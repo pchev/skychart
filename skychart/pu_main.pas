@@ -1286,7 +1286,7 @@ if VerboseMsg then
  f_obslist.onSelectObject:=ObsListSearch;
  f_obslist.onGetObjectCoord:=GetObjectCoord;
  f_obslist.onObjLabelChange:=ObsListChange;
- f_obslist.FileNameEdit1.FileName:=slash(HomeDir)+f_obslist.DefaultList;
+ f_obslist.FileNameEdit1.FileName:=SysToUTF8(slash(HomeDir)+f_obslist.DefaultList);
 if VerboseMsg then
  WriteTrace('SetDefault');
  SetDefault;
@@ -1446,12 +1446,12 @@ f_obslist.AirmassCombo.Text:=cfgm.ObslistAirmass;
 f_obslist.CheckBox1.Checked:=cfgm.ObslistAirmassLimit1;
 f_obslist.CheckBox2.Checked:=cfgm.ObslistAirmassLimit2;
 f_obslist.CheckBox3.Checked:=cfgm.ObslistMark;
-f_obslist.RadioGroup1.ItemIndex:=cfgm.ObsListMeridianSide;
+f_obslist.MeridianSide:=cfgm.ObsListMeridianSide;
 f_obslist.HourAngleCombo.Text:=cfgm.ObslistHourAngle;
 f_obslist.CheckBox4.Checked:=cfgm.ObslistHourAngleLimit1;
 f_obslist.CheckBox5.Checked:=cfgm.ObslistHourAngleLimit2;
 if (cfgm.InitObsList<>'')and(FileExists(cfgm.InitObsList)) then begin
-  f_obslist.FileNameEdit1.FileName:=cfgm.InitObsList;
+  f_obslist.FileNameEdit1.FileName:=SysToUTF8(cfgm.InitObsList);
   if pos(f_obslist.DefaultList,cfgm.InitObsList)>0 then f_obslist.LoadObsList;
 end;
 Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
@@ -5764,7 +5764,7 @@ cfgm.ObslistHourAngle:=ReadString(section,'hourangle',f_obslist.HourAngleCombo.T
 cfgm.ObslistHourAngleLimit1:=ReadBool(section,'houranglelimit1',f_obslist.CheckBox4.Checked);
 cfgm.ObslistHourAngleLimit2:=ReadBool(section,'houranglelimit2',f_obslist.CheckBox5.Checked);
 cfgm.ObsListLimitType:=ReadInteger(section,'limittype',f_obslist.PageControl1.ActivePageIndex);
-cfgm.ObsListMeridianSide:=ReadInteger(section,'meridianside',f_obslist.RadioGroup1.ItemIndex);
+cfgm.ObsListMeridianSide:=ReadInteger(section,'meridianside',f_obslist.MeridianSide);
 except
   ShowError('Error reading '+filename+' dss');
 end;
@@ -6475,7 +6475,7 @@ end;
 WriteBool(section,'OnlineDSS',f_getdss.cfgdss.OnlineDSS);
 WriteInteger(section,'OnlineDSSid',f_getdss.cfgdss.OnlineDSSid);
 section:='obslist';
-buf:=f_obslist.FileNameEdit1.FileName;
+buf:=UTF8ToSys(f_obslist.FileNameEdit1.FileName);
 if buf<>'' then begin
   WriteString(section,'listname',buf);
 end;
@@ -6487,7 +6487,7 @@ WriteString(section,'hourangle',f_obslist.HourAngleCombo.Text);
 WriteBool(section,'houranglelimit1',f_obslist.CheckBox4.Checked);
 WriteBool(section,'houranglelimit2',f_obslist.CheckBox5.Checked);
 WriteInteger(section,'limittype',f_obslist.PageControl1.ActivePageIndex);
-WriteInteger(section,'meridianside',f_obslist.RadioGroup1.ItemIndex);
+WriteInteger(section,'meridianside',f_obslist.MeridianSide);
 
 Updatefile;
 end;

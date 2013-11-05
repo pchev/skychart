@@ -39,7 +39,12 @@ type
   { Tf_obslist }
 
   Tf_obslist = class(TForm)
-    RadioGroup1: TRadioGroup;
+    Panel1: TPanel;
+    RadioButton1: TRadioButton;
+    RadioButton2: TRadioButton;
+    RadioButton3: TRadioButton;
+    ToggleBox1: TToggleBox;
+    ToggleBox2: TToggleBox;
     UpdAllCoord: TButton;
     NoFilterList: TCheckBox;
     HourAngleCombo: TComboBox;
@@ -102,18 +107,22 @@ type
     procedure StringGrid1Resize(Sender: TObject);
     procedure StringGrid1ValidateEntry(sender: TObject; aCol, aRow: Integer;
       const OldValue: string; var NewValue: String);
+    procedure ToggleBox1Click(Sender: TObject);
+    procedure ToggleBox2Click(Sender: TObject);
     procedure UpdAllCoordClick(Sender: TObject);
   private
     { private declarations }
     title,FDefaultList: string;
     Faltitude: double;
-    gridchanged, limitairmass,limittransit,locknewlist: boolean;
+    FMeridianSide: integer;
+    gridchanged, limitairmass,limittransit,locktogglebox,locknewlist: boolean;
     ClickCol,ClickRow: integer;
     FSelectObject: TSelectObject;
     FGetObjectCoord: TGetObjectCoord;
     FObjLabelChange: TNotifyEvent;
     FObjLabels,FEmptyObjLabels: TStringList;
     function GetRowcount : integer;
+    procedure SetMeridianSide(value:integer);
   public
     { public declarations }
     cfgsc: Tconf_skychart;
@@ -139,6 +148,7 @@ type
     property DefaultList: string read FDefaultList;
     property ObjLabels: TStringList read FObjLabels;
     property EmptyObjLabels: TStringList read FEmptyObjLabels;
+    property MeridianSide: integer read FMeridianSide write SetMeridianSide;
     property onSelectObject: TSelectObject read FSelectObject write FSelectObject;
     property onGetObjectCoord: TGetObjectCoord read FGetObjectCoord write FGetObjectCoord;
     property onObjLabelChange: TNotifyEvent read FObjLabelChange write FObjLabelChange;
@@ -171,20 +181,20 @@ begin
   ButtonSave.Caption:=rsSave;
   ButtonClear.Caption:=rsClear;
   UpdAllCoord.Caption:=rsUpdateCoordi;
-  TabSheet1.Caption:=rsAirmass;
+  ToggleBox1.Caption:=rsAirmass;
   Label1.Caption:=rsLimit;
   CheckBox1.Caption:=rsOnlyObjectsW;
   CheckBox2.Caption:=rsOnlyObjectsW2;
   CheckBox3.Caption:=rsMarkObjectsO;
   NoFilterList.Caption:=rsAlwaysShowTh;
   NoFilterList.Hint:=rsBewareThisOp;
-  TabSheet2.Caption:=rsTransit;
+  ToggleBox2.Caption:=rsTransit;
   Label1.Caption:=rsLimit;
   Label3.Caption:=rsLimit;
   Label4.Caption:=rsHours;
-  RadioGroup1.Items[0]:=rsEastSide;
-  RadioGroup1.Items[1]:=rsCrossMeridia;
-  RadioGroup1.Items[2]:=rsWestSide;
+  RadioButton1.Caption:=rsEastSide;
+  RadioButton2.Caption:=rsCrossMeridia;
+  RadioButton3.Caption:=rsWestSide;
   CheckBox4.Caption:=rsOnlyObjectsW3;
   CheckBox5.Caption:=rsOnlyObjectsW4;
   MenuView.Caption:=rsViewOnChart;
@@ -200,6 +210,7 @@ begin
   buf:=ExtractFilePath(FileNameEdit1.FileName);
   if buf<>'' then buf:=slash(buf);
   gridchanged:=false;
+  FileNameEdit1.InitialDir:=buf;
   FileNameEdit1.FileName:=buf+DefaultList;
   UpdateLabels(nil);
 end;
@@ -218,6 +229,7 @@ if obj<>'' then begin
   StringGrid1.Cells[3,StringGrid1.RowCount-1]:=buf;
   StringGrid1.Cells[6,StringGrid1.RowCount-1]:='';
   UpdateLabels(nil);
+  Refresh;
 end;
 end;
 
@@ -226,11 +238,11 @@ var f: textfile;
     obj,lbl,desc,buf,buf1: string;
     ra,de: double;
 begin
-if FileExists(FileNameEdit1.FileName) then begin
+if FileExistsUTF8(FileNameEdit1.FileName) then begin
   StringGrid1.RowCount:=1;
   gridchanged:=false;
   try
-  AssignFile(f,FileNameEdit1.FileName);
+  AssignFile(f,UTF8ToSys(FileNameEdit1.FileName));
   reset(f);
   readln(f,title);
   while not eof(f) do begin
@@ -293,7 +305,7 @@ var f: textfile;
 begin
   try
   bl:=blank15+blank15+blank15;
-  AssignFile(f,FileNameEdit1.FileName);
+  AssignFile(f,UTF8ToSys(FileNameEdit1.FileName));
   Rewrite(f);
   writeln(f,edit1.Text);
   for i:=1 to StringGrid1.RowCount-1 do begin
@@ -562,7 +574,7 @@ limittransit:=true;
        StringGrid1.Cells[4, i]:=rsNever;
        StringGrid1.Cells[5, i]:=rsNever;
      end else begin
-       case RadioGroup1.ItemIndex of
+       case MeridianSide of
          0: begin
              StringGrid1.Cells[4,i]:=TimToStr(rmod(ht-ha+24,24),':',false);
              StringGrid1.Cells[5,i]:=TimToStr(rmod(ht+24,24),':',false);
@@ -590,6 +602,7 @@ begin
   FEmptyObjLabels:=TStringList.Create;
   FDefaultList:='NewObsList.txt';
   locknewlist:=false;
+  locktogglebox:=false;
   StringGrid1.AllowOutboundEvents:=true;
   StringGrid1.ColWidths[0]:=32;
   StringGrid1.ColWidths[1]:=200;
@@ -627,8 +640,7 @@ for i:=1 to StringGrid1.RowCount-1 do begin
 end;
 UpdateLabels(Sender);
 gridchanged:=true;
-ComputeLimits;
-SetVisibleRows;
+Refresh;
 end;
 
 procedure Tf_obslist.MenuUpdcoordClick(Sender: TObject);
@@ -636,19 +648,13 @@ begin
  if UpdateCoord(ClickRow) then begin
     UpdateLabels(Sender);
     gridchanged:=true;
-    ComputeLimits;
-    SetVisibleRows;
+    Refresh;
   end;
 end;
 
 procedure Tf_obslist.MenuViewClick(Sender: TObject);
 begin
 SelectRow(ClickRow);
-end;
-
-procedure Tf_obslist.PageControl1Change(Sender: TObject);
-begin
-  Refresh;
 end;
 
 procedure Tf_obslist.MenuDeleteClick(Sender: TObject);
@@ -665,6 +671,9 @@ end;
 
 procedure Tf_obslist.RadioGroup1Click(Sender: TObject);
 begin
+  if RadioButton1.Checked then FMeridianSide:=0
+  else if RadioButton2.Checked then FMeridianSide:=1
+  else if RadioButton3.Checked then FMeridianSide:=2;
   Refresh;
 end;
 
@@ -672,6 +681,17 @@ procedure Tf_obslist.StringGrid1ColRowMoved(Sender: TObject; IsColumn: Boolean;
   sIndex, tIndex: Integer);
 begin
   gridchanged:=true;
+end;
+
+procedure Tf_obslist.SetMeridianSide(value:integer);
+begin
+FMeridianSide:=value;
+case FMeridianSide of
+  0: RadioButton1.Checked:=true;
+  1: RadioButton2.Checked:=true;
+  2: RadioButton3.Checked:=true;
+  else RadioButton2.Checked:=true;
+end;
 end;
 
 procedure Tf_obslist.StringGrid1MouseDown(Sender: TObject;
@@ -700,9 +720,39 @@ if aCol in [0,4,5,7] then NewValue:=OldValue
   else if OldValue<>NewValue then gridchanged:=true;
 end;
 
+procedure Tf_obslist.PageControl1Change(Sender: TObject);
+begin
+locktogglebox:=true;
+ToggleBox1.Checked:=(PageControl1.ActivePageIndex=0);
+ToggleBox2.Checked:=not ToggleBox1.Checked;
+locktogglebox:=false;
+Refresh;
+end;
+
+procedure Tf_obslist.ToggleBox1Click(Sender: TObject);
+begin
+if locktogglebox then exit;
+locktogglebox:=true;
+ToggleBox1.Checked:=true;
+ToggleBox2.Checked:=false;
+PageControl1.ActivePageIndex:=0;
+locktogglebox:=false;
+end;
+
+procedure Tf_obslist.ToggleBox2Click(Sender: TObject);
+begin
+if locktogglebox then exit;
+locktogglebox:=true;
+ToggleBox1.Checked:=false;
+ToggleBox2.Checked:=true;
+PageControl1.ActivePageIndex:=1;
+locktogglebox:=false;
+end;
+
 procedure Tf_obslist.FileNameEdit1Change(Sender: TObject);
 begin
   if locknewlist then exit;
+  FileNameEdit1.InitialDir:=ExtractFilePath(FileNameEdit1.FileName);
   if assigned(cfgsc) then LoadObsList;
 end;
 
