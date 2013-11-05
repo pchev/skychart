@@ -3338,7 +3338,7 @@ var i,n,timeout: integer;
     thread: array[0..7] of TDrawHorizonThread;
 begin
   n:=min(8,MaxThreadCount);
-  timeout:=round(max(10,hbmp.Width*hbmp.Height/n/100000));
+  timeout:=round(max(10,hbmp.Width*hbmp.Height/n/50000));
   for i:=0 to n-1 do begin
     thread[i]:=TDrawHorizonThread.Create(true);
     thread[i].horizonpicture:=Fcatalog.cfgshr.horizonpicture;
