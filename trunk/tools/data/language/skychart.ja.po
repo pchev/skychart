@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-11-02 22:31+0000\n"
+"POT-Creation-Date: 2013-11-05 12:18+0000\n"
 "PO-Revision-Date: 2013-04-19 16:13+0000\n"
 "Last-Translator: takehito sekijo <sekijo1219@hotmail.co.jp>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-03 18:28+0000\n"
+"X-Launchpad-Export-Date: 2013-11-05 17:52+0000\n"
 "X-Generator: Launchpad (build 16820)\n"
 
 #: u_translation.rs102cddss
@@ -3514,6 +3514,10 @@ msgstr ""
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
+msgstr ""
+
+#: u_translation.rsobservinglis2
+msgid "Observing list elements"
 msgstr ""
 
 #: u_translation.rsobsolete
