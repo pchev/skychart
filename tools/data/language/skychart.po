@@ -5882,3 +5882,7 @@ msgstr ""
 msgid "Print header and footer"
 msgstr ""
 
+#: u_translation:rsobservinglis2
+msgid "Observing list elements"
+msgstr ""
+

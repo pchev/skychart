@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-02 22:31+0000\n"
-"PO-Revision-Date: 2013-10-28 07:47+0000\n"
+"POT-Creation-Date: 2013-11-05 12:18+0000\n"
+"PO-Revision-Date: 2013-11-05 13:36+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-03 18:28+0000\n"
+"X-Launchpad-Export-Date: 2013-11-05 17:52+0000\n"
 "X-Generator: Launchpad (build 16820)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
@@ -255,7 +255,7 @@ msgstr "Zawsze zapisuj bez pytania."
 
 #: u_translation.rsalwaysshowth
 msgid "Always show the objects from the list"
-msgstr ""
+msgstr "Zawsze pokazuj obiekty z listy."
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -483,7 +483,7 @@ msgstr "Upewnij się, że używają formatu DOS dla końca linii."
 
 #: u_translation.rsbewarethisop
 msgid "Beware this option can severly degrade the performance"
-msgstr ""
+msgstr "Wybór tej opcji może poważnie obniżyć  wydajność"
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -1111,7 +1111,7 @@ msgstr "Tworzenie mapy rastrowej z %s dpi. Proszę czekać..."
 
 #: u_translation.rscrossmeridia
 msgid "Cross meridian"
-msgstr ""
+msgstr "Przez merydian"
 
 #: u_translation.rsculmination
 msgid "Culmination"
@@ -1691,7 +1691,7 @@ msgstr "DSS RealSky"
 
 #: u_translation.rsduplicate
 msgid "Duplicate"
-msgstr ""
+msgstr "Duplikuj"
 
 #: u_translation.rsduration
 msgid "Duration"
@@ -1711,7 +1711,7 @@ msgstr "Wschód"
 
 #: u_translation.rseastside
 msgid "East side"
-msgstr ""
+msgstr "Strona wschodnia"
 
 #: u_translation.rseccentricity
 msgid "Eccentricity"
@@ -1939,15 +1939,15 @@ msgstr "Okular"
 
 #: u_translation.rseyepieceappa
 msgid "Eyepiece apparent field of vision"
-msgstr ""
+msgstr "Pozorne pole widzenia okularu"
 
 #: u_translation.rseyepiecefoca
 msgid "Eyepiece focal length"
-msgstr ""
+msgstr "Ogniskowa okularu"
 
 #: u_translation.rseyepiecevisi
 msgid "Eyepiece vision"
-msgstr ""
+msgstr "Widok w okularze"
 
 #: u_translation.rsfailed
 msgid "Failed: %s"
@@ -2119,7 +2119,7 @@ msgstr "Dla dużego katalogu wybierz zawsze tryb binarny. Dla małego zestawu da
 
 #: u_translation.rsforcecolor
 msgid "Force color"
-msgstr ""
+msgstr "Wymuś kolor"
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
@@ -2207,7 +2207,7 @@ msgstr "Galaktyki"
 
 #: u_translation.rsgalaxycluste
 msgid "Galaxy cluster"
-msgstr "Gromady galaktyczne"
+msgstr "Gromady galaktyk"
 
 #: u_translation.rsgamma
 msgid "Gamma"
@@ -3521,6 +3521,10 @@ msgstr "Miejsce obserwacji"
 msgid "Observing list"
 msgstr "Lista obserwacyjna"
 
+#: u_translation.rsobservinglis2
+msgid "Observing list elements"
+msgstr "Obiekty z listy obserwacyjnej"
+
 #: u_translation.rsobsolete
 msgid "Obsolete"
 msgstr "Przestarzałe"
@@ -3759,7 +3763,7 @@ msgstr "Obrazy"
 
 #: u_translation.rspixelcount
 msgid "Pixel count"
-msgstr ""
+msgstr "Liczba pikseli"
 
 #: u_translation.rspixels
 msgid "pixels"
@@ -3767,7 +3771,7 @@ msgstr "pixeli"
 
 #: u_translation.rspixelsize
 msgid "Pixel size"
-msgstr ""
+msgstr "Rozmiar piksela"
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -3919,7 +3923,7 @@ msgstr "PostScript"
 
 #: u_translation.rspower
 msgid "Power"
-msgstr ""
+msgstr "Powiększenie"
 
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
@@ -3983,7 +3987,7 @@ msgstr "Ustawienia druku"
 
 #: u_translation.rsprintheadera
 msgid "Print header and footer"
-msgstr ""
+msgstr "Drukuj nagłówek i stopkę"
 
 #: u_translation.rsprintmethod
 msgid "Print method"
@@ -5263,7 +5267,7 @@ msgstr "Teleskop: %s"
 
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
-msgstr ""
+msgstr "Ogniskowa teleskopu"
 
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
@@ -5815,7 +5819,7 @@ msgstr "Zachód"
 
 #: u_translation.rswestside
 msgid "West side"
-msgstr ""
+msgstr "Strona zachodnia"
 
 #: u_translation.rswhiteonblack
 msgid "White on black"

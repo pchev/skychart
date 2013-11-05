@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-02 22:31+0000\n"
+"POT-Creation-Date: 2013-11-05 12:18+0000\n"
 "PO-Revision-Date: 2013-03-03 22:19+0000\n"
 "Last-Translator: Andreas Papalambrou <papalambrou@ieee.org>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-03 18:28+0000\n"
+"X-Launchpad-Export-Date: 2013-11-05 17:52+0000\n"
 "X-Generator: Launchpad (build 16820)\n"
 
 #: u_translation.rs102cddss
@@ -3574,6 +3574,10 @@ msgstr "ΒΔ παρατηρητηρίων"
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
+msgstr ""
+
+#: u_translation.rsobservinglis2
+msgid "Observing list elements"
 msgstr ""
 
 #: u_translation.rsobsolete
