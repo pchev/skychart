@@ -335,7 +335,7 @@ const
   f13 = '0.0000000000000';
   s6 = '+0.000000;-0.000000;+0.000000';
   dateiso = 'yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz';
-  labspacing = 2;
+  labspacing = 6;
   numlabtype = 9;
   numfont = 7;
   NumSimObject = 13;
