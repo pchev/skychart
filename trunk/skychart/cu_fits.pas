@@ -1141,7 +1141,7 @@ for i:=0 to fitslist.Count-1 do begin
 end;
 imgloaded:=n;
 r:=min(8,MaxThreadCount);
-timeout:=round(max(10,c.xmax*c.ymax/r/100000));
+timeout:=round(max(10,c.xmax*c.ymax/r/50000));
 if VerboseMsg then WriteTrace('SkyChart '+c.chartname+': start FITS thread, timeout:'+inttostr(timeout));
 for i:=0 to r-1 do begin
   thread[i]:=TDrawListThread.Create(true);
