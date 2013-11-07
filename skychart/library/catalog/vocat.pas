@@ -74,12 +74,12 @@ var
    Defmag: double;
    active,VODocOK: boolean;
    drawtype: integer;
-   drawcolor,forcecolor: integer;
+   drawcolor,forcecolor,forcesize,forcename,forcemag: integer;
    flabels: Tlabellst;
    unit_pmra, unit_pmdec, unit_size: double;
    log_pmra, log_pmdec, log_size, cosdec_pmra: boolean;
-   field_pmra, field_pmdec, field_size : integer;
-   catname:string;
+   field_pmra, field_pmdec, field_size, field_name, field_mag : integer;
+   catname,nameprefix:string;
    VOcatlist : TStringList;
    VOFields: TStringList;
    Ncat, CurCat, catversion: integer;
@@ -395,6 +395,14 @@ VOname:=config.GetValue('VOcat/catalog/name','');
 VOobject:=config.GetValue('VOcat/catalog/objtype',VOobject);
 SAMPid:=config.GetValue('VOcat/catalog/sampid','skychart_'+ExtractFileNameOnly(catfile));
 SAMPurl:=config.GetValue('VOcat/catalog/sampurl','file://'+catfile);
+field_size:=config.GetValue('VOcat/data/sizeposition',-1);
+forcesize:=field_size;
+field_mag:=config.GetValue('VOcat/data/magposition',-1);
+forcemag:=field_mag;
+field_name:=config.GetValue('VOcat/data/nameposition',-1);
+forcename:=field_name;
+nameprefix:=config.GetValue('VOcat/data/nameprefix','');
+if field_name<0 then nameprefix:='';
 active:=config.GetValue('VOcat/plot/active',false);
 drawtype:=config.GetValue('VOcat/plot/drawtype',14);
 drawcolor:=config.GetValue('VOcat/plot/drawcolor',$808080);
@@ -476,12 +484,22 @@ end else begin
             end;
          end;
       end;
-      if (pos('phys.angSize',fielddata.ucd)=1)and(pos('error',fielddata.ucd)=0)and(field_size=-1) then begin  //first dimmension
+      if (field_size=j)or((field_size=-1)and(pos('phys.angSize',fielddata.ucd)=1)and(pos('error',fielddata.ucd)=0)) then begin  //first dimmension
         u:=angleunits(fielddata.units,l);
         if (u>0) then begin
            field_size:=j;
            unit_size:=u/secarc;
            log_size:=l;
+        end;
+      end;
+      if (forcemag=j)or((pos('phot.mag',fielddata.ucd)=1)and(pos('error',fielddata.ucd)=0)and(pos('phot.mag.',fielddata.ucd)=0)) then begin
+        if (forcemag=j)or((forcemag<0)and((field_mag=-1)or(pos('em.opt.V',fielddata.ucd)>0))) then begin
+          field_mag:=j;
+        end;
+      end;
+      if (forcename=j)or((pos('meta.id',fielddata.ucd)>0)and(pos('meta.id.',fielddata.ucd)=0)) then begin
+        if (forcename=j)or((forcename<0)and((field_name=-1)or(pos('meta.main',fielddata.ucd)>0))) then begin
+           field_name:=j;
         end;
       end;
     end;
@@ -671,36 +689,41 @@ if Assigned(VoNode) then begin
     case catversion of
     rtStar: begin
             lin.star.comment:=lin.star.comment+VOFields[i]+':'+buf+' '+TFieldData(VOFields.Objects[i]).units+tab;
-            if (buf<>'')and(pos('meta.id',TFieldData(VOFields.Objects[i]).ucd)=1) then begin
-              if (lin.star.id='')or(pos('meta.main',TFieldData(VOFields.Objects[i]).ucd)>0) then
-                  if  pos('meta.id.part',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
-                      if lin.star.id='' then lin.star.id:=lin.star.id+buf
-                                        else lin.star.id:=lin.star.id+'-'+buf;
-                  end else lin.star.id:=trim(VOFields[i])+' '+buf;
+            if i=field_name then begin
+               lin.star.id:=buf;
+               if nameprefix='' then nameprefix:=trim(VOFields[i])+' ';
             end;
-            if (buf<>'')and(pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1)and(pos('error',TFieldData(VOFields.Objects[i]).ucd)=0) then begin
-              lin.star.valid[vsMagv]:=true;
-              if (lin.star.magv=99)or(pos('em.opt.V',TFieldData(VOFields.Objects[i]).ucd)>0) then begin
-                 lin.options.flabel[lOffset+vsMagv]:=VOFields[i];
-                 lin.star.magv:=StrToFloatDef(buf,99);
-              end;
+            if (field_name<0) and (pos('meta.id.part',TFieldData(VOFields.Objects[i]).ucd)>0) then begin
+               if lin.star.id='' then begin
+                 if nameprefix='' then nameprefix:=trim(VOFields[i])+' ';
+                 lin.star.id:=buf;
+               end
+               else lin.star.id:=lin.star.id+'-'+buf;
+            end;
+            if i=field_mag then begin
+              lin.options.flabel[lOffset+vsMagv]:=VOFields[i];
+              lin.star.magv:=StrToFloatDef(buf,99);
             end;
             if i=field_pmra then lin.star.pmra:=StrToFloatDef(buf,0)*unit_pmra;
             if i=field_pmdec then lin.star.pmdec:=StrToFloatDef(buf,0)*unit_pmdec;
             end;
     rtNeb:  begin
             lin.neb.comment:=lin.neb.comment+VOFields[i]+':'+buf+' '+TFieldData(VOFields.Objects[i]).units+tab;
-            if (buf<>'')and(pos('meta.id',TFieldData(VOFields.Objects[i]).ucd)>0) then begin
-              if (lin.neb.id='')or(pos('meta.main',TFieldData(VOFields.Objects[i]).ucd)>0) then
-                  if  pos('meta.id.part',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
-                      if lin.neb.id='' then lin.neb.id:=lin.neb.id+buf
-                                        else lin.neb.id:=lin.neb.id+'-'+buf;
-                  end else lin.neb.id:=trim(VOFields[i])+' '+buf;
+            if i=field_name then begin
+               lin.neb.id:=buf;
+               if nameprefix='' then nameprefix:=trim(VOFields[i])+' ';
             end;
-            if (buf<>'')and(pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1)and(pos('phot.mag.',TFieldData(VOFields.Objects[i]).ucd)=0)and(lin.neb.mag=-99)and(pos('error',TFieldData(VOFields.Objects[i]).ucd)=0) then begin
-               lin.options.flabel[lOffset+vnMag]:=VOFields[i];
-               lin.neb.mag:=StrToFloatDef(buf,Defmag);;
-               lin.neb.valid[vnMag]:=true;
+            if (field_name<0) and (pos('meta.id.part',TFieldData(VOFields.Objects[i]).ucd)>0) then begin
+               if lin.neb.id='' then begin
+                 if nameprefix='' then nameprefix:=trim(VOFields[i])+' ';
+                 lin.neb.id:=buf;
+               end
+               else lin.neb.id:=lin.neb.id+'-'+buf;
+            end;
+            if (buf<>'')and(i=field_mag) then begin
+              lin.options.flabel[lOffset+vnMag]:=VOFields[i];
+              lin.neb.mag:=StrToFloatDef(buf,Defmag);;
+              lin.neb.valid[vnMag]:=true;
             end;
             if (buf<>'')and(i=field_size) then begin
                lin.neb.dim1:=StrToFloatDef(buf,Defsize);
@@ -732,11 +755,17 @@ if Assigned(VoNode) then begin
   end;
   case catversion of
   rtStar: begin
-          if lin.star.id='' then lin.star.id:=recno;
+          if lin.star.id='' then lin.star.id:=recno
+          else begin
+             if nameprefix>'' then lin.star.id:=nameprefix+lin.star.id;
+          end;
           if cosdec_pmra then lin.star.pmra:=lin.star.pmra*cos(lin.dec);
           end;
   rtNeb:  begin
-          if lin.neb.id='' then lin.neb.id:=recno;
+          if lin.neb.id='' then lin.neb.id:=recno
+          else begin
+             if nameprefix>'' then lin.neb.id:=nameprefix+lin.neb.id;
+          end;
           if lin.neb.mag=-99 then lin.neb.mag:=Defmag;
           end;
   end;
