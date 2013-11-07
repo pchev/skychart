@@ -1441,7 +1441,7 @@ if cfgm.SampAutoconnect then begin
 end;
 f_print.cm:=cfgm;
 f_obslist.cfgsc:=Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc;
-f_obslist.PageControl1.ActivePageIndex:=cfgm.ObsListLimitType;
+f_obslist.LimitType:=cfgm.ObsListLimitType;
 f_obslist.AirmassCombo.Text:=cfgm.ObslistAirmass;
 f_obslist.CheckBox1.Checked:=cfgm.ObslistAirmassLimit1;
 f_obslist.CheckBox2.Checked:=cfgm.ObslistAirmassLimit2;
@@ -2328,6 +2328,7 @@ if MultiFrame1.ActiveObject is Tf_chart then begin
        blank+rsDEC+':'+DEmtoStr(rad2deg*Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.decentre);
   if Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindName>'' then  buf:=buf+', '+Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindName;
   cfgm.PrintDesc:=buf;
+  f_print.CheckBox1.Checked := cfgm.PrintHeader;
   formpos(f_print,mouse.cursorpos.x,mouse.cursorpos.y);
   f_print.showmodal;
   if (f_print.ModalResult=mrOK)or(f_print.ModalResult=mrYes) then begin
@@ -2339,10 +2340,16 @@ end;
 end;
 
 procedure Tf_main.PrintPreview1Click(Sender: TObject);
+var buf: string;
 begin
-if MultiFrame1.ActiveObject is Tf_chart then
-  with MultiFrame1.ActiveObject as Tf_chart do
-     PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath,cfgm,true);
+if MultiFrame1.ActiveObject is Tf_chart then begin
+    buf:=rsSkyCharts+', '+rsObservatory+blank+Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.ObsName+', '+
+         rsCenter+blank+rsRA+':'+ARmtoStr(rad2deg*Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.racentre/15)+
+         blank+rsDEC+':'+DEmtoStr(rad2deg*Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.decentre);
+    if Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindName>'' then  buf:=buf+', '+Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindName;
+    cfgm.PrintDesc:=buf;
+    Tf_chart(MultiFrame1.ActiveObject).PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath,cfgm,true);
+end;
 end;
 
 procedure Tf_main.UndoExecute(Sender: TObject);
@@ -4403,6 +4410,7 @@ cfgm.PrtLeftMargin:=15;
 cfgm.PrtRightMargin:=15;
 cfgm.PrtTopMargin:=10;
 cfgm.PrtBottomMargin:=5;
+cfgm.PrintHeader:=true;
 cfgm.maximized:=true;
 cfgm.KioskMode:=false;
 cfgm.KioskDebug:=false;
@@ -5541,6 +5549,7 @@ cfgm.PrtLeftMargin:=ReadInteger(section,'PrtLeftMargin',cfgm.PrtLeftMargin);
 cfgm.PrtRightMargin:=ReadInteger(section,'PrtRightMargin',cfgm.PrtRightMargin);
 cfgm.PrtTopMargin:=ReadInteger(section,'PrtTopMargin',cfgm.PrtTopMargin);
 cfgm.PrtBottomMargin:=ReadInteger(section,'PrtBottomMargin',cfgm.PrtBottomMargin);
+cfgm.PrintHeader:=ReadBool(section,'PrintHeader',cfgm.PrintHeader);
 cfgm.ThemeName:=ReadString(section,'Theme',cfgm.ThemeName);
 cfgm.KioskPass:=ReadString(section,'KioskPass','');
 cfgm.KioskDebug:=ReadBool(section,'KioskDebug',false);
@@ -5763,7 +5772,7 @@ cfgm.ObslistMark:=ReadBool(section,'markonchart',f_obslist.CheckBox3.Checked);
 cfgm.ObslistHourAngle:=ReadString(section,'hourangle',f_obslist.HourAngleCombo.Text);
 cfgm.ObslistHourAngleLimit1:=ReadBool(section,'houranglelimit1',f_obslist.CheckBox4.Checked);
 cfgm.ObslistHourAngleLimit2:=ReadBool(section,'houranglelimit2',f_obslist.CheckBox5.Checked);
-cfgm.ObsListLimitType:=ReadInteger(section,'limittype',f_obslist.PageControl1.ActivePageIndex);
+cfgm.ObsListLimitType:=ReadInteger(section,'limittype',f_obslist.LimitType);
 cfgm.ObsListMeridianSide:=ReadInteger(section,'meridianside',f_obslist.MeridianSide);
 except
   ShowError('Error reading '+filename+' dss');
@@ -6325,6 +6334,7 @@ WriteInteger(section,'PrtLeftMargin',cfgm.PrtLeftMargin);
 WriteInteger(section,'PrtRightMargin',cfgm.PrtRightMargin);
 WriteInteger(section,'PrtTopMargin',cfgm.PrtTopMargin);
 WriteInteger(section,'PrtBottomMargin',cfgm.PrtBottomMargin);
+WriteBool(section,'PrintHeader',cfgm.PrintHeader);
 WriteString(section,'Theme',cfgm.ThemeName);
 WriteBool(section,'WinMaximize',(f_main.WindowState=wsMaximized));
 WriteBool(section,'AzNorth',catalog.cfgshr.AzNorth);
@@ -6486,7 +6496,7 @@ WriteBool(section,'markonchart',f_obslist.CheckBox3.Checked);
 WriteString(section,'hourangle',f_obslist.HourAngleCombo.Text);
 WriteBool(section,'houranglelimit1',f_obslist.CheckBox4.Checked);
 WriteBool(section,'houranglelimit2',f_obslist.CheckBox5.Checked);
-WriteInteger(section,'limittype',f_obslist.PageControl1.ActivePageIndex);
+WriteInteger(section,'limittype',f_obslist.LimitType);
 WriteInteger(section,'meridianside',f_obslist.MeridianSide);
 
 Updatefile;
