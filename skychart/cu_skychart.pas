@@ -4348,6 +4348,7 @@ cfgsc.modlabels[i].fontnum:=fontnum;
 cfgsc.modlabels[i].id:=id;
 cfgsc.modlabels[i].hiden:=true;
 DrawLabels;
+Refresh;
 end;
 
 procedure Tskychart.ResetAllLabel;
