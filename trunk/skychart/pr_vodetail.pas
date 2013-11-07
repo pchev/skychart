@@ -42,10 +42,17 @@ type
     CheckBox1: TCheckBox;
     ColorDialog1: TColorDialog;
     ComboBox1: TComboBox;
+    MagField: TComboBox;
+    SizeField: TComboBox;
+    NameField: TComboBox;
+    Prefix: TEdit;
     FullDownload: TCheckBox;
     Grid: TStringGrid;
     Label1: TLabel;
     Label10: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
     Label9: TLabel;
     DefMag: TLongEdit;
     DefSize: TLongEdit;
@@ -68,6 +75,8 @@ type
     procedure GetData(Sender: TObject);
     procedure GridMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure FieldChange(Sender: TObject);
+    procedure PrefixChange(Sender: TObject);
     procedure RadioGroup1Click(Sender: TObject);
     procedure Shape1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -82,6 +91,9 @@ type
     drawcolor: Tcolor;
     forcecolor: integer;
     drawtype: integer;
+    tablenum: integer;
+    field_size,field_mag,field_name,forcesize,forcemag,forcename: integer;
+    nameprefix: string;
     procedure Setlang;
     property onPreviewData: TNotifyEvent read FPreviewData write FPreviewData;
     property onGetData: TNotifyEvent read FGetData write FGetData;
@@ -124,7 +136,9 @@ ComboBox1.Items[13]:=rsDarkNebula;
 ComboBox1.Items[14]:=rsCircle;
 ComboBox1.Items[15]:=rsSquare;
 ComboBox1.Items[16]:=rsLosange;
-
+Label2.Caption:=rsMagnitude;
+Label3.Caption:=rsSize;
+Label4.Caption:=rsName;
 end;
 
 procedure Tf_vodetail.GetData(Sender: TObject);
@@ -205,6 +219,30 @@ if (row=0)and(Column=0) then begin
 end;
 end;
 
+procedure Tf_vodetail.FieldChange(Sender: TObject);
+var buf: string;
+    i:integer;
+begin
+buf:=TComboBox(Sender).Text;
+if buf>'' then begin
+  for i:=0 to Grid.RowCount-1 do begin
+    if Grid.Cells[1,i]=buf then begin
+       if Grid.Cells[0,i]<>'x' then begin
+         Grid.Cells[0,i]:='x';
+         needdownload:=true;
+         button1.Caption:=rsDownloadCata;
+       end;
+       break;
+    end;
+  end;
+end;
+end;
+
+procedure Tf_vodetail.PrefixChange(Sender: TObject);
+begin
+  nameprefix:=Prefix.Text;
+end;
+
 procedure Tf_vodetail.Shape1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
@@ -226,6 +264,10 @@ case RadioGroup1.ItemIndex of
    Shape1.Enabled:=false;
    label1.Enabled:=false;
    label9.Enabled:=false;
+   MagField.Enabled:=false;
+   SizeField.Enabled:=false;
+   Prefix.Enabled:=false;
+   NameField.Enabled:=False;
    end;
 1: begin
    Button1.Enabled:=true;
@@ -236,6 +278,10 @@ case RadioGroup1.ItemIndex of
    Shape1.Enabled:=false;
    label1.Enabled:=false;
    label9.Enabled:=false;
+   MagField.Enabled:=true;
+   SizeField.Enabled:=false;
+   Prefix.Enabled:=true;
+   NameField.Enabled:=true;
    end;
 2 : begin
    Button1.Enabled:=true;
@@ -246,6 +292,10 @@ case RadioGroup1.ItemIndex of
    Shape1.Enabled:=true;
    label1.Enabled:=true;
    label9.Enabled:=true;
+   MagField.Enabled:=true;
+   SizeField.Enabled:=true;
+   Prefix.Enabled:=true;
+   NameField.Enabled:=true;
    end
 end;
 end;

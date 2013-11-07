@@ -94,6 +94,8 @@ type
     FReloadFeedback: TDownloadFeedback;
     Fvo_maxrecord: integer;
     procedure SetServerList;
+    procedure FillGrid(fr:Tf_vodetail; i,n,nactive: integer;active:boolean);
+    procedure SelectFields(fr:Tf_vodetail);
     procedure FillCatList;
     procedure ClearCatalog;
     procedure ClearDataGrid;
@@ -158,6 +160,8 @@ ButtonBack.Caption:='< '+rsBack;
 CatList.Cells[0, 0]:=rsName;
 CatList.Cells[1, 0]:=rsDescription;
 CatList.Cells[2, 0]:=rsURL;
+ButtonHelp.Caption:=rsHelp;
+ButtonClose.Caption:=rsCancel;
 end;
 
 procedure Tf_voconfig.Setvopath(value:string);
@@ -351,8 +355,149 @@ if buf1=buf2 then result:=buf1
    else result:=txt;
 end;
 
+function numericunit(units: string; out u:double; out log:boolean): string;   //  numeric prefix
+var i,j,pe,s,ni: integer;
+    e,k,c,n:string;
+    ex: double;
+begin
+log:=false;
+k:=trim(units);
+i:=length(k);
+// log scale
+if (copy(k,1,1)='[')and(copy(k,i,1)=']') then begin
+  log:=true;
+  k:=copy(k,2,i-2);
+end;
+// sign
+s:=1;
+c:=copy(k,1,1);
+if c='+' then Delete(k,1,1);
+if c='-' then begin
+   Delete(k,1,1);
+   s:=-1;
+end;
+// exponent position
+pe:=pos('10-',k);
+if pe=0 then pe:=pos('10+',k);
+j:=pe;
+if j=0 then j:=length(k);
+// numeric factor
+n:='';
+ni:=0;
+for i:=1 to j-1 do begin
+   c:=copy(k,i,1);
+   if ((c>='0')and(c<='9'))or(c='.') then begin
+      n:=n+c;
+      inc(ni);
+   end
+   else break;
+end;
+if ni>0 then begin
+  u:=s*StrToFloatDef(n,0);
+  delete(k,1,ni);
+end
+else u:=1;
+// exponent
+if pe>0 then begin
+   n:='';
+   ni:=0;
+   for i:=4 to length(k) do begin
+      if ((c>='0')and(c<='9')) then begin
+         n:=n+c;
+         inc(ni);
+      end
+      else break;
+   end;
+   e:=n;
+   delete(k,1,ni);
+   ex:=StrToFloatDef(e,-99999);
+   if ex<>-99999 then u:=u*power(10,(ex))
+      else u:=0;
+end;
+result:=k;
+end;
+
+function angleunits(units: string; out log: Boolean): double;  // result in radian
+var k:string;
+    u: double;
+begin
+  k:=trim(units);
+  k:=numericunit(k,u,log);
+  if k='mas' then u:=u/3600/1000
+  else if k='arcsec' then u:=u/3600
+  else if k='arcmin' then u:=u/60
+  else if k='rad' then u:=u*rad2deg
+  else if k<>'deg' then u:=0;
+  result:=deg2rad*u;
+end;
+
+procedure Tf_voconfig.FillGrid(fr:Tf_vodetail; i,n,nactive: integer;active:boolean);
+var u:double;
+    l:boolean;
+    p:integer;
+    b:string;
+begin
+  if (not active)or(nactive<0) then nactive:=-99;
+  fr.Grid.Cells[1,i]:=VO_Detail1.RecName[n][i-1];
+  fr.Grid.Cells[2,i]:=VO_Detail1.RecUCD[n][i-1];
+  fr.Grid.Cells[3,i]:=VO_Detail1.RecDatatype[n][i-1];
+  fr.Grid.Cells[4,i]:=VO_Detail1.RecUnits[n][i-1];
+  fr.Grid.Cells[5,i]:=VO_Detail1.RecDescription[n][i-1];
+  if (fr.field_size=nactive)or((fr.field_size=-1)and(pos('phys.angSize',VO_Detail1.RecUCD[n][i-1])=1)and(pos('error',VO_Detail1.RecUCD[n][i-1])=0)) then begin
+    u:=angleunits(VO_Detail1.RecUnits[n][i-1],l);
+    if (u>0) then begin
+       p:=fr.SizeField.Items.Add(VO_Detail1.RecName[n][i-1]);
+       fr.SizeField.ItemIndex:=p;
+       fr.field_size:=nactive;
+    end;
+  end;
+  if (fr.forcemag=nactive)or((pos('phot.mag',VO_Detail1.RecUCD[n][i-1])=1)and(pos('error',VO_Detail1.RecUCD[n][i-1])=0)and(pos('phot.mag.',VO_Detail1.RecUCD[n][i-1])=0)) then begin
+    b:=VO_Detail1.RecName[n][i-1];
+    p:=fr.MagField.Items.Add(VO_Detail1.RecName[n][i-1]);
+    b:=VO_Detail1.RecUCD[n][i-1];
+    if (fr.forcemag=nactive)or((fr.forcemag<0)and((fr.field_mag=-1)or(pos('em.opt.V',VO_Detail1.RecUCD[n][i-1])>0))) then begin
+      fr.MagField.ItemIndex:=p;
+      fr.field_mag:=nactive;
+    end;
+  end;
+  if (fr.forcename=nactive)or((pos('meta.id',VO_Detail1.RecUCD[n][i-1])>0)and(pos('meta.id.',VO_Detail1.RecUCD[n][i-1])=0)) then begin
+    p:=fr.NameField.Items.Add(VO_Detail1.RecName[n][i-1]);
+    if (fr.forcename=nactive)or((fr.forcename<0)and((fr.field_name=-1)or(pos('meta.main',VO_Detail1.RecUCD[n][i-1])>0))) then begin
+       fr.NameField.ItemIndex:=p;
+       fr.field_name:=nactive;
+       fr.nameprefix:=trim(VO_Detail1.RecName[n][i-1])+' ';
+    end;
+  end;
+end;
+
+procedure Tf_voconfig.SelectFields(fr:Tf_vodetail);
+ procedure SelectField(cb:TComboBox; v:integer);
+ var i,p: integer;
+     fn,buf: string;
+ begin
+ exit;
+   if v<0 then cb.Text:=''
+   else begin
+     fn:=VO_Detail1.RecName[fr.tablenum][v];
+     for i:=0 to cb.Items.Count-1 do begin
+        buf:=cb.Items[i];
+        if buf=fn then begin
+          cb.ItemIndex:=i;
+          break;
+        end;
+     end;
+   end;
+ end;
+begin
+SelectField(fr.MagField,fr.field_mag);
+SelectField(fr.SizeField,fr.field_size);
+SelectField(fr.NameField,fr.field_name);
+fr.Prefix.Text:=fr.nameprefix;
+end;
+
 procedure Tf_voconfig.SelectCatalog(Sender: TObject);
-var i,n: integer;
+var i,n,nactive: integer;
+    act: boolean;
     buf,ucd: string;
     tb:TTabsheet;
     fr:Tf_vodetail;
@@ -381,6 +526,23 @@ if CatList.Row>0 then begin
      fr.onGoback:=Goback;
      fr.vo_maxrecord:=Fvo_maxrecord;
      with fr do begin
+       tablenum:=n;
+       field_size:=-1;
+       forcesize:=field_size;
+       field_mag:=-1;
+       forcemag:=field_mag;
+       field_name:=-1;
+       forcename:=field_name;
+       nameprefix:='';
+       SizeField.Clear;
+       MagField.Clear;
+       NameField.Clear;
+       SizeField.Items.Add(rsAutomatic);
+       MagField.Items.Add(rsAutomatic);
+       NameField.Items.Add(rsAutomatic);
+       SizeField.ItemIndex:=0;
+       MagField.ItemIndex:=0;
+       NameField.ItemIndex:=0;
        Grid.ColCount:=6;
        Grid.ColWidths[0]:=20;
        Grid.ColWidths[1]:=100;
@@ -394,17 +556,19 @@ if CatList.Row>0 then begin
        Grid.Cells[3, 0]:=rsDataType;
        Grid.Cells[4, 0]:=rsUnits;
        Grid.Cells[5, 0]:=rsDescription;
+       nactive:=-1;
        Grid.RowCount:=VO_Detail1.RecName[n].Count+1;
        for i:=1 to VO_Detail1.RecName[n].Count do begin
          ucd:=VO_Detail1.RecUCD[n][i-1];
-         if (pos('meta.ref',ucd)=1)or(pos('stat.error',ucd)=1) then
-            Grid.Cells[0,i]:=''
-         else Grid.Cells[0,i]:='x';
-         Grid.Cells[1,i]:=VO_Detail1.RecName[n][i-1];
-         Grid.Cells[2,i]:=VO_Detail1.RecUCD[n][i-1];
-         Grid.Cells[3,i]:=VO_Detail1.RecDatatype[n][i-1];
-         Grid.Cells[4,i]:=VO_Detail1.RecUnits[n][i-1];
-         Grid.Cells[5,i]:=VO_Detail1.RecDescription[n][i-1];
+         if (pos('meta.ref',ucd)=1)or(pos('stat.error',ucd)=1) then begin
+            Grid.Cells[0,i]:='';
+            act:=false;
+         end else begin
+           Grid.Cells[0,i]:='x';
+           act:=true;
+           inc(nactive);
+         end;
+         FillGrid(fr,i,n,nactive,act);
        end;
        SelectAll:=true;
        tn.Text:=VO_Detail1.TableName[n];
@@ -420,6 +584,7 @@ if CatList.Row>0 then begin
           RadioGroup1.ItemIndex:=1;
        RadioGroup1Click(self);
        FullDownload.Checked:=(tr.Value<=vo_maxrecord);
+       SelectFields(fr);
      end;
   end;
   if Pagecontrol2.PageCount=0 then begin
@@ -434,9 +599,9 @@ end;
 end;
 
 procedure Tf_voconfig.UpdateCatalog(cn: string);
-var i,j,n: integer;
-    buf,tablen,baseurl,objtype: string;
-    fullcat:boolean;
+var i,j,n,fs,fm,fn,nactive: integer;
+    buf,tablen,baseurl,objtype,np: string;
+    fullcat,act:boolean;
     dt,dc,ds,dm,fc: integer;
     tb:TTabsheet;
     fr:Tf_vodetail;
@@ -454,6 +619,10 @@ try
   CatName:=config.GetValue('VOcat/catalog/name','');
   tablen:=config.GetValue('VOcat/catalog/table','');
   objtype:=config.GetValue('VOcat/catalog/objtype','');
+  fs:=config.GetValue('VOcat/data/sizeposition',-1);
+  fm:=config.GetValue('VOcat/data/magposition',-1);
+  fn:=config.GetValue('VOcat/data/nameposition',-1);
+  np:=config.GetValue('VOcat/data/nameprefix','');
   baseurl:=config.GetValue('VOcat/update/baseurl','');
   votype:=Tvo_type(config.GetValue('VOcat/update/votype',0));
   fullcat:=config.GetValue('VOcat/update/fullcat',false);
@@ -490,6 +659,22 @@ try
   fr.onGoback:=Goback;
   fr.vo_maxrecord:=Fvo_maxrecord;
   with fr do begin
+     field_size:=fs;
+     forcesize:=field_size;
+     field_mag:=fm;
+     forcemag:=field_mag;
+     field_name:=fn;
+     forcename:=field_name;
+     nameprefix:=np;
+     SizeField.Clear;
+     MagField.Clear;
+     NameField.Clear;
+     SizeField.Items.Add(rsAutomatic);
+     MagField.Items.Add(rsAutomatic);
+     NameField.Items.Add(rsAutomatic);
+     SizeField.ItemIndex:=0;
+     MagField.ItemIndex:=0;
+     NameField.ItemIndex:=0;
      Grid.ColCount:=6;
      Grid.ColWidths[0]:=20;
      Grid.ColWidths[1]:=100;
@@ -503,22 +688,22 @@ try
      Grid.Cells[3, 0]:=rsDataType;
      Grid.Cells[4, 0]:=rsUnits;
      Grid.Cells[5, 0]:=rsDescription;
+     nactive:=-1;
      if baseurl<>'' then begin
        Grid.RowCount:=VO_Detail1.RecName[n].Count+1;
        for i:=1 to VO_Detail1.RecName[n].Count do begin
          buf:=VO_Detail1.RecName[n][i-1];
          Grid.Cells[0,i]:='';
+         act:=false;
          for j:=0 to ActiveFields.Count-1 do begin
            if ActiveFields[j]=buf then begin
                 Grid.Cells[0,i]:='x';
+                inc(nactive);
+                act:=true;
                 break;
            end;
          end;
-         Grid.Cells[1,i]:=VO_Detail1.RecName[n][i-1];
-         Grid.Cells[2,i]:=VO_Detail1.RecUCD[n][i-1];
-         Grid.Cells[3,i]:=VO_Detail1.RecDatatype[n][i-1];
-         Grid.Cells[4,i]:=VO_Detail1.RecUnits[n][i-1];
-         Grid.Cells[5,i]:=VO_Detail1.RecDescription[n][i-1];
+         FillGrid(fr,i,n,nactive,act);
        end;
        SelectAll:=true;
        tn.Text:=VO_Detail1.TableName[n];
@@ -540,6 +725,7 @@ try
        end;
        RadioGroup1Click(self);
        FullDownload.Checked:=(tr.Value<=Fvo_maxrecord);
+       SelectFields(fr);
      end else begin
        Grid.RowCount:=ActiveFieldNum;
        for i:=0 to ActiveFieldNum-1 do begin
@@ -654,6 +840,26 @@ if sender is Tf_vodetail then
        config.SetValue('VOcat/catalog/name',CatName);
        config.SetValue('VOcat/catalog/table',tn.Text);
        config.SetValue('VOcat/catalog/objtype',objtype);
+       config.DeletePath('VOcat/data');
+       config.SetValue('VOcat/data/sizeposition',-1);
+       for i:=0 to VO_TableData1.FieldList.Count-1 do
+         if VO_TableData1.FieldList[i]=SizeField.Text then begin
+           config.SetValue('VOcat/data/sizeposition',i);
+           break;
+         end;
+       config.SetValue('VOcat/data/magposition',-1);
+       for i:=0 to VO_TableData1.FieldList.Count-1 do
+         if VO_TableData1.FieldList[i]=MagField.Text then begin
+           config.SetValue('VOcat/data/magposition',i);
+           break;
+         end;
+       config.SetValue('VOcat/data/nameposition',-1);
+       for i:=0 to VO_TableData1.FieldList.Count-1 do
+         if VO_TableData1.FieldList[i]=NameField.Text then begin
+           config.SetValue('VOcat/data/nameposition',i);
+           break;
+         end;
+       config.SetValue('VOcat/data/nameprefix',nameprefix);
        config.SetValue('VOcat/update/fullcat',not VO_TableData1.SelectCoord);
        config.SetValue('VOcat/update/baseurl',VO_TableData1.BaseUrl);
        config.SetValue('VOcat/update/votype',ord(VO_Detail1.vo_type));
@@ -664,6 +870,7 @@ if sender is Tf_vodetail then
        config.SetValue('VOcat/plot/forcecolor',forcecolor);
        config.SetValue('VOcat/default/defsize',DefSize.Value);
        config.SetValue('VOcat/default/defmag',DefMag.Value);
+       config.DeletePath('VOcat/fields');
        config.SetValue('VOcat/fields/fieldcount',VO_TableData1.FieldList.Count);
        for i:=0 to VO_TableData1.FieldList.Count-1 do
            config.SetValue('VOcat/fields/field_'+inttostr(i),VO_TableData1.FieldList[i]);
@@ -737,12 +944,33 @@ if sender is Tf_vodetail then
        config.Filename:=extfn;
        config.SetValue('VOcat/catalog/objtype',objtype);
        config.SetValue('VOcat/update/fullcat',FullDownload.Checked);
+       config.DeletePath('VOcat/data');
+       config.SetValue('VOcat/data/sizeposition',-1);
+       for i:=0 to VO_TableData1.FieldList.Count-1 do
+         if VO_TableData1.FieldList[i]=SizeField.Text then begin
+           config.SetValue('VOcat/data/sizeposition',i);
+           break;
+         end;
+       config.SetValue('VOcat/data/magposition',-1);
+       for i:=0 to VO_TableData1.FieldList.Count-1 do
+         if VO_TableData1.FieldList[i]=MagField.Text then begin
+           config.SetValue('VOcat/data/magposition',i);
+           break;
+         end;
+       config.SetValue('VOcat/data/nameposition',-1);
+       for i:=0 to VO_TableData1.FieldList.Count-1 do
+         if VO_TableData1.FieldList[i]=NameField.Text then begin
+           config.SetValue('VOcat/data/nameposition',i);
+           break;
+         end;
+       config.SetValue('VOcat/data/nameprefix',nameprefix);
        config.SetValue('VOcat/plot/maxmag',-99);
        config.SetValue('VOcat/plot/drawtype',drawtype);
        config.SetValue('VOcat/plot/drawcolor',drawcolor);
        config.SetValue('VOcat/plot/forcecolor',forcecolor);
        config.SetValue('VOcat/default/defsize',DefSize.Value);
        config.SetValue('VOcat/default/defmag',DefMag.Value);
+       config.DeletePath('VOcat/fields');
        config.SetValue('VOcat/fields/fieldcount',VO_TableData1.FieldList.Count);
        for i:=0 to VO_TableData1.FieldList.Count-1 do
            config.SetValue('VOcat/fields/field_'+inttostr(i),VO_TableData1.FieldList[i]);
