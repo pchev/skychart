@@ -1503,6 +1503,7 @@ resourcestring
   rsEyepieceVisi = 'Eyepiece vision';
   rsPrintHeaderA = 'Print header and footer';
   rsObservingLis2 = 'Observing list elements';
+  rsSelectLabels = 'Select labels to recover';
 
 implementation
 
