@@ -23,10 +23,10 @@ object f_config_display: Tf_config_display
       Height = 526
       Top = 1
       Width = 503
-      ActivePage = Page7
+      ActivePage = Page6
       Align = alClient
       ShowTabs = False
-      TabIndex = 6
+      TabIndex = 5
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Display'
@@ -1983,6 +1983,525 @@ object f_config_display: Tf_config_display
         Caption = 'Labels'
         ClientHeight = 522
         ClientWidth = 499
+        object GroupBox5: TGroupBox
+          Left = 16
+          Height = 282
+          Top = 69
+          Width = 477
+          ClientHeight = 278
+          ClientWidth = 473
+          TabOrder = 2
+          object Label237: TLabel
+            Left = 230
+            Height = 33
+            Top = 6
+            Width = 80
+            AutoSize = False
+            Caption = 'Magnitude difference'
+            ParentColor = False
+            WordWrap = True
+          end
+          object Label252: TLabel
+            Left = 317
+            Height = 16
+            Top = 23
+            Width = 31
+            Caption = 'Color'
+            ParentColor = False
+          end
+          object Label240: TLabel
+            Left = 316
+            Height = 16
+            Top = 6
+            Width = 30
+            Caption = 'Label'
+            ParentColor = False
+          end
+          object labelcolorStar: TShape
+            Tag = 1
+            Left = 313
+            Height = 17
+            Top = 48
+            Width = 33
+            OnMouseUp = labelcolorMouseUp
+          end
+          object labelcolorVar: TShape
+            Tag = 2
+            Left = 313
+            Height = 17
+            Top = 72
+            Width = 33
+            OnMouseUp = labelcolorMouseUp
+          end
+          object labelcolorMult: TShape
+            Tag = 3
+            Left = 313
+            Height = 17
+            Top = 96
+            Width = 33
+            OnMouseUp = labelcolorMouseUp
+          end
+          object labelcolorNeb: TShape
+            Tag = 4
+            Left = 313
+            Height = 17
+            Top = 120
+            Width = 33
+            OnMouseUp = labelcolorMouseUp
+          end
+          object labelcolorSol: TShape
+            Tag = 5
+            Left = 313
+            Height = 17
+            Top = 144
+            Width = 33
+            OnMouseUp = labelcolorMouseUp
+          end
+          object labelcolorConst: TShape
+            Tag = 6
+            Left = 313
+            Height = 17
+            Top = 168
+            Width = 33
+            OnMouseUp = labelcolorMouseUp
+          end
+          object labelcolorMisc: TShape
+            Tag = 7
+            Left = 313
+            Height = 17
+            Top = 192
+            Width = 33
+            OnMouseUp = labelcolorMouseUp
+          end
+          object labelcolorchartinfo: TShape
+            Tag = 8
+            Left = 313
+            Height = 17
+            Top = 216
+            Width = 33
+            OnMouseUp = labelcolorMouseUp
+          end
+          object Label255: TLabel
+            Left = 369
+            Height = 16
+            Top = 23
+            Width = 23
+            Caption = 'Size'
+            ParentColor = False
+          end
+          object showlabelStar: TCheckBox
+            Tag = 1
+            Left = 19
+            Height = 23
+            Top = 45
+            Width = 54
+            Caption = 'Stars'
+            OnClick = showlabelClick
+            TabOrder = 0
+          end
+          object showlabelVar: TCheckBox
+            Tag = 2
+            Left = 19
+            Height = 23
+            Top = 69
+            Width = 101
+            Caption = 'Variable Stars'
+            OnClick = showlabelClick
+            TabOrder = 1
+          end
+          object showlabelMult: TCheckBox
+            Tag = 3
+            Left = 19
+            Height = 23
+            Top = 93
+            Width = 104
+            Caption = 'Multiple Stars'
+            OnClick = showlabelClick
+            TabOrder = 2
+          end
+          object showlabelNeb: TCheckBox
+            Tag = 4
+            Left = 19
+            Height = 23
+            Top = 117
+            Width = 71
+            Caption = 'Nebulae'
+            OnClick = showlabelClick
+            TabOrder = 3
+          end
+          object showlabelSol: TCheckBox
+            Tag = 5
+            Left = 19
+            Height = 23
+            Top = 141
+            Width = 96
+            Caption = 'Solar System'
+            OnClick = showlabelClick
+            TabOrder = 4
+          end
+          object showlabelConst: TCheckBox
+            Tag = 6
+            Left = 19
+            Height = 23
+            Top = 165
+            Width = 135
+            Caption = 'Constellation name'
+            OnClick = showlabelClick
+            TabOrder = 5
+          end
+          object showlabelMisc: TCheckBox
+            Tag = 7
+            Left = 19
+            Height = 23
+            Top = 189
+            Width = 94
+            Caption = 'Other labels'
+            OnClick = showlabelClick
+            TabOrder = 6
+          end
+          object ShowLabelChartInfo: TCheckBox
+            Tag = 8
+            Left = 19
+            Height = 23
+            Top = 213
+            Width = 127
+            Caption = 'Chart Information'
+            OnClick = showlabelClick
+            TabOrder = 7
+          end
+          object Edit1: TEdit
+            Tag = 1
+            Left = 230
+            Height = 23
+            Top = 45
+            Width = 38
+            TabOrder = 8
+          end
+          object labelmagStar: TUpDown
+            Tag = 1
+            Left = 268
+            Height = 23
+            Top = 45
+            Width = 17
+            Associate = Edit1
+            Min = 0
+            Max = 10
+            Position = 1
+            TabOrder = 9
+            Wrap = False
+            OnClick = labelmagChanged
+          end
+          object Edit2: TEdit
+            Tag = 2
+            Left = 230
+            Height = 23
+            Top = 69
+            Width = 38
+            TabOrder = 10
+          end
+          object labelmagVar: TUpDown
+            Tag = 2
+            Left = 268
+            Height = 23
+            Top = 69
+            Width = 17
+            Associate = Edit2
+            Min = 0
+            Max = 10
+            Position = 1
+            TabOrder = 11
+            Wrap = False
+            OnClick = labelmagChanged
+          end
+          object labelmagMult: TUpDown
+            Tag = 3
+            Left = 268
+            Height = 23
+            Top = 93
+            Width = 17
+            Associate = Edit3
+            Min = 0
+            Max = 10
+            Position = 1
+            TabOrder = 12
+            Wrap = False
+            OnClick = labelmagChanged
+          end
+          object Edit3: TEdit
+            Tag = 3
+            Left = 230
+            Height = 23
+            Top = 93
+            Width = 38
+            TabOrder = 13
+          end
+          object labelmagNeb: TUpDown
+            Tag = 4
+            Left = 268
+            Height = 23
+            Top = 117
+            Width = 17
+            Associate = Edit4
+            Min = 0
+            Max = 10
+            Position = 1
+            TabOrder = 14
+            Wrap = False
+            OnClick = labelmagChanged
+          end
+          object Edit4: TEdit
+            Tag = 4
+            Left = 230
+            Height = 23
+            Top = 117
+            Width = 38
+            TabOrder = 15
+          end
+          object labelmagSol: TUpDown
+            Tag = 5
+            Left = 268
+            Height = 23
+            Top = 141
+            Width = 17
+            Associate = Edit5
+            Min = 0
+            Max = 10
+            Position = 1
+            TabOrder = 16
+            Wrap = False
+            OnClick = labelmagChanged
+          end
+          object Edit5: TEdit
+            Tag = 5
+            Left = 230
+            Height = 23
+            Top = 141
+            Width = 38
+            TabOrder = 17
+          end
+          object Edit6: TEdit
+            Tag = 1
+            Left = 366
+            Height = 23
+            Top = 45
+            Width = 38
+            TabOrder = 18
+          end
+          object labelSizeStar: TUpDown
+            Tag = 1
+            Left = 404
+            Height = 23
+            Top = 45
+            Width = 17
+            Associate = Edit6
+            Min = 4
+            Max = 48
+            Position = 6
+            TabOrder = 19
+            Wrap = False
+            OnClick = labelsizeChanged
+          end
+          object Edit7: TEdit
+            Tag = 2
+            Left = 366
+            Height = 23
+            Top = 69
+            Width = 38
+            TabOrder = 20
+          end
+          object labelsizeVar: TUpDown
+            Tag = 2
+            Left = 404
+            Height = 23
+            Top = 69
+            Width = 17
+            Associate = Edit7
+            Min = 4
+            Max = 48
+            Position = 6
+            TabOrder = 21
+            Wrap = False
+            OnClick = labelsizeChanged
+          end
+          object Edit8: TEdit
+            Tag = 3
+            Left = 366
+            Height = 23
+            Top = 93
+            Width = 38
+            TabOrder = 22
+          end
+          object labelsizeMult: TUpDown
+            Tag = 3
+            Left = 404
+            Height = 23
+            Top = 93
+            Width = 17
+            Associate = Edit8
+            Min = 4
+            Max = 48
+            Position = 6
+            TabOrder = 23
+            Wrap = False
+            OnClick = labelsizeChanged
+          end
+          object Edit9: TEdit
+            Tag = 4
+            Left = 366
+            Height = 23
+            Top = 117
+            Width = 38
+            TabOrder = 24
+          end
+          object labelsizeNeb: TUpDown
+            Tag = 4
+            Left = 404
+            Height = 23
+            Top = 117
+            Width = 17
+            Associate = Edit9
+            Min = 4
+            Max = 48
+            Position = 6
+            TabOrder = 25
+            Wrap = False
+            OnClick = labelsizeChanged
+          end
+          object Edit10: TEdit
+            Tag = 5
+            Left = 366
+            Height = 23
+            Top = 141
+            Width = 38
+            TabOrder = 26
+          end
+          object labelsizeSol: TUpDown
+            Tag = 5
+            Left = 404
+            Height = 23
+            Top = 141
+            Width = 17
+            Associate = Edit10
+            Min = 4
+            Max = 48
+            Position = 6
+            TabOrder = 27
+            Wrap = False
+            OnClick = labelsizeChanged
+          end
+          object Edit11: TEdit
+            Tag = 6
+            Left = 366
+            Height = 23
+            Top = 165
+            Width = 38
+            TabOrder = 28
+          end
+          object labelsizeConst: TUpDown
+            Tag = 6
+            Left = 404
+            Height = 23
+            Top = 165
+            Width = 17
+            Associate = Edit11
+            Min = 4
+            Max = 48
+            Position = 6
+            TabOrder = 29
+            Wrap = False
+            OnClick = labelsizeChanged
+          end
+          object Edit12: TEdit
+            Tag = 7
+            Left = 366
+            Height = 23
+            Top = 189
+            Width = 38
+            TabOrder = 30
+          end
+          object labelsizeMisc: TUpDown
+            Tag = 7
+            Left = 404
+            Height = 23
+            Top = 189
+            Width = 17
+            Associate = Edit12
+            Min = 4
+            Max = 48
+            Position = 6
+            TabOrder = 31
+            Wrap = False
+            OnClick = labelsizeChanged
+          end
+          object Edit13: TEdit
+            Tag = 8
+            Left = 366
+            Height = 23
+            Top = 213
+            Width = 38
+            TabOrder = 32
+          end
+          object labelsizeChartInfo: TUpDown
+            Tag = 8
+            Left = 404
+            Height = 23
+            Top = 213
+            Width = 17
+            Associate = Edit13
+            Min = 4
+            Max = 48
+            Position = 6
+            TabOrder = 33
+            Wrap = False
+            OnClick = labelsizeChanged
+          end
+          object Label14: TLabel
+            Left = 19
+            Height = 16
+            Top = 6
+            Width = 72
+            Caption = 'Label Object'
+            ParentColor = False
+          end
+          object Label15: TLabel
+            Left = 40
+            Height = 16
+            Top = 240
+            Width = 136
+            Caption = 'Observing list elements'
+            ParentColor = False
+          end
+          object labelcolorobslist: TShape
+            Tag = 9
+            Left = 313
+            Height = 17
+            Top = 240
+            Width = 33
+            OnMouseUp = labelcolorMouseUp
+          end
+          object Edit14: TEdit
+            Tag = 9
+            Left = 366
+            Height = 23
+            Top = 237
+            Width = 38
+            TabOrder = 34
+          end
+          object labelsizeobslist: TUpDown
+            Tag = 9
+            Left = 404
+            Height = 23
+            Top = 237
+            Width = 17
+            Associate = Edit14
+            Min = 4
+            Max = 48
+            Position = 6
+            TabOrder = 35
+            Wrap = False
+            OnClick = labelsizeChanged
+          end
+        end
         object MagLabel: TRadioGroup
           Left = 16
           Height = 81
@@ -2041,7 +2560,7 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 23
           Top = 49
-          Width = 134
+          Width = 122
           Caption = 'Display the labels'
           OnClick = ShowlabelallClick
           TabOrder = 0
@@ -2050,535 +2569,16 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 23
           Top = 5
-          Width = 302
+          Width = 285
           Caption = 'Display the chart information in the menu bar.'
           OnClick = ShowChartInfoClick
           TabOrder = 1
-        end
-        object GroupBox5: TGroupBox
-          Left = 16
-          Height = 274
-          Top = 77
-          Width = 477
-          ClientHeight = 270
-          ClientWidth = 473
-          TabOrder = 2
-          object Label237: TLabel
-            Left = 230
-            Height = 33
-            Top = 6
-            Width = 80
-            AutoSize = False
-            Caption = 'Magnitude difference'
-            ParentColor = False
-            WordWrap = True
-          end
-          object Label252: TLabel
-            Left = 317
-            Height = 16
-            Top = 23
-            Width = 34
-            Caption = 'Color'
-            ParentColor = False
-          end
-          object Label240: TLabel
-            Left = 316
-            Height = 16
-            Top = 6
-            Width = 34
-            Caption = 'Label'
-            ParentColor = False
-          end
-          object labelcolorStar: TShape
-            Tag = 1
-            Left = 313
-            Height = 17
-            Top = 45
-            Width = 33
-            OnMouseUp = labelcolorMouseUp
-          end
-          object labelcolorVar: TShape
-            Tag = 2
-            Left = 313
-            Height = 17
-            Top = 69
-            Width = 33
-            OnMouseUp = labelcolorMouseUp
-          end
-          object labelcolorMult: TShape
-            Tag = 3
-            Left = 313
-            Height = 17
-            Top = 93
-            Width = 33
-            OnMouseUp = labelcolorMouseUp
-          end
-          object labelcolorNeb: TShape
-            Tag = 4
-            Left = 313
-            Height = 17
-            Top = 117
-            Width = 33
-            OnMouseUp = labelcolorMouseUp
-          end
-          object labelcolorSol: TShape
-            Tag = 5
-            Left = 313
-            Height = 17
-            Top = 141
-            Width = 33
-            OnMouseUp = labelcolorMouseUp
-          end
-          object labelcolorConst: TShape
-            Tag = 6
-            Left = 313
-            Height = 17
-            Top = 165
-            Width = 33
-            OnMouseUp = labelcolorMouseUp
-          end
-          object labelcolorMisc: TShape
-            Tag = 7
-            Left = 313
-            Height = 17
-            Top = 189
-            Width = 33
-            OnMouseUp = labelcolorMouseUp
-          end
-          object labelcolorchartinfo: TShape
-            Tag = 8
-            Left = 313
-            Height = 17
-            Top = 213
-            Width = 33
-            OnMouseUp = labelcolorMouseUp
-          end
-          object Label255: TLabel
-            Left = 369
-            Height = 16
-            Top = 23
-            Width = 24
-            Caption = 'Size'
-            ParentColor = False
-          end
-          object showlabelStar: TCheckBox
-            Tag = 1
-            Left = 19
-            Height = 23
-            Top = 47
-            Width = 56
-            Caption = 'Stars'
-            OnClick = showlabelClick
-            TabOrder = 0
-          end
-          object showlabelVar: TCheckBox
-            Tag = 2
-            Left = 19
-            Height = 23
-            Top = 71
-            Width = 110
-            Caption = 'Variable Stars'
-            OnClick = showlabelClick
-            TabOrder = 1
-          end
-          object showlabelMult: TCheckBox
-            Tag = 3
-            Left = 19
-            Height = 23
-            Top = 95
-            Width = 110
-            Caption = 'Multiple Stars'
-            OnClick = showlabelClick
-            TabOrder = 2
-          end
-          object showlabelNeb: TCheckBox
-            Tag = 4
-            Left = 19
-            Height = 23
-            Top = 119
-            Width = 76
-            Caption = 'Nebulae'
-            OnClick = showlabelClick
-            TabOrder = 3
-          end
-          object showlabelSol: TCheckBox
-            Tag = 5
-            Left = 19
-            Height = 23
-            Top = 143
-            Width = 104
-            Caption = 'Solar System'
-            OnClick = showlabelClick
-            TabOrder = 4
-          end
-          object showlabelConst: TCheckBox
-            Tag = 6
-            Left = 19
-            Height = 23
-            Top = 167
-            Width = 144
-            Caption = 'Constellation name'
-            OnClick = showlabelClick
-            TabOrder = 5
-          end
-          object showlabelMisc: TCheckBox
-            Tag = 7
-            Left = 19
-            Height = 23
-            Top = 191
-            Width = 102
-            Caption = 'Other labels'
-            OnClick = showlabelClick
-            TabOrder = 6
-          end
-          object ShowLabelChartInfo: TCheckBox
-            Tag = 8
-            Left = 19
-            Height = 23
-            Top = 215
-            Width = 133
-            Caption = 'Chart Information'
-            OnClick = showlabelClick
-            TabOrder = 7
-          end
-          object Edit1: TEdit
-            Tag = 1
-            Left = 230
-            Height = 24
-            Top = 43
-            Width = 38
-            TabOrder = 8
-          end
-          object labelmagStar: TUpDown
-            Tag = 1
-            Left = 268
-            Height = 24
-            Top = 43
-            Width = 17
-            Associate = Edit1
-            Min = 0
-            Max = 10
-            Position = 1
-            TabOrder = 9
-            Wrap = False
-            OnClick = labelmagChanged
-          end
-          object Edit2: TEdit
-            Tag = 2
-            Left = 230
-            Height = 24
-            Top = 67
-            Width = 38
-            TabOrder = 10
-          end
-          object labelmagVar: TUpDown
-            Tag = 2
-            Left = 268
-            Height = 24
-            Top = 67
-            Width = 17
-            Associate = Edit2
-            Min = 0
-            Max = 10
-            Position = 1
-            TabOrder = 11
-            Wrap = False
-            OnClick = labelmagChanged
-          end
-          object labelmagMult: TUpDown
-            Tag = 3
-            Left = 268
-            Height = 24
-            Top = 91
-            Width = 17
-            Associate = Edit3
-            Min = 0
-            Max = 10
-            Position = 1
-            TabOrder = 12
-            Wrap = False
-            OnClick = labelmagChanged
-          end
-          object Edit3: TEdit
-            Tag = 3
-            Left = 230
-            Height = 24
-            Top = 91
-            Width = 38
-            TabOrder = 13
-          end
-          object labelmagNeb: TUpDown
-            Tag = 4
-            Left = 268
-            Height = 24
-            Top = 115
-            Width = 17
-            Associate = Edit4
-            Min = 0
-            Max = 10
-            Position = 1
-            TabOrder = 14
-            Wrap = False
-            OnClick = labelmagChanged
-          end
-          object Edit4: TEdit
-            Tag = 4
-            Left = 230
-            Height = 24
-            Top = 115
-            Width = 38
-            TabOrder = 15
-          end
-          object labelmagSol: TUpDown
-            Tag = 5
-            Left = 268
-            Height = 24
-            Top = 139
-            Width = 17
-            Associate = Edit5
-            Min = 0
-            Max = 10
-            Position = 1
-            TabOrder = 16
-            Wrap = False
-            OnClick = labelmagChanged
-          end
-          object Edit5: TEdit
-            Tag = 5
-            Left = 230
-            Height = 24
-            Top = 139
-            Width = 38
-            TabOrder = 17
-          end
-          object Edit6: TEdit
-            Tag = 1
-            Left = 366
-            Height = 24
-            Top = 45
-            Width = 38
-            TabOrder = 18
-          end
-          object labelSizeStar: TUpDown
-            Tag = 1
-            Left = 404
-            Height = 24
-            Top = 45
-            Width = 17
-            Associate = Edit6
-            Min = 4
-            Max = 48
-            Position = 6
-            TabOrder = 19
-            Wrap = False
-            OnClick = labelsizeChanged
-          end
-          object Edit7: TEdit
-            Tag = 2
-            Left = 366
-            Height = 24
-            Top = 67
-            Width = 38
-            TabOrder = 20
-          end
-          object labelsizeVar: TUpDown
-            Tag = 2
-            Left = 404
-            Height = 24
-            Top = 67
-            Width = 17
-            Associate = Edit7
-            Min = 4
-            Max = 48
-            Position = 6
-            TabOrder = 21
-            Wrap = False
-            OnClick = labelsizeChanged
-          end
-          object Edit8: TEdit
-            Tag = 3
-            Left = 366
-            Height = 24
-            Top = 91
-            Width = 38
-            TabOrder = 22
-          end
-          object labelsizeMult: TUpDown
-            Tag = 3
-            Left = 404
-            Height = 24
-            Top = 91
-            Width = 17
-            Associate = Edit8
-            Min = 4
-            Max = 48
-            Position = 6
-            TabOrder = 23
-            Wrap = False
-            OnClick = labelsizeChanged
-          end
-          object Edit9: TEdit
-            Tag = 4
-            Left = 366
-            Height = 24
-            Top = 115
-            Width = 38
-            TabOrder = 24
-          end
-          object labelsizeNeb: TUpDown
-            Tag = 4
-            Left = 404
-            Height = 24
-            Top = 115
-            Width = 17
-            Associate = Edit9
-            Min = 4
-            Max = 48
-            Position = 6
-            TabOrder = 25
-            Wrap = False
-            OnClick = labelsizeChanged
-          end
-          object Edit10: TEdit
-            Tag = 5
-            Left = 366
-            Height = 24
-            Top = 139
-            Width = 38
-            TabOrder = 26
-          end
-          object labelsizeSol: TUpDown
-            Tag = 5
-            Left = 404
-            Height = 24
-            Top = 139
-            Width = 17
-            Associate = Edit10
-            Min = 4
-            Max = 48
-            Position = 6
-            TabOrder = 27
-            Wrap = False
-            OnClick = labelsizeChanged
-          end
-          object Edit11: TEdit
-            Tag = 6
-            Left = 366
-            Height = 24
-            Top = 163
-            Width = 38
-            TabOrder = 28
-          end
-          object labelsizeConst: TUpDown
-            Tag = 6
-            Left = 404
-            Height = 24
-            Top = 163
-            Width = 17
-            Associate = Edit11
-            Min = 4
-            Max = 48
-            Position = 6
-            TabOrder = 29
-            Wrap = False
-            OnClick = labelsizeChanged
-          end
-          object Edit12: TEdit
-            Tag = 7
-            Left = 366
-            Height = 24
-            Top = 187
-            Width = 38
-            TabOrder = 30
-          end
-          object labelsizeMisc: TUpDown
-            Tag = 7
-            Left = 404
-            Height = 24
-            Top = 187
-            Width = 17
-            Associate = Edit12
-            Min = 4
-            Max = 48
-            Position = 6
-            TabOrder = 31
-            Wrap = False
-            OnClick = labelsizeChanged
-          end
-          object Edit13: TEdit
-            Tag = 8
-            Left = 366
-            Height = 24
-            Top = 211
-            Width = 38
-            TabOrder = 32
-          end
-          object labelsizeChartInfo: TUpDown
-            Tag = 8
-            Left = 404
-            Height = 24
-            Top = 211
-            Width = 17
-            Associate = Edit13
-            Min = 4
-            Max = 48
-            Position = 6
-            TabOrder = 33
-            Wrap = False
-            OnClick = labelsizeChanged
-          end
-          object Label14: TLabel
-            Left = 19
-            Height = 16
-            Top = 6
-            Width = 79
-            Caption = 'Label Object'
-            ParentColor = False
-          end
-          object Label15: TLabel
-            Left = 43
-            Height = 16
-            Top = 242
-            Width = 145
-            Caption = 'Observing list elements'
-            ParentColor = False
-          end
-          object labelcolorobslist: TShape
-            Tag = 9
-            Left = 313
-            Height = 17
-            Top = 240
-            Width = 33
-            OnMouseUp = labelcolorMouseUp
-          end
-          object Edit14: TEdit
-            Tag = 9
-            Left = 366
-            Height = 24
-            Top = 237
-            Width = 38
-            TabOrder = 34
-          end
-          object labelsizeobslist: TUpDown
-            Tag = 9
-            Left = 404
-            Height = 24
-            Top = 237
-            Width = 17
-            Associate = Edit14
-            Min = 4
-            Max = 48
-            Position = 6
-            TabOrder = 35
-            Wrap = False
-            OnClick = labelsizeChanged
-          end
         end
         object DrawAllStarLabel: TCheckBox
           Left = 26
           Height = 23
           Top = 437
-          Width = 225
+          Width = 205
           Caption = 'Display labels for all star catalog'
           OnClick = DrawAllStarLabelClick
           TabOrder = 5
@@ -2596,7 +2596,7 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 23
           Top = 27
-          Width = 175
+          Width = 165
           Caption = 'Show position in title bar'
           OnClick = ShowTitleClick
           TabOrder = 7
@@ -2605,7 +2605,7 @@ object f_config_display: Tf_config_display
           Left = 26
           Height = 23
           Top = 459
-          Width = 84
+          Width = 77
           Caption = 'LabelLine'
           OnClick = LabelLineClick
           TabOrder = 8
@@ -2614,7 +2614,7 @@ object f_config_display: Tf_config_display
           Left = 26
           Height = 23
           Top = 481
-          Width = 89
+          Width = 82
           Caption = 'OptLabels'
           OnClick = OptLabelsClick
           TabOrder = 9
@@ -2623,7 +2623,7 @@ object f_config_display: Tf_config_display
           Left = 325
           Height = 23
           Top = 49
-          Width = 106
+          Width = 98
           Caption = 'Chart legend'
           OnClick = CheckBox5Click
           TabOrder = 10
