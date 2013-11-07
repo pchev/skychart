@@ -123,6 +123,8 @@ type
     FObjLabels,FEmptyObjLabels: TStringList;
     function GetRowcount : integer;
     procedure SetMeridianSide(value:integer);
+    procedure SetLimitType(value:integer);
+    function GetLimitType: integer;
   public
     { public declarations }
     cfgsc: Tconf_skychart;
@@ -149,6 +151,7 @@ type
     property ObjLabels: TStringList read FObjLabels;
     property EmptyObjLabels: TStringList read FEmptyObjLabels;
     property MeridianSide: integer read FMeridianSide write SetMeridianSide;
+    property LimitType: integer read GetLimitType write SetLimitType;
     property onSelectObject: TSelectObject read FSelectObject write FSelectObject;
     property onGetObjectCoord: TGetObjectCoord read FGetObjectCoord write FGetObjectCoord;
     property onObjLabelChange: TNotifyEvent read FObjLabelChange write FObjLabelChange;
@@ -692,6 +695,21 @@ case FMeridianSide of
   2: RadioButton3.Checked:=true;
   else RadioButton2.Checked:=true;
 end;
+end;
+
+procedure Tf_obslist.SetLimitType(value:integer);
+begin
+  PageControl1.ActivePageIndex:=value;
+  locktogglebox:=true;
+  ToggleBox1.Checked:=(PageControl1.ActivePageIndex=0);
+  ToggleBox2.Checked:=not ToggleBox1.Checked;
+  locktogglebox:=false;
+  Refresh;
+end;
+
+function Tf_obslist.GetLimitType:integer;
+begin
+result:=PageControl1.ActivePageIndex;
 end;
 
 procedure Tf_obslist.StringGrid1MouseDown(Sender: TObject;
