@@ -465,6 +465,10 @@ object f_chart: Tf_chart
         Caption = 'Remove All Labels'
         OnClick = RemoveAllLabel1Click
       end
+      object RecoverLabel: TMenuItem
+        Caption = 'Recover Label'
+        OnClick = RecoverLabelClick
+      end
     end
     object Telescope1: TMenuItem
       Caption = 'Telescope'

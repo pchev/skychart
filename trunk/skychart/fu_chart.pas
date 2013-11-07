@@ -34,7 +34,7 @@ uses
      u_translation, pu_detail, cu_skychart,  u_constant, u_util,pu_image, gcatunit, pu_obslist,
      u_projection, Printers, Math, downloaddialog, IntfGraphics, contnrs, LCLType,
      PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs, Types,
-     Forms, Controls, StdCtrls, ExtCtrls, Menus, ActnList, SysUtils, LResources;
+     Forms, Controls, StdCtrls, ExtCtrls, Menus, ActnList, SysUtils, LResources, CheckLst;
      
 const maxundo=10;
 
@@ -74,6 +74,7 @@ type
     MenuCircle9: TMenuItem;
     MenuCircle10: TMenuItem;
     EyepieceMask: TMenuItem;
+    RecoverLabel: TMenuItem;
     MenuObslistFirst: TMenuItem;
     MenuObslistNext: TMenuItem;
     MenuObslistPrev: TMenuItem;
@@ -190,6 +191,7 @@ type
     procedure MenuSaveCircleClick(Sender: TObject);
     procedure nsearch1Click(Sender: TObject);
     procedure PDSSTimerTimer(Sender: TObject);
+    procedure RecoverLabelClick(Sender: TObject);
     procedure RefreshTimerTimer(Sender: TObject);
     procedure RemoveAllLabel1Click(Sender: TObject);
     procedure RemoveLastLabel1Click(Sender: TObject);
@@ -4579,6 +4581,57 @@ procedure Tf_chart.PDSSTimerTimer(Sender: TObject);
 begin
   PDSSTimer.Enabled:=false;
   cmd_PDSS('','','','');
+end;
+
+procedure Tf_chart.RecoverLabelClick(Sender: TObject);
+var i,j:integer;
+    buf:string;
+    f:TForm;
+    l:TCheckListBox;
+    b:TButton;
+    lid: array of integer;
+begin
+if sc.cfgsc.nummodlabels<=0 then exit;
+f:=TForm.Create(self);
+b:=TButton.Create(self);
+l:=TCheckListBox.Create(self);
+try
+f.Caption:=rsSelectLabels;
+f.Width:=300;
+f.Height:=300;
+b.Parent:=f;
+b.Align:=alBottom;
+b.ModalResult:=mrOK;
+b.Caption:=rsOK;
+l.Parent:=f;
+l.Align:=alClient;
+SetLength(lid,sc.cfgsc.nummodlabels+1);
+for i:=1 to sc.cfgsc.nummodlabels do begin
+   if sc.cfgsc.modlabels[i].hiden then begin
+     j:=l.Items.Add(sc.cfgsc.modlabels[i].txt);
+     lid[j]:=sc.cfgsc.modlabels[i].id;
+   end;
+end;
+if l.Items.Count>0 then begin
+  FormPos(f,mouse.CursorPos.X,mouse.CursorPos.Y);
+  f.ShowModal;
+  if f.ModalResult=mrOK then begin
+    for i:=0 to l.Items.Count-1 do begin
+      if l.Checked[i] then begin
+        for j:=1 to sc.cfgsc.nummodlabels do
+          if sc.cfgsc.modlabels[j].id=lid[i] then begin
+            sc.cfgsc.modlabels[j].hiden:=false;
+          end;
+      end;
+    end;
+  end;
+  Refresh;
+end;
+finally
+b.Free;
+l.Free;
+f.Free;
+end;
 end;
 
 function Tf_chart.cmd_DefCircle(num, diameter, rotation, offset: string):string;
