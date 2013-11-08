@@ -57,14 +57,14 @@ type
     DefMag: TLongEdit;
     DefSize: TLongEdit;
     Shape1: TShape;
-    tr: TLongEdit;
+    desc: TStaticText;
+    tr: TStaticText;
+    tn: TStaticText;
     Panel1: TPanel;
     MainPanel: TPanel;
     RadioGroup1: TRadioGroup;
     Table: TLabel;
     Rows: TLabel;
-    tn: TEdit;
-    desc: TMemo;
     Button1: TButton;
     procedure Button2Click(Sender: TObject);
     procedure ButtonBackClick(Sender: TObject);
@@ -152,11 +152,11 @@ end;
 
 procedure Tf_vodetail.FullDownloadChange(Sender: TObject);
 begin
-if FullDownload.Checked and (tr.Value>vo_maxrecord) then begin
-   ShowMessage(Format(rsThisCatalogC, [inttostr(tr.value)]));
+if FullDownload.Checked and (StrToIntDef(tr.Caption,MaxInt)>vo_maxrecord) then begin
+   ShowMessage(Format(rsThisCatalogC, [tr.Caption]));
    FullDownload.Checked:=false;
 end;
-if FullDownload.Checked and (tr.Value=0) then begin
+if FullDownload.Checked and (StrToIntDef(tr.Caption,0)=0) then begin
    ShowMessage(Format(rsTheNumberOfR, [inttostr(vo_maxrecord)]));
 end;
 end;
@@ -199,12 +199,14 @@ procedure Tf_vodetail.GridMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 var Column,Row,i : integer;
     mark : string;
+    forcemark: boolean;
 begin
 grid.MouseToCell(X, Y, Column, Row);
 if (row>0)and(Column=0) then begin
    needdownload:=true;
    button1.Caption:=rsDownloadCata;
-   if grid.Cells[Column,Row]='' then mark:='x'
+   forcemark:=(grid.Cells[1,Row]=NameField.Text)or(grid.Cells[1,Row]=SizeField.Text)or(grid.Cells[1,Row]=MagField.Text);
+   if forcemark or (grid.Cells[Column,Row]='') then mark:='x'
       else mark:='';
    grid.Cells[Column,Row]:=mark;
 end;
@@ -214,8 +216,11 @@ if (row=0)and(Column=0) then begin
    SelectAll:=not SelectAll;
    if SelectAll then mark:='x'
       else mark:='';
-   for i:=1 to grid.RowCount-1 do
-      grid.Cells[0,i]:=mark;
+   for i:=1 to grid.RowCount-1 do begin
+      forcemark:=(grid.Cells[1,i]=NameField.Text)or(grid.Cells[1,i]=SizeField.Text)or(grid.Cells[1,i]=MagField.Text);
+      if forcemark then grid.Cells[0,i]:='x'
+         else grid.Cells[0,i]:=mark;
+   end;
 end;
 end;
 
@@ -224,7 +229,8 @@ var buf: string;
     i:integer;
 begin
 buf:=TComboBox(Sender).Text;
-if buf>'' then begin
+if (buf>'')and(buf<>rsAutomatic) then begin
+  Prefix.Text:=buf+' ';
   for i:=0 to Grid.RowCount-1 do begin
     if Grid.Cells[1,i]=buf then begin
        if Grid.Cells[0,i]<>'x' then begin
