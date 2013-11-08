@@ -5886,3 +5886,11 @@ msgstr ""
 msgid "Observing list elements"
 msgstr ""
 
+#: u_translation:rsselectlabels
+msgid "Select labels to recover"
+msgstr ""
+
+#: u_translation:rsrecoverhidde
+msgid "Recover hidden label"
+msgstr ""
+

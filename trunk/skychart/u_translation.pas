@@ -1504,6 +1504,7 @@ resourcestring
   rsPrintHeaderA = 'Print header and footer';
   rsObservingLis2 = 'Observing list elements';
   rsSelectLabels = 'Select labels to recover';
+  rsRecoverHidde = 'Recover hidden label';
 
 implementation
 

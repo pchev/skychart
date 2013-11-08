@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-11-05 12:18+0000\n"
+"POT-Creation-Date: 2013-11-08 16:31+0000\n"
 "PO-Revision-Date: 2013-10-21 03:26+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-05 17:52+0000\n"
+"X-Launchpad-Export-Date: 2013-11-08 17:01+0000\n"
 "X-Generator: Launchpad (build 16820)\n"
 
 #: u_translation.rs102cddss
@@ -4220,6 +4220,10 @@ msgstr "ชื่อขึ้นต้นของแฟ้มที่จะบ
 msgid "Record protocol to a trace file"
 msgstr ""
 
+#: u_translation.rsrecoverhidde
+msgid "Recover hidden label"
+msgstr ""
+
 #: u_translation.rsred
 msgid "Red"
 msgstr "แดง"
@@ -4587,6 +4591,10 @@ msgstr "เลือกวงกลม"
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
 msgstr "เลือกสี (ค่าปริยายคือสีดำ)"
+
+#: u_translation.rsselectlabels
+msgid "Select labels to recover"
+msgstr ""
 
 #: u_translation.rsselectmirror
 msgid "Select mirror site"

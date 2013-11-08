@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-05 12:18+0000\n"
+"POT-Creation-Date: 2013-11-08 16:31+0000\n"
 "PO-Revision-Date: 2012-03-10 15:25+0000\n"
 "Last-Translator: grofaty <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-05 17:52+0000\n"
+"X-Launchpad-Export-Date: 2013-11-08 17:01+0000\n"
 "X-Generator: Launchpad (build 16820)\n"
 "Language: en_US\n"
 
@@ -4221,6 +4221,10 @@ msgstr "Zapisovalna predpona"
 msgid "Record protocol to a trace file"
 msgstr "Zapisovalni protokol za datoteko sledi"
 
+#: u_translation.rsrecoverhidde
+msgid "Recover hidden label"
+msgstr ""
+
 #: u_translation.rsred
 msgid "Red"
 msgstr "Rdeče"
@@ -4588,6 +4592,10 @@ msgstr ""
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
 msgstr "Izberi barvo (črna je privzeta za katalog)"
+
+#: u_translation.rsselectlabels
+msgid "Select labels to recover"
+msgstr ""
 
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
