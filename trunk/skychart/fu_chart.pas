@@ -192,6 +192,7 @@ type
     procedure nsearch1Click(Sender: TObject);
     procedure PDSSTimerTimer(Sender: TObject);
     procedure RecoverLabelClick(Sender: TObject);
+    procedure RecoverLabelSelectAll(Sender: TObject);
     procedure RefreshTimerTimer(Sender: TObject);
     procedure RemoveAllLabel1Click(Sender: TObject);
     procedure RemoveLastLabel1Click(Sender: TObject);
@@ -4583,26 +4584,50 @@ begin
   cmd_PDSS('','','','');
 end;
 
+procedure Tf_chart.RecoverLabelSelectAll(Sender: TObject);
+var f:TForm;
+    i,j:integer;
+begin
+if sender=nil then exit;
+try
+f:=TForm(TButton(sender).Parent);
+for i:=0 to f.ControlCount-1 do begin
+  if f.Controls[i] is TCheckListBox then
+    with f.Controls[i] as TCheckListBox do begin
+      if Items.Count>0 then
+       if Checked[0] then CheckAll(cbUnchecked)
+          else CheckAll(cbChecked);
+    end;
+end;
+except
+end;
+end;
+
 procedure Tf_chart.RecoverLabelClick(Sender: TObject);
 var i,j:integer;
     buf:string;
     f:TForm;
     l:TCheckListBox;
-    b:TButton;
+    b1,b2:TButton;
     lid: array of integer;
 begin
 if sc.cfgsc.nummodlabels<=0 then exit;
 f:=TForm.Create(self);
-b:=TButton.Create(self);
+b1:=TButton.Create(self);
+b2:=TButton.Create(self);
 l:=TCheckListBox.Create(self);
 try
 f.Caption:=rsSelectLabels;
 f.Width:=300;
 f.Height:=300;
-b.Parent:=f;
-b.Align:=alBottom;
-b.ModalResult:=mrOK;
-b.Caption:=rsOK;
+b1.Parent:=f;
+b1.Align:=alBottom;
+b1.ModalResult:=mrOK;
+b1.Caption:=rsOK;
+b2.Parent:=f;
+b2.Align:=alTop;
+b2.Caption:=rsSelectAll;
+b2.OnClick:=RecoverLabelSelectAll;
 l.Parent:=f;
 l.Align:=alClient;
 SetLength(lid,sc.cfgsc.nummodlabels+1);
@@ -4628,7 +4653,8 @@ if l.Items.Count>0 then begin
   Refresh;
 end;
 finally
-b.Free;
+b1.Free;
+b2.Free;
 l.Free;
 f.Free;
 end;
