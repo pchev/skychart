@@ -571,11 +571,11 @@ if CatList.Row>0 then begin
          FillGrid(fr,i,n,nactive,act);
        end;
        SelectAll:=true;
-       tn.Text:=VO_Detail1.TableName[n];
+       tn.Caption:=VO_Detail1.TableName[n];
        tb.Caption:=VO_Detail1.TableName[n];
-       tr.value:=VO_Detail1.Rows[n];
-       if trim(VO_Detail1.description[n])>'' then desc.text:=dedupstr(VO_Detail1.description[n])
-          else desc.text:=CatName;
+       tr.Caption:=inttostr(VO_Detail1.Rows[n]);
+       if trim(VO_Detail1.description[n])>'' then desc.Caption:=dedupstr(VO_Detail1.description[n])
+          else desc.Caption:=CatName;
        if not VO_Detail1.HasCoord[n] then
           RadioGroup1.ItemIndex:=0
        else if (VO_Detail1.HasSize[n])or(not VO_Detail1.HasMag[n]) then
@@ -583,7 +583,7 @@ if CatList.Row>0 then begin
        else
           RadioGroup1.ItemIndex:=1;
        RadioGroup1Click(self);
-       FullDownload.Checked:=(tr.Value<=vo_maxrecord);
+       FullDownload.Checked:=(StrToIntDef(tr.Caption,MaxInt)<=vo_maxrecord);
        SelectFields(fr);
      end;
   end;
@@ -706,11 +706,11 @@ try
          FillGrid(fr,i,n,nactive,act);
        end;
        SelectAll:=true;
-       tn.Text:=VO_Detail1.TableName[n];
+       tn.Caption:=VO_Detail1.TableName[n];
        tb.Caption:=VO_Detail1.TableName[n];
-       tr.value:=VO_Detail1.Rows[n];
-       if trim(VO_Detail1.description[n])>'' then desc.text:=dedupstr(VO_Detail1.description[n])
-          else desc.text:=CatName;
+       tr.Caption:=inttostr(VO_Detail1.Rows[n]);
+       if trim(VO_Detail1.description[n])>'' then desc.Caption:=dedupstr(VO_Detail1.description[n])
+          else desc.Caption:=CatName;
        if objtype='' then begin
          if not VO_Detail1.HasCoord[n] then
             RadioGroup1.ItemIndex:=0
@@ -724,7 +724,7 @@ try
          else RadioGroup1.ItemIndex:=0;
        end;
        RadioGroup1Click(self);
-       FullDownload.Checked:=(tr.Value<=Fvo_maxrecord);
+       FullDownload.Checked:=(StrToIntDef(tr.Caption,MaxInt)<=Fvo_maxrecord);
        SelectFields(fr);
      end else begin
        Grid.RowCount:=ActiveFieldNum;
@@ -734,12 +734,12 @@ try
        end;
        Grid.OnMouseUp:=nil;
        SelectAll:=true;
-       tn.Text:=tablen;
+       tn.Caption:=tablen;
        tb.Caption:=tablen;
-       tr.value:=-1;
+       tr.Caption:='-1';
        tr.Visible:=false;
        Rows.Visible:=false;
-       desc.text:=CatName;
+       desc.Caption:=CatName;
        RadioGroup1.ItemIndex:=2;
        RadioGroup1Click(self);
        FullDownload.Checked:=true;
@@ -810,7 +810,7 @@ ClearDataGrid;
 if sender is Tf_vodetail then
    with sender as Tf_vodetail do begin
        VO_TableData1.vo_type:=VO_Detail1.vo_type;
-       VO_TableData1.BaseUrl:=stringreplace(VO_Detail1.BaseUrl,VO_Detail1.CatalogName+'/*',tn.Text,[]);
+       VO_TableData1.BaseUrl:=stringreplace(VO_Detail1.BaseUrl,VO_Detail1.CatalogName+'/*',tn.Caption,[]);
        VO_TableData1.SelectCoord:=not FullDownload.Checked;
        VO_TableData1.ra:=rad2deg*ra;
        VO_TableData1.dec:=rad2deg*dec;
@@ -833,12 +833,12 @@ if sender is Tf_vodetail then
          1: objtype:='star';
          2: objtype:='dso';
        end;
-       VO_TableData1.GetData(tn.Text,objtype,false);
+       VO_TableData1.GetData(tn.Caption,objtype,false);
        extfn:=slash(VO_TableData1.CachePath)+ChangeFileExt(VO_TableData1.Datafile,'.config');
        config:=TXMLConfig.Create(self);
        config.Filename:=extfn;
        config.SetValue('VOcat/catalog/name',CatName);
-       config.SetValue('VOcat/catalog/table',tn.Text);
+       config.SetValue('VOcat/catalog/table',tn.Caption);
        config.SetValue('VOcat/catalog/objtype',objtype);
        config.DeletePath('VOcat/data');
        config.SetValue('VOcat/data/sizeposition',-1);
@@ -879,6 +879,7 @@ if sender is Tf_vodetail then
    end;
 finally
 screen.Cursor:=crDefault;
+CloseTimer.Enabled:=true;
 end;
 end;
 
@@ -994,7 +995,7 @@ ClearDataGrid;
 if sender is Tf_vodetail then
    with sender as Tf_vodetail do begin
        VO_TableData1.vo_type:=VO_Detail1.vo_type;
-       VO_TableData1.BaseUrl:=stringreplace(VO_Detail1.BaseUrl,VO_Detail1.CatalogName+'/*',tn.Text,[]);
+       VO_TableData1.BaseUrl:=stringreplace(VO_Detail1.BaseUrl,VO_Detail1.CatalogName+'/*',tn.Caption,[]);
        VO_TableData1.SelectCoord:=not FullDownload.Checked;
        VO_TableData1.ra:=rad2deg*ra;
        VO_TableData1.dec:=rad2deg*dec;
@@ -1019,7 +1020,7 @@ if sender is Tf_vodetail then
          1: objtype:='star';
          2: objtype:='dso';
        end;
-       VO_TableData1.GetData(tn.Text,objtype,true);
+       VO_TableData1.GetData(tn.Caption,objtype,true);
    end;
 tn.Text:=VO_TableData1.TableName;
 Pagecontrol1.ActivePage:=TabData;
