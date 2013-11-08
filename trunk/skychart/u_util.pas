@@ -1337,6 +1337,7 @@ minyeardt..-501: begin
                    n:=abs(y-2000);
                    result:=365.25*n*sqrt((n*Q/3)*(1+n/M))/1000;
                  end;
+else  result:=0;
 end;
 end;
 
