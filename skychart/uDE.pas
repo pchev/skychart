@@ -307,9 +307,9 @@ begin
     end;
     de_stream := TFileStream.Create(ephemeris_filename,fmOpenRead+fmShareDenyNone);
     de_created := true;
-    //Seek - soFromCurrent - soFromBeginning - soFromEnd
+    //Seek - soCurrent - soBeginning - soEnd force to use the 64-bit version
     de_stream.Read(Title, Sizeof(Title));
-    de_stream.Seek(2568, soFromCurrent);
+    de_stream.Seek(2568, soCurrent);
     de_stream.Read(de_eph, 28);
     if de_eph.ephem_start=0 then begin  // protect again empty or corrupt file
        de_stream.Free;
@@ -573,7 +573,8 @@ function jpl_state( ephs: pephdata; ephinfos: piinfo; et: double; list: array_11
 var
   i, j, q : Smallint;
     n_intervals : Smallint;
-    flag, nr : integer;
+    flag : integer;
+    nr : Int64;
     aufac, s, prev_midnight, time_of_day : double;
     dest : Array_5D;
     t : Array_1D;
@@ -601,7 +602,7 @@ begin
     if (nr <> ephs.curr_cache_loc) then begin
         SetLength(ephs.cache, ephs.ncoeff);
       ephs.curr_cache_loc := nr;
-      de_stream.Seek(nr * ephs.recsize, soFromBeginning);
+      de_stream.Seek(nr * ephs.recsize, soBeginning);  // soBeginning force to use the 64-bit version
       for i:= 0 to ephs.ncoeff-1 do begin
         de_stream.Read(ephs.cache[i], SizeOf( double));
         if ephs.swap_bytes then ephs.cache[i] := SwapDouble(ephs.cache[i]);
