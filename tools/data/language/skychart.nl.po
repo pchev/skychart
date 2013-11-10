@@ -3,13 +3,13 @@ msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-08 16:31+0000\n"
-"PO-Revision-Date: 2013-11-04 10:02+0000\n"
+"PO-Revision-Date: 2013-11-10 08:38+0000\n"
 "Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-08 17:01+0000\n"
+"X-Launchpad-Export-Date: 2013-11-10 17:21+0000\n"
 "X-Generator: Launchpad (build 16820)\n"
 
 #: u_translation.rs102cddss
@@ -3519,7 +3519,7 @@ msgstr "Observatielijst"
 
 #: u_translation.rsobservinglis2
 msgid "Observing list elements"
-msgstr ""
+msgstr "Observatielijst elementen"
 
 #: u_translation.rsobsolete
 msgid "Obsolete"
@@ -4223,7 +4223,7 @@ msgstr "Neem protocol op in een logbestand"
 
 #: u_translation.rsrecoverhidde
 msgid "Recover hidden label"
-msgstr ""
+msgstr "Herstel verborgen labels"
 
 #: u_translation.rsred
 msgid "Red"
@@ -4595,7 +4595,7 @@ msgstr "Selecteer kleur (zwart voor catalogus standaard)"
 
 #: u_translation.rsselectlabels
 msgid "Select labels to recover"
-msgstr ""
+msgstr "Selecteer te herstellen labels"
 
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
