@@ -135,10 +135,10 @@ type
     procedure LoadObsList;
     procedure SaveObsList;
     procedure SelectRow(r: integer);
-    procedure FirstObj;
-    procedure LastObj;
-    procedure NextObj;
-    procedure PrevObj;
+    function FirstObj: boolean;
+    function LastObj: boolean;
+    function NextObj: boolean;
+    function PrevObj: boolean;
     procedure ComputeLimits;
     procedure ComputeAirmassTime;
     procedure ComputeTransitTime;
@@ -347,31 +347,35 @@ de:=StrToFloatDef(trim(StringGrid1.Cells[3,r]),0);
 if (ra>=0) and assigned(FSelectObject) then FSelectObject(buf,ra,de);
 end;
 
-procedure Tf_obslist.FirstObj;
+function Tf_obslist.FirstObj: boolean;
 begin
   StringGrid1.Row:=1;
-  if StringGrid1.RowHeights[StringGrid1.Row]>0 then
-    SelectRow(StringGrid1.Row)
-  else
-    NextObj;
+  if StringGrid1.RowHeights[StringGrid1.Row]>0 then begin
+    SelectRow(StringGrid1.Row);
+    result:=true;
+  end else
+    result:=NextObj;
 end;
 
-procedure Tf_obslist.LastObj;
+function Tf_obslist.LastObj: boolean;
 begin
   StringGrid1.Row:=StringGrid1.RowCount-1;
-  if StringGrid1.RowHeights[StringGrid1.Row]>0 then
-    SelectRow(StringGrid1.Row)
-  else
-    PrevObj;
+  if StringGrid1.RowHeights[StringGrid1.Row]>0 then begin
+    SelectRow(StringGrid1.Row);
+    result:=true;
+  end else
+    result:=PrevObj;
 end;
 
-procedure Tf_obslist.NextObj;
+function Tf_obslist.NextObj: boolean;
 var ok,ko : boolean;
-    i:integer;
+    oldpos,i:integer;
 begin
+result:=false;
 ok:=false;
 ko:=false;
 i:=StringGrid1.Row;
+oldpos:=i;
 repeat
   inc(i);
   ko:=(i>=(StringGrid1.RowCount-1));
@@ -381,15 +385,18 @@ if ok then begin
   StringGrid1.Row:=i;
   SelectRow(StringGrid1.Row);
 end;
+result:=(oldpos<>StringGrid1.Row);
 end;
 
-procedure Tf_obslist.PrevObj;
+function Tf_obslist.PrevObj: boolean;
 var ok,ko : boolean;
-    i:integer;
+    oldpos,i:integer;
 begin
+result:=false;
 ok:=false;
 ko:=false;
 i:=StringGrid1.Row;
+oldpos:=i;
 repeat
   dec(i);
   ko:=(i<=1);
@@ -399,6 +406,7 @@ if ok then begin
   StringGrid1.Row:=i;
   SelectRow(StringGrid1.Row);
 end;
+result:=(oldpos<>StringGrid1.Row);
 end;
 
 procedure Tf_obslist.SetVisibleRows;

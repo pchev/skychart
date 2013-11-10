@@ -265,19 +265,19 @@ type
     Fpop_scope: Tpop_scope;
     FSendImageFits: TSendImageFits;
     FSendSelectRow: TSendSelectRow;
-    procedure ConnectINDI(Sender: TObject);
+    procedure ConnectINDI(Sender: TObject; autoconnect: boolean=false);
     procedure SlewINDI(Sender: TObject);
     procedure SyncINDI(Sender: TObject);
     procedure AbortSlewINDI(Sender: TObject);
-    procedure ConnectASCOM(Sender: TObject);
+    procedure ConnectASCOM(Sender: TObject; autoconnect: boolean=false);
     procedure SlewASCOM(Sender: TObject);
     procedure SyncASCOM(Sender: TObject);
     procedure AbortSlewASCOM(Sender: TObject);
-    procedure ConnectLX200(Sender: TObject);
+    procedure ConnectLX200(Sender: TObject; autoconnect: boolean=false);
     procedure SlewLX200(Sender: TObject);
     procedure SyncLX200(Sender: TObject);
     procedure AbortSlewLX200(Sender: TObject);
-    procedure ConnectEncoder(Sender: TObject);
+    procedure ConnectEncoder(Sender: TObject; autoconnect: boolean=false);
     procedure SyncEncoder(Sender: TObject);
     procedure SetNightVision(value:boolean);
     procedure Image1Click(Sender: TObject);
@@ -344,9 +344,18 @@ type
     function cmd_ObslistLast: string;
     function cmd_ObslistNext: string;
     function cmd_ObslistPrev: string;
+    function cmd_ObslistLimit(onoff: string): string;
+    function cmd_ObslistAirmassLimit(airmass: string): string;
+    function cmd_ObslistTransitLimit(transit: string): string;
+    function cmd_ObslistTransitSide(side: string): string;
     function cmd_GetScopeRaDec:string;
     function cmd_ConnectINDI:string;
     function cmd_DisconnectINDI:string;
+    function cmd_DisconnectTelescope:string;
+    function cmd_ConnectTelescope:string;
+    function cmd_Sync(RA2,DE2:string):string;
+    function cmd_Slew:string;
+    function cmd_AbortSlew:string;
     function cmd_SlewINDI(RA1,DE1:string):string;
     function cmd_AbortSlewINDI:string;
     function cmd_SyncINDI(RA2,DE2:string):string;
@@ -3635,7 +3644,7 @@ function Tf_chart.cmd_GetScopeRaDec:string;
 var ra,dec:double;
     ok: boolean;
 begin
-
+ok:=false;
 if sc.cfgsc.ASCOMTelescope then begin
      Connect1.checked:=Fpop_scope.ScopeConnected;
      if Connect1.checked then begin
@@ -3668,9 +3677,10 @@ else if sc.cfgsc.EncoderTelescope then begin
       Fpop_encoder.ScopeGetRaDec(ra,dec,ok);
      end;
 end;
-
-result:=artostr3(ra)+blank+detostr3(dec);
-
+if ok then
+  result:=msgOK+blank+artostr3(ra)+blank+detostr3(dec)
+else
+  result:=msgFailed;
 end;
 
 
@@ -3701,14 +3711,148 @@ end;
 function Tf_chart.cmd_DisconnectINDI:string;
 var ok:boolean;
 begin
-
 Fpop_indi.ScopeDisconnect(ok);
 Connect1.Checked:=false;
-
 result:=msgOK;
-
 end;
 
+function Tf_chart.cmd_ConnectTelescope:string;
+begin
+result:=msgFailed;
+if sc.cfgsc.ASCOMTelescope then begin
+   ConnectASCOM(self,true);
+   result:=msgOK;
+end
+else
+if sc.cfgsc.LX200Telescope then begin
+   ConnectLX200(self,true);
+   result:=msgOK;
+end
+else if sc.cfgsc.EncoderTelescope then begin
+   ConnectEncoder(self,true);
+   result:=msgOK;
+end
+else if sc.cfgsc.IndiTelescope then begin
+   ConnectINDI(self,true);
+   result:=msgOK;
+end;
+end;
+
+function Tf_chart.cmd_DisconnectTelescope:string;
+var ok: boolean;
+begin
+result:=msgFailed;
+if sc.cfgsc.ASCOMTelescope then begin
+   if (not Connect1.Checked) or (Fpop_scope=nil) then exit;
+   Fpop_scope.ScopeDisconnect(ok);
+   Connect1.Checked:=false;
+   if ok then result:=msgOK;
+end
+else
+if sc.cfgsc.LX200Telescope then begin
+   if (not Connect1.Checked) or (Fpop_lx200=nil) then exit;
+   Fpop_lx200.ScopeDisconnect(ok);
+   Connect1.Checked:=false;
+   if ok then result:=msgOK;
+end
+else if sc.cfgsc.EncoderTelescope then begin
+   if (not Connect1.Checked) or (Fpop_encoder=nil) then exit;
+   Fpop_encoder.ScopeDisconnect(ok);
+   Connect1.Checked:=false;
+   if ok then result:=msgOK;
+end
+else if sc.cfgsc.IndiTelescope then begin
+  if (not Connect1.Checked) or (Fpop_indi=nil) then exit;
+  Fpop_indi.ScopeDisconnect(ok);
+  Connect1.Checked:=false;
+  if ok then result:=msgOK;
+end;
+end;
+
+function Tf_chart.cmd_Sync(RA2,DE2:string):string;
+var ra,dec: double;
+begin
+Result:=msgFailed;
+ra:=StrToFloatDef(RA2,9999);
+dec:=StrToFloatDef(DE2,9999);
+if (ra>=0)and(ra<=24)and(abs(dec)<=90) then begin
+  ra:=ra*15*deg2rad;
+  dec:=dec*deg2rad;
+  if sc.cfgsc.TelescopeJD=0 then begin
+    precession(sc.cfgsc.JDChart,sc.cfgsc.CurJDUT,ra,dec);
+  end else begin
+    if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
+    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
+  end;
+  ra:=rmod(ra+pi2,pi2);
+  if Connect1.checked then begin
+  if sc.cfgsc.ASCOMTelescope then begin
+    Fpop_scope.ScopeAlign('sync',ra*rad2deg/15,dec*rad2deg);
+    Result:=msgOK;
+  end
+  else
+  if sc.cfgsc.LX200Telescope then begin
+    Fpop_lx200.ScopeAlign('sync',ra*rad2deg/15,dec*rad2deg);
+    Result:=msgOK;
+  end
+  else if sc.cfgsc.EncoderTelescope then begin
+    Fpop_encoder.ScopeAlign('sync',ra*rad2deg/15,dec*rad2deg);
+    Result:=msgOK;
+  end
+  else if sc.cfgsc.IndiTelescope then begin
+    Fpop_indi.ScopeAlign('sync',ra*rad2deg/15,dec*rad2deg);
+    Result:=msgOK;
+  end;
+  end;
+end;
+end;
+
+function Tf_chart.cmd_Slew:string;
+begin
+Result:=msgFailed;
+if Connect1.checked then begin
+  if sc.cfgsc.ASCOMTelescope then begin
+     SlewASCOM(self);
+     result:=msgOK;
+  end
+  else
+  if sc.cfgsc.LX200Telescope then begin
+   SlewLX200(self);
+   result:=msgOK;
+  end
+  else if sc.cfgsc.EncoderTelescope then begin
+   // no slew
+  end
+  else if sc.cfgsc.IndiTelescope then begin
+    SlewINDI(self);
+    result:=msgOK;
+  end;
+end;
+end;
+
+function Tf_chart.cmd_AbortSlew:string;
+begin
+Result:=msgFailed;
+if Connect1.checked then begin
+  if sc.cfgsc.ASCOMTelescope then begin
+     AbortSlewASCOM(self);
+     result:=msgOK;
+  end
+  else
+  if sc.cfgsc.LX200Telescope then begin
+   AbortSlewLX200(self);
+   result:=msgOK;
+  end
+  else if sc.cfgsc.EncoderTelescope then begin
+     // no slew
+    end
+  else if sc.cfgsc.IndiTelescope then
+  begin
+    AbortSlewINDI(self);
+    result:=msgOK;
+  end;
+end;
+end;
 
 function Tf_chart.cmd_SlewINDI(RA1,DE1:string):string;
 var ra,dec:double;
@@ -3874,38 +4018,81 @@ end;
 
 function Tf_chart.cmd_ObslistFirst: string;
 begin
+result:=msgFailed;
 if f_obslist.ObjLabels.Count>0 then begin
-  f_obslist.FirstObj;
-  result:=msgOK;
-end
-  else result:=msgFailed;
+  if f_obslist.FirstObj then
+     result:=msgOK+blank+f_obslist.StringGrid1.Cells[1,f_obslist.StringGrid1.Row];
+end;
 end;
 
 function Tf_chart.cmd_ObslistLast: string;
 begin
+result:=msgFailed;
 if f_obslist.ObjLabels.Count>0 then begin
-  f_obslist.LastObj;
-  result:=msgOK;
-end
-  else result:=msgFailed;
+  if f_obslist.LastObj then
+     result:=msgOK+blank+f_obslist.StringGrid1.Cells[1,f_obslist.StringGrid1.Row];
+end;
 end;
 
 function Tf_chart.cmd_ObslistNext: string;
 begin
+result:=msgFailed;
 if f_obslist.ObjLabels.Count>0 then begin
-  f_obslist.NextObj;
-  result:=msgOK;
-end
-  else result:=msgFailed;
+  if f_obslist.NextObj then
+     result:=msgOK+blank+f_obslist.StringGrid1.Cells[1,f_obslist.StringGrid1.Row];
+end;
 end;
 
 function Tf_chart.cmd_ObslistPrev: string;
 begin
+result:=msgFailed;
 if f_obslist.ObjLabels.Count>0 then begin
-  f_obslist.PrevObj;
-  result:=msgOK;
-end
-  else result:=msgFailed;
+  if f_obslist.PrevObj then
+     result:=msgOK+blank+f_obslist.StringGrid1.Cells[1,f_obslist.StringGrid1.Row];
+end;
+end;
+
+function Tf_chart.cmd_ObslistLimit(onoff: string): string;
+var ok: boolean;
+begin
+ok:=(onoff='ON');
+if f_obslist.LimitType=0 then begin
+  f_obslist.CheckBox1.Checked:=false;
+  f_obslist.CheckBox2.Checked:=ok;
+end else begin
+  f_obslist.CheckBox4.Checked:=false;
+  f_obslist.CheckBox5.Checked:=ok;
+end;
+f_obslist.Refresh;
+result:=msgOK;
+end;
+
+function Tf_chart.cmd_ObslistAirmassLimit(airmass: string): string;
+begin
+f_obslist.AirmassCombo.Text:=airmass;
+f_obslist.LimitType:=0;
+result:=msgOK;
+end;
+
+function Tf_chart.cmd_ObslistTransitLimit(transit: string): string;
+begin
+f_obslist.HourAngleCombo.Text:=transit;
+f_obslist.LimitType:=1;
+result:=msgOK;
+end;
+
+function Tf_chart.cmd_ObslistTransitSide(side: string): string;
+var i: integer;
+begin
+if side='EAST' then i:=0
+else if side='BOTH' then i:=1
+else if side='WEST' then i:=2
+else i:=-1;
+if i>0 then begin
+  f_obslist.MeridianSide:=i;
+  result:=msgOK
+end else
+  result:=msgFailed;
 end;
 
 procedure Tf_chart.imglistExecute(Sender: TObject);
@@ -4384,11 +4571,20 @@ case n of
  101 : result:= cmd_AbortSlewINDI;
  102 : result:= cmd_SyncINDI(arg[1],arg[2]);
  103 : result:= cmd_TrackTelescope(arg[1]);
- 104 : result:= cmd_ObslistLoad(arg[1]);
- 105 : result:= cmd_ObslistFirst;
- 106 : result:= cmd_ObslistLast;
- 107 : result:= cmd_ObslistNext;
- 108 : result:= cmd_ObslistPrev;
+ 104 : result:= cmd_ConnectTelescope;
+ 105 : result:= cmd_DisconnectTelescope;
+ 106 : result:= cmd_Sync(arg[1],arg[2]);
+ 107 : result:= cmd_Slew;
+ 108 : result:= cmd_AbortSlew;
+ 109 : result:= cmd_ObslistLoad(arg[1]);
+ 110 : result:= cmd_ObslistFirst;
+ 111 : result:= cmd_ObslistLast;
+ 112 : result:= cmd_ObslistNext;
+ 113 : result:= cmd_ObslistPrev;
+ 114 : result:= cmd_ObslistLimit(arg[1]);
+ 115 : result:= cmd_ObslistAirmassLimit(arg[1]);
+ 116 : result:= cmd_ObslistTransitLimit(arg[1]);
+ 117 : result:= cmd_ObslistTransitSide(arg[1]);
 else result:=msgFailed+' Bad command name';
 end;
 end;
@@ -4942,7 +5138,8 @@ end;
 
 // INDI interface
 
-procedure Tf_chart.ConnectINDI(Sender: TObject);
+procedure Tf_chart.ConnectINDI(Sender: TObject; autoconnect: boolean=false);
+var ok: boolean;
 begin
 if Fpop_indi=nil then begin
   Fpop_indi:=Tpop_indi.Create(self);
@@ -4952,11 +5149,16 @@ end;
 if Connect1.checked then begin
    Fpop_indi.ScopeShow;
 end else begin
-     Fpop_indi.ScopeReadConfig(ExtractFilePath(Configfile));
-     Fpop_indi.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
+   Fpop_indi.ScopeReadConfig(ExtractFilePath(Configfile));
+   Fpop_indi.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
+   if autoconnect then begin
+     Fpop_indi.ScopeConnect(ok);
+     Connect1.Checked:=true;
+   end else begin
      Fpop_indi.ScopeShow;
-     TelescopeTimer.Interval:=2000;
-     TelescopeTimer.Enabled:=true;
+   end;
+   TelescopeTimer.Interval:=2000;
+   TelescopeTimer.Enabled:=true;
 end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
 end;
@@ -4999,7 +5201,8 @@ end;
 
 // LX200 interface
 
-procedure Tf_chart.ConnectLX200(Sender: TObject);
+procedure Tf_chart.ConnectLX200(Sender: TObject; autoconnect: boolean=false);
+var ok: boolean;
 begin
 if Fpop_lx200=nil then begin
   Fpop_lx200:=Tpop_lx200.Create(self);
@@ -5009,11 +5212,16 @@ end;
 if Connect1.checked then begin
    Fpop_lx200.ScopeShow;
 end else begin
-     Fpop_lx200.ScopeReadConfig(ExtractFilePath(Configfile));
-     Fpop_lx200.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
+   Fpop_lx200.ScopeReadConfig(ExtractFilePath(Configfile));
+   Fpop_lx200.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
+   if autoconnect then begin
+     Fpop_lx200.ScopeConnect(ok);
+     Connect1.Checked:=true;
+   end else begin
      Fpop_lx200.ScopeShow;
-     TelescopeTimer.Interval:=2000;
-     TelescopeTimer.Enabled:=true;
+   end;
+   TelescopeTimer.Interval:=2000;
+   TelescopeTimer.Enabled:=true;
 end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
 end;
@@ -5056,7 +5264,8 @@ end;
 
 // Encoder interface
 
-procedure Tf_chart.ConnectEncoder(Sender: TObject);
+procedure Tf_chart.ConnectEncoder(Sender: TObject; autoconnect: boolean=false);
+var ok: boolean;
 begin
 if Fpop_encoder=nil then begin
   Fpop_encoder:=Tpop_encoder.Create(self);
@@ -5066,11 +5275,16 @@ end;
 if Connect1.checked then begin
    Fpop_encoder.ScopeShow;
 end else begin
-     Fpop_encoder.ScopeReadConfig(ExtractFilePath(Configfile));
-     Fpop_encoder.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
+   Fpop_encoder.ScopeReadConfig(ExtractFilePath(Configfile));
+  Fpop_encoder.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
+   if autoconnect then begin
+     Fpop_encoder.ScopeConnect(ok);
+     Connect1.Checked:=true;
+   end else begin
      Fpop_encoder.ScopeShow;
-     TelescopeTimer.Interval:=2000;
-     TelescopeTimer.Enabled:=true;
+   end;
+   TelescopeTimer.Interval:=2000;
+   TelescopeTimer.Enabled:=true;
 end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
 end;
@@ -5093,7 +5307,8 @@ end;
 
 // Windows only ASCOM interface
 
-procedure Tf_chart.ConnectASCOM(Sender: TObject);
+procedure Tf_chart.ConnectASCOM(Sender: TObject; autoconnect: boolean=false);
+var ok: boolean;
 begin
 if Fpop_scope=nil then begin
   Fpop_scope:=Tpop_scope.Create(self);
@@ -5102,12 +5317,17 @@ end;
 if Connect1.checked then begin
    Fpop_scope.ScopeShow;
 end else begin
-     Fpop_scope.ScopeReadConfig(ExtractFilePath(Configfile));
-     Fpop_scope.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
+   Fpop_scope.ScopeReadConfig(ExtractFilePath(Configfile));
+   Fpop_scope.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
+   if autoconnect then begin
+     Fpop_scope.ScopeConnect(ok);
+     Connect1.Checked:=true;
+   end else begin
      Fpop_scope.ScopeShow;
-     Fpop_scope.Enabled:=true;
-     TelescopeTimer.Interval:=2000;
-     TelescopeTimer.Enabled:=true;
+   end;
+   Fpop_scope.Enabled:=true;
+   TelescopeTimer.Interval:=2000;
+   TelescopeTimer.Enabled:=true;
 end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
 end;
