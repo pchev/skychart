@@ -1303,7 +1303,7 @@ const
     );
 
   // Chart Commands
-  numcmd = 103;
+  numcmd = 108;
   cmdlist: array[1..numcmd, 1..3] of string = (
     ('ZOOM+', '1', ''),
     ('ZOOM-', '2', ''),
@@ -1409,7 +1409,12 @@ const
     ('SLEWINDI', '100', 'RAhr in decimal and Dec in decimal'),
     ('ABORTSLEWINDI', '101', ''),
     ('SYNCINDI', '102', 'RAhr in decimal and Dec in decimal'),
-    ('TRACKTELESCOPE','103','ON/OFF')
+    ('TRACKTELESCOPE','103','ON/OFF'),
+    ('OBSLISTLOAD','104','ON/OFF'),
+    ('OBSLISTFIRST','105','ON/OFF'),
+    ('OBSLISTLAST','106','ON/OFF'),
+    ('OBSLISTNEXT','107','ON/OFF'),
+    ('OBSLISTPREV','108','ON/OFF')
     );
 
 // INDI Telescope driver

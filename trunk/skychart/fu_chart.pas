@@ -339,6 +339,11 @@ type
     function cmd_MoveScope(RA,DE:string):string;
     function cmd_MoveScopeH(H,D:string):string;
     function cmd_TrackTelescope(onoff: string): string;
+    function cmd_ObslistLoad(fn: string): string;
+    function cmd_ObslistFirst: string;
+    function cmd_ObslistLast: string;
+    function cmd_ObslistNext: string;
+    function cmd_ObslistPrev: string;
     function cmd_GetScopeRaDec:string;
     function cmd_ConnectINDI:string;
     function cmd_DisconnectINDI:string;
@@ -3856,6 +3861,53 @@ begin
  result:=msgOK+blank+sc.cfgsc.ObsTZ;
 end;
 
+function Tf_chart.cmd_ObslistLoad(fn: string): string;
+begin
+if (fn<>'')and(FileExists(fn)) then begin
+  f_obslist.CheckBox3.Checked:=true;
+  f_obslist.FileNameEdit1.FileName:=SysToUTF8(fn);
+  f_obslist.LoadObsList;
+  result:=msgOK;
+end
+  else result:=msgFailed;
+end;
+
+function Tf_chart.cmd_ObslistFirst: string;
+begin
+if f_obslist.ObjLabels.Count>0 then begin
+  f_obslist.FirstObj;
+  result:=msgOK;
+end
+  else result:=msgFailed;
+end;
+
+function Tf_chart.cmd_ObslistLast: string;
+begin
+if f_obslist.ObjLabels.Count>0 then begin
+  f_obslist.LastObj;
+  result:=msgOK;
+end
+  else result:=msgFailed;
+end;
+
+function Tf_chart.cmd_ObslistNext: string;
+begin
+if f_obslist.ObjLabels.Count>0 then begin
+  f_obslist.NextObj;
+  result:=msgOK;
+end
+  else result:=msgFailed;
+end;
+
+function Tf_chart.cmd_ObslistPrev: string;
+begin
+if f_obslist.ObjLabels.Count>0 then begin
+  f_obslist.PrevObj;
+  result:=msgOK;
+end
+  else result:=msgFailed;
+end;
+
 procedure Tf_chart.imglistExecute(Sender: TObject);
 var i: integer;
 begin
@@ -4332,6 +4384,11 @@ case n of
  101 : result:= cmd_AbortSlewINDI;
  102 : result:= cmd_SyncINDI(arg[1],arg[2]);
  103 : result:= cmd_TrackTelescope(arg[1]);
+ 104 : result:= cmd_ObslistLoad(arg[1]);
+ 105 : result:= cmd_ObslistFirst;
+ 106 : result:= cmd_ObslistLast;
+ 107 : result:= cmd_ObslistNext;
+ 108 : result:= cmd_ObslistPrev;
 else result:=msgFailed+' Bad command name';
 end;
 end;
