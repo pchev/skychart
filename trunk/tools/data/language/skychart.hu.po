@@ -3,13 +3,13 @@ msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-08 16:31+0000\n"
-"PO-Revision-Date: 2013-09-22 05:28+0000\n"
+"PO-Revision-Date: 2013-11-09 09:12+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-08 17:02+0000\n"
+"X-Launchpad-Export-Date: 2013-11-10 17:21+0000\n"
 "X-Generator: Launchpad (build 16820)\n"
 
 #: u_translation.rs102cddss
@@ -178,7 +178,7 @@ msgstr "Kor"
 
 #: u_translation.rsairmass
 msgid "Airmass"
-msgstr ""
+msgstr "Légtömeg"
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -251,7 +251,7 @@ msgstr "%sforgatás függőlegesen:"
 
 #: u_translation.rsalways
 msgid "always"
-msgstr ""
+msgstr "mindig"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -562,7 +562,7 @@ msgstr "Fényesebb"
 
 #: u_translation.rsbrightest
 msgid "Brightest"
-msgstr ""
+msgstr "Legfényesebb"
 
 #: u_translation.rsbrighteststa
 #| msgid "Brightest Star Magnitude"
@@ -1514,7 +1514,7 @@ msgstr "Törölni akarod a jelenlegi helyet az adatbázisból?"
 
 #: u_translation.rsdeltaterror
 msgid "DeltaT uncertainty"
-msgstr ""
+msgstr "DeltaT bizonytalanság"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -1662,7 +1662,7 @@ msgstr "Távolsága a legutóbbi objektumtól"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
-msgstr ""
+msgstr "Itt ne változtasson semmit, ha nem biztos benne."
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
@@ -1732,7 +1732,7 @@ msgstr "Akarod menteni a program beállításait?"
 
 #: u_translation.rsdoyouwanttos2
 msgid "Do you want to save it?"
-msgstr ""
+msgstr "Mentés?"
 
 #: u_translation.rsdrawalinetha
 #| msgid "Draw a line that represent the proper motion for the next "
@@ -1812,7 +1812,7 @@ msgstr "Kelet"
 
 #: u_translation.rseastside
 msgid "East side"
-msgstr ""
+msgstr "Keleti oldal"
 
 #: u_translation.rseccentricity
 msgid "Eccentricity"
@@ -2189,7 +2189,7 @@ msgstr "Kereső négyszög (CCD)"
 
 #: u_translation.rsfirst
 msgid "First"
-msgstr ""
+msgstr "Első"
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
@@ -2253,7 +2253,7 @@ msgstr ""
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
-msgstr ""
+msgstr "További információkért lásd:"
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -2817,11 +2817,11 @@ msgstr "Jupiter \"VörösFolt\" hosszúsága:"
 
 #: u_translation.rskeepimageson
 msgid "Keep images on exit for later use"
-msgstr ""
+msgstr "Képek megtartása későbbre"
 
 #: u_translation.rskeeptableson
 msgid "Keep tables on exit for later use"
-msgstr ""
+msgstr "Táblázatok megtartása későbbre"
 
 #: u_translation.rskm
 msgid "Km."
@@ -2875,7 +2875,7 @@ msgstr "Nyelv választása"
 
 #: u_translation.rslast
 msgid "Last"
-msgstr ""
+msgstr "Utolsó"
 
 #: u_translation.rslatinname
 #| msgid "Latin Name"
@@ -2943,7 +2943,7 @@ msgstr "LII"
 
 #: u_translation.rslimit
 msgid "Limit"
-msgstr ""
+msgstr "Limit"
 
 #: u_translation.rslimitingmagn
 #| msgid "Limiting magnitude, list :"
@@ -3490,7 +3490,7 @@ msgstr "Neptunusz"
 
 #: u_translation.rsnever
 msgid "never"
-msgstr ""
+msgstr "soha"
 
 #: u_translation.rsnewchart
 #| msgid "New Chart"
@@ -3513,7 +3513,7 @@ msgstr "Következő >>"
 
 #: u_translation.rsnext2
 msgid "Next"
-msgstr ""
+msgstr "Következő"
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
@@ -3740,7 +3740,7 @@ msgstr "Hely adatbázis"
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
-msgstr ""
+msgstr "Megfigyelési lista"
 
 #: u_translation.rsobservinglis2
 msgid "Observing list elements"
@@ -3974,7 +3974,7 @@ msgstr "Fázis"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
-msgstr ""
+msgstr "Fotólemez"
 
 #: u_translation.rsphotographic2
 msgid "Photographic"
@@ -3998,7 +3998,7 @@ msgstr "képpont"
 
 #: u_translation.rspixelsize
 msgid "Pixel size"
-msgstr ""
+msgstr "Képpontméret"
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -4196,7 +4196,7 @@ msgstr "Előnézet"
 
 #: u_translation.rsprevious
 msgid "Previous"
-msgstr ""
+msgstr "Előző"
 
 #: u_translation.rsprint
 msgid "Print"
@@ -4914,7 +4914,7 @@ msgstr "Térkép a nyomtatóra"
 
 #: u_translation.rssendimageto
 msgid "Send image to"
-msgstr ""
+msgstr "Kép küldése"
 
 #: u_translation.rssendtableto
 msgid "Send table to"
@@ -5015,7 +5015,7 @@ msgstr "Teljes ég mutatása"
 
 #: u_translation.rsshowasinglep
 msgid "Show a single picture on the map."
-msgstr ""
+msgstr "Kép mutatása a térképen"
 
 #: u_translation.rsshowasteroid
 #| msgid "Show Asteroids"
@@ -5656,7 +5656,7 @@ msgstr "A katalógusban lévő rekordok száma ismeretlen. A letöltés %s darab
 
 #: u_translation.rstheobserving
 msgid "The observing list %s was modified."
-msgstr ""
+msgstr "A megfigyelési lista módosult (%s)"
 
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
@@ -5720,7 +5720,7 @@ msgstr "Időzóna"
 
 #: u_translation.rstitle
 msgid "Title"
-msgstr ""
+msgstr "Megnevezés"
 
 #: u_translation.rsto
 msgid "to"
@@ -5785,7 +5785,7 @@ msgstr "Átalakítás"
 
 #: u_translation.rstransit
 msgid "Transit"
-msgstr ""
+msgstr "Áthaladás"
 
 #: u_translation.rstranslator
 msgid "Translator:"
@@ -5837,7 +5837,7 @@ msgstr ""
 
 #: u_translation.rsttut
 msgid "DeltaT: "
-msgstr ""
+msgstr "DeltaT: "
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5931,7 +5931,7 @@ msgstr "Felülír"
 
 #: u_translation.rsupdatecoordi
 msgid "Update coordinates"
-msgstr ""
+msgstr "Koordináták frissítése"
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
@@ -5955,7 +5955,7 @@ msgstr "URL betöltése"
 
 #: u_translation.rsuseanothertt
 msgid "Use another DeltaT value"
-msgstr ""
+msgstr "Más értékű DeltaT használata"
 
 #: u_translation.rsuseapresetco
 #| msgid "Use a preset colour scheme :"
@@ -6094,7 +6094,7 @@ msgstr "Égtájra ugrás"
 
 #: u_translation.rsviewobservin
 msgid "View observing list"
-msgstr ""
+msgstr "Megfigyelési lista"
 
 #: u_translation.rsviewonchart
 msgid "View on chart"
@@ -6188,7 +6188,7 @@ msgstr "Nyugat"
 
 #: u_translation.rswestside
 msgid "West side"
-msgstr ""
+msgstr "Nyugati oldal"
 
 #: u_translation.rswhiteonblack
 msgid "White on black"
