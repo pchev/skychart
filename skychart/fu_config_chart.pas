@@ -476,6 +476,7 @@ procedure Tf_config_chart.ShowGridSpacing;
 begin
   CheckBox13.Checked:=cshr.ShowCRose;
   CheckBox2.Checked := cshr.SimplePointer;
+  CheckBox2.Enabled:=cshr.ShowCRose;
   TrackBar1.Position:=cshr.CRoseSz;
   RaDec1.value:=cshr.DegreeGridSpacing[0];
   RaDec2.value:=cshr.DegreeGridSpacing[1];
@@ -1012,6 +1013,7 @@ procedure Tf_config_chart.CheckBox13Click(Sender: TObject);
 begin
 if LockChange then exit;
   cshr.ShowCRose:=CheckBox13.Checked;
+  CheckBox2.Enabled:=cshr.ShowCRose;
 end;
 
 
