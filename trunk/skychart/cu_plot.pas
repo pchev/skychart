@@ -2780,6 +2780,8 @@ if RoseType=3 then begin     // simple arrow
      BGRADrawLine(rosex-(roserd*c),rosey-(roserd*s),(rosex-(roserd*c))+(roserd*c1/8),(rosey-(roserd*s))+(roserd*s1/8), col,cfgchart.drawpen,cbmp);
      BGRADrawLine(rosex-(roserd*c),rosey-(roserd*s),(rosex-(roserd*c))+(roserd*c2/8),(rosey-(roserd*s))+(roserd*s2/8), col,cfgchart.drawpen,cbmp);
      col:=ColorToBGRA(cfgplot.LabelColor[7]);
+     cbmp.FontName:=cfgplot.FontName[1];
+     cbmp.FontHeight:=trunc(cfgplot.FontSize[1]*cfgchart.fontscale*96/72);
      BGRATextOut((rosex-(roserd*c))+(roserd*c2/8),(rosey-(roserd*s))+(roserd*s2/8),rad2deg*rot,'N',col,cbmp);
      if FlipY<0 then rote:=pi-rote;
      if FlipX<0 then rote:=-rote;
