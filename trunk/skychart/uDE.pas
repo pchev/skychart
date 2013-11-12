@@ -267,8 +267,8 @@ begin
                     end else exit;
               end;
         431:  begin  //-13000 to 17000 - 1 file
-                    jdstart:= -3026826.5;
-                    jdend:= 7930182.5;
+                    jdstart:= -3027215.5;
+                    jdend:= 7930192.5;
                     if InRange(jd, jdstart, jdend) then begin
                       de_file:='lnxm13000p17000.431';
                     end else exit;
@@ -575,41 +575,40 @@ var
     n_intervals : Smallint;
     flag : integer;
     nr : Int64;
-    aufac, s, prev_midnight, time_of_day : double;
+    aufac, block_loc : double;
     dest : Array_5D;
     t : Array_1D;
     pefau : Array_5D;
 begin
 //  ********** main entry point **********
-    s := et - 0.5;
-    prev_midnight := floor(s);
-    time_of_day := s - prev_midnight;
-    prev_midnight := prev_midnight + 0.5;
-  //here prev_midnight contains last midnight before epoch desired(in JED: *.5)
-  //and time_of_day contains the remaining, fractional part of the epoch
-  //error return for epoch out of range
+
+    //error return for epoch out of range
     if (et < ephs.ephem_start) or (et > ephs.ephem_end) then begin
         result := 0;
         exit;
     end;
-  //calculate record # and relative time in interval
-    nr := trunc ((prev_midnight-ephs.ephem_start)/ephs.ephem_step) + 2;
-  //add 2 to adjust for the first two records containing header data (2 dates)
-    if prev_midnight = ephs.ephem_end then dec(nr);
-    t[0] :=(prev_midnight - ((nr - 2.0) * ephs.ephem_step + ephs.ephem_start) +
-          time_of_day) / ephs.ephem_step;
+    //calculate record # and relative time in interval
+    block_loc := (et - ephs.ephem_start) / ephs.ephem_step;
+    nr := trunc(block_loc);
+    t[0] := block_loc - nr;
+    if( et = ephs.ephem_end) then begin
+       dec(nr);
+       t[0] := 1.0 - 1e-16;
+    end;
+
     //read correct record if not in core (static vector buf[])
     if (nr <> ephs.curr_cache_loc) then begin
         SetLength(ephs.cache, ephs.ncoeff);
       ephs.curr_cache_loc := nr;
-      de_stream.Seek(nr * ephs.recsize, soBeginning);  // soBeginning force to use the 64-bit version
+      de_stream.Seek((nr+2) * ephs.recsize, soBeginning);  // soBeginning force to use the 64-bit version
       for i:= 0 to ephs.ncoeff-1 do begin
         de_stream.Read(ephs.cache[i], SizeOf( double));
         if ephs.swap_bytes then ephs.cache[i] := SwapDouble(ephs.cache[i]);
       end;
-  end;
+    end;
     t[1] := ephs.ephem_step;
     aufac := 1 / ephs.auinkm;
+
     n_intervals := 1;
     while n_intervals <= 8 do begin
         for i := 0 to 10 do begin
@@ -617,7 +616,7 @@ begin
             ((list[i] >= 1) or (i = 10)) then begin
                 if i = 10 then flag := 2 else flag := list[i];
                 interp(ephs, ephinfos, @ephs.cache[ephs.ipt[i,0]-1], t,
-                ephs.ipt[i,1], 3, n_intervals, flag, dest);
+                       ephs.ipt[i,1], 3, n_intervals, flag, dest);
                 for j := 0 to (flag * 3) - 1 do dest[j] := dest[j] * aufac;
                 if i = 10 then
                   for q := 0 to 5 do ephs.pvsun[q]:= dest[q]
@@ -636,12 +635,12 @@ begin
     //do nutations if requested (and if on file)
   if(list[10] > 0) and (ephs.ipt[11,1] > 0) then begin
       interp(ephs, ephinfos, @ephs.cache[ephs.ipt[11,0]-1], t,
-          ephs.ipt[11,1], 2, ephs.ipt[11,2], list[10], nut);
+             ephs.ipt[11,1], 2, ephs.ipt[11,2], list[10], nut);
     end;
     //get librations if requested (and if on file)
   if(list[11] > 0) and (ephs.ipt[12,1] > 0) then begin
         interp(ephs, ephinfos, @ephs.cache[ephs.ipt[12,0]-1], t,
-        ephs.ipt[12,1], 3, ephs.ipt[12,2], list[11], pefau);
+               ephs.ipt[12,1], 3, ephs.ipt[12,2], list[11], pefau);
         for j := 0 to 5 do pvs[10,j]:= pefau[j];
     end;
   result := 1;
@@ -659,26 +658,25 @@ begin
     //of coefficients and then get normalized chebyshev time
     //within that subinterval.
     dna := na;
-    dt1 := t[0] - frac(t[0]) ;      //modf( t[0], &dt1);
     temp := dna * t[0];
-    l := trunc(temp - dt1);
-    //tc is the normalized chebyshev time (-1 <= tc <= 1)
-    tc := 2.0 * (frac(temp) + dt1) - 1.0;
+    l := trunc(temp);
+    tc := 2.0 * frac(temp) - 1.0;
+
   //check to see whether chebyshev time has changed,
   //and compute new polynomial values if it has.
   //(the element iinfo->pc[1] is the value of t1[tc] and hence
   //contains the value of tc on the previous call.
     if tc <> iinfo.pc[1] then begin
         iinfo.np := 2;
-            iinfo.nv := 3;
-            iinfo.pc[1] := tc;
-            iinfo.twot := tc + tc;
+        iinfo.nv := 3;
+        iinfo.pc[1] := tc;
+        iinfo.twot := tc + tc;
     end;
     //be sure that at least 'ncf' polynomials have been evaluated
     //and are stored in the array 'iinfo->pc'
     if iinfo.np < ncf then begin
         a := iinfo.np;
-          itemp := ncf - iinfo.np;
+        itemp := ncf - iinfo.np;
         for i := itemp downto 1 do begin
               iinfo.pc[a] := iinfo.twot * iinfo.pc[a-1] - iinfo.pc[a-2];
               inc(a);
@@ -686,25 +684,24 @@ begin
         iinfo.np := ncf;
     end;
   //interpolate to get position for each component
-  for i := 0 to ncm - 1 do begin     // ncm is a number of coordinates  + ncf * (i + l * ncm + 1);
-    posvel[i]:= 0;
-        buf_ptr := bufi;
-        inc(buf_ptr, ncf * (i + l * ncm + 1));
-        dec(buf_ptr);
+    for i := 0 to ncm - 1 do begin     // ncm is a number of coordinates  + ncf * (i + l * ncm + 1);
+      posvel[i]:= 0;
+      buf_ptr := bufi;
+      inc(buf_ptr, ncf * (i + l * ncm + 1));
+      dec(buf_ptr);
       for j := ncf downto 1 do begin
-          posvel[i] := posvel[i] + iinfo.pc[j-1] * buf_ptr^;
-          dec(buf_ptr);
+         posvel[i] := posvel[i] + iinfo.pc[j-1] * buf_ptr^;
+         dec(buf_ptr);
       end;
     end;
     if ifl <= 1 then exit;
 
-        //if velocity interpolation is wanted, be sure enough
+    //if velocity interpolation is wanted, be sure enough
     //derivative polynomials have been generated and stored.
-    vfac := (dna + dna) / t[1];
     iinfo.vc[2] := iinfo.twot + iinfo.twot;
     if iinfo.nv < ncf then begin
       a := iinfo.nv;
-        itemp := ncf - iinfo.nv;
+      itemp := ncf - iinfo.nv;
       for i := itemp downto 1 do begin
           iinfo.vc[a] := iinfo.twot * iinfo.vc[a-1] + iinfo.pc[a-1]
                      + iinfo.pc[a-1] - iinfo.vc[a-2];
@@ -713,16 +710,17 @@ begin
       iinfo.nv := ncf;
    end;
    //interpolate to get velocity for each component  ncf * (i + l * ncm + 1);
+   vfac := (dna + dna) / t[1];
    for i := 0 to ncm -1 do begin
       tval := 0;
-        buf_ptr := bufi;
-        inc(buf_ptr, ncf * (i + l * ncm + 1));
-        dec(buf_ptr);
-        for j := ncf downto 1 do begin
-            tval := tval + iinfo.vc[j-1] * buf_ptr^;
-          dec(buf_ptr);
-        end;
-        posvel[i+ncm] := tval * vfac;
+      buf_ptr := bufi;
+      inc(buf_ptr, ncf * (i + l * ncm + 1));
+      dec(buf_ptr);
+      for j := ncf downto 1 do begin
+         tval := tval + iinfo.vc[j-1] * buf_ptr^;
+         dec(buf_ptr);
+      end;
+      posvel[i+ncm] := tval * vfac;
    end;
 end;
 

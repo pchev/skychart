@@ -720,7 +720,7 @@ if Fplot.cfgplot.outradius<Fplot.cfgchart.hw then Fplot.cfgplot.outradius:=Fplot
 if Fplot.cfgplot.outradius<Fplot.cfgchart.hh then Fplot.cfgplot.outradius:=Fplot.cfgchart.hh;
 // nutation constant
 if cfgsc.ApparentPos then
-   Fplanet.nutation(cfgsc.JDChart,cfgsc.nutl,cfgsc.nuto)
+   Fplanet.nutation(cfgsc.CurJDTT,cfgsc.nutl,cfgsc.nuto)
 else begin
    cfgsc.nutl:=0;
    cfgsc.nuto:=0;
