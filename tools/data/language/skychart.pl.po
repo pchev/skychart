@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-08 16:31+0000\n"
-"PO-Revision-Date: 2013-11-06 08:09+0000\n"
-"Last-Translator: Jerzy Rokicki <Unknown>\n"
+"POT-Creation-Date: 2013-11-14 17:57+0000\n"
+"PO-Revision-Date: 2013-11-14 18:05+0000\n"
+"Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-10 17:21+0000\n"
+"X-Launchpad-Export-Date: 2013-11-14 18:13+0000\n"
 "X-Generator: Launchpad (build 16820)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
@@ -2345,6 +2345,10 @@ msgstr "Wysokość"
 msgid "Help"
 msgstr "Pomoc"
 
+#: u_translation.rshelpbasedir
+msgid "en/documentation/"
+msgstr "en/documentation/"
+
 #: u_translation.rshelpcontents
 msgid "Help contents"
 msgstr "Spis tematów"
@@ -2995,7 +2999,7 @@ msgstr "Mapa"
 
 #: u_translation.rsmarkobjectso
 msgid "Mark objects on the chart"
-msgstr "Zaznacz obiekty na mapie"
+msgstr "Wyróżnij obiekty na mapie"
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -4227,7 +4231,7 @@ msgstr "Ustaw protokół dla pliku śledzenia"
 
 #: u_translation.rsrecoverhidde
 msgid "Recover hidden label"
-msgstr ""
+msgstr "Pokaż ukrytą etykietę"
 
 #: u_translation.rsred
 msgid "Red"
@@ -4599,7 +4603,7 @@ msgstr "Wybierz kolor (czarny domyślnie dla katalogu)"
 
 #: u_translation.rsselectlabels
 msgid "Select labels to recover"
-msgstr ""
+msgstr "Wybierz etykiety do wyświetlenia"
 
 #: u_translation.rsselectmirror
 msgid "Select mirror site"

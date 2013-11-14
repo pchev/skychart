@@ -4,18 +4,18 @@ unit u_help;
 
 interface
 
-uses gettext, translations, u_constant, u_util,
+uses u_translation, u_constant, u_util,
   Classes, SysUtils, Controls, FileUtil, LazHelpHTML;
 
-procedure Translate(lang : string = '');
+procedure SetLang;
 procedure SetHelpDB(aHelpDB:THTMLHelpDatabase);
 procedure SetHelp(aControl: TControl; helpstr:string);
 
 var HelpDir: string;
     UseOnlineHelp: Boolean;
+    hlpBaseDir: string = 'en/documentation/';
 
-resourcestring
-  hlpBaseDir = 'en/documentation/';
+const
   hlpSearch = 'advanced_search.html';
   hlpCalAst = 'calendar_asteroid.html';
   hlpCalCom = 'calendar_comet.html';
@@ -91,8 +91,17 @@ if DirectoryExistsUTF8(hdir) then begin
    aHelpDB.BaseURL:='file://'+hdir;
    UseOnlineHelp:=false;
 end else begin
-   aHelpDB.BaseURL:='http://www.ap-i.net/static/skychart/'+buf;
-   UseOnlineHelp:=true;
+   hlpBaseDir:='en/documentation/';
+   buf:=StringReplace(hlpBaseDir,'/',PathDelim,[rfReplaceAll]);
+   buf:=StringReplace(buf,'\',PathDelim,[rfReplaceAll]);
+   hdir:=SysToUTF8(slash(helpdir)+slash('wiki_doc')+buf);
+   if DirectoryExistsUTF8(hdir) then begin
+      aHelpDB.BaseURL:='file://'+hdir;
+      UseOnlineHelp:=false;
+   end else begin
+     aHelpDB.BaseURL:='http://www.ap-i.net/static/skychart/'+buf;
+     UseOnlineHelp:=true;
+   end;
 end;
 aHelpDB.KeywordPrefix:='H/';
 end;
@@ -104,14 +113,10 @@ aControl.HelpKeyword:='H/'+helpstr;
 aControl.HelpType:=htKeyword;
 end;
 
-procedure Translate(lang : string = '');
-var pofile: string;
+procedure SetLang;
+var buf: string;
 begin
- if lang='' then lang:='en';
- pofile:=format(slash(appdir)+slash('data')+slash('language')+'help.%s.po',[lang]);
- if not FileExists(pofile) then
-    pofile:=format(slash(appdir)+slash('data')+slash('language')+'help.%s.po',['en']);
- TranslateUnitResourceStrings('u_help',pofile);
+ hlpBaseDir:=rsHelpBaseDir;
 end;
 
 end.

@@ -2013,7 +2013,6 @@ if VerboseMsg then
  WriteTrace(step);
 GetLanguage;
 lang:=u_translation.translate(cfgm.language);
-u_help.Translate(lang);
 catalog:=Tcatalog.Create(self);
 SetLang;
 step:='Multiframe';
@@ -6568,7 +6567,6 @@ finally
  inif.Free;
 end;
 lang:=u_translation.translate(cfgm.language);
-u_help.Translate(lang);
 SetLang;
 InitFonts;
 f_position.SetLang;
@@ -6861,6 +6859,7 @@ pla[10]:=rsSun;
 pla[11]:=rsMoon;
 pla[31]:=rsSatRing;
 pla[32]:=rsEarthShadow;
+u_help.SetLang;
 SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpIndex);
 end;

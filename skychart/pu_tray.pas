@@ -132,6 +132,7 @@ pla[10]:=rsSun;
 pla[11]:=rsMoon;
 pla[31]:=rsSatRing;
 pla[32]:=rsEarthShadow;
+u_help.SetLang;
 end;
 
 procedure Tf_tray.Init;
@@ -375,7 +376,6 @@ begin
   GetAppDir;
   GetLanguage;
   lang:=u_translation.translate(language);
-  u_help.Translate(lang);
   SetLang;
 end;
 
