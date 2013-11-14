@@ -10,7 +10,7 @@ object f_tray: Tf_tray
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  LCLVersion = '1.0.8.0'
+  LCLVersion = '1.0.12.0'
   object Button1: TButton
     Left = 208
     Height = 25

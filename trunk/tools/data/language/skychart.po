@@ -5894,3 +5894,7 @@ msgstr ""
 msgid "Recover hidden label"
 msgstr ""
 
+#: u_translation:rshelpbasedir
+msgid "en/documentation/"
+msgstr ""
+

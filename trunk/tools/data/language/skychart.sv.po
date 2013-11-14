@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-11-08 16:31+0000\n"
-"PO-Revision-Date: 2013-04-03 12:02+0000\n"
-"Last-Translator: Mikael Hiort af Ornäs <lakritslemmel@hotmail.com>\n"
+"POT-Creation-Date: 2013-11-14 17:57+0000\n"
+"PO-Revision-Date: 2013-11-14 18:07+0000\n"
+"Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-10 17:21+0000\n"
+"X-Launchpad-Export-Date: 2013-11-14 18:12+0000\n"
 "X-Generator: Launchpad (build 16820)\n"
 
 #: u_translation.rs102cddss
@@ -2339,6 +2339,10 @@ msgstr "Höjd"
 #: u_translation.rshelp
 msgid "Help"
 msgstr "Hjälp"
+
+#: u_translation.rshelpbasedir
+msgid "en/documentation/"
+msgstr "en/documentation/"
 
 #: u_translation.rshelpcontents
 msgid "Help contents"
