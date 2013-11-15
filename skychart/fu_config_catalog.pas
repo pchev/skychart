@@ -507,7 +507,8 @@ procedure Tf_config_catalog.Button7Click(Sender: TObject);
 var p : integer;
     fn: string;
 begin
-p:=stringgrid4.selection.top;
+p:=stringgrid4.Row;
+if p>0 then begin
 fn:=slash(VODir)+stringgrid4.cells[2,p];
 fn:=ChangeFileExt(fn,'.config');
 f_voconfig:=Tf_voconfig.Create(Self);
@@ -546,6 +547,8 @@ cmain.VOurl:=f_voconfig.vourlnum;
 cmain.VOmaxrecord := f_voconfig.vo_maxrecord;
 f_voconfig.Free;
 ShowVO;
+stringgrid4.Row:=p;
+end;
 end;
 
 procedure Tf_config_catalog.Button6Click(Sender: TObject);

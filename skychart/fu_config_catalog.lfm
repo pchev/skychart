@@ -23,10 +23,10 @@ object f_config_catalog: Tf_config_catalog
       Height = 465
       Top = 1
       Width = 497
-      ActivePage = Page3
+      ActivePage = Page1a
       Align = alClient
       ShowTabs = False
-      TabIndex = 1
+      TabIndex = 3
       TabOrder = 1
       object Page2: TTabSheet
         Caption = 'CdC Stars'
