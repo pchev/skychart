@@ -63,6 +63,7 @@ Tskychart = class (TComponent)
     FObjectListLabels: TStringList;
     FNoFilterList: boolean;
     FUpdObsListTime: TNotifyEvent;
+    FRefreshImage: TNotifyEvent;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
     procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft;orient:single=0;priority: integer=5; opt:boolean=true; lsize:single=-1);
@@ -163,6 +164,7 @@ Tskychart = class (TComponent)
     function GetChartInfo(sep:string=blank):string;
     function GetChartPos:string;
     property Image: TCanvas write SetImage;
+    property onRefreshImage: TNotifyEvent read FRefreshImage write FRefreshImage;
     property onUpdObsListTime: TNotifyEvent read FUpdObsListTime write FUpdObsListTime;
 end;
 
@@ -383,6 +385,7 @@ finally
   cfgsc.FillMilkyWay:=savfillmw;
   cfgsc.quick:=false;
 end;
+if assigned(FRefreshImage) then FRefreshImage(self);
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': end Refresh');
 end;
 
