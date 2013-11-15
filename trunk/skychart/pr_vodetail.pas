@@ -230,7 +230,7 @@ var buf: string;
 begin
 buf:=TComboBox(Sender).Text;
 if (buf>'')and(buf<>rsAutomatic) then begin
-  Prefix.Text:=buf+' ';
+  if Sender=NameField then Prefix.Text:=buf+' ';
   for i:=0 to Grid.RowCount-1 do begin
     if Grid.Cells[1,i]=buf then begin
        if Grid.Cells[0,i]<>'x' then begin

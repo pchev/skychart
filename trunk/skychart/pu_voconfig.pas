@@ -95,7 +95,6 @@ type
     Fvo_maxrecord: integer;
     procedure SetServerList;
     procedure FillGrid(fr:Tf_vodetail; i,n,nactive: integer;active:boolean);
-    procedure SelectFields(fr:Tf_vodetail);
     procedure FillCatList;
     procedure ClearCatalog;
     procedure ClearDataGrid;
@@ -470,31 +469,6 @@ begin
   end;
 end;
 
-procedure Tf_voconfig.SelectFields(fr:Tf_vodetail);
- procedure SelectField(cb:TComboBox; v:integer);
- var i,p: integer;
-     fn,buf: string;
- begin
- exit;
-   if v<0 then cb.Text:=''
-   else begin
-     fn:=VO_Detail1.RecName[fr.tablenum][v];
-     for i:=0 to cb.Items.Count-1 do begin
-        buf:=cb.Items[i];
-        if buf=fn then begin
-          cb.ItemIndex:=i;
-          break;
-        end;
-     end;
-   end;
- end;
-begin
-SelectField(fr.MagField,fr.field_mag);
-SelectField(fr.SizeField,fr.field_size);
-SelectField(fr.NameField,fr.field_name);
-fr.Prefix.Text:=fr.nameprefix;
-end;
-
 procedure Tf_voconfig.SelectCatalog(Sender: TObject);
 var i,n,nactive: integer;
     act: boolean;
@@ -584,7 +558,7 @@ if CatList.Row>0 then begin
           RadioGroup1.ItemIndex:=1;
        RadioGroup1Click(self);
        FullDownload.Checked:=(StrToIntDef(tr.Caption,MaxInt)<=vo_maxrecord);
-       SelectFields(fr);
+       Prefix.Text:=nameprefix;
      end;
   end;
   if Pagecontrol2.PageCount=0 then begin
@@ -665,7 +639,6 @@ try
      forcemag:=field_mag;
      field_name:=fn;
      forcename:=field_name;
-     nameprefix:=np;
      SizeField.Clear;
      MagField.Clear;
      NameField.Clear;
@@ -725,7 +698,8 @@ try
        end;
        RadioGroup1Click(self);
        FullDownload.Checked:=(StrToIntDef(tr.Caption,MaxInt)<=Fvo_maxrecord);
-       SelectFields(fr);
+       nameprefix:=np;
+       Prefix.Text:=np;
      end else begin
        Grid.RowCount:=ActiveFieldNum;
        for i:=0 to ActiveFieldNum-1 do begin
