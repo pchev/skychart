@@ -114,7 +114,7 @@ sed -i ':a;N;$!ba;s/\n/ /g' fl.txt
 fl=$(<fl.txt)
 
 # create pdf
-wkhtmltopdf --use-xserver --dpi 96 --enable-toc-back-links  --enable-external-links --enable-internal-links --footer-right '[page]' $fl toc ../doc_$lang.pdf
+wkhtmltopdf --quiet --dpi 96 --enable-toc-back-links  --enable-external-links --enable-internal-links --footer-right '[page]' $fl toc ../doc_$lang.pdf
 
 # cleanup
 rm fl.txt $lang/documentation/00_title.html
