@@ -13,7 +13,7 @@ rm doc_*.pdf
 
 cd wiki_doc
 
-// main loop
+# main loop
 for lang in $langs; do
 
 echo $lang
@@ -49,12 +49,18 @@ if [ -f "$lang/documentation/telescope_ascom.html" ]; then
  sed -i '/\/system.html/ a '$lang'\/documentation\/telescope_ascom.html \n'$lang'\/documentation\/telescope_indi.html \n'$lang'\/documentation\/telescope_lx200.html \n'$lang'\/documentation\/telescope_encoder.html ' fl.txt
 fi
 
+# all in one line
+sed -i ':a;N;$!ba;s/\n/ /g' fl.txt 
+# read the list of file
+fl=$(<fl.txt)
+
 # create title page
 
 dt='Edited: '$(LC_ALL=C date '+%B %d %Y')
 t='Cartes du Ciel / Skychart'
 lastv='Last version is available from the wiki at'
 l='Users documentation'
+tocl='Table of Content'
 if [[ $lang = 'ca' ]]; then 
   l='Catalan documentation' 
 fi
@@ -65,16 +71,21 @@ if [[ $lang = 'es' ]]; then
   l='Spanish documentation'
 fi
 if [[ $lang = 'fr' ]]; then
-  dt='Version du: '$(LC_ALL=fr_FR.utf8 date '+%d %B %Y')
   t='Cartes du Ciel'
   l='Documentation en français'
+  dt='Version du: '$(LC_ALL=fr_FR.utf8 date '+%d %B %Y')
   lastv='La dernière version est disponible depuis le Wiki'
+  tocl='Table des matières'
 fi
 if [[ $lang = 'it' ]]; then
   l='Italian documentation'
 fi
 if [[ $lang = 'nl' ]]; then
-  l='Dutch documentation'
+  t='Cartes du Ciel / Skychart'
+  l='Engelstalige documentatie'
+  dt='Geschreven: '$(LC_ALL=nl_NL.utf8 date '+%d %B %Y')
+  lastv='Laatste versie is beschikbaar op deze wiki'
+  tocl='Inhoudsopgave'
 fi
 if [[ $lang = 'ru' ]]; then
   l='Russian documentation'
@@ -108,16 +119,18 @@ $lastv <br/>
 </html>
 EOF
 
-# all in one line
-sed -i ':a;N;$!ba;s/\n/ /g' fl.txt 
-# read the list of file
-fl=$(<fl.txt)
+# toc
+wkhtmltopdf --dump-default-toc-xsl > toc.xsl
+sed -i "s/Table of Content/$tocl/g" toc.xsl
 
 # create pdf
-wkhtmltopdf --quiet --dpi 96 --enable-toc-back-links  --enable-external-links --enable-internal-links --footer-right '[page]' $fl toc ../doc_$lang.pdf
+wkhtmltopdf --quiet --dpi 96 --enable-toc-back-links  --enable-external-links --enable-internal-links --footer-right '[page]' $fl toc --xsl-style-sheet toc.xsl  tmp.pdf
+
+# fix for anchor bug : http://code.google.com/p/wkhtmltopdf/issues/detail?id=463
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.7 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=../doc_$lang.pdf tmp.pdf
 
 # cleanup
-rm fl.txt $lang/documentation/00_title.html
+rm fl.txt toc.xsl $lang/documentation/00_title.html
 
 # end main loop
 done
