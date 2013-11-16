@@ -11,7 +11,7 @@ object f_zoom: Tf_zoom
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.1.3'
+  LCLVersion = '1.0.12.0'
   object Label1: TLabel
     Left = 16
     Height = 16
@@ -84,7 +84,7 @@ object f_zoom: Tf_zoom
     Default = True
     ModalResult = 1
     NumGlyphs = 0
-    TabOrder = 1
+    TabOrder = 3
   end
   object BitBtn2: TBitBtn
     Left = 216
@@ -96,7 +96,7 @@ object f_zoom: Tf_zoom
     Caption = 'Cancel'
     ModalResult = 2
     NumGlyphs = 0
-    TabOrder = 2
+    TabOrder = 4
   end
   object Button1: TButton
     Left = 16
@@ -105,7 +105,7 @@ object f_zoom: Tf_zoom
     Width = 75
     Caption = 'Help'
     OnClick = Button1Click
-    TabOrder = 3
+    TabOrder = 2
   end
   object StaticText1: TStaticText
     Left = 74
@@ -114,6 +114,6 @@ object f_zoom: Tf_zoom
     Width = 161
     Alignment = taCenter
     Caption = 'StaticText1'
-    TabOrder = 4
+    TabOrder = 1
   end
 end

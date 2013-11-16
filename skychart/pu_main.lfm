@@ -30,7 +30,7 @@ object f_main: Tf_main
     Font.Height = 10
     FullRepaint = False
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 1
     object ToolBar2: TToolBar
       Left = 0
       Height = 465
@@ -161,7 +161,7 @@ object f_main: Tf_main
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 0
+      TabOrder = 1
       object ToolButtonAllSky: TToolButton
         Left = 1
         Top = 0
@@ -207,7 +207,7 @@ object f_main: Tf_main
       BevelOuter = bvNone
       ClientHeight = 250
       ClientWidth = 28
-      TabOrder = 1
+      TabOrder = 0
       object Field1: TSpeedButton
         Left = 0
         Height = 24
@@ -469,7 +469,7 @@ object f_main: Tf_main
     ClientHeight = 78
     ClientWidth = 1024
     FullRepaint = False
-    TabOrder = 1
+    TabOrder = 0
     TabStop = True
     object ToolBar1: TToolBar
       Left = 0
@@ -679,7 +679,7 @@ object f_main: Tf_main
         OnCloseUp = quicksearchClick
         OnDblClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
-        TabOrder = 0
+        TabOrder = 1
       end
       object MagPanel: TPanel
         Left = 287
@@ -690,7 +690,7 @@ object f_main: Tf_main
         ClientHeight = 22
         ClientWidth = 24
         FullRepaint = False
-        TabOrder = 1
+        TabOrder = 0
         OnMouseUp = MagPanelMouseUp
         object ButtonMoreStar: TImage
           Left = 0
@@ -823,7 +823,7 @@ object f_main: Tf_main
         ItemHeight = 0
         ParentFont = False
         Style = csDropDownList
-        TabOrder = 2
+        TabOrder = 4
       end
       object ChildControl: TPanel
         Left = 994
@@ -835,7 +835,7 @@ object f_main: Tf_main
         BevelOuter = bvNone
         ClientHeight = 23
         ClientWidth = 30
-        TabOrder = 3
+        TabOrder = 5
         object BtnRestoreChild: TSpeedButton
           Left = 0
           Height = 15
@@ -866,7 +866,7 @@ object f_main: Tf_main
         Min = 1
         Max = 999
         Position = 1
-        TabOrder = 4
+        TabOrder = 3
         Thousands = False
         Wrap = False
       end
@@ -875,7 +875,7 @@ object f_main: Tf_main
         Height = 23
         Top = 2
         Width = 35
-        TabOrder = 5
+        TabOrder = 2
       end
       object ToolButton13: TToolButton
         Left = 618
@@ -1174,7 +1174,7 @@ object f_main: Tf_main
     Color = clBlack
     FullRepaint = False
     ParentColor = False
-    TabOrder = 0
+    TabOrder = 2
     TabStop = True
     object starshape: TImage
       Left = 32
@@ -5978,6 +5978,42 @@ object f_main: Tf_main
           OnClick = GridEQExecute
         end
         object Compass1: TMenuItem
+          Bitmap.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000064000000640000000000000000000000EBEBEBFFEBEB
+            EBFFEBEBEBFFEBEBEBFFE1DDD8FFB49E87FF89613CFF6D3E11FF6D3E11FF8961
+            3CFFB59E87FFE1DDD8FFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEB
+            EBFFEAEAE9FFB49D86FF6E3D0FFF7F4A18FF915A26FF97602CFF97602CFF915A
+            26FF7F4A18FF6D3D0FFFB49D86FFEAEAE9FFEBEBEBFFEBEBEBFFEBEBEBFFEAEA
+            E9FFA38567FF794412FF9F6C3BFFC5AB92FFE9E0D7FFFAF8F5FFFBFAF8FFEDE5
+            DDFFCCB096FFA16C38FF784311FFA18365FFEAEAE9FFEBEBEBFFEBEBEBFFBCA5
+            8FFF834D1AFFB38252FFDDC3AAFFFFF6EDFFFFF1E4FFFFEEDFFFFFFAF6FFFFFC
+            F8FFFFFEFDFFF5F0EBFFB37F4EFF804B18FFB9A28CFFEBEBEBFFE5E1DDFF8551
+            22FFA07144FFEEDAC7FFDABC9FFFB07943FFD5AB84FFFAE7D5FFFFFDFBFFFFFC
+            FAFFFFFBF8FFFFFAF7FFEDE4DBFFB17944FF804D1EFFE5E1DDFFC8B39EFF9C66
+            32FFC9B29CFFFFF5EAFFE9B584FFE2CFBBFFA26A34FFA56D37FFC08E5FFFE9D3
+            BEFFFFF4EAFFFFEDDCFFFFFCFAFFD2B294FF9F6731FFC6B19CFFB28A66FF9F6F
+            41FFF6EDE4FFFFF6EDFFF4D6BAFFE4A66BFFEBE0D7FFA26A34FFA26A34FF585D
+            80FFA7B3D7FFFFEDDDFFFFF3E8FFECE3D9FFB97E47FFAD8561FFAD7948FF996E
+            45FFFEF6EFFFFFF8F1FFFEF5ECFFE5AA71FFE4A66BFFF7F8F9FFD6C3B8FF0133
+            9AFF2B5ABEFFFFEEDEFFFFEEDEFFFAF8F6FFC88C52FFA67341FFBE8855FF946B
+            43FFFFF8F1FFFFFAF4FFFFFBF7FFEFC8A2FFE4A66BFFE0CFCAFFEFF2F7FF0133
+            9AFF02359FFFE9DFDEFFFFECDBFFFAF8F6FFD19459FFB7824FFFD6AF89FF9B70
+            46FFFCF6F0FFFFFBF7FFFFFDFBFFFAEDE0FFBCABAFFF0C5BFFFF0C5BFFFFACC3
+            EEFF01339AFF6081CCFFFFEFE0FFEBE2D9FFD5995EFFD2A983FFE8D5C2FFAE7E
+            50FFE6D9CCFFFFFBF8FFFFFEFDFFFFFEFEFFCFDDFDFF6A9AFDFF1762FFFF0C5B
+            FFFF87A7E6FF0D41ADFFFFF4EAFFD1B599FFDEA065FFE5D2BFFFEBE8E6FFD7A0
+            6CFFA4805DFFFEFAF6FFFFFCFAFFFFFDFBFFFFFDFAFFFFFBF8FFF4F1F3FFA1B9
+            F2FF3C78FAFF628BDEFF9EAED4FFD79E68FFE9AE75FFEBE8E6FFEBEBEBFFEDD9
+            C5FFBB8858FFBA9E83FFFEF9F5FFFFFAF6FFFFFAF5FFFFF9F3FFFFF6EEFFFFF3
+            E8FFFFF2E5FFC4CBE4FF7A7893FFF1B174FFEDD8C5FFEBEBEBFFEBEBEBFFEBEB
+            EBFFF1D3B5FFBF8C5AFFA4815EFFE6D8CAFFFCF4EDFFFFF6EDFFFEF4EBFFF6EB
+            E0FFCAB39DFFC18F5EFFF7B879FFF2D3B5FFEBEBEBFFEBEBEBFFEBEBEBFFEBEB
+            EBFFEBEBEBFFF1DDC9FFE7AF79FFB98858FFA0754AFF966D44FFA1754BFFB988
+            58FFE6AB71FFFEC085FFF1DDC9FFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEB
+            EBFFEBEBEBFFEBEBEBFFECE9E6FFF1DDCAFFF8CEA5FFFDC38BFFFDC38CFFF8CE
+            A5FFF1DDCAFFECE9E6FFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
+          }
           ImageIndex = 91
           OnClick = ToolButtonCompassClick
         end

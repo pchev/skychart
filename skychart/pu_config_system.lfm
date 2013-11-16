@@ -10,7 +10,7 @@ object f_configsystem: Tf_configsystem
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.1.3'
+  LCLVersion = '1.0.12.0'
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -30,7 +30,7 @@ object f_configsystem: Tf_configsystem
       Caption = 'OK'
       Default = True
       ModalResult = 1
-      TabOrder = 0
+      TabOrder = 1
     end
     object Button2: TButton
       Left = 312
@@ -41,7 +41,7 @@ object f_configsystem: Tf_configsystem
       BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
       OnClick = Button2Click
-      TabOrder = 1
+      TabOrder = 2
     end
     object Button3: TButton
       Left = 402
@@ -53,7 +53,7 @@ object f_configsystem: Tf_configsystem
       Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
-      TabOrder = 2
+      TabOrder = 3
     end
     object Button4: TButton
       Left = 127
@@ -63,7 +63,7 @@ object f_configsystem: Tf_configsystem
       Anchors = [akTop, akRight]
       Caption = 'Help'
       OnClick = Button4Click
-      TabOrder = 3
+      TabOrder = 0
     end
   end
   inline f_config_system1: Tf_config_system
@@ -119,10 +119,18 @@ object f_configsystem: Tf_configsystem
                   inherited TabSheet5: TTabSheet
                     ClientHeight = 173
                     ClientWidth = 382
+                    inherited EquatorialMount: TPanel
+                      ClientHeight = 157
+                      ClientWidth = 357
+                    end
                   end
                   inherited TabSheet6: TTabSheet
                     ClientHeight = 173
                     ClientWidth = 382
+                    inherited AltAzMount: TPanel
+                      ClientHeight = 157
+                      ClientWidth = 357
+                    end
                   end
                 end
               end
@@ -146,6 +154,10 @@ object f_configsystem: Tf_configsystem
           end
         end
         inherited Page4: TTabSheet
+          ClientHeight = 516
+          ClientWidth = 494
+        end
+        inherited Page5: TTabSheet
           ClientHeight = 516
           ClientWidth = 494
         end

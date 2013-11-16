@@ -10,7 +10,7 @@ object f_configchart: Tf_configchart
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.1.3'
+  LCLVersion = '1.0.12.0'
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -30,7 +30,7 @@ object f_configchart: Tf_configchart
       Caption = 'OK'
       Default = True
       ModalResult = 1
-      TabOrder = 0
+      TabOrder = 1
     end
     object Button4: TButton
       Left = 301
@@ -41,7 +41,7 @@ object f_configchart: Tf_configchart
       BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
       OnClick = Button4Click
-      TabOrder = 1
+      TabOrder = 2
     end
     object Button5: TButton
       Left = 405
@@ -53,7 +53,7 @@ object f_configchart: Tf_configchart
       Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
-      TabOrder = 2
+      TabOrder = 3
     end
     object Button6: TButton
       Left = 113
@@ -63,7 +63,7 @@ object f_configchart: Tf_configchart
       Anchors = [akTop, akRight]
       Caption = 'Help'
       OnClick = Button6Click
-      TabOrder = 3
+      TabOrder = 0
     end
   end
   inline f_config_chart1: Tf_config_chart
@@ -95,226 +95,6 @@ object f_configchart: Tf_configchart
         inherited Page4: TTabSheet
           ClientHeight = 468
           ClientWidth = 497
-          inherited Label29: TLabel
-            Height = 16
-            Width = 118
-          end
-          inherited GroupBox2: TGroupBox
-            inherited StarBox: TCheckBox
-              Height = 23
-              Width = 90
-            end
-            inherited Panel4: TPanel
-              inherited Panel2: TPanel
-                inherited Label32: TLabel
-                  Height = 16
-                end
-                inherited Label33: TLabel
-                  Height = 16
-                end
-                inherited Label34: TLabel
-                  Height = 16
-                end
-                inherited Label35: TLabel
-                  Height = 16
-                end
-                inherited Label36: TLabel
-                  Height = 16
-                end
-                inherited Label38: TLabel
-                  Height = 16
-                end
-                inherited Label39: TLabel
-                  Height = 16
-                end
-                inherited Label40: TLabel
-                  Height = 16
-                end
-                inherited Label76: TLabel
-                  Height = 16
-                end
-                inherited Label78: TLabel
-                  Height = 16
-                end
-                inherited Label108: TLabel
-                  Height = 16
-                  Width = 129
-                end
-                inherited Label109: TLabel
-                  Height = 16
-                  Width = 117
-                end
-                inherited fsmag0: TFloatEdit
-                  Height = 23
-                end
-                inherited fsmag1: TFloatEdit
-                  Height = 23
-                end
-                inherited fsmag2: TFloatEdit
-                  Height = 23
-                end
-                inherited fsmag3: TFloatEdit
-                  Height = 23
-                end
-                inherited fsmag4: TFloatEdit
-                  Height = 23
-                end
-                inherited fsmag5: TFloatEdit
-                  Height = 23
-                end
-                inherited fsmag6: TFloatEdit
-                  Height = 23
-                end
-                inherited fsmag7: TFloatEdit
-                  Height = 23
-                end
-                inherited fsmag8: TFloatEdit
-                  Height = 23
-                end
-                inherited fsmag9: TFloatEdit
-                  Height = 23
-                end
-              end
-              inherited Panel3: TPanel
-                inherited Label110: TLabel
-                  Height = 16
-                  Width = 118
-                end
-                inherited fsmagvis: TFloatEdit
-                  Height = 23
-                end
-              end
-              inherited StarAutoBox: TCheckBox
-                Height = 23
-                Width = 85
-              end
-            end
-          end
-          inherited GroupBox1: TGroupBox
-            inherited NebBox: TCheckBox
-              Height = 23
-              Width = 102
-            end
-            inherited Panel5: TPanel
-              inherited Label48: TLabel
-                Height = 16
-                Width = 117
-              end
-              inherited Label49: TLabel
-                Height = 16
-                Width = 154
-              end
-              inherited Label41: TLabel
-                Height = 16
-              end
-              inherited Label42: TLabel
-                Height = 16
-              end
-              inherited Label43: TLabel
-                Height = 16
-              end
-              inherited Label44: TLabel
-                Height = 16
-              end
-              inherited Label45: TLabel
-                Height = 16
-              end
-              inherited Label46: TLabel
-                Height = 16
-              end
-              inherited Label47: TLabel
-                Height = 16
-              end
-              inherited Label79: TLabel
-                Height = 16
-              end
-              inherited Label80: TLabel
-                Height = 16
-              end
-              inherited Label111: TLabel
-                Height = 16
-              end
-              inherited Label112: TLabel
-                Height = 16
-                Width = 129
-              end
-              inherited fmag0: TFloatEdit
-                Height = 23
-              end
-              inherited fmag1: TFloatEdit
-                Height = 23
-              end
-              inherited fmag2: TFloatEdit
-                Height = 23
-              end
-              inherited fmag3: TFloatEdit
-                Height = 23
-              end
-              inherited fmag4: TFloatEdit
-                Height = 23
-              end
-              inherited fmag5: TFloatEdit
-                Height = 23
-              end
-              inherited fmag6: TFloatEdit
-                Height = 23
-              end
-              inherited fdim0: TFloatEdit
-                Height = 23
-              end
-              inherited fdim1: TFloatEdit
-                Height = 23
-              end
-              inherited fdim2: TFloatEdit
-                Height = 23
-              end
-              inherited fdim3: TFloatEdit
-                Height = 23
-              end
-              inherited fdim4: TFloatEdit
-                Height = 23
-              end
-              inherited fdim5: TFloatEdit
-                Height = 23
-              end
-              inherited fdim6: TFloatEdit
-                Height = 23
-              end
-              inherited fmag7: TFloatEdit
-                Height = 23
-              end
-              inherited fmag8: TFloatEdit
-                Height = 23
-              end
-              inherited fmag9: TFloatEdit
-                Height = 23
-              end
-              inherited fdim7: TFloatEdit
-                Height = 23
-              end
-              inherited fdim8: TFloatEdit
-                Height = 23
-              end
-              inherited fdim9: TFloatEdit
-                Height = 23
-              end
-              inherited BigNebBox: TCheckBox
-                Height = 23
-                Width = 153
-              end
-              inherited fBigNebLimit: TLongEdit
-                Height = 23
-              end
-              inherited BigNebUnit: TLabel
-                Height = 16
-                Width = 48
-              end
-              inherited MessierBox: TCheckBox
-                Height = 23
-                Width = 190
-              end
-            end
-          end
         end
         inherited Page5: TTabSheet
           ClientHeight = 468

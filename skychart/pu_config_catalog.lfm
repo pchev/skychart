@@ -10,7 +10,7 @@ object f_configcatalog: Tf_configcatalog
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.6.0'
+  LCLVersion = '1.0.12.0'
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -32,7 +32,7 @@ object f_configcatalog: Tf_configcatalog
       Caption = 'OK'
       Default = True
       ModalResult = 1
-      TabOrder = 0
+      TabOrder = 1
     end
     object Button2: TButton
       Left = 328
@@ -43,7 +43,7 @@ object f_configcatalog: Tf_configcatalog
       BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
       OnClick = Button2Click
-      TabOrder = 1
+      TabOrder = 2
     end
     object Button3: TButton
       Left = 416
@@ -55,7 +55,7 @@ object f_configcatalog: Tf_configcatalog
       Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
-      TabOrder = 2
+      TabOrder = 3
     end
     object Button4: TButton
       Left = 144
@@ -66,7 +66,7 @@ object f_configcatalog: Tf_configcatalog
       BorderSpacing.InnerBorder = 4
       Caption = 'Help'
       OnClick = Button4Click
-      TabOrder = 3
+      TabOrder = 0
     end
   end
   inline f_config_catalog1: Tf_config_catalog
@@ -77,7 +77,6 @@ object f_configcatalog: Tf_configcatalog
     ClientWidth = 500
     TabOrder = 1
     DesignLeft = 304
-    DesignTop = 274
     inherited MainPanel: TPanel
       Height = 530
       Width = 500

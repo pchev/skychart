@@ -72,7 +72,7 @@ object f_image: Tf_image
       BorderSpacing.InnerBorder = 4
       Caption = 'Zoom +'
       OnClick = Button2Click
-      TabOrder = 1
+      TabOrder = 2
     end
     object Button3: TButton
       Left = 240
@@ -82,7 +82,7 @@ object f_image: Tf_image
       BorderSpacing.InnerBorder = 4
       Caption = 'Zoom -'
       OnClick = Button3Click
-      TabOrder = 2
+      TabOrder = 3
     end
     object ButtonPrint: TButton
       Left = 80
@@ -91,7 +91,7 @@ object f_image: Tf_image
       Width = 75
       Caption = 'Print'
       ModalResult = 6
-      TabOrder = 3
+      TabOrder = 1
     end
   end
   object VScrollBar: TScrollBar
@@ -102,7 +102,7 @@ object f_image: Tf_image
     Align = alRight
     Kind = sbVertical
     PageSize = 0
-    TabOrder = 1
+    TabOrder = 2
     OnChange = VScrollBarChange
   end
   object HScrollBar: TScrollBar
@@ -112,7 +112,7 @@ object f_image: Tf_image
     Width = 615
     Align = alBottom
     PageSize = 0
-    TabOrder = 2
+    TabOrder = 3
     OnChange = HScrollBarChange
   end
 end

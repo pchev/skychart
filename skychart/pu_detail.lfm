@@ -11,7 +11,7 @@ object f_detail: Tf_detail
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.8.0'
+  LCLVersion = '1.0.12.0'
   object Memo1: TMemo
     Left = 0
     Height = 425
@@ -23,7 +23,7 @@ object f_detail: Tf_detail
     )
     ReadOnly = True
     ScrollBars = ssAutoVertical
-    TabOrder = 1
+    TabOrder = 2
   end
   object Panel1: TPanel
     Left = 0
@@ -82,7 +82,7 @@ object f_detail: Tf_detail
     PrintSettings.MarginTop = 0.5
     PrintSettings.MarginRight = 0.5
     PrintSettings.MarginBottom = 0.5
-    TabOrder = 2
+    TabOrder = 1
     OnHotClick = IpHtmlPanel1HotClick
   end
   object ActionList1: TActionList

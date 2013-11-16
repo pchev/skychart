@@ -8,7 +8,7 @@ object f_observatory_db: Tf_observatory_db
   ClientWidth = 488
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '1.0.1.3'
+  LCLVersion = '1.0.12.0'
   object obsname: TGroupBox
     Left = 8
     Height = 248
@@ -42,7 +42,7 @@ object f_observatory_db: Tf_observatory_db
       AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
       ItemHeight = 0
       OnChange = citylistChange
-      TabOrder = 3
+      TabOrder = 1
       Text = '...'
     end
     object citysearch: TButton
@@ -53,7 +53,7 @@ object f_observatory_db: Tf_observatory_db
       BorderSpacing.InnerBorder = 4
       Caption = 'Search'
       OnClick = citysearchClick
-      TabOrder = 2
+      TabOrder = 3
     end
     object countrylist: TComboBox
       Left = 8
@@ -72,7 +72,7 @@ object f_observatory_db: Tf_observatory_db
       Top = 41
       Width = 104
       OnKeyDown = cityfilterKeyDown
-      TabOrder = 1
+      TabOrder = 2
     end
     object downloadcity: TButton
       Left = 164
@@ -82,7 +82,7 @@ object f_observatory_db: Tf_observatory_db
       BorderSpacing.InnerBorder = 4
       Caption = 'Download country details'
       OnClick = downloadcityClick
-      TabOrder = 7
+      TabOrder = 13
     end
     object updcity: TButton
       Left = 8
@@ -92,7 +92,7 @@ object f_observatory_db: Tf_observatory_db
       BorderSpacing.InnerBorder = 4
       Caption = 'Update'
       OnClick = updcityClick
-      TabOrder = 5
+      TabOrder = 11
     end
     object delcity: TButton
       Left = 84
@@ -102,7 +102,7 @@ object f_observatory_db: Tf_observatory_db
       BorderSpacing.InnerBorder = 4
       Caption = 'Delete'
       OnClick = delcityClick
-      TabOrder = 6
+      TabOrder = 12
     end
     object LocCode: TEdit
       Cursor = crHandPoint
@@ -115,7 +115,7 @@ object f_observatory_db: Tf_observatory_db
       ParentShowHint = False
       ReadOnly = True
       ShowHint = True
-      TabOrder = 8
+      TabOrder = 4
     end
     object vicinity: TButton
       Left = 254
@@ -125,14 +125,14 @@ object f_observatory_db: Tf_observatory_db
       BorderSpacing.InnerBorder = 4
       Caption = 'Vicinity'
       OnClick = vicinityClick
-      TabOrder = 4
+      TabOrder = 5
     end
     object vicinityrangeEdit: TEdit
       Left = 345
       Height = 23
       Top = 83
       Width = 56
-      TabOrder = 9
+      TabOrder = 6
     end
     object vicinityrange: TUpDown
       Left = 401
@@ -143,7 +143,7 @@ object f_observatory_db: Tf_observatory_db
       Min = 0
       Max = 500
       Position = 10
-      TabOrder = 10
+      TabOrder = 7
       Wrap = False
     end
     object Memo1: TMemo
@@ -151,7 +151,7 @@ object f_observatory_db: Tf_observatory_db
       Height = 64
       Top = 114
       Width = 425
-      TabOrder = 11
+      TabOrder = 8
       TabStop = False
       Visible = False
     end
@@ -171,7 +171,7 @@ object f_observatory_db: Tf_observatory_db
       Caption = 'Latitude'
       ClientHeight = 51
       ClientWidth = 181
-      TabOrder = 12
+      TabOrder = 9
       object Label58: TLabel
         Left = 4
         Height = 16
@@ -247,7 +247,7 @@ object f_observatory_db: Tf_observatory_db
       Caption = 'Longitude'
       ClientHeight = 51
       ClientWidth = 181
-      TabOrder = 13
+      TabOrder = 10
       object Label61: TLabel
         Left = 4
         Height = 16

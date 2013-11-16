@@ -93,7 +93,7 @@ object f_fov: Tf_fov
         Width = 49
         Color = clBtnFace
         ReadOnly = True
-        TabOrder = 3
+        TabOrder = 5
       end
       object Button6: TButton
         Left = 182
@@ -102,7 +102,7 @@ object f_fov: Tf_fov
         Width = 75
         Caption = 'Compute'
         OnClick = Button6Click
-        TabOrder = 4
+        TabOrder = 3
       end
       object Edit10: TEdit
         Left = 118
@@ -111,7 +111,7 @@ object f_fov: Tf_fov
         Width = 41
         Color = clBtnFace
         ReadOnly = True
-        TabOrder = 5
+        TabOrder = 4
       end
       object Label51: TLabel
         Left = 267

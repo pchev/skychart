@@ -15,15 +15,15 @@ object pop_encoder: Tpop_encoder
   OnCreate = formcreate
   OnShow = FormShow
   Position = poDefaultPosOnly
-  LCLVersion = '1.0.8.0'
+  LCLVersion = '1.0.12.0'
   object PageControl1: TPageControl
     Left = 0
     Height = 470
     Top = 0
     Width = 352
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     Align = alClient
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Coordinates'
@@ -71,7 +71,7 @@ object pop_encoder: Tpop_encoder
         end
         object pos_x: TEdit
           Left = 62
-          Height = 24
+          Height = 22
           Top = 2
           Width = 81
           ReadOnly = True
@@ -79,7 +79,7 @@ object pop_encoder: Tpop_encoder
         end
         object pos_y: TEdit
           Left = 206
-          Height = 24
+          Height = 22
           Top = 2
           Width = 81
           ReadOnly = True
@@ -87,7 +87,7 @@ object pop_encoder: Tpop_encoder
         end
         object az_x: TEdit
           Left = 62
-          Height = 24
+          Height = 22
           Top = 30
           Width = 81
           ReadOnly = True
@@ -95,7 +95,7 @@ object pop_encoder: Tpop_encoder
         end
         object alt_y: TEdit
           Left = 206
-          Height = 24
+          Height = 22
           Top = 30
           Width = 81
           ReadOnly = True
@@ -109,7 +109,7 @@ object pop_encoder: Tpop_encoder
         Width = 310
         ClientHeight = 198
         ClientWidth = 306
-        TabOrder = 1
+        TabOrder = 2
         object SpeedButton4: TSpeedButton
           Left = 204
           Height = 22
@@ -157,7 +157,7 @@ object pop_encoder: Tpop_encoder
         Width = 310
         ClientHeight = 85
         ClientWidth = 306
-        TabOrder = 2
+        TabOrder = 3
         object SpeedButton1: TSpeedButton
           Left = 2
           Height = 25
@@ -225,7 +225,7 @@ object pop_encoder: Tpop_encoder
         ClientWidth = 310
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 3
+        TabOrder = 1
         object Label18: TLabel
           Left = 110
           Height = 15
@@ -252,15 +252,15 @@ object pop_encoder: Tpop_encoder
         end
         object CheckBox2: TCheckBox
           Left = 6
-          Height = 19
+          Height = 23
           Top = 11
-          Width = 99
+          Width = 103
           Caption = 'Device Status'
           TabOrder = 0
         end
         object Edit1: TEdit
           Left = 133
-          Height = 24
+          Height = 22
           Top = 14
           Width = 25
           ReadOnly = True
@@ -268,7 +268,7 @@ object pop_encoder: Tpop_encoder
         end
         object Edit2: TEdit
           Left = 197
-          Height = 24
+          Height = 22
           Top = 14
           Width = 25
           ReadOnly = True
@@ -276,7 +276,7 @@ object pop_encoder: Tpop_encoder
         end
         object Edit3: TEdit
           Left = 260
-          Height = 24
+          Height = 22
           Top = 14
           Width = 25
           ReadOnly = True
@@ -302,7 +302,7 @@ object pop_encoder: Tpop_encoder
           Left = 22
           Height = 15
           Top = 10
-          Width = 34
+          Width = 35
           Caption = 'Type :'
           ParentColor = False
         end
@@ -340,7 +340,7 @@ object pop_encoder: Tpop_encoder
         end
         object cbo_type: TComboBox
           Left = 164
-          Height = 22
+          Height = 23
           Top = 6
           Width = 113
           ItemHeight = 0
@@ -364,14 +364,14 @@ object pop_encoder: Tpop_encoder
           AutoSize = False
           Color = clRed
           ReadOnly = True
-          TabOrder = 1
+          TabOrder = 4
         end
         object res_x: TEdit
           Left = 164
           Height = 22
           Top = 33
           Width = 65
-          TabOrder = 2
+          TabOrder = 1
           Text = '2000'
         end
         object res_y: TEdit
@@ -379,12 +379,12 @@ object pop_encoder: Tpop_encoder
           Height = 22
           Top = 60
           Width = 65
-          TabOrder = 3
+          TabOrder = 2
           Text = '2000'
         end
         object ReadIntBox: TComboBox
           Left = 164
-          Height = 22
+          Height = 23
           Top = 87
           Width = 113
           ItemHeight = 0
@@ -397,7 +397,7 @@ object pop_encoder: Tpop_encoder
             '5000'
           )
           OnChange = ReadIntBoxChange
-          TabOrder = 4
+          TabOrder = 3
           Text = 'ReadIntBox'
         end
       end
@@ -408,7 +408,7 @@ object pop_encoder: Tpop_encoder
         Width = 125
         Caption = 'Save Setting'
         OnClick = SaveButton1Click
-        TabOrder = 1
+        TabOrder = 7
       end
       object Mounttype: TRadioGroup
         Left = 8
@@ -434,7 +434,7 @@ object pop_encoder: Tpop_encoder
           'Alt-Az'
         )
         OnClick = MounttypeClick
-        TabOrder = 2
+        TabOrder = 1
       end
       object GroupBox5: TGroupBox
         Left = 8
@@ -444,7 +444,7 @@ object pop_encoder: Tpop_encoder
         Caption = 'Observatory '
         ClientHeight = 74
         ClientWidth = 308
-        TabOrder = 3
+        TabOrder = 4
         object Label15: TLabel
           Left = 22
           Height = 15
@@ -491,7 +491,7 @@ object pop_encoder: Tpop_encoder
         ClientWidth = 306
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 4
+        TabOrder = 3
         object Label22: TLabel
           Left = 14
           Height = 15
@@ -574,25 +574,25 @@ object pop_encoder: Tpop_encoder
           '90 °'
         )
         OnClick = InitTypeClick
-        TabOrder = 5
+        TabOrder = 2
       end
       object CheckBox3: TCheckBox
         Left = 10
-        Height = 26
+        Height = 23
         Top = 356
         Width = 197
         Caption = 'Record protocol to a trace file'
         OnClick = CheckBox3Click
-        TabOrder = 6
+        TabOrder = 5
       end
       object CheckBox4: TCheckBox
         Left = 10
-        Height = 26
+        Height = 23
         Top = 376
-        Width = 140
+        Width = 129
         Caption = 'Form always visible'
         OnClick = CheckBox4Click
-        TabOrder = 7
+        TabOrder = 6
       end
     end
     object TabSheet3: TTabSheet
@@ -684,7 +684,7 @@ object pop_encoder: Tpop_encoder
             '57600'
             '115200'
           )
-          TabOrder = 0
+          TabOrder = 1
           Text = 'PortSpeedbox'
         end
         object cbo_port: TComboBox
@@ -703,7 +703,7 @@ object pop_encoder: Tpop_encoder
             'COM7'
             'COM8'
           )
-          TabOrder = 1
+          TabOrder = 0
           Text = 'cbo_port'
         end
         object Paritybox: TComboBox
@@ -717,7 +717,7 @@ object pop_encoder: Tpop_encoder
             'E'
             'O'
           )
-          TabOrder = 2
+          TabOrder = 3
           Text = 'Paritybox'
         end
         object DatabitBox: TComboBox
@@ -733,7 +733,7 @@ object pop_encoder: Tpop_encoder
             '7'
             '8'
           )
-          TabOrder = 3
+          TabOrder = 2
           Text = 'DatabitBox'
         end
         object StopbitBox: TComboBox
@@ -791,7 +791,7 @@ object pop_encoder: Tpop_encoder
         Width = 121
         Caption = 'Save Setting'
         OnClick = SaveButton1Click
-        TabOrder = 1
+        TabOrder = 2
       end
       object Panel2: TPanel
         Left = 8
@@ -800,7 +800,7 @@ object pop_encoder: Tpop_encoder
         Width = 297
         ClientHeight = 113
         ClientWidth = 297
-        TabOrder = 2
+        TabOrder = 1
         object Label17: TLabel
           Left = 14
           Height = 100

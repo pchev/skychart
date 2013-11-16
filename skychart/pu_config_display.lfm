@@ -10,7 +10,7 @@ object f_configdisplay: Tf_configdisplay
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.1.3'
+  LCLVersion = '1.0.12.0'
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -30,7 +30,7 @@ object f_configdisplay: Tf_configdisplay
       Caption = 'OK'
       Default = True
       ModalResult = 1
-      TabOrder = 0
+      TabOrder = 1
     end
     object Button4: TButton
       Left = 286
@@ -41,7 +41,7 @@ object f_configdisplay: Tf_configdisplay
       BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
       OnClick = Button4Click
-      TabOrder = 1
+      TabOrder = 2
     end
     object Button5: TButton
       Left = 395
@@ -53,7 +53,7 @@ object f_configdisplay: Tf_configdisplay
       Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
-      TabOrder = 2
+      TabOrder = 3
     end
     object Button6: TButton
       Left = 80
@@ -63,7 +63,7 @@ object f_configdisplay: Tf_configdisplay
       Anchors = [akTop, akRight]
       Caption = 'Help'
       OnClick = Button6Click
-      TabOrder = 3
+      TabOrder = 0
     end
   end
   inline f_config_display1: Tf_config_display
@@ -83,6 +83,8 @@ object f_configdisplay: Tf_configdisplay
       inherited PageControl1: TPageControl
         Height = 550
         Width = 500
+        ActivePage = nil
+        TabIndex = -1
         inherited Page1: TTabSheet
           ClientHeight = 546
           ClientWidth = 496
@@ -106,6 +108,9 @@ object f_configdisplay: Tf_configdisplay
         inherited Page6: TTabSheet
           ClientHeight = 546
           ClientWidth = 496
+          inherited GroupBox5: TGroupBox
+            ClientHeight = 278
+          end
         end
         inherited Page7: TTabSheet
           ClientHeight = 546

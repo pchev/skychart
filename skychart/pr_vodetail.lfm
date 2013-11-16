@@ -10,7 +10,7 @@ object f_vodetail: Tf_vodetail
   ClientHeight = 458
   ClientWidth = 759
   OnCreate = FormCreate
-  LCLVersion = '1.3'
+  LCLVersion = '1.0.12.0'
   object MainPanel: TPanel
     Left = 0
     Height = 458
@@ -28,13 +28,13 @@ object f_vodetail: Tf_vodetail
       Align = alBottom
       ClientHeight = 217
       ClientWidth = 757
-      TabOrder = 0
+      TabOrder = 1
       TabStop = True
       object Table: TLabel
         Left = 4
         Height = 16
         Top = 12
-        Width = 51
+        Width = 49
         Caption = 'Table......'
         ParentColor = False
       end
@@ -54,7 +54,7 @@ object f_vodetail: Tf_vodetail
         BorderSpacing.InnerBorder = 4
         Caption = 'Download catalog'
         OnClick = GetData
-        TabOrder = 11
+        TabOrder = 15
       end
       object RadioGroup1: TRadioGroup
         Left = 335
@@ -78,13 +78,13 @@ object f_vodetail: Tf_vodetail
           'Draw as DSO                 .'
         )
         OnClick = RadioGroup1Click
-        TabOrder = 8
+        TabOrder = 14
       end
       object Label9: TLabel
         Left = 8
         Height = 16
         Top = 149
-        Width = 150
+        Width = 147
         Caption = 'Default size '' .......................'
         ParentColor = False
       end
@@ -92,7 +92,7 @@ object f_vodetail: Tf_vodetail
         Left = 8
         Height = 16
         Top = 95
-        Width = 153
+        Width = 147
         Caption = 'Default magnitude.............'
         ParentColor = False
       end
@@ -100,7 +100,7 @@ object f_vodetail: Tf_vodetail
         Left = 559
         Height = 23
         Top = 106
-        Width = 203
+        Width = 191
         Caption = 'Download full catalog...............'
         OnChange = FullDownloadChange
         TabOrder = 9
@@ -109,13 +109,13 @@ object f_vodetail: Tf_vodetail
         Left = 8
         Height = 16
         Top = 124
-        Width = 155
+        Width = 149
         Caption = 'Object type ..........................'
         ParentColor = False
       end
       object ComboBox1: TComboBox
         Left = 158
-        Height = 26
+        Height = 25
         Top = 119
         Width = 164
         ItemHeight = 0
@@ -141,7 +141,7 @@ object f_vodetail: Tf_vodetail
         )
         OnChange = ComboBox1Change
         Style = csDropDownList
-        TabOrder = 5
+        TabOrder = 10
         Text = 'Circle'
       end
       object ButtonBack: TButton
@@ -151,25 +151,25 @@ object f_vodetail: Tf_vodetail
         Width = 88
         Caption = '< Back'
         OnClick = ButtonBackClick
-        TabOrder = 12
+        TabOrder = 3
       end
       object DefMag: TLongEdit
         Left = 160
-        Height = 24
+        Height = 23
         Top = 91
         Width = 80
-        TabOrder = 4
+        TabOrder = 8
         Value = 12
       end
       object DefSize: TLongEdit
         Left = 160
-        Height = 24
+        Height = 23
         Hint = '0..36000'
         Top = 145
         Width = 80
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 6
+        TabOrder = 11
         Value = 60
         MaxValue = 36000
       end
@@ -180,7 +180,7 @@ object f_vodetail: Tf_vodetail
         Width = 160
         Caption = 'Data preview'
         OnClick = Button2Click
-        TabOrder = 10
+        TabOrder = 12
       end
       object Shape1: TShape
         Left = 160
@@ -194,72 +194,72 @@ object f_vodetail: Tf_vodetail
         Left = 8
         Height = 23
         Top = 172
-        Width = 154
+        Width = 148
         Caption = 'Force color....................'
         OnChange = CheckBox1Change
-        TabOrder = 7
+        TabOrder = 13
       end
       object MagField: TComboBox
         Left = 81
-        Height = 26
+        Height = 25
         Top = 56
         Width = 130
         ItemHeight = 0
         OnChange = FieldChange
         Style = csDropDownList
-        TabOrder = 0
+        TabOrder = 4
       end
       object Label2: TLabel
         Left = 8
         Height = 16
         Top = 60
-        Width = 65
+        Width = 62
         Caption = 'Magnitude'
         ParentColor = False
       end
       object SizeField: TComboBox
         Left = 287
-        Height = 26
+        Height = 25
         Top = 56
         Width = 130
         ItemHeight = 0
         OnChange = FieldChange
         Style = csDropDownList
-        TabOrder = 1
+        TabOrder = 5
       end
       object Label3: TLabel
         Left = 239
         Height = 16
         Top = 60
-        Width = 24
+        Width = 23
         Caption = 'Size'
         ParentColor = False
       end
       object NameField: TComboBox
         Left = 613
-        Height = 26
+        Height = 25
         Top = 56
         Width = 130
         ItemHeight = 0
         OnChange = FieldChange
         Style = csDropDownList
-        TabOrder = 3
+        TabOrder = 7
       end
       object Label4: TLabel
         Left = 431
         Height = 16
         Top = 60
-        Width = 35
+        Width = 34
         Caption = 'Name'
         ParentColor = False
       end
       object Prefix: TEdit
         Left = 487
-        Height = 24
+        Height = 23
         Top = 57
         Width = 98
         OnChange = PrefixChange
-        TabOrder = 2
+        TabOrder = 6
         Text = 'Prefix'
       end
       object tn: TStaticText
@@ -269,7 +269,7 @@ object f_vodetail: Tf_vodetail
         Width = 104
         BorderStyle = sbsSingle
         Caption = 'tn'
-        TabOrder = 13
+        TabOrder = 0
       end
       object tr: TStaticText
         Left = 227
@@ -278,7 +278,7 @@ object f_vodetail: Tf_vodetail
         Width = 84
         BorderStyle = sbsSingle
         Caption = 'tr'
-        TabOrder = 14
+        TabOrder = 1
       end
       object desc: TStaticText
         Left = 317
@@ -287,7 +287,7 @@ object f_vodetail: Tf_vodetail
         Width = 330
         BorderStyle = sbsSingle
         Caption = 'desc'
-        TabOrder = 15
+        TabOrder = 2
       end
     end
     object Grid: TStringGrid
@@ -303,7 +303,7 @@ object f_vodetail: Tf_vodetail
       GridLineWidth = 0
       Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing]
       RowCount = 2
-      TabOrder = 1
+      TabOrder = 0
       OnMouseUp = GridMouseUp
     end
   end

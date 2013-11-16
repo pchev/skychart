@@ -40,7 +40,7 @@ object f_config_observatory: Tf_config_observatory
           BorderSpacing.InnerBorder = 4
           Caption = '+'
           OnClick = ObszpClick
-          TabOrder = 6
+          TabOrder = 9
         end
         object Obszm: TButton
           Left = 5
@@ -50,7 +50,7 @@ object f_config_observatory: Tf_config_observatory
           BorderSpacing.InnerBorder = 4
           Caption = '-'
           OnClick = ObszmClick
-          TabOrder = 7
+          TabOrder = 11
         end
         object Obsmap: TButton
           Left = 47
@@ -60,7 +60,7 @@ object f_config_observatory: Tf_config_observatory
           BorderSpacing.InnerBorder = 4
           Caption = 'Load'
           OnClick = ObsmapClick
-          TabOrder = 8
+          TabOrder = 14
         end
         object ZoomImage1: TZoomImage
           Cursor = crCross
@@ -87,7 +87,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 429
           Width = 400
           PageSize = 1
-          TabOrder = 5
+          TabOrder = 13
           TabStop = False
           OnScroll = HScrollBarScroll
         end
@@ -98,7 +98,7 @@ object f_config_observatory: Tf_config_observatory
           Width = 15
           Kind = sbVertical
           PageSize = 1
-          TabOrder = 4
+          TabOrder = 10
           TabStop = False
           OnScroll = VScrollBarScroll
         end
@@ -110,7 +110,7 @@ object f_config_observatory: Tf_config_observatory
           Caption = 'Latitude'
           ClientHeight = 51
           ClientWidth = 181
-          TabOrder = 0
+          TabOrder = 5
           object Label58: TLabel
             Left = 4
             Height = 16
@@ -132,7 +132,7 @@ object f_config_observatory: Tf_config_observatory
               'South'
             )
             OnChange = latdegChange
-            TabOrder = 2
+            TabOrder = 3
             Text = 'North'
           end
           object latdeg: TLongEdit
@@ -171,7 +171,7 @@ object f_config_observatory: Tf_config_observatory
             Width = 42
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 3
+            TabOrder = 2
             Value = 0
             MinValue = 0
             MaxValue = 59.99
@@ -187,7 +187,7 @@ object f_config_observatory: Tf_config_observatory
           Caption = 'Longitude'
           ClientHeight = 51
           ClientWidth = 181
-          TabOrder = 1
+          TabOrder = 6
           object Label61: TLabel
             Left = 4
             Height = 16
@@ -209,7 +209,7 @@ object f_config_observatory: Tf_config_observatory
               'East'
             )
             OnChange = longdegChange
-            TabOrder = 2
+            TabOrder = 3
             Text = 'East'
           end
           object longdeg: TLongEdit
@@ -248,7 +248,7 @@ object f_config_observatory: Tf_config_observatory
             Width = 42
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 3
+            TabOrder = 2
             Value = 0
             MinValue = 0
             MaxValue = 59.99
@@ -264,7 +264,7 @@ object f_config_observatory: Tf_config_observatory
           Caption = 'Altitude'
           ClientHeight = 51
           ClientWidth = 77
-          TabOrder = 2
+          TabOrder = 7
           object Label70: TLabel
             Left = 8
             Height = 16
@@ -296,7 +296,7 @@ object f_config_observatory: Tf_config_observatory
           Caption = 'Time Zone'
           ClientHeight = 63
           ClientWidth = 445
-          TabOrder = 3
+          TabOrder = 8
           object TZComboBox: TComboBox
             Left = 8
             Height = 25
@@ -336,7 +336,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 2
           Width = 192
           OnChange = ObsNameChange
-          TabOrder = 10
+          TabOrder = 0
           Text = 'ObsName'
         end
         object ComboBox1: TComboBox
@@ -347,7 +347,7 @@ object f_config_observatory: Tf_config_observatory
           ItemHeight = 0
           OnSelect = ComboBox1Select
           Style = csDropDownList
-          TabOrder = 11
+          TabOrder = 2
         end
         object Button5: TButton
           Left = 302
@@ -356,7 +356,7 @@ object f_config_observatory: Tf_config_observatory
           Width = 163
           Caption = 'Country Database'
           OnClick = Button5Click
-          TabOrder = 12
+          TabOrder = 1
         end
         object Button6: TButton
           Left = 302
@@ -365,7 +365,7 @@ object f_config_observatory: Tf_config_observatory
           Width = 75
           Caption = 'Add'
           OnClick = Button6Click
-          TabOrder = 13
+          TabOrder = 3
         end
         object Button7: TButton
           Left = 390
@@ -374,7 +374,7 @@ object f_config_observatory: Tf_config_observatory
           Width = 75
           Caption = 'Delete'
           OnClick = Button7Click
-          TabOrder = 14
+          TabOrder = 4
         end
         object Label2: TLabel
           Left = 21
@@ -441,7 +441,7 @@ object f_config_observatory: Tf_config_observatory
             Width = 184
             Caption = 'Display the local horizon line'
             OnClick = displayhorizonClick
-            TabOrder = 0
+            TabOrder = 1
           end
           object horizonfile: TFileNameEdit
             Left = 211
@@ -465,7 +465,7 @@ object f_config_observatory: Tf_config_observatory
             Width = 145
             Caption = 'Fill with horizon color'
             OnClick = fillhorizonClick
-            TabOrder = 1
+            TabOrder = 0
           end
           object horizonpicturefile: TFileNameEdit
             Left = 211
@@ -480,7 +480,7 @@ object f_config_observatory: Tf_config_observatory
             ButtonWidth = 23
             NumGlyphs = 1
             MaxLength = 0
-            TabOrder = 3
+            TabOrder = 4
             OnChange = horizonpicturefileChange
           end
           object displayhorizonpicture: TCheckBox
@@ -490,7 +490,7 @@ object f_config_observatory: Tf_config_observatory
             Width = 177
             Caption = 'Display the horizon picture'
             OnClick = displayhorizonpictureClick
-            TabOrder = 4
+            TabOrder = 3
           end
           object picturerotation: TFloatEdit
             Left = 211
@@ -663,7 +663,7 @@ object f_config_observatory: Tf_config_observatory
           Width = 65
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 4
+          TabOrder = 5
           OnChange = polaryChange
           Value = 0
           Decimals = 5
@@ -686,7 +686,7 @@ object f_config_observatory: Tf_config_observatory
           Width = 65
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 5
+          TabOrder = 4
           OnChange = polarxChange
           Value = 0
           Decimals = 5

@@ -23,10 +23,10 @@ object f_config_pictures: Tf_config_pictures
       Height = 522
       Top = 1
       Width = 501
-      ActivePage = Page4
+      ActivePage = Page1
       Align = alClient
       ShowTabs = False
-      TabIndex = 3
+      TabIndex = 0
       TabOrder = 0
       OnChange = PageControl1PageChanged
       object Page1: TTabSheet
@@ -50,7 +50,7 @@ object f_config_pictures: Tf_config_pictures
           Width = 401
           ClientHeight = 94
           ClientWidth = 401
-          TabOrder = 3
+          TabOrder = 2
           Visible = False
           object ProgressCat: TLabel
             Left = 187
@@ -80,7 +80,7 @@ object f_config_pictures: Tf_config_pictures
           Left = 16
           Height = 16
           Top = 36
-          Width = 92
+          Width = 93
           Caption = 'Image Directory'
           ParentColor = False
         end
@@ -91,7 +91,7 @@ object f_config_pictures: Tf_config_pictures
           Width = 401
           ClientHeight = 143
           ClientWidth = 401
-          TabOrder = 1
+          TabOrder = 3
           object Label266: TLabel
             Left = 24
             Height = 16
@@ -152,7 +152,7 @@ object f_config_pictures: Tf_config_pictures
           Width = 219
           Caption = 'Show object pictures on the chart'
           OnClick = ShowImagesBoxClick
-          TabOrder = 2
+          TabOrder = 4
         end
         object imgpath: TDirectoryEdit
           Left = 151
@@ -173,7 +173,7 @@ object f_config_pictures: Tf_config_pictures
           Width = 401
           ClientHeight = 94
           ClientWidth = 401
-          TabOrder = 4
+          TabOrder = 1
           object nimages: TLabel
             Left = 24
             Height = 53
@@ -247,7 +247,7 @@ object f_config_pictures: Tf_config_pictures
           Width = 481
           ClientHeight = 88
           ClientWidth = 481
-          TabOrder = 2
+          TabOrder = 3
           object ImgTrBar2: TTrackBar
             Left = 304
             Height = 27
@@ -321,7 +321,7 @@ object f_config_pictures: Tf_config_pictures
             Width = 96
             Caption = 'Reset'
             OnClick = Button5Click
-            TabOrder = 3
+            TabOrder = 4
           end
           object ImgITT2: TComboBox
             Left = 155
@@ -337,7 +337,7 @@ object f_config_pictures: Tf_config_pictures
               'Sqrt'
             )
             OnChange = ImgITT2Change
-            TabOrder = 4
+            TabOrder = 3
             Text = 'Scaled'
           end
           object Label9: TLabel
@@ -381,7 +381,7 @@ object f_config_pictures: Tf_config_pictures
           Width = 130
           Caption = 'View header'
           OnClick = Header1Click
-          TabOrder = 3
+          TabOrder = 2
         end
       end
       object Page3: TTabSheet
@@ -396,12 +396,12 @@ object f_config_pictures: Tf_config_pictures
           Caption = 'Online DSS'
           ClientHeight = 52
           ClientWidth = 480
-          TabOrder = 1
+          TabOrder = 0
           object OnlineDSS: TCheckBox
             Left = 8
-            Height = 19
+            Height = 23
             Top = 20
-            Width = 196
+            Width = 211
             Caption = 'Use online DSS instead of RealSky'
             OnChange = OnlineDSSChange
             TabOrder = 0
@@ -425,7 +425,7 @@ object f_config_pictures: Tf_config_pictures
           Caption = 'RealSky®'
           ClientHeight = 263
           ClientWidth = 480
-          TabOrder = 0
+          TabOrder = 2
           object Panel2: TPanel
             Left = 4
             Height = 253
@@ -436,9 +436,9 @@ object f_config_pictures: Tf_config_pictures
             TabOrder = 0
             object RealSkyNorth: TCheckBox
               Left = 6
-              Height = 19
+              Height = 23
               Top = 8
-              Width = 94
+              Width = 103
               Caption = 'RealSky North'
               OnClick = RealSkyNorthClick
               TabOrder = 0
@@ -450,7 +450,7 @@ object f_config_pictures: Tf_config_pictures
               Width = 65
               Color = clBtnFace
               ReadOnly = True
-              TabOrder = 1
+              TabOrder = 9
               Value = 0
             end
             object realskymax: TLongEdit
@@ -458,49 +458,49 @@ object f_config_pictures: Tf_config_pictures
               Height = 23
               Top = 189
               Width = 65
-              TabOrder = 2
+              TabOrder = 8
               OnChange = realskymaxChange
               Value = 0
             end
             object reallist: TCheckBox
               Left = 6
-              Height = 19
+              Height = 23
               Top = 157
-              Width = 127
+              Width = 145
               Caption = 'Select plate from list'
               Checked = True
               OnClick = reallistClick
               State = cbChecked
-              TabOrder = 3
+              TabOrder = 6
             end
             object usesubsample: TCheckBox
               Left = 6
-              Height = 19
+              Height = 23
               Top = 189
-              Width = 223
+              Width = 241
               Caption = 'Use subsampling to limit image size to'
               Checked = True
               OnClick = usesubsampleClick
               State = cbChecked
-              TabOrder = 4
+              TabOrder = 7
             end
             object DSS102CD: TCheckBox
               Left = 196
-              Height = 19
+              Height = 23
               Top = 8
-              Width = 80
+              Width = 90
               Caption = '102 CD DSS'
               OnClick = DSS102CDClick
-              TabOrder = 5
+              TabOrder = 1
             end
             object RealSkySouth: TCheckBox
               Left = 6
-              Height = 19
+              Height = 23
               Top = 34
-              Width = 94
+              Width = 102
               Caption = 'RealSky South'
               OnClick = RealSkySouthClick
-              TabOrder = 6
+              TabOrder = 2
             end
             object realskyfile: TEdit
               Left = 196
@@ -508,7 +508,7 @@ object f_config_pictures: Tf_config_pictures
               Top = 126
               Width = 169
               OnChange = realskyfileChange
-              TabOrder = 7
+              TabOrder = 5
               Text = 'images\$TEMP.FIT'
             end
             object realskydrive: TEdit
@@ -517,7 +517,7 @@ object f_config_pictures: Tf_config_pictures
               Top = 94
               Width = 169
               OnChange = realskydriveChange
-              TabOrder = 8
+              TabOrder = 4
               Text = 'X:\'
             end
             object realskydir: TEdit
@@ -526,14 +526,14 @@ object f_config_pictures: Tf_config_pictures
               Top = 61
               Width = 169
               OnChange = realskydirChange
-              TabOrder = 9
+              TabOrder = 3
               Text = 'cat\RealSky\'
             end
             object Label77: TLabel
               Left = 411
               Height = 16
               Top = 225
-              Width = 40
+              Width = 44
               Caption = 'MBytes'
               ParentColor = False
             end
@@ -541,7 +541,7 @@ object f_config_pictures: Tf_config_pictures
               Left = 411
               Height = 16
               Top = 196
-              Width = 30
+              Width = 33
               Caption = 'pixels'
               ParentColor = False
             end
@@ -549,7 +549,7 @@ object f_config_pictures: Tf_config_pictures
               Left = 11
               Height = 16
               Top = 129
-              Width = 75
+              Width = 82
               Caption = 'temporary file'
               ParentColor = False
             end
@@ -557,7 +557,7 @@ object f_config_pictures: Tf_config_pictures
               Left = 11
               Height = 16
               Top = 97
-              Width = 95
+              Width = 102
               Caption = 'Data Files, CDrom'
               ParentColor = False
             end
@@ -565,7 +565,7 @@ object f_config_pictures: Tf_config_pictures
               Left = 11
               Height = 16
               Top = 64
-              Width = 70
+              Width = 74
               Caption = 'Auxiliary files'
               ParentColor = False
             end
@@ -574,7 +574,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 12
             Height = 16
             Top = 20
-            Width = 35
+            Width = 37
             Caption = 'Label6'
             ParentColor = False
           end
@@ -587,12 +587,12 @@ object f_config_pictures: Tf_config_pictures
           Caption = 'Download archive'
           ClientHeight = 71
           ClientWidth = 480
-          TabOrder = 2
+          TabOrder = 1
           object ArchiveBox: TCheckBox
             Left = 8
-            Height = 19
+            Height = 23
             Top = 9
-            Width = 133
+            Width = 146
             Caption = 'Archive to directory : '
             OnChange = ArchiveBoxChange
             TabOrder = 0
@@ -611,9 +611,9 @@ object f_config_pictures: Tf_config_pictures
           end
           object ConfirmArchive: TCheckBox
             Left = 8
-            Height = 19
+            Height = 23
             Top = 41
-            Width = 242
+            Width = 262
             Caption = 'Confirmation prompt before to save a file.'
             OnChange = ConfirmArchiveChange
             TabOrder = 2
@@ -653,7 +653,7 @@ object f_config_pictures: Tf_config_pictures
           GridLineWidth = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
           RowCount = 11
-          TabOrder = 0
+          TabOrder = 1
           TitleStyle = tsStandard
           OnDrawCell = StringGrid1DrawCell
           OnMouseUp = StringGrid1MouseUp
@@ -675,7 +675,7 @@ object f_config_pictures: Tf_config_pictures
           Width = 128
           Caption = 'ScanArchive'
           OnClick = ScanArchiveClick
-          TabOrder = 1
+          TabOrder = 0
         end
         object MaxImg: TComboBox
           Left = 405
@@ -724,7 +724,7 @@ object f_config_pictures: Tf_config_pictures
           Width = 208
           Caption = 'Adjust the visualisation scale'
           OnClick = Button1Click
-          TabOrder = 4
+          TabOrder = 5
         end
         object ShowImageLabel: TCheckBox
           Left = 26
@@ -733,7 +733,7 @@ object f_config_pictures: Tf_config_pictures
           Width = 132
           Caption = 'Show images labels'
           OnChange = ShowImageLabelChange
-          TabOrder = 5
+          TabOrder = 4
         end
       end
     end

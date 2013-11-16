@@ -7,7 +7,7 @@ object f_imglist: Tf_imglist
   ClientHeight = 319
   ClientWidth = 497
   OnShow = FormShow
-  LCLVersion = '1.0.8.0'
+  LCLVersion = '1.0.12.0'
   object Panel1: TPanel
     Left = 0
     Height = 85
@@ -16,7 +16,7 @@ object f_imglist: Tf_imglist
     Align = alBottom
     ClientHeight = 85
     ClientWidth = 497
-    TabOrder = 0
+    TabOrder = 1
     object Button1: TButton
       Left = 390
       Height = 25
@@ -24,7 +24,7 @@ object f_imglist: Tf_imglist
       Width = 90
       Caption = 'OK'
       ModalResult = 1
-      TabOrder = 0
+      TabOrder = 3
     end
     object Button2: TButton
       Left = 96
@@ -33,7 +33,7 @@ object f_imglist: Tf_imglist
       Width = 90
       Caption = 'Cancel'
       ModalResult = 2
-      TabOrder = 1
+      TabOrder = 0
     end
     object Button3: TButton
       Left = 292
@@ -51,7 +51,7 @@ object f_imglist: Tf_imglist
       Width = 90
       Caption = 'View header'
       OnClick = ViewHeaderClick
-      TabOrder = 3
+      TabOrder = 1
     end
     object Button5: TButton
       Left = 96
@@ -80,7 +80,7 @@ object f_imglist: Tf_imglist
     Align = alClient
     ItemHeight = 0
     OnMouseDown = CheckListBox1MouseDown
-    TabOrder = 1
+    TabOrder = 0
     TopIndex = -1
   end
   object PopupMenu1: TPopupMenu
