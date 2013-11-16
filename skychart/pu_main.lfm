@@ -5978,6 +5978,7 @@ object f_main: Tf_main
           OnClick = GridEQExecute
         end
         object Compass1: TMenuItem
+          ImageIndex = 91
           OnClick = ToolButtonCompassClick
         end
         object ShowConstellationLine1: TMenuItem
