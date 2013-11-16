@@ -6,8 +6,8 @@ object f_config_chart: Tf_config_chart
   ClientHeight = 528
   ClientWidth = 505
   TabOrder = 0
-  DesignLeft = 536
-  DesignTop = 362
+  DesignLeft = 371
+  DesignTop = 290
   object MainPanel: TPanel
     Left = 0
     Height = 528
@@ -23,10 +23,10 @@ object f_config_chart: Tf_config_chart
       Height = 472
       Top = 1
       Width = 503
-      ActivePage = Page5
+      ActivePage = Page6
       Align = alClient
       ShowTabs = False
-      TabIndex = 4
+      TabIndex = 5
       TabOrder = 0
       OnChange = PageControl1PageChanged
       object Page1: TTabSheet
@@ -373,7 +373,7 @@ object f_config_chart: Tf_config_chart
           Left = 287
           Height = 16
           Top = 64
-          Width = 14
+          Width = 15
           Caption = 'To'
           ParentColor = False
         end
@@ -1025,7 +1025,7 @@ object f_config_chart: Tf_config_chart
           Width = 73
           Caption = 'Default'
           OnClick = Button7Click
-          TabOrder = 11
+          TabOrder = 12
         end
         object CheckBox1: TCheckBox
           Left = 61
@@ -1034,7 +1034,7 @@ object f_config_chart: Tf_config_chart
           Width = 217
           Caption = 'Use oblique cylindrical projections'#10'(CAR, MER)'
           OnChange = CheckBox1Change
-          TabOrder = 12
+          TabOrder = 11
         end
       end
       object Page4: TTabSheet
@@ -1821,7 +1821,7 @@ object f_config_chart: Tf_config_chart
               Width = 153
               Caption = 'Hide object wider than'
               OnClick = BigNebBoxClick
-              TabOrder = 20
+              TabOrder = 21
             end
             object fBigNebLimit: TLongEdit
               Left = 216
@@ -1831,7 +1831,7 @@ object f_config_chart: Tf_config_chart
               Width = 33
               ParentShowHint = False
               ShowHint = True
-              TabOrder = 21
+              TabOrder = 22
               OnChange = fBigNebLimitChange
               Value = 0
               MaxValue = 20000
@@ -1851,7 +1851,7 @@ object f_config_chart: Tf_config_chart
               Width = 190
               Caption = 'Do not filter Messier objects'
               OnClick = MessierBoxClick
-              TabOrder = 22
+              TabOrder = 20
             end
           end
         end
@@ -2306,9 +2306,9 @@ object f_config_chart: Tf_config_chart
         ClientWidth = 499
         object Label95: TLabel
           Left = 0
-          Height = 14
+          Height = 16
           Top = 0
-          Width = 105
+          Width = 109
           Caption = 'Object List Setting'
           ParentColor = False
         end
@@ -2323,7 +2323,7 @@ object f_config_chart: Tf_config_chart
           TabOrder = 0
           object liststar: TCheckBox
             Left = 32
-            Height = 21
+            Height = 23
             Top = 24
             Width = 54
             Caption = 'Stars'
@@ -2332,34 +2332,34 @@ object f_config_chart: Tf_config_chart
           end
           object listneb: TCheckBox
             Left = 32
-            Height = 21
+            Height = 23
             Top = 58
-            Width = 69
+            Width = 71
             Caption = 'Nebulae'
             OnClick = listnebClick
             TabOrder = 1
           end
           object listpla: TCheckBox
             Left = 32
-            Height = 21
+            Height = 23
             Top = 92
-            Width = 138
+            Width = 136
             Caption = 'Solar System object'
             OnClick = listplaClick
             TabOrder = 2
           end
           object listvar: TCheckBox
             Left = 32
-            Height = 21
+            Height = 23
             Top = 126
-            Width = 103
+            Width = 101
             Caption = 'Variable Stars'
             OnClick = listvarClick
             TabOrder = 3
           end
           object listdbl: TCheckBox
             Left = 32
-            Height = 21
+            Height = 23
             Top = 160
             Width = 97
             Caption = 'Double Stars'

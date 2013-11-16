@@ -1,7 +1,7 @@
 object f_calendar: Tf_calendar
-  Left = 482
+  Left = 473
   Height = 455
-  Top = 89
+  Top = 93
   Width = 835
   ActiveControl = Panel1
   Caption = 'f_calendar'
@@ -13,7 +13,7 @@ object f_calendar: Tf_calendar
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.8.0'
+  LCLVersion = '1.0.12.0'
   object Panel1: TPanel
     Left = 0
     Height = 70
@@ -85,7 +85,7 @@ object f_calendar: Tf_calendar
       ClientHeight = 34
       ClientWidth = 305
       FullRepaint = False
-      TabOrder = 10
+      TabOrder = 7
       Visible = False
       OnClick = SatPanelClick
       object Label9: TLabel
@@ -117,7 +117,7 @@ object f_calendar: Tf_calendar
       FullRepaint = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 11
+      TabOrder = 6
       Visible = False
       OnClick = EcliPanelClick
     end
@@ -129,7 +129,7 @@ object f_calendar: Tf_calendar
       Width = 33
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 3
+      TabOrder = 9
       Value = 1
       MinValue = 1
       MaxValue = 9999
@@ -192,7 +192,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date1Change
       TabOrder = 0
-      Text = '2013.10.07.01'
+      Text = '2013.11.16.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -254,7 +254,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date2Change
       TabOrder = 1
-      Text = '2013.10.07.01'
+      Text = '2013.11.16.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -266,7 +266,7 @@ object f_calendar: Tf_calendar
       BorderSpacing.InnerBorder = 4
       Caption = 'Refresh'
       OnClick = BtnRefreshClick
-      TabOrder = 4
+      TabOrder = 2
     end
     object BtnHelp: TButton
       Left = 536
@@ -276,7 +276,7 @@ object f_calendar: Tf_calendar
       BorderSpacing.InnerBorder = 4
       Caption = 'Help'
       OnClick = BtnHelpClick
-      TabOrder = 5
+      TabOrder = 4
     end
     object BtnClose: TButton
       Left = 648
@@ -287,7 +287,7 @@ object f_calendar: Tf_calendar
       Cancel = True
       Caption = 'Close'
       OnClick = BtnCloseClick
-      TabOrder = 6
+      TabOrder = 5
     end
     object BtnSave: TButton
       Left = 314
@@ -297,7 +297,7 @@ object f_calendar: Tf_calendar
       BorderSpacing.InnerBorder = 4
       Caption = 'Save to File'
       OnClick = BtnSaveClick
-      TabOrder = 7
+      TabOrder = 10
     end
     object BtnPrint: TButton
       Left = 425
@@ -307,7 +307,7 @@ object f_calendar: Tf_calendar
       BorderSpacing.InnerBorder = 4
       Caption = 'Print'
       OnClick = BtnPrintClick
-      TabOrder = 8
+      TabOrder = 11
     end
     object BtnReset: TButton
       Left = 536
@@ -317,7 +317,7 @@ object f_calendar: Tf_calendar
       BorderSpacing.InnerBorder = 4
       Caption = 'Reset Chart'
       OnClick = BtnResetClick
-      TabOrder = 9
+      TabOrder = 12
       Visible = False
     end
     object Time: TTimePicker
@@ -327,7 +327,7 @@ object f_calendar: Tf_calendar
       Width = 101
       Time = 0.883472222222222
       Enabled = True
-      TabOrder = 2
+      TabOrder = 8
       TabStop = True
     end
     object BtnCopyClip: TButton
@@ -338,7 +338,7 @@ object f_calendar: Tf_calendar
       BorderSpacing.InnerBorder = 4
       Caption = 'Copy'
       OnClick = BtnCopyClipClick
-      TabOrder = 12
+      TabOrder = 3
     end
   end
   object PageControl1: TPageControl
@@ -379,23 +379,23 @@ object f_calendar: Tf_calendar
       ImageIndex = 1
       object Pagecontrol2: TPageControl
         Left = 0
-        Height = 343
+        Height = 356
         Top = 0
-        Width = 753
+        Width = 831
         ActivePage = Psoleil
         Align = alClient
         TabIndex = 0
         TabOrder = 0
         object Psoleil: TTabSheet
           Caption = 'Sun'
-          ClientHeight = 339
-          ClientWidth = 749
+          ClientHeight = 327
+          ClientWidth = 827
           ImageIndex = 9
           object SoleilGrid: TStringGrid
             Left = 0
-            Height = 314
+            Height = 327
             Top = 0
-            Width = 749
+            Width = 827
             Align = alClient
             ColCount = 11
             DefaultColWidth = 100
@@ -410,8 +410,8 @@ object f_calendar: Tf_calendar
         end
         object Mercure: TTabSheet
           Caption = 'Mercury'
-          ClientHeight = 339
-          ClientWidth = 749
+          ClientHeight = 327
+          ClientWidth = 827
           object MercureGrid: TStringGrid
             Left = 0
             Height = 252
@@ -431,8 +431,8 @@ object f_calendar: Tf_calendar
         end
         object Venus: TTabSheet
           Caption = 'Venus'
-          ClientHeight = 339
-          ClientWidth = 749
+          ClientHeight = 327
+          ClientWidth = 827
           ImageIndex = 1
           object VenusGrid: TStringGrid
             Left = 0
@@ -453,8 +453,8 @@ object f_calendar: Tf_calendar
         end
         object PLune: TTabSheet
           Caption = 'Moon'
-          ClientHeight = 339
-          ClientWidth = 749
+          ClientHeight = 327
+          ClientWidth = 827
           ImageIndex = 2
           object LuneGrid: TStringGrid
             Left = 0
@@ -475,8 +475,8 @@ object f_calendar: Tf_calendar
         end
         object Mars: TTabSheet
           Caption = 'Mars'
-          ClientHeight = 339
-          ClientWidth = 749
+          ClientHeight = 327
+          ClientWidth = 827
           ImageIndex = 3
           object MarsGrid: TStringGrid
             Left = 0
@@ -497,8 +497,8 @@ object f_calendar: Tf_calendar
         end
         object Jupiter: TTabSheet
           Caption = 'Jupiter'
-          ClientHeight = 339
-          ClientWidth = 749
+          ClientHeight = 327
+          ClientWidth = 827
           ImageIndex = 4
           object JupiterGrid: TStringGrid
             Left = 0
@@ -519,8 +519,8 @@ object f_calendar: Tf_calendar
         end
         object Saturne: TTabSheet
           Caption = 'Saturn'
-          ClientHeight = 339
-          ClientWidth = 749
+          ClientHeight = 327
+          ClientWidth = 827
           ImageIndex = 5
           object SaturneGrid: TStringGrid
             Left = 0
@@ -541,8 +541,8 @@ object f_calendar: Tf_calendar
         end
         object Uranus: TTabSheet
           Caption = 'Uranus'
-          ClientHeight = 339
-          ClientWidth = 749
+          ClientHeight = 327
+          ClientWidth = 827
           ImageIndex = 6
           object UranusGrid: TStringGrid
             Left = 0
@@ -563,8 +563,8 @@ object f_calendar: Tf_calendar
         end
         object Neptune: TTabSheet
           Caption = 'Neptun'
-          ClientHeight = 339
-          ClientWidth = 749
+          ClientHeight = 327
+          ClientWidth = 827
           ImageIndex = 7
           object NeptuneGrid: TStringGrid
             Left = 0
@@ -585,8 +585,8 @@ object f_calendar: Tf_calendar
         end
         object Pluton: TTabSheet
           Caption = 'Pluto'
-          ClientHeight = 339
-          ClientWidth = 749
+          ClientHeight = 327
+          ClientWidth = 827
           ImageIndex = 8
           object PlutonGrid: TStringGrid
             Left = 0
@@ -607,8 +607,8 @@ object f_calendar: Tf_calendar
         end
         object tsPGraphs: TTabSheet
           Caption = 'Graphs'
-          ClientHeight = 339
-          ClientWidth = 749
+          ClientHeight = 327
+          ClientWidth = 827
           object dgPlanet: TDrawGrid
             Left = 0
             Height = 314
@@ -668,14 +668,14 @@ object f_calendar: Tf_calendar
           BorderSpacing.InnerBorder = 4
           Caption = 'Filter ->'
           OnClick = Button1Click
-          TabOrder = 0
+          TabOrder = 1
         end
         object CometFilter: TEdit
           Left = 8
           Height = 23
           Top = 9
           Width = 121
-          TabOrder = 1
+          TabOrder = 0
         end
         object ComboBox1: TComboBox
           Left = 216
@@ -737,7 +737,7 @@ object f_calendar: Tf_calendar
           ItemHeight = 0
           OnSelect = ComboBox2Change
           Style = csDropDownList
-          TabOrder = 0
+          TabOrder = 2
         end
         object Button2: TButton
           Left = 136
@@ -754,7 +754,7 @@ object f_calendar: Tf_calendar
           Height = 23
           Top = 12
           Width = 121
-          TabOrder = 2
+          TabOrder = 0
         end
       end
     end
@@ -765,9 +765,9 @@ object f_calendar: Tf_calendar
       ImageIndex = 3
       object SolarGrid: TStringGrid
         Left = 0
-        Height = 344
+        Height = 356
         Top = 0
-        Width = 753
+        Width = 831
         Align = alClient
         ColCount = 12
         DefaultColWidth = 100
@@ -787,9 +787,9 @@ object f_calendar: Tf_calendar
       ImageIndex = 4
       object LunarGrid: TStringGrid
         Left = 0
-        Height = 344
+        Height = 356
         Top = 0
-        Width = 753
+        Width = 831
         Align = alClient
         ColCount = 9
         DefaultColWidth = 100
@@ -871,7 +871,7 @@ object f_calendar: Tf_calendar
           Height = 23
           Top = 29
           Width = 97
-          TabOrder = 0
+          TabOrder = 4
           Text = 'visible.tle'
         end
         object fullday: TCheckBox
@@ -880,7 +880,7 @@ object f_calendar: Tf_calendar
           Top = 28
           Width = 145
           Caption = 'Include day time pass'
-          TabOrder = 2
+          TabOrder = 6
         end
         object TLEListBox: TFileListBox
           Left = 342
@@ -902,7 +902,7 @@ object f_calendar: Tf_calendar
           Width = 144
           Caption = 'Include Iridium flares'
           OnChange = IridiumBoxChange
-          TabOrder = 4
+          TabOrder = 1
         end
         object magchart: TFloatEdit
           Left = 166
@@ -926,7 +926,7 @@ object f_calendar: Tf_calendar
           MaxLength = 4
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 1
+          TabOrder = 0
           Value = 4
           MinValue = 0
           MaxValue = 99
@@ -938,7 +938,7 @@ object f_calendar: Tf_calendar
           Width = 115
           Caption = 'Download TLE'
           OnClick = Button3Click
-          TabOrder = 6
+          TabOrder = 2
         end
         object MinSatAlt: TLongEdit
           Left = 630

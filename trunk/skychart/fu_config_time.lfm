@@ -6,8 +6,8 @@ object f_config_time: Tf_config_time
   ClientHeight = 530
   ClientWidth = 500
   TabOrder = 0
-  DesignLeft = 361
-  DesignTop = 334
+  DesignLeft = 348
+  DesignTop = 305
   object MainPanel: TPanel
     Left = 0
     Height = 530
@@ -58,7 +58,7 @@ object f_config_time: Tf_config_time
           Width = 417
           ClientHeight = 152
           ClientWidth = 417
-          TabOrder = 4
+          TabOrder = 5
           Visible = False
           object Label135: TLabel
             Left = 8
@@ -99,7 +99,7 @@ object f_config_time: Tf_config_time
             Width = 162
             Caption = 'Use another TT-UT value'
             OnClick = CheckBox4Click
-            TabOrder = 0
+            TabOrder = 1
           end
           object dt_ut: TLongEdit
             Left = 246
@@ -110,7 +110,7 @@ object f_config_time: Tf_config_time
             Enabled = False
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 1
+            TabOrder = 2
             OnChange = dt_utChange
             Value = 0
             MinValue = -99999999
@@ -132,7 +132,7 @@ object f_config_time: Tf_config_time
             ItemHeight = 0
             OnChange = TZComboBoxChange
             Style = csDropDownList
-            TabOrder = 2
+            TabOrder = 0
           end
         end
         object LongEdit2: TLongEdit
@@ -259,14 +259,14 @@ object f_config_time: Tf_config_time
               'BC'
             )
             OnClick = DateEditChange
-            TabOrder = 0
+            TabOrder = 6
           end
           object JDEdit: TFloatEdit
             Left = 54
             Height = 23
             Top = 99
             Width = 131
-            TabOrder = 1
+            TabOrder = 13
             OnChange = JDEditChange
             Value = 0
             Decimals = 6
@@ -283,7 +283,7 @@ object f_config_time: Tf_config_time
             BorderSpacing.InnerBorder = 4
             Caption = '0h'
             OnClick = Button5Click
-            TabOrder = 2
+            TabOrder = 17
           end
           object Button6: TButton
             Left = 332
@@ -293,7 +293,7 @@ object f_config_time: Tf_config_time
             BorderSpacing.InnerBorder = 4
             Caption = '0h UT'
             OnClick = Button6Click
-            TabOrder = 3
+            TabOrder = 18
           end
           object BitBtn4: TButton
             Left = 6
@@ -302,7 +302,7 @@ object f_config_time: Tf_config_time
             Width = 137
             Caption = 'Actual system time'
             OnClick = BitBtn4Click
-            TabOrder = 4
+            TabOrder = 15
           end
           object BitBtn1: TBitBtn
             Left = 192
@@ -357,7 +357,7 @@ object f_config_time: Tf_config_time
             }
             NumGlyphs = 0
             OnClick = BitBtn1Click
-            TabOrder = 5
+            TabOrder = 14
           end
           object d_year: TUpDown
             Left = 124
@@ -367,7 +367,7 @@ object f_config_time: Tf_config_time
             Min = -1
             Max = 1
             Position = 0
-            TabOrder = 6
+            TabOrder = 1
             Thousands = False
             Wrap = False
             OnClick = DateClick
@@ -378,7 +378,7 @@ object f_config_time: Tf_config_time
             Top = 22
             Width = 47
             OnChange = DateEditChange
-            TabOrder = 7
+            TabOrder = 2
           end
           object d_month: TUpDown
             Left = 183
@@ -389,7 +389,7 @@ object f_config_time: Tf_config_time
             Min = 1
             Max = 12
             Position = 1
-            TabOrder = 8
+            TabOrder = 3
             Thousands = False
             Wrap = False
             OnClick = DateChange
@@ -400,7 +400,7 @@ object f_config_time: Tf_config_time
             Top = 22
             Width = 47
             OnChange = DateEditChange
-            TabOrder = 9
+            TabOrder = 4
           end
           object d_day: TUpDown
             Left = 242
@@ -411,7 +411,7 @@ object f_config_time: Tf_config_time
             Min = 1
             Max = 31
             Position = 1
-            TabOrder = 10
+            TabOrder = 5
             Thousands = False
             Wrap = False
             OnClick = DateChange
@@ -422,7 +422,7 @@ object f_config_time: Tf_config_time
             Top = 65
             Width = 47
             OnChange = TimeEditChange
-            TabOrder = 11
+            TabOrder = 7
           end
           object t_hour: TUpDown
             Left = 103
@@ -433,7 +433,7 @@ object f_config_time: Tf_config_time
             Min = 0
             Max = 23
             Position = 0
-            TabOrder = 12
+            TabOrder = 8
             Thousands = False
             Wrap = False
             OnClick = TimeChange
@@ -444,7 +444,7 @@ object f_config_time: Tf_config_time
             Top = 65
             Width = 47
             OnChange = TimeEditChange
-            TabOrder = 13
+            TabOrder = 9
           end
           object t_min: TUpDown
             Left = 174
@@ -455,7 +455,7 @@ object f_config_time: Tf_config_time
             Min = 0
             Max = 59
             Position = 0
-            TabOrder = 14
+            TabOrder = 10
             Thousands = False
             Wrap = False
             OnClick = TimeChange
@@ -469,7 +469,7 @@ object f_config_time: Tf_config_time
             Min = 0
             Max = 59
             Position = 0
-            TabOrder = 15
+            TabOrder = 12
             Thousands = False
             Wrap = False
             OnClick = TimeChange
@@ -480,7 +480,7 @@ object f_config_time: Tf_config_time
             Top = 65
             Width = 47
             OnChange = TimeEditChange
-            TabOrder = 16
+            TabOrder = 11
           end
           object Button8: TButton
             Left = 157
@@ -489,7 +489,7 @@ object f_config_time: Tf_config_time
             Width = 83
             Caption = 'Tonight'
             OnClick = Button8Click
-            TabOrder = 17
+            TabOrder = 16
           end
           object d_yearEdit: TLongEdit
             Left = 56
@@ -499,7 +499,7 @@ object f_config_time: Tf_config_time
             Width = 68
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 18
+            TabOrder = 0
             OnChange = DateEditChange
             Value = 0
             MaxValue = 200000
@@ -538,7 +538,7 @@ object f_config_time: Tf_config_time
           BorderSpacing.InnerBorder = 4
           Caption = 'More Options'
           OnClick = Button4Click
-          TabOrder = 5
+          TabOrder = 4
         end
       end
       object Page2: TTabSheet
@@ -559,7 +559,7 @@ object f_config_time: Tf_config_time
           Left = 358
           Height = 16
           Top = 46
-          Width = 36
+          Width = 37
           Caption = 'every  '
           ParentColor = False
         end
@@ -603,7 +603,7 @@ object f_config_time: Tf_config_time
             'Seconds'
           )
           OnClick = stepunitClick
-          TabOrder = 3
+          TabOrder = 7
         end
         object stepline: TCheckBox
           Left = 8
@@ -612,7 +612,7 @@ object f_config_time: Tf_config_time
           Width = 255
           Caption = 'Connection lines between each position '
           OnClick = steplineClick
-          TabOrder = 4
+          TabOrder = 8
         end
         object SimObj: TCheckListBox
           Left = 6
@@ -649,7 +649,7 @@ object f_config_time: Tf_config_time
           BorderSpacing.InnerBorder = 4
           Caption = 'All'
           OnClick = AllSimClick
-          TabOrder = 1
+          TabOrder = 5
         end
         object NoSim: TButton
           Left = 220
@@ -659,7 +659,7 @@ object f_config_time: Tf_config_time
           BorderSpacing.InnerBorder = 4
           Caption = 'None'
           OnClick = NoSimClick
-          TabOrder = 2
+          TabOrder = 6
         end
         object RadioGroup1: TRadioGroup
           Left = 8
@@ -687,7 +687,7 @@ object f_config_time: Tf_config_time
             'One of'
           )
           OnClick = RadioGroup1Click
-          TabOrder = 5
+          TabOrder = 9
           object LongEdit1: TLongEdit
             Left = 291
             Height = 24
@@ -727,7 +727,7 @@ object f_config_time: Tf_config_time
             'Magnitude'
           )
           OnItemClick = CheckGroup1ItemClick
-          TabOrder = 6
+          TabOrder = 10
           Data = {
             03000000020202
           }
@@ -759,7 +759,7 @@ object f_config_time: Tf_config_time
             'Second'
           )
           OnItemClick = CheckGroup2ItemClick
-          TabOrder = 7
+          TabOrder = 11
           Data = {
             06000000020202020202
           }
@@ -772,7 +772,7 @@ object f_config_time: Tf_config_time
           Width = 75
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 8
+          TabOrder = 1
           OnChange = nbstepChanged
           Value = 1
           MinValue = 1
@@ -786,7 +786,7 @@ object f_config_time: Tf_config_time
           Width = 75
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 9
+          TabOrder = 3
           OnChange = stepsizeChanged
           Value = 1
           MinValue = 1
@@ -800,7 +800,7 @@ object f_config_time: Tf_config_time
           Associate = nbstep
           Min = 1
           Position = 1
-          TabOrder = 10
+          TabOrder = 2
           Wrap = False
           OnClick = UpDown1Click
         end
@@ -813,7 +813,7 @@ object f_config_time: Tf_config_time
           Min = 1
           Max = 999
           Position = 1
-          TabOrder = 11
+          TabOrder = 4
           Wrap = False
           OnClick = UpDown2Click
         end
@@ -871,7 +871,7 @@ object f_config_time: Tf_config_time
             ButtonWidth = 23
             NumGlyphs = 0
             MaxLength = 0
-            TabOrder = 0
+            TabOrder = 1
             OnChange = DirectoryEdit1Change
           end
           object Label3: TLabel
@@ -896,7 +896,7 @@ object f_config_time: Tf_config_time
             Top = 106
             Width = 113
             OnChange = Edit1Change
-            TabOrder = 1
+            TabOrder = 2
           end
           object Label5: TLabel
             Left = 3
@@ -920,7 +920,7 @@ object f_config_time: Tf_config_time
             Top = 252
             Width = 235
             OnChange = Edit2Change
-            TabOrder = 2
+            TabOrder = 9
           end
           object Label7: TLabel
             Left = 3
@@ -936,7 +936,7 @@ object f_config_time: Tf_config_time
             Top = 216
             Width = 50
             OnChange = Edit3Change
-            TabOrder = 3
+            TabOrder = 7
           end
           object Label8: TLabel
             Left = 364
@@ -952,7 +952,7 @@ object f_config_time: Tf_config_time
             Top = 216
             Width = 49
             OnChange = Edit4Change
-            TabOrder = 4
+            TabOrder = 8
           end
           object ComboBox1: TComboBox
             Left = 190
@@ -969,7 +969,7 @@ object f_config_time: Tf_config_time
               'Free size'
             )
             OnChange = ComboBox1Change
-            TabOrder = 5
+            TabOrder = 6
             Text = 'ComboBox1'
           end
           object CheckBox3: TCheckBox
@@ -980,7 +980,7 @@ object f_config_time: Tf_config_time
             AutoSize = False
             Caption = 'Record animation to file'
             OnChange = CheckBox3Change
-            TabOrder = 6
+            TabOrder = 0
           end
           object Label9: TLabel
             Left = 3
@@ -996,7 +996,7 @@ object f_config_time: Tf_config_time
             Top = 140
             Width = 113
             OnChange = Edit5Change
-            TabOrder = 7
+            TabOrder = 3
           end
           object Button9: TButton
             Left = 190
@@ -1005,7 +1005,7 @@ object f_config_time: Tf_config_time
             Width = 85
             Caption = 'Button9'
             OnClick = Button9Click
-            TabOrder = 8
+            TabOrder = 11
           end
           object Label10: TLabel
             Left = 3
@@ -1027,7 +1027,7 @@ object f_config_time: Tf_config_time
             ButtonWidth = 23
             NumGlyphs = 0
             MaxLength = 0
-            TabOrder = 9
+            TabOrder = 10
             OnChange = FileNameEdit1Change
           end
           object UpDown3: TUpDown
@@ -1039,7 +1039,7 @@ object f_config_time: Tf_config_time
             Min = 1
             Max = 60
             Position = 2
-            TabOrder = 10
+            TabOrder = 5
             Wrap = False
             OnClick = UpDown3Click
           end
@@ -1051,7 +1051,7 @@ object f_config_time: Tf_config_time
             Width = 48
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 11
+            TabOrder = 4
             OnChange = fpseditChange
             Value = 2
             MinValue = 1

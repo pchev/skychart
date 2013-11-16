@@ -14,7 +14,7 @@ object pop_scope: Tpop_scope
   OnDestroy = FormDestroy
   ParentFont = True
   Position = poDefaultPosOnly
-  LCLVersion = '1.0.8.0'
+  LCLVersion = '1.0.12.0'
   object GroupBox3: TGroupBox
     Left = 8
     Height = 88
@@ -22,7 +22,7 @@ object pop_scope: Tpop_scope
     Width = 290
     ClientHeight = 84
     ClientWidth = 286
-    TabOrder = 0
+    TabOrder = 3
     object SpeedButton1: TSpeedButton
       Left = 5
       Height = 25
@@ -226,7 +226,7 @@ object pop_scope: Tpop_scope
       Width = 70
       ReadOnly = True
       TabStop = False
-      TabOrder = 2
+      TabOrder = 3
     end
     object alt_y: TEdit
       Left = 200
@@ -235,14 +235,14 @@ object pop_scope: Tpop_scope
       Width = 70
       ReadOnly = True
       TabStop = False
-      TabOrder = 3
+      TabOrder = 4
     end
     object ShowAltAz: TCheckBox
       Left = 8
       Height = 23
       Top = 32
       Width = 23
-      TabOrder = 4
+      TabOrder = 2
     end
     object TrackingBtn: TSpeedButton
       Left = 8
@@ -273,7 +273,7 @@ object pop_scope: Tpop_scope
     Caption = 'Driver Selection'
     ClientHeight = 119
     ClientWidth = 284
-    TabOrder = 3
+    TabOrder = 0
     object SpeedButton3: TSpeedButton
       Left = 182
       Height = 22

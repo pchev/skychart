@@ -18,7 +18,7 @@ object f_obslist: Tf_obslist
     Align = alBottom
     ClientHeight = 66
     ClientWidth = 800
-    TabOrder = 0
+    TabOrder = 2
     object FileNameEdit1: TFileNameEdit
       Left = 8
       Height = 23
@@ -68,7 +68,7 @@ object f_obslist: Tf_obslist
       OnChange = NoFilterListChange
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 4
+      TabOrder = 5
     end
     object UpdAllCoord: TButton
       Left = 240
@@ -77,7 +77,7 @@ object f_obslist: Tf_obslist
       Width = 187
       Caption = 'UpdAllCoord'
       OnClick = UpdAllCoordClick
-      TabOrder = 5
+      TabOrder = 4
     end
   end
   object StringGrid1: TStringGrid
@@ -108,7 +108,7 @@ object f_obslist: Tf_obslist
     Align = alTop
     ClientHeight = 80
     ClientWidth = 800
-    TabOrder = 2
+    TabOrder = 0
     object Edit1: TEdit
       Left = 8
       Height = 23
@@ -123,7 +123,7 @@ object f_obslist: Tf_obslist
       Width = 80
       Caption = '<'
       OnClick = Button5Click
-      TabOrder = 1
+      TabOrder = 2
     end
     object Button6: TButton
       Left = 104
@@ -132,7 +132,7 @@ object f_obslist: Tf_obslist
       Width = 80
       Caption = '>'
       OnClick = Button6Click
-      TabOrder = 2
+      TabOrder = 3
     end
     object ToggleBox1: TToggleBox
       Left = 192
@@ -143,7 +143,7 @@ object f_obslist: Tf_obslist
       Checked = True
       OnClick = ToggleBox1Click
       State = cbChecked
-      TabOrder = 4
+      TabOrder = 1
     end
     object ToggleBox2: TToggleBox
       Left = 192
@@ -152,7 +152,7 @@ object f_obslist: Tf_obslist
       Width = 90
       Caption = 'ToggleBox2'
       OnClick = ToggleBox2Click
-      TabOrder = 5
+      TabOrder = 4
     end
     object PageControl1: TPageControl
       Left = 278
@@ -164,7 +164,7 @@ object f_obslist: Tf_obslist
       Anchors = [akTop, akLeft, akBottom]
       ShowTabs = False
       TabIndex = 0
-      TabOrder = 3
+      TabOrder = 5
       OnChange = PageControl1Change
       object TabSheet1: TTabSheet
         Caption = 'Airmass'
@@ -177,7 +177,7 @@ object f_obslist: Tf_obslist
           Width = 240
           Caption = 'Only objects within airmass limits now'
           OnChange = CheckBox2Change
-          TabOrder = 0
+          TabOrder = 2
         end
         object CheckBox1: TCheckBox
           Left = 16
@@ -213,7 +213,7 @@ object f_obslist: Tf_obslist
             'horizon'
           )
           OnChange = AirmassComboChange
-          TabOrder = 2
+          TabOrder = 0
           Text = '1.5'
         end
         object Label1: TLabel
@@ -233,10 +233,10 @@ object f_obslist: Tf_obslist
           Left = 144
           Height = 23
           Top = 22
-          Width = 294
+          Width = 276
           Caption = 'Only objects within hour angle limits tonight'
           OnChange = CheckBox4Change
-          TabOrder = 0
+          TabOrder = 2
         end
         object Label3: TLabel
           Left = 144
@@ -248,7 +248,7 @@ object f_obslist: Tf_obslist
         end
         object HourAngleCombo: TComboBox
           Left = 240
-          Height = 24
+          Height = 23
           Top = 1
           Width = 72
           ItemHeight = 0
@@ -267,7 +267,7 @@ object f_obslist: Tf_obslist
           Left = 320
           Height = 16
           Top = 3
-          Width = 35
+          Width = 34
           Caption = 'Hours'
           ParentColor = False
         end
@@ -275,10 +275,10 @@ object f_obslist: Tf_obslist
           Left = 144
           Height = 23
           Top = 46
-          Width = 272
+          Width = 256
           Caption = 'Only objects within hour angle limits now'
           OnChange = CheckBox5Change
-          TabOrder = 2
+          TabOrder = 3
         end
         object Panel1: TPanel
           Left = 0
@@ -289,12 +289,12 @@ object f_obslist: Tf_obslist
           BevelOuter = bvLowered
           ClientHeight = 74
           ClientWidth = 141
-          TabOrder = 3
+          TabOrder = 0
           object RadioButton1: TRadioButton
             Left = 2
             Height = 23
             Top = 2
-            Width = 108
+            Width = 104
             Caption = 'RadioButton1'
             Checked = True
             OnClick = RadioGroup1Click
@@ -305,7 +305,7 @@ object f_obslist: Tf_obslist
             Left = 2
             Height = 23
             Top = 26
-            Width = 108
+            Width = 104
             Caption = 'RadioButton2'
             OnClick = RadioGroup1Click
             TabOrder = 1
@@ -314,7 +314,7 @@ object f_obslist: Tf_obslist
             Left = 2
             Height = 23
             Top = 50
-            Width = 108
+            Width = 104
             Caption = 'RadioButton3'
             OnClick = RadioGroup1Click
             TabOrder = 2

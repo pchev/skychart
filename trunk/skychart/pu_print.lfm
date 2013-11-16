@@ -78,7 +78,7 @@ object f_print: Tf_print
     Caption = 'Print'
     Default = True
     ModalResult = 1
-    TabOrder = 0
+    TabOrder = 9
   end
   object Cancel: TButton
     Left = 312
@@ -89,7 +89,7 @@ object f_print: Tf_print
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
-    TabOrder = 1
+    TabOrder = 10
   end
   object Setup: TButton
     Left = 304
@@ -99,7 +99,7 @@ object f_print: Tf_print
     BorderSpacing.InnerBorder = 4
     Caption = 'Setup'
     OnClick = SetupClick
-    TabOrder = 2
+    TabOrder = 0
   end
   object GroupBox1: TGroupBox
     Left = 9
@@ -150,7 +150,7 @@ object f_print: Tf_print
       Width = 40
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 0
+      TabOrder = 1
       OnChange = LongEdit1Change
       Value = 0
       MaxValue = 100
@@ -163,7 +163,7 @@ object f_print: Tf_print
       Width = 40
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 1
+      TabOrder = 2
       OnChange = LongEdit2Change
       Value = 0
       MaxValue = 100
@@ -176,7 +176,7 @@ object f_print: Tf_print
       Width = 40
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 2
+      TabOrder = 3
       OnChange = LongEdit3Change
       Value = 0
       MaxValue = 100
@@ -189,7 +189,7 @@ object f_print: Tf_print
       Width = 40
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 3
+      TabOrder = 4
       OnChange = LongEdit4Change
       Value = 0
       MaxValue = 100
@@ -202,7 +202,7 @@ object f_print: Tf_print
       BorderSpacing.InnerBorder = 4
       Caption = 'No Margin'
       OnClick = Button1Click
-      TabOrder = 4
+      TabOrder = 0
     end
     object Button2: TButton
       Left = 245
@@ -222,7 +222,7 @@ object f_print: Tf_print
     Width = 80
     Caption = 'Help'
     OnClick = Button3Click
-    TabOrder = 6
+    TabOrder = 7
   end
   object Label5: TLabel
     Left = 9
@@ -238,7 +238,7 @@ object f_print: Tf_print
     Top = 64
     Width = 380
     OnChange = Edit1Change
-    TabOrder = 7
+    TabOrder = 2
   end
   object CopyPanel: TPanel
     Left = 9
@@ -247,7 +247,7 @@ object f_print: Tf_print
     Width = 380
     ClientHeight = 30
     ClientWidth = 380
-    TabOrder = 8
+    TabOrder = 6
     object Label6: TLabel
       Left = 7
       Height = 16
@@ -278,7 +278,7 @@ object f_print: Tf_print
     Width = 80
     Caption = 'Preview'
     ModalResult = 6
-    TabOrder = 9
+    TabOrder = 8
   end
   object CheckBox1: TCheckBox
     Left = 112
@@ -288,6 +288,6 @@ object f_print: Tf_print
     Caption = 'Print header and footer'
     Checked = True
     State = cbChecked
-    TabOrder = 10
+    TabOrder = 1
   end
 end

@@ -12,7 +12,7 @@ object f_info: Tf_info
   OnShow = FormShow
   ParentFont = True
   Position = poScreenCenter
-  LCLVersion = '1.0.1.3'
+  LCLVersion = '1.0.12.0'
   object Panel1: TPanel
     Left = 0
     Height = 27
@@ -22,7 +22,7 @@ object f_info: Tf_info
     ClientHeight = 27
     ClientWidth = 718
     FullRepaint = False
-    TabOrder = 0
+    TabOrder = 5
     object Button1: TButton
       Left = 632
       Height = 25
@@ -33,7 +33,7 @@ object f_info: Tf_info
       Cancel = True
       Caption = 'Close'
       OnClick = Button1Click
-      TabOrder = 0
+      TabOrder = 1
     end
     object Button4: TButton
       Left = 544
@@ -43,7 +43,7 @@ object f_info: Tf_info
       Anchors = [akTop, akRight]
       Caption = 'Help'
       OnClick = Button4Click
-      TabOrder = 1
+      TabOrder = 0
     end
   end
   object TitlePanel: TPanel
@@ -53,7 +53,7 @@ object f_info: Tf_info
     Width = 718
     Align = alTop
     Alignment = taLeftJustify
-    TabOrder = 5
+    TabOrder = 0
   end
   object Page3: TPanel
     Left = 110
@@ -221,7 +221,7 @@ object f_info: Tf_info
         BorderSpacing.InnerBorder = 4
         Caption = 'Search'
         OnClick = Button3Click
-        TabOrder = 0
+        TabOrder = 2
       end
       object Edit1: TEdit
         Left = 212
@@ -241,7 +241,7 @@ object f_info: Tf_info
         BorderSpacing.InnerBorder = 4
         Caption = 'Print'
         OnClick = Button6Click
-        TabOrder = 2
+        TabOrder = 3
       end
       object Button7: TButton
         Left = 468
@@ -252,7 +252,7 @@ object f_info: Tf_info
         BorderSpacing.InnerBorder = 4
         Caption = 'Save'
         OnClick = Button7Click
-        TabOrder = 3
+        TabOrder = 4
       end
       object ComboBox1: TComboBox
         Left = 108
@@ -263,7 +263,7 @@ object f_info: Tf_info
         ItemHeight = 0
         OnChange = ComboBox1Change
         Style = csDropDownList
-        TabOrder = 4
+        TabOrder = 0
       end
       object SortLabel: TLabel
         Left = 45

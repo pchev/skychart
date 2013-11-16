@@ -12,7 +12,7 @@ object f_search: Tf_search
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.1.3'
+  LCLVersion = '1.0.12.0'
   object PlanetPanel: TPanel
     Left = 8
     Height = 41
@@ -21,7 +21,7 @@ object f_search: Tf_search
     ClientHeight = 41
     ClientWidth = 416
     FullRepaint = False
-    TabOrder = 7
+    TabOrder = 8
     Visible = False
     object Label2: TLabel
       Left = 13
@@ -48,7 +48,7 @@ object f_search: Tf_search
     Width = 416
     ClientHeight = 41
     ClientWidth = 416
-    TabOrder = 6
+    TabOrder = 4
     object CometFilter: TEdit
       Left = 8
       Height = 23
@@ -82,7 +82,7 @@ object f_search: Tf_search
     Width = 416
     ClientHeight = 41
     ClientWidth = 416
-    TabOrder = 5
+    TabOrder = 6
     object AsteroidFilter: TEdit
       Left = 8
       Height = 23
@@ -117,7 +117,7 @@ object f_search: Tf_search
     ClientHeight = 41
     ClientWidth = 416
     FullRepaint = False
-    TabOrder = 4
+    TabOrder = 3
     Visible = False
     object Label3: TLabel
       Left = 13
@@ -144,7 +144,7 @@ object f_search: Tf_search
     ClientHeight = 41
     ClientWidth = 416
     FullRepaint = False
-    TabOrder = 3
+    TabOrder = 1
     Visible = False
     object Label4: TLabel
       Left = 13
@@ -199,7 +199,7 @@ object f_search: Tf_search
     ClientHeight = 41
     ClientWidth = 416
     FullRepaint = False
-    TabOrder = 1
+    TabOrder = 5
     object Label1: TLabel
       Left = 6
       Height = 16
@@ -216,7 +216,7 @@ object f_search: Tf_search
       ClientHeight = 39
       ClientWidth = 73
       FullRepaint = False
-      TabOrder = 5
+      TabOrder = 2
       Visible = False
       object SpeedButton30: TSpeedButton
         Left = 0
@@ -245,7 +245,7 @@ object f_search: Tf_search
       ClientHeight = 39
       ClientWidth = 73
       FullRepaint = False
-      TabOrder = 4
+      TabOrder = 1
       Visible = False
       object SpeedButton21: TSpeedButton
         Left = 0
@@ -375,7 +375,7 @@ object f_search: Tf_search
       ClientHeight = 39
       ClientWidth = 128
       FullRepaint = False
-      TabOrder = 1
+      TabOrder = 5
       object SpeedButton1: TSpeedButton
         Left = 0
         Height = 18
@@ -502,7 +502,7 @@ object f_search: Tf_search
       ClientHeight = 39
       ClientWidth = 73
       FullRepaint = False
-      TabOrder = 2
+      TabOrder = 4
       object SpeedButton14: TSpeedButton
         Left = 0
         Height = 18
@@ -594,7 +594,7 @@ object f_search: Tf_search
     Caption = 'Find'
     Default = True
     OnClick = Button1Click
-    TabOrder = 8
+    TabOrder = 10
   end
   object Button2: TButton
     Left = 348
@@ -605,7 +605,7 @@ object f_search: Tf_search
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
-    TabOrder = 9
+    TabOrder = 11
   end
   object Button5: TButton
     Left = 152
@@ -614,7 +614,7 @@ object f_search: Tf_search
     Width = 75
     Caption = 'Help'
     OnClick = Button5Click
-    TabOrder = 10
+    TabOrder = 9
   end
   object OnlinePanel: TPanel
     Left = 8
@@ -624,13 +624,13 @@ object f_search: Tf_search
     ClientHeight = 80
     ClientWidth = 416
     FullRepaint = False
-    TabOrder = 11
+    TabOrder = 7
     object OnlineEdit: TEdit
       Left = 256
       Height = 23
       Top = 1
       Width = 151
-      TabOrder = 0
+      TabOrder = 1
       Text = 'ngc4556'
     end
     object ServerList: TComboBox
@@ -641,7 +641,7 @@ object f_search: Tf_search
       ItemHeight = 0
       OnChange = ServerListChange
       Style = csDropDownList
-      TabOrder = 1
+      TabOrder = 0
     end
     object StatusLabel: TLabel
       Left = 19

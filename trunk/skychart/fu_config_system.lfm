@@ -6,8 +6,8 @@ object f_config_system: Tf_config_system
   ClientHeight = 524
   ClientWidth = 500
   TabOrder = 0
-  DesignLeft = 377
-  DesignTop = 219
+  DesignLeft = 366
+  DesignTop = 211
   object MainPanel: TPanel
     Left = 0
     Height = 524
@@ -23,10 +23,10 @@ object f_config_system: Tf_config_system
       Height = 522
       Top = 1
       Width = 498
-      ActivePage = Page5
+      ActivePage = Page1
       Align = alClient
       ShowTabs = False
-      TabIndex = 4
+      TabIndex = 0
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Page1'
@@ -39,52 +39,52 @@ object f_config_system: Tf_config_system
           Width = 452
           ClientHeight = 97
           ClientWidth = 452
-          TabOrder = 5
+          TabOrder = 1
           object dbpass: TEdit
             Left = 348
-            Height = 24
+            Height = 23
             Top = 64
             Width = 100
             EchoMode = emPassword
             OnChange = dbpassChange
             PasswordChar = '*'
-            TabOrder = 0
+            TabOrder = 4
             Text = 'dbpass'
           end
           object dbuser: TEdit
             Left = 125
-            Height = 24
+            Height = 23
             Top = 64
             Width = 100
             OnChange = dbuserChange
-            TabOrder = 1
+            TabOrder = 3
             Text = 'dbuser'
           end
           object dbhost: TEdit
             Left = 250
-            Height = 24
+            Height = 23
             Top = 24
             Width = 65
             OnChange = dbhostChange
-            TabOrder = 2
+            TabOrder = 1
             Text = 'dbhost'
           end
           object dbport: TLongEdit
             Left = 391
-            Height = 24
+            Height = 23
             Top = 24
             Width = 57
-            TabOrder = 3
+            TabOrder = 2
             OnChange = dbportChange
             Value = 0
           end
           object dbname: TEdit
             Left = 80
-            Height = 24
+            Height = 23
             Top = 24
             Width = 65
             OnChange = dbnameChange
-            TabOrder = 4
+            TabOrder = 0
           end
           object Label133: TLabel
             Left = 274
@@ -108,7 +108,7 @@ object f_config_system: Tf_config_system
             Left = 362
             Height = 16
             Top = 28
-            Width = 30
+            Width = 29
             Caption = 'Port:'
             ParentColor = False
           end
@@ -116,7 +116,7 @@ object f_config_system: Tf_config_system
             Left = 178
             Height = 16
             Top = 28
-            Width = 70
+            Width = 67
             Caption = 'Host Name:'
             ParentColor = False
           end
@@ -124,7 +124,7 @@ object f_config_system: Tf_config_system
             Left = 16
             Height = 16
             Top = 28
-            Width = 58
+            Width = 57
             Caption = 'DB Name:'
             ParentColor = False
           end
@@ -132,7 +132,7 @@ object f_config_system: Tf_config_system
             Left = 16
             Height = 16
             Top = 3
-            Width = 93
+            Width = 83
             Caption = 'MysqlBoxLabel'
             ParentColor = False
           end
@@ -144,10 +144,10 @@ object f_config_system: Tf_config_system
           Width = 452
           ClientHeight = 97
           ClientWidth = 452
-          TabOrder = 4
+          TabOrder = 2
           object dbnamesqlite: TEdit
             Left = 125
-            Height = 24
+            Height = 23
             Top = 32
             Width = 281
             Color = clBtnFace
@@ -169,7 +169,7 @@ object f_config_system: Tf_config_system
             Left = 13
             Height = 16
             Top = 12
-            Width = 93
+            Width = 83
             Caption = 'SqliteBoxLabel'
             ParentColor = False
           end
@@ -178,7 +178,7 @@ object f_config_system: Tf_config_system
           Left = 0
           Height = 16
           Top = 0
-          Width = 93
+          Width = 87
           Caption = 'System Setting'
           ParentColor = False
         end
@@ -190,7 +190,7 @@ object f_config_system: Tf_config_system
           Caption = 'Directory'
           ClientHeight = 74
           ClientWidth = 449
-          TabOrder = 2
+          TabOrder = 4
           object Label156: TLabel
             Left = 13
             Height = 15
@@ -211,7 +211,7 @@ object f_config_system: Tf_config_system
           end
           object prgdir: TDirectoryEdit
             Left = 179
-            Height = 24
+            Height = 23
             Top = 3
             Width = 240
             ShowHidden = False
@@ -223,7 +223,7 @@ object f_config_system: Tf_config_system
           end
           object persdir: TDirectoryEdit
             Left = 179
-            Height = 24
+            Height = 23
             Top = 42
             Width = 240
             ShowHidden = False
@@ -241,7 +241,7 @@ object f_config_system: Tf_config_system
           Width = 453
           ClientHeight = 94
           ClientWidth = 449
-          TabOrder = 1
+          TabOrder = 3
           object chkdb: TButton
             Left = 16
             Height = 25
@@ -331,18 +331,18 @@ object f_config_system: Tf_config_system
           Caption = 'Desktop environment'
           ClientHeight = 75
           ClientWidth = 448
-          TabOrder = 3
+          TabOrder = 5
           object Label12: TLabel
             Left = 203
             Height = 16
             Top = 8
-            Width = 129
+            Width = 122
             Caption = 'URL launch command'
             ParentColor = False
           end
           object LinuxDesktopBox: TComboBox
             Left = 20
-            Height = 24
+            Height = 23
             Top = 33
             Width = 102
             AutoCompleteText = [cbactSearchAscending]
@@ -357,7 +357,7 @@ object f_config_system: Tf_config_system
           end
           object LinuxCmd: TEdit
             Left = 204
-            Height = 24
+            Height = 23
             Top = 33
             Width = 194
             OnChange = LinuxCmdChange
@@ -381,32 +381,32 @@ object f_config_system: Tf_config_system
           TabOrder = 0
           object Label54: TLabel
             Left = 16
-            Height = 14
+            Height = 16
             Top = 124
-            Width = 97
+            Width = 111
             Caption = 'Server IP Interface :'
             ParentColor = False
           end
           object Label55: TLabel
             Left = 16
-            Height = 14
+            Height = 16
             Top = 168
-            Width = 73
+            Width = 83
             Caption = 'Server IP Port :'
             ParentColor = False
           end
           object UseIPserver: TCheckBox
             Left = 16
-            Height = 21
+            Height = 23
             Top = 32
-            Width = 111
+            Width = 123
             Caption = 'Use TCP/IP Server'
             OnClick = UseIPserverClick
             TabOrder = 0
           end
           object ipaddr: TEdit
             Left = 144
-            Height = 21
+            Height = 23
             Top = 120
             Width = 100
             OnChange = ipaddrChange
@@ -415,7 +415,7 @@ object f_config_system: Tf_config_system
           end
           object ipport: TEdit
             Left = 144
-            Height = 21
+            Height = 23
             Top = 164
             Width = 100
             OnChange = ipportChange
@@ -424,9 +424,9 @@ object f_config_system: Tf_config_system
           end
           object keepalive: TCheckBox
             Left = 16
-            Height = 21
+            Height = 23
             Top = 72
-            Width = 160
+            Width = 187
             Caption = 'Client Connection Keep Alive'
             OnClick = keepaliveClick
             TabOrder = 1
@@ -491,8 +491,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 450
-              ClientHeight = 324
-              ClientWidth = 446
+              ClientHeight = 328
+              ClientWidth = 450
               TabOrder = 0
               object PanelCmd: TEdit
                 Left = 176
@@ -500,7 +500,7 @@ object f_config_system: Tf_config_system
                 Top = 232
                 Width = 257
                 OnChange = PanelCmdChange
-                TabOrder = 0
+                TabOrder = 6
               end
               object IndiAutostart: TCheckBox
                 Left = 8
@@ -509,7 +509,7 @@ object f_config_system: Tf_config_system
                 Width = 332
                 Caption = 'Automatically start a local server if not already running'
                 OnClick = IndiAutostartClick
-                TabOrder = 2
+                TabOrder = 4
               end
               object IndiServerPort: TEdit
                 Left = 336
@@ -517,7 +517,7 @@ object f_config_system: Tf_config_system
                 Top = 32
                 Width = 97
                 OnChange = IndiServerPortChange
-                TabOrder = 3
+                TabOrder = 1
               end
               object IndiServerHost: TEdit
                 Left = 120
@@ -525,7 +525,7 @@ object f_config_system: Tf_config_system
                 Top = 32
                 Width = 100
                 OnChange = IndiServerHostChange
-                TabOrder = 4
+                TabOrder = 0
               end
               object Label2: TLabel
                 Left = 8
@@ -572,8 +572,8 @@ object f_config_system: Tf_config_system
                 Height = 92
                 Top = 128
                 Width = 444
-                ClientHeight = 88
-                ClientWidth = 440
+                ClientHeight = 92
+                ClientWidth = 444
                 TabOrder = 5
                 Visible = False
                 object Label258: TLabel
@@ -606,7 +606,7 @@ object f_config_system: Tf_config_system
                   Top = 52
                   Width = 100
                   OnChange = IndiPortChange
-                  TabOrder = 1
+                  TabOrder = 2
                 end
                 object Label259: TLabel
                   Left = 248
@@ -623,7 +623,7 @@ object f_config_system: Tf_config_system
                   Width = 100
                   Enabled = False
                   OnChange = IndiDriverChange
-                  TabOrder = 2
+                  TabOrder = 1
                 end
                 object Button5: TButton
                   Left = 249
@@ -641,7 +641,7 @@ object f_config_system: Tf_config_system
                 Top = 64
                 Width = 95
                 OnChange = IndiDevOtherChange
-                TabOrder = 6
+                TabOrder = 3
                 Visible = False
               end
               object IndiDev: TComboBox
@@ -653,7 +653,7 @@ object f_config_system: Tf_config_system
                 ItemHeight = 0
                 OnSelect = IndiDevChange
                 Style = csDropDownList
-                TabOrder = 1
+                TabOrder = 2
               end
             end
           end
@@ -666,8 +666,8 @@ object f_config_system: Tf_config_system
               Height = 330
               Top = 8
               Width = 450
-              ClientHeight = 326
-              ClientWidth = 446
+              ClientHeight = 330
+              ClientWidth = 450
               TabOrder = 0
               object ManualMountType: TRadioGroup
                 Left = 24
@@ -683,7 +683,7 @@ object f_config_system: Tf_config_system
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 2
-                ClientHeight = 24
+                ClientHeight = 37
                 ClientWidth = 357
                 Columns = 2
                 Items.Strings = (
@@ -705,9 +705,9 @@ object f_config_system: Tf_config_system
               end
               object TelescopeManualLabel: TLabel
                 Left = 24
-                Height = 15
+                Height = 16
                 Top = 6
-                Width = 129
+                Width = 128
                 Caption = 'TelescopeManualLabel'
                 ParentColor = False
               end
@@ -729,44 +729,44 @@ object f_config_system: Tf_config_system
                     Height = 161
                     Top = 8
                     Width = 361
-                    ClientHeight = 157
-                    ClientWidth = 357
+                    ClientHeight = 161
+                    ClientWidth = 361
                     TabOrder = 0
                     object Label3: TLabel
                       Left = 16
-                      Height = 15
+                      Height = 16
                       Top = 16
-                      Width = 90
+                      Width = 93
                       Caption = 'Right Ascension'
                       ParentColor = False
                     end
                     object Label4: TLabel
                       Left = 16
-                      Height = 15
+                      Height = 16
                       Top = 93
-                      Width = 63
+                      Width = 66
                       Caption = 'Declination'
                       ParentColor = False
                     end
                     object Label5: TLabel
                       Left = 240
-                      Height = 15
+                      Height = 16
                       Top = 16
-                      Width = 63
+                      Width = 69
                       Caption = 'turns / hour'
                       ParentColor = False
                     end
                     object Label6: TLabel
                       Left = 240
-                      Height = 15
+                      Height = 16
                       Top = 93
-                      Width = 77
+                      Width = 83
                       Caption = 'turns / degree'
                       ParentColor = False
                     end
                     object TurnsRa: TFloatEdit
                       Left = 128
-                      Height = 22
+                      Height = 23
                       Top = 11
                       Width = 81
                       ParentShowHint = False
@@ -778,11 +778,11 @@ object f_config_system: Tf_config_system
                     end
                     object TurnsDec: TFloatEdit
                       Left = 128
-                      Height = 22
+                      Height = 23
                       Top = 88
                       Width = 81
                       ParentShowHint = False
-                      TabOrder = 1
+                      TabOrder = 2
                       OnChange = TurnsDecChange
                       Value = 0
                       MinValue = 0
@@ -792,10 +792,10 @@ object f_config_system: Tf_config_system
                       Left = 128
                       Height = 23
                       Top = 40
-                      Width = 108
+                      Width = 111
                       Caption = 'Revert RA knob'
                       OnClick = TurnsRaChange
-                      TabOrder = 2
+                      TabOrder = 1
                     end
                     object RevertTurnDec: TCheckBox
                       Left = 128
@@ -817,8 +817,8 @@ object f_config_system: Tf_config_system
                     Height = 161
                     Top = 8
                     Width = 361
-                    ClientHeight = 157
-                    ClientWidth = 357
+                    ClientHeight = 161
+                    ClientWidth = 361
                     TabOrder = 0
                     object Label8: TLabel
                       Left = 16
@@ -908,8 +908,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 452
-              ClientHeight = 324
-              ClientWidth = 448
+              ClientHeight = 328
+              ClientWidth = 452
               TabOrder = 0
               object ASCOMLabel: TLabel
                 Left = 21
@@ -932,8 +932,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 452
-              ClientHeight = 324
-              ClientWidth = 448
+              ClientHeight = 328
+              ClientWidth = 452
               TabOrder = 0
               object InterfaceLabel: TLabel
                 Left = 21
@@ -1022,7 +1022,7 @@ object f_config_system: Tf_config_system
           Width = 315
           Caption = 'Ask for confirmation before to jump to coordinates'
           OnChange = CheckBox1Change
-          TabOrder = 0
+          TabOrder = 2
         end
         object CheckBox2: TCheckBox
           Left = 45
@@ -1031,7 +1031,7 @@ object f_config_system: Tf_config_system
           Width = 284
           Caption = 'Ask for confirmation before to load the image'
           OnChange = CheckBox2Change
-          TabOrder = 1
+          TabOrder = 4
         end
         object CheckBox3: TCheckBox
           Left = 45
@@ -1040,7 +1040,7 @@ object f_config_system: Tf_config_system
           Width = 279
           Caption = 'Ask for confirmation before to load the table'
           OnChange = CheckBox3Change
-          TabOrder = 2
+          TabOrder = 7
         end
         object CheckBox4: TCheckBox
           Left = 19
@@ -1049,7 +1049,7 @@ object f_config_system: Tf_config_system
           Width = 277
           Caption = 'Receive coordinates from other applications'
           OnChange = CheckBox4Change
-          TabOrder = 3
+          TabOrder = 1
         end
         object CheckBox5: TCheckBox
           Left = 19
@@ -1058,7 +1058,7 @@ object f_config_system: Tf_config_system
           Width = 274
           Caption = 'Receive FITS images from other applications'
           OnChange = CheckBox5Change
-          TabOrder = 4
+          TabOrder = 3
         end
         object CheckBox6: TCheckBox
           Left = 19
@@ -1067,7 +1067,7 @@ object f_config_system: Tf_config_system
           Width = 285
           Caption = 'Receive VO table data from other applications'
           OnChange = CheckBox6Change
-          TabOrder = 5
+          TabOrder = 6
         end
         object CheckBox7: TCheckBox
           Left = 19
@@ -1076,7 +1076,7 @@ object f_config_system: Tf_config_system
           Width = 361
           Caption = 'Try to auto-connect to a SAMP hub when the program start'
           OnChange = CheckBox7Change
-          TabOrder = 6
+          TabOrder = 0
         end
         object CheckBox8: TCheckBox
           Left = 45
@@ -1085,7 +1085,7 @@ object f_config_system: Tf_config_system
           Width = 207
           Caption = 'Keep tables on exit for later use'
           OnChange = CheckBox8Change
-          TabOrder = 7
+          TabOrder = 8
         end
         object CheckBox9: TCheckBox
           Left = 45
@@ -1094,7 +1094,7 @@ object f_config_system: Tf_config_system
           Width = 212
           Caption = 'Keep images on exit for later use'
           OnChange = CheckBox9Change
-          TabOrder = 8
+          TabOrder = 5
         end
       end
     end
