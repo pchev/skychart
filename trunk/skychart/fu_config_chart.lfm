@@ -23,10 +23,10 @@ object f_config_chart: Tf_config_chart
       Height = 472
       Top = 1
       Width = 503
-      ActivePage = Page6
+      ActivePage = Page1
       Align = alClient
       ShowTabs = False
-      TabIndex = 5
+      TabIndex = 0
       TabOrder = 0
       OnChange = PageControl1PageChanged
       object Page1: TTabSheet
