@@ -742,7 +742,7 @@ end;
 
 procedure Tf_config_chart.SetDefaultApparent;
 begin
-ExpertMode.Enabled:=false;
+ExpertMode.Enabled:=(csc.ProjPole<>1);
 cshr.EquinoxType:=2;
 cshr.EquinoxChart:=rsDate;
 cshr.DefaultJDChart:=jd2000;
