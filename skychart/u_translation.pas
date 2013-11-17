@@ -961,9 +961,9 @@ resourcestring
   rsNebulaeOutli = 'Nebulae outlines';
   rsBinaryIndexe = 'Binary indexed catalog';
   rsTextFileCata = 'Text file catalog';
-  rsHoursMinutes = 'Hours, minutes, secondes';
+  rsHoursMinutes = 'Hours, minutes, seconds';
   rsDecimalHours = 'Decimal hours';
-  rsDegreesMinut = 'Degrees, minutes, secondes';
+  rsDegreesMinut = 'Degrees, minutes, seconds';
   rsDecimalDegre = 'Decimal degrees';
   rsDecimalSouth = 'Decimal south polar distance';
   rsSpline = 'Spline';
@@ -1292,7 +1292,7 @@ resourcestring
   rsVirtualObser = 'Virtual Observatory Catalog';
   rsVOCatalog = 'VO Catalog';
   rsInfo2 = 'Info';
-  rsCatalogsAvai = '%s Catalogs availables.';
+  rsCatalogsAvai = '%s Catalogs available';
   rsVOCatalogBro = 'VO Catalog Browser';
   rsSearchCatalo = 'Search Catalogs';
   rsSelectCatalo = 'Select Catalog';
@@ -1387,16 +1387,14 @@ resourcestring
   rsPlanetVisibi = 'Planet visibility';
   rsInnerSolarSy = 'Inner Solar System';
   rsOuterSolarSy = 'Outer Solar System';
-  rsSolarSystemI = 'Solar System Informations';
+  rsSolarSystemI = 'Solar System Information';
   rsWarningLowRe = 'Warning! Low resolution mode. Use PostScript instead and '
     +'print the result file.';
   rsDisplayTheHo = 'Display the horizon picture';
   rsPictureAngle = 'Picture angle offset';
   rsMillionKm = 'million Km.';
   rsDSOCatalogPi = 'DSO Catalog pictures';
-  rsTheImageDire = 'The image directory contain sub-directories with the same '
-    +'name as the DSO catalog. Each sub-directory contain FITS files with the '
-    +'name of the catalog objects. This images are used to replace the DSO symbole on the map';
+  rsTheImageDire = 'The image directory contains sub-directories with the same names as the DSO catalogs. Each sub-directory contains FITS files with the names of the catalog objects. These images are used to replace the DSO symbols on the map.';
   rsShowASingleP = 'Show a single picture on the map.';
   rsViewHeader = 'View header';
   rsRealskyCDRom = 'Realsky CD-rom cannot be used on a 64 bit system.';
@@ -1405,13 +1403,13 @@ resourcestring
   rsArchiveToDir = 'Archive to directory:';
   rsImageList = 'Image list';
   rsArchiveThisI = 'Archive this image?';
-  rsFilenameWith = 'Filename without path or extention';
+  rsFilenameWith = 'Filename without path or extension';
   rsVisualisatio = 'Visualisation scale';
   rsLinear = 'Linear';
   rsScaled = 'Scaled';
   rsLog = 'Log';
   rsSqrt = 'Sqrt';
-  rsConfirmation = 'Confirmation prompt before to save a file.';
+  rsConfirmation = 'Confirmation prompt before saving a file.';
   rsCount = 'Count';
   rsScanArchives = 'Scan archives';
   rsMaximumNumbe = 'Maximum number of image to show simultaneously';

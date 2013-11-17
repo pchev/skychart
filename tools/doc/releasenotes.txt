@@ -19,6 +19,7 @@ New functions:
   * New option to mask the chart outside of the wider eyepiece.
   * New header/footer in the printout.
   * Capability to define more than 10 eyepieces or ccd fields.
+  * More options to select column of VO catalog
 
 Corrections:
   * Better picture/map transparency.

@@ -130,7 +130,7 @@ wkhtmltopdf --quiet --dpi 96 --enable-toc-back-links  --enable-external-links --
 gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.7 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=../doc_$lang.pdf tmp.pdf
 
 # cleanup
-rm fl.txt toc.xsl $lang/documentation/00_title.html
+rm tmp.pdf fl.txt toc.xsl $lang/documentation/00_title.html
 
 # end main loop
 done

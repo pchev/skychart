@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-14 17:57+0000\n"
-"PO-Revision-Date: 2013-11-14 18:02+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2013-11-17 11:48+0000\n"
+"PO-Revision-Date: 2013-11-17 13:03+0000\n"
+"Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-14 18:13+0000\n"
-"X-Generator: Launchpad (build 16820)\n"
+"X-Launchpad-Export-Date: 2013-11-17 14:52+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -645,7 +645,7 @@ msgid "Catalog long name"
 msgstr "Catalogus lange benaming"
 
 #: u_translation.rscatalogsavai
-msgid "%s Catalogs availables."
+msgid "%s Catalogs available"
 msgstr "%s Catalogi beschikbaar."
 
 #: u_translation.rscatalogshort
@@ -929,7 +929,7 @@ msgid "Configure the program"
 msgstr "Configureer het programma"
 
 #: u_translation.rsconfirmation
-msgid "Confirmation prompt before to save a file."
+msgid "Confirmation prompt before saving a file."
 msgstr "Bevestig alvorens weg te schrijven naar bestand."
 
 #: u_translation.rsconfirmfiled
@@ -1182,7 +1182,7 @@ msgstr "Data onderhoud"
 
 #: u_translation.rsdatapreview
 msgid "Data preview"
-msgstr "Data preview"
+msgstr "Gegevens voorbeeld"
 
 #: u_translation.rsdatastartonl
 msgid "Data starts on line %s"
@@ -1353,7 +1353,7 @@ msgid "degrees"
 msgstr "graden"
 
 #: u_translation.rsdegreesminut
-msgid "Degrees, minutes, secondes"
+msgid "Degrees, minutes, seconds"
 msgstr "Graden, minuten, seconden"
 
 #: u_translation.rsdelaybetween
@@ -2014,7 +2014,7 @@ msgid "File"
 msgstr "Bestand"
 
 #: u_translation.rsfilenamewith
-msgid "Filename without path or extention"
+msgid "Filename without path or extension"
 msgstr "Bestandsnaam zonder pad of extensie"
 
 #: u_translation.rsfilenotfound
@@ -2115,7 +2115,7 @@ msgstr "Selecteer voor een grote catalogus altijd 'binair geïndiceerde catalogu
 
 #: u_translation.rsforcecolor
 msgid "Force color"
-msgstr "Forceer kleur"
+msgstr "Verander kleur"
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
@@ -2410,7 +2410,7 @@ msgid "hours"
 msgstr "uren"
 
 #: u_translation.rshoursminutes
-msgid "Hours, minutes, secondes"
+msgid "Hours, minutes, seconds"
 msgstr "uren, minuten, seconden"
 
 #: u_translation.rshttpproxy
@@ -2471,7 +2471,7 @@ msgstr "Inclinatie="
 
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
-msgstr "Inclusief dag tijd overgang"
+msgstr "inclusief daglicht passages"
 
 #: u_translation.rsincludeiridi
 msgid "Include Iridium flare"
@@ -3111,7 +3111,7 @@ msgstr "Min."
 
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
-msgstr "Minimale altitude"
+msgstr "Minimale hoogte"
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -4907,7 +4907,7 @@ msgstr "Toon eigen gedefinieerde objecten"
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
-msgstr "Toon virtuele observatorium gegevens"
+msgstr "Toon Virtual Observatory gegevens"
 
 #: u_translation.rssideral
 msgid "Sidereal"
@@ -5002,7 +5002,7 @@ msgid "Solar System"
 msgstr "Zonnestelsel"
 
 #: u_translation.rssolarsystemi
-msgid "Solar System Informations"
+msgid "Solar System Information"
 msgstr "Zonnestelsel informatie"
 
 #: u_translation.rssolarsystemo
@@ -5310,7 +5310,7 @@ msgid "Text size"
 msgstr "Tekst grootte"
 
 #: u_translation.rstheimagedire
-msgid "The image directory contain sub-directories with the same name as the DSO catalog. Each sub-directory contain FITS files with the name of the catalog objects. This images are used to replace the DSO symbole on the map"
+msgid "The image directory contains sub-directories with the same names as the DSO catalogs. Each sub-directory contains FITS files with the names of the catalog objects. These images are used to replace the DSO symbols on the map."
 msgstr "De afbeeldingen-map bevat sub-mappen met dezelfde naam als de DSO catalogus. Iedere sub-map bevat FITS-bestanden met de naam van de catalogus-objecten. Deze afbeeldingen worden gebruikt om de DSO-symbolen te vervangen op de kaart."
 
 #: u_translation.rstheinterface
@@ -5751,7 +5751,7 @@ msgstr "Virtuele HandPad voor Scope.exe "
 
 #: u_translation.rsvirtualobser
 msgid "Virtual Observatory Catalog"
-msgstr "Virtueel Observatorium catalogus"
+msgstr "Virtual Observatory Catalogus"
 
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
@@ -5767,7 +5767,7 @@ msgstr "Visuele magnitude"
 
 #: u_translation.rsvocatalog
 msgid "VO Catalog"
-msgstr "VO Catalogus"
+msgstr "VO Catalogi"
 
 #: u_translation.rsvocatalogbro
 msgid "VO Catalog Browser"
