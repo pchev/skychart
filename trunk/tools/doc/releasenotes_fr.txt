@@ -19,6 +19,7 @@ Nouvelles fonctions:
   * Nouvelle option pour masquer la carte à l'extérieur de l'oculaire le plus large.
   * Nouvelle en-tête et pied de page pour l'impression.
   * Possibilité de définir plus de 10 oculaires ou champs CCD.
+  * Plus d'options pour choisir les colonnes des catalogues VO.
 
 Corrections:
   * Meilleure transparence image/carte.

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-14 17:57+0000\n"
-"PO-Revision-Date: 2013-11-14 18:02+0000\n"
+"POT-Creation-Date: 2013-11-17 11:48+0000\n"
+"PO-Revision-Date: 2013-11-17 12:00+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-14 18:12+0000\n"
-"X-Generator: Launchpad (build 16820)\n"
+"X-Launchpad-Export-Date: 2013-11-17 14:52+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -646,7 +646,7 @@ msgid "Catalog long name"
 msgstr "Nom long du catalogue"
 
 #: u_translation.rscatalogsavai
-msgid "%s Catalogs availables."
+msgid "%s Catalogs available"
 msgstr "%s catalogues disponibles"
 
 #: u_translation.rscatalogshort
@@ -931,7 +931,7 @@ msgid "Configure the program"
 msgstr "Configuration du programme"
 
 #: u_translation.rsconfirmation
-msgid "Confirmation prompt before to save a file."
+msgid "Confirmation prompt before saving a file."
 msgstr "Demande de confirmation avant d'enregistrer l'image."
 
 #: u_translation.rsconfirmfiled
@@ -1356,7 +1356,7 @@ msgid "degrees"
 msgstr "degrés"
 
 #: u_translation.rsdegreesminut
-msgid "Degrees, minutes, secondes"
+msgid "Degrees, minutes, seconds"
 msgstr "Degré, minute, seconde"
 
 #: u_translation.rsdelaybetween
@@ -2017,7 +2017,7 @@ msgid "File"
 msgstr "Fichier"
 
 #: u_translation.rsfilenamewith
-msgid "Filename without path or extention"
+msgid "Filename without path or extension"
 msgstr "Nom du fichier, sans le répertoire ni l'extension"
 
 #: u_translation.rsfilenotfound
@@ -2414,7 +2414,7 @@ msgid "hours"
 msgstr "heures"
 
 #: u_translation.rshoursminutes
-msgid "Hours, minutes, secondes"
+msgid "Hours, minutes, seconds"
 msgstr "Heure, minute, seconde"
 
 #: u_translation.rshttpproxy
@@ -5007,7 +5007,7 @@ msgid "Solar System"
 msgstr "Système solaire"
 
 #: u_translation.rssolarsystemi
-msgid "Solar System Informations"
+msgid "Solar System Information"
 msgstr "Information sur le système solaire"
 
 #: u_translation.rssolarsystemo
@@ -5315,7 +5315,7 @@ msgid "Text size"
 msgstr "Taille du texte"
 
 #: u_translation.rstheimagedire
-msgid "The image directory contain sub-directories with the same name as the DSO catalog. Each sub-directory contain FITS files with the name of the catalog objects. This images are used to replace the DSO symbole on the map"
+msgid "The image directory contains sub-directories with the same names as the DSO catalogs. Each sub-directory contains FITS files with the names of the catalog objects. These images are used to replace the DSO symbols on the map."
 msgstr "Le répertoire contient des sous-répertoires avec le même nom que les catalogues de nébuleuses. Chaque sous-répertoire contient les fichiers FITS avec le nom des objets du catalogue. Ces images sont utilisées pour remplacer le symbole sur la carte."
 
 #: u_translation.rstheinterface

@@ -3795,7 +3795,7 @@ msgid "Text file catalog"
 msgstr ""
 
 #: u_translation:rshoursminutes
-msgid "Hours, minutes, secondes"
+msgid "Hours, minutes, seconds"
 msgstr ""
 
 #: u_translation:rsdecimalhours
@@ -3803,7 +3803,7 @@ msgid "Decimal hours"
 msgstr ""
 
 #: u_translation:rsdegreesminut
-msgid "Degrees, minutes, secondes"
+msgid "Degrees, minutes, seconds"
 msgstr ""
 
 #: u_translation:rsdecimaldegre
@@ -5087,7 +5087,7 @@ msgid "Info"
 msgstr ""
 
 #: u_translation:rscatalogsavai
-msgid "%s Catalogs availables."
+msgid "%s Catalogs available"
 msgstr ""
 
 #: u_translation:rsvocatalogbro
@@ -5443,7 +5443,7 @@ msgid "Outer Solar System"
 msgstr ""
 
 #: u_translation:rssolarsystemi
-msgid "Solar System Informations"
+msgid "Solar System Information"
 msgstr ""
 
 #: u_translation:rswarninglowre
@@ -5467,7 +5467,7 @@ msgid "DSO Catalog pictures"
 msgstr ""
 
 #: u_translation:rstheimagedire
-msgid "The image directory contain sub-directories with the same name as the DSO catalog. Each sub-directory contain FITS files with the name of the catalog objects. This images are used to replace the DSO symbole on the map"
+msgid "The image directory contains sub-directories with the same names as the DSO catalogs. Each sub-directory contains FITS files with the names of the catalog objects. These images are used to replace the DSO symbols on the map."
 msgstr ""
 
 #: u_translation:rsshowasinglep
@@ -5503,7 +5503,7 @@ msgid "Archive this image?"
 msgstr ""
 
 #: u_translation:rsfilenamewith
-msgid "Filename without path or extention"
+msgid "Filename without path or extension"
 msgstr ""
 
 #: u_translation:rsvisualisatio
@@ -5527,7 +5527,7 @@ msgid "Sqrt"
 msgstr ""
 
 #: u_translation:rsconfirmation
-msgid "Confirmation prompt before to save a file."
+msgid "Confirmation prompt before saving a file."
 msgstr ""
 
 #: u_translation:rscount

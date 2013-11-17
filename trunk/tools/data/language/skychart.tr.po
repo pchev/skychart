@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-11-14 17:57+0000\n"
+"POT-Creation-Date: 2013-11-17 11:48+0000\n"
 "PO-Revision-Date: 2013-11-14 18:08+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-14 18:12+0000\n"
-"X-Generator: Launchpad (build 16820)\n"
+"X-Launchpad-Export-Date: 2013-11-17 14:52+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -645,7 +645,7 @@ msgid "Catalog long name"
 msgstr ""
 
 #: u_translation.rscatalogsavai
-msgid "%s Catalogs availables."
+msgid "%s Catalogs available"
 msgstr ""
 
 #: u_translation.rscatalogshort
@@ -929,7 +929,7 @@ msgid "Configure the program"
 msgstr ""
 
 #: u_translation.rsconfirmation
-msgid "Confirmation prompt before to save a file."
+msgid "Confirmation prompt before saving a file."
 msgstr ""
 
 #: u_translation.rsconfirmfiled
@@ -1353,7 +1353,7 @@ msgid "degrees"
 msgstr ""
 
 #: u_translation.rsdegreesminut
-msgid "Degrees, minutes, secondes"
+msgid "Degrees, minutes, seconds"
 msgstr ""
 
 #: u_translation.rsdelaybetween
@@ -2013,7 +2013,7 @@ msgid "File"
 msgstr ""
 
 #: u_translation.rsfilenamewith
-msgid "Filename without path or extention"
+msgid "Filename without path or extension"
 msgstr ""
 
 #: u_translation.rsfilenotfound
@@ -2409,7 +2409,7 @@ msgid "hours"
 msgstr ""
 
 #: u_translation.rshoursminutes
-msgid "Hours, minutes, secondes"
+msgid "Hours, minutes, seconds"
 msgstr ""
 
 #: u_translation.rshttpproxy
@@ -5001,7 +5001,7 @@ msgid "Solar System"
 msgstr ""
 
 #: u_translation.rssolarsystemi
-msgid "Solar System Informations"
+msgid "Solar System Information"
 msgstr ""
 
 #: u_translation.rssolarsystemo
@@ -5309,7 +5309,7 @@ msgid "Text size"
 msgstr ""
 
 #: u_translation.rstheimagedire
-msgid "The image directory contain sub-directories with the same name as the DSO catalog. Each sub-directory contain FITS files with the name of the catalog objects. This images are used to replace the DSO symbole on the map"
+msgid "The image directory contains sub-directories with the same names as the DSO catalogs. Each sub-directory contains FITS files with the names of the catalog objects. These images are used to replace the DSO symbols on the map."
 msgstr ""
 
 #: u_translation.rstheinterface

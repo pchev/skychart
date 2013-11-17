@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-14 17:57+0000\n"
-"PO-Revision-Date: 2013-11-14 18:00+0000\n"
+"POT-Creation-Date: 2013-11-17 11:48+0000\n"
+"PO-Revision-Date: 2013-11-17 14:26+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-14 18:13+0000\n"
-"X-Generator: Launchpad (build 16820)\n"
+"X-Launchpad-Export-Date: 2013-11-17 14:52+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -646,7 +646,7 @@ msgid "Catalog long name"
 msgstr "Nom llarg del catàleg"
 
 #: u_translation.rscatalogsavai
-msgid "%s Catalogs availables."
+msgid "%s Catalogs available"
 msgstr "%s Catàlegs disponibles"
 
 #: u_translation.rscatalogshort
@@ -932,7 +932,7 @@ msgid "Configure the program"
 msgstr "Configuració del programa"
 
 #: u_translation.rsconfirmation
-msgid "Confirmation prompt before to save a file."
+msgid "Confirmation prompt before saving a file."
 msgstr "Avís de confirmació per desar un fitxer"
 
 #: u_translation.rsconfirmfiled
@@ -1357,7 +1357,7 @@ msgid "degrees"
 msgstr "graus"
 
 #: u_translation.rsdegreesminut
-msgid "Degrees, minutes, secondes"
+msgid "Degrees, minutes, seconds"
 msgstr "Graus, minuts, segons"
 
 #: u_translation.rsdelaybetween
@@ -2018,7 +2018,7 @@ msgid "File"
 msgstr "Fitxer"
 
 #: u_translation.rsfilenamewith
-msgid "Filename without path or extention"
+msgid "Filename without path or extension"
 msgstr "Nom de fitxer sense camí o extensió"
 
 #: u_translation.rsfilenotfound
@@ -2414,7 +2414,7 @@ msgid "hours"
 msgstr "hores"
 
 #: u_translation.rshoursminutes
-msgid "Hours, minutes, secondes"
+msgid "Hours, minutes, seconds"
 msgstr "Hores, minuts, segons"
 
 #: u_translation.rshttpproxy
@@ -5006,7 +5006,7 @@ msgid "Solar System"
 msgstr "Sistema solar"
 
 #: u_translation.rssolarsystemi
-msgid "Solar System Informations"
+msgid "Solar System Information"
 msgstr "Informacions del Sistema Solar"
 
 #: u_translation.rssolarsystemo
@@ -5314,7 +5314,7 @@ msgid "Text size"
 msgstr "Mida del text"
 
 #: u_translation.rstheimagedire
-msgid "The image directory contain sub-directories with the same name as the DSO catalog. Each sub-directory contain FITS files with the name of the catalog objects. This images are used to replace the DSO symbole on the map"
+msgid "The image directory contains sub-directories with the same names as the DSO catalogs. Each sub-directory contains FITS files with the names of the catalog objects. These images are used to replace the DSO symbols on the map."
 msgstr "El directori d'imatges conté subdirectoris amb el mateix nom que el catàleg DSO. Cada subdirectori conté fitxers FITS amb el nom dels objectes del catàleg. Aquestes imatges s'usen per substituir el símbol DSO en l mapa."
 
 #: u_translation.rstheinterface
