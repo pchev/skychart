@@ -1,21 +1,10 @@
-Export HTML Skychart wiki from a static copy of wiki at http://www.ap-i.net/static/skychart
-It is comfigured with the include .htaccess who add do=export_html option.
-This copy is updated daily by copy of the Dokuwiki data directory
-The data directory is available at http://www.ap-i.net/static/skychart/data/pages/ and http://www.ap-i.net/static/skychart/data/media/
+Export HTML Skychart wiki from the wiki at http://www.ap-i.net/skychart
+The getdoc.sh script add the do=export_xhtml option using the wget --header option.
+The copydoc.sh script copy the data ready for use as the program documentation, it replace the css by the print.css from the dokuwiki default template.
 
-- export content
-----------------
+To make the full documentation (html+pdf) do the following:
 
-erase the old doc_en, doc_fr, ...
-
-cd /home/cdc/src/tools/wiki_doc
-rm -rf doc_*
-
-Update getdoc.sh for new languages
-
-./getdoc.sh
-
-Make the zip for distribution
-
-./zipdoc.sh
-
+cd tools
+make refresh_doc
+cd doc
+./docpdf.sh
