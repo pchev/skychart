@@ -62,7 +62,11 @@ lastv='Last version is available from the wiki at'
 l='Users documentation'
 tocl='Table of Content'
 if [[ $lang = 'ca' ]]; then 
-  l='Catalan documentation' 
+  t='Cartes del Cel'
+  l='Documentació en català'
+  dt='Editat: '$(LC_ALL=ca_ES.utf8 date '+%d %B %Y')
+  lastv='La darrera versió està disponible des del wiki a'
+  tocl='Taula de continguts'
 fi
 if [[ $lang = 'en' ]]; then 
   l='English documentation' 
@@ -97,6 +101,8 @@ if [[ $lang = 'uk' ]]; then
   l='Ukrainian documentation'
 fi
 
+cp ../cdctitle.png  $lang/documentation/
+
 cat > $lang/documentation/00_title.html << EOF
 <!DOCTYPE html>
 <html>
@@ -114,6 +120,11 @@ $dt
 <br/><br/>
 $lastv <br/>
 <a href="http://www.ap-i.net/skychart/$lang/documentation/start">http://www.ap-i.net/skychart/$lang/documentation/start</a>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+<img src="cdctitle.png" width="100%">
 </center>
 </body>
 </html>
@@ -127,10 +138,10 @@ sed -i "s/Table of Content/$tocl/g" toc.xsl
 wkhtmltopdf --quiet --dpi 96 --enable-toc-back-links  --enable-external-links --enable-internal-links --footer-right '[page]' $fl toc --xsl-style-sheet toc.xsl  tmp.pdf
 
 # fix for anchor bug : http://code.google.com/p/wkhtmltopdf/issues/detail?id=463
-gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.7 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=../doc_$lang.pdf tmp.pdf
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.7 -dColorImageResolution=300 -dGrayImageResolution=300 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=../doc_$lang.pdf tmp.pdf
 
 # cleanup
-rm tmp.pdf fl.txt toc.xsl $lang/documentation/00_title.html
+rm tmp.pdf fl.txt toc.xsl $lang/documentation/00_title.html $lang/documentation/cdctitle.png
 
 # end main loop
 done
