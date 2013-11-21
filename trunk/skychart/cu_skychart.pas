@@ -708,6 +708,7 @@ cfgsc.RefractionOffset:=0;
 // clipping limit
 Fplot.cfgchart.hw:=Fplot.cfgchart.width div 2;
 Fplot.cfgchart.hh:=Fplot.cfgchart.height div 2;
+Fplot.cfgchart.cliparea:=max(Fplot.cfgchart.hw,Fplot.cfgchart.hh);
 case trunc(rad2deg*cfgsc.fov) of
   0..1: outr:=100;
   2..5: outr:=20;

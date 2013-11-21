@@ -1012,7 +1012,7 @@ type
   Tconf_chart = class(TObject)    // chart window setting
   public
     onprinter: boolean;
-    Width, Height, drawpen, drawsize, hw, hh: integer;
+    Width, Height, drawpen, drawsize, hw, hh, cliparea: integer;
     fontscale: single;
     min_ma, max_catalog_mag: double;
     constructor Create;
@@ -2356,6 +2356,7 @@ begin
   Height := Source.Height;
   drawpen := Source.drawpen;
   drawsize := Source.drawsize;
+  cliparea:=Source.cliparea;
   fontscale := Source.fontscale;
   hw := Source.hw;
   hh := Source.hh;

@@ -171,7 +171,7 @@ type
 
   end;
 
-  const cliparea = 10;
+//  const cliparea = 10;
   
 Implementation
 
@@ -2545,10 +2545,10 @@ var
     end;
   end;
 begin
-  xL:=-cliparea;
-  xR:=cfgchart.Width+cliparea;
-  yU:=-cliparea;
-  yD:=cfgchart.Height+cliparea;
+  xL:=-cfgchart.cliparea;
+  xR:=cfgchart.Width+cfgchart.cliparea;
+  yU:=-cfgchart.cliparea;
+  yD:=cfgchart.Height+cfgchart.cliparea;
   GetSide(x1,y1,side1);
   GetSide(x2,y2,side2);
   result:=(side1*side2=[]);
