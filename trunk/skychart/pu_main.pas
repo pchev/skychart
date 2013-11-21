@@ -829,6 +829,7 @@ type
     procedure Init;
     Procedure InitDS2000;
     function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
+    procedure RecomputeAsteroid;
     procedure ChartMove(Sender: TObject);
     procedure ImageSetup(Sender: TObject);
     procedure GetActiveChart(var active_chart: string);
@@ -2881,9 +2882,22 @@ procedure Tf_main.ShowPlanetsExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowPlanet:=not sc.cfgsc.ShowPlanet;
-if VerboseMsg then
- WriteTrace('ShowPlanetsExecute');
+   if VerboseMsg then WriteTrace('ShowPlanetsExecute');
    Refresh;
+end;
+end;
+
+procedure Tf_main.RecomputeAsteroid;
+begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+  f_info.setpage(2);
+  f_info.show;
+  f_info.ProgressMemo.lines.add(rsComputeAster);
+  if Planet.PrepareAsteroid(sc.cfgsc.curjdtt, f_info.ProgressMemo.lines) then begin
+     sc.cfgsc.ShowAsteroid:=true;
+     Refresh;
+  end;
+  f_info.hide;
 end;
 end;
 
@@ -2893,18 +2907,10 @@ begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowAsteroid:=not sc.cfgsc.ShowAsteroid;
    showast:=sc.cfgsc.ShowAsteroid;
-if VerboseMsg then
- WriteTrace('ShowAsteroidsExecute');
+   if VerboseMsg then WriteTrace('ShowAsteroidsExecute');
    Refresh;
-   if showast<>sc.cfgsc.ShowAsteroid then begin
-      f_info.setpage(2);
-      f_info.show;
-      f_info.ProgressMemo.lines.add(rsComputeAster);
-      if Planet.PrepareAsteroid(sc.cfgsc.curjdtt, f_info.ProgressMemo.lines) then begin
-         sc.cfgsc.ShowAsteroid:=true;
-         Refresh;
-      end;
-      f_info.hide;
+   if showast and (showast<>sc.cfgsc.ShowAsteroid) then begin
+      RecomputeAsteroid;
    end;
 end;
 end;
@@ -2915,8 +2921,7 @@ begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowComet:=not sc.cfgsc.ShowComet;
    showcom:=sc.cfgsc.ShowComet;
-if VerboseMsg then
- WriteTrace('ShowCometsExecute');
+   if VerboseMsg then WriteTrace('ShowCometsExecute');
    Refresh;
    if showcom<>sc.cfgsc.ShowComet then ShowError(rsErrorPleaseC2);
 end;
@@ -4064,9 +4069,10 @@ end;
 
 procedure Tf_main.activateconfig(cmain:Tconf_main; csc:Tconf_skychart; ccat:Tconf_catalog; cshr:Tconf_shared; cplot:Tconf_plot; cdss:Tconf_dss; applyall:boolean );
 var i:integer;
-  dbchange,themechange,langchange,starchange: Boolean;
+  dbchange,themechange,langchange,starchange,showast: Boolean;
 begin
     dbchange:=false; themechange:=false; langchange:=false; starchange:=false;
+    showast:=csc.ShowAsteroid;
     if cmain<>nil then begin
       if (cfgm.language<>cmain.language) then langchange:=true;
     end;
@@ -4152,6 +4158,10 @@ begin
     end;
     cfgm.NewBackgroundImage:=false;
     RefreshAllChild(cfgm.updall);
+    if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do
+      if showast and (showast<>sc.cfgsc.ShowAsteroid) then begin
+         RecomputeAsteroid;
+      end;
     Autorefresh.enabled:=false;
     Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
     AutoRefreshLock:=false;
