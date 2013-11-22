@@ -1271,9 +1271,17 @@ var i: integer;
 begin
 firstuse:=false;
 try
-if VerboseMsg then
- WriteTrace('Enter Tf_main.Init');
+ if VerboseMsg then WriteTrace('Enter Tf_main.Init');
  // some initialisation that need to be done after all the forms are created.
+ if VerboseMsg then WriteTrace('SetDefault');
+ SetDefault;
+ if VerboseMsg then WriteTrace('ReadDefault');
+ ReadDefault;
+ if (def_cfgsc.ObsTZ='')and FileExists(slash(appdir)+'skychart_valdereuil.ini') then begin
+   CopyFile(SysToUTF8(slash(appdir)+'skychart_valdereuil.ini'),SysToUTF8(Configfile));
+   ReadDefault;
+ end;
+ if VerboseMsg then WriteTrace('Create forms');
  planet:=Tplanet.Create(self);
  Fits:=TFits.Create(self);
  f_info.onGetTCPinfo:=GetTCPInfo;
@@ -1288,22 +1296,10 @@ if VerboseMsg then
  f_obslist.onGetObjectCoord:=GetObjectCoord;
  f_obslist.onObjLabelChange:=ObsListChange;
  f_obslist.FileNameEdit1.FileName:=SysToUTF8(slash(HomeDir)+f_obslist.DefaultList);
-if VerboseMsg then
- WriteTrace('SetDefault');
- SetDefault;
-if VerboseMsg then
- WriteTrace('ReadDefault');
- ReadDefault;
- if (def_cfgsc.ObsTZ='')and FileExists(slash(appdir)+'skychart_valdereuil.ini') then begin
-   CopyFile(SysToUTF8(slash(appdir)+'skychart_valdereuil.ini'),SysToUTF8(Configfile));
-   ReadDefault;
- end;
- if VerboseMsg then
- WriteTrace('InitDS2000');
+ if VerboseMsg then WriteTrace('InitDS2000');
  InitDS2000;
  // must read db configuration before to create this one!
-if VerboseMsg then
- WriteTrace('Create DB');
+ if VerboseMsg then WriteTrace('Create DB');
  cdcdb:=TCDCdb.Create(self);
  cdcdb.onInitializeDB:=InitializeDB;
  planet.cdb:=cdcdb;

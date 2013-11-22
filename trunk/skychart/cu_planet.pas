@@ -26,10 +26,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  uDE,
-  cu_plansat,
+  passql, pasmysql, passqlite,uDE, cu_plansat,
   u_translation, cu_database, u_constant, u_util, u_projection,
-  Classes, Sysutils, passql, pasmysql, passqlite, Forms, Math;
+  Classes, Sysutils, Forms, Math;
 
 type Tastelem = record
   Oaa,Obb,Occ,Oa,Ob,Oc,Ot,Oq,Oe,Oomi : Double;     (* parametres de l'orbite   *)

@@ -960,11 +960,25 @@ begin
          // try version specific library, some distribution do not provide the generic link
          {$IFDEF MYSQL4}
          if hDLL = 0 then
+            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.26')){$ELSE}LoadLibrary(DLL+'.26'){$ENDIF}; // future
+         if hDLL = 0 then
+            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.25')){$ELSE}LoadLibrary(DLL+'.25'){$ENDIF}; // future
+         if hDLL = 0 then
+            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.24')){$ELSE}LoadLibrary(DLL+'.24'){$ENDIF}; // future
+         if hDLL = 0 then
+            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.23')){$ELSE}LoadLibrary(DLL+'.23'){$ENDIF}; // future
+         if hDLL = 0 then
+            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.22')){$ELSE}LoadLibrary(DLL+'.22'){$ENDIF}; // future
+         if hDLL = 0 then
+            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.21')){$ELSE}LoadLibrary(DLL+'.21'){$ENDIF}; // future
+         if hDLL = 0 then
+            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.20')){$ELSE}LoadLibrary(DLL+'.20'){$ENDIF}; // future
+         if hDLL = 0 then
             hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.19')){$ELSE}LoadLibrary(DLL+'.19'){$ENDIF}; // future
          if hDLL = 0 then
-            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.18')){$ELSE}LoadLibrary(DLL+'.18'){$ENDIF}; // future
+            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.18')){$ELSE}LoadLibrary(DLL+'.18'){$ENDIF}; // 5.5
          if hDLL = 0 then
-            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.17')){$ELSE}LoadLibrary(DLL+'.17'){$ENDIF}; // future
+            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.17')){$ELSE}LoadLibrary(DLL+'.17'){$ENDIF}; // 5.?
          if hDLL = 0 then
             hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.16')){$ELSE}LoadLibrary(DLL+'.16'){$ENDIF}; // 5.1
          if hDLL = 0 then
