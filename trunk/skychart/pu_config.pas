@@ -120,7 +120,7 @@ type
     procedure LoadMPCSample(Sender: TObject);
     procedure SysDBChange(Sender: TObject);
     procedure SysSaveAndRestart(Sender: TObject);
-    function  SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
+    function  SolSysPrepareAsteroid(jd1,jd2,step:double; msg:Tstrings):boolean;
     procedure TimeGetTwilight(jd0: double; out ht: double);
     procedure ShowPage(i,j:Integer);
     procedure ActivateChanges;
@@ -427,9 +427,9 @@ begin
  if Assigned(FSaveAndRestart) then FSaveAndRestart(self);
 end;
 
-function Tf_config.SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
+function Tf_config.SolSysPrepareAsteroid(jd1,jd2,step:double; msg:Tstrings):boolean;
 begin
- if assigned(FPrepareAsteroid) then result:=FPrepareAsteroid(jdt,msg)
+ if assigned(FPrepareAsteroid) then result:=FPrepareAsteroid(jd1,jd2,step,msg)
    else result:=false;
 end;
 

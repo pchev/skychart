@@ -49,12 +49,13 @@ type
     db1,db2 : TSqlDB;
     LockPla,LockDB : boolean;
     SolT0,XSol,YSol,ZSol : double;
-    jdnew,jdchart,com_limitmag:double;
+    AstSol: array of array[0..3] of double;
+    jdnew,jdaststart,jdastend,jdaststep,jdchart,com_limitmag:double;
     ast_daypos,com_daypos: string;
     Feph_method: string;
     smsg:Tstrings;
     SolAstrometric, SolBarycenter : boolean;
-    CurrentStep,CurrentPlanet,n_com,n_ast : integer;
+    CurrentStep,CurrentPlanet,n_com,n_ast,jdastnstep : integer;
     CurrentAstStep,CurrentAsteroid : integer;
     CurrentComStep,CurrentComet : integer;
     astelem : Tastelem;
@@ -102,7 +103,7 @@ type
      Procedure NewAstDayCallback(Sender:TObject; Row:TResultRow);
      function  FindAsteroid(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string; trunc:boolean=true):boolean;
      function  FindAsteroidName(astname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
-     function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
+     function PrepareAsteroid(jd1,jd2,step:double; msg:Tstrings):boolean;
      Procedure PrepareAsteroidCallback(Sender:TObject; Row:TResultRow);
      Function NewComDay(newjd,limitmag:double; cfgsc: Tconf_skychart):boolean;
      Procedure NewComDayCallback(Sender:TObject; Row:TResultRow);
@@ -2410,24 +2411,39 @@ cfgsc.FindDesc:=Desc;
 cfgsc.FindNote:='';
 end;
 
-Function TPlanet.PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
-var jds,qry : string;
+Function TPlanet.PrepareAsteroid(jd1,jd2,step:double; msg:Tstrings):boolean;
+var jds,jde,qry : string;
+    i:integer;
+    x,y,z:double;
 begin
 try
-jds:=formatfloat(f1,jdt);
-msg.Add(Format(rsBeginProcess, [jds, jddate(jdt)]));
+jds:=formatfloat(f1,jd1);
+jde:=formatfloat(f1,jd2);
+step:=max(1.0,step);
+msg.Add(Format(rsBeginProcess, [jds, jddate(jd1)])+' - '+Format('%s / %s', [jde, jddate(jd2)]));
 db1.StartTransaction;
 db1.LockTables('cdc_ast_mag WRITE, cdc_ast_elem READ');
 msg.Add(rsDeletePrevio);
 application.processmessages;
-db1.Query('DELETE from cdc_ast_mag where jd='+jds);
+db1.Query('DELETE from cdc_ast_mag where jd between '+jds+' and '+jde);
 msg.Add(rsGetAsteroidL);
 application.processmessages;
 qry:='SELECT distinct(id) from cdc_ast_elem';
 db2.CallBackOnly:=true;
 db2.OnFetchRow:=@PrepareAsteroidCallback;
 n_ast:=0;
-jdnew:=jdt;
+jdaststart:=jd1;
+jdastend:=jd2;
+jdaststep:=step;
+jdastnstep:=round((jd2-jd1)/step)+1;
+SetLength(AstSol,jdastnstep);
+for i:=0 to jdastnstep-1 do begin
+  SunRect(jd1+i*step,false,x,y,z);
+  AstSol[i,0]:=jd1+i*step;
+  AstSol[i,1]:=x;
+  AstSol[i,2]:=y;
+  AstSol[i,3]:=z;
+end;
 smsg:=msg;
 db2.Query(qry);
 db2.CallBackOnly:=false;
@@ -2453,21 +2469,29 @@ Procedure TPlanet.PrepareAsteroidCallback(Sender:TObject; Row:TResultRow);
 var id,jds,ref,nam,qry,elem_id : string;
     epoch,h,g,ma,ap,an,ic,ec,sa,eq : double;
     ra,dec,dist,r,elong,phase,magn,xc,yc,zc : Double;
+    i:integer;
 begin
     id:=row[0];
-    if cdb.GetAstElemEpoch(id,jdnew,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
+    if cdb.GetAstElemEpoch(id,jdaststart,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
          inc(n_ast);
          InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
-         Asteroid(jdnew,false,ra,dec,dist,r,elong,phase,magn,xc,yc,zc);
-         jds:=formatfloat(f1,jdnew);
-         if dist<NEO_dist then magn:=0;
-         qry:='INSERT INTO cdc_ast_mag (id,jd,epoch,mag,elem_id) VALUES ('
-             +'"'+id+'"'
-             +',"'+jds+'"'
-             +',"'+formatfloat(f1,epoch)+'"'
-             +',"'+inttostr(round(magn*10))+'"'
-             +',"'+elem_id+'"'+')';
-         db1.Query(qry);
+         for i:=0 to jdastnstep-1 do begin
+           XSol:=AstSol[i,1];
+           YSol:=AstSol[i,2];
+           ZSol:=AstSol[i,3];
+           SolT0:=AstSol[i,0];
+           jdnew:=AstSol[i,0];
+           Asteroid(jdnew,false,ra,dec,dist,r,elong,phase,magn,xc,yc,zc);
+           jds:=formatfloat(f1,jdnew);
+           if dist<NEO_dist then magn:=0;
+           qry:='INSERT INTO cdc_ast_mag (id,jd,epoch,mag,elem_id) VALUES ('
+               +'"'+id+'"'
+               +',"'+jds+'"'
+               +',"'+formatfloat(f1,epoch)+'"'
+               +',"'+inttostr(round(magn*10))+'"'
+               +',"'+elem_id+'"'+')';
+           db1.Query(qry);
+         end;
       end;
     if (n_ast mod 10000)=0 then begin smsg.Add(Format(rsProcessing, [inttostr(
       n_ast)])); application.processmessages; end;
