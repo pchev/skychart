@@ -1079,7 +1079,7 @@ type
 
 
 type
-  TPrepareAsteroid = function(jdt: double; msg: TStrings): boolean of object;
+  TPrepareAsteroid = function(jd1,jd2,step: double; msg: TStrings): boolean of object;
   TGetTwilight = procedure(jd0: double; out ht: double) of object;
 
 type

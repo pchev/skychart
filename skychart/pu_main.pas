@@ -828,7 +828,7 @@ type
     procedure InitializeDB(Sender: TObject);
     procedure Init;
     Procedure InitDS2000;
-    function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
+    function PrepareAsteroid(jd1,jd2,step:double; msg:Tstrings):boolean;
     procedure RecomputeAsteroid;
     procedure ChartMove(Sender: TObject);
     procedure ImageSetup(Sender: TObject);
@@ -2893,7 +2893,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
   f_info.setpage(2);
   f_info.show;
   f_info.ProgressMemo.lines.add(rsComputeAster);
-  if Planet.PrepareAsteroid(sc.cfgsc.curjdtt, f_info.ProgressMemo.lines) then begin
+  if Planet.PrepareAsteroid(sc.cfgsc.curjdtt, sc.cfgsc.curjdtt, 1, f_info.ProgressMemo.lines) then begin
      sc.cfgsc.ShowAsteroid:=true;
      Refresh;
   end;
@@ -4027,9 +4027,9 @@ begin
  activateconfig(ConfigDisplay.f_config_display1.cmain,ConfigDisplay.f_config_display1.csc,ConfigDisplay.f_config_display1.ccat,ConfigDisplay.f_config_display1.cshr,ConfigDisplay.f_config_display1.cplot,nil,false);
 end;
 
-function Tf_main.PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
+function Tf_main.PrepareAsteroid(jd1,jd2,step:double; msg:Tstrings):boolean;
 begin
- result:=planet.PrepareAsteroid(jdt,msg);
+ result:=planet.PrepareAsteroid(jd1,jd2,step,msg);
 end;
 
 procedure Tf_main.ConfigDBChange(Sender: TObject);
@@ -7787,7 +7787,7 @@ try
        f_info.show;
        f_info.ProgressMemo.lines.add(rsInitializeDa);
        cdcdb.LoadSampleData(f_info.ProgressMemo,cfgm);
-       Planet.PrepareAsteroid(DateTimetoJD(now), f_info.ProgressMemo.lines);
+       Planet.PrepareAsteroid(DateTimetoJD(now),DateTimetoJD(now),1, f_info.ProgressMemo.lines);
        def_cfgsc.ShowAsteroid:=true;
        f_info.hide;
     end;

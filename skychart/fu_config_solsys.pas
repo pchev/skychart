@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_help, u_translation, u_constant, u_util, u_projection, cu_database,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math,
   Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources,
   downloaddialog, jdcalendar, EditBtn, Process, LazHelpHTML, FileUtil;
 
@@ -958,7 +958,7 @@ end;
 end;
 
 procedure Tf_config_solsys.AstComputeClick(Sender: TObject);
-var jdt:double;
+var jd1,jd2,step:double;
     y,m,i:integer;
 begin
 try
@@ -967,19 +967,15 @@ prepastmemo.clear;
 if assigned(FPrepareAsteroid) then begin
 y:=strtoint(trim(aststrtdate_y.text));
 m:=strtoint(trim(aststrtdate_m.text));
-for i:=1 to astnummonth.position do begin
-  jdt:=jd(y,m,1,0);
-  if not FPrepareAsteroid(jdt,prepastmemo.lines) then begin
-     screen.cursor:=crDefault;
-     ShowMessage(Format(rsNoAsteroidDa, [crlf]));
-     AstPageControl.activepage:=astload;
-     exit;
-  end;
-  inc(m);
-  if m>12 then begin
-     inc(y);
-     m:=1;
-  end;
+i:=astnummonth.position-1;
+jd1:=jd(y,m,1,0);
+jd2:=jd(y,m+i,1,0);
+step:=max(1.0,(jd2-jd1)/i);
+if not FPrepareAsteroid(jd1,jd2,step,prepastmemo.lines) then begin
+   screen.cursor:=crDefault;
+   ShowMessage(Format(rsNoAsteroidDa, [crlf]));
+   AstPageControl.activepage:=astload;
+   exit;
 end;
 prepastmemo.lines.Add(rsYouAreNowRea);
 screen.cursor:=crDefault;
