@@ -35,11 +35,13 @@ type
   { Tf_config_display }
 
   Tf_config_display = class(TFrame)
+    ButtonComputeRectangle: TButton;
     Button3: TButton;
     BtnDefaultColor: TButton;
     BtnRedColor: TButton;
     BtnWBColor: TButton;
     BtnBWColor: TButton;
+    ButtonComputeCircle: TButton;
     Button7: TButton;
     Button8: TButton;
     Button9: TButton;
@@ -345,6 +347,8 @@ type
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
     procedure Button9Click(Sender: TObject);
+    procedure ButtonComputeCircleClick(Sender: TObject);
+    procedure ButtonComputeRectangleClick(Sender: TObject);
     procedure CBStyleChange(Sender: TObject);
     procedure CFStyleChange(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
@@ -705,13 +709,17 @@ Label128.caption:=rsFonts;
 Label129.caption:=rsModify;
 Label235.caption:=rsGreekSymbol;
 Button1.caption:=rsDefault;
+
 Page8.caption:=rsFinderCircle;
 Label307.caption:=rsFinderCircle;
+ButtonComputeCircle.Caption:=rsCompute;
 CenterMark1.caption:=rsMarkTheChart;
 CheckBox1.Caption:=rsShowLabels;
 CheckBox3.Caption:=rsShowMarkInde;
+
 Page9.caption:=rsFinderRectan;
 Label308.caption:=rsFinderRectan;
+ButtonComputeRectangle.Caption:=rsCompute;
 CenterMark2.caption:=rsMarkTheChart;
 CheckBox2.Caption:=rsShowLabels;
 CheckBox4.Caption:=rsShowMarkInde;
@@ -903,14 +911,22 @@ end;
 
 procedure Tf_config_display.CirclegridDblClick(Sender: TObject);
 begin
-if (CCol=2)and(CRow>0) then begin
+ButtonComputeCircleClick(Sender);
+end;
+
+procedure Tf_config_display.ButtonComputeCircleClick(Sender: TObject);
+begin
+if (CRow>0) then begin
   f_fov.PageControl1.ActivePageIndex:=0;
-  f_fov.Edit9.Text:=Circlegrid.Cells[CCol,CRow];
+  f_fov.Edit9.Text:=Circlegrid.Cells[2,CRow];
   FormPos(f_fov,mouse.cursorpos.x,mouse.cursorpos.y);
   f_fov.ShowModal;
   if f_fov.ModalResult=mrOK then begin
-    Circlegrid.Cells[CCol,CRow] := f_fov.Edit9.Text;
-    csc.circle[RRow,1]:=StrToFloatDef(Circlegrid.Cells[CCol,CRow],csc.circle[RRow,1]);
+    Circlegrid.Cells[2,CRow] := f_fov.Edit9.Text;
+    csc.circle[CRow,1]:=StrToFloatDef(Circlegrid.Cells[2,CRow],csc.circle[CRow,1]);
+    cshr.ffove_tfl := f_fov.Edit6.Text;
+    cshr.ffove_efl := f_fov.Edit7.Text;
+    cshr.ffove_efv := f_fov.Edit8.Text;
   end;
 end;
 end;
@@ -1420,10 +1436,14 @@ for i:=1 to csc.ncircle do begin
   buf:=inttostr(i)+csc.circlelbl[i];
   buf:=inttostr(i)+circlegrid.Cells[5,i];
 end;
+CRow:=1;
 CenterMark1.checked:=csc.ShowCircle;
 CheckBox1.Checked:=csc.CircleLabel;
 CheckBox3.Checked:=csc.marknumlabel;
 CheckBox4.Checked:=csc.marknumlabel;
+f_fov.Edit6.Text:=cshr.ffove_tfl;
+f_fov.Edit7.Text:=cshr.ffove_efl;
+f_fov.Edit8.Text:=cshr.ffove_efv;
 end;
 
 procedure Tf_config_display.ShowRectangle;
@@ -1455,8 +1475,14 @@ for i:=1 to csc.nrectangle do begin
   rectanglegrid.Cells[5,i]:=formatfloat(f2,csc.rectangle[i,4]);
   rectanglegrid.Cells[6,i]:=csc.rectanglelbl[i];
 end;
+RRow:=1;
 CenterMark2.checked:=csc.ShowCircle;
 CheckBox2.Checked:=csc.RectangleLabel;
+f_fov.Edit11.Text:=cshr.ffovc_tfl;
+f_fov.Edit12.Text:=cshr.ffovc_px;
+f_fov.Edit13.Text:=cshr.ffovc_py;
+f_fov.Edit15.Text:=cshr.ffovc_cx;
+f_fov.Edit16.Text:=cshr.ffovc_cy;
 end;
 
 procedure Tf_config_display.nebuladisplayClick(Sender: TObject);
@@ -2281,7 +2307,12 @@ end;
 
 procedure Tf_config_display.RectangleGridDblClick(Sender: TObject);
 begin
-if ((RCol=2)or(RCol=3))and(RRow>0) then begin
+ButtonComputeRectangleClick(Sender);
+end;
+
+procedure Tf_config_display.ButtonComputeRectangleClick(Sender: TObject);
+begin
+if (RRow>0) then begin
   if f_fov=nil then f_fov:=Tf_fov.Create(self);
   f_fov.PageControl1.ActivePageIndex:=1;
   f_fov.Edit14.Text:=RectangleGrid.Cells[2,RRow];
@@ -2293,6 +2324,11 @@ if ((RCol=2)or(RCol=3))and(RRow>0) then begin
     RectangleGrid.Cells[3,RRow] := f_fov.Edit17.Text;
     csc.rectangle[RRow,1]:=StrToFloatDef(RectangleGrid.Cells[2,RRow],csc.rectangle[RRow,1]);
     csc.rectangle[RRow,2]:=StrToFloatDef(RectangleGrid.Cells[3,RRow],csc.rectangle[RRow,2]);
+    cshr.ffovc_tfl := f_fov.Edit11.Text;
+    cshr.ffovc_px  := f_fov.Edit12.Text;
+    cshr.ffovc_py  := f_fov.Edit13.Text;
+    cshr.ffovc_cx  := f_fov.Edit15.Text;
+    cshr.ffovc_cy  := f_fov.Edit16.Text;
   end;
 end;
 end;
