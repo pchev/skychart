@@ -4482,6 +4482,8 @@ procedure Tskychart.ResetAllLabel;
 begin
 cfgsc.nummodlabels:=0;
 cfgsc.posmodlabels:=0;
+cfgsc.poscustomlabels:=0;
+cfgsc.numcustomlabels:=0;
 Refresh;
 end;
 
