@@ -972,19 +972,30 @@ function Tskychart.DrawCustomLabel :boolean;
 var
   ra,dec,x1,y1: Double;
   xx,yy : single;
-  lid,i : integer;
-  lis:string;
+  lid,i,j,labelnum : integer;
+  lis,txt:string;
+  Lalign: TLabelAlign;
 begin
 result:=false;
 for i:=1 to cfgsc.numcustomlabels do begin
  ra:=cfgsc.customlabels[i].ra;
  dec:=cfgsc.customlabels[i].dec;
+ txt:=cfgsc.customlabels[i].txt;
+ Lalign:=cfgsc.customlabels[i].align;
+ labelnum:=cfgsc.customlabels[i].labelnum;
  lis:=cfgsc.customlabels[i].txt+FormatFloat(f6,ra)+FormatFloat(f6,dec);
  lid:=rshash(lis,$7FFFFFFF);
+ for j:=1 to cfgsc.nummodlabels do
+     if lid=cfgsc.modlabels[j].id then begin
+        txt:=cfgsc.modlabels[j].txt;
+        labelnum:=cfgsc.modlabels[j].labelnum;
+        Lalign:=cfgsc.modlabels[j].align;
+        break;
+      end;
  projection(ra,dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-    SetLabel(lid,xx,yy,0,2,cfgsc.customlabels[i].labelnum,cfgsc.customlabels[i].txt,cfgsc.customlabels[i].align);
+    SetLabel(lid,xx,yy,0,2,labelnum,txt,Lalign);
     result:=true;
  end;
 end;
@@ -4489,6 +4500,7 @@ for j:=i+1 to cfgsc.nummodlabels do cfgsc.modlabels[j-1]:=cfgsc.modlabels[j];
 dec(cfgsc.nummodlabels);
 cfgsc.posmodlabels:=cfgsc.nummodlabels;
 DrawLabels;
+Refresh;
 end;
 
 procedure Tskychart.LabelClick(lnum: integer);
