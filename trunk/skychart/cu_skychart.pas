@@ -1409,13 +1409,17 @@ var rec:GcatRec;
 end;
 
 function Tskychart.DrawImagesList :boolean;
+type trdist= record r: double; n:integer; end;
 var
   filename,objname : string;
   ra,de,width,height,dw,dh,lra,lde: double;
   cosr,sinr: extended;
-  x1,y1,x2,y2,rot,ra2000,de2000: Double;
+  x1,y1,x2,y2,xx1,yy1,xx2,yy2,rot,ra2000,de2000: Double;
   xx,yy:single;
-  i,n: integer;
+  i,j,n: integer;
+  rdist: array of trdist;
+  crdist: trdist;
+  maxreached, rdsorted:boolean;
 
   procedure drawfitslabel;
   var ii: integer;
@@ -1439,7 +1443,7 @@ if bgvalid and (not bgsettingchange) and(bgcra=cfgsc.racentre)and(bgcde=cfgsc.de
    and(bgfov=cfgsc.fov)and(bgmis=cfgsc.BGmin_sigma)and(bgmas=cfgsc.BGmax_sigma)
    and(bgw=cfgsc.xmax)and(bgh=cfgsc.ymax)and(bgproj=cfgsc.ProjPole)
    and(bgrot=cfgsc.theta)and(bgflipx=cfgsc.FlipX)and(bgflipy=cfgsc.FlipY) then begin
-      //cache bgbmp
+      //use cache bgbmp
       Fplot.PlotBGImage(bgbmp, cfgsc.WhiteBg, cfgsc.BGalpha);
       drawfitslabel;
 end else begin
@@ -1456,15 +1460,18 @@ end else begin
   bgproj:=cfgsc.ProjPole;
   bgvalid:=false;
   bgsettingchange:=false;
+  // if the list is not manually edited
   if (not fits.fitslistmodified)or(fits.fitslistra<>cfgsc.racentre)or(fits.fitslistdec<>cfgsc.decentre) then begin
     cfgsc.MaxArchiveImg:=min(cfgsc.MaxArchiveImg,maxfitslist);
     fits.fitslist.Clear;
     setlength(fits.fitslistactive,10);
+    setlength(fits.fitslistcenterdist,10);
     setlength(fits.fitslistlabel,10);
     fits.fitslistmodified:=false;
     fits.fitslistra:=cfgsc.racentre;
     fits.fitslistdec:=cfgsc.decentre;
     n:=0;
+    maxreached:=false;
     result:=false;
     try
     ra2000:=cfgsc.racentre;
@@ -1480,6 +1487,7 @@ end else begin
     end;
     y1 := maxvalue([-pid2,de2000-cfgsc.fov/cfgsc.WindowRatio-deg2rad]);
     y2 := minvalue([pid2,de2000+cfgsc.fov/cfgsc.WindowRatio+deg2rad]);
+    // search each files in every directories using the values in database
     for i:=1 to MaxArchiveDir do
     if cfgsc.ArchiveDirActive[i] then begin
        if FFits.OpenDB(cfgsc.ArchiveDir[i],x1,x2,y1,y2) then
@@ -1487,26 +1495,32 @@ end else begin
           sincos(rot,sinr,cosr);
           precession(jd2000,cfgsc.JDChart,ra,de);
           if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc,true,true);
-          projection(ra,de,x1,y1,true,cfgsc) ;
-          WindowXY(x1,y1,xx,yy,cfgsc);
+          projection(ra,de,xx1,yy1,true,cfgsc) ;
+          WindowXY(xx1,yy1,xx,yy,cfgsc);
           dw:=abs((width*cosr+height*sinr)*abs(cfgsc.BxGlb)/2);
           dh:=abs((height*cosr+width*sinr)*abs(cfgsc.ByGlb)/2);
           if ((xx+dw)>cfgsc.Xmin) and ((xx-dw)<cfgsc.Xmax) and ((yy+dh)>cfgsc.Ymin) and ((yy-dh)<cfgsc.Ymax)
               and (abs(max(width,height)*cfgsc.BxGlb)>10)
           then begin
+             // this file is visible on the current chart
              fits.fitslist.Add(filename);
              if n<cfgsc.MaxArchiveImg then fits.fitslistactive[n]:=true
-                                      else fits.fitslistactive[n]:=false;
-             projection(ra,de+0.001,x2,y2,false,cfgsc) ;
-             fits.fitslistlabel[n].rot:=rot+RotationAngle(x1,y1,x2,y2,cfgsc);
-             XYWindow(round(xx),round(yy+dh),x2,y2,cfgsc);
-             InvProj(x2,y2,lra,lde,cfgsc);
+                else begin
+                  fits.fitslistactive[n]:=false;
+                  maxreached:=true;
+                end;
+             fits.fitslistcenterdist[n]:=AngularDistance(cfgsc.racentre,cfgsc.decentre,ra,de);
+             projection(ra,de+0.001,xx2,yy2,false,cfgsc) ;
+             fits.fitslistlabel[n].rot:=rot+RotationAngle(xx1,yy1,xx2,yy2,cfgsc);
+             XYWindow(round(xx),round(yy+dh),xx2,yy2,cfgsc);
+             InvProj(xx2,yy2,lra,lde,cfgsc);
              fits.fitslistlabel[n].lra:=lra;
              fits.fitslistlabel[n].lde:=lde;
              fits.fitslistlabel[n].lid:=rshash(filename+FormatFloat(f6,lra)+FormatFloat(f6,lde),$7FFFFFFF);
              inc(n);
              if n>=Length(fits.fitslistactive) then begin
                SetLength(fits.fitslistactive,Length(fits.fitslistactive)+10);
+               SetLength(fits.fitslistcenterdist,Length(fits.fitslistcenterdist)+10);
                SetLength(fits.fitslistlabel,Length(fits.fitslistlabel)+10);
              end;
           end;
@@ -1518,11 +1532,12 @@ end else begin
      if FFits.OpenDB('other',x1,x2,y1,y2) then
       while FFits.GetDB(filename,objname,ra,de,width,height,rot) do
        if objname='BKG' then begin
+         // add the last downloaded image even if not archived
          sincos(rot,sinr,cosr);
          precession(jd2000,cfgsc.JDChart,ra,de);
          if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc,true,true);
-         projection(ra,de,x1,y1,true,cfgsc) ;
-         WindowXY(x1,y1,xx,yy,cfgsc);
+         projection(ra,de,xx1,yy1,true,cfgsc) ;
+         WindowXY(xx1,yy1,xx,yy,cfgsc);
          dw:=abs((width*cosr+height*sinr)*abs(cfgsc.BxGlb)/2);
          dh:=abs((height*cosr+width*sinr)*abs(cfgsc.ByGlb)/2);
          if ((xx+dw)>cfgsc.Xmin) and ((xx-dw)<cfgsc.Xmax) and ((yy+dh)>cfgsc.Ymin) and ((yy-dh)<cfgsc.Ymax)
@@ -1530,17 +1545,47 @@ end else begin
          then begin
             fits.fitslist.Add(filename);
             fits.fitslistactive[n]:=true;
-            projection(ra,de+0.001,x2,y2,false,cfgsc) ;
-            fits.fitslistlabel[n].rot:=rot+RotationAngle(x1,y1,x2,y2,cfgsc);
-            XYWindow(round(xx),round(yy+dh),x2,y2,cfgsc);
-            InvProj(x2,y2,lra,lde,cfgsc);
+            fits.fitslistcenterdist[n]:=0;
+            projection(ra,de+0.001,xx2,yy2,false,cfgsc) ;
+            fits.fitslistlabel[n].rot:=rot+RotationAngle(xx1,yy1,xx2,yy2,cfgsc);
+            XYWindow(round(xx),round(yy+dh),xx2,yy2,cfgsc);
+            InvProj(xx2,yy2,lra,lde,cfgsc);
             fits.fitslistlabel[n].lra:=lra;
             fits.fitslistlabel[n].lde:=lde;
             fits.fitslistlabel[n].lid:=rshash(filename+FormatFloat(f6,lra)+FormatFloat(f6,lde),$7FFFFFFF);
             inc(n);
-            if n>=Length(fits.fitslistactive) then SetLength(fits.fitslistactive,Length(fits.fitslistactive)+10);
+            if n>=Length(fits.fitslistactive) then begin
+               SetLength(fits.fitslistactive,Length(fits.fitslistactive)+10);
+               SetLength(fits.fitslistcenterdist,Length(fits.fitslistcenterdist)+10);
+               SetLength(fits.fitslistlabel,Length(fits.fitslistlabel)+10);
+             end;
          end;
        end;
+    end;
+    // if too much files, keep the ones near the center
+    if maxreached and (fits.fitslist.Count>0) then begin
+      SetLength(rdist,fits.fitslist.Count);
+      for j:=0 to fits.fitslist.Count-1 do begin
+         rdist[j].n:=j;
+         rdist[j].r:=fits.fitslistcenterdist[j];
+      end;
+      // sort by distance to center
+      repeat
+        rdsorted:=true;
+        for j:=1 to fits.fitslist.Count-1 do begin
+          if rdist[j-1].r > rdist[j].r then begin
+            crdist:=rdist[j-1];
+            rdist[j-1]:=rdist[j];
+            rdist[j]:=crdist;
+            rdsorted:=false;
+          end;
+        end;
+      until rdsorted;
+      // keep files near the center
+      for j:=0 to fits.fitslist.Count-1 do begin
+        if j<cfgsc.MaxArchiveImg then fits.fitslistactive[rdist[j].n]:=true
+                                 else fits.fitslistactive[rdist[j].n]:=false;
+      end;
     end;
   end;
   if fits.fitslist.Count>0 then begin

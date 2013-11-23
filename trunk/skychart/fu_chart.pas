@@ -4172,7 +4172,7 @@ end;
 
 function Tf_chart.cmd_PDSS(DssDir,ImagePath,ImageName, useexisting: string):string;
 var ra2000,de2000: double;
-    archivefile,buf: string;
+    archivefile,buf,fn: string;
     archiveit : boolean;
     i: integer;
     f1:Tform;
@@ -4186,7 +4186,8 @@ de2000:=sc.cfgsc.decentre;
 if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc,true,true);
 precession(sc.cfgsc.JDchart,jd2000,ra2000,de2000);
 if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width) then begin
-   sc.Fits.Filename:=expandfilename(f_getdss.cfgdss.dssfile);
+   fn:=expandfilename(f_getdss.cfgdss.dssfile);
+   sc.Fits.Filename:=fn;
    sc.Fits.InfoWCScoord;
    if sc.Fits.Header.valid and sc.Fits.WCSvalid then begin
       sc.Fits.DeleteDB('OTHER','BKG');
@@ -4196,7 +4197,6 @@ if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width)
       sc.cfgsc.TrackType:=5;
       sc.cfgsc.BackgroundImage:=sc.Fits.Filename;
       sc.cfgsc.ShowBackgroundImage:=true;
-      Refresh;
       if f_getdss.cfgdss.dssarchive then begin
        if f_getdss.cfgdss.OnlineDSS then begin
           buf:=trim(f_getdss.cfgdss.DSSurl[f_getdss.cfgdss.OnlineDSSid,0]);
@@ -4257,8 +4257,8 @@ if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width)
          end;
          archivefile:=buf;
          try
-         CopyFile(systoutf8(sc.Fits.Filename),systoutf8(archivefile),false);
-         sc.cdb.AddFitsArchiveFile(f_getdss.cfgdss.dssarchivedir,archivefile);
+         CopyFile(systoutf8(fn),systoutf8(archivefile),false);
+         sc.cdb.AddFitsArchiveFile(f_getdss.cfgdss.dssarchivedir,ExtractFileName(archivefile));
          except
           on E: Exception do begin
            WriteTrace('CopyFile error: '+E.Message);
@@ -4268,6 +4268,8 @@ if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width)
        end;
       end;
       result:=msgOK;
+      sc.bgsettingchange:=true;
+      Refresh;
    end;
 end;
 end;

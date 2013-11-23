@@ -113,6 +113,7 @@ type
      fitslist: TStringList;
      fitslistactive: array of boolean;
      fitslistlabel: array of Tfitslistlabel;
+     fitslistcenterdist: array of double;
      fitslistmodified: boolean;
      fitslistra,fitslistdec: double;
      constructor Create(AOwner:TComponent); override;
