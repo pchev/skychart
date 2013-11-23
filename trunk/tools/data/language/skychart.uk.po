@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-17 11:48+0000\n"
+"POT-Creation-Date: 2013-11-23 13:51+0000\n"
 "PO-Revision-Date: 2013-11-17 12:19+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclubzp@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-17 14:52+0000\n"
+"X-Launchpad-Export-Date: 2013-11-23 15:37+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -1740,7 +1740,7 @@ msgid "Edit colour"
 msgstr "Ред.кольору"
 
 #: u_translation.rseditdsolines
-msgid "Edit DSO lines color"
+msgid "Edit nebulae lines color"
 msgstr ""
 
 #: u_translation.rseditlabel
@@ -4784,7 +4784,7 @@ msgid "Show coordinates grid"
 msgstr "Показати координатну сітку"
 
 #: u_translation.rsshowdsolines
-msgid "Show DSO lines"
+msgid "Show nebulae outlines"
 msgstr ""
 
 #: u_translation.rsshowearthsha
@@ -4826,10 +4826,6 @@ msgstr "Показати назви"
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
 msgstr ""
-
-#: u_translation.rsshowlines
-msgid "Show lines"
-msgstr "Показати лінії"
 
 #: u_translation.rsshowmark
 msgid "Show mark"

@@ -67,7 +67,6 @@ resourcestring
   rsSync = 'Sync';
   rsShowStars = 'Show stars';
   rsShowNebulae = 'Show deep sky objects';
-  rsShowLines = 'Show lines';
   rsShowPictures = 'Show pictures';
   rsGetDSSImage = 'Get the DSS image';
   rsShowPlanets = 'Show planets';
@@ -1339,10 +1338,10 @@ resourcestring
   rsShowOnlyMeri = 'Show only meridian in Alt/Az';
   rsOneEvery = 'One every';
   rsComponent = 'Component';
-  rsShowDSOLines = 'Show DSO lines';
+  rsShowDSOLines = 'Show nebulae outlines';
   rsTransparency = 'Transparency';
   rsUseSocksProx = 'Use Socks proxy';
-  rsEditDSOLines = 'Edit DSO lines color';
+  rsEditDSOLines = 'Edit nebulae lines color';
   rsChartLegend = 'Chart legend';
   rsDistanceMeas = 'Distance measurement';
   rsExampleOfUse = 'Example of user defined object: North galactic pole';

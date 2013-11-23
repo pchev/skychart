@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-11-17 11:48+0000\n"
-"PO-Revision-Date: 2013-11-17 12:19+0000\n"
+"POT-Creation-Date: 2013-11-23 13:51+0000\n"
+"PO-Revision-Date: 2013-11-23 14:14+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-17 14:52+0000\n"
+"X-Launchpad-Export-Date: 2013-11-23 15:36+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: u_translation.rs102cddss
@@ -1737,7 +1737,7 @@ msgid "Edit colour"
 msgstr "แก้ไขสี"
 
 #: u_translation.rseditdsolines
-msgid "Edit DSO lines color"
+msgid "Edit nebulae lines color"
 msgstr "แก้ไขสีของเส้นวัตถุท้องฟ้าห้วงลึก"
 
 #: u_translation.rseditlabel
@@ -4781,7 +4781,7 @@ msgid "Show coordinates grid"
 msgstr "แสดงกริดตามพิกัด"
 
 #: u_translation.rsshowdsolines
-msgid "Show DSO lines"
+msgid "Show nebulae outlines"
 msgstr "แสดงเส้นวัตถุท้องฟ้า"
 
 #: u_translation.rsshowearthsha
@@ -4823,10 +4823,6 @@ msgstr "แสดงป้ายชื่อ"
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
 msgstr "แสดงเส้นระหว่างวัตถุกับป้ายชื่อที่ถูกย้าย"
-
-#: u_translation.rsshowlines
-msgid "Show lines"
-msgstr "แสดงเส้น"
 
 #: u_translation.rsshowmark
 msgid "Show mark"

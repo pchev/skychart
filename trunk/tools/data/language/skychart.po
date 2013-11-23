@@ -222,10 +222,6 @@ msgstr ""
 msgid "Show deep sky objects"
 msgstr ""
 
-#: u_translation:rsshowlines
-msgid "Show lines"
-msgstr ""
-
 #: u_translation:rsshowpictures
 msgid "Show pictures"
 msgstr ""
@@ -5259,7 +5255,7 @@ msgid "Component"
 msgstr ""
 
 #: u_translation:rsshowdsolines
-msgid "Show DSO lines"
+msgid "Show nebulae outlines"
 msgstr ""
 
 #: u_translation:rstransparency
@@ -5271,7 +5267,7 @@ msgid "Use Socks proxy"
 msgstr ""
 
 #: u_translation:rseditdsolines
-msgid "Edit DSO lines color"
+msgid "Edit nebulae lines color"
 msgstr ""
 
 #: u_translation:rschartlegend
