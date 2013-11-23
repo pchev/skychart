@@ -7,7 +7,7 @@ object f_config_display: Tf_config_display
   ClientWidth = 505
   TabOrder = 0
   DesignLeft = 397
-  DesignTop = 292
+  DesignTop = 203
   object MainPanel: TPanel
     Left = 0
     Height = 528
@@ -3163,17 +3163,17 @@ object f_config_display: Tf_config_display
         ClientHeight = 522
         ClientWidth = 499
         object Label307: TLabel
-          Left = 13
+          Left = 26
           Height = 16
-          Top = 21
+          Top = 13
           Width = 172
           Caption = 'Finder circle (Eyepiece/Telrad)'
           ParentColor = False
         end
         object Circlegrid: TStringGrid
           Left = 26
-          Height = 349
-          Top = 50
+          Height = 354
+          Top = 45
           Width = 451
           ColCount = 6
           DefaultColWidth = 70
@@ -3219,23 +3219,32 @@ object f_config_display: Tf_config_display
           OnClick = MarkNumberClick
           TabOrder = 3
         end
+        object ButtonComputeCircle: TButton
+          Left = 338
+          Height = 25
+          Top = 14
+          Width = 115
+          Caption = 'Compute'
+          OnClick = ButtonComputeCircleClick
+          TabOrder = 4
+        end
       end
       object Page9: TTabSheet
         Caption = 'Finder rectangle'
         ClientHeight = 522
         ClientWidth = 499
         object Label308: TLabel
-          Left = 80
+          Left = 26
           Height = 16
-          Top = 8
+          Top = 13
           Width = 184
           Caption = 'Finder rectangle (CCD / Camera)'
           ParentColor = False
         end
         object RectangleGrid: TStringGrid
           Left = 26
-          Height = 349
-          Top = 50
+          Height = 352
+          Top = 47
           Width = 451
           ColCount = 7
           DefaultColWidth = 60
@@ -3280,6 +3289,15 @@ object f_config_display: Tf_config_display
           Caption = 'Show mark index'
           OnClick = MarkNumberClick
           TabOrder = 3
+        end
+        object ButtonComputeRectangle: TButton
+          Left = 338
+          Height = 25
+          Top = 14
+          Width = 115
+          Caption = 'Compute'
+          OnClick = ButtonComputeRectangleClick
+          TabOrder = 4
         end
       end
     end

@@ -856,6 +856,7 @@ type
     horizonpicturevalid: Boolean;
     StarName: array of string;
     StarNameHR: array of integer;
+    ffove_tfl, ffove_efl, ffove_efv, ffovc_tfl, ffovc_px, ffovc_py, ffovc_cx, ffovc_cy : string;
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_shared);
@@ -1796,6 +1797,14 @@ begin
   horizonpicture.Assign(Source.horizonpicture);
   horizonpicturevalid := Source.horizonpicturevalid;
   horizonpicturename := Source.horizonpicturename;
+  ffove_tfl :=Source.ffove_tfl;
+  ffove_efl :=Source.ffove_efl;
+  ffove_efv :=Source.ffove_efv;
+  ffovc_tfl :=Source.ffovc_tfl;
+  ffovc_px :=Source.ffovc_px;
+  ffovc_py :=Source.ffovc_py;
+  ffovc_cx :=Source.ffovc_cx;
+  ffovc_cy :=Source.ffovc_cy;
 end;
 
 { Tconf_skychart }

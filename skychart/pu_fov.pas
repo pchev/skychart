@@ -76,6 +76,7 @@ rad2deg = 180 / pi;
 
 procedure Tf_fov.SetLang;
 begin
+Caption:=rsFieldOfVisio;
 Button1.Caption:=rsOK;
 Button2.Caption:=rsOK;
 Button6.Caption:=rsCompute;
