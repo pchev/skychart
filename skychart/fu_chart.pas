@@ -1004,11 +1004,8 @@ end;
 
 procedure Tf_chart.RemoveAllLabel1Click(Sender: TObject);
 begin
-if VerboseMsg then
- WriteTrace(caption+' RemoveAllLabel1Click');
-sc.cfgsc.poscustomlabels:=0;
-sc.cfgsc.numcustomlabels:=0;
-Refresh;
+if VerboseMsg then WriteTrace(caption+' RemoveAllLabel1Click');
+sc.ResetAllLabel;
 end;
 
 procedure Tf_chart.RemoveLastLabel1Click(Sender: TObject);
