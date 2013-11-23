@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-17 11:48+0000\n"
-"PO-Revision-Date: 2013-11-17 11:53+0000\n"
+"POT-Creation-Date: 2013-11-23 13:51+0000\n"
+"PO-Revision-Date: 2013-11-23 14:05+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-17 14:52+0000\n"
+"X-Launchpad-Export-Date: 2013-11-23 15:36+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
@@ -1738,7 +1738,7 @@ msgid "Edit colour"
 msgstr "Upravit barvu"
 
 #: u_translation.rseditdsolines
-msgid "Edit DSO lines color"
+msgid "Edit nebulae lines color"
 msgstr "Upravit barvu obrysů DSO"
 
 #: u_translation.rseditlabel
@@ -4782,7 +4782,7 @@ msgid "Show coordinates grid"
 msgstr "Zobrazit souřadnice"
 
 #: u_translation.rsshowdsolines
-msgid "Show DSO lines"
+msgid "Show nebulae outlines"
 msgstr "Zobrazit obrysy DSO"
 
 #: u_translation.rsshowearthsha
@@ -4824,10 +4824,6 @@ msgstr "Zobrazit popisky u pozice"
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
 msgstr "Zobrazit linku od popisku k objektu"
-
-#: u_translation.rsshowlines
-msgid "Show lines"
-msgstr "Zobrazit obrysy"
 
 #: u_translation.rsshowmark
 msgid "Show mark"

@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-11-17 11:48+0000\n"
-"PO-Revision-Date: 2013-11-17 12:20+0000\n"
+"POT-Creation-Date: 2013-11-23 13:51+0000\n"
+"PO-Revision-Date: 2013-11-23 14:03+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-17 14:52+0000\n"
+"X-Launchpad-Export-Date: 2013-11-23 15:37+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: u_translation.rs102cddss
@@ -1737,7 +1737,7 @@ msgid "Edit colour"
 msgstr "编辑颜色"
 
 #: u_translation.rseditdsolines
-msgid "Edit DSO lines color"
+msgid "Edit nebulae lines color"
 msgstr "编辑深空天体线颜色"
 
 #: u_translation.rseditlabel
@@ -4781,7 +4781,7 @@ msgid "Show coordinates grid"
 msgstr "显示坐标网格"
 
 #: u_translation.rsshowdsolines
-msgid "Show DSO lines"
+msgid "Show nebulae outlines"
 msgstr "显示深空天体线"
 
 #: u_translation.rsshowearthsha
@@ -4823,10 +4823,6 @@ msgstr "显示标签"
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
 msgstr "显示从被移动的标签到对象的连线"
-
-#: u_translation.rsshowlines
-msgid "Show lines"
-msgstr "显示星座连线"
 
 #: u_translation.rsshowmark
 msgid "Show mark"
