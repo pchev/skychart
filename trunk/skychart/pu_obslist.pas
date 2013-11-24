@@ -43,6 +43,7 @@ type
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
     RadioButton3: TRadioButton;
+    RefreshTimer: TTimer;
     ToggleBox1: TToggleBox;
     ToggleBox2: TToggleBox;
     UpdAllCoord: TButton;
@@ -98,6 +99,7 @@ type
     procedure PageControl1Change(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
     procedure RadioGroup1Click(Sender: TObject);
+    procedure RefreshTimerTimer(Sender: TObject);
     procedure StringGrid1ColRowMoved(Sender: TObject; IsColumn: Boolean;
       sIndex, tIndex: Integer);
     procedure StringGrid1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -121,6 +123,7 @@ type
     FGetObjectCoord: TGetObjectCoord;
     FObjLabelChange: TNotifyEvent;
     FObjLabels,FEmptyObjLabels: TStringList;
+    function GetObjcount : integer;
     function GetRowcount : integer;
     procedure SetMeridianSide(value:integer);
     procedure SetLimitType(value:integer);
@@ -146,6 +149,9 @@ type
     function UpdateCoord(arow:integer):boolean;
     procedure SetVisibleRows;
     procedure Refresh;
+    // total number of object added or loaded from the file
+    property ObjCount:Integer read GetObjCount;
+    // number of object within visibilty criterion
     property RowCount: integer read GetRowcount;
     property DefaultList: string read FDefaultList;
     property ObjLabels: TStringList read FObjLabels;
@@ -326,6 +332,12 @@ begin
       if visible then ShowMessage('Error: '+E.Message);
     end;
   end;
+end;
+
+function Tf_obslist.GetObjcount : integer;
+var i: integer;
+begin
+result:=StringGrid1.RowCount-1;
 end;
 
 function Tf_obslist.GetRowcount : integer;
@@ -688,6 +700,11 @@ begin
   Refresh;
 end;
 
+procedure Tf_obslist.RefreshTimerTimer(Sender: TObject);
+begin
+  Refresh;
+end;
+
 procedure Tf_obslist.StringGrid1ColRowMoved(Sender: TObject; IsColumn: Boolean;
   sIndex, tIndex: Integer);
 begin
@@ -859,6 +876,7 @@ end;
 procedure Tf_obslist.CheckBox2Change(Sender: TObject);
 begin
  if CheckBox2.Checked then CheckBox1.Checked:=false;
+  RefreshTimer.Enabled:=(CheckBox2.Checked or CheckBox5.Checked);
  SetVisibleRows;
 end;
 
@@ -887,6 +905,7 @@ end;
 procedure Tf_obslist.CheckBox5Change(Sender: TObject);
 begin
  if CheckBox5.Checked then CheckBox4.Checked:=false;
+ RefreshTimer.Enabled:=(CheckBox2.Checked or CheckBox5.Checked);
  SetVisibleRows;
 end;
 
