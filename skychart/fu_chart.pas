@@ -726,8 +726,10 @@ if VerboseMsg then
  if sc.cfgsc.quick then begin
    sc.ObjectListLabels:=f_obslist.EmptyObjLabels;
    sc.NoFilterList:=False;
+   sc.UpdObsList:=False;
  end else begin
    sc.ObjectListLabels:=f_obslist.ObjLabels;
+   sc.UpdObsList:=True;
    sc.NoFilterList:=f_obslist.NoFilterList.Checked and (sc.ObjectListLabels.Count>0);
  end;
  sc.Refresh;
@@ -5476,7 +5478,7 @@ end;
 
 procedure Tf_chart.UpdObsListTime(Sender: TObject);
 begin
-f_obslist.Refresh;
+if f_obslist.ObjCount>0 then f_obslist.Refresh;
 end;
 
 end.

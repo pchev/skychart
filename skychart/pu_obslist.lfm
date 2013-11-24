@@ -343,4 +343,11 @@ object f_obslist: Tf_obslist
       OnClick = MenuDeleteClick
     end
   end
+  object RefreshTimer: TTimer
+    Enabled = False
+    Interval = 60000
+    OnTimer = RefreshTimerTimer
+    left = 360
+    top = 235
+  end
 end
