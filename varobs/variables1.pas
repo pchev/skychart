@@ -27,7 +27,7 @@ interface
 
 uses
   {$ifdef mswindows}
-    Windows, ShellAPI,
+    Windows, shlobj, ShellAPI,
   {$endif}
   {$ifdef unix}
     unix,baseunix,unixutil,
@@ -447,12 +447,12 @@ i:=0;
 while i <= param.count-1 do begin
 if param[i]='-c' then begin
      inc(i);
-     buf:=param[i];
-     if fileexists(buf) then planname:=buf;
+     buf:=systoutf8(param[i]);
+     if fileexistsutf8(buf) then planname:=buf;
 end
 else if pos('.var',param[i])>0 then begin
-     buf:=param[i];
-     if fileexists(buf) then planname:=buf;
+     buf:=systoutf8(param[i]);
+     if fileexistsutf8(buf) then planname:=buf;
 end;
 inc(i);
 end;
@@ -466,9 +466,6 @@ var buf: string;
 {$ifdef mswindows}
     PIDL : PItemIDList;
     Folder : array[0..MAX_PATH] of Char;
-const CSIDL_PERSONAL = $0005;   // My Documents
-      CSIDL_APPDATA  = $001a;   // <user name>\Application Data
-      CSIDL_LOCAL_APPDATA = $001c;  // <user name>\Local Settings\Applicaiton Data (non roaming)
 {$endif}
 begin
 {$ifdef darwin}
@@ -492,9 +489,15 @@ privatedir:=expandfilename(PrivateDir);
 configfile:=expandfilename(configfile);
 {$endif}
 {$ifdef mswindows}
+buf:=systoutf8(appdir);
+buf:=trim(buf);
+appdir:=safeutf8tosys(buf);
+buf:='';
 SHGetSpecialFolderLocation(0, CSIDL_LOCAL_APPDATA, PIDL);
 SHGetPathFromIDList(PIDL, Folder);
-buf:=trim(Folder);
+buf:=systoutf8(Folder);
+buf:=trim(buf);
+buf:=safeutf8tosys(buf);
 if buf='' then begin  // old windows version
    SHGetSpecialFolderLocation(0, CSIDL_APPDATA, PIDL);
    SHGetPathFromIDList(PIDL, Folder);
@@ -697,9 +700,9 @@ var  inifile : Tinifile;
      section : string;
      i : integer;
 begin
-planname:=slash(privatedir)+'aavsoeasy.dat';
+planname:=systoutf8(slash(privatedir)+'aavsoeasy.dat');
 if not FileExistsUTF8(planname) then begin
-  CopyFile(slash(appdir)+slash('data')+slash('sample')+'aavsoeasy.dat',planname,true);
+  CopyFile(systoutf8(slash(appdir)+slash('data')+slash('sample')+'aavsoeasy.dat'),planname,true);
 end;
 defqlurl:='http://www.aavso.org/cgi-bin/newql.pl?name=$star&output=votable';
 defafoevurl:='ftp://cdsarc.u-strasbg.fr/pub/afoev/';
@@ -711,7 +714,7 @@ pcobscaption:='PCObs Data Entry';
 inifile:=Tinifile.create(configfile);
 section:='Default';
 with inifile do begin
-    planname:=ReadString(section,'planname',planname);
+    planname:=systoutf8(ReadString(section,'planname',safeutf8tosys(planname)));
     Radiogroup1.itemindex:=ReadInteger(section,'dateformat',0);
     OptForm.tz.Value:=ReadInteger(section,'tz',0);
     OptForm.Radiogroup1.itemindex:=ReadInteger(section,'obstype',0);
@@ -828,7 +831,7 @@ begin
 inifile:=Tinifile.create(configfile);
 section:='Default';
 with inifile do begin
-    WriteString(section,'planname',planname);
+    WriteString(section,'planname',safeutf8tosys(planname));
     WriteInteger(section,'dateformat',Radiogroup1.itemindex);
     WriteInteger(section,'tz',OptForm.tz.Value);
     WriteInteger(section,'obstype',OptForm.Radiogroup1.itemindex);
