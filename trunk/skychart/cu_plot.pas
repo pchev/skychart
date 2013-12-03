@@ -71,9 +71,9 @@ type
      Fstarshape,starbmp: Tbitmap;
      Bstarbmp: array [0..6,0..10] of TBGRABitmap;
      starbmpw:integer;
-     Procedure PlotStar0(x,y: single; ma,b_v : Double);
-     Procedure PlotStar1(x,y: single; ma,b_v : Double);
-     Procedure PlotStar2(x,y: single; ma,b_v : Double);
+     function PlotStar0(x,y: single; ma,b_v : Double):integer;
+     function PlotStar1(x,y: single; ma,b_v : Double):integer;
+     function PlotStar2(x,y: single; ma,b_v : Double):integer;
      procedure PlotPlanet1(xx,yy,flipx,flipy,ipla:integer; pixscale,diam,flatten,phase,pa,rot,poleincl,sunincl:double);
      procedure PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,pa,gw:double;WhiteBg:boolean);
      procedure PlotPlanet4(xx,yy,ipla:integer; pixscale,phase:double;WhiteBg:boolean);
@@ -129,9 +129,9 @@ type
      Procedure FlushCnv;
      procedure BGRADrawLine(x1,y1,x2,y2: single; c: TBGRAPixel; w: single; abmp:TBGRABitmap; ps: TPenStyle=psSolid);
      Procedure PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin,HeaderHeight,FooterHeight: integer);
-     Procedure PlotStar(xx,yy: single; ma,b_v : Double);
-     Procedure PlotVarStar(x,y: single; vmax,vmin : Double);
-     Procedure PlotDblStar(x,y,r: single; ma,sep,pa,b_v : Double);
+     function PlotStar(xx,yy: single; ma,b_v : Double):integer;
+     function PlotVarStar(x,y: single; vmax,vmin : Double):integer;
+     function PlotDblStar(x,y,r: single; ma,sep,pa,b_v : Double):integer;
      Procedure PlotDeepSkyObject(Axx,Ayy: single;Adim,Ama,Asbr,Apixscale:Double;Atyp:Integer;Amorph:String;whitebg:boolean; forcecolor:boolean; col:Tcolor=clWhite);
      Procedure PlotDSOGxy(Ax,Ay: single; Ar1,Ar2,Apa,Arnuc,Ab_vt,Ab_ve,Ama,Asbr,Apixscale : double;Amorph:string; forcecolor:boolean; col:Tcolor);
      Procedure PlotCRose(rosex,rosey,roserd,rot:single;flipx,flipy:integer; WhiteBg:boolean; RoseType: integer);
@@ -639,7 +639,7 @@ for i:=1 to maxlabels do ilabels[i].visible:=false;
 result:=true;
 end;
 
-Procedure TSplot.PlotStar1(x,y: single; ma,b_v : Double);  // bitmap image
+function TSplot.PlotStar1(x,y: single; ma,b_v : Double):integer;  // bitmap image
 var
   ds,Icol : Integer;
   ico,isz,xx,yy : integer;
@@ -672,6 +672,7 @@ yy:=round(y);
     11: isz:=1;
    else isz:=0;
  end;
+ result:=round(ds/3);
  if cfgplot.UseBMP then begin
    cbmp.PutImage(xx-cfgplot.starshapew*starbmpw,yy-cfgplot.starshapew*starbmpw,Bstarbmp[ico,isz],dmDrawWithTransparency);
  end else
@@ -681,7 +682,7 @@ yy:=round(y);
    end;
 end;
 
-Procedure TSplot.PlotStar0(x,y: single; ma,b_v : Double);  // draw ellipse
+function TSplot.PlotStar0(x,y: single; ma,b_v : Double):integer;  // draw ellipse
 var
   ds,ds2,Icol,xx,yy : Integer;
   co : Tcolor;
@@ -705,6 +706,7 @@ end;
 if ma<-5 then ma:=-5;
 ds := round(max(1,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
 ds2:= round(ds/2);
+result:=ds2;
 if cfgplot.UseBMP then begin
   cbmp.EllipseAntialias(x,y,ds/2,ds/2,ColorToBGRA(cfgplot.Color[0]),(cfgchart.DrawPen / 2));
   cbmp.FillEllipseAntialias(x,y,ds/2,ds/2,ColorToBGRA(co));
@@ -726,7 +728,7 @@ end else if cnv<>nil then with cnv do begin
 end;
 end;
 
-Procedure TSplot.PlotStar2(x,y: single; ma,b_v : Double);  // antialias sprite
+function TSplot.PlotStar2(x,y: single; ma,b_v : Double):integer;  // antialias sprite
 type
   TPos=single;
 var
@@ -781,6 +783,7 @@ begin
     Lum := Lum * AAWidth;
     AAWidth := 1;
   end;
+  result:=round(AAWidth);
   MinX := RoundInt(X - LineWidth - AAWidth - 0.5);
   MaxX := RoundInt(X + LineWidth + AAWidth + 0.5);
   MinY := RoundInt(Y - LineWidth - AAWidth - 0.5);
@@ -832,17 +835,18 @@ begin
   end;
 end;
 
-Procedure TSplot.PlotStar(xx,yy: single; ma,b_v : Double);
+Function TSplot.PlotStar(xx,yy: single; ma,b_v : Double):integer;
 begin
+ result:=0;
  if not cfgplot.Invisible then
       case cfgplot.starplot of
-      0 : PlotStar0(xx,yy,ma,b_v);
-      1 : PlotStar1(xx,yy,ma,b_v);
-      2 : PlotStar2(xx,yy,ma,b_v);
+      0 : result:=PlotStar0(xx,yy,ma,b_v);
+      1 : result:=PlotStar1(xx,yy,ma,b_v);
+      2 : result:=PlotStar2(xx,yy,ma,b_v);
       end;
 end;
 
-Procedure TSplot.PlotVarStar(x,y: single; vmax,vmin : Double);
+function TSplot.PlotVarStar(x,y: single; vmax,vmin : Double):integer;
 var
   ds,ds2,dsm,xx,yy : Integer;
 begin
@@ -854,6 +858,7 @@ if not cfgplot.Invisible then begin
   // minima
   dsm := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-vmin*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
   if (ds-dsm)<2*cfgchart.drawpen then dsm:=ds-2*cfgchart.drawpen;
+  result:=trunc(ds/2);
   if cfgplot.UseBMP then begin
     // external ellipse
     ds2:= trunc(ds/2)+cfgchart.drawpen;
@@ -907,7 +912,7 @@ if not cfgplot.Invisible then begin
 end;
 end;
 
-Procedure TSplot.PlotDblStar(x,y,r: single; ma,sep,pa,b_v : Double);
+function TSplot.PlotDblStar(x,y,r: single; ma,sep,pa,b_v : Double):integer;
 var
   rd: Double;
   ds,ds2,xx,yy : Integer;
@@ -919,10 +924,10 @@ if not cfgplot.Invisible then
  ds2:= trunc(ds/2);
  rd:=max(r,ds2 + cfgchart.drawsize*(2+2*(0.7+ln(min(50,max(0.5,sep))))));
  if cfgplot.UseBMP then begin
-   PlotStar(x,y,ma,b_v);
+   result:=PlotStar(x,y,ma,b_v);
    BGRADrawLine(x,y,x-round(rd*sin(pa)),y-round(rd*cos(pa)),ColorToBGRA(cfgplot.Color[15]),1,cbmp);
  end else if cnv<>nil then with cnv do begin
-   PlotStar(x,y,ma,b_v);
+   result:=PlotStar(x,y,ma,b_v);
    Pen.Width := 1;
    Pen.Color := cfgplot.Color[15];
    Brush.style:=bsSolid;

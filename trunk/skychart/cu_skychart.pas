@@ -1006,7 +1006,7 @@ function Tskychart.DrawStars :boolean;
 var rec:GcatRec;
   x1,y1,cyear,dyear,pra,pdec,timelimit: Double;
   xx,yy,xxp,yyp : single;
-  j,lid,saveplot,n,lnum,lp : integer;
+  j,lid,saveplot,n,lnum,lp,rs : integer;
   first,forcelabel,savefilter: boolean;
   firstcat:TSname;
   gk,lis: string;
@@ -1081,28 +1081,28 @@ if Fcatalog.OpenStar then
        WindowXY(x1,y1,xxp,yyp,cfgsc);
        Fplot.PlotLine(xx,yy,xxp,yyp,Fplot.cfgplot.Color[15],1);
     end;
-    Fplot.PlotStar(xx,yy,rec.star.magv,rec.star.b_v);
+    rs:=Fplot.PlotStar(xx,yy,rec.star.magv,rec.star.b_v);
     if forcelabel or ((cfgsc.DrawAllStarLabel or(rec.options.ShortName=firstcat)) and (rec.star.magv<cfgsc.StarmagMax-cfgsc.LabelMagDiff[1])) then begin
        if (rec.options.ShortName=firstcat) then al:=laBottomLeft
                                            else al:=laBottomRight;
        if (rec.star.b_v>0.28)and(rec.star.b_v<0.30) then begin
           y1:=0;
        end;
-       if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,lnum,formatfloat(f2,rec.star.magv),al,0,4,true)
-       else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, 0, 2, lnum, rec.str[3],al,0,lp,true)
+       if cfgsc.MagLabel then SetLabel(lid,xx,yy,rs,2,lnum,formatfloat(f2,rec.star.magv),al,0,4,true)
+       else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, rs, 2, lnum, rec.str[3],al,0,lp,true)
        else if rec.star.valid[vsGreekSymbol] then begin
           gk:=GreekSymbolUtf8(rec.star.greeksymbol);
           {$ifdef mswindows}
-          SetLabel(lid,xx,yy,0,7,1,gk,al,0,lp,true);
+          SetLabel(lid,xx,yy,rs,7,1,gk,al,0,lp,true);
           {$else}
           if plot.cfgchart.onprinter and (not plot.cfgplot.UseBMP) then begin
             plot.cfgplot.FontName[7]:='symbol';
-            SetLabel(lid,xx,yy,0,7,lnum,gk,al,0,lp,true);
-          end else SetLabel(lid,xx,yy,0,2,lnum,gk,al,0,lp,true);
+            SetLabel(lid,xx,yy,rs,7,lnum,gk,al,0,lp,true);
+          end else SetLabel(lid,xx,yy,rs,2,lnum,gk,al,0,lp,true);
           {$endif}
         end else begin
            if lp>0 then lp:=4;
-           SetLabel(lid,xx,yy,0,2,lnum,rec.star.id,al,0,lp,true);
+           SetLabel(lid,xx,yy,rs,2,lnum,rec.star.id,al,0,lp,true);
         end;
     end;
  end;
@@ -1119,7 +1119,7 @@ function Tskychart.DrawVarStars :boolean;
 var rec:GcatRec;
   x1,y1,timelimit: Double;
   xx,yy:single;
-  lid,n,lnum,lp: integer;
+  lid,n,lnum,lp,rs: integer;
   forcelabel,savefilter: boolean;
   lis:string;
 begin
@@ -1151,10 +1151,10 @@ if Fcatalog.OpenVarStar then
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-    Fplot.PlotVarStar(xx,yy,rec.variable.magmax,rec.variable.magmin);
+    rs:=Fplot.PlotVarStar(xx,yy,rec.variable.magmax,rec.variable.magmin);
     if forcelabel or (rec.variable.magmax<cfgsc.StarmagMax-cfgsc.LabelMagDiff[2]) then begin
-      if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,lnum,formatfloat(f2,rec.variable.magmax)+'-'+formatfloat(f2,rec.variable.magmin),laTopLeft,0,4)
-         else SetLabel(lid,xx,yy,0,2,lnum,rec.variable.id,laTopLeft,0,lp);
+      if cfgsc.MagLabel then SetLabel(lid,xx,yy,rs,2,lnum,formatfloat(f2,rec.variable.magmax)+'-'+formatfloat(f2,rec.variable.magmin),laTopLeft,0,4)
+         else SetLabel(lid,xx,yy,rs,2,lnum,rec.variable.id,laTopLeft,0,lp);
     end;
  end;
 end;
@@ -1169,7 +1169,7 @@ function Tskychart.DrawDblStars :boolean;
 var rec:GcatRec;
   x1,y1,x2,y2,rot,timelimit: Double;
   xx,yy:single;
-  lid,n,lnum,lp: integer;
+  lid,n,lnum,lp,rs: integer;
   forcelabel,savefilter: boolean;
   lis,buf:string;
 begin
@@ -1208,13 +1208,13 @@ if Fcatalog.OpenDblStar then
     rec.double.pa:=rec.double.pa*cfgsc.FlipX;
     if cfgsc.FlipY<0 then rec.double.pa:=180-rec.double.pa;
     rec.double.pa:=Deg2Rad*rec.double.pa+rot;
-    Fplot.PlotDblStar(xx,yy,abs(rec.double.sep*secarc*cfgsc.BxGlb),rec.double.mag1,rec.double.sep,rec.double.pa,0);
+    rs:=Fplot.PlotDblStar(xx,yy,abs(rec.double.sep*secarc*cfgsc.BxGlb),rec.double.mag1,rec.double.sep,rec.double.pa,0);
     if forcelabel or (rec.double.mag1<cfgsc.StarmagMax-cfgsc.LabelMagDiff[3]) then begin
-      if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,lnum,formatfloat(f2,rec.double.mag1),laTopRight,0,4)
+      if cfgsc.MagLabel then SetLabel(lid,xx,yy,rs,2,lnum,formatfloat(f2,rec.double.mag1),laTopRight,0,4)
       else begin
         buf:=rec.double.id;
         if trim(rec.double.compname)>'' then buf:=trim(buf)+blank+trim(rec.double.compname);
-        SetLabel(lid,xx,yy,0,2,lnum,buf,laTopRight,0,lp);
+        SetLabel(lid,xx,yy,rs,2,lnum,buf,laTopRight,0,lp);
       end;
     end;
  end;
