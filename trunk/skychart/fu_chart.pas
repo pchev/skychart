@@ -1137,6 +1137,7 @@ var buf:TStringList;
 begin
 buf:=TStringList.Create;
 buf.LoadFromFile(fn);
+// PageSize required for ps2pdf
 if printlandscape then begin
    i:=buf.IndexOf('%%Page: 1 1')+1;
    if i>1 then begin
@@ -1358,7 +1359,7 @@ try
       ps.enddoc;
       fname:=slash(printpath)+'cdcprint.ps';
       ps.savetofile(SysToUTF8(fname));
-     // FixPostscript(fname,PrintLandscape,round(PaperWidth[cm.Paper]*72),round(PaperHeight[cm.Paper]*72));
+      FixPostscript(fname,PrintLandscape,round(PaperWidth[cm.Paper]*72),round(PaperHeight[cm.Paper]*72));
       ps.Free;
       chdir(appdir);
       if assigned(Fshowinfo) then Fshowinfo(rsSendChartToP , caption);
