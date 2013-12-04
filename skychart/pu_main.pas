@@ -5569,7 +5569,7 @@ cfgm.KioskDebug:=ReadBool(section,'KioskDebug',false);
 cfgm.KioskMode:=(cfgm.KioskPass>'');
 cfgm.SimpleDetail:=cfgm.KioskMode;
 cfgm.SimpleDetail:=ReadBool(section,'SimpleDetail',cfgm.SimpleDetail);
-cfgm.SimpleMove:=cfgm.SimpleDetail;
+cfgm.SimpleMove:=cfgm.SimpleDetail or ReadBool(section,'SimpleMove',cfgm.SimpleMove);
 cfgm.CenterAtNoon:=ReadBool(section,'CenterAtNoon',cfgm.CenterAtNoon);
 if (ReadBool(section,'WinMaximize',true)) then f_main.WindowState:=wsMaximized;
 cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
@@ -6357,6 +6357,7 @@ WriteInteger(section,'PrtTopMargin',cfgm.PrtTopMargin);
 WriteInteger(section,'PrtBottomMargin',cfgm.PrtBottomMargin);
 WriteBool(section,'PrintHeader',cfgm.PrintHeader);
 WriteString(section,'Theme',cfgm.ThemeName);
+WriteBool(section,'SimpleMove',cfgm.SimpleMove);
 WriteBool(section,'WinMaximize',(f_main.WindowState=wsMaximized));
 WriteBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 WriteBool(section,'ListStar',catalog.cfgshr.ListStar);
@@ -7083,6 +7084,9 @@ if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
          break;
       end;
   end;
+  ToolButton15.Down:=cfgm.SimpleMove;
+  if cfgm.SimpleMove then ToolButton15.ImageIndex:=97
+     else ToolButton15.ImageIndex:=96;
   with MultiFrame1.ActiveObject as Tf_chart do begin
     if sc.cfgsc.ManualTelescope then begin
        ControlPanel1.Visible:=false;
