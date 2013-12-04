@@ -2298,9 +2298,11 @@ else if (button=mbLeft)and(ssShift in shift)and(not lastquick) then begin
    ListXY(x,y);
 end;
 if (button=mbMiddle)or((button=mbLeft)and(ssShift in shift))or((button=mbLeft)and cmain.SimpleMove) then begin
-   if TrackCursorMove then TrackCursor(X,Y);
    Image1.Cursor:=ChartCursor;
-   Refresh;
+   if TrackCursorMove then begin
+     TrackCursor(X,Y);
+     Refresh;
+   end;
 end;
 end;
 
