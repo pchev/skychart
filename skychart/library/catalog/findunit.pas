@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {$mode objfpc}{$H+}
 interface
 Uses sysutils,skylibcat,ngcunit,wdsunit,gcvunit,gscunit,gscfits,gsccompact,
-     bscunit,pgcunit,sacunit,tyc2unit,usnoaunit,gcatunit;
+     bscunit,pgcunit,sacunit,tyc2unit,usnoaunit,usnobunit,gcatunit;
 
 Procedure FindNumNGC(id:Integer ;var ar,de:double; var ok:boolean);
 Procedure FindNumIC(id:Integer ;var ar,de:double; var ok:boolean);
@@ -47,6 +47,7 @@ Procedure FindNumGcat(path,catshortname,id : string ; keylen : integer; var ar,d
 Procedure FindNumGcatRec(path,catshortname,id : string ; keylen : integer; var rec:GCatrec; var ok:boolean);
 Procedure FindNumTYC2(id : string ;var lin: TY2rec; var ok:boolean);
 Procedure FindNumUSNOA(id : string ;var ar,de:double; var ok:boolean);
+Procedure FindNumUSNOB(id : string ;var ar,de:double; var ok:boolean);
 procedure SetXHIPpath(path : string);
 
 implementation                          
@@ -333,6 +334,21 @@ if p>0 then begin
    smnum:=strtoint(copy(buf,1,p-1));
    num:=strtoint(copy(buf,p+1,99));
    FindUSNOAnum(smnum,num,ar,de,ok);
+end;
+end;
+
+Procedure FindNumUSNOB(id : string ;var ar,de:double; var ok:boolean);
+var smnum,num : integer;
+    p : integer;
+    buf:string;
+begin
+ok:=false;
+buf:=trim(id);
+p:=pos('-',buf);
+if p>0 then begin
+   smnum:=strtoint(copy(buf,1,p-1));
+   num:=strtoint(copy(buf,p+1,99));
+   FindUSNOBnum(smnum,num,ar,de,ok);
 end;
 end;
 

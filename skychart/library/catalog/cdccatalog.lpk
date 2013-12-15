@@ -18,7 +18,7 @@
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
-    <Files Count="26">
+    <Files Count="27">
       <Item1>
         <Filename Value="bscunit.pas"/>
         <UnitName Value="bscunit"/>
@@ -123,6 +123,10 @@
         <Filename Value="vocat.pas"/>
         <UnitName Value="vocat"/>
       </Item26>
+      <Item27>
+        <Filename Value="usnobunit.pas"/>
+        <UnitName Value="usnobunit"/>
+      </Item27>
     </Files>
     <RequiredPkgs Count="2">
       <Item1>
