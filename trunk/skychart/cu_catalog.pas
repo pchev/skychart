@@ -30,7 +30,7 @@ interface
 uses
     bscunit, dscat, findunit, gcatunit, gcmunit, gcvunit, gpnunit, gsccompact,
     gscfits, gscunit, lbnunit, microcatunit, ngcunit, oclunit, pgcunit, vocat,
-    sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit, wdsunit,
+    sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit, usnobunit, wdsunit,
     rc3unit, BGRABitmap, BGRABitmapTypes, Graphics,
     u_translation, u_constant, u_util, u_projection,
     SysUtils, Classes, Math, Dialogs, Forms;
@@ -73,6 +73,7 @@ type
      function GetGSCC(var rec:GcatRec):boolean;
      function GetGSC(var rec:GcatRec):boolean;
      function GetUSNOA(var rec:GcatRec):boolean;
+     function GetUSNOB(var rec:GcatRec):boolean;
      function GetMCT(var rec:GcatRec):boolean;
      function GetDSbase(var rec:GcatRec):boolean;
      function GetDSTyc(var rec:GcatRec):boolean;
@@ -283,6 +284,7 @@ case curcat of
    gscc    : result:=GetGSCC(rec);
    gsc     : result:=GetGSC(rec);
    usnoa   : result:=GetUSNOA(rec);
+   usnob   : result:=GetUSNOB(rec);
    microcat: result:=GetMCT(rec);
    dsbase  : result:=GetDSbase(rec);
    dstyc   : result:=GetDSTyc(rec);
@@ -339,6 +341,7 @@ case curcat of
    gscc    : begin SetGsccPath(cfgcat.starcatpath[gscc-BaseStar]); OpenGSCCwin(result); end;
    gsc     : begin SetGscPath(cfgcat.starcatpath[gsc-BaseStar]); OpenGSCwin(result); end;
    usnoa   : begin SetUSNOAPath(cfgcat.starcatpath[usnoa-BaseStar]); OpenUSNOAwin(result); end;
+   usnob   : begin SetUSNOBPath(cfgcat.starcatpath[usnob-BaseStar]); OpenUSNOBwin(result); end;
    microcat: begin SetMCTPath(cfgcat.starcatpath[microcat-BaseStar]); OpenMCTwin(nmctcat,result); end;
    dsbase  : begin SetDSPath(cfgcat.starcatpath[dsbase-BaseStar],cfgcat.starcatpath[dstyc-BaseStar],cfgcat.starcatpath[dsgsc-BaseStar]); OpenDSbasewin(result); end;
    dstyc   : begin SetDSPath(cfgcat.starcatpath[dsbase-BaseStar],cfgcat.starcatpath[dstyc-BaseStar],cfgcat.starcatpath[dsgsc-BaseStar]); OpenDStycwin(result); end;
@@ -375,6 +378,7 @@ case curcat of
    gscc    : CloseGSCC;
    gsc     : CloseGSC;
    usnoa   : CloseUSNOA;
+   usnob   : CloseUSNOB;
    microcat: CloseMCT;
    dsbase  : CloseDSbase;
    dstyc   : CloseDStyc;
@@ -1052,6 +1056,28 @@ begin
              EmptyRec.options.flabel[16]:='Field';
              EmptyRec.options.flabel[17]:='Quality';
              EmptyRec.options.flabel[18]:='Calibration';
+             end;
+   usnob   : begin
+             EmptyRec.options.flabel:=StarLabel;
+             EmptyRec.options.ShortName:='UNB';
+             EmptyRec.options.LongName:='USNO-B catalog';
+             EmptyRec.options.rectype:=rtStar;
+             EmptyRec.options.Equinox:=2000;
+             EmptyRec.options.EquinoxJD:=jd2000;
+             EmptyRec.options.Epoch:=2000.0;
+             EmptyRec.options.MagMax:=21;
+             EmptyRec.options.UsePrefix:=0;
+             Emptyrec.star.valid[vsId]:=true;
+             Emptyrec.star.valid[vsMagv]:=true;
+             Emptyrec.star.valid[vsMagb]:=true;
+             Emptyrec.star.valid[vsPmra]:=true;
+             Emptyrec.star.valid[vsPmdec]:=true;
+             EmptyRec.vnum[1]:=true;
+             EmptyRec.vnum[2]:=true;
+             EmptyRec.options.flabel[4]:='MagR1';
+             EmptyRec.options.flabel[6]:='MagB1';
+             EmptyRec.options.flabel[26]:='MagR2';
+             EmptyRec.options.flabel[27]:='MagB2';
              end;
    microcat: begin
              EmptyRec.options.flabel:=StarLabel;
@@ -2047,6 +2073,34 @@ if result then begin
 end;
 end;
 
+function Tcatalog.GetUSNOB(var rec:GcatRec):boolean;
+var lin : USNOBrec;
+begin
+rec:=EmptyRec;
+result:=true;
+repeat
+  ReadUSNOB(lin,result);
+  if not result then break;
+  if (lin.mr1>25)or(lin.mr1=0) then begin lin.mr1:=lin.mr2; rec.options.flabel[4]:='MagR2'; end;
+  if (lin.mr1>25)or(lin.mr1=0) then begin lin.mr1:=lin.mb1; rec.options.flabel[4]:='MagB1'; end;
+  if (lin.mr1>25)or(lin.mr1=0) then begin lin.mr1:=lin.mb2; rec.options.flabel[4]:='MagB2'; end;
+  if (lin.mr1>25)or(lin.mr1=0) then begin lin.mr1:=99; rec.options.flabel[4]:='No mag.'; end;
+  if cfgshr.StarFilter and (lin.mr1>cfgcat.StarMagMax) then continue;
+  break;
+until not result;
+if result then begin
+   rec.ra:=deg2rad*lin.ra;
+   rec.dec:=deg2rad*lin.de;
+   rec.star.magv:=lin.mr1;
+   rec.star.magb:=lin.mb1;
+   rec.num[1]:=lin.mr2;
+   rec.num[2]:=lin.mb2;
+   rec.star.pmra:=deg2rad*lin.pmra/3600;
+   rec.star.pmdec:=deg2rad*lin.pmde/3600;
+   rec.star.id:=lin.id;
+end;
+end;
+
 function Tcatalog.GetMCT(var rec:GcatRec):boolean;
 var lin : MCTrec;
 begin
@@ -2698,6 +2752,10 @@ try
                      SetUSNOApath(cfgcat.StarCatPath[usnoa-BaseStar]);
                      FindNumUSNOA(id,ra,dec,result) ;
                      end;
+        S_UNB      : if IsUSNOBpath(cfgcat.StarCatPath[usnob-BaseStar]) then begin
+                     SetUSNOBpath(cfgcat.StarCatPath[usnob-BaseStar]);
+                     FindNumUSNOB(id,ra,dec,result) ;
+                     end;
    end;
    if result then FFindId:=id;
    ra:=deg2rad*15*ra;
@@ -2999,6 +3057,7 @@ if not nextobj then begin
    gscc    : OpenGSCC(xx1,xx2,yy1,yy2,ok);
    gsc     : OpenGSC(xx1,xx2,yy1,yy2,ok);
    usnoa   : OpenUSNOA(xx1,xx2,yy1,yy2,ok);
+   usnob   : OpenUSNOB(xx1,xx2,yy1,yy2,ok);
    microcat: OpenMCT(xx1,xx2,yy1,yy2,3,ok);
    dsbase  : OpenDSbase(xx1,xx2,yy1,yy2,ok);
    dstyc   : OpenDSTyc(xx1,xx2,yy1,yy2,ok);
@@ -3080,6 +3139,7 @@ repeat
    gscc    : ok:=GetGSCC(rec);
    gsc     : ok:=GetGSC(rec);
    usnoa   : ok:=GetUSNOA(rec);
+   usnob   : ok:=GetUSNOB(rec);
    microcat: ok:=GetMCT(rec);
    dsbase  : ok:=GetDSbase(rec);
    dstyc   : ok:=GetDSTyc(rec);
@@ -3269,6 +3329,7 @@ if cfgsc.showstars and ((ftype=ftAll)or(ftype=ftStar)or(ftype=ftVar)or(ftype=ftD
   if (not ok) and cfgcat.starcaton[gscc-BaseStar] then begin ok:=FindAtPos(gscc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGSCC; end;
   if (not ok) and cfgcat.starcaton[dsgsc-BaseStar] then begin ok:=FindAtPos(dsgsc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseDSgsc; end;
   if (not ok) and cfgcat.starcaton[usnoa-BaseStar] then begin ok:=FindAtPos(usnoa,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseUSNOA; end;
+  if (not ok) and cfgcat.starcaton[usnob-BaseStar] then begin ok:=FindAtPos(usnob,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseUSNOB; end;
   if (not ok) and cfgcat.starcaton[microcat-BaseStar] then begin ok:=FindAtPos(microcat,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseMCT; end;
   if (not ok) and cfgcat.starcaton[bsc-BaseStar] then begin ok:=FindAtPos(bsc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseBSC; end;
 end;
@@ -3307,6 +3368,7 @@ begin
    gscc    : result:=IsGSCCPath(catpath);
    gsc     : result:=IsGSCPath(catpath);
    usnoa   : result:=IsUSNOAPath(catpath);
+   usnob   : result:=IsUSNOBPath(catpath);
    microcat: result:=IsMCTPath(catpath);
    dsbase  : result:=IsDSbasePath(catpath);
    dstyc   : result:=IsDSTycPath(catpath);

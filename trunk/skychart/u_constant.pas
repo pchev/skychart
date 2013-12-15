@@ -359,7 +359,7 @@ const
   ftCom = 101;
   ftAst = 102;
   BaseStar = 1000;
-  MaxStarCatalog = 16;
+  MaxStarCatalog = 17;
   DefStar = 1001;
   sky2000 = 1002;
   tyc = 1003;
@@ -376,6 +376,7 @@ const
   gcstar = 1014;
   vostar = 1015;
   bsc = 1016;
+  usnob = 1017;
   BaseVar = 2000;
   MaxVarStarCatalog = 2;
   gcvs = 2001;
@@ -400,7 +401,7 @@ const
   BaseLin = 5000;
   MaxLinCatalog = 1;
   gclin = 5001;
-  MaxSearchCatalog = 29;
+  MaxSearchCatalog = 30;
   S_Messier = 1;
   S_NGC = 2;
   S_IC = 3;
@@ -430,6 +431,7 @@ const
   S_TYC2 = 27;
   S_Common = 28;
   S_UNA = 29;
+  S_UNB = 30;
   StarLabel: Tlabellst = ('RA', 'DEC', 'Id', 'mV', 'b-v', 'mB', 'mR',
     'sp', 'pmRA', 'pmDE', 'date', 'px', 'desc', '', '', 'Str1', 'Str2', 'Str3',
     'Str4', 'Str5', 'Str6', 'Str7', 'Str8', 'Str9', 'Str10', 'Num1', 'Num2',

@@ -6,8 +6,8 @@ object f_config_catalog: Tf_config_catalog
   ClientHeight = 521
   ClientWidth = 499
   TabOrder = 0
-  DesignLeft = 303
-  DesignTop = 274
+  DesignLeft = 376
+  DesignTop = 242
   object MainPanel: TPanel
     Left = 0
     Height = 521
@@ -23,10 +23,10 @@ object f_config_catalog: Tf_config_catalog
       Height = 465
       Top = 1
       Width = 497
-      ActivePage = Page2
+      ActivePage = Page4
       Align = alClient
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 6
       TabOrder = 1
       object Page2: TTabSheet
         Caption = 'CdC Stars'
@@ -1449,7 +1449,7 @@ object f_config_catalog: Tf_config_catalog
           Top = 197
           Width = 80
           AutoSize = False
-          Caption = 'Replaced by UCAC3'
+          Caption = 'Replaced by UCAC4'
           ParentColor = False
           WordWrap = True
         end
@@ -1689,9 +1689,9 @@ object f_config_catalog: Tf_config_catalog
         end
         object usn3: TDirectoryEdit
           Tag = 9
-          Left = 358
+          Left = 359
           Height = 23
-          Top = 317
+          Top = 293
           Width = 108
           OnAcceptDirectory = CDCAcceptDirectory
           ShowHidden = False
@@ -1705,7 +1705,7 @@ object f_config_catalog: Tf_config_catalog
           Tag = 7
           Left = 358
           Height = 23
-          Top = 277
+          Top = 261
           Width = 108
           OnAcceptDirectory = CDCAcceptDirectory
           ShowHidden = False
@@ -1719,7 +1719,7 @@ object f_config_catalog: Tf_config_catalog
           Tag = 6
           Left = 358
           Height = 23
-          Top = 237
+          Top = 229
           Width = 108
           OnAcceptDirectory = CDCAcceptDirectory
           ShowHidden = False
@@ -1734,7 +1734,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 321
           Height = 23
           Hint = '0..10'
-          Top = 237
+          Top = 229
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1748,7 +1748,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 321
           Height = 23
           Hint = '0..10'
-          Top = 277
+          Top = 261
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1759,10 +1759,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object fusn2: TLongEdit
           Tag = 9
-          Left = 321
+          Left = 322
           Height = 23
           Hint = '0..10'
-          Top = 317
+          Top = 293
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1773,10 +1773,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object fusn1: TLongEdit
           Tag = 9
-          Left = 281
+          Left = 282
           Height = 23
           Hint = '0..10'
-          Top = 317
+          Top = 293
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1790,7 +1790,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 281
           Height = 23
           Hint = '0..10'
-          Top = 277
+          Top = 261
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1804,7 +1804,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 281
           Height = 23
           Hint = '0..10'
-          Top = 237
+          Top = 229
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1815,9 +1815,9 @@ object f_config_catalog: Tf_config_catalog
         end
         object USNBright: TCheckBox
           Tag = 9
-          Left = 170
+          Left = 171
           Height = 23
-          Top = 317
+          Top = 293
           Width = 93
           Caption = 'Bright stars'
           OnClick = USNBrightClick
@@ -1825,10 +1825,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object USNbox: TCheckBox
           Tag = 9
-          Left = 87
+          Left = 88
           Height = 23
           Hint = '- USNO-SA1.0 '#13#10'- USNO-A1.0 '#13#10'- USNO-A2.0'#13#10'  U.S. Naval Observatory CDROM''s'
-          Top = 317
+          Top = 293
           Width = 69
           HelpContext = 113
           Caption = 'USNO-A'
@@ -1842,7 +1842,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 87
           Height = 23
           Hint = 'The Hubble Space Telescope Guide Star Catalog  ( Lasker 1990)  Compact CDS version '
-          Top = 277
+          Top = 261
           Width = 125
           HelpContext = 104
           Caption = 'HST GSC compact'
@@ -1856,7 +1856,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 87
           Height = 23
           Hint = 'The Hubble Space Telescope Guide Star Catalog  ( Lasker 1990)  original FITS CDROM'
-          Top = 237
+          Top = 229
           Width = 140
           HelpContext = 104
           Caption = 'HST GSC original FITS'
@@ -2050,6 +2050,72 @@ object f_config_catalog: Tf_config_catalog
           Width = 80
           AutoSize = False
           Caption = 'Replaced by XHIP'
+          ParentColor = False
+          WordWrap = True
+        end
+        object UNBbox: TCheckBox
+          Tag = 17
+          Left = 88
+          Height = 23
+          Hint = '- USNO-B1.0 '#13#10' U.S. Naval Observatory format, 180 directory, each with 10 .acc and 10 .cat files.'
+          Top = 325
+          Width = 70
+          HelpContext = 113
+          Caption = 'USNO-B'
+          OnClick = CDCStarSelClick
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 41
+        end
+        object funb1: TLongEdit
+          Tag = 17
+          Left = 282
+          Height = 23
+          Hint = '0..10'
+          Top = 325
+          Width = 30
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 42
+          OnChange = CDCStarField1Change
+          Value = 0
+          MaxValue = 10
+        end
+        object funb2: TLongEdit
+          Tag = 17
+          Left = 322
+          Height = 23
+          Hint = '0..10'
+          Top = 325
+          Width = 30
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 43
+          OnChange = CDCStarField2Change
+          Value = 0
+          MaxValue = 10
+        end
+        object unb3: TDirectoryEdit
+          Tag = 17
+          Left = 358
+          Height = 23
+          Top = 325
+          Width = 108
+          OnAcceptDirectory = CDCAcceptDirectory
+          ShowHidden = False
+          ButtonWidth = 23
+          NumGlyphs = 1
+          MaxLength = 0
+          TabOrder = 44
+          OnChange = CDCStarPathChange
+        end
+        object Label97: TLabel
+          Left = 5
+          Height = 38
+          Top = 293
+          Width = 80
+          AutoSize = False
+          Caption = 'Replaced by NOMAD'
           ParentColor = False
           WordWrap = True
         end

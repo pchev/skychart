@@ -469,6 +469,7 @@ InitStarC(gscc,14.5);
 InitStarC(dsgsc,14.5);
 InitStarC(microcat,16);
 InitStarC(usnoa,18);
+InitStarC(usnob,21);
 InitStarC(vostar,vostar_magmax);
 { activate the other catalog }
 InitVarC(gcvs);
@@ -2920,6 +2921,7 @@ try
      if Fcatalog.cfgcat.starcaton[gscc-BaseStar] then FindAtPosCat(gscc);
      if Fcatalog.cfgcat.starcaton[dsgsc-BaseStar] then FindAtPosCat(dsgsc);
      if Fcatalog.cfgcat.starcaton[usnoa-BaseStar] then FindAtPosCat(usnoa);
+     if Fcatalog.cfgcat.starcaton[usnob-BaseStar] then FindAtPosCat(usnob);
      if Fcatalog.cfgcat.starcaton[microcat-BaseStar] then FindAtPosCat(microcat);
   end;
   if i>maxln then msg:=Format(rsMoreThanObje, [inttostr(maxln)])
