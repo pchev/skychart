@@ -233,6 +233,7 @@ str(zone:4,nomreg);
 nomreg:=padzeros(nomreg,4);
 str(dir:3,nomdir);
 nomdir:=padzeros(nomdir,3);
+CurZone:=nomreg;
 nomfich:=slash(USNOBpath)+slash(nomdir)+'b'+nomreg+'.cat';
 if not FileExists(nomfich) then exit;
 AssignFile(fcat,nomfich);
@@ -251,7 +252,7 @@ currec:=num-1;
 seek(fcat,currec);
 if not eof(fcat) then begin
   ReadUSNOB(lin,ok);
-  ar:=lin.ra;
+  ar:=lin.ra/15;
   de:=lin.de;
 end;
 CloseUSNOB;

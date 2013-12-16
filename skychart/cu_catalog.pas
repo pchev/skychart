@@ -2902,6 +2902,21 @@ begin
       result:=FindNum(S_UNA,buf,ar1,de1) ;
       if result then exit;
    end;
+   if uppercase(copy(Num,1,6))='USNO-A' then begin
+      buf:=StringReplace(Num,'usno-a','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_UNA,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,3))='UNB' then begin
+      buf:=StringReplace(Num,'unb','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_UNB,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,6))='USNO-B' then begin
+      buf:=StringReplace(Num,'usno-b','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_UNB,buf,ar1,de1) ;
+      if result then exit;
+   end;
    if uppercase(copy(Num,1,3))='TYC' then begin
       buf:=StringReplace(Num,'tyc','',[rfReplaceAll,rfIgnoreCase]);
       result:=FindNum(S_TYC2,buf,ar1,de1) ;
