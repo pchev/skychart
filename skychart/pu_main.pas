@@ -3440,7 +3440,7 @@ end;
 
 procedure Tf_main.SetupPicturesExecute(Sender: TObject);
 begin
-ShowBackgroundImageExecute(sender);
+SetupPicturesPage(1);
 end;
 
 procedure Tf_main.SetupChartExecute(Sender: TObject);
