@@ -2384,7 +2384,7 @@ if ok then begin
    FormatSAC(lin,rec);
    ra:=rad2deg*rec.ra/15;
    dec:=rad2deg*rec.dec;
-   FFindId:=id;
+   FFindId:=rec.neb.id;
    FFindRecOK:=true;
    FFindRec:=rec;
 end;
@@ -2668,6 +2668,7 @@ result:=false;
 while lockcat do application.ProcessMessages;
 try
   lockcat:=true;
+  FFindId:='';
   case cat of
         S_Messier  : if IsNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]) then begin
                      SetNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]);
@@ -2757,7 +2758,7 @@ try
                      FindNumUSNOB(id,ra,dec,result) ;
                      end;
    end;
-   if result then FFindId:=id;
+   if result and (FFindId='') then FFindId:=id;
    ra:=deg2rad*15*ra;
    dec:=deg2rad*dec;
 finally

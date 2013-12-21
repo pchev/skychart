@@ -488,7 +488,7 @@ if CheckBox3.Checked then begin
   for i:=1 to StringGrid1.RowCount-1 do begin
      if StringGrid1.RowHeights[i]>0 then begin
        lbl:=trim(StringGrid1.Cells[7,i]);
-       if lbl<>'' then FObjLabels.Add(uppercase(trim(wordspace(lbl))));
+       if lbl<>'' then FObjLabels.Add(uppercase(nospace(lbl)));
      end;
   end;
   FObjLabels.Sorted:=True;

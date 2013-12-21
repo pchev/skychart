@@ -1044,7 +1044,7 @@ if Fcatalog.OpenStar then
  end;
  forcelabel:=false; lnum:=1; lp:=2;
  if FObjectListLabels.Count>0 then begin
-  if FObjectListLabels.Find(uppercase(trim(wordspace(rec.star.id))),n) then begin
+  if FObjectListLabels.Find(uppercase(nospace(rec.star.id)),n) then begin
      forcelabel:=true;
      lp:=0;
      lnum:=9;
@@ -1138,7 +1138,7 @@ if Fcatalog.OpenVarStar then
   end;
  forcelabel:=false; lnum:=2; lp:=2;
  if FObjectListLabels.Count>0 then begin
-  if FObjectListLabels.Find(uppercase(trim(wordspace(rec.variable.id))),n) then begin
+  if FObjectListLabels.Find(uppercase(nospace(rec.variable.id)),n) then begin
      forcelabel:=true;
      lp:=0;
      lnum:=9;
@@ -1188,7 +1188,7 @@ if Fcatalog.OpenDblStar then
  end;
  forcelabel:=false; lnum:=3; lp:=2;
  if FObjectListLabels.Count>0 then begin
-  if FObjectListLabels.Find(uppercase(trim(wordspace(rec.double.id))),n) then begin
+  if FObjectListLabels.Find(uppercase(nospace(rec.double.id)),n) then begin
      forcelabel:=true;
      lp:=0;
      lnum:=9;
@@ -1313,7 +1313,7 @@ var rec:GcatRec;
           forcelabel:=false; lnum:=4;
           if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
           if FObjectListLabels.Count>0 then begin
-           if FObjectListLabels.Find(uppercase(trim(wordspace(rec.neb.id))),n) then begin
+           if FObjectListLabels.Find(uppercase(nospace(rec.neb.id)),n) then begin
               forcelabel:=true;
               lnum:=9;
            end;
@@ -1810,7 +1810,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
         end;
         lis:=pla[ipla]+FormatFloat(f6,cfgsc.Planetlst[j,ipla,8])+FormatFloat(f6,cfgsc.Planetlst[j,ipla,9]);
         lid:=rshash(lis,$7FFFFFFF);
-        if (FObjectListLabels.Count>0) and FObjectListLabels.Find(uppercase(trim(wordspace(ltxt))),k)
+        if (FObjectListLabels.Count>0) and FObjectListLabels.Find(uppercase(nospace(ltxt)),k)
          then
            SetLabel(lid,xx,yy,round(pixscale*diam/2),2,9,ltxt,lalign,lori,0,lopt)
          else
@@ -1955,7 +1955,7 @@ if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw asteroids');
       if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
         forcelabel:=false;
         if FObjectListLabels.Count>0 then begin
-         if FObjectListLabels.Find(uppercase(trim(wordspace(cfgsc.AsteroidName[j,i,2]))),k) then begin
+         if FObjectListLabels.Find(uppercase(nospace(cfgsc.AsteroidName[j,i,2])),k) then begin
             forcelabel:=true;
          end else begin
            if magn>(cfgsc.StarMagMax+savemagdiff) then continue;
@@ -2033,7 +2033,7 @@ if cfgsc.ShowCometValid then begin
       if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
         forcelabel:=false;
         if FObjectListLabels.Count>0 then begin
-         if FObjectListLabels.Find(uppercase(trim(wordspace(cfgsc.CometName[j,i,2]))),k) then begin
+         if FObjectListLabels.Find(uppercase(nospace(cfgsc.CometName[j,i,2])),k) then begin
             forcelabel:=true;
          end else begin
            if cfgsc.CometLst[j,i,3]>(cfgsc.StarMagMax+savemagdiff) then continue;
