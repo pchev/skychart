@@ -316,7 +316,7 @@ end;
     // EQ grid in ALt/Az mode
     DrawAltAzEqGrid;
     // then the horizon line if transparent
-    if (not cfgsc.horizonopaque)or(Fplot.cfgplot.UseBMP and not cfgsc.ShowHorizonPicture) then DrawHorizon;
+    if (not cfgsc.horizonopaque) then DrawHorizon;
     DrawDeepSkyObject;
     if cfgsc.showline then begin
        DrawOutline;
@@ -355,7 +355,7 @@ end;
   if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.showlabelall then DrawLabels;
 
   // the horizon line if not transparent
-  if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.horizonopaque and (not (Fplot.cfgplot.UseBMP and not cfgsc.ShowHorizonPicture)) then DrawHorizon;
+  if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.horizonopaque  then DrawHorizon;
 
   // Mask the chart outside of eyepiece
   DrawEyepieceMask;
