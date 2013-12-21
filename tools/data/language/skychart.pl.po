@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-23 13:51+0000\n"
-"PO-Revision-Date: 2013-11-23 14:10+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"PO-Revision-Date: 2013-11-25 09:52+0000\n"
+"Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-23 15:37+0000\n"
-"X-Generator: Launchpad (build 16831)\n"
+"X-Launchpad-Export-Date: 2013-12-21 13:01+0000\n"
+"X-Generator: Launchpad (build 16872)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -295,7 +295,7 @@ msgstr "Zastosuj zmiany do wszystkich map."
 
 #: u_translation.rsarchivethisi
 msgid "Archive this image?"
-msgstr "Archiwizować ten obraz?"
+msgstr "Czy zarchiwizować ten obraz?"
 
 #: u_translation.rsarchivetodir
 msgid "Archive to directory:"
@@ -1195,7 +1195,7 @@ msgstr "Dane zaczynają się w linii %s"
 
 #: u_translation.rsdatatype
 msgid "Data Type"
-msgstr "Typ Danych"
+msgstr "Typ danych"
 
 #: u_translation.rsdate
 msgid "Date"
@@ -1535,7 +1535,7 @@ msgstr "Wyświetl etykiety dla wszystkich skatalogowanych gwiazd"
 
 #: u_translation.rsdisplaypreci
 msgid "Display Precision"
-msgstr "Precyzja Wyświetlania"
+msgstr "Precyzja wyświetlania"
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar."
@@ -1983,7 +1983,7 @@ msgstr "ścieżka programu ffmpeg"
 
 #: u_translation.rsfieldname
 msgid "Field Name"
-msgstr "Nazwa Pola"
+msgstr "Nazwa pola"
 
 #: u_translation.rsfieldnumber
 msgid "Field Number"
@@ -2779,7 +2779,7 @@ msgstr "LII"
 
 #: u_translation.rslimit
 msgid "Limit"
-msgstr "Granica"
+msgstr "Limit"
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
@@ -2851,7 +2851,7 @@ msgstr "Wczytaj z pliku"
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."
-msgstr "Ładowanie listy Katalogów. Czekaj..."
+msgstr "Ładowanie listy katalogów. Czekaj..."
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"
@@ -3355,7 +3355,7 @@ msgstr "Bez zmian"
 
 #: u_translation.rsnodata
 msgid "No Data"
-msgstr "Brak Danych"
+msgstr "Brak danych"
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -3687,7 +3687,7 @@ msgstr "Parzystość"
 
 #: u_translation.rsparkinganddi
 msgid "Parking and Disconnecting telescope."
-msgstr "Parkowanie i Odłączenie Teleskopu"
+msgstr "Parkowanie i odłączenie teleskopu"
 
 #: u_translation.rsparktelescop
 msgid "Park Telescope"
@@ -4171,7 +4171,7 @@ msgstr "Realistyczne obrazy"
 
 #: u_translation.rsreallyparkan
 msgid "REALLY park and disconnect the telescope?"
-msgstr "Czy na pewno parkować i odłączyć teleskop"
+msgstr "Czy na pewno parkować i odłączyć teleskop?"
 
 #: u_translation.rsrealskycdrom
 msgid "Realsky CD-rom cannot be used on a 64 bit system."
@@ -4547,7 +4547,7 @@ msgstr "Wyszukaj według pozycji"
 
 #: u_translation.rssearchcatalo
 msgid "Search Catalogs"
-msgstr "Przeszukaj Katalogi"
+msgstr "Przeszukaj katalogi"
 
 #: u_translation.rssearchfor
 msgid "Search for"
@@ -4595,7 +4595,7 @@ msgstr "Wybierz katalog"
 
 #: u_translation.rsselectcircle
 msgid "Select Circle"
-msgstr "Wybierz Koło"
+msgstr "Wybierz koło"
 
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
@@ -4615,7 +4615,7 @@ msgstr "Wybierz płytkę z listy"
 
 #: u_translation.rsselectrectan
 msgid "Select Rectangle"
-msgstr "Wybierz Ramkę"
+msgstr "Wybierz ramkę"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
@@ -5583,7 +5583,7 @@ msgstr "Uaktualnij"
 
 #: u_translation.rsupdatecoordi
 msgid "Update coordinates"
-msgstr "Aktuzlizuj współrzędne"
+msgstr "Uaktualnij współrzędne"
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
@@ -5751,7 +5751,7 @@ msgstr "Wirtualny panel sterowania dla Scope.exe "
 
 #: u_translation.rsvirtualobser
 msgid "Virtual Observatory Catalog"
-msgstr "Katalog Wirtualnego Obserwatorium"
+msgstr "Katalog wirtualnego obserwatorium"
 
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
