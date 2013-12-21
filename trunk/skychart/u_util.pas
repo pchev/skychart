@@ -56,6 +56,7 @@ function ExpandTab(str:string; tabwidth:integer):string;
 function striphtml(html:string):string;
 function words(str,sep : string; p,n : integer; isep:char=blank) : string;
 function wordspace(str:string):string;
+function nospace(str:string):string;
 function pos2(sub,str:string;i:integer):integer;
 function InvertI16(X : Word) : SmallInt;
 function InvertI32(X : LongWord) : LongInt;
@@ -521,6 +522,11 @@ for j:=1 to length(str) do begin
       inc(i);
     end;
 end;
+end;
+
+function nospace(str:string):string;
+begin
+result:=StringReplace(str,' ','',[rfReplaceAll]);
 end;
 
 function wordspace(str:string):string;
