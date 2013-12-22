@@ -819,7 +819,7 @@ var dd,min1,min,sec: Double;
 begin
     dd:=Int(ar);
     min1:=abs(ar-dd)*60;
-    if min1>=59.99166667 then begin
+    if min1>=59.999166667 then begin
        dd:=dd+sgn(ar);
        if dd=24 then dd:=0;
        min1:=0.0;
@@ -839,18 +839,26 @@ begin
 end;
 
 Function DEpToStr(de: Double; precision:integer=1) : string;
-var dd,min1,min,sec: Double;
+var dd,min1,min,sec,p,pmin,psec: Double;
     d,m,s : string;
 begin
+    case precision of
+     0: p:=0.95;
+     1: p:=0.995;
+     2: p:=0.9995;
+     else p:=0.99995;
+    end;
+    psec:=59+p;
+    pmin:=59+psec/60;
     dd:=Int(de);
     min1:=abs(de-dd)*60;
-    if min1>=59.9999166667 then begin
+    if min1>=pmin then begin
        dd:=dd+sgn(de);
        min1:=0.0;
     end;
     min:=Int(min1);
     sec:=(min1-min)*60;
-    if sec>=59.995 then begin
+    if sec>=psec then begin
        min:=min+1;
        sec:=0.0;
     end;
@@ -865,19 +873,27 @@ begin
 end;
 
 Function ARpToStr(ar: Double; precision:integer=1) : string;
-var dd,min1,min,sec: Double;
+var dd,min1,min,sec,p,pmin,psec: Double;
     d,m,s : string;
 begin
+    case precision of
+     0: p:=0.95;
+     1: p:=0.995;
+     2: p:=0.9995;
+     else p:=0.99995;
+    end;
+    psec:=59+p;
+    pmin:=59+psec/60;
     dd:=Int(ar);
     min1:=abs(ar-dd)*60;
-    if min1>=59.9999166667 then begin
+    if min1>=pmin then begin
        dd:=dd+sgn(ar);
        if dd=24 then dd:=0;
        min1:=0.0;
     end;
     min:=Int(min1);
     sec:=(min1-min)*60;
-    if sec>=59.995 then begin
+    if sec>=psec then begin
        min:=min+1;
        sec:=0.0;
     end;
