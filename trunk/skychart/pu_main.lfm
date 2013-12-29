@@ -10891,8 +10891,10 @@ object f_main: Tf_main
       OnClick = SetupDisplayExecute
     end
     object MenuItem18: TMenuItem
-      Action = SetupPictures
-      OnClick = SetupPicturesExecute
+      Caption = 'Setup Pictures'
+      Hint = 'Change pictures display'
+      ImageIndex = 77
+      OnClick = MenuItem7Click
     end
     object MenuItem19: TMenuItem
       Action = SetupSystem
