@@ -3442,7 +3442,7 @@ end;
 
 procedure Tf_main.SetupPicturesExecute(Sender: TObject);
 begin
-SetupPicturesPage(1);
+ShowBackgroundImageExecute(sender);
 end;
 
 procedure Tf_main.SetupChartExecute(Sender: TObject);
@@ -6779,6 +6779,7 @@ SetupInternet.caption:='&'+rsInternet+Ellipsis;
 SetupPictures.caption:='&'+rsPictures+Ellipsis;
 SetupCalendar.caption:='&'+rsCalendar+Ellipsis;
 MenuItem7.caption:='&'+rsPictures+Ellipsis;
+MenuItem18.caption:='&'+rsPictures+Ellipsis;
 SetupCatalog.caption:='&'+rsCatalog+Ellipsis;
 MenuItem8.caption:='&'+rsShowHideDSSI;
 View1.caption:='&'+rsView;
