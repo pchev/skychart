@@ -122,13 +122,13 @@ Tskychart = class (TComponent)
     Function CloseSat : integer;
     function  FindArtSat(x1,y1,x2,y2:double; nextobj:boolean;  var nom,ma,desc:string):boolean;
     function DrawOrbitPath:boolean;
-    Procedure DrawGrid;
+    Procedure DrawGrid(drawlabel:boolean);
     Procedure DrawAltAzEqGrid;
     Procedure DrawPole(pole: integer);
-    procedure DrawEqGrid;
-    procedure DrawAzGrid;
-    procedure DrawGalGrid;
-    procedure DrawEclGrid;
+    procedure DrawEqGrid(drawlabel:boolean);
+    procedure DrawAzGrid(drawlabel:boolean);
+    procedure DrawGalGrid(drawlabel:boolean);
+    procedure DrawEclGrid(drawlabel:boolean);
     Procedure DrawScale;
     Procedure DrawBorder;
     function DrawConstL :boolean;
@@ -325,7 +325,7 @@ end;
     DrawComet;
   end;
   // then the lines
-  DrawGrid;
+  DrawGrid(false);
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawConstL;
     DrawConstB;
@@ -356,6 +356,9 @@ end;
 
   // the horizon line if not transparent
   if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.horizonopaque  then DrawHorizon;
+
+  // the coordinates grid labels
+  if cfgsc.ShowGridNum then DrawGrid(true);
 
   // Mask the chart outside of eyepiece
   DrawEyepieceMask;
@@ -2935,19 +2938,19 @@ finally
 end;
 end;
 
-Procedure Tskychart.DrawGrid;
+Procedure Tskychart.DrawGrid(drawlabel:boolean);
 begin
 if (cfgsc.ShowOnlyMeridian)or((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=(cfgsc.fov/2)) then begin
     if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw grid');
     if cfgsc.ShowGrid then begin
        case cfgsc.ProjPole of
-       Equat  :  DrawEqGrid;
-       AltAz  :  begin DrawAzGrid; if ((not Fplot.cfgplot.UseBMP)or(not cfgsc.horizonopaque)) and cfgsc.ShowEqGrid then DrawEqGrid; end;
-       Gal    :  begin DrawGalGrid; if cfgsc.ShowEqGrid then DrawEqGrid; end;
-       Ecl    :  begin DrawEclGrid; if cfgsc.ShowEqGrid then DrawEqGrid; end;
+       Equat  :  DrawEqGrid(drawlabel);
+       AltAz  :  begin DrawAzGrid(drawlabel); if ((not Fplot.cfgplot.UseBMP)or(not cfgsc.horizonopaque)) and cfgsc.ShowEqGrid and (not drawlabel) then DrawEqGrid(drawlabel); end;
+       Gal    :  begin DrawGalGrid(drawlabel); if cfgsc.ShowEqGrid and (not drawlabel) then DrawEqGrid(drawlabel); end;
+       Ecl    :  begin DrawEclGrid(drawlabel); if cfgsc.ShowEqGrid and (not drawlabel) then DrawEqGrid(drawlabel); end;
        end
     end else if cfgsc.ShowEqGrid and (((not Fplot.cfgplot.UseBMP)or(not cfgsc.horizonopaque))or(cfgsc.ProjPole<>AltAz)) then begin
-      DrawEqGrid;
+      DrawEqGrid(drawlabel);
     end
 end;
 end;
@@ -2956,7 +2959,7 @@ Procedure Tskychart.DrawAltAzEqGrid;
 begin
 if ((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=(cfgsc.fov/2)) then begin
     if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw alt/az EQ grid');
-    if Fplot.cfgplot.UseBMP and cfgsc.horizonopaque and (cfgsc.ProjPole=AltAz) and cfgsc.ShowEqGrid then DrawEqGrid;
+    if Fplot.cfgplot.UseBMP and cfgsc.horizonopaque and (cfgsc.ProjPole=AltAz) and cfgsc.ShowEqGrid then DrawEqGrid(false);
 end;
 end;
 
@@ -3065,7 +3068,7 @@ Ecl:   begin
 end;
 end;
 
-procedure Tskychart.DrawEqGrid;
+procedure Tskychart.DrawEqGrid(drawlabel:boolean);
 var ra1,de1,ac,dc,dra,dde,rot:double;
     col,n,lh,lt,dir:integer;
     ok,labelok:boolean;
@@ -3087,10 +3090,10 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    Fplot.Plotline(xxp,yyp,xx,yy,col,0,cfgsc.StyleGrid);
+    if (not drawlabel) then Fplot.Plotline(xxp,yyp,xx,yy,col,0,cfgsc.StyleGrid);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
- if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
+ if drawlabel and(cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
     ((dir=1)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
     ((dir=2)and((abs(yy-cfgsc.Ymin)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
     ((dir=3)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
@@ -3134,10 +3137,10 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    Fplot.Plotline(xxp,yyp,xx,yy,col,w,cfgsc.StyleGrid);
+    if (not drawlabel) then Fplot.Plotline(xxp,yyp,xx,yy,col,w,cfgsc.StyleGrid);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
- if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
+ if drawlabel and(cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
     ((dir=1)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
     ((dir=2)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
     ((dir=3)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
@@ -3228,7 +3231,7 @@ repeat
 until (not ok)or(dc<-pid2);
 end;
 
-procedure Tskychart.DrawAzGrid;
+procedure Tskychart.DrawAzGrid(drawlabel:boolean);
 var a1,h1,ac,hc,dda,ddh,rot:double;
     col,n,lh,lt,dir:integer;
     ok,labelok:boolean;
@@ -3268,10 +3271,10 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    Fplot.Plotline(xxp,yyp,xx,yy,col,w,cfgsc.StyleGrid);
+    if (not drawlabel) then Fplot.Plotline(xxp,yyp,xx,yy,col,w,cfgsc.StyleGrid);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
- if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
+ if drawlabel and(cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
      ((dir=1)and(((abs(h)<minarc)or(abs(yy-cfgsc.Ymax)<lt))and(xx>0)and(xx<cfgsc.Xmax)))or
      ((dir=2)and(((abs(h)<minarc)or(abs(yy-cfgsc.Ymin)<lt))and(xx>0)and(xx<cfgsc.Xmax)))or
      ((dir=3)and(((abs(h)<minarc)or(abs(xx-cfgsc.Xmin)<lt))and(yy>0)and(yy<cfgsc.Ymax)))or
@@ -3319,10 +3322,10 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    Fplot.Plotline(xxp,yyp,xx,yy,col,w,cfgsc.StyleGrid);
+    if (not drawlabel) then Fplot.Plotline(xxp,yyp,xx,yy,col,w,cfgsc.StyleGrid);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
- if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
+ if drawlabel and(cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
     ((dir=1)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
     ((dir=2)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
     ((dir=3)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
@@ -3832,7 +3835,7 @@ end;
 result:=true;
 end;
 
-procedure Tskychart.DrawGalGrid;
+procedure Tskychart.DrawGalGrid(drawlabel:boolean);
 var a1,h1,ac,hc,dda,ddh,rot:double;
     col,n,lh,lt,dir:integer;
     ok,labelok:boolean;
@@ -3854,10 +3857,10 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    Fplot.Plotline(xxp,yyp,xx,yy,col,0,cfgsc.StyleGrid);
+    if (not drawlabel) then Fplot.Plotline(xxp,yyp,xx,yy,col,0,cfgsc.StyleGrid);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
- if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
+ if drawlabel and(cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
    ((dir=1)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
    ((dir=2)and((abs(yy-cfgsc.Ymin)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
    ((dir=3)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
@@ -3901,10 +3904,10 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    Fplot.Plotline(xxp,yyp,xx,yy,col,w,cfgsc.StyleGrid);
+    if (not drawlabel) then Fplot.Plotline(xxp,yyp,xx,yy,col,w,cfgsc.StyleGrid);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
- if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
+ if drawlabel and(cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
     ((dir=1)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
     ((dir=2)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
     ((dir=3)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
@@ -3994,7 +3997,7 @@ repeat
 until (not ok)or(hc<-pid2);
 end;
 
-procedure Tskychart.DrawEclGrid;
+procedure Tskychart.DrawEclGrid(drawlabel:boolean);
 var a1,h1,ac,hc,dda,ddh,rot:double;
     col,n,lh,lt,dir:integer;
     ok,labelok:boolean;
@@ -4016,10 +4019,10 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    Fplot.Plotline(xxp,yyp,xx,yy,col,0,cfgsc.StyleGrid);
+    if (not drawlabel) then Fplot.Plotline(xxp,yyp,xx,yy,col,0,cfgsc.StyleGrid);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
- if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
+ if drawlabel and(cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
     ((dir=1)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
     ((dir=2)and((abs(yy-cfgsc.Ymin)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
     ((dir=3)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
@@ -4063,10 +4066,10 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    Fplot.Plotline(xxp,yyp,xx,yy,col,w,cfgsc.StyleGrid);
+    if (not drawlabel) then Fplot.Plotline(xxp,yyp,xx,yy,col,w,cfgsc.StyleGrid);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
- if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
+ if drawlabel and(cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
     ((dir=1)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
     ((dir=2)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
     ((dir=3)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
