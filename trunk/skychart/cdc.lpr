@@ -33,7 +33,7 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   InterfaceBase, LCLVersion, // version number
-  Forms, Classes, Sysutils, Dialogs, cu_catalog, cu_skychart, cu_plot,
+  Forms, Classes, Sysutils, Dialogs, LResources, cu_catalog, cu_skychart, cu_plot,
   cu_planet, cu_indiprotocol, cu_fits, cu_database, pu_info, pu_image,
   pu_getdss, pu_detail, fu_chart, pu_calendar, pu_zoom, pu_search,
   pu_printsetup, pu_position, pu_manualtelescope, u_projection, u_constant,
@@ -57,6 +57,10 @@ var i : integer;
 {$R *.res}
 
 begin
+  if LazarusResources.Find('sortasc')<>nil then LazarusResources.Find('sortasc').Name:='lcl_sortasc';
+  if LazarusResources.Find('sortdesc')<>nil then LazarusResources.Find('sortdesc').Name:='lcl_sortdesc';
+  {$I grid_images.lrs}
+
   {$ifdef USEHEAPTRC}
   SetHeapTraceOutput('/tmp/skychart_heap.trc');
   {$endif}
