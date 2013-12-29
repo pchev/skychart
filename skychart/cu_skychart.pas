@@ -3281,12 +3281,17 @@ repeat
      ((dir=4)and(((abs(h)<minarc)or(abs(xx-cfgsc.Xmax)<lt))and(yy>0)and(yy<cfgsc.Ymax)))
      )
   then begin
-    if dir<=2 then begin
-       lx:=round(xx);
-       if yy<(cfgsc.Ymax div 2) then ly:=(lh div 2) else ly:=cfgsc.Ymax-(lh div 2);
-     end else begin
-       ly:=round(yy);
-       if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
+    if (abs(h)<minarc) then begin
+      lx:=round(xx);
+      ly:=round(yy);
+    end else begin
+      if dir<=2 then begin
+         lx:=round(xx);
+         if yy<(cfgsc.Ymax div 2) then ly:=(lh div 2) else ly:=cfgsc.Ymax-(lh div 2);
+       end else begin
+         ly:=round(yy);
+         if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
+      end;
     end;
     if Fcatalog.cfgshr.AzNorth then al:=rmod(rad2deg*a+540,360) else al:=rmod(rad2deg*a+360,360);
     if (al<359.9999)or(cfgsc.fov<pid4) then begin
