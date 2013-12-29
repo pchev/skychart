@@ -37,6 +37,7 @@ type
     Button2: TButton;
     Button3: TButton;
     CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
     Preview: TButton;
     Edit1: TEdit;
     GroupBox1: TGroupBox;
@@ -44,7 +45,6 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
-    Label5: TLabel;
     Label6: TLabel;
     LongEdit1: TLongEdit;
     LongEdit2: TLongEdit;
@@ -104,9 +104,9 @@ Label1.caption:=rsLeft;
 Label2.caption:=rsRight;
 Label3.caption:=rsTop;
 Label4.caption:=rsBottom;
-Label5.Caption:=rsDescription;
 Label6.Caption:=rsNumberOfCopi;
-CheckBox1.Caption:=rsPrintHeaderA;
+CheckBox1.Caption:=rsPrintHeader;
+CheckBox2.Caption:=rsPrintFooter;
 Button1.caption:=rsNoMargin;
 Button2.caption:=rsDefaultMargi;
 Button3.caption:=rsHelp;

@@ -1498,11 +1498,12 @@ resourcestring
   rsCrossMeridia = 'Cross meridian';
   rsWestSide = 'West side';
   rsEyepieceVisi = 'Eyepiece vision';
-  rsPrintHeaderA = 'Print header and footer';
   rsObservingLis2 = 'Observing list elements';
   rsSelectLabels = 'Select labels to recover';
   rsRecoverHidde = 'Recover hidden label';
   rsHelpBaseDir =  'en/documentation/';
+  rsPrintHeader = 'Print header';
+  rsPrintFooter = 'Print footer';
 
 implementation
 

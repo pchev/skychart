@@ -1212,9 +1212,12 @@ try
  screen.cursor:=crHourGlass;
  if cm.PrintHeader then begin
     HeaderHeight:=DefHeaderHeight;
-    FooterHeight:=DefFooterHeight;
  end else begin
     HeaderHeight:=0;
+ end;
+ if cm.PrintFooter then begin
+    FooterHeight:=DefFooterHeight;
+ end else begin
     FooterHeight:=0;
  end;
  Case PrintMethod of
