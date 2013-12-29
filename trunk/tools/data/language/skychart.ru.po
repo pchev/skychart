@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-23 13:51+0000\n"
+"POT-Creation-Date: 2013-12-29 17:51+0000\n"
 "PO-Revision-Date: 2013-12-02 06:56+0000\n"
 "Last-Translator: Aleksey Kabanov <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-21 13:01+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-29 18:04+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -3985,8 +3985,12 @@ msgstr "Печать легенды"
 msgid "Printer setup"
 msgstr "Опции принтера"
 
-#: u_translation.rsprintheadera
-msgid "Print header and footer"
+#: u_translation.rsprintfooter
+msgid "Print footer"
+msgstr ""
+
+#: u_translation.rsprintheader
+msgid "Print header"
 msgstr ""
 
 #: u_translation.rsprintmethod

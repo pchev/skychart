@@ -5874,10 +5874,6 @@ msgstr ""
 msgid "Eyepiece vision"
 msgstr ""
 
-#: u_translation:rsprintheadera
-msgid "Print header and footer"
-msgstr ""
-
 #: u_translation:rsobservinglis2
 msgid "Observing list elements"
 msgstr ""
@@ -5892,5 +5888,13 @@ msgstr ""
 
 #: u_translation:rshelpbasedir
 msgid "en/documentation/"
+msgstr ""
+
+#: u_translation:rsprintheader
+msgid "Print header"
+msgstr ""
+
+#: u_translation:rsprintfooter
+msgid "Print footer"
 msgstr ""
 
