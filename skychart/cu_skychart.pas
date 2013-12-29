@@ -3067,11 +3067,11 @@ end;
 
 procedure Tskychart.DrawEqGrid;
 var ra1,de1,ac,dc,dra,dde,rot:double;
-    col,n,lh,dir:integer;
+    col,n,lh,lt,dir:integer;
     ok,labelok:boolean;
 
 function DrawRAline(ra,de,dd:double):boolean;
-var  n: integer;
+var  n,lx,ly: integer;
     x1,y1:double;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
@@ -3091,14 +3091,21 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
-    ((dir=1)and((abs(yy-cfgsc.Ymax)<lh)and(xx>0)and(xx<cfgsc.Xmax)))or
-    ((dir=2)and((abs(yy-cfgsc.Ymin)<lh)and(xx>0)and(xx<cfgsc.Xmax)))or
-    ((dir=3)and((abs(xx-cfgsc.Xmin)<lh)and(yy>0)and(yy<cfgsc.Ymax)))or
-    ((dir=4)and((abs(xx-cfgsc.Xmax)<lh)and(yy>0)and(yy<cfgsc.Ymax)))
+    ((dir=1)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
+    ((dir=2)and((abs(yy-cfgsc.Ymin)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
+    ((dir=3)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
+    ((dir=4)and((abs(xx-cfgsc.Xmax)<lt)and(yy>0)and(yy<cfgsc.Ymax)))
     )
-    then begin
-    if dra<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,artostr3(rmod(ra+pi2,pi2)*rad2deg/15),cfgsc.WhiteBg,true,true,5)
-                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,armtostr(rmod(ra+pi2,pi2)*rad2deg/15),cfgsc.WhiteBg,true,true,5);
+ then begin
+    if dir<=2 then begin
+      lx:=round(xx);
+      if yy<(cfgsc.Ymax div 2) then ly:=(lh div 2) else ly:=cfgsc.Ymax-(lh div 2);
+    end else begin
+      ly:=round(yy);
+      if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
+    end;
+    if dra<=15*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,artostr3(rmod(ra+pi2,pi2)*rad2deg/15),cfgsc.WhiteBg,true,true,5)
+                      else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,armtostr(rmod(ra+pi2,pi2)*rad2deg/15),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -3110,7 +3117,7 @@ result:=(n>1);
 end;
 
 function DrawDEline(ra,de,da:double):boolean;
-var  n,w: integer;
+var  n,w,lx,ly: integer;
     x1,y1:double;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
@@ -3131,14 +3138,21 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
-    ((dir=1)and((abs(xx-cfgsc.Xmax)<lh)and(yy>0)and(yy<cfgsc.Ymax)))or
-    ((dir=2)and((abs(xx-cfgsc.Xmax)<lh)and(yy>0)and(yy<cfgsc.Ymax)))or
-    ((dir=3)and((abs(yy-cfgsc.Ymax)<lh)and(xx>0)and(xx<cfgsc.Xmax)))or
-    ((dir=4)and((abs(yy-cfgsc.Ymax)<lh)and(xx>0)and(xx<cfgsc.Xmax)))
+    ((dir=1)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
+    ((dir=2)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
+    ((dir=3)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
+    ((dir=4)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))
     )
     then begin
-    if dde<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(de*rad2deg),cfgsc.WhiteBg,true,true,5)
-                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(de*rad2deg),cfgsc.WhiteBg,true,true,5);
+     if dir>2 then begin
+       lx:=round(xx);
+       if yy<(cfgsc.Ymax div 2) then ly:=(lh div 2) else ly:=cfgsc.Ymax-(lh div 2);
+     end else begin
+       ly:=round(yy);
+       if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
+     end;
+     if dde<=5*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(de*rad2deg),cfgsc.WhiteBg,true,true,5)
+                      else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(de*rad2deg),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -3164,6 +3178,7 @@ dra:=deg2rad*dra*15;
 dde:=deg2rad*dde;
 ac:=ra1; dc:=de1;
 lh:=2*fplot.GetTextSize(1,'1',7).cy;
+lt:=round(abs(1.2*cfgsc.BxGlb*dde/3));
 dir:=1;
 rot:=rmod(720+rad2deg*CenterRot,360);
 case round(rot) of
@@ -3197,6 +3212,7 @@ repeat
   ac:=ac-dra;
 until (not ok)or(ac<ra1-pi-musec);
 ac:=ra1; dc:=de1;
+lt:=round(abs(1.2*cfgsc.BxGlb*dra/3));
 repeat
   labelok:=false;
   ok:=DrawDEline(ac,dc,dra);
@@ -3214,13 +3230,13 @@ end;
 
 procedure Tskychart.DrawAzGrid;
 var a1,h1,ac,hc,dda,ddh,rot:double;
-    col,n,lh,dir:integer;
+    col,n,lh,lt,dir:integer;
     ok,labelok:boolean;
 
 // draw meridian lines
 function DrawAline(a,h,dd:double):boolean;
 var x1,y1,al:double;
-    n,w: integer;
+    n,w,lx,ly: integer;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
@@ -3256,16 +3272,23 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
-     ((dir=1)and(((abs(h)<minarc)or(abs(yy-cfgsc.Ymax)<lh))and(xx>0)and(xx<cfgsc.Xmax)))or
-     ((dir=2)and(((abs(h)<minarc)or(abs(yy-cfgsc.Ymin)<lh))and(xx>0)and(xx<cfgsc.Xmax)))or
-     ((dir=3)and(((abs(h)<minarc)or(abs(xx-cfgsc.Xmin)<lh))and(yy>0)and(yy<cfgsc.Ymax)))or
-     ((dir=4)and(((abs(h)<minarc)or(abs(xx-cfgsc.Xmax)<lh))and(yy>0)and(yy<cfgsc.Ymax)))
+     ((dir=1)and(((abs(h)<minarc)or(abs(yy-cfgsc.Ymax)<lt))and(xx>0)and(xx<cfgsc.Xmax)))or
+     ((dir=2)and(((abs(h)<minarc)or(abs(yy-cfgsc.Ymin)<lt))and(xx>0)and(xx<cfgsc.Xmax)))or
+     ((dir=3)and(((abs(h)<minarc)or(abs(xx-cfgsc.Xmin)<lt))and(yy>0)and(yy<cfgsc.Ymax)))or
+     ((dir=4)and(((abs(h)<minarc)or(abs(xx-cfgsc.Xmax)<lt))and(yy>0)and(yy<cfgsc.Ymax)))
      )
   then begin
+    if dir<=2 then begin
+       lx:=round(xx);
+       if yy<(cfgsc.Ymax div 2) then ly:=(lh div 2) else ly:=cfgsc.Ymax-(lh div 2);
+     end else begin
+       ly:=round(yy);
+       if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
+    end;
     if Fcatalog.cfgshr.AzNorth then al:=rmod(rad2deg*a+540,360) else al:=rmod(rad2deg*a+360,360);
     if (al<359.9999)or(cfgsc.fov<pid4) then begin
-    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(al),cfgsc.WhiteBg,false,true,5)
-                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(al),cfgsc.WhiteBg,false,true,5);
+    if dda<=15*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(al),cfgsc.WhiteBg,false,true,5)
+                      else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(al),cfgsc.WhiteBg,false,true,5);
     end;
     labelok:=true;
  end;
@@ -3280,7 +3303,7 @@ end;
 // draw altitude lines
 function DrawHline(a,h,da:double):boolean;
 var x1,y1:double;
-    n,w: integer;
+    n,w,lx,ly: integer;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
@@ -3300,15 +3323,22 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
-    ((dir=1)and((abs(xx-cfgsc.Xmax)<lh)and(yy>0)and(yy<cfgsc.Ymax)))or
-    ((dir=2)and((abs(xx-cfgsc.Xmax)<lh)and(yy>0)and(yy<cfgsc.Ymax)))or
-    ((dir=3)and((abs(yy-cfgsc.Ymax)<lh)and(xx>0)and(xx<cfgsc.Xmax)))or
-    ((dir=4)and((abs(yy-cfgsc.Ymax)<lh)and(xx>0)and(xx<cfgsc.Xmax)))
+    ((dir=1)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
+    ((dir=2)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
+    ((dir=3)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
+    ((dir=4)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))
     )
     then begin
-    if ddh<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),cfgsc.WhiteBg,false,true,5)
-                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),cfgsc.WhiteBg,false,true,5);
-    labelok:=true;
+     if dir>2 then begin
+       lx:=round(xx);
+       if yy<(cfgsc.Ymax div 2) then ly:=(lh div 2) else ly:=cfgsc.Ymax-(lh div 2);
+     end else begin
+       ly:=round(yy);
+       if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
+     end;
+     if ddh<=5*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),cfgsc.WhiteBg,false,true,5)
+                     else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),cfgsc.WhiteBg,false,true,5);
+     labelok:=true;
  end;
  xxp:=xx;
  yyp:=yy;
@@ -3331,6 +3361,7 @@ dda:=deg2rad*dda;
 ddh:=deg2rad*ddh;
 ac:=a1; hc:=h1;
 lh:=2*fplot.GetTextSize(1,'1',7).cy;
+lt:=round(abs(1.2*cfgsc.BxGlb*ddh/3));
 dir:=1;
 rot:=rmod(720+rad2deg*CenterRot,360);
 case round(rot) of
@@ -3356,6 +3387,7 @@ until (not ok)or(ac<a1-pi);
 if not cfgsc.ShowOnlyMeridian then begin
   ac:=a1; hc:=h1;
   col:=Fplot.cfgplot.Color[12];
+  lt:=round(abs(1.2*cfgsc.BxGlb*dda/3));
   repeat
     if cfgsc.horizonopaque and (hc<-musec) then break;
     labelok:=false;
@@ -3802,12 +3834,12 @@ end;
 
 procedure Tskychart.DrawGalGrid;
 var a1,h1,ac,hc,dda,ddh,rot:double;
-    col,n,lh,dir:integer;
+    col,n,lh,lt,dir:integer;
     ok,labelok:boolean;
 
 function DrawAline(a,h,dd:double):boolean;
 var x1,y1:double;
-    n: integer;
+    n,lx,ly: integer;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
@@ -3826,14 +3858,21 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
-   ((dir=1)and((abs(yy-cfgsc.Ymax)<lh)and(xx>0)and(xx<cfgsc.Xmax)))or
-   ((dir=2)and((abs(yy-cfgsc.Ymin)<lh)and(xx>0)and(xx<cfgsc.Xmax)))or
-   ((dir=3)and((abs(xx-cfgsc.Xmin)<lh)and(yy>0)and(yy<cfgsc.Ymax)))or
-   ((dir=4)and((abs(xx-cfgsc.Xmax)<lh)and(yy>0)and(yy<cfgsc.Ymax)))
+   ((dir=1)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
+   ((dir=2)and((abs(yy-cfgsc.Ymin)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
+   ((dir=3)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
+   ((dir=4)and((abs(xx-cfgsc.Xmax)<lt)and(yy>0)and(yy<cfgsc.Ymax)))
    )
  then begin
-    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5)
-                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5);
+    if dir<=2 then begin
+      lx:=round(xx);
+      if yy<(cfgsc.Ymax div 2) then ly:=(lh div 2) else ly:=cfgsc.Ymax-(lh div 2);
+    end else begin
+      ly:=round(yy);
+      if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
+    end;
+    if dda<=15*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5)
+                      else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -3846,7 +3885,7 @@ end;
 
 function DrawHline(a,h,da:double):boolean;
 var x1,y1:double;
-    n,w: integer;
+    n,w,lx,ly: integer;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
@@ -3866,14 +3905,21 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
-    ((dir=1)and((abs(xx-cfgsc.Xmax)<lh)and(yy>0)and(yy<cfgsc.Ymax)))or
-    ((dir=2)and((abs(xx-cfgsc.Xmax)<lh)and(yy>0)and(yy<cfgsc.Ymax)))or
-    ((dir=3)and((abs(yy-cfgsc.Ymax)<lh)and(xx>0)and(xx<cfgsc.Xmax)))or
-    ((dir=4)and((abs(yy-cfgsc.Ymax)<lh)and(xx>0)and(xx<cfgsc.Xmax)))
+    ((dir=1)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
+    ((dir=2)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
+    ((dir=3)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
+    ((dir=4)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))
     )
  then begin
-    if ddh<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),cfgsc.WhiteBg,true,true,5)
-                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),cfgsc.WhiteBg,true,true,5);
+    if dir>2 then begin
+      lx:=round(xx);
+      if yy<(cfgsc.Ymax div 2) then ly:=(lh div 2) else ly:=cfgsc.Ymax-(lh div 2);
+    end else begin
+      ly:=round(yy);
+      if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
+    end;
+    if ddh<=5*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),cfgsc.WhiteBg,true,true,5)
+                     else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -3897,6 +3943,7 @@ dda:=deg2rad*dda;
 ddh:=deg2rad*ddh;
 ac:=a1; hc:=h1;
 lh:=2*fplot.GetTextSize(1,'1',7).cy;
+lt:=round(abs(1.2*cfgsc.BxGlb*ddh/3));
 dir:=1;
 rot:=rmod(720+rad2deg*CenterRot,360);
 case round(rot) of
@@ -3931,6 +3978,7 @@ repeat
 until (not ok)or(ac<a1-pi);
 ac:=a1; hc:=h1;
 col:=Fplot.cfgplot.Color[12];
+lt:=round(abs(1.2*cfgsc.BxGlb*dda/3));
 repeat
   labelok:=false;
   ok:=DrawHline(ac,hc,-dda);
@@ -3948,12 +3996,12 @@ end;
 
 procedure Tskychart.DrawEclGrid;
 var a1,h1,ac,hc,dda,ddh,rot:double;
-    col,n,lh,dir:integer;
+    col,n,lh,lt,dir:integer;
     ok,labelok:boolean;
 
 function DrawAline(a,h,dd:double):boolean;
 var x1,y1:double;
-    n: integer;
+    n,lx,ly: integer;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
@@ -3971,15 +4019,22 @@ repeat
     Fplot.Plotline(xxp,yyp,xx,yy,col,0,cfgsc.StyleGrid);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
-  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
-    ((dir=1)and((abs(yy-cfgsc.Ymax)<lh)and(xx>0)and(xx<cfgsc.Xmax)))or
-    ((dir=2)and((abs(yy-cfgsc.Ymin)<lh)and(xx>0)and(xx<cfgsc.Xmax)))or
-    ((dir=3)and((abs(xx-cfgsc.Xmin)<lh)and(yy>0)and(yy<cfgsc.Ymax)))or
-    ((dir=4)and((abs(xx-cfgsc.Xmax)<lh)and(yy>0)and(yy<cfgsc.Ymax)))
+ if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
+    ((dir=1)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
+    ((dir=2)and((abs(yy-cfgsc.Ymin)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
+    ((dir=3)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
+    ((dir=4)and((abs(xx-cfgsc.Xmax)<lt)and(yy>0)and(yy<cfgsc.Ymax)))
     )
-  then begin
-    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5)
-                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5);
+ then begin
+    if dir<=2 then begin
+      lx:=round(xx);
+      if yy<(cfgsc.Ymax div 2) then ly:=(lh div 2) else ly:=cfgsc.Ymax-(lh div 2);
+    end else begin
+      ly:=round(yy);
+      if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
+    end;
+    if dda<=15*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5)
+                      else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -3992,7 +4047,7 @@ end;
 
 function DrawHline(a,h,da:double):boolean;
 var x1,y1:double;
-    n,w: integer;
+    n,w,lx,ly: integer;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
@@ -4012,14 +4067,21 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
-    ((dir=1)and((abs(xx-cfgsc.Xmax)<lh)and(yy>0)and(yy<cfgsc.Ymax)))or
-    ((dir=2)and((abs(xx-cfgsc.Xmax)<lh)and(yy>0)and(yy<cfgsc.Ymax)))or
-    ((dir=3)and((abs(yy-cfgsc.Ymax)<lh)and(xx>0)and(xx<cfgsc.Xmax)))or
-    ((dir=4)and((abs(yy-cfgsc.Ymax)<lh)and(xx>0)and(xx<cfgsc.Xmax)))
+    ((dir=1)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
+    ((dir=2)and((abs(xx-cfgsc.Xmin)<lt)and(yy>0)and(yy<cfgsc.Ymax)))or
+    ((dir=3)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))or
+    ((dir=4)and((abs(yy-cfgsc.Ymax)<lt)and(xx>0)and(xx<cfgsc.Xmax)))
     )
  then begin
-    if ddh<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),cfgsc.WhiteBg,true,true,5)
-                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),cfgsc.WhiteBg,true,true,5);
+    if dir>2 then begin
+      lx:=round(xx);
+      if yy<(cfgsc.Ymax div 2) then ly:=(lh div 2) else ly:=cfgsc.Ymax-(lh div 2);
+    end else begin
+      ly:=round(yy);
+      if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
+    end;
+    if ddh<=5*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),cfgsc.WhiteBg,true,true,5)
+                     else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -4043,6 +4105,7 @@ dda:=deg2rad*dda;
 ddh:=deg2rad*ddh;
 ac:=a1; hc:=h1;
 lh:=2*fplot.GetTextSize(1,'1',7).cy;
+lt:=round(abs(1.2*cfgsc.BxGlb*ddh/3));
 dir:=1;
 rot:=rmod(720+rad2deg*CenterRot,360);
 case round(rot) of
@@ -4077,6 +4140,7 @@ repeat
 until (not ok)or(ac<a1-pi);
 ac:=a1; hc:=h1;
 col:=Fplot.cfgplot.Color[12];
+lt:=round(abs(1.2*cfgsc.BxGlb*dda/3));
 repeat
   labelok:=false;
   ok:=DrawHline(ac,hc,-dda);
