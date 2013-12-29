@@ -1,7 +1,7 @@
 object f_obslist: Tf_obslist
-  Left = 331
+  Left = 414
   Height = 498
-  Top = 124
+  Top = 109
   Width = 800
   Caption = 'f_obslist'
   ClientHeight = 498
@@ -88,6 +88,28 @@ object f_obslist: Tf_obslist
     Align = alClient
     ColCount = 8
     ColumnClickSorts = True
+    Columns = <    
+      item
+        Title.Caption = 'Title'
+      end    
+      item
+        Title.Caption = 'Title'
+      end    
+      item
+        Title.Caption = 'Title'
+      end    
+      item
+        Title.Caption = 'Title'
+      end    
+      item
+        Title.Caption = 'Title'
+      end    
+      item
+        Title.Caption = 'Title'
+      end    
+      item
+        Title.Caption = 'Title'
+      end>
     DefaultColWidth = 100
     MouseWheelOption = mwGrid
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowMoving, goEditing, goRowSelect, goSmoothScroll, goFixedRowNumbering, goFixedColSizing]
@@ -95,6 +117,7 @@ object f_obslist: Tf_obslist
     TabOrder = 1
     OnColRowExchanged = StringGrid1ColRowMoved
     OnColRowMoved = StringGrid1ColRowMoved
+    OnCompareCells = StringGrid1CompareCells
     OnMouseDown = StringGrid1MouseDown
     OnMouseUp = StringGrid1MouseUp
     OnResize = StringGrid1Resize

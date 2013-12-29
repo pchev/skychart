@@ -102,6 +102,7 @@ type
     procedure RefreshTimerTimer(Sender: TObject);
     procedure StringGrid1ColRowMoved(Sender: TObject; IsColumn: Boolean;
       sIndex, tIndex: Integer);
+    procedure StringGrid1CompareCells(Sender: TObject; ACol, ARow, BCol, BRow: Integer; var Result: integer);
     procedure StringGrid1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure StringGrid1MouseUp(Sender: TObject; Button: TMouseButton;
@@ -178,14 +179,13 @@ const objl=32;
 procedure Tf_obslist.SetLang;
 begin
   Caption:=rsObservingLis;
-  StringGrid1.Cells[0,0]:='';
-  StringGrid1.Cells[1,0]:=rsObject;
-  StringGrid1.Cells[2,0]:=rsRA;
-  StringGrid1.Cells[3,0]:=rsDEC;
-  StringGrid1.Cells[4,0]:=rsStart;
-  StringGrid1.Cells[5,0]:=rsEnd;
-  StringGrid1.Cells[6,0]:=rsDescription;
-  StringGrid1.Cells[7,0]:=rsLabel2;
+  StringGrid1.Columns[0].Title.Caption:=rsObject;
+  StringGrid1.Columns[1].Title.Caption:=rsRA;
+  StringGrid1.Columns[2].Title.Caption:=rsDEC;
+  StringGrid1.Columns[3].Title.Caption:=rsStart;
+  StringGrid1.Columns[4].Title.Caption:=rsEnd;
+  StringGrid1.Columns[5].Title.Caption:=rsDescription;
+  StringGrid1.Columns[6].Title.Caption:=rsLabel2;
   AirmassCombo.Items[6]:=rsHorizon;
   ButtonSave.Caption:=rsSave;
   ButtonClear.Caption:=rsClear;
@@ -335,7 +335,6 @@ begin
 end;
 
 function Tf_obslist.GetObjcount : integer;
-var i: integer;
 begin
 result:=StringGrid1.RowCount-1;
 end;
@@ -709,6 +708,65 @@ procedure Tf_obslist.StringGrid1ColRowMoved(Sender: TObject; IsColumn: Boolean;
   sIndex, tIndex: Integer);
 begin
   gridchanged:=true;
+end;
+
+procedure Tf_obslist.StringGrid1CompareCells(Sender: TObject; ACol, ARow, BCol, BRow: Integer; var Result: integer);
+var b1,b2,p1,p2: string;
+    n1,n2: double;
+    i1,i2: integer;
+
+    procedure GetPrefix(str:string; var pref: string; var n: double; var i: integer);
+    var j,p: integer;
+        buf,c: string;
+    begin
+    i:=1; n:=0; pref:='';
+    buf:=trim(str);
+    p:=pos(' ',buf);   // prefix separated by space
+    if p=0 then begin  // try to separate the numeric part
+      for j:=1 to Length(buf) do begin
+        c:=copy(buf,j,1);
+        if (c>='0')and(c<='9') then begin
+          p:=j-1;
+          break;
+        end;
+      end;
+    end;
+    if p>0 then begin  // first prefix
+      pref:=uppercase(trim(copy(buf,1,p)));
+      delete(buf,1,p);
+      Val(trim(buf),n,i);
+    end;
+    end;
+
+begin
+with sender as TStringGrid do begin
+   // cells content
+   b1:=Cells[ACol,ARow];
+   b2:=Cells[BCol,BRow];
+   // try numeric values
+   Val(trim(b1),n1,i1);
+   Val(trim(b2),n2,i2);
+   if (i1=0)and(i2=0) then begin
+     // numeric compare
+     if n1>n2 then result:=1
+     else if n1<n2 then result:=-1
+     else result:=0;
+   end else begin
+     // try prefix + numeric
+     GetPrefix(b1,p1,n1,i1);
+     GetPrefix(b2,p2,n2,i2);
+     if (i1=0)and(i2=0)and(p1=p2) then begin
+       // same prefix, numeric compare
+       if n1>n2 then result:=1
+       else if n1<n2 then result:=-1
+       else result:=0;
+     end else begin
+       // case insensitive string compare
+       result:=CompareText(b1,b2);
+     end;
+   end;
+   if SortOrder=soDescending then result:=-result;
+end;
 end;
 
 procedure Tf_obslist.SetMeridianSide(value:integer);
