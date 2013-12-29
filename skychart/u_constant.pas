@@ -1047,7 +1047,7 @@ type
     TextOnlyDetail, SimpleMove, SimpleDetail, KioskMode, KioskDebug, CenterAtNoon: boolean;
     PrintDesc, PrintCmd1, PrintCmd2: string;
     PrintTmpPath, ThemeName, IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt: string;
-    PrintHeader: boolean;
+    PrintHeader,PrintFooter: boolean;
     AnimOpt, Animffmpeg: string;
     ServerIPaddr, ServerIPport: shortstring;
     AnimFps: double;
@@ -2492,6 +2492,7 @@ begin
   PrintCmd2 := Source.PrintCmd2;
   PrintTmpPath := Source.PrintTmpPath;
   PrintHeader := Source.PrintHeader;
+  PrintFooter := Source.PrintFooter;
   PrintDesc := Source.PrintDesc;
   PrintCopies := Source.PrintCopies;
   ThemeName := Source.ThemeName;

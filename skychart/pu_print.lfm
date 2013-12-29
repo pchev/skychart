@@ -224,14 +224,6 @@ object f_print: Tf_print
     OnClick = Button3Click
     TabOrder = 7
   end
-  object Label5: TLabel
-    Left = 9
-    Height = 16
-    Top = 40
-    Width = 68
-    Caption = 'Description'
-    ParentColor = False
-  end
   object Edit1: TEdit
     Left = 9
     Height = 23
@@ -281,13 +273,23 @@ object f_print: Tf_print
     TabOrder = 8
   end
   object CheckBox1: TCheckBox
-    Left = 112
+    Left = 9
     Height = 23
     Top = 37
-    Width = 158
-    Caption = 'Print header and footer'
+    Width = 95
+    Caption = 'Print header'
     Checked = True
     State = cbChecked
     TabOrder = 1
+  end
+  object CheckBox2: TCheckBox
+    Left = 231
+    Height = 23
+    Top = 37
+    Width = 93
+    Caption = 'Print footer'
+    Checked = True
+    State = cbChecked
+    TabOrder = 11
   end
 end
