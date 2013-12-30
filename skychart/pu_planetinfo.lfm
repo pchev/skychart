@@ -6,7 +6,7 @@ object f_planetinfo: Tf_planetinfo
   Caption = 'f_planetinfo'
   ClientHeight = 600
   ClientWidth = 800
-  Color = clBlack
+  Color = clBtnFace
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnResize = FormResize
@@ -18,10 +18,10 @@ object f_planetinfo: Tf_planetinfo
     Height = 550
     Top = 50
     Width = 800
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     Align = alClient
     ShowTabs = False
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
@@ -29,11 +29,13 @@ object f_planetinfo: Tf_planetinfo
       ClientWidth = 796
       object Panel1: TPanel
         Left = 0
-        Height = 596
+        Height = 546
         Top = 0
         Width = 796
         Align = alClient
         BevelOuter = bvNone
+        Color = clBlack
+        ParentColor = False
         TabOrder = 0
       end
       object Next1: TStaticText
@@ -64,6 +66,8 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
+        Color = clBlack
+        ParentColor = False
         TabOrder = 0
       end
       object Next2: TStaticText
@@ -109,6 +113,8 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
+        Color = clBlack
+        ParentColor = False
         TabOrder = 0
       end
       object Next3: TStaticText
@@ -155,6 +161,8 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
+        Color = clBlack
+        ParentColor = False
         TabOrder = 0
       end
       object Next4: TStaticText
@@ -201,6 +209,8 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
+        Color = clBlack
+        ParentColor = False
         TabOrder = 0
       end
       object Next5: TStaticText
@@ -247,6 +257,8 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
+        Color = clBlack
+        ParentColor = False
         TabOrder = 0
       end
       object Next6: TStaticText
@@ -293,6 +305,8 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
+        Color = clBlack
+        ParentColor = False
         TabOrder = 0
       end
       object Next7: TStaticText
@@ -339,6 +353,8 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
+        Color = clBlack
+        ParentColor = False
         TabOrder = 0
       end
       object Prev8: TStaticText
@@ -385,6 +401,8 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
+        Color = clBlack
+        ParentColor = False
         TabOrder = 0
       end
       object Prev9: TStaticText
