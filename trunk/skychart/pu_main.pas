@@ -1292,9 +1292,6 @@ try
  f_detail.OnNeighborObj:=NeighborObj;
  f_detail.OnKeydown:=FormKeyDown;
  f_obslist.planet:=planet;
- f_obslist.onSelectObject:=ObsListSearch;
- f_obslist.onGetObjectCoord:=GetObjectCoord;
- f_obslist.onObjLabelChange:=ObsListChange;
  f_obslist.FileNameEdit1.FileName:=SysToUTF8(slash(HomeDir)+f_obslist.DefaultList);
  if VerboseMsg then WriteTrace('InitDS2000');
  InitDS2000;
@@ -1451,6 +1448,9 @@ if (cfgm.InitObsList<>'')and(FileExists(cfgm.InitObsList)) then begin
   f_obslist.FileNameEdit1.FileName:=SysToUTF8(cfgm.InitObsList);
   if pos(f_obslist.DefaultList,cfgm.InitObsList)>0 then f_obslist.LoadObsList;
 end;
+f_obslist.onSelectObject:=ObsListSearch;
+f_obslist.onGetObjectCoord:=GetObjectCoord;
+f_obslist.onObjLabelChange:=ObsListChange;
 Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
 AutoRefreshLock:=false;
 Autorefresh.enabled:=true;
