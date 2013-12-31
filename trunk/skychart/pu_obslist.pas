@@ -711,13 +711,12 @@ begin
 end;
 
 procedure Tf_obslist.StringGrid1CompareCells(Sender: TObject; ACol, ARow, BCol, BRow: Integer; var Result: integer);
-var b1,b2,p1,p2: string;
+var b1,b2,p1,p2,buf,c: string;
     n1,n2: double;
-    i1,i2: integer;
+    p,i1,i2: integer;
 
     procedure GetPrefix(str:string; var pref: string; var n: double; var i: integer);
-    var j,p: integer;
-        buf,c: string;
+    var j: integer;
     begin
     i:=1; n:=0; pref:='';
     buf:=trim(str);
@@ -743,6 +742,28 @@ with sender as TStringGrid do begin
    // cells content
    b1:=Cells[ACol,ARow];
    b2:=Cells[BCol,BRow];
+   // Time value
+   if (ACol=BCol)and((ACol=4)or(ACol=5)) then begin
+   i1:=pos(':',b1);
+   i2:=pos(':',b2);
+   if (i1=3)and(i2=3)and(length(b1)=5)and(length(b2)=5) then begin
+     p1:=b1;
+     Delete(p1,i1,1);
+     Val(trim(p1),n1,i1);
+     p2:=b2;
+     Delete(p2,i2,1);
+     Val(trim(p2),n2,i2);
+     if (i1=0)and(i2=0) then begin
+       if n1<1200 then n1:=n1+2400;
+       if n2<1200 then n2:=n2+2400;
+       if n1>n2 then result:=1
+       else if n1<n2 then result:=-1
+       else result:=0;
+       if SortOrder=soDescending then result:=-result;
+       exit;
+     end;
+   end;
+   end;
    // try numeric values
    Val(trim(b1),n1,i1);
    Val(trim(b2),n2,i2);
