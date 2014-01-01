@@ -998,6 +998,9 @@ procedure Tf_chart.RefreshTimerTimer(Sender: TObject);
 begin
 RefreshTimer.Enabled:=false;
 if locked then exit;
+lockscrollbar:=false;
+VertScrollBar.Enabled:=true;
+HorScrollBar.Enabled:=true;
 //if sc<>nil then sc.plot.init(Image1.width,Image1.height);
 if VerboseMsg then
  WriteTrace('Chart '+sc.cfgsc.chartname+': RefreshTimer');
@@ -1693,6 +1696,13 @@ if VerboseMsg then
 end;
 
 procedure Tf_chart.CKeyDown(Key: Word; Shift: TShiftState);
+procedure disablescroll;
+begin
+lockscrollbar:=true;
+VertScrollBar.Enabled:=false;
+HorScrollBar.Enabled:=false;
+end;
+
 begin
 if LockKeyboard then exit;
 try
@@ -1712,14 +1722,14 @@ end;
 if (key>=VK_NUMPAD0)and(key<=VK_NUMPAD9) then key:=key-(VK_NUMPAD0-VK_0);
 // special keys handling
 case key of
-VK_PRIOR      : begin sc.cfgsc.Quick:=true; MoveNorthWest.execute;RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
-VK_NEXT       : begin sc.cfgsc.Quick:=true; MoveSouthWest.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
-VK_END        : begin sc.cfgsc.Quick:=true; MoveSouthEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
-VK_HOME       : begin sc.cfgsc.Quick:=true; MoveNorthEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
-VK_LEFT       : if (movecam or moveguide) then MoveCamera(5) else begin sc.cfgsc.Quick:=true; MoveEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
-VK_UP         : begin sc.cfgsc.Quick:=true; MoveNorth.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
-VK_RIGHT      : if (movecam or moveguide) then MoveCamera(-5) else begin sc.cfgsc.Quick:=true; MoveWest.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
-VK_DOWN       : begin sc.cfgsc.Quick:=true; MoveSouth.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_PRIOR      : begin disablescroll; sc.cfgsc.Quick:=true; MoveNorthWest.execute;RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_NEXT       : begin disablescroll; sc.cfgsc.Quick:=true; MoveSouthWest.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_END        : begin disablescroll; sc.cfgsc.Quick:=true; MoveSouthEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_HOME       : begin disablescroll; sc.cfgsc.Quick:=true; MoveNorthEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_LEFT       : if (movecam or moveguide) then MoveCamera(5) else begin disablescroll; sc.cfgsc.Quick:=true; MoveEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_UP         : begin disablescroll; sc.cfgsc.Quick:=true; MoveNorth.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_RIGHT      : if (movecam or moveguide) then MoveCamera(-5) else begin disablescroll; sc.cfgsc.Quick:=true; MoveWest.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_DOWN       : begin disablescroll; sc.cfgsc.Quick:=true; MoveSouth.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
 VK_DELETE     : Cleanupmap1Click(nil);
 VK_ADD,VK_OEM_PLUS        : Zoomplus.execute;
 VK_SUBTRACT,VK_OEM_MINUS  : Zoomminus.execute;
