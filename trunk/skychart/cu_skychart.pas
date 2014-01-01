@@ -317,7 +317,10 @@ end;
     DrawAltAzEqGrid;
     // then the horizon line if transparent
     if (not cfgsc.horizonopaque) then DrawHorizon;
-    DrawDeepSkyObject;
+  end;
+  // the DSO
+  DrawDeepSkyObject;
+  if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     if cfgsc.showline then begin
        DrawOutline;
        DrawDSL;
@@ -1347,11 +1350,11 @@ var rec:GcatRec;
                 inc(numdsopos);
                 dsopos[numdsopos]:=Point(round(xx),round(yy));
               end;
-              if cfgsc.ShowImages and (rec.options.ShortName<>CurrentCat) then begin
+              if (not cfgsc.Quick)and cfgsc.ShowImages and (rec.options.ShortName<>CurrentCat) then begin
                  CurrentCat:=rec.options.ShortName;
                  imageok:=FFits.ImagesForCatalog(CurrentCat);
               end;
-              if cfgsc.ShowImages and imageok and
+              if (not cfgsc.Quick)and cfgsc.ShowImages and imageok and
                  FFits.GetFileName(rec.options.ShortName,rec.neb.id,imgfile) then
                 begin
                  if (ExtractFileExt(imgfile)<>'.nil') then begin
