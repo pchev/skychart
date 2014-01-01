@@ -1188,12 +1188,12 @@ end;
 
 function TPlanet.FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,ma,date,desc:string;trunc:boolean=true):boolean;
 var
-   yy,mm,dd,i : integer;
+   yy,mm,dd,i,j : integer;
    tar,tde,ar,de : double;
    dist,illum,phase,diam,jdt,magn,dkm,hh,dp,p,pde,pds,w1,w2,w3,jd0,st0,q,distmin,xp,yp,zp,vel : double;
    sar,sde,sdist,sillum,sphase,sdiam,smagn,shh,sdp : string;
    directfind: boolean;
-   distancetocenter: array[1..maxpla] of double;
+   distancetocenter: array[0..MaxPlSim,1..MaxPla] of double;
 const d1='0.0'; d2='0.00';
 begin
 ar:=(x2+x1)/2;
@@ -1201,15 +1201,13 @@ de:=(y2+y1)/2;
 if not nextobj then  begin
    CurrentStep:=0;
    CurrentPlanet:=0;
-   for i:=1 to maxpla do distancetocenter[i]:=maxdouble;
+   for j:=0 to cfgsc.SimNb do for i:=1 to maxpla do distancetocenter[j,i]:=maxdouble;
 end;
 result := false;
 directfind := false;
 desc:='';tar:=1;tde:=1;jdt:=0;
 if cfgsc.ephvalid then repeat
   inc(CurrentPlanet);
-  if CurrentPlanet=44 then
-     CurrentPlanet:=44 ;
   if (CurrentStep>0)and(CurrentPlanet<=11)and(not cfgsc.SimObject[CurrentPlanet]) then continue;
   if CurrentPlanet=3 then continue;    // skip Earth
   if (CurrentPlanet=9) and (not cfgsc.ShowPluto) then continue; // skip Pluto
@@ -1242,10 +1240,10 @@ if cfgsc.ephvalid then repeat
         // no
         // but ok if the cursor is inside the planetary disk
         if (CurrentPlanet<=MaxPla) then begin
-           distancetocenter[CurrentPlanet]:=3600*rad2deg*angulardistance(ar,de,tar,tde);
-           if distancetocenter[CurrentPlanet]<=(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]/2)
+           distancetocenter[CurrentStep,CurrentPlanet]:=3600*rad2deg*angulardistance(ar,de,tar,tde);
+           if distancetocenter[CurrentStep,CurrentPlanet]<=(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]/2)
               then result:=true
-              else distancetocenter[CurrentPlanet]:=maxdouble;
+              else distancetocenter[CurrentStep,CurrentPlanet]:=maxdouble;
         end;
      end
      else begin
@@ -1258,12 +1256,14 @@ cfgsc.FindOK:=result;
 if result then begin
   if not directfind then begin // search the planet nearest to position
      distmin:=maxdouble;
-     for i:=1 to MaxPla do begin
-       if (i<>31)and(i<>32)and(distancetocenter[i]<distmin) then begin
-          distmin:=distancetocenter[i];
-          CurrentPlanet:=i;
+     for j:=0 to cfgsc.SimNb do
+       for i:=1 to MaxPla do begin
+         if (i<>31)and(i<>32)and(distancetocenter[j,i]<distmin) then begin
+            distmin:=distancetocenter[j,i];
+            CurrentPlanet:=i;
+            CurrentStep:=j;
+         end;
        end;
-     end;
   end;
   cfgsc.FindSize:=deg2rad*cfgsc.Planetlst[CurrentStep,CurrentPlanet,4]/3600;
   cfgsc.FindRA:=NormRa(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,1]);
