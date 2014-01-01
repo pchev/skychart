@@ -2257,16 +2257,27 @@ begin
       for k := 1 to 2 do
         AsteroidName[0, j, k] := Source.AsteroidName[0, j, k];
   end;
-  SetLength(CometLst, Source.SimNb);
-  for i := 0 to Source.SimNb - 1 do
+  if SimObject[13] then begin
+    SetLength(CometLst, Source.SimNb);
+    for i := 0 to Source.SimNb - 1 do
+      for j := 1 to Source.CometNb do
+        for k := 1 to 8 do
+          CometLst[i, j, k] := Source.CometLst[i, j, k];
+    SetLength(CometName, Source.SimNb);
+    for i := 0 to Source.SimNb - 1 do
+      for j := 1 to Source.CometNb do
+        for k := 1 to 2 do
+          CometName[i, j, k] := Source.CometName[i, j, k];
+  end else begin
+    SetLength(CometLst, 1);
     for j := 1 to Source.CometNb do
       for k := 1 to 8 do
-        CometLst[i, j, k] := Source.CometLst[i, j, k];
-  SetLength(CometName, Source.SimNb);
-  for i := 0 to Source.SimNb - 1 do
-    for j := 1 to Source.CometNb do
-      for k := 1 to 2 do
-        CometName[i, j, k] := Source.CometName[i, j, k];
+        CometLst[0, j, k] := Source.CometLst[0, j, k];
+    SetLength(CometName, 1);
+      for j := 1 to Source.CometNb do
+        for k := 1 to 2 do
+          CometName[0, j, k] := Source.CometName[0, j, k];
+  end;
   MaxArchiveImg := Source.MaxArchiveImg;
   for i:=1 to MaxArchiveDir do ArchiveDir[i]:=Source.ArchiveDir[i];
   for i:=1 to MaxArchiveDir do ArchiveDirActive[i]:=Source.ArchiveDirActive[i];
