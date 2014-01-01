@@ -256,6 +256,7 @@ type
     xcursor,ycursor,skipmove,movecamnum,moveguidetype,moveguidenum : integer;
     MovingCircle,FNightVision,StartCircle,lockkey,movecam,moveguide,frommovecam,printing: Boolean;
     LockMouseWheel,lockblink: Boolean;
+    KeyPressTime: Double;
     SaveColor: Starcolarray;
     SaveLabelColor: array[1..numlabtype] of Tcolor;
     PrintPreview: Tf_image;
@@ -507,6 +508,7 @@ inherited Create(TheOwner);
  frommovecam:=false;
  printing:=false;
  MeasureOn:=false;
+ KeyPressTime:=0;
  SetLang;
  for i:=1 to maxundo do undolist[i]:=Tconf_skychart.Create;
  Image1:= TChartDrawingControl.Create(Self);
@@ -1696,6 +1698,7 @@ if VerboseMsg then
 end;
 
 procedure Tf_chart.CKeyDown(Key: Word; Shift: TShiftState);
+var keyrepeat:boolean;
 procedure disablescroll;
 begin
 lockscrollbar:=true;
@@ -1718,18 +1721,19 @@ if Shift = [ssCtrl] then begin
    movefactor:=4;
    zoomfactor:=3;
 end;
+keyrepeat:=(abs(now-KeyPressTime)*secday<0.1);
 // numeric pad
 if (key>=VK_NUMPAD0)and(key<=VK_NUMPAD9) then key:=key-(VK_NUMPAD0-VK_0);
 // special keys handling
 case key of
-VK_PRIOR      : begin disablescroll; sc.cfgsc.Quick:=true; MoveNorthWest.execute;RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
-VK_NEXT       : begin disablescroll; sc.cfgsc.Quick:=true; MoveSouthWest.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
-VK_END        : begin disablescroll; sc.cfgsc.Quick:=true; MoveSouthEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
-VK_HOME       : begin disablescroll; sc.cfgsc.Quick:=true; MoveNorthEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
-VK_LEFT       : if (movecam or moveguide) then MoveCamera(5) else begin disablescroll; sc.cfgsc.Quick:=true; MoveEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
-VK_UP         : begin disablescroll; sc.cfgsc.Quick:=true; MoveNorth.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
-VK_RIGHT      : if (movecam or moveguide) then MoveCamera(-5) else begin disablescroll; sc.cfgsc.Quick:=true; MoveWest.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
-VK_DOWN       : begin disablescroll; sc.cfgsc.Quick:=true; MoveSouth.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_PRIOR      : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveNorthWest.execute;RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
+VK_NEXT       : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveSouthWest.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
+VK_END        : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveSouthEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
+VK_HOME       : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveNorthEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
+VK_LEFT       : if (movecam or moveguide) then MoveCamera(5) else begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
+VK_UP         : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveNorth.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
+VK_RIGHT      : if (movecam or moveguide) then MoveCamera(-5) else begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveWest.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
+VK_DOWN       : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveSouth.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
 VK_DELETE     : Cleanupmap1Click(nil);
 VK_ADD,VK_OEM_PLUS        : Zoomplus.execute;
 VK_SUBTRACT,VK_OEM_MINUS  : Zoomminus.execute;
@@ -1821,6 +1825,7 @@ end;
 movefactor:=4;
 zoomfactor:=2;
 application.processmessages;  // very important to empty the mouse event queue before to unlock
+KeyPressTime:=now;
 finally
 LockKeyboard:=false;
 end;
