@@ -128,7 +128,7 @@ type
      function InitLabel : boolean;
      Procedure FlushCnv;
      procedure BGRADrawLine(x1,y1,x2,y2: single; c: TBGRAPixel; w: single; abmp:TBGRABitmap; ps: TPenStyle=psSolid);
-     Procedure PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin,HeaderHeight,FooterHeight: integer);
+     Procedure PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin,HeaderHeight,FooterHeight: integer;whitebg:boolean);
      function PlotStar(xx,yy: single; ma,b_v : Double):integer;
      function PlotVarStar(x,y: single; vmax,vmin : Double):integer;
      function PlotDblStar(x,y,r: single; ma,sep,pa,b_v : Double):integer;
@@ -348,21 +348,29 @@ end;
 result:=true;
 end;
 
-Procedure TSplot.PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin,HeaderHeight,FooterHeight: integer);
+Procedure TSplot.PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin,HeaderHeight,FooterHeight: integer;whitebg:boolean);
 var xmin,xmax,ymin,ymax: integer;
+    bcol,fcol:Tcolor;
     c: TBGRAPixel;
 begin
 if ((LeftMargin>0)or(RightMargin>0)or(TopMargin>0)or(BottomMargin>0)) then begin
   xmin:=0; ymin:=0;
   xmax:=cfgchart.width;
   ymax:=cfgchart.height;
+  if whitebg then begin
+    fcol:=clWhite;
+    bcol:=clBlack;
+  end else begin
+    fcol:=clBlack;
+    bcol:=clWhite;
+  end;
   if cfgplot.UseBMP then begin
-     c:=ColorToBGRA(clWhite,0);
+     c:=ColorToBGRA(fcol,0);
      cbmp.Rectangle(xmin,ymin,xmin+LeftMargin,ymax,c,c,dmSet);
      cbmp.Rectangle(xmax-RightMargin,ymin,xmax,ymax,c,c,dmSet);
      cbmp.Rectangle(xmin,ymin,xmax,ymin+TopMargin,c,c,dmSet);
      cbmp.Rectangle(xmin,ymax-BottomMargin,xmax,ymax,c,c,dmSet);
-     c:=ColorToBGRA(clBlack,0);
+     c:=ColorToBGRA(bcol,0);
      cbmp.Rectangle(xmin+LeftMargin,ymin+TopMargin,xmax-RightMargin,ymax-BottomMargin,c,dmSet);
      if HeaderHeight>0 then
        cbmp.Rectangle(xmin+LeftMargin,ymin+TopMargin-HeaderHeight,xmax-RightMargin,ymin+TopMargin,c,dmSet);
@@ -371,18 +379,18 @@ if ((LeftMargin>0)or(RightMargin>0)or(TopMargin>0)or(BottomMargin>0)) then begin
   end
   else begin
        if cnv<>nil then with cnv do begin
-        Pen.Color := clWhite;
+        Pen.Color := fcol;
         Pen.Width := 1;
         Pen.Mode := pmCopy;
-        Brush.Color := clWhite;
+        Brush.Color := fcol;
         Brush.Style := bsSolid;
         Rectangle(xmin,ymin,xmin+LeftMargin,ymax);
         Rectangle(xmax-RightMargin,ymin,xmax,ymax);
         Rectangle(xmin,ymin,xmax,ymin+TopMargin);
         Rectangle(xmin,ymax-BottomMargin,xmax,ymax);
-        Pen.Color := clBlack;
+        Pen.Color := bcol;
         Pen.Width := 2*cfgchart.drawpen;
-        Brush.Color := clWhite;
+        Brush.Color := fcol;
         moveto(xmin+LeftMargin,ymin+TopMargin);
         lineto(xmin+LeftMargin,ymax-BottomMargin);
         moveto(xmin+LeftMargin,ymax-BottomMargin);  // Postscriptcanvas do not move after line

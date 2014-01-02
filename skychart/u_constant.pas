@@ -1824,6 +1824,8 @@ begin
   SetLength(rectangleok,nrectangle+1);
   SetLength(rectanglelbl,nrectangle+1);
   PlotImageFirst:=false;
+  HeaderHeight:=0;
+  FooterHeight:=0;
 end;
 
 destructor Tconf_skychart.Destroy;

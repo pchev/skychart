@@ -3034,7 +3034,7 @@ end;
 Procedure Tskychart.DrawBorder;
 begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw chart border');
-Fplot.PlotBorder(cfgsc.LeftMargin,cfgsc.RightMargin,cfgsc.TopMargin,cfgsc.BottomMargin,cfgsc.HeaderHeight,cfgsc.FooterHeight);
+Fplot.PlotBorder(cfgsc.LeftMargin,cfgsc.RightMargin,cfgsc.TopMargin,cfgsc.BottomMargin,cfgsc.HeaderHeight,cfgsc.FooterHeight,cfgsc.WhiteBg);
 end;
 
 function Tskychart.CenterRot: double;
@@ -4912,7 +4912,7 @@ var lbmp : TBGRABitmap;
     mag,dma: double;
     ts: TSize;
 begin
-if Fplot.cfgchart.onprinter and (cfgsc.FooterHeight>0) then begin
+if cfgsc.FooterHeight>0 then begin
   fontnum:=3;
   labelnum:=8;
   savefontsize:=Fplot.cfgplot.FontSize[fontnum];
