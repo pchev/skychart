@@ -71,7 +71,6 @@ type
     procedure FormShow(Sender: TObject);
     procedure prtresChange(Sender: TObject);
     procedure printcmdChange(Sender: TObject);
-    procedure savepathChange(Sender: TObject);
     procedure savepathExit(Sender: TObject);
   private
     { Private declarations }
@@ -255,20 +254,13 @@ updprtsetup;
 end;
 //////////////////////////////////////////
 
-procedure Tf_printsetup.savepathChange(Sender: TObject);
+procedure Tf_printsetup.savepathExit(Sender: TObject);
 begin
 if lockupd then exit;
 if DirectoryIsWritable(savepath.Text) then
    cm.PrintTmpPath:=savepath.Text
 else
    ShowMessage(rsInvalidPath+savepath.Text);
-end;
-
-procedure Tf_printsetup.savepathExit(Sender: TObject);
-begin
-if lockupd then exit;
-if DirectoryIsWritable(savepath.Text) then
-   cm.PrintTmpPath:=savepath.Text
 end;
 
 end.

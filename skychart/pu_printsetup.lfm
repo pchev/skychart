@@ -10,7 +10,7 @@ object f_printsetup: Tf_printsetup
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.0.14.0'
   object customoption: TPanel
     Left = 10
     Height = 130
@@ -84,7 +84,6 @@ object f_printsetup: Tf_printsetup
       NumGlyphs = 1
       MaxLength = 0
       TabOrder = 0
-      OnChange = savepathChange
       OnExit = savepathExit
     end
     object printcmd: TFileNameEdit
@@ -112,63 +111,6 @@ object f_printsetup: Tf_printsetup
       Style = csDropDownList
       TabOrder = 2
     end
-  end
-  object printmode: TRadioGroup
-    Left = 10
-    Height = 61
-    Top = 12
-    Width = 422
-    AutoFill = True
-    Caption = 'Print method'
-    ChildSizing.LeftRightSpacing = 6
-    ChildSizing.TopBottomSpacing = 6
-    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-    ChildSizing.EnlargeVertical = crsHomogenousChildResize
-    ChildSizing.ShrinkHorizontal = crsScaleChilds
-    ChildSizing.ShrinkVertical = crsScaleChilds
-    ChildSizing.Layout = cclLeftToRightThenTopToBottom
-    ChildSizing.ControlsPerLine = 3
-    ClientHeight = 44
-    ClientWidth = 418
-    Columns = 3
-    Items.Strings = (
-      'System Printer'
-      'Postscript'
-      'Bitmap File'
-    )
-    OnClick = printmodeClick
-    TabOrder = 0
-  end
-  object Ok: TButton
-    Left = 256
-    Height = 25
-    Top = 216
-    Width = 75
-    BorderSpacing.InnerBorder = 4
-    Caption = 'Ok'
-    Default = True
-    ModalResult = 1
-    TabOrder = 4
-  end
-  object Cancel: TButton
-    Left = 352
-    Height = 25
-    Top = 216
-    Width = 75
-    BorderSpacing.InnerBorder = 4
-    Cancel = True
-    Caption = 'Cancel'
-    ModalResult = 2
-    TabOrder = 5
-  end
-  object Button1: TButton
-    Left = 160
-    Height = 25
-    Top = 216
-    Width = 75
-    Caption = 'Help'
-    OnClick = Button1Click
-    TabOrder = 3
   end
   object qtoption: TPanel
     Left = 10
@@ -241,6 +183,63 @@ object f_printsetup: Tf_printsetup
       ParentFont = False
       WordWrap = True
     end
+  end
+  object printmode: TRadioGroup
+    Left = 10
+    Height = 61
+    Top = 12
+    Width = 422
+    AutoFill = True
+    Caption = 'Print method'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 3
+    ClientHeight = 44
+    ClientWidth = 418
+    Columns = 3
+    Items.Strings = (
+      'System Printer'
+      'Postscript'
+      'Bitmap File'
+    )
+    OnClick = printmodeClick
+    TabOrder = 0
+  end
+  object Ok: TButton
+    Left = 256
+    Height = 25
+    Top = 216
+    Width = 75
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Ok'
+    Default = True
+    ModalResult = 1
+    TabOrder = 4
+  end
+  object Cancel: TButton
+    Left = 352
+    Height = 25
+    Top = 216
+    Width = 75
+    BorderSpacing.InnerBorder = 4
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 5
+  end
+  object Button1: TButton
+    Left = 160
+    Height = 25
+    Top = 216
+    Width = 75
+    Caption = 'Help'
+    OnClick = Button1Click
+    TabOrder = 3
   end
   object PrinterSetupDialog1: TPrinterSetupDialog
     left = 216
