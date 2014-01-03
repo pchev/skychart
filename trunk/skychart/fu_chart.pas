@@ -1214,6 +1214,7 @@ try
  prtsc.NoFilterList:=sc.NoFilterList;
  printing:=true;
  prtsc.cfgsc.UseSystemTime:=false; // same time as current chart
+ prtsc.cfgsc.Editlabels:=false;    // force text label
  screen.cursor:=crHourGlass;
  if cm.PrintHeader then begin
     HeaderHeight:=DefHeaderHeight;
