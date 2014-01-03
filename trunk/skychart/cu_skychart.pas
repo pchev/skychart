@@ -4911,10 +4911,12 @@ var lbmp : TBGRABitmap;
     w,h,h0,fontnum,labelnum,p,ls,ws,i,xx,yy,sz,tr:integer;
     mag,dma: double;
     ts: TSize;
+    lcol: Tcolor;
 begin
 if cfgsc.FooterHeight>0 then begin
   fontnum:=3;
   labelnum:=8;
+  if cfgsc.WhiteBg then lcol:=clBlack else lcol:=clWhite;
   savefontsize:=Fplot.cfgplot.FontSize[fontnum];
   try
   // chart info
@@ -4924,8 +4926,11 @@ if cfgsc.FooterHeight>0 then begin
   yy:=Fplot.cfgchart.Height-cfgsc.BottomMargin+round(ts.cy*1.2);
   Fplot.PlotText(xx,yy,6,Fplot.cfgplot.LabelColor[8],laCenter,laBottom,txt,cfgsc.WhiteBg);
   // legend
-  h0:=yy+round(ts.cy/2);
-  Fplot.PlotLine(cfgsc.LeftMargin,h0,Fplot.cfgchart.Width-cfgsc.RightMargin,h0,clBlack,1);
+  if (ts.cy)<(cfgsc.FooterHeight/3.6) then
+    h0:=yy+round(ts.cy/2)
+  else
+    h0:=yy;
+  Fplot.PlotLine(cfgsc.LeftMargin,h0,Fplot.cfgchart.Width-cfgsc.RightMargin,h0,lcol,1);
   h0:=h0+round(ts.cy);
   Fplot.cfgplot.FontSize[fontnum]:=Fplot.cfgplot.FontSize[fontnum]-2;
   sz:=8*Fplot.cfgchart.drawsize;
