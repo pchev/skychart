@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_translation, gcatunit,
-     BGRABitmap, BGRABitmapTypes, contnrs,
+     BGRABitmap, BGRABitmapTypes, contnrs, FPCanvas,
      cu_plot, cu_catalog, cu_fits, u_constant, cu_planet, cu_database, u_projection, u_util,
      pu_addlabel, SysUtils, Classes, Math, Types, Buttons, dialogs,
      Forms, StdCtrls, Controls, ExtCtrls, Graphics, FPImage, LCLType, IntfGraphics;
@@ -125,7 +125,7 @@ Tskychart = class (TComponent)
     Procedure DrawGrid(drawlabel:boolean);
     Procedure DrawAltAzEqGrid;
     Procedure DrawPole(pole: integer);
-    procedure DrawEqGrid(drawlabel:boolean);
+    procedure DrawEqGrid(drawlabel:boolean; altstyle:boolean=false);
     procedure DrawAzGrid(drawlabel:boolean);
     procedure DrawGalGrid(drawlabel:boolean);
     procedure DrawEclGrid(drawlabel:boolean);
@@ -2948,12 +2948,12 @@ if (cfgsc.ShowOnlyMeridian)or((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.F
     if cfgsc.ShowGrid then begin
        case cfgsc.ProjPole of
        Equat  :  DrawEqGrid(drawlabel);
-       AltAz  :  begin DrawAzGrid(drawlabel); if ((not Fplot.cfgplot.UseBMP)or(not cfgsc.horizonopaque)) and cfgsc.ShowEqGrid and (not drawlabel) then DrawEqGrid(drawlabel); end;
-       Gal    :  begin DrawGalGrid(drawlabel); if cfgsc.ShowEqGrid and (not drawlabel) then DrawEqGrid(drawlabel); end;
-       Ecl    :  begin DrawEclGrid(drawlabel); if cfgsc.ShowEqGrid and (not drawlabel) then DrawEqGrid(drawlabel); end;
+       AltAz  :  begin DrawAzGrid(drawlabel); if ((not Fplot.cfgplot.UseBMP)or(not cfgsc.horizonopaque)) and cfgsc.ShowEqGrid and (not drawlabel) then DrawEqGrid(drawlabel,true); end;
+       Gal    :  begin DrawGalGrid(drawlabel); if cfgsc.ShowEqGrid and (not drawlabel) then DrawEqGrid(drawlabel,true); end;
+       Ecl    :  begin DrawEclGrid(drawlabel); if cfgsc.ShowEqGrid and (not drawlabel) then DrawEqGrid(drawlabel,true); end;
        end
     end else if cfgsc.ShowEqGrid and (((not Fplot.cfgplot.UseBMP)or(not cfgsc.horizonopaque))or(cfgsc.ProjPole<>AltAz)) then begin
-      DrawEqGrid(drawlabel);
+      DrawEqGrid(drawlabel,true);
     end
 end;
 end;
@@ -2962,7 +2962,7 @@ Procedure Tskychart.DrawAltAzEqGrid;
 begin
 if ((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=(cfgsc.fov/2)) then begin
     if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw alt/az EQ grid');
-    if Fplot.cfgplot.UseBMP and cfgsc.horizonopaque and (cfgsc.ProjPole=AltAz) and cfgsc.ShowEqGrid then DrawEqGrid(false);
+    if Fplot.cfgplot.UseBMP and cfgsc.horizonopaque and (cfgsc.ProjPole=AltAz) and cfgsc.ShowEqGrid then DrawEqGrid(false,true);
 end;
 end;
 
@@ -3071,10 +3071,11 @@ Ecl:   begin
 end;
 end;
 
-procedure Tskychart.DrawEqGrid(drawlabel:boolean);
+procedure Tskychart.DrawEqGrid(drawlabel:boolean; altstyle:boolean=false);
 var ra1,de1,ac,dc,dra,dde,rot:double;
     col,n,lh,lt,dir:integer;
     ok,labelok:boolean;
+    linestyle: TFPPenStyle;
 
 function DrawRAline(ra,de,dd:double):boolean;
 var  n,lx,ly: integer;
@@ -3093,7 +3094,7 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    if (not drawlabel) then Fplot.Plotline(xxp,yyp,xx,yy,col,0,cfgsc.StyleGrid);
+    if (not drawlabel) then Fplot.Plotline(xxp,yyp,xx,yy,col,0,linestyle);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if drawlabel and(cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
@@ -3140,7 +3141,7 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    if (not drawlabel) then Fplot.Plotline(xxp,yyp,xx,yy,col,w,cfgsc.StyleGrid);
+    if (not drawlabel) then Fplot.Plotline(xxp,yyp,xx,yy,col,w,linestyle);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if drawlabel and(cfgsc.ShowGridNum)and(plotok)and(not labelok)and(
@@ -3171,9 +3172,14 @@ end;
 
 //Tskychart.DrawEqGrid
 begin
+if altstyle then begin
+  col:=Fplot.cfgplot.Color[13];
+  linestyle:=cfgsc.StyleEqGrid;
+end else begin
+  col:=Fplot.cfgplot.Color[12];
+  linestyle:=cfgsc.StyleGrid;
+end;
 DrawPole(Equat);
-if (cfgsc.projpole=Equat)and(not cfgsc.ShowEqGrid) then col:=Fplot.cfgplot.Color[12]
-                  else col:=Fplot.cfgplot.Color[13];
 n:=GetFieldNum(cfgsc.fov/cos(cfgsc.decentre));
 dra:=Fcatalog.cfgshr.HourGridSpacing[n];
 dde:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum];
