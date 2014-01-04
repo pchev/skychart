@@ -1003,7 +1003,7 @@ for i:=1 to cfgsc.numcustomlabels do begin
  projection(ra,dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-    SetLabel(lid,xx,yy,0,2,labelnum,txt,Lalign);
+    SetLabel(lid,xx,yy,0,2,labelnum,txt,Lalign,0,0,false);
     result:=true;
  end;
 end;
@@ -4723,6 +4723,7 @@ for j:=1 to cfgsc.nummodlabels do
   for i:=1 to numlabels do
      if labels[i].id=cfgsc.modlabels[j].id then begin
        labels[i].priority:=0;
+       labels[i].optimizable:=false;
        break;
      end;
 // sort labels by priority
