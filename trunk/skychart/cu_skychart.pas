@@ -57,7 +57,7 @@ Tskychart = class (TComponent)
     fsat: textfile;
     constlabelindex:integer;
     bgcra,bgcde,bgfov,bgmis,bgmas,bgrot: double;
-    bgvalid: boolean;
+    bgvalid,HorizonDone: boolean;
     bgw,bgh,bgproj,bgflipx,bgflipy: integer;
     nebmagmin,nebmagmax: single;
     FObjectListLabels: TStringList;
@@ -302,6 +302,7 @@ end;
   end;
   InitColor; // after ComputePlanet
   // draw objects
+  HorizonDone:=false;
   if VerboseMsg then   WriteTrace('SkyChart '+cfgsc.chartname+': Open catalogs');
   Fcatalog.OpenCat(cfgsc);
   InitCatalog;
@@ -310,13 +311,15 @@ end;
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
 
     // the images first on canvas that not support the transparency
-    if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.PlotImageFirst and cfgsc.ShowImageList then DrawImagesList;
-
+    if cfgsc.PlotImageFirst then begin
+      if cfgsc.ShowHorizonPicture and (not HorizonDone) then DrawHorizon;
+      if cfgsc.ShowImageList then DrawImagesList;
+    end;
     DrawMilkyWay; // most extended first
     // EQ grid in ALt/Az mode
     DrawAltAzEqGrid;
     // then the horizon line if transparent
-    if (not cfgsc.horizonopaque) then DrawHorizon;
+    if (not cfgsc.horizonopaque) and (not HorizonDone) then DrawHorizon;
   end;
   // the DSO
   DrawDeepSkyObject;
@@ -358,7 +361,7 @@ end;
   if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.showlabelall then DrawLabels;
 
   // the horizon line if not transparent
-  if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.horizonopaque  then DrawHorizon;
+  if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and (not HorizonDone) then DrawHorizon;
 
   // the coordinates grid labels
   if cfgsc.ShowGridNum then DrawGrid(true);
@@ -3573,6 +3576,7 @@ end;
 end;
 
 begin
+HorizonDone:=true;
 // Only with Alt/Az display
 if cfgsc.ProjPole=Altaz then begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw horizon');
@@ -3775,6 +3779,14 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
         GetAHxy(cfgsc.Xmax-1,cfgsc.Ymax-1,az,h,cfgsc);
         if h<0 then fplot.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,Fplot.cfgplot.Color[19]);
      end;
+  end
+  else if cfgsc.ShowHorizonPicture then begin         // use horizon image bitmap
+    hbmp:=TBGRABitmap.Create;
+    hbmp.SetSize(fplot.cfgchart.Width,fplot.cfgchart.Height);
+    DrawHorizonPicture(hbmp);
+    fplot.cnv.CopyMode:=cmSrcCopy;
+    fplot.cnv.Draw(0,0,hbmp.Bitmap);
+    hbmp.free;
   end
   else begin
      // Horizon line
