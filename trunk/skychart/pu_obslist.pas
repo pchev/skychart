@@ -251,7 +251,6 @@ var f: textfile;
 begin
 if FileExistsUTF8(FileNameEdit1.FileName) then begin
   FListName:=FileNameEdit1.FileName;
-  StringGrid1.Clear;
   StringGrid1.RowCount:=1;
   gridchanged:=false;
   try
