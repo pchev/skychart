@@ -1446,8 +1446,8 @@ f_obslist.CheckBox4.Checked:=cfgm.ObslistHourAngleLimit1;
 f_obslist.CheckBox5.Checked:=cfgm.ObslistHourAngleLimit2;
 if (cfgm.InitObsList<>'')and(FileExists(cfgm.InitObsList)) then begin
   f_obslist.FileNameEdit1.FileName:=SysToUTF8(cfgm.InitObsList);
-  if pos(f_obslist.DefaultList,cfgm.InitObsList)>0 then f_obslist.LoadObsList;
 end;
+f_obslist.LoadObsList;
 f_obslist.onSelectObject:=ObsListSearch;
 f_obslist.onGetObjectCoord:=GetObjectCoord;
 f_obslist.onObjLabelChange:=ObsListChange;

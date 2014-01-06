@@ -9,7 +9,7 @@ object f_obslist: Tf_obslist
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.0.14.0'
   object PanelBot: TPanel
     Left = 0
     Height = 66
@@ -24,13 +24,14 @@ object f_obslist: Tf_obslist
       Height = 23
       Top = 5
       Width = 192
+      OnAcceptFileName = FileNameEdit1AcceptFileName
       FilterIndex = 0
       HideDirectories = False
       ButtonWidth = 23
       NumGlyphs = 1
       MaxLength = 0
       TabOrder = 0
-      OnChange = FileNameEdit1Change
+      OnEditingDone = FileNameEdit1EditingDone
     end
     object ButtonSave: TButton
       Left = 240

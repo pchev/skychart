@@ -87,9 +87,10 @@ type
     procedure CheckBox3Change(Sender: TObject);
     procedure CheckBox4Change(Sender: TObject);
     procedure CheckBox5Change(Sender: TObject);
+    procedure FileNameEdit1AcceptFileName(Sender: TObject; var Value: String);
+    procedure FileNameEdit1EditingDone(Sender: TObject);
     procedure HourAngleComboChange(Sender: TObject);
     procedure MenuDeleteClick(Sender: TObject);
-    procedure FileNameEdit1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -115,7 +116,7 @@ type
     procedure UpdAllCoordClick(Sender: TObject);
   private
     { private declarations }
-    title,FDefaultList: string;
+    title,FDefaultList,FListName: string;
     Faltitude: double;
     FMeridianSide: integer;
     gridchanged, limitairmass,limittransit,locktogglebox,locknewlist: boolean;
@@ -221,6 +222,7 @@ begin
   gridchanged:=false;
   FileNameEdit1.InitialDir:=buf;
   FileNameEdit1.FileName:=buf+DefaultList;
+  FListName:=FileNameEdit1.FileName;
   UpdateLabels(nil);
 end;
 
@@ -248,6 +250,8 @@ var f: textfile;
     ra,de: double;
 begin
 if FileExistsUTF8(FileNameEdit1.FileName) then begin
+  FListName:=FileNameEdit1.FileName;
+  StringGrid1.Clear;
   StringGrid1.RowCount:=1;
   gridchanged:=false;
   try
@@ -295,6 +299,7 @@ if FileExistsUTF8(FileNameEdit1.FileName) then begin
     StringGrid1.Cells[6,StringGrid1.RowCount-1]:=desc;
   end;
   CloseFile(f);
+  StringGrid1.Invalidate;
   edit1.Text:=title;
   Refresh;
   Application.ProcessMessages;
@@ -871,11 +876,21 @@ PageControl1.ActivePageIndex:=1;
 locktogglebox:=false;
 end;
 
-procedure Tf_obslist.FileNameEdit1Change(Sender: TObject);
+procedure Tf_obslist.FileNameEdit1AcceptFileName(Sender: TObject; var Value: String);
 begin
-  if locknewlist then exit;
-  FileNameEdit1.InitialDir:=ExtractFilePath(FileNameEdit1.FileName);
-  if assigned(cfgsc) then LoadObsList;
+if locknewlist then exit;
+if FileNameEdit1.FileName=Value then exit;
+FileNameEdit1.FileName:=Value;
+FileNameEdit1.InitialDir:=ExtractFilePath(FileNameEdit1.FileName);
+if assigned(cfgsc) then LoadObsList;
+end;
+
+procedure Tf_obslist.FileNameEdit1EditingDone(Sender: TObject);
+begin
+if locknewlist then exit;
+if FileNameEdit1.FileName=FListName then exit;
+FileNameEdit1.InitialDir:=ExtractFilePath(FileNameEdit1.FileName);
+if assigned(cfgsc) then LoadObsList;
 end;
 
 procedure Tf_obslist.ButtonSaveClick(Sender: TObject);
@@ -987,6 +1002,7 @@ begin
  RefreshTimer.Enabled:=(CheckBox2.Checked or CheckBox5.Checked);
  SetVisibleRows;
 end;
+
 
 end.
 
