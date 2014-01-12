@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-29 17:51+0000\n"
-"PO-Revision-Date: 2013-11-25 09:52+0000\n"
+"PO-Revision-Date: 2014-01-03 09:15+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-29 18:04+0000\n"
-"X-Generator: Launchpad (build 16877)\n"
+"X-Launchpad-Export-Date: 2014-01-12 14:37+0000\n"
+"X-Generator: Launchpad (build 16890)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -3991,11 +3991,11 @@ msgstr "Ustawienia druku"
 
 #: u_translation.rsprintfooter
 msgid "Print footer"
-msgstr ""
+msgstr "Drukuj stopkę"
 
 #: u_translation.rsprintheader
 msgid "Print header"
-msgstr ""
+msgstr "Drukuj nagłówek"
 
 #: u_translation.rsprintmethod
 msgid "Print method"

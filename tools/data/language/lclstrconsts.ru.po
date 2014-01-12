@@ -5,7 +5,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2011-05-14 01:35+0300\n"
+"PO-Revision-Date: 2012-04-15 19:51+0400\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 
@@ -69,6 +69,10 @@ msgstr "CapsLock"
 #: lclstrconsts.ifsvk_clear
 msgid "Clear"
 msgstr "Clear"
+
+#: lclstrconsts.ifsvk_cmd
+msgid "Cmd"
+msgstr "Cmd"
 
 #: lclstrconsts.ifsvk_control
 msgid "Control"
@@ -153,6 +157,10 @@ msgctxt "lclstrconsts.ifsvk_menu"
 msgid "Menu"
 msgstr "Menu"
 
+#: lclstrconsts.ifsvk_meta
+msgid "Meta"
+msgstr "Meta"
+
 #: lclstrconsts.ifsvk_modechange
 msgid "Mode Change"
 msgstr "Изменение режима"
@@ -224,6 +232,10 @@ msgstr "Snapshot"
 msgid "Space key"
 msgstr "Пробел"
 
+#: lclstrconsts.ifsvk_super
+msgid "Super"
+msgstr "Super"
+
 #: lclstrconsts.ifsvk_tab
 msgctxt "lclstrconsts.ifsvk_tab"
 msgid "Tab"
@@ -241,6 +253,11 @@ msgstr "Стрелка вверх"
 #: lclstrconsts.liscannotexecute
 msgid "can not execute %s"
 msgstr "Запустить %s невозможно"
+
+#: lclstrconsts.liscefilter
+#| msgid "(Filter)"
+msgid "(filter)"
+msgstr "(фильтр)"
 
 #: lclstrconsts.lislclresourcesnotfound
 msgctxt "lclstrconsts.lislclresourcesnotfound"
@@ -356,6 +373,10 @@ msgstr "Элемент управления класса '%s' не может и
 #: lclstrconsts.rscontrolhasnoparentwindow
 msgid "Control '%s' has no parent window"
 msgstr "Элемент управления '%s' не имеет родительского окна"
+
+#: lclstrconsts.rscontrolisnotaparent
+msgid "'%s' is not a parent of '%s'"
+msgstr "'%s' не является родителем '%s'"
 
 #: lclstrconsts.rscreamcolorcaption
 msgid "Cream"
@@ -501,7 +522,7 @@ msgstr "(файл не найден: \"%s\")"
 
 #: lclstrconsts.rsfileinformation
 msgid "File information"
-msgstr "Информация о файле"
+msgstr "Сведения о файле"
 
 #: lclstrconsts.rsfind
 msgid "Find"
@@ -674,6 +695,14 @@ msgstr "База данных справки %s%s%s не нашла програ
 #: lclstrconsts.rshelphelpdatabasenotfound
 msgid "Help Database %s%s%s not found"
 msgstr "База данных справки %s%s%s не найдена"
+
+#: lclstrconsts.rshelphelpfordirectivenotfound
+msgid "Help for directive %s%s%s not found."
+msgstr "Справка для директивы %s%s%s не найдена."
+
+#: lclstrconsts.rshelphelpfordirectivenotfoundindatabase
+msgid "Help for directive %s%s%s not found in Database %s%s%s."
+msgstr "Справка для директивы %s%s%s в базе данных %s%s%s не найдена."
 
 #: lclstrconsts.rshelphelpkeywordnotfound
 msgid "Help keyword %s%s%s not found."
@@ -984,7 +1013,7 @@ msgstr "Неверный файл сетки"
 
 #: lclstrconsts.rsnowidgetset
 msgid "No widgetset object. Please check if the unit \"interfaces\" was added to the programs uses clause."
-msgstr "Отсутствует объект библиотеки виджетов. Проверьте, что модуль \"interfaces\" был добавлен в выражение uses программы."
+msgstr "Отсутствует объект библиотеки виджетов. Проверьте, что модуль \"interfaces\" был добавлен в выражение Uses программы."
 
 #: lclstrconsts.rsolivecolorcaption
 msgid "Olive"
@@ -1027,6 +1056,10 @@ msgstr "%s%sНажмите 'OK' чтобы игнорировать и подв�
 msgctxt "lclstrconsts.rspriorrecordhint"
 msgid "Prior"
 msgstr "Предыдущая"
+
+#: lclstrconsts.rspromptonreplace
+msgid "Prompt on replace"
+msgstr "Спрашивать при &замене"
 
 #: lclstrconsts.rspropertydoesnotexist
 msgid "Property %s does not exist"
@@ -1193,6 +1226,10 @@ msgstr "  размер "
 msgid "Sky Blue"
 msgstr "Голубой"
 
+#: lclstrconsts.rstcustomtabcontrolaccessibilitydescription
+msgid "A control with tabs"
+msgstr "Элемент управления со вкладками"
+
 #: lclstrconsts.rstealcolorcaption
 msgid "Teal"
 msgstr "Бирюзовый"
@@ -1204,6 +1241,22 @@ msgstr "Текст"
 #: lclstrconsts.rstiff
 msgid "Tagged Image File Format"
 msgstr "Формат Tagged Image File"
+
+#: lclstrconsts.rstpanelaccessibilitydescription
+msgctxt "lclstrconsts.rstpanelaccessibilitydescription"
+msgid "Panel"
+msgstr "Панель"
+
+#: lclstrconsts.rstsplitteraccessibilitydescription
+#| msgid "A grip to control how much size to give the left and right parts of an area"
+msgctxt "lclstrconsts.rstsplitteraccessibilitydescription"
+msgid "A grip to control how much size to give two parts of an area"
+msgstr "Захват для управления соотношением размеров двух областей"
+
+#: lclstrconsts.rsttreeviewaccessibilitydescription
+msgctxt "lclstrconsts.rsttreeviewaccessibilitydescription"
+msgid "A tree of items"
+msgstr "Дерево элементов"
 
 #: lclstrconsts.rsunabletoloaddefaultfont
 msgid "Unable to load default font"
@@ -1316,6 +1369,10 @@ msgstr "Неверный размер рисунка"
 #: lclstrconsts.sinvalidindex
 msgid "Invalid ImageList Index"
 msgstr "Неверный индекс ImageList"
+
+#: lclstrconsts.smaskeditnomatch
+msgid "The current text does not match the specified mask."
+msgstr "Текущий текст не соответствует заданной маске."
 
 #: lclstrconsts.smenuindexerror
 msgid "Menu index out of range"
@@ -1433,8 +1490,9 @@ msgid "Invalid integer number: %s"
 msgstr "Неверное целое число: %s"
 
 #: lclstrconsts.sparlocinfo
-msgid " (at %d,%d, stream offset %.8x)"
-msgstr " (на %d,%d, смещение потока %.8x)"
+#| msgid " (at %d,%d, stream offset %.8x)"
+msgid " (at %d,%d, stream offset %d)"
+msgstr " (на %d,%d, смещение потока %d)"
 
 #: lclstrconsts.sparunterminatedbinvalue
 msgid "Unterminated byte value"

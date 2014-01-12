@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-29 17:51+0000\n"
-"PO-Revision-Date: 2013-11-23 14:06+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"PO-Revision-Date: 2014-01-01 09:25+0000\n"
+"Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-29 18:04+0000\n"
-"X-Generator: Launchpad (build 16877)\n"
+"X-Launchpad-Export-Date: 2014-01-12 14:37+0000\n"
+"X-Generator: Launchpad (build 16890)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -3987,11 +3987,11 @@ msgstr "Printerinstellingen"
 
 #: u_translation.rsprintfooter
 msgid "Print footer"
-msgstr ""
+msgstr "Voetregel afdrukken"
 
 #: u_translation.rsprintheader
 msgid "Print header"
-msgstr ""
+msgstr "Kopregel afdrukken"
 
 #: u_translation.rsprintmethod
 msgid "Print method"
