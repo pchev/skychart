@@ -1681,7 +1681,7 @@ if sender is TShape then with sender as TShape do begin
    if ColorDialog1.Execute then begin
       // Check the color is "dark" enough
       L:=((ColorDialog1.Color and $ff)+((ColorDialog1.Color shr 8) and $ff)+((ColorDialog1.Color shr 16) and $ff)) div 3;
-      if L<195 then cplot.SkyColor[tag]:=ColorDialog1.Color;
+      if L<251 then cplot.SkyColor[tag]:=ColorDialog1.Color;
       ShowSkyColor;
    end;
 end;
