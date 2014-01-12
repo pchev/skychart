@@ -1,7 +1,7 @@
 object f_main: Tf_main
-  Left = 316
+  Left = 304
   Height = 600
-  Top = 120
+  Top = 121
   Width = 1024
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
@@ -7024,6 +7024,10 @@ object f_main: Tf_main
       end
       object MenuItem10: TMenuItem
         Caption = '-'
+      end
+      object HelpPDF: TMenuItem
+        Caption = 'HelpPDF'
+        OnClick = HelpPDFClick
       end
       object HomePage1: TMenuItem
         Caption = 'Skychart Homepage'
