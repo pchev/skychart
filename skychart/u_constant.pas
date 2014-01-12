@@ -464,6 +464,7 @@ const
   URL_WebHome = 'http://www.ap-i.net/skychart';
   URL_Maillist = 'http://groups.yahoo.com/group/skychart-discussion/';
   URL_BugTracker = 'http://www.ap-i.net/mantis/';
+  URL_DocPDF = 'http://www.ap-i.net/pub/skychart/doc/doc_$LANG.pdf';
 
   URL_TLE = 'https://www.space-track.org';
   URL_QUICKSAT = 'http://www.prismnet.com/~mmccants/';

@@ -47,6 +47,7 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    HelpPDF: TMenuItem;
     MenuObslist: TMenuItem;
     SampDownload: TDownloadDialog;
     MenuItem35: TMenuItem;
@@ -480,6 +481,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure HelpFaq1Execute(Sender: TObject);
+    procedure HelpPDFClick(Sender: TObject);
     procedure HelpQS1Execute(Sender: TObject);
     procedure HomePage1Click(Sender: TObject);
     procedure InitTimerTimer(Sender: TObject);
@@ -1541,6 +1543,16 @@ begin
 sethelp(self,hlpFaq);
 ShowHelp;
 sethelp(self,hlpIndex);
+end;
+
+procedure Tf_main.HelpPDFClick(Sender: TObject);
+const pdflang='ca en es fr it nl uk ';
+var l,pdfurl:string;
+begin
+l:=trim(Lang);
+if pos(l+blank,pdflang)=0 then l:='en';
+pdfurl:=StringReplace(URL_DocPDF,'$LANG',l,[]);;
+ExecuteFile(pdfurl);
 end;
 
 procedure Tf_main.HelpQS1Execute(Sender: TObject);
@@ -6856,6 +6868,7 @@ WindowTileItem2.caption:='&'+rsTileVertical;
 Maximize1.caption:='&'+rsMaximize;
 Help1.caption:='&'+rsHelp;
 HelpContents1.caption:='&'+rsHelpContents+Ellipsis;
+HelpPDF.Caption:='&PDF '+rsHelpContents+Ellipsis;;
 HelpFaq1.Caption:='&'+rsFAQ+Ellipsis;
 HelpQS1.Caption:='&'+rsQuickStartGu+Ellipsis;
 HomePage1.caption:='&'+rsSkychartHome+Ellipsis;
