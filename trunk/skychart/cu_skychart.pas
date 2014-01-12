@@ -264,6 +264,7 @@ end;
 
 function Tskychart.Refresh :boolean;
 var savmag: double;
+    savebg:Tcolor;
     savfilter,saveautofilter,savfillmw,scopemark:boolean;
     saveplaplot:integer;
 begin
@@ -279,6 +280,7 @@ saveautofilter:=Fcatalog.cfgshr.AutoStarFilter;
 savfillmw:=cfgsc.FillMilkyWay;
 scopemark:=cfgsc.ScopeMark;
 saveplaplot:=Fplot.cfgplot.plaplot;
+savebg:=Fplot.cfgplot.color[0];
 try
   chdir(appdir);
   // initialize chart value
@@ -392,6 +394,7 @@ finally
      Fcatalog.cfgshr.AutoStarFilter:=saveautofilter;
      Fplot.cfgplot.plaplot := saveplaplot;
   end;
+  Fplot.cfgplot.color[0]:=savebg;
   cfgsc.FillMilkyWay:=savfillmw;
   cfgsc.quick:=false;
 end;

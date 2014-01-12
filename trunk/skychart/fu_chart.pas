@@ -697,8 +697,7 @@ starttime:=now;
 if locked then exit;
 if lock_refresh then exit;
 try
-if VerboseMsg then
- WriteTrace('Chart '+sc.cfgsc.chartname+': Get refresh lock');
+ if VerboseMsg then WriteTrace('Chart '+sc.cfgsc.chartname+': Get refresh lock');
  lock_refresh:=true;
  lastquick:=sc.cfgsc.quick;
  saveantialias:=sc.plot.cfgplot.AntiAlias;
@@ -714,15 +713,13 @@ if VerboseMsg then
  identlabel.visible:=false;
  Image1.width:=clientwidth;
  Image1.height:=clientheight;
-if VerboseMsg then
- WriteTrace('Chart '+sc.cfgsc.chartname+': Init '+inttostr(Image1.width)+'x'+inttostr(Image1.height));
+ if VerboseMsg then WriteTrace('Chart '+sc.cfgsc.chartname+': Init '+inttostr(Image1.width)+'x'+inttostr(Image1.height));
  sc.plot.init(Image1.width,Image1.height);
  savebg:=sc.plot.cfgplot.color[0];
  if (sc.plot.cfgplot.color[0]<clWhite) and
     not(sc.plot.cfgplot.AutoSkyColor and (sc.cfgsc.Projpole=AltAz)) then
     sc.plot.cfgplot.bgcolor:=sc.plot.cfgplot.skycolor[0];
-if VerboseMsg then
- WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map');
+ if VerboseMsg then WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map');
  if sc.plot.cfgplot.plaplot=2 then GetSunImage;
  if sc.cfgsc.ShowBackgroundImage then sc.cfgsc.ShowImageList:=true;
  if sc.cfgsc.quick then begin
@@ -735,8 +732,7 @@ if VerboseMsg then
    sc.NoFilterList:=f_obslist.NoFilterList.Checked and (sc.ObjectListLabels.Count>0);
  end;
  sc.Refresh;
-if VerboseMsg then
- WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map end');
+ if VerboseMsg then WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map end');
  sc.plot.cfgplot.color[0]:=savebg;
  Image1.Invalidate;
  if not lastquick then begin
@@ -750,8 +746,7 @@ if VerboseMsg then
     Image1.Cursor:=ChartCursor;
 end;
 finally
-if VerboseMsg then
- WriteTrace('Chart '+sc.cfgsc.chartname+': Release refresh lock');
+ if VerboseMsg then WriteTrace('Chart '+sc.cfgsc.chartname+': Release refresh lock');
  lock_refresh:=false;
  sc.plot.cfgplot.AntiAlias := saveantialias;
  EyepieceMask.Checked:=sc.cfgsc.EyepieceMask;
@@ -770,8 +765,7 @@ if assigned(Fshowinfo) then begin
   {$endif}
 end;
 SetScrollBar;
-if VerboseMsg then
- WriteTrace('Chart '+sc.cfgsc.chartname+': Refresh end');
+if VerboseMsg then WriteTrace('Chart '+sc.cfgsc.chartname+': Refresh end');
 end;
 
 procedure Tf_chart.UndoExecute(Sender: TObject);
