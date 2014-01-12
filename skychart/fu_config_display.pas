@@ -1674,11 +1674,14 @@ end;
 
 procedure Tf_config_display.ShapeSkyMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var L: integer;
 begin
 if sender is TShape then with sender as TShape do begin
    ColorDialog1.color:=cplot.SkyColor[tag];
    if ColorDialog1.Execute then begin
-      cplot.SkyColor[tag]:=ColorDialog1.Color;
+      // Check the color is "dark" enough
+      L:=((ColorDialog1.Color and $ff)+((ColorDialog1.Color shr 8) and $ff)+((ColorDialog1.Color shr 16) and $ff)) div 3;
+      if L<195 then cplot.SkyColor[tag]:=ColorDialog1.Color;
       ShowSkyColor;
    end;
 end;
