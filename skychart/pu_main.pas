@@ -4070,7 +4070,7 @@ var i:integer;
   dbchange,themechange,langchange,starchange,showast: Boolean;
 begin
     dbchange:=false; themechange:=false; langchange:=false; starchange:=false;
-    showast:=csc.ShowAsteroid;
+    showast:=false;
     if cmain<>nil then begin
       if (cfgm.language<>cmain.language) then langchange:=true;
     end;
@@ -4114,6 +4114,7 @@ begin
     if cdss<>nil then f_getdss.cfgdss.Assign(cdss);
     if cshr<>nil then catalog.cfgshr.Assign(cshr);
     if csc<>nil  then begin
+       showast:=csc.ShowAsteroid;
        if (not csc.SunOnline)or(csc.sunurlname<>def_cfgsc.sunurlname) then DeleteFile(slash(Tempdir)+'sun.jpg');
        def_cfgsc.Assign(csc);
     end;
