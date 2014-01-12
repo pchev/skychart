@@ -1,4 +1,3 @@
-# Massimo Soricetti <notturno@quipo.it>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.2\n"
@@ -72,6 +71,10 @@ msgstr "Maiuscola"
 #: lclstrconsts.ifsvk_clear
 msgid "Clear"
 msgstr "Cancella"
+
+#: lclstrconsts.ifsvk_cmd
+msgid "Cmd"
+msgstr ""
 
 #: lclstrconsts.ifsvk_control
 msgid "Control"
@@ -156,6 +159,10 @@ msgctxt "lclstrconsts.ifsvk_menu"
 msgid "Menu"
 msgstr "Menu"
 
+#: lclstrconsts.ifsvk_meta
+msgid "Meta"
+msgstr ""
+
 #: lclstrconsts.ifsvk_modechange
 msgid "Mode Change"
 msgstr "Cambiamento di modalità"
@@ -227,6 +234,10 @@ msgstr "Istantanea"
 msgid "Space key"
 msgstr "Tasto di spaziatura"
 
+#: lclstrconsts.ifsvk_super
+msgid "Super"
+msgstr ""
+
 #: lclstrconsts.ifsvk_tab
 msgctxt "lclstrconsts.ifsvk_tab"
 msgid "Tab"
@@ -244,6 +255,10 @@ msgstr "Su"
 #: lclstrconsts.liscannotexecute
 msgid "can not execute %s"
 msgstr "non posso eseguire %s"
+
+#: lclstrconsts.liscefilter
+msgid "(filter)"
+msgstr ""
 
 #: lclstrconsts.lislclresourcesnotfound
 msgctxt "lclstrconsts.lislclresourcesnotfound"
@@ -360,6 +375,10 @@ msgstr "Un controllo di classe '%s' non può avere figli di classe '%s'"
 #: lclstrconsts.rscontrolhasnoparentwindow
 msgid "Control '%s' has no parent window"
 msgstr "Il controllo '%s' non ha finestra padre"
+
+#: lclstrconsts.rscontrolisnotaparent
+msgid "'%s' is not a parent of '%s'"
+msgstr ""
 
 #: lclstrconsts.rscreamcolorcaption
 msgid "Cream"
@@ -680,6 +699,14 @@ msgstr "L'archivio Help %s%s%s non trova un visualizzatore per le pagine di aiut
 #: lclstrconsts.rshelphelpdatabasenotfound
 msgid "Help Database %s%s%s not found"
 msgstr "Archivio Help %s%s%s non trovato"
+
+#: lclstrconsts.rshelphelpfordirectivenotfound
+msgid "Help for directive %s%s%s not found."
+msgstr ""
+
+#: lclstrconsts.rshelphelpfordirectivenotfoundindatabase
+msgid "Help for directive %s%s%s not found in Database %s%s%s."
+msgstr ""
 
 #: lclstrconsts.rshelphelpkeywordnotfound
 msgid "Help keyword %s%s%s not found."
@@ -1037,6 +1064,10 @@ msgctxt "lclstrconsts.rspriorrecordhint"
 msgid "Prior"
 msgstr "Precedente"
 
+#: lclstrconsts.rspromptonreplace
+msgid "Prompt on replace"
+msgstr ""
+
 #: lclstrconsts.rspropertydoesnotexist
 msgid "Property %s does not exist"
 msgstr "La proprietà %s non esiste"
@@ -1194,6 +1225,10 @@ msgstr "  ampiezza "
 msgid "Sky Blue"
 msgstr ""
 
+#: lclstrconsts.rstcustomtabcontrolaccessibilitydescription
+msgid "A control with tabs"
+msgstr ""
+
 #: lclstrconsts.rstealcolorcaption
 msgid "Teal"
 msgstr "Ocra"
@@ -1204,6 +1239,21 @@ msgstr "Testo"
 
 #: lclstrconsts.rstiff
 msgid "Tagged Image File Format"
+msgstr ""
+
+#: lclstrconsts.rstpanelaccessibilitydescription
+msgctxt "lclstrconsts.rstpanelaccessibilitydescription"
+msgid "Panel"
+msgstr ""
+
+#: lclstrconsts.rstsplitteraccessibilitydescription
+msgctxt "lclstrconsts.rstsplitteraccessibilitydescription"
+msgid "A grip to control how much size to give two parts of an area"
+msgstr ""
+
+#: lclstrconsts.rsttreeviewaccessibilitydescription
+msgctxt "lclstrconsts.rsttreeviewaccessibilitydescription"
+msgid "A tree of items"
 msgstr ""
 
 #: lclstrconsts.rsunabletoloaddefaultfont
@@ -1317,6 +1367,10 @@ msgstr "Grandezza immagine non valida"
 #: lclstrconsts.sinvalidindex
 msgid "Invalid ImageList Index"
 msgstr "Indice ImageList non valido"
+
+#: lclstrconsts.smaskeditnomatch
+msgid "The current text does not match the specified mask."
+msgstr ""
 
 #: lclstrconsts.smenuindexerror
 msgid "Menu index out of range"
@@ -1434,7 +1488,9 @@ msgid "Invalid integer number: %s"
 msgstr "Numero intero non valido: %s"
 
 #: lclstrconsts.sparlocinfo
-msgid " (at %d,%d, stream offset %.8x)"
+#, fuzzy
+#| msgid " (at %d,%d, stream offset %.8x)"
+msgid " (at %d,%d, stream offset %d)"
 msgstr " (a %s %d, offset nello stream %.8x)"
 
 #: lclstrconsts.sparunterminatedbinvalue

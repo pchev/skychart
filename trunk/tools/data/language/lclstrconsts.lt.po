@@ -1,17 +1,16 @@
-# translation of lclstrconsts.po to
-# Valdas Jankūnas <zmuogs@gmail.com>, 2008, 2009, 2010.
 msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2010-10-11 13:48+0200\n"
+"PO-Revision-Date: 2012-08-07 00:34+0300\n"
 "Project-Id-Version: lclstrconsts\n"
-"Language-Team: Lietuvių <kde-i18n-lt@kde.org>\n"
-"X-Generator: Lokalize 1.0\n"
+"Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
+"X-Generator: Lokalize 1.5\n"
 "MIME-Version: 1.0\n"
-"Last-Translator: Žilvinas Ledas <zilvinas.ledas@dict.lt>\n"
+"Last-Translator: Valdas Jankunas <zmuogs@gmail.com>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "POT-Creation-Date: \n"
+"Language: lt\n"
 
 #: lclstrconsts.hhshelpbrowsernotexecutable
 msgid "Browser %s%s%s not executable."
@@ -31,7 +30,7 @@ msgstr "Nepavyko rasti HTML naršyklės."
 
 #: lclstrconsts.hhshelpnohtmlbrowserfoundpleasedefineone
 msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
-msgstr ""
+msgstr "Nerasta HTML Naršyklė.%sJą galima nustatyti „Aplinka -> Aplinkos parinktys -> Žinynas -> Žinyno parinktys“"
 
 #: lclstrconsts.hhshelpthehelpdatabasewasunabletofindfile
 msgid "The help database %s%s%s was unable to find file %s%s%s."
@@ -73,6 +72,10 @@ msgstr "Didž"
 #: lclstrconsts.ifsvk_clear
 msgid "Clear"
 msgstr "Išvalyti"
+
+#: lclstrconsts.ifsvk_cmd
+msgid "Cmd"
+msgstr "Cmd"
 
 #: lclstrconsts.ifsvk_control
 msgid "Control"
@@ -157,6 +160,10 @@ msgctxt "lclstrconsts.ifsvk_menu"
 msgid "Menu"
 msgstr "Meniu"
 
+#: lclstrconsts.ifsvk_meta
+msgid "Meta"
+msgstr "Meta"
+
 #: lclstrconsts.ifsvk_modechange
 msgid "Mode Change"
 msgstr "Būsenos keitimas"
@@ -228,6 +235,10 @@ msgstr "Momentinė kopija"
 msgid "Space key"
 msgstr "Tarpo klavišas"
 
+#: lclstrconsts.ifsvk_super
+msgid "Super"
+msgstr "Super"
+
 #: lclstrconsts.ifsvk_tab
 msgctxt "lclstrconsts.ifsvk_tab"
 msgid "Tab"
@@ -245,6 +256,10 @@ msgstr "Aukštyn"
 #: lclstrconsts.liscannotexecute
 msgid "can not execute %s"
 msgstr "negalima vykdyti %s"
+
+#: lclstrconsts.liscefilter
+msgid "(filter)"
+msgstr "(filtras)"
 
 #: lclstrconsts.lislclresourcesnotfound
 msgctxt "lclstrconsts.lislclresourcesnotfound"
@@ -360,6 +375,10 @@ msgstr "„%s“ klasės valdiklis negali būti „%s“ klasės valdiklio tėva
 #: lclstrconsts.rscontrolhasnoparentwindow
 msgid "Control '%s' has no parent window"
 msgstr "„%s“ valdiklis neturi tėvinio lango"
+
+#: lclstrconsts.rscontrolisnotaparent
+msgid "'%s' is not a parent of '%s'"
+msgstr "„%s“ nėra „%s“ tėvas"
 
 #: lclstrconsts.rscreamcolorcaption
 msgid "Cream"
@@ -533,7 +552,7 @@ msgstr "Forma"
 
 #: lclstrconsts.rsformresourcesnotfoundforresourcelessformscreatenew
 msgid "Form resource %s not found. For resourceless forms CreateNew constructor must be used. See the global variable RequireDerivedFormResource."
-msgstr ""
+msgstr "Nepavyko rasti formos ištekliaus „%s“. Formoms be išteklių turi būti naudojamas „CreateNew“ konstruktorius. Žvilktelėkite į globalų kintamąjį „RequireDerivedFormResource“."
 
 #: lclstrconsts.rsformstreamingerror
 msgid "Form streaming \"%s\" error: %s"
@@ -649,16 +668,14 @@ msgid "%s: Already registered"
 msgstr "%s: jau yra registruotas"
 
 #: lclstrconsts.rshelpcontextnotfound
-#, fuzzy
 #| msgid "Help Context not found"
 msgid "A help database was found for this topic, but this topic was not found"
-msgstr "Žinyno turinys nerastas"
+msgstr "Šiai temai rasta žinyno duomenų bazė, tačiau pačios temos rasti nepavyko"
 
 #: lclstrconsts.rshelpdatabasenotfound
-#, fuzzy
 #| msgid "Help Database not found"
 msgid "There is no help database installed for this topic"
-msgstr "Žinyno duomenų bazė nerasta"
+msgstr "Šiai temai nėra įdiegtos žinyno duomenų bazės"
 
 #: lclstrconsts.rshelperror
 msgid "Help Error"
@@ -680,6 +697,14 @@ msgstr "Žinyno duomenų bazė %s%s%s nerado žiūryklės %s tipo žinyno lapui.
 msgid "Help Database %s%s%s not found"
 msgstr "Žinyno duomenų bazė %s%s%s nerasta."
 
+#: lclstrconsts.rshelphelpfordirectivenotfound
+msgid "Help for directive %s%s%s not found."
+msgstr "Žinyne nėra informacijos apie direktyvą %s%s%s."
+
+#: lclstrconsts.rshelphelpfordirectivenotfoundindatabase
+msgid "Help for directive %s%s%s not found in Database %s%s%s."
+msgstr "Informacijos apie direktyvą %s%s%s duomenų bazėje %s%s%s nerasta."
+
 #: lclstrconsts.rshelphelpkeywordnotfound
 msgid "Help keyword %s%s%s not found."
 msgstr "Žinyno raktažodis %s%s%s nerastas."
@@ -697,16 +722,14 @@ msgid "No help found for line %d, column %d of %s."
 msgstr "Žinyne nėra duomenų eilutei %d, stulpeliui %d šio %s."
 
 #: lclstrconsts.rshelpnohelpnodesavailable
-#, fuzzy
 #| msgid "No help nodes available"
 msgid "No help entries available for this topic"
-msgstr "Žinyno mazgų nėra"
+msgstr "Žinyne nėra įrašų šia tema"
 
 #: lclstrconsts.rshelpnotfound
-#, fuzzy
 #| msgid "Help not found"
 msgid "No help found for this topic"
-msgstr "Žinynas nerastas"
+msgstr "Žinyne nėra informacijos šia tema"
 
 #: lclstrconsts.rshelpnotregistered
 msgid "%s: Not registered"
@@ -725,10 +748,9 @@ msgid "Help Viewer Error"
 msgstr "Žinyno žiūryklės klaida"
 
 #: lclstrconsts.rshelpviewernotfound
-#, fuzzy
 #| msgid "Help Viewer not found"
 msgid "No viewer was found for this type of help content"
-msgstr "Žinyno žiūryklė nerasta"
+msgstr "Nepavyko rasti žiūryklės šio tipo žinyno turiniui"
 
 #: lclstrconsts.rshighlightcolorcaption
 msgid "Highlight"
@@ -1036,6 +1058,10 @@ msgctxt "lclstrconsts.rspriorrecordhint"
 msgid "Prior"
 msgstr "Ankstesnis"
 
+#: lclstrconsts.rspromptonreplace
+msgid "Prompt on replace"
+msgstr "Keičiant klausti patvirtinimo"
+
 #: lclstrconsts.rspropertydoesnotexist
 msgid "Property %s does not exist"
 msgstr "Savybė %s neegzistuoja"
@@ -1193,6 +1219,10 @@ msgstr "  dydis "
 msgid "Sky Blue"
 msgstr "Dangaus žydrumo"
 
+#: lclstrconsts.rstcustomtabcontrolaccessibilitydescription
+msgid "A control with tabs"
+msgstr "Valdiklis su ąselėmis"
+
 #: lclstrconsts.rstealcolorcaption
 msgid "Teal"
 msgstr "Tamsiai žydra"
@@ -1204,6 +1234,21 @@ msgstr "Tekstas"
 #: lclstrconsts.rstiff
 msgid "Tagged Image File Format"
 msgstr "„Tagged Image File Format“"
+
+#: lclstrconsts.rstpanelaccessibilitydescription
+msgctxt "lclstrconsts.rstpanelaccessibilitydescription"
+msgid "Panel"
+msgstr "Skydas"
+
+#: lclstrconsts.rstsplitteraccessibilitydescription
+msgctxt "lclstrconsts.rstsplitteraccessibilitydescription"
+msgid "A grip to control how much size to give two parts of an area"
+msgstr "Rankenėlė, kuria galima keisti dviejų srities dalių dydžius"
+
+#: lclstrconsts.rsttreeviewaccessibilitydescription
+msgctxt "lclstrconsts.rsttreeviewaccessibilitydescription"
+msgid "A tree of items"
+msgstr "Elementų medis"
 
 #: lclstrconsts.rsunabletoloaddefaultfont
 msgid "Unable to load default font"
@@ -1316,6 +1361,10 @@ msgstr "Netinkamas paveikslo dydis"
 #: lclstrconsts.sinvalidindex
 msgid "Invalid ImageList Index"
 msgstr "Netinkamas „ImageList“ indeksas"
+
+#: lclstrconsts.smaskeditnomatch
+msgid "The current text does not match the specified mask."
+msgstr "Dabartinis tekstas nedera prie nurodytos kaukės."
 
 #: lclstrconsts.smenuindexerror
 msgid "Menu index out of range"
@@ -1433,8 +1482,9 @@ msgid "Invalid integer number: %s"
 msgstr "Netinkamas sveikasis skaičius: %s"
 
 #: lclstrconsts.sparlocinfo
-msgid " (at %d,%d, stream offset %.8x)"
-msgstr " (ties %d,%d, srauto poslinkis %.8x)"
+#| msgid " (at %d,%d, stream offset %.8x)"
+msgid " (at %d,%d, stream offset %d)"
+msgstr " (ties %d,%d, srauto poslinkis: %d)"
 
 #: lclstrconsts.sparunterminatedbinvalue
 msgid "Unterminated byte value"

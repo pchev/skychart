@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Last-Translator: August Klein\n"
-"PO-Revision-Date: 2011-03-08 06:22+0100\n"
+"Last-Translator: Lucas Martin <codedeep@hotmail.com>\n"
+"PO-Revision-Date: 2012-10-02 20:21+0100\n"
 "Language-Team: \n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,7 +27,7 @@ msgstr "No se pudo encontrar un visor HTML"
 
 #: lclstrconsts.hhshelpnohtmlbrowserfoundpleasedefineone
 msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
-msgstr ""
+msgstr "No encontrado un Navegador HTML.%sPor favor definir uno en Herramientas -> Opciones -> Ayuda -> Opciones de ayuda"
 
 #: lclstrconsts.hhshelpthehelpdatabasewasunabletofindfile
 msgid "The help database %s%s%s was unable to find file %s%s%s."
@@ -69,6 +69,10 @@ msgstr "Mayúscula"
 #: lclstrconsts.ifsvk_clear
 msgid "Clear"
 msgstr "Limpiar"
+
+#: lclstrconsts.ifsvk_cmd
+msgid "Cmd"
+msgstr "Cmd"
 
 #: lclstrconsts.ifsvk_control
 msgid "Control"
@@ -153,6 +157,10 @@ msgctxt "lclstrconsts.ifsvk_menu"
 msgid "Menu"
 msgstr "Menú"
 
+#: lclstrconsts.ifsvk_meta
+msgid "Meta"
+msgstr "Meta"
+
 #: lclstrconsts.ifsvk_modechange
 msgid "Mode Change"
 msgstr "Mode Change"
@@ -224,6 +232,10 @@ msgstr "Snapshot"
 msgid "Space key"
 msgstr "Tecla espaciadora"
 
+#: lclstrconsts.ifsvk_super
+msgid "Super"
+msgstr "Super"
+
 #: lclstrconsts.ifsvk_tab
 msgctxt "lclstrconsts.ifsvk_tab"
 msgid "Tab"
@@ -241,6 +253,10 @@ msgstr "Arriba"
 #: lclstrconsts.liscannotexecute
 msgid "can not execute %s"
 msgstr "no se puede ejecutar %s"
+
+#: lclstrconsts.liscefilter
+msgid "(filter)"
+msgstr "(filtro)"
 
 #: lclstrconsts.lislclresourcesnotfound
 msgctxt "lclstrconsts.lislclresourcesnotfound"
@@ -356,6 +372,10 @@ msgstr "El control de clase '%s' no puede tener al control de clase '%s' como hi
 #: lclstrconsts.rscontrolhasnoparentwindow
 msgid "Control '%s' has no parent window"
 msgstr "El control '%s' no tiene ventana padre"
+
+#: lclstrconsts.rscontrolisnotaparent
+msgid "'%s' is not a parent of '%s'"
+msgstr "'%s' no es un padre de '%s'"
 
 #: lclstrconsts.rscreamcolorcaption
 msgid "Cream"
@@ -676,6 +696,14 @@ msgstr "La base de datos de ayuda %s%s%s no encontró un visor para el tipo de p
 msgid "Help Database %s%s%s not found"
 msgstr "Base de datos de ayuda %s%s%s no encotrada"
 
+#: lclstrconsts.rshelphelpfordirectivenotfound
+msgid "Help for directive %s%s%s not found."
+msgstr "Ayuda para directiva %s%s%s no encontrado."
+
+#: lclstrconsts.rshelphelpfordirectivenotfoundindatabase
+msgid "Help for directive %s%s%s not found in Database %s%s%s."
+msgstr "Ayuda para directiva %s%s%s no encontrada en la base de datos %s%s%s."
+
 #: lclstrconsts.rshelphelpkeywordnotfound
 msgid "Help keyword %s%s%s not found."
 msgstr "Clave de ayuda %s%s%s no encontrada"
@@ -791,7 +819,7 @@ msgstr "%s Índice %d fuera de límites 0 .. %d"
 
 #: lclstrconsts.rsindexoutofrange
 msgid "Index Out of range Cell[Col=%d Row=%d]"
-msgstr "Índice fuera de rango Celda[Col=%s Línea=%d]"
+msgstr "Índice Fuera de rango Celda[Col=%d Línea=%d]"
 
 #: lclstrconsts.rsinfobkcolorcaption
 msgid "Info Background"
@@ -1032,6 +1060,10 @@ msgctxt "lclstrconsts.rspriorrecordhint"
 msgid "Prior"
 msgstr "Anterior"
 
+#: lclstrconsts.rspromptonreplace
+msgid "Prompt on replace"
+msgstr "Preguntar al sustituir"
+
 #: lclstrconsts.rspropertydoesnotexist
 msgid "Property %s does not exist"
 msgstr "La propiedad %s no existe"
@@ -1189,6 +1221,10 @@ msgstr "  tamaño "
 msgid "Sky Blue"
 msgstr "Cielo azul"
 
+#: lclstrconsts.rstcustomtabcontrolaccessibilitydescription
+msgid "A control with tabs"
+msgstr "Un control con pestañas"
+
 #: lclstrconsts.rstealcolorcaption
 msgid "Teal"
 msgstr "Turquesa"
@@ -1200,6 +1236,21 @@ msgstr "Texto"
 #: lclstrconsts.rstiff
 msgid "Tagged Image File Format"
 msgstr "Formato de Archivo de Imagen Etiquetado"
+
+#: lclstrconsts.rstpanelaccessibilitydescription
+msgctxt "lclstrconsts.rstpanelaccessibilitydescription"
+msgid "Panel"
+msgstr "Panel"
+
+#: lclstrconsts.rstsplitteraccessibilitydescription
+msgctxt "lclstrconsts.rstsplitteraccessibilitydescription"
+msgid "A grip to control how much size to give two parts of an area"
+msgstr "Un agarre para controlar cuanto tamaño para dar dos partes de un área"
+
+#: lclstrconsts.rsttreeviewaccessibilitydescription
+msgctxt "lclstrconsts.rsttreeviewaccessibilitydescription"
+msgid "A tree of items"
+msgstr "Un árbol de items"
 
 #: lclstrconsts.rsunabletoloaddefaultfont
 msgid "Unable to load default font"
@@ -1312,6 +1363,10 @@ msgstr "Tamaño de imagen inválido"
 #: lclstrconsts.sinvalidindex
 msgid "Invalid ImageList Index"
 msgstr "Índice de ImageList Inválido"
+
+#: lclstrconsts.smaskeditnomatch
+msgid "The current text does not match the specified mask."
+msgstr "El texto actual no coincide con la máscara especificada."
 
 #: lclstrconsts.smenuindexerror
 msgid "Menu index out of range"
@@ -1429,8 +1484,10 @@ msgid "Invalid integer number: %s"
 msgstr "Número entero no válido: %s"
 
 #: lclstrconsts.sparlocinfo
-msgid " (at %d,%d, stream offset %.8x)"
-msgstr " (en %d,%d, flujo de desplazamiento %.8x)"
+#, fuzzy
+#| msgid " (at %d,%d, stream offset %.8x)"
+msgid " (at %d,%d, stream offset %d)"
+msgstr " (en %d,%d, flujo de desplazamiento %d)"
 
 #: lclstrconsts.sparunterminatedbinvalue
 msgid "Unterminated byte value"

@@ -70,6 +70,10 @@ msgstr "אות ריישית"
 msgid "Clear"
 msgstr "מקש נקה"
 
+#: lclstrconsts.ifsvk_cmd
+msgid "Cmd"
+msgstr ""
+
 #: lclstrconsts.ifsvk_control
 msgid "Control"
 msgstr "מקש קונטרול"
@@ -153,6 +157,10 @@ msgctxt "lclstrconsts.ifsvk_menu"
 msgid "Menu"
 msgstr "תפריט"
 
+#: lclstrconsts.ifsvk_meta
+msgid "Meta"
+msgstr ""
+
 #: lclstrconsts.ifsvk_modechange
 msgid "Mode Change"
 msgstr "שינוי מצב"
@@ -224,6 +232,10 @@ msgstr "תצלום-בזק"
 msgid "Space key"
 msgstr "מקש רווח"
 
+#: lclstrconsts.ifsvk_super
+msgid "Super"
+msgstr ""
+
 #: lclstrconsts.ifsvk_tab
 msgctxt "lclstrconsts.ifsvk_tab"
 msgid "Tab"
@@ -241,6 +253,10 @@ msgstr "למעלה"
 #: lclstrconsts.liscannotexecute
 msgid "can not execute %s"
 msgstr "לא יכול להריץ את %s"
+
+#: lclstrconsts.liscefilter
+msgid "(filter)"
+msgstr ""
 
 #: lclstrconsts.lislclresourcesnotfound
 msgctxt "lclstrconsts.lislclresourcesnotfound"
@@ -355,6 +371,10 @@ msgstr "פקד של המחלקה  '%s' לא יכול לקבל פקד של מחל
 #: lclstrconsts.rscontrolhasnoparentwindow
 msgid "Control '%s' has no parent window"
 msgstr "לפקד s% אין חלון הורה"
+
+#: lclstrconsts.rscontrolisnotaparent
+msgid "'%s' is not a parent of '%s'"
+msgstr ""
 
 #: lclstrconsts.rscreamcolorcaption
 msgid "Cream"
@@ -673,6 +693,14 @@ msgstr "בסיס הנתונים של העזרה %s%s%s  לא מצא תוכנה �
 #: lclstrconsts.rshelphelpdatabasenotfound
 msgid "Help Database %s%s%s not found"
 msgstr "בסיס הנתונים של העזרה %s%s%s  לא נמצא "
+
+#: lclstrconsts.rshelphelpfordirectivenotfound
+msgid "Help for directive %s%s%s not found."
+msgstr ""
+
+#: lclstrconsts.rshelphelpfordirectivenotfoundindatabase
+msgid "Help for directive %s%s%s not found in Database %s%s%s."
+msgstr ""
 
 #: lclstrconsts.rshelphelpkeywordnotfound
 msgid "Help keyword %s%s%s not found."
@@ -1029,6 +1057,10 @@ msgctxt "lclstrconsts.rspriorrecordhint"
 msgid "Prior"
 msgstr "קודם"
 
+#: lclstrconsts.rspromptonreplace
+msgid "Prompt on replace"
+msgstr ""
+
 #: lclstrconsts.rspropertydoesnotexist
 msgid "Property %s does not exist"
 msgstr "התכונה s% לא קיימת"
@@ -1186,6 +1218,10 @@ msgstr "גודל"
 msgid "Sky Blue"
 msgstr "כחול שמיים"
 
+#: lclstrconsts.rstcustomtabcontrolaccessibilitydescription
+msgid "A control with tabs"
+msgstr ""
+
 #: lclstrconsts.rstealcolorcaption
 msgid "Teal"
 msgstr "כחלחל ירקרק"
@@ -1197,6 +1233,21 @@ msgstr "טקסט"
 #: lclstrconsts.rstiff
 msgid "Tagged Image File Format"
 msgstr "פורמט מתוייג של קובץ דמות"
+
+#: lclstrconsts.rstpanelaccessibilitydescription
+msgctxt "lclstrconsts.rstpanelaccessibilitydescription"
+msgid "Panel"
+msgstr ""
+
+#: lclstrconsts.rstsplitteraccessibilitydescription
+msgctxt "lclstrconsts.rstsplitteraccessibilitydescription"
+msgid "A grip to control how much size to give two parts of an area"
+msgstr ""
+
+#: lclstrconsts.rsttreeviewaccessibilitydescription
+msgctxt "lclstrconsts.rsttreeviewaccessibilitydescription"
+msgid "A tree of items"
+msgstr ""
 
 #: lclstrconsts.rsunabletoloaddefaultfont
 msgid "Unable to load default font"
@@ -1309,6 +1360,10 @@ msgstr "גודל דמות לא חוקי"
 #: lclstrconsts.sinvalidindex
 msgid "Invalid ImageList Index"
 msgstr "אינדקס לא חוקי של ImageList"
+
+#: lclstrconsts.smaskeditnomatch
+msgid "The current text does not match the specified mask."
+msgstr ""
 
 #: lclstrconsts.smenuindexerror
 msgid "Menu index out of range"
@@ -1426,7 +1481,7 @@ msgid "Invalid integer number: %s"
 msgstr "מספר שלם לא חוקי %s"
 
 #: lclstrconsts.sparlocinfo
-msgid " (at %d,%d, stream offset %.8x)"
+msgid " (at %d,%d, stream offset %d)"
 msgstr ""
 
 #: lclstrconsts.sparunterminatedbinvalue
