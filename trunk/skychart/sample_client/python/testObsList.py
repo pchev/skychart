@@ -19,7 +19,7 @@ PORT = int(f.read())
 f.close
 
 # set the observation list to use here:
-obslist = HOMEDIR+'/testlist.txt'
+obslist = os.getcwd()+'/testlist.txt'
 
 if PORT==0 :
    print 'Skychart is not running'
