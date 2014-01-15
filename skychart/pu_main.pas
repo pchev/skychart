@@ -860,7 +860,9 @@ uses
      pu_splash, pu_manualtelescope, pu_print, pu_clock;
 
 {$ifdef mswindows}
-const win32_color_elem : array[0..25] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACTIVEBORDER,11    ,COLOR_ACTIVECAPTION,COLOR_BTNTEXT,COLOR_CAPTIONTEXT,COLOR_HIGHLIGHT,COLOR_BTNHIGHLIGHT,COLOR_HIGHLIGHTTEXT,COLOR_INACTIVECAPTION,COLOR_APPWORKSPACE,COLOR_INACTIVECAPTIONTEXT,COLOR_INFOBK,COLOR_INFOTEXT,COLOR_MENU,COLOR_MENUTEXT,COLOR_SCROLLBAR,COLOR_WINDOW,COLOR_WINDOWTEXT,COLOR_WINDOWFRAME,COLOR_3DDKSHADOW,COLOR_3DLIGHT,COLOR_BTNSHADOW,COLOR_GRAYTEXT,COLOR_MENUBAR);
+const
+win32_color_num = 26;
+win32_color_elem : array[0..win32_color_num-1] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACTIVEBORDER,COLOR_INACTIVEBORDER ,COLOR_ACTIVECAPTION,COLOR_BTNTEXT,COLOR_CAPTIONTEXT,COLOR_HIGHLIGHT,COLOR_BTNHIGHLIGHT,COLOR_HIGHLIGHTTEXT,COLOR_INACTIVECAPTION,COLOR_APPWORKSPACE,COLOR_INACTIVECAPTIONTEXT,COLOR_INFOBK,COLOR_INFOTEXT,COLOR_MENU,COLOR_MENUTEXT,COLOR_SCROLLBAR,COLOR_WINDOW,COLOR_WINDOWTEXT,COLOR_WINDOWFRAME,COLOR_3DDKSHADOW,COLOR_3DLIGHT,COLOR_BTNSHADOW,COLOR_GRAYTEXT,COLOR_MENUBAR);
 {$endif}
 
 procedure Tf_main.ShowError(msg: string);
@@ -8285,26 +8287,23 @@ end;
 Procedure Tf_main.SaveWinColor;
 var n : integer;
 begin
-for n:=0 to 25 do
+for n:=0 to win32_color_num-1 do
    savwincol[n]:=getsyscolor(win32_color_elem[n]);
 end;
 
 Procedure Tf_main.ResetWinColor;
-var n : integer;
 begin
-//setsyscolors(sizeof(win32_color_elem),win32_color_elem,savwincol); // strange this not reset all the colors
-for n:=0 to 25 do
-   setsyscolors(1,win32_color_elem[n],savwincol[n]);
+setsyscolors(win32_color_num,win32_color_elem,savwincol);
 end;
 
 procedure Tf_main.SetNightVision(night: boolean);
-const rgb  : array[0..25] of Tcolor =  (nv_black        ,nv_dark      ,nv_dark           ,nv_dark,nv_dim            ,nv_middle    ,nv_middle        ,nv_dark        ,nv_dark           ,nv_light           ,nv_dark              ,nv_black          ,nv_dark                  ,nv_black    ,nv_middle     ,nv_dark   ,nv_middle     ,nv_black       ,nv_black    ,nv_middle       ,nv_black         ,nv_black     ,nv_middle      ,nv_black        ,nv_dark       ,nv_black);
+const rgb  : array[0..win32_color_num-1] of Tcolor =  (nv_black        ,nv_dark      ,nv_dark           ,nv_dark,nv_dim            ,nv_middle    ,nv_middle        ,nv_dark        ,nv_dark           ,nv_light           ,nv_dark              ,nv_black          ,nv_dark                  ,nv_black    ,nv_middle     ,nv_dark   ,nv_middle     ,nv_black       ,nv_black    ,nv_middle       ,nv_black         ,nv_black     ,nv_middle      ,nv_black        ,nv_dark       ,nv_black);
 begin
 if night then begin
  if (Color<>nv_dark) then begin
    SaveWinColor;
    SetButtonImage(cfgm.ButtonNight);
-   setsyscolors(sizeof(win32_color_elem),win32_color_elem,rgb);
+   setsyscolors(win32_color_num,win32_color_elem,rgb);
    Color:=nv_dark;
    Font.Color:=nv_middle;
    quicksearch.Color:=nv_dark;
