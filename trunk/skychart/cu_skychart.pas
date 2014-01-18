@@ -3117,8 +3117,8 @@ repeat
       ly:=round(yy);
       if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
     end;
-    if dra<=15*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,artostr3(rmod(ra+pi2,pi2)*rad2deg/15),cfgsc.WhiteBg,false,true,5)
-                      else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,armtostr(rmod(ra+pi2,pi2)*rad2deg/15),cfgsc.WhiteBg,false,true,5);
+    if dra<=15*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,artostr3(rmod(ra+pi2,pi2)*rad2deg/15),cfgsc.WhiteBg,true,true,5)
+                      else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,armtostr(rmod(ra+pi2,pi2)*rad2deg/15),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -3164,8 +3164,8 @@ repeat
        ly:=round(yy);
        if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
      end;
-     if dde<=5*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(de*rad2deg),cfgsc.WhiteBg,false,true,5)
-                      else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(de*rad2deg),cfgsc.WhiteBg,false,true,5);
+     if dde<=5*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(de*rad2deg),cfgsc.WhiteBg,true,true,5)
+                      else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(de*rad2deg),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -3903,8 +3903,8 @@ repeat
       ly:=round(yy);
       if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
     end;
-    if dda<=15*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,false,true,5)
-                      else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,false,true,5);
+    if dda<=15*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5)
+                      else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -3950,8 +3950,8 @@ repeat
       ly:=round(yy);
       if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
     end;
-    if ddh<=5*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),cfgsc.WhiteBg,false,true,5)
-                     else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),cfgsc.WhiteBg,false,true,5);
+    if ddh<=5*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),cfgsc.WhiteBg,true,true,5)
+                     else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -4065,8 +4065,8 @@ repeat
       ly:=round(yy);
       if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
     end;
-    if dda<=15*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,false,true,5)
-                      else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,false,true,5);
+    if dda<=15*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5)
+                      else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -4112,8 +4112,8 @@ repeat
       ly:=round(yy);
       if xx<(cfgsc.Xmax div 2) then lx:=(lh div 2) else lx:=cfgsc.Xmax-(lh div 2);
     end;
-    if ddh<=5*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),cfgsc.WhiteBg,false,true,5)
-                     else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),cfgsc.WhiteBg,false,true,5);
+    if ddh<=5*minarc then Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),cfgsc.WhiteBg,true,true,5)
+                     else Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
