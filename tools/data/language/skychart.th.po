@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-12-29 17:51+0000\n"
-"PO-Revision-Date: 2013-12-10 09:02+0000\n"
+"PO-Revision-Date: 2014-01-14 02:30+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-12 14:36+0000\n"
-"X-Generator: Launchpad (build 16890)\n"
+"X-Launchpad-Export-Date: 2014-01-19 17:48+0000\n"
+"X-Generator: Launchpad (build 16901)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -250,7 +250,7 @@ msgstr "บันทึกเสมอโดยไม่ต้องถาม"
 
 #: u_translation.rsalwaysshowth
 msgid "Always show the objects from the list"
-msgstr ""
+msgstr "แสดงวัตถุจากรายการเสมอ"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -478,7 +478,7 @@ msgstr ""
 
 #: u_translation.rsbewarethisop
 msgid "Beware this option can severly degrade the performance"
-msgstr ""
+msgstr "ระวังว่าตัวเลือกนี้อาจทำให้โปรแกรมทำงานช้าลง"
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -1106,7 +1106,7 @@ msgstr "สร้างแผนที่แรสเตอร์ที่ %s dp
 
 #: u_translation.rscrossmeridia
 msgid "Cross meridian"
-msgstr ""
+msgstr "ผ่านเมริเดียน"
 
 #: u_translation.rsculmination
 msgid "Culmination"
@@ -1934,7 +1934,7 @@ msgstr "เลนส์ใกล้ตา"
 
 #: u_translation.rseyepieceappa
 msgid "Eyepiece apparent field of vision"
-msgstr ""
+msgstr "ขอบเขตการมองเห็นปรากฏของเลนส์ใกล้ตา"
 
 #: u_translation.rseyepiecefoca
 msgid "Eyepiece focal length"
@@ -3770,7 +3770,7 @@ msgstr "จุดภาพ"
 
 #: u_translation.rspixelsize
 msgid "Pixel size"
-msgstr ""
+msgstr "ขนาดจุดภาพ"
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -3922,7 +3922,7 @@ msgstr "โพสต์สคริปต์"
 
 #: u_translation.rspower
 msgid "Power"
-msgstr ""
+msgstr "กำลังแยกภาพ"
 
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
@@ -3986,11 +3986,11 @@ msgstr "ตั้งค่าเครื่องพิมพ์"
 
 #: u_translation.rsprintfooter
 msgid "Print footer"
-msgstr ""
+msgstr "พิมพ์ท้ายกระดาษ"
 
 #: u_translation.rsprintheader
 msgid "Print header"
-msgstr ""
+msgstr "พิมพ์หัวกระดาษ"
 
 #: u_translation.rsprintmethod
 msgid "Print method"
@@ -5494,7 +5494,7 @@ msgstr "พยายามติดต่อฮับ SAMP โดยอัตโ
 
 #: u_translation.rsttut
 msgid "DeltaT: "
-msgstr ""
+msgstr "DeltaT: "
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5582,7 +5582,7 @@ msgstr "ปรับปรุง"
 
 #: u_translation.rsupdatecoordi
 msgid "Update coordinates"
-msgstr ""
+msgstr "ปรับปรุงพิกัด"
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
@@ -5606,7 +5606,7 @@ msgstr ""
 
 #: u_translation.rsuseanothertt
 msgid "Use another DeltaT value"
-msgstr ""
+msgstr "กำหนดค่า DeltaT ="
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
