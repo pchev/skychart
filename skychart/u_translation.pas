@@ -1047,7 +1047,6 @@ resourcestring
   rsVariableStar2 = 'Variable stars';
   rsAllConfigura = 'All configuration options';
   rsAskConfirmat = 'Ask confirmation before any Internet connection';
-  rsNumberOfNebu = 'Number of nebulae';
   rsInformationD = 'Information detail';
   rsDisplayLabel = 'Display labels for all star catalogs';
   rsUsingExistin = 'Using the existing file %s';
