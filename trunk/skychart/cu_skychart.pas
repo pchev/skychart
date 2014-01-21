@@ -5593,8 +5593,14 @@ begin
     Ecl :     result:=rsEclipticCoor3+pr+sep+cep+sep+dat+sep+rsInclination2+detostr(cfgsc.ecl*rad2deg);
     else result:='';
     end;
-    result:=result+sep+rsMag+formatfloat(f1, plot.cfgchart.min_ma)+sep+rsFOV2+
-      detostr(cfgsc.fov*rad2deg);
+    result:=result+sep+rsMag+formatfloat(f1, plot.cfgchart.min_ma);
+    if catalog.cfgshr.NebFilter then begin
+      if catalog.cfgcat.NebMagMax<90 then
+         result:=result+'/'+formatfloat(f1, catalog.cfgcat.NebMagMax);
+      if catalog.cfgcat.NebSizeMin>0 then
+         result:=result+','+formatfloat(f1, catalog.cfgcat.NebSizeMin)+rsmin;
+    end;
+    result:=result+sep+rsFOV2+detostr(cfgsc.fov*rad2deg);
 end;
 
 function Tskychart.GetChartPos:string;
