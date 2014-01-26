@@ -5115,10 +5115,6 @@ j:=-1;
 for i:=0 to catalog.cfgcat.GCatNum-1 do begin
    inc(j);
    catalog.cfgcat.GCatLst[j].shortname:=Readstring(section,'CatName'+inttostr(i),catalog.cfgcat.GCatLst[i].shortname);
-   if catalog.cfgcat.GCatLst[j].shortname='dsl' then begin
-      dec(j);
-      continue;
-   end;
    catalog.cfgcat.GCatLst[j].name:=Readstring(section,'CatLongName'+inttostr(i),catalog.cfgcat.GCatLst[i].name);
    catalog.cfgcat.GCatLst[j].path:=ExtractSubPath(ConfigAppdir,Readstring(section,'CatPath'+inttostr(i),catalog.cfgcat.GCatLst[i].path));
    catalog.cfgcat.GCatLst[j].min:=ReadFloat(section,'CatMin'+inttostr(i),catalog.cfgcat.GCatLst[i].min);

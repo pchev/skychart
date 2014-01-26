@@ -327,9 +327,9 @@ end;
   DrawDeepSkyObject;
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     if cfgsc.showline then begin
-       DrawOutline;
        DrawDSL;
     end;
+    DrawOutline;
     DrawComet;
   end;
   // then the lines
