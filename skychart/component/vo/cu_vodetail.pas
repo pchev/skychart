@@ -210,7 +210,7 @@ FCatalogName:=StringReplace(trim(Catalog),' ','%20',[rfReplaceAll]);
 case Fvo_type of
   VizierMeta: begin
               if retry=0 then begin
-                   url:= Fbaseurl+'-meta.all&-out=_RAJ2000&-out=_DEJ2000&-source='+FCatalogName;    // tables description and row numbers
+                   url:= Fbaseurl+'-meta.all&-out=_RAJ2000&-out=_DEJ2000&-out=**&-source='+FCatalogName;    // tables description and row numbers
                    if Subdir then url:=url+'/*';
                  end else
                    url:=Fbaseurl+'-source='+FCatalogName+'/*&-out.all&-oc.form=dec&-c=0%2b0&-c.rs=1&-out.max=1'; // table description from empty data search, because the previous form do not work for all the catalogs
