@@ -1503,6 +1503,7 @@ resourcestring
   rsHelpBaseDir =  'en/documentation/';
   rsPrintHeader = 'Print header';
   rsPrintFooter = 'Print footer';
+  rsSAMPSendCoor = 'SAMP send coordinates';
 
 implementation
 
