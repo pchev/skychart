@@ -78,6 +78,9 @@ const
   hlpEncoder = 'telescope_encoder.html';
   hlpASCOM =  'telescope_ascom.html';
   hlpINDI =  'telescope_indi.html';
+  hlpObslist = 'observing_list.html';
+  hlpSAMP = 'vo_samp.html';
+  hlpImgList = 'image_list.html';
 
 implementation
 

@@ -7,7 +7,7 @@ object f_imglist: Tf_imglist
   ClientHeight = 319
   ClientWidth = 497
   OnShow = FormShow
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.0.14.0'
   object Panel1: TPanel
     Left = 0
     Height = 85
@@ -70,6 +70,15 @@ object f_imglist: Tf_imglist
       ItemHeight = 0
       Style = csDropDownList
       TabOrder = 5
+    end
+    object Button6: TButton
+      Left = 12
+      Height = 25
+      Top = 11
+      Width = 75
+      Caption = 'Help'
+      OnClick = Button6Click
+      TabOrder = 6
     end
   end
   object CheckListBox1: TCheckListBox

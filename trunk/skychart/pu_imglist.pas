@@ -4,7 +4,7 @@ unit pu_imglist;
 
 interface
 
-uses u_translation, cu_fits, u_constant,
+uses u_help, u_translation, cu_fits, u_constant,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   CheckLst, StdCtrls, Menus;
 
@@ -20,12 +20,14 @@ type
     Button3: TButton;
     Button4: TButton;
     Button5: TButton;
+    Button6: TButton;
     CheckListBox1: TCheckListBox;
     ComboBox1: TComboBox;
     ViewHeader: TMenuItem;
     Panel1: TPanel;
     PopupMenu1: TPopupMenu;
     procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
     procedure CheckListBox1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormShow(Sender: TObject);
@@ -86,6 +88,11 @@ url:='file://'+CheckListBox1.Items[ListIndex];
 if assigned(FSendImageFits) then FSendImageFits(client,imgname,imgid,url);
 end;
 
+procedure Tf_imglist.Button6Click(Sender: TObject);
+begin
+  ShowHelp;
+end;
+
 procedure Tf_imglist.FormShow(Sender: TObject);
 var i: integer;
 begin
@@ -127,7 +134,9 @@ Button2.Caption:=rsCancel;
 Button3.Caption:=rsSetup;
 Button4.Caption:=rsViewHeader;
 Button5.Caption:=rsSendImageTo;
+Button6.Caption:=rsHelp;
 ViewHeader.Caption:=rsViewHeader;
+SetHelp(self,hlpImgList);
 end;
 
 end.

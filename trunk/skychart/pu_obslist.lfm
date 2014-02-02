@@ -80,6 +80,15 @@ object f_obslist: Tf_obslist
       OnClick = UpdAllCoordClick
       TabOrder = 4
     end
+    object Button1: TButton
+      Left = 125
+      Height = 25
+      Top = 35
+      Width = 75
+      Caption = 'Help'
+      OnClick = Button1Click
+      TabOrder = 6
+    end
   end
   object StringGrid1: TStringGrid
     Left = 0
