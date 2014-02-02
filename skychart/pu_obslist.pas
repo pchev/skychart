@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_translation, u_constant, u_util, u_projection, cu_planet,
+uses  u_help, u_translation, u_constant, u_util, u_projection, cu_planet,
   Math, Classes, SysUtils, FileUtil, Forms, Controls, Graphics,
   Dialogs, ExtCtrls, Grids, EditBtn, StdCtrls, Menus, ComCtrls;
 
@@ -39,6 +39,7 @@ type
   { Tf_obslist }
 
   Tf_obslist = class(TForm)
+    Button1: TButton;
     Panel1: TPanel;
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
@@ -77,6 +78,7 @@ type
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     procedure AirmassComboChange(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
     procedure ButtonSaveClick(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
     procedure ButtonClearClick(Sender: TObject);
@@ -210,6 +212,8 @@ begin
   MenuView.Caption:=rsViewOnChart;
   MenuUpdcoord.Caption:=rsUpdateCoordi;
   MenuDelete.Caption:=rsDelete;
+  button1.Caption:=rshelp;
+  SetHelp(self,hlpObslist);
 end;
 
 procedure Tf_obslist.Newlist;
@@ -915,6 +919,11 @@ if buf<>rsHorizon then begin
   end;
 end;
 Refresh;
+end;
+
+procedure Tf_obslist.Button1Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 
