@@ -41,6 +41,10 @@ if [ -f "$lang/documentation/projection_comparison.html" ]; then
   sed -i '/\/chart_coordinates.html/ a '$lang'\/documentation\/projection_comparison.html' fl.txt
 fi
 
+if [ -f "$lang/documentation/image_list.html" ]; then
+  sed -i '/\/pictures.html/ a '$lang'\/documentation\/image_list.html' fl.txt
+fi
+
 if [ -f "$lang/documentation/virtual_observatory_interface.html" ]; then 
   sed -i '/\/catalog.html/ a '$lang'\/documentation\/virtual_observatory_interface.html' fl.txt
 fi
