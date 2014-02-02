@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-29 17:51+0000\n"
+"POT-Creation-Date: 2014-02-02 15:39+0000\n"
 "PO-Revision-Date: 2013-12-29 20:24+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-19 17:48+0000\n"
-"X-Generator: Launchpad (build 16901)\n"
+"X-Launchpad-Export-Date: 2014-02-02 15:49+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -3450,10 +3450,6 @@ msgstr "Número de archivos"
 msgid "Number of months"
 msgstr "Número de meses"
 
-#: u_translation.rsnumberofnebu
-msgid "Number of nebulae"
-msgstr "Número de nebulosas"
-
 #: u_translation.rsnumberofstar
 msgid "Number of stars"
 msgstr "Número de estrellas"
@@ -4437,6 +4433,10 @@ msgstr "Confirmación SAMP"
 #: u_translation.rssampisamessa
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
 msgstr "SAMP es un protocolo de mensajería que permite a las herramientas software de astronomía interoperar y comunicarse.%sSkychart puede enviar y recibir las coordenadas de una posición, imágenes FITS y tablas de VO."
+
+#: u_translation.rssampsendcoor
+msgid "SAMP send coordinates"
+msgstr ""
 
 #: u_translation.rssampsetup
 msgid "SAMP setup"

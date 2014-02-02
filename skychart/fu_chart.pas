@@ -456,6 +456,7 @@ AddLabel1.caption:=rsNewLabel;
 RemoveLastLabel1.caption:=rsRemoveLastLa;
 RemoveAllLabel1.caption:=rsRemoveAllLab;
 RecoverLabel.Caption:=rsRecoverHidde;
+MenuSAMP.Caption:=rsSAMPSendCoor;
 MenuObslist.Caption:=rsObservingLis;
 MenuViewObsList.Caption:=rsViewObservin;
 MenuObslistFirst.Caption:=rsFirst;

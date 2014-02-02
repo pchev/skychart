@@ -4134,10 +4134,6 @@ msgstr ""
 msgid "Ask confirmation before any Internet connection"
 msgstr ""
 
-#: u_translation:rsnumberofnebu
-msgid "Number of nebulae"
-msgstr ""
-
 #: u_translation:rsinformationd
 msgid "Information detail"
 msgstr ""
@@ -5896,5 +5892,9 @@ msgstr ""
 
 #: u_translation:rsprintfooter
 msgid "Print footer"
+msgstr ""
+
+#: u_translation:rssampsendcoor
+msgid "SAMP send coordinates"
 msgstr ""
 
