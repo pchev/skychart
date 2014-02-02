@@ -2730,6 +2730,8 @@ sc.cfgsc.TargetOn:=false;
 sc.cfgsc.Trackon:=false;
 sc.cfgsc.TrackName:='';
 sc.cfgsc.TrackType:=0;
+sc.cfgsc.FindOK:=false;
+sc.cfgsc.FindName:='';
 Refresh;
 end;
 
