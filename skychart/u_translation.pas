@@ -1504,6 +1504,7 @@ resourcestring
   rsPrintHeader = 'Print header';
   rsPrintFooter = 'Print footer';
   rsSAMPSendCoor = 'SAMP send coordinates';
+  rsGeometricAlt = 'Geometric altitude';
 
 implementation
 
