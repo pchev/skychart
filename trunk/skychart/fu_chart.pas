@@ -3042,6 +3042,10 @@ if not cmain.SimpleDetail then begin
       if isSolarSystem and sc.cfgsc.PlanetParalaxe then Paralaxe(cst,sc.cfgsc.Finddist,raapp,deapp,raapp,deapp,q,sc.cfgsc);
       raapp:=NormRA(raapp);
     end;
+    if isSolarSystem and sc.cfgsc.PlanetParalaxe then begin
+      Paralaxe(cst,sc.cfgsc.Finddist,ra2000,de2000,ra2000,de2000,q,sc.cfgsc);
+      ra2000:=NormRA(ra2000);
+    end;
     // print coord.
     if sc.cfgsc.CoordExpertMode then txt:=txt+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec, precision)+html_br;
     if (sc.cfgsc.CoordType<=1)and ApparentValid then txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+arptostr(rad2deg*raapp/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*deapp, precision)+html_br;
