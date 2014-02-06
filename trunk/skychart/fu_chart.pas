@@ -761,8 +761,10 @@ if assigned(Fshowinfo) then begin
   {$else}
   if sc.cfgsc.TrackOn then
     IdentXY(Image1.Width div 2, Image1.Height div 2)
-  else
+  else begin
     Fshowinfo(sc.cfgsc.msg);
+    if sc.cfgsc.FindOk and (not cmain.SimpleDetail) and (sc.cfgsc.msg='') then Fshowinfo(sc.cfgsc.FindDesc,caption,true,self,sc.cfgsc.FindDesc2);
+  end;
   {$endif}
 end;
 SetScrollBar;
@@ -2161,7 +2163,10 @@ if sc.cfgsc.TrackOn then begin
   sc.cfgsc.Trackobj:=lastobj;
   sc.cfgsc.TrackName:=lasttrname;
 end;
-if result and assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,true,self,sc.cfgsc.FindDesc2);
+if assigned(Fshowinfo) then begin
+  if result then Fshowinfo(sc.cfgsc.FindDesc,caption,true,self,sc.cfgsc.FindDesc2)
+            else Fshowinfo('');
+end;
 if result and SampConnected and (sc.Catalog.cfgcat.SampFindTable>'') then begin
   if assigned(FSendSelectRow) then FSendSelectRow(sc.Catalog.cfgcat.SampFindTable,sc.Catalog.cfgcat.SampFindUrl,inttostr(sc.Catalog.cfgcat.SampFindRec));
 end;
