@@ -2063,6 +2063,7 @@ if sc.cfgsc.FindOK and (not cmain.SimpleDetail) then begin
    identlabel.bringtofront;
    sc.DrawSearchMark(sc.cfgsc.FindRA,sc.cfgsc.FindDec,false);
    sc.cfgsc.FindJD:=sc.cfgsc.JDChart;
+   if sc.cfgsc.trackon and (sc.cfgsc.FindName=sc.cfgsc.TrackName) and f_detail.Visible then identlabelClick(Identlabel);
 end
 else identlabel.Visible:=false;
 end;
