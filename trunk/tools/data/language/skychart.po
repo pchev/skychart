@@ -5898,3 +5898,7 @@ msgstr ""
 msgid "SAMP send coordinates"
 msgstr ""
 
+#: u_translation:rsgeometricalt
+msgid "Geometric altitude"
+msgstr ""
+
