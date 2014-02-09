@@ -4712,6 +4712,7 @@ def_cfgsc.SimH:=0;
 def_cfgsc.SimM:=0;
 def_cfgsc.SimS:=0;
 def_cfgsc.SimLine:=True;
+def_cfgsc.SimMark:=True;
 for i:=1 to NumSimObject do def_cfgsc.SimObject[i]:=true;
 def_cfgsc.sunurlname:=URL_SUN_NAME[1];
 def_cfgsc.sunurl:=URL_SUN[1];
@@ -5408,6 +5409,7 @@ csc.SimH:=ReadInteger(section,'SimH',csc.SimH);
 csc.SimM:=ReadInteger(section,'SimM',csc.SimM);
 csc.SimS:=ReadInteger(section,'SimS',csc.SimS);
 csc.SimLine:=ReadBool(section,'SimLine',csc.SimLine);
+csc.SimMark:=ReadBool(section,'SimMark',csc.SimMark);
 for i:=1 to NumSimObject do csc.SimObject[i]:=ReadBool(section,'SimObject'+inttostr(i),csc.SimObject[i]);
 for i:=1 to numlabtype do begin
    csc.ShowLabel[i]:=readBool(section,'ShowLabel'+inttostr(i),csc.ShowLabel[i]);
@@ -6260,6 +6262,7 @@ WriteInteger(section,'SimH',csc.SimH);
 WriteInteger(section,'SimM',csc.SimM);
 WriteInteger(section,'SimS',csc.SimS);
 WriteBool(section,'SimLine',csc.SimLine);
+WriteBool(section,'SimMark',csc.SimMark);
 for i:=1 to NumSimObject do WriteBool(section,'SimObject'+inttostr(i),csc.SimObject[i]);
 for i:=1 to numlabtype do begin
    WriteBool(section,'ShowLabel'+inttostr(i),csc.ShowLabel[i]);

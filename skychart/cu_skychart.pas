@@ -2307,8 +2307,11 @@ if cfgsc.ShowPlanetValid then for i:=1 to 11 do
     projection(cfgsc.Planetlst[j,i,1],cfgsc.Planetlst[j,i,2],x1,y1,true,cfgsc) ;
     windowxy(x1,y1,xx,yy,cfgsc);
     if (j<>0)and((xx>-dx)and(yy>-dy)and(xx<dx)and(yy<dy))
-       and ((xp>-dx)and(yp>-dy)and(xp<dx)and(yp<dy)) then
-       Fplot.PlotLine(xp,yp,xx,yy,color,1);
+       and ((xp>-dx)and(yp>-dy)and(xp<dx)and(yp<dy)) then begin
+         Fplot.PlotLine(xp,yp,xx,yy,color,1);
+         if cfgsc.SimMark then Fplot.PlotSimMark(xx,yy,color);
+       end;
+    if cfgsc.SimMark and(j=0) then Fplot.PlotSimMark(xx,yy,color);
     xp:=xx;
     yp:=yy;
 end;
@@ -2318,8 +2321,11 @@ if cfgsc.SimObject[13] then for i:=1 to cfgsc.CometNb do
     projection(cfgsc.CometLst[j,i,1],cfgsc.CometLst[j,i,2],x1,y1,true,cfgsc) ;
     windowxy(x1,y1,xx,yy,cfgsc);
     if (j<>0)and((xx>-dx)and(yy>-dy)and(xx<dx)and(yy<dy))
-       and ((xp>-dx)and(yp>-dy)and(xp<dx)and(yp<dy)) then
-       Fplot.PlotLine(xp,yp,xx,yy,color,1);
+       and ((xp>-dx)and(yp>-dy)and(xp<dx)and(yp<dy)) then begin
+         Fplot.PlotLine(xp,yp,xx,yy,color,1);
+         if cfgsc.SimMark then Fplot.PlotSimMark(xx,yy,color);
+       end;
+    if cfgsc.SimMark and(j=0) then Fplot.PlotSimMark(xx,yy,color);
     xp:=xx;
     yp:=yy;
   end;
@@ -2329,8 +2335,11 @@ if cfgsc.SimObject[12] then for i:=1 to cfgsc.AsteroidNb do
     projection(cfgsc.AsteroidLst[j,i,1],cfgsc.AsteroidLst[j,i,2],x1,y1,true,cfgsc) ;
     windowxy(x1,y1,xx,yy,cfgsc);
     if (j<>0)and((xx>-dx)and(yy>-dy)and(xx<dx)and(yy<dy))
-       and ((xp>-dx)and(yp>-dy)and(xp<dx)and(yp<dy)) then
-       Fplot.PlotLine(xp,yp,xx,yy,color,1);
+       and ((xp>-dx)and(yp>-dy)and(xp<dx)and(yp<dy)) then begin
+         Fplot.PlotLine(xp,yp,xx,yy,color,1);
+         if cfgsc.SimMark then Fplot.PlotSimMark(xx,yy,color);
+       end;
+    if cfgsc.SimMark and(j=0) then Fplot.PlotSimMark(xx,yy,color);
     xp:=xx;
     yp:=yy;
   end;

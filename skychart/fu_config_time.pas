@@ -43,6 +43,7 @@ type
     Button8: TButton;
     Button9: TButton;
     CheckBox3: TCheckBox;
+    stepmark: TCheckBox;
     CheckGroup1: TCheckGroup;
     CheckGroup2: TCheckGroup;
     ComboBox1: TComboBox;
@@ -156,6 +157,7 @@ type
     procedure DateChange(Sender: TObject);
     procedure RadioGroup1Click(Sender: TObject);
     procedure SimObjItemClick(Sender: TObject; Index: LongInt);
+    procedure stepmarkClick(Sender: TObject);
     procedure TimeChange(Sender: TObject; Button: TUDBtnType);
     procedure BitBtn4Click(Sender: TObject);
     procedure CheckBox4Click(Sender: TObject);
@@ -243,6 +245,7 @@ stepunit.items[1]:=rsHour;
 stepunit.items[2]:=rsMinute;
 stepunit.items[3]:=rsSecond;
 stepline.caption:=rsConnectionLi;
+stepmark.Caption:=rsShowMark;
 SimObj.items[0]:=rsSun;
 SimObj.items[1]:=rsMercury;
 SimObj.items[2]:=rsVenus;
@@ -441,6 +444,7 @@ if csc.SimS>0 then begin
    stepunit.itemindex:=3;
 end;
 stepline.checked:=csc.SimLine;
+stepmark.checked:=csc.SimMark;
 for i:=0 to SimObj.Items.Count-1 do begin
   case i of
   0 : j:=10;   // sun
@@ -985,10 +989,14 @@ case stepunit.ItemIndex of
 end;
 end;
 
-
 procedure Tf_config_time.steplineClick(Sender: TObject);
 begin
 csc.SimLine:=stepline.checked;
+end;
+
+procedure Tf_config_time.stepmarkClick(Sender: TObject);
+begin
+  csc.SimMark:=stepmark.checked;
 end;
 
 procedure Tf_config_time.stepresetClick(Sender: TObject);

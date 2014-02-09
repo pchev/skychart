@@ -882,7 +882,7 @@ type
     ComSymbol: integer;
     SimNb, SimD, SimH, SimM, SimS, SimLabel: integer;
     SimObject: array[1..NumSimObject] of boolean;
-    SimLine, SimDateLabel, SimNameLabel, SimMagLabel, ShowPlanet,
+    SimLine, SimMark, SimDateLabel, SimNameLabel, SimMagLabel, ShowPlanet,
     PlanetParalaxe, ShowEarthShadow, ShowAsteroid, ShowComet, ShowArtSat, NewArtSat, ShowSmallsat: boolean;
     SimDateYear, SimDateMonth, SimDateDay, SimDateHour,
     SimDateMinute, SimDateSecond: boolean;
@@ -1923,6 +1923,7 @@ begin
   SimS := Source.SimS;
   SimLabel := Source.SimLabel;
   SimLine := Source.SimLine;
+  SimMark := Source.SimMark;
   SimDateLabel := Source.SimDateLabel;
   SimDateYear := Source.SimDateYear;
   SimDateMonth := Source.SimDateMonth;

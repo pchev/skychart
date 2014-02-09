@@ -136,6 +136,7 @@ type
      Procedure PlotDSOGxy(Ax,Ay: single; Ar1,Ar2,Apa,Arnuc,Ab_vt,Ab_ve,Ama,Asbr,Apixscale : double;Amorph:string; forcecolor:boolean; col:Tcolor);
      Procedure PlotCRose(rosex,rosey,roserd,rot:single;flipx,flipy:integer; WhiteBg:boolean; RoseType: integer);
      Procedure PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
+     Procedure PlotSimMark(x,y: single; mcolor: Tcolor);
      Procedure PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean;var ibmp:TBitmap; TransparentMode:integer=0; forcealpha:integer=0);
      Procedure PlotBGImage( ibmp:TBitmap; WhiteBg: boolean; alpha:integer=200);
      procedure PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean;size:integer=0;margin:integer=0);
@@ -1029,6 +1030,31 @@ begin
     end;
 end;
 
+
+Procedure TSplot.PlotSimMark(x,y: single; mcolor: Tcolor);
+var ds,xx,yy : Integer;
+    c:TBGRAPixel;
+begin
+ds:=3*cfgchart.drawsize;
+xx:=round(x);
+yy:=round(y);
+if cfgplot.UseBMP then begin
+  c:=ColorToBGRA(mcolor);
+  cbmp.DrawHorizLine(xx-ds,yy,xx+ds,c);
+  cbmp.DrawVertLine(xx,yy-ds,yy+ds,c);
+end else begin
+  cnv.Pen.Width := cfgchart.drawpen;
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psSolid;
+  cnv.Pen.Color := mcolor;
+  cnv.MoveTo(xx-ds,yy);
+  cnv.LineTo(xx+ds,yy);
+  cnv.MoveTo(xx,yy-ds);
+  cnv.LineTo(xx,yy+ds);
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+end;
+end;
 
 Procedure TSplot.PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
 begin
