@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-02 15:39+0000\n"
+"POT-Creation-Date: 2014-02-09 20:18+0000\n"
 "PO-Revision-Date: 2013-12-02 06:56+0000\n"
 "Last-Translator: Aleksey Kabanov <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-02 15:49+0000\n"
+"X-Launchpad-Export-Date: 2014-02-09 20:32+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 "Language: ru_UA\n"
 
@@ -2224,6 +2224,10 @@ msgstr "Общие установки"
 #: u_translation.rsgeocentric
 msgid "Geocentric"
 msgstr "Геоцентрическая"
+
+#: u_translation.rsgeometricalt
+msgid "Geometric altitude"
+msgstr ""
 
 #: u_translation.rsget
 msgid "Get"
