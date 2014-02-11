@@ -74,6 +74,7 @@ type
     FNeighbor : Tstr1func;
     FHTMLText: String;
     FTextOnly: boolean;
+    FSameposition: boolean;
     Fkeydown: TKeyEvent;
     procedure SetHTMLText(const value: string);
   public
@@ -84,6 +85,7 @@ type
     InfoUrlNum: integer;
     property text: string read FHTMLText write SetHTMLText;
     property TextOnly: boolean read FTextOnly write FTextOnly;
+    property Sameposition: boolean read FSameposition write FSameposition;
     property OnCenterObj: Tstr1func read FCenter write FCenter;
     property OnNeighborObj: Tstr1func read FNeighbor write FNeighbor;
     property OnKeydown: TKeyEvent read Fkeydown write Fkeydown;
@@ -173,6 +175,7 @@ begin
   {$ifdef darwin}   { TODO : Check Mac OS X Bringtofront when called from popupmenu }
   timer1.Enabled:=true;
   {$endif}
+  FSameposition:=false;
   memo1.Visible:=FTextOnly;
   IpHtmlPanel1.Visible:=not FTextOnly;
 end;
@@ -216,17 +219,23 @@ end;
 procedure Tf_detail.SetHTMLText(const value: string);
 var NewHTML: TSimpleIpHtml;
     sstream: TStringStream;
+    p:integer;
 begin
   if FTextOnly then begin
     memo1.clear;
     memo1.Text:=striphtml(value);
   end else begin
+    p:=IpHtmlPanel1.VScrollPos;
     NewHTML:=TSimpleIpHtml.Create;
     NewHTML.OnGetImageX:=HTMLGetImageX;
     sstream:=TStringStream.Create(value);
     NewHTML.LoadFromStream(sstream);
     sstream.Free;
     IpHtmlPanel1.SetHtml(NewHTML);
+    if FSameposition then begin
+      IpHtmlPanel1.Update;
+      IpHtmlPanel1.VScrollPos:=p;
+    end;
   end;
 end;
 
