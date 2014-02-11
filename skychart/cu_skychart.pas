@@ -4948,7 +4948,7 @@ begin
 if cfgsc.FooterHeight>0 then begin
   fontnum:=3;
   labelnum:=8;
-  if cfgsc.WhiteBg then lcol:=clBlack else lcol:=clWhite;
+  if cfgsc.WhiteBg then lcol:=clBlack else lcol:=Fplot.cfgplot.backgroundcolor xor $FFFFFF;
   savefontsize:=Fplot.cfgplot.FontSize[fontnum];
   try
   // chart info
