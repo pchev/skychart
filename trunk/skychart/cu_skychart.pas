@@ -878,9 +878,10 @@ end;
          end;
      6 : begin
          // ra - dec
-//         cfgsc.TrackOn:=false;
          cfgsc.racentre:=cfgsc.TrackRA;
          cfgsc.decentre:=cfgsc.TrackDec;
+         Precession(cfgsc.TrackEpoch,cfgsc.JDChart,cfgsc.TrackRA,cfgsc.TrackDec);
+         cfgsc.TrackEpoch:=cfgsc.JDChart;
          end;
    end;
   end
