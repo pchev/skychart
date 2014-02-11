@@ -2745,6 +2745,7 @@ end;
 procedure Tf_chart.identlabelClick(Sender: TObject);
 var ra2000,de2000: double;
     pt:TPoint;
+    sameobj: boolean;
 begin
 pt.X:=0; pt.Y:=0;
 pt:=self.ClientToScreen(pt);
@@ -2757,11 +2758,13 @@ if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc,true,sc.cfgs
 precession(sc.cfgsc.JDChart,jd2000,ra2000,de2000);
 f_detail.ra:=ra2000;
 f_detail.de:=de2000;
+sameobj:=(f_detail.objname=sc.cfgsc.FindName);
 f_detail.objname:=sc.cfgsc.FindName;
 f_detail.IpHtmlPanel1.DefaultFontSize:=sc.plot.cfgplot.FontSize[4];
 f_detail.IpHtmlPanel1.DefaultTypeFace:=sc.plot.cfgplot.FontName[4];
 f_detail.TextOnly:=cmain.TextOnlyDetail;
 f_detail.show;
+f_detail.Sameposition:=sameobj;
 f_detail.text:=FormatDesc;
 f_detail.setfocus;
 f_detail.BringToFront;
