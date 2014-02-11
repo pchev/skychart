@@ -362,8 +362,8 @@ if ((LeftMargin>0)or(RightMargin>0)or(TopMargin>0)or(BottomMargin>0)) then begin
     fcol:=clWhite;
     bcol:=clBlack;
   end else begin
-    fcol:=clBlack;
-    bcol:=clWhite;
+    fcol:=cfgplot.backgroundcolor;
+    bcol:=fcol xor $FFFFFF;
   end;
   if cfgplot.UseBMP then begin
      c:=ColorToBGRA(fcol,0);
