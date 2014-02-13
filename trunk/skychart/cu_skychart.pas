@@ -5323,7 +5323,7 @@ for i:=1 to cfgsc.ncircle do if cfgsc.circleok[i] then begin
         yla:=abs(ya+yb)/2;
         lis:=cfgsc.circlelbl[i]+FormatFloat(f6,ra)+FormatFloat(f6,de);
         lid:=rshash(lis,$7FFFFFFF);
-        if sz>=20 then SetLabel(lid,xla,yla,sz,2,7,lbl,laBottom);
+        if sz>=20 then SetLabel(lid,xla,yla,sz,2,7,lbl,laBottom,0,0,false);
       end;
     end;
 end;
@@ -5364,7 +5364,7 @@ for i:=1 to cfgsc.nrectangle do if cfgsc.rectangleok[i] and (deg2rad*cfgsc.recta
         sz:=Max(abs(p[0].X-p[1].X),abs(p[0].Y-p[1].Y));
         lis:=cfgsc.rectanglelbl[i]+FormatFloat(f6,ra)+FormatFloat(f6,de);
         lid:=rshash(lis,$7FFFFFFF);
-        if sz>=20 then SetLabel(lid,xla,yla,0,2,7,lbl,laBottom,rad2deg*(pa+rot));
+        if sz>=20 then SetLabel(lid,xla,yla,0,2,7,lbl,laBottom,rad2deg*(pa+rot),0,false);
       end;
     end;
   end;
