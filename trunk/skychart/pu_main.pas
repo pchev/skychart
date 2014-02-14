@@ -1017,7 +1017,7 @@ end;
 procedure Tf_main.AutorefreshTimer(Sender: TObject);
 var i: integer;
 begin
-if AutoRefreshLock or (WindowState=wsMinimized) then exit;
+if AutoRefreshLock then exit;
 try
 if VerboseMsg then
  WriteTrace('AutorefreshTimer');
