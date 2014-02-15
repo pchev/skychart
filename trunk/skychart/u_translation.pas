@@ -1505,6 +1505,9 @@ resourcestring
   rsPrintFooter = 'Print footer';
   rsSAMPSendCoor = 'SAMP send coordinates';
   rsGeometricAlt = 'Geometric altitude';
+  rsUnsupportedS = 'Unsupported SAMP hub profile. Must be a File URL';
+  rsSAMPHubProfi = 'SAMP hub profile %s found, but it is missing a required value.';
+  rsNoSAMPHubPro = 'No SAMP hub profile found, no hub is running.';
 
 implementation
 

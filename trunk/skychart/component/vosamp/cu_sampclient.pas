@@ -41,6 +41,7 @@ TSampClient = class(TObject)
     FClientChange, FDisconnect: TNotifyEvent;
     Flistenport: integer;
     FLockTableSelectRow: boolean;
+    Fhubprofileerror,Fhubmissingvalue,Fnohuberror: string;
     SampAsyncEvent:TSampAsyncEvent;
     SampAsyncP1,SampAsyncP2,SampAsyncP3: string;
     methodResponse,xfault,xparams,xparam,xarray,xdata,xarrayvalue,xmember,xparamn,xparamv: boolean;
@@ -92,6 +93,9 @@ TSampClient = class(TObject)
     property ClientDesc: Tstringlist read FClientDesc;
     property ClientSubscriptions: TSubscriptionsList read FClientSubscriptions;
     property LockTableSelectRow: boolean read FLockTableSelectRow write FLockTableSelectRow;
+    property hubprofileerror: string read Fhubprofileerror write Fhubprofileerror;
+    property hubmissingvalue: string read Fhubmissingvalue write Fhubmissingvalue;
+    property nohuberror: string read Fnohuberror write Fnohuberror;
     property onClientChange: TNotifyEvent read FClientChange write FClientChange;
     property onDisconnect: TNotifyEvent read FDisconnect write FDisconnect;
     property oncoordpointAtsky: TcoordpointAtsky read FcoordpointAtsky write FcoordpointAtsky;
@@ -118,6 +122,9 @@ begin
   samp_hub_xmlrpc_url:='';
   Ferrorcode:=0;
   Ferrortext:='';
+  Fhubprofileerror:='Unsupported SAMP hub profile. Must be a File URL';
+  Fhubmissingvalue:='SAMP hub profile %s found, but it is missing a required value.';
+  Fnohuberror:='No SAMP hub profile found, no hub is running.';
   aHTTP:=THTTPSend.Create;
   FClients:=Tstringlist.Create;
   FClientNames:=Tstringlist.Create;
@@ -337,7 +344,7 @@ begin
     if p>0 then Delete(lockfile,1,p+6)
            else begin
             Ferrorcode:=1;
-            Ferrortext:='Unsupported SAMP hub profile. Must be a File URL: '+lockfile;
+            Ferrortext:=Fhubprofileerror+': '+lockfile;
             exit;
            end;
  end;
@@ -368,11 +375,11 @@ begin
       Ferrortext:='';
     end else begin
        Ferrorcode:=1;
-       Ferrortext:='SAMP hub profile '+lockfile+' found, but it is missing a required value.';
+       Ferrortext:=format(Fhubmissingvalue,[lockfile]);
     end;
  end else begin
     Ferrorcode:=1;
-    Ferrortext:='No SAMP hub profile found, no hub is running.';
+    Ferrortext:=Fnohuberror;
  end;
  str.Free;
 end;

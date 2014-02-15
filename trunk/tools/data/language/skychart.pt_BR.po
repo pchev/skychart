@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-09 20:18+0000\n"
-"PO-Revision-Date: 2014-02-03 11:40+0000\n"
+"POT-Creation-Date: 2014-02-15 13:27+0000\n"
+"PO-Revision-Date: 2014-02-10 03:13+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-09 20:32+0000\n"
+"X-Launchpad-Export-Date: 2014-02-15 13:49+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
@@ -2229,7 +2229,7 @@ msgstr "Geocêntrico"
 
 #: u_translation.rsgeometricalt
 msgid "Geometric altitude"
-msgstr ""
+msgstr "Altitude geométrica"
 
 #: u_translation.rsget
 msgid "Get"
@@ -3399,6 +3399,10 @@ msgstr "Normal (colorido)"
 msgid "North"
 msgstr "Norte"
 
+#: u_translation.rsnosamphubpro
+msgid "No SAMP hub profile found, no hub is running."
+msgstr ""
+
 #: u_translation.rsnotafitsfile
 msgid "Not a FITS file, SIMPLE = T keyword missing"
 msgstr "Não é um arquivo FITS, SIMPLE = T palavra chave faltando"
@@ -4434,6 +4438,10 @@ msgstr "Linhas"
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
 msgstr "SAMP Confirmação"
+
+#: u_translation.rssamphubprofi
+msgid "SAMP hub profile %s found, but it is missing a required value."
+msgstr ""
 
 #: u_translation.rssampisamessa
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
@@ -5582,6 +5590,10 @@ msgstr "Objeto desconhecido"
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
 msgstr "Desbloquear carta"
+
+#: u_translation.rsunsupporteds
+msgid "Unsupported SAMP hub profile. Must be a File URL"
+msgstr ""
 
 #: u_translation.rsupdate1
 msgid "Update"

@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-02-09 20:18+0000\n"
-"PO-Revision-Date: 2014-01-14 02:30+0000\n"
+"POT-Creation-Date: 2014-02-15 13:27+0000\n"
+"PO-Revision-Date: 2014-02-11 01:22+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-09 20:32+0000\n"
+"X-Launchpad-Export-Date: 2014-02-15 13:48+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 
 #: u_translation.rs102cddss
@@ -2226,7 +2226,7 @@ msgstr "ศูนย์โลก"
 
 #: u_translation.rsgeometricalt
 msgid "Geometric altitude"
-msgstr ""
+msgstr "มุมเงยเรขาคณิต"
 
 #: u_translation.rsget
 msgid "Get"
@@ -3396,6 +3396,10 @@ msgstr "(สี) ปกติ"
 msgid "North"
 msgstr "เหนือ"
 
+#: u_translation.rsnosamphubpro
+msgid "No SAMP hub profile found, no hub is running."
+msgstr ""
+
 #: u_translation.rsnotafitsfile
 msgid "Not a FITS file, SIMPLE = T keyword missing"
 msgstr ""
@@ -4430,6 +4434,10 @@ msgstr "แถว"
 
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
+msgstr ""
+
+#: u_translation.rssamphubprofi
+msgid "SAMP hub profile %s found, but it is missing a required value."
 msgstr ""
 
 #: u_translation.rssampisamessa
@@ -5580,6 +5588,10 @@ msgstr "วัตถุไม่ทราบชนิด"
 msgid "Unlock chart"
 msgstr "ปลดล็อกแผนที่"
 
+#: u_translation.rsunsupporteds
+msgid "Unsupported SAMP hub profile. Must be a File URL"
+msgstr ""
+
 #: u_translation.rsupdate1
 msgid "Update"
 msgstr "ปรับปรุง"
@@ -5746,7 +5758,7 @@ msgstr "ดูรายการสังเกตการณ์"
 
 #: u_translation.rsviewonchart
 msgid "View on chart"
-msgstr ""
+msgstr "ดูบนแผนที่"
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "
