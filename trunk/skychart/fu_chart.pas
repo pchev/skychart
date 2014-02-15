@@ -958,7 +958,7 @@ end;
 
 procedure Tf_chart.Image1Paint(Sender: TObject);
 begin
-if printing or locked then exit;
+if locked then exit;
 if VerboseMsg then
  WriteTrace(caption+' Paint');
 sc.plot.FlushCnv;
@@ -1229,7 +1229,6 @@ try
     if PrintLandscape then Printer.Orientation:=poLandscape
                       else Printer.Orientation:=poPortrait;
     if preview then begin
-      rp:=resol;
       printok:=false;
       PrintPreview:=Tf_image.Create(self);
       previewbmp:=Tbitmap.Create;
@@ -1239,10 +1238,11 @@ try
         PrintPreview.Image1.BGcolor:=clBtnFace;
         w:=Printer.PageWidth;
         h:=Printer.PageHeight;
-        rs:=96/rp;
+        rp:=application.MainForm.PixelsPerInch;
+        if (rp<=0)or(rp>300) then rp:=96;
+        rs:=rp/resol;
         w:=round(w*rs);
         h:=round(h*rs);
-        rp:=96;
         {$ifndef mswindows}
         prtsc.cfgsc.PlotImageFirst:=true;
         {$endif}
@@ -1272,8 +1272,10 @@ try
         end;
         previewbmp.SaveToFile(SysToUTF8(slash(TempDir))+'preview.bmp');
         PrintPreview.LoadImage(SysToUTF8(slash(TempDir))+'preview.bmp');
-        PrintPreview.ClientHeight:=Image1.Height;
-        PrintPreview.ClientWidth:=Image1.Width;
+        h:=h+PrintPreview.Panel1.Height+PrintPreview.HScrollBar.Height;
+        w:=w+PrintPreview.VScrollBar.Width;
+        PrintPreview.ClientHeight:=min(h,Image1.Height);
+        PrintPreview.ClientWidth:=min(w,Image1.Width);
         PrintPreview.image1.ZoomMin:=0.5;
         PrintPreview.labeltext:=rsPrintPreview;
         PrintPreview.Init;
