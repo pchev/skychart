@@ -6647,6 +6647,11 @@ if ConfigObservatory<>nil then ConfigObservatory.SetLang;
 if ConfigDisplay<>nil then ConfigDisplay.SetLang;
 if ConfigPictures<>nil then ConfigPictures.SetLang;
 if ConfigCatalog<>nil then ConfigCatalog.SetLang;
+if samp<>nil then begin
+  samp.hubprofileerror:=rsUnsupportedS;
+  samp.hubmissingvalue:=rsSAMPHubProfi;
+  samp.nohuberror:=rsNoSAMPHubPro;
+end;
 except
 end;
 end;
@@ -8508,6 +8513,9 @@ procedure Tf_main.SAMPStart(auto:boolean=false);
 begin
 WriteTrace('start SAMP client');
 if samp=nil then samp:=TSampClient.Create;
+samp.hubprofileerror:=rsUnsupportedS;
+samp.hubmissingvalue:=rsSAMPHubProfi;
+samp.nohuberror:=rsNoSAMPHubPro;
 samp.onClientChange:=SAMPClientChange;
 samp.onDisconnect:=SAMPDisconnect;
 samp.oncoordpointAtsky:=SAMPcoordpointAtsky;

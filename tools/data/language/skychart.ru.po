@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-09 20:18+0000\n"
+"POT-Creation-Date: 2014-02-15 13:27+0000\n"
 "PO-Revision-Date: 2013-12-02 06:56+0000\n"
 "Last-Translator: Aleksey Kabanov <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-09 20:32+0000\n"
+"X-Launchpad-Export-Date: 2014-02-15 13:49+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 "Language: ru_UA\n"
 
@@ -3397,6 +3397,10 @@ msgstr "Нормально (цвет)"
 msgid "North"
 msgstr "Север"
 
+#: u_translation.rsnosamphubpro
+msgid "No SAMP hub profile found, no hub is running."
+msgstr ""
+
 #: u_translation.rsnotafitsfile
 msgid "Not a FITS file, SIMPLE = T keyword missing"
 msgstr "Нет FITS файла, SIMPLE = T потеря ключевого слова"
@@ -4431,6 +4435,10 @@ msgstr "Строки"
 
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
+msgstr ""
+
+#: u_translation.rssamphubprofi
+msgid "SAMP hub profile %s found, but it is missing a required value."
 msgstr ""
 
 #: u_translation.rssampisamessa
@@ -5580,6 +5588,10 @@ msgstr "Неизвестный объект"
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
 msgstr "Раскрыть карту"
+
+#: u_translation.rsunsupporteds
+msgid "Unsupported SAMP hub profile. Must be a File URL"
+msgstr ""
 
 #: u_translation.rsupdate1
 msgid "Update"

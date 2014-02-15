@@ -5902,3 +5902,15 @@ msgstr ""
 msgid "Geometric altitude"
 msgstr ""
 
+#: u_translation:rsunsupporteds
+msgid "Unsupported SAMP hub profile. Must be a File URL"
+msgstr ""
+
+#: u_translation:rssamphubprofi
+msgid "SAMP hub profile %s found, but it is missing a required value."
+msgstr ""
+
+#: u_translation:rsnosamphubpro
+msgid "No SAMP hub profile found, no hub is running."
+msgstr ""
+

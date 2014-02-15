@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-09 20:18+0000\n"
-"PO-Revision-Date: 2014-02-09 20:23+0000\n"
+"POT-Creation-Date: 2014-02-15 13:27+0000\n"
+"PO-Revision-Date: 2014-02-15 13:45+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-09 20:32+0000\n"
+"X-Launchpad-Export-Date: 2014-02-15 13:48+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 "Language: fr\n"
 
@@ -824,7 +824,7 @@ msgstr "Fermer la carte"
 
 #: u_translation.rscloseconnect
 msgid "Close connection"
-msgstr "Fermer le connexion"
+msgstr "Fermer la connexion"
 
 #: u_translation.rsclosedcontou
 msgid "Closed contour"
@@ -968,7 +968,7 @@ msgstr "Connexion $ %s, %s erreur! %sContrôlez que le serveur MySQL est lancé 
 
 #: u_translation.rsconnecttosam
 msgid "Connect to SAMP hub"
-msgstr "Connection au hub SAMP"
+msgstr "Connexion au hub SAM"
 
 #: u_translation.rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
@@ -1506,7 +1506,7 @@ msgstr "Déconnecter"
 
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
-msgstr "Déconnection du hub SAMP"
+msgstr "Déconnexion du hub SAMP"
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
@@ -3401,6 +3401,10 @@ msgstr "Normal (couleur)"
 msgid "North"
 msgstr "Nord"
 
+#: u_translation.rsnosamphubpro
+msgid "No SAMP hub profile found, no hub is running."
+msgstr "Profile du hub SAMP pas trouvé, le hub n'est pas en cours d'execution."
+
 #: u_translation.rsnotafitsfile
 msgid "Not a FITS file, SIMPLE = T keyword missing"
 msgstr "Ce n'est pas un fichier FITS, mot clé SIMPLE = T manquant"
@@ -4437,6 +4441,10 @@ msgstr "Lignes"
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
 msgstr "Confirmation SAMP"
+
+#: u_translation.rssamphubprofi
+msgid "SAMP hub profile %s found, but it is missing a required value."
+msgstr "Profile du hub SAMP %s trouvé, mais il manque une valeur requise."
 
 #: u_translation.rssampisamessa
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
@@ -5585,6 +5593,10 @@ msgstr "Objet inconnu"
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
 msgstr "Déverrouiller la carte"
+
+#: u_translation.rsunsupporteds
+msgid "Unsupported SAMP hub profile. Must be a File URL"
+msgstr "Profile du hub SAMP non supporté. Doit être une URL de fichier"
 
 #: u_translation.rsupdate1
 msgid "Update"
