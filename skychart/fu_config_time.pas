@@ -517,6 +517,9 @@ BitBtn1.enabled:=d_year.enabled;
 Button5.enabled:=d_year.enabled;
 Button6.enabled:=d_year.enabled;
 Button8.enabled:=d_year.enabled;
+CheckBox2.Enabled:=not d_year.enabled;
+LongEdit2.Enabled:=not d_year.enabled;
+label142.Enabled:=not d_year.enabled;
 if LockChange then exit;
 try
 LockChange:=true;
