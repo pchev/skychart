@@ -3,13 +3,13 @@ msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-15 13:27+0000\n"
-"PO-Revision-Date: 2014-02-15 13:45+0000\n"
+"PO-Revision-Date: 2014-02-16 11:04+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-15 13:48+0000\n"
+"X-Launchpad-Export-Date: 2014-02-16 11:08+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 "Language: fr\n"
 
@@ -207,7 +207,7 @@ msgstr "Toutes les barres d'outils"
 
 #: u_translation.rsalsobesureth
 msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
-msgstr "%sContrôler aussi que le logiciel de base de donnée est installé.%sConsultez la documentation si vous n'êtes pas sur.%sVoulez-vous continuer?"
+msgstr "%sContrôler aussi que le logiciel de base de donnée est installé.%sConsultez la documentation si vous n'êtes pas sûr.%sVoulez-vous continuer?"
 
 #: u_translation.rsalt
 msgid "Alt"
@@ -303,7 +303,7 @@ msgstr "Argument du périhélie"
 
 #: u_translation.rsaroundcurren
 msgid "Around current position"
-msgstr "Autour de la position"
+msgstr "Autour de la position actuelle"
 
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
@@ -331,7 +331,7 @@ msgstr "Interface de télescope ASCOM"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
-msgstr "Demande avant de se connecter à Internet"
+msgstr "Demande une confirmation avant de se connecter à Internet"
 
 #: u_translation.rsaskforconfir
 msgid "Ask for confirmation before to jump to coordinates"
@@ -359,7 +359,7 @@ msgstr "Astéroïde"
 
 #: u_translation.rsasteroidelem
 msgid "Sources for asteroid elements in MPC format (one URL per line)"
-msgstr "Element des astéroides au format MPC (une URL par ligne)"
+msgstr "Élément des astéroïdes au format MPC (une URL par ligne)"
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
@@ -399,7 +399,7 @@ msgstr "Automatique"
 
 #: u_translation.rsautomaticall
 msgid "Automatically start a local server if not already running"
-msgstr "Lancer un serveur local si il n'est pas en execution"
+msgstr "Lancer un serveur local si il n'est pas en exécution"
 
 #: u_translation.rsautomaticall2
 msgid "Automatically optimize the labels placement"
@@ -483,7 +483,7 @@ msgstr "Attention que cette option peut dégrader les performances"
 
 #: u_translation.rsbigstars
 msgid "Big stars"
-msgstr "Grande étoiles"
+msgstr "Grandes étoiles"
 
 #: u_translation.rsbii
 msgid "BII"
@@ -539,7 +539,7 @@ msgstr "Fort"
 
 #: u_translation.rsbrightest
 msgid "Brightest"
-msgstr "La plus brilante"
+msgstr "La plus brillante"
 
 #: u_translation.rsbrighteststa
 msgid "Brightest star magnitude"
@@ -671,7 +671,7 @@ msgstr "CdC nébuleuses"
 
 #: u_translation.rscdcnebulaeca
 msgid "CdC deep sky catalogs and settings"
-msgstr "Catalogue de nébuleuse CDC"
+msgstr "Catalogue de nébuleuses CDC"
 
 #: u_translation.rscdcobsoletec
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
@@ -728,7 +728,7 @@ msgstr "Changer le mode de la souris"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
-msgstr "Si vous modifier ce réglage le programme va redémarrer maintenant!"
+msgstr "Si vous modifiez ce réglage le programme va redémarrer maintenant!"
 
 #: u_translation.rschart
 msgid "Chart"
@@ -744,7 +744,7 @@ msgstr "Carte, Coordonnées"
 
 #: u_translation.rschartcoordin2
 msgid "Chart coordinate systems"
-msgstr "Système de coordonnée"
+msgstr "Système de coordonnées"
 
 #: u_translation.rschartinforma
 msgid "Chart information"
@@ -864,7 +864,7 @@ msgstr "Comète"
 
 #: u_translation.rscometelement
 msgid "Sources for comet elements in MPC format (one URL per line)"
-msgstr "Element des comètes au format MPC (une URL par ligne)"
+msgstr "Éléments des comètes au format MPC (une URL par ligne)"
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
@@ -1124,7 +1124,7 @@ msgstr "Pilote selectionné"
 
 #: u_translation.rscustom
 msgid "Custom"
-msgstr "Personalisé"
+msgstr "Personnalisé"
 
 #: u_translation.rscw
 msgid "%sCW"
@@ -1200,7 +1200,7 @@ msgstr "Date"
 
 #: u_translation.rsdateandortim
 msgid "Date and/or time cannot be changed"
-msgstr "La date ou l'heure ne peuvent être modifiée"
+msgstr "La date ou l'heure ne peuvent être modifiées"
 
 #: u_translation.rsdateformat
 msgid "Date format"
@@ -1212,7 +1212,7 @@ msgstr "Depuis"
 
 #: u_translation.rsdatesmaytake
 msgid "dates may take a long time. Do you want to continue?"
-msgstr "dates peut prendre beaucoup de temps. Voullez-vous continuer ?"
+msgstr "dates peut prendre beaucoup de temps. Voulez-vous continuer ?"
 
 #: u_translation.rsdatetime
 msgid "Date / time"
@@ -1345,7 +1345,7 @@ msgstr "°"
 
 #: u_translation.rsdegree
 msgid "Degree"
-msgstr "Degrés"
+msgstr "Degré"
 
 #: u_translation.rsdegreegridsp
 msgid "Declination grid"
@@ -1373,11 +1373,11 @@ msgstr "Suppression terminée"
 
 #: u_translation.rsdeletedailyd
 msgid "Deleting the daily data"
-msgstr "Suppression des données journalière"
+msgstr "Suppression des données journalières"
 
 #: u_translation.rsdeletedsucce
 msgid "Deleted successfully!"
-msgstr "Suppresion terminée avec succès!"
+msgstr "Suppression terminée avec succès!"
 
 #: u_translation.rsdeletefromel
 msgid "Deleting from the element table..."
@@ -1406,15 +1406,15 @@ msgstr "Suppression des données mensuelles "
 
 #: u_translation.rsdeletemonthl2
 msgid "Delete monthly data older than "
-msgstr "Suppression des données plus ancienne que "
+msgstr "Suppression des données plus anciennes que "
 
 #: u_translation.rsdeletempcdat
 msgid "Delete MPC data selectively"
-msgstr "Supprimer des données selectivement"
+msgstr "Supprimer des données sélectivement"
 
 #: u_translation.rsdeleteprevio
 msgid "Delete previous data for this date."
-msgstr "Suppression des données antérieur pour cette date."
+msgstr "Suppression des données antérieures pour cette date."
 
 #: u_translation.rsdeletethecur
 msgid "Delete the current location from the database?"
@@ -1442,7 +1442,7 @@ msgstr "Désignation"
 
 #: u_translation.rsdesktopenvir
 msgid "Desktop environment"
-msgstr "Environement du bureau"
+msgstr "Environnement du bureau"
 
 #: u_translation.rsdetails
 msgid "Details"
@@ -1466,7 +1466,7 @@ msgstr "Diamètre"
 
 #: u_translation.rsdiconnected
 msgid "Diconnected"
-msgstr "Déconnecte"
+msgstr "Déconnecté"
 
 #: u_translation.rsdifferencebe
 msgid "Difference between Terrestrial Time and Universal Time"
@@ -1530,7 +1530,7 @@ msgstr "Afficher une image des objets du catalogue"
 
 #: u_translation.rsdisplaylabel
 msgid "Display labels for all star catalogs"
-msgstr "Voir les labels de tout les catalogues d'étoiles"
+msgstr "Voir les labels de tous les catalogues d'étoiles"
 
 #: u_translation.rsdisplaypreci
 msgid "Display Precision"
@@ -1766,7 +1766,7 @@ msgstr "Elong."
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
-msgstr "Nébuleuse d'émision"
+msgstr "Nébuleuse d'émission"
 
 #: u_translation.rsencoderconfi
 msgid "Encoder Configuration"
@@ -2115,7 +2115,7 @@ msgstr "Police de caractères"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr "Pour un gros catalogue toujours choisir Binaire. Pour un petit dont les données changent fréquement choisir Texte, cela permet de modifier le fichier et de voir immédiatement le résultat sans avoir à le retraiter."
+msgstr "Pour un gros catalogue toujours choisir Binaire. Pour un petit dont les données changent fréquemment choisir Texte, cela permet de modifier le fichier et de voir immédiatement le résultat sans avoir à le retraiter."
 
 #: u_translation.rsforcecolor
 msgid "Force color"
@@ -2775,7 +2775,7 @@ msgstr "Accord de Licence"
 
 #: u_translation.rslightyears
 msgid "light years"
-msgstr "Année lumières"
+msgstr "années-lumière"
 
 #: u_translation.rslii
 msgid "LII"
@@ -2867,7 +2867,7 @@ msgstr "Charger le fichier au format MPC"
 
 #: u_translation.rsloadonlythef
 msgid "Load only the first "
-msgstr "Charger les premier "
+msgstr "Charger le premier "
 
 #: u_translation.rsloadproject
 msgid "Load project"
@@ -3031,7 +3031,7 @@ msgstr "Magnitude maximum"
 
 #: u_translation.rsmaximumnumbe
 msgid "Maximum number of image to show simultaneously"
-msgstr "Nombre maximum d'images affichée simultanément"
+msgstr "Nombre maximum d'images affichées simultanément"
 
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
@@ -3091,7 +3091,7 @@ msgstr "Messages :"
 
 #: u_translation.rsmeters
 msgid "Meters"
-msgstr "Metres"
+msgstr "Mètres"
 
 #: u_translation.rsmiddle
 msgid "Middle"
@@ -3131,7 +3131,7 @@ msgstr "minutes"
 
 #: u_translation.rsmirrorhorizo
 msgid "Mirror horizontally"
-msgstr "Mirroir horizontal"
+msgstr "Miroir horizontal"
 
 #: u_translation.rsmirrorvertic
 msgid "Mirror vertically"
@@ -3143,7 +3143,7 @@ msgstr "Autre lignes"
 
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
-msgstr "Simulateur du boutton Mode"
+msgstr "Simulateur du bouton Mode"
 
 #: u_translation.rsmodel
 msgid "Model"
@@ -3375,7 +3375,7 @@ msgstr "Non existant"
 
 #: u_translation.rsnonexistentu
 msgid "Non-existent/unknown"
-msgstr "Non existent"
+msgstr "Non existant"
 
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
@@ -3467,7 +3467,7 @@ msgstr "Nombre d'étoiles"
 
 #: u_translation.rsnumberofstep
 msgid "Number of steps"
-msgstr "nombre d'étape"
+msgstr "nombre d'étapes"
 
 #: u_translation.rsnutationaber
 msgid "Nutation, aberration"
@@ -3503,7 +3503,7 @@ msgstr "Nom de l'objet"
 
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
-msgstr "Position de l'objet trouvée dans l'index, mais aucun détail dans les catalogues actifs."
+msgstr "Position de l'objet trouvé dans l'index, mais aucun détail dans les catalogues actifs."
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
@@ -3899,7 +3899,7 @@ msgstr "Mouvement du pôle (arc sec)"
 
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
-msgstr "Inclinaison du pole"
+msgstr "Inclinaison du pôle"
 
 #: u_translation.rsport
 msgid "Port:"
@@ -4171,7 +4171,7 @@ msgstr "%stours AR:"
 
 #: u_translation.rsreadinterval
 msgid "Read Interval [ms]"
-msgstr "Intervale de lecture [ms]"
+msgstr "Intervalle de lecture [ms]"
 
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
@@ -4195,7 +4195,7 @@ msgstr "Realsky sud"
 
 #: u_translation.rsrealtimeopti
 msgid "Real time options"
-msgstr "Options temps réels"
+msgstr "Options temps réel"
 
 #: u_translation.rsreceivecoord
 msgid "Receive coordinates from other applications"
@@ -4267,7 +4267,7 @@ msgstr "Référence"
 
 #: u_translation.rsreflectionne
 msgid "Reflection nebula"
-msgstr "Nébuleuse de réflexion"
+msgstr "Nébuleuse par réflexion"
 
 #: u_translation.rsrefresh
 msgid "Refresh"
@@ -4400,7 +4400,7 @@ msgstr "Ascension droite"
 
 #: u_translation.rsrightbar
 msgid "Right Bar"
-msgstr "Bare de droite"
+msgstr "Barre de droite"
 
 #: u_translation.rsrightmode
 msgid "Right Mode"
@@ -4720,7 +4720,7 @@ msgstr "Champ de"
 
 #: u_translation.rssethowthemou
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
-msgstr "Indiquez le mouvement de la monture pour chaque tour de vis. Ainsi le boutton Télescope du menu vous indiquera le nombre de tour à effectuer pour aller d'un objet à un autre."
+msgstr "Indiquez le mouvement de la monture pour chaque tour de vis. Ainsi le bouton Télescope du menu vous indiquera le nombre de tours à effectuer pour aller d'un objet à un autre."
 
 #: u_translation.rssetlocation
 msgid "Set Location"
@@ -4860,7 +4860,7 @@ msgstr "Voir la voie lactée"
 
 #: u_translation.rsshowneareart
 msgid "Show near Earth asteroids independently of the magnitude"
-msgstr "Toujours afficher les astéroïdes proche de la Terre"
+msgstr "Toujours afficher les astéroïdes proches de la Terre"
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
@@ -4988,7 +4988,7 @@ msgstr "Le plus lent"
 
 #: u_translation.rssmallstars
 msgid "Small stars"
-msgstr "Petite étoiles"
+msgstr "Petites étoiles"
 
 #: u_translation.rssminute
 msgid "M"
@@ -5032,11 +5032,11 @@ msgstr "Paramètres du système solaire"
 
 #: u_translation.rssomerecordsw
 msgid "Some records where rejected, see the file %sreject.txt for details."
-msgstr "Certain enregistrement ont été refusé, voir le fichier %sreject.txt pour plus de détails"
+msgstr "Certains enregistrements ont été refusés, voir le fichier %sreject.txt pour plus de détails"
 
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
-msgstr "Quelque chose n'a pas fonctionné lors de l'initialisation du programme. Il va maintenant être fermer."
+msgstr "Quelque chose n'a pas fonctionné lors de l'initialisation du programme. Il va maintenant être fermé."
 
 #: u_translation.rssorrycopyisn
 msgid "Sorry, copy is not yet implemented for this page"
@@ -5228,7 +5228,7 @@ msgstr "Luminosité de surface"
 
 #: u_translation.rsswapbutton
 msgid "Swap button"
-msgstr "Inversion des boutton"
+msgstr "Inversion des boutons"
 
 #: u_translation.rsswitchhpp
 msgid "Switch HPP"
@@ -5356,7 +5356,7 @@ msgstr "Il y a %s objets dans ce champ."
 
 #: u_translation.rsthisactionre
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
-msgstr "Cette action remplace tout le contenu de la base de donnée du pays %s avec des données fraiches du NGA et GNIS.%sToutes vos modification pour ce pays seront perdue à l'exception des lieux que vous avez ajouté avec un nouveau nom.%sVoulez-vous continuer ?"
+msgstr "Cette action remplace tout le contenu de la base de donnée du pays %s avec des données fraiches du NGA et GNIS.%sToutes vos modifications pour ce pays seront perdues à l'exception des lieux que vous avez ajoutés avec un nouveau nom.%sVoulez-vous continuer ?"
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
@@ -5452,7 +5452,7 @@ msgstr "Pour utiliser ces données vous devez calculer les données mensuelles"
 
 #: u_translation.rstracking
 msgid "Tracking"
-msgstr "Suivit"
+msgstr "Suivi"
 
 #: u_translation.rstracktelesco
 msgid "Track telescope"
@@ -5816,15 +5816,15 @@ msgstr "Attention! Mode basse résolution. Utilisez plutôt PostScript et imprim
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated. Load element valid for the current map date."
-msgstr "Attention! Les éléments des astéroïdes ne sont plus valable. Chargez des éléments valables pour la date actuelle de la carte."
+msgstr "Attention! Les éléments des astéroïdes ne sont plus valables. Chargez des éléments valables pour la date actuelle de la carte."
 
 #: u_translation.rswarningsomec
 msgid "Warning! Some comet elements are outdated. Load element valid for the current map date."
-msgstr "Attention! Les éléments des comètes ne sont plus valable. Chargez des éléments valables pour la date actuelle de la carte."
+msgstr "Attention! Les éléments des comètes ne sont plus valables. Chargez des éléments valables pour la date actuelle de la carte."
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
-msgstr "Attention! La date et le lieu d'observation ont pu changer de leur valeur par défaut. Vous devez répondre Non et utiliser le bouton %s maintenant pour retrouver vos valeurs, autrement elles seront perdue. Voulez-vous continuer ?"
+msgstr "Attention! La date et le lieu d'observation ont pu changer de leur valeur par défaut. Vous devez répondre Non et utiliser le bouton %s maintenant pour retrouver vos valeurs, autrement elles seront perdues. Voulez-vous continuer ?"
 
 #: u_translation.rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
@@ -5900,7 +5900,7 @@ msgstr "Vous observez depuis une haute montagne près de l'océan et vous aimez 
 
 #: u_translation.rszenitalequid
 msgid "Zenital equidistant"
-msgstr "Zénital équidistants"
+msgstr "Zénithal équidistants"
 
 #: u_translation.rszenith
 msgid "Zenith"
@@ -5928,7 +5928,7 @@ msgstr "Zoom avant"
 
 #: u_translation.rszoommoretovi
 msgid "Zoom more to view the object"
-msgstr "Zommer plus pour voir cet objet"
+msgstr "Zoomer plus pour voir cet objet"
 
 #: u_translation.rszoomout
 msgid "Zoom out"
