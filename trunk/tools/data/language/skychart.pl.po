@@ -3,13 +3,13 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-15 13:27+0000\n"
-"PO-Revision-Date: 2014-02-09 21:58+0000\n"
+"PO-Revision-Date: 2014-02-16 19:00+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-15 13:49+0000\n"
+"X-Launchpad-Export-Date: 2014-02-16 19:41+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
@@ -3403,7 +3403,7 @@ msgstr "Północ"
 
 #: u_translation.rsnosamphubpro
 msgid "No SAMP hub profile found, no hub is running."
-msgstr ""
+msgstr "Nie znaleziono profilu koncentratora SAMP, brak uruchomionego koncentratora."
 
 #: u_translation.rsnotafitsfile
 msgid "Not a FITS file, SIMPLE = T keyword missing"
@@ -4443,7 +4443,7 @@ msgstr "Potwierdzenie SAMP"
 
 #: u_translation.rssamphubprofi
 msgid "SAMP hub profile %s found, but it is missing a required value."
-msgstr ""
+msgstr "Znaleziono profil %s koncentratora SAMP, lecz nie zawiera on wymaganej wartości."
 
 #: u_translation.rssampisamessa
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
@@ -5595,7 +5595,7 @@ msgstr "Odblokuj mapę"
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
-msgstr ""
+msgstr "Niewspierany profil koncentratora SAMP. Wymagany URL do pliku"
 
 #: u_translation.rsupdate1
 msgid "Update"
@@ -5679,7 +5679,7 @@ msgstr "Użyj serwera proxy Socks"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"
-msgstr "Użyj półpróbkowania żeby zmniejszyć rozmiar obrazków do"
+msgstr "Użyj półpróbkowania, aby zmniejszyć rozmiar obrazów do"
 
 #: u_translation.rsusesystemtim
 msgid "Use system time"
