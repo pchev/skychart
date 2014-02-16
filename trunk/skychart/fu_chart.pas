@@ -672,7 +672,7 @@ end;
 
 procedure Tf_chart.AutoRefresh;
 begin
-if locked then exit;
+if locked or (sc.cfgsc.ShowScale) then exit;
 if VerboseMsg then
  WriteTrace(caption+' AutoRefresh');
 if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
