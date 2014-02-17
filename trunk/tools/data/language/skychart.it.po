@@ -3,13 +3,13 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-17 19:39+0000\n"
-"PO-Revision-Date: 2014-02-17 19:50+0000\n"
+"PO-Revision-Date: 2014-02-17 20:27+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-17 20:01+0000\n"
+"X-Launchpad-Export-Date: 2014-02-17 20:32+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 "Language: it\n"
 
@@ -235,7 +235,7 @@ msgstr "Montatura Alt/Az"
 
 #: u_translation.rsaltitude
 msgid "Altitude"
-msgstr "Altitudine"
+msgstr "Altezza"
 
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
@@ -2228,7 +2228,7 @@ msgstr "geocentriche"
 
 #: u_translation.rsgeometricalt
 msgid "Geometric altitude"
-msgstr ""
+msgstr "Altezza geometrica"
 
 #: u_translation.rsget
 msgid "Get"
