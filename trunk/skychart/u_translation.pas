@@ -231,6 +231,7 @@ resourcestring
   rsLibrationInL2 = 'Libration in longitude';
   rsAzimuth = 'Azimuth';
   rsAltitude = 'Altitude';
+  rsObsAltitude = '%sAltitude';
   rsRise = 'Rise';
   rsCulmination = 'Culmination';
   rsSet = 'Set';

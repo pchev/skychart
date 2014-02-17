@@ -878,6 +878,10 @@ msgstr ""
 msgid "Altitude"
 msgstr ""
 
+#: u_translation:rsobsaltitude
+msgid "%sAltitude"
+msgstr ""
+
 #: u_translation:rsrise
 msgid "Rise"
 msgstr ""
