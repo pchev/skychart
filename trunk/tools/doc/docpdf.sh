@@ -76,7 +76,11 @@ if [[ $lang = 'en' ]]; then
   l='English documentation' 
 fi
 if [[ $lang = 'es' ]]; then
-  l='Spanish documentation'
+  t='Cartes du Ciel / SkyChart'
+  l='Documentación en español'
+  dt='Edición: '$(LC_ALL=es_ES.utf8 date '+%d %B %Y')
+  lastv='La versión más reciente está disponible en la wiki'
+  tocl='Tabla de contenidos' 
 fi
 if [[ $lang = 'fr' ]]; then
   t='Cartes du Ciel'
