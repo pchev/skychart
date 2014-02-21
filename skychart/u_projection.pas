@@ -869,7 +869,11 @@ end;
 PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; c: Tconf_skychart; method:smallint=refmethod);
 var l1,d1,h1 : double;
 BEGIN
-l1:=deg2rad*c.ObsLatitude;
+if method=2 then begin
+  l1:=c.ObsPHI;
+  HH:=HH+(c.ObsELONG + deg2rad*c.ObsLongitude);
+end
+else l1:=deg2rad*c.ObsLatitude;
 d1:=DE;
 h1:=HH;
 h:= double(arcsin( sin(l1)*sin(d1)+cos(l1)*cos(d1)*cos(h1) ));
@@ -877,20 +881,24 @@ A:= double(arctan2(sin(h1),cos(h1)*sin(l1)-tan(d1)*cos(l1)));
 A:=Rmod(A+pi2,pi2);
 if method=2 then DiurnalAberration(A,h,c);
 Refraction(h,true,c,method);
-if method=2 then A:=A+c.ObsDAZ;
 END ;
 
 Procedure Hz2Eq(A,h : double; var hh,de : double; c: Tconf_skychart; method:smallint=refmethod);
 var l1,a1,h1 : double;
 BEGIN
-if method=2 then A:=A-c.ObsDAZ;
 Refraction(h,false,c,method);
 //if method=2 then Reverse_DiurnalAberration(A,h,c);
-l1:=deg2rad*c.ObsLatitude;
+if method=2 then begin
+  l1:=c.ObsPHI;
+end
+else l1:=deg2rad*c.ObsLatitude;
 a1:=A;
 h1:=h;
 de:= double(arcsin( sin(l1)*sin(h1)-cos(l1)*cos(h1)*cos(a1) ));
 hh:= double(arctan2(sin(a1),cos(a1)*sin(l1)+tan(h1)*cos(l1)));
+if method=2 then begin
+  hh:=hh-(c.ObsELONG + deg2rad*c.ObsLongitude);
+end;
 hh:=Rmod(hh+pi2,pi2);
 END ;
 
@@ -922,7 +930,7 @@ if flag then begin   // true -> apparent
             DZD := 1E1;
             WHILE (ABS(DZD)>1E-10)AND(I<=10) do begin
              // Compute refraction using current estimate of observed ZD
-              sla_REFRO(h, c.ObsAltitude, 273+c.ObsTemperature, c.ObsPressure,0.5,0.55, deg2rad*c.ObsLatitude, 0.0065,1E-8,R);
+              sla_REFRO(h, c.ObsAltitude, 273+c.ObsTemperature, c.ObsPressure,c.ObsRH,0.55, deg2rad*c.ObsLatitude, c.ObsTlr,1E-8,R);
              // Remaining discrepancy
               DZD := h+R-h1;
              // Update the estimate
@@ -955,7 +963,7 @@ else begin      // apparent -> true
    2: begin   { slalib }
        if (rad2deg*h)>-0.327565049146 then begin
           h1:=pid2-h;
-          sla_REFRO ( h1, c.ObsAltitude, 273+c.ObsTemperature, c.ObsPressure,0.5,0.55, deg2rad*c.ObsLatitude, 0.0065,1E-8,R);
+          sla_REFRO ( h1, c.ObsAltitude, 273+c.ObsTemperature, c.ObsPressure,c.ObsRH,0.55, deg2rad*c.ObsLatitude, c.ObsTlr,1E-8,R);
           h1:=h1+R;
           h:=pid2-h1;
        end
