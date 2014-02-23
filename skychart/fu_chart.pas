@@ -759,8 +759,10 @@ if assigned(Fshowinfo) then begin
   {$ifdef showtime}
    Fshowinfo('Drawing time: '+formatfloat(f2,(now-starttime)*86400));
   {$else}
-  if sc.cfgsc.TrackOn then
-    IdentXY(Image1.Width div 2, Image1.Height div 2)
+  if sc.cfgsc.TrackOn then begin
+    if sc.cfgsc.TrackType=6 then  ShowIdentLabel
+       else IdentXY(Image1.Width div 2, Image1.Height div 2)
+  end
   else begin
     Fshowinfo(sc.cfgsc.msg);
     if sc.cfgsc.FindOk and (not cmain.SimpleDetail) and (sc.cfgsc.msg='') then Fshowinfo(sc.cfgsc.FindDesc,caption,true,self,sc.cfgsc.FindDesc2);
