@@ -843,9 +843,10 @@ var dd,min1,min,sec,p,pmin,psec: Double;
     d,m,s : string;
 begin
     case precision of
-     0: p:=0.95;
-     1: p:=0.995;
-     2: p:=0.9995;
+     0: p:=0.5;
+     1: p:=0.95;
+     2: p:=0.995;
+     3: p:=0.9995;
      else p:=0.99995;
     end;
     psec:=59+p;
@@ -877,6 +878,7 @@ var dd,min1,min,sec,p,pmin,psec: Double;
     d,m,s : string;
 begin
     case precision of
+    -1: p:=0.5;
      0: p:=0.95;
      1: p:=0.995;
      2: p:=0.9995;
