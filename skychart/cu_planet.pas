@@ -72,6 +72,7 @@ type
      Procedure FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Tconf_skychart);
      function  FindPlanetName(planetname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
      function  FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,ma,date,desc:string;trunc:boolean=true):boolean;
+     procedure FormatPlanet(St,Pl:integer; cfgsc: Tconf_skychart; var nom,ma,date,desc:string);
      Procedure Plan(ipla: integer; t: double ; var p: TPlanData);
      Procedure Planet(ipla : integer; t0 : double ; var alpha,delta,distance,illum,phase,diameter,magn,dp,xp,yp,zp,vel : double);
      Procedure SunRect(t0 : double ; astrometric : boolean; var x,y,z : double;barycenter:boolean=true);
@@ -1188,13 +1189,11 @@ end;
 
 function TPlanet.FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,ma,date,desc:string;trunc:boolean=true):boolean;
 var
-   yy,mm,dd,i,j : integer;
+   i,j : integer;
    tar,tde,ar,de : double;
-   dist,illum,phase,diam,jdt,magn,dkm,hh,dp,p,pde,pds,w1,w2,w3,jd0,st0,q,distmin,xp,yp,zp,vel : double;
-   sar,sde,sdist,sillum,sphase,sdiam,smagn,shh,sdp : string;
+   distmin : double;
    directfind: boolean;
    distancetocenter: array[0..MaxPlSim,1..MaxPla] of double;
-const d1='0.0'; d2='0.00';
 begin
 ar:=(x2+x1)/2;
 de:=(y2+y1)/2;
@@ -1205,7 +1204,7 @@ if not nextobj then  begin
 end;
 result := false;
 directfind := false;
-desc:='';tar:=1;tde:=1;jdt:=0;
+desc:='';tar:=1;tde:=1;
 if cfgsc.ephvalid then repeat
   inc(CurrentPlanet);
   if (CurrentStep>0)and(CurrentPlanet<=11)and(not cfgsc.SimObject[CurrentPlanet]) then continue;
@@ -1251,7 +1250,6 @@ if cfgsc.ephvalid then repeat
         directfind:=true;
      end;
 until directfind;
-st0:=0;
 cfgsc.FindOK:=result;
 if result then begin
   if not directfind then begin // search the planet nearest to position
@@ -1265,6 +1263,20 @@ if result then begin
          end;
        end;
   end;
+  FormatPlanet(CurrentStep,CurrentPlanet,cfgsc, nom,ma,date,desc);
+end;
+end;
+
+procedure TPlanet.FormatPlanet(St,Pl:integer; cfgsc: Tconf_skychart; var nom,ma,date,desc:string);
+var
+   yy,mm,dd : integer;
+   ar,de : double;
+   dist,illum,phase,diam,jdt,magn,dkm,hh,dp,p,pde,pds,w1,w2,w3,jd0,st0,q,xp,yp,zp,vel : double;
+   sar,sde,sdist,sillum,sphase,sdiam,smagn,shh,sdp : string;
+const d1='0.0'; d2='0.00';
+begin
+  CurrentStep:=St;
+  CurrentPlanet:=Pl;
   cfgsc.FindSize:=deg2rad*cfgsc.Planetlst[CurrentStep,CurrentPlanet,4]/3600;
   cfgsc.FindRA:=NormRa(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,1]);
   cfgsc.FindDec:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,2];
@@ -1288,14 +1300,11 @@ if result then begin
   date:=Date2Str(yy,mm,dd)+blank+shh;
   jd0:=jd(yy,mm,dd,0);
   st0:=SidTim(jd0,hh-cfgsc.TimeZone,cfgsc.ObsLongitude);
-end;
-//if result and (currentplanet<=11) then begin
-if result then begin
+
   cfgsc.TrackType:=1;
   cfgsc.TrackObj:=CurrentPlanet;
   cfgsc.TrackName:=trim(pla[CurrentPlanet]);
-end;
-if result and (currentplanet<10) then begin
+if (currentplanet<10) then begin
   Planet(CurrentPlanet,jdt,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel);
   cfgsc.FindX:=xp;
   cfgsc.FindY:=yp;
@@ -1342,7 +1351,7 @@ if result and (currentplanet<10) then begin
   Desc:=Desc+'ephemeris:'+eph_method+tab;
   Desc:=Desc+'date:'+date;
 end;
-if result and (currentplanet=10) then begin
+if (currentplanet=10) then begin
   Sun(jdt,ar,de,dist,diam);
   str(dist:7:4,sdist);
   str(diam/60:5:1,sdiam);
@@ -1360,7 +1369,7 @@ if result and (currentplanet=10) then begin
           +'ephemeris:'+eph_method+tab
           +'date:'+date;
 end;
-if result and (currentplanet=11) then begin
+if (currentplanet=11) then begin
   Moon(jdt,ar,de,dist,dkm,diam,phase,illum);
   precession(jd2000,cfgsc.JDChart,ar,de);
   if cfgsc.PlanetParalaxe then begin   // correct distance for paralaxe
@@ -1393,7 +1402,7 @@ if result and (currentplanet=11) then begin
           +'ephemeris:'+eph_method+tab
           +'date:'+date;
 end;
-if result and (currentplanet=32) then begin   // Earth umbra
+if (currentplanet=32) then begin   // Earth umbra
   jdt:=cfgsc.PlanetLst[CurrentStep,10,3];  // date from the Sun
   cfgsc.FindSimjd:=jdt;
 //  str(jdt:12:4,sjd);
@@ -1409,7 +1418,7 @@ if result and (currentplanet=32) then begin   // Earth umbra
           +'  P'+tab+nom+tab
           +date+tab;
 end;
-if result and (currentplanet>11) and (currentplanet<=15) then begin
+if (currentplanet>11) and (currentplanet<=15) then begin
   nom:=pla[CurrentPlanet];
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
@@ -1420,7 +1429,7 @@ if result and (currentplanet>11) and (currentplanet<=15) then begin
           +'diam:'+sdiam+blank+lsec+tab
           +date+tab;
 end;
-if result and (currentplanet>15) and (currentplanet<=23) then begin
+if (currentplanet>15) and (currentplanet<=23) then begin
   nom:=pla[CurrentPlanet];
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
@@ -1431,7 +1440,7 @@ if result and (currentplanet>15) and (currentplanet<=23) then begin
           +'diam:'+sdiam+blank+lsec+tab
           +date+tab;
 end;
-if result and (currentplanet>23) and (currentplanet<=28) then begin
+if (currentplanet>23) and (currentplanet<=28) then begin
   nom:=pla[CurrentPlanet];
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
@@ -1442,7 +1451,7 @@ if result and (currentplanet>23) and (currentplanet<=28) then begin
           +'diam:'+sdiam+blank+lsec+tab
           +date+tab;
 end;
-if result and (currentplanet>28) and (currentplanet<=30) then begin
+if (currentplanet>28) and (currentplanet<=30) then begin
   nom:=pla[CurrentPlanet];
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
@@ -1453,7 +1462,7 @@ if result and (currentplanet>28) and (currentplanet<=30) then begin
           +'diam:'+sdiam+blank+lsec+tab
           +date+tab;
 end;
-if result and (currentplanet>32) and (currentplanet<=MaxPla) then begin
+if (currentplanet>32) and (currentplanet<=MaxPla) then begin
   nom:=pla[CurrentPlanet];
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
