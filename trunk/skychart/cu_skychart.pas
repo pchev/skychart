@@ -547,9 +547,11 @@ cfgsc.CurJDTT:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.
 cfgsc.CurJDUT:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone);              // UT
 cfgsc.jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,0);
 // thing to do when the date change
-if ((FUpdObsList)and(abs(cfgsc.CurJDTT-cfgsc.LastJD)>(1/1440))) or     // one minute limit
+if (not (cfgsc.TrackOn and (cfgsc.TrackType=6) )) and (
+   ((FUpdObsList)and(abs(cfgsc.CurJDTT-cfgsc.LastJD)>(1/1440))) or     // one minute limit
    ((cfgsc.FindType<ftPla)and(abs(cfgsc.CurJDTT-cfgsc.LastJD)>(1/24))) or     // one hour limit
    ((cfgsc.FindType>=ftPla)and(abs(cfgsc.CurJDTT-cfgsc.LastJD)>(30/86400)))   // 30 sec. limit for moving objects
+   )
    then begin
     cfgsc.FindOk:=false;    // last search no longuer valid
     if assigned(FUpdObsListTime) then FUpdObsListTime(self);
