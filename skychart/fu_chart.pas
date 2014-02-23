@@ -761,6 +761,12 @@ if assigned(Fshowinfo) then begin
   {$else}
   if sc.cfgsc.TrackOn then begin
     if ((sc.cfgsc.TrackType>1)and(sc.cfgsc.TrackType<6)) then IdentXY(Image1.Width div 2, Image1.Height div 2)
+    else begin
+      if (not sc.cfgsc.FindOk)and(sc.cfgsc.FindName=sc.cfgsc.TrackName) then begin
+         sc.cfgsc.FindOk:=true;
+         ShowIdentLabel;
+      end;
+    end;
   end
   else begin
     Fshowinfo(sc.cfgsc.msg);
