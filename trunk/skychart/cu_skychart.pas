@@ -547,7 +547,7 @@ cfgsc.CurJDTT:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.
 cfgsc.CurJDUT:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone);              // UT
 cfgsc.jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,0);
 // thing to do when the date change
-if (not (cfgsc.TrackOn and (cfgsc.TrackType=6) )) and (
+if (not (cfgsc.TrackOn and ((cfgsc.TrackType<=1)or(cfgsc.TrackType=6)) )) and (
    ((FUpdObsList)and(abs(cfgsc.CurJDTT-cfgsc.LastJD)>(1/1440))) or     // one minute limit
    ((cfgsc.FindType<ftPla)and(abs(cfgsc.CurJDTT-cfgsc.LastJD)>(1/24))) or     // one hour limit
    ((cfgsc.FindType>=ftPla)and(abs(cfgsc.CurJDTT-cfgsc.LastJD)>(30/86400)))   // 30 sec. limit for moving objects
@@ -714,6 +714,7 @@ var w,h,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,saveaz : double;
     acc,dcc: double;
     se,ce : extended;
     s1,s2,s3: string;
+    nom,ma,date,desc:string;
     TrackAltAz: boolean;
     outr: integer;
 begin
@@ -820,6 +821,7 @@ end;
          cfgsc.decentre:=cfgsc.PlanetLst[0,cfgsc.Trackobj,2];
          cfgsc.TrackRA:=cfgsc.racentre;
          cfgsc.TrackDec:=cfgsc.decentre;
+         Planet.FormatPlanet(0,cfgsc.Trackobj,cfgsc,nom,ma,date,desc);
          end;
      2 : begin
          // comet
@@ -2847,7 +2849,7 @@ begin
    projection(cfgsc.findra,cfgsc.finddec,xx1,yy1,true,cfgsc) ;
    windowxy(xx1,yy1,xx,yy,cfgsc);
    if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-      text:=text+' '+tab+desc+crlf;
+      text:=text+fplanet.eph_method+tab+desc+crlf;
       inc(i);
    end;
    ok:=fplanet.findplanet(x1,y1,x2,y2,true,cfgsc,n,m,d,desc,trunc);
@@ -2861,7 +2863,7 @@ begin
    projection(cfgsc.findra,cfgsc.finddec,xx1,yy1,true,cfgsc) ;
    windowxy(xx1,yy1,xx,yy,cfgsc);
    if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-      text:=text+' '+tab+desc+crlf;
+      text:=text+'MPC'+tab+desc+crlf;
       inc(i);
    end;
    ok:=fplanet.findasteroid(x1,y1,x2,y2,true,cfgsc,n,m,d,desc,trunc);
@@ -2875,7 +2877,7 @@ begin
    projection(cfgsc.findra,cfgsc.finddec,xx1,yy1,true,cfgsc) ;
    windowxy(xx1,yy1,xx,yy,cfgsc);
    if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-      text:=text+' '+tab+desc+crlf;
+      text:=text+'MPC'+tab+desc+crlf;
       inc(i);
    end;
    ok:=fplanet.findcomet(x1,y1,x2,y2,true,cfgsc,n,m,d,desc,trunc);
