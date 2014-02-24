@@ -1159,6 +1159,7 @@ end else begin
    end;
 end;
 buf.SaveToFile(fn);
+buf.Free;
 end;
 
 procedure Tf_chart.PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main; preview:boolean);

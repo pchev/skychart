@@ -60,8 +60,6 @@ TSampClient = class(TObject)
     procedure XmlEndTag(Sender: TObject; TagName: String);
     procedure XmlLoadExternal(Sender : TObject; SystemId, PublicId, NotationId : STRING; VAR Result : TXmlParser);
     procedure SampAsyncTimerTimer(Sender: TObject);
-    procedure StartHTTPServer;
-    procedure StopHTTPServer;
     function doRpcCall(p: string):boolean;
     function SampCall(m,p: string):boolean;overload;
     function SampCall(m,p1,p2: string):boolean;overload;
@@ -73,6 +71,8 @@ TSampClient = class(TObject)
   public
     constructor Create ;
     destructor Destroy; override;
+    procedure StartHTTPServer;
+    procedure StopHTTPServer;
     function SampReadProfile:boolean;
     function SampHubConnect:boolean;
     function SampHubDisconnect:boolean;
@@ -144,6 +144,7 @@ end;
 
 Destructor TSampClient.Destroy;
 begin
+  try
   aHTTP.Free;
   FClients.Free;
   FClientNames.Free;
@@ -151,6 +152,8 @@ begin
   crowlist.Free;
   SampAsyncTimer.Free;
   XmlScanner.Free;
+  except
+  end;
   inherited Destroy;
 end;
 
@@ -163,7 +166,7 @@ end;
 procedure TSampClient.StopHTTPServer;
 begin
  HttpServer.Terminate;
- sleep(500);
+ sleep(1000);
 end;
 
 procedure TSampClient.InitScanner;

@@ -2145,19 +2145,13 @@ planet.free;
 cdcdb.free;
 def_cfgsc.Free;
 cfgs.Free;
-if cfgm.ObsNameList<>nil then begin
-  try
-  for i:=0 to cfgm.ObsNameList.Count-1 do
-      if cfgm.ObsNameList.Objects[i]<>nil then cfgm.ObsNameList.Objects[i].Free;
-  except
-  end;
-  cfgm.ObsNameList.Free;
-end;
+cfgm.ObsNameList.OwnsObjects:=true;  // destroy objects only on exit
 cfgm.Free;
 def_cfgplot.Free;
 cfgp.Free;
 compass.free;
 arrow.free;
+samp.Free;
 SampClientId.Free;
 SampClientName.Free;
 SampClientDesc.Free;
@@ -4482,11 +4476,11 @@ cfgm.ProxyPort:='';
 cfgm.ProxyUser:='';
 cfgm.ProxyPass:='';
 cfgm.AnonPass:='skychart@';
-cfgm.ObsNameList:=TStringList.Create;
+//cfgm.ObsNameList:=TStringList.Create;
 cfgm.ObsNameList.Sorted:=true;
-cfgm.CometUrlList:=TStringList.Create;
+//cfgm.CometUrlList:=TStringList.Create;
 cfgm.CometUrlList.Add(URL_HTTPCometElements);
-cfgm.AsteroidUrlList:=TStringList.Create;
+//cfgm.AsteroidUrlList:=TStringList.Create;
 cfgm.AsteroidUrlList.Add(URL_CDCAsteroidElements);
 cfgm.AsteroidUrlList.Add(URL_HTTPAsteroidElements2);
 cfgm.AsteroidUrlList.Add(URL_HTTPAsteroidElements3);
@@ -7500,13 +7494,12 @@ if TCPDaemon=nil then exit;
 SetLpanel1(rsStopTCPIPSer);
 try
 screen.cursor:=crHourglass;
+TCPDaemon.stoping:=true;
 for i:=1 to Maxwindow do
  if (TCPDaemon.TCPThrd[i]<>nil) then begin
     TCPDaemon.TCPThrd[i].stoping:=true;
  end;
-d:=now+1.16E-5;  // 1 seconde delay to close the thread, sleep to interrupt the thread
-while now<d do begin; application.processmessages; sleep(50); end;
-TCPDaemon.stoping:=true;
+sleep(800);
 screen.cursor:=crDefault;
 except
  screen.cursor:=crDefault;
@@ -8544,7 +8537,8 @@ procedure Tf_main.SAMPStop;
 var fs:TSearchRec;
     i:integer;
 begin
-if (samp<>nil)and samp.Connected then begin
+if (samp<>nil) then begin
+ if samp.Connected then begin
   WriteTrace('stop SAMP client');
   samp.SampHubDisconnect;
   SampConnected:=samp.Connected;
@@ -8564,6 +8558,9 @@ if (samp<>nil)and samp.Connected then begin
       end;
      findclose(fs);
    end;
+ end else begin
+   samp.StopHTTPServer;
+ end;
 end;
 end;
 
