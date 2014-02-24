@@ -1519,6 +1519,7 @@ try
   output.LoadFromStream(M);
   P.Free;
   M.Free;
+  param.Free;
 except
   on E: Exception do begin
     result:=-1;

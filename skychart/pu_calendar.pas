@@ -278,6 +278,22 @@ var
   i: Integer;
 begin
 try
+FreeCoord(Solargrid);
+FreeCoord(Lunargrid);
+FreeCoord(SatGrid);
+FreeCoord(TwilightGrid);
+FreeCoord(SoleilGrid);
+FreeCoord(MercureGrid);
+FreeCoord(VenusGrid);
+FreeCoord(LuneGrid);
+FreeCoord(MarsGrid);
+FreeCoord(JupiterGrid);
+FreeCoord(SaturneGrid);
+FreeCoord(UranusGrid);
+FreeCoord(NeptuneGrid);
+FreeCoord(PlutonGrid);
+FreeCoord(Cometgrid);
+FreeCoord(Asteroidgrid);
 ShowImage.Free;
 config.Free;
 for i := low(PlanetGraphs) to high(PlanetGraphs) do
@@ -2009,25 +2025,25 @@ if (aRow>=0)and(aColumn>=0) then begin
             ShowImage.Init;
             ShowImage.Show;
          end;
-         exit;
-       end;
-       csconfig.TrackOn:=true;     // set tracking to the Sun
-       csconfig.TrackType:=1;
-       csconfig.TrackObj:=10;
-       csconfig.PlanetParalaxe:=true;
-       csconfig.ShowPlanet:=true;
-       if (aColumn=7)or(aColumn=8) then begin         // change location to eclipse maxima
-         d:=strtofloat(copy(cells[7,aRow],1,4));
-         if copy(cells[7,aRow],5,1)='S' then d:=-d;
-         a:=strtofloat(copy(cells[8,aRow],1,5));
-         if copy(cells[8,aRow],6,1)='E' then a:=-a;
-         csconfig.ObsLatitude:=d;
-         csconfig.ObsLongitude:=a;
-         csconfig.ObsName:='Max. Solar Eclipse '+inttostr(csconfig.CurMonth)+'/'+inttostr(csconfig.CurYear);
-       end;
-       if assigned(Fupdchart) then begin
-          BtnReset.visible:=true;
-          Fupdchart(csconfig);
+       end else begin
+         csconfig.TrackOn:=true;     // set tracking to the Sun
+         csconfig.TrackType:=1;
+         csconfig.TrackObj:=10;
+         csconfig.PlanetParalaxe:=true;
+         csconfig.ShowPlanet:=true;
+         if (aColumn=7)or(aColumn=8) then begin         // change location to eclipse maxima
+           d:=strtofloat(copy(cells[7,aRow],1,4));
+           if copy(cells[7,aRow],5,1)='S' then d:=-d;
+           a:=strtofloat(copy(cells[8,aRow],1,5));
+           if copy(cells[8,aRow],6,1)='E' then a:=-a;
+           csconfig.ObsLatitude:=d;
+           csconfig.ObsLongitude:=a;
+           csconfig.ObsName:='Max. Solar Eclipse '+inttostr(csconfig.CurMonth)+'/'+inttostr(csconfig.CurYear);
+         end;
+         if assigned(Fupdchart) then begin
+            BtnReset.visible:=true;
+            Fupdchart(csconfig);
+         end;
        end;
     end else if sender = lunargrid then begin
        csconfig.TrackOn:=true;         // Lunar eclipse
@@ -2483,6 +2499,7 @@ end;
 Combobox1.Items.Assign(list);
 Combobox1.ItemIndex:=0;
 RefreshComet;
+list.Free;
 end;
 
 

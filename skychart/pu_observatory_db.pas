@@ -52,6 +52,7 @@ type
     procedure delcityClick(Sender: TObject);
     procedure downloadcityClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure latdegChange(Sender: TObject);
     procedure LocCodeClick(Sender: TObject);
@@ -251,6 +252,12 @@ countrycode:=TStringList.Create;
 citycode:=TStringList.Create;
 LockChange:=true;
 obslock:=false;
+end;
+
+procedure Tf_observatory_db.FormDestroy(Sender: TObject);
+begin
+  countrycode.Free;
+  citycode.Free;
 end;
 
 procedure Tf_observatory_db.FormShow(Sender: TObject);

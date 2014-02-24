@@ -62,6 +62,7 @@ begin
   {$I grid_images.lrs}
 
   {$ifdef USEHEAPTRC}
+  DeleteFile('/tmp/skychart_heap.trc');
   SetHeapTraceOutput('/tmp/skychart_heap.trc');
   {$endif}
 

@@ -28,7 +28,7 @@ interface
 
 uses gcatunit,
   cu_tz, dynlibs, BGRABitmap,
-  Classes, Controls, FPCanvas, Graphics;
+  Classes, sysutils, Controls, FPCanvas, Graphics;
 
 const
   MaxColor = 35;
@@ -1026,9 +1026,12 @@ type
   end;
 
   TObsDetail = class(TObject)
+  public
     country,tz,horizonfn,horizonpictfn: string;
     lat, lon, alt,pictureangleoffset: double;
     countrytz,showhorizonline,showhorizonpicture: boolean;
+    constructor Create;
+    destructor Destroy; override;
   end;
 
   Tconf_main = class(TObject)    // main form setting
@@ -2393,20 +2396,32 @@ end;
 
 { Tconf_main }
 
+constructor TObsDetail.Create;
+begin
+  inherited Create;
+end;
+
+destructor TObsDetail.Destroy;
+begin
+  inherited Destroy;
+end;
+
 constructor Tconf_main.Create;
 begin
   inherited Create;
+  CometUrlList := TStringList.Create;
+  AsteroidUrlList := TStringList.Create;
+  ObsNameList := TStringList.Create;
 end;
 
 destructor Tconf_main.Destroy;
 begin
   try
-    if CometUrlList <> nil then
-      CometUrlList.Free;
-    if AsteroidUrlList <> nil then
-      AsteroidUrlList.Free;
-  finally
-    inherited Destroy;
+  FreeAndNil(CometUrlList);
+  FreeAndNil(AsteroidUrlList);
+  FreeAndNil(ObsNameList);
+  inherited Destroy;
+  except
   end;
 end;
 
@@ -2523,18 +2538,12 @@ begin
   SocksType := Source.SocksType;
   ConfirmDownload := Source.ConfirmDownload;
   starshape_file := Source.starshape_file;
-  if CometUrlList = nil then
-    CometUrlList := TStringList.Create;
   CometUrlList.Clear;
   for i := 0 to Source.CometUrlList.Count - 1 do
     CometUrlList.Add(Source.CometUrlList.Strings[i]);
-  if AsteroidUrlList = nil then
-    AsteroidUrlList := TStringList.Create;
   AsteroidUrlList.Clear;
   for i := 0 to Source.AsteroidUrlList.Count - 1 do
     AsteroidUrlList.Add(Source.AsteroidUrlList.Strings[i]);
-  if ObsNameList = nil then
-    ObsNameList := TStringList.Create;
   ObsNameList.Clear;
   for i := 0 to Source.ObsNameList.Count - 1 do
     ObsNameList.AddObject(Source.ObsNameList.Strings[i], Source.ObsNameList.Objects[i]);

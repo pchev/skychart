@@ -72,7 +72,7 @@ begin
       Flistenport:=sock.GetLocalSinPort;
       repeat
         if terminated then break;
-        if canread(1000) then
+        if canread(800) then
           begin
             ClientSock:=accept;
             if lastError=0 then begin
