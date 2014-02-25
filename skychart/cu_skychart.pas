@@ -2294,6 +2294,7 @@ var i,j,color : integer;
     x1,y1 : double;
     xx,yy,xp,yp,dx,dy:single;
 begin
+if cfgsc.SimNb>1 then begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw orbit path');
 case trunc(rad2deg*cfgsc.fov) of
   0..1: begin dx:=100*cfgsc.xmax; dy:=100*cfgsc.ymax; end;
@@ -2349,6 +2350,7 @@ if cfgsc.SimObject[12] then for i:=1 to cfgsc.AsteroidNb do
     yp:=yy;
   end;
 result:=true;
+end;
 end;
 
 procedure Tskychart.GetCoord(x,y: integer; var ra,dec,a,h,l,b,le,be:double);
