@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-02-17 19:39+0000\n"
-"PO-Revision-Date: 2014-02-17 19:56+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"PO-Revision-Date: 2014-02-22 03:01+0000\n"
+"Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-17 20:01+0000\n"
-"X-Generator: Launchpad (build 16916)\n"
+"X-Launchpad-Export-Date: 2014-02-26 19:04+0000\n"
+"X-Generator: Launchpad (build 16935)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -234,7 +234,7 @@ msgstr "ฐานยึดมุมเงยมุมทิศ"
 
 #: u_translation.rsaltitude
 msgid "Altitude"
-msgstr "ระดับความสูง"
+msgstr "มุมเงย"
 
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
@@ -278,7 +278,7 @@ msgstr "รูปลักษณ์"
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
-msgstr "ผนวกเข้าในแค็ตตาล็อกที่มีอยู่แล้ว "
+msgstr "ผนวกเข้าในบัญชีที่มีอยู่แล้ว "
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -490,7 +490,7 @@ msgstr "BII"
 
 #: u_translation.rsbinaryindexe
 msgid "Binary indexed catalog"
-msgstr "แค็ตตาล็อกที่มีดัชนีแบบไบนารี"
+msgstr "บัญชีที่มีดัชนีแบบไบนารี"
 
 #: u_translation.rsbitmap
 msgid "Bitmap"
@@ -566,7 +566,7 @@ msgstr "ขนาดดาวสว่าง"
 
 #: u_translation.rsbuildcatalog
 msgid "Build catalog"
-msgstr "สร้างแค็ตตาล็อก"
+msgstr "สร้างบัญชี"
 
 #: u_translation.rsbutneverfain
 msgid "But never fainter than magnitude"
@@ -606,7 +606,7 @@ msgstr "ไม่สามารถคำนวณดาวเทียมได
 
 #: u_translation.rscannotconnec
 msgid "Cannot connect to server. %s"
-msgstr "ไม่สามารถเชื่อมต่อไปที่เซิร์ฟเวอร์ %s"
+msgstr "ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ %s"
 
 #: u_translation.rscannotdraw
 msgid "Cannot draw"
@@ -638,19 +638,19 @@ msgstr ""
 
 #: u_translation.rscatalog
 msgid "Catalog"
-msgstr "แค็ตตาล็อก"
+msgstr "บัญชี"
 
 #: u_translation.rscataloglongn
 msgid "Catalog long name"
-msgstr "ชื่อเต็มของแค็ตตาล็อก"
+msgstr "ชื่อเต็มของบัญชี"
 
 #: u_translation.rscatalogsavai
 msgid "%s Catalogs available"
-msgstr ""
+msgstr "มีบัญชีที่ใช้งานได้ %s บัญชี"
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
-msgstr "ชื่อย่อของแค็ตตาล็อก"
+msgstr "ชื่อย่อของบัญชี"
 
 #: u_translation.rscatalogstrin
 msgid "Catalog string"
@@ -658,7 +658,7 @@ msgstr ""
 
 #: u_translation.rscatalogtype
 msgid "Catalog type"
-msgstr "ชนิดของแค็ตตาล็อก"
+msgstr "ชนิดของบัญชี"
 
 #: u_translation.rsccw
 msgid "%sCCW"
@@ -670,11 +670,11 @@ msgstr "วัตถุท้องฟ้าห้วงลึกของ CdC"
 
 #: u_translation.rscdcnebulaeca
 msgid "CdC deep sky catalogs and settings"
-msgstr "การตั้งค่าและแค็ตตาล็อกวัตถุท้องฟ้าห้วงลึกของ CdC"
+msgstr "การตั้งค่าและบัญชีวัตถุท้องฟ้าห้วงลึกของโปรแกรม CdC"
 
 #: u_translation.rscdcobsoletec
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
-msgstr "การตั้งค่าและแค็ตตาล็อก CdC ที่ล้าสมัย (คุณยังสามารถใช้มันได้)"
+msgstr "การตั้งค่าและบัญชีที่ล้าสมัยในโปรแกรม CdC (คุณยังสามารถใช้มันได้)"
 
 #: u_translation.rscdcstars
 msgid "CdC stars"
@@ -682,7 +682,7 @@ msgstr "ดาวฤกษ์ CdC"
 
 #: u_translation.rscdcstarscata
 msgid "CdC star catalogs and settings"
-msgstr "แค็ตตาล็อกดาวฤกษ์ของ CdC และการตั้งค่า"
+msgstr "บัญชีดาวฤกษ์ของโปรแกรม CdC และการตั้งค่า"
 
 #: u_translation.rscdctranslator
 msgid "Patrick Chevalley, Marc Fokker"
@@ -1014,11 +1014,11 @@ msgstr "คำสั่งแผงควบคุม "
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
-msgstr "แปลงแฟ้มแค็ตตาล็อก %s"
+msgstr "แปลงแฟ้มบัญชี %s"
 
 #: u_translation.rsconvertcatal2
 msgid "Convert catalog files"
-msgstr "แปลงแฟ้มแค็ตตาล็อก"
+msgstr "แปลงแฟ้มบัญชี"
 
 #: u_translation.rscoord
 msgid "Coord."
@@ -1522,11 +1522,11 @@ msgstr "แสดงสี"
 
 #: u_translation.rsdisplayimage
 msgid "Display images of catalogued objects"
-msgstr "แสดงภาพของวัตถุในแค็ตตาล็อก"
+msgstr "แสดงภาพของวัตถุในบัญชี"
 
 #: u_translation.rsdisplaylabel
 msgid "Display labels for all star catalogs"
-msgstr "แสดงชื่อสำหรับทุกแค็ตตาล็อกดาว"
+msgstr "แสดงชื่อสำหรับทุกบัญชีดาว"
 
 #: u_translation.rsdisplaypreci
 msgid "Display Precision"
@@ -1594,7 +1594,7 @@ msgstr "ดาวน์โหลดภาพจากคลัง"
 
 #: u_translation.rsdownloadcata
 msgid "Download catalog"
-msgstr "ดาวน์โหลดแค็ตตาล็อก"
+msgstr "ดาวน์โหลดบัญชี"
 
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
@@ -1606,7 +1606,7 @@ msgstr "ดาวน์โหลดแฟ้ม"
 
 #: u_translation.rsdownloadfull
 msgid "Download full catalog"
-msgstr "ดาวน์โหลดแค็ตตาล็อกฉบับเต็ม"
+msgstr "ดาวน์โหลดบัญชีฉบับเต็ม"
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -1678,7 +1678,7 @@ msgstr "ทิ้งฐานข้อมูล"
 
 #: u_translation.rsdsocatalogpi
 msgid "DSO Catalog pictures"
-msgstr ""
+msgstr "ภาพของบัญชีวัตถุท้องฟ้าห้วงลึก"
 
 #: u_translation.rsdssrealsky
 msgid "DSS RealSky"
@@ -1926,7 +1926,7 @@ msgstr "โหมดผู้เชี่ยวชาญ"
 
 #: u_translation.rsexternalcata
 msgid "External catalog object"
-msgstr "วัตถุจากแค็ตตาล็อกภายนอก"
+msgstr "วัตถุจากบัญชีภายนอก"
 
 #: u_translation.rseyepiece
 msgid "Eyepiece"
@@ -2110,7 +2110,7 @@ msgstr "แบบอักษร"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr "สำหรับแค็ตตาล็อกขนาดใหญ่ ให้เลือกไบนารีเสมอ ส่วนชุดข้อมูลขนาดเล็กที่มีการเปลี่ยนแปลงบ่อย ๆ ให้เลือกข้อความ วิธีนี้จะช่วยให้คุณสามารถแก้ไขแฟ้มและเห็นผลบนแผนที่ในทันที โดยไม่จำเป็นต้องใช้เครื่องมือนี้อีกครั้ง"
+msgstr "สำหรับบัญชีขนาดใหญ่ ให้เลือกไบนารีเสมอ ส่วนชุดข้อมูลขนาดเล็กที่มีการเปลี่ยนแปลงบ่อย ให้เลือกข้อความ วิธีนี้จะช่วยให้คุณสามารถแก้ไขแฟ้มและเห็นผลบนแผนที่ในทันที โดยไม่จำเป็นต้องใช้เครื่องมือนี้อีกครั้ง"
 
 #: u_translation.rsforcecolor
 msgid "Force color"
@@ -2214,7 +2214,7 @@ msgstr "ทั่วไป"
 
 #: u_translation.rsgeneralcatal
 msgid "General catalog options"
-msgstr "ตัวเลือกทั่วไปของแค็ตตาล็อก"
+msgstr "ตัวเลือกทั่วไปของบัญชี"
 
 #: u_translation.rsgeneralsetti
 msgid "General settings"
@@ -2454,7 +2454,7 @@ msgstr "คลังภาพ"
 
 #: u_translation.rsimagedirecto
 msgid "Image directory"
-msgstr "ไดเรกทอรีของภาพ"
+msgstr "ไดเร็กทอรีที่เก็บภาพ"
 
 #: u_translation.rsimagelist
 msgid "Image list"
@@ -2494,7 +2494,7 @@ msgstr "เพิ่มเวลา"
 
 #: u_translation.rsindicatehere
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
-msgstr "อธิบายวิธีการคำนวณค่าที่จำเป็นต้องใช้ จากแค็ตตาล็อกที่เก็บข้อมูลในรูปของแฟ้มตัวอักษร"
+msgstr "อธิบายวิธีการคำนวณค่าที่ต้องใช้จากบัญชีซึ่งเก็บข้อมูลในรูปของแฟ้มตัวอักษร"
 
 #: u_translation.rsindicatehowt
 msgid "Indicate how to recognize the object size unit:"
@@ -2546,7 +2546,7 @@ msgstr "รายละเอียดข้อมูล"
 
 #: u_translation.rsinformationf
 msgid "Information from catalog"
-msgstr "ข้อมูลจากแค็ตตาล็อก"
+msgstr "ข้อมูลจากบัญชี"
 
 #: u_translation.rsinit
 msgid "Init"
@@ -2626,7 +2626,7 @@ msgstr "ต้องการจะใช้จุดเริ่มยุค %s
 
 #: u_translation.rsittaketoolon
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
-msgstr ""
+msgstr "การวาด %s จากบัญชี %s ใช้เวลานานเกินไป กรุณาหลีกเลี่ยงการใช้บัญชีนี้สำหรับขอบเขตการมองเห็นปัจจุบัน"
 
 #: u_translation.rsjd
 msgid "JD:"
@@ -2850,7 +2850,7 @@ msgstr "โหลดจากแฟ้ม"
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."
-msgstr "กำลังโหลดรายชื่อแค็ตตาล็อก กรุณารอ ..."
+msgstr "กำลังโหลดรายชื่อบัญชี กรุณารอ ..."
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"
@@ -2982,7 +2982,7 @@ msgstr "แถบหลัก"
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
-msgstr "เลือกตารางและคอลัมน์ที่ต้องการในแค็ตตาล็อกของคุณ"
+msgstr "เลือกตารางและคอลัมน์ที่ต้องการในบัญชีของคุณ"
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -3346,7 +3346,7 @@ msgstr "ไม่มีสนธยาดาราศาสตร์ในวั
 
 #: u_translation.rsnocatalogsel
 msgid "No catalog selected, or no table from the selected catalog contain coordinates information."
-msgstr "ไม่ได้เลือกแค็ตตาล็อก หรือไม่มีตารางที่บรรจุข้อมูลพิกัดอยู่ในแค็ตตาล็อกที่เลือก"
+msgstr "ไม่ได้เลือกบัญชี หรือไม่มีตารางที่บรรจุข้อมูลพิกัดอยู่ในบัญชีที่เลือก"
 
 #: u_translation.rsnochange
 msgid "No change"
@@ -3430,11 +3430,11 @@ msgstr "ไม่พบ %s"
 
 #: u_translation.rsnotfoundinan
 msgid "%s  Not found in any of the installed catalog indices."
-msgstr "ไม่พบ %s ในดัชนีวัตถุของแค็ตตาล็อกที่ติดตั้ง"
+msgstr "ไม่พบ %s ในดัชนีวัตถุของบัญชีที่ติดตั้ง"
 
 #: u_translation.rsnotfoundmayb
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
-msgstr "%s ไม่พบ!%sอาจไม่ได้ติดตั้งแค็ตตาล็อก หรือตั้งค่าที่อยู่ของแค็ตตาล็อกไม่ถูกต้อง"
+msgstr "%s ไม่พบ!%sอาจไม่ได้ติดตั้งบัญชี หรือตั้งค่าที่อยู่ของบัญชีไม่ถูกต้อง"
 
 #: u_translation.rsnotinitialis
 msgid "Not initialised"
@@ -3498,7 +3498,7 @@ msgstr "ชื่อวัตถุ"
 
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
-msgstr "พบตำแหน่งของวัตถุในดัชนี แต่ไม่พบรายละเอียดในแค็ตตาล็อกใด ๆ ที่เปิดใช้งานอยู่"
+msgstr "พบตำแหน่งของวัตถุในดัชนี แต่ไม่พบรายละเอียดในบัญชีที่เปิดใช้งานอยู่"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
@@ -3546,7 +3546,7 @@ msgstr "ระยะชดเชย"
 
 #: u_translation.rsoffsetlabel
 msgid "Offset label"
-msgstr ""
+msgstr "ระยะชดเชยของป้าย"
 
 #: u_translation.rsok
 msgid "OK"
@@ -3586,19 +3586,19 @@ msgstr "เฉพาะดาวเคราะห์น้อยที่มี
 
 #: u_translation.rsonlyobjectsw
 msgid "Only objects within airmass limits tonight"
-msgstr ""
+msgstr "เฉพาะวัตถุที่อยู่ภายในขีดจำกัดของมวลอากาศสำหรับคืนนี้"
 
 #: u_translation.rsonlyobjectsw2
 msgid "Only objects within airmass limits now"
-msgstr ""
+msgstr "เฉพาะวัตถุที่อยู่ภายในขีดจำกัดของมวลอากาศสำหรับขณะนี้"
 
 #: u_translation.rsonlyobjectsw3
 msgid "Only objects within hour angle limits tonight"
-msgstr ""
+msgstr "เฉพาะวัตถุที่อยู่ในขีดจำกัดของมุมชั่วโมงสำหรับคืนนี้"
 
 #: u_translation.rsonlyobjectsw4
 msgid "Only objects within hour angle limits now"
-msgstr ""
+msgstr "เฉพาะวัตถุที่อยู่ในขีดจำกัดของมุมชั่วโมงสำหรับปัจจุบัน"
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -3662,11 +3662,11 @@ msgstr "ระบบสุริยะด้านนอก"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
-msgstr "ชนิดของแค็ตตาล็อกที่นำออก"
+msgstr "ชนิดของบัญชีที่นำออก"
 
 #: u_translation.rsoutputcatalo2
 msgid "Output catalog options"
-msgstr "ตัวเลือกการส่งออกแค็ตตาล็อก"
+msgstr "ตัวเลือกบัญชีที่นำออก"
 
 #: u_translation.rsoutputdirect
 msgid "Output directory"
@@ -3762,7 +3762,7 @@ msgstr "ภาพถ่าย"
 
 #: u_translation.rspictureangle
 msgid "Picture angle offset"
-msgstr ""
+msgstr "มุมชดเชยของภาพ"
 
 #: u_translation.rspictures
 msgid "Pictures"
@@ -3834,15 +3834,15 @@ msgstr "กรุณาป้อนตัวระบุวัตถุ"
 
 #: u_translation.rspleaseindica
 msgid "Please indicate a catalog short name"
-msgstr "กรุณาระบุชื่อย่อของแค็ตตาล็อก"
+msgstr "กรุณาระบุชื่อย่อของบัญชี"
 
 #: u_translation.rspleaseindica2
 msgid "Please indicate a catalog long name"
-msgstr "กรุณาระบุชื่อเต็มของแค็ตตาล็อก"
+msgstr "กรุณาระบุชื่อเต็มของบัญชี"
 
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
-msgstr "กรุณาระบุไดเร็กทอรีที่จะสร้างแค็ตตาล็อก"
+msgstr "กรุณาระบุไดเร็กทอรีที่จะสร้างบัญชี"
 
 #: u_translation.rspleaseinitth
 msgid "Please init the 90 degree elevation first"
@@ -3934,7 +3934,7 @@ msgstr "กำลังแยกภาพ"
 
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
-msgstr "ชื่อนำหน้ากับชื่อย่อของแค็ตตาล็อก"
+msgstr "ชื่อนำหน้ากับชื่อย่อของบัญชี"
 
 #: u_translation.rsprefixthealt
 msgid "Prefix the alternative names with their label"
@@ -3942,7 +3942,7 @@ msgstr ""
 
 #: u_translation.rsprepareacata
 msgid "Prepare a catalog with CatGen"
-msgstr "เตรียมแค็ตตาล็อกด้วย CatGen"
+msgstr "เตรียมบัญชีด้วย CatGen"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
@@ -4562,7 +4562,7 @@ msgstr "ค้นหน้าด้วยตำแหน่ง"
 
 #: u_translation.rssearchcatalo
 msgid "Search Catalogs"
-msgstr "สืบค้นแค็ตตาล็อก"
+msgstr "สืบค้นบัญชี"
 
 #: u_translation.rssearchfor
 msgid "Search for"
@@ -4606,7 +4606,7 @@ msgstr "เลือกทั้งหมด"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
-msgstr "เลือกแค็ตตาเล็อก"
+msgstr "เลือกบัญชี"
 
 #: u_translation.rsselectcircle
 msgid "Select Circle"
@@ -4646,7 +4646,7 @@ msgstr "เลือกส่วนต่อประสานกล้องโ
 
 #: u_translation.rsselectthetyp
 msgid "Select the type of objects in your catalog"
-msgstr "เลือกชนิดของวัตถุที่อยู่ในแค็ตตาล็อกของคุณ"
+msgstr "เลือกชนิดของวัตถุที่อยู่ในบัญชีของคุณ"
 
 #: u_translation.rssemi
 msgid "Semi"
@@ -5130,7 +5130,7 @@ msgstr "ดาวฤกษ์"
 
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
-msgstr "แค็ตตาล็อกดาวฤกษ์และวัตถุท้องฟ้าเตรียมด้วย "
+msgstr "บัญชีดาวฤกษ์และวัตถุท้องฟ้าถูกสร้างด้วย "
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
@@ -5142,7 +5142,7 @@ msgstr "ตัวกรองดาวฤกษ์"
 
 #: u_translation.rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
-msgstr "ตัวเลือกการเคลื่อนที่เฉพาะ (ถ้ามีในแค็ตตาล็อก)"
+msgstr "ตัวเลือกการเคลื่อนที่เฉพาะ (ถ้ามีในบัญชี)"
 
 #: u_translation.rsstart
 msgid "Start"
@@ -5318,7 +5318,7 @@ msgstr "ข้อความ"
 
 #: u_translation.rstextfilecata
 msgid "Text file catalog"
-msgstr "แค็ตตาล็อกที่เป็นแฟ้มข้อความ"
+msgstr "บัญชีที่เป็นแฟ้มข้อความ"
 
 #: u_translation.rstextsize
 msgid "Text size"
@@ -5326,7 +5326,7 @@ msgstr "ขนาดข้อความ"
 
 #: u_translation.rstheimagedire
 msgid "The image directory contains sub-directories with the same names as the DSO catalogs. Each sub-directory contains FITS files with the names of the catalog objects. These images are used to replace the DSO symbols on the map."
-msgstr ""
+msgstr "ไดเร็กทอรีที่เก็บรูปภาพมีไดเร็กทอรีย่อยที่ใช้ชื่อเดียวกันกับบัญชีวัตถุท้องฟ้าห้วงลึก แต่ละไดเร็กทอรีย่อยมีแฟ้ม FITS ที่ใช้ชื่อตามวัตถุในบัญชี ภาพเหล่านี้จะนำไปแทนที่สัญลักษณ์วัตถุท้องฟ้าบนแผนที่"
 
 #: u_translation.rstheinterface
 msgid "The interface is either not connected or not initialized"
@@ -5338,7 +5338,7 @@ msgstr ""
 
 #: u_translation.rsthenumberofr
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
-msgstr "ไม่ทราบจำนวนระเบียนในแค็ตตาล็อกนี้ การดาวน์โหลดจะถูกจำกัดอยู่ที่ %s ระเบียน"
+msgstr "ไม่ทราบจำนวนระเบียนในบัญชีนี้ การดาวน์โหลดจะถูกจำกัดอยู่ที่ %s ระเบียน"
 
 #: u_translation.rstheobserving
 msgid "The observing list %s was modified."
@@ -5346,7 +5346,7 @@ msgstr "รายการสังเกตการณ์ %s ถูกแก�
 
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
-msgstr "พบ %s ภาพในแค็ตตาล็อก"
+msgstr "พบ %s ภาพ ในบัญชี"
 
 #: u_translation.rsthereareobjec
 msgid "There are %s objects in this field."
@@ -5358,7 +5358,7 @@ msgstr "การกระทำนี้จะเขียนทับเนื
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
-msgstr "แค็ตตาล็อกนี้มี %s ระเบียน ไม่สามารถดาวน์โหลดทั้งหมดได้เนื่องจากจะลดสมรรถภาพของโปรแกรมลง"
+msgstr "บัญชีนี้มี %s ระเบียน ไม่สามารถดาวน์โหลดทั้งหมดได้เนื่องจากจะลดสมรรถภาพของโปรแกรมลง"
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -5658,7 +5658,7 @@ msgstr "ใช้ภาพดวงอาทิตย์ออนไลน์จ
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
-msgstr "ใช้เฉพาะแค็ตตาล็อกที่มาจากกลุ่มเดียว"
+msgstr "ใช้เฉพาะบัญชีที่มาจากกลุ่มเดียว"
 
 #: u_translation.rsuserdefinedo
 msgid "User defined objects"
@@ -5770,7 +5770,7 @@ msgstr "Virtual HandPad สำหรับ Scope.exe "
 
 #: u_translation.rsvirtualobser
 msgid "Virtual Observatory Catalog"
-msgstr "แค็ตตาล็อกหอดูดาวเสมือน"
+msgstr "บัญชีหอดูดาวเสมือน"
 
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
@@ -5786,11 +5786,11 @@ msgstr "โชติมาตรปรากฏ"
 
 #: u_translation.rsvocatalog
 msgid "VO Catalog"
-msgstr "แค็ตตาล็อกหอดูดาวเสมือน"
+msgstr "บัญชีหอดูดาวเสมือน"
 
 #: u_translation.rsvocatalogbro
 msgid "VO Catalog Browser"
-msgstr ""
+msgstr "ตัวเรียกดูบัญชีหอดูดาวเสมือน"
 
 #: u_translation.rsvosampsettin
 msgid "VO SAMP settings"
@@ -5830,11 +5830,11 @@ msgstr "คำเตือน!%sคุณกำลังจะทำลายฐ
 
 #: u_translation.rswarningyouar2
 msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
-msgstr "คำเตือน! คุณกำลังใช้แค็ตตาล็อกหลายแค็ตตาล็อกเป็นแหล่งข้อมูล ซึ่งเสี่ยงต่อการแสดงวัตถุซ้ำซ้อนกัน โปรดแน่ใจว่านี่คือสิ่งที่คุณต้องการ"
+msgstr "คำเตือน! คุณกำลังใช้แหล่งข้อมูลจากหลายบัญชี ซึ่งเสี่ยงต่อการแสดงวัตถุซ้ำซ้อนกัน โปรดแน่ใจว่านี่คือสิ่งที่คุณต้องการ"
 
 #: u_translation.rswarningyouha
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
-msgstr "คำเตือน !%sคุณเลือกที่จะแทรกข้อมูลลงในแค็ตตาล็อกที่มีอยู่แล้ว%sรูปแบบของแค็ตตาล็อกและดัชนีต้องเหมือนกัน มิฉะนั้น แค็ตตาล็อกจะเกิดความเสียหาย%sเป็นความคิดที่ดีหากได้มีการสำรองแฟ้มไว้ก่อนที่จะดำเนินการต่อ%sคุณต้องการดำเนินการต่อหรือไม่?"
+msgstr "คำเตือน !%sคุณเลือกที่จะแทรกข้อมูลลงในบัญชีที่มีอยู่แล้ว%sรูปแบบของบัญชีและดัชนีต้องเหมือนกัน มิฉะนั้น บัญชีจะเกิดความเสียหาย%sเป็นความคิดที่ดีหากได้มีการสำรองแฟ้มไว้ก่อนที่จะดำเนินการต่อ%sคุณต้องการดำเนินการต่อหรือไม่?"
 
 #: u_translation.rswednesday
 msgid "Wed."
