@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-17 19:39+0000\n"
-"PO-Revision-Date: 2014-02-17 20:27+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"PO-Revision-Date: 2014-02-18 16:46+0000\n"
+"Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-17 20:32+0000\n"
-"X-Generator: Launchpad (build 16916)\n"
+"X-Launchpad-Export-Date: 2014-02-26 19:05+0000\n"
+"X-Generator: Launchpad (build 16935)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -3400,7 +3400,7 @@ msgstr "Nord"
 
 #: u_translation.rsnosamphubpro
 msgid "No SAMP hub profile found, no hub is running."
-msgstr ""
+msgstr "Nessun profilo hub SAMP trovato, nessun hub in esecuzione."
 
 #: u_translation.rsnotafitsfile
 msgid "Not a FITS file, SIMPLE = T keyword missing"
@@ -4444,7 +4444,7 @@ msgstr "Conferma SAMP"
 
 #: u_translation.rssamphubprofi
 msgid "SAMP hub profile %s found, but it is missing a required value."
-msgstr ""
+msgstr "Profilo hub SAMP %s trovato, ma manca un valore richiesto."
 
 #: u_translation.rssampisamessa
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
@@ -4452,7 +4452,7 @@ msgstr "SAMP è un protocollo che consente ai software astronomici di comunicare
 
 #: u_translation.rssampsendcoor
 msgid "SAMP send coordinates"
-msgstr ""
+msgstr "SAMP invia coordinate"
 
 #: u_translation.rssampsetup
 msgid "SAMP setup"
@@ -5596,7 +5596,7 @@ msgstr "Sblocca cartina"
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
-msgstr ""
+msgstr "Profilo hub SAMP non supportato. Deve essere il percorso a un file"
 
 #: u_translation.rsupdate1
 msgid "Update"
