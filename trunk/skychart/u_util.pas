@@ -846,8 +846,7 @@ begin
      0: p:=0.5;
      1: p:=0.95;
      2: p:=0.995;
-     3: p:=0.9995;
-     else p:=0.99995;
+     else begin precision:=1; p:=0.995; end;
     end;
     psec:=59+p;
     pmin:=59+psec/60;
@@ -878,11 +877,10 @@ var dd,min1,min,sec,p,pmin,psec: Double;
     d,m,s : string;
 begin
     case precision of
-    -1: p:=0.5;
      0: p:=0.95;
      1: p:=0.995;
      2: p:=0.9995;
-     else p:=0.99995;
+     else begin precision:=1; p:=0.995; end;
     end;
     psec:=59+p;
     pmin:=59+psec/60;
@@ -1019,7 +1017,7 @@ begin
     str(min:2:0,m);
     if abs(min)<10 then m:='0'+trim(m);
     str(sec:2:0,s);
-    if abs(sec)<9.95 then s:='0'+trim(s);
+    if abs(sec)<9.5 then s:='0'+trim(s);
     result := d+'h'+m+'m'+s+'s';
 end;
 
@@ -1069,7 +1067,7 @@ begin
     str(min:2:0,m);
     if abs(min)<10 then m:='0'+trim(m);
     str(sec:2:0,s);
-    if abs(sec)<9.95 then s:='0'+trim(s);
+    if abs(sec)<9.5 then s:='0'+trim(s);
     result := d+'h'+m+'m'+s+'s';
 end;
 

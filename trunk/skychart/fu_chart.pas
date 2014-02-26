@@ -2844,6 +2844,7 @@ l:=pos2(tab,desc,p+1);
 otype:=trim(copy(desc,p+1,l-p-1));
 if otype='*' then precision:=2
 else if otype='As' then precision:=2
+else if otype='S*' then precision:=1
 else if otype='Cm' then precision:=1
 else if otype='P' then precision:=1
 else if otype='Ps' then precision:=1
@@ -3113,7 +3114,7 @@ if (sc.catalog.cfgshr.Equinoxtype=2) then begin
   Eq2Hz(cst-ra,dec,ag,hg,sc.cfgsc,0) ;
   if sc.catalog.cfgshr.AzNorth then a:=Rmod(a+pi,pi2);
   txt:=txt+html_b+rsLocalSideral+':'+htms_b+artostr3(rmod(rad2deg*cst/15+24,24))+html_br;
-  txt:=txt+html_b+rsHourAngle+':'+htms_b+ARptoStr(rmod(rad2deg*(cst-ra)/15+24,24),-1)+html_br;
+  txt:=txt+html_b+rsHourAngle+':'+htms_b+ARToStr3(rmod(rad2deg*(cst-ra)/15+24,24))+html_br;
   txt:=txt+html_b+rsAzimuth+':'+htms_b+deptostr(rad2deg*a,1)+html_br;
   if h>=0 then txt:=txt+html_b+rsAltitude+':'+htms_b+deptostr(rad2deg*h,1)+html_br; // show refracted altitude only if above the horizon
   txt:=txt+html_b+rsGeometricAlt+':'+htms_b+deptostr(rad2deg*hg, 1)+html_br;
