@@ -2789,7 +2789,7 @@ var desc,buf,buf2,otype,oname,txt,s1,s2,s3: UTF8String;
     i,p,l,y,m,d,precision : integer;
     isStar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
     ApparentValid:boolean;
-    ra,dec,q,a,h,ag,hg,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
+    ra,dec,q,a,h,ag,airm,hg,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
     ra2000,de2000,radate,dedate,raapp,deapp,cjd,cjd0,cst,err: double;
 
 function Bold(s:string):string;
@@ -3102,9 +3102,9 @@ if (sc.catalog.cfgshr.Equinoxtype=2) then begin
 
   err:=DTminusUTError(y,m,d,sc.cfgsc);
   if abs(err)>60 then begin
-    txt:=txt+html_b+rsDeltaTError+':'+htms_b+blank+plusminus+ARmtoStr(err/3600)+html_br;
+    txt:=txt+html_b+rsDeltaTError+': '+htms_b+blank+plusminus+ARmtoStr(err/3600)+html_br;
   end else if abs(err)>10 then begin
-    txt:=txt+html_b+rsDeltaTError+':'+htms_b+blank+plusminus+inttostr(round(err))+blank+rsSec2+html_br;
+    txt:=txt+html_b+rsDeltaTError+': '+htms_b+blank+plusminus+inttostr(round(err))+blank+rsSec2+html_br;
   end;
 
   ra:=sc.cfgsc.FindRA;
@@ -3113,11 +3113,15 @@ if (sc.catalog.cfgshr.Equinoxtype=2) then begin
   Eq2Hz(cst-ra,dec,a,h,sc.cfgsc,2) ;
   Eq2Hz(cst-ra,dec,ag,hg,sc.cfgsc,0) ;
   if sc.catalog.cfgshr.AzNorth then a:=Rmod(a+pi,pi2);
-  txt:=txt+html_b+rsLocalSideral+':'+htms_b+artostr3(rmod(rad2deg*cst/15+24,24))+html_br;
-  txt:=txt+html_b+rsHourAngle+':'+htms_b+ARToStr3(rmod(rad2deg*(cst-ra)/15+24,24))+html_br;
-  txt:=txt+html_b+rsAzimuth+':'+htms_b+deptostr(rad2deg*a,1)+html_br;
-  if h>=0 then txt:=txt+html_b+rsAltitude+':'+htms_b+deptostr(rad2deg*h,1)+html_br; // show refracted altitude only if above the horizon
-  txt:=txt+html_b+rsGeometricAlt+':'+htms_b+deptostr(rad2deg*hg, 1)+html_br;
+  txt:=txt+html_b+rsLocalSideral+': '+htms_b+artostr3(rmod(rad2deg*cst/15+24,24))+html_br;
+  txt:=txt+html_b+rsHourAngle+': '+htms_b+ARToStr3(rmod(rad2deg*(cst-ra)/15+24,24))+html_br;
+  txt:=txt+html_b+rsAzimuth+': '+htms_b+deptostr(rad2deg*a,1)+html_br;
+  if h>=0 then txt:=txt+html_b+rsAltitude+': '+htms_b+deptostr(rad2deg*h,1)+html_br; // show refracted altitude only if above the horizon
+  txt:=txt+html_b+rsGeometricAlt+': '+htms_b+deptostr(rad2deg*hg, 1)+html_br;
+  if h>0 then begin
+    airm:=1/sin(h+deg2rad*(244/(165+47*(rad2deg*h)**1.1))); // Pickering, "The Southern Limits of the Ancient Star Catalog" DIO 2002
+    txt:=txt+html_b+rsAirmass+': '+htms_b+FormatFloat(f1,airm)+html_br;
+  end;
   end;
   if (not isArtSat) then begin
     // rise/set time
