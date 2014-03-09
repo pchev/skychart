@@ -738,9 +738,96 @@ begin
   ini:=tinifile.create(FConfig);
   if ini.SectionExists('lx200') then PageControl1.ActivePage:=TabSheet1
                                 else PageControl1.ActivePage:=TabSheet2;
+  // get configured model
   nom:= ini.readstring('lx200','name','LX200');
   cbo_type.text:=nom;
   cbo_type.ItemIndex:=ini.readinteger('lx200','model',0);
+
+  // set default based on model
+  if cbo_type.text='LX200' then begin
+    PortSpeedbox.itemindex:=5;
+    ShowAltAz.checked:=false;
+    ShowAltAz.enabled:=true;
+    GroupBox1.visible:=true;
+    RadioGroup2.visible:=true;
+    GroupBox5.visible:=true;
+    GroupBox7.visible:=true;
+    if LX200_UseHPP then GroupBox6.visible:=true;
+    SpeedButton8.visible:=true;
+    SpeedButton9.visible:=true;
+    Radiogroup1.Items.Clear;
+    Radiogroup1.Items.Add(rsSlew);
+    Radiogroup1.Items.Add(rsFind);
+    Radiogroup1.Items.Add(rsCentering);
+    Radiogroup1.Items.Add(rsGuide);
+    Radiogroup1.ItemIndex:=1;
+  // Renato Bonomini:
+  end else if cbo_type.text='Scope.exe' then begin
+    PortSpeedbox.itemindex:=5;
+    ShowAltAz.checked:=true;
+    ShowAltAz.enabled:=true;
+    GroupBox1.visible:=true;
+    RadioGroup2.visible:=true;
+    GroupBox5.visible:=true;
+    GroupBox7.visible:=false;
+    // if LX200_UseHPP then GroupBox6.visible:=true; //
+    Radiogroup1.Items.Clear;
+    Radiogroup1.Items.Add(rsSlew);
+    Radiogroup1.Items.Add(rsFind);
+    Radiogroup1.Items.Add(rsCentering);
+    Radiogroup1.Items.Add(rsGuide);
+    Radiogroup1.ItemIndex:=1;
+    VirtHP.TabVisible:=True;
+    Adv.TabVisible:=True;
+    FRAngle.Visible:=True;
+    FRQuery.Visible:=True;
+    FRLabel.Visible:=True;
+    SpeedButton8.visible:=true;
+    SpeedButton9.visible:=true;
+  end else if cbo_type.text='AutoStar' then begin
+    PortSpeedbox.itemindex:=5;
+    ShowAltAz.checked:=false;
+    ShowAltAz.enabled:=true;
+    GroupBox1.visible:=true;
+    RadioGroup2.visible:=true;
+    GroupBox5.visible:=true;
+    GroupBox7.visible:=false;
+    GroupBox6.visible:=false;
+    LX200_UseHPP:=false;
+    SpeedButton8.visible:=true;
+    SpeedButton9.visible:=true;
+    Radiogroup1.Items.Clear;
+    Radiogroup1.Items.Add(rsHighest);
+    Radiogroup1.Items.Add(rsMiddle);
+    Radiogroup1.Items.Add(rsSlowest);
+    Radiogroup1.ItemIndex:=1;
+  end else if cbo_type.text='Magellan-II' then begin
+    PortSpeedbox.itemindex:=1;
+    ShowAltAz.checked:=false;
+    ShowAltAz.enabled:=false;
+    GroupBox1.visible:=false;
+    RadioGroup2.visible:=false;
+    GroupBox5.visible:=false;
+    GroupBox7.visible:=false;
+    GroupBox6.visible:=false;
+    LX200_UseHPP:=false;
+    SpeedButton8.visible:=false;
+    SpeedButton9.visible:=false;
+  end else if cbo_type.text='Magellan-I' then begin
+    PortSpeedbox.itemindex:=2;
+    ShowAltAz.checked:=false;
+    ShowAltAz.enabled:=false;
+    GroupBox1.visible:=false;
+    RadioGroup2.visible:=false;
+    GroupBox5.visible:=false;
+    GroupBox7.visible:=false;
+    GroupBox6.visible:=false;
+    LX200_UseHPP:=false;
+    SpeedButton8.visible:=false;
+    SpeedButton9.visible:=false;
+  end;
+
+  // Get configured values
   ReadIntBox.text:=ini.readstring('lx200','read_interval','1000');
   cbo_port.text:=ini.readstring('lx200','comport',DefaultSerialPort);
   PortSpeedbox.text:=ini.readstring('lx200','baud','9600');
@@ -771,88 +858,6 @@ begin
 
 checkbox2.checked:=av;
 
-if cbo_type.text='LX200' then begin
-  PortSpeedbox.itemindex:=5;
-  ShowAltAz.checked:=false;
-  ShowAltAz.enabled:=true;
-  GroupBox1.visible:=true;
-  RadioGroup2.visible:=true;
-  GroupBox5.visible:=true;
-  GroupBox7.visible:=true;
-  if LX200_UseHPP then GroupBox6.visible:=true;
-  SpeedButton8.visible:=true;
-  SpeedButton9.visible:=true;
-  Radiogroup1.Items.Clear;
-  Radiogroup1.Items.Add(rsSlew);
-  Radiogroup1.Items.Add(rsFind);
-  Radiogroup1.Items.Add(rsCentering);
-  Radiogroup1.Items.Add(rsGuide);
-  Radiogroup1.ItemIndex:=1;
-// Renato Bonomini:
-end else if cbo_type.text='Scope.exe' then begin
-  PortSpeedbox.itemindex:=5;
-  ShowAltAz.checked:=true;
-  ShowAltAz.enabled:=true;
-  GroupBox1.visible:=true;
-  RadioGroup2.visible:=true;
-  GroupBox5.visible:=true;
-  GroupBox7.visible:=false;
-  // if LX200_UseHPP then GroupBox6.visible:=true; //
-  Radiogroup1.Items.Clear;
-  Radiogroup1.Items.Add(rsSlew);
-  Radiogroup1.Items.Add(rsFind);
-  Radiogroup1.Items.Add(rsCentering);
-  Radiogroup1.Items.Add(rsGuide);
-  Radiogroup1.ItemIndex:=1;
-  VirtHP.TabVisible:=True;
-  Adv.TabVisible:=True;
-  FRAngle.Visible:=True;
-  FRQuery.Visible:=True;
-  FRLabel.Visible:=True;
-  SpeedButton8.visible:=true;
-  SpeedButton9.visible:=true;
-end else if cbo_type.text='AutoStar' then begin
-  PortSpeedbox.itemindex:=5;
-  ShowAltAz.checked:=false;
-  ShowAltAz.enabled:=true;
-  GroupBox1.visible:=true;
-  RadioGroup2.visible:=true;
-  GroupBox5.visible:=true;
-  GroupBox7.visible:=false;
-  GroupBox6.visible:=false;
-  LX200_UseHPP:=false;
-  SpeedButton8.visible:=true;
-  SpeedButton9.visible:=true;
-  Radiogroup1.Items.Clear;
-  Radiogroup1.Items.Add(rsHighest);
-  Radiogroup1.Items.Add(rsMiddle);
-  Radiogroup1.Items.Add(rsSlowest);
-  Radiogroup1.ItemIndex:=1;
-end else if cbo_type.text='Magellan-II' then begin
-  PortSpeedbox.itemindex:=1;
-  ShowAltAz.checked:=false;
-  ShowAltAz.enabled:=false;
-  GroupBox1.visible:=false;
-  RadioGroup2.visible:=false;
-  GroupBox5.visible:=false;
-  GroupBox7.visible:=false;
-  GroupBox6.visible:=false;
-  LX200_UseHPP:=false;
-  SpeedButton8.visible:=false;
-  SpeedButton9.visible:=false;
-end else if cbo_type.text='Magellan-I' then begin
-  PortSpeedbox.itemindex:=2;
-  ShowAltAz.checked:=false;
-  ShowAltAz.enabled:=false;
-  GroupBox1.visible:=false;
-  RadioGroup2.visible:=false;
-  GroupBox5.visible:=false;
-  GroupBox7.visible:=false;
-  GroupBox6.visible:=false;
-  LX200_UseHPP:=false;
-  SpeedButton8.visible:=false;
-  SpeedButton9.visible:=false;
-end;
 initial:=false;
 end;
 
