@@ -1180,10 +1180,12 @@ if cfgsc.ephvalid then  for i:=1 to MaxPla do begin
      if i=31 then continue;
      if i=32 then continue;
      if (i=9) and (not cfgsc.ShowPluto) then continue;
-     if (uppercase(trim(planetname))=uppercase(trim(pla[i]))) then begin
+     if (uppercase(trim(planetname))=uppercase(trim(pla[i]))) or
+        (uppercase(trim(planetname))=uppercase(trim(epla[i])))
+        then begin
          FindNumPla(i,ra,de,result,cfgsc);
          break;
-     end;
+        end;
    end;
 end;
 
