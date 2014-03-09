@@ -404,7 +404,7 @@ var
   L: LongInt;
 begin
   L := StrToIntDef(Text,0);
-  if ((FMinValue<>0) or (FMaxValue<>0)) and (L > FMaxValue) or (L < FMinValue) then
+  if ((FMinValue<>0) or (FMaxValue<>0)) and ((L > FMaxValue) or (L < FMinValue)) then
   begin
     if L>FMaxValue then Text:=inttostr(FMaxValue);
     if L<FMinValue then Text:=inttostr(FMinValue);
@@ -452,7 +452,7 @@ var
   L: double;
 begin
   L := GetAsDouble;
-  if ((FMinValue<>0) or (FMaxValue<>0)) and (L > FMaxValue) or (L < FMinValue) then
+  if ((FMinValue<>0) or (FMaxValue<>0)) and ((L > FMaxValue) or (L < FMinValue)) then
   begin
     Beep;
     SelectAll;
