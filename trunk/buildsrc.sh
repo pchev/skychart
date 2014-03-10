@@ -12,7 +12,7 @@ builddir=/tmp/skychart-src  # Be sure this is set to a non existent directory, i
 wd=`pwd`
 
 # Get revision number
-svnrev=$(LC_ALL=C svn info $repo/$pkg |grep "Last Changed Rev:" | sed 's/Last Changed Rev: //')
+svnrev=$(LC_ALL=C svn --non-interactive info $wd |grep "Last Changed Rev:" | sed 's/Last Changed Rev: //')
 verdir=skychart-$version-$svnrev-src
 
 mkdir -p $builddir
