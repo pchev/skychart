@@ -29,8 +29,13 @@ EOF
 
 # download doc
 cd $verdir/tools
-./refresh_wiki_doc.sh 
-cd -
+if [ -f /home/transfert/daily_build/doc_skychart.tgz ]; then
+  cd doc
+  tar xzf /home/transfert/daily_build/doc_skychart.tgz
+else
+  ./refresh_wiki_doc.sh 
+fi
+cd $builddir
 
 # download jpleph
 cd $verdir/BaseData
