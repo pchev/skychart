@@ -1230,6 +1230,8 @@ var
   SampConnected: boolean;
   SampClientId,SampClientName,SampClientDesc: Tstringlist;
   SampClientCoordpointAtsky,SampClientImageLoadFits,SampClientTableLoadVotable: Tstringlist;
+  Xplanetrender: boolean;
+  Xplanetversion: string;
 {$ifdef darwin}
   OpenFileCMD: string = 'open';
 {$else}
