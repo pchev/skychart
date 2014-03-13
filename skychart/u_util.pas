@@ -123,6 +123,7 @@ function ExtractSubPath(basepath, path: string):string;
 function RoundInt(x:double): integer;
 function GetThreadCount: integer;
 function capitalize(txt:string):string;
+function isANSIstr(str:string):boolean;
 function GetXPlanetVersion: string;
 Procedure GetXplanet(Xplanetversion,originfile,searchdir,bsize,outfile : string; ipla:integer; pa,grsl,jd : double; var irc:integer; var r:TStringList);
 {$ifdef unix}
@@ -200,12 +201,13 @@ end;
 function GetSerialPorts(var c: TComboBox):boolean;
 var p: TStringList;
     i: integer;
-    fs : TSearchRec;
     buf: string;
     {$ifdef mswindows}
     reg: TRegistry;
     l: TStringList;
     n: integer;
+    {$else}
+    fs : TSearchRec;
     {$endif}
 begin
 p:=TStringList.Create;
@@ -2349,7 +2351,9 @@ end;
 Procedure GetXplanet(Xplanetversion,originfile,searchdir,bsize,outfile : string; ipla:integer; pa,grsl,jd : double; var irc:integer; var r:TStringList);
 var
   p:TProcess;
-  buf:string;
+  {$ifdef mswindows}
+  shorttmp: array[0..1024] of char;
+  {$endif}
 begin
  p:=TProcess.Create(nil);
  {$ifdef linux}
@@ -2362,6 +2366,12 @@ begin
  {$endif}
  {$ifdef mswindows}
    p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet.exe';
+   if not isANSItmpdir then begin
+     GetShortPathName(pchar(TempDir),@shorttmp,1024);
+     outfile:=slash(shorttmp)+extractfilename(outfile);
+     if (originfile<>'') and FileExists(originfile) then
+         originfile:=slash(shorttmp)+extractfilename(originfile);
+   end;
  {$endif}
  p.Parameters.Add('-origin');
  p.Parameters.Add('earth');
@@ -2401,7 +2411,6 @@ begin
  end;
  DeleteFileUTF8(SysToUTF8(outfile));
  p.Options:=[poWaitOnExit,poUsePipes,poNoConsole, poStdErrToOutput];
- buf:='';
  try
  p.Execute;
  if (p.ExitStatus<>0)and(de_type>0)and(Xplanetversion>='1.3.0') then begin
@@ -2414,6 +2423,17 @@ begin
  r.LoadFromStream(p.Output);
  irc:=p.ExitStatus;
  p.free;
+end;
+
+function isANSIstr(str:string):boolean;
+var c : char;
+begin
+result:=true;
+for c in str do
+   if ord(c)>127 then begin
+      result:=false;
+      break;
+   end;
 end;
 
 end.
