@@ -543,7 +543,8 @@ end;
 
 Procedure Tf_planetinfo.PlotPlanetImage(bmp:TBGRABitmap; ipla:integer);
 var searchdir,sz,buf : string;
-    s,j: integer;
+    s,i,j: integer;
+    gw: double;
     b: TBGRABitmap;
     p:TProcess;
     r:TStringList;
@@ -552,67 +553,23 @@ begin
   s:=min(s,600);
   sz:=inttostr(s)+'x'+inttostr(s);
   searchdir:=slash(appdir)+slash('data')+'planet';
-  p:=TProcess.Create(nil);
-  {$ifdef linux}
-    p.Environment.Add('LC_ALL=C');
-    p.Executable:='xplanet';
-  {$endif}
-  {$ifdef darwin}
-    p.Environment.Add('LC_ALL=C');
-    p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet';
-  {$endif}
-  {$ifdef mswindows}
-    p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet.exe';
-  {$endif}
-  p.Parameters.Add('-origin');
-  p.Parameters.Add('earth');
-  p.Parameters.Add('-body');
-  p.Parameters.Add(LowerCase(trim(epla[ipla])));
-  p.Parameters.Add('-rotate');
-  p.Parameters.Add('0');
-  p.Parameters.Add('-light_time');
-  p.Parameters.Add('-tt');
-  p.Parameters.Add('-num_times');
-  p.Parameters.Add('1');
-  p.Parameters.Add('-jd');
-  p.Parameters.Add(formatfloat(f5,config.CurJDTT));
-  p.Parameters.Add('-searchdir');
-  p.Parameters.Add(searchdir);
-  p.Parameters.Add('-config');
-  p.Parameters.Add('xplanet.config');
-  p.Parameters.Add('-verbosity');
-  p.Parameters.Add('-1');
-  p.Parameters.Add('-radius');
-  p.Parameters.Add('50');
-  p.Parameters.Add('-geometry');
-  p.Parameters.Add(sz);
-  p.Parameters.Add('-output');
-  p.Parameters.Add(slash(Tempdir)+'info2.png');
-  if ipla=5 then begin
-     p.Parameters.Add('-grs_longitude');
-     p.Parameters.Add(formatfloat(f1,planet.JupGRS(config.GRSlongitude,config.GRSdrift,config.GRSjd,config.CurJDTT)));
-  end;
-  p.Options:=[poWaitOnExit,poUsePipes,poNoConsole, poStdErrToOutput];
-  DeleteFile(slash(Tempdir)+'info2.png');
-  try
-  p.Execute;
-  except
-  end;
-  if (p.ExitStatus=0)and(FileExists(slash(Tempdir)+'info2.png')) then begin
+  r:=TStringList.Create;
+  if ipla=5 then gw:=planet.JupGRS(config.GRSlongitude,config.GRSdrift,config.GRSjd,config.CurJDTT)
+            else gw:=0;
+  GetXplanet(Xplanetversion,'',searchdir,sz,slash(Tempdir)+'info2.png',ipla,0,gw,config.CurJDTT,i,r );
+  if (i=0)and(FileExists(slash(Tempdir)+'info2.png')) then begin
     b:=TBGRABitmap.Create(slash(Tempdir)+'info2.png');
     bmp.PutImage(xmin+((xmax-xmin-s)div 2),ymin+((ymax-ymin-s)div 2),b,dmSet);
     b.Free;
   end else begin // something go wrong with xplanet
-     r:=TStringList.Create;
-     r.LoadFromStream(p.Output);
      buf:='';
      if r.Count>0 then for j:=0 to r.Count-1 do begin
       buf:=buf+r[j]+crlf;
      end;
-     r.free;
      writetrace('Return code '+inttostr(p.ExitStatus)+' from xplanet');
      writetrace(buf);
  end;
+ r.Free;
 end;
 
 Procedure Tf_planetinfo.PlotOrbit1(bmp:TBGRABitmap);

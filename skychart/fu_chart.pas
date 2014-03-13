@@ -2790,7 +2790,8 @@ var desc,buf,buf2,otype,oname,txt,s1,s2,s3: UTF8String;
     isStar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
     ApparentValid:boolean;
     ra,dec,q,a,h,ag,airm,hg,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
-    ra2000,de2000,radate,dedate,raapp,deapp,cjd,cjd0,cst,err: double;
+    ra2000,de2000,radate,dedate,raapp,deapp,cjd,cjd0,cst,err,gw: double;
+    r:TStringList;
 
 function Bold(s:string):string;
 var k:integer;
@@ -2900,28 +2901,13 @@ for i:=1 to 11 do if pla[i]=oname then ipla:=i;
 if not cmain.SimpleDetail then begin
 if (otype='P')or((otype='Ps')and(oname=pla[11])) then begin
   if ipla>0 then begin
-    { TODO : make a global function with almost the same code in cu_plot }
-    searchdir:='"'+slash(appdir)+slash('data')+'planet"';
-   {$ifdef linux}
-      cmd:='export LC_ALL=C; xplanet';
-   {$endif}
-   {$ifdef darwin}
-      cmd:='export LC_ALL=C; '+'"'+slash(appdir)+slash(xplanet_dir)+'xplanet"';
-   {$endif}
-   {$ifdef mswindows}
-  //    chdir(xplanet_dir);
-      cmd:='"'+slash(appdir)+slash(xplanet_dir)+'xplanet.exe"';
-   {$endif}
-   cmd:=cmd+' -target '+epla[ipla]+' -origin earth -rotate 0'+
-        ' -light_time -tt -num_times 1 -jd '+ formatfloat(f5,cjd) +
-        ' -searchdir '+searchdir+
-        ' -config xplanet.config -verbosity -1'+
-        ' -radius 50'+
-        ' -geometry 200x200 -output "'+slash(Tempdir)+'info.png'+'"';
-   if ipla=5 then cmd:=cmd+' -grs_longitude '+formatfloat(f1,sc.planet.JupGRS(sc.cfgsc.GRSlongitude,sc.cfgsc.GRSdrift,sc.cfgsc.GRSjd,cjd));
-   DeleteFile(slash(Tempdir)+'info.png');
-   i:=exec(cmd);
-   if i=0 then txt:=txt+'<img src="'+slash(TempDir)+'info.png" alt="'+oname+'" border="0" width="200" height="200">'+html_br;
+    searchdir:=slash(appdir)+slash('data')+'planet';
+    r:=TStringList.Create;
+    if ipla=5 then gw:=sc.planet.JupGRS(sc.cfgsc.GRSlongitude,sc.cfgsc.GRSdrift,sc.cfgsc.GRSjd,cjd)
+              else gw:=0;
+    GetXplanet(Xplanetversion,'',searchdir,'200x200',slash(Tempdir)+'info.png',ipla,0,gw,cjd,i,r );
+    r.Free;
+    if i=0 then txt:=txt+'<img src="'+slash(TempDir)+'info.png" alt="'+oname+'" border="0" width="200" height="200">'+html_br;
  end;
 end;
 // Sun picture

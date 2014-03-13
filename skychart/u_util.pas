@@ -123,6 +123,8 @@ function ExtractSubPath(basepath, path: string):string;
 function RoundInt(x:double): integer;
 function GetThreadCount: integer;
 function capitalize(txt:string):string;
+function GetXPlanetVersion: string;
+Procedure GetXplanet(Xplanetversion,originfile,searchdir,bsize,outfile : string; ipla:integer; pa,grsl,jd : double; var irc:integer; var r:TStringList);
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -2306,6 +2308,112 @@ for i:=1 to length(txt) do begin
   result:=result+c;
   up:=(c=' ')or(c='-');
 end;
+end;
+
+function GetXPlanetVersion: string;
+var p:TProcess;
+    r:TStringList;
+    buf:string;
+begin
+ result:='0.0.0';
+ p:=TProcess.Create(nil);
+ r:=TStringList.Create;
+ try
+{$ifdef linux}
+   p.Environment.Add('LC_ALL=C');
+   p.Executable:='xplanet';
+{$endif}
+{$ifdef darwin}
+   p.Environment.Add('LC_ALL=C');
+   p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet';
+{$endif}
+{$ifdef mswindows}
+   p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet.exe';
+{$endif}
+  p.Parameters.Add('--version');
+  p.Options:=[poWaitOnExit,poUsePipes,poNoConsole, poStdErrToOutput];
+  p.Execute;
+  if p.ExitStatus=0 then begin
+    r.LoadFromStream(p.Output);
+    if r.Count>0 then begin
+      buf:=r[0];
+      result:=trim(words(buf,'',2,1));
+    end;
+  end;
+  finally
+   p.free;
+   r.Free;
+  end;
+end;
+
+Procedure GetXplanet(Xplanetversion,originfile,searchdir,bsize,outfile : string; ipla:integer; pa,grsl,jd : double; var irc:integer; var r:TStringList);
+var
+  p:TProcess;
+  buf:string;
+begin
+ p:=TProcess.Create(nil);
+ {$ifdef linux}
+   p.Environment.Add('LC_ALL=C');
+   p.Executable:='xplanet';
+ {$endif}
+ {$ifdef darwin}
+   p.Environment.Add('LC_ALL=C');
+   p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet';
+ {$endif}
+ {$ifdef mswindows}
+   p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet.exe';
+ {$endif}
+ p.Parameters.Add('-origin');
+ p.Parameters.Add('earth');
+ if (originfile<>'') and FileExists(originfile) then begin
+   p.Parameters.Add('-origin_file');
+   p.Parameters.Add(originfile);
+ end;
+ p.Parameters.Add('-body');
+ p.Parameters.Add(LowerCase(trim(epla[ipla])));
+ p.Parameters.Add('-rotate');
+ p.Parameters.Add(formatfloat(f1,pa));
+ p.Parameters.Add('-light_time');
+ p.Parameters.Add('-tt');
+ p.Parameters.Add('-num_times');
+ p.Parameters.Add('1');
+ p.Parameters.Add('-jd');
+ p.Parameters.Add(formatfloat(f5,jd));
+ p.Parameters.Add('-searchdir');
+ p.Parameters.Add(searchdir);
+ p.Parameters.Add('-config');
+ p.Parameters.Add('xplanet.config');
+ p.Parameters.Add('-verbosity');
+ p.Parameters.Add('-1');
+ p.Parameters.Add('-radius');
+ p.Parameters.Add('50');
+ p.Parameters.Add('-geometry');
+ p.Parameters.Add(bsize);
+ p.Parameters.Add('-output');
+ p.Parameters.Add(outfile);
+ if ipla=5 then begin
+    p.Parameters.Add('-grs_longitude');
+    p.Parameters.Add(formatfloat(f1,grsl));
+ end;
+ if (de_type>0)and(Xplanetversion>='1.3.0') then begin
+     p.Parameters.Add('-ephemeris_file');
+     p.Parameters.Add(de_filename);
+ end;
+ DeleteFileUTF8(SysToUTF8(outfile));
+ p.Options:=[poWaitOnExit,poUsePipes,poNoConsole, poStdErrToOutput];
+ buf:='';
+ try
+ p.Execute;
+ if (p.ExitStatus<>0)and(de_type>0)and(Xplanetversion>='1.3.0') then begin
+   p.Parameters.Delete(p.Parameters.Count-1);
+   p.Parameters.Delete(p.Parameters.Count-1);
+   p.Execute;
+ end;
+ except
+ end;
+ r.LoadFromStream(p.Output);
+ irc:=p.ExitStatus;
+ p.free;
 end;
 
 end.

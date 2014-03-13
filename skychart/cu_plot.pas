@@ -62,8 +62,6 @@ type
      XplanetImg: TPicture;
      PlanetBMPjd,PlanetBMProt : double;
      PlanetBMPpla : integer;
-     Xplanetrender: boolean;
-     Xplanetversion: string;
      OldGRSlong: double;
      TransparentColor : TFPColor;
      bmpreader:TFPReaderBMP;
@@ -422,42 +420,10 @@ end;
 end;
 
 procedure TSplot.InitXPlanetRender;
-var p:TProcess;
-    r:TStringList;
-    buf:string;
 begin
  OldGRSlong:=-9999;
- Xplanetrender:=false;
- Xplanetversion:='0.0.0';
- p:=TProcess.Create(nil);
- r:=TStringList.Create;
- try
-{$ifdef linux}
-   p.Environment.Add('LC_ALL=C');
-   p.Executable:='xplanet';
-{$endif}
-{$ifdef darwin}
-   p.Environment.Add('LC_ALL=C');
-   p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet';
-{$endif}
-{$ifdef mswindows}
-   p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet.exe';
-{$endif}
-  p.Parameters.Add('--version');
-  p.Options:=[poWaitOnExit,poUsePipes,poNoConsole, poStdErrToOutput];
-  p.Execute;
-  if p.ExitStatus=0 then begin
-    Xplanetrender:=true;
-    r.LoadFromStream(p.Output);
-    if r.Count>0 then begin
-      buf:=r[0];
-      Xplanetversion:=trim(words(buf,'',2,1));
-    end;
-  end;
-  finally
-   p.free;
-   r.Free;
-  end;
+ Xplanetversion:=GetXPlanetVersion;
+ Xplanetrender:=(Xplanetversion<>'0.0.0');
 end;
 
 Procedure TSplot.FlushCnv;
@@ -1575,11 +1541,10 @@ begin
 end;
 
 procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,pa,gw:double;WhiteBg:boolean);
-var ds,j,mode : integer;
+var ds,j,mode,irc : integer;
     buf, searchdir, bsize: string;
-    p:TProcess;
-    r:TStringList;
     ok: boolean;
+    r:TStringList;
 begin
 ok:=true;
 if ipla=6 then ds:=round(max(2.2261*diam*pixscale,4*cfgchart.drawpen))
@@ -1587,94 +1552,34 @@ if ipla=6 then ds:=round(max(2.2261*diam*pixscale,4*cfgchart.drawpen))
 if ipla=11 then bsize:='1024x1024'
            else bsize:='512x512';
 if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000693)or(abs(planetbmprot-pa)>0.2) then begin
- searchdir:=slash(appdir)+slash('data')+'planet';
- p:=TProcess.Create(nil);
- {$ifdef linux}
-   p.Environment.Add('LC_ALL=C');
-   p.Executable:='xplanet';
- {$endif}
- {$ifdef darwin}
-   p.Environment.Add('LC_ALL=C');
-   p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet';
- {$endif}
- {$ifdef mswindows}
-   p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet.exe';
- {$endif}
- p.Parameters.Add('-origin');
- p.Parameters.Add('earth');
- if FileExists(slash(Tempdir)+'origin.txt') then begin
-   p.Parameters.Add('-origin_file');
-   p.Parameters.Add(slash(Tempdir)+'origin.txt');
- end;
- p.Parameters.Add('-body');
- p.Parameters.Add(LowerCase(trim(epla[ipla])));
- p.Parameters.Add('-rotate');
- p.Parameters.Add(formatfloat(f1,pa));
- p.Parameters.Add('-light_time');
- p.Parameters.Add('-tt');
- p.Parameters.Add('-num_times');
- p.Parameters.Add('1');
- p.Parameters.Add('-jd');
- p.Parameters.Add(formatfloat(f5,jdt));
- p.Parameters.Add('-searchdir');
- p.Parameters.Add(searchdir);
- p.Parameters.Add('-config');
- p.Parameters.Add('xplanet.config');
- p.Parameters.Add('-verbosity');
- p.Parameters.Add('-1');
- p.Parameters.Add('-radius');
- p.Parameters.Add('50');
- p.Parameters.Add('-geometry');
- p.Parameters.Add(bsize);
- p.Parameters.Add('-output');
- p.Parameters.Add(slash(Tempdir)+'planet.png');
- if ipla=5 then begin
-    p.Parameters.Add('-grs_longitude');
-    p.Parameters.Add(formatfloat(f1,gw));
- end;
- if (de_type>0)and(Xplanetversion>='1.3.0') then begin
-     p.Parameters.Add('-ephemeris_file');
-     p.Parameters.Add(de_filename);
- end;
- DeleteFile(slash(Tempdir)+'planet.png');
- p.Options:=[poWaitOnExit,poUsePipes,poNoConsole, poStdErrToOutput];
- buf:='';
- try
- p.Execute;
- if (p.ExitStatus<>0)and(de_type>0)and(Xplanetversion>='1.3.0') then begin
-   p.Parameters.Delete(p.Parameters.Count-1);
-   p.Parameters.Delete(p.Parameters.Count-1);
-   p.Execute;
- end;
- except
- end;
- if (p.ExitStatus=0)and(FileExists(slash(Tempdir)+'planet.png')) then begin
-   xplanetimg.LoadFromFile(SysToUTF8(slash(Tempdir)+'planet.png'));
-   chdir(appdir);
-   if flatten=1 then begin
-     planetbmp.Assign(xplanetimg.Bitmap);
-   end else begin
-     planetbmp.Height:=round(flatten*planetbmp.Width);
-     PlanetBMP.Canvas.StretchDraw(rect(0,0,planetbmp.Width,planetbmp.Height),XplanetImg.Bitmap);
+   searchdir:=slash(appdir)+slash('data')+'planet';
+   r:=TStringList.Create;
+   GetXplanet(Xplanetversion,slash(Tempdir)+'origin.txt',searchdir,bsize,slash(Tempdir)+'planet.png',ipla,pa,gw,jdt,irc,r );
+   if (irc=0)and(FileExists(slash(Tempdir)+'planet.png')) then begin
+      xplanetimg.LoadFromFile(SysToUTF8(slash(Tempdir)+'planet.png'));
+      chdir(appdir);
+      if flatten=1 then begin
+        planetbmp.Assign(xplanetimg.Bitmap);
+      end else begin
+        planetbmp.Height:=round(flatten*planetbmp.Width);
+        PlanetBMP.Canvas.StretchDraw(rect(0,0,planetbmp.Width,planetbmp.Height),XplanetImg.Bitmap);
+      end;
+      planetbmppla:=ipla;
+      planetbmpjd:=jdt;
+      planetbmprot:=pa;
+   end
+   else begin // something go wrong with xplanet
+      buf:='';
+      if r.Count>0 then for j:=0 to r.Count-1 do begin
+        buf:=buf+r[j]+crlf;
+      end;
+      writetrace('Return code '+inttostr(irc)+' from xplanet');
+      writetrace(buf);
+      PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
+      ok:=false;
+      planetbmpjd:=0;
    end;
-   planetbmppla:=ipla;
-   planetbmpjd:=jdt;
-   planetbmprot:=pa;
- end
- else begin // something go wrong with xplanet
-     r:=TStringList.Create;
-     r.LoadFromStream(p.Output);
-     if r.Count>0 then for j:=0 to r.Count-1 do begin
-      buf:=buf+r[j]+crlf;
-     end;
-     r.free;
-     writetrace('Return code '+inttostr(p.ExitStatus)+' from xplanet');
-     writetrace(buf);
-     PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
-     ok:=false;
-     planetbmpjd:=0;
- end;
- p.free;
+   r.free;
 end;
 if cfgplot.TransparentPlanet then mode:=0
    else mode:=2;
