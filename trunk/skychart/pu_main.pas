@@ -1839,6 +1839,7 @@ if not directoryexists(VODir) then forcedirectories(VODir);
 Tempdir:=slash(privatedir)+DefaultTmpDir;
 if not directoryexists(TempDir) then CreateDir(TempDir);
 if not directoryexists(TempDir) then forcedirectories(TempDir);
+isANSItmpdir:=isANSIstr(TempDir);
 SatDir:=slash(privatedir)+'satellites';
 if not directoryexists(SatDir) then CreateDir(SatDir);
 if not directoryexists(SatDir) then forcedirectories(SatDir);
@@ -2134,7 +2135,6 @@ if VerboseMsg then
 end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
-var i:integer;
 begin
 try
 if VerboseMsg then
@@ -7469,7 +7469,6 @@ end;
 
 procedure Tf_main.StopServer;
 var i :integer;
-    d :double;
     {$ifdef mswindows}
     Registry1: TRegistry;
     {$else}
