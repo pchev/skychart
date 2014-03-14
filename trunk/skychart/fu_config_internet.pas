@@ -325,7 +325,7 @@ end;
 
 procedure Tf_config_internet.astdefaultClick(Sender: TObject);
 begin
-astcdcneoClick(Sender);
+astcdcClick(Sender);
 end;
 
 procedure Tf_config_internet.brightneoClick(Sender: TObject);

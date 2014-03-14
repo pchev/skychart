@@ -1509,6 +1509,7 @@ resourcestring
   rsUnsupportedS = 'Unsupported SAMP hub profile. Must be a File URL';
   rsSAMPHubProfi = 'SAMP hub profile %s found, but it is missing a required value.';
   rsNoSAMPHubPro = 'No SAMP hub profile found, no hub is running.';
+  rsNumberOfIgno = 'Number of ignored invalid rows: %s';
 
 implementation
 
