@@ -61,7 +61,7 @@ end;
 Procedure sub_cy(f,h : double); // 750
 begin
 y[1,0]:=cos(f)*cos(h)-sin(f)*(z2/g)
-       +sin(f)*cos(h)*(z1/g);
+       +sin(f)*sin(h)*(z1/g);
 y[2,0]:=sin(f)*cos(h)+cos(f)*(z2/g)
        -cos(f)*sin(h)*(z1/g);
 y[3,0]:=sin(h);
@@ -70,7 +70,7 @@ end;
 Procedure sub_y(f,h : double); // 785
 begin
 y[1,1]:=cos(f)*cos(h)+sin(f)*(z2/g)
-       -sin(f)*cos(h)*(z1/g);
+       -sin(f)*sin(h)*(z1/g);
 y[2,1]:=sin(f)*cos(h)-cos(f)*(z2/g)
        +cos(f)*sin(h)*(z1/g);
 y[3,1]:=sin(h);
@@ -221,4 +221,4 @@ end;
 end.
 
 
-
+
