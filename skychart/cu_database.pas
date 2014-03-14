@@ -620,8 +620,8 @@ function TCDCdb.LoadAsteroidFile(astfile:string; astnumbered,stoperr,limit: bool
 var
   buf,cmd,c,filedesc,filenum :string;
   ep,id,nam,ec,ax,i,node,peri,eq,ma,h,g,ref  : string;
-  y,m,d,nl,prefl,lid,nerr: integer;
-  hh:double;
+  y,m,d,nl,prefl,lid,nerr,ierr,rerr: integer;
+  hh,tstval:double;
   f : textfile;
 begin
 nerr:=1;
@@ -657,6 +657,7 @@ if db.Active then begin
   db.starttransaction;
   db.LockTables('cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_name WRITE');
   nerr:=0;
+  rerr:=0;
   nl:=0;
   repeat
     readln(f,buf);
@@ -667,11 +668,13 @@ if db.Active then begin
     end;
     if (nl mod 10000)=0 then begin memoast.lines.add(Format(rsProcessingLi, [inttostr(nl)])); application.processmessages; end;
     id:=trim(copy(buf,1,7));
+    if id='' then begin dec(nl); inc(rerr); Continue; end;
     lid:=length(id);
     if lid<7 then id:=StringofChar('0',7-lid)+id;
     h:=trim(copy(buf,9,5));
     g:=trim(copy(buf,15,5));
     ep:=trim(copy(buf,21,5));
+    if ep='' then begin dec(nl); inc(rerr); Continue; end;
     if decode_mpc_date(ep,y,m,d,hh) then
        ep:=floattostr(jd(y,m,d,hh))
      else begin
@@ -680,11 +683,23 @@ if db.Active then begin
        break;
      end;
     ma:=trim(copy(buf,27,9));
+    val(ma,tstval,ierr);
+    if ierr<>0 then begin dec(nl); inc(rerr); Continue; end;
     peri:=trim(copy(buf,38,9));
+    val(peri,tstval,ierr);
+    if ierr<>0 then begin dec(nl); inc(rerr); Continue; end;
     node:=trim(copy(buf,49,9));
+    val(node,tstval,ierr);
+    if ierr<>0 then begin dec(nl); inc(rerr); Continue; end;
     i:=trim(copy(buf,60,9));
+    val(i,tstval,ierr);
+    if ierr<>0 then begin dec(nl); inc(rerr); Continue; end;
     ec:=trim(copy(buf,71,9));
+    val(ec,tstval,ierr);
+    if ierr<>0 then begin dec(nl); inc(rerr); Continue; end;
     ax:=trim(copy(buf,93,11));
+    val(ax,tstval,ierr);
+    if ierr<>0 then begin dec(nl); inc(rerr); Continue; end;
     ref:=trim(copy(buf,108,10));
     nam:=stringreplace(trim(copy(buf,167,27)),'"','\"',[rfreplaceall]);
     eq:='2000';
@@ -728,6 +743,7 @@ if db.Active then begin
   until eof(f);
   closefile(f);
   memoast.lines.add(Format(rsProcessingEn2, [inttostr(nl)]));
+  if rerr>0 then memoast.lines.add(Format(rsNumberOfIgno, [inttostr(rerr)]));
 end else begin
    buf:=trim(db.ErrorMessage);
    if buf<>'0' then memoast.lines.add(buf);
