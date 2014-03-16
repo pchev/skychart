@@ -4738,9 +4738,9 @@ def_cfgsc.MovedLabelLine:=true;
 def_cfgsc.ConstLatinLabel:=false;
 def_cfgsc.PlanetParalaxe:=true;
 def_cfgsc.ShowEarthShadow:=false;
-def_cfgsc.GRSlongitude:=168.0;
-def_cfgsc.GRSjd:=jd(2011,7,15,0);
-def_cfgsc.GRSdrift:=15.2/365.25;
+def_cfgsc.GRSlongitude:=208.0;
+def_cfgsc.GRSjd:=jd(2014,1,31,0);
+def_cfgsc.GRSdrift:=16.5/365.25;
 def_cfgsc.LabelOrientation:=1;
 def_cfgsc.FindOk:=false;
 def_cfgsc.nummodlabels:=0;
@@ -5037,6 +5037,7 @@ end;
 
 procedure Tf_main.ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:Tconf_plot ;var csc:Tconf_skychart);
 var i,j,t,l,w,h,n:integer;
+    xx: double;
     inif: TMemIniFile;
     section,buf : string;
 begin
@@ -5922,6 +5923,12 @@ if  Config_Version < '3.5i' then begin
 end;
 if  Config_Version < '3.7f' then begin
   if def_cfgplot.stardyn=65 then def_cfgplot.stardyn:=78;
+end;
+if  Config_Version < '3.9g' then begin
+  // update Jupiter GRS default values
+  def_cfgsc.GRSlongitude:=208.0;
+  def_cfgsc.GRSjd:=jd(2014,1,31,0);
+  def_cfgsc.GRSdrift:=16.5/365.25;
 end;
 end;
 
