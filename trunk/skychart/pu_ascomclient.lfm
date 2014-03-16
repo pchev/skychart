@@ -205,7 +205,7 @@ object pop_scope: Tpop_scope
       Left = 64
       Height = 23
       Top = 6
-      Width = 70
+      Width = 80
       ReadOnly = True
       TabStop = False
       TabOrder = 0
@@ -214,7 +214,7 @@ object pop_scope: Tpop_scope
       Left = 200
       Height = 23
       Top = 6
-      Width = 70
+      Width = 80
       ReadOnly = True
       TabStop = False
       TabOrder = 1
@@ -223,7 +223,7 @@ object pop_scope: Tpop_scope
       Left = 64
       Height = 23
       Top = 30
-      Width = 70
+      Width = 80
       ReadOnly = True
       TabStop = False
       TabOrder = 3
@@ -232,7 +232,7 @@ object pop_scope: Tpop_scope
       Left = 200
       Height = 23
       Top = 30
-      Width = 70
+      Width = 80
       ReadOnly = True
       TabStop = False
       TabOrder = 4
