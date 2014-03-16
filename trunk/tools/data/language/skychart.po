@@ -5918,3 +5918,7 @@ msgstr ""
 msgid "No SAMP hub profile found, no hub is running."
 msgstr ""
 
+#: u_translation:rsnumberofigno
+msgid "Number of ignored invalid rows: %s"
+msgstr ""
+
