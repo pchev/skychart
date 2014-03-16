@@ -549,9 +549,8 @@ object f_chart: Tf_chart
     Width = 881
     Height = 550
     DefaultExt = '.cdcc'
-    FileName = '/home/compiler/lazarus/circle'
+    FileName = 'circle'
     Filter = 'Circle file|*.cdcc|All|*'
-    InitialDir = '/home/compiler/lazarus/'
     Options = [ofOverwritePrompt, ofPathMustExist, ofEnableSizing, ofViewDetail]
     left = 58
     top = 120
