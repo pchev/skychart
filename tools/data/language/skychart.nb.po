@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-17 19:39+0000\n"
+"POT-Creation-Date: 2014-03-14 19:05+0000\n"
 "PO-Revision-Date: 2014-02-17 19:51+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-26 19:04+0000\n"
-"X-Generator: Launchpad (build 16935)\n"
+"X-Launchpad-Export-Date: 2014-03-16 18:44+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -3451,6 +3451,10 @@ msgstr "Antall kopier"
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr "Antall filer"
+
+#: u_translation.rsnumberofigno
+msgid "Number of ignored invalid rows: %s"
+msgstr ""
 
 #: u_translation.rsnumberofmont
 msgid "Number of months"
