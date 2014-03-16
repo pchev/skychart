@@ -1296,7 +1296,7 @@ try
  f_detail.OnNeighborObj:=NeighborObj;
  f_detail.OnKeydown:=FormKeyDown;
  f_obslist.planet:=planet;
- f_obslist.FileNameEdit1.FileName:=SysToUTF8(slash(HomeDir)+f_obslist.DefaultList);
+ f_obslist.FileNameEdit1.FileName:=slash(HomeDir)+f_obslist.DefaultList;
  if VerboseMsg then WriteTrace('InitDS2000');
  InitDS2000;
  // must read db configuration before to create this one!

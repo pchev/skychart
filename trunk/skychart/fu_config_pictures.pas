@@ -273,13 +273,6 @@ begin
   Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
   label6.Visible:=false;
   StringGrid1.RowCount:=MaxArchiveDir+1;
-(*  {$ifdef CPU64}
-  Panel2.Visible:=false;  { TODO : Realsky libgetdss do not work on 64bit system }
-  OnlineDSS.Enabled:=false;
-  label6.Caption:=rsRealskyCDRom;
-  label6.Visible:=true;
-  label6.BringToFront;
-  {$endif} *)
 end;
 
 Destructor Tf_config_pictures.Destroy;
@@ -331,6 +324,7 @@ realskyfile.text:=SysToUTF8(cdss.dssfile);
 reallist.checked:=cdss.dssplateprompt;
 usesubsample.checked:=cdss.dsssampling;
 realskymax.value:=cdss.dssmaxsize;
+GroupBox3.Visible:=(not cdss.OnlineDSS);
 OnlineDSS.Checked:=cdss.OnlineDSS;
 OnlineDSSList.Clear;
 for i:=1 to MaxDSSurl do
@@ -397,13 +391,6 @@ end;
 
 procedure Tf_config_pictures.PageControl1PageChanged(Sender: TObject);
 begin
-(* {$ifdef CPU64}
-Panel2.Visible:=false;  { TODO : Realsky libgetdss do not work on 64bit system }
-OnlineDSS.Enabled:=false;
-label6.Caption:=rsRealskyCDRom;
-label6.Visible:=true;
-label6.BringToFront;
-{$endif} *)
 if PageControl1.PageIndex=1 then backimgChange(Sender);
 end;
 
@@ -762,6 +749,7 @@ procedure Tf_config_pictures.OnlineDSSChange(Sender: TObject);
 begin
 if LockChange then exit;
 cdss.OnlineDSS:=OnlineDSS.Checked;
+GroupBox3.Visible:=(not cdss.OnlineDSS);
 end;
 
 procedure Tf_config_pictures.OnlineDSSListChange(Sender: TObject);
