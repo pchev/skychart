@@ -585,6 +585,10 @@ try
  Image1.Free;
  if prtsc<>nil then prtsc.Free;
  if prtImage<>nil then prtImage.Free;
+ if Fpop_scope<>nil then begin
+   if Connect1.Checked then Fpop_scope.ScopeDisconnect(ok);
+   Fpop_scope.Free;
+ end;
  if Fpop_indi<>nil then begin
    if Connect1.Checked then begin
      Fpop_indi.ScopeDisconnect(ok,false);
