@@ -2656,7 +2656,6 @@ var fs : TSearchRec;
     fn,cmd,logfile: string;
 begin
 AnimationEnabled:=ToolButton13.Down;
-AnimationTimer.Enabled:=AnimationEnabled;
 if ToolButton13.Down then begin  // start animation
    if (cfgm.AnimSx>0)and(cfgm.AnimSy>0) then begin
      r:=TStringList.Create;
@@ -2675,7 +2674,9 @@ if ToolButton13.Down then begin  // start animation
       end;
       findclose(fs);
    end;
+   AnimationTimer.Enabled:=true;
 end else begin                   // end animation
+   AnimationTimer.Enabled:=false;
    if cfgm.AnimRec then begin
       r:=TStringList.Create;
       i:=0;
@@ -2742,10 +2743,12 @@ end;
 procedure Tf_main.TimeIncExecute(Sender: TObject);
 var hh : double;
     y,m,d,h,n,s,mult : integer;
+    showast: Boolean;
 begin
 // tag is used for the sign
 mult:=TAction(sender).tag*TimeVal.Position;
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   showast:=sc.cfgsc.ShowAsteroid;
    djd(sc.cfgsc.CurJDUT,y,m,d,hh);
    DtoS(hh,h,n,s);
    case TimeU.itemindex of
@@ -2775,20 +2778,27 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    9 : SetJD(sc.cfgsc.CurJDUT+mult*29.530589);   // synodic month
    10: SetJD(sc.cfgsc.CurJDUT+mult*6585.321);    // saros
    end;
+   if showast and (showast<>sc.cfgsc.ShowAsteroid) and (not AnimationEnabled) then begin
+      RecomputeAsteroid;
+   end;
 end;
 end;
 
 procedure Tf_main.TimeResetExecute(Sender: TObject);
+var showast: Boolean;
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   showast:=sc.cfgsc.ShowAsteroid;
    sc.cfgsc.UseSystemTime:=true;
    if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
       sc.cfgsc.TrackOn:=true;
       sc.cfgsc.TrackType:=4;
    end;
-if VerboseMsg then
- WriteTrace('TimeResetExecute');
+   if VerboseMsg then WriteTrace('TimeResetExecute');
    Refresh;
+   if showast and (showast<>sc.cfgsc.ShowAsteroid) then begin
+      RecomputeAsteroid;
+   end;
 end;
 end;
 
@@ -4097,7 +4107,7 @@ begin
          (cfgm.dbport<>cmain.dbport)
          then dbchange:=true;
       cfgm.Assign(cmain);
-      AnimationTimer.Interval:=max(10,cfgm.AnimDelay);
+      AnimationTimer.Interval:=max(100,cfgm.AnimDelay);
     end;
     if themechange then SetTheme;
     if starchange then SetStarShape;
@@ -5636,7 +5646,7 @@ cfgm.SampSubscribeCoord:=ReadBool(section,'SampSubscribeCoord',cfgm.SampSubscrib
 cfgm.SampSubscribeImage:=ReadBool(section,'SampSubscribeImage',cfgm.SampSubscribeImage);
 cfgm.SampSubscribeTable:=ReadBool(section,'SampSubscribeTable',cfgm.SampSubscribeTable);
 cfgm.AnimDelay:=ReadInteger(section,'AnimDelay',cfgm.AnimDelay);
-AnimationTimer.Interval:=max(10,cfgm.AnimDelay);
+AnimationTimer.Interval:=max(100,cfgm.AnimDelay);
 cfgm.AnimFps:=ReadFloat(section,'AnimFps',cfgm.AnimFps);
 //cfgm.AnimRec:=ReadBool(section,'AnimRec',cfgm.AnimRec);
 cfgm.AnimRecDir:=ReadString(section,'AnimRecDir',cfgm.AnimRecDir);
