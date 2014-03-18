@@ -2465,13 +2465,16 @@ cdb.TruncateDailyAsteroid;
 msg.Add(Format(rsEndProcessin, [inttostr(n_ast)]));
 result:=(n_ast>0);
 if not result then begin
-   msg.Add(rsErrorPleaseC);
+   msg.Add(rsWarningSomeA);
+   application.processmessages;
    sleep(3000);
 end;
 except
   result:=false;
-  msg.Add(rsErrorPleaseC);
   db2.CallBackOnly:=false;
+  msg.Add(rsErrorPleaseC);
+  application.processmessages;
+  sleep(3000);
 end;
 end;
 
@@ -2483,6 +2486,7 @@ var id,jds,ref,nam,qry,elem_id : string;
 begin
     id:=row[0];
     if cdb.GetAstElemEpoch(id,jdaststart,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
+       if abs(jdaststart-epoch)<3650 then begin // 10 years max limit
          inc(n_ast);
          InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
          for i:=0 to jdastnstep-1 do begin
@@ -2502,9 +2506,12 @@ begin
                +',"'+elem_id+'"'+')';
            db1.Query(qry);
          end;
+       end;
       end;
-    if (n_ast mod 10000)=0 then begin smsg.Add(Format(rsProcessing, [inttostr(
-      n_ast)])); application.processmessages; end;
+    if (n_ast>0) and ((n_ast mod 10000)=0) then begin
+      smsg.Add(Format(rsProcessing, [inttostr(n_ast)]));
+      application.processmessages;
+    end;
 end;
 
 Procedure TPlanet.PlanetAltitude(pla: integer; jd0,hh: double; cfgsc: Tconf_skychart; var har,sina: double);
