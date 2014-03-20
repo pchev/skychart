@@ -471,6 +471,7 @@ type
     procedure BlinkImageExecute(Sender: TObject);
     procedure BugReport1Click(Sender: TObject);
     procedure CloseTimerTimer(Sender: TObject);
+    procedure EditTimeValChange(Sender: TObject);
     procedure FileClose1Execute(Sender: TObject);
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
@@ -527,6 +528,8 @@ type
     procedure TConnectMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ThemeTimerTimer(Sender: TObject);
+    procedure TimeValChangingEx(Sender: TObject; var AllowChange: Boolean;
+      NewValue: SmallInt; Direction: TUpDownDirection);
     procedure ToolButton13Click(Sender: TObject);
     procedure ToolButton13MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -1709,6 +1712,15 @@ begin
   Close;
 end;
 
+procedure Tf_main.EditTimeValChange(Sender: TObject);
+var i,n: integer;
+begin
+val(EditTimeVal.Text,i,n);
+if (n=0)and(i=0) then
+  EditTimeVal.Text:='1';
+TimeVal.Position:=strtointdef(EditTimeVal.Text,1);
+end;
+
 
 procedure Tf_main.MagPanelMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
@@ -2787,6 +2799,11 @@ end;
 procedure Tf_main.TimeResetExecute(Sender: TObject);
 var showast: Boolean;
 begin
+if AnimationEnabled then begin
+  ToolButton13.Down:=false;
+  ToolButton13Click(ToolButton13);
+end
+else
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    showast:=sc.cfgsc.ShowAsteroid;
    sc.cfgsc.UseSystemTime:=true;
@@ -3639,6 +3656,15 @@ ThemeTimer.Enabled:=false;
      NightVision1.Checked:=nightvision;
    end;
    if nightvision or (cfgm.ThemeName<>'default')or(cfgm.ButtonStandard>1) then SetTheme;
+end;
+
+procedure Tf_main.TimeValChangingEx(Sender: TObject; var AllowChange: Boolean;
+  NewValue: SmallInt; Direction: TUpDownDirection);
+begin
+if NewValue=0 then begin
+  if Direction=updDown then TimeVal.Position:=-1 else TimeVal.Position:=1;
+  AllowChange:=false;
+end;
 end;
 
 procedure Tf_main.ToolButton1MouseUp(Sender: TObject; Button: TMouseButton;

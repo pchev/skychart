@@ -17,7 +17,7 @@ object f_main: Tf_main
   OnResize = FormResize
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.14.0'
+  LCLVersion = '1.2.0.3'
   object PanelLeft: TPanel
     Left = 0
     Height = 465
@@ -218,7 +218,6 @@ object f_main: Tf_main
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
-        NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
         ParentFont = False
@@ -234,7 +233,6 @@ object f_main: Tf_main
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
-        NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
         ParentFont = False
@@ -250,7 +248,6 @@ object f_main: Tf_main
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
-        NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
         ParentFont = False
@@ -266,7 +263,6 @@ object f_main: Tf_main
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
-        NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
         ParentFont = False
@@ -282,7 +278,6 @@ object f_main: Tf_main
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
-        NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
         ParentFont = False
@@ -298,7 +293,6 @@ object f_main: Tf_main
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
-        NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
         ParentFont = False
@@ -314,7 +308,6 @@ object f_main: Tf_main
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
-        NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
         ParentFont = False
@@ -330,7 +323,6 @@ object f_main: Tf_main
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
-        NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
         ParentFont = False
@@ -346,7 +338,6 @@ object f_main: Tf_main
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
-        NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
         ParentFont = False
@@ -362,7 +353,6 @@ object f_main: Tf_main
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
-        NumGlyphs = 0
         OnClick = SetFOVClick
         ShowHint = True
         ParentFont = False
@@ -842,7 +832,6 @@ object f_main: Tf_main
           Top = 0
           Width = 15
           Flat = True
-          NumGlyphs = 0
           Transparent = False
           OnClick = BtnRestoreChildClick
         end
@@ -852,7 +841,6 @@ object f_main: Tf_main
           Top = 0
           Width = 15
           Flat = True
-          NumGlyphs = 0
           Transparent = False
           OnClick = BtnCloseChildClick
         end
@@ -863,18 +851,20 @@ object f_main: Tf_main
         Top = 2
         Width = 17
         Associate = EditTimeVal
-        Min = 1
+        Min = -999
         Max = 999
         Position = 1
         TabOrder = 3
         Thousands = False
         Wrap = False
+        OnChangingEx = TimeValChangingEx
       end
       object EditTimeVal: TEdit
         Left = 641
         Height = 23
         Top = 2
         Width = 35
+        OnChange = EditTimeValChange
         TabOrder = 2
       end
       object ToolButton13: TToolButton
