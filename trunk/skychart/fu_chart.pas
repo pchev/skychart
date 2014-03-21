@@ -1137,6 +1137,7 @@ if VerboseMsg then
    sc.cfgsc.TrackName:=rsTelescope;
    sc.cfgsc.TrackRA:=sc.cfgsc.ScopeRa;
    sc.cfgsc.TrackDec:=sc.cfgsc.ScopeDec;
+   sc.cfgsc.TrackEpoch:=sc.cfgsc.JDChart;
    sc.cfgsc.scopemark:=true;
    sc.MovetoRaDec(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec);
    Refresh;
@@ -2083,7 +2084,7 @@ else identlabel.Visible:=false;
 end;
 
 function Tf_chart.IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean=true;ftype:integer=ftAll;radius:integer=2):boolean;
-var ra,dec,a,h,a1,h1,l,b,le,be,dx,dy,lastra,lastdec,lasttrra,lasttrde,lastx,lasty,lastz,dist,ds,ax,ay:double;
+var ra,dec,a,h,a1,h1,l,b,le,be,dx,dy,lastra,lastdec,lasttrra,lasttrde,lastepoch,lastx,lasty,lastz,dist,ds,ax,ay:double;
     pa,lasttype,lastobj: integer;
     txt,lastname,lasttrname,buf: string;
     showdist,solsys,lastsolsys:boolean;
@@ -2093,6 +2094,7 @@ if locked then exit;
 showdist:=sc.cfgsc.FindOk;
 lastra:=sc.cfgsc.FindRA;
 lastdec:=sc.cfgsc.FindDEC;
+lastepoch:=sc.cfgsc.TrackEpoch;
 lastname:=sc.cfgsc.FindName;
 lasttrra:=sc.cfgsc.TrackRA;
 lasttrde:=sc.cfgsc.TrackDEC;
@@ -2174,6 +2176,7 @@ end;
 if sc.cfgsc.TrackOn then begin
   sc.cfgsc.TrackRA:=lasttrra;
   sc.cfgsc.TrackDEC:=lasttrde;
+  sc.cfgsc.TrackEpoch:=lastepoch;
   sc.cfgsc.TrackType:=lasttype;
   sc.cfgsc.Trackobj:=lastobj;
   sc.cfgsc.TrackName:=lasttrname;
@@ -2222,6 +2225,7 @@ if sc.catalog.FindRecOK then begin
     sc.FindRiseSet(0);
     sc.cfgsc.TrackRA:=sc.cfgsc.FindRA;
     sc.cfgsc.TrackDec:=sc.cfgsc.FindDec;
+    sc.cfgsc.TrackEpoch:=sc.cfgsc.JDChart;
     sc.cfgsc.TrackOn:=false;
     sc.cfgsc.TrackType:=6;
     sc.cfgsc.TrackName:=sc.cfgsc.FindName;
@@ -2274,6 +2278,7 @@ else begin
       sc.cfgsc.TrackType:=6;
       sc.cfgsc.TrackRA:=ar1;
       sc.cfgsc.TrackDec:=de1;
+      sc.cfgsc.TrackEpoch:=sc.cfgsc.JDChart;
       sc.cfgsc.TrackName:=Num;
       // show label
       ShowIdentLabel;
@@ -3662,12 +3667,14 @@ if onoff='ON' then begin
       sc.cfgsc.TrackName:=rsTelescope;
       sc.cfgsc.TrackRA:=sc.cfgsc.ScopeRa;
       sc.cfgsc.TrackDec:=sc.cfgsc.ScopeDec;
+      sc.cfgsc.TrackEpoch:=sc.cfgsc.JDChart;
       sc.cfgsc.scopemark:=true;
       sc.MovetoRaDec(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec);
     end else begin
       sc.cfgsc.TrackName:=rsTelescope+'-2';
       sc.cfgsc.TrackRA:=sc.cfgsc.Scope2Ra;
       sc.cfgsc.TrackDec:=sc.cfgsc.Scope2Dec;
+      sc.cfgsc.TrackEpoch:=sc.cfgsc.JDChart;
       sc.cfgsc.scope2mark:=true;
       sc.MovetoRaDec(sc.cfgsc.Scope2Ra,sc.cfgsc.Scope2Dec);
     end;
@@ -5472,6 +5479,7 @@ if Connect1.checked then begin
       sc.cfgsc.TrackName:=rsTelescope;
       sc.cfgsc.TrackRA:=sc.cfgsc.ScopeRa;
       sc.cfgsc.TrackDec:=sc.cfgsc.ScopeDec;
+      sc.cfgsc.TrackEpoch:=sc.cfgsc.JDChart;
     end;
     sc.cfgsc.scopemark:=true;
     Image1.Invalidate;
