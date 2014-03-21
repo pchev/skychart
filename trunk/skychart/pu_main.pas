@@ -3662,7 +3662,7 @@ procedure Tf_main.TimeValChangingEx(Sender: TObject; var AllowChange: Boolean;
   NewValue: SmallInt; Direction: TUpDownDirection);
 begin
 if NewValue=0 then begin
-  if Direction=updDown then TimeVal.Position:=-1 else TimeVal.Position:=1;
+  if TimeVal.Position>0 then TimeVal.Position:=-1 else TimeVal.Position:=1;
   AllowChange:=false;
 end;
 end;
