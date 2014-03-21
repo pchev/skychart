@@ -821,6 +821,7 @@ end;
          cfgsc.decentre:=cfgsc.PlanetLst[0,cfgsc.Trackobj,2];
          cfgsc.TrackRA:=cfgsc.racentre;
          cfgsc.TrackDec:=cfgsc.decentre;
+         cfgsc.TrackEpoch:=cfgsc.JDChart;
          Planet.FormatPlanet(0,cfgsc.Trackobj,cfgsc,nom,ma,date,desc);
          end;
      2 : begin
@@ -836,6 +837,7 @@ end;
             cfgsc.decentre:=d;
             cfgsc.TrackRA:=cfgsc.racentre;
             cfgsc.TrackDec:=cfgsc.decentre;
+            cfgsc.TrackEpoch:=cfgsc.JDChart;
           end
           else cfgsc.TrackOn:=false;
          end;
@@ -852,6 +854,7 @@ end;
             cfgsc.decentre:=d;
             cfgsc.TrackRA:=cfgsc.racentre;
             cfgsc.TrackDec:=cfgsc.decentre;
+            cfgsc.TrackEpoch:=cfgsc.JDChart;
           end
           else cfgsc.TrackOn:=false;
          end;
@@ -2286,6 +2289,7 @@ function Tskychart.FindArtSat(x1,y1,x2,y2:double; nextobj:boolean; var nom,ma,de
     cfgsc.FindNote:='';
     cfgsc.TrackRA:=cfgsc.FindRA;
     cfgsc.TrackDec:=cfgsc.FindDec;
+    cfgsc.TrackEpoch:=cfgsc.JDChart;
   end;
 end;
 
@@ -2787,6 +2791,7 @@ if result then begin
    cfgsc.TrackName:=cfgsc.FindName;
    cfgsc.TrackRA:=rec.ra;
    cfgsc.TrackDec:=rec.dec;
+   cfgsc.TrackEpoch:=cfgsc.JDChart;
 end else begin
    cfgsc.FindRA2000:=0;
    cfgsc.FindDec2000:=0;
@@ -5527,10 +5532,6 @@ begin
 result:=false;
 cfgsc.moved:=false;
 if (ra<>cfgsc.ScopeRa)or(dec<>cfgsc.ScopeDec) then begin
-{cfgsc.TrackType:=6;
-cfgsc.TrackName:=rsTelescope;
-cfgsc.TrackRA:=ra;
-cfgsc.TrackDec:=dec;    }
 if cfgsc.scopemark then DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true,-1);
 DrawFinderMark(ra,dec,true,-1);
 cfgsc.ScopeRa:=ra;
@@ -5545,6 +5546,7 @@ if (dist>cfgsc.fov/10)and(cfgsc.TrackOn) then begin
         cfgsc.TrackType:=6;
         cfgsc.TrackRA:=ra;
         cfgsc.TrackDec:=dec;
+        cfgsc.TrackEpoch:=cfgsc.JDChart;
       end;
       MovetoRaDec(cfgsc.ScopeRa,cfgsc.ScopeDec);
       if VerboseMsg then WriteTrace('TelescopeMove');
@@ -5575,6 +5577,7 @@ if not cfgsc.scopelock then begin
     cfgsc.TrackType:=6;
     cfgsc.TrackRA:=ra;
     cfgsc.TrackDec:=dec;
+    cfgsc.TrackEpoch:=cfgsc.JDChart;
   end;
   if (dist>cfgsc.fov/10)and(cfgsc.TrackOn) then MovetoRaDec(cfgsc.Scope2Ra,cfgsc.Scope2Dec);
   if VerboseMsg then WriteTrace('Telescope2Move');
