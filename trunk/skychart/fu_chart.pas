@@ -258,6 +258,7 @@ type
     LockMouseWheel,lockblink: Boolean;
     KeyPressTime: Double;
     SaveColor: Starcolarray;
+    SavebgColor: TColor;
     SaveLabelColor: array[1..numlabtype] of Tcolor;
     PrintPreview: Tf_image;
     Fpop_indi: Tpop_indi;
@@ -5086,6 +5087,7 @@ if value=FNightVision then exit;
 FNightVision:=value;
 if FNightVision then begin
    SaveColor:=sc.plot.cfgplot.color;
+   SavebgColor:=sc.plot.cfgplot.bgColor;
    for i:=1 to numlabtype do SaveLabelColor[i]:=sc.plot.cfgplot.labelcolor[i];
    sc.plot.cfgplot.color:=DfRedColor;
    for i:=1 to numlabtype do sc.plot.cfgplot.labelcolor[i]:=$000000A0;
@@ -5095,10 +5097,12 @@ if FNightVision then begin
 end else begin
    if (Savecolor[2]=DfRedColor[2])and(Savecolor[11]=DfRedColor[11]) then begin // started with night vision, return to default color as save is also red. 
       sc.plot.cfgplot.color:=DfColor;
+      sc.plot.cfgplot.bgColor:=DfColor[0];
       for i:=1 to numlabtype do sc.plot.cfgplot.labelcolor[i]:=clWhite;
       sc.plot.cfgplot.labelcolor[6]:=clYellow;
    end else begin
       sc.plot.cfgplot.color:=SaveColor;
+      sc.plot.cfgplot.bgColor:=SavebgColor;
       for i:=1 to numlabtype do sc.plot.cfgplot.labelcolor[i]:=SaveLabelColor[i];
    end;
    {$ifdef mswindows}
