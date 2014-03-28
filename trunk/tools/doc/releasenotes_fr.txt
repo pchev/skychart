@@ -1,4 +1,4 @@
-Version 3.9 beta Notes de la version
+Version 3.10, Notes de la version
 
 Nouvelles fonctions:
 
@@ -20,6 +20,7 @@ Nouvelles fonctions:
   * Nouvelle en-tête et pied de page pour l'impression.
   * Possibilité de définir plus de 10 oculaires ou champs CCD.
   * Plus d'options pour choisir les colonnes des catalogues VO.
+  * La documentation est maintenant disponible au format PDF.
 
 Corrections:
   * Meilleure transparence image/carte.

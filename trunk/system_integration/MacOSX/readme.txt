@@ -1,8 +1,8 @@
 Skychart / Cartes du Ciel
-Version 3.9 beta
+Version 3.10
 
 
-Copyright (C) 2013 Patrick Chevalley
+Copyright (C) 2014 Patrick Chevalley
 
 http://ap-i.net/skychart
 http://skychart.sourceforge.net
