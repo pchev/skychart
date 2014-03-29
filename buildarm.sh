@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-version=3.9
+version=3.10
 
 builddir=/tmp/skychart  # Be sure this is set to a non existent directory, it is removed after the run!
 
