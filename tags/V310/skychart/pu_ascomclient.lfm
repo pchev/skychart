@@ -1,0 +1,356 @@
+object pop_scope: Tpop_scope
+  Left = 300
+  Height = 467
+  Top = 120
+  Width = 305
+  HorzScrollBar.Visible = False
+  VertScrollBar.Visible = False
+  ActiveControl = Edit1
+  Caption = 'ASCOM Telescope Interface'
+  ClientHeight = 467
+  ClientWidth = 305
+  OnCloseQuery = kill
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  ParentFont = True
+  Position = poDefaultPosOnly
+  LCLVersion = '1.0.12.0'
+  object GroupBox3: TGroupBox
+    Left = 8
+    Height = 88
+    Top = 360
+    Width = 290
+    ClientHeight = 84
+    ClientWidth = 286
+    TabOrder = 3
+    object SpeedButton1: TSpeedButton
+      Left = 5
+      Height = 25
+      Top = 6
+      Width = 73
+      Caption = 'Connect'
+      NumGlyphs = 0
+      OnClick = setresClick
+    end
+    object SpeedButton2: TSpeedButton
+      Left = 211
+      Height = 25
+      Top = 6
+      Width = 65
+      Caption = 'Hide'
+      NumGlyphs = 0
+      OnClick = SpeedButton2Click
+    end
+    object SpeedButton5: TSpeedButton
+      Left = 115
+      Height = 25
+      Top = 6
+      Width = 84
+      Caption = 'Disconnect'
+      NumGlyphs = 0
+      OnClick = SpeedButton5Click
+    end
+    object led: TEdit
+      Left = 83
+      Height = 25
+      Top = 7
+      Width = 25
+      AutoSize = False
+      Color = clRed
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+    object WarningLabel: TLabel
+      Left = 6
+      Height = 16
+      Top = 41
+      Width = 76
+      Caption = 'WarningLabel'
+      ParentColor = False
+    end
+    object SpeedButton4: TSpeedButton
+      Left = 211
+      Height = 25
+      Top = 41
+      Width = 65
+      Caption = 'Help'
+      NumGlyphs = 0
+      OnClick = SpeedButton4Click
+    end
+  end
+  object GroupBox5: TGroupBox
+    Left = 8
+    Height = 96
+    Top = 144
+    Width = 288
+    Caption = 'Observatory '
+    ClientHeight = 79
+    ClientWidth = 284
+    TabOrder = 1
+    object Label15: TLabel
+      Left = 0
+      Height = 16
+      Top = 20
+      Width = 58
+      Caption = 'Latitude : '
+      ParentColor = False
+    end
+    object Label16: TLabel
+      Left = 134
+      Height = 16
+      Top = 20
+      Width = 64
+      Caption = 'Longitude :'
+      ParentColor = False
+    end
+    object SpeedButton8: TSpeedButton
+      Left = 150
+      Height = 22
+      Top = 51
+      Width = 126
+      Caption = 'Set Time'
+      Enabled = False
+      NumGlyphs = 0
+      OnClick = SpeedButton8Click
+    end
+    object SpeedButton9: TSpeedButton
+      Left = -2
+      Height = 22
+      Top = 51
+      Width = 129
+      Caption = 'Set Location'
+      Enabled = False
+      NumGlyphs = 0
+      OnClick = SpeedButton9Click
+    end
+    object lat: TEdit
+      Left = 62
+      Height = 23
+      Top = 16
+      Width = 70
+      Color = clBtnFace
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+      Text = '0'
+    end
+    object long: TEdit
+      Left = 206
+      Height = 23
+      Top = 16
+      Width = 70
+      Color = clBtnFace
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 1
+      Text = '0'
+    end
+  end
+  object Panel1: TPanel
+    Left = 8
+    Height = 112
+    Top = 248
+    Width = 288
+    ClientHeight = 112
+    ClientWidth = 288
+    TabOrder = 2
+    object LabelAlpha: TLabel
+      Left = 26
+      Height = 16
+      Top = 10
+      Width = 20
+      Caption = 'RA '
+      ParentColor = False
+    end
+    object LabelDelta: TLabel
+      Left = 157
+      Height = 16
+      Top = 10
+      Width = 25
+      Caption = 'DEC'
+      ParentColor = False
+    end
+    object Label11: TLabel
+      Left = 26
+      Height = 16
+      Top = 34
+      Width = 16
+      Caption = 'AZ'
+      ParentColor = False
+    end
+    object Label12: TLabel
+      Left = 157
+      Height = 16
+      Top = 34
+      Width = 20
+      Caption = 'ALT'
+      ParentColor = False
+    end
+    object SpeedButton6: TSpeedButton
+      Left = 96
+      Height = 25
+      Top = 63
+      Width = 174
+      Caption = 'Abort Slew'
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      NumGlyphs = 0
+      OnClick = SpeedButton6Click
+      ParentFont = False
+    end
+    object pos_x: TEdit
+      Left = 64
+      Height = 23
+      Top = 6
+      Width = 80
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+    object pos_y: TEdit
+      Left = 200
+      Height = 23
+      Top = 6
+      Width = 80
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 1
+    end
+    object az_x: TEdit
+      Left = 64
+      Height = 23
+      Top = 30
+      Width = 80
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 3
+    end
+    object alt_y: TEdit
+      Left = 200
+      Height = 23
+      Top = 30
+      Width = 80
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 4
+    end
+    object ShowAltAz: TCheckBox
+      Left = 8
+      Height = 23
+      Top = 32
+      Width = 23
+      TabOrder = 2
+    end
+    object TrackingBtn: TSpeedButton
+      Left = 8
+      Height = 25
+      Top = 63
+      Width = 84
+      Caption = 'Tracking'
+      NumGlyphs = 0
+      OnClick = TrackingBtnClick
+    end
+    object trackingled: TEdit
+      Left = 10
+      Height = 16
+      Top = 88
+      Width = 80
+      AutoSize = False
+      Color = clRed
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 5
+    end
+  end
+  object GroupBox1: TGroupBox
+    Left = 8
+    Height = 136
+    Top = 0
+    Width = 288
+    Caption = 'Driver Selection'
+    ClientHeight = 119
+    ClientWidth = 284
+    TabOrder = 0
+    object SpeedButton3: TSpeedButton
+      Left = 182
+      Height = 22
+      Top = 7
+      Width = 97
+      Caption = 'Select'
+      NumGlyphs = 0
+      OnClick = SpeedButton3Click
+    end
+    object Label1: TLabel
+      Left = 2
+      Height = 16
+      Top = 56
+      Width = 79
+      Caption = 'Refresh rate :'
+      ParentColor = False
+    end
+    object SpeedButton7: TSpeedButton
+      Left = 182
+      Height = 22
+      Top = 32
+      Width = 97
+      Caption = 'Configure'
+      NumGlyphs = 0
+      OnClick = SpeedButton7Click
+    end
+    object SpeedButton11: TSpeedButton
+      Left = 182
+      Height = 22
+      Top = 56
+      Width = 97
+      Caption = 'About'
+      NumGlyphs = 0
+      OnClick = SpeedButton11Click
+    end
+    object Edit1: TEdit
+      Left = 2
+      Height = 23
+      Top = 15
+      Width = 172
+      Color = clBtnFace
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+    object ReadIntBox: TComboBox
+      Left = 110
+      Height = 23
+      Top = 52
+      Width = 64
+      ItemHeight = 0
+      ItemIndex = 3
+      Items.Strings = (
+        '100'
+        '250'
+        '500'
+        '1000'
+        '2000'
+      )
+      OnChange = ReadIntBoxChange
+      TabOrder = 1
+      Text = '1000'
+    end
+    object SpeedButton10: TSpeedButton
+      Left = 110
+      Height = 22
+      Top = 88
+      Width = 169
+      Caption = 'Advanced setting'
+      NumGlyphs = 0
+      OnClick = SpeedButton10Click
+    end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    OnTimer = Timer1Timer
+    left = 240
+    top = 8
+  end
+end

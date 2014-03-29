@@ -1,0 +1,39 @@
+Public Declare Sub CDC_DrawChart Lib "DS2CDC" (ByVal rah As Double, ByVal ram As Double, _
+  ByVal Decd As Double, ByVal decm As Double, ByVal FOV As Integer, ByVal Comport As Integer, _
+  ByVal LX200Delay As Integer, ByVal TCaption As String, ByVal DSappname As String, ByVal HGCPath As String, _
+  ByVal STychoPath As String, ByVal ScopeType As String, ByVal forceBW As Byte, ByVal MW As Byte)
+  
+Public Declare Sub CDC_CenterOnConst Lib "DS2CDC" (ByVal conname As String, ByVal TCaption As String, _
+    DSappname As String, ByVal HGCPath As String, ByVal STychoPath As String, ByVal ScopeType As String, ByVal Comport As Integer, _
+    LX200Delay As Integer, ByVal forceBW As Byte, ByVal MW As Byte)
+    
+Public Declare Sub CDC_PlotDSO Lib "DS2CDC" (ByVal rah As Double, ByVal ram As Double, _
+  ByVal Decd As Double, ByVal decm As Double, ByVal DecSign As Byte, ByVal ObjType As Byte, _
+  ByVal ObjSize As Integer, ByVal DSOLabel As String, ByVal DSODesc As String, ByVal DSONotes As String, _
+  ByVal ChartImagePath As String, ByVal Observed As Byte, ByVal LastObject As Byte)
+  
+Public Declare Sub CDC_CloseChart Lib "DS2CDC" ()
+
+Public Declare Sub CDC_SetObservatory Lib "DS2CDC" (ByVal Latitude As Double,_
+       ByVal Longitude As Double, ByVal TimeZone As Double, ByVal ObsName As String)
+
+Public Declare Sub CDC_SetDate Lib "DS2CDC" (ByVal Year As Integer, ByVal Month As Integer,_
+       ByVal Day As Integer, ByVal Hour As Integer, ByVal Minute As Integer)
+
+Public Declare Sub CDC_PlotDSS Lib "DS2CDC" (ByVal CDDrive As String, ByVal ImagePath As String,_
+       ByVal ImageFile As String, ByVal UseExistingImage As Byte)
+
+Public Declare Sub CDC_Redraw Lib "DS2CDC" ()
+
+Public Declare Sub CDC_ShowDSS Lib "DS2CDC" (ByVal rah As Double, ByVal ram As Double,_
+       ByVal Decd As Double, ByVal decm As Double, ByVal FOV As Double,_
+       ByVal CDDrive As String, ByVal ImagePath As String,_
+       ByVal ImageFile As String, ByVal UseExistingImage As Byte)
+
+Public Declare Sub CDC_PlotVar  Lib "DS2CDC" (ByVal ObjectID As String, ByVal VarType As String,_
+          ByVal Magnitude As Double, ByVal Magnitude2 As Double, ByVal Epoch As Double,_
+          ByVal Period As Double, ByVal RiseTime As Double, ByVal LastObject As Byte)
+
+Public Declare Sub CDC_CloseVarObs Lib "DS2CDC" ()
+
+

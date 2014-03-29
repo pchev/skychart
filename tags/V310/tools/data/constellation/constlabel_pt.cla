@@ -1,0 +1,95 @@
+﻿; Name of the constellation for Cartes du Ciel
+; Official Portuguese name
+; For a translation copy this file to constlabel_xx.cla where xx is the specific language code
+; Use UTF-8 for character encoding
+; 
+;
+00.567 ;  39.250 ; And ; Andrómeda          
+10.117 ; -33.350 ; Ant ; Máquina Pneumática          
+16.133 ; -76.583 ; Aps ; Ave do Paraíso             
+22.700 ; -10.467 ; Aqr ; Aquário           
+19.683 ;  03.367 ; Aql ; Águia           
+17.233 ; -51.117 ; Ara ; Altar             
+02.683 ;  22.567 ; Ari ; Carneiro             
+05.950 ;  42.817 ; Aur ; Cocheiro            
+14.683 ;  32.333 ; Boo ; Boieiro             
+04.717 ; -38.167 ; Cae ; Buril            
+06.150 ;  71.967 ; Cam ; Girafa     
+08.667 ;  22.000 ; Cnc ; Caranguejo             
+13.017 ;  42.350 ; CVn ; Cães de Caça     
+06.833 ; -22.317 ; CMa ; Cão Maior       
+07.617 ;  06.767 ; CMi ; Cão Menor     
+21.050 ; -19.350 ; Cap ; Capricórnio        
+08.833 ; -60.500 ; Car ; Quilha            
+00.867 ;  60.300 ; Cas ; Cassiopeia         
+12.950 ; -44.000 ; Cen ; Centauro          
+22.417 ;  72.567 ; Cep ; Cefeu            
+01.717 ; -06.367 ; Cet ; Baleia              
+12.000 ; -81.017 ; Cha ; Camaleão         
+14.533 ; -67.300 ; Cir ; Compasso           
+05.700 ; -37.917 ; Col ; Pomba            
+12.750 ;  22.650 ; Com ; Cabeleira de Berenice     
+18.650 ; -41.750 ; CrA ; Coroa Austral  
+15.883 ;  32.633 ; CrB ; Coroa Boreal    
+12.383 ; -18.633 ; Crv ; Corvo            
+11.350 ; -13.750 ; Crt ; Taça            
+12.483 ; -60.300 ; Cru ; Cruzeiro do Sul               
+20.583 ;  44.000 ; Cyg ; Cisne           
+20.667 ;  12.100 ; Del ; Golfinho           
+05.333 ; -63.017 ; Dor ; Dourado              
+17.950 ;  66.067 ; Dra ; Dragão               
+21.250 ;  07.933 ; Equ ; Potro           
+03.883 ; -17.983 ; Eri ; Erídano            
+02.767 ; -31.000 ; For ; Fornalha              
+06.850 ;  24.817 ; Gem ; Gémeos              
+22.450 ; -45.133 ; Gru ; Grou                
+17.433 ;  31.233 ; Her ; Hércules            
+03.217 ; -52.000 ; Hor ; Relógio          
+09.133 ; -11.683 ; Hya ; Hidra           
+02.583 ; -72.917 ; Hyi ; Hidra Macho            
+21.133 ; -52.317 ; Ind ; Índio               
+22.517 ;  46.667 ; Lac ; Lagartixa             
+10.667 ;  17.000 ; Leo ; Leão                
+10.317 ;  33.233 ; LMi ; Leão Menor         
+05.433 ; -19.650 ; Lep ; Lebre               
+15.183 ; -15.550 ; Lib ; Balança               
+15.383 ; -42.717 ; Lup ; Lobo               
+07.733 ;  47.833 ; Lyn ; Lince                
+18.900 ;  40.650 ; Lyr ; Lira                
+05.500 ; -79.017 ; Men ; Mesa              
+20.950 ; -36.800 ; Mic ; Microscópio        
+06.967 ; -03.267 ; Mon ; Unicórnio           
+12.467 ; -69.133 ; Mus ; Mosca               
+16.050 ; -52.717 ; Nor ; Régua               
+22.167 ; -84.267 ; Oct ; Octante             
+17.033 ; -02.350 ; Oph ; Ofiúco           
+05.567 ;  03.583 ; Ori ; Orionte               
+19.167 ; -65.867 ; Pav ; Pavão                
+22.617 ;  19.650 ; Peg ; Pégaso             
+03.517 ;  44.883 ; Per ; Perseu            
+00.733 ; -48.767 ; Phe ; Fénix             
+05.383 ; -51.367 ; Pic ; Pintor              
+00.883 ;  15.483 ; Psc ; Peixes              
+22.417 ; -31.567 ; PsA ; Peixe Austral   
+07.867 ; -32.617 ; Pup ; Popa             
+08.883 ; -29.783 ; Pyx ; Bússola               
+03.900 ; -60.517 ; Ret ; Retículo           
+19.667 ;  17.000 ; Sge ; Flecha            
+19.383 ; -29.883 ; Sgr ; Sagitário         
+16.867 ; -35.333 ; Sco ; Escorpião            
+00.500 ; -31.000 ; Scl ; Escultor            
+18.650 ; -10.883 ; Sct ; Escudo             
+15.733 ;  10.850 ; Ser ; Serpente       
+17.800 ; -13.483 ; Ser ; Cauda da Serpente
+10.100 ; -01.133 ; Sex ; Sextante             
+04.100 ;  17.333 ; Tau ; Touro              
+19.250 ; -51.467 ; Tel ; Telescópio         
+02.050 ;  32.333 ; Tri ; Triângulo          
+16.117 ; -65.100 ; TrA ; Triângulo Austral
+23.833 ; -64.933 ; Tuc ; Tucano              
+11.333 ;  57.500 ; UMa ; Ursa Maior       
+14.967 ;  75.033 ; UMi ; Ursa Menor        
+09.333 ; -48.483 ; Vel ; Vela               
+13.350 ; -03.517 ; Vir ; Virgem              
+07.667 ; -69.617 ; Vol ; Peixe Voador             
+20.367 ;  25.033 ; Vul ; Raposa           

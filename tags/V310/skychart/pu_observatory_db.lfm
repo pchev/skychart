@@ -1,0 +1,347 @@
+object f_observatory_db: Tf_observatory_db
+  Left = 618
+  Height = 291
+  Top = 71
+  Width = 488
+  Caption = 'f_observatory_db'
+  ClientHeight = 291
+  ClientWidth = 488
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  LCLVersion = '1.0.14.0'
+  object obsname: TGroupBox
+    Left = 8
+    Height = 248
+    Top = 0
+    Width = 464
+    ClientHeight = 244
+    ClientWidth = 460
+    TabOrder = 0
+    object Label2: TLabel
+      Left = 320
+      Height = 16
+      Top = 85
+      Width = 18
+      Caption = '+/-'
+      ParentColor = False
+    end
+    object Label3: TLabel
+      Left = 428
+      Height = 16
+      Top = 85
+      Width = 23
+      Caption = 'Km.'
+      ParentColor = False
+    end
+    object citylist: TComboBox
+      Left = 8
+      Height = 23
+      Top = 41
+      Width = 233
+      AutoComplete = True
+      AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
+      ItemHeight = 0
+      OnChange = citylistChange
+      TabOrder = 1
+      Text = '...'
+    end
+    object citysearch: TButton
+      Left = 374
+      Height = 25
+      Top = 41
+      Width = 76
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Search'
+      OnClick = citysearchClick
+      TabOrder = 3
+    end
+    object countrylist: TComboBox
+      Left = 8
+      Height = 25
+      Top = 1
+      Width = 234
+      DropDownCount = 10
+      ItemHeight = 0
+      OnSelect = countrylistChange
+      Style = csDropDownList
+      TabOrder = 0
+    end
+    object cityfilter: TEdit
+      Left = 254
+      Height = 23
+      Top = 41
+      Width = 104
+      OnKeyDown = cityfilterKeyDown
+      TabOrder = 2
+    end
+    object downloadcity: TButton
+      Left = 164
+      Height = 25
+      Top = 194
+      Width = 192
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Download country details'
+      OnClick = downloadcityClick
+      TabOrder = 13
+    end
+    object updcity: TButton
+      Left = 8
+      Height = 25
+      Top = 194
+      Width = 72
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Update'
+      OnClick = updcityClick
+      TabOrder = 11
+    end
+    object delcity: TButton
+      Left = 84
+      Height = 25
+      Top = 194
+      Width = 72
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Delete'
+      OnClick = delcityClick
+      TabOrder = 12
+    end
+    object LocCode: TEdit
+      Cursor = crHandPoint
+      Left = 133
+      Height = 23
+      Top = 83
+      Width = 108
+      Color = clBtnFace
+      OnClick = LocCodeClick
+      ParentShowHint = False
+      ReadOnly = True
+      ShowHint = True
+      TabOrder = 4
+    end
+    object vicinity: TButton
+      Left = 254
+      Height = 25
+      Top = 81
+      Width = 60
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Vicinity'
+      OnClick = vicinityClick
+      TabOrder = 5
+    end
+    object vicinityrangeEdit: TEdit
+      Left = 345
+      Height = 23
+      Top = 83
+      Width = 56
+      TabOrder = 6
+    end
+    object vicinityrange: TUpDown
+      Left = 401
+      Height = 23
+      Top = 83
+      Width = 17
+      Associate = vicinityrangeEdit
+      Min = 0
+      Max = 500
+      Position = 10
+      TabOrder = 7
+      Wrap = False
+    end
+    object Memo1: TMemo
+      Left = 8
+      Height = 64
+      Top = 114
+      Width = 425
+      TabOrder = 8
+      TabStop = False
+      Visible = False
+    end
+    object Label1: TLabel
+      Left = 8
+      Height = 16
+      Top = 85
+      Width = 101
+      Caption = 'Designation Code'
+      ParentColor = False
+    end
+    object Latitude: TGroupBox
+      Left = 8
+      Height = 68
+      Top = 114
+      Width = 185
+      Caption = 'Latitude'
+      ClientHeight = 51
+      ClientWidth = 181
+      TabOrder = 9
+      object Label58: TLabel
+        Left = 4
+        Height = 16
+        Top = 4
+        Width = 43
+        Caption = 'Degree'
+        ParentColor = False
+      end
+      object hemis: TComboBox
+        Left = 112
+        Height = 23
+        Top = 19
+        Width = 65
+        AutoCompleteText = [cbactSearchAscending]
+        ItemHeight = 0
+        ItemIndex = 0
+        Items.Strings = (
+          'North'
+          'South'
+        )
+        OnChange = latdegChange
+        TabOrder = 3
+        Text = 'North'
+      end
+      object latdeg: TLongEdit
+        Left = 4
+        Height = 23
+        Hint = '0..90'
+        Top = 20
+        Width = 33
+        MaxLength = 2
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        Value = 0
+        MaxValue = 90
+        OnExit = latdegChange
+      end
+      object latmin: TLongEdit
+        Left = 48
+        Height = 23
+        Hint = '0..59'
+        Top = 20
+        Width = 25
+        MaxLength = 2
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+        Value = 0
+        MaxValue = 59
+        OnExit = latdegChange
+      end
+      object latsec: TLongEdit
+        Left = 80
+        Height = 23
+        Hint = '0..59'
+        Top = 20
+        Width = 25
+        MaxLength = 2
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 2
+        Value = 0
+        MaxValue = 59
+        OnExit = latdegChange
+      end
+    end
+    object Longitude: TGroupBox
+      Left = 206
+      Height = 68
+      Top = 114
+      Width = 185
+      Caption = 'Longitude'
+      ClientHeight = 51
+      ClientWidth = 181
+      TabOrder = 10
+      object Label61: TLabel
+        Left = 4
+        Height = 16
+        Top = 4
+        Width = 43
+        Caption = 'Degree'
+        ParentColor = False
+      end
+      object long: TComboBox
+        Left = 112
+        Height = 23
+        Top = 19
+        Width = 65
+        AutoCompleteText = [cbactSearchAscending]
+        ItemHeight = 0
+        ItemIndex = 1
+        Items.Strings = (
+          'West'
+          'East'
+        )
+        OnChange = longdegChange
+        TabOrder = 3
+        Text = 'East'
+      end
+      object longdeg: TLongEdit
+        Left = 4
+        Height = 23
+        Hint = '0..180'
+        Top = 20
+        Width = 33
+        MaxLength = 4
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        Value = 0
+        MaxValue = 180
+        OnExit = longdegChange
+      end
+      object longmin: TLongEdit
+        Left = 48
+        Height = 23
+        Hint = '0..59'
+        Top = 20
+        Width = 25
+        MaxLength = 2
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 1
+        Value = 0
+        MaxValue = 59
+        OnExit = longdegChange
+      end
+      object longsec: TLongEdit
+        Left = 80
+        Height = 23
+        Hint = '0..59'
+        Top = 20
+        Width = 25
+        MaxLength = 2
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 2
+        Value = 0
+        MaxValue = 59
+        OnExit = longdegChange
+      end
+    end
+  end
+  object Button1: TButton
+    Left = 248
+    Height = 25
+    Top = 256
+    Width = 75
+    Caption = 'OK'
+    ModalResult = 1
+    TabOrder = 1
+  end
+  object Button2: TButton
+    Left = 368
+    Height = 25
+    Top = 256
+    Width = 75
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 2
+  end
+  object DownloadDialog1: TDownloadDialog
+    Timeout = 90000
+    FtpFwMode = 0
+    FtpFwPassive = True
+    ConfirmDownload = True
+    left = 40
+    top = 144
+  end
+end

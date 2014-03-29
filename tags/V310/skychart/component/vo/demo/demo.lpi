@@ -1,0 +1,344 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="9"/>
+    <General>
+      <Flags>
+        <LRSInOutputDirectory Value="False"/>
+      </Flags>
+      <MainUnit Value="0"/>
+      <ActiveWindowIndexAtStart Value="0"/>
+    </General>
+    <VersionInfo>
+      <Language Value=""/>
+      <CharSet Value=""/>
+      <StringTable ProductVersion=""/>
+    </VersionInfo>
+    <BuildModes Count="1">
+      <Item1 Name="default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="3">
+      <Item1>
+        <PackageName Value="radec"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="LCL"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="lazvo"/>
+        <MinVersion Valid="True"/>
+      </Item3>
+    </RequiredPackages>
+    <Units Count="14">
+      <Unit0>
+        <Filename Value="demo.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <TopLine Value="1"/>
+        <CursorPos X="39" Y="37"/>
+        <UsageCount Value="40"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="demo1.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="demo1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="342"/>
+        <CursorPos X="36" Y="373"/>
+        <UsageCount Value="40"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="pr_vodetail.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_vodetail"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pr_vodetail"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="82"/>
+        <CursorPos X="16" Y="118"/>
+        <UsageCount Value="40"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="../../../../../../pch/lazarus/lcl/include/application.inc"/>
+        <TopLine Value="306"/>
+        <CursorPos X="1" Y="329"/>
+        <UsageCount Value="8"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="../cu_vodetail.pas"/>
+        <UnitName Value="cu_vodetail"/>
+        <EditorIndex Value="3"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="237"/>
+        <CursorPos X="67" Y="263"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="../u_voconstant.pas"/>
+        <UnitName Value="u_voconstant"/>
+        <EditorIndex Value="5"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="26"/>
+        <CursorPos X="1" Y="46"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="../cu_vocatalog.pas"/>
+        <UnitName Value="cu_vocatalog"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="37"/>
+        <CursorPos X="19" Y="43"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="../cu_vodata.pas"/>
+        <UnitName Value="cu_vodata"/>
+        <EditorIndex Value="4"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="76"/>
+        <CursorPos X="6" Y="100"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="../../../../../../pch/lazarus/lcl/grids.pas"/>
+        <UnitName Value="Grids"/>
+        <TopLine Value="6275"/>
+        <CursorPos X="1" Y="6299"/>
+        <UsageCount Value="8"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="../../radec/cu_radec.pas"/>
+        <UnitName Value="cu_radec"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="380"/>
+        <CursorPos X="38" Y="391"/>
+        <UsageCount Value="10"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="../../../../../../compiler/lazarus/lcl/include/control.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="3169"/>
+        <CursorPos X="40" Y="3189"/>
+        <UsageCount Value="8"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="pr_vodetail.lfm"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="183"/>
+        <CursorPos X="1" Y="215"/>
+        <UsageCount Value="8"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="../../xmlparser/LibXmlParser.pas"/>
+        <UnitName Value="LibXmlParser"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="630"/>
+        <CursorPos X="3" Y="1227"/>
+        <UsageCount Value="9"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="../../../../../../compiler/lazarus/lcl/grids.pas"/>
+        <UnitName Value="Grids"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="8210"/>
+        <CursorPos X="1" Y="8230"/>
+        <UsageCount Value="9"/>
+      </Unit13>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="../cu_vodetail.pas"/>
+        <Caret Line="265" Column="17" TopLine="246"/>
+      </Position1>
+      <Position2>
+        <Filename Value="../cu_vodetail.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position2>
+      <Position3>
+        <Filename Value="../cu_vodetail.pas"/>
+        <Caret Line="43" Column="14" TopLine="11"/>
+      </Position3>
+      <Position4>
+        <Filename Value="../cu_vodetail.pas"/>
+        <Caret Line="77" Column="49" TopLine="45"/>
+      </Position4>
+      <Position5>
+        <Filename Value="../cu_vodetail.pas"/>
+        <Caret Line="140" Column="20" TopLine="106"/>
+      </Position5>
+      <Position6>
+        <Filename Value="../cu_vodetail.pas"/>
+        <Caret Line="172" Column="20" TopLine="138"/>
+      </Position6>
+      <Position7>
+        <Filename Value="pr_vodetail.pas"/>
+        <Caret Line="37" Column="41" TopLine="79"/>
+      </Position7>
+      <Position8>
+        <Filename Value="../cu_vodata.pas"/>
+        <Caret Line="152" Column="46" TopLine="140"/>
+      </Position8>
+      <Position9>
+        <Filename Value="../cu_vodata.pas"/>
+        <Caret Line="68" Column="36" TopLine="68"/>
+      </Position9>
+      <Position10>
+        <Filename Value="../cu_vodata.pas"/>
+        <Caret Line="161" Column="36" TopLine="152"/>
+      </Position10>
+      <Position11>
+        <Filename Value="../cu_vodata.pas"/>
+        <Caret Line="152" Column="39" TopLine="132"/>
+      </Position11>
+      <Position12>
+        <Filename Value="demo1.pas"/>
+        <Caret Line="291" Column="63" TopLine="274"/>
+      </Position12>
+      <Position13>
+        <Filename Value="pr_vodetail.pas"/>
+        <Caret Line="109" Column="24" TopLine="80"/>
+      </Position13>
+      <Position14>
+        <Filename Value="pr_vodetail.pas"/>
+        <Caret Line="110" Column="24" TopLine="81"/>
+      </Position14>
+      <Position15>
+        <Filename Value="demo1.pas"/>
+        <Caret Line="366" Column="12" TopLine="334"/>
+      </Position15>
+      <Position16>
+        <Filename Value="demo1.pas"/>
+        <Caret Line="359" Column="27" TopLine="346"/>
+      </Position16>
+      <Position17>
+        <Filename Value="../cu_vodata.pas"/>
+        <Caret Line="161" Column="6" TopLine="152"/>
+      </Position17>
+      <Position18>
+        <Filename Value="../cu_vodata.pas"/>
+        <Caret Line="41" Column="50" TopLine="21"/>
+      </Position18>
+      <Position19>
+        <Filename Value="demo1.pas"/>
+        <Caret Line="368" Column="31" TopLine="337"/>
+      </Position19>
+      <Position20>
+        <Filename Value="demo1.pas"/>
+        <Caret Line="360" Column="38" TopLine="337"/>
+      </Position20>
+      <Position21>
+        <Filename Value="demo1.pas"/>
+        <Caret Line="361" Column="48" TopLine="337"/>
+      </Position21>
+      <Position22>
+        <Filename Value="../cu_vodata.pas"/>
+        <Caret Line="83" Column="44" TopLine="63"/>
+      </Position22>
+      <Position23>
+        <Filename Value="../cu_vodata.pas"/>
+        <Caret Line="118" Column="10" TopLine="86"/>
+      </Position23>
+      <Position24>
+        <Filename Value="../cu_vodata.pas"/>
+        <Caret Line="148" Column="51" TopLine="116"/>
+      </Position24>
+      <Position25>
+        <Filename Value="../cu_vodata.pas"/>
+        <Caret Line="161" Column="9" TopLine="129"/>
+      </Position25>
+      <Position26>
+        <Filename Value="demo1.pas"/>
+        <Caret Line="361" Column="38" TopLine="337"/>
+      </Position26>
+      <Position27>
+        <Filename Value="../cu_vodata.pas"/>
+        <Caret Line="82" Column="54" TopLine="62"/>
+      </Position27>
+      <Position28>
+        <Filename Value="../cu_vodata.pas"/>
+        <Caret Line="119" Column="9" TopLine="87"/>
+      </Position28>
+      <Position29>
+        <Filename Value="../cu_vodata.pas"/>
+        <Caret Line="148" Column="31" TopLine="116"/>
+      </Position29>
+      <Position30>
+        <Filename Value="demo1.pas"/>
+        <Caret Line="361" Column="20" TopLine="305"/>
+      </Position30>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="9"/>
+    <SearchPaths>
+      <OtherUnitFiles Value="component/winxp"/>
+      <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
+      <SrcPath Value="$(LazarusDir)/lcl;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <UseAnsiStrings Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
+    <CodeGeneration>
+      <HeapSize Value="100000"/>
+      <Optimizations>
+        <OptimizationLevel Value="2"/>
+      </Optimizations>
+    </CodeGeneration>
+    <Linking>
+      <Debugging>
+        <GenerateDebugInfo Value="True"/>
+      </Debugging>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <Verbosity>
+        <ShowHints Value="False"/>
+      </Verbosity>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="2">
+      <Item1>
+        <Name Value="ECodetoolError"/>
+      </Item1>
+      <Item2>
+        <Name Value="EFOpenError"/>
+      </Item2>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

@@ -1,0 +1,93 @@
+; Name of the constellation for Cartes du Ciel
+; For a translation copy this file to constlabel_xx.cla where xx is the specific language code
+; Use UTF-8 for character encoding
+; Translated By Jarosław Wójcik <wojcikj [at] op [dot] pl>, 2010
+00.567 ;  39.250 ; And ; Andromeda          
+10.117 ; -33.350 ; Ant ; Pompa              
+16.133 ; -76.583 ; Aps ; Ptak Rajski        
+22.700 ; -10.467 ; Aqr ; Wodnik             
+19.683 ;  03.367 ; Aql ; Orzeł              
+17.233 ; -51.117 ; Ara ; Ołtarz             
+02.683 ;  22.567 ; Ari ; Baran              
+05.950 ;  42.817 ; Aur ; Woźnica            
+14.683 ;  32.333 ; Boo ; Wolarz             
+04.717 ; -38.167 ; Cae ; Rylec              
+06.150 ;  71.967 ; Cam ; Żyrafa             
+08.667 ;  22.000 ; Cnc ; Rak                
+13.017 ;  42.350 ; CVn ; Psy Gończe         
+06.833 ; -22.317 ; CMa ; Pies Wielki        
+07.617 ;  06.767 ; CMi ; Pies Mały          
+21.050 ; -19.350 ; Cap ; Koziorożec         
+08.833 ; -60.500 ; Car ; Kil                
+00.867 ;  60.300 ; Cas ; Kasjopea           
+12.950 ; -44.000 ; Cen ; Centaur            
+22.417 ;  72.567 ; Cep ; Cefeusz            
+01.717 ; -06.367 ; Cet ; Wieloryb           
+12.000 ; -81.017 ; Cha ; Kameleon           
+14.533 ; -67.300 ; Cir ; Cyrkiel            
+05.700 ; -37.917 ; Col ; Gołąb              
+12.750 ;  22.650 ; Com ; Warkocz Bereniki   
+18.650 ; -41.750 ; CrA ; Korona Południowa  
+15.883 ;  32.633 ; CrB ; Korona Północna    
+12.383 ; -18.633 ; Crv ; Kruk               
+11.350 ; -13.750 ; Crt ; Puchar             
+12.483 ; -60.300 ; Cru ; Krzyż Południa     
+20.583 ;  44.000 ; Cyg ; Łabędź             
+20.667 ;  12.100 ; Del ; Delfin             
+05.333 ; -63.017 ; Dor ; Ryba Złota         
+17.950 ;  66.067 ; Dra ; Smok               
+21.250 ;  07.933 ; Equ ; Źrebię             
+03.883 ; -17.983 ; Eri ; Erydan             
+02.767 ; -31.000 ; For ; Piec               
+06.850 ;  24.817 ; Gem ; Bliźnięta          
+22.450 ; -45.133 ; Gru ; Żuraw              
+17.433 ;  31.233 ; Her ; Herkules           
+03.217 ; -52.000 ; Hor ; Zegar              
+09.133 ; -11.683 ; Hya ; Hydra              
+02.583 ; -72.917 ; Hyi ; Wąż Wodny          
+21.133 ; -52.317 ; Ind ; Indianin	           
+22.517 ;  46.667 ; Lac ; Jaszczurka         
+10.667 ;  17.000 ; Leo ; Lew                
+10.317 ;  33.233 ; LMi ; Lew Mały           
+05.433 ; -19.650 ; Lep ; Zając              
+15.183 ; -15.550 ; Lib ; Waga               
+15.383 ; -42.717 ; Lup ; Wilk               
+07.733 ;  47.833 ; Lyn ; Ryś                
+18.900 ;  40.650 ; Lyr ; Lutnia             
+05.500 ; -79.017 ; Men ; Góra Stołowa       
+20.950 ; -36.800 ; Mic ; Mikroskop          
+06.967 ; -03.267 ; Mon ; Jednorożec         
+12.467 ; -69.133 ; Mus ; Mucha              
+16.050 ; -52.717 ; Nor ; Węgielnica         
+22.167 ; -84.267 ; Oct ; Oktant             
+17.033 ; -02.350 ; Oph ; Wężownik           
+05.567 ;  03.583 ; Ori ; Orion              
+19.167 ; -65.867 ; Pav ; Paw                
+22.617 ;  19.650 ; Peg ; Pegaz              
+03.517 ;  44.883 ; Per ; Perseusz           
+00.733 ; -48.767 ; Phe ; Phoenix            
+05.383 ; -51.367 ; Pic ; Malarz             
+00.883 ;  15.483 ; Psc ; Ryby               
+22.417 ; -31.567 ; PsA ; Ryba Południowa    
+07.867 ; -32.617 ; Pup ; Rufa               
+08.883 ; -29.783 ; Pyx ; Kompas             
+03.900 ; -60.517 ; Ret ; Sieć               
+19.667 ;  17.000 ; Sge ; Strzała            
+19.383 ; -29.883 ; Sgr ; Strzelec           
+16.867 ; -35.333 ; Sco ; Skorpion           
+00.500 ; -31.000 ; Scl ; Rzeźbiarz          
+18.650 ; -10.883 ; Sct ; Tarcza             
+15.733 ;  10.850 ; Ser ; Głowa Węża         
+17.800 ; -13.483 ; Ser ; Ogon Węża    
+10.100 ; -01.133 ; Sex ; Sextant            
+04.100 ;  17.333 ; Tau ; Byk                
+19.250 ; -51.467 ; Tel ; Teleskop           
+02.050 ;  32.333 ; Tri ; Trójkąt            
+16.117 ; -65.100 ; TrA ; Trójkąt Południowy 
+23.833 ; -64.933 ; Tuc ; Tukan              
+11.333 ;  57.500 ; UMa ; Niedźwiedzica Wielka
+14.967 ;  75.033 ; UMi ; Niedźwiedzica Mała 
+09.333 ; -48.483 ; Vel ; Żagiel             
+13.350 ; -03.517 ; Vir ; Panna              
+07.667 ; -69.617 ; Vol ; Ryba Latająca      
+20.367 ;  25.033 ; Vul ; Lis                

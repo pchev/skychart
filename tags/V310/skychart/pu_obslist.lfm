@@ -1,0 +1,386 @@
+object f_obslist: Tf_obslist
+  Left = 414
+  Height = 498
+  Top = 109
+  Width = 800
+  Caption = 'f_obslist'
+  ClientHeight = 498
+  ClientWidth = 800
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  LCLVersion = '1.0.14.0'
+  object PanelBot: TPanel
+    Left = 0
+    Height = 66
+    Top = 432
+    Width = 800
+    Align = alBottom
+    ClientHeight = 66
+    ClientWidth = 800
+    TabOrder = 2
+    object FileNameEdit1: TFileNameEdit
+      Left = 8
+      Height = 23
+      Top = 5
+      Width = 192
+      OnAcceptFileName = FileNameEdit1AcceptFileName
+      FilterIndex = 0
+      HideDirectories = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      MaxLength = 0
+      TabOrder = 0
+      OnEditingDone = FileNameEdit1EditingDone
+    end
+    object ButtonSave: TButton
+      Left = 240
+      Height = 25
+      Top = 5
+      Width = 75
+      Caption = 'Save'
+      OnClick = ButtonSaveClick
+      TabOrder = 1
+    end
+    object ButtonClear: TButton
+      Left = 352
+      Height = 25
+      Top = 4
+      Width = 75
+      Caption = 'Clear'
+      OnClick = ButtonClearClick
+      TabOrder = 2
+    end
+    object CheckBox3: TCheckBox
+      Left = 448
+      Height = 23
+      Top = 4
+      Width = 173
+      Caption = 'Mark objects on the chart'
+      OnChange = CheckBox3Change
+      TabOrder = 3
+    end
+    object NoFilterList: TCheckBox
+      Left = 448
+      Height = 23
+      Top = 32
+      Width = 237
+      Caption = 'Always show the objects from the list'
+      OnChange = NoFilterListChange
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
+    end
+    object UpdAllCoord: TButton
+      Left = 240
+      Height = 25
+      Top = 35
+      Width = 187
+      Caption = 'UpdAllCoord'
+      OnClick = UpdAllCoordClick
+      TabOrder = 4
+    end
+    object Button1: TButton
+      Left = 125
+      Height = 25
+      Top = 35
+      Width = 75
+      Caption = 'Help'
+      OnClick = Button1Click
+      TabOrder = 6
+    end
+  end
+  object StringGrid1: TStringGrid
+    Left = 0
+    Height = 352
+    Top = 80
+    Width = 800
+    Align = alClient
+    ColCount = 8
+    ColumnClickSorts = True
+    Columns = <    
+      item
+        Title.Caption = 'Title'
+      end    
+      item
+        Title.Caption = 'Title'
+      end    
+      item
+        Title.Caption = 'Title'
+      end    
+      item
+        Title.Caption = 'Title'
+      end    
+      item
+        Title.Caption = 'Title'
+      end    
+      item
+        Title.Caption = 'Title'
+      end    
+      item
+        Title.Caption = 'Title'
+      end>
+    DefaultColWidth = 100
+    MouseWheelOption = mwGrid
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowMoving, goEditing, goRowSelect, goSmoothScroll, goFixedRowNumbering, goFixedColSizing]
+    PopupMenu = PopupMenu1
+    TabOrder = 1
+    OnColRowExchanged = StringGrid1ColRowMoved
+    OnColRowMoved = StringGrid1ColRowMoved
+    OnCompareCells = StringGrid1CompareCells
+    OnMouseDown = StringGrid1MouseDown
+    OnMouseUp = StringGrid1MouseUp
+    OnResize = StringGrid1Resize
+    OnValidateEntry = StringGrid1ValidateEntry
+  end
+  object PanelTop: TPanel
+    Left = 0
+    Height = 80
+    Top = 0
+    Width = 800
+    Align = alTop
+    ClientHeight = 80
+    ClientWidth = 800
+    TabOrder = 0
+    object Edit1: TEdit
+      Left = 8
+      Height = 23
+      Top = 8
+      Width = 176
+      TabOrder = 0
+    end
+    object Button5: TButton
+      Left = 8
+      Height = 25
+      Top = 40
+      Width = 80
+      Caption = '<'
+      OnClick = Button5Click
+      TabOrder = 2
+    end
+    object Button6: TButton
+      Left = 104
+      Height = 25
+      Top = 40
+      Width = 80
+      Caption = '>'
+      OnClick = Button6Click
+      TabOrder = 3
+    end
+    object ToggleBox1: TToggleBox
+      Left = 192
+      Height = 26
+      Top = 3
+      Width = 90
+      Caption = 'ToggleBox1'
+      Checked = True
+      OnClick = ToggleBox1Click
+      State = cbChecked
+      TabOrder = 1
+    end
+    object ToggleBox2: TToggleBox
+      Left = 192
+      Height = 26
+      Top = 30
+      Width = 90
+      Caption = 'ToggleBox2'
+      OnClick = ToggleBox2Click
+      TabOrder = 4
+    end
+    object PageControl1: TPageControl
+      Left = 278
+      Height = 78
+      Top = 1
+      Width = 521
+      ActivePage = TabSheet1
+      Align = alRight
+      Anchors = [akTop, akLeft, akBottom]
+      ShowTabs = False
+      TabIndex = 0
+      TabOrder = 5
+      OnChange = PageControl1Change
+      object TabSheet1: TTabSheet
+        Caption = 'Airmass'
+        ClientHeight = 74
+        ClientWidth = 517
+        object CheckBox2: TCheckBox
+          Left = 16
+          Height = 23
+          Top = 46
+          Width = 240
+          Caption = 'Only objects within airmass limits now'
+          OnChange = CheckBox2Change
+          TabOrder = 2
+        end
+        object CheckBox1: TCheckBox
+          Left = 16
+          Height = 23
+          Top = 22
+          Width = 260
+          Caption = 'Only objects within airmass limits tonight'
+          OnChange = CheckBox1Change
+          TabOrder = 1
+        end
+        object Label2: TLabel
+          Left = 192
+          Height = 16
+          Top = 3
+          Width = 37
+          Caption = 'Label2'
+          ParentColor = False
+        end
+        object AirmassCombo: TComboBox
+          Left = 112
+          Height = 23
+          Top = 1
+          Width = 72
+          ItemHeight = 0
+          ItemIndex = 2
+          Items.Strings = (
+            '1.1'
+            '1.2'
+            '1.5'
+            '2'
+            '3'
+            '5'
+            'horizon'
+          )
+          OnChange = AirmassComboChange
+          TabOrder = 0
+          Text = '1.5'
+        end
+        object Label1: TLabel
+          Left = 16
+          Height = 16
+          Top = 3
+          Width = 30
+          Caption = 'Limit'
+          ParentColor = False
+        end
+      end
+      object TabSheet2: TTabSheet
+        Caption = 'Transit'
+        ClientHeight = 74
+        ClientWidth = 517
+        object CheckBox4: TCheckBox
+          Left = 144
+          Height = 23
+          Top = 22
+          Width = 276
+          Caption = 'Only objects within hour angle limits tonight'
+          OnChange = CheckBox4Change
+          TabOrder = 2
+        end
+        object Label3: TLabel
+          Left = 144
+          Height = 16
+          Top = 3
+          Width = 30
+          Caption = 'Limit'
+          ParentColor = False
+        end
+        object HourAngleCombo: TComboBox
+          Left = 240
+          Height = 23
+          Top = 1
+          Width = 72
+          ItemHeight = 0
+          ItemIndex = 1
+          Items.Strings = (
+            '1.0'
+            '2.0'
+            '3.0'
+            '4.0'
+          )
+          OnChange = HourAngleComboChange
+          TabOrder = 1
+          Text = '2.0'
+        end
+        object Label4: TLabel
+          Left = 320
+          Height = 16
+          Top = 3
+          Width = 34
+          Caption = 'Hours'
+          ParentColor = False
+        end
+        object CheckBox5: TCheckBox
+          Left = 144
+          Height = 23
+          Top = 46
+          Width = 256
+          Caption = 'Only objects within hour angle limits now'
+          OnChange = CheckBox5Change
+          TabOrder = 3
+        end
+        object Panel1: TPanel
+          Left = 0
+          Height = 74
+          Top = 0
+          Width = 141
+          Align = alLeft
+          BevelOuter = bvLowered
+          ClientHeight = 74
+          ClientWidth = 141
+          TabOrder = 0
+          object RadioButton1: TRadioButton
+            Left = 2
+            Height = 23
+            Top = 2
+            Width = 104
+            Caption = 'RadioButton1'
+            Checked = True
+            OnClick = RadioGroup1Click
+            TabOrder = 0
+            TabStop = True
+          end
+          object RadioButton2: TRadioButton
+            Left = 2
+            Height = 23
+            Top = 26
+            Width = 104
+            Caption = 'RadioButton2'
+            OnClick = RadioGroup1Click
+            TabOrder = 1
+          end
+          object RadioButton3: TRadioButton
+            Left = 2
+            Height = 23
+            Top = 50
+            Width = 104
+            Caption = 'RadioButton3'
+            OnClick = RadioGroup1Click
+            TabOrder = 2
+          end
+        end
+      end
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    OnPopup = PopupMenu1Popup
+    left = 264
+    top = 232
+    object MenuTitle: TMenuItem
+      Enabled = False
+    end
+    object MenuView: TMenuItem
+      Caption = 'View on chart'
+      OnClick = MenuViewClick
+    end
+    object MenuUpdcoord: TMenuItem
+      Caption = 'Update coordinates'
+      OnClick = MenuUpdcoordClick
+    end
+    object MenuDelete: TMenuItem
+      Caption = 'Delete'
+      OnClick = MenuDeleteClick
+    end
+  end
+  object RefreshTimer: TTimer
+    Enabled = False
+    Interval = 60000
+    OnTimer = RefreshTimerTimer
+    left = 360
+    top = 235
+  end
+end

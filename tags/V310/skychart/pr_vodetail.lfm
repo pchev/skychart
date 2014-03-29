@@ -1,0 +1,337 @@
+object f_vodetail: Tf_vodetail
+  Left = 407
+  Height = 458
+  Top = 109
+  Width = 759
+  HorzScrollBar.Page = 758
+  VertScrollBar.Page = 426
+  Align = alClient
+  Caption = 'f_vodetail'
+  ClientHeight = 458
+  ClientWidth = 759
+  OnCreate = FormCreate
+  LCLVersion = '1.0.12.0'
+  object MainPanel: TPanel
+    Left = 0
+    Height = 458
+    Top = 0
+    Width = 759
+    Align = alClient
+    ClientHeight = 458
+    ClientWidth = 759
+    TabOrder = 0
+    object Panel1: TPanel
+      Left = 1
+      Height = 217
+      Top = 240
+      Width = 757
+      Align = alBottom
+      ClientHeight = 217
+      ClientWidth = 757
+      TabOrder = 1
+      TabStop = True
+      object Table: TLabel
+        Left = 4
+        Height = 16
+        Top = 12
+        Width = 49
+        Caption = 'Table......'
+        ParentColor = False
+      end
+      object Rows: TLabel
+        Left = 167
+        Height = 16
+        Top = 12
+        Width = 58
+        Caption = 'Rows.........'
+        ParentColor = False
+      end
+      object Button1: TButton
+        Left = 583
+        Height = 25
+        Top = 182
+        Width = 160
+        BorderSpacing.InnerBorder = 4
+        Caption = 'Download catalog'
+        OnClick = GetData
+        TabOrder = 15
+      end
+      object RadioGroup1: TRadioGroup
+        Left = 335
+        Height = 103
+        Top = 104
+        Width = 209
+        AutoFill = True
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.TopBottomSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 99
+        ClientWidth = 205
+        Items.Strings = (
+          'Cannot draw                 .'
+          'Draw as star                 .'
+          'Draw as DSO                 .'
+        )
+        OnClick = RadioGroup1Click
+        TabOrder = 14
+      end
+      object Label9: TLabel
+        Left = 8
+        Height = 16
+        Top = 149
+        Width = 147
+        Caption = 'Default size '' .......................'
+        ParentColor = False
+      end
+      object Label10: TLabel
+        Left = 8
+        Height = 16
+        Top = 95
+        Width = 147
+        Caption = 'Default magnitude.............'
+        ParentColor = False
+      end
+      object FullDownload: TCheckBox
+        Left = 559
+        Height = 23
+        Top = 106
+        Width = 191
+        Caption = 'Download full catalog...............'
+        OnChange = FullDownloadChange
+        TabOrder = 9
+      end
+      object Label1: TLabel
+        Left = 8
+        Height = 16
+        Top = 124
+        Width = 149
+        Caption = 'Object type ..........................'
+        ParentColor = False
+      end
+      object ComboBox1: TComboBox
+        Left = 158
+        Height = 25
+        Top = 119
+        Width = 164
+        ItemHeight = 0
+        ItemIndex = 14
+        Items.Strings = (
+          'Unknow'
+          'Galaxy'
+          'Open cluster'
+          'Globular cluster'
+          'Planetary nebula'
+          'Bright nebula'
+          'Cluster+Nebula'
+          'Star'
+          'Double star'
+          'Triple star'
+          'Asterism'
+          'Knot'
+          'Galaxy cluster'
+          'Dark nebula'
+          'Circle'
+          'Rectangle'
+          'Lozenge'
+        )
+        OnChange = ComboBox1Change
+        Style = csDropDownList
+        TabOrder = 10
+        Text = 'Circle'
+      end
+      object ButtonBack: TButton
+        Left = 655
+        Height = 25
+        Top = 8
+        Width = 88
+        Caption = '< Back'
+        OnClick = ButtonBackClick
+        TabOrder = 3
+      end
+      object DefMag: TLongEdit
+        Left = 160
+        Height = 23
+        Top = 91
+        Width = 80
+        TabOrder = 8
+        Value = 12
+      end
+      object DefSize: TLongEdit
+        Left = 160
+        Height = 23
+        Hint = '0..36000'
+        Top = 145
+        Width = 80
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 11
+        Value = 60
+        MaxValue = 36000
+      end
+      object Button2: TButton
+        Left = 583
+        Height = 25
+        Top = 145
+        Width = 160
+        Caption = 'Data preview'
+        OnClick = Button2Click
+        TabOrder = 12
+      end
+      object Shape1: TShape
+        Left = 160
+        Height = 24
+        Top = 172
+        Width = 24
+        OnMouseUp = Shape1MouseUp
+        Shape = stRoundSquare
+      end
+      object CheckBox1: TCheckBox
+        Left = 8
+        Height = 23
+        Top = 172
+        Width = 148
+        Caption = 'Force color....................'
+        OnChange = CheckBox1Change
+        TabOrder = 13
+      end
+      object MagField: TComboBox
+        Left = 81
+        Height = 25
+        Top = 56
+        Width = 130
+        ItemHeight = 0
+        OnChange = FieldChange
+        Style = csDropDownList
+        TabOrder = 4
+      end
+      object Label2: TLabel
+        Left = 8
+        Height = 16
+        Top = 60
+        Width = 62
+        Caption = 'Magnitude'
+        ParentColor = False
+      end
+      object SizeField: TComboBox
+        Left = 287
+        Height = 25
+        Top = 56
+        Width = 130
+        ItemHeight = 0
+        OnChange = FieldChange
+        Style = csDropDownList
+        TabOrder = 5
+      end
+      object Label3: TLabel
+        Left = 239
+        Height = 16
+        Top = 60
+        Width = 23
+        Caption = 'Size'
+        ParentColor = False
+      end
+      object NameField: TComboBox
+        Left = 613
+        Height = 25
+        Top = 56
+        Width = 130
+        ItemHeight = 0
+        OnChange = FieldChange
+        Style = csDropDownList
+        TabOrder = 7
+      end
+      object Label4: TLabel
+        Left = 431
+        Height = 16
+        Top = 60
+        Width = 34
+        Caption = 'Name'
+        ParentColor = False
+      end
+      object Prefix: TEdit
+        Left = 487
+        Height = 23
+        Top = 57
+        Width = 98
+        OnChange = PrefixChange
+        TabOrder = 6
+        Text = 'Prefix'
+      end
+      object tn: TStaticText
+        Left = 55
+        Height = 43
+        Top = 10
+        Width = 104
+        BorderStyle = sbsSingle
+        Caption = 'tn'
+        TabOrder = 0
+      end
+      object tr: TStaticText
+        Left = 227
+        Height = 43
+        Top = 10
+        Width = 84
+        BorderStyle = sbsSingle
+        Caption = 'tr'
+        TabOrder = 1
+      end
+      object desc: TStaticText
+        Left = 317
+        Height = 43
+        Top = 10
+        Width = 330
+        BorderStyle = sbsSingle
+        Caption = 'desc'
+        TabOrder = 2
+      end
+    end
+    object Grid: TStringGrid
+      Left = 1
+      Height = 239
+      Top = 1
+      Width = 757
+      Align = alClient
+      BorderStyle = bsNone
+      ColCount = 6
+      DefaultColWidth = 100
+      FixedCols = 0
+      GridLineWidth = 0
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing]
+      RowCount = 2
+      TabOrder = 0
+      OnMouseUp = GridMouseUp
+    end
+  end
+  object ColorDialog1: TColorDialog
+    Color = clSilver
+    CustomColors.Strings = (
+      'ColorA=000000'
+      'ColorB=000080'
+      'ColorC=008000'
+      'ColorD=008080'
+      'ColorE=800000'
+      'ColorF=800080'
+      'ColorG=808000'
+      'ColorH=808080'
+      'ColorI=C0C0C0'
+      'ColorJ=0000FF'
+      'ColorK=00FF00'
+      'ColorL=00FFFF'
+      'ColorM=FF0000'
+      'ColorN=FF00FF'
+      'ColorO=FFFF00'
+      'ColorP=FFFFFF'
+      'ColorQ=C0DCC0'
+      'ColorR=F0CAA6'
+      'ColorS=F0FBFF'
+      'ColorT=A4A0A0'
+    )
+    left = 40
+    top = 48
+  end
+end

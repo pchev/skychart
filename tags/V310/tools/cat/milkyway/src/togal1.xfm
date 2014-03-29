@@ -1,0 +1,76 @@
+object Form1: TForm1
+  Left = 201
+  Top = 204
+  Width = 250
+  Height = 268
+  HorzScrollBar.Range = 193
+  VertScrollBar.Range = 257
+  ActiveControl = Button1
+  Caption = 'Form1'
+  Color = clBackground
+  OnCreate = FormCreate
+  PixelsPerInch = 80
+  TextHeight = 13
+  TextWidth = 5
+  object Button1: TButton
+    Left = 24
+    Top = 16
+    Width = 169
+    Height = 25
+    Caption = 'conv. to galactic'
+    TabOrder = 0
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Left = 24
+    Top = 112
+    Width = 169
+    Height = 25
+    Caption = 'Split zone'
+    TabOrder = 1
+    OnClick = Button2Click
+  end
+  object Button3: TButton
+    Left = 24
+    Top = 72
+    Width = 169
+    Height = 25
+    Caption = 'reverse file order '
+    TabOrder = 2
+    OnClick = Button3Click
+  end
+  object Label1: TLabel
+    Left = 32
+    Top = 48
+    Width = 124
+    Height = 13
+    Caption = '> edit file to start at 0 deg.'
+  end
+  object Button4: TButton
+    Left = 24
+    Top = 152
+    Width = 169
+    Height = 25
+    Caption = 'compose main zone'
+    TabOrder = 4
+    OnClick = Button4Click
+  end
+  object Button5: TButton
+    Left = 24
+    Top = 192
+    Width = 169
+    Height = 25
+    Caption = 'build main data file'
+    TabOrder = 5
+    OnClick = Button5Click
+  end
+  object Button6: TButton
+    Left = 24
+    Top = 232
+    Width = 169
+    Height = 25
+    Caption = 'extra files to equatorial'
+    TabOrder = 6
+    OnClick = Button6Click
+  end
+end

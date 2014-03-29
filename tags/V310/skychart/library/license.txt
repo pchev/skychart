@@ -1,0 +1,7 @@
+
+Beware that the license for the component in this folder
+are not necessarily the same as for the main project.
+
+Please look at the specific file in each component for more
+detail about the license information.
+

@@ -1,0 +1,13 @@
+Index: source/lib/synaser.pas
+===================================================================
+--- source/lib/synaser.pas	(revision 2022)
++++ source/lib/synaser.pas	(working copy)
+@@ -1936,7 +1936,7 @@
+   SerialCheck(ioctl(FHandle, TCFLSH, TCIOFLUSH));
+   {$ELSE}
+     {$IFDEF DARWIN}
+-    SerialCheck(fpioctl(FHandle, TCIOflush, TCIOFLUSH));
++    SerialCheck(fpioctl(FHandle, TCIOflush, Pointer(PtrInt(TCIOFLUSH))));
+     {$ELSE}
+     SerialCheck(fpioctl(FHandle, TCFLSH, Pointer(PtrInt(TCIOFLUSH))));
+     {$ENDIF}

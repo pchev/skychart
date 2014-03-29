@@ -1,0 +1,94 @@
+; Name of the constellation for Cartes du Ciel
+; Official Latin name
+; For a translation copy this file to constlabel_xx.cla where xx is the specific language code
+; Use UTF-8 for character encoding
+;
+00.567 ;  39.250 ; And ; Andromeda          
+10.117 ; -33.350 ; Ant ; Zračna črpalka             
+16.133 ; -76.583 ; Aps ; Rajska ptica               
+22.700 ; -10.467 ; Aqr ; Vodnar           
+19.683 ;  03.367 ; Aql ; Orel             
+17.233 ; -51.117 ; Ara ; Oltar                
+02.683 ;  22.567 ; Ari ; Oven             
+05.950 ;  42.817 ; Aur ; Voznik             
+14.683 ;  32.333 ; Boo ; Volar             
+04.717 ; -38.167 ; Cae ; Dletce             
+06.150 ;  71.967 ; Cam ; Žirafa     
+08.667 ;  22.000 ; Cnc ; Rak             
+13.017 ;  42.350 ; CVn ; Lovski psi     
+06.833 ; -22.317 ; CMa ; Veliki pes        
+07.617 ;  06.767 ; CMi ; Mali pes        
+21.050 ; -19.350 ; Cap ; Kozorog        
+08.833 ; -60.500 ; Car ; Gredelj             
+00.867 ;  60.300 ; Cas ; Kasiopeja         
+12.950 ; -44.000 ; Cen ; Kentaver          
+22.417 ;  72.567 ; Cep ; Kefej            
+01.717 ; -06.367 ; Cet ; Kit              
+12.000 ; -81.017 ; Cha ; Kameleon         
+14.533 ; -67.300 ; Cir ; Šestilo           
+05.700 ; -37.917 ; Col ; Golob            
+12.750 ;  22.650 ; Com ; Berenikini kodri     
+18.650 ; -41.750 ; CrA ; Južna krona   
+15.883 ;  32.633 ; CrB ; Severna krona    
+12.383 ; -18.633 ; Crv ; Krokar             
+11.350 ; -13.750 ; Crt ; Čaša             
+12.483 ; -60.300 ; Cru ; Južni križ               
+20.583 ;  44.000 ; Cyg ; Labod             
+20.667 ;  12.100 ; Del ; Delfin          
+05.333 ; -63.017 ; Dor ; Zlata riba             
+17.950 ;  66.067 ; Dra ; Zmaj              
+21.250 ;  07.933 ; Equ ; Žrebiček           
+03.883 ; -17.983 ; Eri ; Eridan           
+02.767 ; -31.000 ; For ; Peč             
+06.850 ;  24.817 ; Gem ; Dvojčka             
+22.450 ; -45.133 ; Gru ; Žerjav               
+17.433 ;  31.233 ; Her ; Herkul           
+03.217 ; -52.000 ; Hor ; Ura         
+09.133 ; -11.683 ; Hya ; Vodna kača              
+02.583 ; -72.917 ; Hyi ; Mala vodna kača             
+21.133 ; -52.317 ; Ind ; Indijanec              
+22.517 ;  46.667 ; Lac ; Kuščarica            
+10.667 ;  17.000 ; Leo ; Lev               
+10.317 ;  33.233 ; LMi ; Mali lev          
+05.433 ; -19.650 ; Lep ; Zajec              
+15.183 ; -15.550 ; Lib ; Tehnica              
+15.383 ; -42.717 ; Lup ; Volk              
+07.733 ;  47.833 ; Lyn ; Ris               
+18.900 ;  40.650 ; Lyr ; Lira               
+05.500 ; -79.017 ; Men ; Miza              
+20.950 ; -36.800 ; Mic ; Mikroskop       
+06.967 ; -03.267 ; Mon ; Enorog          
+12.467 ; -69.133 ; Mus ; Muha              
+16.050 ; -52.717 ; Nor ; Kotomer              
+22.167 ; -84.267 ; Oct ; Oktant             
+17.033 ; -02.350 ; Oph ; Kačenosec          
+05.567 ;  03.583 ; Ori ; Orion              
+19.167 ; -65.867 ; Pav ; Pav               
+22.617 ;  19.650 ; Peg ; Pegaz            
+03.517 ;  44.883 ; Per ; Perzej           
+00.733 ; -48.767 ; Phe ; Feniks            
+05.383 ; -51.367 ; Pic ; Slikar             
+00.883 ;  15.483 ; Psc ; Ribi             
+22.417 ; -31.567 ; PsA ; Južna riba   
+07.867 ; -32.617 ; Pup ; Krma             
+08.883 ; -29.783 ; Pyx ; Kompas              
+03.900 ; -60.517 ; Ret ; Mreža          
+19.667 ;  17.000 ; Sge ; Puščica           
+19.383 ; -29.883 ; Sgr ; Strelec        
+16.867 ; -35.333 ; Sco ; Škorpijon           
+00.500 ; -31.000 ; Scl ; Kipar           
+18.650 ; -10.883 ; Sct ; Ščit             
+15.733 ;  10.850 ; Ser ; Kača      
+17.800 ; -13.483 ; Ser ; Kača
+10.100 ; -01.133 ; Sex ; Sekstant            
+04.100 ;  17.333 ; Tau ; Bik             
+19.250 ; -51.467 ; Tel ; Daljnogled        
+02.050 ;  32.333 ; Tri ; Trikotnik         
+16.117 ; -65.100 ; TrA ; Južni trikotnik
+23.833 ; -64.933 ; Tuc ; Tukan             
+11.333 ;  57.500 ; UMa ; Veliki medved         
+14.967 ;  75.033 ; UMi ; Mali medved         
+09.333 ; -48.483 ; Vel ; Jadro               
+13.350 ; -03.517 ; Vir ; Devica              
+07.667 ; -69.617 ; Vol ; Leteča riba             
+20.367 ;  25.033 ; Vul ; Lisička          

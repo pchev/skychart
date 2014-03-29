@@ -1,0 +1,7 @@
+
+Example C++ / Qt client for Skychart contributed by Jocelyn Serot.
+
+To build:
+
+qmake cdc.pro
+make
