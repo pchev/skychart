@@ -631,13 +631,6 @@ if full then begin
      and (cfgsc.fov>pi)
      and (abs(cfgsc.hcentre)>pid4)
      then cfgsc.projtype:='A' ;
-  // max arc altaz fov
-  if (cfgsc.ProjPole=Altaz)and(cfgsc.projtype='A') then begin
-     if (not cfgsc.horizonopaque) and (cfgsc.fov>pi) then begin
-        cfgsc.horizonopaque:=true;
-        cfgsc.msg:=rsFieldOfVisio2;
-     end;
-  end;
 end;
 cfgsc.xmin:=cfgsc.LeftMargin;
 cfgsc.ymin:=cfgsc.TopMargin;
