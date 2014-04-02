@@ -36,6 +36,9 @@ type
 
   Tf_config_chart = class(TFrame)
     ApparentType: TRadioGroup;
+    Bevel1: TBevel;
+    Bevel2: TBevel;
+    Bevel3: TBevel;
     Bevel7: TBevel;
     BigNebBox: TCheckBox;
     BigNebUnit: TLabel;
@@ -146,7 +149,6 @@ type
     Label112: TLabel;
     Label114: TLabel;
     Label158: TLabel;
-    Label159: TLabel;
     Label160: TLabel;
     Label161: TLabel;
     Label162: TLabel;
@@ -379,7 +381,6 @@ MessierBox.Caption:=rsDoNotFilterM;
 Label48.caption:=rsLimitingMagn2;
 Label49.caption:=rsLimitingSize;
 Label112.caption:=rsFieldOfVisio5;
-Label159.caption:=rsGridSetting;
 Label160.caption:=rsFieldNumber;
 Label176.caption:=rsDegreeGridSp;
 Label175.caption:=rsHourGridSpac;
