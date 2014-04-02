@@ -3092,7 +3092,7 @@ end;
 end;
 
 procedure Tskychart.DrawEqGrid(drawlabel:boolean; altstyle:boolean=false);
-var ra1,de1,ac,dc,dra,dde,rot:double;
+var ra1,de1,ac,dc,dra,dde,lda1,lda2,rot:double;
     col,n,lh,lt,dir:integer;
     ok,labelok:boolean;
     linestyle: TFPPenStyle;
@@ -3200,9 +3200,19 @@ end else begin
   linestyle:=cfgsc.StyleGrid;
 end;
 DrawPole(Equat);
-n:=GetFieldNum(cfgsc.fov/cos(cfgsc.decentre));
+n:=cfgsc.FieldNum;
+dde:=Fcatalog.cfgshr.DegreeGridSpacing[n];
+lda1:=Fcatalog.cfgshr.HourGridSpacing[n]*15*cos(cfgsc.decentre);
+lda2:=lda1;
+while (lda1<dde)and(n<MaxField) do begin
+  lda2:=lda1;
+  n:=n+1;
+  lda1:=Fcatalog.cfgshr.HourGridSpacing[n]*15*cos(cfgsc.decentre);
+end;
+lda1:=abs(dde-lda1);
+lda2:=abs(dde-lda2);
+if lda2<lda1 then n:=min(n-1,MaxField);
 dra:=Fcatalog.cfgshr.HourGridSpacing[n];
-dde:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum];
 if dde>1000 then dde:=dde-1000;
 ra1:=deg2rad*trunc(rad2deg*cfgsc.racentre/15/dra)*dra*15;
 de1:=deg2rad*trunc(rad2deg*cfgsc.decentre/dde)*dde;
@@ -3261,7 +3271,7 @@ until (not ok)or(dc<-pid2);
 end;
 
 procedure Tskychart.DrawAzGrid(drawlabel:boolean);
-var a1,h1,ac,hc,dda,ddh,rot:double;
+var a1,h1,ac,hc,dda,ddh,lda1,lda2,rot:double;
     col,n,lh,lt,dir:integer;
     ok,labelok:boolean;
 
@@ -3389,9 +3399,19 @@ end;
 begin
 DrawPole(Altaz);
 col:=Fplot.cfgplot.Color[12];
-n:=GetFieldNum(cfgsc.fov/cos(cfgsc.hcentre));
+n:=cfgsc.FieldNum;
+ddh:=Fcatalog.cfgshr.DegreeGridSpacing[n];
+lda1:=ddh*cos(cfgsc.hcentre);
+lda2:=lda1;
+while (lda1<ddh)and(n<MaxField) do begin
+  lda2:=lda1;
+  n:=n+1;
+  lda1:=Fcatalog.cfgshr.DegreeGridSpacing[n]*cos(cfgsc.hcentre);
+end;
+lda1:=abs(ddh-lda1);
+lda2:=abs(ddh-lda2);
+if lda2<lda1 then n:=min(n-1,MaxField);
 dda:=Fcatalog.cfgshr.DegreeGridSpacing[n];
-ddh:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum];
 a1:=deg2rad*round(rad2deg*cfgsc.acentre/dda)*dda;
 h1:=deg2rad*round(rad2deg*cfgsc.hcentre/ddh)*ddh;
 dda:=deg2rad*dda;
@@ -3879,7 +3899,7 @@ result:=true;
 end;
 
 procedure Tskychart.DrawGalGrid(drawlabel:boolean);
-var a1,h1,ac,hc,dda,ddh,rot:double;
+var a1,h1,ac,hc,dda,ddh,lda1,lda2,rot:double;
     col,n,lh,lt,dir:integer;
     ok,labelok:boolean;
 
@@ -3980,9 +4000,19 @@ end;
 begin
 DrawPole(Gal);
 col:=Fplot.cfgplot.Color[12];
-n:=GetFieldNum(cfgsc.fov/cos(cfgsc.bcentre));
+n:=cfgsc.FieldNum;
+ddh:=Fcatalog.cfgshr.DegreeGridSpacing[n];
+lda1:=ddh*cos(cfgsc.bcentre);
+lda2:=lda1;
+while (lda1<ddh)and(n<MaxField) do begin
+  lda2:=lda1;
+  n:=n+1;
+  lda1:=Fcatalog.cfgshr.DegreeGridSpacing[n]*cos(cfgsc.bcentre);
+end;
+lda1:=abs(ddh-lda1);
+lda2:=abs(ddh-lda2);
+if lda2<lda1 then n:=min(n-1,MaxField);
 dda:=Fcatalog.cfgshr.DegreeGridSpacing[n];
-ddh:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum];
 a1:=deg2rad*trunc(rad2deg*cfgsc.lcentre/dda)*dda;
 h1:=deg2rad*trunc(rad2deg*cfgsc.bcentre/ddh)*ddh;
 dda:=deg2rad*dda;
@@ -4041,7 +4071,7 @@ until (not ok)or(hc<-pid2);
 end;
 
 procedure Tskychart.DrawEclGrid(drawlabel:boolean);
-var a1,h1,ac,hc,dda,ddh,rot:double;
+var a1,h1,ac,hc,dda,ddh,lda1,lda2,rot:double;
     col,n,lh,lt,dir:integer;
     ok,labelok:boolean;
 
@@ -4142,9 +4172,19 @@ end;
 begin
 DrawPole(Ecl);
 col:=Fplot.cfgplot.Color[12];
-n:=GetFieldNum(cfgsc.fov/cos(cfgsc.becentre));
+n:=cfgsc.FieldNum;
+ddh:=Fcatalog.cfgshr.DegreeGridSpacing[n];
+lda1:=ddh*cos(cfgsc.becentre);
+lda2:=lda1;
+while (lda1<ddh)and(n<MaxField) do begin
+  lda2:=lda1;
+  n:=n+1;
+  lda1:=Fcatalog.cfgshr.DegreeGridSpacing[n]*cos(cfgsc.becentre);
+end;
+lda1:=abs(ddh-lda1);
+lda2:=abs(ddh-lda2);
+if lda2<lda1 then n:=min(n-1,MaxField);
 dda:=Fcatalog.cfgshr.DegreeGridSpacing[n];
-ddh:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum];
 a1:=deg2rad*trunc(rad2deg*cfgsc.lecentre/dda)*dda;
 h1:=deg2rad*trunc(rad2deg*cfgsc.becentre/ddh)*ddh;
 dda:=deg2rad*dda;
