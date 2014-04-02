@@ -576,9 +576,8 @@ resourcestring
   rsFilterNebula = 'Filter deep sky objects';
   rsHideObjectWi = 'Hide objects wider than';
   rsLimitingSize = 'Limiting size (arcminutes):';
-  rsGridSetting = 'Grid settings';
-  rsDegreeGridSp = 'Declination grid';
-  rsHourGridSpac = 'Right ascension grid';
+  rsDegreeGridSp = 'Grid spacing in degree';
+  rsHourGridSpac = 'Grid spacing in hour for equatorial grid';
   rsObjectListSe = 'Object list settings';
   rsTypeOfObject = 'Object types to add to the list';
   rsSolarSystemO = 'Solar system object';

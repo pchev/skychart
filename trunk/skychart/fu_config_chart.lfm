@@ -6,8 +6,8 @@ object f_config_chart: Tf_config_chart
   ClientHeight = 528
   ClientWidth = 505
   TabOrder = 0
-  DesignLeft = 371
-  DesignTop = 290
+  DesignLeft = 124
+  DesignTop = 92
   object MainPanel: TPanel
     Left = 0
     Height = 528
@@ -23,10 +23,10 @@ object f_config_chart: Tf_config_chart
       Height = 472
       Top = 1
       Width = 503
-      ActivePage = Page1
+      ActivePage = Page5
       Align = alClient
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 4
       TabOrder = 0
       OnChange = PageControl1PageChanged
       object Page1: TTabSheet
@@ -44,17 +44,17 @@ object f_config_chart: Tf_config_chart
           Visible = False
           object EquinoxLabel: TLabel
             Left = 16
-            Height = 16
+            Height = 15
             Top = 20
-            Width = 48
+            Width = 47
             Caption = 'Equinox:'
             ParentColor = False
           end
           object Label1: TLabel
             Left = 248
-            Height = 16
+            Height = 15
             Top = 20
-            Width = 39
+            Width = 38
             Caption = 'Epoch:'
             ParentColor = False
           end
@@ -174,9 +174,9 @@ object f_config_chart: Tf_config_chart
         end
         object Label31: TLabel
           Left = 0
-          Height = 16
+          Height = 15
           Top = 0
-          Width = 78
+          Width = 77
           Caption = 'Chart Setting'
           ParentColor = False
         end
@@ -712,114 +712,114 @@ object f_config_chart: Tf_config_chart
         end
         object Label158: TLabel
           Left = 0
-          Height = 16
+          Height = 15
           Top = 0
-          Width = 105
+          Width = 104
           Caption = 'Projection Setting'
           ParentColor = False
         end
         object Labelp1: TLabel
           Left = 62
-          Height = 16
+          Height = 15
           Top = 88
-          Width = 11
+          Width = 10
           Caption = '1 '
           ParentColor = False
         end
         object Labelp2: TLabel
           Left = 62
-          Height = 16
+          Height = 15
           Top = 116
-          Width = 8
+          Width = 7
           Caption = '2'
           ParentColor = False
         end
         object Labelp3: TLabel
           Left = 62
-          Height = 16
+          Height = 15
           Top = 144
-          Width = 8
+          Width = 7
           Caption = '3'
           ParentColor = False
         end
         object Labelp4: TLabel
           Left = 62
-          Height = 16
+          Height = 15
           Top = 172
-          Width = 8
+          Width = 7
           Caption = '4'
           ParentColor = False
         end
         object Label165: TLabel
           Left = 27
-          Height = 16
+          Height = 15
           Top = 27
-          Width = 76
+          Width = 75
           Alignment = taRightJustify
           Caption = 'Field Number'
           ParentColor = False
         end
         object Labelp0: TLabel
           Left = 62
-          Height = 16
+          Height = 15
           Top = 60
-          Width = 8
+          Width = 7
           Caption = '0'
           ParentColor = False
         end
         object Labelp5: TLabel
           Left = 62
-          Height = 16
+          Height = 15
           Top = 200
-          Width = 8
+          Width = 7
           Caption = '5'
           ParentColor = False
         end
         object Labelp6: TLabel
           Left = 62
-          Height = 16
+          Height = 15
           Top = 228
-          Width = 8
+          Width = 7
           Caption = '6'
           ParentColor = False
         end
         object Labelp7: TLabel
           Left = 62
-          Height = 16
+          Height = 15
           Top = 256
-          Width = 8
+          Width = 7
           Caption = '7'
           ParentColor = False
         end
         object Labelp8: TLabel
           Left = 62
-          Height = 16
+          Height = 15
           Top = 284
-          Width = 8
+          Width = 7
           Caption = '8'
           ParentColor = False
         end
         object Labelp9: TLabel
           Left = 62
-          Height = 16
+          Height = 15
           Top = 312
-          Width = 8
+          Width = 7
           Caption = '9'
           ParentColor = False
         end
         object Labelp10: TLabel
           Left = 62
-          Height = 16
+          Height = 15
           Top = 340
-          Width = 15
+          Width = 14
           Caption = '10'
           ParentColor = False
         end
         object Label172: TLabel
           Left = 195
-          Height = 16
+          Height = 15
           Top = 27
-          Width = 60
+          Width = 59
           Caption = 'Projection'
           ParentColor = False
         end
@@ -1043,9 +1043,9 @@ object f_config_chart: Tf_config_chart
         ClientWidth = 499
         object Label29: TLabel
           Left = 0
-          Height = 16
+          Height = 15
           Top = 0
-          Width = 118
+          Width = 117
           Caption = 'Object Filter Setting'
           ParentColor = False
         end
@@ -1087,97 +1087,97 @@ object f_config_chart: Tf_config_chart
               TabOrder = 2
               object Label32: TLabel
                 Left = 25
-                Height = 16
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 7
                 Caption = '1'
                 ParentColor = False
               end
               object Label33: TLabel
                 Left = 66
-                Height = 16
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 7
                 Caption = '2'
                 ParentColor = False
               end
               object Label34: TLabel
                 Left = 107
-                Height = 16
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 7
                 Caption = '3'
                 ParentColor = False
               end
               object Label35: TLabel
                 Left = 148
-                Height = 16
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 7
                 Caption = '4'
                 ParentColor = False
               end
               object Label36: TLabel
                 Left = 189
-                Height = 16
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 7
                 Caption = '5'
                 ParentColor = False
               end
               object Label38: TLabel
                 Left = 230
-                Height = 16
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 7
                 Caption = '6'
                 ParentColor = False
               end
               object Label39: TLabel
                 Left = 271
-                Height = 16
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 7
                 Caption = '7'
                 ParentColor = False
               end
               object Label40: TLabel
                 Left = 312
-                Height = 16
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 7
                 Caption = '8'
                 ParentColor = False
               end
               object Label76: TLabel
                 Left = 353
-                Height = 16
+                Height = 15
                 Top = 32
-                Width = 8
+                Width = 7
                 Caption = '9'
                 ParentColor = False
               end
               object Label78: TLabel
                 Left = 394
-                Height = 16
+                Height = 15
                 Top = 32
-                Width = 15
+                Width = 14
                 Caption = '10'
                 ParentColor = False
               end
               object Label108: TLabel
                 Left = 8
-                Height = 16
+                Height = 15
                 Top = 8
-                Width = 129
+                Width = 128
                 Caption = 'Field of vision number :'
                 ParentColor = False
               end
               object Label109: TLabel
                 Left = 8
-                Height = 16
+                Height = 15
                 Top = 48
-                Width = 117
+                Width = 116
                 Caption = 'Limiting magnitude :'
                 ParentColor = False
               end
@@ -1343,9 +1343,9 @@ object f_config_chart: Tf_config_chart
               TabOrder = 1
               object Label110: TLabel
                 Left = 8
-                Height = 16
+                Height = 15
                 Top = 12
-                Width = 118
+                Width = 117
                 Caption = 'Naked eye reference'
                 ParentColor = False
               end
@@ -1412,105 +1412,105 @@ object f_config_chart: Tf_config_chart
             TabOrder = 1
             object Label48: TLabel
               Left = 8
-              Height = 16
+              Height = 15
               Top = 43
-              Width = 117
+              Width = 116
               Caption = 'Limiting Magnitude :'
               ParentColor = False
             end
             object Label49: TLabel
               Left = 8
-              Height = 16
+              Height = 15
               Top = 91
-              Width = 154
+              Width = 153
               Caption = 'Limiting Size (arcminutes) :'
               ParentColor = False
             end
             object Label41: TLabel
               Left = 25
-              Height = 16
+              Height = 15
               Top = 27
-              Width = 8
+              Width = 7
               Caption = '1'
               ParentColor = False
             end
             object Label42: TLabel
               Left = 66
-              Height = 16
+              Height = 15
               Top = 27
-              Width = 8
+              Width = 7
               Caption = '2'
               ParentColor = False
             end
             object Label43: TLabel
               Left = 107
-              Height = 16
+              Height = 15
               Top = 27
-              Width = 8
+              Width = 7
               Caption = '3'
               ParentColor = False
             end
             object Label44: TLabel
               Left = 148
-              Height = 16
+              Height = 15
               Top = 27
-              Width = 8
+              Width = 7
               Caption = '4'
               ParentColor = False
             end
             object Label45: TLabel
               Left = 189
-              Height = 16
+              Height = 15
               Top = 27
-              Width = 8
+              Width = 7
               Caption = '5'
               ParentColor = False
             end
             object Label46: TLabel
               Left = 230
-              Height = 16
+              Height = 15
               Top = 27
-              Width = 8
+              Width = 7
               Caption = '6'
               ParentColor = False
             end
             object Label47: TLabel
               Left = 271
-              Height = 16
+              Height = 15
               Top = 27
-              Width = 8
+              Width = 7
               Caption = '7'
               ParentColor = False
             end
             object Label79: TLabel
               Left = 312
-              Height = 16
+              Height = 15
               Top = 27
-              Width = 8
+              Width = 7
               Caption = '8'
               ParentColor = False
             end
             object Label80: TLabel
               Left = 353
-              Height = 16
+              Height = 15
               Top = 27
-              Width = 8
+              Width = 7
               Caption = '9'
               ParentColor = False
             end
             object Label111: TLabel
               Left = 394
-              Height = 16
+              Height = 15
               Top = 27
-              Width = 15
+              Width = 14
               Caption = '10'
               ParentColor = False
             end
             object Label112: TLabel
               Left = 8
-              Height = 16
+              Height = 15
               Top = 4
-              Width = 129
+              Width = 128
               Caption = 'Field of vision number :'
               ParentColor = False
             end
@@ -1838,9 +1838,9 @@ object f_config_chart: Tf_config_chart
             end
             object BigNebUnit: TLabel
               Left = 260
-              Height = 16
+              Height = 15
               Top = 159
-              Width = 48
+              Width = 47
               Caption = 'minutes'
               ParentColor = False
             end
@@ -1860,29 +1860,39 @@ object f_config_chart: Tf_config_chart
         Caption = 'Page5'
         ClientHeight = 468
         ClientWidth = 499
-        object Label159: TLabel
+        object Bevel1: TBevel
+          Left = 253
+          Height = 340
+          Top = 13
+          Width = 185
+        end
+        object Bevel2: TBevel
+          Left = 61
+          Height = 340
+          Top = 14
+          Width = 185
+        end
+        object Bevel3: TBevel
           Left = 0
-          Height = 16
-          Top = 0
-          Width = 69
-          Caption = 'Grid Setting'
-          ParentColor = False
+          Height = 340
+          Top = 14
+          Width = 57
         end
         object Label160: TLabel
-          Left = 0
+          Left = 2
           Height = 34
           Top = 21
-          Width = 80
+          Width = 61
           AutoSize = False
           Caption = 'Field Number'
           ParentColor = False
           WordWrap = True
         end
         object Label176: TLabel
-          Left = 85
-          Height = 34
+          Left = 67
+          Height = 40
           Top = 21
-          Width = 112
+          Width = 168
           AutoSize = False
           Caption = 'Degree Grid Spacing'
           ParentColor = False
@@ -1890,9 +1900,9 @@ object f_config_chart: Tf_config_chart
         end
         object Label175: TLabel
           Left = 261
-          Height = 34
-          Top = 21
-          Width = 112
+          Height = 40
+          Top = 20
+          Width = 168
           AutoSize = False
           Caption = 'Hour Grid Spacing'
           ParentColor = False
@@ -1900,97 +1910,97 @@ object f_config_chart: Tf_config_chart
         end
         object Label161: TLabel
           Left = 29
-          Height = 16
+          Height = 15
           Top = 107
-          Width = 8
+          Width = 7
           Caption = '1'
           ParentColor = False
         end
         object Label162: TLabel
           Left = 29
-          Height = 16
+          Height = 15
           Top = 132
-          Width = 8
+          Width = 7
           Caption = '2'
           ParentColor = False
         end
         object Label163: TLabel
           Left = 29
-          Height = 16
+          Height = 15
           Top = 157
-          Width = 8
+          Width = 7
           Caption = '3'
           ParentColor = False
         end
         object Label164: TLabel
           Left = 29
-          Height = 16
+          Height = 15
           Top = 182
-          Width = 8
+          Width = 7
           Caption = '4'
           ParentColor = False
         end
         object Label166: TLabel
           Left = 29
-          Height = 16
+          Height = 15
           Top = 82
-          Width = 8
+          Width = 7
           Caption = '0'
           ParentColor = False
         end
         object Label167: TLabel
           Left = 29
-          Height = 16
+          Height = 15
           Top = 207
-          Width = 8
+          Width = 7
           Caption = '5'
           ParentColor = False
         end
         object Label168: TLabel
           Left = 29
-          Height = 16
+          Height = 15
           Top = 232
-          Width = 8
+          Width = 7
           Caption = '6'
           ParentColor = False
         end
         object Label169: TLabel
           Left = 29
-          Height = 16
+          Height = 15
           Top = 257
-          Width = 8
+          Width = 7
           Caption = '7'
           ParentColor = False
         end
         object Label170: TLabel
           Left = 29
-          Height = 16
+          Height = 15
           Top = 282
-          Width = 8
+          Width = 7
           Caption = '8'
           ParentColor = False
         end
         object Label174: TLabel
           Left = 29
-          Height = 16
+          Height = 15
           Top = 307
-          Width = 8
+          Width = 7
           Caption = '9'
           ParentColor = False
         end
         object Label177: TLabel
           Left = 29
-          Height = 16
+          Height = 15
           Top = 332
-          Width = 15
+          Width = 14
           Caption = '10'
           ParentColor = False
         end
         object Label4: TLabel
           Left = 67
-          Height = 16
+          Height = 15
           Top = 361
-          Width = 105
+          Width = 104
           Caption = 'Compass rose size'
           ParentColor = False
         end
@@ -2160,9 +2170,9 @@ object f_config_chart: Tf_config_chart
           TabOrder = 20
         end
         object RaDec12: TRaDec
-          Left = 253
+          Left = 258
           Height = 23
-          Top = 76
+          Top = 75
           Width = 176
           kind = RA
           value = 0
@@ -2172,9 +2182,9 @@ object f_config_chart: Tf_config_chart
         end
         object RaDec13: TRaDec
           Tag = 1
-          Left = 253
+          Left = 258
           Height = 23
-          Top = 101
+          Top = 100
           Width = 176
           kind = RA
           value = 0
@@ -2184,9 +2194,9 @@ object f_config_chart: Tf_config_chart
         end
         object RaDec14: TRaDec
           Tag = 2
-          Left = 253
+          Left = 258
           Height = 23
-          Top = 126
+          Top = 125
           Width = 176
           kind = RA
           value = 0
@@ -2196,9 +2206,9 @@ object f_config_chart: Tf_config_chart
         end
         object RaDec15: TRaDec
           Tag = 3
-          Left = 253
+          Left = 258
           Height = 23
-          Top = 151
+          Top = 150
           Width = 176
           kind = RA
           value = 0
@@ -2208,9 +2218,9 @@ object f_config_chart: Tf_config_chart
         end
         object RaDec16: TRaDec
           Tag = 4
-          Left = 253
+          Left = 258
           Height = 23
-          Top = 176
+          Top = 175
           Width = 176
           kind = RA
           value = 0
@@ -2220,9 +2230,9 @@ object f_config_chart: Tf_config_chart
         end
         object RaDec17: TRaDec
           Tag = 5
-          Left = 253
+          Left = 258
           Height = 23
-          Top = 201
+          Top = 200
           Width = 176
           kind = RA
           value = 0
@@ -2232,9 +2242,9 @@ object f_config_chart: Tf_config_chart
         end
         object RaDec18: TRaDec
           Tag = 6
-          Left = 253
+          Left = 258
           Height = 23
-          Top = 226
+          Top = 225
           Width = 176
           kind = RA
           value = 0
@@ -2244,9 +2254,9 @@ object f_config_chart: Tf_config_chart
         end
         object RaDec19: TRaDec
           Tag = 7
-          Left = 253
+          Left = 258
           Height = 23
-          Top = 251
+          Top = 250
           Width = 176
           kind = RA
           value = 0
@@ -2256,9 +2266,9 @@ object f_config_chart: Tf_config_chart
         end
         object RaDec20: TRaDec
           Tag = 8
-          Left = 253
+          Left = 258
           Height = 23
-          Top = 276
+          Top = 275
           Width = 176
           kind = RA
           value = 0
@@ -2268,9 +2278,9 @@ object f_config_chart: Tf_config_chart
         end
         object RaDec21: TRaDec
           Tag = 9
-          Left = 253
+          Left = 258
           Height = 23
-          Top = 301
+          Top = 300
           Width = 176
           kind = RA
           value = 0
@@ -2280,9 +2290,9 @@ object f_config_chart: Tf_config_chart
         end
         object RaDec22: TRaDec
           Tag = 10
-          Left = 253
+          Left = 258
           Height = 23
-          Top = 326
+          Top = 325
           Width = 176
           kind = RA
           value = 0
