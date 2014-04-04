@@ -2841,9 +2841,13 @@ end;
 end;
 
 procedure Tf_main.ShowPicturesExecute(Sender: TObject);
+var nimg: integer;
+    dirok: boolean;
 begin
+dirok:=DirectoryExists(cfgm.ImagePath);
+nimg:=cdcdb.CountImages('SAC');
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   if sc.cfgsc.ShowImages then
+   if sc.cfgsc.ShowImages or (nimg=0) or (not dirok) then
      cmd_SetShowPicture('OFF')
    else
      cmd_SetShowPicture('ON');
