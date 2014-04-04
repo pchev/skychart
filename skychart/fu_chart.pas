@@ -1179,6 +1179,7 @@ var
     HeaderHeight,FooterHeight: integer;
     pt:TPoint;
     ps:TPostscriptCanvas;
+    png:TPortableNetworkGraphic;
     previewbmp:Tbitmap;
 const DefHeaderHeight=10;
       DefFooterHeight=20;
@@ -1422,8 +1423,14 @@ try
        prtsc.plot.PlotText(x,y,6,prtsc.plot.cfgplot.LabelColor[8],laCenter,laCenter,cm.PrintDesc,prtsc.cfgsc.WhiteBg);
      end;
      // save the bitmap
-     fname:=slash(printpath)+'cdcprint.bmp';
-     prtsc.plot.cbmp.savetofile(SysToUTF8(fname));
+     png:=TPortableNetworkGraphic.Create;
+     try
+      png.Assign(prtsc.plot.cbmp);
+      fname:=slash(printpath)+'cdcprint.png';
+      png.savetofile(SysToUTF8(fname));
+     finally
+      png.Free;
+     end;
      if printcmd2<>'' then begin
         if assigned(Fshowinfo) then Fshowinfo(rsOpenTheBitma , caption);
         execnowait(printcmd2+' "'+fname+'"','',false);
