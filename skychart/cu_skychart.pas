@@ -1383,12 +1383,13 @@ var rec:GcatRec;
                             projection(ra,de+0.001,x2,y2,false,cfgsc) ;
                             rot:=FFits.Rotation-arctan2((x2-x1),(y2-y1));
                             Fplot.plotimage(x,y,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,true,bmp,0);
+                            if (Fplot.cfgplot.nebplot=0) then Drawing;
                           end
-                        else Drawing_Gray;
+                        else if (Fplot.cfgplot.nebplot=0) then Drawing else Drawing_Gray;
                       end
-                      else Drawing_Gray;
+                      else if (Fplot.cfgplot.nebplot=0) then Drawing else Drawing_Gray;
                     end
-                  else Drawing_Gray;
+                  else if (Fplot.cfgplot.nebplot=0) then Drawing else Drawing_Gray;
                  end;
                 end
               else
