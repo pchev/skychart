@@ -2316,6 +2316,7 @@ function GetXPlanetVersion: string;
 var p:TProcess;
     r:TStringList;
     buf:string;
+    ok: boolean;
 begin
  result:='0.0.0';
  p:=TProcess.Create(nil);
@@ -2334,8 +2335,13 @@ begin
 {$endif}
   p.Parameters.Add('--version');
   p.Options:=[poWaitOnExit,poUsePipes,poNoConsole, poStdErrToOutput];
+  try
+  ok:=true;
   p.Execute;
-  if p.ExitStatus=0 then begin
+  except
+   ok:=false;
+  end;
+  if ok and (p.ExitStatus=0) then begin
     r.LoadFromStream(p.Output);
     if r.Count>0 then begin
       buf:=r[0];
