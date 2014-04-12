@@ -697,7 +697,7 @@ end;
 
 procedure TVarForm.FormShow(Sender: TObject);
 var  inifile : Tinifile;
-     section : string;
+     section,buf : string;
      i : integer;
 begin
 planname:=systoutf8(slash(privatedir)+'aavsoeasy.dat');
@@ -706,8 +706,8 @@ if not FileExistsUTF8(planname) then begin
 end;
 defqlurl:='http://www.aavso.org/cgi-bin/newql.pl?name=$star&output=votable';
 defafoevurl:='ftp://cdsarc.u-strasbg.fr/pub/afoev/';
-defaavsocharturl:='http://mira.aavso.org/cgi-bin/vsp.pl?action=render&name=$star&ra=&dec=&charttitle=&chartcomment=&aavsoscale=$scale&fov=$fov&resolution=150&maglimit=$mag&north=$north&east=$east&othervars=gcvs&Submit=Plot+Chart';
-defwebobsurl:='http://www.aavso.org/observing/submit/webobs.shtml';
+defaavsocharturl:='http://www.aavso.org/vsp/chart?name=$star&charttitle=&chartcomment=&fov=$fov&maglimit=$mag&north=$north&east=$east&othervars=all';
+defwebobsurl:='http://www.aavso.org/webobs';
 aavsourl:='http://www.aavso.org';
 varobsurl:='http://www.ap-i.net/skychart';
 pcobscaption:='PCObs Data Entry';
@@ -720,7 +720,8 @@ with inifile do begin
     OptForm.Radiogroup1.itemindex:=ReadInteger(section,'obstype',0);
     OptForm.Radiogroup4.itemindex:=ReadInteger(section,'obsformat',0);
     OptForm.Radiogroup5.itemindex:=ReadInteger(section,'obspgm',0);
-    OptForm.Radiogroup6.itemindex:=ReadInteger(section,'onlinedata',0);
+//    OptForm.Radiogroup6.itemindex:=ReadInteger(section,'onlinedata',0); // AAVSO quicklook is no more available in votable format
+    OptForm.Radiogroup6.itemindex:=1;                                     // Force to use AFOEV ftp
     OptForm.FilenameEdit8.text:=ReadString(section,'pcobs','C:\pcobs\pcobs.exe');
     pcobscaption:=ReadString(section,'pcobscaption',pcobscaption);
     OptForm.FilenameEdit0.text:=ReadString(section,'faavsovis',slash(privatedir)+'aavsovis.txt');
@@ -734,8 +735,12 @@ with inifile do begin
     OptForm.SpinEdit1.value:=ReadInteger(section,'skychartzoomto',15);
     OptForm.qlurl.text:=ReadString(section,'quicklookurl',defqlurl);
     OptForm.afoevurl.text:=ReadString(section,'afoevurl',defafoevurl);
-    OptForm.charturl.text:=ReadString(section,'charturl',defaavsocharturl);
-    OptForm.webobsurl.text:=ReadString(section,'webobsurl',defwebobsurl);
+    buf:=ReadString(section,'charturl',defaavsocharturl);
+    if pos('mira',buf)>0 then buf:=defaavsocharturl;
+    OptForm.charturl.text:=buf;
+    buf:=ReadString(section,'webobsurl',defwebobsurl);
+    if pos('/submit/',buf)>0 then buf:=defwebobsurl;
+    OptForm.webobsurl.text:=buf;
     OptForm.FilenameEdit3.text:=ReadString(section,'fobs',slash(privatedir)+'aavsovis.txt');
     OptForm.Edit1.text:=ReadString(section,'namepos','1');
     OptForm.Edit2.text:=ReadString(section,'datepos','2');
