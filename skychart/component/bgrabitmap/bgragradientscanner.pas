@@ -107,6 +107,13 @@ type
     function IsScanPutPixelsDefined: boolean; override;
   end;
 
+  { TBGRAConstantScanner }
+
+  TBGRAConstantScanner = class(TBGRAGradientScanner)
+    constructor Create(c: TBGRAPixel);
+  end;
+
+
   { TBGRAGradientTriangleScanner }
 
   TBGRAGradientTriangleScanner= class(TBGRACustomScanner)
@@ -183,6 +190,13 @@ type
 implementation
 
 uses BGRABlend;
+
+{ TBGRAConstantScanner }
+
+constructor TBGRAConstantScanner.Create(c: TBGRAPixel);
+begin
+  inherited Create(c,c,gtLinear,PointF(0,0),PointF(0,0),false);
+end;
 
 { TBGRAHueGradient }
 
@@ -757,7 +771,7 @@ procedure TBGRAGradientScanner.ScanMoveTo(X, Y: Integer);
 begin
   InitScanInline(X,Y);
   if FVertical then
-    FHorizColor := ScanAt(X,Y);
+    FHorizColor := ScanNextInline;
 end;
 
 function TBGRAGradientScanner.ScanNextPixel: TBGRAPixel;

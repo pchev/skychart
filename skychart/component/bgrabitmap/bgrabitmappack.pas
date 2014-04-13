@@ -14,14 +14,11 @@ uses
   BGRAOpenRaster, BGRAPaintNet, BGRAPath, BGRAPen, BGRAPhongTypes, 
   BGRAPolygon, BGRAPolygonAliased, BGRAResample, BGRAScene3D, 
   BGRASliceScaling, BGRASSE, BGRAStreamLayers, BGRAText, BGRATextFX, 
-  BGRATransform, BGRATypewriter, BGRAVectorize, LazarusPackageIntf;
+  BGRATransform, BGRATypewriter, BGRAVectorize, BGRAGrayscaleMask, 
+  BGRAReadBMP, BGRAReadGif, BGRAReadPCX, BGRAReadPng, BGRAReadPSD, 
+  BGRAThumbnail, BGRAReadTGA, BGRAReadIco, bgrareadjpeg, BGRAReadLzp, 
+  UnzipperExt, BGRALzpCommon, BGRAWriteLzp, BGRAReadXPM;
 
 implementation
 
-procedure Register;
-begin
-end;
-
-initialization
-  RegisterPackage('BGRABitmapPack', @Register);
 end.

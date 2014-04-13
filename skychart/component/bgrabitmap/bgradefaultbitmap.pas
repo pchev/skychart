@@ -47,7 +47,6 @@ type
     function CheckVertLineBounds(var x, y, y2: int32or64; out delta: int32or64): boolean; inline;
     function CheckRectBounds(var x,y,x2,y2: integer; minsize: integer): boolean; inline;
     function CheckClippedRectBounds(var x,y,x2,y2: integer): boolean; inline;
-    function CheckPutImageBounds(x, y, tx, ty: integer; out minxb, minyb, maxxb, maxyb, ignoreleft: integer): boolean; inline;
     function CheckAntialiasRectBounds(var x,y,x2,y2: single; w: single): boolean;
     function GetCanvasBGRA: TBGRACanvas;
     function GetCanvas2D: TBGRACanvas2D;
@@ -98,7 +97,7 @@ type
     function LoadFromRawImage(ARawImage: TRawImage; DefaultOpacity: byte;
       AlwaysReplaceAlpha: boolean = False; RaiseErrorOnInvalidPixelFormat: boolean = True): boolean;
     function GetDataPtr: PBGRAPixel; override;
-    procedure ClearTransparentPixels;
+    procedure ClearTransparentPixels; override;
     function GetScanlineFast(y: integer): PBGRAPixel; inline;
     function GetLineOrder: TRawImageLineOrder; override;
     function GetNbPixels: integer; override;
@@ -143,7 +142,6 @@ type
     function GetAverageColor: TColor; override;
     function GetAveragePixel: TBGRAPixel; override;
     function CreateAdaptedPngWriter: TFPWriterPNG;
-    function LoadAsBmp32(Str: TStream): boolean; override;
 
     //drawing
     function GetCustomPenStyle: TBGRAPenStyle; override;
@@ -180,6 +178,7 @@ type
     constructor Create(AWidth, AHeight: integer; Color: TColor); override;
     constructor Create(AWidth, AHeight: integer; Color: TBGRAPixel); override;
     constructor Create(AFilename: string); override;
+    constructor Create(AFilename: string; AIsUtf8: boolean); override;
     constructor Create(AStream: TStream); override;
     destructor Destroy; override;
 
@@ -188,10 +187,9 @@ type
     function NewBitmap(AWidth, AHeight: integer; Color: TBGRAPixel): TBGRACustomBitmap; override;
     function NewBitmap(Filename: string): TBGRACustomBitmap; override;
 
-    procedure LoadFromFile(const filename: string); override;
     procedure SaveToFile(const filename: string); override;
     procedure SaveToStreamAsPng(Str: TStream); override;
-    procedure Assign(ABitmap: TBitmap); override; overload;
+    procedure Assign(ARaster: TRasterImage); override; overload;
     procedure Assign(MemBitmap: TBGRACustomBitmap);override; overload;
     procedure Serialize(AStream: TStream); override;
     procedure Deserialize(AStream: TStream); override;
@@ -317,13 +315,13 @@ type
     procedure RoundRect(X1, Y1, X2, Y2: integer; DX, DY: integer;
       BorderColor, FillColor: TBGRAPixel); override;
 
-    procedure TextOutAngle(x, y: single; orientation: integer; s: string; c: TBGRAPixel; align: TAlignment); override; overload;
-    procedure TextOutAngle(x, y: single; orientation: integer; s: string; texture: IBGRAScanner; align: TAlignment); override; overload;
-    procedure TextOut(x, y: single; s: string; texture: IBGRAScanner; align: TAlignment); override; overload;
-    procedure TextOut(x, y: single; s: string; c: TBGRAPixel; align: TAlignment); override; overload;
-    procedure TextRect(ARect: TRect; x, y: integer; s: string; style: TTextStyle; c: TBGRAPixel); override; overload;
-    procedure TextRect(ARect: TRect; x, y: integer; s: string; style: TTextStyle; texture: IBGRAScanner); override; overload;
-    function TextSize(s: string): TSize; override;
+    procedure TextOutAngle(x, y: single; orientation: integer; sUTF8: string; c: TBGRAPixel; align: TAlignment); override; overload;
+    procedure TextOutAngle(x, y: single; orientation: integer; sUTF8: string; texture: IBGRAScanner; align: TAlignment); override; overload;
+    procedure TextOut(x, y: single; sUTF8: string; texture: IBGRAScanner; align: TAlignment); override; overload;
+    procedure TextOut(x, y: single; sUTF8: string; c: TBGRAPixel; align: TAlignment); override; overload;
+    procedure TextRect(ARect: TRect; x, y: integer; sUTF8: string; style: TTextStyle; c: TBGRAPixel); override; overload;
+    procedure TextRect(ARect: TRect; x, y: integer; sUTF8: string; style: TTextStyle; texture: IBGRAScanner); override; overload;
+    function TextSize(sUTF8: string): TSize; override;
 
     {Spline}
     function ComputeClosedSpline(const APoints: array of TPointF; AStyle: TSplineStyle): ArrayOfTPointF; override;
@@ -354,8 +352,8 @@ type
     procedure Fill(c: TBGRAPixel; start, Count: integer); override;
     procedure DrawPixels(c: TBGRAPixel; start, Count: integer); override;
     procedure AlphaFill(alpha: byte; start, Count: integer); override;
-    procedure FillMask(x,y: integer; AMask: TBGRACustomBitmap; color: TBGRAPixel); override;
-    procedure FillMask(x,y: integer; AMask: TBGRACustomBitmap; texture: IBGRAScanner); override;
+    procedure FillMask(x,y: integer; AMask: TBGRACustomBitmap; color: TBGRAPixel; ADrawMode: TDrawMode); override;
+    procedure FillMask(x,y: integer; AMask: TBGRACustomBitmap; texture: IBGRAScanner; ADrawMode: TDrawMode); override;
     procedure FillClearTypeMask(x,y: integer; xThird: integer; AMask: TBGRACustomBitmap; color: TBGRAPixel; ARGBOrder: boolean = true); override;
     procedure FillClearTypeMask(x,y: integer; xThird: integer; AMask: TBGRACustomBitmap; texture: IBGRAScanner; ARGBOrder: boolean = true); override;
     procedure ReplaceColor(before, after: TColor); override;
@@ -390,9 +388,12 @@ type
     procedure LoadFromBitmapIfNeeded; override;   //call to ensure that bitmap data is up to date
 
     {BGRA bitmap functions}
+    procedure CrossFade(ARect: TRect; Source1, Source2: IBGRAScanner; AFadePosition: byte; mode: TDrawMode = dmDrawWithTransparency); override;
+    procedure CrossFade(ARect: TRect; Source1, Source2: IBGRAScanner; AFadeMask: IBGRAScanner; mode: TDrawMode = dmDrawWithTransparency); override;
     procedure PutImage(x, y: integer; Source: TBGRACustomBitmap; mode: TDrawMode; AOpacity: byte = 255); override;
-    procedure PutImageAngle(x,y: single; Source: TBGRACustomBitmap; angle: single; imageCenterX: single = 0; imageCenterY: single = 0; AOpacity: Byte=255; ARestoreOffsetAfterRotation: boolean = false); override;
-    procedure PutImageAffine(Origin,HAxis,VAxis: TPointF; Source: TBGRACustomBitmap; AOpacity: Byte=255); override;
+    procedure PutImageAffine(Origin,HAxis,VAxis: TPointF; Source: TBGRACustomBitmap; AOutputBounds: TRect; AOpacity: Byte=255); override;
+    procedure StretchPutImage(ARect: TRect; Source: TBGRACustomBitmap; mode: TDrawMode; AOpacity: byte = 255); override;
+
     procedure BlendImage(x, y: integer; Source: TBGRACustomBitmap; operation: TBlendOperation); override;
     procedure BlendImageOver(x, y: integer; Source: TBGRACustomBitmap; operation: TBlendOperation; AOpacity: byte = 255;
         ALinearBlend: boolean = false); override;
@@ -404,14 +405,14 @@ type
     function Equals(comp: TBGRACustomBitmap): boolean; override;
     function Equals(comp: TBGRAPixel): boolean; override;
     function GetImageBounds(Channel: TChannel = cAlpha; ANothingValue: Byte = 0): TRect; override;
-    function GetImageBounds(Channels: TChannels): TRect; override;
+    function GetImageBounds(Channels: TChannels; ANothingValue: Byte = 0): TRect; override;
     function GetDifferenceBounds(ABitmap: TBGRACustomBitmap): TRect; override;
     function MakeBitmapCopy(BackgroundColor: TColor): TBitmap; override;
 
     function Resample(newWidth, newHeight: integer;
       mode: TResampleMode = rmFineResample): TBGRACustomBitmap; override;
-    procedure VerticalFlip; override;
-    procedure HorizontalFlip; override;
+    procedure VerticalFlip(ARect: TRect); override;
+    procedure HorizontalFlip(ARect: TRect); override;
     function RotateCW: TBGRACustomBitmap; override;
     function RotateCCW: TBGRACustomBitmap; override;
     procedure Negative; override;
@@ -423,10 +424,11 @@ type
     procedure SwapRedBlue; override;
     procedure GrayscaleToAlpha; override;
     procedure AlphaToGrayscale; override;
-    procedure ApplyMask(mask: TBGRACustomBitmap); override;
+    procedure ApplyMask(mask: TBGRACustomBitmap; ARect: TRect; AMaskRectTopLeft: TPoint); override;
     procedure ApplyGlobalOpacity(alpha: byte); override;
     procedure ConvertToLinearRGB; override;
     procedure ConvertFromLinearRGB; override;
+    procedure DrawCheckers(ARect: TRect; AColorEven,AColorOdd: TBGRAPixel);
 
     {Filters}
     function FilterSmartZoom3(Option: TMedianOption): TBGRACustomBitmap; override;
@@ -791,6 +793,13 @@ begin
   Fill(Color);
 end;
 
+constructor TBGRADefaultBitmap.Create(AFilename: string);
+begin
+  Init;
+  inherited Create(0, 0);
+  LoadFromFile(Afilename);
+end;
+
 destructor TBGRADefaultBitmap.Destroy;
 begin
   FreeData;
@@ -804,11 +813,14 @@ end;
 
 {------------------------- Loading functions ----------------------------------}
 
-constructor TBGRADefaultBitmap.Create(AFilename: string);
+constructor TBGRADefaultBitmap.Create(AFilename: string; AIsUtf8: boolean);
 begin
   Init;
-  inherited Create(0, 0);  
-  LoadFromFile(Afilename);
+  inherited Create(0, 0);
+  if AIsUtf8 then
+    LoadFromFileUTF8(Afilename)
+  else
+    LoadFromFile(Afilename);
 end;
 
 constructor TBGRADefaultBitmap.Create(AStream: TStream);
@@ -818,23 +830,25 @@ begin
   LoadFromStream(AStream);
 end;
 
-procedure TBGRADefaultBitmap.Assign(ABitmap: TBitmap);
+procedure TBGRADefaultBitmap.Assign(ARaster: TRasterImage);
 var TempBmp: TBitmap;
     ConvertOk: boolean;
 begin
   DiscardBitmapChange;
-  SetSize(ABitmap.Width, ABitmap.Height);
-  if not LoadFromRawImage(ABitmap.RawImage,0,False,False) then
+  SetSize(ARaster.Width, ARaster.Height);
+  if not LoadFromRawImage(ARaster.RawImage,0,False,False) then
+  if ARaster is TBitmap then
   begin //try to convert
     TempBmp := TBitmap.Create;
-    TempBmp.Width := ABitmap.Width;
-    TempBmp.Height := ABitmap.Height;
-    TempBmp.Canvas.Draw(0,0,ABitmap);
+    TempBmp.Width := ARaster.Width;
+    TempBmp.Height := ARaster.Height;
+    TempBmp.Canvas.Draw(0,0,ARaster);
     ConvertOk := LoadFromRawImage(TempBmp.RawImage,0,False,False);
     TempBmp.Free;
     if not ConvertOk then
       raise Exception.Create('Unable to convert image to 24 bit');
-  end;
+  end else
+    raise Exception.Create('Unable to convert image to 24 bit');
   If Empty then AlphaFill(255); // if bitmap seems to be empty, assume
                                 // it is an opaque bitmap without alpha channel
 end;
@@ -877,21 +891,6 @@ begin
   zero := 0;
   AStream.Write(zero,sizeof(zero));
   AStream.Write(zero,sizeof(zero));
-end;
-
-procedure TBGRADefaultBitmap.LoadFromFile(const filename: string);
-var
-  OldDrawMode: TDrawMode;
-begin
-  OldDrawMode := CanvasDrawModeFP;
-  CanvasDrawModeFP := dmSet;
-  ClipRect := rect(0,0,Width,Height);
-  try
-    inherited LoadFromfile(filename);
-  finally
-    CanvasDrawModeFP := OldDrawMode;
-    ClearTransparentPixels;
-  end;
 end;
 
 procedure TBGRADefaultBitmap.SaveToFile(const filename: string);
@@ -1669,6 +1668,49 @@ begin
   begin
     DoAlphaCorrection;
   end;
+end;
+
+procedure TBGRADefaultBitmap.CrossFade(ARect: TRect; Source1, Source2: IBGRAScanner; AFadePosition: byte; mode: TDrawMode = dmDrawWithTransparency);
+var constScanner: TBGRAConstantScanner;
+begin
+  if AFadePosition = 0 then
+    FillRect(ARect, Source1, mode) else
+  if AFadePosition = 255 then
+    FillRect(ARect, Source2, mode) else
+  begin
+    constScanner := TBGRAConstantScanner.Create(BGRA(AFadePosition,AFadePosition,AFadePosition,255));
+    CrossFade(ARect, Source1,Source2, constScanner, mode);
+    constScanner.Free;
+  end;
+end;
+
+procedure TBGRADefaultBitmap.CrossFade(ARect: TRect; Source1, Source2: IBGRAScanner; AFadeMask: IBGRAScanner; mode: TDrawMode = dmDrawWithTransparency);
+var xb,yb: NativeInt;
+  pdest: PBGRAPixel;
+  c: TBGRAPixel;
+  fadePos: byte;
+begin
+  if not IntersectRect(ARect,ARect,ClipRect) then exit;
+  for yb := ARect.top to ARect.Bottom-1 do
+  begin
+    pdest := GetScanlineFast(yb)+ARect.Left;
+    Source1.ScanMoveTo(ARect.left, yb);
+    Source2.ScanMoveTo(ARect.left, yb);
+    AFadeMask.ScanMoveTo(ARect.left, yb);
+    for xb := ARect.left to ARect.Right-1 do
+    begin
+      fadePos := AFadeMask.ScanNextPixel.green;
+      c := MergeBGRAWithGammaCorrection(Source1.ScanNextPixel,not fadePos,Source2.ScanNextPixel,fadePos);
+      case mode of
+      dmSet: pdest^ := c;
+      dmDrawWithTransparency: DrawPixelInlineWithAlphaCheck(pdest, c);
+      dmLinearBlend: FastBlendPixelInline(pdest,c);
+      dmSetExceptTransparent: if c.alpha = 255 then pdest^ := c;
+      end;
+      inc(pdest);
+    end;
+  end;
+  InvalidateBitmap;
 end;
 
 procedure TBGRADefaultBitmap.DiscardBitmapChange; inline;
@@ -2928,44 +2970,44 @@ end;
 {------------------------- Text functions ---------------------------------------}
 
 procedure TBGRADefaultBitmap.TextOutAngle(x, y: single; orientation: integer;
-  s: string; c: TBGRAPixel; align: TAlignment);
+  sUTF8: string; c: TBGRAPixel; align: TAlignment);
 begin
-  FontRenderer.TextOutAngle(self,x,y,orientation,CleanTextOutString(s),c,align);
+  FontRenderer.TextOutAngle(self,x,y,orientation,CleanTextOutString(sUTF8),c,align);
 end;
 
 procedure TBGRADefaultBitmap.TextOutAngle(x, y: single; orientation: integer;
-  s: string; texture: IBGRAScanner; align: TAlignment);
+  sUTF8: string; texture: IBGRAScanner; align: TAlignment);
 begin
-  FontRenderer.TextOutAngle(self,x,y,orientation,CleanTextOutString(s),texture,align);
+  FontRenderer.TextOutAngle(self,x,y,orientation,CleanTextOutString(sUTF8),texture,align);
 end;
 
-procedure TBGRADefaultBitmap.TextOut(x, y: single; s: string;
+procedure TBGRADefaultBitmap.TextOut(x, y: single; sUTF8: string;
   texture: IBGRAScanner; align: TAlignment);
 begin
-  FontRenderer.TextOut(self,x,y,CleanTextOutString(s),texture,align);
+  FontRenderer.TextOut(self,x,y,CleanTextOutString(sUTF8),texture,align);
 end;
 
-procedure TBGRADefaultBitmap.TextOut(x, y: single; s: string;
+procedure TBGRADefaultBitmap.TextOut(x, y: single; sUTF8: string;
   c: TBGRAPixel; align: TAlignment);
 begin
-  FontRenderer.TextOut(self,x,y,CleanTextOutString(s),c,align);
+  FontRenderer.TextOut(self,x,y,CleanTextOutString(sUTF8),c,align);
 end;
 
 procedure TBGRADefaultBitmap.TextRect(ARect: TRect; x, y: integer;
-  s: string; style: TTextStyle; c: TBGRAPixel);
+  sUTF8: string; style: TTextStyle; c: TBGRAPixel);
 begin
-  FontRenderer.TextRect(self,ARect,x,y,s,style,c);
+  FontRenderer.TextRect(self,ARect,x,y,sUTF8,style,c);
 end;
 
-procedure TBGRADefaultBitmap.TextRect(ARect: TRect; x, y: integer; s: string;
+procedure TBGRADefaultBitmap.TextRect(ARect: TRect; x, y: integer; sUTF8: string;
   style: TTextStyle; texture: IBGRAScanner);
 begin
-  FontRenderer.TextRect(self,ARect,x,y,s,style,texture);
+  FontRenderer.TextRect(self,ARect,x,y,sUTF8,style,texture);
 end;
 
-function TBGRADefaultBitmap.TextSize(s: string): TSize;
+function TBGRADefaultBitmap.TextSize(sUTF8: string): TSize;
 begin
-  result := FontRenderer.TextSize(s);
+  result := FontRenderer.TextSize(sUTF8);
 end;
 
 {---------------------------- Curves ----------------------------------------}
@@ -3117,24 +3159,24 @@ begin
 end;
 
 procedure TBGRADefaultBitmap.FillMask(x, y: integer; AMask: TBGRACustomBitmap;
-  color: TBGRAPixel);
+  color: TBGRAPixel; ADrawMode: TDrawMode);
 var
   scan: TBGRACustomScanner;
 begin
   if (AMask = nil) or (color.alpha = 0) then exit;
   scan := TBGRASolidColorMaskScanner.Create(AMask,Point(-X,-Y),color);
-  self.FillRect(X,Y,X+AMask.Width,Y+AMask.Height,scan,dmDrawWithTransparency);
+  self.FillRect(X,Y,X+AMask.Width,Y+AMask.Height,scan,ADrawMode);
   scan.Free;
 end;
 
 procedure TBGRADefaultBitmap.FillMask(x, y: integer; AMask: TBGRACustomBitmap;
-  texture: IBGRAScanner);
+  texture: IBGRAScanner; ADrawMode: TDrawMode);
 var
   scan: TBGRACustomScanner;
 begin
   if AMask = nil then exit;
   scan := TBGRATextureMaskScanner.Create(AMask,Point(-X,-Y),texture);
-  self.FillRect(X,Y,X+AMask.Width,Y+AMask.Height,scan,dmDrawWithTransparency);
+  self.FillRect(X,Y,X+AMask.Width,Y+AMask.Height,scan,ADrawMode);
   scan.Free;
 end;
 
@@ -3595,46 +3637,6 @@ begin
   InvalidateBitmap;
 end;
 
-function TBGRADefaultBitmap.CheckPutImageBounds(x,y,tx,ty: integer; out minxb,minyb,maxxb,maxyb,ignoreleft: integer): boolean inline;
-var x2,y2: integer;
-begin
-  if (x >= FClipRect.Right) or (y >= FClipRect.Bottom) or (x <= FClipRect.Left-tx) or
-    (y <= FClipRect.Top-ty) or (Height = 0) or (ty = 0) or (tx = 0) then
-  begin
-    result := false;
-    exit;
-  end;
-
-  x2 := x + tx - 1;
-  y2 := y + ty - 1;
-
-  if y < FClipRect.Top then
-    minyb := FClipRect.Top
-  else
-    minyb := y;
-  if y2 >= FClipRect.Bottom then
-    maxyb := FClipRect.Bottom - 1
-  else
-    maxyb := y2;
-
-  if x < FClipRect.Left then
-  begin
-    ignoreleft := FClipRect.Left-x;
-    minxb      := FClipRect.Left;
-  end
-  else
-  begin
-    ignoreleft := 0;
-    minxb      := x;
-  end;
-  if x2 >= FClipRect.Right then
-    maxxb := FClipRect.Right - 1
-  else
-    maxxb := x2;
-
-  result := true;
-end;
-
 function TBGRADefaultBitmap.CheckAntialiasRectBounds(var x, y, x2, y2: single;
   w: single): boolean;
 var
@@ -3682,7 +3684,7 @@ begin
   if (source = nil) or (AOpacity = 0) then exit;
   sourcewidth := Source.Width;
 
-  if not CheckPutImageBounds(x,y,sourcewidth,source.height,minxb,minyb,maxxb,maxyb,ignoreleft) then exit;
+  if not CheckPutImageBounds(x,y,sourcewidth,source.height,minxb,minyb,maxxb,maxyb,ignoreleft,FClipRect) then exit;
 
   copycount := maxxb - minxb + 1;
 
@@ -3847,7 +3849,7 @@ var
 begin
   sourcewidth := Source.Width;
 
-  if not CheckPutImageBounds(x,y,sourcewidth,source.height,minxb,minyb,maxxb,maxyb,ignoreleft) then exit;
+  if not CheckPutImageBounds(x,y,sourcewidth,source.height,minxb,minyb,maxxb,maxyb,ignoreleft,FClipRect) then exit;
 
   copycount := maxxb - minxb + 1;
 
@@ -3881,7 +3883,7 @@ var
 begin
   sourcewidth := Source.Width;
 
-  if not CheckPutImageBounds(x,y,sourcewidth,source.height,minxb,minyb,maxxb,maxyb,ignoreleft) then exit;
+  if not CheckPutImageBounds(x,y,sourcewidth,source.height,minxb,minyb,maxxb,maxyb,ignoreleft,FClipRect) then exit;
 
   copycount := maxxb - minxb + 1;
 
@@ -3906,55 +3908,26 @@ begin
   InvalidateBitmap;
 end;
 
-{ Draw an image wih an angle. Use an affine transformation to do this. }
-procedure TBGRADefaultBitmap.PutImageAngle(x, y: single;
-  Source: TBGRACustomBitmap; angle: single; imageCenterX: single;
-  imageCenterY: single; AOpacity: Byte; ARestoreOffsetAfterRotation: boolean);
-var
-  cosa,sina: single;
-
-  { Compute rotated coordinates }
-  function Coord(relX,relY: single): TPointF;
-  begin
-    relX -= imageCenterX;
-    relY -= imageCenterY;
-    result.x := relX*cosa-relY*sina+x;
-    result.y := relY*cosa+relX*sina+y;
-    if ARestoreOffsetAfterRotation then
-    begin
-      result.x += imageCenterX;
-      result.y += imageCenterY;
-    end;
-  end;
-
-begin
-  cosa := cos(-angle*Pi/180);
-  sina := -sin(-angle*Pi/180);
-  PutImageAffine(Coord(0,0),Coord(source.Width,0),Coord(0,source.Height),source,AOpacity);
-end;
-
 { Draw an image with an affine transformation (rotation, scale, translate).
-  Parameters are the bitmap origin, the end of the horizontal axis and the end of the vertical axis. }
-procedure TBGRADefaultBitmap.PutImageAffine(Origin,HAxis,VAxis: TPointF; Source: TBGRACustomBitmap; AOpacity: Byte);
+  Parameters are the bitmap origin, the end of the horizontal axis and the end of the vertical axis.
+  The output bounds correspond to the pixels that will be affected in the destination. }
+procedure TBGRADefaultBitmap.PutImageAffine(Origin, HAxis, VAxis: TPointF;
+  Source: TBGRACustomBitmap; AOutputBounds: TRect; AOpacity: Byte);
 var affine: TBGRAAffineBitmapTransform;
-    minx,miny,maxx,maxy: integer;
-    pt4: TPointF;
-
-  //include specified point in the bounds
-  procedure Include(pt: TPointF);
-  begin
-    if floor(pt.X) < minx then minx := floor(pt.X);
-    if floor(pt.Y) < miny then miny := floor(pt.Y);
-    if ceil(pt.X) > maxx then maxx := ceil(pt.X);
-    if ceil(pt.Y) > maxy then maxy := ceil(pt.Y);
-  end;
-
+    SourceBounds: TRect;
 begin
+  if (Source = nil) or (AOpacity = 0) then exit;
+  IntersectRect(AOutputBounds,AOutputBounds,ClipRect);
+  if IsRectEmpty(AOutputBounds) then exit;
+
   if (abs(Origin.x-round(Origin.x))<1e-6) and (abs(Origin.y-round(Origin.Y))<1e-6) and
      (abs(HAxis.x-(Origin.x+Source.Width))<1e-6) and (abs(HAxis.y-origin.y)<1e-6) and
      (abs(VAxis.x-Origin.x)<1e-6) and (abs(VAxis.y-(Origin.y+Source.Height))<1e-6) then
   begin
-    PutImage(round(origin.x),round(origin.y),Source,dmDrawWithTransparency,AOpacity);
+    SourceBounds := AOutputBounds;
+    OffsetRect(SourceBounds, -round(origin.x),-round(origin.y));
+    IntersectRect(SourceBounds,SourceBounds,rect(0,0,Source.Width,Source.Height));
+    PutImagePart(round(origin.x)+SourceBounds.Left,round(origin.y)+SourceBounds.Top,Source,SourceBounds,dmDrawWithTransparency,AOpacity);
     exit;
   end;
 
@@ -3962,21 +3935,18 @@ begin
   affine := TBGRAAffineBitmapTransform.Create(Source);
   affine.GlobalOpacity := AOpacity;
   affine.Fit(Origin,HAxis,VAxis);
-
-  { Compute bounds }
-  pt4.x := VAxis.x+HAxis.x-Origin.x;
-  pt4.y := VAxis.y+HAxis.y-Origin.y;
-  minx := floor(Origin.X);
-  miny := floor(Origin.Y);
-  maxx := ceil(Origin.X);
-  maxy := ceil(Origin.Y);
-  Include(HAxis);
-  Include(VAxis);
-  Include(pt4);
-
-  { Use the affine transformation as a scanner }
-  FillRect(minx,miny,maxx+1,maxy+1,affine,dmDrawWithTransparency);
+  FillRect(AOutputBounds,affine,dmDrawWithTransparency);
   affine.Free;
+end;
+
+procedure TBGRADefaultBitmap.StretchPutImage(ARect: TRect;
+  Source: TBGRACustomBitmap; mode: TDrawMode; AOpacity: byte);
+begin
+  If (Source = nil) or (AOpacity = 0) then exit;
+  if (ARect.Right-ARect.Left = Source.Width) and (ARect.Bottom-ARect.Top = Source.Height) then
+     PutImage(ARect.Left,ARect.Top,Source,mode,AOpacity)
+  else
+     BGRAResample.StretchPutImage(Source, ARect.Right-ARect.Left, ARect.Bottom-ARect.Top, self, ARect.left,ARect.Top, mode, AOpacity);
 end;
 
 { Duplicate bitmap content. Optionally, bitmap properties can be also duplicated }
@@ -4301,48 +4271,6 @@ begin
   result.WordSized := false;
 end;
 
-{$hints off}
-function TBGRADefaultBitmap.LoadAsBmp32(Str: TStream): boolean;
-var OldPos: int64;
-    fileHeader: TBitmapFileHeader;
-    infoHeader: TBitmapInfoHeader;
-    dataSize: integer;
-begin
-  OldPos := Str.Position;
-  result := false;
-  try
-    if Str.Read(fileHeader,sizeof(fileHeader)) <> sizeof(fileHeader) then
-      raise exception.Create('Inuable to read file header');
-    if fileHeader.bfType = $4D42 then
-    begin
-      if Str.Read(infoHeader,sizeof(infoHeader)) <> sizeof(infoHeader) then
-        raise exception.Create('Inuable to read info header');
-
-      if (infoHeader.biPlanes = 1) and (infoHeader.biBitCount = 32) and (infoHeader.biCompression = 0) then
-      begin
-        SetSize(infoHeader.biWidth,infoHeader.biHeight);
-        Str.Position := OldPos+fileHeader.bfOffBits;
-        dataSize := NbPixels*sizeof(TBGRAPixel);
-        if Str.Read(Data^, dataSize) <> dataSize then
-        Begin
-          SetSize(0,0);
-          raise exception.Create('Unable to read data');
-        end;
-        result := true;
-      end;
-    end;
-
-  except
-    on ex:exception do
-    begin
-
-    end;
-  end;
-  Str.Position := OldPos;
-
-end;
-{$hints on}
-
 procedure TBGRADefaultBitmap.SetCanvasOpacity(AValue: byte);
 begin
   LoadFromBitmapIfNeeded;
@@ -4386,30 +4314,34 @@ end;
   assign bottom line to top line, then assign temporary line to bottom line.
 
   It is an involution, i.e it does nothing when applied twice }
-procedure TBGRADefaultBitmap.VerticalFlip;
+procedure TBGRADefaultBitmap.VerticalFlip(ARect: TRect);
 var
-  yb:     integer;
+  yb,h2:     integer;
   line:   PBGRAPixel;
-  linesize: integer;
+  linesize, delta: integer;
   PStart: PBGRAPixel;
   PEnd:   PBGRAPixel;
 begin
   if FData = nil then
     exit;
 
+  if (ARect.Right <= ARect.Left) or (ARect.Bottom <= ARect.Top) then exit;
+  if not IntersectRect(ARect, ARect, rect(0,0,Width,Height)) then exit;
   LoadFromBitmapIfNeeded;
-  linesize := Width * sizeof(TBGRAPixel);
+  linesize := (ARect.Right-ARect.Left) * sizeof(TBGRAPixel);
   line     := nil;
   getmem(line, linesize);
-  PStart := Data;
-  PEnd   := Data + (Height - 1) * Width;
-  for yb := 0 to (Height div 2) - 1 do
+  PStart := GetScanlineFast(ARect.Top)+ARect.Left;
+  PEnd   := GetScanlineFast(ARect.Bottom-1)+ARect.Left;
+  h2 := (ARect.Bottom-ARect.Top) div 2;
+  if LineOrder = riloTopToBottom then delta := +Width else delta := -Width;
+  for yb := h2-1 downto 0 do
   begin
     move(PStart^, line^, linesize);
     move(PEnd^, PStart^, linesize);
     move(line^, PEnd^, linesize);
-    Inc(PStart, Width);
-    Dec(PEnd, Width);
+    Inc(PStart, delta);
+    Dec(PEnd, delta);
   end;
   freemem(line);
   InvalidateBitmap;
@@ -4418,9 +4350,9 @@ end;
 { Flip horizontally. Swap left pixels with right pixels on each line.
 
   It is an involution, i.e it does nothing when applied twice}
-procedure TBGRADefaultBitmap.HorizontalFlip;
+procedure TBGRADefaultBitmap.HorizontalFlip(ARect: TRect);
 var
-  yb, xb: integer;
+  yb, xb, w: integer;
   PStart: PBGRAPixel;
   PEnd:   PBGRAPixel;
   temp:   TBGRAPixel;
@@ -4428,12 +4360,15 @@ begin
   if FData = nil then
     exit;
 
+  if (ARect.Right <= ARect.Left) or (ARect.Bottom <= ARect.Top) then exit;
+  if not IntersectRect(ARect, ARect, rect(0,0,Width,Height)) then exit;
+  w := ARect.Right-ARect.Left;
   LoadFromBitmapIfNeeded;
-  for yb := 0 to Height - 1 do
+  for yb := ARect.Top to ARect.Bottom-1 do
   begin
-    PStart := Scanline[yb];
-    PEnd   := PStart + Width;
-    for xb := 0 to (Width div 2) - 1 do
+    PStart := GetScanlineFast(yb)+ARect.Left;
+    PEnd   := PStart + w;
+    for xb := 0 to (w div 2) - 1 do
     begin
       Dec(PEnd);
       temp    := PStart^;
@@ -4672,20 +4607,27 @@ end;
   changed according to grayscale values of the mask.
 
   See : http://wiki.lazarus.freepascal.org/BGRABitmap_tutorial_5 }
-procedure TBGRADefaultBitmap.ApplyMask(mask: TBGRACustomBitmap);
+procedure TBGRADefaultBitmap.ApplyMask(mask: TBGRACustomBitmap; ARect: TRect; AMaskRectTopLeft: TPoint);
 var
   p, pmask: PBGRAPixel;
   yb, xb:   integer;
+  MaskOffsetX,MaskOffsetY,w: integer;
 begin
-  if (Mask.Width <> Width) or (Mask.Height <> Height) then
-    exit;
+  if (ARect.Right <= ARect.Left) or (ARect.Bottom <= ARect.Top) then exit;
+  IntersectRect(ARect, ARect, rect(0,0,Width,Height));
+  MaskOffsetX := AMaskRectTopLeft.x - ARect.Left;
+  MaskOffsetY := AMaskRectTopLeft.y - ARect.Top;
+  OffsetRect(ARect, MaskOffsetX, MaskOffsetY);
+  IntersectRect(ARect, ARect, rect(0,0,mask.Width,mask.Height));
+  OffsetRect(ARect, -MaskOffsetX, -MaskOffsetY);
 
   LoadFromBitmapIfNeeded;
-  for yb := 0 to Height - 1 do
+  w := ARect.Right-ARect.Left-1;
+  for yb := ARect.Top to ARect.Bottom - 1 do
   begin
-    p     := Scanline[yb];
-    pmask := Mask.Scanline[yb];
-    for xb := Width - 1 downto 0 do
+    p     := Scanline[yb]+ARect.Left;
+    pmask := Mask.Scanline[yb+MaskOffsetY]+ARect.Left+MaskOffsetX;
+    for xb := w downto 0 do
     begin
       p^.alpha := ApplyOpacity(p^.alpha, pmask^.red);
       Inc(p);
@@ -4742,31 +4684,105 @@ begin
   end;
 end;
 
+procedure TBGRADefaultBitmap.DrawCheckers(ARect: TRect; AColorEven,
+  AColorOdd: TBGRAPixel);
+const tx = 8; ty = 8; //must be a power of 2
+      xMask = tx*2-1;
+var xcount,patY,w,n,patY1,patY2m1,patX,patX1: NativeInt;
+    pdest: PBGRAPixel;
+    delta: PtrInt;
+    actualRect: TRect;
+begin
+  actualRect := ARect;
+  IntersectRect(actualRect, ARect, self.ClipRect);
+  w := actualRect.Right-actualRect.Left;
+  if (w <= 0) or (actualRect.Bottom <= actualRect.Top) then exit;
+  delta := self.Width;
+  if self.LineOrder = riloBottomToTop then delta := -delta;
+  delta := (delta-w)*SizeOf(TBGRAPixel);
+  pdest := self.ScanLine[actualRect.Top]+actualRect.left;
+  patY1 := actualRect.Top - ARect.Top;
+  patY2m1 := actualRect.Bottom - ARect.Top-1;
+  patX1 := (actualRect.Left - ARect.Left) and xMask;
+  for patY := patY1 to patY2m1 do
+  begin
+    xcount := w;
+    if patY and ty = 0 then
+       patX := patX1
+    else
+       patX := (patX1+tx) and xMask;
+    while xcount > 0 do
+    begin
+      if patX and tx = 0 then
+      begin
+        n := 8-patX;
+        if n > xcount then n := xcount;
+        FillDWord(pdest^,n,DWord(AColorEven));
+        dec(xcount,n);
+        inc(pdest,n);
+        patX := tx;
+      end else
+      begin
+        n := 16-patX;
+        if n > xcount then n := xcount;
+        FillDWord(pdest^,n,DWord(AColorOdd));
+        dec(xcount,n);
+        inc(pdest,n);
+        patX := 0;
+      end;
+    end;
+    inc(pbyte(pdest),delta);
+  end;
+  self.InvalidateBitmap;
+end;
+
 { Get bounds of non zero values of specified channel }
 function TBGRADefaultBitmap.GetImageBounds(Channel: TChannel = cAlpha; ANothingValue: Byte = 0): TRect;
+begin
+  result := GetImageBounds([Channel], ANothingValue);
+end;
+
+function TBGRADefaultBitmap.GetImageBounds(Channels: TChannels; ANothingValue: Byte = 0): TRect;
 var
   minx, miny, maxx, maxy: integer;
-  xb, yb: integer;
-  p:      pbyte;
-  offset: integer;
+  xb, xb2, yb: integer;
+  p:      PDWord;
+  colorMask, colorZeros: DWord;
 begin
   maxx := -1;
   maxy := -1;
   minx := self.Width;
   miny := self.Height;
-  case Channel of
-    cBlue: offset  := 0;
-    cGreen: offset := 1;
-    cRed: offset   := 2;
-    else
-      offset := 3;
+  colorMask := 0;
+  colorZeros := 0;
+  if cBlue in Channels then
+  begin
+    colorMask := colorMask or $ff;
+    colorZeros:= colorZeros or ANothingValue;
   end;
+  if cGreen in Channels then
+  begin
+    colorMask := colorMask or $ff00;
+    colorZeros:= colorZeros or (ANothingValue shl 8);
+  end;
+  if cRed in Channels then
+  begin
+    colorMask := colorMask or $ff0000;
+    colorZeros:= colorZeros or (ANothingValue shl 16);
+  end;
+  if cAlpha in Channels then
+  begin
+    colorMask := colorMask or $ff000000;
+    colorZeros:= colorZeros or (ANothingValue shl 24);
+  end;
+  colorMask := NtoLE(colorMask);
+  colorZeros := NtoLE(colorZeros);
   for yb := 0 to self.Height - 1 do
   begin
-    p := PByte(self.ScanLine[yb]) + offset;
+    p := PDWord(self.ScanLine[yb]);
     for xb := 0 to self.Width - 1 do
     begin
-      if p^ <> ANothingValue then
+      if (p^ and colorMask) <> colorZeros then
       begin
         if xb < minx then
           minx := xb;
@@ -4776,8 +4792,21 @@ begin
           maxx := xb;
         if yb > maxy then
           maxy := yb;
+
+        inc(p, self.width-1-xb);
+        for xb2 := self.Width-1 downto xb+1 do
+        begin
+          if (p^ and colorMask) <> colorZeros then
+          begin
+            if xb2 > maxx then
+              maxx := xb2;
+            break;
+          end;
+          dec(p);
+        end;
+        break;
       end;
-      Inc(p, sizeof(TBGRAPixel));
+      Inc(p);
     end;
   end;
   if minx > maxx then
@@ -4794,15 +4823,6 @@ begin
     Result.right  := maxx + 1;
     Result.bottom := maxy + 1;
   end;
-end;
-
-function TBGRADefaultBitmap.GetImageBounds(Channels: TChannels): TRect;
-var c: TChannel;
-begin
-  result := rect(0,0,0,0);
-  for c := low(TChannel) to high(TChannel) do
-    if c in Channels then
-      UnionRect(result,result,GetImageBounds(c));
 end;
 
 function TBGRADefaultBitmap.GetDifferenceBounds(ABitmap: TBGRACustomBitmap): TRect;

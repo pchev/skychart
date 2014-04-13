@@ -382,8 +382,8 @@ begin
 
     for i := 0 to nbinter div 2 - 1 do
     begin
-      x1 := inter[i + i].interX-AliasingOfs.X;
-      x2 := inter[i + i+ 1].interX-AliasingOfs.X;
+      x1 := inter[i + i].interX+AliasingOfs.X;
+      x2 := inter[i + i+ 1].interX+AliasingOfs.X;
 
       if x1 <> x2 then
       begin

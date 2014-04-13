@@ -68,7 +68,7 @@ function CreateMotionBlurTask(ABmp: TBGRACustomBitmap; ABounds: TRect; ADistance
 { General purpose blur filter, with a blur mask as parameter to describe
   how pixels influence each other }
 function FilterBlur(bmp: TBGRACustomBitmap; blurMask: TBGRACustomBitmap): TBGRACustomBitmap;
-function CreateBlurTask(ABmp: TBGRACustomBitmap; ABounds: TRect; AMask: TBGRACustomBitmap): TFilterTask;
+function CreateBlurTask(ABmp: TBGRACustomBitmap; ABounds: TRect; AMask: TBGRACustomBitmap; AMaskIsThreadSafe: boolean = false): TFilterTask;
 
 function FilterPixelate(bmp: TBGRACustomBitmap; pixelSize: integer; useResample: boolean; filter: TResampleFilter = rfLinear): TBGRACustomBitmap;
 
@@ -151,8 +151,10 @@ type
   private
     FBounds: TRect;
     FMask: TBGRACustomBitmap;
+    FMaskOwned: boolean;
   public
-    constructor Create(bmp: TBGRACustomBitmap; ABounds: TRect; AMask: TBGRACustomBitmap);
+    constructor Create(bmp: TBGRACustomBitmap; ABounds: TRect; AMask: TBGRACustomBitmap; AMaskIsThreadSafe: boolean = false);
+    destructor Destroy; override;
   protected
     procedure DoExecute; override;
   end;
@@ -752,9 +754,9 @@ begin
 end;
 
 function CreateBlurTask(ABmp: TBGRACustomBitmap; ABounds: TRect;
-  AMask: TBGRACustomBitmap): TFilterTask;
+  AMask: TBGRACustomBitmap; AMaskIsThreadSafe: boolean): TFilterTask;
 begin
-  result := TCustomBlurTask.Create(ABmp,ABounds,AMask);
+  result := TCustomBlurTask.Create(ABmp,ABounds,AMask,AMaskIsThreadSafe);
 end;
 
 procedure FilterBlur(bmp: TBGRACustomBitmap;
@@ -1992,11 +1994,25 @@ end;
 { TCustomBlurTask }
 
 constructor TCustomBlurTask.Create(bmp: TBGRACustomBitmap; ABounds: TRect;
-  AMask: TBGRACustomBitmap);
+  AMask: TBGRACustomBitmap; AMaskIsThreadSafe: boolean);
 begin
   FSource := bmp;
   FBounds := ABounds;
-  FMask := AMask;
+  if AMaskIsThreadSafe then
+  begin
+    FMask := AMask;
+    FMaskOwned := false;
+  end else
+  begin
+    FMask := AMask.Duplicate;
+    FMaskOwned := true;
+  end;
+end;
+
+destructor TCustomBlurTask.Destroy;
+begin
+  If FMaskOwned then FreeAndNil(FMask);
+  inherited Destroy;
 end;
 
 procedure TCustomBlurTask.DoExecute;

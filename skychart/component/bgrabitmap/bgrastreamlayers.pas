@@ -5,18 +5,18 @@ unit BGRAStreamLayers;
 interface
 
 uses
-  Classes, SysUtils, BGRALayers, BGRABitmap;
+  Classes, SysUtils, BGRALayers, BGRABitmap, BGRALzpCommon;
 
 function CheckStreamForLayers(AStream: TStream): boolean;
 function LoadLayersFromStream(AStream: TStream; out ASelectedLayerIndex: integer; ALoadLayerUniqueIds: boolean = false) : TBGRALayeredBitmap;
-procedure SaveLayersToStream(AStream: TStream; ALayers: TBGRACustomLayeredBitmap; ASelectedLayerIndex: integer);
-procedure SaveLayerBitmapToStream(AStream: TStream; ABitmap: TBGRABitmap; ACaption: string);
-function LoadLayerBitmapFromStream(AStream: TStream) : TBGRABitmap;
+procedure SaveLayersToStream(AStream: TStream; ALayers: TBGRACustomLayeredBitmap; ASelectedLayerIndex: integer; ACompression: TLzpCompression = lzpZStream);
+procedure SaveLayerBitmapToStream(AStream: TStream; ABitmap: TBGRABitmap; ACaption: string; ACompression: TLzpCompression = lzpZStream);
+function LoadLayerBitmapFromStream(AStream: TStream; ACompression: TLzpCompression = lzpZStream) : TBGRABitmap;
 procedure RegisterStreamLayers;
 
 implementation
 
-uses BGRABitmapTypes, BGRACompressableBitmap, zstream;
+uses BGRABitmapTypes, BGRACompressableBitmap, zstream, BGRAReadLzp, BGRAWriteLzp;
 
 procedure SaveLayeredBitmapToStream(AStream: TStream; ALayers: TBGRACustomLayeredBitmap);
 begin
@@ -72,6 +72,7 @@ var
   i,LayerIndex: integer;
   LayerName: string;
   LayerId: LongInt;
+  Compression: TLzpCompression;
 begin
   result := TBGRALayeredBitmap.Create;
   OldPosition:= AStream.Position;
@@ -98,6 +99,7 @@ begin
 
     StackOption := WinReadLongint(AStream);
     result.LinearBlend := (StackOption and 1) = 1;
+    if (StackOption and 2) = 2 then Compression := lzpRLE else Compression:= lzpZStream;
     //end of header
 
     AStream.Position:= LayerStackStartPosition;
@@ -108,7 +110,7 @@ begin
       LayerBitmapPosition := LayerHeaderPosition + LayerHeaderSize;
 
       AStream.Position:= LayerBitmapPosition;
-      Layer := LoadLayerBitmapFromStream(AStream);
+      Layer := LoadLayerBitmapFromStream(AStream, Compression);
       LayerName := Layer.Caption;
       LayerIndex := result.AddOwnedLayer(Layer);
       Layer := nil;
@@ -147,7 +149,7 @@ begin
   end;
 end;
 
-procedure SaveLayersToStream(AStream: TStream; ALayers: TBGRACustomLayeredBitmap; ASelectedLayerIndex: integer);
+procedure SaveLayersToStream(AStream: TStream; ALayers: TBGRACustomLayeredBitmap; ASelectedLayerIndex: integer; ACompression: TLzpCompression);
 var
   LayerOption,StackOption: longint;
   i: integer;
@@ -164,6 +166,7 @@ begin
   WinWriteLongint(AStream, ASelectedLayerIndex);
   StackOption := 0;
   if ALayers.LinearBlend then StackOption := StackOption or 1;
+  if ACompression = lzpRLE then StackOption:= StackOption or 2;
   WinWriteLongint(AStream, StackOption);
   //end of header
 
@@ -190,33 +193,46 @@ begin
     AStream.Position:= LayerBitmapPosition;
     bitmap := ALayers.GetLayerBitmapDirectly(i);
     if bitmap <> nil then
-      SaveLayerBitmapToStream(AStream, bitmap, ALayers.LayerName[i])
+      SaveLayerBitmapToStream(AStream, bitmap, ALayers.LayerName[i], ACompression)
     else
     begin
       bitmap := ALayers.GetLayerBitmapCopy(i);
-      SaveLayerBitmapToStream(AStream, bitmap, ALayers.LayerName[i]);
+      SaveLayerBitmapToStream(AStream, bitmap, ALayers.LayerName[i], ACompression);
       bitmap.free;
     end;
   end;
 end;
 
-procedure SaveLayerBitmapToStream(AStream: TStream; ABitmap: TBGRABitmap; ACaption: string);
+procedure SaveLayerBitmapToStream(AStream: TStream; ABitmap: TBGRABitmap; ACaption: string; ACompression: TLzpCompression);
 var Compressed: TBGRACompressableBitmap;
 begin
-  Compressed := TBGRACompressableBitmap.Create(ABitmap);
-  Compressed.Caption := ACaption;
-  Compressed.CompressionLevel:= cldefault;
-  Compressed.WriteToStream(AStream);
-  Compressed.Free;
+  if ACompression = lzpZStream then
+  begin
+    Compressed := TBGRACompressableBitmap.Create(ABitmap);
+    Compressed.Caption := ACaption;
+    Compressed.CompressionLevel:= cldefault;
+    Compressed.WriteToStream(AStream);
+    Compressed.Free;
+  end else
+    TBGRAWriterLazPaint.WriteRLEImage(AStream, ABitmap, ACaption);
 end;
 
-function LoadLayerBitmapFromStream(AStream: TStream): TBGRABitmap;
+function LoadLayerBitmapFromStream(AStream: TStream; ACompression: TLzpCompression): TBGRABitmap;
 var Compressed: TBGRACompressableBitmap;
+  captionFound: string;
 begin
-  Compressed := TBGRACompressableBitmap.Create;
-  Compressed.ReadFromStream(AStream);
-  result := Compressed.GetBitmap;
-  Compressed.Free;
+  if ACompression = lzpZStream then
+  begin
+    Compressed := TBGRACompressableBitmap.Create;
+    Compressed.ReadFromStream(AStream);
+    result := Compressed.GetBitmap;
+    Compressed.Free;
+  end else
+  begin
+    result := TBGRABitmap.Create;
+    TBGRAReaderLazPaint.LoadRLEImage(AStream, result, captionFound);
+    result.Caption := captionFound;
+  end;
 end;
 
 procedure RegisterStreamLayers;
