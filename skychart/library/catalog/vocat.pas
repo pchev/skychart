@@ -78,7 +78,7 @@ var
    flabels: Tlabellst;
    unit_pmra, unit_pmdec, unit_size: double;
    log_pmra, log_pmdec, log_size, cosdec_pmra: boolean;
-   field_pmra, field_pmdec, field_size, field_name, field_mag : integer;
+   field_pmra, field_pmdec, field_size, field_name, field_mag,field_b_v : integer;
    catname,nameprefix:string;
    VOcatlist : TStringList;
    VOFields: TStringList;
@@ -399,6 +399,7 @@ field_size:=config.GetValue('VOcat/data/sizeposition',-1);
 forcesize:=field_size;
 field_mag:=config.GetValue('VOcat/data/magposition',-1);
 forcemag:=field_mag;
+field_b_v:=-1;
 field_name:=config.GetValue('VOcat/data/nameposition',-1);
 forcename:=field_name;
 nameprefix:=config.GetValue('VOcat/data/nameprefix','');
@@ -496,6 +497,9 @@ end else begin
         if (forcemag=j)or((forcemag<0)and((field_mag=-1)or(pos('em.opt.V',fielddata.ucd)>0))) then begin
           field_mag:=j;
         end;
+      end;
+      if (field_b_v<0)and(pos('phot.color',fielddata.ucd)=1) then begin
+         field_b_v:=j;
       end;
       if (forcename=j)or((pos('meta.id',fielddata.ucd)>0)and(pos('meta.id.',fielddata.ucd)=0)) then begin
         if (forcename=j)or((forcename<0)and((field_name=-1)or(pos('meta.main',fielddata.ucd)>0))) then begin
@@ -704,6 +708,7 @@ if Assigned(VoNode) then begin
               lin.options.flabel[lOffset+vsMagv]:=VOFields[i];
               lin.star.magv:=StrToFloatDef(buf,99);
             end;
+            if i=field_b_v then lin.star.b_v:=StrToFloatDef(buf,0);
             if i=field_pmra then lin.star.pmra:=StrToFloatDef(buf,0)*unit_pmra;
             if i=field_pmdec then lin.star.pmdec:=StrToFloatDef(buf,0)*unit_pmdec;
             end;
