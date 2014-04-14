@@ -450,7 +450,7 @@ begin
        fr.field_size:=nactive;
     end;
   end;
-  if (fr.forcemag=nactive)or((pos('phot.mag',VO_Detail1.RecUCD[n][i-1])=1)and(pos('error',VO_Detail1.RecUCD[n][i-1])=0)and(pos('phot.mag.',VO_Detail1.RecUCD[n][i-1])=0)) then begin
+  if (fr.forcemag=nactive)or(((pos('phot.mag',VO_Detail1.RecUCD[n][i-1])=1)or(pos('phys.mag',VO_Detail1.RecUCD[n][i-1])=1))and(pos('error',VO_Detail1.RecUCD[n][i-1])=0)and(pos('phot.mag.',VO_Detail1.RecUCD[n][i-1])=0)) then begin
     b:=VO_Detail1.RecName[n][i-1];
     p:=fr.MagField.Items.Add(VO_Detail1.RecName[n][i-1]);
     b:=VO_Detail1.RecUCD[n][i-1];
