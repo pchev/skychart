@@ -531,7 +531,7 @@ const VP : array[1..10,1..4] of double = (
           (0,-0.641,90,-0.557),           //earth
           (317.681,-0.108,52.886,-0.061), //mars
           (268.05,-0.009,64.49,0.003),    //jupiter
-          (40.589,-0.036,83.537,-0.004),  //saturn
+          (40.859,-0.036,83.537,-0.004),  //saturn
           (257.311,0,-15.175,0),          //uranus
           (299.36,0.70,43.46,-0.51),      //neptune !
           (313.02,0,9.09,0),              //pluto
@@ -542,7 +542,7 @@ const VP : array[1..10,1..4] of double = (
           (190.16,360.9856235),
           (176.901,350.8919830),
           (67.1,877.90003539),
-          (38.90,810.7939024),
+          (227.2037,844.3),
           (203.81,-501.1600928),
           (253.18,536.3128492),
           (236.77,-56.3623195),
@@ -578,6 +578,9 @@ w1:=W[ipla,1]+W[ipla,2]*d;
 if ipla=5 then begin
    w2:=43.3+870.27003539*d;
    w3:=284.95+870.5360000*d;
+end else if ipla=6 then begin
+    w2:=105.4857+812.0*d;
+    w3:=38.90+810.7939024*d;
 end else begin
    w2:=-999;
    w3:=-999;
@@ -613,6 +616,10 @@ w1:=to360(w1-f-del*tlight*W[ipla,2]);
 if ipla=5 then begin
    w2:=to360(w2-f-del*tlight*870.27003539);
    w3:=to360(w3-f-del*tlight*870.5360000);
+end;
+if ipla=6 then begin
+   w2:=to360(w2-f-del*tlight*812.0);
+   w3:=to360(w3-f-del*tlight*810.7939024);
 end;
 P:=to360(rad2deg*(arctan2(cos(d0)*sin(a0-al),sin(d0)*cos(dl)-cos(d0)*sin(dl)*cos(a0-al))));
 end;
@@ -1334,9 +1341,9 @@ if (currentplanet<10) then begin
           +'PoleIncl:'+formatfloat(d1,pde)+tab
           +'SunIncl:'+formatfloat(d1,pds)+tab;
   if Currentplanet=5 then begin
-     Desc:=Desc+'CMI:'+formatfloat(d2,w1)+tab
-          +'CMII:'+formatfloat(d2,w2)+tab
-          +'CMIII:'+formatfloat(d2,w3)+tab;
+     Desc:=Desc+'CMI:'+formatfloat(d1,w1)+tab
+          +'CMII:'+formatfloat(d1,w2)+tab
+          +'CMIII:'+formatfloat(d1,w3)+tab;
      jd0:=jd(yy,mm,dd,0-cfgsc.TimeZone+cfgsc.DT_UT);
      PlanetOrientation(jd0,CurrentPlanet,p,pde,pds,w1,w2,w3);
      w1:=(JupGRS(cfgsc.GRSlongitude,cfgsc.GRSdrift,cfgsc.GRSjd,jdt)-w2)*24/870.27003539;
@@ -1348,8 +1355,12 @@ if (currentplanet<10) then begin
      until w1>24;
      Desc:=Desc+'GRStr:'+shh+tab;
      Desc:=Desc+'GRSLon:'+FormatFloat(f1,JupGRS(cfgsc.GRSlongitude,cfgsc.GRSdrift,cfgsc.GRSjd,jdt))+tab;
+  end else if Currentplanet=6 then begin
+     Desc:=Desc+'CMI:'+formatfloat(d1,w1)+tab
+          +'CMII:'+formatfloat(d1,w2)+tab
+          +'CMIII:'+formatfloat(d1,w3)+tab;
   end else begin
-     Desc:=Desc+'CM:'+formatfloat(d2,w1)+tab
+     Desc:=Desc+'CM:'+formatfloat(d1,w1)+tab
   end;
   Desc:=Desc+'ephemeris:'+eph_method+tab;
   Desc:=Desc+'date:'+date;
