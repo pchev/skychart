@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-14 19:05+0000\n"
+"POT-Creation-Date: 2014-04-16 15:12+0000\n"
 "PO-Revision-Date: 2014-02-17 19:55+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-28 15:52+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-16 15:21+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1345,8 +1345,8 @@ msgid "Degree"
 msgstr "Grad"
 
 #: u_translation.rsdegreegridsp
-msgid "Declination grid"
-msgstr "Deklination rutnät"
+msgid "Grid spacing in degree"
+msgstr ""
 
 #: u_translation.rsdegrees
 msgid "degrees"
@@ -1504,10 +1504,6 @@ msgstr "Koppla från"
 msgid "Disconnect from SAMP"
 msgstr ""
 
-#: u_translation.rsdisconnectte
-msgid "Disconnect telescope"
-msgstr "Koppla från teleskop"
-
 #: u_translation.rsdisplay
 msgid "Display"
 msgstr "Bildskärm"
@@ -1555,10 +1551,6 @@ msgstr "Avstånd"
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
 msgstr "Distansmätning"
-
-#: u_translation.rsdistancetoth
-msgid "Distance to the last object"
-msgstr "Avstånd till senaste objekt"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
@@ -1988,10 +1980,6 @@ msgstr "Fältnummer"
 msgid "Field of vision"
 msgstr "Synfält"
 
-#: u_translation.rsfieldofvisio2
-msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
-msgstr "Synfältet för stort för bågprojektion, objektet är dolt under horisonten"
-
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
 msgstr "Synfält inställningar"
@@ -2284,10 +2272,6 @@ msgstr "Grekiska symboler"
 msgid "Green"
 msgstr "Grön"
 
-#: u_translation.rsgridsetting
-msgid "Grid settings"
-msgstr "Inställning av rutmönster"
-
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
 msgstr "Mellanrum rutnät"
@@ -2405,8 +2389,8 @@ msgid "Hour angle"
 msgstr "Timvinkel"
 
 #: u_translation.rshourgridspac
-msgid "Right ascension grid"
-msgstr "Rektascension rutnät"
+msgid "Grid spacing in hour for equatorial grid"
+msgstr ""
 
 #: u_translation.rshours
 msgid "hours"
@@ -2459,10 +2443,6 @@ msgstr "Bildkatalog"
 #: u_translation.rsimagelist
 msgid "Image list"
 msgstr ""
-
-#: u_translation.rsimageoptions
-msgid "Image options"
-msgstr "Bildalternativ"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -2535,10 +2515,6 @@ msgstr "i CD-spelaren"
 #: u_translation.rsinfo
 msgid "Information"
 msgstr "Information"
-
-#: u_translation.rsinfo2
-msgid "Info"
-msgstr "Info"
 
 #: u_translation.rsinformationd
 msgid "Information detail"
@@ -3108,10 +3084,6 @@ msgstr "m"
 msgid "min"
 msgstr "min"
 
-#: u_translation.rsmin3
-msgid "Min."
-msgstr "Min."
-
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
 msgstr "Lägsta altitud"
@@ -3499,10 +3471,6 @@ msgstr "Inställning av objektlista"
 #: u_translation.rsobjectname
 msgid "Object name"
 msgstr "Objektets namn"
-
-#: u_translation.rsobjectpositi
-msgid "Object position found in index, but no detail found in any active catalog"
-msgstr "Objektets position hittades i index, men ingen information i någon aktiv katalag"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
@@ -3940,10 +3908,6 @@ msgstr ""
 msgid "Prefix name with catalog short name"
 msgstr "Sätt katalogens kortnamn som prefix för namn"
 
-#: u_translation.rsprefixthealt
-msgid "Prefix the alternative names with their label"
-msgstr "Använd alternativa namnens etikett som prefix"
-
 #: u_translation.rsprepareacata
 msgid "Prepare a catalog with CatGen"
 msgstr "Skapa en katalog med CatGen"
@@ -4183,10 +4147,6 @@ msgstr "Riktiga bilder"
 #: u_translation.rsreallyparkan
 msgid "REALLY park and disconnect the telescope?"
 msgstr "SÄKERT att teleskopet skall parkeras och kopplas från?"
-
-#: u_translation.rsrealskycdrom
-msgid "Realsky CD-rom cannot be used on a 64 bit system."
-msgstr ""
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -4539,10 +4499,6 @@ msgstr "Skanna katalogen"
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
 msgstr "Scope Adv"
-
-#: u_translation.rsscreenandsta
-msgid "Screen and status bar"
-msgstr "Skärm och statusfält"
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
@@ -5288,10 +5244,6 @@ msgstr "TCP/IP tjänsten är inte tillgänglig."
 msgid "Telescope"
 msgstr "Teleskop"
 
-#: u_translation.rstelescope2
-msgid "Telescope: %s"
-msgstr "Teleskop: %s"
-
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
 msgstr ""
@@ -5704,10 +5656,6 @@ msgstr "Använd korrekt rörelse för att korrigera positionen för given epok"
 msgid "Use this field as an alternative name"
 msgstr "Använd fältet som ett alternativt namn"
 
-#: u_translation.rsusexplanet
-msgid "Use Xplanet"
-msgstr "Använd Xplanet"
-
 #: u_translation.rsusingexistin
 msgid "Using the existing file %s"
 msgstr "Använder befintlig fil %s"
@@ -5867,18 +5815,6 @@ msgstr "Fönster"
 #: u_translation.rsxerrors
 msgid "X Errors"
 msgstr "X-fel"
-
-#: u_translation.rsxplanetisnot
-msgid "Xplanet is not compiled with JPEG support"
-msgstr "Xplanet är inte kompilerad med JPEG-stöd"
-
-#: u_translation.rsxplanetispro
-msgid "Xplanet is probably not installed!"
-msgstr "Xplanet är förmodligen inte installerat!"
-
-#: u_translation.rsxplanetretur
-msgid "%s, xplanet returns %s"
-msgstr "%s, xplanet rapporterar %s"
 
 #: u_translation.rsyear
 msgid "Year"

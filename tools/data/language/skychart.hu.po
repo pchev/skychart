@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-14 19:05+0000\n"
+"POT-Creation-Date: 2014-04-16 15:12+0000\n"
 "PO-Revision-Date: 2014-02-17 19:49+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-28 15:52+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-16 15:20+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1434,9 +1434,8 @@ msgid "Degree"
 msgstr "Fok"
 
 #: u_translation.rsdegreegridsp
-#| msgid "Degree Grid Spacing"
-msgid "Declination grid"
-msgstr "Fokok beosztása"
+msgid "Grid spacing in degree"
+msgstr ""
 
 #: u_translation.rsdegrees
 msgid "degrees"
@@ -1601,11 +1600,6 @@ msgstr "A kapcsolat bontása"
 msgid "Disconnect from SAMP"
 msgstr ""
 
-#: u_translation.rsdisconnectte
-#| msgid "Disconnect Telescope"
-msgid "Disconnect telescope"
-msgstr "Távcső szétkapcsolása"
-
 #: u_translation.rsdisplay
 msgid "Display"
 msgstr "Megjelenítés"
@@ -1655,10 +1649,6 @@ msgstr "Távolság"
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
 msgstr "Távolságmérés"
-
-#: u_translation.rsdistancetoth
-msgid "Distance to the last object"
-msgstr "Távolsága a legutóbbi objektumtól"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
@@ -2105,10 +2095,6 @@ msgstr "Mező szám"
 msgid "Field of vision"
 msgstr "Látómező"
 
-#: u_translation.rsfieldofvisio2
-msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
-msgstr ""
-
 #: u_translation.rsfieldofvisio3
 #| msgid "Field of Vision Setting"
 msgid "Field of vision settings"
@@ -2423,11 +2409,6 @@ msgstr "Görög betűk"
 msgid "Green"
 msgstr "Zöld"
 
-#: u_translation.rsgridsetting
-#| msgid "Grid Setting"
-msgid "Grid settings"
-msgstr "Háló beállításai"
-
 #: u_translation.rsgridspacing
 #| msgid "Grid Spacing"
 msgid "Grid spacing"
@@ -2550,9 +2531,8 @@ msgid "Hour angle"
 msgstr "Óraszög"
 
 #: u_translation.rshourgridspac
-#| msgid "Hour Grid Spacing"
-msgid "Right ascension grid"
-msgstr "Órák beosztása"
+msgid "Grid spacing in hour for equatorial grid"
+msgstr ""
 
 #: u_translation.rshours
 msgid "hours"
@@ -2611,11 +2591,6 @@ msgstr "Képek könyvtára"
 #: u_translation.rsimagelist
 msgid "Image list"
 msgstr "Képlista"
-
-#: u_translation.rsimageoptions
-#| msgid "Image Options"
-msgid "Image options"
-msgstr "Képek opciói"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -2697,10 +2672,6 @@ msgstr ""
 #: u_translation.rsinfo
 msgid "Information"
 msgstr "Információ"
-
-#: u_translation.rsinfo2
-msgid "Info"
-msgstr "Információk"
 
 #: u_translation.rsinformationd
 msgid "Information detail"
@@ -3296,10 +3267,6 @@ msgstr "'"
 msgid "min"
 msgstr "LM-től"
 
-#: u_translation.rsmin3
-msgid "Min."
-msgstr "p."
-
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
 msgstr "Minimális magasság"
@@ -3724,10 +3691,6 @@ msgstr "Objektum lista beállításai"
 #| msgid "Object Name"
 msgid "Object name"
 msgstr "Objektum neve"
-
-#: u_translation.rsobjectpositi
-msgid "Object position found in index, but no detail found in any active catalog"
-msgstr "Az objektum megtalálható az indexben, de nincs részletes adat az aktív katalógusban"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
@@ -4179,11 +4142,6 @@ msgstr ""
 msgid "Prefix name with catalog short name"
 msgstr ""
 
-#: u_translation.rsprefixthealt
-#| msgid "Prefix the alternate names with their label"
-msgid "Prefix the alternative names with their label"
-msgstr "Alternativ név előtt a címke neve"
-
 #: u_translation.rsprepareacata
 #| msgid "Prepare a catalog CatGen"
 msgid "Prepare a catalog with CatGen"
@@ -4436,10 +4394,6 @@ msgstr "Valós képek"
 #: u_translation.rsreallyparkan
 msgid "REALLY park and disconnect the telescope?"
 msgstr "TÉNYLEG parkolod és kikapcsolod a távcsövet?"
-
-#: u_translation.rsrealskycdrom
-msgid "Realsky CD-rom cannot be used on a 64 bit system."
-msgstr ""
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -4810,11 +4764,6 @@ msgstr "Könyvtár átnézése"
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
 msgstr ""
-
-#: u_translation.rsscreenandsta
-#| msgid "Screen and Status Bar"
-msgid "Screen and status bar"
-msgstr "Kép és státusz sor"
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
@@ -5619,10 +5568,6 @@ msgstr "A TCP/IP szolgáltatás nem elérhető"
 msgid "Telescope"
 msgstr "Távcső"
 
-#: u_translation.rstelescope2
-msgid "Telescope: %s"
-msgstr "Távcső: %s"
-
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
 msgstr ""
@@ -6060,10 +6005,6 @@ msgstr "Az adott epochához tartozó pozició korrigálásához használd a saj�
 msgid "Use this field as an alternative name"
 msgstr "Használd ezt a mezőt alternatív névként"
 
-#: u_translation.rsusexplanet
-msgid "Use Xplanet"
-msgstr "Xplanet használata"
-
 #: u_translation.rsusingexistin
 #| msgid "Using existing file %s"
 msgid "Using the existing file %s"
@@ -6232,19 +6173,6 @@ msgstr "Ablak"
 #: u_translation.rsxerrors
 msgid "X Errors"
 msgstr "X hibák"
-
-#: u_translation.rsxplanetisnot
-msgid "Xplanet is not compiled with JPEG support"
-msgstr "Az Xplanet nem lett jpeg támogatással fordítva"
-
-#: u_translation.rsxplanetispro
-msgid "Xplanet is probably not installed!"
-msgstr "Xplanet valószínüleg nincs installálva!"
-
-#: u_translation.rsxplanetretur
-#| msgid "%s, xplanet return %s"
-msgid "%s, xplanet returns %s"
-msgstr "%s, xplanet vissza %s"
 
 #: u_translation.rsyear
 msgid "Year"

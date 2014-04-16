@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-14 19:05+0000\n"
+"POT-Creation-Date: 2014-04-16 15:12+0000\n"
 "PO-Revision-Date: 2013-11-17 14:47+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-28 15:52+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-16 15:20+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -1347,8 +1347,8 @@ msgid "Degree"
 msgstr "度"
 
 #: u_translation.rsdegreegridsp
-msgid "Declination grid"
-msgstr "赤緯間距"
+msgid "Grid spacing in degree"
+msgstr ""
 
 #: u_translation.rsdegrees
 msgid "degrees"
@@ -1507,10 +1507,6 @@ msgstr ""
 msgid "Disconnect from SAMP"
 msgstr ""
 
-#: u_translation.rsdisconnectte
-msgid "Disconnect telescope"
-msgstr "離開望遠鏡"
-
 #: u_translation.rsdisplay
 msgid "Display"
 msgstr "顯示"
@@ -1558,10 +1554,6 @@ msgstr "距離"
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
 msgstr ""
-
-#: u_translation.rsdistancetoth
-msgid "Distance to the last object"
-msgstr "到上一天體距離"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
@@ -1991,10 +1983,6 @@ msgstr "視場編號"
 msgid "Field of vision"
 msgstr "視場"
 
-#: u_translation.rsfieldofvisio2
-msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
-msgstr ""
-
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
 msgstr "視場設定"
@@ -2287,10 +2275,6 @@ msgstr "希臘符號"
 msgid "Green"
 msgstr "綠色"
 
-#: u_translation.rsgridsetting
-msgid "Grid settings"
-msgstr "網格設定"
-
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
 msgstr "網格間距"
@@ -2408,8 +2392,8 @@ msgid "Hour angle"
 msgstr "時角"
 
 #: u_translation.rshourgridspac
-msgid "Right ascension grid"
-msgstr "赤經網格"
+msgid "Grid spacing in hour for equatorial grid"
+msgstr ""
 
 #: u_translation.rshours
 msgid "hours"
@@ -2462,10 +2446,6 @@ msgstr "圖像目錄"
 #: u_translation.rsimagelist
 msgid "Image list"
 msgstr ""
-
-#: u_translation.rsimageoptions
-msgid "Image options"
-msgstr "圖像選項"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -2538,10 +2518,6 @@ msgstr "驅動器"
 #: u_translation.rsinfo
 msgid "Information"
 msgstr "訊息"
-
-#: u_translation.rsinfo2
-msgid "Info"
-msgstr ""
 
 #: u_translation.rsinformationd
 msgid "Information detail"
@@ -3111,10 +3087,6 @@ msgstr "'"
 msgid "min"
 msgstr "最小"
 
-#: u_translation.rsmin3
-msgid "Min."
-msgstr "分最小"
-
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
 msgstr ""
@@ -3502,10 +3474,6 @@ msgstr "天體表設定"
 #: u_translation.rsobjectname
 msgid "Object name"
 msgstr "天體名稱"
-
-#: u_translation.rsobjectpositi
-msgid "Object position found in index, but no detail found in any active catalog"
-msgstr "在索引中找到天體位置，但在所有開啟的星表中都沒有找到詳細的資料"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
@@ -3943,10 +3911,6 @@ msgstr ""
 msgid "Prefix name with catalog short name"
 msgstr "使用字首命名星表短名"
 
-#: u_translation.rsprefixthealt
-msgid "Prefix the alternative names with their label"
-msgstr "别名前缀用他的標籤"
-
 #: u_translation.rsprepareacata
 msgid "Prepare a catalog with CatGen"
 msgstr "使用 CatGen 編製星表"
@@ -4185,10 +4149,6 @@ msgstr "真實圖像"
 
 #: u_translation.rsreallyparkan
 msgid "REALLY park and disconnect the telescope?"
-msgstr ""
-
-#: u_translation.rsrealskycdrom
-msgid "Realsky CD-rom cannot be used on a 64 bit system."
 msgstr ""
 
 #: u_translation.rsrealskynorth
@@ -4542,10 +4502,6 @@ msgstr "掃描目錄"
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
 msgstr ""
-
-#: u_translation.rsscreenandsta
-msgid "Screen and status bar"
-msgstr "螢幕和狀態欄"
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
@@ -5291,10 +5247,6 @@ msgstr "TCP/IP 伺服器不能用"
 msgid "Telescope"
 msgstr "望遠鏡"
 
-#: u_translation.rstelescope2
-msgid "Telescope: %s"
-msgstr "望遠鏡：%s"
-
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
 msgstr ""
@@ -5707,10 +5659,6 @@ msgstr "使用自行修正位置到指定的曆元"
 msgid "Use this field as an alternative name"
 msgstr "使用這個欄位的别名"
 
-#: u_translation.rsusexplanet
-msgid "Use Xplanet"
-msgstr "使用 Xplanet"
-
 #: u_translation.rsusingexistin
 msgid "Using the existing file %s"
 msgstr "使用現存檔案%s"
@@ -5870,18 +5818,6 @@ msgstr "視窗"
 #: u_translation.rsxerrors
 msgid "X Errors"
 msgstr ""
-
-#: u_translation.rsxplanetisnot
-msgid "Xplanet is not compiled with JPEG support"
-msgstr "Xplanet 不支援 JPEG 格式的編輯"
-
-#: u_translation.rsxplanetispro
-msgid "Xplanet is probably not installed!"
-msgstr "Xplanet 大概未安装！"
-
-#: u_translation.rsxplanetretur
-msgid "%s, xplanet returns %s"
-msgstr "%s，Xplanet 返回 %s"
 
 #: u_translation.rsyear
 msgid "Year"

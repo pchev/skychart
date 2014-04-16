@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-14 19:05+0000\n"
+"POT-Creation-Date: 2014-04-16 15:12+0000\n"
 "PO-Revision-Date: 2014-03-09 18:07+0000\n"
 "Last-Translator: grofaty <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-28 15:52+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-16 15:20+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 "Language: en_US\n"
 
 #: u_translation.rs102cddss
@@ -1346,8 +1346,8 @@ msgid "Degree"
 msgstr "Stopi."
 
 #: u_translation.rsdegreegridsp
-msgid "Declination grid"
-msgstr "Razmik stopinjske mreže"
+msgid "Grid spacing in degree"
+msgstr ""
 
 #: u_translation.rsdegrees
 msgid "degrees"
@@ -1505,10 +1505,6 @@ msgstr "Odjavi"
 msgid "Disconnect from SAMP"
 msgstr ""
 
-#: u_translation.rsdisconnectte
-msgid "Disconnect telescope"
-msgstr "Izključi teleskop"
-
 #: u_translation.rsdisplay
 msgid "Display"
 msgstr "Prikaz"
@@ -1556,10 +1552,6 @@ msgstr "Razdalja"
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
 msgstr "Mera razdalje"
-
-#: u_translation.rsdistancetoth
-msgid "Distance to the last object"
-msgstr "Razdalja do zadnjega predmeta"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
@@ -1989,10 +1981,6 @@ msgstr "Številka polja"
 msgid "Field of vision"
 msgstr "Polje vidnosti"
 
-#: u_translation.rsfieldofvisio2
-msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
-msgstr "Polje vidljivosti preveč široko za ARC prikaz, skrivam predmete pod obzorjem"
-
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
 msgstr "Nastavitve polja vidnosti"
@@ -2285,10 +2273,6 @@ msgstr "Grški simbol"
 msgid "Green"
 msgstr "Zeleno"
 
-#: u_translation.rsgridsetting
-msgid "Grid settings"
-msgstr "Nastavitve mreže"
-
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
 msgstr "Razmik mreže"
@@ -2406,8 +2390,8 @@ msgid "Hour angle"
 msgstr "Urni kot"
 
 #: u_translation.rshourgridspac
-msgid "Right ascension grid"
-msgstr "Razmik urne mreže"
+msgid "Grid spacing in hour for equatorial grid"
+msgstr ""
 
 #: u_translation.rshours
 msgid "hours"
@@ -2460,10 +2444,6 @@ msgstr "Mapa slik"
 #: u_translation.rsimagelist
 msgid "Image list"
 msgstr "Seznam slik"
-
-#: u_translation.rsimageoptions
-msgid "Image options"
-msgstr "Možnosti slike"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -2536,10 +2516,6 @@ msgstr "v pogonu"
 #: u_translation.rsinfo
 msgid "Information"
 msgstr "Podatek"
-
-#: u_translation.rsinfo2
-msgid "Info"
-msgstr "Podatki"
 
 #: u_translation.rsinformationd
 msgid "Information detail"
@@ -3109,10 +3085,6 @@ msgstr "m"
 msgid "min"
 msgstr "min"
 
-#: u_translation.rsmin3
-msgid "Min."
-msgstr "Min."
-
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
 msgstr ""
@@ -3500,10 +3472,6 @@ msgstr "Nastavitve seznama predmetov"
 #: u_translation.rsobjectname
 msgid "Object name"
 msgstr "Ime predmeta"
-
-#: u_translation.rsobjectpositi
-msgid "Object position found in index, but no detail found in any active catalog"
-msgstr "Položaj predmeta najden v indeksu, vendar podrobnosti ni najti v enem izmed aktivnih katalogov."
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
@@ -3941,10 +3909,6 @@ msgstr ""
 msgid "Prefix name with catalog short name"
 msgstr "Dodajte pripono kratkega imena kataloga"
 
-#: u_translation.rsprefixthealt
-msgid "Prefix the alternative names with their label"
-msgstr "Dodaj predpono k nadomestnim imenom s svojimi oznakami"
-
 #: u_translation.rsprepareacata
 msgid "Prepare a catalog with CatGen"
 msgstr "Pripravi CatGen katalog"
@@ -4184,10 +4148,6 @@ msgstr "Resnične slike"
 #: u_translation.rsreallyparkan
 msgid "REALLY park and disconnect the telescope?"
 msgstr "Resnično zaustavim in izključim telestkop?"
-
-#: u_translation.rsrealskycdrom
-msgid "Realsky CD-rom cannot be used on a 64 bit system."
-msgstr ""
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -4540,10 +4500,6 @@ msgstr "Preišči mapo"
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
 msgstr "Doseg Adv"
-
-#: u_translation.rsscreenandsta
-msgid "Screen and status bar"
-msgstr "Vrstica zaslona in stanja"
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
@@ -5289,10 +5245,6 @@ msgstr "TCP/IP storitev ni na voljo."
 msgid "Telescope"
 msgstr "Teleskop"
 
-#: u_translation.rstelescope2
-msgid "Telescope: %s"
-msgstr "Teleskop: %s"
-
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
 msgstr ""
@@ -5705,10 +5657,6 @@ msgstr "Uporabi pravilen premik za popravek položaja za določeno dobo"
 msgid "Use this field as an alternative name"
 msgstr "Uporabi to bolje kot drugo možnost imena"
 
-#: u_translation.rsusexplanet
-msgid "Use Xplanet"
-msgstr "Uporabi Xplanet"
-
 #: u_translation.rsusingexistin
 msgid "Using the existing file %s"
 msgstr "Uporabljam obstoječo datkoteko %s"
@@ -5868,18 +5816,6 @@ msgstr "Okno"
 #: u_translation.rsxerrors
 msgid "X Errors"
 msgstr "X napake"
-
-#: u_translation.rsxplanetisnot
-msgid "Xplanet is not compiled with JPEG support"
-msgstr "Xplane ni preveden za JPEG podporo"
-
-#: u_translation.rsxplanetispro
-msgid "Xplanet is probably not installed!"
-msgstr "Xplanet verjetno ni nameščen!"
-
-#: u_translation.rsxplanetretur
-msgid "%s, xplanet returns %s"
-msgstr "%s, xplanet vrne %s"
 
 #: u_translation.rsyear
 msgid "Year"
