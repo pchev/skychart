@@ -237,7 +237,6 @@ resourcestring
   rsSet = 'Set';
   rsCircumpolar = 'Circumpolar';
   rsInvisibleAtT = 'Invisible at this latitude';
-  rsDistanceToTh = 'Distance to the last object';
   rsLocalSideral = 'Local sidereal time';
   rsHourAngle = 'Hour angle';
   rsPlanetarySat = 'Planetary satellite';
@@ -255,7 +254,6 @@ resourcestring
   rsUnlockChart = 'Unlock chart';
   rsLockOn = 'Lock on %s';
   rsNotFoundInAn = '%s  Not found in any of the installed catalog indices.';
-  rsDisconnectTe = 'Disconnect telescope';
   rsSocketError = 'Socket error %s.  %s';
   rsDifferentTha = '%s (different than the configured port, maybe busy or other error.)';
   rsListenOnPort = 'Listen on port: %s';
@@ -413,7 +411,6 @@ resourcestring
   rsOther = 'Other';
   rsTelescopeNot = 'Telescope not connected';
   rsPleaseConfir = 'Please confirm that the telescope is pointed at %s';
-  rsTelescope2 = 'Telescope: %s';
   rsSkyCharts = 'Sky Charts';
   rsThisProgramI = 'This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License';
   rsLabel = 'Label:';
@@ -471,7 +468,6 @@ resourcestring
   rsSearchIndex = 'Search index';
   rsCreateASearc = 'Create a search index file';
   rsAddTheAltern = 'Add the alternative names to the index';
-  rsPrefixTheAlt = 'Prefix the alternative names with their label';
   rsIndicateTheS = 'Indicate the string identifier for each type of object:';
   rsReturn = 'Return';
   rsIndicateHowT = 'Indicate how to recognize the object size unit:';
@@ -553,7 +549,6 @@ resourcestring
   rsFovNumber = 'FOV number:';
   rsApply = 'Apply';
   rsCat = 'Cat.';
-  rsMin3 = 'Min.';
   rsPath = 'Path';
   rsChartSetting = 'Chart settings';
   rsYears = 'years';
@@ -644,7 +639,6 @@ resourcestring
   rsConstellatio7 = 'Constellation name';
   rsCoordinatesG = 'Coordinates grid';
   rsLegend = 'Legend';
-  rsScreenAndSta = 'Screen and status bar';
   rsPrinterLegen = 'Printer legend';
   rsModify = 'Modify';
   rsGreekSymbol = 'Greek symbols';
@@ -725,8 +719,6 @@ resourcestring
   rsShowPlanetOn = 'Show planets on the chart';
   rsDrawPlanetAs = 'Draw planet as';
   rsShowEarthSha = 'Show Earth shadow (Lunar eclipses)';
-  rsImageOptions = 'Image options';
-  rsUseXplanet = 'Use Xplanet';
   rsTransparentL = 'Transparent line mode (occultations)';
   rsGeneralSetti = 'General settings';
   rsMagnitudeFai = 'magnitudes fainter than the stars.';
@@ -992,10 +984,7 @@ resourcestring
   rsPlutoIsAPlan = 'Pluto is a planet.';
   rsUncheckToAvo = 'Uncheck to avoid duplicate with minor planet 134340';
   rsDirectoryNot = 'Directory not found %s';
-  rsXplanetRetur = '%s, xplanet returns %s';
-  rsXplanetIsNot = 'Xplanet is not compiled with JPEG support';
   rsRequireXplan = '(requires Xplanet 1.2.0)';
-  rsXplanetIsPro = 'Xplanet is probably not installed!';
   rsEveryPositio = 'Every position';
   rsOnlyTheFirst = 'Only the first';
   rsOnlyTheLast = 'Only the last';
@@ -1091,8 +1080,6 @@ resourcestring
   rsIntTelesco = 'Integrated telescope driver.';
   rsUseTheMenuOr = 'Use the menu or button "%s" to configure this driver.';
   rsOtherSoftwar = 'Other software data';
-  rsObjectPositi = 'Object position found in index, but no detail found in any '
-    +'active catalog';
   rsInvalidPath = 'Invalid path: ';
   rsShowPosition = 'Show position in title bar';
   rsCopyCoordina = 'Copy coordinates';
@@ -1289,7 +1276,6 @@ resourcestring
   rsConfirmFileD = 'Confirm file delete: ';
   rsVirtualObser = 'Virtual Observatory Catalog';
   rsVOCatalog = 'VO Catalog';
-  rsInfo2 = 'Info';
   rsCatalogsAvai = '%s Catalogs available';
   rsVOCatalogBro = 'VO Catalog Browser';
   rsSearchCatalo = 'Search Catalogs';
@@ -1393,7 +1379,6 @@ resourcestring
   rsTheImageDire = 'The image directory contains sub-directories with the same names as the DSO catalogs. Each sub-directory contains FITS files with the names of the catalog objects. These images are used to replace the DSO symbols on the map.';
   rsShowASingleP = 'Show a single picture on the map.';
   rsViewHeader = 'View header';
-  rsRealskyCDRom = 'Realsky CD-rom cannot be used on a 64 bit system.';
   rsImageArchive = 'Image archive';
   rsDownloadArch = 'Download archive';
   rsArchiveToDir = 'Archive to directory:';
