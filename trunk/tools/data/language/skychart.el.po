@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-14 19:05+0000\n"
-"PO-Revision-Date: 2014-02-17 19:48+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2014-04-16 15:12+0000\n"
+"PO-Revision-Date: 2014-03-30 11:54+0000\n"
+"Last-Translator: Andreas Papalambrou <papalambrou@ieee.org>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-28 15:52+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-16 15:21+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -86,7 +86,7 @@ msgstr "Σφαιρ"
 
 #: u_translation.rsabrevglobularcluster
 msgid "Gb"
-msgstr ""
+msgstr "Gb"
 
 #: u_translation.rsabrevnebula
 msgid "Nb"
@@ -243,7 +243,7 @@ msgstr "%sΥψ. στροφές:"
 
 #: u_translation.rsalways
 msgid "always"
-msgstr ""
+msgstr "πάντα"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -1376,8 +1376,8 @@ msgid "Degree"
 msgstr "Μοίρα"
 
 #: u_translation.rsdegreegridsp
-msgid "Declination grid"
-msgstr "Πλέγμα απόκλισης"
+msgid "Grid spacing in degree"
+msgstr ""
 
 #: u_translation.rsdegrees
 msgid "degrees"
@@ -1536,10 +1536,6 @@ msgstr "Αποσύνδεση"
 msgid "Disconnect from SAMP"
 msgstr "Αποσύνδεση από SAMP"
 
-#: u_translation.rsdisconnectte
-msgid "Disconnect telescope"
-msgstr "Αποσύνδεση τηλεσκοπίου"
-
 #: u_translation.rsdisplay
 msgid "Display"
 msgstr "Εμφάνιση"
@@ -1570,7 +1566,7 @@ msgstr "Προβολή πληροφοριών χάρτη στη γραμμή τ�
 
 #: u_translation.rsdisplaytheho
 msgid "Display the horizon picture"
-msgstr ""
+msgstr "Προβολή εικόνας ορίζοντα"
 
 #: u_translation.rsdisplaythela
 msgid "Display the labels"
@@ -1587,10 +1583,6 @@ msgstr "Απόσταση"
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
 msgstr "Μέτρηση αποστάσεων"
-
-#: u_translation.rsdistancetoth
-msgid "Distance to the last object"
-msgstr "Απόσταση προς το τελευταίο αντικείμενο"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
@@ -1664,7 +1656,7 @@ msgstr "Θέλετε να αποθηκεύσετε τις ρυθμίσεις τ�
 
 #: u_translation.rsdoyouwanttos2
 msgid "Do you want to save it?"
-msgstr ""
+msgstr "Θέλετε να το αποθηκεύσετε;"
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
@@ -1721,7 +1713,7 @@ msgstr "DSS RealSky"
 
 #: u_translation.rsduplicate
 msgid "Duplicate"
-msgstr ""
+msgstr "Διπλότυπο"
 
 #: u_translation.rsduration
 msgid "Duration"
@@ -2029,10 +2021,6 @@ msgstr "Αριθμός πεδίου"
 msgid "Field of vision"
 msgstr "Πεδίο όρασης"
 
-#: u_translation.rsfieldofvisio2
-msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
-msgstr ""
-
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
 msgstr "Ρυθμίσεις πεδίου όρασης"
@@ -2055,7 +2043,7 @@ msgstr "Αρχείο"
 
 #: u_translation.rsfilenamewith
 msgid "Filename without path or extension"
-msgstr ""
+msgstr "Όνομα αρχείου χωρίς διαδρομή ή επέκταση"
 
 #: u_translation.rsfilenotfound
 msgid "File not found!"
@@ -2107,7 +2095,7 @@ msgstr "Παραλληλόγραμο ερευνητή (CCD)"
 
 #: u_translation.rsfirst
 msgid "First"
-msgstr ""
+msgstr "Πρώτο"
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
@@ -2275,7 +2263,7 @@ msgstr "Γεωκεντρικό"
 
 #: u_translation.rsgeometricalt
 msgid "Geometric altitude"
-msgstr ""
+msgstr "Γεωμετρικό ύψος"
 
 #: u_translation.rsget
 msgid "Get"
@@ -2335,11 +2323,6 @@ msgstr "Ελληνικό σύμβολο"
 #: u_translation.rsgreen
 msgid "Green"
 msgstr "Πράσινο"
-
-#: u_translation.rsgridsetting
-#| msgid "Grid Setting"
-msgid "Grid settings"
-msgstr "Ρύθμιση πλέγματος"
 
 #: u_translation.rsgridspacing
 #| msgid "Grid Spacing"
@@ -2459,8 +2442,8 @@ msgid "Hour angle"
 msgstr "Ωριαία γωνία"
 
 #: u_translation.rshourgridspac
-msgid "Right ascension grid"
-msgstr "Πλέγμα ορθής αναφοράς"
+msgid "Grid spacing in hour for equatorial grid"
+msgstr ""
 
 #: u_translation.rshours
 msgid "hours"
@@ -2514,10 +2497,6 @@ msgstr "Κατάλογος εικόνων"
 #: u_translation.rsimagelist
 msgid "Image list"
 msgstr "Κατάλογος εικόνων"
-
-#: u_translation.rsimageoptions
-msgid "Image options"
-msgstr "Επιλογές εικόνων"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -2589,10 +2568,6 @@ msgstr "μέσα"
 
 #: u_translation.rsinfo
 msgid "Information"
-msgstr "Πληροφορίες"
-
-#: u_translation.rsinfo2
-msgid "Info"
 msgstr "Πληροφορίες"
 
 #: u_translation.rsinformationd
@@ -2769,7 +2744,7 @@ msgstr "Επιλογή γλώσσας"
 
 #: u_translation.rslast
 msgid "Last"
-msgstr ""
+msgstr "Τελευταίο"
 
 #: u_translation.rslatinname
 msgid "Latin name"
@@ -2853,7 +2828,7 @@ msgstr "Γραμμή"
 
 #: u_translation.rslinear
 msgid "Linear"
-msgstr ""
+msgstr "Γραμμικό"
 
 #: u_translation.rslinemode
 msgid "Line mode"
@@ -3155,7 +3130,7 @@ msgstr "Γαλαξίας"
 
 #: u_translation.rsmillionkm
 msgid "million Km."
-msgstr ""
+msgstr "εκατομμύρια χλμ."
 
 #: u_translation.rsmin
 msgid "m"
@@ -3164,10 +3139,6 @@ msgstr "'"
 #: u_translation.rsmin2
 msgid "min"
 msgstr "ελ."
-
-#: u_translation.rsmin3
-msgid "Min."
-msgstr "Λεπ."
 
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
@@ -3352,7 +3323,7 @@ msgstr "Ποσειδώνας"
 
 #: u_translation.rsnever
 msgid "never"
-msgstr ""
+msgstr "ποτέ"
 
 #: u_translation.rsnewchart
 msgid "New chart"
@@ -3372,7 +3343,7 @@ msgstr "Επόμενο  >>"
 
 #: u_translation.rsnext2
 msgid "Next"
-msgstr ""
+msgstr "Επόμενο"
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
@@ -3559,10 +3530,6 @@ msgstr "Ρυθμίσεις λίστας αντικειμένων"
 #: u_translation.rsobjectname
 msgid "Object name"
 msgstr "Όνομα αντικειμένου"
-
-#: u_translation.rsobjectpositi
-msgid "Object position found in index, but no detail found in any active catalog"
-msgstr "Η θέση του αντικειμένου ευρέθη στο ευρετήριο αλλά δε βρέθηκαν λεπτομέρειες σε κανένα ενεργό κατάλογο"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
@@ -3826,7 +3793,7 @@ msgstr "Φωτογραφικό"
 
 #: u_translation.rspictureangle
 msgid "Picture angle offset"
-msgstr ""
+msgstr "Αντιστάθμιση γωνίας εικόνας"
 
 #: u_translation.rspictures
 msgid "Pictures"
@@ -3834,7 +3801,7 @@ msgstr "Εικόνες"
 
 #: u_translation.rspixelcount
 msgid "Pixel count"
-msgstr ""
+msgstr "Αριθμός pixel"
 
 #: u_translation.rspixels
 msgid "pixels"
@@ -3842,7 +3809,7 @@ msgstr "πίξελ"
 
 #: u_translation.rspixelsize
 msgid "Pixel size"
-msgstr ""
+msgstr "Μέγεθος pixel"
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -3994,15 +3961,11 @@ msgstr "PostScript"
 
 #: u_translation.rspower
 msgid "Power"
-msgstr ""
+msgstr "Μεγέθυνση"
 
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
 msgstr ""
-
-#: u_translation.rsprefixthealt
-msgid "Prefix the alternative names with their label"
-msgstr "Πρόθεμα στα εναλλακτικά ονόματα με την ετικέτα τους"
 
 #: u_translation.rsprepareacata
 msgid "Prepare a catalog with CatGen"
@@ -4030,7 +3993,7 @@ msgstr "Προεπισκόπιση"
 
 #: u_translation.rsprevious
 msgid "Previous"
-msgstr ""
+msgstr "Προηγούμενο"
 
 #: u_translation.rsprint
 msgid "Print"
@@ -4058,11 +4021,11 @@ msgstr "Ρυθμίσεις εκτυπωτή"
 
 #: u_translation.rsprintfooter
 msgid "Print footer"
-msgstr ""
+msgstr "Εκτύπωση υποσέλιδου"
 
 #: u_translation.rsprintheader
 msgid "Print header"
-msgstr ""
+msgstr "Εκτύπωση επικεφαλίδας"
 
 #: u_translation.rsprintmethod
 msgid "Print method"
@@ -4242,10 +4205,6 @@ msgstr "Ρεαλιστικές εικόνες"
 
 #: u_translation.rsreallyparkan
 msgid "REALLY park and disconnect the telescope?"
-msgstr ""
-
-#: u_translation.rsrealskycdrom
-msgid "Realsky CD-rom cannot be used on a 64 bit system."
 msgstr ""
 
 #: u_translation.rsrealskynorth
@@ -4590,7 +4549,7 @@ msgstr "Αποθήκευση"
 
 #: u_translation.rsscaled
 msgid "Scaled"
-msgstr ""
+msgstr "Σε κλίμακα"
 
 #: u_translation.rsscanarchives
 msgid "Scan archives"
@@ -4603,10 +4562,6 @@ msgstr "Έρευνα καταλόγου"
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
 msgstr ""
-
-#: u_translation.rsscreenandsta
-msgid "Screen and status bar"
-msgstr "Γραμμή οθόνης και κατάστασης"
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
@@ -5368,13 +5323,9 @@ msgstr "Υπηρεσία TCP/IP μη διαθέσιμη."
 msgid "Telescope"
 msgstr "Τηλεσκόπιο"
 
-#: u_translation.rstelescope2
-msgid "Telescope: %s"
-msgstr "Τηλεσκόπιο: %s"
-
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
-msgstr ""
+msgstr "Εστιακό μήκος τηλεσκοπίου"
 
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
@@ -5489,7 +5440,7 @@ msgstr "Ζώνη Ώρας"
 
 #: u_translation.rstitle
 msgid "Title"
-msgstr ""
+msgstr "Τίτλος"
 
 #: u_translation.rsto
 msgid "to"
@@ -5790,10 +5741,6 @@ msgstr "Χρήση ιδίας κίνησης για διόρθωση θέσης 
 msgid "Use this field as an alternative name"
 msgstr "Χρήση αυτού του πεδίου ως εναλλακτικό όνομα"
 
-#: u_translation.rsusexplanet
-msgid "Use Xplanet"
-msgstr "Χρήση Xplanet"
-
 #: u_translation.rsusingexistin
 msgid "Using the existing file %s"
 msgstr "Χρήση υπάρχοντος αρχείου %s"
@@ -5840,7 +5787,7 @@ msgstr "Προβολή"
 
 #: u_translation.rsviewheader
 msgid "View header"
-msgstr ""
+msgstr "Προβολή επικεφαλίδας"
 
 #: u_translation.rsviewhorizon
 msgid "View horizon"
@@ -5852,7 +5799,7 @@ msgstr "Προβολή λίστας παρατήρησης"
 
 #: u_translation.rsviewonchart
 msgid "View on chart"
-msgstr ""
+msgstr "Προβολή στο χάρτη"
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "
@@ -5953,18 +5900,6 @@ msgstr "Παράθυρο"
 #: u_translation.rsxerrors
 msgid "X Errors"
 msgstr "X Σφάλματα"
-
-#: u_translation.rsxplanetisnot
-msgid "Xplanet is not compiled with JPEG support"
-msgstr "Το Xplanet δεν έχει μεταγλωτιστεί με υποστήριξη JPEG"
-
-#: u_translation.rsxplanetispro
-msgid "Xplanet is probably not installed!"
-msgstr "Το Xplanet μάλλον δεν είναι εγκατεστημένο"
-
-#: u_translation.rsxplanetretur
-msgid "%s, xplanet returns %s"
-msgstr "%s, το xplanet επιστρέφει %s"
 
 #: u_translation.rsyear
 msgid "Year"

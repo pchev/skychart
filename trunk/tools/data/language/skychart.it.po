@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-14 19:05+0000\n"
-"PO-Revision-Date: 2014-02-18 16:46+0000\n"
+"POT-Creation-Date: 2014-04-16 15:12+0000\n"
+"PO-Revision-Date: 2014-04-05 17:52+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-28 15:52+0000\n"
-"X-Generator: Launchpad (build 16967)\n"
+"X-Launchpad-Export-Date: 2014-04-16 15:21+0000\n"
+"X-Generator: Launchpad (build 16976)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -1346,8 +1346,8 @@ msgid "Degree"
 msgstr "Gradi"
 
 #: u_translation.rsdegreegridsp
-msgid "Declination grid"
-msgstr "Spaziatura Griglia Gradi"
+msgid "Grid spacing in degree"
+msgstr ""
 
 #: u_translation.rsdegrees
 msgid "degrees"
@@ -1506,10 +1506,6 @@ msgstr "Disconnetti"
 msgid "Disconnect from SAMP"
 msgstr "Disconnetti da SAMP"
 
-#: u_translation.rsdisconnectte
-msgid "Disconnect telescope"
-msgstr "Disconnetti telescopio"
-
 #: u_translation.rsdisplay
 msgid "Display"
 msgstr "Mostra"
@@ -1557,10 +1553,6 @@ msgstr "Distanza"
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
 msgstr "Misura distanza"
-
-#: u_translation.rsdistancetoth
-msgid "Distance to the last object"
-msgstr "Distanza dall'ultimo oggetto"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
@@ -1990,10 +1982,6 @@ msgstr "Campo numero"
 msgid "Field of vision"
 msgstr "Campo visivo"
 
-#: u_translation.rsfieldofvisio2
-msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
-msgstr "Campo visivo troppo largo per proiezione ARC, nascondo gli oggetti sotto l'orizzonte"
-
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
 msgstr "Impostazioni Campo Visivo"
@@ -2286,10 +2274,6 @@ msgstr "Lettera greca"
 msgid "Green"
 msgstr "Verde"
 
-#: u_translation.rsgridsetting
-msgid "Grid settings"
-msgstr "Impostazioni Griglia"
-
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
 msgstr "Spaziatura della Griglia"
@@ -2407,8 +2391,8 @@ msgid "Hour angle"
 msgstr "Angolo Orario"
 
 #: u_translation.rshourgridspac
-msgid "Right ascension grid"
-msgstr "Spaziatura Griglia Oraria"
+msgid "Grid spacing in hour for equatorial grid"
+msgstr ""
 
 #: u_translation.rshours
 msgid "hours"
@@ -2461,10 +2445,6 @@ msgstr "Cartella immagini"
 #: u_translation.rsimagelist
 msgid "Image list"
 msgstr "Lista immagini"
-
-#: u_translation.rsimageoptions
-msgid "Image options"
-msgstr "Impostazioni Immagini"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -2537,10 +2517,6 @@ msgstr "nel lettore"
 #: u_translation.rsinfo
 msgid "Information"
 msgstr "Informazioni"
-
-#: u_translation.rsinfo2
-msgid "Info"
-msgstr "Info"
 
 #: u_translation.rsinformationd
 msgid "Information detail"
@@ -3110,10 +3086,6 @@ msgstr "'"
 msgid "min"
 msgstr "min"
 
-#: u_translation.rsmin3
-msgid "Min."
-msgstr "Min"
-
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
 msgstr "Altezza minima"
@@ -3456,7 +3428,7 @@ msgstr "Numero di files"
 
 #: u_translation.rsnumberofigno
 msgid "Number of ignored invalid rows: %s"
-msgstr ""
+msgstr "Numero di linee invalide ignorate: %s"
 
 #: u_translation.rsnumberofmont
 msgid "Number of months"
@@ -3501,10 +3473,6 @@ msgstr "Impostazioni Lista Oggetti"
 #: u_translation.rsobjectname
 msgid "Object name"
 msgstr "Nome dell'oggetto"
-
-#: u_translation.rsobjectpositi
-msgid "Object position found in index, but no detail found in any active catalog"
-msgstr "Trovata posizione dell'oggetto nell'indice, ma nessun dettaglio in alcun catalogo attivo"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
@@ -3942,10 +3910,6 @@ msgstr "Ingrandimento"
 msgid "Prefix name with catalog short name"
 msgstr "Prefissa col nome abbreviato del catalogo"
 
-#: u_translation.rsprefixthealt
-msgid "Prefix the alternative names with their label"
-msgstr "Precedi il nome alternativo con l'etichetta"
-
 #: u_translation.rsprepareacata
 msgid "Prepare a catalog with CatGen"
 msgstr "Crea un catalogo CatGen"
@@ -4185,10 +4149,6 @@ msgstr "Immagine realistica"
 #: u_translation.rsreallyparkan
 msgid "REALLY park and disconnect the telescope?"
 msgstr "Se sicuro di parcheggiare e disconnettere il telescopio?"
-
-#: u_translation.rsrealskycdrom
-msgid "Realsky CD-rom cannot be used on a 64 bit system."
-msgstr "Il CD-rom Realsky non può essere usato su sistemi 64 bit."
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -4541,10 +4501,6 @@ msgstr "Controlla directory"
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
 msgstr "Imp. avanzate telescopio"
-
-#: u_translation.rsscreenandsta
-msgid "Screen and status bar"
-msgstr "Schermo e barra di stato"
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
@@ -5156,7 +5112,7 @@ msgstr "Inizio"
 
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
-msgstr "Inizia grafici alla mezzanotte locale"
+msgstr "Inizia grafici a mezzogiorno locale"
 
 #: u_translation.rsstartmonth
 msgid "Start month"
@@ -5289,10 +5245,6 @@ msgstr "Il servizio TCP/IP non è presente."
 #: u_translation.rstelescope
 msgid "Telescope"
 msgstr "Telescopio"
-
-#: u_translation.rstelescope2
-msgid "Telescope: %s"
-msgstr "Telescopio: %s"
 
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
@@ -5706,10 +5658,6 @@ msgstr "Usa moto proprio per correggere la posizione per l'epoca"
 msgid "Use this field as an alternative name"
 msgstr "Usa questo campo come nome alternativo"
 
-#: u_translation.rsusexplanet
-msgid "Use Xplanet"
-msgstr "Usa Xplanet"
-
 #: u_translation.rsusingexistin
 msgid "Using the existing file %s"
 msgstr "Uso il file esistente %s"
@@ -5869,18 +5817,6 @@ msgstr "Finestra"
 #: u_translation.rsxerrors
 msgid "X Errors"
 msgstr "Errori X"
-
-#: u_translation.rsxplanetisnot
-msgid "Xplanet is not compiled with JPEG support"
-msgstr "Xplanet non è compilato col supporto JPEG"
-
-#: u_translation.rsxplanetispro
-msgid "Xplanet is probably not installed!"
-msgstr "Xplanet non è installato!"
-
-#: u_translation.rsxplanetretur
-msgid "%s, xplanet returns %s"
-msgstr "%s, xplanet riporta %s"
 
 #: u_translation.rsyear
 msgid "Year"

@@ -902,10 +902,6 @@ msgstr ""
 msgid "Invisible at this latitude"
 msgstr ""
 
-#: u_translation:rsdistancetoth
-msgid "Distance to the last object"
-msgstr ""
-
 #: u_translation:rslocalsideral
 msgid "Local sidereal time"
 msgstr ""
@@ -972,10 +968,6 @@ msgstr ""
 
 #: u_translation:rsnotfoundinan
 msgid "%s  Not found in any of the installed catalog indices."
-msgstr ""
-
-#: u_translation:rsdisconnectte
-msgid "Disconnect telescope"
 msgstr ""
 
 #: u_translation:rssocketerror
@@ -1606,10 +1598,6 @@ msgstr ""
 msgid "Please confirm that the telescope is pointed at %s"
 msgstr ""
 
-#: u_translation:rstelescope2
-msgid "Telescope: %s"
-msgstr ""
-
 #: u_translation:rsskycharts
 msgid "Sky Charts"
 msgstr ""
@@ -1836,10 +1824,6 @@ msgstr ""
 
 #: u_translation:rsaddthealtern
 msgid "Add the alternative names to the index"
-msgstr ""
-
-#: u_translation:rsprefixthealt
-msgid "Prefix the alternative names with their label"
 msgstr ""
 
 #: u_translation:rsindicatethes
@@ -2162,10 +2146,6 @@ msgstr ""
 msgid "Cat."
 msgstr ""
 
-#: u_translation:rsmin3
-msgid "Min."
-msgstr ""
-
 #: u_translation:rspath
 msgid "Path"
 msgstr ""
@@ -2254,16 +2234,12 @@ msgstr ""
 msgid "Limiting size (arcminutes):"
 msgstr ""
 
-#: u_translation:rsgridsetting
-msgid "Grid settings"
-msgstr ""
-
 #: u_translation:rsdegreegridsp
-msgid "Declination grid"
+msgid "Grid spacing in degree"
 msgstr ""
 
 #: u_translation:rshourgridspac
-msgid "Right ascension grid"
+msgid "Grid spacing in hour for equatorial grid"
 msgstr ""
 
 #: u_translation:rsobjectlistse
@@ -2528,10 +2504,6 @@ msgstr ""
 
 #: u_translation:rslegend
 msgid "Legend"
-msgstr ""
-
-#: u_translation:rsscreenandsta
-msgid "Screen and status bar"
 msgstr ""
 
 #: u_translation:rsprinterlegen
@@ -2852,14 +2824,6 @@ msgstr ""
 
 #: u_translation:rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
-msgstr ""
-
-#: u_translation:rsimageoptions
-msgid "Image options"
-msgstr ""
-
-#: u_translation:rsusexplanet
-msgid "Use Xplanet"
 msgstr ""
 
 #: u_translation:rstransparentl
@@ -3918,20 +3882,8 @@ msgstr ""
 msgid "Directory not found %s"
 msgstr ""
 
-#: u_translation:rsxplanetretur
-msgid "%s, xplanet returns %s"
-msgstr ""
-
-#: u_translation:rsxplanetisnot
-msgid "Xplanet is not compiled with JPEG support"
-msgstr ""
-
 #: u_translation:rsrequirexplan
 msgid "(requires Xplanet 1.2.0)"
-msgstr ""
-
-#: u_translation:rsxplanetispro
-msgid "Xplanet is probably not installed!"
 msgstr ""
 
 #: u_translation:rseverypositio
@@ -4308,10 +4260,6 @@ msgstr ""
 
 #: u_translation:rsothersoftwar
 msgid "Other software data"
-msgstr ""
-
-#: u_translation:rsobjectpositi
-msgid "Object position found in index, but no detail found in any active catalog"
 msgstr ""
 
 #: u_translation:rsinvalidpath
@@ -5078,10 +5026,6 @@ msgstr ""
 msgid "VO Catalog"
 msgstr ""
 
-#: u_translation:rsinfo2
-msgid "Info"
-msgstr ""
-
 #: u_translation:rscatalogsavai
 msgid "%s Catalogs available"
 msgstr ""
@@ -5286,10 +5230,6 @@ msgstr ""
 msgid "Show mark index"
 msgstr ""
 
-#: u_translation:rsfieldofvisio2
-msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
-msgstr ""
-
 #: u_translation:rsabrevasteroid
 msgid "Ast"
 msgstr ""
@@ -5472,10 +5412,6 @@ msgstr ""
 
 #: u_translation:rsviewheader
 msgid "View header"
-msgstr ""
-
-#: u_translation:rsrealskycdrom
-msgid "Realsky CD-rom cannot be used on a 64 bit system."
 msgstr ""
 
 #: u_translation:rsimagearchive
