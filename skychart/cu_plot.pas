@@ -60,7 +60,7 @@ type
      FLabelClick: Tintfunc;
      PlanetBMP : Tbitmap;
      XplanetImg: TPicture;
-     PlanetBMPjd,PlanetBMProt : double;
+     PlanetBMPjd,PlanetBMProt,PlanetBMPgrs : double;
      PlanetBMPpla : integer;
      OldGRSlong: double;
      TransparentColor : TFPColor;
@@ -1551,7 +1551,7 @@ if ipla=6 then ds:=round(max(2.2261*diam*pixscale,4*cfgchart.drawpen))
           else ds:=round(max(diam*pixscale,4*cfgchart.drawpen));
 if ipla=11 then bsize:='1024x1024'
            else bsize:='512x512';
-if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000693)or(abs(planetbmprot-pa)>0.2) then begin
+if (planetBMPpla<>ipla)or(abs(PlanetBMPjd-jdt)>0.000693)or(abs(PlanetBMProt-pa)>0.2)or(PlanetBMPgrs<>gw) then begin
    searchdir:=slash(appdir)+slash('data')+'planet';
    r:=TStringList.Create;
    GetXplanet(Xplanetversion,slash(Tempdir)+'origin.txt',searchdir,bsize,slash(Tempdir)+'planet.png',ipla,pa,gw,jdt,irc,r );
@@ -1564,9 +1564,10 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000693)or(abs(planetbmprot-pa)>
         planetbmp.Height:=round(flatten*planetbmp.Width);
         PlanetBMP.Canvas.StretchDraw(rect(0,0,planetbmp.Width,planetbmp.Height),XplanetImg.Bitmap);
       end;
-      planetbmppla:=ipla;
-      planetbmpjd:=jdt;
-      planetbmprot:=pa;
+      PlanetBMPpla:=ipla;
+      PlanetBMPjd:=jdt;
+      PlanetBMProt:=pa;
+      PlanetBMPgrs:=gw;
    end
    else begin // something go wrong with xplanet
       buf:='';
