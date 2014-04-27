@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-16 15:12+0000\n"
-"PO-Revision-Date: 2014-04-13 10:22+0000\n"
+"PO-Revision-Date: 2014-04-20 13:51+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-16 15:21+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-27 15:24+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -1347,7 +1347,7 @@ msgstr "Grado"
 
 #: u_translation.rsdegreegridsp
 msgid "Grid spacing in degree"
-msgstr ""
+msgstr "Espaciado cuadrícula en grados"
 
 #: u_translation.rsdegrees
 msgid "degrees"
@@ -2392,7 +2392,7 @@ msgstr "Ángulo horario"
 
 #: u_translation.rshourgridspac
 msgid "Grid spacing in hour for equatorial grid"
-msgstr ""
+msgstr "Espaciado cuadrícula en horas para cuadrícula ecuatorial"
 
 #: u_translation.rshours
 msgid "hours"
