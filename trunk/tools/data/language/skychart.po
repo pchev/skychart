@@ -2479,7 +2479,7 @@ msgid "Display the labels"
 msgstr ""
 
 #: u_translation:rsdisplaythech
-msgid "Display the chart information in the menu bar."
+msgid "Display the chart information in the menu bar"
 msgstr ""
 
 #: u_translation:rslabelobject
