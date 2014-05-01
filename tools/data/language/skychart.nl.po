@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-16 15:12+0000\n"
-"PO-Revision-Date: 2014-02-17 19:46+0000\n"
+"POT-Creation-Date: 2014-05-01 08:18+0000\n"
+"PO-Revision-Date: 2014-05-01 08:33+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-27 15:24+0000\n"
+"X-Launchpad-Export-Date: 2014-05-01 08:45+0000\n"
 "X-Generator: Launchpad (build 16985)\n"
 
 #: u_translation.rs102cddss
@@ -1530,8 +1530,8 @@ msgid "Display Precision"
 msgstr "Toon nauwkeurigheid"
 
 #: u_translation.rsdisplaythech
-msgid "Display the chart information in the menu bar."
-msgstr "Toon de kaart-informatie in de menubalk."
+msgid "Display the chart information in the menu bar"
+msgstr "Toon de kaart-informatie in de menubalk"
 
 #: u_translation.rsdisplaytheho
 msgid "Display the horizon picture"

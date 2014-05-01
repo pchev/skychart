@@ -632,7 +632,7 @@ resourcestring
   rsStarLabel = 'Star label';
   rsConstellatio6 = 'Constellation label';
   rsDisplayTheLa = 'Display the labels';
-  rsDisplayTheCh = 'Display the chart information in the menu bar.';
+  rsDisplayTheCh = 'Display the chart information in the menu bar';
   rsLabelObject = 'Label object';
   rsMagnitudeDif = 'Magnitude difference';
   rsSize = 'Size';
