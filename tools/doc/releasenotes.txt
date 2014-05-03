@@ -2,3 +2,7 @@ Version 3.11 beta, release Notes
 
 New functions:
 
+
+Corrections:
+
+  * No more store the program data location in the configuration file. If you need a non-standard location use the new command line option "--datadir=".

@@ -17,7 +17,7 @@ object f_main: Tf_main
   OnResize = FormResize
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.2.0.3'
+  LCLVersion = '1.2.2.0'
   object PanelLeft: TPanel
     Left = 0
     Height = 465

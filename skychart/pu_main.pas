@@ -1808,16 +1808,11 @@ homedir:=trim(systoutf8(Folder));
 {$endif}
 
 if ForceConfig<>'' then Configfile:=ForceConfig;
-
-ConfigAppdir:='';
-ConfigPrivateDir:='';
+if ConfigAppdir<>'' then Appdir:=ConfigAppdir;
 
 if fileexists(configfile) then begin
   inif:=TMeminifile.create(configfile);
   try
-  buf:=inif.ReadString('main','AppDir',appdir);
-  if Directoryexists(buf) then appdir:=noslash(buf);
-  if buf<>'' then ConfigAppdir:=noslash(buf);
   buf:=inif.ReadString('main','PrivateDir',privatedir);
   if Directoryexists(buf) then privatedir:=noslash(buf);
   if buf<>'' then ConfigPrivateDir:=noslash(buf);
@@ -1891,8 +1886,8 @@ if (not directoryexists(slash(appdir)+slash('data')+'constellation')) then begin
                appdir:=buf
             else begin
                MessageDlg('Could not found the application data directory.'+crlf
-                   +'Please edit the file skychart.ini'+crlf
-                   +'and indicate at the line Appdir= where you install the data.',
+                   +'Please reinstall the program at a standard location'+crlf
+                   +'or use the option --datadir= to indicate where you install the data.',
                    mtError, [mbAbort], 0);
                Halt;
             end;
@@ -2011,6 +2006,8 @@ cfgm:=Tconf_main.Create;
 def_cfgplot:=Tconf_plot.Create;
 cfgp:=Tconf_plot.Create;
 ForceConfig:='';
+ConfigAppdir:='';
+ConfigPrivateDir:='';
 step:='Create cursor';
 if VerboseMsg then
  debugln(step);
@@ -3461,7 +3458,6 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    ConfigTime.f_config_time1.csc.Assign(sc.cfgsc);
    ConfigTime.f_config_time1.cplot.Assign(sc.plot.cfgplot);
 end;
-cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigTime.f_config_time1.cmain.Assign(cfgm);
 formpos(ConfigTime,mouse.cursorpos.x,mouse.cursorpos.y);
@@ -3511,7 +3507,6 @@ try
      f_config.csc:=sc.cfgsc;
      f_config.cplot:=sc.plot.cfgplot;
  end;
- cfgm.prgdir:=appdir;
  cfgm.persdir:=privatedir;
  f_config.cmain:=cfgm;
  f_config.cdss:=f_getdss.cfgdss;
@@ -3554,7 +3549,6 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    ConfigChart.f_config_chart1.csc.Assign(sc.cfgsc);
    ConfigChart.f_config_chart1.cplot.Assign(sc.plot.cfgplot);
 end;
-cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigChart.f_config_chart1.cmain.Assign(cfgm);
 formpos(ConfigChart,mouse.cursorpos.x,mouse.cursorpos.y);
@@ -3626,7 +3620,6 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    ConfigSolsys.f_config_solsys1.csc.Assign(sc.cfgsc);
    ConfigSolsys.f_config_solsys1.cplot.Assign(sc.plot.cfgplot);
 end;
-cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigSolsys.f_config_solsys1.cmain.Assign(cfgm);
 formpos(ConfigSolsys,mouse.cursorpos.x,mouse.cursorpos.y);
@@ -3707,7 +3700,6 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    ConfigSystem.f_config_system1.csc.Assign(sc.cfgsc);
    ConfigSystem.f_config_system1.cplot.Assign(sc.plot.cfgplot);
 end;
-cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigSystem.f_config_system1.cmain.Assign(cfgm);
 formpos(ConfigSystem,mouse.cursorpos.x,mouse.cursorpos.y);
@@ -3741,7 +3733,6 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    ConfigSystem.f_config_system1.csc.Assign(sc.cfgsc);
    ConfigSystem.f_config_system1.cplot.Assign(sc.plot.cfgplot);
 end;
-cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigSystem.f_config_system1.cmain.Assign(cfgm);
 ConfigSystem.f_config_system1.cmain.language:='';
@@ -3770,7 +3761,6 @@ if ConfigInternet=nil then begin
    ConfigInternet.f_config_internet1.onApplyConfig:=ApplyConfigInternet;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigInternet,nightvision);{$endif}
-cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigInternet.f_config_internet1.cmain.Assign(cfgm);
 ConfigInternet.f_config_internet1.cdss.Assign(f_getdss.cfgdss);
@@ -3810,7 +3800,6 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    ConfigPictures.f_config_pictures1.cplot.Assign(sc.plot.cfgplot);
    sc.bgsettingchange:=true;
 end;
-cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigPictures.f_config_pictures1.cmain.Assign(cfgm);
 formpos(ConfigPictures,mouse.cursorpos.x,mouse.cursorpos.y);
@@ -3862,7 +3851,6 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    ConfigObservatory.f_config_observatory1.csc.Assign(sc.cfgsc);
    ConfigObservatory.f_config_observatory1.cplot.Assign(sc.plot.cfgplot);
 end;
-cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigObservatory.f_config_observatory1.cmain.Assign(cfgm);
 if (posx=0)and(posy=0) then
@@ -3917,7 +3905,6 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    ConfigCatalog.f_config_catalog1.fov:=sc.cfgsc.fov*0.75;
    Precession(sc.cfgsc.JDChart,jd2000,ConfigCatalog.f_config_catalog1.ra,ConfigCatalog.f_config_catalog1.dec);
 end;
-cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigCatalog.f_config_catalog1.cmain.Assign(cfgm);
 formpos(ConfigCatalog,mouse.cursorpos.x,mouse.cursorpos.y);
@@ -4038,7 +4025,6 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    ConfigDisplay.f_config_display1.csc.Assign(sc.cfgsc);
    ConfigDisplay.f_config_display1.cplot.Assign(sc.plot.cfgplot);
 end;
-cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigDisplay.f_config_display1.cmain.Assign(cfgm);
 formpos(ConfigDisplay,mouse.cursorpos.x,mouse.cursorpos.y);
@@ -4054,7 +4040,6 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    ConfigDisplay.f_config_display1.csc.Assign(sc.cfgsc);
    ConfigDisplay.f_config_display1.cplot.Assign(sc.plot.cfgplot);
 end;
-cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigDisplay.f_config_display1.cmain.Assign(cfgm);
 ///////////////////////////////
@@ -4094,7 +4079,6 @@ procedure Tf_main.SaveAndRestart(Sender: TObject);
 begin
 if ConfigSystem<>nil then begin
   cfgm.Assign(ConfigSystem.f_config_system1.cmain);
-  if directoryexists(cfgm.prgdir) then appdir:=cfgm.prgdir;
   privatedir:=cfgm.persdir;
   def_cfgsc.Assign(ConfigSystem.f_config_system1.csc);
   catalog.cfgcat.Assign(ConfigSystem.f_config_system1.ccat);
@@ -4142,7 +4126,6 @@ begin
     if themechange then SetTheme;
     if starchange then SetStarShape;
     cfgm.updall:=applyall;
-    if directoryexists(cfgm.prgdir) then appdir:=cfgm.prgdir;
     privatedir:=cfgm.persdir;
     if ccat<>nil then begin
       for i:=0 to ccat.GCatNum-1 do begin
@@ -6384,8 +6367,8 @@ inif:=TMeminifile.create(filename);
 try
 with inif do begin
 section:='main';
+DeleteKey(section,'AppDir');
 WriteString(section,'version',cdcver);
-WriteString(section,'AppDir',appdir);
 WriteString(section,'PrivateDir',privatedir);
 {$ifdef linux}
 WriteInteger(section,'LinuxDesktop',LinuxDesktop);
@@ -7607,6 +7590,8 @@ for i:=0 to Params.Count-1 do begin
       end;
    end else if cmd='--userdir' then begin
       ForceUserDir:=SafeUTF8ToSys(trim(parm));
+   end else if cmd='--datadir' then begin
+      ConfigAppdir:=SafeUTF8ToSys(trim(parm));
    end else if cmd='--daemon' then begin
       showsplash:=false;
       Application.ShowMainForm:=false;

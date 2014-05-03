@@ -106,33 +106,33 @@ object f_config_system: Tf_config_system
           end
           object Label85: TLabel
             Left = 362
-            Height = 16
+            Height = 15
             Top = 28
-            Width = 29
+            Width = 28
             Caption = 'Port:'
             ParentColor = False
           end
           object Label84: TLabel
             Left = 178
-            Height = 16
+            Height = 15
             Top = 28
-            Width = 67
+            Width = 66
             Caption = 'Host Name:'
             ParentColor = False
           end
           object Label77: TLabel
             Left = 16
-            Height = 16
+            Height = 15
             Top = 28
-            Width = 57
+            Width = 56
             Caption = 'DB Name:'
             ParentColor = False
           end
           object MysqlBoxLabel: TLabel
             Left = 16
-            Height = 16
+            Height = 15
             Top = 3
-            Width = 83
+            Width = 82
             Caption = 'MysqlBoxLabel'
             ParentColor = False
           end
@@ -167,18 +167,18 @@ object f_config_system: Tf_config_system
           end
           object SqliteBoxLabel: TLabel
             Left = 13
-            Height = 16
+            Height = 15
             Top = 12
-            Width = 83
+            Width = 82
             Caption = 'SqliteBoxLabel'
             ParentColor = False
           end
         end
         object Label153: TLabel
           Left = 0
-          Height = 16
+          Height = 15
           Top = 0
-          Width = 87
+          Width = 86
           Caption = 'System Setting'
           ParentColor = False
         end
@@ -191,46 +191,25 @@ object f_config_system: Tf_config_system
           ClientHeight = 74
           ClientWidth = 449
           TabOrder = 4
-          object Label156: TLabel
-            Left = 13
-            Height = 15
-            Top = 8
-            Width = 161
-            AutoSize = False
-            Caption = 'Program Data '
-            ParentColor = False
-          end
           object Label157: TLabel
-            Left = 14
+            Left = 12
             Height = 15
-            Top = 47
+            Top = 29
             Width = 161
             AutoSize = False
             Caption = 'Personal data'
             ParentColor = False
           end
-          object prgdir: TDirectoryEdit
-            Left = 179
+          object persdir: TDirectoryEdit
+            Left = 177
             Height = 23
-            Top = 3
+            Top = 24
             Width = 240
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
             MaxLength = 0
             TabOrder = 0
-            OnChange = prgdirChange
-          end
-          object persdir: TDirectoryEdit
-            Left = 179
-            Height = 23
-            Top = 42
-            Width = 240
-            ShowHidden = False
-            ButtonWidth = 23
-            NumGlyphs = 1
-            MaxLength = 0
-            TabOrder = 1
             OnChange = persdirChange
           end
         end
@@ -334,9 +313,9 @@ object f_config_system: Tf_config_system
           TabOrder = 5
           object Label12: TLabel
             Left = 203
-            Height = 16
+            Height = 15
             Top = 8
-            Width = 122
+            Width = 121
             Caption = 'URL launch command'
             ParentColor = False
           end
@@ -491,8 +470,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 450
-              ClientHeight = 328
-              ClientWidth = 450
+              ClientHeight = 324
+              ClientWidth = 446
               TabOrder = 0
               object PanelCmd: TEdit
                 Left = 176
@@ -572,8 +551,8 @@ object f_config_system: Tf_config_system
                 Height = 92
                 Top = 128
                 Width = 444
-                ClientHeight = 92
-                ClientWidth = 444
+                ClientHeight = 88
+                ClientWidth = 440
                 TabOrder = 5
                 Visible = False
                 object Label258: TLabel
@@ -666,8 +645,8 @@ object f_config_system: Tf_config_system
               Height = 330
               Top = 8
               Width = 450
-              ClientHeight = 330
-              ClientWidth = 450
+              ClientHeight = 326
+              ClientWidth = 446
               TabOrder = 0
               object ManualMountType: TRadioGroup
                 Left = 24
@@ -683,7 +662,7 @@ object f_config_system: Tf_config_system
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 2
-                ClientHeight = 37
+                ClientHeight = 24
                 ClientWidth = 357
                 Columns = 2
                 Items.Strings = (
@@ -729,8 +708,8 @@ object f_config_system: Tf_config_system
                     Height = 161
                     Top = 8
                     Width = 361
-                    ClientHeight = 161
-                    ClientWidth = 361
+                    ClientHeight = 157
+                    ClientWidth = 357
                     TabOrder = 0
                     object Label3: TLabel
                       Left = 16
@@ -817,8 +796,8 @@ object f_config_system: Tf_config_system
                     Height = 161
                     Top = 8
                     Width = 361
-                    ClientHeight = 161
-                    ClientWidth = 361
+                    ClientHeight = 157
+                    ClientWidth = 357
                     TabOrder = 0
                     object Label8: TLabel
                       Left = 16
@@ -908,8 +887,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 452
-              ClientHeight = 328
-              ClientWidth = 452
+              ClientHeight = 324
+              ClientWidth = 448
               TabOrder = 0
               object ASCOMLabel: TLabel
                 Left = 21
@@ -932,8 +911,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 452
-              ClientHeight = 328
-              ClientWidth = 452
+              ClientHeight = 324
+              ClientWidth = 448
               TabOrder = 0
               object InterfaceLabel: TLabel
                 Left = 21

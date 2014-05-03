@@ -3,3 +3,7 @@ Version 3.11 beta, Notes de la version
 Nouvelles fonctions:
 
 
+Corrections:
+
+  * N'enregistre plus l'emplacement des données du programme dans le fichier de configuration. Si vous avez besoin d'un emplacement non standard utilisez la nouvelle option de ligne de commande "--datadir=".
+
