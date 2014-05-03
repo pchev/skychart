@@ -6,8 +6,8 @@ object f_config_display: Tf_config_display
   ClientHeight = 528
   ClientWidth = 505
   TabOrder = 0
-  DesignLeft = 397
-  DesignTop = 203
+  DesignLeft = 227
+  DesignTop = 111
   object MainPanel: TPanel
     Left = 0
     Height = 528
@@ -23,10 +23,10 @@ object f_config_display: Tf_config_display
       Height = 526
       Top = 1
       Width = 503
-      ActivePage = Page9
+      ActivePage = Page6
       Align = alClient
       ShowTabs = False
-      TabIndex = 8
+      TabIndex = 5
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Display'
@@ -2003,17 +2003,17 @@ object f_config_display: Tf_config_display
           end
           object Label252: TLabel
             Left = 317
-            Height = 16
+            Height = 15
             Top = 23
-            Width = 31
+            Width = 30
             Caption = 'Color'
             ParentColor = False
           end
           object Label240: TLabel
             Left = 316
-            Height = 16
+            Height = 15
             Top = 6
-            Width = 30
+            Width = 29
             Caption = 'Label'
             ParentColor = False
           end
@@ -2083,9 +2083,9 @@ object f_config_display: Tf_config_display
           end
           object Label255: TLabel
             Left = 369
-            Height = 16
+            Height = 15
             Top = 23
-            Width = 23
+            Width = 22
             Caption = 'Size'
             ParentColor = False
           end
@@ -2457,17 +2457,17 @@ object f_config_display: Tf_config_display
           end
           object Label14: TLabel
             Left = 19
-            Height = 16
+            Height = 15
             Top = 6
-            Width = 72
+            Width = 71
             Caption = 'Label Object'
             ParentColor = False
           end
           object Label15: TLabel
             Left = 40
-            Height = 16
+            Height = 15
             Top = 240
-            Width = 136
+            Width = 134
             Caption = 'Observing list elements'
             ParentColor = False
           end
@@ -2533,7 +2533,7 @@ object f_config_display: Tf_config_display
           Left = 247
           Height = 81
           Top = 357
-          Width = 220
+          Width = 244
           AutoFill = True
           Caption = 'Constellation Label'
           ChildSizing.LeftRightSpacing = 6
@@ -2545,13 +2545,13 @@ object f_config_display: Tf_config_display
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
           ClientHeight = 64
-          ClientWidth = 216
+          ClientWidth = 240
           Columns = 2
           ItemIndex = 0
           Items.Strings = (
-            'Full Name'
+            'Official name'
             'Abbreviation'
-            'Latin Name'
+            'Localized name'
           )
           OnClick = constlabelClick
           TabOrder = 6
@@ -2760,7 +2760,6 @@ object f_config_display: Tf_config_display
             FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
             FFFF00FFFF00FFFF00FF
           }
-          NumGlyphs = 0
           OnClick = SelectFontClick
         end
         object SpeedButton2: TSpeedButton
@@ -2811,7 +2810,6 @@ object f_config_display: Tf_config_display
             FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
             FFFF00FFFF00FFFF00FF
           }
-          NumGlyphs = 0
           OnClick = SelectFontClick
         end
         object SpeedButton3: TSpeedButton
@@ -2862,7 +2860,6 @@ object f_config_display: Tf_config_display
             FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
             FFFF00FFFF00FFFF00FF
           }
-          NumGlyphs = 0
           OnClick = SelectFontClick
         end
         object SpeedButton4: TSpeedButton
@@ -2913,7 +2910,6 @@ object f_config_display: Tf_config_display
             FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
             FFFF00FFFF00FFFF00FF
           }
-          NumGlyphs = 0
           OnClick = SelectFontClick
         end
         object SpeedButton5: TSpeedButton
@@ -2964,7 +2960,6 @@ object f_config_display: Tf_config_display
             FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
             FFFF00FFFF00FFFF00FF
           }
-          NumGlyphs = 0
           OnClick = SelectFontClick
         end
         object SpeedButton6: TSpeedButton
@@ -3015,7 +3010,6 @@ object f_config_display: Tf_config_display
             FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
             FFFF00FFFF00FFFF00FF
           }
-          NumGlyphs = 0
           OnClick = SelectFontClick
         end
         object SpeedButton7: TSpeedButton
@@ -3066,7 +3060,6 @@ object f_config_display: Tf_config_display
             FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
             FFFF00FFFF00FFFF00FF
           }
-          NumGlyphs = 0
           OnClick = SelectFontClick
         end
         object Label235: TLabel
@@ -3235,9 +3228,9 @@ object f_config_display: Tf_config_display
         ClientWidth = 499
         object Label308: TLabel
           Left = 26
-          Height = 16
+          Height = 15
           Top = 13
-          Width = 184
+          Width = 183
           Caption = 'Finder rectangle (CCD / Camera)'
           ParentColor = False
         end

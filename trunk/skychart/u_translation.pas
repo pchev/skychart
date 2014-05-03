@@ -11,7 +11,6 @@ procedure GetDefaultLanguage(var buf1,buf2: string);
 function Translate(lang : string = ''):string;
 
 resourcestring
-  rsLanguage = 'Internal language';
   rsdeg = 'd';
   rsmin = 'm';
   rssec = 's';
@@ -935,7 +934,6 @@ resourcestring
   rsBlue = 'Blue';
   rsGreen = 'Green';
   rsFixedBlack = 'Fixed black';
-  rsFullName = 'Full name';
   rsAbbreviation = 'Abbreviation';
   rsGeocentric = 'Geocentric';
   rsTopoCentric = 'Topocentric';
@@ -1004,7 +1002,6 @@ resourcestring
   rsWarningYouAr2 = 'Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want.';
   rsReleaseNotes = 'Release notes';
   rsBlinkingPict = 'Blinking picture';
-  rsLatinName = 'Latin name';
   rsExpertMode = 'Expert mode';
   rsTypeOfCoordi = 'Type of coordinates';
   rsApparent = 'Apparent';
@@ -1491,6 +1488,8 @@ resourcestring
   rsSAMPHubProfi = 'SAMP hub profile %s found, but it is missing a required value.';
   rsNoSAMPHubPro = 'No SAMP hub profile found, no hub is running.';
   rsNumberOfIgno = 'Number of ignored invalid rows: %s';
+  rsOfficialName = 'Official name';
+  rsLocalizedNam = 'Localized name';
 
 implementation
 
@@ -1539,7 +1538,7 @@ begin
  TranslateUnitResourceStrings('u_translation',systoutf8(slash(appdir)+slash('data')+slash('language')+'skychart.%s.po'),result,'');
  // translate LCL messages
  TranslateUnitResourceStrings('LCLStrConsts',systoutf8(slash(appdir)+slash('data')+slash('language')+'lclstrconsts.%s.po'),result,'');
- writetrace('Language: '+result+' '+rsLanguage);
+ writetrace('Language: '+result);
 end;
 
 end.
