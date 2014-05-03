@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-01 08:18+0000\n"
-"PO-Revision-Date: 2014-05-01 08:33+0000\n"
+"POT-Creation-Date: 2014-05-03 09:12+0000\n"
+"PO-Revision-Date: 2014-05-03 09:14+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-01 08:45+0000\n"
+"X-Launchpad-Export-Date: 2014-05-03 09:17+0000\n"
 "X-Generator: Launchpad (build 16985)\n"
 "Language: fr\n"
 
@@ -2165,10 +2165,6 @@ msgstr "FTP "
 msgid "FTP passive mode"
 msgstr "FTP Passif"
 
-#: u_translation.rsfullname
-msgid "Full name"
-msgstr "Nom complet"
-
 #: u_translation.rsfullscreen
 msgid "Full screen"
 msgstr "Affichage plein écran"
@@ -2681,10 +2677,6 @@ msgstr "Texte du label"
 msgid "Landscape"
 msgstr "Paysage"
 
-#: u_translation.rslanguage
-msgid "Internal language"
-msgstr "Français"
-
 #: u_translation.rslanguage2
 msgid "Language"
 msgstr "Langues"
@@ -2696,10 +2688,6 @@ msgstr "Choix de la langue"
 #: u_translation.rslast
 msgid "Last"
 msgstr "Dernier"
-
-#: u_translation.rslatinname
-msgid "Latin name"
-msgstr "Nom latin"
 
 #: u_translation.rslatitude
 msgid "Latitude"
@@ -2852,6 +2840,10 @@ msgstr "Charger"
 #: u_translation.rslocalhorizon
 msgid "Local horizon"
 msgstr "Horizon local"
+
+#: u_translation.rslocalizednam
+msgid "Localized name"
+msgstr "Nom français"
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
@@ -3517,6 +3509,10 @@ msgstr "Obsolète"
 msgid "Off"
 msgstr "Off"
 
+#: u_translation.rsofficialname
+msgid "Official name"
+msgstr "Nom officiel"
+
 #: u_translation.rsoffset
 msgid "Offset"
 msgstr "Décalage"
@@ -4008,10 +4004,6 @@ msgstr "Traitement de la ligne %s"
 #: u_translation.rsproductinfo
 msgid "Product Info"
 msgstr "Informations"
-
-#: u_translation.rsprogramdata
-msgid "Program data "
-msgstr "Données programme "
 
 #: u_translation.rsprograminfor
 msgid "Program information"
