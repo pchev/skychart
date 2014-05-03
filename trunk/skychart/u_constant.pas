@@ -44,7 +44,7 @@ type
 
 const
   cdcversion = 'Version 3.11-svn';
-  cdcver = '3.11a';
+  cdcver = '3.11b';
   cdccpy = 'Copyright (C) 2002-2014 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf +
     'Peter Dean,' + crlf + 'John Sunderland' + crlf  + 'Anat Ruangrassamee';
@@ -1038,7 +1038,7 @@ type
   public
     prtname, language, Constellationpath, ConstLfile, ConstBfile,
     EarthMapFile, HorizonFile, HorizonPictureFile, Planetdir: string;
-    db, dbhost, dbuser, dbpass, ImagePath, persdir, prgdir: string;
+    db, dbhost, dbuser, dbpass, ImagePath, persdir: string;
     starshape_file, KioskPass: string;
     Paper, PrinterResolution, PrintMethod, PrintColor,
     configpage, configpage_i, configpage_j, autorefreshdelay, MaxChildID, dbport: integer;
@@ -2476,7 +2476,6 @@ begin
   dbpass := Source.dbpass;
   ImagePath := Source.ImagePath;
   persdir := Source.persdir;
-  prgdir := Source.prgdir;
   Paper := Source.Paper;
   PrinterResolution := Source.PrinterResolution;
   PrintMethod := Source.PrintMethod;

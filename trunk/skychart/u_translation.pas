@@ -777,7 +777,6 @@ resourcestring
   rsSqliteDataba = 'SQLite database';
   rsDatabaseFile = 'Database file: ';
   rsDirectory = 'Directory';
-  rsProgramData = 'Program data ';
   rsPersonalData = 'Personal data';
   rsCheck = 'Check';
   rsCreateDataba = 'Create database';

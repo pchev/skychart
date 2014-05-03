@@ -78,7 +78,6 @@ type
     Page4: TTabSheet;
     TelescopeManual: TPanel;
     INDI: TPanel;
-    prgdir: TDirectoryEdit;
     persdir: TDirectoryEdit;
     Label12: TLabel;
     LinuxCmd: TEdit;
@@ -100,7 +99,6 @@ type
     dbuser: TEdit;
     dbpass: TEdit;
     GroupBoxDir: TGroupBox;
-    Label156: TLabel;
     Label157: TLabel;
     GroupBox3: TGroupBox;
     Label54: TLabel;
@@ -190,7 +188,6 @@ type
     procedure IndiDriverChange(Sender: TObject);
     procedure IndiPortChange(Sender: TObject);
     procedure TelescopeSelectClick(Sender: TObject);
-    procedure prgdirChange(Sender: TObject);
     procedure persdirChange(Sender: TObject);
     procedure AstDBClick(Sender: TObject);
     procedure CometDBClick(Sender: TObject);
@@ -263,7 +260,6 @@ Label133.caption:=rsPassword;
 SqliteBoxLabel.caption:=rsSqliteDataba;
 Label1.caption:=rsDatabaseFile;
 GroupBoxDir.caption:=rsDirectory;
-Label156.caption:=rsProgramData;
 Label157.caption:=rsPersonalData;
 chkdb.caption:=rsCheck;
 credb.caption:=rsCreateDataba;
@@ -445,7 +441,6 @@ dbhost.Text:=cmain.dbhost;
 dbport.value:=cmain.dbport;
 dbuser.Text:=cmain.dbuser;
 dbpass.Text:=cmain.dbpass;
-prgdir.text:=SysToUTF8(cmain.prgdir);
 persdir.text:=SysToUTF8(cmain.persdir);
 {$ifdef linux}
 LinuxDesktopBox.itemIndex:=min(1,LinuxDesktop);
@@ -706,12 +701,6 @@ end;
 procedure Tf_config_system.CometDBClick(Sender: TObject);
 begin
  if Assigned(FShowComet) then FShowComet(self);
-end;
-
-procedure Tf_config_system.prgdirChange(Sender: TObject);
-begin
-if LockChange then exit;
-cmain.prgdir:=prgdir.text;
 end;
 
 procedure Tf_config_system.persdirChange(Sender: TObject);
