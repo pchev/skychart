@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-01 08:18+0000\n"
+"POT-Creation-Date: 2014-05-03 09:12+0000\n"
 "PO-Revision-Date: 2014-05-01 08:35+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-01 08:44+0000\n"
+"X-Launchpad-Export-Date: 2014-05-03 09:16+0000\n"
 "X-Generator: Launchpad (build 16985)\n"
 
 #: u_translation.rs102cddss
@@ -2287,11 +2287,6 @@ msgstr "FTP "
 msgid "FTP passive mode"
 msgstr "FTP Passive Mode"
 
-#: u_translation.rsfullname
-#| msgid "Full Name"
-msgid "Full name"
-msgstr "Teljes név"
-
 #: u_translation.rsfullscreen
 #| msgid "Full Screen"
 msgid "Full screen"
@@ -2840,10 +2835,6 @@ msgstr "Címke szöveg"
 msgid "Landscape"
 msgstr "Fekvő"
 
-#: u_translation.rslanguage
-msgid "Internal language"
-msgstr "English"
-
 #: u_translation.rslanguage2
 msgid "Language"
 msgstr "Nyelv"
@@ -2855,11 +2846,6 @@ msgstr "Nyelv választása"
 #: u_translation.rslast
 msgid "Last"
 msgstr "Utolsó"
-
-#: u_translation.rslatinname
-#| msgid "Latin Name"
-msgid "Latin name"
-msgstr "Latin név"
 
 #: u_translation.rslatitude
 msgid "Latitude"
@@ -3021,6 +3007,10 @@ msgstr "Projekt betöltése"
 #| msgid "Local Horizon"
 msgid "Local horizon"
 msgstr "Helyi horizont"
+
+#: u_translation.rslocalizednam
+msgid "Localized name"
+msgstr ""
 
 #: u_translation.rslocalsideral
 #| msgid "Local Sideral Time"
@@ -3733,6 +3723,10 @@ msgstr "Elavult"
 msgid "Off"
 msgstr "Ki"
 
+#: u_translation.rsofficialname
+msgid "Official name"
+msgstr ""
+
 #: u_translation.rsoffset
 msgid "Offset"
 msgstr "Eltolás"
@@ -4242,11 +4236,6 @@ msgstr "Sor feldolgozása %s"
 #: u_translation.rsproductinfo
 msgid "Product Info"
 msgstr "termék információ"
-
-#: u_translation.rsprogramdata
-#| msgid "Program Data "
-msgid "Program data "
-msgstr "Program adatok: "
 
 #: u_translation.rsprograminfor
 msgid "Program information"

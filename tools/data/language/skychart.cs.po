@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-01 08:18+0000\n"
+"POT-Creation-Date: 2014-05-03 09:12+0000\n"
 "PO-Revision-Date: 2014-05-01 08:32+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-01 08:45+0000\n"
+"X-Launchpad-Export-Date: 2014-05-03 09:17+0000\n"
 "X-Generator: Launchpad (build 16985)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
@@ -2161,10 +2161,6 @@ msgstr "FTP "
 msgid "FTP passive mode"
 msgstr "Pasivní mód"
 
-#: u_translation.rsfullname
-msgid "Full name"
-msgstr "Celé jméno"
-
 #: u_translation.rsfullscreen
 msgid "Full screen"
 msgstr "Celá obrazovka"
@@ -2677,10 +2673,6 @@ msgstr "Text popisku"
 msgid "Landscape"
 msgstr "Na šířku"
 
-#: u_translation.rslanguage
-msgid "Internal language"
-msgstr "Čeština"
-
 #: u_translation.rslanguage2
 msgid "Language"
 msgstr "Jazyk"
@@ -2692,10 +2684,6 @@ msgstr "Výběr jazyka"
 #: u_translation.rslast
 msgid "Last"
 msgstr ""
-
-#: u_translation.rslatinname
-msgid "Latin name"
-msgstr "Latinský název"
 
 #: u_translation.rslatitude
 msgid "Latitude"
@@ -2848,6 +2836,10 @@ msgstr "Nahrát projekt"
 #: u_translation.rslocalhorizon
 msgid "Local horizon"
 msgstr "Místní horizont"
+
+#: u_translation.rslocalizednam
+msgid "Localized name"
+msgstr ""
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
@@ -3513,6 +3505,10 @@ msgstr "Zastaralé"
 msgid "Off"
 msgstr "Vypnuto"
 
+#: u_translation.rsofficialname
+msgid "Official name"
+msgstr ""
+
 #: u_translation.rsoffset
 msgid "Offset"
 msgstr "Offset"
@@ -4004,10 +4000,6 @@ msgstr "Zpracování řádky %s"
 #: u_translation.rsproductinfo
 msgid "Product Info"
 msgstr "Informace o produktu"
-
-#: u_translation.rsprogramdata
-msgid "Program data "
-msgstr "Data programu "
 
 #: u_translation.rsprograminfor
 msgid "Program information"
