@@ -674,9 +674,9 @@ MagLabel.Items[0]:=rsName;
 MagLabel.Items[1]:=rsCommonName;
 MagLabel.Items[2]:=rsMagnitude;
 constlabel.caption:=rsConstellatio6;
-constlabel.Items[0]:=rsFullName;
+constlabel.Items[0]:=rsOfficialName;
 constlabel.Items[1]:=rsAbbreviation;
-constlabel.Items[2]:=rsLatinName;
+constlabel.Items[2]:=rsLocalizedNam;
 Showlabelall.caption:=rsDisplayTheLa;
 ShowChartInfo.caption:=rsDisplayTheCh;
 ShowTitle.Caption:=rsShowPosition;
@@ -1394,8 +1394,8 @@ begin
  else if csc.MagLabel then MagLabel.ItemIndex:=2
                       else MagLabel.itemindex:=0;
  if csc.ConstFullLabel then begin
-    if csc.ConstLatinLabel then constlabel.ItemIndex:=2
-                           else constlabel.ItemIndex:=0;
+    if csc.ConstLatinLabel then constlabel.ItemIndex:=0
+                           else constlabel.ItemIndex:=2;
   end
     else constlabel.ItemIndex:=1;
  Showlabelall.checked:=csc.Showlabelall;
@@ -1987,7 +1987,7 @@ end;
 procedure Tf_config_display.constlabelClick(Sender: TObject);
 begin
 csc.ConstFullLabel:=(constlabel.ItemIndex<>1);
-csc.ConstLatinLabel:=(constlabel.ItemIndex=2);
+csc.ConstLatinLabel:=(constlabel.ItemIndex=0);
 end;
 
 procedure Tf_config_display.CirclegridSetEditText(Sender: TObject; ACol,ARow: Integer; const Value: String);
