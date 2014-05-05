@@ -33,8 +33,8 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   InterfaceBase, LCLVersion, // version number
-  Forms, Classes, Sysutils, Dialogs, LResources, cu_catalog, cu_skychart, cu_plot,
-  cu_planet, cu_indiprotocol, cu_fits, cu_database, pu_info, pu_image,
+  Forms, Classes, Sysutils, Dialogs, LResources, cu_catalog, cu_skychart,
+  cu_plot, cu_planet, cu_indiprotocol, cu_fits, cu_database, pu_info, pu_image,
   pu_getdss, pu_detail, fu_chart, pu_calendar, pu_zoom, pu_search,
   pu_printsetup, pu_position, pu_manualtelescope, u_projection, u_constant,
   u_util, enhedit, pu_config_catalog, pu_config_system, pu_config_solsys,
@@ -49,7 +49,8 @@ uses
   bgrabitmappack, lazvo, multiframepackage, fu_config_time, fu_config_catalog,
   fu_config_chart, fu_config_display, fu_config_internet, fu_config_observatory,
   fu_config_pictures, fu_config_solsys, fu_config_system, fu_config_calendar,
-  pu_config_calendar, pu_planetinfo, pu_imglist, cu_plansat, cu_smallsat, pu_fov;
+  pu_config_calendar, pu_planetinfo, pu_imglist, cu_plansat, cu_smallsat,
+  pu_fov, pu_edittoolbar;
   
 var i : integer;
     buf, p, step : string;
@@ -138,6 +139,9 @@ begin
   step:='Create f_obslist';
   if VerboseMsg then WriteTrace(step);
   Application.CreateForm(Tf_obslist, f_obslist);
+  step:='Create f_edittoolbar';
+  if VerboseMsg then WriteTrace(step);
+  Application.CreateForm(Tf_edittoolbar, f_edittoolbar);
   step:='Main Init';
   if VerboseMsg then WriteTrace(step);
   f_main.init;
