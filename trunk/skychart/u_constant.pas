@@ -1635,6 +1635,113 @@ const
     ('cdc_location_idx2', 'cdc_location(latitude,longitude)')
     ));
 
+// Standard main toolbar
+numstandardmainbar = 37;
+standardmainbar: array[1..numstandardmainbar] of string=(
+('0'+tab+'FileNew1'),
+('1'+tab+'FileOpen1'),
+('2'+tab+'FileSaveAs1'),
+('3'+tab+'Print1'),
+('82'+tab+'ViewNightVision'),
+('-1'+tab+'Divider'),
+('4'+tab+'Cascade1'),
+('14'+tab+'TileVertical1'),
+('-1'+tab+'Divider'),
+('19'+tab+'Undo'),
+('20'+tab+'Redo'),
+('6'+tab+'zoomplus'),
+('7'+tab+'zoomminus'),
+('8'+tab+'ZoomBar'),
+('54'+tab+'MagPanel'),
+('45'+tab+'quicksearch'),
+('-1'+tab+'Divider'),
+('76'+tab+'Search1'),
+('78'+tab+'Position'),
+('46'+tab+'listobj'),
+('98'+tab+'Obslist'),
+('75'+tab+'Calendar'),
+('94'+tab+'PlanetInfo'),
+('-1'+tab+'Divider'),
+('43'+tab+'TimeDec'),
+('84'+tab+'TimeReset'),
+('44'+tab+'TimeInc'),
+('88'+tab+'Animation'),
+('45'+tab+'TimeValPanel'),
+('-1'+tab+'Divider'),
+('45'+tab+'TimeU'),
+('-1'+tab+'Divider'),
+('48'+tab+'TelescopeConnect'),
+('51'+tab+'TelescopeSync'),
+('50'+tab+'TelescopeSlew'),
+('95'+tab+'TelescopeAbortSlew'),
+('-1'+tab+'Divider'));
+
+// Standard object toolbar
+numstandardobjectbar = 32;
+standardobjectbar: array[1..numstandardobjectbar] of string=(
+('56'+tab+'ShowStars'),
+('57'+tab+'ShowNebulae'),
+('59'+tab+'ShowLines'),
+('58'+tab+'ShowPictures'),
+('89'+tab+'ShowVO'),
+('52'+tab+'ShowUobj'),
+('81'+tab+'DSSImage'),
+('77'+tab+'SetPictures'),
+('86'+tab+'BlinkImage'),
+('62'+tab+'ShowPlanets'),
+('60'+tab+'ShowAsteroids'),
+('61'+tab+'ShowComets'),
+('63'+tab+'ShowMilkyWay'),
+('25'+tab+'Grid'),
+('24'+tab+'GridEQ'),
+('91'+tab+'ShowCompass'),
+('65'+tab+'ShowConstellationLine'),
+('66'+tab+'ShowConstellationLimit'),
+('67'+tab+'ShowGalacticEquator'),
+('68'+tab+'ShowEcliptic'),
+('69'+tab+'ShowMark'),
+('90'+tab+'ScaleMode'),
+('64'+tab+'ShowLabels'),
+('83'+tab+'EditLabels'),
+('70'+tab+'ShowObjectbelowHorizon'),
+('35'+tab+'switchbackground'),
+('-1'+tab+'Divider'),
+('97'+tab+'MouseMode'),
+('79'+tab+'SyncChart'),
+('80'+tab+'Track'),
+('-1'+tab+'Divider'),
+('34'+tab+'switchstars'));
+
+// Standard left toolbar
+numstandardleftbar = 12;
+standardleftbar: array[1..numstandardleftbar] of string=(
+('85'+tab+'SetupObservatory'),
+('45'+tab+'SetupTime'),
+('10'+tab+'ConfigPopup'),
+('71'+tab+'EquatorialProjection'),
+('72'+tab+'AltAzProjection'),
+('73'+tab+'EclipticProjection'),
+('74'+tab+'GalacticProjection'),
+('15'+tab+'FlipX'),
+('17'+tab+'FlipY'),
+('21'+tab+'rot_plus'),
+('22'+tab+'rot_minus'),
+('92'+tab+'rotate180'));
+
+// Standard right toolbar
+numstandardrightbar = 7;
+standardrightbar: array[1..numstandardrightbar] of string=(
+('32'+tab+'ToolBarFOV'),
+('42'+tab+'allSky'),
+('38'+tab+'toN'),
+('39'+tab+'toS'),
+('37'+tab+'toE'),
+('40'+tab+'toW'),
+('41'+tab+'toZenith'));
+
+
+
+
 implementation
 
 { Tconf_catalog }

@@ -47,6 +47,8 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    Panel1: TPanel;
+    TimeValPanel: TPanel;
     ResetRotation: TAction;
     ToolBarFOV: TToolBar;
     tbFOV1: TToolButton;
@@ -59,6 +61,7 @@ type
     tbFOV7: TToolButton;
     tbFOV8: TToolButton;
     tbFOV9: TToolButton;
+    Divider_ToolBarMain_end: TToolButton;
     ViewChartInfo: TAction;
     ViewChartLegend: TAction;
     Animation: TAction;
@@ -95,7 +98,7 @@ type
     Obslist: TAction;
     HelpPDF: TMenuItem;
     MenuItem34: TMenuItem;
-    MenuItem39: TMenuItem;
+    MenuItemEditToolbar: TMenuItem;
     MenuObslist: TMenuItem;
     SampDownload: TDownloadDialog;
     MenuItem35: TMenuItem;
@@ -123,15 +126,6 @@ type
     ResetLanguage: TMenuItem;
     InitTimer: TTimer;
     TabControl1: TTabControl;
-    ToolButton_PlanetInfo: TToolButton;
-    TollButton_TelescopeAbortSlew: TToolButton;
-    ToolButton_MouseMode: TToolButton;
-    ToolButton_Obslist: TToolButton;
-    ToolButton_rotate180: TToolButton;
-    ToolButton_ShowCompass: TToolButton;
-    ToolButton_ScaleMode: TToolButton;
-    ToolButton_ShowUobj: TToolButton;
-    ToolButton_ShowVO: TToolButton;
     TrackTelescope1: TMenuItem;
     PrintPreview1: TMenuItem;
     TelescopeSetup1: TMenuItem;
@@ -143,7 +137,6 @@ type
     ThemeTimer: TTimer;
     AnimationTimer: TTimer;
     TimeVal: TUpDown;
-    ToolButton_Animation: TToolButton;
     ViewClock: TAction;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
@@ -185,8 +178,6 @@ type
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
     MenuItem5: TMenuItem;
-    ToolButton_divider1_3: TToolButton;
-    ToolButton_divider1_5: TToolButton;
     VariableStar1: TMenuItem;
     PopupConfig: TPopupMenu;
     SetupInternet: TAction;
@@ -197,7 +188,6 @@ type
     P1L1: TLabel;
     P0L1: TLabel;
     ReleaseNotes1: TMenuItem;
-    ToolButton_BlinkImage: TToolButton;
     ViewScrollBar1: TMenuItem;
     ResetAllLabels1: TMenuItem;
     PopupMenu1: TPopupMenu;
@@ -225,12 +215,7 @@ type
     ButtonLessNeb: TImage;
     ImageNormal: TImageList;
     Shape1: TShape;
-    ToolButton_SetupTime: TToolButton;
-    ToolButton_SetupObservatory: TToolButton;
     topmessage: TMenuItem;
-    ToolButton_divider2_2: TToolButton;
-    ToolButton_divider2_1: TToolButton;
-    ToolButton_divider1_7: TToolButton;
     MainMenu1: TMainMenu;
     File1: TMenuItem;
     FileNewItem: TMenuItem;
@@ -260,33 +245,20 @@ type
     Setup1: TMenuItem;
     Search1: TAction;
     PanelLeft: TPanel;
-    ToolBar2: TToolBar;
-    ToolButton_ConfigPopup: TToolButton;
+    ToolBarLeft: TToolBar;
     PanelRight: TPanel;
-    ToolBar3: TToolBar;
+    ToolBarRight: TToolBar;
     PanelBottom: TPanel;
     PPanels0: TPanel;
     PPanels1: TPanel;
     PanelTop: TPanel;
-    ToolBar1: TToolBar;
-    ToolButton_FileNew1: TToolButton;
-    ToolButton_FileOpen1: TToolButton;
-    ToolButton_FileSaveAs1: TToolButton;
-    ToolButton_Print1: TToolButton;
-    ToolButton_divider1_1: TToolButton;
-    ToolButton_Cascade1: TToolButton;
-    ToolButton_TileVertical1: TToolButton;
-    ToolButton_divider1_2: TToolButton;
-    ToolButton_zoomplus: TToolButton;
-    ToolButton_zoomminus: TToolButton;
+    ToolBarMain: TToolBar;
     MagPanel: TPanel;
     zoomplus: TAction;
     zoomminus: TAction;
     quicksearch: TComboBox;
     FlipX: TAction;
     FlipY: TAction;
-    ToolButton_FlipX: TToolButton;
-    ToolButton_FlipY: TToolButton;
     ViewToolsBar1: TMenuItem;
     SaveDialog: TSaveDialog;
     ViewStatusBar1: TMenuItem;
@@ -295,13 +267,9 @@ type
     SaveConfigurationNow1: TMenuItem;
     SaveConfigOnExit: TAction;
     SaveConfigurationOnExit1: TMenuItem;
-    ToolButton_Undo: TToolButton;
     Undo: TAction;
     Redo: TAction;
-    ToolButton_Redo: TToolButton;
     Autorefresh: TTimer;
-    ToolButton_rot_plus: TToolButton;
-    ToolButton_rot_minus: TToolButton;
     rot_plus: TAction;
     rot_minus: TAction;
     GridEQ: TAction;
@@ -318,27 +286,12 @@ type
     toW: TAction;
     toZenith: TAction;
     allSky: TAction;
-    ToolButton_allSky: TToolButton;
-    ToolButton_toN: TToolButton;
-    ToolButton_toS: TToolButton;
-    ToolButton_toE: TToolButton;
-    ToolButton_toW: TToolButton;
-    ToolButton_toZenith: TToolButton;
     TimeInc: TAction;
     TimeDec: TAction;
     TimeReset: TAction;
-    ToolButton_divider1_4: TToolButton;
-    ToolButton_TimeReset: TToolButton;
     TimeU: TComboBox;
-    ToolButton_TimeDec: TToolButton;
-    ToolButton_TimeInc: TToolButton;
-    ToolButton_divider1_6: TToolButton;
     listobj: TAction;
-    ToolButton_listobj: TToolButton;
     FilePrintSetup1: TAction;
-    ToolButton_TelescopeConnect: TToolButton;
-    ToolButton_TelescopeSlew: TToolButton;
-    ToolButton_TelescopeSync: TToolButton;
     TelescopeConnect: TAction;
     TelescopeSlew: TAction;
     TelescopeSync: TAction;
@@ -346,14 +299,7 @@ type
     LessStar: TAction;
     MoreNeb: TAction;
     LessNeb: TAction;
-    ToolBar4: TToolBar;
-    ToolButton_ShowStars: TToolButton;
-    ToolButton_ShowNebulae: TToolButton;
-    ToolButton_ShowPictures: TToolButton;
-    ToolButton_ShowLines: TToolButton;
-    ToolButton_ShowAsteroids: TToolButton;
-    ToolButton_ShowComets: TToolButton;
-    ToolButton_ShowPlanets: TToolButton;
+    ToolBarObj: TToolBar;
     ShowStars: TAction;
     ShowNebulae: TAction;
     ShowPictures: TAction;
@@ -362,29 +308,13 @@ type
     ShowAsteroids: TAction;
     ShowComets: TAction;
     ShowMilkyWay: TAction;
-    ToolButton_ShowMilkyWay: TToolButton;
     ShowLabels: TAction;
-    ToolButton_ShowLabels: TToolButton;
-    ToolButton_Grid: TToolButton;
-    ToolButton_GridEq: TToolButton;
     ShowConstellationLine: TAction;
     ShowConstellationLimit: TAction;
-    ToolButton_ShowConstellationLine: TToolButton;
-    ToolButton_ShowConstellationLimit: TToolButton;
-    ToolButton_ShowGalacticEquator: TToolButton;
-    ToolButton_ShowEcliptic: TToolButton;
     ShowGalacticEquator: TAction;
     ShowEcliptic: TAction;
-    ToolButton_ShowMark: TToolButton;
     ShowMark: TAction;
     ShowObjectbelowHorizon: TAction;
-    ToolButton_ShowObjectbelowHorizon: TToolButton;
-    ToolButton_switchbackground: TToolButton;
-    ToolButton_switchstars: TToolButton;
-    ToolButton_EquatorialProjection: TToolButton;
-    ToolButton_AltAzProjection: TToolButton;
-    ToolButton_EclipticProjection: TToolButton;
-    ToolButton_GalacticProjection: TToolButton;
     EquatorialProjection: TAction;
     AltAzProjection: TAction;
     EclipticProjection: TAction;
@@ -395,9 +325,7 @@ type
     RightBar1: TMenuItem;
     ObjectBar1: TMenuItem;
     N5: TMenuItem;
-    ToolButton_Calendar: TToolButton;
     Calendar: TAction;
-    ToolButton_Search1: TToolButton;
     HelpContents1: TMenuItem;
     Undo1: TMenuItem;
     Redo1: TMenuItem;
@@ -456,21 +384,13 @@ type
     Calendar1: TMenuItem;
     N6: TMenuItem;
     ShowBackgroundImage: TAction;
-    ToolButton_SetPictures: TToolButton;
-    ToolButton_Position: TToolButton;
     Position: TAction;
-    ToolButton_SyncChart: TToolButton;
     SyncChart: TAction;
     Track: TAction;
-    ToolButton_Track: TToolButton;
     ZoomBar: TAction;
-    ToolButton_ZoomBar: TToolButton;
     DSSImage: TAction;
-    ToolButton_DSSImage: TToolButton;
-    ToolButton_ViewNightVision: TToolButton;
     ImageList2: TImageList;
     NightVision1: TMenuItem;
-    Toolbutton_Editlabels: TToolButton;
     EditLabels: TAction;
     N7: TMenuItem;
     FullScreen1: TMenuItem;
@@ -516,7 +436,7 @@ type
     procedure MenuItem36Click(Sender: TObject);
     procedure MenuItem37Click(Sender: TObject);
     procedure MenuItem38Click(Sender: TObject);
-    procedure MenuItem39Click(Sender: TObject);
+    procedure MenuItemEditToolbarClick(Sender: TObject);
     procedure MouseModeExecute(Sender: TObject);
     procedure MultiFrame1CreateChild(Sender: TObject);
     procedure MultiFrame1DeleteChild(Sender: TObject);
@@ -806,6 +726,7 @@ type
     procedure ClearAndRestart;
     procedure InitializeDB(Sender: TObject);
     procedure Init;
+    procedure InitToolBar;
     Procedure InitDS2000;
     function PrepareAsteroid(jd1,jd2,step:double; msg:Tstrings):boolean;
     procedure RecomputeAsteroid;
@@ -1190,6 +1111,8 @@ begin
 InitTimer.Enabled:=False;
 if VerboseMsg then
  WriteTrace('Enter Tf_main.InitTimerTimer');
+// Init tool bar after the main form is show and resized
+InitToolBar;
 MultiFrame1.setActiveChild(0);
 // ensure a first chart is draw, even if it usually result in a double refresh on launch
 for i:=0 to MultiFrame1.ChildCount-1 do
@@ -1256,6 +1179,7 @@ try
    CopyFile(SysToUTF8(slash(appdir)+'skychart_valdereuil.ini'),SysToUTF8(Configfile));
    ReadDefault;
  end;
+// InitToolBar;
  if VerboseMsg then WriteTrace('Create forms');
  planet:=Tplanet.Create(self);
  Fits:=TFits.Create(self);
@@ -1355,17 +1279,17 @@ if VerboseMsg then
    Window1.Visible:=False;
    help1.Visible:=False;
    topmessage.Visible:=False;
-   ToolBar1.visible:=False;
-   PanelLeft.visible:=ToolBar1.visible;
-   PanelRight.visible:=ToolBar1.visible;
-   ToolBar4.visible:=ToolBar1.visible;
-   PanelBottom.visible:=ToolBar1.visible;
-   ViewToolsBar1.checked:=ToolBar1.visible;
-   MainBar1.checked:=ToolBar1.visible;
-   ObjectBar1.checked:=ToolBar1.visible;
-   LeftBar1.checked:=ToolBar1.visible;
-   RightBar1.checked:=ToolBar1.visible;
-   ViewStatusBar1.checked:=ToolBar1.visible;
+   ToolBarMain.visible:=False;
+   PanelLeft.visible:=ToolBarMain.visible;
+   PanelRight.visible:=ToolBarMain.visible;
+   ToolBarObj.visible:=ToolBarMain.visible;
+   PanelBottom.visible:=ToolBarMain.visible;
+   ViewToolsBar1.checked:=ToolBarMain.visible;
+   MainBar1.checked:=ToolBarMain.visible;
+   ObjectBar1.checked:=ToolBarMain.visible;
+   LeftBar1.checked:=ToolBarMain.visible;
+   RightBar1.checked:=ToolBarMain.visible;
+   ViewStatusBar1.checked:=ToolBarMain.visible;
    ViewTopPanel;
    FormResize(nil);
  end;
@@ -3991,8 +3915,8 @@ procedure Tf_main.ViewTopPanel;
 var i: integer;
 begin
 i:=0;
-if ToolBar1.visible then i:=i+ToolBar1.Height;
-if ToolBar4.visible then i:=i+ToolBar4.Height;
+if ToolBarMain.visible then i:=i+ToolBarMain.Height;
+if ToolBarObj.visible then i:=i+ToolBarObj.Height;
 if TabControl1.visible then i:=i+TabControl1.Height;
 if i=0 then PanelTop.visible:=false
    else begin
@@ -4003,17 +3927,17 @@ end;
 
 procedure Tf_main.ViewBarExecute(Sender: TObject);
 begin
-ToolBar1.visible:=not ViewToolsBar1.checked;
-PanelLeft.visible:=ToolBar1.visible;
-PanelRight.visible:=ToolBar1.visible;
-ToolBar4.visible:=ToolBar1.visible;
-PanelBottom.visible:=ToolBar1.visible;
-ViewToolsBar1.checked:=ToolBar1.visible;
-MainBar1.checked:=ToolBar1.visible;
-ObjectBar1.checked:=ToolBar1.visible;
-LeftBar1.checked:=ToolBar1.visible;
-RightBar1.checked:=ToolBar1.visible;
-ViewStatusBar1.checked:=ToolBar1.visible;
+ToolBarMain.visible:=not ViewToolsBar1.checked;
+PanelLeft.visible:=ToolBarMain.visible;
+PanelRight.visible:=ToolBarMain.visible;
+ToolBarObj.visible:=ToolBarMain.visible;
+PanelBottom.visible:=ToolBarMain.visible;
+ViewToolsBar1.checked:=ToolBarMain.visible;
+MainBar1.checked:=ToolBarMain.visible;
+ObjectBar1.checked:=ToolBarMain.visible;
+LeftBar1.checked:=ToolBarMain.visible;
+RightBar1.checked:=ToolBarMain.visible;
+ViewStatusBar1.checked:=ToolBarMain.visible;
 ViewTopPanel;
 if PanelBottom.visible then InitFonts;
 FormResize(sender);
@@ -4057,8 +3981,8 @@ end;
 
 procedure Tf_main.ViewMainBarExecute(Sender: TObject);
 begin
-ToolBar1.visible:=not ToolBar1.visible;
-MainBar1.checked:=ToolBar1.visible;
+ToolBarMain.visible:=not ToolBarMain.visible;
+MainBar1.checked:=ToolBarMain.visible;
 if not MainBar1.checked then ViewToolsBar1.checked:=false;
 if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
 ViewTopPanel;
@@ -4067,8 +3991,8 @@ end;
 
 procedure Tf_main.ViewObjectBarExecute(Sender: TObject);
 begin
-ToolBar4.visible:=not ToolBar4.visible;
-ObjectBar1.checked:=ToolBar4.visible;
+ToolBarObj.visible:=not ToolBarObj.visible;
+ObjectBar1.checked:=ToolBarObj.visible;
 if not ObjectBar1.checked then ViewToolsBar1.checked:=false;
 if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
 ViewTopPanel;
@@ -4209,8 +4133,8 @@ end;
 procedure Tf_main.FormResize(Sender: TObject);
 begin
 SaveState:=WindowState;
-if ToolButton_divider1_7<>nil then
-   quicksearch.Width:=min(300,max(90,(quicksearch.Width+ChildControl.left-ToolButton_divider1_7.Left-ToolButton_divider1_7.Width)));
+if Divider_ToolBarMain_end<>nil then
+   quicksearch.Width:=min(300,max(90,(quicksearch.Width+ChildControl.left-Divider_ToolBarMain_end.Left-Divider_ToolBarMain_end.Width)));
 end;
 
 procedure Tf_main.SetDefault;
@@ -5543,15 +5467,15 @@ if not (def_cfgsc.IndiTelescope or def_cfgsc.ASCOMTelescope or def_cfgsc.LX200Te
   {$endif}
 end;
 TelescopePanel.visible:=def_cfgsc.IndiTelescope;
-toolbar1.visible:=ReadBool(section,'ViewMainBar',true);
+ToolBarMain.visible:=ReadBool(section,'ViewMainBar',true);
 PanelLeft.visible:=ReadBool(section,'ViewLeftBar',true);
 PanelRight.visible:=ReadBool(section,'ViewRightBar',true);
-toolbar4.visible:=ReadBool(section,'ViewObjectBar',true);
+ToolBarObj.visible:=ReadBool(section,'ViewObjectBar',true);
 ViewScrollBar1.Checked:=ReadBool(section,'ViewScrollBar',true) and CanShowScrollbar;
 PanelBottom.visible:=ReadBool(section,'ViewStatusBar',true);
 ViewStatusBar1.checked:=PanelBottom.visible;
-MainBar1.checked:=ToolBar1.visible;
-ObjectBar1.checked:=ToolBar4.visible;
+MainBar1.checked:=ToolBarMain.visible;
+ObjectBar1.checked:=ToolBarObj.visible;
 LeftBar1.checked:=PanelLeft.visible;
 RightBar1.checked:=PanelRight.visible;
 ViewToolsBar1.checked:=(MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked);
@@ -6305,10 +6229,10 @@ WriteBool(section,'ManualTelescope',def_cfgsc.ManualTelescope);
 WriteInteger(section,'ManualTelescopeType',def_cfgsc.ManualTelescopeType);
 WriteFloat(section,'TelescopeTurnsX',def_cfgsc.TelescopeTurnsX);
 WriteFloat(section,'TelescopeTurnsY',def_cfgsc.TelescopeTurnsY);
-WriteBool(section,'ViewMainBar',toolbar1.visible);
+WriteBool(section,'ViewMainBar',ToolBarMain.visible);
 WriteBool(section,'ViewLeftBar',PanelLeft.visible);
 WriteBool(section,'ViewRightBar',PanelRight.visible);
-WriteBool(section,'ViewObjectBar',toolbar4.visible);
+WriteBool(section,'ViewObjectBar',ToolBarObj.visible);
 WriteBool(section,'ViewScrollBar',ViewScrollBar1.Checked);
 WriteBool(section,'ViewStatusBar',ViewStatusBar1.Checked);
 WriteInteger(section,'NumChart',MultiFrame1.ChildCount);
@@ -6713,7 +6637,7 @@ PrintPreview1.Caption:='&'+rsPrintPreview;
 Edit1.caption:='&'+rsEdit;
 // menu Setup
 Setup1.caption:='&'+rsSetup;
-MenuItem39.Caption:='&'+'Edit tool bar';
+MenuItemEditToolbar.Caption:='&'+'Edit tool bar';
 // menu View
 View1.caption:='&'+rsView;
 ViewToolBar1.caption:='&'+rsToolBar;
@@ -7977,10 +7901,10 @@ begin
    ActionListChart.Images:=imagelist;
    ActionListTelescope.Images:=imagelist;
    ActionListWindow.Images:=imagelist;
-   Toolbar1.Images:=imagelist;
-   Toolbar2.Images:=imagelist;
-   Toolbar3.Images:=imagelist;
-   Toolbar4.Images:=imagelist;
+   ToolBarMain.Images:=imagelist;
+   ToolBarLeft.Images:=imagelist;
+   ToolBarRight.Images:=imagelist;
+   ToolBarObj.Images:=imagelist;
    MainMenu1.Images:=imagelist;
    btn:=TPortableNetworkGraphic.Create;
    btn.LoadFromFile(iconpath+'b1.png');
@@ -8023,7 +7947,7 @@ case button of
    SetButtonImage1(ImageList2);
    end;
 end;
-ChildControl.Left:=ToolBar1.Width-ChildControl.Width;
+ChildControl.Left:=ToolBarMain.Width-ChildControl.Width;
 ToolBarFOV.font.color:=col;
 except
 end;
@@ -8338,9 +8262,11 @@ begin
      samp.SampSubscribe(cfgm.SampSubscribeCoord,cfgm.SampSubscribeImage,cfgm.SampSubscribeTable);
 end;
 
-procedure Tf_main.MenuItem39Click(Sender: TObject);
+procedure Tf_main.InitToolBar;
 var str:TStringList;
+    i:integer;
 begin
+str:=TStringList.Create;
 f_edittoolbar.Images:=ImageNormal;
 f_edittoolbar.TBOnMouseUp:=ToolButtonMouseUp;
 f_edittoolbar.ClearAction;
@@ -8353,33 +8279,39 @@ f_edittoolbar.AddAction(ActionListChart,rsChart);
 f_edittoolbar.AddAction(ActionListTelescope,rsTelescope);
 f_edittoolbar.AddAction(ActionListWindow,rsWindow);
 f_edittoolbar.ClearControl;
-f_edittoolbar.AddOtherControl(MagPanel,'Star and nebula limit','main','Groupe 1',52);
-f_edittoolbar.AddOtherControl(quicksearch,'Quick search','main','Groupe 1',76);
-f_edittoolbar.AddOtherControl(EditTimeVal,'Edit time increment','main','Groupe 1',45);
-f_edittoolbar.AddOtherControl(TimeU,'Edit time units','main','Groupe 1',45);
+f_edittoolbar.AddOtherControl(MagPanel,'Star and nebula limit','View',rsView,54);
+f_edittoolbar.AddOtherControl(quicksearch,'Search box','Edit',rsEdit,76);
+f_edittoolbar.AddOtherControl(TimeValPanel,'Edit time increment','chart',rsChart,45);
+f_edittoolbar.AddOtherControl(TimeU,'Edit time units','chart',rsChart,45);
+f_edittoolbar.AddOtherControl(ToolBarFOV,'FOV bar','chart',rsChart,32);
 f_edittoolbar.ClearToolbar;
-f_edittoolbar.DefaultToolbar:=ToolBar1.Caption;
-f_edittoolbar.AddToolbar(ToolBar1);
-f_edittoolbar.AddToolbar(ToolBar4);
-f_edittoolbar.AddToolbar(ToolBar2);
-f_edittoolbar.AddToolbar(ToolBar3);
+f_edittoolbar.DefaultToolbar:=ToolBarMain.Caption;
+f_edittoolbar.AddToolbar(ToolBarMain);
+f_edittoolbar.AddToolbar(ToolBarObj);
+f_edittoolbar.AddToolbar(ToolBarLeft);
+f_edittoolbar.AddToolbar(ToolBarRight);
 f_edittoolbar.ProcessActions;
-f_edittoolbar.LoadFromToolbar;
-f_edittoolbar.ShowModal;
-str:=TStringList.Create;
-f_edittoolbar.SaveToolbar(0,str);
-str.SaveToFile('/tmp/mainbar.txt');
-str.Clear;
-f_edittoolbar.SaveToolbar(1,str);
-str.SaveToFile('/tmp/objectbar.txt');
-str.Clear;
-f_edittoolbar.SaveToolbar(2,str);
-str.SaveToFile('/tmp/rightbar.txt');
-str.Clear;
-f_edittoolbar.SaveToolbar(3,str);
-str.SaveToFile('/tmp/leftbar.txt');
-str.Clear;
+str.clear;
+for i:=1 to numstandardmainbar do str.Add(standardmainbar[i]);
+f_edittoolbar.LoadToolbar(0,str);
+str.clear;
+for i:=1 to numstandardobjectbar do str.Add(standardobjectbar[i]);
+f_edittoolbar.LoadToolbar(1,str);
+str.clear;
+for i:=1 to numstandardleftbar do str.Add(standardleftbar[i]);
+f_edittoolbar.LoadToolbar(2,str);
+str.clear;
+for i:=1 to numstandardrightbar do str.Add(standardrightbar[i]);
+f_edittoolbar.LoadToolbar(3,str);
+f_edittoolbar.ProcessToolbar;
+f_edittoolbar.ProcessToolbar;
 str.free;
+FormResize(nil);
+end;
+
+procedure Tf_main.MenuItemEditToolbarClick(Sender: TObject);
+begin
+ f_edittoolbar.ShowModal;
 end;
 
 procedure Tf_main.ToolButtonMouseUp(Sender: TObject; Button: TMouseButton;  Shift: TShiftState; X, Y: Integer);

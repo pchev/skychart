@@ -1,7 +1,7 @@
 object f_main: Tf_main
-  Left = 349
+  Left = 511
   Height = 600
-  Top = 55
+  Top = 72
   Width = 1024
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
@@ -20,131 +20,58 @@ object f_main: Tf_main
   LCLVersion = '1.2.2.0'
   object PanelLeft: TPanel
     Left = 0
-    Height = 465
-    Top = 78
-    Width = 28
+    Height = 468
+    Top = 75
+    Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 465
-    ClientWidth = 28
+    ClientHeight = 468
+    ClientWidth = 26
     Font.Height = 10
     FullRepaint = False
     ParentFont = False
     TabOrder = 1
-    object ToolBar2: TToolBar
+    object ToolBarLeft: TToolBar
       Left = 0
-      Height = 465
+      Height = 468
       Top = 0
-      Width = 28
+      Width = 26
       Align = alClient
-      ButtonHeight = 23
+      ButtonHeight = 24
+      ButtonWidth = 24
       Caption = 'Left bar'
       EdgeBorders = []
+      EdgeInner = esNone
+      EdgeOuter = esNone
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
-      object ToolButton_SetupTime: TToolButton
-        Left = 1
-        Top = 23
-        Action = SetupTime
-        Wrap = True
-      end
-      object ToolButton_SetupObservatory: TToolButton
-        Left = 1
-        Top = 0
-        Action = SetupObservatory
-        Wrap = True
-      end
-      object ToolButton_ConfigPopup: TToolButton
-        Left = 1
-        Top = 46
-        Action = ConfigPopup
-        Wrap = True
-      end
-      object ToolButton_EquatorialProjection: TToolButton
-        Left = 1
-        Top = 69
-        Action = EquatorialProjection
-        OnMouseUp = ToolButtonMouseUp
-        Wrap = True
-      end
-      object ToolButton_AltAzProjection: TToolButton
-        Left = 1
-        Top = 92
-        Action = AltAzProjection
-        OnMouseUp = ToolButtonMouseUp
-        Wrap = True
-      end
-      object ToolButton_EclipticProjection: TToolButton
-        Left = 1
-        Top = 115
-        Action = EclipticProjection
-        OnMouseUp = ToolButtonMouseUp
-        Wrap = True
-      end
-      object ToolButton_GalacticProjection: TToolButton
-        Left = 1
-        Top = 138
-        Action = GalacticProjection
-        OnMouseUp = ToolButtonMouseUp
-        Wrap = True
-      end
-      object ToolButton_FlipX: TToolButton
-        Left = 1
-        Top = 161
-        Action = FlipX
-        Wrap = True
-      end
-      object ToolButton_FlipY: TToolButton
-        Left = 1
-        Top = 184
-        Action = FlipY
-        Wrap = True
-      end
-      object ToolButton_rotate180: TToolButton
-        Left = 1
-        Top = 253
-        Action = rotate180
-        AutoSize = True
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_rot_minus: TToolButton
-        Left = 1
-        Top = 230
-        Action = rot_minus
-        OnMouseUp = ToolButtonMouseUp
-        Wrap = True
-      end
-      object ToolButton_rot_plus: TToolButton
-        Left = 1
-        Top = 207
-        Action = rot_plus
-        OnMouseUp = ToolButtonMouseUp
-        Wrap = True
-      end
     end
   end
   object PanelRight: TPanel
-    Left = 996
-    Height = 465
-    Top = 78
-    Width = 28
+    Left = 998
+    Height = 468
+    Top = 75
+    Width = 26
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 465
-    ClientWidth = 28
+    ClientHeight = 468
+    ClientWidth = 26
     FullRepaint = False
     TabOrder = 3
-    object ToolBar3: TToolBar
+    object ToolBarRight: TToolBar
       Left = 0
-      Height = 465
+      Height = 468
       Top = 0
-      Width = 28
+      Width = 26
       Align = alClient
-      ButtonHeight = 23
+      ButtonHeight = 24
+      ButtonWidth = 24
       Caption = 'Right bar'
       EdgeBorders = []
+      EdgeInner = esNone
+      EdgeOuter = esNone
       Font.CharSet = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -10
@@ -155,119 +82,6 @@ object f_main: Tf_main
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
-      object ToolButton_allSky: TToolButton
-        Left = 1
-        Top = 242
-        Action = allSky
-        Wrap = True
-      end
-      object ToolButton_toN: TToolButton
-        Left = 1
-        Top = 265
-        Action = toN
-        Wrap = True
-      end
-      object ToolButton_toS: TToolButton
-        Left = 1
-        Top = 288
-        Action = toS
-        Wrap = True
-      end
-      object ToolButton_toE: TToolButton
-        Left = 1
-        Top = 311
-        Action = toE
-        Wrap = True
-      end
-      object ToolButton_toW: TToolButton
-        Left = 1
-        Top = 334
-        Action = toW
-        Wrap = True
-      end
-      object ToolButton_toZenith: TToolButton
-        Left = 1
-        Top = 357
-        Action = toZenith
-      end
-      object ToolBarFOV: TToolBar
-        Left = 1
-        Height = 242
-        Top = 0
-        Width = 27
-        ButtonHeight = 23
-        ButtonWidth = 28
-        Caption = 'ToolBarFOV'
-        EdgeBorders = []
-        Font.Color = clNavy
-        Font.Style = [fsBold]
-        ParentFont = False
-        ParentShowHint = False
-        ShowCaptions = True
-        ShowHint = True
-        TabOrder = 0
-        object tbFOV1: TToolButton
-          Left = 1
-          Top = 0
-          Caption = '10'''
-          OnClick = SetFOVClick
-        end
-        object tbFOV2: TToolButton
-          Tag = 1
-          Left = 1
-          Top = 23
-          OnClick = SetFOVClick
-        end
-        object tbFOV3: TToolButton
-          Tag = 2
-          Left = 1
-          Top = 46
-          OnClick = SetFOVClick
-        end
-        object tbFOV4: TToolButton
-          Tag = 3
-          Left = 1
-          Top = 69
-          OnClick = SetFOVClick
-        end
-        object tbFOV5: TToolButton
-          Tag = 4
-          Left = 1
-          Top = 92
-          OnClick = SetFOVClick
-        end
-        object tbFOV6: TToolButton
-          Tag = 5
-          Left = 1
-          Top = 115
-          OnClick = SetFOVClick
-        end
-        object tbFOV7: TToolButton
-          Tag = 6
-          Left = 1
-          Top = 138
-          OnClick = SetFOVClick
-        end
-        object tbFOV8: TToolButton
-          Tag = 7
-          Left = 1
-          Top = 161
-          OnClick = SetFOVClick
-        end
-        object tbFOV9: TToolButton
-          Tag = 8
-          Left = 1
-          Top = 184
-          OnClick = SetFOVClick
-        end
-        object tbFOV10: TToolButton
-          Tag = 9
-          Left = 1
-          Top = 207
-          Caption = '300'
-          OnClick = SetFOVClick
-        end
-      end
     end
   end
   object PanelBottom: TPanel
@@ -361,362 +175,44 @@ object f_main: Tf_main
   end
   object PanelTop: TPanel
     Left = 0
-    Height = 78
+    Height = 75
     Top = 0
     Width = 1024
     Align = alTop
     BevelOuter = bvNone
-    ClientHeight = 78
+    ClientHeight = 75
     ClientWidth = 1024
     FullRepaint = False
     TabOrder = 0
     TabStop = True
-    object ToolBar1: TToolBar
+    object ToolBarMain: TToolBar
       Left = 0
       Height = 25
       Top = 25
       Width = 1024
+      ButtonHeight = 24
+      ButtonWidth = 24
       Caption = 'Main bar'
+      EdgeBorders = [ebBottom]
+      EdgeInner = esNone
+      EdgeOuter = esNone
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
       TabStop = True
       Wrapable = False
-      object ToolButton_FileNew1: TToolButton
-        Left = 1
-        Top = 2
-        Action = FileNew1
-      end
-      object ToolButton_FileOpen1: TToolButton
-        Left = 24
-        Top = 2
-        Action = FileOpen1
-        Caption = ' '
-      end
-      object ToolButton_FileSaveAs1: TToolButton
-        Left = 47
-        Top = 2
-        Action = FileSaveAs1
-      end
-      object ToolButton_Print1: TToolButton
-        Left = 70
-        Top = 2
-        Action = Print1
-      end
-      object ToolButton_ViewNightVision: TToolButton
-        Left = 93
-        Top = 2
-        Action = ViewNightVision
-      end
-      object ToolButton_divider1_1: TToolButton
-        Left = 116
-        Top = 2
-        Width = 5
-        ImageIndex = 2
-        Style = tbsDivider
-      end
-      object ToolButton_Cascade1: TToolButton
-        Left = 121
-        Top = 2
-        Action = Cascade1
-      end
-      object ToolButton_TileVertical1: TToolButton
-        Left = 144
-        Top = 2
-        Action = TileVertical1
-      end
-      object ToolButton_divider1_2: TToolButton
-        Left = 167
-        Top = 2
-        Width = 5
-        ImageIndex = 17
-        Style = tbsDivider
-      end
-      object ToolButton_Undo: TToolButton
-        Left = 172
-        Top = 2
-        Action = Undo
-      end
-      object ToolButton_Redo: TToolButton
-        Left = 195
-        Top = 2
-        Action = Redo
-      end
-      object ToolButton_zoomplus: TToolButton
-        Left = 218
-        Top = 2
-        Action = zoomplus
-      end
-      object ToolButton_zoomminus: TToolButton
-        Left = 241
-        Top = 2
-        Action = zoomminus
-      end
-      object ToolButton_ZoomBar: TToolButton
-        Left = 264
-        Top = 2
-        Action = ZoomBar
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_Search1: TToolButton
-        Left = 406
-        Top = 2
-        Action = Search1
-      end
-      object ToolButton_Position: TToolButton
-        Left = 429
-        Top = 2
-        Action = Position
-      end
-      object ToolButton_listobj: TToolButton
-        Left = 452
-        Top = 2
-        Action = listobj
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_Calendar: TToolButton
-        Left = 498
-        Top = 2
-        Action = Calendar
-      end
-      object ToolButton_divider1_4: TToolButton
-        Left = 544
-        Top = 2
-        Width = 5
-        ImageIndex = 8
-        Style = tbsDivider
-      end
-      object ToolButton_TimeDec: TToolButton
-        Left = 549
-        Top = 2
-        Action = TimeDec
-      end
-      object ToolButton_TimeReset: TToolButton
-        Left = 572
-        Top = 2
-        Action = TimeReset
-      end
-      object ToolButton_TimeInc: TToolButton
-        Left = 595
-        Top = 2
-        Action = TimeInc
-      end
-      object ToolButton_divider1_6: TToolButton
-        Left = 778
-        Top = 2
-        Width = 5
-        ImageIndex = 45
-        Style = tbsDivider
-      end
-      object ToolButton_TelescopeConnect: TToolButton
-        Left = 783
-        Top = 2
-        Action = TelescopeConnect
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_TelescopeSlew: TToolButton
-        Left = 829
-        Top = 2
-        Action = TelescopeSlew
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_TelescopeSync: TToolButton
-        Left = 806
-        Top = 2
-        Action = TelescopeSync
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_divider1_7: TToolButton
-        Left = 875
-        Top = 2
-        Width = 5
-        Style = tbsDivider
-      end
-      object ToolButton_divider1_3: TToolButton
-        Left = 401
-        Top = 2
-        Width = 5
-        Style = tbsDivider
-      end
-      object ToolButton_divider1_5: TToolButton
-        Left = 693
-        Top = 2
-        Width = 5
-        Style = tbsDivider
-      end
-      object quicksearch: TComboBox
-        Left = 311
-        Height = 22
-        Hint = 'Search'
-        Top = 2
-        Width = 90
-        ArrowKeysTraverseList = False
-        AutoComplete = True
-        AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
-        AutoSize = False
-        DropDownCount = 15
-        ItemHeight = 0
-        OnCloseUp = quicksearchClick
-        OnDblClick = quicksearchClick
-        OnKeyDown = quicksearchKeyDown
-        TabOrder = 1
-      end
-      object MagPanel: TPanel
-        Left = 287
-        Height = 22
-        Top = 2
-        Width = 24
-        BevelOuter = bvNone
-        ClientHeight = 22
-        ClientWidth = 24
-        FullRepaint = False
-        TabOrder = 0
-        OnMouseUp = MagPanelMouseUp
-        object ButtonMoreStar: TImage
-          Left = 0
-          Height = 11
-          Hint = 'More Stars'
-          Top = 0
-          Width = 11
-          OnClick = MoreStarExecute
-          OnMouseUp = MagPanelMouseUp
-          Picture.Data = {
-            07544269746D617036050000424D360500000000000036040000280000001000
-            000010000000010008000000000000000000120B0000120B0000000000000000
-            000000000000FFBDB700FF978E00FF847B00FF968D00FFBFBD00F77B6F00F742
-            3100F7332100F7463700FF847700FFC7C700FF9F9700F74A3900F7210C00F71B
-            0700F7230E00F7534200FFAFA700FF958D00F73D2D00F71C0800F71D0900F747
-            3500FFA79E00FFADA500F7574600F7271400F71F0B00F7291600F75F5300FFB7
-            AD00FF958700F75F4F00F74E3D00F7635600FF9C94000002010020000000011C
-            030000006D00004301005C003A000061000070007000006C00005C0069000061
-            00005C0073000063000065006900006C000064005C000061000061007400005C
-            0000680054000065000065006D000073000064005C0000650000610066000075
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            00000000000000202122232400000000000000000000191A1B1C1D1E1F000000
-            0000000000001314150F1617180000000000000000000C0D0E0F101112000000
-            00000000000005060708090A0B00000000000000000000010203040500000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000
-          }
-          Transparent = True
-        end
-        object ButtonLessStar: TImage
-          Left = 12
-          Height = 11
-          Hint = 'Less Stars'
-          Top = 0
-          Width = 11
-          OnClick = LessStarExecute
-          OnMouseUp = MagPanelMouseUp
-          Picture.Data = {
-            07544269746D6170F6000000424DF60000000000000076000000280000001000
-            000010000000010004000000000000000000120B0000120B0000000000000000
-            000000000000F7675700F73B2900FF8C7F00F74F4200F7271400FF776B00FFA5
-            9C00FF7F7300FFBDB700037FFD000000000000000200003B00003D000000471D
-            1C00000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000789000
-            0000000000456000000000000012300000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000
-          }
-          Transparent = True
-        end
-        object ButtonMoreNeb: TImage
-          Left = 0
-          Height = 11
-          Hint = 'More Nebulae'
-          Top = 12
-          Width = 11
-          OnClick = MoreNebExecute
-          OnMouseUp = MagPanelMouseUp
-          Picture.Data = {
-            07544269746D6170F6000000424DF60000000000000076000000280000001000
-            000010000000010004000000000000000000120B0000120B0000000000000000
-            0000000000008456FF00561FFF004A0FFF005721FF007B4FFF009F7FFF004B0F
-            FF004204FF009473FF006F42FF004F13FF005B25FF00003B0000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            000000000000000000000000000000000000000000000000000000000A2BC500
-            0000000067888890000000000123450000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000
-          }
-          Transparent = True
-        end
-        object ButtonLessNeb: TImage
-          Left = 12
-          Height = 11
-          Hint = 'Less Nebulae'
-          Top = 12
-          Width = 11
-          OnClick = LessNebExecute
-          OnMouseUp = MagPanelMouseUp
-          Picture.Data = {
-            07544269746D6170F6000000424DF60000000000000076000000280000001000
-            000010000000010004000000000000000000120B0000120B0000000000000000
-            0000000000008C77FF00846BFF00856BFF00A796FF002B02FF008E7BFF009D8D
-            FF008F7BFF00846FFF00037FFD000000000000000200003B0000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000789000
-            0000000004555600000000000012300000000000000000000000000000000000
-            0000000000000000000000000000000000000000000000000000000000000000
-            0000
-          }
-          Transparent = True
-        end
-      end
-      object TimeU: TComboBox
-        Left = 698
-        Height = 25
-        Hint = 'Time Units'
-        Top = 2
-        Width = 80
-        AutoCompleteText = [cbactSearchAscending]
-        DropDownCount = 11
-        Font.CharSet = ANSI_CHARSET
-        ItemHeight = 0
-        ParentFont = False
-        Style = csDropDownList
-        TabOrder = 4
-      end
       object ChildControl: TPanel
         Left = 994
-        Height = 23
-        Top = 2
+        Height = 25
+        Top = 0
         Width = 30
         Align = alRight
         AutoSize = True
         BevelOuter = bvNone
-        ClientHeight = 23
+        ClientHeight = 25
         ClientWidth = 30
-        TabOrder = 5
+        TabOrder = 0
         object BtnRestoreChild: TSpeedButton
           Left = 0
           Height = 15
@@ -736,256 +232,31 @@ object f_main: Tf_main
           OnClick = BtnCloseChildClick
         end
       end
-      object TimeVal: TUpDown
-        Left = 676
-        Height = 22
-        Top = 2
-        Width = 17
-        Associate = EditTimeVal
-        Min = -999
-        Max = 999
-        Position = 1
-        TabOrder = 3
-        Thousands = False
-        Wrap = False
-        OnChangingEx = TimeValChangingEx
-      end
-      object EditTimeVal: TEdit
-        Left = 641
-        Height = 23
-        Top = 2
-        Width = 35
-        OnChange = EditTimeValChange
-        TabOrder = 2
-      end
-      object ToolButton_Animation: TToolButton
-        Left = 618
-        Top = 2
-        Action = Animation
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_PlanetInfo: TToolButton
-        Left = 521
-        Top = 2
-        Action = PlanetInfo
-      end
-      object TollButton_TelescopeAbortSlew: TToolButton
-        Left = 852
-        Top = 2
-        Action = TelescopeAbortSlew
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_Obslist: TToolButton
-        Left = 475
-        Top = 2
-        Action = Obslist
+      object Divider_ToolBarMain_end: TToolButton
+        Left = 1
+        Top = 0
+        Width = 5
+        Caption = 'Divider_ToolBarMain_end'
+        Style = tbsDivider
       end
     end
-    object ToolBar4: TToolBar
+    object ToolBarObj: TToolBar
       Left = 0
-      Height = 28
+      Height = 25
       Top = 50
       Width = 1024
       Align = alBottom
       ButtonHeight = 24
+      ButtonWidth = 24
       Caption = 'Object bar'
-      EdgeBorders = [ebTop, ebBottom]
+      EdgeBorders = [ebBottom]
+      EdgeInner = esNone
+      EdgeOuter = esNone
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
       Wrapable = False
-      object ToolButton_ShowStars: TToolButton
-        Left = 1
-        Top = 2
-        Action = ShowStars
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowNebulae: TToolButton
-        Left = 24
-        Top = 2
-        Action = ShowNebulae
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowLines: TToolButton
-        Left = 47
-        Top = 2
-        Action = ShowLines
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowPictures: TToolButton
-        Left = 70
-        Top = 2
-        Action = ShowPictures
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_DSSImage: TToolButton
-        Left = 139
-        Top = 2
-        Action = DSSImage
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_SetPictures: TToolButton
-        Left = 162
-        Top = 2
-        Action = SetPictures
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowPlanets: TToolButton
-        Left = 208
-        Top = 2
-        Action = ShowPlanets
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowAsteroids: TToolButton
-        Left = 231
-        Top = 2
-        Action = ShowAsteroids
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowComets: TToolButton
-        Left = 254
-        Top = 2
-        Action = ShowComets
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowMilkyWay: TToolButton
-        Left = 277
-        Top = 2
-        Action = ShowMilkyWay
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_Grid: TToolButton
-        Left = 300
-        Top = 2
-        Action = Grid
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_GridEq: TToolButton
-        Left = 323
-        Top = 2
-        Action = GridEQ
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowConstellationLine: TToolButton
-        Left = 369
-        Top = 2
-        Action = ShowConstellationLine
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowConstellationLimit: TToolButton
-        Left = 392
-        Top = 2
-        Action = ShowConstellationLimit
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowGalacticEquator: TToolButton
-        Left = 415
-        Top = 2
-        Action = ShowGalacticEquator
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowEcliptic: TToolButton
-        Left = 438
-        Top = 2
-        Action = ShowEcliptic
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowMark: TToolButton
-        Left = 461
-        Top = 2
-        Action = ShowMark
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowLabels: TToolButton
-        Left = 507
-        Top = 2
-        Action = ShowLabels
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object Toolbutton_Editlabels: TToolButton
-        Left = 530
-        Top = 2
-        Action = EditLabels
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowObjectbelowHorizon: TToolButton
-        Left = 553
-        Top = 2
-        Action = ShowObjectbelowHorizon
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_switchbackground: TToolButton
-        Left = 576
-        Top = 2
-        Action = switchbackground
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_SyncChart: TToolButton
-        Left = 627
-        Top = 2
-        Action = SyncChart
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_Track: TToolButton
-        Left = 650
-        Top = 2
-        Action = Track
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_switchstars: TToolButton
-        Left = 678
-        Top = 2
-        Action = switchstars
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_divider2_2: TToolButton
-        Left = 673
-        Top = 2
-        Width = 5
-        Style = tbsDivider
-      end
-      object ToolButton_divider2_1: TToolButton
-        Left = 599
-        Top = 2
-        Width = 5
-        Style = tbsDivider
-      end
-      object ToolButton_BlinkImage: TToolButton
-        Left = 185
-        Top = 2
-        Action = BlinkImage
-      end
-      object ToolButton_ShowVO: TToolButton
-        Left = 93
-        Top = 2
-        Action = ShowVO
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowUobj: TToolButton
-        Left = 116
-        Top = 2
-        Action = ShowUobj
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ScaleMode: TToolButton
-        Left = 484
-        Top = 2
-        Action = ScaleMode
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_ShowCompass: TToolButton
-        Left = 346
-        Top = 2
-        Action = ShowCompass
-        OnMouseUp = ToolButtonMouseUp
-      end
-      object ToolButton_MouseMode: TToolButton
-        Left = 604
-        Top = 2
-        Action = MouseMode
-        OnMouseUp = ToolButtonMouseUp
-      end
     end
     object TabControl1: TTabControl
       Left = 0
@@ -3645,6 +2916,292 @@ object f_main: Tf_main
       Visible = False
     end
   end
+  object Panel1: TPanel
+    Left = 472
+    Height = 96
+    Top = 424
+    Width = 328
+    ClientHeight = 96
+    ClientWidth = 328
+    TabOrder = 5
+    Visible = False
+    object MagPanel: TPanel
+      Left = 8
+      Height = 22
+      Top = 19
+      Width = 24
+      BevelOuter = bvNone
+      ClientHeight = 22
+      ClientWidth = 24
+      FullRepaint = False
+      TabOrder = 0
+      OnMouseUp = MagPanelMouseUp
+      object ButtonMoreStar: TImage
+        Left = 0
+        Height = 11
+        Hint = 'More Stars'
+        Top = 0
+        Width = 11
+        OnClick = MoreStarExecute
+        OnMouseUp = MagPanelMouseUp
+        Picture.Data = {
+          07544269746D617036050000424D360500000000000036040000280000001000
+          000010000000010008000000000000000000120B0000120B0000000000000000
+          000000000000FFBDB700FF978E00FF847B00FF968D00FFBFBD00F77B6F00F742
+          3100F7332100F7463700FF847700FFC7C700FF9F9700F74A3900F7210C00F71B
+          0700F7230E00F7534200FFAFA700FF958D00F73D2D00F71C0800F71D0900F747
+          3500FFA79E00FFADA500F7574600F7271400F71F0B00F7291600F75F5300FFB7
+          AD00FF958700F75F4F00F74E3D00F7635600FF9C94000002010020000000011C
+          030000006D00004301005C003A000061000070007000006C00005C0069000061
+          00005C0073000063000065006900006C000064005C000061000061007400005C
+          0000680054000065000065006D000073000064005C0000650000610066000075
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          00000000000000202122232400000000000000000000191A1B1C1D1E1F000000
+          0000000000001314150F1617180000000000000000000C0D0E0F101112000000
+          00000000000005060708090A0B00000000000000000000010203040500000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000
+        }
+        Transparent = True
+      end
+      object ButtonLessStar: TImage
+        Left = 12
+        Height = 11
+        Hint = 'Less Stars'
+        Top = 0
+        Width = 11
+        OnClick = LessStarExecute
+        OnMouseUp = MagPanelMouseUp
+        Picture.Data = {
+          07544269746D6170F6000000424DF60000000000000076000000280000001000
+          000010000000010004000000000000000000120B0000120B0000000000000000
+          000000000000F7675700F73B2900FF8C7F00F74F4200F7271400FF776B00FFA5
+          9C00FF7F7300FFBDB700037FFD000000000000000200003B00003D000000471D
+          1C00000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000789000
+          0000000000456000000000000012300000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000
+        }
+        Transparent = True
+      end
+      object ButtonMoreNeb: TImage
+        Left = 0
+        Height = 11
+        Hint = 'More Nebulae'
+        Top = 12
+        Width = 11
+        OnClick = MoreNebExecute
+        OnMouseUp = MagPanelMouseUp
+        Picture.Data = {
+          07544269746D6170F6000000424DF60000000000000076000000280000001000
+          000010000000010004000000000000000000120B0000120B0000000000000000
+          0000000000008456FF00561FFF004A0FFF005721FF007B4FFF009F7FFF004B0F
+          FF004204FF009473FF006F42FF004F13FF005B25FF00003B0000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          000000000000000000000000000000000000000000000000000000000A2BC500
+          0000000067888890000000000123450000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000
+        }
+        Transparent = True
+      end
+      object ButtonLessNeb: TImage
+        Left = 12
+        Height = 11
+        Hint = 'Less Nebulae'
+        Top = 12
+        Width = 11
+        OnClick = LessNebExecute
+        OnMouseUp = MagPanelMouseUp
+        Picture.Data = {
+          07544269746D6170F6000000424DF60000000000000076000000280000001000
+          000010000000010004000000000000000000120B0000120B0000000000000000
+          0000000000008C77FF00846BFF00856BFF00A796FF002B02FF008E7BFF009D8D
+          FF008F7BFF00846FFF00037FFD000000000000000200003B0000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000789000
+          0000000004555600000000000012300000000000000000000000000000000000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000
+        }
+        Transparent = True
+      end
+    end
+    object quicksearch: TComboBox
+      Left = 55
+      Height = 22
+      Hint = 'Search'
+      Top = 19
+      Width = 90
+      ArrowKeysTraverseList = False
+      AutoComplete = True
+      AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
+      AutoSize = False
+      DropDownCount = 15
+      ItemHeight = 0
+      OnCloseUp = quicksearchClick
+      OnDblClick = quicksearchClick
+      OnKeyDown = quicksearchKeyDown
+      TabOrder = 1
+      Visible = False
+    end
+    object TimeU: TComboBox
+      Left = 217
+      Height = 25
+      Hint = 'Time Units'
+      Top = 16
+      Width = 80
+      AutoCompleteText = [cbactSearchAscending]
+      DropDownCount = 11
+      Font.CharSet = ANSI_CHARSET
+      ItemHeight = 0
+      ParentFont = False
+      Style = csDropDownList
+      TabOrder = 2
+    end
+    object TimeValPanel: TPanel
+      Left = 152
+      Height = 22
+      Top = 19
+      Width = 58
+      BevelOuter = bvNone
+      ClientHeight = 22
+      ClientWidth = 58
+      TabOrder = 3
+      object TimeVal: TUpDown
+        Left = 36
+        Height = 23
+        Top = 0
+        Width = 18
+        Associate = EditTimeVal
+        Min = -999
+        Max = 999
+        Position = 1
+        TabOrder = 0
+        Thousands = False
+        Wrap = False
+        OnChangingEx = TimeValChangingEx
+      end
+      object EditTimeVal: TEdit
+        Left = 0
+        Height = 23
+        Top = 0
+        Width = 36
+        OnChange = EditTimeValChange
+        TabOrder = 1
+      end
+    end
+    object ToolBarFOV: TToolBar
+      Left = 10
+      Height = 24
+      Top = 60
+      Width = 250
+      Align = alNone
+      AutoSize = True
+      ButtonHeight = 24
+      ButtonWidth = 24
+      Caption = 'ToolBarFOV'
+      Color = clBtnFace
+      EdgeBorders = []
+      Font.Color = clNavy
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowCaptions = True
+      ShowHint = True
+      TabOrder = 4
+      object tbFOV1: TToolButton
+        Left = 1
+        Top = 0
+        Caption = '10'''
+        OnClick = SetFOVClick
+      end
+      object tbFOV2: TToolButton
+        Tag = 1
+        Left = 27
+        Top = 0
+        OnClick = SetFOVClick
+      end
+      object tbFOV3: TToolButton
+        Tag = 2
+        Left = 51
+        Top = 0
+        OnClick = SetFOVClick
+      end
+      object tbFOV4: TToolButton
+        Tag = 3
+        Left = 75
+        Top = 0
+        OnClick = SetFOVClick
+      end
+      object tbFOV5: TToolButton
+        Tag = 4
+        Left = 99
+        Top = 0
+        OnClick = SetFOVClick
+      end
+      object tbFOV6: TToolButton
+        Tag = 5
+        Left = 123
+        Top = 0
+        OnClick = SetFOVClick
+      end
+      object tbFOV7: TToolButton
+        Tag = 6
+        Left = 147
+        Top = 0
+        OnClick = SetFOVClick
+      end
+      object tbFOV8: TToolButton
+        Tag = 7
+        Left = 171
+        Top = 0
+        OnClick = SetFOVClick
+      end
+      object tbFOV9: TToolButton
+        Tag = 8
+        Left = 195
+        Top = 0
+        OnClick = SetFOVClick
+      end
+      object tbFOV10: TToolButton
+        Tag = 9
+        Left = 219
+        Top = 0
+        Caption = '300'
+        OnClick = SetFOVClick
+      end
+    end
+  end
   object MainMenu1: TMainMenu
     Images = ImageNormal
     left = 56
@@ -4220,9 +3777,9 @@ object f_main: Tf_main
     object Setup1: TMenuItem
       Caption = '&Setup'
       GroupIndex = 2
-      object MenuItem39: TMenuItem
+      object MenuItemEditToolbar: TMenuItem
         Caption = 'Edit tool bar'
-        OnClick = MenuItem39Click
+        OnClick = MenuItemEditToolbarClick
       end
       object MenuItem34: TMenuItem
         Caption = '-'
