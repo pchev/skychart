@@ -47,6 +47,20 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    ResetRotation: TAction;
+    ToolBarFOV: TToolBar;
+    tbFOV1: TToolButton;
+    tbFOV10: TToolButton;
+    tbFOV2: TToolButton;
+    tbFOV3: TToolButton;
+    tbFOV4: TToolButton;
+    tbFOV5: TToolButton;
+    tbFOV6: TToolButton;
+    tbFOV7: TToolButton;
+    tbFOV8: TToolButton;
+    tbFOV9: TToolButton;
+    ViewChartInfo: TAction;
+    ViewChartLegend: TAction;
     Animation: TAction;
     ActionListWindow: TActionList;
     ActionListTelescope: TActionList;
@@ -113,7 +127,7 @@ type
     TollButton_TelescopeAbortSlew: TToolButton;
     ToolButton_MouseMode: TToolButton;
     ToolButton_Obslist: TToolButton;
-    ToolButtonRot180: TToolButton;
+    ToolButton_rotate180: TToolButton;
     ToolButton_ShowCompass: TToolButton;
     ToolButton_ScaleMode: TToolButton;
     ToolButton_ShowUobj: TToolButton;
@@ -214,7 +228,6 @@ type
     ToolButton_SetupTime: TToolButton;
     ToolButton_SetupObservatory: TToolButton;
     topmessage: TMenuItem;
-    PanelFieldSize: TPanel;
     ToolButton_divider2_2: TToolButton;
     ToolButton_divider2_1: TToolButton;
     ToolButton_divider1_7: TToolButton;
@@ -287,8 +300,8 @@ type
     Redo: TAction;
     ToolButton_Redo: TToolButton;
     Autorefresh: TTimer;
-    ToolButtonRotP: TToolButton;
-    ToolButtonRotM: TToolButton;
+    ToolButton_rot_plus: TToolButton;
+    ToolButton_rot_minus: TToolButton;
     rot_plus: TAction;
     rot_minus: TAction;
     GridEQ: TAction;
@@ -297,7 +310,7 @@ type
     switchbackground: TAction;
     SaveImage: TAction;
     SaveImage1: TMenuItem;
-    ViewInfo: TAction;
+    ViewServerInfo: TAction;
     ViewInformation1: TMenuItem;
     toN: TAction;
     toE: TAction;
@@ -386,16 +399,6 @@ type
     Calendar: TAction;
     ToolButton_Search1: TToolButton;
     HelpContents1: TMenuItem;
-    Field1: TSpeedButton;
-    Field2: TSpeedButton;
-    Field3: TSpeedButton;
-    Field4: TSpeedButton;
-    Field5: TSpeedButton;
-    Field6: TSpeedButton;
-    Field7: TSpeedButton;
-    Field8: TSpeedButton;
-    Field9: TSpeedButton;
-    Field10: TSpeedButton;
     Undo1: TMenuItem;
     Redo1: TMenuItem;
     zoomplus1: TMenuItem;
@@ -509,8 +512,6 @@ type
     procedure MagPanelMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure Maillist1Click(Sender: TObject);
-    procedure MenuChartInfoClick(Sender: TObject);
-    procedure MenuChartLegendClick(Sender: TObject);
     procedure MenuItem35Click(Sender: TObject);
     procedure MenuItem36Click(Sender: TObject);
     procedure MenuItem37Click(Sender: TObject);
@@ -520,6 +521,7 @@ type
     procedure MultiFrame1CreateChild(Sender: TObject);
     procedure MultiFrame1DeleteChild(Sender: TObject);
     procedure PlanetInfoExecute(Sender: TObject);
+    procedure ResetRotationExecute(Sender: TObject);
     procedure rotate180Execute(Sender: TObject);
     procedure ScaleModeExecute(Sender: TObject);
     procedure SetupPicturesExecute(Sender: TObject);
@@ -528,11 +530,12 @@ type
     procedure ShowVOExecute(Sender: TObject);
     procedure TelescopeSetupExecute(Sender: TObject);
     procedure TrackTelescopeExecute(Sender: TObject);
+    procedure ViewChartInfoExecute(Sender: TObject);
+    procedure ViewChartLegendExecute(Sender: TObject);
     procedure ViewNightVisionExecute(Sender: TObject);
     procedure ObslistExecute(Sender: TObject);
     procedure PrintPreview1Click(Sender: TObject);
     procedure ResetLanguageClick(Sender: TObject);
-    procedure ResetRotClick(Sender: TObject);
     procedure SetupCalendarExecute(Sender: TObject);
     procedure TelescopeAbortSlewExecute(Sender: TObject);
     procedure NextChild1Click(Sender: TObject);
@@ -550,55 +553,9 @@ type
     procedure SetupSolSysExecute(Sender: TObject);
     procedure SetupSystemExecute(Sender: TObject);
     procedure SetupTimeExecute(Sender: TObject);
-    procedure ToolButton_TelescopeConnectMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
     procedure ThemeTimerTimer(Sender: TObject);
     procedure TimeValChangingEx(Sender: TObject; var AllowChange: Boolean;
       NewValue: SmallInt; Direction: TUpDownDirection);
-    procedure ToolButton_AnimationMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure ToolButtonRot180MouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_ZoomBarMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_DSSImageMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_listobjMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure ToolButtonRotMMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_ShowAsteroidsMouseUp(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_SetPicturesMouseUp(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_ShowCometsMouseUp(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure ToolButtonShowLineMouseUp(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_ShowLabelsMouseUp(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_ShowLinesMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_ShowMarkMouseUp(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_ShowNebulaeMouseUp(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_ShowPicturesMouseUp(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_ShowPlanetsMouseUp(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_ShowStarsMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_switchbackgroundMouseUp(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_switchstarsMouseUp(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_ShowUobjMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure ToolButton_ShowVOMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
     procedure VariableStar1Click(Sender: TObject);
     procedure View1Click(Sender: TObject);
     procedure ViewBarExecute(Sender: TObject);
@@ -628,7 +585,7 @@ type
     procedure switchstarsExecute(Sender: TObject);
     procedure switchbackgroundExecute(Sender: TObject);
     procedure SaveImageExecute(Sender: TObject);
-    procedure ViewInfoExecute(Sender: TObject);
+    procedure ViewServerInfoExecute(Sender: TObject);
     procedure toNExecute(Sender: TObject);
     procedure toEExecute(Sender: TObject);
     procedure toSExecute(Sender: TObject);
@@ -696,6 +653,7 @@ type
     procedure ViewFullScreenExecute(Sender: TObject);
     procedure SetTheme;
     procedure SetStarShape;
+    procedure ToolButtonMouseUp(Sender: TObject; Button: TMouseButton;  Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
     UniqueInstance1: TCdCUniqueInstance;
@@ -1587,7 +1545,7 @@ begin
    ExecuteFile(URL_Maillist);
 end;
 
-procedure Tf_main.MenuChartInfoClick(Sender: TObject);
+procedure Tf_main.ViewChartInfoExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowLabel[8]:=not sc.cfgsc.ShowLabel[8];
@@ -1595,7 +1553,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
 end;
 end;
 
-procedure Tf_main.MenuChartLegendClick(Sender: TObject);
+procedure Tf_main.ViewChartLegendExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowLegend:=not sc.cfgsc.ShowLegend;
@@ -2439,45 +2397,7 @@ begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do rot_minusExecute(Sender);
 end;
 
-procedure Tf_main.ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-var rot:double;
-begin
-if Button=mbLeft then begin
-  if ssCtrl in Shift then rot:=45
-  else if ssShift in Shift then rot:=1
-  else if ssMeta in Shift then rot:=180
-  else rot:=15;
-  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do rotation(rot);
-end;
-if Button=mbRight then begin
-  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-     sc.cfgsc.theta:=0;
-     Refresh;
-  end;
-end;
-end;
-
-procedure Tf_main.ToolButtonRotMMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-var rot:double;
-begin
-if Button=mbLeft then begin
-  if ssCtrl in Shift then rot:=-45
-  else if ssShift in Shift then rot:=-1
-  else if ssMeta in Shift then rot:=-180
-  else rot:=-15;
-  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do  rotation(rot);
-end;
-if Button=mbRight then begin
-  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-     sc.cfgsc.theta:=0;
-     Refresh;
-  end;
-end;
-end;
-
-procedure Tf_main.ResetRotClick(Sender: TObject);
+procedure Tf_main.ResetRotationExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.theta:=0;
@@ -2490,22 +2410,6 @@ var rot:double;
 begin
 rot:=180;
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do rotation(rot);
-end;
-
-procedure Tf_main.ToolButtonRot180MouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-var rot:double;
-begin
-if Button=mbLeft then begin
-  rot:=180;
-  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do rotation(rot);
-end;
-if Button=mbRight then begin
-  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-     sc.cfgsc.theta:=0;
-     Refresh;
-  end;
-end;
 end;
 
 procedure Tf_main.TelescopeConnectExecute(Sender: TObject);
@@ -2598,7 +2502,7 @@ end;
 procedure Tf_main.SetFOVClick(Sender: TObject);
 var f : integer;
 begin
-with Sender as TSpeedButton do f:=tag;
+with Sender as TToolButton do f:=tag;
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    SetField(deg2rad*sc.catalog.cfgshr.FieldNum[f]);
 end;
@@ -2715,12 +2619,6 @@ end else begin                   // end animation
       end;
    end;
 end;
-end;
-
-procedure Tf_main.ToolButton_AnimationMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  if Button=mbRight then SetupTimePage(2);
 end;
 
 procedure Tf_main.MouseModeExecute(Sender: TObject);
@@ -3236,6 +3134,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with (MultiFrame1.ActiveObject as T
 end;
 end;
 
+
 procedure Tf_main.PositionExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
@@ -3403,18 +3302,6 @@ begin
 PopupConfig.PopUp(mouse.cursorpos.x,mouse.cursorpos.y);
 end;
 
-procedure Tf_main.ToolButton_DSSImageMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  if Button=mbRight then SetupPicturesPage(2);
-end;
-
-procedure Tf_main.ToolButton_listobjMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  if Button=mbRight then SetupChartPage(5);
-end;
-
 procedure Tf_main.SetupCalendarPage(page:integer);
 begin
 if ConfigCalendar=nil then begin
@@ -3569,36 +3456,6 @@ begin
  activateconfig(ConfigChart.f_config_chart1.cmain,ConfigChart.f_config_chart1.csc,ConfigChart.f_config_chart1.ccat,ConfigChart.f_config_chart1.cshr,ConfigChart.f_config_chart1.cplot,nil,false);
 end;
 
-procedure Tf_main.ToolButton_ShowPlanetsMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-if Button=mbRight then SetupSolsysPage(1);
-end;
-
-procedure Tf_main.ToolButton_ShowStarsMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-if Button=mbRight then SetupCatalogPage(0);
-end;
-
-procedure Tf_main.ToolButton_ShowAsteroidsMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-if Button=mbRight then SetupSolsysPage(3);
-end;
-
-procedure Tf_main.ToolButton_SetPicturesMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-if Button=mbRight then SetupPicturesPage(1);
-end;
-
-procedure Tf_main.ToolButton_ShowCometsMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-if Button=mbRight then SetupSolsysPage(2);
-end;
-
 procedure Tf_main.SetupSolSysExecute(Sender: TObject);
 begin
  SetupSolsysPage(0);
@@ -3640,20 +3497,13 @@ begin
  activateconfig(ConfigSolsys.f_config_solsys1.cmain,ConfigSolsys.f_config_solsys1.csc,ConfigSolsys.f_config_solsys1.ccat,ConfigSolsys.f_config_solsys1.cshr,ConfigSolsys.f_config_solsys1.cplot,nil,false);
 end;
 
-procedure Tf_main.ToolButton_TelescopeConnectMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  if Button=mbRight then SetupSystemPage(2);
-end;
-
 procedure Tf_main.ThemeTimerTimer(Sender: TObject);
 begin
 ThemeTimer.Enabled:=false;
   if NightVision then begin
       if VerboseMsg then
        WriteTrace('Night vision');
-     ToolButton_ViewNightVision.Down:=NightVision;
-     NightVision1.Checked:=NightVision;
+     ViewNightVision.Checked:=NightVision;
    end;
    if NightVision or (cfgm.ThemeName<>'default')or(cfgm.ButtonStandard>1) then SetTheme;
 end;
@@ -3665,12 +3515,6 @@ if NewValue=0 then begin
   if TimeVal.Position>0 then TimeVal.Position:=-1 else TimeVal.Position:=1;
   AllowChange:=false;
 end;
-end;
-
-procedure Tf_main.ToolButton_ZoomBarMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  if Button=mbRight then SetupChartPage(1);
 end;
 
 procedure Tf_main.TelescopeSetupExecute(Sender: TObject);
@@ -3929,81 +3773,23 @@ begin
  activateconfig(ConfigCatalog.f_config_catalog1.cmain,ConfigCatalog.f_config_catalog1.csc,ConfigCatalog.f_config_catalog1.ccat,ConfigCatalog.f_config_catalog1.cshr,ConfigCatalog.f_config_catalog1.cplot,nil,false);
 end;
 
-procedure Tf_main.ToolButton_ShowLabelsMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  if Button=mbRight then SetupDisplayPage(5);
-end;
-
-procedure Tf_main.ToolButtonShowLineMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  if Button=mbRight then SetupDisplayPage(4);
-end;
-
-procedure Tf_main.ToolButton_switchstarsMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  if Button=mbRight then SetupDisplayPage(0);
-end;
-
 procedure Tf_main.ShowUobjExecute(Sender: TObject);
 begin
   if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-     sc.catalog.cfgcat.nebcatdef[uneb-BaseNeb]:=ToolButton_ShowUobj.Down;
+     ShowUobj.Checked:=not ShowUobj.Checked;
+     sc.catalog.cfgcat.nebcatdef[uneb-BaseNeb]:=ShowUobj.Checked;
      Refresh;
   end;
-end;
-
-procedure Tf_main.ToolButton_ShowUobjMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  if Button=mbRight then SetupCatalogPage(4);
 end;
 
 procedure Tf_main.ShowVOExecute(Sender: TObject);
 begin
   if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-     sc.catalog.cfgcat.starcatdef[vostar-BaseStar]:=ToolButton_ShowVO.Down;
-     sc.catalog.cfgcat.nebcatdef[voneb-BaseNeb]:=ToolButton_ShowVO.Down;
+     ShowVO.Checked:=not ShowVO.Checked;
+     sc.catalog.cfgcat.starcatdef[vostar-BaseStar]:=ShowVO.Checked;
+     sc.catalog.cfgcat.nebcatdef[voneb-BaseNeb]:=ShowVO.Checked;
      Refresh;
   end;
-end;
-
-procedure Tf_main.ToolButton_ShowVOMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  if Button=mbRight then SetupCatalogPage(3);
-end;
-
-procedure Tf_main.ToolButton_switchbackgroundMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  if Button=mbRight then SetupDisplayPage(3);
-end;
-
-procedure Tf_main.ToolButton_ShowMarkMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-if Button=mbRight then SetupDisplayPage(7);
-end;
-
-procedure Tf_main.ToolButton_ShowNebulaeMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-if Button=mbRight then SetupCatalogPage(1);
-end;
-
-procedure Tf_main.ToolButton_ShowLinesMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-if Button=mbRight then SetupDisplayPage(4);
-end;
-
-procedure Tf_main.ToolButton_ShowPicturesMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  if Button=mbRight then SetupPicturesPage(0);
 end;
 
 procedure Tf_main.SetupDisplayExecute(Sender: TObject);
@@ -6749,8 +6535,8 @@ ViewFullScreen.caption:='&'+rsFullScreen;
 ViewFullScreen.Hint:=rsFullScreen;
 ViewNightVision.caption:='&'+rsNightVision;
 ViewNightVision.hint:=rsNightVisionC;
-ViewInfo.caption:='&'+rsServerInform+Ellipsis;
-ViewInfo.Hint:=rsServerInform;
+ViewServerInfo.caption:='&'+rsServerInform+Ellipsis;
+ViewServerInfo.Hint:=rsServerInform;
 ViewClock.Caption:='&'+rsClock+Ellipsis;
 ViewClock.Hint:=rsClock;
 PlanetInfo.Caption:='&'+rsSolarSystemI;
@@ -6771,8 +6557,6 @@ BlinkImage.Caption:='&'+rsBlinkingPict;
 BlinkImage.hint:=rsBlinkingPict;
 switchbackground.caption:='&'+rsSkyBackgroun;
 switchbackground.hint:=rsSkyBackgroun;
-SetPictures.caption:='&'+rsPictures+Ellipsis;
-SetPictures.Hint:=rsPictures;
 MouseMode.Caption:=rsChangeMouseM;
 MouseMode.Hint:=rsChangeMouseM;
 ScaleMode.Caption:=rsDistanceMeas;
@@ -6792,13 +6576,10 @@ FlipY.caption:='&'+rsMirrorVertic;
 FlipY.hint:=rsMirrorVertic;
 rot_plus.caption:='&'+rsRotateRight;
 rot_plus.hint:=rsRotateRight;
-ToolButtonRotP.hint:=rsRotateRight;      // !! special action
 rot_minus.caption:='&'+rsRotateLeft;
 rot_minus.hint:=rsRotateLeft;
-ToolButtonRotM.hint:=rsRotateLeft;       // !! special action
 rotate180.Caption:='&'+rsRotateBy180D;
 rotate180.Hint:=rsRotateBy180D;
-ToolButtonRot180.Hint:=rsRotateBy180D;   // !! special action
 allSky.caption:='&'+rsShowAllSky;
 AllSky.hint:=rsShowAllSky;
 toN.caption:='&'+rsNorth;
@@ -6847,11 +6628,16 @@ ShowMark.caption:='&'+rsShowMark;
 ShowMark.hint:=rsShowMark;
 ShowLabels.caption:='&'+rsShowLabels;
 ShowLabels.hint:=rsShowLabels;
+ViewChartInfo.Caption:=rsChartInforma;
+ViewChartInfo.Hint:=rsChartInforma;
+ViewChartLegend.Caption:=rsChartLegend;
+ViewChartLegend.Hint:=rsChartLegend;
 ShowObjectbelowHorizon.caption:='&'+rsBelowTheHori;
 ShowObjectbelowHorizon.hint:=rsShowObjectBe;
 ShowBackgroundImage.caption:='&'+rsShowHideDSSI;
 ShowBackgroundImage.Hint:=rsShowHideDSSI;
-ToolButton_SetPictures.hint:=rsShowTheImage;   // !! special action
+SetPictures.Caption:='&'+rsShowTheImage;
+SetPictures.hint:=rsShowTheImage;
 MoreStar.Caption:='&'+rsMoreStars;
 MoreStar.Hint:=rsMoreStars;
 ButtonMoreStar.Hint:=rsMoreStars;  // !! special action
@@ -6873,7 +6659,7 @@ ShowUObj.Hint:=rsShowUserDefi;
 // menu Telescope
 TelescopeSetup.Caption:='&'+rsTelescopeSet+Ellipsis;
 TelescopeSetup.Hint:=rsTelescopeSet;
-telescopeConnect.caption:='&'+ToolButton_TelescopeConnect.hint+Ellipsis;
+telescopeConnect.caption:='&'+rsControlPanel+Ellipsis;
 telescopeConnect.hint:=rsControlPanel;
 TelescopePanel.caption:='&INDI '+rsControlPanel+Ellipsis;
 TelescopePanel.Hint:='INDI '+rsControlPanel;
@@ -6899,6 +6685,16 @@ TileVertical1.hint:=rsTileVertical;
 Maximize.caption:='&'+rsMaximize;
 Maximize.Hint:=rsMaximize;
 //menu Help
+
+// No menu
+TimeDec.Caption:=rsDecrementTim;
+TimeDec.hint:=rsDecrementTim;
+TimeReset.Caption:=rsNow;
+TimeReset.hint:=rsNow;
+TimeInc.Caption:=rsIncrementTim;
+TimeInc.hint:=rsIncrementTim;
+Animation.Caption:=rsAnimation;
+Animation.Hint:=rsAnimation;
 
 
 // menu without action
@@ -6940,8 +6736,6 @@ MenuItem32.Caption:=rsLabels;
 MenuStarNum.Caption:='&'+rsStarsFilter;
 MenuNebNum.Caption:='&'+rsNebulaeFilte;
 ResetRot.Caption:=rsResetRotatio;
-MenuChartInfo.Caption:=rsChartInforma;
-MenuChartLegend.Caption:=rsChartLegend;
 // menu Telescope
 telescope1.caption:='&'+rsTelescope;
 //menu Window
@@ -6977,26 +6771,22 @@ TimeU.Items.Add(rsSynodicMonth);
 TimeU.Items.Add(rsSaros);
 TimeU.ItemIndex:=0;
 TimeU.Hint:=rsTimeUnits;
-ToolButton_TimeDec.hint:=rsDecrementTim;
-ToolButton_TimeReset.hint:=rsNow;
-ToolButton_TimeInc.hint:=rsIncrementTim;
-Animation.Caption:=rsAnimation;
-Animation.Hint:=rsAnimation;
 TimeVal.Hint:=rsTime;
 // quicksearch
 quicksearch.Hint:=rsSearch;
+// FOV toolbar
+tbFOV1.Hint:=rsSetFOVTo;
+tbFOV2.Hint:=rsSetFOVTo;
+tbFOV3.Hint:=rsSetFOVTo;
+tbFOV4.Hint:=rsSetFOVTo;
+tbFOV5.Hint:=rsSetFOVTo;
+tbFOV6.Hint:=rsSetFOVTo;
+tbFOV7.Hint:=rsSetFOVTo;
+tbFOV8.Hint:=rsSetFOVTo;
+tbFOV9.Hint:=rsSetFOVTo;
+tbFOV10.Hint:=rsSetFOVTo;
 
-////////////////////
-Field1.Hint:=rsSetFOVTo;
-Field2.Hint:=rsSetFOVTo;
-Field3.Hint:=rsSetFOVTo;
-Field4.Hint:=rsSetFOVTo;
-Field5.Hint:=rsSetFOVTo;
-Field6.Hint:=rsSetFOVTo;
-Field7.Hint:=rsSetFOVTo;
-Field8.Hint:=rsSetFOVTo;
-Field9.Hint:=rsSetFOVTo;
-Field10.Hint:=rsSetFOVTo;
+// planet names
 pla[1]:=rsMercury;
 pla[2]:=rsVenus;
 pla[4]:=rsMars;
@@ -7009,6 +6799,7 @@ pla[10]:=rsSun;
 pla[11]:=rsMoon;
 pla[31]:=rsSatRing;
 pla[32]:=rsEarthShadow;
+// Help
 u_help.SetLang;
 SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpIndex);
@@ -7208,135 +6999,108 @@ if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
        ControlPanel1.Visible:=false;
        telescopeSlew1.Visible:=false;
        telescopeSync1.Visible:=false;
-       ToolButton_TelescopeSlew.Enabled:=false;
-       ToolButton_TelescopeSync.Enabled:=false;
+       TelescopeSlew.Enabled:=false;
+       TelescopeSync.Enabled:=false;
     end else begin
        ControlPanel1.Visible:=sc.cfgsc.IndiTelescope;
        telescopeSlew1.Visible:=true;
        telescopeSync1.Visible:=true;
-       ToolButton_TelescopeSlew.Enabled:=true;
-       ToolButton_TelescopeSync.Enabled:=true;
+       TelescopeSlew.Enabled:=true;
+       TelescopeSync.Enabled:=true;
     end;
-    if (abs(sc.cfgsc.theta)>(pi-secarc))and(abs(sc.cfgsc.theta)<(pi+secarc)) then ToolButtonRot180.ImageIndex:=93
-       else  ToolButtonRot180.ImageIndex:=92;
+    if (abs(sc.cfgsc.theta)>(pi-secarc))and(abs(sc.cfgsc.theta)<(pi+secarc)) then rotate180.ImageIndex:=93
+       else rotate180.ImageIndex:=92;
     Animation.Checked:=AnimationEnabled;
     TrackTelescope1.Checked:=(sc.cfgsc.TrackOn and (sc.cfgsc.TrackName=rsTelescope));
     Tf_chart(sender).TrackTelescope.Checked:=TrackTelescope1.Checked;
-    ToolButton_ShowStars.down:=sc.cfgsc.showstars;
-    ShowStars1.checked:=sc.cfgsc.showstars;
-    ToolButton_ShowNebulae.down:=sc.cfgsc.shownebulae;
-    ShowNebulae1.checked:=sc.cfgsc.shownebulae;
-    ToolButton_ShowVO.Down:=(catalog.cfgcat.starcatdef[vostar-BaseStar] or catalog.cfgcat.nebcatdef[voneb-BaseNeb]);
-    ToolButton_ShowUobj.Down:=catalog.cfgcat.nebcatdef[uneb-BaseNeb];
-    ToolButton_ShowPictures.down:=sc.cfgsc.ShowImages;
-    ShowPictures1.checked:=sc.cfgsc.ShowImages;
-    ToolButton_SetPictures.down:=sc.cfgsc.ShowImageList;
+    ShowStars.Checked:=sc.cfgsc.showstars;
+    ShowNebulae.Checked:=sc.cfgsc.shownebulae;
+    ShowVO.Checked:=(catalog.cfgcat.starcatdef[vostar-BaseStar] or catalog.cfgcat.nebcatdef[voneb-BaseNeb]);
+    ShowUobj.Checked:=catalog.cfgcat.nebcatdef[uneb-BaseNeb];
+    ShowPictures.Checked:=sc.cfgsc.ShowImages;
+    SetPictures.Checked:=sc.cfgsc.ShowImageList;
     imglist.Enabled:=sc.cfgsc.ShowImageList;
     ListImg.Enabled:=sc.cfgsc.ShowImageList;
-    ToolButton_ShowLines.down:=sc.cfgsc.ShowLine;
-    ShowLines1.checked:=sc.cfgsc.ShowLine;
-    ToolButton_ShowAsteroids.down:=sc.cfgsc.ShowAsteroid;
-    ShowAsteroids1.checked:=sc.cfgsc.ShowAsteroid;
-    ToolButton_ShowComets.down:=sc.cfgsc.ShowComet;
-    ShowComets1.checked:=sc.cfgsc.ShowComet;
-    ToolButton_ShowPlanets.down:=sc.cfgsc.ShowPlanet;
-    ShowPlanets1.checked:=sc.cfgsc.ShowPlanet;
-    ToolButton_ShowMilkyWay.down:=sc.cfgsc.ShowMilkyWay;
-    ShowMilkyWay.checked:=sc.cfgsc.ShowMilkyWay;
-    ToolButton_ShowLabels.down:=sc.cfgsc.Showlabelall;
-    Toolbutton_Editlabels.down:=sc.cfgsc.Editlabels;
+    ShowLines.Checked:=sc.cfgsc.ShowLine;
+    ShowAsteroids.Checked:=sc.cfgsc.ShowAsteroid;
+    ShowComets.Checked:=sc.cfgsc.ShowComet;
+    ShowPlanets.Checked:=sc.cfgsc.ShowPlanet;
+    ShowMilkyWay.Checked:=sc.cfgsc.ShowMilkyWay;
+    ShowLabels.Checked:=sc.cfgsc.Showlabelall;
+    Editlabels.Checked:=sc.cfgsc.Editlabels;
     ScaleMode.Checked := sc.cfgsc.ShowScale;
-    ShowLabels1.checked:=sc.cfgsc.Showlabelall;
-    MenuChartInfo.Checked:=sc.cfgsc.ShowLabel[8];
-    MenuChartLegend.Checked:=sc.cfgsc.ShowLegend;
-    ToolButton_Grid.down:=sc.cfgsc.ShowGrid;
-    Grid1.checked:=sc.cfgsc.ShowGrid;
-    ToolButton_GridEq.down:=sc.cfgsc.ShowEqGrid;
-    GridEQ1.checked:=sc.cfgsc.ShowEqGrid;
-    ToolButton_ShowCompass.Down:=sc.catalog.cfgshr.ShowCRose;
-    ToolButton_ShowConstellationLine.down:=sc.cfgsc.ShowConstl;
-    ShowConstellationLine1.checked:=sc.cfgsc.ShowConstl;
-    ToolButton_ShowConstellationLimit.down:=sc.cfgsc.ShowConstB;
-    ShowConstellationLimit1.checked:=sc.cfgsc.ShowConstB;
-    ToolButton_ShowGalacticEquator.down:=sc.cfgsc.ShowGalactic;
-    ShowGalacticEquator1.checked:=sc.cfgsc.ShowGalactic;
-    ToolButton_ShowEcliptic.down:=sc.cfgsc.ShowEcliptic;
-    ShowEcliptic1.checked:=sc.cfgsc.ShowEcliptic;
-    ToolButton_ShowMark.down:=sc.cfgsc.ShowCircle;
-    ShowMark1.checked:=sc.cfgsc.ShowCircle;
-    ToolButton_ShowObjectbelowHorizon.down:=not sc.cfgsc.horizonopaque;
-    ShowObjectbelowthehorizon1.checked:=not sc.cfgsc.horizonopaque;
+    ViewChartInfo.Checked:=sc.cfgsc.ShowLabel[8];
+    ViewChartLegend.Checked:=sc.cfgsc.ShowLegend;
+    Grid.Checked:=sc.cfgsc.ShowGrid;
+    GridEq.Checked:=sc.cfgsc.ShowEqGrid;
+    ShowCompass.Checked:=sc.catalog.cfgshr.ShowCRose;
+    ShowConstellationLine.Checked:=sc.cfgsc.ShowConstl;
+    ShowConstellationLimit.Checked:=sc.cfgsc.ShowConstB;
+    ShowGalacticEquator.Checked:=sc.cfgsc.ShowGalactic;
+    ShowEcliptic.Checked:=sc.cfgsc.ShowEcliptic;
+    ShowMark.Checked:=sc.cfgsc.ShowCircle;
+    ShowObjectbelowHorizon.Checked:=not sc.cfgsc.horizonopaque;
     switchbackground.Checked:=sc.plot.cfgplot.autoskycolor;
     if sc.cfgsc.ProjPole=AltAz then begin
-       ToolButton_ShowObjectbelowHorizon.Enabled:=true;
-       ToolButton_ShowObjectbelowHorizon.Indeterminate:=false;
+       ShowObjectbelowHorizon.Enabled:=true;
        switchbackground.Enabled:=true;
-       ToolButton_switchbackground.Enabled:=true;
-       ShowObjectbelowthehorizon1.Enabled:=true;
     end else begin
-       ToolButton_ShowObjectbelowHorizon.Enabled:=false;
-       ToolButton_ShowObjectbelowHorizon.Indeterminate:=true;
+       ShowObjectbelowHorizon.Enabled:=false;
        switchbackground.Enabled:=false;
-       ToolButton_switchbackground.Enabled:=false;
-       ShowObjectbelowthehorizon1.Enabled:=false;
     end;
     BlinkImage.Checked:=BlinkTimer.enabled;
-    ToolButton_SyncChart.down:=cfgm.SyncChart;
-    ToolButton_Track.down:=sc.cfgsc.TrackOn;
+    SyncChart.Checked:=cfgm.SyncChart;
+    Track.Checked:=sc.cfgsc.TrackOn;
     if sc.cfgsc.TrackOn then begin
-       ToolButton_Track.Hint:=rsUnlockChart;
-       MenuTrack.Caption:=rsUnlockChart;
+       Track.Hint:=rsUnlockChart;
+       Track.Caption:=rsUnlockChart;
      end else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6)
      then begin
-       ToolButton_Track.Hint:=Format(rsLockOn, [sc.cfgsc.Trackname]);
-       MenuTrack.Caption:=Format(rsLockOn, [sc.cfgsc.Trackname]);
+       Track.Hint:=Format(rsLockOn, [sc.cfgsc.Trackname]);
+       Track.Caption:=Format(rsLockOn, [sc.cfgsc.Trackname]);
      end else begin
-       ToolButton_Track.Hint:=rsNoObjectToLo;
-       MenuTrack.Caption:=rsNoObjectToLo;
+       Track.Hint:=rsNoObjectToLo;
+       Track.Caption:=rsNoObjectToLo;
     end;
     case sc.plot.cfgplot.starplot of
     0: begin switchstars.Checked:=true;  end;
     1: begin switchstars.Checked:=true;  end;
     2: begin switchstars.Checked:=false;  end;
     end;
-    ToolButton_EquatorialProjection.down:= (sc.cfgsc.projpole=Equat);
-    ToolButton_AltAzProjection.down:= (sc.cfgsc.projpole=AltAz);
-    ToolButton_EclipticProjection.down:= (sc.cfgsc.projpole=Ecl);
-    ToolButton_GalacticProjection.down:= (sc.cfgsc.projpole=Gal);
-    EquatorialCoordinate1.checked:= ToolButton_EquatorialProjection.down;
-    AltAzProjection1.checked:= ToolButton_AltAzProjection.down;
-    EclipticProjection1.checked:= ToolButton_EclipticProjection.down;
-    GalacticProjection1.checked:= ToolButton_GalacticProjection.down;
-    Field1.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[0]);
-    Field2.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[1]);
-    Field3.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[2]);
-    Field4.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[3]);
-    Field5.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[4]);
-    Field6.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[5]);
-    Field7.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[6]);
-    Field8.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[7]);
-    Field9.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[8]);
-    Field10.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[9]);
-    Field1.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[0]);
-    Field2.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[1]);
-    Field3.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[2]);
-    Field4.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[3]);
-    Field5.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[4]);
-    Field6.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[5]);
-    Field7.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[6]);
-    Field8.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[7]);
-    Field9.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[8]);
-    Field10.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[9]);
-    SetFov01.caption:=Field1.hint;
-    SetFov02.caption:=Field2.hint;
-    SetFov03.caption:=Field3.hint;
-    SetFov04.caption:=Field4.hint;
-    SetFov05.caption:=Field5.hint;
-    SetFov06.caption:=Field6.hint;
-    SetFov07.caption:=Field7.hint;
-    SetFov08.caption:=Field8.hint;
-    SetFov09.caption:=Field9.hint;
-    SetFov10.caption:=Field10.hint;
+    EquatorialProjection.Checked:= (sc.cfgsc.projpole=Equat);
+    AltAzProjection.Checked:= (sc.cfgsc.projpole=AltAz);
+    EclipticProjection.Checked:= (sc.cfgsc.projpole=Ecl);
+    GalacticProjection.Checked:= (sc.cfgsc.projpole=Gal);
+    tbFOV1.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[0]);
+    tbFOV2.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[1]);
+    tbFOV3.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[2]);
+    tbFOV4.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[3]);
+    tbFOV5.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[4]);
+    tbFOV6.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[5]);
+    tbFOV7.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[6]);
+    tbFOV8.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[7]);
+    tbFOV9.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[8]);
+    tbFOV10.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[9]);
+    tbFOV1.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[0]);
+    tbFOV2.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[1]);
+    tbFOV3.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[2]);
+    tbFOV4.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[3]);
+    tbFOV5.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[4]);
+    tbFOV6.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[5]);
+    tbFOV7.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[6]);
+    tbFOV8.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[7]);
+    tbFOV9.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[8]);
+    tbFOV10.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[9]);
+    SetFov01.caption:=tbFOV1.hint;
+    SetFov02.caption:=tbFOV2.hint;
+    SetFov03.caption:=tbFOV3.hint;
+    SetFov04.caption:=tbFOV4.hint;
+    SetFov05.caption:=tbFOV5.hint;
+    SetFov06.caption:=tbFOV6.hint;
+    SetFov07.caption:=tbFOV7.hint;
+    SetFov08.caption:=tbFOV8.hint;
+    SetFov09.caption:=tbFOV9.hint;
+    SetFov10.caption:=tbFOV10.hint;
   end;
 end;
 end;
@@ -7941,7 +7705,7 @@ begin
   NeedToInitializeDB:=true;
 end;
 
-procedure Tf_main.ViewInfoExecute(Sender: TObject);
+procedure Tf_main.ViewServerInfoExecute(Sender: TObject);
 begin
 f_info.setpage(0);
 f_info.serverinfo.Caption:=f_main.serverinfo;
@@ -8260,16 +8024,7 @@ case button of
    end;
 end;
 ChildControl.Left:=ToolBar1.Width-ChildControl.Width;
-Field1.font.color:=col;
-Field2.font.color:=col;
-Field3.font.color:=col;
-Field4.font.color:=col;
-Field5.font.color:=col;
-Field6.font.color:=col;
-Field7.font.color:=col;
-Field8.font.color:=col;
-Field9.font.color:=col;
-Field10.font.color:=col;
+ToolBarFOV.font.color:=col;
 except
 end;
 end;
@@ -8372,8 +8127,7 @@ var i: integer;
 begin
 NightVision:= not NightVision;
 SetNightVision(NightVision);
-ToolButton_ViewNightVision.Down:=NightVision;
-NightVision1.Checked:=NightVision;
+ViewNightVision.Checked:=NightVision;
 for i:=0 to MultiFrame1.ChildCount-1 do
   if MultiFrame1.Childs[i].DockedObject is Tf_chart then
     (MultiFrame1.Childs[i].DockedObject as Tf_chart).NightVision:=NightVision;
@@ -8585,8 +8339,10 @@ begin
 end;
 
 procedure Tf_main.MenuItem39Click(Sender: TObject);
+var str:TStringList;
 begin
 f_edittoolbar.Images:=ImageNormal;
+f_edittoolbar.TBOnMouseUp:=ToolButtonMouseUp;
 f_edittoolbar.ClearAction;
 f_edittoolbar.DefaultAction:=rsFile;
 f_edittoolbar.AddAction(ActionListFile,rsFile);
@@ -8604,13 +8360,131 @@ f_edittoolbar.AddOtherControl(TimeU,'Edit time units','main','Groupe 1',45);
 f_edittoolbar.ClearToolbar;
 f_edittoolbar.DefaultToolbar:=ToolBar1.Caption;
 f_edittoolbar.AddToolbar(ToolBar1);
+f_edittoolbar.AddToolbar(ToolBar4);
 f_edittoolbar.AddToolbar(ToolBar2);
 f_edittoolbar.AddToolbar(ToolBar3);
-f_edittoolbar.AddToolbar(ToolBar4);
 f_edittoolbar.ProcessActions;
 f_edittoolbar.LoadFromToolbar;
 f_edittoolbar.ShowModal;
+str:=TStringList.Create;
+f_edittoolbar.SaveToolbar(0,str);
+str.SaveToFile('/tmp/mainbar.txt');
+str.Clear;
+f_edittoolbar.SaveToolbar(1,str);
+str.SaveToFile('/tmp/objectbar.txt');
+str.Clear;
+f_edittoolbar.SaveToolbar(2,str);
+str.SaveToFile('/tmp/rightbar.txt');
+str.Clear;
+f_edittoolbar.SaveToolbar(3,str);
+str.SaveToFile('/tmp/leftbar.txt');
+str.Clear;
+str.free;
 end;
+
+procedure Tf_main.ToolButtonMouseUp(Sender: TObject; Button: TMouseButton;  Shift: TShiftState; X, Y: Integer);
+var act: string;
+begin
+if (sender is TToolButton)and(TToolButton(sender).Action<>nil ) then begin
+  act:=TToolButton(sender).Action.Name;
+  if Button=mbRight then begin
+    if act='ShowStars'          then SetupCatalogPage(0)
+    else if act='ShowNebulae'   then SetupCatalogPage(1)
+    else if act='ShowLines'     then SetupDisplayPage(4)
+    else if act='ShowPictures'  then SetupPicturesPage(0)
+    else if act='ShowVO'        then SetupCatalogPage(3)
+    else if act='ShowUobj'      then SetupCatalogPage(4)
+    else if act='DSSImage'      then SetupPicturesPage(2)
+    else if act='SetPictures'   then SetupPicturesPage(1)
+    else if act='ShowPlanets'   then SetupSolsysPage(1)
+    else if act='ShowAsteroids' then SetupSolsysPage(3)
+    else if act='ShowComets'    then SetupSolsysPage(2)
+    else if act='ShowLine'      then SetupDisplayPage(4)
+    else if act='Grid'          then SetupDisplayPage(4)
+    else if act='GridEQ'        then SetupDisplayPage(4)
+    else if act='ShowConstellationLine'   then SetupDisplayPage(4)
+    else if act='ShowConstellationLimit'  then SetupDisplayPage(4)
+    else if act='ShowGalacticEquator'     then SetupDisplayPage(4)
+    else if act='ShowEcliptic'  then SetupDisplayPage(4)
+    else if act='ShowCompass'   then SetupChartPage(4)
+    else if act='ShowMark'      then SetupDisplayPage(7)
+    else if act='ShowLabels'    then SetupDisplayPage(5)
+    else if act='EditLabels'    then PopupMenu1.PopUp
+    else if act='ShowObjectbelowHorizon'  then SetupObservatoryPage(1)
+    else if act='switchbackground'        then SetupDisplayPage(3)
+    else if act='switchstars'   then SetupDisplayPage(0)
+    else if act='ZoomBar'       then SetupChartPage(1)
+    else if act='listobj'       then SetupChartPage(5)
+    else if act='Animation'     then SetupTimePage(2)
+    else if act='TelescopeConnect'        then SetupSystemPage(2)
+    else if act='TelescopeSync'           then SetupSystemPage(2)
+    else if act='TelescopeSlew'           then SetupSystemPage(2)
+    else if act='TelescopeAbortSlew'      then SetupSystemPage(2)
+    else if act='EquatorialProjection'    then SetupChartPage(0)
+    else if act='AltAzProjection'         then SetupChartPage(0)
+    else if act='EclipticProjection'      then SetupChartPage(0)
+    else if act='GalacticProjection'      then SetupChartPage(0)
+    else if act='rot_plus'      then ResetRotationExecute(sender)
+    else if act='rot_minus'     then ResetRotationExecute(sender)
+    else if act='rotate180'     then ResetRotationExecute(sender)
+    ;
+  end;
+end;
+end;
+
+{procedure Tf_main.ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var rot:double;
+begin
+if Button=mbLeft then begin
+  if ssCtrl in Shift then rot:=45
+  else if ssShift in Shift then rot:=1
+  else if ssMeta in Shift then rot:=180
+  else rot:=15;
+  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do rotation(rot);
+end;
+if Button=mbRight then begin
+  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+     sc.cfgsc.theta:=0;
+     Refresh;
+  end;
+end;
+end;
+
+procedure Tf_main.ToolButtonRotMMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var rot:double;
+begin
+if Button=mbLeft then begin
+  if ssCtrl in Shift then rot:=-45
+  else if ssShift in Shift then rot:=-1
+  else if ssMeta in Shift then rot:=-180
+  else rot:=-15;
+  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do  rotation(rot);
+end;
+if Button=mbRight then begin
+  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+     sc.cfgsc.theta:=0;
+     Refresh;
+  end;
+end;
+end;
+
+procedure Tf_main.ToolButtonRot180MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var rot:double;
+begin
+if Button=mbLeft then begin
+  rot:=180;
+  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do rotation(rot);
+end;
+if Button=mbRight then begin
+  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+     sc.cfgsc.theta:=0;
+     Refresh;
+  end;
+end;
+end; }
 
 procedure Tf_main.UpdateSAMPmenu;
 begin
