@@ -1,0 +1,129 @@
+object f_edittoolbar: Tf_edittoolbar
+  Left = 520
+  Height = 399
+  Top = 135
+  Width = 524
+  Caption = 'f_edittoolbar'
+  ClientHeight = 399
+  ClientWidth = 524
+  OnCreate = FormCreate
+  LCLVersion = '1.2.2.0'
+  object ActionTreeView: TTreeView
+    Left = 8
+    Height = 303
+    Top = 40
+    Width = 225
+    DefaultItemHeight = 18
+    ReadOnly = True
+    ScrollBars = ssAutoBoth
+    TabOrder = 0
+    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 32
+    Top = 367
+    Width = 524
+    Align = alBottom
+    ClientHeight = 32
+    ClientWidth = 524
+    TabOrder = 1
+    object ButtonOK: TButton
+      Left = 433
+      Height = 25
+      Top = 4
+      Width = 75
+      Caption = 'OK'
+      OnClick = ButtonOKClick
+      TabOrder = 0
+    end
+    object ButtonCancel: TButton
+      Left = 296
+      Height = 25
+      Top = 4
+      Width = 75
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+  object ButtonAdd: TButton
+    Left = 247
+    Height = 25
+    Top = 93
+    Width = 33
+    Caption = '>'
+    OnClick = ButtonAddClick
+    TabOrder = 2
+  end
+  object ButtonDel: TButton
+    Left = 247
+    Height = 25
+    Top = 135
+    Width = 33
+    Caption = '<'
+    OnClick = ButtonDelClick
+    TabOrder = 3
+  end
+  object ButtonClear: TButton
+    Left = 247
+    Height = 25
+    Top = 250
+    Width = 33
+    Caption = 'X'
+    OnClick = ButtonClearClick
+    TabOrder = 4
+  end
+  object ButtonUp: TButton
+    Left = 247
+    Height = 25
+    Top = 175
+    Width = 33
+    Caption = '^'
+    OnClick = ButtonUpClick
+    TabOrder = 5
+  end
+  object ButtonDown: TButton
+    Left = 247
+    Height = 25
+    Top = 213
+    Width = 33
+    Caption = 'v'
+    OnClick = ButtonDownClick
+    TabOrder = 6
+  end
+  object ComboBox1: TComboBox
+    Left = 288
+    Height = 25
+    Top = 12
+    Width = 225
+    ItemHeight = 0
+    OnChange = ComboBox1Change
+    Style = csDropDownList
+    TabOrder = 7
+  end
+  object Label1: TLabel
+    Left = 16
+    Height = 15
+    Top = 16
+    Width = 92
+    Caption = 'Available actions'
+    ParentColor = False
+  end
+  object editbarPanel: TPanel
+    Left = 288
+    Height = 303
+    Top = 40
+    Width = 225
+    BevelOuter = bvNone
+    TabOrder = 8
+  end
+  object LabelMsg: TLabel
+    Left = 16
+    Height = 15
+    Top = 344
+    Width = 57
+    Caption = '                   '
+    ParentColor = False
+  end
+end
