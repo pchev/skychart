@@ -341,7 +341,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item21>
     </RequiredPackages>
-    <Units Count="76">
+    <Units Count="77">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -878,6 +878,14 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_fov"/>
       </Unit75>
+      <Unit76>
+        <Filename Value="pu_edittoolbar.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_edittoolbar"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pu_edittoolbar"/>
+      </Unit76>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
