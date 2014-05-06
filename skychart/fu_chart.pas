@@ -2365,9 +2365,9 @@ TrackCursorMove:=false;
 GetCoordxy(x,y,lastl,lastb,sc.cfgsc);
 lastyzoom:=y;
 case Button of
-   mbLeft  : if cmain.SimpleMove then image1.cursor:=crHandPoint
-              else if sc.cfgsc.ShowScale then  MeasureDistance(1,X,Y)
-               else ZoomBox(1,X,Y);
+   mbLeft  :  if sc.cfgsc.ShowScale then  MeasureDistance(1,X,Y)
+                else if cmain.SimpleMove then image1.cursor:=crHandPoint
+                  else ZoomBox(1,X,Y);
    mbMiddle: image1.cursor:=crHandPoint;
 end;
 if assigned(FSetFocus) then FSetFocus(Self);
@@ -2392,9 +2392,10 @@ if MovingCircle then begin
    sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true,-1);
    Image1.Invalidate;
 end else
-if (ssLeft in shift)and(not(ssShift in shift))and(not cmain.SimpleMove) then begin
+if (ssLeft in shift)and(not(ssShift in shift)) then begin
    if sc.cfgsc.ShowScale then  MeasureDistance(2,X,Y)
-               else ZoomBox(2,X,Y);
+     else if  cmain.SimpleMove then TrackCursor(X,Y)
+          else ZoomBox(2,X,Y);
 end else if ((ssMiddle in shift)and(not(ssCtrl in Shift)))or((ssLeft in shift)and(ssShift in shift))or(cmain.SimpleMove and (ssLeft in shift)) then begin
      TrackCursor(X,Y);
 end else if Shift=[ssCtrl] then begin
