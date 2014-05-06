@@ -1233,6 +1233,9 @@ var
   SampClientCoordpointAtsky,SampClientImageLoadFits,SampClientTableLoadVotable: Tstringlist;
   Xplanetrender: boolean;
   Xplanetversion: string;
+  nummainbar,numobjectbar,numleftbar,numrightbar: integer;
+  configmainbar,configobjectbar,configleftbar,configrightbar: TStringList;
+
 {$ifdef darwin}
   OpenFileCMD: string = 'open';
 {$else}
@@ -1635,109 +1638,133 @@ const
     ('cdc_location_idx2', 'cdc_location(latitude,longitude)')
     ));
 
+const
+// Minimal main toolbar
+numminimalmainbar = 18;
+minimalmainbar: array[1..numminimalmainbar] of string=(
+('89;ShowVO'),
+('52;ShowUobj'),
+('81;DSSImage'),
+('77;SetPictures'),
+('60;ShowAsteroids'),
+('61;ShowComets'),
+('69;ShowMark'),
+('71;EquatorialProjection'),
+('72;AltAzProjection'),
+('92;rotate180'),
+('90;ScaleMode'),
+('64;ShowLabels'),
+('80;Track'),
+('45;quicksearch'),
+('48;TelescopeConnect'),
+('51;TelescopeSync'),
+('50;TelescopeSlew'),
+('95;TelescopeAbortSlew'));
+
+
 // Standard main toolbar
-numstandardmainbar = 37;
+numstandardmainbar = 36;
 standardmainbar: array[1..numstandardmainbar] of string=(
-('0'+tab+'FileNew1'),
-('1'+tab+'FileOpen1'),
-('2'+tab+'FileSaveAs1'),
-('3'+tab+'Print1'),
-('82'+tab+'ViewNightVision'),
-('-1'+tab+'Divider'),
-('4'+tab+'Cascade1'),
-('14'+tab+'TileVertical1'),
-('-1'+tab+'Divider'),
-('19'+tab+'Undo'),
-('20'+tab+'Redo'),
-('6'+tab+'zoomplus'),
-('7'+tab+'zoomminus'),
-('8'+tab+'ZoomBar'),
-('54'+tab+'MagPanel'),
-('45'+tab+'quicksearch'),
-('-1'+tab+'Divider'),
-('76'+tab+'Search1'),
-('78'+tab+'Position'),
-('46'+tab+'listobj'),
-('98'+tab+'Obslist'),
-('75'+tab+'Calendar'),
-('94'+tab+'PlanetInfo'),
-('-1'+tab+'Divider'),
-('43'+tab+'TimeDec'),
-('84'+tab+'TimeReset'),
-('44'+tab+'TimeInc'),
-('88'+tab+'Animation'),
-('45'+tab+'TimeValPanel'),
-('-1'+tab+'Divider'),
-('45'+tab+'TimeU'),
-('-1'+tab+'Divider'),
-('48'+tab+'TelescopeConnect'),
-('51'+tab+'TelescopeSync'),
-('50'+tab+'TelescopeSlew'),
-('95'+tab+'TelescopeAbortSlew'),
-('-1'+tab+'Divider'));
+('0;FileNew1'),
+('1;FileOpen1'),
+('2;FileSaveAs1'),
+('3;Print1'),
+('82;ViewNightVision'),
+('-1;Divider'),
+('4;Cascade1'),
+('14;TileVertical1'),
+('-1;Divider'),
+('19;Undo'),
+('20;Redo'),
+('6;zoomplus'),
+('7;zoomminus'),
+('8;ZoomBar'),
+('54;MagPanel'),
+('45;quicksearch'),
+('-1;Divider'),
+('76;Search1'),
+('78;Position'),
+('46;listobj'),
+('98;Obslist'),
+('75;Calendar'),
+('94;PlanetInfo'),
+('-1;Divider'),
+('43;TimeDec'),
+('84;TimeReset'),
+('44;TimeInc'),
+('88;Animation'),
+('45;TimeValPanel'),
+('-1;Divider'),
+('45;TimeU'),
+('-1;Divider'),
+('48;TelescopeConnect'),
+('51;TelescopeSync'),
+('50;TelescopeSlew'),
+('95;TelescopeAbortSlew'));
 
 // Standard object toolbar
 numstandardobjectbar = 32;
 standardobjectbar: array[1..numstandardobjectbar] of string=(
-('56'+tab+'ShowStars'),
-('57'+tab+'ShowNebulae'),
-('59'+tab+'ShowLines'),
-('58'+tab+'ShowPictures'),
-('89'+tab+'ShowVO'),
-('52'+tab+'ShowUobj'),
-('81'+tab+'DSSImage'),
-('77'+tab+'SetPictures'),
-('86'+tab+'BlinkImage'),
-('62'+tab+'ShowPlanets'),
-('60'+tab+'ShowAsteroids'),
-('61'+tab+'ShowComets'),
-('63'+tab+'ShowMilkyWay'),
-('25'+tab+'Grid'),
-('24'+tab+'GridEQ'),
-('91'+tab+'ShowCompass'),
-('65'+tab+'ShowConstellationLine'),
-('66'+tab+'ShowConstellationLimit'),
-('67'+tab+'ShowGalacticEquator'),
-('68'+tab+'ShowEcliptic'),
-('69'+tab+'ShowMark'),
-('90'+tab+'ScaleMode'),
-('64'+tab+'ShowLabels'),
-('83'+tab+'EditLabels'),
-('70'+tab+'ShowObjectbelowHorizon'),
-('35'+tab+'switchbackground'),
-('-1'+tab+'Divider'),
-('97'+tab+'MouseMode'),
-('79'+tab+'SyncChart'),
-('80'+tab+'Track'),
-('-1'+tab+'Divider'),
-('34'+tab+'switchstars'));
+('56;ShowStars'),
+('57;ShowNebulae'),
+('59;ShowLines'),
+('58;ShowPictures'),
+('89;ShowVO'),
+('52;ShowUobj'),
+('81;DSSImage'),
+('77;SetPictures'),
+('86;BlinkImage'),
+('62;ShowPlanets'),
+('60;ShowAsteroids'),
+('61;ShowComets'),
+('63;ShowMilkyWay'),
+('25;Grid'),
+('24;GridEQ'),
+('91;ShowCompass'),
+('65;ShowConstellationLine'),
+('66;ShowConstellationLimit'),
+('67;ShowGalacticEquator'),
+('68;ShowEcliptic'),
+('69;ShowMark'),
+('90;ScaleMode'),
+('64;ShowLabels'),
+('83;EditLabels'),
+('70;ShowObjectbelowHorizon'),
+('35;switchbackground'),
+('-1;Divider'),
+('97;MouseMode'),
+('79;SyncChart'),
+('80;Track'),
+('-1;Divider'),
+('34;switchstars'));
 
 // Standard left toolbar
 numstandardleftbar = 12;
 standardleftbar: array[1..numstandardleftbar] of string=(
-('85'+tab+'SetupObservatory'),
-('45'+tab+'SetupTime'),
-('10'+tab+'ConfigPopup'),
-('71'+tab+'EquatorialProjection'),
-('72'+tab+'AltAzProjection'),
-('73'+tab+'EclipticProjection'),
-('74'+tab+'GalacticProjection'),
-('15'+tab+'FlipX'),
-('17'+tab+'FlipY'),
-('21'+tab+'rot_plus'),
-('22'+tab+'rot_minus'),
-('92'+tab+'rotate180'));
+('85;SetupObservatory'),
+('45;SetupTime'),
+('10;ConfigPopup'),
+('71;EquatorialProjection'),
+('72;AltAzProjection'),
+('73;EclipticProjection'),
+('74;GalacticProjection'),
+('15;FlipX'),
+('17;FlipY'),
+('21;rot_plus'),
+('22;rot_minus'),
+('92;rotate180'));
 
 // Standard right toolbar
-numstandardrightbar = 7;
+numstandardrightbar = 8;
 standardrightbar: array[1..numstandardrightbar] of string=(
-('32'+tab+'ToolBarFOV'),
-('42'+tab+'allSky'),
-('38'+tab+'toN'),
-('39'+tab+'toS'),
-('37'+tab+'toE'),
-('40'+tab+'toW'),
-('41'+tab+'toZenith'));
+('32;ToolBarFOV'),
+('-1;Divider'),
+('42;allSky'),
+('38;toN'),
+('39;toS'),
+('37;toE'),
+('40;toW'),
+('41;toZenith'));
 
 
 

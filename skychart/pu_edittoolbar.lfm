@@ -1,13 +1,13 @@
 object f_edittoolbar: Tf_edittoolbar
-  Left = 520
+  Left = 527
   Height = 399
-  Top = 135
+  Top = 121
   Width = 524
   Caption = 'f_edittoolbar'
   ClientHeight = 399
   ClientWidth = 524
   OnCreate = FormCreate
-  LCLVersion = '1.2.2.0'
+  LCLVersion = '1.2.0.3'
   object ActionTreeView: TTreeView
     Left = 8
     Height = 303
@@ -21,11 +21,11 @@ object f_edittoolbar: Tf_edittoolbar
   end
   object Panel1: TPanel
     Left = 0
-    Height = 32
-    Top = 367
+    Height = 35
+    Top = 364
     Width = 524
     Align = alBottom
-    ClientHeight = 32
+    ClientHeight = 35
     ClientWidth = 524
     TabOrder = 1
     object ButtonOK: TButton
@@ -45,6 +45,24 @@ object f_edittoolbar: Tf_edittoolbar
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 1
+    end
+    object ButtonMini: TButton
+      Left = 17
+      Height = 25
+      Top = 4
+      Width = 75
+      Caption = 'Minimal'
+      OnClick = ButtonMiniClick
+      TabOrder = 2
+    end
+    object ButtonStd: TButton
+      Left = 136
+      Height = 25
+      Top = 4
+      Width = 75
+      Caption = 'Standard'
+      OnClick = ButtonStdClick
+      TabOrder = 3
     end
   end
   object ButtonAdd: TButton
@@ -94,7 +112,7 @@ object f_edittoolbar: Tf_edittoolbar
   end
   object ComboBox1: TComboBox
     Left = 288
-    Height = 25
+    Height = 26
     Top = 12
     Width = 225
     ItemHeight = 0
@@ -104,9 +122,9 @@ object f_edittoolbar: Tf_edittoolbar
   end
   object Label1: TLabel
     Left = 16
-    Height = 15
+    Height = 16
     Top = 16
-    Width = 92
+    Width = 104
     Caption = 'Available actions'
     ParentColor = False
   end
@@ -120,7 +138,7 @@ object f_edittoolbar: Tf_edittoolbar
   end
   object LabelMsg: TLabel
     Left = 16
-    Height = 15
+    Height = 16
     Top = 344
     Width = 57
     Caption = '                   '
