@@ -61,7 +61,7 @@ type
   Tf_chart = class(TFrame)
     About2: TMenuItem;
     About1: TMenuItem;
-    imglist: TAction;
+    chart_imglist: TAction;
     AddLabel1: TMenuItem;
     DownloadDialog1: TDownloadDialog;
     CopyCoord1: TMenuItem;
@@ -128,33 +128,33 @@ type
     BlinkTimer: TTimer;
     VertScrollBar: TScrollBar;
     HorScrollBar: TScrollBar;
-    zoomplus: TAction;
-    zoomminus: TAction;
-    MoveWest: TAction;
-    MoveEast: TAction;
-    MoveNorth: TAction;
-    MoveSouth: TAction;
-    MoveNorthWest: TAction;
-    MoveNorthEast: TAction;
-    MoveSouthWest: TAction;
-    MoveSouthEast: TAction;
-    Centre: TAction;
+    chart_zoomplus: TAction;
+    chart_zoomminus: TAction;
+    chart_MoveWest: TAction;
+    chart_MoveEast: TAction;
+    chart_MoveNorth: TAction;
+    chart_MoveSouth: TAction;
+    chart_MoveNorthWest: TAction;
+    chart_MoveNorthEast: TAction;
+    chart_MoveSouthWest: TAction;
+    chart_MoveSouthEast: TAction;
+    chart_Centre: TAction;
     PopupMenu1: TPopupMenu;
     Zoom1: TMenuItem;
     Zoom2: TMenuItem;
     Centre1: TMenuItem;
-    zoomplusmove: TAction;
-    zoomminusmove: TAction;
-    FlipX: TAction;
-    FlipY: TAction;
-    Undo: TAction;
-    Redo: TAction;
-    rot_plus: TAction;
-    rot_minus: TAction;
-    GridEQ: TAction;
-    Grid: TAction;
-    switchbackground: TAction;
-    switchstar: TAction;
+    chart_zoomplusmove: TAction;
+    chart_zoomminusmove: TAction;
+    chart_FlipX: TAction;
+    chart_FlipY: TAction;
+    chart_Undo: TAction;
+    chart_Redo: TAction;
+    chart_rot_plus: TAction;
+    chart_rot_minus: TAction;
+    chart_GridEQ: TAction;
+    chart_Grid: TAction;
+    chart_switchbackground: TAction;
+    chart_switchstar: TAction;
     Telescope1: TMenuItem;
     Connect1: TMenuItem;
     Slew1: TMenuItem;
@@ -178,7 +178,7 @@ type
     procedure EyepieceMaskClick(Sender: TObject);
     procedure HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
-    procedure imglistExecute(Sender: TObject);
+    procedure chart_imglistExecute(Sender: TObject);
     procedure MenuCircleClick(Sender: TObject);
     procedure MenuAddToObsListClick(Sender: TObject);
     procedure MenuObslistFirstClick(Sender: TObject);
@@ -203,31 +203,31 @@ type
     procedure TrackTelescopeClick(Sender: TObject);
     procedure VertScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
-    procedure zoomplusExecute(Sender: TObject);
-    procedure zoomminusExecute(Sender: TObject);
-    procedure MoveWestExecute(Sender: TObject);
-    procedure MoveEastExecute(Sender: TObject);
-    procedure MoveNorthExecute(Sender: TObject);
-    procedure MoveSouthExecute(Sender: TObject);
-    procedure MoveNorthWestExecute(Sender: TObject);
-    procedure MoveNorthEastExecute(Sender: TObject);
-    procedure MoveSouthWestExecute(Sender: TObject);
-    procedure MoveSouthEastExecute(Sender: TObject);
-    procedure CentreExecute(Sender: TObject);
+    procedure chart_zoomplusExecute(Sender: TObject);
+    procedure chart_zoomminusExecute(Sender: TObject);
+    procedure chart_MoveWestExecute(Sender: TObject);
+    procedure chart_MoveEastExecute(Sender: TObject);
+    procedure chart_MoveNorthExecute(Sender: TObject);
+    procedure chart_MoveSouthExecute(Sender: TObject);
+    procedure chart_MoveNorthWestExecute(Sender: TObject);
+    procedure chart_MoveNorthEastExecute(Sender: TObject);
+    procedure chart_MoveSouthWestExecute(Sender: TObject);
+    procedure chart_MoveSouthEastExecute(Sender: TObject);
+    procedure chart_CentreExecute(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
-    procedure zoomminusmoveExecute(Sender: TObject);
-    procedure zoomplusmoveExecute(Sender: TObject);
-    procedure FlipXExecute(Sender: TObject);
-    procedure FlipYExecute(Sender: TObject);
-    procedure UndoExecute(Sender: TObject);
-    procedure RedoExecute(Sender: TObject);
-    procedure rot_plusExecute(Sender: TObject);
-    procedure rot_minusExecute(Sender: TObject);
-    procedure GridEQExecute(Sender: TObject);
-    procedure GridExecute(Sender: TObject);
+    procedure chart_zoomminusmoveExecute(Sender: TObject);
+    procedure chart_zoomplusmoveExecute(Sender: TObject);
+    procedure chart_FlipXExecute(Sender: TObject);
+    procedure chart_FlipYExecute(Sender: TObject);
+    procedure chart_UndoExecute(Sender: TObject);
+    procedure chart_RedoExecute(Sender: TObject);
+    procedure chart_rot_plusExecute(Sender: TObject);
+    procedure chart_rot_minusExecute(Sender: TObject);
+    procedure chart_GridEQExecute(Sender: TObject);
+    procedure chart_GridExecute(Sender: TObject);
     procedure identlabelClick(Sender: TObject);
-    procedure switchstarExecute(Sender: TObject);
-    procedure switchbackgroundExecute(Sender: TObject);
+    procedure chart_switchstarExecute(Sender: TObject);
+    procedure chart_switchbackgroundExecute(Sender: TObject);
     procedure Connect1Click(Sender: TObject);
     procedure Slew1Click(Sender: TObject);
     procedure Sync1Click(Sender: TObject);
@@ -483,7 +483,7 @@ Connect1.caption:=rsConnectTeles;
 AbortSlew1.caption:=rsAbortSlew;
 TrackOff1.caption:=rsUnlockChart;
 AllAtThisPos.Caption:=rsAllObjectsAt;
-imglist.Caption:=rsImageList;
+chart_imglist.Caption:=rsImageList;
 DownloadDialog1.msgDownloadFile:=rsDownloadFile;
 DownloadDialog1.msgCopyfrom:=rsCopyFrom;
 DownloadDialog1.msgtofile:=rsToFile;
@@ -783,7 +783,7 @@ SetScrollBar;
 if VerboseMsg then WriteTrace('Chart '+sc.cfgsc.chartname+': Refresh end');
 end;
 
-procedure Tf_chart.UndoExecute(Sender: TObject);
+procedure Tf_chart.chart_UndoExecute(Sender: TObject);
 var i,j : integer;
 begin
 if locked then exit;
@@ -807,7 +807,7 @@ if (i<=validundo)and(i<>lastundo)and((i<lastundo)or(i>=j)) then begin
 end;
 end;
 
-procedure Tf_chart.RedoExecute(Sender: TObject);
+procedure Tf_chart.chart_RedoExecute(Sender: TObject);
 var i,j : integer;
 begin
 if locked then exit;
@@ -1457,12 +1457,12 @@ if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo,self);
 if sc.cfgsc.FindOk and assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,false,nil,sc.cfgsc.FindDesc2);
 end;
 
-procedure Tf_chart.FlipxExecute(Sender: TObject);
+procedure Tf_chart.chart_FlipXExecute(Sender: TObject);
 begin
 if VerboseMsg then
  WriteTrace(caption+' FlipxExecute');
  sc.cfgsc.FlipX:=-sc.cfgsc.FlipX;
- if (sc.cfgsc.FlipX<0)and(sc.cfgsc.Flipy<0) then begin // flipx+y=rotation
+ if (sc.cfgsc.FlipX<0)and(sc.cfgsc.Flipy<0) then begin // chart_FlipX+y=rotation
    sc.cfgsc.FlipX:=1;
    sc.cfgsc.FlipY:=1;
    rotation(180);
@@ -1471,12 +1471,12 @@ if VerboseMsg then
  Refresh;
 end;
 
-procedure Tf_chart.FlipyExecute(Sender: TObject);
+procedure Tf_chart.chart_FlipYExecute(Sender: TObject);
 begin
 if VerboseMsg then
  WriteTrace(caption+' FlipyExecute');
  sc.cfgsc.FlipY:=-sc.cfgsc.FlipY;
-if (sc.cfgsc.FlipX<0)and(sc.cfgsc.Flipy<0) then begin // flipx+y=rotation
+if (sc.cfgsc.FlipX<0)and(sc.cfgsc.Flipy<0) then begin // chart_FlipX+y=rotation
   sc.cfgsc.FlipX:=1;
   sc.cfgsc.FlipY:=1;
   rotation(180);
@@ -1578,12 +1578,12 @@ if VerboseMsg then
  Refresh;
 end;
 
-procedure Tf_chart.rot_plusExecute(Sender: TObject);
+procedure Tf_chart.chart_rot_plusExecute(Sender: TObject);
 begin
  rotation(15);
 end;
 
-procedure Tf_chart.rot_minusExecute(Sender: TObject);
+procedure Tf_chart.chart_rot_minusExecute(Sender: TObject);
 begin
  rotation(-15);
 end;
@@ -1594,7 +1594,7 @@ begin
    Refresh;
 end;
 
-procedure Tf_chart.GridEQExecute(Sender: TObject);
+procedure Tf_chart.chart_GridEQExecute(Sender: TObject);
 begin
 if VerboseMsg then
  WriteTrace(caption+' GridEQExecute');
@@ -1602,7 +1602,7 @@ if VerboseMsg then
  Refresh;
 end;
 
-procedure Tf_chart.GridExecute(Sender: TObject);
+procedure Tf_chart.chart_GridExecute(Sender: TObject);
 begin
 if VerboseMsg then
  WriteTrace(caption+' GridExecute');
@@ -1612,7 +1612,7 @@ if VerboseMsg then
  Refresh;
 end;
 
-procedure Tf_chart.zoomplusExecute(Sender: TObject);
+procedure Tf_chart.chart_zoomplusExecute(Sender: TObject);
 begin
 if VerboseMsg then
  WriteTrace(caption+' zoomplusExecute');
@@ -1620,7 +1620,7 @@ sc.zoom(zoomfactor);
 Refresh;
 end;
 
-procedure Tf_chart.zoomminusExecute(Sender: TObject);
+procedure Tf_chart.chart_zoomminusExecute(Sender: TObject);
 begin
 if VerboseMsg then
  WriteTrace(caption+' zoomminusExecute');
@@ -1628,7 +1628,7 @@ sc.zoom(1/zoomfactor);
 Refresh;
 end;
 
-procedure Tf_chart.zoomplusmoveExecute(Sender: TObject);
+procedure Tf_chart.chart_zoomplusmoveExecute(Sender: TObject);
 begin
 if VerboseMsg then
  WriteTrace(caption+' zoomplusmoveExecute');
@@ -1641,7 +1641,7 @@ sc.cfgsc.TrackOn:=false;
 Refresh;
 end;
 
-procedure Tf_chart.zoomminusmoveExecute(Sender: TObject);
+procedure Tf_chart.chart_zoomminusmoveExecute(Sender: TObject);
 begin
 if VerboseMsg then
  WriteTrace(caption+' zoomminusmoveExecute');
@@ -1654,7 +1654,7 @@ sc.cfgsc.TrackOn:=false;
 Refresh;
 end;
 
-procedure Tf_chart.MoveWestExecute(Sender: TObject);
+procedure Tf_chart.chart_MoveWestExecute(Sender: TObject);
 begin
 if VerboseMsg then
  WriteTrace(caption+' MoveWestExecute');
@@ -1662,7 +1662,7 @@ if VerboseMsg then
  Refresh;
 end;
 
-procedure Tf_chart.MoveEastExecute(Sender: TObject);
+procedure Tf_chart.chart_MoveEastExecute(Sender: TObject);
 begin
 if VerboseMsg then
  WriteTrace(caption+' MoveEastExecute');
@@ -1670,7 +1670,7 @@ if VerboseMsg then
  Refresh;
 end;
 
-procedure Tf_chart.MoveNorthExecute(Sender: TObject);
+procedure Tf_chart.chart_MoveNorthExecute(Sender: TObject);
 begin
 if VerboseMsg then
  WriteTrace(caption+' MoveNorthExecute');
@@ -1678,7 +1678,7 @@ if VerboseMsg then
  Refresh;
 end;
 
-procedure Tf_chart.MoveSouthExecute(Sender: TObject);
+procedure Tf_chart.chart_MoveSouthExecute(Sender: TObject);
 begin
  sc.MoveChart(-1,0,movefactor);
 if VerboseMsg then
@@ -1686,7 +1686,7 @@ if VerboseMsg then
  Refresh;
 end;
 
-procedure Tf_chart.MoveNorthWestExecute(Sender: TObject);
+procedure Tf_chart.chart_MoveNorthWestExecute(Sender: TObject);
 begin
  sc.MoveChart(1,-1,movefactor);
 if VerboseMsg then
@@ -1694,7 +1694,7 @@ if VerboseMsg then
  Refresh;
 end;
 
-procedure Tf_chart.MoveNorthEastExecute(Sender: TObject);
+procedure Tf_chart.chart_MoveNorthEastExecute(Sender: TObject);
 begin
  sc.MoveChart(1,1,movefactor);
 if VerboseMsg then
@@ -1702,7 +1702,7 @@ if VerboseMsg then
  Refresh;
 end;
 
-procedure Tf_chart.MoveSouthWestExecute(Sender: TObject);
+procedure Tf_chart.chart_MoveSouthWestExecute(Sender: TObject);
 begin
  sc.MoveChart(-1,-1,movefactor);
 if VerboseMsg then
@@ -1710,7 +1710,7 @@ if VerboseMsg then
  Refresh;
 end;
 
-procedure Tf_chart.MoveSouthEastExecute(Sender: TObject);
+procedure Tf_chart.chart_MoveSouthEastExecute(Sender: TObject);
 begin
  sc.MoveChart(-1,1,movefactor);
 if VerboseMsg then
@@ -1747,17 +1747,17 @@ keyrepeat:=(abs(now-KeyPressTime)*secday<0.1);
 if (key>=VK_NUMPAD0)and(key<=VK_NUMPAD9) then key:=key-(VK_NUMPAD0-VK_0);
 // special keys handling
 case key of
-VK_PRIOR      : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveNorthWest.execute;RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
-VK_NEXT       : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveSouthWest.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
-VK_END        : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveSouthEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
-VK_HOME       : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveNorthEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
-VK_LEFT       : if (movecam or moveguide) then MoveCamera(5) else begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
-VK_UP         : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveNorth.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
-VK_RIGHT      : if (movecam or moveguide) then MoveCamera(-5) else begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveWest.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
-VK_DOWN       : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; MoveSouth.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
+VK_PRIOR      : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; chart_MoveNorthWest.execute;RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
+VK_NEXT       : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; chart_MoveSouthWest.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
+VK_END        : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; chart_MoveSouthEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
+VK_HOME       : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; chart_MoveNorthEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
+VK_LEFT       : if (movecam or moveguide) then MoveCamera(5) else begin disablescroll; sc.cfgsc.Quick:=keyrepeat; chart_MoveEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
+VK_UP         : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; chart_MoveNorth.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
+VK_RIGHT      : if (movecam or moveguide) then MoveCamera(-5) else begin disablescroll; sc.cfgsc.Quick:=keyrepeat; chart_MoveWest.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
+VK_DOWN       : begin disablescroll; sc.cfgsc.Quick:=keyrepeat; chart_MoveSouth.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=keyrepeat;end;
 VK_DELETE     : Cleanupmap1Click(nil);
-VK_ADD,VK_OEM_PLUS        : Zoomplus.execute;
-VK_SUBTRACT,VK_OEM_MINUS  : Zoomminus.execute;
+VK_ADD,VK_OEM_PLUS        : chart_zoomplus.execute;
+VK_SUBTRACT,VK_OEM_MINUS  : chart_zoomminus.execute;
 else begin
   if (Shift=[ssCtrl])and (key<>VK_CONTROL) then begin
     // Ctrl + key handling
@@ -1986,7 +1986,7 @@ if VerboseMsg then
   Refresh;
 end;
 
-procedure Tf_chart.CentreExecute(Sender: TObject);
+procedure Tf_chart.chart_CentreExecute(Sender: TObject);
 begin
   if sc.cfgsc.FindName>'' then
       sc.MovetoRaDec(sc.cfgsc.FindRA,sc.cfgsc.FindDec)
@@ -3218,7 +3218,7 @@ end;
 result:=txt+html_br+htms_h;
 end;
 
-procedure Tf_chart.switchstarExecute(Sender: TObject);
+procedure Tf_chart.chart_switchstarExecute(Sender: TObject);
 begin
 if VerboseMsg then
  WriteTrace(caption+' switchstarExecute');
@@ -3230,7 +3230,7 @@ sc.cfgsc.FillMilkyWay:=(sc.plot.cfgplot.nebplot=1);
 Refresh;
 end;
 
-procedure Tf_chart.switchbackgroundExecute(Sender: TObject);
+procedure Tf_chart.chart_switchbackgroundExecute(Sender: TObject);
 
 begin
 if VerboseMsg then
@@ -4150,7 +4150,7 @@ end else
   result:=msgFailed;
 end;
 
-procedure Tf_chart.imglistExecute(Sender: TObject);
+procedure Tf_chart.chart_imglistExecute(Sender: TObject);
 var i: integer;
 begin
  if f_imglist=nil then begin
@@ -4553,8 +4553,8 @@ case n of
  21 : result:=cmd_SetStarMode(strtointdef(arg[1],-1));
  22 : result:=cmd_SetNebMode(strtointdef(arg[1],-1));
  23 : result:=cmd_SetSkyMode(arg[1]);
- 24 : UndoExecute(self);
- 25 : RedoExecute(self);
+ 24 : chart_UndoExecute(self);
+ 25 : chart_RedoExecute(self);
  26 : result:=cmd_SetProjection(arg[1]);
  27 : result:=cmd_SetFov(arg[1]);
  28 : result:=cmd_SetRa(arg[1]);
@@ -4595,8 +4595,8 @@ case n of
  63 : cmd_LessStar;
  64 : cmd_MoreNeb;
  65 : cmd_LessNeb;
- 66 : GridEQExecute(Self);
- 67 : GridExecute(Self);
+ 66 : chart_GridEQExecute(Self);
+ 67 : chart_GridExecute(Self);
  68 : begin result:=cmd_SwitchGridNum; Refresh; end;
  69 : begin result:=cmd_SwitchConstL; Refresh; end;
  70 : begin result:=cmd_SwitchConstB; Refresh; end;

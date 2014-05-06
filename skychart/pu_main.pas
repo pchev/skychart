@@ -1492,7 +1492,7 @@ end;
 
 procedure Tf_main.ListImgExecute(Sender: TObject);
 begin
-  with MultiFrame1.ActiveObject as Tf_chart do imglist.execute;
+  with MultiFrame1.ActiveObject as Tf_chart do chart_imglist.execute;
 end;
 
 procedure Tf_main.ObslistExecute(Sender: TObject);
@@ -2264,22 +2264,22 @@ end;
 
 procedure Tf_main.UndoExecute(Sender: TObject);
 begin
-if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do UndoExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_UndoExecute(Sender);
 end;
 
 procedure Tf_main.RedoExecute(Sender: TObject);
 begin
-if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do RedoExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_RedoExecute(Sender);
 end;
 
 procedure Tf_main.zoomplusExecute(Sender: TObject);
 begin
-if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do zoomplusExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_zoomplusExecute(Sender);
 end;
 
 procedure Tf_main.zoomminusExecute(Sender: TObject);
 begin
-if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do zoomminusExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_zoomminusExecute(Sender);
 end;
 
 
@@ -2301,17 +2301,17 @@ end;
 
 procedure Tf_main.FlipxExecute(Sender: TObject);
 begin
-if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do FlipxExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_FlipxExecute(Sender);
 end;
 
 procedure Tf_main.FlipyExecute(Sender: TObject);
 begin
-if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do FlipyExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_FlipyExecute(Sender);
 end;
 
 procedure Tf_main.rot_plusExecute(Sender: TObject);
 begin
-if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do rot_plusExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_rot_plusExecute(Sender);
 end;
 
 procedure Tf_main.VariableStar1Click(Sender: TObject);
@@ -2326,7 +2326,7 @@ end;
 
 procedure Tf_main.rot_minusExecute(Sender: TObject);
 begin
-if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do rot_minusExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_rot_minusExecute(Sender);
 end;
 
 procedure Tf_main.ResetRotationExecute(Sender: TObject);
@@ -2407,12 +2407,12 @@ end;
 
 procedure Tf_main.GridEQExecute(Sender: TObject);
 begin
-if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do GridEQExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_GridEQExecute(Sender);
 end;
 
 procedure Tf_main.GridExecute(Sender: TObject);
 begin
-if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do GridExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_GridExecute(Sender);
 end;
 
 procedure Tf_main.ShowCompassExecute(Sender: TObject);
@@ -2423,12 +2423,12 @@ end;
 
 procedure Tf_main.switchstarsExecute(Sender: TObject);
 begin
-if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do switchstarExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_switchstarExecute(Sender);
 end;
 
 procedure Tf_main.switchbackgroundExecute(Sender: TObject);
 begin
-if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do switchbackgroundExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_switchbackgroundExecute(Sender);
 end;
 
 procedure Tf_main.SetFOVClick(Sender: TObject);
@@ -6997,7 +6997,7 @@ if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
     ShowUobj.Checked:=catalog.cfgcat.nebcatdef[uneb-BaseNeb];
     ShowPictures.Checked:=sc.cfgsc.ShowImages;
     SetPictures.Checked:=sc.cfgsc.ShowImageList;
-    imglist.Enabled:=sc.cfgsc.ShowImageList;
+    chart_imglist.Enabled:=sc.cfgsc.ShowImageList;
     ListImg.Enabled:=sc.cfgsc.ShowImageList;
     ShowLines.Checked:=sc.cfgsc.ShowLine;
     ShowAsteroids.Checked:=sc.cfgsc.ShowAsteroid;
@@ -8331,11 +8331,11 @@ f_edittoolbar.AddAction(ActionListChart,rsChart);
 f_edittoolbar.AddAction(ActionListTelescope,rsTelescope);
 f_edittoolbar.AddAction(ActionListWindow,rsWindow);
 f_edittoolbar.ClearControl;
-f_edittoolbar.AddOtherControl(MagPanel,'Star and nebula limit','View',rsView,54);
-f_edittoolbar.AddOtherControl(quicksearch,'Search box','Edit',rsEdit,76);
-f_edittoolbar.AddOtherControl(TimeValPanel,'Edit time increment','chart',rsChart,45);
-f_edittoolbar.AddOtherControl(TimeU,'Edit time units','chart',rsChart,45);
-f_edittoolbar.AddOtherControl(ToolBarFOV,'FOV bar','chart',rsChart,32);
+f_edittoolbar.AddOtherControl(MagPanel,'Star and nebula limit','Filter',rsChart,54);
+f_edittoolbar.AddOtherControl(quicksearch,'Search box','Search',rsEdit,76);
+f_edittoolbar.AddOtherControl(TimeValPanel,'Edit time increment','Animation',rsChart,45);
+f_edittoolbar.AddOtherControl(TimeU,'Edit time units','Animation',rsChart,45);
+f_edittoolbar.AddOtherControl(ToolBarFOV,'FOV bar','FOV',rsChart,32);
 f_edittoolbar.ClearToolbar;
 f_edittoolbar.DefaultToolbar:=ToolBarMain.Caption;
 f_edittoolbar.AddToolbar(ToolBarMain);

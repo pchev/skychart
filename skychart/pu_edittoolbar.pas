@@ -30,28 +30,39 @@ interface
 
 uses u_constant,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  ActnList, ExtCtrls, StdCtrls;
+  ActnList, ExtCtrls, StdCtrls, PairSplitter, Buttons;
 
 type
 
   { Tf_edittoolbar }
 
   Tf_edittoolbar = class(TForm)
+    ButtonClear: TBitBtn;
+    ButtonDown: TBitBtn;
+    ButtonUp: TBitBtn;
+    ButtonDel: TBitBtn;
+    ButtonAdd: TBitBtn;
+    ButtonCollapse: TBitBtn;
+    ButtonExpand: TBitBtn;
+    ButtonClearAll: TButton;
     ButtonMini: TButton;
     ButtonStd: TButton;
-    ButtonUp: TButton;
-    ButtonDown: TButton;
-    ButtonClear: TButton;
     ButtonOK: TButton;
     ButtonCancel: TButton;
-    ButtonAdd: TButton;
-    ButtonDel: TButton;
     ComboBox1: TComboBox;
     Label1: TLabel;
-    LabelMsg: TLabel;
-    Panel1: TPanel;
+    PanelRtop: TPanel;
+    PanelLtop: TPanel;
+    PanelLbot: TPanel;
+    PanelCentre: TPanel;
+    PanelRight: TPanel;
+    PanelBottom: TPanel;
     ActionTreeView: TTreeView;
     editbarPanel: TPanel;
+    PanelLeft: TPanel;
+    procedure ButtonClearAllClick(Sender: TObject);
+    procedure ButtonCollapseClick(Sender: TObject);
+    procedure ButtonExpandClick(Sender: TObject);
     procedure ButtonMiniClick(Sender: TObject);
     procedure ButtonClearClick(Sender: TObject);
     procedure ButtonDownClick(Sender: TObject);
@@ -62,6 +73,7 @@ type
     procedure ButtonUpClick(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormResize(Sender: TObject);
   private
     { private declarations }
     numaction,numcontrol,numeditbar: integer;
@@ -79,6 +91,7 @@ type
     editControlGroup: array of string;
     defaultact, defaultbar: string;
     function AddBtn(pos:TTreeNode; act: string; barnum,imgix: integer):TTreeNode;
+    procedure ClearToolbarTree(bn:integer);
     function GetControlName(capt:string):string;
     function GetControlCaption(nam:string):string;
   public
@@ -213,6 +226,7 @@ if value<>nil then begin
   ToolbarTreeview[numeditbar-1].Parent:=editbarpanel;
   ToolbarTreeview[numeditbar-1].Images:=Fimages;
   ToolbarTreeview[numeditbar-1].Align:=alClient;
+  ToolbarTreeview[numeditbar-1].ScrollBars:=ssAutoBoth;
   ToolbarTreeview[numeditbar-1].Visible:=(value.Caption=defaultbar);
   i:=ComboBox1.Items.Add(value.Caption);
   if (value.Caption=defaultbar) then ComboBox1.ItemIndex:=i;
@@ -236,6 +250,11 @@ begin
   SeparatorTxt:='Separator';
 end;
 
+procedure Tf_edittoolbar.FormResize(Sender: TObject);
+begin
+PanelRight.Width:=trunc((ClientWidth-PanelCentre.Width)/2);
+end;
+
 procedure Tf_edittoolbar.ProcessActions;
 var i,k,n: integer;
   catlst: TStringList;
@@ -243,6 +262,7 @@ var i,k,n: integer;
   actnode,cnode: TTreeNode;
 begin
 if (numeditbar>0) and (numaction>0) then begin
+  catlst:=TStringList.Create;
   ActionTreeView.Items.Clear;
   ActionTreeView.FullCollapse;
   ActionTreeView.Images:=Fimages;
@@ -255,11 +275,12 @@ if (numeditbar>0) and (numaction>0) then begin
     // set main actionlist as first level
     actnode:=ActionTreeView.Items.Add(nil,editActionTxt[k]);
     // list categories
-    catlst:=TStringList.Create;
+    catlst.Clear;
     for i:=0 to editAction[k].ActionCount-1 do begin
       cat:=editAction[k].Actions[i].Category;
       if cat='' then cat:='none';
-      if not catlst.Find(cat,n) then catlst.Add(cat);
+      n:=catlst.IndexOf(cat);
+      if n<0 then catlst.Add(cat);
     end;
     // second tree level is categories
     for i:=0 to catlst.Count-1 do begin
@@ -275,7 +296,6 @@ if (numeditbar>0) and (numaction>0) then begin
         ImageIndex:=TAction(editAction[k].Actions[i]).ImageIndex;
       end;
     end;
-    catlst.Free;
     // add other control (non action button)
     for i:=0 to numcontrol-1 do begin
        if editControlGroup[i]=editActionTxt[k] then begin
@@ -291,20 +311,24 @@ if (numeditbar>0) and (numaction>0) then begin
     // expand
     if editActionTxt[k]=defaultact then actnode.Expand(true);
   end;
+  catlst.Free;
 end;
 end;
 
 procedure Tf_edittoolbar.LoadFromToolbar;
 var i,j,k: integer;
     cn: string;
+    node: TTreeNode;
 begin
 // add current visible buttons
 for k:=0 to numeditbar-1 do begin
-  ToolbarTreeview[k].Items.Clear;
+  ClearToolbarTree(k);
   ToolbarTreeview[k].Images:=Fimages;
   for i:=0 to editbar[k].ControlCount-1 do begin
     if (editbar[k].Controls[i] is TToolButton) then begin
       // toolbutton
+      node:=ActionTreeView.Items.FindNodeWithText(editbar[k].Controls[i].hint);
+      if node<>nil then node.Visible:=false;
       with  ToolbarTreeview[k].Items.Add(nil,editbar[k].Controls[i].hint) do begin
          ImageIndex:=TToolButton(editbar[k].Controls[i]).ImageIndex;
       end;
@@ -316,6 +340,8 @@ for k:=0 to numeditbar-1 do begin
          for j:=0 to numcontrol-1 do begin
            if editbar[k].Controls[i]=editControl[j] then cn:=editControlTxt[j];
          end;
+         node:=ActionTreeView.Items.FindNodeWithText(cn);
+         if node<>nil then node.Visible:=false;
          with ToolbarTreeview[k].Items.Add(nil,cn) do begin
            ImageIndex:=editControlImg[j]
          end;
@@ -348,9 +374,10 @@ end;
 procedure Tf_edittoolbar.LoadToolbar(bn:integer; str:TStringList);
 var i,j,im:integer;
     act,buf: string;
+    node: TTreeNode;
 begin
 if (bn<numeditbar) then begin
-   ToolbarTreeview[bn].Items.Clear;
+   ClearToolbarTree(bn);
    for i:=0 to str.Count-1 do begin
      buf:=str[i];
      if buf='' then continue;
@@ -359,6 +386,10 @@ if (bn<numeditbar) then begin
      im:=strtointdef(copy(buf,1,j-1),0);
      delete(buf,1,j);
      act:=GetControlCaption(buf);
+     if (act<>SeparatorTxt)and(act<>DividerTxt) then begin
+       node:=ActionTreeView.Items.FindNodeWithText(act);
+       if node<>nil then node.Visible:=false;
+     end;
      with  ToolbarTreeview[bn].Items.Add(nil,act) do begin
         ImageIndex:=im;
      end;
@@ -541,7 +572,6 @@ if (act<>DividerTxt)and(act<>SeparatorTxt) then begin
   for i:=0 to numeditbar-1 do begin
    ok:=ok and (ToolbarTreeview[i].Items.FindNodeWithText(act)=nil);
    if not ok then begin
-     LabelMsg.Caption:='Button "'+act+'" already in '+editbar[i].Caption;
      break;
    end;
   end;
@@ -557,23 +587,29 @@ var act:string;
     lvl,bn:integer;
     node,pos,nextpos: TTreeNode;
 begin
-LabelMsg.Caption:='';
 bn:=ComboBox1.ItemIndex;
-lvl:=ActionTreeView.Selected.Level;
-pos:=ToolbarTreeview[bn].Selected;
-// individual button
-if lvl=2 then begin
-  act:=ActionTreeView.Selected.Text;
-  AddBtn(pos,act,bn,ActionTreeView.Selected.ImageIndex);
-end;
-// all the selected category
-if lvl=1 then begin
-  node:=ActionTreeView.Selected.GetFirstChild;
-  while node<>nil do begin
+node:=ActionTreeView.Selected;
+if node<>nil then begin
+  lvl:=node.Level;
+  pos:=ToolbarTreeview[bn].Selected;
+  // individual button
+  if lvl=2 then begin
     act:=node.Text;
-    nextpos:=AddBtn(pos,act,bn,node.ImageIndex);
-    if nextpos<>nil then pos:=nextpos;
-    node:=node.GetNextSibling;
+    AddBtn(pos,act,bn,ActionTreeView.Selected.ImageIndex);
+    if (act<>SeparatorTxt)and(act<>DividerTxt) then node.Visible:=false;
+  end;
+  // all the selected category
+  if lvl=1 then begin
+    node:=ActionTreeView.Selected.GetFirstChild;
+    while node<>nil do begin
+     if node.visible then begin
+       act:=node.Text;
+       nextpos:=AddBtn(pos,act,bn,node.ImageIndex);
+       if (act<>SeparatorTxt)and(act<>DividerTxt) then node.Visible:=false;
+       if nextpos<>nil then pos:=nextpos;
+     end;
+     node:=node.GetNextSibling;
+    end;
   end;
 end;
 end;
@@ -604,18 +640,38 @@ end;
 
 procedure Tf_edittoolbar.ButtonDelClick(Sender: TObject);
 var i,bn: integer;
+    capt: string;
+    node: TTreeNode;
 begin
 bn:=ComboBox1.ItemIndex;
 for i:=ToolbarTreeview[bn].items.Count-1 downto 0 do begin
-  if ToolbarTreeview[bn].Items[i].Selected then ToolbarTreeview[bn].Items.Delete(ToolbarTreeview[bn].Items[i]);
+  if ToolbarTreeview[bn].Items[i].Selected then begin
+    capt:=ToolbarTreeview[bn].Items[i].Text;
+    node:=ActionTreeView.Items.FindNodeWithText(capt);
+    if node<>nil then node.Visible:=true;
+    ToolbarTreeview[bn].Items.Delete(ToolbarTreeview[bn].Items[i]);
+  end;
 end;
+end;
+
+procedure Tf_edittoolbar.ClearToolbarTree(bn:integer);
+var i: integer;
+    capt: string;
+    node: TTreeNode;
+begin
+ for i:=ToolbarTreeview[bn].items.Count-1 downto 0 do begin
+   capt:=ToolbarTreeview[bn].Items[i].Text;
+   node:=ActionTreeView.Items.FindNodeWithText(capt);
+   if node<>nil then node.Visible:=true;
+   ToolbarTreeview[bn].Items.Delete(ToolbarTreeview[bn].Items[i]);
+ end;
 end;
 
 procedure Tf_edittoolbar.ButtonClearClick(Sender: TObject);
 var bn: integer;
 begin
  bn:=ComboBox1.ItemIndex;
- ToolbarTreeview[bn].Items.Clear;
+ ClearToolbarTree(bn);
 end;
 
 procedure Tf_edittoolbar.ButtonStdClick(Sender: TObject);
@@ -655,6 +711,22 @@ LoadToolbar(2,str);
 str.clear;
 LoadToolbar(3,str);
 str.free;
+end;
+
+procedure Tf_edittoolbar.ButtonExpandClick(Sender: TObject);
+begin
+  ActionTreeView.FullExpand;
+end;
+
+procedure Tf_edittoolbar.ButtonCollapseClick(Sender: TObject);
+begin
+ActionTreeView.FullCollapse;
+end;
+
+procedure Tf_edittoolbar.ButtonClearAllClick(Sender: TObject);
+var i: integer;
+begin
+ for i:=0 to ComboBox1.Items.Count-1 do ClearToolbarTree(i);
 end;
 
 

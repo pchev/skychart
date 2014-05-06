@@ -68,133 +68,133 @@ object f_chart: Tf_chart
   object ActionList1: TActionList
     left = 192
     top = 64
-    object zoomplus: TAction
+    object chart_zoomplus: TAction
       Category = 'zoom'
       Caption = 'Zoom +'
       ImageIndex = 6
-      OnExecute = zoomplusExecute
+      OnExecute = chart_zoomplusExecute
     end
-    object zoomminus: TAction
+    object chart_zoomminus: TAction
       Category = 'zoom'
       Caption = 'Zoom -'
       ImageIndex = 7
-      OnExecute = zoomminusExecute
+      OnExecute = chart_zoomminusExecute
     end
-    object MoveWest: TAction
+    object chart_MoveWest: TAction
       Category = 'move'
       Caption = 'Move West'
-      OnExecute = MoveWestExecute
+      OnExecute = chart_MoveWestExecute
     end
-    object MoveEast: TAction
+    object chart_MoveEast: TAction
       Category = 'move'
       Caption = 'Move East'
-      OnExecute = MoveEastExecute
+      OnExecute = chart_MoveEastExecute
     end
-    object MoveNorth: TAction
+    object chart_MoveNorth: TAction
       Category = 'move'
       Caption = 'Move North'
-      OnExecute = MoveNorthExecute
+      OnExecute = chart_MoveNorthExecute
     end
-    object MoveSouth: TAction
+    object chart_MoveSouth: TAction
       Category = 'move'
       Caption = 'Move South'
-      OnExecute = MoveSouthExecute
+      OnExecute = chart_MoveSouthExecute
     end
-    object MoveNorthWest: TAction
+    object chart_MoveNorthWest: TAction
       Category = 'move'
       Caption = 'Move North-West'
-      OnExecute = MoveNorthWestExecute
+      OnExecute = chart_MoveNorthWestExecute
     end
-    object MoveNorthEast: TAction
+    object chart_MoveNorthEast: TAction
       Category = 'move'
       Caption = 'Move North-East'
-      OnExecute = MoveNorthEastExecute
+      OnExecute = chart_MoveNorthEastExecute
     end
-    object MoveSouthWest: TAction
+    object chart_MoveSouthWest: TAction
       Category = 'move'
       Caption = 'Move South-West'
-      OnExecute = MoveSouthWestExecute
+      OnExecute = chart_MoveSouthWestExecute
     end
-    object MoveSouthEast: TAction
+    object chart_MoveSouthEast: TAction
       Category = 'move'
       Caption = 'Move South-East'
-      OnExecute = MoveSouthEastExecute
+      OnExecute = chart_MoveSouthEastExecute
     end
-    object Centre: TAction
+    object chart_Centre: TAction
       Category = 'move'
       Caption = 'Centre'
-      OnExecute = CentreExecute
+      OnExecute = chart_CentreExecute
     end
-    object zoomplusmove: TAction
+    object chart_zoomplusmove: TAction
       Category = 'zoom'
       Caption = 'Zoom + Centre'
       ImageIndex = 6
-      OnExecute = zoomplusmoveExecute
+      OnExecute = chart_zoomplusmoveExecute
     end
-    object zoomminusmove: TAction
+    object chart_zoomminusmove: TAction
       Category = 'zoom'
       Caption = 'Zoom - Centre'
       ImageIndex = 7
-      OnExecute = zoomminusmoveExecute
+      OnExecute = chart_zoomminusmoveExecute
     end
-    object FlipX: TAction
+    object chart_FlipX: TAction
       Category = 'rotation'
-      Caption = 'FlipX'
+      Caption = 'chart_FlipX'
       ImageIndex = 15
-      OnExecute = FlipXExecute
+      OnExecute = chart_FlipXExecute
     end
-    object FlipY: TAction
+    object chart_FlipY: TAction
       Category = 'rotation'
-      Caption = 'FlipY'
+      Caption = 'chart_FlipY'
       ImageIndex = 17
-      OnExecute = FlipYExecute
+      OnExecute = chart_FlipYExecute
     end
-    object Undo: TAction
+    object chart_Undo: TAction
       Category = 'Undo'
-      Caption = 'Undo'
-      OnExecute = UndoExecute
+      Caption = 'chart_Undo'
+      OnExecute = chart_UndoExecute
     end
-    object Redo: TAction
+    object chart_Redo: TAction
       Category = 'Undo'
-      Caption = 'Redo'
-      OnExecute = RedoExecute
+      Caption = 'chart_Redo'
+      OnExecute = chart_RedoExecute
     end
-    object rot_plus: TAction
+    object chart_rot_plus: TAction
       Category = 'rotation'
-      Caption = 'rot_plus'
+      Caption = 'chart_rot_plus'
       ImageIndex = 21
-      OnExecute = rot_plusExecute
+      OnExecute = chart_rot_plusExecute
     end
-    object rot_minus: TAction
+    object chart_rot_minus: TAction
       Category = 'rotation'
-      Caption = 'rot_minus'
+      Caption = 'chart_rot_minus'
       ImageIndex = 22
-      OnExecute = rot_minusExecute
+      OnExecute = chart_rot_minusExecute
     end
-    object GridEQ: TAction
+    object chart_GridEQ: TAction
       Category = 'Grid'
-      Caption = 'GridEQ'
+      Caption = 'chart_GridEQ'
       ImageIndex = 24
-      OnExecute = GridEQExecute
+      OnExecute = chart_GridEQExecute
     end
-    object Grid: TAction
+    object chart_Grid: TAction
       Category = 'Grid'
-      Caption = 'Grid'
+      Caption = 'chart_Grid'
       ImageIndex = 25
-      OnExecute = GridExecute
+      OnExecute = chart_GridExecute
     end
-    object switchbackground: TAction
-      Caption = 'switchbackground'
-      OnExecute = switchbackgroundExecute
+    object chart_switchbackground: TAction
+      Caption = 'chart_switchbackground'
+      OnExecute = chart_switchbackgroundExecute
     end
-    object switchstar: TAction
-      Caption = 'switchstar'
-      OnExecute = switchstarExecute
+    object chart_switchstar: TAction
+      Caption = 'chart_switchstar'
+      OnExecute = chart_switchstarExecute
     end
-    object imglist: TAction
+    object chart_imglist: TAction
       Category = 'images'
       Caption = 'imglist'
-      OnExecute = imglistExecute
+      OnExecute = chart_imglistExecute
     end
   end
   object PopupMenu1: TPopupMenu
@@ -258,16 +258,16 @@ object f_chart: Tf_chart
       Visible = False
     end
     object Centre1: TMenuItem
-      Action = Centre
-      OnClick = CentreExecute
+      Action = chart_Centre
+      OnClick = chart_CentreExecute
     end
     object Zoom1: TMenuItem
-      Action = zoomplusmove
-      OnClick = zoomplusmoveExecute
+      Action = chart_zoomplusmove
+      OnClick = chart_zoomplusmoveExecute
     end
     object Zoom2: TMenuItem
-      Action = zoomminusmove
-      OnClick = zoomminusmoveExecute
+      Action = chart_zoomminusmove
+      OnClick = chart_zoomminusmoveExecute
     end
     object CopyCoord1: TMenuItem
       Caption = 'CopyCoord1'
@@ -498,7 +498,7 @@ object f_chart: Tf_chart
       end
     end
     object ImgList1: TMenuItem
-      Action = imglist
+      Action = chart_imglist
     end
     object N3: TMenuItem
       Caption = '-'
