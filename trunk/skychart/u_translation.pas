@@ -1490,6 +1490,7 @@ resourcestring
   rsNumberOfIgno = 'Number of ignored invalid rows: %s';
   rsOfficialName = 'Official name';
   rsLocalizedNam = 'Localized name';
+  rsIsEmpty      = '%s is empty!';
 
 implementation
 

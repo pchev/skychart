@@ -47,7 +47,7 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
-    Panel1: TPanel;
+    ContainerPanel: TPanel;
     TimeValPanel: TPanel;
     ResetRotation: TAction;
     ToolBarFOV: TToolBar;
@@ -478,7 +478,7 @@ type
       NewValue: SmallInt; Direction: TUpDownDirection);
     procedure VariableStar1Click(Sender: TObject);
     procedure View1Click(Sender: TObject);
-    procedure ViewBarExecute(Sender: TObject);
+    procedure ViewToolsBar1Click(Sender: TObject);
     procedure ViewClockExecute(Sender: TObject);
     procedure ViewScrollBar1Click(Sender: TObject);
     procedure zoomplusExecute(Sender: TObject);
@@ -492,7 +492,7 @@ type
     procedure FlipYExecute(Sender: TObject);
     procedure SetFOVClick(Sender: TObject);
     procedure FileSaveAs1Execute(Sender: TObject);
-    procedure ViewStatusExecute(Sender: TObject);
+    procedure ViewStatusBarClick(Sender: TObject);
     procedure SaveConfigurationExecute(Sender: TObject);
     procedure SaveConfigOnExitExecute(Sender: TObject);
     procedure UndoExecute(Sender: TObject);
@@ -542,10 +542,10 @@ type
     procedure AltAzProjectionExecute(Sender: TObject);
     procedure EclipticProjectionExecute(Sender: TObject);
     procedure GalacticProjectionExecute(Sender: TObject);
-    procedure ViewMainBarExecute(Sender: TObject);
-    procedure ViewObjectBarExecute(Sender: TObject);
-    procedure ViewLeftBarExecute(Sender: TObject);
-    procedure ViewRightBarExecute(Sender: TObject);
+    procedure ViewMainBarClick(Sender: TObject);
+    procedure ViewObjectBarClick(Sender: TObject);
+    procedure ViewLeftBarClick(Sender: TObject);
+    procedure ViewRightBarClick(Sender: TObject);
     procedure CalendarExecute(Sender: TObject);
     procedure HelpContents1Execute(Sender: TObject);
     procedure EditCopy1Execute(Sender: TObject);
@@ -2016,6 +2016,10 @@ SampClientDesc:=Tstringlist.Create;
 SampClientCoordpointAtsky:=TStringList.Create;
 SampClientImageLoadFits:=TStringList.Create;
 SampClientTableLoadVotable:=TStringList.Create;
+configmainbar:=TStringList.Create;
+configobjectbar:=TStringList.Create;
+configleftbar:=TStringList.Create;
+configrightbar:=TStringList.Create;
 
 except
   on E: Exception do begin
@@ -2054,6 +2058,10 @@ SampClientDesc.Free;
 SampClientCoordpointAtsky.Free;
 SampClientImageLoadFits.Free;
 SampClientTableLoadVotable.Free;
+configmainbar.Free;
+configobjectbar.Free;
+configleftbar.Free;
+configrightbar.Free;
 if NeedRestart then ExecNoWait(paramstr(0));
 if VerboseMsg then
  WriteTrace('Destroy Cursor');
@@ -3925,19 +3933,21 @@ if i=0 then PanelTop.visible:=false
    end;  
 end;
 
-procedure Tf_main.ViewBarExecute(Sender: TObject);
+procedure Tf_main.ViewToolsBar1Click(Sender: TObject);
 begin
-ToolBarMain.visible:=not ViewToolsBar1.checked;
-PanelLeft.visible:=ToolBarMain.visible;
-PanelRight.visible:=ToolBarMain.visible;
-ToolBarObj.visible:=ToolBarMain.visible;
-PanelBottom.visible:=ToolBarMain.visible;
-ViewToolsBar1.checked:=ToolBarMain.visible;
-MainBar1.checked:=ToolBarMain.visible;
-ObjectBar1.checked:=ToolBarMain.visible;
-LeftBar1.checked:=ToolBarMain.visible;
-RightBar1.checked:=ToolBarMain.visible;
-ViewStatusBar1.checked:=ToolBarMain.visible;
+ViewToolsBar1.checked:=not ViewToolsBar1.checked;
+MainBar1.checked:=ViewToolsBar1.checked and (ToolBarMain.ControlCount>0);
+ObjectBar1.checked:=ViewToolsBar1.checked and (ToolBarObj.ControlCount>0);
+LeftBar1.checked:=ViewToolsBar1.checked and (ToolBarLeft.ControlCount>0);
+RightBar1.checked:=ViewToolsBar1.checked and (ToolBarRight.ControlCount>0);
+ViewStatusBar1.checked:=ViewToolsBar1.checked;
+
+ToolBarMain.visible:=MainBar1.checked;
+ToolBarObj.visible:=ObjectBar1.checked;
+PanelLeft.visible:=LeftBar1.checked;
+PanelRight.visible:=RightBar1.checked;
+PanelBottom.visible:=ViewStatusBar1.checked;
+
 ViewTopPanel;
 if PanelBottom.visible then InitFonts;
 FormResize(sender);
@@ -3979,45 +3989,49 @@ for i:=0 to MultiFrame1.ChildCount-1 do
   end;
 end;
 
-procedure Tf_main.ViewMainBarExecute(Sender: TObject);
+procedure Tf_main.ViewMainBarClick(Sender: TObject);
 begin
-ToolBarMain.visible:=not ToolBarMain.visible;
-MainBar1.checked:=ToolBarMain.visible;
+if ToolBarMain.ControlCount=0 then SetLPanel1(format(rsIsEmpty,[rsMainBar]));
+MainBar1.checked:=not MainBar1.checked and (ToolBarMain.ControlCount>0);
+ToolBarMain.visible:=MainBar1.checked;
 if not MainBar1.checked then ViewToolsBar1.checked:=false;
 if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
 ViewTopPanel;
 FormResize(sender);
 end;
 
-procedure Tf_main.ViewObjectBarExecute(Sender: TObject);
+procedure Tf_main.ViewObjectBarClick(Sender: TObject);
 begin
-ToolBarObj.visible:=not ToolBarObj.visible;
-ObjectBar1.checked:=ToolBarObj.visible;
+if ToolBarObj.ControlCount=0 then SetLPanel1(format(rsIsEmpty,[rsObjectBar]));
+ObjectBar1.checked:=not ObjectBar1.checked and (ToolBarObj.ControlCount>0);
+ToolBarObj.visible:=ObjectBar1.checked;
 if not ObjectBar1.checked then ViewToolsBar1.checked:=false;
 if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
 ViewTopPanel;
 FormResize(sender);
 end;
 
-procedure Tf_main.ViewLeftBarExecute(Sender: TObject);
+procedure Tf_main.ViewLeftBarClick(Sender: TObject);
 begin
-PanelLeft.visible:=not PanelLeft.visible;
-LeftBar1.checked:=PanelLeft.visible;
+if ToolBarLeft.ControlCount=0 then SetLPanel1(format(rsIsEmpty,[rsLeftBar]));
+LeftBar1.checked:=not LeftBar1.checked and (ToolBarLeft.ControlCount>0);
+PanelLeft.visible:=LeftBar1.checked;
 if not LeftBar1.checked then ViewToolsBar1.checked:=false;
 if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
 FormResize(sender);
 end;
 
-procedure Tf_main.ViewRightBarExecute(Sender: TObject);
+procedure Tf_main.ViewRightBarClick(Sender: TObject);
 begin
-PanelRight.visible:=not PanelRight.visible;
-RightBar1.checked:=PanelRight.visible;
+if ToolBarRight.ControlCount=0 then SetLPanel1(format(rsIsEmpty,[rsRightBar]));
+RightBar1.checked:=not RightBar1.checked and (ToolBarRight.ControlCount>0);
+PanelRight.visible:=RightBar1.checked;
 if not RightBar1.checked then ViewToolsBar1.checked:=false;
 if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
 FormResize(sender);
 end;
 
-procedure Tf_main.ViewStatusExecute(Sender: TObject);
+procedure Tf_main.ViewStatusBarClick(Sender: TObject);
 begin
 PanelBottom.visible:=not PanelBottom.visible;
 ViewStatusBar1.checked:=PanelBottom.visible;
@@ -4763,6 +4777,18 @@ catalog.cfgshr.NebSizeFilter[7]:=10;
 catalog.cfgshr.NebSizeFilter[8]:=20;
 catalog.cfgshr.NebSizeFilter[9]:=30;
 catalog.cfgshr.NebSizeFilter[10]:=60;
+nummainbar:=numstandardmainbar;
+numobjectbar:=numstandardobjectbar;
+numleftbar:=numstandardleftbar;
+numrightbar:=numstandardrightbar;
+configmainbar.clear;
+configobjectbar.clear;
+configleftbar.clear;
+configrightbar.clear;
+for i:=1 to nummainbar do configmainbar.Add(standardmainbar[i]);
+for i:=1 to numobjectbar do configobjectbar.Add(standardobjectbar[i]);
+for i:=1 to numleftbar do configleftbar.Add(standardleftbar[i]);
+for i:=1 to numrightbar do configrightbar.Add(standardrightbar[i]);
 end;
 
 procedure Tf_main.ReadDefault;
@@ -4774,7 +4800,6 @@ end;
 
 procedure Tf_main.ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:Tconf_plot ;var csc:Tconf_skychart);
 var i,j,t,l,w,h,n:integer;
-    xx: double;
     inif: TMemIniFile;
     section,buf : string;
 begin
@@ -5552,6 +5577,25 @@ for i:=1 to j do quicksearch.Items.Add(ReadString(section,'item'+inttostr(i),'')
 except
   ShowError('Error reading '+filename+' quicksearch');
 end;
+try
+section:='toolbar';
+if SectionExists(section) then begin
+  configmainbar.Clear;
+  nummainbar:=ReadInteger(section,'nummainbar',nummainbar);
+  for i:=0 to nummainbar-1 do configmainbar.Add(ReadString(section,'mainbar'+inttostr(i),''));
+  configobjectbar.Clear;
+  numobjectbar:=ReadInteger(section,'numobjectbar',numobjectbar);
+  for i:=0 to numobjectbar-1 do configobjectbar.Add(ReadString(section,'objectbar'+inttostr(i),''));
+  configleftbar.Clear;
+  numleftbar:=ReadInteger(section,'numleftbar',numleftbar);
+  for i:=0 to numleftbar-1 do configleftbar.Add(ReadString(section,'leftbar'+inttostr(i),''));
+  configrightbar.Clear;
+  numrightbar:=ReadInteger(section,'numrightbar',numrightbar);
+  for i:=0 to numrightbar-1 do configrightbar.Add(ReadString(section,'rightbar'+inttostr(i),''));
+end;
+except
+  ShowError('Error reading '+filename+' quicksearch');
+end;
 end;
 finally
 inif.Free;
@@ -6283,7 +6327,15 @@ WriteBool(section,'houranglelimit1',f_obslist.CheckBox4.Checked);
 WriteBool(section,'houranglelimit2',f_obslist.CheckBox5.Checked);
 WriteInteger(section,'limittype',f_obslist.LimitType);
 WriteInteger(section,'meridianside',f_obslist.MeridianSide);
-
+section:='toolbar';
+WriteInteger(section,'nummainbar',nummainbar);
+for i:=0 to nummainbar-1 do WriteString(section,'mainbar'+inttostr(i),configmainbar[i]);
+WriteInteger(section,'numobjectbar',numobjectbar);
+for i:=0 to numobjectbar-1 do WriteString(section,'objectbar'+inttostr(i),configobjectbar[i]);
+WriteInteger(section,'numleftbar',numleftbar);
+for i:=0 to numleftbar-1 do WriteString(section,'leftbar'+inttostr(i),configleftbar[i]);
+WriteInteger(section,'numrightbar',numrightbar);
+for i:=0 to numrightbar-1 do WriteString(section,'rightbar'+inttostr(i),configrightbar[i]);
 Updatefile;
 end;
 finally
@@ -6556,6 +6608,8 @@ ViewChartInfo.Caption:=rsChartInforma;
 ViewChartInfo.Hint:=rsChartInforma;
 ViewChartLegend.Caption:=rsChartLegend;
 ViewChartLegend.Hint:=rsChartLegend;
+ResetRotation.Caption:=rsResetRotatio;
+ResetRotation.Hint:=rsResetRotatio;
 ShowObjectbelowHorizon.caption:='&'+rsBelowTheHori;
 ShowObjectbelowHorizon.hint:=rsShowObjectBe;
 ShowBackgroundImage.caption:='&'+rsShowHideDSSI;
@@ -6564,16 +6618,12 @@ SetPictures.Caption:='&'+rsShowTheImage;
 SetPictures.hint:=rsShowTheImage;
 MoreStar.Caption:='&'+rsMoreStars;
 MoreStar.Hint:=rsMoreStars;
-ButtonMoreStar.Hint:=rsMoreStars;  // !! special action
 LessStar.Caption:='&'+rsLessStars;
 LessStar.Hint:=rsLessStars;
-ButtonLessStar.Hint:=rsLessStars;   // !! special action
 MoreNeb.Caption:='&'+rsMoreNebulae;
 MoreNeb.Hint:=rsMoreNebulae;
-ButtonMoreNeb.Hint:=rsMoreNebulae;  // !! special action
 LessNeb.Caption:='&'+rsLessNebulae;
 LessNeb.Hint:=rsLessNebulae;
-ButtonLessNeb.Hint:=rsLessNebulae;  // !! special action
 DSSImage.Caption:='&'+rsGetDSSImage+Ellipsis;
 DSSImage.hint:=rsGetDSSImage;
 ShowVO.Caption:=rsShowVirtualO;
@@ -6659,7 +6709,6 @@ ShowGrid1.caption:='&'+rsLinesGrid;
 MenuItem32.Caption:=rsLabels;
 MenuStarNum.Caption:='&'+rsStarsFilter;
 MenuNebNum.Caption:='&'+rsNebulaeFilte;
-ResetRot.Caption:=rsResetRotatio;
 // menu Telescope
 telescope1.caption:='&'+rsTelescope;
 //menu Window
@@ -6680,6 +6729,11 @@ ReleaseNotes1.Caption:='&'+rsReleaseNotes+Ellipsis;
 ResetAllLabels1.caption:='&'+rsResetAllLabe;
 
 // Other control
+// Mag panel
+ButtonMoreStar.Hint:=rsMoreStars;
+ButtonLessStar.Hint:=rsLessStars;
+ButtonMoreNeb.Hint:=rsMoreNebulae;
+ButtonLessNeb.Hint:=rsLessNebulae;
 // time control bar
 TimeU.Items.Clear;
 TimeU.Items.Add(rsHour);
@@ -8263,11 +8317,9 @@ begin
 end;
 
 procedure Tf_main.InitToolBar;
-var str:TStringList;
-    i:integer;
 begin
-str:=TStringList.Create;
 f_edittoolbar.Images:=ImageNormal;
+f_edittoolbar.DisabledContainer:=ContainerPanel;
 f_edittoolbar.TBOnMouseUp:=ToolButtonMouseUp;
 f_edittoolbar.ClearAction;
 f_edittoolbar.DefaultAction:=rsFile;
@@ -8291,27 +8343,39 @@ f_edittoolbar.AddToolbar(ToolBarObj);
 f_edittoolbar.AddToolbar(ToolBarLeft);
 f_edittoolbar.AddToolbar(ToolBarRight);
 f_edittoolbar.ProcessActions;
-str.clear;
-for i:=1 to numstandardmainbar do str.Add(standardmainbar[i]);
-f_edittoolbar.LoadToolbar(0,str);
-str.clear;
-for i:=1 to numstandardobjectbar do str.Add(standardobjectbar[i]);
-f_edittoolbar.LoadToolbar(1,str);
-str.clear;
-for i:=1 to numstandardleftbar do str.Add(standardleftbar[i]);
-f_edittoolbar.LoadToolbar(2,str);
-str.clear;
-for i:=1 to numstandardrightbar do str.Add(standardrightbar[i]);
-f_edittoolbar.LoadToolbar(3,str);
-f_edittoolbar.ProcessToolbar;
-f_edittoolbar.ProcessToolbar;
-str.free;
-FormResize(nil);
+// Set configured bar
+f_edittoolbar.LoadToolbar(0,configmainbar);
+f_edittoolbar.LoadToolbar(1,configobjectbar);
+f_edittoolbar.LoadToolbar(2,configleftbar);
+f_edittoolbar.LoadToolbar(3,configrightbar);
+f_edittoolbar.ActivateToolbar;
+// show all the configured bar
+ViewToolsBar1.checked:=false;
+ViewToolsBar1Click(nil);
 end;
 
 procedure Tf_main.MenuItemEditToolbarClick(Sender: TObject);
 begin
+ // load current config
+ f_edittoolbar.LoadToolbar(0,configmainbar);
+ f_edittoolbar.LoadToolbar(1,configobjectbar);
+ f_edittoolbar.LoadToolbar(2,configleftbar);
+ f_edittoolbar.LoadToolbar(3,configrightbar);
  f_edittoolbar.ShowModal;
+ if f_edittoolbar.ModalResult=mrOK then begin
+    // save the configuration
+    f_edittoolbar.SaveToolbar(0,configmainbar);
+    f_edittoolbar.SaveToolbar(1,configobjectbar);
+    f_edittoolbar.SaveToolbar(2,configleftbar);
+    f_edittoolbar.SaveToolbar(3,configrightbar);
+    nummainbar:=configmainbar.Count;
+    numobjectbar:=configobjectbar.Count;
+    numleftbar:=configleftbar.Count;
+    numrightbar:=configrightbar.Count;
+    // show all the configured bar
+    ViewToolsBar1.checked:=false;
+    ViewToolsBar1Click(sender);
+ end;
 end;
 
 procedure Tf_main.ToolButtonMouseUp(Sender: TObject; Button: TMouseButton;  Shift: TShiftState; X, Y: Integer);
