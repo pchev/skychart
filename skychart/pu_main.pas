@@ -1843,7 +1843,9 @@ UniqueInstance1.Loaded;
 step:='Init';
 if VerboseMsg then
  debugln(step);
+{$ifdef mswindows}
 Application.UpdateFormatSettings := False;
+{$endif}
 DefaultFormatSettings.DecimalSeparator:='.';
 DefaultFormatSettings.ThousandSeparator:=',';
 DefaultFormatSettings.DateSeparator:='/';
@@ -2049,7 +2051,7 @@ cfgm.ObsNameList.OwnsObjects:=true;  // destroy objects only on exit
 cfgm.Free;
 def_cfgplot.Free;
 cfgp.Free;
-ShowCompass.free;
+Compass.free;
 arrow.free;
 samp.Free;
 SampClientId.Free;
@@ -7960,6 +7962,7 @@ begin
    ToolBarRight.Images:=imagelist;
    ToolBarObj.Images:=imagelist;
    MainMenu1.Images:=imagelist;
+   f_edittoolbar.Images:=imagelist;
    btn:=TPortableNetworkGraphic.Create;
    btn.LoadFromFile(iconpath+'b1.png');
    BtnCloseChild.Glyph.Assign(btn);
@@ -8161,6 +8164,8 @@ if night then begin
    f_printsetup.Font.Color:=nv_middle;
    f_print.Color:=nv_dark;
    f_print.Font.Color:=nv_middle;
+   f_edittoolbar.Color:=nv_dark;
+   f_edittoolbar.Font.Color:=nv_middle;
  end;
 end else begin
    ResetWinColor;
@@ -8193,6 +8198,8 @@ end else begin
    f_printsetup.Font.Color:=clWindowText;
    f_print.Color:=clBtnFace;
    f_print.Font.Color:=clWindowText;
+   f_edittoolbar.Color:=clBtnFace;
+   f_edittoolbar.Font.Color:=clWindowText;
 end;
 end;
 

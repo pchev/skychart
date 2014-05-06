@@ -90,6 +90,7 @@ type
     editControlCat: array of string;
     editControlGroup: array of string;
     defaultact, defaultbar: string;
+    procedure SetImages(value: TImageList);
     function AddBtn(pos:TTreeNode; act: string; barnum,imgix: integer):TTreeNode;
     procedure ClearToolbarTree(bn:integer);
     function GetControlName(capt:string):string;
@@ -132,7 +133,7 @@ type
     procedure LoadFromToolbar;
 
     // the imagelist to use for all the buttons
-    property Images: TImageList read Fimages write Fimages;
+    property Images: TImageList read Fimages write SetImages;
 
     // set the action to expand by default in the left tree
     property DefaultAction: string read defaultact write defaultact;
@@ -159,6 +160,14 @@ implementation
 {$R *.lfm}
 
 { Tf_edittoolbar }
+
+procedure Tf_edittoolbar.SetImages(value: TImageList);
+var i: integer;
+begin
+Fimages:=value;
+for i:=0 to numeditbar-1 do ToolbarTreeview[i].Images:=Fimages;
+ActionTreeView.Images:=Fimages;
+end;
 
 procedure Tf_edittoolbar.ClearToolbar;
 var i: integer;

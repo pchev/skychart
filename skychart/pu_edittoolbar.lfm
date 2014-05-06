@@ -8,7 +8,7 @@ object f_edittoolbar: Tf_edittoolbar
   ClientWidth = 550
   OnCreate = FormCreate
   OnResize = FormResize
-  LCLVersion = '1.2.0.3'
+  LCLVersion = '1.2.2.0'
   object PanelBottom: TPanel
     Left = 0
     Height = 35
@@ -226,9 +226,9 @@ object f_edittoolbar: Tf_edittoolbar
       TabOrder = 2
       object Label1: TLabel
         Left = 16
-        Height = 16
+        Height = 15
         Top = 7
-        Width = 104
+        Width = 92
         Caption = 'Available actions'
         ParentColor = False
       end
@@ -573,7 +573,7 @@ object f_edittoolbar: Tf_edittoolbar
       TabOrder = 1
       object ComboBox1: TComboBox
         Left = 8
-        Height = 26
+        Height = 25
         Top = 4
         Width = 230
         ItemHeight = 0
