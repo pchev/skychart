@@ -1235,6 +1235,9 @@ var
   Xplanetversion: string;
   nummainbar,numobjectbar,numleftbar,numrightbar: integer;
   configmainbar,configobjectbar,configleftbar,configrightbar: TStringList;
+  CatAnimation,CatDirection,CatDrawing,CatEdit,CatFile,CatFilter,CatFOV,CatGrid,CatInformation,CatLabel,
+  CatLines,CatLock,CatObject,CatOrientation,CatPictures,CatPrint,CatProjection,CatSearch,CatSetup,
+  CatSetupOption,CatTelescope,CatTools,CatUndo,CatView,CatWindow,CatZoom :string;
 
 {$ifdef darwin}
   OpenFileCMD: string = 'open';
@@ -1640,63 +1643,61 @@ const
 
 const
 // Minimal main toolbar
-numminimalmainbar = 18;
+numminimalmainbar = 17;
 minimalmainbar: array[1..numminimalmainbar] of string=(
-('89;ShowVO'),
-('52;ShowUobj'),
-('81;DSSImage'),
-('77;SetPictures'),
-('60;ShowAsteroids'),
-('61;ShowComets'),
-('69;ShowMark'),
+('32;ToolBarFOV'),
+('102;quicksearch'),
 ('71;EquatorialProjection'),
 ('72;AltAzProjection'),
 ('92;rotate180'),
-('90;ScaleMode'),
 ('64;ShowLabels'),
+('89;ShowVO'),
+('52;ShowUobj'),
 ('80;Track'),
-('45;quicksearch'),
+('60;ShowAsteroids'),
+('61;ShowComets'),
+('69;ShowMark'),
 ('48;TelescopeConnect'),
+('110;TrackTelescope'),
 ('51;TelescopeSync'),
 ('50;TelescopeSlew'),
 ('95;TelescopeAbortSlew'));
 
 
 // Standard main toolbar
-numstandardmainbar = 36;
+numstandardmainbar = 35;
 standardmainbar: array[1..numstandardmainbar] of string=(
 ('0;FileNew1'),
 ('1;FileOpen1'),
 ('2;FileSaveAs1'),
 ('3;Print1'),
 ('82;ViewNightVision'),
-('-1;Divider'),
+('100;Divider'),
 ('4;Cascade1'),
 ('14;TileVertical1'),
-('-1;Divider'),
+('100;Divider'),
 ('19;Undo'),
 ('20;Redo'),
 ('6;zoomplus'),
 ('7;zoomminus'),
 ('8;ZoomBar'),
-('54;MagPanel'),
-('45;quicksearch'),
-('-1;Divider'),
+('99;MagPanel'),
+('102;quicksearch'),
+('100;Divider'),
 ('76;Search1'),
 ('78;Position'),
 ('46;listobj'),
 ('98;Obslist'),
 ('75;Calendar'),
 ('94;PlanetInfo'),
-('-1;Divider'),
+('100;Divider'),
 ('43;TimeDec'),
 ('84;TimeReset'),
 ('44;TimeInc'),
 ('88;Animation'),
-('45;TimeValPanel'),
-('-1;Divider'),
-('45;TimeU'),
-('-1;Divider'),
+('103;TimeValPanel'),
+('104;TimeU'),
+('100;Divider'),
 ('48;TelescopeConnect'),
 ('51;TelescopeSync'),
 ('50;TelescopeSlew'),
@@ -1731,11 +1732,11 @@ standardobjectbar: array[1..numstandardobjectbar] of string=(
 ('83;EditLabels'),
 ('70;ShowObjectbelowHorizon'),
 ('35;switchbackground'),
-('-1;Divider'),
+('100;Divider'),
 ('97;MouseMode'),
 ('79;SyncChart'),
 ('80;Track'),
-('-1;Divider'),
+('100;Divider'),
 ('34;switchstars'));
 
 // Standard left toolbar
@@ -1758,7 +1759,7 @@ standardleftbar: array[1..numstandardleftbar] of string=(
 numstandardrightbar = 8;
 standardrightbar: array[1..numstandardrightbar] of string=(
 ('32;ToolBarFOV'),
-('-1;Divider'),
+('100;Divider'),
 ('42;allSky'),
 ('38;toN'),
 ('39;toS'),
