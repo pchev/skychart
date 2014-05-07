@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-05-03 09:12+0000\n"
+"POT-Creation-Date: 2014-05-07 15:03+0000\n"
 "PO-Revision-Date: 2014-05-01 08:40+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-03 09:17+0000\n"
-"X-Generator: Launchpad (build 16985)\n"
+"X-Launchpad-Export-Date: 2014-05-07 15:44+0000\n"
+"X-Generator: Launchpad (build 16996)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -415,6 +415,10 @@ msgstr "รีเฟรชอัตโนมัติทุก ๆ "
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
 msgstr "แฟ้มเสริม"
+
+#: u_translation.rsavailableact
+msgid "Available actions"
+msgstr ""
 
 #: u_translation.rsaz
 msgid "Az"
@@ -1484,6 +1488,10 @@ msgstr "ขนาดและหน่วย"
 msgid "Dir"
 msgstr "ทิศทาง"
 
+#: u_translation.rsdirection2
+msgid "Direction"
+msgstr ""
+
 #: u_translation.rsdirectory
 msgid "Directory"
 msgstr "ไดเรกทอรี"
@@ -1551,6 +1559,10 @@ msgstr "ระยะห่าง"
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
 msgstr "การวัดระยะห่าง"
+
+#: u_translation.rsdivider
+msgid "Divider"
+msgstr ""
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
@@ -1635,6 +1647,10 @@ msgstr "วาดเป็นวัตถุท้องฟ้า"
 #: u_translation.rsdrawasstar
 msgid "Draw as star"
 msgstr "วาดเป็นดาว"
+
+#: u_translation.rsdrawing
+msgid "Drawing"
+msgstr ""
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
@@ -1744,6 +1760,10 @@ msgstr ""
 msgid "Edit object types"
 msgstr "แก้ไขชนิดของวัตถุ"
 
+#: u_translation.rsedittimeincr
+msgid "Edit time increment"
+msgstr ""
+
 #: u_translation.rseditunits
 msgid "Edit units"
 msgstr "แก้ไขหน่วย"
@@ -1755,6 +1775,10 @@ msgstr "มุมห่าง"
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
 msgstr "เนบิวลาเปล่งแสง"
+
+#: u_translation.rsempty
+msgid "Empty"
+msgstr ""
 
 #: u_translation.rsencoderconfi
 msgid "Encoder Configuration"
@@ -2028,6 +2052,10 @@ msgstr "ระบายด้วยสีขอบฟ้า"
 msgid "Filter ->"
 msgstr "ตัวกรอง ->"
 
+#: u_translation.rsfilter2
+msgid "Filter"
+msgstr ""
+
 #: u_translation.rsfilternebula
 msgid "Filter deep sky objects"
 msgstr "กรองวัตถุท้องฟ้าห้วงลึก"
@@ -2123,6 +2151,10 @@ msgstr "ขอบเขตการมองเห็น"
 #: u_translation.rsfov2
 msgid "FOV:"
 msgstr "ขอบเขตการมองเห็น:"
+
+#: u_translation.rsfovbar
+msgid "FOV bar"
+msgstr ""
 
 #: u_translation.rsfovnumber
 msgid "FOV number:"
@@ -2596,6 +2628,10 @@ msgstr "มองไม่เห็นในละติจูดนี้"
 msgid "Is the coordinates epoch really %s?"
 msgstr "ต้องการจะใช้จุดเริ่มยุค %s จริงหรือไม่?"
 
+#: u_translation.rsisempty
+msgid "%s is empty!"
+msgstr ""
+
 #: u_translation.rsittaketoolon
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
 msgstr "การวาด %s จากบัญชี %s ใช้เวลานานเกินไป กรุณาหลีกเลี่ยงการใช้บัญชีนี้สำหรับขอบเขตการมองเห็นปัจจุบัน"
@@ -2848,6 +2884,10 @@ msgstr "เวลาดาราคติท้องถิ่น"
 msgid "Location code"
 msgstr "รหัสสถานที่"
 
+#: u_translation.rslock
+msgid "Lock"
+msgstr ""
+
 #: u_translation.rslockon
 msgid "Lock on %s"
 msgstr "ล็อกอยู่ที่ %s"
@@ -3075,6 +3115,10 @@ msgstr "′"
 #: u_translation.rsmin2
 msgid "min"
 msgstr "ต่ำสุด"
+
+#: u_translation.rsminimal
+msgid "Minimal"
+msgstr ""
 
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
@@ -4504,6 +4548,10 @@ msgstr "วัน"
 msgid "Search"
 msgstr "สืบค้น"
 
+#: u_translation.rssearchbox
+msgid "Search box"
+msgstr ""
+
 #: u_translation.rssearchbyname
 msgid "Search by name"
 msgstr "ค้นหาด้วยชื่อ"
@@ -4600,6 +4648,10 @@ msgstr "เลือกส่วนต่อประสานกล้องโ
 msgid "Select the type of objects in your catalog"
 msgstr "เลือกชนิดของวัตถุที่อยู่ในบัญชีของคุณ"
 
+#: u_translation.rsselecttimeun
+msgid "Select time units"
+msgstr ""
+
 #: u_translation.rssemi
 msgid "Semi"
 msgstr "กึ่ง"
@@ -4623,6 +4675,10 @@ msgstr "ส่งตารางไปยัง"
 #: u_translation.rsseparation
 msgid "Separation"
 msgstr "ระยะห่าง"
+
+#: u_translation.rsseparator
+msgid "Separator"
+msgstr ""
 
 #: u_translation.rsserialport
 msgid "Serial Port"
@@ -4699,6 +4755,10 @@ msgstr "ตั้งค่าเวลา"
 #: u_translation.rssetup
 msgid "Setup"
 msgstr "ตั้งค่า"
+
+#: u_translation.rssetupoption
+msgid "Setup Options"
+msgstr ""
 
 #: u_translation.rsshour
 msgid "H"
@@ -5052,6 +5112,10 @@ msgstr "สี่เหลี่ยมจัตุรัส"
 msgid "S"
 msgstr "วินาที"
 
+#: u_translation.rsstandard
+msgid "Standard"
+msgstr ""
+
 #: u_translation.rsstandardcolo
 msgid "Standard  colour"
 msgstr "สีมาตรฐาน"
@@ -5059,6 +5123,10 @@ msgstr "สีมาตรฐาน"
 #: u_translation.rsstar
 msgid "Star"
 msgstr "ดาวฤกษ์"
+
+#: u_translation.rsstarandnebul
+msgid "Star and nebula limit"
+msgstr ""
 
 #: u_translation.rsstarcolourbv
 msgid "Star colour (B-V):"
@@ -5371,6 +5439,14 @@ msgstr "คืนนี้"
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "แถบเครื่องมือ"
+
+#: u_translation.rstoolbaredito
+msgid "Tool bar editor"
+msgstr ""
+
+#: u_translation.rstools
+msgid "Tools"
+msgstr ""
 
 #: u_translation.rstoomanyopenw
 msgid "Too many open windows, please close some charts."
@@ -5843,6 +5919,10 @@ msgstr "ซูมเข้า"
 #: u_translation.rszoom2
 msgid "Zoom -"
 msgstr "ซูมออก"
+
+#: u_translation.rszoom3
+msgid "Zoom"
+msgstr ""
 
 #: u_translation.rszoomcentre
 msgid "Zoom + and centre on"

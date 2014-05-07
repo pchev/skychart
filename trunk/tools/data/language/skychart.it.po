@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-03 09:12+0000\n"
-"PO-Revision-Date: 2014-05-01 08:35+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2014-05-07 15:03+0000\n"
+"PO-Revision-Date: 2014-05-03 10:25+0000\n"
+"Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-03 09:17+0000\n"
-"X-Generator: Launchpad (build 16985)\n"
+"X-Launchpad-Export-Date: 2014-05-07 15:44+0000\n"
+"X-Generator: Launchpad (build 16996)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -35,7 +35,7 @@ msgstr "9537 (insieme di dati maggiore)"
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
-msgstr "Abbreviazione"
+msgstr "Abbreviato"
 
 #: u_translation.rsabort
 msgid "Abort"
@@ -416,6 +416,10 @@ msgstr "Auto aggiornamento ogni "
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
 msgstr "Files ausiliari"
+
+#: u_translation.rsavailableact
+msgid "Available actions"
+msgstr ""
 
 #: u_translation.rsaz
 msgid "Az"
@@ -995,7 +999,7 @@ msgstr "Nome file confini delle costellazioni : "
 
 #: u_translation.rsconstellatio6
 msgid "Constellation label"
-msgstr "Etichette Costellazioni"
+msgstr "Nomi Costellazioni"
 
 #: u_translation.rsconstellatio7
 msgid "Constellation name"
@@ -1347,7 +1351,7 @@ msgstr "Gradi"
 
 #: u_translation.rsdegreegridsp
 msgid "Grid spacing in degree"
-msgstr ""
+msgstr "Spaziatura griglia in gradi"
 
 #: u_translation.rsdegrees
 msgid "degrees"
@@ -1486,6 +1490,10 @@ msgstr "Dimensioni e Unità"
 msgid "Dir"
 msgstr "Dir"
 
+#: u_translation.rsdirection2
+msgid "Direction"
+msgstr ""
+
 #: u_translation.rsdirectory
 msgid "Directory"
 msgstr "Cartella"
@@ -1553,6 +1561,10 @@ msgstr "Distanza"
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
 msgstr "Misura distanza"
+
+#: u_translation.rsdivider
+msgid "Divider"
+msgstr ""
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
@@ -1637,6 +1649,10 @@ msgstr "Mostra come DSO"
 #: u_translation.rsdrawasstar
 msgid "Draw as star"
 msgstr "Mostra come stella"
+
+#: u_translation.rsdrawing
+msgid "Drawing"
+msgstr ""
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
@@ -1746,6 +1762,10 @@ msgstr "Operazione di modifica linea"
 msgid "Edit object types"
 msgstr "Modifica Tipo di Oggetto"
 
+#: u_translation.rsedittimeincr
+msgid "Edit time increment"
+msgstr ""
+
 #: u_translation.rseditunits
 msgid "Edit units"
 msgstr "Modifica Unità"
@@ -1757,6 +1777,10 @@ msgstr "Elong."
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
 msgstr "Nebulosa a emissione"
+
+#: u_translation.rsempty
+msgid "Empty"
+msgstr ""
 
 #: u_translation.rsencoderconfi
 msgid "Encoder Configuration"
@@ -2030,6 +2054,10 @@ msgstr "Riempi col colore dell'orizzonte"
 msgid "Filter ->"
 msgstr "Filtro ->"
 
+#: u_translation.rsfilter2
+msgid "Filter"
+msgstr ""
+
 #: u_translation.rsfilternebula
 msgid "Filter deep sky objects"
 msgstr "Filtra profondo cielo"
@@ -2125,6 +2153,10 @@ msgstr "FOV"
 #: u_translation.rsfov2
 msgid "FOV:"
 msgstr "FOV:"
+
+#: u_translation.rsfovbar
+msgid "FOV bar"
+msgstr ""
 
 #: u_translation.rsfovnumber
 msgid "FOV number:"
@@ -2388,7 +2420,7 @@ msgstr "Angolo Orario"
 
 #: u_translation.rshourgridspac
 msgid "Grid spacing in hour for equatorial grid"
-msgstr ""
+msgstr "Spaziatura griglia in ore per griglia equatoriale"
 
 #: u_translation.rshours
 msgid "hours"
@@ -2597,6 +2629,10 @@ msgstr "Invisibile a questa latitudine"
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
 msgstr "L'epoca dei dati è veramente %s ?"
+
+#: u_translation.rsisempty
+msgid "%s is empty!"
+msgstr ""
 
 #: u_translation.rsittaketoolon
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
@@ -2840,7 +2876,7 @@ msgstr "Carica orizzonte"
 
 #: u_translation.rslocalizednam
 msgid "Localized name"
-msgstr ""
+msgstr "Tradotto"
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
@@ -2849,6 +2885,10 @@ msgstr "Tempo Locale Siderale"
 #: u_translation.rslocationcode
 msgid "Location code"
 msgstr "Codice località"
+
+#: u_translation.rslock
+msgid "Lock"
+msgstr ""
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -3077,6 +3117,10 @@ msgstr "'"
 #: u_translation.rsmin2
 msgid "min"
 msgstr "min"
+
+#: u_translation.rsminimal
+msgid "Minimal"
+msgstr ""
 
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
@@ -3508,7 +3552,7 @@ msgstr "Spegni"
 
 #: u_translation.rsofficialname
 msgid "Official name"
-msgstr ""
+msgstr "Latino"
 
 #: u_translation.rsoffset
 msgid "Offset"
@@ -4506,6 +4550,10 @@ msgstr "G"
 msgid "Search"
 msgstr "Cerca"
 
+#: u_translation.rssearchbox
+msgid "Search box"
+msgstr ""
+
 #: u_translation.rssearchbyname
 msgid "Search by name"
 msgstr "Cerca per nome"
@@ -4602,6 +4650,10 @@ msgstr "Seleziona l'interfaccia"
 msgid "Select the type of objects in your catalog"
 msgstr "Seleziona il tipo di oggetti del tuo catalogo"
 
+#: u_translation.rsselecttimeun
+msgid "Select time units"
+msgstr ""
+
 #: u_translation.rssemi
 msgid "Semi"
 msgstr "Semi"
@@ -4625,6 +4677,10 @@ msgstr "Invia tabella a"
 #: u_translation.rsseparation
 msgid "Separation"
 msgstr "Separazione"
+
+#: u_translation.rsseparator
+msgid "Separator"
+msgstr ""
 
 #: u_translation.rsserialport
 msgid "Serial Port"
@@ -4701,6 +4757,10 @@ msgstr "Imposta tempo"
 #: u_translation.rssetup
 msgid "Setup"
 msgstr "Configurazione"
+
+#: u_translation.rssetupoption
+msgid "Setup Options"
+msgstr ""
 
 #: u_translation.rsshour
 msgid "H"
@@ -5054,6 +5114,10 @@ msgstr "Quadrato"
 msgid "S"
 msgstr "S"
 
+#: u_translation.rsstandard
+msgid "Standard"
+msgstr ""
+
 #: u_translation.rsstandardcolo
 msgid "Standard  colour"
 msgstr "Colorazioni Standard"
@@ -5061,6 +5125,10 @@ msgstr "Colorazioni Standard"
 #: u_translation.rsstar
 msgid "Star"
 msgstr "Stella"
+
+#: u_translation.rsstarandnebul
+msgid "Star and nebula limit"
+msgstr ""
 
 #: u_translation.rsstarcolourbv
 msgid "Star colour (B-V):"
@@ -5373,6 +5441,14 @@ msgstr "Stanotte"
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "Pannelli"
+
+#: u_translation.rstoolbaredito
+msgid "Tool bar editor"
+msgstr ""
+
+#: u_translation.rstools
+msgid "Tools"
+msgstr ""
 
 #: u_translation.rstoomanyopenw
 msgid "Too many open windows, please close some charts."
@@ -5845,6 +5921,10 @@ msgstr "Zoom +"
 #: u_translation.rszoom2
 msgid "Zoom -"
 msgstr "Zoom -"
+
+#: u_translation.rszoom3
+msgid "Zoom"
+msgstr ""
 
 #: u_translation.rszoomcentre
 msgid "Zoom + and centre on"

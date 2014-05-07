@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-03 09:12+0000\n"
+"POT-Creation-Date: 2014-05-07 15:03+0000\n"
 "PO-Revision-Date: 2014-05-01 08:38+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-03 09:17+0000\n"
-"X-Generator: Launchpad (build 16985)\n"
+"X-Launchpad-Export-Date: 2014-05-07 15:44+0000\n"
+"X-Generator: Launchpad (build 16996)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -416,6 +416,10 @@ msgstr "Автообновление каждые "
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
 msgstr "Дополнительные файлы"
+
+#: u_translation.rsavailableact
+msgid "Available actions"
+msgstr ""
 
 #: u_translation.rsaz
 msgid "Az"
@@ -1485,6 +1489,10 @@ msgstr "Размер и единицы"
 msgid "Dir"
 msgstr "Dir"
 
+#: u_translation.rsdirection2
+msgid "Direction"
+msgstr ""
+
 #: u_translation.rsdirectory
 msgid "Directory"
 msgstr "Каталог"
@@ -1552,6 +1560,10 @@ msgstr "Дистанция"
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
 msgstr "Измерение расстояния"
+
+#: u_translation.rsdivider
+msgid "Divider"
+msgstr ""
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
@@ -1636,6 +1648,10 @@ msgstr "Рисовать как DSO"
 #: u_translation.rsdrawasstar
 msgid "Draw as star"
 msgstr "Рисовать как звезду"
+
+#: u_translation.rsdrawing
+msgid "Drawing"
+msgstr ""
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
@@ -1745,6 +1761,10 @@ msgstr "Редактировать оператор линии"
 msgid "Edit object types"
 msgstr "Изм. тип объектов"
 
+#: u_translation.rsedittimeincr
+msgid "Edit time increment"
+msgstr ""
+
 #: u_translation.rseditunits
 msgid "Edit units"
 msgstr "Изм. величин"
@@ -1756,6 +1776,10 @@ msgstr "Элонг."
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
 msgstr "Эмисионная туманность"
+
+#: u_translation.rsempty
+msgid "Empty"
+msgstr ""
 
 #: u_translation.rsencoderconfi
 msgid "Encoder Configuration"
@@ -2029,6 +2053,10 @@ msgstr "Залить цветом горизонта"
 msgid "Filter ->"
 msgstr "Фильтр ->"
 
+#: u_translation.rsfilter2
+msgid "Filter"
+msgstr ""
+
 #: u_translation.rsfilternebula
 msgid "Filter deep sky objects"
 msgstr "Фильтровать Deep Sky"
@@ -2124,6 +2152,10 @@ msgstr "ПЗ"
 #: u_translation.rsfov2
 msgid "FOV:"
 msgstr "ПЗ:"
+
+#: u_translation.rsfovbar
+msgid "FOV bar"
+msgstr ""
 
 #: u_translation.rsfovnumber
 msgid "FOV number:"
@@ -2597,6 +2629,10 @@ msgstr "Невидимо на этой широте"
 msgid "Is the coordinates epoch really %s?"
 msgstr "Это действительно такая эпоха координат %s ?"
 
+#: u_translation.rsisempty
+msgid "%s is empty!"
+msgstr ""
+
 #: u_translation.rsittaketoolon
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
 msgstr ""
@@ -2849,6 +2885,10 @@ msgstr "Местное звёздное время"
 msgid "Location code"
 msgstr ""
 
+#: u_translation.rslock
+msgid "Lock"
+msgstr ""
+
 #: u_translation.rslockon
 msgid "Lock on %s"
 msgstr "Замкнуть на %s"
@@ -3076,6 +3116,10 @@ msgstr "'"
 #: u_translation.rsmin2
 msgid "min"
 msgstr "мин."
+
+#: u_translation.rsminimal
+msgid "Minimal"
+msgstr ""
 
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
@@ -4505,6 +4549,10 @@ msgstr "Число"
 msgid "Search"
 msgstr "Поиск"
 
+#: u_translation.rssearchbox
+msgid "Search box"
+msgstr ""
+
 #: u_translation.rssearchbyname
 msgid "Search by name"
 msgstr "Поиск по имени"
@@ -4601,6 +4649,10 @@ msgstr "Выбор интерфейса телескопа"
 msgid "Select the type of objects in your catalog"
 msgstr "Выберите тип объекта в вашем каталоге"
 
+#: u_translation.rsselecttimeun
+msgid "Select time units"
+msgstr ""
+
 #: u_translation.rssemi
 msgid "Semi"
 msgstr "Полу"
@@ -4624,6 +4676,10 @@ msgstr ""
 #: u_translation.rsseparation
 msgid "Separation"
 msgstr "Разделение"
+
+#: u_translation.rsseparator
+msgid "Separator"
+msgstr ""
 
 #: u_translation.rsserialport
 msgid "Serial Port"
@@ -4700,6 +4756,10 @@ msgstr "Задать время"
 #: u_translation.rssetup
 msgid "Setup"
 msgstr "Настройка"
+
+#: u_translation.rssetupoption
+msgid "Setup Options"
+msgstr ""
 
 #: u_translation.rsshour
 msgid "H"
@@ -5053,6 +5113,10 @@ msgstr "Квадрат"
 msgid "S"
 msgstr "Секунд"
 
+#: u_translation.rsstandard
+msgid "Standard"
+msgstr ""
+
 #: u_translation.rsstandardcolo
 msgid "Standard  colour"
 msgstr "Стандартный цвет"
@@ -5060,6 +5124,10 @@ msgstr "Стандартный цвет"
 #: u_translation.rsstar
 msgid "Star"
 msgstr "Звезда"
+
+#: u_translation.rsstarandnebul
+msgid "Star and nebula limit"
+msgstr ""
 
 #: u_translation.rsstarcolourbv
 msgid "Star colour (B-V):"
@@ -5372,6 +5440,14 @@ msgstr "Сегод. вечер"
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "Панель инструментов"
+
+#: u_translation.rstoolbaredito
+msgid "Tool bar editor"
+msgstr ""
+
+#: u_translation.rstools
+msgid "Tools"
+msgstr ""
 
 #: u_translation.rstoomanyopenw
 msgid "Too many open windows, please close some charts."
@@ -5844,6 +5920,10 @@ msgstr "Увеличение"
 #: u_translation.rszoom2
 msgid "Zoom -"
 msgstr "Уменьшение"
+
+#: u_translation.rszoom3
+msgid "Zoom"
+msgstr ""
 
 #: u_translation.rszoomcentre
 msgid "Zoom + and centre on"
