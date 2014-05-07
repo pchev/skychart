@@ -1507,7 +1507,7 @@ resourcestring
   rsFilter2 = 'Filter';
   rsLock = 'Lock';
   rsDirection2 = 'Direction';
-  rsSetupOption = 'SetupOption';
+  rsSetupOption = 'Setup Options';
   rsTools = 'Tools';
   rsZoom3 = 'Zoom';
 

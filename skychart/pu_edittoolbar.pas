@@ -291,8 +291,8 @@ if (numeditbar>0) and (numaction>0) then begin
   ActionTreeView.FullCollapse;
   ActionTreeView.Images:=Fimages;
   // add separator tools
-  actnode:=ActionTreeView.Items.Add(nil,'Tools');
-  cnode:=ActionTreeView.Items.AddChild(actnode,'Separators');
+  actnode:=ActionTreeView.Items.Add(nil,rsTools);
+  cnode:=ActionTreeView.Items.AddChild(actnode,rsSeparator);
   with ActionTreeView.Items.AddChild(cnode,DividerTxt) do ImageIndex:=100;
   with ActionTreeView.Items.AddChild(cnode,SeparatorTxt) do ImageIndex:=101;
   for k:=0 to numaction-1 do begin

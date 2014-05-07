@@ -6440,6 +6440,7 @@ if samp<>nil then begin
   samp.hubmissingvalue:=rsSAMPHubProfi;
   samp.nohuberror:=rsNoSAMPHubPro;
 end;
+InitToolBar;
 except
 end;
 end;
@@ -6449,6 +6450,11 @@ begin
 ldeg:=rsdeg;
 lmin:=rsmin;
 lsec:=rssec;
+// Tool bar
+ToolBarMain.Caption:=rsMainBar;
+ToolBarObj.Caption:=rsObjectBar;
+ToolBarLeft.Caption:=rsLeftBar;
+ToolBarRight.Caption:=rsRightBar;
 // Action category
 CatAnimation := rsAnimation ;
 CatDirection := rsDirection2;
@@ -6894,6 +6900,16 @@ tbFOV7.Hint:=rsSetFOVTo;
 tbFOV8.Hint:=rsSetFOVTo;
 tbFOV9.Hint:=rsSetFOVTo;
 tbFOV10.Hint:=rsSetFOVTo;
+SetFOV01.Category:=CatFOV;
+SetFOV02.Category:=CatFOV;
+SetFOV03.Category:=CatFOV;
+SetFOV04.Category:=CatFOV;
+SetFOV05.Category:=CatFOV;
+SetFOV06.Category:=CatFOV;
+SetFOV07.Category:=CatFOV;
+SetFOV08.Category:=CatFOV;
+SetFOV09.Category:=CatFOV;
+SetFOV10.Category:=CatFOV;
 
 // planet names
 pla[1]:=rsMercury;
@@ -8467,11 +8483,11 @@ f_edittoolbar.AddAction(ActionListChart,rsChart);
 f_edittoolbar.AddAction(ActionListTelescope,rsTelescope);
 f_edittoolbar.AddAction(ActionListWindow,rsWindow);
 f_edittoolbar.ClearControl;
-f_edittoolbar.AddOtherControl(MagPanel, rsStarAndNebul, 'Filter', rsChart, 99);
-f_edittoolbar.AddOtherControl(quicksearch, rsSearchBox, 'Search', rsEdit, 102);
-f_edittoolbar.AddOtherControl(TimeValPanel, rsEditTimeIncr, 'Animation',  rsChart, 103);
-f_edittoolbar.AddOtherControl(TimeU, rsSelectTimeUn, 'Animation', rsChart, 104);
-f_edittoolbar.AddOtherControl(ToolBarFOV, rsFOVBar, 'FOV', rsChart, 32);
+f_edittoolbar.AddOtherControl(MagPanel, rsStarAndNebul, CatFilter, rsChart, 99);
+f_edittoolbar.AddOtherControl(quicksearch, rsSearchBox, CatSearch, rsEdit, 102);
+f_edittoolbar.AddOtherControl(TimeValPanel, rsEditTimeIncr, CatAnimation,  rsChart, 103);
+f_edittoolbar.AddOtherControl(TimeU, rsSelectTimeUn, CatAnimation, rsChart, 104);
+f_edittoolbar.AddOtherControl(ToolBarFOV, rsFOVBar, CatFOV, rsChart, 32);
 f_edittoolbar.ClearToolbar;
 f_edittoolbar.DefaultToolbar:=ToolBarMain.Caption;
 f_edittoolbar.AddToolbar(ToolBarMain);
