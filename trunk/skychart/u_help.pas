@@ -81,6 +81,7 @@ const
   hlpObslist = 'observing_list.html';
   hlpSAMP = 'vo_samp.html';
   hlpImgList = 'image_list.html';
+  hlpToolbarEditor = 'toolbar_editor.html';
 
 implementation
 

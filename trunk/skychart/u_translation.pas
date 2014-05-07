@@ -1491,6 +1491,25 @@ resourcestring
   rsOfficialName = 'Official name';
   rsLocalizedNam = 'Localized name';
   rsIsEmpty      = '%s is empty!';
+  rsToolBarEdito = 'Tool bar editor';
+  rsAvailableAct = 'Available actions';
+  rsMinimal = 'Minimal';
+  rsStandard = 'Standard';
+  rsEmpty = 'Empty';
+  rsStarAndNebul = 'Star and nebula limit';
+  rsSearchBox = 'Search box';
+  rsEditTimeIncr = 'Edit time increment';
+  rsSelectTimeUn = 'Select time units';
+  rsFOVBar = 'FOV bar';
+  rsDivider = 'Divider';
+  rsSeparator = 'Separator';
+  rsDrawing = 'Drawing';
+  rsFilter2 = 'Filter';
+  rsLock = 'Lock';
+  rsDirection2 = 'Direction';
+  rsSetupOption = 'SetupOption';
+  rsTools = 'Tools';
+  rsZoom3 = 'Zoom';
 
 implementation
 

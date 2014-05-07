@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant,
+uses u_constant, u_translation,  u_help,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
   ActnList, ExtCtrls, StdCtrls, PairSplitter, Buttons;
 
@@ -37,6 +37,7 @@ type
   { Tf_edittoolbar }
 
   Tf_edittoolbar = class(TForm)
+    ButtonHelp: TButton;
     ButtonClear: TBitBtn;
     ButtonDown: TBitBtn;
     ButtonUp: TBitBtn;
@@ -44,7 +45,7 @@ type
     ButtonAdd: TBitBtn;
     ButtonCollapse: TBitBtn;
     ButtonExpand: TBitBtn;
-    ButtonClearAll: TButton;
+    ButtonEmpty: TButton;
     ButtonMini: TButton;
     ButtonStd: TButton;
     ButtonOK: TButton;
@@ -60,7 +61,7 @@ type
     ActionTreeView: TTreeView;
     editbarPanel: TPanel;
     PanelLeft: TPanel;
-    procedure ButtonClearAllClick(Sender: TObject);
+    procedure ButtonEmptyClick(Sender: TObject);
     procedure ButtonCollapseClick(Sender: TObject);
     procedure ButtonExpandClick(Sender: TObject);
     procedure ButtonMiniClick(Sender: TObject);
@@ -146,7 +147,7 @@ type
 
     // add a mouseup event to each toolbutton (to process the right click)
     property TBOnMouseUp: TMouseEvent read FTBOnMouseUp write FTBOnMouseUp;
-
+    procedure SetLang;
   end;
 
 var
@@ -160,6 +161,21 @@ implementation
 {$R *.lfm}
 
 { Tf_edittoolbar }
+
+procedure Tf_edittoolbar.SetLang;
+begin
+Caption:=rsToolBarEdito;
+ButtonOK.caption:=rsOK;
+ButtonCancel.caption:=rsCancel;
+ButtonHelp.caption:=rsHelp;
+Label1.Caption:=rsAvailableAct;
+ButtonMini.Caption:=rsMinimal;
+ButtonStd.Caption:=rsStandard;
+ButtonEmpty.Caption:=rsEmpty;
+DividerTxt:=rsDivider;
+SeparatorTxt:=rsSeparator;
+SetHelp(self,hlpToolbarEditor);
+end;
 
 procedure Tf_edittoolbar.SetImages(value: TImageList);
 var i: integer;
@@ -255,8 +271,7 @@ procedure Tf_edittoolbar.FormCreate(Sender: TObject);
 begin
   numaction:=0;
   numeditbar:=0;
-  DividerTxt:='Divider';
-  SeparatorTxt:='Separator';
+  Setlang;
 end;
 
 procedure Tf_edittoolbar.FormResize(Sender: TObject);
@@ -278,8 +293,8 @@ if (numeditbar>0) and (numaction>0) then begin
   // add separator tools
   actnode:=ActionTreeView.Items.Add(nil,'Tools');
   cnode:=ActionTreeView.Items.AddChild(actnode,'Separators');
-  ActionTreeView.Items.AddChild(cnode,DividerTxt);
-  ActionTreeView.Items.AddChild(cnode,SeparatorTxt);
+  with ActionTreeView.Items.AddChild(cnode,DividerTxt) do ImageIndex:=100;
+  with ActionTreeView.Items.AddChild(cnode,SeparatorTxt) do ImageIndex:=101;
   for k:=0 to numaction-1 do begin
     // set main actionlist as first level
     actnode:=ActionTreeView.Items.Add(nil,editActionTxt[k]);
@@ -732,7 +747,7 @@ begin
 ActionTreeView.FullCollapse;
 end;
 
-procedure Tf_edittoolbar.ButtonClearAllClick(Sender: TObject);
+procedure Tf_edittoolbar.ButtonEmptyClick(Sender: TObject);
 var i: integer;
 begin
  for i:=0 to ComboBox1.Items.Count-1 do ClearToolbarTree(i);

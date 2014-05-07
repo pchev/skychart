@@ -8,7 +8,7 @@ object f_edittoolbar: Tf_edittoolbar
   ClientWidth = 550
   OnCreate = FormCreate
   OnResize = FormResize
-  LCLVersion = '1.2.2.0'
+  LCLVersion = '1.2.0.3'
   object PanelBottom: TPanel
     Left = 0
     Height = 35
@@ -19,7 +19,7 @@ object f_edittoolbar: Tf_edittoolbar
     ClientWidth = 550
     TabOrder = 0
     object ButtonOK: TButton
-      Left = 456
+      Left = 464
       Height = 25
       Top = 4
       Width = 75
@@ -28,7 +28,7 @@ object f_edittoolbar: Tf_edittoolbar
       TabOrder = 0
     end
     object ButtonCancel: TButton
-      Left = 352
+      Left = 368
       Height = 25
       Top = 4
       Width = 75
@@ -54,14 +54,22 @@ object f_edittoolbar: Tf_edittoolbar
       OnClick = ButtonStdClick
       TabOrder = 3
     end
-    object ButtonClearAll: TButton
+    object ButtonEmpty: TButton
       Left = 184
       Height = 25
       Top = 4
-      Width = 96
+      Width = 80
       Caption = 'Empty'
-      OnClick = ButtonClearAllClick
+      OnClick = ButtonEmptyClick
       TabOrder = 4
+    end
+    object ButtonHelp: TButton
+      Left = 280
+      Height = 25
+      Top = 4
+      Width = 75
+      Caption = 'Help'
+      TabOrder = 5
     end
   end
   object PanelLeft: TPanel
@@ -226,9 +234,9 @@ object f_edittoolbar: Tf_edittoolbar
       TabOrder = 2
       object Label1: TLabel
         Left = 16
-        Height = 15
+        Height = 16
         Top = 7
-        Width = 92
+        Width = 104
         Caption = 'Available actions'
         ParentColor = False
       end
@@ -484,7 +492,7 @@ object f_edittoolbar: Tf_edittoolbar
       TabOrder = 3
     end
     object ButtonClear: TBitBtn
-      Left = 6
+      Left = 8
       Height = 30
       Top = 248
       Width = 42
@@ -573,7 +581,7 @@ object f_edittoolbar: Tf_edittoolbar
       TabOrder = 1
       object ComboBox1: TComboBox
         Left = 8
-        Height = 25
+        Height = 28
         Top = 4
         Width = 230
         ItemHeight = 0
