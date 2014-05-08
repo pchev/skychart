@@ -479,8 +479,8 @@ var i,j,k,n,m,p,lpos,w,h: integer;
     act: string;
 begin
 if (numeditbar>0) and  (numaction>0) then begin
-  lpos:=10000; // big enough to add to the right
   for p:=0 to numeditbar-1 do begin
+    lpos:=0; // first button to the left
     // clear bar
     i:=editbar[p].ButtonCount;
     editbar[p].BeginUpdate;
@@ -575,6 +575,7 @@ if (numeditbar>0) and  (numaction>0) then begin
         end;
       end;
       end;
+      lpos:=10000; // big enough to add the next button to the right
     end;
     // Move the final divider to the end
     if editbar[p].Name='ToolBarMain' then
