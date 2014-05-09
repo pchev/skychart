@@ -1102,6 +1102,8 @@ except
    MessageDlg('FormShow error: '+E.Message, mtError, [mbClose], 0);
   end;
 end;
+// Init tool bar
+InitToolBar;
 InitTimer.Enabled:=true;
 InitOK:=true;
 if VerboseMsg then
@@ -1114,8 +1116,6 @@ begin
 InitTimer.Enabled:=False;
 if VerboseMsg then
  WriteTrace('Enter Tf_main.InitTimerTimer');
-// Init tool bar after the main form is show and resized
-InitToolBar;
 MultiFrame1.setActiveChild(0);
 // ensure a first chart is draw, even if it usually result in a double refresh on launch
 for i:=0 to MultiFrame1.ChildCount-1 do
