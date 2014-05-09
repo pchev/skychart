@@ -78,7 +78,7 @@ type
   private
     { private declarations }
     numaction,numcontrol,numeditbar: integer;
-    FTBOnMouseUp: TMouseEvent;
+    FTBOnMouseDown, FTBOnMouseUp: TMouseEvent;
     Fimages: TImageList;
     FDisabledContainer: TWinControl;
     editbar: array of TToolBar;
@@ -147,6 +147,10 @@ type
 
     // add a mouseup event to each toolbutton (to process the right click)
     property TBOnMouseUp: TMouseEvent read FTBOnMouseUp write FTBOnMouseUp;
+
+    // add a mousedown event to each toolbutton (to set modifier keys)
+    property TBOnMouseDown: TMouseEvent read FTBOnMouseDown write FTBOnMouseDown;
+
     procedure SetLang;
   end;
 
@@ -518,6 +522,7 @@ if (numeditbar>0) and  (numaction>0) then begin
         b.Style:=tbsButton;
         b.Action:=editAction[m].Actions[n];
         if assigned(FTBOnMouseUp) then b.OnMouseUp:=FTBOnMouseUp;
+        if assigned(FTBOnMouseDown) then b.OnMouseDown:=FTBOnMouseDown;
         b.Left:=lpos;
       end else begin
         // search for a control
