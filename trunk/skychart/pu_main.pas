@@ -575,6 +575,7 @@ type
     procedure SetTheme;
     procedure SetStarShape;
     procedure ToolButtonMouseUp(Sender: TObject; Button: TMouseButton;  Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonMouseDown(Sender: TObject; Button: TMouseButton;  Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
     UniqueInstance1: TCdCUniqueInstance;
@@ -589,6 +590,7 @@ type
     ConfigCatalog: Tf_configcatalog;
     ConfigCalendar: Tf_configcalendar;
     cryptedpwd,basecaption,kioskpwd :string;
+    rotspeed: double;
     NeedRestart,NeedToInitializeDB,ConfirmSaveConfig,InitOK,RestoreState,ForceClose,SaveBlinkBG : Boolean;
     InitialChartNum, Animcount: integer;
     AutoRefreshLock: Boolean;
@@ -2023,6 +2025,7 @@ configmainbar:=TStringList.Create;
 configobjectbar:=TStringList.Create;
 configleftbar:=TStringList.Create;
 configrightbar:=TStringList.Create;
+rotspeed:=-1;
 
 except
   on E: Exception do begin
@@ -2312,11 +2315,6 @@ begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_FlipyExecute(Sender);
 end;
 
-procedure Tf_main.rot_plusExecute(Sender: TObject);
-begin
-if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_rot_plusExecute(Sender);
-end;
-
 procedure Tf_main.VariableStar1Click(Sender: TObject);
 begin
   ExecNoWait(varobs);
@@ -2327,9 +2325,22 @@ begin
     ViewClock.Checked:=(f_clock<>nil)and(f_clock.Visible);
 end;
 
+procedure Tf_main.rot_plusExecute(Sender: TObject);
+begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+  if rotspeed>0 then rotation(rotspeed)
+                else chart_rot_plusExecute(Sender);
+end;
+rotspeed:=-1;
+end;
+
 procedure Tf_main.rot_minusExecute(Sender: TObject);
 begin
-if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_rot_minusExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+  if rotspeed>0 then rotation(-rotspeed)
+                else chart_rot_minusExecute(Sender);
+end;
+rotspeed:=-1;
 end;
 
 procedure Tf_main.ResetRotationExecute(Sender: TObject);
@@ -7224,16 +7235,16 @@ if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
     tbFOV8.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[7]);
     tbFOV9.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[8]);
     tbFOV10.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[9]);
-    tbFOV1.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[0]);
-    tbFOV2.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[1]);
-    tbFOV3.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[2]);
-    tbFOV4.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[3]);
-    tbFOV5.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[4]);
-    tbFOV6.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[5]);
-    tbFOV7.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[6]);
-    tbFOV8.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[7]);
-    tbFOV9.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[8]);
-    tbFOV10.Hint:=rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[9]);
+    tbFOV1.Hint:='(1) '+rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[0]);
+    tbFOV2.Hint:='(2) '+rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[1]);
+    tbFOV3.Hint:='(3) '+rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[2]);
+    tbFOV4.Hint:='(4) '+rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[3]);
+    tbFOV5.Hint:='(5) '+rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[4]);
+    tbFOV6.Hint:='(6) '+rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[5]);
+    tbFOV7.Hint:='(7) '+rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[6]);
+    tbFOV8.Hint:='(8) '+rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[7]);
+    tbFOV9.Hint:='(9) '+rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[8]);
+    tbFOV10.Hint:='(0) '+rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[9]);
     SetFov01.caption:=tbFOV1.hint;
     SetFov02.caption:=tbFOV2.hint;
     SetFov03.caption:=tbFOV3.hint;
@@ -8491,6 +8502,7 @@ begin
 f_edittoolbar.Images:=ImageNormal;
 f_edittoolbar.DisabledContainer:=ContainerPanel;
 f_edittoolbar.TBOnMouseUp:=ToolButtonMouseUp;
+f_edittoolbar.TBOnMouseDown:=ToolButtonMouseDown;
 f_edittoolbar.ClearAction;
 f_edittoolbar.DefaultAction:=rsFile;
 f_edittoolbar.AddAction(ActionListFile,rsFile);
@@ -8632,59 +8644,21 @@ if (sender is TToolButton)and(TToolButton(sender).Action<>nil ) then begin
 end;
 end;
 
-{procedure Tf_main.ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-var rot:double;
+procedure Tf_main.ToolButtonMouseDown(Sender: TObject; Button: TMouseButton;  Shift: TShiftState; X, Y: Integer);
+var act: string;
 begin
-if Button=mbLeft then begin
-  if ssCtrl in Shift then rot:=45
-  else if ssShift in Shift then rot:=1
-  else if ssMeta in Shift then rot:=180
-  else rot:=15;
-  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do rotation(rot);
-end;
-if Button=mbRight then begin
-  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-     sc.cfgsc.theta:=0;
-     Refresh;
+if (sender is TToolButton)and(TToolButton(sender).Action<>nil ) then begin
+  act:=TToolButton(sender).Action.Name;
+  if Button=mbLeft then begin
+    if (act='rot_plus')or(act='rot_minus') then begin
+      if ssCtrl in Shift then rotspeed:=45
+      else if ssShift in Shift then rotspeed:=1
+      else if ssMeta in Shift then rotspeed:=180
+      else rotspeed:=15;
+    end;
   end;
 end;
 end;
-
-procedure Tf_main.ToolButtonRotMMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-var rot:double;
-begin
-if Button=mbLeft then begin
-  if ssCtrl in Shift then rot:=-45
-  else if ssShift in Shift then rot:=-1
-  else if ssMeta in Shift then rot:=-180
-  else rot:=-15;
-  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do  rotation(rot);
-end;
-if Button=mbRight then begin
-  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-     sc.cfgsc.theta:=0;
-     Refresh;
-  end;
-end;
-end;
-
-procedure Tf_main.ToolButtonRot180MouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-var rot:double;
-begin
-if Button=mbLeft then begin
-  rot:=180;
-  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do rotation(rot);
-end;
-if Button=mbRight then begin
-  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-     sc.cfgsc.theta:=0;
-     Refresh;
-  end;
-end;
-end; }
 
 procedure Tf_main.UpdateSAMPmenu;
 begin
