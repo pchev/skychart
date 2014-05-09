@@ -2912,11 +2912,11 @@ object f_main: Tf_main
     end
   end
   object ContainerPanel: TPanel
-    Left = 472
-    Height = 96
-    Top = 424
+    Left = 476
+    Height = 120
+    Top = 416
     Width = 328
-    ClientHeight = 96
+    ClientHeight = 120
     ClientWidth = 328
     TabOrder = 5
     Visible = False
@@ -3114,85 +3114,128 @@ object f_main: Tf_main
         TabOrder = 1
       end
     end
-    object ToolBarFOV: TToolBar
-      Left = 10
-      Height = 24
-      Top = 60
-      Width = 260
-      Align = alNone
-      AutoSize = True
-      ButtonHeight = 24
-      ButtonWidth = 24
-      Caption = 'ToolBarFOV'
-      Color = clBtnFace
-      EdgeBorders = []
+    object ToolBarFOV: TPanel
+      Left = 8
+      Height = 25
+      Top = 88
+      Width = 275
+      BevelOuter = bvNone
+      ClientHeight = 25
+      ClientWidth = 275
       Font.Color = clNavy
       Font.Style = [fsBold]
-      ParentColor = False
       ParentFont = False
-      ParentShowHint = False
-      ShowCaptions = True
-      ShowHint = True
       TabOrder = 4
-      object tbFOV1: TToolButton
+      OnResize = ToolBarFOVResize
+      object tbFOV1: TSpeedButton
         Left = 1
-        Top = 0
+        Height = 22
+        Top = 2
+        Width = 26
+        AllowAllUp = True
         Caption = '10'''
+        Flat = True
+        Transparent = False
         OnClick = SetFOVClick
       end
-      object tbFOV2: TToolButton
+      object tbFOV2: TSpeedButton
         Tag = 1
-        Left = 27
-        Top = 0
+        Left = 28
+        Height = 22
+        Top = 2
+        Width = 26
+        AllowAllUp = True
+        Flat = True
+        Transparent = False
         OnClick = SetFOVClick
       end
-      object tbFOV3: TToolButton
+      object tbFOV3: TSpeedButton
         Tag = 2
-        Left = 51
-        Top = 0
+        Left = 55
+        Height = 22
+        Top = 2
+        Width = 26
+        AllowAllUp = True
+        Flat = True
+        Transparent = False
         OnClick = SetFOVClick
       end
-      object tbFOV4: TToolButton
+      object tbFOV4: TSpeedButton
         Tag = 3
-        Left = 75
-        Top = 0
+        Left = 82
+        Height = 22
+        Top = 2
+        Width = 26
+        AllowAllUp = True
+        Flat = True
+        Transparent = False
         OnClick = SetFOVClick
       end
-      object tbFOV5: TToolButton
+      object tbFOV5: TSpeedButton
         Tag = 4
-        Left = 99
-        Top = 0
+        Left = 109
+        Height = 22
+        Top = 2
+        Width = 26
+        AllowAllUp = True
+        Flat = True
+        Transparent = False
         OnClick = SetFOVClick
       end
-      object tbFOV6: TToolButton
+      object tbFOV6: TSpeedButton
         Tag = 5
-        Left = 123
-        Top = 0
+        Left = 136
+        Height = 22
+        Top = 2
+        Width = 26
+        AllowAllUp = True
+        Flat = True
+        Transparent = False
         OnClick = SetFOVClick
       end
-      object tbFOV7: TToolButton
+      object tbFOV7: TSpeedButton
         Tag = 6
-        Left = 147
-        Top = 0
+        Left = 163
+        Height = 22
+        Top = 2
+        Width = 26
+        AllowAllUp = True
+        Flat = True
+        Transparent = False
         OnClick = SetFOVClick
       end
-      object tbFOV8: TToolButton
+      object tbFOV8: TSpeedButton
         Tag = 7
-        Left = 171
-        Top = 0
+        Left = 190
+        Height = 22
+        Top = 2
+        Width = 26
+        AllowAllUp = True
+        Flat = True
+        Transparent = False
         OnClick = SetFOVClick
       end
-      object tbFOV9: TToolButton
+      object tbFOV9: TSpeedButton
         Tag = 8
-        Left = 195
-        Top = 0
+        Left = 217
+        Height = 22
+        Top = 2
+        Width = 26
+        AllowAllUp = True
+        Flat = True
+        Transparent = False
         OnClick = SetFOVClick
       end
-      object tbFOV10: TToolButton
+      object tbFOV10: TSpeedButton
         Tag = 9
-        Left = 219
-        Top = 0
-        Caption = '300'
+        Left = 244
+        Height = 22
+        Top = 2
+        Width = 26
+        AllowAllUp = True
+        Caption = '310'
+        Flat = True
+        Transparent = False
         OnClick = SetFOVClick
       end
     end

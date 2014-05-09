@@ -48,19 +48,19 @@ type
 
   Tf_main = class(TForm)
     ContainerPanel: TPanel;
+    ToolBarFOV: TPanel;
+    tbFOV1: TSpeedButton;
+    tbFOV10: TSpeedButton;
+    tbFOV2: TSpeedButton;
+    tbFOV3: TSpeedButton;
+    tbFOV4: TSpeedButton;
+    tbFOV5: TSpeedButton;
+    tbFOV6: TSpeedButton;
+    tbFOV7: TSpeedButton;
+    tbFOV8: TSpeedButton;
+    tbFOV9: TSpeedButton;
     TimeValPanel: TPanel;
     ResetRotation: TAction;
-    ToolBarFOV: TToolBar;
-    tbFOV1: TToolButton;
-    tbFOV10: TToolButton;
-    tbFOV2: TToolButton;
-    tbFOV3: TToolButton;
-    tbFOV4: TToolButton;
-    tbFOV5: TToolButton;
-    tbFOV6: TToolButton;
-    tbFOV7: TToolButton;
-    tbFOV8: TToolButton;
-    tbFOV9: TToolButton;
     Divider_ToolBarMain_end: TToolButton;
     ViewChartInfo: TAction;
     ViewChartLegend: TAction;
@@ -449,6 +449,7 @@ type
     procedure ShowUobjExecute(Sender: TObject);
     procedure ShowVOExecute(Sender: TObject);
     procedure TelescopeSetupExecute(Sender: TObject);
+    procedure ToolBarFOVResize(Sender: TObject);
     procedure TrackTelescopeExecute(Sender: TObject);
     procedure ViewChartInfoExecute(Sender: TObject);
     procedure ViewChartLegendExecute(Sender: TObject);
@@ -2436,7 +2437,7 @@ end;
 procedure Tf_main.SetFOVClick(Sender: TObject);
 var f : integer;
 begin
-with Sender as TToolButton do f:=tag;
+with Sender as TSpeedButton do f:=tag;
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    SetField(deg2rad*sc.catalog.cfgshr.FieldNum[f]);
 end;
@@ -3456,6 +3457,7 @@ begin
   SetupSystemPage(2);
 end;
 
+
 procedure Tf_main.SetupSystemExecute(Sender: TObject);
 begin
  SetupSystemPage(0);
@@ -3935,13 +3937,20 @@ if i=0 then PanelTop.visible:=false
    end;  
 end;
 
+function VisibleControlCount(obj:TWinControl):integer;
+var i:integer;
+begin
+result:=0;
+for i:=0 to obj.ControlCount-1 do if obj.Controls[i].visible then inc(result);
+end;
+
 procedure Tf_main.ViewToolsBar1Click(Sender: TObject);
 begin
 ViewToolsBar1.checked:=not ViewToolsBar1.checked;
-MainBar1.checked:=ViewToolsBar1.checked and (ToolBarMain.ControlCount>0);
-ObjectBar1.checked:=ViewToolsBar1.checked and (ToolBarObj.ControlCount>0);
-LeftBar1.checked:=ViewToolsBar1.checked and (ToolBarLeft.ControlCount>0);
-RightBar1.checked:=ViewToolsBar1.checked and (ToolBarRight.ControlCount>0);
+MainBar1.checked:=ViewToolsBar1.checked and (VisibleControlCount(ToolBarMain)>0);
+ObjectBar1.checked:=ViewToolsBar1.checked and (VisibleControlCount(ToolBarObj)>0);
+LeftBar1.checked:=ViewToolsBar1.checked and (VisibleControlCount(ToolBarLeft)>0);
+RightBar1.checked:=ViewToolsBar1.checked and (VisibleControlCount(ToolBarRight)>0);
 ViewStatusBar1.checked:=ViewToolsBar1.checked;
 
 ToolBarMain.visible:=MainBar1.checked;
@@ -3951,6 +3960,82 @@ PanelRight.visible:=RightBar1.checked;
 PanelBottom.visible:=ViewStatusBar1.checked;
 
 ViewTopPanel;
+if PanelBottom.visible then InitFonts;
+FormResize(sender);
+end;
+
+
+procedure Tf_main.ViewScrollBar1Click(Sender: TObject);
+var i: Integer;
+begin
+if VerboseMsg then
+ WriteTrace('ViewScrollBar1Click');
+if cfgm.KioskMode then ViewScrollBar1.Checked:=false
+                  else ViewScrollBar1.Checked:=(not ViewScrollBar1.Checked)and CanShowScrollbar;
+for i:=0 to MultiFrame1.ChildCount-1 do
+  if MultiFrame1.Childs[i].DockedObject is Tf_chart then begin
+    (MultiFrame1.Childs[i].DockedObject as Tf_chart).VertScrollBar.Visible:=ViewScrollBar1.Checked;
+    (MultiFrame1.Childs[i].DockedObject as Tf_chart).HorScrollBar.Visible:=ViewScrollBar1.Checked;
+    (MultiFrame1.Childs[i].DockedObject as Tf_chart).Refresh;
+  end;
+end;
+
+procedure Tf_main.ViewMainBarClick(Sender: TObject);
+var c:integer;
+begin
+c:=VisibleControlCount(ToolBarMain);
+if c=0 then SetLPanel1(format(rsIsEmpty,[rsMainBar]));
+MainBar1.checked:=not MainBar1.checked and (c>0);
+ToolBarMain.visible:=MainBar1.checked;
+if not MainBar1.checked then ViewToolsBar1.checked:=false;
+if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
+ViewTopPanel;
+FormResize(sender);
+end;
+
+procedure Tf_main.ViewObjectBarClick(Sender: TObject);
+var c:integer;
+begin
+c:=VisibleControlCount(ToolBarObj);
+if c=0 then SetLPanel1(format(rsIsEmpty,[rsObjectBar]));
+ObjectBar1.checked:=not ObjectBar1.checked and (c>0);
+ToolBarObj.visible:=ObjectBar1.checked;
+if not ObjectBar1.checked then ViewToolsBar1.checked:=false;
+if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
+ViewTopPanel;
+FormResize(sender);
+end;
+
+procedure Tf_main.ViewLeftBarClick(Sender: TObject);
+var c:integer;
+begin
+c:=VisibleControlCount(ToolBarLeft);
+if c=0 then SetLPanel1(format(rsIsEmpty,[rsLeftBar]));
+LeftBar1.checked:=not LeftBar1.checked and (c>0);
+PanelLeft.visible:=LeftBar1.checked;
+if not LeftBar1.checked then ViewToolsBar1.checked:=false;
+if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
+FormResize(sender);
+end;
+
+procedure Tf_main.ViewRightBarClick(Sender: TObject);
+var c:integer;
+begin
+c:=VisibleControlCount(ToolBarRight);
+if c=0 then SetLPanel1(format(rsIsEmpty,[rsRightBar]));
+RightBar1.checked:=not RightBar1.checked and (c>0);
+PanelRight.visible:=RightBar1.checked;
+if not RightBar1.checked then ViewToolsBar1.checked:=false;
+if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
+FormResize(sender);
+end;
+
+procedure Tf_main.ViewStatusBarClick(Sender: TObject);
+begin
+PanelBottom.visible:=not PanelBottom.visible;
+ViewStatusBar1.checked:=PanelBottom.visible;
+if not ViewStatusBar1.checked then ViewToolsBar1.checked:=false;
+if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
 if PanelBottom.visible then InitFonts;
 FormResize(sender);
 end;
@@ -3974,73 +4059,6 @@ P:=point(0,110);
      f_main.Setfocus;
      ViewClock.Checked:=true;
   end;
-end;
-
-procedure Tf_main.ViewScrollBar1Click(Sender: TObject);
-var i: Integer;
-begin
-if VerboseMsg then
- WriteTrace('ViewScrollBar1Click');
-if cfgm.KioskMode then ViewScrollBar1.Checked:=false
-                  else ViewScrollBar1.Checked:=(not ViewScrollBar1.Checked)and CanShowScrollbar;
-for i:=0 to MultiFrame1.ChildCount-1 do
-  if MultiFrame1.Childs[i].DockedObject is Tf_chart then begin
-    (MultiFrame1.Childs[i].DockedObject as Tf_chart).VertScrollBar.Visible:=ViewScrollBar1.Checked;
-    (MultiFrame1.Childs[i].DockedObject as Tf_chart).HorScrollBar.Visible:=ViewScrollBar1.Checked;
-    (MultiFrame1.Childs[i].DockedObject as Tf_chart).Refresh;
-  end;
-end;
-
-procedure Tf_main.ViewMainBarClick(Sender: TObject);
-begin
-if ToolBarMain.ControlCount=0 then SetLPanel1(format(rsIsEmpty,[rsMainBar]));
-MainBar1.checked:=not MainBar1.checked and (ToolBarMain.ControlCount>0);
-ToolBarMain.visible:=MainBar1.checked;
-if not MainBar1.checked then ViewToolsBar1.checked:=false;
-if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
-ViewTopPanel;
-FormResize(sender);
-end;
-
-procedure Tf_main.ViewObjectBarClick(Sender: TObject);
-begin
-if ToolBarObj.ControlCount=0 then SetLPanel1(format(rsIsEmpty,[rsObjectBar]));
-ObjectBar1.checked:=not ObjectBar1.checked and (ToolBarObj.ControlCount>0);
-ToolBarObj.visible:=ObjectBar1.checked;
-if not ObjectBar1.checked then ViewToolsBar1.checked:=false;
-if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
-ViewTopPanel;
-FormResize(sender);
-end;
-
-procedure Tf_main.ViewLeftBarClick(Sender: TObject);
-begin
-if ToolBarLeft.ControlCount=0 then SetLPanel1(format(rsIsEmpty,[rsLeftBar]));
-LeftBar1.checked:=not LeftBar1.checked and (ToolBarLeft.ControlCount>0);
-PanelLeft.visible:=LeftBar1.checked;
-if not LeftBar1.checked then ViewToolsBar1.checked:=false;
-if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
-FormResize(sender);
-end;
-
-procedure Tf_main.ViewRightBarClick(Sender: TObject);
-begin
-if ToolBarRight.ControlCount=0 then SetLPanel1(format(rsIsEmpty,[rsRightBar]));
-RightBar1.checked:=not RightBar1.checked and (ToolBarRight.ControlCount>0);
-PanelRight.visible:=RightBar1.checked;
-if not RightBar1.checked then ViewToolsBar1.checked:=false;
-if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
-FormResize(sender);
-end;
-
-procedure Tf_main.ViewStatusBarClick(Sender: TObject);
-begin
-PanelBottom.visible:=not PanelBottom.visible;
-ViewStatusBar1.checked:=PanelBottom.visible;
-if not ViewStatusBar1.checked then ViewToolsBar1.checked:=false;
-if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
-if PanelBottom.visible then InitFonts;
-FormResize(sender);
 end;
 
 Procedure Tf_main.InitFonts;
@@ -8530,6 +8548,39 @@ begin
     ViewToolsBar1Click(sender);
  end;
 end;
+
+procedure Tf_main.ToolBarFOVResize(Sender: TObject);
+var i,w,h: integer;
+begin
+ w:=TPanel(sender).Width;
+ h:=TPanel(sender).Height;
+ if w>h then begin
+   i:=0;
+   with tbFOV1 do begin Left:=i*27; Top:=0; end; inc(i);
+   with tbFOV2 do begin Left:=i*27; Top:=0; end; inc(i);
+   with tbFOV3 do begin Left:=i*27; Top:=0; end; inc(i);
+   with tbFOV4 do begin Left:=i*27; Top:=0; end; inc(i);
+   with tbFOV5 do begin Left:=i*27; Top:=0; end; inc(i);
+   with tbFOV6 do begin Left:=i*27; Top:=0; end; inc(i);
+   with tbFOV7 do begin Left:=i*27; Top:=0; end; inc(i);
+   with tbFOV8 do begin Left:=i*27; Top:=0; end; inc(i);
+   with tbFOV9 do begin Left:=i*27; Top:=0; end; inc(i);
+   with tbFOV10 do begin Left:=i*27; Top:=0; end; inc(i);
+ end else begin
+   i:=0;
+   with tbFOV1 do begin Top:=i*27; Left:=0; end; inc(i);
+   with tbFOV2 do begin Top:=i*27; Left:=0; end; inc(i);
+   with tbFOV3 do begin Top:=i*27; Left:=0; end; inc(i);
+   with tbFOV4 do begin Top:=i*27; Left:=0; end; inc(i);
+   with tbFOV5 do begin Top:=i*27; Left:=0; end; inc(i);
+   with tbFOV6 do begin Top:=i*27; Left:=0; end; inc(i);
+   with tbFOV7 do begin Top:=i*27; Left:=0; end; inc(i);
+   with tbFOV8 do begin Top:=i*27; Left:=0; end; inc(i);
+   with tbFOV9 do begin Top:=i*27; Left:=0; end; inc(i);
+   with tbFOV10 do begin Top:=i*27; Left:=0; end; inc(i);
+ end;
+end;
+
 
 procedure Tf_main.ToolButtonMouseUp(Sender: TObject; Button: TMouseButton;  Shift: TShiftState; X, Y: Integer);
 var act: string;
