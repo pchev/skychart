@@ -487,6 +487,7 @@ if (numeditbar>0) and  (numaction>0) then begin
   for p:=0 to numeditbar-1 do begin
     lpos:=0; // first button to the left
     // clear bar
+    editbar[p].Visible:=false;
     editbar[p].BeginUpdate;
     for i:=editbar[p].ButtonCount-1 downto 0 do begin
        if editbar[p].Buttons[i].Name='Divider_ToolBarMain_end' then continue;
@@ -498,6 +499,9 @@ if (numeditbar>0) and  (numaction>0) then begin
       editbar[p].Controls[i].Visible:=false;
       editbar[p].Controls[i].Parent:=FDisabledContainer;
     end;
+    editbar[p].EndUpdate;
+    editbar[p].Visible:=true;
+    editbar[p].BeginUpdate;
     // add buttons
     for i:=0 to ToolbarTreeview[p].Items.Count-1 do begin
       act:=ToolbarTreeview[p].Items[i].Text;
