@@ -378,6 +378,7 @@ end;
 procedure Tf_edittoolbar.ButtonOKClick(Sender: TObject);
 begin
   ActivateToolbar;
+  ModalResult:=mrOK;
 end;
 
 procedure Tf_edittoolbar.SaveToolbar(bn:integer; str:TStringList);
@@ -482,9 +483,7 @@ if (numeditbar>0) and  (numaction>0) then begin
   for p:=0 to numeditbar-1 do begin
     lpos:=0; // first button to the left
     // clear bar
-    i:=editbar[p].ButtonCount;
     editbar[p].BeginUpdate;
-    i:=editbar[p].ControlCount;
     for i:=editbar[p].ButtonCount-1 downto 0 do begin
        if editbar[p].Buttons[i].Name='Divider_ToolBarMain_end' then continue;
        editbar[p].Buttons[i].Free;
@@ -495,8 +494,6 @@ if (numeditbar>0) and  (numaction>0) then begin
       editbar[p].Controls[i].Visible:=false;
       editbar[p].Controls[i].Parent:=FDisabledContainer;
     end;
-    editbar[p].EndUpdate;
-    i:=editbar[p].ButtonCount;
     // add buttons
     for i:=0 to ToolbarTreeview[p].Items.Count-1 do begin
       act:=ToolbarTreeview[p].Items[i].Text;
@@ -533,26 +530,20 @@ if (numeditbar>0) and  (numaction>0) then begin
         end;
         // move control to toolbar
         if n>=0 then begin
-          if editControl[n] is TToolbar then begin
-            if editbar[p].Height>editbar[p].Width then begin
-              if editControl[n].Width>editControl[n].Height then begin
-                w:=editControl[n].Width;
-                h:=editControl[n].Height;
-                editControl[n].Width:=h;
-                editControl[n].Height:=w;
-              end;
-            end else begin
-                if editControl[n].Width<editControl[n].Height then begin
-                  w:=editControl[n].Width;
-                  h:=editControl[n].Height;
-                  editControl[n].Width:=h;
-                  editControl[n].Height:=w;
-                end;
-            end;
-          end;
           editControl[n].Parent:=editbar[p];
           editControl[n].Visible:=true;
           editControl[n].Left:=lpos;
+          if editControl[n].Name='ToolBarFOV' then begin
+            if editbar[p].Height>editbar[p].Width then begin
+                w:=25;
+                h:=275;
+                editControl[n].SetBounds(editControl[n].Left,editControl[n].Top,w,h);
+            end else begin
+                w:=275;
+                h:=25;
+                editControl[n].SetBounds(editControl[n].Left,editControl[n].Top,w,h);
+            end;
+          end;
       end else begin
         // search for a separator
         if act=SeparatorTxt then begin
@@ -582,9 +573,9 @@ if (numeditbar>0) and  (numaction>0) then begin
       for i:=editbar[p].ButtonCount-1 downto 0 do begin
          if editbar[p].Buttons[i].Name='Divider_ToolBarMain_end' then editbar[p].Buttons[i].Left:=lpos;
       end;
+    editbar[p].EndUpdate;
   end;
 end;
-ModalResult:=mrOK;
 end;
 
 function Tf_edittoolbar.AddBtn(pos:TTreeNode; act: string; barnum,imgix: integer):TTreeNode;
