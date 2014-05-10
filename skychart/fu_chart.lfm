@@ -23,10 +23,10 @@ object f_chart: Tf_chart
     OnResize = ChartResize
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 493
-      Height = 323
+      Left = 492
+      Height = 322
       Top = 0
-      Width = 15
+      Width = 16
       Align = alRight
       Kind = sbVertical
       LargeChange = 10
@@ -39,8 +39,8 @@ object f_chart: Tf_chart
     object HorScrollBar: TScrollBar
       Cursor = crArrow
       Left = 0
-      Height = 15
-      Top = 323
+      Height = 16
+      Top = 322
       Width = 508
       Align = alBottom
       LargeChange = 10
@@ -468,6 +468,10 @@ object f_chart: Tf_chart
       object RecoverLabel: TMenuItem
         Caption = 'Recover Label'
         OnClick = RecoverLabelClick
+      end
+      object Resetalllabel: TMenuItem
+        Caption = 'Resetalllabel'
+        OnClick = ResetalllabelClick
       end
     end
     object Telescope1: TMenuItem

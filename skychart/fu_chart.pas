@@ -74,6 +74,7 @@ type
     MenuCircle9: TMenuItem;
     MenuCircle10: TMenuItem;
     EyepieceMask: TMenuItem;
+    Resetalllabel: TMenuItem;
     RecoverLabel: TMenuItem;
     MenuObslistFirst: TMenuItem;
     MenuObslistNext: TMenuItem;
@@ -181,6 +182,7 @@ type
     procedure chart_imglistExecute(Sender: TObject);
     procedure MenuCircleClick(Sender: TObject);
     procedure MenuAddToObsListClick(Sender: TObject);
+    procedure ResetalllabelClick(Sender: TObject);
     procedure MenuObslistFirstClick(Sender: TObject);
     procedure MenuObslistLastClick(Sender: TObject);
     procedure MenuObslistNextClick(Sender: TObject);
@@ -457,6 +459,7 @@ AddLabel1.caption:=rsNewLabel;
 RemoveLastLabel1.caption:=rsRemoveLastLa;
 RemoveAllLabel1.caption:=rsRemoveAllLab;
 RecoverLabel.Caption:=rsRecoverHidde;
+Resetalllabel.Caption:=rsResetAllLabe;
 MenuSAMP.Caption:=rsSAMPSendCoor;
 MenuObslist.Caption:=rsObservingLis;
 MenuViewObsList.Caption:=rsViewObservin;
@@ -4189,6 +4192,11 @@ end;
 procedure Tf_chart.MenuAddToObsListClick(Sender: TObject);
 begin
  f_obslist.Add(sc.cfgsc.FindName,rad2deg*sc.cfgsc.FindRA2000,rad2deg*sc.cfgsc.FindDec2000);
+end;
+
+procedure Tf_chart.ResetalllabelClick(Sender: TObject);
+begin
+  sc.ResetAllLabel;
 end;
 
 procedure Tf_chart.MenuObslistFirstClick(Sender: TObject);
