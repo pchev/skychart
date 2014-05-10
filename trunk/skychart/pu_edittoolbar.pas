@@ -542,6 +542,9 @@ if (numeditbar>0) and  (numaction>0) then begin
           editControl[n].Parent:=editbar[p];
           editControl[n].Visible:=true;
           editControl[n].Left:=lpos;
+          if editControl[n].Name='quicksearch' then begin
+            editControl[n].Width:=90;
+          end;
           if editControl[n].Name='ToolBarFOV' then begin
             if editbar[p].Height>editbar[p].Width then begin
                 w:=25;
