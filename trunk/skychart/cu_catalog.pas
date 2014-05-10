@@ -162,6 +162,7 @@ type
      Procedure LoadConstellation(fpath,lang:string);
      Procedure LoadConstL(fname:string);
      Procedure LoadConstB(fname:string);
+     Procedure LoadMilkywaydot(fname:string);
      Procedure LoadHorizon(fname:string; cfgsc:Tconf_skychart);
      Procedure LoadHorizonPicture(fname:string);
      Procedure LoadStarName(fpath,lang:string);
@@ -3529,6 +3530,44 @@ begin
      curconst:=constel;
    end;
    cfgshr.ConstBNum := n;
+   finally
+   closefile(f);
+   end;
+end;
+
+Procedure Tcatalog.LoadMilkywaydot(fname:string);
+var f : textfile;
+    i,n:integer;
+    ra,de:single;
+    val: byte;
+begin
+   if not FileExists(fname) then begin
+      cfgshr.MilkywaydotNum := 0;
+      setlength(cfgshr.Milkywaydot,0);
+      exit;
+   end;
+   Filemode:=0;
+   assignfile(f,fname);
+   try
+   reset(f);
+   n:=0;
+   // first loop to get the size
+   readln(f);
+   repeat
+     readln(f);
+     inc(n);
+   until eof(f);
+   setlength(cfgshr.Milkywaydot,n);
+   // read the file now
+   reset(f);
+   readln(f,cfgshr.Milkywaydotradius);
+   for i:=0 to n-1 do begin
+     readln(f,ra,de,val);
+     cfgshr.Milkywaydot[i].ra:=deg2rad*ra*15;
+     cfgshr.Milkywaydot[i].de:=deg2rad*de;
+     cfgshr.Milkywaydot[i].val:=val;
+   end;
+   cfgshr.MilkywaydotNum := n;
    finally
    closefile(f);
    end;

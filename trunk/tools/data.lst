@@ -284,6 +284,8 @@ data/language/skychart.uk.po
 data/language/skychart.zh.po
 data/language/skychart.zh_TW.po
 data/language/skychart.zh_CN.po
+data/milkyway
+data/milkyway/milkyway.dat
 data/pictures
 data/planet
 data/planet/jupiter-0.jpg

@@ -1,0 +1,9 @@
+This Milky Way file is based on the similar one from the PP3 project.
+http://sourceforge.net/projects/pp3/
+It is itself based on a sky panorama created by Axel Mellinger 
+http://home.arcor-online.de/axel.mellinger/
+
+The following change where done for the use with Skychart:
+- remove all the point at more than 20° from the galactic equator.
+- remove all the point with a level less than 3.
+

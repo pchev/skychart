@@ -725,6 +725,12 @@ type
   Tconstl = record
     ra1, de1, ra2, de2: single;
   end;
+
+  TMilkywaydot = record
+    ra,de: single;
+    val: byte;
+  end;
+
   TLabelAlign = (laNone, laTop, laBottom, laLeft, laRight, laCenter,
     laTopLeft, laBottomLeft, laTopRight, laBottomRight);
   Thorizonlist = array [0..361] of single;
@@ -853,6 +859,9 @@ type
     ConstelPos: array of Tconstpos;
     ConstL: array of Tconstl;
     ConstB: array of Tconstb;
+    Milkywaydotradius : single;
+    MilkywaydotNum: integer;
+    Milkywaydot: array of TMilkywaydot;
     horizonlist: Thorizonlist;
     horizonpicture: TBGRABitmap;
     horizonpicturename: string;
@@ -897,7 +906,7 @@ type
     ShowGridNum, ShowOnlyMeridian, UseSystemTime, countrytz: boolean;
     StyleGrid, StyleEqGrid, StyleConstL, StyleConstB,
     StyleEcliptic, StyleGalEq: TFPPenStyle;
-    ShowEcliptic, ShowGalactic, ShowMilkyWay, FillMilkyWay,
+    ShowEcliptic, ShowGalactic, ShowMilkyWay, FillMilkyWay, LinemodeMilkyway,
     ShowHorizon, ShowHorizonPicture, HorizonPictureLowQuality, FillHorizon, ShowHorizonDepression: boolean;
     CurTime, DT_UT_val, GRSlongitude, GRSjd, GRSdrift,
     TelescopeTurnsX, TelescopeTurnsY, TelescopeJD, HorizonPictureRotate: double;
@@ -1860,6 +1869,7 @@ begin
   Setlength(ConstelPos, 0);
   Setlength(ConstB, 0);
   Setlength(ConstL, 0);
+  Setlength(Milkywaydot, 0);
   Setlength(StarName, 0);
   Setlength(StarNameHR, 0);
   horizonpicture.Free;
@@ -1927,6 +1937,15 @@ begin
     ConstL[i].de1 := Source.ConstL[i].de1;
     ConstL[i].ra2 := Source.ConstL[i].ra2;
     ConstL[i].de2 := Source.ConstL[i].de2;
+  end;
+  Milkywaydotradius := Source.Milkywaydotradius;
+  MilkywaydotNum := Source.MilkywaydotNum;
+  Setlength(Milkywaydot, MilkywaydotNum);
+  for i := 0 to MilkywaydotNum - 1 do
+  begin
+    Milkywaydot[i].ra:=Source.Milkywaydot[i].ra;
+    Milkywaydot[i].de:=Source.Milkywaydot[i].de;
+    Milkywaydot[i].val:=Source.Milkywaydot[i].val;
   end;
   StarNameNum := Source.StarNameNum;
   Setlength(StarName, StarNameNum);
@@ -2132,6 +2151,7 @@ begin
   ShowGalactic := Source.ShowGalactic;
   ShowMilkyWay := Source.ShowMilkyWay;
   FillMilkyWay := Source.FillMilkyWay;
+  LinemodeMilkyway := Source.LinemodeMilkyway;
   ShowHorizon := Source.ShowHorizon;
   ShowHorizonPicture := Source.ShowHorizonPicture;
   HorizonPictureLowQuality := Source.HorizonPictureLowQuality;
