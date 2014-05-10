@@ -64,6 +64,7 @@ type
     procedure ButtonEmptyClick(Sender: TObject);
     procedure ButtonCollapseClick(Sender: TObject);
     procedure ButtonExpandClick(Sender: TObject);
+    procedure ButtonHelpClick(Sender: TObject);
     procedure ButtonMiniClick(Sender: TObject);
     procedure ButtonClearClick(Sender: TObject);
     procedure ButtonDownClick(Sender: TObject);
@@ -744,6 +745,11 @@ end;
 procedure Tf_edittoolbar.ButtonExpandClick(Sender: TObject);
 begin
   ActionTreeView.FullExpand;
+end;
+
+procedure Tf_edittoolbar.ButtonHelpClick(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_edittoolbar.ButtonCollapseClick(Sender: TObject);

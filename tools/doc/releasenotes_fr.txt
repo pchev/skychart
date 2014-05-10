@@ -2,6 +2,8 @@ Version 3.11 beta, Notes de la version
 
 Nouvelles fonctions:
 
+  * L'éditeur de barre d'outils vous permet de modifier la disposition des boutons. La fonction est disponible depuis la menu Configuration / Éditeur de barre d'outils.
+
 
 Corrections:
 

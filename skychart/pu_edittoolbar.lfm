@@ -69,6 +69,7 @@ object f_edittoolbar: Tf_edittoolbar
       Top = 4
       Width = 75
       Caption = 'Help'
+      OnClick = ButtonHelpClick
       TabOrder = 5
     end
   end
