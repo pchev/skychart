@@ -147,6 +147,7 @@ type
      procedure PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; WhiteBg: boolean; opaque:boolean=true; clip:boolean=false; marge: integer=5; orient: integer=0);
      procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; WhiteBg: boolean; opaque:boolean=true; orient: integer=0);
      procedure PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
+     Procedure PlotMWDot(x,y,r:single; col: TColor; WhiteBg: boolean);
      Procedure PlotCircle(x1,y1,x2,y2:single;lcolor:integer;moving:boolean);
      Procedure PlotCircleMask(x1,y1,r:single; whitebg:boolean);
      Procedure PlotPolyLine(p:array of Tpoint; lcolor:integer; moving:boolean);
@@ -2617,6 +2618,21 @@ end;
 Procedure TSplot.DeleteAlllabel(Sender: TObject);
 begin
 if assigned(FDeleteAllLabel) then FDeleteAllLabel;
+end;
+
+Procedure TSplot.PlotMWDot(x,y,r:single; col: TColor; WhiteBg: boolean);
+begin
+if WhiteBg then col:=SubColor(clWhite,col);
+if cfgplot.UseBMP then begin
+ if not WhiteBg then col:=Addcolor(col,cfgplot.backgroundcolor);
+ cbmp.FillEllipseLinearColorAntialias(x,y,r,r,ColorToBGRA(col,60),ColorToBGRA(col,255));
+end else if cnv<>nil then with cnv do begin
+  Pen.Color:=col;
+  Brush.Color:=col;
+  Brush.Style:=bsSolid;
+  Ellipse(round(x-r),round(y-r),round(x+r),round(y+r));
+  Pen.Mode:=pmCopy;
+end;
 end;
 
 Procedure TSplot.PlotCircle(x1,y1,x2,y2:single;lcolor: integer;moving:boolean);

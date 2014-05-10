@@ -52,6 +52,7 @@ type
     CheckBox4: TCheckBox;
     CheckBox5: TCheckBox;
     CheckBox6: TCheckBox;
+    linemodemilkyway: TCheckBox;
     Edit14: TEdit;
     ImageList1: TImageList;
     Label15: TLabel;
@@ -364,6 +365,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure CirclegridSelectCell(Sender: TObject; aCol, aRow: Integer;
       var CanSelect: Boolean);
+    procedure linemodemilkywayClick(Sender: TObject);
     procedure MarkNumberClick(Sender: TObject);
     procedure ConstbFileAcceptFileName(Sender: TObject; var Value: String);
     procedure ConstlFileAcceptFileName(Sender: TObject; var Value: String);
@@ -643,6 +645,7 @@ CBStyle.items[4]:=rsDashDotDot1;
 GroupBox4.caption:=rsMilkyWay;
 milkyway.caption:=rsShowMilkyWay;
 fillmilkyway.caption:=rsFillMilkyWay;
+linemodemilkyway.Caption:=rsLineMode;
 GroupBox8.caption:=rsProperMotion3;
 GridStyle.items[0]:=rsLine1;
 GridStyle.items[1]:=rsDash1;
@@ -1342,6 +1345,7 @@ ConstL.Checked:=csc.ShowConstl;
 ConstB.Checked:=csc.ShowConstb;
 milkyway.Checked:=csc.ShowMilkyWay;
 fillmilkyway.Checked:=csc.FillMilkyWay;
+linemodemilkyway.Checked:=csc.LinemodeMilkyway;
 GridStyle.ItemIndex:=ord(csc.StyleGrid);
 EqGridStyle.ItemIndex:=ord(csc.StyleEqGrid);
 EclipticStyle.ItemIndex:=ord(csc.StyleEcliptic);
@@ -1896,6 +1900,11 @@ end;
 procedure Tf_config_display.milkywayClick(Sender: TObject);
 begin
   csc.showmilkyway:=milkyway.checked;
+end;
+
+procedure Tf_config_display.linemodemilkywayClick(Sender: TObject);
+begin
+  csc.LinemodeMilkyway:=linemodemilkyway.checked;
 end;
 
 procedure Tf_config_display.fillmilkywayClick(Sender: TObject);

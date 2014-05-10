@@ -1683,40 +1683,65 @@ function Tskychart.DrawMilkyWay :boolean;
 var rec:GcatRec;
   x1,y1: Double;
   xx,yy:single;
-  op,lw,col,fs: integer;
+  op,lw,col,fs,i: integer;
   first:boolean;
+  pxradius,ra,de: double;
+  xmi,xma,ymi,yma: single;
+  val: integer;
+  mwcol: TColor;
 begin
 result:=false;
 if not cfgsc.ShowMilkyWay then exit;
-if cfgsc.fov<(deg2rad*2) then exit;
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw milky way');
-fillchar(rec,sizeof(rec),0);
-first:=true;
-lw:=1;fs:=1;
-if cfgsc.WhiteBg then col:=FPlot.cfgplot.Color[11]
-else begin
-   col:=addcolor(FPlot.cfgplot.Color[22],FPlot.cfgplot.Color[0]);
-end;
-if col = FPlot.cfgplot.bgcolor then cfgsc.FillMilkyWay:=false;
-try
-if Fcatalog.OpenMilkyway(cfgsc.FillMilkyWay) then
- while Fcatalog.readMilkyway(rec) do begin
- if first then begin
-    // all the milkyway line use the same property
-    if rec.outlines.valid[vlLinewidth] then lw:=rec.outlines.linewidth else lw:=rec.options.Size;
-    if rec.outlines.valid[vlLinetype] then fs:=rec.outlines.linetype else fs:=rec.options.LogSize;
-    first:=false;
- end;
- precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
- if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,false);
- projection(rec.ra,rec.dec,x1,y1,true,cfgsc,true) ;
- WindowXY(x1,y1,xx,yy,cfgsc);
- op:=rec.outlines.lineoperation;
- FPlot.PlotOutline(xx,yy,op,lw,fs,rec.options.ObjType,cfgsc.x2,col);
-end;
-result:=true;
-finally
- Fcatalog.CloseMilkyway;
+if Fcatalog.cfgshr.MilkywaydotNum=0 then cfgsc.LinemodeMilkyway:=true;
+if cfgsc.LinemodeMilkyway then begin
+  if cfgsc.fov<(deg2rad*2) then exit;
+  fillchar(rec,sizeof(rec),0);
+  first:=true;
+  lw:=1;fs:=1;
+  if cfgsc.WhiteBg then col:=FPlot.cfgplot.Color[11]
+  else begin
+     col:=addcolor(FPlot.cfgplot.Color[22],FPlot.cfgplot.Color[0]);
+  end;
+  if col = FPlot.cfgplot.bgcolor then cfgsc.FillMilkyWay:=false;
+  try
+  if Fcatalog.OpenMilkyway(cfgsc.FillMilkyWay) then
+   while Fcatalog.readMilkyway(rec) do begin
+   if first then begin
+      // all the milkyway line use the same property
+      if rec.outlines.valid[vlLinewidth] then lw:=rec.outlines.linewidth else lw:=rec.options.Size;
+      if rec.outlines.valid[vlLinetype] then fs:=rec.outlines.linetype else fs:=rec.options.LogSize;
+      first:=false;
+   end;
+   precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
+   if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,false);
+   projection(rec.ra,rec.dec,x1,y1,true,cfgsc,true) ;
+   WindowXY(x1,y1,xx,yy,cfgsc);
+   op:=rec.outlines.lineoperation;
+   FPlot.PlotOutline(xx,yy,op,lw,fs,rec.options.ObjType,cfgsc.x2,col);
+  end;
+  result:=true;
+  finally
+   Fcatalog.CloseMilkyway;
+  end;
+end else begin
+  pxradius:=round(max(abs(cfgsc.BxGlb)*deg2rad*Fcatalog.cfgshr.Milkywaydotradius,Fplot.cfgchart.drawpen))+Fplot.cfgchart.drawpen;
+  xmi:=cfgsc.Xmin-pxradius;
+  xma:=cfgsc.Xmax+pxradius;
+  ymi:=cfgsc.Ymin-pxradius;
+  yma:=cfgsc.Ymax+pxradius;
+  for i:=0 to Fcatalog.cfgshr.MilkywaydotNum-1 do begin
+    ra:=Fcatalog.cfgshr.Milkywaydot[i].ra;
+    de:=Fcatalog.cfgshr.Milkywaydot[i].de;
+    precession(jd2000,cfgsc.JDChart,ra,de);
+    projection(ra,de,x1,y1,false,cfgsc) ;
+    WindowXY(x1,y1,xx,yy,cfgsc);
+    if (xx>xmi) and (xx<xma) and (yy>ymi) and (yy<yma) then begin
+       col:=round(Fcatalog.cfgshr.Milkywaydot[i].val);
+       mwcol:=(col)+256*(col)+65536*(col);
+       FPlot.PlotMWDot(xx,yy,pxradius,mwcol,cfgsc.WhiteBg);
+    end;
+  end;
 end;
 end;
 

@@ -1219,6 +1219,7 @@ if VerboseMsg then
  catalog.LoadConstL(cfgm.ConstLfile);
  catalog.LoadConstB(cfgm.ConstBfile);
  catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
+ catalog.LoadMilkywaydot(slash(appdir)+slash('data')+slash('milkyway')+'milkyway.dat');
  if def_cfgsc.ShowHorizonPicture then catalog.LoadHorizonPicture(cfgm.HorizonPictureFile);
  catalog.LoadStarName(slash(appdir)+slash('data')+slash('common_names'),Lang);
  f_search.cfgshr:=catalog.cfgshr;
@@ -4454,6 +4455,7 @@ def_cfgsc.ShowEcliptic:=false;
 def_cfgsc.ShowGalactic:=false;
 def_cfgsc.ShowMilkyWay:=true;
 def_cfgsc.FillMilkyWay:=true;
+def_cfgsc.LinemodeMilkyway:=false;
 def_cfgsc.showstars:=true;
 def_cfgsc.shownebulae:=true;
 def_cfgsc.showline:=true;
@@ -5114,6 +5116,7 @@ csc.ShowEcliptic:=ReadBool(section,'ShowEcliptic',csc.ShowEcliptic);
 csc.ShowGalactic:=ReadBool(section,'ShowGalactic',csc.ShowGalactic); 
 csc.ShowMilkyWay:=ReadBool(section,'ShowMilkyWay',csc.ShowMilkyWay);
 csc.FillMilkyWay:=ReadBool(section,'FillMilkyWay',csc.FillMilkyWay);
+csc.LinemodeMilkyway:=ReadBool(section,'LinemodeMilkyway',csc.LinemodeMilkyway);
 csc.sunurlname:=ReadString(section,'URL_SUN_NAME',csc.sunurlname);
 csc.sunurl:=ReadString(section,'URL_SUN',csc.sunurl);
 csc.sunurlsize:=ReadInteger(section,'URL_SUN_SIZE',csc.sunurlsize);
@@ -5999,6 +6002,7 @@ WriteBool(section,'ShowEcliptic',csc.ShowEcliptic);
 WriteBool(section,'ShowGalactic',csc.ShowGalactic);
 WriteBool(section,'ShowMilkyWay',csc.ShowMilkyWay);
 WriteBool(section,'FillMilkyWay',csc.FillMilkyWay);
+WriteBool(section,'LinemodeMilkyway',csc.LinemodeMilkyway);
 WriteString(section,'URL_SUN_NAME',csc.sunurlname);
 WriteString(section,'URL_SUN',csc.sunurl);
 WriteInteger(section,'URL_SUN_SIZE',csc.sunurlsize);
@@ -8612,6 +8616,7 @@ if (sender is TToolButton)and(TToolButton(sender).Action<>nil ) then begin
     else if act='ShowAsteroids' then SetupSolsysPage(3)
     else if act='ShowComets'    then SetupSolsysPage(2)
     else if act='ShowLine'      then SetupDisplayPage(4)
+    else if act='ShowMilkyWay'      then SetupDisplayPage(4)
     else if act='Grid'          then SetupDisplayPage(4)
     else if act='GridEQ'        then SetupDisplayPage(4)
     else if act='ShowConstellationLine'   then SetupDisplayPage(4)
