@@ -8149,13 +8149,13 @@ begin
    btn.canvas.pen.color:=clBlack;
    btn.canvas.brush.color:=clBlack;
    btn.canvas.brush.style:=bsSolid;
-   ImageNormal.GetBitmap(52,btn); ButtonMoreStar.Picture.Assign(btn);
+   imagelist.GetBitmap(52,btn); ButtonMoreStar.Picture.Assign(btn);
    btn.canvas.rectangle(0,0,btn.width,btn.height);
-   ImageNormal.GetBitmap(53,btn); ButtonLessStar.Picture.Assign(btn);
+   imagelist.GetBitmap(53,btn); ButtonLessStar.Picture.Assign(btn);
    btn.canvas.rectangle(0,0,btn.width,btn.height);
-   ImageNormal.GetBitmap(54,btn); ButtonMoreNeb.Picture.Assign(btn);
+   imagelist.GetBitmap(54,btn); ButtonMoreNeb.Picture.Assign(btn);
    btn.canvas.rectangle(0,0,btn.width,btn.height);
-   ImageNormal.GetBitmap(55,btn); ButtonLessNeb.Picture.Assign(btn);
+   imagelist.GetBitmap(55,btn); ButtonLessNeb.Picture.Assign(btn);
    btn.free;
 end;
 begin
