@@ -730,6 +730,7 @@ type
     procedure InitializeDB(Sender: TObject);
     procedure Init;
     procedure InitToolBar;
+    procedure ViewToolsBar;
     Procedure InitDS2000;
     function PrepareAsteroid(jd1,jd2,step:double; msg:Tstrings):boolean;
     procedure RecomputeAsteroid;
@@ -3954,6 +3955,21 @@ var i:integer;
 begin
 result:=0;
 for i:=0 to obj.ControlCount-1 do if obj.Controls[i].visible then inc(result);
+end;
+
+procedure Tf_main.ViewToolsBar;
+begin
+MainBar1.checked:= (VisibleControlCount(ToolBarMain)>0);
+ObjectBar1.checked:= (VisibleControlCount(ToolBarObj)>0);
+LeftBar1.checked:= (VisibleControlCount(ToolBarLeft)>0);
+RightBar1.checked:= (VisibleControlCount(ToolBarRight)>0);
+ViewToolsBar1.checked:=MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked;
+ToolBarMain.visible:=MainBar1.checked;
+ToolBarObj.visible:=ObjectBar1.checked;
+PanelLeft.visible:=LeftBar1.checked;
+PanelRight.visible:=RightBar1.checked;
+ViewTopPanel;
+FormResize(nil);
 end;
 
 procedure Tf_main.ViewToolsBar1Click(Sender: TObject);
@@ -8536,8 +8552,7 @@ f_edittoolbar.LoadToolbar(2,configleftbar);
 f_edittoolbar.LoadToolbar(3,configrightbar);
 f_edittoolbar.ActivateToolbar;
 // show all the configured bar
-ViewToolsBar1.checked:=false;
-ViewToolsBar1Click(nil);
+ViewToolsBar;
 end;
 
 procedure Tf_main.MenuItemEditToolbarClick(Sender: TObject);
@@ -8560,8 +8575,7 @@ begin
     numleftbar:=configleftbar.Count;
     numrightbar:=configrightbar.Count;
     // show all the configured bar
-    ViewToolsBar1.checked:=false;
-    ViewToolsBar1Click(sender);
+    ViewToolsBar;
  end;
 end;
 
