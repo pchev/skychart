@@ -2628,9 +2628,7 @@ if cfgplot.UseBMP then begin
  if cfgplot.AntiAlias then
    cbmp.FillEllipseLinearColorAntialias(x,y,r,r,ColorToBGRA(col,60),ColorToBGRA(col,255))
  else begin
-   cbmp.Canvas.Brush.Color:=col;
-   cbmp.Canvas.Brush.Style:=bsSolid;
-   cbmp.Canvas.FillRect(round(x-r),round(y-r),round(x+r),round(y+r));
+   cbmp.FillRect(round(x-r),round(y-r),round(x+r),round(y+r),ColorToBGRA(col),dmSet);
  end;
 end else if cnv<>nil then with cnv do begin
   Pen.Color:=col;

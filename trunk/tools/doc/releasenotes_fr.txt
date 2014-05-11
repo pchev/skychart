@@ -3,7 +3,7 @@ Version 3.11 beta, Notes de la version
 Nouvelles fonctions:
 
   * L'éditeur de barre d'outils vous permet de modifier la disposition des boutons. La fonction est disponible depuis la menu Configuration / Éditeur de barre d'outils.
-  * Nouvelle représentation pour la Voie Lactée. Le précédent dessin en mode ligne peut être activé à partir du menu Configuration / Affichage / Lignes.
+  * Nouvelle représentation pour la Voie Lactée. Vous pouvez l'activer à partir du menu Configuration / Affichage / Lignes, en décochant "Voie lactée - Mode ligne".
 
 Corrections:
 
