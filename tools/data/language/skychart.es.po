@@ -3,13 +3,13 @@ msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-07 15:03+0000\n"
-"PO-Revision-Date: 2014-05-01 08:39+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"PO-Revision-Date: 2014-05-10 23:24+0000\n"
+"Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-07 15:44+0000\n"
+"X-Launchpad-Export-Date: 2014-05-11 18:17+0000\n"
 "X-Generator: Launchpad (build 16996)\n"
 "Language: es\n"
 
@@ -419,7 +419,7 @@ msgstr "Archivos auxiliares"
 
 #: u_translation.rsavailableact
 msgid "Available actions"
-msgstr ""
+msgstr "Acciones disponibles"
 
 #: u_translation.rsaz
 msgid "Az"
@@ -1492,7 +1492,7 @@ msgstr "Dir"
 
 #: u_translation.rsdirection2
 msgid "Direction"
-msgstr ""
+msgstr "Dirección"
 
 #: u_translation.rsdirectory
 msgid "Directory"
@@ -1564,7 +1564,7 @@ msgstr "Medida de distancia"
 
 #: u_translation.rsdivider
 msgid "Divider"
-msgstr ""
+msgstr "Divisor"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
@@ -1764,7 +1764,7 @@ msgstr "Editar los tipos de objetos"
 
 #: u_translation.rsedittimeincr
 msgid "Edit time increment"
-msgstr ""
+msgstr "Editar incremento de tiempo"
 
 #: u_translation.rseditunits
 msgid "Edit units"
@@ -1780,7 +1780,7 @@ msgstr "Nebulosa de emisión"
 
 #: u_translation.rsempty
 msgid "Empty"
-msgstr ""
+msgstr "Vacío"
 
 #: u_translation.rsencoderconfi
 msgid "Encoder Configuration"
@@ -2156,7 +2156,7 @@ msgstr "CV:"
 
 #: u_translation.rsfovbar
 msgid "FOV bar"
-msgstr ""
+msgstr "Barra de Campo Visual"
 
 #: u_translation.rsfovnumber
 msgid "FOV number:"
@@ -2632,7 +2632,7 @@ msgstr "La época de las coordenadas es realmente %s?"
 
 #: u_translation.rsisempty
 msgid "%s is empty!"
-msgstr ""
+msgstr "¡%s está vacío!"
 
 #: u_translation.rsittaketoolon
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
@@ -2888,7 +2888,7 @@ msgstr "Código de la ubicación"
 
 #: u_translation.rslock
 msgid "Lock"
-msgstr ""
+msgstr "Bloquear"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -3120,7 +3120,7 @@ msgstr "min"
 
 #: u_translation.rsminimal
 msgid "Minimal"
-msgstr ""
+msgstr "Mínimo"
 
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
@@ -3552,7 +3552,7 @@ msgstr "Apagado"
 
 #: u_translation.rsofficialname
 msgid "Official name"
-msgstr ""
+msgstr "Nombre oficial"
 
 #: u_translation.rsoffset
 msgid "Offset"
@@ -4652,7 +4652,7 @@ msgstr "Seleccione el tipo de objetos en su catálogo"
 
 #: u_translation.rsselecttimeun
 msgid "Select time units"
-msgstr ""
+msgstr "Selecionar unidades de tiempo"
 
 #: u_translation.rssemi
 msgid "Semi"
@@ -4680,7 +4680,7 @@ msgstr "Separación"
 
 #: u_translation.rsseparator
 msgid "Separator"
-msgstr ""
+msgstr "Separador"
 
 #: u_translation.rsserialport
 msgid "Serial Port"
@@ -4760,7 +4760,7 @@ msgstr "Ajustes"
 
 #: u_translation.rssetupoption
 msgid "Setup Options"
-msgstr ""
+msgstr "Opciones de ajuste"
 
 #: u_translation.rsshour
 msgid "H"
@@ -5116,7 +5116,7 @@ msgstr "S"
 
 #: u_translation.rsstandard
 msgid "Standard"
-msgstr ""
+msgstr "Estándar"
 
 #: u_translation.rsstandardcolo
 msgid "Standard  colour"
@@ -5128,7 +5128,7 @@ msgstr "Estrella"
 
 #: u_translation.rsstarandnebul
 msgid "Star and nebula limit"
-msgstr ""
+msgstr "Límite de estrellas y nebulosas"
 
 #: u_translation.rsstarcolourbv
 msgid "Star colour (B-V):"
@@ -5444,11 +5444,11 @@ msgstr "Barra de herramientas"
 
 #: u_translation.rstoolbaredito
 msgid "Tool bar editor"
-msgstr ""
+msgstr "Editor barra de herramientas"
 
 #: u_translation.rstools
 msgid "Tools"
-msgstr ""
+msgstr "Herramientas"
 
 #: u_translation.rstoomanyopenw
 msgid "Too many open windows, please close some charts."
@@ -5924,7 +5924,7 @@ msgstr "Alejar"
 
 #: u_translation.rszoom3
 msgid "Zoom"
-msgstr ""
+msgstr "Ampliación"
 
 #: u_translation.rszoomcentre
 msgid "Zoom + and centre on"

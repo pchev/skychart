@@ -3,13 +3,13 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-07 15:03+0000\n"
-"PO-Revision-Date: 2014-05-05 08:21+0000\n"
+"PO-Revision-Date: 2014-05-09 07:40+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-07 15:44+0000\n"
+"X-Launchpad-Export-Date: 2014-05-11 18:16+0000\n"
 "X-Generator: Launchpad (build 16996)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
@@ -423,7 +423,7 @@ msgstr "Pliki dodatkowe"
 
 #: u_translation.rsavailableact
 msgid "Available actions"
-msgstr ""
+msgstr "Dostępne działania"
 
 #: u_translation.rsaz
 msgid "Az"
@@ -1767,7 +1767,7 @@ msgstr "Edytuj typy obiektów"
 
 #: u_translation.rsedittimeincr
 msgid "Edit time increment"
-msgstr ""
+msgstr "Edycja kroku czasu"
 
 #: u_translation.rseditunits
 msgid "Edit units"
@@ -1783,7 +1783,7 @@ msgstr "Mgławice emisyjne"
 
 #: u_translation.rsempty
 msgid "Empty"
-msgstr ""
+msgstr "Pusty"
 
 #: u_translation.rsencoderconfi
 msgid "Encoder Configuration"
@@ -2159,7 +2159,7 @@ msgstr "FOV:"
 
 #: u_translation.rsfovbar
 msgid "FOV bar"
-msgstr ""
+msgstr "Pasek pola widzenia (FOV)"
 
 #: u_translation.rsfovnumber
 msgid "FOV number:"
@@ -2635,7 +2635,7 @@ msgstr "Czy współrzędne epoki to naprawdę %s?"
 
 #: u_translation.rsisempty
 msgid "%s is empty!"
-msgstr ""
+msgstr "%s jest pusty!"
 
 #: u_translation.rsittaketoolon
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
@@ -3123,7 +3123,7 @@ msgstr "min"
 
 #: u_translation.rsminimal
 msgid "Minimal"
-msgstr ""
+msgstr "Minimalny"
 
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
@@ -4555,7 +4555,7 @@ msgstr "Szukaj"
 
 #: u_translation.rssearchbox
 msgid "Search box"
-msgstr ""
+msgstr "Pole wyszukiwania"
 
 #: u_translation.rssearchbyname
 msgid "Search by name"
@@ -4655,7 +4655,7 @@ msgstr "Wybierz typ obiektu w twoim katalogu"
 
 #: u_translation.rsselecttimeun
 msgid "Select time units"
-msgstr ""
+msgstr "Wybór jednostki czasu"
 
 #: u_translation.rssemi
 msgid "Semi"
@@ -4683,7 +4683,7 @@ msgstr "Separacja"
 
 #: u_translation.rsseparator
 msgid "Separator"
-msgstr ""
+msgstr "Separator"
 
 #: u_translation.rsserialport
 msgid "Serial Port"
@@ -5119,7 +5119,7 @@ msgstr "S"
 
 #: u_translation.rsstandard
 msgid "Standard"
-msgstr ""
+msgstr "Standardowy"
 
 #: u_translation.rsstandardcolo
 msgid "Standard  colour"
@@ -5447,11 +5447,11 @@ msgstr "Pasek narzędziowy"
 
 #: u_translation.rstoolbaredito
 msgid "Tool bar editor"
-msgstr ""
+msgstr "Edytor paska narzędzi"
 
 #: u_translation.rstools
 msgid "Tools"
-msgstr ""
+msgstr "Narzędzia"
 
 #: u_translation.rstoomanyopenw
 msgid "Too many open windows, please close some charts."
