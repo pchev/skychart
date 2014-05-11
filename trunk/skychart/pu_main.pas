@@ -7236,11 +7236,7 @@ if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
        Track.Hint:=rsNoObjectToLo;
        Track.Caption:=rsNoObjectToLo;
     end;
-    case sc.plot.cfgplot.starplot of
-    0: begin switchstars.Checked:=true;  end;
-    1: begin switchstars.Checked:=true;  end;
-    2: begin switchstars.Checked:=false;  end;
-    end;
+    switchstars.ImageIndex:=117+sc.plot.cfgplot.starplot;
     EquatorialProjection.Checked:= (sc.cfgsc.projpole=Equat);
     AltAzProjection.Checked:= (sc.cfgsc.projpole=AltAz);
     EclipticProjection.Checked:= (sc.cfgsc.projpole=Ecl);
