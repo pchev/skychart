@@ -3,7 +3,7 @@ Version 3.11 beta, release Notes
 New functions:
 
   * The tool bar editor allow you to edit the button bar layout. The function is available from the menu Setup / Tool bar editor.
-  * New representation for the Milky Way. The previous line mode drawing can be activated from the menu Setup / Display / Lines.
+  * New representation for the Milky Way. This can be activated from the menu Setup / Display / Lines by unchecking "Milky Way - Line mode".
 
 Corrections:
 
