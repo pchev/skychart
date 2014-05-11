@@ -303,7 +303,7 @@ type
     cmain: Tconf_main;
     prtsc: Tskychart;
     prtImage: TChartDrawingControl;
-    locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar,TrackCursorMove,lockmove,TelescopeLock,MeasureOn :boolean;
+    locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar,TrackingCursor,TrackCursorMove,lockmove,TelescopeLock,MeasureOn :boolean;
     undolist : array[1..maxundo] of Tconf_skychart;
     lastundo,curundo,validundo, lastx,lasty,lastyzoom  : integer;
     lastl,lastb,MeasureRa,MeasureDe: double;
@@ -374,7 +374,7 @@ type
     function SaveChartImage(format,fn : string; quality: integer=95):boolean;
     Procedure ZoomBox(action,x,y:integer);
     Procedure MeasureDistance(action,x,y:integer);
-    Procedure TrackCursor(X,Y : integer);
+    Procedure TrackCursor(X,Y : integer; step: integer);
     Procedure ZoomCursor(yy : double);
     procedure SetField(field : double);
     procedure SetZenit(field : double; redraw:boolean=true);
@@ -552,6 +552,7 @@ inherited Create(TheOwner);
  validundo:=0;
  LockKeyboard:=false;
  LockTrackCursor:=false;
+ TrackingCursor:=false;
  ChartCursor:=crRetic;
  Image1.Cursor := ChartCursor;
  lock_refresh:=false;
@@ -2350,7 +2351,7 @@ end;
 if (button=mbMiddle)or((button=mbLeft)and(ssShift in shift))or((button=mbLeft)and cmain.SimpleMove) then begin
    Image1.Cursor:=ChartCursor;
    if TrackCursorMove then begin
-     TrackCursor(X,Y);
+     TrackCursor(X,Y,2);
      Refresh;
    end;
 end;
@@ -2369,9 +2370,9 @@ GetCoordxy(x,y,lastl,lastb,sc.cfgsc);
 lastyzoom:=y;
 case Button of
    mbLeft  :  if sc.cfgsc.ShowScale then  MeasureDistance(1,X,Y)
-                else if cmain.SimpleMove then image1.cursor:=crHandPoint
+                else if cmain.SimpleMove or (ssShift in shift) then TrackCursor(X,Y,0)
                   else ZoomBox(1,X,Y);
-   mbMiddle: image1.cursor:=crHandPoint;
+   mbMiddle: TrackCursor(X,Y,0);
 end;
 if assigned(FSetFocus) then FSetFocus(Self);
 if assigned(FImageSetFocus) then FImageSetFocus(Sender);
@@ -2397,10 +2398,10 @@ if MovingCircle then begin
 end else
 if (ssLeft in shift)and(not(ssShift in shift)) then begin
    if sc.cfgsc.ShowScale then  MeasureDistance(2,X,Y)
-     else if  cmain.SimpleMove then TrackCursor(X,Y)
+     else if  cmain.SimpleMove then TrackCursor(X,Y,1)
           else ZoomBox(2,X,Y);
 end else if ((ssMiddle in shift)and(not(ssCtrl in Shift)))or((ssLeft in shift)and(ssShift in shift))or(cmain.SimpleMove and (ssLeft in shift)) then begin
-     TrackCursor(X,Y);
+     TrackCursor(X,Y,1);
 end else if Shift=[ssCtrl] then begin
      try
      lockmove:=true;
@@ -2689,26 +2690,37 @@ end;
  Image1.Invalidate;
 end;
 
-Procedure Tf_chart.TrackCursor(X,Y : integer);
+Procedure Tf_chart.TrackCursor(X,Y : integer; step: integer);
 var newl,newb: double;
 begin
-TrackCursorMove:=true;
-if LockTrackCursor then exit;
-try
-  if VerboseMsg then
-   WriteTrace(caption+' TrackCursor');
-   LockTrackCursor:=true;
-   image1.cursor:=crHandPoint;
-   GetCoordxy(x,y,newl,newb,sc.cfgsc);
-   sc.MoveCenter(lastl-newl,lastb-newb);
-   sc.cfgsc.quick:=true;
-   lastx:=x;
-   lasty:=y;
-   lastyzoom:=y;
-   Refresh;
-   application.processmessages;  // very important to empty the mouse event queue before to unlock
-finally
-LockTrackCursor:=false;
+case step of
+0: begin
+     TrackingCursor:=true;
+     image1.cursor:=crHandPoint;
+   end;
+1: if TrackingCursor then begin
+      TrackCursorMove:=true;
+      if LockTrackCursor then exit;
+      try
+        if VerboseMsg then
+         WriteTrace(caption+' TrackCursor');
+         LockTrackCursor:=true;
+         GetCoordxy(x,y,newl,newb,sc.cfgsc);
+         sc.MoveCenter(lastl-newl,lastb-newb);
+         sc.cfgsc.quick:=true;
+         lastx:=x;
+         lasty:=y;
+         lastyzoom:=y;
+         Refresh;
+         application.processmessages;  // very important to empty the mouse event queue before to unlock
+      finally
+      LockTrackCursor:=false;
+      end;
+    end;
+2: begin
+    TrackingCursor:=false;
+    Image1.Cursor:=ChartCursor;
+   end;
 end;
 end;
 
