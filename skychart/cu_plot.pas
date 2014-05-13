@@ -2626,7 +2626,7 @@ if WhiteBg then col:=SubColor(clWhite,col);
 if cfgplot.UseBMP then begin
  if not WhiteBg then col:=Addcolor(col,cfgplot.backgroundcolor);
  if cfgplot.AntiAlias then
-   cbmp.FillEllipseLinearColorAntialias(x,y,r,r,ColorToBGRA(col,60),ColorToBGRA(col,255))
+   cbmp.FillEllipseLinearColorAntialias(x,y,r*2 ,r*2,ColorToBGRA(col,0),ColorToBGRA(col,255))
  else begin
    cbmp.FillRect(round(x-r),round(y-r),round(x+r),round(y+r),ColorToBGRA(col),dmSet);
  end;
