@@ -1,0 +1,86 @@
+object f_script: Tf_script
+  Left = 0
+  Height = 274
+  Top = 0
+  Width = 170
+  ClientHeight = 274
+  ClientWidth = 170
+  TabOrder = 0
+  DesignLeft = 336
+  DesignTop = 148
+  object BottomPanel: TPanel
+    Left = 0
+    Height = 50
+    Top = 224
+    Width = 170
+    Align = alBottom
+    ClientHeight = 50
+    ClientWidth = 170
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 8
+      Height = 15
+      Top = 0
+      Width = 78
+      Caption = 'Configuration'
+      ParentColor = False
+    end
+    object ButtonEditSrc: TBitBtn
+      Left = 4
+      Height = 25
+      Top = 21
+      Width = 75
+      Caption = 'Script'
+      OnClick = ButtonEditSrcClick
+      TabOrder = 0
+    end
+    object ButtonEditTB: TBitBtn
+      Left = 88
+      Height = 25
+      Top = 21
+      Width = 75
+      Caption = 'Toolbar'
+      OnClick = ButtonEditTBClick
+      TabOrder = 1
+    end
+  end
+  object ToolBar1: TToolBar
+    Left = 0
+    Height = 26
+    Top = 34
+    Width = 170
+    AutoSize = True
+    Caption = 'Toolbar 1'
+    TabOrder = 1
+  end
+  object ToolBar2: TToolBar
+    Left = 0
+    Height = 26
+    Top = 60
+    Width = 170
+    AutoSize = True
+    Caption = 'Toolbar 2'
+    TabOrder = 2
+  end
+  object MainPanel: TPanel
+    Left = 0
+    Height = 138
+    Top = 86
+    Width = 170
+    Align = alClient
+    ChildSizing.ShrinkHorizontal = crsHomogenousChildResize
+    ChildSizing.ShrinkVertical = crsHomogenousSpaceResize
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    TabOrder = 3
+  end
+  object PanelTitle: TPanel
+    Left = 0
+    Height = 34
+    Top = 0
+    Width = 170
+    Align = alTop
+    Caption = 'PanelTitle'
+    TabOrder = 4
+  end
+end

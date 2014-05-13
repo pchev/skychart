@@ -35,7 +35,7 @@ uses
   lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, fu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
-  pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, pu_obslist,
+  pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, pu_obslist, fu_script,
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
@@ -48,6 +48,8 @@ type
 
   Tf_main = class(TForm)
     ContainerPanel: TPanel;
+    ScriptPanel: TPanel;
+    Splitter1: TSplitter;
     ToolBarFOV: TPanel;
     tbFOV1: TSpeedButton;
     tbFOV10: TSpeedButton;
@@ -599,6 +601,8 @@ type
     CursorImage1: TCursorImage;
     SaveState: TWindowState;
     samp: TSampClient;
+    numscript: integer;
+    Fscript: array of Tf_script;
   {$ifdef mswindows}
     savwincol  : array[0..25] of Tcolor;
   {$endif}
@@ -730,6 +734,8 @@ type
     procedure InitializeDB(Sender: TObject);
     procedure Init;
     procedure InitToolBar;
+    procedure InitScriptPanel;
+    procedure ShowScriptPanel(n:integer);
     procedure ViewToolsBar;
     Procedure InitDS2000;
     function PrepareAsteroid(jd1,jd2,step:double; msg:Tstrings):boolean;
@@ -1359,6 +1365,7 @@ Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
 AutoRefreshLock:=false;
 Autorefresh.enabled:=true;
 AnimationEnabled:=false;
+InitScriptPanel;
 if not Application.ShowMainForm then InitOK:=true;  // no formshow if --daemon
 except
   on E: Exception do begin
@@ -1830,6 +1837,7 @@ end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
 var step,buf:string;
+    i:integer;
 begin
 try
 if VerboseMsg then
@@ -2013,9 +2021,10 @@ if buf<'2000' then begin
              mtError, [mbAbort], 0);
    Halt;
 end;
-if VerboseMsg then
- WriteTrace(step);
+if VerboseMsg then WriteTrace(step);
 def_cfgsc.tz.LoadZoneTab(ZoneDir+'zone.tab');
+step:='SAMP';
+if VerboseMsg then WriteTrace(step);
 SampConnected:=false;
 SampClientId:=Tstringlist.Create;
 SampClientName:=Tstringlist.Create;
@@ -2023,12 +2032,29 @@ SampClientDesc:=Tstringlist.Create;
 SampClientCoordpointAtsky:=TStringList.Create;
 SampClientImageLoadFits:=TStringList.Create;
 SampClientTableLoadVotable:=TStringList.Create;
+step:='Toolbar';
+if VerboseMsg then WriteTrace(step);
 configmainbar:=TStringList.Create;
 configobjectbar:=TStringList.Create;
 configleftbar:=TStringList.Create;
 configrightbar:=TStringList.Create;
 rotspeed:=-1;
+step:='Script panel';
+if VerboseMsg then WriteTrace(step);
+numscript:=8;
+SetLength(Fscript,numscript);
+for i:=0 to numscript-1 do begin
+  Fscript[i]:=Tf_script.Create(self);
+  Fscript[i].Name:='fscript'+inttostr(i);
+  Fscript[i].PanelTitle.Caption:='Toolbox '+inttostr(i+1);
+  Fscript[i].Tag:=i;
+  Fscript[i].Align:=alClient;
+  Fscript[i].Visible:=false;
+  Fscript[i].Parent:=ScriptPanel;
+end;
+Splitter1.ResizeControl:=ScriptPanel;
 
+step:='End';
 except
   on E: Exception do begin
    WriteTrace(step+': '+E.Message);
@@ -3950,13 +3976,6 @@ if i=0 then PanelTop.visible:=false
    end;  
 end;
 
-function VisibleControlCount(obj:TWinControl):integer;
-var i:integer;
-begin
-result:=0;
-for i:=0 to obj.ControlCount-1 do if obj.Controls[i].visible then inc(result);
-end;
-
 procedure Tf_main.ViewToolsBar;
 begin
 MainBar1.checked:= (VisibleControlCount(ToolBarMain)>0);
@@ -5348,7 +5367,7 @@ end;
 end;
 
 procedure Tf_main.ReadPrivateConfig(filename:string);
-var i,j:integer;
+var i,j,n:integer;
     inif: TMemIniFile;
     section,buf : string;
     obsdetail: TObsDetail;
@@ -5643,6 +5662,28 @@ if SectionExists(section) then begin
   numrightbar:=ReadInteger(section,'numrightbar',numrightbar);
   for i:=0 to numrightbar-1 do configrightbar.Add(ReadString(section,'rightbar'+inttostr(i),''));
 end;
+// Script panel
+for i:=0 to numscript-1 do begin
+   section:='ScriptPanel'+inttostr(i);
+   Fscript[i].Visible:=ReadBool(section,'visible',false);
+   if Fscript[i].Visible then ScriptPanel.Visible:=true;
+   n:=ReadInteger(section,'numtoolbar1',0);
+   for j:=0 to n-1 do Fscript[i].ConfigToolbar1.Add(ReadString(section,'toolbar1_'+inttostr(j),''));
+   n:=ReadInteger(section,'numtoolbar2',0);
+   for j:=0 to n-1 do Fscript[i].ConfigToolbar2.Add(ReadString(section,'toolbar2_'+inttostr(j),''));
+   n:=ReadInteger(section,'numscriptbutton',0);
+   for j:=0 to n-1 do begin
+     buf:=ReadString(section,'scriptbutton_'+inttostr(j),'');
+     if buf='' then continue;
+     buf:=StringReplace(buf,'"','',[rfReplaceAll]);
+     Fscript[i].ConfigScriptButton.Add(buf);
+   end;
+   n:=ReadInteger(section,'numscript',0);
+   for j:=0 to n-1 do Fscript[i].ConfigScript.Add(ReadString(section,'script_'+inttostr(j),''));
+end;
+Splitter1.Visible:=ScriptPanel.Visible;
+Splitter1.ResizeControl:=ScriptPanel;
+
 except
   ShowError('Error reading '+filename+' quicksearch');
 end;
@@ -6167,7 +6208,7 @@ end;
 end;
 
 procedure Tf_main.SavePrivateConfig(filename:string);
-var i,j:integer;
+var i,j,n:integer;
     inif: TMemIniFile;
     section,buf : string;
 begin
@@ -6387,6 +6428,23 @@ WriteInteger(section,'numleftbar',numleftbar);
 for i:=0 to numleftbar-1 do WriteString(section,'leftbar'+inttostr(i),configleftbar[i]);
 WriteInteger(section,'numrightbar',numrightbar);
 for i:=0 to numrightbar-1 do WriteString(section,'rightbar'+inttostr(i),configrightbar[i]);
+// Script panel
+for i:=0 to numscript-1 do begin
+   section:='ScriptPanel'+inttostr(i);
+   WriteBool(section,'visible',Fscript[i].Visible);
+   n:=Fscript[i].ConfigToolbar1.Count;
+   WriteInteger(section,'numtoolbar1',n);
+   for j:=0 to n-1 do WriteString(section,'toolbar1_'+inttostr(j),Fscript[i].ConfigToolbar1[j]);
+   n:=Fscript[i].ConfigToolbar2.Count;
+   WriteInteger(section,'numtoolbar2',n);
+   for j:=0 to n-1 do WriteString(section,'toolbar2_'+inttostr(j),Fscript[i].ConfigToolbar2[j]);
+   n:=Fscript[i].ConfigScriptButton.Count;
+   WriteInteger(section,'numscriptbutton',n);
+   for j:=0 to n-1 do WriteString(section,'scriptbutton_'+inttostr(j),'"'+Fscript[i].ConfigScriptButton[j]+'"');
+   n:=Fscript[i].ConfigScript.Count;
+   WriteInteger(section,'numscript',n);
+   for j:=0 to n-1 do WriteString(section,'script_'+inttostr(j),Fscript[i].ConfigScript[j]);
+end;
 Updatefile;
 end;
 finally
@@ -6976,7 +7034,7 @@ pla[32]:=rsEarthShadow;
 // Help
 u_help.SetLang;
 SetHelpDB(HTMLHelpDatabase1);
-SetHelp(self,hlpIndex);
+//SetHelp(self,hlpIndex);
 end;
 
 procedure Tf_main.quicksearchClick(Sender: TObject);
@@ -8266,12 +8324,24 @@ if cfgm.KioskMode then begin
   end;
 end;
 if cfgm.KioskMode or
+   ((Activecontrol<>nil) and (
    (Activecontrol=quicksearch) or
    (Activecontrol=EditTimeVal) or
    (Activecontrol=TimeVal) or
-   (Activecontrol=TimeU) then exit
+   (Activecontrol=TimeU) or
+   (pos('_',ActiveControl.Name)>0 ))) then exit
 else
-   (MultiFrame1.ActiveObject as Tf_chart).CKeyDown(Key,Shift);
+  case key of
+   VK_F1: ShowScriptPanel(0);
+   VK_F2: ShowScriptPanel(1);
+   VK_F3: ShowScriptPanel(2);
+   VK_F4: ShowScriptPanel(3);
+   VK_F5: ShowScriptPanel(4);
+   VK_F6: ShowScriptPanel(5);
+   VK_F7: ShowScriptPanel(6);
+   VK_F8: ShowScriptPanel(7);
+   else (MultiFrame1.ActiveObject as Tf_chart).CKeyDown(Key,Shift);
+  end;
 end;
 
 procedure Tf_main.SetChildFocus(Sender: TObject);
@@ -9016,44 +9086,54 @@ if not samp.SampSendImageFits(client,imgname,imgid,url) then begin
 end;
 end;
 
-///////////////////////////////////////////////////////////////////////////////////
-
-// one time use function to extract all text to translate from component object
-//uses pu_addlabel, pu_catgen, pu_catgenadv, pu_config_chart, pu_config_internet, pu_config_solsys, pu_config_system,pu_image, pu_progressbar,
-{procedure Tf_main.MenuItem12Click(Sender: TObject);
-//var f: textfile;
+procedure Tf_main.InitScriptPanel;
+var i: integer;
 begin
-AssignFile(f,'translation.txt');
-rewrite(f);
-GetTranslationString(f_main,f);
-GetTranslationString(f_position,f);
-GetTranslationString(f_search,f);
-GetTranslationString(f_zoom,f);
-GetTranslationString(f_getdss,f);
-GetTranslationString(f_manualtelescope,f);
-GetTranslationString(f_detail,f);
-GetTranslationString(f_info,f);
-GetTranslationString(f_calendar,f);
-GetTranslationString(f_printsetup,f);
-GetTranslationString(f_print,f);
-GetTranslationString(Tf_chart(MultiFrame1.ActiveObject),f);
-GetTranslationString(Tf_about.Create(self),f);
-GetTranslationString(Tf_addlabel.Create(self),f);
-GetTranslationString(Tf_catgen.Create(self),f);
-GetTranslationString(Tf_catgenadv.Create(self),f);
-GetTranslationString(Tf_config.Create(self),f);
-GetTranslationString(Tf_config_catalog.Create(self),f);
-GetTranslationString(Tf_config_chart.Create(self),f);
-GetTranslationString(Tf_config_display.Create(self),f);
-GetTranslationString(Tf_config_internet.Create(self),f);
-GetTranslationString(Tf_config_observatory.Create(self),f);
-GetTranslationString(Tf_config_pictures.Create(self),f);
-GetTranslationString(Tf_config_solsys.Create(self),f);
-GetTranslationString(Tf_config_system.Create(self),f);
-GetTranslationString(Tf_config_time.Create(self),f);
-GetTranslationString(Tf_image.Create(self),f);
-GetTranslationString(Tf_progress.Create(self),f);
-closefile(f);
-end;}
+for i:=0 to numscript-1 do begin
+  Fscript[i].ImageNormal:=ImageNormal;
+  Fscript[i].ContainerPanel:=ContainerPanel;
+  Fscript[i].ToolButtonMouseUp:=ToolButtonMouseUp;
+  Fscript[i].ToolButtonMouseDown:=ToolButtonMouseDown;
+  Fscript[i].ActionListFile:=ActionListFile;
+  Fscript[i].ActionListEdit:=ActionListEdit;
+  Fscript[i].ActionListSetup:=ActionListSetup;
+  Fscript[i].ActionListView:=ActionListView;
+  Fscript[i].ActionListChart:=ActionListChart;
+  Fscript[i].ActionListTelescope:=ActionListTelescope;
+  Fscript[i].ActionListWindow:=ActionListWindow;
+  Fscript[i].MagPanel:=MagPanel;
+  Fscript[i].quicksearch:=quicksearch;
+  Fscript[i].TimeValPanel:=TimeValPanel;
+  Fscript[i].TimeU:=TimeU;
+  Fscript[i].ToolBarFOV:=ToolBarFOV;
+  Fscript[i].Mainmenu:=MainMenu1;
+  Fscript[i].Init;
+end;
+Splitter1.ResizeControl:=ScriptPanel;
+end;
+
+procedure Tf_main.ShowScriptPanel(n:integer);
+var i: integer;
+begin
+ if n<numscript then begin
+   for i:=0 to numscript-1 do begin
+     if i=n then begin
+        if Fscript[i].Visible then begin
+           Fscript[i].Visible:=false;
+           ScriptPanel.Visible:=false;
+           Splitter1.Visible:=false;
+        end else begin
+           Fscript[i].Visible:=true;
+           ScriptPanel.Visible:=true;
+           Splitter1.Visible:=true;
+           Splitter1.ResizeControl:=ScriptPanel;
+        end;
+     end
+     else Fscript[i].Visible:=false;
+   end;
+ end;
+end;
+
+///////////////////////////////////////////////////////////////////////////////////
 
 end.

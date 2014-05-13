@@ -3240,6 +3240,22 @@ object f_main: Tf_main
       end
     end
   end
+  object ScriptPanel: TPanel
+    Left = 28
+    Height = 471
+    Top = 76
+    Width = 170
+    Align = alLeft
+    TabOrder = 6
+    Visible = False
+  end
+  object Splitter1: TSplitter
+    Left = 198
+    Height = 471
+    Top = 76
+    Width = 5
+    ResizeStyle = rsPattern
+  end
   object MainMenu1: TMainMenu
     Images = ImageNormal
     left = 56
