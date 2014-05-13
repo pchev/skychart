@@ -126,6 +126,7 @@ function capitalize(txt:string):string;
 function isANSIstr(str:string):boolean;
 function GetXPlanetVersion: string;
 Procedure GetXplanet(Xplanetversion,originfile,searchdir,bsize,outfile : string; ipla:integer; pa,grsl,jd : double; var irc:integer; var r:TStringList);
+function VisibleControlCount(obj:TWinControl):integer;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -555,13 +556,13 @@ str:=trim(str);
 for i:=1 to p-1 do begin
  j:=pos(isep,str);
  if j=0 then j:=length(str)+1;
- str:=trim(copy(str,j,length(str)));
+ str:=trim(copy(str,j+1,length(str)));
 end;
 for i:=1 to n do begin
  j:=pos(isep,str);
  if j=0 then j:=length(str)+1;
- result:=result+trim(copy(str,1,j))+sep;
- str:=trim(copy(str,j,length(str)));
+ result:=result+trim(copy(str,1,j-1))+sep;
+ str:=trim(copy(str,j+1,length(str)));
 end;
 end;
 
@@ -2096,6 +2097,8 @@ end;
 end;
 {$endif}
 
+// one time use function to extract all text to translate from component object
+//uses pu_addlabel, pu_catgen, pu_catgenadv, pu_config_chart, pu_config_internet, pu_config_solsys, pu_config_system,pu_image, pu_progressbar,
 procedure GetTranslationString(form: TForm; var f: textfile);
 var i,j: integer;
     cname,cprop,ctext : string;
@@ -2440,6 +2443,13 @@ for c in str do
       result:=false;
       break;
    end;
+end;
+
+function VisibleControlCount(obj:TWinControl):integer;
+var i:integer;
+begin
+result:=0;
+for i:=0 to obj.ControlCount-1 do if obj.Controls[i].visible then inc(result);
 end;
 
 end.

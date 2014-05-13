@@ -264,84 +264,87 @@
         <WorkingDirectory Value="/usr/local/bin"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="21">
+    <RequiredPackages Count="22">
       <Item1>
-        <PackageName Value="MemDSLaz"/>
+        <PackageName Value="pascalscript"/>
       </Item1>
       <Item2>
-        <PackageName Value="SDFLaz"/>
+        <PackageName Value="MemDSLaz"/>
       </Item2>
       <Item3>
-        <PackageName Value="vosamp"/>
+        <PackageName Value="SDFLaz"/>
       </Item3>
       <Item4>
-        <PackageName Value="TurboPowerIPro"/>
+        <PackageName Value="vosamp"/>
       </Item4>
       <Item5>
-        <PackageName Value="MultiFramePackage"/>
+        <PackageName Value="TurboPowerIPro"/>
       </Item5>
       <Item6>
-        <PackageName Value="lazvo"/>
-        <MinVersion Minor="1" Valid="True"/>
+        <PackageName Value="MultiFramePackage"/>
       </Item6>
       <Item7>
-        <PackageName Value="bgrabitmappack"/>
+        <PackageName Value="lazvo"/>
+        <MinVersion Minor="1" Valid="True"/>
       </Item7>
       <Item8>
-        <PackageName Value="uniqueinstance_package"/>
+        <PackageName Value="bgrabitmappack"/>
       </Item8>
       <Item9>
-        <PackageName Value="cdccatalog"/>
-        <DefaultFilename Value="library/catalog/cdccatalog.lpk"/>
+        <PackageName Value="uniqueinstance_package"/>
       </Item9>
       <Item10>
-        <PackageName Value="CDCjdcalendar"/>
-        <DefaultFilename Value="component/jdcalendar/cdcjdcalendar.lpk"/>
+        <PackageName Value="cdccatalog"/>
+        <DefaultFilename Value="library/catalog/cdccatalog.lpk"/>
       </Item10>
       <Item11>
-        <PackageName Value="downldialog"/>
-        <DefaultFilename Value="component/downloaddialog/downldialog.lpk"/>
+        <PackageName Value="CDCjdcalendar"/>
+        <DefaultFilename Value="component/jdcalendar/cdcjdcalendar.lpk"/>
       </Item11>
       <Item12>
-        <PackageName Value="enhedit"/>
-        <DefaultFilename Value="component/enhedits/enhedit.lpk"/>
+        <PackageName Value="downldialog"/>
+        <DefaultFilename Value="component/downloaddialog/downldialog.lpk"/>
       </Item12>
       <Item13>
-        <PackageName Value="FCL"/>
+        <PackageName Value="enhedit"/>
+        <DefaultFilename Value="component/enhedits/enhedit.lpk"/>
       </Item13>
       <Item14>
-        <PackageName Value="LCL"/>
+        <PackageName Value="FCL"/>
       </Item14>
       <Item15>
-        <PackageName Value="libsql"/>
-        <DefaultFilename Value="component/libsql/libsql.lpk"/>
+        <PackageName Value="LCL"/>
       </Item15>
       <Item16>
-        <PackageName Value="mrecsort"/>
-        <DefaultFilename Value="component/mrecsort/mrecsort.lpk"/>
+        <PackageName Value="libsql"/>
+        <DefaultFilename Value="component/libsql/libsql.lpk"/>
       </Item16>
       <Item17>
-        <PackageName Value="Printer4Lazarus"/>
-        <MinVersion Build="1" Valid="True"/>
+        <PackageName Value="mrecsort"/>
+        <DefaultFilename Value="component/mrecsort/mrecsort.lpk"/>
       </Item17>
       <Item18>
-        <PackageName Value="radec"/>
-        <DefaultFilename Value="component/radec/radec.lpk"/>
+        <PackageName Value="Printer4Lazarus"/>
+        <MinVersion Build="1" Valid="True"/>
       </Item18>
       <Item19>
-        <PackageName Value="synapse"/>
-        <DefaultFilename Value="component/synapse/source/lib/synapse.lpk"/>
+        <PackageName Value="radec"/>
+        <DefaultFilename Value="component/radec/radec.lpk"/>
       </Item19>
       <Item20>
-        <PackageName Value="XmlParser"/>
-        <DefaultFilename Value="component/xmlparser/xmlparser.lpk"/>
+        <PackageName Value="synapse"/>
+        <DefaultFilename Value="component/synapse/source/lib/synapse.lpk"/>
       </Item20>
       <Item21>
+        <PackageName Value="XmlParser"/>
+        <DefaultFilename Value="component/xmlparser/xmlparser.lpk"/>
+      </Item21>
+      <Item22>
         <PackageName Value="zoomimage"/>
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
-      </Item21>
+      </Item22>
     </RequiredPackages>
-    <Units Count="77">
+    <Units Count="79">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -886,6 +889,22 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_edittoolbar"/>
       </Unit76>
+      <Unit77>
+        <Filename Value="fu_script.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_script"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fu_script"/>
+      </Unit77>
+      <Unit78>
+        <Filename Value="pu_scripteditor.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_scripteditor"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pu_scripteditor"/>
+      </Unit78>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
