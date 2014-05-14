@@ -20,12 +20,12 @@ object f_main: Tf_main
   LCLVersion = '1.2.2.0'
   object PanelLeft: TPanel
     Left = 0
-    Height = 471
-    Top = 76
+    Height = 467
+    Top = 80
     Width = 28
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 471
+    ClientHeight = 467
     ClientWidth = 28
     Font.Height = 10
     FullRepaint = False
@@ -33,7 +33,7 @@ object f_main: Tf_main
     TabOrder = 1
     object ToolBarLeft: TToolBar
       Left = 0
-      Height = 471
+      Height = 467
       Top = 0
       Width = 28
       Align = alClient
@@ -51,18 +51,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 994
-    Height = 471
-    Top = 76
+    Height = 467
+    Top = 80
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 471
+    ClientHeight = 467
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBarRight: TToolBar
       Left = 0
-      Height = 471
+      Height = 467
       Top = 0
       Width = 28
       Align = alClient
@@ -175,12 +175,12 @@ object f_main: Tf_main
   end
   object PanelTop: TPanel
     Left = 0
-    Height = 76
+    Height = 80
     Top = 0
     Width = 1022
     Align = alTop
     BevelOuter = bvNone
-    ClientHeight = 76
+    ClientHeight = 80
     ClientWidth = 1022
     FullRepaint = False
     TabOrder = 0
@@ -188,7 +188,7 @@ object f_main: Tf_main
     object ToolBarMain: TToolBar
       Left = 0
       Height = 25
-      Top = 25
+      Top = 30
       Width = 1022
       ButtonHeight = 24
       ButtonWidth = 24
@@ -239,7 +239,7 @@ object f_main: Tf_main
     end
     object TabControl1: TTabControl
       Left = 0
-      Height = 25
+      Height = 30
       Top = 0
       Width = 1022
       TabStop = False
@@ -251,7 +251,7 @@ object f_main: Tf_main
     object ToolBarObj: TToolBar
       Left = 0
       Height = 27
-      Top = 49
+      Top = 53
       Width = 1022
       Align = alBottom
       ButtonHeight = 24
@@ -3242,8 +3242,8 @@ object f_main: Tf_main
   end
   object ScriptPanel: TPanel
     Left = 28
-    Height = 471
-    Top = 76
+    Height = 467
+    Top = 80
     Width = 170
     Align = alLeft
     TabOrder = 6
@@ -3251,8 +3251,8 @@ object f_main: Tf_main
   end
   object Splitter1: TSplitter
     Left = 198
-    Height = 471
-    Top = 76
+    Height = 467
+    Top = 80
     Width = 5
     ResizeStyle = rsPattern
   end
@@ -3260,10 +3260,10 @@ object f_main: Tf_main
     Images = ImageNormal
     left = 56
     top = 104
-    object File1: TMenuItem
+    object SubFile: TMenuItem
       Caption = '&File'
       Hint = 'File related commands'
-      object FileNewItem: TMenuItem
+      object MenuFileNew: TMenuItem
         Action = FileNew1
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -3302,7 +3302,7 @@ object f_main: Tf_main
           6BFFE78CB5FF945A63FFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object FileOpenItem: TMenuItem
+      object MenuFileOpen: TMenuItem
         Action = FileOpen1
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -3341,7 +3341,7 @@ object f_main: Tf_main
           00FFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object FileSaveAsItem: TMenuItem
+      object MenuFileSave: TMenuItem
         Action = FileSaveAs1
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -3380,24 +3380,24 @@ object f_main: Tf_main
           EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object FileCloseItem: TMenuItem
+      object MenuFileClose: TMenuItem
         Caption = 'FileClose1'
         Hint = 'Close Chart'
         ShortCut = 16472
         OnClick = BtnCloseChildClick
       end
-      object MenuItem31: TMenuItem
+      object MenuResetChart: TMenuItem
         Caption = 'ResetDefaultChart'
         OnClick = ResetDefaultChartExecute
       end
-      object ResetLanguage: TMenuItem
+      object MenuResetLanguage: TMenuItem
         Caption = 'Reset language'
-        OnClick = ResetLanguageClick
+        OnClick = MenuResetLanguageClick
       end
       object N6: TMenuItem
         Caption = '-'
       end
-      object Calendar1: TMenuItem
+      object MenuCalendar: TMenuItem
         Action = Calendar
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -3475,32 +3475,32 @@ object f_main: Tf_main
           F7FFF6F6F7FFF6F6F7FFF6F6F7FFF6F6F7FFF6F6F7FFF6F6F7FF
         }
       end
-      object VariableStar1: TMenuItem
-        OnClick = VariableStar1Click
+      object MenuVariableStar: TMenuItem
+        OnClick = MenuVariableStarClick
       end
-      object MenuItemSAMP: TMenuItem
+      object SubSAMP: TMenuItem
         Caption = 'SAMP'
-        object MenuItem35: TMenuItem
+        object MenuSAMPConnect: TMenuItem
           Caption = 'Connect to SAMP HUB'
-          OnClick = MenuItem35Click
+          OnClick = MenuSAMPConnectClick
         end
-        object MenuItem36: TMenuItem
+        object MenuSAMPDisconnect: TMenuItem
           Caption = 'Disconnect from SAMP'
-          OnClick = MenuItem36Click
+          OnClick = MenuSAMPDisconnectClick
         end
-        object MenuItem37: TMenuItem
+        object MenuSAMPStatus: TMenuItem
           Caption = 'SAMP status'
-          OnClick = MenuItem37Click
+          OnClick = MenuSAMPStatusClick
         end
-        object MenuItem38: TMenuItem
+        object MenuSAMPSetup: TMenuItem
           Caption = 'SAMP setup'
-          OnClick = MenuItem38Click
+          OnClick = MenuSAMPSetupClick
         end
       end
       object N2: TMenuItem
         Caption = '-'
       end
-      object SaveImage1: TMenuItem
+      object MenuSaveImage: TMenuItem
         Action = SaveImage
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -3539,7 +3539,7 @@ object f_main: Tf_main
           52FF845252FF845252FF845252FF845252FF845252FF845252FF
         }
       end
-      object Print2: TMenuItem
+      object MenuPrint: TMenuItem
         Action = Print1
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -3578,11 +3578,11 @@ object f_main: Tf_main
           EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object PrintPreview1: TMenuItem
+      object MenuPrintPreview: TMenuItem
         Caption = 'PrintPreview'
-        OnClick = PrintPreview1Click
+        OnClick = MenuPrintPreviewClick
       end
-      object PrintSetup2: TMenuItem
+      object MenuPrintSetup: TMenuItem
         Action = FilePrintSetup1
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -3624,7 +3624,7 @@ object f_main: Tf_main
       object N1: TMenuItem
         Caption = '-'
       end
-      object FileExitItem: TMenuItem
+      object MenuExit: TMenuItem
         Action = FileExit1
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -3664,7 +3664,7 @@ object f_main: Tf_main
         }
       end
     end
-    object Edit1: TMenuItem
+    object SubEdit: TMenuItem
       Caption = '&Edit'
       GroupIndex = 2
       Hint = 'Edit commands'
@@ -3746,7 +3746,7 @@ object f_main: Tf_main
           D4FFD4D4D4FFD4D4D4FFD4D4D4FFD4D4D4FFD4D4D4FFD4D4D4FF
         }
       end
-      object CopyItem: TMenuItem
+      object MenuCopy: TMenuItem
         Action = EditCopy1
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -3785,7 +3785,7 @@ object f_main: Tf_main
           CFFFC8CACFFFC8CACFFFC8CACFFFC8CACFFFC8CACFFFC8CACFFF
         }
       end
-      object Undo1: TMenuItem
+      object MenuUndo: TMenuItem
         Action = Undo
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -3824,7 +3824,7 @@ object f_main: Tf_main
           EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object Redo1: TMenuItem
+      object MenuRedo: TMenuItem
         Action = Redo
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -3864,17 +3864,17 @@ object f_main: Tf_main
         }
       end
     end
-    object Setup1: TMenuItem
+    object SubSetup: TMenuItem
       Caption = '&Setup'
       GroupIndex = 2
-      object MenuItemEditToolbar: TMenuItem
+      object MenuEditToolbar: TMenuItem
         Caption = 'Edit tool bar'
-        OnClick = MenuItemEditToolbarClick
+        OnClick = MenuEditToolbarClick
       end
-      object MenuItem34: TMenuItem
+      object N34: TMenuItem
         Caption = '-'
       end
-      object DateConfig1: TMenuItem
+      object MenuDateConfig: TMenuItem
         Action = SetupTime
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -3913,7 +3913,7 @@ object f_main: Tf_main
           EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object ObsConfig1: TMenuItem
+      object MenuObsConfig: TMenuItem
         Action = SetupObservatory
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -3952,7 +3952,7 @@ object f_main: Tf_main
           EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object MenuItem2: TMenuItem
+      object MenuChartConfig: TMenuItem
         Action = SetupChart
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -3992,7 +3992,7 @@ object f_main: Tf_main
         }
         OnClick = SetupChartExecute
       end
-      object MenuItem9: TMenuItem
+      object MenuCatalogConfig: TMenuItem
         Action = SetupCatalog
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4031,7 +4031,7 @@ object f_main: Tf_main
           B8FFC7C8CAFFC9CCCBFFBDBEBEFFB0B2B6FFB4B7BEFFB8BBC2FF
         }
       end
-      object MenuItem3: TMenuItem
+      object MenuSolsysConfig: TMenuItem
         Action = SetupSolSys
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4070,7 +4070,7 @@ object f_main: Tf_main
           B8FFC7C8CAFFC9CCCBFFBDBEBEFFB0B2B6FFB4B7BEFFB8BBC2FF
         }
       end
-      object MenuItem1: TMenuItem
+      object MenuDisplayConfig: TMenuItem
         Action = SetupDisplay
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4109,7 +4109,7 @@ object f_main: Tf_main
           B8FFC7C8CAFFC9CCCBFFBDBEBEFFB0B2B6FFB4B7BEFFB8BBC2FF
         }
       end
-      object MenuItem7: TMenuItem
+      object MenuPictureConfig: TMenuItem
         Action = SetupPictures
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4148,7 +4148,7 @@ object f_main: Tf_main
           B8FFC7C8CAFFC9CCCBFFBDBEBEFFB0B2B6FFB4B7BEFFB8BBC2FF
         }
       end
-      object MenuItem4: TMenuItem
+      object MenuGeneralConfig: TMenuItem
         Action = SetupSystem
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4187,7 +4187,7 @@ object f_main: Tf_main
           B8FFC7C8CAFFC9CCCBFFBDBEBEFFB0B2B6FFB4B7BEFFB8BBC2FF
         }
       end
-      object MenuItem5: TMenuItem
+      object MenuInternetConfig: TMenuItem
         Action = SetupInternet
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4226,7 +4226,7 @@ object f_main: Tf_main
           B8FFC7C8CAFFC9CCCBFFBDBEBEFFB0B2B6FFB4B7BEFFB8BBC2FF
         }
       end
-      object MenuItem33: TMenuItem
+      object MenuCalendarConfig: TMenuItem
         Action = SetupCalendar
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4265,10 +4265,10 @@ object f_main: Tf_main
           B8FFC7C8CAFFC9CCCBFFBDBEBEFFB0B2B6FFB4B7BEFFB8BBC2FF
         }
       end
-      object MenuItem26: TMenuItem
+      object N26: TMenuItem
         Caption = '-'
       end
-      object MenuItem6: TMenuItem
+      object MenuConfig: TMenuItem
         Action = SetupConfig
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4311,7 +4311,7 @@ object f_main: Tf_main
         Caption = '-'
         GroupIndex = 2
       end
-      object SaveConfigurationNow1: TMenuItem
+      object MenuSaveConfigurationNow: TMenuItem
         Action = SaveConfiguration
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4351,17 +4351,17 @@ object f_main: Tf_main
         }
         GroupIndex = 2
       end
-      object SaveConfigurationOnExit1: TMenuItem
+      object MenuSaveConfigurationOnExit: TMenuItem
         Action = SaveConfigOnExit
         GroupIndex = 2
         GlyphShowMode = gsmNever
       end
     end
-    object View1: TMenuItem
+    object SubView: TMenuItem
       Caption = '&View'
       GroupIndex = 2
-      OnClick = View1Click
-      object FullScreen1: TMenuItem
+      OnClick = SubViewClick
+      object MenuFullScreen: TMenuItem
         Action = ViewFullScreen
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4403,7 +4403,7 @@ object f_main: Tf_main
         GlyphShowMode = gsmNever
         ShowAlwaysCheckable = True
       end
-      object NightVision1: TMenuItem
+      object MenuNightVision: TMenuItem
         Action = ViewNightVision
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4445,10 +4445,10 @@ object f_main: Tf_main
         GlyphShowMode = gsmNever
         ShowAlwaysCheckable = True
       end
-      object ViewToolBar1: TMenuItem
+      object SubToolBar: TMenuItem
         Caption = 'Tool Bar'
         GroupIndex = 2
-        object ViewToolsBar1: TMenuItem
+        object MenuViewToolsBar: TMenuItem
           Caption = 'All Tools Bar'
           Checked = True
           GroupIndex = 2
@@ -4456,42 +4456,42 @@ object f_main: Tf_main
           Hint = 'View Tools Bar'
           ShortCut = 16450
           ShowAlwaysCheckable = True
-          OnClick = ViewToolsBar1Click
+          OnClick = MenuViewToolsBarClick
         end
         object N5: TMenuItem
           Caption = '-'
           GroupIndex = 2
           ShowAlwaysCheckable = True
         end
-        object MainBar1: TMenuItem
+        object MenuViewMainBar: TMenuItem
           Checked = True
           GroupIndex = 2
           GlyphShowMode = gsmNever
           ShowAlwaysCheckable = True
           OnClick = ViewMainBarClick
         end
-        object ObjectBar1: TMenuItem
+        object MenuViewObjectBar: TMenuItem
           Checked = True
           GroupIndex = 2
           GlyphShowMode = gsmNever
           ShowAlwaysCheckable = True
           OnClick = ViewObjectBarClick
         end
-        object LeftBar1: TMenuItem
+        object MenuViewLeftBar: TMenuItem
           Checked = True
           GroupIndex = 2
           GlyphShowMode = gsmNever
           ShowAlwaysCheckable = True
           OnClick = ViewLeftBarClick
         end
-        object RightBar1: TMenuItem
+        object MenuViewRightBar: TMenuItem
           Checked = True
           GroupIndex = 2
           GlyphShowMode = gsmNever
           ShowAlwaysCheckable = True
           OnClick = ViewRightBarClick
         end
-        object ViewStatusBar1: TMenuItem
+        object MenuViewStatusBar: TMenuItem
           Caption = 'Status Bar'
           Checked = True
           GroupIndex = 2
@@ -4501,16 +4501,16 @@ object f_main: Tf_main
           OnClick = ViewStatusBarClick
         end
       end
-      object ViewScrollBar1: TMenuItem
+      object MenuViewScrollBar: TMenuItem
         Caption = 'Scroll Bar'
         GlyphShowMode = gsmNever
-        OnClick = ViewScrollBar1Click
+        OnClick = MenuViewScrollBarClick
       end
       object N9: TMenuItem
         Caption = '-'
         GroupIndex = 2
       end
-      object ViewInformation1: TMenuItem
+      object MenuServerInformation: TMenuItem
         Action = ViewServerInfo
         Caption = 'Server Information'
         Bitmap.Data = {
@@ -4551,7 +4551,7 @@ object f_main: Tf_main
         }
         GroupIndex = 2
       end
-      object MenuItem27: TMenuItem
+      object MenuViewClock: TMenuItem
         Action = ViewClock
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4592,7 +4592,7 @@ object f_main: Tf_main
         GlyphShowMode = gsmNever
         ShowAlwaysCheckable = True
       end
-      object PlanetInfo1: TMenuItem
+      object MenuViewPlanetInfo: TMenuItem
         Action = PlanetInfo
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4635,7 +4635,7 @@ object f_main: Tf_main
         Caption = '-'
         GroupIndex = 2
       end
-      object zoommenu: TMenuItem
+      object MenuZoom: TMenuItem
         Action = ZoomBar
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4674,7 +4674,7 @@ object f_main: Tf_main
           EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object zoomplus1: TMenuItem
+      object MenuZoomPlus: TMenuItem
         Action = zoomplus
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4714,7 +4714,7 @@ object f_main: Tf_main
         }
         GroupIndex = 2
       end
-      object zoomminus1: TMenuItem
+      object MenuZoomMinus: TMenuItem
         Action = zoomminus
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4793,7 +4793,7 @@ object f_main: Tf_main
           EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object MenuListObj: TMenuItem
+      object MenuViewListObj: TMenuItem
         Action = listobj
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -4953,12 +4953,12 @@ object f_main: Tf_main
         ShowAlwaysCheckable = True
       end
     end
-    object Chart1: TMenuItem
+    object SubChart: TMenuItem
       Caption = '&Chart'
       GroupIndex = 2
-      object Projection1: TMenuItem
+      object SubProjection: TMenuItem
         Caption = 'Projection'
-        object EquatorialCoordinate1: TMenuItem
+        object MenuEquatorialProjection: TMenuItem
           Action = EquatorialProjection
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -4998,7 +4998,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object AltAzProjection1: TMenuItem
+        object MenuAltAzProjection: TMenuItem
           Action = AltAzProjection
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5038,7 +5038,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object EclipticProjection1: TMenuItem
+        object MenuEclipticProjection: TMenuItem
           Action = EclipticProjection
           Caption = 'Ecliptic Coordinate'
           Bitmap.Data = {
@@ -5079,7 +5079,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object GalacticProjection1: TMenuItem
+        object MenuGalacticProjection: TMenuItem
           Action = GalacticProjection
           Caption = 'Galactic Coordinate'
           Bitmap.Data = {
@@ -5121,9 +5121,9 @@ object f_main: Tf_main
           ShowAlwaysCheckable = True
         end
       end
-      object Transformation1: TMenuItem
+      object SubTransformation: TMenuItem
         Caption = 'Transformation'
-        object FlipX1: TMenuItem
+        object MenuFlipX: TMenuItem
           Action = FlipX
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5163,7 +5163,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object FlipY1: TMenuItem
+        object MenuFlipY: TMenuItem
           Action = FlipY
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5203,7 +5203,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object rotplus1: TMenuItem
+        object MenuRotPlus: TMenuItem
           Action = rot_plus
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5243,7 +5243,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object rotminus1: TMenuItem
+        object MenuRotMinus: TMenuItem
           Action = rot_minus
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5283,7 +5283,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object rot180: TMenuItem
+        object MenuRot180: TMenuItem
           Action = rotate180
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5322,7 +5322,7 @@ object f_main: Tf_main
             EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
           }
         end
-        object ResetRot: TMenuItem
+        object MenuResetRot: TMenuItem
           Action = ResetRotation
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5362,48 +5362,48 @@ object f_main: Tf_main
           }
         end
       end
-      object FieldofVision1: TMenuItem
+      object SubFieldofVision: TMenuItem
         Caption = 'Field of Vision'
-        object SetFov1m: TMenuItem
+        object MenuSetFov1: TMenuItem
           Action = SetFOV01
         end
-        object SetFov2m: TMenuItem
+        object MenuSetFov2: TMenuItem
           Tag = 1
           Action = SetFOV02
         end
-        object SetFov3m: TMenuItem
+        object MenuSetFov3: TMenuItem
           Tag = 2
           Action = SetFOV03
         end
-        object SetFov4m: TMenuItem
+        object MenuSetFov4: TMenuItem
           Tag = 3
           Action = SetFOV04
         end
-        object SetFov5m: TMenuItem
+        object MenuSetFov5: TMenuItem
           Tag = 4
           Action = SetFOV05
         end
-        object SetFov6m: TMenuItem
+        object MenuSetFov6: TMenuItem
           Tag = 5
           Action = SetFOV06
         end
-        object SetFov7m: TMenuItem
+        object MenuSetFov7: TMenuItem
           Tag = 6
           Action = SetFOV07
         end
-        object SetFov8m: TMenuItem
+        object MenuSetFov8: TMenuItem
           Tag = 7
           Action = SetFOV08
         end
-        object SetFov9m: TMenuItem
+        object MenuSetFov9: TMenuItem
           Tag = 8
           Action = SetFOV09
         end
-        object SetFov10m: TMenuItem
+        object MenuSetFov10: TMenuItem
           Tag = 9
           Action = SetFOV10
         end
-        object allSky1: TMenuItem
+        object MenuAllSky: TMenuItem
           Action = allSky
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5443,9 +5443,9 @@ object f_main: Tf_main
           }
         end
       end
-      object ShowHorizon1: TMenuItem
+      object SubShowHorizon: TMenuItem
         Caption = 'View Horizon'
-        object toN1: TMenuItem
+        object MenutoN: TMenuItem
           Action = toN
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5484,7 +5484,7 @@ object f_main: Tf_main
             EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
           }
         end
-        object toS1: TMenuItem
+        object MenutoS: TMenuItem
           Action = toS
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5523,7 +5523,7 @@ object f_main: Tf_main
             EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
           }
         end
-        object toE1: TMenuItem
+        object MenutoE: TMenuItem
           Action = toE
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5562,7 +5562,7 @@ object f_main: Tf_main
             EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
           }
         end
-        object toW1: TMenuItem
+        object MenutoW: TMenuItem
           Action = toW
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5602,9 +5602,9 @@ object f_main: Tf_main
           }
         end
       end
-      object ShowObjects1: TMenuItem
+      object SubShowObjects: TMenuItem
         Caption = 'Show Objects'
-        object ShowStars1: TMenuItem
+        object MenuShowStars: TMenuItem
           Action = ShowStars
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5644,7 +5644,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object ShowNebulae1: TMenuItem
+        object MenuShowNebulae: TMenuItem
           Action = ShowNebulae
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5684,7 +5684,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object ShowPictures1: TMenuItem
+        object MenuShowPictures: TMenuItem
           Action = ShowPictures
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5724,7 +5724,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object ShowLines1: TMenuItem
+        object MenuShowLines: TMenuItem
           Action = ShowLines
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5764,7 +5764,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object ShowPlanets1: TMenuItem
+        object MenuShowPlanets: TMenuItem
           Action = ShowPlanets
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5804,7 +5804,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object ShowAsteroids1: TMenuItem
+        object MenuShowAsteroids: TMenuItem
           Action = ShowAsteroids
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5844,7 +5844,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object ShowComets1: TMenuItem
+        object MenuShowComets: TMenuItem
           Action = ShowComets
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5884,7 +5884,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object ShowMilkyWay1: TMenuItem
+        object MenuShowMilkyWay: TMenuItem
           Action = ShowMilkyWay
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5925,9 +5925,9 @@ object f_main: Tf_main
           ShowAlwaysCheckable = True
         end
       end
-      object ShowGrid1: TMenuItem
+      object SubShowGrid: TMenuItem
         Caption = 'Lines / Grid'
-        object Grid1: TMenuItem
+        object MenuShowGrid: TMenuItem
           Action = Grid
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -5967,7 +5967,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object GridEQ1: TMenuItem
+        object MenuShowGridEQ: TMenuItem
           Action = GridEQ
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -6007,7 +6007,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object Compass1: TMenuItem
+        object MenuShowCompass: TMenuItem
           Action = ShowCompass
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -6046,7 +6046,7 @@ object f_main: Tf_main
             A5FFF1DDCAFFECE9E6FFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
           }
         end
-        object ShowConstellationLine1: TMenuItem
+        object MenuShowConstellationLine: TMenuItem
           Action = ShowConstellationLine
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -6086,7 +6086,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object ShowConstellationLimit1: TMenuItem
+        object MenuShowConstellationLimit: TMenuItem
           Action = ShowConstellationLimit
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -6126,7 +6126,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object ShowGalacticEquator1: TMenuItem
+        object MenuShowGalacticEquator: TMenuItem
           Action = ShowGalacticEquator
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -6166,7 +6166,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object ShowEcliptic1: TMenuItem
+        object MenuShowEcliptic: TMenuItem
           Action = ShowEcliptic
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -6206,7 +6206,7 @@ object f_main: Tf_main
           }
           ShowAlwaysCheckable = True
         end
-        object ShowMark1: TMenuItem
+        object MenuShowMark: TMenuItem
           Action = ShowMark
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -6247,9 +6247,9 @@ object f_main: Tf_main
           ShowAlwaysCheckable = True
         end
       end
-      object MenuItem32: TMenuItem
+      object SubLabels: TMenuItem
         Caption = 'Labels'
-        object ShowLabels1: TMenuItem
+        object MenuShowLabels: TMenuItem
           Action = ShowLabels
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
@@ -6371,7 +6371,7 @@ object f_main: Tf_main
           ShowAlwaysCheckable = True
         end
       end
-      object ShowObjectbelowthehorizon1: TMenuItem
+      object MenuShowObjectbelowthehorizon: TMenuItem
         Action = ShowObjectbelowHorizon
         Caption = 'Below the horizon'
         Bitmap.Data = {
@@ -6411,7 +6411,7 @@ object f_main: Tf_main
           FFFFEBEBEBFFEBEBEBFFFFFFF7FFFFFFF7FFEBEBEBFFEBEBEBFF
         }
       end
-      object MenuItem8: TMenuItem
+      object MenuShowBackgroundImage: TMenuItem
         Action = ShowBackgroundImage
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -6450,7 +6450,7 @@ object f_main: Tf_main
           EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object MenuStarNum: TMenuItem
+      object SubStarNum: TMenuItem
         Caption = 'Number of stars'
         object MenuMoreStar: TMenuItem
           Action = MoreStar
@@ -6531,7 +6531,7 @@ object f_main: Tf_main
           }
         end
       end
-      object MenuNebNum: TMenuItem
+      object SubNebNum: TMenuItem
         Caption = 'Number of nebulae'
         object MenuMoreNeb: TMenuItem
           Action = MoreNeb
@@ -6652,10 +6652,10 @@ object f_main: Tf_main
         }
       end
     end
-    object telescope1: TMenuItem
+    object SubTelescope: TMenuItem
       Caption = '&Telescope'
       GroupIndex = 2
-      object TelescopeSetup1: TMenuItem
+      object MenuTelescopeSetup: TMenuItem
         Action = TelescopeSetup
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -6694,7 +6694,7 @@ object f_main: Tf_main
           EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object telescopeConnect1: TMenuItem
+      object MenuTelescopeConnect: TMenuItem
         Action = TelescopeConnect
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -6734,7 +6734,7 @@ object f_main: Tf_main
         }
         ShowAlwaysCheckable = True
       end
-      object ControlPanel1: TMenuItem
+      object MenuTelescopeControlPanel: TMenuItem
         Action = TelescopePanel
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -6773,7 +6773,7 @@ object f_main: Tf_main
           F7FFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object telescopeSlew1: TMenuItem
+      object MenuTelescopeSlew: TMenuItem
         Action = TelescopeSlew
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -6812,7 +6812,7 @@ object f_main: Tf_main
           EBFF252B2BFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object telescopeabortslew1: TMenuItem
+      object MenuTelescopeAbortSlew: TMenuItem
         Action = TelescopeAbortSlew
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -6851,7 +6851,7 @@ object f_main: Tf_main
           D7FFADD6E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         }
       end
-      object telescopeSync1: TMenuItem
+      object MenuTelescopeSync: TMenuItem
         Action = TelescopeSync
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -6890,7 +6890,7 @@ object f_main: Tf_main
           E7FF949797FF1E2325FFCFCECEFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object TrackTelescope1: TMenuItem
+      object MenuTrackTelescope: TMenuItem
         Action = TrackTelescope
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -6931,7 +6931,7 @@ object f_main: Tf_main
         ShowAlwaysCheckable = True
       end
     end
-    object Window1: TMenuItem
+    object SubWindow: TMenuItem
       Caption = '&Window'
       GroupIndex = 2
       Hint = 'Window related commands'
@@ -7013,15 +7013,15 @@ object f_main: Tf_main
           EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object MenuItem28: TMenuItem
+      object N28: TMenuItem
         Caption = '-'
       end
-      object NextChild1: TMenuItem
+      object MenuNextChild: TMenuItem
         Caption = 'NextChild'
         ShortCut = 16393
-        OnClick = NextChild1Click
+        OnClick = MenuNextChildClick
       end
-      object WindowCascadeItem: TMenuItem
+      object MenuWindowCascade: TMenuItem
         Action = Cascade1
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -7060,7 +7060,7 @@ object f_main: Tf_main
           63FFE78CB5FFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object WindowTileItem: TMenuItem
+      object MenuWindowTileHor: TMenuItem
         Action = TileHorizontal1
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -7099,7 +7099,7 @@ object f_main: Tf_main
           EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object WindowTileItem2: TMenuItem
+      object MenuWindowTileVert: TMenuItem
         Action = TileVertical1
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -7138,7 +7138,7 @@ object f_main: Tf_main
           EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF
         }
       end
-      object Maximize1: TMenuItem
+      object MenuMaximize: TMenuItem
         Action = Maximize
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -7181,11 +7181,11 @@ object f_main: Tf_main
         Caption = '-'
       end
     end
-    object Help1: TMenuItem
+    object SubHelp: TMenuItem
       Caption = '&Help'
       GroupIndex = 2
       Hint = 'Help topics'
-      object HelpContents1: TMenuItem
+      object MenuHelpContents: TMenuItem
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
           2000000000000004000064000000640000000000000000000000EBEBEBFFEBEB
@@ -7226,41 +7226,41 @@ object f_main: Tf_main
         ImageIndex = 12
         OnClick = HelpContents1Execute
       end
-      object HelpFaq1: TMenuItem
+      object MenuHelpFaq: TMenuItem
         Caption = 'HelpFaq1'
         OnClick = HelpFaq1Execute
       end
-      object HelpQS1: TMenuItem
+      object MenuHelpQuickStart: TMenuItem
         Caption = 'HelpQS1'
         OnClick = HelpQS1Execute
       end
-      object MenuItem10: TMenuItem
+      object N12: TMenuItem
         Caption = '-'
       end
-      object HelpPDF: TMenuItem
+      object MenuHelpPDF: TMenuItem
         Caption = 'HelpPDF'
-        OnClick = HelpPDFClick
+        OnClick = MenuHelpPDFClick
       end
-      object HomePage1: TMenuItem
+      object MenuHomePage: TMenuItem
         Caption = 'Skychart Homepage'
-        OnClick = HomePage1Click
+        OnClick = MenuHomePageClick
       end
-      object Maillist1: TMenuItem
+      object MenuMaillist: TMenuItem
         Caption = 'MailList'
-        OnClick = Maillist1Click
+        OnClick = MenuMaillistClick
       end
-      object BugReport1: TMenuItem
+      object MenuBugReport: TMenuItem
         Caption = 'Report a problem'
-        OnClick = BugReport1Click
+        OnClick = MenuBugReportClick
       end
-      object MenuItem11: TMenuItem
+      object N11: TMenuItem
         Caption = '-'
       end
-      object ReleaseNotes1: TMenuItem
+      object MenuReleaseNotes: TMenuItem
         Caption = 'Release Notes'
-        OnClick = ReleaseNotes1Click
+        OnClick = MenuReleaseNotesClick
       end
-      object HelpAboutItem: TMenuItem
+      object MenuHelpAbout: TMenuItem
         Hint = 'About|Displays program information, version number, and copyright'
         OnClick = HelpAbout1Execute
       end

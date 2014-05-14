@@ -4,7 +4,7 @@ unit fu_script;
 
 interface
 
-uses  u_translation, u_constant, pu_edittoolbar, pu_scripteditor, u_util,
+uses  u_translation, u_constant, pu_edittoolbar, pu_scriptengine, u_util,
   ActnList, Menus, Classes, SysUtils,
   FileUtil, Forms, Controls, ExtCtrls, StdCtrls, ComCtrls, Buttons;
 
@@ -26,7 +26,7 @@ type
   private
     { private declarations }
     fedittoolbar: Tf_edittoolbar;
-    fscripteditor: Tf_scripteditor;
+    fscriptengine: Tf_scriptengine;
     FImageNormal: TImageList;
     FContainerPanel: TPanel;
     FToolButtonMouseUp,FToolButtonMouseDown: TMouseEvent;
@@ -39,14 +39,18 @@ type
     FToolBarFOV: Tpanel;
     FMainmenu: TMenu;
     FExecuteCmd: TExecuteCmd;
-    FConfigToolbar1,FConfigToolbar2,FConfigScriptButton,FConfigScript: TStringList;
+    FConfigToolbar1,FConfigToolbar2,FConfigScriptButton,FConfigScript,FConfigEvent: TStringList;
     procedure ApplyScript(Sender: TObject);
     procedure SetExecuteCmd(value:TExecuteCmd);
+    procedure SetMainmenu(value:TMenu);
   public
     { public declarations }
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
     procedure Init;
+    procedure ChartRefreshEvent(origin,str:string);
+    procedure ObjectSelectionEvent(origin,str:string);
+    procedure TelescopeMoveEvent(origin:string; ra,de: double);
     property ImageNormal: TImageList read FImageNormal  write FImageNormal ;
     property ContainerPanel: TPanel read FContainerPanel  write FContainerPanel ;
     property ToolButtonMouseUp: TMouseEvent read FToolButtonMouseUp  write FToolButtonMouseUp ;
@@ -63,11 +67,12 @@ type
     property TimeValPanel: Tpanel read FTimeValPanel  write FTimeValPanel ;
     property TimeU: TComboBox read FTimeU  write FTimeU ;
     property ToolBarFOV: Tpanel read FToolBarFOV  write FToolBarFOV ;
-    property Mainmenu: TMenu read FMainmenu  write FMainmenu;
+    property Mainmenu: TMenu read FMainmenu  write SetMainmenu;
     property ConfigToolbar1: TStringList read FConfigToolbar1 write FConfigToolbar1;
     property ConfigToolbar2: TStringList read FConfigToolbar2 write FConfigToolbar2;
     property ConfigScriptButton: TStringList read FConfigScriptButton write FConfigScriptButton;
     property ConfigScript: TStringList read FConfigScript write FConfigScript;
+    property ConfigEvent: TStringList read FConfigEvent write FConfigEvent;
     property ExecuteCmd: TExecuteCmd read FExecuteCmd write SetExecuteCmd;
   end;
 
@@ -86,6 +91,7 @@ begin
   FConfigToolbar2:=TStringList.Create;
   FConfigScriptButton:=TStringList.Create;
   FConfigScript:=TStringList.Create;
+  FConfigEvent:=TStringList.Create;
 end;
 
 destructor Tf_script.Destroy;
@@ -95,7 +101,8 @@ begin
   FConfigToolbar2.Free;
   FConfigScriptButton.Free;
   FConfigScript.Free;
-  if fscripteditor<>nil then fscripteditor.Free;
+  FConfigEvent.Free;
+  if fscriptengine<>nil then fscriptengine.Free;
   inherited Destroy;
 end;
 
@@ -132,13 +139,14 @@ begin
   ToolBar1.Visible:=(VisibleControlCount(ToolBar1)>0);
   ToolBar2.Visible:=(VisibleControlCount(ToolBar2)>0);
   if FConfigScriptButton.Count>0 then begin
-     if fscripteditor=nil then begin
-        fscripteditor:=Tf_scripteditor.Create(self);
-        fscripteditor.editsurface:=MainPanel;
-        fscripteditor.onApply:=@ApplyScript;
-        fscripteditor.ExecuteCmd:=FExecuteCmd;
+     if fscriptengine=nil then begin
+        fscriptengine:=Tf_scriptengine.Create(self);
+        fscriptengine.editsurface:=MainPanel;
+        fscriptengine.onApply:=@ApplyScript;
+        fscriptengine.ExecuteCmd:=FExecuteCmd;
+        fscriptengine.Mainmenu:=FMainmenu;
      end;
-     fscripteditor.Load(FConfigScriptButton, FConfigScript);
+     fscriptengine.Load(FConfigScriptButton, FConfigScript, FConfigEvent);
   end;
 end;
 
@@ -158,24 +166,46 @@ end;
 
 procedure Tf_script.ButtonEditSrcClick(Sender: TObject);
 begin
-  if fscripteditor=nil then begin
-     fscripteditor:=Tf_scripteditor.Create(self);
-     fscripteditor.editsurface:=MainPanel;
-     fscripteditor.onApply:=@ApplyScript;
-     fscripteditor.ExecuteCmd:=FExecuteCmd;
+  if fscriptengine=nil then begin
+     fscriptengine:=Tf_scriptengine.Create(self);
+     fscriptengine.editsurface:=MainPanel;
+     fscriptengine.onApply:=@ApplyScript;
+     fscriptengine.ExecuteCmd:=FExecuteCmd;
+     fscriptengine.Mainmenu:=FMainmenu;
   end;
-  fscripteditor.Show;
+  fscriptengine.Show;
 end;
 
 procedure Tf_script.ApplyScript(Sender: TObject);
 begin
- fscripteditor.Save(FConfigScriptButton, FConfigScript);
+ fscriptengine.Save(FConfigScriptButton, FConfigScript, FConfigEvent);
 end;
 
 procedure Tf_script.SetExecuteCmd(value:TExecuteCmd);
 begin
  FExecuteCmd:=value;
- if fscripteditor<>nil then fscripteditor.ExecuteCmd:=FExecuteCmd;
+ if fscriptengine<>nil then fscriptengine.ExecuteCmd:=FExecuteCmd;
+end;
+
+procedure Tf_script.SetMainmenu(value:TMenu);
+begin
+ FMainmenu:=value;
+ if fscriptengine<>nil then fscriptengine.Mainmenu:=FMainmenu;
+end;
+
+procedure Tf_script.ChartRefreshEvent(origin,str:string);
+begin
+  if fscriptengine<>nil then fscriptengine.ChartRefreshEvent(origin,str);
+end;
+
+procedure Tf_script.ObjectSelectionEvent(origin,str:string);
+begin
+  if fscriptengine<>nil then fscriptengine.ObjectSelectionEvent(origin,str);
+end;
+
+procedure Tf_script.TelescopeMoveEvent(origin:string; ra,de: double);
+begin
+  if fscriptengine<>nil then fscriptengine.TelescopeMoveEvent(origin,ra,de);
 end;
 
 end.

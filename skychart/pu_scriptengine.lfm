@@ -1,9 +1,9 @@
-object f_scripteditor: Tf_scripteditor
+object f_scriptengine: Tf_scriptengine
   Left = 357
   Height = 410
   Top = 121
   Width = 750
-  Caption = 'f_scripteditor'
+  Caption = 'Script'
   ClientHeight = 410
   ClientWidth = 750
   OnCreate = FormCreate
@@ -71,12 +71,12 @@ object f_scripteditor: Tf_scripteditor
     TabOrder = 4
   end
   object GroupBox1: TGroupBox
-    Left = 344
-    Height = 256
-    Top = 8
+    Left = 336
+    Height = 280
+    Top = 0
     Width = 400
     Caption = 'Component'
-    ClientHeight = 225
+    ClientHeight = 249
     ClientWidth = 396
     TabOrder = 5
     object RadioButtonGroup: TRadioButton
@@ -93,7 +93,7 @@ object f_scripteditor: Tf_scripteditor
     object RadioButtonButton: TRadioButton
       Left = 14
       Height = 26
-      Top = 50
+      Top = 46
       Width = 69
       Caption = 'Button'
       OnClick = RadioButtonClick
@@ -102,7 +102,7 @@ object f_scripteditor: Tf_scripteditor
     object ButtonCaptionEdit: TEdit
       Left = 187
       Height = 21
-      Top = 52
+      Top = 48
       Width = 80
       OnChange = ButtonCaptionEditChange
       TabOrder = 2
@@ -111,7 +111,7 @@ object f_scripteditor: Tf_scripteditor
     object Label3: TLabel
       Left = 134
       Height = 15
-      Top = 55
+      Top = 51
       Width = 51
       Caption = 'Caption='
       ParentColor = False
@@ -153,7 +153,7 @@ object f_scripteditor: Tf_scripteditor
     object RadioButtonEdit: TRadioButton
       Left = 14
       Height = 26
-      Top = 96
+      Top = 84
       Width = 51
       Caption = 'Edit'
       OnClick = RadioButtonClick
@@ -162,7 +162,7 @@ object f_scripteditor: Tf_scripteditor
     object RadioButtonMemo: TRadioButton
       Left = 14
       Height = 26
-      Top = 139
+      Top = 126
       Width = 64
       Caption = 'Memo'
       OnClick = RadioButtonClick
@@ -171,7 +171,7 @@ object f_scripteditor: Tf_scripteditor
     object RadioButtonSpacer: TRadioButton
       Left = 14
       Height = 26
-      Top = 186
+      Top = 162
       Width = 66
       Caption = 'Spacer'
       OnClick = RadioButtonClick
@@ -180,7 +180,7 @@ object f_scripteditor: Tf_scripteditor
     object MemoHeightEdit: TEdit
       Left = 187
       Height = 21
-      Top = 141
+      Top = 128
       Width = 80
       OnChange = MemoHeightEditChange
       TabOrder = 8
@@ -189,10 +189,36 @@ object f_scripteditor: Tf_scripteditor
     object Label4: TLabel
       Left = 134
       Height = 15
-      Top = 144
+      Top = 131
       Width = 45
       Caption = 'Height='
       ParentColor = False
+    end
+    object RadioButtonEvent: TRadioButton
+      Left = 14
+      Height = 26
+      Top = 201
+      Width = 60
+      Caption = 'Event'
+      OnClick = RadioButtonClick
+      TabOrder = 9
+    end
+    object EventComboBox: TComboBox
+      Left = 134
+      Height = 23
+      Top = 205
+      Width = 204
+      ItemHeight = 0
+      ItemIndex = 0
+      Items.Strings = (
+        'Chart refresh'
+        'Object identification click'
+        'Telescope move'
+      )
+      OnChange = EventComboBoxChange
+      Style = csDropDownList
+      TabOrder = 10
+      Text = 'Chart refresh'
     end
   end
   object ButtonAdd: TButton
@@ -223,6 +249,24 @@ object f_scripteditor: Tf_scripteditor
     OnClick = ButtonUpdateClick
     TabOrder = 8
     Visible = False
+  end
+  object ButtonSave: TButton
+    Left = 384
+    Height = 25
+    Top = 288
+    Width = 75
+    Caption = 'Save'
+    OnClick = ButtonSaveClick
+    TabOrder = 9
+  end
+  object ButtonLoad: TButton
+    Left = 496
+    Height = 25
+    Top = 288
+    Width = 80
+    Caption = 'Load'
+    OnClick = ButtonLoadClick
+    TabOrder = 10
   end
   object TplPSScript: TPSScript
     CompilerOptions = []
@@ -276,5 +320,13 @@ object f_scripteditor: Tf_scripteditor
     EnableButtons = True
     left = 64
     top = 312
+  end
+  object OpenDialog1: TOpenDialog
+    left = 152
+    top = 16
+  end
+  object SaveDialog1: TSaveDialog
+    left = 152
+    top = 73
   end
 end

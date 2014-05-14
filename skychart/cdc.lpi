@@ -901,17 +901,18 @@
         <UnitName Value="fu_script"/>
       </Unit77>
       <Unit78>
-        <Filename Value="pu_scripteditor.pas"/>
+        <Filename Value="pu_scriptengine.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="f_scripteditor"/>
+        <ComponentName Value="f_scriptengine"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_scripteditor"/>
+        <UnitName Value="pu_scriptengine"/>
       </Unit78>
       <Unit79>
         <Filename Value="pu_pascaleditor.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="f_pascaleditor"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_pascaleditor"/>
       </Unit79>
