@@ -98,44 +98,44 @@ type
     ViewNightVision: TAction;
     ConfigPopup: TAction;
     Obslist: TAction;
-    HelpPDF: TMenuItem;
-    MenuItem34: TMenuItem;
-    MenuItemEditToolbar: TMenuItem;
+    MenuHelpPDF: TMenuItem;
+    N34: TMenuItem;
+    MenuEditToolbar: TMenuItem;
     MenuObslist: TMenuItem;
     SampDownload: TDownloadDialog;
-    MenuItem35: TMenuItem;
-    MenuItem36: TMenuItem;
-    MenuItem37: TMenuItem;
-    MenuItem38: TMenuItem;
-    MenuItemSAMP: TMenuItem;
-    telescopeabortslew1: TMenuItem;
+    MenuSAMPConnect: TMenuItem;
+    MenuSAMPDisconnect: TMenuItem;
+    MenuSAMPStatus: TMenuItem;
+    MenuSAMPSetup: TMenuItem;
+    SubSAMP: TMenuItem;
+    MenuTelescopeAbortSlew: TMenuItem;
     TelescopeAbortSlew: TAction;
     MenuListImg: TMenuItem;
-    PlanetInfo1: TMenuItem;
+    MenuViewPlanetInfo: TMenuItem;
     SetupCalendar: TAction;
     EditTimeVal: TEdit;
-    MenuItem31: TMenuItem;
+    MenuResetChart: TMenuItem;
     CloseTimer: TTimer;
-    MenuItem32: TMenuItem;
+    SubLabels: TMenuItem;
     MenuChartInfo: TMenuItem;
     MenuChartLegend: TMenuItem;
-    Compass1: TMenuItem;
-    MenuItem33: TMenuItem;
-    ResetRot: TMenuItem;
-    rot180: TMenuItem;
+    MenuShowCompass: TMenuItem;
+    MenuCalendarConfig: TMenuItem;
+    MenuResetRot: TMenuItem;
+    MenuRot180: TMenuItem;
     MultiFrame1: TMultiFrame;
-    ShowLabels1: TMenuItem;
-    ResetLanguage: TMenuItem;
+    MenuShowLabels: TMenuItem;
+    MenuResetLanguage: TMenuItem;
     InitTimer: TTimer;
     TabControl1: TTabControl;
-    TrackTelescope1: TMenuItem;
-    PrintPreview1: TMenuItem;
-    TelescopeSetup1: TMenuItem;
-    NextChild1: TMenuItem;
+    MenuTrackTelescope: TMenuItem;
+    MenuPrintPreview: TMenuItem;
+    MenuTelescopeSetup: TMenuItem;
+    MenuNextChild: TMenuItem;
     EditCopy1: TAction;
-    MenuItem27: TMenuItem;
-    HelpFaq1: TMenuItem;
-    HelpQS1: TMenuItem;
+    MenuViewClock: TMenuItem;
+    MenuHelpFaq: TMenuItem;
+    MenuHelpQuickStart: TMenuItem;
     ThemeTimer: TTimer;
     AnimationTimer: TTimer;
     TimeVal: TUpDown;
@@ -144,25 +144,25 @@ type
     HTMLHelpDatabase1: THTMLHelpDatabase;
     MenuItem24: TMenuItem;
     MenuItem25: TMenuItem;
-    MenuItem26: TMenuItem;
+    N26: TMenuItem;
     MenuEditLabels: TMenuItem;
     MenuDSS: TMenuItem;
     MenuBlinkImage: TMenuItem;
     MenuTrack: TMenuItem;
     MenuSyncChart: TMenuItem;
-    MenuItem28: TMenuItem;
+    N28: TMenuItem;
     Menuswitchbackground: TMenuItem;
     MenuPosition: TMenuItem;
-    MenuListObj: TMenuItem;
+    MenuViewListObj: TMenuItem;
     MenuSearch: TMenuItem;
-    zoommenu: TMenuItem;
-    MenuStarNum: TMenuItem;
-    MenuNebNum: TMenuItem;
+    MenuZoom: TMenuItem;
+    SubStarNum: TMenuItem;
+    SubNebNum: TMenuItem;
     MenuMoreStar: TMenuItem;
     MenuLessStar: TMenuItem;
     MenuMoreNeb: TMenuItem;
     MenuLessNeb: TMenuItem;
-    MenuItem6: TMenuItem;
+    MenuConfig: TMenuItem;
     SetupConfig: TAction;
     MenuItem12: TMenuItem;
     MenuItem13: TMenuItem;
@@ -172,15 +172,15 @@ type
     MenuItem17: TMenuItem;
     MenuItem18: TMenuItem;
     MenuItem19: TMenuItem;
-    MenuItem2: TMenuItem;
+    MenuChartConfig: TMenuItem;
     MenuItem20: TMenuItem;
     MenuItem21: TMenuItem;
     MenuItem22: TMenuItem;
     MenuItem23: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
-    MenuItem5: TMenuItem;
-    VariableStar1: TMenuItem;
+    MenuSolsysConfig: TMenuItem;
+    MenuGeneralConfig: TMenuItem;
+    MenuInternetConfig: TMenuItem;
+    MenuVariableStar: TMenuItem;
     PopupConfig: TPopupMenu;
     SetupInternet: TAction;
     SetupSystem: TAction;
@@ -189,27 +189,27 @@ type
     BlinkImage: TAction;
     P1L1: TLabel;
     P0L1: TLabel;
-    ReleaseNotes1: TMenuItem;
-    ViewScrollBar1: TMenuItem;
+    MenuReleaseNotes: TMenuItem;
+    MenuViewScrollBar: TMenuItem;
     ResetAllLabels1: TMenuItem;
     PopupMenu1: TPopupMenu;
     SetupCatalog: TAction;
-    HomePage1: TMenuItem;
-    Maillist1: TMenuItem;
-    BugReport1: TMenuItem;
-    MenuItem10: TMenuItem;
-    MenuItem11: TMenuItem;
-    MenuItem7: TMenuItem;
-    MenuItem8: TMenuItem;
+    MenuHomePage: TMenuItem;
+    MenuMaillist: TMenuItem;
+    MenuBugReport: TMenuItem;
+    N12: TMenuItem;
+    N11: TMenuItem;
+    MenuPictureConfig: TMenuItem;
+    MenuShowBackgroundImage: TMenuItem;
     LPanels0: TPanel;
     LPanels1: TPanel;
-    MenuItem9: TMenuItem;
+    MenuCatalogConfig: TMenuItem;
     SetPictures: TAction;
-    MenuItem1: TMenuItem;
+    MenuDisplayConfig: TMenuItem;
     SetupDisplay: TAction;
-    ObsConfig1: TMenuItem;
+    MenuObsConfig: TMenuItem;
     SetupObservatory: TAction;
-    DateConfig1: TMenuItem;
+    MenuDateConfig: TMenuItem;
     SetupTime: TAction;
     ButtonMoreStar: TImage;
     ButtonLessStar: TImage;
@@ -219,32 +219,32 @@ type
     Shape1: TShape;
     topmessage: TMenuItem;
     MainMenu1: TMainMenu;
-    File1: TMenuItem;
-    FileNewItem: TMenuItem;
-    FileOpenItem: TMenuItem;
-    FileCloseItem: TMenuItem;
-    Window1: TMenuItem;
-    Help1: TMenuItem;
+    SubFile: TMenuItem;
+    MenuFileNew: TMenuItem;
+    MenuFileOpen: TMenuItem;
+    MenuFileClose: TMenuItem;
+    SubWindow: TMenuItem;
+    SubHelp: TMenuItem;
     N1: TMenuItem;
-    FileExitItem: TMenuItem;
-    WindowCascadeItem: TMenuItem;
-    WindowTileItem: TMenuItem;
-    HelpAboutItem: TMenuItem;
+    MenuExit: TMenuItem;
+    MenuWindowCascade: TMenuItem;
+    MenuWindowTileHor: TMenuItem;
+    MenuHelpAbout: TMenuItem;
     OpenDialog: TOpenDialog;
-    FileSaveAsItem: TMenuItem;
-    Edit1: TMenuItem;
-    CopyItem: TMenuItem;
+    MenuFileSave: TMenuItem;
+    SubEdit: TMenuItem;
+    MenuCopy: TMenuItem;
     FileNew1: TAction;
     FileExit1: TAction;
     FileOpen1: TAction;
     FileSaveAs1: TAction;
-    WindowTileItem2: TMenuItem;
+    MenuWindowTileVert: TMenuItem;
     Print1: TAction;
-    Print2: TMenuItem;
+    MenuPrint: TMenuItem;
     starshape: TImage;
-    PrintSetup2: TMenuItem;
+    MenuPrintSetup: TMenuItem;
     N2: TMenuItem;
-    Setup1: TMenuItem;
+    SubSetup: TMenuItem;
     Search1: TAction;
     PanelLeft: TPanel;
     ToolBarLeft: TToolBar;
@@ -261,14 +261,14 @@ type
     quicksearch: TComboBox;
     FlipX: TAction;
     FlipY: TAction;
-    ViewToolsBar1: TMenuItem;
+    MenuViewToolsBar: TMenuItem;
     SaveDialog: TSaveDialog;
-    ViewStatusBar1: TMenuItem;
-    View1: TMenuItem;
+    MenuViewStatusBar: TMenuItem;
+    SubView: TMenuItem;
     SaveConfiguration: TAction;
-    SaveConfigurationNow1: TMenuItem;
+    MenuSaveConfigurationNow: TMenuItem;
     SaveConfigOnExit: TAction;
-    SaveConfigurationOnExit1: TMenuItem;
+    MenuSaveConfigurationOnExit: TMenuItem;
     Undo: TAction;
     Redo: TAction;
     Autorefresh: TTimer;
@@ -279,9 +279,9 @@ type
     switchstars: TAction;
     switchbackground: TAction;
     SaveImage: TAction;
-    SaveImage1: TMenuItem;
+    MenuSaveImage: TMenuItem;
     ViewServerInfo: TAction;
-    ViewInformation1: TMenuItem;
+    MenuServerInformation: TMenuItem;
     toN: TAction;
     toE: TAction;
     toS: TAction;
@@ -321,69 +321,69 @@ type
     AltAzProjection: TAction;
     EclipticProjection: TAction;
     GalacticProjection: TAction;
-    ViewToolBar1: TMenuItem;
-    MainBar1: TMenuItem;
-    LeftBar1: TMenuItem;
-    RightBar1: TMenuItem;
-    ObjectBar1: TMenuItem;
+    SubToolBar: TMenuItem;
+    MenuViewMainBar: TMenuItem;
+    MenuViewLeftBar: TMenuItem;
+    MenuViewRightBar: TMenuItem;
+    MenuViewObjectBar: TMenuItem;
     N5: TMenuItem;
     Calendar: TAction;
-    HelpContents1: TMenuItem;
-    Undo1: TMenuItem;
-    Redo1: TMenuItem;
-    zoomplus1: TMenuItem;
-    zoomminus1: TMenuItem;
-    telescope1: TMenuItem;
-    telescopeConnect1: TMenuItem;
-    telescopeSlew1: TMenuItem;
-    telescopeSync1: TMenuItem;
-    Chart1: TMenuItem;
-    Projection1: TMenuItem;
-    EquatorialCoordinate1: TMenuItem;
-    AltAzProjection1: TMenuItem;
-    EclipticProjection1: TMenuItem;
-    GalacticProjection1: TMenuItem;
-    Transformation1: TMenuItem;
-    FlipX1: TMenuItem;
-    FlipY1: TMenuItem;
-    rotplus1: TMenuItem;
-    rotminus1: TMenuItem;
-    FieldofVision1: TMenuItem;
-    SetFov1m: TMenuItem;
-    SetFov2m: TMenuItem;
-    SetFov3m: TMenuItem;
-    SetFov4m: TMenuItem;
-    SetFov5m: TMenuItem;
-    SetFov6m: TMenuItem;
-    SetFov7m: TMenuItem;
-    SetFov8m: TMenuItem;
-    SetFov9m: TMenuItem;
-    SetFov10m: TMenuItem;
-    allSky1: TMenuItem;
-    ShowHorizon1: TMenuItem;
-    toN1: TMenuItem;
-    toS1: TMenuItem;
-    toE1: TMenuItem;
-    toW1: TMenuItem;
-    ShowObjects1: TMenuItem;
-    ShowStars1: TMenuItem;
-    ShowNebulae1: TMenuItem;
-    ShowPictures1: TMenuItem;
-    ShowLines1: TMenuItem;
-    ShowPlanets1: TMenuItem;
-    ShowAsteroids1: TMenuItem;
-    ShowComets1: TMenuItem;
-    ShowMilkyWay1: TMenuItem;
-    ShowGrid1: TMenuItem;
-    Grid1: TMenuItem;
-    GridEQ1: TMenuItem;
-    ShowConstellationLine1: TMenuItem;
-    ShowConstellationLimit1: TMenuItem;
-    ShowGalacticEquator1: TMenuItem;
-    ShowEcliptic1: TMenuItem;
-    ShowMark1: TMenuItem;
-    ShowObjectbelowthehorizon1: TMenuItem;
-    Calendar1: TMenuItem;
+    MenuHelpContents: TMenuItem;
+    MenuUndo: TMenuItem;
+    MenuRedo: TMenuItem;
+    MenuZoomPlus: TMenuItem;
+    MenuZoomMinus: TMenuItem;
+    SubTelescope: TMenuItem;
+    MenuTelescopeConnect: TMenuItem;
+    MenuTelescopeSlew: TMenuItem;
+    MenuTelescopeSync: TMenuItem;
+    SubChart: TMenuItem;
+    SubProjection: TMenuItem;
+    MenuEquatorialProjection: TMenuItem;
+    MenuAltAzProjection: TMenuItem;
+    MenuEclipticProjection: TMenuItem;
+    MenuGalacticProjection: TMenuItem;
+    SubTransformation: TMenuItem;
+    MenuFlipX: TMenuItem;
+    MenuFlipY: TMenuItem;
+    MenuRotPlus: TMenuItem;
+    MenuRotMinus: TMenuItem;
+    SubFieldofVision: TMenuItem;
+    MenuSetFov1: TMenuItem;
+    MenuSetFov2: TMenuItem;
+    MenuSetFov3: TMenuItem;
+    MenuSetFov4: TMenuItem;
+    MenuSetFov5: TMenuItem;
+    MenuSetFov6: TMenuItem;
+    MenuSetFov7: TMenuItem;
+    MenuSetFov8: TMenuItem;
+    MenuSetFov9: TMenuItem;
+    MenuSetFov10: TMenuItem;
+    MenuAllSky: TMenuItem;
+    SubShowHorizon: TMenuItem;
+    MenutoN: TMenuItem;
+    MenutoS: TMenuItem;
+    MenutoE: TMenuItem;
+    MenutoW: TMenuItem;
+    SubShowObjects: TMenuItem;
+    MenuShowStars: TMenuItem;
+    MenuShowNebulae: TMenuItem;
+    MenuShowPictures: TMenuItem;
+    MenuShowLines: TMenuItem;
+    MenuShowPlanets: TMenuItem;
+    MenuShowAsteroids: TMenuItem;
+    MenuShowComets: TMenuItem;
+    MenuShowMilkyWay: TMenuItem;
+    SubShowGrid: TMenuItem;
+    MenuShowGrid: TMenuItem;
+    MenuShowGridEQ: TMenuItem;
+    MenuShowConstellationLine: TMenuItem;
+    MenuShowConstellationLimit: TMenuItem;
+    MenuShowGalacticEquator: TMenuItem;
+    MenuShowEcliptic: TMenuItem;
+    MenuShowMark: TMenuItem;
+    MenuShowObjectbelowthehorizon: TMenuItem;
+    MenuCalendar: TMenuItem;
     N6: TMenuItem;
     ShowBackgroundImage: TAction;
     Position: TAction;
@@ -392,10 +392,10 @@ type
     ZoomBar: TAction;
     DSSImage: TAction;
     ImageList2: TImageList;
-    NightVision1: TMenuItem;
+    MenuNightVision: TMenuItem;
     EditLabels: TAction;
     N7: TMenuItem;
-    FullScreen1: TMenuItem;
+    MenuFullScreen: TMenuItem;
     N8: TMenuItem;
     N9: TMenuItem;
     ChildControl: TPanel;
@@ -405,15 +405,15 @@ type
     TileVertical1: TAction;
     BtnRestoreChild: TSpeedButton;
     BtnCloseChild: TSpeedButton;
-    Maximize1: TMenuItem;
+    MenuMaximize: TMenuItem;
     Maximize: TAction;
     TelescopePanel: TAction;
-    ControlPanel1: TMenuItem;
+    MenuTelescopeControlPanel: TMenuItem;
     ViewFullScreen: TAction;
     procedure AnimationExecute(Sender: TObject);
     procedure AnimationTimerTimer(Sender: TObject);
     procedure BlinkImageExecute(Sender: TObject);
-    procedure BugReport1Click(Sender: TObject);
+    procedure MenuBugReportClick(Sender: TObject);
     procedure CloseTimerTimer(Sender: TObject);
     procedure ConfigPopupExecute(Sender: TObject);
     procedure EditTimeValChange(Sender: TObject);
@@ -426,19 +426,19 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure HelpFaq1Execute(Sender: TObject);
-    procedure HelpPDFClick(Sender: TObject);
+    procedure MenuHelpPDFClick(Sender: TObject);
     procedure HelpQS1Execute(Sender: TObject);
-    procedure HomePage1Click(Sender: TObject);
+    procedure MenuHomePageClick(Sender: TObject);
     procedure InitTimerTimer(Sender: TObject);
     procedure ListImgExecute(Sender: TObject);
     procedure MagPanelMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure Maillist1Click(Sender: TObject);
-    procedure MenuItem35Click(Sender: TObject);
-    procedure MenuItem36Click(Sender: TObject);
-    procedure MenuItem37Click(Sender: TObject);
-    procedure MenuItem38Click(Sender: TObject);
-    procedure MenuItemEditToolbarClick(Sender: TObject);
+    procedure MenuMaillistClick(Sender: TObject);
+    procedure MenuSAMPConnectClick(Sender: TObject);
+    procedure MenuSAMPDisconnectClick(Sender: TObject);
+    procedure MenuSAMPStatusClick(Sender: TObject);
+    procedure MenuSAMPSetupClick(Sender: TObject);
+    procedure MenuEditToolbarClick(Sender: TObject);
     procedure MouseModeExecute(Sender: TObject);
     procedure MultiFrame1CreateChild(Sender: TObject);
     procedure MultiFrame1DeleteChild(Sender: TObject);
@@ -457,13 +457,13 @@ type
     procedure ViewChartLegendExecute(Sender: TObject);
     procedure ViewNightVisionExecute(Sender: TObject);
     procedure ObslistExecute(Sender: TObject);
-    procedure PrintPreview1Click(Sender: TObject);
-    procedure ResetLanguageClick(Sender: TObject);
+    procedure MenuPrintPreviewClick(Sender: TObject);
+    procedure MenuResetLanguageClick(Sender: TObject);
     procedure SetupCalendarExecute(Sender: TObject);
     procedure TelescopeAbortSlewExecute(Sender: TObject);
-    procedure NextChild1Click(Sender: TObject);
+    procedure MenuNextChildClick(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
-    procedure ReleaseNotes1Click(Sender: TObject);
+    procedure MenuReleaseNotesClick(Sender: TObject);
     procedure ResetAllLabels1Click(Sender: TObject);
     procedure ResetDefaultChartExecute(Sender: TObject);
     procedure SetupCatalogExecute(Sender: TObject);
@@ -479,11 +479,11 @@ type
     procedure ThemeTimerTimer(Sender: TObject);
     procedure TimeValChangingEx(Sender: TObject; var AllowChange: Boolean;
       NewValue: SmallInt; Direction: TUpDownDirection);
-    procedure VariableStar1Click(Sender: TObject);
-    procedure View1Click(Sender: TObject);
-    procedure ViewToolsBar1Click(Sender: TObject);
+    procedure MenuVariableStarClick(Sender: TObject);
+    procedure SubViewClick(Sender: TObject);
+    procedure MenuViewToolsBarClick(Sender: TObject);
     procedure ViewClockExecute(Sender: TObject);
-    procedure ViewScrollBar1Click(Sender: TObject);
+    procedure MenuViewScrollBarClick(Sender: TObject);
     procedure zoomplusExecute(Sender: TObject);
     procedure zoomminusExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -603,6 +603,7 @@ type
     samp: TSampClient;
     numscript: integer;
     Fscript: array of Tf_script;
+    ActiveScript: integer;
   {$ifdef mswindows}
     savwincol  : array[0..25] of Tcolor;
   {$endif}
@@ -662,6 +663,7 @@ type
     procedure SAMPTableLoadVotable(table_name,table_id,url:string);
     procedure SAMPTableHighlightRow(table_id,url,row:string);
     procedure SAMPTableSelectRowlist(table_id,url:string;rowlist:Tstringlist);
+    procedure TelescopeMove(origin: string; ra,de: double);
 
   {$ifdef mswindows}
     Procedure SaveWinColor;
@@ -818,8 +820,8 @@ begin
   if locked then Child.lock_refresh:=true;
   inc(cfgm.MaxChildID);
   Child.tag:=cfgm.MaxChildID;
-  Child.VertScrollBar.Visible:=ViewScrollBar1.Checked;
-  Child.HorScrollBar.Visible:=ViewScrollBar1.Checked;
+  Child.VertScrollBar.Visible:=MenuViewScrollBar.Checked;
+  Child.HorScrollBar.Visible:=MenuViewScrollBar.Checked;
   if cfgm.KioskMode then Child.Image1.PopupMenu:=nil;
   cp.Caption:=CName;
   Child.Caption:=CName;
@@ -850,6 +852,7 @@ begin
   Child.onSendImageFits:=SendImageFits;
   Child.onSendSelectRow:=SendSelectRow;
   Child.onPlanetInfo:=PlanetInfoExecute;
+  Child.onTelescopeMove:=TelescopeMove;
   if (not Child.sc.cfgsc.TrackOn)and(Child.sc.cfgsc.Projpole=Altaz) then begin
      Child.sc.cfgsc.TrackOn:=true;
      Child.sc.cfgsc.TrackType:=4;
@@ -1280,27 +1283,27 @@ if VerboseMsg then
    if VerboseMsg then
     WriteTrace('Initialize kiosk mode');
    if not cfgm.KioskDebug then ViewFullScreenExecute(nil);
-   ViewScrollBar1Click(nil);
-   file1.Visible:=False;
-   edit1.Visible:=False;
-   setup1.Visible:=False;
-   view1.Visible:=False;
-   chart1.Visible:=False;
-   telescope1.Visible:=False;
-   Window1.Visible:=False;
-   help1.Visible:=False;
+   MenuViewScrollBarClick(nil);
+   SubFile.Visible:=False;
+   SubEdit.Visible:=False;
+   SubSetup.Visible:=False;
+   SubView.Visible:=False;
+   SubChart.Visible:=False;
+   SubTelescope.Visible:=False;
+   SubWindow.Visible:=False;
+   SubHelp.Visible:=False;
    topmessage.Visible:=False;
    ToolBarMain.visible:=False;
    PanelLeft.visible:=ToolBarMain.visible;
    PanelRight.visible:=ToolBarMain.visible;
    ToolBarObj.visible:=ToolBarMain.visible;
    PanelBottom.visible:=ToolBarMain.visible;
-   ViewToolsBar1.checked:=ToolBarMain.visible;
-   MainBar1.checked:=ToolBarMain.visible;
-   ObjectBar1.checked:=ToolBarMain.visible;
-   LeftBar1.checked:=ToolBarMain.visible;
-   RightBar1.checked:=ToolBarMain.visible;
-   ViewStatusBar1.checked:=ToolBarMain.visible;
+   MenuViewToolsBar.checked:=ToolBarMain.visible;
+   MenuViewMainBar.checked:=ToolBarMain.visible;
+   MenuViewObjectBar.checked:=ToolBarMain.visible;
+   MenuViewLeftBar.checked:=ToolBarMain.visible;
+   MenuViewRightBar.checked:=ToolBarMain.visible;
+   MenuViewStatusBar.checked:=ToolBarMain.visible;
    ViewTopPanel;
    FormResize(nil);
  end;
@@ -1454,7 +1457,7 @@ ShowHelp;
 sethelp(self,hlpIndex);
 end;
 
-procedure Tf_main.HelpPDFClick(Sender: TObject);
+procedure Tf_main.MenuHelpPDFClick(Sender: TObject);
 const pdflang='ca en es fr it nl uk ';
 var l,pdfurl:string;
 begin
@@ -1471,12 +1474,12 @@ ShowHelp;
 sethelp(self,hlpIndex);
 end;
 
-procedure Tf_main.HomePage1Click(Sender: TObject);
+procedure Tf_main.MenuHomePageClick(Sender: TObject);
 begin
    ExecuteFile(URL_WebHome);
 end;
 
-procedure Tf_main.Maillist1Click(Sender: TObject);
+procedure Tf_main.MenuMaillistClick(Sender: TObject);
 begin
    ExecuteFile(URL_Maillist);
 end;
@@ -1595,12 +1598,12 @@ if (TabControl1.TabIndex>=0)and(TabControl1.TabIndex<TabControl1.Tabs.Count)  th
 end;
 end;
 
-procedure Tf_main.NextChild1Click(Sender: TObject);
+procedure Tf_main.MenuNextChildClick(Sender: TObject);
 begin
   MultiFrame1.NexChild;
 end;
 
-procedure Tf_main.BugReport1Click(Sender: TObject);
+procedure Tf_main.MenuBugReportClick(Sender: TObject);
 begin
    ExecuteFile(URL_BugTracker);
 end;
@@ -1881,8 +1884,8 @@ isWOW64:=false;
     step:='Windows 98 spefic';
     MenuItem24.Visible:=false;  // config all not working
     MenuItem25.Visible:=false;
-    MenuItem26.Visible:=false;
-    MenuItem6.Visible:=false;
+    N26.Visible:=false;
+    MenuConfig.Visible:=false;
     if FileExists(Win98DefaultBrowser) then HTMLBrowserHelpViewer1.BrowserPath:=Win98DefaultBrowser;
   end;
   SaveDialog.Options:=SaveDialog.Options-[ofNoReadOnlyReturn]; { TODO : check readonly test on Windows }
@@ -1943,7 +1946,7 @@ if VerboseMsg then
  WriteTrace(step);
 TabControl1.Visible:=false;
 basecaption:=caption;
-MultiFrame1.WindowList:=Window1;
+MultiFrame1.WindowList:=SubWindow;
 MultiFrame1.KeepLastChild:=true;
 ChildControl.visible:=false;
 BtnCloseChild.Glyph.LoadFromLazarusResource('CLOSE');
@@ -2042,6 +2045,7 @@ rotspeed:=-1;
 step:='Script panel';
 if VerboseMsg then WriteTrace(step);
 numscript:=8;
+ActiveScript:=-1;
 SetLength(Fscript,numscript);
 for i:=0 to numscript-1 do begin
   Fscript[i]:=Tf_script.Create(self);
@@ -2280,11 +2284,11 @@ if MultiFrame1.ActiveObject is Tf_chart then begin
     cfgm.PrintFooter:=f_print.CheckBox2.Checked;
     Tf_chart(MultiFrame1.ActiveObject).PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath,cfgm,(f_print.ModalResult=mrYes));
   end;
-  PrintPreview1.Visible:=(cfgm.PrintMethod=0);
+  MenuPrintPreview.Visible:=(cfgm.PrintMethod=0);
 end;
 end;
 
-procedure Tf_main.PrintPreview1Click(Sender: TObject);
+procedure Tf_main.MenuPrintPreviewClick(Sender: TObject);
 var buf: string;
 begin
 if MultiFrame1.ActiveObject is Tf_chart then begin
@@ -2344,12 +2348,12 @@ begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_FlipyExecute(Sender);
 end;
 
-procedure Tf_main.VariableStar1Click(Sender: TObject);
+procedure Tf_main.MenuVariableStarClick(Sender: TObject);
 begin
   ExecNoWait(varobs);
 end;
 
-procedure Tf_main.View1Click(Sender: TObject);
+procedure Tf_main.SubViewClick(Sender: TObject);
 begin
     ViewClock.Checked:=(f_clock<>nil)and(f_clock.Visible);
 end;
@@ -3257,7 +3261,7 @@ if VerboseMsg then
 end;
 end;
 
-procedure Tf_main.ReleaseNotes1Click(Sender: TObject);
+procedure Tf_main.MenuReleaseNotesClick(Sender: TObject);
 begin
   ShowReleaseNotes(false);
 end;
@@ -3536,7 +3540,7 @@ ConfigSystem.Free;
 ConfigSystem:=nil;
 end;
 
-procedure Tf_main.ResetLanguageClick(Sender: TObject);
+procedure Tf_main.MenuResetLanguageClick(Sender: TObject);
 begin
 // Reset language to default using the same procedure as SetupSystemPage
 if ConfigSystem=nil then begin
@@ -3979,33 +3983,33 @@ end;
 
 procedure Tf_main.ViewToolsBar;
 begin
-MainBar1.checked:= (VisibleControlCount(ToolBarMain)>0);
-ObjectBar1.checked:= (VisibleControlCount(ToolBarObj)>0);
-LeftBar1.checked:= (VisibleControlCount(ToolBarLeft)>0);
-RightBar1.checked:= (VisibleControlCount(ToolBarRight)>0);
-ViewToolsBar1.checked:=MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked;
-ToolBarMain.visible:=MainBar1.checked;
-ToolBarObj.visible:=ObjectBar1.checked;
-PanelLeft.visible:=LeftBar1.checked;
-PanelRight.visible:=RightBar1.checked;
+MenuViewMainBar.checked:= (VisibleControlCount(ToolBarMain)>0);
+MenuViewObjectBar.checked:= (VisibleControlCount(ToolBarObj)>0);
+MenuViewLeftBar.checked:= (VisibleControlCount(ToolBarLeft)>0);
+MenuViewRightBar.checked:= (VisibleControlCount(ToolBarRight)>0);
+MenuViewToolsBar.checked:=MenuViewMainBar.checked and MenuViewObjectBar.checked and MenuViewLeftBar.checked and MenuViewRightBar.checked and MenuViewStatusBar.checked;
+ToolBarMain.visible:=MenuViewMainBar.checked;
+ToolBarObj.visible:=MenuViewObjectBar.checked;
+PanelLeft.visible:=MenuViewLeftBar.checked;
+PanelRight.visible:=MenuViewRightBar.checked;
 ViewTopPanel;
 FormResize(nil);
 end;
 
-procedure Tf_main.ViewToolsBar1Click(Sender: TObject);
+procedure Tf_main.MenuViewToolsBarClick(Sender: TObject);
 begin
-ViewToolsBar1.checked:=not ViewToolsBar1.checked;
-MainBar1.checked:=ViewToolsBar1.checked and (VisibleControlCount(ToolBarMain)>0);
-ObjectBar1.checked:=ViewToolsBar1.checked and (VisibleControlCount(ToolBarObj)>0);
-LeftBar1.checked:=ViewToolsBar1.checked and (VisibleControlCount(ToolBarLeft)>0);
-RightBar1.checked:=ViewToolsBar1.checked and (VisibleControlCount(ToolBarRight)>0);
-ViewStatusBar1.checked:=ViewToolsBar1.checked;
+MenuViewToolsBar.checked:=not MenuViewToolsBar.checked;
+MenuViewMainBar.checked:=MenuViewToolsBar.checked and (VisibleControlCount(ToolBarMain)>0);
+MenuViewObjectBar.checked:=MenuViewToolsBar.checked and (VisibleControlCount(ToolBarObj)>0);
+MenuViewLeftBar.checked:=MenuViewToolsBar.checked and (VisibleControlCount(ToolBarLeft)>0);
+MenuViewRightBar.checked:=MenuViewToolsBar.checked and (VisibleControlCount(ToolBarRight)>0);
+MenuViewStatusBar.checked:=MenuViewToolsBar.checked;
 
-ToolBarMain.visible:=MainBar1.checked;
-ToolBarObj.visible:=ObjectBar1.checked;
-PanelLeft.visible:=LeftBar1.checked;
-PanelRight.visible:=RightBar1.checked;
-PanelBottom.visible:=ViewStatusBar1.checked;
+ToolBarMain.visible:=MenuViewMainBar.checked;
+ToolBarObj.visible:=MenuViewObjectBar.checked;
+PanelLeft.visible:=MenuViewLeftBar.checked;
+PanelRight.visible:=MenuViewRightBar.checked;
+PanelBottom.visible:=MenuViewStatusBar.checked;
 
 ViewTopPanel;
 if PanelBottom.visible then InitFonts;
@@ -4013,17 +4017,17 @@ FormResize(sender);
 end;
 
 
-procedure Tf_main.ViewScrollBar1Click(Sender: TObject);
+procedure Tf_main.MenuViewScrollBarClick(Sender: TObject);
 var i: Integer;
 begin
 if VerboseMsg then
  WriteTrace('ViewScrollBar1Click');
-if cfgm.KioskMode then ViewScrollBar1.Checked:=false
-                  else ViewScrollBar1.Checked:=(not ViewScrollBar1.Checked)and CanShowScrollbar;
+if cfgm.KioskMode then MenuViewScrollBar.Checked:=false
+                  else MenuViewScrollBar.Checked:=(not MenuViewScrollBar.Checked)and CanShowScrollbar;
 for i:=0 to MultiFrame1.ChildCount-1 do
   if MultiFrame1.Childs[i].DockedObject is Tf_chart then begin
-    (MultiFrame1.Childs[i].DockedObject as Tf_chart).VertScrollBar.Visible:=ViewScrollBar1.Checked;
-    (MultiFrame1.Childs[i].DockedObject as Tf_chart).HorScrollBar.Visible:=ViewScrollBar1.Checked;
+    (MultiFrame1.Childs[i].DockedObject as Tf_chart).VertScrollBar.Visible:=MenuViewScrollBar.Checked;
+    (MultiFrame1.Childs[i].DockedObject as Tf_chart).HorScrollBar.Visible:=MenuViewScrollBar.Checked;
     (MultiFrame1.Childs[i].DockedObject as Tf_chart).Refresh;
   end;
 end;
@@ -4033,10 +4037,10 @@ var c:integer;
 begin
 c:=VisibleControlCount(ToolBarMain);
 if c=0 then SetLPanel1(format(rsIsEmpty,[rsMainBar]));
-MainBar1.checked:=not MainBar1.checked and (c>0);
-ToolBarMain.visible:=MainBar1.checked;
-if not MainBar1.checked then ViewToolsBar1.checked:=false;
-if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
+MenuViewMainBar.checked:=not MenuViewMainBar.checked and (c>0);
+ToolBarMain.visible:=MenuViewMainBar.checked;
+if not MenuViewMainBar.checked then MenuViewToolsBar.checked:=false;
+if MenuViewMainBar.checked and MenuViewObjectBar.checked and MenuViewLeftBar.checked and MenuViewRightBar.checked and MenuViewStatusBar.checked then MenuViewToolsBar.checked:=true;
 ViewTopPanel;
 FormResize(sender);
 end;
@@ -4046,10 +4050,10 @@ var c:integer;
 begin
 c:=VisibleControlCount(ToolBarObj);
 if c=0 then SetLPanel1(format(rsIsEmpty,[rsObjectBar]));
-ObjectBar1.checked:=not ObjectBar1.checked and (c>0);
-ToolBarObj.visible:=ObjectBar1.checked;
-if not ObjectBar1.checked then ViewToolsBar1.checked:=false;
-if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
+MenuViewObjectBar.checked:=not MenuViewObjectBar.checked and (c>0);
+ToolBarObj.visible:=MenuViewObjectBar.checked;
+if not MenuViewObjectBar.checked then MenuViewToolsBar.checked:=false;
+if MenuViewMainBar.checked and MenuViewObjectBar.checked and MenuViewLeftBar.checked and MenuViewRightBar.checked and MenuViewStatusBar.checked then MenuViewToolsBar.checked:=true;
 ViewTopPanel;
 FormResize(sender);
 end;
@@ -4059,10 +4063,10 @@ var c:integer;
 begin
 c:=VisibleControlCount(ToolBarLeft);
 if c=0 then SetLPanel1(format(rsIsEmpty,[rsLeftBar]));
-LeftBar1.checked:=not LeftBar1.checked and (c>0);
-PanelLeft.visible:=LeftBar1.checked;
-if not LeftBar1.checked then ViewToolsBar1.checked:=false;
-if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
+MenuViewLeftBar.checked:=not MenuViewLeftBar.checked and (c>0);
+PanelLeft.visible:=MenuViewLeftBar.checked;
+if not MenuViewLeftBar.checked then MenuViewToolsBar.checked:=false;
+if MenuViewMainBar.checked and MenuViewObjectBar.checked and MenuViewLeftBar.checked and MenuViewRightBar.checked and MenuViewStatusBar.checked then MenuViewToolsBar.checked:=true;
 FormResize(sender);
 end;
 
@@ -4071,19 +4075,19 @@ var c:integer;
 begin
 c:=VisibleControlCount(ToolBarRight);
 if c=0 then SetLPanel1(format(rsIsEmpty,[rsRightBar]));
-RightBar1.checked:=not RightBar1.checked and (c>0);
-PanelRight.visible:=RightBar1.checked;
-if not RightBar1.checked then ViewToolsBar1.checked:=false;
-if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
+MenuViewRightBar.checked:=not MenuViewRightBar.checked and (c>0);
+PanelRight.visible:=MenuViewRightBar.checked;
+if not MenuViewRightBar.checked then MenuViewToolsBar.checked:=false;
+if MenuViewMainBar.checked and MenuViewObjectBar.checked and MenuViewLeftBar.checked and MenuViewRightBar.checked and MenuViewStatusBar.checked then MenuViewToolsBar.checked:=true;
 FormResize(sender);
 end;
 
 procedure Tf_main.ViewStatusBarClick(Sender: TObject);
 begin
 PanelBottom.visible:=not PanelBottom.visible;
-ViewStatusBar1.checked:=PanelBottom.visible;
-if not ViewStatusBar1.checked then ViewToolsBar1.checked:=false;
-if MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked and ViewStatusBar1.checked then ViewToolsBar1.checked:=true;
+MenuViewStatusBar.checked:=PanelBottom.visible;
+if not MenuViewStatusBar.checked then MenuViewToolsBar.checked:=false;
+if MenuViewMainBar.checked and MenuViewObjectBar.checked and MenuViewLeftBar.checked and MenuViewRightBar.checked and MenuViewStatusBar.checked then MenuViewToolsBar.checked:=true;
 if PanelBottom.visible then InitFonts;
 FormResize(sender);
 end;
@@ -4195,7 +4199,7 @@ status:='';
 if SampConnected then begin
   status:='* ';
 end;
-// set the message that appear in the menu bar
+// set the message that appear in the Menu bar
 if MultiFrame1.ActiveObject=sender then begin
   topmsg:=txt;
   if cfgm.ShowChartInfo then topmessage.caption:=status+topmsg
@@ -4209,6 +4213,9 @@ begin
 if MultiFrame1.ActiveObject=sender then begin
   if cfgm.ShowTitlePos then caption:=basecaption+' - '+MultiFrame1.ActiveChild.Caption+blank+blank+txt
      else caption:=basecaption+' - '+MultiFrame1.ActiveChild.Caption;
+  if ScriptPanel.Visible and (ActiveScript>=0) then begin
+     Fscript[ActiveScript].ChartRefreshEvent(MultiFrame1.ActiveChild.Caption,txt);
+  end;
 end;
 end;
 
@@ -5566,18 +5573,19 @@ ToolBarMain.visible:=ReadBool(section,'ViewMainBar',true);
 PanelLeft.visible:=ReadBool(section,'ViewLeftBar',true);
 PanelRight.visible:=ReadBool(section,'ViewRightBar',true);
 ToolBarObj.visible:=ReadBool(section,'ViewObjectBar',true);
-ViewScrollBar1.Checked:=ReadBool(section,'ViewScrollBar',true) and CanShowScrollbar;
+MenuViewScrollBar.Checked:=ReadBool(section,'ViewScrollBar',true) and CanShowScrollbar;
 PanelBottom.visible:=ReadBool(section,'ViewStatusBar',true);
-ViewStatusBar1.checked:=PanelBottom.visible;
-MainBar1.checked:=ToolBarMain.visible;
-ObjectBar1.checked:=ToolBarObj.visible;
-LeftBar1.checked:=PanelLeft.visible;
-RightBar1.checked:=PanelRight.visible;
-ViewToolsBar1.checked:=(MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked);
+MenuViewStatusBar.checked:=PanelBottom.visible;
+MenuViewMainBar.checked:=ToolBarMain.visible;
+MenuViewObjectBar.checked:=ToolBarObj.visible;
+MenuViewLeftBar.checked:=PanelLeft.visible;
+MenuViewRightBar.checked:=PanelRight.visible;
+MenuViewToolsBar.checked:=(MenuViewMainBar.checked and MenuViewObjectBar.checked and MenuViewLeftBar.checked and MenuViewRightBar.checked);
 ViewTopPanel;
 InitialChartNum:=ReadInteger(section,'NumChart',0);
 f_detail.Width:=ReadInteger(section,'Detail_Width',f_detail.Width);
 f_detail.Height:=ReadInteger(section,'Detail_Height',f_detail.Height);
+ScriptPanel.Width:=ReadInteger(section,'ScriptWidth',ScriptPanel.Width);
 except
   ShowError('Error reading '+filename+' main');
 end;
@@ -5667,7 +5675,10 @@ end;
 for i:=0 to numscript-1 do begin
    section:='ScriptPanel'+inttostr(i);
    Fscript[i].Visible:=ReadBool(section,'visible',false);
-   if Fscript[i].Visible then ScriptPanel.Visible:=true;
+   if Fscript[i].Visible then begin
+       ScriptPanel.Visible:=true;
+       ActiveScript:=i;
+   end;
    n:=ReadInteger(section,'numtoolbar1',0);
    for j:=0 to n-1 do Fscript[i].ConfigToolbar1.Add(ReadString(section,'toolbar1_'+inttostr(j),''));
    n:=ReadInteger(section,'numtoolbar2',0);
@@ -5681,6 +5692,8 @@ for i:=0 to numscript-1 do begin
    end;
    n:=ReadInteger(section,'numscriptrows',0);
    for j:=0 to n-1 do Fscript[i].ConfigScript.Add(ReadString(section,'script_'+inttostr(j),''));
+   n:=ReadInteger(section,'numevents',0);
+   for j:=0 to n-1 do Fscript[i].ConfigEvent.Add(ReadString(section,'event_'+inttostr(j),''));
 end;
 Splitter1.Visible:=ScriptPanel.Visible;
 Splitter1.ResizeControl:=ScriptPanel;
@@ -6370,11 +6383,13 @@ WriteBool(section,'ViewMainBar',ToolBarMain.visible);
 WriteBool(section,'ViewLeftBar',PanelLeft.visible);
 WriteBool(section,'ViewRightBar',PanelRight.visible);
 WriteBool(section,'ViewObjectBar',ToolBarObj.visible);
-WriteBool(section,'ViewScrollBar',ViewScrollBar1.Checked);
-WriteBool(section,'ViewStatusBar',ViewStatusBar1.Checked);
+WriteBool(section,'ViewScrollBar',MenuViewScrollBar.Checked);
+WriteBool(section,'ViewStatusBar',MenuViewStatusBar.Checked);
 WriteInteger(section,'NumChart',MultiFrame1.ChildCount);
 WriteInteger(section,'Detail_Width',f_detail.Width);
 WriteInteger(section,'Detail_Height',f_detail.Height);
+WriteInteger(section,'ScriptWidth',ScriptPanel.Width);
+
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
    WriteString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
@@ -6421,6 +6436,7 @@ WriteBool(section,'houranglelimit2',f_obslist.CheckBox5.Checked);
 WriteInteger(section,'limittype',f_obslist.LimitType);
 WriteInteger(section,'meridianside',f_obslist.MeridianSide);
 section:='toolbar';
+EraseSection(section);
 WriteInteger(section,'nummainbar',nummainbar);
 for i:=0 to nummainbar-1 do WriteString(section,'mainbar'+inttostr(i),configmainbar[i]);
 WriteInteger(section,'numobjectbar',numobjectbar);
@@ -6432,6 +6448,7 @@ for i:=0 to numrightbar-1 do WriteString(section,'rightbar'+inttostr(i),configri
 // Script panel
 for i:=0 to numscript-1 do begin
    section:='ScriptPanel'+inttostr(i);
+   EraseSection(section);
    WriteBool(section,'visible',Fscript[i].Visible);
    n:=Fscript[i].ConfigToolbar1.Count;
    WriteInteger(section,'numtoolbar1',n);
@@ -6445,6 +6462,9 @@ for i:=0 to numscript-1 do begin
    n:=Fscript[i].ConfigScript.Count;
    WriteInteger(section,'numscriptrows',n);
    for j:=0 to n-1 do WriteString(section,'script_'+inttostr(j),Fscript[i].ConfigScript[j]);
+   n:=Fscript[i].ConfigEvent.Count;
+   WriteInteger(section,'numevents',n);
+   for j:=0 to n-1 do WriteString(section,'event_'+inttostr(j),Fscript[i].ConfigEvent[j]);
 end;
 Updatefile;
 end;
@@ -6591,7 +6611,7 @@ CatView := rsView;
 CatWindow := rsWindow ;
 CatZoom := rsZoom3;
 // Actions
-// menu File
+// Menu File
 FileNew1.Caption:='&'+rsNewChart;
 FileNew1.hint:=rsCreateANewCh;
 FileNew1.Category:=CatFile;
@@ -6619,7 +6639,7 @@ FilePrintSetup1.Category:=CatPrint;
 FileExit1.caption:='&'+rsExit;
 FileExit1.Hint:=rsExit;
 FileExit1.Category:=CatFile;
-// menu Edit
+// Menu Edit
 Search1.Caption:='&'+rsAdvancedSear+Ellipsis;
 Search1.hint:=rsAdvancedSear;
 Search1.Category:=CatSearch;
@@ -6635,7 +6655,7 @@ Undo.Category:=CatUndo;
 Redo.caption:='&'+rsRedo;
 Redo.hint:=rsRedoLastChan;
 Redo.Category:=CatUndo;
-// menu Setup
+// Menu Setup
 SetupTime.caption:='&'+rsDateTime+Ellipsis;
 SetupTime.hint:=rsSetDateAndTi;
 SetupTime.Category:=CatSetupOption;
@@ -6677,7 +6697,7 @@ SaveConfiguration.Hint:=rsSaveConfigur;
 SaveConfiguration.Category:=CatSetup;
 SaveConfigOnExit.caption:='&'+rsSaveConfigur2;
 SaveConfigOnExit.Category:=CatSetup;
-// menu View
+// Menu View
 ViewFullScreen.caption:='&'+rsFullScreen;
 ViewFullScreen.Hint:=rsFullScreen;
 ViewFullScreen.Category:=CatView;
@@ -6723,7 +6743,7 @@ MouseMode.Category:=CatView;
 ScaleMode.Caption:=rsDistanceMeas;
 ScaleMode.Hint:=rsDistanceMeas;
 ScaleMode.Category:=CatView;
-// menu Chart
+// Menu Chart
 EquatorialProjection.caption:='&'+rsEquatorialCo;
 EquatorialProjection.hint:=rsEquatorialCo;
 EquatorialProjection.Category:=CatProjection;
@@ -6799,7 +6819,7 @@ ShowMilkyWay.Category:=CatObject;
 Grid.caption:='&'+rsShowCoordina;
 Grid.hint:=rsShowCoordina;
 Grid.Category:=CatGrid;
-GridEQ1.caption:='&'+rsAddEquatoria;
+MenuShowGridEQ.caption:='&'+rsAddEquatoria;
 GridEq.hint:=rsAddEquatoria;
 GridEq.Category:=CatGrid;
 ShowCompass.Caption:=rsShowCompass;
@@ -6863,7 +6883,7 @@ ShowUObj.Caption:=rsShowUserDefi;
 ShowUObj.Hint:=rsShowUserDefi;
 ShowUObj.Category:=CatObject;
 
-// menu Telescope
+// Menu Telescope
 TelescopeSetup.Caption:='&'+rsTelescopeSet+Ellipsis;
 TelescopeSetup.Hint:=rsTelescopeSet;
 TelescopeSetup.Category:=CatSetup;
@@ -6885,7 +6905,7 @@ TelescopeSync.Category:=CatTelescope;
 TrackTelescope.Caption:=rsTrackTelesco;
 TrackTelescope.Hint:=rsTrackTelesco;
 TrackTelescope.Category:=CatTelescope;
-//menu Window
+//Menu Window
 SyncChart.Caption:='&'+rsLinkAllChart;
 SyncChart.hint:=rsLinkAllChart;
 SyncChart.Category:=CatLock;
@@ -6904,9 +6924,9 @@ TileVertical1.Category:=CatWindow;
 Maximize.caption:='&'+rsMaximize;
 Maximize.Hint:=rsMaximize;
 Maximize.Category:=CatWindow;
-//menu Help
+//Menu Help
 
-// No menu
+// No Menu
 TimeDec.Caption:=rsDecrementTim;
 TimeDec.hint:=rsDecrementTim;
 TimeReset.Caption:=rsNow;
@@ -6916,60 +6936,60 @@ TimeInc.hint:=rsIncrementTim;
 Animation.Caption:=rsAnimation;
 Animation.Hint:=rsAnimation;
 
-// menu without action
-// menu File
-File1.caption:='&'+rsFile;
-FileCloseItem.caption:='&'+rsCloseChart;
-MenuItem31.Caption:='&'+rsResetChartAn+Ellipsis;
-// ResetLanguage is not translated
-VariableStar1.Caption:='&'+rsVariableStar2+Ellipsis;
-MenuItem35.Caption:=rsConnectToSAM;
-MenuItem36.Caption:=rsDisconnectFr;
-MenuItem37.Caption:=rsSAMPStatus;
-MenuItem38.Caption:=rsSAMPSetup;
-PrintPreview1.Caption:='&'+rsPrintPreview;
-// menu Edit
-Edit1.caption:='&'+rsEdit;
-// menu Setup
-Setup1.caption:='&'+rsSetup;
-MenuItemEditToolbar.Caption:='&'+rsToolBarEdito;
-// menu View
-View1.caption:='&'+rsView;
-ViewToolBar1.caption:='&'+rsToolBar;
-ViewToolsBar1.caption:='&'+rsAllToolsBar;
-MainBar1.caption:='&'+rsMainBar;
-ObjectBar1.caption:='&'+rsObjectBar;
-LeftBar1.caption:='&'+rsLeftBar;
-RightBar1.caption:='&'+rsRightBar;
-ViewStatusBar1.caption:='&'+rsStatusBar;
-ViewScrollBar1.caption:='&'+rsScrollBar;
-// menu Chart
-Chart1.caption:='&'+rsChart;
-Projection1.caption:='&'+rsChartCoordin2;
-Transformation1.caption:='&'+rsTransformati;
-FieldofVision1.caption:='&'+rsFieldOfVisio;
-ShowHorizon1.caption:='&'+rsViewHorizon;
-ShowObjects1.caption:='&'+rsShowObjects;
-ShowGrid1.caption:='&'+rsLinesGrid;
-MenuItem32.Caption:=rsLabels;
-MenuStarNum.Caption:='&'+rsStarsFilter;
-MenuNebNum.Caption:='&'+rsNebulaeFilte;
-// menu Telescope
-telescope1.caption:='&'+rsTelescope;
-//menu Window
-Window1.caption:='&'+rsWindow;
-NextChild1.Caption:='&'+rsNextChart;
-//menu Help
-Help1.caption:='&'+rsHelp;
-HelpContents1.caption:='&'+rsHelpContents+Ellipsis;
-HelpPDF.Caption:='&PDF '+rsHelpContents+Ellipsis;;
-HelpFaq1.Caption:='&'+rsFAQ+Ellipsis;
-HelpQS1.Caption:='&'+rsQuickStartGu+Ellipsis;
-HomePage1.caption:='&'+rsSkychartHome+Ellipsis;
-Maillist1.caption:='&'+rsMailList+Ellipsis;
-BugReport1.caption:='&'+rsReportAProbl+Ellipsis;
-HelpAboutItem.caption:='&'+rsAbout+Ellipsis;
-ReleaseNotes1.Caption:='&'+rsReleaseNotes+Ellipsis;
+// Menu without action
+// Menu File
+SubFile.caption:='&'+rsFile;
+MenuFileClose.caption:='&'+rsCloseChart;
+MenuResetChart.Caption:='&'+rsResetChartAn+Ellipsis;
+// MenuResetLanguage is not translated
+MenuVariableStar.Caption:='&'+rsVariableStar2+Ellipsis;
+MenuSAMPConnect.Caption:=rsConnectToSAM;
+MenuSAMPDisconnect.Caption:=rsDisconnectFr;
+MenuSAMPStatus.Caption:=rsSAMPStatus;
+MenuSAMPSetup.Caption:=rsSAMPSetup;
+MenuPrintPreview.Caption:='&'+rsPrintPreview;
+// Menu Edit
+SubEdit.caption:='&'+rsEdit;
+// Menu Setup
+SubSetup.caption:='&'+rsSetup;
+MenuEditToolbar.Caption:='&'+rsToolBarEdito;
+// Menu View
+SubView.caption:='&'+rsView;
+SubToolBar.caption:='&'+rsToolBar;
+MenuViewToolsBar.caption:='&'+rsAllToolsBar;
+MenuViewMainBar.caption:='&'+rsMainBar;
+MenuViewObjectBar.caption:='&'+rsObjectBar;
+MenuViewLeftBar.caption:='&'+rsLeftBar;
+MenuViewRightBar.caption:='&'+rsRightBar;
+MenuViewStatusBar.caption:='&'+rsStatusBar;
+MenuViewScrollBar.caption:='&'+rsScrollBar;
+// Menu Chart
+SubChart.caption:='&'+rsChart;
+SubProjection.caption:='&'+rsChartCoordin2;
+SubTransformation.caption:='&'+rsTransformati;
+SubFieldofVision.caption:='&'+rsFieldOfVisio;
+SubShowHorizon.caption:='&'+rsViewHorizon;
+SubShowObjects.caption:='&'+rsShowObjects;
+SubShowGrid.caption:='&'+rsLinesGrid;
+SubLabels.Caption:=rsLabels;
+SubStarNum.Caption:='&'+rsStarsFilter;
+SubNebNum.Caption:='&'+rsNebulaeFilte;
+// Menu Telescope
+SubTelescope.caption:='&'+rsTelescope;
+//Menu Window
+SubWindow.caption:='&'+rsWindow;
+MenuNextChild.Caption:='&'+rsNextChart;
+//Menu Help
+SubHelp.caption:='&'+rsHelp;
+MenuHelpContents.caption:='&'+rsHelpContents+Ellipsis;
+MenuHelpPDF.Caption:='&PDF '+rsHelpContents+Ellipsis;;
+MenuHelpFaq.Caption:='&'+rsFAQ+Ellipsis;
+MenuHelpQuickStart.Caption:='&'+rsQuickStartGu+Ellipsis;
+MenuHomePage.caption:='&'+rsSkychartHome+Ellipsis;
+MenuMaillist.caption:='&'+rsMailList+Ellipsis;
+MenuBugReport.caption:='&'+rsReportAProbl+Ellipsis;
+MenuHelpAbout.caption:='&'+rsAbout+Ellipsis;
+MenuReleaseNotes.Caption:='&'+rsReleaseNotes+Ellipsis;
 // popmenu1
 ResetAllLabels1.caption:='&'+rsResetAllLabe;
 
@@ -7217,7 +7237,7 @@ if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
                telescopeConnect.Checked:=false;
           end;
   ViewClock.Checked:=(f_clock<>nil)and(f_clock.Visible);
-  PrintPreview1.Visible:=(cfgm.PrintMethod=0);
+  MenuPrintPreview.Visible:=(cfgm.PrintMethod=0);
   cname:=MultiFrame1.ActiveChild.Caption;
   for i:=0 to TabControl1.Tabs.Count-1 do begin
       if TabControl1.Tabs[i]=cname then begin
@@ -7229,23 +7249,23 @@ if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
      else MouseMode.ImageIndex:=96;
   with MultiFrame1.ActiveObject as Tf_chart do begin
     if sc.cfgsc.ManualTelescope then begin
-       ControlPanel1.Visible:=false;
-       telescopeSlew1.Visible:=false;
-       telescopeSync1.Visible:=false;
+       MenuTelescopeControlPanel.Visible:=false;
+       MenuTelescopeSlew.Visible:=false;
+       MenuTelescopeSync.Visible:=false;
        TelescopeSlew.Enabled:=false;
        TelescopeSync.Enabled:=false;
     end else begin
-       ControlPanel1.Visible:=sc.cfgsc.IndiTelescope;
-       telescopeSlew1.Visible:=true;
-       telescopeSync1.Visible:=true;
+       MenuTelescopeControlPanel.Visible:=sc.cfgsc.IndiTelescope;
+       MenuTelescopeSlew.Visible:=true;
+       MenuTelescopeSync.Visible:=true;
        TelescopeSlew.Enabled:=true;
        TelescopeSync.Enabled:=true;
     end;
     if (abs(sc.cfgsc.theta)>(pi-secarc))and(abs(sc.cfgsc.theta)<(pi+secarc)) then rotate180.ImageIndex:=93
        else rotate180.ImageIndex:=92;
     Animation.Checked:=AnimationEnabled;
-    TrackTelescope1.Checked:=(sc.cfgsc.TrackOn and (sc.cfgsc.TrackName=rsTelescope));
-    Tf_chart(sender).TrackTelescope.Checked:=TrackTelescope1.Checked;
+    MenuTrackTelescope.Checked:=(sc.cfgsc.TrackOn and (sc.cfgsc.TrackName=rsTelescope));
+    Tf_chart(sender).TrackTelescope.Checked:=MenuTrackTelescope.Checked;
     ShowStars.Checked:=sc.cfgsc.showstars;
     ShowNebulae.Checked:=sc.cfgsc.shownebulae;
     ShowVO.Checked:=(catalog.cfgcat.starcatdef[vostar-BaseStar] or catalog.cfgcat.nebcatdef[voneb-BaseNeb]);
@@ -7527,13 +7547,17 @@ procedure Tf_main.SendInfo(Sender: TObject; origin,str:string);
 var i : integer;
 begin
 if (origin='') and (str='') then exit;
-for i:=1 to Maxwindow do
+for i:=1 to Maxwindow do begin
  if (TCPDaemon<>nil)
     and(TCPDaemon.ThrdActive[i])
     and (TCPDaemon.TCPThrd[i]<>nil)
     and(TCPDaemon.TCPThrd[i].sock<>nil)
     and(not TCPDaemon.TCPThrd[i].terminated)
     then TCPDaemon.TCPThrd[i].SendData('>'+tab+origin+' :'+tab+str);
+end;
+if ScriptPanel.Visible and (ActiveScript>=0) then begin
+   Fscript[ActiveScript].ObjectSelectionEvent(origin,str);
+end;
 end;
 
 procedure Tf_main.StartServer;
@@ -8123,7 +8147,7 @@ if f_printsetup.showmodal=mrOK then begin
 end else begin
  cfgm.Assign(savecfgm);
 end;
-PrintPreview1.Visible:=(cfgm.PrintMethod=0);
+MenuPrintPreview.Visible:=(cfgm.PrintMethod=0);
 finally
 savecfgm.Free;
 end;
@@ -8468,8 +8492,8 @@ end;
 procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
 var lPrevStyle: LongInt;
 begin
-FullScreen1.Checked:=not FullScreen1.Checked;
-if FullScreen1.Checked then begin
+MenuFullScreen.Checked:=not MenuFullScreen.Checked;
+if MenuFullScreen.Checked then begin
    cfgm.savetop:=top;
    cfgm.saveleft:=left;
    cfgm.savewidth:=width;
@@ -8518,17 +8542,17 @@ end;
 
 procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
 begin
-if cfgm.KioskMode then FullScreen1.Checked:=true
-                  else FullScreen1.Checked:=not FullScreen1.Checked;
+if cfgm.KioskMode then MenuFullScreen.Checked:=true
+                  else MenuFullScreen.Checked:=not MenuFullScreen.Checked;
 {$IF DEFINED(LCLgtk2)}
 { TODO : fullscreen showmodal do not work with Gnome/Unity }
- SetWindowFullScreen(f_main,FullScreen1.Checked);
- if FullScreen1.Checked then
+ SetWindowFullScreen(f_main,MenuFullScreen.Checked);
+ if MenuFullScreen.Checked then
     WindowState:=wsMaximized
  else
     WindowState:=wsNormal;
 {$else}
- if FullScreen1.Checked then
+ if MenuFullScreen.Checked then
     WindowState:=wsMaximized
  else
     WindowState:=wsNormal;
@@ -8544,19 +8568,19 @@ begin
   ht:=rmod(astroe+def_cfgsc.tz.SecondsOffset/3600+24,24);
 end;
 
-procedure Tf_main.MenuItem35Click(Sender: TObject);
+procedure Tf_main.MenuSAMPConnectClick(Sender: TObject);
 begin
   if (samp=nil)or(not samp.Connected) then SAMPStart;
   UpdateSAMPmenu;
 end;
 
-procedure Tf_main.MenuItem36Click(Sender: TObject);
+procedure Tf_main.MenuSAMPDisconnectClick(Sender: TObject);
 begin
   SAMPStop;
   UpdateSAMPmenu;
 end;
 
-procedure Tf_main.MenuItem37Click(Sender: TObject);
+procedure Tf_main.MenuSAMPStatusClick(Sender: TObject);
 var buf: string;
     i: integer;
 begin
@@ -8573,7 +8597,7 @@ end;
 ShowMessage(buf);
 end;
 
-procedure Tf_main.MenuItem38Click(Sender: TObject);
+procedure Tf_main.MenuSAMPSetupClick(Sender: TObject);
 var b1,b2,b3: boolean;
 begin
   b1:=cfgm.SampSubscribeCoord;
@@ -8622,7 +8646,7 @@ f_edittoolbar.ActivateToolbar;
 ViewToolsBar;
 end;
 
-procedure Tf_main.MenuItemEditToolbarClick(Sender: TObject);
+procedure Tf_main.MenuEditToolbarClick(Sender: TObject);
 begin
  // load current config
  f_edittoolbar.LoadToolbar(0,configmainbar);
@@ -8750,17 +8774,17 @@ procedure Tf_main.UpdateSAMPmenu;
 begin
 if samp=nil then begin
  SampConnected:=false;
- MenuItem35.Enabled:=true;
- MenuItem36.Enabled:=false;
- MenuItem37.Enabled:=true;
- MenuItem38.Enabled:=true;
+ MenuSAMPConnect.Enabled:=true;
+ MenuSAMPDisconnect.Enabled:=false;
+ MenuSAMPStatus.Enabled:=true;
+ MenuSAMPSetup.Enabled:=true;
 end
 else begin
  SampConnected:=samp.Connected;
- MenuItem35.Enabled:=not samp.Connected;
- MenuItem36.Enabled:=samp.Connected;
- MenuItem37.Enabled:=true;
- MenuItem38.Enabled:=true;
+ MenuSAMPConnect.Enabled:=not samp.Connected;
+ MenuSAMPDisconnect.Enabled:=samp.Connected;
+ MenuSAMPStatus.Enabled:=true;
+ MenuSAMPSetup.Enabled:=true;
 end;
 end;
 
@@ -9132,6 +9156,14 @@ begin
      end
      else Fscript[i].Visible:=false;
    end;
+   ActiveScript:=n;
+ end;
+end;
+
+procedure Tf_main.TelescopeMove(origin: string; ra,de: double);
+begin
+ if ScriptPanel.Visible and (ActiveScript>=0) then begin
+    Fscript[ActiveScript].TelescopeMoveEvent(origin,ra,de);
  end;
 end;
 

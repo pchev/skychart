@@ -33,6 +33,7 @@ uses u_translation, gcatunit,
      Forms, StdCtrls, Controls, ExtCtrls, Graphics, FPImage, LCLType, IntfGraphics;
 type
   Tint2func = procedure(i,j: integer) of object;
+  Tfloat2func = procedure(n:string; x,y: double) of object;
 
   TDrawHorizonThread = class(TThread)
     public
@@ -54,6 +55,7 @@ Tskychart = class (TComponent)
     Fplanet : Tplanet;
     Fcdb: Tcdcdb;
     FShowDetailXY: Tint2func;
+    FonTelescopeMove: Tfloat2func;
     fsat: textfile;
     constlabelindex:integer;
     bgcra,bgcde,bgfov,bgmis,bgmas,bgrot: double;
@@ -167,6 +169,7 @@ Tskychart = class (TComponent)
     property Image: TCanvas write SetImage;
     property onRefreshImage: TNotifyEvent read FRefreshImage write FRefreshImage;
     property onUpdObsListTime: TNotifyEvent read FUpdObsListTime write FUpdObsListTime;
+    property onTelescopeMove: Tfloat2func read FonTelescopeMove write FonTelescopeMove;
 end;
 
 
@@ -5591,6 +5594,7 @@ begin
 result:=false;
 cfgsc.moved:=false;
 if (ra<>cfgsc.ScopeRa)or(dec<>cfgsc.ScopeDec) then begin
+if assigned(FonTelescopeMove) then FonTelescopeMove(cfgsc.chartname,ra,dec);
 if cfgsc.scopemark then DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true,-1);
 DrawFinderMark(ra,dec,true,-1);
 cfgsc.ScopeRa:=ra;

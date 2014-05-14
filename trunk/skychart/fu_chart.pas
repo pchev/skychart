@@ -295,6 +295,8 @@ type
     procedure ShowCoord(x,y: Integer);
     procedure UpdObsListTime(Sender: TObject);
     procedure RefreshImage(Sender: TObject);
+    function GetTelescopeMove: Tfloat2func;
+    procedure SetTelescopeMove(value:Tfloat2func);
   public
     { Public declarations }
     Image1 : TChartDrawingControl;
@@ -434,6 +436,7 @@ type
     property onSendImageFits: TSendImageFits read FSendImageFits write FSendImageFits;
     property onSendSelectRow: TSendSelectRow read FSendSelectRow write FSendSelectRow;
     property onPlanetInfo: TNotifyEvent read FPlanetInfo write FPlanetInfo;
+    property onTelescopeMove: Tfloat2func read GetTelescopeMove write SetTelescopeMove;
   end;
 
 implementation
@@ -5558,6 +5561,16 @@ end;
 procedure Tf_chart.UpdObsListTime(Sender: TObject);
 begin
 if f_obslist.ObjCount>0 then f_obslist.Refresh;
+end;
+
+function Tf_chart.GetTelescopeMove: Tfloat2func;
+begin
+  result:=sc.onTelescopeMove;
+end;
+
+procedure Tf_chart.SetTelescopeMove(value:Tfloat2func);
+begin
+  sc.onTelescopeMove:=value;
 end;
 
 end.

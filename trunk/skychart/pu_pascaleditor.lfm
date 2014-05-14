@@ -1,9 +1,9 @@
 object f_pascaleditor: Tf_pascaleditor
-  Left = 355
+  Left = 396
   Height = 375
-  Top = 154
+  Top = 152
   Width = 484
-  Caption = 'f_pascaleditor'
+  Caption = 'Editor'
   ClientHeight = 375
   ClientWidth = 484
   LCLVersion = '1.2.0.3'
@@ -44,11 +44,11 @@ object f_pascaleditor: Tf_pascaleditor
     Font.Height = -13
     Font.Name = 'Courier New'
     Font.Pitch = fpFixed
-    Font.Quality = fqNonAntialiased
+    Font.Quality = fqDraft
     ParentColor = False
     ParentFont = False
     TabOrder = 1
-    Gutter.Width = 57
+    Gutter.Width = 29
     Gutter.MouseActions = <>
     RightGutter.Width = 0
     RightGutter.MouseActions = <>
@@ -506,10 +506,6 @@ object f_pascaleditor: Tf_pascaleditor
     LineHighlightColor.Foreground = clNone
     LineHighlightColor.FrameEdges = sfeAround
     inline SynLeftGutterPartList1: TSynGutterPartList
-      object SynGutterMarks1: TSynGutterMarks
-        Width = 24
-        MouseActions = <>
-      end
       object SynGutterLineNumber1: TSynGutterLineNumber
         Width = 17
         MouseActions = <>
@@ -520,12 +516,6 @@ object f_pascaleditor: Tf_pascaleditor
         ShowOnlyLineNumbersMultiplesOf = 1
         ZeroStart = False
         LeadingZeros = False
-      end
-      object SynGutterChanges1: TSynGutterChanges
-        Width = 4
-        MouseActions = <>
-        ModifiedColor = 59900
-        SavedColor = clGreen
       end
       object SynGutterSeparator1: TSynGutterSeparator
         Width = 2
@@ -545,15 +535,18 @@ object f_pascaleditor: Tf_pascaleditor
     end
   end
   object SynPasSyn1: TSynPasSyn
-    Enabled = False
     AsmAttri.FrameEdges = sfeAround
+    CommentAttri.Foreground = clBlue
     CommentAttri.FrameEdges = sfeAround
     IDEDirectiveAttri.FrameEdges = sfeAround
     IdentifierAttri.FrameEdges = sfeAround
     KeyAttri.FrameEdges = sfeAround
+    NumberAttri.Foreground = clNavy
     NumberAttri.FrameEdges = sfeAround
     SpaceAttri.FrameEdges = sfeAround
+    StringAttri.Foreground = clBlue
     StringAttri.FrameEdges = sfeAround
+    SymbolAttri.Foreground = clRed
     SymbolAttri.FrameEdges = sfeAround
     CaseLabelAttri.FrameEdges = sfeAround
     DirectiveAttri.FrameEdges = sfeAround
