@@ -51,7 +51,7 @@ uses
   fu_config_internet, fu_config_observatory, fu_config_pictures,
   fu_config_solsys, fu_config_system, fu_config_calendar, pu_config_calendar,
   pu_planetinfo, pu_imglist, cu_plansat, cu_smallsat, pu_fov, pu_edittoolbar,
-  fu_script, pu_scripteditor;
+  fu_script, pu_scripteditor, pu_pascaleditor;
   
 var i : integer;
     buf, p, step : string;
