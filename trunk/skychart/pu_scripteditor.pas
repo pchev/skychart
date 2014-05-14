@@ -86,6 +86,7 @@ type
     procedure AddEdit(num:string; pt: TWinControl);
     procedure AddMemo(num:string; pt: TWinControl;h: integer);
     procedure AddSpacer(num:string; pt: TWinControl);
+    procedure ClearTreeView;
     procedure CompileScripts;
   public
     { public declarations }
@@ -121,6 +122,7 @@ begin
   TreeView1.SaveToStream(m);
   m.Position:=0;
   strbtn.LoadFromStream(m);
+  m.Free;
   strscr.Clear;
   node:=TreeView1.Items.GetFirstNode;
   while node<>nil do begin
@@ -149,6 +151,7 @@ begin
   strbtn.SaveToStream(m);
   m.Position:=0;
   TreeView1.LoadFromStream(m);
+  m.Free;
   cnu:='';
   s:=TStringList.Create;
   p:=TStringList.Create;
@@ -333,18 +336,6 @@ CompileScripts;
 if Assigned(FonApply) then FonApply(self);
 end;
 
-procedure Tf_scripteditor.ButtonClearClick(Sender: TObject);
-begin
-if MessageDlg('This action remove all the component and you lose all your scripts.', mtConfirmation, mbYesNo, 0)=mrYes then begin
-  TreeView1.Items.Clear;
-  GroupIdx:=0;
-  ButtonIdx:=0;
-  EditIdx:=0;
-  MemoIdx:=0;
-  SpacerIdx:=0;
-end;
-end;
-
 procedure Tf_scripteditor.ButtonAddClick(Sender: TObject);
 var v,n: integer;
 begin
@@ -480,8 +471,10 @@ var s:TStringList;
 begin
 if (TreeView1.Selected<>nil)and(copy(TreeView1.Selected.Text,1,7)='Button_') then begin
   node:=TreeView1.Selected;
-  s:=TStringList.Create;
-  if (node.data<>nil)and(TObject(node.data) is TStringList) then s.Assign(TStringList(node.data));
+  if (node.data<>nil)and(TObject(node.data) is TStringList) then
+     s:=(TStringList(node.data))
+  else
+     s:=TStringList.Create;
   if Fpascaleditor=nil then begin
     Fpascaleditor:=Tf_pascaleditor.Create(self);
   end;
@@ -530,9 +523,40 @@ begin
   SpacerIdx:=0;
 end;
 
+procedure Tf_scripteditor.ClearTreeView;
+var i: integer;
+    buf,txt: string;
+    node:TTreeNode;
+begin
+node:=TreeView1.Items.GetFirstNode;
+while node<>nil do begin
+  buf:=words(node.Text,'',1,1,';');
+  txt:=words(buf,'',1,1,'_');
+  if (txt='Button')and(node.data<>nil)and(TObject(node.data) is TStringList) then begin
+     TStringList(node.data).Free;
+  end;
+  node:=node.GetNext;
+end;
+TreeView1.Items.Clear;
+GroupIdx:=0;
+ButtonIdx:=0;
+EditIdx:=0;
+MemoIdx:=0;
+SpacerIdx:=0;
+end;
+
 procedure Tf_scripteditor.FormDestroy(Sender: TObject);
 begin
+  ClearTreeView;
+  TreeView1.free;
   if Fpascaleditor<>nil then Fpascaleditor.Free;
+end;
+
+procedure Tf_scripteditor.ButtonClearClick(Sender: TObject);
+begin
+if MessageDlg('This action remove all the component and you lose all your scripts.', mtConfirmation, mbYesNo, 0)=mrYes then begin
+   ClearTreeView;
+end;
 end;
 
 procedure Tf_scripteditor.TplPSScriptCompile(Sender: TPSScript);
