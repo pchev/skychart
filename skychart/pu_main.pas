@@ -2050,6 +2050,7 @@ for i:=0 to numscript-1 do begin
   Fscript[i].Tag:=i;
   Fscript[i].Align:=alClient;
   Fscript[i].Visible:=false;
+  Fscript[i].ExecuteCmd:=ExecuteCmd;
   Fscript[i].Parent:=ScriptPanel;
 end;
 Splitter1.ResizeControl:=ScriptPanel;
@@ -5678,7 +5679,7 @@ for i:=0 to numscript-1 do begin
      buf:=StringReplace(buf,'"','',[rfReplaceAll]);
      Fscript[i].ConfigScriptButton.Add(buf);
    end;
-   n:=ReadInteger(section,'numscript',0);
+   n:=ReadInteger(section,'numscriptrows',0);
    for j:=0 to n-1 do Fscript[i].ConfigScript.Add(ReadString(section,'script_'+inttostr(j),''));
 end;
 Splitter1.Visible:=ScriptPanel.Visible;
@@ -6442,7 +6443,7 @@ for i:=0 to numscript-1 do begin
    WriteInteger(section,'numscriptbutton',n);
    for j:=0 to n-1 do WriteString(section,'scriptbutton_'+inttostr(j),'"'+Fscript[i].ConfigScriptButton[j]+'"');
    n:=Fscript[i].ConfigScript.Count;
-   WriteInteger(section,'numscript',n);
+   WriteInteger(section,'numscriptrows',n);
    for j:=0 to n-1 do WriteString(section,'script_'+inttostr(j),Fscript[i].ConfigScript[j]);
 end;
 Updatefile;

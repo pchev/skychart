@@ -40,6 +40,8 @@ type
   TSkycolor = array[0..7] of Tcolor;
   Titt = (ittlinear,ittramp,ittlog,ittsqrt);
 
+  TExecuteCmd = function(cname:string; arg:Tstringlist):string of object;
+
 {$i revision.inc}
 
 const

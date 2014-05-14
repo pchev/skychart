@@ -4,7 +4,7 @@ unit fu_script;
 
 interface
 
-uses  u_translation, pu_edittoolbar, pu_scripteditor, u_util,
+uses  u_translation, u_constant, pu_edittoolbar, pu_scripteditor, u_util,
   ActnList, Menus, Classes, SysUtils,
   FileUtil, Forms, Controls, ExtCtrls, StdCtrls, ComCtrls, Buttons;
 
@@ -38,8 +38,10 @@ type
     FTimeU: TComboBox;
     FToolBarFOV: Tpanel;
     FMainmenu: TMenu;
+    FExecuteCmd: TExecuteCmd;
     FConfigToolbar1,FConfigToolbar2,FConfigScriptButton,FConfigScript: TStringList;
     procedure ApplyScript(Sender: TObject);
+    procedure SetExecuteCmd(value:TExecuteCmd);
   public
     { public declarations }
     constructor Create(TheOwner: TComponent); override;
@@ -66,7 +68,7 @@ type
     property ConfigToolbar2: TStringList read FConfigToolbar2 write FConfigToolbar2;
     property ConfigScriptButton: TStringList read FConfigScriptButton write FConfigScriptButton;
     property ConfigScript: TStringList read FConfigScript write FConfigScript;
-
+    property ExecuteCmd: TExecuteCmd read FExecuteCmd write SetExecuteCmd;
   end;
 
 implementation
@@ -134,6 +136,7 @@ begin
         fscripteditor:=Tf_scripteditor.Create(self);
         fscripteditor.editsurface:=MainPanel;
         fscripteditor.onApply:=@ApplyScript;
+        fscripteditor.ExecuteCmd:=FExecuteCmd;
      end;
      fscripteditor.Load(FConfigScriptButton, FConfigScript);
   end;
@@ -159,6 +162,7 @@ begin
      fscripteditor:=Tf_scripteditor.Create(self);
      fscripteditor.editsurface:=MainPanel;
      fscripteditor.onApply:=@ApplyScript;
+     fscripteditor.ExecuteCmd:=FExecuteCmd;
   end;
   fscripteditor.Show;
 end;
@@ -166,6 +170,12 @@ end;
 procedure Tf_script.ApplyScript(Sender: TObject);
 begin
  fscripteditor.Save(FConfigScriptButton, FConfigScript);
+end;
+
+procedure Tf_script.SetExecuteCmd(value:TExecuteCmd);
+begin
+ FExecuteCmd:=value;
+ if fscripteditor<>nil then fscripteditor.ExecuteCmd:=FExecuteCmd;
 end;
 
 end.

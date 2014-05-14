@@ -4,7 +4,8 @@ unit pu_scripteditor;
 
 interface
 
-uses   u_constant, u_util, ActnList, StdCtrls, ExtCtrls, Menus, Classes, SysUtils, FileUtil,
+uses   u_constant, u_util, ActnList, pu_pascaleditor,
+  StdCtrls, ExtCtrls, Menus, Classes, SysUtils, FileUtil,
   uPSComponent, uPSComponent_Default, uPSComponent_DB, uPSComponent_Forms,
   uPSComponent_Controls, uPSComponent_StdCtrls, Forms, Controls, Graphics,
   Dialogs, ComCtrls,uPSCompiler, uPSRuntime, math;
@@ -14,16 +15,14 @@ type
   { Tf_scripteditor }
 
   Tf_scripteditor = class(TForm)
+    ButtonUpdate: TButton;
+    ButtonAdd: TButton;
     ButtonEditScript: TButton;
     ButtonApply: TButton;
     ButtonClear: TButton;
-    ButtonGroup: TButton;
-    ButtonButton: TButton;
-    ButtonEdit: TButton;
-    ButtonMemo: TButton;
-    ButtonSpacer: TButton;
     ButtonDelete: TButton;
     CompileMemo: TMemo;
+    GroupBox1: TGroupBox;
     GroupCaptionEdit: TEdit;
     ButtonCaptionEdit: TEdit;
     MemoHeightEdit: TEdit;
@@ -38,20 +37,29 @@ type
     PSImport_DateUtils1: TPSImport_DateUtils;
     PSImport_Forms1: TPSImport_Forms;
     PSImport_StdCtrls1: TPSImport_StdCtrls;
+    RadioButtonGroup: TRadioButton;
+    RadioButtonButton: TRadioButton;
+    RadioButtonEdit: TRadioButton;
+    RadioButtonMemo: TRadioButton;
+    RadioButtonSpacer: TRadioButton;
     TplPSScript: TPSScript;
     TreeView1: TTreeView;
+    procedure ButtonAddClick(Sender: TObject);
+    procedure ButtonCaptionEditChange(Sender: TObject);
     procedure ButtonEditScriptClick(Sender: TObject);
     procedure ButtonApplyClick(Sender: TObject);
     procedure ButtonClearClick(Sender: TObject);
-    procedure ButtonGroupClick(Sender: TObject);
-    procedure ButtonButtonClick(Sender: TObject);
-    procedure ButtonEditClick(Sender: TObject);
-    procedure ButtonMemoClick(Sender: TObject);
-    procedure ButtonSpacerClick(Sender: TObject);
     procedure ButtonDeleteClick(Sender: TObject);
+    procedure ButtonUpdateClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure GroupCaptionEditChange(Sender: TObject);
+    procedure GroupRowEditChange(Sender: TObject);
+    procedure MemoHeightEditChange(Sender: TObject);
+    procedure RadioButtonClick(Sender: TObject);
     procedure TplPSScriptCompile(Sender: TPSScript);
     procedure TplPSScriptExecute(Sender: TPSScript);
+    procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
   private
     { private declarations }
     FEditSurface: TPanel;
@@ -68,22 +76,24 @@ type
     mem: array of TMemo;
     snum:integer;
     sp: array of TPanel;
+    Fpascaleditor: Tf_pascaleditor;
     GroupIdx,ButtonIdx,EditIdx,MemoIdx,SpacerIdx: integer;
-    function  ExecuteCmd(cname:string; arg:Tstringlist):string;
+    FExecuteCmd: TExecuteCmd;
+    function  doExecuteCmd(cname:string; arg:Tstringlist):string;
     procedure Button_Click(Sender: TObject);
-    function AddGroup(num,capt:string; pt: TWinControl; ctlperline:integer=1):TGroupBox;
+    function  AddGroup(num,capt:string; pt: TWinControl; ctlperline:integer=1):TGroupBox;
     procedure AddButton(num,capt:string; pt: TWinControl);
     procedure AddEdit(num:string; pt: TWinControl);
     procedure AddMemo(num:string; pt: TWinControl;h: integer);
     procedure AddSpacer(num:string; pt: TWinControl);
     procedure CompileScripts;
-
   public
     { public declarations }
     procedure Save(strbtn, strscr: Tstringlist);
     procedure Load(strbtn, strscr: Tstringlist);
     property EditSurface: TPanel read FEditSurface write FEditSurface;
     property onApply: TNotifyEvent read FonApply write FonApply;
+    property ExecuteCmd: TExecuteCmd read FExecuteCmd write FExecuteCmd;
   end;
 
 var
@@ -93,14 +103,9 @@ implementation
 
 {$R *.lfm}
 
-function Tf_scripteditor.ExecuteCmd(cname:string; arg:Tstringlist):string;
-var buf: string;
-   i: integer;
+function Tf_scripteditor.doExecuteCmd(cname:string; arg:Tstringlist):string;
 begin
-  buf:=cname;
-  for i:=0 to arg.Count-1 do buf:=buf+' '+arg[i];
-  //ButtonCaptionEdit.Text:=buf;
-  result:='OK! '+buf;
+  if assigned(FExecuteCmd) then result:=FExecuteCmd(cname,arg);
 end;
 
 procedure Tf_scripteditor.Save(strbtn, strscr: Tstringlist);
@@ -135,10 +140,10 @@ end;
 
 procedure Tf_scripteditor.Load(strbtn, strscr: Tstringlist);
 var m:TMemoryStream;
-   buf,txt,cnu,nu,scrlin: string;
+   bu,txt,cnu,nu,scrlin: string;
    i,j: integer;
    node:TTreeNode;
-   s:TStringList;
+   s,p:TStringList;
 begin
   m:=TMemoryStream.Create;
   strbtn.SaveToStream(m);
@@ -146,10 +151,13 @@ begin
   TreeView1.LoadFromStream(m);
   cnu:='';
   s:=TStringList.Create;
+  p:=TStringList.Create;
   for i:=0 to strscr.Count-1 do begin
-    buf:=strscr[i];
-    nu:=words(buf,'',1,1,tab);
-    scrlin:=words(buf,'',2,2,tab);
+    bu:=strscr[i];
+    SplitRec(bu,tab,p);
+    if p.Count<2 then continue;
+    nu:=p[0];
+    scrlin:=p[1];
     if (cnu='') then cnu:=nu;
     if cnu=nu then begin
       s.Add(scrlin);
@@ -166,6 +174,14 @@ begin
       cnu:=nu;
     end;
   end;
+  node := TreeView1.Items.GetFirstNode;
+  while Assigned(node) and (pos('Button_'+cnu+';',node.Text)<=0) do
+        node := node.GetNext;
+  if assigned(node) then begin
+    txt:=node.text;
+    node.Data:=s;
+  end;
+  p.free;
   ButtonApplyClick(self);
 end;
 
@@ -180,6 +196,10 @@ gr[gnum-1].Name:='Group_'+num;
 gr[gnum-1].Caption:=capt;
 gr[gnum-1].tag:=StrToIntDef(num,0);
 gr[gnum-1].AutoSize:=true;
+gr[gnum-1].top:=gnum;
+gr[gnum-1].Align:=altop;
+gr[gnum-1].ChildSizing.EnlargeHorizontal := crsHomogenousChildResize;
+gr[gnum-1].ChildSizing.EnlargeVertical := crsHomogenousSpaceResize;
 gr[gnum-1].ChildSizing.ShrinkHorizontal := crsHomogenousChildResize;
 gr[gnum-1].ChildSizing.ShrinkVertical := crsHomogenousSpaceResize;
 gr[gnum-1].ChildSizing.Layout := cclLeftToRightThenTopToBottom;
@@ -216,9 +236,11 @@ var n: integer;
 begin
 n:=TButton(sender).tag;
 if (n<scrnum)and(scr[n].Script.Count>0) then begin
-  scr[n].Execute;
   CompileMemo.Clear;
-  if scr[n].Execute then CompileMemo.Lines.Add('OK') else CompileMemo.Lines.Add('Failed!');
+  if scr[n].Execute then
+    CompileMemo.Lines.Add('OK')
+  else
+    CompileMemo.Lines.Add('Failed! row='+inttostr(scr[n].ExecErrorRow)+': '+scr[n].ExecErrorToString);
 end;
 end;
 
@@ -313,6 +335,7 @@ end;
 
 procedure Tf_scripteditor.ButtonClearClick(Sender: TObject);
 begin
+if MessageDlg('This action remove all the component and you lose all your scripts.', mtConfirmation, mbYesNo, 0)=mrYes then begin
   TreeView1.Items.Clear;
   GroupIdx:=0;
   ButtonIdx:=0;
@@ -320,50 +343,135 @@ begin
   MemoIdx:=0;
   SpacerIdx:=0;
 end;
-
-procedure Tf_scripteditor.ButtonGroupClick(Sender: TObject);
-begin
-if (TreeView1.Selected=nil)or((TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0)) then begin
-  inc(GroupIdx);
-  TreeView1.Items.Add(TreeView1.Selected,'Group_'+inttostr(GroupIdx)+';'+StringReplace(GroupCaptionEdit.Text,';','',[rfReplaceAll])+';'+IntToStr(StrToIntDef(GroupRowEdit.Text,1)));
-end;
 end;
 
-procedure Tf_scripteditor.ButtonButtonClick(Sender: TObject);
+procedure Tf_scripteditor.ButtonAddClick(Sender: TObject);
+var v,n: integer;
 begin
-if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
-  inc(ButtonIdx);
-  TreeView1.Items.AddChild(TreeView1.Selected,'Button_'+inttostr(ButtonIdx)+';'+StringReplace(ButtonCaptionEdit.Text,';','',[rfReplaceAll]));
+if RadioButtonGroup.Checked then begin
+  if (TreeView1.Selected=nil)or((TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0)) then begin
+    val(GroupRowEdit.Text,v,n);
+    if n=0 then begin
+      inc(GroupIdx);
+      TreeView1.Selected:=TreeView1.Items.Add(TreeView1.Selected,'Group_'+inttostr(GroupIdx)+';'+StringReplace(GroupCaptionEdit.Text,';','',[rfReplaceAll])+';'+IntToStr(StrToIntDef(GroupRowEdit.Text,1)));
+    end;
+  end;
+end else if RadioButtonButton.Checked then begin
+  if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
+    inc(ButtonIdx);
+    TreeView1.Items.AddChild(TreeView1.Selected,'Button_'+inttostr(ButtonIdx)+';'+StringReplace(ButtonCaptionEdit.Text,';','',[rfReplaceAll]));
+  end;
+end else if RadioButtonEdit.Checked then begin
+  if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
+    inc(EditIdx);
+    TreeView1.Items.AddChild(TreeView1.Selected,'Edit_'+inttostr(EditIdx));
+  end;
+end else if RadioButtonMemo.Checked then begin
+  if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
+    val(MemoHeightEdit.Text,v,n);
+    if n=0 then begin
+      inc(MemoIdx);
+      TreeView1.Items.AddChild(TreeView1.Selected,'Memo_'+inttostr(MemoIdx)+';'+IntToStr(StrToIntDef(MemoHeightEdit.Text,1)));
+    end;
+  end;
+end else if RadioButtonSpacer.Checked then begin
+  if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
+    inc(SpacerIdx);
+    TreeView1.Items.AddChild(TreeView1.Selected,'Spacer_'+inttostr(SpacerIdx));
+  end;
 end;
 end;
 
-procedure Tf_scripteditor.ButtonEditClick(Sender: TObject);
+procedure Tf_scripteditor.ButtonUpdateClick(Sender: TObject);
 begin
-if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
-  inc(EditIdx);
-  TreeView1.Items.AddChild(TreeView1.Selected,'Edit_'+inttostr(EditIdx));
+if (TreeView1.Selected<>nil) then begin
+  if RadioButtonGroup.Checked then begin
+    TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+StringReplace(GroupCaptionEdit.Text,';','',[rfReplaceAll])+';'+IntToStr(StrToIntDef(GroupRowEdit.Text,1));
+  end else if RadioButtonButton.Checked then begin
+    TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+StringReplace(ButtonCaptionEdit.Text,';','',[rfReplaceAll]);
+  end else if RadioButtonEdit.Checked then begin
+     //
+  end else if RadioButtonMemo.Checked then begin
+    TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+IntToStr(StrToIntDef(MemoHeightEdit.Text,1));
+  end else if RadioButtonSpacer.Checked then begin
+     //
+  end;
 end;
 end;
 
-procedure Tf_scripteditor.ButtonMemoClick(Sender: TObject);
+procedure Tf_scripteditor.GroupCaptionEditChange(Sender: TObject);
 begin
-if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
-  inc(MemoIdx);
-  TreeView1.Items.AddChild(TreeView1.Selected,'Memo_'+inttostr(MemoIdx)+';'+IntToStr(StrToIntDef(MemoHeightEdit.Text,1)));
+  if ButtonUpdate.Tag=1 then ButtonUpdate.Visible:=true;
+end;
+
+procedure Tf_scripteditor.GroupRowEditChange(Sender: TObject);
+var v,n: integer;
+begin
+  val(GroupRowEdit.Text,v,n);
+  ButtonUpdate.Visible:=(n=0)and(ButtonUpdate.Tag=1);
+end;
+
+procedure Tf_scripteditor.MemoHeightEditChange(Sender: TObject);
+var v,n: integer;
+begin
+  val(MemoHeightEdit.Text,v,n);
+  ButtonUpdate.Visible:=(n=0)and(ButtonUpdate.Tag=3);
+end;
+
+procedure Tf_scripteditor.RadioButtonClick(Sender: TObject);
+begin
+  ButtonUpdate.Tag:=0;
+  ButtonUpdate.Visible:=false;
+end;
+
+procedure Tf_scripteditor.ButtonCaptionEditChange(Sender: TObject);
+begin
+  if ButtonUpdate.Tag=2 then ButtonUpdate.Visible:=true;
+end;
+
+procedure Tf_scripteditor.TreeView1Change(Sender: TObject; Node: TTreeNode);
+begin
+ButtonUpdate.Tag:=0;
+if node<>nil then begin
+  if (pos('Group_',node.Text)=1) then begin
+    ButtonEditScript.Visible:=false;
+    RadioButtonGroup.Checked:=true;
+    GroupCaptionEdit.Text:=words(node.Text,'',2,1,';');
+    GroupRowEdit.Text:=words(node.Text,'',3,1,';');
+    ButtonUpdate.Visible:=false;
+    ButtonUpdate.Tag:=1;
+  end else if (pos('Button_',node.Text)=1) then begin
+    ButtonEditScript.Visible:=true;
+    RadioButtonButton.Checked:=true;
+    ButtonCaptionEdit.Text:=words(node.Text,'',2,1,';');
+    ButtonUpdate.Visible:=false;
+    ButtonUpdate.Tag:=2;
+  end else if (pos('Edit_',node.Text)=1) then begin
+    ButtonEditScript.Visible:=false;
+    ButtonUpdate.Visible:=false;
+    RadioButtonEdit.Checked:=true;
+  end else if (pos('Memo_',node.Text)=1) then begin
+    ButtonEditScript.Visible:=false;
+    RadioButtonMemo.Checked:=true;
+    MemoHeightEdit.Text:=words(node.Text,'',2,1,';');
+    ButtonUpdate.Visible:=false;
+    ButtonUpdate.Tag:=3;
+  end else if (pos('Spacer_',node.Text)=1) then begin
+    ButtonEditScript.Visible:=false;
+    ButtonUpdate.Visible:=false;
+    RadioButtonSpacer.Checked:=true;
+  end;
 end;
 end;
 
-procedure Tf_scripteditor.ButtonSpacerClick(Sender: TObject);
-begin
-if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
-  inc(SpacerIdx);
-  TreeView1.Items.AddChild(TreeView1.Selected,'Spacer_'+inttostr(SpacerIdx));
-end;
-end;
 
 procedure Tf_scripteditor.ButtonDeleteClick(Sender: TObject);
 begin
-  TreeView1.Items.Delete(TreeView1.Selected);
+if TreeView1.Selected<>nil then begin
+  if MessageDlg('Delete '+TreeView1.Selected.Text+', all the child nodes and the scripts?', mtConfirmation, mbYesNo, 0)=mrYes then begin
+    TreeView1.Items.Delete(TreeView1.Selected);
+  end;
+end;
 end;
 
 procedure Tf_scripteditor.ButtonEditScriptClick(Sender: TObject);
@@ -373,12 +481,16 @@ begin
 if (TreeView1.Selected<>nil)and(copy(TreeView1.Selected.Text,1,7)='Button_') then begin
   node:=TreeView1.Selected;
   s:=TStringList.Create;
-  s.Add('  var a: string;');
-  s.Add('  begin');
-  s.Add('    a:=Edit_1.text;');
-  s.Add('    Edit_2.text:=a+''ZZZ'';');
-  s.Add('  end.');
-  node.Data:=s;
+  if (node.data<>nil)and(TObject(node.data) is TStringList) then s.Assign(TStringList(node.data));
+  if Fpascaleditor=nil then begin
+    Fpascaleditor:=Tf_pascaleditor.Create(self);
+  end;
+  Fpascaleditor.SynEdit1.Lines.Assign(s);
+  Fpascaleditor.ShowModal;
+  if Fpascaleditor.ModalResult=mrOK then begin
+    s.Assign(Fpascaleditor.SynEdit1.Lines);
+    node.Data:=s;
+  end;
 end;
 end;
 
@@ -418,6 +530,11 @@ begin
   SpacerIdx:=0;
 end;
 
+procedure Tf_scripteditor.FormDestroy(Sender: TObject);
+begin
+  if Fpascaleditor<>nil then Fpascaleditor.Free;
+end;
+
 procedure Tf_scripteditor.TplPSScriptCompile(Sender: TPSScript);
 var CustomClass: TPSCompileTimeClass;
     i: integer;
@@ -428,7 +545,7 @@ with Sender as TPSScript do begin
   for i:=1 to mnum do AddRegisteredVariable('Memo_'+inttostr(i), 'TMemo');
 end;
 TPSScript(Sender).AddRegisteredVariable('menu1', 'TMenuItem');
-TPSScript(Sender).AddMethod(self, @Tf_scripteditor.ExecuteCmd, 'function ExecuteCmd(cname:string; arg:Tstringlist):string;');
+TPSScript(Sender).AddMethod(self, @Tf_scripteditor.doExecuteCmd, 'function ExecuteCmd(cname:string; arg:Tstringlist):string;');
 end;
 
 procedure Tf_scripteditor.TplPSScriptExecute(Sender: TPSScript);
