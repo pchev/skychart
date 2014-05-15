@@ -496,9 +496,9 @@ object f_chart: Tf_chart
         Caption = 'Abort Slew'
         OnClick = AbortSlew1Click
       end
-      object TrackTelescope: TMenuItem
+      object TrackTelescope1: TMenuItem
         Caption = 'TrackTelescope'
-        OnClick = TrackTelescopeClick
+        OnClick = TrackTelescope1Click
       end
     end
     object ImgList1: TMenuItem

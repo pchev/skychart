@@ -120,7 +120,7 @@ type
     SaveDialog1: TSaveDialog;
     SlewCursor: TMenuItem;
     PDSSTimer: TTimer;
-    TrackTelescope: TMenuItem;
+    TrackTelescope1: TMenuItem;
     Panel1: TPanel;
     RemoveLastLabel1: TMenuItem;
     RemoveAllLabel1: TMenuItem;
@@ -202,7 +202,7 @@ type
     procedure search1Click(Sender: TObject);
     procedure SlewCursorClick(Sender: TObject);
     procedure Target1Click(Sender: TObject);
-    procedure TrackTelescopeClick(Sender: TObject);
+    procedure TrackTelescope1Click(Sender: TObject);
     procedure VertScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
     procedure chart_zoomplusExecute(Sender: TObject);
@@ -479,7 +479,7 @@ search1.Caption:=infocoord_url[1,2];
 search2.Caption:=infocoord_url[2,2];
 search3.Caption:=infocoord_url[3,2];
 Telescope1.caption:=rsTelescope;
-TrackTelescope.Caption:=rsTrackTelesco;
+TrackTelescope1.Caption:=rsTrackTelesco;
 SlewCursor.Caption:=rsSlewToCursor;
 Slew1.caption:=rsSlew;
 Sync1.caption:=rsSync;
@@ -1130,7 +1130,7 @@ then begin
 end;
 end;
 
-procedure Tf_chart.TrackTelescopeClick(Sender: TObject);
+procedure Tf_chart.TrackTelescope1Click(Sender: TObject);
 begin
 if sc.cfgsc.TrackOn and(sc.cfgsc.TrackName=rsTelescope) then begin
    sc.cfgsc.TrackOn:=false;
@@ -1150,7 +1150,7 @@ if VerboseMsg then
    sc.MovetoRaDec(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec);
    Refresh;
 end;
-if Sender is TMenuItem then TMenuItem(Sender).Checked:=(sc.cfgsc.TrackOn and (sc.cfgsc.TrackName=rsTelescope));
+if Sender=TrackTelescope1 then TMenuItem(Sender).Checked:=(sc.cfgsc.TrackOn and (sc.cfgsc.TrackName=rsTelescope));
 end;
 
 Procedure FixPostscript(fn: string; printlandscape:boolean; pw,ph:integer);
