@@ -7556,7 +7556,8 @@ for i:=1 to Maxwindow do begin
     then TCPDaemon.TCPThrd[i].SendData('>'+tab+origin+' :'+tab+str);
 end;
 if ScriptPanel.Visible and (ActiveScript>=0) then begin
-   Fscript[ActiveScript].ObjectSelectionEvent(origin,str,striphtml(Tf_chart(MultiFrame1.ActiveObject).formatdesc));
+    if copy(str,1,i)=rsFrom then Fscript[ActiveScript].DistanceMeasurementEvent(origin,str)
+      else Fscript[ActiveScript].ObjectSelectionEvent(origin,str,striphtml(Tf_chart(MultiFrame1.ActiveObject).formatdesc));
 end;
 end;
 
