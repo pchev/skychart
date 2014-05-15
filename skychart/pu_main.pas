@@ -3107,7 +3107,7 @@ end;
 procedure Tf_main.TrackTelescopeExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with (MultiFrame1.ActiveObject as Tf_chart) do begin
-  TrackTelescopeClick(Sender);
+  TrackTelescope1Click(Sender);
 end;
 end;
 
@@ -7265,7 +7265,7 @@ if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
        else rotate180.ImageIndex:=92;
     Animation.Checked:=AnimationEnabled;
     TrackTelescope.Checked:=(sc.cfgsc.TrackOn and (sc.cfgsc.TrackName=rsTelescope));
-    Tf_chart(sender).TrackTelescope.Checked:=MenuTrackTelescope.Checked;
+    Tf_chart(sender).TrackTelescope1.Checked:=MenuTrackTelescope.Checked;
     ShowStars.Checked:=sc.cfgsc.showstars;
     ShowNebulae.Checked:=sc.cfgsc.shownebulae;
     ShowVO.Checked:=(catalog.cfgcat.starcatdef[vostar-BaseStar] or catalog.cfgcat.nebcatdef[voneb-BaseNeb]);
