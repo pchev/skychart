@@ -367,23 +367,37 @@ if (ra>=0) and assigned(FSelectObject) then FSelectObject(buf,ra,de);
 end;
 
 function Tf_obslist.FirstObj: boolean;
+var i: integer;
+    ok,ko : boolean;
 begin
-  StringGrid1.Row:=1;
-  if StringGrid1.RowHeights[StringGrid1.Row]>0 then begin
+  i:=0;
+  repeat
+    inc(i);
+    ko:=(i>=(StringGrid1.RowCount-1));
+    ok:=StringGrid1.RowHeights[i]>0;
+  until ok or ko;
+  if ok then begin
+    StringGrid1.Row:=i;
     SelectRow(StringGrid1.Row);
-    result:=true;
-  end else
-    result:=NextObj;
+  end;
+  result:=ok;
 end;
 
 function Tf_obslist.LastObj: boolean;
+var i: integer;
+    ok,ko : boolean;
 begin
-  StringGrid1.Row:=StringGrid1.RowCount-1;
-  if StringGrid1.RowHeights[StringGrid1.Row]>0 then begin
+  i:=StringGrid1.RowCount;
+  repeat
+    dec(i);
+    ko:=(i<=1);
+    ok:=StringGrid1.RowHeights[i]>0;
+  until ok or ko;
+  if ok then begin
+    StringGrid1.Row:=i;
     SelectRow(StringGrid1.Row);
-    result:=true;
-  end else
-    result:=PrevObj;
+  end;
+  result:=ok;
 end;
 
 function Tf_obslist.NextObj: boolean;
