@@ -1949,8 +1949,6 @@ basecaption:=caption;
 MultiFrame1.WindowList:=SubWindow;
 MultiFrame1.KeepLastChild:=true;
 ChildControl.visible:=false;
-BtnCloseChild.Glyph.LoadFromLazarusResource('CLOSE');
-BtnRestoreChild.Glyph.LoadFromLazarusResource('RESTORE');
 step:='Size control';
 if VerboseMsg then
  WriteTrace(step);
@@ -5679,6 +5677,7 @@ for i:=0 to numscript-1 do begin
        ScriptPanel.Visible:=true;
        ActiveScript:=i;
    end;
+   Fscript[i].PanelTitle.Caption:=ReadString(section,'Title',Fscript[i].PanelTitle.Caption);
    n:=ReadInteger(section,'numtoolbar1',0);
    for j:=0 to n-1 do Fscript[i].ConfigToolbar1.Add(ReadString(section,'toolbar1_'+inttostr(j),''));
    n:=ReadInteger(section,'numtoolbar2',0);
@@ -6450,6 +6449,7 @@ for i:=0 to numscript-1 do begin
    section:='ScriptPanel'+inttostr(i);
    EraseSection(section);
    WriteBool(section,'visible',Fscript[i].Visible);
+   WriteString(section,'Title',Fscript[i].PanelTitle.Caption);
    n:=Fscript[i].ConfigToolbar1.Count;
    WriteInteger(section,'numtoolbar1',n);
    for j:=0 to n-1 do WriteString(section,'toolbar1_'+inttostr(j),Fscript[i].ConfigToolbar1[j]);
@@ -7264,7 +7264,7 @@ if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
     if (abs(sc.cfgsc.theta)>(pi-secarc))and(abs(sc.cfgsc.theta)<(pi+secarc)) then rotate180.ImageIndex:=93
        else rotate180.ImageIndex:=92;
     Animation.Checked:=AnimationEnabled;
-    MenuTrackTelescope.Checked:=(sc.cfgsc.TrackOn and (sc.cfgsc.TrackName=rsTelescope));
+    TrackTelescope.Checked:=(sc.cfgsc.TrackOn and (sc.cfgsc.TrackName=rsTelescope));
     Tf_chart(sender).TrackTelescope.Checked:=MenuTrackTelescope.Checked;
     ShowStars.Checked:=sc.cfgsc.showstars;
     ShowNebulae.Checked:=sc.cfgsc.shownebulae;
@@ -7556,7 +7556,7 @@ for i:=1 to Maxwindow do begin
     then TCPDaemon.TCPThrd[i].SendData('>'+tab+origin+' :'+tab+str);
 end;
 if ScriptPanel.Visible and (ActiveScript>=0) then begin
-   Fscript[ActiveScript].ObjectSelectionEvent(origin,str);
+   Fscript[ActiveScript].ObjectSelectionEvent(origin,str,striphtml(Tf_chart(MultiFrame1.ActiveObject).formatdesc));
 end;
 end;
 

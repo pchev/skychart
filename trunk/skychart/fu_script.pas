@@ -49,7 +49,7 @@ type
     destructor Destroy; override;
     procedure Init;
     procedure ChartRefreshEvent(origin,str:string);
-    procedure ObjectSelectionEvent(origin,str:string);
+    procedure ObjectSelectionEvent(origin,str,longstr:string);
     procedure TelescopeMoveEvent(origin:string; ra,de: double);
     property ImageNormal: TImageList read FImageNormal  write FImageNormal ;
     property ContainerPanel: TPanel read FContainerPanel  write FContainerPanel ;
@@ -146,7 +146,7 @@ begin
         fscriptengine.ExecuteCmd:=FExecuteCmd;
         fscriptengine.Mainmenu:=FMainmenu;
      end;
-     fscriptengine.Load(FConfigScriptButton, FConfigScript, FConfigEvent);
+     fscriptengine.Load(FConfigScriptButton, FConfigScript, FConfigEvent,PanelTitle.Caption);
   end;
 end;
 
@@ -177,8 +177,10 @@ begin
 end;
 
 procedure Tf_script.ApplyScript(Sender: TObject);
+var tt: string;
 begin
- fscriptengine.Save(FConfigScriptButton, FConfigScript, FConfigEvent);
+ fscriptengine.Save(FConfigScriptButton, FConfigScript, FConfigEvent,tt);
+ PanelTitle.Caption:=tt;
 end;
 
 procedure Tf_script.SetExecuteCmd(value:TExecuteCmd);
@@ -198,9 +200,9 @@ begin
   if fscriptengine<>nil then fscriptengine.ChartRefreshEvent(origin,str);
 end;
 
-procedure Tf_script.ObjectSelectionEvent(origin,str:string);
+procedure Tf_script.ObjectSelectionEvent(origin,str,longstr:string);
 begin
-  if fscriptengine<>nil then fscriptengine.ObjectSelectionEvent(origin,str);
+  if fscriptengine<>nil then fscriptengine.ObjectSelectionEvent(origin,str,longstr);
 end;
 
 procedure Tf_script.TelescopeMoveEvent(origin:string; ra,de: double);
