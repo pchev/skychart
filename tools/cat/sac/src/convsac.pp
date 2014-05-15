@@ -187,8 +187,8 @@ repeat
   buf:=trim(nextword(lin));
   if buf='' then out.pa:=255
             else out.pa:=strtoint(buf);
-  buf:=trim(nextword(lin));
-  out.clas:=copy(buf,1,10);
+  buf:=trim(nextword(lin))+blanc;
+  out.clas:=copy(buf,1,11);
   buf:=trim(nextword(lin));
   buf:=trim(nextword(lin));
   buf:=trim(nextword(lin));
