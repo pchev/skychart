@@ -50,6 +50,7 @@ type
     procedure Init;
     procedure ChartRefreshEvent(origin,str:string);
     procedure ObjectSelectionEvent(origin,str,longstr:string);
+    procedure DistanceMeasurementEvent(origin,str:string);
     procedure TelescopeMoveEvent(origin:string; ra,de: double);
     property ImageNormal: TImageList read FImageNormal  write FImageNormal ;
     property ContainerPanel: TPanel read FContainerPanel  write FContainerPanel ;
@@ -212,6 +213,11 @@ end;
 procedure Tf_script.ObjectSelectionEvent(origin,str,longstr:string);
 begin
   if fscriptengine<>nil then fscriptengine.ObjectSelectionEvent(origin,str,longstr);
+end;
+
+procedure Tf_script.DistanceMeasurementEvent(origin,str:string);
+begin
+  if fscriptengine<>nil then fscriptengine.DistanceMeasurementEvent(origin,str);
 end;
 
 procedure Tf_script.TelescopeMoveEvent(origin:string; ra,de: double);

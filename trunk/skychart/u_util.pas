@@ -591,6 +591,7 @@ for i:=1 to length(html) do begin
         end;
    end;
 end;
+result:=StringReplace(result,'&nbsp;',' ',[rfReplaceAll]);
 end;
 
 function pos2(sub,str:string;i:integer):integer;
