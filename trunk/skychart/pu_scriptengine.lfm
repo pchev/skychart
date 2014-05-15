@@ -8,7 +8,7 @@ object f_scriptengine: Tf_scriptengine
   ClientWidth = 750
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  LCLVersion = '1.2.0.3'
+  LCLVersion = '1.2.2.0'
   object ButtonApply: TButton
     Left = 248
     Height = 25
@@ -76,14 +76,14 @@ object f_scriptengine: Tf_scriptengine
     Top = 48
     Width = 400
     Caption = 'Component'
-    ClientHeight = 248
+    ClientHeight = 249
     ClientWidth = 396
     TabOrder = 5
     object RadioButtonGroup: TRadioButton
       Left = 14
       Height = 26
       Top = 6
-      Width = 65
+      Width = 62
       Caption = 'Group'
       Checked = True
       OnClick = RadioButtonClick
@@ -94,14 +94,14 @@ object f_scriptengine: Tf_scriptengine
       Left = 14
       Height = 26
       Top = 46
-      Width = 70
+      Width = 69
       Caption = 'Button'
       OnClick = RadioButtonClick
       TabOrder = 1
     end
     object ButtonCaptionEdit: TEdit
       Left = 187
-      Height = 22
+      Height = 21
       Top = 48
       Width = 80
       OnChange = ButtonCaptionEditChange
@@ -110,23 +110,23 @@ object f_scriptengine: Tf_scriptengine
     end
     object Label3: TLabel
       Left = 134
-      Height = 16
+      Height = 15
       Top = 51
-      Width = 55
+      Width = 51
       Caption = 'Caption='
       ParentColor = False
     end
     object Label2: TLabel
       Left = 134
-      Height = 16
+      Height = 15
       Top = 11
-      Width = 55
+      Width = 51
       Caption = 'Caption='
       ParentColor = False
     end
     object GroupCaptionEdit: TEdit
       Left = 187
-      Height = 22
+      Height = 21
       Top = 8
       Width = 80
       OnChange = GroupCaptionEditChange
@@ -135,15 +135,15 @@ object f_scriptengine: Tf_scriptengine
     end
     object Label1: TLabel
       Left = 275
-      Height = 16
+      Height = 15
       Top = 11
-      Width = 34
+      Width = 31
       Caption = 'Cols='
       ParentColor = False
     end
     object GroupRowEdit: TEdit
       Left = 328
-      Height = 22
+      Height = 21
       Top = 8
       Width = 32
       OnChange = GroupRowEditChange
@@ -154,7 +154,7 @@ object f_scriptengine: Tf_scriptengine
       Left = 14
       Height = 26
       Top = 84
-      Width = 52
+      Width = 51
       Caption = 'Edit'
       OnClick = RadioButtonClick
       TabOrder = 5
@@ -163,7 +163,7 @@ object f_scriptengine: Tf_scriptengine
       Left = 14
       Height = 26
       Top = 126
-      Width = 66
+      Width = 64
       Caption = 'Memo'
       OnClick = RadioButtonClick
       TabOrder = 6
@@ -172,14 +172,14 @@ object f_scriptengine: Tf_scriptengine
       Left = 14
       Height = 26
       Top = 162
-      Width = 70
+      Width = 66
       Caption = 'Spacer'
       OnClick = RadioButtonClick
       TabOrder = 7
     end
     object MemoHeightEdit: TEdit
       Left = 187
-      Height = 22
+      Height = 21
       Top = 128
       Width = 80
       OnChange = MemoHeightEditChange
@@ -188,9 +188,9 @@ object f_scriptengine: Tf_scriptengine
     end
     object Label4: TLabel
       Left = 134
-      Height = 16
+      Height = 15
       Top = 131
-      Width = 49
+      Width = 45
       Caption = 'Height='
       ParentColor = False
     end
@@ -198,14 +198,14 @@ object f_scriptengine: Tf_scriptengine
       Left = 14
       Height = 26
       Top = 201
-      Width = 63
+      Width = 60
       Caption = 'Event'
       OnClick = RadioButtonClick
       TabOrder = 9
     end
     object EventComboBox: TComboBox
       Left = 134
-      Height = 24
+      Height = 23
       Top = 207
       Width = 188
       ItemHeight = 0
@@ -225,7 +225,7 @@ object f_scriptengine: Tf_scriptengine
     end
     object TimerIntervalEdit: TEdit
       Left = 328
-      Height = 22
+      Height = 21
       Top = 207
       Width = 56
       TabOrder = 11
@@ -290,7 +290,7 @@ object f_scriptengine: Tf_scriptengine
     TabOrder = 11
     object ScriptTitle: TEdit
       Left = 112
-      Height = 22
+      Height = 21
       Top = 14
       Width = 268
       TabOrder = 0

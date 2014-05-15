@@ -92,6 +92,7 @@ type
     mem: array of TMemo;
     snum:integer;
     sp: array of TPanel;
+    FConfigToolbar1,FConfigToolbar2: TStringlist;
     Fpascaleditor: Tf_pascaleditor;
     GroupIdx,ButtonIdx,EditIdx,MemoIdx,SpacerIdx,EventIdx: integer;
     FExecuteCmd: TExecuteCmd;
@@ -121,6 +122,8 @@ type
     procedure ChartRefreshEvent(origin,str:string);
     procedure ObjectSelectionEvent(origin,str,longstr:string);
     procedure TelescopeMoveEvent(origin:string; ra,de: double);
+    property ConfigToolbar1: TStringList read FConfigToolbar1 write FConfigToolbar1;
+    property ConfigToolbar2: TStringList read FConfigToolbar2 write FConfigToolbar2;
     property EditSurface: TPanel read FEditSurface write FEditSurface;
     property onApply: TNotifyEvent read FonApply write FonApply;
     property ExecuteCmd: TExecuteCmd read FExecuteCmd write FExecuteCmd;
@@ -652,10 +655,12 @@ if OpenDialog1.Execute then begin
   with inif do begin
   section:='ScriptPanel';
   titl:=ReadString(section,'Title',ScriptTitle.Text);
-{  n:=ReadInteger(section,'numtoolbar1',0);
-  for j:=0 to n-1 do Fscript[i].ConfigToolbar1.Add(ReadString(section,'toolbar1_'+inttostr(j),''));
+  n:=ReadInteger(section,'numtoolbar1',0);
+  ConfigToolbar1.Clear;
+  for j:=0 to n-1 do ConfigToolbar1.Add(ReadString(section,'toolbar1_'+inttostr(j),''));
   n:=ReadInteger(section,'numtoolbar2',0);
-  for j:=0 to n-1 do Fscript[i].ConfigToolbar2.Add(ReadString(section,'toolbar2_'+inttostr(j),''));  }
+  ConfigToolbar2.Clear;
+  for j:=0 to n-1 do ConfigToolbar2.Add(ReadString(section,'toolbar2_'+inttostr(j),''));
   n:=ReadInteger(section,'numscriptbutton',0);
   for j:=0 to n-1 do begin
     buf:=ReadString(section,'scriptbutton_'+inttostr(j),'');
@@ -672,6 +677,9 @@ if OpenDialog1.Execute then begin
    inif.Free;
   end;
   Load(ConfigScriptButton, ConfigScript, ConfigEvent,titl);
+  ConfigScriptButton.Free;
+  ConfigScript.Free;
+  ConfigEvent.Free;
 end;
 end;
 
@@ -693,12 +701,12 @@ if SaveDialog1.Execute then begin
   section:='ScriptPanel';
   EraseSection(section);
   WriteString(section,'Title',titl);
-{  n:=ConfigToolbar1.Count;
+  n:=ConfigToolbar1.Count;
   WriteInteger(section,'numtoolbar1',n);
   for j:=0 to n-1 do WriteString(section,'toolbar1_'+inttostr(j),ConfigToolbar1[j]);
-  n:=Fscript[i].ConfigToolbar2.Count;
+  n:=ConfigToolbar2.Count;
   WriteInteger(section,'numtoolbar2',n);
-  for j:=0 to n-1 do WriteString(section,'toolbar2_'+inttostr(j),Fscript[i].ConfigToolbar2[j]); }
+  for j:=0 to n-1 do WriteString(section,'toolbar2_'+inttostr(j),ConfigToolbar2[j]);
   n:=ConfigScriptButton.Count;
   WriteInteger(section,'numscriptbutton',n);
   for j:=0 to n-1 do WriteString(section,'scriptbutton_'+inttostr(j),'"'+ConfigScriptButton[j]+'"');
@@ -713,6 +721,9 @@ if SaveDialog1.Execute then begin
   finally
    inif.Free;
   end;
+  ConfigScriptButton.Free;
+  ConfigScript.Free;
+  ConfigEvent.Free;
 end;
 end;
 
