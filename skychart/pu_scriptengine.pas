@@ -12,6 +12,8 @@ uses  u_translation, u_constant, u_util, ActnList, pu_pascaleditor,
 
 type
 
+  Teventlist=(evInitialisation,evTimer,evTelescope_move,evChart_refresh,evObject_identification,evDistance_measurement);
+
   { Tf_scriptengine }
 
   Tf_scriptengine = class(TForm)
@@ -23,6 +25,9 @@ type
     ButtonApply: TButton;
     ButtonClear: TButton;
     ButtonDelete: TButton;
+    ScriptTitle: TEdit;
+    Panel2: TPanel;
+    TimerIntervalEdit: TEdit;
     EventComboBox: TComboBox;
     CompileMemo: TMemo;
     GroupBox1: TGroupBox;
@@ -91,12 +96,16 @@ type
     GroupIdx,ButtonIdx,EditIdx,MemoIdx,SpacerIdx,EventIdx: integer;
     FExecuteCmd: TExecuteCmd;
     FMainmenu: TMenu;
-    ChartName,RefreshText,SelectionText,DistanceText: string;
+    ChartName,RefreshText,SelectionText,DescriptionText,DistanceText: string;
     TelescopeRA,TelescopeDE: double;
     function  doExecuteCmd(cname:string; arg:Tstringlist):string;
     function  doGetS(varname:string; var str: string):Boolean;
     function  doGetI(varname:string; var i: Integer):Boolean;
     function doGetD(varname:string; var x: Double):Boolean;
+    Function doARtoStr(var ar: Double) : string;
+    Function doDEtoStr(var de: Double) : string;
+    Function doStrtoAR(str:string; var ar: Double) : boolean;
+    Function doStrtoDE(str:string; var de: Double) : boolean;
     procedure Button_Click(Sender: TObject);
     function  AddGroup(num,capt:string; pt: TWinControl; ctlperline:integer=1):TGroupBox;
     procedure AddButton(num,capt:string; pt: TWinControl);
@@ -107,10 +116,10 @@ type
     procedure CompileScripts;
   public
     { public declarations }
-    procedure Save(strbtn, strscr, eventscr: Tstringlist);
-    procedure Load(strbtn, strscr, eventscr: Tstringlist);
+    procedure Save(strbtn, strscr, eventscr: Tstringlist; var title:string);
+    procedure Load(strbtn, strscr, eventscr: Tstringlist; title:string);
     procedure ChartRefreshEvent(origin,str:string);
-    procedure ObjectSelectionEvent(origin,str:string);
+    procedure ObjectSelectionEvent(origin,str,longstr:string);
     procedure TelescopeMoveEvent(origin:string; ra,de: double);
     property EditSurface: TPanel read FEditSurface write FEditSurface;
     property onApply: TNotifyEvent read FonApply write FonApply;
@@ -137,6 +146,7 @@ begin
   if varname='CHARTNAME' then str:=ChartName
   else if varname='REFRESHTEXT' then str:=RefreshText
   else if varname='SELECTIONTEXT' then str:=SelectionText
+  else if varname='DESCRIPTIONTEXT' then str:=DescriptionText
   else if varname='DISTANCETEXT' then str:=DistanceText
   else result:=false;
 end;
@@ -155,13 +165,46 @@ begin
   result:=false;
 end;
 
-procedure Tf_scriptengine.Save(strbtn, strscr, eventscr: Tstringlist);
+Function Tf_scriptengine.doARtoStr(var ar: Double) : string;
+begin
+  // script do not work if a float parameter is not var.
+  result:=ARtoStr3(ar);
+end;
+
+Function Tf_scriptengine.doDEtoStr(var de: Double) : string;
+begin
+  result:=DEtoStr3(de);
+end;
+
+Function Tf_scriptengine.doStrtoAR(str:string; var ar: Double) : boolean;
+begin
+  if trim(str)<>'' then begin
+    ar:=Str3ToAR(str);
+    result:=(ar<>0);
+  end
+  else result:=false;
+end;
+
+Function Tf_scriptengine.doStrtoDE(str:string; var de: Double) : boolean;
+begin
+  if trim(str)<>'' then begin
+    str:=StringReplace(str,ldeg,'d',[rfReplaceAll]);
+    str:=StringReplace(str,lmin,'m',[rfReplaceAll]);
+    str:=StringReplace(str,lsec,'s',[rfReplaceAll]);
+    de:=Str3ToDE(str);
+    result:=(de<>0);
+  end
+  else result:=false;
+end;
+
+procedure Tf_scriptengine.Save(strbtn, strscr, eventscr: Tstringlist; var title:string);
 var m:TMemoryStream;
    i,j: integer;
    node:TTreeNode;
    buf,txt,nu: string;
    s:TStringList;
 begin
+  title:=ScriptTitle.Text;
   s:=TStringList.Create;
   strbtn.Clear;
   m:=TMemoryStream.Create;
@@ -193,13 +236,14 @@ begin
   s.Free;
 end;
 
-procedure Tf_scriptengine.Load(strbtn, strscr, eventscr: Tstringlist);
+procedure Tf_scriptengine.Load(strbtn, strscr, eventscr: Tstringlist; title:string);
 var m:TMemoryStream;
    bu,txt,cnu,nu,scrlin: string;
    i,j: integer;
    node:TTreeNode;
    s,p:TStringList;
 begin
+  ScriptTitle.Text:=title;
   // load toolbar
   m:=TMemoryStream.Create;
   strbtn.SaveToStream(m);
@@ -422,6 +466,7 @@ while node<>nil do begin
   node:=node.GetNext;
 end;
 CompileScripts;
+evscr[ord(evInitialisation)].Execute;
 if Assigned(FonApply) then FonApply(self);
 end;
 
@@ -505,7 +550,8 @@ end;
 
 procedure Tf_scriptengine.EventComboBoxChange(Sender: TObject);
 begin
-//  if ButtonUpdate.Tag=4 then ButtonUpdate.Visible:=true;
+  if ButtonUpdate.Tag=4 then ButtonUpdate.Visible:=true;
+  TimerIntervalEdit.Visible:=(EventComboBox.ItemIndex=1);
 end;
 
 procedure Tf_scriptengine.GroupCaptionEditChange(Sender: TObject);
@@ -531,6 +577,7 @@ procedure Tf_scriptengine.RadioButtonClick(Sender: TObject);
 begin
   ButtonUpdate.Tag:=0;
   ButtonUpdate.Visible:=false;
+  TimerIntervalEdit.Visible:=(EventComboBox.ItemIndex=1);
 end;
 
 procedure Tf_scriptengine.ButtonCaptionEditChange(Sender: TObject);
@@ -591,7 +638,7 @@ end;
 
 procedure Tf_scriptengine.ButtonLoadClick(Sender: TObject);
 var ConfigScriptButton, ConfigScript, ConfigEvent: Tstringlist;
-    fn,section,buf: string;
+    fn,section,buf,titl: string;
     inif: TMemIniFile;
     j,n: integer;
 begin
@@ -604,6 +651,7 @@ if OpenDialog1.Execute then begin
   try
   with inif do begin
   section:='ScriptPanel';
+  titl:=ReadString(section,'Title',ScriptTitle.Text);
 {  n:=ReadInteger(section,'numtoolbar1',0);
   for j:=0 to n-1 do Fscript[i].ConfigToolbar1.Add(ReadString(section,'toolbar1_'+inttostr(j),''));
   n:=ReadInteger(section,'numtoolbar2',0);
@@ -619,17 +667,17 @@ if OpenDialog1.Execute then begin
   for j:=0 to n-1 do ConfigScript.Add(ReadString(section,'script_'+inttostr(j),''));
   n:=ReadInteger(section,'numevents',0);
   for j:=0 to n-1 do ConfigEvent.Add(ReadString(section,'event_'+inttostr(j),''));
-  Load(ConfigScriptButton, ConfigScript, ConfigEvent);
   end;
   finally
    inif.Free;
   end;
+  Load(ConfigScriptButton, ConfigScript, ConfigEvent,titl);
 end;
 end;
 
 procedure Tf_scriptengine.ButtonSaveClick(Sender: TObject);
 var ConfigScriptButton, ConfigScript, ConfigEvent: Tstringlist;
-    fn,section: string;
+    fn,section,titl: string;
     inif: TMemIniFile;
     j,n: integer;
 begin
@@ -638,12 +686,13 @@ if SaveDialog1.Execute then begin
   ConfigScriptButton:=Tstringlist.create;
   ConfigScript:=Tstringlist.create;
   ConfigEvent:=Tstringlist.create;
-  Save(ConfigScriptButton, ConfigScript, ConfigEvent);
+  Save(ConfigScriptButton, ConfigScript, ConfigEvent,titl);
   inif:=TMeminifile.create(fn);
   try
   with inif do begin
   section:='ScriptPanel';
   EraseSection(section);
+  WriteString(section,'Title',titl);
 {  n:=ConfigToolbar1.Count;
   WriteInteger(section,'numtoolbar1',n);
   for j:=0 to n-1 do WriteString(section,'toolbar1_'+inttostr(j),ConfigToolbar1[j]);
@@ -734,7 +783,7 @@ begin
   EditIdx:=0;
   MemoIdx:=0;
   SpacerIdx:=0;
-  evscrnum:=3;
+  evscrnum:=sizeof(Teventlist)+1;
   SetLength(evscr,evscrnum);
   for i:=0 to evscrnum-1 do begin
     evscr[i]:=TPSScript.Create(self);
@@ -798,6 +847,7 @@ var i: integer;
 
 begin
 with Sender as TPSScript do begin
+  for i:=1 to gnum do AddRegisteredVariable('Group_'+inttostr(i), 'TGroupbox');
   for i:=1 to bnum do AddRegisteredVariable('Button_'+inttostr(i), 'TButton');
   for i:=1 to enum do AddRegisteredVariable('Edit_'+inttostr(i), 'TEdit');
   for i:=1 to mnum do AddRegisteredVariable('Memo_'+inttostr(i), 'TMemo');
@@ -807,8 +857,10 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doGetS, 'function GetS(varname:string; var str: string):Boolean;');
   AddMethod(self, @Tf_scriptengine.doGetI, 'function GetI(varname:string; var i: Integer):Boolean;');
   AddMethod(self, @Tf_scriptengine.doGetD, 'function GetD(varname:string; var x: double):boolean;');
-  AddFunction(@ARtoStr, 'Function ARToStr(ar: Double) : string;');
-  AddFunction(@DEtoStr, 'Function DEToStr(de: Double) : string;');
+  AddMethod(self, @Tf_scriptengine.doARtoStr, 'Function ARtoStr(var ar: Double) : string;');
+  AddMethod(self, @Tf_scriptengine.doDEtoStr, 'Function DEtoStr(var de: Double) : string;');
+  AddMethod(self, @Tf_scriptengine.doStrtoAR, 'Function StrtoAR(str:string; var ar: Double) : boolean;');
+  AddMethod(self, @Tf_scriptengine.doStrtoDE, 'Function StrtoDE(str:string; var de: Double) : boolean;');
 end;
 ProcessMenu(FMainmenu.Items);
 end;
@@ -826,6 +878,7 @@ var i: integer;
 
 begin
 with Sender as TPSScript do begin
+  for i:=1 to gnum do SetVarToInstance('Group_'+inttostr(i), gr[i-1]);
   for i:=1 to bnum do SetVarToInstance('Button_'+inttostr(i), bt[i-1]);
   for i:=1 to enum do SetVarToInstance('Edit_'+inttostr(i), ed[i-1]);
   for i:=1 to mnum do SetVarToInstance('Memo_'+inttostr(i), mem[i-1]);
@@ -837,17 +890,18 @@ procedure Tf_scriptengine.ChartRefreshEvent(origin,str:string);
 begin
 ChartName:=origin;
 RefreshText:=str;
-evscr[0].Execute;
+evscr[ord(evChart_refresh)].Execute;
 end;
 
-procedure Tf_scriptengine.ObjectSelectionEvent(origin,str:string);
+procedure Tf_scriptengine.ObjectSelectionEvent(origin,str,longstr:string);
 var l:integer;
 begin
 ChartName:=origin;
 l:=length(rsFrom);
 if copy(str,1,l)=rsFrom then DistanceText:=str
    else SelectionText:=str;
-evscr[1].Execute;
+DescriptionText:=longstr;
+evscr[ord(evObject_identification)].Execute;
 end;
 
 procedure Tf_scriptengine.TelescopeMoveEvent(origin:string; ra,de: double);
@@ -855,7 +909,7 @@ begin
 ChartName:=origin;
 TelescopeRA:=ra;
 TelescopeDE:=de;
-evscr[2].Execute;
+evscr[ord(evTelescope_move)].Execute;
 end;
 
 end.

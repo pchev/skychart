@@ -19,9 +19,9 @@ object f_script: Tf_script
     TabOrder = 0
     object Label1: TLabel
       Left = 8
-      Height = 15
+      Height = 16
       Top = 0
-      Width = 78
+      Width = 83
       Caption = 'Configuration'
       ParentColor = False
     end
@@ -47,7 +47,7 @@ object f_script: Tf_script
   object ToolBar1: TToolBar
     Left = 0
     Height = 26
-    Top = 34
+    Top = 28
     Width = 170
     AutoSize = True
     Caption = 'Toolbar 1'
@@ -56,7 +56,7 @@ object f_script: Tf_script
   object ToolBar2: TToolBar
     Left = 0
     Height = 26
-    Top = 60
+    Top = 54
     Width = 170
     AutoSize = True
     Caption = 'Toolbar 2'
@@ -64,8 +64,8 @@ object f_script: Tf_script
   end
   object MainPanel: TPanel
     Left = 0
-    Height = 138
-    Top = 86
+    Height = 144
+    Top = 80
     Width = 170
     Align = alClient
     ChildSizing.ShrinkHorizontal = crsHomogenousChildResize
@@ -76,11 +76,13 @@ object f_script: Tf_script
   end
   object PanelTitle: TPanel
     Left = 0
-    Height = 34
+    Height = 28
     Top = 0
     Width = 170
     Align = alTop
     Caption = 'PanelTitle'
+    Font.Style = [fsBold]
+    ParentFont = False
     TabOrder = 4
   end
 end
