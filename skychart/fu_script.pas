@@ -141,6 +141,8 @@ begin
   if FConfigScriptButton.Count>0 then begin
      if fscriptengine=nil then begin
         fscriptengine:=Tf_scriptengine.Create(self);
+        fscriptengine.ConfigToolbar1:=ConfigToolbar1;
+        fscriptengine.ConfigToolbar2:=ConfigToolbar2;
         fscriptengine.editsurface:=MainPanel;
         fscriptengine.onApply:=@ApplyScript;
         fscriptengine.ExecuteCmd:=FExecuteCmd;
@@ -168,6 +170,8 @@ procedure Tf_script.ButtonEditSrcClick(Sender: TObject);
 begin
   if fscriptengine=nil then begin
      fscriptengine:=Tf_scriptengine.Create(self);
+     fscriptengine.ConfigToolbar1:=ConfigToolbar1;
+     fscriptengine.ConfigToolbar2:=ConfigToolbar2;
      fscriptengine.editsurface:=MainPanel;
      fscriptengine.onApply:=@ApplyScript;
      fscriptengine.ExecuteCmd:=FExecuteCmd;
@@ -181,6 +185,11 @@ var tt: string;
 begin
  fscriptengine.Save(FConfigScriptButton, FConfigScript, FConfigEvent,tt);
  PanelTitle.Caption:=tt;
+ fedittoolbar.LoadToolbar(0,ConfigToolbar1);
+ fedittoolbar.LoadToolbar(1,ConfigToolbar2);
+ fedittoolbar.ActivateToolbar;
+ ToolBar1.Visible:=(VisibleControlCount(ToolBar1)>0);
+ ToolBar2.Visible:=(VisibleControlCount(ToolBar2)>0);
 end;
 
 procedure Tf_script.SetExecuteCmd(value:TExecuteCmd);
