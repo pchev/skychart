@@ -397,38 +397,41 @@ object f_scriptengine: Tf_scriptengine
       end    
       item
         Plugin = PSImport_DateUtils1
+      end    
+      item
+        Plugin = PSDllPlugin1
       end>
     UsePreProcessor = False
-    left = 64
+    left = 48
     top = 16
   end
   object PSImport_Classes1: TPSImport_Classes
     EnableStreams = True
     EnableClasses = True
-    left = 64
+    left = 48
     top = 73
   end
   object PSImport_DateUtils1: TPSImport_DateUtils
-    left = 64
+    left = 48
     top = 128
   end
   object PSImport_Forms1: TPSImport_Forms
     EnableForms = True
     EnableMenus = True
-    left = 64
+    left = 48
     top = 192
   end
   object PSImport_Controls1: TPSImport_Controls
     EnableStreams = True
     EnableGraphics = True
     EnableControls = True
-    left = 64
+    left = 48
     top = 248
   end
   object PSImport_StdCtrls1: TPSImport_StdCtrls
     EnableExtCtrls = True
     EnableButtons = True
-    left = 64
+    left = 48
     top = 312
   end
   object OpenDialog1: TOpenDialog
@@ -442,7 +445,11 @@ object f_scriptengine: Tf_scriptengine
   object EventTimer: TTimer
     Enabled = False
     OnTimer = EventTimerTimer
-    left = 64
+    left = 152
+    top = 128
+  end
+  object PSDllPlugin1: TPSDllPlugin
+    left = 48
     top = 368
   end
 end

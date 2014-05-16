@@ -27,6 +27,7 @@ type
     ButtonApply: TButton;
     ButtonClear: TButton;
     ButtonDelete: TButton;
+    PSDllPlugin1: TPSDllPlugin;
     ScriptTitle: TEdit;
     Panel2: TPanel;
     EventTimer: TTimer;
