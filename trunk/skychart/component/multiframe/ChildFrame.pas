@@ -200,6 +200,8 @@ skipmouseeventcount=4; // duplicate mousemove events
 skipmouseeventcount=1;
 {$endif}
 
+{$i childbutton.inc}
+
 { TCdCSplitter }
 
 procedure TCdCSplitter.MouseDown(Button: TMouseButton; Shift:TShiftState; X,Y:Integer);
@@ -221,6 +223,7 @@ end;
      Class creator
 }
 constructor TChildFrame.Create(AOwner:TComponent);
+var m: TStringStream;
 begin
 inherited Create(AOwner);
 BorderW:=2;  TitleHeight:=15;
@@ -344,7 +347,10 @@ ButtonClose.Height:=TitleHeight-2;
 ButtonClose.Transparent:=true;
 ButtonClose.Flat:=true;
 ButtonClose.Caption:='';
-ButtonClose.Glyph.LoadFromLazarusResource('CLOSE');
+m:=TStringStream.Create(closebmp);
+m.Position:=0;
+ButtonClose.Glyph.LoadFromStream(m);
+m.Free;
 ButtonClose.Parent:=MenuBar;
 ButtonClose.Align:=alRight;
 ButtonClose.OnMouseUp:=@ButtonCloseMouseUp;
@@ -354,7 +360,10 @@ ButtonMaximize.Height:=TitleHeight-2;
 ButtonMaximize.Transparent:=true;
 ButtonMaximize.Flat:=true;
 ButtonMaximize.Caption:='';
-ButtonMaximize.Glyph.LoadFromLazarusResource('MAXI');
+m:=TStringStream.Create(maxibmp);
+m.Position:=0;
+ButtonMaximize.Glyph.LoadFromStream(m);
+m.Free;
 ButtonMaximize.Parent:=MenuBar;
 ButtonMaximize.Align:=alRight;
 ButtonMaximize.OnClick:=@ButtonMaximizeClick;
