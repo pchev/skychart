@@ -2053,6 +2053,7 @@ for i:=0 to numscript-1 do begin
   Fscript[i].Align:=alClient;
   Fscript[i].Visible:=false;
   Fscript[i].ExecuteCmd:=ExecuteCmd;
+  if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
   Fscript[i].Parent:=ScriptPanel;
 end;
 Splitter1.ResizeControl:=ScriptPanel;
@@ -8297,6 +8298,7 @@ if MultiFrame1.ActiveObject<>nil then begin
    if cfgm.ShowTitlePos then caption:=basecaption+' - '+MultiFrame1.ActiveChild.Caption+blank+blank+Tf_chart(MultiFrame1.ActiveObject).sc.GetChartPos
       else caption:=basecaption+' - '+MultiFrame1.ActiveChild.Caption;
    Tf_chart(MultiFrame1.ActiveObject).ChartActivate;
+   if Fscript[ActiveScript].visible then Fscript[ActiveScript].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
 end
 else
    caption:=basecaption;
@@ -9133,6 +9135,7 @@ for i:=0 to numscript-1 do begin
   Fscript[i].TimeU:=TimeU;
   Fscript[i].ToolBarFOV:=ToolBarFOV;
   Fscript[i].Mainmenu:=MainMenu1;
+  if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
   Fscript[i].Init;
 end;
 Splitter1.ResizeControl:=ScriptPanel;
@@ -9153,6 +9156,7 @@ begin
            ScriptPanel.Visible:=true;
            Splitter1.Visible:=true;
            Splitter1.ResizeControl:=ScriptPanel;
+           if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
         end;
      end
      else Fscript[i].Visible:=false;
