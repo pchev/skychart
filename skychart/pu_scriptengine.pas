@@ -8,7 +8,11 @@ uses  u_translation, u_constant, u_util, ActnList, pu_pascaleditor,
   StdCtrls, ExtCtrls, Menus, Classes, SysUtils, FileUtil, IniFiles,
   uPSComponent, uPSComponent_Default, uPSComponent_DB, uPSComponent_Forms,
   uPSComponent_Controls, uPSComponent_StdCtrls, Forms, Controls, Graphics,
-  Dialogs, ComCtrls, Buttons,uPSCompiler, uPSRuntime, math;
+  Dialogs, ComCtrls, Buttons,uPSCompiler, uPSRuntime, math
+  {$ifdef mswindows}
+  , uPSComponent_COM
+  {$endif}
+  ;
 
 type
 
@@ -50,6 +54,9 @@ type
     PSImport_DateUtils1: TPSImport_DateUtils;
     PSImport_Forms1: TPSImport_Forms;
     PSImport_StdCtrls1: TPSImport_StdCtrls;
+    {$ifdef mswindows}
+    PSImport_ComObj1: TPSImport_ComObj;
+    {$endif}
     RadioButtonEvent: TRadioButton;
     RadioButtonGroup: TRadioButton;
     RadioButtonButton: TRadioButton;
@@ -885,6 +892,10 @@ begin
   EditIdx:=0;
   MemoIdx:=0;
   SpacerIdx:=0;
+  {$ifdef mswindows}
+    PSImport_ComObj1:=TPSImport_ComObj.Create(self);
+    TPSPluginItem(TplPSScript.Plugins.Add).Plugin:=PSImport_ComObj1;
+  {$endif}
   evscrnum:=ord(High(Teventlist))+1;
   SetLength(evscr,evscrnum);
   for i:=0 to evscrnum-1 do begin
