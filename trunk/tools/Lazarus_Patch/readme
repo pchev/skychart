@@ -1,0 +1,4 @@
+Apply the patch PascalScriptCOM.patch in the directory:
+$LAZDIR/components/PascalScript/
+
+This enable COM object scripting on Windows. 

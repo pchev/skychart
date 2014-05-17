@@ -1,0 +1,271 @@
+Index: Source/PascalScriptFPC.inc
+===================================================================
+--- Source/PascalScriptFPC.inc	(révision 44854)
++++ Source/PascalScriptFPC.inc	(copie de travail)
+@@ -1,14 +1,19 @@
+   
+   {$DEFINE PS_HAVEVARIANT}
+   {$DEFINE PS_DYNARRAY}
+-  {$DEFINE PS_NOIDISPATCH}
++  {$ifndef mswindows}
++    {$DEFINE PS_NOIDISPATCH}
++  {$endif}  
+   {.$if (fpc_version=2) and (fpc_release>=3) and (fpc_patch>=1)}
+-  {$if (fpc_version=2) and ((fpc_release=2) and (fpc_patch>=4)) or (fpc_release>2)}
++  {$if (fpc_version=2) and ((fpc_release=2) and (fpc_patch>=4)) or (fpc_release>2) or (fpc_version>2)}
+     {$UNDEF FPC_OLD_FIX}
+     {$DEFINE PS_STACKALIGN}
+     {$UNDEF PS_FPCSTRINGWORKAROUND}
+     {$DEFINE PS_RESBEFOREPARAMETERS}
+-    {$DEFINE x64_string_result_as_varparameter}    
++    {$DEFINE x64_string_result_as_varparameter}
++    {$ifdef mswindows}
++      {$DEFINE PS_FPC_HAS_COM}
++    {$endif}
+   {FreePascal 2.3.1 and above has much Delphi compatibility bugs fixed}
+   {$else}
+     {$DEFINE FPC_OLD_FIX}
+Index: Source/PascalScript_Core_Reg.pas
+===================================================================
+--- Source/PascalScript_Core_Reg.pas	(révision 44854)
++++ Source/PascalScript_Core_Reg.pas	(copie de travail)
+@@ -30,9 +30,7 @@
+   uPSComponent,
+   uPSDebugger,
+   uPSComponent_Default,
+- {$IFNDEF FPC}
+   uPSComponent_COM,
+- {$ENDIF}
+   uPSComponent_DB,
+   uPSComponent_Forms,
+   uPSComponent_Controls,
+@@ -45,9 +43,7 @@
+                                        TPSDllPlugin,
+                                        TPSImport_Classes,
+                                        TPSImport_DateUtils,
+-                                       {$IFNDEF FPC}
+                                        TPSImport_ComObj,
+-                                       {$ENDIF}
+                                        TPSImport_DB,
+                                        TPSImport_Forms,
+                                        TPSImport_Controls,
+Index: Source/pascalscript.lpk
+===================================================================
+--- Source/pascalscript.lpk	(révision 44854)
++++ Source/pascalscript.lpk	(copie de travail)
+@@ -1,4 +1,4 @@
+-<?xml version="1.0"?>
++<?xml version="1.0" encoding="UTF-8"?>
+ <CONFIG>
+   <Package Version="4">
+     <Name Value="pascalscript"/>
+@@ -9,15 +9,6 @@
+       <SearchPaths>
+         <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+       </SearchPaths>
+-      <Parsing>
+-        <SyntaxOptions>
+-          <DelphiCompat Value="True"/>
+-          <UseAnsiStrings Value="True"/>
+-        </SyntaxOptions>
+-      </Parsing>
+-      <CodeGeneration>
+-        <Generate Value="Faster"/>
+-      </CodeGeneration>
+       <Other>
+         <Verbosity>
+           <ShowHints Value="False"/>
+@@ -60,7 +51,7 @@
+ RemObjects Software
+ "/>
+     <Version Build="1"/>
+-    <Files Count="43">
++    <Files Count="46">
+       <Item1>
+         <Filename Value="uPSRuntime.pas"/>
+         <UnitName Value="uPSRuntime"/>
+@@ -234,6 +225,18 @@
+         <Filename Value="x86.inc"/>
+         <Type Value="Include"/>
+       </Item43>
++      <Item44>
++        <Filename Value="uPSComponent_COM.pas"/>
++        <UnitName Value="uPSComponent_COM"/>
++      </Item44>
++      <Item45>
++        <Filename Value="uPSC_comobj.pas"/>
++        <UnitName Value="uPSC_comobj"/>
++      </Item45>
++      <Item46>
++        <Filename Value="uPSR_comobj.pas"/>
++        <UnitName Value="uPSR_comobj"/>
++      </Item46>
+     </Files>
+     <Type Value="RunAndDesignTime"/>
+     <RequiredPkgs Count="1">
+Index: Source/pascalscript.pas
+===================================================================
+--- Source/pascalscript.pas	(révision 44854)
++++ Source/pascalscript.pas	(copie de travail)
+@@ -7,13 +7,15 @@
+ interface
+ 
+ uses
+-  uPSRuntime, uPSR_stdctrls, PascalScript_Core_Reg, uPSC_buttons, uPSC_classes, 
+-  uPSC_controls, uPSC_dateutils, uPSC_DB, uPSC_dll, uPSC_extctrls, uPSC_forms, uPSC_graphics, 
+-  uPSC_menus, uPSC_std, uPSC_stdctrls, uPSCompiler, uPSComponent, uPSComponent_Controls, 
+-  uPSComponent_DB, uPSComponent_Default, uPSComponent_Forms, uPSComponent_StdCtrls, uPSUtils, 
+-  uPSDebugger, uPSDisassembly, uPSPreProcessor, uPSR_buttons, uPSR_classes, uPSR_controls, 
+-  uPSR_dateutils, uPSR_DB, uPSR_dll, uPSR_extctrls, uPSR_forms, uPSR_graphics, uPSR_menus, 
+-  uPSR_std, LazarusPackageIntf;
++  uPSRuntime, uPSR_stdctrls, PascalScript_Core_Reg, uPSC_buttons, 
++  uPSC_classes, uPSC_controls, uPSC_dateutils, uPSC_DB, uPSC_dll, 
++  uPSC_extctrls, uPSC_forms, uPSC_graphics, uPSC_menus, uPSC_std, 
++  uPSC_stdctrls, uPSCompiler, uPSComponent, uPSComponent_Controls, 
++  uPSComponent_DB, uPSComponent_Default, uPSComponent_Forms, 
++  uPSComponent_StdCtrls, uPSUtils, uPSDebugger, uPSDisassembly, 
++  uPSPreProcessor, uPSR_buttons, uPSR_classes, uPSR_controls, uPSR_dateutils, 
++  uPSR_DB, uPSR_dll, uPSR_extctrls, uPSR_forms, uPSR_graphics, uPSR_menus, 
++  uPSR_std, uPSComponent_COM, uPSC_comobj, uPSR_comobj, LazarusPackageIntf;
+ 
+ implementation
+ 
+Index: Source/uPSC_comobj.pas
+===================================================================
+--- Source/uPSC_comobj.pas	(révision 44854)
++++ Source/uPSC_comobj.pas	(copie de travail)
+@@ -21,6 +21,19 @@
+ 
+ procedure SIRegister_ComObj(cl: TPSPascalCompiler);
+ begin
++{$IFDEF FPC}
++    {$IFDEF PS_FPC_HAS_COM}
++    cl.AddTypeS('HResult', 'LongInt');
++    cl.AddTypeS('TGUID', 'record D1: LongWord; D2: Word; D3: Word; D4: array[0..7] of Byte; end;');
++    cl.AddTypeS('TCLSID', 'TGUID');
++    cl.AddTypeS('TIID', 'TGUID');
++    cl.AddDelphiFunction('procedure OleCheck(Result: HResult);');
++    cl.AddDelphiFunction('function StringToGUID(const S: string): TGUID;');
++    cl.AddDelphiFunction('function CreateComObject(const ClassID: TGUID): IUnknown;');
++    cl.AddDelphiFunction('function CreateOleObject(const ClassName: String): IDispatch;');
++    cl.AddDelphiFunction('function GetActiveOleObject(const ClassName: String): IDispatch;');
++    {$ENDIF}
++{$ELSE}
+   cl.AddTypeS('HResult', 'LongInt');
+   cl.AddTypeS('TGUID', 'record D1: LongWord; D2: Word; D3: Word; D4: array[0..7] of Byte; end;');
+   cl.AddTypeS('TCLSID', 'TGUID');
+@@ -34,6 +47,7 @@
+ {$ENDIF}
+   cl.AddDelphiFunction('function CreateOleObject(const ClassName: String): IDispatch;');
+   cl.AddDelphiFunction('function GetActiveOleObject(const ClassName: String): IDispatch;');
++{$ENDIF}
+ end;
+ 
+ end.
+Index: Source/uPSCompiler.pas
+===================================================================
+--- Source/uPSCompiler.pas	(révision 44854)
++++ Source/uPSCompiler.pas	(copie de travail)
+@@ -1724,7 +1724,7 @@
+ 
+ implementation
+ 
+-uses {$IFDEF DELPHI5}ComObj, {$ENDIF}Classes, typInfo;
++uses {$IFDEF DELPHI5}ComObj, {$ENDIF}{$IFDEF PS_FPC_HAS_COM}ComObj, {$ENDIF}Classes, typInfo;
+ 
+ {$IFDEF DELPHI3UP}
+ resourceString
+Index: Source/uPSR_comobj.pas
+===================================================================
+--- Source/uPSR_comobj.pas	(révision 44854)
++++ Source/uPSR_comobj.pas	(copie de travail)
+@@ -5,17 +5,22 @@
+ {$I PascalScript.inc}
+ interface
+ uses
+-  uPSRuntime, uPSUtils;
++  {$IFDEF PS_FPC_HAS_COM}sysutils, {$ENDIF}uPSRuntime, uPSUtils;
+ 
+ 
+ procedure RIRegister_ComObj(cl: TPSExec);
+ 
+ implementation
+-uses
+-{$IFDEF DELPHI3UP}
+-  ComObj;
++{$IFDEF FPC}
++  {$IFDEF PS_FPC_HAS_COM}
++   uses ComObj;
++  {$ENDIF}
+ {$ELSE}
+-  SysUtils, Ole2;
++  {$IFDEF DELPHI3UP}
++   uses ComObj;
++  {$ELSE}
++   uses SysUtils, Ole2;
++  {$ENDIF}
+ {$ENDIF}
+ {$IFNDEF DELPHI3UP}
+ 
+@@ -89,6 +94,15 @@
+ 
+ procedure RIRegister_ComObj(cl: TPSExec);
+ begin
++{$IFDEF FPC}
++    {$IFDEF PS_FPC_HAS_COM}
++    cl.RegisterDelphiFunction(@OleCheck, 'OleCheck', cdRegister);
++    cl.RegisterDelphiFunction(@StringToGUID, 'StringToGUID', cdRegister);
++    cl.RegisterDelphiFunction(@CreateComObject, 'CreateComObject', cdRegister);
++    cl.RegisterDelphiFunction(@CreateOleObject, 'CREATEOLEOBJECT', cdRegister);
++    cl.RegisterDelphiFunction(@GetActiveOleObject, 'GETACTIVEOLEOBJECT', cdRegister);
++    {$ENDIF}
++{$ELSE}
+   cl.RegisterDelphiFunction(@OleCheck, 'OleCheck', cdRegister);
+ {$IFNDEF PS_NOINTERFACES}
+ {$IFDEF DELPHI3UP}
+@@ -98,6 +112,8 @@
+ {$ENDIF}
+   cl.RegisterDelphiFunction(@CreateOleObject, 'CREATEOLEOBJECT', cdRegister);
+   cl.RegisterDelphiFunction(@GetActiveOleObject, 'GETACTIVEOLEOBJECT', cdRegister);
++{$ENDIF}
++
+ end;
+ 
+ end.
+Index: Source/uPSRuntime.pas
+===================================================================
+--- Source/uPSRuntime.pas	(révision 44854)
++++ Source/uPSRuntime.pas	(copie de travail)
+@@ -1101,7 +1101,7 @@
+ 
+ implementation
+ uses
+-  TypInfo {$IFDEF DELPHI3UP}{$IFNDEF FPC} , ComObj {$ENDIF}{$ENDIF};
++  TypInfo {$IFDEF PS_FPC_HAS_COM}, ComObj{$ENDIF} {$IFDEF DELPHI3UP}{$IFNDEF FPC} , ComObj {$ENDIF}{$ENDIF};
+ 
+ {$IFDEF DELPHI3UP }
+ resourceString
+@@ -9345,7 +9345,9 @@
+   RegisterDelphiFunction(@VarIsEmpty, 'VARISEMPTY', cdRegister);
+   RegisterDelphiFunction(@Null, 'NULL', cdRegister);
+   RegisterDelphiFunction(@VarIsNull, 'VARISNULL', cdRegister);
++  {$IFNDEF FPC}
+   RegisterDelphiFunction(@VarType, 'VARTYPE', cdRegister);
++  {$ENDIF}
+   {$IFNDEF PS_NOIDISPATCH}
+   RegisterDelphiFunction(@IDispatchInvoke, 'IDISPATCHINVOKE', cdregister);
+   {$ENDIF}
+@@ -12625,8 +12627,12 @@
+       {$ELSE}
+        if not Succeeded(i) then
+        begin
+-         if i = DISP_E_EXCEPTION then
++	 if i = DISP_E_EXCEPTION then
++	   {$IFDEF FPC}
++	   raise Exception.Create(ExceptInfo.Source+': '+ExceptInfo.Description)
++	   {$ELSE}
+            raise Exception.Create(ExceptInfo.bstrSource+': '+ExceptInfo.bstrDescription)
++	   {$ENDIF}
+          else
+            raise Exception.Create(SysErrorMessage(i));
+        end;
