@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-07 15:03+0000\n"
+"POT-Creation-Date: 2014-05-17 19:00+0000\n"
 "PO-Revision-Date: 2014-05-01 08:32+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-11 18:17+0000\n"
-"X-Generator: Launchpad (build 16996)\n"
+"X-Launchpad-Export-Date: 2014-05-17 19:21+0000\n"
+"X-Generator: Launchpad (build 17007)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -577,6 +577,10 @@ msgstr "Vytvořit katalog"
 msgid "But never fainter than magnitude"
 msgstr "Ne však slabší, než magnituda"
 
+#: u_translation.rsbutton
+msgid "Button"
+msgstr ""
+
 #: u_translation.rsby
 msgid "by"
 msgstr "po"
@@ -628,6 +632,10 @@ msgstr "%sNelze otevřít databázi %s! %s"
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr "Nelze zapsat do"
+
+#: u_translation.rscaption
+msgid "Caption"
+msgstr ""
 
 #: u_translation.rscartesian
 msgid "Cartesian"
@@ -757,6 +765,10 @@ msgstr "Informace o mapě"
 msgid "Chart legend"
 msgstr "Legenda mapy"
 
+#: u_translation.rschartrefresh
+msgid "Chart refresh"
+msgstr ""
+
 #: u_translation.rscharts
 msgid "Charts"
 msgstr "Mapy"
@@ -796,6 +808,10 @@ msgstr "Vyčistit mapu"
 #: u_translation.rsclear
 msgid "Clear"
 msgstr "Smazat"
+
+#: u_translation.rsclearall
+msgid "Clear all"
+msgstr ""
 
 #: u_translation.rscleartarget
 msgid "Clear Target"
@@ -860,6 +876,10 @@ msgstr "Barva, linie"
 #: u_translation.rscolorsaturat
 msgid "Colour saturation"
 msgstr "Nasycení barvy"
+
+#: u_translation.rscolumns
+msgid "Columns"
+msgstr ""
 
 #: u_translation.rscomet
 msgid "Comet"
@@ -1369,6 +1389,10 @@ msgstr "Časový interval mezi snímky"
 msgid "Delete"
 msgstr "Smazat"
 
+#: u_translation.rsdeleteallthe
+msgid "Delete %s, all the child nodes and the scripts?"
+msgstr ""
+
 #: u_translation.rsdeletecomple
 msgid "Delete completed"
 msgstr "Smazat dokončené"
@@ -1761,6 +1785,10 @@ msgstr "Upravit operace linií"
 msgid "Edit object types"
 msgstr "Upravit typ objektu"
 
+#: u_translation.rseditscript
+msgid "Edit Script"
+msgstr ""
+
 #: u_translation.rsedittimeincr
 msgid "Edit time increment"
 msgstr ""
@@ -1916,6 +1944,10 @@ msgstr "Večer"
 #: u_translation.rseveningtwili
 msgid "Evening twilight"
 msgstr "Večerní soumrak"
+
+#: u_translation.rsevent
+msgid "Event"
+msgstr ""
 
 #: u_translation.rsevery
 msgid "every "
@@ -2305,6 +2337,10 @@ msgstr "Zelená"
 msgid "Grid spacing"
 msgstr "Jemnost sítě"
 
+#: u_translation.rsgroup
+msgid "Group"
+msgstr ""
+
 #: u_translation.rsgrstransit
 msgid "GRS transit"
 msgstr "Přechod GRS"
@@ -2556,6 +2592,10 @@ msgstr "Informace z katalogu"
 #: u_translation.rsinit
 msgid "Init"
 msgstr "Init"
+
+#: u_translation.rsinitalisatio
+msgid "Initalisation"
+msgstr ""
 
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
@@ -3081,6 +3121,10 @@ msgstr "Střední k datu"
 msgid "Mean position"
 msgstr "Střední pozice"
 
+#: u_translation.rsmemo
+msgid "Memo"
+msgstr ""
+
 #: u_translation.rsmercator
 msgid "Mercator"
 msgstr "Mercatorova"
@@ -3496,6 +3540,10 @@ msgstr "Filtrování objektů"
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
 msgstr "Nastavení filtru objektů"
+
+#: u_translation.rsobjectidenti
+msgid "Object identification"
+msgstr ""
 
 #: u_translation.rsobjectlist
 msgid "Object list"
@@ -4537,6 +4585,14 @@ msgstr "Prohledat adresář"
 msgid "Scope Adv"
 msgstr "Scope pokročilé"
 
+#: u_translation.rsscript
+msgid "Script"
+msgstr ""
+
+#: u_translation.rsscripteditor
+msgid "Script editor"
+msgstr ""
+
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
 msgstr "Posuvníky"
@@ -5069,6 +5125,10 @@ msgstr "Řazení indexového souboru "
 msgid "South"
 msgstr "Jih"
 
+#: u_translation.rsspacer
+msgid "Spacer"
+msgstr ""
+
 #: u_translation.rsspectralclas
 msgid "Spectral class"
 msgstr "Spektrální třída"
@@ -5309,6 +5369,10 @@ msgstr "Dalekohled"
 msgid "Telescope focal length"
 msgstr ""
 
+#: u_translation.rstelescopemov
+msgid "Telescope move"
+msgstr ""
+
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "Dalekohled není připojen"
@@ -5405,6 +5469,10 @@ msgstr "Čas"
 msgid "Timeout [ms]"
 msgstr "Timeout [ms]"
 
+#: u_translation.rstimer
+msgid "Timer"
+msgstr ""
+
 #: u_translation.rstimesimulati
 msgid "Time simulation"
 msgstr "Časová simulace"
@@ -5443,6 +5511,10 @@ msgstr "Nástrojové lišty"
 
 #: u_translation.rstoolbaredito
 msgid "Tool bar editor"
+msgstr ""
+
+#: u_translation.rstoolbox
+msgid "Tool box"
 msgstr ""
 
 #: u_translation.rstools

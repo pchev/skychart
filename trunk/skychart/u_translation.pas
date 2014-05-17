@@ -1510,6 +1510,24 @@ resourcestring
   rsSetupOption = 'Setup Options';
   rsTools = 'Tools';
   rsZoom3 = 'Zoom';
+  rsToolBox = 'Tool box';
+  rsScript = 'Script';
+  rsEditScript = 'Edit Script';
+  rsClearAll = 'Clear all';
+  rsGroup = 'Group';
+  rsButton = 'Button';
+  rsMemo = 'Memo';
+  rsSpacer = 'Spacer';
+  rsEvent = 'Event';
+  rsCaption = 'Caption';
+  rsColumns = 'Columns';
+  rsInitalisatio = 'Initalisation';
+  rsTimer = 'Timer';
+  rsTelescopeMov = 'Telescope move';
+  rsChartRefresh = 'Chart refresh';
+  rsObjectIdenti = 'Object identification';
+  rsScriptEditor = 'Script editor';
+  rsDeleteAllThe = 'Delete %s, all the child nodes and the scripts?';
 
 implementation
 

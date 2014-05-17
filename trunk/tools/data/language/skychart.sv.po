@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-05-07 15:03+0000\n"
+"POT-Creation-Date: 2014-05-17 19:00+0000\n"
 "PO-Revision-Date: 2014-05-01 08:39+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-11 18:17+0000\n"
-"X-Generator: Launchpad (build 16996)\n"
+"X-Launchpad-Export-Date: 2014-05-17 19:21+0000\n"
+"X-Generator: Launchpad (build 17007)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -576,6 +576,10 @@ msgstr "Skapa katalog"
 msgid "But never fainter than magnitude"
 msgstr "Men aldrig svagare än magnitud"
 
+#: u_translation.rsbutton
+msgid "Button"
+msgstr ""
+
 #: u_translation.rsby
 msgid "by"
 msgstr "var"
@@ -627,6 +631,10 @@ msgstr "%sKan inte öppna databas %s! %s"
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr "Kan inte skriva till"
+
+#: u_translation.rscaption
+msgid "Caption"
+msgstr ""
 
 #: u_translation.rscartesian
 msgid "Cartesian"
@@ -756,6 +764,10 @@ msgstr "Kartinformation"
 msgid "Chart legend"
 msgstr "Kartbeskrivning"
 
+#: u_translation.rschartrefresh
+msgid "Chart refresh"
+msgstr ""
+
 #: u_translation.rscharts
 msgid "Charts"
 msgstr "Kartor"
@@ -795,6 +807,10 @@ msgstr "Städa upp på kartan"
 #: u_translation.rsclear
 msgid "Clear"
 msgstr "Nollställ"
+
+#: u_translation.rsclearall
+msgid "Clear all"
+msgstr ""
 
 #: u_translation.rscleartarget
 msgid "Clear Target"
@@ -859,6 +875,10 @@ msgstr "Färg, linje-mode"
 #: u_translation.rscolorsaturat
 msgid "Colour saturation"
 msgstr "Färgmättnad"
+
+#: u_translation.rscolumns
+msgid "Columns"
+msgstr ""
 
 #: u_translation.rscomet
 msgid "Comet"
@@ -1368,6 +1388,10 @@ msgstr "Fördröjning mellan bildrutor"
 msgid "Delete"
 msgstr "Ta bort"
 
+#: u_translation.rsdeleteallthe
+msgid "Delete %s, all the child nodes and the scripts?"
+msgstr ""
+
 #: u_translation.rsdeletecomple
 msgid "Delete completed"
 msgstr "Borttagning klar"
@@ -1760,6 +1784,10 @@ msgstr "Ändra linjeoperation"
 msgid "Edit object types"
 msgstr "Ändra objekttyper"
 
+#: u_translation.rseditscript
+msgid "Edit Script"
+msgstr ""
+
 #: u_translation.rsedittimeincr
 msgid "Edit time increment"
 msgstr ""
@@ -1915,6 +1943,10 @@ msgstr "Kväll"
 #: u_translation.rseveningtwili
 msgid "Evening twilight"
 msgstr "Skymning"
+
+#: u_translation.rsevent
+msgid "Event"
+msgstr ""
 
 #: u_translation.rsevery
 msgid "every "
@@ -2304,6 +2336,10 @@ msgstr "Grön"
 msgid "Grid spacing"
 msgstr "Mellanrum rutnät"
 
+#: u_translation.rsgroup
+msgid "Group"
+msgstr ""
+
 #: u_translation.rsgrstransit
 msgid "GRS transit"
 msgstr "GRS transit"
@@ -2555,6 +2591,10 @@ msgstr "Information från katalog"
 #: u_translation.rsinit
 msgid "Init"
 msgstr "Init"
+
+#: u_translation.rsinitalisatio
+msgid "Initalisation"
+msgstr ""
 
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
@@ -3080,6 +3120,10 @@ msgstr "Medelvärde datum"
 msgid "Mean position"
 msgstr "Medelposition"
 
+#: u_translation.rsmemo
+msgid "Memo"
+msgstr ""
+
 #: u_translation.rsmercator
 msgid "Mercator"
 msgstr "Mercator-projektion"
@@ -3495,6 +3539,10 @@ msgstr "Objektfilter"
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
 msgstr "Objektfilter inställningar"
+
+#: u_translation.rsobjectidenti
+msgid "Object identification"
+msgstr ""
 
 #: u_translation.rsobjectlist
 msgid "Object list"
@@ -4536,6 +4584,14 @@ msgstr "Skanna katalogen"
 msgid "Scope Adv"
 msgstr "Scope Adv"
 
+#: u_translation.rsscript
+msgid "Script"
+msgstr ""
+
+#: u_translation.rsscripteditor
+msgid "Script editor"
+msgstr ""
+
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
 msgstr "Rullningslist"
@@ -5068,6 +5124,10 @@ msgstr "Sorterar indexfilen "
 msgid "South"
 msgstr "Söder"
 
+#: u_translation.rsspacer
+msgid "Spacer"
+msgstr ""
+
 #: u_translation.rsspectralclas
 msgid "Spectral class"
 msgstr "Spektralklass"
@@ -5308,6 +5368,10 @@ msgstr "Teleskop"
 msgid "Telescope focal length"
 msgstr ""
 
+#: u_translation.rstelescopemov
+msgid "Telescope move"
+msgstr ""
+
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "Teleskopet inte anslutet"
@@ -5404,6 +5468,10 @@ msgstr "Tid"
 msgid "Timeout [ms]"
 msgstr "Timeout (ms)"
 
+#: u_translation.rstimer
+msgid "Timer"
+msgstr ""
+
 #: u_translation.rstimesimulati
 msgid "Time simulation"
 msgstr "Simulering av tid"
@@ -5442,6 +5510,10 @@ msgstr "Vertygsfält"
 
 #: u_translation.rstoolbaredito
 msgid "Tool bar editor"
+msgstr ""
+
+#: u_translation.rstoolbox
+msgid "Tool box"
 msgstr ""
 
 #: u_translation.rstools

@@ -2,9 +2,9 @@ object f_script: Tf_script
   Left = 0
   Height = 274
   Top = 0
-  Width = 170
+  Width = 180
   ClientHeight = 274
-  ClientWidth = 170
+  ClientWidth = 180
   TabOrder = 0
   DesignLeft = 336
   DesignTop = 148
@@ -12,10 +12,10 @@ object f_script: Tf_script
     Left = 0
     Height = 50
     Top = 224
-    Width = 170
+    Width = 180
     Align = alBottom
     ClientHeight = 50
-    ClientWidth = 170
+    ClientWidth = 180
     TabOrder = 0
     object Label1: TLabel
       Left = 8
@@ -26,10 +26,10 @@ object f_script: Tf_script
       ParentColor = False
     end
     object ButtonEditSrc: TBitBtn
-      Left = 4
+      Left = 0
       Height = 25
       Top = 21
-      Width = 75
+      Width = 86
       Caption = 'Script'
       OnClick = ButtonEditSrcClick
       TabOrder = 0
@@ -38,7 +38,7 @@ object f_script: Tf_script
       Left = 88
       Height = 25
       Top = 21
-      Width = 75
+      Width = 90
       Caption = 'Toolbar'
       OnClick = ButtonEditTBClick
       TabOrder = 1
@@ -48,7 +48,7 @@ object f_script: Tf_script
     Left = 0
     Height = 26
     Top = 28
-    Width = 170
+    Width = 180
     AutoSize = True
     Caption = 'Toolbar 1'
     TabOrder = 1
@@ -57,7 +57,7 @@ object f_script: Tf_script
     Left = 0
     Height = 26
     Top = 54
-    Width = 170
+    Width = 180
     AutoSize = True
     Caption = 'Toolbar 2'
     TabOrder = 2
@@ -66,7 +66,7 @@ object f_script: Tf_script
     Left = 0
     Height = 144
     Top = 80
-    Width = 170
+    Width = 180
     Align = alClient
     ChildSizing.ShrinkHorizontal = crsHomogenousChildResize
     ChildSizing.ShrinkVertical = crsHomogenousSpaceResize
@@ -78,7 +78,7 @@ object f_script: Tf_script
     Left = 0
     Height = 28
     Top = 0
-    Width = 170
+    Width = 180
     Align = alTop
     Caption = 'PanelTitle'
     Font.Style = [fsBold]

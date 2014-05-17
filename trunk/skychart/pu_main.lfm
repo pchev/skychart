@@ -3278,13 +3278,13 @@ object f_main: Tf_main
     Left = 28
     Height = 467
     Top = 80
-    Width = 170
+    Width = 180
     Align = alLeft
     TabOrder = 6
     Visible = False
   end
   object Splitter1: TSplitter
-    Left = 198
+    Left = 208
     Height = 467
     Top = 80
     Width = 5
@@ -4533,6 +4533,56 @@ object f_main: Tf_main
           Hint = 'View the status bar'
           ShowAlwaysCheckable = True
           OnClick = ViewStatusBarClick
+        end
+      end
+      object SubToolbox: TMenuItem
+        Caption = 'Tool box'
+        object MenuToolbox1: TMenuItem
+          Caption = 'MenuToolbox1'
+          ShortCut = 112
+          OnClick = MenuToolboxClick
+        end
+        object MenuToolbox2: TMenuItem
+          Tag = 1
+          Caption = 'MenuToolbox2'
+          ShortCut = 113
+          OnClick = MenuToolboxClick
+        end
+        object MenuToolbox3: TMenuItem
+          Tag = 2
+          Caption = 'MenuToolbox3'
+          ShortCut = 114
+          OnClick = MenuToolboxClick
+        end
+        object MenuToolbox4: TMenuItem
+          Tag = 3
+          Caption = 'MenuToolbox4'
+          ShortCut = 115
+          OnClick = MenuToolboxClick
+        end
+        object MenuToolbox5: TMenuItem
+          Tag = 4
+          Caption = 'MenuToolbox5'
+          ShortCut = 116
+          OnClick = MenuToolboxClick
+        end
+        object MenuToolbox6: TMenuItem
+          Tag = 5
+          Caption = 'MenuToolbox6'
+          ShortCut = 117
+          OnClick = MenuToolboxClick
+        end
+        object MenuToolbox7: TMenuItem
+          Tag = 6
+          Caption = 'MenuToolbox7'
+          ShortCut = 118
+          OnClick = MenuToolboxClick
+        end
+        object MenuToolbox8: TMenuItem
+          Tag = 7
+          Caption = 'MenuToolbox8'
+          ShortCut = 119
+          OnClick = MenuToolboxClick
         end
       end
       object MenuViewScrollBar: TMenuItem

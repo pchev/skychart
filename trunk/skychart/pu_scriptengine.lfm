@@ -1,7 +1,7 @@
 object f_scriptengine: Tf_scriptengine
-  Left = 357
+  Left = 376
   Height = 457
-  Top = 121
+  Top = 124
   Width = 750
   Caption = 'Script'
   ClientHeight = 457
@@ -10,10 +10,10 @@ object f_scriptengine: Tf_scriptengine
   OnDestroy = FormDestroy
   LCLVersion = '1.2.2.0'
   object ButtonApply: TButton
-    Left = 248
+    Left = 240
     Height = 25
     Top = 336
-    Width = 75
+    Width = 85
     Caption = 'Apply'
     OnClick = ButtonApplyClick
     TabOrder = 0
@@ -65,10 +65,10 @@ object f_scriptengine: Tf_scriptengine
     TabOrder = 3
   end
   object ButtonDelete: TButton
-    Left = 248
+    Left = 240
     Height = 25
     Top = 144
-    Width = 75
+    Width = 85
     Caption = 'Delete'
     OnClick = ButtonDeleteClick
     TabOrder = 4
@@ -115,16 +115,16 @@ object f_scriptengine: Tf_scriptengine
       Left = 134
       Height = 15
       Top = 51
-      Width = 51
-      Caption = 'Caption='
+      Width = 44
+      Caption = 'Caption'
       ParentColor = False
     end
     object Label2: TLabel
       Left = 134
       Height = 15
       Top = 11
-      Width = 51
-      Caption = 'Caption='
+      Width = 44
+      Caption = 'Caption'
       ParentColor = False
     end
     object GroupCaptionEdit: TEdit
@@ -140,12 +140,12 @@ object f_scriptengine: Tf_scriptengine
       Left = 275
       Height = 15
       Top = 11
-      Width = 31
-      Caption = 'Cols='
+      Width = 49
+      Caption = 'Columns'
       ParentColor = False
     end
     object GroupRowEdit: TEdit
-      Left = 328
+      Left = 336
       Height = 21
       Top = 8
       Width = 32
@@ -193,8 +193,8 @@ object f_scriptengine: Tf_scriptengine
       Left = 134
       Height = 15
       Top = 131
-      Width = 45
-      Caption = 'Height='
+      Width = 38
+      Caption = 'Height'
       ParentColor = False
     end
     object RadioButtonEvent: TRadioButton
@@ -227,7 +227,7 @@ object f_scriptengine: Tf_scriptengine
       Text = 'Object identification click'
     end
     object TimerIntervalEdit: TEdit
-      Left = 328
+      Left = 336
       Height = 21
       Top = 207
       Width = 56
@@ -238,48 +238,48 @@ object f_scriptengine: Tf_scriptengine
     end
   end
   object ButtonAdd: TButton
-    Left = 248
+    Left = 240
     Height = 25
     Top = 64
-    Width = 75
+    Width = 85
     Caption = '< Add'
     OnClick = ButtonAddClick
     TabOrder = 6
   end
   object ButtonEditScript: TButton
-    Left = 248
+    Left = 240
     Height = 25
     Top = 288
-    Width = 75
+    Width = 85
     Caption = 'Edit Script'
     OnClick = ButtonEditScriptClick
     TabOrder = 7
     Visible = False
   end
   object ButtonUpdate: TButton
-    Left = 248
+    Left = 240
     Height = 25
     Top = 104
-    Width = 75
+    Width = 85
     Caption = '< Update'
     OnClick = ButtonUpdateClick
     TabOrder = 8
     Visible = False
   end
   object ButtonSave: TButton
-    Left = 384
+    Left = 344
     Height = 25
     Top = 336
-    Width = 75
+    Width = 91
     Caption = 'Save'
     OnClick = ButtonSaveClick
     TabOrder = 9
   end
   object ButtonLoad: TButton
-    Left = 496
+    Left = 448
     Height = 25
     Top = 336
-    Width = 80
+    Width = 88
     Caption = 'Load'
     OnClick = ButtonLoadClick
     TabOrder = 10
@@ -377,6 +377,15 @@ object f_scriptengine: Tf_scriptengine
     GlyphShowMode = gsmAlways
     OnClick = ButtonDownClick
     TabOrder = 13
+  end
+  object ButtonHelp: TButton
+    Left = 552
+    Height = 25
+    Top = 336
+    Width = 75
+    Caption = 'Help'
+    OnClick = ButtonHelpClick
+    TabOrder = 14
   end
   object TplPSScript: TPSScript
     CompilerOptions = []

@@ -5930,3 +5930,75 @@ msgstr ""
 msgid "Zoom"
 msgstr ""
 
+#: u_translation:rstoolbox
+msgid "Tool box"
+msgstr ""
+
+#: u_translation:rsscript
+msgid "Script"
+msgstr ""
+
+#: u_translation:rseditscript
+msgid "Edit Script"
+msgstr ""
+
+#: u_translation:rsclearall
+msgid "Clear all"
+msgstr ""
+
+#: u_translation:rsgroup
+msgid "Group"
+msgstr ""
+
+#: u_translation:rsbutton
+msgid "Button"
+msgstr ""
+
+#: u_translation:rsmemo
+msgid "Memo"
+msgstr ""
+
+#: u_translation:rsspacer
+msgid "Spacer"
+msgstr ""
+
+#: u_translation:rsevent
+msgid "Event"
+msgstr ""
+
+#: u_translation:rscaption
+msgid "Caption"
+msgstr ""
+
+#: u_translation:rscolumns
+msgid "Columns"
+msgstr ""
+
+#: u_translation:rsinitalisatio
+msgid "Initalisation"
+msgstr ""
+
+#: u_translation:rstimer
+msgid "Timer"
+msgstr ""
+
+#: u_translation:rstelescopemov
+msgid "Telescope move"
+msgstr ""
+
+#: u_translation:rschartrefresh
+msgid "Chart refresh"
+msgstr ""
+
+#: u_translation:rsobjectidenti
+msgid "Object identification"
+msgstr ""
+
+#: u_translation:rsscripteditor
+msgid "Script editor"
+msgstr ""
+
+#: u_translation:rsdeleteallthe
+msgid "Delete %s, all the child nodes and the scripts?"
+msgstr ""
+

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-07 15:03+0000\n"
+"POT-Creation-Date: 2014-05-17 19:00+0000\n"
 "PO-Revision-Date: 2014-05-01 08:35+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-11 18:16+0000\n"
-"X-Generator: Launchpad (build 16996)\n"
+"X-Launchpad-Export-Date: 2014-05-17 19:20+0000\n"
+"X-Generator: Launchpad (build 17007)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -604,6 +604,10 @@ msgstr "Kat.felépítése"
 msgid "But never fainter than magnitude"
 msgstr ""
 
+#: u_translation.rsbutton
+msgid "Button"
+msgstr ""
+
 #: u_translation.rsby
 msgid "by"
 msgstr ""
@@ -655,6 +659,10 @@ msgstr "%sNem lehet megnyitni az adatbázist %s! %s"
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr "Nem lehet írni a"
+
+#: u_translation.rscaption
+msgid "Caption"
+msgstr ""
 
 #: u_translation.rscartesian
 msgid "Cartesian"
@@ -797,6 +805,10 @@ msgstr "Térkép információk"
 msgid "Chart legend"
 msgstr "A térkép jelölései"
 
+#: u_translation.rschartrefresh
+msgid "Chart refresh"
+msgstr ""
+
 #: u_translation.rscharts
 msgid "Charts"
 msgstr "Térképek"
@@ -838,6 +850,10 @@ msgstr "Térkép törlése."
 #: u_translation.rsclear
 msgid "Clear"
 msgstr "Tisztítás"
+
+#: u_translation.rsclearall
+msgid "Clear all"
+msgstr ""
 
 #: u_translation.rscleartarget
 msgid "Clear Target"
@@ -911,6 +927,10 @@ msgstr "Színes, körvonal"
 #| msgid "Color saturation"
 msgid "Colour saturation"
 msgstr "Szín szaturáció"
+
+#: u_translation.rscolumns
+msgid "Columns"
+msgstr ""
 
 #: u_translation.rscomet
 msgid "Comet"
@@ -1457,6 +1477,10 @@ msgstr "képkockák közötti késleltetés"
 msgid "Delete"
 msgstr "Töröl"
 
+#: u_translation.rsdeleteallthe
+msgid "Delete %s, all the child nodes and the scripts?"
+msgstr ""
+
 #: u_translation.rsdeletecomple
 msgid "Delete completed"
 msgstr "A törlés sikeres"
@@ -1868,6 +1892,10 @@ msgstr "Vonalműveletek"
 msgid "Edit object types"
 msgstr "Objektum típus szerk."
 
+#: u_translation.rseditscript
+msgid "Edit Script"
+msgstr ""
+
 #: u_translation.rsedittimeincr
 msgid "Edit time increment"
 msgstr ""
@@ -2028,6 +2056,10 @@ msgstr "Este"
 #: u_translation.rseveningtwili
 msgid "Evening twilight"
 msgstr "Esti szürkület"
+
+#: u_translation.rsevent
+msgid "Event"
+msgstr ""
 
 #: u_translation.rsevery
 msgid "every "
@@ -2441,6 +2473,10 @@ msgstr "Zöld"
 msgid "Grid spacing"
 msgstr "Háló beosztása"
 
+#: u_translation.rsgroup
+msgid "Group"
+msgstr ""
+
 #: u_translation.rsgrstransit
 msgid "GRS transit"
 msgstr "VörösFolt áthaladás"
@@ -2711,6 +2747,10 @@ msgstr "Információk katalógusból"
 #: u_translation.rsinit
 msgid "Init"
 msgstr "Init."
+
+#: u_translation.rsinitalisatio
+msgid "Initalisation"
+msgstr ""
 
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
@@ -3261,6 +3301,10 @@ msgstr "Mean of the date"
 msgid "Mean position"
 msgstr "Középhely"
 
+#: u_translation.rsmemo
+msgid "Memo"
+msgstr ""
+
 #: u_translation.rsmercator
 msgid "Mercator"
 msgstr "Mercator"
@@ -3710,6 +3754,10 @@ msgstr "Objektumok szűrése"
 #| msgid "Object Filter Setting"
 msgid "Object filter settings"
 msgstr "Objektum szűrés beállítások"
+
+#: u_translation.rsobjectidenti
+msgid "Object identification"
+msgstr ""
 
 #: u_translation.rsobjectlist
 #| msgid "Object List"
@@ -4798,6 +4846,14 @@ msgstr "Könyvtár átnézése"
 msgid "Scope Adv"
 msgstr ""
 
+#: u_translation.rsscript
+msgid "Script"
+msgstr ""
+
+#: u_translation.rsscripteditor
+msgid "Script editor"
+msgstr ""
+
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
 msgstr "Görgetősáv"
@@ -5372,6 +5428,10 @@ msgstr "Indexfájl rendezése "
 msgid "South"
 msgstr "Dél"
 
+#: u_translation.rsspacer
+msgid "Spacer"
+msgstr ""
+
 #: u_translation.rsspectralclas
 #| msgid "Spectral Class"
 msgid "Spectral class"
@@ -5629,6 +5689,10 @@ msgstr "Távcső"
 msgid "Telescope focal length"
 msgstr ""
 
+#: u_translation.rstelescopemov
+msgid "Telescope move"
+msgstr ""
+
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "A távcső nincs csatlakoztatva"
@@ -5729,6 +5793,10 @@ msgstr "Idő"
 msgid "Timeout [ms]"
 msgstr "Időtúllépés [ms]"
 
+#: u_translation.rstimer
+msgid "Timer"
+msgstr ""
+
 #: u_translation.rstimesimulati
 msgid "Time simulation"
 msgstr "Mozgás szimulációja"
@@ -5770,6 +5838,10 @@ msgstr "Eszköztárak"
 
 #: u_translation.rstoolbaredito
 msgid "Tool bar editor"
+msgstr ""
+
+#: u_translation.rstoolbox
+msgid "Tool box"
 msgstr ""
 
 #: u_translation.rstools
