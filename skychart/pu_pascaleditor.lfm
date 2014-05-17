@@ -1,25 +1,26 @@
 object f_pascaleditor: Tf_pascaleditor
   Left = 396
-  Height = 375
+  Height = 415
   Top = 152
-  Width = 484
+  Width = 554
   Caption = 'Editor'
-  ClientHeight = 375
-  ClientWidth = 484
-  LCLVersion = '1.2.0.3'
+  ClientHeight = 415
+  ClientWidth = 554
+  OnCreate = FormCreate
+  LCLVersion = '1.2.2.0'
   object Panel1: TPanel
     Left = 0
-    Height = 50
-    Top = 325
-    Width = 484
+    Height = 31
+    Top = 384
+    Width = 554
     Align = alBottom
-    ClientHeight = 50
-    ClientWidth = 484
+    ClientHeight = 31
+    ClientWidth = 554
     TabOrder = 0
     object Button1: TButton
       Left = 381
       Height = 25
-      Top = 10
+      Top = 2
       Width = 75
       Caption = 'Save'
       ModalResult = 1
@@ -28,18 +29,26 @@ object f_pascaleditor: Tf_pascaleditor
     object Button2: TButton
       Left = 248
       Height = 25
-      Top = 10
+      Top = 2
       Width = 75
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 1
     end
+    object Button3: TButton
+      Left = 128
+      Height = 25
+      Top = 2
+      Width = 75
+      Caption = 'Help'
+      TabOrder = 2
+    end
   end
   inline SynEdit1: TSynEdit
     Left = 0
-    Height = 325
+    Height = 384
     Top = 0
-    Width = 484
+    Width = 554
     Align = alClient
     Font.Height = -13
     Font.Name = 'Courier New'
@@ -47,6 +56,7 @@ object f_pascaleditor: Tf_pascaleditor
     Font.Quality = fqDraft
     ParentColor = False
     ParentFont = False
+    PopupMenu = PopupMenu1
     TabOrder = 1
     Gutter.Width = 29
     Gutter.MouseActions = <>
@@ -475,6 +485,7 @@ object f_pascaleditor: Tf_pascaleditor
         ShortCut = 57379
       end>
     MouseActions = <>
+    MouseTextActions = <>
     MouseSelActions = <>
     Lines.Strings = (
       'SynEdit1'
@@ -535,6 +546,7 @@ object f_pascaleditor: Tf_pascaleditor
     end
   end
   object SynPasSyn1: TSynPasSyn
+    Enabled = False
     AsmAttri.FrameEdges = sfeAround
     CommentAttri.Foreground = clBlue
     CommentAttri.FrameEdges = sfeAround
@@ -552,7 +564,51 @@ object f_pascaleditor: Tf_pascaleditor
     DirectiveAttri.FrameEdges = sfeAround
     CompilerMode = pcmDelphi
     NestedComments = False
-    left = 177
-    top = 153
+    left = 56
+    top = 48
+  end
+  object PopupMenu1: TPopupMenu
+    left = 144
+    top = 48
+    object MenuItem3: TMenuItem
+      Action = EditSelectAll1
+    end
+    object MenuItem1: TMenuItem
+      Action = EditCopy1
+    end
+    object MenuItem4: TMenuItem
+      Action = EditCut1
+    end
+    object MenuItem2: TMenuItem
+      Action = EditPaste1
+    end
+  end
+  object ActionList1: TActionList
+    left = 240
+    top = 48
+    object EditSelectAll1: TEditSelectAll
+      Category = 'Edit'
+      Caption = 'Select &All'
+      Hint = 'Select All'
+      ShortCut = 16449
+    end
+    object EditCopy1: TEditCopy
+      Category = 'Edit'
+      Caption = '&Copy'
+      Hint = 'Copy'
+      ShortCut = 16451
+    end
+    object EditCut1: TEditCut
+      Category = 'Edit'
+      Caption = 'Cu&t'
+      Hint = 'Cut'
+      ShortCut = 16472
+    end
+    object EditPaste1: TEditPaste
+      Category = 'Edit'
+      Caption = '&Paste'
+      Hint = 'Paste'
+      ShortCut = 16470
+    end
   end
 end

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-05-07 15:03+0000\n"
+"POT-Creation-Date: 2014-05-17 19:00+0000\n"
 "PO-Revision-Date: 2014-05-01 08:40+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-11 18:17+0000\n"
-"X-Generator: Launchpad (build 16996)\n"
+"X-Launchpad-Export-Date: 2014-05-17 19:21+0000\n"
+"X-Generator: Launchpad (build 17007)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -576,6 +576,10 @@ msgstr "สร้างบัญชี"
 msgid "But never fainter than magnitude"
 msgstr "แต่ไม่สว่างน้อยกว่าโชติมาตร"
 
+#: u_translation.rsbutton
+msgid "Button"
+msgstr ""
+
 #: u_translation.rsby
 msgid "by"
 msgstr "โดย"
@@ -627,6 +631,10 @@ msgstr "%sไม่สามารถเปิดฐานข้อมูล %s!
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr "ไม่สามารถเขียนไปที่"
+
+#: u_translation.rscaption
+msgid "Caption"
+msgstr ""
 
 #: u_translation.rscartesian
 msgid "Cartesian"
@@ -756,6 +764,10 @@ msgstr "รายละเอียดของแผนที่"
 msgid "Chart legend"
 msgstr "สัญลักษณ์แผนที่"
 
+#: u_translation.rschartrefresh
+msgid "Chart refresh"
+msgstr ""
+
 #: u_translation.rscharts
 msgid "Charts"
 msgstr "แผนที่"
@@ -795,6 +807,10 @@ msgstr "ล้างแผนที่"
 #: u_translation.rsclear
 msgid "Clear"
 msgstr "ล้าง"
+
+#: u_translation.rsclearall
+msgid "Clear all"
+msgstr ""
 
 #: u_translation.rscleartarget
 msgid "Clear Target"
@@ -859,6 +875,10 @@ msgstr "โหมดสี, เส้น"
 #: u_translation.rscolorsaturat
 msgid "Colour saturation"
 msgstr "ความอิ่มตัวสี"
+
+#: u_translation.rscolumns
+msgid "Columns"
+msgstr ""
 
 #: u_translation.rscomet
 msgid "Comet"
@@ -1368,6 +1388,10 @@ msgstr "หน่วงเวลาระหว่างเฟรม"
 msgid "Delete"
 msgstr "ลบ"
 
+#: u_translation.rsdeleteallthe
+msgid "Delete %s, all the child nodes and the scripts?"
+msgstr ""
+
 #: u_translation.rsdeletecomple
 msgid "Delete completed"
 msgstr "ลบเสร็จแล้ว"
@@ -1760,6 +1784,10 @@ msgstr ""
 msgid "Edit object types"
 msgstr "แก้ไขชนิดของวัตถุ"
 
+#: u_translation.rseditscript
+msgid "Edit Script"
+msgstr ""
+
 #: u_translation.rsedittimeincr
 msgid "Edit time increment"
 msgstr ""
@@ -1915,6 +1943,10 @@ msgstr "หัวค่ำ"
 #: u_translation.rseveningtwili
 msgid "Evening twilight"
 msgstr "สนธยาเวลาหัวค่ำ"
+
+#: u_translation.rsevent
+msgid "Event"
+msgstr ""
 
 #: u_translation.rsevery
 msgid "every "
@@ -2304,6 +2336,10 @@ msgstr "เขียว"
 msgid "Grid spacing"
 msgstr "ช่องว่างระหว่างกริด"
 
+#: u_translation.rsgroup
+msgid "Group"
+msgstr ""
+
 #: u_translation.rsgrstransit
 msgid "GRS transit"
 msgstr "เวลาที่จุดแดงใหญ่ผ่านเมริเดียน"
@@ -2554,6 +2590,10 @@ msgstr "ข้อมูลจากบัญชี"
 
 #: u_translation.rsinit
 msgid "Init"
+msgstr ""
+
+#: u_translation.rsinitalisatio
+msgid "Initalisation"
 msgstr ""
 
 #: u_translation.rsinitialiseda
@@ -3080,6 +3120,10 @@ msgstr "ปานกลางของวัน"
 msgid "Mean position"
 msgstr "ตำแหน่งปานกลาง"
 
+#: u_translation.rsmemo
+msgid "Memo"
+msgstr ""
+
 #: u_translation.rsmercator
 msgid "Mercator"
 msgstr "เมอร์เคเตอร์"
@@ -3495,6 +3539,10 @@ msgstr "ตัวกรองวัตถุ"
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
 msgstr "ตั้งค่าตัวกรองวัตถุ"
+
+#: u_translation.rsobjectidenti
+msgid "Object identification"
+msgstr ""
 
 #: u_translation.rsobjectlist
 msgid "Object list"
@@ -4536,6 +4584,14 @@ msgstr "สแกนไดเร็กทอรี"
 msgid "Scope Adv"
 msgstr ""
 
+#: u_translation.rsscript
+msgid "Script"
+msgstr ""
+
+#: u_translation.rsscripteditor
+msgid "Script editor"
+msgstr ""
+
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
 msgstr "แถบเลื่อนหน้าจอ"
@@ -5068,6 +5124,10 @@ msgstr "กำลังเรียงลำดับแฟ้มดัชนี
 msgid "South"
 msgstr "ใต้"
 
+#: u_translation.rsspacer
+msgid "Spacer"
+msgstr ""
+
 #: u_translation.rsspectralclas
 msgid "Spectral class"
 msgstr "ชนิดสเปกตรัม"
@@ -5308,6 +5368,10 @@ msgstr "กล้องโทรทรรศน์"
 msgid "Telescope focal length"
 msgstr "ความยาวโฟัสของกล้อง"
 
+#: u_translation.rstelescopemov
+msgid "Telescope move"
+msgstr ""
+
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "ไม่มีการเชื่อมต่อกล้องโทรทรรศน์"
@@ -5404,6 +5468,10 @@ msgstr "เวลา"
 msgid "Timeout [ms]"
 msgstr "เวลารอ [มิลลิวินาที]"
 
+#: u_translation.rstimer
+msgid "Timer"
+msgstr ""
+
 #: u_translation.rstimesimulati
 msgid "Time simulation"
 msgstr "จำลองเวลา"
@@ -5442,6 +5510,10 @@ msgstr "แถบเครื่องมือ"
 
 #: u_translation.rstoolbaredito
 msgid "Tool bar editor"
+msgstr ""
+
+#: u_translation.rstoolbox
+msgid "Tool box"
 msgstr ""
 
 #: u_translation.rstools

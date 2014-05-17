@@ -4,7 +4,7 @@ unit pu_scriptengine;
 
 interface
 
-uses  u_translation, u_constant, u_util, ActnList, pu_pascaleditor,
+uses  u_translation, u_constant, u_help, u_util, ActnList, pu_pascaleditor,
   StdCtrls, ExtCtrls, Menus, Classes, SysUtils, FileUtil, IniFiles, fu_chart,
   uPSComponent, uPSComponent_Default, uPSComponent_DB, uPSComponent_Forms,
   uPSComponent_Controls, uPSComponent_StdCtrls, Forms, Controls, Graphics,
@@ -21,6 +21,7 @@ type
   { Tf_scriptengine }
 
   Tf_scriptengine = class(TForm)
+    ButtonHelp: TButton;
     ButtonDown: TBitBtn;
     ButtonSave: TButton;
     ButtonLoad: TButton;
@@ -73,6 +74,7 @@ type
     procedure ButtonApplyClick(Sender: TObject);
     procedure ButtonClearClick(Sender: TObject);
     procedure ButtonDeleteClick(Sender: TObject);
+    procedure ButtonHelpClick(Sender: TObject);
     procedure ButtonLoadClick(Sender: TObject);
     procedure ButtonSaveClick(Sender: TObject);
     procedure ButtonUpClick(Sender: TObject);
@@ -110,7 +112,6 @@ type
     mem: array of TMemo;
     snum:integer;
     sp: array of TPanel;
-    pla: PPlanetData;
     FConfigToolbar1,FConfigToolbar2: TStringlist;
     Fpascaleditor: Tf_pascaleditor;
     GroupIdx,ButtonIdx,EditIdx,MemoIdx,SpacerIdx,EventIdx: integer;
@@ -120,7 +121,6 @@ type
     ChartName,RefreshText,SelectionText,DescriptionText,DistanceText: string;
     TelescopeRA,TelescopeDE: double;
     vlist: array of Variant;
-    vlst0,vlst1,vlst2,vlst3,vlst4 : Variant;
     function  doExecuteCmd(cname:string; arg:Tstringlist):string;
     function  doGetS(varname:string; var str: string):Boolean;
     function  doGetI(varname:string; var i: Integer):Boolean;
@@ -144,6 +144,7 @@ type
     procedure CompileScripts;
   public
     { public declarations }
+    procedure SetLang;
     procedure Save(strbtn, strscr, eventscr: Tstringlist; var title:string);
     procedure Load(strbtn, strscr, eventscr: Tstringlist; title:string);
     procedure ChartRefreshEvent(origin,str:string);
@@ -165,6 +166,38 @@ var
 implementation
 
 {$R *.lfm}
+
+procedure Tf_scriptengine.SetLang;
+begin
+  caption:=rsScript;
+  ButtonAdd.Caption:=rsAdd;
+  ButtonEditScript.Caption:=rsEditScript;
+  ButtonUpdate.Caption:=rsUpdate1;
+  ButtonDelete.Caption:=rsDelete;
+  ButtonApply.Caption:=rsApply;
+  ButtonSave.Caption:=rsSave;
+  ButtonLoad.Caption:=rsLoad;
+  ButtonClear.Caption:=rsClearAll;
+  ButtonHelp.Caption:=rsHelp;
+  GroupBox1.Caption:=rsComponent;
+  RadioButtonGroup.Caption:=rsGroup;
+  RadioButtonButton.Caption:=rsButton;
+  RadioButtonMemo.Caption:=rsMemo;
+  RadioButtonSpacer.Caption:=rsSpacer;
+  RadioButtonEvent.Caption:=rsEvent;
+  Label1.Caption:=rsColumns;
+  Label2.Caption:=rsCaption;
+  Label3.Caption:=rsCaption;
+  Label4.Caption:=rsHeight;
+  EventComboBox.Items[0]:=rsInitalisatio;
+  EventComboBox.Items[1]:=rsTimer;
+  EventComboBox.Items[2]:=rsTelescopeMov;
+  EventComboBox.Items[3]:=rsChartRefresh;
+  EventComboBox.Items[4]:=rsObjectIdenti;
+  EventComboBox.Items[5]:=rsDistanceMeas;
+  if Fpascaleditor<>nil then Fpascaleditor.SetLang;
+  SetHelp(self,hlpScriptEditor);
+end;
 
 function Tf_scriptengine.doExecuteCmd(cname:string; arg:Tstringlist):string;
 begin
@@ -778,10 +811,15 @@ end;
 procedure Tf_scriptengine.ButtonDeleteClick(Sender: TObject);
 begin
 if TreeView1.Selected<>nil then begin
-  if MessageDlg('Delete '+TreeView1.Selected.Text+', all the child nodes and the scripts?', mtConfirmation, mbYesNo, 0)=mrYes then begin
+  if MessageDlg(Format(rsDeleteAllThe, [TreeView1.Selected.Text]),mtConfirmation, mbYesNo, 0)=mrYes then begin
     TreeView1.Items.Delete(TreeView1.Selected);
   end;
 end;
+end;
+
+procedure Tf_scriptengine.ButtonHelpClick(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_scriptengine.ButtonLoadClick(Sender: TObject);
@@ -915,6 +953,7 @@ if (TreeView1.Selected<>nil) then begin
       Fpascaleditor:=Tf_pascaleditor.Create(self);
     end;
     Fpascaleditor.SynEdit1.Lines.Assign(s);
+    FormPos(Fpascaleditor,mouse.cursorpos.x,mouse.cursorpos.y);
     Fpascaleditor.ShowModal;
     if Fpascaleditor.ModalResult=mrOK then begin
       s.Assign(Fpascaleditor.SynEdit1.Lines);
@@ -989,6 +1028,7 @@ begin
     evscr[i].OnExecute:=@TplPSScriptExecute;
     evscr[i].Plugins.Assign(TplPSScript.Plugins);
   end;
+  SetLang;
 end;
 
 procedure Tf_scriptengine.ClearTreeView;
@@ -1026,7 +1066,7 @@ end;
 
 procedure Tf_scriptengine.ButtonClearClick(Sender: TObject);
 begin
-if MessageDlg('This action remove all the component and you lose all your scripts.', mtConfirmation, mbYesNo, 0)=mrYes then begin
+  if MessageDlg(Format(rsDeleteAllThe, [rsAll] ),mtConfirmation, mbYesNo, 0)=mrYes then begin
    ClearTreeView;
 end;
 end;

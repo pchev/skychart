@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-07 15:03+0000\n"
-"PO-Revision-Date: 2014-05-09 07:40+0000\n"
+"POT-Creation-Date: 2014-05-17 19:00+0000\n"
+"PO-Revision-Date: 2014-05-12 07:09+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-11 18:16+0000\n"
-"X-Generator: Launchpad (build 16996)\n"
+"X-Launchpad-Export-Date: 2014-05-17 19:21+0000\n"
+"X-Generator: Launchpad (build 17007)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -581,6 +581,10 @@ msgstr "Buduj katalog"
 msgid "But never fainter than magnitude"
 msgstr "Lecz nigdy ciemniejsze niż magnitudo"
 
+#: u_translation.rsbutton
+msgid "Button"
+msgstr ""
+
 #: u_translation.rsby
 msgid "by"
 msgstr "przez"
@@ -632,6 +636,10 @@ msgstr "%sNie można otworzyć bazy danych %s! %s"
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr "Nie można pisać do"
+
+#: u_translation.rscaption
+msgid "Caption"
+msgstr ""
 
 #: u_translation.rscartesian
 msgid "Cartesian"
@@ -761,6 +769,10 @@ msgstr "Informacje o mapie"
 msgid "Chart legend"
 msgstr "Legenda"
 
+#: u_translation.rschartrefresh
+msgid "Chart refresh"
+msgstr ""
+
 #: u_translation.rscharts
 msgid "Charts"
 msgstr "Mapy"
@@ -800,6 +812,10 @@ msgstr "Porządkowanie mapy"
 #: u_translation.rsclear
 msgid "Clear"
 msgstr "Wyczyść"
+
+#: u_translation.rsclearall
+msgid "Clear all"
+msgstr ""
 
 #: u_translation.rscleartarget
 msgid "Clear Target"
@@ -864,6 +880,10 @@ msgstr "Kolor, tryb liniowy"
 #: u_translation.rscolorsaturat
 msgid "Colour saturation"
 msgstr "Poziom nasycenia koloru"
+
+#: u_translation.rscolumns
+msgid "Columns"
+msgstr ""
 
 #: u_translation.rscomet
 msgid "Comet"
@@ -1373,6 +1393,10 @@ msgstr "Przerwa między klatkami"
 msgid "Delete"
 msgstr "Usuń"
 
+#: u_translation.rsdeleteallthe
+msgid "Delete %s, all the child nodes and the scripts?"
+msgstr ""
+
 #: u_translation.rsdeletecomple
 msgid "Delete completed"
 msgstr "Kasowanie zakończone"
@@ -1495,7 +1519,7 @@ msgstr "Fol"
 
 #: u_translation.rsdirection2
 msgid "Direction"
-msgstr ""
+msgstr "Kierunek"
 
 #: u_translation.rsdirectory
 msgid "Directory"
@@ -1567,7 +1591,7 @@ msgstr "Pomiar odległości"
 
 #: u_translation.rsdivider
 msgid "Divider"
-msgstr ""
+msgstr "Odstęp"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
@@ -1655,7 +1679,7 @@ msgstr "Wyświetl jako gwiazdę"
 
 #: u_translation.rsdrawing
 msgid "Drawing"
-msgstr ""
+msgstr "Wyświetlanie"
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
@@ -1764,6 +1788,10 @@ msgstr "Edytuj linię operacji"
 #: u_translation.rseditobjectty
 msgid "Edit object types"
 msgstr "Edytuj typy obiektów"
+
+#: u_translation.rseditscript
+msgid "Edit Script"
+msgstr ""
 
 #: u_translation.rsedittimeincr
 msgid "Edit time increment"
@@ -1921,6 +1949,10 @@ msgstr "Wieczór"
 msgid "Evening twilight"
 msgstr "Zmierzch"
 
+#: u_translation.rsevent
+msgid "Event"
+msgstr ""
+
 #: u_translation.rsevery
 msgid "every "
 msgstr "co "
@@ -2059,7 +2091,7 @@ msgstr "Filtr ->"
 
 #: u_translation.rsfilter2
 msgid "Filter"
-msgstr ""
+msgstr "Filtr"
 
 #: u_translation.rsfilternebula
 msgid "Filter deep sky objects"
@@ -2308,6 +2340,10 @@ msgstr "Zielony"
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
 msgstr "Odstępy siatki"
+
+#: u_translation.rsgroup
+msgid "Group"
+msgstr ""
 
 #: u_translation.rsgrstransit
 msgid "GRS transit"
@@ -2561,6 +2597,10 @@ msgstr "Informacje z katalogu"
 msgid "Init"
 msgstr "Inicjalizuj"
 
+#: u_translation.rsinitalisatio
+msgid "Initalisation"
+msgstr ""
+
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
 msgstr "Zainicjalizowany w %s%s używając %s%s (RA: %s DEC :%s)"
@@ -2735,7 +2775,7 @@ msgstr "Lewy"
 
 #: u_translation.rsleftbar
 msgid "Left bar"
-msgstr "Lewy pasek narzędzi"
+msgstr "Lewy pasek narzędziowy"
 
 #: u_translation.rsleftmode
 msgid "Left Mode"
@@ -2891,7 +2931,7 @@ msgstr "Kod pozycji"
 
 #: u_translation.rslock
 msgid "Lock"
-msgstr ""
+msgstr "Blokada"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -3084,6 +3124,10 @@ msgstr "Średnia daty"
 #: u_translation.rsmeanposition
 msgid "Mean position"
 msgstr "Średnia pozycja"
+
+#: u_translation.rsmemo
+msgid "Memo"
+msgstr ""
 
 #: u_translation.rsmercator
 msgid "Mercator"
@@ -3500,6 +3544,10 @@ msgstr "Filtr obiektów"
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
 msgstr "Ustawienia filtru obiektów"
+
+#: u_translation.rsobjectidenti
+msgid "Object identification"
+msgstr ""
 
 #: u_translation.rsobjectlist
 msgid "Object list"
@@ -4403,7 +4451,7 @@ msgstr "Rektascensja"
 
 #: u_translation.rsrightbar
 msgid "Right Bar"
-msgstr "Prawy pasek narzędzi"
+msgstr "Prawy pasek narzędziowy"
 
 #: u_translation.rsrightmode
 msgid "Right Mode"
@@ -4540,6 +4588,14 @@ msgstr "Skanuj folder"
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
 msgstr "Zakres zaaw."
+
+#: u_translation.rsscript
+msgid "Script"
+msgstr ""
+
+#: u_translation.rsscripteditor
+msgid "Script editor"
+msgstr ""
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
@@ -4763,7 +4819,7 @@ msgstr "Ustawienia"
 
 #: u_translation.rssetupoption
 msgid "Setup Options"
-msgstr ""
+msgstr "Opcje ustawień"
 
 #: u_translation.rsshour
 msgid "H"
@@ -5073,6 +5129,10 @@ msgstr "Sortowanie pliku indeksu "
 msgid "South"
 msgstr "Południe"
 
+#: u_translation.rsspacer
+msgid "Spacer"
+msgstr ""
+
 #: u_translation.rsspectralclas
 msgid "Spectral class"
 msgstr "Typ widmowy"
@@ -5131,7 +5191,7 @@ msgstr "Gwiazdy"
 
 #: u_translation.rsstarandnebul
 msgid "Star and nebula limit"
-msgstr ""
+msgstr "Limit dla gwiazd i mgławic"
 
 #: u_translation.rsstarcolourbv
 msgid "Star colour (B-V):"
@@ -5313,6 +5373,10 @@ msgstr "Teleskop"
 msgid "Telescope focal length"
 msgstr "Ogniskowa teleskopu"
 
+#: u_translation.rstelescopemov
+msgid "Telescope move"
+msgstr ""
+
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "Teleskop nie podłączony"
@@ -5409,6 +5473,10 @@ msgstr "Czas"
 msgid "Timeout [ms]"
 msgstr "Timeout [ms]"
 
+#: u_translation.rstimer
+msgid "Timer"
+msgstr ""
+
 #: u_translation.rstimesimulati
 msgid "Time simulation"
 msgstr "Symulacja czasu"
@@ -5448,6 +5516,10 @@ msgstr "Pasek narzędziowy"
 #: u_translation.rstoolbaredito
 msgid "Tool bar editor"
 msgstr "Edytor paska narzędzi"
+
+#: u_translation.rstoolbox
+msgid "Tool box"
+msgstr ""
 
 #: u_translation.rstools
 msgid "Tools"
@@ -5927,7 +5999,7 @@ msgstr "Oddal (-)"
 
 #: u_translation.rszoom3
 msgid "Zoom"
-msgstr ""
+msgstr "Powiększenie"
 
 #: u_translation.rszoomcentre
 msgid "Zoom + and centre on"

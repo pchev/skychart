@@ -48,6 +48,15 @@ type
 
   Tf_main = class(TForm)
     ContainerPanel: TPanel;
+    MenuToolbox8: TMenuItem;
+    MenuToolbox1: TMenuItem;
+    MenuToolbox2: TMenuItem;
+    MenuToolbox3: TMenuItem;
+    MenuToolbox4: TMenuItem;
+    MenuToolbox5: TMenuItem;
+    MenuToolbox6: TMenuItem;
+    MenuToolbox7: TMenuItem;
+    SubToolbox: TMenuItem;
     ScriptPanel: TPanel;
     Splitter1: TSplitter;
     ToolBarFOV: TPanel;
@@ -439,6 +448,7 @@ type
     procedure MenuSAMPStatusClick(Sender: TObject);
     procedure MenuSAMPSetupClick(Sender: TObject);
     procedure MenuEditToolbarClick(Sender: TObject);
+    procedure MenuToolboxClick(Sender: TObject);
     procedure MouseModeExecute(Sender: TObject);
     procedure MultiFrame1CreateChild(Sender: TObject);
     procedure MultiFrame1DeleteChild(Sender: TObject);
@@ -664,7 +674,7 @@ type
     procedure SAMPTableHighlightRow(table_id,url,row:string);
     procedure SAMPTableSelectRowlist(table_id,url:string;rowlist:Tstringlist);
     procedure TelescopeMove(origin: string; ra,de: double);
-
+    procedure ApplyScript(Sender: TObject);
   {$ifdef mswindows}
     Procedure SaveWinColor;
     Procedure ResetWinColor;
@@ -737,6 +747,7 @@ type
     procedure Init;
     procedure InitToolBar;
     procedure InitScriptPanel;
+    procedure SetScriptMenuCaption;
     procedure ShowScriptPanel(n:integer);
     procedure ViewToolsBar;
     Procedure InitDS2000;
@@ -1940,7 +1951,6 @@ if VerboseMsg then
 GetLanguage;
 lang:=u_translation.translate(cfgm.language);
 catalog:=Tcatalog.Create(self);
-SetLang;
 step:='Multiframe';
 if VerboseMsg then
  WriteTrace(step);
@@ -2053,11 +2063,14 @@ for i:=0 to numscript-1 do begin
   Fscript[i].Align:=alClient;
   Fscript[i].Visible:=false;
   Fscript[i].ExecuteCmd:=ExecuteCmd;
+  Fscript[i].onApply:=ApplyScript;
   if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
   Fscript[i].Parent:=ScriptPanel;
 end;
 Splitter1.ResizeControl:=ScriptPanel;
-
+step:='SetLang';
+if VerboseMsg then WriteTrace(step);
+SetLang;
 step:='End';
 except
   on E: Exception do begin
@@ -5678,7 +5691,9 @@ for i:=0 to numscript-1 do begin
        ScriptPanel.Visible:=true;
        ActiveScript:=i;
    end;
-   Fscript[i].PanelTitle.Caption:=ReadString(section,'Title',Fscript[i].PanelTitle.Caption);
+   buf:=ReadString(section,'Title',Fscript[i].PanelTitle.Caption);
+   if copy(buf,1,Length(rsToolBox))<>rsToolBox then
+      Fscript[i].PanelTitle.Caption:=buf;
    n:=ReadInteger(section,'numtoolbar1',0);
    for j:=0 to n-1 do Fscript[i].ConfigToolbar1.Add(ReadString(section,'toolbar1_'+inttostr(j),''));
    n:=ReadInteger(section,'numtoolbar2',0);
@@ -6575,6 +6590,7 @@ end;
 end;
 
 procedure Tf_main.SetLang;
+var i: integer;
 begin
 ldeg:=rsdeg;
 lmin:=rsmin;
@@ -7039,6 +7055,11 @@ SetFOV07.Category:=CatFOV;
 SetFOV08.Category:=CatFOV;
 SetFOV09.Category:=CatFOV;
 SetFOV10.Category:=CatFOV;
+
+//ToolBox
+for i:=0 to numscript-1 do Fscript[i].setlang;
+SubToolbox.Caption:=rsToolBox;
+SetScriptMenuCaption;
 
 // planet names
 pla[1]:=rsMercury;
@@ -8359,17 +8380,7 @@ if cfgm.KioskMode or
    (Activecontrol=TimeU) or
    (pos('_',ActiveControl.Name)>0 ))) then exit
 else
-  case key of
-   VK_F1: ShowScriptPanel(0);
-   VK_F2: ShowScriptPanel(1);
-   VK_F3: ShowScriptPanel(2);
-   VK_F4: ShowScriptPanel(3);
-   VK_F5: ShowScriptPanel(4);
-   VK_F6: ShowScriptPanel(5);
-   VK_F7: ShowScriptPanel(6);
-   VK_F8: ShowScriptPanel(7);
-   else (MultiFrame1.ActiveObject as Tf_chart).CKeyDown(Key,Shift);
-  end;
+   (MultiFrame1.ActiveObject as Tf_chart).CKeyDown(Key,Shift);
 end;
 
 procedure Tf_main.SetChildFocus(Sender: TObject);
@@ -8671,6 +8682,12 @@ begin
     // show all the configured bar
     ViewToolsBar;
  end;
+end;
+
+procedure Tf_main.MenuToolboxClick(Sender: TObject);
+begin
+if Sender is TMenuItem then
+  ShowScriptPanel(TMenuItem(Sender).tag);
 end;
 
 procedure Tf_main.ToolBarFOVResize(Sender: TObject);
@@ -9139,6 +9156,19 @@ for i:=0 to numscript-1 do begin
   Fscript[i].Init;
 end;
 Splitter1.ResizeControl:=ScriptPanel;
+SetScriptMenuCaption;
+end;
+
+procedure Tf_main.SetScriptMenuCaption;
+begin
+MenuToolbox1.Caption:=Fscript[0].PanelTitle.Caption;
+MenuToolbox2.Caption:=Fscript[1].PanelTitle.Caption;
+MenuToolbox3.Caption:=Fscript[2].PanelTitle.Caption;
+MenuToolbox4.Caption:=Fscript[3].PanelTitle.Caption;
+MenuToolbox5.Caption:=Fscript[4].PanelTitle.Caption;
+MenuToolbox6.Caption:=Fscript[5].PanelTitle.Caption;
+MenuToolbox7.Caption:=Fscript[6].PanelTitle.Caption;
+MenuToolbox8.Caption:=Fscript[7].PanelTitle.Caption;
 end;
 
 procedure Tf_main.ShowScriptPanel(n:integer);
@@ -9163,6 +9193,11 @@ begin
    end;
    ActiveScript:=n;
  end;
+end;
+
+procedure Tf_main.ApplyScript(Sender: TObject);
+begin
+  SetScriptMenuCaption;
 end;
 
 procedure Tf_main.TelescopeMove(origin: string; ra,de: double);

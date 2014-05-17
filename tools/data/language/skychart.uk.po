@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-07 15:03+0000\n"
+"POT-Creation-Date: 2014-05-17 19:00+0000\n"
 "PO-Revision-Date: 2014-05-01 08:41+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclubzp@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-11 18:17+0000\n"
-"X-Generator: Launchpad (build 16996)\n"
+"X-Launchpad-Export-Date: 2014-05-17 19:21+0000\n"
+"X-Generator: Launchpad (build 17007)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -579,6 +579,10 @@ msgstr "Створити каталог"
 msgid "But never fainter than magnitude"
 msgstr ""
 
+#: u_translation.rsbutton
+msgid "Button"
+msgstr ""
+
 #: u_translation.rsby
 msgid "by"
 msgstr "через"
@@ -629,6 +633,10 @@ msgstr "%sНеможливо відкрити базу даних %s! %s"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
+msgstr ""
+
+#: u_translation.rscaption
+msgid "Caption"
 msgstr ""
 
 #: u_translation.rscartesian
@@ -759,6 +767,10 @@ msgstr "Інформація мапи"
 msgid "Chart legend"
 msgstr ""
 
+#: u_translation.rschartrefresh
+msgid "Chart refresh"
+msgstr ""
+
 #: u_translation.rscharts
 msgid "Charts"
 msgstr "Мапи"
@@ -797,6 +809,10 @@ msgstr ""
 
 #: u_translation.rsclear
 msgid "Clear"
+msgstr ""
+
+#: u_translation.rsclearall
+msgid "Clear all"
 msgstr ""
 
 #: u_translation.rscleartarget
@@ -862,6 +878,10 @@ msgstr "Кольорове, метод ліній"
 #: u_translation.rscolorsaturat
 msgid "Colour saturation"
 msgstr "Колір сатурації"
+
+#: u_translation.rscolumns
+msgid "Columns"
+msgstr ""
 
 #: u_translation.rscomet
 msgid "Comet"
@@ -1371,6 +1391,10 @@ msgstr ""
 msgid "Delete"
 msgstr "Видалити"
 
+#: u_translation.rsdeleteallthe
+msgid "Delete %s, all the child nodes and the scripts?"
+msgstr ""
+
 #: u_translation.rsdeletecomple
 msgid "Delete completed"
 msgstr "Видалення завершено"
@@ -1763,6 +1787,10 @@ msgstr "Редагувати оператор лінії"
 msgid "Edit object types"
 msgstr "Ред. тип об'єктів"
 
+#: u_translation.rseditscript
+msgid "Edit Script"
+msgstr ""
+
 #: u_translation.rsedittimeincr
 msgid "Edit time increment"
 msgstr ""
@@ -1918,6 +1946,10 @@ msgstr "Вечір"
 #: u_translation.rseveningtwili
 msgid "Evening twilight"
 msgstr "Вечірні сутінки"
+
+#: u_translation.rsevent
+msgid "Event"
+msgstr ""
 
 #: u_translation.rsevery
 msgid "every "
@@ -2307,6 +2339,10 @@ msgstr "Зелений"
 msgid "Grid spacing"
 msgstr "Крок сітки"
 
+#: u_translation.rsgroup
+msgid "Group"
+msgstr ""
+
 #: u_translation.rsgrstransit
 msgid "GRS transit"
 msgstr "Кульмінація ВЧП"
@@ -2557,6 +2593,10 @@ msgstr ""
 
 #: u_translation.rsinit
 msgid "Init"
+msgstr ""
+
+#: u_translation.rsinitalisatio
+msgid "Initalisation"
 msgstr ""
 
 #: u_translation.rsinitialiseda
@@ -3083,6 +3123,10 @@ msgstr "Середні на дату"
 msgid "Mean position"
 msgstr "Середнє положення"
 
+#: u_translation.rsmemo
+msgid "Memo"
+msgstr ""
+
 #: u_translation.rsmercator
 msgid "Mercator"
 msgstr ""
@@ -3498,6 +3542,10 @@ msgstr "Фільтр об'єктів"
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
 msgstr "Настанови фільтру об'єктів"
+
+#: u_translation.rsobjectidenti
+msgid "Object identification"
+msgstr ""
 
 #: u_translation.rsobjectlist
 msgid "Object list"
@@ -4539,6 +4587,14 @@ msgstr "Сканувати директорію"
 msgid "Scope Adv"
 msgstr ""
 
+#: u_translation.rsscript
+msgid "Script"
+msgstr ""
+
+#: u_translation.rsscripteditor
+msgid "Script editor"
+msgstr ""
+
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
 msgstr "Панель прокрутки"
@@ -5071,6 +5127,10 @@ msgstr "Сортування файлу індексів "
 msgid "South"
 msgstr "Південь"
 
+#: u_translation.rsspacer
+msgid "Spacer"
+msgstr ""
+
 #: u_translation.rsspectralclas
 msgid "Spectral class"
 msgstr "Спектральний клас"
@@ -5311,6 +5371,10 @@ msgstr "Телескоп"
 msgid "Telescope focal length"
 msgstr ""
 
+#: u_translation.rstelescopemov
+msgid "Telescope move"
+msgstr ""
+
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "Телескоп не під'єднано"
@@ -5407,6 +5471,10 @@ msgstr "Час"
 msgid "Timeout [ms]"
 msgstr ""
 
+#: u_translation.rstimer
+msgid "Timer"
+msgstr ""
+
 #: u_translation.rstimesimulati
 msgid "Time simulation"
 msgstr "Моделювання в часі"
@@ -5445,6 +5513,10 @@ msgstr "Панель інструментів"
 
 #: u_translation.rstoolbaredito
 msgid "Tool bar editor"
+msgstr ""
+
+#: u_translation.rstoolbox
+msgid "Tool box"
 msgstr ""
 
 #: u_translation.rstools

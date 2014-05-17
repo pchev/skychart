@@ -4,7 +4,7 @@ unit fu_script;
 
 interface
 
-uses  u_translation, u_constant, pu_edittoolbar, pu_scriptengine, u_util,
+uses  u_translation, u_constant, u_help, pu_edittoolbar, pu_scriptengine, u_util,
   fu_chart, ActnList, Menus, Classes, SysUtils,
   FileUtil, Forms, Controls, ExtCtrls, StdCtrls, ComCtrls, Buttons;
 
@@ -40,6 +40,8 @@ type
     FMainmenu: TMenu;
     FExecuteCmd: TExecuteCmd;
     FActivechart: Tf_chart;
+    FonApply: TNotifyEvent;
+    FScriptTitle: string;
     FConfigToolbar1,FConfigToolbar2,FConfigScriptButton,FConfigScript,FConfigEvent: TStringList;
     procedure ApplyScript(Sender: TObject);
     procedure SetExecuteCmd(value:TExecuteCmd);
@@ -49,6 +51,7 @@ type
     { public declarations }
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
+    procedure SetLang;
     procedure Init;
     procedure ChartRefreshEvent(origin,str:string);
     procedure ObjectSelectionEvent(origin,str,longstr:string);
@@ -78,6 +81,7 @@ type
     property ConfigEvent: TStringList read FConfigEvent write FConfigEvent;
     property ExecuteCmd: TExecuteCmd read FExecuteCmd write SetExecuteCmd;
     property ActiveChart: Tf_chart read FActiveChart write SetActiveChart;
+    property onApply: TNotifyEvent read FonApply write FonApply;
   end;
 
 implementation
@@ -85,9 +89,26 @@ implementation
 {$R *.lfm}
 
 { Tf_script }
+
+procedure Tf_script.SetLang;
+var txt:string;
+begin
+ txt:= FScriptTitle;
+  if FScriptTitle='' then PanelTitle.Caption:=rsToolBox+' '+inttostr(tag+1)
+                     else PanelTitle.Caption:=FScriptTitle;
+  txt:=PanelTitle.Caption;
+  Label1.Caption:=rsConfiguratio;
+  ButtonEditSrc.Caption:=rsScript;
+  ButtonEditTB.Caption:=rsToolBar;
+  fedittoolbar.SetLang;
+  if fscriptengine<>nil then fscriptengine.SetLang;
+  SetHelp(self,hlpScriptEditor);
+end;
+
 constructor Tf_script.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
+  FScriptTitle:='';
   fedittoolbar:=Tf_edittoolbar.Create(self);
   fedittoolbar.ButtonMini.Visible:=false;
   fedittoolbar.ButtonStd.Visible:=false;
@@ -183,19 +204,20 @@ begin
      fscriptengine.Activechart:=FActivechart;
      fscriptengine.Mainmenu:=FMainmenu;
   end;
+  FormPos(fscriptengine,mouse.cursorpos.x,mouse.cursorpos.y);
   fscriptengine.Show;
 end;
 
 procedure Tf_script.ApplyScript(Sender: TObject);
-var tt: string;
 begin
- fscriptengine.Save(FConfigScriptButton, FConfigScript, FConfigEvent,tt);
- PanelTitle.Caption:=tt;
+ fscriptengine.Save(FConfigScriptButton, FConfigScript, FConfigEvent,FScriptTitle);
+ PanelTitle.Caption:=FScriptTitle;
  fedittoolbar.LoadToolbar(0,ConfigToolbar1);
  fedittoolbar.LoadToolbar(1,ConfigToolbar2);
  fedittoolbar.ActivateToolbar;
  ToolBar1.Visible:=(VisibleControlCount(ToolBar1)>0);
  ToolBar2.Visible:=(VisibleControlCount(ToolBar2)>0);
+  if Assigned(FonApply) then FonApply(self);
 end;
 
 procedure Tf_script.SetExecuteCmd(value:TExecuteCmd);
