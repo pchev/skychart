@@ -421,6 +421,8 @@ type
     procedure ChartActivate;
     procedure SetCameraRotation(cam:integer);
     procedure MoveCamera(angle:single);
+    Procedure cmdEq2Hz(ra,de : double ; var a,h : double);
+    Procedure cmdHz2Eq(a,h : double; var ra,de : double);
     property OnImageSetFocus: TNotifyEvent read FImageSetFocus write FImageSetFocus;
     property OnSetFocus: TNotifyEvent read FSetFocus write FSetFocus;
     property OnShowTopMessage: Tstr2func read FShowTopMessage write FShowTopMessage;
@@ -5571,6 +5573,19 @@ end;
 procedure Tf_chart.SetTelescopeMove(value:Tfloat2func);
 begin
   sc.onTelescopeMove:=value;
+end;
+
+Procedure Tf_chart.cmdEq2Hz(ra,de : double ; var a,h : double);
+begin
+ Eq2Hz(sc.cfgsc.CurSt-ra,de,a,h,sc.cfgsc) ;
+ a:=rmod(a+pi,pi2)
+end;
+
+Procedure Tf_chart.cmdHz2Eq(a,h : double; var ra,de : double);
+begin
+ a:=rmod(a-pi,pi2);
+ Hz2Eq(a,h,ra,de,sc.cfgsc);
+ ra:=Rmod(sc.cfgsc.CurST-ra+pi2,pi2);
 end;
 
 end.

@@ -5,7 +5,7 @@ unit fu_script;
 interface
 
 uses  u_translation, u_constant, pu_edittoolbar, pu_scriptengine, u_util,
-  ActnList, Menus, Classes, SysUtils,
+  fu_chart, ActnList, Menus, Classes, SysUtils,
   FileUtil, Forms, Controls, ExtCtrls, StdCtrls, ComCtrls, Buttons;
 
 type
@@ -39,9 +39,11 @@ type
     FToolBarFOV: Tpanel;
     FMainmenu: TMenu;
     FExecuteCmd: TExecuteCmd;
+    FActivechart: Tf_chart;
     FConfigToolbar1,FConfigToolbar2,FConfigScriptButton,FConfigScript,FConfigEvent: TStringList;
     procedure ApplyScript(Sender: TObject);
     procedure SetExecuteCmd(value:TExecuteCmd);
+    procedure SetActiveChart(value:Tf_chart);
     procedure SetMainmenu(value:TMenu);
   public
     { public declarations }
@@ -75,6 +77,7 @@ type
     property ConfigScript: TStringList read FConfigScript write FConfigScript;
     property ConfigEvent: TStringList read FConfigEvent write FConfigEvent;
     property ExecuteCmd: TExecuteCmd read FExecuteCmd write SetExecuteCmd;
+    property ActiveChart: Tf_chart read FActiveChart write SetActiveChart;
   end;
 
 implementation
@@ -147,6 +150,7 @@ begin
         fscriptengine.editsurface:=MainPanel;
         fscriptengine.onApply:=@ApplyScript;
         fscriptengine.ExecuteCmd:=FExecuteCmd;
+        fscriptengine.Activechart:=FActivechart;
         fscriptengine.Mainmenu:=FMainmenu;
      end;
      fscriptengine.Load(FConfigScriptButton, FConfigScript, FConfigEvent,PanelTitle.Caption);
@@ -176,6 +180,7 @@ begin
      fscriptengine.editsurface:=MainPanel;
      fscriptengine.onApply:=@ApplyScript;
      fscriptengine.ExecuteCmd:=FExecuteCmd;
+     fscriptengine.Activechart:=FActivechart;
      fscriptengine.Mainmenu:=FMainmenu;
   end;
   fscriptengine.Show;
@@ -197,6 +202,12 @@ procedure Tf_script.SetExecuteCmd(value:TExecuteCmd);
 begin
  FExecuteCmd:=value;
  if fscriptengine<>nil then fscriptengine.ExecuteCmd:=FExecuteCmd;
+end;
+
+procedure Tf_script.SetActiveChart(value:Tf_chart);
+begin
+ FActivechart:=value;
+ if fscriptengine<>nil then fscriptengine.Activechart:=FActivechart;
 end;
 
 procedure Tf_script.SetMainmenu(value:TMenu);

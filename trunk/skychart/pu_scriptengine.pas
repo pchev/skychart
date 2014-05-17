@@ -5,7 +5,7 @@ unit pu_scriptengine;
 interface
 
 uses  u_translation, u_constant, u_util, ActnList, pu_pascaleditor,
-  StdCtrls, ExtCtrls, Menus, Classes, SysUtils, FileUtil, IniFiles,
+  StdCtrls, ExtCtrls, Menus, Classes, SysUtils, FileUtil, IniFiles, fu_chart,
   uPSComponent, uPSComponent_Default, uPSComponent_DB, uPSComponent_Forms,
   uPSComponent_Controls, uPSComponent_StdCtrls, Forms, Controls, Graphics,
   Dialogs, ComCtrls, Buttons,uPSCompiler, uPSRuntime, math
@@ -110,21 +110,29 @@ type
     mem: array of TMemo;
     snum:integer;
     sp: array of TPanel;
+    pla: PPlanetData;
     FConfigToolbar1,FConfigToolbar2: TStringlist;
     Fpascaleditor: Tf_pascaleditor;
     GroupIdx,ButtonIdx,EditIdx,MemoIdx,SpacerIdx,EventIdx: integer;
     FExecuteCmd: TExecuteCmd;
     FMainmenu: TMenu;
+    FActiveChart: Tf_chart;
     ChartName,RefreshText,SelectionText,DescriptionText,DistanceText: string;
     TelescopeRA,TelescopeDE: double;
+    vlist: array of Variant;
+    vlst0,vlst1,vlst2,vlst3,vlst4 : Variant;
     function  doExecuteCmd(cname:string; arg:Tstringlist):string;
     function  doGetS(varname:string; var str: string):Boolean;
     function  doGetI(varname:string; var i: Integer):Boolean;
     function doGetD(varname:string; var x: Double):Boolean;
+    function doGetV(varname:string; var v: Variant):Boolean;
+    function doSetV(varname:string; v: Variant):Boolean;
     Function doARtoStr(var ar: Double) : string;
     Function doDEtoStr(var de: Double) : string;
     Function doStrtoAR(str:string; var ar: Double) : boolean;
     Function doStrtoDE(str:string; var de: Double) : boolean;
+    Procedure doEq2Hz(ra,de : double ; var a,h : double);
+    Procedure doHz2Eq(a,h : double; var ra,de : double);
     procedure Button_Click(Sender: TObject);
     procedure ReorderGroup;
     function  AddGroup(num,capt:string; pt: TWinControl; ctlperline,ordernum:integer):TGroupBox;
@@ -148,6 +156,7 @@ type
     property onApply: TNotifyEvent read FonApply write FonApply;
     property ExecuteCmd: TExecuteCmd read FExecuteCmd write FExecuteCmd;
     property Mainmenu: TMenu read FMainmenu write FMainmenu;
+    property ActiveChart: Tf_chart read FActiveChart write FActiveChart;
   end;
 
 var
@@ -162,7 +171,17 @@ begin
   if assigned(FExecuteCmd) then result:=FExecuteCmd(cname,arg);
 end;
 
-function  Tf_scriptengine.doGetS(varname:string; var str: string):Boolean;
+Procedure Tf_scriptengine.doEq2Hz(ra,de : double ; var a,h : double);
+begin
+  if assigned(FActiveChart) then FActiveChart.cmdEq2Hz(ra,de,a,h);
+end;
+
+Procedure Tf_scriptengine.doHz2Eq(a,h : double; var ra,de : double);
+begin
+  if assigned(FActiveChart) then FActiveChart.cmdHz2Eq(a,h,ra,de);
+end;
+
+function Tf_scriptengine.doGetS(varname:string; var str: string):Boolean;
 begin
   result:=true;
   varname:=uppercase(varname);
@@ -187,6 +206,64 @@ end;
 function  Tf_scriptengine.doGetI(varname:string; var i: Integer):Boolean;
 begin
   result:=false;
+end;
+
+function Tf_scriptengine.doGetV(varname:string; var v: Variant):Boolean;
+begin
+  result:=true;
+  varname:=uppercase(varname);
+  if varname='TELESCOPE1' then v:=vlist[0]
+  else if varname='TELESCOPE2' then v:=vlist[1]
+  else if varname='DOME1' then v:=vlist[2]
+  else if varname='DOME2' then v:=vlist[3]
+  else if varname='CAMERA1' then v:=vlist[4]
+  else if varname='CAMERA2' then v:=vlist[5]
+  else if varname='FOCUSER1' then v:=vlist[6]
+  else if varname='FOCUSER2' then v:=vlist[7]
+  else if varname='FILTER1' then v:=vlist[8]
+  else if varname='FILTER1' then v:=vlist[9]
+  else if varname='ROTATOR1' then v:=vlist[10]
+  else if varname='ROTATOR2' then v:=vlist[11]
+  else if varname='VARIANT1' then v:=vlist[12]
+  else if varname='VARIANT2' then v:=vlist[13]
+  else if varname='VARIANT3' then v:=vlist[14]
+  else if varname='VARIANT4' then v:=vlist[15]
+  else if varname='VARIANT5' then v:=vlist[16]
+  else if varname='VARIANT6' then v:=vlist[17]
+  else if varname='VARIANT7' then v:=vlist[18]
+  else if varname='VARIANT8' then v:=vlist[19]
+  else if varname='VARIANT9' then v:=vlist[20]
+  else if varname='VARIANT10' then v:=vlist[21]
+  else result:=false;
+end;
+
+function Tf_scriptengine.doSetV(varname:string; v: Variant):Boolean;
+begin
+  result:=true;
+  varname:=uppercase(varname);
+  if varname='TELESCOPE1' then vlist[0]:=v
+  else if varname='TELESCOPE2' then vlist[1]:=v
+  else if varname='DOME1' then vlist[2]:=v
+  else if varname='DOME2' then vlist[3] := v
+  else if varname='CAMERA1' then vlist[4] := v
+  else if varname='CAMERA2' then vlist[5] := v
+  else if varname='FOCUSER1' then vlist[6] := v
+  else if varname='FOCUSER2' then vlist[7] := v
+  else if varname='FILTER1' then vlist[8] := v
+  else if varname='FILTER1' then vlist[9] := v
+  else if varname='ROTATOR1' then vlist[10] := v
+  else if varname='ROTATOR2' then vlist[11] := v
+  else if varname='VARIANT1' then vlist[12] := v
+  else if varname='VARIANT2' then vlist[13] := v
+  else if varname='VARIANT3' then vlist[14] := v
+  else if varname='VARIANT4' then vlist[15] := v
+  else if varname='VARIANT5' then vlist[16] := v
+  else if varname='VARIANT6' then vlist[17] := v
+  else if varname='VARIANT7' then vlist[18] := v
+  else if varname='VARIANT8' then vlist[19] := v
+  else if varname='VARIANT9' then vlist[20] := v
+  else if varname='VARIANT10' then vlist[21] := v
+  else result:=false;
 end;
 
 Function Tf_scriptengine.doARtoStr(var ar: Double) : string;
@@ -454,6 +531,10 @@ var node:TTreeNode;
    txt,parm1,parm2,buf,nu: string;
    i,groupseq: integer;
 begin
+EventTimer.Enabled:=false;
+for i:=0 to scrnum-1 do if (scr[i]<>nil) and scr[i].Running then scr[i].Stop;
+for i:=0 to evscrnum-1 do if (evscr[i]<>nil) and evscr[i].Running then scr[i].Stop;
+EventTimer.Enabled:=false;
 for i:=snum-1 downto 0 do sp[i].Free;
 for i:=mnum-1 downto 0 do mem[i].Free;
 for i:=enum-1 downto 0 do ed[i].Free;
@@ -847,10 +928,11 @@ procedure Tf_scriptengine.CompileScripts;
 var i,j,n: integer;
     buf,txt,nu,parm: string;
     node:TTreeNode;
-    ok: boolean;
+    timerok,ok: boolean;
 begin
 CompileMemo.Clear;
 EventTimer.Enabled:=false;
+timerok:=false;
 node:=TreeView1.Items.GetFirstNode;
 while node<>nil do begin
   buf:=words(node.Text,'',1,1,';');
@@ -871,11 +953,12 @@ while node<>nil do begin
       parm:=words(node.Text,'',4,1,';');
       i:=StrToIntDef(parm,60);
       EventTimer.Interval:=i*1000;
-      EventTimer.Enabled:=ok;
+      timerok:=ok;
     end;
   end;
   node:=node.GetNext;
 end;
+EventTimer.Enabled:=timerok;
 end;
 
 procedure Tf_scriptengine.FormCreate(Sender: TObject);
@@ -896,6 +979,7 @@ begin
     PSImport_ComObj1:=TPSImport_ComObj.Create(self);
     TPSPluginItem(TplPSScript.Plugins.Add).Plugin:=PSImport_ComObj1;
   {$endif}
+  SetLength(vlist,22);
   evscrnum:=ord(High(Teventlist))+1;
   SetLength(evscr,evscrnum);
   for i:=0 to evscrnum-1 do begin
@@ -937,6 +1021,7 @@ begin
   ClearTreeView;
   TreeView1.free;
   if Fpascaleditor<>nil then Fpascaleditor.Free;
+  SetLength(vlist,0);
 end;
 
 procedure Tf_scriptengine.ButtonClearClick(Sender: TObject);
@@ -969,10 +1054,14 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doGetS, 'function GetS(varname:string; var str: string):Boolean;');
   AddMethod(self, @Tf_scriptengine.doGetI, 'function GetI(varname:string; var i: Integer):Boolean;');
   AddMethod(self, @Tf_scriptengine.doGetD, 'function GetD(varname:string; var x: double):boolean;');
+  AddMethod(self, @Tf_scriptengine.doGetV, 'function GetV(varname:string; var v: Variant):Boolean;');
+  AddMethod(self, @Tf_scriptengine.doSetV, 'function SetV(varname:string; v: Variant):Boolean;');
   AddMethod(self, @Tf_scriptengine.doARtoStr, 'Function ARtoStr(var ar: Double) : string;');
   AddMethod(self, @Tf_scriptengine.doDEtoStr, 'Function DEtoStr(var de: Double) : string;');
   AddMethod(self, @Tf_scriptengine.doStrtoAR, 'Function StrtoAR(str:string; var ar: Double) : boolean;');
   AddMethod(self, @Tf_scriptengine.doStrtoDE, 'Function StrtoDE(str:string; var de: Double) : boolean;');
+  AddMethod(self, @Tf_scriptengine.doEq2Hz, 'Procedure Eq2Hz(ra,de : double ; var a,h : double);');
+  AddMethod(self, @Tf_scriptengine.doHz2Eq, 'Procedure Hz2Eq(a,h : double; var ra,de : double);');
 end;
 ProcessMenu(FMainmenu.Items);
 end;
@@ -1000,7 +1089,9 @@ end;
 
 procedure Tf_scriptengine.EventTimerTimer(Sender: TObject);
 begin
+EventTimer.Enabled:=false;
 evscr[ord(evTimer)].Execute;
+EventTimer.Enabled:=true;
 end;
 
 procedure Tf_scriptengine.ChartRefreshEvent(origin,str:string);
