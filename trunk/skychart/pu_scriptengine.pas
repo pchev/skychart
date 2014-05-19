@@ -35,8 +35,13 @@ type
     ButtonClear: TButton;
     ButtonDelete: TButton;
     Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
     ListHeightEdit: TEdit;
+    ImageHeightEdit: TEdit;
+    ImageWidthEdit: TEdit;
     PSDllPlugin1: TPSDllPlugin;
+    RadioButtonImage: TRadioButton;
     RadioButtonList: TRadioButton;
     RadioButtonCombo: TRadioButton;
     ScriptTitle: TEdit;
@@ -91,6 +96,8 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure GroupCaptionEditChange(Sender: TObject);
     procedure GroupRowEditChange(Sender: TObject);
+    procedure ImageHeightEditChange(Sender: TObject);
+    procedure ImageWidthEditChange(Sender: TObject);
     procedure ListHeightEditChange(Sender: TObject);
     procedure MemoHeightEditChange(Sender: TObject);
     procedure RadioButtonClick(Sender: TObject);
@@ -123,9 +130,11 @@ type
     cb: array of TCombobox;
     lsnum:integer;
     ls: array of TListBox;
+    imnum:integer;
+    im: array of TImage;
     FConfigToolbar1,FConfigToolbar2: TStringlist;
     Fpascaleditor: Tf_pascaleditor;
-    GroupIdx,ButtonIdx,EditIdx,MemoIdx,SpacerIdx,ComboIdx,ListIdx,EventIdx: integer;
+    GroupIdx,ButtonIdx,EditIdx,MemoIdx,SpacerIdx,ComboIdx,ListIdx,ImageIdx,EventIdx: integer;
     FExecuteCmd: TExecuteCmd;
     FMainmenu: TMenu;
     FActiveChart: Tf_chart;
@@ -153,6 +162,7 @@ type
     procedure AddSpacer(num:string; pt: TWinControl);
     procedure AddCombo(num:string; pt: TWinControl);
     procedure AddList(num:string; pt: TWinControl;h: integer);
+    procedure AddImage(num:string; pt: TWinControl;w,h: integer);
     procedure ClearTreeView;
     procedure CompileScripts;
   public
@@ -592,6 +602,23 @@ ls[lsnum-1].Constraints.MinHeight:=h;
 ls[lsnum-1].Parent:=pt;
 end;
 
+procedure Tf_scriptengine.AddImage(num:string; pt: TWinControl;w,h: integer);
+begin
+{inc(imnum);
+SetLength(im,imnum);
+if num='' then num:=inttostr(imnum);
+im[imnum-1]:=TImage.Create(self);
+im[imnum-1].Name:='Image_'+num;
+im[imnum-1].tag:=StrToIntDef(num,0);
+im[imnum-1].Width:=w;
+im[imnum-1].Height:=h;
+im[imnum-1].Proportional:=true;
+im[imnum-1].Stretch:=true;
+im[imnum-1].Constraints.MinWidth:=w;
+im[imnum-1].Constraints.MinHeight:=h;
+im[imnum-1].Parent:=pt; }
+end;
+
 procedure Tf_scriptengine.ReorderGroup;
 var i: integer;
 begin
@@ -612,6 +639,7 @@ EventTimer.Enabled:=false;
 for i:=0 to scrnum-1 do if (scr[i]<>nil) and scr[i].Running then scr[i].Stop;
 for i:=0 to evscrnum-1 do if (evscr[i]<>nil) and evscr[i].Running then scr[i].Stop;
 EventTimer.Enabled:=false;
+for i:=imnum-1 downto 0 do im[i].Free;
 for i:=lsnum-1 downto 0 do ls[i].Free;
 for i:=cbnum-1 downto 0 do cb[i].Free;
 for i:=spnum-1 downto 0 do sp[i].Free;
@@ -625,6 +653,7 @@ menum:=0; SetLength(me,0);
 spnum:=0; SetLength(sp,0);
 cbnum:=0; SetLength(cb,0);
 lsnum:=0; SetLength(ls,0);
+imnum:=0; SetLength(im,0);
 grnum:=0; SetLength(gr,0);
 groupseq:=0;
 node:=TreeView1.Items.GetFirstNode;
@@ -658,6 +687,10 @@ while node<>nil do begin
   else if txt='List' then begin
     AddList(nu,curgroup,StrToIntDef(parm1,50));
     ListIdx:=max(ListIdx,strtoint(nu));
+  end
+  else if txt='Image' then begin
+    AddImage(nu,curgroup,StrToIntDef(parm1,100),StrToIntDef(parm2,100));
+    ImageIdx:=max(ImageIdx,strtoint(nu));
   end
   else if txt='Spacer' then begin
     AddSpacer(nu,curgroup);
@@ -704,6 +737,11 @@ end else if RadioButtonList.Checked then begin
   if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
     inc(ListIdx);
     TreeView1.Items.AddChild(TreeView1.Selected,'List_'+inttostr(ListIdx)+';'+IntToStr(StrToIntDef(ListHeightEdit.Text,50)));
+  end;
+end else if RadioButtonImage.Checked then begin
+  if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
+    inc(ImageIdx);
+    TreeView1.Items.AddChild(TreeView1.Selected,'Image_'+inttostr(ImageIdx)+';'+IntToStr(StrToIntDef(ImageWidthEdit.Text,100))+';'+IntToStr(StrToIntDef(ImageHeightEdit.Text,100)));
   end;
 end else if RadioButtonMemo.Checked then begin
   if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
@@ -757,6 +795,8 @@ if (TreeView1.Selected<>nil) then begin
     TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+IntToStr(StrToIntDef(MemoHeightEdit.Text,50));
   end else if RadioButtonList.Checked then begin
     TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+IntToStr(StrToIntDef(ListHeightEdit.Text,50));
+  end else if RadioButtonImage.Checked then begin
+    TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+IntToStr(StrToIntDef(ImageWidthEdit.Text,100))+';'+IntToStr(StrToIntDef(ImageHeightEdit.Text,100));
   end else if RadioButtonSpacer.Checked then begin
      //
   end else if RadioButtonEvent.Checked then begin
@@ -783,6 +823,20 @@ var v,n: integer;
 begin
   val(GroupRowEdit.Text,v,n);
   ButtonUpdate.Visible:=(n=0)and(ButtonUpdate.Tag=1);
+end;
+
+procedure Tf_scriptengine.ImageHeightEditChange(Sender: TObject);
+var v,n: integer;
+begin
+  val(ImageHeightEdit.Text,v,n);
+  ButtonUpdate.Visible:=(n=0)and(ButtonUpdate.Tag=6);
+end;
+
+procedure Tf_scriptengine.ImageWidthEditChange(Sender: TObject);
+var v,n: integer;
+begin
+  val(ImageWidthEdit.Text,v,n);
+  ButtonUpdate.Visible:=(n=0)and(ButtonUpdate.Tag=6);
 end;
 
 procedure Tf_scriptengine.ListHeightEditChange(Sender: TObject);
@@ -851,6 +905,13 @@ if node<>nil then begin
     ListHeightEdit.Text:=words(node.Text,'',2,1,';');
     ButtonUpdate.Visible:=false;
     ButtonUpdate.Tag:=5;
+  end else if (pos('Image_',node.Text)=1) then begin
+    ButtonEditScript.Visible:=false;
+    RadioButtonImage.Checked:=true;
+    ImageWidthEdit.Text:=words(node.Text,'',2,1,';');
+    ImageHeightEdit.Text:=words(node.Text,'',3,1,';');
+    ButtonUpdate.Visible:=false;
+    ButtonUpdate.Tag:=6;
   end else if (pos('Spacer_',node.Text)=1) then begin
     ButtonEditScript.Visible:=false;
     ButtonUpdate.Visible:=false;
@@ -1089,6 +1150,7 @@ begin
   ednum:=0;
   cbnum:=0;
   lsnum:=0;
+  imnum:=0;
   menum:=0;
   spnum:=0;
   scrnum:=0;
@@ -1175,6 +1237,7 @@ with Sender as TPSScript do begin
   for i:=1 to menum do AddRegisteredVariable(me[i-1].Name, 'TMemo');
   for i:=1 to cbnum do AddRegisteredVariable(cb[i-1].Name, 'TComboBox');
   for i:=1 to lsnum do AddRegisteredVariable(ls[i-1].Name, 'TListBox');
+//  for i:=1 to imnum do AddRegisteredVariable(im[i-1].Name, 'TImage');
   comp.AddConstantN('deg2rad', 'extended').SetExtended(deg2rad);
   comp.AddConstantN('rad2deg', 'extended').SetExtended(rad2deg);
   AddMethod(self, @Tf_scriptengine.doExecuteCmd, 'function  Cmd(cname:string; arg:Tstringlist):string;');
@@ -1212,6 +1275,7 @@ with Sender as TPSScript do begin
   for i:=1 to menum do SetVarToInstance(me[i-1].Name, me[i-1]);
   for i:=1 to cbnum do SetVarToInstance(cb[i-1].Name, cb[i-1]);
   for i:=1 to lsnum do SetVarToInstance(ls[i-1].Name, ls[i-1]);
+//  for i:=1 to imnum do SetVarToInstance(im[i-1].Name, im[i-1]);
 end;
 ProcessMenu(FMainmenu.Items);
 end;

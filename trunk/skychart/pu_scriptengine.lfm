@@ -96,7 +96,7 @@ object f_scriptengine: Tf_scriptengine
     object RadioButtonButton: TRadioButton
       Left = 14
       Height = 26
-      Top = 36
+      Top = 32
       Width = 69
       Caption = 'Button'
       OnClick = RadioButtonClick
@@ -156,7 +156,7 @@ object f_scriptengine: Tf_scriptengine
     object RadioButtonEdit: TRadioButton
       Left = 14
       Height = 26
-      Top = 66
+      Top = 58
       Width = 51
       Caption = 'Edit'
       OnClick = RadioButtonClick
@@ -165,7 +165,7 @@ object f_scriptengine: Tf_scriptengine
     object RadioButtonMemo: TRadioButton
       Left = 14
       Height = 26
-      Top = 93
+      Top = 84
       Width = 64
       Caption = 'Memo'
       OnClick = RadioButtonClick
@@ -174,7 +174,7 @@ object f_scriptengine: Tf_scriptengine
     object RadioButtonSpacer: TRadioButton
       Left = 14
       Height = 26
-      Top = 186
+      Top = 188
       Width = 66
       Caption = 'Spacer'
       OnClick = RadioButtonClick
@@ -183,7 +183,7 @@ object f_scriptengine: Tf_scriptengine
     object MemoHeightEdit: TEdit
       Left = 187
       Height = 21
-      Top = 96
+      Top = 87
       Width = 80
       OnChange = MemoHeightEditChange
       TabOrder = 8
@@ -192,25 +192,25 @@ object f_scriptengine: Tf_scriptengine
     object Label4: TLabel
       Left = 134
       Height = 15
-      Top = 99
+      Top = 88
       Width = 38
       Caption = 'Height'
       ParentColor = False
     end
     object RadioButtonEvent: TRadioButton
-      Left = 16
+      Left = 14
       Height = 26
-      Top = 216
+      Top = 214
       Width = 60
       Caption = 'Event'
       OnClick = RadioButtonClick
       TabOrder = 9
     end
     object EventComboBox: TComboBox
-      Left = 136
+      Left = 134
       Height = 23
-      Top = 219
-      Width = 188
+      Top = 216
+      Width = 180
       ItemHeight = 0
       ItemIndex = 0
       Items.Strings = (
@@ -227,10 +227,10 @@ object f_scriptengine: Tf_scriptengine
       Text = 'Initialisation'
     end
     object TimerIntervalEdit: TEdit
-      Left = 338
+      Left = 318
       Height = 21
-      Top = 219
-      Width = 56
+      Top = 218
+      Width = 50
       OnClick = TimerIntervalEditClick
       TabOrder = 11
       Text = '60'
@@ -239,7 +239,7 @@ object f_scriptengine: Tf_scriptengine
     object RadioButtonCombo: TRadioButton
       Left = 14
       Height = 26
-      Top = 156
+      Top = 136
       Width = 68
       Caption = 'Combo'
       OnClick = RadioButtonClick
@@ -248,15 +248,16 @@ object f_scriptengine: Tf_scriptengine
     object RadioButtonList: TRadioButton
       Left = 14
       Height = 26
-      Top = 121
+      Top = 110
       Width = 49
       Caption = 'List'
+      OnClick = RadioButtonClick
       TabOrder = 13
     end
     object Label5: TLabel
       Left = 134
       Height = 15
-      Top = 127
+      Top = 118
       Width = 38
       Caption = 'Height'
       ParentColor = False
@@ -264,11 +265,59 @@ object f_scriptengine: Tf_scriptengine
     object ListHeightEdit: TEdit
       Left = 187
       Height = 21
-      Top = 124
+      Top = 115
       Width = 80
       OnChange = ListHeightEditChange
       TabOrder = 14
       Text = '50'
+    end
+    object RadioButtonImage: TRadioButton
+      Left = 14
+      Height = 26
+      Top = 162
+      Width = 62
+      Caption = 'Image'
+      OnClick = RadioButtonClick
+      TabOrder = 15
+      Visible = False
+    end
+    object Label6: TLabel
+      Left = 248
+      Height = 15
+      Top = 170
+      Width = 38
+      Caption = 'Height'
+      ParentColor = False
+      Visible = False
+    end
+    object ImageHeightEdit: TEdit
+      Left = 318
+      Height = 21
+      Top = 167
+      Width = 50
+      OnChange = ImageHeightEditChange
+      TabOrder = 16
+      Text = '100'
+      Visible = False
+    end
+    object Label7: TLabel
+      Left = 134
+      Height = 15
+      Top = 170
+      Width = 34
+      Caption = 'Width'
+      ParentColor = False
+      Visible = False
+    end
+    object ImageWidthEdit: TEdit
+      Left = 187
+      Height = 21
+      Top = 167
+      Width = 50
+      OnChange = ImageWidthEditChange
+      TabOrder = 17
+      Text = '100'
+      Visible = False
     end
   end
   object ButtonAdd: TButton
