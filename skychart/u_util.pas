@@ -75,7 +75,7 @@ Function ARptoStr(ar: Double; precision:integer=1) : string;
 Function TimToStr(tim: Double; sep:string=':'; showsec:boolean=true) : string;
 Function StrToTim(tim : string; sep:string=':') : double;
 Function YearADBC(year : integer) : string;
-Function Date2Str(y,m,d:integer):string;
+Function Date2Str(y,m,d:integer;yadbc:boolean=true):string;
 Function ARToStr2(ar: Double; var d,m,s : string) : string;
 Function ARToStr3(ar: Double) : string;
 Function ARToStr4(ar: Double; f: string; var d,m,s : string) : string;
@@ -798,10 +798,11 @@ result:=0;
 end;
 end;
 
-Function Date2Str(y,m,d:integer):string;
+Function Date2Str(y,m,d:integer;yadbc:boolean=true):string;
 var buf:string;
 begin
-  result:=YearADBC(y);
+  if yadbc then result:=YearADBC(y)
+           else result:=inttostr(y);
   str(m:2,buf);
   if m<10 then buf:='0'+trim(buf);
   result:=result+'-'+buf;

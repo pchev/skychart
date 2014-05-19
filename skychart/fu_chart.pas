@@ -3602,14 +3602,19 @@ end
 end;
 
 function Tf_chart.cmd_SetDate(dt:string):string;
-var p,y,m,d,h,n,s : integer;
+var p,sy,y,m,d,h,n,s : integer;
 begin
 result:=msgFailed+' Bad date format!';
 try
+sy:=1;
 dt:=trim(dt);
+if length(dt)>2 then begin
+ if dt[1]='-' then begin sy:=-1; delete(dt,1,1); end;
+ if dt[1]='+' then begin sy:=1; delete(dt,1,1); end;
+end;
 p:=pos('-',dt);
 if p=0 then exit;
-y:=strtoint(trim(copy(dt,1,p-1)));
+y:=sy*strtoint(trim(copy(dt,1,p-1)));
 dt:=copy(dt,p+1,999);
 p:=pos('-',dt);
 if p=0 then exit;
@@ -3631,7 +3636,7 @@ dt:=copy(dt,p+1,999);
 s:=strtoint(trim(dt));
 sc.cfgsc.UseSystemTime:=false;
 result:=msgOK;
-if (y>=-20000)and(y<=20000) then sc.cfgsc.CurYear:=y else result:=msgFailed+' Year out of range';
+if (y>=-200000)and(y<=200000) then sc.cfgsc.CurYear:=y else result:=msgFailed+' Year out of range';
 if (m>=1)and(m<=12) then sc.cfgsc.CurMonth:=m else result:=msgFailed+' Month out of range';
 if (d>=1)and(d<=31) then sc.cfgsc.CurDay:=d else result:=msgFailed+' Day out of range';
 if (h>=0)and(h<=23)and(n>=0)and(n<=59)and(s>=0)and(s<=59) then sc.cfgsc.CurTime:=h+n/60+s/3600 else result:=msgFailed+' Time out of range';
@@ -3648,7 +3653,7 @@ end;
 
 function Tf_chart.cmd_GetDate:string;
 begin
-result:=msgOK+blank+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+'T'+ArToStr3(sc.cfgsc.Curtime);
+result:=msgOK+blank+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday,false)+'T'+TimToStr(sc.cfgsc.Curtime);
 end;
 
 function Tf_chart.cmd_MoveScope(RA,DE:string):string;
