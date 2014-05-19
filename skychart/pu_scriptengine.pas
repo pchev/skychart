@@ -10,7 +10,9 @@ uses  u_translation, u_constant, u_help, u_util, ActnList, pu_pascaleditor,
   uPSComponent_Controls, uPSComponent_StdCtrls, Forms, Controls, Graphics,
   Dialogs, ComCtrls, Buttons,uPSCompiler, uPSRuntime, math
   {$ifdef mswindows}
-  , uPSComponent_COM
+  , uPSComponent_COM    // in case of error here please apply the Lazarus patch
+                        // available in (Skychart_source)/tools/Lazarus_Patch/
+                        // or install PascalScript from git master
   {$endif}
   ;
 
@@ -200,7 +202,9 @@ begin
 end;
 
 function Tf_scriptengine.doExecuteCmd(cname:string; arg:Tstringlist):string;
+var i: integer;
 begin
+  for i:=arg.count to MaxCmdArg do arg.add('');
   if assigned(FExecuteCmd) then result:=FExecuteCmd(cname,arg);
 end;
 
