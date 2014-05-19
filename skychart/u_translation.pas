@@ -1528,6 +1528,8 @@ resourcestring
   rsObjectIdenti = 'Object identification';
   rsScriptEditor = 'Script editor';
   rsDeleteAllThe = 'Delete %s, all the child nodes and the scripts?';
+  rsList = 'List';
+  rsComboBox = 'Combo box';
 
 implementation
 

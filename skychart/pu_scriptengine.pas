@@ -34,7 +34,11 @@ type
     ButtonApply: TButton;
     ButtonClear: TButton;
     ButtonDelete: TButton;
+    Label5: TLabel;
+    ListHeightEdit: TEdit;
     PSDllPlugin1: TPSDllPlugin;
+    RadioButtonList: TRadioButton;
+    RadioButtonCombo: TRadioButton;
     ScriptTitle: TEdit;
     Panel2: TPanel;
     EventTimer: TTimer;
@@ -87,6 +91,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure GroupCaptionEditChange(Sender: TObject);
     procedure GroupRowEditChange(Sender: TObject);
+    procedure ListHeightEditChange(Sender: TObject);
     procedure MemoHeightEditChange(Sender: TObject);
     procedure RadioButtonClick(Sender: TObject);
     procedure TimerIntervalEditClick(Sender: TObject);
@@ -100,23 +105,27 @@ type
     { private declarations }
     FEditSurface: TPanel;
     FonApply: TNotifyEvent;
-    gnum:integer;
+    grnum:integer;
     gr: array of TGroupBox;
-    bnum:integer;
+    btnum:integer;
     bt: array of TButton;
     scrnum: integer;
     scr: array of TPSScript;
     evscrnum: integer;
     evscr: array of TPSScript;
-    enum:integer;
+    ednum:integer;
     ed: array of TEdit;
-    mnum:integer;
-    mem: array of TMemo;
-    snum:integer;
+    menum:integer;
+    me: array of TMemo;
+    spnum:integer;
     sp: array of TPanel;
+    cbnum:integer;
+    cb: array of TCombobox;
+    lsnum:integer;
+    ls: array of TListBox;
     FConfigToolbar1,FConfigToolbar2: TStringlist;
     Fpascaleditor: Tf_pascaleditor;
-    GroupIdx,ButtonIdx,EditIdx,MemoIdx,SpacerIdx,EventIdx: integer;
+    GroupIdx,ButtonIdx,EditIdx,MemoIdx,SpacerIdx,ComboIdx,ListIdx,EventIdx: integer;
     FExecuteCmd: TExecuteCmd;
     FMainmenu: TMenu;
     FActiveChart: Tf_chart;
@@ -142,6 +151,8 @@ type
     procedure AddEdit(num:string; pt: TWinControl);
     procedure AddMemo(num:string; pt: TWinControl;h: integer);
     procedure AddSpacer(num:string; pt: TWinControl);
+    procedure AddCombo(num:string; pt: TWinControl);
+    procedure AddList(num:string; pt: TWinControl;h: integer);
     procedure ClearTreeView;
     procedure CompileScripts;
   public
@@ -184,13 +195,17 @@ begin
   GroupBox1.Caption:=rsComponent;
   RadioButtonGroup.Caption:=rsGroup;
   RadioButtonButton.Caption:=rsButton;
+  RadioButtonEdit.Caption:=rsEdit;
   RadioButtonMemo.Caption:=rsMemo;
+  RadioButtonList.Caption:=rsList;
+  RadioButtonCombo.Caption:=rsComboBox;
   RadioButtonSpacer.Caption:=rsSpacer;
   RadioButtonEvent.Caption:=rsEvent;
   Label1.Caption:=rsColumns;
   Label2.Caption:=rsCaption;
   Label3.Caption:=rsCaption;
   Label4.Caption:=rsHeight;
+  Label5.Caption:=rsHeight;
   EventComboBox.Items[0]:=rsInitalisatio;
   EventComboBox.Items[1]:=rsTimer;
   EventComboBox.Items[2]:=rsTelescopeMov;
@@ -455,41 +470,41 @@ end;
 
 Function Tf_scriptengine.AddGroup(num,capt:string; pt: TWinControl; ctlperline,ordernum:integer):TGroupBox;
 begin
-inc(gnum);
-SetLength(gr,gnum);
-if num='' then num:=inttostr(gnum);
+inc(grnum);
+SetLength(gr,grnum);
+if num='' then num:=inttostr(grnum);
 if capt='' then capt:='Group_'+num;
-gr[gnum-1]:=TGroupBox.Create(self);
-gr[gnum-1].Name:='Group_'+num;
-gr[gnum-1].Caption:=capt;
-gr[gnum-1].tag:=StrToIntDef(num,0);
-gr[gnum-1].AutoSize:=true;
-gr[gnum-1].top:=10*ordernum;
-gr[gnum-1].Align:=altop;
-gr[gnum-1].ChildSizing.EnlargeHorizontal := crsHomogenousChildResize;
-gr[gnum-1].ChildSizing.EnlargeVertical := crsHomogenousSpaceResize;
-gr[gnum-1].ChildSizing.ShrinkHorizontal := crsHomogenousChildResize;
-gr[gnum-1].ChildSizing.ShrinkVertical := crsHomogenousSpaceResize;
-gr[gnum-1].ChildSizing.Layout := cclLeftToRightThenTopToBottom;
-gr[gnum-1].ChildSizing.ControlsPerLine := ctlperline;
-gr[gnum-1].Parent:=pt;
-result:=gr[gnum-1];
+gr[grnum-1]:=TGroupBox.Create(self);
+gr[grnum-1].Name:='Group_'+num;
+gr[grnum-1].Caption:=capt;
+gr[grnum-1].tag:=StrToIntDef(num,0);
+gr[grnum-1].AutoSize:=true;
+gr[grnum-1].top:=10*ordernum;
+gr[grnum-1].Align:=altop;
+gr[grnum-1].ChildSizing.EnlargeHorizontal := crsHomogenousChildResize;
+gr[grnum-1].ChildSizing.EnlargeVertical := crsHomogenousSpaceResize;
+gr[grnum-1].ChildSizing.ShrinkHorizontal := crsHomogenousChildResize;
+gr[grnum-1].ChildSizing.ShrinkVertical := crsHomogenousSpaceResize;
+gr[grnum-1].ChildSizing.Layout := cclLeftToRightThenTopToBottom;
+gr[grnum-1].ChildSizing.ControlsPerLine := ctlperline;
+gr[grnum-1].Parent:=pt;
+result:=gr[grnum-1];
 end;
 
 procedure Tf_scriptengine.AddButton(num,capt:string; pt: TWinControl);
 var n: integer;
 begin
-inc(bnum);
-SetLength(bt,bnum);
-if num='' then num:=inttostr(bnum);
-n:=StrToIntDef(num,bnum);
+inc(btnum);
+SetLength(bt,btnum);
+if num='' then num:=inttostr(btnum);
+n:=StrToIntDef(num,btnum);
 if capt='' then capt:='Button_'+num;
-bt[bnum-1]:=Tbutton.Create(self);
-bt[bnum-1].Name:='Button_'+num;
-bt[bnum-1].Caption:=capt;
-bt[bnum-1].tag:=n;
-bt[bnum-1].OnClick:=@Button_Click;
-bt[bnum-1].Parent:=pt;
+bt[btnum-1]:=Tbutton.Create(self);
+bt[btnum-1].Name:='Button_'+num;
+bt[btnum-1].Caption:=capt;
+bt[btnum-1].tag:=n;
+bt[btnum-1].OnClick:=@Button_Click;
+bt[btnum-1].Parent:=pt;
 scrnum:=max(scrnum,n+1);
 SetLength(scr,scrnum);
 scr[n]:=TPSScript.Create(self);
@@ -514,49 +529,74 @@ end;
 
 procedure Tf_scriptengine.AddEdit(num:string; pt: TWinControl);
 begin
-inc(enum);
-SetLength(ed,enum);
-if num='' then num:=inttostr(enum);
-ed[enum-1]:=TEdit.Create(self);
-ed[enum-1].Name:='Edit_'+num;
-ed[enum-1].tag:=StrToIntDef(num,0);
-ed[enum-1].Text:='';
-ed[enum-1].Parent:=pt;
+inc(ednum);
+SetLength(ed,ednum);
+if num='' then num:=inttostr(ednum);
+ed[ednum-1]:=TEdit.Create(self);
+ed[ednum-1].Name:='Edit_'+num;
+ed[ednum-1].tag:=StrToIntDef(num,0);
+ed[ednum-1].Text:='';
+ed[ednum-1].Parent:=pt;
 end;
 
 procedure Tf_scriptengine.AddMemo(num:string; pt: TWinControl;h: integer);
 begin
-inc(mnum);
-SetLength(mem,mnum);
-if num='' then num:=inttostr(mnum);
-mem[mnum-1]:=TMemo.Create(self);
-mem[mnum-1].Name:='Memo_'+num;
-mem[mnum-1].tag:=StrToIntDef(num,0);
-mem[mnum-1].Height:=h;
-mem[mnum-1].Constraints.MinHeight:=h;
-mem[mnum-1].Clear;
-mem[mnum-1].ScrollBars:=ssAutoBoth;
-mem[mnum-1].Parent:=pt;
+inc(menum);
+SetLength(me,menum);
+if num='' then num:=inttostr(menum);
+me[menum-1]:=TMemo.Create(self);
+me[menum-1].Name:='Memo_'+num;
+me[menum-1].tag:=StrToIntDef(num,0);
+me[menum-1].Height:=h;
+me[menum-1].Constraints.MinHeight:=h;
+me[menum-1].Clear;
+me[menum-1].ScrollBars:=ssAutoBoth;
+me[menum-1].Parent:=pt;
 end;
 
 procedure Tf_scriptengine.AddSpacer(num:string; pt: TWinControl);
 begin
-inc(snum);
-SetLength(sp,snum);
-if num='' then num:=inttostr(snum);
-sp[snum-1]:=TPanel.Create(self);
-sp[snum-1].Name:='Spacer_'+num;
-sp[snum-1].tag:=StrToIntDef(num,0);
-sp[snum-1].BevelOuter:=bvNone;
-sp[snum-1].Caption:='';
-sp[snum-1].Parent:=pt;
+inc(spnum);
+SetLength(sp,spnum);
+if num='' then num:=inttostr(spnum);
+sp[spnum-1]:=TPanel.Create(self);
+sp[spnum-1].Name:='Spacer_'+num;
+sp[spnum-1].tag:=StrToIntDef(num,0);
+sp[spnum-1].BevelOuter:=bvNone;
+sp[spnum-1].Caption:='';
+sp[spnum-1].Parent:=pt;
+end;
+
+procedure Tf_scriptengine.AddCombo(num:string; pt: TWinControl);
+begin
+inc(cbnum);
+SetLength(cb,cbnum);
+if num='' then num:=inttostr(cbnum);
+cb[cbnum-1]:=TComboBox.Create(self);
+cb[cbnum-1].Name:='Combo_'+num;
+cb[cbnum-1].tag:=StrToIntDef(num,0);
+cb[cbnum-1].Text:='';
+cb[cbnum-1].Parent:=pt;
+end;
+
+procedure Tf_scriptengine.AddList(num:string; pt: TWinControl;h: integer);
+begin
+inc(lsnum);
+SetLength(ls,lsnum);
+if num='' then num:=inttostr(lsnum);
+ls[lsnum-1]:=TListBox.Create(self);
+ls[lsnum-1].Name:='List_'+num;
+ls[lsnum-1].tag:=StrToIntDef(num,0);
+ls[lsnum-1].Height:=h;
+ls[lsnum-1].Constraints.MinHeight:=h;
+ls[lsnum-1].Parent:=pt;
 end;
 
 procedure Tf_scriptengine.ReorderGroup;
 var i: integer;
 begin
 FEditSurface.DisableAlign;
-for i:=0 to gnum-1 do begin
+for i:=0 to grnum-1 do begin
   gr[i].top:=10*i;
 end;
 FEditSurface.EnableAlign;
@@ -572,16 +612,20 @@ EventTimer.Enabled:=false;
 for i:=0 to scrnum-1 do if (scr[i]<>nil) and scr[i].Running then scr[i].Stop;
 for i:=0 to evscrnum-1 do if (evscr[i]<>nil) and evscr[i].Running then scr[i].Stop;
 EventTimer.Enabled:=false;
-for i:=snum-1 downto 0 do sp[i].Free;
-for i:=mnum-1 downto 0 do mem[i].Free;
-for i:=enum-1 downto 0 do ed[i].Free;
-for i:=bnum-1 downto 0 do bt[i].Free;
-for i:=gnum-1 downto 0 do gr[i].Free;
-bnum:=0; SetLength(bt,0);
-enum:=0; SetLength(ed,0);
-mnum:=0; SetLength(mem,0);
-snum:=0; SetLength(sp,0);
-gnum:=0; SetLength(gr,0);
+for i:=lsnum-1 downto 0 do ls[i].Free;
+for i:=cbnum-1 downto 0 do cb[i].Free;
+for i:=spnum-1 downto 0 do sp[i].Free;
+for i:=menum-1 downto 0 do me[i].Free;
+for i:=ednum-1 downto 0 do ed[i].Free;
+for i:=btnum-1 downto 0 do bt[i].Free;
+for i:=grnum-1 downto 0 do gr[i].Free;
+btnum:=0; SetLength(bt,0);
+ednum:=0; SetLength(ed,0);
+menum:=0; SetLength(me,0);
+spnum:=0; SetLength(sp,0);
+cbnum:=0; SetLength(cb,0);
+lsnum:=0; SetLength(ls,0);
+grnum:=0; SetLength(gr,0);
 groupseq:=0;
 node:=TreeView1.Items.GetFirstNode;
 while node<>nil do begin
@@ -606,6 +650,14 @@ while node<>nil do begin
   else if txt='Memo' then begin
     AddMemo(nu,curgroup,StrToIntDef(parm1,50));
     MemoIdx:=max(MemoIdx,strtoint(nu));
+  end
+  else if txt='Combo' then begin
+    AddCombo(nu,curgroup);
+    ComboIdx:=max(ComboIdx,strtoint(nu));
+  end
+  else if txt='List' then begin
+    AddList(nu,curgroup,StrToIntDef(parm1,50));
+    ListIdx:=max(ListIdx,strtoint(nu));
   end
   else if txt='Spacer' then begin
     AddSpacer(nu,curgroup);
@@ -643,12 +695,22 @@ end else if RadioButtonEdit.Checked then begin
     inc(EditIdx);
     TreeView1.Items.AddChild(TreeView1.Selected,'Edit_'+inttostr(EditIdx));
   end;
+end else if RadioButtonCombo.Checked then begin
+  if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
+    inc(ComboIdx);
+    TreeView1.Items.AddChild(TreeView1.Selected,'Combo_'+inttostr(ComboIdx));
+  end;
+end else if RadioButtonList.Checked then begin
+  if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
+    inc(ListIdx);
+    TreeView1.Items.AddChild(TreeView1.Selected,'List_'+inttostr(ListIdx)+';'+IntToStr(StrToIntDef(ListHeightEdit.Text,50)));
+  end;
 end else if RadioButtonMemo.Checked then begin
   if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
     val(MemoHeightEdit.Text,v,n);
     if n=0 then begin
       inc(MemoIdx);
-      TreeView1.Items.AddChild(TreeView1.Selected,'Memo_'+inttostr(MemoIdx)+';'+IntToStr(StrToIntDef(MemoHeightEdit.Text,1)));
+      TreeView1.Items.AddChild(TreeView1.Selected,'Memo_'+inttostr(MemoIdx)+';'+IntToStr(StrToIntDef(MemoHeightEdit.Text,50)));
     end;
   end;
 end else if RadioButtonSpacer.Checked then begin
@@ -692,7 +754,9 @@ if (TreeView1.Selected<>nil) then begin
   end else if RadioButtonEdit.Checked then begin
      //
   end else if RadioButtonMemo.Checked then begin
-    TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+IntToStr(StrToIntDef(MemoHeightEdit.Text,1));
+    TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+IntToStr(StrToIntDef(MemoHeightEdit.Text,50));
+  end else if RadioButtonList.Checked then begin
+    TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+IntToStr(StrToIntDef(ListHeightEdit.Text,50));
   end else if RadioButtonSpacer.Checked then begin
      //
   end else if RadioButtonEvent.Checked then begin
@@ -719,6 +783,13 @@ var v,n: integer;
 begin
   val(GroupRowEdit.Text,v,n);
   ButtonUpdate.Visible:=(n=0)and(ButtonUpdate.Tag=1);
+end;
+
+procedure Tf_scriptengine.ListHeightEditChange(Sender: TObject);
+var v,n: integer;
+begin
+  val(ListHeightEdit.Text,v,n);
+  ButtonUpdate.Visible:=(n=0)and(ButtonUpdate.Tag=5);
 end;
 
 procedure Tf_scriptengine.MemoHeightEditChange(Sender: TObject);
@@ -774,6 +845,12 @@ if node<>nil then begin
     MemoHeightEdit.Text:=words(node.Text,'',2,1,';');
     ButtonUpdate.Visible:=false;
     ButtonUpdate.Tag:=3;
+  end else if (pos('List_',node.Text)=1) then begin
+    ButtonEditScript.Visible:=false;
+    RadioButtonList.Checked:=true;
+    ListHeightEdit.Text:=words(node.Text,'',2,1,';');
+    ButtonUpdate.Visible:=false;
+    ButtonUpdate.Tag:=5;
   end else if (pos('Spacer_',node.Text)=1) then begin
     ButtonEditScript.Visible:=false;
     ButtonUpdate.Visible:=false;
@@ -1007,16 +1084,20 @@ end;
 procedure Tf_scriptengine.FormCreate(Sender: TObject);
 var i: integer;
 begin
-  gnum:=0;
-  bnum:=0;
-  enum:=0;
-  mnum:=0;
-  snum:=0;
+  grnum:=0;
+  btnum:=0;
+  ednum:=0;
+  cbnum:=0;
+  lsnum:=0;
+  menum:=0;
+  spnum:=0;
   scrnum:=0;
   GroupIdx:=0;
   ButtonIdx:=0;
   EditIdx:=0;
   MemoIdx:=0;
+  ComboIdx:=0;
+  ListIdx:=0;
   SpacerIdx:=0;
   {$ifdef mswindows}
     PSImport_ComObj1:=TPSImport_ComObj.Create(self);
@@ -1088,10 +1169,12 @@ var i: integer;
 
 begin
 with Sender as TPSScript do begin
-  for i:=1 to gnum do AddRegisteredVariable(gr[i-1].Name, 'TGroupbox');
-  for i:=1 to bnum do AddRegisteredVariable(bt[i-1].Name, 'TButton');
-  for i:=1 to enum do AddRegisteredVariable(ed[i-1].Name, 'TEdit');
-  for i:=1 to mnum do AddRegisteredVariable(mem[i-1].Name, 'TMemo');
+  for i:=1 to grnum do AddRegisteredVariable(gr[i-1].Name, 'TGroupbox');
+  for i:=1 to btnum do AddRegisteredVariable(bt[i-1].Name, 'TButton');
+  for i:=1 to ednum do AddRegisteredVariable(ed[i-1].Name, 'TEdit');
+  for i:=1 to menum do AddRegisteredVariable(me[i-1].Name, 'TMemo');
+  for i:=1 to cbnum do AddRegisteredVariable(cb[i-1].Name, 'TComboBox');
+  for i:=1 to lsnum do AddRegisteredVariable(ls[i-1].Name, 'TListBox');
   comp.AddConstantN('deg2rad', 'extended').SetExtended(deg2rad);
   comp.AddConstantN('rad2deg', 'extended').SetExtended(rad2deg);
   AddMethod(self, @Tf_scriptengine.doExecuteCmd, 'function  Cmd(cname:string; arg:Tstringlist):string;');
@@ -1123,10 +1206,12 @@ var i: integer;
 
 begin
 with Sender as TPSScript do begin
-  for i:=1 to gnum do SetVarToInstance(gr[i-1].Name, gr[i-1]);
-  for i:=1 to bnum do SetVarToInstance(bt[i-1].Name, bt[i-1]);
-  for i:=1 to enum do SetVarToInstance(ed[i-1].Name, ed[i-1]);
-  for i:=1 to mnum do SetVarToInstance(mem[i-1].Name, mem[i-1]);
+  for i:=1 to grnum do SetVarToInstance(gr[i-1].Name, gr[i-1]);
+  for i:=1 to btnum do SetVarToInstance(bt[i-1].Name, bt[i-1]);
+  for i:=1 to ednum do SetVarToInstance(ed[i-1].Name, ed[i-1]);
+  for i:=1 to menum do SetVarToInstance(me[i-1].Name, me[i-1]);
+  for i:=1 to cbnum do SetVarToInstance(cb[i-1].Name, cb[i-1]);
+  for i:=1 to lsnum do SetVarToInstance(ls[i-1].Name, ls[i-1]);
 end;
 ProcessMenu(FMainmenu.Items);
 end;
