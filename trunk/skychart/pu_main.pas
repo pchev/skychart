@@ -5391,6 +5391,7 @@ var i,j,n:integer;
     inif: TMemIniFile;
     section,buf : string;
     obsdetail: TObsDetail;
+    ok: boolean;
 begin
 inif:=TMeminifile.create(filename);
 try
@@ -5686,9 +5687,8 @@ end;
 // Script panel
 for i:=0 to numscript-1 do begin
    section:='ScriptPanel'+inttostr(i);
-   Fscript[i].Visible:=ReadBool(section,'visible',false);
-   if Fscript[i].Visible then begin
-       ScriptPanel.Visible:=true;
+   ok:=ReadBool(section,'visible',false);
+   if ok then begin
        ActiveScript:=i;
    end;
    buf:=ReadString(section,'Title',Fscript[i].PanelTitle.Caption);
@@ -9154,6 +9154,10 @@ for i:=0 to numscript-1 do begin
   Fscript[i].Mainmenu:=MainMenu1;
   if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
   Fscript[i].Init;
+  if i=ActiveScript then begin
+     ScriptPanel.Visible:=true;
+     Fscript[i].ShowScript(true);
+  end;
 end;
 Splitter1.ResizeControl:=ScriptPanel;
 SetScriptMenuCaption;
@@ -9178,18 +9182,18 @@ begin
    for i:=0 to numscript-1 do begin
      if i=n then begin
         if Fscript[i].Visible then begin
-           Fscript[i].Visible:=false;
+           Fscript[i].ShowScript(false);
            ScriptPanel.Visible:=false;
            Splitter1.Visible:=false;
         end else begin
-           Fscript[i].Visible:=true;
+           Fscript[i].ShowScript(true);
            ScriptPanel.Visible:=true;
            Splitter1.Visible:=true;
            Splitter1.ResizeControl:=ScriptPanel;
            if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
         end;
      end
-     else Fscript[i].Visible:=false;
+     else Fscript[i].ShowScript(false);
    end;
    ActiveScript:=n;
  end;

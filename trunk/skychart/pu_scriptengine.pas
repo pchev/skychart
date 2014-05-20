@@ -104,6 +104,7 @@ type
     procedure TimerIntervalEditClick(Sender: TObject);
     procedure TplPSScriptCompile(Sender: TPSScript);
     procedure TplPSScriptExecute(Sender: TPSScript);
+    procedure TplPSScriptLine(Sender: TObject);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure TreeView1DragDrop(Sender, Source: TObject; X, Y: Integer);
     procedure TreeView1DragOver(Sender, Source: TObject; X, Y: Integer;
@@ -141,6 +142,7 @@ type
     ChartName,RefreshText,SelectionText,DescriptionText,DistanceText: string;
     TelescopeRA,TelescopeDE: double;
     vlist: array of Variant;
+    FTimerReady: boolean;
     function  doExecuteCmd(cname:string; arg:Tstringlist):string;
     function  doGetS(varname:string; var str: string):Boolean;
     function  doGetI(varname:string; var i: Integer):Boolean;
@@ -168,12 +170,15 @@ type
   public
     { public declarations }
     procedure SetLang;
+    procedure StopAllScript;
+    procedure StartTimer;
     procedure Save(strbtn, strscr, eventscr: Tstringlist; var title:string);
     procedure Load(strbtn, strscr, eventscr: Tstringlist; title:string);
     procedure ChartRefreshEvent(origin,str:string);
     procedure ObjectSelectionEvent(origin,str,longstr:string);
     procedure DistanceMeasurementEvent(origin,str:string);
     procedure TelescopeMoveEvent(origin:string; ra,de: double);
+    property TimerReady: boolean read FTimerReady;
     property ConfigToolbar1: TStringList read FConfigToolbar1 write FConfigToolbar1;
     property ConfigToolbar2: TStringList read FConfigToolbar2 write FConfigToolbar2;
     property EditSurface: TPanel read FEditSurface write FEditSurface;
@@ -521,6 +526,7 @@ scr[n]:=TPSScript.Create(self);
 scr[n].tag:=n;
 scr[n].OnCompile:=@TplPSScriptCompile;
 scr[n].OnExecute:=@TplPSScriptExecute;
+scr[n].OnLine:=@TplPSScriptLine;
 scr[n].Plugins.Assign(TplPSScript.Plugins);
 end;
 
@@ -629,16 +635,27 @@ end;
 FEditSurface.EnableAlign;
 end;
 
+Procedure Tf_scriptengine.StopAllScript;
+var i:integer;
+begin
+EventTimer.Enabled:=false;
+for i:=0 to scrnum-1 do if (scr[i]<>nil) and scr[i].Running then scr[i].Stop;
+for i:=0 to evscrnum-1 do if (evscr[i]<>nil) and evscr[i].Running then scr[i].Stop;
+EventTimer.Enabled:=false;
+end;
+
+procedure Tf_scriptengine.StartTimer;
+begin
+EventTimer.Enabled:=FTimerReady;
+end;
+
 procedure Tf_scriptengine.ButtonApplyClick(Sender: TObject);
 var node:TTreeNode;
    curgroup:TGroupBox;
    txt,parm1,parm2,buf,nu: string;
    i,groupseq: integer;
 begin
-EventTimer.Enabled:=false;
-for i:=0 to scrnum-1 do if (scr[i]<>nil) and scr[i].Running then scr[i].Stop;
-for i:=0 to evscrnum-1 do if (evscr[i]<>nil) and evscr[i].Running then scr[i].Stop;
-EventTimer.Enabled:=false;
+StopAllScript;
 for i:=imnum-1 downto 0 do im[i].Free;
 for i:=lsnum-1 downto 0 do ls[i].Free;
 for i:=cbnum-1 downto 0 do cb[i].Free;
@@ -705,15 +722,14 @@ if Assigned(FonApply) then FonApply(self);
 end;
 
 procedure Tf_scriptengine.ButtonAddClick(Sender: TObject);
-var v,n: integer;
+var
    buf,txt,num: string;
    ok:boolean;
    node:TTreeNode;
 begin
 if RadioButtonGroup.Checked then begin
   if (TreeView1.Selected=nil)or((TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0)) then begin
-    val(GroupRowEdit.Text,v,n);
-    if n=0 then begin
+    if isInteger(GroupRowEdit.Text) then begin
       inc(GroupIdx);
       TreeView1.Selected:=TreeView1.Items.Add(TreeView1.Selected,'Group_'+inttostr(GroupIdx)+';'+StringReplace(GroupCaptionEdit.Text,';','',[rfReplaceAll])+';'+IntToStr(StrToIntDef(GroupRowEdit.Text,1)));
     end;
@@ -745,8 +761,7 @@ end else if RadioButtonImage.Checked then begin
   end;
 end else if RadioButtonMemo.Checked then begin
   if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
-    val(MemoHeightEdit.Text,v,n);
-    if n=0 then begin
+    if isInteger(MemoHeightEdit.Text) then begin
       inc(MemoIdx);
       TreeView1.Items.AddChild(TreeView1.Selected,'Memo_'+inttostr(MemoIdx)+';'+IntToStr(StrToIntDef(MemoHeightEdit.Text,50)));
     end;
@@ -819,45 +834,33 @@ begin
 end;
 
 procedure Tf_scriptengine.GroupRowEditChange(Sender: TObject);
-var v,n: integer;
 begin
-  val(GroupRowEdit.Text,v,n);
-  ButtonUpdate.Visible:=(n=0)and(ButtonUpdate.Tag=1);
+  ButtonUpdate.Visible:=(isInteger(GroupRowEdit.Text))and(ButtonUpdate.Tag=1);
 end;
 
 procedure Tf_scriptengine.ImageHeightEditChange(Sender: TObject);
-var v,n: integer;
 begin
-  val(ImageHeightEdit.Text,v,n);
-  ButtonUpdate.Visible:=(n=0)and(ButtonUpdate.Tag=6);
+  ButtonUpdate.Visible:=(isInteger(ImageHeightEdit.Text))and(ButtonUpdate.Tag=6);
 end;
 
 procedure Tf_scriptengine.ImageWidthEditChange(Sender: TObject);
-var v,n: integer;
 begin
-  val(ImageWidthEdit.Text,v,n);
-  ButtonUpdate.Visible:=(n=0)and(ButtonUpdate.Tag=6);
+  ButtonUpdate.Visible:=(isInteger(ImageWidthEdit.Text))and(ButtonUpdate.Tag=6);
 end;
 
 procedure Tf_scriptengine.ListHeightEditChange(Sender: TObject);
-var v,n: integer;
 begin
-  val(ListHeightEdit.Text,v,n);
-  ButtonUpdate.Visible:=(n=0)and(ButtonUpdate.Tag=5);
+  ButtonUpdate.Visible:=(isInteger(ListHeightEdit.Text))and(ButtonUpdate.Tag=5);
 end;
 
 procedure Tf_scriptengine.MemoHeightEditChange(Sender: TObject);
-var v,n: integer;
 begin
-  val(MemoHeightEdit.Text,v,n);
-  ButtonUpdate.Visible:=(n=0)and(ButtonUpdate.Tag=3);
+  ButtonUpdate.Visible:=(isInteger(MemoHeightEdit.Text))and(ButtonUpdate.Tag=3);
 end;
 
 procedure Tf_scriptengine.TimerIntervalEditClick(Sender: TObject);
-var v,n: integer;
 begin
-  val(TimerIntervalEdit.Text,v,n);
-  ButtonUpdate.Visible:=(n=0)and(ButtonUpdate.Tag=4);
+  ButtonUpdate.Visible:=(isInteger(TimerIntervalEdit.Text))and(ButtonUpdate.Tag=4);
 end;
 
 procedure Tf_scriptengine.RadioButtonClick(Sender: TObject);
@@ -1109,11 +1112,11 @@ procedure Tf_scriptengine.CompileScripts;
 var i,j,n: integer;
     buf,txt,nu,parm: string;
     node:TTreeNode;
-    timerok,ok: boolean;
+    ok: boolean;
 begin
 CompileMemo.Clear;
 EventTimer.Enabled:=false;
-timerok:=false;
+FTimerReady:=false;
 node:=TreeView1.Items.GetFirstNode;
 while node<>nil do begin
   buf:=words(node.Text,'',1,1,';');
@@ -1134,12 +1137,12 @@ while node<>nil do begin
       parm:=words(node.Text,'',4,1,';');
       i:=StrToIntDef(parm,60);
       EventTimer.Interval:=i*1000;
-      timerok:=ok;
+      FTimerReady:=ok;
     end;
   end;
   node:=node.GetNext;
 end;
-EventTimer.Enabled:=timerok;
+if visible then StartTimer;
 end;
 
 procedure Tf_scriptengine.FormCreate(Sender: TObject);
@@ -1165,6 +1168,7 @@ begin
     PSImport_ComObj1:=TPSImport_ComObj.Create(self);
     TPSPluginItem(TplPSScript.Plugins.Add).Plugin:=PSImport_ComObj1;
   {$endif}
+  FTimerReady:=false;
   SetLength(vlist,22);
   evscrnum:=ord(High(Teventlist))+1;
   SetLength(evscr,evscrnum);
@@ -1278,6 +1282,11 @@ with Sender as TPSScript do begin
 //  for i:=1 to imnum do SetVarToInstance(im[i-1].Name, im[i-1]);
 end;
 ProcessMenu(FMainmenu.Items);
+end;
+
+procedure Tf_scriptengine.TplPSScriptLine(Sender: TObject);
+begin
+  Application.ProcessMessages;
 end;
 
 procedure Tf_scriptengine.EventTimerTimer(Sender: TObject);

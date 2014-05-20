@@ -44,6 +44,7 @@ Function mm2pi(l,PrinterResolution : single): integer;
 Function Slash(nom : string) : string;
 Function NoSlash(nom : string) : string;
 function IsNumber(n : string) : boolean;
+function IsInteger(n : string) : boolean;
 function AddColor(c1,c2 : Tcolor):Tcolor;
 function SubColor(c1,c2 : Tcolor):Tcolor;
 function roundF(x:double;n:integer):double;
@@ -146,6 +147,7 @@ uses u_projection;
 
 var
   dummy_ext : extended;
+  dummy_int : integer;
   ftrace : textfile;
   
 {$ifdef lclgtk2} {$define cdcutf8} {$define greekutf8} {$endif}
@@ -327,6 +329,11 @@ end;
 function IsNumber(n : string) : boolean;
 begin
 result:=TextToFloat(PChar(n),Dummy_ext);
+end;
+
+function IsInteger(n : string) : boolean;
+begin
+result:=TryStrToInt(n,dummy_int);
 end;
 
 function roundF(x:double;n:integer):double;

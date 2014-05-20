@@ -53,6 +53,7 @@ type
     destructor Destroy; override;
     procedure SetLang;
     procedure Init;
+    procedure ShowScript(onoff:boolean);
     procedure ChartRefreshEvent(origin,str:string);
     procedure ObjectSelectionEvent(origin,str,longstr:string);
     procedure DistanceMeasurementEvent(origin,str:string);
@@ -91,12 +92,9 @@ implementation
 { Tf_script }
 
 procedure Tf_script.SetLang;
-var txt:string;
 begin
- txt:= FScriptTitle;
   if FScriptTitle='' then PanelTitle.Caption:=rsToolBox+' '+inttostr(tag+1)
                      else PanelTitle.Caption:=FScriptTitle;
-  txt:=PanelTitle.Caption;
   Label1.Caption:=rsConfiguratio;
   ButtonEditSrc.Caption:=rsScript;
   ButtonEditTB.Caption:=rsToolBar;
@@ -129,6 +127,22 @@ begin
   FConfigEvent.Free;
   if fscriptengine<>nil then fscriptengine.Free;
   inherited Destroy;
+end;
+
+procedure Tf_script.ShowScript(onoff:boolean);
+begin
+  if onoff<>visible then begin
+     visible:=onoff;
+     if visible then begin
+        if fscriptengine<>nil then begin
+           fscriptengine.StartTimer;
+        end;
+     end else
+        if fscriptengine<>nil then begin
+           fscriptengine.StopAllScript;
+           fscriptengine.Hide;
+        end;
+  end;
 end;
 
 procedure Tf_script.Init;
