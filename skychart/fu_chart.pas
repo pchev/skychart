@@ -3664,9 +3664,6 @@ d:=StrToFloatDef(DE,9999);
 if (abs(r)<=360)and(abs(d)<=90) then begin
  d:=deg2rad*d;
  r:=deg2rad*r;
- sc.cfgsc.TrackOn:=true;
- sc.cfgsc.TrackType:=6;
- sc.cfgsc.TrackName:=rsTelescope+'-2';
  sc.cfgsc.scopelock:=false;
  if sc.Telescope2Move(r,d) then Refresh;
  result:=msgOK;
