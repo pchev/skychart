@@ -472,6 +472,7 @@ object f_scriptengine: Tf_scriptengine
   end
   object TplPSScript: TPSScript
     CompilerOptions = []
+    OnLine = TplPSScriptLine
     OnCompile = TplPSScriptCompile
     OnExecute = TplPSScriptExecute
     Plugins = <    
