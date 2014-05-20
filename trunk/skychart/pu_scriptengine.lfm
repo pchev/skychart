@@ -1,10 +1,10 @@
 object f_scriptengine: Tf_scriptengine
   Left = 376
-  Height = 457
+  Height = 494
   Top = 124
   Width = 750
   Caption = 'Script'
-  ClientHeight = 457
+  ClientHeight = 494
   ClientWidth = 750
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -12,7 +12,7 @@ object f_scriptengine: Tf_scriptengine
   object ButtonApply: TButton
     Left = 240
     Height = 25
-    Top = 336
+    Top = 376
     Width = 85
     Caption = 'Apply'
     OnClick = ButtonApplyClick
@@ -21,7 +21,7 @@ object f_scriptengine: Tf_scriptengine
   object CompileMemo: TMemo
     Left = 240
     Height = 72
-    Top = 376
+    Top = 416
     Width = 504
     Lines.Strings = (
       'CompileMemo'
@@ -30,17 +30,17 @@ object f_scriptengine: Tf_scriptengine
   end
   object Panel1: TPanel
     Left = 0
-    Height = 457
+    Height = 494
     Top = 0
     Width = 226
     Align = alLeft
     Caption = 'Panel1'
-    ClientHeight = 457
+    ClientHeight = 494
     ClientWidth = 226
     TabOrder = 2
     object TreeView1: TTreeView
       Left = 1
-      Height = 455
+      Height = 492
       Top = 1
       Width = 224
       Align = alClient
@@ -58,7 +58,7 @@ object f_scriptengine: Tf_scriptengine
   object ButtonClear: TButton
     Left = 648
     Height = 25
-    Top = 336
+    Top = 376
     Width = 88
     Caption = 'Clear all'
     OnClick = ButtonClearClick
@@ -75,11 +75,11 @@ object f_scriptengine: Tf_scriptengine
   end
   object GroupBox1: TGroupBox
     Left = 336
-    Height = 280
+    Height = 320
     Top = 48
     Width = 400
     Caption = 'Component'
-    ClientHeight = 249
+    ClientHeight = 289
     ClientWidth = 396
     TabOrder = 5
     object RadioButtonGroup: TRadioButton
@@ -319,6 +319,14 @@ object f_scriptengine: Tf_scriptengine
       Text = '100'
       Visible = False
     end
+    object CheckBoxHidenTimer: TCheckBox
+      Left = 134
+      Height = 26
+      Top = 240
+      Width = 201
+      Caption = 'Activate the Timer when hiden'
+      TabOrder = 18
+    end
   end
   object ButtonAdd: TButton
     Left = 240
@@ -352,7 +360,7 @@ object f_scriptengine: Tf_scriptengine
   object ButtonSave: TButton
     Left = 344
     Height = 25
-    Top = 336
+    Top = 376
     Width = 91
     Caption = 'Save'
     OnClick = ButtonSaveClick
@@ -361,7 +369,7 @@ object f_scriptengine: Tf_scriptengine
   object ButtonLoad: TButton
     Left = 448
     Height = 25
-    Top = 336
+    Top = 376
     Width = 88
     Caption = 'Load'
     OnClick = ButtonLoadClick
@@ -464,7 +472,7 @@ object f_scriptengine: Tf_scriptengine
   object ButtonHelp: TButton
     Left = 552
     Height = 25
-    Top = 336
+    Top = 376
     Width = 75
     Caption = 'Help'
     OnClick = ButtonHelpClick
