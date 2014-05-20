@@ -890,8 +890,6 @@ end;
   end
   else begin
       if cfgsc.TrackName=rsTelescope+'-2' then begin
-        if cfgsc.scope2mark then DrawFinderMark(cfgsc.Scope2Ra,cfgsc.Scope2Dec,true,-1,MarkType);
-        cfgsc.scope2mark:=false;
         cfgsc.TrackName:='';
       end;
   end;
