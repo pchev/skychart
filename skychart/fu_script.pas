@@ -43,9 +43,12 @@ type
     FonApply: TNotifyEvent;
     FScriptTitle: string;
     FConfigToolbar1,FConfigToolbar2,FConfigScriptButton,FConfigScript,FConfigEvent: TStringList;
+    FHidenTimer: Boolean;
     procedure ApplyScript(Sender: TObject);
     procedure SetExecuteCmd(value:TExecuteCmd);
     procedure SetActiveChart(value:Tf_chart);
+    function  GetHidenTimer: Boolean;
+    procedure SetHidenTimer(value:Boolean);
     procedure SetMainmenu(value:TMenu);
   public
     { public declarations }
@@ -82,6 +85,7 @@ type
     property ConfigEvent: TStringList read FConfigEvent write FConfigEvent;
     property ExecuteCmd: TExecuteCmd read FExecuteCmd write SetExecuteCmd;
     property ActiveChart: Tf_chart read FActiveChart write SetActiveChart;
+    property HidenTimer: Boolean read GetHidenTimer write SetHidenTimer;
     property onApply: TNotifyEvent read FonApply write FonApply;
   end;
 
@@ -107,6 +111,7 @@ constructor Tf_script.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
   FScriptTitle:='';
+  FHidenTimer:=false;
   fedittoolbar:=Tf_edittoolbar.Create(self);
   fedittoolbar.ButtonMini.Visible:=false;
   fedittoolbar.ButtonStd.Visible:=false;
@@ -141,6 +146,7 @@ begin
         if fscriptengine<>nil then begin
            fscriptengine.StopAllScript;
            fscriptengine.Hide;
+           if fscriptengine.CheckBoxHidenTimer.Checked then fscriptengine.StartTimer;
         end;
   end;
 end;
@@ -188,6 +194,7 @@ begin
         fscriptengine.Activechart:=FActivechart;
         fscriptengine.Mainmenu:=FMainmenu;
      end;
+     fscriptengine.CheckBoxHidenTimer.Checked:=FHidenTimer;
      fscriptengine.Load(FConfigScriptButton, FConfigScript, FConfigEvent,PanelTitle.Caption);
   end;
 end;
@@ -270,6 +277,18 @@ end;
 procedure Tf_script.TelescopeMoveEvent(origin:string; ra,de: double);
 begin
   if fscriptengine<>nil then fscriptengine.TelescopeMoveEvent(origin,ra,de);
+end;
+
+function  Tf_script.GetHidenTimer: Boolean;
+begin
+  if fscriptengine<>nil then Result:=fscriptengine.CheckBoxHidenTimer.Checked
+     else Result:=FHidenTimer;
+end;
+
+procedure Tf_script.SetHidenTimer(value:Boolean);
+begin
+  FHidenTimer:=value;
+  if fscriptengine<>nil then fscriptengine.CheckBoxHidenTimer.Checked:=value;
 end;
 
 end.

@@ -34,6 +34,7 @@ type
     ButtonApply: TButton;
     ButtonClear: TButton;
     ButtonDelete: TButton;
+    CheckBoxHidenTimer: TCheckBox;
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
@@ -142,11 +143,17 @@ type
     ChartName,RefreshText,SelectionText,DescriptionText,DistanceText: string;
     TelescopeRA,TelescopeDE: double;
     vlist: array of Variant;
+    ilist: array of Integer;
+    dlist: array of Double;
+    slist: array of String;
     FTimerReady: boolean;
-    function  doExecuteCmd(cname:string; arg:Tstringlist):string;
-    function  doGetS(varname:string; var str: string):Boolean;
-    function  doGetI(varname:string; var i: Integer):Boolean;
+    function doExecuteCmd(cname:string; arg:Tstringlist):string;
+    function doGetS(varname:string; var str: string):Boolean;
+    function doSetS(varname:string; str: string):Boolean;
+    function doGetI(varname:string; var i: Integer):Boolean;
+    function doSetI(varname:string; i: Integer):Boolean;
     function doGetD(varname:string; var x: Double):Boolean;
+    function doSetD(varname:string; x: Double):Boolean;
     function doGetV(varname:string; var v: Variant):Boolean;
     function doSetV(varname:string; v: Variant):Boolean;
     Function doARtoStr(var ar: Double) : string;
@@ -257,6 +264,33 @@ begin
   else if varname='SELECTIONTEXT' then str:=SelectionText
   else if varname='DESCRIPTIONTEXT' then str:=DescriptionText
   else if varname='DISTANCETEXT' then str:=DistanceText
+  else if varname='STR1' then str:=slist[0]
+  else if varname='STR2' then str:=slist[1]
+  else if varname='STR3' then str:=slist[2]
+  else if varname='STR4' then str:=slist[3]
+  else if varname='STR5' then str:=slist[4]
+  else if varname='STR6' then str:=slist[5]
+  else if varname='STR7' then str:=slist[6]
+  else if varname='STR8' then str:=slist[7]
+  else if varname='STR9' then str:=slist[8]
+  else if varname='STR10' then str:=slist[9]
+  else result:=false;
+end;
+
+function Tf_scriptengine.doSetS(varname:string; str: string):Boolean;
+begin
+  result:=true;
+  varname:=uppercase(varname);
+  if varname='STR1' then slist[0]:=str
+  else if varname='STR2' then slist[1]:=str
+  else if varname='STR3' then slist[2]:=str
+  else if varname='STR4' then slist[3]:=str
+  else if varname='STR5' then slist[4]:=str
+  else if varname='STR6' then slist[5]:=str
+  else if varname='STR7' then slist[6]:=str
+  else if varname='STR8' then slist[7]:=str
+  else if varname='STR9' then slist[8]:=str
+  else if varname='STR10' then slist[9]:=str
   else result:=false;
 end;
 
@@ -267,12 +301,68 @@ begin
   if varname='TELESCOPERA' then x:=TelescopeRA
   else if varname='TELESCOPEDE' then x:=TelescopeDE
   else if varname='TIMENOW' then x:=now
+  else if varname='DOUBLE1' then x:=dlist[0]
+  else if varname='DOUBLE2' then x:=dlist[1]
+  else if varname='DOUBLE3' then x:=dlist[2]
+  else if varname='DOUBLE4' then x:=dlist[3]
+  else if varname='DOUBLE5' then x:=dlist[4]
+  else if varname='DOUBLE6' then x:=dlist[5]
+  else if varname='DOUBLE7' then x:=dlist[6]
+  else if varname='DOUBLE8' then x:=dlist[7]
+  else if varname='DOUBLE9' then x:=dlist[8]
+  else if varname='DOUBLE10' then x:=dlist[9]
+  else result:=false;
+end;
+
+function Tf_scriptengine.doSetD(varname:string; x: Double):Boolean;
+begin
+  result:=true;
+  varname:=uppercase(varname);
+  if varname='DOUBLE1' then dlist[0]:=x
+  else if varname='DOUBLE2' then dlist[1]:=x
+  else if varname='DOUBLE3' then dlist[2]:=x
+  else if varname='DOUBLE4' then dlist[3]:=x
+  else if varname='DOUBLE5' then dlist[4]:=x
+  else if varname='DOUBLE6' then dlist[5]:=x
+  else if varname='DOUBLE7' then dlist[6]:=x
+  else if varname='DOUBLE8' then dlist[7]:=x
+  else if varname='DOUBLE9' then dlist[8]:=x
+  else if varname='DOUBLE10' then dlist[9]:=x
   else result:=false;
 end;
 
 function  Tf_scriptengine.doGetI(varname:string; var i: Integer):Boolean;
 begin
-  result:=false;
+  result:=true;
+  varname:=uppercase(varname);
+  if varname='INT1' then i:=ilist[0]
+  else if varname='INT2' then i:=ilist[1]
+  else if varname='INT3' then i:=ilist[2]
+  else if varname='INT4' then i:=ilist[3]
+  else if varname='INT5' then i:=ilist[4]
+  else if varname='INT6' then i:=ilist[5]
+  else if varname='INT7' then i:=ilist[6]
+  else if varname='INT8' then i:=ilist[7]
+  else if varname='INT9' then i:=ilist[8]
+  else if varname='INT10' then i:=ilist[9]
+  else result:=false;
+end;
+
+function Tf_scriptengine.doSetI(varname:string; i: Integer):Boolean;
+begin
+  result:=true;
+  varname:=uppercase(varname);
+  if varname='INT1' then ilist[0]:=i
+  else if varname='INT2' then ilist[1]:=i
+  else if varname='INT3' then ilist[2]:=i
+  else if varname='INT4' then ilist[3]:=i
+  else if varname='INT5' then ilist[4]:=i
+  else if varname='INT6' then ilist[5]:=i
+  else if varname='INT7' then ilist[6]:=i
+  else if varname='INT8' then ilist[7]:=i
+  else if varname='INT9' then ilist[8]:=i
+  else if varname='INT10' then ilist[9]:=i
+  else result:=false;
 end;
 
 function Tf_scriptengine.doGetV(varname:string; var v: Variant):Boolean;
@@ -983,6 +1073,7 @@ if OpenDialog1.Execute then begin
   with inif do begin
   section:='ScriptPanel';
   titl:=ReadString(section,'Title',ScriptTitle.Text);
+  CheckBoxHidenTimer.Checked:=ReadBool(section,'HidenTimer',CheckBoxHidenTimer.Checked);
   n:=ReadInteger(section,'numtoolbar1',0);
   ConfigToolbar1.Clear;
   for j:=0 to n-1 do ConfigToolbar1.Add(ReadString(section,'toolbar1_'+inttostr(j),''));
@@ -1029,6 +1120,7 @@ if SaveDialog1.Execute then begin
   section:='ScriptPanel';
   EraseSection(section);
   WriteString(section,'Title',titl);
+  WriteBool(section,'HidenTimer',CheckBoxHidenTimer.Checked);
   n:=ConfigToolbar1.Count;
   WriteInteger(section,'numtoolbar1',n);
   for j:=0 to n-1 do WriteString(section,'toolbar1_'+inttostr(j),ConfigToolbar1[j]);
@@ -1170,6 +1262,9 @@ begin
   {$endif}
   FTimerReady:=false;
   SetLength(vlist,22);
+  SetLength(ilist,10);
+  SetLength(dlist,10);
+  SetLength(slist,10);
   evscrnum:=ord(High(Teventlist))+1;
   SetLength(evscr,evscrnum);
   for i:=0 to evscrnum-1 do begin
@@ -1213,6 +1308,9 @@ begin
   TreeView1.free;
   if Fpascaleditor<>nil then Fpascaleditor.Free;
   SetLength(vlist,0);
+  SetLength(ilist,0);
+  SetLength(dlist,0);
+  SetLength(slist,0);
 end;
 
 procedure Tf_scriptengine.ButtonClearClick(Sender: TObject);
@@ -1246,8 +1344,11 @@ with Sender as TPSScript do begin
   comp.AddConstantN('rad2deg', 'extended').SetExtended(rad2deg);
   AddMethod(self, @Tf_scriptengine.doExecuteCmd, 'function  Cmd(cname:string; arg:Tstringlist):string;');
   AddMethod(self, @Tf_scriptengine.doGetS, 'function GetS(varname:string; var str: string):Boolean;');
+  AddMethod(self, @Tf_scriptengine.doSetS, 'function SetS(varname:string; str: string):Boolean;');
   AddMethod(self, @Tf_scriptengine.doGetI, 'function GetI(varname:string; var i: Integer):Boolean;');
+  AddMethod(self, @Tf_scriptengine.doSetI, 'function SetI(varname:string; i: Integer):Boolean;');
   AddMethod(self, @Tf_scriptengine.doGetD, 'function GetD(varname:string; var x: double):boolean;');
+  AddMethod(self, @Tf_scriptengine.doSetD, 'function SetD(varname:string; x: Double):Boolean;');
   AddMethod(self, @Tf_scriptengine.doGetV, 'function GetV(varname:string; var v: Variant):Boolean;');
   AddMethod(self, @Tf_scriptengine.doSetV, 'function SetV(varname:string; v: Variant):Boolean;');
   AddMethod(self, @Tf_scriptengine.doARtoStr, 'Function ARtoStr(var ar: Double) : string;');
