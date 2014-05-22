@@ -4057,14 +4057,22 @@ end;
 
 function Tf_chart.cmd_GetObs:string;
 begin
-result:=msgOK+blank+'LAT:'+detostr3(sc.cfgsc.ObsLatitude)+'LON:'+detostr3(sc.cfgsc.ObsLongitude)+'ALT:'+formatfloat(f0,sc.cfgsc.ObsAltitude)+'mOBS:'+sc.cfgsc.Obscountry+'/'+sc.cfgsc.ObsName;
+result:=msgOK+blank+'LAT:'+detostr3(sc.cfgsc.ObsLatitude)+'LON:'+detostr3(sc.cfgsc.ObsLongitude)
+        +'ALT:'+formatfloat(f0,sc.cfgsc.ObsAltitude);
+if  trim(sc.cfgsc.Obscountry)='' then
+     result:=result+'mOBS:'+sc.cfgsc.ObsName
+  else
+     result:=result+'mOBS:'+sc.cfgsc.Obscountry+'/'+sc.cfgsc.ObsName;
 end;
 
 function Tf_chart.cmd_SetTZ(tz:string):string;
 var buf:string;
 begin
 try
-  if copy(tz,1,3)='UTC' then tz:=TzUTC2GMT(tz);
+  if copy(tz,1,3)='UTC' then begin
+    tz:=TzUTC2GMT(tz);
+    sc.cfgsc.countrytz:=false;
+  end;
   buf:=ZoneDir+StringReplace(tz,'/',PathDelim,[rfReplaceAll]);
   if FileExists(buf) then begin
     sc.cfgsc.ObsTZ:=tz;

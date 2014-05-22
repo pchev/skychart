@@ -5711,8 +5711,6 @@ for i:=0 to numscript-1 do begin
    n:=ReadInteger(section,'numevents',0);
    for j:=0 to n-1 do Fscript[i].ConfigEvent.Add(ReadString(section,'event_'+inttostr(j),''));
 end;
-Splitter1.Visible:=ScriptPanel.Visible;
-Splitter1.ResizeControl:=ScriptPanel;
 
 except
   ShowError('Error reading '+filename+' quicksearch');
@@ -9158,6 +9156,8 @@ for i:=0 to numscript-1 do begin
   Fscript[i].Init;
   if i=ActiveScript then begin
      ScriptPanel.Visible:=true;
+     Splitter1.Visible:=true;
+     Splitter1.ResizeControl:=ScriptPanel;
      Fscript[i].ShowScript(true);
   end;
 end;
