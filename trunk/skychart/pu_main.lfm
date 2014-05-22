@@ -5686,6 +5686,18 @@ object f_main: Tf_main
           }
         end
       end
+      object SubAnimation: TMenuItem
+        Caption = 'Animation'
+        object MenuTimeDec: TMenuItem
+          Action = TimeDec
+        end
+        object MenuTimeInc: TMenuItem
+          Action = TimeInc
+        end
+        object MenuTimeReset: TMenuItem
+          Action = TimeReset
+        end
+      end
       object SubShowObjects: TMenuItem
         Caption = 'Show Objects'
         object MenuShowStars: TMenuItem
@@ -11752,22 +11764,25 @@ object f_main: Tf_main
       ImageIndex = 42
       OnExecute = allSkyExecute
     end
-    object TimeInc: TAction
-      Tag = 1
-      Category = 'Animation'
-      Hint = 'Increment Time'
-      ImageIndex = 44
-      OnExecute = TimeIncExecute
-    end
     object TimeDec: TAction
       Tag = -1
       Category = 'Animation'
+      Caption = 'Decrement Time'
       Hint = 'Decrement Time'
       ImageIndex = 43
       OnExecute = TimeIncExecute
     end
+    object TimeInc: TAction
+      Tag = 1
+      Category = 'Animation'
+      Caption = 'Increment Time'
+      Hint = 'Increment Time'
+      ImageIndex = 44
+      OnExecute = TimeIncExecute
+    end
     object TimeReset: TAction
       Category = 'Animation'
+      Caption = 'Now'
       Hint = 'Now'
       ImageIndex = 84
       OnExecute = TimeResetExecute

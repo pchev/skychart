@@ -4072,6 +4072,9 @@ try
   if copy(tz,1,3)='UTC' then begin
     tz:=TzUTC2GMT(tz);
     sc.cfgsc.countrytz:=false;
+  end
+  else begin
+    if copy(tz,1,7)<>'Etc/GMT' then sc.cfgsc.countrytz:=true;
   end;
   buf:=ZoneDir+StringReplace(tz,'/',PathDelim,[rfReplaceAll]);
   if FileExists(buf) then begin
