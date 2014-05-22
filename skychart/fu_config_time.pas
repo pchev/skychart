@@ -409,6 +409,9 @@ d:=csc.curday;
 checkbox1.checked:=csc.UseSystemTime;
 checkbox2.checked:=csc.AutoRefresh;
 longedit2.value:=cmain.AutoRefreshDelay;
+CheckBox2.Enabled:=checkbox1.checked;
+LongEdit2.Enabled:=checkbox1.checked;
+label142.Enabled:=checkbox1.checked;
 if y>0 then begin
   d_yearEdit.Value:=y;
   adbc.itemindex:=0;
@@ -517,9 +520,6 @@ BitBtn1.enabled:=d_year.enabled;
 Button5.enabled:=d_year.enabled;
 Button6.enabled:=d_year.enabled;
 Button8.enabled:=d_year.enabled;
-CheckBox2.Enabled:=not d_year.enabled;
-LongEdit2.Enabled:=not d_year.enabled;
-label142.Enabled:=not d_year.enabled;
 if LockChange then exit;
 try
 LockChange:=true;

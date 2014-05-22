@@ -48,6 +48,10 @@ type
 
   Tf_main = class(TForm)
     ContainerPanel: TPanel;
+    SubAnimation: TMenuItem;
+    MenuTimeDec: TMenuItem;
+    MenuTimeInc: TMenuItem;
+    MenuTimeReset: TMenuItem;
     MenuToolbox8: TMenuItem;
     MenuToolbox1: TMenuItem;
     MenuToolbox2: TMenuItem;
@@ -948,7 +952,7 @@ Autorefresh.enabled:=false;
 for i:=0 to MultiFrame1.ChildCount-1 do
   if MultiFrame1.Childs[i].DockedObject is Tf_chart then
      with MultiFrame1.Childs[i].DockedObject as Tf_chart do begin
-      if sc.cfgsc.autorefresh then AutoRefresh;
+      if sc.cfgsc.autorefresh and sc.cfgsc.UseSystemTime then AutoRefresh;
      end;
 finally
 AutoRefreshLock:=false;
@@ -6986,6 +6990,7 @@ SubProjection.caption:='&'+rsChartCoordin2;
 SubTransformation.caption:='&'+rsTransformati;
 SubFieldofVision.caption:='&'+rsFieldOfVisio;
 SubShowHorizon.caption:='&'+rsViewHorizon;
+SubAnimation.Caption:='&'+rsAnimation;
 SubShowObjects.caption:='&'+rsShowObjects;
 SubShowGrid.caption:='&'+rsLinesGrid;
 SubLabels.Caption:=rsLabels;

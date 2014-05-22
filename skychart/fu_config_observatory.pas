@@ -412,8 +412,10 @@ if f_observatory_db.countrylist.ItemIndex<0 then exit;
 if CountryTZ.Checked then begin
    code:=f_observatory_db.countrycode[f_observatory_db.countrylist.ItemIndex];
    cdb.GetCountryISOCode(code,isocode);
+   countrylist.Visible:=true;
 end else begin
    isocode:='ZZ';
+   countrylist.Visible:=false;
 end;
 TZComboBox.Clear;
 TZComboBox.ItemIndex:=-1;
@@ -444,8 +446,10 @@ if countrylist.ItemIndex<0 then exit;
 if CountryTZ.Checked then begin
    code:=countrycode[countrylist.ItemIndex];
    cdb.GetCountryISOCode(code,isocode);
+   countrylist.Visible:=true;
 end else begin
    isocode:='ZZ';
+   countrylist.Visible:=false;
 end;
 TZComboBox.Clear;
 TZComboBox.ItemIndex:=-1;
