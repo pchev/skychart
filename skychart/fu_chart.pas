@@ -4091,7 +4091,7 @@ end;
 
 function Tf_chart.cmd_GetTZ:string;
 begin
- result:=msgOK+blank+sc.cfgsc.ObsTZ;
+ result:=msgOK+blank+TzGMT2UTC(sc.cfgsc.ObsTZ);
 end;
 
 function Tf_chart.cmd_ObslistLoad(fn: string): string;
