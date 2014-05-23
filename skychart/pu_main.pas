@@ -5712,6 +5712,8 @@ for i:=0 to numscript-1 do begin
    end;
    n:=ReadInteger(section,'numscriptrows',0);
    for j:=0 to n-1 do Fscript[i].ConfigScript.Add(ReadString(section,'script_'+inttostr(j),''));
+   n:=ReadInteger(section,'numcomborows',0);
+   for j:=0 to n-1 do Fscript[i].ConfigCombo.Add(ReadString(section,'comboscript_'+inttostr(j),''));
    n:=ReadInteger(section,'numevents',0);
    for j:=0 to n-1 do Fscript[i].ConfigEvent.Add(ReadString(section,'event_'+inttostr(j),''));
 end;
@@ -6482,6 +6484,9 @@ for i:=0 to numscript-1 do begin
    n:=Fscript[i].ConfigScript.Count;
    WriteInteger(section,'numscriptrows',n);
    for j:=0 to n-1 do WriteString(section,'script_'+inttostr(j),Fscript[i].ConfigScript[j]);
+   n:=Fscript[i].ConfigCombo.Count;
+   WriteInteger(section,'numcomborows',n);
+   for j:=0 to n-1 do WriteString(section,'comboscript_'+inttostr(j),Fscript[i].ConfigCombo[j]);
    n:=Fscript[i].ConfigEvent.Count;
    WriteInteger(section,'numevents',n);
    for j:=0 to n-1 do WriteString(section,'event_'+inttostr(j),Fscript[i].ConfigEvent[j]);

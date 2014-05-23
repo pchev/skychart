@@ -1530,6 +1530,7 @@ resourcestring
   rsDeleteAllThe = 'Delete %s, all the child nodes and the scripts?';
   rsList = 'List';
   rsComboBox = 'Combo box';
+  rsActivateTheT = 'Activate the timer event when hidden';
 
 implementation
 
