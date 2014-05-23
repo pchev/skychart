@@ -42,7 +42,7 @@ type
     FActivechart: Tf_chart;
     FonApply: TNotifyEvent;
     FScriptTitle: string;
-    FConfigToolbar1,FConfigToolbar2,FConfigScriptButton,FConfigScript,FConfigEvent: TStringList;
+    FConfigToolbar1,FConfigToolbar2,FConfigScriptButton,FConfigCombo,FConfigScript,FConfigEvent: TStringList;
     FHidenTimer: Boolean;
     procedure ApplyScript(Sender: TObject);
     procedure SetExecuteCmd(value:TExecuteCmd);
@@ -82,6 +82,7 @@ type
     property ConfigToolbar2: TStringList read FConfigToolbar2 write FConfigToolbar2;
     property ConfigScriptButton: TStringList read FConfigScriptButton write FConfigScriptButton;
     property ConfigScript: TStringList read FConfigScript write FConfigScript;
+    property ConfigCombo: TStringList read FConfigCombo write FConfigCombo;
     property ConfigEvent: TStringList read FConfigEvent write FConfigEvent;
     property ExecuteCmd: TExecuteCmd read FExecuteCmd write SetExecuteCmd;
     property ActiveChart: Tf_chart read FActiveChart write SetActiveChart;
@@ -119,6 +120,7 @@ begin
   FConfigToolbar2:=TStringList.Create;
   FConfigScriptButton:=TStringList.Create;
   FConfigScript:=TStringList.Create;
+  FConfigCombo:=TStringList.Create;
   FConfigEvent:=TStringList.Create;
 end;
 
@@ -129,6 +131,7 @@ begin
   FConfigToolbar2.Free;
   FConfigScriptButton.Free;
   FConfigScript.Free;
+  FConfigCombo.Free;
   FConfigEvent.Free;
   if fscriptengine<>nil then fscriptengine.Free;
   inherited Destroy;
@@ -195,7 +198,7 @@ begin
         fscriptengine.Mainmenu:=FMainmenu;
      end;
      fscriptengine.CheckBoxHidenTimer.Checked:=FHidenTimer;
-     fscriptengine.Load(FConfigScriptButton, FConfigScript, FConfigEvent,PanelTitle.Caption);
+     fscriptengine.Load(FConfigScriptButton, FConfigScript, FConfigCombo, FConfigEvent,PanelTitle.Caption);
   end;
 end;
 
@@ -231,7 +234,7 @@ end;
 
 procedure Tf_script.ApplyScript(Sender: TObject);
 begin
- fscriptengine.Save(FConfigScriptButton, FConfigScript, FConfigEvent,FScriptTitle);
+ fscriptengine.Save(FConfigScriptButton, FConfigScript, FConfigCombo, FConfigEvent,FScriptTitle);
  PanelTitle.Caption:=FScriptTitle;
  fedittoolbar.LoadToolbar(0,ConfigToolbar1);
  fedittoolbar.LoadToolbar(1,ConfigToolbar2);

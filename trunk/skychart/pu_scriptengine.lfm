@@ -320,11 +320,11 @@ object f_scriptengine: Tf_scriptengine
       Visible = False
     end
     object CheckBoxHidenTimer: TCheckBox
-      Left = 134
+      Left = 14
       Height = 26
       Top = 240
-      Width = 201
-      Caption = 'Activate the Timer when hiden'
+      Width = 242
+      Caption = 'Activate the timer event when hidden'
       TabOrder = 18
     end
   end

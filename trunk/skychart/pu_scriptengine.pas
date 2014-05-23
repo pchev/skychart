@@ -118,8 +118,10 @@ type
     gr: array of TGroupBox;
     btnum:integer;
     bt: array of TButton;
-    scrnum: integer;
-    scr: array of TPSScript;
+    btscrnum: integer;
+    btscr: array of TPSScript;
+    cbscrnum: integer;
+    cbscr: array of TPSScript;
     evscrnum: integer;
     evscr: array of TPSScript;
     ednum:integer;
@@ -167,6 +169,7 @@ type
     Procedure doEq2Hz(ra,de : double ; var a,h : double);
     Procedure doHz2Eq(a,h : double; var ra,de : double);
     procedure Button_Click(Sender: TObject);
+    procedure Combo_Change(Sender: TObject);
     procedure ReorderGroup;
     function  AddGroup(num,capt:string; pt: TWinControl; ctlperline,ordernum:integer):TGroupBox;
     procedure AddButton(num,capt:string; pt: TWinControl);
@@ -183,8 +186,8 @@ type
     procedure SetLang;
     procedure StopAllScript;
     procedure StartTimer;
-    procedure Save(strbtn, strscr, eventscr: Tstringlist; var title:string);
-    procedure Load(strbtn, strscr, eventscr: Tstringlist; title:string);
+    procedure Save(strbtn, strscr, comboscr, eventscr: Tstringlist; var title:string);
+    procedure Load(strbtn, strscr, comboscr, eventscr: Tstringlist; title:string);
     procedure ChartRefreshEvent(origin,str:string);
     procedure ObjectSelectionEvent(origin,str,longstr:string);
     procedure DistanceMeasurementEvent(origin,str:string);
@@ -238,6 +241,7 @@ begin
   EventComboBox.Items[3]:=rsChartRefresh;
   EventComboBox.Items[4]:=rsObjectIdenti;
   EventComboBox.Items[5]:=rsDistanceMeas;
+  CheckBoxHidenTimer.Caption:=rsActivateTheT;
   if Fpascaleditor<>nil then Fpascaleditor.SetLang;
   SetHelp(self,hlpScriptEditor);
 end;
@@ -473,7 +477,7 @@ begin
   else result:=false;
 end;
 
-procedure Tf_scriptengine.Save(strbtn, strscr, eventscr: Tstringlist; var title:string);
+procedure Tf_scriptengine.Save(strbtn, strscr, comboscr, eventscr: Tstringlist; var title:string);
 var m:TMemoryStream;
    j: integer;
    node:TTreeNode;
@@ -489,6 +493,7 @@ begin
   strbtn.LoadFromStream(m);
   m.Free;
   strscr.Clear;
+  comboscr.Clear;
   eventscr.Clear;
   node:=TreeView1.Items.GetFirstNode;
   while node<>nil do begin
@@ -499,6 +504,12 @@ begin
       s.Assign(TStringList(node.data));
       for j:=0 to s.count-1 do begin
          strscr.Add(nu+tab+s[j]);
+      end;
+    end;
+    if (txt='Combo')and(node.data<>nil)and(TObject(node.data) is TStringList) then begin
+      s.Assign(TStringList(node.data));
+      for j:=0 to s.count-1 do begin
+         comboscr.Add(nu+tab+s[j]);
       end;
     end;
     if (txt='Event')and(node.data<>nil)and(TObject(node.data) is TStringList) then begin
@@ -512,7 +523,7 @@ begin
   s.Free;
 end;
 
-procedure Tf_scriptengine.Load(strbtn, strscr, eventscr: Tstringlist; title:string);
+procedure Tf_scriptengine.Load(strbtn, strscr, comboscr, eventscr: Tstringlist; title:string);
 var m:TMemoryStream;
    bu,cnu,nu,scrlin: string;
    i: integer;
@@ -526,10 +537,11 @@ begin
   m.Position:=0;
   TreeView1.LoadFromStream(m);
   m.Free;
+  p:=TStringList.Create;
   // load button scripts
   cnu:='';
+  if strscr.Count>0 then begin
   s:=TStringList.Create;
-  p:=TStringList.Create;
   for i:=0 to strscr.Count-1 do begin
     bu:=strscr[i];
     SplitRec(bu,tab,p);
@@ -551,14 +563,51 @@ begin
       cnu:=nu;
     end;
   end;
+  if s.Count=0 then s.Free;
   node := TreeView1.Items.GetFirstNode;
   while Assigned(node) and (pos('Button_'+cnu+';',node.Text)<=0) do
         node := node.GetNext;
   if assigned(node) then begin
     node.Data:=s;
   end;
+  end;
+  // load combo scripts
+  cnu:='';
+  if comboscr.Count>0 then begin
+  s:=TStringList.Create;
+  for i:=0 to comboscr.Count-1 do begin
+    bu:=comboscr[i];
+    SplitRec(bu,tab,p);
+    if p.Count<2 then continue;
+    nu:=p[0];
+    scrlin:=p[1];
+    if (cnu='') then cnu:=nu;
+    if cnu=nu then begin
+      s.Add(scrlin);
+    end else begin
+      node := TreeView1.Items.GetFirstNode;
+      while Assigned(node) and (pos('Combo_'+cnu+';',node.Text)<=0) do
+            node := node.GetNext;
+      if assigned(node) then begin
+        node.Data:=s;
+      end;
+      s:=TStringList.Create;
+      s.Add(scrlin);
+      cnu:=nu;
+    end;
+  end;
+  if s.Count=0 then s.Free;
+  node := TreeView1.Items.GetFirstNode;
+  while Assigned(node) and (pos('Combo_'+cnu+';',node.Text)<=0) do
+        node := node.GetNext;
+  if assigned(node) then begin
+    node.Data:=s;
+  end;
+  end;
+
   // load event script
   cnu:='';
+  if eventscr.Count>0 then begin
   s:=TStringList.Create;
   for i:=0 to eventscr.Count-1 do begin
     bu:=eventscr[i];
@@ -581,12 +630,15 @@ begin
       cnu:=nu;
     end;
   end;
+  if s.Count=0 then s.Free;
   node := TreeView1.Items.GetFirstNode;
   while Assigned(node) and (pos('Event_'+cnu+';',node.Text)<=0) do
         node := node.GetNext;
   if assigned(node) then begin
     node.Data:=s;
   end;
+  end;
+
   p.free;
   ButtonApplyClick(self);
 end;
@@ -627,26 +679,47 @@ bt[btnum-1].Caption:=capt;
 bt[btnum-1].tag:=n;
 bt[btnum-1].OnClick:=@Button_Click;
 bt[btnum-1].Parent:=pt;
-scrnum:=max(scrnum,n+1);
-SetLength(scr,scrnum);
-scr[n]:=TPSScript.Create(self);
-scr[n].tag:=n;
-scr[n].OnCompile:=@TplPSScriptCompile;
-scr[n].OnExecute:=@TplPSScriptExecute;
-scr[n].OnLine:=@TplPSScriptLine;
-scr[n].Plugins.Assign(TplPSScript.Plugins);
+btscrnum:=max(btscrnum,n+1);
+SetLength(btscr,btscrnum);
+btscr[n]:=TPSScript.Create(self);
+btscr[n].tag:=n;
+btscr[n].OnCompile:=@TplPSScriptCompile;
+btscr[n].OnExecute:=@TplPSScriptExecute;
+btscr[n].OnLine:=@TplPSScriptLine;
+btscr[n].Plugins.Assign(TplPSScript.Plugins);
 end;
 
 procedure Tf_scriptengine.Button_Click(Sender: TObject);
 var n: integer;
+    ok: boolean;
 begin
 n:=TButton(sender).tag;
-if (n<scrnum)and(scr[n].Script.Count>0) then begin
-  CompileMemo.Clear;
-  if scr[n].Execute then
-    CompileMemo.Lines.Add('OK')
-  else
-    CompileMemo.Lines.Add('Failed! row='+inttostr(scr[n].ExecErrorRow)+': '+scr[n].ExecErrorToString);
+if (n<btscrnum)and(btscr[n].Script.Count>0) then begin
+  ok:=btscr[n].Execute;
+  if visible then begin
+    CompileMemo.Clear;
+    if ok then
+      CompileMemo.Lines.Add('OK')
+    else
+      CompileMemo.Lines.Add('Failed! row='+inttostr(btscr[n].ExecErrorRow)+': '+btscr[n].ExecErrorToString);
+  end;
+end;
+end;
+
+procedure Tf_scriptengine.Combo_Change(Sender: TObject);
+var n: integer;
+    ok: boolean;
+begin
+n:=TComboBox(sender).tag;
+if (n<cbscrnum)and(cbscr[n].Script.Count>0) then begin
+  ok:=cbscr[n].Execute;
+  if visible then begin
+    CompileMemo.Clear;
+    if ok then
+      CompileMemo.Lines.Add('OK')
+    else
+      CompileMemo.Lines.Add('Failed! row='+inttostr(cbscr[n].ExecErrorRow)+': '+cbscr[n].ExecErrorToString);
+  end;
 end;
 end;
 
@@ -691,15 +764,26 @@ sp[spnum-1].Parent:=pt;
 end;
 
 procedure Tf_scriptengine.AddCombo(num:string; pt: TWinControl);
+var n: integer;
 begin
 inc(cbnum);
 SetLength(cb,cbnum);
 if num='' then num:=inttostr(cbnum);
+n:=StrToIntDef(num,cbnum);
 cb[cbnum-1]:=TComboBox.Create(self);
 cb[cbnum-1].Name:='Combo_'+num;
-cb[cbnum-1].tag:=StrToIntDef(num,0);
+cb[cbnum-1].tag:=n;
 cb[cbnum-1].Text:='';
+cb[cbnum-1].OnChange:=@Combo_Change;
 cb[cbnum-1].Parent:=pt;
+cbscrnum:=max(cbscrnum,n+1);
+SetLength(cbscr,cbscrnum);
+cbscr[n]:=TPSScript.Create(self);
+cbscr[n].tag:=n;
+cbscr[n].OnCompile:=@TplPSScriptCompile;
+cbscr[n].OnExecute:=@TplPSScriptExecute;
+cbscr[n].OnLine:=@TplPSScriptLine;
+cbscr[n].Plugins.Assign(TplPSScript.Plugins);
 end;
 
 procedure Tf_scriptengine.AddList(num:string; pt: TWinControl;h: integer);
@@ -746,8 +830,9 @@ Procedure Tf_scriptengine.StopAllScript;
 var i:integer;
 begin
 EventTimer.Enabled:=false;
-for i:=0 to scrnum-1 do if (scr[i]<>nil) and scr[i].Running then scr[i].Stop;
-for i:=0 to evscrnum-1 do if (evscr[i]<>nil) and evscr[i].Running then scr[i].Stop;
+for i:=0 to btscrnum-1 do if (btscr[i]<>nil) and btscr[i].Running then btscr[i].Stop;
+for i:=0 to cbscrnum-1 do if (cbscr[i]<>nil) and cbscr[i].Running then cbscr[i].Stop;
+for i:=0 to evscrnum-1 do if (evscr[i]<>nil) and evscr[i].Running then evscr[i].Stop;
 EventTimer.Enabled:=false;
 end;
 
@@ -854,7 +939,7 @@ end else if RadioButtonEdit.Checked then begin
 end else if RadioButtonCombo.Checked then begin
   if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
     inc(ComboIdx);
-    TreeView1.Items.AddChild(TreeView1.Selected,'Combo_'+inttostr(ComboIdx));
+    TreeView1.Items.AddChild(TreeView1.Selected,'Combo_'+inttostr(ComboIdx)+';');
   end;
 end else if RadioButtonList.Checked then begin
   if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
@@ -1009,6 +1094,11 @@ if node<>nil then begin
     MemoHeightEdit.Text:=words(node.Text,'',2,1,';');
     ButtonUpdate.Visible:=false;
     ButtonUpdate.Tag:=3;
+  end else if (pos('Combo_',node.Text)=1) then begin
+    ButtonEditScript.Visible:=true;
+    RadioButtonCombo.Checked:=true;
+    ButtonUpdate.Visible:=false;
+    ButtonUpdate.Tag:=7;
   end else if (pos('List_',node.Text)=1) then begin
     ButtonEditScript.Visible:=false;
     RadioButtonList.Checked:=true;
@@ -1080,7 +1170,7 @@ begin
 end;
 
 procedure Tf_scriptengine.ButtonLoadClick(Sender: TObject);
-var ConfigScriptButton, ConfigScript, ConfigEvent: Tstringlist;
+var ConfigScriptButton, ConfigScript, ConfigCombo, ConfigEvent: Tstringlist;
     fn,section,buf,titl: string;
     inif: TMemIniFile;
     j,n: integer;
@@ -1089,6 +1179,7 @@ if OpenDialog1.Execute then begin
   fn:=OpenDialog1.FileName;
   ConfigScriptButton:=Tstringlist.create;
   ConfigScript:=Tstringlist.create;
+  ConfigCombo:=Tstringlist.create;
   ConfigEvent:=Tstringlist.create;
   inif:=TMeminifile.create(fn);
   try
@@ -1111,13 +1202,15 @@ if OpenDialog1.Execute then begin
   end;
   n:=ReadInteger(section,'numscriptrows',0);
   for j:=0 to n-1 do ConfigScript.Add(ReadString(section,'script_'+inttostr(j),''));
+  n:=ReadInteger(section,'numcomborows',0);
+  for j:=0 to n-1 do ConfigCombo.Add(ReadString(section,'comboscript_'+inttostr(j),''));
   n:=ReadInteger(section,'numevents',0);
   for j:=0 to n-1 do ConfigEvent.Add(ReadString(section,'event_'+inttostr(j),''));
   end;
   finally
    inif.Free;
   end;
-  Load(ConfigScriptButton, ConfigScript, ConfigEvent,titl);
+  Load(ConfigScriptButton, ConfigScript, ConfigCombo, ConfigEvent,titl);
   ConfigScriptButton.Free;
   ConfigScript.Free;
   ConfigEvent.Free;
@@ -1125,7 +1218,7 @@ end;
 end;
 
 procedure Tf_scriptengine.ButtonSaveClick(Sender: TObject);
-var ConfigScriptButton, ConfigScript, ConfigEvent: Tstringlist;
+var ConfigScriptButton, ConfigScript, ConfigCombo, ConfigEvent: Tstringlist;
     fn,section,titl: string;
     inif: TMemIniFile;
     j,n: integer;
@@ -1134,8 +1227,9 @@ if SaveDialog1.Execute then begin
   fn:=SaveDialog1.FileName;
   ConfigScriptButton:=Tstringlist.create;
   ConfigScript:=Tstringlist.create;
+  ConfigCombo:=Tstringlist.create;
   ConfigEvent:=Tstringlist.create;
-  Save(ConfigScriptButton, ConfigScript, ConfigEvent,titl);
+  Save(ConfigScriptButton, ConfigScript, ConfigCombo, ConfigEvent,titl);
   inif:=TMeminifile.create(fn);
   try
   with inif do begin
@@ -1155,6 +1249,9 @@ if SaveDialog1.Execute then begin
   n:=ConfigScript.Count;
   WriteInteger(section,'numscriptrows',n);
   for j:=0 to n-1 do WriteString(section,'script_'+inttostr(j),ConfigScript[j]);
+  n:=ConfigCombo.Count;
+  WriteInteger(section,'numcomborows',n);
+  for j:=0 to n-1 do WriteString(section,'comboscript_'+inttostr(j),ConfigCombo[j]);
   n:=ConfigEvent.Count;
   WriteInteger(section,'numevents',n);
   for j:=0 to n-1 do WriteString(section,'event_'+inttostr(j),ConfigEvent[j]);
@@ -1202,7 +1299,7 @@ var s:TStringList;
 begin
 if (TreeView1.Selected<>nil) then begin
   txt:=copy(TreeView1.Selected.Text,1,6);
-  if (txt='Button')or(txt='Event_') then begin
+  if (txt='Button')or(txt='Combo_')or(txt='Event_') then begin
     node:=TreeView1.Selected;
     if (node.data<>nil)and(TObject(node.data) is TStringList) then
        s:=(TStringList(node.data))
@@ -1238,15 +1335,21 @@ while node<>nil do begin
   nu:=words(buf,'',2,1,'_');
   if (txt='Button')and(node.data<>nil)and(TObject(node.data) is TStringList) then begin
     n:=strtoint(nu);
-    scr[n].Script.Assign(TStringList(node.data));
-    scr[n].Compile;
-    for j:=0 to scr[n].CompilerMessageCount-1 do CompileMemo.Lines.Add('Script'+inttostr(n)+': '+ scr[n].CompilerErrorToStr(j));
-  end;
-  if (txt='Event')and(node.data<>nil)and(TObject(node.data) is TStringList) then begin
+    btscr[n].Script.Assign(TStringList(node.data));
+    btscr[n].Compile;
+    for j:=0 to btscr[n].CompilerMessageCount-1 do CompileMemo.Lines.Add('Script button_'+inttostr(n)+': '+ btscr[n].CompilerErrorToStr(j));
+  end
+  else if (txt='Combo')and(node.data<>nil)and(TObject(node.data) is TStringList) then begin
+    n:=strtoint(nu);
+    cbscr[n].Script.Assign(TStringList(node.data));
+    cbscr[n].Compile;
+    for j:=0 to cbscr[n].CompilerMessageCount-1 do CompileMemo.Lines.Add('Script button_'+inttostr(n)+': '+ cbscr[n].CompilerErrorToStr(j));
+  end
+  else if (txt='Event')and(node.data<>nil)and(TObject(node.data) is TStringList) then begin
     n:=strtoint(nu);
     evscr[n].Script.Assign(TStringList(node.data));
     ok:=evscr[n].Compile;
-    for j:=0 to evscr[n].CompilerMessageCount-1 do CompileMemo.Lines.Add('Script'+inttostr(n)+': '+ evscr[n].CompilerErrorToStr(j));
+    for j:=0 to evscr[n].CompilerMessageCount-1 do CompileMemo.Lines.Add('Script event_'+inttostr(n)+': '+ evscr[n].CompilerErrorToStr(j));
     if (n=1) then begin // Timer
       parm:=words(node.Text,'',4,1,';');
       i:=StrToIntDef(parm,60);
@@ -1270,7 +1373,8 @@ begin
   imnum:=0;
   menum:=0;
   spnum:=0;
-  scrnum:=0;
+  btscrnum:=0;
+  cbscrnum:=0;
   GroupIdx:=0;
   ButtonIdx:=0;
   EditIdx:=0;
@@ -1310,6 +1414,9 @@ while node<>nil do begin
   buf:=words(node.Text,'',1,1,';');
   txt:=words(buf,'',1,1,'_');
   if (txt='Button')and(node.data<>nil)and(TObject(node.data) is TStringList) then begin
+     TStringList(node.data).Free;
+  end;
+  if (txt='Combo')and(node.data<>nil)and(TObject(node.data) is TStringList) then begin
      TStringList(node.data).Free;
   end;
   if (txt='Event')and(node.data<>nil)and(TObject(node.data) is TStringList) then begin
