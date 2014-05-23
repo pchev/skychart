@@ -134,6 +134,8 @@ type
     ls: array of TListBox;
     imnum:integer;
     im: array of TImage;
+    opdialog: TOpenDialog;
+    svdialog: TSaveDialog;
     FConfigToolbar1,FConfigToolbar2: TStringlist;
     Fpascaleditor: Tf_pascaleditor;
     GroupIdx,ButtonIdx,EditIdx,MemoIdx,SpacerIdx,ComboIdx,ListIdx,ImageIdx,EventIdx: integer;
@@ -156,6 +158,8 @@ type
     function doSetD(varname:string; x: Double):Boolean;
     function doGetV(varname:string; var v: Variant):Boolean;
     function doSetV(varname:string; v: Variant):Boolean;
+    function doOpenDialog(var fn: string): boolean;
+    function doSaveDialog(var fn: string): boolean;
     Function doARtoStr(var ar: Double) : string;
     Function doDEtoStr(var de: Double) : string;
     Function doStrtoAR(str:string; var ar: Double) : boolean;
@@ -423,6 +427,20 @@ begin
   else result:=false;
 end;
 
+function Tf_scriptengine.doOpenDialog(var fn: string): boolean;
+begin
+  opdialog.FileName:=fn;
+  result:=opdialog.Execute;
+  if result then fn:=opdialog.FileName;
+end;
+
+function Tf_scriptengine.doSaveDialog(var fn: string): boolean;
+begin
+  svdialog.FileName:=fn;
+  result:=svdialog.Execute;
+  if result then fn:=svdialog.FileName;
+end;
+
 Function Tf_scriptengine.doARtoStr(var ar: Double) : string;
 begin
   // script do not work if a float parameter is not var.
@@ -578,7 +596,6 @@ begin
 inc(grnum);
 SetLength(gr,grnum);
 if num='' then num:=inttostr(grnum);
-if capt='' then capt:='Group_'+num;
 gr[grnum-1]:=TGroupBox.Create(self);
 gr[grnum-1].Name:='Group_'+num;
 gr[grnum-1].Caption:=capt;
@@ -1027,7 +1044,12 @@ var
 begin
   if (Source=Sender)and(Sender is TTreeView)and(Assigned(TTreeView(Sender).Selected)) then begin
     DestNode:=TTreeView(Sender).GetNodeAt(x,y);
-    if (DestNode<>TTreeView(Sender).Selected) then TTreeView(Sender).Selected.MoveTo(DestNode, naInsert);
+    if (DestNode<>TTreeView(Sender).Selected) then begin
+      if DestNode.Level=TTreeView(Sender).Selected.Level then
+         TTreeView(Sender).Selected.MoveTo(DestNode, naInsert)
+      else if DestNode.Level<TTreeView(Sender).Selected.Level then
+         TTreeView(Sender).Selected.MoveTo(DestNode, naAddChild)
+    end;
   end;
 end;
 
@@ -1038,7 +1060,7 @@ begin
   accept:=false;
   if (Source=Sender)and(Sender is TTreeView)and(Assigned(TTreeView(Sender).Selected)) then begin
      DestNode := TTreeView(Sender).GetNodeAt(x,y);
-     if Assigned(DestNode)and(DestNode<>TTreeView(Sender).Selected) then accept:=(DestNode.Level=TTreeView(Sender).Selected.Level);
+     if Assigned(DestNode)and(DestNode<>TTreeView(Sender).Selected) then accept:=(DestNode.Level<=TTreeView(Sender).Selected.Level);
   end;
 end;
 
@@ -1274,6 +1296,8 @@ begin
     evscr[i].OnExecute:=@TplPSScriptExecute;
     evscr[i].Plugins.Assign(TplPSScript.Plugins);
   end;
+  opdialog:=TOpenDialog.Create(self);
+  svdialog:=TSaveDialog.Create(self);
   SetLang;
 end;
 
@@ -1306,6 +1330,8 @@ procedure Tf_scriptengine.FormDestroy(Sender: TObject);
 begin
   ClearTreeView;
   TreeView1.free;
+  opdialog.Free;
+  svdialog.Free;
   if Fpascaleditor<>nil then Fpascaleditor.Free;
   SetLength(vlist,0);
   SetLength(ilist,0);
@@ -1351,6 +1377,8 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doSetD, 'function SetD(varname:string; x: Double):Boolean;');
   AddMethod(self, @Tf_scriptengine.doGetV, 'function GetV(varname:string; var v: Variant):Boolean;');
   AddMethod(self, @Tf_scriptengine.doSetV, 'function SetV(varname:string; v: Variant):Boolean;');
+  AddMethod(self, @Tf_scriptengine.doOpenDialog, 'function OpenDialog(var fn: string): boolean;');
+  AddMethod(self, @Tf_scriptengine.doSaveDialog, 'function SaveDialog(var fn: string): boolean;');
   AddMethod(self, @Tf_scriptengine.doARtoStr, 'Function ARtoStr(var ar: Double) : string;');
   AddMethod(self, @Tf_scriptengine.doDEtoStr, 'Function DEtoStr(var de: Double) : string;');
   AddMethod(self, @Tf_scriptengine.doStrtoAR, 'Function StrtoAR(str:string; var ar: Double) : boolean;');
