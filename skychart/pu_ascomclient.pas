@@ -136,6 +136,8 @@ type
     Function  ScopeConnected : boolean ;
     Procedure ScopeClose;
     Procedure ScopeReadConfig(ConfigPath : shortstring);
+    procedure GetScopeRates(var nrates0,nrates1:integer; axis0rates,axis1rates: Pdoublearray);
+    procedure ScopeMoveAxis(axis:Integer; rate: double);
   end;
 
 
@@ -433,6 +435,57 @@ if ScopeConnected then begin
    end;
 {$endif}
 end;
+
+procedure Tpop_scope.GetScopeRates(var nrates0,nrates1:integer; axis0rates,axis1rates: Pdoublearray);
+var rate,irate: Variant;
+    i,j,k: integer;
+    min,max:double;
+begin
+{$ifdef mswindows}
+SetLength(axis0rates^,0);
+SetLength(axis1rates^,0);
+nrates0:=0;
+nrates1:=0;
+if ScopeConnected then begin
+//  First axis
+  k:=0;
+  if T.CanMoveAxis(k) then begin
+    rate:=T.AxisRates(k);
+    j:=rate.count;
+    for i:=1 to j do begin
+      irate:=rate.item[i];
+      inc(nrates0,2);
+      SetLength(axis0rates^,nrates0);
+      axis0rates^[nrates0-2]:=irate.Minimum;
+      axis0rates^[nrates0-1]:=irate.Maximum;
+    end;
+  end;
+//  Second axis
+  k:=1;
+  if T.CanMoveAxis(k) then begin
+    rate:=T.AxisRates(k);
+    j:=rate.count;
+    for i:=1 to j do begin
+      irate:=rate.item[i];
+      inc(nrates1,2);
+      SetLength(axis1rates^,nrates1);
+      axis1rates^[nrates1-2]:=irate.Minimum;
+      axis1rates^[nrates1-1]:=irate.Maximum;
+    end;
+  end;
+end;
+{$endif}
+end;
+
+procedure Tpop_scope.ScopeMoveAxis(axis:Integer; rate: double);
+begin
+if ScopeConnected then begin
+  if T.CanMoveAxis(axis) then begin
+     T.MoveAxis(axis,rate);
+  end;
+end;
+end;
+
 
 {-------------------------------------------------------------------------------
 

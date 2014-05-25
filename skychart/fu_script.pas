@@ -44,6 +44,7 @@ type
     FScriptTitle: string;
     FConfigToolbar1,FConfigToolbar2,FConfigScriptButton,FConfigCombo,FConfigScript,FConfigEvent: TStringList;
     FHidenTimer: Boolean;
+    FTelescopeConnected: Boolean;
     procedure ApplyScript(Sender: TObject);
     procedure SetExecuteCmd(value:TExecuteCmd);
     procedure SetActiveChart(value:Tf_chart);
@@ -61,6 +62,7 @@ type
     procedure ObjectSelectionEvent(origin,str,longstr:string);
     procedure DistanceMeasurementEvent(origin,str:string);
     procedure TelescopeMoveEvent(origin:string; ra,de: double);
+    procedure TelescopeConnectEvent(origin:string; connected: boolean);
     property ImageNormal: TImageList read FImageNormal  write FImageNormal ;
     property ContainerPanel: TPanel read FContainerPanel  write FContainerPanel ;
     property ToolButtonMouseUp: TMouseEvent read FToolButtonMouseUp  write FToolButtonMouseUp ;
@@ -113,6 +115,7 @@ begin
   inherited Create(TheOwner);
   FScriptTitle:='';
   FHidenTimer:=false;
+  FTelescopeConnected:=False;
   fedittoolbar:=Tf_edittoolbar.Create(self);
   fedittoolbar.ButtonMini.Visible:=false;
   fedittoolbar.ButtonStd.Visible:=false;
@@ -144,6 +147,7 @@ begin
      if visible then begin
         if fscriptengine<>nil then begin
            fscriptengine.StartTimer;
+           fscriptengine.TelescopeConnectEvent('',FTelescopeConnected);
         end;
      end else
         if fscriptengine<>nil then begin
@@ -280,6 +284,12 @@ end;
 procedure Tf_script.TelescopeMoveEvent(origin:string; ra,de: double);
 begin
   if fscriptengine<>nil then fscriptengine.TelescopeMoveEvent(origin,ra,de);
+end;
+
+procedure Tf_script.TelescopeConnectEvent(origin:string; connected: boolean);
+begin
+  FTelescopeConnected:=connected;
+  if visible and (fscriptengine<>nil) then fscriptengine.TelescopeConnectEvent(origin,connected);
 end;
 
 function  Tf_script.GetHidenTimer: Boolean;

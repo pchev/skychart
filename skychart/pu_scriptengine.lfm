@@ -212,7 +212,6 @@ object f_scriptengine: Tf_scriptengine
       Top = 216
       Width = 180
       ItemHeight = 0
-      ItemIndex = 0
       Items.Strings = (
         'Initialisation'
         'Timer'
@@ -220,11 +219,12 @@ object f_scriptengine: Tf_scriptengine
         'Chart refresh'
         'Object identification click'
         'Distance measurement'
+        'Telescope connected'
+        'Telescope disconnected'
       )
       OnChange = EventComboBoxChange
       Style = csDropDownList
       TabOrder = 10
-      Text = 'Initialisation'
     end
     object TimerIntervalEdit: TEdit
       Left = 318

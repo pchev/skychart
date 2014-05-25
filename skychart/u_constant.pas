@@ -332,6 +332,7 @@ const
   f2 = '0.00';
   f2s = '0.##';
   f3 = '0.000';
+  f4 = '0.0000';
   f5 = '0.00000';
   f6 = '0.000000';
   f9 = '0.000000000';
@@ -712,6 +713,8 @@ type
   TasteroidName = array of array[1..MaxAsteroid, 1..2] of string[27]; // id, name
   double6 = array[1..6] of double;
   Pdouble6 = ^double6;
+  doublearray = array of double;
+  Pdoublearray = ^doublearray;
   coordvector = array[1..3] of double;
   rotmatrix = array[1..3, 1..3] of double;
 
@@ -1331,7 +1334,7 @@ const
     );
 
   // Chart Commands
-  numcmd = 117;
+  numcmd = 119;
   cmdlist: array[1..numcmd, 1..3] of string = (
     ('ZOOM+', '1', ''),
     ('ZOOM-', '2', ''),
@@ -1451,7 +1454,9 @@ const
     ('OBSLISTLIMIT','114','ON/OFF'),
     ('OBSLISTAIRMASSLIMIT','115','num'),
     ('OBSLISTTRANSITLIMIT','116','hours'),
-    ('OBSLISTTRANSITSIDE','117','EAST/WEST/BOTH')
+    ('OBSLISTTRANSITSIDE','117','EAST/WEST/BOTH'),
+    ('GETSCOPERATES','118',''),
+    ('SCOPEMOVEAXIS','119','axis(0/1) rate')
     );
 
 // INDI Telescope driver
