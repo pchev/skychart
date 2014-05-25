@@ -356,6 +356,8 @@ type
     function cmd_ObslistTransitLimit(transit: string): string;
     function cmd_ObslistTransitSide(side: string): string;
     function cmd_GetScopeRaDec:string;
+    function cmd_GetScopeRates:string;
+    function cmd_ScopeMoveAxis(axis,rate: string):string;
     function cmd_ConnectINDI:string;
     function cmd_DisconnectINDI:string;
     function cmd_DisconnectTelescope:string;
@@ -2821,7 +2823,7 @@ end;
 function Tf_chart.FormatDesc:string;
 var desc,buf,buf2,otype,oname,txt,s1,s2,s3: UTF8String;
     thr,tht,ths,tazr,tazs,tculmalt: string;
-    searchdir,cmd,fn: string;
+    searchdir,fn: string;
     bmp: Tbitmap;
     ipla:integer;
     i,p,l,y,m,d,precision : integer;
@@ -3761,7 +3763,42 @@ else
   result:=msgFailed;
 end;
 
+function Tf_chart.cmd_GetScopeRates: string;
+var i,n0,n1: integer;
+    ax0r,ax1r: array of double;
+begin
+n0:=0;
+n1:=0;
+if Connect1.checked then begin
+  if sc.cfgsc.ASCOMTelescope then begin
+    Fpop_scope.GetScopeRates(n0,n1,@ax0r,@ax1r);
+  end;
+end;
+if n0>0 then begin
+  result:=msgOK+tab+inttostr(n0)+tab;
+  result:=result+inttostr(n1)+tab;
+  for i:=0 to n0-1 do result:=result+formatfloat(f4,ax0r[i])+tab;
+  for i:=0 to n1-1 do result:=result+formatfloat(f4,ax1r[i])+tab;
+end
+  else result:=msgFailed;
+end;
 
+function Tf_chart.cmd_ScopeMoveAxis(axis,rate: string):string;
+var ax,n: integer;
+    rt:double;
+begin
+result:=msgFailed;
+if Connect1.checked then begin
+  if sc.cfgsc.ASCOMTelescope then begin
+    val(axis,ax,n);
+    if n<>0 then exit;
+    val(rate,rt,n);
+    if n<>0 then exit;
+    Fpop_scope.ScopeMoveAxis(ax,rt);
+    result:=msgOK;
+  end;
+end;
+end;
 
 function Tf_chart.cmd_ConnectINDI:string;
 var ok:boolean;
@@ -4681,6 +4718,8 @@ case n of
  115 : result:= cmd_ObslistAirmassLimit(arg[1]);
  116 : result:= cmd_ObslistTransitLimit(arg[1]);
  117 : result:= cmd_ObslistTransitSide(arg[1]);
+ 118 : result:= cmd_GetScopeRates;
+ 119 : result:= cmd_ScopeMoveAxis(arg[1], arg[2]);
 else result:=msgFailed+' Bad command name';
 end;
 end;
@@ -4936,7 +4975,7 @@ end;
 
 procedure Tf_chart.RecoverLabelSelectAll(Sender: TObject);
 var f:TForm;
-    i,j:integer;
+    i:integer;
 begin
 if sender=nil then exit;
 try
@@ -4955,7 +4994,6 @@ end;
 
 procedure Tf_chart.RecoverLabelClick(Sender: TObject);
 var i,j:integer;
-    buf:string;
     f:TForm;
     l:TCheckListBox;
     b1,b2:TButton;

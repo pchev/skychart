@@ -618,6 +618,7 @@ type
     numscript: integer;
     Fscript: array of Tf_script;
     ActiveScript: integer;
+    FTelescopeConnected: boolean;
   {$ifdef mswindows}
     savwincol  : array[0..25] of Tcolor;
   {$endif}
@@ -678,6 +679,7 @@ type
     procedure SAMPTableHighlightRow(table_id,url,row:string);
     procedure SAMPTableSelectRowlist(table_id,url:string;rowlist:Tstringlist);
     procedure TelescopeMove(origin: string; ra,de: double);
+    procedure TelescopeChange(origin: string; tc:boolean);
     procedure ApplyScript(Sender: TObject);
   {$ifdef mswindows}
     Procedure SaveWinColor;
@@ -2056,6 +2058,7 @@ configrightbar:=TStringList.Create;
 rotspeed:=-1;
 step:='Script panel';
 if VerboseMsg then WriteTrace(step);
+FTelescopeConnected:=false;
 numscript:=8;
 ActiveScript:=-1;
 SetLength(Fscript,numscript);
@@ -7383,6 +7386,7 @@ if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
     SetFov09.caption:=tbFOV9.hint;
     SetFov10.caption:=tbFOV10.hint;
   end;
+  if tc<>FTelescopeConnected then TelescopeChange(MultiFrame1.ActiveChild.Caption,tc);
 end;
 end;
 
@@ -9198,11 +9202,11 @@ begin
            ScriptPanel.Visible:=false;
            Splitter1.Visible:=false;
         end else begin
+           if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
            Fscript[i].ShowScript(true);
            ScriptPanel.Visible:=true;
            Splitter1.Visible:=true;
            Splitter1.ResizeControl:=ScriptPanel;
-           if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
         end;
      end
      else Fscript[i].ShowScript(false);
@@ -9221,6 +9225,15 @@ begin
  if ScriptPanel.Visible and (ActiveScript>=0) then begin
     Fscript[ActiveScript].TelescopeMoveEvent(origin,ra,de);
  end;
+end;
+
+procedure Tf_main.TelescopeChange(origin: string; tc:boolean);
+var i: integer;
+begin
+FTelescopeConnected:=tc;
+for i:=0 to numscript-1 do begin
+  Fscript[i].TelescopeConnectEvent(origin,FTelescopeConnected);
+end;
 end;
 
 ///////////////////////////////////////////////////////////////////////////////////

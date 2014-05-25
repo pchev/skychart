@@ -18,7 +18,7 @@ uses  u_translation, u_constant, u_help, u_util, ActnList, pu_pascaleditor,
 
 type
 
-  Teventlist=(evInitialisation,evTimer,evTelescope_move,evChart_refresh,evObject_identification,evDistance_measurement);
+  Teventlist=(evInitialisation,evTimer,evTelescope_move,evChart_refresh,evObject_identification,evDistance_measurement,evTelescope_connect,evTelescope_disconnect);
 
   { Tf_scriptengine }
 
@@ -146,6 +146,7 @@ type
     FActiveChart: Tf_chart;
     ChartName,RefreshText,SelectionText,DescriptionText,DistanceText: string;
     TelescopeRA,TelescopeDE: double;
+    FTelescopeConnected: boolean;
     vlist: array of Variant;
     ilist: array of Integer;
     dlist: array of Double;
@@ -168,6 +169,8 @@ type
     Function doStrtoDE(str:string; var de: Double) : boolean;
     Procedure doEq2Hz(ra,de : double ; var a,h : double);
     Procedure doHz2Eq(a,h : double; var ra,de : double);
+    function doFormatFloat(Const Format : String; Value : Extended) : String;
+    function doMsgBox(const aMsg: string):boolean;
     procedure Button_Click(Sender: TObject);
     procedure Combo_Change(Sender: TObject);
     procedure ReorderGroup;
@@ -192,6 +195,7 @@ type
     procedure ObjectSelectionEvent(origin,str,longstr:string);
     procedure DistanceMeasurementEvent(origin,str:string);
     procedure TelescopeMoveEvent(origin:string; ra,de: double);
+    procedure TelescopeConnectEvent(origin:string; connected:boolean);
     property TimerReady: boolean read FTimerReady;
     property ConfigToolbar1: TStringList read FConfigToolbar1 write FConfigToolbar1;
     property ConfigToolbar2: TStringList read FConfigToolbar2 write FConfigToolbar2;
@@ -261,6 +265,16 @@ end;
 Procedure Tf_scriptengine.doHz2Eq(a,h : double; var ra,de : double);
 begin
   if assigned(FActiveChart) then FActiveChart.cmdHz2Eq(a,h,ra,de);
+end;
+
+function Tf_scriptengine.doFormatFloat(Const Format : String; Value : Extended) : String;
+begin
+  result:=FormatFloat(format, Value);
+end;
+
+function Tf_scriptengine.doMsgBox(const aMsg: string):boolean;
+begin
+  result:=MessageDlg(aMsg,mtConfirmation,mbYesNo,0)=mrYes;
 end;
 
 function Tf_scriptengine.doGetS(varname:string; var str: string):Boolean;
@@ -910,6 +924,7 @@ end;
 ReorderGroup;
 CompileScripts;
 evscr[ord(evInitialisation)].Execute;
+TelescopeConnectEvent(ChartName,FTelescopeConnected);
 if Assigned(FonApply) then FonApply(self);
 end;
 
@@ -1387,6 +1402,7 @@ begin
     TPSPluginItem(TplPSScript.Plugins.Add).Plugin:=PSImport_ComObj1;
   {$endif}
   FTimerReady:=false;
+  FTelescopeConnected:=false;
   SetLength(vlist,22);
   SetLength(ilist,10);
   SetLength(dlist,10);
@@ -1492,6 +1508,8 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doStrtoDE, 'Function StrtoDE(str:string; var de: Double) : boolean;');
   AddMethod(self, @Tf_scriptengine.doEq2Hz, 'Procedure Eq2Hz(ra,de : double ; var a,h : double);');
   AddMethod(self, @Tf_scriptengine.doHz2Eq, 'Procedure Hz2Eq(a,h : double; var ra,de : double);');
+  AddMethod(self, @Tf_scriptengine.doFormatFloat, 'function FormatFloat(Const Format : String; Value : Extended) : String;');
+  AddMethod(self, @Tf_scriptengine.doMsgBox,'function MsgBox(const aMsg: string):boolean;');
 end;
 ProcessMenu(FMainmenu.Items);
 end;
@@ -1534,14 +1552,14 @@ end;
 
 procedure Tf_scriptengine.ChartRefreshEvent(origin,str:string);
 begin
-ChartName:=origin;
+if origin<>'' then ChartName:=origin;
 RefreshText:=str;
 evscr[ord(evChart_refresh)].Execute;
 end;
 
 procedure Tf_scriptengine.ObjectSelectionEvent(origin,str,longstr:string);
 begin
-ChartName:=origin;
+if origin<>'' then ChartName:=origin;
 SelectionText:=str;
 DescriptionText:=longstr;
 evscr[ord(evObject_identification)].Execute;
@@ -1549,17 +1567,25 @@ end;
 
 procedure Tf_scriptengine.DistanceMeasurementEvent(origin,str:string);
 begin
-ChartName:=origin;
+if origin<>'' then ChartName:=origin;
 DistanceText:=str;
 evscr[ord(evDistance_measurement)].Execute;
 end;
 
 procedure Tf_scriptengine.TelescopeMoveEvent(origin:string; ra,de: double);
 begin
-ChartName:=origin;
+if origin<>'' then ChartName:=origin;
 TelescopeRA:=ra;
 TelescopeDE:=de;
 evscr[ord(evTelescope_move)].Execute;
+end;
+
+procedure Tf_scriptengine.TelescopeConnectEvent(origin:string; connected:boolean);
+begin
+if origin<>'' then ChartName:=origin;
+FTelescopeConnected:=connected;
+if connected then evscr[ord(evTelescope_connect)].Execute
+   else evscr[ord(evTelescope_disconnect)].Execute;
 end;
 
 end.
