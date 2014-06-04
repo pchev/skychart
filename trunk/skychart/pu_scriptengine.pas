@@ -5,10 +5,11 @@ unit pu_scriptengine;
 interface
 
 uses  u_translation, u_constant, u_help, u_util, ActnList, pu_pascaleditor,
+  cu_database, uPSI_CheckLst,
   StdCtrls, ExtCtrls, Menus, Classes, SysUtils, FileUtil, IniFiles, fu_chart,
   uPSComponent, uPSComponent_Default, uPSComponent_DB, uPSComponent_Forms,
   uPSComponent_Controls, uPSComponent_StdCtrls, Forms, Controls, Graphics,
-  Dialogs, ComCtrls, Buttons,uPSCompiler, uPSRuntime, math
+  Dialogs, ComCtrls, Buttons, CheckLst,uPSCompiler, uPSRuntime, math
   {$ifdef mswindows}
   , uPSComponent_COM    // in case of error here please apply the Lazarus patch
                         // available in (Skychart_source)/tools/Lazarus_Patch/
@@ -37,14 +38,13 @@ type
     CheckBoxHidenTimer: TCheckBox;
     Label5: TLabel;
     Label6: TLabel;
-    Label7: TLabel;
     ListHeightEdit: TEdit;
-    ImageHeightEdit: TEdit;
-    ImageWidthEdit: TEdit;
+    CheckListHeightEdit: TEdit;
+    PSCustomPlugin1: TPSCustomPlugin;
     PSDllPlugin1: TPSDllPlugin;
-    RadioButtonImage: TRadioButton;
     RadioButtonList: TRadioButton;
     RadioButtonCombo: TRadioButton;
+    RadioButtonCheckList: TRadioButton;
     ScriptTitle: TEdit;
     Panel2: TPanel;
     EventTimer: TTimer;
@@ -97,10 +97,11 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure GroupCaptionEditChange(Sender: TObject);
     procedure GroupRowEditChange(Sender: TObject);
-    procedure ImageHeightEditChange(Sender: TObject);
-    procedure ImageWidthEditChange(Sender: TObject);
     procedure ListHeightEditChange(Sender: TObject);
     procedure MemoHeightEditChange(Sender: TObject);
+    procedure PSCustomPlugin1CompileImport1(Sender: TPSScript);
+    procedure PSCustomPlugin1ExecImport1(Sender: TObject; se: TPSExec;
+      x: TPSRuntimeClassImporter);
     procedure RadioButtonClick(Sender: TObject);
     procedure TimerIntervalEditClick(Sender: TObject);
     procedure TplPSScriptCompile(Sender: TPSScript);
@@ -134,15 +135,16 @@ type
     cb: array of TCombobox;
     lsnum:integer;
     ls: array of TListBox;
-    imnum:integer;
-    im: array of TImage;
+    cknum:integer;
+    ck: array of TCheckListBox;
     opdialog: TOpenDialog;
     svdialog: TSaveDialog;
     FConfigToolbar1,FConfigToolbar2: TStringlist;
     Fpascaleditor: Tf_pascaleditor;
-    GroupIdx,ButtonIdx,EditIdx,MemoIdx,SpacerIdx,ComboIdx,ListIdx,ImageIdx,EventIdx: integer;
+    GroupIdx,ButtonIdx,EditIdx,MemoIdx,SpacerIdx,ComboIdx,ListIdx,CheckListIdx,EventIdx: integer;
     FExecuteCmd: TExecuteCmd;
     FMainmenu: TMenu;
+    Fcdb: TCDCdb;
     FActiveChart: Tf_chart;
     ChartName,RefreshText,SelectionText,DescriptionText,DistanceText: string;
     TelescopeRA,TelescopeDE: double;
@@ -171,6 +173,7 @@ type
     Procedure doHz2Eq(a,h : double; var ra,de : double);
     function doFormatFloat(Const Format : String; Value : Extended) : String;
     function doMsgBox(const aMsg: string):boolean;
+    function doGetCometList(const filter: string; maxnum:integer; list:TstringList):boolean;
     procedure Button_Click(Sender: TObject);
     procedure Combo_Change(Sender: TObject);
     procedure ReorderGroup;
@@ -181,7 +184,7 @@ type
     procedure AddSpacer(num:string; pt: TWinControl);
     procedure AddCombo(num:string; pt: TWinControl);
     procedure AddList(num:string; pt: TWinControl;h: integer);
-    procedure AddImage(num:string; pt: TWinControl;w,h: integer);
+    procedure AddCheckList(num:string; pt: TWinControl;h: integer);
     procedure ClearTreeView;
     procedure CompileScripts;
   public
@@ -203,6 +206,7 @@ type
     property onApply: TNotifyEvent read FonApply write FonApply;
     property ExecuteCmd: TExecuteCmd read FExecuteCmd write FExecuteCmd;
     property Mainmenu: TMenu read FMainmenu write FMainmenu;
+    property cdb: TCDCdb read Fcdb  write Fcdb;
     property ActiveChart: Tf_chart read FActiveChart write FActiveChart;
   end;
 
@@ -275,6 +279,16 @@ end;
 function Tf_scriptengine.doMsgBox(const aMsg: string):boolean;
 begin
   result:=MessageDlg(aMsg,mtConfirmation,mbYesNo,0)=mrYes;
+end;
+
+function Tf_scriptengine.doGetCometList(const filter: string; maxnum:integer; list:TstringList):boolean;
+var cometid : array of string;
+begin
+  SetLength(cometid,maxnum);
+  list.Clear;
+  Fcdb.GetCometList(filter,maxnum,list,cometid);
+  SetLength(cometid,0);
+  result:=list.count>0;
 end;
 
 function Tf_scriptengine.doGetS(varname:string; var str: string):Boolean;
@@ -813,21 +827,17 @@ ls[lsnum-1].Constraints.MinHeight:=h;
 ls[lsnum-1].Parent:=pt;
 end;
 
-procedure Tf_scriptengine.AddImage(num:string; pt: TWinControl;w,h: integer);
+procedure Tf_scriptengine.AddCheckList(num:string; pt: TWinControl;h: integer);
 begin
-{inc(imnum);
-SetLength(im,imnum);
-if num='' then num:=inttostr(imnum);
-im[imnum-1]:=TImage.Create(self);
-im[imnum-1].Name:='Image_'+num;
-im[imnum-1].tag:=StrToIntDef(num,0);
-im[imnum-1].Width:=w;
-im[imnum-1].Height:=h;
-im[imnum-1].Proportional:=true;
-im[imnum-1].Stretch:=true;
-im[imnum-1].Constraints.MinWidth:=w;
-im[imnum-1].Constraints.MinHeight:=h;
-im[imnum-1].Parent:=pt; }
+inc(cknum);
+SetLength(ck,cknum);
+if num='' then num:=inttostr(cknum);
+ck[cknum-1]:=TCheckListBox.Create(self);
+ck[cknum-1].Name:='CheckList_'+num;
+ck[cknum-1].tag:=StrToIntDef(num,0);
+ck[cknum-1].Height:=h;
+ck[cknum-1].Constraints.MinHeight:=h;
+ck[cknum-1].Parent:=pt;
 end;
 
 procedure Tf_scriptengine.ReorderGroup;
@@ -862,7 +872,7 @@ var node:TTreeNode;
    i,groupseq: integer;
 begin
 StopAllScript;
-for i:=imnum-1 downto 0 do im[i].Free;
+for i:=cknum-1 downto 0 do ck[i].Free;
 for i:=lsnum-1 downto 0 do ls[i].Free;
 for i:=cbnum-1 downto 0 do cb[i].Free;
 for i:=spnum-1 downto 0 do sp[i].Free;
@@ -876,7 +886,7 @@ menum:=0; SetLength(me,0);
 spnum:=0; SetLength(sp,0);
 cbnum:=0; SetLength(cb,0);
 lsnum:=0; SetLength(ls,0);
-imnum:=0; SetLength(im,0);
+cknum:=0; SetLength(ck,0);
 grnum:=0; SetLength(gr,0);
 groupseq:=0;
 node:=TreeView1.Items.GetFirstNode;
@@ -911,9 +921,9 @@ while node<>nil do begin
     AddList(nu,curgroup,StrToIntDef(parm1,50));
     ListIdx:=max(ListIdx,strtoint(nu));
   end
-  else if txt='Image' then begin
-    AddImage(nu,curgroup,StrToIntDef(parm1,100),StrToIntDef(parm2,100));
-    ImageIdx:=max(ImageIdx,strtoint(nu));
+  else if txt='CheckList' then begin
+    AddCheckList(nu,curgroup,StrToIntDef(parm1,50));
+    CheckListIdx:=max(CheckListIdx,strtoint(nu));
   end
   else if txt='Spacer' then begin
     AddSpacer(nu,curgroup);
@@ -961,10 +971,10 @@ end else if RadioButtonList.Checked then begin
     inc(ListIdx);
     TreeView1.Items.AddChild(TreeView1.Selected,'List_'+inttostr(ListIdx)+';'+IntToStr(StrToIntDef(ListHeightEdit.Text,50)));
   end;
-end else if RadioButtonImage.Checked then begin
+end else if RadioButtonCheckList.Checked then begin
   if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
-    inc(ImageIdx);
-    TreeView1.Items.AddChild(TreeView1.Selected,'Image_'+inttostr(ImageIdx)+';'+IntToStr(StrToIntDef(ImageWidthEdit.Text,100))+';'+IntToStr(StrToIntDef(ImageHeightEdit.Text,100)));
+    inc(CheckListIdx);
+    TreeView1.Items.AddChild(TreeView1.Selected,'CheckList_'+inttostr(CheckListIdx)+';'+IntToStr(StrToIntDef(CheckListHeightEdit.Text,50)));
   end;
 end else if RadioButtonMemo.Checked then begin
   if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
@@ -1017,8 +1027,8 @@ if (TreeView1.Selected<>nil) then begin
     TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+IntToStr(StrToIntDef(MemoHeightEdit.Text,50));
   end else if RadioButtonList.Checked then begin
     TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+IntToStr(StrToIntDef(ListHeightEdit.Text,50));
-  end else if RadioButtonImage.Checked then begin
-    TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+IntToStr(StrToIntDef(ImageWidthEdit.Text,100))+';'+IntToStr(StrToIntDef(ImageHeightEdit.Text,100));
+  end else if RadioButtonCheckList.Checked then begin
+    TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+IntToStr(StrToIntDef(CheckListHeightEdit.Text,50));
   end else if RadioButtonSpacer.Checked then begin
      //
   end else if RadioButtonEvent.Checked then begin
@@ -1043,16 +1053,6 @@ end;
 procedure Tf_scriptengine.GroupRowEditChange(Sender: TObject);
 begin
   ButtonUpdate.Visible:=(isInteger(GroupRowEdit.Text))and(ButtonUpdate.Tag=1);
-end;
-
-procedure Tf_scriptengine.ImageHeightEditChange(Sender: TObject);
-begin
-  ButtonUpdate.Visible:=(isInteger(ImageHeightEdit.Text))and(ButtonUpdate.Tag=6);
-end;
-
-procedure Tf_scriptengine.ImageWidthEditChange(Sender: TObject);
-begin
-  ButtonUpdate.Visible:=(isInteger(ImageWidthEdit.Text))and(ButtonUpdate.Tag=6);
 end;
 
 procedure Tf_scriptengine.ListHeightEditChange(Sender: TObject);
@@ -1120,11 +1120,10 @@ if node<>nil then begin
     ListHeightEdit.Text:=words(node.Text,'',2,1,';');
     ButtonUpdate.Visible:=false;
     ButtonUpdate.Tag:=5;
-  end else if (pos('Image_',node.Text)=1) then begin
+  end else if (pos('CheckList_',node.Text)=1) then begin
     ButtonEditScript.Visible:=false;
-    RadioButtonImage.Checked:=true;
-    ImageWidthEdit.Text:=words(node.Text,'',2,1,';');
-    ImageHeightEdit.Text:=words(node.Text,'',3,1,';');
+    RadioButtonCheckList.Checked:=true;
+    CheckListHeightEdit.Text:=words(node.Text,'',2,1,';');
     ButtonUpdate.Visible:=false;
     ButtonUpdate.Tag:=6;
   end else if (pos('Spacer_',node.Text)=1) then begin
@@ -1385,7 +1384,7 @@ begin
   ednum:=0;
   cbnum:=0;
   lsnum:=0;
-  imnum:=0;
+  cknum:=0;
   menum:=0;
   spnum:=0;
   btscrnum:=0;
@@ -1396,6 +1395,7 @@ begin
   MemoIdx:=0;
   ComboIdx:=0;
   ListIdx:=0;
+  CheckListIdx:=0;
   SpacerIdx:=0;
   {$ifdef mswindows}
     PSImport_ComObj1:=TPSImport_ComObj.Create(self);
@@ -1488,7 +1488,7 @@ with Sender as TPSScript do begin
   for i:=1 to menum do AddRegisteredVariable(me[i-1].Name, 'TMemo');
   for i:=1 to cbnum do AddRegisteredVariable(cb[i-1].Name, 'TComboBox');
   for i:=1 to lsnum do AddRegisteredVariable(ls[i-1].Name, 'TListBox');
-//  for i:=1 to imnum do AddRegisteredVariable(im[i-1].Name, 'TImage');
+  for i:=1 to cknum do AddRegisteredVariable(ck[i-1].Name, 'TCheckListBox');
   comp.AddConstantN('deg2rad', 'extended').SetExtended(deg2rad);
   comp.AddConstantN('rad2deg', 'extended').SetExtended(rad2deg);
   AddMethod(self, @Tf_scriptengine.doExecuteCmd, 'function  Cmd(cname:string; arg:Tstringlist):string;');
@@ -1510,12 +1510,27 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doHz2Eq, 'Procedure Hz2Eq(a,h : double; var ra,de : double);');
   AddMethod(self, @Tf_scriptengine.doFormatFloat, 'function FormatFloat(Const Format : String; Value : Extended) : String;');
   AddMethod(self, @Tf_scriptengine.doMsgBox,'function MsgBox(const aMsg: string):boolean;');
+  AddMethod(self, @Tf_scriptengine.doGetCometList,'function GetCometList(const filter: string; maxnum:integer; list:TstringList):boolean;');
 end;
 ProcessMenu(FMainmenu.Items);
 end;
 
+procedure Tf_scriptengine.PSCustomPlugin1CompileImport1(Sender: TPSScript);
+begin
+ SIRegister_CheckLst(Sender.Comp);
+end;
+
+procedure Tf_scriptengine.PSCustomPlugin1ExecImport1(Sender: TObject;
+  se: TPSExec; x: TPSRuntimeClassImporter);
+begin
+ RIRegister_CheckLst(x);
+ RIRegister_CheckLst_Routines(se);
+end;
+
+
 procedure Tf_scriptengine.TplPSScriptExecute(Sender: TPSScript);
 var i: integer;
+
   procedure ProcessMenu(Amenu: TMenuItem);
   var k: integer;
   begin
@@ -1533,7 +1548,7 @@ with Sender as TPSScript do begin
   for i:=1 to menum do SetVarToInstance(me[i-1].Name, me[i-1]);
   for i:=1 to cbnum do SetVarToInstance(cb[i-1].Name, cb[i-1]);
   for i:=1 to lsnum do SetVarToInstance(ls[i-1].Name, ls[i-1]);
-//  for i:=1 to imnum do SetVarToInstance(im[i-1].Name, im[i-1]);
+  for i:=1 to cknum do SetVarToInstance(ck[i-1].Name, ck[i-1]);
 end;
 ProcessMenu(FMainmenu.Items);
 end;

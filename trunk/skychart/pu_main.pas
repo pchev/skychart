@@ -465,6 +465,7 @@ type
     procedure ShowUobjExecute(Sender: TObject);
     procedure ShowVOExecute(Sender: TObject);
     procedure TelescopeSetupExecute(Sender: TObject);
+    procedure TimeUChange(Sender: TObject);
     procedure ToolBarFOVResize(Sender: TObject);
     procedure TrackTelescopeExecute(Sender: TObject);
     procedure ViewChartInfoExecute(Sender: TObject);
@@ -1638,8 +1639,23 @@ val(EditTimeVal.Text,i,n);
 if (n=0)and(i=0) then
   EditTimeVal.Text:='1';
 TimeVal.Position:=strtointdef(EditTimeVal.Text,1);
+for i:=0 to numscript-1 do begin
+  Fscript[i].EditTimeVal.Text:=EditTimeVal.Text;
+end;
 end;
 
+procedure Tf_main.TimeValChangingEx(Sender: TObject; var AllowChange: Boolean;
+  NewValue: SmallInt; Direction: TUpDownDirection);
+var i: integer;
+begin
+if NewValue=0 then begin
+  if TimeVal.Position>0 then TimeVal.Position:=-1 else TimeVal.Position:=1;
+  AllowChange:=false;
+end;
+for i:=0 to numscript-1 do begin
+  Fscript[i].TimeVal.Position:=TimeVal.Position;
+end;
+end;
 
 procedure Tf_main.MagPanelMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
@@ -3506,20 +3522,10 @@ ThemeTimer.Enabled:=false;
    if NightVision or (cfgm.ThemeName<>'default')or(cfgm.ButtonStandard>1) then SetTheme;
 end;
 
-procedure Tf_main.TimeValChangingEx(Sender: TObject; var AllowChange: Boolean;
-  NewValue: SmallInt; Direction: TUpDownDirection);
-begin
-if NewValue=0 then begin
-  if TimeVal.Position>0 then TimeVal.Position:=-1 else TimeVal.Position:=1;
-  AllowChange:=false;
-end;
-end;
-
 procedure Tf_main.TelescopeSetupExecute(Sender: TObject);
 begin
   SetupSystemPage(2);
 end;
-
 
 procedure Tf_main.SetupSystemExecute(Sender: TObject);
 begin
@@ -8388,10 +8394,10 @@ if cfgm.KioskMode then begin
 end;
 if cfgm.KioskMode or
    ((Activecontrol<>nil) and (
-   (Activecontrol=quicksearch) or
-   (Activecontrol=EditTimeVal) or
-   (Activecontrol=TimeVal) or
-   (Activecontrol=TimeU) or
+   (Activecontrol.Name='quicksearch') or
+   (Activecontrol.Name='EditTimeVal') or
+   (Activecontrol.Name='TimeVal') or
+   (Activecontrol.Name='TimeU') or
    (pos('_',ActiveControl.Name)>0 ))) then exit
 else
    (MultiFrame1.ActiveObject as Tf_chart).CKeyDown(Key,Shift);
@@ -9160,12 +9166,12 @@ for i:=0 to numscript-1 do begin
   Fscript[i].ActionListChart:=ActionListChart;
   Fscript[i].ActionListTelescope:=ActionListTelescope;
   Fscript[i].ActionListWindow:=ActionListWindow;
-  Fscript[i].MagPanel:=MagPanel;
-  Fscript[i].quicksearch:=quicksearch;
-  Fscript[i].TimeValPanel:=TimeValPanel;
+  Fscript[i].TimeValPanel:=TimeValPanel; // keep in sequence! 1 //
+  Fscript[i].EditTimeVal:=EditTimeVal;   // keep in sequence! 2 //
+  Fscript[i].TimeVal:=TimeVal;           // keep in sequence! 3 //
   Fscript[i].TimeU:=TimeU;
-  Fscript[i].ToolBarFOV:=ToolBarFOV;
   Fscript[i].Mainmenu:=MainMenu1;
+  Fscript[i].cdb:=cdcdb;
   if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
   Fscript[i].Init;
   if i=ActiveScript then begin
@@ -9235,6 +9241,15 @@ for i:=0 to numscript-1 do begin
   Fscript[i].TelescopeConnectEvent(origin,FTelescopeConnected);
 end;
 end;
+
+procedure Tf_main.TimeUChange(Sender: TObject);
+var i: integer;
+begin
+for i:=0 to numscript-1 do begin
+  Fscript[i].TimeU.ItemIndex:=TimeU.ItemIndex;
+end;
+end;
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 
