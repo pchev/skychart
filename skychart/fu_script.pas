@@ -5,7 +5,7 @@ unit fu_script;
 interface
 
 uses  u_translation, u_constant, u_help, pu_edittoolbar, pu_scriptengine, u_util,
-  fu_chart, ActnList, Menus, Classes, SysUtils,
+  fu_chart, cu_database, ActnList, Menus, Classes, SysUtils,
   FileUtil, Forms, Controls, ExtCtrls, StdCtrls, ComCtrls, Buttons;
 
 type
@@ -17,6 +17,7 @@ type
     ButtonEditSrc: TBitBtn;
     BottomPanel: TPanel;
     Label1: TLabel;
+    LabelShortcut: TLabel;
     MainPanel: TPanel;
     PanelTitle: TPanel;
     ToolBar1: TToolBar;
@@ -32,12 +33,12 @@ type
     FToolButtonMouseUp,FToolButtonMouseDown: TMouseEvent;
     FActionListFile,FActionListEdit,FActionListSetup,
     FActionListView,FActionListChart,FActionListTelescope,FActionListWindow: TActionList;
-    FMagPanel: TPanel;
-    Fquicksearch: TComboBox;
-    FTimeValPanel: Tpanel;
-    FTimeU: TComboBox;
-    FToolBarFOV: Tpanel;
+    FTimeValPanel,FMainTimeValPanel: Tpanel;
+    FEditTimeVal,FMainEditTimeVal: TEdit;
+    FTimeVal,FMainTimeVal: TUpDown;
+    FTimeU,FMainTimeU: TComboBox;
     FMainmenu: TMenu;
+    Fcdb: TCDCdb;
     FExecuteCmd: TExecuteCmd;
     FActivechart: Tf_chart;
     FonApply: TNotifyEvent;
@@ -51,6 +52,15 @@ type
     function  GetHidenTimer: Boolean;
     procedure SetHidenTimer(value:Boolean);
     procedure SetMainmenu(value:TMenu);
+    procedure SetCDB(value:TCDCdb);
+    procedure SetTimeU(value:TComboBox);
+    procedure SetTimeValPanel(value:TPanel);
+    procedure SetEditTimeVal(value:TEdit);
+    procedure SetTimeVal(value:TUpDown);
+    procedure TimeUChange(Sender: TObject);
+    procedure EditTimeValChange(Sender: TObject);
+    procedure TimeValChangingEx(Sender: TObject; var AllowChange: Boolean; NewValue: SmallInt; Direction: TUpDownDirection);
+
   public
     { public declarations }
     constructor Create(TheOwner: TComponent); override;
@@ -74,12 +84,12 @@ type
     property ActionListChart: TActionList read FActionListChart  write FActionListChart ;
     property ActionListTelescope: TActionList read FActionListTelescope  write FActionListTelescope ;
     property ActionListWindow: TActionList read FActionListWindow  write FActionListWindow ;
-    property MagPanel: TPanel read FMagPanel  write FMagPanel ;
-    property quicksearch: TComboBox read Fquicksearch  write Fquicksearch ;
-    property TimeValPanel: Tpanel read FTimeValPanel  write FTimeValPanel ;
-    property TimeU: TComboBox read FTimeU  write FTimeU ;
-    property ToolBarFOV: Tpanel read FToolBarFOV  write FToolBarFOV ;
+    property TimeValPanel: Tpanel read FTimeValPanel  write SetTimeValPanel ;
+    property EditTimeVal: TEdit read FEditTimeVal  write SetEditTimeVal ;
+    property TimeVal: TUpDown read FTimeVal  write SetTimeVal ;
+    property TimeU: TComboBox read FTimeU  write SetTimeU ;
     property Mainmenu: TMenu read FMainmenu  write SetMainmenu;
+    property cdb: TCDCdb read Fcdb  write SetCDB;
     property ConfigToolbar1: TStringList read FConfigToolbar1 write FConfigToolbar1;
     property ConfigToolbar2: TStringList read FConfigToolbar2 write FConfigToolbar2;
     property ConfigScriptButton: TStringList read FConfigScriptButton write FConfigScriptButton;
@@ -160,6 +170,7 @@ end;
 
 procedure Tf_script.Init;
 begin
+  LabelShortcut.Caption:='F'+inttostr(tag+1);
   ToolBar1.Images:=FImageNormal;
   ToolBar2.Images:=FImageNormal;
   fedittoolbar.Images:=FImageNormal;
@@ -176,8 +187,6 @@ begin
   fedittoolbar.AddAction(FActionListTelescope,rsTelescope);
   fedittoolbar.AddAction(FActionListWindow,rsWindow);
   fedittoolbar.ClearControl;
-  fedittoolbar.AddOtherControl(FMagPanel, rsStarAndNebul, rsFilter2, rsChart, 99);
-  fedittoolbar.AddOtherControl(Fquicksearch, rsSearchBox, rsSearch, rsEdit, 102);
   fedittoolbar.AddOtherControl(FTimeValPanel, rsEditTimeIncr, rsAnimation,  rsChart, 103);
   fedittoolbar.AddOtherControl(FTimeU, rsSelectTimeUn, rsAnimation, rsChart, 104);
   fedittoolbar.ClearToolbar;
@@ -200,6 +209,7 @@ begin
         fscriptengine.ExecuteCmd:=FExecuteCmd;
         fscriptengine.Activechart:=FActivechart;
         fscriptengine.Mainmenu:=FMainmenu;
+        fscriptengine.cdb:=Fcdb;
      end;
      fscriptengine.CheckBoxHidenTimer.Checked:=FHidenTimer;
      fscriptengine.Load(FConfigScriptButton, FConfigScript, FConfigCombo, FConfigEvent,PanelTitle.Caption);
@@ -231,6 +241,7 @@ begin
      fscriptengine.ExecuteCmd:=FExecuteCmd;
      fscriptengine.Activechart:=FActivechart;
      fscriptengine.Mainmenu:=FMainmenu;
+     fscriptengine.cdb:=Fcdb;
   end;
   FormPos(fscriptengine,mouse.cursorpos.x,mouse.cursorpos.y);
   fscriptengine.Show;
@@ -264,6 +275,12 @@ procedure Tf_script.SetMainmenu(value:TMenu);
 begin
  FMainmenu:=value;
  if fscriptengine<>nil then fscriptengine.Mainmenu:=FMainmenu;
+end;
+
+procedure Tf_script.SetCDB(value:TCDCdb);
+begin
+ Fcdb:=value;
+ if fscriptengine<>nil then fscriptengine.cdb:=Fcdb;
 end;
 
 procedure Tf_script.ChartRefreshEvent(origin,str:string);
@@ -303,6 +320,95 @@ begin
   FHidenTimer:=value;
   if fscriptengine<>nil then fscriptengine.CheckBoxHidenTimer.Checked:=value;
 end;
+
+procedure Tf_script.SetTimeU(value:TComboBox);
+var i:integer;
+begin
+  FMainTimeU:=value;
+  if FTimeU<>nil then FreeAndNil(FTimeU);
+  FTimeU:=TComboBox.Create(self);
+  FTimeU.Style:=value.Style;
+  FTimeU.Width:=value.Width;
+  FTimeU.Height:=value.Height;
+  FTimeU.Caption:=value.Caption;
+  FTimeU.Hint:=value.Hint;
+  FTimeU.Name:=value.Name;
+  for i:=0 to value.Items.Count-1 do FTimeU.Items.Add(value.Items[i]);
+  FTimeU.ItemIndex:=value.ItemIndex;
+  FTimeU.OnChange:=@TimeUChange;
+end;
+
+procedure Tf_script.SetTimeValPanel(value:TPanel);
+begin
+  FMainTimeValPanel:=value;
+  if FTimeValPanel<>nil then FreeAndNil(FTimeValPanel);
+  FTimeValPanel:=TPanel.Create(self);
+  FTimeValPanel.Name:=value.Name;
+  FTimeValPanel.Caption:=value.Caption;
+  FTimeValPanel.BevelOuter:=value.BevelOuter;
+  FTimeValPanel.Width:=value.Width;
+  FTimeValPanel.Height:=value.Height;
+end;
+
+procedure Tf_script.SetEditTimeVal(value:TEdit);
+begin
+  FMainEditTimeVal:=value;
+  if FEditTimeVal<>nil then FreeAndNil(FEditTimeVal);
+  FEditTimeVal:=TEdit.Create(self);
+  FEditTimeVal.Name:=value.Name;
+  FEditTimeVal.Parent:=FTimeValPanel;
+  FEditTimeVal.Width:=value.Width;
+  FEditTimeVal.Height:=value.Height;
+  FEditTimeVal.Top:=value.Top;
+  FEditTimeVal.Left:=value.Left;
+  FEditTimeVal.Text:=value.Text;
+  FEditTimeVal.OnChange:=@EditTimeValChange;
+end;
+
+procedure Tf_script.SetTimeVal(value:TUpDown);
+begin
+  FMainTimeVal:=value;
+  if FTimeVal<>nil then FreeAndNil(FTimeVal);
+  FTimeVal:=TUpDown.Create(self);
+  FTimeVal.Parent:=FTimeValPanel;
+  FTimeVal.Name:=value.Name;
+  FTimeVal.Width:=value.Width;
+  FTimeVal.Height:=value.Height;
+  FTimeVal.Top:=value.Top;
+  FTimeVal.Left:=value.Left;
+  FTimeVal.Max:=value.Max;
+  FTimeVal.Min:=value.Min;
+  FTimeVal.Thousands:=value.Thousands;
+  FTimeVal.Associate:=FEditTimeVal;
+  FTimeVal.Position:=value.Position;
+  FTimeVal.OnChangingEx:=@TimeValChangingEx;
+end;
+
+procedure Tf_script.TimeUChange(Sender: TObject);
+begin
+  FMainTimeU.ItemIndex:=TimeU.ItemIndex;
+  FMainTimeU.OnChange(self);
+end;
+
+procedure Tf_script.EditTimeValChange(Sender: TObject);
+var i,n: integer;
+begin
+val(FEditTimeVal.Text,i,n);
+if (n=0)and(i=0) then
+  FEditTimeVal.Text:='1';
+FTimeVal.Position:=strtointdef(FEditTimeVal.Text,1);
+FMainEditTimeVal.Text:=FEditTimeVal.Text;
+end;
+
+procedure Tf_script.TimeValChangingEx(Sender: TObject; var AllowChange: Boolean; NewValue: SmallInt; Direction: TUpDownDirection);
+begin
+if NewValue=0 then begin
+  if FTimeVal.Position>0 then FTimeVal.Position:=-1 else FTimeVal.Position:=1;
+  AllowChange:=false;
+end;
+FMainTimeVal.Position:=FTimeVal.Position;
+end;
+
 
 end.
 

@@ -347,7 +347,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item23>
     </RequiredPackages>
-    <Units Count="80">
+    <Units Count="81">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -916,6 +916,11 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_pascaleditor"/>
       </Unit79>
+      <Unit80>
+        <Filename Value="upsi_checklst.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uPSI_CheckLst"/>
+      </Unit80>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -208,7 +208,7 @@ object f_scriptengine: Tf_scriptengine
     end
     object EventComboBox: TComboBox
       Left = 134
-      Height = 23
+      Height = 27
       Top = 216
       Width = 180
       ItemHeight = 0
@@ -239,7 +239,7 @@ object f_scriptengine: Tf_scriptengine
     object RadioButtonCombo: TRadioButton
       Left = 14
       Height = 26
-      Top = 136
+      Top = 162
       Width = 68
       Caption = 'Combo'
       OnClick = RadioButtonClick
@@ -271,61 +271,38 @@ object f_scriptengine: Tf_scriptengine
       TabOrder = 14
       Text = '50'
     end
-    object RadioButtonImage: TRadioButton
-      Left = 14
-      Height = 26
-      Top = 162
-      Width = 62
-      Caption = 'Image'
-      OnClick = RadioButtonClick
-      TabOrder = 15
-      Visible = False
-    end
-    object Label6: TLabel
-      Left = 248
-      Height = 15
-      Top = 170
-      Width = 38
-      Caption = 'Height'
-      ParentColor = False
-      Visible = False
-    end
-    object ImageHeightEdit: TEdit
-      Left = 318
-      Height = 21
-      Top = 167
-      Width = 50
-      OnChange = ImageHeightEditChange
-      TabOrder = 16
-      Text = '100'
-      Visible = False
-    end
-    object Label7: TLabel
-      Left = 134
-      Height = 15
-      Top = 170
-      Width = 34
-      Caption = 'Width'
-      ParentColor = False
-      Visible = False
-    end
-    object ImageWidthEdit: TEdit
-      Left = 187
-      Height = 21
-      Top = 167
-      Width = 50
-      OnChange = ImageWidthEditChange
-      TabOrder = 17
-      Text = '100'
-      Visible = False
-    end
     object CheckBoxHidenTimer: TCheckBox
       Left = 14
       Height = 26
       Top = 240
       Width = 242
       Caption = 'Activate the timer event when hidden'
-      TabOrder = 18
+      TabOrder = 15
+    end
+    object RadioButtonCheckList: TRadioButton
+      Left = 14
+      Height = 26
+      Top = 136
+      Width = 84
+      Caption = 'CheckList'
+      OnClick = RadioButtonClick
+      TabOrder = 16
+    end
+    object Label6: TLabel
+      Left = 134
+      Height = 15
+      Top = 144
+      Width = 38
+      Caption = 'Height'
+      ParentColor = False
+    end
+    object CheckListHeightEdit: TEdit
+      Left = 187
+      Height = 21
+      Top = 141
+      Width = 80
+      TabOrder = 17
+      Text = '50'
     end
   end
   object ButtonAdd: TButton
@@ -501,6 +478,9 @@ object f_scriptengine: Tf_scriptengine
       end    
       item
         Plugin = PSDllPlugin1
+      end    
+      item
+        Plugin = PSCustomPlugin1
       end>
     UsePreProcessor = False
     left = 48
@@ -536,10 +516,14 @@ object f_scriptengine: Tf_scriptengine
     top = 312
   end
   object OpenDialog1: TOpenDialog
+    DefaultExt = '.cdcps'
+    Filter = 'CdC script|*.cdcps'
     left = 152
     top = 16
   end
   object SaveDialog1: TSaveDialog
+    DefaultExt = '.cdcps'
+    Filter = 'CdC script|*.cdcps'
     left = 152
     top = 73
   end
@@ -552,5 +536,11 @@ object f_scriptengine: Tf_scriptengine
   object PSDllPlugin1: TPSDllPlugin
     left = 48
     top = 368
+  end
+  object PSCustomPlugin1: TPSCustomPlugin
+    OnCompileImport1 = PSCustomPlugin1CompileImport1
+    OnExecImport1 = PSCustomPlugin1ExecImport1
+    left = 48
+    top = 424
   end
 end

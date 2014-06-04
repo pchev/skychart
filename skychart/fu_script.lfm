@@ -19,9 +19,9 @@ object f_script: Tf_script
     TabOrder = 0
     object Label1: TLabel
       Left = 8
-      Height = 15
+      Height = 16
       Top = 0
-      Width = 78
+      Width = 83
       Caption = 'Configuration'
       ParentColor = False
     end
@@ -51,6 +51,8 @@ object f_script: Tf_script
     Width = 180
     AutoSize = True
     Caption = 'Toolbar 1'
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 1
   end
   object ToolBar2: TToolBar
@@ -60,6 +62,8 @@ object f_script: Tf_script
     Width = 180
     AutoSize = True
     Caption = 'Toolbar 2'
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 2
   end
   object MainPanel: TPanel
@@ -81,8 +85,20 @@ object f_script: Tf_script
     Width = 180
     Align = alTop
     Caption = 'PanelTitle'
+    ClientHeight = 28
+    ClientWidth = 180
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 4
+    object LabelShortcut: TLabel
+      Left = 156
+      Height = 16
+      Top = 6
+      Width = 22
+      Anchors = [akTop, akRight]
+      Caption = 'Lab'
+      ParentColor = False
+      ParentFont = False
+    end
   end
 end
