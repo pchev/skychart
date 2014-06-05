@@ -301,6 +301,7 @@ object f_scriptengine: Tf_scriptengine
       Height = 21
       Top = 141
       Width = 80
+      OnChange = CheckListHeightEditChange
       TabOrder = 17
       Text = '50'
     end

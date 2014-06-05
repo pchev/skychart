@@ -978,6 +978,7 @@ type
     CircleLst: array[0..MaxCircle, 1..2] of double;
     CircleLabel, RectangleLabel, marknumlabel: boolean;
     msg: string;
+    CometMark,AsteroidMark: Tstringlist;
     // Calendar
     CalGraphHeight: integer;
     constructor Create;
@@ -1994,10 +1995,14 @@ begin
   PlotImageFirst:=false;
   HeaderHeight:=0;
   FooterHeight:=0;
+  CometMark:=Tstringlist.Create;
+  AsteroidMark:=Tstringlist.Create;
 end;
 
 destructor Tconf_skychart.Destroy;
 begin
+  CometMark.Free;
+  AsteroidMark.Free;
   SetLength(circle,0);
   SetLength(circleok,0);
   SetLength(circlelbl,0);
@@ -2377,6 +2382,12 @@ begin
   CircleLabel := Source.CircleLabel;
   CalGraphHeight := Source.CalGraphHeight;
   RectangleLabel := Source.RectangleLabel;
+  CometMark.Clear;
+  for i := 0 to Source.CometMark.Count - 1 do
+    CometMark.Add(Source.CometMark.Strings[i]);
+  AsteroidMark.Clear;
+  for i := 0 to Source.AsteroidMark.Count - 1 do
+    AsteroidMark.Add(Source.AsteroidMark.Strings[i]);
   marknumlabel := Source.marknumlabel;
   for i := 0 to Source.NumCircle do
     for j := 1 to 2 do

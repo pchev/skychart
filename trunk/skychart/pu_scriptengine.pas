@@ -4,12 +4,12 @@ unit pu_scriptengine;
 
 interface
 
-uses  u_translation, u_constant, u_help, u_util, ActnList, pu_pascaleditor,
-  cu_database, uPSI_CheckLst,
-  StdCtrls, ExtCtrls, Menus, Classes, SysUtils, FileUtil, IniFiles, fu_chart,
-  uPSComponent, uPSComponent_Default, uPSComponent_DB, uPSComponent_Forms,
-  uPSComponent_Controls, uPSComponent_StdCtrls, Forms, Controls, Graphics,
-  Dialogs, ComCtrls, Buttons, CheckLst,uPSCompiler, uPSRuntime, math
+uses  u_translation, u_constant, u_projection, u_help, u_util, ActnList, pu_pascaleditor,
+  cu_database, uPSI_CheckLst, StdCtrls, ExtCtrls, Menus, Classes, SysUtils,
+  FileUtil, IniFiles, fu_chart, jdcalendar, uPSComponent, uPSComponent_Default,
+  uPSComponent_DB, uPSComponent_Forms, uPSComponent_Controls,
+  uPSComponent_StdCtrls, Forms, Controls, Graphics, Dialogs, ComCtrls, Buttons,
+  CheckLst, ExtDlgs, uPSCompiler, uPSRuntime, math
   {$ifdef mswindows}
   , uPSComponent_COM    // in case of error here please apply the Lazarus patch
                         // available in (Skychart_source)/tools/Lazarus_Patch/
@@ -91,6 +91,7 @@ type
     procedure ButtonSaveClick(Sender: TObject);
     procedure ButtonUpClick(Sender: TObject);
     procedure ButtonUpdateClick(Sender: TObject);
+    procedure CheckListHeightEditChange(Sender: TObject);
     procedure EventComboBoxChange(Sender: TObject);
     procedure EventTimerTimer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -139,10 +140,13 @@ type
     ck: array of TCheckListBox;
     opdialog: TOpenDialog;
     svdialog: TSaveDialog;
+    cadialog: TJDCalendarDialog;
     FConfigToolbar1,FConfigToolbar2: TStringlist;
     Fpascaleditor: Tf_pascaleditor;
     GroupIdx,ButtonIdx,EditIdx,MemoIdx,SpacerIdx,ComboIdx,ListIdx,CheckListIdx,EventIdx: integer;
     FExecuteCmd: TExecuteCmd;
+    FCometMark: TExecuteCmd;
+    FAsteroidMark: TExecuteCmd;
     FMainmenu: TMenu;
     Fcdb: TCDCdb;
     FActiveChart: Tf_chart;
@@ -153,7 +157,7 @@ type
     ilist: array of Integer;
     dlist: array of Double;
     slist: array of String;
-    FTimerReady: boolean;
+    FTimerReady,FEventReady: boolean;
     function doExecuteCmd(cname:string; arg:Tstringlist):string;
     function doGetS(varname:string; var str: string):Boolean;
     function doSetS(varname:string; str: string):Boolean;
@@ -165,6 +169,9 @@ type
     function doSetV(varname:string; v: Variant):Boolean;
     function doOpenDialog(var fn: string): boolean;
     function doSaveDialog(var fn: string): boolean;
+    function doCalendarDialog(var dt: double): boolean;
+    Function doJDtoStr(var jd: Double) : string;
+    Function doStrtoJD(dt:string; var jdt: Double) : boolean;
     Function doARtoStr(var ar: Double) : string;
     Function doDEtoStr(var de: Double) : string;
     Function doStrtoAR(str:string; var ar: Double) : boolean;
@@ -174,6 +181,9 @@ type
     function doFormatFloat(Const Format : String; Value : Extended) : String;
     function doMsgBox(const aMsg: string):boolean;
     function doGetCometList(const filter: string; maxnum:integer; list:TstringList):boolean;
+    function doCometMark(list:TstringList):boolean;
+    function doGetAsteroidList(const filter: string; maxnum:integer; list:TstringList):boolean;
+    function doAsteroidMark(list:TstringList):boolean;
     procedure Button_Click(Sender: TObject);
     procedure Combo_Change(Sender: TObject);
     procedure ReorderGroup;
@@ -200,11 +210,14 @@ type
     procedure TelescopeMoveEvent(origin:string; ra,de: double);
     procedure TelescopeConnectEvent(origin:string; connected:boolean);
     property TimerReady: boolean read FTimerReady;
+    property EventReady: boolean read FEventReady write FEventReady;
     property ConfigToolbar1: TStringList read FConfigToolbar1 write FConfigToolbar1;
     property ConfigToolbar2: TStringList read FConfigToolbar2 write FConfigToolbar2;
     property EditSurface: TPanel read FEditSurface write FEditSurface;
     property onApply: TNotifyEvent read FonApply write FonApply;
     property ExecuteCmd: TExecuteCmd read FExecuteCmd write FExecuteCmd;
+    property CometMark: TExecuteCmd read FCometMark write FCometMark;
+    property AsteroidMark: TExecuteCmd read FAsteroidMark write FAsteroidMark;
     property Mainmenu: TMenu read FMainmenu write FMainmenu;
     property cdb: TCDCdb read Fcdb  write Fcdb;
     property ActiveChart: Tf_chart read FActiveChart write FActiveChart;
@@ -289,6 +302,30 @@ begin
   Fcdb.GetCometList(filter,maxnum,list,cometid);
   SetLength(cometid,0);
   result:=list.count>0;
+end;
+
+function Tf_scriptengine.doCometMark(list:TstringList):boolean;
+var str: string;
+begin
+  if assigned(FCometMark) then str:=FCometMark('',list);
+  result:=(pos(msgOK,str)>0);
+end;
+
+function Tf_scriptengine.doGetAsteroidList(const filter: string; maxnum:integer; list:TstringList):boolean;
+var astid : array of string;
+begin
+  SetLength(astid,maxnum);
+  list.Clear;
+  Fcdb.GetAsteroidList(filter,maxnum,list,astid);
+  SetLength(astid,0);
+  result:=list.count>0;
+end;
+
+function Tf_scriptengine.doAsteroidMark(list:TstringList):boolean;
+var str: string;
+begin
+  if assigned(FAsteroidMark) then str:=FAsteroidMark('',list);
+  result:=(pos(msgOK,str)>0);
 end;
 
 function Tf_scriptengine.doGetS(varname:string; var str: string):Boolean;
@@ -473,6 +510,13 @@ begin
   if result then fn:=svdialog.FileName;
 end;
 
+function Tf_scriptengine.doCalendarDialog(var dt: double): boolean;
+begin
+  cadialog.JD:=dt;
+  result:=cadialog.Execute;
+  if result then dt:=cadialog.JD;
+end;
+
 Function Tf_scriptengine.doARtoStr(var ar: Double) : string;
 begin
   // script do not work if a float parameter is not var.
@@ -503,6 +547,41 @@ begin
     result:=(de<>0);
   end
   else result:=false;
+end;
+
+Function Tf_scriptengine.doJDtoStr(var jd: Double) : string;
+begin
+  result:=jddate(jd);
+end;
+
+Function Tf_scriptengine.doStrtoJD(dt:string; var jdt: Double) : boolean;
+var sy,y,m,d,p: integer;
+    h:double;
+begin
+result:=false;
+sy:=1;
+h:=0;
+dt:=trim(dt);
+if length(dt)>2 then begin
+ if dt[1]='-' then begin sy:=-1; delete(dt,1,1); end;
+ if dt[1]='+' then begin sy:=1; delete(dt,1,1); end;
+end;
+p:=pos('-',dt);
+if p=0 then exit;
+y:=sy*strtoint(trim(copy(dt,1,p-1)));
+dt:=copy(dt,p+1,999);
+p:=pos('-',dt);
+if p=0 then exit;
+m:=strtoint(trim(copy(dt,1,p-1)));
+dt:=copy(dt,p+1,999);
+p:=pos('T',dt);
+if p=0 then p:=pos(' ',dt);
+if p=0 then d:=strtoint(trim(dt))     // no time part
+   else begin
+    d:=strtoint(trim(copy(dt,1,p-1)));
+
+   end;
+jdt:=jd(y,m,d,h);
 end;
 
 procedure Tf_scriptengine.Save(strbtn, strscr, comboscr, eventscr: Tstringlist; var title:string);
@@ -771,8 +850,8 @@ if num='' then num:=inttostr(menum);
 me[menum-1]:=TMemo.Create(self);
 me[menum-1].Name:='Memo_'+num;
 me[menum-1].tag:=StrToIntDef(num,0);
-me[menum-1].Height:=h;
 me[menum-1].Constraints.MinHeight:=h;
+me[menum-1].Height:=h;
 me[menum-1].Clear;
 me[menum-1].ScrollBars:=ssAutoBoth;
 me[menum-1].Parent:=pt;
@@ -822,8 +901,8 @@ if num='' then num:=inttostr(lsnum);
 ls[lsnum-1]:=TListBox.Create(self);
 ls[lsnum-1].Name:='List_'+num;
 ls[lsnum-1].tag:=StrToIntDef(num,0);
-ls[lsnum-1].Height:=h;
 ls[lsnum-1].Constraints.MinHeight:=h;
+ls[lsnum-1].Height:=h;
 ls[lsnum-1].Parent:=pt;
 end;
 
@@ -835,8 +914,8 @@ if num='' then num:=inttostr(cknum);
 ck[cknum-1]:=TCheckListBox.Create(self);
 ck[cknum-1].Name:='CheckList_'+num;
 ck[cknum-1].tag:=StrToIntDef(num,0);
-ck[cknum-1].Height:=h;
 ck[cknum-1].Constraints.MinHeight:=h;
+ck[cknum-1].Height:=h;
 ck[cknum-1].Parent:=pt;
 end;
 
@@ -858,6 +937,7 @@ for i:=0 to btscrnum-1 do if (btscr[i]<>nil) and btscr[i].Running then btscr[i].
 for i:=0 to cbscrnum-1 do if (cbscr[i]<>nil) and cbscr[i].Running then cbscr[i].Stop;
 for i:=0 to evscrnum-1 do if (evscr[i]<>nil) and evscr[i].Running then evscr[i].Stop;
 EventTimer.Enabled:=false;
+FEventReady:=false;
 end;
 
 procedure Tf_scriptengine.StartTimer;
@@ -934,6 +1014,7 @@ end;
 ReorderGroup;
 CompileScripts;
 evscr[ord(evInitialisation)].Execute;
+FEventReady:=true;
 TelescopeConnectEvent(ChartName,FTelescopeConnected);
 if Assigned(FonApply) then FonApply(self);
 end;
@@ -1058,6 +1139,11 @@ end;
 procedure Tf_scriptengine.ListHeightEditChange(Sender: TObject);
 begin
   ButtonUpdate.Visible:=(isInteger(ListHeightEdit.Text))and(ButtonUpdate.Tag=5);
+end;
+
+procedure Tf_scriptengine.CheckListHeightEditChange(Sender: TObject);
+begin
+  ButtonUpdate.Visible:=(isInteger(CheckListHeightEdit.Text))and(ButtonUpdate.Tag=6);
 end;
 
 procedure Tf_scriptengine.MemoHeightEditChange(Sender: TObject);
@@ -1342,6 +1428,7 @@ begin
 CompileMemo.Clear;
 EventTimer.Enabled:=false;
 FTimerReady:=false;
+FEventReady:=false;
 node:=TreeView1.Items.GetFirstNode;
 while node<>nil do begin
   buf:=words(node.Text,'',1,1,';');
@@ -1402,11 +1489,13 @@ begin
     TPSPluginItem(TplPSScript.Plugins.Add).Plugin:=PSImport_ComObj1;
   {$endif}
   FTimerReady:=false;
+  FEventReady:=false;
   FTelescopeConnected:=false;
   SetLength(vlist,22);
   SetLength(ilist,10);
   SetLength(dlist,10);
   SetLength(slist,10);
+  EventComboBox.ItemIndex:=0;
   evscrnum:=ord(High(Teventlist))+1;
   SetLength(evscr,evscrnum);
   for i:=0 to evscrnum-1 do begin
@@ -1418,6 +1507,7 @@ begin
   end;
   opdialog:=TOpenDialog.Create(self);
   svdialog:=TSaveDialog.Create(self);
+  cadialog:=TJDCalendarDialog.Create(self);
   SetLang;
 end;
 
@@ -1455,6 +1545,7 @@ begin
   TreeView1.free;
   opdialog.Free;
   svdialog.Free;
+  cadialog.Free;
   if Fpascaleditor<>nil then Fpascaleditor.Free;
   SetLength(vlist,0);
   SetLength(ilist,0);
@@ -1502,15 +1593,21 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doSetV, 'function SetV(varname:string; v: Variant):Boolean;');
   AddMethod(self, @Tf_scriptengine.doOpenDialog, 'function OpenDialog(var fn: string): boolean;');
   AddMethod(self, @Tf_scriptengine.doSaveDialog, 'function SaveDialog(var fn: string): boolean;');
+  AddMethod(self, @Tf_scriptengine.doCalendarDialog, 'function CalendarDialog(var dt: double): boolean;');
   AddMethod(self, @Tf_scriptengine.doARtoStr, 'Function ARtoStr(var ar: Double) : string;');
   AddMethod(self, @Tf_scriptengine.doDEtoStr, 'Function DEtoStr(var de: Double) : string;');
   AddMethod(self, @Tf_scriptengine.doStrtoAR, 'Function StrtoAR(str:string; var ar: Double) : boolean;');
   AddMethod(self, @Tf_scriptengine.doStrtoDE, 'Function StrtoDE(str:string; var de: Double) : boolean;');
+  AddMethod(self, @Tf_scriptengine.doJDtoStr, 'Function JDtoStr(var jd: Double) : string;');
+  AddMethod(self, @Tf_scriptengine.doStrtoJD, 'Function StrtoJD(dt:string; var jdt: Double) : boolean;');
   AddMethod(self, @Tf_scriptengine.doEq2Hz, 'Procedure Eq2Hz(ra,de : double ; var a,h : double);');
   AddMethod(self, @Tf_scriptengine.doHz2Eq, 'Procedure Hz2Eq(a,h : double; var ra,de : double);');
   AddMethod(self, @Tf_scriptengine.doFormatFloat, 'function FormatFloat(Const Format : String; Value : Extended) : String;');
   AddMethod(self, @Tf_scriptengine.doMsgBox,'function MsgBox(const aMsg: string):boolean;');
   AddMethod(self, @Tf_scriptengine.doGetCometList,'function GetCometList(const filter: string; maxnum:integer; list:TstringList):boolean;');
+  AddMethod(self, @Tf_scriptengine.doCometMark,'function CometMark(list:TstringList):boolean;');
+  AddMethod(self, @Tf_scriptengine.doGetAsteroidList,'function GetAsteroidList(const filter: string; maxnum:integer; list:TstringList):boolean;');
+  AddMethod(self, @Tf_scriptengine.doAsteroidMark,'function AsteroidMark(list:TstringList):boolean;');
 end;
 ProcessMenu(FMainmenu.Items);
 end;
@@ -1569,7 +1666,7 @@ procedure Tf_scriptengine.ChartRefreshEvent(origin,str:string);
 begin
 if origin<>'' then ChartName:=origin;
 RefreshText:=str;
-evscr[ord(evChart_refresh)].Execute;
+if FEventReady then evscr[ord(evChart_refresh)].Execute;
 end;
 
 procedure Tf_scriptengine.ObjectSelectionEvent(origin,str,longstr:string);
@@ -1577,14 +1674,15 @@ begin
 if origin<>'' then ChartName:=origin;
 SelectionText:=str;
 DescriptionText:=longstr;
-evscr[ord(evObject_identification)].Execute;
+if FEventReady then
+   evscr[ord(evObject_identification)].Execute;
 end;
 
 procedure Tf_scriptengine.DistanceMeasurementEvent(origin,str:string);
 begin
 if origin<>'' then ChartName:=origin;
 DistanceText:=str;
-evscr[ord(evDistance_measurement)].Execute;
+if FEventReady then evscr[ord(evDistance_measurement)].Execute;
 end;
 
 procedure Tf_scriptengine.TelescopeMoveEvent(origin:string; ra,de: double);
@@ -1592,15 +1690,16 @@ begin
 if origin<>'' then ChartName:=origin;
 TelescopeRA:=ra;
 TelescopeDE:=de;
-evscr[ord(evTelescope_move)].Execute;
+if FEventReady then evscr[ord(evTelescope_move)].Execute;
 end;
 
 procedure Tf_scriptengine.TelescopeConnectEvent(origin:string; connected:boolean);
 begin
 if origin<>'' then ChartName:=origin;
 FTelescopeConnected:=connected;
-if connected then evscr[ord(evTelescope_connect)].Execute
-   else evscr[ord(evTelescope_disconnect)].Execute;
+if FEventReady then
+  if connected then evscr[ord(evTelescope_connect)].Execute
+     else evscr[ord(evTelescope_disconnect)].Execute;
 end;
 
 end.

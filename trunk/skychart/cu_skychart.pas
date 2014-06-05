@@ -118,7 +118,9 @@ Tskychart = class (TComponent)
     function DrawMilkyWay :boolean;
     function DrawPlanet :boolean;
     procedure DrawEarthShadow(AR,DE,SunDist,MoonDist,MoonDistTopo : double);
+    function DrawAsteroidMark :boolean;
     function DrawAsteroid :boolean;
+    function DrawCometMark :boolean;
     function DrawComet :boolean;
     procedure DrawArtSat;
     Function CloseSat : integer;
@@ -180,7 +182,7 @@ begin
   result:=false;
   case simlabel of
   -1000..-1 : result:=((step mod abs(simlabel))=0); // one of ...
-    0 : result:=false;           // none
+    0 : result:=(simnb=1);       // none if more than one point
     1 : result:=(step=0);        // first
     2 : result:=(step=simnb-1);  // last
     3 : result:=true;            // every
@@ -333,6 +335,7 @@ end;
        DrawDSL;
     end;
     DrawOutline;
+    DrawCometMark;
     DrawComet;
   end;
   // then the lines
@@ -351,6 +354,7 @@ end;
   end;
   // the planets
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
+    DrawAsteroidMark;
     DrawAsteroid;
     if cfgsc.SimLine then DrawOrbitPath;
   end;
@@ -1688,7 +1692,6 @@ var rec:GcatRec;
   first:boolean;
   pxradius,ra,de: double;
   xmi,xma,ymi,yma: single;
-  val: integer;
   mwcol: TColor;
 begin
 result:=false;
@@ -1969,6 +1972,44 @@ if not(hidesat xor showhide)and(j=0) then begin
 end;
 end;
 
+function Tskychart.DrawAsteroidMark :boolean;
+var i:integer;
+    ra,de,mag,x1,y1: double;
+    xx,yy,r,lori: single;
+    lalign: TLabelAlign;
+    lid: integer;
+    lopt: boolean;
+    ltxt,lis:string;
+begin
+result:=false;
+if cfgsc.ShowAsteroidValid then begin
+  r:=5;
+  for i:=0 to cfgsc.AsteroidMark.Count-1 do begin
+     if FPlanet.FindAsteroidName( cfgsc.AsteroidMark[i],ra,de,mag,cfgsc,false) then begin
+       precession(jd2000,cfgsc.jdchart,ra,de);
+       if cfgsc.ApparentPos then begin
+          apparent_equatorial(ra,de,cfgsc,true,false);
+       end;
+       projection(ra,de,x1,y1,true,cfgsc);
+       WindowXY(x1,y1,xx,yy,cfgsc);
+       if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
+          Fplot.PlotCircle(xx-r,yy-r,xx+r,yy+r,Fplot.cfgplot.Color[20],false);
+          if (FObjectListLabels.Count=0)and(mag>=(cfgsc.StarMagMax+cfgsc.AstMagDiff-cfgsc.LabelMagDiff[5])) then begin
+           lis:=cfgsc.AsteroidMark[i]+FormatFloat(f6,ra)+FormatFloat(f6,de);
+           lid:=rshash(lis,$7FFFFFFF);
+           ltxt:=cfgsc.AsteroidMark[i];
+           lori:=0;
+           lopt:=true;
+           lalign:=laLeft;
+           SetLabel(lid,xx,yy,round(r),2,5,ltxt,lalign,lori,4,lopt);
+          end;
+          result:=true;
+       end;
+     end;
+  end;
+end;
+end;
+
 function Tskychart.DrawAsteroid :boolean;
 var
   x1,y1,x2,y2,ra,dec,magn,savemagdiff: Double;
@@ -2047,6 +2088,48 @@ if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw asteroids');
 end else begin
   cfgsc.AsteroidNb:=0;
   result:=false;
+end;
+end;
+
+function Tskychart.DrawCometMark :boolean;
+var i:integer;
+    ra,de,mag,x1,y1: double;
+    xx,yy,r,lori: single;
+    lalign: TLabelAlign;
+    lid: integer;
+    lopt: boolean;
+    ltxt,lis:string;
+begin
+result:=false;
+if cfgsc.ShowCometValid then begin
+  r:=5;
+  for i:=0 to cfgsc.CometMark.Count-1 do begin
+     if FPlanet.FindCometName( cfgsc.CometMark[i],ra,de,mag,cfgsc,false) then begin
+       precession(jd2000,cfgsc.jdchart,ra,de);
+       if cfgsc.ApparentPos then begin
+          apparent_equatorial(ra,de,cfgsc,true,false);
+       end;
+       projection(ra,de,x1,y1,true,cfgsc);
+       WindowXY(x1,y1,xx,yy,cfgsc);
+       if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
+          Fplot.PlotCircle(xx-r,yy-r,xx+r,yy+r,Fplot.cfgplot.Color[21],false);
+          x1:=cfgsc.StarMagMax;
+          x1:=cfgsc.ComMagDiff;
+          x1:=cfgsc.LabelMagDiff[5];
+          x1:=(cfgsc.StarMagMax+cfgsc.ComMagDiff-cfgsc.LabelMagDiff[5]);
+          if (FObjectListLabels.Count=0)and(mag>=x1) then begin
+           lis:=cfgsc.CometMark[i]+FormatFloat(f6,ra)+FormatFloat(f6,de);
+           lid:=rshash(lis,$7FFFFFFF);
+           ltxt:=cfgsc.CometMark[i];
+           lori:=0;
+           lopt:=true;
+           lalign:=laLeft;
+           SetLabel(lid,xx,yy,round(r),2,5,ltxt,lalign,lori,4,lopt);
+          end;
+          result:=true;
+       end;
+     end;
+  end;
 end;
 end;
 
