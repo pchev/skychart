@@ -48,6 +48,7 @@ type
 
   Tf_main = class(TForm)
     ContainerPanel: TPanel;
+    ScriptScrollBox: TScrollBox;
     SubAnimation: TMenuItem;
     MenuTimeDec: TMenuItem;
     MenuTimeInc: TMenuItem;
@@ -727,6 +728,8 @@ type
     Function HelpCmd(cname:string):string;
     Function GetSelectedObject:string;
     function ExecuteCmd(cname:string; arg:Tstringlist):string;
+    function CometMark(cname:string; arg:Tstringlist):string;
+    function AsteroidMark(cname:string; arg:Tstringlist):string;
     procedure SendInfo(Sender: TObject; origin,str:string);
     function GenericSearch(cname,Num:string; var ar1,de1: double; idresult:boolean=true):boolean;
     procedure ObsListSearch(obj:string; ra,de:double);
@@ -2086,9 +2089,11 @@ for i:=0 to numscript-1 do begin
   Fscript[i].Align:=alClient;
   Fscript[i].Visible:=false;
   Fscript[i].ExecuteCmd:=ExecuteCmd;
+  Fscript[i].CometMark:=CometMark;
+  Fscript[i].AsteroidMark:=AsteroidMark;
   Fscript[i].onApply:=ApplyScript;
   if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
-  Fscript[i].Parent:=ScriptPanel;
+  Fscript[i].Parent:=ScriptScrollBox;
 end;
 Splitter1.ResizeControl:=ScriptPanel;
 step:='SetLang';
@@ -3214,7 +3219,7 @@ end;
 
 function Tf_main.Find(kind:integer; num:string; def_ra:double=0;def_de:double=0): string;
 var ok: Boolean;
-    ar1,de1 : Double;
+    ar1,de1,mag : Double;
     i, itype : integer;
     chart:TFrame;
     stype: string;
@@ -3245,8 +3250,8 @@ if chart is Tf_chart then with chart as Tf_chart do begin
       3  : begin ok:=catalog.SearchStar(num,ar1,de1) ; itype:=ftStar; stype:='*'; end;
       4  : begin ok:=catalog.SearchVarStar(num,ar1,de1) ; itype:=ftVar; stype:='V*'; end;
       5  : begin ok:=catalog.SearchDblStar(num,ar1,de1) ; itype:=ftDbl; stype:='D*'; end;
-      6  : begin ok:=planet.FindCometName(trim(num),ar1,de1,sc.cfgsc); itype:=ftCom; stype:='Cm'; end;
-      7  : begin ok:=planet.FindAsteroidName(trim(num),ar1,de1,sc.cfgsc); itype:=ftAst; stype:='As'; end;
+      6  : begin ok:=planet.FindCometName(trim(num),ar1,de1,mag,sc.cfgsc,true); itype:=ftCom; stype:='Cm'; end;
+      7  : begin ok:=planet.FindAsteroidName(trim(num),ar1,de1,mag,sc.cfgsc,true); itype:=ftAst; stype:='As'; end;
       8  : begin ok:=planet.FindPlanetName(trim(num),ar1,de1,sc.cfgsc); itype:=ftPla; stype:='P'; end;
       9  : begin ok:=catalog.SearchConstellation(num,ar1,de1); itype:=ftlin; stype:=''; end;
       10 : begin
@@ -7184,6 +7189,7 @@ function Tf_main.GenericSearch(cname,Num:string; var ar1,de1: double; idresult:b
 var ok : Boolean;
     i : integer;
     chart:TFrame;
+    mag: double;
     stype: string;
     itype:integer;
 label findit;
@@ -7239,12 +7245,12 @@ if chart is Tf_chart then with chart as Tf_chart do begin
    end;
    if sc.cfgsc.ShowAsteroid then begin
      stype:='As';  itype:=ftAst;
-     ok:=planet.FindAsteroidName(trim(Num),ar1,de1,sc.cfgsc);
+     ok:=planet.FindAsteroidName(trim(Num),ar1,de1,mag,sc.cfgsc,true);
      if ok then goto findit;
    end;
    if sc.cfgsc.ShowComet then begin
      stype:='Cm'; itype:=ftCom;
-     ok:=planet.FindCometName(trim(Num),ar1,de1,sc.cfgsc);
+     ok:=planet.FindCometName(trim(Num),ar1,de1,mag,sc.cfgsc,true);
      if ok then goto findit;
    end;
 
@@ -9250,6 +9256,33 @@ for i:=0 to numscript-1 do begin
 end;
 end;
 
+function Tf_main.CometMark(cname:string; arg:Tstringlist):string;
+var i,mx: integer;
+begin
+ result:=msgFailed;
+ if MultiFrame1.ActiveObject is Tf_chart then begin
+    Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.CometMark.Clear;
+    mx:=min(arg.Count-1,1000);
+    for i:=0 to mx do
+        Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.CometMark.Add(arg[i]);
+    Tf_chart(MultiFrame1.ActiveObject).Refresh;
+    result:=msgOK;
+ end;
+end;
+
+function Tf_main.AsteroidMark(cname:string; arg:Tstringlist):string;
+var i,mx: integer;
+begin
+ result:=msgFailed;
+ if MultiFrame1.ActiveObject is Tf_chart then begin
+    Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.AsteroidMark.Clear;
+    mx:=min(arg.Count-1,1000);
+    for i:=0 to mx do
+        Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.AsteroidMark.Add(arg[i]);
+    Tf_chart(MultiFrame1.ActiveObject).Refresh;
+    result:=msgOK;
+ end;
+end;
 
 ///////////////////////////////////////////////////////////////////////////////////
 

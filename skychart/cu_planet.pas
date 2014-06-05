@@ -102,13 +102,13 @@ type
      Function NewAstDay(newjd,limitmag:double; cfgsc: Tconf_skychart):boolean;
      Procedure NewAstDayCallback(Sender:TObject; Row:TResultRow);
      function  FindAsteroid(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string; trunc:boolean=true):boolean;
-     function  FindAsteroidName(astname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
+     function  FindAsteroidName(astname: String; var ra,de,mag:double; cfgsc: Tconf_skychart; upddb:boolean):boolean;
      function PrepareAsteroid(jd1,jd2,step:double; msg:Tstrings):boolean;
      Procedure PrepareAsteroidCallback(Sender:TObject; Row:TResultRow);
      Function NewComDay(newjd,limitmag:double; cfgsc: Tconf_skychart):boolean;
      Procedure NewComDayCallback(Sender:TObject; Row:TResultRow);
      function FindComet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string; trunc:boolean=true):boolean;
-     function FindCometName(comname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
+     function FindCometName(comname: String; var ra,de,mag:double; cfgsc: Tconf_skychart; upddb:boolean):boolean;
      procedure PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ; var i: integer; cfgsc: Tconf_skychart);
      procedure PlanetAltitude(pla: integer; jd0,hh:double; cfgsc: Tconf_skychart; var har,sina: double);
      procedure Twilight(jd0,obslat,obslon: double; out astrom,nautm,civm,cive,naute,astroe: double);
@@ -2179,8 +2179,8 @@ finally
 end;
 end;
 
-function TPlanet.FindAsteroidName(astname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
-var dist,r,elong,phase,magn,rad,ded : double;
+function TPlanet.FindAsteroidName(astname: String; var ra,de,mag:double; cfgsc: Tconf_skychart; upddb:boolean):boolean;
+var dist,r,elong,phase,rad,ded : double;
   epoch,h,g,ma,ap,an,ic,ec,sa,eq,xc,yc,zc : double;
   qry,id,ref,nam,elem_id :string;
   ira,idec,imag: integer;
@@ -2194,29 +2194,31 @@ id:=db1.QueryOne(qry);
 if id='' then exit;
 if cdb.GetAstElemEpoch(id,cfgsc.CurJDTT,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
-   Asteroid(cfgsc.CurJDTT,true,ra,de,dist,r,elong,phase,magn,xc,yc,zc);
+   Asteroid(cfgsc.CurJDTT,true,ra,de,dist,r,elong,phase,mag,xc,yc,zc);
    if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,ra,de,ra,de,r,cfgsc);
-   rad:=ra;
-   ded:=de;
-   precession(jd2000,cfgsc.jdchart,rad,ded);
-   ira:=round(rad*1000);
-   idec:=round(ded*1000);
-   imag:=round(magn*10);
-   qry:='INSERT INTO '+cfgsc.ast_daypos+' (id,epoch,ra,de,mag) VALUES ('
-        +'"'+id+'"'
-        +',"'+formatfloat(f1,epoch)+'"'
-        +',"'+inttostr(ira)+'"'
-        +',"'+inttostr(idec)+'"'
-        +',"'+inttostr(imag)+'")';
-   db1.Query(qry);
-   db1.flush('tables');
+   if upddb then begin
+       rad:=ra;
+       ded:=de;
+       precession(jd2000,cfgsc.jdchart,rad,ded);
+       ira:=round(rad*1000);
+       idec:=round(ded*1000);
+       imag:=round(mag*10);
+       qry:='INSERT INTO '+cfgsc.ast_daypos+' (id,epoch,ra,de,mag) VALUES ('
+            +'"'+id+'"'
+            +',"'+formatfloat(f1,epoch)+'"'
+            +',"'+inttostr(ira)+'"'
+            +',"'+inttostr(idec)+'"'
+            +',"'+inttostr(imag)+'")';
+       db1.Query(qry);
+       db1.flush('tables');
+   end;
    result:=true;
 end
  else result:=false;
 end;
 
-function TPlanet.FindCometName(comname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
-var dist,r,elong,phase,magn,rad,ded : double;
+function TPlanet.FindCometName(comname: String; var ra,de,mag:double; cfgsc: Tconf_skychart; upddb:boolean):boolean;
+var dist,r,elong,phase,rad,ded : double;
   epoch,h,g,ap,an,ic,ec,eq,tp,q,diam,lc,car,cde,rc,xc,yc,zc : double;
   qry,id,nam,elem_id :string;
   ira,idec,imag: integer;
@@ -2230,22 +2232,25 @@ id:=db1.QueryOne(qry);
 if id='' then exit;
 if cdb.GetComElemEpoch(id,cfgsc.CurJDTT,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) then begin
    InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
-   Comet(cfgsc.CurJDTT,true,ra,de,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
+   Comet(cfgsc.CurJDTT,true,ra,de,dist,r,elong,phase,mag,diam,lc,car,cde,rc,xc,yc,zc);
    if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,ra,de,ra,de,r,cfgsc);
-   rad:=ra;
-   ded:=de;
-   precession(jd2000,cfgsc.jdchart,rad,ded);
-   ira:=round(rad*1000);
-   idec:=round(ded*1000);
-   imag:=round(magn*10);
-   qry:='INSERT INTO '+cfgsc.com_daypos+' (id,epoch,ra,de,mag) VALUES ('
-        +'"'+id+'"'
-        +',"'+formatfloat(f1,epoch)+'"'
-        +',"'+inttostr(ira)+'"'
-        +',"'+inttostr(idec)+'"'
-        +',"'+inttostr(imag)+'")';
-   db1.Query(qry);
-   db1.flush('tables');
+   if upddb then begin
+       rad:=ra;
+       ded:=de;
+       precession(jd2000,cfgsc.jdchart,rad,ded);
+       ira:=round(rad*1000);
+       idec:=round(ded*1000);
+       imag:=round(mag*10);
+       qry:='INSERT INTO '+cfgsc.com_daypos+' (id,epoch,ra,de,mag) VALUES ('
+            +'"'+id+'"'
+            +',"'+formatfloat(f1,epoch)+'"'
+            +',"'+inttostr(ira)+'"'
+            +',"'+inttostr(idec)+'"'
+            +',"'+inttostr(imag)+'")';
+       db1.Query(qry);
+       qry:=db1.ErrorMessage;
+       db1.flush('tables');
+   end;
    result:=true;
 end
  else result:=false;
