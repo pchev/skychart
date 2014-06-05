@@ -1155,6 +1155,7 @@ for i:=0 to MultiFrame1.ChildCount-1 do
        RefreshTimer.Enabled:=false;
        RefreshTimer.Enabled:=true;
     end;
+if ScriptPanel.Visible then Fscript[ActiveScript].ActivateEvent;
 if VerboseMsg then
  WriteTrace('Exit Tf_main.InitTimerTimer');
 end;
@@ -4238,14 +4239,14 @@ end;
 end;
 
 Procedure Tf_main.SetTitleMessage(txt:string;sender:TObject);
+var i: integer;
 begin
 // set the message that appear in the title bar
 if MultiFrame1.ActiveObject=sender then begin
   if cfgm.ShowTitlePos then caption:=basecaption+' - '+MultiFrame1.ActiveChild.Caption+blank+blank+txt
      else caption:=basecaption+' - '+MultiFrame1.ActiveChild.Caption;
-  if ScriptPanel.Visible and (ActiveScript>=0) then begin
-     Fscript[ActiveScript].ChartRefreshEvent(MultiFrame1.ActiveChild.Caption,txt);
-  end;
+  for i:=0 to numscript-1 do
+    Fscript[i].ChartRefreshEvent(MultiFrame1.ActiveChild.Caption,txt);
 end;
 end;
 
@@ -7593,6 +7594,7 @@ end;
 
 procedure Tf_main.SendInfo(Sender: TObject; origin,str:string);
 var i : integer;
+    lstr: string;
 begin
 if (origin='') and (str='') then exit;
 for i:=1 to Maxwindow do begin
@@ -7603,9 +7605,11 @@ for i:=1 to Maxwindow do begin
     and(not TCPDaemon.TCPThrd[i].terminated)
     then TCPDaemon.TCPThrd[i].SendData('>'+tab+origin+' :'+tab+str);
 end;
-if ScriptPanel.Visible and (ActiveScript>=0) then begin
-    if copy(str,1,i)=rsFrom then Fscript[ActiveScript].DistanceMeasurementEvent(origin,str)
-      else Fscript[ActiveScript].ObjectSelectionEvent(origin,str,striphtml(Tf_chart(MultiFrame1.ActiveObject).formatdesc));
+if copy(str,1,i)=rsFrom then
+   for i:=0 to numscript-1 do Fscript[i].DistanceMeasurementEvent(origin,str)
+else begin
+   lstr:=striphtml(Tf_chart(MultiFrame1.ActiveObject).formatdesc);
+   for i:=0 to numscript-1 do Fscript[i].ObjectSelectionEvent(origin,str,lstr);
 end;
 end;
 
@@ -8340,12 +8344,13 @@ end;
 
 
 procedure Tf_main.MultiFrame1ActiveChildChange(Sender: TObject);
+var i: integer;
 begin
 if MultiFrame1.ActiveObject<>nil then begin
    if cfgm.ShowTitlePos then caption:=basecaption+' - '+MultiFrame1.ActiveChild.Caption+blank+blank+Tf_chart(MultiFrame1.ActiveObject).sc.GetChartPos
       else caption:=basecaption+' - '+MultiFrame1.ActiveChild.Caption;
    Tf_chart(MultiFrame1.ActiveObject).ChartActivate;
-   if Fscript[ActiveScript].visible then Fscript[ActiveScript].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
+   for i:=0 to numscript-1 do Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
 end
 else
    caption:=basecaption;
@@ -9233,19 +9238,18 @@ begin
 end;
 
 procedure Tf_main.TelescopeMove(origin: string; ra,de: double);
+var i: integer;
 begin
- if ScriptPanel.Visible and (ActiveScript>=0) then begin
-    Fscript[ActiveScript].TelescopeMoveEvent(origin,ra,de);
- end;
+for i:=0 to numscript-1 do
+    Fscript[i].TelescopeMoveEvent(origin,ra,de);
 end;
 
 procedure Tf_main.TelescopeChange(origin: string; tc:boolean);
 var i: integer;
 begin
 FTelescopeConnected:=tc;
-for i:=0 to numscript-1 do begin
+for i:=0 to numscript-1 do
   Fscript[i].TelescopeConnectEvent(origin,FTelescopeConnected);
-end;
 end;
 
 procedure Tf_main.TimeUChange(Sender: TObject);

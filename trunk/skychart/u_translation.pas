@@ -1531,6 +1531,9 @@ resourcestring
   rsList = 'List';
   rsComboBox = 'Combo box';
   rsActivateTheT = 'Activate the timer event when hidden';
+  rsActivation = 'Activation';
+  rsTelescopeCon = 'Telescope connected';
+  rsTelescopeDis = 'Telescope disconnected';
 
 implementation
 
