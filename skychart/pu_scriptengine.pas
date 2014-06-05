@@ -19,7 +19,7 @@ uses  u_translation, u_constant, u_projection, u_help, u_util, ActnList, pu_pasc
 
 type
 
-  Teventlist=(evInitialisation,evTimer,evTelescope_move,evChart_refresh,evObject_identification,evDistance_measurement,evTelescope_connect,evTelescope_disconnect);
+  Teventlist=(evInitialisation,evActivation,evTimer,evTelescope_move,evChart_refresh,evObject_identification,evDistance_measurement,evTelescope_connect,evTelescope_disconnect);
 
   { Tf_scriptengine }
 
@@ -158,6 +158,9 @@ type
     dlist: array of Double;
     slist: array of String;
     FTimerReady,FEventReady: boolean;
+    function doOpenFile(fn:string):boolean;
+    function doRun(cmdline:string):boolean;
+    function doRunOutput(cmdline:string; var output:TStringlist):boolean;
     function doExecuteCmd(cname:string; arg:Tstringlist):string;
     function doGetS(varname:string; var str: string):Boolean;
     function doSetS(varname:string; str: string):Boolean;
@@ -209,6 +212,7 @@ type
     procedure DistanceMeasurementEvent(origin,str:string);
     procedure TelescopeMoveEvent(origin:string; ra,de: double);
     procedure TelescopeConnectEvent(origin:string; connected:boolean);
+    procedure ActivateEvent;
     property TimerReady: boolean read FTimerReady;
     property EventReady: boolean read FEventReady write FEventReady;
     property ConfigToolbar1: TStringList read FConfigToolbar1 write FConfigToolbar1;
@@ -257,11 +261,14 @@ begin
   Label4.Caption:=rsHeight;
   Label5.Caption:=rsHeight;
   EventComboBox.Items[0]:=rsInitalisatio;
-  EventComboBox.Items[1]:=rsTimer;
-  EventComboBox.Items[2]:=rsTelescopeMov;
-  EventComboBox.Items[3]:=rsChartRefresh;
-  EventComboBox.Items[4]:=rsObjectIdenti;
-  EventComboBox.Items[5]:=rsDistanceMeas;
+  EventComboBox.Items[1]:=rsActivation;
+  EventComboBox.Items[2]:=rsTimer;
+  EventComboBox.Items[3]:=rsTelescopeMov;
+  EventComboBox.Items[4]:=rsChartRefresh;
+  EventComboBox.Items[5]:=rsObjectIdenti;
+  EventComboBox.Items[6]:=rsDistanceMeas;
+  EventComboBox.Items[7]:=rsTelescopeCon;
+  EventComboBox.Items[8]:=rsTelescopeDis;
   CheckBoxHidenTimer.Caption:=rsActivateTheT;
   if Fpascaleditor<>nil then Fpascaleditor.SetLang;
   SetHelp(self,hlpScriptEditor);
@@ -326,6 +333,26 @@ var str: string;
 begin
   if assigned(FAsteroidMark) then str:=FAsteroidMark('',list);
   result:=(pos(msgOK,str)>0);
+end;
+
+function Tf_scriptengine.doOpenFile(fn:string):boolean;
+var i: integer;
+begin
+  i:=ExecuteFile(fn);
+  result:=(i=0);
+end;
+
+function Tf_scriptengine.doRun(cmdline:string):boolean;
+begin
+  ExecNoWait(cmdline,'',true);
+  result:=true;
+end;
+
+function Tf_scriptengine.doRunOutput(cmdline:string; var output:TStringlist):boolean;
+var i: integer;
+begin
+  i:=ExecProcess(cmdline,output,false);
+  result:=(i=0);
 end;
 
 function Tf_scriptengine.doGetS(varname:string; var str: string):Boolean;
@@ -1015,6 +1042,7 @@ ReorderGroup;
 CompileScripts;
 evscr[ord(evInitialisation)].Execute;
 FEventReady:=true;
+evscr[ord(evActivation)].Execute;
 TelescopeConnectEvent(ChartName,FTelescopeConnected);
 if Assigned(FonApply) then FonApply(self);
 end;
@@ -1086,7 +1114,7 @@ end else if RadioButtonEvent.Checked then begin
     end;
     if ok then begin
       num:=IntToStr(EventComboBox.ItemIndex);
-      if EventComboBox.ItemIndex=1 then txt:=IntToStr(StrToIntDef(TimerIntervalEdit.Text,60))
+      if EventComboBox.ItemIndex=ord(evTimer) then txt:=IntToStr(StrToIntDef(TimerIntervalEdit.Text,60))
          else txt:='';
       TreeView1.Items.AddChild(TreeView1.Selected,'Event_'+num+';'+num+';'+EventComboBox.Text+';'+txt);
     end;
@@ -1113,7 +1141,7 @@ if (TreeView1.Selected<>nil) then begin
   end else if RadioButtonSpacer.Checked then begin
      //
   end else if RadioButtonEvent.Checked then begin
-    if EventComboBox.ItemIndex=1 then txt:=IntToStr(StrToIntDef(TimerIntervalEdit.Text,60))
+    if EventComboBox.ItemIndex=ord(evTimer) then txt:=IntToStr(StrToIntDef(TimerIntervalEdit.Text,60))
        else txt:='';
     TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+IntToStr(EventComboBox.ItemIndex)+';'+EventComboBox.Text+';'+txt;
   end;
@@ -1123,7 +1151,7 @@ end;
 procedure Tf_scriptengine.EventComboBoxChange(Sender: TObject);
 begin
   ButtonUpdate.Visible:=false;
-  TimerIntervalEdit.Visible:=(EventComboBox.ItemIndex=1);
+  TimerIntervalEdit.Visible:=(EventComboBox.ItemIndex=ord(evTimer));
 end;
 
 procedure Tf_scriptengine.GroupCaptionEditChange(Sender: TObject);
@@ -1160,7 +1188,7 @@ procedure Tf_scriptengine.RadioButtonClick(Sender: TObject);
 begin
   ButtonUpdate.Tag:=0;
   ButtonUpdate.Visible:=false;
-  TimerIntervalEdit.Visible:=(EventComboBox.ItemIndex=1);
+  TimerIntervalEdit.Visible:=(EventComboBox.ItemIndex=ord(evTimer));
 end;
 
 procedure Tf_scriptengine.ButtonCaptionEditChange(Sender: TObject);
@@ -1220,8 +1248,8 @@ if node<>nil then begin
     ButtonEditScript.Visible:=true;
     RadioButtonEvent.Checked:=true;
     EventComboBox.ItemIndex:=StrToIntDef(words(node.Text,'',2,1,';'),0);
-    TimerIntervalEdit.Visible:=(EventComboBox.ItemIndex=1);
-    if (EventComboBox.ItemIndex=1) then TimerIntervalEdit.Text:=words(node.Text,'',4,1,';');
+    TimerIntervalEdit.Visible:=(EventComboBox.ItemIndex=ord(evTimer));
+    if (EventComboBox.ItemIndex=ord(evTimer)) then TimerIntervalEdit.Text:=words(node.Text,'',4,1,';');
     ButtonUpdate.Visible:=false;
     ButtonUpdate.Tag:=4;
   end;
@@ -1507,7 +1535,7 @@ begin
   end;
   opdialog:=TOpenDialog.Create(self);
   svdialog:=TSaveDialog.Create(self);
-  cadialog:=TJDCalendarDialog.Create(self);
+  cadialog:=TJDCalendarDialog.Create(nil);
   SetLang;
 end;
 
@@ -1608,6 +1636,9 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doCometMark,'function CometMark(list:TstringList):boolean;');
   AddMethod(self, @Tf_scriptengine.doGetAsteroidList,'function GetAsteroidList(const filter: string; maxnum:integer; list:TstringList):boolean;');
   AddMethod(self, @Tf_scriptengine.doAsteroidMark,'function AsteroidMark(list:TstringList):boolean;');
+  AddMethod(self, @Tf_scriptengine.doOpenFile,'function OpenFile(fn:string):boolean;');
+  AddMethod(self, @Tf_scriptengine.doRun,'function Run(cmdline:string):boolean;');
+  AddMethod(self, @Tf_scriptengine.doRunOutput,'function RunOutput(cmdline:string; var output:TStringlist):boolean;');
 end;
 ProcessMenu(FMainmenu.Items);
 end;
@@ -1697,9 +1728,15 @@ procedure Tf_scriptengine.TelescopeConnectEvent(origin:string; connected:boolean
 begin
 if origin<>'' then ChartName:=origin;
 FTelescopeConnected:=connected;
-if FEventReady then
+if FEventReady then begin
   if connected then evscr[ord(evTelescope_connect)].Execute
      else evscr[ord(evTelescope_disconnect)].Execute;
+end;
+end;
+
+procedure Tf_scriptengine.ActivateEvent;
+begin
+if FEventReady then evscr[ord(evActivation)].Execute;
 end;
 
 end.

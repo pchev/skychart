@@ -1,5 +1,5 @@
 object f_scriptengine: Tf_scriptengine
-  Left = 376
+  Left = 390
   Height = 494
   Top = 124
   Width = 750
@@ -208,12 +208,14 @@ object f_scriptengine: Tf_scriptengine
     end
     object EventComboBox: TComboBox
       Left = 134
-      Height = 27
+      Height = 23
       Top = 216
       Width = 180
       ItemHeight = 0
+      ItemIndex = 0
       Items.Strings = (
         'Initialisation'
+        'Activation'
         'Timer'
         'Telescope move'
         'Chart refresh'
@@ -225,6 +227,7 @@ object f_scriptengine: Tf_scriptengine
       OnChange = EventComboBoxChange
       Style = csDropDownList
       TabOrder = 10
+      Text = 'Initialisation'
     end
     object TimerIntervalEdit: TEdit
       Left = 318

@@ -77,6 +77,7 @@ type
     procedure DistanceMeasurementEvent(origin,str:string);
     procedure TelescopeMoveEvent(origin:string; ra,de: double);
     procedure TelescopeConnectEvent(origin:string; connected: boolean);
+    procedure ActivateEvent;
     property ImageNormal: TImageList read FImageNormal  write FImageNormal ;
     property ContainerPanel: TPanel read FContainerPanel  write FContainerPanel ;
     property ToolButtonMouseUp: TMouseEvent read FToolButtonMouseUp  write FToolButtonMouseUp ;
@@ -165,6 +166,7 @@ begin
            fscriptengine.EventReady:=true;
            fscriptengine.StartTimer;
            fscriptengine.TelescopeConnectEvent('',FTelescopeConnected);
+           fscriptengine.ActivateEvent;
         end;
      end else
         if fscriptengine<>nil then begin
@@ -330,6 +332,11 @@ procedure Tf_script.TelescopeConnectEvent(origin:string; connected: boolean);
 begin
   FTelescopeConnected:=connected;
   if visible and (fscriptengine<>nil) then fscriptengine.TelescopeConnectEvent(origin,connected);
+end;
+
+procedure Tf_script.ActivateEvent;
+begin
+  if fscriptengine<>nil then fscriptengine.ActivateEvent;
 end;
 
 function  Tf_script.GetHidenTimer: Boolean;
