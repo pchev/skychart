@@ -3768,6 +3768,7 @@ var i,n0,n1: integer;
     ax0r,ax1r: array of double;
     srate: TStringList;
 begin
+result:=msgFailed;
 if Connect1.checked then begin
   if sc.cfgsc.ASCOMTelescope then begin
     n0:=0;
@@ -3785,6 +3786,17 @@ if Connect1.checked then begin
     n0:=0;
     srate:=TStringList.Create;
     Fpop_indi.GetScopeRates(n0,srate);
+    if n0>0 then begin
+      result:=msgOK+tab+inttostr(n0)+tab;
+      result:=result+'0'+tab;
+      for i:=0 to n0-1 do result:=result+srate[i]+tab;
+    end
+      else result:=msgFailed;
+  end;
+  if sc.cfgsc.LX200Telescope then begin
+    n0:=0;
+    srate:=TStringList.Create;
+    Fpop_lx200.GetScopeRates(n0,srate);
     if n0>0 then begin
       result:=msgOK+tab+inttostr(n0)+tab;
       result:=result+'0'+tab;
@@ -3813,6 +3825,12 @@ if Connect1.checked then begin
     val(axis,ax,n);
     if n<>0 then exit;
     Fpop_indi.ScopeMoveAxis(ax,rate);
+    result:=msgOK;
+  end;
+  if sc.cfgsc.LX200Telescope then begin
+    val(axis,ax,n);
+    if n<>0 then exit;
+    Fpop_lx200.ScopeMoveAxis(ax,rate);
     result:=msgOK;
   end;
 end;

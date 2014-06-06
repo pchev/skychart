@@ -324,6 +324,8 @@ type
     Procedure ScopeClose;
     Procedure ScopeGetEqSys(var EqSys : double);
     Procedure ScopeReadConfig(ConfigPath : shortstring);
+    procedure GetScopeRates(var nrates:integer;var srate: TStringList);
+    procedure ScopeMoveAxis(axis:Integer; rate: string);
   end;
 
 implementation
@@ -584,6 +586,46 @@ end;
 Procedure Tpop_lx200.ScopeAbortSlew;
 begin
 LX200_StopMove;
+end;
+
+procedure Tpop_lx200.GetScopeRates(var nrates:integer;var srate: TStringList);
+begin
+srate.clear;
+srate.Assign(RadioGroup1.Items);
+nrates:=srate.count;
+end;
+
+procedure Tpop_lx200.ScopeMoveAxis(axis:Integer; rate: string);
+var dir1,dir2: string;
+    i,n: integer;
+    positive: boolean;
+begin
+positive:=(copy(rate,1,1)<>'-');
+if not positive then delete(rate,1,1);
+for i:=0 to RadioGroup1.Items.Count-1 do begin
+   if RadioGroup1.Items[i]=rate then begin
+     RadioGroup1.ItemIndex:=i;
+     LX200_SetSpeed(i);
+   end;
+end;
+case axis of
+  0: begin  //  alpha
+       if positive then begin
+          LX200_Move(east);
+       end else begin
+          LX200_Move(west);
+       end;
+     end;
+  1: begin  // delta
+       if positive then begin
+          LX200_Move(north);
+       end else begin
+          LX200_Move(south);
+       end;
+     end;
+end;
+
+
 end;
 
 {-------------------------------------------------------------------------------
