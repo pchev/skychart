@@ -3766,21 +3766,33 @@ end;
 function Tf_chart.cmd_GetScopeRates: string;
 var i,n0,n1: integer;
     ax0r,ax1r: array of double;
+    srate: TStringList;
 begin
-n0:=0;
-n1:=0;
 if Connect1.checked then begin
   if sc.cfgsc.ASCOMTelescope then begin
+    n0:=0;
+    n1:=0;
     Fpop_scope.GetScopeRates(n0,n1,@ax0r,@ax1r);
+    if n0>0 then begin
+      result:=msgOK+tab+inttostr(n0)+tab;
+      result:=result+inttostr(n1)+tab;
+      for i:=0 to n0-1 do result:=result+formatfloat(f4,ax0r[i])+tab;
+      for i:=0 to n1-1 do result:=result+formatfloat(f4,ax1r[i])+tab;
+    end
+      else result:=msgFailed;
+  end;
+  if sc.cfgsc.INDITelescope then begin
+    n0:=0;
+    srate:=TStringList.Create;
+    Fpop_indi.GetScopeRates(n0,srate);
+    if n0>0 then begin
+      result:=msgOK+tab+inttostr(n0)+tab;
+      result:=result+'0'+tab;
+      for i:=0 to n0-1 do result:=result+srate[i]+tab;
+    end
+      else result:=msgFailed;
   end;
 end;
-if n0>0 then begin
-  result:=msgOK+tab+inttostr(n0)+tab;
-  result:=result+inttostr(n1)+tab;
-  for i:=0 to n0-1 do result:=result+formatfloat(f4,ax0r[i])+tab;
-  for i:=0 to n1-1 do result:=result+formatfloat(f4,ax1r[i])+tab;
-end
-  else result:=msgFailed;
 end;
 
 function Tf_chart.cmd_ScopeMoveAxis(axis,rate: string):string;
@@ -3795,6 +3807,12 @@ if Connect1.checked then begin
     val(rate,rt,n);
     if n<>0 then exit;
     Fpop_scope.ScopeMoveAxis(ax,rt);
+    result:=msgOK;
+  end;
+  if sc.cfgsc.IndiTelescope then begin
+    val(axis,ax,n);
+    if n<>0 then exit;
+    Fpop_indi.ScopeMoveAxis(ax,rate);
     result:=msgOK;
   end;
 end;
