@@ -40,6 +40,8 @@ type
     Label6: TLabel;
     ListHeightEdit: TEdit;
     CheckListHeightEdit: TEdit;
+    Panel3: TPanel;
+    PanelLeft: TPanel;
     PSCustomPlugin1: TPSCustomPlugin;
     PSDllPlugin1: TPSDllPlugin;
     RadioButtonList: TRadioButton;
@@ -48,6 +50,7 @@ type
     ScriptTitle: TEdit;
     Panel2: TPanel;
     EventTimer: TTimer;
+    Splitter1: TSplitter;
     TimerIntervalEdit: TEdit;
     EventComboBox: TComboBox;
     CompileMemo: TMemo;
