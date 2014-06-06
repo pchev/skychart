@@ -181,7 +181,8 @@ type
     Function doStrtoDE(str:string; var de: Double) : boolean;
     Procedure doEq2Hz(ra,de : double ; var a,h : double);
     Procedure doHz2Eq(a,h : double; var ra,de : double);
-    function doFormatFloat(Const Format : String; Value : Extended) : String;
+    function doFormatFloat(Const Format : String; var Value : double) : String;
+    function doIsNumber(str: String): boolean;
     function doMsgBox(const aMsg: string):boolean;
     function doGetCometList(const filter: string; maxnum:integer; list:TstringList):boolean;
     function doCometMark(list:TstringList):boolean;
@@ -291,9 +292,14 @@ begin
   if assigned(FActiveChart) then FActiveChart.cmdHz2Eq(a,h,ra,de);
 end;
 
-function Tf_scriptengine.doFormatFloat(Const Format : String; Value : Extended) : String;
+function Tf_scriptengine.doFormatFloat(Const Format : String; var Value : double) : String;
 begin
   result:=FormatFloat(format, Value);
+end;
+
+function Tf_scriptengine.doIsNumber(str: String): boolean;
+begin
+  result:=IsNumber(str);
 end;
 
 function Tf_scriptengine.doMsgBox(const aMsg: string):boolean;
@@ -1630,7 +1636,8 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doStrtoJD, 'Function StrtoJD(dt:string; var jdt: Double) : boolean;');
   AddMethod(self, @Tf_scriptengine.doEq2Hz, 'Procedure Eq2Hz(ra,de : double ; var a,h : double);');
   AddMethod(self, @Tf_scriptengine.doHz2Eq, 'Procedure Hz2Eq(a,h : double; var ra,de : double);');
-  AddMethod(self, @Tf_scriptengine.doFormatFloat, 'function FormatFloat(Const Format : String; Value : Extended) : String;');
+  AddMethod(self, @Tf_scriptengine.doFormatFloat, 'function FormatFloat(Const Format : String; var Value : double) : String;');
+  AddMethod(self, @Tf_scriptengine.doIsNumber, 'function IsNumber(str: String): boolean;');
   AddMethod(self, @Tf_scriptengine.doMsgBox,'function MsgBox(const aMsg: string):boolean;');
   AddMethod(self, @Tf_scriptengine.doGetCometList,'function GetCometList(const filter: string; maxnum:integer; list:TstringList):boolean;');
   AddMethod(self, @Tf_scriptengine.doCometMark,'function CometMark(list:TstringList):boolean;');

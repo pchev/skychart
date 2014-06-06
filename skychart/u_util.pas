@@ -446,7 +446,7 @@ while pos(sep,buf)<>0 do begin
   end;
  end;
 end;
-arg.add(buf);
+if buf>'' then arg.add(buf);
 end;
 
 // same as SplitArg but keep empty strings

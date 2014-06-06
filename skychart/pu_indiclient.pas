@@ -99,6 +99,8 @@ type
     Function  ScopeConnected : boolean ;
     Procedure ScopeClose;
     Procedure ScopeReadConfig(ConfigPath : shortstring);
+    procedure GetScopeRates(var nrates:integer;var srate: TStringList);
+    procedure ScopeMoveAxis(axis:Integer; rate: string);
   end;
 
 implementation
@@ -170,7 +172,7 @@ procedure Tpop_indi.TelescopeStatusChange(Sender : Tobject; source: TIndiSource;
 var ok: boolean;
 begin
   if source=Telescope then begin
-     ok:=(status=cu_indiprotocol.Ok)or(status=cu_indiprotocol.Busy);
+     ok:=(indi1.PropertiesReady)and((status=cu_indiprotocol.Ok)or(status=cu_indiprotocol.Busy));
      if ok then begin
         if ok<>connected then TelescopeGetMessage(Sender,'Connected');
         connected:=true;
@@ -282,6 +284,45 @@ end;
 Procedure Tpop_indi.ScopeAbortSlew;
 begin
 indi1.AbortSlew;
+end;
+
+procedure Tpop_indi.GetScopeRates(var nrates:integer;var srate: TStringList);
+begin
+  indi1.GetSlewRate(srate);
+  if srate.Count=0 then srate.Add('N/A');
+  nrates:=srate.count;
+end;
+
+procedure Tpop_indi.ScopeMoveAxis(axis:Integer; rate: string);
+var dir1,dir2: string;
+    positive: boolean;
+begin
+positive:=(copy(rate,1,1)<>'-');
+if not positive then delete(rate,1,1);
+case axis of
+  0: begin  //  alpha
+       if positive then begin
+          dir1:='Off';
+          dir2:='On';
+       end else begin
+          dir1:='On';
+          dir2:='Off';
+       end;
+       if pos('N/A',rate)=0 then indi1.SetSlewRate(rate);
+       indi1.MotionWE(dir1,dir2);
+     end;
+  1: begin  // delta
+       if positive then begin
+          dir1:='On';
+          dir2:='Off';
+       end else begin
+          dir1:='Off';
+          dir2:='On';
+       end;
+       if pos('N/A',rate)=0 then indi1.SetSlewRate(rate);
+       indi1.MotionNS(dir1,dir2);
+     end;
+end;
 end;
 
 {-------------------------------------------------------------------------------

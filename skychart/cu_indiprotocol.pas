@@ -64,7 +64,8 @@ type
     Fserverstatus,Ftelescopestatus,Fcoordstatus: TIndiStatus;
     FTag,FCurrentTag,FDevice,FCurrentDevice,FName,FPerm,FCurrentName,FMessage,FDevicePort,FRa,FDec,FCOORD_REQUEST: string;
     FWantDevice,FWantDevicePort,FWantRA,FWantDec: string;
-    FAutoconnect,FAutoStart,Ftrace,FServerStartedByMe,EOD,Fexiting,FDeviceFound,FCanSlew,FCanSync :boolean;
+    FAutoconnect,FAutoStart,Ftrace,FServerStartedByMe,EOD,Fexiting,FDeviceFound,FCanSlew,FCanSync,FPropertiesReady :boolean;
+    FRateList: TstringList;
     XmlScanner: TEasyXmlScanner;
     procedure DisplayMessagesyn;
     procedure ProcessDataSyn;
@@ -93,6 +94,11 @@ type
     procedure Sync;
     procedure Slew;
     procedure AbortSlew;
+    procedure GetSlewRate(var ratelist:Tstringlist);
+    procedure SetSlewRate(rate:string);
+    procedure MotionRate(rate:string);
+    procedure MotionNS(MN,MS:string);
+    procedure MotionWE(MW,ME:string);
     property Terminated;
     property TargetHost : string read FTargetHost write FTargetHost;
     property TargetPort : string read FTargetPort write FTargetPort;
@@ -103,6 +109,7 @@ type
     property Device : string read FWantDevice write FWantDevice;
     property AutoStart : boolean read FAutoStart write FAutoStart;
     property Autoconnect : boolean read FAutoconnect write FAutoconnect;
+    property PropertiesReady: boolean read FPropertiesReady;
     property CanSync : boolean read FCanSync write FCanSync;
     property CanSlew : boolean read FCanSlew write FCanSlew;
     property ServerStatus: TIndiStatus read FServerstatus;
@@ -168,6 +175,7 @@ end;
 
 Constructor TIndiClient.Create ;
 begin
+FPropertiesReady:=false;
 Fexiting:=false;
 freeonterminate:=true;
 Ftrace:=false;  // for debuging only
@@ -177,6 +185,7 @@ FDeviceFound:=false;
 Ftelescopestatus:=Idle;
 FCOORD_REQUEST:='_REQUEST';
 EOD:=true;
+FRateList:=TstringList.Create;
 // start suspended to let time to the main thread to set the parameters
 inherited create(true);
 end;
@@ -277,6 +286,7 @@ terminate;
 tcpclient.Disconnect;
 tcpclient.Free;
 XmlScanner.Free;
+FRateList.Free;
 writetrace('Indi client stoped');
 end;
 except
@@ -342,6 +352,7 @@ try
 XmlScanner.LoadFromBuffer(pchar(FRecvData));
 XmlScanner.Execute;
 if assigned(onReceiveData) then onReceiveData(self,FRecvData);
+FPropertiesReady:=true;
 except
 end;
 end;
@@ -390,6 +401,7 @@ if (status<>'')and(FCurrentname='EQUATORIAL_EOD_COORD')and(pos('w',FPerm)>0) the
 if (status<>'')and(FCurrentname='EQUATORIAL_EOD_COORD_REQUEST')and(pos('w',FPerm)>0) then begin FCOORD_REQUEST:='_REQUEST'; EOD:=true; setstatus(coord,stat);end;
 if (status<>'')and(FCurrentname='EQUATORIAL_COORD')and(pos('w',FPerm)>0) then begin FCOORD_REQUEST:=''; EOD:=false; setstatus(coord,stat);end;
 if (status<>'')and(FCurrentname='EQUATORIAL_COORD_REQUEST')and(pos('w',FPerm)>0) then begin FCOORD_REQUEST:='_REQUEST'; EOD:=false; setstatus(coord,stat);end;
+if (status<>'')and(FCurrentname='Slew Rate') then begin FRateList.Clear; end; { TODO : Add the use of TELESCOPE_MOTION_RATE if a driver wil use it }
 end;
 
 procedure TIndiClient.XmlContent(Sender: TObject; Content: String);
@@ -400,6 +412,7 @@ if (FCurrentname='EQUATORIAL_EOD_COORD')and(Fname='RA') then begin EOD:=true; FR
 if (FCurrentname='EQUATORIAL_EOD_COORD')and(Fname='DEC') then begin EOD:=true; FDec:=Content; end;
 if (FCurrentname='EQUATORIAL_COORD')and(Fname='RA') then begin EOD:=false; FRa:=Content; end;
 if (FCurrentname='EQUATORIAL_COORD')and(Fname='DEC') then begin EOD:=false; FDec:=Content; end;
+if (FCurrentname='Slew Rate') then begin FRateList.Add(Fname); end;
 if Ftrace then writetrace(FCurrentdevice+blank+FCurrentname+blank+FName+blank+Content);
 end;
 
@@ -479,6 +492,43 @@ if EOD then
 else
    Send('<newNumberVector device="'+FWantDevice+'" name="EQUATORIAL_COORD'+FCOORD_REQUEST+'"><oneNumber name="RA" >'+Fra+'</oneNumber><oneNumber name="DEC">'+Fdec+'</oneNumber></newNumberVector>');
 Send('<newSwitchVector device="'+FWantDevice+'" name="TELESCOPE_ABORT_MOTION"><oneSwitch name="ABORT">On</oneSwitch></newSwitchVector>');
+end;
+
+procedure  TIndiClient.GetSlewRate(var ratelist: TStringList);
+begin
+ratelist.Assign(FRateList);
+end;
+
+procedure TIndiClient.SetSlewRate(rate:string);
+var str,onoff: string;
+    i: integer;
+begin
+{ TODO : Add the use of TELESCOPE_MOTION_RATE if a driver wil use it }
+str:='<newSwitchVector device="'+FWantDevice+'" name="Slew Rate">';
+for i:=0 to FRateList.Count-1 do begin
+   if FRateList[i]=rate then onoff:='On' else onoff:='Off';
+   str:=str+'<oneSwitch name="'+FRateList[i]+'">'+onoff+'</oneSwitch>';
+end;
+str:=str+'</newSwitchVector>';
+Send(str);
+end;
+
+procedure TIndiClient.MotionRate(rate:string);
+begin
+if not FDeviceFound then exit;
+Send('<newNumberVector device="'+FWantDevice+'" name="TELESCOPE_MOTION_RATE"><oneNumber name="MOTION_RATE" >'+rate+'</oneNumber></newNumberVector>');
+end;
+
+procedure TIndiClient.MotionNS(MN,MS:string);
+begin
+if not FDeviceFound then exit;
+Send('<newSwitchVector device="'+FWantDevice+'" name="TELESCOPE_MOTION_NS"><oneSwitch name="MOTION_NORTH">'+MN+'</oneSwitch><oneSwitch name="MOTION_SOUTH">'+MS+'</oneSwitch></newSwitchVector>');
+end;
+
+procedure TIndiClient.MotionWE(MW,ME:string);
+begin
+if not FDeviceFound then exit;
+Send('<newSwitchVector device="'+FWantDevice+'" name="TELESCOPE_MOTION_WE"><oneSwitch name="MOTION_WEST">'+MW+'</oneSwitch><oneSwitch name="MOTION_EAST">'+ME+'</oneSwitch></newSwitchVector>');
 end;
 
 end.
