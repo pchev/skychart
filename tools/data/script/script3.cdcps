@@ -1,0 +1,283 @@
+[ScriptPanel]
+Title=Location / Time
+HidenTimer=0
+numtoolbar1=6
+toolbar1_0=43;TimeDec
+toolbar1_1=44;TimeInc
+toolbar1_2=84;TimeReset
+toolbar1_3=88;Animation
+toolbar1_4=103;TimeValPanel
+toolbar1_5=104;TimeU
+numtoolbar2=0
+numscriptbutton=24
+scriptbutton_0="Group_1;Time;2"
+scriptbutton_1="	Edit_1"
+scriptbutton_2="	Edit_2"
+scriptbutton_3="	Button_1;Set Date / Time"
+scriptbutton_4="	Button_4;Now"
+scriptbutton_5="	Button_7;Cal"
+scriptbutton_6="	Event_0;0;Initalisation;"
+scriptbutton_7="	Event_1;1;Activation;"
+scriptbutton_8="	Event_4;4;Chart refresh;"
+scriptbutton_9="Group_3;Observatory;2"
+scriptbutton_10="	Edit_3"
+scriptbutton_11="	Edit_4"
+scriptbutton_12="	Edit_5"
+scriptbutton_13="	Edit_6"
+scriptbutton_14="	Edit_7"
+scriptbutton_15="	Combo_1;"
+scriptbutton_16="Group_5;Observatory list;1"
+scriptbutton_17="	List_1;80"
+scriptbutton_18="	Button_3;Set Observatory"
+scriptbutton_19="Group_6;;2"
+scriptbutton_20="	Button_5;Save"
+scriptbutton_21="	Button_6;Load"
+scriptbutton_22="Group_2;Info;1"
+scriptbutton_23="	Memo_1;250"
+numscriptrows=75
+script_0=1	// Set date/time
+script_1=1	var str: string;
+script_2=1	    cm: Tstringlist;
+script_3=1	begin
+script_4=1	 str:=trim(Edit_1.Text)+'T'+trim(Edit_2.Text);
+script_5=1	 cm:=Tstringlist.Create;
+script_6=1	 cm.add('SETDATE');
+script_7=1	 cm.add(str);
+script_8=1	 str:=cmd('',cm);
+script_9=1	 if pos('OK!',str)=0 then memo_1.lines.add('Error:'+str);
+script_10=1	 cm.Free;
+script_11=1	end.
+script_12=4	// Set current time
+script_13=4	begin
+script_14=4	  MenuTimeReset.click;
+script_15=4	end.
+script_16=7	var jd: double;
+script_17=7	begin
+script_18=7	  StrtoJD(Edit_1.Text,jd);
+script_19=7	  if CalendarDialog(jd) then begin
+script_20=7	     Edit_1.Text:=JDToStr(jd);
+script_21=7	  end;
+script_22=7	end.
+script_23=3	// Set observatory
+script_24=3	var str,obs,lat,lon,alt,tz: string;
+script_25=3	    p: integer;
+script_26=3	    cm: Tstringlist;
+script_27=3	begin
+script_28=3	  // split the parameters from the selected row
+script_29=3	  str:=List_1.items[List_1.itemindex];
+script_30=3	  p:=pos('=',str);
+script_31=3	  obs:=copy(str,1,p-1);
+script_32=3	  delete(str,1,p);
+script_33=3	  p:=pos(';',str);
+script_34=3	  lat:=copy(str,1,p-1);
+script_35=3	  delete(str,1,p);
+script_36=3	  p:=pos(';',str);
+script_37=3	  lon:=copy(str,1,p-1);
+script_38=3	  delete(str,1,p);
+script_39=3	  p:=pos(';',str);
+script_40=3	  alt:=copy(str,1,p-1);
+script_41=3	  delete(str,1,p);
+script_42=3	  tz:=str;
+script_43=3	  // format the command and set observatory
+script_44=3	  str:='LAT:'+trim(lat)+'LON:'+trim(lon);
+script_45=3	  str:=str+'ALT:'+trim(alt)+'OBS:'+trim(obs)
+script_46=3	  memo_1.lines.add('cmd:'+str);
+script_47=3	  cm:=Tstringlist.Create;
+script_48=3	  cm.add('SETOBS');
+script_49=3	  cm.add(str);
+script_50=3	  str:=cmd('',cm);
+script_51=3	  if pos('OK!',str)=0 then memo_1.lines.add('Error:'+str);
+script_52=3	  // set the timezone
+script_53=3	  cm.clear;
+script_54=3	  cm.add('SETTZ');
+script_55=3	  cm.add(trim(tz));
+script_56=3	  str:=cmd('',cm);
+script_57=3	  if pos('OK!',str)=0 then memo_1.lines.add('Error:'+str);
+script_58=3	  cm.Free;
+script_59=3	  Combo_1.text:='';
+script_60=3	end.
+script_61=5	// save the observatory list to file
+script_62=5	var fn: string;
+script_63=5	begin
+script_64=5	 if SaveDialog(fn) then begin
+script_65=5	    List_1.items.savetofile(fn);
+script_66=5	 end;
+script_67=5	end.
+script_68=6	// load the observatory list from file
+script_69=6	var fn: string;
+script_70=6	begin
+script_71=6	 if OpenDialog(fn) then begin
+script_72=6	    List_1.items.loadfromfile(fn);
+script_73=6	 end;
+script_74=6	end.
+numcomborows=12
+comboscript_0=1	// Select and set timezone
+comboscript_1=1	var cm: TStringList;
+comboscript_2=1	    str: string;
+comboscript_3=1	begin
+comboscript_4=1	  cm:=TStringList.create;
+comboscript_5=1	  cm.clear;
+comboscript_6=1	  cm.add('SETTZ');
+comboscript_7=1	  cm.add(trim(combo_1.text));
+comboscript_8=1	  str:=cmd('',cm);
+comboscript_9=1	  if pos('OK!',str)=0 then memo_1.lines.add('Error:'+str);
+comboscript_10=1	  cm.Free;
+comboscript_11=1	end.
+numevents=157
+event_0=0	// Initialization
+event_1=0	var cm: Tstringlist;
+event_2=0	    str: string;
+event_3=0	    i,p: integer;
+event_4=0	begin
+event_5=0	 // set properties
+event_6=0	 Memo_1.wordwrap:=false;
+event_7=0	 Combo_1.Style:=csDropDownList;
+event_8=0	 // fill UTC timezone
+event_9=0	 Combo_1.Clear;
+event_10=0	 for i:=0 to 11 do Combo_1.items.add('UTC'+inttostr(i-12));
+event_11=0	 Combo_1.items.add('UTC');
+event_12=0	 for i:=1 to 12 do Combo_1.items.add('UTC+'+inttostr(i));
+event_13=0	 // add a few interesting location
+event_14=0	 List_1.clear;
+event_15=0	 List_1.items.add('Alexandria=31d12m00s;-29d55m00s;0m;UTC+2');
+event_16=0	 List_1.items.add('Babylon=32d32m11s;-44d25m15s;200m;UTC+3');
+event_17=0	 List_1.items.add('Samarkand=39d42m00s;-66d59m00s;700m;UTC+4');
+event_18=0	 List_1.items.add('Tikal=17d13m20s;89d37m25s;200m;UTC-6');
+event_19=0	 // add the default observatory
+event_20=0	 cm:=Tstringlist.Create;
+event_21=0	 cm.add('GETOBS');
+event_22=0	 str:=cmd('',cm);
+event_23=0	 p:=pos('OK!',str);
+event_24=0	 if p>0 then begin
+event_25=0	   delete(str,1,p+2);
+event_26=0	   p:=pos('LAT:',str);
+event_27=0	   delete(str,1,p+3);
+event_28=0	   p:=pos('LON:',str);
+event_29=0	   Edit_3.Text:=copy(str,1,p-1);
+event_30=0	   delete(str,1,p+3);
+event_31=0	   p:=pos('ALT:',str);
+event_32=0	   Edit_4.Text:=copy(str,1,p-1);
+event_33=0	   delete(str,1,p+3);
+event_34=0	   p:=pos('OBS:',str);
+event_35=0	   Edit_5.Text:=copy(str,1,p-1);
+event_36=0	   delete(str,1,p+3);
+event_37=0	   Edit_6.Text:=str;
+event_38=0	 end;
+event_39=0	 cm.clear;
+event_40=0	 cm.add('GETTZ');
+event_41=0	 str:=cmd('',cm);
+event_42=0	 p:=pos('OK!',str);
+event_43=0	 if p>0 then begin
+event_44=0	   delete(str,1,p+2);
+event_45=0	   Edit_7.text:=str;
+event_46=0	 end;
+event_47=0	 i:=List_1.Items.IndexOfName(Edit_6.Text);
+event_48=0	 if i<0 then begin
+event_49=0	   str:=Edit_6.Text+'='+Edit_3.Text+';'+Edit_4.Text+';'+Edit_5.Text+';'+Edit_7.text;
+event_50=0	   List_1.Items.Insert(0,str);
+event_51=0	 end;
+event_52=0	 // force a chart redraw
+event_53=0	 cm.add('REDRAW');
+event_54=0	 cmd('',cm);
+event_55=0	 cm.free;
+event_56=0	end.
+event_57=1	// Activation event
+event_58=1	var str: string;
+event_59=1	    cm: Tstringlist;
+event_60=1	    p: integer;
+event_61=1	begin
+event_62=1	// get chart date
+event_63=1	 cm:=Tstringlist.Create;
+event_64=1	 cm.add('GETDATE');
+event_65=1	 str:=cmd('',cm);
+event_66=1	 p:=pos('OK!',str);
+event_67=1	 if p>0 then begin
+event_68=1	   delete(str,1,p+2);
+event_69=1	   p:=pos('T',str);
+event_70=1	   Edit_1.Text:=copy(str,1,p-1);
+event_71=1	   delete(str,1,p);
+event_72=1	   Edit_2.Text:=str;
+event_73=1	 end;
+event_74=1	 cm.clear;
+event_75=1	// get chart observatory
+event_76=1	 cm.add('GETOBS');
+event_77=1	 str:=cmd('',cm);
+event_78=1	 memo_1.lines.add(str);
+event_79=1	 p:=pos('OK!',str);
+event_80=1	 if p>0 then begin
+event_81=1	   delete(str,1,p+2);
+event_82=1	   p:=pos('LAT:',str);
+event_83=1	   delete(str,1,p+3);
+event_84=1	   p:=pos('LON:',str);
+event_85=1	   Edit_3.Text:=copy(str,1,p-1);
+event_86=1	   delete(str,1,p+3);
+event_87=1	   p:=pos('ALT:',str);
+event_88=1	   Edit_4.Text:=copy(str,1,p-1);
+event_89=1	   delete(str,1,p+3);
+event_90=1	   p:=pos('OBS:',str);
+event_91=1	   Edit_5.Text:=copy(str,1,p-1);
+event_92=1	   delete(str,1,p+3);
+event_93=1	   Edit_6.Text:=str;
+event_94=1	 end;
+event_95=1	// get timezone
+event_96=1	 cm.clear;
+event_97=1	 cm.add('GETTZ');
+event_98=1	 str:=cmd('',cm);
+event_99=1	 memo_1.lines.add(str);
+event_100=1	 p:=pos('OK!',str);
+event_101=1	 if p>0 then begin
+event_102=1	   delete(str,1,p+2);
+event_103=1	   Edit_7.text:=str;
+event_104=1	 end;
+event_105=1	 cm.Free;
+event_106=1	end.
+event_107=4	// Chart refresh event
+event_108=4	var str: string;
+event_109=4	    cm: Tstringlist;
+event_110=4	    p: integer;
+event_111=4	begin
+event_112=4	// get chart date
+event_113=4	 cm:=Tstringlist.Create;
+event_114=4	 cm.add('GETDATE');
+event_115=4	 str:=cmd('',cm);
+event_116=4	 p:=pos('OK!',str);
+event_117=4	 if p>0 then begin
+event_118=4	   delete(str,1,p+2);
+event_119=4	   p:=pos('T',str);
+event_120=4	   Edit_1.Text:=copy(str,1,p-1);
+event_121=4	   delete(str,1,p);
+event_122=4	   Edit_2.Text:=str;
+event_123=4	 end;
+event_124=4	 cm.clear;
+event_125=4	// get chart observatory
+event_126=4	 cm.add('GETOBS');
+event_127=4	 str:=cmd('',cm);
+event_128=4	 memo_1.lines.add(str);
+event_129=4	 p:=pos('OK!',str);
+event_130=4	 if p>0 then begin
+event_131=4	   delete(str,1,p+2);
+event_132=4	   p:=pos('LAT:',str);
+event_133=4	   delete(str,1,p+3);
+event_134=4	   p:=pos('LON:',str);
+event_135=4	   Edit_3.Text:=copy(str,1,p-1);
+event_136=4	   delete(str,1,p+3);
+event_137=4	   p:=pos('ALT:',str);
+event_138=4	   Edit_4.Text:=copy(str,1,p-1);
+event_139=4	   delete(str,1,p+3);
+event_140=4	   p:=pos('OBS:',str);
+event_141=4	   Edit_5.Text:=copy(str,1,p-1);
+event_142=4	   delete(str,1,p+3);
+event_143=4	   Edit_6.Text:=str;
+event_144=4	 end;
+event_145=4	// get timezone
+event_146=4	 cm.clear;
+event_147=4	 cm.add('GETTZ');
+event_148=4	 str:=cmd('',cm);
+event_149=4	 memo_1.lines.add(str);
+event_150=4	 p:=pos('OK!',str);
+event_151=4	 if p>0 then begin
+event_152=4	   delete(str,1,p+2);
+event_153=4	   Edit_7.text:=str;
+event_154=4	 end;
+event_155=4	 cm.Free;
+event_156=4	end.

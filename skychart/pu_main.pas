@@ -5706,7 +5706,14 @@ if SectionExists(section) then begin
   for i:=0 to numrightbar-1 do configrightbar.Add(ReadString(section,'rightbar'+inttostr(i),''));
 end;
 // Script panel
-for i:=0 to numscript-1 do begin
+for i:=0 to ReservedScript-1 do begin
+  section:='ScriptPanel'+inttostr(i);
+  ok:=ReadBool(section,'visible',false);
+  if ok then begin
+      ActiveScript:=i;
+  end;
+end;
+for i:=ReservedScript to numscript-1 do begin
    section:='ScriptPanel'+inttostr(i);
    ok:=ReadBool(section,'visible',false);
    if ok then begin
@@ -6483,7 +6490,12 @@ for i:=0 to numleftbar-1 do WriteString(section,'leftbar'+inttostr(i),configleft
 WriteInteger(section,'numrightbar',numrightbar);
 for i:=0 to numrightbar-1 do WriteString(section,'rightbar'+inttostr(i),configrightbar[i]);
 // Script panel
-for i:=0 to numscript-1 do begin
+for i:=0 to ReservedScript-1 do begin
+  section:='ScriptPanel'+inttostr(i);
+  EraseSection(section);
+  WriteBool(section,'visible',Fscript[i].Visible);
+end;
+for i:=ReservedScript to numscript-1 do begin
    section:='ScriptPanel'+inttostr(i);
    EraseSection(section);
    WriteBool(section,'visible',Fscript[i].Visible);

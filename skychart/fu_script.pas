@@ -74,6 +74,7 @@ type
     FHidenTimer: Boolean;
     FTelescopeConnected: Boolean;
     TelescopeChartName: string;
+    procedure CreateEngine;
     procedure ApplyScript(Sender: TObject);
     procedure SetExecuteCmd(value:TExecuteCmd);
     procedure SetCometMark(value:TExecuteCmd);
@@ -205,6 +206,23 @@ begin
   end;
 end;
 
+procedure Tf_script.CreateEngine;
+begin
+  fscriptengine:=Tf_scriptengine.Create(self);
+  fscriptengine.Tag:=Tag;
+  fscriptengine.ConfigToolbar1:=ConfigToolbar1;
+  fscriptengine.ConfigToolbar2:=ConfigToolbar2;
+  fscriptengine.editsurface:=MainPanel;
+  fscriptengine.onApply:=@ApplyScript;
+  fscriptengine.ExecuteCmd:=FExecuteCmd;
+  fscriptengine.CometMark:=FCometMark;
+  fscriptengine.AsteroidMark:=FAsteroidMark;
+  fscriptengine.GetScopeRates:=FGetScopeRates;
+  fscriptengine.Activechart:=FActivechart;
+  fscriptengine.Mainmenu:=FMainmenu;
+  fscriptengine.cdb:=Fcdb;
+end;
+
 procedure Tf_script.Init;
 begin
   LabelShortcut.Caption:='F'+inttostr(tag+1);
@@ -236,23 +254,19 @@ begin
   fedittoolbar.ActivateToolbar;
   ToolBar1.Visible:=(VisibleControlCount(ToolBar1)>0);
   ToolBar2.Visible:=(VisibleControlCount(ToolBar2)>0);
-  if FConfigScriptButton.Count>0 then begin
-     if fscriptengine=nil then begin
-        fscriptengine:=Tf_scriptengine.Create(self);
-        fscriptengine.ConfigToolbar1:=ConfigToolbar1;
-        fscriptengine.ConfigToolbar2:=ConfigToolbar2;
-        fscriptengine.editsurface:=MainPanel;
-        fscriptengine.onApply:=@ApplyScript;
-        fscriptengine.ExecuteCmd:=FExecuteCmd;
-        fscriptengine.CometMark:=FCometMark;
-        fscriptengine.AsteroidMark:=FAsteroidMark;
-        fscriptengine.GetScopeRates:=FGetScopeRates;
-        fscriptengine.Activechart:=FActivechart;
-        fscriptengine.Mainmenu:=FMainmenu;
-        fscriptengine.cdb:=Fcdb;
-     end;
-     fscriptengine.CheckBoxHidenTimer.Checked:=FHidenTimer;
-     fscriptengine.Load(FConfigScriptButton, FConfigScript, FConfigCombo, FConfigEvent,PanelTitle.Caption);
+  if Tag>=ReservedScript then begin
+    if FConfigScriptButton.Count>0 then begin
+       if fscriptengine=nil then begin
+          CreateEngine;
+       end;
+       fscriptengine.CheckBoxHidenTimer.Checked:=FHidenTimer;
+       fscriptengine.Load(FConfigScriptButton, FConfigScript, FConfigCombo, FConfigEvent,PanelTitle.Caption);
+    end;
+  end else begin
+    if fscriptengine=nil then begin
+       CreateEngine;
+    end;
+    fscriptengine.LoadFile(slash(appdir)+slash('data')+slash('script')+'script'+inttostr(tag+1)+'.cdcps');
   end;
 end;
 
@@ -273,18 +287,7 @@ end;
 procedure Tf_script.ButtonEditSrcClick(Sender: TObject);
 begin
   if fscriptengine=nil then begin
-     fscriptengine:=Tf_scriptengine.Create(self);
-     fscriptengine.ConfigToolbar1:=ConfigToolbar1;
-     fscriptengine.ConfigToolbar2:=ConfigToolbar2;
-     fscriptengine.editsurface:=MainPanel;
-     fscriptengine.onApply:=@ApplyScript;
-     fscriptengine.ExecuteCmd:=FExecuteCmd;
-     fscriptengine.CometMark:=FCometMark;
-     fscriptengine.AsteroidMark:=FAsteroidMark;
-     fscriptengine.GetScopeRates:=FGetScopeRates;
-     fscriptengine.Activechart:=FActivechart;
-     fscriptengine.Mainmenu:=FMainmenu;
-     fscriptengine.cdb:=Fcdb;
+     CreateEngine;
   end;
   FormPos(fscriptengine,mouse.cursorpos.x,mouse.cursorpos.y);
   fscriptengine.Show;
