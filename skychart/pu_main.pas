@@ -730,6 +730,7 @@ type
     function ExecuteCmd(cname:string; arg:Tstringlist):string;
     function CometMark(cname:string; arg:Tstringlist):string;
     function AsteroidMark(cname:string; arg:Tstringlist):string;
+    function GetScopeRates(cname:string; arg:Tstringlist):string;
     procedure SendInfo(Sender: TObject; origin,str:string);
     function GenericSearch(cname,Num:string; var ar1,de1: double; idresult:boolean=true):boolean;
     procedure ObsListSearch(obj:string; ra,de:double);
@@ -2092,6 +2093,7 @@ for i:=0 to numscript-1 do begin
   Fscript[i].ExecuteCmd:=ExecuteCmd;
   Fscript[i].CometMark:=CometMark;
   Fscript[i].AsteroidMark:=AsteroidMark;
+  Fscript[i].GetScopeRates:=GetScopeRates;
   Fscript[i].onApply:=ApplyScript;
   if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
   Fscript[i].Parent:=ScriptScrollBox;
@@ -9285,6 +9287,19 @@ begin
         Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.AsteroidMark.Add(arg[i]);
     Tf_chart(MultiFrame1.ActiveObject).Refresh;
     result:=msgOK;
+ end;
+end;
+
+function Tf_main.GetScopeRates(cname:string; arg:Tstringlist):string;
+var i,j,mx: integer;
+begin
+ result:=msgFailed;
+ arg.clear;
+ for j:=0 to MultiFrame1.ChildCount-1 do begin
+   if MultiFrame1.Childs[j].Caption=cname then begin
+      Tf_chart(MultiFrame1.Childs[j].DockedObject).GetScopeRates(arg);
+      if arg.Count>0 then result:=msgOK;
+   end;
  end;
 end;
 

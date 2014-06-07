@@ -357,6 +357,7 @@ type
     function cmd_ObslistTransitSide(side: string): string;
     function cmd_GetScopeRaDec:string;
     function cmd_GetScopeRates:string;
+    procedure GetScopeRates(rates:TStringList);
     function cmd_ScopeMoveAxis(axis,rate: string):string;
     function cmd_ConnectINDI:string;
     function cmd_DisconnectINDI:string;
@@ -3761,6 +3762,52 @@ if ok then
   result:=msgOK+blank+artostr3(ra)+blank+detostr3(dec)
 else
   result:=msgFailed;
+end;
+
+procedure Tf_chart.GetScopeRates(rates:TStringList);
+var i,j,n0,n1: integer;
+    ax0r,ax1r: array of double;
+    min,max,step,rate,x: double;
+begin
+rates.Clear;
+if Connect1.checked then begin
+  if sc.cfgsc.ASCOMTelescope then begin
+    n0:=0;
+    n1:=0;
+    Fpop_scope.GetScopeRates(n0,n1,@ax0r,@ax1r);
+    if n0>1 then begin
+      n0:=n0 div 2;
+      for i:=0 to n0-1 do begin
+        min:=ax0r[2*i];
+        max:=ax0r[2*i+1];
+        if min=max then
+           rates.Add(formatfloat(f4,ax0r[i]))
+        else begin
+          step:=(max-min)/3;
+          for j:=0 to 3 do begin
+            rate:=min+j*step;
+            if (rate=0)and(max>0.15) then begin  // add slow speed 2x ->32x sidereal
+              rates.add('0.0083');
+              rates.add('0.0167');
+              rates.add('0.0333');
+              rates.add('0.0667');
+              rates.add('0.1333');
+              x:=step/2;
+              if step>0.3 then rates.add(formatfloat('0.0000',x));
+            end
+            else if rate>0 then rates.add(formatfloat('0.0000',rate))
+          end;
+        end;
+    end;
+    end;
+  end;
+  if sc.cfgsc.INDITelescope then begin
+    Fpop_indi.GetScopeRates(n0,rates);
+  end;
+  if sc.cfgsc.LX200Telescope then begin
+    Fpop_lx200.GetScopeRates(n0,rates);
+  end;
+end;
 end;
 
 function Tf_chart.cmd_GetScopeRates: string;

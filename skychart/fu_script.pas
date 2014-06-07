@@ -66,16 +66,19 @@ type
     FExecuteCmd: TExecuteCmd;
     FCometMark: TExecuteCmd;
     FAsteroidMark: TExecuteCmd;
+    FGetScopeRates: TExecuteCmd;
     FActivechart: Tf_chart;
     FonApply: TNotifyEvent;
     FScriptTitle: string;
     FConfigToolbar1,FConfigToolbar2,FConfigScriptButton,FConfigCombo,FConfigScript,FConfigEvent: TStringList;
     FHidenTimer: Boolean;
     FTelescopeConnected: Boolean;
+    TelescopeChartName: string;
     procedure ApplyScript(Sender: TObject);
     procedure SetExecuteCmd(value:TExecuteCmd);
     procedure SetCometMark(value:TExecuteCmd);
     procedure SetAsteroidMark(value:TExecuteCmd);
+    procedure SetGetScopeRates(value:TExecuteCmd);
     procedure SetActiveChart(value:Tf_chart);
     function  GetHidenTimer: Boolean;
     procedure SetHidenTimer(value:Boolean);
@@ -128,6 +131,7 @@ type
     property ExecuteCmd: TExecuteCmd read FExecuteCmd write SetExecuteCmd;
     property CometMark: TExecuteCmd read FCometMark write SetCometMark;
     property AsteroidMark: TExecuteCmd read FAsteroidMark write SetAsteroidMark;
+    property GetScopeRates: TExecuteCmd read FGetScopeRates write SetGetScopeRates;
     property ActiveChart: Tf_chart read FActiveChart write SetActiveChart;
     property HidenTimer: Boolean read GetHidenTimer write SetHidenTimer;
     property onApply: TNotifyEvent read FonApply write FonApply;
@@ -189,7 +193,7 @@ begin
         if fscriptengine<>nil then begin
            fscriptengine.EventReady:=true;
            fscriptengine.StartTimer;
-           fscriptengine.TelescopeConnectEvent('',FTelescopeConnected);
+           fscriptengine.TelescopeConnectEvent(TelescopeChartName,FTelescopeConnected);
            fscriptengine.ActivateEvent;
         end;
      end else
@@ -242,6 +246,7 @@ begin
         fscriptengine.ExecuteCmd:=FExecuteCmd;
         fscriptengine.CometMark:=FCometMark;
         fscriptengine.AsteroidMark:=FAsteroidMark;
+        fscriptengine.GetScopeRates:=FGetScopeRates;
         fscriptengine.Activechart:=FActivechart;
         fscriptengine.Mainmenu:=FMainmenu;
         fscriptengine.cdb:=Fcdb;
@@ -276,6 +281,7 @@ begin
      fscriptengine.ExecuteCmd:=FExecuteCmd;
      fscriptengine.CometMark:=FCometMark;
      fscriptengine.AsteroidMark:=FAsteroidMark;
+     fscriptengine.GetScopeRates:=FGetScopeRates;
      fscriptengine.Activechart:=FActivechart;
      fscriptengine.Mainmenu:=FMainmenu;
      fscriptengine.cdb:=Fcdb;
@@ -312,6 +318,12 @@ procedure Tf_script.SetAsteroidMark(value:TExecuteCmd);
 begin
 FAsteroidMark:=value;
 if fscriptengine<>nil then fscriptengine.AsteroidMark:=FAsteroidMark;
+end;
+
+procedure Tf_script.SetGetScopeRates(value:TExecuteCmd);
+begin
+FGetScopeRates:=value;
+if fscriptengine<>nil then fscriptengine.GetScopeRates:=FGetScopeRates;
 end;
 
 procedure Tf_script.SetActiveChart(value:Tf_chart);
@@ -355,6 +367,7 @@ end;
 procedure Tf_script.TelescopeConnectEvent(origin:string; connected: boolean);
 begin
   FTelescopeConnected:=connected;
+  TelescopeChartName:=origin;
   if visible and (fscriptengine<>nil) then fscriptengine.TelescopeConnectEvent(origin,connected);
 end;
 
