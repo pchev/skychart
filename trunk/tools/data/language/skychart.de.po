@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-17 19:00+0000\n"
-"PO-Revision-Date: 2014-05-01 08:34+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2014-06-07 19:36+0000\n"
+"PO-Revision-Date: 2014-06-07 14:15+0000\n"
+"Last-Translator: Tobias Bannert <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-17 19:21+0000\n"
-"X-Generator: Launchpad (build 17007)\n"
+"X-Launchpad-Export-Date: 2014-06-07 19:48+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -31,6 +31,10 @@ msgstr "732 (empfohlen bis zu 5.000.000 Objekten)"
 #: u_translation.rs9537largerda
 msgid "9537 (larger datasets)"
 msgstr "9537 (größerer Datenbestand)"
+
+#: u_translation.rsabandonyourc
+msgid "Abandon your changes?"
+msgstr ""
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
@@ -108,6 +112,14 @@ msgstr "Var"
 msgid "Action"
 msgstr "Funktion"
 
+#: u_translation.rsactivatethet
+msgid "Activate the timer event when hidden"
+msgstr ""
+
+#: u_translation.rsactivation
+msgid "Activation"
+msgstr ""
+
 #: u_translation.rsactualsystem
 msgid "Actual system time"
 msgstr "Aktuelle Systemzeit"
@@ -158,7 +170,7 @@ msgstr "Fortschrittlich"
 
 #: u_translation.rsadvancedsear
 msgid "Advanced search"
-msgstr "Suchen ..."
+msgstr "Erweiterte Suche"
 
 #: u_translation.rsadvancedsett
 msgid "Advanced Settings for Scope.exe"
@@ -186,7 +198,7 @@ msgstr "Alle"
 
 #: u_translation.rsallconfigura
 msgid "All configuration options"
-msgstr "Alle Einstellungen ..."
+msgstr "Alle Konfigurationsoftionen"
 
 #: u_translation.rsallobjectsat
 msgid "All the objects at this position"
@@ -267,6 +279,10 @@ msgstr "Anonymous Passwort"
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
 msgstr "Anti-Alias"
+
+#: u_translation.rsanychangeyou
+msgid "Any change you do here will be lost when the program restart."
+msgstr ""
 
 #: u_translation.rsapparent
 msgid "Apparent"
@@ -785,6 +801,10 @@ msgstr "Karte_"
 msgid "Check"
 msgstr "Überprüfen"
 
+#: u_translation.rschecklist
+msgid "CheckList"
+msgstr ""
+
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
 msgstr "Farbe für die Objektklassen wählen"
@@ -879,6 +899,10 @@ msgstr "Farbsättigung"
 
 #: u_translation.rscolumns
 msgid "Columns"
+msgstr ""
+
+#: u_translation.rscombobox
+msgid "Combo box"
 msgstr ""
 
 #: u_translation.rscomet
@@ -1123,11 +1147,11 @@ msgstr "Erzeuge Header"
 
 #: u_translation.rscreatepostsc
 msgid "Create postscript chart. Please wait..."
-msgstr "Erzeuge PostScript Karte. Bitte warten..."
+msgstr "PostScript-Karte wird erstellt. Bitte warten …"
 
 #: u_translation.rscreateraster
 msgid "Create raster chart at %s dpi. Please wait..."
-msgstr "Erzeuge Raster Karte mit %s dpi. Bitte warten..."
+msgstr "Rasterkarte mit %s dpi wird erstellt. Bitte warten …"
 
 #: u_translation.rscrossmeridia
 msgid "Cross meridian"
@@ -1183,7 +1207,7 @@ msgstr "%sDatenbank %s geöffnet.%s"
 
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
-msgstr "Datenbankeinstellungen"
+msgstr "Datenbankeinstellungen …"
 
 #: u_translation.rsdatabasetype
 msgid "Database type"
@@ -1399,7 +1423,7 @@ msgstr "Löschen abgeschlossen"
 
 #: u_translation.rsdeletedailyd
 msgid "Deleting the daily data"
-msgstr "Tägliche Daten löschen ..."
+msgstr "Tägliche Daten löschen …"
 
 #: u_translation.rsdeletedsucce
 msgid "Deleted successfully!"
@@ -1407,15 +1431,15 @@ msgstr "Erfolgreich gelöscht!"
 
 #: u_translation.rsdeletefromel
 msgid "Deleting from the element table..."
-msgstr "Aus Elemententabelle löschen..."
+msgstr "Aus Elementtabelle wird gelöscht …"
 
 #: u_translation.rsdeletefromel2
 msgid "Deleting from the element list..."
-msgstr "Aus Elementenliste löschen ..."
+msgstr "Aus Elementliste wird gelöscht …"
 
 #: u_translation.rsdeletefrommo
 msgid "Deleting from the monthly table ..."
-msgstr "Aus Monatstabelle löschen ..."
+msgstr "Aus Monatstabelle wird gelöscht …"
 
 #: u_translation.rsdeletefrommo2
 msgid "Delete from monthly table for jd<%s"
@@ -1423,7 +1447,7 @@ msgstr "Lösche aus Monatstabelle, für JD<%s"
 
 #: u_translation.rsdeletefromna
 msgid "Deleting from the name list..."
-msgstr "Aus Namensliste löschen..."
+msgstr "Aus Namensliste wird gelöscht …"
 
 #: u_translation.rsdeletemonthl
 msgid "Delete monthly data "
@@ -1596,6 +1620,14 @@ msgstr ""
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "Filter nicht die Messier-Objekte"
+
+#: u_translation.rsdontforgetto
+msgid "Don't forget to save to a new file!"
+msgstr ""
+
+#: u_translation.rsdontforgetto2
+msgid "Don't forget to save the program configuration!"
+msgstr ""
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -1967,7 +1999,7 @@ msgstr "Beenden"
 
 #: u_translation.rsexiting
 msgid "Exiting ..."
-msgstr "Beenden ..."
+msgstr "Beenden …"
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -2489,6 +2521,10 @@ msgstr "Symbol Zeitanzeige"
 msgid "If it is not installed try the following depending on your system:"
 msgstr "Falls es nicht installiert ist, versuche das folgende (abhängig von Deinem System):"
 
+#: u_translation.rsifyouneedtoc
+msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Beleucht."
@@ -2869,6 +2905,10 @@ msgstr "Linienbreite "
 msgid "Link all charts"
 msgstr "Alle Karten verknüpfen"
 
+#: u_translation.rslist
+msgid "List"
+msgstr ""
+
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
 msgstr "Aktiv auf Port: %s"
@@ -2891,7 +2931,7 @@ msgstr "Von Datei laden"
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."
-msgstr "Lade Katalogliste. Bitte warten ..."
+msgstr "Katalogliste wird geladen. Bitte warten …"
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"
@@ -3671,7 +3711,7 @@ msgstr "Nur die letzte"
 
 #: u_translation.rsopen
 msgid "Open"
-msgstr "Öffnen ..."
+msgstr "Öffnen"
 
 #: u_translation.rsopenachart
 msgid "Open a chart"
@@ -3780,6 +3820,10 @@ msgstr "Pfad zum Speichern der Datei:"
 #: u_translation.rspathwidth
 msgid "Path width"
 msgstr "Pfadbreite"
+
+#: u_translation.rspause
+msgid "Pause"
+msgstr ""
 
 #: u_translation.rspec
 msgid "PEC"
@@ -4071,7 +4115,7 @@ msgstr "Karte drucken"
 
 #: u_translation.rsprocessing
 msgid "Processing... %s"
-msgstr "Berechne... %s"
+msgstr "Berechnung läuft … %s"
 
 #: u_translation.rsprocessingen
 msgid "Processing ended. Total number of comets: %s"
@@ -4341,6 +4385,10 @@ msgstr "Neu laden"
 msgid "Reload %s for current chart"
 msgstr "Lade %s erneut für den aktuellen Katalog"
 
+#: u_translation.rsremoveallbre
+msgid "Remove all breakpoints"
+msgstr ""
+
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
 msgstr "Lösche alle Okulare"
@@ -4485,6 +4533,10 @@ msgstr "Rotation"
 msgid "Rows"
 msgstr "Zeilen"
 
+#: u_translation.rsrun
+msgid "Run"
+msgstr ""
+
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
 msgstr ""
@@ -4539,7 +4591,7 @@ msgstr "Speichern"
 
 #: u_translation.rssaveas
 msgid "Save as..."
-msgstr "Speichern unter ..."
+msgstr "Speichern unter …"
 
 #: u_translation.rssaveconfigur
 msgid "Save configuration now"
@@ -4551,7 +4603,7 @@ msgstr "Konfiguration beim Beenden speichern"
 
 #: u_translation.rssaveimage
 msgid "Save image..."
-msgstr "Bild speichern"
+msgstr "Bild speichern …"
 
 #: u_translation.rssaveproject
 msgid "Save project"
@@ -5249,6 +5301,14 @@ msgstr "Status"
 msgid "Status bar"
 msgstr "Statusleiste"
 
+#: u_translation.rsstepinto
+msgid "Step Into"
+msgstr ""
+
+#: u_translation.rsstepover
+msgid "Step Over"
+msgstr ""
+
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
 msgstr "Schritte (Alpha)"
@@ -5365,6 +5425,14 @@ msgstr "TCP/IP Dienst nicht verfügbar"
 msgid "Telescope"
 msgstr "Teleskop"
 
+#: u_translation.rstelescopecon
+msgid "Telescope connected"
+msgstr ""
+
+#: u_translation.rstelescopedis
+msgid "Telescope disconnected"
+msgstr ""
+
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
 msgstr ""
@@ -5448,6 +5516,10 @@ msgstr "Diese Datei wurde nicht als MPCORB-Datei erkannt."
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
 msgstr "Dieses Programm ist freie Software. Sie können es weitergeben und/oder es unter den Bedingungen der GNU General Public Licence (GNU GPL) modifizieren."
+
+#: u_translation.rsthisscriptis
+msgid "This script is maintained within the software distribution."
+msgstr ""
 
 #: u_translation.rsthursday
 msgid "Thu."

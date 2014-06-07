@@ -6,8 +6,8 @@ object f_script: Tf_script
   ClientHeight = 274
   ClientWidth = 180
   TabOrder = 0
-  DesignLeft = 336
-  DesignTop = 148
+  DesignLeft = 192
+  DesignTop = 141
   object BottomPanel: TPanel
     Left = 0
     Height = 50

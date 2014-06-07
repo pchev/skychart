@@ -200,10 +200,10 @@ object f_scriptengine: Tf_scriptengine
         Visible = False
       end
       object ButtonEditScript: TButton
-        Left = 16
+        Left = 2
         Height = 25
         Top = 248
-        Width = 85
+        Width = 110
         Caption = 'Edit Script'
         OnClick = ButtonEditScriptClick
         TabOrder = 6

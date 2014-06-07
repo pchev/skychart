@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-17 19:00+0000\n"
-"PO-Revision-Date: 2014-05-12 07:09+0000\n"
+"POT-Creation-Date: 2014-06-07 19:36+0000\n"
+"PO-Revision-Date: 2014-05-26 08:52+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-17 19:21+0000\n"
-"X-Generator: Launchpad (build 17007)\n"
+"X-Launchpad-Export-Date: 2014-06-07 19:49+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -35,6 +35,10 @@ msgstr "732 (rekomendowany do 5.000.000 obiektów)"
 #: u_translation.rs9537largerda
 msgid "9537 (larger datasets)"
 msgstr "9537 (większy zestaw danych)"
+
+#: u_translation.rsabandonyourc
+msgid "Abandon your changes?"
+msgstr ""
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
@@ -111,6 +115,14 @@ msgstr ""
 #: u_translation.rsaction
 msgid "Action"
 msgstr "Akcja"
+
+#: u_translation.rsactivatethet
+msgid "Activate the timer event when hidden"
+msgstr ""
+
+#: u_translation.rsactivation
+msgid "Activation"
+msgstr ""
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -272,6 +284,10 @@ msgstr "Hasło anonimowego użytkownika"
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
 msgstr "Antyaliasing"
+
+#: u_translation.rsanychangeyou
+msgid "Any change you do here will be lost when the program restart."
+msgstr ""
 
 #: u_translation.rsapparent
 msgid "Apparent"
@@ -583,7 +599,7 @@ msgstr "Lecz nigdy ciemniejsze niż magnitudo"
 
 #: u_translation.rsbutton
 msgid "Button"
-msgstr ""
+msgstr "Przycisk"
 
 #: u_translation.rsby
 msgid "by"
@@ -639,7 +655,7 @@ msgstr "Nie można pisać do"
 
 #: u_translation.rscaption
 msgid "Caption"
-msgstr ""
+msgstr "Podpis"
 
 #: u_translation.rscartesian
 msgid "Cartesian"
@@ -771,7 +787,7 @@ msgstr "Legenda"
 
 #: u_translation.rschartrefresh
 msgid "Chart refresh"
-msgstr ""
+msgstr "Odśwież mapę"
 
 #: u_translation.rscharts
 msgid "Charts"
@@ -788,6 +804,10 @@ msgstr "Mapa_"
 #: u_translation.rscheck
 msgid "Check"
 msgstr "Sprawdź"
+
+#: u_translation.rschecklist
+msgid "CheckList"
+msgstr ""
 
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
@@ -815,7 +835,7 @@ msgstr "Wyczyść"
 
 #: u_translation.rsclearall
 msgid "Clear all"
-msgstr ""
+msgstr "Wyczyść wszystko"
 
 #: u_translation.rscleartarget
 msgid "Clear Target"
@@ -883,6 +903,10 @@ msgstr "Poziom nasycenia koloru"
 
 #: u_translation.rscolumns
 msgid "Columns"
+msgstr "Kolumny"
+
+#: u_translation.rscombobox
+msgid "Combo box"
 msgstr ""
 
 #: u_translation.rscomet
@@ -1601,6 +1625,14 @@ msgstr "Nie wprowadzaj tutaj zmian, jeżeli nie jesteś pewien tego, co robisz!"
 msgid "Do not filter Messier objects"
 msgstr "Nie filtruj obiektów Messiera"
 
+#: u_translation.rsdontforgetto
+msgid "Don't forget to save to a new file!"
+msgstr ""
+
+#: u_translation.rsdontforgetto2
+msgid "Don't forget to save the program configuration!"
+msgstr ""
+
 #: u_translation.rsdot1
 msgid "Dot"
 msgstr "Kropka"
@@ -1791,7 +1823,7 @@ msgstr "Edytuj typy obiektów"
 
 #: u_translation.rseditscript
 msgid "Edit Script"
-msgstr ""
+msgstr "Edytuj skrypt"
 
 #: u_translation.rsedittimeincr
 msgid "Edit time increment"
@@ -1951,7 +1983,7 @@ msgstr "Zmierzch"
 
 #: u_translation.rsevent
 msgid "Event"
-msgstr ""
+msgstr "Zdarzenie"
 
 #: u_translation.rsevery
 msgid "every "
@@ -2343,7 +2375,7 @@ msgstr "Odstępy siatki"
 
 #: u_translation.rsgroup
 msgid "Group"
-msgstr ""
+msgstr "Grupa"
 
 #: u_translation.rsgrstransit
 msgid "GRS transit"
@@ -2493,6 +2525,10 @@ msgstr "Czas wyświetlania ikony"
 msgid "If it is not installed try the following depending on your system:"
 msgstr "Jeżeli to nie jest zainstalowane, spróbuj następujących kroków w zależności od Twojego systemu:"
 
+#: u_translation.rsifyouneedtoc
+msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Oświe."
@@ -2599,7 +2635,7 @@ msgstr "Inicjalizuj"
 
 #: u_translation.rsinitalisatio
 msgid "Initalisation"
-msgstr ""
+msgstr "Inicjalizacja"
 
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
@@ -2873,6 +2909,10 @@ msgstr "Szerokość linii "
 msgid "Link all charts"
 msgstr "Połącz wszystkie mapy"
 
+#: u_translation.rslist
+msgid "List"
+msgstr ""
+
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
 msgstr "Nasłuchuj na porcie: %s"
@@ -3127,7 +3167,7 @@ msgstr "Średnia pozycja"
 
 #: u_translation.rsmemo
 msgid "Memo"
-msgstr ""
+msgstr "Opis"
 
 #: u_translation.rsmercator
 msgid "Mercator"
@@ -3785,6 +3825,10 @@ msgstr "Ścieżka zapisu:"
 msgid "Path width"
 msgstr "Szerokość ścieżki"
 
+#: u_translation.rspause
+msgid "Pause"
+msgstr ""
+
 #: u_translation.rspec
 msgid "PEC"
 msgstr "PEC"
@@ -4345,6 +4389,10 @@ msgstr "Przeładuj"
 msgid "Reload %s for current chart"
 msgstr "Przeładuj %s dla bieżącej mapy"
 
+#: u_translation.rsremoveallbre
+msgid "Remove all breakpoints"
+msgstr ""
+
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
 msgstr "Usuń wszystkie okręgi"
@@ -4489,6 +4537,10 @@ msgstr "Obrót"
 msgid "Rows"
 msgstr "Wierszy"
 
+#: u_translation.rsrun
+msgid "Run"
+msgstr ""
+
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
 msgstr "Potwierdzenie SAMP"
@@ -4591,11 +4643,11 @@ msgstr "Zakres zaaw."
 
 #: u_translation.rsscript
 msgid "Script"
-msgstr ""
+msgstr "Skrypt"
 
 #: u_translation.rsscripteditor
 msgid "Script editor"
-msgstr ""
+msgstr "Edytor skryptów"
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
@@ -5131,7 +5183,7 @@ msgstr "Południe"
 
 #: u_translation.rsspacer
 msgid "Spacer"
-msgstr ""
+msgstr "Odstęp"
 
 #: u_translation.rsspectralclas
 msgid "Spectral class"
@@ -5253,6 +5305,14 @@ msgstr "Stan"
 msgid "Status bar"
 msgstr "Pasek stanu"
 
+#: u_translation.rsstepinto
+msgid "Step Into"
+msgstr ""
+
+#: u_translation.rsstepover
+msgid "Step Over"
+msgstr ""
+
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
 msgstr "Kroki (Alfa)"
@@ -5369,6 +5429,14 @@ msgstr "Usługa TCP/IP nie jest dostępna"
 msgid "Telescope"
 msgstr "Teleskop"
 
+#: u_translation.rstelescopecon
+msgid "Telescope connected"
+msgstr ""
+
+#: u_translation.rstelescopedis
+msgid "Telescope disconnected"
+msgstr ""
+
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
 msgstr "Ogniskowa teleskopu"
@@ -5453,6 +5521,10 @@ msgstr "Ten plik nie został rozpoznany jako plik MPCORB."
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
 msgstr "Ten program jest darmowy; możesz go rozpowszechniać i/lub modyfikować pod warunkami GNU General Public License"
 
+#: u_translation.rsthisscriptis
+msgid "This script is maintained within the software distribution."
+msgstr ""
+
 #: u_translation.rsthursday
 msgid "Thu."
 msgstr "Cz."
@@ -5475,7 +5547,7 @@ msgstr "Timeout [ms]"
 
 #: u_translation.rstimer
 msgid "Timer"
-msgstr ""
+msgstr "Licznik"
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
@@ -5519,7 +5591,7 @@ msgstr "Edytor paska narzędzi"
 
 #: u_translation.rstoolbox
 msgid "Tool box"
-msgstr ""
+msgstr "Narzędzia"
 
 #: u_translation.rstools
 msgid "Tools"

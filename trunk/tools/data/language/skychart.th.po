@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-05-17 19:00+0000\n"
+"POT-Creation-Date: 2014-06-07 19:36+0000\n"
 "PO-Revision-Date: 2014-05-01 08:40+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-17 19:21+0000\n"
-"X-Generator: Launchpad (build 17007)\n"
+"X-Launchpad-Export-Date: 2014-06-07 19:49+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -31,6 +31,10 @@ msgstr "732 (แนะนำสำหรับจำนวนวัตถุไ�
 #: u_translation.rs9537largerda
 msgid "9537 (larger datasets)"
 msgstr "9537 (ชุดข้อมูลขนาดใหญ่กว่านี้)"
+
+#: u_translation.rsabandonyourc
+msgid "Abandon your changes?"
+msgstr ""
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
@@ -107,6 +111,14 @@ msgstr "Var"
 #: u_translation.rsaction
 msgid "Action"
 msgstr "การกระทำ"
+
+#: u_translation.rsactivatethet
+msgid "Activate the timer event when hidden"
+msgstr ""
+
+#: u_translation.rsactivation
+msgid "Activation"
+msgstr ""
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -267,6 +279,10 @@ msgstr "รหัสผ่านแบบปิดบัง"
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
 msgstr "วาดแบบขจัดรอยหยัก"
+
+#: u_translation.rsanychangeyou
+msgid "Any change you do here will be lost when the program restart."
+msgstr ""
 
 #: u_translation.rsapparent
 msgid "Apparent"
@@ -784,6 +800,10 @@ msgstr "แผนที่_"
 msgid "Check"
 msgstr "ตรวจสอบ"
 
+#: u_translation.rschecklist
+msgid "CheckList"
+msgstr ""
+
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
 msgstr "เลือกสีสำหรับชนิดของวัตถุ"
@@ -878,6 +898,10 @@ msgstr "ความอิ่มตัวสี"
 
 #: u_translation.rscolumns
 msgid "Columns"
+msgstr ""
+
+#: u_translation.rscombobox
+msgid "Combo box"
 msgstr ""
 
 #: u_translation.rscomet
@@ -1595,6 +1619,14 @@ msgstr "อย่าเปลี่ยนแปลงหากคุณไม่
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "ไม่ต้องกรองวัตถุเมซีเย"
+
+#: u_translation.rsdontforgetto
+msgid "Don't forget to save to a new file!"
+msgstr ""
+
+#: u_translation.rsdontforgetto2
+msgid "Don't forget to save the program configuration!"
+msgstr ""
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2488,6 +2520,10 @@ msgstr ""
 msgid "If it is not installed try the following depending on your system:"
 msgstr ""
 
+#: u_translation.rsifyouneedtoc
+msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "ส่วนสว่าง"
@@ -2867,6 +2903,10 @@ msgstr "ความหนาของเส้น "
 #: u_translation.rslinkallchart
 msgid "Link all charts"
 msgstr "เชื่อมโยงแผนที่ทั้งหมด"
+
+#: u_translation.rslist
+msgid "List"
+msgstr ""
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
@@ -3780,6 +3820,10 @@ msgstr "ที่จัดเก็บแฟ้ม:"
 msgid "Path width"
 msgstr "ความกว้างของเงา"
 
+#: u_translation.rspause
+msgid "Pause"
+msgstr ""
+
 #: u_translation.rspec
 msgid "PEC"
 msgstr ""
@@ -4340,6 +4384,10 @@ msgstr "โหลดใหม่"
 msgid "Reload %s for current chart"
 msgstr "โหลด %s ใหม่ สำหรับแผนที่ที่ใช้งานอยู่"
 
+#: u_translation.rsremoveallbre
+msgid "Remove all breakpoints"
+msgstr ""
+
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
 msgstr "ลบวงทั้งหมด"
@@ -4483,6 +4531,10 @@ msgstr "การหมุน"
 #: u_translation.rsrows
 msgid "Rows"
 msgstr "แถว"
+
+#: u_translation.rsrun
+msgid "Run"
+msgstr ""
 
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
@@ -5248,6 +5300,14 @@ msgstr "สถานะ"
 msgid "Status bar"
 msgstr "แถบสถานะ"
 
+#: u_translation.rsstepinto
+msgid "Step Into"
+msgstr ""
+
+#: u_translation.rsstepover
+msgid "Step Over"
+msgstr ""
+
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
 msgstr ""
@@ -5364,6 +5424,14 @@ msgstr "ไม่มีบริการ TCP/IP"
 msgid "Telescope"
 msgstr "กล้องโทรทรรศน์"
 
+#: u_translation.rstelescopecon
+msgid "Telescope connected"
+msgstr ""
+
+#: u_translation.rstelescopedis
+msgid "Telescope disconnected"
+msgstr ""
+
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
 msgstr "ความยาวโฟัสของกล้อง"
@@ -5447,6 +5515,10 @@ msgstr "พบว่าแฟ้มนี้ไม่ใช่แฟ้ม MPCOR
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
 msgstr "โปรแกรมนี้เป็นซอฟต์แวร์เสรี คุณสามารถแจกจ่าย และ/หรือดัดแปลงภายใต้ข้อกำหนดในสัญญาอนุญาตสาธารณะทั่วไปของกนู (GNU General Public License)"
+
+#: u_translation.rsthisscriptis
+msgid "This script is maintained within the software distribution."
+msgstr ""
 
 #: u_translation.rsthursday
 msgid "Thu."

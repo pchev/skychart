@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-17 19:00+0000\n"
-"PO-Revision-Date: 2014-05-13 16:24+0000\n"
+"POT-Creation-Date: 2014-06-07 19:36+0000\n"
+"PO-Revision-Date: 2014-05-25 09:59+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-17 19:21+0000\n"
-"X-Generator: Launchpad (build 17007)\n"
+"X-Launchpad-Export-Date: 2014-06-07 19:48+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -32,6 +32,10 @@ msgstr "732 (recomendado hasta 5.000.000 de objetos)"
 #: u_translation.rs9537largerda
 msgid "9537 (larger datasets)"
 msgstr "9537 (conjuntos de datos mayores)"
+
+#: u_translation.rsabandonyourc
+msgid "Abandon your changes?"
+msgstr ""
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
@@ -108,6 +112,14 @@ msgstr "Var"
 #: u_translation.rsaction
 msgid "Action"
 msgstr "Acción"
+
+#: u_translation.rsactivatethet
+msgid "Activate the timer event when hidden"
+msgstr ""
+
+#: u_translation.rsactivation
+msgid "Activation"
+msgstr ""
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -268,6 +280,10 @@ msgstr "Contraseña anónima"
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
 msgstr "Trazado anti alias"
+
+#: u_translation.rsanychangeyou
+msgid "Any change you do here will be lost when the program restart."
+msgstr ""
 
 #: u_translation.rsapparent
 msgid "Apparent"
@@ -579,7 +595,7 @@ msgstr "Pero nunca de magnitud inferior a"
 
 #: u_translation.rsbutton
 msgid "Button"
-msgstr ""
+msgstr "Botón"
 
 #: u_translation.rsby
 msgid "by"
@@ -635,7 +651,7 @@ msgstr "No se puede escribir en"
 
 #: u_translation.rscaption
 msgid "Caption"
-msgstr ""
+msgstr "Epígrafe"
 
 #: u_translation.rscartesian
 msgid "Cartesian"
@@ -767,7 +783,7 @@ msgstr "Leyenda de la carta"
 
 #: u_translation.rschartrefresh
 msgid "Chart refresh"
-msgstr ""
+msgstr "Refrescar carta"
 
 #: u_translation.rscharts
 msgid "Charts"
@@ -784,6 +800,10 @@ msgstr "Carta_"
 #: u_translation.rscheck
 msgid "Check"
 msgstr "Marcar"
+
+#: u_translation.rschecklist
+msgid "CheckList"
+msgstr ""
 
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
@@ -811,7 +831,7 @@ msgstr "Borrar"
 
 #: u_translation.rsclearall
 msgid "Clear all"
-msgstr ""
+msgstr "Borrar todo"
 
 #: u_translation.rscleartarget
 msgid "Clear Target"
@@ -879,6 +899,10 @@ msgstr "Saturación del color"
 
 #: u_translation.rscolumns
 msgid "Columns"
+msgstr "Columnas"
+
+#: u_translation.rscombobox
+msgid "Combo box"
 msgstr ""
 
 #: u_translation.rscomet
@@ -1391,7 +1415,7 @@ msgstr "Eliminar"
 
 #: u_translation.rsdeleteallthe
 msgid "Delete %s, all the child nodes and the scripts?"
-msgstr ""
+msgstr "¿Borrar %s, todos sus nodos hijo y los guiones?"
 
 #: u_translation.rsdeletecomple
 msgid "Delete completed"
@@ -1598,6 +1622,14 @@ msgstr "¡No cambie nada aquí si no está seguro de lo que hace!"
 msgid "Do not filter Messier objects"
 msgstr "No filtrar objetos Messier"
 
+#: u_translation.rsdontforgetto
+msgid "Don't forget to save to a new file!"
+msgstr ""
+
+#: u_translation.rsdontforgetto2
+msgid "Don't forget to save the program configuration!"
+msgstr ""
+
 #: u_translation.rsdot1
 msgid "Dot"
 msgstr "Punto"
@@ -1676,7 +1708,7 @@ msgstr "Trazar como estrella"
 
 #: u_translation.rsdrawing
 msgid "Drawing"
-msgstr ""
+msgstr "Dibujo"
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
@@ -1788,7 +1820,7 @@ msgstr "Editar los tipos de objetos"
 
 #: u_translation.rseditscript
 msgid "Edit Script"
-msgstr ""
+msgstr "Editar guión"
 
 #: u_translation.rsedittimeincr
 msgid "Edit time increment"
@@ -1948,7 +1980,7 @@ msgstr "Crepúsculo vespertino"
 
 #: u_translation.rsevent
 msgid "Event"
-msgstr ""
+msgstr "Acontecimiento"
 
 #: u_translation.rsevery
 msgid "every "
@@ -2340,7 +2372,7 @@ msgstr "Espaciado de la cuadrícula"
 
 #: u_translation.rsgroup
 msgid "Group"
-msgstr ""
+msgstr "Grupo"
 
 #: u_translation.rsgrstransit
 msgid "GRS transit"
@@ -2490,6 +2522,10 @@ msgstr "Hora mostrada en el icono"
 msgid "If it is not installed try the following depending on your system:"
 msgstr "Si no está instalado, intente lo siguiente dependiendo de su sistema:"
 
+#: u_translation.rsifyouneedtoc
+msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Ilum."
@@ -2596,7 +2632,7 @@ msgstr "Iniciar"
 
 #: u_translation.rsinitalisatio
 msgid "Initalisation"
-msgstr ""
+msgstr "Iniciación"
 
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
@@ -2870,6 +2906,10 @@ msgstr "Ancho de Línea "
 msgid "Link all charts"
 msgstr "Enlazar todas las cartas"
 
+#: u_translation.rslist
+msgid "List"
+msgstr ""
+
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
 msgstr "Escuchar en el puerto: %s"
@@ -3124,7 +3164,7 @@ msgstr "Posición promedio"
 
 #: u_translation.rsmemo
 msgid "Memo"
-msgstr ""
+msgstr "Nota"
 
 #: u_translation.rsmercator
 msgid "Mercator"
@@ -3544,7 +3584,7 @@ msgstr "Ajustes del filtro de objetos"
 
 #: u_translation.rsobjectidenti
 msgid "Object identification"
-msgstr ""
+msgstr "Identificación de objeto"
 
 #: u_translation.rsobjectlist
 msgid "Object list"
@@ -3781,6 +3821,10 @@ msgstr "Ruta para guardar el archivo:"
 #: u_translation.rspathwidth
 msgid "Path width"
 msgstr "Ancho de ruta"
+
+#: u_translation.rspause
+msgid "Pause"
+msgstr ""
 
 #: u_translation.rspec
 msgid "PEC"
@@ -4342,6 +4386,10 @@ msgstr "Recargar"
 msgid "Reload %s for current chart"
 msgstr "Recargar %s para la carta actual"
 
+#: u_translation.rsremoveallbre
+msgid "Remove all breakpoints"
+msgstr ""
+
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
 msgstr "Eliminar todos los circulos"
@@ -4486,6 +4534,10 @@ msgstr "Rotación"
 msgid "Rows"
 msgstr "Filas"
 
+#: u_translation.rsrun
+msgid "Run"
+msgstr ""
+
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
 msgstr "Confirmación SAMP"
@@ -4588,11 +4640,11 @@ msgstr "Scope Avnz"
 
 #: u_translation.rsscript
 msgid "Script"
-msgstr ""
+msgstr "Guión"
 
 #: u_translation.rsscripteditor
 msgid "Script editor"
-msgstr ""
+msgstr "Editor de guiones"
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
@@ -5128,7 +5180,7 @@ msgstr "Sur"
 
 #: u_translation.rsspacer
 msgid "Spacer"
-msgstr ""
+msgstr "Espaciador"
 
 #: u_translation.rsspectralclas
 msgid "Spectral class"
@@ -5250,6 +5302,14 @@ msgstr "Estado"
 msgid "Status bar"
 msgstr "Barra de estado"
 
+#: u_translation.rsstepinto
+msgid "Step Into"
+msgstr ""
+
+#: u_translation.rsstepover
+msgid "Step Over"
+msgstr ""
+
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
 msgstr "Pasos (Alfa)"
@@ -5366,13 +5426,21 @@ msgstr "Servicio TCP/IP no disponible."
 msgid "Telescope"
 msgstr "Telescopio"
 
+#: u_translation.rstelescopecon
+msgid "Telescope connected"
+msgstr ""
+
+#: u_translation.rstelescopedis
+msgid "Telescope disconnected"
+msgstr ""
+
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
 msgstr "Longitud focal del telescopio"
 
 #: u_translation.rstelescopemov
 msgid "Telescope move"
-msgstr ""
+msgstr "Movimiento telescopio"
 
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
@@ -5450,6 +5518,10 @@ msgstr "El archivo no se reconoce como un archivo MPCORB."
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
 msgstr "Este programa es freeware; puede distribuirlo y/o modificarlo bajo los términos de la licencia GNU (General Public License)"
 
+#: u_translation.rsthisscriptis
+msgid "This script is maintained within the software distribution."
+msgstr ""
+
 #: u_translation.rsthursday
 msgid "Thu."
 msgstr "jue."
@@ -5472,7 +5544,7 @@ msgstr "Plazo [ms]"
 
 #: u_translation.rstimer
 msgid "Timer"
-msgstr ""
+msgstr "Temporizador"
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
@@ -5516,7 +5588,7 @@ msgstr "Editor barra de herramientas"
 
 #: u_translation.rstoolbox
 msgid "Tool box"
-msgstr ""
+msgstr "Caja de herramientas"
 
 #: u_translation.rstools
 msgid "Tools"

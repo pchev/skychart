@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-17 19:00+0000\n"
+"POT-Creation-Date: 2014-06-07 19:36+0000\n"
 "PO-Revision-Date: 2014-05-01 08:34+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-17 19:21+0000\n"
-"X-Generator: Launchpad (build 17007)\n"
+"X-Launchpad-Export-Date: 2014-06-07 19:48+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -31,6 +31,10 @@ msgstr "732 (συνιστώμενο έως 5,000,000 αντικείμενα)"
 #: u_translation.rs9537largerda
 msgid "9537 (larger datasets)"
 msgstr "9537 (μεγαλύτερα dataset)"
+
+#: u_translation.rsabandonyourc
+msgid "Abandon your changes?"
+msgstr ""
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
@@ -107,6 +111,14 @@ msgstr "Μετ"
 #: u_translation.rsaction
 msgid "Action"
 msgstr "Ενέργεια"
+
+#: u_translation.rsactivatethet
+msgid "Activate the timer event when hidden"
+msgstr ""
+
+#: u_translation.rsactivation
+msgid "Activation"
+msgstr ""
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -268,6 +280,10 @@ msgstr "Κωδικός για ανώνυμο"
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
 msgstr "Σχεδιασμός με anti-aliasing"
+
+#: u_translation.rsanychangeyou
+msgid "Any change you do here will be lost when the program restart."
+msgstr ""
 
 #: u_translation.rsapparent
 msgid "Apparent"
@@ -795,6 +811,10 @@ msgstr "Χάρτης_"
 msgid "Check"
 msgstr "Έλεγχος"
 
+#: u_translation.rschecklist
+msgid "CheckList"
+msgstr ""
+
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
 msgstr "Επιλογή χρώματος για τα είδη αντικειμένων"
@@ -893,6 +913,10 @@ msgstr "Κορεσμός χρώματος"
 
 #: u_translation.rscolumns
 msgid "Columns"
+msgstr ""
+
+#: u_translation.rscombobox
+msgid "Combo box"
 msgstr ""
 
 #: u_translation.rscomet
@@ -1627,6 +1651,14 @@ msgstr ""
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "Να μην φιλτράρονται τα αντικείμενα Messier"
+
+#: u_translation.rsdontforgetto
+msgid "Don't forget to save to a new file!"
+msgstr ""
+
+#: u_translation.rsdontforgetto2
+msgid "Don't forget to save the program configuration!"
+msgstr ""
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2541,6 +2573,10 @@ msgstr "Προβολή εικονιδίου χρόνου"
 msgid "If it is not installed try the following depending on your system:"
 msgstr ""
 
+#: u_translation.rsifyouneedtoc
+msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Φωτισ."
@@ -2920,6 +2956,10 @@ msgstr "Πάχος γραμμής "
 #: u_translation.rslinkallchart
 msgid "Link all charts"
 msgstr "Σύνδεση όλων των χαρτών"
+
+#: u_translation.rslist
+msgid "List"
+msgstr ""
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
@@ -3838,6 +3878,10 @@ msgstr "Διαδρομή αποθήκευσης αρχείου"
 msgid "Path width"
 msgstr "Πλάτος μονοπατιού"
 
+#: u_translation.rspause
+msgid "Pause"
+msgstr ""
+
 #: u_translation.rspec
 msgid "PEC"
 msgstr "PEC"
@@ -4398,6 +4442,10 @@ msgstr "Επαναφόρτωση"
 msgid "Reload %s for current chart"
 msgstr ""
 
+#: u_translation.rsremoveallbre
+msgid "Remove all breakpoints"
+msgstr ""
+
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
 msgstr "Αφαίρεση όλων των κύκλων"
@@ -4541,6 +4589,10 @@ msgstr "Περιστροφή"
 #: u_translation.rsrows
 msgid "Rows"
 msgstr "Σειρές"
+
+#: u_translation.rsrun
+msgid "Run"
+msgstr ""
 
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
@@ -5323,6 +5375,14 @@ msgstr "Κατάσταση"
 msgid "Status bar"
 msgstr "Γραμμή κατάστασης"
 
+#: u_translation.rsstepinto
+msgid "Step Into"
+msgstr ""
+
+#: u_translation.rsstepover
+msgid "Step Over"
+msgstr ""
+
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
 msgstr "Βήματα (Alpha)"
@@ -5442,6 +5502,14 @@ msgstr "Υπηρεσία TCP/IP μη διαθέσιμη."
 msgid "Telescope"
 msgstr "Τηλεσκόπιο"
 
+#: u_translation.rstelescopecon
+msgid "Telescope connected"
+msgstr ""
+
+#: u_translation.rstelescopedis
+msgid "Telescope disconnected"
+msgstr ""
+
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
 msgstr "Εστιακό μήκος τηλεσκοπίου"
@@ -5526,6 +5594,10 @@ msgstr ""
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
 msgstr "Αυτό το πρόγραμα είναι δωρεάν λογισμικό. Μπορείτε να το αναδιανείμετε και να το τροποποιήσετε σύμφωνα με την άδεια GNU General Public License."
+
+#: u_translation.rsthisscriptis
+msgid "This script is maintained within the software distribution."
+msgstr ""
 
 #: u_translation.rsthursday
 msgid "Thu."

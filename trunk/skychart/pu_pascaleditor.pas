@@ -137,6 +137,12 @@ begin
   Button1.Caption:=rsSave;
   Button2.Caption:=rsCancel;
   Button3.Caption:=rsHelp;
+  ToolButton1.Hint:=rsRun;
+  ToolButton2.Hint:=rsPause;
+  ToolButton3.Hint:=rsStop;
+  ToolButton4.Hint:=rsStepInto;
+  ToolButton5.Hint:=rsStepOver;
+  ToolButton6.Hint:=rsRemoveAllBre;
   SetHelp(self,hlpScriptEditor);
 end;
 
@@ -180,7 +186,7 @@ DebugMemo.Clear;
 Fdbgscr.Script.Assign(SynEdit1.Lines);
 ok:=Fdbgscr.Compile;
 if ok then begin
-  DebugMemo.Lines.Add('running');
+  DebugMemo.Lines.Add('running...');
   Application.ProcessMessages;
   Fdbgscr.Exec.DebugEnabled:=true;
   Fdbgscr.StepInto;
@@ -245,7 +251,7 @@ end;
 procedure Tf_pascaleditor.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
 if SynEdit1.Modified and (ModalResult<>mrOK) then begin
-   CanClose:=(MessageDlg('Abandon your changes?',mtConfirmation,mbYesNo,0)=mrYes);
+   CanClose:=(MessageDlg(rsAbandonYourC, mtConfirmation, mbYesNo, 0)=mrYes);
 end;
 end;
 
@@ -358,7 +364,7 @@ procedure Tf_pascaleditor.DebugBreakpoint(Sender: TObject; const fn: String; Pos
 begin
  FDebugResume:=false;
  Fdbgscr.Pause;
- DebugMemo.Lines.Add('break row:'+inttostr(row)+' col:'+inttostr(col));
+ DebugMemo.Lines.Add('breakpoint row:'+inttostr(row)+' col:'+inttostr(col));
  FActiveLine := Row;
  if (FActiveLine < SynEdit1.TopLine +2) or (FActiveLine > SynEdit1.TopLine + SynEdit1.LinesInWindow -2) then
  begin

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-05-17 19:00+0000\n"
+"POT-Creation-Date: 2014-06-07 19:36+0000\n"
 "PO-Revision-Date: 2013-11-14 18:05+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-17 19:20+0000\n"
-"X-Generator: Launchpad (build 17007)\n"
+"X-Launchpad-Export-Date: 2014-06-07 19:49+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -30,6 +30,10 @@ msgstr ""
 
 #: u_translation.rs9537largerda
 msgid "9537 (larger datasets)"
+msgstr ""
+
+#: u_translation.rsabandonyourc
+msgid "Abandon your changes?"
 msgstr ""
 
 #: u_translation.rsabbreviation
@@ -106,6 +110,14 @@ msgstr ""
 
 #: u_translation.rsaction
 msgid "Action"
+msgstr ""
+
+#: u_translation.rsactivatethet
+msgid "Activate the timer event when hidden"
+msgstr ""
+
+#: u_translation.rsactivation
+msgid "Activation"
 msgstr ""
 
 #: u_translation.rsactualsystem
@@ -266,6 +278,10 @@ msgstr ""
 
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
+msgstr ""
+
+#: u_translation.rsanychangeyou
+msgid "Any change you do here will be lost when the program restart."
 msgstr ""
 
 #: u_translation.rsapparent
@@ -784,6 +800,10 @@ msgstr ""
 msgid "Check"
 msgstr ""
 
+#: u_translation.rschecklist
+msgid "CheckList"
+msgstr ""
+
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
 msgstr ""
@@ -878,6 +898,10 @@ msgstr ""
 
 #: u_translation.rscolumns
 msgid "Columns"
+msgstr ""
+
+#: u_translation.rscombobox
+msgid "Combo box"
 msgstr ""
 
 #: u_translation.rscomet
@@ -1594,6 +1618,14 @@ msgstr ""
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
+msgstr ""
+
+#: u_translation.rsdontforgetto
+msgid "Don't forget to save to a new file!"
+msgstr ""
+
+#: u_translation.rsdontforgetto2
+msgid "Don't forget to save the program configuration!"
 msgstr ""
 
 #: u_translation.rsdot1
@@ -2488,6 +2520,10 @@ msgstr ""
 msgid "If it is not installed try the following depending on your system:"
 msgstr ""
 
+#: u_translation.rsifyouneedtoc
+msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr ""
@@ -2866,6 +2902,10 @@ msgstr ""
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
+msgstr ""
+
+#: u_translation.rslist
+msgid "List"
 msgstr ""
 
 #: u_translation.rslistenonport
@@ -3780,6 +3820,10 @@ msgstr ""
 msgid "Path width"
 msgstr ""
 
+#: u_translation.rspause
+msgid "Pause"
+msgstr ""
+
 #: u_translation.rspec
 msgid "PEC"
 msgstr ""
@@ -4340,6 +4384,10 @@ msgstr ""
 msgid "Reload %s for current chart"
 msgstr ""
 
+#: u_translation.rsremoveallbre
+msgid "Remove all breakpoints"
+msgstr ""
+
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
 msgstr ""
@@ -4482,6 +4530,10 @@ msgstr ""
 
 #: u_translation.rsrows
 msgid "Rows"
+msgstr ""
+
+#: u_translation.rsrun
+msgid "Run"
 msgstr ""
 
 #: u_translation.rssampconfirma
@@ -5248,6 +5300,14 @@ msgstr ""
 msgid "Status bar"
 msgstr ""
 
+#: u_translation.rsstepinto
+msgid "Step Into"
+msgstr ""
+
+#: u_translation.rsstepover
+msgid "Step Over"
+msgstr ""
+
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
 msgstr ""
@@ -5364,6 +5424,14 @@ msgstr ""
 msgid "Telescope"
 msgstr ""
 
+#: u_translation.rstelescopecon
+msgid "Telescope connected"
+msgstr ""
+
+#: u_translation.rstelescopedis
+msgid "Telescope disconnected"
+msgstr ""
+
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
 msgstr ""
@@ -5446,6 +5514,10 @@ msgstr ""
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
+msgstr ""
+
+#: u_translation.rsthisscriptis
+msgid "This script is maintained within the software distribution."
 msgstr ""
 
 #: u_translation.rsthursday
