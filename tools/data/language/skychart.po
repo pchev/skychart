@@ -6002,3 +6002,75 @@ msgstr ""
 msgid "Delete %s, all the child nodes and the scripts?"
 msgstr ""
 
+#: u_translation:rslist
+msgid "List"
+msgstr ""
+
+#: u_translation:rscombobox
+msgid "Combo box"
+msgstr ""
+
+#: u_translation:rsactivatethet
+msgid "Activate the timer event when hidden"
+msgstr ""
+
+#: u_translation:rsactivation
+msgid "Activation"
+msgstr ""
+
+#: u_translation:rstelescopecon
+msgid "Telescope connected"
+msgstr ""
+
+#: u_translation:rstelescopedis
+msgid "Telescope disconnected"
+msgstr ""
+
+#: u_translation:rschecklist
+msgid "CheckList"
+msgstr ""
+
+#: u_translation:rsdontforgetto
+msgid "Don't forget to save to a new file!"
+msgstr ""
+
+#: u_translation:rsdontforgetto2
+msgid "Don't forget to save the program configuration!"
+msgstr ""
+
+#: u_translation:rsthisscriptis
+msgid "This script is maintained within the software distribution."
+msgstr ""
+
+#: u_translation:rsanychangeyou
+msgid "Any change you do here will be lost when the program restart."
+msgstr ""
+
+#: u_translation:rsifyouneedtoc
+msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
+msgstr ""
+
+#: u_translation:rsrun
+msgid "Run"
+msgstr ""
+
+#: u_translation:rspause
+msgid "Pause"
+msgstr ""
+
+#: u_translation:rsstepinto
+msgid "Step Into"
+msgstr ""
+
+#: u_translation:rsstepover
+msgid "Step Over"
+msgstr ""
+
+#: u_translation:rsremoveallbre
+msgid "Remove all breakpoints"
+msgstr ""
+
+#: u_translation:rsabandonyourc
+msgid "Abandon your changes?"
+msgstr ""
+

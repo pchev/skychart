@@ -287,6 +287,7 @@ begin
   RadioButtonEdit.Caption:=rsEdit;
   RadioButtonMemo.Caption:=rsMemo;
   RadioButtonList.Caption:=rsList;
+  RadioButtonCheckList.Caption:=rsCheckList;
   RadioButtonCombo.Caption:=rsComboBox;
   RadioButtonSpacer.Caption:=rsSpacer;
   RadioButtonEvent.Caption:=rsEvent;
@@ -1139,8 +1140,8 @@ evscr[ord(evActivation)].Execute;
 TelescopeConnectEvent(TelescopeChartName,FTelescopeConnected);
 if Assigned(FonApply) then FonApply(self);
 if CompileMemo.Lines.Count=0 then begin
-  if tag<ReservedScript then CompileMemo.Lines.Add('Don''t forget to save to a new file!')
-     else CompileMemo.Lines.Add('Don''t forget to save the program configuration!');
+  if tag<ReservedScript then CompileMemo.Lines.Add(rsDonTForgetTo)
+     else CompileMemo.Lines.Add(rsDonTForgetTo2);
 end;
 end;
 
@@ -1651,10 +1652,10 @@ procedure Tf_scriptengine.FormShow(Sender: TObject);
 begin
 CompileMemo.Clear;
 if Tag < ReservedScript then begin
-  CompileMemo.Lines.Add('WARNING!');
-  CompileMemo.Lines.Add('This script is maintained whithin the software distribution.');
-  CompileMemo.Lines.Add('Any change you do here will be lost when the program restart.');
-  CompileMemo.Lines.Add('If you need to change it use the Save/Load button to assign this script on a free F key.');
+  CompileMemo.Lines.Add(rsWarning);
+  CompileMemo.Lines.Add(rsThisScriptIs);
+  CompileMemo.Lines.Add(rsAnyChangeYou);
+  CompileMemo.Lines.Add(rsIfYouNeedToC);
 end;
 end;
 

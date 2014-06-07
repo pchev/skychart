@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-17 19:00+0000\n"
+"POT-Creation-Date: 2014-06-07 19:36+0000\n"
 "PO-Revision-Date: 2013-11-17 14:47+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-17 19:21+0000\n"
-"X-Generator: Launchpad (build 17007)\n"
+"X-Launchpad-Export-Date: 2014-06-07 19:49+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -33,6 +33,10 @@ msgstr "732（建議最多5'000'000天體）"
 #: u_translation.rs9537largerda
 msgid "9537 (larger datasets)"
 msgstr "9537（更多資料）"
+
+#: u_translation.rsabandonyourc
+msgid "Abandon your changes?"
+msgstr ""
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
@@ -109,6 +113,14 @@ msgstr ""
 #: u_translation.rsaction
 msgid "Action"
 msgstr "活動"
+
+#: u_translation.rsactivatethet
+msgid "Activate the timer event when hidden"
+msgstr ""
+
+#: u_translation.rsactivation
+msgid "Activation"
+msgstr ""
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -268,6 +280,10 @@ msgstr "匿名密碼"
 
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
+msgstr ""
+
+#: u_translation.rsanychangeyou
+msgid "Any change you do here will be lost when the program restart."
 msgstr ""
 
 #: u_translation.rsapparent
@@ -786,6 +802,10 @@ msgstr "星圖_"
 msgid "Check"
 msgstr "檢查"
 
+#: u_translation.rschecklist
+msgid "CheckList"
+msgstr ""
+
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
 msgstr "選擇天體類型顏色"
@@ -880,6 +900,10 @@ msgstr "色飽和度"
 
 #: u_translation.rscolumns
 msgid "Columns"
+msgstr ""
+
+#: u_translation.rscombobox
+msgid "Combo box"
 msgstr ""
 
 #: u_translation.rscomet
@@ -1597,6 +1621,14 @@ msgstr ""
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
+msgstr ""
+
+#: u_translation.rsdontforgetto
+msgid "Don't forget to save to a new file!"
+msgstr ""
+
+#: u_translation.rsdontforgetto2
+msgid "Don't forget to save the program configuration!"
 msgstr ""
 
 #: u_translation.rsdot1
@@ -2491,6 +2523,10 @@ msgstr "圖示顯示時間"
 msgid "If it is not installed try the following depending on your system:"
 msgstr ""
 
+#: u_translation.rsifyouneedtoc
+msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "照明率"
@@ -2870,6 +2906,10 @@ msgstr "線寬 "
 #: u_translation.rslinkallchart
 msgid "Link all charts"
 msgstr "連接所有星圖"
+
+#: u_translation.rslist
+msgid "List"
+msgstr ""
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
@@ -3783,6 +3823,10 @@ msgstr "儲存檔案到："
 msgid "Path width"
 msgstr "路徑寬度"
 
+#: u_translation.rspause
+msgid "Pause"
+msgstr ""
+
 #: u_translation.rspec
 msgid "PEC"
 msgstr ""
@@ -4343,6 +4387,10 @@ msgstr ""
 msgid "Reload %s for current chart"
 msgstr ""
 
+#: u_translation.rsremoveallbre
+msgid "Remove all breakpoints"
+msgstr ""
+
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
 msgstr "移去所有尋星鏡圓形"
@@ -4485,6 +4533,10 @@ msgstr "自轉"
 
 #: u_translation.rsrows
 msgid "Rows"
+msgstr ""
+
+#: u_translation.rsrun
+msgid "Run"
 msgstr ""
 
 #: u_translation.rssampconfirma
@@ -5251,6 +5303,14 @@ msgstr ""
 msgid "Status bar"
 msgstr "狀態欄"
 
+#: u_translation.rsstepinto
+msgid "Step Into"
+msgstr ""
+
+#: u_translation.rsstepover
+msgid "Step Over"
+msgstr ""
+
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
 msgstr ""
@@ -5367,6 +5427,14 @@ msgstr "TCP/IP 伺服器不能用"
 msgid "Telescope"
 msgstr "望遠鏡"
 
+#: u_translation.rstelescopecon
+msgid "Telescope connected"
+msgstr ""
+
+#: u_translation.rstelescopedis
+msgid "Telescope disconnected"
+msgstr ""
+
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
 msgstr ""
@@ -5450,6 +5518,10 @@ msgstr "此檔案確認非 MPCORB 檔案。"
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
 msgstr "本程式是自由軟體，你可以根據 GNU 通用公共許可證條款修改和/或再發布。"
+
+#: u_translation.rsthisscriptis
+msgid "This script is maintained within the software distribution."
+msgstr ""
 
 #: u_translation.rsthursday
 msgid "Thu."

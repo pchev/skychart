@@ -1534,6 +1534,21 @@ resourcestring
   rsActivation = 'Activation';
   rsTelescopeCon = 'Telescope connected';
   rsTelescopeDis = 'Telescope disconnected';
+  rsCheckList = 'CheckList';
+  rsDonTForgetTo = 'Don''t forget to save to a new file!';
+  rsDonTForgetTo2 = 'Don''t forget to save the program configuration!';
+  rsThisScriptIs = 'This script is maintained within the software '
+    +'distribution.';
+  rsAnyChangeYou = 'Any change you do here will be lost when the program '
+    +'restart.';
+  rsIfYouNeedToC = 'If you need to change it, use the Save/Load button to '
+    +'assign this script on a free tab.';
+  rsRun = 'Run';
+  rsPause = 'Pause';
+  rsStepInto = 'Step Into';
+  rsStepOver = 'Step Over';
+  rsRemoveAllBre = 'Remove all breakpoints';
+  rsAbandonYourC = 'Abandon your changes?';
 
 implementation
 

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-17 19:00+0000\n"
+"POT-Creation-Date: 2014-06-07 19:36+0000\n"
 "PO-Revision-Date: 2014-05-01 08:35+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-17 19:20+0000\n"
-"X-Generator: Launchpad (build 17007)\n"
+"X-Launchpad-Export-Date: 2014-06-07 19:48+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -32,6 +32,10 @@ msgstr "732 (5 000 000 objektumig ajánlott)"
 #| msgid "9537 (larger dataset)"
 msgid "9537 (larger datasets)"
 msgstr "9537 (legnagyobb adathalmaz)"
+
+#: u_translation.rsabandonyourc
+msgid "Abandon your changes?"
+msgstr ""
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
@@ -108,6 +112,14 @@ msgstr "Var"
 #: u_translation.rsaction
 msgid "Action"
 msgstr "Művelet"
+
+#: u_translation.rsactivatethet
+msgid "Activate the timer event when hidden"
+msgstr ""
+
+#: u_translation.rsactivation
+msgid "Activation"
+msgstr ""
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -277,6 +289,10 @@ msgstr "Anonymous jelszó"
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
 msgstr "antialiasing"
+
+#: u_translation.rsanychangeyou
+msgid "Any change you do here will be lost when the program restart."
+msgstr ""
 
 #: u_translation.rsapparent
 msgid "Apparent"
@@ -826,6 +842,10 @@ msgstr "Térkép_"
 msgid "Check"
 msgstr "Ellenőriz"
 
+#: u_translation.rschecklist
+msgid "CheckList"
+msgstr ""
+
 #: u_translation.rschoosecolour
 #| msgid "Choose colours for object type"
 msgid "Choose colours for the object types"
@@ -930,6 +950,10 @@ msgstr "Szín szaturáció"
 
 #: u_translation.rscolumns
 msgid "Columns"
+msgstr ""
+
+#: u_translation.rscombobox
+msgid "Combo box"
 msgstr ""
 
 #: u_translation.rscomet
@@ -1693,6 +1717,14 @@ msgstr "Itt ne változtasson semmit, ha nem biztos benne."
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "A Messier objektumokat ne szűrje"
+
+#: u_translation.rsdontforgetto
+msgid "Don't forget to save to a new file!"
+msgstr ""
+
+#: u_translation.rsdontforgetto2
+msgid "Don't forget to save the program configuration!"
+msgstr ""
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2633,6 +2665,10 @@ msgstr "Idő megjelenítése a tálcán"
 msgid "If it is not installed try the following depending on your system:"
 msgstr "Ha nincs felrakva, próbálja meg a következők valamelyikét:"
 
+#: u_translation.rsifyouneedtoc
+msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Megvil."
@@ -3038,6 +3074,10 @@ msgstr "Vonalvastagság "
 #| msgid "Link All Chart"
 msgid "Link all charts"
 msgstr "Térképek csatolása"
+
+#: u_translation.rslist
+msgid "List"
+msgstr ""
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
@@ -4005,6 +4045,10 @@ msgstr "A file mentésének elérési útvonala:"
 msgid "Path width"
 msgstr "Út szélessége"
 
+#: u_translation.rspause
+msgid "Pause"
+msgstr ""
+
 #: u_translation.rspec
 msgid "PEC"
 msgstr "PEC"
@@ -4587,6 +4631,10 @@ msgstr "Frissítés"
 msgid "Reload %s for current chart"
 msgstr ""
 
+#: u_translation.rsremoveallbre
+msgid "Remove all breakpoints"
+msgstr ""
+
 #: u_translation.rsremoveallcir
 #| msgid "Remove All Circles"
 msgid "Remove all circles"
@@ -4739,6 +4787,10 @@ msgstr "Forgatás"
 #: u_translation.rsrows
 msgid "Rows"
 msgstr "Sorok"
+
+#: u_translation.rsrun
+msgid "Run"
+msgstr ""
 
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
@@ -5562,6 +5614,14 @@ msgstr "Állapot"
 msgid "Status bar"
 msgstr "Állapotsor"
 
+#: u_translation.rsstepinto
+msgid "Step Into"
+msgstr ""
+
+#: u_translation.rsstepover
+msgid "Step Over"
+msgstr ""
+
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
 msgstr ""
@@ -5685,6 +5745,14 @@ msgstr "A TCP/IP szolgáltatás nem elérhető"
 msgid "Telescope"
 msgstr "Távcső"
 
+#: u_translation.rstelescopecon
+msgid "Telescope connected"
+msgstr ""
+
+#: u_translation.rstelescopedis
+msgid "Telescope disconnected"
+msgstr ""
+
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
 msgstr ""
@@ -5770,6 +5838,10 @@ msgstr "A fájl nem MPCORB formátúmú."
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
 msgstr "Ez a program szabad szoftver, továbbadhatod és/vagy módosíthatod a GNU Általános Nyilvános Licenc értelmében"
+
+#: u_translation.rsthisscriptis
+msgid "This script is maintained within the software distribution."
+msgstr ""
 
 #: u_translation.rsthursday
 msgid "Thu."

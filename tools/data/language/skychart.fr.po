@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-17 19:00+0000\n"
-"PO-Revision-Date: 2014-05-17 19:16+0000\n"
+"POT-Creation-Date: 2014-06-07 19:36+0000\n"
+"PO-Revision-Date: 2014-06-07 19:44+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-17 19:20+0000\n"
-"X-Generator: Launchpad (build 17007)\n"
+"X-Launchpad-Export-Date: 2014-06-07 19:48+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -32,6 +32,10 @@ msgstr "732 (recommandé jusqu'à 5'000'000 objets)"
 #: u_translation.rs9537largerda
 msgid "9537 (larger datasets)"
 msgstr "9537 (plus gros catalogues)"
+
+#: u_translation.rsabandonyourc
+msgid "Abandon your changes?"
+msgstr "Abandonner vos modifications?"
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
@@ -108,6 +112,14 @@ msgstr "Var"
 #: u_translation.rsaction
 msgid "Action"
 msgstr "Action"
+
+#: u_translation.rsactivatethet
+msgid "Activate the timer event when hidden"
+msgstr "Activer le timer quand le panneau est caché"
+
+#: u_translation.rsactivation
+msgid "Activation"
+msgstr "Activation"
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -268,6 +280,10 @@ msgstr "Mot de passe anonyme"
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
 msgstr "Dessin avec anti-alias"
+
+#: u_translation.rsanychangeyou
+msgid "Any change you do here will be lost when the program restart."
+msgstr "Tout changement que vous faites ici sera perdu lors du redémarrage du programme."
 
 #: u_translation.rsapparent
 msgid "Apparent"
@@ -786,6 +802,10 @@ msgstr "Carte_"
 msgid "Check"
 msgstr "Contrôle"
 
+#: u_translation.rschecklist
+msgid "CheckList"
+msgstr "Liste a cocher"
+
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
 msgstr "Choix de la couleur par type d'objet"
@@ -881,6 +901,10 @@ msgstr "Saturation de couleur"
 #: u_translation.rscolumns
 msgid "Columns"
 msgstr "Colonnes"
+
+#: u_translation.rscombobox
+msgid "Combo box"
+msgstr "Liste déroulante"
 
 #: u_translation.rscomet
 msgid "Comet"
@@ -1599,6 +1623,14 @@ msgstr "Ne changez rien si vous n'êtes pas sûr de ce que vous faites!"
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "Ne pas filtrer les objets Messier"
+
+#: u_translation.rsdontforgetto
+msgid "Don't forget to save to a new file!"
+msgstr "Ne pas oublier de sauvegarder dans un nouveau fichier!"
+
+#: u_translation.rsdontforgetto2
+msgid "Don't forget to save the program configuration!"
+msgstr "Ne pas oublier de sauvegarder la configuration du programme!"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2493,6 +2525,10 @@ msgstr "Affichage de l'heure dans l'icône"
 msgid "If it is not installed try the following depending on your system:"
 msgstr "Si il n'est pas installé, essayez les commandes suivantes selon votre système:"
 
+#: u_translation.rsifyouneedtoc
+msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
+msgstr "Si vous avez besoin de le changer, utilisez le bouton Enregister/Charger pour affecter ce script sur un onglet libre."
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Illum."
@@ -2872,6 +2908,10 @@ msgstr "Epaisseur de la ligne "
 #: u_translation.rslinkallchart
 msgid "Link all charts"
 msgstr "Lier toutes les cartes"
+
+#: u_translation.rslist
+msgid "List"
+msgstr "Liste"
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
@@ -3785,6 +3825,10 @@ msgstr "Chemin du fichier :"
 msgid "Path width"
 msgstr "Larg. ombre"
 
+#: u_translation.rspause
+msgid "Pause"
+msgstr "Pause"
+
 #: u_translation.rspec
 msgid "PEC"
 msgstr "PEC"
@@ -4346,6 +4390,10 @@ msgstr "Recharge"
 msgid "Reload %s for current chart"
 msgstr "Recharge %s pour la carte courante"
 
+#: u_translation.rsremoveallbre
+msgid "Remove all breakpoints"
+msgstr "Supprimer tous les points d'arrêt"
+
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
 msgstr "Supprime tous les cercles"
@@ -4489,6 +4537,10 @@ msgstr "Rotation"
 #: u_translation.rsrows
 msgid "Rows"
 msgstr "Lignes"
+
+#: u_translation.rsrun
+msgid "Run"
+msgstr "Exécuter"
 
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
@@ -5254,6 +5306,14 @@ msgstr "Etat"
 msgid "Status bar"
 msgstr "Barre d'état"
 
+#: u_translation.rsstepinto
+msgid "Step Into"
+msgstr "Pas à pas approfondi"
+
+#: u_translation.rsstepover
+msgid "Step Over"
+msgstr "Pas à pas"
+
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
 msgstr "Nombre de pas (alpha)"
@@ -5370,6 +5430,14 @@ msgstr "Les services TCP/IP ne sont pas disponibles."
 msgid "Telescope"
 msgstr "Télescope"
 
+#: u_translation.rstelescopecon
+msgid "Telescope connected"
+msgstr "Télescope connecté"
+
+#: u_translation.rstelescopedis
+msgid "Telescope disconnected"
+msgstr "Télescope déconnecté"
+
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
 msgstr "Focale du télescope"
@@ -5453,6 +5521,10 @@ msgstr "Ce fichier n'est pas reconnu comme un fichier MPCORB."
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
 msgstr "Ce programme est un logiciel libre; vous pouvez le redistribuer et/ou le modifier selon la license GNU GPL."
+
+#: u_translation.rsthisscriptis
+msgid "This script is maintained within the software distribution."
+msgstr "Ce script est maintenu dans la distribution du logiciel."
 
 #: u_translation.rsthursday
 msgid "Thu."
