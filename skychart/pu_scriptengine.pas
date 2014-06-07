@@ -2,6 +2,30 @@ unit pu_scriptengine;
 
 {$mode objfpc}{$H+}
 
+{
+Copyright (C) 2014 Patrick Chevalley
+
+http://www.ap-i.net
+pch@ap-i.net
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+}
+{
+ Script engine with specific function for Skychart
+}
+
 interface
 
 uses  u_translation, u_constant, u_projection, u_help, u_util, ActnList, pu_pascaleditor,
@@ -119,6 +143,8 @@ type
     { private declarations }
     FEditSurface: TPanel;
     FonApply: TNotifyEvent;
+    dbgscr: TPSScriptDebugger;
+    FDebugResume: Boolean;
     grnum:integer;
     gr: array of TGroupBox;
     btnum:integer;
@@ -1131,6 +1157,8 @@ end else if RadioButtonEvent.Checked then begin
 end;
 end;
 
+
+
 procedure Tf_scriptengine.ButtonUpdateClick(Sender: TObject);
 var txt: string;
 begin
@@ -1444,7 +1472,13 @@ if (TreeView1.Selected<>nil) then begin
        s:=TStringList.Create;
     if Fpascaleditor=nil then begin
       Fpascaleditor:=Tf_pascaleditor.Create(self);
+      dbgscr:=TPSScriptDebugger.Create(self);
+      dbgscr.OnCompile:=@TplPSScriptCompile;
+      dbgscr.OnExecute:=@TplPSScriptExecute;
+      dbgscr.Plugins.Assign(TplPSScript.Plugins);
+      Fpascaleditor.DebugScript:=dbgscr;
     end;
+    Fpascaleditor.ScriptName:=TreeView1.Selected.Text;
     Fpascaleditor.SynEdit1.Lines.Assign(s);
     FormPos(Fpascaleditor,mouse.cursorpos.x,mouse.cursorpos.y);
     Fpascaleditor.ShowModal;
