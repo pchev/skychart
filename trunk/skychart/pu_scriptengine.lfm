@@ -1,27 +1,28 @@
 object f_scriptengine: Tf_scriptengine
   Left = 376
-  Height = 471
+  Height = 485
   Top = 124
   Width = 758
   Caption = 'Script'
-  ClientHeight = 471
+  ClientHeight = 485
   ClientWidth = 758
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnShow = FormShow
   LCLVersion = '1.2.2.0'
   object Panel1: TPanel
     Left = 0
-    Height = 471
+    Height = 485
     Top = 0
     Width = 226
     Align = alLeft
     Caption = 'Panel1'
-    ClientHeight = 471
+    ClientHeight = 485
     ClientWidth = 226
     TabOrder = 0
     object TreeView1: TTreeView
       Left = 1
-      Height = 469
+      Height = 483
       Top = 1
       Width = 224
       Align = alClient
@@ -38,11 +39,11 @@ object f_scriptengine: Tf_scriptengine
   end
   object PanelLeft: TPanel
     Left = 234
-    Height = 471
+    Height = 485
     Top = 0
     Width = 524
     Align = alClient
-    ClientHeight = 471
+    ClientHeight = 485
     ClientWidth = 524
     TabOrder = 1
     object Panel2: TPanel
@@ -64,7 +65,7 @@ object f_scriptengine: Tf_scriptengine
     end
     object CompileMemo: TMemo
       Left = 1
-      Height = 62
+      Height = 76
       Top = 408
       Width = 522
       Align = alClient
@@ -484,7 +485,7 @@ object f_scriptengine: Tf_scriptengine
   end
   object Splitter1: TSplitter
     Left = 226
-    Height = 471
+    Height = 485
     Top = 0
     Width = 8
   end

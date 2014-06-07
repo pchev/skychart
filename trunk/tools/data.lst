@@ -323,6 +323,9 @@ data/sample/MPCsample.dat
 data/sample/us.dat
 data/sample/world.dat
 data/sample/aavsoeasy.dat
+data/script/script1.cdcps
+data/script/script2.cdcps
+data/script/script3.cdcps
 data/stars
 data/stars/PhotoBW.bmp
 data/stars/PhotoColor.bmp
