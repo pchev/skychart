@@ -176,10 +176,11 @@ type
     FExecuteCmd: TExecuteCmd;
     FCometMark: TExecuteCmd;
     FAsteroidMark: TExecuteCmd;
+    FGetScopeRates: TExecuteCmd;
     FMainmenu: TMenu;
     Fcdb: TCDCdb;
     FActiveChart: Tf_chart;
-    ChartName,RefreshText,SelectionText,DescriptionText,DistanceText: string;
+    ChartName,TelescopeChartName,RefreshText,SelectionText,DescriptionText,DistanceText: string;
     TelescopeRA,TelescopeDE: double;
     FTelescopeConnected: boolean;
     vlist: array of Variant;
@@ -217,6 +218,7 @@ type
     function doCometMark(list:TstringList):boolean;
     function doGetAsteroidList(const filter: string; maxnum:integer; list:TstringList):boolean;
     function doAsteroidMark(list:TstringList):boolean;
+    function doGetScopeRates(list:TstringList):boolean;
     procedure Button_Click(Sender: TObject);
     procedure Combo_Change(Sender: TObject);
     procedure ReorderGroup;
@@ -252,6 +254,7 @@ type
     property ExecuteCmd: TExecuteCmd read FExecuteCmd write FExecuteCmd;
     property CometMark: TExecuteCmd read FCometMark write FCometMark;
     property AsteroidMark: TExecuteCmd read FAsteroidMark write FAsteroidMark;
+    property GetScopeRates: TExecuteCmd read FGetScopeRates write FGetScopeRates;
     property Mainmenu: TMenu read FMainmenu write FMainmenu;
     property cdb: TCDCdb read Fcdb  write Fcdb;
     property ActiveChart: Tf_chart read FActiveChart write FActiveChart;
@@ -369,6 +372,14 @@ begin
   if assigned(FAsteroidMark) then str:=FAsteroidMark('',list);
   result:=(pos(msgOK,str)>0);
 end;
+
+function Tf_scriptengine.doGetScopeRates(list:TstringList):boolean;
+var str: string;
+begin
+  if assigned(FGetScopeRates) then str:=FGetScopeRates(TelescopeChartName,list);
+  result:=(pos(msgOK,str)>0);
+end;
+
 
 function Tf_scriptengine.doOpenFile(fn:string):boolean;
 var i: integer;
@@ -1078,7 +1089,7 @@ CompileScripts;
 evscr[ord(evInitialisation)].Execute;
 FEventReady:=true;
 evscr[ord(evActivation)].Execute;
-TelescopeConnectEvent(ChartName,FTelescopeConnected);
+TelescopeConnectEvent(TelescopeChartName,FTelescopeConnected);
 if Assigned(FonApply) then FonApply(self);
 end;
 
@@ -1680,6 +1691,7 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doCometMark,'function CometMark(list:TstringList):boolean;');
   AddMethod(self, @Tf_scriptengine.doGetAsteroidList,'function GetAsteroidList(const filter: string; maxnum:integer; list:TstringList):boolean;');
   AddMethod(self, @Tf_scriptengine.doAsteroidMark,'function AsteroidMark(list:TstringList):boolean;');
+  AddMethod(self, @Tf_scriptengine.doGetScopeRates,'function GetScopeRates(list:TstringList):boolean;');
   AddMethod(self, @Tf_scriptengine.doOpenFile,'function OpenFile(fn:string):boolean;');
   AddMethod(self, @Tf_scriptengine.doRun,'function Run(cmdline:string):boolean;');
   AddMethod(self, @Tf_scriptengine.doRunOutput,'function RunOutput(cmdline:string; var output:TStringlist):boolean;');
@@ -1770,7 +1782,7 @@ end;
 
 procedure Tf_scriptengine.TelescopeConnectEvent(origin:string; connected:boolean);
 begin
-if origin<>'' then ChartName:=origin;
+if origin<>'' then TelescopeChartName:=origin;
 FTelescopeConnected:=connected;
 if FEventReady then begin
   if connected then evscr[ord(evTelescope_connect)].Execute
