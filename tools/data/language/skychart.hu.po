@@ -117,10 +117,6 @@ msgstr "Művelet"
 msgid "Activate the timer event when hidden"
 msgstr ""
 
-#: u_translation.rsactivation
-msgid "Activation"
-msgstr ""
-
 #: u_translation.rsactualsystem
 msgid "Actual system time"
 msgstr "Pillanatnyi rendszeridő"
@@ -820,10 +816,6 @@ msgstr "Térkép információk"
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr "A térkép jelölései"
-
-#: u_translation.rschartrefresh
-msgid "Chart refresh"
-msgstr ""
 
 #: u_translation.rscharts
 msgid "Charts"
@@ -2784,10 +2776,6 @@ msgstr "Információk katalógusból"
 msgid "Init"
 msgstr "Init."
 
-#: u_translation.rsinitalisatio
-msgid "Initalisation"
-msgstr ""
-
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
 msgstr ""
@@ -3794,10 +3782,6 @@ msgstr "Objektumok szűrése"
 #| msgid "Object Filter Setting"
 msgid "Object filter settings"
 msgstr "Objektum szűrés beállítások"
-
-#: u_translation.rsobjectidenti
-msgid "Object identification"
-msgstr ""
 
 #: u_translation.rsobjectlist
 #| msgid "Object List"
@@ -5745,20 +5729,8 @@ msgstr "A TCP/IP szolgáltatás nem elérhető"
 msgid "Telescope"
 msgstr "Távcső"
 
-#: u_translation.rstelescopecon
-msgid "Telescope connected"
-msgstr ""
-
-#: u_translation.rstelescopedis
-msgid "Telescope disconnected"
-msgstr ""
-
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
-msgstr ""
-
-#: u_translation.rstelescopemov
-msgid "Telescope move"
 msgstr ""
 
 #: u_translation.rstelescopenot
@@ -5864,10 +5836,6 @@ msgstr "Idő"
 #: u_translation.rstimeoutms
 msgid "Timeout [ms]"
 msgstr "Időtúllépés [ms]"
-
-#: u_translation.rstimer
-msgid "Timer"
-msgstr ""
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"

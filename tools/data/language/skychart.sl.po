@@ -117,10 +117,6 @@ msgstr "Dejanje"
 msgid "Activate the timer event when hidden"
 msgstr ""
 
-#: u_translation.rsactivation
-msgid "Activation"
-msgstr ""
-
 #: u_translation.rsactualsystem
 msgid "Actual system time"
 msgstr "Sedanji sistemski čas"
@@ -780,10 +776,6 @@ msgstr "Podatki o karti"
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr "Legenda karte"
-
-#: u_translation.rschartrefresh
-msgid "Chart refresh"
-msgstr ""
 
 #: u_translation.rscharts
 msgid "Charts"
@@ -2629,10 +2621,6 @@ msgstr "Podatki iz kataloga"
 msgid "Init"
 msgstr "Začenjanje"
 
-#: u_translation.rsinitalisatio
-msgid "Initalisation"
-msgstr ""
-
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
 msgstr "Začenjanje ob %s%s z uporabo: %s%s (RA: %s DEC:%s)"
@@ -3580,10 +3568,6 @@ msgstr "Filter predmetov"
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
 msgstr "Nastavitve filtrov predmetov"
-
-#: u_translation.rsobjectidenti
-msgid "Object identification"
-msgstr ""
 
 #: u_translation.rsobjectlist
 msgid "Object list"
@@ -5425,20 +5409,8 @@ msgstr "TCP/IP storitev ni na voljo."
 msgid "Telescope"
 msgstr "Teleskop"
 
-#: u_translation.rstelescopecon
-msgid "Telescope connected"
-msgstr ""
-
-#: u_translation.rstelescopedis
-msgid "Telescope disconnected"
-msgstr ""
-
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
-msgstr ""
-
-#: u_translation.rstelescopemov
-msgid "Telescope move"
 msgstr ""
 
 #: u_translation.rstelescopenot
@@ -5540,10 +5512,6 @@ msgstr "Čas"
 #: u_translation.rstimeoutms
 msgid "Timeout [ms]"
 msgstr "Časovna omejitev [ms]"
-
-#: u_translation.rstimer
-msgid "Timer"
-msgstr ""
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"

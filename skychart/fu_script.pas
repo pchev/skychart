@@ -63,6 +63,7 @@ type
     FTimeU,FMainTimeU: TComboBox;
     FMainmenu: TMenu;
     Fcdb: TCDCdb;
+    Fcmain: Tconf_main;
     FExecuteCmd: TExecuteCmd;
     FCometMark: TExecuteCmd;
     FAsteroidMark: TExecuteCmd;
@@ -123,6 +124,7 @@ type
     property TimeU: TComboBox read FTimeU  write SetTimeU ;
     property Mainmenu: TMenu read FMainmenu  write SetMainmenu;
     property cdb: TCDCdb read Fcdb  write SetCDB;
+    property cmain: Tconf_main read Fcmain write Fcmain;
     property ConfigToolbar1: TStringList read FConfigToolbar1 write FConfigToolbar1;
     property ConfigToolbar2: TStringList read FConfigToolbar2 write FConfigToolbar2;
     property ConfigScriptButton: TStringList read FConfigScriptButton write FConfigScriptButton;
@@ -221,6 +223,7 @@ begin
   fscriptengine.Activechart:=FActivechart;
   fscriptengine.Mainmenu:=FMainmenu;
   fscriptengine.cdb:=Fcdb;
+  fscriptengine.cmain:=Fcmain;
 end;
 
 procedure Tf_script.Init;
@@ -261,12 +264,14 @@ begin
        end;
        fscriptengine.CheckBoxHidenTimer.Checked:=FHidenTimer;
        fscriptengine.Load(FConfigScriptButton, FConfigScript, FConfigCombo, FConfigEvent,PanelTitle.Caption);
+       fscriptengine.InitialLoad:=false;
     end;
   end else begin
     if fscriptengine=nil then begin
        CreateEngine;
     end;
     fscriptengine.LoadFile(slash(appdir)+slash('data')+slash('script')+'script'+inttostr(tag+1)+'.cdcps');
+    fscriptengine.InitialLoad:=false;
   end;
 end;
 
@@ -288,6 +293,7 @@ procedure Tf_script.ButtonEditSrcClick(Sender: TObject);
 begin
   if fscriptengine=nil then begin
      CreateEngine;
+     fscriptengine.InitialLoad:=false;
   end;
   FormPos(fscriptengine,mouse.cursorpos.x,mouse.cursorpos.y);
   fscriptengine.Show;

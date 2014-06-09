@@ -180,6 +180,7 @@ type
     FGetScopeRates: TExecuteCmd;
     FMainmenu: TMenu;
     Fcdb: TCDCdb;
+    Fcmain: Tconf_main;
     FActiveChart: Tf_chart;
     ChartName,TelescopeChartName,RefreshText,SelectionText,DescriptionText,DistanceText: string;
     TelescopeRA,TelescopeDE: double;
@@ -201,6 +202,7 @@ type
     function doSetD(varname:string; x: Double):Boolean;
     function doGetV(varname:string; var v: Variant):Boolean;
     function doSetV(varname:string; v: Variant):Boolean;
+    function doGetObservatoryList(list:TstringList):boolean;
     function doOpenDialog(var fn: string): boolean;
     function doSaveDialog(var fn: string): boolean;
     function doCalendarDialog(var dt: double): boolean;
@@ -235,6 +237,7 @@ type
     procedure CompileScripts;
   public
     { public declarations }
+    InitialLoad: Boolean;
     procedure SetLang;
     procedure StopAllScript;
     procedure StartTimer;
@@ -259,6 +262,7 @@ type
     property GetScopeRates: TExecuteCmd read FGetScopeRates write FGetScopeRates;
     property Mainmenu: TMenu read FMainmenu write FMainmenu;
     property cdb: TCDCdb read Fcdb  write Fcdb;
+    property cmain: Tconf_main read Fcmain write Fcmain;
     property ActiveChart: Tf_chart read FActiveChart write FActiveChart;
   end;
 
@@ -296,15 +300,6 @@ begin
   Label3.Caption:=rsCaption;
   Label4.Caption:=rsHeight;
   Label5.Caption:=rsHeight;
-  EventComboBox.Items[0]:=rsInitalisatio;
-  EventComboBox.Items[1]:=rsActivation;
-  EventComboBox.Items[2]:=rsTimer;
-  EventComboBox.Items[3]:=rsTelescopeMov;
-  EventComboBox.Items[4]:=rsChartRefresh;
-  EventComboBox.Items[5]:=rsObjectIdenti;
-  EventComboBox.Items[6]:=rsDistanceMeas;
-  EventComboBox.Items[7]:=rsTelescopeCon;
-  EventComboBox.Items[8]:=rsTelescopeDis;
   CheckBoxHidenTimer.Caption:=rsActivateTheT;
   if Fpascaleditor<>nil then Fpascaleditor.SetLang;
   SetHelp(self,hlpScriptEditor);
@@ -383,6 +378,60 @@ begin
   result:=(pos(msgOK,str)>0);
 end;
 
+function Tf_scriptengine.doGetObservatoryList(list:TstringList):boolean;
+var str,buf,cobs,clat,clon,calt,ctz: string;
+    cmd: Tstringlist;
+    addcobs: boolean;
+    i,p: integer;
+begin
+list.clear;
+addcobs:=true;
+cobs:='';
+cmd:=Tstringlist.Create;
+cmd.add('GETOBS');
+str:=ExecuteCmd('',cmd);
+p:=pos('OK!',str);
+if p>0 then begin
+ delete(str,1,p+2);
+ p:=pos('LAT:',str);
+ delete(str,1,p+3);
+ p:=pos('LON:',str);
+ clat:=copy(str,1,p-1);
+ delete(str,1,p+3);
+ p:=pos('ALT:',str);
+ clon:=copy(str,1,p-1);
+ delete(str,1,p+3);
+ p:=pos('OBS:',str);
+ calt:=copy(str,1,p-1);
+ delete(str,1,p+3);
+ cobs:=str;
+end;
+cmd.clear;
+cmd.add('GETTZ');
+str:=ExecuteCmd('',cmd);
+p:=pos('OK!',str);
+if p>0 then begin
+ delete(str,1,p+2);
+ ctz:=str;
+end;
+cmd.Free;
+for i:=0 to cmain.ObsNameList.Count-1 do begin
+  str:=cmain.ObsNameList[i];
+  buf:=trim(TObsDetail(cmain.ObsNameList.Objects[i]).country);
+  if buf<>'' then str:=buf+'/'+str;
+  if str=cobs then addcobs:=false;
+  str:=str+'='+DEtoStr3(TObsDetail(cmain.ObsNameList.Objects[i]).lat)+';';
+  str:=str+DEtoStr3(TObsDetail(cmain.ObsNameList.Objects[i]).lon)+';';
+  str:=str+FormatFloat(f0,TObsDetail(cmain.ObsNameList.Objects[i]).alt)+'m;';
+  str:=str+TzGMT2UTC(TObsDetail(cmain.ObsNameList.Objects[i]).tz);
+  list.Add(str);
+end;
+if addcobs then begin
+ str:=cobs+'='+clat+';'+clon+';'+calt+';'+ctz;
+ list.Insert(0,str);
+end;
+result:=(list.Count>0);
+end;
 
 function Tf_scriptengine.doOpenFile(fn:string):boolean;
 var i: integer;
@@ -823,7 +872,7 @@ begin
   end;
 
   p.free;
-  ButtonApplyClick(self);
+  ButtonApplyClick(nil);
 end;
 
 procedure Tf_scriptengine.LoadFile(fn: string);
@@ -1135,13 +1184,15 @@ end;
 ReorderGroup;
 CompileScripts;
 evscr[ord(evInitialisation)].Execute;
-FEventReady:=true;
-evscr[ord(evActivation)].Execute;
-TelescopeConnectEvent(TelescopeChartName,FTelescopeConnected);
-if Assigned(FonApply) then FonApply(self);
-if CompileMemo.Lines.Count=0 then begin
-  if tag<ReservedScript then CompileMemo.Lines.Add(rsDonTForgetTo)
-     else CompileMemo.Lines.Add(rsDonTForgetTo2);
+if not InitialLoad then begin
+  FEventReady:=true;
+  evscr[ord(evActivation)].Execute;
+  TelescopeConnectEvent(TelescopeChartName,FTelescopeConnected);
+  if Assigned(FonApply) then FonApply(self);
+  if CompileMemo.Lines.Count=0 then begin
+    if tag<ReservedScript then CompileMemo.Lines.Add(rsDonTForgetTo)
+       else CompileMemo.Lines.Add(rsDonTForgetTo2);
+  end;
 end;
 end;
 
@@ -1524,6 +1575,7 @@ CompileMemo.Clear;
 EventTimer.Enabled:=false;
 FTimerReady:=false;
 FEventReady:=false;
+for i:=0 to evscrnum-1 do begin evscr[i].Script.Clear; evscr[i].Exec.Clear; end;
 node:=TreeView1.Items.GetFirstNode;
 while node<>nil do begin
   buf:=words(node.Text,'',1,1,';');
@@ -1585,6 +1637,7 @@ begin
   {$endif}
   FTimerReady:=false;
   FEventReady:=false;
+  InitialLoad:=true;
   FTelescopeConnected:=false;
   SetLength(vlist,22);
   SetLength(ilist,10);
@@ -1716,6 +1769,7 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doGetAsteroidList,'function GetAsteroidList(const filter: string; maxnum:integer; list:TstringList):boolean;');
   AddMethod(self, @Tf_scriptengine.doAsteroidMark,'function AsteroidMark(list:TstringList):boolean;');
   AddMethod(self, @Tf_scriptengine.doGetScopeRates,'function GetScopeRates(list:TstringList):boolean;');
+  AddMethod(self, @Tf_scriptengine.doGetObservatoryList,'function GetObservatoryList(list:TstringList):boolean;');
   AddMethod(self, @Tf_scriptengine.doOpenFile,'function OpenFile(fn:string):boolean;');
   AddMethod(self, @Tf_scriptengine.doRun,'function Run(cmdline:string):boolean;');
   AddMethod(self, @Tf_scriptengine.doRunOutput,'function RunOutput(cmdline:string; var output:TStringlist):boolean;');

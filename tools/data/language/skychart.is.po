@@ -116,10 +116,6 @@ msgstr "Aðgerð"
 msgid "Activate the timer event when hidden"
 msgstr ""
 
-#: u_translation.rsactivation
-msgid "Activation"
-msgstr ""
-
 #: u_translation.rsactualsystem
 msgid "Actual system time"
 msgstr "Réttur kerfistími"
@@ -778,10 +774,6 @@ msgstr "Upplýsingar um kort"
 
 #: u_translation.rschartlegend
 msgid "Chart legend"
-msgstr ""
-
-#: u_translation.rschartrefresh
-msgid "Chart refresh"
 msgstr ""
 
 #: u_translation.rscharts
@@ -2628,10 +2620,6 @@ msgstr ""
 msgid "Init"
 msgstr "Upph"
 
-#: u_translation.rsinitalisatio
-msgid "Initalisation"
-msgstr ""
-
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
 msgstr ""
@@ -3579,10 +3567,6 @@ msgstr "Sía fyrirb."
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
 msgstr "Síustill. fyrirb."
-
-#: u_translation.rsobjectidenti
-msgid "Object identification"
-msgstr ""
 
 #: u_translation.rsobjectlist
 msgid "Object list"
@@ -5424,20 +5408,8 @@ msgstr "Ekki hægt að nota TCP/IP"
 msgid "Telescope"
 msgstr "Sjónauki"
 
-#: u_translation.rstelescopecon
-msgid "Telescope connected"
-msgstr ""
-
-#: u_translation.rstelescopedis
-msgid "Telescope disconnected"
-msgstr ""
-
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
-msgstr ""
-
-#: u_translation.rstelescopemov
-msgid "Telescope move"
 msgstr ""
 
 #: u_translation.rstelescopenot
@@ -5538,10 +5510,6 @@ msgstr "Tími"
 
 #: u_translation.rstimeoutms
 msgid "Timeout [ms]"
-msgstr ""
-
-#: u_translation.rstimer
-msgid "Timer"
 msgstr ""
 
 #: u_translation.rstimesimulati

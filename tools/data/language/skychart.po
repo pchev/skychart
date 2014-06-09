@@ -5974,26 +5974,6 @@ msgstr ""
 msgid "Columns"
 msgstr ""
 
-#: u_translation:rsinitalisatio
-msgid "Initalisation"
-msgstr ""
-
-#: u_translation:rstimer
-msgid "Timer"
-msgstr ""
-
-#: u_translation:rstelescopemov
-msgid "Telescope move"
-msgstr ""
-
-#: u_translation:rschartrefresh
-msgid "Chart refresh"
-msgstr ""
-
-#: u_translation:rsobjectidenti
-msgid "Object identification"
-msgstr ""
-
 #: u_translation:rsscripteditor
 msgid "Script editor"
 msgstr ""
@@ -6012,18 +5992,6 @@ msgstr ""
 
 #: u_translation:rsactivatethet
 msgid "Activate the timer event when hidden"
-msgstr ""
-
-#: u_translation:rsactivation
-msgid "Activation"
-msgstr ""
-
-#: u_translation:rstelescopecon
-msgid "Telescope connected"
-msgstr ""
-
-#: u_translation:rstelescopedis
-msgid "Telescope disconnected"
 msgstr ""
 
 #: u_translation:rschecklist
