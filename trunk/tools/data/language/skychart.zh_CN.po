@@ -116,10 +116,6 @@ msgstr "动作"
 msgid "Activate the timer event when hidden"
 msgstr ""
 
-#: u_translation.rsactivation
-msgid "Activation"
-msgstr ""
-
 #: u_translation.rsactualsystem
 msgid "Actual system time"
 msgstr "当前系统时间"
@@ -779,10 +775,6 @@ msgstr "星图信息"
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr "星图图例"
-
-#: u_translation.rschartrefresh
-msgid "Chart refresh"
-msgstr ""
 
 #: u_translation.rscharts
 msgid "Charts"
@@ -2628,10 +2620,6 @@ msgstr "来自星表的信息"
 msgid "Init"
 msgstr "初始化"
 
-#: u_translation.rsinitalisatio
-msgid "Initalisation"
-msgstr ""
-
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
 msgstr "已初始化在%s%s，使用：%s%s(赤经:%s赤纬:%s)"
@@ -3579,10 +3567,6 @@ msgstr "天体过滤器"
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
 msgstr "天体过滤器设置"
-
-#: u_translation.rsobjectidenti
-msgid "Object identification"
-msgstr ""
 
 #: u_translation.rsobjectlist
 msgid "Object list"
@@ -5424,20 +5408,8 @@ msgstr "TCP/IP 服务不可用。"
 msgid "Telescope"
 msgstr "望远镜"
 
-#: u_translation.rstelescopecon
-msgid "Telescope connected"
-msgstr ""
-
-#: u_translation.rstelescopedis
-msgid "Telescope disconnected"
-msgstr ""
-
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
-msgstr ""
-
-#: u_translation.rstelescopemov
-msgid "Telescope move"
 msgstr ""
 
 #: u_translation.rstelescopenot
@@ -5539,10 +5511,6 @@ msgstr "时间"
 #: u_translation.rstimeoutms
 msgid "Timeout [ms]"
 msgstr "超时[ms]"
-
-#: u_translation.rstimer
-msgid "Timer"
-msgstr ""
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"

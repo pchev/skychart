@@ -9179,6 +9179,7 @@ end;
 procedure Tf_main.InitScriptPanel;
 var i: integer;
 begin
+if VerboseMsg then WriteTrace('InitScript');
 for i:=0 to numscript-1 do begin
   Fscript[i].ImageNormal:=ImageNormal;
   Fscript[i].ContainerPanel:=ContainerPanel;
@@ -9197,6 +9198,7 @@ for i:=0 to numscript-1 do begin
   Fscript[i].TimeU:=TimeU;
   Fscript[i].Mainmenu:=MainMenu1;
   Fscript[i].cdb:=cdcdb;
+  Fscript[i].cmain:=cfgm;
   if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
   Fscript[i].Init;
   if i=ActiveScript then begin
@@ -9208,6 +9210,7 @@ for i:=0 to numscript-1 do begin
 end;
 Splitter1.ResizeControl:=ScriptPanel;
 SetScriptMenuCaption;
+if VerboseMsg then WriteTrace('InitScript end');
 end;
 
 procedure Tf_main.SetScriptMenuCaption;

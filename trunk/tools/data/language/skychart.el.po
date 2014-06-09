@@ -116,10 +116,6 @@ msgstr "Ενέργεια"
 msgid "Activate the timer event when hidden"
 msgstr ""
 
-#: u_translation.rsactivation
-msgid "Activation"
-msgstr ""
-
 #: u_translation.rsactualsystem
 msgid "Actual system time"
 msgstr "Τρέχουσα ώρα συστήμ."
@@ -789,10 +785,6 @@ msgstr "Πληροφορίες Χάρτη"
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr "Υπόμνημα χάρτη"
-
-#: u_translation.rschartrefresh
-msgid "Chart refresh"
-msgstr ""
 
 #: u_translation.rscharts
 msgid "Charts"
@@ -2681,10 +2673,6 @@ msgstr "Πληροφορίες από τον κατάλογο"
 msgid "Init"
 msgstr "Αρχικ."
 
-#: u_translation.rsinitalisatio
-msgid "Initalisation"
-msgstr ""
-
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
 msgstr ""
@@ -3637,10 +3625,6 @@ msgstr "Φίλτρο αντικειμένων"
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
 msgstr "Ρυθμίσεις φίλτρου αντικειμένων"
-
-#: u_translation.rsobjectidenti
-msgid "Object identification"
-msgstr ""
 
 #: u_translation.rsobjectlist
 msgid "Object list"
@@ -5502,21 +5486,9 @@ msgstr "Υπηρεσία TCP/IP μη διαθέσιμη."
 msgid "Telescope"
 msgstr "Τηλεσκόπιο"
 
-#: u_translation.rstelescopecon
-msgid "Telescope connected"
-msgstr ""
-
-#: u_translation.rstelescopedis
-msgid "Telescope disconnected"
-msgstr ""
-
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
 msgstr "Εστιακό μήκος τηλεσκοπίου"
-
-#: u_translation.rstelescopemov
-msgid "Telescope move"
-msgstr ""
 
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
@@ -5618,10 +5590,6 @@ msgstr "Ώρα"
 #: u_translation.rstimeoutms
 msgid "Timeout [ms]"
 msgstr "Timeout [ms]"
-
-#: u_translation.rstimer
-msgid "Timer"
-msgstr ""
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"

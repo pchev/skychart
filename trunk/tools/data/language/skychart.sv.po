@@ -116,10 +116,6 @@ msgstr "Åtgärd"
 msgid "Activate the timer event when hidden"
 msgstr ""
 
-#: u_translation.rsactivation
-msgid "Activation"
-msgstr ""
-
 #: u_translation.rsactualsystem
 msgid "Actual system time"
 msgstr "Aktuell systemtid"
@@ -779,10 +775,6 @@ msgstr "Kartinformation"
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr "Kartbeskrivning"
-
-#: u_translation.rschartrefresh
-msgid "Chart refresh"
-msgstr ""
 
 #: u_translation.rscharts
 msgid "Charts"
@@ -2628,10 +2620,6 @@ msgstr "Information från katalog"
 msgid "Init"
 msgstr "Init"
 
-#: u_translation.rsinitalisatio
-msgid "Initalisation"
-msgstr ""
-
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
 msgstr "Initierad vid %s%s med: %s%s (RA: %s DEC: %s)"
@@ -3579,10 +3567,6 @@ msgstr "Objektfilter"
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
 msgstr "Objektfilter inställningar"
-
-#: u_translation.rsobjectidenti
-msgid "Object identification"
-msgstr ""
 
 #: u_translation.rsobjectlist
 msgid "Object list"
@@ -5424,20 +5408,8 @@ msgstr "TCP/IP tjänsten är inte tillgänglig."
 msgid "Telescope"
 msgstr "Teleskop"
 
-#: u_translation.rstelescopecon
-msgid "Telescope connected"
-msgstr ""
-
-#: u_translation.rstelescopedis
-msgid "Telescope disconnected"
-msgstr ""
-
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
-msgstr ""
-
-#: u_translation.rstelescopemov
-msgid "Telescope move"
 msgstr ""
 
 #: u_translation.rstelescopenot
@@ -5539,10 +5511,6 @@ msgstr "Tid"
 #: u_translation.rstimeoutms
 msgid "Timeout [ms]"
 msgstr "Timeout (ms)"
-
-#: u_translation.rstimer
-msgid "Timer"
-msgstr ""
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"

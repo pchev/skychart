@@ -1994,7 +1994,7 @@ if cfgsc.ShowAsteroidValid then begin
        WindowXY(x1,y1,xx,yy,cfgsc);
        if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
           Fplot.PlotCircle(xx-r,yy-r,xx+r,yy+r,Fplot.cfgplot.Color[20],false);
-          if (FObjectListLabels.Count=0)and(mag>=(cfgsc.StarMagMax+cfgsc.AstMagDiff-cfgsc.LabelMagDiff[5])) then begin
+          if mag>=(cfgsc.StarMagMax+cfgsc.AstMagDiff-cfgsc.LabelMagDiff[5]) then begin
            lis:=cfgsc.AsteroidMark[i]+FormatFloat(f6,ra)+FormatFloat(f6,de);
            lid:=rshash(lis,$7FFFFFFF);
            ltxt:=cfgsc.AsteroidMark[i];
@@ -2113,11 +2113,7 @@ if cfgsc.ShowCometValid then begin
        WindowXY(x1,y1,xx,yy,cfgsc);
        if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
           Fplot.PlotCircle(xx-r,yy-r,xx+r,yy+r,Fplot.cfgplot.Color[21],false);
-          x1:=cfgsc.StarMagMax;
-          x1:=cfgsc.ComMagDiff;
-          x1:=cfgsc.LabelMagDiff[5];
-          x1:=(cfgsc.StarMagMax+cfgsc.ComMagDiff-cfgsc.LabelMagDiff[5]);
-          if (FObjectListLabels.Count=0)and(mag>=x1) then begin
+          if mag>=(cfgsc.StarMagMax+cfgsc.ComMagDiff-cfgsc.LabelMagDiff[5]) then begin
            lis:=cfgsc.CometMark[i]+FormatFloat(f6,ra)+FormatFloat(f6,de);
            lid:=rshash(lis,$7FFFFFFF);
            ltxt:=cfgsc.CometMark[i];

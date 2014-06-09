@@ -117,10 +117,6 @@ msgstr "Acción"
 msgid "Activate the timer event when hidden"
 msgstr ""
 
-#: u_translation.rsactivation
-msgid "Activation"
-msgstr ""
-
 #: u_translation.rsactualsystem
 msgid "Actual system time"
 msgstr "Hora actual del sistema"
@@ -780,10 +776,6 @@ msgstr "Información de la carta"
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr "Leyenda de la carta"
-
-#: u_translation.rschartrefresh
-msgid "Chart refresh"
-msgstr "Refrescar carta"
 
 #: u_translation.rscharts
 msgid "Charts"
@@ -2630,10 +2622,6 @@ msgstr "Información del catálogo"
 msgid "Init"
 msgstr "Iniciar"
 
-#: u_translation.rsinitalisatio
-msgid "Initalisation"
-msgstr "Iniciación"
-
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
 msgstr "Iniciado a %s%s usando : %s%s (AR: %s DEC: %s)"
@@ -3581,10 +3569,6 @@ msgstr "Filtro de objetos"
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
 msgstr "Ajustes del filtro de objetos"
-
-#: u_translation.rsobjectidenti
-msgid "Object identification"
-msgstr "Identificación de objeto"
 
 #: u_translation.rsobjectlist
 msgid "Object list"
@@ -5426,21 +5410,9 @@ msgstr "Servicio TCP/IP no disponible."
 msgid "Telescope"
 msgstr "Telescopio"
 
-#: u_translation.rstelescopecon
-msgid "Telescope connected"
-msgstr ""
-
-#: u_translation.rstelescopedis
-msgid "Telescope disconnected"
-msgstr ""
-
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
 msgstr "Longitud focal del telescopio"
-
-#: u_translation.rstelescopemov
-msgid "Telescope move"
-msgstr "Movimiento telescopio"
 
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
@@ -5541,10 +5513,6 @@ msgstr "Hora"
 #: u_translation.rstimeoutms
 msgid "Timeout [ms]"
 msgstr "Plazo [ms]"
-
-#: u_translation.rstimer
-msgid "Timer"
-msgstr "Temporizador"
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
