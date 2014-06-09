@@ -3308,6 +3308,7 @@ object f_main: Tf_main
     Top = 80
     Width = 5
     ResizeStyle = rsPattern
+    Visible = False
   end
   object MainMenu1: TMainMenu
     Images = ImageNormal

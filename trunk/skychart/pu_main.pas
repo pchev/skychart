@@ -9233,13 +9233,13 @@ begin
      if i=n then begin
         if Fscript[i].Visible then begin
            Fscript[i].ShowScript(false);
-           ScriptPanel.Visible:=false;
            Splitter1.Visible:=false;
+           ScriptPanel.Visible:=false;
         end else begin
            if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
            Fscript[i].ShowScript(true);
-           ScriptPanel.Visible:=true;
            Splitter1.Visible:=true;
+           ScriptPanel.Visible:=true;
            Splitter1.ResizeControl:=ScriptPanel;
         end;
      end
