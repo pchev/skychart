@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-07 19:36+0000\n"
-"PO-Revision-Date: 2014-06-07 19:44+0000\n"
+"POT-Creation-Date: 2014-06-09 08:36+0000\n"
+"PO-Revision-Date: 2014-06-07 20:09+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-07 19:48+0000\n"
+"X-Launchpad-Export-Date: 2014-06-09 11:43+0000\n"
 "X-Generator: Launchpad (build 17031)\n"
 "Language: fr\n"
 
@@ -115,7 +115,7 @@ msgstr "Action"
 
 #: u_translation.rsactivatethet
 msgid "Activate the timer event when hidden"
-msgstr "Activer le timer quand le panneau est caché"
+msgstr "Activer le minuteur quand le panneau est caché"
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
