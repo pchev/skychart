@@ -266,7 +266,7 @@ script_212=6	  r:=cmd('',c);
 script_213=6	  c.free;
 script_214=6	end.
 numcomborows=0
-numevents=166
+numevents=159
 event_0=0	// Initialization
 event_1=0	begin
 event_2=0	  // change attribute
@@ -279,157 +279,150 @@ event_8=0	  memo_1.clear;
 event_9=0	end.
 event_10=1	// Script activation event
 event_11=1	var str,buf,longstr: string;
-event_12=1	    c: Tstringlist;
-event_13=1	    p: integer;
-event_14=1	begin
-event_15=1	// actualize the observing list filter
-event_16=1	 c:=Tstringlist.create;
-event_17=1	 c.add('OBSLISTLIMIT');
-event_18=1	 c.add('ON');
-event_19=1	 buf:=cmd('',c);
-event_20=1	 c.free;
-event_21=1	// Info about current object
-event_22=1	 getS('SelectionText',str)
-event_23=1	 getS('DescriptionText',longstr)
-event_24=1	 if trim(str)<>'' then begin
-event_25=1	   // coordinates from selected object
-event_26=1	   // Get RA
-event_27=1	   p:=pos(chr(9),str);
-event_28=1	   buf:=copy(str,1,p-1);
-event_29=1	   edit_1.text:=buf;
-event_30=1	   delete(str,1,p);
-event_31=1	   // Get Dec
-event_32=1	   p:=pos(chr(9),str);
-event_33=1	   buf:=copy(str,1,p-1);
-event_34=1	   edit_2.text:=buf;
-event_35=1	 end else begin
-event_36=1	   // coordinates from chart center
-event_37=1	   getS('RefreshText',str)
-event_38=1	   p:=pos('C:',str);
-event_39=1	   if p>0 then begin
-event_40=1	     delete(str,1,p+1);
-event_41=1	     str:=trim(str);
-event_42=1	     // RA
-event_43=1	     p:=pos(' ',str);
-event_44=1	     buf:=trim(copy(str,1,p));
-event_45=1	     edit_1.text:=buf;
-event_46=1	     delete(str,1,p);
-event_47=1	     // Dec
-event_48=1	     p:=pos(' ',str);
-event_49=1	     buf:=trim(copy(str,1,p));
-event_50=1	     edit_2.text:=buf;
-event_51=1	   end;
-event_52=1	 end;
-event_53=1	 if trim(longstr)<>'' then begin
-event_54=1	   // show other information line by line
-event_55=1	   memo_1.clear;
-event_56=1	   memo_1.text:=longstr;
-event_57=1	   memo_1.selstart:=0;
-event_58=1	 end;
-event_59=1	end.
-event_60=2	// Timer event
-event_61=2	var  t,h: Double;
-event_62=2	     a,r: string;
-event_63=2	     c: TStringlist;
-event_64=2	begin
-event_65=2	  // display time
-event_66=2	  getd('TimeNow',t);
-event_67=2	  h:=24*(t-trunc(t));
-event_68=2	  a:=artostr(h);
-event_69=2	  memo_1.lines.add('Time is '+a);
-event_70=2	  // actualize the observing list filter
-event_71=2	  c:=Tstringlist.create;
-event_72=2	  c.add('OBSLISTLIMIT');
-event_73=2	  c.add('ON');
-event_74=2	  r:=cmd('',c);
-event_75=2	  c.free;
-event_76=2	end.
-event_77=3	// Telescope move event
-event_78=3	var
-event_79=3	    ra,de: double;
-event_80=3	begin
-event_81=3	 getD('TelescopeRA',ra);
-event_82=3	 getD('TelescopeDE',de);
-event_83=3	 ra:=ra*rad2deg/15;
-event_84=3	 de:=de*rad2deg;
-event_85=3	 Edit_3.text:=ARtoStr(ra);
-event_86=3	 Edit_4.text:=DEtoStr(de);
-event_87=3	end.
-event_88=4	// Chart refresh event
-event_89=4	var str,buf: string;
-event_90=4	    p: integer;
-event_91=4	begin
-event_92=4	  // ensure the target coordinate field is not empty
-event_93=4	  if (Edit_1.text='')and(Edit_2.text='') then begin
-event_94=4	   // coordinates from chart center
-event_95=4	   getS('RefreshText',str)
-event_96=4	   p:=pos('C:',str);
-event_97=4	   if p>0 then begin
-event_98=4	     delete(str,1,p+1);
-event_99=4	     str:=trim(str);
-event_100=4	     // RA
-event_101=4	     p:=pos(' ',str);
-event_102=4	     buf:=trim(copy(str,1,p));
-event_103=4	     edit_1.text:=buf;
-event_104=4	     delete(str,1,p);
-event_105=4	     // Dec
-event_106=4	     p:=pos(' ',str);
-event_107=4	     buf:=trim(copy(str,1,p));
-event_108=4	     edit_2.text:=buf;
-event_109=4	   end;
-event_110=4	 end;
-event_111=4	end.
-event_112=5	// Object identification event
-event_113=5	var str,buf,longstr: string;
-event_114=5	    p: integer;
-event_115=5	begin
-event_116=5	// Info about object
-event_117=5	 getS('SelectionText',str)
-event_118=5	 getS('DescriptionText',longstr)
-event_119=5	// Get RA
-event_120=5	 p:=pos(chr(9),str);
-event_121=5	 buf:=copy(str,1,p-1);
-event_122=5	 edit_1.text:=buf;
-event_123=5	 delete(str,1,p);
-event_124=5	// Get Dec
-event_125=5	 p:=pos(chr(9),str);
-event_126=5	 buf:=copy(str,1,p-1);
-event_127=5	 edit_2.text:=buf;
-event_128=5	 delete(str,1,p);
-event_129=5	// show other information line by line
-event_130=5	 memo_1.clear;
-event_131=5	 memo_1.text:=longstr;
-event_132=5	 memo_1.selstart:=0;
-event_133=5	end.
-event_134=6	// Distance event
-event_135=6	var str: string;
-event_136=6	begin
-event_137=6	 getS('DistanceText',str)
-event_138=6	 memo_1.clear;
-event_139=6	 memo_1.lines.add('Distance: '+str);
-event_140=6	end.
-event_141=7	// Telescope connected
-event_142=7	var cm: Tstringlist;
-event_143=7	    ra,de: double;
-event_144=7	begin
-event_145=7	  // moving rates
-event_146=7	  Combo_1.clear;
-event_147=7	  cm:=Tstringlist.create;
-event_148=7	  GetScopeRates(cm);
-event_149=7	  Combo_1.items.assign(cm);
-event_150=7	  Combo_1.itemindex:=0;
-event_151=7	// Telescope position
-event_152=7	  getD('TelescopeRA',ra);
-event_153=7	  getD('TelescopeDE',de);
-event_154=7	  ra:=ra*rad2deg/15;
-event_155=7	  de:=de*rad2deg;
-event_156=7	  Edit_3.text:=ARtoStr(ra);
-event_157=7	  Edit_4.text:=DEtoStr(de);
-event_158=7	  cm.Free;
-event_159=7	end.
-event_160=8	// Telescope disconnect
-event_161=8	begin
-event_162=8	 Combo_1.clear;
-event_163=8	 Edit_3.text:='';
-event_164=8	 Edit_4.text:='';
-event_165=8	end.
+event_12=1	    p: integer;
+event_13=1	begin
+event_14=1	// Info about current object
+event_15=1	 getS('SelectionText',str)
+event_16=1	 getS('DescriptionText',longstr)
+event_17=1	 if trim(str)<>'' then begin
+event_18=1	   // coordinates from selected object
+event_19=1	   // Get RA
+event_20=1	   p:=pos(chr(9),str);
+event_21=1	   buf:=copy(str,1,p-1);
+event_22=1	   edit_1.text:=buf;
+event_23=1	   delete(str,1,p);
+event_24=1	   // Get Dec
+event_25=1	   p:=pos(chr(9),str);
+event_26=1	   buf:=copy(str,1,p-1);
+event_27=1	   edit_2.text:=buf;
+event_28=1	 end else begin
+event_29=1	   // coordinates from chart center
+event_30=1	   getS('RefreshText',str)
+event_31=1	   p:=pos('C:',str);
+event_32=1	   if p>0 then begin
+event_33=1	     delete(str,1,p+1);
+event_34=1	     str:=trim(str);
+event_35=1	     // RA
+event_36=1	     p:=pos(' ',str);
+event_37=1	     buf:=trim(copy(str,1,p));
+event_38=1	     edit_1.text:=buf;
+event_39=1	     delete(str,1,p);
+event_40=1	     // Dec
+event_41=1	     p:=pos(' ',str);
+event_42=1	     buf:=trim(copy(str,1,p));
+event_43=1	     edit_2.text:=buf;
+event_44=1	   end;
+event_45=1	 end;
+event_46=1	 if trim(longstr)<>'' then begin
+event_47=1	   // show other information line by line
+event_48=1	   memo_1.clear;
+event_49=1	   memo_1.text:=longstr;
+event_50=1	   memo_1.selstart:=0;
+event_51=1	 end;
+event_52=1	end.
+event_53=2	// Timer event
+event_54=2	var  t,h: Double;
+event_55=2	     a,r: string;
+event_56=2	     c: TStringlist;
+event_57=2	begin
+event_58=2	  // display time
+event_59=2	  getd('TimeNow',t);
+event_60=2	  h:=24*(t-trunc(t));
+event_61=2	  a:=artostr(h);
+event_62=2	  memo_1.lines.add('Time is '+a);
+event_63=2	  // actualize the observing list filter
+event_64=2	  c:=Tstringlist.create;
+event_65=2	  c.add('OBSLISTLIMIT');
+event_66=2	  c.add('ON');
+event_67=2	  r:=cmd('',c);
+event_68=2	  c.free;
+event_69=2	end.
+event_70=3	// Telescope move event
+event_71=3	var
+event_72=3	    ra,de: double;
+event_73=3	begin
+event_74=3	 getD('TelescopeRA',ra);
+event_75=3	 getD('TelescopeDE',de);
+event_76=3	 ra:=ra*rad2deg/15;
+event_77=3	 de:=de*rad2deg;
+event_78=3	 Edit_3.text:=ARtoStr(ra);
+event_79=3	 Edit_4.text:=DEtoStr(de);
+event_80=3	end.
+event_81=4	// Chart refresh event
+event_82=4	var str,buf: string;
+event_83=4	    p: integer;
+event_84=4	begin
+event_85=4	  // ensure the target coordinate field is not empty
+event_86=4	  if (Edit_1.text='')and(Edit_2.text='') then begin
+event_87=4	   // coordinates from chart center
+event_88=4	   getS('RefreshText',str)
+event_89=4	   p:=pos('C:',str);
+event_90=4	   if p>0 then begin
+event_91=4	     delete(str,1,p+1);
+event_92=4	     str:=trim(str);
+event_93=4	     // RA
+event_94=4	     p:=pos(' ',str);
+event_95=4	     buf:=trim(copy(str,1,p));
+event_96=4	     edit_1.text:=buf;
+event_97=4	     delete(str,1,p);
+event_98=4	     // Dec
+event_99=4	     p:=pos(' ',str);
+event_100=4	     buf:=trim(copy(str,1,p));
+event_101=4	     edit_2.text:=buf;
+event_102=4	   end;
+event_103=4	 end;
+event_104=4	end.
+event_105=5	// Object identification event
+event_106=5	var str,buf,longstr: string;
+event_107=5	    p: integer;
+event_108=5	begin
+event_109=5	// Info about object
+event_110=5	 getS('SelectionText',str)
+event_111=5	 getS('DescriptionText',longstr)
+event_112=5	// Get RA
+event_113=5	 p:=pos(chr(9),str);
+event_114=5	 buf:=copy(str,1,p-1);
+event_115=5	 edit_1.text:=buf;
+event_116=5	 delete(str,1,p);
+event_117=5	// Get Dec
+event_118=5	 p:=pos(chr(9),str);
+event_119=5	 buf:=copy(str,1,p-1);
+event_120=5	 edit_2.text:=buf;
+event_121=5	 delete(str,1,p);
+event_122=5	// show other information line by line
+event_123=5	 memo_1.clear;
+event_124=5	 memo_1.text:=longstr;
+event_125=5	 memo_1.selstart:=0;
+event_126=5	end.
+event_127=6	// Distance event
+event_128=6	var str: string;
+event_129=6	begin
+event_130=6	 getS('DistanceText',str)
+event_131=6	 memo_1.clear;
+event_132=6	 memo_1.lines.add('Distance: '+str);
+event_133=6	end.
+event_134=7	// Telescope connected
+event_135=7	var cm: Tstringlist;
+event_136=7	    ra,de: double;
+event_137=7	begin
+event_138=7	  // moving rates
+event_139=7	  Combo_1.clear;
+event_140=7	  cm:=Tstringlist.create;
+event_141=7	  GetScopeRates(cm);
+event_142=7	  Combo_1.items.assign(cm);
+event_143=7	  Combo_1.itemindex:=0;
+event_144=7	// Telescope position
+event_145=7	  getD('TelescopeRA',ra);
+event_146=7	  getD('TelescopeDE',de);
+event_147=7	  ra:=ra*rad2deg/15;
+event_148=7	  de:=de*rad2deg;
+event_149=7	  Edit_3.text:=ARtoStr(ra);
+event_150=7	  Edit_4.text:=DEtoStr(de);
+event_151=7	  cm.Free;
+event_152=7	end.
+event_153=8	// Telescope disconnect
+event_154=8	begin
+event_155=8	 Combo_1.clear;
+event_156=8	 Edit_3.text:='';
+event_157=8	 Edit_4.text:='';
+event_158=8	end.

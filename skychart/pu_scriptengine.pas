@@ -1188,12 +1188,12 @@ if not InitialLoad then begin
   FEventReady:=true;
   evscr[ord(evActivation)].Execute;
   TelescopeConnectEvent(TelescopeChartName,FTelescopeConnected);
-  if Assigned(FonApply) then FonApply(self);
   if CompileMemo.Lines.Count=0 then begin
     if tag<ReservedScript then CompileMemo.Lines.Add(rsDonTForgetTo)
        else CompileMemo.Lines.Add(rsDonTForgetTo2);
   end;
 end;
+if Assigned(FonApply) then FonApply(self);
 end;
 
 procedure Tf_scriptengine.ButtonAddClick(Sender: TObject);
@@ -1715,6 +1715,7 @@ end;
 procedure Tf_scriptengine.ButtonClearClick(Sender: TObject);
 begin
   if MessageDlg(Format(rsDeleteAllThe, [rsAll] ),mtConfirmation, mbYesNo, 0)=mrYes then begin
+   ScriptTitle.Text:=rsToolBox+' '+inttostr(tag+1);
    ClearTreeView;
 end;
 end;
