@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-07 19:36+0000\n"
-"PO-Revision-Date: 2014-05-26 08:52+0000\n"
+"POT-Creation-Date: 2014-06-09 08:36+0000\n"
+"PO-Revision-Date: 2014-06-09 07:35+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-07 19:49+0000\n"
+"X-Launchpad-Export-Date: 2014-06-09 11:43+0000\n"
 "X-Generator: Launchpad (build 17031)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
@@ -38,7 +38,7 @@ msgstr "9537 (większy zestaw danych)"
 
 #: u_translation.rsabandonyourc
 msgid "Abandon your changes?"
-msgstr ""
+msgstr "Porzucić zmiany?"
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
@@ -118,7 +118,7 @@ msgstr "Akcja"
 
 #: u_translation.rsactivatethet
 msgid "Activate the timer event when hidden"
-msgstr ""
+msgstr "Aktywuj zdarzenie zegara gdy ukryte"
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -283,7 +283,7 @@ msgstr "Antyaliasing"
 
 #: u_translation.rsanychangeyou
 msgid "Any change you do here will be lost when the program restart."
-msgstr ""
+msgstr "Jakakolwiek zmiana dokonana tutaj będzie utracona po uruchomieniu programu."
 
 #: u_translation.rsapparent
 msgid "Apparent"
@@ -799,7 +799,7 @@ msgstr "Sprawdź"
 
 #: u_translation.rschecklist
 msgid "CheckList"
-msgstr ""
+msgstr "Lista kontrolna"
 
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
@@ -899,7 +899,7 @@ msgstr "Kolumny"
 
 #: u_translation.rscombobox
 msgid "Combo box"
-msgstr ""
+msgstr "Pole wyboru"
 
 #: u_translation.rscomet
 msgid "Comet"
@@ -1411,7 +1411,7 @@ msgstr "Usuń"
 
 #: u_translation.rsdeleteallthe
 msgid "Delete %s, all the child nodes and the scripts?"
-msgstr ""
+msgstr "Czy usunąć %s, wraz z węzłami pochodnymi i skryptami?"
 
 #: u_translation.rsdeletecomple
 msgid "Delete completed"
@@ -1619,11 +1619,11 @@ msgstr "Nie filtruj obiektów Messiera"
 
 #: u_translation.rsdontforgetto
 msgid "Don't forget to save to a new file!"
-msgstr ""
+msgstr "Nie zapomnij zapisać do nowego pliku!"
 
 #: u_translation.rsdontforgetto2
 msgid "Don't forget to save the program configuration!"
-msgstr ""
+msgstr "Nie zapomnij zapisać konfiguracji programu!"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2519,7 +2519,7 @@ msgstr "Jeżeli to nie jest zainstalowane, spróbuj następujących kroków w za
 
 #: u_translation.rsifyouneedtoc
 msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
-msgstr ""
+msgstr "Jeżeli potrzebujesz go zmienić, użyj przycisku Zapisz/Ładuj aby przypisać ten skrypt na wolnej zakładce."
 
 #: u_translation.rsillum
 msgid "Illum."
@@ -2899,7 +2899,7 @@ msgstr "Połącz wszystkie mapy"
 
 #: u_translation.rslist
 msgid "List"
-msgstr ""
+msgstr "Lista"
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
@@ -3811,7 +3811,7 @@ msgstr "Szerokość ścieżki"
 
 #: u_translation.rspause
 msgid "Pause"
-msgstr ""
+msgstr "Wstrzymaj"
 
 #: u_translation.rspec
 msgid "PEC"
@@ -4375,7 +4375,7 @@ msgstr "Przeładuj %s dla bieżącej mapy"
 
 #: u_translation.rsremoveallbre
 msgid "Remove all breakpoints"
-msgstr ""
+msgstr "Usuń wszystkie punkty przerwania"
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
@@ -4523,7 +4523,7 @@ msgstr "Wierszy"
 
 #: u_translation.rsrun
 msgid "Run"
-msgstr ""
+msgstr "Uruchom"
 
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
@@ -5495,7 +5495,7 @@ msgstr "Ten program jest darmowy; możesz go rozpowszechniać i/lub modyfikować
 
 #: u_translation.rsthisscriptis
 msgid "This script is maintained within the software distribution."
-msgstr ""
+msgstr "Ten skrypt jest utrzymywany z resztą oprogramowania"
 
 #: u_translation.rsthursday
 msgid "Thu."
