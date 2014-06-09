@@ -49,7 +49,7 @@ scriptbutton_38="	Event_5;5;Object identification click"
 scriptbutton_39="	Event_6;6;Distance measurement"
 scriptbutton_40="	Event_7;7;Telescope connected;"
 scriptbutton_41="	Event_8;8;Telescope disconnected;"
-numscriptrows=215
+numscriptrows=219
 script_0=1	// Slew telescope
 script_1=1	  var ra,de: double;
 script_2=1	      a,b,r: string;
@@ -153,118 +153,122 @@ script_99=9	   c.add('SCOPEMOVEAXIS');
 script_100=9	   c.add('1');
 script_101=9	   c.add(Combo_1.text);
 script_102=9	   r:=cmd('',c);
-script_103=9	   memo_1.lines.add(r);
-script_104=9	 end
-script_105=9	 else memo_1.lines.add('Connect the telescope first!');
-script_106=9	end.
-script_107=10	// Move scope left
-script_108=10	var c: Tstringlist;
-script_109=10	    r: string;
-script_110=10	begin
-script_111=10	 memo_1.clear;
-script_112=10	 if MenuTelescopeConnect.checked then begin
-script_113=10	   c:=Tstringlist.create;
-script_114=10	   c.add('SCOPEMOVEAXIS');
-script_115=10	   c.add('0');
-script_116=10	   c.add(Combo_1.text);
-script_117=10	   r:=cmd('',c);
-script_118=10	   memo_1.lines.add(r);
-script_119=10	 end
-script_120=10	 else memo_1.lines.add('Connect the telescope first!');
-script_121=10	end.
-script_122=11	// Stop moving
-script_123=11	var c: Tstringlist;
-script_124=11	    r: string;
-script_125=11	begin
-script_126=11	 memo_1.clear;
-script_127=11	 if MenuTelescopeConnect.checked then begin
-script_128=11	   c:=Tstringlist.create;
-script_129=11	   c.add('ABORTSLEW');
-script_130=11	   r:=cmd('',c);
-script_131=11	   c.free;
-script_132=11	   memo_1.lines.add(r);
-script_133=11	 end
-script_134=11	 else memo_1.lines.add('Connect the telescope first!');
-script_135=11	end.
-script_136=12	// Move scope right
-script_137=12	var c: Tstringlist;
-script_138=12	    r: string;
-script_139=12	begin
-script_140=12	 memo_1.clear;
-script_141=12	 if MenuTelescopeConnect.checked then begin
-script_142=12	   c:=Tstringlist.create;
-script_143=12	   c.add('SCOPEMOVEAXIS');
-script_144=12	   c.add('0');
-script_145=12	   c.add('-'+Combo_1.text);
-script_146=12	   r:=cmd('',c);
-script_147=12	   memo_1.lines.add(r);
-script_148=12	 end
-script_149=12	 else memo_1.lines.add('Connect the telescope first!');
-script_150=12	end.
-script_151=13	// Move scope down
-script_152=13	var c: Tstringlist;
-script_153=13	    r: string;
-script_154=13	begin
-script_155=13	 memo_1.clear;
-script_156=13	 if MenuTelescopeConnect.checked then begin
-script_157=13	   c:=Tstringlist.create;
-script_158=13	   c.add('SCOPEMOVEAXIS');
-script_159=13	   c.add('1');
-script_160=13	   c.add('-'+Combo_1.text);
-script_161=13	   r:=cmd('',c);
-script_162=13	   memo_1.lines.add(r);
-script_163=13	 end
-script_164=13	 else memo_1.lines.add('Connect the telescope first!');
-script_165=13	end.
-script_166=14	// Search for an object name
-script_167=14	var cm:TstringList;
-script_168=14	    str:string;
-script_169=14	    p: integer;
-script_170=14	begin
-script_171=14	    cm:=TstringList.Create;
-script_172=14	    cm.add('SEARCH');
-script_173=14	    cm.add(Edit_5.Text);
-script_174=14	    str:=cmd('',cm);
-script_175=14	    p:=pos('OK!',str);
-script_176=14	    if p=0 then memo_1.lines.add('Error:'+Edit_5.Text+' '+str);
-script_177=14	    cm.Free;
-script_178=14	end.
-script_179=7	// First in observing list
-script_180=7	var c: TStringlist;
-script_181=7	    r:  String;
-script_182=7	begin
-script_183=7	  c:=Tstringlist.create;
-script_184=7	  c.add('OBSLISTFIRST');
-script_185=7	  r:=cmd('',c);
-script_186=7	  c.free;
-script_187=7	end.
-script_188=8	// Last in observing list
-script_189=8	var c: TStringlist;
-script_190=8	    r:  String;
-script_191=8	begin
-script_192=8	  c:=Tstringlist.create;
-script_193=8	  c.add('OBSLISTLAST');
-script_194=8	  r:=cmd('',c);
-script_195=8	  c.free;
-script_196=8	end.
-script_197=5	// Previous in observing list
-script_198=5	var c: TStringlist;
-script_199=5	    r:  String;
-script_200=5	begin
-script_201=5	  c:=Tstringlist.create;
-script_202=5	  c.add('OBSLISTPREV');
-script_203=5	  r:=cmd('',c);
-script_204=5	  c.free;
-script_205=5	end.
-script_206=6	// Next in observing list
-script_207=6	var c: TStringlist;
-script_208=6	    r:  String;
-script_209=6	begin
-script_210=6	  c:=Tstringlist.create;
-script_211=6	  c.add('OBSLISTNEXT');
-script_212=6	  r:=cmd('',c);
-script_213=6	  c.free;
-script_214=6	end.
+script_103=9	   c.Free;
+script_104=9	   memo_1.lines.add(r);
+script_105=9	 end
+script_106=9	 else memo_1.lines.add('Connect the telescope first!');
+script_107=9	end.
+script_108=10	// Move scope left
+script_109=10	var c: Tstringlist;
+script_110=10	    r: string;
+script_111=10	begin
+script_112=10	 memo_1.clear;
+script_113=10	 if MenuTelescopeConnect.checked then begin
+script_114=10	   c:=Tstringlist.create;
+script_115=10	   c.add('SCOPEMOVEAXIS');
+script_116=10	   c.add('0');
+script_117=10	   c.add(Combo_1.text);
+script_118=10	   r:=cmd('',c);
+script_119=10	   c.Free;
+script_120=10	   memo_1.lines.add(r);
+script_121=10	 end
+script_122=10	 else memo_1.lines.add('Connect the telescope first!');
+script_123=10	end.
+script_124=11	// Stop moving
+script_125=11	var c: Tstringlist;
+script_126=11	    r: string;
+script_127=11	begin
+script_128=11	 memo_1.clear;
+script_129=11	 if MenuTelescopeConnect.checked then begin
+script_130=11	   c:=Tstringlist.create;
+script_131=11	   c.add('ABORTSLEW');
+script_132=11	   r:=cmd('',c);
+script_133=11	   c.free;
+script_134=11	   memo_1.lines.add(r);
+script_135=11	 end
+script_136=11	 else memo_1.lines.add('Connect the telescope first!');
+script_137=11	end.
+script_138=12	// Move scope right
+script_139=12	var c: Tstringlist;
+script_140=12	    r: string;
+script_141=12	begin
+script_142=12	 memo_1.clear;
+script_143=12	 if MenuTelescopeConnect.checked then begin
+script_144=12	   c:=Tstringlist.create;
+script_145=12	   c.add('SCOPEMOVEAXIS');
+script_146=12	   c.add('0');
+script_147=12	   c.add('-'+Combo_1.text);
+script_148=12	   r:=cmd('',c);
+script_149=12	   c.Free;
+script_150=12	   memo_1.lines.add(r);
+script_151=12	 end
+script_152=12	 else memo_1.lines.add('Connect the telescope first!');
+script_153=12	end.
+script_154=13	// Move scope down
+script_155=13	var c: Tstringlist;
+script_156=13	    r: string;
+script_157=13	begin
+script_158=13	 memo_1.clear;
+script_159=13	 if MenuTelescopeConnect.checked then begin
+script_160=13	   c:=Tstringlist.create;
+script_161=13	   c.add('SCOPEMOVEAXIS');
+script_162=13	   c.add('1');
+script_163=13	   c.add('-'+Combo_1.text);
+script_164=13	   r:=cmd('',c);
+script_165=13	   c.Free;
+script_166=13	   memo_1.lines.add(r);
+script_167=13	end
+script_168=13	 else memo_1.lines.add('Connect the telescope first!');
+script_169=13	end.
+script_170=14	// Search for an object name
+script_171=14	var cm:TstringList;
+script_172=14	    str:string;
+script_173=14	    p: integer;
+script_174=14	begin
+script_175=14	    cm:=TstringList.Create;
+script_176=14	    cm.add('SEARCH');
+script_177=14	    cm.add(Edit_5.Text);
+script_178=14	    str:=cmd('',cm);
+script_179=14	    p:=pos('OK!',str);
+script_180=14	    if p=0 then memo_1.lines.add('Error:'+Edit_5.Text+' '+str);
+script_181=14	    cm.Free;
+script_182=14	end.
+script_183=7	// First in observing list
+script_184=7	var c: TStringlist;
+script_185=7	    r:  String;
+script_186=7	begin
+script_187=7	  c:=Tstringlist.create;
+script_188=7	  c.add('OBSLISTFIRST');
+script_189=7	  r:=cmd('',c);
+script_190=7	  c.free;
+script_191=7	end.
+script_192=8	// Last in observing list
+script_193=8	var c: TStringlist;
+script_194=8	    r:  String;
+script_195=8	begin
+script_196=8	  c:=Tstringlist.create;
+script_197=8	  c.add('OBSLISTLAST');
+script_198=8	  r:=cmd('',c);
+script_199=8	  c.free;
+script_200=8	end.
+script_201=5	// Previous in observing list
+script_202=5	var c: TStringlist;
+script_203=5	    r:  String;
+script_204=5	begin
+script_205=5	  c:=Tstringlist.create;
+script_206=5	  c.add('OBSLISTPREV');
+script_207=5	  r:=cmd('',c);
+script_208=5	  c.free;
+script_209=5	end.
+script_210=6	// Next in observing list
+script_211=6	var c: TStringlist;
+script_212=6	    r:  String;
+script_213=6	begin
+script_214=6	  c:=Tstringlist.create;
+script_215=6	  c.add('OBSLISTNEXT');
+script_216=6	  r:=cmd('',c);
+script_217=6	  c.free;
+script_218=6	end.
 numcomborows=0
 numevents=159
 event_0=0	// Initialization
