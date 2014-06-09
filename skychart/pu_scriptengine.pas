@@ -917,6 +917,7 @@ begin
   Load(ConfigScriptButton, ConfigScript, ConfigCombo, ConfigEvent,titl);
   ConfigScriptButton.Free;
   ConfigScript.Free;
+  ConfigCombo.Free;
   ConfigEvent.Free;
 end;
 
