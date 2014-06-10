@@ -9306,7 +9306,7 @@ begin
 end;
 
 function Tf_main.GetScopeRates(cname:string; arg:Tstringlist):string;
-var i,j,mx: integer;
+var j: integer;
 begin
  result:=msgFailed;
  arg.clear;
