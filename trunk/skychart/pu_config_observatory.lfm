@@ -11,7 +11,7 @@ object f_configobservatory: Tf_configobservatory
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.2.0'
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -31,6 +31,7 @@ object f_configobservatory: Tf_configobservatory
       Caption = 'OK'
       Default = True
       ModalResult = 1
+      OnClick = Button1Click
       TabOrder = 1
     end
     object Button2: TButton
@@ -84,12 +85,12 @@ object f_configobservatory: Tf_configobservatory
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 522
-          ClientWidth = 495
+          ClientHeight = 526
+          ClientWidth = 499
         end
         inherited Page2: TTabSheet
-          ClientHeight = 522
-          ClientWidth = 495
+          ClientHeight = 526
+          ClientWidth = 499
         end
       end
     end

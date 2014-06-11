@@ -42,6 +42,7 @@ type
     Button4: TButton;
     f_config_observatory1: Tf_config_observatory;
     Panel1: TPanel;
+    procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -84,7 +85,13 @@ end;
 
 procedure Tf_configobservatory.Button2Click(Sender: TObject);
 begin
+f_config_observatory1.Button6Click(nil);
 if assigned(f_config_observatory1.onApplyConfig) then f_config_observatory1.onApplyConfig(f_config_observatory1);
+end;
+
+procedure Tf_configobservatory.Button1Click(Sender: TObject);
+begin
+f_config_observatory1.Button6Click(nil);
 end;
 
 procedure Tf_configobservatory.Button4Click(Sender: TObject);
