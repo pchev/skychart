@@ -79,6 +79,7 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure HelpBtnClick(Sender: TObject);
+    procedure OKBtnClick(Sender: TObject);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -373,6 +374,11 @@ case PageControl1.PageIndex of
 end;
 end;
 
+procedure Tf_config.OKBtnClick(Sender: TObject);
+begin
+  f_config_observatory1.Button6Click(nil);
+end;
+
 procedure Tf_config.nextClick(Sender: TObject);
 begin
 if (Treeview1.selected<>nil)and(Treeview1.selected.absoluteindex< Treeview1.items.count-1) then begin
@@ -548,6 +554,7 @@ end;
 
 procedure Tf_config.applyClick(Sender: TObject);
 begin
+f_config_observatory1.Button6Click(nil);
 ActivateChanges;
 if assigned(FApplyConfig) then FApplyConfig(Self);
 end;
