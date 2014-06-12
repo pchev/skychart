@@ -2061,7 +2061,6 @@ var x,y : integer;
 begin
 if locked then exit;
 if sc.cfgsc.FindOK and (not cmain.SimpleDetail) then begin
-   sc.plot.FlushCnv;
    identlabel.Visible:=false;
    Identlabel.Picture.Bitmap.Canvas.Brush.Color:=sc.plot.cfgplot.color[0];
    Identlabel.Picture.Bitmap.Canvas.Brush.Style:=bsSolid;
