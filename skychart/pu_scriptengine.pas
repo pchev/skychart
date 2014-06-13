@@ -248,7 +248,7 @@ type
     procedure StartTimer;
     procedure Save(strbtn, strscr, comboscr, eventscr: Tstringlist; var title:string);
     procedure Load(strbtn, strscr, comboscr, eventscr: Tstringlist; title:string);
-    procedure LoadFile(fn: string);
+    procedure LoadFile(fn: string; title:string='');
     procedure ChartRefreshEvent(origin,str:string);
     procedure ObjectSelectionEvent(origin,str,longstr:string);
     procedure DistanceMeasurementEvent(origin,str:string);
@@ -894,7 +894,7 @@ begin
   ButtonApplyClick(nil);
 end;
 
-procedure Tf_scriptengine.LoadFile(fn: string);
+procedure Tf_scriptengine.LoadFile(fn: string; title:string='');
 var ConfigScriptButton, ConfigScript, ConfigCombo, ConfigEvent: Tstringlist;
     section,buf,titl: string;
     inif: TMemIniFile;
@@ -909,6 +909,7 @@ begin
   with inif do begin
   section:='ScriptPanel';
   titl:=ReadString(section,'Title',ScriptTitle.Text);
+  if title<>'' then titl:=title;
   CheckBoxHidenTimer.Checked:=ReadBool(section,'HidenTimer',CheckBoxHidenTimer.Checked);
   n:=ReadInteger(section,'numtoolbar1',0);
   ConfigToolbar1.Clear;
@@ -1738,7 +1739,7 @@ end;
 procedure Tf_scriptengine.ButtonClearClick(Sender: TObject);
 begin
   if MessageDlg(Format(rsDeleteAllThe, [rsAll] ),mtConfirmation, mbYesNo, 0)=mrYes then begin
-   ScriptTitle.Text:=rsToolBox+' '+inttostr(tag+1);
+   ScriptTitle.Text:='';
    ClearTreeView;
 end;
 end;

@@ -1544,6 +1544,8 @@ resourcestring
   rsTarget = 'Target';
   rsHandPad = 'HandPad';
   rsSelectNone = 'Select none';
+  rsObserverTool = 'Observer tools';
+  rsLocationTime = 'Location / Time';
 
 implementation
 

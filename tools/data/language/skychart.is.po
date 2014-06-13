@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-13 10:57+0000\n"
+"POT-Creation-Date: 2014-06-13 14:45+0000\n"
 "PO-Revision-Date: 2014-05-01 08:35+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-13 11:04+0000\n"
+"X-Launchpad-Export-Date: 2014-06-13 14:52+0000\n"
 "X-Generator: Launchpad (build 17045)\n"
 
 #: u_translation.rs102cddss
@@ -2956,6 +2956,10 @@ msgstr "Stjörnutími staðar"
 msgid "Location code"
 msgstr "Staðarlykill"
 
+#: u_translation.rslocationtime
+msgid "Location / Time"
+msgstr ""
+
 #: u_translation.rslock
 msgid "Lock"
 msgstr ""
@@ -3607,6 +3611,10 @@ msgstr "Athugunarstaður"
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
 msgstr "Gagnagrunnur athugunarstaðar"
+
+#: u_translation.rsobservertool
+msgid "Observer tools"
+msgstr ""
 
 #: u_translation.rsobservinglis
 msgid "Observing list"

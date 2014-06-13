@@ -5744,9 +5744,8 @@ for i:=ReservedScript to numscript-1 do begin
    if ok then begin
        ActiveScript:=i;
    end;
-   buf:=ReadString(section,'Title',Fscript[i].PanelTitle.Caption);
-   if copy(buf,1,Length(rsToolBox))<>rsToolBox then
-      Fscript[i].PanelTitle.Caption:=buf;
+   buf:=ReadString(section,'Title',Fscript[i].ScriptTitle);
+   if buf<>'' then Fscript[i].PanelTitle.Caption:=buf;
    Fscript[i].HidenTimer:=ReadBool(section,'HidenTimer',false);
    n:=ReadInteger(section,'numtoolbar1',0);
    for j:=0 to n-1 do Fscript[i].ConfigToolbar1.Add(ReadString(section,'toolbar1_'+inttostr(j),''));
@@ -6524,7 +6523,7 @@ for i:=ReservedScript to numscript-1 do begin
    section:='ScriptPanel'+inttostr(i);
    EraseSection(section);
    WriteBool(section,'visible',Fscript[i].Visible);
-   WriteString(section,'Title',Fscript[i].PanelTitle.Caption);
+   WriteString(section,'Title',Fscript[i].ScriptTitle);
    WriteBool(section,'HidenTimer',Fscript[i].HidenTimer);
    n:=Fscript[i].ConfigToolbar1.Count;
    WriteInteger(section,'numtoolbar1',n);

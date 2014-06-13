@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-13 10:57+0000\n"
+"POT-Creation-Date: 2014-06-13 14:45+0000\n"
 "PO-Revision-Date: 2014-06-09 07:35+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-13 11:05+0000\n"
+"X-Launchpad-Export-Date: 2014-06-13 14:52+0000\n"
 "X-Generator: Launchpad (build 17045)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
@@ -2961,6 +2961,10 @@ msgstr "Lokalny czas gwiazdowy"
 msgid "Location code"
 msgstr "Kod pozycji"
 
+#: u_translation.rslocationtime
+msgid "Location / Time"
+msgstr ""
+
 #: u_translation.rslock
 msgid "Lock"
 msgstr "Blokada"
@@ -3612,6 +3616,10 @@ msgstr "Obserwatorium"
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
 msgstr "Miejsce obserwacji"
+
+#: u_translation.rsobservertool
+msgid "Observer tools"
+msgstr ""
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
