@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-09 08:36+0000\n"
+"POT-Creation-Date: 2014-06-13 10:57+0000\n"
 "PO-Revision-Date: 2014-05-01 08:34+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-09 11:43+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-13 11:04+0000\n"
+"X-Generator: Launchpad (build 17045)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2452,6 +2452,10 @@ msgstr "Διακοπή μετά από 1000 λάθη"
 msgid "Hammer-Aitoff"
 msgstr "Hammer-Aitoff"
 
+#: u_translation.rshandpad
+msgid "HandPad"
+msgstr ""
+
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
 msgstr ""
@@ -4779,6 +4783,10 @@ msgstr ""
 msgid "Select mirror site"
 msgstr "Επιλογή mirror site"
 
+#: u_translation.rsselectnone
+msgid "Select none"
+msgstr ""
+
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
 msgstr "Επιλογή πλάκας από λίστα"
@@ -5468,6 +5476,10 @@ msgstr ""
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
 msgstr "%sΑυτός ο πίνακας υπάρχει: %s"
+
+#: u_translation.rstarget
+msgid "Target"
+msgstr ""
 
 #: u_translation.rstcpipconnect
 #| msgid "TCP/IP Connection"

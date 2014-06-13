@@ -6042,3 +6042,15 @@ msgstr ""
 msgid "Abandon your changes?"
 msgstr ""
 
+#: u_translation:rstarget
+msgid "Target"
+msgstr ""
+
+#: u_translation:rshandpad
+msgid "HandPad"
+msgstr ""
+
+#: u_translation:rsselectnone
+msgid "Select none"
+msgstr ""
+
