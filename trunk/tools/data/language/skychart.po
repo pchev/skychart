@@ -6054,3 +6054,11 @@ msgstr ""
 msgid "Select none"
 msgstr ""
 
+#: u_translation:rsobservertool
+msgid "Observer tools"
+msgstr ""
+
+#: u_translation:rslocationtime
+msgid "Location / Time"
+msgstr ""
+

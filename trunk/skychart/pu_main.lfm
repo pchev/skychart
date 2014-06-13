@@ -2,11 +2,11 @@ object f_main: Tf_main
   Left = 358
   Height = 600
   Top = 124
-  Width = 1022
+  Width = 1024
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
   ClientHeight = 580
-  ClientWidth = 1022
+  ClientWidth = 1024
   KeyPreview = True
   Menu = MainMenu1
   OnActivate = FormActivate
@@ -50,7 +50,7 @@ object f_main: Tf_main
     end
   end
   object PanelRight: TPanel
-    Left = 994
+    Left = 996
     Height = 466
     Top = 80
     Width = 28
@@ -88,11 +88,11 @@ object f_main: Tf_main
     Left = 0
     Height = 34
     Top = 546
-    Width = 1022
+    Width = 1024
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 34
-    ClientWidth = 1022
+    ClientWidth = 1024
     FullRepaint = False
     TabOrder = 4
     object Shape1: TShape
@@ -142,30 +142,30 @@ object f_main: Tf_main
       Left = 222
       Height = 34
       Top = 0
-      Width = 800
+      Width = 802
       Align = alClient
       Alignment = taLeftJustify
       BevelOuter = bvNone
       ClientHeight = 34
-      ClientWidth = 800
+      ClientWidth = 802
       FullRepaint = False
       TabOrder = 1
       object LPanels1: TPanel
         Left = 0
         Height = 34
         Top = 0
-        Width = 800
+        Width = 802
         Align = alClient
         Alignment = taLeftJustify
         BevelOuter = bvNone
         ClientHeight = 34
-        ClientWidth = 800
+        ClientWidth = 802
         TabOrder = 0
         object P1L1: TLabel
           Left = 0
           Height = 34
           Top = 0
-          Width = 800
+          Width = 802
           Align = alClient
           AutoSize = False
           ParentColor = False
@@ -177,11 +177,11 @@ object f_main: Tf_main
     Left = 0
     Height = 80
     Top = 0
-    Width = 1022
+    Width = 1024
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 80
-    ClientWidth = 1022
+    ClientWidth = 1024
     FullRepaint = False
     TabOrder = 0
     TabStop = True
@@ -189,7 +189,7 @@ object f_main: Tf_main
       Left = 0
       Height = 25
       Top = 30
-      Width = 1022
+      Width = 1024
       ButtonHeight = 24
       ButtonWidth = 24
       Caption = 'Main bar'
@@ -200,7 +200,7 @@ object f_main: Tf_main
       TabStop = True
       Wrapable = False
       object ChildControl: TPanel
-        Left = 992
+        Left = 994
         Height = 23
         Top = 2
         Width = 30
@@ -275,7 +275,7 @@ object f_main: Tf_main
       Left = 0
       Height = 30
       Top = 0
-      Width = 1022
+      Width = 1024
       TabStop = False
       OnChange = TabControl1Change
       Align = alTop
@@ -286,7 +286,7 @@ object f_main: Tf_main
       Left = 0
       Height = 27
       Top = 53
-      Width = 1022
+      Width = 1024
       Align = alBottom
       ButtonHeight = 24
       ButtonWidth = 24
@@ -3279,19 +3279,19 @@ object f_main: Tf_main
     Left = 28
     Height = 466
     Top = 80
-    Width = 225
+    Width = 276
     Align = alLeft
     ClientHeight = 466
-    ClientWidth = 225
+    ClientWidth = 276
     TabOrder = 6
     Visible = False
     object ScriptScrollBox: TScrollBox
       Left = 1
       Height = 464
       Top = 1
-      Width = 223
-      HorzScrollBar.Increment = 21
-      HorzScrollBar.Page = 219
+      Width = 274
+      HorzScrollBar.Increment = 27
+      HorzScrollBar.Page = 270
       HorzScrollBar.Smooth = True
       HorzScrollBar.Tracking = True
       VertScrollBar.Increment = 46
@@ -3304,7 +3304,7 @@ object f_main: Tf_main
     end
   end
   object Splitter1: TSplitter
-    Left = 253
+    Left = 304
     Height = 466
     Top = 80
     Width = 5

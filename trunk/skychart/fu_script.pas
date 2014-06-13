@@ -80,6 +80,7 @@ type
     FHidenTimer: Boolean;
     FTelescopeConnected: Boolean;
     TelescopeChartName: string;
+    sctitle: array[0..ReservedScript] of string;
     procedure CreateEngine;
     procedure ApplyScript(Sender: TObject);
     procedure SetExecuteCmd(value:TExecuteCmd);
@@ -151,6 +152,7 @@ type
     property ActiveChart: Tf_chart read FActiveChart write SetActiveChart;
     property HidenTimer: Boolean read GetHidenTimer write SetHidenTimer;
     property onApply: TNotifyEvent read FonApply write FonApply;
+    property ScriptTitle: string read FScriptTitle;
   end;
 
 implementation
@@ -166,6 +168,9 @@ begin
   Label1.Caption:=rsConfiguratio;
   ButtonEditSrc.Caption:=rsScript;
   ButtonEditTB.Caption:=rsToolBar;
+  sctitle[0]:=rsObserverTool;
+  sctitle[1]:=rsSolarSystem;
+  sctitle[2]:=rsLocationTime;
   fedittoolbar.SetLang;
   if fscriptengine<>nil then fscriptengine.SetLang;
   SetHelp(self,hlpScriptEditor);
@@ -287,7 +292,7 @@ begin
     if fscriptengine=nil then begin
        CreateEngine;
     end;
-    fscriptengine.LoadFile(slash(appdir)+slash('data')+slash('script')+'script'+inttostr(tag+1)+'.cdcps');
+    fscriptengine.LoadFile(slash(appdir)+slash('data')+slash('script')+'script'+inttostr(tag+1)+'.cdcps',sctitle[tag]);
     fscriptengine.InitialLoad:=false;
   end;
 end;
@@ -319,7 +324,8 @@ end;
 procedure Tf_script.ApplyScript(Sender: TObject);
 begin
  fscriptengine.Save(FConfigScriptButton, FConfigScript, FConfigCombo, FConfigEvent,FScriptTitle);
- PanelTitle.Caption:=FScriptTitle;
+ if FScriptTitle<>'' then PanelTitle.Caption:=FScriptTitle
+    else PanelTitle.Caption:=rsToolBox+' '+inttostr(tag+1);
  fedittoolbar.LoadToolbar(0,ConfigToolbar1);
  fedittoolbar.LoadToolbar(1,ConfigToolbar2);
  fedittoolbar.ActivateToolbar;
