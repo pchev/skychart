@@ -177,6 +177,7 @@ type
     FCometMark: TExecuteCmd;
     FAsteroidMark: TExecuteCmd;
     FGetScopeRates: TExecuteCmd;
+    FSendInfo: TSendInfo;
     FMainmenu: TMenu;
     Fcdb: TCDCdb;
     Fcmain: Tconf_main;
@@ -221,6 +222,7 @@ type
     function doGetAsteroidList(const filter: string; maxnum:integer; list:TstringList):boolean;
     function doAsteroidMark(list:TstringList):boolean;
     function doGetScopeRates(list:TstringList):boolean;
+    procedure doSendInfo(origin,str:string);
     procedure Button_Click(Sender: TObject);
     procedure Combo_Change(Sender: TObject);
     procedure ReorderGroup;
@@ -259,6 +261,7 @@ type
     property CometMark: TExecuteCmd read FCometMark write FCometMark;
     property AsteroidMark: TExecuteCmd read FAsteroidMark write FAsteroidMark;
     property GetScopeRates: TExecuteCmd read FGetScopeRates write FGetScopeRates;
+    property SendInfo: TSendInfo read FSendInfo write FSendInfo;
     property Mainmenu: TMenu read FMainmenu write FMainmenu;
     property cdb: TCDCdb read Fcdb  write Fcdb;
     property cmain: Tconf_main read Fcmain write Fcmain;
@@ -375,6 +378,11 @@ var str: string;
 begin
   if assigned(FGetScopeRates) then str:=FGetScopeRates(TelescopeChartName,list);
   result:=(pos(msgOK,str)>0);
+end;
+
+procedure Tf_scriptengine.doSendInfo(origin,str:string);
+begin
+  if Assigned(FSendInfo) then FSendInfo(self,origin,str);
 end;
 
 function Tf_scriptengine.doGetObservatoryList(list:TstringList):boolean;
@@ -1773,6 +1781,7 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doGetAsteroidList,'function GetAsteroidList(const filter: string; maxnum:integer; list:TstringList):boolean;');
   AddMethod(self, @Tf_scriptengine.doAsteroidMark,'function AsteroidMark(list:TstringList):boolean;');
   AddMethod(self, @Tf_scriptengine.doGetScopeRates,'function GetScopeRates(list:TstringList):boolean;');
+  AddMethod(self, @Tf_scriptengine.doSendInfo,'procedure SendInfo(origin,str:string);');
   AddMethod(self, @Tf_scriptengine.doGetObservatoryList,'function GetObservatoryList(list:TstringList):boolean;');
   AddMethod(self, @Tf_scriptengine.doOpenFile,'function OpenFile(fn:string):boolean;');
   AddMethod(self, @Tf_scriptengine.doRun,'function Run(cmdline:string):boolean;');

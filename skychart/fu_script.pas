@@ -68,6 +68,7 @@ type
     FCometMark: TExecuteCmd;
     FAsteroidMark: TExecuteCmd;
     FGetScopeRates: TExecuteCmd;
+    FSendInfo: TSendInfo;
     FActivechart: Tf_chart;
     FonApply: TNotifyEvent;
     FScriptTitle: string;
@@ -81,6 +82,7 @@ type
     procedure SetCometMark(value:TExecuteCmd);
     procedure SetAsteroidMark(value:TExecuteCmd);
     procedure SetGetScopeRates(value:TExecuteCmd);
+    procedure SetSendInfo(value:TSendInfo);
     procedure SetActiveChart(value:Tf_chart);
     function  GetHidenTimer: Boolean;
     procedure SetHidenTimer(value:Boolean);
@@ -135,6 +137,7 @@ type
     property CometMark: TExecuteCmd read FCometMark write SetCometMark;
     property AsteroidMark: TExecuteCmd read FAsteroidMark write SetAsteroidMark;
     property GetScopeRates: TExecuteCmd read FGetScopeRates write SetGetScopeRates;
+    property SendInfo: TSendInfo read FSendInfo write SetSendInfo;
     property ActiveChart: Tf_chart read FActiveChart write SetActiveChart;
     property HidenTimer: Boolean read GetHidenTimer write SetHidenTimer;
     property onApply: TNotifyEvent read FonApply write FonApply;
@@ -220,6 +223,7 @@ begin
   fscriptengine.CometMark:=FCometMark;
   fscriptengine.AsteroidMark:=FAsteroidMark;
   fscriptengine.GetScopeRates:=FGetScopeRates;
+  fscriptengine.SendInfo:=FSendInfo;
   fscriptengine.Activechart:=FActivechart;
   fscriptengine.Mainmenu:=FMainmenu;
   fscriptengine.cdb:=Fcdb;
@@ -333,6 +337,12 @@ procedure Tf_script.SetGetScopeRates(value:TExecuteCmd);
 begin
 FGetScopeRates:=value;
 if fscriptengine<>nil then fscriptengine.GetScopeRates:=FGetScopeRates;
+end;
+
+procedure Tf_script.SetSendInfo(value:TSendInfo);
+begin
+FSendInfo:=value;
+if fscriptengine<>nil then fscriptengine.SendInfo:=FSendInfo;
 end;
 
 procedure Tf_script.SetActiveChart(value:Tf_chart);

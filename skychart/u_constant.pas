@@ -41,6 +41,7 @@ type
   Titt = (ittlinear,ittramp,ittlog,ittsqrt);
 
   TExecuteCmd = function(cname:string; arg:Tstringlist):string of object;
+  TSendInfo = procedure(Sender: TObject; origin,str:string) of object;
 
 {$i revision.inc}
 
