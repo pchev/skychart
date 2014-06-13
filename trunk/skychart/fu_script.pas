@@ -29,8 +29,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses  u_translation, u_constant, u_help, pu_edittoolbar, pu_scriptengine, u_util,
-  fu_chart, cu_database, ActnList, Menus, Classes, SysUtils,
-  FileUtil, Forms, Controls, ExtCtrls, StdCtrls, ComCtrls, Buttons;
+  fu_chart, cu_database, cu_catalog, cu_fits, cu_planet,
+  ActnList, Menus, Classes, SysUtils, FileUtil, Forms, Controls, ExtCtrls,
+  StdCtrls, ComCtrls, Buttons;
 
 type
 
@@ -63,6 +64,9 @@ type
     FTimeU,FMainTimeU: TComboBox;
     FMainmenu: TMenu;
     Fcdb: TCDCdb;
+    Fcatalog: TCatalog;
+    Ffits : TFits;
+    Fplanet  : Tplanet;
     Fcmain: Tconf_main;
     FExecuteCmd: TExecuteCmd;
     FCometMark: TExecuteCmd;
@@ -88,6 +92,9 @@ type
     procedure SetHidenTimer(value:Boolean);
     procedure SetMainmenu(value:TMenu);
     procedure SetCDB(value:TCDCdb);
+    procedure SetCatalog(value:TCatalog);
+    procedure SetPlanet(value:TPlanet);
+    procedure SetFits(value:TFits);
     procedure SetTimeU(value:TComboBox);
     procedure SetTimeValPanel(value:TPanel);
     procedure SetEditTimeVal(value:TEdit);
@@ -126,6 +133,9 @@ type
     property TimeU: TComboBox read FTimeU  write SetTimeU ;
     property Mainmenu: TMenu read FMainmenu  write SetMainmenu;
     property cdb: TCDCdb read Fcdb  write SetCDB;
+    property planet: Tplanet read Fplanet write Setplanet;
+    property fits: Tfits read Ffits write Setfits;
+    property catalog: Tcatalog read Fcatalog write Setcatalog;
     property cmain: Tconf_main read Fcmain write Fcmain;
     property ConfigToolbar1: TStringList read FConfigToolbar1 write FConfigToolbar1;
     property ConfigToolbar2: TStringList read FConfigToolbar2 write FConfigToolbar2;
@@ -227,6 +237,9 @@ begin
   fscriptengine.Activechart:=FActivechart;
   fscriptengine.Mainmenu:=FMainmenu;
   fscriptengine.cdb:=Fcdb;
+  fscriptengine.catalog:=Fcatalog;
+  fscriptengine.fits:=Ffits;
+  fscriptengine.planet:=Fplanet;
   fscriptengine.cmain:=Fcmain;
 end;
 
@@ -361,6 +374,24 @@ procedure Tf_script.SetCDB(value:TCDCdb);
 begin
  Fcdb:=value;
  if fscriptengine<>nil then fscriptengine.cdb:=Fcdb;
+end;
+
+procedure Tf_script.SetCatalog(value:TCatalog);
+begin
+ Fcatalog:=value;
+ if fscriptengine<>nil then fscriptengine.catalog:=Fcatalog;
+end;
+
+procedure Tf_script.SetPlanet(value:TPlanet);
+begin
+ Fplanet:=value;
+ if fscriptengine<>nil then fscriptengine.planet:=Fplanet;
+end;
+
+procedure Tf_script.SetFits(value:TFits);
+begin
+ Ffits:=value;
+ if fscriptengine<>nil then fscriptengine.fits:=Ffits;
 end;
 
 procedure Tf_script.ChartRefreshEvent(origin,str:string);

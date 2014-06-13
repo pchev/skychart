@@ -131,11 +131,11 @@ object pop_lx200: Tpop_lx200
       end
       object GroupBox1: TGroupBox
         Left = 3
-        Height = 217
+        Height = 241
         Top = 73
         Width = 339
         Caption = 'Move '
-        ClientHeight = 187
+        ClientHeight = 211
         ClientWidth = 335
         TabOrder = 1
         object Shape1: TShape
@@ -329,18 +329,18 @@ object pop_lx200: Tpop_lx200
         end
         object GroupBox8: TGroupBox
           Left = 9
-          Height = 76
+          Height = 108
           Top = 126
           Width = 128
           Caption = 'Swap button'
-          ClientHeight = 46
+          ClientHeight = 78
           ClientWidth = 124
           TabOrder = 1
           object CheckBox3: TCheckBox
             Left = 6
             Height = 26
             Top = 2
-            Width = 68
+            Width = 74
             Caption = 'N <-> S'
             OnClick = CheckBox3Click
             TabOrder = 0
@@ -349,7 +349,7 @@ object pop_lx200: Tpop_lx200
             Left = 6
             Height = 26
             Top = 30
-            Width = 71
+            Width = 74
             Caption = 'E <-> W'
             OnClick = CheckBox4Click
             TabOrder = 1
@@ -358,10 +358,10 @@ object pop_lx200: Tpop_lx200
       end
       object GroupBox3: TGroupBox
         Left = 3
-        Height = 82
-        Top = 382
+        Height = 66
+        Top = 398
         Width = 347
-        ClientHeight = 78
+        ClientHeight = 62
         ClientWidth = 343
         TabOrder = 3
         object SpeedButton1: TSpeedButton
@@ -408,12 +408,12 @@ object pop_lx200: Tpop_lx200
         end
       end
       object GroupBox6: TGroupBox
-        Left = 3
-        Height = 65
-        Top = 302
+        Left = 8
+        Height = 74
+        Top = 318
         Width = 155
         Caption = 'High Precision Pointing'
-        ClientHeight = 35
+        ClientHeight = 44
         ClientWidth = 151
         TabOrder = 2
         Visible = False

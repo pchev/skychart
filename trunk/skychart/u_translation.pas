@@ -1541,6 +1541,9 @@ resourcestring
   rsStepOver = 'Step Over';
   rsRemoveAllBre = 'Remove all breakpoints';
   rsAbandonYourC = 'Abandon your changes?';
+  rsTarget = 'Target';
+  rsHandPad = 'HandPad';
+  rsSelectNone = 'Select none';
 
 implementation
 
