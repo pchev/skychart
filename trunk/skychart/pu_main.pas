@@ -35,7 +35,7 @@ uses
   lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, fu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
-  pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, pu_obslist, fu_script,
+  pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, pu_obslist, fu_script, pu_scriptengine,
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
@@ -2094,6 +2094,7 @@ for i:=0 to numscript-1 do begin
   Fscript[i].CometMark:=CometMark;
   Fscript[i].AsteroidMark:=AsteroidMark;
   Fscript[i].GetScopeRates:=GetScopeRates;
+  Fscript[i].SendInfo:=SendInfo;
   Fscript[i].onApply:=ApplyScript;
   if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
   Fscript[i].Parent:=ScriptScrollBox;
@@ -4201,7 +4202,7 @@ end else begin
   txt:=txt+catalog.LongLabel(buf2);                        // Alt name
 end;
 P1L1.Caption:=txt+crlf+txt2;
-if sendmsg then SendInfo(Sender,origin,txt1);
+if sendmsg then SendInfo(sender,origin,txt1);
 // refresh tracking object
 if MultiFrame1.ActiveObject is Tf_chart then with (MultiFrame1.ActiveObject as Tf_chart) do begin
     if sc.cfgsc.TrackOn then begin
@@ -7619,11 +7620,13 @@ for i:=1 to Maxwindow do begin
     and(not TCPDaemon.TCPThrd[i].terminated)
     then TCPDaemon.TCPThrd[i].SendData('>'+tab+origin+' :'+tab+str);
 end;
-if copy(str,1,i)=rsFrom then
-   for i:=0 to numscript-1 do Fscript[i].DistanceMeasurementEvent(origin,str)
-else begin
-   lstr:=striphtml(Tf_chart(MultiFrame1.ActiveObject).formatdesc);
-   for i:=0 to numscript-1 do Fscript[i].ObjectSelectionEvent(origin,str,lstr);
+if not(sender is Tf_scriptengine) then begin
+  if copy(str,1,i)=rsFrom then
+     for i:=0 to numscript-1 do Fscript[i].DistanceMeasurementEvent(origin,str)
+  else begin
+     lstr:=striphtml(Tf_chart(MultiFrame1.ActiveObject).formatdesc);
+     for i:=0 to numscript-1 do Fscript[i].ObjectSelectionEvent(origin,str,lstr);
+  end;
 end;
 end;
 
