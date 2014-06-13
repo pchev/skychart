@@ -461,6 +461,7 @@ type
     procedure ResetRotationExecute(Sender: TObject);
     procedure rotate180Execute(Sender: TObject);
     procedure ScaleModeExecute(Sender: TObject);
+    procedure ScriptScrollBoxResize(Sender: TObject);
     procedure SetupPicturesExecute(Sender: TObject);
     procedure ShowCompassExecute(Sender: TObject);
     procedure ShowUobjExecute(Sender: TObject);
@@ -621,6 +622,8 @@ type
     Fscript: array of Tf_script;
     ActiveScript: integer;
     FTelescopeConnected: boolean;
+    ScriptScrollBoxResizeCount: integer;
+    ScriptScrollBoxResizeTime: double;
   {$ifdef mswindows}
     savwincol  : array[0..25] of Tcolor;
   {$endif}
@@ -2658,6 +2661,27 @@ begin
      if MeasureOn then MeasureDistance(4,0,0);
      Refresh;
   end;
+end;
+
+procedure Tf_main.ScriptScrollBoxResize(Sender: TObject);
+begin
+// Protection again auto-resize loop
+if ScriptScrollBoxResizeCount=0 then begin
+   ScriptScrollBoxResizeTime:=now;
+   inc(ScriptScrollBoxResizeCount);
+end else begin
+  inc(ScriptScrollBoxResizeCount);
+  if (now-ScriptScrollBoxResizeTime)>(0.1/secday) then begin
+    ScriptScrollBoxResizeCount:=0;
+  end else begin
+    if ScriptScrollBoxResizeCount>10 then begin  // 10 resize call in 0.1 sec
+       ScriptScrollBoxResizeCount:=0;
+       ScriptScrollBox.AutoScroll:=false;
+       ScriptScrollBox.VertScrollBar.Visible:=false;
+       ScriptScrollBox.HorzScrollBar.Visible:=false;
+    end;
+  end;
+end;
 end;
 
 procedure Tf_main.AnimationTimerTimer(Sender: TObject);
@@ -9201,6 +9225,9 @@ for i:=0 to numscript-1 do begin
   Fscript[i].TimeU:=TimeU;
   Fscript[i].Mainmenu:=MainMenu1;
   Fscript[i].cdb:=cdcdb;
+  Fscript[i].catalog:=catalog;
+  Fscript[i].Fits:=Fits;
+  Fscript[i].planet:=planet;
   Fscript[i].cmain:=cfgm;
   if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
   Fscript[i].Init;

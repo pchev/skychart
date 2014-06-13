@@ -59,7 +59,7 @@ script_7=1	    cm.add('8');
 script_8=1	    cm.add(Combo_1.Text);
 script_9=1	    str:=cmd('',cm);
 script_10=1	    p:=pos('OK!',str);
-script_11=1	    if p=0 then memo_1.lines.add('Error:'+Combo_1.Text+' '+str);
+script_11=1	    if p=0 then memo_1.lines.add(rsError+' '+Combo_1.Text+' '+str);
 script_12=1	    cm.Free;
 script_13=1	end.
 script_14=2	var cm:TstringList;
@@ -123,7 +123,7 @@ script_71=5	      cm.add('6');
 script_72=5	      cm.add(obj);
 script_73=5	      str:=cmd('',cm);
 script_74=5	      p:=pos('OK!',str);
-script_75=5	      if p=0 then memo_1.lines.add('Error:'+obj+' '+str);
+script_75=5	      if p=0 then memo_1.lines.add(rsError+' '+obj+' '+str);
 script_76=5	      cm.Free;
 script_77=5	    end;
 script_78=5	end.
@@ -188,12 +188,12 @@ script_136=11	      cm.add('7');
 script_137=11	      cm.add(obj);
 script_138=11	      str:=cmd('',cm);
 script_139=11	      p:=pos('OK!',str);
-script_140=11	      if p=0 then memo_1.lines.add('Error:'+obj+' '+str);
+script_140=11	      if p=0 then memo_1.lines.add(rsError+' '+obj+' '+str);
 script_141=11	      cm.Free;
 script_142=11	    end;
 script_143=11	end.
 numcomborows=0
-numevents=52
+numevents=68
 event_0=5	// Object identification event
 event_1=5	var longstr: string;
 event_2=5	begin
@@ -208,41 +208,57 @@ event_10=0	var cm:TstringList;
 event_11=0	    str,year: string;
 event_12=0	    p: integer;
 event_13=0	begin
-event_14=0	  // Fill planet list
-event_15=0	  Combo_1.Clear;
-event_16=0	  Combo_1.Items.Add('Sun');
-event_17=0	  Combo_1.Items.Add('Mercury');
-event_18=0	  Combo_1.Items.Add('Venus');
-event_19=0	  Combo_1.Items.Add('Moon');
-event_20=0	  Combo_1.Items.Add('Mars');
-event_21=0	  Combo_1.Items.Add('Jupiter');
-event_22=0	  Combo_1.Items.Add('Saturn');
-event_23=0	  Combo_1.Items.Add('Uranus');
-event_24=0	  Combo_1.Items.Add('Neptune');
-event_25=0	  Combo_1.Items.Add('Pluto');
-event_26=0	  Combo_1.ItemIndex:=0;
-event_27=0	  // Get current year
-event_28=0	  Edit_2.Text:='C/';
-event_29=0	  cm:=Tstringlist.Create;
-event_30=0	  cm.add('GETDATE');
-event_31=0	  str:=cmd('',cm);
-event_32=0	  p:=pos('OK!',str);
-event_33=0	  if p>0 then begin
-event_34=0	    delete(str,1,p+2);
-event_35=0	    p:=pos('-',str);
-event_36=0	    year:=copy(str,1,p-1);
-event_37=0	    Edit_2.Text:=year;
-event_38=0	  end;
-event_39=0	  // Fill comet list
-event_40=0	  CheckList_1.Clear;
-event_41=0	  cm.Clear;
-event_42=0	  GetCometList(Edit_2.Text,1000,cm);
-event_43=0	  CheckList_1.items.assign(cm);
-event_44=0	  // Fill asteroid list
-event_45=0	  Edit_3.Text:='*';
-event_46=0	  CheckList_2.Clear;
-event_47=0	  cm.Clear;
-event_48=0	  GetAsteroidList('%',100,cm);
-event_49=0	  CheckList_2.items.assign(cm);
-event_50=0	  cm.Free;
-event_51=0	end.
+event_14=0	  // translation
+event_15=0	  group_1.caption:=rsSun+' / '+rsPlanet;
+event_16=0	  button_1.caption:=rsSearch;
+event_17=0	  group_2.caption:=rsComet;
+event_18=0	  group_3.caption:=rsAsteroid;
+event_19=0	  button_2.caption:=rsFilter2;
+event_20=0	  button_3.caption:=rsFilter2;
+event_21=0	  button_6.caption:=rsSelectAll;
+event_22=0	  button_8.caption:=rsSelectAll;
+event_23=0	  button_7.caption:=rsSelectNone;
+event_24=0	  button_9.caption:=rsSelectNone;
+event_25=0	  button_4.caption:=rsShowMark;
+event_26=0	  button_10.caption:=rsShowMark;
+event_27=0	  button_5.caption:=rsCenter;
+event_28=0	  button_11.caption:=rsCenter;
+event_29=0	  group_4.caption:=rsInfo;
+event_30=0	  // Fill planet list
+event_31=0	  Combo_1.Clear;
+event_32=0	  Combo_1.Items.Add(rsSun);
+event_33=0	  Combo_1.Items.Add(rsMercury);
+event_34=0	  Combo_1.Items.Add(rsVenus);
+event_35=0	  Combo_1.Items.Add(rsMoon);
+event_36=0	  Combo_1.Items.Add(rsMars);
+event_37=0	  Combo_1.Items.Add(rsJupiter);
+event_38=0	  Combo_1.Items.Add(rsSaturn);
+event_39=0	  Combo_1.Items.Add(rsUranus);
+event_40=0	  Combo_1.Items.Add(rsNeptune);
+event_41=0	  Combo_1.Items.Add(rsPluto);
+event_42=0	  Combo_1.ItemIndex:=0;
+event_43=0	  // Get current year
+event_44=0	  Edit_2.Text:='C/';
+event_45=0	  cm:=Tstringlist.Create;
+event_46=0	  cm.add('GETDATE');
+event_47=0	  str:=cmd('',cm);
+event_48=0	  p:=pos('OK!',str);
+event_49=0	  if p>0 then begin
+event_50=0	    delete(str,1,p+2);
+event_51=0	    p:=pos('-',str);
+event_52=0	    year:=copy(str,1,p-1);
+event_53=0	    Edit_2.Text:=year;
+event_54=0	  end;
+event_55=0	  // Fill comet list
+event_56=0	  CheckList_1.Clear;
+event_57=0	  cm.Clear;
+event_58=0	  GetCometList(Edit_2.Text,1000,cm);
+event_59=0	  CheckList_1.items.assign(cm);
+event_60=0	  // Fill asteroid list
+event_61=0	  Edit_3.Text:='*';
+event_62=0	  CheckList_2.Clear;
+event_63=0	  cm.Clear;
+event_64=0	  GetAsteroidList('%',100,cm);
+event_65=0	  CheckList_2.items.assign(cm);
+event_66=0	  cm.Free;
+event_67=0	end.

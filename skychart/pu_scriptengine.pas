@@ -29,11 +29,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses  u_translation, u_constant, u_projection, u_help, u_util, ActnList, pu_pascaleditor,
-  cu_database, uPSI_CheckLst, StdCtrls, ExtCtrls, Menus, Classes, SysUtils,
-  FileUtil, IniFiles, fu_chart, jdcalendar, uPSComponent, uPSComponent_Default,
-  uPSComponent_DB, uPSComponent_Forms, uPSComponent_Controls,
-  uPSComponent_StdCtrls, Forms, Controls, Graphics, Dialogs, ComCtrls, Buttons,
-  CheckLst, ExtDlgs, uPSCompiler, uPSRuntime, math
+  cu_database, cu_catalog, cu_fits, cu_planet, math, fu_chart, jdcalendar, upsi_translation,
+  uPSComponent, uPSComponent_Default, uPSCompiler, uPSRuntime, uPSComponent_DB,
+  uPSComponent_Forms, uPSComponent_Controls, uPSI_CheckLst, uPSComponent_StdCtrls,
+  StdCtrls, ExtCtrls, Menus, Classes, SysUtils,Forms, Controls, Graphics, Dialogs,
+  ComCtrls, Buttons, FileUtil, IniFiles, CheckLst, ExtDlgs
   {$ifdef mswindows}
   , uPSComponent_COM    // in case of error here please apply the Lazarus patch
                         // available in (Skychart_source)/tools/Lazarus_Patch/
@@ -180,6 +180,9 @@ type
     FSendInfo: TSendInfo;
     FMainmenu: TMenu;
     Fcdb: TCDCdb;
+    Fcatalog: TCatalog;
+    Ffits : TFits;
+    Fplanet  : Tplanet;
     Fcmain: Tconf_main;
     FActiveChart: Tf_chart;
     ChartName,TelescopeChartName,RefreshText,SelectionText,DescriptionText,DistanceText: string;
@@ -215,6 +218,7 @@ type
     Procedure doEq2Hz(ra,de : double ; var a,h : double);
     Procedure doHz2Eq(a,h : double; var ra,de : double);
     function doFormatFloat(Const Format : String; var Value : double) : String;
+    function doFormat(Const Fmt : String; const Args : Array of const) : String;
     function doIsNumber(str: String): boolean;
     function doMsgBox(const aMsg: string):boolean;
     function doGetCometList(const filter: string; maxnum:integer; list:TstringList):boolean;
@@ -264,6 +268,9 @@ type
     property SendInfo: TSendInfo read FSendInfo write FSendInfo;
     property Mainmenu: TMenu read FMainmenu write FMainmenu;
     property cdb: TCDCdb read Fcdb  write Fcdb;
+    property catalog: TCatalog read Fcatalog write Fcatalog;
+    property fits: TFits read Ffits write Ffits;
+    property planet: Tplanet read Fplanet write Fplanet;
     property cmain: Tconf_main read Fcmain write Fcmain;
     property ActiveChart: Tf_chart read FActiveChart write FActiveChart;
   end;
@@ -327,6 +334,11 @@ end;
 function Tf_scriptengine.doFormatFloat(Const Format : String; var Value : double) : String;
 begin
   result:=FormatFloat(format, Value);
+end;
+
+function Tf_scriptengine.doFormat(Const Fmt : String; const Args : Array of const) : String;
+begin
+ result:=Format(Fmt,Args);
 end;
 
 function Tf_scriptengine.doIsNumber(str: String): boolean;
@@ -1774,6 +1786,7 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doEq2Hz, 'Procedure Eq2Hz(ra,de : double ; var a,h : double);');
   AddMethod(self, @Tf_scriptengine.doHz2Eq, 'Procedure Hz2Eq(a,h : double; var ra,de : double);');
   AddMethod(self, @Tf_scriptengine.doFormatFloat, 'function FormatFloat(Const Format : String; var Value : double) : String;');
+  AddMethod(self, @Tf_scriptengine.doFormat, 'Function Format(Const Fmt : String; const Args : Array of const) : String;');
   AddMethod(self, @Tf_scriptengine.doIsNumber, 'function IsNumber(str: String): boolean;');
   AddMethod(self, @Tf_scriptengine.doMsgBox,'function MsgBox(const aMsg: string):boolean;');
   AddMethod(self, @Tf_scriptengine.doGetCometList,'function GetCometList(const filter: string; maxnum:integer; list:TstringList):boolean;');
@@ -1793,6 +1806,7 @@ end;
 procedure Tf_scriptengine.PSCustomPlugin1CompileImport1(Sender: TPSScript);
 begin
  SIRegister_CheckLst(Sender.Comp);
+ SIRegister_translation(Sender.Comp)
 end;
 
 procedure Tf_scriptengine.PSCustomPlugin1ExecImport1(Sender: TObject;
