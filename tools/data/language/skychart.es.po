@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-09 08:36+0000\n"
-"PO-Revision-Date: 2014-05-25 09:59+0000\n"
+"POT-Creation-Date: 2014-06-13 10:57+0000\n"
+"PO-Revision-Date: 2014-06-10 09:40+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-09 11:43+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-13 11:04+0000\n"
+"X-Generator: Launchpad (build 17045)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -35,7 +35,7 @@ msgstr "9537 (conjuntos de datos mayores)"
 
 #: u_translation.rsabandonyourc
 msgid "Abandon your changes?"
-msgstr ""
+msgstr "¿Descartar sus cambios?"
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
@@ -115,7 +115,7 @@ msgstr "Acción"
 
 #: u_translation.rsactivatethet
 msgid "Activate the timer event when hidden"
-msgstr ""
+msgstr "Activar la alarma cuando esté oculto"
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -279,7 +279,7 @@ msgstr "Trazado anti alias"
 
 #: u_translation.rsanychangeyou
 msgid "Any change you do here will be lost when the program restart."
-msgstr ""
+msgstr "Caulquier cambio que realice aquí se perderá al reiniciar el programa."
 
 #: u_translation.rsapparent
 msgid "Apparent"
@@ -791,11 +791,11 @@ msgstr "Carta_"
 
 #: u_translation.rscheck
 msgid "Check"
-msgstr "Marcar"
+msgstr "Comprobar"
 
 #: u_translation.rschecklist
 msgid "CheckList"
-msgstr ""
+msgstr "Lista de comprobación"
 
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
@@ -895,7 +895,7 @@ msgstr "Columnas"
 
 #: u_translation.rscombobox
 msgid "Combo box"
-msgstr ""
+msgstr "Lista de selección"
 
 #: u_translation.rscomet
 msgid "Comet"
@@ -1616,11 +1616,11 @@ msgstr "No filtrar objetos Messier"
 
 #: u_translation.rsdontforgetto
 msgid "Don't forget to save to a new file!"
-msgstr ""
+msgstr "¡No olvide guardar en un nuevo archivo!"
 
 #: u_translation.rsdontforgetto2
 msgid "Don't forget to save the program configuration!"
-msgstr ""
+msgstr "¡No olvide guardar la configuración del programa!"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2402,6 +2402,10 @@ msgstr "Detener después de 1000 errores"
 msgid "Hammer-Aitoff"
 msgstr "Hammer-Aitoff"
 
+#: u_translation.rshandpad
+msgid "HandPad"
+msgstr ""
+
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
 msgstr "Selección Modo Mando Manual"
@@ -2516,7 +2520,7 @@ msgstr "Si no está instalado, intente lo siguiente dependiendo de su sistema:"
 
 #: u_translation.rsifyouneedtoc
 msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
-msgstr ""
+msgstr "Si necesita cambiarlo, utiñice el botón Guardar/Cargar para asignar este guión a un separador libre."
 
 #: u_translation.rsillum
 msgid "Illum."
@@ -2896,7 +2900,7 @@ msgstr "Enlazar todas las cartas"
 
 #: u_translation.rslist
 msgid "List"
-msgstr ""
+msgstr "Lista"
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
@@ -3808,7 +3812,7 @@ msgstr "Ancho de ruta"
 
 #: u_translation.rspause
 msgid "Pause"
-msgstr ""
+msgstr "Pausa"
 
 #: u_translation.rspec
 msgid "PEC"
@@ -4372,7 +4376,7 @@ msgstr "Recargar %s para la carta actual"
 
 #: u_translation.rsremoveallbre
 msgid "Remove all breakpoints"
-msgstr ""
+msgstr "Eliminar todos los puntos de ruptura"
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
@@ -4520,7 +4524,7 @@ msgstr "Filas"
 
 #: u_translation.rsrun
 msgid "Run"
-msgstr ""
+msgstr "Ejecutar"
 
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
@@ -4717,6 +4721,10 @@ msgstr "Seleccionar etiquetas a recuperar"
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
 msgstr "Seleccionar servidor espejo"
+
+#: u_translation.rsselectnone
+msgid "Select none"
+msgstr ""
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -5288,11 +5296,11 @@ msgstr "Barra de estado"
 
 #: u_translation.rsstepinto
 msgid "Step Into"
-msgstr ""
+msgstr "Paso a paso por instrucciones"
 
 #: u_translation.rsstepover
 msgid "Step Over"
-msgstr ""
+msgstr "Paso a paso por procedimientos"
 
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
@@ -5394,6 +5402,10 @@ msgstr "%s¡La tabla %s no existe! %sPor favor, corrija el error y reinténtelo.
 msgid "%sThis table exists: %s"
 msgstr "%sEsta tabla existe: %s"
 
+#: u_translation.rstarget
+msgid "Target"
+msgstr ""
+
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
 msgstr "Conexión TCP/IP"
@@ -5492,7 +5504,7 @@ msgstr "Este programa es freeware; puede distribuirlo y/o modificarlo bajo los t
 
 #: u_translation.rsthisscriptis
 msgid "This script is maintained within the software distribution."
-msgstr ""
+msgstr "Este guión se mantiene dentro de la distribución software."
 
 #: u_translation.rsthursday
 msgid "Thu."

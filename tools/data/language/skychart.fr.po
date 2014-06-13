@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-09 08:36+0000\n"
-"PO-Revision-Date: 2014-06-07 20:09+0000\n"
+"POT-Creation-Date: 2014-06-13 10:57+0000\n"
+"PO-Revision-Date: 2014-06-13 11:01+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-09 11:43+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-13 11:04+0000\n"
+"X-Generator: Launchpad (build 17045)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -715,7 +715,7 @@ msgstr "Patrick Chevalley"
 
 #: u_translation.rscenter
 msgid "Center"
-msgstr "Centre on"
+msgstr "Centre"
 
 #: u_translation.rscentering
 msgid "Centering"
@@ -2404,6 +2404,10 @@ msgstr "Arrêt après 1000 erreurs"
 #: u_translation.rshammeraitoff
 msgid "Hammer-Aitoff"
 msgstr "Hammer-Aitoff"
+
+#: u_translation.rshandpad
+msgid "HandPad"
+msgstr "Raquette"
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -4722,6 +4726,10 @@ msgstr "Choisir les labels à récupérer"
 msgid "Select mirror site"
 msgstr "Choix du site miroir"
 
+#: u_translation.rsselectnone
+msgid "Select none"
+msgstr "Tout désélectionner"
+
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
 msgstr "Choix de la plaque"
@@ -5397,6 +5405,10 @@ msgstr "%sla table %s n'existe pas! %sCorrigez l'erreur et reessayez."
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
 msgstr "%sla table %s existe"
+
+#: u_translation.rstarget
+msgid "Target"
+msgstr "Cible"
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"

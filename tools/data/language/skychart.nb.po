@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-09 08:36+0000\n"
+"POT-Creation-Date: 2014-06-13 10:57+0000\n"
 "PO-Revision-Date: 2014-05-01 08:36+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-09 11:43+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-13 11:05+0000\n"
+"X-Generator: Launchpad (build 17045)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2400,6 +2400,10 @@ msgstr "Stopp etter 1000 feil"
 msgid "Hammer-Aitoff"
 msgstr ""
 
+#: u_translation.rshandpad
+msgid "HandPad"
+msgstr ""
+
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
 msgstr ""
@@ -4716,6 +4720,10 @@ msgstr ""
 msgid "Select mirror site"
 msgstr "Velg nedlastingssted"
 
+#: u_translation.rsselectnone
+msgid "Select none"
+msgstr ""
+
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
 msgstr "Velg en plate fra listen"
@@ -5391,6 +5399,10 @@ msgstr "%stabell %s eksisterer ikke! %sKorriger feilen og prøv igjen."
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
 msgstr "%sdenne tabell eksisterer: %s"
+
+#: u_translation.rstarget
+msgid "Target"
+msgstr ""
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"

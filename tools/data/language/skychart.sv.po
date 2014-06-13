@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-06-09 08:36+0000\n"
+"POT-Creation-Date: 2014-06-13 10:57+0000\n"
 "PO-Revision-Date: 2014-05-01 08:39+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-09 11:43+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-06-13 11:05+0000\n"
+"X-Generator: Launchpad (build 17045)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2400,6 +2400,10 @@ msgstr "Stopp efter 1000 fel"
 msgid "Hammer-Aitoff"
 msgstr "Hammer-Aitoff-projektion"
 
+#: u_translation.rshandpad
+msgid "HandPad"
+msgstr ""
+
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
 msgstr "Välj mode för handkontroll"
@@ -4716,6 +4720,10 @@ msgstr ""
 msgid "Select mirror site"
 msgstr "Välj mirror site"
 
+#: u_translation.rsselectnone
+msgid "Select none"
+msgstr ""
+
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
 msgstr "Välj en bild från listan"
@@ -5391,6 +5399,10 @@ msgstr "%sTabell %s finns inte! %sRätta till felet och försök igen."
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
 msgstr "%sTabellen finns: %s"
+
+#: u_translation.rstarget
+msgid "Target"
+msgstr ""
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
