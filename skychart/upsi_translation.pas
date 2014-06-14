@@ -1531,6 +1531,7 @@ CL.AddConstantN('rsRemoveAllBre','String').SetString(rsRemoveAllBre);
 CL.AddConstantN('rsTarget','String').SetString(rsTarget);
 CL.AddConstantN('rsHandPad','String').SetString(rsHandPad);
 CL.AddConstantN('rsSelectNone','String').SetString(rsSelectNone);
+CL.AddConstantN('rsMark','String').SetString(rsMark);
 
 end;
 

@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-13 14:45+0000\n"
+"POT-Creation-Date: 2014-06-14 06:57+0000\n"
 "PO-Revision-Date: 2014-05-01 08:38+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-13 14:52+0000\n"
+"X-Launchpad-Export-Date: 2014-06-14 07:04+0000\n"
 "X-Generator: Launchpad (build 17045)\n"
 "Language: ru_UA\n"
 
@@ -3080,6 +3080,10 @@ msgstr "Телескоп с ручным ведением"
 #: u_translation.rsmap
 msgid "Map"
 msgstr "Карта"
+
+#: u_translation.rsmark
+msgid "Mark"
+msgstr ""
 
 #: u_translation.rsmarkobjectso
 msgid "Mark objects on the chart"

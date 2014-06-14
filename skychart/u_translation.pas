@@ -1546,6 +1546,7 @@ resourcestring
   rsSelectNone = 'Select none';
   rsObserverTool = 'Observer tools';
   rsLocationTime = 'Location / Time';
+  rsMark = 'Mark';
 
 implementation
 

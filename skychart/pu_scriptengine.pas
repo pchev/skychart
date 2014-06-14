@@ -43,7 +43,7 @@ uses  u_translation, u_constant, u_projection, u_help, u_util, ActnList, pu_pasc
 
 type
 
-  Teventlist=(evInitialisation,evActivation,evTimer,evTelescope_move,evChart_refresh,evObject_identification,evDistance_measurement,evTelescope_connect,evTelescope_disconnect);
+  Teventlist=(evInitialisation,evActivation,evTimer,evTelescope_move,evChart_refresh,evObject_identification,evDistance_measurement,evTelescope_connect,evTelescope_disconnect,evTranslation);
 
   { Tf_scriptengine }
 
@@ -312,6 +312,12 @@ begin
   CheckBoxHidenTimer.Caption:=rsActivateTheT;
   if Fpascaleditor<>nil then Fpascaleditor.SetLang;
   SetHelp(self,hlpScriptEditor);
+  if (evscr[ord(evTranslation)]<>nil) and
+     (evscr[ord(evTranslation)].Script.Count>0)
+     then begin
+      evscr[ord(evTranslation)].Compile;
+      evscr[ord(evTranslation)].Execute;
+     end;
 end;
 
 function Tf_scriptengine.doExecuteCmd(cname:string; arg:Tstringlist):string;
@@ -1208,6 +1214,7 @@ end;
 ReorderGroup;
 CompileScripts;
 evscr[ord(evInitialisation)].Execute;
+evscr[ord(evTranslation)].Execute;
 if not InitialLoad then begin
   FEventReady:=true;
   evscr[ord(evActivation)].Execute;

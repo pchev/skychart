@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-13 14:45+0000\n"
+"POT-Creation-Date: 2014-06-14 06:57+0000\n"
 "PO-Revision-Date: 2014-05-03 10:25+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-13 14:52+0000\n"
+"X-Launchpad-Export-Date: 2014-06-14 07:05+0000\n"
 "X-Generator: Launchpad (build 17045)\n"
 "Language: it\n"
 
@@ -3081,6 +3081,10 @@ msgstr "Telescopio manuale"
 #: u_translation.rsmap
 msgid "Map"
 msgstr "Mappa"
+
+#: u_translation.rsmark
+msgid "Mark"
+msgstr ""
 
 #: u_translation.rsmarkobjectso
 msgid "Mark objects on the chart"
