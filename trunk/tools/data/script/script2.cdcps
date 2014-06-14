@@ -1,5 +1,5 @@
 [ScriptPanel]
-Title=Solar system
+Title=Système solaire
 HidenTimer=0
 numtoolbar1=10
 toolbar1_0=94;PlanetInfo
@@ -19,7 +19,7 @@ toolbar2_2=84;TimeReset
 toolbar2_3=88;Animation
 toolbar2_4=103;TimeValPanel
 toolbar2_5=104;TimeU
-numscriptbutton=27
+numscriptbutton=28
 scriptbutton_0="Group_1;Sun / Planet;2"
 scriptbutton_1="	Combo_1;"
 scriptbutton_2="	Button_1;search"
@@ -47,6 +47,7 @@ scriptbutton_23="Group_4;Info;1"
 scriptbutton_24="	Memo_1;150"
 scriptbutton_25="	Event_5;5;Object identification;"
 scriptbutton_26="	Event_0;0;Initalisation;"
+scriptbutton_27="	Event_9;9;Translation;"
 numscriptrows=144
 script_0=1	var cm:TstringList;
 script_1=1	    str:string;
@@ -193,7 +194,7 @@ script_141=11	      cm.Free;
 script_142=11	    end;
 script_143=11	end.
 numcomborows=0
-numevents=68
+numevents=80
 event_0=5	// Object identification event
 event_1=5	var longstr: string;
 event_2=5	begin
@@ -208,57 +209,69 @@ event_10=0	var cm:TstringList;
 event_11=0	    str,year: string;
 event_12=0	    p: integer;
 event_13=0	begin
-event_14=0	  // translation
-event_15=0	  group_1.caption:=rsSun+' / '+rsPlanet;
-event_16=0	  button_1.caption:=rsSearch;
-event_17=0	  group_2.caption:=rsComet;
-event_18=0	  group_3.caption:=rsAsteroid;
-event_19=0	  button_2.caption:=rsFilter2;
-event_20=0	  button_3.caption:=rsFilter2;
-event_21=0	  button_6.caption:=rsSelectAll;
-event_22=0	  button_8.caption:=rsSelectAll;
-event_23=0	  button_7.caption:=rsSelectNone;
-event_24=0	  button_9.caption:=rsSelectNone;
-event_25=0	  button_4.caption:=rsShowMark;
-event_26=0	  button_10.caption:=rsShowMark;
-event_27=0	  button_5.caption:=rsCenter;
-event_28=0	  button_11.caption:=rsCenter;
-event_29=0	  group_4.caption:=rsInfo;
-event_30=0	  // Fill planet list
-event_31=0	  Combo_1.Clear;
-event_32=0	  Combo_1.Items.Add(rsSun);
-event_33=0	  Combo_1.Items.Add(rsMercury);
-event_34=0	  Combo_1.Items.Add(rsVenus);
-event_35=0	  Combo_1.Items.Add(rsMoon);
-event_36=0	  Combo_1.Items.Add(rsMars);
-event_37=0	  Combo_1.Items.Add(rsJupiter);
-event_38=0	  Combo_1.Items.Add(rsSaturn);
-event_39=0	  Combo_1.Items.Add(rsUranus);
-event_40=0	  Combo_1.Items.Add(rsNeptune);
-event_41=0	  Combo_1.Items.Add(rsPluto);
-event_42=0	  Combo_1.ItemIndex:=0;
-event_43=0	  // Get current year
-event_44=0	  Edit_2.Text:='C/';
-event_45=0	  cm:=Tstringlist.Create;
-event_46=0	  cm.add('GETDATE');
-event_47=0	  str:=cmd('',cm);
-event_48=0	  p:=pos('OK!',str);
-event_49=0	  if p>0 then begin
-event_50=0	    delete(str,1,p+2);
-event_51=0	    p:=pos('-',str);
-event_52=0	    year:=copy(str,1,p-1);
-event_53=0	    Edit_2.Text:=year;
-event_54=0	  end;
-event_55=0	  // Fill comet list
-event_56=0	  CheckList_1.Clear;
-event_57=0	  cm.Clear;
-event_58=0	  GetCometList(Edit_2.Text,1000,cm);
-event_59=0	  CheckList_1.items.assign(cm);
-event_60=0	  // Fill asteroid list
-event_61=0	  Edit_3.Text:='*';
-event_62=0	  CheckList_2.Clear;
-event_63=0	  cm.Clear;
-event_64=0	  GetAsteroidList('%',100,cm);
-event_65=0	  CheckList_2.items.assign(cm);
-event_66=0	  cm.Free;
-event_67=0	end.
+event_14=0	  // Fill planet list
+event_15=0	  Combo_1.Clear;
+event_16=0	  Combo_1.Items.Add(rsSun);
+event_17=0	  Combo_1.Items.Add(rsMercury);
+event_18=0	  Combo_1.Items.Add(rsVenus);
+event_19=0	  Combo_1.Items.Add(rsMoon);
+event_20=0	  Combo_1.Items.Add(rsMars);
+event_21=0	  Combo_1.Items.Add(rsJupiter);
+event_22=0	  Combo_1.Items.Add(rsSaturn);
+event_23=0	  Combo_1.Items.Add(rsUranus);
+event_24=0	  Combo_1.Items.Add(rsNeptune);
+event_25=0	  Combo_1.Items.Add(rsPluto);
+event_26=0	  Combo_1.ItemIndex:=0;
+event_27=0	  // Get current year
+event_28=0	  Edit_2.Text:='C/';
+event_29=0	  cm:=Tstringlist.Create;
+event_30=0	  cm.add('GETDATE');
+event_31=0	  str:=cmd('',cm);
+event_32=0	  p:=pos('OK!',str);
+event_33=0	  if p>0 then begin
+event_34=0	    delete(str,1,p+2);
+event_35=0	    p:=pos('-',str);
+event_36=0	    year:=copy(str,1,p-1);
+event_37=0	    Edit_2.Text:=year;
+event_38=0	  end;
+event_39=0	  // Fill comet list
+event_40=0	  CheckList_1.Clear;
+event_41=0	  cm.Clear;
+event_42=0	  GetCometList(Edit_2.Text,1000,cm);
+event_43=0	  CheckList_1.items.assign(cm);
+event_44=0	  // Fill asteroid list
+event_45=0	  Edit_3.Text:='*';
+event_46=0	  CheckList_2.Clear;
+event_47=0	  cm.Clear;
+event_48=0	  GetAsteroidList('%',100,cm);
+event_49=0	  CheckList_2.items.assign(cm);
+event_50=0	  cm.Free;
+event_51=0	end.
+event_52=9	// translation
+event_53=9	begin
+event_54=9	  group_1.caption:=rsSun+' / '+rsPlanet;
+event_55=9	  button_1.caption:=rsSearch;
+event_56=9	  group_2.caption:=rsComet;
+event_57=9	  group_3.caption:=rsAsteroid;
+event_58=9	  button_2.caption:=rsFilter2;
+event_59=9	  button_3.caption:=rsFilter2;
+event_60=9	  button_6.caption:=rsSelectAll;
+event_61=9	  button_8.caption:=rsSelectAll;
+event_62=9	  button_7.caption:=rsSelectNone;
+event_63=9	  button_9.caption:=rsSelectNone;
+event_64=9	  button_4.caption:=rsMark;
+event_65=9	  button_10.caption:=rsMark;
+event_66=9	  button_5.caption:=rsCenter;
+event_67=9	  button_11.caption:=rsCenter;
+event_68=9	  group_4.caption:=rsInfo;
+event_69=9	  Combo_1.Items[0]:=rsSun;
+event_70=9	  Combo_1.Items[1]:=rsMercury;
+event_71=9	  Combo_1.Items[2]:=rsVenus;
+event_72=9	  Combo_1.Items[3]:=rsMoon;
+event_73=9	  Combo_1.Items[4]:=rsMars;
+event_74=9	  Combo_1.Items[5]:=rsJupiter;
+event_75=9	  Combo_1.Items[6]:=rsSaturn;
+event_76=9	  Combo_1.Items[7]:=rsUranus;
+event_77=9	  Combo_1.Items[8]:=rsNeptune;
+event_78=9	  Combo_1.Items[9]:=rsPluto;
+event_79=9	end.

@@ -6062,3 +6062,7 @@ msgstr ""
 msgid "Location / Time"
 msgstr ""
 
+#: u_translation:rsmark
+msgid "Mark"
+msgstr ""
+

@@ -19,9 +19,9 @@ object f_script: Tf_script
     TabOrder = 0
     object Label1: TLabel
       Left = 8
-      Height = 16
+      Height = 15
       Top = 0
-      Width = 83
+      Width = 78
       Caption = 'Configuration'
       ParentColor = False
     end
@@ -36,9 +36,9 @@ object f_script: Tf_script
     end
     object ButtonEditTB: TBitBtn
       Left = 88
-      Height = 25
+      Height = 24
       Top = 21
-      Width = 58
+      Width = 53
       AutoSize = True
       Caption = 'Toolbar'
       OnClick = ButtonEditTBClick
@@ -92,10 +92,10 @@ object f_script: Tf_script
     ParentFont = False
     TabOrder = 4
     object LabelShortcut: TLabel
-      Left = 156
-      Height = 16
+      Left = 159
+      Height = 15
       Top = 6
-      Width = 22
+      Width = 19
       Anchors = [akTop, akRight]
       Caption = 'Lab'
       ParentColor = False
