@@ -49,6 +49,15 @@
          MenuViewLeftBar
          MenuViewRightBar
          MenuViewStatusBar
+       SubToolbox
+         MenuToolbox1
+         MenuToolbox2
+         MenuToolbox3
+         MenuToolbox4
+         MenuToolbox5
+         MenuToolbox6
+         MenuToolbox7
+         MenuToolbox8
        MenuViewScrollBar
        MenuServerInformation
        MenuViewClock
