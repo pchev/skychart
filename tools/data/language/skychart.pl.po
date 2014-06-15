@@ -3,13 +3,13 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-14 06:57+0000\n"
-"PO-Revision-Date: 2014-06-09 07:35+0000\n"
+"PO-Revision-Date: 2014-06-14 18:31+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-14 07:05+0000\n"
+"X-Launchpad-Export-Date: 2014-06-15 17:56+0000\n"
 "X-Generator: Launchpad (build 17045)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
@@ -2963,7 +2963,7 @@ msgstr "Kod pozycji"
 
 #: u_translation.rslocationtime
 msgid "Location / Time"
-msgstr ""
+msgstr "Lokalizacja / Czas"
 
 #: u_translation.rslock
 msgid "Lock"
@@ -3087,7 +3087,7 @@ msgstr "Mapa"
 
 #: u_translation.rsmark
 msgid "Mark"
-msgstr ""
+msgstr "Zaznacz"
 
 #: u_translation.rsmarkobjectso
 msgid "Mark objects on the chart"
@@ -3623,7 +3623,7 @@ msgstr "Miejsce obserwacji"
 
 #: u_translation.rsobservertool
 msgid "Observer tools"
-msgstr ""
+msgstr "Narzędzia obserwatora"
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -4739,7 +4739,7 @@ msgstr "Wybierz serwer lustrzany"
 
 #: u_translation.rsselectnone
 msgid "Select none"
-msgstr ""
+msgstr "Wyczyść zaznaczenie"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -5419,7 +5419,7 @@ msgstr "%sTablica już istnieje: %s"
 
 #: u_translation.rstarget
 msgid "Target"
-msgstr ""
+msgstr "Cel"
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
