@@ -72,6 +72,7 @@ type
     ToolButton7: TToolButton;
     ToolButton8: TToolButton;
     ToolButton9: TToolButton;
+    procedure Button3Click(Sender: TObject);
     procedure ButtonPauseClick(Sender: TObject);
     procedure ButtonRunClick(Sender: TObject);
     procedure ButtonStepIntoClick(Sender: TObject);
@@ -143,7 +144,7 @@ begin
   ToolButton4.Hint:=rsStepInto;
   ToolButton5.Hint:=rsStepOver;
   ToolButton6.Hint:=rsRemoveAllBre;
-  SetHelp(self,hlpScriptEditor);
+  SetHelp(self,hlpScriptReference);
 end;
 
 procedure Tf_pascaleditor.SetScriptName(value:string);
@@ -220,6 +221,11 @@ if Fdbgscr.Exec.Status = isRunning then
   Fdbgscr.Pause;
   Fdbgscr.StepInto;
   end;
+end;
+
+procedure Tf_pascaleditor.Button3Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_pascaleditor.ButtonStepIntoClick(Sender: TObject);
