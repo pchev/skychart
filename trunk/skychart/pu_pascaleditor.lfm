@@ -63,6 +63,7 @@ object f_pascaleditor: Tf_pascaleditor
       Top = 9
       Width = 75
       Caption = 'Help'
+      OnClick = Button3Click
       TabOrder = 2
     end
     object Label1: TLabel

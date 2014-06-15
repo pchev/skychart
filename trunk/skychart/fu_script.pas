@@ -45,10 +45,14 @@ type
     LabelShortcut: TLabel;
     MainPanel: TPanel;
     PanelTitle: TPanel;
+    SpeedButton1: TSpeedButton;
     ToolBar1: TToolBar;
     ToolBar2: TToolBar;
     procedure ButtonEditTBClick(Sender: TObject);
     procedure ButtonEditSrcClick(Sender: TObject);
+    procedure PanelTitleMouseEnter(Sender: TObject);
+    procedure PanelTitleMouseLeave(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
   private
     { private declarations }
     fedittoolbar: Tf_edittoolbar;
@@ -173,7 +177,7 @@ begin
   sctitle[2]:=rsLocationTime;
   fedittoolbar.SetLang;
   if fscriptengine<>nil then fscriptengine.SetLang;
-  SetHelp(self,hlpScriptEditor);
+  SetHelp(self,hlpToolbox);
 end;
 
 constructor Tf_script.Create(TheOwner: TComponent);
@@ -319,6 +323,21 @@ begin
   end;
   FormPos(fscriptengine,mouse.cursorpos.x,mouse.cursorpos.y);
   fscriptengine.Show;
+end;
+
+procedure Tf_script.PanelTitleMouseEnter(Sender: TObject);
+begin
+   SpeedButton1.Visible:=true;
+end;
+
+procedure Tf_script.PanelTitleMouseLeave(Sender: TObject);
+begin
+  SpeedButton1.Visible:=false;
+end;
+
+procedure Tf_script.SpeedButton1Click(Sender: TObject);
+begin
+  ShowHelp;
 end;
 
 procedure Tf_script.ApplyScript(Sender: TObject);

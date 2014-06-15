@@ -82,7 +82,9 @@ const
   hlpSAMP = 'vo_samp.html';
   hlpImgList = 'image_list.html';
   hlpToolbarEditor = 'toolbar_editor.html';
-  hlpScriptEditor = 'script_editor.html';
+  hlpToolbox = 'toolbox.html';
+  hlpToolboxEditor = 'toolbox_editor.html';
+  hlpScriptReference = 'script_reference.html';
 
 implementation
 

@@ -311,7 +311,7 @@ begin
   Label5.Caption:=rsHeight;
   CheckBoxHidenTimer.Caption:=rsActivateTheT;
   if Fpascaleditor<>nil then Fpascaleditor.SetLang;
-  SetHelp(self,hlpScriptEditor);
+  SetHelp(self,hlpToolboxEditor);
   if (evscr[ord(evTranslation)]<>nil) and
      (evscr[ord(evTranslation)].Script.Count>0)
      then begin
