@@ -2423,6 +2423,7 @@ begin
   {$endif}
   ShowMessage(txt);
   ExecuteFile(URL_TLE);
+  ExecuteFile(Satdir);
 end;
 
 procedure Tf_calendar.dgPlanetDrawCell(Sender: TObject; aCol, aRow: Integer;
