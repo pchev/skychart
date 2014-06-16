@@ -62,6 +62,7 @@ type
     IridiumBox:TCheckBox;
     fullday:TCheckBox;
     Label10: TLabel;
+    LabelTle: TLabel;
     MinSatAlt: TLongEdit;
     tsPGraphs: TTabSheet;
     Time: TTimePicker;
@@ -159,6 +160,7 @@ type
     procedure Date1Change(Sender: TObject);
     procedure Date2Change(Sender: TObject);
     procedure SatPanelClick(Sender: TObject);
+    procedure tle1Change(Sender: TObject);
     procedure TLEListBoxClick(Sender: TObject);
   private
     { Private declarations }
@@ -246,6 +248,7 @@ decodedate(now,yy,mm,dd);
 date1.JD:=jdd(yy,mm,dd,0);
 date2.JD:=date1.JD+5;
 time.Time:=now;
+LabelTle.Caption:='';
 initial:=true;
 for i := low(PlanetGraphs) to high(PlanetGraphs) do begin
   PlanetGraphs[i] := TBitmap.Create;
@@ -1981,6 +1984,41 @@ begin
 ExecuteFile(URL_QUICKSAT);
 end;
 
+procedure Tf_calendar.tle1Change(Sender: TObject);
+var fn,str,s:string;
+    y,m,d:integer;
+    dd,h,jdt: double;
+    ok:boolean;
+    f:textfile;
+begin
+  LabelTle.Caption:='';
+  fn:=slash(SatDir)+tle1.text;
+  if FileExists(fn) then begin
+   AssignFile(f,fn);
+   reset(f);
+   str:='';
+   repeat
+     readln(f,str);
+     ok:=(copy(str,1,1)='1');
+   until eof(f) or ok;
+   CloseFile(f);
+   if ok then begin
+      s:=copy(str,19,2);
+      y:=StrToIntDef(s,-1);
+      if y<0 then exit;
+      if y>56 then y:=1900+y
+              else y:=2000+y;
+      s:=copy(str,21,12);
+      dd:=StrToFloatDef(s,-1);
+      if dd<0 then exit;
+      jdt:=jd(y,1,1,0);
+      jdt:=jdt+dd;
+      Djd(jdt,y,m,d,h);
+      LabelTle.Caption:=isodate(y,m,d);
+   end;
+  end;
+end;
+
 procedure Tf_calendar.Label9Click(Sender: TObject);
 begin
 ExecuteFile(URL_QUICKSAT);
@@ -2165,6 +2203,7 @@ case pagecontrol1.ActivePage.TabIndex of
          Dategroup2(false);
          SatPanel.Visible:=true;
          if doscmd='wine' then CheckWine;
+         tle1Change(nil);
          //if (dat61<>date1.jd) then RefreshSatellite;
          end;
 
