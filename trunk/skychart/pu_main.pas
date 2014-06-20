@@ -1,3 +1,4 @@
+
 unit pu_main;
 
 {$MODE Delphi}{$H+}
@@ -7644,6 +7645,7 @@ for i:=1 to Maxwindow do begin
     then TCPDaemon.TCPThrd[i].SendData('>'+tab+origin+' :'+tab+str);
 end;
 if not(sender is Tf_scriptengine) then begin
+  i:=length(rsFrom);
   if copy(str,1,i)=rsFrom then
      for i:=0 to numscript-1 do Fscript[i].DistanceMeasurementEvent(origin,str)
   else begin
