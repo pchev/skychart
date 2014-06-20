@@ -1,14 +1,14 @@
 object f_configcalendar: Tf_configcalendar
-  Left = 256
+  Left = 243
   Height = 583
-  Top = 120
+  Top = 124
   Width = 495
   Caption = 'f_configcalendar'
   ClientHeight = 583
   ClientWidth = 495
   OnClose = FormClose
   OnShow = FormShow
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 54
@@ -77,8 +77,16 @@ object f_configcalendar: Tf_configcalendar
         ActivePage = nil
         TabIndex = -1
         inherited TabSheet1: TTabSheet
-          ClientHeight = 523
-          ClientWidth = 489
+          ClientWidth = 493
+          inherited GroupBox1: TGroupBox
+            inherited LongEdit1: TLongEdit
+              Height = 23
+            end
+            inherited Label2: TLabel
+              Height = 16
+              Width = 74
+            end
+          end
         end
       end
     end

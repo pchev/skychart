@@ -1,7 +1,7 @@
 object pop_encoder: Tpop_encoder
-  Left = 180
+  Left = 473
   Height = 489
-  Top = 132
+  Top = 124
   Width = 352
   Caption = 'Digital encoders'
   ClientHeight = 489
@@ -15,7 +15,7 @@ object pop_encoder: Tpop_encoder
   OnCreate = formcreate
   OnShow = FormShow
   Position = poDefaultPosOnly
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object PageControl1: TPageControl
     Left = 0
     Height = 470
@@ -27,8 +27,8 @@ object pop_encoder: Tpop_encoder
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Coordinates'
-      ClientHeight = 442
-      ClientWidth = 348
+      ClientHeight = 434
+      ClientWidth = 344
       object Panel1: TPanel
         Left = 8
         Height = 61
@@ -39,39 +39,39 @@ object pop_encoder: Tpop_encoder
         TabOrder = 0
         object LabelAlpha: TLabel
           Left = 6
-          Height = 15
+          Height = 14
           Top = 6
-          Width = 19
+          Width = 18
           Caption = 'RA '
           ParentColor = False
         end
         object LabelDelta: TLabel
           Left = 152
-          Height = 15
+          Height = 14
           Top = 6
-          Width = 24
+          Width = 23
           Caption = 'DEC'
           ParentColor = False
         end
         object Label11: TLabel
           Left = 6
-          Height = 15
+          Height = 14
           Top = 34
-          Width = 45
+          Width = 44
           Caption = 'Azimuth'
           ParentColor = False
         end
         object Label12: TLabel
           Left = 152
-          Height = 15
+          Height = 14
           Top = 34
-          Width = 43
+          Width = 42
           Caption = 'Altitude'
           ParentColor = False
         end
         object pos_x: TEdit
           Left = 62
-          Height = 22
+          Height = 20
           Top = 2
           Width = 81
           ReadOnly = True
@@ -79,7 +79,7 @@ object pop_encoder: Tpop_encoder
         end
         object pos_y: TEdit
           Left = 206
-          Height = 22
+          Height = 20
           Top = 2
           Width = 81
           ReadOnly = True
@@ -87,7 +87,7 @@ object pop_encoder: Tpop_encoder
         end
         object az_x: TEdit
           Left = 62
-          Height = 22
+          Height = 20
           Top = 30
           Width = 81
           ReadOnly = True
@@ -95,7 +95,7 @@ object pop_encoder: Tpop_encoder
         end
         object alt_y: TEdit
           Left = 206
-          Height = 22
+          Height = 20
           Top = 30
           Width = 81
           ReadOnly = True
@@ -116,14 +116,13 @@ object pop_encoder: Tpop_encoder
           Top = 0
           Width = 83
           Caption = 'Clear'
-          NumGlyphs = 0
           OnClick = SpeedButton4Click
         end
         object Label1: TLabel
           Left = 4
-          Height = 15
+          Height = 14
           Top = 30
-          Width = 168
+          Width = 167
           Caption = 'Objects used for Initialisation'
           ParentColor = False
         end
@@ -133,7 +132,6 @@ object pop_encoder: Tpop_encoder
           Top = 0
           Width = 85
           Caption = 'Status'
-          NumGlyphs = 0
           OnClick = statusClick
         end
         object list_init: TListView
@@ -164,7 +162,6 @@ object pop_encoder: Tpop_encoder
           Top = 0
           Width = 82
           Caption = 'Connect'
-          NumGlyphs = 0
           OnClick = setresClick
         end
         object SpeedButton2: TSpeedButton
@@ -173,7 +170,6 @@ object pop_encoder: Tpop_encoder
           Top = 37
           Width = 80
           Caption = 'Hide'
-          NumGlyphs = 0
           OnClick = SpeedButton2Click
         end
         object SpeedButton5: TSpeedButton
@@ -182,7 +178,6 @@ object pop_encoder: Tpop_encoder
           Top = 0
           Width = 109
           Caption = 'Disconnect'
-          NumGlyphs = 0
           OnClick = SpeedButton5Click
         end
         object init90: TSpeedButton
@@ -191,7 +186,6 @@ object pop_encoder: Tpop_encoder
           Top = 0
           Width = 69
           Caption = 'Init 90°'
-          NumGlyphs = 0
           OnClick = init90Click
         end
         object led1: TEdit
@@ -211,7 +205,6 @@ object pop_encoder: Tpop_encoder
           Top = 37
           Width = 109
           Caption = 'Help'
-          NumGlyphs = 0
           OnClick = SpeedButton6Click
         end
       end
@@ -228,39 +221,39 @@ object pop_encoder: Tpop_encoder
         TabOrder = 1
         object Label18: TLabel
           Left = 110
-          Height = 15
+          Height = 14
           Top = 0
-          Width = 48
+          Width = 47
           Caption = 'X Errors'
           ParentColor = False
         end
         object Label19: TLabel
           Left = 174
-          Height = 15
+          Height = 14
           Top = 0
-          Width = 48
+          Width = 47
           Caption = 'Y Errors'
           ParentColor = False
         end
         object Label20: TLabel
           Left = 238
-          Height = 15
+          Height = 14
           Top = 0
-          Width = 42
+          Width = 41
           Caption = 'Battery'
           ParentColor = False
         end
         object CheckBox2: TCheckBox
           Left = 6
-          Height = 23
+          Height = 26
           Top = 11
-          Width = 103
+          Width = 106
           Caption = 'Device Status'
           TabOrder = 0
         end
         object Edit1: TEdit
           Left = 133
-          Height = 22
+          Height = 20
           Top = 14
           Width = 25
           ReadOnly = True
@@ -268,7 +261,7 @@ object pop_encoder: Tpop_encoder
         end
         object Edit2: TEdit
           Left = 197
-          Height = 22
+          Height = 20
           Top = 14
           Width = 25
           ReadOnly = True
@@ -276,7 +269,7 @@ object pop_encoder: Tpop_encoder
         end
         object Edit3: TEdit
           Left = 260
-          Height = 22
+          Height = 20
           Top = 14
           Width = 25
           ReadOnly = True
@@ -286,8 +279,8 @@ object pop_encoder: Tpop_encoder
     end
     object TabSheet2: TTabSheet
       Caption = 'Encoder Configuration'
-      ClientHeight = 442
-      ClientWidth = 348
+      ClientHeight = 434
+      ClientWidth = 344
       ImageIndex = 1
       object GroupBox2: TGroupBox
         Left = 8
@@ -597,8 +590,8 @@ object pop_encoder: Tpop_encoder
     end
     object TabSheet3: TTabSheet
       Caption = 'Port Configuration'
-      ClientHeight = 442
-      ClientWidth = 348
+      ClientHeight = 434
+      ClientWidth = 344
       ImageIndex = 2
       object GroupBox4: TGroupBox
         Left = 8

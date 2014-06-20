@@ -1,7 +1,7 @@
 object f_configinternet: Tf_configinternet
-  Left = 517
+  Left = 551
   Height = 576
-  Top = 120
+  Top = 124
   Width = 499
   BorderIcons = [biSystemMenu]
   Caption = 'Internet'
@@ -11,7 +11,7 @@ object f_configinternet: Tf_configinternet
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -85,16 +85,76 @@ object f_configinternet: Tf_configinternet
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 522
-          ClientWidth = 495
+          ClientHeight = 526
+          ClientWidth = 499
+          inherited GroupBox1: TGroupBox
+            inherited httpproxy: TCheckBox
+              Height = 23
+              Width = 111
+            end
+            inherited Panel2: TPanel
+              inherited proxypass: TEdit
+                Height = 23
+              end
+              inherited proxyuser: TEdit
+                Height = 23
+              end
+              inherited proxyport: TEdit
+                Height = 23
+              end
+              inherited proxyhost: TEdit
+                Height = 23
+              end
+              inherited Label5: TLabel
+                Height = 16
+                Width = 54
+              end
+              inherited Label4: TLabel
+                Height = 16
+                Width = 63
+              end
+              inherited Label3: TLabel
+                Height = 16
+                Width = 59
+              end
+              inherited Label2: TLabel
+                Height = 16
+                Width = 60
+              end
+              inherited SocksType: TComboBox
+                Height = 25
+              end
+            end
+            inherited SocksProxy: TCheckBox
+              Height = 23
+              Width = 90
+            end
+          end
+          inherited GroupBox2: TGroupBox
+            inherited Label1: TLabel
+              Height = 16
+              Width = 121
+            end
+            inherited ftppassive: TCheckBox
+              Height = 23
+              Width = 123
+            end
+            inherited anonpass: TEdit
+              Height = 23
+            end
+          end
+          inherited CheckBox1: TCheckBox
+            Height = 23
+            Width = 302
+          end
         end
         inherited Page2: TTabSheet
-          ClientHeight = 522
-          ClientWidth = 495
+          ClientHeight = 526
+          ClientWidth = 499
         end
         inherited Page3: TTabSheet
-          ClientHeight = 522
-          ClientWidth = 495
+          ClientHeight = 526
+          ClientWidth = 499
         end
       end
     end

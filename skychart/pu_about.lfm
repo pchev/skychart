@@ -1,5 +1,5 @@
 object f_about: Tf_about
-  Left = 433
+  Left = 459
   Height = 305
   Top = 104
   Width = 581
@@ -10,7 +10,7 @@ object f_about: Tf_about
   OnCreate = FormCreate
   ParentFont = True
   Position = poMainFormCenter
-  LCLVersion = '1.0.1.3'
+  LCLVersion = '1.2.4.0'
   object Panel2: TPanel
     Left = 0
     Height = 305
@@ -23,17 +23,17 @@ object f_about: Tf_about
     TabOrder = 0
     object Panel0: TPanel
       Left = 0
-      Height = 305
+      Height = 301
       Top = 0
       Width = 80
       Align = alLeft
       BevelOuter = bvNone
-      ClientHeight = 305
+      ClientHeight = 301
       ClientWidth = 80
       TabOrder = 0
       object Image2: TImage
         Left = 0
-        Height = 305
+        Height = 301
         Top = 0
         Width = 80
         Align = alClient
@@ -2346,21 +2346,21 @@ object f_about: Tf_about
     end
     object Panel4: TPanel
       Left = 80
-      Height = 305
+      Height = 301
       Top = 0
-      Width = 501
+      Width = 497
       Align = alClient
-      ClientHeight = 305
-      ClientWidth = 501
+      ClientHeight = 301
+      ClientWidth = 497
       TabOrder = 1
       object Panel3: TPanel
         Left = 1
         Height = 39
-        Top = 265
-        Width = 499
+        Top = 261
+        Width = 495
         Align = alBottom
         ClientHeight = 39
-        ClientWidth = 499
+        ClientWidth = 495
         TabOrder = 0
         object Button1: TButton
           Left = 151
@@ -2376,9 +2376,9 @@ object f_about: Tf_about
       end
       object PageControl1: TPageControl
         Left = 1
-        Height = 264
+        Height = 260
         Top = 1
-        Width = 499
+        Width = 495
         ActivePage = Page1
         Align = alClient
         TabIndex = 0
@@ -2386,13 +2386,13 @@ object f_about: Tf_about
         OnChange = PageControl1Change
         object Page1: TTabSheet
           Caption = 'About'
-          ClientHeight = 235
-          ClientWidth = 495
+          ClientHeight = 223
+          ClientWidth = 487
           object Label5: TLabel
             Left = 20
-            Height = 16
+            Height = 15
             Top = 30
-            Width = 64
+            Width = 63
             Caption = 'Sky Charts'
             Font.Style = [fsBold]
             ParentColor = False
@@ -2400,9 +2400,9 @@ object f_about: Tf_about
           end
           object Label6: TLabel
             Left = 20
-            Height = 16
+            Height = 15
             Top = 6
-            Width = 83
+            Width = 82
             Caption = 'Cartes du Ciel'
             Font.Style = [fsBold]
             ParentColor = False
@@ -2420,25 +2420,25 @@ object f_about: Tf_about
           end
           object Label8: TLabel
             Left = 20
-            Height = 16
+            Height = 15
             Top = 78
-            Width = 56
+            Width = 55
             Caption = 'Copyright'
             ParentColor = False
           end
           object Label2: TLabel
             Left = 20
-            Height = 16
+            Height = 15
             Top = 54
-            Width = 42
+            Width = 41
             Caption = 'Version'
             ParentColor = False
           end
           object Label4: TLabel
             Left = 20
-            Height = 16
+            Height = 15
             Top = 158
-            Width = 52
+            Width = 51
             Caption = 'Compiler'
             ParentColor = False
           end
@@ -2459,8 +2459,8 @@ object f_about: Tf_about
         end
         object Page2: TTabSheet
           Caption = 'Authors'
-          ClientHeight = 235
-          ClientWidth = 495
+          ClientHeight = 223
+          ClientWidth = 487
           object Label3: TLabel
             Left = 11
             Height = 14
@@ -2496,8 +2496,8 @@ object f_about: Tf_about
         end
         object Page3: TTabSheet
           Caption = 'License Agreement'
-          ClientHeight = 235
-          ClientWidth = 495
+          ClientHeight = 223
+          ClientWidth = 487
           object Memo2: TMemo
             Left = 0
             Height = 235

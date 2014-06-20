@@ -1,13 +1,13 @@
 object f_imglist: Tf_imglist
-  Left = 297
+  Left = 252
   Height = 319
-  Top = 211
+  Top = 209
   Width = 497
   Caption = 'f_imglist'
   ClientHeight = 319
   ClientWidth = 497
   OnShow = FormShow
-  LCLVersion = '1.2.2.0'
+  LCLVersion = '1.2.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 85
@@ -64,7 +64,7 @@ object f_imglist: Tf_imglist
     end
     object ComboBox1: TComboBox
       Left = 272
-      Height = 28
+      Height = 27
       Top = 46
       Width = 162
       ItemHeight = 0

@@ -6,8 +6,8 @@ object f_config_system: Tf_config_system
   ClientHeight = 524
   ClientWidth = 500
   TabOrder = 0
-  DesignLeft = 366
-  DesignTop = 211
+  DesignLeft = 307
+  DesignTop = 205
   object MainPanel: TPanel
     Left = 0
     Height = 524
@@ -30,8 +30,8 @@ object f_config_system: Tf_config_system
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Page1'
-        ClientHeight = 518
-        ClientWidth = 494
+        ClientHeight = 522
+        ClientWidth = 498
         object MysqlBox: TPanel
           Left = 17
           Height = 97
@@ -42,7 +42,7 @@ object f_config_system: Tf_config_system
           TabOrder = 1
           object dbpass: TEdit
             Left = 348
-            Height = 23
+            Height = 21
             Top = 64
             Width = 100
             EchoMode = emPassword
@@ -53,7 +53,7 @@ object f_config_system: Tf_config_system
           end
           object dbuser: TEdit
             Left = 125
-            Height = 23
+            Height = 21
             Top = 64
             Width = 100
             OnChange = dbuserChange
@@ -62,7 +62,7 @@ object f_config_system: Tf_config_system
           end
           object dbhost: TEdit
             Left = 250
-            Height = 23
+            Height = 21
             Top = 24
             Width = 65
             OnChange = dbhostChange
@@ -71,7 +71,7 @@ object f_config_system: Tf_config_system
           end
           object dbport: TLongEdit
             Left = 391
-            Height = 23
+            Height = 21
             Top = 24
             Width = 57
             TabOrder = 2
@@ -80,7 +80,7 @@ object f_config_system: Tf_config_system
           end
           object dbname: TEdit
             Left = 80
-            Height = 23
+            Height = 21
             Top = 24
             Width = 65
             OnChange = dbnameChange
@@ -147,7 +147,7 @@ object f_config_system: Tf_config_system
           TabOrder = 2
           object dbnamesqlite: TEdit
             Left = 125
-            Height = 23
+            Height = 21
             Top = 32
             Width = 281
             Color = clBtnFace
@@ -188,7 +188,7 @@ object f_config_system: Tf_config_system
           Top = 267
           Width = 453
           Caption = 'Directory'
-          ClientHeight = 74
+          ClientHeight = 60
           ClientWidth = 449
           TabOrder = 4
           object Label157: TLabel
@@ -202,7 +202,7 @@ object f_config_system: Tf_config_system
           end
           object persdir: TDirectoryEdit
             Left = 177
-            Height = 23
+            Height = 21
             Top = 24
             Width = 240
             ShowHidden = False
@@ -289,7 +289,7 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 31
+          ClientHeight = 17
           ClientWidth = 291
           Columns = 2
           ItemIndex = 0
@@ -308,7 +308,7 @@ object f_config_system: Tf_config_system
           Top = 367
           Width = 452
           Caption = 'Desktop environment'
-          ClientHeight = 75
+          ClientHeight = 61
           ClientWidth = 448
           TabOrder = 5
           object Label12: TLabel
@@ -321,7 +321,7 @@ object f_config_system: Tf_config_system
           end
           object LinuxDesktopBox: TComboBox
             Left = 20
-            Height = 23
+            Height = 21
             Top = 33
             Width = 102
             AutoCompleteText = [cbactSearchAscending]
@@ -336,7 +336,7 @@ object f_config_system: Tf_config_system
           end
           object LinuxCmd: TEdit
             Left = 204
-            Height = 23
+            Height = 21
             Top = 33
             Width = 194
             OnChange = LinuxCmdChange
@@ -347,8 +347,8 @@ object f_config_system: Tf_config_system
       end
       object Page2: TTabSheet
         Caption = 'Page2'
-        ClientHeight = 518
-        ClientWidth = 494
+        ClientHeight = 522
+        ClientWidth = 498
         object GroupBox3: TGroupBox
           Left = 16
           Height = 249
@@ -414,8 +414,8 @@ object f_config_system: Tf_config_system
       end
       object Page3: TTabSheet
         Caption = 'Page3'
-        ClientHeight = 518
-        ClientWidth = 494
+        ClientHeight = 522
+        ClientWidth = 498
         object Label13: TLabel
           Left = 0
           Height = 16
@@ -930,8 +930,8 @@ object f_config_system: Tf_config_system
       end
       object Page4: TTabSheet
         Caption = 'Page4'
-        ClientHeight = 518
-        ClientWidth = 494
+        ClientHeight = 522
+        ClientWidth = 498
         object Label14: TLabel
           Left = 19
           Height = 16
@@ -953,8 +953,8 @@ object f_config_system: Tf_config_system
       end
       object Page5: TTabSheet
         Caption = 'Page5'
-        ClientHeight = 518
-        ClientWidth = 494
+        ClientHeight = 522
+        ClientWidth = 498
         object Label15: TLabel
           Left = 19
           Height = 16

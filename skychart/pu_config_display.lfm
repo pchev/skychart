@@ -1,7 +1,7 @@
 object f_configdisplay: Tf_configdisplay
-  Left = 269
+  Left = 258
   Height = 602
-  Top = 338
+  Top = 337
   Width = 502
   Caption = 'Display'
   ClientHeight = 602
@@ -10,7 +10,7 @@ object f_configdisplay: Tf_configdisplay
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -86,43 +86,58 @@ object f_configdisplay: Tf_configdisplay
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
-        end
-        inherited Page2: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
-        end
-        inherited Page3: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
-        end
-        inherited Page4: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
-        end
-        inherited Page5: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
-        end
-        inherited Page6: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
-          inherited GroupBox5: TGroupBox
-            ClientHeight = 278
+          ClientHeight = 550
+          ClientWidth = 500
+          inherited stardisplay: TRadioGroup
+            ClientHeight = 34
+          end
+          inherited nebuladisplay: TRadioGroup
+            ClientHeight = 34
           end
         end
+        inherited Page2: TTabSheet
+          ClientHeight = 550
+          ClientWidth = 500
+        end
+        inherited Page3: TTabSheet
+          ClientHeight = 550
+          ClientWidth = 500
+        end
+        inherited Page4: TTabSheet
+          ClientHeight = 550
+          ClientWidth = 500
+        end
+        inherited Page5: TTabSheet
+          ClientHeight = 550
+          ClientWidth = 500
+          inherited GroupBox1: TGroupBox
+            ClientHeight = 123
+          end
+          inherited GroupBox3: TGroupBox
+            ClientHeight = 123
+          end
+          inherited GroupBox4: TGroupBox
+            ClientHeight = 123
+          end
+          inherited GroupBox8: TGroupBox
+            ClientHeight = 123
+          end
+        end
+        inherited Page6: TTabSheet
+          ClientHeight = 550
+          ClientWidth = 500
+        end
         inherited Page7: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
+          ClientHeight = 550
+          ClientWidth = 500
         end
         inherited Page8: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
+          ClientHeight = 550
+          ClientWidth = 500
         end
         inherited Page9: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
+          ClientHeight = 550
+          ClientWidth = 500
         end
       end
     end

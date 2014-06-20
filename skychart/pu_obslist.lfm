@@ -1,7 +1,7 @@
 object f_obslist: Tf_obslist
-  Left = 414
+  Left = 402
   Height = 498
-  Top = 109
+  Top = 106
   Width = 800
   Caption = 'f_obslist'
   ClientHeight = 498
@@ -9,7 +9,7 @@ object f_obslist: Tf_obslist
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '1.2.2.0'
+  LCLVersion = '1.2.4.0'
   object PanelBot: TPanel
     Left = 0
     Height = 66

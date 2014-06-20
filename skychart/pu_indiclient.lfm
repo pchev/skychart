@@ -1,7 +1,7 @@
 object pop_indi: Tpop_indi
-  Left = 288
+  Left = 244
   Height = 401
-  Top = 120
+  Top = 121
   Width = 279
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
@@ -14,7 +14,7 @@ object pop_indi: Tpop_indi
   OnDestroy = FormDestroy
   ParentFont = True
   Position = poDefaultPosOnly
-  LCLVersion = '1.2.2.0'
+  LCLVersion = '1.2.4.0'
   object GroupBox3: TGroupBox
     Left = 0
     Height = 136

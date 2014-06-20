@@ -1,7 +1,7 @@
 object f_splash: Tf_splash
-  Left = 421
+  Left = 428
   Height = 263
-  Top = 156
+  Top = 155
   Width = 496
   ActiveControl = Panel1
   BorderIcons = []
@@ -15,7 +15,7 @@ object f_splash: Tf_splash
   OnShow = FormShow
   ParentFont = True
   Position = poScreenCenter
-  LCLVersion = '1.0.8.0'
+  LCLVersion = '1.2.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 263
@@ -8406,10 +8406,10 @@ object f_splash: Tf_splash
       Stretch = True
     end
     object Label1: TLabel
-      Left = 306
-      Height = 31
+      Left = 307
+      Height = 30
       Top = 108
-      Width = 135
+      Width = 134
       Alignment = taRightJustify
       Anchors = [akTop, akRight]
       Caption = 'Sky Charts'
@@ -8421,9 +8421,9 @@ object f_splash: Tf_splash
     end
     object Label2: TLabel
       Left = 16
-      Height = 24
+      Height = 23
       Top = 144
-      Width = 95
+      Width = 94
       Caption = 'Version 3 '
       Font.Color = clWhite
       Font.Height = -20
@@ -8458,9 +8458,9 @@ object f_splash: Tf_splash
     end
     object LabelDate: TLabel
       Left = 16
-      Height = 18
+      Height = 17
       Top = 168
-      Width = 35
+      Width = 34
       Caption = 'Date'
       Font.Color = clWhite
       Font.Height = -15

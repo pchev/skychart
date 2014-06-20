@@ -1,7 +1,7 @@
 object f_configsystem: Tf_configsystem
-  Left = 515
+  Left = 541
   Height = 572
-  Top = 120
+  Top = 124
   Width = 500
   Caption = 'System'
   ClientHeight = 572
@@ -10,7 +10,7 @@ object f_configsystem: Tf_configsystem
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -79,87 +79,66 @@ object f_configsystem: Tf_configsystem
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 516
-          ClientWidth = 494
-          inherited GroupBox1: TGroupBox
-            ClientHeight = 94
+          ClientHeight = 520
+          inherited MysqlBox: TPanel
+            inherited dbpass: TEdit
+              Height = 23
+            end
+            inherited dbuser: TEdit
+              Height = 23
+            end
+            inherited dbhost: TEdit
+              Height = 23
+            end
+            inherited dbport: TLongEdit
+              Height = 23
+            end
+            inherited dbname: TEdit
+              Height = 23
+            end
+          end
+          inherited SqliteBox: TPanel
+            inherited dbnamesqlite: TEdit
+              Height = 23
+            end
+          end
+          inherited GroupBoxDir: TGroupBox
+            inherited persdir: TDirectoryEdit
+              Height = 23
+            end
+          end
+          inherited GroupBoxLinux: TGroupBox
+            inherited LinuxDesktopBox: TComboBox
+              Height = 23
+            end
+            inherited LinuxCmd: TEdit
+              Height = 23
+            end
           end
         end
         inherited Page2: TTabSheet
-          ClientHeight = 516
-          ClientWidth = 494
+          ClientHeight = 520
         end
         inherited Page3: TTabSheet
-          ClientHeight = 516
-          ClientWidth = 494
+          ClientHeight = 520
           inherited PageControl2: TPageControl
             ActivePage = nil
             TabIndex = -1
-            inherited TabSheet1: TTabSheet
-              ClientHeight = 348
-              ClientWidth = 470
-              inherited INDI: TPanel
-                ClientHeight = 324
-                ClientWidth = 446
-                inherited Panel2: TPanel
-                  ClientHeight = 88
-                  ClientWidth = 440
-                end
-              end
-            end
             inherited TabSheet2: TTabSheet
-              ClientHeight = 348
-              ClientWidth = 470
               inherited TelescopeManual: TPanel
-                ClientHeight = 326
-                ClientWidth = 446
                 inherited PageControl3: TPageControl
                   ActivePage = nil
                   TabIndex = -1
-                  inherited TabSheet5: TTabSheet
-                    ClientHeight = 173
-                    ClientWidth = 382
-                    inherited EquatorialMount: TPanel
-                      ClientHeight = 157
-                      ClientWidth = 357
-                    end
-                  end
-                  inherited TabSheet6: TTabSheet
-                    ClientHeight = 173
-                    ClientWidth = 382
-                    inherited AltAzMount: TPanel
-                      ClientHeight = 157
-                      ClientWidth = 357
-                    end
-                  end
                 end
-              end
-            end
-            inherited TabSheet4: TTabSheet
-              ClientHeight = 348
-              ClientWidth = 470
-              inherited ASCOMPanel: TPanel
-                ClientHeight = 324
-                ClientWidth = 448
-              end
-            end
-            inherited TabSheet3: TTabSheet
-              ClientHeight = 348
-              ClientWidth = 470
-              inherited InterfacePanel: TPanel
-                ClientHeight = 324
-                ClientWidth = 448
               end
             end
           end
         end
         inherited Page4: TTabSheet
-          ClientHeight = 516
-          ClientWidth = 494
+          ClientHeight = 520
         end
         inherited Page5: TTabSheet
-          ClientHeight = 516
-          ClientWidth = 494
+          ClientHeight = 520
         end
       end
     end

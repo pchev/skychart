@@ -1,7 +1,7 @@
 object f_detail: Tf_detail
-  Left = 345
+  Left = 249
   Height = 461
-  Top = 401
+  Top = 209
   Width = 393
   ActiveControl = Panel1
   Caption = 'Details'
@@ -11,7 +11,7 @@ object f_detail: Tf_detail
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object Memo1: TMemo
     Left = 0
     Height = 425

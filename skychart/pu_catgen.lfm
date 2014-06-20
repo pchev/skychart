@@ -1,7 +1,7 @@
 object f_catgen: Tf_catgen
-  Left = 364
+  Left = 385
   Height = 479
-  Top = 94
+  Top = 95
   Width = 503
   Caption = 'Prepare a catalog CatGen 3.0'
   ClientHeight = 479
@@ -11,7 +11,7 @@ object f_catgen: Tf_catgen
   OnShow = FormShow
   ParentFont = True
   Position = poDefaultPosOnly
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object Image1: TImage
     Left = 0
     Height = 438
@@ -2907,8 +2907,8 @@ object f_catgen: Tf_catgen
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
       Caption = '1'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 438
+      ClientWidth = 389
       object Label6: TLabel
         Left = 20
         Height = 16
@@ -2998,7 +2998,6 @@ object f_catgen: Tf_catgen
           C4CFCFC4CFCFC4CFCFC4CFCFC4CFCFC4CFCFC4CFCFC4CFCFC4CFCFC4CFCFC4CF
           CFC4CFCFC4CFCFC4CFCFC4CFCFC4CFCF0000
         }
-        NumGlyphs = 0
         OnClick = SpeedButton1Click
       end
       object Label22: TLabel
@@ -3112,8 +3111,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet2: TTabSheet
       Caption = '2'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 438
+      ClientWidth = 389
       ImageIndex = 4
       object GroupBox7: TGroupBox
         Left = 16
@@ -3476,8 +3475,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet3: TTabSheet
       Caption = '3'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 438
+      ClientWidth = 389
       ImageIndex = 1
       object Label4: TLabel
         Left = 134
@@ -3604,8 +3603,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet4: TTabSheet
       Caption = '4'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 438
+      ClientWidth = 389
       ImageIndex = 2
       object Label1: TLabel
         Left = 24
@@ -3711,14 +3710,14 @@ object f_catgen: Tf_catgen
     end
     object TabSheet5: TTabSheet
       Caption = '5'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 438
+      ClientWidth = 389
       ImageIndex = 4
       object Label9: TLabel
         Left = 22
-        Height = 16
+        Height = 15
         Top = 6
-        Width = 302
+        Width = 301
         Caption = 'Indicate the string identifier for each type of object :'
         ParentColor = False
       end
@@ -3753,8 +3752,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet6: TTabSheet
       Caption = '6'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 438
+      ClientWidth = 389
       ImageIndex = 5
       object Label14: TLabel
         Left = 22
@@ -3795,8 +3794,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet7: TTabSheet
       Caption = '7'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 438
+      ClientWidth = 389
       ImageIndex = 6
       object Label17: TLabel
         Left = 30
@@ -3836,8 +3835,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet8: TTabSheet
       Caption = '8'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 438
+      ClientWidth = 389
       ImageIndex = 7
       object Label20: TLabel
         Left = 70

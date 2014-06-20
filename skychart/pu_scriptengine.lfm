@@ -1,5 +1,5 @@
 object f_scriptengine: Tf_scriptengine
-  Left = 376
+  Left = 403
   Height = 485
   Top = 124
   Width = 758
@@ -9,7 +9,7 @@ object f_scriptengine: Tf_scriptengine
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '1.2.2.0'
+  LCLVersion = '1.2.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 485

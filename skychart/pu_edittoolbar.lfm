@@ -1,14 +1,14 @@
 object f_edittoolbar: Tf_edittoolbar
-  Left = 527
+  Left = 540
   Height = 368
-  Top = 121
+  Top = 124
   Width = 550
   Caption = 'f_edittoolbar'
   ClientHeight = 368
   ClientWidth = 550
   OnCreate = FormCreate
   OnResize = FormResize
-  LCLVersion = '1.2.2.0'
+  LCLVersion = '1.2.4.0'
   object PanelBottom: TPanel
     Left = 0
     Height = 35

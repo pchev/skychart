@@ -6,8 +6,8 @@ object f_config_pictures: Tf_config_pictures
   ClientHeight = 524
   ClientWidth = 503
   TabOrder = 0
-  DesignLeft = 548
-  DesignTop = 212
+  DesignLeft = 553
+  DesignTop = 124
   object MainPanel: TPanel
     Left = 0
     Height = 524
@@ -31,8 +31,8 @@ object f_config_pictures: Tf_config_pictures
       OnChange = PageControl1PageChanged
       object Page1: TTabSheet
         Caption = 'Objects'
-        ClientHeight = 518
-        ClientWidth = 497
+        ClientHeight = 522
+        ClientWidth = 501
         object Label3: TLabel
           Left = 17
           Height = 96
@@ -54,9 +54,9 @@ object f_config_pictures: Tf_config_pictures
           Visible = False
           object ProgressCat: TLabel
             Left = 187
-            Height = 16
+            Height = 15
             Top = 8
-            Width = 35
+            Width = 34
             Caption = 'Other'
             ParentColor = False
           end
@@ -70,17 +70,17 @@ object f_config_pictures: Tf_config_pictures
         end
         object Label50: TLabel
           Left = 17
-          Height = 16
+          Height = 15
           Top = 2
-          Width = 197
+          Width = 196
           Caption = 'Display image of cataloged objects'
           ParentColor = False
         end
         object Label264: TLabel
           Left = 16
-          Height = 16
+          Height = 15
           Top = 36
-          Width = 93
+          Width = 91
           Caption = 'Image Directory'
           ParentColor = False
         end
@@ -94,17 +94,17 @@ object f_config_pictures: Tf_config_pictures
           TabOrder = 3
           object Label266: TLabel
             Left = 24
-            Height = 16
+            Height = 15
             Top = 35
-            Width = 62
+            Width = 61
             Caption = 'Luminosity'
             ParentColor = False
           end
           object Label268: TLabel
             Left = 24
-            Height = 16
+            Height = 15
             Top = 91
-            Width = 52
+            Width = 51
             Caption = 'Contrast'
             ParentColor = False
           end
@@ -147,16 +147,16 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowImagesBox: TCheckBox
           Left = 31
-          Height = 23
+          Height = 26
           Top = 405
-          Width = 219
+          Width = 222
           Caption = 'Show object pictures on the chart'
           OnClick = ShowImagesBoxClick
           TabOrder = 4
         end
         object imgpath: TDirectoryEdit
           Left = 151
-          Height = 23
+          Height = 21
           Top = 29
           Width = 264
           ShowHidden = False
@@ -198,8 +198,8 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page2: TTabSheet
         Caption = 'Background'
-        ClientHeight = 518
-        ClientWidth = 497
+        ClientHeight = 522
+        ClientWidth = 501
         object Label270: TLabel
           Left = 7
           Height = 16
@@ -386,8 +386,8 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page3: TTabSheet
         Caption = 'DSS - Realsky'
-        ClientHeight = 518
-        ClientWidth = 497
+        ClientHeight = 522
+        ClientWidth = 501
         object GroupBox1: TGroupBox
           Left = 4
           Height = 69
@@ -604,7 +604,7 @@ object f_config_pictures: Tf_config_pictures
             Width = 256
             ShowHidden = False
             ButtonWidth = 23
-            NumGlyphs = 0
+            NumGlyphs = 1
             MaxLength = 0
             TabOrder = 1
             OnChange = ArchiveDirectory1Change
@@ -622,8 +622,8 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page4: TTabSheet
         Caption = 'Image archive'
-        ClientHeight = 518
-        ClientWidth = 497
+        ClientHeight = 522
+        ClientWidth = 501
         object StringGrid1: TStringGrid
           Left = 21
           Height = 296

@@ -1,7 +1,7 @@
 object f_configtime: Tf_configtime
-  Left = 362
+  Left = 504
   Height = 583
-  Top = 145
+  Top = 124
   Width = 496
   BorderIcons = [biSystemMenu]
   Caption = 'Date / Time'
@@ -11,7 +11,7 @@ object f_configtime: Tf_configtime
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 54
@@ -87,17 +87,12 @@ object f_configtime: Tf_configtime
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 525
-          ClientWidth = 492
-          inherited Panel9: TPanel
-            inherited ADBC: TRadioGroup
-              ClientHeight = 35
-            end
-          end
+          ClientHeight = 529
+          ClientWidth = 496
         end
         inherited Page2: TTabSheet
-          ClientHeight = 525
-          ClientWidth = 492
+          ClientHeight = 529
+          ClientWidth = 496
           inherited SimObj: TCheckListBox
             Data = {
               0C000000000000000000000000000000
@@ -115,8 +110,8 @@ object f_configtime: Tf_configtime
           end
         end
         inherited Page3: TTabSheet
-          ClientHeight = 525
-          ClientWidth = 492
+          ClientHeight = 529
+          ClientWidth = 496
         end
       end
     end
