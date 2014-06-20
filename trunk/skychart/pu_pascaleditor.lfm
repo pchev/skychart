@@ -1,7 +1,7 @@
 object f_pascaleditor: Tf_pascaleditor
   Left = 407
   Height = 500
-  Top = 165
+  Top = 175
   Width = 700
   Caption = 'Editor'
   ClientHeight = 500
@@ -9,7 +9,7 @@ object f_pascaleditor: Tf_pascaleditor
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '1.2.2.0'
+  LCLVersion = '1.2.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 80

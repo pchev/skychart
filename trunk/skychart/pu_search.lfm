@@ -1,7 +1,7 @@
 object f_search: Tf_search
-  Left = 494
+  Left = 504
   Height = 355
-  Top = 105
+  Top = 106
   Width = 433
   ActiveControl = RadioGroup1.RadioButton0
   Caption = 'Search'
@@ -12,7 +12,7 @@ object f_search: Tf_search
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object PlanetPanel: TPanel
     Left = 8
     Height = 41
@@ -25,15 +25,15 @@ object f_search: Tf_search
     Visible = False
     object Label2: TLabel
       Left = 13
-      Height = 16
+      Height = 15
       Top = 14
-      Width = 40
+      Width = 39
       Caption = 'Planet '
       ParentColor = False
     end
     object PlanetBox: TComboBox
       Left = 184
-      Height = 23
+      Height = 21
       Top = 8
       Width = 146
       DropDownCount = 10
@@ -51,7 +51,7 @@ object f_search: Tf_search
     TabOrder = 4
     object CometFilter: TEdit
       Left = 8
-      Height = 23
+      Height = 21
       Top = 10
       Width = 99
       TabOrder = 0
@@ -68,7 +68,7 @@ object f_search: Tf_search
     end
     object CometList: TComboBox
       Left = 192
-      Height = 23
+      Height = 21
       Top = 10
       Width = 216
       ItemHeight = 0
@@ -85,7 +85,7 @@ object f_search: Tf_search
     TabOrder = 6
     object AsteroidFilter: TEdit
       Left = 8
-      Height = 23
+      Height = 21
       Top = 10
       Width = 99
       TabOrder = 0
@@ -102,7 +102,7 @@ object f_search: Tf_search
     end
     object AsteroidList: TComboBox
       Left = 192
-      Height = 23
+      Height = 21
       Top = 10
       Width = 216
       ItemHeight = 0
@@ -121,15 +121,15 @@ object f_search: Tf_search
     Visible = False
     object Label3: TLabel
       Left = 13
-      Height = 16
+      Height = 15
       Top = 14
-      Width = 40
+      Width = 39
       Caption = 'Nebula'
       ParentColor = False
     end
     object NebNameBox: TComboBox
       Left = 104
-      Height = 23
+      Height = 21
       Top = 11
       Width = 280
       ItemHeight = 0
@@ -148,15 +148,15 @@ object f_search: Tf_search
     Visible = False
     object Label4: TLabel
       Left = 13
-      Height = 16
+      Height = 15
       Top = 14
-      Width = 24
+      Width = 23
       Caption = 'Star'
       ParentColor = False
     end
     object StarNameBox: TComboBox
       Left = 97
-      Height = 23
+      Height = 21
       Top = 11
       Width = 281
       ItemHeight = 0
@@ -175,15 +175,15 @@ object f_search: Tf_search
     Visible = False
     object Label5: TLabel
       Left = 13
-      Height = 16
+      Height = 15
       Top = 14
-      Width = 77
+      Width = 76
       Caption = 'Constellation'
       ParentColor = False
     end
     object ConstBox: TComboBox
       Left = 113
-      Height = 23
+      Height = 21
       Top = 11
       Width = 265
       ItemHeight = 0
@@ -202,9 +202,9 @@ object f_search: Tf_search
     TabOrder = 5
     object Label1: TLabel
       Left = 6
-      Height = 16
+      Height = 15
       Top = 14
-      Width = 76
+      Width = 75
       Caption = 'Object Name'
       ParentColor = False
     end
@@ -224,7 +224,6 @@ object f_search: Tf_search
         Top = 2
         Width = 36
         Caption = 'ADS'
-        NumGlyphs = 0
         OnClick = CatButtonClick
       end
       object SpeedButton31: TSpeedButton
@@ -233,7 +232,6 @@ object f_search: Tf_search
         Top = 2
         Width = 36
         Caption = 'STF'
-        NumGlyphs = 0
         OnClick = CatButtonClick
       end
     end
@@ -253,7 +251,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'R'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton24: TSpeedButton
@@ -262,7 +259,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'S'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton25: TSpeedButton
@@ -271,7 +267,6 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = 'V'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton26: TSpeedButton
@@ -280,7 +275,6 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = 'NSV'
-        NumGlyphs = 0
         OnClick = CatButtonClick
       end
       object SpeedButton27: TSpeedButton
@@ -289,7 +283,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'T'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton28: TSpeedButton
@@ -298,7 +291,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'U'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton29: TSpeedButton
@@ -307,7 +299,6 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = 'W'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
     end
@@ -327,7 +318,6 @@ object f_search: Tf_search
         Top = 2
         Width = 36
         Caption = 'TYC'
-        NumGlyphs = 0
         OnClick = CatButtonClick
       end
       object SpeedButton20: TSpeedButton
@@ -336,7 +326,6 @@ object f_search: Tf_search
         Top = 2
         Width = 36
         Caption = 'GSC'
-        NumGlyphs = 0
         OnClick = CatButtonClick
       end
       object SpeedButton22: TSpeedButton
@@ -345,7 +334,6 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = 'HD'
-        NumGlyphs = 0
         OnClick = CatButtonClick
       end
       object SpeedButton23: TSpeedButton
@@ -354,13 +342,12 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = 'BD'
-        NumGlyphs = 0
         OnClick = CatButtonClick
       end
     end
     object Id: TEdit
       Left = 105
-      Height = 23
+      Height = 21
       Top = 10
       Width = 96
       OnKeyDown = IdKeyDown
@@ -382,7 +369,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '1'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton2: TSpeedButton
@@ -391,7 +377,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '2'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton3: TSpeedButton
@@ -400,7 +385,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '3'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton4: TSpeedButton
@@ -409,7 +393,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '4'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton5: TSpeedButton
@@ -418,7 +401,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '5'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton6: TSpeedButton
@@ -427,7 +409,6 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = '6'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton7: TSpeedButton
@@ -436,7 +417,6 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = '7'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton8: TSpeedButton
@@ -445,7 +425,6 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = '8'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton9: TSpeedButton
@@ -454,7 +433,6 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = '9'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton10: TSpeedButton
@@ -463,7 +441,6 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = '0'
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton11: TSpeedButton
@@ -472,7 +449,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '<-'
-        NumGlyphs = 0
         OnClick = SpeedButton11Click
       end
       object SpeedButton12: TSpeedButton
@@ -481,7 +457,6 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = ' '
-        NumGlyphs = 0
         OnClick = NumButtonClick
       end
       object SpeedButton13: TSpeedButton
@@ -490,7 +465,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'C'
-        NumGlyphs = 0
         OnClick = SpeedButton13Click
       end
     end
@@ -509,7 +483,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'M'
-        NumGlyphs = 0
         OnClick = CatButtonClick
       end
       object SpeedButton15: TSpeedButton
@@ -518,7 +491,6 @@ object f_search: Tf_search
         Top = 2
         Width = 36
         Caption = 'NGC'
-        NumGlyphs = 0
         OnClick = CatButtonClick
       end
       object SpeedButton16: TSpeedButton
@@ -527,7 +499,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'IC'
-        NumGlyphs = 0
         OnClick = CatButtonClick
       end
       object SpeedButton17: TSpeedButton
@@ -536,7 +507,6 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = 'PGC'
-        NumGlyphs = 0
         OnClick = CatButtonClick
       end
       object SpeedButton18: TSpeedButton
@@ -545,7 +515,6 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = 'PK'
-        NumGlyphs = 0
         OnClick = CatButtonClick
       end
     end
@@ -565,7 +534,7 @@ object f_search: Tf_search
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 2
-    ClientHeight = 200
+    ClientHeight = 186
     ClientWidth = 412
     Columns = 2
     ItemIndex = 0
@@ -627,7 +596,7 @@ object f_search: Tf_search
     TabOrder = 7
     object OnlineEdit: TEdit
       Left = 256
-      Height = 23
+      Height = 21
       Top = 1
       Width = 151
       TabOrder = 1
@@ -635,7 +604,7 @@ object f_search: Tf_search
     end
     object ServerList: TComboBox
       Left = 16
-      Height = 25
+      Height = 27
       Top = 1
       Width = 200
       ItemHeight = 0
@@ -645,9 +614,9 @@ object f_search: Tf_search
     end
     object StatusLabel: TLabel
       Left = 19
-      Height = 16
+      Height = 15
       Top = 58
-      Width = 67
+      Width = 66
       Caption = 'StatusLabel'
       ParentColor = False
     end

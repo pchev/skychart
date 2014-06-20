@@ -1,7 +1,7 @@
 object f_configobservatory: Tf_configobservatory
-  Left = 513
+  Left = 552
   Height = 578
-  Top = 120
+  Top = 124
   Width = 501
   BorderIcons = [biSystemMenu]
   Caption = 'Observatory'
@@ -11,7 +11,7 @@ object f_configobservatory: Tf_configobservatory
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.2.2.0'
+  LCLVersion = '1.2.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 50

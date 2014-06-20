@@ -1,7 +1,7 @@
 object f_image: Tf_image
-  Left = 335
+  Left = 247
   Height = 407
-  Top = 121
+  Top = 194
   Width = 615
   HorzScrollBar.Increment = 61
   HorzScrollBar.Page = 614
@@ -17,7 +17,7 @@ object f_image: Tf_image
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   ParentFont = True
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object Image1: TZoomImage
     Left = 0
     Height = 265
@@ -48,9 +48,9 @@ object f_image: Tf_image
     TabStop = True
     object Label1: TLabel
       Left = 320
-      Height = 16
+      Height = 15
       Top = 7
-      Width = 37
+      Width = 36
       Caption = 'Label1'
       ParentColor = False
     end
@@ -95,10 +95,10 @@ object f_image: Tf_image
     end
   end
   object VScrollBar: TScrollBar
-    Left = 600
-    Height = 365
+    Left = 599
+    Height = 364
     Top = 27
-    Width = 15
+    Width = 16
     Align = alRight
     Kind = sbVertical
     PageSize = 0
@@ -107,8 +107,8 @@ object f_image: Tf_image
   end
   object HScrollBar: TScrollBar
     Left = 0
-    Height = 15
-    Top = 392
+    Height = 16
+    Top = 391
     Width = 615
     Align = alBottom
     PageSize = 0

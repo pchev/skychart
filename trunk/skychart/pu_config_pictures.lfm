@@ -1,7 +1,7 @@
 object f_configpictures: Tf_configpictures
-  Left = 513
+  Left = 527
   Height = 576
-  Top = 120
+  Top = 124
   Width = 501
   Caption = 'Pictures'
   ClientHeight = 576
@@ -10,7 +10,7 @@ object f_configpictures: Tf_configpictures
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object Panel2: TPanel
     Left = 0
     Height = 50
@@ -84,20 +84,51 @@ object f_configpictures: Tf_configpictures
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 520
-          ClientWidth = 495
+          ClientHeight = 524
+          ClientWidth = 499
+          inherited ProgressPanel: TPanel
+            inherited ProgressCat: TLabel
+              Height = 16
+              Width = 35
+            end
+          end
+          inherited Label50: TLabel
+            Height = 16
+            Width = 197
+          end
+          inherited Label264: TLabel
+            Height = 16
+            Width = 93
+          end
+          inherited Panel11: TPanel
+            inherited Label266: TLabel
+              Height = 16
+              Width = 62
+            end
+            inherited Label268: TLabel
+              Height = 16
+              Width = 52
+            end
+          end
+          inherited ShowImagesBox: TCheckBox
+            Height = 23
+            Width = 219
+          end
+          inherited imgpath: TDirectoryEdit
+            Height = 23
+          end
         end
         inherited Page2: TTabSheet
-          ClientHeight = 520
-          ClientWidth = 495
+          ClientHeight = 524
+          ClientWidth = 499
         end
         inherited Page3: TTabSheet
-          ClientHeight = 520
-          ClientWidth = 495
+          ClientHeight = 524
+          ClientWidth = 499
         end
         inherited Page4: TTabSheet
-          ClientHeight = 520
-          ClientWidth = 495
+          ClientHeight = 524
+          ClientWidth = 499
         end
       end
     end

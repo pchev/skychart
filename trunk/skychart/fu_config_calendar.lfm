@@ -6,8 +6,8 @@ object f_config_calendar: Tf_config_calendar
   ClientHeight = 529
   ClientWidth = 500
   TabOrder = 0
-  DesignLeft = 302
-  DesignTop = 210
+  DesignLeft = 296
+  DesignTop = 229
   object Mainpanel: TPanel
     Left = 0
     Height = 529
@@ -29,20 +29,20 @@ object f_config_calendar: Tf_config_calendar
       TabOrder = 0
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
-        ClientHeight = 523
-        ClientWidth = 494
+        ClientHeight = 527
+        ClientWidth = 498
         object GroupBox1: TGroupBox
           Left = 21
           Height = 209
           Top = 29
           Width = 377
           Caption = 'Calendar graph setting'
-          ClientHeight = 192
+          ClientHeight = 178
           ClientWidth = 373
           TabOrder = 0
           object LongEdit1: TLongEdit
             Left = 125
-            Height = 23
+            Height = 21
             Hint = '100..500'
             Top = 57
             Width = 80
@@ -56,9 +56,9 @@ object f_config_calendar: Tf_config_calendar
           end
           object Label2: TLabel
             Left = 14
-            Height = 16
+            Height = 15
             Top = 61
-            Width = 74
+            Width = 73
             Caption = 'Graph height'
             ParentColor = False
           end

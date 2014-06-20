@@ -6,8 +6,8 @@ object f_chart: Tf_chart
   ClientHeight = 338
   ClientWidth = 508
   TabOrder = 0
-  DesignLeft = 360
-  DesignTop = 134
+  DesignLeft = 299
+  DesignTop = 212
   object Panel1: TPanel
     Left = 0
     Height = 338
@@ -23,8 +23,8 @@ object f_chart: Tf_chart
     OnResize = ChartResize
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 492
-      Height = 322
+      Left = 488
+      Height = 318
       Top = 0
       Width = 16
       Align = alRight
@@ -40,8 +40,8 @@ object f_chart: Tf_chart
       Cursor = crArrow
       Left = 0
       Height = 16
-      Top = 322
-      Width = 508
+      Top = 318
+      Width = 504
       Align = alBottom
       LargeChange = 10
       Max = 50

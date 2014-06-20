@@ -1,7 +1,7 @@
 object f_voconfig: Tf_voconfig
-  Left = 310
+  Left = 502
   Height = 516
-  Top = 62
+  Top = 89
   Width = 783
   HorzScrollBar.Page = 713
   VertScrollBar.Page = 487
@@ -12,7 +12,7 @@ object f_voconfig: Tf_voconfig
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object PageControl1: TPageControl
     Left = 0
     Height = 516
@@ -25,8 +25,8 @@ object f_voconfig: Tf_voconfig
     TabOrder = 0
     object TabCat: TTabSheet
       Caption = 'Catalog List'
-      ClientHeight = 512
-      ClientWidth = 779
+      ClientHeight = 516
+      ClientWidth = 783
       object Panel1: TPanel
         Left = 0
         Height = 96
@@ -133,14 +133,14 @@ object f_voconfig: Tf_voconfig
     end
     object TabDetail: TTabSheet
       Caption = 'Catalog Detail'
-      ClientHeight = 512
-      ClientWidth = 779
+      ClientHeight = 516
+      ClientWidth = 783
       ImageIndex = 1
       object PageControl2: TPageControl
         Left = 0
-        Height = 447
+        Height = 451
         Top = 31
-        Width = 779
+        Width = 783
         TabStop = False
         Align = alClient
         TabOrder = 1
@@ -149,16 +149,16 @@ object f_voconfig: Tf_voconfig
         Left = 0
         Height = 31
         Top = 0
-        Width = 779
+        Width = 783
         Align = alTop
         ClientHeight = 31
-        ClientWidth = 779
+        ClientWidth = 783
         TabOrder = 0
         object Label6: TLabel
           Left = 9
-          Height = 15
+          Height = 14
           Top = 9
-          Width = 368
+          Width = 367
           Caption = 'Make selection of the table and column you want to your catalog'
           ParentColor = False
         end
@@ -166,11 +166,11 @@ object f_voconfig: Tf_voconfig
       object Panel4: TPanel
         Left = 0
         Height = 34
-        Top = 478
-        Width = 779
+        Top = 482
+        Width = 783
         Align = alBottom
         ClientHeight = 34
-        ClientWidth = 779
+        ClientWidth = 783
         TabOrder = 2
         object ButtonClose: TButton
           Left = 676
@@ -192,9 +192,9 @@ object f_voconfig: Tf_voconfig
         end
         object LabelStatus: TLabel
           Left = 12
-          Height = 15
+          Height = 14
           Top = 10
-          Width = 68
+          Width = 67
           Caption = 'LabelStatus'
           ParentColor = False
         end
@@ -202,8 +202,8 @@ object f_voconfig: Tf_voconfig
     end
     object TabData: TTabSheet
       Caption = 'Catalog Data'
-      ClientHeight = 512
-      ClientWidth = 779
+      ClientHeight = 516
+      ClientWidth = 783
       ImageIndex = 2
       object DataGrid: TStringGrid
         Left = 0
@@ -250,8 +250,8 @@ object f_voconfig: Tf_voconfig
     end
     object TabRegistry: TTabSheet
       Caption = 'Registry'
-      ClientHeight = 512
-      ClientWidth = 779
+      ClientHeight = 516
+      ClientWidth = 783
       ImageIndex = 3
       TabVisible = False
       object RadioGroup1: TRadioGroup

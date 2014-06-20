@@ -1,7 +1,7 @@
 object f_position: Tf_position
-  Left = 459
+  Left = 481
   Height = 282
-  Top = 107
+  Top = 108
   Width = 477
   ActiveControl = Panel2
   Caption = 'Position'
@@ -10,7 +10,7 @@ object f_position: Tf_position
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object Button1: TButton
     Left = 304
     Height = 25
@@ -44,25 +44,25 @@ object f_position: Tf_position
     TabOrder = 1
     object coord1: TLabel
       Left = 8
-      Height = 16
+      Height = 15
       Top = 36
-      Width = 15
+      Width = 13
       Caption = 'Az'
       ParentColor = False
     end
     object coord2: TLabel
       Left = 248
-      Height = 16
+      Height = 15
       Top = 36
-      Width = 17
+      Width = 16
       Caption = 'Alt'
       ParentColor = False
     end
     object coord: TLabel
       Left = 8
-      Height = 16
+      Height = 15
       Top = 8
-      Width = 34
+      Width = 33
       Caption = 'coord'
       ParentColor = False
     end
@@ -100,25 +100,25 @@ object f_position: Tf_position
     TabOrder = 0
     object eq1: TLabel
       Left = 8
-      Height = 16
+      Height = 15
       Top = 36
-      Width = 17
+      Width = 15
       Caption = 'RA'
       ParentColor = False
     end
     object eq2: TLabel
       Left = 248
-      Height = 16
+      Height = 15
       Top = 36
-      Width = 17
+      Width = 16
       Caption = 'DE'
       ParentColor = False
     end
     object Equinox: TLabel
       Left = 8
-      Height = 16
+      Height = 15
       Top = 8
-      Width = 45
+      Width = 44
       Caption = 'Equinox'
       ParentColor = False
     end
@@ -156,17 +156,17 @@ object f_position: Tf_position
     TabOrder = 2
     object Label3: TLabel
       Left = 8
-      Height = 16
+      Height = 15
       Top = 14
-      Width = 23
+      Width = 22
       Caption = 'FOV'
       ParentColor = False
     end
     object Label4: TLabel
       Left = 248
-      Height = 16
+      Height = 15
       Top = 14
-      Width = 51
+      Width = 50
       Caption = 'Rotation'
       ParentColor = False
     end
@@ -182,7 +182,7 @@ object f_position: Tf_position
     end
     object rot: TFloatEdit
       Left = 336
-      Height = 23
+      Height = 21
       Hint = '-180..180'
       Top = 9
       Width = 73

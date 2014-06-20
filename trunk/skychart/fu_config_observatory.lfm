@@ -6,7 +6,7 @@ object f_config_observatory: Tf_config_observatory
   ClientHeight = 548
   ClientWidth = 502
   TabOrder = 0
-  DesignLeft = 351
+  DesignLeft = 307
   DesignTop = 235
   object MainPanel: TPanel
     Left = 0
@@ -412,7 +412,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 152
           Width = 457
           Caption = 'Want to track an object before it rise ?'
-          ClientHeight = 34
+          ClientHeight = 48
           ClientWidth = 453
           TabOrder = 1
           object horizonopaque: TCheckBox
@@ -431,7 +431,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 4
           Width = 457
           Caption = 'Local Horizon'
-          ClientHeight = 117
+          ClientHeight = 131
           ClientWidth = 453
           TabOrder = 0
           object displayhorizon: TCheckBox
@@ -530,7 +530,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 223
           Width = 457
           Caption = 'Depression of the visible horizon'
-          ClientHeight = 92
+          ClientHeight = 106
           ClientWidth = 453
           TabOrder = 2
           object Label1: TLabel
@@ -559,7 +559,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 346
           Width = 457
           Caption = 'Atmospheric Refraction'
-          ClientHeight = 73
+          ClientHeight = 87
           ClientWidth = 453
           TabOrder = 3
           object Label82: TLabel

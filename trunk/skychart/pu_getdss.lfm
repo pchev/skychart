@@ -1,7 +1,7 @@
 object f_getdss: Tf_getdss
-  Left = 331
+  Left = 276
   Height = 308
-  Top = 137
+  Top = 222
   Width = 420
   ActiveControl = ListBox1
   Caption = 'List of available plates'
@@ -11,7 +11,7 @@ object f_getdss: Tf_getdss
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   ParentFont = True
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object Memo1: TMemo
     Left = 8
     Height = 232
@@ -42,9 +42,9 @@ object f_getdss: Tf_getdss
   end
   object Label1: TLabel
     Left = 12
-    Height = 15
+    Height = 14
     Top = 8
-    Width = 43
+    Width = 42
     Caption = 'Label1'
     Font.CharSet = ANSI_CHARSET
     Font.Height = -11
@@ -62,7 +62,6 @@ object f_getdss: Tf_getdss
     Caption = 'OK'
     Default = True
     ModalResult = 1
-    NumGlyphs = 0
     TabOrder = 2
   end
   object BitBtn2: TBitBtn
@@ -74,7 +73,6 @@ object f_getdss: Tf_getdss
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
-    NumGlyphs = 0
     OnClick = BitBtn2Click
     TabOrder = 3
   end

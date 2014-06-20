@@ -1,7 +1,7 @@
 object f_calendar: Tf_calendar
-  Left = 473
+  Left = 490
   Height = 455
-  Top = 93
+  Top = 95
   Width = 835
   ActiveControl = Panel1
   Caption = 'f_calendar'
@@ -13,7 +13,7 @@ object f_calendar: Tf_calendar
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.2.2.0'
+  LCLVersion = '1.2.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 70
@@ -192,7 +192,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date1Change
       TabOrder = 0
-      Text = '2014.06.16.01'
+      Text = '2014.06.20.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -254,7 +254,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date2Change
       TabOrder = 1
-      Text = '2014.06.16.01'
+      Text = '2014.06.20.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end

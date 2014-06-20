@@ -1,7 +1,7 @@
 object f_configsolsys: Tf_configsolsys
-  Left = 516
+  Left = 534
   Height = 576
-  Top = 120
+  Top = 124
   Width = 500
   Caption = 'Solar System'
   ClientHeight = 576
@@ -10,7 +10,7 @@ object f_configsolsys: Tf_configsolsys
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -84,86 +84,61 @@ object f_configsolsys: Tf_configsolsys
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 520
-          ClientWidth = 494
+          ClientHeight = 524
+          ClientWidth = 498
+          inherited Label12: TLabel
+            Height = 16
+            Width = 117
+          end
+          inherited Label131: TLabel
+            Height = 16
+            Width = 62
+          end
+          inherited Label3: TLabel
+            Height = 16
+            Width = 332
+          end
+          inherited planetdir: TDirectoryEdit
+            Height = 23
+          end
+          inherited CheckBoxPluto: TCheckBox
+            Height = 23
+            Width = 118
+          end
+          inherited smallsat: TCheckBox
+            Height = 23
+            Width = 282
+          end
         end
         inherited Page2: TTabSheet
-          ClientHeight = 520
-          ClientWidth = 494
+          ClientHeight = 524
+          ClientWidth = 498
         end
         inherited Page3: TTabSheet
-          ClientHeight = 520
-          ClientWidth = 494
+          ClientHeight = 524
+          ClientWidth = 498
           inherited ComPageControl: TPageControl
             ActivePage = nil
             TabIndex = -1
-            inherited comsetting: TTabSheet
-              ClientHeight = 512
-              ClientWidth = 492
-            end
             inherited comload: TTabSheet
-              ClientHeight = 512
-              ClientWidth = 492
               inherited ComPageControl1: TPageControl
                 ActivePage = nil
                 TabIndex = -1
-                inherited TabSheet1: TTabSheet
-                  ClientHeight = 100
-                  ClientWidth = 432
-                end
-                inherited TabSheet2: TTabSheet
-                  ClientHeight = 100
-                  ClientWidth = 432
-                end
               end
-            end
-            inherited comdelete: TTabSheet
-              ClientHeight = 512
-              ClientWidth = 492
-            end
-            inherited Addsinglecom: TTabSheet
-              ClientHeight = 512
-              ClientWidth = 492
             end
           end
         end
         inherited Page4: TTabSheet
-          ClientHeight = 520
-          ClientWidth = 494
+          ClientHeight = 524
+          ClientWidth = 498
           inherited AstPageControl: TPageControl
             ActivePage = nil
             TabIndex = -1
-            inherited astsetting: TTabSheet
-              ClientHeight = 512
-              ClientWidth = 492
-            end
             inherited astload: TTabSheet
-              ClientHeight = 512
-              ClientWidth = 492
               inherited AstPageControl2: TPageControl
                 ActivePage = nil
                 TabIndex = -1
-                inherited TabSheet3: TTabSheet
-                  ClientHeight = 92
-                  ClientWidth = 437
-                end
-                inherited TabSheet4: TTabSheet
-                  ClientHeight = 92
-                  ClientWidth = 437
-                end
               end
-            end
-            inherited astprepare: TTabSheet
-              ClientHeight = 512
-              ClientWidth = 492
-            end
-            inherited astdelete: TTabSheet
-              ClientHeight = 512
-              ClientWidth = 492
-            end
-            inherited AddsingleAst: TTabSheet
-              ClientHeight = 512
-              ClientWidth = 492
             end
           end
         end

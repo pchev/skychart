@@ -6,8 +6,8 @@ object f_config_time: Tf_config_time
   ClientHeight = 530
   ClientWidth = 500
   TabOrder = 0
-  DesignLeft = 348
-  DesignTop = 305
+  DesignLeft = 319
+  DesignTop = 285
   object MainPanel: TPanel
     Left = 0
     Height = 530
@@ -593,7 +593,7 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 105
+          ClientHeight = 119
           ClientWidth = 133
           Items.Strings = (
             'Days'
@@ -632,9 +632,10 @@ object f_config_time: Tf_config_time
             'Asteroids'
             'Comets'
           )
-          ItemHeight = 21
+          ItemHeight = 0
           OnItemClick = SimObjItemClick
           TabOrder = 0
+          TopIndex = -1
           Data = {
             0C000000000000000000000000000000
           }
@@ -674,7 +675,7 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 47
+          ClientHeight = 61
           ClientWidth = 434
           Columns = 3
           Items.Strings = (
@@ -716,7 +717,7 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 17
+          ClientHeight = 31
           ClientWidth = 434
           Columns = 3
           Items.Strings = (
@@ -745,7 +746,7 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 6
-          ClientHeight = 17
+          ClientHeight = 31
           ClientWidth = 434
           Columns = 6
           Items.Strings = (

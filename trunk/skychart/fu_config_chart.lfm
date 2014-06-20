@@ -6,8 +6,8 @@ object f_config_chart: Tf_config_chart
   ClientHeight = 528
   ClientWidth = 505
   TabOrder = 0
-  DesignLeft = 124
-  DesignTop = 92
+  DesignLeft = 154
+  DesignTop = 231
   object MainPanel: TPanel
     Left = 0
     Height = 528
@@ -31,8 +31,8 @@ object f_config_chart: Tf_config_chart
       OnChange = PageControl1PageChanged
       object Page1: TTabSheet
         Caption = 'Page1'
-        ClientHeight = 468
-        ClientWidth = 499
+        ClientHeight = 472
+        ClientWidth = 503
         object PanelExpert: TPanel
           Left = 13
           Height = 192
@@ -245,8 +245,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page2: TTabSheet
         Caption = 'Page2'
-        ClientHeight = 468
-        ClientWidth = 499
+        ClientHeight = 472
+        ClientWidth = 503
         object Label30: TLabel
           Left = 0
           Height = 16
@@ -701,8 +701,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page3: TTabSheet
         Caption = 'Page3'
-        ClientHeight = 468
-        ClientWidth = 499
+        ClientHeight = 472
+        ClientWidth = 503
         object Bevel7: TBevel
           Left = 13
           Height = 384
@@ -1039,8 +1039,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page4: TTabSheet
         Caption = 'Page4'
-        ClientHeight = 468
-        ClientWidth = 499
+        ClientHeight = 472
+        ClientWidth = 503
         object Label29: TLabel
           Left = 0
           Height = 15
@@ -1858,8 +1858,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page5: TTabSheet
         Caption = 'Page5'
-        ClientHeight = 468
-        ClientWidth = 499
+        ClientHeight = 472
+        ClientWidth = 503
         object Bevel1: TBevel
           Left = 253
           Height = 340
@@ -2006,9 +2006,9 @@ object f_config_chart: Tf_config_chart
         end
         object CheckBox13: TCheckBox
           Left = 253
-          Height = 23
+          Height = 26
           Top = 387
-          Width = 135
+          Width = 138
           Caption = 'Show compass rose'
           OnClick = CheckBox13Click
           TabOrder = 23
@@ -2302,9 +2302,9 @@ object f_config_chart: Tf_config_chart
         end
         object CheckBox2: TCheckBox
           Left = 253
-          Height = 23
+          Height = 26
           Top = 413
-          Width = 131
+          Width = 134
           Caption = 'Use simple pointer'
           OnClick = CheckBox2Click
           TabOrder = 25
@@ -2312,8 +2312,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page6: TTabSheet
         Caption = 'Page6'
-        ClientHeight = 468
-        ClientWidth = 499
+        ClientHeight = 472
+        ClientWidth = 503
         object Label95: TLabel
           Left = 0
           Height = 16

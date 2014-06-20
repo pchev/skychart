@@ -1,7 +1,7 @@
 object f_addlabel: Tf_addlabel
-  Left = 320
+  Left = 317
   Height = 149
-  Top = 208
+  Top = 225
   Width = 264
   ActiveControl = Edit1
   BorderIcons = [biSystemMenu]
@@ -11,26 +11,26 @@ object f_addlabel: Tf_addlabel
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.1.3'
+  LCLVersion = '1.2.4.0'
   object Label1: TLabel
     Left = 12
-    Height = 16
+    Height = 15
     Top = 16
-    Width = 33
+    Width = 32
     Caption = 'Label:'
     ParentColor = False
   end
   object Label2: TLabel
     Left = 12
-    Height = 16
+    Height = 15
     Top = 45
-    Width = 30
+    Width = 29
     Caption = 'Type:'
     ParentColor = False
   end
   object Edit1: TEdit
     Left = 56
-    Height = 23
+    Height = 21
     Top = 8
     Width = 192
     OnChange = Edit1Change
@@ -38,7 +38,7 @@ object f_addlabel: Tf_addlabel
   end
   object ComboBox1: TComboBox
     Left = 56
-    Height = 23
+    Height = 21
     Top = 40
     Width = 192
     ItemHeight = 0
@@ -94,7 +94,7 @@ object f_addlabel: Tf_addlabel
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 3
-    ClientHeight = 27
+    ClientHeight = 13
     ClientWidth = 232
     Columns = 3
     ItemIndex = 0

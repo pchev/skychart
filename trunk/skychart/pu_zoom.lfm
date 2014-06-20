@@ -1,7 +1,7 @@
 object f_zoom: Tf_zoom
-  Left = 453
+  Left = 476
   Height = 142
-  Top = 181
+  Top = 169
   Width = 308
   ActiveControl = TrackBar1
   Caption = 'Set FOV'
@@ -11,52 +11,52 @@ object f_zoom: Tf_zoom
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object Label1: TLabel
     Left = 16
-    Height = 16
+    Height = 15
     Top = 8
-    Width = 11
+    Width = 10
     Caption = '1'''
     ParentColor = False
   end
   object Label2: TLabel
     Left = 120
-    Height = 16
+    Height = 15
     Top = 8
-    Width = 8
+    Width = 7
     Caption = '1'
     ParentColor = False
   end
   object Label3: TLabel
     Left = 172
-    Height = 16
+    Height = 15
     Top = 8
-    Width = 15
+    Width = 14
     Caption = '10'
     ParentColor = False
   end
   object Label4: TLabel
     Left = 225
-    Height = 16
+    Height = 15
     Top = 8
-    Width = 22
+    Width = 21
     Caption = '100'
     ParentColor = False
   end
   object Label5: TLabel
     Left = 254
-    Height = 16
+    Height = 15
     Top = 8
-    Width = 22
+    Width = 21
     Caption = '360'
     ParentColor = False
   end
   object Label6: TLabel
     Left = 70
-    Height = 16
+    Height = 15
     Top = 8
-    Width = 18
+    Width = 17
     Caption = '10'''
     ParentColor = False
   end
@@ -83,7 +83,6 @@ object f_zoom: Tf_zoom
     Caption = 'OK'
     Default = True
     ModalResult = 1
-    NumGlyphs = 0
     TabOrder = 3
   end
   object BitBtn2: TBitBtn
@@ -95,7 +94,6 @@ object f_zoom: Tf_zoom
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
-    NumGlyphs = 0
     TabOrder = 4
   end
   object Button1: TButton
