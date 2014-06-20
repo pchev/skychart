@@ -309,6 +309,7 @@ type
     undolist : array[1..maxundo] of Tconf_skychart;
     lastundo,curundo,validundo, lastx,lasty,lastyzoom  : integer;
     lastl,lastb,MeasureRa,MeasureDe: double;
+    MeasureStartName,MeasureEndName: string;
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
     XM1,YM1,XMD1,YMD1: integer;
     constructor Create(TheOwner: TComponent); override;
@@ -2481,7 +2482,9 @@ case action of
        WindowXY(x1,y1,xx,yy,sc.cfgsc);
        X:=round(xx);
        Y:=round(yy);
-     end;
+       MeasureStartName:=sc.cfgsc.FindName;
+     end
+     else MeasureStartName:='.';
      XM1:=X;
      YM1:=Y;
      XMD1:=X;
@@ -2510,7 +2513,9 @@ case action of
        WindowXY(x1,y1,xx,yy,sc.cfgsc);
        X:=round(xx);
        Y:=round(yy);
-    end;
+       MeasureEndName:=sc.cfgsc.FindName;
+    end
+    else MeasureEndName:='.';
     dist:=rad2deg*AngularDistance(MeasureRa,MeasureDe,ra,de);
     if dist>0 then begin
       pa:=round(rmod(rad2deg*PositionAngle(MeasureRa,MeasureDe,ra,de)+360,360));
@@ -2521,7 +2526,12 @@ case action of
       txt:=txt+crlf+artostr(dx)+blank+detostr(dy);
       if assigned(Fshowcoord) then Fshowcoord(txt);
     end;
-    if action=3 then Image1.Repaint;
+    if action=3 then begin
+      txt:=rsFrom+':  "'+MeasureStartName+'" '+rsTo+' "'+MeasureEndName+'"'+tab+rsSeparation+': '+txt;
+      txt:=stringreplace(txt,crlf,tab+rsOffset+':',[]);
+      if assigned(Fshowinfo) then Fshowinfo(txt,caption,true,self);
+      Image1.Repaint;
+    end;
     with Image1.Canvas do begin
      Pen.Width := 1;
      pen.Color:=clWhite;
