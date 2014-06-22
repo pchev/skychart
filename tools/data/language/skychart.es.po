@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-14 06:57+0000\n"
-"PO-Revision-Date: 2014-06-10 09:40+0000\n"
+"PO-Revision-Date: 2014-06-17 07:50+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-15 17:56+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-22 19:21+0000\n"
+"X-Generator: Launchpad (build 17058)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -2404,7 +2404,7 @@ msgstr "Hammer-Aitoff"
 
 #: u_translation.rshandpad
 msgid "HandPad"
-msgstr ""
+msgstr "Mando manual"
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -2960,7 +2960,7 @@ msgstr "Código de la ubicación"
 
 #: u_translation.rslocationtime
 msgid "Location / Time"
-msgstr ""
+msgstr "Ubicación / Hora"
 
 #: u_translation.rslock
 msgid "Lock"
@@ -3084,7 +3084,7 @@ msgstr "Mapa"
 
 #: u_translation.rsmark
 msgid "Mark"
-msgstr ""
+msgstr "Marcar"
 
 #: u_translation.rsmarkobjectso
 msgid "Mark objects on the chart"
@@ -3620,7 +3620,7 @@ msgstr "Base de datos de observatorios"
 
 #: u_translation.rsobservertool
 msgid "Observer tools"
-msgstr ""
+msgstr "Herramientas de observador"
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -4736,7 +4736,7 @@ msgstr "Seleccionar servidor espejo"
 
 #: u_translation.rsselectnone
 msgid "Select none"
-msgstr ""
+msgstr "Anular selección"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -5416,7 +5416,7 @@ msgstr "%sEsta tabla existe: %s"
 
 #: u_translation.rstarget
 msgid "Target"
-msgstr ""
+msgstr "Objetivo"
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
