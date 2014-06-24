@@ -367,7 +367,7 @@ See the documentation under sqlite3_column_blob for additional information.
   //sqlite_progress_handler: procedure (db: Pointer; VMCyclesPerCallback: Integer; ProgressCallBack: Pointer; UserData: Integer{? Pointer?}); cdecl;
 
   Libs3Loaded: Boolean=False;
-  DLLHandle: THandle;
+  DLLHandle: {$IFDEF FPC}TLibHandle{$ELSE}THandle{$ENDIF};
   MsgNoError: String;
 
 
@@ -622,7 +622,7 @@ int sqlite3_value_type(sqlite3_value*);
         {$ELSE}
           FreeLibrary(DLLHandle);
         {$ENDIF}
-        DllHandle := 0;
+        DLLHandle := 0;
         //todo: nil all vars again...
       end;
   end;

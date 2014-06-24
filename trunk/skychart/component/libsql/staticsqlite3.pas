@@ -243,7 +243,7 @@ function sqlite3_Total_Changes(db: Pointer): Integer; cdecl; external;
 
 var
   Libs3Loaded: Boolean=False;  //static, always true, but for compatability
-  DLLHandle: THandle;
+  DLLHandle: {$IFDEF FPC}TLibHandle{$ELSE}THandle{$ENDIF};
   MsgNoError: String;
 
 function LoadLibSqlite3(var libraryName: String): Boolean;
