@@ -2150,12 +2150,13 @@ configobjectbar.Free;
 configleftbar.Free;
 configrightbar.Free;
 if NeedRestart then ExecNoWait(paramstr(0));
-if VerboseMsg then
- WriteTrace('Destroy Cursor');
-if CursorImage1<>nil then begin
-  if lclver<'0.9.29' then CursorImage1.FreeImage;
-  CursorImage1.Free;
-end;
+{$ifndef lclqt}
+  if VerboseMsg then WriteTrace('Destroy Cursor');
+  if CursorImage1<>nil then begin
+    if lclver<'0.9.29' then CursorImage1.FreeImage;
+    CursorImage1.Free;
+  end;
+{$endif}
 ///////////////////////////////////////////////
 // removed as this crash on Windows and memleak is very small
 // if TCPDaemon<>nil then TCPDaemon.Free;
