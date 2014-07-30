@@ -4827,53 +4827,25 @@ var labbox: array [0..maxlabels,1..8] of TRect;
     safedistance: single;
 const
       al:array[1..4]of TLabelAlign=(laTopLeft, laBottomLeft, laTopRight, laBottomRight);
-function SorCompare(l1,l2:Tobjlabel):integer;
-begin
- if l1.priority<l2.priority then result:=-1
- else if l1.priority=l2.priority then result:=0
- else if l1.priority>l2.priority then result:=1;
-end;
+
 procedure SortLabels;
 var
-  Left, Right, SubArray, SubLeft, SubRight: integer;
-  Temp, Pivot: Tobjlabel;
-  Stack: array[1..32]of record First, Last: integer;
-  end;
+  i,j,p: integer;
+  tmplabel: array[1..maxlabels] of Tobjlabel;
 begin
   if numlabels<2 then exit;
-  SubArray:=1;
-  Stack[SubArray].First:=1;
-  Stack[SubArray].Last:=numlabels;
-  repeat
-    Left:=Stack[SubArray].First;
-    Right:=Stack[SubArray].Last;
-    Dec(SubArray);
-    repeat
-      SubLeft:=Left;
-      SubRight:=Right;
-      Pivot:=labels[(Left+Right)shr 1];
-      repeat
-        while SorCompare(labels[SubLeft], Pivot)<0 do Inc(SubLeft);
-        while SorCompare(labels[SubRight], Pivot)>0 do Dec(SubRight);
-        IF SubLeft<=SubRight then
-        begin
-          Temp:=labels[SubLeft];
-          labels[SubLeft]:=labels[SubRight];
-          labels[SubRight]:=Temp;
-          Inc(SubLeft);
-          Dec(SubRight);
-        end;
-      until SubLeft>SubRight;
-      IF SubLeft<Right then
-      begin
-        Inc(SubArray);
-        Stack[SubArray].First:=SubLeft;
-        Stack[SubArray].Last:=Right;
-      end;
-      Right:=SubRight;
-    until Left>=Right;
-  until SubArray=0;
+  // Need a stable sort here.
+  // As the priority use a limited range of values we can use a trivial insertion.
+  j:=1;
+  for p:=0 to 5 do
+   for i:=1 to numlabels do
+     if labels[i].priority=p then begin
+       tmplabel[j]:=labels[i];
+       inc(j);
+     end;
+  for i:=1 to numlabels do labels[i]:=tmplabel[i];
 end;
+
 function rectangleintersect(r1,r2: TRect):boolean;
 begin
 // find more performant solution ?
