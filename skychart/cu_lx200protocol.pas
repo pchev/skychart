@@ -45,7 +45,7 @@ Function LX200_Slew : boolean;
 Function LX200_Goto(RA,DEC : double) : boolean;
 Function LX200_Sync : boolean;
 Function LX200_SyncPos( RA,DEC : double) : boolean;
-Function LX200_SetObs( Lat,Long,TZ : double; datenow : Tdatetime) : boolean;
+Function LX200_SetObs( Lat,Long,TIZ: double; datenow : Tdatetime) : boolean;
 Function LX200_SetSpeed(speed : integer) : boolean;
 Function LX200_Move(direction : integer) : boolean;
 Function LX200_StopDir(direction : integer) : boolean;
@@ -56,7 +56,6 @@ Function LX200_QueryHighPrecision : string;
 Function LX200_SetFocusSteep(speed:char):boolean;
 Function LX200_StartFocus(dir:char):boolean;
 Function LX200_StopFocus:boolean;
-function LX200_SetTimeDate : boolean;
 function LX200_Parkscope : boolean;
 // Renato Bonomini:
 Procedure LX200_SimpleCmd(cmd: string);
@@ -230,6 +229,24 @@ begin
     str(min:4:1,m);
     if length(trim(m))<4 then m:='0'+trim(m);
     result := d+'h'+m+'m';
+end;
+
+Function LonToStr(lon: Double; var d,m : string) : string;
+var dd,min: Double;
+begin
+    lon:=abs(lon); // 0..360
+    dd:=Int(lon);
+    min:=abs(lon-dd)*60;
+    if min>=59.5 then begin
+       dd:=dd+sgn(lon);
+       min:=0.0;
+    end;
+    min:=Round(min);
+    str(abs(dd):2:0,d);
+    if abs(dd)<10 then d:='0'+trim(d);
+    str(min:2:0,m);
+    if abs(min)<10 then m:='0'+trim(m);
+    result := d+'°'+m+chr(39);
 end;
 
 //  LX-200 uses 9600 N 8 1
@@ -529,7 +546,7 @@ case LX200_type of
 case LX200_format of
 0 : begin
     armtostr(ra,s1,s2);
-    buf:='#:Sr '+s1+':'+s2+'#';
+    buf:='#:Sr'+s1+':'+s2+'#';
     count:=length(buf);
     PurgeBuffer(LX200_port);
     if WriteCom(LX200_port,buf,count)= false then exit;
@@ -537,7 +554,7 @@ case LX200_format of
     if ReadCom(LX200_port,buf,count) = false then exit;
     if trim(buf)='0' then exit;
     demtostr(dec,s1,s2);
-    buf:='#:Sd '+s1+chr(223)+s2+'#';
+    buf:='#:Sd'+s1+'*'+s2+'#';
     count:=length(buf);
     PurgeBuffer(LX200_port);
     if WriteCom(LX200_port,buf,count)= false then exit;
@@ -547,7 +564,7 @@ case LX200_format of
     end;
 1 : begin
     artostr(ra,s1,s2,s3);
-    buf:='#:Sr '+s1+':'+s2+':'+s3+'#';
+    buf:='#:Sr'+s1+':'+s2+':'+s3+'#';
     count:=length(buf);
     PurgeBuffer(LX200_port);
     if WriteCom(LX200_port,buf,count)= false then exit;
@@ -555,7 +572,7 @@ case LX200_format of
     if ReadCom(LX200_port,buf,count) = false then exit;
     if trim(buf)='0' then exit;
     detostr(dec,s1,s2,s3);
-    buf:='#:Sd '+s1+chr(223)+s2+':'+s3+'#';
+    buf:='#:Sd'+s1+'*'+s2+':'+s3+'#';
     count:=length(buf);
     PurgeBuffer(LX200_port);
     if WriteCom(LX200_port,buf,count)= false then exit;
@@ -569,9 +586,9 @@ else begin          // LX200, Magellan
 case LX200_format of
 0 : begin
     armtostr(ra,s1,s2);
-    buf:='#:Sr '+s1+':'+s2+'#:Sd ';
+    buf:='#:Sr'+s1+':'+s2;
     demtostr(dec,s1,s2);
-    buf:=buf+s1+chr(223)+s2+'#';
+    buf:=buf+'#:Sd'+s1+'*'+s2+'#';
     count:=length(buf);
     PurgeBuffer(LX200_port);
     if WriteCom(LX200_port,buf,count)= false then exit;
@@ -581,9 +598,9 @@ case LX200_format of
     end;
 1 : begin
     artostr(ra,s1,s2,s3);
-    buf:='#:Sr '+s1+':'+s2+':'+s3+'#:Sd ';
+    buf:='#:Sr'+s1+':'+s2+':'+s3;
     detostr(dec,s1,s2,s3);
-    buf:=buf+s1+chr(223)+s2+':'+s3+'#';
+    buf:=buf+'#:Sd'+s1+'*'+s2+':'+s3+'#';
     count:=length(buf);
     PurgeBuffer(LX200_port);
     if WriteCom(LX200_port,buf,count)= false then exit;
@@ -647,10 +664,6 @@ PurgeBuffer(LX200_port);
 result:=true;
 end;
 
-Function LX200_SetObs( Lat,Long,TZ : double; datenow : Tdatetime) : boolean;
-begin
-result:=true;
-end;
 
 Function LX200_SetSpeed(speed : integer) : boolean;
 var count : integer;
@@ -846,10 +859,9 @@ count:=length(buf);
 result:=WriteCom(LX200_port,buf,count);
 end;
 
-function LX200_SetTimeDate : boolean;
+Function LX200_SetObs( Lat,Long,TIZ : double; datenow : Tdatetime) : boolean;
 var count : integer;
-    buf, dt, tm, tz, site, saved, savet : string;
-label exit;
+    cms, s1, s2, buf, dt, tm, tz, site, saved, savet : string;
 begin
   saved := DefaultFormatSettings.ShortDateFormat;
   savet := DefaultFormatSettings.ShortTimeFormat;
@@ -857,57 +869,101 @@ begin
         result:=false;
         PurgeBuffer(LX200_port);
 
-        //Set Date
-        DefaultFormatSettings.ShortDateFormat := 'mm/dd/yy';
-        buf := '#:SC '+DateToStr(Date)+'#';
-        count:=length(buf);
-        if WriteCom(LX200_port,buf,count)= false then goto exit;
-        // read ok response
-        count:=1;
-        ReadCom(LX200_port,buf,count);
+        // Set Latitude
+        demtostr(Lat,s1,s2);
+        cms:='#:St'+s1+'*'+s2+'#';
+        count:=length(cms);
+        if WriteCom(LX200_port,cms,count) then begin
+          count:=1;
+          ReadCom(LX200_port,buf,count);
+        end;
 
-        if (count = 1) then
-        begin
-          // read planetary update response
-          ReadComTerm(LX200_port,buf);
-          ReadComTerm(LX200_port,buf);
+        // Set Longitude
+        lontostr(Long,s1,s2);
+        cms:='#:Sg'+s1+'*'+s2+'#';
+        count:=length(cms);
+        if WriteCom(LX200_port,cms,count) then begin
+          count:=1;
+          ReadCom(LX200_port,buf,count);
+        end;
+
+        // Set Timezone
+        s1:=FormatFloat('0.0',TIZ);
+        if TIZ>=0 then s1:='+'+s1;
+        cms:='#:SG'+s1+'#';
+        count:=length(cms);
+        if WriteCom(LX200_port,cms,count) then begin
+          count:=1;
+          ReadCom(LX200_port,buf,count);
         end;
 
         //Set Time
         DefaultFormatSettings.ShortTimeFormat := 'hh:mm:ss';
-        buf := '#:SL '+TimeToStr(Time)+'#';
-        count:=length(buf);
-        if WriteCom(LX200_port,buf,count)= false then goto exit;
-        count:=1;
-        ReadCom(LX200_port,buf,count);
+        cms := '#:SL'+TimeToStr(datenow)+'#';
+        DefaultFormatSettings.ShortTimeFormat := savet;
+        count:=length(cms);
+        if WriteCom(LX200_port,cms,count) then begin
+          count:=1;
+          ReadCom(LX200_port,buf,count);
+        end;
+
+        //Set Date
+        DefaultFormatSettings.ShortDateFormat := 'mm/dd/yy';
+        cms := '#:SC'+DateToStr(datenow)+'#';
+        DefaultFormatSettings.ShortDateFormat := saved;
+        count:=length(cms);
+        if WriteCom(LX200_port,cms,count) then begin
+          count:=1;
+          ReadCom(LX200_port,buf,count);
+          if (count = 1) then begin
+              // read planetary update response
+              ReadComTerm(LX200_port,buf);
+              ReadComTerm(LX200_port,buf);
+          end;
+        end;
 
         //Clean buffer
+        sleep(100);
         PurgeBuffer(LX200_port);
 
         //Get from scope: site, date and time
-        buf := '#:GM#';
-        count:=length(buf);
-        if WriteCom(LX200_port,buf,count)= false then goto exit;
-        if ReadComTerm(LX200_port,site) = false then goto exit;
+        cms := '#:Gt#';
+        count:=length(cms);
+        buf:='?';
+        if WriteCom(LX200_port,cms,count) then ReadComTerm(LX200_port,buf);
+        site:=buf;
+        if site='' then begin
+          if WriteCom(LX200_port,cms,count) then ReadComTerm(LX200_port,buf);
+          site:=buf;
+        end;
+        cms := '#:Gg#';
+        count:=length(cms);
+        buf:='?';
+        PurgeBuffer(LX200_port);
+        if WriteCom(LX200_port,cms,count) then ReadComTerm(LX200_port,buf);
+        site:=site+'/'+buf;
+        site:=StringReplace(site,chr(223),'*',[rfReplaceAll]);
 
-        buf := '#:GC#';
-        count:=length(buf);
-        if WriteCom(LX200_port,buf,count)= false then goto exit;
-        if ReadComTerm(LX200_port,dt) = false then goto exit;
+        cms := '#:GC#';
+        count:=length(cms);
+        dt:='?';
+        PurgeBuffer(LX200_port);
+        if WriteCom(LX200_port,cms,count) then ReadComTerm(LX200_port,dt);
 
-        buf := '#:GL#';
-        count:=length(buf);
-        if WriteCom(LX200_port,buf,count)= false then goto exit;
-        if ReadComTerm(LX200_port,tm) = false then goto exit;
+        cms := '#:GL#';
+        count:=length(cms);
+        tm:='?';
+        PurgeBuffer(LX200_port);
+        if WriteCom(LX200_port,cms,count) then ReadComTerm(LX200_port,tm);
 
-        buf := '#:GG#';
-        count:=length(buf);
-        if WriteCom(LX200_port,buf,count)= false then goto exit;
-        if ReadComTerm(LX200_port,tz) = false then goto exit;
+        cms := '#:GG#';
+        count:=length(cms);
+        tz:='?';
+        PurgeBuffer(LX200_port);
+        if WriteCom(LX200_port,cms,count) then ReadComTerm(LX200_port,tz);
 
         result := true;
         ShowMessage('Telescope setting is now:'+crlf+'Site: ' + site + crlf+'Date: ' + dt + crlf+'Time: ' + tm +crlf+'Time zone: ' + tz+ '.');
-exit:
 finally
   DefaultFormatSettings.ShortDateFormat := saved;
   DefaultFormatSettings.ShortTimeFormat := savet;
