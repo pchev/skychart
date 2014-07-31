@@ -49,7 +49,9 @@ type
   { Tpop_lx200 }
 
   Tpop_lx200 = class(TForm)
+    UTCBox: TCheckBox;
     PageControl1: TPageControl;
+    SpeedButton8: TSpeedButton;
     TabSheet1: TTabSheet;
     Panel1: TPanel;
     LabelAlpha: TLabel;
@@ -134,7 +136,6 @@ type
     Bevel1: TBevel;
     Button1: TButton;
      SpeedButton4: TSpeedButton;
-     SpeedButton8: TSpeedButton;
      SpeedButton9: TSpeedButton;
     ProductInfoBox: TGroupbox;
      QueryFirmwareButton: TButton;
@@ -302,6 +303,7 @@ type
     Sideral_Time : Double;              // Current sideral time
     Longitude : Double;                 // Observatory longitude (Negative East of Greenwich}
     Latitude : Double;                  // Observatory latitude
+    Timezone : Double;                  // Observatory timezone
     procedure SetLang;
     function  ReadConfig(ConfigPath : shortstring):boolean;
     Procedure ShowCoordinates;
@@ -312,7 +314,7 @@ type
     Procedure ScopeConnect(var ok : boolean);
     Procedure ScopeDisconnect(var ok : boolean);
     Procedure ScopeGetInfo(var Nam : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
-    Procedure ScopeSetObs(la,lo : double);
+    Procedure ScopeSetObs(la,lo,tz : double);
     Procedure ScopeAlign(source : string; ra,dec : double);
     Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean);
     Procedure ScopeGetAltAz(var alt,az : double; var ok : boolean);
@@ -569,13 +571,14 @@ Procedure Tpop_lx200.ScopeReset;
 begin
 end;
 
-Procedure Tpop_lx200.ScopeSetObs(la,lo : double);
+Procedure Tpop_lx200.ScopeSetObs(la,lo,tz : double);
 begin
-lat.text:=floattostr(la);
-long.text:=floattostr(lo);
 latitude:=la;
 longitude:=lo;
-LX200_SetObs( La,Lo,1,now);
+if longitude<0 then longitude:=360+longitude;
+timezone:=-tz;
+lat.text:=floattostr(Latitude);
+long.text:=floattostr(Longitude);
 end;
 
 Procedure Tpop_lx200.ScopeGoto(ar,de : double; var ok : boolean);
@@ -891,6 +894,7 @@ begin
   checkbox6.Checked:=ini.ReadBool('lx200','focuspulse',false);
   longedit1.Value:=ini.readinteger('lx200','focusduration',100);
   eqsys1.ItemIndex:=ini.readinteger('lx200','eqsys',0);
+  UTCBox.Checked:=ini.readBool('lx200','utctime',false);
   ini.free;
   Timer1.Interval:=strtointdef(ReadIntBox.text,1000);
 
@@ -969,6 +973,7 @@ ini.writeinteger('lx200','focusspeed2',radiogroup4.ItemIndex);
 ini.writeBool('lx200','focuspulse',checkbox6.Checked);
 ini.writeinteger('lx200','focusduration',longedit1.Value);
 ini.writeinteger('lx200','eqsys',eqsys1.ItemIndex);
+ini.writeBool('lx200','utctime',UTCBox.Checked);
 ini.free;
 end;
 
@@ -1314,16 +1319,19 @@ longedit1.Enabled:=CheckBox6.Checked;
 end;
 
 procedure Tpop_lx200.SpeedButton8Click(Sender: TObject);
+var datim: TdateTime;
 begin
- if ScopeConnected and not CoordLock then begin
-     CoordLock := true;
-     try
-     if not LX200_SetTimeDate then
-        ShowMessage(rsDateAndOrTim)
-     finally
+if ScopeConnected and not CoordLock then begin
+  CoordLock := true;
+  try
+     datim:=now;
+     if UTCBox.Checked then datim:=datim+timezone/24;
+     if not LX200_SetObs(Latitude,Longitude,timezone,datim) then
+        ShowMessage(rsDateAndOrTim);
+  finally
      CoordLock := false;
-     end;
   end;
+end;
 end;
 
 procedure Tpop_lx200.SpeedButton9Click(Sender: TObject);

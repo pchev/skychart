@@ -1204,7 +1204,7 @@ resourcestring
   rsSwapButton = 'Swap button';
   rsHighPrecisio = 'High Precision Pointing';
   rsResumeGoTo = 'Resume GoTo';
-  rsSetTelescope = 'Set TelescopeTime';
+  rsSetTelescope = 'Set location and time';
   rsParkTelescop = 'Park Telescope';
   rsStop = 'Stop';
   rsMotor = 'Motor';

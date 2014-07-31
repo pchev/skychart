@@ -5442,7 +5442,7 @@ if Connect1.checked then begin
    Fpop_lx200.ScopeShow;
 end else begin
    Fpop_lx200.ScopeReadConfig(ExtractFilePath(Configfile));
-   Fpop_lx200.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
+   Fpop_lx200.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude,sc.cfgsc.TimeZone);
    if autoconnect then begin
      Fpop_lx200.ScopeConnect(ok);
      Connect1.Checked:=true;
