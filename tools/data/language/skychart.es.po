@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-14 06:57+0000\n"
+"POT-Creation-Date: 2014-08-10 16:36+0000\n"
 "PO-Revision-Date: 2014-06-17 07:50+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-22 19:21+0000\n"
-"X-Generator: Launchpad (build 17058)\n"
+"X-Launchpad-Export-Date: 2014-08-10 16:52+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -252,6 +252,10 @@ msgstr "%sGiros Alt:"
 #: u_translation.rsalways
 msgid "always"
 msgstr "siempre"
+
+#: u_translation.rsalwaysaddmer
+msgid "Always add meridian"
+msgstr ""
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -760,6 +764,10 @@ msgstr "Carta"
 #: u_translation.rschart2
 msgid "chart:"
 msgstr "carta:"
+
+#: u_translation.rschartcenterc
+msgid "Add a crosshair to the chart center"
+msgstr ""
 
 #: u_translation.rschartcoordin
 msgid "Chart, coordinates"
@@ -4859,8 +4867,8 @@ msgid "Set target to %s"
 msgstr "Establecer como objetivo %s"
 
 #: u_translation.rssettelescope
-msgid "Set TelescopeTime"
-msgstr "Establecer Hora del Telescopio"
+msgid "Set location and time"
+msgstr ""
 
 #: u_translation.rssettime
 msgid "Set Time"

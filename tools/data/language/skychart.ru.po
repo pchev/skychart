@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-14 06:57+0000\n"
+"POT-Creation-Date: 2014-08-10 16:36+0000\n"
 "PO-Revision-Date: 2014-05-01 08:38+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-22 19:21+0000\n"
-"X-Generator: Launchpad (build 17058)\n"
+"X-Launchpad-Export-Date: 2014-08-10 16:53+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -252,6 +252,10 @@ msgstr "%sAlt повороты:"
 #: u_translation.rsalways
 msgid "always"
 msgstr "всегда"
+
+#: u_translation.rsalwaysaddmer
+msgid "Always add meridian"
+msgstr ""
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -760,6 +764,10 @@ msgstr "Карта"
 #: u_translation.rschart2
 msgid "chart:"
 msgstr "карта:"
+
+#: u_translation.rschartcenterc
+msgid "Add a crosshair to the chart center"
+msgstr ""
 
 #: u_translation.rschartcoordin
 msgid "Chart, coordinates"
@@ -4858,7 +4866,7 @@ msgid "Set target to %s"
 msgstr "Установить цель на %s"
 
 #: u_translation.rssettelescope
-msgid "Set TelescopeTime"
+msgid "Set location and time"
 msgstr ""
 
 #: u_translation.rssettime
