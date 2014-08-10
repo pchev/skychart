@@ -922,7 +922,7 @@ type
     LabelOrientation, ManualTelescopeType, CoordType, DSLcolor: integer;
     IndiServerHost, IndiServerPort, IndiServerCmd,
     IndiDriver, IndiPort, IndiDevice: string;
-    IndiAutostart, ShowCircle, IndiTelescope, ASCOMTelescope,
+    IndiAutostart, ShowCircle, ShowCrosshair, IndiTelescope, ASCOMTelescope,
     LX200Telescope, EncoderTelescope, ManualTelescope, ShowImages, EyepieceMask,
     ShowImageList, ShowImageLabel, ShowBackgroundImage, showstars, shownebulae, showline,
     showlabelall, Editlabels, OptimizeLabels: boolean;
@@ -2195,6 +2195,7 @@ begin
   IndiDevice := Source.IndiDevice;
   IndiAutostart := Source.IndiAutostart;
   ShowCircle := Source.ShowCircle;
+  ShowCrosshair := Source.ShowCrosshair;
   EyepieceMask := Source.EyepieceMask;
   IndiTelescope := Source.IndiTelescope;
   ASCOMTelescope := Source.ASCOMTelescope;

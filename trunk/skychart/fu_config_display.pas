@@ -52,6 +52,7 @@ type
     CheckBox4: TCheckBox;
     CheckBox5: TCheckBox;
     CheckBox6: TCheckBox;
+    CheckBox7: TCheckBox;
     linemodemilkyway: TCheckBox;
     Edit14: TEdit;
     ImageList1: TImageList;
@@ -356,6 +357,7 @@ type
     procedure CheckBox2Click(Sender: TObject);
     procedure CheckBox5Click(Sender: TObject);
     procedure CheckBox6Click(Sender: TObject);
+    procedure CheckBox7Click(Sender: TObject);
     procedure CirclegridColRowInserted(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
     procedure CirclegridColRowMoved(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
     procedure CirclegridDblClick(Sender: TObject);
@@ -717,6 +719,7 @@ Page8.caption:=rsFinderCircle;
 Label307.caption:=rsFinderCircle;
 ButtonComputeCircle.Caption:=rsCompute;
 CenterMark1.caption:=rsMarkTheChart;
+CheckBox7.Caption:=rsChartCenterC;
 CheckBox1.Caption:=rsShowLabels;
 CheckBox3.Caption:=rsShowMarkInde;
 
@@ -1442,6 +1445,7 @@ for i:=1 to csc.ncircle do begin
 end;
 CRow:=1;
 CenterMark1.checked:=csc.ShowCircle;
+CheckBox7.Checked:=csc.ShowCrosshair;
 CheckBox1.Checked:=csc.CircleLabel;
 CheckBox3.Checked:=csc.marknumlabel;
 CheckBox4.Checked:=csc.marknumlabel;
@@ -2032,6 +2036,11 @@ with sender as TCheckbox do begin
  CenterMark1.checked:=checked;
  CenterMark2.checked:=checked;
 end;
+end;
+
+procedure Tf_config_display.CheckBox7Click(Sender: TObject);
+begin
+ csc.ShowCrosshair:=CheckBox7.Checked;
 end;
 
 procedure Tf_config_display.RectangleGridSetEditText(Sender: TObject; ACol,ARow: Integer; const Value: String);

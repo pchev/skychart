@@ -1547,6 +1547,7 @@ resourcestring
   rsObserverTool = 'Observer tools';
   rsLocationTime = 'Location / Time';
   rsMark = 'Mark';
+  rsChartCenterC = 'Add a crosshair to the chart center';
 
 implementation
 
