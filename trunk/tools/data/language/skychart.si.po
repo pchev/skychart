@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-06-14 06:57+0000\n"
+"POT-Creation-Date: 2014-08-10 16:36+0000\n"
 "PO-Revision-Date: 2013-11-14 18:06+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-22 19:20+0000\n"
-"X-Generator: Launchpad (build 17058)\n"
+"X-Launchpad-Export-Date: 2014-08-10 16:53+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -250,6 +250,10 @@ msgstr ""
 
 #: u_translation.rsalways
 msgid "always"
+msgstr ""
+
+#: u_translation.rsalwaysaddmer
+msgid "Always add meridian"
 msgstr ""
 
 #: u_translation.rsalwayssavewi
@@ -758,6 +762,10 @@ msgstr ""
 
 #: u_translation.rschart2
 msgid "chart:"
+msgstr ""
+
+#: u_translation.rschartcenterc
+msgid "Add a crosshair to the chart center"
 msgstr ""
 
 #: u_translation.rschartcoordin
@@ -4857,7 +4865,7 @@ msgid "Set target to %s"
 msgstr ""
 
 #: u_translation.rssettelescope
-msgid "Set TelescopeTime"
+msgid "Set location and time"
 msgstr ""
 
 #: u_translation.rssettime

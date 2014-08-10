@@ -4743,7 +4743,7 @@ msgid "Resume GoTo"
 msgstr ""
 
 #: u_translation:rssettelescope
-msgid "Set TelescopeTime"
+msgid "Set location and time"
 msgstr ""
 
 #: u_translation:rsparktelescop
@@ -6064,5 +6064,13 @@ msgstr ""
 
 #: u_translation:rsmark
 msgid "Mark"
+msgstr ""
+
+#: u_translation:rschartcenterc
+msgid "Add a crosshair to the chart center"
+msgstr ""
+
+#: u_translation:rsalwaysaddmer
+msgid "Always add meridian"
 msgstr ""
 
