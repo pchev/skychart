@@ -5406,6 +5406,7 @@ if mark>0 then begin
    projection(ra,de,x1,y1,false,cfgsc) ;
    WindowXY(x1,y1,xx1,yy1,cfgsc);
    if mark=1 then begin
+     // telescope2 mark
      xa:=xx1-10; xb:=xx1+10; ya:=yy1-10; yb:=yy1+10;
      Fplot.PlotCircle(xa,ya,xb,yb,col,moving);
    end else begin
@@ -5418,6 +5419,12 @@ end else begin
 projection(ra,de,x1,y1,false,cfgsc) ;
 projection(ra,de+0.001,x2,y2,false,cfgsc) ;
 rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
+// crosshair
+if cfgsc.ShowCrosshair and (num<0) and (not moving) then begin
+  Fplot.PlotLine(Fplot.cfgchart.Width/2,0,Fplot.cfgchart.Width/2,Fplot.cfgchart.Height,Fplot.cfgplot.Color[18],1);
+  Fplot.PlotLine(0,Fplot.cfgchart.Height/2,Fplot.cfgchart.Width,Fplot.cfgchart.Height/2,Fplot.cfgplot.Color[18],1);
+end;
+// circle
 for i:=1 to cfgsc.ncircle do if cfgsc.circleok[i] then begin
     if cfgsc.circle[i,4]=0 then begin
       col:=Fplot.cfgplot.Color[18];
@@ -5449,6 +5456,7 @@ for i:=1 to cfgsc.ncircle do if cfgsc.circleok[i] then begin
       end;
     end;
 end;
+// rectangle
 for i:=1 to cfgsc.nrectangle do if cfgsc.rectangleok[i] and (deg2rad*cfgsc.rectangle[i,2]/60<2*cfgsc.fov) then begin
     if cfgsc.rectangle[i,5]=0 then begin
       col:=Fplot.cfgplot.Color[18];

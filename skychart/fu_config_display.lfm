@@ -23,10 +23,10 @@ object f_config_display: Tf_config_display
       Height = 526
       Top = 1
       Width = 503
-      ActivePage = Page5
+      ActivePage = Page8
       Align = alClient
       ShowTabs = False
-      TabIndex = 4
+      TabIndex = 7
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Display'
@@ -3166,9 +3166,9 @@ object f_config_display: Tf_config_display
         ClientWidth = 503
         object Label307: TLabel
           Left = 26
-          Height = 16
+          Height = 15
           Top = 13
-          Width = 172
+          Width = 170
           Caption = 'Finder circle (Eyepiece/Telrad)'
           ParentColor = False
         end
@@ -3196,27 +3196,27 @@ object f_config_display: Tf_config_display
         end
         object CenterMark1: TCheckBox
           Left = 26
-          Height = 23
-          Top = 435
-          Width = 155
+          Height = 26
+          Top = 405
+          Width = 158
           Caption = 'Mark the chart center '
           OnClick = CenterMark1Click
           TabOrder = 2
         end
         object CheckBox1: TCheckBox
           Left = 293
-          Height = 23
+          Height = 26
           Top = 405
-          Width = 83
+          Width = 86
           Caption = 'Show label'
           OnClick = CheckBox1Click
           TabOrder = 1
         end
         object CheckBox3: TCheckBox
           Left = 293
-          Height = 23
+          Height = 26
           Top = 435
-          Width = 118
+          Width = 121
           Caption = 'Show mark index'
           OnClick = MarkNumberClick
           TabOrder = 3
@@ -3229,6 +3229,15 @@ object f_config_display: Tf_config_display
           Caption = 'Compute'
           OnClick = ButtonComputeCircleClick
           TabOrder = 4
+        end
+        object CheckBox7: TCheckBox
+          Left = 26
+          Height = 26
+          Top = 435
+          Width = 157
+          Caption = 'Chart center crosshair'
+          OnClick = CheckBox7Click
+          TabOrder = 5
         end
       end
       object Page9: TTabSheet
