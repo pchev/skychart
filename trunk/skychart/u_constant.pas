@@ -63,7 +63,7 @@ const
   maxmodlabels = 1000;
   //maximum number of modified labels before older one are replaced
   MaxUserObjects = 100;
-  MaxCircle = 100;
+  MaxCircle = 500;
   MaxDSSurl = 50;
   jd2000 = 2451545.0;
   jd1950 = 2433282.4235;
