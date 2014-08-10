@@ -53,6 +53,7 @@ type
     CheckBox5: TCheckBox;
     CheckBox6: TCheckBox;
     CheckBox7: TCheckBox;
+    CheckBox8: TCheckBox;
     linemodemilkyway: TCheckBox;
     Edit14: TEdit;
     ImageList1: TImageList;
@@ -358,6 +359,7 @@ type
     procedure CheckBox5Click(Sender: TObject);
     procedure CheckBox6Click(Sender: TObject);
     procedure CheckBox7Click(Sender: TObject);
+    procedure CheckBox8Click(Sender: TObject);
     procedure CirclegridColRowInserted(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
     procedure CirclegridColRowMoved(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
     procedure CirclegridDblClick(Sender: TObject);
@@ -623,6 +625,7 @@ Page5.caption:=rsLines;
 EqGrid.caption:=rsAddEquatoria;
 CGrid.caption:=rsShowCoordina;
 OnlyMeridian.Caption:=rsShowOnlyMeri;
+CheckBox8.Caption:=rsAlwaysAddMer;
 ShowLines.Caption:=rsShowDSOLines;
 Label10.Caption:=rsEditDSOLines;
 ecliptic.caption:=rsShowEcliptic;
@@ -1336,6 +1339,7 @@ begin
 EqGrid.Checked:=csc.ShowEqGrid;
 CGrid.Checked:=csc.ShowGrid;
 OnlyMeridian.Checked := csc.ShowOnlyMeridian;
+CheckBox8.Checked := csc.ShowAlwaysMeridian;
 GridNum.Checked:=csc.ShowGridNum;
 ShowLines.Checked := csc.showline;
 if csc.DSLforcecolor then ShowLineShape.Brush.Color:=csc.DSLcolor
@@ -2041,6 +2045,11 @@ end;
 procedure Tf_config_display.CheckBox7Click(Sender: TObject);
 begin
  csc.ShowCrosshair:=CheckBox7.Checked;
+end;
+
+procedure Tf_config_display.CheckBox8Click(Sender: TObject);
+begin
+csc.ShowAlwaysMeridian:=CheckBox8.Checked;
 end;
 
 procedure Tf_config_display.RectangleGridSetEditText(Sender: TObject; ACol,ARow: Integer; const Value: String);

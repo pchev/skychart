@@ -910,7 +910,7 @@ type
     CurYear, CurMonth, CurDay, DrawPMyear, sunurlsize, sunurlmargin,
     sunrefreshtime: integer;
     ShowPluto, ShowConstl, ShowConstB, ShowEqGrid, ShowGrid,
-    ShowGridNum, ShowOnlyMeridian, UseSystemTime, countrytz: boolean;
+    ShowGridNum, ShowOnlyMeridian, ShowAlwaysMeridian, UseSystemTime, countrytz: boolean;
     StyleGrid, StyleEqGrid, StyleConstL, StyleConstB,
     StyleEcliptic, StyleGalEq: TFPPenStyle;
     ShowEcliptic, ShowGalactic, ShowMilkyWay, FillMilkyWay, LinemodeMilkyway,
@@ -2154,6 +2154,7 @@ begin
   ShowGrid := Source.ShowGrid;
   ShowGridNum := Source.ShowGridNum;
   ShowOnlyMeridian := Source.ShowOnlyMeridian;
+  ShowAlwaysMeridian := source.ShowAlwaysMeridian;
   UseSystemTime := Source.UseSystemTime;
   StyleGrid := Source.StyleGrid;
   StyleEqGrid := Source.StyleEqGrid;

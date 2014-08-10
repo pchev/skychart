@@ -1548,6 +1548,7 @@ resourcestring
   rsLocationTime = 'Location / Time';
   rsMark = 'Mark';
   rsChartCenterC = 'Add a crosshair to the chart center';
+  rsAlwaysAddMer = 'Always add meridian';
 
 implementation
 
