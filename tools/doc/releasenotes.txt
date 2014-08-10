@@ -6,6 +6,8 @@ New functions:
   * Scripting functions and custom tool box capabilities.
   * The tool bar editor allow you to edit the button bar layout. The function is available from the menu Setup / Tool bar editor.
   * New representation for the Milky Way. This can be activated from the menu Setup / Display / Lines by unchecking "Milky Way - Line mode".
+  * Option to add a crosshair to the chart center.
+  * Option to add the meridian line with any projection.
 
 Corrections:
 

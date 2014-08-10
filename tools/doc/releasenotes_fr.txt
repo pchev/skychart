@@ -6,6 +6,8 @@ Nouvelles fonctions:
   * Fonctions de script et boites à outils personnalisées.
   * L'éditeur de barre d'outils vous permet de modifier la disposition des boutons. La fonction est disponible depuis la menu Configuration / Éditeur de barre d'outils.
   * Nouvelle représentation pour la Voie Lactée. Vous pouvez l'activer à partir du menu Configuration / Affichage / Lignes, en décochant "Voie lactée - Mode ligne".
+  * Possibilité d'ajouter un réticule au centre de la carte. 
+  * Option pour ajouter la ligne méridienne avec toute projection.
 
 Corrections:
 
