@@ -23,10 +23,10 @@ object f_config_display: Tf_config_display
       Height = 526
       Top = 1
       Width = 503
-      ActivePage = Page8
+      ActivePage = Page5
       Align = alClient
       ShowTabs = False
-      TabIndex = 7
+      TabIndex = 4
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Display'
@@ -1619,7 +1619,7 @@ object f_config_display: Tf_config_display
         object EqGrid: TCheckBox
           Left = 16
           Height = 26
-          Top = 124
+          Top = 104
           Width = 135
           Caption = 'Add Equatorial Grid'
           OnClick = EqGridClick
@@ -1646,7 +1646,7 @@ object f_config_display: Tf_config_display
         object galactic: TCheckBox
           Left = 277
           Height = 26
-          Top = 124
+          Top = 104
           Width = 154
           Caption = 'Show Galactic Equator'
           OnClick = galacticClick
@@ -1664,7 +1664,7 @@ object f_config_display: Tf_config_display
         object GroupBox1: TGroupBox
           Left = 8
           Height = 140
-          Top = 180
+          Top = 192
           Width = 273
           Caption = 'Constellation Figures'
           ClientHeight = 109
@@ -1726,11 +1726,11 @@ object f_config_display: Tf_config_display
         end
         object GroupBox3: TGroupBox
           Left = 8
-          Height = 140
-          Top = 324
+          Height = 148
+          Top = 336
           Width = 273
           Caption = 'Constellation Boundaries'
-          ClientHeight = 109
+          ClientHeight = 117
           ClientWidth = 269
           TabOrder = 13
           object Label72: TLabel
@@ -1790,7 +1790,7 @@ object f_config_display: Tf_config_display
         object GroupBox4: TGroupBox
           Left = 293
           Height = 140
-          Top = 180
+          Top = 192
           Width = 185
           Caption = 'Milky Way'
           ClientHeight = 109
@@ -1867,7 +1867,7 @@ object f_config_display: Tf_config_display
         object EqGridStyle: TComboBox
           Left = 39
           Height = 27
-          Top = 148
+          Top = 128
           Width = 100
           ItemHeight = 16
           ItemIndex = 0
@@ -1887,7 +1887,7 @@ object f_config_display: Tf_config_display
         object GalEqStyle: TComboBox
           Left = 297
           Height = 27
-          Top = 148
+          Top = 128
           Width = 100
           ItemHeight = 16
           ItemIndex = 0
@@ -1906,11 +1906,11 @@ object f_config_display: Tf_config_display
         end
         object GroupBox8: TGroupBox
           Left = 293
-          Height = 140
-          Top = 324
+          Height = 148
+          Top = 336
           Width = 185
           Caption = 'Proper Motion'
-          ClientHeight = 109
+          ClientHeight = 117
           ClientWidth = 181
           TabOrder = 14
           object Label68: TLabel
@@ -1955,9 +1955,9 @@ object f_config_display: Tf_config_display
           end
         end
         object OnlyMeridian: TCheckBox
-          Left = 16
+          Left = 277
           Height = 26
-          Top = 97
+          Top = 160
           Width = 183
           Caption = 'Show only meridian in Alt/Az'
           OnClick = OnlyMeridianClick
@@ -1973,19 +1973,28 @@ object f_config_display: Tf_config_display
           TabOrder = 1
         end
         object ShowLineShape: TShape
-          Left = 279
+          Left = 297
           Height = 18
           Top = 31
           Width = 18
           OnMouseUp = ShowLineShapeMouseUp
         end
         object Label10: TLabel
-          Left = 306
+          Left = 324
           Height = 15
           Top = 33
           Width = 43
           Caption = 'Label10'
           ParentColor = False
+        end
+        object CheckBox8: TCheckBox
+          Left = 16
+          Height = 26
+          Top = 160
+          Width = 139
+          Caption = 'Always add meridian'
+          OnClick = CheckBox8Click
+          TabOrder = 15
         end
       end
       object Page6: TTabSheet

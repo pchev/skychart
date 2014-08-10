@@ -133,6 +133,7 @@ Tskychart = class (TComponent)
     procedure DrawAzGrid(drawlabel:boolean);
     procedure DrawGalGrid(drawlabel:boolean);
     procedure DrawEclGrid(drawlabel:boolean);
+    procedure DrawMeridian;
     Procedure DrawScale;
     Procedure DrawBorder;
     function DrawConstL :boolean;
@@ -3077,7 +3078,10 @@ if (cfgsc.ShowOnlyMeridian)or((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.F
        AltAz  :  begin DrawAzGrid(drawlabel); if ((not Fplot.cfgplot.UseBMP)or(not cfgsc.horizonopaque)) and cfgsc.ShowEqGrid and (not drawlabel) then DrawEqGrid(drawlabel,true); end;
        Gal    :  begin DrawGalGrid(drawlabel); if cfgsc.ShowEqGrid and (not drawlabel) then DrawEqGrid(drawlabel,true); end;
        Ecl    :  begin DrawEclGrid(drawlabel); if cfgsc.ShowEqGrid and (not drawlabel) then DrawEqGrid(drawlabel,true); end;
-       end
+       end;
+       if cfgsc.ShowAlwaysMeridian and (cfgsc.ProjPole<>Altaz) then begin
+         DrawMeridian;
+       end;
     end else if cfgsc.ShowEqGrid and (((not Fplot.cfgplot.UseBMP)or(not cfgsc.horizonopaque))or(cfgsc.ProjPole<>AltAz)) then begin
       DrawEqGrid(drawlabel,true);
     end
@@ -3568,6 +3572,53 @@ if not cfgsc.ShowOnlyMeridian then begin
   until (not ok)or(hc<-pid2);
 end;
 end;
+
+procedure Tskychart.DrawMeridian;
+var ra,de:double;
+    col,n,i,w:integer;
+    x1,y1:double;
+    xx,yy,xxp,yyp:single;
+begin
+col:=Fplot.cfgplot.Color[15];
+w:=WideLine;
+// meridian
+for i:=0 to 1 do begin
+  xxp:=999999;
+  for n:=0 to 90 do begin
+    Hz2Eq(i*pi,deg2rad*n,ra,de,cfgsc);
+    ra:=cfgsc.CurST-ra;
+    projection(ra,de,x1,y1,false,cfgsc) ;
+    if (x1<200)and(y1<200) then begin
+    WindowXY(x1,y1,xx,yy,cfgsc);
+    if (xxp<999999) and
+      ((intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 )and
+      ((xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax)) then begin
+        Fplot.Plotline(xxp,yyp,xx,yy,col,w,cfgsc.StyleGrid);
+    end;
+    xxp:=xx;
+    yyp:=yy;
+    end;
+  end;
+end;
+// horizon
+xxp:=999999;
+for n:=0 to 360 do begin
+  Hz2Eq(deg2rad*n,0,ra,de,cfgsc);
+  ra:=cfgsc.CurST-ra;
+  projection(ra,de,x1,y1,false,cfgsc) ;
+  if (x1<200)and(y1<200) then begin
+  WindowXY(x1,y1,xx,yy,cfgsc);
+  if (xxp<999999) and
+    ((intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 )and
+    ((xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax)) then begin
+      Fplot.Plotline(xxp,yyp,xx,yy,col,w,cfgsc.StyleGrid);
+  end;
+  xxp:=xx;
+  yyp:=yy;
+  end;
+end;
+end;
+
 
 constructor TDrawHorizonThread.Create(CreateSuspended: boolean);
 begin
