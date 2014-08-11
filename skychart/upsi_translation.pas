@@ -1532,6 +1532,12 @@ CL.AddConstantN('rsTarget','String').SetString(rsTarget);
 CL.AddConstantN('rsHandPad','String').SetString(rsHandPad);
 CL.AddConstantN('rsSelectNone','String').SetString(rsSelectNone);
 CL.AddConstantN('rsMark','String').SetString(rsMark);
+CL.AddConstantN('rsChartCenterC','String').SetString(rsChartCenterC);
+CL.AddConstantN('rsAlwaysAddMer','String').SetString(rsAlwaysAddMer);
+CL.AddConstantN('rsIPAddress','String').SetString(rsIPAddress);
+CL.AddConstantN('rsTCPPort','String').SetString(rsTCPPort);
+CL.AddConstantN('rsCommunicatio','String').SetString(rsCommunicatio);
+CL.AddConstantN('rsSocketConfig','String').SetString(rsSocketConfig);
 
 end;
 
