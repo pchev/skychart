@@ -22,10 +22,10 @@ object pop_lx200: Tpop_lx200
     Height = 521
     Top = 0
     Width = 374
-    ActivePage = TabSheet3
+    ActivePage = TabSheet2
     Align = alClient
     MultiLine = True
-    TabIndex = 7
+    TabIndex = 6
     TabOrder = 0
     OnChange = PageControl1Change
     Options = [nboMultiLine]
@@ -807,7 +807,7 @@ object pop_lx200: Tpop_lx200
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 57
+        ClientHeight = 43
         ClientWidth = 301
         Columns = 2
         ItemIndex = 1
@@ -908,7 +908,7 @@ object pop_lx200: Tpop_lx200
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 4
-        ClientHeight = 57
+        ClientHeight = 43
         ClientWidth = 301
         Columns = 4
         ItemIndex = 0
@@ -936,7 +936,7 @@ object pop_lx200: Tpop_lx200
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 57
+        ClientHeight = 43
         ClientWidth = 298
         Columns = 2
         ItemIndex = 0
@@ -1012,7 +1012,7 @@ object pop_lx200: Tpop_lx200
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 302
+        ClientHeight = 288
         ClientWidth = 301
         Columns = 2
         Enabled = False
@@ -1050,7 +1050,7 @@ object pop_lx200: Tpop_lx200
         Top = 40
         Width = 305
         Caption = 'Mode Button Simulator'
-        ClientHeight = 49
+        ClientHeight = 35
         ClientWidth = 301
         Enabled = False
         TabOrder = 1
@@ -1112,7 +1112,7 @@ object pop_lx200: Tpop_lx200
         Top = 40
         Width = 89
         Caption = 'Speed settings'
-        ClientHeight = 265
+        ClientHeight = 251
         ClientWidth = 85
         Enabled = False
         TabOrder = 1
@@ -1206,7 +1206,7 @@ object pop_lx200: Tpop_lx200
         Top = 40
         Width = 121
         Caption = 'Initialize'
-        ClientHeight = 129
+        ClientHeight = 115
         ClientWidth = 117
         Enabled = False
         ParentShowHint = False
@@ -1382,7 +1382,7 @@ object pop_lx200: Tpop_lx200
           Left = 16
           Height = 26
           Top = 74
-          Width = 86
+          Width = 81
           Caption = 'Send UTC'
           TabOrder = 2
         end
@@ -1534,7 +1534,7 @@ object pop_lx200: Tpop_lx200
           Left = 6
           Height = 26
           Top = 4
-          Width = 79
+          Width = 74
           Caption = 'Use HPP'
           Enabled = False
           OnClick = CheckBox1Click
@@ -1563,7 +1563,7 @@ object pop_lx200: Tpop_lx200
         Left = 24
         Height = 26
         Top = 416
-        Width = 144
+        Width = 132
         Caption = 'Form always visible'
         OnClick = CheckBox2Click
         TabOrder = 6
@@ -1572,7 +1572,7 @@ object pop_lx200: Tpop_lx200
         Left = 24
         Height = 26
         Top = 396
-        Width = 215
+        Width = 201
         Caption = 'Record protocol to a trace file'
         OnClick = CheckBox5Click
         TabOrder = 5
