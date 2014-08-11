@@ -49,6 +49,14 @@ type
   { Tpop_lx200 }
 
   Tpop_lx200 = class(TForm)
+    ipaddr: TEdit;
+    tcpport: TEdit;
+    tcptimeout: TEdit;
+    GroupBox9: TGroupBox;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    RadioGroup6: TRadioGroup;
     UTCBox: TCheckBox;
     PageControl1: TPageControl;
     SpeedButton8: TSpeedButton;
@@ -210,6 +218,7 @@ type
      procedure FormCreate(Sender: TObject);
      procedure kill(Sender: TObject; var CanClose: Boolean);
      procedure PageControl1Change(Sender: TObject);
+     procedure RadioGroup6Click(Sender: TObject);
      procedure Timer1Timer(Sender: TObject);
      procedure setresClick(Sender: TObject);
      function str2ra(s:string):double;
@@ -446,12 +455,15 @@ led.color:=clRed;
 led.refresh;
 timer1.enabled:=false;
 ok:=false;
-if LX200_Open(trim(cbo_type.text),trim(cbo_port.text),PortSpeedbox.text,Paritybox.text,DatabitBox.text,StopbitBox.text,TimeOutBox.text,IntTimeOutBox.text) then begin
+case RadioGroup6.ItemIndex of
+ 0: ok:=LX200_Open(trim(cbo_type.text),trim(cbo_port.text),PortSpeedbox.text,Paritybox.text,DatabitBox.text,StopbitBox.text,TimeOutBox.text,IntTimeOutBox.text);
+ 1: ok:=LX200_Open(trim(cbo_type.text),trim(ipaddr.text),tcpport.text,TcpTimeOut.text);
+end;
+if ok then begin
    LX200_SetFormat(radiogroup2.ItemIndex);
    if not CoordLock then   // TMa
      ShowCoordinates;
    led.color:=clLime;
-   ok:=true;
    timer1.enabled:=true;
    ChangeButton(true);
    cbo_type.enabled:=false;
@@ -466,7 +478,11 @@ if LX200_Open(trim(cbo_type.text),trim(cbo_port.text),PortSpeedbox.text,Paritybo
 end else begin
     LX200_Close;
     formstyle:=fsNormal;
-    ShowMessage(Format(rsErrorOpening3, [cbo_type.text, cbo_port.text+crlf]));
+    case RadioGroup6.ItemIndex of
+     0: ShowMessage(Format(rsErrorOpening3, [cbo_type.text, cbo_port.text+crlf]));
+     1: ShowMessage(Format(rsErrorOpening3, ['tcp/ip', ipaddr.text+':'+tcpport.text+crlf]));
+    end;
+
     formstyle:=fsStayOnTop;
     ChangeButton(false);
     // Renato Bonomini:
@@ -758,6 +774,7 @@ CheckBox5.Caption:=rsRecordProtoc;
 CheckBox2.Caption:=rsFormAlwaysVi;
 SaveButton1.Caption:=rsSaveSetting;
 TabSheet3.Caption:=rsPortConfigur;
+RadioGroup6.Caption:=rsCommunicatio;
 GroupBox4.Caption:=rsPortConfigur;
 Label5.Caption:=rsSerialPort;
 Label7.Caption:=rsSpeed;
@@ -766,7 +783,12 @@ Label8.Caption:=rsParity;
 Label10.Caption:=rsStopBits;
 Label13.Caption:=rsTimeoutMs;
 Label18.Caption:=rsIntervalTime;
+GroupBox9.Caption:=rsSocketConfig;
+Label22.Caption:=rsIPAddress;
+Label23.Caption:=rsTCPPort;
+Label24.Caption:=rsTimeoutMs;
 Button2.Caption:=rsSaveSetting;
+
 SetHelp(self,hlpLX200);
 end;
 
@@ -873,6 +895,8 @@ begin
   end;
 
   // Get configured values
+  RadioGroup6.ItemIndex:=ini.readinteger('lx200','comproto',0);
+  RadioGroup6Click(nil);
   ReadIntBox.text:=ini.readstring('lx200','read_interval','1000');
   cbo_port.text:=ini.readstring('lx200','comport',DefaultSerialPort);
   PortSpeedbox.text:=ini.readstring('lx200','baud','9600');
@@ -881,6 +905,9 @@ begin
   StopbitBox.text:=ini.readstring('lx200','stopbits','1');
   TimeOutBox.text:=ini.readstring('lx200','timeout','1000');
   IntTimeOutBox.text:=ini.readstring('lx200','inttimeout','400');
+  ipaddr.text:=ini.readstring('lx200','ipaddr','127.0.0.1');
+  tcpport.text:=ini.readstring('lx200','tcpport','999');
+  tcptimeout.text:=ini.readstring('lx200','tcptimeout','1000');
   checkBox1.Checked:=ini.ReadBool('lx200','hpp',false);
   ShowAltAz.Checked:=ini.ReadBool('lx200','AltAz',false);
   av:=ini.ReadBool('lx200','AlwaysVisible',true);
@@ -920,6 +947,20 @@ begin
 
 end;
 
+procedure Tpop_lx200.RadioGroup6Click(Sender: TObject);
+begin
+case RadioGroup6.ItemIndex of
+  0: begin
+       GroupBox4.Visible:=true;
+       GroupBox9.Visible:=false;
+  end;
+  1: begin
+       GroupBox4.Visible:=false;
+       GroupBox9.Visible:=true;
+  end;
+end;
+end;
+
 procedure Tpop_lx200.FormCreate(Sender: TObject);
 begin
     CoordLock := false;
@@ -953,6 +994,7 @@ ini:=tinifile.create(FConfig);
 ini.writestring('lx200','name',cbo_type.text);
 ini.writeinteger('lx200','model',cbo_type.ItemIndex);
 ini.writestring('lx200','read_interval',ReadIntBox.text);
+ini.writeinteger('lx200','comproto',radiogroup6.ItemIndex);
 ini.writestring('lx200','comport',cbo_port.text);
 ini.writestring('lx200','baud',PortSpeedbox.text);
 ini.writestring('lx200','databits',DatabitBox.text);
@@ -960,6 +1002,9 @@ ini.writestring('lx200','parity',Paritybox.text);
 ini.writestring('lx200','stopbits',StopbitBox.text);
 ini.writestring('lx200','timeout',TimeOutBox.text);
 ini.writestring('lx200','inttimeout',IntTimeOutBox.text);
+ini.writestring('lx200','ipaddr',ipaddr.text);
+ini.writestring('lx200','tcpport',tcpport.text);
+ini.writestring('lx200','tcptimeout',tcptimeout.text);
 ini.writeBool('lx200','hpp',checkBox1.Checked);
 ini.writeBool('lx200','AltAz',ShowAltAz.Checked);
 ini.writeBool('lx200','AlwaysVisible',checkbox2.checked);

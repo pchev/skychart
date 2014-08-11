@@ -1549,6 +1549,10 @@ resourcestring
   rsMark = 'Mark';
   rsChartCenterC = 'Add a crosshair to the chart center';
   rsAlwaysAddMer = 'Always add meridian';
+  rsIPAddress = 'IP address';
+  rsTCPPort = 'TCP port';
+  rsCommunicatio = 'Communication protocol';
+  rsSocketConfig = 'Socket configuration';
 
 implementation
 
