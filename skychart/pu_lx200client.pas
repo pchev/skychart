@@ -915,6 +915,7 @@ begin
   checkBox4.Checked:=ini.ReadBool('lx200','SwapEW',false);
   lat.text:=ini.readstring('observatory','latitude','0');
   long.text:=ini.readstring('observatory','longitude','0');
+  radiogroup2.ItemIndex:=ini.readinteger('lx200','precision',0);
   radiogroup5.ItemIndex:=ini.readinteger('lx200','focusmodel',0);
   radiogroup3.ItemIndex:=ini.readinteger('lx200','focusspeed1',0);
   radiogroup4.ItemIndex:=ini.readinteger('lx200','focusspeed2',1);
@@ -1012,6 +1013,7 @@ ini.writeBool('lx200','SwapNS',checkbox3.checked);
 ini.writeBool('lx200','SwapEW',checkbox4.checked);
 ini.writestring('observatory','latitude',lat.text);
 ini.writestring('observatory','longitude',long.text);
+ini.writeinteger('lx200','precision',radiogroup2.ItemIndex);
 ini.writeinteger('lx200','focusmodel',radiogroup5.ItemIndex);
 ini.writeinteger('lx200','focusspeed1',radiogroup3.ItemIndex);
 ini.writeinteger('lx200','focusspeed2',radiogroup4.ItemIndex);
