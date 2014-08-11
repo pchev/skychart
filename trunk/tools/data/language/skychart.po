@@ -6074,3 +6074,19 @@ msgstr ""
 msgid "Always add meridian"
 msgstr ""
 
+#: u_translation:rsipaddress
+msgid "IP address"
+msgstr ""
+
+#: u_translation:rstcpport
+msgid "TCP port"
+msgstr ""
+
+#: u_translation:rscommunicatio
+msgid "Communication protocol"
+msgstr ""
+
+#: u_translation:rssocketconfig
+msgid "Socket configuration"
+msgstr ""
+

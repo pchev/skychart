@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-10 16:36+0000\n"
+"POT-Creation-Date: 2014-08-11 15:36+0000\n"
 "PO-Revision-Date: 2014-05-03 10:25+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-10 16:52+0000\n"
+"X-Launchpad-Export-Date: 2014-08-11 15:44+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 "Language: it\n"
 
@@ -932,6 +932,10 @@ msgstr "Comando da usare per elaborare il file."
 #: u_translation.rscommonname
 msgid "Common name"
 msgstr "Nome Proprio"
+
+#: u_translation.rscommunicatio
+msgid "Communication protocol"
+msgstr ""
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
@@ -2701,6 +2705,10 @@ msgstr "%s Inversione Delta"
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "Invisibile a questa latitudine"
+
+#: u_translation.rsipaddress
+msgid "IP address"
+msgstr ""
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
@@ -5130,6 +5138,10 @@ msgstr "M"
 msgid "M."
 msgstr "M."
 
+#: u_translation.rssocketconfig
+msgid "Socket configuration"
+msgstr ""
+
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
 msgstr "Socket error %s.  %s"
@@ -5437,6 +5449,10 @@ msgstr "Server TCP/IP"
 #: u_translation.rstcpipservice
 msgid "TCP/IP service not available."
 msgstr "Il servizio TCP/IP non è presente."
+
+#: u_translation.rstcpport
+msgid "TCP port"
+msgstr ""
 
 #: u_translation.rstelescope
 msgid "Telescope"

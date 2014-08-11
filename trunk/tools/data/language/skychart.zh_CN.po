@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-10 16:36+0000\n"
+"POT-Creation-Date: 2014-08-11 15:36+0000\n"
 "PO-Revision-Date: 2014-05-01 08:30+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-10 16:53+0000\n"
+"X-Launchpad-Export-Date: 2014-08-11 15:45+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: u_translation.rs102cddss
@@ -931,6 +931,10 @@ msgstr "用来处理文件的命令。"
 #: u_translation.rscommonname
 msgid "Common name"
 msgstr "通用名"
+
+#: u_translation.rscommunicatio
+msgid "Communication protocol"
+msgstr ""
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
@@ -2699,6 +2703,10 @@ msgstr ""
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "在此纬度不可见"
+
+#: u_translation.rsipaddress
+msgid "IP address"
+msgstr ""
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
@@ -5128,6 +5136,10 @@ msgstr "分"
 msgid "M."
 msgstr "月"
 
+#: u_translation.rssocketconfig
+msgid "Socket configuration"
+msgstr ""
+
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
 msgstr "Socket 错误 %s。 %s"
@@ -5435,6 +5447,10 @@ msgstr "TCP/IP服务器"
 #: u_translation.rstcpipservice
 msgid "TCP/IP service not available."
 msgstr "TCP/IP 服务不可用。"
+
+#: u_translation.rstcpport
+msgid "TCP port"
+msgstr ""
 
 #: u_translation.rstelescope
 msgid "Telescope"

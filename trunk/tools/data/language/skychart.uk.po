@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-10 16:36+0000\n"
+"POT-Creation-Date: 2014-08-11 15:36+0000\n"
 "PO-Revision-Date: 2014-05-01 08:41+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclubzp@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-10 16:53+0000\n"
+"X-Launchpad-Export-Date: 2014-08-11 15:44+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -934,6 +934,10 @@ msgstr "Команда використовується для обробітк�
 #: u_translation.rscommonname
 msgid "Common name"
 msgstr "Назва"
+
+#: u_translation.rscommunicatio
+msgid "Communication protocol"
+msgstr ""
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
@@ -2702,6 +2706,10 @@ msgstr ""
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "Невидимо на цій широті"
+
+#: u_translation.rsipaddress
+msgid "IP address"
+msgstr ""
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
@@ -5131,6 +5139,10 @@ msgstr "М"
 msgid "M."
 msgstr ""
 
+#: u_translation.rssocketconfig
+msgid "Socket configuration"
+msgstr ""
+
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
 msgstr "Помилка сокету %s.  %s"
@@ -5438,6 +5450,10 @@ msgstr "TCP/IP сервер"
 #: u_translation.rstcpipservice
 msgid "TCP/IP service not available."
 msgstr "TCP/IP сервіс не доступний."
+
+#: u_translation.rstcpport
+msgid "TCP port"
+msgstr ""
 
 #: u_translation.rstelescope
 msgid "Telescope"
