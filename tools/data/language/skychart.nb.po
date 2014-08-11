@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-10 16:36+0000\n"
+"POT-Creation-Date: 2014-08-11 15:36+0000\n"
 "PO-Revision-Date: 2014-05-01 08:36+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-10 16:53+0000\n"
+"X-Launchpad-Export-Date: 2014-08-11 15:45+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: u_translation.rs102cddss
@@ -931,6 +931,10 @@ msgstr "Kommando for behandling:"
 #: u_translation.rscommonname
 msgid "Common name"
 msgstr "Vanlig navn"
+
+#: u_translation.rscommunicatio
+msgid "Communication protocol"
+msgstr ""
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
@@ -2699,6 +2703,10 @@ msgstr ""
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "Usynlig på denne breddegrad"
+
+#: u_translation.rsipaddress
+msgid "IP address"
+msgstr ""
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
@@ -5128,6 +5136,10 @@ msgstr "M"
 msgid "M."
 msgstr "M"
 
+#: u_translation.rssocketconfig
+msgid "Socket configuration"
+msgstr ""
+
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
 msgstr "Socket-feil %s.  %s"
@@ -5435,6 +5447,10 @@ msgstr "TCP/IP-server"
 #: u_translation.rstcpipservice
 msgid "TCP/IP service not available."
 msgstr "TCP/IP-service ikke tilgjengelig."
+
+#: u_translation.rstcpport
+msgid "TCP port"
+msgstr ""
 
 #: u_translation.rstelescope
 msgid "Telescope"
