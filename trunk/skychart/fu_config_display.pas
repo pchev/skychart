@@ -54,6 +54,25 @@ type
     CheckBox6: TCheckBox;
     CheckBox7: TCheckBox;
     CheckBox8: TCheckBox;
+    Edit15: TEdit;
+    Edit16: TEdit;
+    Edit17: TEdit;
+    Edit18: TEdit;
+    Edit19: TEdit;
+    Edit20: TEdit;
+    Edit21: TEdit;
+    Edit22: TEdit;
+    Edit23: TEdit;
+    Label260: TLabel;
+    labelRotChartInfo: TUpDown;
+    labelRotConst: TUpDown;
+    labelRotMisc: TUpDown;
+    labelRotMult: TUpDown;
+    labelRotNeb: TUpDown;
+    labelRotobslist: TUpDown;
+    labelRotSol: TUpDown;
+    labelRotStar: TUpDown;
+    labelRotVar: TUpDown;
     linemodemilkyway: TCheckBox;
     Edit14: TEdit;
     ImageList1: TImageList;
@@ -369,6 +388,9 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure CirclegridSelectCell(Sender: TObject; aCol, aRow: Integer;
       var CanSelect: Boolean);
+    procedure labelmagChange(Sender: TObject);
+    procedure LabelsizeChange(Sender: TObject);
+    procedure LabelRotChange(Sender: TObject);
     procedure linemodemilkywayClick(Sender: TObject);
     procedure MarkNumberClick(Sender: TObject);
     procedure ConstbFileAcceptFileName(Sender: TObject; var Value: String);
@@ -441,8 +463,6 @@ type
     procedure showlabelClick(Sender: TObject);
     procedure labelcolorMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure labelsizeChanged(Sender: TObject; Button: TUDBtnType);
-    procedure labelmagChanged(Sender: TObject; Button: TUDBtnType);
     procedure MagLabelClick(Sender: TObject);
     procedure constlabelClick(Sender: TObject);
     procedure CirclegridSetEditText(Sender: TObject; ACol, ARow: Integer;
@@ -984,6 +1004,36 @@ CCol:=aCol;
 CRow:=aRow;
 end;
 
+procedure Tf_config_display.labelmagChange(Sender: TObject);
+var x,n: integer;
+    txt: string;
+begin
+if LockChange then exit;
+txt:=TEdit(sender).Text;
+Val(txt,x,n);
+if n=0 then csc.LabelmagDiff[TEdit(sender).tag]:=x;
+end;
+
+procedure Tf_config_display.LabelsizeChange(Sender: TObject);
+var x,n: integer;
+    txt: string;
+begin
+if LockChange then exit;
+txt:=TEdit(sender).Text;
+Val(txt,x,n);
+if n=0 then cplot.LabelSize[TEdit(sender).tag]:=x;
+end;
+
+procedure Tf_config_display.LabelRotChange(Sender: TObject);
+var x,n: integer;
+    txt: string;
+begin
+if LockChange then exit;
+txt:=TEdit(sender).Text;
+Val(txt,x,n);
+if n=0 then  csc.LabelOrient[TEdit(sender).tag]:=x;
+end;
+
 procedure Tf_config_display.MarkNumberClick(Sender: TObject);
 begin
 csc.marknumlabel:=TCheckBox(sender).Checked;
@@ -1400,6 +1450,15 @@ begin
  labelsizeMisc.position:=cplot.labelsize[7];
  labelsizeChartInfo.position:=cplot.labelsize[8];
  labelsizeobslist.position:=cplot.labelsize[9];
+ labelRotStar.position:=round(csc.LabelOrient[1]);
+ labelRotVar.position:=round(csc.LabelOrient[2]);
+ labelRotMult.position:=round(csc.LabelOrient[3]);
+ labelRotNeb.position:=round(csc.LabelOrient[4]);
+ labelRotSol.position:=round(csc.LabelOrient[5]);
+ labelRotConst.position:=round(csc.LabelOrient[6]);
+ labelRotMisc.position:=round(csc.LabelOrient[7]);
+ labelRotChartInfo.position:=round(csc.LabelOrient[8]);
+ labelRotobslist.position:=round(csc.LabelOrient[9]);
  showlabelcolor;
  if csc.NameLabel then MagLabel.ItemIndex:=1
  else if csc.MagLabel then MagLabel.ItemIndex:=2
@@ -1938,18 +1997,6 @@ end;
 procedure Tf_config_display.ShowTitleClick(Sender: TObject);
 begin
 cmain.ShowTitlePos:=ShowTitle.Checked;
-end;
-
-procedure Tf_config_display.labelmagChanged(Sender: TObject; Button: TUDBtnType);
-begin
-if LockChange then exit;
-with sender as TUpDown do csc.LabelmagDiff[tag]:=Position;
-end;
-
-procedure Tf_config_display.labelsizeChanged(Sender: TObject; Button: TUDBtnType);
-begin
-if LockChange then exit;
-with sender as TUpDown do cplot.LabelSize[tag]:=Position;
 end;
 
 procedure Tf_config_display.labelcolorMouseUp(Sender: TObject;

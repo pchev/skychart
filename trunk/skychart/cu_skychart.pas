@@ -1108,21 +1108,21 @@ if Fcatalog.OpenStar then
        if (rec.star.b_v>0.28)and(rec.star.b_v<0.30) then begin
           y1:=0;
        end;
-       if cfgsc.MagLabel then SetLabel(lid,xx,yy,rs,2,lnum,formatfloat(f2,rec.star.magv),al,0,4,true)
-       else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, rs, 2, lnum, rec.str[3],al,0,lp,true)
+       if cfgsc.MagLabel then SetLabel(lid,xx,yy,rs,2,lnum,formatfloat(f2,rec.star.magv),al,cfgsc.LabelOrient[lnum],4,true)
+       else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, rs, 2, lnum, rec.str[3],al,cfgsc.LabelOrient[lnum],lp,true)
        else if rec.star.valid[vsGreekSymbol] then begin
           gk:=GreekSymbolUtf8(rec.star.greeksymbol);
           {$ifdef mswindows}
-          SetLabel(lid,xx,yy,rs,7,1,gk,al,0,lp,true);
+          SetLabel(lid,xx,yy,rs,7,1,gk,al,cfgsc.LabelOrient[lnum],lp,true);
           {$else}
           if plot.cfgchart.onprinter and (not plot.cfgplot.UseBMP) then begin
             plot.cfgplot.FontName[7]:='symbol';
-            SetLabel(lid,xx,yy,rs,7,lnum,gk,al,0,lp,true);
-          end else SetLabel(lid,xx,yy,rs,2,lnum,gk,al,0,lp,true);
+            SetLabel(lid,xx,yy,rs,7,lnum,gk,al,cfgsc.LabelOrient[lnum],lp,true);
+          end else SetLabel(lid,xx,yy,rs,2,lnum,gk,al,cfgsc.LabelOrient[lnum],lp,true);
           {$endif}
         end else begin
            if lp>0 then lp:=4;
-           SetLabel(lid,xx,yy,rs,2,lnum,rec.star.id,al,0,lp,true);
+           SetLabel(lid,xx,yy,rs,2,lnum,rec.star.id,al,cfgsc.LabelOrient[lnum],lp,true);
         end;
     end;
  end;
@@ -1173,8 +1173,8 @@ if Fcatalog.OpenVarStar then
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
     rs:=Fplot.PlotVarStar(xx,yy,rec.variable.magmax,rec.variable.magmin);
     if forcelabel or (rec.variable.magmax<cfgsc.StarmagMax-cfgsc.LabelMagDiff[2]) then begin
-      if cfgsc.MagLabel then SetLabel(lid,xx,yy,rs,2,lnum,formatfloat(f2,rec.variable.magmax)+'-'+formatfloat(f2,rec.variable.magmin),laTopLeft,0,4)
-         else SetLabel(lid,xx,yy,rs,2,lnum,rec.variable.id,laTopLeft,0,lp);
+      if cfgsc.MagLabel then SetLabel(lid,xx,yy,rs,2,lnum,formatfloat(f2,rec.variable.magmax)+'-'+formatfloat(f2,rec.variable.magmin),laTopLeft,cfgsc.LabelOrient[lnum],4)
+         else SetLabel(lid,xx,yy,rs,2,lnum,rec.variable.id,laTopLeft,cfgsc.LabelOrient[lnum],lp);
     end;
  end;
 end;
@@ -1230,11 +1230,11 @@ if Fcatalog.OpenDblStar then
     rec.double.pa:=Deg2Rad*rec.double.pa+rot;
     rs:=Fplot.PlotDblStar(xx,yy,abs(rec.double.sep*secarc*cfgsc.BxGlb),rec.double.mag1,rec.double.sep,rec.double.pa,0);
     if forcelabel or (rec.double.mag1<cfgsc.StarmagMax-cfgsc.LabelMagDiff[3]) then begin
-      if cfgsc.MagLabel then SetLabel(lid,xx,yy,rs,2,lnum,formatfloat(f2,rec.double.mag1),laTopRight,0,4)
+      if cfgsc.MagLabel then SetLabel(lid,xx,yy,rs,2,lnum,formatfloat(f2,rec.double.mag1),laTopRight,cfgsc.LabelOrient[lnum],4)
       else begin
         buf:=rec.double.id;
         if trim(rec.double.compname)>'' then buf:=trim(buf)+blank+trim(rec.double.compname);
-        SetLabel(lid,xx,yy,rs,2,lnum,buf,laTopRight,0,lp);
+        SetLabel(lid,xx,yy,rs,2,lnum,buf,laTopRight,cfgsc.LabelOrient[lnum],lp);
       end;
     end;
  end;
@@ -1418,7 +1418,7 @@ var rec:GcatRec;
                  end;
                  nebmagmax:=max(nebmagmax,rec.neb.mag);
                  nebmagmin:=min(nebmagmin,rec.neb.mag);
-                 SetLabel(lid,xx,yy,round(sz),2,lnum,rec.neb.id,al,0,lp,true,lsize);
+                 SetLabel(lid,xx,yy,round(sz),2,lnum,rec.neb.id,al,cfgsc.LabelOrient[lnum],lp,true,lsize);
               end;
             end;
         end;
@@ -1827,7 +1827,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
       if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and(ipla<=11) then begin
         if (cfgsc.SimNb=1)or(not cfgsc.SimObject[ipla]) then begin
           ltxt:=pla[ipla];
-          lori:=0;
+          lori:=cfgsc.LabelOrient[5];
           lopt:=true;
           lalign:=laLeft;
         end
@@ -1969,7 +1969,7 @@ Fplot.PlotSatel(xx,yy,ipla,pixscale,ma,diam,hidesat,showhide);
 if not(hidesat xor showhide)and(j=0) then begin
   lis:=pla[ipla]+FormatFloat(f6,ra)+FormatFloat(f6,dec);
   lid:=rshash(lis,$7FFFFFFF);
-  SetLabel(lid,xx,yy,round(pixscale*diam/2),2,5,pla[ipla],laLeft);
+  SetLabel(lid,xx,yy,round(pixscale*diam/2),2,5,pla[ipla],laLeft,cfgsc.LabelOrient[5]);
 end;
 end;
 
@@ -1999,7 +1999,7 @@ if cfgsc.ShowAsteroidValid then begin
            lis:=cfgsc.AsteroidMark[i]+FormatFloat(f6,ra)+FormatFloat(f6,de);
            lid:=rshash(lis,$7FFFFFFF);
            ltxt:=cfgsc.AsteroidMark[i];
-           lori:=0;
+           lori:=cfgsc.LabelOrient[5];
            lopt:=true;
            lalign:=laLeft;
            SetLabel(lid,xx,yy,round(r),2,5,ltxt,lalign,lori,4,lopt);
@@ -2049,7 +2049,7 @@ if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw asteroids');
           lid:=rshash(lis,$7FFFFFFF);
           if (cfgsc.SimNb=1) or (not cfgsc.SimObject[12]) then begin
             ltxt:=cfgsc.AsteroidName[j,i,2];
-            lori:=0;
+            lori:=cfgsc.LabelOrient[5];
             lopt:=true;
             lalign:=laLeft;
           end
@@ -2118,7 +2118,7 @@ if cfgsc.ShowCometValid then begin
            lis:=cfgsc.CometMark[i]+FormatFloat(f6,ra)+FormatFloat(f6,de);
            lid:=rshash(lis,$7FFFFFFF);
            ltxt:=cfgsc.CometMark[i];
-           lori:=0;
+           lori:=cfgsc.LabelOrient[5];
            lopt:=true;
            lalign:=laLeft;
            SetLabel(lid,xx,yy,round(r),2,5,ltxt,lalign,lori,4,lopt);
@@ -2166,7 +2166,7 @@ if cfgsc.ShowCometValid then begin
 
           if (cfgsc.SimNb=1) or (not cfgsc.SimObject[13]) then begin
             ltxt:=cfgsc.CometName[j,i,2];
-            lori:=0;
+            lori:=cfgsc.LabelOrient[5];
             lopt:=true;
             lalign:=laLeft;
           end
@@ -4413,7 +4413,7 @@ begin
  x:=xx;
  y:=yy;
  if (xx>=cfgsc.Xmin) and (xx<=cfgsc.Xmax) and (yy>=cfgsc.Ymin) and (yy<=cfgsc.Ymax) then begin
-    o:=cfgsc.LabelOrientation;
+    o:=1;
     hh:=(h div 2);
     if (o=1)and((xx+w)>cfgsc.Xmax) then o:=0;
     if (o=0)and((xx-w)<cfgsc.Xmin) then o:=1;
@@ -4582,8 +4582,8 @@ begin
       WindowXY(x1,y1,xx,yy,cfgsc);
       lis:=Fcatalog.cfgshr.ConstelName[i,2]+FormatFloat(f6,ra)+FormatFloat(f6,de);
       lid:=rshash(lis,$7FFFFFFF);
-      if cfgsc.ConstFullLabel then SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,2],laCenter,0,0)
-                              else SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,1],laCenter,0,0);
+      if cfgsc.ConstFullLabel then SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,2],laCenter,cfgsc.LabelOrient[6],0)
+                              else SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,1],laCenter,cfgsc.LabelOrient[6],0);
   end;
   constlabelindex:=numlabels;
 end;
@@ -5093,7 +5093,7 @@ for i:=1 to numlabels do begin
          else if labels[i].lsize>(nebmagmax-((nebmagmax-nebmagmin)*3/4)) then lsize:=1
          else lsize:=1.1
       end else lsize:=1;
-      Fplot.PlotLabel(i,labelnum,fontnum,x,y,r,orient,al,av,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt,labels[i].px,labels[i].py,false,lsize);
+      Fplot.PlotLabel(i,labelnum,fontnum,x,y,r,orient,al,av,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt,labels[i].px,labels[i].py,lsize);
       if cfgsc.MovedLabelLine and (i>constlabelindex)and(sqrt((x-x0)*(x-x0)+(y-y0)*(y-y0))>30) then begin
         if Fplot.cfgplot.UseBMP then ts:=Fplot.cbmp.TextSize(txt)
            else ts:=Fplot.cnv.TextExtent(txt);
