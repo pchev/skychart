@@ -919,7 +919,7 @@ type
     TelescopeTurnsX, TelescopeTurnsY, TelescopeJD, HorizonPictureRotate: double;
     PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline,
     DSLforcecolor: boolean;
-    LabelOrientation, ManualTelescopeType, CoordType, DSLcolor: integer;
+    ManualTelescopeType, CoordType, DSLcolor: integer;
     IndiServerHost, IndiServerPort, IndiServerCmd,
     IndiDriver, IndiPort, IndiDevice: string;
     IndiAutostart, ShowCircle, ShowCrosshair, IndiTelescope, ASCOMTelescope,
@@ -969,6 +969,7 @@ type
     modlabels: array[1..maxmodlabels] of Tmodlabel;
     customlabels: array[1..maxmodlabels] of Tcustomlabel;
     LabelMagDiff: array[1..numlabtype] of double;
+    LabelOrient: array[1..numlabtype] of double;
     ShowLabel: array[1..numlabtype] of boolean;
     ncircle,nrectangle: integer;
     circle: array of array [1..4] of single; // radius, rotation, offset, mode
@@ -2186,7 +2187,6 @@ begin
   ApparentPos := Source.ApparentPos;
   CoordExpertMode := Source.CoordExpertMode;
   CoordType := Source.CoordType;
-  LabelOrientation := Source.LabelOrientation;
   ManualTelescopeType := Source.ManualTelescopeType;
   IndiServerHost := Source.IndiServerHost;
   IndiServerPort := Source.IndiServerPort;
@@ -2359,6 +2359,7 @@ begin
   begin
     ShowLabel[i] := Source.ShowLabel[i];
     LabelMagDiff[i] := Source.LabelMagDiff[i];
+    LabelOrient[i] := Source.LabelOrient[i];
   end;
   ncircle:=Source.ncircle;
   SetLength(circle,ncircle+1);

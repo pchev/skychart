@@ -142,7 +142,7 @@ type
      procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
      Procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
      Procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
-     function  PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; var px,py: integer; opaque:boolean=false;sizex:single=1):integer;
+     function  PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; var px,py: integer; sizex:single=1):integer;
      function  GetTextSize(fontnum:integer; txt:string; labelnum:integer=-1; lsize:single=1):Tsize;
      procedure PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; WhiteBg: boolean; opaque:boolean=true; clip:boolean=false; marge: integer=5; orient: integer=0);
      procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; WhiteBg: boolean; opaque:boolean=true; orient: integer=0);
@@ -2144,7 +2144,7 @@ end else if cnv<>nil then with cnv do begin
 end;
 end;
 
-function TSplot.PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; var px,py: integer; opaque:boolean=false;sizex:single=1):integer;
+function TSplot.PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; var px,py: integer; sizex:single=1):integer;
 var ts:TSize;
     mp:TRect;
     ATextStyle: TTextStyle;
@@ -2179,21 +2179,19 @@ if cfgplot.UseBMP then begin;
     laCenter : begin xxs:=xxs-(ts.cx div 2)*cosa;yys:=yys+(ts.cx div 2)*sina;end;
   end;
   case Yalign of
-    laTop    : yys:=yys-ts.cy-rs;
-    laBottom : yys:=yys+rs;
+    laTop    : begin yys:=yys-(ts.cy-rs)*cosa; xxs:=xxs-(ts.cy-rs)*sina; end;
+    laBottom : begin yys:=yys+rs*cosa; xxs:=xxs+rs*sina; end;
     laCenter : begin yys:=yys-(ts.cy div 2)*cosa;xxs:=xxs-(ts.cy div 2)*sina;end;
   end;
   end;
-  if opaque then cbmp.FillRect(round(xxs),round(yys),round(xxs+ts.cx),round(yys+ts.cy),ColorToBGRA(cfgplot.backgroundcolor),dmSet);
   BGRATextOut(xxs,yys,orient,txt,ColorToBGRA(lcolor),cbmp);
   px:=round(xxs);
   py:=round(yys);
 end else if cnv<>nil then with cnv do begin
   ATextStyle := TextStyle;
-  ATextStyle.Opaque:=opaque;
+  ATextStyle.Opaque:=false;
   TextStyle:=ATextStyle;
-  if opaque then Brush.Style:=bsSolid
-            else Brush.Style:=bsClear;
+  Brush.Style:=bsClear;
   Pen.Mode:=pmCopy;
   Font.Name:=cfgplot.FontName[fontnum];
   Font.Color:=cfgplot.LabelColor[labelnum];
@@ -2209,8 +2207,8 @@ end else if cnv<>nil then with cnv do begin
    laCenter : begin xx:=xx-round((ts.cx div 2)*cosa);yy:=yy+round((ts.cx div 2)*sina);end;
   end;
   case Yalign of
-   laTop    : yy:=yy-ts.cy-r;
-   laBottom : yy:=yy+r;
+   laTop    : begin yy:=yy-round((ts.cy-rs)*cosa); xx:=xx-round((ts.cy-rs)*sina); end;
+   laBottom : begin yy:=yy+round(rs*cosa); xx:=xx+round(rs*sina); end;
    laCenter : begin yy:=yy-round((ts.cy div 2)*cosa);xx:=xx-round((ts.cy div 2)*sina);end;
   end;
   end;
@@ -2269,8 +2267,8 @@ with ilabels[i] do begin
      laCenter : begin xxs:=xxs-(ts.cx div 2)*cosa;yys:=yys+(ts.cx div 2)*sina;end;
     end;
     case Yalign of
-     laTop    : yys:=yys-ts.cy-rs;
-     laBottom : yys:=yys+rs;
+     laTop    : begin yys:=yys-(ts.cy-rs)*cosa; xxs:=xxs-(ts.cy-rs)*sina; end;
+     laBottom : begin yys:=yys+rs*cosa; xxs:=xxs+rs*sina; end;
      laCenter : begin yys:=yys-(ts.cy div 2)*cosa;xxs:=xxs-(ts.cy div 2)*sina;end;
     end;
   end;

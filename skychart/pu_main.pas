@@ -4432,6 +4432,7 @@ for i:=1 to numlabtype do begin
    def_cfgplot.LabelSize[i]:=DefaultFontSize;
    def_cfgsc.LabelMagDiff[i]:=4;
    def_cfgsc.ShowLabel[i]:=true;
+   def_cfgsc.LabelOrient[i]:=0;
 end;
 def_cfgsc.LabelMagDiff[1]:=3;
 def_cfgsc.LabelMagDiff[5]:=2;
@@ -4629,7 +4630,6 @@ def_cfgsc.ShowEarthShadow:=false;
 def_cfgsc.GRSlongitude:=208.0;
 def_cfgsc.GRSjd:=jd(2014,1,31,0);
 def_cfgsc.GRSdrift:=16.5/365.25;
-def_cfgsc.LabelOrientation:=1;
 def_cfgsc.FindOk:=false;
 def_cfgsc.nummodlabels:=0;
 def_cfgsc.posmodlabels:=0;
@@ -5308,6 +5308,7 @@ for i:=1 to NumSimObject do csc.SimObject[i]:=ReadBool(section,'SimObject'+intto
 for i:=1 to numlabtype do begin
    csc.ShowLabel[i]:=readBool(section,'ShowLabel'+inttostr(i),csc.ShowLabel[i]);
    csc.LabelMagDiff[i]:=readFloat(section,'LabelMag'+inttostr(i),csc.LabelMagDiff[i]);
+   csc.LabelOrient[i]:=readFloat(section,'LabelOrient'+inttostr(i),csc.LabelOrient[i]);
 end;
 csc.TrackOn:=ReadBool(section,'TrackOn',csc.TrackOn);
 csc.TrackType:=ReadInteger(section,'TrackType',csc.TrackType);
@@ -6227,6 +6228,7 @@ for i:=1 to NumSimObject do WriteBool(section,'SimObject'+inttostr(i),csc.SimObj
 for i:=1 to numlabtype do begin
    WriteBool(section,'ShowLabel'+inttostr(i),csc.ShowLabel[i]);
    WriteFloat(section,'LabelMag'+inttostr(i),csc.LabelMagDiff[i]);
+   WriteFloat(section,'LabelOrient'+inttostr(i),csc.LabelOrient[i]);
 end;
 WriteBool(section,'TrackOn',csc.TrackOn);
 WriteInteger(section,'TrackType',csc.TrackType);
