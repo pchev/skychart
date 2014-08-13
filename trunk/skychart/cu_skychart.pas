@@ -69,8 +69,8 @@ Tskychart = class (TComponent)
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
     procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft;orient:single=0;priority: integer=5; opt:boolean=true; lsize:single=-1);
-    procedure EditLabelPos(lnum,x,y: integer;moderadec:boolean);
-    procedure EditLabelTxt(lnum,x,y: integer;mode:boolean);
+    procedure EditLabelPos(lnum,x,y,w,h: integer;moderadec:boolean);
+    procedure EditLabelTxt(lnum,x,y,w,h: integer;mode:boolean);
     procedure DefaultLabel(lnum: integer);
     procedure DeleteLabel(lnum: integer);
     procedure LabelClick(lnum: integer);
@@ -996,6 +996,7 @@ var
   lid,i,j,labelnum : integer;
   lis,txt:string;
   Lalign: TLabelAlign;
+  orient: single;
 begin
 result:=false;
 for i:=1 to cfgsc.numcustomlabels do begin
@@ -1003,6 +1004,7 @@ for i:=1 to cfgsc.numcustomlabels do begin
  dec:=cfgsc.customlabels[i].dec;
  txt:=cfgsc.customlabels[i].txt;
  Lalign:=cfgsc.customlabels[i].align;
+ orient:=cfgsc.customlabels[i].orientation;
  labelnum:=cfgsc.customlabels[i].labelnum;
  lis:=cfgsc.customlabels[i].txt+FormatFloat(f6,ra)+FormatFloat(f6,dec);
  lid:=rshash(lis,$7FFFFFFF);
@@ -1011,12 +1013,13 @@ for i:=1 to cfgsc.numcustomlabels do begin
         txt:=cfgsc.modlabels[j].txt;
         labelnum:=cfgsc.modlabels[j].labelnum;
         Lalign:=cfgsc.modlabels[j].align;
+        orient:=cfgsc.modlabels[j].orientation;
         break;
       end;
  projection(ra,dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-    SetLabel(lid,xx,yy,0,2,labelnum,txt,Lalign,0,0,false);
+    SetLabel(lid,xx,yy,0,2,labelnum,txt,Lalign,orient,0,false);
     result:=true;
  end;
 end;
@@ -4622,11 +4625,13 @@ if (cfgsc.ShowLabel[labelnum])and(numlabels<maxlabels)and(trim(txt)<>'')and(xx>=
 end;
 end;
 
-procedure Tskychart.EditLabelPos(lnum,x,y: integer;moderadec:boolean);
+procedure Tskychart.EditLabelPos(lnum,x,y,w,h: integer;moderadec:boolean);
 var
     i,j,id: integer;
     labelnum,fontnum:byte;
     Lalign: TLabelAlign;
+    orient: single;
+    sina,cosa:extended;
     txt: string;
     ra,dec:double;
 begin
@@ -4635,6 +4640,7 @@ txt:=labels[lnum].txt;
 labelnum:=labels[lnum].labelnum;
 fontnum:=labels[lnum].fontnum;
 Lalign:=labels[lnum].align;
+orient:=labels[lnum].orientation;
 id:=labels[lnum].id;
 for j:=1 to cfgsc.nummodlabels do
     if id=cfgsc.modlabels[j].id then begin
@@ -4643,6 +4649,7 @@ for j:=1 to cfgsc.nummodlabels do
        labelnum:=cfgsc.modlabels[j].labelnum;
        fontnum:=cfgsc.modlabels[j].fontnum;
        Lalign:=cfgsc.modlabels[j].align;
+       orient:=cfgsc.modlabels[j].orientation;
        break;
      end;
 if i<0 then begin
@@ -4654,6 +4661,11 @@ if i<0 then begin
    i:=cfgsc.posmodlabels;
 end;
 cfgsc.modlabels[i].useradec:=moderadec;
+if orient<>0 then begin
+  sincos(deg2rad*orient,sina,cosa);
+  if cosa<0 then x:=x+w;
+  y:=y+round(sina*h);
+end;
 if moderadec then begin
   GetADxy(x,y,ra,dec,cfgsc);
   cfgsc.modlabels[i].ra:=ra;
@@ -4664,6 +4676,7 @@ end else begin
 end;
 cfgsc.modlabels[i].txt:=txt;
 cfgsc.modlabels[i].align:=Lalign;
+cfgsc.modlabels[i].orientation:=orient;
 cfgsc.modlabels[i].labelnum:=labelnum;
 cfgsc.modlabels[i].fontnum:=fontnum;
 cfgsc.modlabels[i].id:=id;
@@ -4671,10 +4684,11 @@ cfgsc.modlabels[i].hiden:=false;
 Refresh;
 end;
 
-procedure Tskychart.EditLabelTxt(lnum,x,y: integer;mode:boolean);
+procedure Tskychart.EditLabelTxt(lnum,x,y,w,h: integer;mode:boolean);
 var i,j,id: integer;
     labelnum,fontnum:byte;
     Lalign: TLabelAlign;
+    orient: single;
     txt: string;
     f1:Tform;
     e1:Tedit;
@@ -4685,6 +4699,7 @@ txt:=labels[lnum].txt;
 labelnum:=labels[lnum].labelnum;
 fontnum:=labels[lnum].fontnum;
 Lalign:=labels[lnum].align;
+orient:=labels[lnum].orientation;
 id:=labels[lnum].id;
 for j:=1 to cfgsc.nummodlabels do
     if id=cfgsc.modlabels[j].id then begin
@@ -4693,6 +4708,7 @@ for j:=1 to cfgsc.nummodlabels do
        labelnum:=cfgsc.modlabels[j].labelnum;
        fontnum:=cfgsc.modlabels[j].fontnum;
        Lalign:=cfgsc.modlabels[j].align;
+       orient:=cfgsc.modlabels[j].orientation;
        break;
      end;
 f1:=Tform.Create(self);
@@ -4740,6 +4756,7 @@ if f1.ShowModal=mrOK then begin
    end;
    cfgsc.modlabels[i].txt:=txt;
    cfgsc.modlabels[i].align:=Lalign;
+   cfgsc.modlabels[i].orientation:=orient;
    cfgsc.modlabels[i].labelnum:=labelnum;
    cfgsc.modlabels[i].fontnum:=fontnum;
    cfgsc.modlabels[i].id:=id;
@@ -4782,9 +4799,10 @@ if f_addlabel.ShowModal=mrOK then begin
    cfgsc.customlabels[i].labelnum:=f_addlabel.labelnum;
    cfgsc.customlabels[i].txt:=txt;
    cfgsc.customlabels[i].align:=f_addlabel.Lalign;
+   cfgsc.customlabels[i].orientation:=cfgsc.LabelOrient[f_addlabel.labelnum];
    lis:=txt+FormatFloat(f6,ra)+FormatFloat(f6,dec);
    lid:=rshash(lis,$7FFFFFFF);
-   SetLabel(lid,x,y,0,fontnum,cfgsc.customlabels[i].labelnum,txt,cfgsc.customlabels[i].align);
+   SetLabel(lid,x,y,0,fontnum,cfgsc.customlabels[i].labelnum,txt,cfgsc.customlabels[i].align,cfgsc.customlabels[i].orientation);
    DrawLabels;
    if VerboseMsg then WriteTrace('AddNewLabel');
    Refresh;
@@ -4795,6 +4813,7 @@ procedure Tskychart.DeleteLabel(lnum: integer);
 var i,j,id: integer;
     labelnum,fontnum:byte;
     Lalign:TLabelAlign;
+    orient:single;
     txt: string;
 begin
 i:=-1;
@@ -4802,6 +4821,7 @@ txt:=labels[lnum].txt;
 labelnum:=labels[lnum].labelnum;
 fontnum:=labels[lnum].fontnum;
 Lalign:=labels[lnum].align;
+orient:=labels[lnum].orientation;
 id:=labels[lnum].id;
 for j:=1 to cfgsc.nummodlabels do
     if id=cfgsc.modlabels[j].id then begin
@@ -4810,6 +4830,7 @@ for j:=1 to cfgsc.nummodlabels do
        labelnum:=cfgsc.modlabels[j].labelnum;
        fontnum:=cfgsc.modlabels[j].fontnum;
        Lalign:=cfgsc.modlabels[j].align;
+       orient:=cfgsc.modlabels[j].orientation;
        break;
      end;
 if i<0 then begin
@@ -4825,6 +4846,7 @@ cfgsc.modlabels[i].dx:=0;
 cfgsc.modlabels[i].dy:=0;
 cfgsc.modlabels[i].txt:=txt;
 cfgsc.modlabels[i].align:=Lalign;
+cfgsc.modlabels[i].orientation:=orient;
 cfgsc.modlabels[i].labelnum:=labelnum;
 cfgsc.modlabels[i].fontnum:=fontnum;
 cfgsc.modlabels[i].id:=id;
