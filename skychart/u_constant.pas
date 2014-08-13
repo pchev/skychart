@@ -756,6 +756,7 @@ type
   Tmodlabel = record
     id, dx, dy: integer;
     ra, Dec: double;
+    orientation: single;
     labelnum, fontnum: byte;
     align: TLabelAlign;
     txt: string;
@@ -765,6 +766,7 @@ type
 
   Tcustomlabel = record
     ra, Dec: double;
+    orientation: single;
     labelnum: byte;
     align: TLabelAlign;
     txt: string;

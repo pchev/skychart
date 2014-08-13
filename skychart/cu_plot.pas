@@ -36,7 +36,7 @@ type
 
   TSide   = (U,D,L,R);  // Up, Down, Left, Right
   TSideSet = set of TSide;
-  TEditLabelPos = procedure(lnum,left,top: integer;moderadec:boolean) of object;
+  TEditLabelPos = procedure(lnum,left,top,w,h: integer;moderadec:boolean) of object;
   Tintfunc = procedure(i: integer) of object;
   Tvoidfunc = procedure of object;
 
@@ -2562,7 +2562,7 @@ if editlabel>0 then begin
 //  labels[editlabel].Transparent:=true;
   ilabels[editlabel].color:=clNone;
   ilabels[editlabel].Cursor:=crDefault;
-  if editlabelmod and assigned(FEditLabelPos) then FEditLabelPos(editlabel,ilabels[editlabel].left,ilabels[editlabel].top,FlabelRaDec);
+  if editlabelmod and assigned(FEditLabelPos) then FEditLabelPos(editlabel,ilabels[editlabel].left,ilabels[editlabel].top,ilabels[editlabel].Width,ilabels[editlabel].Height,FlabelRaDec);
 end;
 editlabel:=-1;
 end;
@@ -2600,7 +2600,7 @@ end;
 
 Procedure TSplot.EditlabelTxt(Sender: TObject);
 begin
-if (selectedlabel>0)and assigned(FEditLabelTxt) then FEditLabelTxt(selectedlabel,editlabelx,editlabely,false);
+if (selectedlabel>0)and assigned(FEditLabelTxt) then FEditLabelTxt(selectedlabel,editlabelx,editlabely,0,0,false);
 end;
 
 Procedure TSplot.DefaultLabel(Sender: TObject);
