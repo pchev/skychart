@@ -31,7 +31,7 @@ Add Tcp/Ip protocol, Patrick Chevalley Aug 2014
 
 interface
 
-Uses Forms, synaser, sysutils, FileUtil, synautil, blcksock;
+Uses Forms, synaser, sysutils, FileUtil, synautil, blcksock, synsock;
 
 Function OpenCom(var ser:TBlockSerial; CommPort,baud,parity,data,stop,timeouts,inttimeout : string):boolean;
 Function ReadCom(var ser:TBlockSerial; var buf : string; var count : integer) : boolean;
@@ -237,7 +237,7 @@ begin
 result:=false;
 if Tcpip_opened then begin
   buf:=Sock.RecvBufferStr(count,Tcp_timout);
-  result:=(Sock.LastError=0);
+  result:=(Sock.LastError=0)or(Sock.LastError=WSAETIMEDOUT);
   if debug then writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+' Read  : '+inttostr(count)+' *'+buf+'*');
 end;
 end;
