@@ -614,7 +614,7 @@ begin
    cfgsc.ObsRoSinPhi:=ratio*sin(u)+(cfgsc.ObsAltitude/H0)*sin(p);
    cfgsc.ObsRoCosPhi:=cos(u)+(cfgsc.ObsAltitude/H0)*cos(p);
    cfgsc.ObsRefractionCor:=(cfgsc.ObsPressure/1010)*(283/(273+cfgsc.ObsTemperature));
-   cfgsc.ObsHorizonDepression:=min(0,-deg2rad*sqrt(cfgsc.ObsAltitude)*0.02931+deg2rad*0.64658062088);
+   cfgsc.ObsHorizonDepression:=min(0,-deg2rad*sqrt(cfgsc.ObsAltitude)*0.02931+deg2rad*cfgsc.ObsRefractionCor*0.64658062088);
    sla_GEOC(p,cfgsc.ObsAltitude,cfgsc.ObsRAU,cfgsc.ObsZAU);
    cfgsc.Diurab := PI2*cfgsc.ObsRAU*SOLSID/C;
    cfgsc.ShowHorizonPicture:=cfgsc.ShowHorizonPicture and Fcatalog.cfgshr.horizonpicturevalid;
