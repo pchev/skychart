@@ -602,7 +602,7 @@ result:=true;
 end;
 
 function Tskychart.InitObservatory:boolean;
-var u,p : double;
+var u,p,r90,rm,dip,ht : double;
 const ratio = 0.99664719;
       H0 = 6378140.0 ;
       SOLSID=1.00273790935;  // Ratio between solar and sidereal time
@@ -613,8 +613,18 @@ begin
    u:=arctan(ratio*tan(p));
    cfgsc.ObsRoSinPhi:=ratio*sin(u)+(cfgsc.ObsAltitude/H0)*sin(p);
    cfgsc.ObsRoCosPhi:=cos(u)+(cfgsc.ObsAltitude/H0)*cos(p);
+   // compute refraction constant
    cfgsc.ObsRefractionCor:=(cfgsc.ObsPressure/1010)*(283/(273+cfgsc.ObsTemperature));
-   cfgsc.ObsHorizonDepression:=min(0,-deg2rad*sqrt(cfgsc.ObsAltitude)*0.02931+deg2rad*cfgsc.ObsRefractionCor*0.64658062088);
+   sla_REFCO(cfgsc.ObsAltitude,273.15+cfgsc.ObsTemperature,cfgsc.ObsPressure,cfgsc.ObsRH,RefractionWavelength,deg2rad*cfgsc.ObsLatitude,cfgsc.ObsTlr,1E-8,cfgsc.ObsRefA,cfgsc.ObsRefb);
+   // horizon dip  (Wittmann, 1997 Astron. Nachr. 318)
+   r90:=0;
+   Refraction(r90,true,cfgsc,2);
+   r90:=rad2deg*r90;
+   rm:= r90*((2*exp(cfgsc.ObsAltitude/8000))/(1+exp(-cfgsc.ObsAltitude/12300)));
+   dip:=sqrt(cfgsc.ObsAltitude)*0.02931;
+   ht:=dip+rm;
+   cfgsc.ObsHorizonDepression:=min(0,-deg2rad*ht+deg2rad*cfgsc.ObsRefractionCor*0.64658062088);
+   // diurnal abberation
    sla_GEOC(p,cfgsc.ObsAltitude,cfgsc.ObsRAU,cfgsc.ObsZAU);
    cfgsc.Diurab := PI2*cfgsc.ObsRAU*SOLSID/C;
    cfgsc.ShowHorizonPicture:=cfgsc.ShowHorizonPicture and Fcatalog.cfgshr.horizonpicturevalid;
@@ -935,8 +945,6 @@ if not TrackAltAz then begin
      cfgsc.acentre:=saveaz;
   end;
 end;
-// compute refraction constant
-sla_REFCO(cfgsc.ObsAltitude,273.15+cfgsc.ObsTemperature,cfgsc.ObsPressure,cfgsc.ObsRH,RefractionWavelength,deg2rad*cfgsc.ObsLatitude,cfgsc.ObsTlr,1E-8,cfgsc.ObsRefA,cfgsc.ObsRefb);
 // compute refraction error at the chart center
 Hz2Eq(cfgsc.acentre,cfgsc.hcentre,a,d,cfgsc);
 Eq2Hz(a,d,w,h,cfgsc) ;
