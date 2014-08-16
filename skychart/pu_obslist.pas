@@ -613,7 +613,7 @@ limittransit:=true;
      ra:=deg2rad*ra;
      de:=deg2rad*de;
      Precession(jd2000,cfgsc.JDChart,ra,de);
-     RiseSet(1,cfgsc.jd0,ra,de,hr,ht,hs,azr,azs,irc,cfgsc);
+     RiseSet(cfgsc.jd0,ra,de,hr,ht,hs,azr,azs,irc,cfgsc);
      if irc=2 then begin
        StringGrid1.Cells[4, i]:=rsNever;
        StringGrid1.Cells[5, i]:=rsNever;
