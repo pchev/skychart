@@ -3103,10 +3103,10 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    sc.cfgsc.projpole:=AltAz;
    sc.cfgsc.FindOk:=false; // invalidate the search result
    sc.cfgsc.theta:=0; // rotation = 0
-   if sc.catalog.cfgshr.EquinoxType<>2 then begin // ensure equinox of the date
-     sc.catalog.cfgshr.EquinoxType:=2;
-     sc.catalog.cfgshr.EquinoxChart:=rsDate;
-     sc.catalog.cfgshr.DefaultJDChart:=jd2000;
+   if sc.cfgsc.EquinoxType<>2 then begin // ensure equinox of the date
+     sc.cfgsc.EquinoxType:=2;
+     sc.cfgsc.EquinoxChart:=rsDate;
+     sc.cfgsc.DefaultJDChart:=jd2000;
      sc.cfgsc.CoordExpertMode:=false;
      sc.cfgsc.ApparentPos:=true;
      sc.cfgsc.PMon:=true;
@@ -4716,9 +4716,9 @@ catalog.cfgshr.ListVar:=true;
 catalog.cfgshr.ListDbl:=true;
 catalog.cfgshr.ListPla:=true;
 catalog.cfgshr.AzNorth:=true;
-catalog.cfgshr.EquinoxType:=2;
-catalog.cfgshr.EquinoxChart:=rsDate;
-catalog.cfgshr.DefaultJDchart:=jd2000;
+def_cfgsc.EquinoxType:=2;
+def_cfgsc.EquinoxChart:=rsDate;
+def_cfgsc.DefaultJDchart:=jd2000;
 catalog.cfgshr.StarFilter:=true;
 catalog.cfgshr.AutoStarFilter:=true;
 catalog.cfgshr.AutoStarFilterMag:=6.5;
@@ -5172,9 +5172,9 @@ except
 end;
 try
 section:='chart';
-catalog.cfgshr.EquinoxType:=ReadInteger(section,'EquinoxType',catalog.cfgshr.EquinoxType);
-catalog.cfgshr.EquinoxChart:=ReadString(section,'EquinoxChart',catalog.cfgshr.EquinoxChart);
-catalog.cfgshr.DefaultJDchart:=ReadFloat(section,'DefaultJDchart',catalog.cfgshr.DefaultJDchart);
+csc.EquinoxType:=ReadInteger(section,'EquinoxType',csc.EquinoxType);
+csc.EquinoxChart:=ReadString(section,'EquinoxChart',csc.EquinoxChart);
+csc.DefaultJDchart:=ReadFloat(section,'DefaultJDchart',csc.DefaultJDchart);
 except
   ShowError('Error reading '+filename+' chart');
 end;
@@ -5403,36 +5403,36 @@ csc.TimeZone:=csc.tz.SecondsOffset/3600;
 if not csc.CoordExpertMode then begin
 case csc.CoordType of
  0 : begin
-       catalog.cfgshr.EquinoxType:=2;
+       csc.EquinoxType:=2;
        csc.ApparentPos:=true;
        csc.PMon:=true;
        csc.YPmon:=0;
-       catalog.cfgshr.EquinoxChart:=rsDate;
-       catalog.cfgshr.DefaultJDChart:=jd2000;
+       csc.EquinoxChart:=rsDate;
+       csc.DefaultJDChart:=jd2000;
      end;
  1 : begin
-       catalog.cfgshr.EquinoxType:=2;
+       csc.EquinoxType:=2;
        csc.ApparentPos:=false;
        csc.PMon:=true;
        csc.YPmon:=0;
-       catalog.cfgshr.EquinoxChart:=rsDate;
-       catalog.cfgshr.DefaultJDChart:=jd2000;
+       csc.EquinoxChart:=rsDate;
+       csc.DefaultJDChart:=jd2000;
      end;
  2 : begin
-       catalog.cfgshr.EquinoxType:=0;
+       csc.EquinoxType:=0;
        csc.ApparentPos:=false;
        csc.PMon:=true;
        csc.YPmon:=2000;
-       catalog.cfgshr.EquinoxChart:='J2000';
-       catalog.cfgshr.DefaultJDChart:=jd2000;
+       csc.EquinoxChart:='J2000';
+       csc.DefaultJDChart:=jd2000;
      end;
  3 : begin
-       catalog.cfgshr.EquinoxType:=0;
+       csc.EquinoxType:=0;
        csc.ApparentPos:=false;
        csc.PMon:=true;
        csc.YPmon:=0;
-       catalog.cfgshr.EquinoxChart:='J2000';
-       catalog.cfgshr.DefaultJDChart:=jd2000;
+       csc.EquinoxChart:='J2000';
+       csc.DefaultJDChart:=jd2000;
      end;
 end;
 end;
@@ -6105,9 +6105,9 @@ for i:=1 to csc.nrectangle do WriteFloat(section,'RectangleOffset'+inttostr(i),c
 for i:=1 to csc.nrectangle do WriteBool(section,'ShowRectangle'+inttostr(i),csc.rectangleok[i]);
 for i:=1 to csc.nrectangle do WriteString(section,'RectangleLbl'+inttostr(i),csc.rectanglelbl[i]+' ');
 section:='chart';
-WriteInteger(section,'EquinoxType',catalog.cfgshr.EquinoxType);
-WriteString(section,'EquinoxChart',catalog.cfgshr.EquinoxChart);
-WriteFloat(section,'DefaultJDchart',catalog.cfgshr.DefaultJDchart);
+WriteInteger(section,'EquinoxType',csc.EquinoxType);
+WriteString(section,'EquinoxChart',csc.EquinoxChart);
+WriteFloat(section,'DefaultJDchart',csc.DefaultJDchart);
 section:='default_chart';
 if (child<>nil) then begin
   WriteInteger(section,'ChartWidth',child.Width);

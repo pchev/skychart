@@ -3127,7 +3127,7 @@ end
   else txt:=txt+html_br;
 
 // local position
-if (sc.catalog.cfgshr.Equinoxtype=2) then begin
+if (sc.cfgsc.Equinoxtype=2) then begin
   if not cmain.SimpleDetail then begin
   txt:=txt+html_b+rsVisibilityFo+':'+htms_b+html_br;
   djd(cjd+(sc.cfgsc.TimeZone-sc.cfgsc.DT_UT)/24,y,m,d,h);
@@ -3461,10 +3461,10 @@ if proj='ALTAZ' then sc.cfgsc.projpole:=altaz
   else if proj='ECLIPTIC' then sc.cfgsc.projpole:=ecl
   else result:=msgFailed+' Bad projection name.';
 sc.cfgsc.FindOk:=false;
-if (sc.cfgsc.projpole=altaz)and(sc.catalog.cfgshr.EquinoxType<>2) then begin // ensure equinox of the date for alt/az
-  sc.catalog.cfgshr.EquinoxType:=2;
-  sc.catalog.cfgshr.EquinoxChart:=rsDate;
-  sc.catalog.cfgshr.DefaultJDChart:=jd2000;
+if (sc.cfgsc.projpole=altaz)and(sc.cfgsc.EquinoxType<>2) then begin // ensure equinox of the date for alt/az
+  sc.cfgsc.EquinoxType:=2;
+  sc.cfgsc.EquinoxChart:=rsDate;
+  sc.cfgsc.DefaultJDChart:=jd2000;
   sc.cfgsc.CoordExpertMode:=false;
   sc.cfgsc.ApparentPos:=true;
   sc.cfgsc.PMon:=true;
@@ -4835,10 +4835,10 @@ if field>0 then begin
      else sc.cfgsc.fov:=field;
 end;
 sc.cfgsc.ProjPole:=Altaz;
-if (sc.catalog.cfgshr.EquinoxType<>2) then begin // ensure equinox of the date for alt/az
-  sc.catalog.cfgshr.EquinoxType:=2;
-  sc.catalog.cfgshr.EquinoxChart:=rsDate;
-  sc.catalog.cfgshr.DefaultJDChart:=jd2000;
+if (sc.cfgsc.EquinoxType<>2) then begin // ensure equinox of the date for alt/az
+  sc.cfgsc.EquinoxType:=2;
+  sc.cfgsc.EquinoxChart:=rsDate;
+  sc.cfgsc.DefaultJDChart:=jd2000;
   sc.cfgsc.CoordExpertMode:=false;
   sc.cfgsc.ApparentPos:=true;
   sc.cfgsc.PMon:=true;
@@ -4870,10 +4870,10 @@ sc.cfgsc.racentre:=sc.cfgsc.CurST-a;
 sc.cfgsc.decentre:=d;
 sc.cfgsc.ProjPole:=Altaz;
 sc.cfgsc.TrackOn:=false;
-if (sc.catalog.cfgshr.EquinoxType<>2) then begin // ensure equinox of the date for alt/az
-  sc.catalog.cfgshr.EquinoxType:=2;
-  sc.catalog.cfgshr.EquinoxChart:=rsDate;
-  sc.catalog.cfgshr.DefaultJDChart:=jd2000;
+if (sc.cfgsc.EquinoxType<>2) then begin // ensure equinox of the date for alt/az
+  sc.cfgsc.EquinoxType:=2;
+  sc.cfgsc.EquinoxChart:=rsDate;
+  sc.cfgsc.DefaultJDChart:=jd2000;
   sc.cfgsc.CoordExpertMode:=false;
   sc.cfgsc.ApparentPos:=true;
   sc.cfgsc.PMon:=true;
