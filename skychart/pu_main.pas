@@ -3977,6 +3977,10 @@ begin
        showast:=csc.ShowAsteroid;
        if (not csc.SunOnline)or(csc.sunurlname<>def_cfgsc.sunurlname) then DeleteFile(slash(Tempdir)+'sun.jpg');
        def_cfgsc.Assign(csc);
+       if f_calendar.Visible then begin
+          f_calendar.config.Assign(csc);
+          f_calendar.BtnRefreshClick(nil);
+       end;
     end;
     if cplot<>nil then begin
        def_cfgplot.Assign(cplot);
