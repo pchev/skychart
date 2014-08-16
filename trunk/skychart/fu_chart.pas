@@ -3152,7 +3152,7 @@ if (sc.catalog.cfgshr.Equinoxtype=2) then begin
   txt:=txt+html_b+rsLocalSideral+': '+htms_b+artostr3(rmod(rad2deg*cst/15+24,24))+html_br;
   txt:=txt+html_b+rsHourAngle+': '+htms_b+ARToStr3(rmod(rad2deg*(cst-ra)/15+24,24))+html_br;
   txt:=txt+html_b+rsAzimuth+': '+htms_b+deptostr(rad2deg*a,1)+html_br;
-  if h>=0 then txt:=txt+html_b+rsAltitude+': '+htms_b+deptostr(rad2deg*h,1)+html_br; // show refracted altitude only if above the horizon
+  if h>=sc.cfgsc.ObsHorizonDepression then txt:=txt+html_b+rsAltitude+': '+htms_b+deptostr(rad2deg*h,1)+html_br; // show refracted altitude only if above the horizon
   txt:=txt+html_b+rsGeometricAlt+': '+htms_b+deptostr(rad2deg*hg, 1)+html_br;
   if h>0 then begin
     airm:=1/sin(h+deg2rad*(244/(165+47*(rad2deg*h)**1.1))); // Pickering, "The Southern Limits of the Ancient Star Catalog" DIO 2002
