@@ -459,7 +459,7 @@ end;
 
 procedure Tf_config_chart.ShowChart;
 begin
-equinox2.text:=stringreplace(stringreplace(stringreplace(cshr.EquinoxChart,'J','',[]),'B','',[]),rsDate,'2000.0',[]);
+equinox2.text:=stringreplace(stringreplace(stringreplace(csc.EquinoxChart,'J','',[]),'B','',[]),rsDate,'2000.0',[]);
 epoch2.Value:=csc.YPmon;
 PMBox.checked:=csc.PMon;
 if csc.ApparentPos then ApparentType.ItemIndex:=1
@@ -708,7 +708,7 @@ end;
 
 procedure Tf_config_chart.SetExpertEquinox;
 begin
-cshr.EquinoxType:=1;
+csc.EquinoxType:=1;
 csc.PMon:=PMBox.checked;
 csc.ApparentPos:=(ApparentType.ItemIndex=1);
 equinox2Change(nil);
@@ -717,9 +717,9 @@ end;
 procedure Tf_config_chart.equinox2Change(Sender: TObject);
 begin
 if LockChange then exit;
-if (cshr.EquinoxType=1)and(trim(equinox2.text)>'') then begin
-     cshr.EquinoxChart:=equinox2.text;
-     cshr.DefaultJDChart:=jd(trunc(equinox2.Value),trunc(frac(equinox2.Value)*12)+1,0,0);
+if (csc.EquinoxType=1)and(trim(equinox2.text)>'') then begin
+     csc.EquinoxChart:=equinox2.text;
+     csc.DefaultJDChart:=jd(trunc(equinox2.Value),trunc(frac(equinox2.Value)*12)+1,0,0);
 end;
 end;
 
@@ -736,7 +736,7 @@ end;
 procedure Tf_config_chart.epoch2Change(Sender: TObject);
 begin
 if LockChange then exit;
-if (cshr.EquinoxType=1)and(trim(epoch2.text)>'') then begin
+if (csc.EquinoxType=1)and(trim(epoch2.text)>'') then begin
      csc.YPmon:=epoch2.Value;
 end;
 end;
@@ -744,9 +744,9 @@ end;
 procedure Tf_config_chart.SetDefaultApparent;
 begin
 ExpertMode.Enabled:=(csc.ProjPole<>1);
-cshr.EquinoxType:=2;
-cshr.EquinoxChart:=rsDate;
-cshr.DefaultJDChart:=jd2000;
+csc.EquinoxType:=2;
+csc.EquinoxChart:=rsDate;
+csc.DefaultJDChart:=jd2000;
 csc.CoordExpertMode:=false;
 csc.ApparentPos:=true;
 csc.PMon:=true;
@@ -791,40 +791,40 @@ procedure Tf_config_chart.CoordTypeClick(Sender: TObject);
 begin
 if LockChange then exit;
 if Sender is TRadioGroup then begin
-if cshr.EquinoxType=1 then exit;
+if csc.EquinoxType=1 then exit;
 csc.CoordType:=CoordType.ItemIndex;
 case CoordType.ItemIndex of
  0 : begin
-       cshr.EquinoxType:=2;
+       csc.EquinoxType:=2;
        csc.ApparentPos:=true;
        csc.PMon:=true;
        csc.YPmon:=0;
-       cshr.EquinoxChart:=rsDate;
-       cshr.DefaultJDChart:=jd2000;
+       csc.EquinoxChart:=rsDate;
+       csc.DefaultJDChart:=jd2000;
      end;
  1 : begin
-       cshr.EquinoxType:=2;
+       csc.EquinoxType:=2;
        csc.ApparentPos:=false;
        csc.PMon:=true;
        csc.YPmon:=0;
-       cshr.EquinoxChart:=rsDate;
-       cshr.DefaultJDChart:=jd2000;
+       csc.EquinoxChart:=rsDate;
+       csc.DefaultJDChart:=jd2000;
      end;
  2 : begin
-       cshr.EquinoxType:=0;
+       csc.EquinoxType:=0;
        csc.ApparentPos:=false;
        csc.PMon:=true;
        csc.YPmon:=2000;
-       cshr.EquinoxChart:='J2000';
-       cshr.DefaultJDChart:=jd2000;
+       csc.EquinoxChart:='J2000';
+       csc.DefaultJDChart:=jd2000;
      end;
  3 : begin
-       cshr.EquinoxType:=0;
+       csc.EquinoxType:=0;
        csc.ApparentPos:=false;
        csc.PMon:=true;
        csc.YPmon:=0;
-       cshr.EquinoxChart:='J2000';
-       cshr.DefaultJDChart:=jd2000;
+       csc.EquinoxChart:='J2000';
+       csc.DefaultJDChart:=jd2000;
      end;
 end;
 end;

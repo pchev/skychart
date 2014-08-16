@@ -858,9 +858,6 @@ type
     DegreeGridSpacing: array [0..MaxField] of double;
     ShowCRose, SimplePointer: boolean; //  compass rose
     CRoseSz: integer;
-    EquinoxType: integer;
-    DefaultJDchart: double;
-    EquinoxChart: string;
     AzNorth, ListNeb, ListStar, ListVar, ListDbl, ListPla: boolean;
     ConstelName: array of array[1..2] of string;
     // constellation three letter abbrev and name.
@@ -892,6 +889,9 @@ type
     EarthB, abv, ehn: coordvector;
     NutMAT, EqpMAT, EqtMAT: rotmatrix;
     ProjEquatorCentered: boolean;
+    EquinoxType: integer;
+    DefaultJDchart: double;
+    EquinoxChart: string;
     Force_DT_UT, horizonopaque, autorefresh, TrackOn, TargetOn,
     Quick, NP, SP, moved, abm, asl, ShowScale: boolean;
     projtype: char;
@@ -1915,9 +1915,6 @@ begin
   ShowCRose := Source.ShowCRose;
   SimplePointer := Source.SimplePointer;
   CRoseSz := Source.CRoseSz;
-  EquinoxType := Source.EquinoxType;
-  DefaultJDchart := Source.DefaultJDchart;
-  EquinoxChart := Source.EquinoxChart;
   AzNorth := Source.AzNorth;
   ListNeb := Source.ListNeb;
   ListStar := Source.ListStar;
@@ -2052,6 +2049,9 @@ begin
       EqtMAT[i, j] := Source.EqtMAT[i, j];
     end;
   ProjEquatorCentered := Source.ProjEquatorCentered;
+  EquinoxType := Source.EquinoxType;
+  DefaultJDchart := Source.DefaultJDchart;
+  EquinoxChart := Source.EquinoxChart;
   haicx := Source.haicx;
   haicy := Source.haicy;
   eqeq := Source.eqeq;

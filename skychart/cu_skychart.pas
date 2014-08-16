@@ -568,12 +568,12 @@ if cfgsc.CurJDTT<>cfgsc.LastJD then begin
    if not cfgsc.NewArtSat then cfgsc.ShowArtSat:=false;  // satellite position not valid
 end;
 cfgsc.LastJD:=cfgsc.CurJDTT;
-if (Fcatalog.cfgshr.Equinoxtype=2) then begin  // use equinox of the date
+if (cfgsc.Equinoxtype=2) then begin  // use equinox of the date
    cfgsc.JDChart:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone);  // UT
    cfgsc.EquinoxName:=rsDate;
 end else begin
-   cfgsc.JDChart:=Fcatalog.cfgshr.DefaultJDChart;
-   cfgsc.EquinoxName:=fcatalog.cfgshr.EquinoxChart;
+   cfgsc.JDChart:=cfgsc.DefaultJDChart;
+   cfgsc.EquinoxName:=cfgsc.EquinoxChart;
 end;
 if (cfgsc.lastJDchart<-1E20) then cfgsc.lastJDchart:=cfgsc.JDchart; // initial value
 // position of J2000 pole in current coordinates
@@ -2817,7 +2817,7 @@ var txt,thr,tht,ths,tazr,tazs: string;
     cjd0,ra,dec,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des :double;
     i,y,m,d: integer;
 begin
- if (Fcatalog.cfgshr.Equinoxtype=2) then begin
+ if (cfgsc.Equinoxtype=2) then begin
     // mode= 0 star, 1..11 planet
      if (mode>0) and (cfgsc.FindSimjd<>0) then begin
         Djd(cfgsc.FindSimjd+(cfgsc.TimeZone-cfgsc.DT_UT)/24,y,m,d,h);
