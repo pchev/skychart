@@ -333,6 +333,7 @@ FActiveChild:=FChildIndex;
 if Assigned(FWindowList) then begin
   try
   m:=TmenuItem.Create(self);
+  m.Name:='MenuChild_'+ inttostr(FChildIndex);
   m.Caption:='Child '+ inttostr(FChildIndex);
   m.Tag:=100+FChildIndex;
   m.OnClick:=@FocusChildClick;
