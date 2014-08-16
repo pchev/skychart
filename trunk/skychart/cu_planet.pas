@@ -2548,7 +2548,7 @@ sina:=(sin(deg2rad*cfgsc.Obslatitude) * sin(de) + cos(deg2rad*cfgsc.Obslatitude)
 end;
 
 procedure TPlanet.PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ;var i: integer; cfgsc: Tconf_skychart);
-var hr,ht,hs,h1,h2,azr,azs,dist,q,diam : double;
+var hr,ht,hs,h1,h2,azr,azs,dist,q,diam,dh : double;
     ho,sinho,dt,hh,y1,y2,y3,x1,x2,x3,xmax,ymax,xmax2,ymax2,ymax0,ra,de,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13: double;
     frise,fset,ftransit: boolean;
     n: integer;
@@ -2566,12 +2566,15 @@ case pla of
   34..35: pla:=8; // nep sat
   36: pla:=9;     // pluto sat
 end;
+dh:=0;
+if cfgsc.ShowHorizonDepression then dh:=rad2deg*cfgsc.ObsHorizonDepression;
+if dh=0 then dh:=-0.5667;
 case pla of
-1..9: ho:=-0.5667;
-10 : ho:=-0.8333;
+1..9: ho:=dh;
+10 : ho:=dh-0.2667;
 11: begin
     Moon(jd0+(cfgsc.DT_UT/24),ra,de,dist,dm5,diam,dm7,dm8);
-    ho:=(8.794/dist/3600)-0.5748*cfgsc.ObsRefractionCor-diam/2/3600-0.04;
+    ho:=(8.794/dist/3600)+dh*cfgsc.ObsRefractionCor-diam/2/3600-0.04;
     end;
 end;
 sinho:=sin(deg2rad*ho);

@@ -83,8 +83,8 @@ Procedure Gal2Eq(l,b: double; var ar,de : double; c: Tconf_skychart);
 Procedure Eq2Gal(ar,de : double; var l,b: double; c: Tconf_skychart);
 //Function int3(n,y1,y2,y3 : double): double;
 Procedure int4(y1,y2,y3:double; var n: integer; var x1,x2,xmax,ymax: double);
-Procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer; c: Tconf_skychart; dho:double=9999);
-          (* typeobj = 1 etoile ; typeobj = 2 soleil,lune
+Procedure RiseSet(jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer; c: Tconf_skychart);
+          (* Only for ponctual objects, see cu_planet.pas TPlanet.PlanetRiseSet for the planets
             ar,de equinox of the date
             irc = 0 lever et coucher
             irc = 1 circumpolaire
@@ -1292,13 +1292,13 @@ l:=rmod(l+pi2,pi2);
 b:=double(arcsin(sin(de)*sin(dp)+cos(de)*cos(dp)*cos(ar)));
 end;
 
-procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer; c: Tconf_skychart; dho:double=9999);
-const ho : array[1..3] of Double = (-0.5667,-0.8333,0.125) ;
+procedure RiseSet(jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer; c: Tconf_skychart);
 var hoo,hs0,chh0,hh0,m0,m1,m2,a0 : double;
     hsg,hl,h,dm,longref : double;
 begin
-if (typobj=3)and(dho<9999) then hoo:=dho
-   else hoo:=ho[typobj];
+hoo:=0;
+if c.ShowHorizonDepression then hoo:=rad2deg*c.ObsHorizonDepression;
+if hoo=0 then hoo:=-0.5667;
 longref:=-c.timezone*15;
 hs0 := sidtim(jd0,-c.timezone,longref);
 chh0 :=(sin(deg2rad*hoo)-sin(deg2rad*c.ObsLatitude)*sin(de))/(cos(deg2rad*c.ObsLatitude)*cos(de)) ;
@@ -1307,12 +1307,12 @@ if abs(chh0)<=1 then begin
    m0:=(ar+deg2rad*c.ObsLongitude-deg2rad*longref-hs0)/pi2;
    m1:=m0-hh0/pi2;
    m2:=m0+hh0/pi2;
-   if m0<0 then m0:=m0+1;
-   if m0>1 then m0:=m0-1;
-   if m1<0 then m1:=m1+1;
-   if m1>1 then m1:=m1-1;
-   if m2<0 then m2:=m2+1;
-   if m2>1 then m2:=m2-1;
+   while m0<0 do m0:=m0+1;
+   while m0>1 do m0:=m0-1;
+   while m1<0 do m1:=m1+1;
+   while m1>1 do m1:=m1-1;
+   while m2<0 do m2:=m2+1;
+   while m2>1 do m2:=m2-1;
    // rise
    hsg:= hs0 + deg2rad*360.985647 * m1;
    hl:= hsg - deg2rad*c.Obslongitude + deg2rad*longref - ar;

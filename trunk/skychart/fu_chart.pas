@@ -3174,7 +3174,7 @@ if (sc.catalog.cfgshr.Equinoxtype=2) then begin
          ra:=sc.cfgsc.FindRA;
          dec:=sc.cfgsc.FindDec;
          precession(sc.cfgsc.JDChart,cjd,ra,dec);
-         RiseSet(1,cjd0,ra,dec,hr,ht,hs,azr,azs,i,sc.cfgsc);
+         RiseSet(cjd0,ra,dec,hr,ht,hs,azr,azs,i,sc.cfgsc);
          if sc.catalog.cfgshr.AzNorth then begin
             Azr:=rmod(Azr+pi,pi2);
             Azs:=rmod(Azs+pi,pi2);

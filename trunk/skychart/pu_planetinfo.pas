@@ -447,7 +447,7 @@ ipla:=10;
 Fplanet.Sun(config.CurJDTT,ar,de,dist,diam);
 precession(jd2000,config.CurJDUT,ar,de);
 if (ar<0) then ar:=ar+pi2;
-RiseSet(1,config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);
+RiseSet(config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);
 case i of
   0: PlotLine(bmp,pla[ipla],yc,de,hp1,hp2,ht);
   1: PlotLine(bmp,pla[ipla],yc,de,0,24,ht);
@@ -459,7 +459,7 @@ yc:=yc+ys;
 Fplanet.Moon(config.CurJDTT,ar,de,dist,dkm,diam,phase,illum);
 precession(jd2000,config.CurJDUT,ar,de);
 if (ar<0) then ar:=ar+pi2;
-RiseSet(1,config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);
+RiseSet(config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);
 case i of
   0: PlotLine(bmp,pla[ipla],yc,de,hp1,hp2,ht);
   1: PlotLine(bmp,pla[ipla],yc,de,0,24,ht);
@@ -472,7 +472,7 @@ for ipla:=1 to 8 do begin
   Fplanet.Planet(ipla,config.CurJDTT,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel);
   precession(jd2000,config.CurJDUT,ar,de);
   if (ar<0) then ar:=ar+pi2;
-  RiseSet(1,config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);
+  RiseSet(config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);
   case i of
     0: PlotLine(bmp,pla[ipla],yc,de,hp1,hp2,ht);
     1: PlotLine(bmp,pla[ipla],yc,de,0,24,ht);
@@ -489,7 +489,7 @@ begin
 if ShowCurrentObject and config.FindOK and (config.FindType<>ftPla) then begin
   ys:=trunc((ymax-ymin)/11);
   yc:=ymax-ys;
-  RiseSet(1,config.jd0,config.FindRA,config.FindDec,hp1,ht,hp2,azr,azs,i,config);
+  RiseSet(config.jd0,config.FindRA,config.FindDec,hp1,ht,hp2,azr,azs,i,config);
   case i of
     0: PlotLine(bmp,config.FindName,yc,config.FindDec,hp1,hp2,ht);
     1: PlotLine(bmp,config.FindName,yc,config.FindDec,0,24,ht);

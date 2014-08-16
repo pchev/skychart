@@ -2832,7 +2832,7 @@ begin
     else begin // fixed object
          ra:=cfgsc.FindRA;
          dec:=cfgsc.FindDec;
-         RiseSet(1,cjd0,ra,dec,hr,ht,hs,azr,azs,i,cfgsc);
+         RiseSet(cjd0,ra,dec,hr,ht,hs,azr,azs,i,cfgsc);
          thr:=armtostr(rmod(hr+24,24));
          tht:=armtostr(rmod(ht+24,24));
          ths:=armtostr(rmod(hs+24,24));

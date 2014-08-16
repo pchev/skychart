@@ -2608,16 +2608,16 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
          cells[4,i]:=demtostr(rad2deg*elong);
          cells[5,i]:=demtostr(rad2deg*phase);
          objects[0,i]:=SetObjCoord(jda,ra,dec);
-         RiseSet(1,jd0,ra,dec,hr1,ht1,hs1,azr,azs,irc,config);
+         RiseSet(jd0,ra,dec,hr1,ht1,hs1,azr,azs,irc,config);
          Fplanet.Comet(jd0+rmod((hr1-config.TimeZone)+24,24)/24,false,ra1,dec1,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
          precession(jd2000,config.jdchart,ra1,dec1);
-         RiseSet(1,jd0,ra1,dec1,hr,ht2,hs2,azr,azs,irc2,config);
+         RiseSet(jd0,ra1,dec1,hr,ht2,hs2,azr,azs,irc2,config);
          Fplanet.Comet(jd0+rmod((ht1-config.TimeZone)+24,24)/24,false,ra2,dec2,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
          precession(jd2000,config.jdchart,ra2,dec2);
-         RiseSet(1,jd0,ra2,dec2,hr2,ht,hs2,azr,azs,irc2,config);
+         RiseSet(jd0,ra2,dec2,hr2,ht,hs2,azr,azs,irc2,config);
          Fplanet.Comet(jd0+rmod((hs1-config.TimeZone)+24,24)/24,false,ra3,dec3,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
          precession(jd2000,config.jdchart,ra3,dec3);
-         RiseSet(1,jd0,ra3,dec3,hr2,ht2,hs,azr,azs,irc2,config);
+         RiseSet(jd0,ra3,dec3,hr2,ht2,hs,azr,azs,irc2,config);
          case irc of
           0 : begin
            cells[6,i]:=armtostr(hr);
@@ -2792,16 +2792,16 @@ if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
          cells[4,i]:=demtostr(rad2deg*elong);
          cells[5,i]:=demtostr(rad2deg*phase);
          objects[0,i]:=SetObjCoord(jda,ra,dec);
-         RiseSet(1,jd0,ra,dec,hr1,ht1,hs1,azr,azs,irc,config);
+         RiseSet(jd0,ra,dec,hr1,ht1,hs1,azr,azs,irc,config);
          Fplanet.Asteroid(jd0+rmod((hr1-config.TimeZone)+24,24)/24,false,ra1,dec1,dist,r,elong,phase,magn,xac,yac,zac);
          precession(jd2000,config.jdchart,ra1,dec1);
-         RiseSet(1,jd0,ra1,dec1,hr,ht2,hs2,azr,azs,irc2,config);
+         RiseSet(jd0,ra1,dec1,hr,ht2,hs2,azr,azs,irc2,config);
          Fplanet.Asteroid(jd0+rmod((ht1-config.TimeZone)+24,24)/24,false,ra2,dec2,dist,r,elong,phase,magn,xac,yac,zac);
          precession(jd2000,config.jdchart,ra2,dec2);
-         RiseSet(1,jd0,ra2,dec2,hr2,ht,hs2,azr,azs,irc2,config);
+         RiseSet(jd0,ra2,dec2,hr2,ht,hs2,azr,azs,irc2,config);
          Fplanet.Asteroid(jd0+rmod((hs1-config.TimeZone)+24,24)/24,false,ra3,dec3,dist,r,elong,phase,magn,xac,yac,zac);
          precession(jd2000,config.jdchart,ra3,dec3);
-         RiseSet(1,jd0,ra3,dec3,hr2,ht2,hs,azr,azs,irc2,config);
+         RiseSet(jd0,ra3,dec3,hr2,ht2,hs,azr,azs,irc2,config);
          case irc of
           0 : begin
            cells[6,i]:=armtostr(hr);
