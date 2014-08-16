@@ -623,7 +623,7 @@ begin
    rm:= r90*((2*exp(cfgsc.ObsAltitude/8000))/(1+exp(-cfgsc.ObsAltitude/12300)));
    dip:=sqrt(cfgsc.ObsAltitude)*0.02931;
    ht:=dip+rm;
-   cfgsc.ObsHorizonDepression:=min(0,-deg2rad*ht+deg2rad*cfgsc.ObsRefractionCor*0.64658062088);
+   cfgsc.ObsHorizonDepression:=min(0,-deg2rad*ht);
    // diurnal abberation
    sla_GEOC(p,cfgsc.ObsAltitude,cfgsc.ObsRAU,cfgsc.ObsZAU);
    cfgsc.Diurab := PI2*cfgsc.ObsRAU*SOLSID/C;
@@ -4022,6 +4022,7 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
      // Horizon depression line
      first:=true; xp:=0;yp:=0;
      h:=cfgsc.ObsHorizonDepression;
+     Refraction(h,true,cfgsc,refmethod); // draw the line at the right altitude relative to the refracted stars
      if h<0 then for i:=1 to 360 do begin
        az:=deg2rad*rmod(360+i-1-180,360);
        proj2(-az,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
