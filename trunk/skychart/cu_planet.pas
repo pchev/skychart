@@ -525,29 +525,34 @@ end;
 
 
 Procedure TPlanet.PlanetOrientation(jde:double; ipla:integer; var P,De,Ds,w1,w2,w3 : double);
+// Report of the IAU Working Group on Cartographic
+// Coordinates and Rotational Elements: 2009
+// + 2011 Erratum
+
 const VP : array[1..10,1..4] of double = (
-          (281.01,-0.033,61.54,-0.005),   //mercure
-          (272.6,0,67.16,0),              //venus
+          (281.0097,-0.0328,61.4143,-0.0049), //mercure
+          (272.76,0,67.16,0),             //venus
           (0,-0.641,90,-0.557),           //earth
-          (317.681,-0.108,52.886,-0.061), //mars
-          (268.05,-0.009,64.49,0.003),    //jupiter
-          (40.859,-0.036,83.537,-0.004),  //saturn
+          (317.68143,-0.1061,52.88650,-0.0609), //mars
+          (268.056595,-0.006499,64.495303,0.002413), //jupiter
+          (40.589,-0.036,83.537,-0.004),  //saturn
           (257.311,0,-15.175,0),          //uranus
           (299.36,0.70,43.46,-0.51),      //neptune !
-          (313.02,0,9.09,0),              //pluto
+          (132.993,0,-6.163,0),           //pluto
           (286.13,0,63.87,0));            //sun
       W : array[1..10,1..2] of double =(
-          (329.68,6.1385025),
+          (329.5469,6.1385025),
           (160.20,-1.4813688),
-          (190.16,360.9856235),
-          (176.901,350.8919830),
-          (67.1,877.90003539),
-          (227.2037,844.3),
+          (190.147,360.9856235),
+          (176.630,350.89198226),
+          (67.1,877.90003539),   //System I
+          (227.2037,844.3),      //System I
           (203.81,-501.1600928),
           (253.18,536.3128492),
-          (236.77,-56.3623195),
-          (84.10,14.1844000));
+          (302.695,56.3625225),
+          (84.176,14.1844000));
 var d,T,N,a0,d0,l0,b0,r0,l1,b1,r1,x,y,z,del,eps,als,des,u,v,al,dl,f,th,k,i : double;
+    M1,M2,M3,M4,M5,Ja,Jb,Jc,Jd,Je : double;
     pl :TPlanData;
 begin
 d := (jde-jd2000);
@@ -567,14 +572,34 @@ if ipla=10 then begin  // sun
   n:=arctan2(-sin(l0-k)*cos(i),-cos(l0-k));
   w1:=to360(rad2deg*n-th);
 end else begin
-if ipla=8 then N:=sin(357.85+52.316*T)  // Neptune
+if ipla=8 then N:=cos(deg2rad*(357.85+52.316*T))   // Neptune
+          else N:=T;
+// coordinates of the pole
+d0:=deg2rad*(VP[ipla,3]+VP[ipla,4]*N);
+if ipla=8 then N:=sin(deg2rad*(357.85+52.316*T))
           else N:=T;
 a0:=deg2rad*(VP[ipla,1]+VP[ipla,2]*N);
-if ipla=8 then N:=cos(357.85+52.316*T)
-          else N:=T;
-d0:=deg2rad*(VP[ipla,3]+VP[ipla,4]*N);
+if ipla=5 then begin
+  Ja:=deg2rad*(99.360714+4850.4046*T);
+  Jb:=deg2rad*(175.895369+1191.9605*T);
+  Jc:=deg2rad*(300.323162+262.5475*T);
+  Jd:=deg2rad*(114.012305+6070.2476*T);
+  Je:=deg2rad*(49.511251+64.3000*T);
+  a0:=a0+0.000117*sin(Ja)+0.000938*sin(Jb)+0.001432*sin(Jc)+0.000030*sin(Jd)+0.002150*sin(Je);
+  d0:=d0+0.000050*cos(Ja)+0.000404*cos(Jb)+0.000617*cos(Jc)-0.000013*cos(Jd)+0.000926*cos(Je);
+end;
 precession(jd2000,jde,a0,d0);
+// rotation
 w1:=W[ipla,1]+W[ipla,2]*d;
+if ipla=1 then begin
+  M1:=deg2rad*(174.791086+4.092335*d);
+  M2:=deg2rad*(349.582171+8.184670*d);
+  M3:=deg2rad*(164.373257+12.277005*d);
+  M4:=deg2rad*(339.164343+16.369340*d);
+  M5:=deg2rad*(153.955429+20.461675*d);
+  w1:=w1+0.00993822*sin(M1)-0.00104581*sin(M2)-0.00010280*sin(M3)-0.00002364*sin(M4)-0.00000532*sin(M5);
+end;
+if ipla=8 then w1:=w1-0.48*N;  // N=sin(..)
 if ipla=5 then begin
    w2:=43.3+870.27003539*d;
    w3:=284.95+870.5360000*d;
@@ -585,6 +610,7 @@ end else begin
    w2:=-999;
    w3:=-999;
 end;
+// view from Earth
 Plan(3,jde,pl);
 PrecessionEcl(jd2000,jde,pl.l,pl.b);
 l0:=pl.l; b0:=pl.b; r0:=pl.r;
@@ -612,7 +638,7 @@ al:=arctan2(u,x);
 dl:=arctan(v/sqrt(x*x+u*u));
 f:=rad2deg*(arctan2(sin(d0)*cos(dl)*cos(a0-al)-sin(dl)*cos(d0),cos(dl)*sin(a0-al)));
 De:=rad2deg*(arcsin(-sin(d0)*sin(dl)-cos(d0)*cos(dl)*cos(a0-al)));
-w1:=to360(w1-f-del*tlight*W[ipla,2]);
+w1:=to360((w1-f-del*tlight*W[ipla,2])*sgn(W[ipla,2]));
 if ipla=5 then begin
    w2:=to360(w2-f-del*tlight*870.27003539);
    w3:=to360(w3-f-del*tlight*870.5360000);
