@@ -67,6 +67,8 @@ function InvertF64(X : Int64) : Double;
 Procedure DToS(t: Double; var h,m,s : integer);
 Function DEToStr(de: Double) : string;
 Function ARtoStr(ar: Double) : string;
+Function ARToStrShort(ar: Double) : string;
+Function DEToStrShort(de: Double) : string;
 Function DEmToStr(de: Double) : string;
 Function DEdToStr(de: Double) : string;
 Function DEToStrmin(de: Double) : string;
@@ -851,6 +853,68 @@ begin
     if abs(sec)<9.95 then s:='0'+trim(s);
     result := d+'h'+m+'m'+s+'s';
 end;
+
+Function ARToStrShort(ar: Double) : string;
+var dd,min1,min,sec: Double;
+    sg,d,m,s : string;
+begin
+    if ar>=0 then sg:='' else sg:='-';
+    ar:=abs(ar);
+    dd:=Int(ar);
+    min1:=abs(ar-dd)*60;
+    if min1>=59.999166667 then begin
+       dd:=dd+sgn(ar);
+       if dd=24 then dd:=0;
+       min1:=0.0;
+    end;
+    min:=Int(min1);
+    sec:=(min1-min)*60;
+    if sec>=59.95 then begin
+       min:=min+1;
+       sec:=0.0;
+    end;
+    str(dd:3:0,d);
+    str(min:2:0,m);
+    if abs(min)<10 then m:='0'+trim(m);
+    str(sec:4:1,s);
+    if abs(sec)<9.95 then s:='0'+trim(s);
+    result:=sg;
+    if dd<>0 then result:=result+d+'h';
+    if min<>0 then result:=result+m+'m';
+    result:=result+s+'s';
+end;
+
+Function DEToStrShort(de: Double) : string;
+var dd,min1,min,sec: Double;
+    sg,d,m,s : string;
+begin
+    if de>=0 then sg:='' else sg:='-';
+    de:=abs(de);
+    dd:=Int(de);
+    min1:=abs(de-dd)*60;
+    if min1>=59.99166667 then begin
+       dd:=dd+sgn(de);
+       min1:=0.0;
+    end;
+    min:=Int(min1);
+    sec:=(min1-min)*60;
+    if sec>=59.5 then begin
+       min:=min+1;
+       sec:=0.0;
+    end;
+    str(abs(dd):2:0,d);
+    if abs(dd)<10 then d:='0'+trim(d);
+    if de<0 then d:='-'+d else d:='+'+d;
+    str(min:2:0,m);
+    if abs(min)<10 then m:='0'+trim(m);
+    str(sec:2:0,s);
+    if abs(sec)<9.5 then s:='0'+trim(s);
+    result:=sg;
+    if dd<>0 then result:=result+d+ldeg;
+    if min<>0 then result:=result+m+lmin;
+    result:=result+s+lsec;
+end;
+
 
 Function DEpToStr(de: Double; precision:integer=1) : string;
 var dd,min1,min,sec,p,pmin,psec: Double;

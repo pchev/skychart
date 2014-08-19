@@ -1538,6 +1538,7 @@ CL.AddConstantN('rsIPAddress','String').SetString(rsIPAddress);
 CL.AddConstantN('rsTCPPort','String').SetString(rsTCPPort);
 CL.AddConstantN('rsCommunicatio','String').SetString(rsCommunicatio);
 CL.AddConstantN('rsSocketConfig','String').SetString(rsSocketConfig);
+CL.AddConstantN('rsHourlyMotion','String').SetString(rsHourlyMotion);
 
 end;
 

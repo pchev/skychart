@@ -2836,12 +2836,15 @@ var desc,buf,buf2,otype,oname,txt,s1,s2,s3: UTF8String;
     searchdir,fn: string;
     bmp: Tbitmap;
     ipla:integer;
-    i,p,l,y,m,d,precision : integer;
+    i,p,l,y,m,d,precision,pa : integer;
     isStar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
     ApparentValid:boolean;
     ra,dec,q,a,h,ag,airm,hg,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
     ra2000,de2000,radate,dedate,raapp,deapp,cjd,cjd0,cst,err,gw: double;
     r:TStringList;
+    tp,ec,ap,an,ic,g,eq,cra,cdec,dist,rr,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc,ma,sa,dx,dy : double;
+    nam,elem_id,ref : string;
+
 
 function Bold(s:string):string;
 var k:integer;
@@ -3044,6 +3047,30 @@ repeat
      txt:=txt+buf2;
   txt:=txt+html_br;
 until buf='';
+
+
+// object motion
+dist:=0;
+if otype='Cm' then begin
+  sc.cdb.GetComElem(sc.cfgsc.FindId,sc.cfgsc.TrackEpoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id);
+  sc.planet.InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
+  sc.planet.Comet(cjd+1/24,true,cra,cdec,dist,rr,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
+  dist := rad2deg*angulardistance(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec);
+end;
+if otype='As' then begin
+  sc.cdb.GetAstElem(sc.cfgsc.FindId,sc.cfgsc.TrackEpoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id);
+  sc.planet.InitAsteroid(sc.cfgsc.TrackEpoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
+  sc.planet.Asteroid(cjd+1/24,true,cra,cdec,dist,rr,elong,phase,magn,xc,yc,zc);
+  dist := rad2deg*angulardistance(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec);
+end;
+if dist<>0 then begin
+  pa:=round(rmod(rad2deg*PositionAngle(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec)+360,360));
+  dx:=rmod((rad2deg*(cra-sc.cfgsc.FindRA2000)/15)+24,24);
+  if dx>12 then dx:=dx-24;
+  dy:=rad2deg*(cdec-sc.cfgsc.FindDec2000);
+  txt:=txt+html_b+rsHourlyMotion+': '+htms_b+DEToStrShort(dist)+' PA:'+inttostr(pa)+ldeg;
+  txt:=txt+' dRA:'+ARToStrShort(dx)+' dDec:'+DEToStrShort(dy)+html_br;
+end;
 
 if not cmain.SimpleDetail then begin
   // coordinates
