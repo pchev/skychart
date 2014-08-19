@@ -1553,6 +1553,7 @@ resourcestring
   rsTCPPort = 'TCP port';
   rsCommunicatio = 'Communication protocol';
   rsSocketConfig = 'Socket configuration';
+  rsHourlyMotion = 'Hourly motion';
 
 implementation
 
