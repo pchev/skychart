@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-11 15:36+0000\n"
-"PO-Revision-Date: 2014-06-21 21:18+0000\n"
+"POT-Creation-Date: 2014-08-24 09:15+0000\n"
+"PO-Revision-Date: 2014-08-15 16:30+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-11 15:44+0000\n"
-"X-Generator: Launchpad (build 17156)\n"
+"X-Launchpad-Export-Date: 2014-08-24 09:33+0000\n"
+"X-Generator: Launchpad (build 17163)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -259,7 +259,7 @@ msgstr "zawsze"
 
 #: u_translation.rsalwaysaddmer
 msgid "Always add meridian"
-msgstr ""
+msgstr "Zawsze pokazuj południk niebieski"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -771,7 +771,7 @@ msgstr "mapa:"
 
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
-msgstr ""
+msgstr "Pokaż krzyż na środku mapy"
 
 #: u_translation.rschartcoordin
 msgid "Chart, coordinates"
@@ -939,7 +939,7 @@ msgstr "Nazwa własna"
 
 #: u_translation.rscommunicatio
 msgid "Communication protocol"
-msgstr ""
+msgstr "Protokół komunikacyjny"
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
@@ -2501,6 +2501,10 @@ msgstr "Kąt godzinny"
 msgid "Grid spacing in hour for equatorial grid"
 msgstr "Odstępy siatki w godzinach dla współrzędnych równikowych"
 
+#: u_translation.rshourlymotion
+msgid "Hourly motion"
+msgstr ""
+
 #: u_translation.rshours
 msgid "hours"
 msgstr "godziny"
@@ -2711,7 +2715,7 @@ msgstr "Niewidoczne na tej szerokości geograficznej"
 
 #: u_translation.rsipaddress
 msgid "IP address"
-msgstr ""
+msgstr "Adres IP"
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
@@ -4567,7 +4571,7 @@ msgstr "Znaleziono profil %s koncentratora SAMP, lecz nie zawiera on wymaganej w
 
 #: u_translation.rssampisamessa
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
-msgstr "SAMP jest protokołem przekazywania komunikatów, który umożliwia aplikacjom astronomicznym komunikację i współpracę.%sSkychart może wysyłać i odbierać współrzędne, obrazy FITS oraz tabele VO."
+msgstr "SAMP jest protokołem wymiany komunikatów, który umożliwia programom astronomicznym komunikację i współpracę.%sSkychart może wysyłać i odbierać współrzędne, obrazy FITS oraz tabele VO."
 
 #: u_translation.rssampsendcoor
 msgid "SAMP send coordinates"
@@ -4879,7 +4883,7 @@ msgstr "Ustaw cel na %s"
 
 #: u_translation.rssettelescope
 msgid "Set location and time"
-msgstr ""
+msgstr "Ustaw lokalizację i czas"
 
 #: u_translation.rssettime
 msgid "Set Time"
@@ -5143,7 +5147,7 @@ msgstr "M"
 
 #: u_translation.rssocketconfig
 msgid "Socket configuration"
-msgstr ""
+msgstr "Konfiguracja gniazda"
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
@@ -5331,11 +5335,11 @@ msgstr "Pasek stanu"
 
 #: u_translation.rsstepinto
 msgid "Step Into"
-msgstr ""
+msgstr "Wejdź do funkcji"
 
 #: u_translation.rsstepover
 msgid "Step Over"
-msgstr ""
+msgstr "Przejdź"
 
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
@@ -5455,7 +5459,7 @@ msgstr "Usługa TCP/IP nie jest dostępna"
 
 #: u_translation.rstcpport
 msgid "TCP port"
-msgstr ""
+msgstr "Port TCP"
 
 #: u_translation.rstelescope
 msgid "Telescope"

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-11 15:36+0000\n"
+"POT-Creation-Date: 2014-08-24 09:15+0000\n"
 "PO-Revision-Date: 2014-05-21 07:50+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-11 15:44+0000\n"
-"X-Generator: Launchpad (build 17156)\n"
+"X-Launchpad-Export-Date: 2014-08-24 09:32+0000\n"
+"X-Generator: Launchpad (build 17163)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -2500,6 +2500,10 @@ msgstr "Angle horari"
 #: u_translation.rshourgridspac
 msgid "Grid spacing in hour for equatorial grid"
 msgstr "Espaiat de la graella equatorial en hores"
+
+#: u_translation.rshourlymotion
+msgid "Hourly motion"
+msgstr ""
 
 #: u_translation.rshours
 msgid "hours"

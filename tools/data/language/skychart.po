@@ -6090,3 +6090,7 @@ msgstr ""
 msgid "Socket configuration"
 msgstr ""
 
+#: u_translation:rshourlymotion
+msgid "Hourly motion"
+msgstr ""
+

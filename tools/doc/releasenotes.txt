@@ -8,6 +8,8 @@ New functions:
   * New representation for the Milky Way. This can be activated from the menu Setup / Display / Lines by unchecking "Milky Way - Line mode".
   * Option to add a crosshair to the chart center.
   * Option to add the meridian line with any projection.
+  * Add Tcp/Ip connection to the LX200 telescope interface.
+  * Show comet and asteroid hourly motion in the detail window.
 
 Corrections:
 
