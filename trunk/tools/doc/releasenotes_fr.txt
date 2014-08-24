@@ -8,6 +8,8 @@ Nouvelles fonctions:
   * Nouvelle représentation pour la Voie Lactée. Vous pouvez l'activer à partir du menu Configuration / Affichage / Lignes, en décochant "Voie lactée - Mode ligne".
   * Possibilité d'ajouter un réticule au centre de la carte. 
   * Option pour ajouter la ligne méridienne avec toute projection.
+  * Ajout de la connexion Tcp/Ip à l'interface télescope LX200. 
+  * Affiche le déplacement horaire des comètes et astéroïdes dans la fenêtre de détail.
 
 Corrections:
 

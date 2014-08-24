@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-11 15:36+0000\n"
-"PO-Revision-Date: 2014-06-17 07:50+0000\n"
+"POT-Creation-Date: 2014-08-24 09:15+0000\n"
+"PO-Revision-Date: 2014-08-22 17:47+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-11 15:44+0000\n"
-"X-Generator: Launchpad (build 17156)\n"
+"X-Launchpad-Export-Date: 2014-08-24 09:32+0000\n"
+"X-Generator: Launchpad (build 17163)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -255,7 +255,7 @@ msgstr "siempre"
 
 #: u_translation.rsalwaysaddmer
 msgid "Always add meridian"
-msgstr ""
+msgstr "Añadir siempre meridiano"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -767,7 +767,7 @@ msgstr "carta:"
 
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
-msgstr ""
+msgstr "Añadir un retículo en el centro de la carta"
 
 #: u_translation.rschartcoordin
 msgid "Chart, coordinates"
@@ -935,7 +935,7 @@ msgstr "Nombre común"
 
 #: u_translation.rscommunicatio
 msgid "Communication protocol"
-msgstr ""
+msgstr "Protocolo de comunicación"
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
@@ -2498,6 +2498,10 @@ msgstr "Ángulo horario"
 msgid "Grid spacing in hour for equatorial grid"
 msgstr "Espaciado cuadrícula en horas para cuadrícula ecuatorial"
 
+#: u_translation.rshourlymotion
+msgid "Hourly motion"
+msgstr ""
+
 #: u_translation.rshours
 msgid "hours"
 msgstr "horas"
@@ -2708,7 +2712,7 @@ msgstr "Invisible a esta latitud"
 
 #: u_translation.rsipaddress
 msgid "IP address"
-msgstr ""
+msgstr "Dirección IP"
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
@@ -4876,7 +4880,7 @@ msgstr "Establecer como objetivo %s"
 
 #: u_translation.rssettelescope
 msgid "Set location and time"
-msgstr ""
+msgstr "Establecer lugar y hora"
 
 #: u_translation.rssettime
 msgid "Set Time"
@@ -5140,7 +5144,7 @@ msgstr "M."
 
 #: u_translation.rssocketconfig
 msgid "Socket configuration"
-msgstr ""
+msgstr "Configuración del socket"
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
@@ -5452,7 +5456,7 @@ msgstr "Servicio TCP/IP no disponible."
 
 #: u_translation.rstcpport
 msgid "TCP port"
-msgstr ""
+msgstr "Puerto TCP"
 
 #: u_translation.rstelescope
 msgid "Telescope"
