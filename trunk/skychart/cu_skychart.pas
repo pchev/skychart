@@ -837,7 +837,7 @@ end;
          end;
      2 : begin
          // comet
-         if cdb.GetComElem(cfgsc.TrackId,cfgsc.TrackEpoch,v1,v2,v3,v4,v5,v6,v7,v8,v9,s1,s2) then begin
+         if cdb.GetComElem(cfgsc.TrackId,cfgsc.TrackElemEpoch,v1,v2,v3,v4,v5,v6,v7,v8,v9,s1,s2) then begin
             Fplanet.InitComet(v1,v2,v3,v4,v5,v6,v7,v8,v9,s1);
             Fplanet.Comet(cfgsc.CurJDTT,true,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12);
             precession(jd2000,cfgsc.JDChart,a,d);
@@ -854,8 +854,8 @@ end;
          end;
      3 : begin
          // asteroid
-         if cdb.GetAstElem(cfgsc.TrackId,cfgsc.TrackEpoch,v1,v2,v3,v4,v5,v6,v7,v8,v9,s1,s2,s3) then begin
-            Fplanet.InitAsteroid(cfgsc.TrackEpoch,v1,v2,v3,v4,v5,v6,v7,v8,v9,s2);
+         if cdb.GetAstElem(cfgsc.TrackId,cfgsc.TrackElemEpoch,v1,v2,v3,v4,v5,v6,v7,v8,v9,s1,s2,s3) then begin
+            Fplanet.InitAsteroid(cfgsc.TrackElemEpoch,v1,v2,v3,v4,v5,v6,v7,v8,v9,s2);
             Fplanet.Asteroid(cfgsc.CurJDTT,true,a,d,dist,v1,v2,v3,v4,v5,v6,v7);
             precession(jd2000,cfgsc.JDChart,a,d);
             cfgsc.LastJDChart:=cfgsc.JDChart;

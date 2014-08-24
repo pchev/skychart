@@ -947,7 +947,7 @@ type
     FindSimjd, AstmagMax, AstMagDiff, CommagMax, Commagdiff: double;
     TimeZone, DT_UT, DT_UTerr, CurST, CurJDTT, CurJDUT, LastJD, jd0,
     JDChart, YPmon, LastJDChart, FindJD, CurSunH, CurMoonH, CurMoonIllum, ScopeRa,
-    ScopeDec, TrackEpoch, TrackRA, TrackDec, TargetRA, TargetDec, FindPMra,
+    ScopeDec, TrackElemEpoch, TrackEpoch, TrackRA, TrackDec, TargetRA, TargetDec, FindPMra,
     FindPMde, FindPMEpoch, FindPMpx, FindPMrv, FindDist, FindBV, FindMag: double;
     Scope2Ra,Scope2Dec: double;
     DrawAllStarLabel, MovedLabelLine, StarFilter, NebFilter,
@@ -2306,6 +2306,7 @@ begin
   Scope2Ra := Source.Scope2Ra;
   Scope2Dec := Source.Scope2Dec;
   TrackEpoch := Source.TrackEpoch;
+  TrackElemEpoch := Source.TrackElemEpoch;
   TrackRA := Source.TrackRA;
   TrackDec := Source.TrackDec;
   StarFilter := Source.StarFilter;
