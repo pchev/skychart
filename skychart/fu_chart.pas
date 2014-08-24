@@ -759,7 +759,7 @@ try
     if lastundo>maxundo then lastundo:=1;
     undolist[lastundo].Assign(sc.cfgsc);
     curundo:=lastundo;
-    if sc.cfgsc.FindOk and (not cmain.SimpleDetail) then ShowIdentLabel;
+    if sc.cfgsc.FindOk and (not cmain.SimpleDetail) and (sc.cfgsc.FindName=sc.cfgsc.TrackName) then ShowIdentLabel;
     if assigned(FShowTopMessage) then FShowTopMessage(sc.GetChartInfo,self);
     if assigned(FShowTitleMessage) then FShowTitleMessage(sc.GetChartPos,self);
     Image1.Cursor:=ChartCursor;
