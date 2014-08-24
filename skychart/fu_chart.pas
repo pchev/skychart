@@ -2267,7 +2267,7 @@ else begin
     sc.movetoradec(ar1,de1);
     Refresh;
     // try to get more information and show the label
-    if (itype=ftOnline) or (not IdentXY(sc.cfgsc.Xcentre,sc.cfgsc.Ycentre,false,true)) then begin
+    if (itype=ftOnline) or (not IdentXY(sc.cfgsc.Xcentre,sc.cfgsc.Ycentre,false,true,itype)) then begin
       // object not found
       // online search result
       if itype=ftOnline then begin
@@ -3052,16 +3052,18 @@ until buf='';
 // object motion
 dist:=0;
 if otype='Cm' then begin
-  sc.cdb.GetComElem(sc.cfgsc.FindId,sc.cfgsc.TrackEpoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id);
-  sc.planet.InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
-  sc.planet.Comet(cjd+1/24,true,cra,cdec,dist,rr,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
-  dist := rad2deg*angulardistance(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec);
+  if sc.cdb.GetComElem(sc.cfgsc.FindId,sc.cfgsc.TrackElemEpoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) then begin
+    sc.planet.InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
+    sc.planet.Comet(cjd+1/24,true,cra,cdec,dist,rr,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
+    dist := rad2deg*angulardistance(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec);
+  end;
 end;
 if otype='As' then begin
-  sc.cdb.GetAstElem(sc.cfgsc.FindId,sc.cfgsc.TrackEpoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id);
-  sc.planet.InitAsteroid(sc.cfgsc.TrackEpoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
-  sc.planet.Asteroid(cjd+1/24,true,cra,cdec,dist,rr,elong,phase,magn,xc,yc,zc);
-  dist := rad2deg*angulardistance(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec);
+  if sc.cdb.GetAstElem(sc.cfgsc.FindId,sc.cfgsc.TrackElemEpoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
+    sc.planet.InitAsteroid(sc.cfgsc.TrackEpoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
+    sc.planet.Asteroid(cjd+1/24,true,cra,cdec,dist,rr,elong,phase,magn,xc,yc,zc);
+    dist := rad2deg*angulardistance(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec);
+  end;
 end;
 if dist<>0 then begin
   pa:=round(rmod(rad2deg*PositionAngle(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec)+360,360));

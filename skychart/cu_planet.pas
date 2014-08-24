@@ -52,6 +52,7 @@ type
     jdnew,jdaststart,jdastend,jdaststep,jdchart,com_limitmag:double;
     ast_daypos,com_daypos: string;
     Feph_method: string;
+    searchid: string;
     smsg:Tstrings;
     SolAstrometric, SolBarycenter : boolean;
     CurrentStep,CurrentPlanet,n_com,n_ast,jdastnstep : integer;
@@ -125,6 +126,7 @@ begin
  lockpla:=false;
  lockdb:=false;
  Feph_method:='';
+ searchid:='';
  de_type:=0;
  de_year:=-999999;
  if DBtype=mysql then begin
@@ -2073,6 +2075,7 @@ else
 qry:=qry+' and (de>'+inttostr(round(1000*(cfgsc.decentre-d)))
     +' and de<'+inttostr(round(1000*(cfgsc.decentre+d)))+'))';
 if cfgsc.AstNEO then qry:=qry+' or (near_earth=1)';
+if searchid<>'' then qry:=qry+' or (id="'+searchid+'")';
 qry:=qry+' limit '+inttostr(MaxAsteroid) ;
 db2.Query(qry);
 if db2.Rowcount>0 then begin
@@ -2151,8 +2154,10 @@ else
            +' and ra<'+inttostr(round(1000*(cfgsc.racentre+da)))+')';
 
 qry:=qry+' and (de>'+inttostr(round(1000*(cfgsc.decentre-d)))
-    +' and de<'+inttostr(round(1000*(cfgsc.decentre+d)))+')) or (near_earth=1)'
-    +' limit '+inttostr(MaxComet) ;
+    +' and de<'+inttostr(round(1000*(cfgsc.decentre+d)))+'))'
+    +' or (near_earth=1)';
+if searchid<>'' then qry:=qry+' or (id="'+searchid+'")';
+qry:=qry+' limit '+inttostr(MaxComet) ;
 db2.Query(qry);
 if db2.Rowcount>0 then begin
   if cfgsc.SimObject[13] then SimNb:=min(cfgsc.Simnb,MaxAstSim)
@@ -2212,6 +2217,7 @@ var dist,r,elong,phase,rad,ded : double;
   ira,idec,imag: integer;
 begin
 result:=false;
+searchid:='';
 if (not db1.Active)or(not cfgsc.ephvalid) then exit;
 qry:='SELECT id FROM cdc_ast_name'
     +' where name like "%'+astname+'%"'
@@ -2237,6 +2243,7 @@ if cdb.GetAstElemEpoch(id,cfgsc.CurJDTT,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,e
             +',"'+inttostr(imag)+'")';
        db1.Query(qry);
        db1.flush('tables');
+       searchid:=id;
    end;
    result:=true;
 end
@@ -2247,9 +2254,10 @@ function TPlanet.FindCometName(comname: String; var ra,de,mag:double; cfgsc: Tco
 var dist,r,elong,phase,rad,ded : double;
   epoch,h,g,ap,an,ic,ec,eq,tp,q,diam,lc,car,cde,rc,xc,yc,zc : double;
   qry,id,nam,elem_id :string;
-  ira,idec,imag: integer;
+  ira,idec,imag,i: integer;
 begin
 result:=false;
+searchid:='';
 if (not db1.Active)or(not cfgsc.ephvalid) then exit;
 qry:='SELECT id FROM cdc_com_name'
     +' where name like "%'+comname+'%"'
@@ -2276,6 +2284,7 @@ if cdb.GetComElemEpoch(id,cfgsc.CurJDTT,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_i
        db1.Query(qry);
        qry:=db1.ErrorMessage;
        db1.flush('tables');
+       searchid:=id;
    end;
    result:=true;
 end
@@ -2360,7 +2369,7 @@ if result then begin
   if abs(cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5]-cfgsc.CurJDUT)>180 then desc:=desc+rsWarningSomeA+tab;
   cfgsc.TrackType:=3;
   cfgsc.TrackId:=cfgsc.AsteroidName[CurrentAstStep,CurrentAsteroid,1];
-  cfgsc.TrackEpoch:=cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5];
+  cfgsc.TrackElemEpoch:=cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5];
   cfgsc.TrackName:=nom;
   cfgsc.FindId:=cfgsc.AsteroidName[CurrentAstStep,CurrentAsteroid,1];
   cfgsc.FindX:=xc;
@@ -2454,7 +2463,7 @@ if result then begin
   if abs(cfgsc.CometLst[CurrentComStep,CurrentComet,8]-cfgsc.CurJDUT)>180 then desc:=desc+rsWarningSomeC+tab;
   cfgsc.TrackType:=2;
   cfgsc.TrackId:=cfgsc.CometName[CurrentComStep,CurrentComet,1];
-  cfgsc.TrackEpoch:=cfgsc.CometLst[CurrentComStep,CurrentComet,8];
+  cfgsc.TrackElemEpoch:=cfgsc.CometLst[CurrentComStep,CurrentComet,8];
   cfgsc.TrackName:=nom;
   cfgsc.FindId:=cfgsc.CometName[CurrentComStep,CurrentComet,1];
   cfgsc.FindX:=xc;
