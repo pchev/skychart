@@ -1,0 +1,108 @@
+object ConvForm: TConvForm
+  Left = 442
+  Height = 295
+  Top = 126
+  Width = 330
+  Caption = 'Constellation Figures'
+  ClientHeight = 295
+  ClientWidth = 330
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '1.2.4.0'
+  object BitBtn1: TBitBtn
+    Left = 16
+    Height = 25
+    Hint = 'Run the convertion program'
+    Top = 248
+    Width = 91
+    Caption = 'Convert'
+    OnClick = BitBtn1Click
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+  end
+  object GroupBox1: TGroupBox
+    Left = 16
+    Height = 65
+    Hint = 'Select here your modified constellation figure file.'
+    Top = 8
+    Width = 281
+    Caption = 'Input File'
+    ClientHeight = 35
+    ClientWidth = 277
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
+    object FilenameEdit1: TEdit
+      Left = 22
+      Height = 20
+      Top = 10
+      Width = 226
+      TabOrder = 0
+      Text = 'DefaultConstL.txt'
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 16
+    Height = 65
+    Hint = 'Do not change this value if you want your constellation figure to be used directly with Cartes du Ciel'
+    Top = 80
+    Width = 281
+    Caption = 'Output File'
+    ClientHeight = 35
+    ClientWidth = 277
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+    object FilenameEdit2: TEdit
+      Left = 22
+      Height = 20
+      Top = 10
+      Width = 226
+      TabOrder = 0
+      Text = 'DefaultConstL.cln'
+    end
+  end
+  object BitBtn2: TBitBtn
+    Left = 124
+    Height = 25
+    Hint = 'Exit without running the program'
+    Top = 248
+    Width = 75
+    Caption = 'Close'
+    OnClick = BitBtn2Click
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 3
+  end
+  object Label1: TLabel
+    Left = 23
+    Height = 14
+    Top = 232
+    Width = 37
+    Caption = 'Label1'
+    ParentColor = False
+  end
+  object GroupBox3: TGroupBox
+    Left = 16
+    Height = 64
+    Top = 160
+    Width = 281
+    Caption = 'Proper motion for epoch'
+    ClientHeight = 34
+    ClientWidth = 277
+    TabOrder = 4
+    object Edit1: TEdit
+      Left = 29
+      Height = 20
+      Top = 6
+      Width = 131
+      TabOrder = 0
+      Text = '2000'
+    end
+  end
+end
