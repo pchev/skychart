@@ -5705,6 +5705,16 @@ for i:=1 to MaxDSSurl do begin
 end;
 f_getdss.cfgdss.OnlineDSS:=ReadBool(section,'OnlineDSS',f_getdss.cfgdss.OnlineDSS);
 f_getdss.cfgdss.OnlineDSSid:=ReadInteger(section,'OnlineDSSid',f_getdss.cfgdss.OnlineDSSid);
+section:='jpleph';
+nJPL_DE:=ReadInteger(section,'num',0);
+if nJPL_DE>0 then begin
+  SetLength(JPL_DE,nJPL_DE+1);
+  for i:=1 to nJPL_DE do JPL_DE[i]:=ReadInteger(section,'JPL_DE'+inttostr(i),0);
+end else begin
+  nJPL_DE:=DefaultnJPL_DE;
+  SetLength(JPL_DE,nJPL_DE+1);
+  for i:=1 to nJPL_DE do JPL_DE[i]:=DefaultJPL_DE[i];
+end;
 section:='obslist';
 cfgm.InitObsList:=ReadString(section,'listname','');
 cfgm.ObslistAirmass:=ReadString(section,'airmass',f_obslist.AirmassCombo.Text);
@@ -6504,6 +6514,9 @@ for i:=1 to MaxDSSurl do begin
 end;
 WriteBool(section,'OnlineDSS',f_getdss.cfgdss.OnlineDSS);
 WriteInteger(section,'OnlineDSSid',f_getdss.cfgdss.OnlineDSSid);
+section:='jpleph';
+WriteInteger(section,'num',nJPL_DE);
+for i:=1 to nJPL_DE do WriteInteger(section,'JPL_DE'+inttostr(i),JPL_DE[i]);
 section:='obslist';
 buf:=UTF8ToSys(f_obslist.FileNameEdit1.FileName);
 if buf<>'' then begin

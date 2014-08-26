@@ -35,6 +35,14 @@ type
   { Tf_config_solsys }
 
   Tf_config_solsys = class(TFrame)
+    ButtonEphDefault: TButton;
+    ButtonEphAdd: TButton;
+    ButtonEphDel: TButton;
+    ButtonEphUp: TButton;
+    ButtonEphDown: TButton;
+    EditEph: TEdit;
+    GroupBox2: TGroupBox;
+    ListBoxEph: TListBox;
     smallsat: TCheckBox;
     ComboBox2: TComboBox;
     AstNeo: TCheckBox;
@@ -212,6 +220,11 @@ type
     OpenDialog1: TOpenDialog;
     PageControl1: TPageControl;
     procedure AstNeoClick(Sender: TObject);
+    procedure ButtonEphAddClick(Sender: TObject);
+    procedure ButtonEphDefaultClick(Sender: TObject);
+    procedure ButtonEphDelClick(Sender: TObject);
+    procedure ButtonEphDownClick(Sender: TObject);
+    procedure ButtonEphUpClick(Sender: TObject);
     procedure CheckBoxPlutoChange(Sender: TObject);
     procedure ComboBox1Select(Sender: TObject);
     procedure ComboBox2Select(Sender: TObject);
@@ -283,6 +296,7 @@ type
     procedure Lock; // old FormClose
     procedure SetLang;
     procedure LoadSampleData;
+    procedure ActivateJplEph;
     property onShowDB: TNotifyEvent read FShowDB write FShowDB;
     property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
@@ -513,6 +527,9 @@ if PlanetMode.itemindex=2 then begin
 end else begin
    SunPanel.Visible:=false;
 end;
+ListBoxEph.clear;
+for i:=1 to nJPL_DE do ListBoxEph.Items.Add(IntToStr(JPL_DE[i]));
+ListBoxEph.TopIndex:=0;
 end;
 
 procedure Tf_config_solsys.ShowComet;
@@ -681,6 +698,58 @@ end;
 procedure Tf_config_solsys.AstNeoClick(Sender: TObject);
 begin
   csc.AstNEO := AstNeo.Checked;
+end;
+
+procedure Tf_config_solsys.ButtonEphAddClick(Sender: TObject);
+begin
+if IsInteger(EditEph.Text) then  begin
+   ListBoxEph.Items.Insert(0,EditEph.Text);
+   ListBoxEph.TopIndex:=0;
+end;
+end;
+
+procedure Tf_config_solsys.ButtonEphDefaultClick(Sender: TObject);
+var i:integer;
+begin
+ListBoxEph.clear;
+for i:=1 to DefaultnJPL_DE do ListBoxEph.Items.Add(IntToStr(DefaultJPL_DE[i]));
+end;
+
+procedure Tf_config_solsys.ButtonEphDelClick(Sender: TObject);
+begin
+ListBoxEph.Items.Delete(ListBoxEph.ItemIndex);
+end;
+
+procedure Tf_config_solsys.ButtonEphDownClick(Sender: TObject);
+var p:integer;
+begin
+p:=ListBoxEph.ItemIndex;
+if p<(ListBoxEph.Count-1) then begin
+  ListBoxEph.Items.Move(p,p+1);
+  ListBoxEph.ItemIndex:=p+1;
+end;
+end;
+
+procedure Tf_config_solsys.ButtonEphUpClick(Sender: TObject);
+var p:integer;
+begin
+p:=ListBoxEph.ItemIndex;
+if p>0 then begin
+  ListBoxEph.Items.Move(p,p-1);
+  ListBoxEph.ItemIndex:=p-1;
+end;
+end;
+
+procedure Tf_config_solsys.ActivateJplEph;
+var i: integer;
+begin
+nJPL_DE:=ListBoxEph.Count;
+SetLength(JPL_DE,nJPL_DE+1);
+for i:=1 to nJPL_DE do JPL_DE[i]:=StrToIntDef(ListBoxEph.Items[i-1],0);
+de_type:=0;
+de_jdcheck:=MaxInt;
+de_jdstart:=MaxInt;
+de_jdend:=-MaxInt;
 end;
 
 procedure Tf_config_solsys.Lock;
