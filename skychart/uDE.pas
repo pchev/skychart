@@ -185,6 +185,7 @@ begin
           jdstart:=de_eph.ephem_start+de_eph.ephem_step;
           jdend:=de_eph.ephem_end-de_eph.ephem_step;
           result := true;
+          break;
         end;
      end;
      i:=FindNext(fs);
