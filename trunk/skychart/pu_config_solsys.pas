@@ -41,6 +41,7 @@ type
     Button4: TButton;
     f_config_solsys1: Tf_config_solsys;
     Panel1: TPanel;
+    procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -84,7 +85,13 @@ end;
 
 procedure Tf_configsolsys.Button2Click(Sender: TObject);
 begin
+ f_config_solsys1.ActivateJplEph;
  if assigned(f_config_solsys1.onApplyConfig) then f_config_solsys1.onApplyConfig(f_config_solsys1);
+end;
+
+procedure Tf_configsolsys.Button1Click(Sender: TObject);
+begin
+  f_config_solsys1.ActivateJplEph;
 end;
 
 procedure Tf_configsolsys.Button4Click(Sender: TObject);

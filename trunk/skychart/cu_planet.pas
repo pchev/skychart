@@ -128,7 +128,9 @@ begin
  Feph_method:='';
  searchid:='';
  de_type:=0;
- de_year:=-999999;
+ de_jdcheck:=MaxInt;
+ de_jdstart:=MaxInt;
+ de_jdend:=-MaxInt;
  if DBtype=mysql then begin
    db1:=TMyDB.create(self);
    db2:=TMyDB.create(self);
@@ -2782,32 +2784,29 @@ end;
 function TPlanet.load_de(t: double): boolean;
 var
   i: integer;
-  y,ys,ye,m,d : integer;
-  hour,jdstart,jdend: double;
 begin
-djd(t,y,m,d,hour);
-if y=de_year then begin
+if (t>de_jdstart)and(t<de_jdend) then begin
+  // a file is already loaded for this date
   result:=(de_type<>0);
-end else begin
+end
+else if trunc(t)=de_jdcheck then begin
+  // we know that no file match this date
+  result:=(de_type<>0);
+end
+else begin
+  // search a file for the date
   result:=false;
   de_type:=0;
+  de_jdcheck:=trunc(t);
+  de_jdstart:=MaxInt;
+  de_jdend:=-MaxInt;
   for i:=1 to nJPL_DE do begin
-     if load_de_file(t,de_folder,JPL_DE[i],de_filename,jdstart,jdend) then begin
+     if load_de_file(t,de_folder,JPL_DE[i],de_filename,de_jdstart,de_jdend) then begin
        result:=true;
        de_type:=JPL_DE[i];
        break;
      end;
   end;
-  if result then begin
-    djd(jdstart,ys,m,d,hour);
-    djd(jdend,ye,m,d,hour);
-    if (y=ys)or(y=ye) then
-       de_year:=MaxInt
-    else
-       de_year:=y;
-  end
-   else
-    de_year:=MaxInt;
 end;
 end;
 

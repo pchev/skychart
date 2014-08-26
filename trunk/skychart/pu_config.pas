@@ -377,6 +377,7 @@ end;
 procedure Tf_config.OKBtnClick(Sender: TObject);
 begin
   f_config_observatory1.Button6Click(nil);
+  f_config_solsys1.ActivateJplEph;
 end;
 
 procedure Tf_config.nextClick(Sender: TObject);
@@ -555,6 +556,7 @@ end;
 procedure Tf_config.applyClick(Sender: TObject);
 begin
 f_config_observatory1.Button6Click(nil);
+f_config_solsys1.ActivateJplEph;
 ActivateChanges;
 if assigned(FApplyConfig) then FApplyConfig(Self);
 end;

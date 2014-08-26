@@ -318,8 +318,8 @@ const
   D0ura: array [1..18] of double = (236, 581, 585, 789, 761,13,16,22,33,29,42,55,29,34,77,5,5,5);
   D0nep: array [1..8] of double = (1350, 170,29,40,74,79,104,218);
   D0plu: array [1..1] of double = (605);
-  nJPL_DE = 9;
-  JPL_DE: array [1..nJPL_DE] of integer = (430, 431 ,423, 421, 422, 405, 406, 403, 200);
+  DefaultnJPL_DE = 9;
+  DefaultJPL_DE: array [1..DefaultnJPL_DE] of integer = (430, 431 ,423, 421, 422, 405, 406, 403, 200);
   // JPL ephemeris to try, order by preference
 
   blank15 = '               ';
@@ -1241,7 +1241,8 @@ var
   crRetic: TCursor = 5;
   Params: TStringList;
   de_folder,de_filename: string;
-  de_type, de_year: integer;
+  de_type, de_jdcheck : integer;
+  de_jdstart, de_jdend: double;
   NumIndiDriver: integer;
   IndiDriverLst: array of array of string;
   VerboseMsg: boolean = False;
@@ -1258,6 +1259,8 @@ var
   CatAnimation,CatDirection,CatDrawing,CatEdit,CatFile,CatFilter,CatFOV,CatGrid,CatInformation,CatLabel,
   CatLines,CatLock,CatObject,CatOrientation,CatPictures,CatPrint,CatProjection,CatSearch,CatSetup,
   CatSetupOption,CatTelescope,CatTools,CatUndo,CatView,CatWindow,CatZoom :string;
+  nJPL_DE: integer;
+  JPL_DE: array of integer;
 
 {$ifdef darwin}
   OpenFileCMD: string = 'open';

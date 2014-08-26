@@ -30,6 +30,7 @@ object f_configsolsys: Tf_configsolsys
       Caption = 'OK'
       Default = True
       ModalResult = 1
+      OnClick = Button1Click
       TabOrder = 1
     end
     object Button2: TButton
@@ -87,15 +88,12 @@ object f_configsolsys: Tf_configsolsys
           ClientHeight = 524
           ClientWidth = 498
           inherited Label12: TLabel
-            Height = 16
             Width = 117
           end
           inherited Label131: TLabel
-            Height = 16
             Width = 62
           end
           inherited Label3: TLabel
-            Height = 16
             Width = 332
           end
           inherited planetdir: TDirectoryEdit
@@ -113,6 +111,9 @@ object f_configsolsys: Tf_configsolsys
         inherited Page2: TTabSheet
           ClientHeight = 524
           ClientWidth = 498
+          inherited PlanetMode: TRadioGroup
+            ClientHeight = 99
+          end
         end
         inherited Page3: TTabSheet
           ClientHeight = 524
