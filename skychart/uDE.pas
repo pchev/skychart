@@ -168,126 +168,30 @@ end;
 
 function load_de_file(jd: double; de_folder: string; de_type: integer; var de_filename:string; var jdstart,jdend: double): boolean;
 var
-    de_file : string;
-    de_y,y,m,d : integer;
-    hour: double;
+  fs: TSearchRec;
+  i: integer;
 begin
-    //first we need to extract the year
-    result := false;
-    djd(jd,y,m,d,hour);
-    //using the year to find the file and name it.
-    Case de_type of
-         200: begin  //1600 to 2200 - 50 years steps
-                  jdstart:= 2305424.5;
-                  jdend:= 2513392.5;
-                  if InRange(jd, jdstart, jdend) then begin
-                      de_y := 1600 + floor((y - 1600) / 50) * 50;
-                      de_file := 'unxp' + floatToStr(de_y) + '.200';
-                  end else exit;
-              end;
-        403:  begin  //1600 to 2200 - 100 years step
-                    jdstart:= 2305200.5;
-                    jdend:= 2524400.5;
-                    if InRange(jd, jdstart, jdend) then begin
-                      de_y := 1600 + floor((y - 1600) / 100) * 100;
-                      de_file := 'lnxp' + floatToStr(de_y) + '.403';
-                      if not fileexists(de_folder +DirectorySeparator+ de_file) then begin
-                         de_file := 'unxp' + floatToStr(de_y) + '.403';
-                      end;
-                    end else exit;
-              end;
-        405:  begin  //1600 to 2200 - 150 or 50 years step
-                  jdstart:= 2305424.5;
-                  jdend:= 2525008.5;
-                  if InRange(jd, jdstart, jdend) then begin
-                          de_y := 1600 + floor((y - 1600) / 150) * 150;
-                          de_file := 'lnx' + floatToStr(de_y) + '.405';
-                          if not fileexists(de_folder +DirectorySeparator+ de_file) then begin
-                             de_y := 1600 + floor((y - 1600) / 50) * 50;
-                             de_file := 'unxp' + floatToStr(de_y) + '.405';
-                          end;
-                  end else exit;
-              end;
-        406:  begin  // -3000 to 3000 - 1 file or 300 years step
-                  jdstart:= 625360.5;
-                  jdend:= 2816912.5;
-                  if InRange(jd, jdstart, jdend) then begin
-                      de_file := 'lnxm3000p3000.406';
-                      if not fileexists(de_folder +DirectorySeparator+ de_file) then de_file := 'lnxm3000p3000.406';
-                      if not fileexists(de_folder +DirectorySeparator+ de_file) then begin
-                        de_y := -3000 + floor((y - (-3000)) / 300) * 300;
-                        if de_y < 0 then
-                           de_file := 'unxm' + FormatFloat('0000',abs(de_y)) + '.406'
-                        else
-                           de_file := 'unxp' + FormatFloat('0000',de_y) + '.406';
-                      end;
-                  end else exit;
-              end;
-        421:  begin  //1900 to 2050 - 1 file
-                    jdstart:= 2414864.5;
-                    jdend:= 2469807.5;
-                    if InRange(jd, jdstart, jdend) then begin
-                      de_y := 1900;
-                      de_file:='lnxp1900p2053.421';
-                      if not fileexists(de_folder +DirectorySeparator+ de_file) then begin
-                         de_file := 'unxp1900p2053.421';
-                      end;
-                    end else exit;
-              end;
-        422:  begin  //-3000 to 3000 - 1 file
-                    jdstart:= 625648.5;
-                    jdend:= 2816816.5;
-                    if InRange(jd, jdstart, jdend) then begin
-                      de_y := -3000;
-                      de_file := 'lnxm3000p3000.422';
-                      if not fileexists(de_folder +DirectorySeparator+ de_file) then begin
-                         de_file := 'unxm3000p3000.422';
-                      end;
-                    end else exit;
-              end;
-        423:  begin  //1900 to 2200 - 150 years step
-                  jdstart:= 2378480.5;
-                  jdend:= 2524624.5;
-                  if InRange(jd, jdstart, jdend) then begin
-                     de_file:='lnxp1800p2200.423';
-                     if not fileexists(de_folder +DirectorySeparator+ de_file) then begin
-                          de_y := 1900 + floor((y - 1900) / 150) * 150;
-                          de_file := 'lnxp' + floatToStr(de_y) + '.423';
-                          if not fileexists(de_folder +DirectorySeparator+ de_file) then begin
-                             de_file := 'unxp' + floatToStr(de_y) + '.423';
-                          end;
-                     end;
-                  end else exit;
-              end;
-        430:  begin  //1549 to 2650 - 1 file
-                    jdstart:= 2287184.5;
-                    jdend:= 2688976.5;
-                    if InRange(jd, jdstart, jdend) then begin
-                      de_file:='linkp1550p2650.430';
-                    end else exit;
-              end;
-        431:  begin  //-13000 to 17000 - 1 file
-                    jdstart:= -3027215.5;
-                    jdend:= 7930192.5;
-                    if InRange(jd, jdstart, jdend) then begin
-                      de_file:='lnxm13000p17000.431';
-                    end else exit;
-              end;
-    end;
-
-    //if file is not already loaded then load
-    if de_eph.de_file <> de_file then begin
-      //add folder location
-      de_filename := de_folder +DirectorySeparator+ de_file;
-      //see if file is there, set DE return true if it works
-      if fileexists(de_filename) then begin
-            if init_de_file(de_filename) then begin
-              de_eph.de_file := de_file;
-              result := true;
-            end;
-      end;
-    end else result := true;
+  result:=false;
+  // search for all file with .de_type extension ( *.431 )
+  i:=FindFirst(de_folder+DirectorySeparator+'*.'+inttostr(de_type),0,fs);
+  while i=0 do begin
+     de_filename:=de_folder+DirectorySeparator+fs.name;
+     // open the ephemeris file
+     if init_de_file(de_filename) then begin
+        // check the jd range for this file
+        if (jd>(de_eph.ephem_start+de_eph.ephem_step))and(jd<(de_eph.ephem_end-de_eph.ephem_step)) then begin
+          // OK use this one
+          de_eph.de_file := de_filename;
+          jdstart:=de_eph.ephem_start+de_eph.ephem_step;
+          jdend:=de_eph.ephem_end-de_eph.ephem_step;
+          result := true;
+        end;
+     end;
+     i:=FindNext(fs);
+  end;
+  FindClose(fs);
 end;
+
 
 // here we will use a file stream to load and extract coef.
 
