@@ -1629,7 +1629,7 @@ while node<>nil do begin
     evscr[n].Script.Assign(TStringList(node.data));
     ok:=evscr[n].Compile;
     for j:=0 to evscr[n].CompilerMessageCount-1 do CompileMemo.Lines.Add('Script event_'+inttostr(n)+': '+ evscr[n].CompilerErrorToStr(j));
-    if (n=1) then begin // Timer
+    if (n=ord(evTimer)) then begin // Timer
       parm:=words(node.Text,'',4,1,';');
       i:=StrToIntDef(parm,60);
       EventTimer.Interval:=i*1000;
