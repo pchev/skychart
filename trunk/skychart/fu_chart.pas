@@ -318,7 +318,7 @@ type
     procedure AutoRefresh;
     procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main; preview:boolean);
     function  FormatDesc:string;
-    procedure ShowIdentLabel;
+    procedure ShowIdentLabel(newjd:boolean=true);
     function  IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean= true;ftype:integer=ftAll;radius:integer=2):boolean;
     procedure IdentSearchResult(num,stype:string; itype:integer; ar1,de1:double; sr:string='';sn:string='';sd:string='');
     procedure Identdetail(X, Y: Integer);
@@ -759,7 +759,7 @@ try
     if lastundo>maxundo then lastundo:=1;
     undolist[lastundo].Assign(sc.cfgsc);
     curundo:=lastundo;
-    if sc.cfgsc.FindOk and (not cmain.SimpleDetail) and (sc.cfgsc.FindName=sc.cfgsc.TrackName) then ShowIdentLabel;
+    if sc.cfgsc.FindOk and (not cmain.SimpleDetail) and (sc.cfgsc.FindName=sc.cfgsc.TrackName) then ShowIdentLabel(false);
     if assigned(FShowTopMessage) then FShowTopMessage(sc.GetChartInfo,self);
     if assigned(FShowTitleMessage) then FShowTitleMessage(sc.GetChartPos,self);
     Image1.Cursor:=ChartCursor;
@@ -1008,7 +1008,7 @@ end;
 if sc.cfgsc.scope2mark then begin
    sc.DrawFinderMark(sc.cfgsc.Scope2Ra,sc.cfgsc.Scope2Dec,true,-1,MarkType);
 end;
-if (((sc.cfgsc.Trackon)and(sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or((abs(sc.cfgsc.FindJD-sc.cfgsc.JDchart)<0.001 )))and(sc.cfgsc.TrackName<>rsTelescope)and(sc.cfgsc.TrackName<>'') then begin
+if (((sc.cfgsc.Trackon)and(sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.FindOK))and(sc.cfgsc.TrackName<>rsTelescope)and(sc.cfgsc.TrackName<>'') then begin
    sc.DrawSearchMark(sc.cfgsc.TrackRA,sc.cfgsc.TrackDec,false);
 end;
 end;
@@ -2053,7 +2053,7 @@ LockMouseWheel:=false;
 end;
 end;
 
-Procedure Tf_chart.ShowIdentLabel;
+Procedure Tf_chart.ShowIdentLabel(newjd:boolean=true);
 var x,y : integer;
     ts:TSize;
     lis: string;
@@ -2097,7 +2097,7 @@ if sc.cfgsc.FindOK and (not cmain.SimpleDetail) then begin
    identlabel.Cursor:=crHandPoint;
    identlabel.bringtofront;
    sc.DrawSearchMark(sc.cfgsc.FindRA,sc.cfgsc.FindDec,false);
-   sc.cfgsc.FindJD:=sc.cfgsc.JDChart;
+   if newjd then sc.cfgsc.FindJD:=sc.cfgsc.JDChart;
    if sc.cfgsc.trackon and (sc.cfgsc.FindName=sc.cfgsc.TrackName) and f_detail.Visible then identlabelClick(Identlabel);
 end
 else identlabel.Visible:=false;
