@@ -269,6 +269,7 @@ type
     Fpop_scope: Tpop_scope;
     FSendImageFits: TSendImageFits;
     FSendSelectRow: TSendSelectRow;
+    AccelList: array[0..MaxMenulevel] of string;
     procedure ConnectINDI(Sender: TObject; autoconnect: boolean=false);
     procedure SlewINDI(Sender: TObject);
     procedure SyncINDI(Sender: TObject);
@@ -449,6 +450,7 @@ implementation
 {$R *.lfm}
 
 procedure Tf_chart.SetLang;
+var i: integer;
 begin
 About1.caption:=rsAbout;
 Centre1.caption:=rsCentre;
@@ -506,6 +508,9 @@ if Fpop_lx200<>nil then Fpop_lx200.SetLang;
 if Fpop_encoder<>nil then Fpop_encoder.SetLang;
 if Fpop_indi<>nil then Fpop_indi.SetLang;
 if Fpop_scope<>nil then Fpop_scope.SetLang;
+// Menu accelerator
+for i:=0 to MaxMenulevel do AccelList[i]:='';
+SetMenuAccelerator(PopupMenu1.items,0,AccelList);
 end;
 
 constructor Tf_chart.Create(TheOwner: TComponent);

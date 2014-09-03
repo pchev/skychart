@@ -625,6 +625,7 @@ type
     FTelescopeConnected: boolean;
     ScriptScrollBoxResizeCount: integer;
     ScriptScrollBoxResizeTime: double;
+    AccelList: array[0..MaxMenulevel] of string;
   {$ifdef mswindows}
     savwincol  : array[0..25] of Tcolor;
   {$endif}
@@ -7165,6 +7166,11 @@ pla[10]:=rsSun;
 pla[11]:=rsMoon;
 pla[31]:=rsSatRing;
 pla[32]:=rsEarthShadow;
+
+// Menu accelerator
+for i:=0 to MaxMenulevel do AccelList[i]:='';
+SetMenuAccelerator(MainMenu1.items,0,AccelList);
+
 // Help
 u_help.SetLang;
 SetHelpDB(HTMLHelpDatabase1);

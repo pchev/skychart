@@ -130,6 +130,7 @@ function isANSIstr(str:string):boolean;
 function GetXPlanetVersion: string;
 Procedure GetXplanet(Xplanetversion,originfile,searchdir,bsize,outfile : string; ipla:integer; pa,grsl,jd : double; var irc:integer; var r:TStringList);
 function VisibleControlCount(obj:TWinControl):integer;
+procedure SetMenuAccelerator(Amenu: TMenuItem; level: integer; var AccelList: array of string);
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -2537,6 +2538,33 @@ var i:integer;
 begin
 result:=0;
 for i:=0 to obj.ControlCount-1 do if obj.Controls[i].visible then inc(result);
+end;
+
+procedure SetMenuAccelerator(Amenu: TMenuItem; level: integer; var AccelList: array of string);
+var k,p: integer;
+    txt,c: string;
+begin
+  if level>MaxMenulevel then exit;
+  txt:=StringReplace(Amenu.Caption,'&','',[rfReplaceAll]);
+  if (txt<>'')and(txt<>'-') then begin
+    p:=1;
+    c:=UpperCase(copy(txt,p,1));
+    while (pos(c,AccelList[level])>0)or(c<'A')or(c>'Z') do begin
+      inc(p);
+      if p>=length(txt) then begin
+         p:=1;
+         c:=UpperCase(copy(txt,p,1));
+         break;
+      end;
+      c:=UpperCase(copy(txt,p,1));
+    end;
+    Amenu.Caption:=copy(txt,1,p-1)+'&'+copy(txt,p,999);
+    AccelList[level]:=AccelList[level]+c;
+  end;
+  AccelList[level+1]:='';
+  for k:=0 to Amenu.Count-1 do begin
+     SetMenuAccelerator(Amenu[k],level+1,AccelList);
+  end;
 end;
 
 end.
