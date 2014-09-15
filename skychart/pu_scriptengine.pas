@@ -28,7 +28,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_translation, u_constant, u_projection, u_help, u_util, ActnList, pu_pascaleditor,
+uses  u_translation, u_constant, u_projection, u_help,
+  u_scriptsocket, u_util, ActnList, pu_pascaleditor,
   cu_database, cu_catalog, cu_fits, cu_planet, math, fu_chart, jdcalendar, upsi_translation,
   uPSComponent, uPSComponent_Default, uPSCompiler, uPSRuntime, uPSComponent_DB,
   uPSComponent_Forms, uPSComponent_Controls, uPSI_CheckLst, uPSComponent_StdCtrls,
@@ -192,6 +193,7 @@ type
     ilist: array of Integer;
     dlist: array of Double;
     slist: array of String;
+    socklist: array[0..maxscriptsock] of TScriptSocket;
     FTimerReady,FEventReady: boolean;
     function doOpenFile(fn:string):boolean;
     function doRun(cmdline:string):boolean;
@@ -227,6 +229,13 @@ type
     function doAsteroidMark(list:TstringList):boolean;
     function doGetScopeRates(list:TstringList):boolean;
     procedure doSendInfo(origin,str:string);
+    function doTcpConnect(socknum:integer; ipaddr,port,timeout:string):boolean;
+    function doTcpDisconnect(socknum:integer):boolean;
+    Function doTcpConnected(socknum:integer) : boolean;
+    Function doTcpReadCount(socknum:integer; var buf : string; var count : integer) : boolean;
+    Function doTcpRead(socknum:integer; var buf : string; termchar:string) : boolean;
+    Function doTcpWrite(socknum:integer; var buf : string; var count : integer) : boolean;
+    Procedure doTcpPurgeBuffer(socknum:integer);
     procedure Button_Click(Sender: TObject);
     procedure Combo_Change(Sender: TObject);
     procedure ReorderGroup;
@@ -1674,6 +1683,7 @@ begin
   SetLength(ilist,10);
   SetLength(dlist,10);
   SetLength(slist,10);
+  for i:=0 to maxscriptsock do socklist[i]:=TScriptSocket.Create;
   EventComboBox.ItemIndex:=0;
   evscrnum:=ord(High(Teventlist))+1;
   SetLength(evscr,evscrnum);
@@ -1719,6 +1729,7 @@ EventIdx:=0;
 end;
 
 procedure Tf_scriptengine.FormDestroy(Sender: TObject);
+var i : integer;
 begin
   ClearTreeView;
   TreeView1.free;
@@ -1730,6 +1741,7 @@ begin
   SetLength(ilist,0);
   SetLength(dlist,0);
   SetLength(slist,0);
+  for i:=0 to maxscriptsock do socklist[i].Free;
 end;
 
 procedure Tf_scriptengine.FormShow(Sender: TObject);
@@ -1807,6 +1819,13 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doOpenFile,'function OpenFile(fn:string):boolean;');
   AddMethod(self, @Tf_scriptengine.doRun,'function Run(cmdline:string):boolean;');
   AddMethod(self, @Tf_scriptengine.doRunOutput,'function RunOutput(cmdline:string; var output:TStringlist):boolean;');
+  AddMethod(self, @Tf_scriptengine.doTcpConnect,'function TcpConnect(socknum:integer; ipaddr,port,timeout:string):boolean;');
+  AddMethod(self, @Tf_scriptengine.doTcpDisconnect,'function TcpDisconnect(socknum:integer):boolean;');
+  AddMethod(self, @Tf_scriptengine.doTcpConnected,'Function TcpConnected(socknum:integer) : boolean;');
+  AddMethod(self, @Tf_scriptengine.doTcpReadCount,'Function TcpReadCount(socknum:integer; var buf : string; var count : integer) : boolean;');
+  AddMethod(self, @Tf_scriptengine.doTcpRead,'Function TcpRead(socknum:integer; var buf : string; termchar:string) : boolean;');
+  AddMethod(self, @Tf_scriptengine.doTcpWrite,'Function TcpWrite(socknum:integer; var buf : string; var count : integer) : boolean;');
+  AddMethod(self, @Tf_scriptengine.doTcpPurgeBuffer,'Procedure TcpPurgeBuffer(socknum:integer);');
 end;
 ProcessMenu(FMainmenu.Items);
 end;
@@ -1907,6 +1926,64 @@ procedure Tf_scriptengine.ActivateEvent;
 begin
 if FEventReady then evscr[ord(evActivation)].Execute;
 end;
+
+function Tf_scriptengine.doTcpConnect(socknum:integer; ipaddr,port,timeout:string):boolean;
+var timout:integer;
+begin
+result:=false;
+if (socknum>=0)and(socknum<=maxscriptsock) then begin
+  timout:=StrToIntDef(timeout,100);
+  result:=socklist[socknum].Connect(ipaddr,port,timout);
+end;
+end;
+
+function Tf_scriptengine.doTcpDisconnect(socknum:integer):boolean;
+begin
+result:=false;
+if (socknum>=0)and(socknum<=maxscriptsock) then begin
+  result:=socklist[socknum].Disconnect;
+end;
+end;
+
+Function Tf_scriptengine.doTcpConnected(socknum:integer) : boolean;
+begin
+result:=false;
+if (socknum>=0)and(socknum<=maxscriptsock) then begin
+  result:=socklist[socknum].Tcpip_opened;
+end;
+end;
+
+Function Tf_scriptengine.doTcpReadCount(socknum:integer; var buf : string; var count : integer) : boolean;
+begin
+result:=false;
+if (socknum>=0)and(socknum<=maxscriptsock) then begin
+  result:=socklist[socknum].ReadCount(buf,count);
+end;
+end;
+
+Function Tf_scriptengine.doTcpRead(socknum:integer; var buf : string; termchar:string) : boolean;
+begin
+result:=false;
+if (socknum>=0)and(socknum<=maxscriptsock) then begin
+  result:=socklist[socknum].Read(buf,termchar);
+end;
+end;
+
+Function Tf_scriptengine.doTcpWrite(socknum:integer; var buf : string; var count : integer) : boolean;
+begin
+result:=false;
+if (socknum>=0)and(socknum<=maxscriptsock) then begin
+  result:=socklist[socknum].Write(buf,count);
+end;
+end;
+
+Procedure Tf_scriptengine.doTcpPurgeBuffer(socknum:integer);
+begin
+if (socknum>=0)and(socknum<=maxscriptsock) then begin
+  socklist[socknum].PurgeBuffer;
+end;
+end;
+
 
 end.
 

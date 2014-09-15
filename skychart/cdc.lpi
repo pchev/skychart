@@ -396,7 +396,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item23>
     </RequiredPackages>
-    <Units Count="82">
+    <Units Count="83">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -975,6 +975,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="upsi_translation"/>
       </Unit81>
+      <Unit82>
+        <Filename Value="u_scriptsocket.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="u_scriptsocket"/>
+      </Unit82>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
