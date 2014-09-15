@@ -4241,6 +4241,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with (MultiFrame1.ActiveObject as T
        Track.Caption:=rsUnlockChart;
      end else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6)
      then begin
+       if (sc.cfgsc.Trackname='')and TelescopeConnect.Checked then sc.cfgsc.Trackname:=rsTelescope;
        Track.Hint:=Format(rsLockOn, [sc.cfgsc.Trackname]);
        Track.Caption:=Format(rsLockOn, [sc.cfgsc.Trackname]);
      end else begin
