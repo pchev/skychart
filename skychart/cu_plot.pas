@@ -1002,6 +1002,7 @@ Procedure TSplot.PlotSimMark(x,y: single; mcolor: Tcolor);
 var ds,xx,yy : Integer;
     c:TBGRAPixel;
 begin
+if (abs(x)>MaxInt)or(abs(y)>MaxInt) then exit;
 ds:=3*cfgchart.drawsize;
 xx:=round(x);
 yy:=round(y);
