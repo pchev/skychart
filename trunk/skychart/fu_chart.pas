@@ -2840,14 +2840,14 @@ var desc,buf,buf2,otype,oname,txt,s1,s2,s3: UTF8String;
     thr,tht,ths,tazr,tazs,tculmalt: string;
     searchdir,fn: string;
     bmp: Tbitmap;
-    ipla:integer;
+    ipla,isat:integer;
     i,p,l,y,m,d,precision,pa : integer;
     isStar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
-    ApparentValid:boolean;
+    ApparentValid, supconj:boolean;
     ra,dec,q,a,h,ag,airm,hg,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
     ra2000,de2000,radate,dedate,raapp,deapp,cjd,cjd0,cst,err,gw: double;
     r:TStringList;
-    tp,ec,ap,an,ic,g,eq,cra,cdec,dist,rr,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc,ma,sa,dx,dy : double;
+    tp,ec,ap,an,ic,g,eq,cra,cdec,dist,rr,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc,ma,sa,dx,dy,illum,vel : double;
     nam,elem_id,ref : string;
 
 
@@ -2955,7 +2955,11 @@ end;
 txt:=txt+html_b+oname+htms_b+html_br;
 // Planet picture
 ipla:=0;
-for i:=1 to 11 do if pla[i]=oname then ipla:=i;
+isat:=0;
+if (otype='P')or(otype='Ps') then begin
+  for i:=1 to 11 do if pla[i]=oname then ipla:=i;
+  if ipla=0 then for i:=12 to MaxPla do if pla[i]=oname then isat:=i;
+end;
 if not cmain.SimpleDetail then begin
 if (otype='P')or((otype='Ps')and(oname=pla[11])) then begin
   if ipla>0 then begin
@@ -3065,12 +3069,20 @@ if otype='Cm' then begin
 end;
 if otype='As' then begin
   if sc.cdb.GetAstElem(sc.cfgsc.FindId,sc.cfgsc.TrackElemEpoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
-    sc.planet.InitAsteroid(sc.cfgsc.TrackEpoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
+    sc.planet.InitAsteroid(sc.cfgsc.TrackElemEpoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
     sc.planet.Asteroid(cjd+1/24,true,cra,cdec,dist,rr,elong,phase,magn,xc,yc,zc);
     dist := rad2deg*angulardistance(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec);
   end;
 end;
-if dist<>0 then begin
+if otype='P' then begin
+   sc.planet.Planet(ipla,cjd+1/24,cra,cdec,dist,illum,phase,diam,magn,rc,xc,yc,zc,vel);
+   dist := rad2deg*angulardistance(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec);
+end;
+if otype='Ps' then begin
+   sc.planet.PlanSat(isat,cjd+1/24,cra,cdec,supconj);
+   dist := rad2deg*angulardistance(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec);
+end;
+if dist>(0.05/3600) then begin
   pa:=round(rmod(rad2deg*PositionAngle(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec)+360,360));
   dx:=rmod((rad2deg*(cra-sc.cfgsc.FindRA2000)/15)+24,24);
   if dx>12 then dx:=dx-24;

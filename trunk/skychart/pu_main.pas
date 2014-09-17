@@ -7167,6 +7167,7 @@ pla[10]:=rsSun;
 pla[11]:=rsMoon;
 pla[31]:=rsSatRing;
 pla[32]:=rsEarthShadow;
+for i:=1 to MaxPla do pla[i]:=trim(pla[i]);
 
 // Menu accelerator
 for i:=0 to MaxMenulevel do AccelList[i]:='';

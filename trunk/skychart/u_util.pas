@@ -908,7 +908,7 @@ begin
     if de<0 then d:='-'+d else d:='+'+d;
     str(min:2:0,m);
     if abs(min)<10 then m:='0'+trim(m);
-    str(sec:2:0,s);
+    str(sec:2:1,s);
     if abs(sec)<9.5 then s:='0'+trim(s);
     result:=sg;
     if dd<>0 then result:=result+d+ldeg;
