@@ -40,6 +40,13 @@ function SatSatAll(jde: double; smallsat: boolean; var xsat,ysat,zsat : double20
 function UraSatAll(jde: double; smallsat: boolean; var xsat,ysat,zsat : double20):integer;
 function NepSatAll(jde: double; smallsat: boolean; var xsat,ysat,zsat : double20):integer;
 function PluSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
+function MarSatOne(jde: double; isat:integer; var xs,ys,zs : double):integer;
+function JupSatOne(jde: double; isat:integer; var xs,ys,zs : double):integer;
+function SatSatOne(jde: double; isat:integer; var xs,ys,zs : double):integer;
+function UraSatOne(jde: double; isat:integer; var xs,ys,zs : double):integer;
+function NepSatOne(jde: double; isat:integer; var xs,ys,zs : double):integer;
+function PluSatOne(jde: double; isat:integer; var xs,ys,zs : double):integer;
+
 
 implementation
 
@@ -1878,6 +1885,132 @@ for i:=1 to 1 do begin
   end
   else result:=1;
 end;
+end;
+
+
+
+function MarSatOne(jde: double; isat:integer; var xs,ys,zs : double):integer;
+begin
+result:=1;
+if isat<=2 then begin
+if marsat(jde, tbody(ord(MARS)+isat), xs,ys,zs) then
+    result:=0;
+end;
+end;
+
+function JupSatOne(jde: double; isat:integer; var xs,ys,zs : double):integer;
+const nrocks=4;
+      rocks: array[1..nrocks] of integer = (505,514,515,516);
+var vect: array [0..2] of double;
+begin
+result:=1;
+if isat<=4  then begin
+  if jupsat(jde, tbody(ord(JUPITER)+isat), xs,ys,zs) then begin
+    result:=0;
+  end
+  else result:=1;
+end else begin
+  isat:=isat-4;
+  if isat<=nrocks then begin
+  if evaluate_rock( jde,rocks[isat],vect) then begin
+    xs:=vect[0]/AU_to_km;
+    ys:=vect[1]/AU_to_km;
+    zs:=vect[2]/AU_to_km;
+    result:=0;
+  end
+  else result:=1;
+  end;
+end;
+end;
+
+function SatSatOne(jde: double; isat:integer; var xs,ys,zs : double):integer;
+const nrocks=10;
+      rocks: array[1..nrocks] of integer = (610,611,612,613,614,615,616,617,618,635);
+var vect: array [0..2] of double;
+begin
+result:=1;
+if isat<=9  then begin
+  if satsat(jde, tbody(ord(SATURN)+isat), xs,ys,zs) then begin
+    result:=0;
+  end
+  else result:=1;
+end else begin
+  isat:=isat-9;
+  if isat<=nrocks then begin
+  if evaluate_rock( jde,rocks[isat],vect) then begin
+    xs:=vect[0]/AU_to_km;
+    ys:=vect[1]/AU_to_km;
+    zs:=vect[2]/AU_to_km;
+    result:=0;
+  end
+  else result:=1;
+  end;
+end;
+end;
+
+function UraSatOne(jde: double; isat:integer; var xs,ys,zs : double):integer;
+const nrocks=13;
+      rocks: array[1..nrocks] of integer = (706,707,708,709,710,711,712,713,714,715,725,726,727);
+var vect: array [0..2] of double;
+begin
+result:=1;
+if isat<=5 then begin
+  if urasat(jde, tbody(ord(URANUS)+isat), xs,ys,zs) then begin
+    result:=0;
+  end
+  else result:=1;
+end else begin
+  isat:=isat-5;
+  if isat<=nrocks then begin
+  if evaluate_rock( jde,rocks[isat],vect) then begin
+    xs:=vect[0]/AU_to_km;
+    ys:=vect[1]/AU_to_km;
+    zs:=vect[2]/AU_to_km;
+    result:=0;
+  end
+  else result:=1;
+  end;
+end;
+end;
+
+function NepSatOne(jde: double; isat:integer; var xs,ys,zs : double):integer;
+const nrocks=6;
+      rocks: array[1..nrocks] of integer = (803,804,805,806,807,808);
+var i: integer;
+    X,Y,Z: double;
+    vect: array [0..2] of double;
+begin
+result:=1;
+if isat<=2 then begin
+  if nepsat(jde, tbody(ord(NEPTUNE)+isat), xs,ys,zs) then begin
+    result:=0;
+  end
+  else result:=1;
+end else begin
+  isat:=isat-2;
+  if isat<=nrocks then begin
+  if evaluate_rock( jde,rocks[isat],vect) then begin
+    xs:=vect[0]/AU_to_km;
+    ys:=vect[1]/AU_to_km;
+    zs:=vect[2]/AU_to_km;
+    result:=0;
+  end
+  else result:=1;
+  end;
+end;
+end;
+
+function PluSatOne(jde: double; isat:integer; var xs,ys,zs : double):integer;
+var i: integer;
+    X,Y,Z: double;
+begin
+result:=1;
+if isat=1 then begin
+  if plusat(jde, tbody(ord(PLUTO)+isat), xs,ys,zs) then begin
+    result:=0;
+  end
+  else result:=1;
+  end;
 end;
 
 end.

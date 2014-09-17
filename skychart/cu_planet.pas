@@ -79,6 +79,7 @@ type
      Procedure SunRect(t0 : double ; astrometric : boolean; var x,y,z : double;barycenter:boolean=true);
      Procedure Sun(t0 : double; var alpha,delta,dist,diam : double);
      Procedure SunEcl(t0 : double ; var l,b : double);
+     procedure PlanSat(isat:integer; jde:double; var alpha,delta: double; supconj:boolean);
      Function MarSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj: bool20):integer;
      Function JupSat(jde,lighttime,xp,yp,zp : double; smallsat: boolean; var xsat,ysat : double20; var supconj: bool20):integer;
      Function SatSat(jde,lighttime,xp,yp,zp : double; smallsat: boolean; var xsat,ysat : double20; var supconj : array of boolean):integer;
@@ -353,6 +354,53 @@ end;
 function to360(x:double):double;
 begin
 result:=rmod(x+3600000000,360);
+end;
+
+procedure TPlanet.PlanSat(isat:integer; jde:double; var alpha,delta: double; supconj:boolean);
+var ipl,ix:integer;
+    pra,pdec,dist,illum,phase,diam,magn,rp,xp,yp,zp,vel: double;
+    satx,saty,satz,xs,ys,zs,x,y,z,d1,d2,qr,lighttime : double;
+begin
+case isat of
+   12..15 : begin ipl:=5; ix:=isat-11; end;
+   16..23 : begin ipl:=6; ix:=isat-15; end;
+   24..28 : begin ipl:=7; ix:=isat-23; end;
+   29..30 : begin ipl:=4; ix:=isat-28; end;
+   33     : begin ipl:=6; ix:=9; end;
+   34..35 : begin ipl:=8; ix:=isat-33; end;
+   36     : begin ipl:=9; ix:=1; end;
+   37..40 : begin ipl:=5; ix:=isat-36+4; end;
+   41..50 : begin ipl:=6; ix:=isat-40+9; end;
+   51..63 : begin ipl:=7; ix:=isat-50+5; end;
+   64..69 : begin ipl:=8; ix:=isat-63+2; end;
+   else ipl:=0;
+end;
+if ipl<>0 then begin
+   Planet(ipl,jde,pra,pdec,dist,illum,phase,diam,magn,rp,xp,yp,zp,vel);
+   lighttime:=dist*tlight;
+   case ipl of
+      4: MarSatOne(jde-lighttime,ix,satx,saty,satz);
+      5: JupSatOne(jde-lighttime,ix,satx,saty,satz);
+      6: SatSatOne(jde-lighttime,ix,satx,saty,satz);
+      7: UraSatOne(jde-lighttime,ix,satx,saty,satz);
+      8: NepSatOne(jde-lighttime,ix,satx,saty,satz);
+      9: PluSatOne(jde-lighttime,ix,satx,saty,satz);
+   end;
+   SunRect(jde,false,xs,ys,zs);
+   x:=xp+xs;
+   y:=yp+ys;
+   z:=zp+zs;
+   d1:=sqrt(x*x+y*y+z*z);
+   x:=x+satx;
+   y:=y+saty;
+   z:=z+satz;
+   d2:=sqrt(x*x+y*y+z*z);
+   alpha:=arctan2(y,x);
+   if (alpha<0) then alpha:=alpha+2*pi;
+   qr:=sqrt(x*x+y*y);
+   if qr<>0 then delta:=arctan(z/qr);
+   supconj:=(d2>d1);
+end;
 end;
 
 Function TPlanet.MarSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj: bool20):integer;
