@@ -67,8 +67,8 @@ function InvertF64(X : Int64) : Double;
 Procedure DToS(t: Double; var h,m,s : integer);
 Function DEToStr(de: Double) : string;
 Function ARtoStr(ar: Double) : string;
-Function ARToStrShort(ar: Double) : string;
-Function DEToStrShort(de: Double) : string;
+Function ARToStrShort(ar: Double; digits:integer=1) : string;
+Function DEToStrShort(de: Double; digits:integer=1) : string;
 Function DEmToStr(de: Double) : string;
 Function DEdToStr(de: Double) : string;
 Function DEToStrmin(de: Double) : string;
@@ -855,7 +855,7 @@ begin
     result := d+'h'+m+'m'+s+'s';
 end;
 
-Function ARToStrShort(ar: Double) : string;
+Function ARToStrShort(ar: Double; digits:integer=1) : string;
 var dd,min1,min,sec: Double;
     sg,d,m,s : string;
 begin
@@ -877,7 +877,7 @@ begin
     str(dd:3:0,d);
     str(min:2:0,m);
     if abs(min)<10 then m:='0'+trim(m);
-    str(sec:4:1,s);
+    str(sec:4:digits,s);
     if abs(sec)<9.95 then s:='0'+trim(s);
     result:=sg;
     if dd<>0 then result:=result+d+'h';
@@ -885,7 +885,7 @@ begin
     result:=result+s+'s';
 end;
 
-Function DEToStrShort(de: Double) : string;
+Function DEToStrShort(de: Double; digits:integer=1) : string;
 var dd,min1,min,sec: Double;
     sg,d,m,s : string;
 begin
@@ -908,7 +908,7 @@ begin
     if de<0 then d:='-'+d else d:='+'+d;
     str(min:2:0,m);
     if abs(min)<10 then m:='0'+trim(m);
-    str(sec:2:1,s);
+    str(sec:2:digits,s);
     if abs(sec)<9.5 then s:='0'+trim(s);
     result:=sg;
     if dd<>0 then result:=result+d+ldeg;
