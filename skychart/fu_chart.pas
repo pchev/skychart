@@ -2845,9 +2845,9 @@ var desc,buf,buf2,otype,oname,txt,s1,s2,s3: UTF8String;
     isStar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
     ApparentValid, supconj:boolean;
     ra,dec,q,a,h,ag,airm,hg,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
-    ra2000,de2000,radate,dedate,raapp,deapp,cjd,cjd0,cst,err,gw: double;
+    ra2000,de2000,radate,dedate,raapp,deapp,cjd,cjd0,cst,nst,njd,err,gw: double;
     r:TStringList;
-    tp,ec,ap,an,ic,g,eq,cra,cdec,dist,rr,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc,ma,sa,dx,dy,illum,vel : double;
+    tp,ec,ap,an,ic,g,eq,cra,cdec,dist,dst,dkm,rr,elong,phase,magn,diam,lc,ctar,ctde,rc,xc,yc,zc,ma,sa,dx,dy,illum,vel : double;
     nam,elem_id,ref : string;
 
 
@@ -2956,7 +2956,7 @@ txt:=txt+html_b+oname+htms_b+html_br;
 // Planet picture
 ipla:=0;
 isat:=0;
-if (otype='P')or(otype='Ps') then begin
+if (otype='P')or(otype='Ps')or(otype='S*') then begin
   for i:=1 to 11 do if pla[i]=oname then ipla:=i;
   if ipla=0 then for i:=12 to MaxPla do if pla[i]=oname then isat:=i;
 end;
@@ -3060,35 +3060,63 @@ until buf='';
 
 // object motion
 dist:=0;
+nst:=Rmod(cst+ 1.00273790935*15*deg2rad,pi2); // sidereal + 1 hour
+njd:=cjd+1/24; // JD + 1 hour
 if otype='Cm' then begin
   if sc.cdb.GetComElem(sc.cfgsc.FindId,sc.cfgsc.TrackElemEpoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) then begin
     sc.planet.InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
-    sc.planet.Comet(cjd+1/24,true,cra,cdec,dist,rr,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
-    dist := rad2deg*angulardistance(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec);
+    sc.planet.Comet(njd,true,cra,cdec,dst,rr,elong,phase,magn,diam,lc,ctar,ctde,rc,xc,yc,zc);
+    precession(jd2000,sc.cfgsc.jdchart,cra,cdec);
+    if sc.cfgsc.PlanetParalaxe then Paralaxe(nst,dst,cra,cdec,cra,cdec,q,sc.cfgsc);
+    if sc.cfgsc.ApparentPos then apparent_equatorial(cra,cdec,sc.cfgsc,true,false);
+    dist := rad2deg*angulardistance(sc.cfgsc.FindRA,sc.cfgsc.FindDec,cra,cdec);
   end;
 end;
 if otype='As' then begin
   if sc.cdb.GetAstElem(sc.cfgsc.FindId,sc.cfgsc.TrackElemEpoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
     sc.planet.InitAsteroid(sc.cfgsc.TrackElemEpoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
-    sc.planet.Asteroid(cjd+1/24,true,cra,cdec,dist,rr,elong,phase,magn,xc,yc,zc);
-    dist := rad2deg*angulardistance(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec);
+    sc.planet.Asteroid(njd,true,cra,cdec,dst,rr,elong,phase,magn,xc,yc,zc);
+    precession(jd2000,sc.cfgsc.jdchart,cra,cdec);
+    if sc.cfgsc.PlanetParalaxe then Paralaxe(nst,dst,cra,cdec,cra,cdec,q,sc.cfgsc);
+    if sc.cfgsc.ApparentPos then apparent_equatorial(cra,cdec,sc.cfgsc,true,false);
+    dist := rad2deg*angulardistance(sc.cfgsc.FindRA,sc.cfgsc.FindDec,cra,cdec);
   end;
 end;
-if otype='P' then begin
-   sc.planet.Planet(ipla,cjd+1/24,cra,cdec,dist,illum,phase,diam,magn,rc,xc,yc,zc,vel);
-   dist := rad2deg*angulardistance(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec);
+if (otype='P') then begin
+   sc.planet.Planet(ipla,njd,cra,cdec,dst,illum,phase,diam,magn,rc,xc,yc,zc,vel);
+   precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
+   if sc.cfgsc.PlanetParalaxe then Paralaxe(nst,dst,cra,cdec,cra,cdec,q,sc.cfgsc);
+   if sc.cfgsc.ApparentPos then apparent_equatorial(cra,cdec,sc.cfgsc,true,false);
+   dist := rad2deg*angulardistance(sc.cfgsc.FindRA,sc.cfgsc.FindDec,cra,cdec);
 end;
-if otype='Ps' then begin
-   sc.planet.PlanSat(isat,cjd+1/24,cra,cdec,supconj);
-   dist := rad2deg*angulardistance(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec);
+if (otype='S*') and (ipla=10) then begin
+   sc.planet.Sun(njd,cra,cdec,dst,diam);;
+   precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
+   if sc.cfgsc.PlanetParalaxe then Paralaxe(nst,dst,cra,cdec,cra,cdec,q,sc.cfgsc);
+   if sc.cfgsc.ApparentPos then apparent_equatorial(cra,cdec,sc.cfgsc,true,false);
+   dist := rad2deg*angulardistance(sc.cfgsc.FindRA,sc.cfgsc.FindDec,cra,cdec);
+end;
+if (otype='Ps') and (ipla=11) then begin
+   sc.planet.Moon(njd,cra,cdec,dst,dkm,diam,phase,illum);
+   precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
+   apparent_equatorial(cra,cdec,sc.cfgsc,false,false);
+   if sc.cfgsc.PlanetParalaxe then Paralaxe(nst,dst,cra,cdec,cra,cdec,q,sc.cfgsc);
+   dist := rad2deg*angulardistance(sc.cfgsc.FindRA,sc.cfgsc.FindDec,cra,cdec);
+end;
+if (otype='Ps') and (isat>0) then begin
+   sc.planet.PlanSat(isat,njd,cra,cdec,dst,supconj);
+   precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
+   if sc.cfgsc.PlanetParalaxe then Paralaxe(nst,dst,cra,cdec,cra,cdec,q,sc.cfgsc);
+   if sc.cfgsc.ApparentPos then apparent_equatorial(cra,cdec,sc.cfgsc,true,false);
+   dist := rad2deg*angulardistance(sc.cfgsc.FindRA,sc.cfgsc.FindDec,cra,cdec);
 end;
 if dist>(0.05/3600) then begin
-  pa:=round(rmod(rad2deg*PositionAngle(sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000,cra,cdec)+360,360));
-  dx:=rmod((rad2deg*(cra-sc.cfgsc.FindRA2000)/15)+24,24);
+  pa:=round(rmod(rad2deg*PositionAngle(sc.cfgsc.FindRA,sc.cfgsc.FindDec,cra,cdec)+360,360));
+  dx:=rmod((rad2deg*(cra-sc.cfgsc.FindRA)/15)+24,24);
   if dx>12 then dx:=dx-24;
-  dy:=rad2deg*(cdec-sc.cfgsc.FindDec2000);
+  dy:=rad2deg*(cdec-sc.cfgsc.FindDec);
   txt:=txt+html_b+rsHourlyMotion+': '+htms_b+DEToStrShort(dist)+' PA:'+inttostr(pa)+ldeg;
-  txt:=txt+' dRA:'+ARToStrShort(dx)+' dDec:'+DEToStrShort(dy)+html_br;
+  txt:=txt+' dRA:'+ARToStrShort(dx,2)+' dDec:'+DEToStrShort(dy)+html_br;
 end;
 
 if not cmain.SimpleDetail then begin

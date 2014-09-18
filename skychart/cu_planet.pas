@@ -79,7 +79,7 @@ type
      Procedure SunRect(t0 : double ; astrometric : boolean; var x,y,z : double;barycenter:boolean=true);
      Procedure Sun(t0 : double; var alpha,delta,dist,diam : double);
      Procedure SunEcl(t0 : double ; var l,b : double);
-     procedure PlanSat(isat:integer; jde:double; var alpha,delta: double; supconj:boolean);
+     procedure PlanSat(isat:integer; jde:double; var alpha,delta,distance: double; supconj:boolean);
      Function MarSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj: bool20):integer;
      Function JupSat(jde,lighttime,xp,yp,zp : double; smallsat: boolean; var xsat,ysat : double20; var supconj: bool20):integer;
      Function SatSat(jde,lighttime,xp,yp,zp : double; smallsat: boolean; var xsat,ysat : double20; var supconj : array of boolean):integer;
@@ -356,7 +356,7 @@ begin
 result:=rmod(x+3600000000,360);
 end;
 
-procedure TPlanet.PlanSat(isat:integer; jde:double; var alpha,delta: double; supconj:boolean);
+procedure TPlanet.PlanSat(isat:integer; jde:double; var alpha,delta,distance: double; supconj:boolean);
 var ipl,ix:integer;
     pra,pdec,dist,illum,phase,diam,magn,rp,xp,yp,zp,vel: double;
     satx,saty,satz,xs,ys,zs,x,y,z,d1,d2,qr,lighttime : double;
@@ -400,6 +400,7 @@ if ipl<>0 then begin
    qr:=sqrt(x*x+y*y);
    if qr<>0 then delta:=arctan(z/qr);
    supconj:=(d2>d1);
+   distance:=d2;
 end;
 end;
 
