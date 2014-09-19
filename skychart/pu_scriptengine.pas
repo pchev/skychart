@@ -221,6 +221,8 @@ type
     Procedure doHz2Eq(a,h : double; var ra,de : double);
     function doFormatFloat(Const Format : String; var Value : double) : String;
     function doFormat(Const Fmt : String; const Args : Array of const) : String;
+    Procedure doStrtoFloatD(str:string; var defval: Double; var val: Double);
+    function doStringReplace(str,s1,s2: String): string;
     function doIsNumber(str: String): boolean;
     function doMsgBox(const aMsg: string):boolean;
     function doGetCometList(const filter: string; maxnum:integer; list:TstringList):boolean;
@@ -349,6 +351,16 @@ end;
 function Tf_scriptengine.doFormatFloat(Const Format : String; var Value : double) : String;
 begin
   result:=FormatFloat(format, Value);
+end;
+
+Procedure Tf_scriptengine.doStrtoFloatD(str:string; var defval: Double; var val: Double);
+begin
+  val:=StrToFloatDef(str,defval);
+end;
+
+function Tf_scriptengine.doStringReplace(str,s1,s2: String): string;
+begin
+  result:=StringReplace(str,s1,s2,[rfReplaceAll]);
 end;
 
 function Tf_scriptengine.doFormat(Const Fmt : String; const Args : Array of const) : String;
@@ -1806,6 +1818,8 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doEq2Hz, 'Procedure Eq2Hz(ra,de : double ; var a,h : double);');
   AddMethod(self, @Tf_scriptengine.doHz2Eq, 'Procedure Hz2Eq(a,h : double; var ra,de : double);');
   AddMethod(self, @Tf_scriptengine.doFormatFloat, 'function FormatFloat(Const Format : String; var Value : double) : String;');
+  AddMethod(self, @Tf_scriptengine.doStrtoFloatD, 'Procedure StrtoFloatD(str:string; var defval: Double; var val: Double);');
+  AddMethod(self, @Tf_scriptengine.doStringReplace, 'function StringReplace(str,s1,s2: String): string;');
   AddMethod(self, @Tf_scriptengine.doFormat, 'Function Format(Const Fmt : String; const Args : Array of const) : String;');
   AddMethod(self, @Tf_scriptengine.doIsNumber, 'function IsNumber(str: String): boolean;');
   AddMethod(self, @Tf_scriptengine.doMsgBox,'function MsgBox(const aMsg: string):boolean;');
