@@ -3,31 +3,34 @@ Title=PHD interface
 HidenTimer=0
 numtoolbar1=0
 numtoolbar2=0
-numscriptbutton=19
-scriptbutton_0="Group_1;Status;2"
-scriptbutton_1="	Button_1;connect"
-scriptbutton_2="	Button_2;disconnect"
-scriptbutton_3="	Edit_1"
-scriptbutton_4="	Edit_2"
-scriptbutton_5="	Event_2;2;Timer;1"
-scriptbutton_6="	Event_0;0;Initialisation;"
-scriptbutton_7="	Event_5;5;Object identification click;"
-scriptbutton_8="Group_2;Lock Shift;2"
-scriptbutton_9="	Edit_3"
-scriptbutton_10="	Edit_4"
-scriptbutton_11="	Button_3;Set"
-scriptbutton_12="	Button_4;Off"
-scriptbutton_13="	Edit_5"
-scriptbutton_14="	Edit_6"
-scriptbutton_15="	Edit_7"
-scriptbutton_16="	Edit_8"
-scriptbutton_17="Group_3;Messages;1"
-scriptbutton_18="	Memo_1;150"
+numscriptbutton=22
+scriptbutton_0="Group_4;PHD host and port;2"
+scriptbutton_1="	Edit_9"
+scriptbutton_2="	Edit_10"
+scriptbutton_3="Group_1;Status;2"
+scriptbutton_4="	Button_1;connect"
+scriptbutton_5="	Button_2;disconnect"
+scriptbutton_6="	Edit_1"
+scriptbutton_7="	Edit_2"
+scriptbutton_8="	Event_2;2;Timer;1"
+scriptbutton_9="	Event_0;0;Initialisation;"
+scriptbutton_10="	Event_5;5;Object identification click;"
+scriptbutton_11="Group_2;Lock Shift;2"
+scriptbutton_12="	Edit_3"
+scriptbutton_13="	Edit_4"
+scriptbutton_14="	Button_3;Set"
+scriptbutton_15="	Button_4;Off"
+scriptbutton_16="	Edit_5"
+scriptbutton_17="	Edit_6"
+scriptbutton_18="	Edit_7"
+scriptbutton_19="	Edit_8"
+scriptbutton_20="Group_3;Messages;1"
+scriptbutton_21="	Memo_1;150"
 numscriptrows=50
 script_0=1	var buf: string;
 script_1=1	    count:integer;
 script_2=1	begin
-script_3=1	  TcpConnect(0,'localhost','4400','100');
+script_3=1	  TcpConnect(0,edit_9.text,edit_10.text,'100');
 script_4=1	  buf:='{"method": "get_lock_shift_params", "id": 1003}';
 script_5=1	  count:=length(buf);
 script_6=1	  TcpWrite(0,buf,count);
@@ -75,7 +78,7 @@ script_47=4	  TcpWrite(0,buf,count);
 script_48=4	end;
 script_49=4	end.
 numcomborows=0
-numevents=269
+numevents=271
 event_0=2	// Split a attrib:value pair
 event_1=2	procedure Splitval(buf: string; var a,v: string);
 event_2=2	var p:integer;
@@ -283,65 +286,67 @@ event_203=0	edit_7.readonly:=true;
 event_204=0	edit_7.enabled:=false;
 event_205=0	edit_8.readonly:=true;
 event_206=0	edit_8.enabled:=false;
-event_207=0	if TcpConnected(0) then begin
-event_208=0	  buf:='{"method": "get_app_state", "id": 1000}';
-event_209=0	  count:=length(buf);
-event_210=0	  TcpWrite(0,buf,count);
-event_211=0	  buf:='{"method": "get_lock_shift_params", "id": 1003}';
-event_212=0	  count:=length(buf);
-event_213=0	  TcpWrite(0,buf,count);
-event_214=0	end;
-event_215=0	end.
-event_216=5	// Object identification event
-event_217=5	const
-event_218=5	  crlf = #13 + #10;
-event_219=5	function NextVal(var txt: string; key:string): double;
-event_220=5	var buf: string;
-event_221=5	    p: integer;
-event_222=5	    dv: double;
-event_223=5	begin
-event_224=5	  dv:=0;
-event_225=5	  p:=pos(key,txt);
-event_226=5	  if p>0 then begin
-event_227=5	    buf:=copy(txt,1,p-1);
-event_228=5	    delete(txt,1,p);
-event_229=5	    StrtoFloatD(buf,dv,result);
-event_230=5	  end
-event_231=5	  else result:=dv;
-event_232=5	end;
-event_233=5	var str,dx,dy: string;
-event_234=5	    p: integer;
-event_235=5	    x,y,sx,sy: double;
-event_236=5	begin
-event_237=5	// Info about object
-event_238=5	 getS('DescriptionText',str)
-event_239=5	 p:=pos(rsHourlyMotion,str);
-event_240=5	 if p>0 then begin
-event_241=5	    delete(str,1,p+length(rsHourlyMotion)+1);
-event_242=5	    p:=pos('dRA:',str);
-event_243=5	    delete(str,1,p+3);
-event_244=5	    p:=pos(' dDec:',str);
-event_245=5	    dx:=copy(str,1,p-1);
-event_246=5	    delete(str,1,p+5);
-event_247=5	    p:=pos(crlf,str);
-event_248=5	    dy:=copy(str,1,p-1);
-event_249=5	    x:=0;
-event_250=5	    if copy(dx,1,1)='-' then sx:=-1 else sx:=1;
-event_251=5	    x:=x+3600*abs(NextVal(dx,'h'));
-event_252=5	    x:=x+60*abs(NextVal(dx,'m'));
-event_253=5	    x:=x+abs(NextVal(dx,'s'));
-event_254=5	    y:=0;
-event_255=5	    if copy(dy,1,1)='-' then sy:=-1 else sy:=1;
-event_256=5	    y:=y+3600*abs(NextVal(dy,rsdeg));
-event_257=5	    y:=y+60*abs(NextVal(dy,rsmin));
-event_258=5	    y:=y+abs(NextVal(dy,rssec));
-event_259=5	    x:=15*sx*x;
-event_260=5	    y:=sy*y;
-event_261=5	    Edit_3.text:=FormatFloat('0.000000',x);
-event_262=5	    Edit_4.text:=FormatFloat('0.000000',y);
-event_263=5	 end
-event_264=5	 else begin
-event_265=5	    Edit_3.text:='0';
-event_266=5	    Edit_4.text:='0';
-event_267=5	 end;
-event_268=5	end.
+event_207=0	edit_9.text:='localhost';
+event_208=0	edit_10.text:='4400';
+event_209=0	if TcpConnected(0) then begin
+event_210=0	  buf:='{"method": "get_app_state", "id": 1000}';
+event_211=0	  count:=length(buf);
+event_212=0	  TcpWrite(0,buf,count);
+event_213=0	  buf:='{"method": "get_lock_shift_params", "id": 1003}';
+event_214=0	  count:=length(buf);
+event_215=0	  TcpWrite(0,buf,count);
+event_216=0	end;
+event_217=0	end.
+event_218=5	// Object identification event
+event_219=5	const
+event_220=5	  crlf = #13 + #10;
+event_221=5	function NextVal(var txt: string; key:string): double;
+event_222=5	var buf: string;
+event_223=5	    p: integer;
+event_224=5	    dv: double;
+event_225=5	begin
+event_226=5	  dv:=0;
+event_227=5	  p:=pos(key,txt);
+event_228=5	  if p>0 then begin
+event_229=5	    buf:=copy(txt,1,p-1);
+event_230=5	    delete(txt,1,p);
+event_231=5	    StrtoFloatD(buf,dv,result);
+event_232=5	  end
+event_233=5	  else result:=dv;
+event_234=5	end;
+event_235=5	var str,dx,dy: string;
+event_236=5	    p: integer;
+event_237=5	    x,y,sx,sy: double;
+event_238=5	begin
+event_239=5	// Info about object
+event_240=5	 getS('DescriptionText',str)
+event_241=5	 p:=pos(rsHourlyMotion,str);
+event_242=5	 if p>0 then begin
+event_243=5	    delete(str,1,p+length(rsHourlyMotion)+1);
+event_244=5	    p:=pos('dRA:',str);
+event_245=5	    delete(str,1,p+3);
+event_246=5	    p:=pos(' dDec:',str);
+event_247=5	    dx:=copy(str,1,p-1);
+event_248=5	    delete(str,1,p+5);
+event_249=5	    p:=pos(crlf,str);
+event_250=5	    dy:=copy(str,1,p-1);
+event_251=5	    x:=0;
+event_252=5	    if copy(dx,1,1)='-' then sx:=-1 else sx:=1;
+event_253=5	    x:=x+3600*abs(NextVal(dx,'h'));
+event_254=5	    x:=x+60*abs(NextVal(dx,'m'));
+event_255=5	    x:=x+abs(NextVal(dx,'s'));
+event_256=5	    y:=0;
+event_257=5	    if copy(dy,1,1)='-' then sy:=-1 else sy:=1;
+event_258=5	    y:=y+3600*abs(NextVal(dy,rsdeg));
+event_259=5	    y:=y+60*abs(NextVal(dy,rsmin));
+event_260=5	    y:=y+abs(NextVal(dy,rssec));
+event_261=5	    x:=15*sx*x;
+event_262=5	    y:=sy*y;
+event_263=5	    Edit_3.text:=FormatFloat('0.000000',x);
+event_264=5	    Edit_4.text:=FormatFloat('0.000000',y);
+event_265=5	 end
+event_266=5	 else begin
+event_267=5	    Edit_3.text:='0';
+event_268=5	    Edit_4.text:='0';
+event_269=5	 end;
+event_270=5	end.
