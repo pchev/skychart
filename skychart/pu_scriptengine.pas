@@ -225,6 +225,7 @@ type
     function doStringReplace(str,s1,s2: String): string;
     function doIsNumber(str: String): boolean;
     function doMsgBox(const aMsg: string):boolean;
+    Procedure doShowMessage(const aMsg: string);
     function doGetCometList(const filter: string; maxnum:integer; list:TstringList):boolean;
     function doCometMark(list:TstringList):boolean;
     function doGetAsteroidList(const filter: string; maxnum:integer; list:TstringList):boolean;
@@ -376,6 +377,11 @@ end;
 function Tf_scriptengine.doMsgBox(const aMsg: string):boolean;
 begin
   result:=MessageDlg(aMsg,mtConfirmation,mbYesNo,0)=mrYes;
+end;
+
+Procedure Tf_scriptengine.doShowMessage(const aMsg: string);
+begin
+  ShowMessage(aMsg);
 end;
 
 function Tf_scriptengine.doGetCometList(const filter: string; maxnum:integer; list:TstringList):boolean;
@@ -1823,6 +1829,7 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doFormat, 'Function Format(Const Fmt : String; const Args : Array of const) : String;');
   AddMethod(self, @Tf_scriptengine.doIsNumber, 'function IsNumber(str: String): boolean;');
   AddMethod(self, @Tf_scriptengine.doMsgBox,'function MsgBox(const aMsg: string):boolean;');
+  AddMethod(self, @Tf_scriptengine.doShowMessage,'Procedure ShowMessage(const aMsg: string);');
   AddMethod(self, @Tf_scriptengine.doGetCometList,'function GetCometList(const filter: string; maxnum:integer; list:TstringList):boolean;');
   AddMethod(self, @Tf_scriptengine.doCometMark,'function CometMark(list:TstringList):boolean;');
   AddMethod(self, @Tf_scriptengine.doGetAsteroidList,'function GetAsteroidList(const filter: string; maxnum:integer; list:TstringList):boolean;');
