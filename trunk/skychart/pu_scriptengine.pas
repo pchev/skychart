@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses  u_translation, u_constant, u_projection, u_help,
-  u_scriptsocket, u_util, ActnList, pu_pascaleditor,
+  u_scriptsocket, u_util, ActnList, pu_pascaleditor, fpjson, jsonparser,
   cu_database, cu_catalog, cu_fits, cu_planet, math, fu_chart, jdcalendar, upsi_translation,
   uPSComponent, uPSComponent_Default, uPSCompiler, uPSRuntime, uPSComponent_DB,
   uPSComponent_Forms, uPSComponent_Controls, uPSI_CheckLst, uPSComponent_StdCtrls,
@@ -61,14 +61,17 @@ type
     ButtonClear: TButton;
     ButtonDelete: TButton;
     CheckBoxHidenTimer: TCheckBox;
+    LabelCaptionEdit: TEdit;
     Label5: TLabel;
     Label6: TLabel;
+    Label7: TLabel;
     ListHeightEdit: TEdit;
     CheckListHeightEdit: TEdit;
     Panel3: TPanel;
     PanelLeft: TPanel;
     PSCustomPlugin1: TPSCustomPlugin;
     PSDllPlugin1: TPSDllPlugin;
+    RadioButtonLabel: TRadioButton;
     RadioButtonList: TRadioButton;
     RadioButtonCombo: TRadioButton;
     RadioButtonCheckList: TRadioButton;
@@ -127,6 +130,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure GroupCaptionEditChange(Sender: TObject);
     procedure GroupRowEditChange(Sender: TObject);
+    procedure LabelCaptionEditChange(Sender: TObject);
     procedure ListHeightEditChange(Sender: TObject);
     procedure MemoHeightEditChange(Sender: TObject);
     procedure PSCustomPlugin1CompileImport1(Sender: TPSScript);
@@ -166,6 +170,8 @@ type
     cb: array of TCombobox;
     lsnum:integer;
     ls: array of TListBox;
+    lbnum:integer;
+    lb: array of TLabel;
     cknum:integer;
     ck: array of TCheckListBox;
     opdialog: TOpenDialog;
@@ -173,7 +179,7 @@ type
     cadialog: TJDCalendarDialog;
     FConfigToolbar1,FConfigToolbar2: TStringlist;
     Fpascaleditor: Tf_pascaleditor;
-    GroupIdx,ButtonIdx,EditIdx,MemoIdx,SpacerIdx,ComboIdx,ListIdx,CheckListIdx,EventIdx: integer;
+    GroupIdx,ButtonIdx,EditIdx,MemoIdx,SpacerIdx,LabelIdx,ComboIdx,ListIdx,CheckListIdx,EventIdx: integer;
     FExecuteCmd: TExecuteCmd;
     FCometMark: TExecuteCmd;
     FAsteroidMark: TExecuteCmd;
@@ -239,6 +245,8 @@ type
     Function doTcpRead(socknum:integer; var buf : string; termchar:string) : boolean;
     Function doTcpWrite(socknum:integer; var buf : string; var count : integer) : boolean;
     Procedure doTcpPurgeBuffer(socknum:integer);
+    procedure JsonDataToStringlist(var SK,SV: TStringList; prefix:string; D : TJSONData);
+    procedure doJsonToStringlist(jsontxt:string; var SK,SV: TStringList);
     procedure Button_Click(Sender: TObject);
     procedure Combo_Change(Sender: TObject);
     procedure ReorderGroup;
@@ -247,6 +255,7 @@ type
     procedure AddEdit(num:string; pt: TWinControl);
     procedure AddMemo(num:string; pt: TWinControl;h: integer);
     procedure AddSpacer(num:string; pt: TWinControl);
+    procedure AddLabel(num,capt:string; pt: TWinControl);
     procedure AddCombo(num:string; pt: TWinControl);
     procedure AddList(num:string; pt: TWinControl;h: integer);
     procedure AddCheckList(num:string; pt: TWinControl;h: integer);
@@ -1095,6 +1104,18 @@ sp[spnum-1].Caption:='';
 sp[spnum-1].Parent:=pt;
 end;
 
+procedure Tf_scriptengine.AddLabel(num,capt:string; pt: TWinControl);
+begin
+inc(lbnum);
+SetLength(lb,lbnum);
+if num='' then num:=inttostr(lbnum);
+lb[lbnum-1]:=TLabel.Create(self);
+lb[lbnum-1].Name:='Label_'+num;
+lb[lbnum-1].tag:=StrToIntDef(num,0);
+lb[lbnum-1].Caption:=capt;
+lb[lbnum-1].Parent:=pt;
+end;
+
 procedure Tf_scriptengine.AddCombo(num:string; pt: TWinControl);
 var n: integer;
 begin
@@ -1183,6 +1204,7 @@ for i:=cknum-1 downto 0 do ck[i].Free;
 for i:=lsnum-1 downto 0 do ls[i].Free;
 for i:=cbnum-1 downto 0 do cb[i].Free;
 for i:=spnum-1 downto 0 do sp[i].Free;
+for i:=lbnum-1 downto 0 do lb[i].Free;
 for i:=menum-1 downto 0 do me[i].Free;
 for i:=ednum-1 downto 0 do ed[i].Free;
 for i:=btnum-1 downto 0 do bt[i].Free;
@@ -1191,6 +1213,7 @@ btnum:=0; SetLength(bt,0);
 ednum:=0; SetLength(ed,0);
 menum:=0; SetLength(me,0);
 spnum:=0; SetLength(sp,0);
+lbnum:=0; SetLength(lb,0);
 cbnum:=0; SetLength(cb,0);
 lsnum:=0; SetLength(ls,0);
 cknum:=0; SetLength(ck,0);
@@ -1235,6 +1258,10 @@ while node<>nil do begin
   else if txt='Spacer' then begin
     AddSpacer(nu,curgroup);
     SpacerIdx:=max(SpacerIdx,strtoint(nu));
+  end
+  else if txt='Label' then begin
+    AddLabel(nu,parm1,curgroup);
+    LabelIdx:=max(LabelIdx,strtoint(nu));
   end;
   node:=node.GetNext;
 end;
@@ -1304,6 +1331,11 @@ end else if RadioButtonSpacer.Checked then begin
     inc(SpacerIdx);
     TreeView1.Items.AddChild(TreeView1.Selected,'Spacer_'+inttostr(SpacerIdx));
   end;
+end else if RadioButtonLabel.Checked then begin
+  if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
+    inc(LabelIdx);
+    TreeView1.Items.AddChild(TreeView1.Selected,'Label_'+inttostr(LabelIdx)+';'+StringReplace(LabelCaptionEdit.Text,';','',[rfReplaceAll]));
+  end;
 end else if RadioButtonEvent.Checked then begin
   if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
     ok:=true;
@@ -1349,6 +1381,8 @@ if (TreeView1.Selected<>nil) then begin
     TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+IntToStr(StrToIntDef(CheckListHeightEdit.Text,50));
   end else if RadioButtonSpacer.Checked then begin
      //
+  end else if RadioButtonLabel.Checked then begin
+    TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+StringReplace(LabelCaptionEdit.Text,';','',[rfReplaceAll]);
   end else if RadioButtonEvent.Checked then begin
     if EventComboBox.ItemIndex=ord(evTimer) then txt:=IntToStr(StrToIntDef(TimerIntervalEdit.Text,60))
        else txt:='';
@@ -1405,6 +1439,11 @@ begin
   if ButtonUpdate.Tag=2 then ButtonUpdate.Visible:=true;
 end;
 
+procedure Tf_scriptengine.LabelCaptionEditChange(Sender: TObject);
+begin
+  if ButtonUpdate.Tag=8 then ButtonUpdate.Visible:=true;
+end;
+
 procedure Tf_scriptengine.TreeView1Change(Sender: TObject; Node: TTreeNode);
 begin
 ButtonUpdate.Tag:=0;
@@ -1453,6 +1492,12 @@ if node<>nil then begin
     ButtonEditScript.Visible:=false;
     ButtonUpdate.Visible:=false;
     RadioButtonSpacer.Checked:=true;
+  end else if (pos('Label_',node.Text)=1) then begin
+    ButtonEditScript.Visible:=false;
+    RadioButtonLabel.Checked:=true;
+    LabelCaptionEdit.Text:=words(node.Text,'',2,1,';');
+    ButtonUpdate.Visible:=false;
+    ButtonUpdate.Tag:=8;
   end else if (pos('Event_',node.Text)=1) then begin
     ButtonEditScript.Visible:=true;
     RadioButtonEvent.Checked:=true;
@@ -1679,6 +1724,7 @@ begin
   cknum:=0;
   menum:=0;
   spnum:=0;
+  lbnum:=0;
   btscrnum:=0;
   cbscrnum:=0;
   GroupIdx:=0;
@@ -1689,6 +1735,7 @@ begin
   ListIdx:=0;
   CheckListIdx:=0;
   SpacerIdx:=0;
+  LabelIdx:=0;
   {$ifdef mswindows}
     PSImport_ComObj1:=TPSImport_ComObj.Create(self);
     TPSPluginItem(TplPSScript.Plugins.Add).Plugin:=PSImport_ComObj1;
@@ -1847,6 +1894,8 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doTcpRead,'Function TcpRead(socknum:integer; var buf : string; termchar:string) : boolean;');
   AddMethod(self, @Tf_scriptengine.doTcpWrite,'Function TcpWrite(socknum:integer; var buf : string; var count : integer) : boolean;');
   AddMethod(self, @Tf_scriptengine.doTcpPurgeBuffer,'Procedure TcpPurgeBuffer(socknum:integer);');
+  AddMethod(self, @Tf_scriptengine.doJsonToStringlist,'procedure JsonToStringlist(jsontxt:string; var SK,SV: TStringList);');
+
 end;
 ProcessMenu(FMainmenu.Items);
 end;
@@ -2005,6 +2054,47 @@ if (socknum>=0)and(socknum<=maxscriptsock) then begin
 end;
 end;
 
+procedure Tf_scriptengine.JsonDataToStringlist(var SK,SV: TStringList; prefix:string; D : TJSONData);
+var i:integer;
+    pr,buf:string;
+begin
+if Assigned(D) then begin
+  case D.JSONType of
+    jtArray,jtObject: begin
+        for i:=0 to D.Count-1 do begin
+           if D.JSONType=jtArray then begin
+              if prefix='' then pr:=IntToStr(I) else pr:=prefix+'.'+IntToStr(I);
+              JsonDataToStringlist(SK,SV,pr,D.items[i]);
+           end else begin
+              if prefix='' then pr:=TJSONObject(D).Names[i] else pr:=prefix+'.'+TJSONObject(D).Names[i];
+              JsonDataToStringlist(SK,SV,pr,D.items[i]);
+           end;
+        end;
+       end;
+    jtNull: begin
+       SK.Add(prefix);
+       SV.Add('null');
+    end;
+    jtNumber: begin
+       SK.Add(prefix);
+       buf:=floattostr(D.AsFloat);
+       SV.Add(buf);
+    end
+    else begin
+       SK.Add(prefix);
+       SV.Add(D.AsString);
+    end;
+ end;
+end;
+end;
+
+procedure Tf_scriptengine.doJsonToStringlist(jsontxt:string; var SK,SV: TStringList);
+var  J: TJSONData;
+begin
+J:=GetJSON(jsontxt);
+JsonDataToStringlist(SK,SV,'',J);
+J.Free;
+end;
 
 end.
 
