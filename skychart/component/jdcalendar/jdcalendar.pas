@@ -138,14 +138,22 @@ type
 
   { TJDDatePicker }
 
+ {$IF (FPC_VERSION = 2) and (FPC_RELEASE < 7)}
   TJDDatePicker = class(TEditButton)
+ {$ELSE}
+  TJDDatePicker = class(TCustomEditButton)
+ {$ENDIF}
   private
     savejd: double;
     Flabels: TDatesLabelsArray;
     Fcaption: string;
     procedure UpdDate;
   protected
+    {$IF (FPC_VERSION = 2) and (FPC_RELEASE < 7)}
     procedure DoButtonClick(Sender: TObject); override;
+    {$ELSE}
+    procedure ButtonClick(Sender: TObject);
+    {$ENDIF}
     procedure SetJD(Value: double);
   public
     constructor Create(AOwner: TComponent); override;
@@ -810,7 +818,11 @@ begin
   Color := clBtnFace;
   ReadOnly := True;
   Button.Glyph.LoadFromLazarusResource('BtnDatePicker');
+  {$IF (FPC_VERSION = 2) and (FPC_RELEASE < 7)}
   Button.OnClick := @DoButtonClick;
+  {$ELSE}
+  Button.OnClick := @ButtonClick;
+  {$ENDIF}
   Button.Enabled := True;
   UpdDate;
 end;
@@ -820,11 +832,19 @@ begin
   inherited Destroy;
 end;
 
+{$IF (FPC_VERSION = 2) and (FPC_RELEASE < 7)}
 procedure TJDDatePicker.DoButtonClick(Sender: TObject);//or onClick
+{$ELSE}
+procedure TJDDatePicker.ButtonClick(Sender: TObject);//or onClick
+{$ENDIF}
 var
   CD: TJDCalendarDialog;
 begin
+  {$IF (FPC_VERSION = 2) and (FPC_RELEASE < 7)}
   inherited DoButtonClick(Sender);
+  {$ELSE}
+  inherited ButtonClick;
+  {$ENDIF}
 
   CD := TJDCalendarDialog.Create(Self);
   CD.JD := savejd;
