@@ -199,6 +199,7 @@ type
     ilist: array of Integer;
     dlist: array of Double;
     slist: array of String;
+    strllist: array of TStringList;
     socklist: array[0..maxscriptsock] of TScriptSocket;
     FTimerReady,FEventReady: boolean;
     function doOpenFile(fn:string):boolean;
@@ -207,6 +208,8 @@ type
     function doExecuteCmd(cname:string; arg:Tstringlist):string;
     function doGetS(varname:string; var str: string):Boolean;
     function doSetS(varname:string; str: string):Boolean;
+    function doGetSL(varname:string; var strl: TStringList):Boolean;
+    function doSetSL(varname:string; strl: TStringList):Boolean;
     function doGetI(varname:string; var i: Integer):Boolean;
     function doSetI(varname:string; i: Integer):Boolean;
     function doGetD(varname:string; var x: Double):Boolean;
@@ -551,6 +554,40 @@ begin
   else if varname='STR9' then slist[8]:=str
   else if varname='STR10' then slist[9]:=str
   else result:=false;
+end;
+
+function Tf_scriptengine.doGetSL(varname:string; var strl: TStringList):Boolean;
+begin
+result:=true;
+varname:=uppercase(varname);
+if varname='STRL1' then strl:=strllist[0]
+else if varname='STRL2' then strl:=strllist[1]
+else if varname='STRL3' then strl:=strllist[2]
+else if varname='STRL4' then strl:=strllist[3]
+else if varname='STRL5' then strl:=strllist[4]
+else if varname='STRL6' then strl:=strllist[5]
+else if varname='STRL7' then strl:=strllist[6]
+else if varname='STRL8' then strl:=strllist[7]
+else if varname='STRL9' then strl:=strllist[8]
+else if varname='STRL10' then strl:=strllist[9]
+else result:=false;
+end;
+
+function Tf_scriptengine.doSetSL(varname:string; strl: TStringList):Boolean;
+begin
+result:=true;
+varname:=uppercase(varname);
+if varname='STRL1' then strllist[0]:=strl
+else if varname='STRL2' then strllist[1]:=strl
+else if varname='STRL3' then strllist[2]:=strl
+else if varname='STRL4' then strllist[3]:=strl
+else if varname='STRL5' then strllist[4]:=strl
+else if varname='STRL6' then strllist[5]:=strl
+else if varname='STRL7' then strllist[6]:=strl
+else if varname='STRL8' then strllist[7]:=strl
+else if varname='STRL9' then strllist[8]:=strl
+else if varname='STRL10' then strllist[9]:=strl
+else result:=false;
 end;
 
 function  Tf_scriptengine.doGetD(varname:string; var x: double):boolean;
@@ -1748,6 +1785,8 @@ begin
   SetLength(ilist,10);
   SetLength(dlist,10);
   SetLength(slist,10);
+  SetLength(strllist,10);
+  for i:=0 to 9 do strllist[i]:=TStringList.Create;
   for i:=0 to maxscriptsock do socklist[i]:=TScriptSocket.Create;
   EventComboBox.ItemIndex:=0;
   evscrnum:=ord(High(Teventlist))+1;
@@ -1806,6 +1845,8 @@ begin
   SetLength(ilist,0);
   SetLength(dlist,0);
   SetLength(slist,0);
+  for i:=0 to 9 do strllist[i].Free;
+  SetLength(strllist,0);
   for i:=0 to maxscriptsock do socklist[i].Free;
 end;
 
@@ -1853,6 +1894,8 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doExecuteCmd, 'function  Cmd(cname:string; arg:Tstringlist):string;');
   AddMethod(self, @Tf_scriptengine.doGetS, 'function GetS(varname:string; var str: string):Boolean;');
   AddMethod(self, @Tf_scriptengine.doSetS, 'function SetS(varname:string; str: string):Boolean;');
+  AddMethod(self, @Tf_scriptengine.doSetSL, 'function SetSL(varname:string; strl: TStringList):Boolean;');
+  AddMethod(self, @Tf_scriptengine.doGetSL, 'function GetSL(varname:string; var strl: TStringList):Boolean;');
   AddMethod(self, @Tf_scriptengine.doGetI, 'function GetI(varname:string; var i: Integer):Boolean;');
   AddMethod(self, @Tf_scriptengine.doSetI, 'function SetI(varname:string; i: Integer):Boolean;');
   AddMethod(self, @Tf_scriptengine.doGetD, 'function GetD(varname:string; var x: double):boolean;');

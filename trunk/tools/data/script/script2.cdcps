@@ -1,5 +1,5 @@
 [ScriptPanel]
-Title=Système solaire
+Title=Solar System
 HidenTimer=0
 numtoolbar1=10
 toolbar1_0=94;PlanetInfo
@@ -48,153 +48,164 @@ scriptbutton_24="	Memo_1;150"
 scriptbutton_25="	Event_5;5;Object identification;"
 scriptbutton_26="	Event_0;0;Initalisation;"
 scriptbutton_27="	Event_9;9;Translation;"
-numscriptrows=144
+numscriptrows=155
 script_0=1	var cm:TstringList;
 script_1=1	    str:string;
 script_2=1	    p: integer;
 script_3=1	begin
 script_4=1	    Memo_1.Clear;
-script_5=1	    cm:=TstringList.Create;
-script_6=1	    cm.add('FIND');
-script_7=1	    cm.add('8');
-script_8=1	    cm.add(Combo_1.Text);
-script_9=1	    str:=cmd('',cm);
-script_10=1	    p:=pos('OK!',str);
-script_11=1	    if p=0 then memo_1.lines.add(rsError+' '+Combo_1.Text+' '+str);
-script_12=1	    cm.Free;
-script_13=1	end.
-script_14=2	var cm:TstringList;
-script_15=2	    filter: string;
-script_16=2	begin
-script_17=2	    filter:=Edit_2.Text;
-script_18=2	    if trim(filter)='*' then filter:='%';
-script_19=2	    CheckList_1.Clear;
-script_20=2	    cm:=TstringList.Create;
-script_21=2	    GetCometList(filter,1000,cm);
-script_22=2	    CheckList_1.items.assign(cm);
-script_23=2	    cm.Free;
-script_24=2	end.
-script_25=6	var str: Tstringlist;
-script_26=6	    i: integer;
-script_27=6	begin
-script_28=6	   CheckList_1.Checkall(cbchecked,true,true);
-script_29=6	   str:=Tstringlist.create;
-script_30=6	   for i:=0 to CheckList_1.Count-1 do begin
-script_31=6	     if CheckList_1.Checked[i] then str.add(CheckList_1.items[i]);
-script_32=6	   end;
-script_33=6	   CometMark(str);
-script_34=6	   str.Free;
-script_35=6	end.
-script_36=7	var str: Tstringlist;
-script_37=7	    i: integer;
-script_38=7	begin
-script_39=7	   CheckList_1.Checkall(cbunchecked,true,true);
-script_40=7	   str:=Tstringlist.create;
-script_41=7	   for i:=0 to CheckList_1.Count-1 do begin
-script_42=7	     if CheckList_1.Checked[i] then str.add(CheckList_1.items[i]);
-script_43=7	   end;
-script_44=7	   CometMark(str);
-script_45=7	   str.Free;
-script_46=7	end.
-script_47=4	var str: Tstringlist;
-script_48=4	    i: integer;
-script_49=4	begin
-script_50=4	   str:=Tstringlist.create;
-script_51=4	   for i:=0 to CheckList_1.Count-1 do begin
-script_52=4	     if CheckList_1.Checked[i] then str.add(CheckList_1.items[i]);
-script_53=4	   end;
-script_54=4	   CometMark(str);
-script_55=4	   str.Free;
-script_56=4	end.
-script_57=5	var cm:TstringList;
-script_58=5	    str,obj:string;
-script_59=5	    i,p: integer;
-script_60=5	begin
-script_61=5	    obj:='';
-script_62=5	    for i:=0 to CheckList_1.Count-1 do
-script_63=5	      if CheckList_1.Selected[i] then begin
-script_64=5	         obj:=CheckList_1.Items[i];
-script_65=5	         break;
-script_66=5	      end;
-script_67=5	    if obj<>'' then begin
-script_68=5	      memo_1.Clear;
-script_69=5	      cm:=TstringList.Create;
-script_70=5	      cm.add('FIND');
-script_71=5	      cm.add('6');
-script_72=5	      cm.add(obj);
-script_73=5	      str:=cmd('',cm);
-script_74=5	      p:=pos('OK!',str);
-script_75=5	      if p=0 then memo_1.lines.add(rsError+' '+obj+' '+str);
-script_76=5	      cm.Free;
-script_77=5	    end;
-script_78=5	end.
-script_79=3	var cm:TstringList;
-script_80=3	    filter: string;
-script_81=3	begin
-script_82=3	    filter:=Edit_3.Text;
-script_83=3	    if trim(filter)='*' then filter:='%';
-script_84=3	    CheckList_2.Clear;
-script_85=3	    cm:=TstringList.Create;
-script_86=3	    GetAsteroidList(filter,100,cm);
-script_87=3	    CheckList_2.items.assign(cm);
-script_88=3	    cm.Free;
-script_89=3	end.
-script_90=8	var str: Tstringlist;
-script_91=8	    i: integer;
-script_92=8	begin
-script_93=8	   CheckList_2.Checkall(cbchecked,true,true);
-script_94=8	   str:=Tstringlist.create;
-script_95=8	   for i:=0 to CheckList_2.Count-1 do begin
-script_96=8	     if CheckList_2.Checked[i] then str.add(CheckList_2.items[i]);
-script_97=8	   end;
-script_98=8	   AsteroidMark(str);
-script_99=8	   str.Free;
-script_100=8	end.
-script_101=9	var str: Tstringlist;
-script_102=9	    i: integer;
-script_103=9	begin
-script_104=9	   CheckList_2.Checkall(cbunchecked,true,true);
-script_105=9	   str:=Tstringlist.create;
-script_106=9	   for i:=0 to CheckList_2.Count-1 do begin
-script_107=9	     if CheckList_2.Checked[i] then str.add(CheckList_2.items[i]);
-script_108=9	   end;
-script_109=9	   AsteroidMark(str);
-script_110=9	   str.Free;
-script_111=9	end.
-script_112=10	var str: Tstringlist;
-script_113=10	    i: integer;
-script_114=10	begin
-script_115=10	   str:=Tstringlist.create;
-script_116=10	   for i:=0 to CheckList_2.Count-1 do begin
-script_117=10	     if CheckList_2.Checked[i] then str.add(CheckList_2.items[i]);
-script_118=10	   end;
-script_119=10	   AsteroidMark(str);
-script_120=10	   str.Free;
-script_121=10	end.
-script_122=11	var cm:TstringList;
-script_123=11	    str,obj:string;
-script_124=11	    i,p: integer;
-script_125=11	begin
-script_126=11	    obj:='';
-script_127=11	    for i:=0 to CheckList_2.Count-1 do
-script_128=11	      if CheckList_2.Selected[i] then begin
-script_129=11	         obj:=CheckList_2.Items[i];
-script_130=11	         break;
-script_131=11	      end;
-script_132=11	    if obj<>'' then begin
-script_133=11	      memo_1.Clear;
-script_134=11	      cm:=TstringList.Create;
-script_135=11	      cm.add('FIND');
-script_136=11	      cm.add('7');
-script_137=11	      cm.add(obj);
-script_138=11	      str:=cmd('',cm);
-script_139=11	      p:=pos('OK!',str);
-script_140=11	      if p=0 then memo_1.lines.add(rsError+' '+obj+' '+str);
-script_141=11	      cm.Free;
-script_142=11	    end;
-script_143=11	end.
+script_5=1	    GetSL('STRL1',cm);
+script_6=1	    cm.clear;
+script_7=1	    cm.add('FIND');
+script_8=1	    cm.add('8');
+script_9=1	    cm.add(Combo_1.Text);
+script_10=1	    str:=cmd('',cm);
+script_11=1	    p:=pos('OK!',str);
+script_12=1	    if p=0 then memo_1.lines.add(rsError+' '+Combo_1.Text+' '+str);
+script_13=1	    cm.clear;
+script_14=1	end.
+script_15=2	var cm:TstringList;
+script_16=2	    filter: string;
+script_17=2	begin
+script_18=2	    filter:=Edit_2.Text;
+script_19=2	    if trim(filter)='*' then filter:='%';
+script_20=2	    CheckList_1.Clear;
+script_21=2	    GetSL('STRL1',cm);
+script_22=2	    cm.clear;
+script_23=2	    GetCometList(filter,1000,cm);
+script_24=2	    CheckList_1.items.assign(cm);
+script_25=2	    cm.clear;
+script_26=2	end.
+script_27=6	var str: Tstringlist;
+script_28=6	    i: integer;
+script_29=6	begin
+script_30=6	   CheckList_1.Checkall(cbchecked,true,true);
+script_31=6	   GetSL('STRL1',str);
+script_32=6	   str.clear;
+script_33=6	   for i:=0 to CheckList_1.Count-1 do begin
+script_34=6	     if CheckList_1.Checked[i] then str.add(CheckList_1.items[i]);
+script_35=6	   end;
+script_36=6	   CometMark(str);
+script_37=6	   str.clear;
+script_38=6	end.
+script_39=7	var str: Tstringlist;
+script_40=7	    i: integer;
+script_41=7	begin
+script_42=7	   CheckList_1.Checkall(cbunchecked,true,true);
+script_43=7	   GetSL('STRL1',str);
+script_44=7	   str.clear;
+script_45=7	   for i:=0 to CheckList_1.Count-1 do begin
+script_46=7	     if CheckList_1.Checked[i] then str.add(CheckList_1.items[i]);
+script_47=7	   end;
+script_48=7	   CometMark(str);
+script_49=7	   str.clear;
+script_50=7	end.
+script_51=4	var str: Tstringlist;
+script_52=4	    i: integer;
+script_53=4	begin
+script_54=4	   GetSL('STRL1',str);
+script_55=4	   str.clear;
+script_56=4	   for i:=0 to CheckList_1.Count-1 do begin
+script_57=4	     if CheckList_1.Checked[i] then str.add(CheckList_1.items[i]);
+script_58=4	   end;
+script_59=4	   CometMark(str);
+script_60=4	   str.clear;
+script_61=4	end.
+script_62=5	var cm:TstringList;
+script_63=5	    str,obj:string;
+script_64=5	    i,p: integer;
+script_65=5	begin
+script_66=5	    obj:='';
+script_67=5	    for i:=0 to CheckList_1.Count-1 do
+script_68=5	      if CheckList_1.Selected[i] then begin
+script_69=5	         obj:=CheckList_1.Items[i];
+script_70=5	         break;
+script_71=5	      end;
+script_72=5	    if obj<>'' then begin
+script_73=5	      memo_1.Clear;
+script_74=5	      GetSL('STRL1',cm);
+script_75=5	      cm.clear;
+script_76=5	      cm.add('FIND');
+script_77=5	      cm.add('6');
+script_78=5	      cm.add(obj);
+script_79=5	      str:=cmd('',cm);
+script_80=5	      p:=pos('OK!',str);
+script_81=5	      if p=0 then memo_1.lines.add(rsError+' '+obj+' '+str);
+script_82=5	      cm.clear;
+script_83=5	    end;
+script_84=5	end.
+script_85=3	var cm:TstringList;
+script_86=3	    filter: string;
+script_87=3	begin
+script_88=3	    filter:=Edit_3.Text;
+script_89=3	    if trim(filter)='*' then filter:='%';
+script_90=3	    CheckList_2.Clear;
+script_91=3	    GetSL('STRL1',cm);
+script_92=3	    cm.clear;
+script_93=3	    GetAsteroidList(filter,100,cm);
+script_94=3	    CheckList_2.items.assign(cm);
+script_95=3	    cm.clear;
+script_96=3	end.
+script_97=8	var str: Tstringlist;
+script_98=8	    i: integer;
+script_99=8	begin
+script_100=8	   CheckList_2.Checkall(cbchecked,true,true);
+script_101=8	   GetSL('STRL1',str);
+script_102=8	   str.clear;
+script_103=8	   for i:=0 to CheckList_2.Count-1 do begin
+script_104=8	     if CheckList_2.Checked[i] then str.add(CheckList_2.items[i]);
+script_105=8	   end;
+script_106=8	   AsteroidMark(str);
+script_107=8	   str.clear;
+script_108=8	end.
+script_109=9	var str: Tstringlist;
+script_110=9	    i: integer;
+script_111=9	begin
+script_112=9	   CheckList_2.Checkall(cbunchecked,true,true);
+script_113=9	   GetSL('STRL1',str);
+script_114=9	   str.clear;
+script_115=9	   for i:=0 to CheckList_2.Count-1 do begin
+script_116=9	     if CheckList_2.Checked[i] then str.add(CheckList_2.items[i]);
+script_117=9	   end;
+script_118=9	   AsteroidMark(str);
+script_119=9	   str.clear;
+script_120=9	end.
+script_121=10	var str: Tstringlist;
+script_122=10	    i: integer;
+script_123=10	begin
+script_124=10	   GetSL('STRL1',str);
+script_125=10	   str.clear;
+script_126=10	   for i:=0 to CheckList_2.Count-1 do begin
+script_127=10	     if CheckList_2.Checked[i] then str.add(CheckList_2.items[i]);
+script_128=10	   end;
+script_129=10	   AsteroidMark(str);
+script_130=10	   str.clear;
+script_131=10	end.
+script_132=11	var cm:TstringList;
+script_133=11	    str,obj:string;
+script_134=11	    i,p: integer;
+script_135=11	begin
+script_136=11	    obj:='';
+script_137=11	    for i:=0 to CheckList_2.Count-1 do
+script_138=11	      if CheckList_2.Selected[i] then begin
+script_139=11	         obj:=CheckList_2.Items[i];
+script_140=11	         break;
+script_141=11	      end;
+script_142=11	    if obj<>'' then begin
+script_143=11	      memo_1.Clear;
+script_144=11	      GetSL('STRL1',cm);
+script_145=11	      cm.clear;
+script_146=11	      cm.add('FIND');
+script_147=11	      cm.add('7');
+script_148=11	      cm.add(obj);
+script_149=11	      str:=cmd('',cm);
+script_150=11	      p:=pos('OK!',str);
+script_151=11	      if p=0 then memo_1.lines.add(rsError+' '+obj+' '+str);
+script_152=11	      cm.clear;
+script_153=11	    end;
+script_154=11	end.
 numcomborows=0
-numevents=80
+numevents=81
 event_0=5	// Object identification event
 event_1=5	var longstr: string;
 event_2=5	begin
@@ -224,54 +235,55 @@ event_25=0	  Combo_1.Items.Add(rsPluto);
 event_26=0	  Combo_1.ItemIndex:=0;
 event_27=0	  // Get current year
 event_28=0	  Edit_2.Text:='C/';
-event_29=0	  cm:=Tstringlist.Create;
-event_30=0	  cm.add('GETDATE');
-event_31=0	  str:=cmd('',cm);
-event_32=0	  p:=pos('OK!',str);
-event_33=0	  if p>0 then begin
-event_34=0	    delete(str,1,p+2);
-event_35=0	    p:=pos('-',str);
-event_36=0	    year:=copy(str,1,p-1);
-event_37=0	    Edit_2.Text:=year;
-event_38=0	  end;
-event_39=0	  // Fill comet list
-event_40=0	  CheckList_1.Clear;
-event_41=0	  cm.Clear;
-event_42=0	  GetCometList(Edit_2.Text,1000,cm);
-event_43=0	  CheckList_1.items.assign(cm);
-event_44=0	  // Fill asteroid list
-event_45=0	  Edit_3.Text:='*';
-event_46=0	  CheckList_2.Clear;
-event_47=0	  cm.Clear;
-event_48=0	  GetAsteroidList('%',100,cm);
-event_49=0	  CheckList_2.items.assign(cm);
-event_50=0	  cm.Free;
-event_51=0	end.
-event_52=9	// translation
-event_53=9	begin
-event_54=9	  group_1.caption:=rsSun+' / '+rsPlanet;
-event_55=9	  button_1.caption:=rsSearch;
-event_56=9	  group_2.caption:=rsComet;
-event_57=9	  group_3.caption:=rsAsteroid;
-event_58=9	  button_2.caption:=rsFilter2;
-event_59=9	  button_3.caption:=rsFilter2;
-event_60=9	  button_6.caption:=rsSelectAll;
-event_61=9	  button_8.caption:=rsSelectAll;
-event_62=9	  button_7.caption:=rsSelectNone;
-event_63=9	  button_9.caption:=rsSelectNone;
-event_64=9	  button_4.caption:=rsMark;
-event_65=9	  button_10.caption:=rsMark;
-event_66=9	  button_5.caption:=rsCenter;
-event_67=9	  button_11.caption:=rsCenter;
-event_68=9	  group_4.caption:=rsInfo;
-event_69=9	  Combo_1.Items[0]:=rsSun;
-event_70=9	  Combo_1.Items[1]:=rsMercury;
-event_71=9	  Combo_1.Items[2]:=rsVenus;
-event_72=9	  Combo_1.Items[3]:=rsMoon;
-event_73=9	  Combo_1.Items[4]:=rsMars;
-event_74=9	  Combo_1.Items[5]:=rsJupiter;
-event_75=9	  Combo_1.Items[6]:=rsSaturn;
-event_76=9	  Combo_1.Items[7]:=rsUranus;
-event_77=9	  Combo_1.Items[8]:=rsNeptune;
-event_78=9	  Combo_1.Items[9]:=rsPluto;
-event_79=9	end.
+event_29=0	  GetSL('STRL1',cm);
+event_30=0	  cm.clear;
+event_31=0	  cm.add('GETDATE');
+event_32=0	  str:=cmd('',cm);
+event_33=0	  p:=pos('OK!',str);
+event_34=0	  if p>0 then begin
+event_35=0	    delete(str,1,p+2);
+event_36=0	    p:=pos('-',str);
+event_37=0	    year:=copy(str,1,p-1);
+event_38=0	    Edit_2.Text:=year;
+event_39=0	  end;
+event_40=0	  // Fill comet list
+event_41=0	  CheckList_1.Clear;
+event_42=0	  cm.Clear;
+event_43=0	  GetCometList(Edit_2.Text,1000,cm);
+event_44=0	  CheckList_1.items.assign(cm);
+event_45=0	  // Fill asteroid list
+event_46=0	  Edit_3.Text:='*';
+event_47=0	  CheckList_2.Clear;
+event_48=0	  cm.Clear;
+event_49=0	  GetAsteroidList('%',100,cm);
+event_50=0	  CheckList_2.items.assign(cm);
+event_51=0	  cm.clear;
+event_52=0	end.
+event_53=9	// translation
+event_54=9	begin
+event_55=9	  group_1.caption:=rsSun+' / '+rsPlanet;
+event_56=9	  button_1.caption:=rsSearch;
+event_57=9	  group_2.caption:=rsComet;
+event_58=9	  group_3.caption:=rsAsteroid;
+event_59=9	  button_2.caption:=rsFilter2;
+event_60=9	  button_3.caption:=rsFilter2;
+event_61=9	  button_6.caption:=rsSelectAll;
+event_62=9	  button_8.caption:=rsSelectAll;
+event_63=9	  button_7.caption:=rsSelectNone;
+event_64=9	  button_9.caption:=rsSelectNone;
+event_65=9	  button_4.caption:=rsMark;
+event_66=9	  button_10.caption:=rsMark;
+event_67=9	  button_5.caption:=rsCenter;
+event_68=9	  button_11.caption:=rsCenter;
+event_69=9	  group_4.caption:=rsInfo;
+event_70=9	  Combo_1.Items[0]:=rsSun;
+event_71=9	  Combo_1.Items[1]:=rsMercury;
+event_72=9	  Combo_1.Items[2]:=rsVenus;
+event_73=9	  Combo_1.Items[3]:=rsMoon;
+event_74=9	  Combo_1.Items[4]:=rsMars;
+event_75=9	  Combo_1.Items[5]:=rsJupiter;
+event_76=9	  Combo_1.Items[6]:=rsSaturn;
+event_77=9	  Combo_1.Items[7]:=rsUranus;
+event_78=9	  Combo_1.Items[8]:=rsNeptune;
+event_79=9	  Combo_1.Items[9]:=rsPluto;
+event_80=9	end.
