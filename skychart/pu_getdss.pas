@@ -166,8 +166,8 @@ function Tf_getdss.GetDss(ra,de,fov,ratio:double; imgx:integer):boolean;
 var i : SImageConfig;
     pl: Plate_data;
     gzbuf : array[0..4095]of char;
-    rc,datasource,subsample,n,l,imgy : integer;
-    width,height,npix,imgsize,fovx,fovy : double;
+    rc,datasource,n,l,imgy : integer;
+    subsample,wi,he,npix,imgsize,fovx,fovy : double;
     ima,app,platename,buf,dd,mm,ss : string;
     firstrec: boolean;
     gzf:pointer;
@@ -208,13 +208,13 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
   DownloadDialog1.FtpFwPassive:=cmain.FtpPassive;
   DownloadDialog1.ConfirmDownload:=cmain.ConfirmDownload;
   buf:=cfgdss.DSSurl[cfgdss.OnlineDSSid,1];
-  width:=fov*rad2deg*60;
-  height:=width/ratio;
+  wi:=fov*rad2deg*60;
+  he:=wi/ratio;
   fovx:=rad2deg*fov;
   fovy:=fovx/ratio;
   imgy:=round(imgx/ratio);
-  buf:=StringReplace(buf,'$XSZ',formatfloat(f1s,width),[rfReplaceAll]);
-  buf:=StringReplace(buf,'$YSZ',formatfloat(f1s,height),[rfReplaceAll]);
+  buf:=StringReplace(buf,'$XSZ',formatfloat(f1s,wi),[rfReplaceAll]);
+  buf:=StringReplace(buf,'$YSZ',formatfloat(f1s,he),[rfReplaceAll]);
   ArToStr2(rad2deg*ra/15,dd,mm,ss);
   buf:=StringReplace(buf,'$RAH',dd,[rfReplaceAll]);
   buf:=StringReplace(buf,'$RAM',mm,[rfReplaceAll]);
@@ -295,14 +295,14 @@ end else if Fenabled then begin    // RealSky cdrom
   i.pImageFile:=Pchar(ima);
   i.DataSource:=datasource;
   i.PromptForDisk:=true;
-  width:=fov*rad2deg*60;
-  height:=width/ratio;
-  if min(width, height) > 420 then begin ShowMessage(Format(rsFieldTooWidt, [
+  wi:=fov*rad2deg*60;
+  he:=wi/ratio;
+  if min(wi, he) > 420 then begin ShowMessage(Format(rsFieldTooWidt, [
     '7'+ldeg])); exit; end;
-  width:=min(width,400);
-  height:=min(height,400);
+  wi:=min(wi,400);
+  he:=min(he,400);
   if cfgdss.dsssampling then begin
-    npix:=max(width,height)*60/1.7;
+    npix:=max(wi,he)*60/1.7;
     n:=trunc(npix/cfgdss.dssmaxsize);
     case n of
          0    : subsample:=1;
@@ -316,18 +316,18 @@ end else if Fenabled then begin    // RealSky cdrom
     end;
   end else begin
       subsample:=1;
-      imgsize:=(width*60/1.7/subsample)*(height*60/1.7/subsample)*2/1024/1024;
+      imgsize:=(wi*60/1.7/subsample)*(he*60/1.7/subsample)*2/1024/1024;
       if imgsize>8 then begin
          if MessageDlg(Format(rsEstimatedFil, [floattostrf(imgsize, ffFixed, 6,
            0), crlf]),
             mtWarning,[mbOk, mbCancel],0)<>mrOK then exit;
       end;
   end;
-  i.SubSample:=subsample;
+  i.SubSample:=round(subsample);
   i.Ra:=ra;
   i.De:=de;
-  i.Width:=width;
-  i.Height:=height;
+  i.Width:=wi;
+  i.Height:=he;
   i.Sender:=integer(handle);
   app:=application.title;
   i.pApplication:=Pchar(app);
