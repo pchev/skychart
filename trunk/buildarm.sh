@@ -12,6 +12,7 @@ arch=$(arch)
 unset extratarget
 
 make_linuxarm=1
+make_linuxarm_debug=1
 
 if [[ -n $1 ]]; then
   configopt="fpc=$1"
@@ -74,22 +75,24 @@ if [[ $make_linuxarm ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   cd $wd
   rm -rf $builddir
-  make CPU_TARGET=arm OS_TARGET=linux clean
-  fpcopts="-O1 -g -gl -Ci -Co -Ct" make CPU_TARGET=arm OS_TARGET=linux
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  mkdir $builddir
-  mkdir $builddir/debug
-  cp skychart/cdc $builddir/debug/skychart
-  cp skychart/cdcicon $builddir/debug/
-  cp varobs/varobs $builddir/debug/
-  cp varobs/varobs_lpv_bulletin $builddir/debug/
-  cd $builddir
-  tar cvjf bin-linux_armhf-debug-$currentrev.tar.bz2 debug
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  mv bin-*.tar.bz2 $wd
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  cd $wd
-  rm -rf $builddir
+  if [[ $make_linuxarm_debug ]]; then
+    make CPU_TARGET=arm OS_TARGET=linux clean
+    fpcopts="-O1 -g -gl -Ci -Co -Ct" make CPU_TARGET=arm OS_TARGET=linux
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    mkdir $builddir
+    mkdir $builddir/debug
+    cp skychart/cdc $builddir/debug/skychart
+    cp skychart/cdcicon $builddir/debug/
+    cp varobs/varobs $builddir/debug/
+    cp varobs/varobs_lpv_bulletin $builddir/debug/
+    cd $builddir
+    tar cvjf bin-linux_armhf-debug-$currentrev.tar.bz2 debug
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    mv bin-*.tar.bz2 $wd
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    cd $wd
+    rm -rf $builddir
+  fi
 fi
 
 cd $wd
