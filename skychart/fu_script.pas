@@ -55,6 +55,7 @@ type
     procedure SpeedButton1Click(Sender: TObject);
   private
     { private declarations }
+    FScriptFilename: string;
     fedittoolbar: Tf_edittoolbar;
     fscriptengine: Tf_scriptengine;
     FImageNormal: TImageList;
@@ -84,7 +85,6 @@ type
     FHidenTimer: Boolean;
     FTelescopeConnected: Boolean;
     TelescopeChartName: string;
-    sctitle: array[0..ReservedScript] of string;
     procedure CreateEngine;
     procedure ApplyScript(Sender: TObject);
     procedure SetExecuteCmd(value:TExecuteCmd);
@@ -114,6 +114,7 @@ type
     destructor Destroy; override;
     procedure SetLang;
     procedure Init;
+    procedure Loadfile;
     procedure ShowScript(onoff:boolean);
     procedure ChartRefreshEvent(origin,str:string);
     procedure ObjectSelectionEvent(origin,str,longstr:string);
@@ -121,6 +122,7 @@ type
     procedure TelescopeMoveEvent(origin:string; ra,de: double);
     procedure TelescopeConnectEvent(origin:string; connected: boolean);
     procedure ActivateEvent;
+    property ScriptFilename: string read FScriptFilename write FScriptFilename;
     property ImageNormal: TImageList read FImageNormal  write FImageNormal ;
     property ContainerPanel: TPanel read FContainerPanel  write FContainerPanel ;
     property ToolButtonMouseUp: TMouseEvent read FToolButtonMouseUp  write FToolButtonMouseUp ;
@@ -172,9 +174,6 @@ begin
   Label1.Caption:=rsConfiguratio;
   ButtonEditSrc.Caption:=rsScript;
   ButtonEditTB.Caption:=rsToolBar;
-  sctitle[0]:=rsObserverTool;
-  sctitle[1]:=rsSolarSystem;
-  sctitle[2]:=rsLocationTime;
   fedittoolbar.SetLang;
   if fscriptengine<>nil then fscriptengine.SetLang;
   SetHelp(self,hlpToolbox);
@@ -184,6 +183,7 @@ constructor Tf_script.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
   FScriptTitle:='';
+  FScriptFilename:='';
   FHidenTimer:=false;
   FTelescopeConnected:=False;
   fedittoolbar:=Tf_edittoolbar.Create(self);
@@ -252,6 +252,12 @@ begin
   fscriptengine.cmain:=Fcmain;
 end;
 
+procedure Tf_script.Loadfile;
+begin
+if (fscriptengine<>nil)and(FScriptFilename>'') then
+   fscriptengine.LoadFile(FScriptFilename);
+end;
+
 procedure Tf_script.Init;
 begin
   LabelShortcut.Caption:='F'+inttostr(tag+1);
@@ -283,22 +289,11 @@ begin
   fedittoolbar.ActivateToolbar;
   ToolBar1.Visible:=(VisibleControlCount(ToolBar1)>0);
   ToolBar2.Visible:=(VisibleControlCount(ToolBar2)>0);
-  if Tag>=ReservedScript then begin
-    if FConfigScriptButton.Count>0 then begin
-       if fscriptengine=nil then begin
-          CreateEngine;
-       end;
-       fscriptengine.CheckBoxHidenTimer.Checked:=FHidenTimer;
-       fscriptengine.Load(FConfigScriptButton, FConfigScript, FConfigCombo, FConfigEvent,PanelTitle.Caption);
-       fscriptengine.InitialLoad:=false;
-    end;
-  end else begin
-    if fscriptengine=nil then begin
-       CreateEngine;
-    end;
-    fscriptengine.LoadFile(slash(appdir)+slash('data')+slash('script')+'script'+inttostr(tag+1)+'.cdcps',sctitle[tag]);
-    fscriptengine.InitialLoad:=false;
+  if fscriptengine=nil then begin
+     CreateEngine;
   end;
+  fscriptengine.LoadFile(FScriptFilename);
+  fscriptengine.InitialLoad:=false;
 end;
 
 procedure Tf_script.ButtonEditTBClick(Sender: TObject);
@@ -350,7 +345,8 @@ begin
  fedittoolbar.ActivateToolbar;
  ToolBar1.Visible:=(VisibleControlCount(ToolBar1)>0);
  ToolBar2.Visible:=(VisibleControlCount(ToolBar2)>0);
-  if Assigned(FonApply) then FonApply(self);
+ FScriptFilename:=fscriptengine.ScriptFilename;
+ if Assigned(FonApply) then FonApply(self);
 end;
 
 procedure Tf_script.SetExecuteCmd(value:TExecuteCmd);

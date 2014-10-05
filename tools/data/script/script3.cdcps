@@ -1,14 +1,14 @@
-[ScriptPanel]
-Title=Location / Time
+[Panel]
+Title=%rsLocationTime
 HidenTimer=0
-numtoolbar1=6
+NumToolbar1=6
 toolbar1_0=43;TimeDec
 toolbar1_1=44;TimeInc
 toolbar1_2=84;TimeReset
 toolbar1_3=88;Animation
 toolbar1_4=103;TimeValPanel
 toolbar1_5=104;TimeU
-numtoolbar2=8
+NumToolbar2=8
 toolbar2_0=45;SetupTime
 toolbar2_1=85;SetupObservatory
 toolbar2_2=75;Calendar
@@ -17,273 +17,306 @@ toolbar2_4=38;toN
 toolbar2_5=37;toE
 toolbar2_6=39;toS
 toolbar2_7=40;toW
-numscriptbutton=26
-scriptbutton_0="Group_1;Time;2"
-scriptbutton_1="	Edit_1"
-scriptbutton_2="	Edit_2"
-scriptbutton_3="	Button_7;Calendar"
-scriptbutton_4="	Button_4;Now"
-scriptbutton_5="	Button_1;Apply"
-scriptbutton_6="	Event_0;0;Initalisation;"
-scriptbutton_7="	Event_1;1;Activation;"
-scriptbutton_8="	Event_4;4;Chart refresh;"
-scriptbutton_9="	Event_5;5;Object identification click;"
-scriptbutton_10="	Event_9;9;Translation;"
-scriptbutton_11="Group_3;Observatory;2"
-scriptbutton_12="	Edit_3"
-scriptbutton_13="	Edit_4"
-scriptbutton_14="	Edit_5"
-scriptbutton_15="	Edit_6"
-scriptbutton_16="	Edit_7"
-scriptbutton_17="	Combo_1;"
-scriptbutton_18="Group_5;Observatory list;1"
-scriptbutton_19="	List_1;90"
-scriptbutton_20="	Button_3;Apply"
-scriptbutton_21="Group_6;;2"
-scriptbutton_22="	Button_5;Save"
-scriptbutton_23="	Button_6;Load"
-scriptbutton_24="Group_2;Info;1"
-scriptbutton_25="	Memo_1;200"
-numscriptrows=78
-script_0=7	var jd: double;
-script_1=7	begin
-script_2=7	  StrtoJD(Edit_1.Text,jd);
-script_3=7	  if CalendarDialog(jd) then begin
-script_4=7	     Edit_1.Text:=JDToStr(jd);
-script_5=7	  end;
-script_6=7	end.
-script_7=4	// Set current time
-script_8=4	begin
-script_9=4	  MenuTimeReset.click;
-script_10=4	end.
-script_11=1	// Set date/time
-script_12=1	var str: string;
-script_13=1	    cm: Tstringlist;
-script_14=1	begin
-script_15=1	 str:=trim(Edit_1.Text)+'T'+trim(Edit_2.Text);
-script_16=1	 GetSL('STRL1',cm);
-script_17=1	 cm.clear;
-script_18=1	 cm.add('SETDATE');
-script_19=1	 cm.add(str);
-script_20=1	 str:=cmd('',cm);
-script_21=1	 if pos('OK!',str)=0 then memo_1.lines.add('Error:'+str);
-script_22=1	 cm.clear;
-script_23=1	end.
-script_24=3	// Set observatory
-script_25=3	var str,obs,lat,lon,alt,tz: string;
-script_26=3	    p: integer;
-script_27=3	    cm: Tstringlist;
-script_28=3	begin
-script_29=3	if List_1.itemindex>=0 then begin
-script_30=3	  // split the parameters from the selected row
-script_31=3	  str:=List_1.items[List_1.itemindex];
-script_32=3	  p:=pos('=',str);
-script_33=3	  obs:=copy(str,1,p-1);
-script_34=3	  delete(str,1,p);
-script_35=3	  p:=pos(';',str);
-script_36=3	  lat:=copy(str,1,p-1);
-script_37=3	  delete(str,1,p);
-script_38=3	  p:=pos(';',str);
-script_39=3	  lon:=copy(str,1,p-1);
-script_40=3	  delete(str,1,p);
-script_41=3	  p:=pos(';',str);
-script_42=3	  alt:=copy(str,1,p-1);
-script_43=3	  delete(str,1,p);
-script_44=3	  tz:=str;
-script_45=3	  // format the command and set observatory
-script_46=3	  str:='LAT:'+trim(lat)+'LON:'+trim(lon);
-script_47=3	  str:=str+'ALT:'+trim(alt)+'OBS:'+trim(obs)
-script_48=3	  GetSL('STRL1',cm);
-script_49=3	  cm.clear;
-script_50=3	  cm.add('SETOBS');
-script_51=3	  cm.add(str);
-script_52=3	  str:=cmd('',cm);
-script_53=3	  if pos('OK!',str)=0 then memo_1.lines.add('Error:'+str);
-script_54=3	  // set the timezone
-script_55=3	  cm.clear;
-script_56=3	  cm.add('SETTZ');
-script_57=3	  cm.add(trim(tz));
-script_58=3	  str:=cmd('',cm);
-script_59=3	  if pos('OK!',str)=0 then memo_1.lines.add('Error:'+str);
-script_60=3	  cm.clear;
-script_61=3	  Combo_1.text:='';
-script_62=3	end;
-script_63=3	end.
-script_64=5	// save the observatory list to file
-script_65=5	var fn: string;
-script_66=5	begin
-script_67=5	 if SaveDialog(fn) then begin
-script_68=5	    List_1.items.savetofile(fn);
-script_69=5	 end;
-script_70=5	end.
-script_71=6	// load the observatory list from file
-script_72=6	var fn: string;
-script_73=6	begin
-script_74=6	 if OpenDialog(fn) then begin
-script_75=6	    List_1.items.loadfromfile(fn);
-script_76=6	 end;
-script_77=6	end.
-numcomborows=13
-comboscript_0=1	// Select and set timezone
-comboscript_1=1	var cm: TStringList;
-comboscript_2=1	    str: string;
-comboscript_3=1	begin
-comboscript_4=1	  GetSL('STRL1',cm);
-comboscript_5=1	  cm.clear;
-comboscript_6=1	  cm.clear;
-comboscript_7=1	  cm.add('SETTZ');
-comboscript_8=1	  cm.add(trim(combo_1.text));
-comboscript_9=1	  str:=cmd('',cm);
-comboscript_10=1	  if pos('OK!',str)=0 then memo_1.lines.add('Error:'+str);
-comboscript_11=1	  cm.clear;
-comboscript_12=1	end.
-numevents=149
-event_0=0	// Initialization
-event_1=0	var cm: Tstringlist;
-event_2=0	    i: integer;
-event_3=0	begin
-event_4=0	 // set properties
-event_5=0	 Memo_1.wordwrap:=false;
-event_6=0	 Combo_1.Style:=csDropDownList;
-event_7=0	 Edit_3.readonly:=true;
-event_8=0	 Edit_4.readonly:=true;
-event_9=0	 Edit_5.readonly:=true;
-event_10=0	 Edit_6.readonly:=true;
-event_11=0	 Edit_7.readonly:=true;
-event_12=0	 // fill UTC timezone
-event_13=0	 Combo_1.Clear;
-event_14=0	 for i:=0 to 11 do Combo_1.items.add('UTC'+inttostr(i-12));
-event_15=0	 Combo_1.items.add('UTC');
-event_16=0	 for i:=1 to 12 do Combo_1.items.add('UTC+'+inttostr(i));
-event_17=0	 // fill observatory list
-event_18=0	 GetSL('STRL1',cm);
-event_19=0	 cm.clear;
-event_20=0	 GetObservatoryList(cm);
-event_21=0	 List_1.Items.assign(cm);
-event_22=0	 cm.clear;
-event_23=0	 // add a few interesting location
-event_24=0	 List_1.items.add('Alexandria=31d12m00s;-29d55m00s;0m;UTC+2');
-event_25=0	 List_1.items.add('Babylon=32d32m11s;-44d25m15s;200m;UTC+3');
-event_26=0	 List_1.items.add('Samarkand=39d42m00s;-66d59m00s;700m;UTC+4');
-event_27=0	 List_1.items.add('Tikal=17d13m20s;89d37m25s;200m;UTC-6');
-event_28=0	end.
-event_29=1	// Activation event
-event_30=1	var str: string;
-event_31=1	    cm: Tstringlist;
-event_32=1	    p: integer;
-event_33=1	begin
-event_34=1	// get chart date
-event_35=1	 GetSL('STRL1',cm);
-event_36=1	 cm.clear;
-event_37=1	 cm.add('GETDATE');
-event_38=1	 str:=cmd('',cm);
-event_39=1	 p:=pos('OK!',str);
-event_40=1	 if p>0 then begin
-event_41=1	   delete(str,1,p+2);
-event_42=1	   p:=pos('T',str);
-event_43=1	   Edit_1.Text:=copy(str,1,p-1);
-event_44=1	   delete(str,1,p);
-event_45=1	   Edit_2.Text:=str;
-event_46=1	 end;
-event_47=1	 cm.clear;
-event_48=1	// get chart observatory
-event_49=1	 cm.add('GETOBS');
-event_50=1	 str:=cmd('',cm);
-event_51=1	 p:=pos('OK!',str);
-event_52=1	 if p>0 then begin
-event_53=1	   delete(str,1,p+2);
-event_54=1	   p:=pos('LAT:',str);
-event_55=1	   delete(str,1,p+3);
-event_56=1	   p:=pos('LON:',str);
-event_57=1	   Edit_3.Text:=copy(str,1,p-1);
-event_58=1	   delete(str,1,p+3);
-event_59=1	   p:=pos('ALT:',str);
-event_60=1	   Edit_4.Text:=copy(str,1,p-1);
-event_61=1	   delete(str,1,p+3);
-event_62=1	   p:=pos('OBS:',str);
-event_63=1	   Edit_5.Text:=copy(str,1,p-1);
-event_64=1	   delete(str,1,p+3);
-event_65=1	   Edit_6.Text:=str;
-event_66=1	 end;
-event_67=1	// get timezone
-event_68=1	 cm.clear;
-event_69=1	 cm.add('GETTZ');
-event_70=1	 str:=cmd('',cm);
-event_71=1	 p:=pos('OK!',str);
-event_72=1	 if p>0 then begin
-event_73=1	   delete(str,1,p+2);
-event_74=1	   Edit_7.text:=str;
-event_75=1	 end;
-event_76=1	 cm.clear;
-event_77=1	end.
-event_78=4	// Chart refresh event
-event_79=4	var str: string;
-event_80=4	    cm: Tstringlist;
-event_81=4	    p: integer;
-event_82=4	begin
-event_83=4	// get chart date
-event_84=4	 GetSL('STRL1',cm);
-event_85=4	 cm.clear;
-event_86=4	 cm.add('GETDATE');
-event_87=4	 str:=cmd('',cm);
-event_88=4	 p:=pos('OK!',str);
-event_89=4	 if p>0 then begin
-event_90=4	   delete(str,1,p+2);
-event_91=4	   p:=pos('T',str);
-event_92=4	   Edit_1.Text:=copy(str,1,p-1);
-event_93=4	   delete(str,1,p);
-event_94=4	   Edit_2.Text:=str;
-event_95=4	 end;
-event_96=4	 cm.clear;
-event_97=4	// get chart observatory
-event_98=4	 cm.add('GETOBS');
-event_99=4	 str:=cmd('',cm);
-event_100=4	 p:=pos('OK!',str);
-event_101=4	 if p>0 then begin
-event_102=4	   delete(str,1,p+2);
-event_103=4	   p:=pos('LAT:',str);
-event_104=4	   delete(str,1,p+3);
-event_105=4	   p:=pos('LON:',str);
-event_106=4	   Edit_3.Text:=copy(str,1,p-1);
-event_107=4	   delete(str,1,p+3);
-event_108=4	   p:=pos('ALT:',str);
-event_109=4	   Edit_4.Text:=copy(str,1,p-1);
-event_110=4	   delete(str,1,p+3);
-event_111=4	   p:=pos('OBS:',str);
-event_112=4	   Edit_5.Text:=copy(str,1,p-1);
-event_113=4	   delete(str,1,p+3);
-event_114=4	   Edit_6.Text:=str;
-event_115=4	 end;
-event_116=4	// get timezone
-event_117=4	 cm.clear;
-event_118=4	 cm.add('GETTZ');
-event_119=4	 str:=cmd('',cm);
-event_120=4	 p:=pos('OK!',str);
-event_121=4	 if p>0 then begin
-event_122=4	   delete(str,1,p+2);
-event_123=4	   Edit_7.text:=str;
-event_124=4	 end;
-event_125=4	 cm.clear;
-event_126=4	end.
-event_127=5	// Object identification event
-event_128=5	var longstr: string;
-event_129=5	begin
-event_130=5	// Info about object
-event_131=5	 getS('DescriptionText',longstr)
-event_132=5	 memo_1.clear;
-event_133=5	 memo_1.text:=longstr;
-event_134=5	 memo_1.selstart:=0;
-event_135=5	end.
-event_136=9	 // translation
-event_137=9	 begin
-event_138=9	  group_1.caption:=rsDateTime;
-event_139=9	  button_7.caption:=rsCalendar;
-event_140=9	  button_4.caption:=rsNow;
-event_141=9	  button_1.caption:=rsApply;
-event_142=9	  group_3.caption:=rsObservatory;
-event_143=9	  group_5.caption:=rsFavorite;
-event_144=9	  button_3.caption:=rsApply;
-event_145=9	  button_5.caption:=rsSave;
-event_146=9	  button_6.caption:=rsLoad;
-event_147=9	  group_2.caption:=rsInfo;
-event_148=9	 end.
+NumComponent=26
+component_0="Group_1;Time;2"
+component_1="	Edit_1"
+component_2="	Edit_2"
+component_3="	Button_7;Calendar"
+component_4="	Button_4;Now"
+component_5="	Button_1;Apply"
+component_6="	Event_0;0;Initalisation;"
+component_7="	Event_1;1;Activation;"
+component_8="	Event_4;4;Chart refresh;"
+component_9="	Event_5;5;Object identification click;"
+component_10="	Event_9;9;Translation;"
+component_11="Group_3;Observatory;2"
+component_12="	Edit_3"
+component_13="	Edit_4"
+component_14="	Edit_5"
+component_15="	Edit_6"
+component_16="	Edit_7"
+component_17="	Combo_1;"
+component_18="Group_5;Observatory list;1"
+component_19="	List_1;90"
+component_20="	Button_3;Apply"
+component_21="Group_6;;2"
+component_22="	Button_5;Save"
+component_23="	Button_6;Load"
+component_24="Group_2;Info;1"
+component_25="	Memo_1;200"
+
+[button_7]
+s="var jd: double;"
+"begin"
+"  StrtoJD(Edit_1.Text,jd);"
+"  if CalendarDialog(jd) then begin"
+"     Edit_1.Text:=JDToStr(jd);"
+"  end;"
+"end."
+
+
+[button_4]
+s="// Set current time"
+"begin"
+"  MenuTimeReset.click;"
+"end."
+
+
+[button_1]
+s="// Set date/time"
+"var str: string;"
+"    cm: Tstringlist;"
+"begin"
+" str:=trim(Edit_1.Text)+'T'+trim(Edit_2.Text);"
+" GetSL('STRL1',cm);"
+" cm.clear;"
+" cm.add('SETDATE');"
+" cm.add(str);"
+" str:=cmd('',cm);"
+" if pos('OK!',str)=0 then memo_1.lines.add('Error:'+str);"
+" cm.clear;"
+"end."
+
+
+[button_3]
+s="// Set observatory"
+"var str,obs,lat,lon,alt,tz: string;"
+"    p: integer;"
+"    cm: Tstringlist;"
+"begin"
+"if List_1.itemindex>=0 then begin"
+"  // split the parameters from the selected row"
+"  str:=List_1.items[List_1.itemindex];"
+"  p:=pos('=',str);"
+"  obs:=copy(str,1,p-1);"
+"  delete(str,1,p);"
+"  p:=pos(';',str);"
+"  lat:=copy(str,1,p-1);"
+"  delete(str,1,p);"
+"  p:=pos(';',str);"
+"  lon:=copy(str,1,p-1);"
+"  delete(str,1,p);"
+"  p:=pos(';',str);"
+"  alt:=copy(str,1,p-1);"
+"  delete(str,1,p);"
+"  tz:=str;"
+"  // format the command and set observatory"
+"  str:='LAT:'+trim(lat)+'LON:'+trim(lon);"
+"  str:=str+'ALT:'+trim(alt)+'OBS:'+trim(obs)"
+"  GetSL('STRL1',cm);"
+"  cm.clear;"
+"  cm.add('SETOBS');"
+"  cm.add(str);"
+"  str:=cmd('',cm);"
+"  if pos('OK!',str)=0 then memo_1.lines.add('Error:'+str);"
+"  // set the timezone"
+"  cm.clear;"
+"  cm.add('SETTZ');"
+"  cm.add(trim(tz));"
+"  str:=cmd('',cm);"
+"  if pos('OK!',str)=0 then memo_1.lines.add('Error:'+str);"
+"  cm.clear;"
+"  Combo_1.text:='';"
+"end;"
+"end."
+
+
+[button_5]
+s="// save the observatory list to file"
+"var fn: string;"
+"begin"
+" if SaveDialog(fn) then begin"
+"    List_1.items.savetofile(fn);"
+" end;"
+"end."
+
+
+[button_6]
+s="// load the observatory list from file"
+"var fn: string;"
+"begin"
+" if OpenDialog(fn) then begin"
+"    List_1.items.loadfromfile(fn);"
+" end;"
+"end."
+
+
+[combo_1]
+s="// Select and set timezone"
+"var cm: TStringList;"
+"    str: string;"
+"begin"
+"  GetSL('STRL1',cm);"
+"  cm.clear;"
+"  cm.clear;"
+"  cm.add('SETTZ');"
+"  cm.add(trim(combo_1.text));"
+"  str:=cmd('',cm);"
+"  if pos('OK!',str)=0 then memo_1.lines.add('Error:'+str);"
+"  cm.clear;"
+"end."
+
+
+[event_0]
+s="// Initialization"
+"var cm: Tstringlist;"
+"    i: integer;"
+"begin"
+" // set properties"
+" Memo_1.wordwrap:=false;"
+" Combo_1.Style:=csDropDownList;"
+" Edit_3.readonly:=true;"
+" Edit_4.readonly:=true;"
+" Edit_5.readonly:=true;"
+" Edit_6.readonly:=true;"
+" Edit_7.readonly:=true;"
+" // fill UTC timezone"
+" Combo_1.Clear;"
+" for i:=0 to 11 do Combo_1.items.add('UTC'+inttostr(i-12));"
+" Combo_1.items.add('UTC');"
+" for i:=1 to 12 do Combo_1.items.add('UTC+'+inttostr(i));"
+" // fill observatory list"
+" GetSL('STRL1',cm);"
+" cm.clear;"
+" GetObservatoryList(cm);"
+" List_1.Items.assign(cm);"
+" cm.clear;"
+" // add a few interesting location"
+" List_1.items.add('Alexandria=31d12m00s;-29d55m00s;0m;UTC+2');"
+" List_1.items.add('Babylon=32d32m11s;-44d25m15s;200m;UTC+3');"
+" List_1.items.add('Samarkand=39d42m00s;-66d59m00s;700m;UTC+4');"
+" List_1.items.add('Tikal=17d13m20s;89d37m25s;200m;UTC-6');"
+"end."
+
+
+[event_1]
+s="// Activation event"
+"var str: string;"
+"    cm: Tstringlist;"
+"    p: integer;"
+"begin"
+"// get chart date"
+" GetSL('STRL1',cm);"
+" cm.clear;"
+" cm.add('GETDATE');"
+" str:=cmd('',cm);"
+" p:=pos('OK!',str);"
+" if p>0 then begin"
+"   delete(str,1,p+2);"
+"   p:=pos('T',str);"
+"   Edit_1.Text:=copy(str,1,p-1);"
+"   delete(str,1,p);"
+"   Edit_2.Text:=str;"
+" end;"
+" cm.clear;"
+"// get chart observatory"
+" cm.add('GETOBS');"
+" str:=cmd('',cm);"
+" p:=pos('OK!',str);"
+" if p>0 then begin"
+"   delete(str,1,p+2);"
+"   p:=pos('LAT:',str);"
+"   delete(str,1,p+3);"
+"   p:=pos('LON:',str);"
+"   Edit_3.Text:=copy(str,1,p-1);"
+"   delete(str,1,p+3);"
+"   p:=pos('ALT:',str);"
+"   Edit_4.Text:=copy(str,1,p-1);"
+"   delete(str,1,p+3);"
+"   p:=pos('OBS:',str);"
+"   Edit_5.Text:=copy(str,1,p-1);"
+"   delete(str,1,p+3);"
+"   Edit_6.Text:=str;"
+" end;"
+"// get timezone"
+" cm.clear;"
+" cm.add('GETTZ');"
+" str:=cmd('',cm);"
+" p:=pos('OK!',str);"
+" if p>0 then begin"
+"   delete(str,1,p+2);"
+"   Edit_7.text:=str;"
+" end;"
+" cm.clear;"
+"end."
+
+
+[event_4]
+s="// Chart refresh event"
+"var str: string;"
+"    cm: Tstringlist;"
+"    p: integer;"
+"begin"
+"// get chart date"
+" GetSL('STRL1',cm);"
+" cm.clear;"
+" cm.add('GETDATE');"
+" str:=cmd('',cm);"
+" p:=pos('OK!',str);"
+" if p>0 then begin"
+"   delete(str,1,p+2);"
+"   p:=pos('T',str);"
+"   Edit_1.Text:=copy(str,1,p-1);"
+"   delete(str,1,p);"
+"   Edit_2.Text:=str;"
+" end;"
+" cm.clear;"
+"// get chart observatory"
+" cm.add('GETOBS');"
+" str:=cmd('',cm);"
+" p:=pos('OK!',str);"
+" if p>0 then begin"
+"   delete(str,1,p+2);"
+"   p:=pos('LAT:',str);"
+"   delete(str,1,p+3);"
+"   p:=pos('LON:',str);"
+"   Edit_3.Text:=copy(str,1,p-1);"
+"   delete(str,1,p+3);"
+"   p:=pos('ALT:',str);"
+"   Edit_4.Text:=copy(str,1,p-1);"
+"   delete(str,1,p+3);"
+"   p:=pos('OBS:',str);"
+"   Edit_5.Text:=copy(str,1,p-1);"
+"   delete(str,1,p+3);"
+"   Edit_6.Text:=str;"
+" end;"
+"// get timezone"
+" cm.clear;"
+" cm.add('GETTZ');"
+" str:=cmd('',cm);"
+" p:=pos('OK!',str);"
+" if p>0 then begin"
+"   delete(str,1,p+2);"
+"   Edit_7.text:=str;"
+" end;"
+" cm.clear;"
+"end."
+
+
+[event_5]
+s="// Object identification event"
+"var longstr: string;"
+"begin"
+"// Info about object"
+" getS('DescriptionText',longstr)"
+" memo_1.clear;"
+" memo_1.text:=longstr;"
+" memo_1.selstart:=0;"
+"end."
+
+
+[event_9]
+s=" // translation"
+" begin"
+"  group_1.caption:=rsDateTime;"
+"  button_7.caption:=rsCalendar;"
+"  button_4.caption:=rsNow;"
+"  button_1.caption:=rsApply;"
+"  group_3.caption:=rsObservatory;"
+"  group_5.caption:=rsFavorite;"
+"  button_3.caption:=rsApply;"
+"  button_5.caption:=rsSave;"
+"  button_6.caption:=rsLoad;"
+"  group_2.caption:=rsInfo;"
+" end."
+

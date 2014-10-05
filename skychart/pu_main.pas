@@ -49,6 +49,7 @@ type
 
   Tf_main = class(TForm)
     ContainerPanel: TPanel;
+    MenuToolboxConfig: TMenuItem;
     ScriptScrollBox: TScrollBox;
     SubAnimation: TMenuItem;
     MenuTimeDec: TMenuItem;
@@ -454,6 +455,7 @@ type
     procedure MenuSAMPStatusClick(Sender: TObject);
     procedure MenuSAMPSetupClick(Sender: TObject);
     procedure MenuEditToolbarClick(Sender: TObject);
+    procedure MenuToolboxConfigClick(Sender: TObject);
     procedure MenuToolboxClick(Sender: TObject);
     procedure MouseModeExecute(Sender: TObject);
     procedure MultiFrame1CreateChild(Sender: TObject);
@@ -764,7 +766,8 @@ type
     procedure InitToolBar;
     procedure InitScriptPanel;
     procedure SetScriptMenuCaption;
-    procedure ShowScriptPanel(n:integer);
+    procedure ShowScriptPanel(n:integer); overload;
+    procedure ShowScriptPanel(n:integer; showonly:boolean); overload;
     procedure ViewToolsBar;
     Procedure InitDS2000;
     function PrepareAsteroid(jd1,jd2,step:double; msg:Tstrings):boolean;
@@ -794,7 +797,7 @@ uses
     {$endif}
      LCLProc,pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom, pu_edittoolbar,
-     pu_splash, pu_manualtelescope, pu_print, pu_clock;
+     pu_scriptconfig, pu_splash, pu_manualtelescope, pu_print, pu_clock;
 
 {$ifdef mswindows}
 const
@@ -1798,6 +1801,9 @@ if not directoryexists(SatDir) then forcedirectories(SatDir);
 ArchiveDir:=slash(PrivateDir)+'Archive';
 if not directoryexists(ArchiveDir) then CreateDir(ArchiveDir);
 if not directoryexists(ArchiveDir) then forcedirectories(ArchiveDir);
+PrivateScriptDir:=slash(PrivateDir)+'script';
+if not directoryexists(PrivateScriptDir) then CreateDir(PrivateScriptDir);
+if not directoryexists(PrivateScriptDir) then forcedirectories(PrivateScriptDir);
 if VerboseMsg then
  debugln('appdir='+appdir);
 // Be sur the data directory exists
@@ -1852,6 +1858,7 @@ VarObs:=slash(appdir)+DefaultVarObs;     // varobs normally at same location as 
 if not FileExists(VarObs) then VarObs:=DefaultVarObs; // if not try in $PATH
 helpdir:=slash(appdir)+slash('doc');
 SampleDir:=slash(appdir)+slash('data')+'sample';
+ScriptDir:=slash(appdir)+slash('data')+'script';
 // Be sure zoneinfo exists in standard location or in skychart directory
 ZoneDir:=slash(appdir)+slash('data')+slash('zoneinfo');
 if VerboseMsg then
@@ -4934,6 +4941,9 @@ for i:=1 to nummainbar do configmainbar.Add(standardmainbar[i]);
 for i:=1 to numobjectbar do configobjectbar.Add(standardobjectbar[i]);
 for i:=1 to numleftbar do configleftbar.Add(standardleftbar[i]);
 for i:=1 to numrightbar do configrightbar.Add(standardrightbar[i]);
+Fscript[0].ScriptFilename:=slash(ScriptDir)+'script1.cdcps';
+Fscript[1].ScriptFilename:=slash(ScriptDir)+'script2.cdcps';
+Fscript[2].ScriptFilename:=slash(ScriptDir)+'script3.cdcps';
 end;
 
 procedure Tf_main.ReadDefault;
@@ -5755,39 +5765,13 @@ if SectionExists(section) then begin
   for i:=0 to numrightbar-1 do configrightbar.Add(ReadString(section,'rightbar'+inttostr(i),''));
 end;
 // Script panel
-for i:=0 to ReservedScript-1 do begin
+for i:=0 to numscript-1 do begin
   section:='ScriptPanel'+inttostr(i);
   ok:=ReadBool(section,'visible',false);
+  Fscript[i].ScriptFilename:=ReadString(section,'ScriptFile',Fscript[i].ScriptFilename);
   if ok then begin
       ActiveScript:=i;
   end;
-end;
-for i:=ReservedScript to numscript-1 do begin
-   section:='ScriptPanel'+inttostr(i);
-   ok:=ReadBool(section,'visible',false);
-   if ok then begin
-       ActiveScript:=i;
-   end;
-   buf:=ReadString(section,'Title',Fscript[i].ScriptTitle);
-   if buf<>'' then Fscript[i].PanelTitle.Caption:=buf;
-   Fscript[i].HidenTimer:=ReadBool(section,'HidenTimer',false);
-   n:=ReadInteger(section,'numtoolbar1',0);
-   for j:=0 to n-1 do Fscript[i].ConfigToolbar1.Add(ReadString(section,'toolbar1_'+inttostr(j),''));
-   n:=ReadInteger(section,'numtoolbar2',0);
-   for j:=0 to n-1 do Fscript[i].ConfigToolbar2.Add(ReadString(section,'toolbar2_'+inttostr(j),''));
-   n:=ReadInteger(section,'numscriptbutton',0);
-   for j:=0 to n-1 do begin
-     buf:=ReadString(section,'scriptbutton_'+inttostr(j),'');
-     if buf='' then continue;
-     buf:=StringReplace(buf,'"','',[rfReplaceAll]);
-     Fscript[i].ConfigScriptButton.Add(buf);
-   end;
-   n:=ReadInteger(section,'numscriptrows',0);
-   for j:=0 to n-1 do Fscript[i].ConfigScript.Add(ReadString(section,'script_'+inttostr(j),''));
-   n:=ReadInteger(section,'numcomborows',0);
-   for j:=0 to n-1 do Fscript[i].ConfigCombo.Add(ReadString(section,'comboscript_'+inttostr(j),''));
-   n:=ReadInteger(section,'numevents',0);
-   for j:=0 to n-1 do Fscript[i].ConfigEvent.Add(ReadString(section,'event_'+inttostr(j),''));
 end;
 
 except
@@ -5907,6 +5891,9 @@ if  Config_Version < '3.9g' then begin
   def_cfgsc.GRSlongitude:=208.0;
   def_cfgsc.GRSjd:=jd(2014,1,31,0);
   def_cfgsc.GRSdrift:=16.5/365.25;
+end;
+if  Config_Version < '3.11g' then begin
+   CopyFile(Configfile,Configfile+'.oldscripts');
 end;
 end;
 
@@ -6544,35 +6531,11 @@ for i:=0 to numleftbar-1 do WriteString(section,'leftbar'+inttostr(i),configleft
 WriteInteger(section,'numrightbar',numrightbar);
 for i:=0 to numrightbar-1 do WriteString(section,'rightbar'+inttostr(i),configrightbar[i]);
 // Script panel
-for i:=0 to ReservedScript-1 do begin
+for i:=0 to numscript-1 do begin
   section:='ScriptPanel'+inttostr(i);
   EraseSection(section);
   WriteBool(section,'visible',Fscript[i].Visible);
-end;
-for i:=ReservedScript to numscript-1 do begin
-   section:='ScriptPanel'+inttostr(i);
-   EraseSection(section);
-   WriteBool(section,'visible',Fscript[i].Visible);
-   WriteString(section,'Title',Fscript[i].ScriptTitle);
-   WriteBool(section,'HidenTimer',Fscript[i].HidenTimer);
-   n:=Fscript[i].ConfigToolbar1.Count;
-   WriteInteger(section,'numtoolbar1',n);
-   for j:=0 to n-1 do WriteString(section,'toolbar1_'+inttostr(j),Fscript[i].ConfigToolbar1[j]);
-   n:=Fscript[i].ConfigToolbar2.Count;
-   WriteInteger(section,'numtoolbar2',n);
-   for j:=0 to n-1 do WriteString(section,'toolbar2_'+inttostr(j),Fscript[i].ConfigToolbar2[j]);
-   n:=Fscript[i].ConfigScriptButton.Count;
-   WriteInteger(section,'numscriptbutton',n);
-   for j:=0 to n-1 do WriteString(section,'scriptbutton_'+inttostr(j),'"'+Fscript[i].ConfigScriptButton[j]+'"');
-   n:=Fscript[i].ConfigScript.Count;
-   WriteInteger(section,'numscriptrows',n);
-   for j:=0 to n-1 do WriteString(section,'script_'+inttostr(j),Fscript[i].ConfigScript[j]);
-   n:=Fscript[i].ConfigCombo.Count;
-   WriteInteger(section,'numcomborows',n);
-   for j:=0 to n-1 do WriteString(section,'comboscript_'+inttostr(j),Fscript[i].ConfigCombo[j]);
-   n:=Fscript[i].ConfigEvent.Count;
-   WriteInteger(section,'numevents',n);
-   for j:=0 to n-1 do WriteString(section,'event_'+inttostr(j),Fscript[i].ConfigEvent[j]);
+  WriteString(section,'ScriptFile',Fscript[i].ScriptFilename);
 end;
 Updatefile;
 end;
@@ -7062,6 +7025,7 @@ SubEdit.caption:='&'+rsEdit;
 // Menu Setup
 SubSetup.caption:='&'+rsSetup;
 MenuEditToolbar.Caption:='&'+rsToolBarEdito;
+MenuToolboxConfig.Caption:='&'+rsConfigureToo;
 // Menu View
 SubView.caption:='&'+rsView;
 SubToolBar.caption:='&'+rsToolBar;
@@ -8792,10 +8756,23 @@ begin
  end;
 end;
 
+procedure Tf_main.MenuToolboxConfigClick(Sender: TObject);
+var i:integer;
+begin
+f_scriptconfig:=Tf_scriptconfig.Create(self);
+SetLength(f_scriptconfig.Fscript,numscript);
+f_scriptconfig.onScriptSelect:=ShowScriptPanel;
+for i:=0 to numscript-1 do begin
+  f_scriptconfig.Fscript[i]:=Fscript[i];
+end;
+f_scriptconfig.ShowModal;
+f_scriptconfig.Free;
+end;
+
 procedure Tf_main.MenuToolboxClick(Sender: TObject);
 begin
 if Sender is TMenuItem then
-  ShowScriptPanel(TMenuItem(Sender).tag);
+  ShowScriptPanel(TMenuItem(Sender).tag,false);
 end;
 
 procedure Tf_main.ToolBarFOVResize(Sender: TObject);
@@ -9292,12 +9269,17 @@ MenuToolbox8.Caption:=Fscript[7].PanelTitle.Caption;
 end;
 
 procedure Tf_main.ShowScriptPanel(n:integer);
+begin
+  ShowScriptPanel(n,true);
+end;
+
+procedure Tf_main.ShowScriptPanel(n:integer; showonly:boolean);
 var i: integer;
 begin
  if n<numscript then begin
    for i:=0 to numscript-1 do begin
      if i=n then begin
-        if Fscript[i].Visible then begin
+        if Fscript[i].Visible and (not showonly) then begin
            Fscript[i].ShowScript(false);
            Splitter1.Visible:=false;
            ScriptPanel.Visible:=false;

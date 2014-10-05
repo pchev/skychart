@@ -11,8 +11,7 @@ uses
   ;
 
 procedure SIRegister_translation(CL: TPSPascalCompiler);
-  
-  
+
 implementation
 uses u_translation;
   
@@ -1520,9 +1519,6 @@ CL.AddConstantN('rsActivateTheT','String').SetString(rsActivateTheT);
 CL.AddConstantN('rsCheckList','String').SetString(rsCheckList);
 CL.AddConstantN('rsDonTForgetTo','String').SetString(rsDonTForgetTo);
 CL.AddConstantN('rsDonTForgetTo2','String').SetString(rsDonTForgetTo2);
-CL.AddConstantN('rsThisScriptIs','String').SetString(rsThisScriptIs);
-CL.AddConstantN('rsAnyChangeYou','String').SetString(rsAnyChangeYou);
-CL.AddConstantN('rsIfYouNeedToC','String').SetString(rsIfYouNeedToC);
 CL.AddConstantN('rsRun','String').SetString(rsRun);
 CL.AddConstantN('rsPause','String').SetString(rsPause);
 CL.AddConstantN('rsStepInto','String').SetString(rsStepInto);
@@ -1531,6 +1527,8 @@ CL.AddConstantN('rsRemoveAllBre','String').SetString(rsRemoveAllBre);
 CL.AddConstantN('rsTarget','String').SetString(rsTarget);
 CL.AddConstantN('rsHandPad','String').SetString(rsHandPad);
 CL.AddConstantN('rsSelectNone','String').SetString(rsSelectNone);
+CL.AddConstantN('rsObserverTool','String').SetString(rsObserverTool);
+CL.AddConstantN('rsLocationTime','String').SetString(rsLocationTime);
 CL.AddConstantN('rsMark','String').SetString(rsMark);
 CL.AddConstantN('rsChartCenterC','String').SetString(rsChartCenterC);
 CL.AddConstantN('rsAlwaysAddMer','String').SetString(rsAlwaysAddMer);
@@ -1539,7 +1537,6 @@ CL.AddConstantN('rsTCPPort','String').SetString(rsTCPPort);
 CL.AddConstantN('rsCommunicatio','String').SetString(rsCommunicatio);
 CL.AddConstantN('rsSocketConfig','String').SetString(rsSocketConfig);
 CL.AddConstantN('rsHourlyMotion','String').SetString(rsHourlyMotion);
-
 end;
 
 end.

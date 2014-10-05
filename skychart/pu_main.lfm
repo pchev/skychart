@@ -1,5 +1,5 @@
 object f_main: Tf_main
-  Left = 330
+  Left = 236
   Height = 600
   Top = 124
   Width = 1024
@@ -3925,6 +3925,10 @@ object f_main: Tf_main
       object MenuEditToolbar: TMenuItem
         Caption = 'Edit tool bar'
         OnClick = MenuEditToolbarClick
+      end
+      object MenuToolboxConfig: TMenuItem
+        Caption = 'Configure tool box'
+        OnClick = MenuToolboxConfigClick
       end
       object N34: TMenuItem
         Caption = '-'

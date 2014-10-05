@@ -147,6 +147,7 @@ type
       State: TDragState; var Accept: Boolean);
   private
     { private declarations }
+    FScriptFilename: string;
     FEditSurface: TPanel;
     FonApply: TNotifyEvent;
     dbgscr: TPSScriptDebugger;
@@ -199,6 +200,7 @@ type
     ilist: array of Integer;
     dlist: array of Double;
     slist: array of String;
+    reservedslist: string;
     strllist: array of TStringList;
     socklist: array[0..maxscriptsock] of TScriptSocket;
     FTimerReady,FEventReady: boolean;
@@ -262,6 +264,7 @@ type
     procedure AddCombo(num:string; pt: TWinControl);
     procedure AddList(num:string; pt: TWinControl;h: integer);
     procedure AddCheckList(num:string; pt: TWinControl;h: integer);
+    function GetScriptTranslation(str:string):string;
     procedure ClearTreeView;
     procedure CompileScripts;
   public
@@ -272,7 +275,7 @@ type
     procedure StartTimer;
     procedure Save(strbtn, strscr, comboscr, eventscr: Tstringlist; var title:string);
     procedure Load(strbtn, strscr, comboscr, eventscr: Tstringlist; title:string);
-    procedure LoadFile(fn: string; title:string='');
+    procedure LoadFile(fn: string);
     procedure ChartRefreshEvent(origin,str:string);
     procedure ObjectSelectionEvent(origin,str,longstr:string);
     procedure DistanceMeasurementEvent(origin,str:string);
@@ -297,6 +300,7 @@ type
     property planet: Tplanet read Fplanet write Fplanet;
     property cmain: Tconf_main read Fcmain write Fcmain;
     property ActiveChart: Tf_chart read FActiveChart write FActiveChart;
+    property ScriptFilename: string read FScriptFilename;
   end;
 
 var
@@ -553,6 +557,7 @@ begin
   else if varname='STR8' then slist[7]:=str
   else if varname='STR9' then slist[8]:=str
   else if varname='STR10' then slist[9]:=str
+  else if varname='RESERVED' then reservedslist:=str
   else result:=false;
 end;
 
@@ -973,42 +978,142 @@ begin
   ButtonApplyClick(nil);
 end;
 
-procedure Tf_scriptengine.LoadFile(fn: string; title:string='');
+
+function Tf_scriptengine.GetScriptTranslation(str:string):string;
+var testscr:Tstringlist;
+    tscr:TPSScript;
+begin
+testscr:=Tstringlist.create;
+testscr.Add('var buf:string;');
+testscr.Add('begin');
+testscr.Add('buf:='+str+';');
+testscr.Add('SetS(''RESERVED'',buf);');
+testscr.Add('end.');
+tscr:=TPSScript.Create(self);
+tscr.OnCompile:=@TplPSScriptCompile;
+tscr.OnExecute:=@TplPSScriptExecute;
+tscr.OnLine:=@TplPSScriptLine;
+tscr.Plugins.Assign(TplPSScript.Plugins);
+tscr.Script.Assign(testscr);
+tscr.Compile;
+tscr.Execute;
+tscr.free;
+testscr.free;
+result:=reservedslist;
+end;
+
+procedure Tf_scriptengine.LoadFile(fn: string);
 var ConfigScriptButton, ConfigScript, ConfigCombo, ConfigEvent: Tstringlist;
-    section,buf,titl: string;
+    section,buf,titl,num: string;
+    sectionlist,scrlist: Tstringlist;
     inif: TMemIniFile;
-    j,n: integer;
+    i,j,k,n: integer;
 begin
   ConfigScriptButton:=Tstringlist.create;
   ConfigScript:=Tstringlist.create;
   ConfigCombo:=Tstringlist.create;
   ConfigEvent:=Tstringlist.create;
+  FScriptFilename:=fn;
   inif:=TMeminifile.create(fn);
   try
   with inif do begin
-  section:='ScriptPanel';
-  titl:=ReadString(section,'Title',ScriptTitle.Text);
-  if title<>'' then titl:=title;
-  CheckBoxHidenTimer.Checked:=ReadBool(section,'HidenTimer',CheckBoxHidenTimer.Checked);
-  n:=ReadInteger(section,'numtoolbar1',0);
-  ConfigToolbar1.Clear;
-  for j:=0 to n-1 do ConfigToolbar1.Add(ReadString(section,'toolbar1_'+inttostr(j),''));
-  n:=ReadInteger(section,'numtoolbar2',0);
-  ConfigToolbar2.Clear;
-  for j:=0 to n-1 do ConfigToolbar2.Add(ReadString(section,'toolbar2_'+inttostr(j),''));
-  n:=ReadInteger(section,'numscriptbutton',0);
-  for j:=0 to n-1 do begin
-    buf:=ReadString(section,'scriptbutton_'+inttostr(j),'');
-    if buf='' then continue;
-    buf:=StringReplace(buf,'"','',[rfReplaceAll]);
-    ConfigScriptButton.Add(buf);
+  if SectionExists('Panel') then begin // New format
+    section:='Panel';
+    titl:=ReadString(section,'Title',ScriptTitle.Text);
+    if copy(titl,1,1)='%' then begin
+      delete(titl,1,1);
+      titl:=GetScriptTranslation(titl);
+    end;
+    CheckBoxHidenTimer.Checked:=ReadBool(section,'HidenTimer',CheckBoxHidenTimer.Checked);
+    n:=ReadInteger(section,'NumToolbar1',0);
+    ConfigToolbar1.Clear;
+    for j:=0 to n-1 do ConfigToolbar1.Add(ReadString(section,'toolbar1_'+inttostr(j),''));
+    n:=ReadInteger(section,'NumNoolbar2',0);
+    ConfigToolbar2.Clear;
+    for j:=0 to n-1 do ConfigToolbar2.Add(ReadString(section,'toolbar2_'+inttostr(j),''));
+    n:=ReadInteger(section,'NumComponent',0);
+    for j:=0 to n-1 do begin
+      buf:=ReadString(section,'component_'+inttostr(j),'');
+      if buf='' then continue;
+      buf:=StringReplace(buf,'"','',[rfReplaceAll]);
+      ConfigScriptButton.Add(buf);
+    end;
+    sectionlist:=Tstringlist.Create;
+    scrlist:=Tstringlist.Create;
+    ReadSections(sectionlist);
+    for j:=0 to sectionlist.Count-1 do begin
+      section:=sectionlist[j];
+      if pos('button_',section)=1 then begin
+         num:=section;
+         delete(num,1,7);
+         ReadSectionRaw(section,scrlist);
+         for k:=0 to scrlist.Count-1 do begin
+           buf:=scrlist[k];
+           if k=0 then begin
+             delete(buf,1,2); // s="..."
+           end;
+           delete(buf,1,1); //start quote
+           delete(buf,length(buf),1); //end quote
+           ConfigScript.Add(num+tab+buf);
+         end;
+         scrlist.Clear;
+      end else if pos('combo_',section)=1 then begin
+        num:=section;
+        delete(num,1,6);
+        ReadSectionRaw(section,scrlist);
+        for k:=0 to scrlist.Count-1 do begin
+          buf:=scrlist[k];
+          if k=0 then begin
+            delete(buf,1,2); // s="..."
+          end;
+          delete(buf,1,1); //start quote
+          delete(buf,length(buf),1); //end quote
+          ConfigCombo.Add(num+tab+buf);
+        end;
+        scrlist.Clear;
+      end else if pos('event_',section)=1 then begin
+        num:=section;
+        delete(num,1,6);
+        ReadSectionRaw(section,scrlist);
+        for k:=0 to scrlist.Count-1 do begin
+          buf:=scrlist[k];
+          if k=0 then begin
+            delete(buf,1,2); // s="..."
+          end;
+          delete(buf,1,1); //start quote
+          delete(buf,length(buf),1); //end quote
+          ConfigEvent.Add(num+tab+buf);
+        end;
+        scrlist.Clear;
+      end;
+    end;
+    sectionlist.Free;
+    scrlist.Free;
+
+  end else begin // Old format
+    section:='ScriptPanel';
+    titl:=ReadString(section,'Title',ScriptTitle.Text);
+    CheckBoxHidenTimer.Checked:=ReadBool(section,'HidenTimer',CheckBoxHidenTimer.Checked);
+    n:=ReadInteger(section,'numtoolbar1',0);
+    ConfigToolbar1.Clear;
+    for j:=0 to n-1 do ConfigToolbar1.Add(ReadString(section,'toolbar1_'+inttostr(j),''));
+    n:=ReadInteger(section,'numtoolbar2',0);
+    ConfigToolbar2.Clear;
+    for j:=0 to n-1 do ConfigToolbar2.Add(ReadString(section,'toolbar2_'+inttostr(j),''));
+    n:=ReadInteger(section,'numscriptbutton',0);
+    for j:=0 to n-1 do begin
+      buf:=ReadString(section,'scriptbutton_'+inttostr(j),'');
+      if buf='' then continue;
+      buf:=StringReplace(buf,'"','',[rfReplaceAll]);
+      ConfigScriptButton.Add(buf);
+    end;
+    n:=ReadInteger(section,'numscriptrows',0);
+    for j:=0 to n-1 do ConfigScript.Add(ReadString(section,'script_'+inttostr(j),''));
+    n:=ReadInteger(section,'numcomborows',0);
+    for j:=0 to n-1 do ConfigCombo.Add(ReadString(section,'comboscript_'+inttostr(j),''));
+    n:=ReadInteger(section,'numevents',0);
+    for j:=0 to n-1 do ConfigEvent.Add(ReadString(section,'event_'+inttostr(j),''));
   end;
-  n:=ReadInteger(section,'numscriptrows',0);
-  for j:=0 to n-1 do ConfigScript.Add(ReadString(section,'script_'+inttostr(j),''));
-  n:=ReadInteger(section,'numcomborows',0);
-  for j:=0 to n-1 do ConfigCombo.Add(ReadString(section,'comboscript_'+inttostr(j),''));
-  n:=ReadInteger(section,'numevents',0);
-  for j:=0 to n-1 do ConfigEvent.Add(ReadString(section,'event_'+inttostr(j),''));
   end;
   finally
    inif.Free;
@@ -1311,8 +1416,7 @@ if not InitialLoad then begin
   evscr[ord(evActivation)].Execute;
   TelescopeConnectEvent(TelescopeChartName,FTelescopeConnected);
   if CompileMemo.Lines.Count=0 then begin
-    if tag<ReservedScript then CompileMemo.Lines.Add(rsDonTForgetTo)
-       else CompileMemo.Lines.Add(rsDonTForgetTo2);
+    CompileMemo.Lines.Add(rsDonTForgetTo);
   end;
 end;
 if Assigned(FonApply) then FonApply(self);
@@ -1599,42 +1703,93 @@ end;
 
 procedure Tf_scriptengine.ButtonSaveClick(Sender: TObject);
 var ConfigScriptButton, ConfigScript, ConfigCombo, ConfigEvent: Tstringlist;
-    fn,section,titl: string;
+    fn,section,scrsect,scrline,titl,num,pnum,buf: string;
     inif: TMemIniFile;
-    j,n: integer;
+    j,n,p: integer;
 begin
+SaveDialog1.FileName:=FScriptFilename;
 if SaveDialog1.Execute then begin
   fn:=SaveDialog1.FileName;
+  FScriptFilename:=fn;
   ConfigScriptButton:=Tstringlist.create;
   ConfigScript:=Tstringlist.create;
   ConfigCombo:=Tstringlist.create;
   ConfigEvent:=Tstringlist.create;
   Save(ConfigScriptButton, ConfigScript, ConfigCombo, ConfigEvent,titl);
   inif:=TMeminifile.create(fn);
+  inif.Clear;
   try
   with inif do begin
-  section:='ScriptPanel';
+  section:='Panel';
   EraseSection(section);
   WriteString(section,'Title',titl);
   WriteBool(section,'HidenTimer',CheckBoxHidenTimer.Checked);
   n:=ConfigToolbar1.Count;
-  WriteInteger(section,'numtoolbar1',n);
+  WriteInteger(section,'NumToolbar1',n);
   for j:=0 to n-1 do WriteString(section,'toolbar1_'+inttostr(j),ConfigToolbar1[j]);
   n:=ConfigToolbar2.Count;
-  WriteInteger(section,'numtoolbar2',n);
+  WriteInteger(section,'NumToolbar2',n);
   for j:=0 to n-1 do WriteString(section,'toolbar2_'+inttostr(j),ConfigToolbar2[j]);
   n:=ConfigScriptButton.Count;
-  WriteInteger(section,'numscriptbutton',n);
-  for j:=0 to n-1 do WriteString(section,'scriptbutton_'+inttostr(j),'"'+ConfigScriptButton[j]+'"');
+  WriteInteger(section,'NumComponent',n);
+  for j:=0 to n-1 do WriteString(section,'component_'+inttostr(j),'"'+ConfigScriptButton[j]+'"');
+  // button script
   n:=ConfigScript.Count;
-  WriteInteger(section,'numscriptrows',n);
-  for j:=0 to n-1 do WriteString(section,'script_'+inttostr(j),ConfigScript[j]);
+  pnum:='';
+  scrline:=''; scrsect:='';
+  for j:=0 to n-1 do begin
+    buf:=ConfigScript[j];
+    p:=pos(tab,buf);
+    num:=copy(buf,1,p-1);
+    delete(buf,1,p);
+    if num=pnum then begin
+      scrline:=scrline+'"'+buf+'"'+crlf;
+    end else begin
+      if scrline>'' then WriteString(scrsect,'s',scrline);
+      pnum:=num;
+      scrsect:='button_'+num;
+      scrline:='"'+buf+'"'+crlf;
+    end;
+  end;
+  if scrline>'' then WriteString(scrsect,'s',scrline);
+  // Combo script
   n:=ConfigCombo.Count;
-  WriteInteger(section,'numcomborows',n);
-  for j:=0 to n-1 do WriteString(section,'comboscript_'+inttostr(j),ConfigCombo[j]);
+  pnum:='';
+  scrline:=''; scrsect:='';
+  for j:=0 to n-1 do begin
+    buf:=ConfigCombo[j];
+    p:=pos(tab,buf);
+    num:=copy(buf,1,p-1);
+    delete(buf,1,p);
+    if num=pnum then begin
+      scrline:=scrline+'"'+buf+'"'+crlf;
+    end else begin
+      if scrline>'' then WriteString(scrsect,'s',scrline);
+      pnum:=num;
+      scrsect:='combo_'+num;
+      scrline:='"'+buf+'"'+crlf;
+    end;
+  end;
+  if scrline>'' then WriteString(scrsect,'s',scrline);
+  // Events
   n:=ConfigEvent.Count;
-  WriteInteger(section,'numevents',n);
-  for j:=0 to n-1 do WriteString(section,'event_'+inttostr(j),ConfigEvent[j]);
+  pnum:='';
+  scrline:=''; scrsect:='';
+  for j:=0 to n-1 do begin
+    buf:=ConfigEvent[j];
+    p:=pos(tab,buf);
+    num:=copy(buf,1,p-1);
+    delete(buf,1,p);
+    if num=pnum then begin
+      scrline:=scrline+'"'+buf+'"'+crlf;
+    end else begin
+      if scrline>'' then WriteString(scrsect,'s',scrline);
+      pnum:=num;
+      scrsect:='event_'+num;
+      scrline:='"'+buf+'"'+crlf;
+    end;
+  end;
+  if scrline>'' then WriteString(scrsect,'s',scrline);
   Updatefile;
   end;
   finally
@@ -1852,13 +2007,9 @@ end;
 
 procedure Tf_scriptengine.FormShow(Sender: TObject);
 begin
+OpenDialog1.InitialDir:=PrivateScriptDir;
+SaveDialog1.InitialDir:=PrivateScriptDir;
 CompileMemo.Clear;
-if Tag < ReservedScript then begin
-  CompileMemo.Lines.Add(rsWarning);
-  CompileMemo.Lines.Add(rsThisScriptIs);
-  CompileMemo.Lines.Add(rsAnyChangeYou);
-  CompileMemo.Lines.Add(rsIfYouNeedToC);
-end;
 end;
 
 procedure Tf_scriptengine.ButtonClearClick(Sender: TObject);

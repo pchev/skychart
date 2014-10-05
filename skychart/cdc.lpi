@@ -395,7 +395,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item23>
     </RequiredPackages>
-    <Units Count="83">
+    <Units Count="84">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -979,6 +979,14 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="u_scriptsocket"/>
       </Unit82>
+      <Unit83>
+        <Filename Value="pu_scriptconfig.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_scriptconfig"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pu_scriptconfig"/>
+      </Unit83>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
