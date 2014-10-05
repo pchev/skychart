@@ -1550,6 +1550,7 @@ resourcestring
   rsHourlyMotion = 'Hourly motion';
   rsKey = 'Key';
   rsConfigureToo = 'Configure tool box';
+  rsSelectScript = 'Select script';
 
 implementation
 

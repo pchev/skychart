@@ -38,16 +38,17 @@ type
   { Tf_script }
 
   Tf_script = class(TFrame)
+    ButtonConfig: TBitBtn;
     ButtonEditTB: TBitBtn;
     ButtonEditSrc: TBitBtn;
     BottomPanel: TPanel;
-    Label1: TLabel;
     LabelShortcut: TLabel;
     MainPanel: TPanel;
     PanelTitle: TPanel;
     SpeedButton1: TSpeedButton;
     ToolBar1: TToolBar;
     ToolBar2: TToolBar;
+    procedure ButtonConfigClick(Sender: TObject);
     procedure ButtonEditTBClick(Sender: TObject);
     procedure ButtonEditSrcClick(Sender: TObject);
     procedure PanelTitleMouseEnter(Sender: TObject);
@@ -85,6 +86,7 @@ type
     FHidenTimer: Boolean;
     FTelescopeConnected: Boolean;
     TelescopeChartName: string;
+    FToolboxConfig: TNotifyEvent;
     procedure CreateEngine;
     procedure ApplyScript(Sender: TObject);
     procedure SetExecuteCmd(value:TExecuteCmd);
@@ -158,6 +160,7 @@ type
     property ActiveChart: Tf_chart read FActiveChart write SetActiveChart;
     property HidenTimer: Boolean read GetHidenTimer write SetHidenTimer;
     property onApply: TNotifyEvent read FonApply write FonApply;
+    property onToolboxConfig: TNotifyEvent read FToolboxConfig write FToolboxConfig;
     property ScriptTitle: string read FScriptTitle;
   end;
 
@@ -171,7 +174,7 @@ procedure Tf_script.SetLang;
 begin
   if FScriptTitle='' then PanelTitle.Caption:=rsToolBox+' '+inttostr(tag+1)
                      else PanelTitle.Caption:=FScriptTitle;
-  Label1.Caption:=rsConfiguratio;
+  ButtonConfig.Caption:=rsConfiguratio;
   ButtonEditSrc.Caption:=rsScript;
   ButtonEditTB.Caption:=rsToolBar;
   fedittoolbar.SetLang;
@@ -254,7 +257,7 @@ end;
 
 procedure Tf_script.Loadfile;
 begin
-if (fscriptengine<>nil)and(FScriptFilename>'') then
+if (fscriptengine<>nil) then
    fscriptengine.LoadFile(FScriptFilename);
 end;
 
@@ -308,6 +311,11 @@ begin
      ToolBar1.Visible:=(VisibleControlCount(ToolBar1)>0);
      ToolBar2.Visible:=(VisibleControlCount(ToolBar2)>0);
   end;
+end;
+
+procedure Tf_script.ButtonConfigClick(Sender: TObject);
+begin
+ if assigned(FToolboxConfig) then FToolboxConfig(self);
 end;
 
 procedure Tf_script.ButtonEditSrcClick(Sender: TObject);
