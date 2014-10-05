@@ -47,7 +47,7 @@ type
 
 const
   cdcversion = 'Version 3.11-svn';
-  cdcver = '3.11f';
+  cdcver = '3.11g';
   cdccpy = 'Copyright (C) 2002-2014 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf +
     'Peter Dean,' + crlf + 'John Sunderland' + crlf  + 'Anat Ruangrassamee';
@@ -108,7 +108,6 @@ const
   FovMax = pi2;
   DefaultPrtRes = 300;
   encryptpwd = 'zh6Tiq4h;90uA3.ert';
-  ReservedScript=3;
   maxscriptsock=10;
   MaxMenulevel=10;
   //                          0         1                                       5                                                 10                                                15                                                20                            23        24        25        26        27        28        29        30        31        32        33        34        35
@@ -1226,7 +1225,7 @@ type
 // pseudo-constant only here
 var
   ConfigAppdir, ConfigPrivateDir, Appdir, PrivateDir, SampleDir, SatDir, ArchiveDir,
-  TempDir, ZoneDir, HomeDir, VODir: string;
+  TempDir, ZoneDir, HomeDir, VODir, ScriptDir, PrivateScriptDir: string;
   VarObs, CdC, MPCDir, DBDir, PictureDir: string;
   ForceConfig, ForceUserDir, Configfile, Lang: string;
   compile_time, compile_version, compile_system, lclver: string;

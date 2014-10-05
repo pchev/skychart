@@ -1,0 +1,51 @@
+object f_scriptconfig: Tf_scriptconfig
+  Left = 609
+  Height = 294
+  Top = 159
+  Width = 592
+  Caption = 'f_scriptconfig'
+  ClientHeight = 294
+  ClientWidth = 592
+  OnCreate = FormCreate
+  OnShow = FormShow
+  LCLVersion = '1.2.4.0'
+  object StringGrid1: TStringGrid
+    Left = 0
+    Height = 251
+    Top = 0
+    Width = 592
+    Align = alClient
+    ColCount = 3
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goSmoothScroll]
+    RowCount = 9
+    TabOrder = 0
+    OnMouseUp = StringGrid1MouseUp
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 43
+    Top = 251
+    Width = 592
+    Align = alBottom
+    ClientHeight = 43
+    ClientWidth = 592
+    TabOrder = 1
+    object Button1: TButton
+      Left = 488
+      Height = 25
+      Top = 8
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = 'Close'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Filter = 'CdC script|*.cdcps'
+    Options = [ofReadOnly, ofFileMustExist, ofEnableSizing, ofViewDetail]
+    left = 248
+    top = 32
+  end
+end

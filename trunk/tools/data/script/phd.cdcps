@@ -1,405 +1,426 @@
-[ScriptPanel]
+[Panel]
 Title=PHD interface
 HidenTimer=0
-numtoolbar1=0
-numtoolbar2=0
-numscriptbutton=32
-scriptbutton_0="Group_4;PHD host and port;2"
-scriptbutton_1="	Edit_9"
-scriptbutton_2="	Edit_10"
-scriptbutton_3="Group_1;Status;2"
-scriptbutton_4="	Button_1;Connect"
-scriptbutton_5="	Button_2;Disconnect"
-scriptbutton_6="	Edit_1"
-scriptbutton_7="	Edit_2"
-scriptbutton_8="	Event_2;2;Timer;1"
-scriptbutton_9="	Event_0;0;Initialisation;"
-scriptbutton_10="	Event_5;5;Object identification click;"
-scriptbutton_11="Group_2;Lock Shift;2"
-scriptbutton_12="	Edit_3"
-scriptbutton_13="	Edit_4"
-scriptbutton_14="	Button_3;Set rates"
-scriptbutton_15="	Button_4;Off"
-scriptbutton_16="	Edit_7"
-scriptbutton_17="	Edit_5"
-scriptbutton_18="	Edit_6"
-scriptbutton_19="	Edit_8"
-scriptbutton_20="Group_5;Dither;2"
-scriptbutton_21="	Label_1;Shift"
-scriptbutton_22="	Label_2;Direction"
-scriptbutton_23="	Combo_1;"
-scriptbutton_24="	CheckList_1;26"
-scriptbutton_25="	Label_3;Stability"
-scriptbutton_26="	Label_4;Timeout"
-scriptbutton_27="	Combo_2;"
-scriptbutton_28="	Combo_3;"
-scriptbutton_29="	Button_5;Dither"
-scriptbutton_30="Group_3;Messages;1"
-scriptbutton_31="	Memo_1;50"
-numscriptrows=82
-script_0=1	//
-script_1=1	// Button Connect
-script_2=1	var buf: string;
-script_3=1	    count:integer;
-script_4=1	begin
-script_5=1	  TcpConnect(0,edit_9.text,edit_10.text,'100');
-script_6=1	  buf:='{"method": "get_lock_shift_params", "id": 1003}';
-script_7=1	  count:=length(buf);
-script_8=1	  TcpWrite(0,buf,count);
-script_9=1	end.
-script_10=1	//
-script_11=2	//
-script_12=2	// Button Disconnect
-script_13=2	begin
-script_14=2	TcpDisconnect(0);
-script_15=2	end.
-script_16=2	//
-script_17=3	//
-script_18=3	// Button Set
-script_19=3	var count : integer;
-script_20=3	    buf:string;
-script_21=3	    rx,ry,invalidfloat:double;
-script_22=3	begin
-script_23=3	if TcpConnected(0) then begin
-script_24=3	  invalidfloat:=999999;
-script_25=3	  StrtoFloatD(Edit_3.text,invalidfloat,rx);
-script_26=3	  StrtoFloatD(Edit_4.text,invalidfloat,ry);
-script_27=3	  if (abs(rx)>10000)or(abs(ry)>10000) then
-script_28=3	    ShowMessage('Invalid rate values!')
-script_29=3	  else begin
-script_30=3	    buf:='{"method": "set_lock_shift_params", "params": [{"rate": [';
-script_31=3	    buf:=buf+Edit_3.text+',';
-script_32=3	    buf:=buf+Edit_4.text;
-script_33=3	    buf:=buf+'], "units": "arcsec/hr", "axes": "RA/Dec"}], "id": 1001}'
-script_34=3	    count:=length(buf);
-script_35=3	    TcpWrite(0,buf,count);
-script_36=3	    buf:='{"method": "get_lock_shift_params", "id": 1003}';
-script_37=3	    count:=length(buf);
-script_38=3	    TcpWrite(0,buf,count);
-script_39=3	    SetI('INT1',1);
-script_40=3	  end;
-script_41=3	end;
-script_42=3	end.
-script_43=3	//
-script_44=4	//
-script_45=4	// Button On/Off
-script_46=4	var count : integer;
-script_47=4	    buf,status:string;
-script_48=4	begin
-script_49=4	if TcpConnected(0) then begin
-script_50=4	  if Button_4.Caption='Off' then status:='true' else status:='false';
-script_51=4	  buf:='{"method": "set_lock_shift_enabled", "params": [';
-script_52=4	  buf:=buf+status;
-script_53=4	  buf:=buf+'], "id": 1002}'
-script_54=4	  count:=length(buf);
-script_55=4	  TcpWrite(0,buf,count);
-script_56=4	  if status='true' then  Button_4.Caption:='On' else Button_4.Caption:='Off';
-script_57=4	  buf:='{"method": "get_lock_shift_enabled", "id": 1004}';
-script_58=4	  count:=length(buf);
-script_59=4	  TcpWrite(0,buf,count);
-script_60=4	  SetI('INT1',1);
-script_61=4	end;
-script_62=4	end.
-script_63=4	//
-script_64=5	//
-script_65=5	// Button Dither
-script_66=5	var count : integer;
-script_67=5	    buf:string;
-script_68=5	begin
-script_69=5	if TcpConnected(0) then begin
-script_70=5	    buf:='{"method": "dither", "params": [';
-script_71=5	    buf:=buf+Combo_1.text+',';
-script_72=5	    if Checklist_1.checked[0] then buf:=buf+'true,' else buf:=buf+'false,';
-script_73=5	    buf:=buf+'{"pixels": '+Combo_2.text+',';
-script_74=5	    buf:=buf+'"time": 5,';
-script_75=5	    buf:=buf+'"timeout": '+Combo_3.text+'}],';
-script_76=5	    buf:=buf+'"id": 1005}';
-script_77=5	    count:=length(buf);
-script_78=5	    TcpWrite(0,buf,count);
-script_79=5	end;
-script_80=5	end.
-script_81=5	//
-numcomborows=0
-numevents=282
-event_0=2	//
-event_1=2	// Timer
-event_2=2	// Process a PHD event
-event_3=2	Procedure ProcessEvent(txt:string);
-event_4=2	var eventname,rpcid,rpcresult,rpcerror,buf,fullmsg: string;
-event_5=2	    PHDVersion,MsgVersion: string;
-event_6=2	    attrib,value:Tstringlist;
-event_7=2	    p,i:integer;
-event_8=2	begin
-event_9=2	GetSL('STRL1',attrib);
-event_10=2	attrib.clear;
-event_11=2	GetSL('STRL2',value);
-event_12=2	value.clear;
-event_13=2	try
-event_14=2	fullmsg:=txt;
-event_15=2	JsontoStringlist(txt,attrib,value);
-event_16=2	p:=attrib.IndexOf('Event');    // PHD events
-event_17=2	if p>=0 then begin
-event_18=2	   eventname:=value[p];
-event_19=2	   if eventname='GuideStep' then edit_2.text:='Guiding'
-event_20=2	   else if eventname='StartGuiding' then edit_2.text:='Guiding'
-event_21=2	   else if eventname='GuidingStopped' then edit_2.text:='Stopped'
-event_22=2	   else if eventname='StarSelected' then edit_2.text:='Star Selected'
-event_23=2	   else if eventname='StarLost' then edit_2.text:='Star lost'
-event_24=2	   else if eventname='Paused' then edit_2.text:='Paused'
-event_25=2	   else if eventname='Resumed' then edit_2.text:='Resumed'
-event_26=2	   else if eventname='LockPositionSet' then edit_2.text:='Lock Position Set'
-event_27=2	   else if eventname='CalibrationComplete' then edit_2.text:='Calibration Complete'
-event_28=2	   else if eventname='StarSelected' then edit_2.text:='Star Selected'
-event_29=2	   else if eventname='StartCalibration' then edit_2.text:='Start Calibration'
-event_30=2	   else if eventname='CalibrationFailed' then edit_2.text:='Calibration Failed'
-event_31=2	   else if eventname='CalibrationDataFlipped' then edit_2.text:='Calibration Data Flipped'
-event_32=2	   else if eventname='LoopingExposures' then edit_2.text:='Looping Exposures'
-event_33=2	   else if eventname='LoopingExposuresStopped' then edit_2.text:='Looping Exposures Stopped'
-event_34=2	   else if eventname='Settling' then edit_2.text:='Settling'
-event_35=2	   else if eventname='SettleDone' then edit_2.text:='Settle Done'
-event_36=2	   else if eventname='GuidingDithered' then edit_2.text:='Guiding Dithered'
-event_37=2	   else if eventname='LockPositionLost' then edit_2.text:='Lock Position Lost'
-event_38=2	   else if eventname='Alert' then edit_2.text:='Alert'
-event_39=2	   else if eventname='AppState' then begin
-event_40=2	     i:=attrib.IndexOf('State');
-event_41=2	     edit_2.text:=value[i];
-event_42=2	   end
-event_43=2	   else if eventname='Version' then begin
-event_44=2	     i:=attrib.IndexOf('PHDVersion');
-event_45=2	     if i>=0 then begin
-event_46=2	        PHDVersion:=value[i];
-event_47=2	        SetS('STR1',PHDVersion);
-event_48=2	     end;
-event_49=2	     i:=attrib.IndexOf('MsgVersion');
-event_50=2	     if i>=0 then begin
-event_51=2	        MsgVersion:=value[i];
-event_52=2	        SetS('STR2',MsgVersion);
-event_53=2	     end;
-event_54=2	   end
-event_55=2	   ;
-event_56=2	end else begin
-event_57=2	  p:=attrib.IndexOf('jsonrpc');   // Response to command
-event_58=2	  if p>=0 then begin
-event_59=2	     p:=attrib.IndexOf('id');
-event_60=2	     rpcid:=value[p];
-event_61=2	     i:=attrib.IndexOf('result');
-event_62=2	     if i>=0 then rpcresult:=value[i]
-event_63=2	     else begin
-event_64=2	       i:=attrib.IndexOf('error.code');
-event_65=2	       if i>=0 then begin
-event_66=2	          rpcresult:='error'
-event_67=2	          i:=attrib.IndexOf('error.message');
-event_68=2	          if i>=0 then rpcerror:=value[i]
-event_69=2	                  else rpcerror:='no response';
-event_70=2	       end
-event_71=2	       else rpcresult:='ok';
-event_72=2	     end;
-event_73=2	     if rpcid='1000' then begin   // get_app_state
-event_74=2	       if rpcresult='error' then memo_1.lines.add('get_app_state'+' '+rpcresult+' '+rpcerror)
-event_75=2	          else edit_2.text:=rpcresult;
-event_76=2	     end
-event_77=2	     else if rpcid='1001' then begin  // set_lock_shift_params
-event_78=2	       if rpcresult='error' then memo_1.lines.add('set_lock_shift_params'+' '+rpcresult+' '+rpcerror);
-event_79=2	     end
-event_80=2	     else if rpcid='1002' then begin  // set_lock_shift_enabled
-event_81=2	       if rpcresult='error' then memo_1.lines.add('set_lock_shift_enabled'+' '+rpcresult+' '+rpcerror);
-event_82=2	     end
-event_83=2	     else if rpcid='1003' then begin  // get_lock_shift_params
-event_84=2	       if rpcresult='error' then
-event_85=2	         memo_1.lines.add('get_lock_shift_params'+' '+rpcresult+' '+rpcerror)
-event_86=2	       else begin
-event_87=2	         i:=attrib.IndexOf('result.enabled');
-event_88=2	         if i>=0 then begin
-event_89=2	           edit_5.text:=value[i];
-event_90=2	           if uppercase(trim(value[i]))='TRUE' then Button_4.Caption:='On'
-event_91=2	              else Button_4.Caption:='Off';
-event_92=2	         end
-event_93=2	         else edit_5.text:='?';
-event_94=2	         i:=attrib.IndexOf('result.axes');
-event_95=2	         if i>=0 then edit_6.text:=value[i] else edit_6.text:='?';
-event_96=2	         buf:='?';
-event_97=2	         i:=attrib.IndexOf('result.rate.0');
-event_98=2	         if i>=0 then buf:=value[i];
-event_99=2	         i:=attrib.IndexOf('result.rate.1');
-event_100=2	         if i>=0 then buf:=buf+','+value[i];
-event_101=2	         edit_7.text:=buf;
-event_102=2	         i:=attrib.IndexOf('result.units');
-event_103=2	         if i>=0 then edit_8.text:=value[i] else edit_8.text:='?';
-event_104=2	       end;
-event_105=2	     end
-event_106=2	     else if rpcid='1004' then begin  // get_lock_shift_enabled
-event_107=2	       if rpcresult='error' then
-event_108=2	         memo_1.lines.add('get_lock_shift_enabled'+' '+rpcresult+' '+rpcerror)
-event_109=2	       else
-event_110=2	         edit_5.text:=rpcresult;
-event_111=2	         if uppercase(trim(rpcresult))='TRUE' then Button_4.Caption:='On'
-event_112=2	            else Button_4.Caption:='Off';
-event_113=2	     end;
-event_114=2	  end;
-event_115=2	end;
-event_116=2	finally
-event_117=2	 attrib.clear;
-event_118=2	 value.clear;
-event_119=2	end;
-event_120=2	end;
-event_121=2	//
-event_122=2	// read and process all the events in queue
-event_123=2	var
-event_124=2	    buf:string;
-event_125=2	    LockChanged,NTimer,count: integer;
-event_126=2	begin
-event_127=2	if TcpConnected(0) then begin
-event_128=2	  // Refresh lock status
-event_129=2	  GetI('INT1',LockChanged);
-event_130=2	  if LockChanged>0 then begin
-event_131=2	    buf:='{"method": "get_lock_shift_params", "id": 1003}';
-event_132=2	    count:=length(buf);
-event_133=2	    TcpWrite(0,buf,count);
-event_134=2	    SetI('INT1',0);
-event_135=2	  end;
-event_136=2	  // refresh state
-event_137=2	  GetI('INT2',NTimer);
-event_138=2	  inc(NTimer);
-event_139=2	  if NTimer>10 then begin
-event_140=2	    buf:='{"method": "get_app_state", "id": 1000}';
-event_141=2	    count:=length(buf);
-event_142=2	    TcpWrite(0,buf,count);
-event_143=2	    NTimer:=0;
-event_144=2	  end;
-event_145=2	  SetI('INT2',NTimer);
-event_146=2	  Edit_1.text:='Connected';
-event_147=2	  // read and process messages from PHD
-event_148=2	  repeat
-event_149=2	  if TcpRead(0,buf,'') then
-event_150=2	     ProcessEvent(buf);
-event_151=2	  until buf='';
-event_152=2	end
-event_153=2	else begin
-event_154=2	  Edit_1.text:='Disconnected';
-event_155=2	  Edit_2.text:='';
-event_156=2	  Edit_5.text:='';
-event_157=2	  Edit_6.text:='';
-event_158=2	  Edit_7.text:='';
-event_159=2	  Edit_8.text:='';
-event_160=2	end;
-event_161=2	end.
-event_162=2	//
-event_163=0	//
-event_164=0	// Initialisation
-event_165=0	var buf: string;
-event_166=0	    count: integer;
-event_167=0	begin
-event_168=0	// Hide dithering by default as this function is better used in the capture software.
-event_169=0	// Comment the following line if you need it, for example if you shoot with a standalone camera.
-event_170=0	Group_5.visible:=false;
-event_171=0	//
-event_172=0	edit_1.text := 'Disconnected';
-event_173=0	edit_1.readonly:=true;
-event_174=0	edit_1.enabled:=false;
-event_175=0	edit_2.readonly:=true;
-event_176=0	edit_2.enabled:=false;
-event_177=0	edit_5.readonly:=true;
-event_178=0	edit_5.enabled:=false;
-event_179=0	edit_6.readonly:=true;
-event_180=0	edit_6.enabled:=false;
-event_181=0	edit_7.readonly:=true;
-event_182=0	edit_7.enabled:=false;
-event_183=0	edit_8.readonly:=true;
-event_184=0	edit_8.enabled:=false;
-event_185=0	edit_9.text:='localhost';
-event_186=0	edit_10.text:='4400';
-event_187=0	Combo_1.Style:=csDropDownList;
-event_188=0	Combo_1.clear;
-event_189=0	Combo_1.Items.Add('1');
-event_190=0	Combo_1.Items.Add('2');
-event_191=0	Combo_1.Items.Add('3');
-event_192=0	Combo_1.Items.Add('5');
-event_193=0	Combo_1.Items.Add('10');
-event_194=0	Combo_1.ItemIndex:=0;
-event_195=0	CheckList_1.clear;
-event_196=0	CheckList_1.Items.Add('RA only');
-event_197=0	CheckList_1.Checked[0]:=false;
-event_198=0	Combo_2.Style:=csDropDownList;
-event_199=0	Combo_2.clear;
-event_200=0	Combo_2.Items.Add('0.2');
-event_201=0	Combo_2.Items.Add('0.5');
-event_202=0	Combo_2.Items.Add('1');
-event_203=0	Combo_2.Items.Add('1.5');
-event_204=0	Combo_2.ItemIndex:=1;
-event_205=0	Combo_3.Style:=csDropDownList;
-event_206=0	Combo_3.clear;
-event_207=0	Combo_3.Items.Add('5');
-event_208=0	Combo_3.Items.Add('10');
-event_209=0	Combo_3.Items.Add('20');
-event_210=0	Combo_3.Items.Add('30');
-event_211=0	Combo_3.Items.Add('60');
-event_212=0	Combo_3.ItemIndex:=2;
-event_213=0	Edit_3.Text:='0';
-event_214=0	Edit_4.Text:='0';
-event_215=0	if TcpConnected(0) then begin
-event_216=0	  buf:='{"method": "get_app_state", "id": 1000}';
-event_217=0	  count:=length(buf);
-event_218=0	  TcpWrite(0,buf,count);
-event_219=0	  buf:='{"method": "get_lock_shift_params", "id": 1003}';
-event_220=0	  count:=length(buf);
-event_221=0	  TcpWrite(0,buf,count);
-event_222=0	  SetI('INT1',1); // lock changed marker
-event_223=0	  SetI('INT2',0); // timer loop counter
-event_224=0	end;
-event_225=0	end.
-event_226=0	//
-event_227=5	//
-event_228=5	// Object identification event
-event_229=5	const
-event_230=5	  crlf = #13 + #10;
-event_231=5	function NextVal(var txt: string; key:string): double;
-event_232=5	var buf: string;
-event_233=5	    p: integer;
-event_234=5	    dv: double;
-event_235=5	begin
-event_236=5	  dv:=0;
-event_237=5	  p:=pos(key,txt);
-event_238=5	  if p>0 then begin
-event_239=5	    buf:=copy(txt,1,p-1);
-event_240=5	    delete(txt,1,p);
-event_241=5	    StrtoFloatD(buf,dv,result);
-event_242=5	  end
-event_243=5	  else result:=dv;
-event_244=5	end;
-event_245=5	var str,dx,dy: string;
-event_246=5	    p: integer;
-event_247=5	    x,y,sx,sy: double;
-event_248=5	begin
-event_249=5	// Info about object
-event_250=5	 getS('DescriptionText',str)
-event_251=5	 p:=pos(rsHourlyMotion,str);
-event_252=5	 if p>0 then begin
-event_253=5	    delete(str,1,p+length(rsHourlyMotion)+1);
-event_254=5	    p:=pos('dRA:',str);
-event_255=5	    delete(str,1,p+3);
-event_256=5	    p:=pos(' dDec:',str);
-event_257=5	    dx:=copy(str,1,p-1);
-event_258=5	    delete(str,1,p+5);
-event_259=5	    p:=pos(crlf,str);
-event_260=5	    dy:=copy(str,1,p-1);
-event_261=5	    x:=0;
-event_262=5	    if copy(dx,1,1)='-' then sx:=-1 else sx:=1;
-event_263=5	    x:=x+3600*abs(NextVal(dx,'h'));
-event_264=5	    x:=x+60*abs(NextVal(dx,'m'));
-event_265=5	    x:=x+abs(NextVal(dx,'s'));
-event_266=5	    y:=0;
-event_267=5	    if copy(dy,1,1)='-' then sy:=-1 else sy:=1;
-event_268=5	    y:=y+3600*abs(NextVal(dy,rsdeg));
-event_269=5	    y:=y+60*abs(NextVal(dy,rsmin));
-event_270=5	    y:=y+abs(NextVal(dy,rssec));
-event_271=5	    x:=15*sx*x;
-event_272=5	    y:=sy*y;
-event_273=5	    Edit_3.text:=FormatFloat('0.00',x);
-event_274=5	    Edit_4.text:=FormatFloat('0.00',y);
-event_275=5	 end
-event_276=5	 else begin
-event_277=5	    Edit_3.text:='0';
-event_278=5	    Edit_4.text:='0';
-event_279=5	 end;
-event_280=5	end.
-event_281=5	//
+NumToolbar1=0
+NumToolbar2=0
+NumComponent=32
+component_0="Group_4;PHD host and port;2"
+component_1="	Edit_9"
+component_2="	Edit_10"
+component_3="Group_1;Status;2"
+component_4="	Button_1;Connect"
+component_5="	Button_2;Disconnect"
+component_6="	Edit_1"
+component_7="	Edit_2"
+component_8="	Event_2;2;Timer;1"
+component_9="	Event_0;0;Initialisation;"
+component_10="	Event_5;5;Object identification click;"
+component_11="Group_2;Lock Shift;2"
+component_12="	Edit_3"
+component_13="	Edit_4"
+component_14="	Button_3;Set rates"
+component_15="	Button_4;Off"
+component_16="	Edit_7"
+component_17="	Edit_5"
+component_18="	Edit_6"
+component_19="	Edit_8"
+component_20="Group_5;Dither;2"
+component_21="	Label_1;Shift"
+component_22="	Label_2;Direction"
+component_23="	Combo_1;"
+component_24="	CheckList_1;26"
+component_25="	Label_3;Stability"
+component_26="	Label_4;Timeout"
+component_27="	Combo_2;"
+component_28="	Combo_3;"
+component_29="	Button_5;Dither"
+component_30="Group_3;Messages;1"
+component_31="	Memo_1;50"
+
+[button_1]
+s="//"
+"// Button Connect"
+"var buf: string;"
+"    count:integer;"
+"begin"
+"  TcpConnect(0,edit_9.text,edit_10.text,'100');"
+"  buf:='{"method": "get_lock_shift_params", "id": 1003}';"
+"  count:=length(buf);"
+"  TcpWrite(0,buf,count);"
+"end."
+"//"
+
+
+[button_2]
+s="//"
+"// Button Disconnect"
+"begin"
+"TcpDisconnect(0);"
+"end."
+"//"
+
+
+[button_3]
+s="//"
+"// Button Set"
+"var count : integer;"
+"    buf:string;"
+"    rx,ry,invalidfloat:double;"
+"begin"
+"if TcpConnected(0) then begin"
+"  invalidfloat:=999999;"
+"  StrtoFloatD(Edit_3.text,invalidfloat,rx);"
+"  StrtoFloatD(Edit_4.text,invalidfloat,ry);"
+"  if (abs(rx)>10000)or(abs(ry)>10000) then"
+"    ShowMessage('Invalid rate values!')"
+"  else begin"
+"    buf:='{"method": "set_lock_shift_params", "params": [{"rate": [';"
+"    buf:=buf+Edit_3.text+',';"
+"    buf:=buf+Edit_4.text;"
+"    buf:=buf+'], "units": "arcsec/hr", "axes": "RA/Dec"}], "id": 1001}'"
+"    count:=length(buf);"
+"    TcpWrite(0,buf,count);"
+"    buf:='{"method": "get_lock_shift_params", "id": 1003}';"
+"    count:=length(buf);"
+"    TcpWrite(0,buf,count);"
+"    SetI('INT1',1);"
+"  end;"
+"end;"
+"end."
+"//"
+
+
+[button_4]
+s="//"
+"// Button On/Off"
+"var count : integer;"
+"    buf,status:string;"
+"begin"
+"if TcpConnected(0) then begin"
+"  if Button_4.Caption='Off' then status:='true' else status:='false';"
+"  buf:='{"method": "set_lock_shift_enabled", "params": [';"
+"  buf:=buf+status;"
+"  buf:=buf+'], "id": 1002}'"
+"  count:=length(buf);"
+"  TcpWrite(0,buf,count);"
+"  if status='true' then  Button_4.Caption:='On' else Button_4.Caption:='Off';"
+"  buf:='{"method": "get_lock_shift_enabled", "id": 1004}';"
+"  count:=length(buf);"
+"  TcpWrite(0,buf,count);"
+"  SetI('INT1',1);"
+"end;"
+"end."
+"//"
+
+
+[button_5]
+s="//"
+"// Button Dither"
+"var count : integer;"
+"    buf:string;"
+"begin"
+"if TcpConnected(0) then begin"
+"    buf:='{"method": "dither", "params": [';"
+"    buf:=buf+Combo_1.text+',';"
+"    if Checklist_1.checked[0] then buf:=buf+'true,' else buf:=buf+'false,';"
+"    buf:=buf+'{"pixels": '+Combo_2.text+',';"
+"    buf:=buf+'"time": 5,';"
+"    buf:=buf+'"timeout": '+Combo_3.text+'}],';"
+"    buf:=buf+'"id": 1005}';"
+"    count:=length(buf);"
+"    TcpWrite(0,buf,count);"
+"end;"
+"end."
+"//"
+
+
+[event_2]
+s="//"
+"// Timer"
+"// Process a PHD event"
+"Procedure ProcessEvent(txt:string);"
+"var eventname,rpcid,rpcresult,rpcerror,buf,fullmsg: string;"
+"    PHDVersion,MsgVersion: string;"
+"    attrib,value:Tstringlist;"
+"    p,i:integer;"
+"begin"
+"GetSL('STRL1',attrib);"
+"attrib.clear;"
+"GetSL('STRL2',value);"
+"value.clear;"
+"try"
+"fullmsg:=txt;"
+"JsontoStringlist(txt,attrib,value);"
+"p:=attrib.IndexOf('Event');    // PHD events"
+"if p>=0 then begin"
+"   eventname:=value[p];"
+"   if eventname='GuideStep' then edit_2.text:='Guiding'"
+"   else if eventname='StartGuiding' then edit_2.text:='Guiding'"
+"   else if eventname='GuidingStopped' then edit_2.text:='Stopped'"
+"   else if eventname='StarSelected' then edit_2.text:='Star Selected'"
+"   else if eventname='StarLost' then edit_2.text:='Star lost'"
+"   else if eventname='Paused' then edit_2.text:='Paused'"
+"   else if eventname='Resumed' then edit_2.text:='Resumed'"
+"   else if eventname='LockPositionSet' then edit_2.text:='Lock Position Set'"
+"   else if eventname='CalibrationComplete' then edit_2.text:='Calibration Complete'"
+"   else if eventname='StarSelected' then edit_2.text:='Star Selected'"
+"   else if eventname='StartCalibration' then edit_2.text:='Start Calibration'"
+"   else if eventname='CalibrationFailed' then edit_2.text:='Calibration Failed'"
+"   else if eventname='CalibrationDataFlipped' then edit_2.text:='Calibration Data Flipped'"
+"   else if eventname='LoopingExposures' then edit_2.text:='Looping Exposures'"
+"   else if eventname='LoopingExposuresStopped' then edit_2.text:='Looping Exposures Stopped'"
+"   else if eventname='Settling' then edit_2.text:='Settling'"
+"   else if eventname='SettleDone' then edit_2.text:='Settle Done'"
+"   else if eventname='GuidingDithered' then edit_2.text:='Guiding Dithered'"
+"   else if eventname='LockPositionLost' then edit_2.text:='Lock Position Lost'"
+"   else if eventname='Alert' then edit_2.text:='Alert'"
+"   else if eventname='AppState' then begin"
+"     i:=attrib.IndexOf('State');"
+"     edit_2.text:=value[i];"
+"   end"
+"   else if eventname='Version' then begin"
+"     i:=attrib.IndexOf('PHDVersion');"
+"     if i>=0 then begin"
+"        PHDVersion:=value[i];"
+"        SetS('STR1',PHDVersion);"
+"     end;"
+"     i:=attrib.IndexOf('MsgVersion');"
+"     if i>=0 then begin"
+"        MsgVersion:=value[i];"
+"        SetS('STR2',MsgVersion);"
+"     end;"
+"   end"
+"   ;"
+"end else begin"
+"  p:=attrib.IndexOf('jsonrpc');   // Response to command"
+"  if p>=0 then begin"
+"     p:=attrib.IndexOf('id');"
+"     rpcid:=value[p];"
+"     i:=attrib.IndexOf('result');"
+"     if i>=0 then rpcresult:=value[i]"
+"     else begin"
+"       i:=attrib.IndexOf('error.code');"
+"       if i>=0 then begin"
+"          rpcresult:='error'"
+"          i:=attrib.IndexOf('error.message');"
+"          if i>=0 then rpcerror:=value[i]"
+"                  else rpcerror:='no response';"
+"       end"
+"       else rpcresult:='ok';"
+"     end;"
+"     if rpcid='1000' then begin   // get_app_state"
+"       if rpcresult='error' then memo_1.lines.add('get_app_state'+' '+rpcresult+' '+rpcerror)"
+"          else edit_2.text:=rpcresult;"
+"     end"
+"     else if rpcid='1001' then begin  // set_lock_shift_params"
+"       if rpcresult='error' then memo_1.lines.add('set_lock_shift_params'+' '+rpcresult+' '+rpcerror);"
+"     end"
+"     else if rpcid='1002' then begin  // set_lock_shift_enabled"
+"       if rpcresult='error' then memo_1.lines.add('set_lock_shift_enabled'+' '+rpcresult+' '+rpcerror);"
+"     end"
+"     else if rpcid='1003' then begin  // get_lock_shift_params"
+"       if rpcresult='error' then"
+"         memo_1.lines.add('get_lock_shift_params'+' '+rpcresult+' '+rpcerror)"
+"       else begin"
+"         i:=attrib.IndexOf('result.enabled');"
+"         if i>=0 then begin"
+"           edit_5.text:=value[i];"
+"           if uppercase(trim(value[i]))='TRUE' then Button_4.Caption:='On'"
+"              else Button_4.Caption:='Off';"
+"         end"
+"         else edit_5.text:='?';"
+"         i:=attrib.IndexOf('result.axes');"
+"         if i>=0 then edit_6.text:=value[i] else edit_6.text:='?';"
+"         buf:='?';"
+"         i:=attrib.IndexOf('result.rate.0');"
+"         if i>=0 then buf:=value[i];"
+"         i:=attrib.IndexOf('result.rate.1');"
+"         if i>=0 then buf:=buf+','+value[i];"
+"         edit_7.text:=buf;"
+"         i:=attrib.IndexOf('result.units');"
+"         if i>=0 then edit_8.text:=value[i] else edit_8.text:='?';"
+"       end;"
+"     end"
+"     else if rpcid='1004' then begin  // get_lock_shift_enabled"
+"       if rpcresult='error' then"
+"         memo_1.lines.add('get_lock_shift_enabled'+' '+rpcresult+' '+rpcerror)"
+"       else"
+"         edit_5.text:=rpcresult;"
+"         if uppercase(trim(rpcresult))='TRUE' then Button_4.Caption:='On'"
+"            else Button_4.Caption:='Off';"
+"     end;"
+"  end;"
+"end;"
+"finally"
+" attrib.clear;"
+" value.clear;"
+"end;"
+"end;"
+"//"
+"// read and process all the events in queue"
+"var"
+"    buf:string;"
+"    LockChanged,NTimer,count: integer;"
+"begin"
+"if TcpConnected(0) then begin"
+"  // Refresh lock status"
+"  GetI('INT1',LockChanged);"
+"  if LockChanged>0 then begin"
+"    buf:='{"method": "get_lock_shift_params", "id": 1003}';"
+"    count:=length(buf);"
+"    TcpWrite(0,buf,count);"
+"    SetI('INT1',0);"
+"  end;"
+"  // refresh state"
+"  GetI('INT2',NTimer);"
+"  inc(NTimer);"
+"  if NTimer>10 then begin"
+"    buf:='{"method": "get_app_state", "id": 1000}';"
+"    count:=length(buf);"
+"    TcpWrite(0,buf,count);"
+"    NTimer:=0;"
+"  end;"
+"  SetI('INT2',NTimer);"
+"  Edit_1.text:='Connected';"
+"  // read and process messages from PHD"
+"  repeat"
+"  if TcpRead(0,buf,'') then"
+"     ProcessEvent(buf);"
+"  until buf='';"
+"end"
+"else begin"
+"  Edit_1.text:='Disconnected';"
+"  Edit_2.text:='';"
+"  Edit_5.text:='';"
+"  Edit_6.text:='';"
+"  Edit_7.text:='';"
+"  Edit_8.text:='';"
+"end;"
+"end."
+"//"
+
+
+[event_0]
+s="//"
+"// Initialisation"
+"var buf: string;"
+"    count: integer;"
+"begin"
+"// Hide dithering by default as this function is better used in the capture software."
+"// Comment the following line if you need it, for example if you shoot with a standalone camera."
+"Group_5.visible:=false;"
+"//"
+"edit_1.text := 'Disconnected';"
+"edit_1.readonly:=true;"
+"edit_1.enabled:=false;"
+"edit_2.readonly:=true;"
+"edit_2.enabled:=false;"
+"edit_5.readonly:=true;"
+"edit_5.enabled:=false;"
+"edit_6.readonly:=true;"
+"edit_6.enabled:=false;"
+"edit_7.readonly:=true;"
+"edit_7.enabled:=false;"
+"edit_8.readonly:=true;"
+"edit_8.enabled:=false;"
+"edit_9.text:='localhost';"
+"edit_10.text:='4400';"
+"Combo_1.Style:=csDropDownList;"
+"Combo_1.clear;"
+"Combo_1.Items.Add('1');"
+"Combo_1.Items.Add('2');"
+"Combo_1.Items.Add('3');"
+"Combo_1.Items.Add('5');"
+"Combo_1.Items.Add('10');"
+"Combo_1.ItemIndex:=0;"
+"CheckList_1.clear;"
+"CheckList_1.Items.Add('RA only');"
+"CheckList_1.Checked[0]:=false;"
+"Combo_2.Style:=csDropDownList;"
+"Combo_2.clear;"
+"Combo_2.Items.Add('0.2');"
+"Combo_2.Items.Add('0.5');"
+"Combo_2.Items.Add('1');"
+"Combo_2.Items.Add('1.5');"
+"Combo_2.ItemIndex:=1;"
+"Combo_3.Style:=csDropDownList;"
+"Combo_3.clear;"
+"Combo_3.Items.Add('5');"
+"Combo_3.Items.Add('10');"
+"Combo_3.Items.Add('20');"
+"Combo_3.Items.Add('30');"
+"Combo_3.Items.Add('60');"
+"Combo_3.ItemIndex:=2;"
+"Edit_3.Text:='0';"
+"Edit_4.Text:='0';"
+"if TcpConnected(0) then begin"
+"  buf:='{"method": "get_app_state", "id": 1000}';"
+"  count:=length(buf);"
+"  TcpWrite(0,buf,count);"
+"  buf:='{"method": "get_lock_shift_params", "id": 1003}';"
+"  count:=length(buf);"
+"  TcpWrite(0,buf,count);"
+"  SetI('INT1',1); // lock changed marker"
+"  SetI('INT2',0); // timer loop counter"
+"end;"
+"end."
+"//"
+
+
+[event_5]
+s="//"
+"// Object identification event"
+"const"
+"  crlf = #13 + #10;"
+"function NextVal(var txt: string; key:string): double;"
+"var buf: string;"
+"    p: integer;"
+"    dv: double;"
+"begin"
+"  dv:=0;"
+"  p:=pos(key,txt);"
+"  if p>0 then begin"
+"    buf:=copy(txt,1,p-1);"
+"    delete(txt,1,p);"
+"    StrtoFloatD(buf,dv,result);"
+"  end"
+"  else result:=dv;"
+"end;"
+"var str,dx,dy: string;"
+"    p: integer;"
+"    x,y,sx,sy: double;"
+"begin"
+"// Info about object"
+" getS('DescriptionText',str)"
+" p:=pos(rsHourlyMotion,str);"
+" if p>0 then begin"
+"    delete(str,1,p+length(rsHourlyMotion)+1);"
+"    p:=pos('dRA:',str);"
+"    delete(str,1,p+3);"
+"    p:=pos(' dDec:',str);"
+"    dx:=copy(str,1,p-1);"
+"    delete(str,1,p+5);"
+"    p:=pos(crlf,str);"
+"    dy:=copy(str,1,p-1);"
+"    x:=0;"
+"    if copy(dx,1,1)='-' then sx:=-1 else sx:=1;"
+"    x:=x+3600*abs(NextVal(dx,'h'));"
+"    x:=x+60*abs(NextVal(dx,'m'));"
+"    x:=x+abs(NextVal(dx,'s'));"
+"    y:=0;"
+"    if copy(dy,1,1)='-' then sy:=-1 else sy:=1;"
+"    y:=y+3600*abs(NextVal(dy,rsdeg));"
+"    y:=y+60*abs(NextVal(dy,rsmin));"
+"    y:=y+abs(NextVal(dy,rssec));"
+"    x:=15*sx*x;"
+"    y:=sy*y;"
+"    Edit_3.text:=FormatFloat('0.00',x);"
+"    Edit_4.text:=FormatFloat('0.00',y);"
+" end"
+" else begin"
+"    Edit_3.text:='0';"
+"    Edit_4.text:='0';"
+" end;"
+"end."
+"//"
+
