@@ -1537,6 +1537,10 @@ CL.AddConstantN('rsTCPPort','String').SetString(rsTCPPort);
 CL.AddConstantN('rsCommunicatio','String').SetString(rsCommunicatio);
 CL.AddConstantN('rsSocketConfig','String').SetString(rsSocketConfig);
 CL.AddConstantN('rsHourlyMotion','String').SetString(rsHourlyMotion);
+CL.AddConstantN('rsKey','String').SetString(rsKey);
+CL.AddConstantN('rsConfigureToo','String').SetString(rsConfigureToo);
+CL.AddConstantN('rsSelectScript','String').SetString(rsSelectScript);
+
 end;
 
 end.

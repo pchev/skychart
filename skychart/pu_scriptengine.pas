@@ -1092,7 +1092,7 @@ begin
 
   end else begin // Old format
     section:='ScriptPanel';
-    titl:=ReadString(section,'Title',ScriptTitle.Text);
+    titl:=ReadString(section,'Title','');
     CheckBoxHidenTimer.Checked:=ReadBool(section,'HidenTimer',CheckBoxHidenTimer.Checked);
     n:=ReadInteger(section,'numtoolbar1',0);
     ConfigToolbar1.Clear;

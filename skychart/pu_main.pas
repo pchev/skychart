@@ -2108,6 +2108,7 @@ for i:=0 to numscript-1 do begin
   Fscript[i].GetScopeRates:=GetScopeRates;
   Fscript[i].SendInfo:=SendInfo;
   Fscript[i].onApply:=ApplyScript;
+  Fscript[i].onToolboxConfig:=MenuToolboxConfigClick;
   if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
   Fscript[i].Parent:=ScriptScrollBox;
 end;
