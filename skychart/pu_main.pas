@@ -897,7 +897,7 @@ begin
   result:=true;
   Child.locked:=false;
   Child.lock_refresh:=false;
-  Child.Refresh;
+  Child.RefreshTimer.Enabled:=true;
 end;
 
 procedure Tf_main.RefreshAllChild(applydef:boolean);
