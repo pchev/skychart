@@ -39,7 +39,6 @@ type
 
   Tf_script = class(TFrame)
     ButtonConfig: TBitBtn;
-    ButtonEditTB: TBitBtn;
     ButtonEditSrc: TBitBtn;
     BottomPanel: TPanel;
     LabelShortcut: TLabel;
@@ -49,7 +48,6 @@ type
     ToolBar1: TToolBar;
     ToolBar2: TToolBar;
     procedure ButtonConfigClick(Sender: TObject);
-    procedure ButtonEditTBClick(Sender: TObject);
     procedure ButtonEditSrcClick(Sender: TObject);
     procedure PanelTitleMouseEnter(Sender: TObject);
     procedure PanelTitleMouseLeave(Sender: TObject);
@@ -109,6 +107,7 @@ type
     procedure TimeUChange(Sender: TObject);
     procedure EditTimeValChange(Sender: TObject);
     procedure TimeValChangingEx(Sender: TObject; var AllowChange: Boolean; NewValue: SmallInt; Direction: TUpDownDirection);
+    procedure EditToolBar(Sender: TObject);
 
   public
     { public declarations }
@@ -176,7 +175,6 @@ begin
                      else PanelTitle.Caption:=FScriptTitle;
   ButtonConfig.Caption:=rsConfiguratio;
   ButtonEditSrc.Caption:=rsScript;
-  ButtonEditTB.Caption:=rsToolBar;
   fedittoolbar.SetLang;
   if fscriptengine<>nil then fscriptengine.SetLang;
   SetHelp(self,hlpToolbox);
@@ -241,6 +239,7 @@ begin
   fscriptengine.ConfigToolbar2:=ConfigToolbar2;
   fscriptengine.editsurface:=MainPanel;
   fscriptengine.onApply:=@ApplyScript;
+  fscriptengine.onEditToolBar:=@EditToolBar;
   fscriptengine.ExecuteCmd:=FExecuteCmd;
   fscriptengine.CometMark:=FCometMark;
   fscriptengine.AsteroidMark:=FAsteroidMark;
@@ -299,7 +298,7 @@ begin
   fscriptengine.InitialLoad:=false;
 end;
 
-procedure Tf_script.ButtonEditTBClick(Sender: TObject);
+procedure Tf_script.EditToolBar(Sender: TObject);
 begin
   fedittoolbar.LoadToolbar(0,ConfigToolbar1);
   fedittoolbar.LoadToolbar(1,ConfigToolbar2);
