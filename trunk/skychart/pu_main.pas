@@ -4942,9 +4942,7 @@ for i:=1 to nummainbar do configmainbar.Add(standardmainbar[i]);
 for i:=1 to numobjectbar do configobjectbar.Add(standardobjectbar[i]);
 for i:=1 to numleftbar do configleftbar.Add(standardleftbar[i]);
 for i:=1 to numrightbar do configrightbar.Add(standardrightbar[i]);
-Fscript[0].ScriptFilename:=slash(ScriptDir)+'script1.cdcps';
-Fscript[1].ScriptFilename:=slash(ScriptDir)+'script2.cdcps';
-Fscript[2].ScriptFilename:=slash(ScriptDir)+'script3.cdcps';
+Fscript[0].ScriptFilename:=slash(ScriptDir)+'ObserverTool.cdcps';
 end;
 
 procedure Tf_main.ReadDefault;
