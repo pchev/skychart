@@ -51,6 +51,10 @@ Name: {app}\plugins; Type: dirifempty; Components: ; Tasks:
 Name: {app}\data\Themes\default\*; Type: filesandordirs; Components: ; Tasks: 
 Name: {app}\data\zoneinfo\*; Type: filesandordirs; Components: ; Tasks: 
 Name: {app}\doc\wiki_doc\*; Type: filesandordirs; Components: ; Tasks: 
+Name: {app}\data\script1.cdcps; Type: files; Components: ; Tasks:
+Name: {app}\data\script2.cdcps; Type: files; Components: ; Tasks:
+Name: {app}\data\script3.cdcps; Type: files; Components: ; Tasks:
+Name: {app}\data\phd.cdcps; Type: files; Components: ; Tasks:
 
 [Files]
 Source: Data\*; DestDir: {app}; Flags: ignoreversion recursesubdirs createallsubdirs restartreplace
