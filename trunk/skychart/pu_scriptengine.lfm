@@ -22,8 +22,8 @@ object f_scriptengine: Tf_scriptengine
     TabOrder = 0
     object TreeView1: TTreeView
       Left = 1
-      Height = 483
-      Top = 1
+      Height = 451
+      Top = 33
       Width = 224
       Align = alClient
       AutoExpand = True
@@ -35,6 +35,25 @@ object f_scriptengine: Tf_scriptengine
       OnDragDrop = TreeView1DragDrop
       OnDragOver = TreeView1DragOver
       Options = [tvoAutoExpand, tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+    end
+    object Panel4: TPanel
+      Left = 1
+      Height = 32
+      Top = 1
+      Width = 224
+      Align = alTop
+      ClientHeight = 32
+      ClientWidth = 224
+      TabOrder = 1
+      object ButtonEditTB: TButton
+        Left = 44
+        Height = 25
+        Top = 5
+        Width = 139
+        Caption = 'Tool bar editor'
+        OnClick = ButtonEditTBClick
+        TabOrder = 0
+      end
     end
   end
   object PanelLeft: TPanel

@@ -20,29 +20,20 @@ object f_script: Tf_script
     object ButtonEditSrc: TBitBtn
       Left = 0
       Height = 22
-      Top = 21
-      Width = 85
+      Top = 24
+      Width = 104
       Caption = 'Script'
       OnClick = ButtonEditSrcClick
       TabOrder = 0
-    end
-    object ButtonEditTB: TBitBtn
-      Left = 88
-      Height = 22
-      Top = 21
-      Width = 88
-      Caption = 'Toolbar'
-      OnClick = ButtonEditTBClick
-      TabOrder = 1
     end
     object ButtonConfig: TBitBtn
       Left = 0
       Height = 22
       Top = 0
-      Width = 176
+      Width = 104
       Caption = 'ButtonConfig'
       OnClick = ButtonConfigClick
-      TabOrder = 2
+      TabOrder = 1
     end
   end
   object ToolBar1: TToolBar

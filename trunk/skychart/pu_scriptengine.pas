@@ -49,6 +49,7 @@ type
   { Tf_scriptengine }
 
   Tf_scriptengine = class(TForm)
+    ButtonEditTB: TButton;
     ButtonHelp: TButton;
     ButtonDown: TBitBtn;
     ButtonSave: TButton;
@@ -68,6 +69,7 @@ type
     ListHeightEdit: TEdit;
     CheckListHeightEdit: TEdit;
     Panel3: TPanel;
+    Panel4: TPanel;
     PanelLeft: TPanel;
     PSCustomPlugin1: TPSCustomPlugin;
     PSDllPlugin1: TPSDllPlugin;
@@ -117,6 +119,7 @@ type
     procedure ButtonApplyClick(Sender: TObject);
     procedure ButtonClearClick(Sender: TObject);
     procedure ButtonDeleteClick(Sender: TObject);
+    procedure ButtonEditTBClick(Sender: TObject);
     procedure ButtonHelpClick(Sender: TObject);
     procedure ButtonLoadClick(Sender: TObject);
     procedure ButtonSaveClick(Sender: TObject);
@@ -150,6 +153,7 @@ type
     FScriptFilename: string;
     FEditSurface: TPanel;
     FonApply: TNotifyEvent;
+    FonEditToolBar: TNotifyEvent;
     dbgscr: TPSScriptDebugger;
     grnum:integer;
     gr: array of TGroupBox;
@@ -288,6 +292,7 @@ type
     property ConfigToolbar2: TStringList read FConfigToolbar2 write FConfigToolbar2;
     property EditSurface: TPanel read FEditSurface write FEditSurface;
     property onApply: TNotifyEvent read FonApply write FonApply;
+    property onEditToolBar: TNotifyEvent read FonEditToolBar write FonEditToolBar;
     property ExecuteCmd: TExecuteCmd read FExecuteCmd write FExecuteCmd;
     property CometMark: TExecuteCmd read FCometMark write FCometMark;
     property AsteroidMark: TExecuteCmd read FAsteroidMark write FAsteroidMark;
@@ -313,6 +318,7 @@ implementation
 procedure Tf_scriptengine.SetLang;
 begin
   caption:=rsScript;
+  ButtonEditTB.Caption:=rsToolBarEdito;
   ButtonAdd.Caption:=rsAdd;
   ButtonEditScript.Caption:=rsEditScript;
   ButtonUpdate.Caption:=rsUpdate1;
@@ -1685,6 +1691,11 @@ if TreeView1.Selected<>nil then begin
     TreeView1.Items.Delete(TreeView1.Selected);
   end;
 end;
+end;
+
+procedure Tf_scriptengine.ButtonEditTBClick(Sender: TObject);
+begin
+  if Assigned(FonEditToolBar) then FonEditToolBar(self);
 end;
 
 procedure Tf_scriptengine.ButtonHelpClick(Sender: TObject);

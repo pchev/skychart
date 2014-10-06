@@ -85,7 +85,7 @@ var fn:string;
 begin
 fn:=StringGrid1.Cells[2,row];
 OpenDialog1.FileName:='';
-if fn='' then OpenDialog1.InitialDir:=PrivateScriptDir
+if fn='' then OpenDialog1.InitialDir:=ScriptDir
          else OpenDialog1.InitialDir:=ExtractFilePath(fn);
 if OpenDialog1.Execute then begin
    fn:=OpenDialog1.FileName;
