@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-24 09:15+0000\n"
+"POT-Creation-Date: 2014-10-07 16:36+0000\n"
 "PO-Revision-Date: 2014-05-01 08:35+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-24 09:33+0000\n"
-"X-Generator: Launchpad (build 17163)\n"
+"X-Launchpad-Export-Date: 2014-10-07 17:12+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -289,10 +289,6 @@ msgstr "Anonymous jelszó"
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
 msgstr "antialiasing"
-
-#: u_translation.rsanychangeyou
-msgid "Any change you do here will be lost when the program restart."
-msgstr ""
 
 #: u_translation.rsapparent
 msgid "Apparent"
@@ -2677,10 +2673,6 @@ msgstr "Idő megjelenítése a tálcán"
 msgid "If it is not installed try the following depending on your system:"
 msgstr "Ha nincs felrakva, próbálja meg a következők valamelyikét:"
 
-#: u_translation.rsifyouneedtoc
-msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
-msgstr ""
-
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Megvil."
@@ -2920,6 +2912,10 @@ msgstr "Képek megtartása későbbre"
 #: u_translation.rskeeptableson
 msgid "Keep tables on exit for later use"
 msgstr "Táblázatok megtartása későbbre"
+
+#: u_translation.rskey
+msgid "Key"
+msgstr ""
 
 #: u_translation.rskm
 msgid "Km."
@@ -3265,6 +3261,10 @@ msgstr "Szokásos"
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
 msgstr "Válaszd ki, hogy milyen oszlopok legyenek a katalógusban."
+
+#: u_translation.rsmanagetoolbo
+msgid "Manage tool box script"
+msgstr ""
 
 #: u_translation.rsmanualmount
 #| msgid "Manual Mount"
@@ -3959,6 +3959,10 @@ msgstr "Térkép megnyitása"
 #| msgid "Open Cluster"
 msgid "Open cluster"
 msgstr "Nyílthalmaz"
+
+#: u_translation.rsopenscript
+msgid "Open script"
+msgstr ""
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
@@ -4926,6 +4930,10 @@ msgstr ""
 msgid "Script editor"
 msgstr ""
 
+#: u_translation.rsscriptisalre
+msgid "Script is already assigned to %s are you sure you want to duplicate it to %s ?"
+msgstr ""
+
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
 msgstr "Görgetősáv"
@@ -5025,6 +5033,10 @@ msgstr "Válasszon lemezt a listából"
 
 #: u_translation.rsselectrectan
 msgid "Select Rectangle"
+msgstr ""
+
+#: u_translation.rsselectscript
+msgid "Select script"
 msgstr ""
 
 #: u_translation.rsselectthefie
@@ -5862,10 +5874,6 @@ msgstr "A fájl nem MPCORB formátúmú."
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
 msgstr "Ez a program szabad szoftver, továbbadhatod és/vagy módosíthatod a GNU Általános Nyilvános Licenc értelmében"
-
-#: u_translation.rsthisscriptis
-msgid "This script is maintained within the software distribution."
-msgstr ""
 
 #: u_translation.rsthursday
 msgid "Thu."

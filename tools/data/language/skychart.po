@@ -6006,18 +6006,6 @@ msgstr ""
 msgid "Don't forget to save the program configuration!"
 msgstr ""
 
-#: u_translation:rsthisscriptis
-msgid "This script is maintained within the software distribution."
-msgstr ""
-
-#: u_translation:rsanychangeyou
-msgid "Any change you do here will be lost when the program restart."
-msgstr ""
-
-#: u_translation:rsifyouneedtoc
-msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
-msgstr ""
-
 #: u_translation:rsrun
 msgid "Run"
 msgstr ""
@@ -6092,5 +6080,25 @@ msgstr ""
 
 #: u_translation:rshourlymotion
 msgid "Hourly motion"
+msgstr ""
+
+#: u_translation:rskey
+msgid "Key"
+msgstr ""
+
+#: u_translation:rsmanagetoolbo
+msgid "Manage tool box script"
+msgstr ""
+
+#: u_translation:rsselectscript
+msgid "Select script"
+msgstr ""
+
+#: u_translation:rsopenscript
+msgid "Open script"
+msgstr ""
+
+#: u_translation:rsscriptisalre
+msgid "Script is already assigned to %s are you sure you want to duplicate it to %s ?"
 msgstr ""
 

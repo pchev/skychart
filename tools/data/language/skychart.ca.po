@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-24 09:15+0000\n"
-"PO-Revision-Date: 2014-05-21 07:50+0000\n"
+"POT-Creation-Date: 2014-10-07 16:36+0000\n"
+"PO-Revision-Date: 2014-08-31 11:34+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-24 09:32+0000\n"
-"X-Generator: Launchpad (build 17163)\n"
+"X-Launchpad-Export-Date: 2014-10-07 17:12+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -35,7 +35,7 @@ msgstr "9537 (catàlegs més grans)"
 
 #: u_translation.rsabandonyourc
 msgid "Abandon your changes?"
-msgstr ""
+msgstr "Abandoneu els canvis?"
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
@@ -115,7 +115,7 @@ msgstr "Acció"
 
 #: u_translation.rsactivatethet
 msgid "Activate the timer event when hidden"
-msgstr ""
+msgstr "Activa el temporitzador quan estigui amagat"
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -255,7 +255,7 @@ msgstr "sempre"
 
 #: u_translation.rsalwaysaddmer
 msgid "Always add meridian"
-msgstr ""
+msgstr "Sempre afegeix un meridià"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -280,10 +280,6 @@ msgstr "Contrasenya anònima"
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
 msgstr "Dibuix anti alias"
-
-#: u_translation.rsanychangeyou
-msgid "Any change you do here will be lost when the program restart."
-msgstr ""
 
 #: u_translation.rsapparent
 msgid "Apparent"
@@ -769,7 +765,7 @@ msgstr "carta :"
 
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
-msgstr ""
+msgstr "Afegeix un cursor al centre de la carta"
 
 #: u_translation.rschartcoordin
 msgid "Chart, coordinates"
@@ -805,7 +801,7 @@ msgstr "Control"
 
 #: u_translation.rschecklist
 msgid "CheckList"
-msgstr ""
+msgstr "Llistat de control"
 
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
@@ -905,7 +901,7 @@ msgstr "Columnes"
 
 #: u_translation.rscombobox
 msgid "Combo box"
-msgstr ""
+msgstr "Caixetí"
 
 #: u_translation.rscomet
 msgid "Comet"
@@ -937,7 +933,7 @@ msgstr "Nom comú"
 
 #: u_translation.rscommunicatio
 msgid "Communication protocol"
-msgstr ""
+msgstr "Protocol de comunicació"
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
@@ -1631,11 +1627,11 @@ msgstr "No filtreu els objectes Messier"
 
 #: u_translation.rsdontforgetto
 msgid "Don't forget to save to a new file!"
-msgstr ""
+msgstr "No oblideu desar el fitxer nou!"
 
 #: u_translation.rsdontforgetto2
 msgid "Don't forget to save the program configuration!"
-msgstr ""
+msgstr "No oblideu desar la configuració del programa!"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2419,7 +2415,7 @@ msgstr "Hammer-Aitoff"
 
 #: u_translation.rshandpad
 msgid "HandPad"
-msgstr ""
+msgstr "Plataforma manual"
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -2503,7 +2499,7 @@ msgstr "Espaiat de la graella equatorial en hores"
 
 #: u_translation.rshourlymotion
 msgid "Hourly motion"
-msgstr ""
+msgstr "Moviment horari"
 
 #: u_translation.rshours
 msgid "hours"
@@ -2536,10 +2532,6 @@ msgstr "Mostra la icona de l'hora"
 #: u_translation.rsifitisnotins
 msgid "If it is not installed try the following depending on your system:"
 msgstr "Si no està instal·lat, proveu el següent depenent del vostre sistema:"
-
-#: u_translation.rsifyouneedtoc
-msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
-msgstr ""
 
 #: u_translation.rsillum
 msgid "Illum."
@@ -2715,7 +2707,7 @@ msgstr "Invisible des d'aquesta latitud"
 
 #: u_translation.rsipaddress
 msgid "IP address"
-msgstr ""
+msgstr "Adreça IP"
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
@@ -2764,6 +2756,10 @@ msgstr "Desa les imatges en sortir per a ús posterior"
 #: u_translation.rskeeptableson
 msgid "Keep tables on exit for later use"
 msgstr "Guarda les taules en sortir per a ús posterior"
+
+#: u_translation.rskey
+msgid "Key"
+msgstr ""
 
 #: u_translation.rskm
 msgid "Km."
@@ -2923,7 +2919,7 @@ msgstr "Enllaça totes les cartes"
 
 #: u_translation.rslist
 msgid "List"
-msgstr ""
+msgstr "Llista"
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
@@ -2983,7 +2979,7 @@ msgstr "Codi del lloc"
 
 #: u_translation.rslocationtime
 msgid "Location / Time"
-msgstr ""
+msgstr "Lloc / Hora"
 
 #: u_translation.rslock
 msgid "Lock"
@@ -3093,6 +3089,10 @@ msgstr "Barra principal"
 msgid "Make selection of the table and column you want to your catalog"
 msgstr "Feu selecció de la taula i columnes que voleu per al catàleg"
 
+#: u_translation.rsmanagetoolbo
+msgid "Manage tool box script"
+msgstr ""
+
 #: u_translation.rsmanualmount
 msgid "Manual mount"
 msgstr "Muntura manual"
@@ -3107,7 +3107,7 @@ msgstr "Carta"
 
 #: u_translation.rsmark
 msgid "Mark"
-msgstr ""
+msgstr "Marca"
 
 #: u_translation.rsmarkobjectso
 msgid "Mark objects on the chart"
@@ -3643,7 +3643,7 @@ msgstr "Base de dades"
 
 #: u_translation.rsobservertool
 msgid "Observer tools"
-msgstr ""
+msgstr "Eines de l'observador"
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -3744,6 +3744,10 @@ msgstr "Obre un mapa"
 #: u_translation.rsopencluster
 msgid "Open cluster"
 msgstr "Cúmuls oberts"
+
+#: u_translation.rsopenscript
+msgid "Open script"
+msgstr ""
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
@@ -3847,7 +3851,7 @@ msgstr "Ample ombra"
 
 #: u_translation.rspause
 msgid "Pause"
-msgstr ""
+msgstr "Pausa"
 
 #: u_translation.rspec
 msgid "PEC"
@@ -4411,7 +4415,7 @@ msgstr "Recarrega %s per al mapa actual"
 
 #: u_translation.rsremoveallbre
 msgid "Remove all breakpoints"
-msgstr ""
+msgstr "Elimina totes les interrupcions"
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
@@ -4559,7 +4563,7 @@ msgstr "Files"
 
 #: u_translation.rsrun
 msgid "Run"
-msgstr ""
+msgstr "Executa"
 
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
@@ -4669,6 +4673,10 @@ msgstr "Script"
 msgid "Script editor"
 msgstr "Editor de fitxers de seqüència"
 
+#: u_translation.rsscriptisalre
+msgid "Script is already assigned to %s are you sure you want to duplicate it to %s ?"
+msgstr ""
+
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
 msgstr "Barra de desplaçament"
@@ -4759,7 +4767,7 @@ msgstr "Trieu el lloc de xarxa mirall"
 
 #: u_translation.rsselectnone
 msgid "Select none"
-msgstr ""
+msgstr "No en seleccionis cap"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -4768,6 +4776,10 @@ msgstr "Trieu una placa de la llista"
 #: u_translation.rsselectrectan
 msgid "Select Rectangle"
 msgstr "Seleccioneu rectangle"
+
+#: u_translation.rsselectscript
+msgid "Select script"
+msgstr ""
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
@@ -4883,7 +4895,7 @@ msgstr "\"Defineix\\\"%s\\\" com objectiu\""
 
 #: u_translation.rssettelescope
 msgid "Set location and time"
-msgstr ""
+msgstr "Posa situació i hora"
 
 #: u_translation.rssettime
 msgid "Set Time"
@@ -5147,7 +5159,7 @@ msgstr "M."
 
 #: u_translation.rssocketconfig
 msgid "Socket configuration"
-msgstr ""
+msgstr "Configuració del socket"
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
@@ -5335,11 +5347,11 @@ msgstr "Barra d'estat"
 
 #: u_translation.rsstepinto
 msgid "Step Into"
-msgstr ""
+msgstr "Passa en"
 
 #: u_translation.rsstepover
 msgid "Step Over"
-msgstr ""
+msgstr "Passa per sobre"
 
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
@@ -5443,7 +5455,7 @@ msgstr "%s la taula %s existeix"
 
 #: u_translation.rstarget
 msgid "Target"
-msgstr ""
+msgstr "Objectiu"
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
@@ -5459,7 +5471,7 @@ msgstr "Els serveis TCP/IP no estan disponibles."
 
 #: u_translation.rstcpport
 msgid "TCP port"
-msgstr ""
+msgstr "Port TCP"
 
 #: u_translation.rstelescope
 msgid "Telescope"
@@ -5544,10 +5556,6 @@ msgstr "Aquest fitxer no es reconeix com del tipus MPCORB."
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
 msgstr "Aquest programa és programari lliure; podeu redistribuir-lo i/o modificar-lo segons la llicència GNU GPL."
-
-#: u_translation.rsthisscriptis
-msgid "This script is maintained within the software distribution."
-msgstr ""
 
 #: u_translation.rsthursday
 msgid "Thu."
