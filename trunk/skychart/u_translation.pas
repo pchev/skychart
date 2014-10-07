@@ -1549,8 +1549,10 @@ resourcestring
   rsSocketConfig = 'Socket configuration';
   rsHourlyMotion = 'Hourly motion';
   rsKey = 'Key';
-  rsConfigureToo = 'Configure tool box';
+  rsManageToolbo = 'Manage tool box script';
   rsSelectScript = 'Select script';
+  rsOpenScript = 'Open script';
+  rsScriptIsAlre = 'Script is already assigned to %s are you sure you want to duplicate it to %s ?';
 
 implementation
 

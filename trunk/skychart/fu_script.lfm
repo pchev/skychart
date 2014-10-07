@@ -6,8 +6,8 @@ object f_script: Tf_script
   ClientHeight = 274
   ClientWidth = 180
   TabOrder = 0
-  DesignLeft = 329
-  DesignTop = 146
+  DesignLeft = 307
+  DesignTop = 147
   object BottomPanel: TPanel
     Left = 0
     Height = 50
@@ -21,7 +21,7 @@ object f_script: Tf_script
       Left = 0
       Height = 22
       Top = 24
-      Width = 104
+      Width = 176
       Caption = 'Script'
       OnClick = ButtonEditSrcClick
       TabOrder = 0
@@ -30,7 +30,7 @@ object f_script: Tf_script
       Left = 0
       Height = 22
       Top = 0
-      Width = 104
+      Width = 176
       Caption = 'ButtonConfig'
       OnClick = ButtonConfigClick
       TabOrder = 1

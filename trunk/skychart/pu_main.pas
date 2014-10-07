@@ -469,6 +469,7 @@ type
     procedure ShowCompassExecute(Sender: TObject);
     procedure ShowUobjExecute(Sender: TObject);
     procedure ShowVOExecute(Sender: TObject);
+    procedure Splitter1Moved(Sender: TObject);
     procedure TelescopeSetupExecute(Sender: TObject);
     procedure TimeUChange(Sender: TObject);
     procedure ToolBarFOVResize(Sender: TObject);
@@ -628,6 +629,7 @@ type
     ScriptScrollBoxResizeCount: integer;
     ScriptScrollBoxResizeTime: double;
     AccelList: array[0..MaxMenulevel] of string;
+    SplitterLeft: integer;
   {$ifdef mswindows}
     savwincol  : array[0..25] of Tcolor;
   {$endif}
@@ -1906,6 +1908,7 @@ UniqueInstance1.OnOtherInstance:=OtherInstance;
 UniqueInstance1.OnInstanceRunning:=InstanceRunning;
 UniqueInstance1.Enabled:=true;
 UniqueInstance1.Loaded;
+SplitterLeft:=Splitter1.Left;
 step:='Init';
 if VerboseMsg then
  debugln(step);
@@ -3839,6 +3842,12 @@ begin
      sc.catalog.cfgcat.nebcatdef[voneb-BaseNeb]:=ShowVO.Checked;
      Refresh;
   end;
+end;
+
+procedure Tf_main.Splitter1Moved(Sender: TObject);
+begin
+  SplitterLeft:=Splitter1.Left;
+  if ScriptPanel.Visible then Fscript[ActiveScript].Constraints.MaxWidth:=ScriptPanel.ClientWidth;
 end;
 
 procedure Tf_main.SetupDisplayExecute(Sender: TObject);
@@ -7024,7 +7033,7 @@ SubEdit.caption:='&'+rsEdit;
 // Menu Setup
 SubSetup.caption:='&'+rsSetup;
 MenuEditToolbar.Caption:='&'+rsToolBarEdito;
-MenuToolboxConfig.Caption:='&'+rsConfigureToo;
+MenuToolboxConfig.Caption:='&'+rsManageToolbo;
 // Menu View
 SubView.caption:='&'+rsView;
 SubToolBar.caption:='&'+rsToolBar;
@@ -9284,10 +9293,12 @@ begin
            ScriptPanel.Visible:=false;
         end else begin
            if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
-           Fscript[i].ShowScript(true);
            Splitter1.Visible:=true;
            ScriptPanel.Visible:=true;
            Splitter1.ResizeControl:=ScriptPanel;
+           Splitter1.Left:=SplitterLeft;
+           Fscript[i].Constraints.MaxWidth:=ScriptPanel.ClientWidth;
+           Fscript[i].ShowScript(true);
         end;
      end
      else Fscript[i].ShowScript(false);

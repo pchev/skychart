@@ -1,7 +1,7 @@
 object f_main: Tf_main
-  Left = 236
+  Left = 205
   Height = 600
-  Top = 124
+  Top = 128
   Width = 1024
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
@@ -3281,15 +3281,16 @@ object f_main: Tf_main
     Top = 80
     Width = 276
     Align = alLeft
+    BevelOuter = bvNone
     ClientHeight = 467
     ClientWidth = 276
     TabOrder = 6
     Visible = False
     object ScriptScrollBox: TScrollBox
-      Left = 1
-      Height = 465
-      Top = 1
-      Width = 274
+      Left = 0
+      Height = 467
+      Top = 0
+      Width = 276
       HorzScrollBar.Increment = 0
       HorzScrollBar.Page = 1
       HorzScrollBar.Smooth = True
@@ -3299,6 +3300,7 @@ object f_main: Tf_main
       VertScrollBar.Smooth = True
       VertScrollBar.Tracking = True
       Align = alClient
+      BorderStyle = bsNone
       TabOrder = 0
       OnResize = ScriptScrollBoxResize
     end
@@ -3308,6 +3310,7 @@ object f_main: Tf_main
     Height = 467
     Top = 80
     Width = 5
+    OnMoved = Splitter1Moved
     ResizeStyle = rsPattern
     Visible = False
   end

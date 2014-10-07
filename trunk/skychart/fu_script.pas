@@ -173,8 +173,8 @@ procedure Tf_script.SetLang;
 begin
   if FScriptTitle='' then PanelTitle.Caption:=rsToolBox+' '+inttostr(tag+1)
                      else PanelTitle.Caption:=FScriptTitle;
-  ButtonConfig.Caption:=rsConfiguratio;
-  ButtonEditSrc.Caption:=rsScript;
+  ButtonConfig.Caption:=rsManageToolbo;
+  ButtonEditSrc.Caption:=rsScriptEditor;
   fedittoolbar.SetLang;
   if fscriptengine<>nil then fscriptengine.SetLang;
   SetHelp(self,hlpToolbox);
