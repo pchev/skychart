@@ -423,7 +423,7 @@ begin
 end;
 
 function TSampClient.SampHubGetClientList:boolean;
-var i,j: integer;
+var i: integer;
 begin
   FClients.Clear;
   FClientNames.Clear;
@@ -655,7 +655,6 @@ end;
 
 
 procedure TSampClient.XmlStartTag(Sender: TObject; TagName: String; Attributes: TAttrList);
-var buf: string;
 begin
 if TagName='methodResponse' then methodResponse:=true
 else if methodResponse and(TagName='params') then begin
@@ -692,7 +691,6 @@ else if cmember and cparamv and (TagName='array') then cparamarray:=true;
 end;
 
 procedure TSampClient.XmlContent(Sender: TObject; Content: String);
-var buf: string;
 begin
 if xparamn then begin
   xparamname:=content;

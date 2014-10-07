@@ -338,7 +338,7 @@ if copy(Furl,1,4)='http' then begin        // HTTP protocol
   DownloadDaemon.protocol:=prHttp;
   DownloadDaemon.onProgress:=@progressreport;
   DownloadDaemon.onDownloadComplete:=@HTTPComplete;
-  DownloadDaemon.Resume;
+  DownloadDaemon.Start;
 end else begin                // FTP protocol
   if copy(Furl,1,3)<>'ftp' then exit;
   i:=pos('://',Furl);
@@ -367,7 +367,7 @@ end else begin                // FTP protocol
   DownloadDaemon.protocol:=prFtp;
   DownloadDaemon.onProgress:=@progressreport;
   DownloadDaemon.onDownloadComplete:=@FTPComplete;
-  DownloadDaemon.Resume;
+  DownloadDaemon.Start;
 end;
 end;
 

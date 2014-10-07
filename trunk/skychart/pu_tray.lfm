@@ -10,7 +10,7 @@ object f_tray: Tf_tray
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.2.4.0'
   object Button1: TButton
     Left = 208
     Height = 25
@@ -30,29 +30,29 @@ object f_tray: Tf_tray
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Appearance'
-      ClientHeight = 219
-      ClientWidth = 380
+      ClientHeight = 211
+      ClientWidth = 376
       object Label1: TLabel
         Left = 15
-        Height = 16
+        Height = 15
         Top = 96
-        Width = 68
+        Width = 67
         Caption = 'Background'
         ParentColor = False
       end
       object Label2: TLabel
         Left = 220
-        Height = 16
+        Height = 15
         Top = 96
-        Width = 27
+        Width = 25
         Caption = 'Text'
         ParentColor = False
       end
       object Label3: TLabel
         Left = 15
-        Height = 16
+        Height = 15
         Top = 154
-        Width = 52
+        Width = 50
         Caption = 'Text Size'
         ParentColor = False
       end
@@ -64,7 +64,7 @@ object f_tray: Tf_tray
       end
       object ColorBox1: TColorBox
         Left = 15
-        Height = 25
+        Height = 27
         Top = 111
         Width = 150
         Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
@@ -74,7 +74,7 @@ object f_tray: Tf_tray
       end
       object ColorBox2: TColorBox
         Left = 220
-        Height = 25
+        Height = 27
         Top = 111
         Width = 150
         Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
@@ -84,7 +84,7 @@ object f_tray: Tf_tray
       end
       object SpinEdit1: TSpinEdit
         Left = 15
-        Height = 23
+        Height = 21
         Top = 169
         Width = 146
         MaxValue = 20
@@ -108,7 +108,7 @@ object f_tray: Tf_tray
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 4
-        ClientHeight = 55
+        ClientHeight = 41
         ClientWidth = 349
         Columns = 4
         Items.Strings = (
@@ -123,8 +123,8 @@ object f_tray: Tf_tray
     end
     object TabSheet2: TTabSheet
       Caption = 'Clock'
-      ClientHeight = 219
-      ClientWidth = 380
+      ClientHeight = 211
+      ClientWidth = 376
       object RadioGroup1: TRadioGroup
         Left = 55
         Height = 184
@@ -156,8 +156,8 @@ object f_tray: Tf_tray
     end
     object TabSheet3: TTabSheet
       Caption = 'Action'
-      ClientHeight = 219
-      ClientWidth = 380
+      ClientHeight = 211
+      ClientWidth = 376
       object RadioGroup3: TRadioGroup
         Left = 55
         Height = 105

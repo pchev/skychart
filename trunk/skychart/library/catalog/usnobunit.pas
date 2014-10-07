@@ -64,7 +64,7 @@ var
    FileIsOpen : Boolean = false;
    CurZone : string;
    demin,demax,armin,armax : double;
-   fullwin : boolean;
+//   fullwin : boolean;
 
 Function IsUSNOBpath(path : string) : Boolean;
 var p : string;
@@ -274,7 +274,7 @@ var
    ar,de,arp,dep : double;
    def : boolean;
 begin
-fullwin:=true;
+//fullwin:=true;
 dx:=Trunc((xmax-xmin)/9);
 dy:=Trunc((ymax-ymin)/49);
 nSM:=0;
@@ -327,7 +327,7 @@ var
    ar,de,dar,dde,arp,dep : double;
    def : boolean;
 begin
-fullwin:=false;
+//fullwin:=false;
 demin:=90;
 demax:=-90;
 armin:=360;
