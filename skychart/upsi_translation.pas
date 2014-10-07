@@ -1538,8 +1538,10 @@ CL.AddConstantN('rsCommunicatio','String').SetString(rsCommunicatio);
 CL.AddConstantN('rsSocketConfig','String').SetString(rsSocketConfig);
 CL.AddConstantN('rsHourlyMotion','String').SetString(rsHourlyMotion);
 CL.AddConstantN('rsKey','String').SetString(rsKey);
-CL.AddConstantN('rsConfigureToo','String').SetString(rsConfigureToo);
+CL.AddConstantN('rsManageToolbo','String').SetString(rsManageToolbo);
 CL.AddConstantN('rsSelectScript','String').SetString(rsSelectScript);
+CL.AddConstantN('rsOpenScript','String').SetString(rsOpenScript);
+CL.AddConstantN('rsScriptIsAlre','String').SetString(rsScriptIsAlre);
 
 end;
 

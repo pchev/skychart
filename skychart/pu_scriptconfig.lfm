@@ -1,7 +1,7 @@
 object f_scriptconfig: Tf_scriptconfig
-  Left = 609
+  Left = 588
   Height = 294
-  Top = 159
+  Top = 170
   Width = 592
   Caption = 'f_scriptconfig'
   ClientHeight = 294
@@ -53,13 +53,21 @@ object f_scriptconfig: Tf_scriptconfig
   object PopupMenu1: TPopupMenu
     left = 248
     top = 108
-    object MenuItem1: TMenuItem
+    object MenuItemSelect: TMenuItem
       Caption = 'Select script'
-      OnClick = MenuItem1Click
+      OnClick = MenuItemSelectClick
     end
-    object MenuItem2: TMenuItem
+    object MenuItemOpen: TMenuItem
+      Caption = 'Open script'
+      OnClick = MenuItemOpenClick
+    end
+    object MenuItemDelete: TMenuItem
       Caption = 'Delete'
-      OnClick = MenuItem2Click
+      OnClick = MenuItemDeleteClick
     end
+  end
+  object SelectPopup: TPopupMenu
+    left = 360
+    top = 108
   end
 end
