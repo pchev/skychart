@@ -3282,28 +3282,8 @@ object f_main: Tf_main
     Width = 276
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 467
-    ClientWidth = 276
     TabOrder = 6
     Visible = False
-    object ScriptScrollBox: TScrollBox
-      Left = 0
-      Height = 467
-      Top = 0
-      Width = 276
-      HorzScrollBar.Increment = 0
-      HorzScrollBar.Page = 1
-      HorzScrollBar.Smooth = True
-      HorzScrollBar.Tracking = True
-      VertScrollBar.Increment = 0
-      VertScrollBar.Page = 1
-      VertScrollBar.Smooth = True
-      VertScrollBar.Tracking = True
-      Align = alClient
-      BorderStyle = bsNone
-      TabOrder = 0
-      OnResize = ScriptScrollBoxResize
-    end
   end
   object Splitter1: TSplitter
     Left = 304

@@ -79,7 +79,7 @@ type
      Procedure SunRect(t0 : double ; astrometric : boolean; var x,y,z : double;barycenter:boolean=true);
      Procedure Sun(t0 : double; var alpha,delta,dist,diam : double);
      Procedure SunEcl(t0 : double ; var l,b : double);
-     procedure PlanSat(isat:integer; jde:double; var alpha,delta,distance: double; supconj:boolean);
+     procedure PlanSat(isat:integer; jde:double; var alpha,delta,distance: double; var supconj:boolean);
      Function MarSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj: bool20):integer;
      Function JupSat(jde,lighttime,xp,yp,zp : double; smallsat: boolean; var xsat,ysat : double20; var supconj: bool20):integer;
      Function SatSat(jde,lighttime,xp,yp,zp : double; smallsat: boolean; var xsat,ysat : double20; var supconj : array of boolean):integer;
@@ -356,7 +356,7 @@ begin
 result:=rmod(x+3600000000,360);
 end;
 
-procedure TPlanet.PlanSat(isat:integer; jde:double; var alpha,delta,distance: double; supconj:boolean);
+procedure TPlanet.PlanSat(isat:integer; jde:double; var alpha,delta,distance: double; var supconj:boolean);
 var ipl,ix:integer;
     pra,pdec,dist,illum,phase,diam,magn,rp,xp,yp,zp,vel: double;
     satx,saty,satz,xs,ys,zs,x,y,z,d1,d2,qr,lighttime : double;
@@ -2305,7 +2305,7 @@ function TPlanet.FindCometName(comname: String; var ra,de,mag:double; cfgsc: Tco
 var dist,r,elong,phase,rad,ded : double;
   epoch,h,g,ap,an,ic,ec,eq,tp,q,diam,lc,car,cde,rc,xc,yc,zc : double;
   qry,id,nam,elem_id :string;
-  ira,idec,imag,i: integer;
+  ira,idec,imag: integer;
 begin
 result:=false;
 searchid:='';

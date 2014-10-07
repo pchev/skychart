@@ -3595,7 +3595,7 @@ col:=Fplot.cfgplot.Color[15];
 w:=WideLine;
 // meridian
 for i:=0 to 1 do begin
-  xxp:=999999;
+  xxp:=999999; yyp:=999999;
   for n:=0 to 90 do begin
     Hz2Eq(i*pi,deg2rad*n,ra,de,cfgsc);
     ra:=cfgsc.CurST-ra;

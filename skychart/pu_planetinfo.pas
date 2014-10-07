@@ -543,10 +543,9 @@ end;
 
 Procedure Tf_planetinfo.PlotPlanetImage(bmp:TBGRABitmap; ipla:integer);
 var searchdir,sz,buf : string;
-    s,i,j: integer;
+    s,irc,j: integer;
     gw: double;
     b: TBGRABitmap;
-    p:TProcess;
     r:TStringList;
 begin
   s:=min((xmax-xmin),(ymax-xmin));
@@ -556,8 +555,8 @@ begin
   r:=TStringList.Create;
   if ipla=5 then gw:=planet.JupGRS(config.GRSlongitude,config.GRSdrift,config.GRSjd,config.CurJDTT)
             else gw:=0;
-  GetXplanet(Xplanetversion,'',searchdir,sz,slash(Tempdir)+'info2.png',ipla,0,gw,config.CurJDTT,i,r );
-  if (i=0)and(FileExists(slash(Tempdir)+'info2.png')) then begin
+  GetXplanet(Xplanetversion,'',searchdir,sz,slash(Tempdir)+'info2.png',ipla,0,gw,config.CurJDTT,irc,r );
+  if (irc=0)and(FileExists(slash(Tempdir)+'info2.png')) then begin
     b:=TBGRABitmap.Create(slash(Tempdir)+'info2.png');
     bmp.PutImage(xmin+((xmax-xmin-s)div 2),ymin+((ymax-ymin-s)div 2),b,dmSet);
     b.Free;
@@ -566,7 +565,7 @@ begin
      if r.Count>0 then for j:=0 to r.Count-1 do begin
       buf:=buf+r[j]+crlf;
      end;
-     writetrace('Return code '+inttostr(p.ExitStatus)+' from xplanet');
+     writetrace('Return code '+inttostr(irc)+' from xplanet');
      writetrace(buf);
  end;
  r.Free;

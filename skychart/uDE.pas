@@ -555,7 +555,7 @@ end;
 procedure interp(ephint: pephdata; iinfo: piinfo; bufi: pdouble;
         t: Array_1D;  ncf, ncm, na, ifl: integer; var posvel: array_5D);
 var
-  dna, dt1, temp, tc, vfac, tval : double;
+  dna, temp, tc, vfac, tval : double;
     a, l, i, j, itemp : Smallint;
   buf_ptr : pdouble;
 begin
