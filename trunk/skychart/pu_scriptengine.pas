@@ -1718,7 +1718,7 @@ var ConfigScriptButton, ConfigScript, ConfigCombo, ConfigEvent: Tstringlist;
     inif: TMemIniFile;
     j,n,p: integer;
 begin
-SaveDialog1.FileName:=FScriptFilename;
+SaveDialog1.FileName:=ExtractFileName(FScriptFilename);
 if SaveDialog1.Execute then begin
   fn:=SaveDialog1.FileName;
   FScriptFilename:=fn;
