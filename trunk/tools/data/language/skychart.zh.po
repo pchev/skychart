@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-24 09:15+0000\n"
+"POT-Creation-Date: 2014-10-07 16:36+0000\n"
 "PO-Revision-Date: 2013-11-17 14:47+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-24 09:33+0000\n"
-"X-Generator: Launchpad (build 17163)\n"
+"X-Launchpad-Export-Date: 2014-10-07 17:13+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -280,10 +280,6 @@ msgstr "匿名密碼"
 
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
-msgstr ""
-
-#: u_translation.rsanychangeyou
-msgid "Any change you do here will be lost when the program restart."
 msgstr ""
 
 #: u_translation.rsapparent
@@ -2535,10 +2531,6 @@ msgstr "圖示顯示時間"
 msgid "If it is not installed try the following depending on your system:"
 msgstr ""
 
-#: u_translation.rsifyouneedtoc
-msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
-msgstr ""
-
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "照明率"
@@ -2761,6 +2753,10 @@ msgstr ""
 
 #: u_translation.rskeeptableson
 msgid "Keep tables on exit for later use"
+msgstr ""
+
+#: u_translation.rskey
+msgid "Key"
 msgstr ""
 
 #: u_translation.rskm
@@ -3089,6 +3085,10 @@ msgstr "主要欄"
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
+msgstr ""
+
+#: u_translation.rsmanagetoolbo
+msgid "Manage tool box script"
 msgstr ""
 
 #: u_translation.rsmanualmount
@@ -3742,6 +3742,10 @@ msgstr "開啟星圖"
 #: u_translation.rsopencluster
 msgid "Open cluster"
 msgstr "疏散星團"
+
+#: u_translation.rsopenscript
+msgid "Open script"
+msgstr ""
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
@@ -4667,6 +4671,10 @@ msgstr ""
 msgid "Script editor"
 msgstr ""
 
+#: u_translation.rsscriptisalre
+msgid "Script is already assigned to %s are you sure you want to duplicate it to %s ?"
+msgstr ""
+
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
 msgstr "滾動條"
@@ -4765,6 +4773,10 @@ msgstr "從表單選擇光碟"
 
 #: u_translation.rsselectrectan
 msgid "Select Rectangle"
+msgstr ""
+
+#: u_translation.rsselectscript
+msgid "Select script"
 msgstr ""
 
 #: u_translation.rsselectthefie
@@ -5542,10 +5554,6 @@ msgstr "此檔案確認非 MPCORB 檔案。"
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
 msgstr "本程式是自由軟體，你可以根據 GNU 通用公共許可證條款修改和/或再發布。"
-
-#: u_translation.rsthisscriptis
-msgid "This script is maintained within the software distribution."
-msgstr ""
 
 #: u_translation.rsthursday
 msgid "Thu."

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-24 09:15+0000\n"
-"PO-Revision-Date: 2014-05-03 10:25+0000\n"
+"POT-Creation-Date: 2014-10-07 16:36+0000\n"
+"PO-Revision-Date: 2014-09-22 18:28+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-24 09:33+0000\n"
-"X-Generator: Launchpad (build 17163)\n"
+"X-Launchpad-Export-Date: 2014-10-07 17:12+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -281,10 +281,6 @@ msgstr "Password utente anonimo"
 msgid "Anti Alias drawing"
 msgstr "Applica Anti-Alias"
 
-#: u_translation.rsanychangeyou
-msgid "Any change you do here will be lost when the program restart."
-msgstr ""
-
 #: u_translation.rsapparent
 msgid "Apparent"
 msgstr "Apparenti"
@@ -435,7 +431,7 @@ msgstr "Files ausiliari"
 
 #: u_translation.rsavailableact
 msgid "Available actions"
-msgstr ""
+msgstr "Azioni disponibili"
 
 #: u_translation.rsaz
 msgid "Az"
@@ -1544,7 +1540,7 @@ msgstr "Dir"
 
 #: u_translation.rsdirection2
 msgid "Direction"
-msgstr ""
+msgstr "Direzione"
 
 #: u_translation.rsdirectory
 msgid "Directory"
@@ -1616,7 +1612,7 @@ msgstr "Misura distanza"
 
 #: u_translation.rsdivider
 msgid "Divider"
-msgstr ""
+msgstr "Divisore"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
@@ -1828,7 +1824,7 @@ msgstr ""
 
 #: u_translation.rsedittimeincr
 msgid "Edit time increment"
-msgstr ""
+msgstr "Modifica incremento temporale"
 
 #: u_translation.rseditunits
 msgid "Edit units"
@@ -1844,7 +1840,7 @@ msgstr "Nebulosa a emissione"
 
 #: u_translation.rsempty
 msgid "Empty"
-msgstr ""
+msgstr "Vuoto"
 
 #: u_translation.rsencoderconfi
 msgid "Encoder Configuration"
@@ -2124,7 +2120,7 @@ msgstr "Filtro ->"
 
 #: u_translation.rsfilter2
 msgid "Filter"
-msgstr ""
+msgstr "Filtro"
 
 #: u_translation.rsfilternebula
 msgid "Filter deep sky objects"
@@ -2224,7 +2220,7 @@ msgstr "FOV:"
 
 #: u_translation.rsfovbar
 msgid "FOV bar"
-msgstr ""
+msgstr "Barra FOV"
 
 #: u_translation.rsfovnumber
 msgid "FOV number:"
@@ -2534,10 +2530,6 @@ msgstr "Icona Visualizza Orario"
 msgid "If it is not installed try the following depending on your system:"
 msgstr "Se non è installato prova a seconda di qual'è il tuo sistema operativo:"
 
-#: u_translation.rsifyouneedtoc
-msgid "If you need to change it, use the Save/Load button to assign this script on a free tab."
-msgstr ""
-
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Illum."
@@ -2720,7 +2712,7 @@ msgstr "L'epoca dei dati è veramente %s ?"
 
 #: u_translation.rsisempty
 msgid "%s is empty!"
-msgstr ""
+msgstr "%s è vuoto!"
 
 #: u_translation.rsittaketoolon
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
@@ -2761,6 +2753,10 @@ msgstr "Mantieni immagini all'uscita"
 #: u_translation.rskeeptableson
 msgid "Keep tables on exit for later use"
 msgstr "Mantieni tabelle all'uscita"
+
+#: u_translation.rskey
+msgid "Key"
+msgstr ""
 
 #: u_translation.rskm
 msgid "Km."
@@ -3090,6 +3086,10 @@ msgstr "Pannello principale"
 msgid "Make selection of the table and column you want to your catalog"
 msgstr "Seleziona tabella e colonna che vuoi inserire nel tuo catalogo"
 
+#: u_translation.rsmanagetoolbo
+msgid "Manage tool box script"
+msgstr ""
+
 #: u_translation.rsmanualmount
 msgid "Manual mount"
 msgstr "Montatura Manuale"
@@ -3224,7 +3224,7 @@ msgstr "min"
 
 #: u_translation.rsminimal
 msgid "Minimal"
-msgstr ""
+msgstr "Minimale"
 
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
@@ -3741,6 +3741,10 @@ msgstr "Apri una cartina"
 #: u_translation.rsopencluster
 msgid "Open cluster"
 msgstr "Ammasso Aperto"
+
+#: u_translation.rsopenscript
+msgid "Open script"
+msgstr ""
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
@@ -4666,6 +4670,10 @@ msgstr ""
 msgid "Script editor"
 msgstr ""
 
+#: u_translation.rsscriptisalre
+msgid "Script is already assigned to %s are you sure you want to duplicate it to %s ?"
+msgstr ""
+
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
 msgstr "Barre di scorrimento"
@@ -4680,7 +4688,7 @@ msgstr "Cerca"
 
 #: u_translation.rssearchbox
 msgid "Search box"
-msgstr ""
+msgstr "Casella di ricerca"
 
 #: u_translation.rssearchbyname
 msgid "Search by name"
@@ -4766,6 +4774,10 @@ msgstr "Seleziona lastra dalla lista"
 msgid "Select Rectangle"
 msgstr "Seleziona rettangolo"
 
+#: u_translation.rsselectscript
+msgid "Select script"
+msgstr ""
+
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
 msgstr "Seleziona i campi da usare e la loro posizione nel file"
@@ -4784,7 +4796,7 @@ msgstr "Seleziona il tipo di oggetti del tuo catalogo"
 
 #: u_translation.rsselecttimeun
 msgid "Select time units"
-msgstr ""
+msgstr "Seleziona unità di tempo"
 
 #: u_translation.rssemi
 msgid "Semi"
@@ -4812,7 +4824,7 @@ msgstr "Separazione"
 
 #: u_translation.rsseparator
 msgid "Separator"
-msgstr ""
+msgstr "Separatore"
 
 #: u_translation.rsserialport
 msgid "Serial Port"
@@ -4880,7 +4892,7 @@ msgstr "Imposta obiettivo su %s"
 
 #: u_translation.rssettelescope
 msgid "Set location and time"
-msgstr ""
+msgstr "Imposta località e ora"
 
 #: u_translation.rssettime
 msgid "Set Time"
@@ -5256,7 +5268,7 @@ msgstr "S"
 
 #: u_translation.rsstandard
 msgid "Standard"
-msgstr ""
+msgstr "Standard"
 
 #: u_translation.rsstandardcolo
 msgid "Standard  colour"
@@ -5541,10 +5553,6 @@ msgstr "Il file non è riconosciuto come un valido MPCORB file."
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
 msgstr "Questo programma e software libero; puoi distribuirlo e/o modificarlo secondo i termini di licenza GNU General Public License"
-
-#: u_translation.rsthisscriptis
-msgid "This script is maintained within the software distribution."
-msgstr ""
 
 #: u_translation.rsthursday
 msgid "Thu."
