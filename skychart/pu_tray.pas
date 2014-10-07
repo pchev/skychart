@@ -365,7 +365,9 @@ end;
 
 procedure Tf_tray.FormCreate(Sender: TObject);
 begin
+{$ifdef mswindows}
   Application.UpdateFormatSettings := False;
+{$endif}
   DefaultFormatSettings.DecimalSeparator:='.';
   DefaultFormatSettings.ThousandSeparator:=',';
   DefaultFormatSettings.DateSeparator:='/';

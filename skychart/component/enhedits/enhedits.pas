@@ -532,9 +532,6 @@ end;
 { Function to check the Value property is in range
   Min < Value < Max. }
 function TFloatEdit.CheckValue(NewValue: Extended): Extended;
-const
-  FMaxVal: Double = 1.7E308;
-  FMinVal: Double = -1.7E308;
 begin
   Result := NewValue;
   if (FMaxValue <> FMinValue) then
@@ -662,7 +659,7 @@ end;
 { Don't accept invalid characters }
 procedure TFloatEdit.KeyPress(var Key: Char);
 begin
-  if Key in ['0'..'9', '-', '+', 'e', 'E', DecimalSeparator, #0 .. #20] then
+  if Key in ['0'..'9', '-', '+', 'e', 'E', DefaultFormatSettings.DecimalSeparator, #0 .. #20] then
     inherited KeyPress(Key)
   else begin
     Key := #0;
