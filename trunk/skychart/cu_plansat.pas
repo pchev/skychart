@@ -1976,9 +1976,7 @@ end;
 function NepSatOne(jde: double; isat:integer; var xs,ys,zs : double):integer;
 const nrocks=6;
       rocks: array[1..nrocks] of integer = (803,804,805,806,807,808);
-var i: integer;
-    X,Y,Z: double;
-    vect: array [0..2] of double;
+var vect: array [0..2] of double;
 begin
 result:=1;
 if isat<=2 then begin
@@ -2001,8 +1999,6 @@ end;
 end;
 
 function PluSatOne(jde: double; isat:integer; var xs,ys,zs : double):integer;
-var i: integer;
-    X,Y,Z: double;
 begin
 result:=1;
 if isat=1 then begin

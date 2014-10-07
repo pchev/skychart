@@ -615,8 +615,7 @@ nrates:=srate.count;
 end;
 
 procedure Tpop_lx200.ScopeMoveAxis(axis:Integer; rate: string);
-var dir1,dir2: string;
-    i,n: integer;
+var i: integer;
     positive: boolean;
 begin
 positive:=(copy(rate,1,1)<>'-');

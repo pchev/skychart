@@ -981,7 +981,7 @@ end;
 
 procedure Tf_config_display.CirclegridMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-var i,col,row:integer;
+var col,row:integer;
 begin
 Circlegrid.MouseToCell(X, Y, Col, Row);
 if row=0 then exit;
@@ -1479,7 +1479,6 @@ end;
 
 procedure Tf_config_display.ShowCircle;
 var i:integer;
-    buf:string;
 begin
 circlegrid.ColWidths[0]:=30;
 circlegrid.ColWidths[1]:=30;
@@ -1503,8 +1502,6 @@ for i:=1 to csc.ncircle do begin
   circlegrid.Cells[3,i]:=formatfloat(f2,csc.circle[i,2]);
   circlegrid.Cells[4,i]:=formatfloat(f2,csc.circle[i,3]);
   circlegrid.Cells[5,i]:=csc.circlelbl[i];
-  buf:=inttostr(i)+csc.circlelbl[i];
-  buf:=inttostr(i)+circlegrid.Cells[5,i];
 end;
 CRow:=1;
 CenterMark1.checked:=csc.ShowCircle;
@@ -2432,7 +2429,7 @@ end;
 
 procedure Tf_config_display.RectangleGridMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X,
   Y: Integer);
-var i,col,row:integer;
+var col,row:integer;
 begin
 RectangleGrid.MouseToCell(X, Y, Col, Row);
 if row=0 then exit;

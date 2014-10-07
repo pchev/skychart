@@ -110,7 +110,7 @@ end;
 Procedure Tf_scriptconfig.SelectFile(row:integer);
 var fl:TStringList;
     fs: TSearchRec;
-    i,n:integer;
+    i:integer;
     mf:TMenuItem;
 begin
 fl:=TStringList.Create;
@@ -190,7 +190,7 @@ StringGrid1.MouseToCell(X, Y, CurCol, CurRow);
 end;
 
 procedure Tf_scriptconfig.StringGrid1MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-var i,col,row:integer;
+var col,row:integer;
 begin
 StringGrid1.MouseToCell(X, Y, Col, Row);
 if (row>0)and(col=2) then begin

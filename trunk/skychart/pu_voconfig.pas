@@ -434,7 +434,6 @@ procedure Tf_voconfig.FillGrid(fr:Tf_vodetail; i,n,nactive: integer;active:boole
 var u:double;
     l:boolean;
     p:integer;
-    b:string;
 begin
   if (not active)or(nactive<0) then nactive:=-99;
   fr.Grid.Cells[1,i]:=VO_Detail1.RecName[n][i-1];
@@ -451,9 +450,7 @@ begin
     end;
   end;
   if (fr.forcemag=nactive)or(((pos('phot.mag',VO_Detail1.RecUCD[n][i-1])=1)or(pos('phys.mag',VO_Detail1.RecUCD[n][i-1])=1))and(pos('error',VO_Detail1.RecUCD[n][i-1])=0)and(pos('phot.mag.',VO_Detail1.RecUCD[n][i-1])=0)) then begin
-    b:=VO_Detail1.RecName[n][i-1];
     p:=fr.MagField.Items.Add(VO_Detail1.RecName[n][i-1]);
-    b:=VO_Detail1.RecUCD[n][i-1];
     if (fr.forcemag=nactive)or((fr.forcemag<0)and((fr.field_mag=-1)or(pos('em.opt.V',VO_Detail1.RecUCD[n][i-1])>0))) then begin
       fr.MagField.ItemIndex:=p;
       fr.field_mag:=nactive;

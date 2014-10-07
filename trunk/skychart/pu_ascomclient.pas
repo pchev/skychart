@@ -437,9 +437,11 @@ if ScopeConnected then begin
 end;
 
 procedure Tpop_scope.GetScopeRates(var nrates0,nrates1:integer; axis0rates,axis1rates: Pdoublearray);
+{$ifdef mswindows}
 var rate,irate: Variant;
     i,j,k: integer;
     min,max:double;
+{$endif}
 begin
 {$ifdef mswindows}
 SetLength(axis0rates^,0);

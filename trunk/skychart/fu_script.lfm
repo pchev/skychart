@@ -3,6 +3,11 @@ object f_script: Tf_script
   Height = 274
   Top = 0
   Width = 180
+  HorzScrollBar.Page = 1
+  HorzScrollBar.Tracking = True
+  VertScrollBar.Page = 1
+  VertScrollBar.Tracking = True
+  AutoScroll = True
   ClientHeight = 274
   ClientWidth = 180
   TabOrder = 0

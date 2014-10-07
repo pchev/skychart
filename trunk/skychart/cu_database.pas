@@ -38,6 +38,7 @@ type
     FInitializeDB: TNotifyEvent;
     FAstmsg: string;
     FComMindt: integer;
+    tstval: double;
   public
     { Public declarations }
      constructor Create(AOwner:TComponent); override;
@@ -621,7 +622,7 @@ var
   buf,cmd,c,filedesc,filenum :string;
   ep,id,nam,ec,ax,i,node,peri,eq,ma,h,g,ref  : string;
   y,m,d,nl,prefl,lid,nerr,ierr,rerr: integer;
-  hh,tstval:double;
+  hh:double;
   f : textfile;
 begin
 nerr:=1;

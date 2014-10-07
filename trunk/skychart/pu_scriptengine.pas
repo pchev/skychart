@@ -1013,7 +1013,7 @@ var ConfigScriptButton, ConfigScript, ConfigCombo, ConfigEvent: Tstringlist;
     section,buf,titl,num: string;
     sectionlist,scrlist: Tstringlist;
     inif: TMemIniFile;
-    i,j,k,n: integer;
+    j,k,n: integer;
 begin
   ConfigScriptButton:=Tstringlist.create;
   ConfigScript:=Tstringlist.create;

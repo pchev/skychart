@@ -121,7 +121,6 @@ aControl.HelpType:=htKeyword;
 end;
 
 procedure SetLang;
-var buf: string;
 begin
  hlpBaseDir:=rsHelpBaseDir;
 end;

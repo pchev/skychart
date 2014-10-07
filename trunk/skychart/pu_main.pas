@@ -50,7 +50,6 @@ type
   Tf_main = class(TForm)
     ContainerPanel: TPanel;
     MenuToolboxConfig: TMenuItem;
-    ScriptScrollBox: TScrollBox;
     SubAnimation: TMenuItem;
     MenuTimeDec: TMenuItem;
     MenuTimeInc: TMenuItem;
@@ -464,7 +463,6 @@ type
     procedure ResetRotationExecute(Sender: TObject);
     procedure rotate180Execute(Sender: TObject);
     procedure ScaleModeExecute(Sender: TObject);
-    procedure ScriptScrollBoxResize(Sender: TObject);
     procedure SetupPicturesExecute(Sender: TObject);
     procedure ShowCompassExecute(Sender: TObject);
     procedure ShowUobjExecute(Sender: TObject);
@@ -626,8 +624,6 @@ type
     Fscript: array of Tf_script;
     ActiveScript: integer;
     FTelescopeConnected: boolean;
-    ScriptScrollBoxResizeCount: integer;
-    ScriptScrollBoxResizeTime: double;
     AccelList: array[0..MaxMenulevel] of string;
     SplitterLeft: integer;
   {$ifdef mswindows}
@@ -2100,6 +2096,7 @@ ActiveScript:=-1;
 SetLength(Fscript,numscript);
 for i:=0 to numscript-1 do begin
   Fscript[i]:=Tf_script.Create(self);
+  Fscript[i].Parent:=ScriptPanel;
   Fscript[i].Name:='fscript'+inttostr(i);
   Fscript[i].PanelTitle.Caption:='Toolbox '+inttostr(i+1);
   Fscript[i].Tag:=i;
@@ -2113,7 +2110,6 @@ for i:=0 to numscript-1 do begin
   Fscript[i].onApply:=ApplyScript;
   Fscript[i].onToolboxConfig:=MenuToolboxConfigClick;
   if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
-  Fscript[i].Parent:=ScriptScrollBox;
 end;
 Splitter1.ResizeControl:=ScriptPanel;
 step:='SetLang';
@@ -2677,27 +2673,6 @@ begin
   end;
 end;
 
-procedure Tf_main.ScriptScrollBoxResize(Sender: TObject);
-begin
-// Protection again auto-resize loop
-if ScriptScrollBoxResizeCount=0 then begin
-   ScriptScrollBoxResizeTime:=now;
-   inc(ScriptScrollBoxResizeCount);
-end else begin
-  inc(ScriptScrollBoxResizeCount);
-  if (now-ScriptScrollBoxResizeTime)>(0.1/secday) then begin
-    ScriptScrollBoxResizeCount:=0;
-  end else begin
-    if ScriptScrollBoxResizeCount>10 then begin  // 10 resize call in 0.1 sec
-       ScriptScrollBoxResizeCount:=0;
-       ScriptScrollBox.AutoScroll:=false;
-       ScriptScrollBox.VertScrollBar.Visible:=false;
-       ScriptScrollBox.HorzScrollBar.Visible:=false;
-    end;
-  end;
-end;
-end;
-
 procedure Tf_main.AnimationTimerTimer(Sender: TObject);
 var fn:string;
 begin
@@ -2714,8 +2689,6 @@ begin
   Application.ProcessMessages;
   AnimationTimer.Enabled:=AnimationEnabled;
 end;
-
-
 
 procedure Tf_main.TimeIncExecute(Sender: TObject);
 var hh : double;
@@ -5465,7 +5438,7 @@ end;
 end;
 
 procedure Tf_main.ReadPrivateConfig(filename:string);
-var i,j,n:integer;
+var i,j:integer;
     inif: TMemIniFile;
     section,buf : string;
     obsdetail: TObsDetail;
@@ -6312,7 +6285,7 @@ end;
 end;
 
 procedure Tf_main.SavePrivateConfig(filename:string);
-var i,j,n:integer;
+var i,j:integer;
     inif: TMemIniFile;
     section,buf : string;
 begin
