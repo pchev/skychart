@@ -2109,6 +2109,7 @@ for i:=0 to numscript-1 do begin
   if MultiFrame1.ActiveObject is Tf_chart then Fscript[i].Activechart:=Tf_chart(MultiFrame1.ActiveObject);
 end;
 Splitter1.ResizeControl:=ScriptPanel;
+ScriptPanel.Constraints.MinWidth:=Fscript[0].ButtonConfig.Width+4+GetSystemMetrics(SM_SWSCROLLBARSPACING)+GetSystemMetrics(SM_CXVSCROLL);;
 step:='SetLang';
 if VerboseMsg then WriteTrace(step);
 SetLang;
