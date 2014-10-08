@@ -10,6 +10,7 @@ object f_script: Tf_script
   AutoScroll = True
   ClientHeight = 274
   ClientWidth = 180
+  OnResize = FrameResize
   TabOrder = 0
   DesignLeft = 307
   DesignTop = 147

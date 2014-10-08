@@ -3290,7 +3290,6 @@ object f_main: Tf_main
     Height = 467
     Top = 80
     Width = 5
-    OnMoved = Splitter1Moved
     ResizeStyle = rsPattern
     Visible = False
   end
