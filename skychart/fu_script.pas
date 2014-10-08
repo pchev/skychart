@@ -49,6 +49,7 @@ type
     ToolBar2: TToolBar;
     procedure ButtonConfigClick(Sender: TObject);
     procedure ButtonEditSrcClick(Sender: TObject);
+    procedure FrameResize(Sender: TObject);
     procedure PanelTitleMouseEnter(Sender: TObject);
     procedure PanelTitleMouseLeave(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
@@ -325,6 +326,13 @@ begin
   end;
   FormPos(fscriptengine,mouse.cursorpos.x,mouse.cursorpos.y);
   fscriptengine.Show;
+end;
+
+procedure Tf_script.FrameResize(Sender: TObject);
+begin
+  MainPanel.Width:=ClientWidth;
+  MainPanel.Constraints.MaxWidth:=ClientWidth;
+  MainPanel.Constraints.MinWidth:=ClientWidth;
 end;
 
 procedure Tf_script.PanelTitleMouseEnter(Sender: TObject);
