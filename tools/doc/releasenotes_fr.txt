@@ -1,5 +1,15 @@
 Version 3.11 beta, Notes de la version
 
+Incompatibilités avec les versions beta inférieur à 3023:
+
+  * Modification des boîtes à outils:
+    Seul le script F1 est maintenant affecté par défaut. 
+    Pour en charger d'autres voir http://www.ap-i.net/skychart/fr/documentation/toolbox
+   
+  * Si vous avez développé vos propres scripts:
+    Le format de fichier des scripts est modifié par la version 3.11-3023. Vous devez enregistrer vos propres scripts à nouveau parce que le support de l'ancien format sera supprimé avant la sortie de la version stable.
+    De plus, le code des scripts n'est plus sauvegardé dans skychart.ini. En cas de problème, vous pouvez utiliser la copie de sauvegarde avec l'extension .oldscript qui se fait la première fois que vous exécutez cette version.
+
 Nouvelles fonctions:
 
   * Nouvelles boites à outils que vous pouvez activer avec les touches F1 à F8.

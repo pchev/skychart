@@ -1,5 +1,15 @@
 Version 3.11 beta, release Notes
 
+Incompatibilities with beta versions before 3023:
+
+  * Tool box change:
+    Only the F1 script is now assigned by default. 
+    To load the others script see http://www.ap-i.net/skychart/en/documentation/toolbox
+
+  * If you have developed your own script: 
+    The script file format as changed in version 3.11-3023. You must save your own scripts to file again because the support for the old format will be removed before the stable version release.
+    Also the script code is no more saved in skychart.ini. In case of problem you can use the backup copy with the .oldscript extension that is done the first time you run this version.  
+
 New functions:
 
   * New tool box function you can activate with the keys F1 to F8.
