@@ -150,7 +150,7 @@ type
       State: TDragState; var Accept: Boolean);
   private
     { private declarations }
-    FScriptFilename: string;
+    FScriptFilename, FScriptTitle, FTrScriptTitle: string;
     FEditSurface: TPanel;
     FonApply: TNotifyEvent;
     FonEditToolBar: TNotifyEvent;
@@ -306,6 +306,7 @@ type
     property cmain: Tconf_main read Fcmain write Fcmain;
     property ActiveChart: Tf_chart read FActiveChart write FActiveChart;
     property ScriptFilename: string read FScriptFilename;
+    property Title: string read FTrScriptTitle;
   end;
 
 var
@@ -316,6 +317,7 @@ implementation
 {$R *.lfm}
 
 procedure Tf_scriptengine.SetLang;
+var titl:string;
 begin
   caption:=rsScript;
   ButtonEditTB.Caption:=rsToolBarEdito;
@@ -352,6 +354,12 @@ begin
       evscr[ord(evTranslation)].Compile;
       evscr[ord(evTranslation)].Execute;
      end;
+  titl:=FScriptTitle;
+  if copy(titl,1,1)='%' then begin
+     delete(titl,1,1);
+     titl:=GetScriptTranslation(titl);
+  end;
+  FTrScriptTitle:=titl;
 end;
 
 function Tf_scriptengine.doExecuteCmd(cname:string; arg:Tstringlist):string;
@@ -1025,11 +1033,13 @@ begin
   with inif do begin
   if SectionExists('Panel') then begin // New format
     section:='Panel';
-    titl:=ReadString(section,'Title',ScriptTitle.Text);
+    FScriptTitle:=ReadString(section,'Title',ScriptTitle.Text);
+    titl:=FScriptTitle;
     if copy(titl,1,1)='%' then begin
       delete(titl,1,1);
       titl:=GetScriptTranslation(titl);
     end;
+    FTrScriptTitle:=titl;
     CheckBoxHidenTimer.Checked:=ReadBool(section,'HidenTimer',CheckBoxHidenTimer.Checked);
     n:=ReadInteger(section,'NumToolbar1',0);
     ConfigToolbar1.Clear;
@@ -1098,7 +1108,9 @@ begin
 
   end else begin // Old format
     section:='ScriptPanel';
-    titl:=ReadString(section,'Title','');
+    FScriptTitle:=ReadString(section,'Title','');
+    titl:=FScriptTitle;
+    FTrScriptTitle:=titl;
     CheckBoxHidenTimer.Checked:=ReadBool(section,'HidenTimer',CheckBoxHidenTimer.Checked);
     n:=ReadInteger(section,'numtoolbar1',0);
     ConfigToolbar1.Clear;
@@ -1939,6 +1951,7 @@ begin
   CheckListIdx:=0;
   SpacerIdx:=0;
   LabelIdx:=0;
+  FScriptTitle:='';
   {$ifdef mswindows}
     PSImport_ComObj1:=TPSImport_ComObj.Create(self);
     TPSPluginItem(TplPSScript.Plugins.Add).Plugin:=PSImport_ComObj1;
