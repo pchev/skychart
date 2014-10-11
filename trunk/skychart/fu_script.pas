@@ -172,12 +172,16 @@ implementation
 
 procedure Tf_script.SetLang;
 begin
-  if FScriptTitle='' then PanelTitle.Caption:=rsToolBox+' '+inttostr(tag+1)
-                     else PanelTitle.Caption:=FScriptTitle;
   ButtonConfig.Caption:=rsManageToolbo;
   ButtonEditSrc.Caption:=rsScriptEditor;
   fedittoolbar.SetLang;
-  if fscriptengine<>nil then fscriptengine.SetLang;
+  FScriptTitle:='';
+  if fscriptengine<>nil then begin
+    fscriptengine.SetLang;
+    FScriptTitle:=fscriptengine.Title;
+  end;
+  if FScriptTitle='' then PanelTitle.Caption:=rsToolBox+' '+inttostr(tag+1)
+                     else PanelTitle.Caption:=FScriptTitle;
   SetHelp(self,hlpToolbox);
 end;
 
