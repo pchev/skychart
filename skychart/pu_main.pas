@@ -5866,7 +5866,7 @@ if  Config_Version < '3.9g' then begin
   def_cfgsc.GRSdrift:=16.5/365.25;
 end;
 if  Config_Version < '3.11g' then begin
-   CopyFile(Configfile,Configfile+'.oldscripts');
+   CopyFile(SysToUTF8(Configfile),SysToUTF8(Configfile+'.oldscripts'));
 end;
 end;
 
