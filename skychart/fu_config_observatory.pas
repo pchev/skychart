@@ -37,6 +37,7 @@ type
   { Tf_config_observatory }
 
   Tf_config_observatory = class(TFrame)
+    ShowHorizon0: TCheckBox;
     HorizonQuality: TCheckBox;
     displayhorizonpicture: TCheckBox;
     picturerotation: TFloatEdit;
@@ -109,6 +110,7 @@ type
     procedure Button6Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
+    procedure ShowHorizon0Click(Sender: TObject);
     procedure ComboBox1Select(Sender: TObject);
     procedure countrylistSelect(Sender: TObject);
     procedure CountryTZChange(Sender: TObject);
@@ -226,6 +228,7 @@ displayhorizonpicture.caption:=rsDisplayTheHo;
 HorizonQuality.Caption:=rsHighQuality;
 label9.Caption:=rsPictureAngle;
 fillhorizon.caption:=rsFillWithHori;
+ShowHorizon0.Caption:=rsShow0Horizon;
 GroupBox3.caption:=rsDepressionOf;
 Label1.caption:=rsYouLiveOnABi;
 horizondepression.caption:=rsDrawTheAppar;
@@ -897,6 +900,7 @@ displayhorizonpicture.Checked := csc.ShowHorizonPicture;
 HorizonQuality.Checked := not csc.HorizonPictureLowQuality;
 picturerotation.Value:=csc.HorizonPictureRotate;
 fillhorizon.Checked:=csc.FillHorizon;
+ShowHorizon0.Checked:=csc.ShowHorizon0;
 horizondepression.Checked:=csc.ShowHorizonDepression;
 end;
 
@@ -909,6 +913,11 @@ end;
 procedure Tf_config_observatory.fillhorizonClick(Sender: TObject);
 begin
 csc.FillHorizon:=fillhorizon.Checked;
+end;
+
+procedure Tf_config_observatory.ShowHorizon0Click(Sender: TObject);
+begin
+csc.ShowHorizon0:=ShowHorizon0.Checked;
 end;
 
 procedure Tf_config_observatory.horizondepressionClick(Sender: TObject);

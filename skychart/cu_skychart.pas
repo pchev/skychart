@@ -3805,29 +3805,30 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
       DrawHorizonPicture(hbmp);
 
       // Horizon line
-      col2:=ColorToBGRA(Fplot.cfgplot.Color[12]);
-      first:=true; xph:=0;yph:=0;x0h:=0;y0h:=0;
-      for i:=1 to 360 do begin
-           az:=deg2rad*rmod(360+i-1-180,360);
-           proj2(-az,0,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
-           WindowXY(x1,y1,xh,yh,cfgsc);
-           if first then begin
-              first:=false;
-              x0h:=xh;
-              y0h:=yh;
-           end else begin
-             if (xh>-5*cfgsc.Xmax)and(xh<5*cfgsc.Xmax)and(yh>-5*cfgsc.Ymax)and(yh<5*cfgsc.Ymax)and((cfgsc.fov<0.1)or(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2))) then begin
-                  Fplot.BGRADrawLine(xph,yph,xh,yh,col2,2,hbmp);
-                  hlplot:=true;
+      if cfgsc.ShowHorizon0 then begin
+        col2:=ColorToBGRA(Fplot.cfgplot.Color[12]);
+        first:=true; xph:=0;yph:=0;x0h:=0;y0h:=0;
+        for i:=1 to 360 do begin
+             az:=deg2rad*rmod(360+i-1-180,360);
+             proj2(-az,0,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+             WindowXY(x1,y1,xh,yh,cfgsc);
+             if first then begin
+                first:=false;
+                x0h:=xh;
+                y0h:=yh;
+             end else begin
+               if (xh>-5*cfgsc.Xmax)and(xh<5*cfgsc.Xmax)and(yh>-5*cfgsc.Ymax)and(yh<5*cfgsc.Ymax)and((cfgsc.fov<0.1)or(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2))) then begin
+                    Fplot.BGRADrawLine(xph,yph,xh,yh,col2,2,hbmp);
+                    hlplot:=true;
+               end;
              end;
-           end;
-           xph:=xh;
-           yph:=yh;
+             xph:=xh;
+             yph:=yh;
+        end;
+        xph:=x0h; yph:=y0h;
+        if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then
+            Fplot.BGRADrawLine(xh,yh,xph,yph,col2,2,hbmp);
       end;
-      xph:=x0h; yph:=y0h;
-      if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then
-          Fplot.BGRADrawLine(xh,yh,xph,yph,col2,2,hbmp);
-
       hbmp.InvalidateBitmap;
       // Render bitmap
       Fplot.cbmp.PutImage(0,0,hbmp,dmDrawWithTransparency);
@@ -3898,27 +3899,29 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
         end;
       end;
       // Horizon line
-      first:=true; xph:=0;yph:=0;x0h:=0;y0h:=0;
-      for i:=1 to 360 do begin
-           az:=deg2rad*rmod(360+i-1-180,360);
-           proj2(-az,0,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
-           WindowXY(x1,y1,xh,yh,cfgsc);
-           if first then begin
-              first:=false;
-              x0h:=xh;
-              y0h:=yh;
-           end else begin
-             if (xh>-5*cfgsc.Xmax)and(xh<5*cfgsc.Xmax)and(yh>-5*cfgsc.Ymax)and(yh<5*cfgsc.Ymax)and((cfgsc.fov<0.1)or(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2))) then begin
-                  Fplot.BGRADrawLine(xph,yph,xh,yh,col2,2,hbmp);
-                  hlplot:=true;
+      if cfgsc.ShowHorizon0 then begin
+        first:=true; xph:=0;yph:=0;x0h:=0;y0h:=0;
+        for i:=1 to 360 do begin
+             az:=deg2rad*rmod(360+i-1-180,360);
+             proj2(-az,0,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+             WindowXY(x1,y1,xh,yh,cfgsc);
+             if first then begin
+                first:=false;
+                x0h:=xh;
+                y0h:=yh;
+             end else begin
+               if (xh>-5*cfgsc.Xmax)and(xh<5*cfgsc.Xmax)and(yh>-5*cfgsc.Ymax)and(yh<5*cfgsc.Ymax)and((cfgsc.fov<0.1)or(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2))) then begin
+                    Fplot.BGRADrawLine(xph,yph,xh,yh,col2,2,hbmp);
+                    hlplot:=true;
+               end;
              end;
-           end;
-           xph:=xh;
-           yph:=yh;
+             xph:=xh;
+             yph:=yh;
+        end;
+        xph:=x0h; yph:=y0h;
+        if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then
+            Fplot.BGRADrawLine(xh,yh,xph,yph,col2,2,hbmp);
       end;
-      xph:=x0h; yph:=y0h;
-      if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then
-          Fplot.BGRADrawLine(xh,yh,xph,yph,col2,2,hbmp);
       // Fill below horizon
       if hlplot and fill and (not Fplot.cfgchart.onprinter) and(cfgsc.fov<fillfov) then begin
            if (fillx1>0)or(filly1>0) then hbmp.FloodFill(round(fillx1),round(filly1),col1,fmSet);
@@ -3966,7 +3969,7 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
            // draw line
            Fplot.Plotline(ps[0,hdiv],ps[1,hdiv],ps[0,hdiv+1],ps[1,hdiv+1],Fplot.cfgplot.Color[19],1);
          end;
-         Fplot.Plotline(ps[0,0],ps[1,0],ps[0,2*hdiv+1],ps[1,2*hdiv+1],Fplot.cfgplot.Color[12],2);
+         if cfgsc.ShowHorizon0 then Fplot.Plotline(ps[0,0],ps[1,0],ps[0,2*hdiv+1],ps[1,2*hdiv+1],Fplot.cfgplot.Color[12],2);
          end;
        end;
        azp:=az;
@@ -3996,26 +3999,28 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
   end
   else begin
      // Horizon line
-     first:=true; xph:=0;yph:=0;x0h:=0;y0h:=0;
-     for i:=1 to 360 do begin
-       az:=deg2rad*rmod(360+i-1-180,360);
-       proj2(-az,0,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
-       WindowXY(x1,y1,xh,yh,cfgsc);
-       if first then begin
-          first:=false;
-          x0h:=xh;
-          y0h:=yh;
-       end else begin
-         if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then begin
-           Fplot.Plotline(xph,yph,xh,yh,Fplot.cfgplot.Color[12],2);
+     if cfgsc.ShowHorizon0 then begin
+       first:=true; xph:=0;yph:=0;x0h:=0;y0h:=0;
+       for i:=1 to 360 do begin
+         az:=deg2rad*rmod(360+i-1-180,360);
+         proj2(-az,0,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+         WindowXY(x1,y1,xh,yh,cfgsc);
+         if first then begin
+            first:=false;
+            x0h:=xh;
+            y0h:=yh;
+         end else begin
+           if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then begin
+             Fplot.Plotline(xph,yph,xh,yh,Fplot.cfgplot.Color[12],2);
+           end;
          end;
+         xph:=xh;
+         yph:=yh;
        end;
-       xph:=xh;
-       yph:=yh;
+       xph:=x0h; yph:=y0h;
+       if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then
+          Fplot.Plotline(xh,yh,xph,yph,Fplot.cfgplot.Color[12],2);
      end;
-     xph:=x0h; yph:=y0h;
-     if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then
-        Fplot.Plotline(xh,yh,xph,yph,Fplot.cfgplot.Color[12],2);
   end;
  end;
  ////// End of horizon drawing
