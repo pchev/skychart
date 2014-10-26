@@ -1,5 +1,5 @@
 [Panel]
-Title=%rsObserverTool
+Title=Outils pour l'observation
 HidenTimer=0
 NumToolbar1=3
 toolbar1_0=48;TelescopeConnect
@@ -228,6 +228,15 @@ s="// Stop moving"
 "   c.add('ABORTSLEW');"
 "   r:=cmd('',c);"
 "   c.clear;"
+"   c.add('SCOPEMOVEAXIS');"
+"   c.add('0');"
+"   c.add('0');"
+"   r:=cmd('',c);"
+"   c.clear;"
+"   c.add('SCOPEMOVEAXIS');"
+"   c.add('1');"
+"   c.add('0');"
+"   r:=cmd('',c);"
 "   memo_1.lines.add(r);"
 " end"
 " else memo_1.lines.add(rsTelescopeNot);"
