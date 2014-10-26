@@ -739,7 +739,7 @@ if LockChange then exit;
 try
 LockChange:=true;
 csc.curtime:=t_hour.Position+t_min.Position/60+t_sec.Position/3600;
-csc.tz.JD:=jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime/secday);
+csc.tz.JD:=jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 csc.TimeZone:=csc.tz.SecondsOffset/3600;
 JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 ShowUTTime;
