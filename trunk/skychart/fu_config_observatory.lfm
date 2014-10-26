@@ -6,8 +6,8 @@ object f_config_observatory: Tf_config_observatory
   ClientHeight = 548
   ClientWidth = 502
   TabOrder = 0
-  DesignLeft = 307
-  DesignTop = 235
+  DesignLeft = 354
+  DesignTop = 219
   object MainPanel: TPanel
     Left = 0
     Height = 548
@@ -23,10 +23,10 @@ object f_config_observatory: Tf_config_observatory
       Height = 546
       Top = 1
       Width = 500
-      ActivePage = Page1
+      ActivePage = Page2
       Align = alClient
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Observatory'
@@ -108,7 +108,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 72
           Width = 185
           Caption = 'Latitude'
-          ClientHeight = 42
+          ClientHeight = 56
           ClientWidth = 181
           TabOrder = 5
           object Label58: TLabel
@@ -185,7 +185,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 72
           Width = 185
           Caption = 'Longitude'
-          ClientHeight = 42
+          ClientHeight = 56
           ClientWidth = 181
           TabOrder = 6
           object Label61: TLabel
@@ -262,7 +262,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 72
           Width = 81
           Caption = 'Altitude'
-          ClientHeight = 42
+          ClientHeight = 56
           ClientWidth = 77
           TabOrder = 7
           object Label70: TLabel
@@ -294,7 +294,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 149
           Width = 449
           Caption = 'Time Zone'
-          ClientHeight = 68
+          ClientHeight = 82
           ClientWidth = 445
           TabOrder = 8
           object TZComboBox: TComboBox
@@ -412,7 +412,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 152
           Width = 457
           Caption = 'Want to track an object before it rise ?'
-          ClientHeight = 48
+          ClientHeight = 34
           ClientWidth = 453
           TabOrder = 1
           object horizonopaque: TCheckBox
@@ -427,11 +427,11 @@ object f_config_observatory: Tf_config_observatory
         end
         object GroupBox1: TGroupBox
           Left = 8
-          Height = 148
-          Top = 4
+          Height = 154
+          Top = 0
           Width = 457
           Caption = 'Local Horizon'
-          ClientHeight = 131
+          ClientHeight = 123
           ClientWidth = 453
           TabOrder = 0
           object displayhorizon: TCheckBox
@@ -506,14 +506,6 @@ object f_config_observatory: Tf_config_observatory
             MinValue = -360
             MaxValue = 360
           end
-          object Label9: TLabel
-            Left = 28
-            Height = 15
-            Top = 92
-            Width = 113
-            Caption = 'Picture angle offset'
-            ParentColor = False
-          end
           object HorizonQuality: TCheckBox
             Left = 307
             Height = 26
@@ -523,6 +515,23 @@ object f_config_observatory: Tf_config_observatory
             OnClick = HorizonQualityClick
             TabOrder = 6
           end
+          object Label9: TLabel
+            Left = 28
+            Height = 15
+            Top = 92
+            Width = 113
+            Caption = 'Picture angle offset'
+            ParentColor = False
+          end
+          object ShowHorizon0: TCheckBox
+            Left = 211
+            Height = 26
+            Top = 8
+            Width = 142
+            Caption = 'Show 0° horizon line '
+            OnClick = ShowHorizon0Click
+            TabOrder = 7
+          end
         end
         object GroupBox3: TGroupBox
           Left = 8
@@ -530,13 +539,13 @@ object f_config_observatory: Tf_config_observatory
           Top = 223
           Width = 457
           Caption = 'Depression of the visible horizon'
-          ClientHeight = 106
+          ClientHeight = 92
           ClientWidth = 453
           TabOrder = 2
           object Label1: TLabel
             Left = 13
             Height = 48
-            Top = 16
+            Top = 4
             Width = 415
             AutoSize = False
             Caption = 'You live on a big mountain near the ocean shore and you like to observe the distorded image of the object below the horizon.'
@@ -546,7 +555,7 @@ object f_config_observatory: Tf_config_observatory
           object horizondepression: TCheckBox
             Left = 13
             Height = 26
-            Top = 65
+            Top = 56
             Width = 264
             Caption = 'Draw the apparent depressed horizon line'
             OnClick = horizondepressionClick
@@ -555,11 +564,11 @@ object f_config_observatory: Tf_config_observatory
         end
         object refraction: TGroupBox
           Left = 8
-          Height = 104
-          Top = 346
+          Height = 124
+          Top = 344
           Width = 457
           Caption = 'Atmospheric Refraction'
-          ClientHeight = 87
+          ClientHeight = 93
           ClientWidth = 453
           TabOrder = 3
           object Label82: TLabel
@@ -659,7 +668,7 @@ object f_config_observatory: Tf_config_observatory
           Left = 311
           Height = 21
           Hint = '-0.5..0.5'
-          Top = 458
+          Top = 474
           Width = 65
           ParentShowHint = False
           ShowHint = True
@@ -673,7 +682,7 @@ object f_config_observatory: Tf_config_observatory
         object Label8: TLabel
           Left = 293
           Height = 15
-          Top = 461
+          Top = 477
           Width = 10
           Caption = 'Y:'
           ParentColor = False
@@ -682,7 +691,7 @@ object f_config_observatory: Tf_config_observatory
           Left = 205
           Height = 21
           Hint = '-0.5..0.5'
-          Top = 458
+          Top = 474
           Width = 65
           ParentShowHint = False
           ShowHint = True
@@ -696,7 +705,7 @@ object f_config_observatory: Tf_config_observatory
         object Label7: TLabel
           Left = 189
           Height = 15
-          Top = 461
+          Top = 477
           Width = 10
           Caption = 'X:'
           ParentColor = False
@@ -705,7 +714,7 @@ object f_config_observatory: Tf_config_observatory
           Cursor = crHandPoint
           Left = 21
           Height = 15
-          Top = 461
+          Top = 477
           Width = 124
           Caption = 'polar motion (arc sec)'
           Font.Color = clBlue
@@ -717,7 +726,7 @@ object f_config_observatory: Tf_config_observatory
         object RefDefault: TButton
           Left = 390
           Height = 25
-          Top = 456
+          Top = 472
           Width = 75
           Caption = 'Default'
           OnClick = RefDefaultClick
@@ -728,15 +737,15 @@ object f_config_observatory: Tf_config_observatory
   end
   object OpenDialog1: TOpenDialog
     FilterIndex = 0
-    left = 320
-    top = 325
+    left = 408
+    top = 256
   end
   object DownloadDialog1: TDownloadDialog
     Timeout = 90000
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True
-    left = 400
-    top = 325
+    left = 408
+    top = 320
   end
 end

@@ -917,7 +917,7 @@ type
     StyleGrid, StyleEqGrid, StyleConstL, StyleConstB,
     StyleEcliptic, StyleGalEq: TFPPenStyle;
     ShowEcliptic, ShowGalactic, ShowMilkyWay, FillMilkyWay, LinemodeMilkyway,
-    ShowHorizon, ShowHorizonPicture, HorizonPictureLowQuality, FillHorizon, ShowHorizonDepression: boolean;
+    ShowHorizon, ShowHorizonPicture, HorizonPictureLowQuality, FillHorizon, ShowHorizon0, ShowHorizonDepression: boolean;
     CurTime, DT_UT_val, GRSlongitude, GRSjd, GRSdrift,
     TelescopeTurnsX, TelescopeTurnsY, TelescopeJD, HorizonPictureRotate: double;
     PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline,
@@ -2180,6 +2180,7 @@ begin
   HorizonPictureRotate := Source.HorizonPictureRotate;
   FillHorizon := Source.FillHorizon;
   ShowHorizonDepression := Source.ShowHorizonDepression;
+  ShowHorizon0 := Source.ShowHorizon0;
   CurTime := Source.CurTime;
   DT_UT_val := Source.DT_UT_val;
   GRSlongitude := Source.GRSlongitude;

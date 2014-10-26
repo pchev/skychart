@@ -1542,6 +1542,7 @@ CL.AddConstantN('rsManageToolbo','String').SetString(rsManageToolbo);
 CL.AddConstantN('rsSelectScript','String').SetString(rsSelectScript);
 CL.AddConstantN('rsOpenScript','String').SetString(rsOpenScript);
 CL.AddConstantN('rsScriptIsAlre','String').SetString(rsScriptIsAlre);
+CL.AddConstantN('rsShow0Horizon','String').SetString(rsShow0Horizon);
 
 end;
 
