@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-07 16:36+0000\n"
-"PO-Revision-Date: 2014-08-25 01:09+0000\n"
+"PO-Revision-Date: 2014-10-08 19:51+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-07 17:12+0000\n"
-"X-Generator: Launchpad (build 17196)\n"
+"X-Launchpad-Export-Date: 2014-10-26 16:28+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -2756,7 +2756,7 @@ msgstr "Manter tabelas na saída para usar mais tarde"
 
 #: u_translation.rskey
 msgid "Key"
-msgstr ""
+msgstr "Chave"
 
 #: u_translation.rskm
 msgid "Km."
@@ -3088,7 +3088,7 @@ msgstr "Fazer a seleção da tabela e coluna que deseja para o seu catálogo"
 
 #: u_translation.rsmanagetoolbo
 msgid "Manage tool box script"
-msgstr ""
+msgstr "Gerenciar script da caixa de ferramentas"
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -3744,7 +3744,7 @@ msgstr "Aglom. Aberto"
 
 #: u_translation.rsopenscript
 msgid "Open script"
-msgstr ""
+msgstr "Abrir script"
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
@@ -4672,7 +4672,7 @@ msgstr "Editor do roteiro"
 
 #: u_translation.rsscriptisalre
 msgid "Script is already assigned to %s are you sure you want to duplicate it to %s ?"
-msgstr ""
+msgstr "Script já está atribuído a %s você tem certeza que quer duplicá-lo para %s?"
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
@@ -4776,7 +4776,7 @@ msgstr "Selecionar Retângulo"
 
 #: u_translation.rsselectscript
 msgid "Select script"
-msgstr ""
+msgstr "Selecionar script"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
