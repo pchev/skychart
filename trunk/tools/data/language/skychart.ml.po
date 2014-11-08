@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-10-07 16:36+0000\n"
+"POT-Creation-Date: 2014-11-08 16:06+0000\n"
 "PO-Revision-Date: 2014-02-17 19:51+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-26 16:28+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-08 16:13+0000\n"
+"X-Generator: Launchpad (build 17231)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -4906,6 +4906,10 @@ msgstr ""
 
 #: u_translation.rsshour
 msgid "H"
+msgstr ""
+
+#: u_translation.rsshow0horizon
+msgid "Show 0d horizon line"
 msgstr ""
 
 #: u_translation.rsshowallsky

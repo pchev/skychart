@@ -6102,3 +6102,7 @@ msgstr ""
 msgid "Script is already assigned to %s are you sure you want to duplicate it to %s ?"
 msgstr ""
 
+#: u_translation:rsshow0horizon
+msgid "Show 0d horizon line"
+msgstr ""
+

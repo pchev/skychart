@@ -1553,7 +1553,7 @@ resourcestring
   rsSelectScript = 'Select script';
   rsOpenScript = 'Open script';
   rsScriptIsAlre = 'Script is already assigned to %s are you sure you want to duplicate it to %s ?';
-  rsShow0Horizon = 'Show 0° horizon line';
+  rsShow0Horizon = 'Show 0d horizon line';
 
 implementation
 
