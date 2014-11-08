@@ -867,7 +867,7 @@ A:=rmod(A+pi2,pi2);
 end;
 
 PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; c: Tconf_skychart; method:smallint=refmethod);
-var l1,d1,h1 : double;
+var l1,d1,h1,sh : double;
 BEGIN
 if method=2 then begin
   l1:=c.ObsPHI;
@@ -876,7 +876,11 @@ end
 else l1:=deg2rad*c.ObsLatitude;
 d1:=DE;
 h1:=HH;
-h:= double(arcsin( sin(l1)*sin(d1)+cos(l1)*cos(d1)*cos(h1) ));
+sh := sin(l1)*sin(d1)+cos(l1)*cos(d1)*cos(h1);
+if abs(sh)<1 then
+   h:= double(arcsin(sh))
+else
+   h:=sgn(sh)*pi/2;
 A:= double(arctan2(sin(h1),cos(h1)*sin(l1)-tan(d1)*cos(l1)));
 A:=Rmod(A+pi2,pi2);
 if method=2 then DiurnalAberration(A,h,c);
@@ -884,7 +888,7 @@ Refraction(h,true,c,method);
 END ;
 
 Procedure Hz2Eq(A,h : double; var hh,de : double; c: Tconf_skychart; method:smallint=refmethod);
-var l1,a1,h1 : double;
+var l1,a1,h1,sd : double;
 BEGIN
 Refraction(h,false,c,method);
 //if method=2 then Reverse_DiurnalAberration(A,h,c);
@@ -894,7 +898,11 @@ end
 else l1:=deg2rad*c.ObsLatitude;
 a1:=A;
 h1:=h;
-de:= double(arcsin( sin(l1)*sin(h1)-cos(l1)*cos(h1)*cos(a1) ));
+sd:=sin(l1)*sin(h1)-cos(l1)*cos(h1)*cos(a1);
+if abs(sd)<1 then
+  de:= double(arcsin(sd))
+else
+   h:=sgn(sd)*pi/2;
 hh:= double(arctan2(sin(a1),cos(a1)*sin(l1)+tan(h1)*cos(l1)));
 if method=2 then begin
   hh:=hh-(c.ObsELONG + deg2rad*c.ObsLongitude);
