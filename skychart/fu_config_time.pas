@@ -43,6 +43,7 @@ type
     Button8: TButton;
     Button9: TButton;
     CheckBox3: TCheckBox;
+    dt_ut: TFloatEdit;
     stepmark: TCheckBox;
     CheckGroup1: TCheckGroup;
     CheckGroup2: TCheckGroup;
@@ -100,7 +101,6 @@ type
     Label136: TLabel;
     Label150: TLabel;
     CheckBox4: TCheckBox;
-    dt_ut: TLongEdit;
     LongEdit2: TLongEdit;
     Panel9: TPanel;
     Label137: TLabel;
@@ -425,10 +425,10 @@ artostr2(csc.curtime,h,n,s);
 t_hour.Position:=strtoint(h);
 t_min.Position:=strtoint(n);
 t_sec.Position:=strtoint(s);
-Tdt_Ut.caption:=formatfloat(f1,(csc.DT_UT*3600));
+Tdt_Ut.caption:=formatfloat(f2,(csc.DT_UT*3600));
 checkbox4.checked:=csc.Force_DT_UT;
 if not csc.Force_DT_UT then csc.DT_UT_val:=csc.DT_UT;
-dt_ut.value:=round(csc.DT_UT_val*3600);
+dt_ut.value:=csc.DT_UT_val*3600;
 nbstep.value:=csc.Simnb;
 if csc.SimD>0 then begin
    stepsize.value:=csc.SimD;
@@ -723,7 +723,7 @@ csc.curday:=d_day.Position;
 csc.tz.JD:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 csc.TimeZone:=csc.tz.SecondsOffset/3600;
 csc.DT_UT:=DTminusUT(csc.CurYear,csc.CurMonth,csc.CurDay,csc);
-Tdt_Ut.caption:=formatfloat(f1,(csc.DT_UT*3600));
+Tdt_Ut.caption:=formatfloat(f2,(csc.DT_UT*3600));
 dt_ut.text:=Tdt_Ut.caption;
 JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 ShowUTTime;
@@ -918,7 +918,7 @@ begin
 csc.Force_DT_UT:=checkbox4.checked;
 dt_ut.enabled:=csc.Force_DT_UT;
 csc.DT_UT:=DTminusUT(csc.CurYear,csc.CurMonth,csc.CurDay,csc);
-Tdt_Ut.caption:=formatfloat(f1,(csc.DT_UT*3600));
+Tdt_Ut.caption:=formatfloat(f2,(csc.DT_UT*3600));
 dt_ut.text:=Tdt_Ut.caption;
 end;
 
