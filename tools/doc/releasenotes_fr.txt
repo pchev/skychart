@@ -12,6 +12,7 @@ Incompatibilités avec les versions beta inférieur à 3023:
 
 Nouvelles fonctions:
 
+  * Nouvelle option de performance depuis le menu Fichier/Carte et options par défaut...
   * Nouvelles boites à outils que vous pouvez activer avec les touches F1 à F8.
   * Fonctions de script et boites à outils personnalisées.
   * L'éditeur de barre d'outils vous permet de modifier la disposition des boutons. La fonction est disponible depuis la menu Configuration / Éditeur de barre d'outils.
