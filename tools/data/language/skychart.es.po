@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-08 16:06+0000\n"
-"PO-Revision-Date: 2014-11-09 19:31+0000\n"
+"PO-Revision-Date: 2014-11-14 15:41+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-09 19:36+0000\n"
-"X-Generator: Launchpad (build 17231)\n"
+"X-Launchpad-Export-Date: 2014-11-30 13:10+0000\n"
+"X-Generator: Launchpad (build 17267)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -1588,7 +1588,7 @@ msgstr "Precisión representación"
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar"
-msgstr "Mostrar información de la carta en la barra del menu"
+msgstr "Mostrar información de la carta en la barra del menú"
 
 #: u_translation.rsdisplaytheho
 msgid "Display the horizon picture"
@@ -2032,7 +2032,7 @@ msgstr "Falló: %s"
 
 #: u_translation.rsfainter
 msgid "Fainter"
-msgstr "Más debil"
+msgstr "Más débil"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
@@ -3120,7 +3120,7 @@ msgstr "Marte"
 
 #: u_translation.rsmax
 msgid "Max."
-msgstr "Max."
+msgstr "Máx."
 
 #: u_translation.rsmax2
 msgid "max"
@@ -4881,6 +4881,10 @@ msgstr "Establecer Ubicación"
 #: u_translation.rssetobservato
 msgid "Set observatory location"
 msgstr "Establecer ubicación del observatorio"
+
+#: u_translation.rssetoptionsfo
+msgid "Set options for best performance"
+msgstr ""
 
 #: u_translation.rssetslewing
 msgid "Set Slewing"
