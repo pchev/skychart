@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-08 16:06+0000\n"
-"PO-Revision-Date: 2014-09-22 18:28+0000\n"
+"PO-Revision-Date: 2014-11-16 10:28+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-09 19:37+0000\n"
-"X-Generator: Launchpad (build 17231)\n"
+"X-Launchpad-Export-Date: 2014-11-30 13:10+0000\n"
+"X-Generator: Launchpad (build 17267)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -35,7 +35,7 @@ msgstr "9537 (insieme di dati maggiore)"
 
 #: u_translation.rsabandonyourc
 msgid "Abandon your changes?"
-msgstr ""
+msgstr "Abbandona i cambiamenti?"
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
@@ -255,7 +255,7 @@ msgstr "sempre"
 
 #: u_translation.rsalwaysaddmer
 msgid "Always add meridian"
-msgstr ""
+msgstr "Aggiungi sempre il meridiano"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -591,7 +591,7 @@ msgstr "Ma mai più deboli di magnitudine"
 
 #: u_translation.rsbutton
 msgid "Button"
-msgstr ""
+msgstr "Pulsante"
 
 #: u_translation.rsby
 msgid "by"
@@ -647,7 +647,7 @@ msgstr "Impossibile scrivere su"
 
 #: u_translation.rscaption
 msgid "Caption"
-msgstr ""
+msgstr "Titolo"
 
 #: u_translation.rscartesian
 msgid "Cartesian"
@@ -763,7 +763,7 @@ msgstr "cartina :"
 
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
-msgstr ""
+msgstr "Aggiungi mirino al centro della cartina"
 
 #: u_translation.rschartcoordin
 msgid "Chart, coordinates"
@@ -799,7 +799,7 @@ msgstr "Verifica"
 
 #: u_translation.rschecklist
 msgid "CheckList"
-msgstr ""
+msgstr "Checklist"
 
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
@@ -827,7 +827,7 @@ msgstr "Cancella"
 
 #: u_translation.rsclearall
 msgid "Clear all"
-msgstr ""
+msgstr "Cancella tutto"
 
 #: u_translation.rscleartarget
 msgid "Clear Target"
@@ -895,11 +895,11 @@ msgstr "Saturazione del colore"
 
 #: u_translation.rscolumns
 msgid "Columns"
-msgstr ""
+msgstr "Colonne"
 
 #: u_translation.rscombobox
 msgid "Combo box"
-msgstr ""
+msgstr "Casella combinata"
 
 #: u_translation.rscomet
 msgid "Comet"
@@ -931,7 +931,7 @@ msgstr "Nome Proprio"
 
 #: u_translation.rscommunicatio
 msgid "Communication protocol"
-msgstr ""
+msgstr "Protocollo di comunicazione"
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
@@ -1415,7 +1415,7 @@ msgstr "Cancella"
 
 #: u_translation.rsdeleteallthe
 msgid "Delete %s, all the child nodes and the scripts?"
-msgstr ""
+msgstr "Cancello %s, tutti i nodi figli e gli script?"
 
 #: u_translation.rsdeletecomple
 msgid "Delete completed"
@@ -1624,11 +1624,11 @@ msgstr "Non filtrare oggetti Messier"
 
 #: u_translation.rsdontforgetto
 msgid "Don't forget to save to a new file!"
-msgstr ""
+msgstr "Non dimenticare di salvare in un nuovo file!"
 
 #: u_translation.rsdontforgetto2
 msgid "Don't forget to save the program configuration!"
-msgstr ""
+msgstr "Non dimenticare di salvare la configurazione!"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -1708,7 +1708,7 @@ msgstr "Mostra come stella"
 
 #: u_translation.rsdrawing
 msgid "Drawing"
-msgstr ""
+msgstr "Disegno"
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
@@ -1820,7 +1820,7 @@ msgstr "Modifica Tipo di Oggetto"
 
 #: u_translation.rseditscript
 msgid "Edit Script"
-msgstr ""
+msgstr "Modifica script"
 
 #: u_translation.rsedittimeincr
 msgid "Edit time increment"
@@ -1980,7 +1980,7 @@ msgstr "Crepuscolo serale"
 
 #: u_translation.rsevent
 msgid "Event"
-msgstr ""
+msgstr "Evento"
 
 #: u_translation.rsevery
 msgid "every "
@@ -2372,7 +2372,7 @@ msgstr "Spaziatura della Griglia"
 
 #: u_translation.rsgroup
 msgid "Group"
-msgstr ""
+msgstr "Gruppo"
 
 #: u_translation.rsgrstransit
 msgid "GRS transit"
@@ -2496,7 +2496,7 @@ msgstr "Spaziatura griglia in ore per griglia equatoriale"
 
 #: u_translation.rshourlymotion
 msgid "Hourly motion"
-msgstr ""
+msgstr "Movimento orario"
 
 #: u_translation.rshours
 msgid "hours"
@@ -2704,7 +2704,7 @@ msgstr "Invisibile a questa latitudine"
 
 #: u_translation.rsipaddress
 msgid "IP address"
-msgstr ""
+msgstr "Indirizzo IP"
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
@@ -2756,7 +2756,7 @@ msgstr "Mantieni tabelle all'uscita"
 
 #: u_translation.rskey
 msgid "Key"
-msgstr ""
+msgstr "Chiave"
 
 #: u_translation.rskm
 msgid "Km."
@@ -2916,7 +2916,7 @@ msgstr "Collega tutte le cartine"
 
 #: u_translation.rslist
 msgid "List"
-msgstr ""
+msgstr "Elenco"
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
@@ -2976,11 +2976,11 @@ msgstr "Codice località"
 
 #: u_translation.rslocationtime
 msgid "Location / Time"
-msgstr ""
+msgstr "Posizione / Data"
 
 #: u_translation.rslock
 msgid "Lock"
-msgstr ""
+msgstr "Blocco"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -3184,7 +3184,7 @@ msgstr "Posizione media"
 
 #: u_translation.rsmemo
 msgid "Memo"
-msgstr ""
+msgstr "Memo"
 
 #: u_translation.rsmercator
 msgid "Mercator"
@@ -3640,7 +3640,7 @@ msgstr "Database Osservatori"
 
 #: u_translation.rsobservertool
 msgid "Observer tools"
-msgstr ""
+msgstr "Strumenti osservatore"
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -3744,7 +3744,7 @@ msgstr "Ammasso Aperto"
 
 #: u_translation.rsopenscript
 msgid "Open script"
-msgstr ""
+msgstr "Apri script"
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
@@ -3848,7 +3848,7 @@ msgstr "Lunghezza Percorso"
 
 #: u_translation.rspause
 msgid "Pause"
-msgstr ""
+msgstr "Pausa"
 
 #: u_translation.rspec
 msgid "PEC"
@@ -4560,7 +4560,7 @@ msgstr "Righe"
 
 #: u_translation.rsrun
 msgid "Run"
-msgstr ""
+msgstr "Avvia"
 
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
@@ -4664,15 +4664,15 @@ msgstr "Imp. avanzate telescopio"
 
 #: u_translation.rsscript
 msgid "Script"
-msgstr ""
+msgstr "Script"
 
 #: u_translation.rsscripteditor
 msgid "Script editor"
-msgstr ""
+msgstr "Editor Script"
 
 #: u_translation.rsscriptisalre
 msgid "Script is already assigned to %s are you sure you want to duplicate it to %s ?"
-msgstr ""
+msgstr "Lo script è già assegnato a %s, sei sicuro di volerlo duplicare a %s?"
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
@@ -4764,7 +4764,7 @@ msgstr "Seleziona sito mirror"
 
 #: u_translation.rsselectnone
 msgid "Select none"
-msgstr ""
+msgstr "Deseleziona tutto"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -4776,7 +4776,7 @@ msgstr "Seleziona rettangolo"
 
 #: u_translation.rsselectscript
 msgid "Select script"
-msgstr ""
+msgstr "Seleziona script"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
@@ -4882,6 +4882,10 @@ msgstr "Imposta località"
 msgid "Set observatory location"
 msgstr "Imposta località osservatore"
 
+#: u_translation.rssetoptionsfo
+msgid "Set options for best performance"
+msgstr ""
+
 #: u_translation.rssetslewing
 msgid "Set Slewing"
 msgstr "Imposta puntamento"
@@ -4904,7 +4908,7 @@ msgstr "Configurazione"
 
 #: u_translation.rssetupoption
 msgid "Setup Options"
-msgstr ""
+msgstr "Opzioni di setup"
 
 #: u_translation.rsshour
 msgid "H"
@@ -4912,7 +4916,7 @@ msgstr "H"
 
 #: u_translation.rsshow0horizon
 msgid "Show 0d horizon line"
-msgstr ""
+msgstr "Mostra linea orizzonte a 0 gradi"
 
 #: u_translation.rsshowallsky
 msgid "Show all sky"
@@ -5160,7 +5164,7 @@ msgstr "M."
 
 #: u_translation.rssocketconfig
 msgid "Socket configuration"
-msgstr ""
+msgstr "Configurazione socket"
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
@@ -5224,7 +5228,7 @@ msgstr "Sud"
 
 #: u_translation.rsspacer
 msgid "Spacer"
-msgstr ""
+msgstr "Spaziatore"
 
 #: u_translation.rsspectralclas
 msgid "Spectral class"
@@ -5456,7 +5460,7 @@ msgstr "%sLa tabella esiste %s"
 
 #: u_translation.rstarget
 msgid "Target"
-msgstr ""
+msgstr "Obbiettivo"
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
@@ -5472,7 +5476,7 @@ msgstr "Il servizio TCP/IP non è presente."
 
 #: u_translation.rstcpport
 msgid "TCP port"
-msgstr ""
+msgstr "Porta TCP"
 
 #: u_translation.rstelescope
 msgid "Telescope"
@@ -5616,7 +5620,7 @@ msgstr "Pannelli"
 
 #: u_translation.rstoolbaredito
 msgid "Tool bar editor"
-msgstr ""
+msgstr "Modifica barre degli strumenti"
 
 #: u_translation.rstoolbox
 msgid "Tool box"
@@ -5624,7 +5628,7 @@ msgstr ""
 
 #: u_translation.rstools
 msgid "Tools"
-msgstr ""
+msgstr "Strumenti"
 
 #: u_translation.rstoomanyopenw
 msgid "Too many open windows, please close some charts."
@@ -6100,7 +6104,7 @@ msgstr "Zoom -"
 
 #: u_translation.rszoom3
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 #: u_translation.rszoomcentre
 msgid "Zoom + and centre on"

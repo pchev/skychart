@@ -6106,3 +6106,7 @@ msgstr ""
 msgid "Show 0d horizon line"
 msgstr ""
 
+#: u_translation:rssetoptionsfo
+msgid "Set options for best performance"
+msgstr ""
+
