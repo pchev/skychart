@@ -757,6 +757,7 @@ type
     procedure ConfigDBChange(Sender: TObject);
     procedure SaveAndRestart(Sender: TObject);
     procedure ClearAndRestart;
+    procedure SetPerformanceOptions;
     procedure InitializeDB(Sender: TObject);
     procedure Init;
     procedure InitToolBar;
@@ -2950,7 +2951,8 @@ if sender<>nil then begin
   btn.Align:=alBottom;
   r1.Items.Add(rsResetInitial);
   r1.Items.Add(rsResetToLastT);
-  r1.ItemIndex:=1;
+  r1.Items.Add(rsSetOptionsFo);
+  r1.ItemIndex:=2;
   r1.Parent:=f1;
   btn.Parent:=f1;
   r1.AdjustSize;
@@ -2978,7 +2980,11 @@ if sender<>nil then begin
             Refresh;
           end;
          end;
-    end;
+      2: begin
+          WriteTrace('Set options for best performance');
+          SetPerformanceOptions;
+         end;
+      end;
   end;
   finally
    btn.Free;
@@ -3907,6 +3913,82 @@ begin
   DeleteFile(configfile);
   NeedRestart:=true;
   Close;
+end;
+
+procedure Tf_main.SetPerformanceOptions;
+var cmain:Tconf_main;
+    csc:Tconf_skychart;
+    ccat:Tconf_catalog;
+    cshr:Tconf_shared;
+    cplot:Tconf_plot;
+    cdss:Tconf_dss;
+    i: integer;
+begin
+if MultiFrame1.ActiveObject is Tf_chart then begin
+  cmain:=Tconf_main.Create;
+  csc:=Tconf_skychart.Create;
+  ccat:=Tconf_catalog.Create;
+  cshr:=Tconf_shared.Create;
+  cplot:=Tconf_plot.Create;
+  cdss:=Tconf_dss.Create;
+  try
+  // Close extra charts
+  for i:=MultiFrame1.ChildCount-1 downto 0 do
+    if MultiFrame1.Childs[i].DockedObject <> MultiFrame1.ActiveObject then
+       MultiFrame1.Childs[i].Close;
+  MultiFrame1.Maximized:=true;
+  // Get current config
+  cmain.Assign(cfgm);
+  csc.Assign(Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc);
+  ccat.Assign(catalog.cfgcat);
+  cshr.Assign(catalog.cfgshr);
+  cplot.Assign(def_cfgplot);
+  cdss.Assign(f_getdss.cfgdss);
+  // Perf options
+  cmain.AutoRefreshDelay:=60;
+  cmain.SyncChart:=false;
+  csc.MaxArchiveImg:=1;
+  for i:=1 to MaxArchiveDir do csc.ArchiveDirActive[i]:=false;
+  csc.ShowHorizonPicture:=false;
+  csc.HorizonPictureLowQuality:=true;
+  csc.DrawPMon:=false;
+  csc.LinemodeMilkyway:=true;
+  csc.Editlabels:=false;
+  csc.Simnb:=1;
+  for i:=1 to NumSimObject do def_cfgsc.SimObject[i]:=false;
+  csc.SunOnline:=false;
+  csc.ShowImages:=false;
+  csc.ShowImageList:=false;
+  csc.ShowImageLabel:=false;
+  csc.ShowBackgroundImage:=false;
+  csc.BackgroundImage:='';
+  csc.AstmagMax:=18;
+  csc.AstmagDiff:=6;
+  csc.ShowArtSat:=false;
+  csc.CommagMax:=18;
+  csc.CommagDiff:=4;
+  csc.DrawAllStarLabel:=false;
+  csc.ShowEarthShadow:=false;
+  csc.StarFilter:=true;
+  cshr.AutoStarFilter:=true;
+  cshr.AutoStarFilterMag:=6.5;
+  cshr.NebFilter:=true;
+  cplot.AntiAlias:=false;
+  cplot.red_move:=true;
+  cplot.plaplot:=1;
+  // Set new options
+  activateconfig(cmain,csc,ccat,cshr,cplot,cdss,false);
+  if ShowVO.Checked then ShowVOExecute(nil);
+  if ShowUobj.Checked then ShowUobjExecute(nil);
+  finally
+  cmain.Free;
+  csc.Free;
+  ccat.Free;
+  cshr.Free;
+  cplot.Free;
+  cdss.Free;
+  end;
+end;
 end;
 
 procedure Tf_main.activateconfig(cmain:Tconf_main; csc:Tconf_skychart; ccat:Tconf_catalog; cshr:Tconf_shared; cplot:Tconf_plot; cdss:Tconf_dss; applyall:boolean );
