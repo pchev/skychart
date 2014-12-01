@@ -472,8 +472,9 @@ CheckBox8.Enabled:=cmain.SampSubscribeTable;
 end;
 
 procedure Tf_config_system.ShowTelescope;
-var i,j,n: integer;
-    buf,fn,val : string;
+var i,j,n,k: integer;
+    buf,fn,fdir,val : string;
+    fs : TSearchRec;
     f: textfile;
     telescopegroup, newtelescope: boolean;
 begin
@@ -504,54 +505,68 @@ NumIndiDriver:=0;
 SetLength(IndiDriverLst,NumIndiDriver+1,2);
 IndiDriverLst[0,0]:='Other';
 IndiDriverLst[0,1]:='';
+fn:='';
 {$ifdef unix}
-fn:='/usr/share/indi/drivers.xml';
+{$ifdef darwin}
+// try xIndi first
+fn='/Applications/INDI Server.app/Contents/Resources/share/indi/drivers.xml';
+{$endif}
 if not FileExists(fn) then begin
- fn:='/usr/local/share/indi/drivers.xml';
- if not FileExists(fn) then begin
-   fn:=slash(appdir)+slash('data')+slash('indi')+'drivers.xml';
- end;
+fn:='/usr/share/indi/drivers.xml';
+  if not FileExists(fn) then begin
+   fn:='/usr/local/share/indi/drivers.xml';
+   if not FileExists(fn) then begin
+     fn:=slash(appdir)+slash('data')+slash('indi')+'drivers.xml';
+   end;
+  end;
 end;
 {$else}
 fn:=slash(appdir)+slash('data')+slash('indi')+'drivers.xml';
 {$endif}
-// drivers.xml contain multiple root elements (<devGroup>),
-// so it is not valid for parsing with ReadXMLFile.
-// Using a plain file read instead, with the hope it is always formated by line.
-if FileExists(fn) then begin
-  AssignFile(f,fn);
-  reset(f);
-  telescopegroup:=false;
-  repeat
-    readln(f,buf);
-    if (pos('<devGroup',buf)>0)and(pos('group="Telescopes"',buf)>0) then begin
-      telescopegroup:=true;
-      Continue;
-    end;
-    if (pos('</devGroup',buf)>0) then begin
-     telescopegroup:=false;
-     Continue;
-   end;
-   if telescopegroup and (pos('<driver',buf)>0)and(pos('name="',buf)>0) then begin
-     i:=pos('name="',buf)+6;
-     j:=pos('">',buf)-i;
-     val:=copy(buf,i,j);
-     newtelescope:=true;
-     for n:=0 to NumIndiDriver do if IndiDriverLst[n,0]=val then newtelescope:=false;
-     if newtelescope then begin
-       inc(NumIndiDriver);
-       SetLength(IndiDriverLst,NumIndiDriver+1,2);
-       IndiDriverLst[NumIndiDriver,0]:=val;
-       buf:=copy(buf,i+j+2,9999);
-       i:=0;
-       j:=pos('<',buf)-1;
-       val:=copy(buf,i,j);
-       IndiDriverLst[NumIndiDriver,1]:=val;
+fdir:=ExtractFilePath(fn);
+k:=findfirst(slash(fdir)+'*.xml',0,fs);
+while k=0 do begin
+  fn:=slash(fdir)+fs.name;
+  // drivers.xml contain multiple root elements (<devGroup>),
+  // so it is not valid for parsing with ReadXMLFile.
+  // Using a plain file read instead, with the hope it is always formated by line.
+  if FileExists(fn) then begin
+    AssignFile(f,fn);
+    reset(f);
+    telescopegroup:=false;
+    repeat
+      readln(f,buf);
+      if (pos('<devGroup',buf)>0)and(pos('group="Telescopes"',buf)>0) then begin
+        telescopegroup:=true;
+        Continue;
+      end;
+      if (pos('</devGroup',buf)>0) then begin
+       telescopegroup:=false;
+       Continue;
      end;
-   end;
-  until eof(f);
-  CloseFile(f);
+     if telescopegroup and (pos('<driver',buf)>0)and(pos('name="',buf)>0) then begin
+       i:=pos('name="',buf)+6;
+       j:=pos('">',buf)-i;
+       val:=copy(buf,i,j);
+       newtelescope:=true;
+       for n:=0 to NumIndiDriver do if IndiDriverLst[n,0]=val then newtelescope:=false;
+       if newtelescope then begin
+         inc(NumIndiDriver);
+         SetLength(IndiDriverLst,NumIndiDriver+1,2);
+         IndiDriverLst[NumIndiDriver,0]:=val;
+         buf:=copy(buf,i+j+2,9999);
+         i:=0;
+         j:=pos('<',buf)-1;
+         val:=copy(buf,i,j);
+         IndiDriverLst[NumIndiDriver,1]:=val;
+       end;
+     end;
+    until eof(f);
+    CloseFile(f);
+  end;
+  k:=findnext(fs);
 end;
+findclose(fs);
 // Fallback to internal driver list
 if NumIndiDriver=0 then begin
   NumIndiDriver:=DefaultNumIndiDriver;
