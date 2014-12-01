@@ -1669,26 +1669,27 @@ const
 
 const
 // Minimal main toolbar
-numminimalmainbar = 17;
+numminimalmainbar = 19;
 minimalmainbar: array[1..numminimalmainbar] of string=(
-('32;ToolBarFOV'),
-('102;quicksearch'),
-('71;EquatorialProjection'),
+('38;toN'),
+('37;toE'),
+('39;toS'),
+('40;toW'),
+('41;toZenith'),
+('100;Divider'),
 ('72;AltAzProjection'),
+('71;EquatorialProjection'),
 ('92;rotate180'),
-('64;ShowLabels'),
-('89;ShowVO'),
-('52;ShowUobj'),
-('80;Track'),
-('60;ShowAsteroids'),
-('61;ShowComets'),
-('69;ShowMark'),
-('48;TelescopeConnect'),
-('110;TrackTelescope'),
-('51;TelescopeSync'),
-('50;TelescopeSlew'),
-('95;TelescopeAbortSlew'));
-
+('102;quicksearch'),
+('100;Divider'),
+('6;zoomplus'),
+('7;zoomminus'),
+('100;Divider'),
+('43;TimeDec'),
+('84;TimeReset'),
+('44;TimeInc'),
+('103;TimeValPanel'),
+('104;TimeU'));
 
 // Standard main toolbar
 numstandardmainbar = 35;
