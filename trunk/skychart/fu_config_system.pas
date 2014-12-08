@@ -509,7 +509,7 @@ fn:='';
 {$ifdef unix}
 {$ifdef darwin}
 // try xIndi first
-fn='/Applications/INDI Server.app/Contents/Resources/share/indi/drivers.xml';
+fn:='/Applications/INDI Server.app/Contents/Resources/share/indi/drivers.xml';
 {$endif}
 if not FileExists(fn) then begin
 fn:='/usr/share/indi/drivers.xml';
