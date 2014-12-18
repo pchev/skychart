@@ -1,0 +1,98 @@
+object Form1: TForm1
+  Left = 665
+  Height = 464
+  Top = 125
+  Width = 673
+  Caption = 'Form1'
+  ClientHeight = 464
+  ClientWidth = 673
+  OnClose = FormClose
+  OnCreate = FormCreate
+  LCLVersion = '1.2.4.0'
+  object Edit1: TEdit
+    Left = 54
+    Height = 21
+    Top = 37
+    Width = 80
+    TabOrder = 0
+    Text = 'localhost'
+  end
+  object Edit2: TEdit
+    Left = 160
+    Height = 21
+    Top = 37
+    Width = 80
+    TabOrder = 1
+    Text = '7624'
+  end
+  object Button1: TButton
+    Left = 288
+    Height = 25
+    Top = 37
+    Width = 75
+    Caption = 'Connect'
+    OnClick = Button1Click
+    TabOrder = 2
+  end
+  object Memo1: TMemo
+    Left = 15
+    Height = 335
+    Top = 113
+    Width = 641
+    Lines.Strings = (
+      'Memo1'
+    )
+    ScrollBars = ssAutoBoth
+    TabOrder = 3
+  end
+  object Button2: TButton
+    Left = 400
+    Height = 25
+    Top = 37
+    Width = 120
+    Caption = 'CCD exposure'
+    OnClick = Button2Click
+    TabOrder = 4
+  end
+  object Label1: TLabel
+    Left = 61
+    Height = 15
+    Top = 79
+    Width = 36
+    Caption = 'Label1'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 168
+    Height = 15
+    Top = 79
+    Width = 36
+    Caption = 'Label2'
+    ParentColor = False
+  end
+  object Edit3: TEdit
+    Left = 288
+    Height = 21
+    Top = 79
+    Width = 80
+    TabOrder = 5
+    Text = '19'
+  end
+  object Edit4: TEdit
+    Left = 400
+    Height = 21
+    Top = 79
+    Width = 80
+    TabOrder = 6
+    Text = '19'
+  end
+  object Button3: TButton
+    Left = 504
+    Height = 25
+    Top = 76
+    Width = 75
+    Caption = 'Goto'
+    OnClick = Button3Click
+    TabOrder = 7
+  end
+end
