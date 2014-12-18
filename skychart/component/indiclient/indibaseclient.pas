@@ -88,8 +88,8 @@ type
     procedure SyncSwitchEvent;
     procedure SyncLightEvent;
     procedure SyncBlobEvent;
-    function findDev(root: TDOMNode; createifnotexist: boolean; errmsg: string):BaseDevice;
-    function findDev(root: TDOMNode; errmsg: string):BaseDevice;
+    function findDev(root: TDOMNode; createifnotexist: boolean; out errmsg: string):BaseDevice;
+    function findDev(root: TDOMNode; out errmsg: string):BaseDevice;
     procedure ProcessData(line: string);
     procedure setDriverConnection(status: boolean; deviceName: string);
   public
@@ -254,7 +254,7 @@ begin
  end;
 end;
 
-function TIndiBaseClient.findDev(root: TDOMNode; errmsg: string):BaseDevice;
+function TIndiBaseClient.findDev(root: TDOMNode; out errmsg: string):BaseDevice;
 var i: integer;
     buf: string;
 begin
@@ -268,7 +268,7 @@ begin
  end;
 end;
 
-function TIndiBaseClient.findDev(root: TDOMNode; createifnotexist: boolean; errmsg: string):BaseDevice;
+function TIndiBaseClient.findDev(root: TDOMNode; createifnotexist: boolean; out errmsg: string):BaseDevice;
 var buf: string;
 begin
  result:=findDev(root,errmsg);
@@ -422,7 +422,6 @@ begin
 end;
 
 procedure TIndiBaseClient.ConnectServer;
-var i: integer;
 begin
  Start;
 end;

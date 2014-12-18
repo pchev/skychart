@@ -55,7 +55,7 @@ type
       pDynamic: boolean;
   public
       constructor Create;
-      destructor Destroy;
+      destructor Destroy;override;
       procedure setProperty(p: TObject);
       procedure setType(t:INDI_TYPE);
       procedure setRegistered(r:Boolean);
@@ -95,7 +95,7 @@ type
       pAll: TObjectList;
   public
       constructor Create;
-      destructor Destroy;
+      destructor Destroy;override;
       function getDeviceName(): string;
       procedure setDeviceName(value:string);
       function getProperty(name: string; typ: INDI_TYPE=INDI_UNKNOWN):IndiProperty;
@@ -105,9 +105,9 @@ type
       function getSwitch(name: string):ISwitchVectorProperty;
       function getLight(name: string):ILightVectorProperty;
       function getBlob(name: string):IBLOBVectorProperty;
-      function buildProp(root: TDOMNode; errmsg: string):integer;
-      function setValue(root: TDOMNode; errmsg: string):integer;
-      function setBLOB(bvp: IBLOBVectorProperty; root: TDOMNode; errmsg:string): integer;
+      function buildProp(root: TDOMNode; out errmsg: string):integer;
+      function setValue(root: TDOMNode; out errmsg: string):integer;
+      function setBLOB(bvp: IBLOBVectorProperty; root: TDOMNode; out errmsg:string): integer;
       procedure checkMessage(root: TDOMNode);
 
       property onNewMessage  : TIndiMessageEvent read FIndiMessageEvent write FIndiMessageEvent;
@@ -196,12 +196,11 @@ begin
    result:=IBLOBVectorProperty(getRawProperty(name,INDI_BLOB));
 end;
 
-function BaseDevice.buildProp(root: TDOMNode; errmsg: string):integer;
+function BaseDevice.buildProp(root: TDOMNode; out errmsg: string):integer;
 var perm: IPerm;
     state: IPState;
     timeout: double;
-    rtag,rname,rdev,buf: string;
-    n: integer;
+    rtag,rname,rdev: string;
     node,cnode: TDOMNode;
     indiProp: IndiProperty;
     nvp: INumberVectorProperty;
@@ -456,18 +455,15 @@ begin
 
 end;
 
-function BaseDevice.setValue(root: TDOMNode; errmsg: string):integer;
-var perm: IPerm;
-    state: IPState;
+function BaseDevice.setValue(root: TDOMNode; out errmsg: string):integer;
+var state: IPState;
     timeout: double;
     swState: ISState;
     lState: IPState;
     stateSet: boolean = false;
     timeoutSet: boolean = false;
-    rtag,rname,rdev,buf: string;
-    n: integer;
+    rtag,rname: string;
     node,pnode,cnode: TDOMNode;
-    indiProp: IndiProperty;
     nvp: INumberVectorProperty;
     np:  INumber;
     svp: ISwitchVectorProperty;
@@ -477,7 +473,6 @@ var perm: IPerm;
     lvp: ILightVectorProperty;
     lp:  ILight;
     bvp: IBLOBVectorProperty;
-    bp:  IBLOB;
 begin
   rtag:=root.NodeName;
   node:=root.Attributes.GetNamedItem('name');
@@ -607,15 +602,12 @@ begin
   exit(-1);
 end;
 
-function BaseDevice.setBLOB(bvp: IBLOBVectorProperty; root: TDOMNode; errmsg:string): integer;
-var n,r: integer;
-    blobEL: IBLOB;
+function BaseDevice.setBLOB(bvp: IBLOBVectorProperty; root: TDOMNode; out errmsg:string): integer;
+var blobEL: IBLOB;
     str1,str2,str3:TStringStream;
     b64str: TBase64DecodingStream;
     unzstr: Tdecompressionstream;
     node,cnode,na,fa,sa: TDOMNode;
-    dataBuffer: Pchar;
-    dataSize: LongInt;
 begin
   node:=root.FirstChild;
   while node<> nil do begin
