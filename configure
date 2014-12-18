@@ -20,6 +20,7 @@ dirs="skychart/component/synapse/source/lib \
      skychart/component/enhedits \
      skychart/component/radec \
      skychart/component/zoomimage \
+     skychart/component/indiclient \
      skychart/component/downloaddialog \
      skychart/component/jdcalendar \
      skychart/component/multiframe \
