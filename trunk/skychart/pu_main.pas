@@ -7761,7 +7761,7 @@ for i:=1 to Maxwindow do
  if (TCPDaemon.TCPThrd[i]<>nil) then begin
     TCPDaemon.TCPThrd[i].stoping:=true;
  end;
-sleep(800);
+ISleep(800);
 screen.cursor:=crDefault;
 except
  screen.cursor:=crDefault;
