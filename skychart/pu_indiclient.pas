@@ -4,7 +4,7 @@ unit pu_indiclient;
 
 {------------- interface for INDI telescope driver. ----------------------------
 
-Copyright (C) 2011 Patrick Chevalley
+Copyright (C) 2011,2014 Patrick Chevalley
 
 http://www.ap-i.net
 pch@ap-i.net
@@ -27,11 +27,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation,
-  LCLIntf, u_util, cu_indiprotocol, u_constant,
+uses u_help, u_translation, indibaseclient, indibasedevice,
+  indiapi, indicom, LCLIntf, u_util, u_constant,
   Messages, SysUtils, Classes, Graphics, Controls,
-  Forms, Dialogs,
-  StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls;
+  Forms, Dialogs, StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls;
 
 type
 
@@ -53,7 +52,6 @@ type
     Edit1: TEdit;
     SpeedButton6: TButton;
     SpeedButton4: TButton;
-    Timer1: TTimer;
     {Utility and form functions}
     procedure FormCreate(Sender: TObject);
     procedure kill(Sender: TObject; var CanClose: Boolean);
@@ -64,19 +62,25 @@ type
     procedure SpeedButton4Click(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
   private
     { Private declarations }
-    indi1: TIndiClient;
+    client: TIndiBaseClient;
+    TelescopeDevice: Basedevice;
     CoordLock : boolean;
     connected: boolean;
     TelescopeJD: double;
     Longitude : single;                 // Observatory longitude (Negative East of Greenwich}
     Latitude : single;                  // Observatory latitude
     curdeg_x,  curdeg_y :double;        // current equatorial position in degrees
-    procedure TelescopeCoordChange(Sender: TObject);
-    procedure TelescopeStatusChange(Sender : Tobject; source: TIndiSource; status: TIndistatus);
-    procedure TelescopeGetMessage(Sender : TObject; const msg : string);
+    procedure NewDevice(dp: Basedevice);
+    procedure NewMessage(msg: string);
+    procedure NewProperty(indiProp: IndiProperty);
+    procedure NewNumber(nvp: INumberVectorProperty);
+    procedure NewText(tvp: ITextVectorProperty);
+    procedure NewSwitch(svp: ISwitchVectorProperty);
+    procedure NewLight(lvp: ILightVectorProperty);
+    procedure ServerConnected(Sender: TObject);
+    procedure ServerDisconnected(Sender: TObject);
   public
     { Public declarations }
     csc: Tconf_skychart;
@@ -106,26 +110,69 @@ type
 implementation
 {$R *.lfm}
 
-procedure Tpop_indi.TelescopeCoordChange(Sender: TObject);
-var ra,dec:double;
-    i:integer;
+procedure Tpop_indi.ServerConnected(Sender: TObject);
 begin
-try
- if ScopeInitialized then begin
-    val(indi1.RA,ra,i);
-    if i<>0 then exit;
-    val(indi1.Dec,Dec,i);
-    if i<>0 then exit;
-    Curdeg_x:=ra*15;
-    Curdeg_y:=dec;
-    pos_x.text := artostr(Curdeg_x/15);
-    pos_y.text := detostr(Curdeg_y);
- end else begin
-    pos_x.text := '';
-    pos_y.text := '';
- end;
-except
+  Memomsg.Lines.Add('Server connected');
+  // csc.IndiPort;
+  client.connectDevice(csc.IndiDevice);
 end;
+
+procedure Tpop_indi.ServerDisconnected(Sender: TObject);
+begin
+  Memomsg.Lines.Add('Server disconnected');
+  connected:=false;
+  led.color:=clRed;
+end;
+
+procedure Tpop_indi.NewDevice(dp: Basedevice);
+begin
+//  Memomsg.Lines.Add('Newdev: '+dp.getDeviceName);
+  if dp.getDeviceName=csc.IndiDevice then begin
+     connected:=true;
+     led.color:=clLime;
+     TelescopeDevice:=dp;
+  end;
+end;
+
+procedure Tpop_indi.NewMessage(msg: string);
+begin
+  if Memomsg.Lines.Count>4 then Memomsg.Lines.Delete(0);
+  Memomsg.Lines.Add('Message: '+msg);
+end;
+
+procedure Tpop_indi.NewProperty(indiProp: IndiProperty);
+begin
+//  Memomsg.Lines.Add('Newprop: '+indiProp.getDeviceName+' '+indiProp.getName+' '+indiProp.getLabel);
+  if indiProp.getType = INDI_NUMBER then NewNumber(indiProp.getNumber);
+end;
+
+procedure Tpop_indi.NewNumber(nvp: INumberVectorProperty);
+var n: INumber;
+begin
+//  Memomsg.Lines.Add('NewNumber: '+nvp.name+' '+FloatToStr(nvp.np[0].value));
+  if nvp.name='EQUATORIAL_EOD_COORD' then begin
+     n:=IUFindNumber(nvp,'RA');
+     Curdeg_x:=n.value*15;
+     n:=IUFindNumber(nvp,'DEC');
+     Curdeg_y:=n.value;
+     pos_x.text := artostr(Curdeg_x/15);
+     pos_y.text := detostr(Curdeg_y);
+  end;
+end;
+
+procedure Tpop_indi.NewText(tvp: ITextVectorProperty);
+begin
+//  Memomsg.Lines.Add('NewText: '+tvp.name+' '+tvp.tp[0].text);
+end;
+
+procedure Tpop_indi.NewSwitch(svp: ISwitchVectorProperty);
+begin
+//  Memomsg.Lines.Add('NewSwitch: '+svp.name);
+end;
+
+procedure Tpop_indi.NewLight(lvp: ILightVectorProperty);
+begin
+//  Memomsg.Lines.Add('NewLight: '+lvp.name);
 end;
 
 Procedure Tpop_indi.ScopeDisconnect(var ok : boolean; updstatus:boolean=true);
@@ -133,11 +180,9 @@ begin
 pos_x.text:='';
 pos_y.text:='';
 if trim(edit1.text)='' then exit;
-if (indi1<>nil) then begin
-   if not updstatus then indi1.exiting:=true;
-   indi1.terminate;
+if (client<>nil) then begin
+   client.Terminate;
 end;
-timer1.Enabled:=false;
 ok:=true;
 end;
 
@@ -148,48 +193,26 @@ if not connected then begin
   Memomsg.Clear;
   led.refresh;
   TelescopeJD:=0;
-  indi1:=TIndiClient.Create;
-  indi1.TargetHost:=csc.IndiServerHost;
-  indi1.TargetPort:=csc.IndiServerPort;
-  indi1.Timeout := 100;
-  indi1.TelescopePort:=csc.IndiPort;
-  if csc.IndiDevice=rsOther then indi1.Device:=''
-     else indi1.Device:=csc.IndiDevice;
-  indi1.IndiServer:=csc.IndiServerCmd;
-  indi1.IndiDriver:=csc.IndiDriver;
-  indi1.AutoStart:=csc.IndiAutostart;
-  indi1.Autoconnect:=true;
-  indi1.onCoordChange:=@TelescopeCoordChange;
-  indi1.onStatusChange:=@TelescopeStatusChange;
-  indi1.onMessage:=@TelescopeGetMessage;
-  indi1.Start;
-  timer1.Enabled:=true;
+   if (client=nil)or(client.Terminated) then begin
+     client:=TIndiBaseClient.Create;
+     client.onNewDevice:=@NewDevice;
+     client.onNewMessage:=@NewMessage;
+     client.onNewProperty:=@NewProperty;
+     client.onNewNumber:=@NewNumber;
+     client.onNewText:=@NewText;
+     client.onNewSwitch:=@NewSwitch;
+     client.onNewLight:=@NewLight;
+     client.onServerConnected:=@ServerConnected;
+     client.onServerDisconnected:=@ServerDisconnected;
+   end else begin
+     Memomsg.Lines.Add('Already connected');
+     exit;
+   end;
+   client.SetServer(csc.IndiServerHost,csc.IndiServerPort);
+   client.watchDevice(csc.IndiDevice);
+   client.ConnectServer;
   ok:=true;
 end;
-end;
-
-procedure Tpop_indi.TelescopeStatusChange(Sender : Tobject; source: TIndiSource; status: TIndistatus);
-var ok: boolean;
-begin
-  if source=Telescope then begin
-     ok:=(indi1.PropertiesReady)and((status=cu_indiprotocol.Ok)or(status=cu_indiprotocol.Busy));
-     if ok then begin
-        if ok<>connected then TelescopeGetMessage(Sender,'Connected');
-        connected:=true;
-     end else begin
-        if ok<>connected then TelescopeGetMessage(Sender,'Disconnected');
-        connected:=false;
-     end;
-  end;
-  if connected then led.color:=clLime
-               else led.color:=clRed;
-  Edit1.Caption:=indi1.Device;
-end;
-
-procedure Tpop_indi.TelescopeGetMessage(Sender : TObject; const msg : string);
-begin
-  if Memomsg.Lines.Count>4 then Memomsg.Lines.Delete(0);
-  Memomsg.Lines.Add(trim(msg));
 end;
 
 
@@ -230,11 +253,11 @@ end;
 
 Procedure Tpop_indi.ScopeGetInfo(var scName : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
 begin
-   if ScopeConnected  then begin
-     scname:=indi1.Device;
+   if ScopeConnected and (client.devices.Count>0) then begin
+     scname:=BaseDevice(client.devices[0]).getDeviceName;
      QueryOK:=true;
-     SyncOK:=indi1.CanSync;
-     GotoOK:=indi1.CanSlew;
+     SyncOK:=BaseDevice(client.devices[0]).getSwitch('ON_COORD_SET')<>nil;
+     GotoOK:=SyncOK;
    end else begin
       scname:='';
       QueryOK:=false;
@@ -246,8 +269,8 @@ end;
 
 Procedure Tpop_indi.ScopeGetEqSys(var EqSys : double);
 begin
-if ScopeConnected then begin
-   if indi1.EquatorialOfDay then EqSys:=0
+if ScopeConnected  and (client.devices.Count>0) then begin
+   if BaseDevice(client.devices[0]).getNumber('EQUATORIAL_EOD_COORD')<>nil then EqSys:=0
       else EqSys:=2000;
 end;
 end;
@@ -263,17 +286,41 @@ longitude:=-lo;
 end;
 
 Procedure Tpop_indi.ScopeAlign(source : string; ra,dec : single);
+var svp:ISwitchVectorProperty;
+    s:ISwitch;
+    nvp:INumberVectorProperty;
+    np:INumber;
 begin
-indi1.RA:=formatfloat(f13,ra);
-indi1.Dec:=formatfloat(f13,dec);
-indi1.Sync;
+ svp:=TelescopeDevice.getSwitch('ON_COORD_SET');
+ IUResetSwitch(svp);
+ s:=IUFindSwitch(svp,'SYNC');
+ s.s:=ISS_ON;
+ client.sendNewSwitch(svp);
+ nvp:=TelescopeDevice.getNumber('EQUATORIAL_EOD_COORD');
+ np:=IUFindNumber(nvp,'RA');
+ np.value:=ra;
+ np:=IUFindNumber(nvp,'DEC');
+ np.value:=dec;
+ client.sendNewNumber(nvp);
 end;
 
 Procedure Tpop_indi.ScopeGoto(ar,de : single; var ok : boolean);
+var svp:ISwitchVectorProperty;
+    s:ISwitch;
+    nvp:INumberVectorProperty;
+    np:INumber;
 begin
-indi1.RA:=formatfloat(f13,ar);
-indi1.Dec:=formatfloat(f13,de);
-indi1.Slew;
+ svp:=TelescopeDevice.getSwitch('ON_COORD_SET');
+ IUResetSwitch(svp);
+ s:=IUFindSwitch(svp,'SLEW');
+ s.s:=ISS_ON;
+ client.sendNewSwitch(svp);
+ nvp:=TelescopeDevice.getNumber('EQUATORIAL_EOD_COORD');
+ np:=IUFindNumber(nvp,'RA');
+ np.value:=ar;
+ np:=IUFindNumber(nvp,'DEC');
+ np.value:=de;
+ client.sendNewNumber(nvp);
 end;
 
 Procedure Tpop_indi.ScopeReadConfig(ConfigPath : shortstring);
@@ -282,22 +329,32 @@ begin
 end;
 
 Procedure Tpop_indi.ScopeAbortSlew;
+var svp:ISwitchVectorProperty;
+    s:ISwitch;
 begin
-indi1.AbortSlew;
+if TelescopeDevice=nil then exit;
+svp:=TelescopeDevice.getSwitch('TELESCOPE_ABORT_MOTION');
+if svp=nil then exit;
+IUResetSwitch(svp);
+s:=IUFindSwitch(svp,'ABORT');
+if s=nil then s:=IUFindSwitch(svp,'ABORT_MOTION');
+if s=nil then exit;
+s.s:=ISS_ON;
+client.sendNewSwitch(svp);
 end;
 
 procedure Tpop_indi.GetScopeRates(var nrates:integer;var srate: TStringList);
 begin
-  indi1.GetSlewRate(srate);
+{  indi1.GetSlewRate(srate);
   if srate.Count=0 then srate.Add('N/A');
-  nrates:=srate.count;
+  nrates:=srate.count;}
 end;
 
 procedure Tpop_indi.ScopeMoveAxis(axis:Integer; rate: string);
 var dir1,dir2: string;
     positive: boolean;
 begin
-positive:=(copy(rate,1,1)<>'-');
+{positive:=(copy(rate,1,1)<>'-');
 if not positive then delete(rate,1,1);
 case axis of
   0: begin  //  alpha
@@ -322,7 +379,7 @@ case axis of
        if pos('N/A',rate)=0 then indi1.SetSlewRate(rate);
        indi1.MotionNS(dir1,dir2);
      end;
-end;
+end;   }
 end;
 
 {-------------------------------------------------------------------------------
@@ -406,14 +463,6 @@ end;
 procedure Tpop_indi.FormDestroy(Sender: TObject);
 begin
 SaveConfig;
-end;
-
-procedure Tpop_indi.Timer1Timer(Sender: TObject);
-begin
-timer1.Enabled:=false;
-if (not connected) and ((indi1.TelescopeStatus=cu_indiprotocol.Idle)or(indi1.TelescopeStatus=cu_indiprotocol.Alert)) then begin
-      indi1.Terminate;
-end;
 end;
 
 end.
