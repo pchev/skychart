@@ -51,11 +51,21 @@ implementation
 
 {$R *.lfm}
 
+procedure Isleep(milli:integer);
+var tx: double;
+begin
+  tx:=now+milli/1000/3600/24;
+  repeat
+    sleep(10);
+    Application.ProcessMessages;
+  until now>tx;
+end;
+
 { TForm1 }
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-  if client=nil then begin
+  if (client=nil)or(client.Terminated) then begin
     client:=TIndiBaseClient.Create;
     client.onNewDevice:=@NewDevice;
     client.onNewMessage:=@NewMessage;
@@ -68,7 +78,8 @@ begin
     client.onServerConnected:=@ServerConnected;
     client.onServerDisconnected:=@ServerDisconnected;
   end else begin
-    client.DisconnectServer;
+    memo1.Lines.Add('Already connected');
+    exit;
   end;
   client.SetServer(Edit1.Text,Edit2.Text);
   client.watchDevice('Telescope Simulator');
@@ -112,6 +123,8 @@ end;
 procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   if client<>nil then client.DisconnectServer;
+  Isleep(500);
+  CloseAction:=caFree;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -120,8 +133,8 @@ begin
 end;
 
 procedure TForm1.ServerConnected(Sender: TObject);
-var i:integer;
 begin
+  memo1.Lines.Add('Server connected');
   client.connectDevice('Telescope Simulator');
   client.connectDevice('CCD Simulator');
   client.setBLOBMode(B_ALSO,'CCD Simulator');
@@ -129,6 +142,7 @@ end;
 
 procedure TForm1.ServerDisconnected(Sender: TObject);
 begin
+  memo1.Lines.Add('Server disconnected');
 end;
 
 procedure TForm1.NewDevice(dp: Basedevice);
@@ -174,8 +188,8 @@ begin
 end;
 
 procedure TForm1.NewBlob(bp: IBLOB);
-var str:TStringStream;
-    mem:TMemoryStream;
+var //str:TStringStream;
+    //mem:TMemoryStream;
     f: textfile;
 begin
  memo1.Lines.Add('NewBlob: '+bp.name);

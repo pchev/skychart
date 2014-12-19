@@ -133,6 +133,7 @@ end;
 
 destructor BaseDevice.Destroy;
 begin
+ if Ftrace then writeln('BaseDevice.Destroy');
  pAll.Free;
  inherited Destroy;
 end;
@@ -214,35 +215,35 @@ var perm: IPerm;
     bvp: IBLOBVectorProperty;
     bp:  IBLOB;
 begin
-  rtag:=root.NodeName;
-  node:=root.Attributes.GetNamedItem('name');
+  rtag:=GetNodeName(root);
+  node:=GetAttrib(root,'name');
   if node=nil then begin
      errmsg:='INDI: <'+rtag+'> unable to find name attribute';
      if ftrace then writeln(errmsg);
      exit(-1);
   end else
-    rname:=trim(node.NodeValue);
-  node:=root.Attributes.GetNamedItem('device');
+    rname:=GetNodeValue(node);
+  node:=GetAttrib(root,'device');
   if node=nil then begin
      errmsg:='INDI: <'+rtag+'> unable to find device attribute';
      if ftrace then writeln(errmsg);
      exit(-1);
   end else
-     rdev:=trim(node.NodeValue);
+     rdev:=GetNodeValue(node);
   if deviceID='' then deviceID:=rdev;
   if (getProperty(rname)<>nil) then
         exit(INDI_PROPERTY_DUPLICATED);
   if (rtag<>'defLightVector') then begin
-    cnode:=root.Attributes.GetNamedItem('perm');
-    if (cnode=nil)or(not crackIPerm(trim(cnode.NodeValue),perm)) then  begin
+    cnode:=GetAttrib(root,'perm');
+    if (cnode=nil)or(not crackIPerm(GetNodeValue(cnode),perm)) then  begin
         if ftrace then writeln('no perm');
         exit(-1);
     end;
   end;
-  cnode:=root.Attributes.GetNamedItem('timeout');
-  if cnode<>nil then timeout:=StrToFloatDef(trim(cnode.NodeValue),0) else timeout:=0;
-  cnode:=root.Attributes.GetNamedItem('state');
-  if (cnode=nil)or(not crackIPState(trim(cnode.NodeValue),state)) then begin
+  cnode:=GetAttrib(root,'timeout');
+  if cnode<>nil then timeout:=StrToFloatDef(GetNodeValue(cnode),0) else timeout:=0;
+  cnode:=GetAttrib(root,'state');
+  if (cnode=nil)or(not crackIPState(GetNodeValue(cnode),state)) then begin
        if ftrace then writeln('no state');
        exit(-1);
   end;
@@ -254,10 +255,10 @@ begin
     nvp.device:= deviceID;
     nvp.name  := rname;
     if ftrace then writeln(rname);
-    cnode:=root.Attributes.GetNamedItem('label');
-    if cnode<>nil then nvp.lbl:= trim(cnode.NodeValue);
-    cnode:=root.Attributes.GetNamedItem('group');
-    if cnode<>nil then nvp.group:= trim(cnode.NodeValue);
+    cnode:=GetAttrib(root,'label');
+    if cnode<>nil then nvp.lbl:= GetNodeValue(cnode);
+    cnode:=GetAttrib(root,'group');
+    if cnode<>nil then nvp.group:= GetNodeValue(cnode);
     nvp.p     := perm;
     nvp.s     := state;
     nvp.timeout := timeout;
@@ -268,20 +269,20 @@ begin
         np.nvp:=nvp;
         cnode:=node.FirstChild;
         if (cnode=nil) then np.value:=0
-           else f_scansexa(trim(cnode.NodeValue),np.value);
-        cnode:=node.Attributes.GetNamedItem('name');
+           else f_scansexa(GetNodeValue(cnode),np.value);
+        cnode:=GetAttrib(node,'name');
         if cnode=nil then exit(-1);
-        np.name:=trim(cnode.NodeValue);
-        cnode:=node.Attributes.GetNamedItem('label');
-        if cnode<>nil then np.lbl :=trim(cnode.NodeValue);
-        cnode:=node.Attributes.GetNamedItem('format');
-        if cnode<>nil then np.format:=trim(cnode.NodeValue);
-        cnode:=node.Attributes.GetNamedItem('min');
-        np.min:=StrToFloatDef(trim(cnode.NodeValue),0);
-        cnode:=node.Attributes.GetNamedItem('max');
-        np.max:=StrToFloatDef(trim(cnode.NodeValue),0);
-        cnode:=node.Attributes.GetNamedItem('step');
-        np.step:=StrToFloatDef(trim(cnode.NodeValue),0);
+        np.name:=GetNodeValue(cnode);
+        cnode:=GetAttrib(node,'label');
+        if cnode<>nil then np.lbl :=GetNodeValue(cnode);
+        cnode:=GetAttrib(node,'format');
+        if cnode<>nil then np.format:=GetNodeValue(cnode);
+        cnode:=GetAttrib(node,'min');
+        np.min:=StrToFloatDef(GetNodeValue(cnode),0);
+        cnode:=GetAttrib(node,'max');
+        np.max:=StrToFloatDef(GetNodeValue(cnode),0);
+        cnode:=GetAttrib(node,'step');
+        np.step:=StrToFloatDef(GetNodeValue(cnode),0);
         nvp.np.Add(np);
         inc(nvp.nnp);
       end;
@@ -301,12 +302,12 @@ begin
     svp.nsp:=0;
     svp.device:= deviceID;
     svp.name  := rname;
-    cnode:=root.Attributes.GetNamedItem('label');
-    if cnode<>nil then svp.lbl:= trim(cnode.NodeValue);
-    cnode:=root.Attributes.GetNamedItem('group');
-    if cnode<>nil then svp.group:= trim(cnode.NodeValue);
-    cnode:=root.Attributes.GetNamedItem('rule');
-    if (cnode=nil)or(not crackISRule(trim(cnode.NodeValue), svp.r)) then svp.r:=ISR_1OFMANY;
+    cnode:=GetAttrib(root,'label');
+    if cnode<>nil then svp.lbl:= GetNodeValue(cnode);
+    cnode:=GetAttrib(root,'group');
+    if cnode<>nil then svp.group:= GetNodeValue(cnode);
+    cnode:=GetAttrib(root,'rule');
+    if (cnode=nil)or(not crackISRule(GetNodeValue(cnode), svp.r)) then svp.r:=ISR_1OFMANY;
     svp.p     := perm;
     svp.s     := state;
     svp.timeout := timeout;
@@ -315,14 +316,14 @@ begin
       if node.NodeName='defSwitch' then begin
         sp:=ISwitch.Create;
         sp.svp:=svp;
-        cnode:=node.Attributes.GetNamedItem('name');
+        cnode:=GetAttrib(node,'name');
         if cnode=nil then exit(-1);
-        sp.name:=trim(cnode.NodeValue);
-        cnode:=node.Attributes.GetNamedItem('label');
-        if cnode<>nil then sp.lbl :=trim(cnode.NodeValue);
+        sp.name:=GetNodeValue(cnode);
+        cnode:=GetAttrib(node,'label');
+        if cnode<>nil then sp.lbl :=GetNodeValue(cnode);
         cnode:=node.FirstChild;
         if (cnode<>nil) then
-            crackISState(trim(cnode.NodeValue),sp.s);
+            crackISState(GetNodeValue(cnode),sp.s);
         svp.sp.Add(sp);
         inc(svp.nsp);
       end;
@@ -342,10 +343,10 @@ begin
     tvp.ntp:=0;
     tvp.device:= deviceID;
     tvp.name  := rname;
-    cnode:=root.Attributes.GetNamedItem('label');
-    if cnode<>nil then tvp.lbl:= trim(cnode.NodeValue);
-    cnode:=root.Attributes.GetNamedItem('group');
-    if cnode<>nil then tvp.group:= trim(cnode.NodeValue);
+    cnode:=GetAttrib(root,'label');
+    if cnode<>nil then tvp.lbl:= GetNodeValue(cnode);
+    cnode:=GetAttrib(root,'group');
+    if cnode<>nil then tvp.group:= GetNodeValue(cnode);
     tvp.p     := perm;
     tvp.s     := state;
     tvp.timeout := timeout;
@@ -354,14 +355,14 @@ begin
       if node.NodeName='defText' then begin
         tp:=IText.Create;
         tp.tvp:=tvp;
-        cnode:=node.Attributes.GetNamedItem('name');
+        cnode:=GetAttrib(node,'name');
         if cnode=nil then exit(-1);
-        tp.name:=trim(cnode.NodeValue);
-        cnode:=node.Attributes.GetNamedItem('label');
-        if cnode<>nil then tp.lbl :=trim(cnode.NodeValue);
+        tp.name:=GetNodeValue(cnode);
+        cnode:=GetAttrib(node,'label');
+        if cnode<>nil then tp.lbl :=GetNodeValue(cnode);
         cnode:=node.FirstChild;
         if (cnode=nil) then tp.text:=''
-           else tp.text:=trim(cnode.NodeValue);
+           else tp.text:=GetNodeValue(cnode);
         tvp.tp.Add(tp);
         inc(tvp.ntp);
       end;
@@ -381,24 +382,24 @@ begin
     lvp.nlp:=0;
     lvp.device:= deviceID;
     lvp.name  := rname;
-    cnode:=root.Attributes.GetNamedItem('label');
-    if cnode<>nil then lvp.lbl:= trim(cnode.NodeValue);
-    cnode:=root.Attributes.GetNamedItem('group');
-    if cnode<>nil then lvp.group:= trim(cnode.NodeValue);
+    cnode:=GetAttrib(root,'label');
+    if cnode<>nil then lvp.lbl:= GetNodeValue(cnode);
+    cnode:=GetAttrib(root,'group');
+    if cnode<>nil then lvp.group:= GetNodeValue(cnode);
     lvp.s     := state;
     node:=root.FirstChild;
     while node<> nil do begin
       if node.NodeName='defLight' then begin
         lp:=ILight.Create;
         lp.lvp:=lvp;
-        cnode:=node.Attributes.GetNamedItem('name');
+        cnode:=GetAttrib(node,'name');
         if cnode=nil then exit(-1);
-        lp.name:=trim(cnode.NodeValue);
-        cnode:=node.Attributes.GetNamedItem('label');
-        if cnode<>nil then lp.lbl :=trim(cnode.NodeValue);
+        lp.name:=GetNodeValue(cnode);
+        cnode:=GetAttrib(node,'label');
+        if cnode<>nil then lp.lbl :=GetNodeValue(cnode);
         cnode:=node.FirstChild;
         if (cnode<>nil) then
-            crackIPState(trim(cnode.NodeValue), lp.s);
+            crackIPState(GetNodeValue(cnode), lp.s);
         lvp.lp.Add(lp);
         inc(lvp.nlp);
       end;
@@ -418,10 +419,10 @@ begin
     bvp.nbp:=0;
     bvp.device:= deviceID;
     bvp.name  := rname;
-    cnode:=root.Attributes.GetNamedItem('label');
-    if cnode<>nil then bvp.lbl:= trim(cnode.NodeValue);
-    cnode:=root.Attributes.GetNamedItem('group');
-    if cnode<>nil then bvp.group:= trim(cnode.NodeValue);
+    cnode:=GetAttrib(root,'label');
+    if cnode<>nil then bvp.lbl:= GetNodeValue(cnode);
+    cnode:=GetAttrib(root,'group');
+    if cnode<>nil then bvp.group:= GetNodeValue(cnode);
     bvp.p     := perm;
     bvp.s     := state;
     bvp.timeout := timeout;
@@ -430,13 +431,13 @@ begin
       if node.NodeName='defBLOB' then begin
         bp:=IBLOB.Create;
         bp.bvp:=bvp;
-        cnode:=node.Attributes.GetNamedItem('name');
+        cnode:=GetAttrib(node,'name');
         if cnode=nil then exit(-1);
-        bp.name:=trim(cnode.NodeValue);
-        cnode:=node.Attributes.GetNamedItem('label');
-        if cnode<>nil then bp.lbl :=trim(cnode.NodeValue);
-        cnode:=node.Attributes.GetNamedItem('format');
-        if cnode<>nil then bp.format :=trim(cnode.NodeValue);
+        bp.name:=GetNodeValue(cnode);
+        cnode:=GetAttrib(node,'label');
+        if cnode<>nil then bp.lbl :=GetNodeValue(cnode);
+        cnode:=GetAttrib(node,'format');
+        if cnode<>nil then bp.format :=GetNodeValue(cnode);
         bp.blob:='';
         bp.size:=0;
         bp.bloblen:=0;
@@ -474,24 +475,24 @@ var state: IPState;
     lp:  ILight;
     bvp: IBLOBVectorProperty;
 begin
-  rtag:=root.NodeName;
-  node:=root.Attributes.GetNamedItem('name');
+  rtag:=GetNodeName(root);
+  node:=GetAttrib(root,'name');
   if node=nil then begin
      errmsg:='INDI: <'+rtag+'> unable to find name attribute';
      exit(-1);
   end else
-    rname:=trim(node.NodeValue);
-  node:=root.Attributes.GetNamedItem('state');
+    rname:=GetNodeValue(node);
+  node:=GetAttrib(root,'state');
   if node<>nil then begin
-     if (not crackIPState(trim(node.NodeValue),state)) then begin
+     if (not crackIPState(GetNodeValue(node),state)) then begin
         errmsg:='INDI: <'+rtag+'> '+rname+'bogus state';
         exit(-1);
      end;
      stateSet := true;
   end;
-  node:=root.Attributes.GetNamedItem('timeout');
+  node:=GetAttrib(root,'timeout');
   if node<>nil then begin
-    timeout:=StrToFloatDef(trim(node.NodeValue),0);
+    timeout:=StrToFloatDef(GetNodeValue(node),0);
     timeoutSet := true;
   end;
 
@@ -507,17 +508,17 @@ begin
     if (timeoutSet) then nvp.timeout := timeout;
     node:=root.FirstChild;
     while node<> nil do begin
-      cnode:=node.Attributes.GetNamedItem('name');
+      cnode:=GetAttrib(node,'name');
       if cnode=nil then continue;
-      np:=IUFindNumber(nvp,trim(cnode.NodeValue));
+      np:=IUFindNumber(nvp,GetNodeValue(cnode));
       if np=nil then continue;
       cnode:=node.FirstChild;
       if (cnode=nil) then np.value:=0
-         else f_scansexa(trim(cnode.NodeValue),np.value);
-      pnode:=node.Attributes.GetNamedItem('min');
-      if pnode<>nil then np.min:=StrToFloatDef(trim(pnode.NodeValue),0);
-      pnode:=node.Attributes.GetNamedItem('max');
-      if pnode<>nil then np.max:=StrToFloatDef(trim(pnode.NodeValue),0);
+         else f_scansexa(GetNodeValue(cnode),np.value);
+      pnode:=GetAttrib(node,'min');
+      if pnode<>nil then np.min:=StrToFloatDef(GetNodeValue(pnode),0);
+      pnode:=GetAttrib(node,'max');
+      if pnode<>nil then np.max:=StrToFloatDef(GetNodeValue(pnode),0);
       node:=node.NextSibling;
     end;
     if assigned(FIndiNumberEvent) then FIndiNumberEvent(nvp);
@@ -533,13 +534,13 @@ begin
     if (timeoutSet) then tvp.timeout := timeout;
     node:=root.FirstChild;
     while node<> nil do begin
-      cnode:=node.Attributes.GetNamedItem('name');
+      cnode:=GetAttrib(node,'name');
       if cnode=nil then continue;
-      tp:=IUFindText(tvp,trim(cnode.NodeValue));
+      tp:=IUFindText(tvp,GetNodeValue(cnode));
       if tp=nil then continue;
       cnode:=node.FirstChild;
       if (cnode=nil) then tp.text:=''
-         else tp.text:=trim(cnode.NodeValue);
+         else tp.text:=GetNodeValue(cnode);
       node:=node.NextSibling;
     end;
     if assigned(FIndiTextEvent) then FIndiTextEvent(tvp);
@@ -555,13 +556,13 @@ begin
     if (timeoutSet) then svp.timeout := timeout;
     node:=root.FirstChild;
     while node<> nil do begin
-      cnode:=node.Attributes.GetNamedItem('name');
+      cnode:=GetAttrib(node,'name');
       if cnode=nil then continue;
-      sp:=IUFindSwitch(svp,trim(cnode.NodeValue));
+      sp:=IUFindSwitch(svp,GetNodeValue(cnode));
       if sp=nil then continue;
       cnode:=node.FirstChild;
       if (cnode<>nil) then
-          if crackISState(trim(cnode.NodeValue),swState) then sp.s:=swState;
+          if crackISState(GetNodeValue(cnode),swState) then sp.s:=swState;
       node:=node.NextSibling;
     end;
     if assigned(FIndiSwitchEvent) then FIndiSwitchEvent(svp);
@@ -576,13 +577,13 @@ begin
     if (stateSet) then lvp.s := state;
     node:=root.FirstChild;
     while node<> nil do begin
-      cnode:=node.Attributes.GetNamedItem('name');
+      cnode:=GetAttrib(node,'name');
       if cnode=nil then continue;
-      lp:=IUFindLight(lvp,trim(cnode.NodeValue));
+      lp:=IUFindLight(lvp,GetNodeValue(cnode));
       if lp=nil then continue;
       cnode:=node.FirstChild;
       if (cnode<>nil) then
-          if crackIPState(trim(cnode.NodeValue), lState) then lp.s:=lState;
+          if crackIPState(GetNodeValue(cnode), lState) then lp.s:=lState;
       node:=node.NextSibling;
     end;
     if assigned(FIndiLightEvent) then FIndiLightEvent(lvp);
@@ -612,38 +613,45 @@ begin
   node:=root.FirstChild;
   while node<> nil do begin
     if node.NodeName='oneBLOB' then begin
-      na := node.Attributes.GetNamedItem('name');
-      blobEL := IUFindBLOB(bvp, trim(na.NodeValue));
-      fa := node.Attributes.GetNamedItem('format');
-      sa := node.Attributes.GetNamedItem('size');
+      na := GetAttrib(node,'name');
+      blobEL := IUFindBLOB(bvp, GetNodeValue(na));
+      fa := GetAttrib(node,'format');
+      sa := GetAttrib(node,'size');
       if (na<>nil)and(fa<>nil)and(sa<>nil) then begin
-        blobEL.size:=StrToInt(trim(sa.NodeValue));
+        blobEL.size:=StrToInt(GetNodeValue(sa));
         if (blobEL.size = 0) then begin
+            errmsg:='only blob attribute set';
             if assigned(FIndiBlobEvent) then FIndiBlobEvent(blobEL);
             continue;
         end;
         cnode:=node.FirstChild;
         if cnode<>nil then begin
-          str1:=TStringStream.Create(cnode.NodeValue);
+          str1:=TStringStream.Create(string(cnode.NodeValue));
           str2:=TStringStream.Create('');
           b64str:=TBase64DecodingStream.Create(str1);
+          try
           str2.CopyFrom(b64str,b64str.Size);
-          blobEL.format:=trim(fa.NodeValue);
+          blobEL.format:=GetNodeValue(fa);
           if pos('.z',blobEL.format)>0 then begin
              unzstr:=Tdecompressionstream.create(str2);
              str3:=TStringStream.Create('');
+             try
              str3.CopyFrom(unzstr,unzstr.Size);
              blobEL.blob:=str3.DataString;
              blobEL.bloblen:=str3.Size;
-             unzstr.Free;
-             str3.Free;
+             finally
+               unzstr.Free;
+               str3.Free;
+             end;
           end else begin
              blobEL.blob:=str2.DataString;
              blobEL.bloblen:=str2.Size;
           end;
-          str1.Free;
-          str2.Free;
-          b64str.Free;
+          finally
+            str1.Free;
+            str2.Free;
+            b64str.Free;
+          end;
           if assigned(FIndiBlobEvent) then FIndiBlobEvent(blobEL);
         end;
       end;
@@ -657,9 +665,9 @@ procedure BaseDevice.checkMessage(root: TDOMNode);
 var node: TDOMNode;
     buf: string;
 begin
-  node:=root.Attributes.GetNamedItem('message');
+  node:=GetAttrib(root,'message');
   if node <> nil then begin
-     buf:=node.NodeValue;
+     buf:=GetNodeValue(node);
      if assigned(FIndiMessageEvent) then FIndiMessageEvent(buf);
   end;
 end;
@@ -677,6 +685,7 @@ end;
 
 destructor IndiProperty.Destroy;
 begin
+  if pPtr<>nil then pPtr.Free;
   inherited Destroy;
 end;
 
