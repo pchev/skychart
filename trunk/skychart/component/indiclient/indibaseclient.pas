@@ -111,8 +111,8 @@ type
     procedure sendNewNumber(nvp: INumberVectorProperty);
     procedure sendNewText(tvp: ITextVectorProperty);
     procedure sendNewSwitch(svp: ISwitchVectorProperty);
-    property Terminated;
     property Timeout : integer read FTimeout write FTimeout;
+    property Connected: boolean read FConnected;
     property ErrorDesc : string read FErrorDesc;
     property RecvData : string read FRecvData;
     property onServerConnected: TNotifyEvent read FServerConnected write FServerConnected;
@@ -235,6 +235,7 @@ try
    until false;
  end;
 finally
+FConnected:=false;
 terminate;
 tcpclient.Disconnect;
 tcpclient.Free;
