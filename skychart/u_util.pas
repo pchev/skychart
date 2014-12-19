@@ -131,6 +131,7 @@ function GetXPlanetVersion: string;
 Procedure GetXplanet(Xplanetversion,originfile,searchdir,bsize,outfile : string; ipla:integer; pa,grsl,jd : double; var irc:integer; var r:TStringList);
 function VisibleControlCount(obj:TWinControl):integer;
 procedure SetMenuAccelerator(Amenu: TMenuItem; level: integer; var AccelList: array of string);
+procedure ISleep(milli:integer);
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -2565,6 +2566,16 @@ begin
   for k:=0 to Amenu.Count-1 do begin
      SetMenuAccelerator(Amenu[k],level+1,AccelList);
   end;
+end;
+
+procedure ISleep(milli:integer);
+var tx: double;
+begin
+  tx:=now+milli/1000/3600/24;
+  repeat
+    sleep(10);
+    Application.ProcessMessages;
+  until now>tx;
 end;
 
 end.

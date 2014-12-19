@@ -612,7 +612,7 @@ try
    if Connect1.Checked then begin
      Fpop_indi.ScopeDisconnect(ok,false);
      Application.ProcessMessages;
-     sleep(500);
+     ISleep(500);
    end;
    Fpop_indi.Free;
  end;
