@@ -27,15 +27,19 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses indiapi,
+uses indiapi, DOM,
   Classes, SysUtils;
 
+function GetAttrib(node:TDOMNode; attr:string):TDOMNode;
+function GetNodeName(node:TDOMNode): string;
+function GetNodeValue(node:TDOMNode): string;
+function GetChildValue(node:TDOMNode): string;
 function pstateStr (s:IPState):string;
-function crackIPState (str: string; var ip: IPState): boolean;
-function crackISState (str:string; var ip: ISState): boolean;
-function crackIPerm (str: string; var ip: IPerm): boolean;
-function crackISRule (str:string; var ip: ISRule): boolean;
-function f_scansexa (str: string; var dp: double): boolean;
+function crackIPState (str: string; out ip: IPState): boolean;
+function crackISState (str:string; out ip: ISState): boolean;
+function crackIPerm (str: string; out ip: IPerm): boolean;
+function crackISRule (str:string; out ip: ISRule): boolean;
+function f_scansexa (str: string; out dp: double): boolean;
 function IUFindText (tvp: ITextVectorProperty; name: string): IText;
 function IUFindNumber(nvp: INumberVectorProperty; name: string): INumber;
 function IUFindSwitch(svp: ISwitchVectorProperty; name: string): ISwitch;
@@ -45,6 +49,35 @@ function IUFindOnSwitch(svp: ISwitchVectorProperty): ISwitch;
 procedure IUResetSwitch(svp: ISwitchVectorProperty);
 
 implementation
+
+function GetAttrib(node:TDOMNode; attr:string):TDOMNode;
+begin
+  if node=nil then result:=nil
+  else result:=node.Attributes.GetNamedItem(DOMString(attr));
+end;
+
+function GetNodeName(node:TDOMNode): string;
+begin
+  if node=nil then result:=''
+  else result:=trim(string(node.NodeName));
+end;
+
+function GetNodeValue(node:TDOMNode): string;
+begin
+  if node=nil then result:=''
+  else result:=trim(string(node.NodeValue));
+end;
+
+function GetChildValue(node:TDOMNode): string;
+var cnode: TDOMNode;
+begin
+  if node=nil then result:=''
+  else begin
+    cnode:=node.FirstChild;
+    if (cnode=nil) then result:=''
+    else result:=trim(string(cnode.NodeValue));
+  end
+end;
 
 //* return static string corresponding to the given property or light state */
 function pstateStr (s:IPState):string;
@@ -61,7 +94,7 @@ end;
 
 
 //* crack string into IPState.
-function crackIPState (str: string; var ip: IPState): boolean;
+function crackIPState (str: string; out ip: IPState): boolean;
 begin
         result:=true;
              if (str='Idle')  then ip := IPS_IDLE
@@ -72,7 +105,7 @@ begin
 end;
 
 //* crack string into ISState.
-function crackISState (str:string; var ip: ISState): boolean;
+function crackISState (str:string; out ip: ISState): boolean;
 begin
         result:=true;
              if (str='On')  then ip := ISS_ON
@@ -80,7 +113,7 @@ begin
         else result:=false;
 end;
 
-function crackIPerm (str: string; var ip: IPerm): boolean;
+function crackIPerm (str: string; out ip: IPerm): boolean;
 begin
         result:=true;
              if (str='rw') then ip := IP_RW
@@ -89,7 +122,7 @@ begin
         else result:=false;
 end;
 
-function crackISRule (str:string; var ip: ISRule): boolean;
+function crackISRule (str:string; out ip: ISRule): boolean;
 begin
     result:=true;
     if (str='OneOfMany')      then ip := ISR_1OFMANY
@@ -98,7 +131,7 @@ begin
     else result:=false;
 end;
 
-function f_scansexa (str: string; var dp: double): boolean;
+function f_scansexa (str: string; out dp: double): boolean;
 var a,b,c: extended;
     s1,s2,s3: char;
     p: array[0..5] of pointer;

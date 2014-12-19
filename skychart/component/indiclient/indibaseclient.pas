@@ -129,9 +129,6 @@ type
 
 implementation
 
-const
-  blank=' ';
-
 ///////////////////////  TTCPclient //////////////////////////
 
 constructor TTCPclient.Create;
@@ -186,8 +183,8 @@ FTargetHost:='localhost';
 FTargetPort:='7624';
 FTimeout:=50;
 FConnected:=false;
-freeonterminate:=true;
-Ftrace:=true;  // for debuging only
+FreeOnTerminate:=true;
+Ftrace:=false;  // for debuging only
 Fdevices:=TObjectList.Create;
 FwatchDevices:=TStringlist.Create;
 // start suspended to let time to the main thread to set the parameters
@@ -196,6 +193,7 @@ end;
 
 destructor TIndiBaseClient.Destroy;
 begin
+if Ftrace then writeln('TIndiBaseClient.Destroy');
 Fdevices.Free;
 FwatchDevices.Free;
 Inherited destroy;
@@ -259,10 +257,12 @@ var i: integer;
     buf: string;
 begin
  result:=nil;
- buf:=root.Attributes.GetNamedItem('device').NodeValue;
+ errmsg:='Device not found';
+ buf:=GetNodeValue(GetAttrib(root,'device'));
  for i:=0 to Fdevices.Count-1 do begin
      if BaseDevice(Fdevices[i]).getDeviceName=buf then begin
         result:= BaseDevice(Fdevices[i]);
+        errmsg:='';
         break;
      end;
  end;
@@ -272,8 +272,8 @@ function TIndiBaseClient.findDev(root: TDOMNode; createifnotexist: boolean; out 
 var buf: string;
 begin
  result:=findDev(root,errmsg);
- if createifnotexist and (result=nil) then begin
-   buf:=root.Attributes.GetNamedItem('device').NodeValue;
+ if (result=nil) and createifnotexist then begin
+   buf:=GetNodeValue(GetAttrib(root,'device'));
    if buf<>'' then begin
      result:=BaseDevice.Create;
      result.setDeviceName(buf);
@@ -286,6 +286,8 @@ begin
      result.onNewBlob:=@IndiBlobEvent;
      Fdevices.Add(result);
      if assigned(FIndiDeviceEvent) then IndiDeviceEvent(result);
+   end else begin
+     errmsg:='No device name';
    end;
  end;
 end;
@@ -308,10 +310,9 @@ var Doc: TXMLDocument;
 begin
 //if Ftrace then writeln(line);
 FRecvData:='<INDIMSG>'+line+'</INDIMSG>';
-Doc:=TXMLDocument.Create;
 s:=TStringStream.Create(FRecvData);
 ReadXMLFile(Doc,s);
-s.Free;
+try
 Node:=Doc.DocumentElement.FirstChild;
 while Node<>nil do begin
    dp:=findDev(Node,true,errmsg);
@@ -321,10 +322,14 @@ while Node<>nil do begin
    if Node.NodeName='delProperty' then begin
       // TODO
    end;
-   buf:=copy(Node.NodeName,1,3);
+   buf:=copy(GetNodeName(Node),1,3);
    if buf='set' then dp.setValue(Node,errmsg)
    else if buf='def' then  dp.buildProp(Node,errmsg);
    Node:=Node.NextSibling;
+end;
+finally
+ s.Free;
+ Doc.Free;
 end;
 end;
 
