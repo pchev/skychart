@@ -989,8 +989,7 @@ end;
 procedure Tf_chart.Image1Paint(Sender: TObject);
 begin
 if locked then exit;
-if VerboseMsg then
- WriteTrace(caption+' Paint');
+//if VerboseMsg then WriteTrace(caption+' Paint');
 sc.plot.FlushCnv;
 inherited Paint;
 if  MovingCircle then begin
@@ -5681,8 +5680,7 @@ try
 TelescopeLock:=true;
 try
 ok:=false;
-if VerboseMsg then
- WriteTrace(caption+' TelescopeTimerTimer');
+//if VerboseMsg then WriteTrace(caption+' TelescopeTimerTimer');
 newconnection:=Connect1.checked;
 if sc.cfgsc.ASCOMTelescope then begin
      Connect1.checked:=Fpop_scope.ScopeConnected;

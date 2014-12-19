@@ -27,10 +27,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, indibaseclient, indibasedevice,
-  indiapi, indicom, LCLIntf, u_util, u_constant,
-  Messages, SysUtils, Classes, Graphics, Controls,
-  Forms, Dialogs, StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls;
+uses u_help, u_translation, indibaseclient, indibasedevice, indiapi, indicom,
+  LCLIntf, u_util, u_constant, Messages, SysUtils, Classes, Graphics, Controls,
+  Forms, Dialogs, StdCtrls, Buttons, inifiles, process, ComCtrls, Menus,
+  ExtCtrls;
 
 type
 
@@ -40,6 +40,7 @@ type
     GroupBox3: TGroupBox;
     Connect: TButton;
     Memomsg: TMemo;
+    IndiProcess: TProcess;
     SpeedButton2: TButton;
     Disconnect: TButton;
     led: TEdit;
@@ -112,7 +113,7 @@ implementation
 
 procedure Tpop_indi.ServerConnected(Sender: TObject);
 begin
-  Memomsg.Lines.Add('Server connected');
+   Memomsg.Lines.Add('Server connected');
   // csc.IndiPort;
   client.connectDevice(csc.IndiDevice);
 end;
@@ -137,7 +138,7 @@ end;
 procedure Tpop_indi.NewMessage(msg: string);
 begin
   if Memomsg.Lines.Count>4 then Memomsg.Lines.Delete(0);
-  Memomsg.Lines.Add('Message: '+msg);
+  Memomsg.Lines.Add(msg);
 end;
 
 procedure Tpop_indi.NewProperty(indiProp: IndiProperty);
@@ -176,6 +177,7 @@ begin
 end;
 
 Procedure Tpop_indi.ScopeDisconnect(var ok : boolean; updstatus:boolean=true);
+var i: integer;
 begin
 pos_x.text:='';
 pos_y.text:='';
@@ -183,36 +185,74 @@ if trim(edit1.text)='' then exit;
 if (client<>nil) then begin
    client.Terminate;
 end;
+if IndiProcess.Active then begin
+   writetrace('Kill indi server');
+   IndiProcess.Terminate(i);
+   IndiProcess.Executable:='';
+   IndiProcess.Parameters.Clear;
+end;
 ok:=true;
 end;
 
 Procedure Tpop_indi.ScopeConnect(var ok : boolean);
+var buf,plugin,IndiServer,IndiDriver:string;
+    i : integer;
+    localplugin: boolean;
 begin
 if not connected then begin
   led.color:=clRed;
   Memomsg.Clear;
   led.refresh;
   TelescopeJD:=0;
-   if (client=nil)or(client.Terminated) then begin
-     client:=TIndiBaseClient.Create;
-     client.onNewDevice:=@NewDevice;
-     client.onNewMessage:=@NewMessage;
-     client.onNewProperty:=@NewProperty;
-     client.onNewNumber:=@NewNumber;
-     client.onNewText:=@NewText;
-     client.onNewSwitch:=@NewSwitch;
-     client.onNewLight:=@NewLight;
-     client.onServerConnected:=@ServerConnected;
-     client.onServerDisconnected:=@ServerDisconnected;
-   end else begin
-     Memomsg.Lines.Add('Already connected');
-     exit;
-   end;
-   client.SetServer(csc.IndiServerHost,csc.IndiServerPort);
-   client.watchDevice(csc.IndiDevice);
-   client.ConnectServer;
+  if csc.IndiAutostart and (not IndiProcess.Active) then begin
+     buf:=GetCurrentDir;
+     try
+       IndiServer:=csc.IndiServerCmd;
+       IndiDriver:=csc.IndiDriver;
+       plugin:=slash('plugins');
+       localplugin:=DirectoryExists(plugin);
+       {$ifdef linux}
+         plugin:=ExpandFileName(plugin);
+         if localplugin then chdir(plugin);
+         localplugin:=localplugin and fileexists(plugin+IndiServer) and fileexists(plugin+IndiDriver);
+         if localplugin then begin
+            IndiServer:='./'+IndiServer;
+            IndiDriver:='./'+IndiDriver;
+         end;
+       {$endif}
+       if localplugin then IndiProcess.CurrentDirectory:=plugin else IndiProcess.CurrentDirectory:='';
+       IndiProcess.Executable:=IndiServer;
+       IndiProcess.Parameters.Clear;
+       IndiProcess.Parameters.add('-p');
+       IndiProcess.Parameters.add(csc.IndiServerPort);
+       IndiProcess.Parameters.add(IndiDriver);
+       IndiProcess.Execute;
+     finally
+       chdir(buf);
+     end;
+     ISleep(1000);
+  end;
+  if (client=nil)or(not client.Connected) then begin
+    client:=TIndiBaseClient.Create;
+    client.onNewDevice:=@NewDevice;
+    client.onNewMessage:=@NewMessage;
+    client.onNewProperty:=@NewProperty;
+    client.onNewNumber:=@NewNumber;
+    client.onNewText:=@NewText;
+    client.onNewSwitch:=@NewSwitch;
+    client.onNewLight:=@NewLight;
+    client.onServerConnected:=@ServerConnected;
+    client.onServerDisconnected:=@ServerDisconnected;
+  end else begin
+    Memomsg.Lines.Add('Already connected');
+    exit;
+  end;
+  client.SetServer(csc.IndiServerHost,csc.IndiServerPort);
+  client.watchDevice(csc.IndiDevice);
+  client.ConnectServer;
   ok:=true;
-end;
+end
+else Memomsg.Lines.Add('Already connected');
 end;
 
 
