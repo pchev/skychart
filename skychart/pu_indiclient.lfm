@@ -171,7 +171,14 @@ object pop_indi: Tpop_indi
     WindowTop = 0
     WindowWidth = 0
     FillAttribute = 0
-    left = 190
+    left = 176
+    top = 40
+  end
+  object InitTimer: TTimer
+    Enabled = False
+    Interval = 5000
+    OnTimer = InitTimerTimer
+    left = 240
     top = 40
   end
 end
