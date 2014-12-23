@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses indiapi, indicom, DOM, contnrs, base64, zstream,
+uses indiapi, indicom, DOM, contnrs, base64,
   Classes, SysUtils;
 
 type
@@ -605,9 +605,8 @@ end;
 
 function BaseDevice.setBLOB(bvp: IBLOBVectorProperty; root: TDOMNode; out errmsg:string): integer;
 var blobEL: IBLOB;
-    str1,str2,str3:TStringStream;
+    str1,str2:TStringStream;
     b64str: TBase64DecodingStream;
-    unzstr: Tdecompressionstream;
     node,cnode,na,fa,sa: TDOMNode;
 begin
   node:=root.FirstChild;
@@ -632,21 +631,8 @@ begin
           try
           str2.CopyFrom(b64str,b64str.Size);
           blobEL.format:=GetNodeValue(fa);
-          if pos('.z',blobEL.format)>0 then begin
-             unzstr:=Tdecompressionstream.create(str2);
-             str3:=TStringStream.Create('');
-             try
-             str3.CopyFrom(unzstr,unzstr.Size);
-             blobEL.blob:=str3.DataString;
-             blobEL.bloblen:=str3.Size;
-             finally
-               unzstr.Free;
-               str3.Free;
-             end;
-          end else begin
-             blobEL.blob:=str2.DataString;
-             blobEL.bloblen:=str2.Size;
-          end;
+          blobEL.blob:=str2.DataString;
+          blobEL.bloblen:=str2.Size;
           finally
             str1.Free;
             str2.Free;
