@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses indiapi, indibasedevice, indicom, blcksock, synsock, XMLRead, DOM, contnrs,
-  Classes, SysUtils;
+  Forms, Classes, SysUtils;
 
 type
   TTCPclient = class(TSynaClient)
@@ -111,6 +111,9 @@ type
     procedure sendNewNumber(nvp: INumberVectorProperty);
     procedure sendNewText(tvp: ITextVectorProperty);
     procedure sendNewSwitch(svp: ISwitchVectorProperty);
+    function WaitBusy(nvp: INumberVectorProperty; timeout:integer=5000):boolean;
+    function WaitBusy(tvp: ITextVectorProperty; timeout:integer=5000):boolean;
+    function WaitBusy(svp: ISwitchVectorProperty; timeout:integer=5000):boolean;
     property Timeout : integer read FTimeout write FTimeout;
     property Connected: boolean read FConnected;
     property ErrorDesc : string read FErrorDesc;
@@ -395,6 +398,45 @@ begin
   end;
   buf:=buf+'</newSwitchVector>';
   Send(buf);
+end;
+
+function TIndiBaseClient.WaitBusy(nvp: INumberVectorProperty; timeout:integer=5000):boolean;
+var count,maxcount:integer;
+begin
+maxcount:=timeout div 100;
+count:=0;
+while (nvp.s=IPS_BUSY)and(count<maxcount) do begin
+   sleep(100);
+   Application.ProcessMessages;
+   inc(count);
+end;
+result:=(count<maxcount);
+end;
+
+function TIndiBaseClient.WaitBusy(tvp: ITextVectorProperty; timeout:integer=5000):boolean;
+var count,maxcount:integer;
+begin
+maxcount:=timeout div 100;
+count:=0;
+while (tvp.s=IPS_BUSY)and(count<maxcount) do begin
+   sleep(100);
+   Application.ProcessMessages;
+   inc(count);
+end;
+result:=(count<maxcount);
+end;
+
+function TIndiBaseClient.WaitBusy(svp: ISwitchVectorProperty; timeout:integer=5000):boolean;
+var count,maxcount:integer;
+begin
+maxcount:=timeout div 100;
+count:=0;
+while (svp.s=IPS_BUSY)and(count<maxcount) do begin
+   sleep(100);
+   Application.ProcessMessages;
+   inc(count);
+end;
+result:=(count<maxcount);
 end;
 
 procedure TIndiBaseClient.SetServer(host,port: string);
