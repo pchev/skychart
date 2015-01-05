@@ -1201,18 +1201,21 @@ if db.Rowcount>0 then begin
   if dt<FComMindt then begin
      FComMindt:=round(dt-1);
   end;
-  tp:=strtofloat(trim(db.Results[j][1]));
-  q:=strtofloat(trim(db.Results[j][2]));
-  ec:=strtofloat(trim(db.Results[j][3]));
-  ap:=strtofloat(trim(db.Results[j][4]));
-  an:=strtofloat(trim(db.Results[j][5]));
-  ic:=strtofloat(trim(db.Results[j][6]));
-  h:=strtofloat(trim(db.Results[j][8]));
-  g:=strtofloat(trim(db.Results[j][9]));
-  nam:=db.Results[j][10];
-  eq:=strtofloat(trim(db.Results[j][11]));
-  elem_id:=db.Results[j][12];
-  result:=true;
+  if dt<36500 then begin // 100 years grace period...
+    tp:=strtofloat(trim(db.Results[j][1]));
+    q:=strtofloat(trim(db.Results[j][2]));
+    ec:=strtofloat(trim(db.Results[j][3]));
+    ap:=strtofloat(trim(db.Results[j][4]));
+    an:=strtofloat(trim(db.Results[j][5]));
+    ic:=strtofloat(trim(db.Results[j][6]));
+    h:=strtofloat(trim(db.Results[j][8]));
+    g:=strtofloat(trim(db.Results[j][9]));
+    nam:=db.Results[j][10];
+    eq:=strtofloat(trim(db.Results[j][11]));
+    elem_id:=db.Results[j][12];
+    result:=true;
+  end else
+    result:=false;
 end else begin
   result:=false;
 end;
