@@ -453,7 +453,6 @@ end;
 procedure TIndiBaseClient.setBLOBMode(blobH: BLOBHandling; dev: string; prop:string='');
 var buf: string;
 begin
- if (dev='') then exit;
  if (prop<>'') then
     buf:='<enableBLOB device="'+dev+'" name="'+prop+'">'
  else
