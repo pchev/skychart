@@ -360,6 +360,7 @@ if Snode<>nil then sesame_resolver:=Snode.TextContent;
 Node:=Node.FirstChild;
 while Node<>nil do begin
    k:=Node.NodeName;
+   if k<>'#comment' then begin
    v:=Node.TextContent;
    a:='';
    Dnode:=Node.Attributes.Item[0];
@@ -385,6 +386,7 @@ while Node<>nil do begin
       de:=StrToFloatDef(v,-9999);
       if de=-9999 then exit;
       de:=deg2rad*de;
+   end;
    end;
    Node:=Node.NextSibling;
 end;
