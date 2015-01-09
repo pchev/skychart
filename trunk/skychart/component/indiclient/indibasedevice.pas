@@ -438,7 +438,7 @@ begin
         if cnode<>nil then bp.lbl :=GetNodeValue(cnode);
         cnode:=GetAttrib(node,'format');
         if cnode<>nil then bp.format :=GetNodeValue(cnode);
-        bp.blob:='';
+        bp.blob.Clear;
         bp.size:=0;
         bp.bloblen:=0;
         bvp.bp.Add(bp);
@@ -605,7 +605,7 @@ end;
 
 function BaseDevice.setBLOB(bvp: IBLOBVectorProperty; root: TDOMNode; out errmsg:string): integer;
 var blobEL: IBLOB;
-    str1,str2:TStringStream;
+    str1:TStringStream;
     b64str: TBase64DecodingStream;
     node,cnode,na,fa,sa: TDOMNode;
 begin
@@ -625,17 +625,17 @@ begin
         end;
         cnode:=node.FirstChild;
         if cnode<>nil then begin
+          // Only base64 decoding. The eventual decompression is done in
+          // the final client to avoid a dependency to zlib here.
           str1:=TStringStream.Create(string(cnode.NodeValue));
-          str2:=TStringStream.Create('');
           b64str:=TBase64DecodingStream.Create(str1);
           try
-          str2.CopyFrom(b64str,b64str.Size);
+          blobEL.blob.Position:=0;
+          blobEL.blob.CopyFrom(b64str,b64str.Size);
+          blobEL.bloblen:=blobEL.blob.Size;
           blobEL.format:=GetNodeValue(fa);
-          blobEL.blob:=str2.DataString;
-          blobEL.bloblen:=str2.Size;
           finally
             str1.Free;
-            str2.Free;
             b64str.Free;
           end;
           if assigned(FIndiBlobEvent) then FIndiBlobEvent(blobEL);
