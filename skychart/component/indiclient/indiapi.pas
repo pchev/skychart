@@ -211,11 +211,13 @@ type
       name:   string;
       lbl :   string;
       format: string;
-      blob:   string;
+      blob:   TMemoryStream;
       bloblen:integer;
       size:   integer;
       bvp:    IBLOBVectorProperty;
       aux0,aux1,aux2: LongInt;
+      constructor Create;
+      destructor Destroy; override;
   end;
 
   IBLOBList = class(TObjectList)
@@ -328,6 +330,20 @@ end;
 destructor ILightVectorProperty.Destroy;
 begin
   lp.Free;
+  inherited Destroy;
+end;
+
+//////////////////////// IBLOB ////////////////////////
+
+constructor IBLOB.Create;
+begin
+  inherited Create;
+  blob:=TMemoryStream.Create;
+end;
+
+destructor IBLOB.Destroy;
+begin
+  blob.Free;
   inherited Destroy;
 end;
 
