@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  u_unzip, pu_observatory_db, IniFiles,
+  u_unzip, pu_observatory_db, IniFiles, LCLType,
   u_help, u_translation, u_constant, u_util, cu_database, Math, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FileUtil,
   Buttons, StdCtrls, ExtCtrls, cu_zoomimage, enhedits, ComCtrls, LResources,
@@ -82,12 +82,12 @@ type
     Latitude: TGroupBox;
     Label58: TLabel;
     hemis: TComboBox;
-    latdeg: TLongEdit;
+    latdeg: TFloatEdit;
     latmin: TLongEdit;
     Longitude: TGroupBox;
     Label61: TLabel;
     long: TComboBox;
-    longdeg: TLongEdit;
+    longdeg: TFloatEdit;
     longmin: TLongEdit;
     Altitude: TGroupBox;
     Label70: TLabel;
@@ -110,6 +110,9 @@ type
     procedure Button6Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
+    procedure latKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure longKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
+      );
     procedure ShowHorizon0Click(Sender: TObject);
     procedure ComboBox1Select(Sender: TObject);
     procedure countrylistSelect(Sender: TObject);
@@ -683,8 +686,12 @@ procedure Tf_config_observatory.latdegChange(Sender: TObject);
 begin
 if LockChange then exit;
 if obslock then exit;
-csc.ObsLatitude:=latdeg.value+latmin.value/60+latsec.value/3600;
+if frac(latdeg.Value)>0 then
+  csc.ObsLatitude:=latdeg.value
+else
+  csc.ObsLatitude:=latdeg.value+latmin.value/60+latsec.value/3600;
 if hemis.Itemindex>0 then csc.ObsLatitude:=-csc.ObsLatitude;
+ShowObsCoord;
 SetObsPos;
 CenterObs;
 end;
@@ -693,10 +700,26 @@ procedure Tf_config_observatory.longdegChange(Sender: TObject);
 begin
 if LockChange then exit;
 if obslock then exit;
-csc.ObsLongitude:=longdeg.value+longmin.value/60+longsec.value/3600;
+if frac(longdeg.Value)>0 then
+   csc.ObsLongitude:=longdeg.value
+else
+   csc.ObsLongitude:=longdeg.value+longmin.value/60+longsec.value/3600;
 if long.Itemindex>0 then csc.ObsLongitude:=-csc.ObsLongitude;
+ShowObsCoord;
 SetObsPos;
 CenterObs;
+end;
+
+procedure Tf_config_observatory.latKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+if key=VK_RETURN then latdegChange(Sender);
+end;
+
+procedure Tf_config_observatory.longKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+if key=VK_RETURN then longdegChange(Sender);
 end;
 
 procedure Tf_config_observatory.altmeterChange(Sender: TObject);
