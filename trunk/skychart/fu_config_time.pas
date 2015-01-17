@@ -36,6 +36,7 @@ type
 
   Tf_config_time = class(TFrame)
     BitBtn1: TBitBtn;
+    ButtonDefGreg: TButton;
     Button4: TButton;
     Button5: TButton;
     Button6: TButton;
@@ -44,6 +45,10 @@ type
     Button9: TButton;
     CheckBox3: TCheckBox;
     dt_ut: TFloatEdit;
+    Label12: TLabel;
+    GregY: TLongEdit;
+    GregM: TLongEdit;
+    GregD: TLongEdit;
     stepmark: TCheckBox;
     CheckGroup1: TCheckGroup;
     CheckGroup2: TCheckGroup;
@@ -134,6 +139,7 @@ type
     procedure Button6Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
     procedure Button9Click(Sender: TObject);
+    procedure ButtonDefGregClick(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure CheckBox3Change(Sender: TObject);
@@ -151,6 +157,7 @@ type
     procedure FileNameEdit1AcceptFileName(Sender: TObject; var Value: String);
     procedure FileNameEdit1Change(Sender: TObject);
     procedure fpseditChange(Sender: TObject);
+    procedure GregChange(Sender: TObject);
     procedure JDEditChange(Sender: TObject);
     procedure LongEdit1Change(Sender: TObject);
     procedure LongEdit2Change(Sender: TObject);
@@ -400,7 +407,7 @@ end;
 
 procedure Tf_config_time.ShowTime;
 var h,n,s:string;
-    y,m,d,i,j:integer;
+    y,m,d,i,j,gr:integer;
 begin
 if not lockJD then JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 y:=csc.curyear;
@@ -429,6 +436,12 @@ Tdt_Ut.caption:=formatfloat(f2,(csc.DT_UT*3600));
 checkbox4.checked:=csc.Force_DT_UT;
 if not csc.Force_DT_UT then csc.DT_UT_val:=csc.DT_UT;
 dt_ut.value:=csc.DT_UT_val*3600;
+gr:=GregorianStart;
+GregD.Value:=round(frac(gr/100)*100);
+gr:=trunc(gr/100);
+GregM.Value:=round(frac(gr/100)*100);
+gr:=trunc(gr/100);
+GregY.Value:=gr;
 nbstep.value:=csc.Simnb;
 if csc.SimD>0 then begin
    stepsize.value:=csc.SimD;
@@ -693,6 +706,12 @@ begin
   cmain.AnimFps := fpsedit.Value;
 end;
 
+procedure Tf_config_time.GregChange(Sender: TObject);
+begin
+  GregorianStart:=GregY.Value*10000+GregM.Value*100+GregD.Value;
+  GregorianStartJD:=round(Jd(GregY.Value,GregM.Value,GregD.Value,6));
+end;
+
 procedure Tf_config_time.DateChange(Sender: TObject);
 begin
 {$ifdef darwin}
@@ -911,6 +930,13 @@ begin
   fpsedit.Value:=10;
   ComboBox1.ItemIndex:=0;
   Edit2.Text:=DefaultffmpegOptions;
+end;
+
+procedure Tf_config_time.ButtonDefGregClick(Sender: TObject);
+begin
+  GregorianStart:=DefaultGregorianStart;
+  GregorianStartJD:=DefaultGregorianStartJD;
+  ShowTime;
 end;
 
 procedure Tf_config_time.CheckBox4Click(Sender: TObject);

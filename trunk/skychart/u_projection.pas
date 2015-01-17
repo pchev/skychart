@@ -684,7 +684,7 @@ function Jd(annee,mois,jour :INTEGER; Heure:double):double;
 var u,u0,u1,u2 : double;
 	gregorian : boolean;
 begin
-if annee*10000+mois*100+jour >= 15821015 then gregorian:=true else gregorian:=false;
+if annee*10000+mois*100+jour >= GregorianStart then gregorian:=true else gregorian:=false;
 u:=annee;
 if mois<3 then u:=u-1;
 u0:=u+4712;
@@ -704,7 +704,7 @@ var u0,u1,u2,u3,u4 : double;
 	gregorian : boolean;
 begin
 u0:=jd+0.5;
-if int(u0)>=2299161 then gregorian:=true else gregorian:=false;
+if int(u0)>=GregorianStartJD then gregorian:=true else gregorian:=false;
 u0:=jd+32082.5;
 if gregorian then begin
    u1:=u0+floor(u0/36525)-floor(u0/146100)-38;

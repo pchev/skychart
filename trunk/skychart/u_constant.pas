@@ -80,6 +80,9 @@ const
   maxjdabe = 2524593.5; // 2200
   minjdnut = 2378496.5; // 1800   //limit for nutation calculation using Meeus function
   maxjdnut = 2524593.5; // 2200
+  // julian - gregorian calendar switch
+  DefaultGregorianStart=15821015;
+  DefaultGregorianStartJD=2299161;
   km_au = 149597870.691;
   clight = 299792.458;
   grsun = 1.974126e-8;  // twice the gravitational radius of the Sun
@@ -1262,6 +1265,7 @@ var
   CatSetupOption,CatTelescope,CatTools,CatUndo,CatView,CatWindow,CatZoom :string;
   nJPL_DE: integer;
   JPL_DE: array of integer;
+  GregorianStart,GregorianStartJD: integer;
 
 {$ifdef darwin}
   OpenFileCMD: string = 'open';

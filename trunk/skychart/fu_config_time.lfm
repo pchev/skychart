@@ -32,8 +32,8 @@ object f_config_time: Tf_config_time
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Time'
-        ClientHeight = 526
-        ClientWidth = 496
+        ClientHeight = 530
+        ClientWidth = 500
         object Label142: TLabel
           Left = 286
           Height = 15
@@ -44,9 +44,9 @@ object f_config_time: Tf_config_time
         end
         object CheckBox2: TCheckBox
           Left = 40
-          Height = 23
+          Height = 26
           Top = 56
-          Width = 134
+          Width = 137
           Caption = 'Auto-refresh every '
           OnClick = CheckBox2Click
           TabOrder = 1
@@ -63,7 +63,7 @@ object f_config_time: Tf_config_time
           object Label135: TLabel
             Left = 8
             Height = 15
-            Top = 80
+            Top = 64
             Width = 52
             Caption = 'TT - UT  : '
             ParentColor = False
@@ -71,7 +71,7 @@ object f_config_time: Tf_config_time
           object Tdt_Ut: TLabel
             Left = 85
             Height = 15
-            Top = 80
+            Top = 64
             Width = 28
             Caption = '0000'
             ParentColor = False
@@ -79,7 +79,7 @@ object f_config_time: Tf_config_time
           object Label136: TLabel
             Left = 142
             Height = 15
-            Top = 80
+            Top = 64
             Width = 47
             Caption = 'Seconds'
             ParentColor = False
@@ -87,16 +87,16 @@ object f_config_time: Tf_config_time
           object Label150: TLabel
             Left = 8
             Height = 15
-            Top = 56
+            Top = 48
             Width = 314
             Caption = 'Difference between Terrestrial Time and Universal Time'
             ParentColor = False
           end
           object CheckBox4: TCheckBox
-            Left = 8
-            Height = 23
-            Top = 109
-            Width = 161
+            Left = 6
+            Height = 26
+            Top = 80
+            Width = 164
             Caption = 'Use another TT-UT value'
             OnClick = CheckBox4Click
             TabOrder = 1
@@ -111,7 +111,7 @@ object f_config_time: Tf_config_time
           end
           object TZComboBox: TComboBox
             Left = 129
-            Height = 25
+            Height = 27
             Top = 8
             Width = 283
             ItemHeight = 0
@@ -120,10 +120,10 @@ object f_config_time: Tf_config_time
             TabOrder = 0
           end
           object dt_ut: TFloatEdit
-            Left = 217
-            Height = 23
+            Left = 215
+            Height = 21
             Hint = '-99999999..99999999'
-            Top = 109
+            Top = 82
             Width = 105
             Enabled = False
             ParentShowHint = False
@@ -134,10 +134,64 @@ object f_config_time: Tf_config_time
             MinValue = -99999999
             MaxValue = 99999999
           end
+          object Label12: TLabel
+            Left = 8
+            Height = 15
+            Top = 123
+            Width = 167
+            Caption = 'Gregorian calendar start date'
+            ParentColor = False
+          end
+          object GregY: TLongEdit
+            Left = 195
+            Height = 21
+            Top = 120
+            Width = 56
+            TabOrder = 3
+            OnChange = GregChange
+            Value = 0
+          end
+          object GregM: TLongEdit
+            Left = 256
+            Height = 21
+            Hint = '1..12'
+            Top = 120
+            Width = 36
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 4
+            OnChange = GregChange
+            Value = 1
+            MinValue = 1
+            MaxValue = 12
+          end
+          object GregD: TLongEdit
+            Left = 296
+            Height = 21
+            Hint = '1..31'
+            Top = 120
+            Width = 40
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 5
+            OnChange = GregChange
+            Value = 1
+            MinValue = 1
+            MaxValue = 31
+          end
+          object ButtonDefGreg: TButton
+            Left = 341
+            Height = 25
+            Top = 118
+            Width = 66
+            Caption = 'Default'
+            OnClick = ButtonDefGregClick
+            TabOrder = 6
+          end
         end
         object LongEdit2: TLongEdit
           Left = 230
-          Height = 23
+          Height = 21
           Hint = '10..86400'
           Top = 56
           Width = 41
@@ -263,7 +317,7 @@ object f_config_time: Tf_config_time
           end
           object JDEdit: TFloatEdit
             Left = 54
-            Height = 23
+            Height = 21
             Top = 99
             Width = 131
             TabOrder = 13
@@ -373,7 +427,7 @@ object f_config_time: Tf_config_time
           end
           object d_monthEdit: TEdit
             Left = 136
-            Height = 23
+            Height = 21
             Top = 22
             Width = 47
             OnChange = DateEditChange
@@ -381,7 +435,7 @@ object f_config_time: Tf_config_time
           end
           object d_month: TUpDown
             Left = 183
-            Height = 23
+            Height = 21
             Top = 22
             Width = 13
             Associate = d_monthEdit
@@ -395,7 +449,7 @@ object f_config_time: Tf_config_time
           end
           object d_dayEdit: TEdit
             Left = 195
-            Height = 23
+            Height = 21
             Top = 22
             Width = 47
             OnChange = DateEditChange
@@ -403,7 +457,7 @@ object f_config_time: Tf_config_time
           end
           object d_day: TUpDown
             Left = 242
-            Height = 23
+            Height = 21
             Top = 22
             Width = 13
             Associate = d_dayEdit
@@ -417,7 +471,7 @@ object f_config_time: Tf_config_time
           end
           object t_hourEdit: TEdit
             Left = 56
-            Height = 23
+            Height = 21
             Top = 65
             Width = 47
             OnChange = TimeEditChange
@@ -425,7 +479,7 @@ object f_config_time: Tf_config_time
           end
           object t_hour: TUpDown
             Left = 103
-            Height = 23
+            Height = 21
             Top = 65
             Width = 13
             Associate = t_hourEdit
@@ -439,7 +493,7 @@ object f_config_time: Tf_config_time
           end
           object t_minEdit: TEdit
             Left = 127
-            Height = 23
+            Height = 21
             Top = 65
             Width = 47
             OnChange = TimeEditChange
@@ -447,7 +501,7 @@ object f_config_time: Tf_config_time
           end
           object t_min: TUpDown
             Left = 174
-            Height = 23
+            Height = 21
             Top = 65
             Width = 13
             Associate = t_minEdit
@@ -461,7 +515,7 @@ object f_config_time: Tf_config_time
           end
           object t_sec: TUpDown
             Left = 242
-            Height = 23
+            Height = 21
             Top = 65
             Width = 13
             Associate = t_secEdit
@@ -475,7 +529,7 @@ object f_config_time: Tf_config_time
           end
           object t_secEdit: TEdit
             Left = 195
-            Height = 23
+            Height = 21
             Top = 65
             Width = 47
             OnChange = TimeEditChange
@@ -492,7 +546,7 @@ object f_config_time: Tf_config_time
           end
           object d_yearEdit: TLongEdit
             Left = 56
-            Height = 23
+            Height = 21
             Hint = '0..200000'
             Top = 22
             Width = 68
@@ -522,9 +576,9 @@ object f_config_time: Tf_config_time
         end
         object CheckBox1: TCheckBox
           Left = 40
-          Height = 23
+          Height = 26
           Top = 24
-          Width = 120
+          Width = 123
           Caption = 'Use system time'
           OnClick = CheckBox1Click
           TabOrder = 0
@@ -542,8 +596,8 @@ object f_config_time: Tf_config_time
       end
       object Page2: TTabSheet
         Caption = 'Simulation'
-        ClientHeight = 526
-        ClientWidth = 496
+        ClientHeight = 530
+        ClientWidth = 500
         object stepreset: TSpeedButton
           Left = 220
           Height = 25
@@ -828,8 +882,8 @@ object f_config_time: Tf_config_time
       end
       object Page3: TTabSheet
         Caption = 'Animation'
-        ClientHeight = 526
-        ClientWidth = 496
+        ClientHeight = 530
+        ClientWidth = 500
         object GroupBox1: TGroupBox
           Left = 6
           Height = 80
