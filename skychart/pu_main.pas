@@ -1295,6 +1295,8 @@ if (cfgm.starshape_file<>'')and(FileExists(utf8tosys(cfgm.starshape_file))) then
 end;
 if VerboseMsg then
  WriteTrace('Timezone');
+ def_cfgsc.tz.GregorianStart:=GregorianStart;
+ def_cfgsc.tz.GregorianStartJD:=GregorianStartJD;
  def_cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
  if def_cfgsc.tz.TimeZoneFile='' then firstuse:=true;
  if firstuse then begin
@@ -5004,6 +5006,8 @@ for i:=1 to numobjectbar do configobjectbar.Add(standardobjectbar[i]);
 for i:=1 to numstandardleftbar do configleftbar.Add(standardleftbar[i]);
 for i:=1 to numstandardrightbar do configrightbar.Add(standardrightbar[i]);
 Fscript[0].ScriptFilename:=slash(ScriptDir)+'ObserverTool.cdcps';
+GregorianStart:=DefaultGregorianStart;
+GregorianStartJD:=DefaultGregorianStartJD;
 end;
 
 procedure Tf_main.ReadDefault;
@@ -5470,6 +5474,8 @@ except
 end;
 end;
 try
+csc.tz.GregorianStart:=GregorianStart;
+csc.tz.GregorianStartJD:=GregorianStartJD;
 csc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
 csc.tz.JD:=jd(csc.CurYear,csc.CurMonth,csc.CurDay,csc.CurTime);
 csc.TimeZone:=csc.tz.SecondsOffset/3600;
@@ -5730,6 +5736,8 @@ InitialChartNum:=ReadInteger(section,'NumChart',0);
 f_detail.Width:=ReadInteger(section,'Detail_Width',f_detail.Width);
 f_detail.Height:=ReadInteger(section,'Detail_Height',f_detail.Height);
 ScriptPanel.Width:=ReadInteger(section,'ScriptWidth',ScriptPanel.Width);
+GregorianStart:=ReadInteger(section,'GregorianStart',GregorianStart);
+GregorianStartJD:=ReadInteger(section,'GregorianStartJD',GregorianStartJD);
 except
   ShowError('Error reading '+filename+' main');
 end;
@@ -6533,6 +6541,8 @@ WriteInteger(section,'NumChart',MultiFrame1.ChildCount);
 WriteInteger(section,'Detail_Width',f_detail.Width);
 WriteInteger(section,'Detail_Height',f_detail.Height);
 WriteInteger(section,'ScriptWidth',ScriptPanel.Width);
+WriteInteger(section,'GregorianStart',GregorianStart);
+WriteInteger(section,'GregorianStartJD',GregorianStartJD);
 
 section:='catalog';
 for i:=1 to maxstarcatalog do begin

@@ -82,6 +82,7 @@ type
       fZoneTabCoord: TStringList;
       fZoneTabZone: TStringList;
       fZoneTabComment: TStringList;
+      fGregorianStart, fGregorianStartJD: integer;
       num_transitions,
       num_leaps,
       num_types    : longint;
@@ -90,6 +91,8 @@ type
       types        : pttinfo;
       zone_names   : pchar;
       leaps        : pleap;
+      function Cjd(annee,mois,jour :INTEGER; Heure:double):double;
+      PROCEDURE Djd(jd:Double;VAR annee,mois,jour:INTEGER; VAR Heure:double);
       procedure GetLocalTimezone(timer:longint;var leap_correct,leap_hit:longint);
       procedure GetLocalTimezone(timer:longint);
       function find_transition(timer:longint):pttinfo;
@@ -124,6 +127,8 @@ type
       property ZoneTabComment: TStringList read fZoneTabComment;
       property NowLocalTime: TDateTime read GetNowLocalTime;
       property NowUTC: TDateTime read GetNowUTC;
+      property GregorianStart: integer read fGregorianStart write fGregorianStart;
+      property GregorianStartJD: integer read fGregorianStartJD write fGregorianStartJD;
      end;
 
 const
@@ -138,11 +143,11 @@ const
 
 implementation
 
-function Cjd(annee,mois,jour :INTEGER; Heure:double):double;
+function TCdCTimeZone.Cjd(annee,mois,jour :INTEGER; Heure:double):double;
 var u,u0,u1,u2 : double;
 	gregorian : boolean;
 begin
-if annee*10000+mois*100+jour >= 15821015 then gregorian:=true else gregorian:=false;
+if annee*10000+mois*100+jour >= FGregorianStart then gregorian:=true else gregorian:=false;
 u:=annee;
 if mois<3 then u:=u-1;
 u0:=u+4712;
@@ -157,12 +162,12 @@ if gregorian then begin
 end;
 end;
 
-PROCEDURE Djd(jd:Double;VAR annee,mois,jour:INTEGER; VAR Heure:double);
+PROCEDURE TCdCTimeZone.Djd(jd:Double;VAR annee,mois,jour:INTEGER; VAR Heure:double);
 var u0,u1,u2,u3,u4 : double;
 	gregorian : boolean;
 begin
 u0:=jd+0.5;
-if int(u0)>=2299161 then gregorian:=true else gregorian:=false;
+if int(u0)>=FGregorianStartJD then gregorian:=true else gregorian:=false;
 u0:=jd+32082.5;
 if gregorian then begin
    u1:=u0+floor(u0/36525)-floor(u0/146100)-38;
@@ -204,6 +209,8 @@ begin
   fZoneTabZone:=TStringList.Create;
   fZoneTabComment:=TStringList.Create;
   fTimeZoneFile:='';
+  fGregorianStart:=15821015;
+  fGregorianStartJD:=2299161;
   ReadTimezoneFile(GetTimezoneFile);
   GetLocalTimezone(round((now-UnixDateDelta)*24*3600));
 end;
