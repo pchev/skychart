@@ -132,6 +132,7 @@ Procedure GetXplanet(Xplanetversion,originfile,searchdir,bsize,outfile : string;
 function VisibleControlCount(obj:TWinControl):integer;
 procedure SetMenuAccelerator(Amenu: TMenuItem; level: integer; var AccelList: array of string);
 procedure ISleep(milli:integer);
+function CompareVersion(v1,v2: string):integer;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -2576,6 +2577,47 @@ begin
     sleep(10);
     Application.ProcessMessages;
   until now>tx;
+end;
+
+
+function CompareVersion(v1,v2: string):integer;
+// +1 if v2>v1
+//  0 if v2=v1
+// -1 if v2<v1
+var major1,minor1,rev1: integer;
+    beta1: boolean;
+    major2,minor2,rev2: integer;
+    beta2: boolean;
+  function NextNum(var str: string; sep:char): integer;
+  var p:integer;
+      txt:string;
+  begin
+    p:=Pos(sep,str);
+    if p>0 then begin
+      txt:=Copy(str,1,p-1);
+      Delete(str,1,p);
+      result:=StrToIntDef(txt,0);
+    end
+    else result:=0;
+  end;
+begin
+  beta1:=Pos('-svn-',v1)>0;
+  beta2:=Pos('-svn-',v2)>0;
+  if beta1 then v1:=StringReplace(v1,'-svn-','-',[]);
+  if beta2 then v2:=StringReplace(v2,'-svn-','-',[]);
+  major1:=NextNum(v1,'.');
+  minor1:=NextNum(v1,'-');
+  rev1:=StrToIntDef(v1,0);
+  major2:=NextNum(v2,'.');
+  minor2:=NextNum(v2,'-');
+  rev2:=StrToIntDef(v2,0);
+  if (major2>major1) then result:=1
+  else if (major2<major1) then result:=-1
+  else if (minor2>minor1) then result:=1
+  else if (minor2<minor1) then result:=-1
+  else if (rev2>rev1) then result:=1
+  else if (rev2<rev1) then result:=-1
+  else result:=0;
 end;
 
 end.

@@ -1,12 +1,12 @@
 object f_main: Tf_main
-  Left = 217
-  Height = 800
+  Left = 211
+  Height = 611
   Top = 124
-  Width = 1280
+  Width = 876
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 781
-  ClientWidth = 1280
+  ClientHeight = 592
+  ClientWidth = 876
   KeyPreview = True
   Menu = MainMenu1
   OnActivate = FormActivate
@@ -20,12 +20,12 @@ object f_main: Tf_main
   LCLVersion = '1.2.4.0'
   object PanelLeft: TPanel
     Left = 0
-    Height = 667
+    Height = 478
     Top = 80
     Width = 28
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 667
+    ClientHeight = 478
     ClientWidth = 28
     Font.Height = 10
     FullRepaint = False
@@ -33,7 +33,7 @@ object f_main: Tf_main
     TabOrder = 1
     object ToolBarLeft: TToolBar
       Left = 0
-      Height = 667
+      Height = 478
       Top = 0
       Width = 28
       Align = alClient
@@ -50,19 +50,19 @@ object f_main: Tf_main
     end
   end
   object PanelRight: TPanel
-    Left = 1252
-    Height = 667
+    Left = 848
+    Height = 478
     Top = 80
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 667
+    ClientHeight = 478
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBarRight: TToolBar
       Left = 0
-      Height = 667
+      Height = 478
       Top = 0
       Width = 28
       Align = alClient
@@ -87,12 +87,12 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 747
-    Width = 1280
+    Top = 558
+    Width = 876
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 34
-    ClientWidth = 1280
+    ClientWidth = 876
     FullRepaint = False
     TabOrder = 4
     object Shape1: TShape
@@ -142,30 +142,30 @@ object f_main: Tf_main
       Left = 222
       Height = 34
       Top = 0
-      Width = 1058
+      Width = 654
       Align = alClient
       Alignment = taLeftJustify
       BevelOuter = bvNone
       ClientHeight = 34
-      ClientWidth = 1058
+      ClientWidth = 654
       FullRepaint = False
       TabOrder = 1
       object LPanels1: TPanel
         Left = 0
         Height = 34
         Top = 0
-        Width = 1058
+        Width = 654
         Align = alClient
         Alignment = taLeftJustify
         BevelOuter = bvNone
         ClientHeight = 34
-        ClientWidth = 1058
+        ClientWidth = 654
         TabOrder = 0
         object P1L1: TLabel
           Left = 0
           Height = 34
           Top = 0
-          Width = 1058
+          Width = 654
           Align = alClient
           AutoSize = False
           ParentColor = False
@@ -177,11 +177,11 @@ object f_main: Tf_main
     Left = 0
     Height = 80
     Top = 0
-    Width = 1280
+    Width = 876
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 80
-    ClientWidth = 1280
+    ClientWidth = 876
     FullRepaint = False
     TabOrder = 0
     TabStop = True
@@ -189,7 +189,7 @@ object f_main: Tf_main
       Left = 0
       Height = 25
       Top = 30
-      Width = 1280
+      Width = 876
       ButtonHeight = 24
       ButtonWidth = 24
       Caption = 'Main bar'
@@ -200,7 +200,7 @@ object f_main: Tf_main
       TabStop = True
       Wrapable = False
       object ChildControl: TPanel
-        Left = 1250
+        Left = 846
         Height = 23
         Top = 2
         Width = 30
@@ -275,7 +275,7 @@ object f_main: Tf_main
       Left = 0
       Height = 30
       Top = 0
-      Width = 1280
+      Width = 876
       TabStop = False
       OnChange = TabControl1Change
       Align = alTop
@@ -286,7 +286,7 @@ object f_main: Tf_main
       Left = 0
       Height = 27
       Top = 53
-      Width = 1280
+      Width = 876
       Align = alBottom
       ButtonHeight = 24
       ButtonWidth = 24
@@ -3277,7 +3277,7 @@ object f_main: Tf_main
   end
   object ScriptPanel: TPanel
     Left = 28
-    Height = 667
+    Height = 478
     Top = 80
     Width = 276
     Align = alLeft
@@ -3287,7 +3287,7 @@ object f_main: Tf_main
   end
   object Splitter1: TSplitter
     Left = 304
-    Height = 667
+    Height = 478
     Top = 80
     Width = 5
     ResizeStyle = rsLine
@@ -7479,6 +7479,25 @@ object f_main: Tf_main
       end
       object N10: TMenuItem
         Caption = '-'
+      end
+    end
+    object SubUpdate: TMenuItem
+      Caption = 'Update'
+      object MenuUpdSoft: TMenuItem
+        Caption = 'Search software update'
+        OnClick = MenuUpdSoftClick
+      end
+      object MenuUpdComet: TMenuItem
+        Caption = 'Comet elements'
+        OnClick = MenuUpdCometClick
+      end
+      object MenuUpdAsteroid: TMenuItem
+        Caption = 'Asteroid elements'
+        OnClick = MenuUpdAsteroidClick
+      end
+      object MenuUpdSatellite: TMenuItem
+        Caption = 'Artificial satellites'
+        OnClick = MenuUpdSatelliteClick
       end
     end
     object SubHelp: TMenuItem

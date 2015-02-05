@@ -49,6 +49,11 @@ type
 
   Tf_main = class(TForm)
     ContainerPanel: TPanel;
+    MenuUpdSatellite: TMenuItem;
+    MenuUpdSoft: TMenuItem;
+    MenuUpdComet: TMenuItem;
+    MenuUpdAsteroid: TMenuItem;
+    SubUpdate: TMenuItem;
     MenuMousemode: TMenuItem;
     MenuScaleMode: TMenuItem;
     N20: TMenuItem;
@@ -459,6 +464,10 @@ type
     procedure MenuEditToolbarClick(Sender: TObject);
     procedure MenuToolboxConfigClick(Sender: TObject);
     procedure MenuToolboxClick(Sender: TObject);
+    procedure MenuUpdAsteroidClick(Sender: TObject);
+    procedure MenuUpdCometClick(Sender: TObject);
+    procedure MenuUpdSatelliteClick(Sender: TObject);
+    procedure MenuUpdSoftClick(Sender: TObject);
     procedure MouseModeExecute(Sender: TObject);
     procedure MultiFrame1CreateChild(Sender: TObject);
     procedure MultiFrame1DeleteChild(Sender: TObject);
@@ -660,7 +669,7 @@ type
     procedure SetupCatalogPage(page:integer);
     procedure SetupChartPage(page:integer);
     procedure ApplyConfigChart(Sender: TObject);
-    procedure SetupSolsysPage(page:integer);
+    procedure SetupSolsysPage(page:integer; directdownload:boolean=false);
     procedure ApplyConfigSolsys(Sender: TObject);
     procedure SetupSystemPage(page:integer);
     procedure ApplyConfigSystem(Sender: TObject);
@@ -1423,7 +1432,7 @@ begin
     buf:=slash(HelpDir)+'releasenotes.txt';
  if fileexists(buf) then begin
     f_info.setpage(3);
-    f_info.TitlePanel.Caption:=f_info.TitlePanel.Caption+', '+cdcversion+'-'+RevisionStr;
+    f_info.TitlePanel.Caption:=f_info.TitlePanel.Caption+', '+rsVersion+blank+cdcversion+'-'+RevisionStr;
     if shownext then f_info.Button1.caption:=rsNext
                 else f_info.Button1.caption:=rsClose;
     f_info.InfoMemo.Lines.LoadFromFile(buf);
@@ -3504,7 +3513,7 @@ begin
  SetupSolsysPage(0);
 end;
 
-procedure Tf_main.SetupSolsysPage(page:integer);
+procedure Tf_main.SetupSolsysPage(page:integer; directdownload:boolean=false);
 begin
 if ConfigSolsys=nil then begin
    ConfigSolsys:=Tf_configsolsys.Create(self);
@@ -3527,9 +3536,31 @@ cfgm.persdir:=privatedir;
 ConfigSolsys.f_config_solsys1.cmain.Assign(cfgm);
 formpos(ConfigSolsys,mouse.cursorpos.x,mouse.cursorpos.y);
 ConfigSolsys.f_config_solsys1.PageControl1.PageIndex:=page;
-ConfigSolsys.showmodal;
-if ConfigSolsys.ModalResult=mrOK then begin
- activateconfig(ConfigSolsys.f_config_solsys1.cmain,ConfigSolsys.f_config_solsys1.csc,ConfigSolsys.f_config_solsys1.ccat,ConfigSolsys.f_config_solsys1.cshr,ConfigSolsys.f_config_solsys1.cplot,nil,false);
+if directdownload then begin
+   case page of
+     2: begin
+          ConfigSolsys.f_config_solsys1.ComPageControl.PageIndex:=1;
+          ConfigSolsys.f_config_solsys1.ConfirmDownload:=false;
+          ConfigSolsys.show;
+          Application.ProcessMessages;
+          ConfigSolsys.f_config_solsys1.DownloadComet.Click;
+          RefreshAllChild(false);
+        end;
+     3: begin
+          ConfigSolsys.f_config_solsys1.AstPageControl.PageIndex:=1;
+          ConfigSolsys.f_config_solsys1.ConfirmDownload:=false;
+          ConfigSolsys.show;
+          ConfigSolsys.f_config_solsys1.DownloadAsteroid.Click;
+          RecomputeAsteroid;
+          RefreshAllChild(false);
+        end;
+   end;
+end
+else begin
+   ConfigSolsys.showmodal;
+   if ConfigSolsys.ModalResult=mrOK then begin
+     activateconfig(ConfigSolsys.f_config_solsys1.cmain,ConfigSolsys.f_config_solsys1.csc,ConfigSolsys.f_config_solsys1.ccat,ConfigSolsys.f_config_solsys1.cshr,ConfigSolsys.f_config_solsys1.cplot,nil,false);
+   end;
 end;
 ConfigSolsys.Free;
 ConfigSolsys:=nil;
@@ -8845,6 +8876,95 @@ procedure Tf_main.MenuToolboxClick(Sender: TObject);
 begin
 if Sender is TMenuItem then
   ShowScriptPanel(TMenuItem(Sender).tag,false);
+end;
+
+procedure Tf_main.MenuUpdAsteroidClick(Sender: TObject);
+begin
+   SetupSolsysPage(3,true);
+end;
+
+procedure Tf_main.MenuUpdCometClick(Sender: TObject);
+begin
+   SetupSolsysPage(2,true);
+end;
+
+procedure Tf_main.MenuUpdSatelliteClick(Sender: TObject);
+begin
+  if not f_calendar.Visible then begin
+    if MultiFrame1.ActiveObject is Tf_chart then f_calendar.config.Assign(Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc)
+       else f_calendar.config.Assign(def_cfgsc);
+  end;
+  f_calendar.AzNorth:=catalog.cfgshr.AzNorth;
+  formpos(f_calendar,mouse.cursorpos.x,mouse.cursorpos.y);
+  f_calendar.show;
+  f_calendar.bringtofront;
+  f_calendar.PageControl1.PageIndex:=6;
+  f_calendar.Button3.Click;
+end;
+
+procedure Tf_main.MenuUpdSoftClick(Sender: TObject);
+var ver,newver,newbeta,fn: string;
+    beta:boolean;
+    dl:TDownloadDialog;
+    f: textfile;
+begin
+ ver:=cdcversion+'-'+RevisionStr;
+ beta:=Pos('-svn-',ver)>0;
+ dl:=TDownloadDialog.Create(self);
+  if cfgm.HttpProxy then begin
+    dl.SocksProxy:='';
+    dl.SocksType:='';
+    dl.HttpProxy:=cfgm.ProxyHost;
+    dl.HttpProxyPort:=cfgm.ProxyPort;
+    dl.HttpProxyUser:=cfgm.ProxyUser;
+    dl.HttpProxyPass:=cfgm.ProxyPass;
+ end else if cfgm.SocksProxy then begin
+    dl.HttpProxy:='';
+    dl.SocksType:=cfgm.SocksType;
+    dl.SocksProxy:=cfgm.ProxyHost;
+    dl.HttpProxyPort:=cfgm.ProxyPort;
+    dl.HttpProxyUser:=cfgm.ProxyUser;
+    dl.HttpProxyPass:=cfgm.ProxyPass;
+ end else begin
+    dl.SocksProxy:='';
+    dl.SocksType:='';
+    dl.HttpProxy:='';
+    dl.HttpProxyPort:='';
+    dl.HttpProxyUser:='';
+    dl.HttpProxyPass:='';
+ end;
+ dl.URL:='http://www.ap-i.net/pub/skychart/version.txt';
+ fn:=slash(TempDir)+'version.txt';
+ dl.SaveToFile:=fn;
+ dl.ConfirmDownload:=false;
+ if dl.Execute and FileExists(fn) then begin
+    AssignFile(f,fn);
+    reset(f);
+    readln(f,newver);
+    Closefile(f);
+ end;
+ dl.URL:='http://www.ap-i.net/pub/skychart/beta.txt';
+ fn:=slash(TempDir)+'beta.txt';
+ dl.SaveToFile:=fn;
+ dl.ConfirmDownload:=false;
+ if dl.Execute and FileExists(fn) then begin
+    AssignFile(f,fn);
+    reset(f);
+    readln(f,newbeta);
+    Closefile(f);
+ end;
+ dl.free;
+ if CompareVersion(ver,newver)>0 then begin
+    if MessageDlg('New version available', 'A new version '+newver+' of Skychart is available.'+crlf+'Do you want to download it now?', mtInformation, mbYesNo, 0)=mrYes then begin
+       ExecuteFile('http://www.ap-i.net/skychart/en/download');
+    end;
+ end
+ else if CompareVersion(ver,newbeta)>0 then begin
+    if MessageDlg('New beta version', 'A new beta version '+newbeta+' of Skychart is available.'+crlf+'Do you want to download it now?', mtInformation, mbYesNo, 0)=mrYes then begin
+       ExecuteFile('http://sourceforge.net/projects/skychart/files/0-beta/');
+    end;
+ end
+ else ShowMessage('You already have the latest available version!');
 end;
 
 procedure Tf_main.ToolBarFOVResize(Sender: TObject);
