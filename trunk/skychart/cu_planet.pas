@@ -1914,7 +1914,7 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
         qry:='SELECT a.id,a.h,a.g,a.epoch,a.mean_anomaly,a.arg_perihelion,a.asc_node,a.inclination,a.eccentricity,a.semi_axis,a.ref,a.name,a.equinox'
             +' FROM cdc_ast_elem a, cdc_ast_mag b'
             +' where b.mag<='+inttostr(lmag)
-            +' and b.jd='+formatfloat(f1,jd1)
+            +' and b.jd='+trim(formatfloat(f6s,jd1))
             +' and a.id=b.id'
             +' and a.epoch=b.epoch';
         db1.CallBackOnly:=true;
@@ -1977,7 +1977,7 @@ begin
              if dist<NEO_dist then nea:=1 else nea:=0;
              qry:='INSERT INTO '+ast_daypos+' (id,epoch,ra,de,mag,near_earth) VALUES ('
                  +'"'+id+'"'
-                 +',"'+formatfloat(f1,epoch)+'"'
+                 +',"'+trim(formatfloat(f6s,epoch))+'"'
                  +',"'+inttostr(ira)+'"'
                  +',"'+inttostr(idec)+'"'
                  +',"'+inttostr(imag)+'"'
@@ -2288,7 +2288,7 @@ if cdb.GetAstElemEpoch(id,cfgsc.CurJDTT,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,e
        imag:=round(mag*10);
        qry:='INSERT INTO '+cfgsc.ast_daypos+' (id,epoch,ra,de,mag) VALUES ('
             +'"'+id+'"'
-            +',"'+formatfloat(f1,epoch)+'"'
+            +',"'+trim(formatfloat(f6s,epoch))+'"'
             +',"'+inttostr(ira)+'"'
             +',"'+inttostr(idec)+'"'
             +',"'+inttostr(imag)+'")';

@@ -46,7 +46,7 @@ type
 {$i revision.inc}
 
 const
-  cdcversion = 'Version 3.11-svn';
+  cdcversion = '3.11-svn';
   cdcver = '3.11h';
   cdccpy = 'Copyright (C) 2002-2014 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf +
@@ -341,6 +341,7 @@ const
   f4 = '0.0000';
   f5 = '0.00000';
   f6 = '0.000000';
+  f6s = '0.######';
   f9 = '0.000000000';
   f13 = '0.0000000000000';
   s6 = '+0.000000;-0.000000;+0.000000';

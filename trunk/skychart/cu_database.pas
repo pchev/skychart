@@ -1071,7 +1071,7 @@ try
 qry:='SELECT id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id'
     +' from cdc_ast_elem '
     +' where id="'+id+'"'
-    +' and epoch='+formatfloat(f1,epoch);
+    +' and epoch='+trim(formatfloat(f6s,epoch));
 db.Query(qry);
 if db.rowcount>0 then begin
   if not trystrtofloat(trim(db.Results[0][1]),h) then h:=17;
