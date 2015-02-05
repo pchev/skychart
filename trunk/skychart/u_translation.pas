@@ -1555,6 +1555,7 @@ resourcestring
   rsScriptIsAlre = 'Script is already assigned to %s are you sure you want to duplicate it to %s ?';
   rsShow0Horizon = 'Show 0d horizon line';
   rsSetOptionsFo = 'Set options for best performance';
+  rsVersion = 'Version';
 
 // also update upsi_translation
 

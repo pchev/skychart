@@ -75,7 +75,7 @@ end;
 
 procedure Tf_splash.FormCreate(Sender: TObject);
 begin
-label2.caption:=cdcversion;
+label2.caption:=rsVersion+blank+cdcversion;
 if pos('svn',cdcversion)>0 then begin
    label2.Caption:=label2.Caption+RevisionStr;
    LabelDate.caption:=compile_time;

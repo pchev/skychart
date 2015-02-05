@@ -269,6 +269,7 @@ type
     FPrepareAsteroid: TPrepareAsteroid;
     FApplyConfig: TNotifyEvent;
     LockChange: boolean;
+    FConfirmDownload: Boolean;
     procedure ShowPlanet;
     procedure ShowComet;
     procedure UpdComList;
@@ -297,6 +298,7 @@ type
     procedure SetLang;
     procedure LoadSampleData;
     procedure ActivateJplEph;
+    property ConfirmDownload: Boolean read FConfirmDownload write FConfirmDownload;
     property onShowDB: TNotifyEvent read FShowDB write FShowDB;
     property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
@@ -467,6 +469,7 @@ begin
  cplot:=mycplot;
  cmain:=mycmain;
  inherited Create(AOwner);
+  FConfirmDownload:=true;
   SetLang;
   LockChange:=true;
   ComboBox1.Clear;
@@ -621,7 +624,7 @@ begin
          DownloadDialog1.SaveToFile:=fn+'.gz'
        else
          DownloadDialog1.SaveToFile:=fn;
-       DownloadDialog1.ConfirmDownload:=true;
+       DownloadDialog1.ConfirmDownload:=FConfirmDownload;
     end else begin
        tfn:=fn;
        if gzfile then
@@ -808,7 +811,7 @@ begin
     MemoCom.Lines.Add(Format(rsDownload2, [DownloadDialog1.URL]));
     if i=1 then begin
        DownloadDialog1.SaveToFile:=fn;
-       DownloadDialog1.ConfirmDownload:=true;
+       DownloadDialog1.ConfirmDownload:=FConfirmDownload;
     end else begin
        DownloadDialog1.SaveToFile:=tmpfn;
        DownloadDialog1.ConfirmDownload:=false;
