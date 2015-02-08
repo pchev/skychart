@@ -48,6 +48,8 @@ fi
 echo $lastrev ' - ' $currentrev
 if [[ $lastrev -ne $currentrev ]]; then
 
+echo $version-svn-$currentrev > beta.txt
+
 # delete old files
   rm skychart*.xz
   rm skychart*.deb
