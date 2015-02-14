@@ -777,7 +777,7 @@ type
     procedure SetScriptMenuCaption;
     procedure ShowScriptPanel(n:integer); overload;
     procedure ShowScriptPanel(n:integer; showonly:boolean); overload;
-    procedure ViewToolsBar;
+    procedure ViewToolsBar(ForceVisible:boolean);
     Procedure InitDS2000;
     function PrepareAsteroid(jd1,jd2,step:double; msg:Tstrings):boolean;
     procedure RecomputeAsteroid;
@@ -4143,15 +4143,16 @@ if i=0 then PanelTop.visible:=false
    else begin
      PanelTop.visible:=true;
      PanelTop.Height:=i+2;
-   end;  
+   end;
+FormResize(nil);
 end;
 
-procedure Tf_main.ViewToolsBar;
+procedure Tf_main.ViewToolsBar(ForceVisible:boolean);
 begin
-MenuViewMainBar.checked:= (VisibleControlCount(ToolBarMain)>0);
-MenuViewObjectBar.checked:= (VisibleControlCount(ToolBarObj)>0);
-MenuViewLeftBar.checked:= (VisibleControlCount(ToolBarLeft)>0);
-MenuViewRightBar.checked:= (VisibleControlCount(ToolBarRight)>0);
+MenuViewMainBar.checked:= (VisibleControlCount(ToolBarMain)>0) and (ForceVisible or MenuViewMainBar.checked);
+MenuViewObjectBar.checked:= (VisibleControlCount(ToolBarObj)>0) and (ForceVisible or MenuViewObjectBar.checked);
+MenuViewLeftBar.checked:= (VisibleControlCount(ToolBarLeft)>0) and (ForceVisible or MenuViewLeftBar.checked);
+MenuViewRightBar.checked:= (VisibleControlCount(ToolBarRight)>0) and (ForceVisible or MenuViewRightBar.checked);
 MenuViewToolsBar.checked:=MenuViewMainBar.checked and MenuViewObjectBar.checked and MenuViewLeftBar.checked and MenuViewRightBar.checked and MenuViewStatusBar.checked;
 ToolBarMain.visible:=MenuViewMainBar.checked;
 ToolBarObj.visible:=MenuViewObjectBar.checked;
@@ -8832,7 +8833,7 @@ f_edittoolbar.LoadToolbar(2,configleftbar);
 f_edittoolbar.LoadToolbar(3,configrightbar);
 f_edittoolbar.ActivateToolbar;
 // show all the configured bar
-ViewToolsBar;
+ViewToolsBar(false);
 end;
 
 procedure Tf_main.MenuEditToolbarClick(Sender: TObject);
@@ -8855,7 +8856,7 @@ begin
     numleftbar:=configleftbar.Count;
     numrightbar:=configrightbar.Count;
     // show all the configured bar
-    ViewToolsBar;
+    ViewToolsBar(true);
  end;
 end;
 

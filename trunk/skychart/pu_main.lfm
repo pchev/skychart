@@ -18,6 +18,132 @@ object f_main: Tf_main
   OnShow = FormShow
   ParentFont = True
   LCLVersion = '1.2.4.0'
+  object PanelTop: TPanel
+    Left = 0
+    Height = 80
+    Top = 0
+    Width = 876
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 80
+    ClientWidth = 876
+    FullRepaint = False
+    TabOrder = 0
+    TabStop = True
+    object ToolBarMain: TToolBar
+      Left = 0
+      Height = 25
+      Top = 30
+      Width = 876
+      ButtonHeight = 24
+      ButtonWidth = 24
+      Caption = 'Main bar'
+      Images = ImageNormal
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      TabStop = True
+      Wrapable = False
+      object ChildControl: TPanel
+        Left = 846
+        Height = 23
+        Top = 2
+        Width = 30
+        Align = alRight
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 23
+        ClientWidth = 30
+        TabOrder = 0
+        object BtnRestoreChild: TSpeedButton
+          Left = 0
+          Height = 15
+          Top = 0
+          Width = 15
+          Flat = True
+          Glyph.Data = {
+            C2010000424DC20100000000000036000000280000000B0000000B0000000100
+            1800000000008C01000064000000640000000000000000000000C0C0C0C0C0C0
+            C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0000000C0C0
+            C0000000000000000000000000000000000000C0C0C0C0C0C0C0C0C0C0C0C000
+            0000C0C0C0000000C0C0C0C0C0C0C0C0C0C0C0C0000000C0C0C0C0C0C0C0C0C0
+            C0C0C0000000C0C0C0000000C0C0C0C0C0C0C0C0C0C0C0C0000000C0C0C0C0C0
+            C0C0C0C0C0C0C0000000C0C0C0000000C0C0C0C0C0C0C0C0C0C0C0C000000000
+            0000000000C0C0C0C0C0C0000000C0C0C0000000000000000000000000000000
+            000000C0C0C0000000C0C0C0C0C0C0000000C0C0C00000000000000000000000
+            00000000000000C0C0C0000000C0C0C0C0C0C0000000C0C0C0C0C0C0C0C0C000
+            0000C0C0C0C0C0C0C0C0C0C0C0C0000000C0C0C0C0C0C0000000C0C0C0C0C0C0
+            C0C0C0000000000000000000000000000000000000C0C0C0C0C0C0000000C0C0
+            C0C0C0C0C0C0C0000000000000000000000000000000000000C0C0C0C0C0C000
+            0000C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0000000
+          }
+          Transparent = False
+          OnClick = BtnRestoreChildClick
+        end
+        object BtnCloseChild: TSpeedButton
+          Left = 15
+          Height = 15
+          Top = 0
+          Width = 15
+          Flat = True
+          Glyph.Data = {
+            C2010000424DC20100000000000036000000280000000B0000000B0000000100
+            1800000000008C01000064000000640000000000000000000000C0C0C0C0C0C0
+            C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0000000C0C0
+            C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C000
+            0000C0C0C0C0C0C0000000000000C0C0C0C0C0C0C0C0C0000000000000C0C0C0
+            C0C0C0000000C0C0C0C0C0C0000000000000000000C0C0C00000000000000000
+            00C0C0C0C0C0C0000000C0C0C0C0C0C0C0C0C000000000000000000000000000
+            0000C0C0C0C0C0C0C0C0C0000000C0C0C0C0C0C0C0C0C0C0C0C0000000000000
+            000000C0C0C0C0C0C0C0C0C0C0C0C0000000C0C0C0C0C0C0C0C0C00000000000
+            00000000000000000000C0C0C0C0C0C0C0C0C0000000C0C0C0C0C0C000000000
+            0000000000C0C0C0000000000000000000C0C0C0C0C0C0000000C0C0C0C0C0C0
+            000000000000C0C0C0C0C0C0C0C0C0000000000000C0C0C0C0C0C0000000C0C0
+            C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C000
+            0000C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
+            C0C0C0000000
+          }
+          Transparent = False
+          OnClick = BtnCloseChildClick
+        end
+      end
+      object Divider_ToolBarMain_end: TToolButton
+        Left = 1
+        Top = 2
+        Width = 5
+        Caption = 'Divider_ToolBarMain_end'
+        Style = tbsDivider
+      end
+    end
+    object TabControl1: TTabControl
+      Left = 0
+      Height = 30
+      Top = 0
+      Width = 876
+      TabStop = False
+      OnChange = TabControl1Change
+      Align = alTop
+      TabOrder = 2
+      Visible = False
+    end
+    object ToolBarObj: TToolBar
+      Left = 0
+      Height = 27
+      Top = 53
+      Width = 876
+      Align = alBottom
+      ButtonHeight = 24
+      ButtonWidth = 24
+      Caption = 'Object bar'
+      EdgeBorders = [ebTop, ebBottom]
+      Images = ImageNormal
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      Wrapable = False
+    end
+  end
   object PanelLeft: TPanel
     Left = 0
     Height = 478
@@ -171,132 +297,6 @@ object f_main: Tf_main
           ParentColor = False
         end
       end
-    end
-  end
-  object PanelTop: TPanel
-    Left = 0
-    Height = 80
-    Top = 0
-    Width = 876
-    Align = alTop
-    BevelOuter = bvNone
-    ClientHeight = 80
-    ClientWidth = 876
-    FullRepaint = False
-    TabOrder = 0
-    TabStop = True
-    object ToolBarMain: TToolBar
-      Left = 0
-      Height = 25
-      Top = 30
-      Width = 876
-      ButtonHeight = 24
-      ButtonWidth = 24
-      Caption = 'Main bar'
-      Images = ImageNormal
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 0
-      TabStop = True
-      Wrapable = False
-      object ChildControl: TPanel
-        Left = 846
-        Height = 23
-        Top = 2
-        Width = 30
-        Align = alRight
-        AutoSize = True
-        BevelOuter = bvNone
-        ClientHeight = 23
-        ClientWidth = 30
-        TabOrder = 0
-        object BtnRestoreChild: TSpeedButton
-          Left = 0
-          Height = 15
-          Top = 0
-          Width = 15
-          Flat = True
-          Glyph.Data = {
-            C2010000424DC20100000000000036000000280000000B0000000B0000000100
-            1800000000008C01000064000000640000000000000000000000C0C0C0C0C0C0
-            C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0000000C0C0
-            C0000000000000000000000000000000000000C0C0C0C0C0C0C0C0C0C0C0C000
-            0000C0C0C0000000C0C0C0C0C0C0C0C0C0C0C0C0000000C0C0C0C0C0C0C0C0C0
-            C0C0C0000000C0C0C0000000C0C0C0C0C0C0C0C0C0C0C0C0000000C0C0C0C0C0
-            C0C0C0C0C0C0C0000000C0C0C0000000C0C0C0C0C0C0C0C0C0C0C0C000000000
-            0000000000C0C0C0C0C0C0000000C0C0C0000000000000000000000000000000
-            000000C0C0C0000000C0C0C0C0C0C0000000C0C0C00000000000000000000000
-            00000000000000C0C0C0000000C0C0C0C0C0C0000000C0C0C0C0C0C0C0C0C000
-            0000C0C0C0C0C0C0C0C0C0C0C0C0000000C0C0C0C0C0C0000000C0C0C0C0C0C0
-            C0C0C0000000000000000000000000000000000000C0C0C0C0C0C0000000C0C0
-            C0C0C0C0C0C0C0000000000000000000000000000000000000C0C0C0C0C0C000
-            0000C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
-            C0C0C0000000
-          }
-          Transparent = False
-          OnClick = BtnRestoreChildClick
-        end
-        object BtnCloseChild: TSpeedButton
-          Left = 15
-          Height = 15
-          Top = 0
-          Width = 15
-          Flat = True
-          Glyph.Data = {
-            C2010000424DC20100000000000036000000280000000B0000000B0000000100
-            1800000000008C01000064000000640000000000000000000000C0C0C0C0C0C0
-            C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0000000C0C0
-            C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C000
-            0000C0C0C0C0C0C0000000000000C0C0C0C0C0C0C0C0C0000000000000C0C0C0
-            C0C0C0000000C0C0C0C0C0C0000000000000000000C0C0C00000000000000000
-            00C0C0C0C0C0C0000000C0C0C0C0C0C0C0C0C000000000000000000000000000
-            0000C0C0C0C0C0C0C0C0C0000000C0C0C0C0C0C0C0C0C0C0C0C0000000000000
-            000000C0C0C0C0C0C0C0C0C0C0C0C0000000C0C0C0C0C0C0C0C0C00000000000
-            00000000000000000000C0C0C0C0C0C0C0C0C0000000C0C0C0C0C0C000000000
-            0000000000C0C0C0000000000000000000C0C0C0C0C0C0000000C0C0C0C0C0C0
-            000000000000C0C0C0C0C0C0C0C0C0000000000000C0C0C0C0C0C0000000C0C0
-            C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C000
-            0000C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0
-            C0C0C0000000
-          }
-          Transparent = False
-          OnClick = BtnCloseChildClick
-        end
-      end
-      object Divider_ToolBarMain_end: TToolButton
-        Left = 1
-        Top = 2
-        Width = 5
-        Caption = 'Divider_ToolBarMain_end'
-        Style = tbsDivider
-      end
-    end
-    object TabControl1: TTabControl
-      Left = 0
-      Height = 30
-      Top = 0
-      Width = 876
-      TabStop = False
-      OnChange = TabControl1Change
-      Align = alTop
-      TabOrder = 2
-      Visible = False
-    end
-    object ToolBarObj: TToolBar
-      Left = 0
-      Height = 27
-      Top = 53
-      Width = 876
-      Align = alBottom
-      ButtonHeight = 24
-      ButtonWidth = 24
-      Caption = 'Object bar'
-      EdgeBorders = [ebTop, ebBottom]
-      Images = ImageNormal
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 1
-      Wrapable = False
     end
   end
   object MultiFrame1: TMultiFrame
