@@ -483,11 +483,13 @@ procedure Tf_edittoolbar.ActivateToolbar;
 var i,j,k,n,m,p,lpos,w,h: integer;
     b: TToolButton;
     act: string;
+    visiblebar:boolean;
 begin
 if (numeditbar>0) and  (numaction>0) then begin
   for p:=0 to numeditbar-1 do begin
     lpos:=0; // first button to the left
     // clear bar
+    visiblebar:=editbar[p].Visible;
     editbar[p].Visible:=false;
     editbar[p].BeginUpdate;
     for i:=editbar[p].ButtonCount-1 downto 0 do begin
@@ -501,7 +503,7 @@ if (numeditbar>0) and  (numaction>0) then begin
       editbar[p].Controls[i].Parent:=FDisabledContainer;
     end;
     editbar[p].EndUpdate;
-    editbar[p].Visible:=true;
+    editbar[p].Visible:=visiblebar;
     editbar[p].BeginUpdate;
     // add buttons
     for i:=0 to ToolbarTreeview[p].Items.Count-1 do begin
