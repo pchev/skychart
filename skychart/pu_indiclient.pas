@@ -455,7 +455,7 @@ var svp:ISwitchVectorProperty;
 begin
  if ready then begin
    IUResetSwitch(oncoordset_prop);
-   setslew_prop.s:=ISS_ON;
+   settrack_prop.s:=ISS_ON;
    client.sendNewSwitch(oncoordset_prop);
    coord_ra.value:=ra;
    coord_dec.value:=de;
