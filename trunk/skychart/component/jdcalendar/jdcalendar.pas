@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  SysUtils, Classes, Dialogs, LCLType, Grids, StdCtrls,
+  SysUtils, Classes, Dialogs, LCLType, Grids, StdCtrls, LCLVersion,
   Controls, ExtCtrls, Types, GraphType, Graphics, Forms, Buttons, MaskEdit,
   Math, LResources, EditBtn, enhedits;
 
@@ -138,7 +138,7 @@ type
 
   { TJDDatePicker }
 
- {$IF (FPC_VERSION = 2) and (FPC_RELEASE < 7)}
+ {$if (lcl_major<2) and (lcl_minor<3)}
   TJDDatePicker = class(TEditButton)
  {$ELSE}
   TJDDatePicker = class(TCustomEditButton)
@@ -149,7 +149,7 @@ type
     Fcaption: string;
     procedure UpdDate;
   protected
-    {$IF (FPC_VERSION = 2) and (FPC_RELEASE < 7)}
+    {$if (lcl_major<2) and (lcl_minor<3)}
     procedure DoButtonClick(Sender: TObject); override;
     {$ELSE}
     procedure ButtonClick(Sender: TObject);
@@ -818,7 +818,7 @@ begin
   Color := clBtnFace;
   ReadOnly := True;
   Button.Glyph.LoadFromLazarusResource('BtnDatePicker');
-  {$IF (FPC_VERSION = 2) and (FPC_RELEASE < 7)}
+  {$if (lcl_major<2) and (lcl_minor<3)}
   Button.OnClick := @DoButtonClick;
   {$ELSE}
   Button.OnClick := @ButtonClick;
@@ -832,7 +832,7 @@ begin
   inherited Destroy;
 end;
 
-{$IF (FPC_VERSION = 2) and (FPC_RELEASE < 7)}
+{$if (lcl_major<2) and (lcl_minor<3)}
 procedure TJDDatePicker.DoButtonClick(Sender: TObject);//or onClick
 {$ELSE}
 procedure TJDDatePicker.ButtonClick(Sender: TObject);//or onClick
@@ -840,7 +840,7 @@ procedure TJDDatePicker.ButtonClick(Sender: TObject);//or onClick
 var
   CD: TJDCalendarDialog;
 begin
-  {$IF (FPC_VERSION = 2) and (FPC_RELEASE < 7)}
+  {$if (lcl_major<2) and (lcl_minor<3)}
   inherited DoButtonClick(Sender);
   {$ELSE}
   inherited ButtonClick;
