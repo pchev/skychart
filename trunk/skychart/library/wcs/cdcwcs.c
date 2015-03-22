@@ -148,3 +148,19 @@ p->n = offscale;
 return(offscale);
 }
 
+int cdcwcs_xy2sky ( p,  wcsnum )
+struct cdcCoord *p;
+{
+double ra, dec, x, y;
+if (wcs[wcsnum] != NULL ) {
+  x = p->x;
+  y = p->y;
+  
+  pix2wcs (wcs[wcsnum], x, y, &ra, &dec);
+  
+  p->ra = ra;
+  p->de = dec;
+}
+return(wcs[wcsnum]->offscl);
+}
+
