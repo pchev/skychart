@@ -115,6 +115,7 @@ type
     function WaitBusy(tvp: ITextVectorProperty; timeout:integer=5000):boolean;
     function WaitBusy(svp: ISwitchVectorProperty; timeout:integer=5000):boolean;
     property Timeout : integer read FTimeout write FTimeout;
+    property Terminated;
     property Connected: boolean read FConnected;
     property ErrorDesc : string read FErrorDesc;
     property RecvData : string read FRecvData;
