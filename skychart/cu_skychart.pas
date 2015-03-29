@@ -891,7 +891,7 @@ end;
             if cfgsc.ApparentPos then apparent_equatorial(v1,v2,cfgsc,true,true);
             cfgsc.racentre:=v1;
             cfgsc.decentre:=v2;
-            cfgsc.fov:=FFits.Img_Width;
+            cfgsc.fov:=1.25*FFits.Img_Width;
             ScaleWindow(cfgsc);
          end;
          end;
