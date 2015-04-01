@@ -630,6 +630,7 @@ begin
           str1:=TStringStream.Create(string(cnode.NodeValue));
           b64str:=TBase64DecodingStream.Create(str1);
           try
+          blobEL.blob.Clear;
           blobEL.blob.Position:=0;
           blobEL.blob.CopyFrom(b64str,b64str.Size);
           blobEL.bloblen:=blobEL.blob.Size;
