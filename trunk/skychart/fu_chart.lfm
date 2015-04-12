@@ -23,10 +23,10 @@ object f_chart: Tf_chart
     OnResize = ChartResize
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 488
-      Height = 318
+      Left = 489
+      Height = 319
       Top = 0
-      Width = 16
+      Width = 15
       Align = alRight
       Kind = sbVertical
       LargeChange = 10
@@ -39,8 +39,8 @@ object f_chart: Tf_chart
     object HorScrollBar: TScrollBar
       Cursor = crArrow
       Left = 0
-      Height = 16
-      Top = 318
+      Height = 15
+      Top = 319
       Width = 504
       Align = alBottom
       LargeChange = 10
@@ -448,6 +448,7 @@ object f_chart: Tf_chart
       end
       object MenuAddToObsList: TMenuItem
         Caption = 'Add object'
+        ShortCut = 49231
         OnClick = MenuAddToObsListClick
       end
     end

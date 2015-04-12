@@ -28,6 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses  u_help, u_translation, u_constant, u_util, u_projection, cu_planet,
+  pu_tour,
   Math, Classes, SysUtils, FileUtil, Forms, Controls, Graphics,
   Dialogs, ExtCtrls, Grids, EditBtn, StdCtrls, Menus, ComCtrls;
 
@@ -40,6 +41,8 @@ type
 
   Tf_obslist = class(TForm)
     Button1: TButton;
+    BtnTour: TButton;
+    ButtonLoad: TButton;
     Panel1: TPanel;
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
@@ -55,11 +58,10 @@ type
     Button5: TButton;
     Button6: TButton;
     AirmassCombo: TComboBox;
-    CheckBox1: TCheckBox;
-    CheckBox2: TCheckBox;
-    CheckBox3: TCheckBox;
-    CheckBox4: TCheckBox;
-    CheckBox5: TCheckBox;
+    LimitAirmassTonight: TCheckBox;
+    LimitAirmassNow: TCheckBox;
+    LimitHourangleTonight: TCheckBox;
+    LimitHourangleNow: TCheckBox;
     Edit1: TEdit;
     FileNameEdit1: TFileNameEdit;
     Label1: TLabel;
@@ -78,19 +80,18 @@ type
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     procedure AirmassComboChange(Sender: TObject);
+    procedure BtnTourClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure ButtonLoadClick(Sender: TObject);
     procedure ButtonSaveClick(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
     procedure ButtonClearClick(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
-    procedure CheckBox1Change(Sender: TObject);
-    procedure CheckBox2Change(Sender: TObject);
-    procedure CheckBox3Change(Sender: TObject);
-    procedure CheckBox4Change(Sender: TObject);
-    procedure CheckBox5Change(Sender: TObject);
-    procedure FileNameEdit1AcceptFileName(Sender: TObject; var Value: String);
-    procedure FileNameEdit1EditingDone(Sender: TObject);
+    procedure LimitAirmassTonightChange(Sender: TObject);
+    procedure LimitAirmassNowChange(Sender: TObject);
+    procedure LimitHourangleTonightChange(Sender: TObject);
+    procedure LimitHourangleNowChange(Sender: TObject);
     procedure HourAngleComboChange(Sender: TObject);
     procedure MenuDeleteClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -118,20 +119,26 @@ type
     procedure UpdAllCoordClick(Sender: TObject);
   private
     { private declarations }
-    title,FDefaultList,FListName: string;
+    title,FDefaultList,FListName,FObjName: string;
     Faltitude: double;
     FMeridianSide: integer;
     gridchanged, limitairmass,limittransit,locktogglebox,locknewlist: boolean;
     ClickCol,ClickRow: integer;
-    FSelectObject: TSelectObject;
+    FSelectObject,FSlew: TSelectObject;
     FGetObjectCoord: TGetObjectCoord;
     FObjLabelChange: TNotifyEvent;
     FObjLabels,FEmptyObjLabels: TStringList;
+    tour: Tf_tour;
     function GetObjcount : integer;
     function GetRowcount : integer;
     procedure SetMeridianSide(value:integer);
     procedure SetLimitType(value:integer);
     function GetLimitType: integer;
+    procedure TourFirst(Sender: TObject);
+    procedure TourLast(Sender: TObject);
+    procedure TourPrev(Sender: TObject);
+    procedure TourNext(Sender: TObject);
+    procedure TourSlew(Sender: TObject);
   public
     { public declarations }
     cfgsc: Tconf_skychart;
@@ -165,6 +172,7 @@ type
     property onSelectObject: TSelectObject read FSelectObject write FSelectObject;
     property onGetObjectCoord: TGetObjectCoord read FGetObjectCoord write FGetObjectCoord;
     property onObjLabelChange: TNotifyEvent read FObjLabelChange write FObjLabelChange;
+    property onSlew: TSelectObject read FSlew write FSlew;
   end;
 
 var
@@ -195,9 +203,8 @@ begin
   UpdAllCoord.Caption:=rsUpdateCoordi;
   ToggleBox1.Caption:=rsAirmass;
   Label1.Caption:=rsLimit;
-  CheckBox1.Caption:=rsOnlyObjectsW;
-  CheckBox2.Caption:=rsOnlyObjectsW2;
-  CheckBox3.Caption:=rsMarkObjectsO;
+  LimitAirmassTonight.Caption:=rsOnlyObjectsW;
+  LimitAirmassNow.Caption:=rsOnlyObjectsW2;
   NoFilterList.Caption:=rsAlwaysShowTh;
   NoFilterList.Hint:=rsBewareThisOp;
   ToggleBox2.Caption:=rsTransit;
@@ -207,8 +214,8 @@ begin
   RadioButton1.Caption:=rsEastSide;
   RadioButton2.Caption:=rsCrossMeridia;
   RadioButton3.Caption:=rsWestSide;
-  CheckBox4.Caption:=rsOnlyObjectsW3;
-  CheckBox5.Caption:=rsOnlyObjectsW4;
+  LimitHourangleTonight.Caption:=rsOnlyObjectsW3;
+  LimitHourangleNow.Caption:=rsOnlyObjectsW4;
   MenuView.Caption:=rsViewOnChart;
   MenuUpdcoord.Caption:=rsUpdateCoordi;
   MenuDelete.Caption:=rsDelete;
@@ -356,14 +363,13 @@ for i:=1 to StringGrid1.RowCount-1 do
 end;
 
 procedure Tf_obslist.SelectRow(r: integer);
-var buf: string;
-    ra,de: double;
+var ra,de: double;
 begin
 StringGrid1.Row:=r;
-buf:=trim(StringGrid1.Cells[1,r]);
+FObjName:=trim(StringGrid1.Cells[1,r]);
 ra:=StrToFloatDef(trim(StringGrid1.Cells[2,r]),-1);
 de:=StrToFloatDef(trim(StringGrid1.Cells[3,r]),0);
-if (ra>=0) and assigned(FSelectObject) then FSelectObject(buf,ra,de);
+if (ra>=0) and assigned(FSelectObject) then FSelectObject(FObjName,ra,de);
 end;
 
 function Tf_obslist.FirstObj: boolean;
@@ -448,7 +454,7 @@ var ok: boolean;
     cr1,cr2,t1,t2: double;
     astrom,nautm,civm,cive,naute,astroe: double;
 begin
- if (limitairmass and CheckBox1.Checked) or (limittransit and CheckBox4.Checked) then begin
+ if (limitairmass and LimitAirmassTonight.Checked) or (limittransit and LimitHourangleTonight.Checked) then begin
    planet.Twilight(cfgsc.jd0,cfgsc.ObsLatitude,cfgsc.ObsLongitude,astrom,nautm,civm,cive,naute,astroe);
    if abs(astrom)<90 then begin
      cr1:=rmod(astroe+cfgsc.TimeZone+24,24);
@@ -463,12 +469,12 @@ begin
      cr2:=24;
    end;
  end;
- if (limitairmass and CheckBox2.Checked) or (limittransit and CheckBox5.Checked) then begin
+ if (limitairmass and LimitAirmassNow.Checked) or (limittransit and LimitHourangleNow.Checked) then begin
    cr1:=cfgsc.CurTime;
    cr2:=cr1;
  end;
  for i:=1 to StringGrid1.RowCount-1 do begin
-     if (limitairmass and (CheckBox1.Checked or CheckBox2.Checked)) or (limittransit and (CheckBox4.Checked or CheckBox5.Checked)) then begin
+     if (limitairmass and (LimitAirmassTonight.Checked or LimitAirmassNow.Checked)) or (limittransit and (LimitHourangleTonight.Checked or LimitHourangleNow.Checked)) then begin
        if cr1<0 then
             ok:=false
        else begin
@@ -504,17 +510,15 @@ var i: integer;
     lbl:string;
 begin
 FObjLabels.Clear;
-if CheckBox3.Checked then begin
-  FObjLabels.Sorted:=False;
-  for i:=1 to StringGrid1.RowCount-1 do begin
-     if StringGrid1.RowHeights[i]>0 then begin
-       lbl:=trim(StringGrid1.Cells[7,i]);
-       if lbl<>'' then FObjLabels.Add(uppercase(nospace(lbl)));
-     end;
-  end;
-  FObjLabels.Sorted:=True;
+FObjLabels.Sorted:=False;
+for i:=1 to StringGrid1.RowCount-1 do begin
+   if StringGrid1.RowHeights[i]>0 then begin
+     lbl:=trim(StringGrid1.Cells[7,i]);
+     if lbl<>'' then FObjLabels.Add(uppercase(nospace(lbl)));
+   end;
 end;
-if ((sender=CheckBox3)or CheckBox3.Checked) and Assigned(FObjLabelChange) then FObjLabelChange(self);
+FObjLabels.Sorted:=True;
+if Assigned(FObjLabelChange) then FObjLabelChange(self);
 end;
 
 procedure Tf_obslist.ComputeLimits;
@@ -893,21 +897,12 @@ PageControl1.ActivePageIndex:=1;
 locktogglebox:=false;
 end;
 
-procedure Tf_obslist.FileNameEdit1AcceptFileName(Sender: TObject; var Value: String);
+procedure Tf_obslist.ButtonLoadClick(Sender: TObject);
 begin
-if locknewlist then exit;
-if FileNameEdit1.FileName=Value then exit;
-FileNameEdit1.FileName:=Value;
-FileNameEdit1.InitialDir:=ExtractFilePath(FileNameEdit1.FileName);
-if assigned(cfgsc) then LoadObsList;
-end;
-
-procedure Tf_obslist.FileNameEdit1EditingDone(Sender: TObject);
-begin
-if locknewlist then exit;
-if FileNameEdit1.FileName=FListName then exit;
-FileNameEdit1.InitialDir:=ExtractFilePath(FileNameEdit1.FileName);
-if assigned(cfgsc) then LoadObsList;
+ if locknewlist then exit;
+ //if FileNameEdit1.FileName=FListName then exit;
+ FileNameEdit1.InitialDir:=ExtractFilePath(FileNameEdit1.FileName);
+ if assigned(cfgsc) then LoadObsList;
 end;
 
 procedure Tf_obslist.ButtonSaveClick(Sender: TObject);
@@ -935,11 +930,30 @@ end;
 Refresh;
 end;
 
+procedure Tf_obslist.BtnTourClick(Sender: TObject);
+begin
+  tour:=Tf_tour.Create(self);
+  tour.onFirst:=@TourFirst;
+  tour.onLast:=@TourLast;
+  tour.onPrev:=@TourPrev;
+  tour.onNext:=@TourNext;
+  tour.onSlew:=@TourSlew;
+  tour.TourName.Caption:=Edit1.Text;
+  tour.ObjectName.Caption:=FObjName;
+  visible:=false;
+  tour.Show;
+  while tour.Visible do begin
+    sleep(100);
+    Application.ProcessMessages;
+  end;
+  tour.Free;
+  visible:=true
+end;
+
 procedure Tf_obslist.Button1Click(Sender: TObject);
 begin
   ShowHelp;
 end;
-
 
 procedure Tf_obslist.HourAngleComboChange(Sender: TObject);
 var ha:double;
@@ -983,28 +997,17 @@ begin
  NextObj;
 end;
 
-procedure Tf_obslist.CheckBox1Change(Sender: TObject);
+procedure Tf_obslist.LimitAirmassTonightChange(Sender: TObject);
 begin
- if CheckBox1.Checked then CheckBox2.Checked:=false;
+ if LimitAirmassTonight.Checked then LimitAirmassNow.Checked:=false;
  SetVisibleRows;
 end;
 
-procedure Tf_obslist.CheckBox2Change(Sender: TObject);
+procedure Tf_obslist.LimitAirmassNowChange(Sender: TObject);
 begin
- if CheckBox2.Checked then CheckBox1.Checked:=false;
-  RefreshTimer.Enabled:=(CheckBox2.Checked or CheckBox5.Checked);
+ if LimitAirmassNow.Checked then LimitAirmassTonight.Checked:=false;
+  RefreshTimer.Enabled:=(LimitAirmassNow.Checked or LimitHourangleNow.Checked);
  SetVisibleRows;
-end;
-
-procedure Tf_obslist.CheckBox3Change(Sender: TObject);
-begin
-  if CheckBox3.Checked then begin
-    NoFilterList.Enabled:=true;
-  end else begin
-    NoFilterList.Checked:=false;
-    NoFilterList.Enabled:=false;
-  end;
-  UpdateLabels(Sender);
 end;
 
 procedure Tf_obslist.NoFilterListChange(Sender: TObject);
@@ -1012,17 +1015,52 @@ begin
  UpdateLabels(Sender);
 end;
 
-procedure Tf_obslist.CheckBox4Change(Sender: TObject);
+procedure Tf_obslist.LimitHourangleTonightChange(Sender: TObject);
 begin
- if CheckBox4.Checked then CheckBox5.Checked:=false;
+ if LimitHourangleTonight.Checked then LimitHourangleNow.Checked:=false;
  SetVisibleRows;
 end;
 
-procedure Tf_obslist.CheckBox5Change(Sender: TObject);
+procedure Tf_obslist.LimitHourangleNowChange(Sender: TObject);
 begin
- if CheckBox5.Checked then CheckBox4.Checked:=false;
- RefreshTimer.Enabled:=(CheckBox2.Checked or CheckBox5.Checked);
+ if LimitHourangleNow.Checked then LimitHourangleTonight.Checked:=false;
+ RefreshTimer.Enabled:=(LimitAirmassNow.Checked or LimitHourangleNow.Checked);
  SetVisibleRows;
+end;
+
+procedure Tf_obslist.TourFirst(Sender: TObject);
+begin
+ FirstObj;
+ tour.ObjectName.Caption:=FObjName;
+end;
+
+procedure Tf_obslist.TourLast(Sender: TObject);
+begin
+  LastObj;
+  tour.ObjectName.Caption:=FObjName;
+end;
+
+procedure Tf_obslist.TourPrev(Sender: TObject);
+begin
+  PrevObj;
+  tour.ObjectName.Caption:=FObjName;
+end;
+
+procedure Tf_obslist.TourNext(Sender: TObject);
+begin
+  NextObj;
+  tour.ObjectName.Caption:=FObjName;
+end;
+
+procedure Tf_obslist.TourSlew(Sender: TObject);
+var ra,de: double;
+    r: integer;
+begin
+r:=StringGrid1.Row;
+FObjName:=trim(StringGrid1.Cells[1,r]);
+ra:=StrToFloatDef(trim(StringGrid1.Cells[2,r]),-1);
+de:=StrToFloatDef(trim(StringGrid1.Cells[3,r]),0);
+if (ra>=0) and assigned(FSlew) then FSlew(FObjName,ra,de);
 end;
 
 

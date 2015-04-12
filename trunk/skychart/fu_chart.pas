@@ -4299,7 +4299,6 @@ end;
 function Tf_chart.cmd_ObslistLoad(fn: string): string;
 begin
 if (fn<>'')and(FileExists(fn)) then begin
-  f_obslist.CheckBox3.Checked:=true;
   f_obslist.FileNameEdit1.FileName:=SysToUTF8(fn);
   f_obslist.LoadObsList;
   result:=msgOK;
@@ -4348,11 +4347,11 @@ var ok: boolean;
 begin
 ok:=(onoff='ON');
 if f_obslist.LimitType=0 then begin
-  f_obslist.CheckBox1.Checked:=false;
-  f_obslist.CheckBox2.Checked:=ok;
+  f_obslist.LimitAirmassTonight.Checked:=false;
+  f_obslist.LimitAirmassNow.Checked:=ok;
 end else begin
-  f_obslist.CheckBox4.Checked:=false;
-  f_obslist.CheckBox5.Checked:=ok;
+  f_obslist.LimitHourangleTonight.Checked:=false;
+  f_obslist.LimitHourangleNow.Checked:=ok;
 end;
 f_obslist.Refresh;
 result:=msgOK;

@@ -52,9 +52,6 @@
             <Verbosity>
               <ShowHints Value="False"/>
             </Verbosity>
-            <CompilerMessages>
-              <UseMsgFile Value="True"/>
-            </CompilerMessages>
             <CustomOptions Value="-CF64"/>
             <CompilerPath Value="$(CompPath)"/>
           </Other>
@@ -100,9 +97,6 @@
             <Verbosity>
               <ShowHints Value="False"/>
             </Verbosity>
-            <CompilerMessages>
-              <UseMsgFile Value="True"/>
-            </CompilerMessages>
             <CustomOptions Value="-CF64 -dUSEHEAPTRC"/>
             <CompilerPath Value="$(CompPath)"/>
           </Other>
@@ -147,9 +141,6 @@
             <Verbosity>
               <ShowHints Value="False"/>
             </Verbosity>
-            <CompilerMessages>
-              <UseMsgFile Value="True"/>
-            </CompilerMessages>
             <CustomOptions Value="-CF64"/>
             <CompilerPath Value="$(CompPath)"/>
           </Other>
@@ -191,9 +182,6 @@
             <Verbosity>
               <ShowHints Value="False"/>
             </Verbosity>
-            <CompilerMessages>
-              <UseMsgFile Value="True"/>
-            </CompilerMessages>
             <CustomOptions Value="-CF64"/>
             <CompilerPath Value="$(CompPath)"/>
           </Other>
@@ -239,9 +227,6 @@
             <Verbosity>
               <ShowHints Value="False"/>
             </Verbosity>
-            <CompilerMessages>
-              <UseMsgFile Value="True"/>
-            </CompilerMessages>
             <CustomOptions Value="-CF64"/>
             <CompilerPath Value="$(CompPath)"/>
           </Other>
@@ -287,9 +272,6 @@
             <Verbosity>
               <ShowHints Value="False"/>
             </Verbosity>
-            <CompilerMessages>
-              <UseMsgFile Value="True"/>
-            </CompilerMessages>
             <CustomOptions Value="-CF64"/>
             <CompilerPath Value="$(CompPath)"/>
           </Other>
@@ -398,16 +380,14 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item24>
     </RequiredPackages>
-    <Units Count="83">
+    <Units Count="84">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cdc"/>
       </Unit0>
       <Unit1>
         <Filename Value="u_satellite.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="u_satellite"/>
       </Unit1>
       <Unit2>
         <Filename Value="cu_database.pas"/>
@@ -422,22 +402,18 @@
       <Unit4>
         <Filename Value="cu_planet.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cu_planet"/>
       </Unit4>
       <Unit5>
         <Filename Value="cu_plot.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cu_plot"/>
       </Unit5>
       <Unit6>
         <Filename Value="cu_skychart.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cu_skychart"/>
       </Unit6>
       <Unit7>
         <Filename Value="cu_catalog.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cu_catalog"/>
       </Unit7>
       <Unit8>
         <Filename Value="pu_zoom.pas"/>
@@ -445,7 +421,6 @@
         <ComponentName Value="f_zoom"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_zoom"/>
       </Unit8>
       <Unit9>
         <Filename Value="pu_calendar.pas"/>
@@ -453,7 +428,6 @@
         <ComponentName Value="f_calendar"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_calendar"/>
       </Unit9>
       <Unit10>
         <Filename Value="fu_chart.pas"/>
@@ -469,7 +443,6 @@
         <ComponentName Value="f_detail"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_detail"/>
       </Unit11>
       <Unit12>
         <Filename Value="pu_getdss.pas"/>
@@ -477,7 +450,6 @@
         <ComponentName Value="f_getdss"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_getdss"/>
       </Unit12>
       <Unit13>
         <Filename Value="pu_image.pas"/>
@@ -485,7 +457,6 @@
         <ComponentName Value="f_image"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_image"/>
       </Unit13>
       <Unit14>
         <Filename Value="pu_info.pas"/>
@@ -493,7 +464,6 @@
         <ComponentName Value="f_info"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_info"/>
       </Unit14>
       <Unit15>
         <Filename Value="pu_manualtelescope.pas"/>
@@ -501,7 +471,6 @@
         <ComponentName Value="f_manualtelescope"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_manualtelescope"/>
       </Unit15>
       <Unit16>
         <Filename Value="pu_position.pas"/>
@@ -509,7 +478,6 @@
         <ComponentName Value="f_position"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_position"/>
       </Unit16>
       <Unit17>
         <Filename Value="pu_printsetup.pas"/>
@@ -517,7 +485,6 @@
         <ComponentName Value="f_printsetup"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_printsetup"/>
       </Unit17>
       <Unit18>
         <Filename Value="pu_search.pas"/>
@@ -525,12 +492,10 @@
         <ComponentName Value="f_search"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_search"/>
       </Unit18>
       <Unit19>
         <Filename Value="u_util.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="u_util"/>
       </Unit19>
       <Unit20>
         <Filename Value="u_constant.pas"/>
@@ -540,7 +505,6 @@
       <Unit21>
         <Filename Value="u_projection.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="u_projection"/>
       </Unit21>
       <Unit22>
         <Filename Value="pu_config_catalog.pas"/>
@@ -548,7 +512,6 @@
         <ComponentName Value="f_configcatalog"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_config_catalog"/>
       </Unit22>
       <Unit23>
         <Filename Value="pu_config_time.pas"/>
@@ -556,7 +519,6 @@
         <ComponentName Value="f_configtime"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_config_time"/>
       </Unit23>
       <Unit24>
         <Filename Value="pu_config_system.pas"/>
@@ -564,7 +526,6 @@
         <ComponentName Value="f_configsystem"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_config_system"/>
       </Unit24>
       <Unit25>
         <Filename Value="pu_config_pictures.pas"/>
@@ -572,7 +533,6 @@
         <ComponentName Value="f_configpictures"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_config_pictures"/>
       </Unit25>
       <Unit26>
         <Filename Value="pu_config_display.pas"/>
@@ -580,7 +540,6 @@
         <ComponentName Value="f_configdisplay"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_config_display"/>
       </Unit26>
       <Unit27>
         <Filename Value="pu_config_solsys.pas"/>
@@ -588,7 +547,6 @@
         <ComponentName Value="f_configsolsys"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_config_solsys"/>
       </Unit27>
       <Unit28>
         <Filename Value="pu_config_chart.pas"/>
@@ -596,7 +554,6 @@
         <ComponentName Value="f_configchart"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_config_chart"/>
       </Unit28>
       <Unit29>
         <Filename Value="pu_config_observatory.pas"/>
@@ -604,7 +561,6 @@
         <ComponentName Value="f_configobservatory"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_config_observatory"/>
       </Unit29>
       <Unit30>
         <Filename Value="pu_config_internet.pas"/>
@@ -612,7 +568,6 @@
         <ComponentName Value="f_configinternet"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_config_internet"/>
       </Unit30>
       <Unit31>
         <Filename Value="pu_catgen.pas"/>
@@ -620,7 +575,6 @@
         <ComponentName Value="f_catgen"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_catgen"/>
       </Unit31>
       <Unit32>
         <Filename Value="pu_catgenadv.pas"/>
@@ -628,7 +582,6 @@
         <ComponentName Value="f_catgenadv"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_catgenadv"/>
       </Unit32>
       <Unit33>
         <Filename Value="pu_progressbar.pas"/>
@@ -636,7 +589,6 @@
         <ComponentName Value="f_progress"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_progressbar"/>
       </Unit33>
       <Unit34>
         <Filename Value="pu_addlabel.pas"/>
@@ -644,7 +596,6 @@
         <ComponentName Value="f_addlabel"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_addlabel"/>
       </Unit34>
       <Unit35>
         <Filename Value="pu_print.pas"/>
@@ -652,7 +603,6 @@
         <ComponentName Value="f_print"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_print"/>
       </Unit35>
       <Unit36>
         <Filename Value="u_translation.pas"/>
@@ -665,7 +615,6 @@
         <ComponentName Value="f_about"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_about"/>
       </Unit37>
       <Unit38>
         <Filename Value="pu_splash.pas"/>
@@ -673,12 +622,10 @@
         <ComponentName Value="f_splash"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_splash"/>
       </Unit38>
       <Unit39>
         <Filename Value="cu_tz.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cu_tz"/>
       </Unit39>
       <Unit40>
         <Filename Value="pu_config.pas"/>
@@ -686,12 +633,10 @@
         <ComponentName Value="f_config"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_config"/>
       </Unit40>
       <Unit41>
         <Filename Value="u_help.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="u_help"/>
       </Unit41>
       <Unit42>
         <Filename Value="pu_clock.pas"/>
@@ -699,17 +644,14 @@
         <ComponentName Value="f_clock"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_clock"/>
       </Unit42>
       <Unit43>
         <Filename Value="u_unzip.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="u_unzip"/>
       </Unit43>
       <Unit44>
         <Filename Value="cu_tcpserver.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cu_tcpserver"/>
       </Unit44>
       <Unit45>
         <Filename Value="pu_indiclient.pas"/>
@@ -733,7 +675,6 @@
         <ComponentName Value="f_observatory_db"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_observatory_db"/>
       </Unit47>
       <Unit48>
         <Filename Value="pu_lx200client.pas"/>
@@ -741,17 +682,14 @@
         <ComponentName Value="pop_lx200"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_lx200client"/>
       </Unit48>
       <Unit49>
         <Filename Value="cu_lx200protocol.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cu_lx200protocol"/>
       </Unit49>
       <Unit50>
         <Filename Value="cu_serial.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cu_serial"/>
       </Unit50>
       <Unit51>
         <Filename Value="pu_encoderclient.pas"/>
@@ -759,17 +697,14 @@
         <ComponentName Value="pop_encoder"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_encoderclient"/>
       </Unit51>
       <Unit52>
         <Filename Value="cu_encoderprotocol.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cu_encoderprotocol"/>
       </Unit52>
       <Unit53>
         <Filename Value="cu_taki.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cu_taki"/>
       </Unit53>
       <Unit54>
         <Filename Value="pu_ascomclient.pas"/>
@@ -777,12 +712,10 @@
         <ComponentName Value="pop_scope"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_ascomclient"/>
       </Unit54>
       <Unit55>
         <Filename Value="uDE.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="uDE"/>
       </Unit55>
       <Unit56>
         <Filename Value="pu_voconfig.pas"/>
@@ -790,7 +723,6 @@
         <ComponentName Value="f_voconfig"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_voconfig"/>
       </Unit56>
       <Unit57>
         <Filename Value="pr_vodetail.pas"/>
@@ -798,7 +730,6 @@
         <ComponentName Value="f_vodetail"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pr_vodetail"/>
       </Unit57>
       <Unit58>
         <Filename Value="fu_config_time.pas"/>
@@ -806,7 +737,6 @@
         <ComponentName Value="f_config_time"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="fu_config_time"/>
       </Unit58>
       <Unit59>
         <Filename Value="fu_config_catalog.pas"/>
@@ -814,7 +744,6 @@
         <ComponentName Value="f_config_catalog"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="fu_config_catalog"/>
       </Unit59>
       <Unit60>
         <Filename Value="fu_config_chart.pas"/>
@@ -822,7 +751,6 @@
         <ComponentName Value="f_config_chart"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="fu_config_chart"/>
       </Unit60>
       <Unit61>
         <Filename Value="fu_config_display.pas"/>
@@ -830,7 +758,6 @@
         <ComponentName Value="f_config_display"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="fu_config_display"/>
       </Unit61>
       <Unit62>
         <Filename Value="fu_config_internet.pas"/>
@@ -838,7 +765,6 @@
         <ComponentName Value="f_config_internet"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="fu_config_internet"/>
       </Unit62>
       <Unit63>
         <Filename Value="fu_config_observatory.pas"/>
@@ -846,7 +772,6 @@
         <ComponentName Value="f_config_observatory"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="fu_config_observatory"/>
       </Unit63>
       <Unit64>
         <Filename Value="fu_config_pictures.pas"/>
@@ -862,7 +787,6 @@
         <ComponentName Value="f_config_solsys"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="fu_config_solsys"/>
       </Unit65>
       <Unit66>
         <Filename Value="fu_config_system.pas"/>
@@ -870,7 +794,6 @@
         <ComponentName Value="f_config_system"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="fu_config_system"/>
       </Unit66>
       <Unit67>
         <Filename Value="fu_config_calendar.pas"/>
@@ -878,7 +801,6 @@
         <ComponentName Value="f_config_calendar"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="fu_config_calendar"/>
       </Unit67>
       <Unit68>
         <Filename Value="pu_config_calendar.pas"/>
@@ -886,7 +808,6 @@
         <ComponentName Value="f_configcalendar"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_config_calendar"/>
       </Unit68>
       <Unit69>
         <Filename Value="pu_planetinfo.pas"/>
@@ -894,7 +815,6 @@
         <ComponentName Value="f_planetinfo"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_planetinfo"/>
       </Unit69>
       <Unit70>
         <Filename Value="pu_imglist.pas"/>
@@ -902,17 +822,14 @@
         <ComponentName Value="f_imglist"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_imglist"/>
       </Unit70>
       <Unit71>
         <Filename Value="cu_plansat.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cu_plansat"/>
       </Unit71>
       <Unit72>
         <Filename Value="cu_smallsat.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cu_smallsat"/>
       </Unit72>
       <Unit73>
         <Filename Value="pu_obslist.pas"/>
@@ -928,7 +845,6 @@
         <ComponentName Value="f_fov"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_fov"/>
       </Unit74>
       <Unit75>
         <Filename Value="pu_edittoolbar.pas"/>
@@ -936,7 +852,6 @@
         <ComponentName Value="f_edittoolbar"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_edittoolbar"/>
       </Unit75>
       <Unit76>
         <Filename Value="fu_script.pas"/>
@@ -944,7 +859,6 @@
         <ComponentName Value="f_script"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="fu_script"/>
       </Unit76>
       <Unit77>
         <Filename Value="pu_scriptengine.pas"/>
@@ -960,12 +874,10 @@
         <ComponentName Value="f_pascaleditor"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_pascaleditor"/>
       </Unit78>
       <Unit79>
         <Filename Value="upsi_checklst.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="uPSI_CheckLst"/>
       </Unit79>
       <Unit80>
         <Filename Value="upsi_translation.pas"/>
@@ -975,7 +887,6 @@
       <Unit81>
         <Filename Value="u_scriptsocket.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="u_scriptsocket"/>
       </Unit81>
       <Unit82>
         <Filename Value="pu_scriptconfig.pas"/>
@@ -983,8 +894,15 @@
         <ComponentName Value="f_scriptconfig"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_scriptconfig"/>
       </Unit82>
+      <Unit83>
+        <Filename Value="pu_tour.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_tour"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pu_tour"/>
+      </Unit83>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -1018,9 +936,6 @@
       <Verbosity>
         <ShowHints Value="False"/>
       </Verbosity>
-      <CompilerMessages>
-        <UseMsgFile Value="True"/>
-      </CompilerMessages>
       <CustomOptions Value="-CF64"/>
       <CompilerPath Value="$(CompPath)"/>
     </Other>
