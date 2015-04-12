@@ -1091,7 +1091,7 @@ type
     SampSubscribeCoord,SampSubscribeImage,SampSubscribeTable: boolean;
     ObsListLimitType,ObsListMeridianSide: integer;
     InitObsList,ObslistAirmass,ObslistHourAngle: string;
-    ObslistAirmassLimit1,ObslistAirmassLimit2,ObslistHourAngleLimit1,ObslistHourAngleLimit2,ObslistMark: boolean;
+    ObslistAirmassLimit1,ObslistAirmassLimit2,ObslistHourAngleLimit1,ObslistHourAngleLimit2: boolean;
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_main);
@@ -2633,7 +2633,6 @@ begin
   ObslistHourAngle:=Source.ObslistHourAngle;
   ObslistHourAngleLimit1:=Source.ObslistHourAngleLimit1;
   ObslistHourAngleLimit2:=Source.ObslistHourAngleLimit2;
-  ObslistMark:=Source.ObslistMark;
   SampAutoconnect:=Source.SampAutoconnect;
   SampKeepTables:=Source.SampKeepTables;
   SampKeepImages:=Source.SampKeepImages;

@@ -1441,7 +1441,6 @@ CL.AddConstantN('rsDoYouWantToS2','String').SetString(rsDoYouWantToS2);
 CL.AddConstantN('rsItTakeTooLon','String').SetString(rsItTakeTooLon);
 CL.AddConstantN('rsOnlyObjectsW','String').SetString(rsOnlyObjectsW);
 CL.AddConstantN('rsOnlyObjectsW2','String').SetString(rsOnlyObjectsW2);
-CL.AddConstantN('rsMarkObjectsO','String').SetString(rsMarkObjectsO);
 CL.AddConstantN('rsFirst','String').SetString(rsFirst);
 CL.AddConstantN('rsLast','String').SetString(rsLast);
 CL.AddConstantN('rsNext2','String').SetString(rsNext2);

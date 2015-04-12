@@ -1,7 +1,7 @@
 object f_obslist: Tf_obslist
-  Left = 402
+  Left = 189
   Height = 498
-  Top = 106
+  Top = 34
   Width = 800
   Caption = 'f_obslist'
   ClientHeight = 498
@@ -20,45 +20,35 @@ object f_obslist: Tf_obslist
     ClientWidth = 800
     TabOrder = 2
     object FileNameEdit1: TFileNameEdit
-      Left = 8
+      Left = 0
       Height = 21
-      Top = 5
+      Top = 3
       Width = 192
-      OnAcceptFileName = FileNameEdit1AcceptFileName
       FilterIndex = 0
       HideDirectories = False
       ButtonWidth = 23
       NumGlyphs = 1
       MaxLength = 0
       TabOrder = 0
-      OnEditingDone = FileNameEdit1EditingDone
+      OnChange = ButtonLoadClick
     end
     object ButtonSave: TButton
-      Left = 240
+      Left = 296
       Height = 25
-      Top = 5
+      Top = 3
       Width = 75
       Caption = 'Save'
       OnClick = ButtonSaveClick
       TabOrder = 1
     end
     object ButtonClear: TButton
-      Left = 352
+      Left = 376
       Height = 25
-      Top = 4
+      Top = 3
       Width = 75
       Caption = 'Clear'
       OnClick = ButtonClearClick
       TabOrder = 2
-    end
-    object CheckBox3: TCheckBox
-      Left = 448
-      Height = 26
-      Top = 4
-      Width = 176
-      Caption = 'Mark objects on the chart'
-      OnChange = CheckBox3Change
-      TabOrder = 3
     end
     object NoFilterList: TCheckBox
       Left = 448
@@ -69,7 +59,7 @@ object f_obslist: Tf_obslist
       OnChange = NoFilterListChange
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 5
+      TabOrder = 4
     end
     object UpdAllCoord: TButton
       Left = 240
@@ -78,15 +68,24 @@ object f_obslist: Tf_obslist
       Width = 187
       Caption = 'UpdAllCoord'
       OnClick = UpdAllCoordClick
-      TabOrder = 4
+      TabOrder = 3
     end
     object Button1: TButton
-      Left = 125
+      Left = 117
       Height = 25
       Top = 35
       Width = 75
       Caption = 'Help'
       OnClick = Button1Click
+      TabOrder = 5
+    end
+    object ButtonLoad: TButton
+      Left = 216
+      Height = 25
+      Top = 3
+      Width = 75
+      Caption = 'Load'
+      OnClick = ButtonLoadClick
       TabOrder = 6
     end
   end
@@ -153,16 +152,16 @@ object f_obslist: Tf_obslist
       Left = 8
       Height = 25
       Top = 40
-      Width = 80
+      Width = 40
       Caption = '<'
       OnClick = Button5Click
       TabOrder = 2
     end
     object Button6: TButton
-      Left = 104
+      Left = 56
       Height = 25
       Top = 40
-      Width = 80
+      Width = 40
       Caption = '>'
       OnClick = Button6Click
       TabOrder = 3
@@ -192,46 +191,46 @@ object f_obslist: Tf_obslist
       Height = 78
       Top = 1
       Width = 521
-      ActivePage = TabSheet1
+      ActivePage = TabSheet2
       Align = alRight
       Anchors = [akTop, akLeft, akBottom]
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 5
       OnChange = PageControl1Change
       object TabSheet1: TTabSheet
         Caption = 'Airmass'
         ClientHeight = 78
         ClientWidth = 521
-        object CheckBox2: TCheckBox
+        object LimitAirmassNow: TCheckBox
           Left = 16
-          Height = 26
+          Height = 24
           Top = 46
-          Width = 243
+          Width = 281
           Caption = 'Only objects within airmass limits now'
-          OnChange = CheckBox2Change
+          OnChange = LimitAirmassNowChange
           TabOrder = 2
         end
-        object CheckBox1: TCheckBox
+        object LimitAirmassTonight: TCheckBox
           Left = 16
-          Height = 26
+          Height = 24
           Top = 22
-          Width = 263
+          Width = 303
           Caption = 'Only objects within airmass limits tonight'
-          OnChange = CheckBox1Change
+          OnChange = LimitAirmassTonightChange
           TabOrder = 1
         end
         object Label2: TLabel
           Left = 192
-          Height = 15
+          Height = 17
           Top = 3
-          Width = 36
+          Width = 45
           Caption = 'Label2'
           ParentColor = False
         end
         object AirmassCombo: TComboBox
           Left = 112
-          Height = 21
+          Height = 29
           Top = 1
           Width = 72
           ItemHeight = 0
@@ -251,9 +250,9 @@ object f_obslist: Tf_obslist
         end
         object Label1: TLabel
           Left = 16
-          Height = 15
+          Height = 17
           Top = 3
-          Width = 29
+          Width = 35
           Caption = 'Limit'
           ParentColor = False
         end
@@ -262,26 +261,26 @@ object f_obslist: Tf_obslist
         Caption = 'Transit'
         ClientHeight = 78
         ClientWidth = 521
-        object CheckBox4: TCheckBox
+        object LimitHourangleTonight: TCheckBox
           Left = 144
-          Height = 23
+          Height = 26
           Top = 22
-          Width = 276
+          Width = 279
           Caption = 'Only objects within hour angle limits tonight'
-          OnChange = CheckBox4Change
+          OnChange = LimitHourangleTonightChange
           TabOrder = 2
         end
         object Label3: TLabel
           Left = 144
-          Height = 16
+          Height = 15
           Top = 3
-          Width = 30
+          Width = 29
           Caption = 'Limit'
           ParentColor = False
         end
         object HourAngleCombo: TComboBox
           Left = 240
-          Height = 23
+          Height = 21
           Top = 1
           Width = 72
           ItemHeight = 0
@@ -298,36 +297,36 @@ object f_obslist: Tf_obslist
         end
         object Label4: TLabel
           Left = 320
-          Height = 16
+          Height = 15
           Top = 3
-          Width = 34
+          Width = 33
           Caption = 'Hours'
           ParentColor = False
         end
-        object CheckBox5: TCheckBox
+        object LimitHourangleNow: TCheckBox
           Left = 144
-          Height = 23
+          Height = 26
           Top = 46
-          Width = 256
+          Width = 259
           Caption = 'Only objects within hour angle limits now'
-          OnChange = CheckBox5Change
+          OnChange = LimitHourangleNowChange
           TabOrder = 3
         end
         object Panel1: TPanel
           Left = 0
-          Height = 74
+          Height = 78
           Top = 0
           Width = 141
           Align = alLeft
           BevelOuter = bvLowered
-          ClientHeight = 74
+          ClientHeight = 78
           ClientWidth = 141
           TabOrder = 0
           object RadioButton1: TRadioButton
             Left = 2
-            Height = 23
+            Height = 26
             Top = 2
-            Width = 104
+            Width = 107
             Caption = 'RadioButton1'
             Checked = True
             OnClick = RadioGroup1Click
@@ -336,24 +335,33 @@ object f_obslist: Tf_obslist
           end
           object RadioButton2: TRadioButton
             Left = 2
-            Height = 23
+            Height = 26
             Top = 26
-            Width = 104
+            Width = 107
             Caption = 'RadioButton2'
             OnClick = RadioGroup1Click
             TabOrder = 1
           end
           object RadioButton3: TRadioButton
             Left = 2
-            Height = 23
+            Height = 26
             Top = 50
-            Width = 104
+            Width = 107
             Caption = 'RadioButton3'
             OnClick = RadioGroup1Click
             TabOrder = 2
           end
         end
       end
+    end
+    object BtnTour: TButton
+      Left = 104
+      Height = 25
+      Top = 40
+      Width = 80
+      Caption = 'Tour'
+      OnClick = BtnTourClick
+      TabOrder = 6
     end
   end
   object PopupMenu1: TPopupMenu

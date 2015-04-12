@@ -1,0 +1,102 @@
+object f_tour: Tf_tour
+  Left = 40
+  Height = 167
+  Top = 106
+  Width = 319
+  Caption = 'f_tour'
+  ClientHeight = 167
+  ClientWidth = 319
+  FormStyle = fsSystemStayOnTop
+  KeyPreview = True
+  OnKeyDown = FormKeyDown
+  LCLVersion = '1.4.0.3'
+  object TourName: TLabel
+    Left = 27
+    Height = 17
+    Top = 8
+    Width = 70
+    Caption = 'TourName'
+    ParentColor = False
+  end
+  object ObjectName: TLabel
+    Left = 26
+    Height = 17
+    Top = 37
+    Width = 85
+    Caption = 'ObjectName'
+    ParentColor = False
+  end
+  object BtnPrev: TButton
+    Left = 104
+    Height = 25
+    Hint = 'Previous object [Left] and slew [Ctrl+Left]'
+    Top = 72
+    Width = 43
+    Caption = '<'
+    OnClick = BtnPrevClick
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+  end
+  object BtnNext: TButton
+    Left = 160
+    Height = 25
+    Hint = 'Next object [Right] and slew [Ctrl+Right]'
+    Top = 72
+    Width = 40
+    Caption = '>'
+    OnClick = BtnNextClick
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
+  end
+  object BtnEnd: TButton
+    Left = 224
+    Height = 25
+    Hint = 'Close Tour window'
+    Top = 120
+    Width = 75
+    Cancel = True
+    Caption = 'End tour'
+    OnClick = BtnEndClick
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+  end
+  object BtnFirst: TButton
+    Left = 16
+    Height = 25
+    Hint = 'Center first object on the observation list  [Home]'
+    Top = 72
+    Width = 75
+    Caption = 'First'
+    OnClick = BtnFirstClick
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 3
+  end
+  object BtnLast: TButton
+    Left = 224
+    Height = 25
+    Hint = 'Center last object on the observation list  [End]'
+    Top = 72
+    Width = 75
+    Caption = 'Last'
+    OnClick = BtnLastClick
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 4
+  end
+  object BtnSlew: TButton
+    Left = 104
+    Height = 25
+    Hint = 'Slew telescope to this object [Ctrl+S]'
+    Top = 120
+    Width = 96
+    Caption = 'Slew'
+    OnClick = BtnSlewClick
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 5
+  end
+end

@@ -1451,7 +1451,6 @@ resourcestring
     +'consider to not use this catalog for this FOV.';
   rsOnlyObjectsW = 'Only objects within airmass limits tonight';
   rsOnlyObjectsW2 = 'Only objects within airmass limits now';
-  rsMarkObjectsO = 'Mark objects on the chart';
   rsFirst = 'First';
   rsLast = 'Last';
   rsNext2 = 'Next';
