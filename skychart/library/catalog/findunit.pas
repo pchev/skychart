@@ -91,7 +91,7 @@ repeat
   if lin.num>id then imax:=i
                 else imin:=i;
   if lin.num=id then ok:=true;
-until ok or (pnum=lin.num);
+until ok or (abs(imax-imin)<2);
 CloseFile(fx);
 if ok then begin
    ar:=lin.ar/15;
@@ -126,7 +126,7 @@ repeat
   if lin.num>id then imax:=i
                 else imin:=i;
   if lin.num=id then ok:=true;
-until ok or (pnum=lin.num);
+until ok or (abs(imax-imin)<2);
 CloseFile(fx);
 if ok then begin
    ar:=lin.ar/15;
@@ -163,7 +163,7 @@ repeat
   if lin.key>id then imax:=i
                 else imin:=i;
   if lin.key=id then ok:=true;
-until ok or (pnum=lin.key);
+until ok or (abs(imax-imin)<2);
 CloseFile(fx);
 if ok then begin
    n:=lin.n;
@@ -200,7 +200,7 @@ repeat
   if lin.key>id then imax:=i
                 else imin:=i;
   if lin.key=id then ok:=true;
-until ok or (pnum=lin.key);
+until ok or (abs(imax-imin)<2);
 CloseFile(fx);
 if ok then begin
    n:=lin.n;
@@ -648,7 +648,7 @@ repeat
   if lin.key>buf then imax:=i
                 else imin:=i;
   if lin.key=buf then ok:=true;
-until ok or (pnum=lin.key);
+until ok or (abs(imax-imin)<2);
 CloseFile(fx);
 if ok then begin
    n:=lin.n;
