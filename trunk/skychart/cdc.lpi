@@ -53,7 +53,6 @@
               <ShowHints Value="False"/>
             </Verbosity>
             <CustomOptions Value="-CF64"/>
-            <CompilerPath Value="$(CompPath)"/>
           </Other>
         </CompilerOptions>
       </Item2>
@@ -98,7 +97,6 @@
               <ShowHints Value="False"/>
             </Verbosity>
             <CustomOptions Value="-CF64 -dUSEHEAPTRC"/>
-            <CompilerPath Value="$(CompPath)"/>
           </Other>
         </CompilerOptions>
       </Item3>
@@ -142,7 +140,6 @@
               <ShowHints Value="False"/>
             </Verbosity>
             <CustomOptions Value="-CF64"/>
-            <CompilerPath Value="$(CompPath)"/>
           </Other>
         </CompilerOptions>
       </Item4>
@@ -183,7 +180,6 @@
               <ShowHints Value="False"/>
             </Verbosity>
             <CustomOptions Value="-CF64"/>
-            <CompilerPath Value="$(CompPath)"/>
           </Other>
         </CompilerOptions>
       </Item5>
@@ -228,7 +224,6 @@
               <ShowHints Value="False"/>
             </Verbosity>
             <CustomOptions Value="-CF64"/>
-            <CompilerPath Value="$(CompPath)"/>
           </Other>
         </CompilerOptions>
       </Item6>
@@ -273,7 +268,6 @@
               <ShowHints Value="False"/>
             </Verbosity>
             <CustomOptions Value="-CF64"/>
-            <CompilerPath Value="$(CompPath)"/>
           </Other>
         </CompilerOptions>
       </Item7>
@@ -414,6 +408,7 @@
       <Unit7>
         <Filename Value="cu_catalog.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="cu_catalog"/>
       </Unit7>
       <Unit8>
         <Filename Value="pu_zoom.pas"/>
@@ -428,6 +423,7 @@
         <ComponentName Value="f_calendar"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pu_calendar"/>
       </Unit9>
       <Unit10>
         <Filename Value="fu_chart.pas"/>
@@ -435,7 +431,6 @@
         <ComponentName Value="f_chart"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="fu_chart"/>
       </Unit10>
       <Unit11>
         <Filename Value="pu_detail.pas"/>
@@ -500,7 +495,6 @@
       <Unit20>
         <Filename Value="u_constant.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="u_constant"/>
       </Unit20>
       <Unit21>
         <Filename Value="u_projection.pas"/>
@@ -607,7 +601,6 @@
       <Unit36>
         <Filename Value="u_translation.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="u_translation"/>
       </Unit36>
       <Unit37>
         <Filename Value="pu_about.pas"/>
@@ -659,7 +652,6 @@
         <ComponentName Value="pop_indi"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_indiclient"/>
       </Unit45>
       <Unit46>
         <Filename Value="pu_main.pas"/>
@@ -787,6 +779,7 @@
         <ComponentName Value="f_config_solsys"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fu_config_solsys"/>
       </Unit65>
       <Unit66>
         <Filename Value="fu_config_system.pas"/>
@@ -866,7 +859,6 @@
         <ComponentName Value="f_scriptengine"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_scriptengine"/>
       </Unit77>
       <Unit78>
         <Filename Value="pu_pascaleditor.pas"/>
@@ -882,7 +874,6 @@
       <Unit80>
         <Filename Value="upsi_translation.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="upsi_translation"/>
       </Unit80>
       <Unit81>
         <Filename Value="u_scriptsocket.pas"/>
@@ -901,7 +892,6 @@
         <ComponentName Value="f_tour"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_tour"/>
       </Unit83>
     </Units>
   </ProjectOptions>
@@ -937,7 +927,6 @@
         <ShowHints Value="False"/>
       </Verbosity>
       <CustomOptions Value="-CF64"/>
-      <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>
   <Debugging>

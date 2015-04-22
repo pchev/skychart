@@ -233,7 +233,6 @@ type
     procedure GRSdriftChange(Sender: TObject);
     procedure GRSJDDateChange(Sender: TObject);
     procedure PlanetDirChange(Sender: TObject);
-    procedure PlanetDirSelClick(Sender: TObject);
     procedure PlaParalaxeClick(Sender: TObject);
     procedure PlanetBoxClick(Sender: TObject);
     procedure PlanetModeClick(Sender: TObject);
@@ -564,11 +563,6 @@ procedure Tf_config_solsys.PlanetDirChange(Sender: TObject);
 begin
 if LockChange then exit;
 cmain.planetdir:=planetdir.text;
-end;
-
-procedure Tf_config_solsys.PlanetDirSelClick(Sender: TObject);
-begin
-
 end;
 
 procedure Tf_config_solsys.DownloadAsteroidClick(Sender: TObject);
