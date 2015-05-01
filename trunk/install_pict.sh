@@ -3,13 +3,13 @@
 # install nebulae catalog data
 
 function InstPict {
-  pkg=$1.tgz
+  pkg=$1.tar.xz
   ddir=$2
   pkgz=BaseData/$pkg
   if [ ! -e $pkgz ]; then
      wget http://sourceforge.net/projects/skychart/files/4-source_data/$pkg -O $pkgz
   fi
-  tar xvzf $pkgz -C $ddir
+  tar xvJf $pkgz -C $ddir
 }
 
 destdir=$1
@@ -24,4 +24,4 @@ install -m 755 -d $destdir
 install -m 755 -d $destdir/share
 install -m 755 -d $destdir/share/skychart
 
-InstPict pictures_sac $destdir/share/skychart
+InstPict pictures_sac_3.2 $destdir/share/skychart

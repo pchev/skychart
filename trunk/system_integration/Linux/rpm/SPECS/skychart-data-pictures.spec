@@ -1,7 +1,7 @@
 Summary: Skychart / Cartes du Ciel Pictures of Deepsky objects
 Name: skychart-data-pictures
 Version: 3
-Release: 1
+Release: 2
 Group: Sciences/Astronomy
 License: GPLv2+
 URL: http://skychart.sourceforge.net
@@ -17,6 +17,9 @@ AutoReqProv: no
 Pictures of Deepsky objects to use with Skychart planetarium software. 
 
 %changelog
+* Fri May 1 2015 Patrick Chevalley
+ - Pictures improvement
+
 * Thu Sep 9 2009 Patrick Chevalley
  - new package name
 
