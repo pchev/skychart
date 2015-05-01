@@ -1,4 +1,7 @@
 program sac_img;
+
+{$MODE Delphi}
+
 {
 Copyright (C) 2005 Patrick Chevalley
 
@@ -25,10 +28,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 
 uses
-  Forms,
+  Forms, Interfaces,
   sac_dss in 'sac_dss.pas' {Form1};
-
-{$R *.res}
 
 begin
   Application.Initialize;

@@ -1,4 +1,7 @@
 unit sac_dss;
+
+{$MODE Delphi}{$H+}
+
 {
 Copyright (C) 2005 Patrick Chevalley
 
@@ -26,9 +29,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls;
+uses dynlibs,
+  LCLIntf, LCLType, LMessages, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, FileUtil;
 
 type
   TForm1 = class(TForm)
@@ -55,9 +58,9 @@ var
 
 implementation
 
-{$R *.dfm}
+{$R *.lfm}
 
-uses passql, pasmysql, libcatalog, math;
+uses unix, passql, passqlite, sacunit, math;
 
 type
   SImageConfig = record
@@ -76,7 +79,7 @@ type
      pPrompt1 : Pchar;
      pPrompt2 : Pchar;
   end;
-  Plate_data = packed record
+  Plate_data = record
    nplate : integer;
    plate_name, gsc_plate_name : array[1..10]of Pchar;
    dist_from_edge, cd_number, is_uk_survey : array[1..10]of integer;
@@ -94,6 +97,8 @@ type
 
 var  ImageExtract: TImageExtract;
      GetPlateList: TGetPlateList;
+     ForcePlate:string;
+     ForceNil: Boolean;
      ImageExtractFromPlate: TImageExtractFromPlate;
      dsslib : Dword;
      log: textfile;
@@ -195,24 +200,12 @@ until eoh;
 if dmin=dmax then begin
   Closefile(f);
   writeln(log,'DATAMIN=DATAMAX : '+nam);
-  deletefile(nam);
+  DeleteFileUTF8(nam); { *Converted from DeleteFile* }
   exit;
 end;
 s:='DATAMIN =   0'; move(s[1],header2[p,1],length(s));inc(p);
 s:='DATAMAX = 255'; move(s[1],header2[p,1],length(s));inc(p);
-s:='Based on photographic data obtained using The UK Schmidt Telescope.'; move(s[1],header2[p,1],length(s));inc(p);
-s:='The UK Schmidt Telescope was operated by the Royal Observatory'; move(s[1],header2[p,1],length(s));inc(p);
-s:='Edinburgh, with funding from the UK Science and Engineering Research'; move(s[1],header2[p,1],length(s));inc(p);
-s:='Council, until 1988 June, and thereafter by the Anglo-Australian'; move(s[1],header2[p,1],length(s));inc(p);
-s:='Observatory.  Original plate material is copyright (c) the Royal'; move(s[1],header2[p,1],length(s));inc(p);
-s:='Observatory Edinburgh and the Anglo-Australian Observatory.  The'; move(s[1],header2[p,1],length(s));inc(p);
-s:='plates were processed into the present compressed digital form with'; move(s[1],header2[p,1],length(s));inc(p);
-s:='their permission.  The Digitized Sky Survey was produced at the Space'; move(s[1],header2[p,1],length(s));inc(p);
-s:='Telescope Science Institute under US Government grant NAG W-2166.'; move(s[1],header2[p,1],length(s));inc(p);
-s:='Investigators using these scans are requested to include the above'; move(s[1],header2[p,1],length(s));inc(p);
-s:='acknowledgements in any publications.'; move(s[1],header2[p,1],length(s));inc(p);
-s:='Copyright (c) 1993, 1994, 1997, Association of Universities for'; move(s[1],header2[p,1],length(s));inc(p);
-s:='Research in Astronomy, Inc.  All rights reserved.'; move(s[1],header2[p,1],length(s));inc(p);
+s:='COMMENT Extracted from Digitized Sky Survey 101 CD-ROMs.'; move(s[1],header2[p,1],length(s));inc(p);
 s:='END'; move(s[1],header2[p,1],length(s));
 
 // Read 16 bit image
@@ -276,28 +269,123 @@ end;
 
 Procedure Magouille(nam:string; var sac:SACrec);
 begin
-if nam='IC434' then begin sac.s1:=80; sac.s2:=80;end
+// Correct object size or position to fit in a DSS plate
+ForcePlate:='';
+ForceNil:=false;
+if nam='Biur10' then begin ForcePlate:='xe541' ; end
+else if nam='Gum12' then begin sac.s1:=240; sac.s2:=240 ; end
+else if nam='Haffner25' then begin ForcePlate:='s493' ; end
+else if nam='IC434' then begin sac.s1:=80; sac.s2:=80;end
+else if nam='IC1396' then begin sac.s1:=80; sac.s2:=80 ; sac.ar:=324.795833; sac.de:=57.18; end
+else if nam='IC2118' then begin sac.s1:=140; sac.s2:=140 ; sac.ar:=76.12917; sac.de:=-6.960;  end
+else if nam='IC2162' then begin sac.s1:=30; sac.s2:=30 ; end
+else if nam='IC2537' then begin ForcePlate:='s499' ; end
+else if nam='IC4444' then begin ForcePlate:='s499' ; end
+else if nam='IC4997' then begin ForcePlate:='xe455' ; end
+else if nam='IC5070' then begin sac.s1:=90; sac.s2:=90 ; sac.ar:=313.141667; sac.de:=44.0725; end
+else if nam='IC5186' then begin ForcePlate:='s405' ; end
+else if nam='M16' then begin sac.s1:=75; sac.s2:=75 ; end
+else if nam='M43' then begin ForceNil:=true; end
+else if nam='M76' then begin ForcePlate:='xe152'; end
+else if nam='M83' then begin ForcePlate:='s444'; end
+else if nam='NGC50' then begin ForcePlate:='s680'; end
+else if nam='NGC303' then begin ForcePlate:='s610'; end
+else if nam='NGC474' then begin ForcePlate:='xe587'; end
+else if nam='NGC483' then begin ForcePlate:='xe295'; end
+else if nam='NGC496' then begin ForcePlate:='xe295'; end
+else if nam='NGC538' then begin ForcePlate:='s827'; end
+else if nam='NGC576' then begin ForcePlate:='s196'; end
+else if nam='NGC726' then begin ForcePlate:='s685'; end
+else if nam='NGC727' then begin ForcePlate:='s354'; end
+else if nam='NGC1187' then begin ForcePlate:='s480'; end
+else if nam='NGC1244' then begin ForcePlate:='s082'; end
+else if nam='NGC1460' then begin ForcePlate:='s358'; end
+else if nam='NGC1499' then begin sac.s1:=180; sac.s2:=180 ; sac.ar:=60.22083; sac.de:=36.41444;  end
+else if nam='NGC1591' then begin ForcePlate:='s484'; end
+else if nam='NGC1670' then begin ForcePlate:='s765'; end
+else if nam='NGC1691' then begin ForcePlate:='xe536'; end
+else if nam='NGC1760' then begin ForcePlate:='xv085'; end
+else if nam='NGC1761' then begin ForcePlate:='xv085'; end
+else if nam='NGC1775' then begin ForcePlate:='xv056'; end
 else if nam='NGC2237' then begin sac.s1:=120; sac.s2:=120 ; end
 else if nam='NGC2238' then begin sac.s1:=1; sac.s2:=1  ; end
-else if nam='IC5070' then begin sac.s1:=120; sac.s2:=120 ; end
+else if nam='NGC2299' then begin ForcePlate:='s771'; end
+else if nam='NGC2804' then begin ForcePlate:='xe427'; end
+else if nam='NGC2906' then begin ForcePlate:='xe488'; end
+else if nam='NGC3112' then begin ForcePlate:='s567'; end
+else if nam='NGC3136B' then begin ForcePlate:='xv092'; end
+else if nam='NGC3285A' then begin ForcePlate:='x501'; end
+else if nam='NGC3305' then begin ForcePlate:='s501'; end
+else if nam='NGC3315' then begin ForcePlate:='s501'; end
+else if nam='NGC3419A' then begin ForcePlate:='xe491'; end
+else if nam='NGC3483' then begin ForcePlate:='s438'; end
+else if nam='NGC4123' then begin ForcePlate:='xe554'; end
+else if nam='NGC4141' then begin ForcePlate:='xe094'; end
+else if nam='NGC4304' then begin ForcePlate:='s380'; end
+else if nam='NGC4527' then begin ForcePlate:='xe555'; end
+else if nam='NGC4799' then begin ForcePlate:='xe556'; end
+else if nam='NGC4802' then begin ForcePlate:='s718'; end
+else if nam='NGC4835A' then begin ForcePlate:='s269'; end
+else if nam='NGC4950' then begin ForcePlate:='s269'; end
+else if nam='NGC4999' then begin ForcePlate:='s862'; end
+else if nam='NGC5335' then begin ForcePlate:='xe558'; end
+else if nam='NGC5543' then begin ForcePlate:='xe559'; end
+else if nam='NGC5776' then begin ForcePlate:='xe561'; end
+else if nam='NGC5781' then begin ForcePlate:='s652'; end
+else if nam='NGC5864' then begin ForcePlate:='xe562'; end
+else if nam='NGC5865' then begin ForcePlate:='s868'; end
+else if nam='NGC5869' then begin ForcePlate:='s868'; end
+else if nam='NGC5965' then begin ForcePlate:='xe099'; end
+else if nam='NGC6423' then begin ForcePlate:='xe070'; end
+else if nam='NGC6515' then begin ForcePlate:='xe181'; end
+else if nam='NGC6689' then begin ForcePlate:='xe044'; end
+else if nam='NGC6706' then begin ForcePlate:='s104'; end
+else if nam='NGC6726' then begin ForcePlate:='xv396'; end
 else if nam='NGC6960' then begin sac.s1:=100; sac.s2:=100 ; sac.ar:=312.255; sac.de:=30.993; end
-else if nam='M16' then begin sac.s1:=75; sac.s2:=75 ; end
-else if nam='NGC1499' then begin sac.s1:=180; sac.s2:=180 ; sac.ar:=60.22083; sac.de:=36.41444;  end
-else if nam='IC2118' then begin sac.s1:=140; sac.s2:=140 ; sac.ar:=76.12917; sac.de:=-6.960;  end
+else if nam='NGC7000' then begin sac.s1:=170; sac.s2:=170 ; end
+else if nam='NGC7139' then begin ForcePlate:='xe075'; end
+else if nam='NGC7149' then begin ForcePlate:='xe638'; end
+else if nam='NGC7232B' then begin ForcePlate:='s289'; end
+else if nam='NGC7442' then begin ForcePlate:='xe521'; end
+else if nam='NGC7467' then begin ForcePlate:='xe521'; end
+else if nam='NGC7679' then begin ForcePlate:='xe642'; end
+else if nam='NGC7682' then begin ForcePlate:='xe642'; end
+else if nam='NGC7694' then begin ForcePlate:='s822'; end
+else if nam='NGC7695' then begin ForcePlate:='s822'; end
+else if nam='NGC7699' then begin ForcePlate:='s822'; end
+else if nam='NGC7700' then begin ForcePlate:='s822'; end
+else if nam='NGC7701' then begin ForcePlate:='s822'; end
+else if nam='NGC7713' then begin ForcePlate:='s347'; end
+else if nam='NGC7744' then begin ForcePlate:='s292'; end
+else if nam='NGC7754' then begin ForcePlate:='s678'; end
+else if nam='NGC7821' then begin ForcePlate:='s607'; end
+else if nam='PK18+20.1' then begin ForcePlate:='s803'; end
+else if nam='PK217+14.1' then begin ForcePlate:='xe543'; end
+else if nam='Ru39' then begin ForcePlate:='s560'; end
+else if nam='Ru67' then begin ForcePlate:='s260'; end
 else if nam='Sh2-240' then begin sac.s1:=180; sac.s2:=180 ; sac.ar:=85.250; sac.de:=28.30;  end
-else if nam='NGC7000' then begin sac.s1:=170; sac.s2:=170 ; end;
+else if nam='Sh2-301' then begin ForcePlate:='s558';  end
+else if nam='UGC1072' then begin ForcePlate:='s827';  end
+else if nam='UGC3647' then begin ForcePlate:='xe122';  end
+;
+
+end;
+
+Function Exec(cmd: string; hide: boolean=true): integer;
+begin
+ result:=fpSystem(cmd);
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 var sac : SACrec;
     ok : boolean;
-    size,sub,i : integer;
-    outdir,cmd: string;
-    db:TmyDB;
+    sub,i : integer;
+    outdir,cmd,dbn: string;
+    db:TLiteDB;
     img : SImageConfig;
     pl: Plate_data;
     rc,datasource,n,margin : integer;
-    exposure : double;
+    size,exposure : double;
     dir,drv,ima,app,platename,nam : string;
 const b=' ';
       f5='0.00000';
@@ -306,20 +394,26 @@ const b=' ';
       npix2=400;
       deg2rad = pi/180;
 begin
-datasource:=4;
+{$ifdef unix}
+  exec('export LC_ALL=C');
+{$endif}
+datasource:=3;
 dir:=edit3.Text;
 drv:=edit4.Text;
 app:=application.title;
 
-outdir:=Edit2.text+'\';
-if not directoryexists(outdir) then forcedirectories(outdir);
-db:=TMyDB.create(self);
+outdir:=Edit2.text;
+if not DirectoryExistsUTF8(outdir) then ForceDirectoriesUTF8(outdir);
+db:=TLiteDB.create(self);
 try
 screen.cursor:=crHourGlass;
-db.SetPort(3306);
-db.database:='cdc';
-db.Connect('localhost','root','','cdc');
-db.Query('Truncate table cdc_fits');    // table must already be created by first running cdc_vcl
+dbn:=ExpandFileName('~/.skychart/database/cdc.db');
+dbn:=UTF8Encode(dbn);
+db.Use(dbn);
+if not db.TruncateTable('cdc_fits') then begin // table must already be created by first running skychart
+  ShowMessage(db.ErrorMessage);
+  exit;
+end;
 i:=0;
 assignfile(log,'error.log');
 rewrite(log);
@@ -329,17 +423,24 @@ if ok then
   repeat
     ReadSAC(sac,ok);
     if ok then begin
-    nam:=stringreplace(sac.nom1,' ','',[rfReplaceAll]);
+
+      sac.typ:=trim(sac.typ);
+      if (sac.typ='Ast')or(sac.typ='-')or(pos('*',sac.typ)>0)or(sac.typ='Drk')or(sac.typ='Gcl') then begin
+        writeln(log,'Type:'+sac.typ+'  '+sac.nom1);
+        continue;
+      end;
+
+      nam:=stringreplace(sac.nom1,' ','',[rfReplaceAll]);
     
     // use the following line for selective re-do.
-    //if pos(nam+' ',' Sh2-240  ')=0 then continue;
+    //if pos(nam+' ',' UGC3647 ')=0 then continue;
 
     magouille(nam,sac);
 
     inc(i);
     edit5.Text:=inttostr(i)+'  '+sac.nom1;
     Application.ProcessMessages;
-    ima:=ExpandFileName(outdir+nam+'.fit');
+    ima:=ExpandFileNameUTF8(outdir+nam+'.fit'); { *Converted from ExpandFileName* }
     // check unique object at this position (many ngc duplicate)
     cmd:='INSERT INTO cdc_fits (filename,catalogname,objectname,ra,de,width,height,rotation) VALUES ('
         +'"'+stringreplace(sac.nom1,'\','\\',[rfReplaceAll])+'"'
@@ -350,10 +451,17 @@ if ok then
         +',"'+formatfloat(f5,0)+'"'
         +',"'+formatfloat(f5,0)+'"'
         +',"'+formatfloat(f5,0)+'"'+')';
-    if not db.query(cmd) then begin Pseudofile(ima);writeln(log,'Non unique:'+sac.nom1);continue;end;
-      size:=round(min(420,maxvalue([2,sac.s1,sac.s2])+1));
 
-      if size<100 then
+    if (ForceNil)or(not db.query(cmd))and(copy(nam,1,1)<>'M') then begin
+      Pseudofile(ima);
+      writeln(log,'Non unique:'+sac.nom1);
+      continue;
+    end;
+
+      size:=min(420,maxvalue([3.0,sac.s1,sac.s2]));
+      if size<15 then size:=1.2*size; // margin for small objects
+
+      if size<30 then
          sub:=trunc(size*60/1.7/npix)
       else
          sub:=trunc(size*60/1.7/npix2);
@@ -370,16 +478,13 @@ if ok then
       else if sub <=300 then sub:=250
       else sub:=500;
 
-      sac.typ:=trim(sac.typ);
-      if (sac.typ='Ast')or(sac.typ='-')or(pos('*',sac.typ)>0)or(sac.typ='Drk')or(sac.typ='Gcl') then continue;
       img.pImageFile:=Pchar(ima);
       img.SubSample:=sub;
       img.Ra:=deg2rad*sac.ar;
       img.De:=deg2rad*sac.de;
       img.Width:=size;
-     // if nam='IC5070' then img.Width:=0.58*size; //at plate border
       img.Height:=size;
-      img.Sender:=handle;
+      img.Sender:=integer(handle);
       img.pDir:=Pchar(dir);
       img.pDrive:=Pchar(drv);
       img.DataSource:=datasource;
@@ -392,22 +497,25 @@ if ok then
       margin:=-9999999;
       platename:='';
      // search a plate with reasonable margin and maximum exposure time
-      rc:=GetPlateList(addr(img),addr(pl));
-      if rc=0 then begin
-        if pl.nplate>10 then pl.nplate:=10;
-        for n:=1 to pl.nplate do begin
-           margin:=max(margin,pl.dist_from_edge[n]);
-           if (pl.dist_from_edge[n]>120)
-              and (pl.exposure[n]>exposure)
-              then begin
-                 platename:=pl.plate_name[n];
-                 exposure:=pl.exposure[n];
-              end;
-        end;
-        if platename='' then begin writeln(log,'No Plate found:'+sac.nom1+' max margin:'+inttostr(margin));continue;end;
-      end else begin writeln(log,'GetPlateList error:'+inttostr(rc)+' '+sac.nom1);continue;end;
-
-      // extract image an dconvert to 8 bit to save space
+      if ForcePlate='' then begin
+        rc:=GetPlateList(@img,@pl);
+        if rc=0 then begin
+          if pl.nplate>10 then pl.nplate:=10;
+          for n:=1 to pl.nplate do begin
+             margin:=max(margin,pl.dist_from_edge[n]);
+             if (pl.dist_from_edge[n]>120)
+                and (pl.exposure[n]>exposure)
+                then begin
+                   platename:=pl.plate_name[n];
+                   exposure:=pl.exposure[n];
+                end;
+          end;
+          if platename='' then begin writeln(log,'No Plate found:'+sac.nom1+' max margin:'+inttostr(margin));continue;end;
+        end else begin writeln(log,'GetPlateList error:'+inttostr(rc)+' '+sac.nom1);continue;end;
+       end else begin
+         platename:=ForcePlate;
+       end;
+      // extract image and convert to 8 bit to save space
       rc:=ImageExtractFromPlate(addr(img),Pchar(platename));
       if rc=0 then Conv8bit(ima)
       else begin writeln(log,'ImageExtractFromPlate error:'+inttostr(rc)+' '+sac.nom1);continue;end;
@@ -415,7 +523,7 @@ if ok then
   until not ok;
 finally
 screen.cursor:=crdefault;
-db.Query('Truncate table cdc_fits');
+db.TruncateTable('cdc_fits');
 db.Free;
 CloseSAC;
 closefile(log);
@@ -423,14 +531,20 @@ end;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
+const
+{$ifdef mswindows}
+  libname = 'libgetdss.dll';
+{$else}
+  libname = 'libgetdss.so';
+{$endif}
 begin
-  dsslib := LoadLibrary('getdss.dll');
+  dsslib := LoadLibrary(libname);
   if dsslib<>0 then begin
-    ImageExtract:= TImageExtract(GetProcAddress(dsslib, 'ImageExtract'));
-    GetPlateList:= TGetPlateList(GetProcAddress(dsslib, 'GetPlateList'));
-    ImageExtractFromPlate:= TImageExtractFromPlate(GetProcAddress(dsslib, 'ImageExtractFromPlate'));
+    ImageExtract:= TImageExtract(GetProcedureAddress(dsslib, 'ImageExtract'));
+    GetPlateList:= TGetPlateList(GetProcedureAddress(dsslib, 'GetPlateList'));
+    ImageExtractFromPlate:= TImageExtractFromPlate(GetProcedureAddress(dsslib, 'ImageExtractFromPlate'));
   end
-  else raise exception.Create('Could not load getdss.dll');
+  else raise exception.Create('Could not load '+libname);
 end;
 
 end.
