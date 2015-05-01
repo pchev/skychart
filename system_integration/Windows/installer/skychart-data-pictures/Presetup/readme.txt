@@ -1,7 +1,7 @@
 Skychart / Cartes du Ciel
 DSO Pictures
 
-This file install 9894 pictures for object of the SAC database.
+This file install 9700 pictures for object of the SAC database.
 
 Be sure to install in the directory where you already install Skychart.
 
