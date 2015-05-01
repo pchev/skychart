@@ -222,6 +222,7 @@ try
    repeat
      if terminated then break;
      buf:=tcpclient.recvstring;
+     if terminated then break;
      if (tcpclient.Sock.lastError<>0)and(tcpclient.Sock.lastError<>WSAETIMEDOUT) then break;
      if buf<>'' then begin
         ProcessData(buf);
@@ -320,6 +321,7 @@ ReadXMLFile(Doc,s);
 try
 Node:=Doc.DocumentElement.FirstChild;
 while Node<>nil do begin
+   if terminated then break;
    dp:=findDev(Node,true,errmsg);
    if Node.NodeName='message' then begin
       dp.checkMessage(Node);
