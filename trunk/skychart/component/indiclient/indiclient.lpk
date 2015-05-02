@@ -2,16 +2,15 @@
 <CONFIG>
   <Package Version="4">
     <Name Value="indiclient"/>
+    <Type Value="RunAndDesignTime"/>
     <CompilerOptions>
       <Version Value="11"/>
       <SearchPaths>
+        <OtherUnitFiles Value="."/>
         <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
-      <Other>
-        <CompilerPath Value="$(CompPath)"/>
-      </Other>
     </CompilerOptions>
-    <Files Count="4">
+    <Files Count="5">
       <Item1>
         <Filename Value="indibaseclient.pas"/>
         <UnitName Value="indibaseclient"/>
@@ -29,8 +28,11 @@
         <Filename Value="indicom.pas"/>
         <UnitName Value="indicom"/>
       </Item4>
+      <Item5>
+        <Filename Value="pu_indigui.pas"/>
+        <UnitName Value="pu_indigui"/>
+      </Item5>
     </Files>
-    <Type Value="RunAndDesignTime"/>
     <RequiredPkgs Count="3">
       <Item1>
         <PackageName Value="synapse"/>
@@ -48,5 +50,8 @@
     <PublishOptions>
       <Version Value="2"/>
     </PublishOptions>
+    <CustomOptions Items="ExternHelp" Version="2">
+      <_ExternHelp Items="Count"/>
+    </CustomOptions>
   </Package>
 </CONFIG>
