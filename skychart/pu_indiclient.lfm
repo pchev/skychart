@@ -14,15 +14,15 @@ object pop_indi: Tpop_indi
   OnDestroy = FormDestroy
   ParentFont = True
   Position = poDefaultPosOnly
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.4.0.4'
   object GroupBox3: TGroupBox
     Left = 0
     Height = 136
     Top = 137
     Width = 279
     Align = alTop
-    ClientHeight = 132
-    ClientWidth = 275
+    ClientHeight = 134
+    ClientWidth = 277
     TabOrder = 2
     object Connect: TButton
       Left = 8
@@ -34,10 +34,10 @@ object pop_indi: Tpop_indi
       TabOrder = 0
     end
     object SpeedButton2: TButton
-      Left = 8
+      Left = 96
       Height = 25
       Top = 94
-      Width = 81
+      Width = 75
       Caption = 'Hide'
       OnClick = SpeedButton2Click
       TabOrder = 4
@@ -74,13 +74,22 @@ object pop_indi: Tpop_indi
       TabOrder = 3
     end
     object SpeedButton4: TButton
-      Left = 158
+      Left = 184
       Height = 25
       Top = 94
-      Width = 84
+      Width = 75
       Caption = 'Help'
       OnClick = SpeedButton4Click
       TabOrder = 5
+    end
+    object BtnIndiGui: TButton
+      Left = 8
+      Height = 25
+      Top = 94
+      Width = 75
+      Caption = 'INDI gui'
+      OnClick = BtnIndiGuiClick
+      TabOrder = 6
     end
   end
   object Panel1: TPanel
@@ -96,7 +105,7 @@ object pop_indi: Tpop_indi
       Left = 8
       Height = 15
       Top = 20
-      Width = 18
+      Width = 20
       Caption = 'RA '
       ParentColor = False
     end
@@ -104,7 +113,7 @@ object pop_indi: Tpop_indi
       Left = 126
       Height = 15
       Top = 20
-      Width = 24
+      Width = 25
       Caption = 'DEC'
       ParentColor = False
     end
@@ -134,8 +143,8 @@ object pop_indi: Tpop_indi
     Width = 279
     Align = alTop
     Caption = 'Current driver'
-    ClientHeight = 50
-    ClientWidth = 275
+    ClientHeight = 65
+    ClientWidth = 277
     TabOrder = 0
     object Edit1: TEdit
       Left = 8

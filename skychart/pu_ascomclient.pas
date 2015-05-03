@@ -257,8 +257,8 @@ end;
 Function  Tpop_scope.ScopeConnected : boolean ;
 begin
 result:=false;
-if not initialized then exit;
 {$ifdef mswindows}
+if not initialized then exit;
 result:=false;
 if VarIsEmpty(T) then exit;
 try

@@ -34,7 +34,7 @@ uses
     Windows, ShlObj, Registry,
   {$endif}
   lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, fu_chart,
-  cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
+  cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures, pu_indigui,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
   pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, pu_obslist, fu_script, pu_scriptengine,
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
@@ -698,6 +698,7 @@ type
     procedure TelescopeMove(origin: string; ra,de: double);
     procedure TelescopeChange(origin: string; tc:boolean);
     procedure ApplyScript(Sender: TObject);
+    procedure IndiGUIdestroy(Sender: TObject);
   {$ifdef mswindows}
     Procedure SaveWinColor;
     Procedure ResetWinColor;
@@ -1233,7 +1234,7 @@ try
    CopyFile(SysToUTF8(slash(appdir)+'skychart_valdereuil.ini'),SysToUTF8(Configfile));
    ReadDefault;
  end;
-// InitToolBar;
+ // InitToolBar;
  if VerboseMsg then WriteTrace('Create forms');
  planet:=Tplanet.Create(self);
  Fits:=TFits.Create(self);
@@ -2498,7 +2499,24 @@ end;
 
 procedure Tf_main.TelescopePanelExecute(Sender: TObject);
 begin
-execnowait(cfgm.IndiPanelCmd);
+  if cfgm.InternalIndiPanel then begin
+    if not IndiGUIready then begin
+       f_indigui:=Tf_indigui.Create(self);
+       f_indigui.onDestroy:=IndiGUIdestroy;
+       f_indigui.IndiServer:=def_cfgsc.IndiServerHost;
+       f_indigui.IndiPort:=def_cfgsc.IndiServerPort;
+       f_indigui.IndiDevice:='';
+       IndiGUIready:=true;
+    end;
+    f_indigui.Show;
+  end else begin
+    execnowait(cfgm.IndiPanelCmd);
+  end;
+end;
+
+procedure Tf_main.IndiGUIdestroy(Sender: TObject);
+begin
+  IndiGUIready:=false;
 end;
 
 procedure Tf_main.ListObjExecute(Sender: TObject);
@@ -4433,6 +4451,7 @@ cfgm.AutoRefreshDelay:=60;
 cfgm.ServerIPaddr:='127.0.0.1';
 cfgm.ServerIPport:='3292'; // x'CDC' :o)
 cfgm.IndiPanelCmd:=dcd_cmd;
+cfgm.InternalIndiPanel:=true;
 cfgm.keepalive:=true;
 cfgm.TextOnlyDetail:=false;
 cfgm.AutostartServer:=true;
@@ -5622,6 +5641,7 @@ cfgm.HorizonPictureFile:=ReadString(section,'HorizonPictureFile',cfgm.HorizonPic
 cfgm.ServerIPaddr:=ReadString(section,'ServerIPaddr',cfgm.ServerIPaddr);
 cfgm.ServerIPport:=ReadString(section,'ServerIPport',cfgm.ServerIPport);
 cfgm.IndiPanelCmd:=ReadString(section,'IndiPanelCmd',cfgm.IndiPanelCmd);
+cfgm.InternalIndiPanel:=ReadBool(section,'InternalIndiPanel',cfgm.InternalIndiPanel);
 cfgm.keepalive:=ReadBool(section,'keepalive',cfgm.keepalive);
 cfgm.TextOnlyDetail:=ReadBool(section,'TextOnlyDetail',cfgm.TextOnlyDetail);
 cfgm.AutostartServer:=ReadBool(section,'AutostartServer',cfgm.AutostartServer);
@@ -6472,6 +6492,7 @@ WriteString(section,'HorizonPictureFile',cfgm.HorizonPictureFile);
 WriteString(section,'ServerIPaddr',cfgm.ServerIPaddr);
 WriteString(section,'ServerIPport',cfgm.ServerIPport);
 WriteString(section,'IndiPanelCmd',cfgm.IndiPanelCmd);
+WriteBool(section,'InternalIndiPanel',cfgm.InternalIndiPanel);
 WriteBool(section,'keepalive',cfgm.keepalive);
 WriteBool(section,'TextOnlyDetail',cfgm.TextOnlyDetail);
 WriteBool(section,'AutostartServer',cfgm.AutostartServer);
