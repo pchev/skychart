@@ -35,6 +35,7 @@ type
 
   Tf_config_system = class(TFrame)
     CheckBox1: TCheckBox;
+    InternalIndiGui: TCheckBox;
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
@@ -61,6 +62,7 @@ type
     ASCOMPanel: TPanel;
     PageControl2: TPageControl;
     PageControl3: TPageControl;
+    ExternalControlPanel: TPanel;
     Panel2: TPanel;
     SqliteBoxLabel: TLabel;
     SqliteBox: TPanel;
@@ -162,6 +164,7 @@ type
     procedure CheckBox8Change(Sender: TObject);
     procedure CheckBox9Change(Sender: TObject);
     procedure IndiDevOtherChange(Sender: TObject);
+    procedure InternalIndiGuiClick(Sender: TObject);
     procedure Label18Click(Sender: TObject);
     procedure LanguageListSelect(Sender: TObject);
     procedure LinuxCmdChange(Sender: TObject);
@@ -174,8 +177,6 @@ type
     procedure chkdbClick(Sender: TObject);
     procedure credbClick(Sender: TObject);
     procedure dropdbClick(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
-    procedure BitBtn2Click(Sender: TObject);
     procedure UseIPserverClick(Sender: TObject);
     procedure keepaliveClick(Sender: TObject);
     procedure ipaddrChange(Sender: TObject);
@@ -483,7 +484,9 @@ IndiServerPort.text:=csc.IndiServerPort;
 IndiAutostart.checked:=csc.IndiAutostart;
 IndiServerCmd.text:=csc.IndiServerCmd;
 IndiDriver.text:=csc.IndiDriver;
+InternalIndiGui.Checked:=cmain.InternalIndiPanel;
 PanelCmd.text:=cmain.IndiPanelCmd;
+ExternalControlPanel.Visible:=(not cmain.InternalIndiPanel);
 TurnsRa.value:=abs(csc.TelescopeTurnsX);
 TurnsDec.value:=abs(csc.TelescopeTurnsY);
 RevertTurnsRa.checked:=csc.TelescopeTurnsX<0;
@@ -698,16 +701,6 @@ if messagedlg(Format(rsWarningYouAr, [crlf, cmain.db, crlf]),
 end;
 end;
 
-procedure Tf_config_system.BitBtn1Click(Sender: TObject);
-begin
-
-end;
-
-procedure Tf_config_system.BitBtn2Click(Sender: TObject);
-begin
-
-end;
-
 procedure Tf_config_system.AstDBClick(Sender: TObject);
 begin
  if Assigned(FShowAsteroid) then FShowAsteroid(self);
@@ -751,6 +744,12 @@ procedure Tf_config_system.IndiDevOtherChange(Sender: TObject);
 begin
   if LockChange then exit;
   csc.IndiDevice:=IndiDevOther.Text;
+end;
+
+procedure Tf_config_system.InternalIndiGuiClick(Sender: TObject);
+begin
+ cmain.InternalIndiPanel := InternalIndiGui.Checked;
+ ExternalControlPanel.Visible:=(not cmain.InternalIndiPanel);
 end;
 
 procedure Tf_config_system.Label18Click(Sender: TObject);

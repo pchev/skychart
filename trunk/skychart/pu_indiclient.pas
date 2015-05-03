@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, indibaseclient, indibasedevice, indiapi, indicom,
+uses u_help, u_translation, indibaseclient, indibasedevice, indiapi, indicom,  pu_indigui,
   LCLIntf, u_util, u_constant, Messages, SysUtils, Classes, Graphics, Controls,
   Forms, Dialogs, StdCtrls, Buttons, inifiles, process, ComCtrls, Menus,
   ExtCtrls;
@@ -37,6 +37,7 @@ type
   { Tpop_indi }
 
   Tpop_indi = class(TForm)
+    BtnIndiGui: TButton;
     GroupBox3: TGroupBox;
     Connect: TButton;
     Memomsg: TMemo;
@@ -55,6 +56,7 @@ type
     SpeedButton4: TButton;
     InitTimer: TTimer;
     {Utility and form functions}
+    procedure BtnIndiGuiClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure InitTimerTimer(Sender: TObject);
     procedure kill(Sender: TObject; var CanClose: Boolean);
@@ -102,6 +104,7 @@ type
     procedure NewLight(lvp: ILightVectorProperty);
     procedure ServerConnected(Sender: TObject);
     procedure ServerDisconnected(Sender: TObject);
+    procedure IndiGUIdestroy(Sender: TObject);
   public
     { Public declarations }
     csc: Tconf_skychart;
@@ -572,6 +575,24 @@ procedure Tpop_indi.FormCreate(Sender: TObject);
 begin
 SlewRateList:=TStringList.Create;
 ClearStatus;
+end;
+
+procedure Tpop_indi.BtnIndiGuiClick(Sender: TObject);
+begin
+  if not IndiGUIready then begin
+     f_indigui:=Tf_indigui.Create(self);
+     f_indigui.onDestroy:=@IndiGUIdestroy;
+     f_indigui.IndiServer:=csc.IndiServerHost;
+     f_indigui.IndiPort:=csc.IndiServerPort;
+     f_indigui.IndiDevice:='';
+     IndiGUIready:=true;
+  end;
+  f_indigui.Show;
+end;
+
+procedure Tpop_indi.IndiGUIdestroy(Sender: TObject);
+begin
+  IndiGUIready:=false;
 end;
 
 procedure Tpop_indi.InitTimerTimer(Sender: TObject);

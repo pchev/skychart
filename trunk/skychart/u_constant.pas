@@ -1076,7 +1076,7 @@ type
     TextOnlyDetail, SimpleMove, SimpleDetail, KioskMode, KioskDebug, CenterAtNoon: boolean;
     PrintDesc, PrintCmd1, PrintCmd2: string;
     PrintTmpPath, ThemeName, IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt: string;
-    PrintHeader,PrintFooter: boolean;
+    PrintHeader,PrintFooter,InternalIndiPanel: boolean;
     AnimOpt, Animffmpeg: string;
     ServerIPaddr, ServerIPport: shortstring;
     AnimFps: double;
@@ -1254,6 +1254,7 @@ var
   WideLine: integer = 2;
   MarkWidth: integer = 1;
   MarkType: integer = 1;
+  IndiGUIready: boolean;
   SampConnected: boolean;
   SampClientId,SampClientName,SampClientDesc: Tstringlist;
   SampClientCoordpointAtsky,SampClientImageLoadFits,SampClientTableLoadVotable: Tstringlist;
@@ -2720,6 +2721,7 @@ begin
   PrintCopies := Source.PrintCopies;
   ThemeName := Source.ThemeName;
   IndiPanelCmd := Source.IndiPanelCmd;
+  InternalIndiPanel := Source.InternalIndiPanel;
   ProxyHost := Source.ProxyHost;
   ProxyPort := Source.ProxyPort;
   ProxyUser := Source.ProxyUser;
