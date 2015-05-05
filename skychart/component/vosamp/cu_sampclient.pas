@@ -27,6 +27,7 @@ TSampClient = class(TObject)
     samp_hub_xmlrpc_url,
     samp_private_key,
     samp_profile_version: string;
+    Fappname,Fappdesc,Fappicon,Fappdoc: string;
     Fconnected: boolean;
     Ferrorcode: integer;
     Ferrortext: string;
@@ -83,6 +84,10 @@ TSampClient = class(TObject)
     function SampSelectRow(client,tableid,url,row: string):boolean;
     function SampSendImageFits(client,imgname,imgid,url:string):boolean;
     function SampSubscribe(SubscribeCoord,SubscribeImage,SubscribeTable: boolean):boolean;
+    property appname: string read Fappname write Fappname;
+    property appdesc: string read Fappdesc write Fappdesc;
+    property appicon: string read Fappicon write Fappicon;
+    property appdoc:  string read Fappdoc write Fappdoc;
     property LastErrorcode: integer read Ferrorcode;
     property LastError: string read Ferrortext;
     property Connected: boolean read Fconnected;
@@ -122,6 +127,10 @@ begin
   samp_hub_xmlrpc_url:='';
   Ferrorcode:=0;
   Ferrortext:='';
+  Fappname:='skychart';
+  Fappdesc:='Cartes du Ciel - Skychart planetarium';
+  Fappicon:='http://ap-i.net/skychart/ciel.png';
+  Fappdoc:='http://ap-i.net/skychart/en/documentation/start';
   Fhubprofileerror:='Unsupported SAMP hub profile. Must be a File URL';
   Fhubmissingvalue:='SAMP hub profile %s found, but it is missing a required value.';
   Fnohuberror:='No SAMP hub profile found, no hub is running.';
@@ -412,13 +421,13 @@ var map:Tmap;
 begin
   SetLength(map,4);
   map[0].name:='samp.name';
-  map[0].value:='skychart';
+  map[0].value:=Fappname;
   map[1].name:='samp.description.text';
-  map[1].value:='Cartes du Ciel - Skychart planetarium';
+  map[1].value:=Fappdesc;
   map[2].name:='samp.icon.url';
-  map[2].value:='http://ap-i.net/skychart/ciel.png';
+  map[2].value:=Fappicon;
   map[3].name:='samp.documentation.url';
-  map[3].value:='http://ap-i.net/skychart/en/documentation/start';
+  map[3].value:=Fappdoc;
   result:=SampCall('samp.hub.declareMetadata',samp_private_key,map);
 end;
 
