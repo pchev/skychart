@@ -6,7 +6,7 @@ Maintainer: Patrick Chevalley <pch@ap-i.net>
 Architecture: amd64
 Installed-Size: %size%
 Depends: libc6, libx11-6, libgtk2.0-0, libglib2.0-0, libpango1.0-0, libjpeg62, libpng12-0, libsqlite3-0, xplanet 
-Recommends: libindi0, skychart-data-stars, skychart-data-dso, skychart-data-pictures
+Recommends: indi-bin, skychart-data-stars, skychart-data-dso, skychart-data-pictures
 Description: Skychart / Cartes du Ciel planetarium software
  Planetarium software for the advanced amateur astronomer.
  .
