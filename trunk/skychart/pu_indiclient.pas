@@ -83,7 +83,6 @@ type
     abort_prop:      ISwitch;
     GeographicCoord_prop:INumberVectorProperty;
     SlewRate_prop:   ISwitchVectorProperty;
-    MotionRate_prop: INumberVectorProperty;
     moveNS_prop:     ISwitchVectorProperty;
     moveN_prop:      ISwitch;
     moveS_prop:      ISwitch;
@@ -139,7 +138,6 @@ begin
     coord_prop:=nil;
     abortmotion_prop:=nil;
     SlewRate_prop:=nil;
-    MotionRate_prop:=nil;
     moveNS_prop:=nil;
     moveEW_prop:=nil;
     oncoordset_prop:=nil;
@@ -237,15 +235,12 @@ begin
   else if (proptype=INDI_NUMBER)and(propname='GEOGRAPHIC_COORD') then begin
 
   end
-  else if (proptype=INDI_SWITCH)and(propname='Slew Rate') then begin
+  else if (proptype=INDI_SWITCH)and((propname='TELESCOPE_SLEW_RATE')or(propname='SLEWMODE')) then begin
      SlewRateList.Clear;
      SlewRate_prop:=indiProp.getSwitch;
      for i:=0 to SlewRate_prop.nsp-1 do begin
         SlewRateList.Add(SlewRate_prop.sp[i].name);
      end;
-  end
-  else if (proptype=INDI_NUMBER)and(propname='TELESCOPE_MOTION_RATE') then begin
-     MotionRate_prop:=indiProp.getNumber;
   end
   else if (proptype=INDI_SWITCH)and(propname='TELESCOPE_MOTION_NS') then begin
      moveNS_prop:=indiProp.getSwitch;
@@ -483,10 +478,7 @@ end;
 procedure Tpop_indi.GetScopeRates(var nrates:integer;var srate: TStringList);
 begin
 srate.Clear;
-if MotionRate_prop<>nil then begin
-   // no driver at the moment
-end
-else if SlewRate_prop<>nil then begin
+if SlewRate_prop<>nil then begin
   srate.Assign(SlewRateList);
 end;
 if srate.Count=0 then srate.Add('N/A');
@@ -494,39 +486,48 @@ nrates:=srate.count;
 end;
 
 procedure Tpop_indi.ScopeMoveAxis(axis:Integer; rate: string);
-var dir1,dir2: string;
-    positive: boolean;
+var positive: boolean;
     sw:ISwitch;
 begin
 if (moveNS_prop<>nil) and (moveEW_prop<>nil) then begin
-  positive:=(copy(rate,1,1)<>'-');
-  if not positive then delete(rate,1,1);
-  if MotionRate_prop<>nil then begin
-     // no driver at the moment
-  end
-  else if SlewRate_prop<>nil then begin
-    if pos('N/A',rate)=0 then begin
-       sw:=IUFindSwitch(SlewRate_prop,rate);
-       if sw<>nil then begin
-         IUResetSwitch(SlewRate_prop);
-         sw.s:=ISS_ON;
-         client.sendNewSwitch(SlewRate_prop);
-       end;
+  if rate='0' then begin
+     case axis of
+       0: begin  //  alpha
+            IUResetSwitch(moveEW_prop);
+            client.sendNewSwitch(moveEW_prop);
+          end;
+       1: begin  // delta
+            IUResetSwitch(moveNS_prop);
+            client.sendNewSwitch(moveNS_prop);
+          end;
+     end;
+  end else begin
+    positive:=(copy(rate,1,1)<>'-');
+    if not positive then delete(rate,1,1);
+    if SlewRate_prop<>nil then begin
+      if pos('N/A',rate)=0 then begin
+         sw:=IUFindSwitch(SlewRate_prop,rate);
+         if sw<>nil then begin
+           IUResetSwitch(SlewRate_prop);
+           sw.s:=ISS_ON;
+           client.sendNewSwitch(SlewRate_prop);
+         end;
+      end;
     end;
-  end;
-  case axis of
-    0: begin  //  alpha
-         IUResetSwitch(moveEW_prop);
-         if positive then moveW_prop.s:=ISS_ON
-                     else moveE_prop.s:=ISS_ON;
-         client.sendNewSwitch(moveEW_prop);
-       end;
-    1: begin  // delta
-         IUResetSwitch(moveNS_prop);
-         if positive then moveN_prop.s:=ISS_ON
-                     else moveS_prop.s:=ISS_ON;
-         client.sendNewSwitch(moveNS_prop);
-       end;
+    case axis of
+      0: begin  //  alpha
+           IUResetSwitch(moveEW_prop);
+           if positive then moveW_prop.s:=ISS_ON
+                       else moveE_prop.s:=ISS_ON;
+           client.sendNewSwitch(moveEW_prop);
+         end;
+      1: begin  // delta
+           IUResetSwitch(moveNS_prop);
+           if positive then moveN_prop.s:=ISS_ON
+                       else moveS_prop.s:=ISS_ON;
+           client.sendNewSwitch(moveNS_prop);
+         end;
+    end;
   end;
 end;
 end;

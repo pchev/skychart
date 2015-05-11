@@ -1,5 +1,5 @@
 [Panel]
-Title=%rsObserverTool
+Title=Observer tools
 HidenTimer=0
 NumToolbar1=3
 toolbar1_0=48;TelescopeConnect
@@ -224,9 +224,6 @@ s="// Stop moving"
 " memo_1.clear;"
 " if MenuTelescopeConnect.checked then begin"
 "   GetSL('STRL1',c);"
-"   c.clear;"
-"   c.add('ABORTSLEW');"
-"   r:=cmd('',c);"
 "   c.clear;"
 "   c.add('SCOPEMOVEAXIS');"
 "   c.add('0');"
