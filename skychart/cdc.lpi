@@ -402,7 +402,6 @@
       <Unit6>
         <Filename Value="cu_skychart.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cu_skychart"/>
       </Unit6>
       <Unit7>
         <Filename Value="cu_catalog.pas"/>
@@ -428,7 +427,6 @@
         <ComponentName Value="f_chart"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="fu_chart"/>
       </Unit10>
       <Unit11>
         <Filename Value="pu_detail.pas"/>
@@ -457,7 +455,6 @@
         <ComponentName Value="f_info"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_info"/>
       </Unit14>
       <Unit15>
         <Filename Value="pu_manualtelescope.pas"/>
