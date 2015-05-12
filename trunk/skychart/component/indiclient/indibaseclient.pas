@@ -55,8 +55,10 @@ type
     FServerConnected: TNotifyEvent;
     FServerDisconnected: TNotifyEvent;
     FIndiDeviceEvent: TIndiDeviceEvent;
+    FIndiDeleteDeviceEvent: TIndiDeviceEvent;
     FIndiMessageEvent: TIndiMessageEvent;
     FIndiPropertyEvent: TIndiPropertyEvent;
+    FIndiDeletePropertyEvent: TIndiPropertyEvent;
     FIndiNumberEvent: TIndiNumberEvent;
     FIndiTextEvent: TIndiTextEvent;
     FIndiSwitchEvent: TIndiSwitchEvent;
@@ -71,8 +73,10 @@ type
     SyncindiLight: ILightVectorProperty;
     SyncindiBlob: IBLOB;
     procedure IndiDeviceEvent(dp: Basedevice);
+    procedure IndiDeleteDeviceEvent(dp: Basedevice);
     procedure IndiMessageEvent(msg: string);
     procedure IndiPropertyEvent(indiProp: IndiProperty);
+    procedure IndiDeletePropertyEvent(indiProp: IndiProperty);
     procedure IndiNumberEvent(nvp: INumberVectorProperty);
     procedure IndiTextEvent(tvp: ITextVectorProperty);
     procedure IndiSwitchEvent(svp: ISwitchVectorProperty);
@@ -81,8 +85,10 @@ type
     procedure SyncServerConnected;
     procedure SyncServerDisonnected;
     procedure SyncDeviceEvent;
+    procedure SyncDeleteDeviceEvent;
     procedure SyncMessageEvent;
     procedure SyncPropertyEvent;
+    procedure SyncDeletePropertyEvent;
     procedure SyncNumberEvent;
     procedure SyncTextEvent;
     procedure SyncSwitchEvent;
@@ -108,6 +114,7 @@ type
     procedure Send(const Value: string);
     property devices: TObjectlist read Fdevices;
     function getDevice(deviceName: string): Basedevice;
+    procedure deleteDevice(deviceName: string; out errmsg: string);
     procedure sendNewNumber(nvp: INumberVectorProperty);
     procedure sendNewText(tvp: ITextVectorProperty);
     procedure sendNewSwitch(svp: ISwitchVectorProperty);
@@ -122,8 +129,10 @@ type
     property onServerConnected: TNotifyEvent read FServerConnected write FServerConnected;
     property onServerDisconnected: TNotifyEvent read FServerDisconnected write FServerDisconnected;
     property onNewDevice: TIndiDeviceEvent read FIndiDeviceEvent write FIndiDeviceEvent;
+    property onDeleteDevice: TIndiDeviceEvent read FIndiDeleteDeviceEvent write FIndiDeleteDeviceEvent;
     property onNewMessage : TIndiMessageEvent read FIndiMessageEvent write FIndiMessageEvent;
     property onNewProperty : TIndiPropertyEvent read FIndiPropertyEvent write FIndiPropertyEvent;
+    property onDeleteProperty : TIndiPropertyEvent read FIndiDeletePropertyEvent write FIndiDeletePropertyEvent;
     property onNewNumber : TIndiNumberEvent read FIndiNumberEvent write FIndiNumberEvent;
     property onNewText   : TIndiTextEvent read FIndiTextEvent write FIndiTextEvent;
     property onNewSwitch : TIndiSwitchEvent read FIndiSwitchEvent write FIndiSwitchEvent;
@@ -183,6 +192,8 @@ end;
 
 Constructor TIndiBaseClient.Create ;
 begin
+// start suspended to let time to the main thread to set the parameters
+inherited create(true);
 FTargetHost:='localhost';
 FTargetPort:='7624';
 FTimeout:=50;
@@ -191,8 +202,6 @@ FreeOnTerminate:=true;
 Ftrace:=false;  // for debuging only
 Fdevices:=TObjectList.Create;
 FwatchDevices:=TStringlist.Create;
-// start suspended to let time to the main thread to set the parameters
-inherited create(true);
 end;
 
 destructor TIndiBaseClient.Destroy;
@@ -285,6 +294,7 @@ begin
      result.setDeviceName(buf);
      result.onNewMessage:=@IndiMessageEvent;
      result.onNewProperty:=@IndiPropertyEvent;
+     result.onDeleteProperty:=@IndiDeletePropertyEvent;
      result.onNewNumber:=@IndiNumberEvent;
      result.onNewText:=@IndiTextEvent;
      result.onNewSwitch:=@IndiSwitchEvent;
@@ -307,12 +317,25 @@ begin
     exit(nil);
 end;
 
+procedure TIndiBaseClient.deleteDevice(deviceName: string; out errmsg: string);
+var dp: BaseDevice;
+    i: integer;
+begin
+  for i:=0 to Fdevices.Count-1 do
+     if (deviceName = BaseDevice(Fdevices[i]).getDeviceName) then begin
+        dp:=(BaseDevice(Fdevices[i]));
+        if assigned(FIndiDeleteDeviceEvent) then IndiDeleteDeviceEvent(dp);
+        Fdevices.Delete(i);
+        break;
+     end;
+end;
+
 procedure TIndiBaseClient.ProcessData(line:string);
 var Doc: TXMLDocument;
     Node: TDOMNode;
     dp: BaseDevice;
     s: TStringStream;
-    buf,errmsg: string;
+    buf,errmsg,dname,pname: string;
 begin
 //if Ftrace then writeln(line);
 FRecvData:='<INDIMSG>'+line+'</INDIMSG>';
@@ -327,7 +350,15 @@ while Node<>nil do begin
       dp.checkMessage(Node);
    end;
    if Node.NodeName='delProperty' then begin
-      // TODO
+      dname:=GetNodeValue(GetAttrib(Node,'device'));
+      if dname='' then dname:='Unnamed_device';
+      pname:=GetNodeValue(GetAttrib(Node,'name'));
+      if pname='' then begin
+         deleteDevice(dname,errmsg)
+      end
+      else begin
+         dp.removeProperty(pname,errmsg);
+      end;
    end;
    buf:=copy(GetNodeName(Node),1,3);
    if buf='set' then dp.setValue(Node,errmsg)
@@ -533,6 +564,11 @@ begin
   SyncindiDev:=dp;
   Synchronize(@SyncDeviceEvent);
 end;
+procedure TIndiBaseClient.IndiDeleteDeviceEvent(dp: Basedevice);
+begin
+  SyncindiDev:=dp;
+  Synchronize(@SyncDeleteDeviceEvent);
+end;
 procedure TIndiBaseClient.IndiMessageEvent(msg: string);
 begin
   SyncindiMessage:=msg;
@@ -542,6 +578,11 @@ procedure TIndiBaseClient.IndiPropertyEvent(indiProp: IndiProperty);
 begin
   SyncindiProp:=indiProp;
   Synchronize(@SyncPropertyEvent);
+end;
+procedure TIndiBaseClient.IndiDeletePropertyEvent(indiProp: IndiProperty);
+begin
+  SyncindiProp:=indiProp;
+  Synchronize(@SyncDeletePropertyEvent);
 end;
 procedure TIndiBaseClient.IndiNumberEvent(nvp: INumberVectorProperty);
 begin
@@ -582,6 +623,10 @@ procedure TIndiBaseClient.SyncDeviceEvent;
 begin
   if assigned(FIndiDeviceEvent) then FIndiDeviceEvent(SyncindiDev);
 end;
+procedure TIndiBaseClient.SyncDeleteDeviceEvent;
+begin
+  if assigned(FIndiDeleteDeviceEvent) then FIndiDeleteDeviceEvent(SyncindiDev);
+end;
 procedure TIndiBaseClient.SyncMessageEvent;
 begin
   if assigned(FIndiMessageEvent) then FIndiMessageEvent(SyncindiMessage);
@@ -589,6 +634,10 @@ end;
 procedure TIndiBaseClient.SyncPropertyEvent;
 begin
   if assigned(FIndiPropertyEvent) then FIndiPropertyEvent(SyncindiProp);
+end;
+procedure TIndiBaseClient.SyncDeletePropertyEvent;
+begin
+  if assigned(FIndiDeletePropertyEvent) then FIndiDeletePropertyEvent(SyncindiProp);
 end;
 procedure TIndiBaseClient.SyncNumberEvent;
 begin
