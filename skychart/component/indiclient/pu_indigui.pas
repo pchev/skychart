@@ -57,7 +57,9 @@ type
     public
       ctrl: TStringList;
       entry: TStringList;
+      widget: TStringList;
       state: TIpsLed;
+      lbl:   TLabel;
       name: string;
       page: TScrollBox;
       dp: BaseDevice;
@@ -85,15 +87,17 @@ type
     FonDestroy: TNotifyEvent;
     FButtonGroup: integer;
     procedure NewDevice(dp: Basedevice);
+    procedure DeleteDevice(dp: Basedevice);
     procedure NewMessage(txt: string);
     procedure NewProperty(indiProp: IndiProperty);
+    procedure DeleteProperty(indiProp: IndiProperty);
     procedure NewNumber(nvp: INumberVectorProperty);
     procedure NewText(tvp: ITextVectorProperty);
     procedure NewSwitch(svp: ISwitchVectorProperty);
     procedure NewLight(lvp: ILightVectorProperty);
     procedure ServerConnected(Sender: TObject);
     procedure ServerDisconnected(Sender: TObject);
-    procedure AddSpacer(p:TWinControl);
+    procedure AddSpacer(iprop:TIndiProp);
     procedure CreateTextWidget(iprop:TIndiProp);
     procedure CreateSwitchWidget(iprop:TIndiProp);
     procedure CreateNumberWidget(iprop:TIndiProp);
@@ -131,7 +135,10 @@ begin
 end;
 
 destructor TIndiDev.Destroy;
+var i: integer;
 begin
+  for i:=0 to group.Count-1 do if group.Objects[i]<>nil then group.Objects[i].Free;
+  for i:=0 to props.Count-1 do if props.Objects[i]<>nil then props.Objects[i].Free;
   group.Free;
   props.Free;
 end;
@@ -141,12 +148,16 @@ constructor TIndiProp.Create;
 begin
   ctrl:=TStringList.Create;
   entry:=TStringList.Create;
+  widget:=TStringList.Create;
 end;
 
 destructor TIndiProp.Destroy;
+var i: integer;
 begin
+  // objects are destroyed by TForms
   ctrl.Free;
   entry.Free;
+  widget.Free;
 end;
 
 /////  TIpsLed //////
@@ -218,8 +229,10 @@ begin
   indiclient:=TIndiBaseClient.Create;
   devlist:=Tstringlist.Create;
   indiclient.onNewDevice:=@NewDevice;
+  indiclient.onDeleteDevice:=@DeleteDevice;
   indiclient.onNewMessage:=@NewMessage;
   indiclient.onNewProperty:=@NewProperty;
+  indiclient.onDeleteProperty:=@DeleteProperty;
   indiclient.onNewNumber:=@NewNumber;
   indiclient.onNewText:=@NewText;
   indiclient.onNewSwitch:=@NewSwitch;
@@ -229,9 +242,11 @@ begin
 end;
 
 procedure Tf_indigui.FormDestroy(Sender: TObject);
+var i:integer;
 begin
   if assigned(FonDestroy) then FonDestroy(self);
   indiclient.Terminate;
+  for i:=0 to devlist.Count-1 do if devlist.Objects[i]<>nil then devlist.Objects[i].Free;
   devlist.Free;
 end;
 
@@ -265,6 +280,25 @@ begin
  idev.page.Parent:=tb;
  idev.page.Align:=alClient;
  devlist.AddObject(devname,idev);
+end;
+
+procedure Tf_indigui.DeleteDevice(dp: Basedevice);
+var devname:string;
+    i,j:integer;
+begin
+  devname:=dp.getDeviceName;
+  for i:=0 to dev.PageCount-1 do begin
+    if dev.Pages[i].Caption=devname then begin
+      for j:=0 to devlist.Count-1 do begin
+        if TIndiDev(devlist.Objects[j]).page.Parent=dev.Pages[i] then begin
+          dev.Pages[i].Free;
+          devlist.Delete(j);
+          break;
+        end;
+      end;
+      break;
+    end;
+  end;
 end;
 
 procedure Tf_indigui.NewMessage(txt: string);
@@ -318,6 +352,7 @@ begin
   lbl.Caption:=proplbl;
   lbl.Parent:=iprop.page;
   iprop.state:=led;
+  iprop.lbl:=lbl;
   iprop.name:=propname;
   iprop.iprop:=indiProp;
   case proptype of
@@ -331,12 +366,61 @@ begin
   iprop.idev.props.AddObject(propname,iprop);
 end;
 
-procedure Tf_indigui.AddSpacer(p:TWinControl);
+procedure Tf_indigui.DeleteProperty(indiProp: IndiProperty);
+var devname,groupname,propname,proplbl: string;
+    proptype: INDI_TYPE;
+    sb: TScrollBox;
+    tb: TTabSheet;
+    iprop: TIndiProp;
+    idev: TIndiDev;
+    ip,ig,i,gcount: integer;
+begin
+  devname:=indiProp.getDeviceName;
+  groupname:=indiProp.getGroupName;
+  propname:=indiProp.getName;
+  proplbl:=indiProp.getLabel;
+  if proplbl='' then proplbl:=propname;
+  proptype:=indiProp.getType;
+  i:=devlist.IndexOf(devname);
+  if i<0 then exit;
+  idev:=TIndiDev(devlist.Objects[i]);
+  ip:=idev.props.IndexOf(propname);
+  if ip<0 then exit;
+  iprop:=TIndiProp(idev.props.Objects[ip]);
+  for i:=0 to iprop.ctrl.Count-1 do begin
+    iprop.ctrl.Objects[i].Free;
+  end;
+  for i:=0 to iprop.entry.Count-1 do begin
+    iprop.entry.Objects[i].Free;
+  end;
+  for i:=0 to iprop.widget.Count-1 do begin
+    iprop.widget.Objects[i].Free;
+  end;
+  iprop.state.Free;
+  iprop.lbl.Free;
+  iprop.Free;
+  idev.props.Delete(ip);
+  ig:=idev.group.IndexOf(groupname);
+  if ig<0 then exit;
+  sb:=TScrollBox(idev.group.Objects[ig]);
+  gcount:=0;
+  for i:=0 to idev.props.Count-1 do begin
+    if TIndiProp(idev.props.Objects[i]).page=sb then inc(gcount);
+  end;
+  if gcount=0 then begin
+    tb:=TTabSheet(sb.Parent);
+    tb.Free;
+    idev.group.Delete(ig);
+  end;
+end;
+
+procedure Tf_indigui.AddSpacer(iprop:TIndiProp);
 var spacer: TLabel;
 begin
    spacer:=TLabel.Create(self);
    spacer.Caption:=' ';
-   spacer.Parent:=p;
+   spacer.Parent:=iprop.page;
+   iprop.widget.AddObject('',spacer);
 end;
 
 procedure Tf_indigui.CreateTextWidget(iprop:TIndiProp);
@@ -353,8 +437,8 @@ begin
   btnok:=false;
   for i:=0 to tvp.ntp-1 do begin
      if i>0 then begin
-       AddSpacer(iprop.page);
-       AddSpacer(iprop.page);
+       AddSpacer(iprop);
+       AddSpacer(iprop);
      end;
      lbl:=TLabel.Create(self);
      lbl.AutoSize:=true;
@@ -362,6 +446,7 @@ begin
      if trim(n)='' then n:=tvp.tp[i].name;
      lbl.Caption:=n+':';
      lbl.Parent:=iprop.page;
+     iprop.widget.AddObject(lbl.Caption,lbl);
      txt:=TLabel.Create(self);
      txt.AutoSize:=true;
      txt.Caption:=tvp.tp[i].text;
@@ -380,12 +465,13 @@ begin
            btn.OnClick:=@SetButtonClick;
            btn.tag:=PtrInt(iprop);
            btn.Parent:=iprop.page;
+           iprop.widget.AddObject(btn.Caption,btn);
         end else begin
-           AddSpacer(iprop.page);
+           AddSpacer(iprop);
         end;
      end else begin
-        AddSpacer(iprop.page);
-        AddSpacer(iprop.page);
+        AddSpacer(iprop);
+        AddSpacer(iprop);
      end;
   end;
 end;
@@ -453,8 +539,8 @@ begin
   btnok:=false;
   for i:=0 to nvp.nnp-1 do begin
      if i>0 then begin
-       AddSpacer(iprop.page);
-       AddSpacer(iprop.page);
+       AddSpacer(iprop);
+       AddSpacer(iprop);
      end;
      lbl:=TLabel.Create(self);
      lbl.AutoSize:=true;
@@ -462,6 +548,7 @@ begin
      if trim(n)='' then n:=nvp.np[i].name;
      lbl.Caption:=n+':';
      lbl.Parent:=iprop.page;
+     iprop.widget.AddObject(lbl.Caption,lbl);
      txt:=TLabel.Create(self);
      txt.AutoSize:=true;
      txt.Caption:=IndiFormatFloat(nvp.np[i].value,nvp.np[i].format);
@@ -480,12 +567,13 @@ begin
            btn.OnClick:=@SetButtonClick;
            btn.tag:=PtrInt(iprop);
            btn.Parent:=iprop.page;
+           iprop.widget.AddObject(btn.Caption,btn);
         end else begin
-           AddSpacer(iprop.page);
+           AddSpacer(iprop);
         end;
      end else begin
-        AddSpacer(iprop.page);
-        AddSpacer(iprop.page);
+        AddSpacer(iprop);
+        AddSpacer(iprop);
      end;
   end;
 end;
@@ -529,7 +617,7 @@ begin
   chk.tag:=PtrInt(iprop);
   chk.Parent:=iprop.page;
   iprop.ctrl.AddObject(svp.name,chk);
-  for i:=1 to 3 do AddSpacer(iprop.page);
+  for i:=1 to 3 do AddSpacer(iprop);
 end;
 
 procedure Tf_indigui.CreateSwitchButton(svp:ISwitchVectorProperty; iprop:TIndiProp);
@@ -552,7 +640,7 @@ begin
      btn.Parent:=iprop.page;
      iprop.ctrl.AddObject(svp.sp[i].name,btn);
   end;
-  for i:=svp.nsp+1 to 4 do AddSpacer(iprop.page);
+  for i:=svp.nsp+1 to 4 do AddSpacer(iprop);
  end;
 
 procedure Tf_indigui.CreateSwitchCombobox(svp:ISwitchVectorProperty; iprop:TIndiProp);
@@ -574,7 +662,7 @@ begin
   cmb.tag:=PtrInt(iprop);
   cmb.Parent:=iprop.page;
   iprop.ctrl.AddObject(svp.name,cmb);
-  for i:=1 to 3 do AddSpacer(iprop.page);
+  for i:=1 to 3 do AddSpacer(iprop);
 end;
 
 procedure Tf_indigui.CreateLightWidget(iprop:TIndiProp);
@@ -585,8 +673,8 @@ begin
   lvp:=iprop.iprop.getLight;
   for i:=0 to lvp.nlp-1 do begin
      if i>0 then begin
-       AddSpacer(iprop.page);
-       AddSpacer(iprop.page);
+       AddSpacer(iprop);
+       AddSpacer(iprop);
      end;
      lbl:=TLabel.Create(self);
      lbl.AutoSize:=true;
@@ -606,7 +694,7 @@ begin
      end;
      lbl.Parent:=iprop.page;
      iprop.ctrl.AddObject(lvp.lp[i].name,lbl);
-     AddSpacer(iprop.page);
+     AddSpacer(iprop);
   end;
 end;
 
@@ -618,8 +706,8 @@ begin
   bvp:=iprop.iprop.getBLOB;
   for i:=0 to bvp.nbp-1 do begin
      if i>0 then begin
-       AddSpacer(iprop.page);
-       AddSpacer(iprop.page);
+       AddSpacer(iprop);
+       AddSpacer(iprop);
      end;
      lbl:=TLabel.Create(self);
      lbl.AutoSize:=true;
@@ -629,17 +717,18 @@ begin
      lbl.AutoSize:=true;
      lbl.Caption:=bvp.bp[i].lbl;
      lbl.Parent:=iprop.page;
-     AddSpacer(iprop.page);
-     AddSpacer(iprop.page);
+     iprop.widget.AddObject(lbl.Caption,lbl);
+     AddSpacer(iprop);
+     AddSpacer(iprop);
   end;
 end;
 
 procedure Tf_indigui.CreateUnknowWidget(iprop:TIndiProp);
 begin
-  AddSpacer(iprop.page);
-  AddSpacer(iprop.page);
-  AddSpacer(iprop.page);
-  AddSpacer(iprop.page);
+  AddSpacer(iprop);
+  AddSpacer(iprop);
+  AddSpacer(iprop);
+  AddSpacer(iprop);
 end;
 
 procedure Tf_indigui.NewNumber(nvp: INumberVectorProperty);

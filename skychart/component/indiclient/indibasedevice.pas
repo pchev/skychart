@@ -86,6 +86,7 @@ type
   private
       FIndiMessageEvent: TIndiMessageEvent;
       FIndiPropertyEvent: TIndiPropertyEvent;
+      FIndiDeletePropertyEvent: TIndiPropertyEvent;
       FIndiNumberEvent: TIndiNumberEvent;
       FIndiTextEvent: TIndiTextEvent;
       FIndiSwitchEvent: TIndiSwitchEvent;
@@ -106,12 +107,14 @@ type
       function getLight(name: string):ILightVectorProperty;
       function getBlob(name: string):IBLOBVectorProperty;
       function buildProp(root: TDOMNode; out errmsg: string):integer;
+      function removeProperty(pname: string; out errmsg: string):integer;
       function setValue(root: TDOMNode; out errmsg: string):integer;
       function setBLOB(bvp: IBLOBVectorProperty; root: TDOMNode; out errmsg:string): integer;
       procedure checkMessage(root: TDOMNode);
 
       property onNewMessage  : TIndiMessageEvent read FIndiMessageEvent write FIndiMessageEvent;
       property onNewProperty : TIndiPropertyEvent read FIndiPropertyEvent write FIndiPropertyEvent;
+      property onDeleteProperty : TIndiPropertyEvent read FIndiDeletePropertyEvent write FIndiDeletePropertyEvent;
       property onNewNumber : TIndiNumberEvent read FIndiNumberEvent write FIndiNumberEvent;
       property onNewText   : TIndiTextEvent read FIndiTextEvent write FIndiTextEvent;
       property onNewSwitch : TIndiSwitchEvent read FIndiSwitchEvent write FIndiSwitchEvent;
@@ -358,6 +361,7 @@ begin
         cnode:=GetAttrib(node,'name');
         if cnode=nil then exit(-1);
         tp.name:=GetNodeValue(cnode);
+        cnode.Free;
         cnode:=GetAttrib(node,'label');
         if cnode<>nil then tp.lbl :=GetNodeValue(cnode);
         cnode:=node.FirstChild;
@@ -453,6 +457,28 @@ begin
     pAll.Add(indiProp);
     if assigned(FIndiPropertyEvent) then FIndiPropertyEvent(indiProp);
   end;
+
+end;
+
+function BaseDevice.removeProperty(pname: string; out errmsg: string):integer;
+var indiProp: IndiProperty;
+    i: integer;
+begin
+ indiProp:=getProperty(pname);
+ if indiProp<>nil then begin
+  if assigned(FIndiDeletePropertyEvent) then FIndiDeletePropertyEvent(indiProp);
+  for i:=0 to pAll.Count do begin
+     if pAll[i]=indiProp then begin
+        pAll.Delete(i);
+        break;
+     end;
+  end;
+  exit(0);
+ end
+ else begin
+   errmsg:=format('Error: Property %s not found in device %s.',[pname,deviceID]);
+   exit(-1);
+ end;
 
 end;
 

@@ -101,6 +101,8 @@ type
     procedure NewText(tvp: ITextVectorProperty);
     procedure NewSwitch(svp: ISwitchVectorProperty);
     procedure NewLight(lvp: ILightVectorProperty);
+    procedure DeleteDevice(dp: Basedevice);
+    procedure DeleteProperty(indiProp: IndiProperty);
     procedure ServerConnected(Sender: TObject);
     procedure ServerDisconnected(Sender: TObject);
     procedure IndiGUIdestroy(Sender: TObject);
@@ -187,6 +189,19 @@ begin
      connected:=true;
      TelescopeDevice:=dp;
   end;
+end;
+
+procedure Tpop_indi.DeleteDevice(dp: Basedevice);
+var ok:boolean;
+begin
+  if dp.getDeviceName=csc.indidevice then begin
+     ScopeDisconnect(ok);
+  end;
+end;
+
+procedure Tpop_indi.DeleteProperty(indiProp: IndiProperty);
+begin
+  { TODO :  check if a vital property is removed ? }
 end;
 
 procedure Tpop_indi.NewMessage(msg: string);
@@ -347,6 +362,8 @@ if not connected then begin
     client.onNewText:=@NewText;
     client.onNewSwitch:=@NewSwitch;
     client.onNewLight:=@NewLight;
+    client.onDeleteDevice:=@DeleteDevice;
+    client.onDeleteProperty:=@DeleteProperty;
     client.onServerConnected:=@ServerConnected;
     client.onServerDisconnected:=@ServerDisconnected;
   end else begin
