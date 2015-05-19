@@ -1,7 +1,7 @@
 object pop_indi: Tpop_indi
-  Left = 244
+  Left = 456
   Height = 401
-  Top = 121
+  Top = 130
   Width = 279
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
@@ -14,15 +14,15 @@ object pop_indi: Tpop_indi
   OnDestroy = FormDestroy
   ParentFont = True
   Position = poDefaultPosOnly
-  LCLVersion = '1.4.0.4'
+  LCLVersion = '1.4.1.0'
   object GroupBox3: TGroupBox
     Left = 0
     Height = 136
     Top = 137
     Width = 279
     Align = alTop
-    ClientHeight = 134
-    ClientWidth = 277
+    ClientHeight = 132
+    ClientWidth = 275
     TabOrder = 2
     object Connect: TButton
       Left = 8
@@ -103,7 +103,7 @@ object pop_indi: Tpop_indi
     TabOrder = 1
     object LabelAlpha: TLabel
       Left = 8
-      Height = 15
+      Height = 16
       Top = 20
       Width = 20
       Caption = 'RA '
@@ -111,7 +111,7 @@ object pop_indi: Tpop_indi
     end
     object LabelDelta: TLabel
       Left = 126
-      Height = 15
+      Height = 16
       Top = 20
       Width = 25
       Caption = 'DEC'
@@ -119,7 +119,7 @@ object pop_indi: Tpop_indi
     end
     object pos_x: TEdit
       Left = 30
-      Height = 21
+      Height = 22
       Top = 16
       Width = 86
       ReadOnly = True
@@ -128,7 +128,7 @@ object pop_indi: Tpop_indi
     end
     object pos_y: TEdit
       Left = 158
-      Height = 21
+      Height = 22
       Top = 16
       Width = 86
       ReadOnly = True
@@ -143,12 +143,12 @@ object pop_indi: Tpop_indi
     Width = 279
     Align = alTop
     Caption = 'Current driver'
-    ClientHeight = 65
-    ClientWidth = 277
+    ClientHeight = 49
+    ClientWidth = 275
     TabOrder = 0
     object Edit1: TEdit
       Left = 8
-      Height = 21
+      Height = 22
       Top = 24
       Width = 153
       Color = clBtnFace
@@ -167,27 +167,11 @@ object pop_indi: Tpop_indi
     ScrollBars = ssAutoBoth
     TabOrder = 3
   end
-  object IndiProcess: TProcess
-    Active = False
-    Options = []
-    Priority = ppNormal
-    StartupOptions = []
-    ShowWindow = swoNone
-    WindowColumns = 0
-    WindowHeight = 0
-    WindowLeft = 0
-    WindowRows = 0
-    WindowTop = 0
-    WindowWidth = 0
-    FillAttribute = 0
-    left = 176
-    top = 40
-  end
   object InitTimer: TTimer
     Enabled = False
     Interval = 5000
     OnTimer = InitTimerTimer
-    left = 240
+    left = 232
     top = 40
   end
 end

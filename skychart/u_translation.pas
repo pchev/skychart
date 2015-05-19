@@ -804,12 +804,8 @@ resourcestring
   rsINDIDriverSe = 'INDI driver settings';
   rsINDIServerHo = 'INDI server host ';
   rsINDIServerPo = 'INDI server port';
-  rsServerComman = 'Server command ';
-  rsDriverName = 'Driver name';
-  rsTelescopeTyp = 'Telescope type';
-  rsDevicePort = 'Device port ';
+  rsTelescopeNam = 'Telescope name';
   rsControlPanel2 = 'Control panel command ';
-  rsAutomaticall = 'Automatically start a local server if not already running';
   rsAlsoBeSureTh = '%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?';
   rsWarningYouAr = 'Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?';
   rsTime = 'Time';
@@ -1555,6 +1551,9 @@ resourcestring
   rsShow0Horizon = 'Show 0d horizon line';
   rsSetOptionsFo = 'Set options for best performance';
   rsVersion = 'Version';
+  rsLaunchINDIst = 'Launch INDIstarter if the server is not running';
+  rsConnectionTo = 'Connection to INDI server failed!';
+  rsPleaseInstal = 'Please install indistarter package!';
 
 // also update upsi_translation
 

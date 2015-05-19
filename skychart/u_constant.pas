@@ -927,8 +927,7 @@ type
     PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline,
     DSLforcecolor: boolean;
     ManualTelescopeType, CoordType, DSLcolor: integer;
-    IndiServerHost, IndiServerPort, IndiServerCmd,
-    IndiDriver, IndiPort, IndiDevice: string;
+    IndiServerHost, IndiServerPort, IndiDevice: string;
     IndiAutostart, ShowCircle, ShowCrosshair, IndiTelescope, ASCOMTelescope,
     LX200Telescope, EncoderTelescope, ManualTelescope, ShowImages, EyepieceMask,
     ShowImageList, ShowImageLabel, ShowBackgroundImage, showstars, shownebulae, showline,
@@ -1248,8 +1247,6 @@ var
   de_folder,de_filename: string;
   de_type, de_jdcheck : integer;
   de_jdstart, de_jdend: double;
-  NumIndiDriver: integer;
-  IndiDriverLst: array of array of string;
   VerboseMsg: boolean = False;
   WideLine: integer = 2;
   MarkWidth: integer = 1;
@@ -2204,9 +2201,6 @@ begin
   ManualTelescopeType := Source.ManualTelescopeType;
   IndiServerHost := Source.IndiServerHost;
   IndiServerPort := Source.IndiServerPort;
-  IndiServerCmd := Source.IndiServerCmd;
-  IndiDriver := Source.IndiDriver;
-  IndiPort := Source.IndiPort;
   IndiDevice := Source.IndiDevice;
   IndiAutostart := Source.IndiAutostart;
   ShowCircle := Source.ShowCircle;

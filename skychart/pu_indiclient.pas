@@ -41,7 +41,6 @@ type
     GroupBox3: TGroupBox;
     Connect: TButton;
     Memomsg: TMemo;
-    IndiProcess: TProcess;
     SpeedButton2: TButton;
     Disconnect: TButton;
     led: TEdit;
@@ -168,16 +167,21 @@ end;
 procedure Tpop_indi.ServerConnected(Sender: TObject);
 begin
    Memomsg.Lines.Add('Server connected');
-   if (scope_port<>nil)and(csc.IndiPort<>'') then begin
-      scope_port.tp[0].text:=csc.IndiPort;
-      client.sendNewText(scope_port);
-   end;
    client.connectDevice(csc.IndiDevice);
 end;
 
 procedure Tpop_indi.ServerDisconnected(Sender: TObject);
 begin
-  Memomsg.Lines.Add('Server disconnected');
+  if InitTimer.Enabled then begin
+     if csc.IndiAutostart then begin
+        InitTimer.Enabled:=false;
+        ExecNoWait('nohup indistarter');
+     end else begin
+        Memomsg.Lines.Add('Server disconnected');
+     end;
+  end else begin
+    Memomsg.Lines.Add('Server disconnected');
+  end;
   ClearStatus;
   led.color:=clRed;
 end;
@@ -289,8 +293,18 @@ begin
 end;
 
 procedure Tpop_indi.NewSwitch(svp: ISwitchVectorProperty);
+var propname: string;
+    sw: ISwitch;
+    ok:boolean;
 begin
-//  Memomsg.Lines.Add('NewSwitch: '+svp.name);
+  //  writeln('NewSwitch: '+svp.name);
+  propname:=svp.name;
+  if (propname='CONNECTION') then begin
+    sw:=IUFindOnSwitch(svp);
+    if (sw<>nil)and(sw.name='DISCONNECT') then begin
+      ScopeDisconnect(ok);
+    end;
+  end;
 end;
 
 procedure Tpop_indi.NewLight(lvp: ILightVectorProperty);
@@ -301,58 +315,23 @@ end;
 Procedure Tpop_indi.ScopeDisconnect(var ok : boolean; updstatus:boolean=true);
 var i: integer;
 begin
+InitTimer.Enabled:=false;
 pos_x.text:='';
 pos_y.text:='';
 if (client<>nil) then begin
    client.Terminate;
-end;
-if IndiProcess.Active then begin
-   writetrace('Kill indi server');
-   IndiProcess.Terminate(i);
-   IndiProcess.Executable:='';
-   IndiProcess.Parameters.Clear;
 end;
 ClearStatus;
 ok:=true;
 end;
 
 Procedure Tpop_indi.ScopeConnect(var ok : boolean);
-var buf,plugin,IndiServer,IndiDriver:string;
-    i : integer;
-    localplugin: boolean;
+var i : integer;
 begin
 if not connected then begin
   led.color:=clRed;
   Memomsg.Clear;
   led.refresh;
-  if csc.IndiAutostart and (not IndiProcess.Active) then begin
-     buf:=GetCurrentDir;
-     try
-       IndiServer:=csc.IndiServerCmd;
-       IndiDriver:=csc.IndiDriver;
-       plugin:=slash('plugins');
-       localplugin:=DirectoryExists(plugin);
-       {$ifdef linux}
-         plugin:=ExpandFileName(plugin);
-         if localplugin then chdir(plugin);
-         localplugin:=localplugin and fileexists(plugin+IndiServer) and fileexists(plugin+IndiDriver);
-         if localplugin then begin
-            IndiServer:='./'+IndiServer;
-            IndiDriver:='./'+IndiDriver;
-         end;
-       {$endif}
-       if localplugin then IndiProcess.CurrentDirectory:=plugin else IndiProcess.CurrentDirectory:='';
-       IndiProcess.Executable:=IndiServer;
-       IndiProcess.Parameters.Clear;
-       IndiProcess.Parameters.add('-p');
-       IndiProcess.Parameters.add(csc.IndiServerPort);
-       IndiProcess.Parameters.add(IndiDriver);
-       IndiProcess.Execute;
-     finally
-       chdir(buf);
-     end;
-     ISleep(1000);
-  end;
   if (client=nil)or(not client.Connected) then begin
     client:=TIndiBaseClient.Create;
     client.onNewDevice:=@NewDevice;
@@ -618,9 +597,13 @@ var ok:boolean;
 begin
   InitTimer.Enabled:=false;
   if TelescopeDevice=nil then begin
-     Memomsg.Lines.Add('No response from server');
-     Memomsg.Lines.Add('Is driver"'+csc.IndiDevice+'" running?');
      ScopeDisconnect(ok);
+     if csc.IndiAutostart then begin
+        ExecNoWait('nohup indistarter');
+     end else begin
+        Memomsg.Lines.Add('No response from server');
+        Memomsg.Lines.Add('Is driver"'+csc.IndiDevice+'" running?');
+     end;
   end;
 end;
 
