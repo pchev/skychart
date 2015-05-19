@@ -25,6 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_help, u_translation, u_constant, u_util, cu_database,
+  indibaseclient, indibasedevice,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms, FileUtil, math,
   ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML;
@@ -34,6 +35,7 @@ type
   { Tf_config_system }
 
   Tf_config_system = class(TFrame)
+    GetIndiDevices: TButton;
     CheckBox1: TCheckBox;
     InternalIndiGui: TCheckBox;
     CheckBox2: TCheckBox;
@@ -46,24 +48,18 @@ type
     CheckBox9: TCheckBox;
     InterfaceLabel: TLabel;
     InterfacePanel: TPanel;
-    Button5: TButton;
-    IndiDevOther: TEdit;
-    IndiPort: TEdit;
     INDILabel: TLabel;
     ASCOMLabel: TLabel;
-    IndiServerCmd: TEdit;
     Label15: TLabel;
     Label16: TLabel;
     Label17: TLabel;
     Label18: TLabel;
-    Label258: TLabel;
     MysqlBoxLabel: TLabel;
     MysqlBox: TPanel;
     ASCOMPanel: TPanel;
     PageControl2: TPageControl;
     PageControl3: TPageControl;
     ExternalControlPanel: TPanel;
-    Panel2: TPanel;
     SqliteBoxLabel: TLabel;
     SqliteBox: TPanel;
     TabSheet1: TTabSheet;
@@ -105,6 +101,7 @@ type
     GroupBox3: TGroupBox;
     Label54: TLabel;
     Label55: TLabel;
+    IndiTimer: TTimer;
     UseIPserver: TCheckBox;
     ipaddr: TEdit;
     ipport: TEdit;
@@ -112,14 +109,11 @@ type
     Label13: TLabel;
     Label75: TLabel;
     Label130: TLabel;
-    Label259: TLabel;
     Label260: TLabel;
-    Label261: TLabel;
     IndiServerHost: TEdit;
     IndiServerPort: TEdit;
     IndiAutostart: TCheckBox;
-    IndiDriver: TEdit;
-    IndiDev: TComboBox;
+    MountIndiDevice: TComboBox;
     TelescopeSelect: TRadioGroup;
     GroupBox1: TGroupBox;
     chkdb: TButton;
@@ -153,7 +147,7 @@ type
     RevertTurnsAz: TCheckBox;
     RevertTurnsAlt: TCheckBox;
     PageControl1: TPageControl;
-    procedure Button5Click(Sender: TObject);
+    procedure GetIndiDevicesClick(Sender: TObject);
     procedure CheckBox1Change(Sender: TObject);
     procedure CheckBox2Change(Sender: TObject);
     procedure CheckBox3Change(Sender: TObject);
@@ -163,7 +157,7 @@ type
     procedure CheckBox7Change(Sender: TObject);
     procedure CheckBox8Change(Sender: TObject);
     procedure CheckBox9Change(Sender: TObject);
-    procedure IndiDevOtherChange(Sender: TObject);
+    procedure IndiTimerTimer(Sender: TObject);
     procedure InternalIndiGuiClick(Sender: TObject);
     procedure Label18Click(Sender: TObject);
     procedure LanguageListSelect(Sender: TObject);
@@ -184,10 +178,7 @@ type
     procedure IndiServerHostChange(Sender: TObject);
     procedure IndiServerPortChange(Sender: TObject);
     procedure IndiAutostartClick(Sender: TObject);
-    procedure IndiServerCmdChange(Sender: TObject);
     procedure IndiDevChange(Sender: TObject);
-    procedure IndiDriverChange(Sender: TObject);
-    procedure IndiPortChange(Sender: TObject);
     procedure TelescopeSelectClick(Sender: TObject);
     procedure persdirChange(Sender: TObject);
     procedure AstDBClick(Sender: TObject);
@@ -209,11 +200,14 @@ type
     FDBChange: TNotifyEvent;
     FSaveAndRestart: TNotifyEvent;
     FApplyConfig: TNotifyEvent;
-    dbchanged,skipDBtypeGroupClick,LockChange: boolean;
+    dbchanged,skipDBtypeGroupClick,LockChange,LockMsg: boolean;
+    indiclient: TIndiBaseClient;
+    mountsavedev: string;
     procedure ShowSYS;
     procedure ShowServer;
     procedure ShowTelescope;
     procedure ShowLanguage;
+    procedure IndiNewDevice(dp: Basedevice);
   public
     { Public declarations }
     cdb:Tcdcdb;
@@ -293,15 +287,11 @@ Label11.caption:=rsTurnsDegree;
 RevertTurnsAz.caption:=rsRevertAzKnob;
 RevertTurnsAlt.caption:=rsRevertAltKno;
 INDILabel.caption:=rsINDIDriverSe;
-Button5.Caption:=rsDefault;
 Label75.caption:=rsINDIServerHo;
 Label130.caption:=rsINDIServerPo;
-Label258.caption:=rsServerComman;
-Label259.caption:=rsDriverName;
-Label260.caption:=rsTelescopeTyp;
-Label261.caption:=rsDevicePort;
+Label260.caption:=rsTelescopeNam;
 Label2.caption:=rsControlPanel2;
-IndiAutostart.caption:=rsAutomaticall;
+IndiAutostart.caption:=rsLaunchINDIst;
 Label14.caption:=rsLanguageSele;
 ManualMountType.Items[0]:=rsEquatorialMo;
 ManualMountType.Items[1]:=rsAltAzMount;
@@ -348,6 +338,7 @@ begin
  inherited Create(AOwner);
  SetLang;
  LockChange:=true;
+ LockMsg:=false;
 end;
 
 destructor Tf_config_system.Destroy;
@@ -371,6 +362,10 @@ LockChange:=true;
 dbchanged:=false;
 {$if defined(mswindows) or defined(darwin)}
   GroupBoxLinux.Visible:=false;
+{$endif}
+{$ifdef mswindows}
+IndiAutostart.Visible:=false;
+csc.IndiAutostart:=false;
 {$endif}
 ShowLanguage;
 ShowSYS;
@@ -482,8 +477,6 @@ begin
 IndiServerHost.text:=csc.IndiServerHost;
 IndiServerPort.text:=csc.IndiServerPort;
 IndiAutostart.checked:=csc.IndiAutostart;
-IndiServerCmd.text:=csc.IndiServerCmd;
-IndiDriver.text:=csc.IndiDriver;
 InternalIndiGui.Checked:=cmain.InternalIndiPanel;
 PanelCmd.text:=cmain.IndiPanelCmd;
 ExternalControlPanel.Visible:=(not cmain.InternalIndiPanel);
@@ -503,89 +496,10 @@ if csc.IndiTelescope then Telescopeselect.itemindex:=0
    else if csc.ASCOMTelescope then Telescopeselect.itemindex:=2
    else Telescopeselect.itemindex:=1;
 TelescopeselectClick(self);
-IndiPort.text:=csc.IndiPort;
-NumIndiDriver:=0;
-SetLength(IndiDriverLst,NumIndiDriver+1,2);
-IndiDriverLst[0,0]:='Other';
-IndiDriverLst[0,1]:='';
-fn:='';
-{$ifdef unix}
-{$ifdef darwin}
-// try xIndi first
-fn:='/Applications/INDI Server.app/Contents/Resources/share/indi/drivers.xml';
-{$endif}
-if not FileExists(fn) then begin
-fn:='/usr/share/indi/drivers.xml';
-  if not FileExists(fn) then begin
-   fn:='/usr/local/share/indi/drivers.xml';
-   if not FileExists(fn) then begin
-     fn:=slash(appdir)+slash('data')+slash('indi')+'drivers.xml';
-   end;
-  end;
-end;
-{$else}
-fn:=slash(appdir)+slash('data')+slash('indi')+'drivers.xml';
-{$endif}
-fdir:=ExtractFilePath(fn);
-k:=findfirst(slash(fdir)+'*.xml',0,fs);
-while k=0 do begin
-  fn:=slash(fdir)+fs.name;
-  // drivers.xml contain multiple root elements (<devGroup>),
-  // so it is not valid for parsing with ReadXMLFile.
-  // Using a plain file read instead, with the hope it is always formated by line.
-  if FileExists(fn) then begin
-    AssignFile(f,fn);
-    reset(f);
-    telescopegroup:=false;
-    repeat
-      readln(f,buf);
-      if (pos('<devGroup',buf)>0)and(pos('group="Telescopes"',buf)>0) then begin
-        telescopegroup:=true;
-        Continue;
-      end;
-      if (pos('</devGroup',buf)>0) then begin
-       telescopegroup:=false;
-       Continue;
-     end;
-     if telescopegroup and (pos('<driver',buf)>0)and(pos('name="',buf)>0) then begin
-       i:=pos('name="',buf)+6;
-       j:=pos('">',buf)-i;
-       val:=copy(buf,i,j);
-       newtelescope:=true;
-       for n:=0 to NumIndiDriver do if IndiDriverLst[n,0]=val then newtelescope:=false;
-       if newtelescope then begin
-         inc(NumIndiDriver);
-         SetLength(IndiDriverLst,NumIndiDriver+1,2);
-         IndiDriverLst[NumIndiDriver,0]:=val;
-         buf:=copy(buf,i+j+2,9999);
-         i:=0;
-         j:=pos('<',buf)-1;
-         val:=copy(buf,i,j);
-         IndiDriverLst[NumIndiDriver,1]:=val;
-       end;
-     end;
-    until eof(f);
-    CloseFile(f);
-  end;
-  k:=findnext(fs);
-end;
-findclose(fs);
-// Fallback to internal driver list
-if NumIndiDriver=0 then begin
-  NumIndiDriver:=DefaultNumIndiDriver;
-  SetLength(IndiDriverLst,NumIndiDriver+1,2);
-  for i:=0 to NumIndiDriver do begin
-    IndiDriverLst[i,0]:=DefaultIndiDriverLst[i,0];
-    IndiDriverLst[i,1]:=DefaultIndiDriverLst[i,1];
-  end;
-end;
-IndiDev.items.clear;
-for i:=0 to NumIndiDriver do IndiDev.items.add(IndiDriverLst[i,0]);
-IndiDev.itemindex:=0;
-for i:=0 to NumIndiDriver do if IndiDriverLst[i,0]=csc.IndiDevice then IndiDev.itemindex:=i;
-if IndiDev.itemindex=0 then begin
-  IndiDevOther.Text:=csc.IndiDevice;
-  IndiDevOther.visible:=true;
+MountIndiDevice.items.clear;
+if csc.IndiDevice<>'' then begin
+  MountIndiDevice.items.add(csc.IndiDevice);
+  MountIndiDevice.ItemIndex:=0;
 end;
 end;
 
@@ -740,12 +654,6 @@ if LockChange then exit;
 OpenFileCMD:=LinuxCmd.Text;
 end;
 
-procedure Tf_config_system.IndiDevOtherChange(Sender: TObject);
-begin
-  if LockChange then exit;
-  csc.IndiDevice:=IndiDevOther.Text;
-end;
-
 procedure Tf_config_system.InternalIndiGuiClick(Sender: TObject);
 begin
  cmain.InternalIndiPanel := InternalIndiGui.Checked;
@@ -767,12 +675,6 @@ end;
 procedure Tf_config_system.Lock;
 begin
   LockChange:=true;
-end;
-
-procedure Tf_config_system.Button5Click(Sender: TObject);
-begin
-  IndiPort.Text:='/dev/ttyS0';
-  IndiServerCmd.Text:='indiserver';
 end;
 
 procedure Tf_config_system.CheckBox1Change(Sender: TObject);
@@ -874,60 +776,60 @@ csc.IndiServerPort:=IndiServerPort.text;
 end;
 
 procedure Tf_config_system.IndiAutostartClick(Sender: TObject);
+var i: integer;
 begin
+i:=Exec('which indistarter');
+if i<>0 then begin
+   if not LockMsg then ShowMessage(rsPleaseInstal);
+   LockMsg:=true;
+   IndiAutostart.checked:=false;
+   LockMsg:=false;
+end;
 csc.IndiAutostart:=IndiAutostart.checked;
-panel2.Visible:=IndiAutostart.checked;
-if IndiAutostart.checked then begin
-   if trim(IndiPort.Text)='' then IndiPort.Text:='/dev/ttyS0';
-end else
-   IndiPort.Text:=' ';
 end;
 
-procedure Tf_config_system.IndiServerCmdChange(Sender: TObject);
+procedure Tf_config_system.GetIndiDevicesClick(Sender: TObject);
 begin
-if LockChange then exit;
-csc.IndiServerCmd:=IndiServerCmd.text;
+  mountsavedev:=MountIndiDevice.Text;
+  MountIndiDevice.Clear;
+  indiclient:=TIndiBaseClient.Create;
+  indiclient.onNewDevice:=IndiNewDevice;
+  indiclient.SetServer(IndiServerHost.Text,IndiServerPort.Text);
+  indiclient.ConnectServer;
+  IndiTimer.Enabled:=true;
+  Screen.Cursor:=crHourGlass;
+end;
+
+procedure Tf_config_system.IndiTimerTimer(Sender: TObject);
+var i: integer;
+begin
+  IndiTimer.Enabled:=false;
+  if indiclient.Connected then begin
+    indiclient.DisconnectServer;
+    for i:=0 to MountIndiDevice.Items.Count-1 do
+       if MountIndiDevice.Items[i]=mountsavedev then MountIndiDevice.ItemIndex:=i;
+  end else begin
+    if csc.IndiAutostart then begin
+      ExecNoWait('nohup indistarter');
+    end
+    else begin
+       ShowMessage(rsConnectionTo);
+    end;
+    MountIndiDevice.Items.Add(mountsavedev);
+    MountIndiDevice.ItemIndex:=0;
+  end;
+  Screen.Cursor:=crDefault;
+end;
+
+procedure Tf_config_system.IndiNewDevice(dp: Basedevice);
+begin
+   MountIndiDevice.Items.Add(dp.getDeviceName);
 end;
 
 procedure Tf_config_system.IndiDevChange(Sender: TObject);
 begin
 if LockChange then exit;
-csc.IndiDevice:=IndiDriverLst[IndiDev.itemindex,0];
-IndiDriver.text:=IndiDriverLst[IndiDev.itemindex,1];
-if IndiDev.itemindex=0 then begin
-   IndiDriver.enabled:=true;
-   IndiDevOther.Visible:=true;
-   IndiDevOther.setfocus;
-end else begin
-   IndiDriver.enabled:=false;
-   IndiDevOther.Visible:=false;
-end;
-end;
-
-procedure Tf_config_system.IndiDriverChange(Sender: TObject);
-begin
-if LockChange then exit;
-csc.IndiDriver:=IndiDriver.text;
-end;
-
-procedure Tf_config_system.IndiPortChange(Sender: TObject);
-{$ifdef mswindows}
-var i,n: integer;
-{$endif}
-begin
-if LockChange then exit;
-{$ifdef unix}
-csc.IndiPort:=IndiPort.text;
-{$endif}
-{$ifdef mswindows}
-if uppercase(copy(IndiPort.Text,1,3))='COM' then begin
-   val(trim(copy(IndiPort.text,4,2)),i,n);
-   if (n=0)and(i>=0) then csc.IndiPort:='/dev/ttyS'+inttostr(i-1)
-          else csc.IndiPort:=IndiPort.text;
-end else
-   csc.IndiPort:=IndiPort.text;
-{$endif}
-if csc.IndiPort='' then csc.IndiPort:=' ';
+csc.IndiDevice:=MountIndiDevice.Text;
 end;
 
 procedure Tf_config_system.PanelCmdChange(Sender: TObject);
