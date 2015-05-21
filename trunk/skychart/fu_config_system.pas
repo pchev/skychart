@@ -362,10 +362,8 @@ LockChange:=true;
 dbchanged:=false;
 {$if defined(mswindows) or defined(darwin)}
   GroupBoxLinux.Visible:=false;
-{$endif}
-{$ifdef mswindows}
-IndiAutostart.Visible:=false;
-csc.IndiAutostart:=false;
+  IndiAutostart.Visible:=false;
+  csc.IndiAutostart:=false;
 {$endif}
 ShowLanguage;
 ShowSYS;

@@ -12,6 +12,8 @@ Incompatibilities with beta versions before 3023:
 
 New functions:
 
+  * Use INDIstarter to manage the INDI server.
+  * New INDI control panel.
   * New performance options from menu File/Reset chart and options...
   * New tool box function you can activate with the keys F1 to F8.
   * Scripting functions and custom tool box capabilities.
