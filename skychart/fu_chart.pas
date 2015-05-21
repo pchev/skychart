@@ -5681,7 +5681,7 @@ try
 ok:=false;
 //if VerboseMsg then WriteTrace(caption+' TelescopeTimerTimer');
 newconnection:=Connect1.checked;
-if sc.cfgsc.ASCOMTelescope then begin
+if sc.cfgsc.ASCOMTelescope and(Fpop_scope<>nil) then begin
      Connect1.checked:=Fpop_scope.ScopeConnected;
      if Connect1.checked then begin
       Fpop_scope.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
@@ -5689,7 +5689,7 @@ if sc.cfgsc.ASCOMTelescope then begin
       Fpop_scope.ScopeGetRaDec(ra,dec,ok);
      end;
  end
-else if sc.cfgsc.IndiTelescope then begin
+else if sc.cfgsc.IndiTelescope and(Fpop_indi<>nil) then begin
      Connect1.checked:=Fpop_indi.ScopeConnected;
      if Connect1.checked then begin
       Fpop_indi.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
@@ -5697,7 +5697,7 @@ else if sc.cfgsc.IndiTelescope then begin
       Fpop_indi.ScopeGetRaDec(ra,dec,ok);
      end;
  end
-else if sc.cfgsc.LX200Telescope then begin
+else if sc.cfgsc.LX200Telescope and(Fpop_lx200<>nil) then begin
      Connect1.checked:=Fpop_lx200.ScopeConnected;
      if Connect1.checked then begin
       Fpop_lx200.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
@@ -5705,7 +5705,7 @@ else if sc.cfgsc.LX200Telescope then begin
       Fpop_lx200.ScopeGetRaDec(ra,dec,ok);
      end;
  end
-else if sc.cfgsc.EncoderTelescope then begin
+else if sc.cfgsc.EncoderTelescope and(Fpop_encoder<>nil) then begin
      Connect1.checked:=Fpop_encoder.ScopeConnected;
      if Connect1.checked then begin
       Fpop_encoder.ScopeGetEqSys(sc.cfgsc.TelescopeJD);

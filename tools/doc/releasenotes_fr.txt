@@ -12,6 +12,8 @@ Incompatibilités avec les versions beta inférieur à 3023:
 
 Nouvelles fonctions:
 
+  * Utilise INDIstarter pour gérer le serveur INDI.
+  * Nouveau panneau de controle INDI.
   * Nouvelle option de performance depuis le menu Fichier/Carte et options par défaut...
   * Nouvelles boites à outils que vous pouvez activer avec les touches F1 à F8.
   * Fonctions de script et boites à outils personnalisées.

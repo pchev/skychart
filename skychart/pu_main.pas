@@ -7074,8 +7074,8 @@ ShowUObj.Category:=CatObject;
 TelescopeSetup.Caption:='&'+rsTelescopeSet+Ellipsis;
 TelescopeSetup.Hint:=rsTelescopeSet;
 TelescopeSetup.Category:=CatSetup;
-telescopeConnect.caption:='&'+rsControlPanel+Ellipsis;
-telescopeConnect.hint:=rsControlPanel;
+telescopeConnect.caption:='&'+rsConnectTeles+Ellipsis;
+telescopeConnect.hint:=rsConnectTeles;
 telescopeConnect.Category:=CatTelescope;
 TelescopePanel.caption:='&INDI '+rsControlPanel+Ellipsis;
 TelescopePanel.Hint:='INDI '+rsControlPanel;
@@ -7445,13 +7445,13 @@ if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
           else begin FlipY.ImageIndex:=18 ; Flipy.checked:=true; end;
   if tc   then begin
                TelescopeConnect.ImageIndex:=49;
-               TelescopeConnect.Hint:=rsControlPanel;
-               telescopeConnect.caption:='&'+rsControlPanel+Ellipsis;
+               TelescopeConnect.Hint:=rsConnectTeles;
+               telescopeConnect.caption:='&'+rsConnectTeles+Ellipsis;
                telescopeConnect.Checked:=true;
           end else begin
                TelescopeConnect.ImageIndex:=48;
-               TelescopeConnect.Hint:=rsControlPanel;
-               telescopeConnect.caption:='&'+rsControlPanel+Ellipsis;
+               TelescopeConnect.Hint:=rsConnectTeles;
+               telescopeConnect.caption:='&'+rsConnectTeles+Ellipsis;
                telescopeConnect.Checked:=false;
           end;
   ViewClock.Checked:=(f_clock<>nil)and(f_clock.Visible);
