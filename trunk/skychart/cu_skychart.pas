@@ -4540,8 +4540,10 @@ for i:=0 to (360 div mult) do begin
   WindowXY(xx,yy,x2,y2,cfgsc);
   if first then
      first:=false
-  else
+  else begin
+    if ((intpower(x2-x1,2)+intpower(y2-y1,2))<cfgsc.x2) then
      FPlot.PlotLine(x1,y1,x2,y2,color,1,cfgsc.StyleEcliptic);
+  end;
   x1:=x2;
   y1:=y2;
 end;
@@ -4575,8 +4577,10 @@ for i:=0 to (360 div mult) do begin
   WindowXY(xx,yy,x2,y2,cfgsc);
   if first then begin
      first:=false;
-  end else
+  end else begin
+    if ((intpower(x2-x1,2)+intpower(y2-y1,2))<cfgsc.x2) then
      FPlot.PlotLine(x1,y1,x2,y2,color,1,cfgsc.StyleGalEq);
+  end;
   x1:=x2;
   y1:=y2;
 end;
