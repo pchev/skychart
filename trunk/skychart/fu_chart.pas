@@ -366,7 +366,7 @@ type
     function cmd_DisconnectTelescope:string;
     function cmd_ConnectTelescope:string;
     function cmd_Sync(RA2,DE2:string):string;
-    function cmd_Slew:string;
+    function cmd_Slew(RA1,DE1:string):string;
     function cmd_AbortSlew:string;
     function cmd_SlewINDI(RA1,DE1:string):string;
     function cmd_AbortSlewINDI:string;
@@ -4087,27 +4087,57 @@ if (ra>=0)and(ra<=24)and(abs(dec)<=90) then begin
 end;
 end;
 
-function Tf_chart.cmd_Slew:string;
+function Tf_chart.cmd_Slew(RA1,DE1:string):string;
+var ra,dec:double;
+    ok:boolean;
 begin
-Result:=msgFailed;
-if Connect1.checked then begin
-  if sc.cfgsc.ASCOMTelescope then begin
-     SlewASCOM(self);
-     result:=msgOK;
+  Result:=msgFailed;
+  if (RA1='') and (DE1='') then begin
+    if Connect1.checked then begin
+      if sc.cfgsc.ASCOMTelescope then begin
+         SlewASCOM(self);
+         result:=msgOK;
+      end
+      else
+      if sc.cfgsc.LX200Telescope then begin
+       SlewLX200(self);
+       result:=msgOK;
+      end
+      else if sc.cfgsc.EncoderTelescope then begin
+       // no slew
+      end
+      else if sc.cfgsc.IndiTelescope then begin
+        SlewINDI(self);
+        result:=msgOK;
+      end;
+    end;
   end
-  else
-  if sc.cfgsc.LX200Telescope then begin
-   SlewLX200(self);
-   result:=msgOK;
-  end
-  else if sc.cfgsc.EncoderTelescope then begin
-   // no slew
-  end
-  else if sc.cfgsc.IndiTelescope then begin
-    SlewINDI(self);
-    result:=msgOK;
+  else begin
+    ra:=StrToFloatDef(RA1,9999);
+    dec:=StrToFloatDef(DE1,9999);
+    if (ra>=0)and(ra<=24)and(abs(dec)<=90) then begin
+     ra:=ra*15*deg2rad;
+     dec:=dec*deg2rad;
+     if sc.cfgsc.TelescopeJD=0 then begin
+       precession(sc.cfgsc.JDChart,sc.cfgsc.CurJDUT,ra,dec);
+     end else begin
+       if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
+       precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
+     end;
+     ra:=rmod(ra+pi2,pi2);
+     if sc.cfgsc.ASCOMTelescope then begin
+       Fpop_scope.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
+       result:=msgOK;
+     end else if sc.cfgsc.LX200Telescope then begin
+       Fpop_lx200.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
+       result:=msgOK;
+     end else if sc.cfgsc.IndiTelescope then begin
+       Fpop_indi.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
+       result:=msgOK;
+     end;
+    end
+    else result:=msgFailed+' out of range';
   end;
-end;
 end;
 
 function Tf_chart.cmd_AbortSlew:string;
@@ -4871,7 +4901,7 @@ case n of
  104 : result:= cmd_ConnectTelescope;
  105 : result:= cmd_DisconnectTelescope;
  106 : result:= cmd_Sync(arg[1],arg[2]);
- 107 : result:= cmd_Slew;
+ 107 : result:= cmd_Slew(arg[1],arg[2]);
  108 : result:= cmd_AbortSlew;
  109 : result:= cmd_ObslistLoad(arg[1]);
  110 : result:= cmd_ObslistFirst;
