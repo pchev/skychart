@@ -14,20 +14,23 @@ arch=$(arch)
 unset extratarget
 
 unset make_linux32
-make_linux32=1
 unset make_linux64
+unset make_win32
+unset make_win64
+
+if [[ $arch == i686 ]]; then 
+   make_linux32=1
+fi
 if [[ $arch == x86_64 ]]; then 
    make_linux64=1
+   make_win32=1
+   make_win64=1
    extratarget=",x86_64-linux"
 fi
-unset make_win32
-make_win32=1
-unset make_win64
-make_win64=1
 
 # For win32 and win64 target you must also install the corresponding mingw-w64 to build the C library
-mingw32=/opt/mingw-w32/bin/
-mingw64=/opt/mingw-w64/bin/
+#mingw32=/opt/mingw-w32/bin/
+#mingw64=/opt/mingw-w64/bin/
 
 if [[ -n $1 ]]; then
   configopt="fpc=$1"
