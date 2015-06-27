@@ -271,7 +271,7 @@ end;
 function Tskychart.Refresh :boolean;
 var savmag: double;
     savebg:Tcolor;
-    savfilter,saveautofilter,savfillmw,scopemark:boolean;
+    savfilter,saveautofilter,savfillmw,scopemark,savApparentPos:boolean;
     saveplaplot:integer;
 begin
 if VerboseMsg then begin
@@ -281,6 +281,7 @@ if VerboseMsg then begin
      WriteTrace('SkyChart '+cfgsc.chartname+': Full Refresh');
 end;
 savmag:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
+savApparentPos:=cfgsc.ApparentPos;
 savfilter:=Fcatalog.cfgshr.StarFilter;
 saveautofilter:=Fcatalog.cfgshr.AutoStarFilter;
 savfillmw:=cfgsc.FillMilkyWay;
@@ -396,6 +397,7 @@ end;
 if VerboseMsg then   WriteTrace('SkyChart '+cfgsc.chartname+': end drawing');
 finally
   Fcatalog.CloseCat;
+  cfgsc.ApparentPos:=savApparentPos;
   if cfgsc.quick and FPlot.cfgplot.red_move then begin
      Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum]:=savmag;
      Fcatalog.cfgshr.StarFilter:=savfilter;
@@ -723,7 +725,7 @@ end;
 
 function Tskychart.InitCoordinates:boolean;
 var w,h,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,saveaz : double;
-    acc,dcc: double;
+    acc,dcc,pxsec: double;
     se,ce : extended;
     s1,s2,s3: string;
     nom,ma,date,desc:string;
@@ -752,6 +754,9 @@ if Fplot.cfgplot.outradius>maxSmallint then Fplot.cfgplot.outradius:=maxSmallint
 if Fplot.cfgplot.outradius<Fplot.cfgchart.hw then Fplot.cfgplot.outradius:=Fplot.cfgchart.hw;
 if Fplot.cfgplot.outradius<Fplot.cfgchart.hh then Fplot.cfgplot.outradius:=Fplot.cfgchart.hh;
 // nutation constant
+pxsec:=abs(1/cfgsc.BxGlb)*rad2deg*3600;
+if pxsec>30 then  // compute only if effect is visible on map
+   cfgsc.ApparentPos:=false;
 if cfgsc.ApparentPos then
    Fplanet.nutation(cfgsc.CurJDTT,cfgsc.nutl,cfgsc.nuto)
 else begin
