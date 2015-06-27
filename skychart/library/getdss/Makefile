@@ -4,7 +4,7 @@ CC            = gcc
 OSTYPE = $(shell uname)
 ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name = libgetdss.dylib
-LDFLAGS=  -Wl,-single_module -dynamiclib  -lc -lm -lstdc++
+LDFLAGS=  -Wl,-single_module -dynamiclib  -lc -lm -lstdc++ -mmacosx-version-min=10.5
 else
 SO_Name = libgetdss.so
 LDFLAGS= -shared -Wl,-soname,$(SO_Name) $(arch_flags)
