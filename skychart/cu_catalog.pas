@@ -1598,15 +1598,12 @@ bsccat:=(rec.vstr[3] and (trim(rec.options.flabel[lOffsetStr+3])='CommonName'))a
         (rec.vstr[5] and (trim(rec.options.flabel[lOffsetStr+5])='Bayer'))and
         (rec.vstr[6] and (trim(rec.options.flabel[lOffsetStr+6])='Const'));
 if bsccat then begin
-    for i:=1 to 10 do begin  // remove fields used only for index
-       if UpperCase(trim(rec.options.flabel[lOffsetStr+i]))='NA' then rec.vstr[i]:=false;
-    end;
+    // remove fields used only for index
+    rec.vstr[8]:=false;
+    rec.vstr[10]:=false;
     flam:=(trim(rec.str[4])<>'');
     rec.vstr[4]:=flam;
     bayer:=(trim(rec.str[5])<>'');
-    if trim(rec.str[5])='H02' then begin
-       rec.vstr[5]:=bayer;
-    end;
     rec.vstr[5]:=bayer;
     if bayer then begin
         rec.star.greeksymbol:=GreekLetter(rec.str[5]);
