@@ -748,12 +748,10 @@ try
  if sc.cfgsc.ShowBackgroundImage then sc.cfgsc.ShowImageList:=true;
  if sc.cfgsc.quick then begin
    sc.ObjectListLabels:=f_obslist.EmptyObjLabels;
-   sc.NoFilterList:=False;
    sc.UpdObsList:=False;
  end else begin
    sc.ObjectListLabels:=f_obslist.ObjLabels;
    sc.UpdObsList:=True;
-   sc.NoFilterList:=f_obslist.NoFilterList.Checked and (sc.ObjectListLabels.Count>0);
  end;
  sc.Refresh;
  if VerboseMsg then WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map end');
@@ -1240,7 +1238,6 @@ try
  prtsc.plot.cfgplot.Assign(sc.plot.cfgplot);
  prtsc.cfgsc.Assign(sc.cfgsc);
  prtsc.ObjectListLabels:=sc.ObjectListLabels;
- prtsc.NoFilterList:=sc.NoFilterList;
  printing:=true;
  prtsc.cfgsc.UseSystemTime:=false; // same time as current chart
  prtsc.cfgsc.Editlabels:=false;    // force text label
