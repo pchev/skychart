@@ -51,7 +51,6 @@ type
     ToggleBox1: TToggleBox;
     ToggleBox2: TToggleBox;
     UpdAllCoord: TButton;
-    NoFilterList: TCheckBox;
     HourAngleCombo: TComboBox;
     ButtonSave: TButton;
     ButtonClear: TButton;
@@ -205,8 +204,6 @@ begin
   Label1.Caption:=rsLimit;
   LimitAirmassTonight.Caption:=rsOnlyObjectsW;
   LimitAirmassNow.Caption:=rsOnlyObjectsW2;
-  NoFilterList.Caption:=rsAlwaysShowTh;
-  NoFilterList.Hint:=rsBewareThisOp;
   ToggleBox2.Caption:=rsTransit;
   Label1.Caption:=rsLimit;
   Label3.Caption:=rsLimit;
@@ -513,8 +510,10 @@ FObjLabels.Clear;
 FObjLabels.Sorted:=False;
 for i:=1 to StringGrid1.RowCount-1 do begin
    if StringGrid1.RowHeights[i]>0 then begin
-     lbl:=trim(StringGrid1.Cells[7,i]);
-     if lbl<>'' then FObjLabels.Add(uppercase(nospace(lbl)));
+     lbl:=trim(wordspace(StringGrid1.Cells[7,i]));
+     if (lbl<>'') then begin
+       FObjLabels.Add(lbl);
+     end;
    end;
 end;
 FObjLabels.Sorted:=True;
@@ -664,6 +663,7 @@ begin
 end;
 
 procedure Tf_obslist.FormDestroy(Sender: TObject);
+var i: integer;
 begin
   if gridchanged then begin
     if MessageDlg(Format(rsTheObserving, [FileNameEdit1.FileName])+crlf+rsDoYouWantToS2,
