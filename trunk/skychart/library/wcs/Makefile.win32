@@ -2,7 +2,7 @@ CC=i686-w64-mingw32-gcc
 CFLAGS= -w -fPIC $(arch_flags)
 
 SO_Name       = libcdcwcs.dll
-LIBFLAGS      = -shared -Wl,-soname,$(SO_Name)  -lm
+LIBFLAGS      = -shared -static-libgcc -Wl,-soname,$(SO_Name)  -lm
 
 OBJS =	cdcwcs.o imgetwcs.o daoread.o wcscon.o \
 	fitswcs.o wcsinit.o wcs.o  \
