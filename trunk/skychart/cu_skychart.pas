@@ -1203,7 +1203,6 @@ var rec:GcatRec;
   x1,y1,x2,y2,rot,timelimit: Double;
   xx,yy:single;
   lid,n,lnum,lp,rs: integer;
-  forcelabel,savefilter: boolean;
   lis,buf:string;
 begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw double stars');
@@ -1233,7 +1232,7 @@ if Fcatalog.OpenDblStar then
     if cfgsc.FlipY<0 then rec.double.pa:=180-rec.double.pa;
     rec.double.pa:=Deg2Rad*rec.double.pa+rot;
     rs:=Fplot.PlotDblStar(xx,yy,abs(rec.double.sep*secarc*cfgsc.BxGlb),rec.double.mag1,rec.double.sep,rec.double.pa,0);
-    if forcelabel or (rec.double.mag1<cfgsc.StarmagMax-cfgsc.LabelMagDiff[3]) then begin
+    if (rec.double.mag1<cfgsc.StarmagMax-cfgsc.LabelMagDiff[3]) then begin
       if cfgsc.MagLabel then SetLabel(lid,xx,yy,rs,2,lnum,formatfloat(f2,rec.double.mag1),laTopRight,cfgsc.LabelOrient[lnum],4)
       else begin
         buf:=rec.double.id;
@@ -1245,7 +1244,6 @@ if Fcatalog.OpenDblStar then
 end;
 result:=true;
 finally
-  catalog.cfgshr.StarFilter := savefilter;
   Fcatalog.CloseDblStar;
 end;
 end;
