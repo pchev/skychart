@@ -29,8 +29,8 @@ if [[ $lastrev -ne $currentrev ]]; then
   rm bin-*.bz2
   rm -rf $basedir
 
-# make i386 Mac version
-  ./configure $configopt prefix=$builddir target=i386-darwin
+# make x86_64 Mac version
+  ./configure $configopt prefix=$builddir target=x86_64-darwin
   if [[ $? -ne 0 ]]; then exit 1;fi
   make clean
   make
@@ -48,13 +48,15 @@ if [[ $lastrev -ne $currentrev ]]; then
   sed -i.bak "24s/1.0/$version/"  $builddir/varobs.app/Contents/Info.plist
   rm $builddir/skychart.app/Contents/Info.plist.bak
   rm $builddir/varobs.app/Contents/Info.plist.bak
+  macdeployqt $builddir/skychart.app
+  macdeployqt $builddir/varobs.app
   cp system_integration/MacOSX/skychart.packproj $basedir
   cp system_integration/MacOSX/readme.txt $basedir
   cd $basedir
   mv Cartes "Cartes du Ciel"
   freeze -v skychart.packproj
   if [[ $? -ne 0 ]]; then exit 1;fi
-  hdiutil create -anyowners -volname skychart-$version-$currentrev-i386-macosx -imagekey zlib-level=9 -format UDZO -srcfolder ./build skychart-$version-$currentrev-i386-macosx.dmg
+  hdiutil create -anyowners -volname skychart-$version-$currentrev-x86_64-macosx -imagekey zlib-level=9 -format UDZO -srcfolder ./build skychart-$version-$currentrev-x86_64-macosx.dmg
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.dmg $wd
   if [[ $? -ne 0 ]]; then exit 1;fi

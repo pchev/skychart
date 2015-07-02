@@ -6,7 +6,7 @@ OSTYPE = $(shell uname)
 ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name       = libplan404.dylib
 CFLAGS        = -O3 -fPIC $(arch_flags) -Wno-implicit-function-declaration
-LIBFLAGS      = -Wl,-single_module -dynamiclib  -lc -lm -mmacosx-version-min=10.5
+LIBFLAGS      = -Wl,-single_module -dynamiclib  -lc -lm -mmacosx-version-min=10.6
 else
 SO_Name       = libplan404.so
 LIBFLAGS      = -shared -Wl,-soname,$(SO_Name) -lc -lm

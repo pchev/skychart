@@ -45,8 +45,8 @@ LCL_PLATFORM=win32
 opt_target= -WG
 else
 ifeq ($(OS_TARGET),darwin)
-LCL_PLATFORM=carbon
-opt_target= -k-macosx_version_min -k10.5 -XR/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/
+LCL_PLATFORM=qt
+opt_target= -k-macosx_version_min -k10.6
 else
 LCL_PLATFORM=gtk2
 opt_target=

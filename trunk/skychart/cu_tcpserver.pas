@@ -310,6 +310,7 @@ end;
 initialization
 
  {$ifdef darwin}           //  ignore SIGPIPE
+ {$ifdef CPU32}
  with NewSigRec do begin
    Integer(@Sa_Handler):=SIG_IGN; // ignore signal
    Sa_Mask[0]:=0;
@@ -317,6 +318,6 @@ initialization
    end;
  res:=fpsigaction(SIGPIPE,@NewSigRec,@OldSigRec);
  {$endif}
-
+ {$endif}
 end.
 
