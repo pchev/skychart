@@ -48,8 +48,12 @@ if [[ $lastrev -ne $currentrev ]]; then
   sed -i.bak "24s/1.0/$version/"  $builddir/varobs.app/Contents/Info.plist
   rm $builddir/skychart.app/Contents/Info.plist.bak
   rm $builddir/varobs.app/Contents/Info.plist.bak
-  macdeployqt $builddir/skychart.app
-  macdeployqt $builddir/varobs.app
+  macdeployqt $builddir/skychart.app -no-plugins
+  macdeployqt $builddir/varobs.app -no-plugins
+  cd $builddir/varobs.app/Contents
+  rm -rf Frameworks
+  ln -s ../../skychart.app/Contents/Frameworks .
+  cd - 
   cp system_integration/MacOSX/skychart.packproj $basedir
   cp system_integration/MacOSX/readme.txt $basedir
   cd $basedir
