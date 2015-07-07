@@ -2441,23 +2441,23 @@ begin
    sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
    case sc.cfgsc.projpole of
    AltAz: begin
-          txt:=rsAz+':'+deptostr(rad2deg*a)+blank+deptostr(rad2deg*h)+crlf
-              +rsRA+':'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
+          txt:=rsAz+':'+deptostr(rad2deg*a)+blank+rsAlt+':'+deptostr(rad2deg*h)+crlf
+              +rsRA+':'+arptostr(rad2deg*ra/15)+blank+rsDE+':'+deptostr(rad2deg*dec);
           end;
    Equat: begin
           ra:=rmod(ra+pi2,pi2);
-          txt:=rsRA+':'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec)+crlf
-               +rsAz+':'+deptostr(rad2deg*a)+blank+deptostr(rad2deg*h);
+          txt:=rsRA+':'+arptostr(rad2deg*ra/15)+blank+rsDE+':'+deptostr(rad2deg*dec)+crlf
+               +rsAz+':'+deptostr(rad2deg*a)+blank+rsAlt+':'+deptostr(rad2deg*h);
           end;
    Gal:   begin
           l:=rmod(l+pi2,pi2);
-          txt:=rsL+':'+deptostr(rad2deg*l)+blank+deptostr(rad2deg*b)+crlf
-              +rsRA+':'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
+          txt:=rsL+':'+deptostr(rad2deg*l)+blank+rsB+':'+deptostr(rad2deg*b)+crlf
+              +rsRA+':'+arptostr(rad2deg*ra/15)+blank+rsDE+':'+deptostr(rad2deg*dec);
           end;
    Ecl:   begin
           le:=rmod(le+pi2,pi2);
-          txt:=rsL+':'+deptostr(rad2deg*le)+blank+deptostr(rad2deg*be)+crlf
-              +rsRA+':'+arptostr(rad2deg*ra/15)+blank+deptostr(rad2deg*dec);
+          txt:=rsL+':'+deptostr(rad2deg*le)+blank+rsB+':'+deptostr(rad2deg*be)+crlf
+              +rsRA+':'+arptostr(rad2deg*ra/15)+blank+rsDE+':'+deptostr(rad2deg*dec);
           end;
    end;
    if assigned(Fshowcoord) then Fshowcoord(txt);
