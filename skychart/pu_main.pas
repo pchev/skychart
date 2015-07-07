@@ -4302,8 +4302,8 @@ Procedure Tf_main.InitFonts;
 var ts,ts1,ts2: Tsize;
 begin
    P0L1.Caption:='';
-   ts1:=P0L1.Canvas.TextExtent(rsRA+':222h22m22.22s +22d22m22s22');
-   ts2:=P0L1.Canvas.TextExtent(rsAz+':+222h22m22.22s +22d22m22s22');
+   ts1:=P0L1.Canvas.TextExtent(rsRA+':222h22m22.22s '+rsDE+'+22d22m22s22');
+   ts2:=P0L1.Canvas.TextExtent(rsAz+':+222h22m22.22s '+rsAlt+'+22d22m22s22');
    if ts1.cx>ts2.cx then ts:=ts1
       else ts:=ts2;
    PanelBottom.height:=2*ts.cy+4;
