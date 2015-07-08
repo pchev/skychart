@@ -22,7 +22,7 @@ currentrev=`LC_ALL=C svn info . | grep Revision: | sed 's/Revision: //'`
   rm -rf $basedir
 
 # make DSO Mac version
-  ./configure $configopt prefix=$builddir target=i386-darwin
+  ./configure $configopt prefix=$builddir target=x86_64-darwin
   if [[ $? -ne 0 ]]; then exit 1;fi
   make install_cat2
   if [[ $? -ne 0 ]]; then exit 1;fi
