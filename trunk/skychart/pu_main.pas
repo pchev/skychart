@@ -6429,7 +6429,7 @@ inif:=TMeminifile.create(filename);
 try
 with inif do begin
 section:='main';
-DeleteKey(section,'AppDir');
+WriteString(section,'AppDir',Appdir);
 WriteString(section,'version',cdcver);
 WriteString(section,'PrivateDir',privatedir);
 {$ifdef linux}
