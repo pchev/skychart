@@ -29,9 +29,18 @@ if [ ! -d doc/wiki_doc ]; then
   cd ..
 fi
 
+# create directories
+for f in $(find doc/wiki_doc -type d |grep -v .svn)
+do  
+ if [ -d $f ]
+   then  install -v -d -m 755  $destdir/share/skychart/$f
+ fi
+done
+
+# install files
 for f in $(find doc/wiki_doc/|grep -v .svn)
 do
-  install -v -D -m 644  $f $destdir/share/skychart/$f
+  install -v -m 644  $f $destdir/share/skychart/$f
 done
 
 
