@@ -104,10 +104,7 @@ Function NoSlash(nom : string) : string;
 Function Slash(nom : string) : string;
 Procedure Precession_rad(j0,j1: double; var ra,de: double);
 
-{$ifdef linux}
-const slashchar='/';
-{$endif}
-{$ifdef darwin}
+{$ifdef unix}
 const slashchar='/';
 {$endif}
 {$ifdef mswindows}

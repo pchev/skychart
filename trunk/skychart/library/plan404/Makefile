@@ -1,8 +1,12 @@
 # Common flags
+OSTYPE = $(shell uname)
+ifneq ($(findstring BSD,$(OSTYPE)),)
+CC            = cc
+else
 CC            = gcc
+endif
 #CFLAGS        = -O3 -ffast-math (fast-math removed for better compatibility )
 CFLAGS        = -O3 -fPIC $(arch_flags)
-OSTYPE = $(shell uname)
 ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name       = libplan404.dylib
 CFLAGS        = -O3 -fPIC $(arch_flags) -Wno-implicit-function-declaration

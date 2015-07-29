@@ -58,6 +58,14 @@ skychartopt = '--unique';
       DefaultLpvb='varobs_lpv_bulletin';
       DefaultOpenFileCMD='xdg-open';
 {$endif}
+{$ifdef freebsd}
+      DefaultPrivateDir='~/.skychart/varobs';
+      Defaultconfigfile='~/.skychart/varobs.ini';
+      SharedDir='../share/skychart';
+      DefaultSkychart='skychart';
+      DefaultLpvb='varobs_lpv_bulletin';
+      DefaultOpenFileCMD='xdg-open';
+{$endif}
 {$ifdef darwin}
       DefaultPrivateDir='~/.skychart/varobs';
       Defaultconfigfile='~/.skychart/varobs.ini';

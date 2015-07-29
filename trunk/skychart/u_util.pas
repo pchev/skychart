@@ -2419,6 +2419,10 @@ begin
    p.Environment.Add('LC_ALL=C');
    p.Executable:='xplanet';
 {$endif}
+{$ifdef freebsd}
+   p.Environment.Add('LC_ALL=C');
+   p.Executable:='xplanet';
+{$endif}
 {$ifdef darwin}
    p.Environment.Add('LC_ALL=C');
    p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet';

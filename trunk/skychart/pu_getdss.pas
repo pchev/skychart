@@ -101,6 +101,9 @@ type
   {$ifdef linux}
   Const dsslibname = 'libgetdss.so';
   {$endif}
+  {$ifdef freebsd}
+  Const dsslibname = 'libgetdss.so';
+  {$endif}
   {$ifdef darwin}
   Const dsslibname = 'libgetdss.dylib';
   {$endif}

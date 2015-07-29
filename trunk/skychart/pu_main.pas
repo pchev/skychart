@@ -1848,6 +1848,21 @@ if (not directoryexists(slash(appdir)+slash('data')+'constellation')) then begin
              debugln('Try '+buf);
             if (directoryexists(slash(buf)+slash('data')+'constellation')) then
                appdir:=buf
+         else begin
+            // try in /usr
+            buf:=ExpandFileName(slash('/usr/bin')+SharedDir);
+            if VerboseMsg then
+             debugln('Try '+buf);
+            if (directoryexists(slash(buf)+slash('data')+'constellation')) then
+               appdir:=buf
+         else begin
+            // try /usr/local
+            buf:=ExpandFileName(slash('/usr/local/bin')+SharedDir);
+            if VerboseMsg then
+             debugln('Try '+buf);
+            if (directoryexists(slash(buf)+slash('data')+'constellation')) then
+               appdir:=buf
+
             else begin
                MessageDlg('Could not found the application data directory.'+crlf
                    +'Please reinstall the program at a standard location'+crlf
@@ -1855,6 +1870,8 @@ if (not directoryexists(slash(appdir)+slash('data')+'constellation')) then begin
                    mtError, [mbAbort], 0);
                Halt;
             end;
+         end;
+         end;
          end;
      end;
   end;
