@@ -1,7 +1,11 @@
 CPPFLAGS=-I. -O3 -fPIC $(arch_flags)
 #### For Suns and similar wrong-endian computers, add -DWRONG_WAY_BYTE_ORDER.
-CC            = gcc
 OSTYPE = $(shell uname)
+ifneq ($(findstring BSD,$(OSTYPE)),)
+CC            = cc
+else
+CC            = gcc
+endif
 ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name = libgetdss.dylib
 LDFLAGS=  -Wl,-single_module -dynamiclib  -lc -lm -lstdc++ -mmacosx-version-min=10.6

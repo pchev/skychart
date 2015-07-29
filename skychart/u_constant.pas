@@ -666,6 +666,25 @@ const
   Defaultffmpeg = 'ffmpeg';
   DefaultSerialPort = '/dev/ttyS0';
 {$endif}
+{$ifdef freebsd}
+  DefaultFontName = 'Helvetica';
+  DefaultFontFixed = 'Courier';
+  DefaultFontSymbol = 'adobe-symbol';
+  // available in core XFree86 75 and 100 dpi fonts
+  DefaultFontSize = 10;
+  DefaultHomeDir = '~';
+  DefaultPrivateDir = '~/.skychart';
+  Defaultconfigfile = '~/.skychart/skychart.ini';
+  SharedDir = '../share/skychart';
+  DefaultPrintCmd1 = 'xdg-open';
+  DefaultPrintCmd2 = 'xdg-open';
+  DefaultTmpDir = 'tmp';
+  Default_dssdrive = '/mnt/cdrom';
+  DefaultVarObs = 'varobs';
+  DefaultCdC = 'skychart';
+  Defaultffmpeg = 'ffmpeg';
+  DefaultSerialPort = '/dev/cuaU0';
+{$endif}
 {$ifdef darwin}
   DefaultFontName = 'Helvetica';
   DefaultFontFixed = 'Courier';
@@ -1133,6 +1152,11 @@ const
   libcdcwcs = 'libcdcwcs.so';
   libz = 'libz.so.1';
 {$endif}
+{$ifdef freebsd}
+  lib404 = 'libplan404.so';
+  libcdcwcs = 'libcdcwcs.so';
+  libz = 'libz.so.1';
+{$endif}
 {$ifdef darwin}
   lib404 = 'libplan404.dylib';
   libcdcwcs = 'libcdcwcs.dylib';
@@ -1272,6 +1296,12 @@ var
   OpenFileCMD: string = 'xdg-open';   // default FreeDesktop.org
 {$endif}
 {$ifdef linux}
+  tracefile: string = ''; // to stdout
+  dcd_cmd: string = 'cd /usr/local/dcd ; python ./dcd.py';
+  use_xplanet: boolean = True;
+  xplanet_dir: string = '';
+{$endif}
+{$ifdef freebsd}
   tracefile: string = ''; // to stdout
   dcd_cmd: string = 'cd /usr/local/dcd ; python ./dcd.py';
   use_xplanet: boolean = True;

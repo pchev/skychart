@@ -1,7 +1,10 @@
 CFLAGS= -w -fPIC $(arch_flags)
-CC= gcc
-
 OSTYPE = $(shell uname)
+ifneq ($(findstring BSD,$(OSTYPE)),)
+CC            = cc
+else
+CC            = gcc
+endif
 ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name       = libcdcwcs.dylib
 LIBFLAGS      = -Wl,-single_module -dynamiclib  -lc -lm -mmacosx-version-min=10.6

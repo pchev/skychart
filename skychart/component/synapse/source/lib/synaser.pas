@@ -106,6 +106,9 @@ uses
   KernelIoctl,
   {$ELSE}
   termio, baseunix, unix,
+    {$IFDEF FREEBSD}
+    freebsd,
+    {$ENDIF}
   {$ENDIF}
   {$IFNDEF FPC}
   Types,
@@ -124,6 +127,9 @@ const
   LF = #$0a;
   CRLF = CR + LF;
   cSerialChunk = 8192;
+  {$IFDEF FREEBSD}
+  TCFLSH = $540B;
+  {$ENDIF}
 
   {$IFDEF DARWIN}
   LockfileDirectory = '/tmp';
@@ -207,7 +213,11 @@ const
      {$IFDEF CPUARM}
        MaxRates = 19;  //UNIX ARM
      {$ELSE}
-       MaxRates = 30; //UNIX
+       {$IFDEF FREEBSD}
+          MaxRates = 20; //freebsd
+       {$ELSE}
+         MaxRates = 30; //UNIX
+       {$ENDIF}
      {$ENDIF}
   {$ENDIF}
 {$ELSE}
@@ -238,6 +248,7 @@ const
     ,(460800, B460800)
   {$IFDEF UNIX}
   {$IFNDEF CPUARM}
+   {$IFNDEF FREEBSD}
     ,(500000, B500000),
     (576000, B576000),
     (921600, B921600),
@@ -249,6 +260,9 @@ const
     (3000000, B3000000),
     (3500000, B3500000),
     (4000000, B4000000)
+   {$ELSE}
+    ,(921600, B921600)
+   {$ENDIF}
   {$ENDIF}
   {$ENDIF}
 {$ENDIF}
@@ -2358,4 +2372,5 @@ begin
 end;
 {$ENDIF}
 
-end.Index: skychart/fu_chart.pas
+end.
+Index: skychart/fu_chart.pas
