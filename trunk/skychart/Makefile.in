@@ -59,7 +59,10 @@ export LCL_PLATFORM
 [rules]
 .PHONY: all
 
-all: component_all library_all cdc$(EXEEXT) cdcicon$(EXEEXT)
+outdir:
+	mkdir -p units/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
+
+all: outdir component_all library_all cdc$(EXEEXT) cdcicon$(EXEEXT)
 
 revision:
 	$(LAZDIR)/tools/svn2revisioninc . revision.inc
