@@ -776,6 +776,7 @@ end;
 procedure Tf_config_system.IndiAutostartClick(Sender: TObject);
 var i: integer;
 begin
+if LockChange then exit;
 i:=Exec('which indistarter');
 if i<>0 then begin
    if not LockMsg then ShowMessage(rsPleaseInstal);
