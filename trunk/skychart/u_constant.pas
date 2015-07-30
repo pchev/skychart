@@ -664,7 +664,7 @@ const
   DefaultVarObs = 'varobs';
   DefaultCdC = 'skychart';
   Defaultffmpeg = 'ffmpeg';
-  DefaultSerialPort = '/dev/ttyS0';
+  DefaultSerialPort = '/dev/ttyUSB0';
 {$endif}
 {$ifdef freebsd}
   DefaultFontName = 'Helvetica';
