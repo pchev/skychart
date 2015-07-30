@@ -436,7 +436,7 @@ dbport.value:=cmain.dbport;
 dbuser.Text:=cmain.dbuser;
 dbpass.Text:=cmain.dbpass;
 persdir.text:=SysToUTF8(cmain.persdir);
-{$ifdef linux}
+{$if defined(linux) or defined(freebsd)}
 LinuxDesktopBox.itemIndex:=min(1,LinuxDesktop);
 LinuxCmd.Text:=OpenFileCMD;
 if LinuxDesktopBox.itemIndex<1 then LinuxCmd.Enabled:=false;

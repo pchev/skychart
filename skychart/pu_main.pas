@@ -5604,7 +5604,7 @@ try
 Config_Version:=ReadString(section,'version',cdcver);
 SaveConfigOnExit.Checked:=ReadBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
 ConfirmSaveConfig:=ReadBool(section,'ConfirmSaveConfig',ConfirmSaveConfig);
-{$ifdef linux}
+{$if defined(linux) or defined(freebsd)}
 LinuxDesktop:=ReadInteger(section,'LinuxDesktop',LinuxDesktop);
 if LinuxDesktop>1 then LinuxDesktop:=1;
 OpenFileCMD:=ReadString(section,'OpenFileCMD',OpenFileCMD);
@@ -6449,7 +6449,7 @@ section:='main';
 WriteString(section,'AppDir',Appdir);
 WriteString(section,'version',cdcver);
 WriteString(section,'PrivateDir',privatedir);
-{$ifdef linux}
+{$if defined(linux) or defined(freebsd)}
 WriteInteger(section,'LinuxDesktop',LinuxDesktop);
 WriteString(section,'OpenFileCMD',OpenFileCMD);
 {$endif}

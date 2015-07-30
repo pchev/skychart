@@ -234,6 +234,14 @@ p.clear;
   end;
   findclose(fs);
 {$endif}
+{$ifdef freebsd}
+  i:=findfirst('/dev/cua*',faSysFile,fs);
+  while i=0 do begin
+    p.Add('/dev/'+fs.Name);
+    i:=findnext(fs);
+  end;
+  findclose(fs);
+{$endif}
 {$ifdef darwin}
   i:=findfirst('/dev/cu.usbserial*',faSysFile,fs);
   while i=0 do begin
@@ -2460,6 +2468,10 @@ var
 begin
  p:=TProcess.Create(nil);
  {$ifdef linux}
+   p.Environment.Add('LC_ALL=C');
+   p.Executable:='xplanet';
+ {$endif}
+ {$ifdef freebsd}
    p.Environment.Add('LC_ALL=C');
    p.Executable:='xplanet';
  {$endif}
