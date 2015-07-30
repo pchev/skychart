@@ -56,6 +56,9 @@ export LCL_PLATFORM
 [rules]
 .PHONY: all
 
-all: varobs$(EXEEXT) varobs_lpv_bulletin$(EXEEXT)
+outdir:
+	mkdir -p units/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
+
+all: outdir varobs$(EXEEXT) varobs_lpv_bulletin$(EXEEXT)
 
 
