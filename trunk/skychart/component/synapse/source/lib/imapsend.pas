@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 002.005.002 |
+| Project : Ararat Synapse                                       | 002.005.004 |
 |==============================================================================|
 | Content: IMAP4rev1 client                                                    |
 |==============================================================================|
-| Copyright (c)1999-2010, Lukas Gebauer                                        |
+| Copyright (c)1999-2015, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c)2001-2010.                |
+| Portions created by Lukas Gebauer are Copyright (c)2001-2015.                |
 | All Rights Reserved.                                                         |
 |==============================================================================|
 | Contributor(s):                                                              |
@@ -399,7 +399,7 @@ var
 begin
   Value.Clear;
   for n := 0 to FFullResult.Count - 2 do
-    if FFullResult[n][Length(FFullResult[n])] = '}' then
+    if (length(FFullResult[n]) > 0) and (FFullResult[n][Length(FFullResult[n])] = '}') then
     begin
       Value.Text := FFullResult[n + 1];
       Break;
@@ -501,6 +501,8 @@ end;
 function TIMAPSend.AuthLogin: Boolean;
 begin
   Result := IMAPcommand('LOGIN "' + FUsername + '" "' + FPassword + '"') = 'OK';
+  if Result then
+    FAuthDone := True;
 end;
 
 function TIMAPSend.Connect: Boolean;
