@@ -205,7 +205,6 @@ const
      {$ELSE}
        MaxRates = 30; //UNIX
      {$ENDIF}  
-   MaxRates = 30; //UNIX
   {$ENDIF}
 {$ELSE}
   MaxRates = 19;  //WIN
