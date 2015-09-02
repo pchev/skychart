@@ -4396,18 +4396,29 @@ end;
 function Tskychart.DrawConstL:boolean;
 var
   xx1,yy1,xx2,yy2,ra1,de1,ra2,de2 : Double;
+  cyear,dyear : double;
   i,color : Integer;
+  pmok: boolean;
   x1,y1,x2,y2:single;
 begin
 result:=false;
 if not cfgsc.ShowConstl then exit;
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw constellation figures');
 color := Fplot.cfgplot.Color[16];
+if cfgsc.PMon then begin
+   cyear:=cfgsc.CurYear+DayofYear(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay)/365.25;
+   dyear:=cyear-Fcatalog.cfgshr.ConstLepoch
+end;
 for i:=0 to Fcatalog.cfgshr.ConstLnum-1 do begin
   ra1:=Fcatalog.cfgshr.ConstL[i].ra1;
   de1:=Fcatalog.cfgshr.ConstL[i].de1;
   ra2:=Fcatalog.cfgshr.ConstL[i].ra2;
   de2:=Fcatalog.cfgshr.ConstL[i].de2;
+  pmok:=Fcatalog.cfgshr.ConstL[i].pm;
+  if pmok and cfgsc.PMon then begin
+    propermotion(ra1,de1,dyear,Fcatalog.cfgshr.ConstL[i].pmra1,Fcatalog.cfgshr.ConstL[i].pmde1, Fcatalog.cfgshr.ConstL[i].pxrv1,Fcatalog.cfgshr.ConstL[i].px1,Fcatalog.cfgshr.ConstL[i].rv1);
+    propermotion(ra2,de2,dyear,Fcatalog.cfgshr.ConstL[i].pmra2,Fcatalog.cfgshr.ConstL[i].pmde2, Fcatalog.cfgshr.ConstL[i].pxrv2,Fcatalog.cfgshr.ConstL[i].px2,Fcatalog.cfgshr.ConstL[i].rv2);
+  end;
   precession(jd2000,cfgsc.JDChart,ra1,de1);
   if cfgsc.ApparentPos then apparent_equatorial(ra1,de1,cfgsc,true,false);
   projection(ra1,de1,xx1,yy1,true,cfgsc) ;
