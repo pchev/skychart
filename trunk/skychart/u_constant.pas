@@ -754,7 +754,9 @@ type
   end;
 
   Tconstl = record
-    ra1, de1, ra2, de2: single;
+    ra1, de1, ra2, de2: double;
+    pmra1, pmde1, pmra2, pmde2, px1, rv1, px2, rv2: double;
+    pm, pxrv1, pxrv2: boolean;
   end;
 
   TMilkywaydot = record
@@ -886,6 +888,7 @@ type
     ConstelName: array of array[1..2] of string;
     // constellation three letter abbrev and name.
     ConstLnum, ConstBnum, ConstelNum, StarNameNum: integer;
+    ConstLepoch: double;
     ConstelPos: array of Tconstpos;
     ConstL: array of Tconstl;
     ConstB: array of Tconstb;
@@ -1960,6 +1963,7 @@ begin
   ListDbl := Source.ListDbl;
   ListPla := Source.ListPla;
   ConstelNum := Source.ConstelNum;
+  ConstLepoch := Source.ConstLepoch;
   Setlength(ConstelName, ConstelNum);
   Setlength(ConstelPos, ConstelNum);
   for i := 0 to ConstelNum - 1 do

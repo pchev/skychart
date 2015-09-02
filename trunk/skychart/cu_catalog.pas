@@ -3461,6 +3461,12 @@ Procedure Tcatalog.LoadConstL(fname:string);
 var f : textfile;
     i,n:integer;
     ra1,ra2,de1,de2:single;
+    buf,c,h1,h2: string;
+    filter,ok: boolean;
+    ver,ctype: integer;
+    rec: GCatrec;
+    h:TCatHeader;
+    info:TCatHdrInfo;
 begin
    if not FileExists(fname) then begin
       cfgshr.ConstLNum := 0;
@@ -3470,22 +3476,79 @@ begin
    Filemode:=0;
    assignfile(f,fname);
    try
+   // get file type
+   reset(f);
+   readln(f,buf);
+   if Copy(buf,1,1)=';' then ctype:=0 else ctype:=1;
+   // first loop to get the size
    reset(f);
    n:=0;
-   // first loop to get the size
    repeat
-     readln(f);
+     readln(f,buf);
+     if trim(buf)='' then continue;
+     if copy(buf,1,1)=';' then continue;
      inc(n);
    until eof(f);
    setlength(cfgshr.ConstL,n);
    // read the file now
    reset(f);
-   for i:=0 to n-1 do begin
-     readln(f,ra1,de1,ra2,de2);
-     cfgshr.ConstL[i].ra1:=deg2rad*ra1*15;
-     cfgshr.ConstL[i].de1:=deg2rad*de1;
-     cfgshr.ConstL[i].ra2:=deg2rad*ra2*15;
-     cfgshr.ConstL[i].de2:=deg2rad*de2;
+   case ctype of
+    0 : begin    // HR number
+          i:=0;
+          SetGCatpath(cfgcat.StarCatPath[DefStar-BaseStar],'star');
+          GetGCatInfo(h,info,ver,filter,ok);
+          cfgshr.ConstLepoch:=0;
+          repeat
+            readln(f,buf);
+            if trim(buf)='' then continue;
+            if copy(buf,1,1)=';' then continue;
+            c:=copy(buf,1,3);
+            h1:=trim(copy(buf,6,5));
+            h2:=trim(copy(buf,13,5));
+            FindNumGcatRec(cfgcat.StarCatPath[DefStar-BaseStar],'star','HR'+h1,11,rec,ok);
+            if not ok then continue;
+            if cfgshr.ConstLepoch=0 then begin
+               if rec.star.valid[vsEpoch] then cfgshr.ConstLepoch:=rec.star.epoch
+                                          else cfgshr.ConstLepoch:=rec.options.Epoch;
+            end;
+            cfgshr.ConstL[i].pm:=true;
+            cfgshr.ConstL[i].ra1:=deg2rad*rec.ra;
+            cfgshr.ConstL[i].de1:=deg2rad*rec.dec;
+            cfgshr.ConstL[i].pmra1:=deg2rad*rec.star.pmra/3600;
+            cfgshr.ConstL[i].pmde1:=deg2rad*rec.star.pmdec/3600;
+            cfgshr.ConstL[i].pxrv1:=(rec.star.valid[vsPx] and (trim(rec.options.flabel[26])='RV'));
+            cfgshr.ConstL[i].px1:=rec.star.px;
+            cfgshr.ConstL[i].rv1:=rec.num[1];
+            FindNumGcatRec(cfgcat.StarCatPath[DefStar-BaseStar],'star','HR'+h2,11,rec,ok);
+            if not ok then continue;
+            cfgshr.ConstL[i].ra2:=deg2rad*rec.ra;
+            cfgshr.ConstL[i].de2:=deg2rad*rec.dec;
+            cfgshr.ConstL[i].pmra2:=deg2rad*rec.star.pmra/3600;
+            cfgshr.ConstL[i].pmde2:=deg2rad*rec.star.pmdec/3600;
+            cfgshr.ConstL[i].pxrv2:=(rec.star.valid[vsPx] and (trim(rec.options.flabel[26])='RV'));
+            cfgshr.ConstL[i].px2:=rec.star.px;
+            cfgshr.ConstL[i].rv2:=rec.num[1];
+            inc(i);
+          until eof(f);
+        end;
+    1 : begin   // Coordinates
+          cfgshr.ConstLepoch:=jd2000;
+          for i:=0 to n-1 do begin
+            {$I-}
+            readln(f,ra1,de1,ra2,de2);
+            ok:=(IOResult=0);
+            {$I+}
+            if not ok then begin
+               if VerboseMsg then WriteTrace('Error in file '+fname+' , row '+inttostr(i+1));
+               continue;
+            end;
+            cfgshr.ConstL[i].ra1:=deg2rad*ra1*15;
+            cfgshr.ConstL[i].de1:=deg2rad*de1;
+            cfgshr.ConstL[i].ra2:=deg2rad*ra2*15;
+            cfgshr.ConstL[i].de2:=deg2rad*de2;
+            cfgshr.ConstL[i].pm:=false;
+          end;
+        end;
    end;
    cfgshr.ConstLNum := n;
    finally
