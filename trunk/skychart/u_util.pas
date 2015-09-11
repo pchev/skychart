@@ -33,7 +33,7 @@ uses Math, SysUtils, Classes, u_constant, LCLType, FileUtil,
     unix,baseunix,unixutil,
   {$endif}
     Controls, Process, MTPCPU,
-    MaskEdit,enhedits,Menus,Spin,CheckLst,Buttons, ExtCtrls,
+    MaskEdit,enhedits,Menus,Spin,CheckLst,Buttons, ExtCtrls, ActnList,
     Forms,Graphics,StdCtrls,ComCtrls,Dialogs,Grids,PrintersDlgs,Printers;
 
 function rmod(x,y:Double):Double;
@@ -2576,7 +2576,9 @@ begin
       end;
       c:=UpperCase(copy(txt,p,1));
     end;
-    Amenu.Caption:=copy(txt,1,p-1)+'&'+copy(txt,p,999);
+    if Amenu.Action<>nil
+      then  TAction(Amenu.Action).Caption:=copy(txt,1,p-1)+'&'+copy(txt,p,999)
+      else Amenu.Caption:=copy(txt,1,p-1)+'&'+copy(txt,p,999);
     AccelList[level]:=AccelList[level]+c;
   end;
   AccelList[level+1]:='';
