@@ -429,7 +429,6 @@ type
     procedure NightButtonClick(Sender: TObject);
     procedure StandardButtonClick(Sender: TObject);
     procedure ThemeListChange(Sender: TObject);
-    procedure lDrawPMyChange(Sender: TObject);
     procedure nebuladisplayClick(Sender: TObject);
     procedure red_moveBoxClick(Sender: TObject);
     procedure stardisplayClick(Sender: TObject);
@@ -1135,10 +1134,6 @@ if LockChange then exit;
   cmain.ThemeName:=ThemeList.Text;
 end;
 
-procedure Tf_config_display.lDrawPMyChange(Sender: TObject);
-begin
-  end;
-
 procedure Tf_config_display.Button7Click(Sender: TObject);
 begin
   FileNameEdit1.FileName:='';
@@ -1397,7 +1392,9 @@ if csc.DSLforcecolor then ShowLineShape.Brush.Color:=csc.DSLcolor
 Ecliptic.Checked:=csc.ShowEcliptic;
 Galactic.Checked:=csc.ShowGalactic;
 ConstlFile.Text:=cmain.ConstLfile;
+ConstlFile.InitialDir:=ExtractFilePath(cmain.ConstLfile);
 ConstbFile.Text:=cmain.ConstBfile;
+ConstbFile.InitialDir:=ExtractFilePath(cmain.ConstBfile);
 ConstL.Checked:=csc.ShowConstl;
 ConstB.Checked:=csc.ShowConstb;
 milkyway.Checked:=csc.ShowMilkyWay;
