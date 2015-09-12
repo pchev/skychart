@@ -1131,6 +1131,7 @@ if OpenDialog.InitialDir='' then OpenDialog.InitialDir:=HomeDir;
 OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
 OpenDialog.Title:=rsOpenAChart;
 if OpenDialog.Execute then
+    Savedialog.InitialDir:=ExtractFilePath(OpenDialog.FileName);
     OpenChart(OpenDialog.FileName);
 end;
 
