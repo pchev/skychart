@@ -491,7 +491,6 @@
       <Unit20>
         <Filename Value="u_constant.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="u_constant"/>
       </Unit20>
       <Unit21>
         <Filename Value="u_projection.pas"/>
@@ -649,7 +648,6 @@
         <ComponentName Value="pop_indi"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_indiclient"/>
       </Unit45>
       <Unit46>
         <Filename Value="pu_main.pas"/>
@@ -657,7 +655,6 @@
         <ComponentName Value="f_main"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_main"/>
       </Unit46>
       <Unit47>
         <Filename Value="pu_observatory_db.pas"/>
@@ -702,7 +699,6 @@
         <ComponentName Value="pop_scope"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_ascomclient"/>
       </Unit54>
       <Unit55>
         <Filename Value="uDE.pas"/>
@@ -784,7 +780,6 @@
         <ComponentName Value="f_config_system"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="fu_config_system"/>
       </Unit66>
       <Unit67>
         <Filename Value="fu_config_calendar.pas"/>

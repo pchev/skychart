@@ -1028,6 +1028,7 @@ procedure Tf_main.FileSaveAs1Execute(Sender: TObject);
 begin
 Savedialog.DefaultExt:='cdc3';
 if Savedialog.InitialDir='' then Savedialog.InitialDir:=HomeDir;
+if (MultiFrame1.ActiveObject is Tf_chart) then savedialog.FileName:=trim(Tf_chart(MultiFrame1.ActiveObject).Caption)+'.cdc3';
 savedialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
 savedialog.Title:=rsSaveTheCurre;
 if SaveDialog.Execute then SaveChart(SaveDialog.Filename);
