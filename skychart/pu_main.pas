@@ -1312,7 +1312,7 @@ if VerboseMsg then
  def_cfgsc.tz.GregorianStartJD:=GregorianStartJD;
  def_cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
  if def_cfgsc.tz.TimeZoneFile='' then firstuse:=true;
- if firstuse then begin
+ if firstuse and Application.ShowMainForm then begin // no setup forms if --daemon
     if VerboseMsg then
      WriteTrace('First setup');
     FirstSetup
@@ -1382,12 +1382,12 @@ if VerboseMsg then
  WriteTrace('Add signal handler');
 CdcSigAction(@RecvSignal);
 {$endif}
-if DirectoryExists(cfgm.ImagePath+'sac')and(cdcdb.CountImages('SAC')=0) then begin
+if DirectoryExists(cfgm.ImagePath+'sac')and(cdcdb.CountImages('SAC')=0) and Application.ShowMainForm then begin
   if VerboseMsg then
    WriteTrace('Init picture DB');
   SetupPicturesPage(0,1);
 end;
-if (not firstuse)and(config_version<cdcver) then
+if (not firstuse)and(config_version<cdcver) and Application.ShowMainForm then
    ShowReleaseNotes(false);
 if cfgm.SampAutoconnect then begin
   SAMPStart(true);
@@ -2225,7 +2225,7 @@ if (not ForceClose) and TCPClientConnected then begin  // do not close if client
    writetrace('Client still connected, minimize instead of close.');
 end else begin
   try
-  if SaveConfigOnExit.checked then begin
+  if SaveConfigOnExit.checked and Application.ShowMainForm then begin
      if ConfirmSaveConfig then begin
      try
       f1:=TForm.Create(self);
