@@ -3577,17 +3577,18 @@ ConfigSolsys.f_config_solsys1.PageControl1.PageIndex:=page;
 if directdownload then begin
    case page of
      2: begin
-          ConfigSolsys.f_config_solsys1.ComPageControl.PageIndex:=1;
           ConfigSolsys.f_config_solsys1.ConfirmDownload:=false;
           ConfigSolsys.show;
+          ConfigSolsys.f_config_solsys1.ComPageControl.ActivePageIndex:=1;
           Application.ProcessMessages;
           ConfigSolsys.f_config_solsys1.DownloadComet.Click;
           RefreshAllChild(false);
         end;
      3: begin
-          ConfigSolsys.f_config_solsys1.AstPageControl.PageIndex:=1;
           ConfigSolsys.f_config_solsys1.ConfirmDownload:=false;
+          ConfigSolsys.f_config_solsys1.autoprocess:=true;
           ConfigSolsys.show;
+          ConfigSolsys.f_config_solsys1.AstPageControl.ActivePageIndex:=1;
           ConfigSolsys.f_config_solsys1.DownloadAsteroid.Click;
           RecomputeAsteroid;
           RefreshAllChild(false);
