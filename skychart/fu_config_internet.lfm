@@ -24,30 +24,30 @@ object f_config_internet: Tf_config_internet
       Height = 511
       Top = 0
       Width = 498
-      ActivePage = Page1
+      ActivePage = Page2
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Proxy'
-        ClientHeight = 511
-        ClientWidth = 498
+        ClientHeight = 507
+        ClientWidth = 494
         object GroupBox1: TGroupBox
           Left = 20
           Height = 201
           Top = 12
           Width = 401
           Caption = 'HTTP Proxy'
-          ClientHeight = 170
-          ClientWidth = 397
+          ClientHeight = 185
+          ClientWidth = 399
           TabOrder = 0
           object httpproxy: TCheckBox
             Left = 30
-            Height = 26
+            Height = 24
             Top = 11
-            Width = 114
+            Width = 122
             Caption = 'Use HTTP Proxy'
             OnClick = httpproxyClick
             TabOrder = 0
@@ -96,7 +96,7 @@ object f_config_internet: Tf_config_internet
               Left = 22
               Height = 15
               Top = 105
-              Width = 53
+              Width = 59
               Caption = 'Password'
               ParentColor = False
             end
@@ -104,7 +104,7 @@ object f_config_internet: Tf_config_internet
               Left = 22
               Height = 15
               Top = 61
-              Width = 62
+              Width = 69
               Caption = 'User Name'
               ParentColor = False
             end
@@ -112,7 +112,7 @@ object f_config_internet: Tf_config_internet
               Left = 227
               Height = 15
               Top = 17
-              Width = 58
+              Width = 63
               Caption = 'Proxy port'
               ParentColor = False
             end
@@ -120,7 +120,7 @@ object f_config_internet: Tf_config_internet
               Left = 22
               Height = 15
               Top = 17
-              Width = 59
+              Width = 65
               Caption = 'Proxy host'
               ParentColor = False
             end
@@ -143,9 +143,9 @@ object f_config_internet: Tf_config_internet
           end
           object SocksProxy: TCheckBox
             Left = 202
-            Height = 26
+            Height = 24
             Top = 11
-            Width = 93
+            Width = 100
             Caption = 'Socks proxy'
             OnClick = SocksProxyClick
             TabOrder = 2
@@ -157,22 +157,22 @@ object f_config_internet: Tf_config_internet
           Top = 222
           Width = 401
           Caption = 'FTP '
-          ClientHeight = 89
-          ClientWidth = 397
+          ClientHeight = 104
+          ClientWidth = 399
           TabOrder = 1
           object Label1: TLabel
             Left = 39
             Height = 15
             Top = 60
-            Width = 120
+            Width = 136
             Caption = 'Anonymous password'
             ParentColor = False
           end
           object ftppassive: TCheckBox
             Left = 39
-            Height = 26
+            Height = 24
             Top = 18
-            Width = 126
+            Width = 136
             Caption = 'FTP Passive Mode'
             OnClick = ftppassiveClick
             TabOrder = 0
@@ -188,9 +188,9 @@ object f_config_internet: Tf_config_internet
         end
         object CheckBox1: TCheckBox
           Left = 20
-          Height = 26
+          Height = 24
           Top = 350
-          Width = 305
+          Width = 329
           Caption = 'Ask confirmation before any Internet connection'
           OnClick = CheckBox1Click
           TabOrder = 2
@@ -198,21 +198,21 @@ object f_config_internet: Tf_config_internet
       end
       object Page2: TTabSheet
         Caption = 'Orbital Elements'
-        ClientHeight = 511
-        ClientWidth = 498
+        ClientHeight = 507
+        ClientWidth = 494
         object Label6: TLabel
           Left = 28
-          Height = 16
+          Height = 15
           Top = 6
-          Width = 280
+          Width = 305
           Caption = 'Comet elements in MPC format (one URL by line) '
           ParentColor = False
         end
         object Label7: TLabel
           Left = 28
-          Height = 16
+          Height = 15
           Top = 182
-          Width = 286
+          Width = 313
           Caption = 'Asteroid elements in MPC format (one URL by line)'
           ParentColor = False
         end
@@ -220,7 +220,7 @@ object f_config_internet: Tf_config_internet
           Left = 16
           Height = 108
           Top = 30
-          Width = 438
+          Width = 434
           Anchors = [akTop, akLeft, akRight]
           OnExit = CometUrlListExit
           ScrollBars = ssAutoBoth
@@ -231,11 +231,11 @@ object f_config_internet: Tf_config_internet
           Left = 14
           Height = 112
           Top = 206
-          Width = 438
+          Width = 434
           Anchors = [akTop, akLeft, akRight]
           OnExit = AsteroidUrlListExit
           ScrollBars = ssAutoBoth
-          TabOrder = 5
+          TabOrder = 3
           WordWrap = False
         end
         object comdefault: TButton
@@ -246,7 +246,7 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
           OnClick = comdefaultClick
-          TabOrder = 4
+          TabOrder = 2
         end
         object astdefault: TButton
           Left = 371
@@ -256,27 +256,17 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
           OnClick = astdefaultClick
-          TabOrder = 8
-        end
-        object brightneo: TButton
-          Left = 151
-          Height = 25
-          Top = 326
-          Width = 120
-          BorderSpacing.InnerBorder = 4
-          Caption = 'Bright + NEO + TNO'
-          OnClick = brightneoClick
-          TabOrder = 7
+          TabOrder = 5
         end
         object mpcorb: TButton
-          Left = 151
+          Left = 32
           Height = 25
-          Top = 358
+          Top = 368
           Width = 120
           BorderSpacing.InnerBorder = 4
           Caption = 'MPCORB > 70Mb!'
           OnClick = mpcorbClick
-          TabOrder = 10
+          TabOrder = 6
         end
         object comhttp: TButton
           Left = 275
@@ -286,63 +276,32 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'MPC Http'
           OnClick = comhttpClick
-          TabOrder = 3
-        end
-        object comftp: TButton
-          Left = 178
-          Height = 25
-          Top = 142
-          Width = 75
-          BorderSpacing.InnerBorder = 4
-          Caption = 'MPC Ftp'
-          OnClick = comftpClick
-          TabOrder = 2
-          Visible = False
+          TabOrder = 1
         end
         object astcdc: TButton
           Left = 30
           Height = 25
           Top = 326
-          Width = 106
+          Width = 122
           BorderSpacing.InnerBorder = 4
           Caption = 'First 5000'
           OnClick = astcdcClick
-          TabOrder = 6
-        end
-        object Button4: TButton
-          Left = 62
-          Height = 25
-          Top = 142
-          Width = 91
-          Caption = 'astro.cz HTTP'
-          OnClick = Button4Click
-          TabOrder = 1
-          Visible = False
-        end
-        object Button5: TButton
-          Left = 30
-          Height = 25
-          Top = 356
-          Width = 106
-          Caption = 'astro.cz > 70MB!'
-          OnClick = Button5Click
-          TabOrder = 9
-          Visible = False
+          TabOrder = 4
         end
         object astcdcneo: TButton
-          Left = 283
+          Left = 170
           Height = 25
-          Top = 358
+          Top = 326
           Width = 163
           Caption = 'First 5000 + NEO + TNO'
           OnClick = astcdcneoClick
-          TabOrder = 11
+          TabOrder = 7
         end
       end
       object Page3: TTabSheet
         Caption = 'Online DSS'
-        ClientHeight = 511
-        ClientWidth = 498
+        ClientHeight = 507
+        ClientWidth = 494
         object Label8: TLabel
           Left = 20
           Height = 16

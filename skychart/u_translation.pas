@@ -656,9 +656,7 @@ resourcestring
   rsFTPPassiveMo = 'FTP passive mode';
   rsCometElement = 'Sources for comet elements in MPC format (one URL per line)';
   rsAsteroidElem = 'Sources for asteroid elements in MPC format (one URL per line)';
-  rsBrightNEO = 'Bright + NEO + TNO';
   rsMPCHttp = 'MPC HTTP';
-  rsMPCFtp = 'MPC FTP';
   rsFirst5000 = 'First 5000';
   rsOnlineDSS = 'Online DSS';
   rsOnlinePictur = 'Online pictures servers';

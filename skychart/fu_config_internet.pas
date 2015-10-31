@@ -36,18 +36,14 @@ type
 
   Tf_config_internet = class(TFrame)
     astcdc: TButton;
-    Button4: TButton;
-    Button5: TButton;
     astcdcneo: TButton;
     CheckBox1: TCheckBox;
     SocksProxy: TCheckBox;
     SocksType: TComboBox;
     DefaultDSS: TButton;
     comhttp: TButton;
-    comftp: TButton;
     comdefault: TButton;
     astdefault: TButton;
-    brightneo: TButton;
     Label8: TLabel;
     mpcorb: TButton;
     ftppassive: TCheckBox;
@@ -75,8 +71,6 @@ type
     PageControl1: TPageControl;
     Page2: TTabSheet;
     DSSpictures: TStringGrid;
-    procedure Button4Click(Sender: TObject);
-    procedure Button5Click(Sender: TObject);
     procedure astcdcneoClick(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure anonpassChange(Sender: TObject);
@@ -84,8 +78,6 @@ type
     procedure AsteroidUrlListExit(Sender: TObject);
     procedure comdefaultClick(Sender: TObject);
     procedure astdefaultClick(Sender: TObject);
-    procedure brightneoClick(Sender: TObject);
-    procedure comftpClick(Sender: TObject);
     procedure comhttpClick(Sender: TObject);
     procedure DefaultDSSClick(Sender: TObject);
     procedure DSSpicturesEditingDone(Sender: TObject);
@@ -143,9 +135,7 @@ Label6.caption:=rsCometElement;
 Label7.caption:=rsAsteroidElem;
 comdefault.caption:=rsDefault;
 astdefault.caption:=rsDefault;
-brightneo.caption:=rsBrightNEO;
 comhttp.caption:=rsMPCHttp;
-comftp.caption:=rsMPCFtp;
 astcdc.caption:=rsFirst5000;
 astcdcneo.Caption:=rsFirst5000+' NEO + TNO';
 Page3.caption:=rsOnlineDSS;
@@ -288,24 +278,11 @@ begin
 LockChange:=true;
 end;
 
-procedure Tf_config_internet.Button4Click(Sender: TObject);
-begin
-CometUrlList.Clear;
-CometUrlList.Lines.Add(URL_HTTPCometElements2);
-CometUrlListExit(Sender);
-end;
-
-procedure Tf_config_internet.Button5Click(Sender: TObject);
-begin
-AsteroidUrlList.Clear;
-AsteroidUrlList.Lines.Add(URL_MPCORBAsteroidElements2);
-AsteroidUrlListExit(Sender);
-end;
-
 procedure Tf_config_internet.astcdcneoClick(Sender: TObject);
 begin
 AsteroidUrlList.Clear;
 AsteroidUrlList.Lines.Add(URL_CDCAsteroidElements);
+AsteroidUrlList.Lines.Add(URL_HTTPAsteroidElements1);
 AsteroidUrlList.Lines.Add(URL_HTTPAsteroidElements2);
 AsteroidUrlList.Lines.Add(URL_HTTPAsteroidElements3);
 AsteroidUrlListExit(Sender);
@@ -326,24 +303,6 @@ end;
 procedure Tf_config_internet.astdefaultClick(Sender: TObject);
 begin
 astcdcClick(Sender);
-end;
-
-procedure Tf_config_internet.brightneoClick(Sender: TObject);
-var buf: string;
-begin
-AsteroidUrlList.Clear;
-buf:=stringreplace(URL_HTTPAsteroidElements1,'$YYYY',FormatDateTime('yyyy',now),[]);
-AsteroidUrlList.Lines.Add(buf);
-AsteroidUrlList.Lines.Add(URL_HTTPAsteroidElements2);
-AsteroidUrlList.Lines.Add(URL_HTTPAsteroidElements3);
-AsteroidUrlListExit(Sender);
-end;
-
-procedure Tf_config_internet.comftpClick(Sender: TObject);
-begin
-CometUrlList.Clear;
-CometUrlList.Lines.Add(URL_FTPCometElements);
-CometUrlListExit(Sender);
 end;
 
 procedure Tf_config_internet.comhttpClick(Sender: TObject);
