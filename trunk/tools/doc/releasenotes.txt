@@ -23,6 +23,7 @@ New functions:
   * Option to add the meridian line with any projection.
   * Add Tcp/Ip connection to the LX200 telescope interface.
   * Show comet and asteroid hourly motion in the detail window.
+  * Update download URL for asteroids and comets
 
 Corrections:
 

@@ -47,7 +47,7 @@ type
 
 const
   cdcversion = '3.11-svn';
-  cdcver = '3.11i';
+  cdcver = '3.11j';
   cdccpy = 'Copyright (C) 2002-2014 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf +
     'Peter Dean,' + crlf + 'John Sunderland' + crlf  + 'Anat Ruangrassamee';
@@ -484,21 +484,13 @@ const
 
   URL_IERSBulletins = 'http://www.iers.org/IERS/EN/Publications/Bulletins/bulletins.html';
 
-  URL_HTTPCometElements =
-    'http://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt';
-  URL_HTTPCometElements2 =
-    'http://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt';
-  URL_FTPCometElements = '**';
-  URL_HTTPAsteroidElements1 =
-    'http://www.minorplanetcenter.net/iau/Ephemerides/Bright/$YYYY/Soft00Bright.txt';
-  URL_HTTPAsteroidElements2 =
-    'http://www.minorplanetcenter.net/iau/Ephemerides/Unusual/Soft00Unusual.txt';
-  URL_HTTPAsteroidElements3 =
-    'http://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt';
-  URL_MPCORBAsteroidElements =
-    'http://www.minorplanetcenter.net/iau/MPCORB/MPCORB.DAT.gz';
-  URL_MPCORBAsteroidElements2 = '**';
-  URL_CDCAsteroidElements = 'http://www.ap-i.net/pub/skychart/mpc/mpc5000.dat';
+  URL_HTTPCometElements ='http://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt';
+
+  URL_MPCORBAsteroidElements= 'http://www.minorplanetcenter.net/iau/MPCORB/MPCORB.DAT.gz';
+  URL_HTTPAsteroidElements1 = 'http://www.minorplanetcenter.net/iau/MPCORB/Unusual.txt';
+  URL_HTTPAsteroidElements2 = 'http://www.minorplanetcenter.net/iau/MPCORB/NEA.txt';
+  URL_HTTPAsteroidElements3 = 'http://www.minorplanetcenter.net/iau/MPCORB/Distant.txt';
+  URL_CDCAsteroidElements   = 'http://www.ap-i.net/pub/skychart/mpc/mpc5000.dat';
 
   URL_IVOASAMP = 'http://www.ivoa.net/documents/SAMP/';
 

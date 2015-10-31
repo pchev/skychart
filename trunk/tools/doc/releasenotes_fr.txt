@@ -23,6 +23,7 @@ Nouvelles fonctions:
   * Option pour ajouter la ligne méridienne avec toute projection.
   * Ajout de la connexion Tcp/Ip à l'interface télescope LX200. 
   * Affiche le déplacement horaire des comètes et astéroïdes dans la fenêtre de détail.
+  * Mise à jour du téléchargement des comètes et astéroïdes.
 
 Corrections:
 

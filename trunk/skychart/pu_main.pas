@@ -5716,21 +5716,17 @@ cfgm.ProxyUser:=ReadString(section,'ProxyUser',cfgm.ProxyUser);
 cfgm.ProxyPass:=ReadString(section,'ProxyPass',cfgm.ProxyPass);
 cfgm.AnonPass:=ReadString(section,'AnonPass',cfgm.AnonPass);
 cfgm.starshape_file:=ReadString(section,'starshape_file',cfgm.starshape_file);
-buf:=ReadString(section,'CometUrl1','');
-if (Pos('cfa-www.harvard.edu',buf)=0) and (Pos('www.minorplanetcenter.org',buf)=0) then begin   // Old MPC URL, ignore saved configuration
-  j:=ReadInteger(section,'CometUrlCount',0);
-  if (j>0) then begin
-     cfgm.CometUrlList.Clear;
-     for i:=1 to j do cfgm.CometUrlList.Add(ReadString(section,'CometUrl'+inttostr(i),''));
-  end;
-  j:=ReadInteger(section,'AsteroidUrlCount',0);
-  if j>0 then begin
-    cfgm.AsteroidUrlList.Clear;
-    for i:=1 to j do begin
-      buf:=ReadString(section,'AsteroidUrl'+inttostr(i),'');
-      if Pos('ap-i.net',buf)>0 then buf:=URL_CDCAsteroidElements; // change mpc5000 file location
-      cfgm.AsteroidUrlList.Add(buf);
-    end;
+j:=ReadInteger(section,'CometUrlCount',0);
+if (j>0) then begin
+   cfgm.CometUrlList.Clear;
+   for i:=1 to j do cfgm.CometUrlList.Add(ReadString(section,'CometUrl'+inttostr(i),''));
+end;
+j:=ReadInteger(section,'AsteroidUrlCount',0);
+if j>0 then begin
+  cfgm.AsteroidUrlList.Clear;
+  for i:=1 to j do begin
+    buf:=ReadString(section,'AsteroidUrl'+inttostr(i),'');
+    cfgm.AsteroidUrlList.Add(buf);
   end;
 end;
 j:=ReadInteger(section,'ObsNameListCount',0);
@@ -5919,6 +5915,7 @@ end;
 
 procedure Tf_main.UpdateConfig;
 var i: integer;
+    b1,b2: boolean;
 begin
 if Config_Version < '3.0.1.3d' then begin
   f_getdss.cfgdss.DSSurl[1,0]:=URL_DSS_NAME1;
@@ -6028,6 +6025,24 @@ if  Config_Version < '3.9g' then begin
 end;
 if  Config_Version < '3.11g' then begin
    CopyFile(SysToUTF8(Configfile),SysToUTF8(Configfile+'.oldscripts'));
+end;
+if  Config_Version < '3.11j' then begin
+  for i:=0 to cfgm.CometUrlList.Count-1 do begin
+     if pos('Soft00Cmt',cfgm.CometUrlList[i])>0 then cfgm.CometUrlList[i]:=URL_HTTPCometElements;
+  end;
+  b1:=false;
+  b2:=false;
+  for i:=0 to cfgm.AsteroidUrlList.Count-1 do if pos('ap-i.net',cfgm.AsteroidUrlList[i])>0 then b2:=true;
+  if b2 then begin
+    for i:=0 to cfgm.AsteroidUrlList.Count-1 do if (pos('Soft00Bright',cfgm.AsteroidUrlList[i])>0)then begin cfgm.AsteroidUrlList.Delete(i); break; end;
+  end;
+  for i:=0 to cfgm.AsteroidUrlList.Count-1 do begin
+     if pos('Soft00Unusual',cfgm.AsteroidUrlList[i])>0 then begin b1:=true; cfgm.AsteroidUrlList[i]:=URL_HTTPAsteroidElements1; end;
+     if pos('Soft00Distant',cfgm.AsteroidUrlList[i])>0 then cfgm.AsteroidUrlList[i]:=URL_HTTPAsteroidElements3;
+     if (pos('Soft00Bright',cfgm.AsteroidUrlList[i])>0)then cfgm.AsteroidUrlList[i]:=URL_CDCAsteroidElements;
+  end;
+  if b1 then cfgm.AsteroidUrlList.Add(URL_HTTPAsteroidElements2);
+
 end;
 end;
 
