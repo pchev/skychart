@@ -40,6 +40,7 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    Button4: TButton;
     Panel1: TPanel;
     coord1: TLabel;
     coord2: TLabel;
@@ -58,6 +59,7 @@ type
     de: TRaDec;
     rot: TFloatEdit;
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure EqChange(Sender: TObject);
@@ -65,11 +67,13 @@ type
   private
     { Private declarations }
     lock: boolean;
+    FApply: TNotifyEvent;
   public
     { Public declarations }
     AzNorth: boolean;
     cfgsc: Tconf_skychart;
     procedure SetLang;
+    property onApply: TNotifyEvent read FApply write FApply;
   end;
 
 var
@@ -84,6 +88,7 @@ Caption:=rsPosition;
 Button1.caption:=rsOK;
 Button2.caption:=rsCancel;
 Button3.caption:=rsHelp;
+Button4.caption:=rsApply;
 coord1.caption:=rsAz;
 coord2.caption:=rsAlt;
 eq1.caption:=rsRA;
@@ -135,6 +140,11 @@ end;
 procedure Tf_position.Button3Click(Sender: TObject);
 begin
   ShowHelp;
+end;
+
+procedure Tf_position.Button4Click(Sender: TObject);
+begin
+  if Assigned(FApply) then FApply(self);
 end;
 
 procedure Tf_position.EqChange(Sender: TObject);

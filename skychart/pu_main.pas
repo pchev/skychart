@@ -699,6 +699,7 @@ type
     procedure TelescopeChange(origin: string; tc:boolean);
     procedure ApplyScript(Sender: TObject);
     procedure IndiGUIdestroy(Sender: TObject);
+    procedure PositionApply(Sender: TObject);
   {$ifdef mswindows}
     Procedure SaveWinColor;
     Procedure ResetWinColor;
@@ -3228,27 +3229,34 @@ end;
 procedure Tf_main.PositionExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   f_position.onApply:=PositionApply;
    f_position.cfgsc:=sc.cfgsc;
    f_position.AzNorth:=sc.catalog.cfgshr.AzNorth;
    formpos(f_position,mouse.cursorpos.x,mouse.cursorpos.y);
    f_position.showmodal;
    if f_position.modalresult=mrOK then begin
-      if sc.cfgsc.Projpole=Altaz then begin
-         sc.cfgsc.TrackOn:=true;
-         sc.cfgsc.TrackType:=4;
-         sc.cfgsc.acentre:=deg2rad*f_position.long.value;
-         if sc.catalog.cfgshr.AzNorth then sc.cfgsc.acentre:=rmod(sc.cfgsc.acentre+pi,pi2);
-         sc.cfgsc.hcentre:=deg2rad*f_position.lat.value;
-      end
-         else sc.cfgsc.TrackOn:=false;
-      sc.cfgsc.racentre:=15*deg2rad*f_position.ra.value;
-      sc.cfgsc.decentre:=deg2rad*f_position.de.value;
-      sc.cfgsc.fov:=deg2rad*f_position.fov.value;
-      sc.cfgsc.theta:=deg2rad*f_position.rot.value;
-if VerboseMsg then
- WriteTrace('PositionExecute');
-      refresh;
+     PositionApply(Sender);
    end;
+end;
+end;
+
+procedure Tf_main.PositionApply(Sender: TObject);
+begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+  if sc.cfgsc.Projpole=Altaz then begin
+     sc.cfgsc.TrackOn:=true;
+     sc.cfgsc.TrackType:=4;
+     sc.cfgsc.acentre:=deg2rad*f_position.long.value;
+     if sc.catalog.cfgshr.AzNorth then sc.cfgsc.acentre:=rmod(sc.cfgsc.acentre+pi,pi2);
+     sc.cfgsc.hcentre:=deg2rad*f_position.lat.value;
+  end
+     else sc.cfgsc.TrackOn:=false;
+  sc.cfgsc.racentre:=15*deg2rad*f_position.ra.value;
+  sc.cfgsc.decentre:=deg2rad*f_position.de.value;
+  sc.cfgsc.fov:=deg2rad*f_position.fov.value;
+  sc.cfgsc.theta:=deg2rad*f_position.rot.value;
+  if VerboseMsg then WriteTrace('PositionExecute');
+  refresh;
 end;
 end;
 
