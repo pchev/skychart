@@ -163,7 +163,7 @@ object f_position: Tf_position
       ParentColor = False
     end
     object Label4: TLabel
-      Left = 256
+      Left = 289
       Height = 15
       Top = 14
       Width = 52
@@ -171,7 +171,7 @@ object f_position: Tf_position
       ParentColor = False
     end
     object Fov: TRaDec
-      Left = 39
+      Left = 72
       Height = 23
       Top = 9
       Width = 210
@@ -181,10 +181,10 @@ object f_position: Tf_position
       TabOrder = 0
     end
     object rot: TFloatEdit
-      Left = 320
+      Left = 353
       Height = 21
       Hint = '-180..180'
-      Top = 9
+      Top = 10
       Width = 73
       ParentShowHint = False
       ShowHint = True
