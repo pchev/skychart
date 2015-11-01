@@ -2,11 +2,11 @@ object f_position: Tf_position
   Left = 481
   Height = 282
   Top = 108
-  Width = 477
+  Width = 510
   ActiveControl = Panel2
   Caption = 'Position'
   ClientHeight = 282
-  ClientWidth = 477
+  ClientWidth = 510
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
@@ -37,9 +37,9 @@ object f_position: Tf_position
     Left = 8
     Height = 77
     Top = 88
-    Width = 464
+    Width = 496
     ClientHeight = 77
-    ClientWidth = 464
+    ClientWidth = 496
     FullRepaint = False
     TabOrder = 1
     object coord1: TLabel
@@ -51,7 +51,7 @@ object f_position: Tf_position
       ParentColor = False
     end
     object coord2: TLabel
-      Left = 248
+      Left = 256
       Height = 15
       Top = 36
       Width = 16
@@ -67,10 +67,10 @@ object f_position: Tf_position
       ParentColor = False
     end
     object long: TRaDec
-      Left = 64
+      Left = 39
       Height = 23
       Top = 32
-      Width = 176
+      Width = 210
       kind = Az
       value = 0
       Enabled = True
@@ -81,7 +81,7 @@ object f_position: Tf_position
       Left = 280
       Height = 23
       Top = 32
-      Width = 176
+      Width = 210
       kind = Alt
       value = 0
       Enabled = True
@@ -93,9 +93,9 @@ object f_position: Tf_position
     Left = 8
     Height = 77
     Top = 3
-    Width = 464
+    Width = 495
     ClientHeight = 77
-    ClientWidth = 464
+    ClientWidth = 495
     FullRepaint = False
     TabOrder = 0
     object eq1: TLabel
@@ -107,7 +107,7 @@ object f_position: Tf_position
       ParentColor = False
     end
     object eq2: TLabel
-      Left = 248
+      Left = 256
       Height = 15
       Top = 36
       Width = 17
@@ -123,10 +123,10 @@ object f_position: Tf_position
       ParentColor = False
     end
     object ra: TRaDec
-      Left = 64
+      Left = 39
       Height = 23
       Top = 32
-      Width = 176
+      Width = 210
       kind = RA
       value = 0
       Enabled = True
@@ -137,7 +137,7 @@ object f_position: Tf_position
       Left = 280
       Height = 23
       Top = 32
-      Width = 176
+      Width = 210
       kind = DE
       value = 0
       Enabled = True
@@ -149,9 +149,9 @@ object f_position: Tf_position
     Left = 8
     Height = 49
     Top = 176
-    Width = 464
+    Width = 496
     ClientHeight = 49
-    ClientWidth = 464
+    ClientWidth = 496
     FullRepaint = False
     TabOrder = 2
     object Label3: TLabel
@@ -163,7 +163,7 @@ object f_position: Tf_position
       ParentColor = False
     end
     object Label4: TLabel
-      Left = 248
+      Left = 256
       Height = 15
       Top = 14
       Width = 52
@@ -171,17 +171,17 @@ object f_position: Tf_position
       ParentColor = False
     end
     object Fov: TRaDec
-      Left = 64
+      Left = 39
       Height = 23
       Top = 9
-      Width = 176
+      Width = 210
       kind = Az
       value = 0
       Enabled = True
       TabOrder = 0
     end
     object rot: TFloatEdit
-      Left = 336
+      Left = 320
       Height = 21
       Hint = '-180..180'
       Top = 9

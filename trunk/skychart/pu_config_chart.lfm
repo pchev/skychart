@@ -10,7 +10,7 @@ object f_configchart: Tf_configchart
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.4.3.0'
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -81,38 +81,24 @@ object f_configchart: Tf_configchart
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientWidth = 501
-          inherited PanelExpert: TPanel
-            inherited ApparentType: TRadioGroup
-              ClientHeight = 26
-            end
-            inherited GroupBox3: TGroupBox
-              ClientHeight = 26
-            end
-          end
-          inherited PanelCoord: TPanel
-            inherited CoordType: TRadioGroup
-              ClientHeight = 145
-            end
-          end
-          inherited projectiontype: TRadioGroup
-            ClientHeight = 65
-          end
-          inherited AzimutOrigin: TRadioGroup
-            ClientHeight = 19
-          end
+          ClientHeight = 468
+          ClientWidth = 497
         end
         inherited Page2: TTabSheet
-          ClientWidth = 501
+          ClientHeight = 468
+          ClientWidth = 497
         end
         inherited Page3: TTabSheet
-          ClientWidth = 501
+          ClientHeight = 468
+          ClientWidth = 497
         end
         inherited Page4: TTabSheet
-          ClientWidth = 501
+          ClientHeight = 468
+          ClientWidth = 497
         end
         inherited Page5: TTabSheet
-          ClientWidth = 501
+          ClientHeight = 468
+          ClientWidth = 497
           inherited CheckBox13: TCheckBox
             Height = 23
             Width = 135
@@ -123,7 +109,8 @@ object f_configchart: Tf_configchart
           end
         end
         inherited Page6: TTabSheet
-          ClientWidth = 501
+          ClientHeight = 468
+          ClientWidth = 497
         end
       end
       inherited FOVPanel: TPanel
