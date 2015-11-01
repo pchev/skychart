@@ -1,15 +1,5 @@
 Version 3.11 beta, Notes de la version
 
-Incompatibilités avec les versions beta inférieur à 3023:
-
-  * Modification des boîtes à outils:
-    Seul le script F1 est maintenant affecté par défaut. 
-    Pour en charger d'autres voir http://www.ap-i.net/skychart/fr/documentation/toolbox
-   
-  * Si vous avez développé vos propres scripts:
-    Le format de fichier des scripts est modifié par la version 3.11-3023. Vous devez enregistrer vos propres scripts à nouveau parce que le support de l'ancien format sera supprimé avant la sortie de la version stable.
-    De plus, le code des scripts n'est plus sauvegardé dans skychart.ini. En cas de problème, vous pouvez utiliser la copie de sauvegarde avec l'extension .oldscript qui se fait la première fois que vous exécutez cette version.
-
 Nouvelles fonctions:
 
   * Utilise INDIstarter pour gérer le serveur INDI.
@@ -29,3 +19,12 @@ Corrections:
 
   * N'enregistre plus l'emplacement des données du programme dans le fichier de configuration. Si vous avez besoin d'un emplacement non standard utilisez la nouvelle option de ligne de commande "--datadir=".
 
+Incompatibilités avec les versions beta inférieur à 3023:
+
+  * Modification des boîtes à outils:
+    Seul le script F1 est maintenant affecté par défaut. 
+    Pour en charger d'autres voir http://www.ap-i.net/skychart/fr/documentation/toolbox
+   
+  * Si vous avez développé vos propres scripts:
+    Le format de fichier des scripts est modifié par la version 3.11-3023. Vous devez enregistrer vos propres scripts à nouveau parce que le support de l'ancien format sera supprimé avant la sortie de la version stable.
+    De plus, le code des scripts n'est plus sauvegardé dans skychart.ini. En cas de problème, vous pouvez utiliser la copie de sauvegarde avec l'extension .oldscript qui se fait la première fois que vous exécutez cette version.
