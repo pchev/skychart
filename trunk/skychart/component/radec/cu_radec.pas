@@ -255,6 +255,7 @@ LabelDeg := TLabel.Create(self);
 LabelMin := TLabel.Create(self);
 LabelSec := TLabel.Create(self);
 ArrowDeg := TUpDown.Create(self);
+ArrowDeg.Max:=360;
 ArrowMin := TUpDown.Create(self);
 ArrowSec := TUpDown.Create(self);
 EditDeg.Parent:=self;

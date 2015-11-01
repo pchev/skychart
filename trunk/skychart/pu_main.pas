@@ -700,6 +700,7 @@ type
     procedure ApplyScript(Sender: TObject);
     procedure IndiGUIdestroy(Sender: TObject);
     procedure PositionApply(Sender: TObject);
+    procedure ZoomBarApply(Sender: TObject);
   {$ifdef mswindows}
     Procedure SaveWinColor;
     Procedure ResetWinColor;
@@ -2418,15 +2419,21 @@ procedure Tf_main.ZoomBarExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
  formpos(f_zoom,mouse.cursorpos.x,mouse.cursorpos.y);
+ f_zoom.onApply:=ZoomBarApply;
  f_zoom.fov:=rad2deg*sc.cfgsc.fov;
  f_zoom.showmodal;
  if f_zoom.modalresult=mrOK then begin
-    sc.setfov(deg2rad*f_zoom.fov);
-if VerboseMsg then
- WriteTrace('ZoomBarExecute');
-    Refresh;
+    ZoomBarApply(Sender);
  end;
+end;
+end;
 
+procedure Tf_main.ZoomBarApply(Sender: TObject);
+begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+  sc.setfov(deg2rad*f_zoom.fov);
+  if VerboseMsg then WriteTrace('ZoomBarExecute');
+  Refresh;
 end;
 end;
 

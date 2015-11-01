@@ -11,12 +11,12 @@ object f_zoom: Tf_zoom
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.4.3.0'
   object Label1: TLabel
     Left = 16
     Height = 15
     Top = 8
-    Width = 10
+    Width = 11
     Caption = '1'''
     ParentColor = False
   end
@@ -24,7 +24,7 @@ object f_zoom: Tf_zoom
     Left = 120
     Height = 15
     Top = 8
-    Width = 7
+    Width = 8
     Caption = '1'
     ParentColor = False
   end
@@ -32,7 +32,7 @@ object f_zoom: Tf_zoom
     Left = 172
     Height = 15
     Top = 8
-    Width = 14
+    Width = 16
     Caption = '10'
     ParentColor = False
   end
@@ -40,7 +40,7 @@ object f_zoom: Tf_zoom
     Left = 225
     Height = 15
     Top = 8
-    Width = 21
+    Width = 24
     Caption = '100'
     ParentColor = False
   end
@@ -48,7 +48,7 @@ object f_zoom: Tf_zoom
     Left = 254
     Height = 15
     Top = 8
-    Width = 21
+    Width = 24
     Caption = '360'
     ParentColor = False
   end
@@ -56,7 +56,7 @@ object f_zoom: Tf_zoom
     Left = 70
     Height = 15
     Top = 8
-    Width = 17
+    Width = 19
     Caption = '10'''
     ParentColor = False
   end
@@ -75,43 +75,55 @@ object f_zoom: Tf_zoom
     TabOrder = 0
   end
   object BitBtn1: TBitBtn
-    Left = 118
+    Left = 156
     Height = 25
-    Top = 104
+    Top = 103
     Width = 73
     BorderSpacing.InnerBorder = 2
     Caption = 'OK'
     Default = True
     ModalResult = 1
-    TabOrder = 3
+    TabOrder = 2
   end
   object BitBtn2: TBitBtn
-    Left = 216
+    Left = 231
     Height = 25
-    Top = 104
+    Top = 103
     Width = 73
     BorderSpacing.InnerBorder = 2
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
-    TabOrder = 4
+    TabOrder = 3
   end
   object Button1: TButton
-    Left = 16
+    Left = 4
     Height = 25
     Top = 103
     Width = 75
     Caption = 'Help'
     OnClick = Button1Click
-    TabOrder = 2
-  end
-  object StaticText1: TStaticText
-    Left = 74
-    Height = 24
-    Top = 64
-    Width = 161
-    Alignment = taCenter
-    Caption = 'StaticText1'
     TabOrder = 1
+  end
+  object RaDec1: TRaDec
+    Left = 48
+    Height = 23
+    Top = 64
+    Width = 217
+    kind = Az
+    value = 0
+    Enabled = True
+    OnChange = RaDec1Change
+    TabOrder = 4
+  end
+  object BitBtn3: TBitBtn
+    Left = 81
+    Height = 25
+    Top = 103
+    Width = 73
+    BorderSpacing.InnerBorder = 2
+    Caption = 'Apply'
+    OnClick = BitBtn3Click
+    TabOrder = 5
   end
 end
