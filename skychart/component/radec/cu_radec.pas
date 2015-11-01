@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-Uses Controls, Classes, SysUtils, LResources, GraphType, ExtCtrls, StdCtrls;
+Uses Controls, Classes, ComCtrls, SysUtils, LResources, GraphType, ExtCtrls, StdCtrls;
 
 type 
   Tradeckind=( RA, DE, Az, Alt );
@@ -37,6 +37,7 @@ type
   protected
     { Private declarations }
     EditDeg, EditMin, EditSec : TEdit;
+    ArrowDeg, ArrowMin, ArrowSec : TUpDown;
     LabelDeg, LabelMin, LabelSec : TLabel;
     Fkind : Tradeckind;
     lockchange: boolean;
@@ -253,39 +254,48 @@ EditSec := TEdit.Create(self);
 LabelDeg := TLabel.Create(self);
 LabelMin := TLabel.Create(self);
 LabelSec := TLabel.Create(self);
+ArrowDeg := TUpDown.Create(self);
+ArrowMin := TUpDown.Create(self);
+ArrowSec := TUpDown.Create(self);
 EditDeg.Parent:=self;
 EditMin.Parent:=self;
 EditSec.Parent:=self;
 LabelDeg.Parent:=self;
 LabelMin.Parent:=self;
 LabelSec.Parent:=self;
+ArrowDeg.Parent:=self;
+ArrowMin.Parent:=self;
+ArrowSec.Parent:=self;
 EditDeg.ParentFont:=true;
 EditMin.ParentFont:=true;
 EditSec.ParentFont:=true;
 LabelDeg.ParentFont:=true;
 LabelMin.ParentFont:=true;
 LabelSec.ParentFont:=true;
+ArrowDeg.Associate:=EditDeg;
+ArrowMin.Associate:=EditMin;
+ArrowSec.Associate:=EditSec;
 EditDeg.Text:='0';
 EditDeg.Top:=0;
 EditDeg.Left:=0;
 EditDeg.Width:=dsize;
 LabelDeg.Caption:='h';
 LabelDeg.Top:=(EditDeg.Height-LabelDeg.Height) div 2;
-LabelDeg.Left:=EditDeg.Left+EditDeg.Width+2;
+LabelDeg.Left:=ArrowDeg.Left+ArrowDeg.Width+2;
 EditMin.Text:='0';
 EditMin.Top:=0;
 EditMin.Left:=LabelDeg.Left+lsize;
 EditMin.Width:=msize;
 LabelMin.Caption:='m';
 LabelMin.Top:=LabelDeg.Top;
-LabelMin.Left:=EditMin.Left+EditMin.Width+2;
+LabelMin.Left:=ArrowMin.Left+ArrowMin.Width+2;
 EditSec.Text:='0';
 EditSec.Top:=0;
 EditSec.Left:=LabelMin.Left+lsize;
 EditSec.Width:=msize;
 LabelSec.Caption:='s';
 LabelSec.Top:=LabelDeg.Top;
-LabelSec.Left:=EditSec.Left+EditSec.Width+2;
+LabelSec.Left:=ArrowSec.Left+ArrowSec.Width+2;
 Height:=EditDeg.Height;
 Width:=LabelSec.Left+lsize;
 EditDeg.OnChange:=@EditChange;

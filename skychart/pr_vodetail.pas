@@ -30,7 +30,7 @@ interface
 
 uses u_translation, u_voconstant,
   Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Grids, ExtCtrls, cu_radec, enhedits, LResources, Buttons;
+  StdCtrls, Grids, ExtCtrls, enhedits, LResources, Buttons;
 
 type
 
