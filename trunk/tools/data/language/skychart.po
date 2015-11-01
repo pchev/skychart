@@ -2574,16 +2574,8 @@ msgstr ""
 msgid "Sources for asteroid elements in MPC format (one URL per line)"
 msgstr ""
 
-#: u_translation:rsbrightneo
-msgid "Bright + NEO + TNO"
-msgstr ""
-
 #: u_translation:rsmpchttp
 msgid "MPC HTTP"
-msgstr ""
-
-#: u_translation:rsmpcftp
-msgid "MPC FTP"
 msgstr ""
 
 #: u_translation:rsfirst5000
@@ -3166,28 +3158,12 @@ msgstr ""
 msgid "INDI server port"
 msgstr ""
 
-#: u_translation:rsservercomman
-msgid "Server command "
-msgstr ""
-
-#: u_translation:rsdrivername
-msgid "Driver name"
-msgstr ""
-
-#: u_translation:rstelescopetyp
-msgid "Telescope type"
-msgstr ""
-
-#: u_translation:rsdeviceport
-msgid "Device port "
+#: u_translation:rstelescopenam
+msgid "Telescope name"
 msgstr ""
 
 #: u_translation:rscontrolpanel2
 msgid "Control panel command "
-msgstr ""
-
-#: u_translation:rsautomaticall
-msgid "Automatically start a local server if not already running"
 msgstr ""
 
 #: u_translation:rsalsobesureth
@@ -5694,10 +5670,6 @@ msgstr ""
 msgid "Only objects within airmass limits now"
 msgstr ""
 
-#: u_translation:rsmarkobjectso
-msgid "Mark objects on the chart"
-msgstr ""
-
 #: u_translation:rsfirst
 msgid "First"
 msgstr ""
@@ -6108,5 +6080,21 @@ msgstr ""
 
 #: u_translation:rssetoptionsfo
 msgid "Set options for best performance"
+msgstr ""
+
+#: u_translation:rsversion
+msgid "Version"
+msgstr ""
+
+#: u_translation:rslaunchindist
+msgid "Launch INDIstarter if the server is not running"
+msgstr ""
+
+#: u_translation:rsconnectionto
+msgid "Connection to INDI server failed!"
+msgstr ""
+
+#: u_translation:rspleaseinstal
+msgid "Please install indistarter package!"
 msgstr ""
 
