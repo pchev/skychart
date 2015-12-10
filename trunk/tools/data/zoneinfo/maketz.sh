@@ -9,7 +9,8 @@ rm -rf tzdata zoneinfo
 mkdir tzdata
 mkdir zoneinfo
 
-wget --retr-symlinks 'ftp://ftp.iana.org/tz/tz*.tar.gz'
+wget --retr-symlinks 'ftp://ftp.iana.org/tz/tzcode-latest.tar.gz'
+wget --retr-symlinks 'ftp://ftp.iana.org/tz/tzdata-latest.tar.gz'
 
 cd tzdata
 
