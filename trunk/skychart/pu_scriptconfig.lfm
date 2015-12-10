@@ -3,12 +3,14 @@ object f_scriptconfig: Tf_scriptconfig
   Height = 294
   Top = 170
   Width = 592
+  ActiveControl = StringGrid1
   Caption = 'f_scriptconfig'
   ClientHeight = 294
   ClientWidth = 592
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.1'
+  Visible = False
   object StringGrid1: TStringGrid
     Left = 0
     Height = 251

@@ -6,8 +6,6 @@ object f_chart: Tf_chart
   ClientHeight = 338
   ClientWidth = 508
   TabOrder = 0
-  DesignLeft = 299
-  DesignTop = 212
   object Panel1: TPanel
     Left = 0
     Height = 338
@@ -23,8 +21,8 @@ object f_chart: Tf_chart
     OnResize = ChartResize
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 489
-      Height = 319
+      Left = 493
+      Height = 323
       Top = 0
       Width = 15
       Align = alRight
@@ -40,8 +38,8 @@ object f_chart: Tf_chart
       Cursor = crArrow
       Left = 0
       Height = 15
-      Top = 319
-      Width = 504
+      Top = 323
+      Width = 508
       Align = alBottom
       LargeChange = 10
       Max = 50
@@ -280,6 +278,10 @@ object f_chart: Tf_chart
     end
     object N1: TMenuItem
       Caption = '-'
+    end
+    object ScriptMenu: TMenuItem
+      Caption = 'Script'
+      Visible = False
     end
     object MenuFinderCircle: TMenuItem
       Caption = 'Finder Circle'

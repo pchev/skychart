@@ -61,6 +61,7 @@ type
     ButtonApply: TButton;
     ButtonClear: TButton;
     ButtonDelete: TButton;
+    BtnMenu: TCheckBox;
     CheckBoxHidenTimer: TCheckBox;
     LabelCaptionEdit: TEdit;
     Label5: TLabel;
@@ -112,6 +113,7 @@ type
     SaveDialog1: TSaveDialog;
     TplPSScript: TPSScript;
     TreeView1: TTreeView;
+    procedure BtnMenuChange(Sender: TObject);
     procedure ButtonAddClick(Sender: TObject);
     procedure ButtonCaptionEditChange(Sender: TObject);
     procedure ButtonDownClick(Sender: TObject);
@@ -260,7 +262,7 @@ type
     procedure Combo_Change(Sender: TObject);
     procedure ReorderGroup;
     function  AddGroup(num,capt:string; pt: TWinControl; ctlperline,ordernum:integer):TGroupBox;
-    procedure AddButton(num,capt:string; pt: TWinControl);
+    procedure AddButton(num,capt:string; addmenu:boolean; pt: TWinControl);
     procedure AddEdit(num:string; pt: TWinControl);
     procedure AddMemo(num:string; pt: TWinControl;h: integer);
     procedure AddSpacer(num:string; pt: TWinControl);
@@ -280,6 +282,7 @@ type
     procedure Save(strbtn, strscr, comboscr, eventscr: Tstringlist; var title:string);
     procedure Load(strbtn, strscr, comboscr, eventscr: Tstringlist; title:string);
     procedure LoadFile(fn: string);
+    procedure SetMenu(aMenu: TMenuItem);
     procedure ChartRefreshEvent(origin,str:string);
     procedure ObjectSelectionEvent(origin,str,longstr:string);
     procedure DistanceMeasurementEvent(origin,str:string);
@@ -1165,7 +1168,7 @@ gr[grnum-1].Parent:=pt;
 result:=gr[grnum-1];
 end;
 
-procedure Tf_scriptengine.AddButton(num,capt:string; pt: TWinControl);
+procedure Tf_scriptengine.AddButton(num,capt:string; addmenu:boolean; pt: TWinControl);
 var n: integer;
 begin
 inc(btnum);
@@ -1176,7 +1179,10 @@ if capt='' then capt:='Button_'+num;
 bt[btnum-1]:=Tbutton.Create(self);
 bt[btnum-1].Name:='Button_'+num;
 bt[btnum-1].Caption:=capt;
-bt[btnum-1].tag:=n;
+if addmenu then
+   bt[btnum-1].tag:=10000+n
+else
+   bt[btnum-1].tag:=n;
 bt[btnum-1].OnClick:=@Button_Click;
 bt[btnum-1].Parent:=pt;
 btscrnum:=max(btscrnum,n+1);
@@ -1194,6 +1200,7 @@ var n: integer;
     ok: boolean;
 begin
 n:=TButton(sender).tag;
+if n>=10000 then n:=n-10000;
 if (n<btscrnum)and(btscr[n].Script.Count>0) then begin
   ok:=btscr[n].Execute;
   if visible then begin
@@ -1392,7 +1399,7 @@ while node<>nil do begin
     inc(groupseq);
   end
   else if txt='Button' then begin
-    AddButton(nu,parm1,curgroup);
+    AddButton(nu,parm1,(parm2='1'),curgroup);
     ButtonIdx:=max(ButtonIdx,strtoint(nu));
   end
   else if txt='Edit' then begin
@@ -1456,7 +1463,7 @@ if RadioButtonGroup.Checked then begin
 end else if RadioButtonButton.Checked then begin
   if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
     inc(ButtonIdx);
-    TreeView1.Items.AddChild(TreeView1.Selected,'Button_'+inttostr(ButtonIdx)+';'+StringReplace(ButtonCaptionEdit.Text,';','',[rfReplaceAll]));
+    TreeView1.Items.AddChild(TreeView1.Selected,'Button_'+inttostr(ButtonIdx)+';'+StringReplace(ButtonCaptionEdit.Text,';','',[rfReplaceAll])+';'+BoolToStr(BtnMenu.Checked,'1','0'));
   end;
 end else if RadioButtonEdit.Checked then begin
   if (TreeView1.Selected<>nil)and(TreeView1.Selected.Level=0) then begin
@@ -1520,8 +1527,6 @@ end else if RadioButtonEvent.Checked then begin
 end;
 end;
 
-
-
 procedure Tf_scriptengine.ButtonUpdateClick(Sender: TObject);
 var txt: string;
 begin
@@ -1529,7 +1534,7 @@ if (TreeView1.Selected<>nil) then begin
   if RadioButtonGroup.Checked then begin
     TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+StringReplace(GroupCaptionEdit.Text,';','',[rfReplaceAll])+';'+IntToStr(StrToIntDef(GroupRowEdit.Text,1));
   end else if RadioButtonButton.Checked then begin
-    TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+StringReplace(ButtonCaptionEdit.Text,';','',[rfReplaceAll]);
+    TreeView1.Selected.Text:=words(TreeView1.Selected.Text,'',1,1,';')+';'+StringReplace(ButtonCaptionEdit.Text,';','',[rfReplaceAll])+';'+BoolToStr(BtnMenu.Checked,'1','0');
   end else if RadioButtonEdit.Checked then begin
      //
   end else if RadioButtonMemo.Checked then begin
@@ -1598,6 +1603,11 @@ begin
   if ButtonUpdate.Tag=2 then ButtonUpdate.Visible:=true;
 end;
 
+procedure Tf_scriptengine.BtnMenuChange(Sender: TObject);
+begin
+ if ButtonUpdate.Tag=2 then ButtonUpdate.Visible:=true;
+end;
+
 procedure Tf_scriptengine.LabelCaptionEditChange(Sender: TObject);
 begin
   if ButtonUpdate.Tag=8 then ButtonUpdate.Visible:=true;
@@ -1618,6 +1628,7 @@ if node<>nil then begin
     ButtonEditScript.Visible:=true;
     RadioButtonButton.Checked:=true;
     ButtonCaptionEdit.Text:=words(node.Text,'',2,1,';');
+    BtnMenu.Checked:=(words(node.Text,'',3,1,';')='1');
     ButtonUpdate.Visible:=false;
     ButtonUpdate.Tag:=2;
   end else if (pos('Edit_',node.Text)=1) then begin
@@ -2167,6 +2178,25 @@ begin
 EventTimer.Enabled:=false;
 evscr[ord(evTimer)].Execute;
 EventTimer.Enabled:=true;
+end;
+
+procedure Tf_scriptengine.SetMenu(aMenu: TMenuItem);
+var sm: TMenuItem;
+    i,n: integer;
+begin
+  if FEventReady then begin
+   for i:=0 to btnum-1 do begin
+     n:=bt[i].Tag;
+     if n>=10000 then begin
+       aMenu.Caption:=FTrScriptTitle;
+       sm:=TMenuItem.Create(self);
+       sm.Tag:=n-10000;
+       sm.Caption:=bt[i].Caption;
+       sm.OnClick:=bt[i].OnClick;
+       aMenu.Add(sm);
+     end;
+   end;
+  end;
 end;
 
 procedure Tf_scriptengine.ChartRefreshEvent(origin,str:string);

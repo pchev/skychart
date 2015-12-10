@@ -763,6 +763,7 @@ type
     procedure NeighborObj(chart:string);
     procedure ConnectDB(updversion:string='');
     procedure ImageSetFocus(Sender: TObject);
+    procedure SetScriptMenu(Sender: TObject);
     procedure ListInfo(buf,msg:string);
     function  TCPClientConnected: boolean;
     procedure GetTCPInfo(i:integer; var buf:string);
@@ -882,6 +883,7 @@ begin
   Child.sc.cfgsc.Assign(cfg1);
   Child.sc.cfgsc.chartname:=CName;
   Child.onImageSetFocus:=ImageSetFocus;
+  Child.OnSetScriptMenu:=SetScriptMenu;
   Child.onSetFocus:=SetChildFocus;
   Child.onShowTopMessage:=SetTopMessage;
   Child.onShowTitleMessage:=SetTitleMessage;
@@ -9571,6 +9573,18 @@ end;
 procedure Tf_main.ApplyScript(Sender: TObject);
 begin
   SetScriptMenuCaption;
+end;
+
+procedure Tf_main.SetScriptMenu(Sender: TObject);
+var i: integer;
+begin
+ with Sender as Tf_chart do begin
+   for i:=ScriptMenu.Count-1 downto 0 do
+     ScriptMenu.Delete(i);
+   for i:=0 to numscript-1 do
+     Fscript[i].SetMenu(ScriptMenu);
+   ScriptMenu.Visible:=(ScriptMenu.Count>0);
+ end;
 end;
 
 procedure Tf_main.TelescopeMove(origin: string; ra,de: double);
