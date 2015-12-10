@@ -118,6 +118,7 @@ type
     procedure Init;
     procedure Loadfile;
     procedure ShowScript(onoff:boolean);
+    procedure SetMenu(aMenu: TMenuItem);
     procedure ChartRefreshEvent(origin,str:string);
     procedure ObjectSelectionEvent(origin,str,longstr:string);
     procedure DistanceMeasurementEvent(origin,str:string);
@@ -432,6 +433,11 @@ procedure Tf_script.SetFits(value:TFits);
 begin
  Ffits:=value;
  if fscriptengine<>nil then fscriptengine.fits:=Ffits;
+end;
+
+procedure Tf_script.SetMenu(aMenu: TMenuItem);
+begin
+  if fscriptengine<>nil then fscriptengine.SetMenu(aMenu);
 end;
 
 procedure Tf_script.ChartRefreshEvent(origin,str:string);

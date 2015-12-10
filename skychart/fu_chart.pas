@@ -74,6 +74,7 @@ type
     MenuCircle9: TMenuItem;
     MenuCircle10: TMenuItem;
     EyepieceMask: TMenuItem;
+    ScriptMenu: TMenuItem;
     Resetalllabel: TMenuItem;
     RecoverLabel: TMenuItem;
     MenuObslistFirst: TMenuItem;
@@ -243,6 +244,7 @@ type
   private
     { Private declarations }
     FImageSetFocus: TnotifyEvent;
+    FSetScriptMenu: TnotifyEvent;
     FSetFocus: TnotifyEvent;
     FShowTopMessage: Tstr2func;
     FShowTitleMessage: Tstr2func;
@@ -429,6 +431,7 @@ type
     Procedure cmdEq2Hz(ra,de : double ; var a,h : double);
     Procedure cmdHz2Eq(a,h : double; var ra,de : double);
     property OnImageSetFocus: TNotifyEvent read FImageSetFocus write FImageSetFocus;
+    property OnSetScriptMenu: TnotifyEvent read FSetScriptMenu write FSetScriptMenu;
     property OnSetFocus: TNotifyEvent read FSetFocus write FSetFocus;
     property OnShowTopMessage: Tstr2func read FShowTopMessage write FShowTopMessage;
     property OnShowTitleMessage: Tstr2func read FShowTitleMessage write FShowTitleMessage;
@@ -1939,6 +1942,7 @@ begin
        end;
     end;
  end;
+ if assigned(FSetScriptMenu) then FSetScriptMenu(self);
  MenuCircle1.checked:=sc.cfgsc.circleok[1];
  MenuCircle2.checked:=sc.cfgsc.circleok[2];
  MenuCircle3.checked:=sc.cfgsc.circleok[3];

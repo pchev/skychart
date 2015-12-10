@@ -12,8 +12,6 @@ object f_script: Tf_script
   ClientWidth = 180
   OnResize = FrameResize
   TabOrder = 0
-  DesignLeft = 307
-  DesignTop = 147
   object BottomPanel: TPanel
     Left = 0
     Height = 50
@@ -91,10 +89,10 @@ object f_script: Tf_script
     OnMouseEnter = PanelTitleMouseEnter
     OnMouseLeave = PanelTitleMouseLeave
     object LabelShortcut: TLabel
-      Left = 159
-      Height = 15
+      Left = 156
+      Height = 16
       Top = 6
-      Width = 19
+      Width = 22
       Anchors = [akTop, akRight]
       Caption = 'Lab'
       ParentColor = False
