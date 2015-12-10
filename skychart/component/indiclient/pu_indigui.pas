@@ -264,7 +264,7 @@ end;
 
 procedure Tf_indigui.ServerDisconnected(Sender: TObject);
 begin
-
+  Close;
 end;
 
 procedure Tf_indigui.NewDevice(dp: Basedevice);
