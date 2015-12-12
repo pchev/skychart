@@ -1929,6 +1929,7 @@ var step,buf:string;
     i:integer;
 begin
 try
+ProcessParams1;
 if VerboseMsg then
  debugln('Enter f_main.formcreate');
 InitOK:=false;
@@ -2003,10 +2004,6 @@ step:='Create cursor';
 if VerboseMsg then
  debugln(step);
 CursorImage1:=TCursorImage.Create;
-step:='Read initial parameters';
-if VerboseMsg then
- debugln(step);
-ProcessParams1;
 step:='Application directory';
 if VerboseMsg then
  debugln(step);
@@ -2016,6 +2013,9 @@ step:='Trace';
 if VerboseMsg then
  debugln(step);
 InitTrace;
+WriteTrace('Program version : '+cdcversion+'-'+RevisionStr);
+WriteTrace('Program compiled: '+compile_time);
+WriteTrace('Compiler version: '+compile_version);
 if VerboseMsg then begin
  WriteTrace('Privatedir: '+PrivateDir);
  WriteTrace('Appdir: '+AppDir);
