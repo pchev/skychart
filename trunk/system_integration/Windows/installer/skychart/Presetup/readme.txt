@@ -1,6 +1,9 @@
 Skychart / Cartes du Ciel
 Version 3.11 beta
 
+If your are upgrading, be sure to install in the directory where you already install Skychart.
+If you want to reinstall to a new location you must uninstall the old version first.
+
 To avoid to reboot your computer please close the Skychart Clock Icon now if it is running in the task bar.
 
 Copyright (C) 2014 Patrick Chevalley
