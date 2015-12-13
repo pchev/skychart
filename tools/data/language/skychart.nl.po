@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 09:18+0000\n"
-"PO-Revision-Date: 2015-06-26 19:39+0000\n"
+"POT-Creation-Date: 2015-12-13 19:21+0000\n"
+"PO-Revision-Date: 2015-11-05 19:25+0000\n"
 "Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-01 09:37+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2015-12-13 19:24+0000\n"
+"X-Generator: Launchpad (build 17865)\n"
 
 #: u_translation:rsdeg
 msgid "d"
@@ -3236,7 +3236,7 @@ msgstr "INDI server port"
 
 #: u_translation:rstelescopenam
 msgid "Telescope name"
-msgstr ""
+msgstr "Telescoop-naam"
 
 #: u_translation:rscontrolpanel2
 msgid "Control panel command "
@@ -6262,44 +6262,24 @@ msgstr "Toon 0° horizon-lijn"
 
 #: u_translation:rssetoptionsfo
 msgid "Set options for best performance"
-msgstr ""
+msgstr "Instellingen voor de beste prestaties"
 
 #: u_translation:rsversion
 msgid "Version"
-msgstr ""
+msgstr "Versie"
 
 #: u_translation:rslaunchindist
 msgid "Launch INDIstarter if the server is not running"
-msgstr ""
+msgstr "Start INDIstarter wanneer de server niet draait"
 
 #: u_translation:rsconnectionto
 msgid "Connection to INDI server failed!"
-msgstr ""
+msgstr "Verbinding met de INDI server mislukt!"
 
 #: u_translation:rspleaseinstal
 msgid "Please install indistarter package!"
+msgstr "Alsjeblieft, installeer het INDIstarter pakket!"
+
+#: u_translation:rsactivateallt
+msgid "Activate all the functions when hidden"
 msgstr ""
-
-#~ msgid "Automatically start a local server if not already running"
-#~ msgstr "Start automatisch een lokale server als er geen draait"
-
-#~ msgid "Bright + NEO + TNO"
-#~ msgstr "Helder + NEO + TNO"
-
-#~ msgid "Device port "
-#~ msgstr "Apparaat-poort "
-
-#~ msgid "Driver name"
-#~ msgstr "Driver naam"
-
-#~ msgid "MPC FTP"
-#~ msgstr "MPC via FTP"
-
-#~ msgid "Server command "
-#~ msgstr "Server commando "
-
-#~ msgid "Telescope type"
-#~ msgstr "Telescoop type"
-
-#~ msgid "Mark objects on the chart"
-#~ msgstr "Markeer objecten op de kaart"

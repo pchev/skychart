@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 09:18+0000\n"
-"PO-Revision-Date: 2015-11-01 09:32+0000\n"
+"POT-Creation-Date: 2015-12-13 19:21+0000\n"
+"PO-Revision-Date: 2015-12-13 19:23+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-01 09:37+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2015-12-13 19:24+0000\n"
+"X-Generator: Launchpad (build 17865)\n"
 "Language: fr\n"
 
 #: u_translation:rsdeg
@@ -54,19 +54,19 @@ msgstr "Année"
 
 #: u_translation:rsjulianyear
 msgid "Julian Year"
-msgstr "Année Julienne"
+msgstr "Année julienne"
 
 #: u_translation:rstropicalyear
 msgid "Tropical year"
-msgstr "Année Tropique"
+msgstr "Année tropique"
 
 #: u_translation:rssiderealday
 msgid "Sidereal day"
-msgstr "Jour Sidéral"
+msgstr "Jour sidéral"
 
 #: u_translation:rssynodicmonth
 msgid "Synodic month"
-msgstr "Mois Synodique"
+msgstr "Mois synodique"
 
 #: u_translation:rssaros
 msgid "Saros"
@@ -86,7 +86,7 @@ msgstr "Configuration du programme"
 
 #: u_translation:rsequatorialco
 msgid "Equatorial coordinates"
-msgstr "Coordonnée Equatoriale"
+msgstr "Coordonnées équatoriales"
 
 #: u_translation:rsaltazcoordin
 msgid "Alt-Az coordinates"
@@ -94,11 +94,11 @@ msgstr "Coordonnée Alt-Az"
 
 #: u_translation:rseclipticcoor
 msgid "Ecliptic coordinates"
-msgstr "Coordonnée Ecliptique"
+msgstr "Coordonnées écliptiques"
 
 #: u_translation:rsgalacticcoor
 msgid "Galactic coordinates"
-msgstr "Coordonnée Galactique"
+msgstr "Coordonnées galactiques"
 
 #: u_translation:rsmirrorhorizo
 msgid "Mirror horizontally"
@@ -226,7 +226,7 @@ msgstr "Goto"
 
 #: u_translation:rssync
 msgid "Sync"
-msgstr "Sync"
+msgstr "Synchroniser"
 
 #: u_translation:rsshowstars
 msgid "Show stars"
@@ -350,19 +350,19 @@ msgstr "Sortie"
 
 #: u_translation:rsedit
 msgid "Edit"
-msgstr "Edition"
+msgstr "Édition"
 
 #: u_translation:rscopy
 msgid "Copy"
-msgstr "Copie"
+msgstr "Copier"
 
 #: u_translation:rsundo
 msgid "Undo"
-msgstr "Défaire"
+msgstr "Annuler"
 
 #: u_translation:rsredo
 msgid "Redo"
-msgstr "Refaire"
+msgstr "Rétablir"
 
 #: u_translation:rssetup
 msgid "Setup"
@@ -1570,7 +1570,7 @@ msgstr "Ouvrir le fichier bitmap."
 
 #: u_translation:rsabout2
 msgid "About %s"
-msgstr "Au sujet de %s"
+msgstr "À propos de %s"
 
 #: u_translation:rsraturns2
 msgid "%sRA turns:"
@@ -6056,7 +6056,7 @@ msgstr "Filtre"
 
 #: u_translation:rslock
 msgid "Lock"
-msgstr "Verrouillage"
+msgstr "Verrouiller"
 
 #: u_translation:rsdirection2
 msgid "Direction"
@@ -6274,26 +6274,6 @@ msgstr "La connexion au serveur INDI a échoué!"
 msgid "Please install indistarter package!"
 msgstr "Merci d'installer le paquet indistarter!"
 
-#~ msgid "Bright + NEO + TNO"
-#~ msgstr "Brill. + NEO + TNO"
-
-#~ msgid "Device port "
-#~ msgstr "Port télescope "
-
-#~ msgid "Driver name"
-#~ msgstr "Nom du driver"
-
-#~ msgid "MPC FTP"
-#~ msgstr "MPC Ftp"
-
-#~ msgid "Server command "
-#~ msgstr "Commande du serveur "
-
-#~ msgid "Telescope type"
-#~ msgstr "Type de télescope"
-
-#~ msgid "Mark objects on the chart"
-#~ msgstr "Marquer les objets sur la carte"
-
-#~ msgid "Automatically start a local server if not already running"
-#~ msgstr "Lancer un serveur local si il n'est pas en exécution"
+#: u_translation:rsactivateallt
+msgid "Activate all the functions when hidden"
+msgstr "Activer toutes les fonctions lorsque le script est masqué"

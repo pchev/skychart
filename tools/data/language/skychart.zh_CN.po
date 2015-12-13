@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-11-01 09:18+0000\n"
+"POT-Creation-Date: 2015-12-13 19:21+0000\n"
 "PO-Revision-Date: 2014-11-10 02:28+0000\n"
 "Last-Translator: observer <observer@263.net>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-01 09:36+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2015-12-13 19:24+0000\n"
+"X-Generator: Launchpad (build 17865)\n"
 
 #: u_translation:rsdeg
 msgid "d"
@@ -6190,23 +6190,6 @@ msgstr ""
 msgid "Please install indistarter package!"
 msgstr ""
 
-#~ msgid "MPC FTP"
-#~ msgstr "MPC FTP"
-
-#~ msgid "Telescope type"
-#~ msgstr "望远镜类型"
-
-#~ msgid "Device port "
-#~ msgstr "设备端口 "
-
-#~ msgid "Automatically start a local server if not already running"
-#~ msgstr "本地服务器未运行时自动启动"
-
-#~ msgid "Server command "
-#~ msgstr "服务器命令 "
-
-#~ msgid "Driver name"
-#~ msgstr "驱动名称"
-
-#~ msgid "Bright + NEO + TNO"
-#~ msgstr "明亮+近地+海王星外"
+#: u_translation:rsactivateallt
+msgid "Activate all the functions when hidden"
+msgstr ""

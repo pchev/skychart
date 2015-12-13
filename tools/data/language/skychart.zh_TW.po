@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 09:18+0000\n"
-"PO-Revision-Date: 2014-05-01 08:31+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2015-12-13 19:21+0000\n"
+"PO-Revision-Date: 2015-12-07 08:58+0000\n"
+"Last-Translator: Po-Hsu Lin <po-hsu.lin@canonical.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-01 09:36+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2015-12-13 19:24+0000\n"
+"X-Generator: Launchpad (build 17865)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -2576,7 +2576,7 @@ msgstr "代理主機"
 
 #: u_translation:rsproxyport
 msgid "Proxy port"
-msgstr "代理端口"
+msgstr "代理伺服器連接埠"
 
 #: u_translation:rsusername
 msgid "User name"
@@ -6189,23 +6189,6 @@ msgstr ""
 msgid "Please install indistarter package!"
 msgstr ""
 
-#~ msgid "Automatically start a local server if not already running"
-#~ msgstr "如果未運行自動啟動本地服務"
-
-#~ msgid "Bright + NEO + TNO"
-#~ msgstr "亮 + NEO + TNO"
-
-#~ msgid "Device port "
-#~ msgstr "設備端口 "
-
-#~ msgid "Driver name"
-#~ msgstr "驅動程式名稱"
-
-#~ msgid "MPC FTP"
-#~ msgstr "MPC Ftp"
-
-#~ msgid "Server command "
-#~ msgstr "伺服器指令 "
-
-#~ msgid "Telescope type"
-#~ msgstr "望遠鏡類型"
+#: u_translation:rsactivateallt
+msgid "Activate all the functions when hidden"
+msgstr ""

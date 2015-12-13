@@ -6098,3 +6098,7 @@ msgstr ""
 msgid "Please install indistarter package!"
 msgstr ""
 
+#: u_translation:rsactivateallt
+msgid "Activate all the functions when hidden"
+msgstr ""
+

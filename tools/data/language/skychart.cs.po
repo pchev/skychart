@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 09:18+0000\n"
+"POT-Creation-Date: 2015-12-13 19:21+0000\n"
 "PO-Revision-Date: 2015-03-01 18:07+0000\n"
 "Last-Translator: Václav Houška <vaclav.houska@volny.cz>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-01 09:37+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2015-12-13 19:24+0000\n"
+"X-Generator: Launchpad (build 17865)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation:rsdeg
@@ -6240,23 +6240,6 @@ msgstr ""
 msgid "Please install indistarter package!"
 msgstr ""
 
-#~ msgid "Automatically start a local server if not already running"
-#~ msgstr "Automaticky spustit lokální server pokud neběží"
-
-#~ msgid "Bright + NEO + TNO"
-#~ msgstr "Bright + NEO + TNO"
-
-#~ msgid "Device port "
-#~ msgstr "Port zařízení "
-
-#~ msgid "Driver name"
-#~ msgstr "Ovladač"
-
-#~ msgid "MPC FTP"
-#~ msgstr "MPC FTP"
-
-#~ msgid "Server command "
-#~ msgstr "Příkaz serveru "
-
-#~ msgid "Telescope type"
-#~ msgstr "Typ dalekohledu"
+#: u_translation:rsactivateallt
+msgid "Activate all the functions when hidden"
+msgstr ""
