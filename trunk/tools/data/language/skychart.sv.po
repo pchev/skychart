@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-11-01 09:18+0000\n"
+"POT-Creation-Date: 2015-12-13 19:21+0000\n"
 "PO-Revision-Date: 2015-08-22 11:47+0000\n"
 "Last-Translator: Kåre Lekebjer <kare@lekebjer.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-01 09:36+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2015-12-13 19:24+0000\n"
+"X-Generator: Launchpad (build 17865)\n"
 
 #: u_translation:rsdeg
 msgid "d"
@@ -6263,26 +6263,6 @@ msgstr ""
 msgid "Please install indistarter package!"
 msgstr ""
 
-#~ msgid "MPC FTP"
-#~ msgstr "MPC FTP"
-
-#~ msgid "Bright + NEO + TNO"
-#~ msgstr "Bright + NEO + TNO"
-
-#~ msgid "Driver name"
-#~ msgstr "Driver namn"
-
-#~ msgid "Automatically start a local server if not already running"
-#~ msgstr "Starta en lokal server automatiskt om den inte redan körs"
-
-#~ msgid "Device port "
-#~ msgstr "Device port "
-
-#~ msgid "Server command "
-#~ msgstr "Serverkommando "
-
-#~ msgid "Telescope type"
-#~ msgstr "Teleskoptyp"
-
-#~ msgid "Mark objects on the chart"
-#~ msgstr "Markera objekt på kartan"
+#: u_translation:rsactivateallt
+msgid "Activate all the functions when hidden"
+msgstr ""

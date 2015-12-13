@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 09:18+0000\n"
+"POT-Creation-Date: 2015-12-13 19:21+0000\n"
 "PO-Revision-Date: 2015-10-22 07:57+0000\n"
 "Last-Translator: Stefán Örvar Sigmundsson <stefan.orvar.sigmundsson@emi.is>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-01 09:37+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2015-12-13 19:24+0000\n"
+"X-Generator: Launchpad (build 17865)\n"
 
 #: u_translation:rsdeg
 msgid "d"
@@ -6239,23 +6239,6 @@ msgstr ""
 msgid "Please install indistarter package!"
 msgstr ""
 
-#~ msgid "Automatically start a local server if not already running"
-#~ msgstr "Ræsa staðbundinn netþjón sjálfkrafa ef ekki er kveikt á honum"
-
-#~ msgid "Bright + NEO + TNO"
-#~ msgstr "Björt + NEO + TNO"
-
-#~ msgid "Driver name"
-#~ msgstr "Heiti rekils"
-
-#~ msgid "Server command "
-#~ msgstr "Skipun til netþjóns "
-
-#~ msgid "Telescope type"
-#~ msgstr "Tegund sjónauka"
-
-#~ msgid "Device port "
-#~ msgstr "Tengi tækis "
-
-#~ msgid "MPC FTP"
-#~ msgstr "MPC Ftp"
+#: u_translation:rsactivateallt
+msgid "Activate all the functions when hidden"
+msgstr ""
