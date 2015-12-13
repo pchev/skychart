@@ -9576,14 +9576,19 @@ begin
 end;
 
 procedure Tf_main.SetScriptMenu(Sender: TObject);
-var i: integer;
+var i,j: integer;
 begin
  with Sender as Tf_chart do begin
-   for i:=ScriptMenu.Count-1 downto 0 do
-     ScriptMenu.Delete(i);
+   // delete old entries
+   for i:=PopupMenu1.Items.Count-1 downto 0 do
+     if PopupMenu1.Items[i].Tag=100 then begin
+       for j:=PopupMenu1.Items[i].Count-1 downto 0 do
+          PopupMenu1.Items[i].Delete(j);
+       PopupMenu1.Items.Delete(i);
+     end;
+   // add entries
    for i:=0 to numscript-1 do
-     Fscript[i].SetMenu(ScriptMenu);
-   ScriptMenu.Visible:=(ScriptMenu.Count>0);
+     Fscript[i].SetMenu(N1);
  end;
 end;
 

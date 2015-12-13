@@ -279,10 +279,6 @@ object f_chart: Tf_chart
     object N1: TMenuItem
       Caption = '-'
     end
-    object ScriptMenu: TMenuItem
-      Caption = 'Script'
-      Visible = False
-    end
     object MenuFinderCircle: TMenuItem
       Caption = 'Finder Circle'
       object SelectCircle: TMenuItem
