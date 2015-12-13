@@ -62,6 +62,7 @@ type
     ButtonClear: TButton;
     ButtonDelete: TButton;
     BtnMenu: TCheckBox;
+    CheckBoxAlwaysActive: TCheckBox;
     CheckBoxHidenTimer: TCheckBox;
     LabelCaptionEdit: TEdit;
     Label5: TLabel;
@@ -349,6 +350,7 @@ begin
   Label4.Caption:=rsHeight;
   Label5.Caption:=rsHeight;
   CheckBoxHidenTimer.Caption:=rsActivateTheT;
+  CheckBoxAlwaysActive.Caption:=rsActivateAllT;
   if Fpascaleditor<>nil then Fpascaleditor.SetLang;
   SetHelp(self,hlpToolboxEditor);
   if (evscr[ord(evTranslation)]<>nil) and
@@ -1044,6 +1046,7 @@ begin
     end;
     FTrScriptTitle:=titl;
     CheckBoxHidenTimer.Checked:=ReadBool(section,'HidenTimer',CheckBoxHidenTimer.Checked);
+    CheckBoxAlwaysActive.Checked:=ReadBool(section,'AlwaysActive',CheckBoxAlwaysActive.Checked);
     n:=ReadInteger(section,'NumToolbar1',0);
     ConfigToolbar1.Clear;
     for j:=0 to n-1 do ConfigToolbar1.Add(ReadString(section,'toolbar1_'+inttostr(j),''));
@@ -1436,7 +1439,7 @@ ReorderGroup;
 CompileScripts;
 evscr[ord(evInitialisation)].Execute;
 evscr[ord(evTranslation)].Execute;
-if not InitialLoad then begin
+if (not InitialLoad)or CheckBoxAlwaysActive.Checked then begin
   FEventReady:=true;
   evscr[ord(evActivation)].Execute;
   TelescopeConnectEvent(TelescopeChartName,FTelescopeConnected);
@@ -1758,6 +1761,7 @@ if SaveDialog1.Execute then begin
   EraseSection(section);
   WriteString(section,'Title',titl);
   WriteBool(section,'HidenTimer',CheckBoxHidenTimer.Checked);
+  WriteBool(section,'AlwaysActive',CheckBoxAlwaysActive.Checked);
   n:=ConfigToolbar1.Count;
   WriteInteger(section,'NumToolbar1',n);
   for j:=0 to n-1 do WriteString(section,'toolbar1_'+inttostr(j),ConfigToolbar1[j]);
@@ -2181,19 +2185,27 @@ EventTimer.Enabled:=true;
 end;
 
 procedure Tf_scriptengine.SetMenu(aMenu: TMenuItem);
-var sm: TMenuItem;
-    i,n: integer;
+var tm,sm: TMenuItem;
+    i,k,n,m: integer;
 begin
+  m:=0;
   if FEventReady then begin
    for i:=0 to btnum-1 do begin
      n:=bt[i].Tag;
      if n>=10000 then begin
-       aMenu.Caption:=FTrScriptTitle;
+       if m=0 then begin
+         tm:=TMenuItem.Create(self);
+         tm.Tag:=100;
+         tm.Caption:=FTrScriptTitle;
+         k:=1+aMenu.Parent.IndexOf(aMenu);
+         aMenu.Parent.Insert(k,tm);
+       end;
+       inc(m);
        sm:=TMenuItem.Create(self);
        sm.Tag:=n-10000;
        sm.Caption:=bt[i].Caption;
        sm.OnClick:=bt[i].OnClick;
-       aMenu.Add(sm);
+       tm.Add(sm);
      end;
    end;
   end;

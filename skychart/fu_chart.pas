@@ -74,7 +74,6 @@ type
     MenuCircle9: TMenuItem;
     MenuCircle10: TMenuItem;
     EyepieceMask: TMenuItem;
-    ScriptMenu: TMenuItem;
     Resetalllabel: TMenuItem;
     RecoverLabel: TMenuItem;
     MenuObslistFirst: TMenuItem;

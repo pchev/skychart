@@ -1552,6 +1552,7 @@ resourcestring
   rsLaunchINDIst = 'Launch INDIstarter if the server is not running';
   rsConnectionTo = 'Connection to INDI server failed!';
   rsPleaseInstal = 'Please install indistarter package!';
+  rsActivateAllT = 'Activate all the functions when hidden';
 
 // also update upsi_translation
 

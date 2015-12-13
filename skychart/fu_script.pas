@@ -82,7 +82,6 @@ type
     FonApply: TNotifyEvent;
     FScriptTitle: string;
     FConfigToolbar1,FConfigToolbar2,FConfigScriptButton,FConfigCombo,FConfigScript,FConfigEvent: TStringList;
-    FHidenTimer: Boolean;
     FTelescopeConnected: Boolean;
     TelescopeChartName: string;
     FToolboxConfig: TNotifyEvent;
@@ -94,8 +93,6 @@ type
     procedure SetGetScopeRates(value:TExecuteCmd);
     procedure SetSendInfo(value:TSendInfo);
     procedure SetActiveChart(value:Tf_chart);
-    function  GetHidenTimer: Boolean;
-    procedure SetHidenTimer(value:Boolean);
     procedure SetMainmenu(value:TMenu);
     procedure SetCDB(value:TCDCdb);
     procedure SetCatalog(value:TCatalog);
@@ -159,7 +156,6 @@ type
     property GetScopeRates: TExecuteCmd read FGetScopeRates write SetGetScopeRates;
     property SendInfo: TSendInfo read FSendInfo write SetSendInfo;
     property ActiveChart: Tf_chart read FActiveChart write SetActiveChart;
-    property HidenTimer: Boolean read GetHidenTimer write SetHidenTimer;
     property onApply: TNotifyEvent read FonApply write FonApply;
     property onToolboxConfig: TNotifyEvent read FToolboxConfig write FToolboxConfig;
     property ScriptTitle: string read FScriptTitle;
@@ -191,7 +187,6 @@ begin
   inherited Create(TheOwner);
   FScriptTitle:='';
   FScriptFilename:='';
-  FHidenTimer:=false;
   FTelescopeConnected:=False;
   fedittoolbar:=Tf_edittoolbar.Create(self);
   fedittoolbar.ButtonMini.Visible:=false;
@@ -230,9 +225,9 @@ begin
         end;
      end else
         if fscriptengine<>nil then begin
-           fscriptengine.StopAllScript;
+           if not fscriptengine.CheckBoxAlwaysActive.Checked then fscriptengine.StopAllScript;
            fscriptengine.Hide;
-           if fscriptengine.CheckBoxHidenTimer.Checked then fscriptengine.StartTimer;
+           if fscriptengine.CheckBoxAlwaysActive.Checked or fscriptengine.CheckBoxHidenTimer.Checked then fscriptengine.StartTimer;
         end;
   end;
 end;
@@ -470,18 +465,6 @@ end;
 procedure Tf_script.ActivateEvent;
 begin
   if fscriptengine<>nil then fscriptengine.ActivateEvent;
-end;
-
-function  Tf_script.GetHidenTimer: Boolean;
-begin
-  if fscriptengine<>nil then Result:=fscriptengine.CheckBoxHidenTimer.Checked
-     else Result:=FHidenTimer;
-end;
-
-procedure Tf_script.SetHidenTimer(value:Boolean);
-begin
-  FHidenTimer:=value;
-  if fscriptengine<>nil then fscriptengine.CheckBoxHidenTimer.Checked:=value;
 end;
 
 procedure Tf_script.SetTimeU(value:TComboBox);

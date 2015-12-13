@@ -10,7 +10,8 @@ object f_scriptengine: Tf_scriptengine
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '1.4.3.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object Panel1: TPanel
     Left = 0
     Height = 485
@@ -240,11 +241,11 @@ object f_scriptengine: Tf_scriptengine
       end
       object GroupBox1: TGroupBox
         Left = 112
-        Height = 320
+        Height = 324
         Top = 8
         Width = 400
         Caption = 'Component'
-        ClientHeight = 304
+        ClientHeight = 308
         ClientWidth = 398
         TabOrder = 8
         object RadioButtonGroup: TRadioButton
@@ -373,7 +374,7 @@ object f_scriptengine: Tf_scriptengine
         end
         object EventComboBox: TComboBox
           Left = 134
-          Height = 25
+          Height = 23
           Top = 210
           Width = 180
           ItemHeight = 0
@@ -508,6 +509,14 @@ object f_scriptengine: Tf_scriptengine
           Caption = 'Menu'
           OnChange = BtnMenuChange
           TabOrder = 20
+        end
+        object CheckBoxAlwaysActive: TCheckBox
+          Left = 14
+          Height = 24
+          Top = 280
+          Width = 265
+          Caption = 'Activate all the functions when hidden'
+          TabOrder = 21
         end
       end
       object ButtonDelete: TButton
