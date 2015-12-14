@@ -18,6 +18,7 @@ const
   LazpaintChannelBlueFromRed   = 2;
   LazpaintChannelBlueFromGreen = 4;
   LazpaintChannelNoAlpha       = 8;
+  LazpaintPalettedRGB          = 16;
 
   LazPaintThumbMaxWidth = 128;
   LazPaintThumbMaxHeight = 128;
@@ -41,7 +42,7 @@ procedure LazPaintImageHeader_SwapEndianIfNeeded(AHeader: TLazPaintImageHeader);
 //separate the channels to obtain any compression)
 
 procedure EncodeLazRLE(var sourceBuffer; size:PtrInt; ADest: TStream);
-function DecodeLazRLE(ASource: TStream; var destBuffer; availableSize: PtrInt): PtrInt;
+function DecodeLazRLE(ASource: TStream; var destBuffer; availableOutputSize: PtrInt; availableInputSize: int64 = -1): PtrInt;
 
 implementation
 
@@ -418,7 +419,7 @@ begin
   buf.Free;
 end;
 
-function DecodeLazRLE(ASource: TStream; var destBuffer; availableSize: PtrInt): PtrInt;
+function DecodeLazRLE(ASource: TStream; var destBuffer; availableOutputSize: PtrInt; availableInputSize: int64 = -1): PtrInt;
 const MaxBufferSize = 1024;
 var
   opCode: NativeInt;
@@ -430,13 +431,26 @@ var
   BufferPos, BufferSize: NativeInt;
   BufferStartLocation: Int64;
 
-  procedure Overflow(AWanted: PtrInt; AFunctionName: string);
+  procedure OutputOverflow(AWanted: PtrInt; AFunctionName: string);
   var position: int64;
   begin
     position := ASource.Position - BufferSize + BufferPos;
-    raise exception.Create('Buffer overflow. Current position is ' + IntToStr(result)+' out of '+ IntToStr(availableSize)+
+    raise exception.Create('Output buffer overflow. Current position is ' + IntToStr(result)+' out of '+ IntToStr(availableOutputSize)+
     ' and '+IntToStr(AWanted)+' is required by '+AFunctionName+'. ' +
     'The absolute input position is '+IntToStr(position)+' which is ' + inttostr(position-BufferStartLocation) + ' from start.');
+  end;
+
+  function ReduceAvailableInputSize(AWanted: PtrInt): PtrInt;
+  begin
+    if availableInputSize <> -1 then
+    begin
+      if AWanted>availableInputSize then
+        result := availableInputSize
+      else
+        result := AWanted;
+      dec(availableInputSize, result);
+    end else
+      result := AWanted;
   end;
 
   function GetNextBufferByte: byte;
@@ -450,7 +464,7 @@ var
       result := $e0
     else
     begin
-      BufferSize := ASource.Read(Buffer[0],length(Buffer));
+      BufferSize := ASource.Read(Buffer[0],ReduceAvailableInputSize(length(Buffer)));
       BufferPos := 0;
       if BufferPos < BufferSize then
       begin
@@ -463,7 +477,7 @@ var
 
   procedure RepeatValue(AValue: NativeInt; ACount: NativeInt);
   begin
-    if result+ACount > availableSize then Overflow(ACount,'RepeatValue');
+    if result+ACount > availableOutputSize then OutputOverflow(ACount,'RepeatValue');
     fillchar(pdest^, ACount, AValue);
     inc(pdest, ACount);
     inc(result, ACount);
@@ -488,7 +502,7 @@ var
 
   procedure DumpValues(ACount: NativeInt);
   begin
-    if result+ACount > availableSize then Overflow(ACount, 'DumpValues');
+    if result+ACount > availableOutputSize then OutputOverflow(ACount, 'DumpValues');
     inc(result, ACount);
     while ACount > 0 do
     begin
@@ -501,7 +515,7 @@ var
   procedure PackedDumpValues(ACount: NativeInt);
   var packedData: NativeInt;
   begin
-    if result+ACount > availableSize then Overflow(ACount, 'PackedDumpValues');
+    if result+ACount > availableOutputSize then OutputOverflow(ACount, 'PackedDumpValues');
     inc(result, ACount);
     while ACount > 0 do
     begin
@@ -525,7 +539,7 @@ var
 begin
   BufferStartLocation:= ASource.Position;
   setLength(Buffer,MaxBufferSize);
-  BufferSize := ASource.Read(Buffer[0],length(Buffer));
+  BufferSize := ASource.Read(Buffer[0],ReduceAvailableInputSize(length(Buffer)));
   BufferPos := 0;
 
   pdest := @destBuffer;

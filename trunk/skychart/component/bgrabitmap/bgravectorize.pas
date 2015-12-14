@@ -71,6 +71,7 @@ type
     procedure TextOut(ADest: TBGRACustomBitmap; x, y: single; s: string; c: TBGRAPixel; align: TAlignment); override;
     procedure TextRect(ADest: TBGRACustomBitmap; ARect: TRect; x, y: integer; s: string; style: TTextStyle; c: TBGRAPixel); override;
     procedure TextRect(ADest: TBGRACustomBitmap; ARect: TRect; x, y: integer; s: string; style: TTextStyle; texture: IBGRAScanner); override;
+    procedure CopyTextPathTo(ADest: IBGRAPath; x, y: single; s: string; align: TAlignment); override;
     function TextSize(s: string): TSize; override;
     destructor Destroy; override;
   end;
@@ -157,6 +158,8 @@ type
     function GetTextSize(AText:string): TPointF;
     procedure SplitText(var ATextUTF8: string; AMaxWidth: single; out ARemainsUTF8: string);
     procedure DrawText(ADest: TBGRACanvas2D; ATextUTF8: string; X, Y: Single; AAlign: TBGRATypeWriterAlignment=twaTopLeft); override;
+    procedure CopyTextPathTo(ADest: IBGRAPath; ATextUTF8: string; X, Y: Single;
+      AAlign: TBGRATypeWriterAlignment=twaTopLeft); override;
     procedure DrawTextWordBreak(ADest: TBGRACanvas2D; ATextUTF8: string; X, Y, MaxWidth: Single; AAlign: TBGRATypeWriterAlignment=twaTopLeft);
     procedure DrawTextRect(ADest: TBGRACanvas2D; ATextUTF8: string; X1,Y1,X2,Y2: Single; AAlign: TBGRATypeWriterAlignment=twaTopLeft);
     procedure DrawTextRect(ADest: TBGRACanvas2D; ATextUTF8: string; ATopLeft,ABottomRight: TPointF; AAlign: TBGRATypeWriterAlignment=twaTopLeft);
@@ -186,9 +189,8 @@ type
 
 implementation
 
-uses LCLProc, FileUtil, lazutf8classes;
+uses BGRAUTF8;
 
-{$i winstream.inc}
 function VectorizeMonochrome(ASource: TBGRACustomBitmap; zoom: single; PixelCenteredCoordinates: boolean): ArrayOfTPointF;
 const unitShift = 6;
       iHalf = 1 shl (unitShift-1);
@@ -1205,6 +1207,23 @@ begin
   InternalTextRect(ADest,ARect,x,y,s,style,BGRAPixelTransparent,texture);
 end;
 
+procedure TBGRAVectorizedFontRenderer.CopyTextPathTo(ADest: IBGRAPath; x, y: single; s: string; align: TAlignment);
+var
+  twAlign : TBGRATypeWriterAlignment;
+  ofs: TPointF;
+begin
+  UpdateFont;
+  FVectorizedFont.Orientation := 0;
+  case align of
+    taCenter: twAlign:= twaMiddle;
+    taRightJustify: twAlign := twaRight;
+    else twAlign:= twaLeft;
+  end;
+  ofs := PointF(x,y);
+  ofs += PointF(0,FVectorizedFont.FullHeight*0.5);
+  FVectorizedFont.CopyTextPathTo(ADest, s, ofs.x,ofs.y, twAlign);
+end;
+
 function TBGRAVectorizedFontRenderer.TextSize(s: string): TSize;
 var sizeF: TPointF;
 begin
@@ -1264,7 +1283,7 @@ function TBGRAVectorizedFont.GetFontPixelMetric: TFontPixelMetric;
 begin
   if not FFontPixelMetricComputed and (FFont <> nil) then
   begin
-    FFontPixelMetric := BGRAText.GetFontPixelMetric(FFont);
+    FFontPixelMetric := BGRAText.GetLCLFontPixelMetric(FFont);
     FFontPixelMetricComputed := true;
   end;
   result := FFontPixelMetric;
@@ -1622,6 +1641,45 @@ begin
   end;
 end;
 
+procedure TBGRAVectorizedFont.CopyTextPathTo(ADest: IBGRAPath;
+  ATextUTF8: string; X, Y: Single; AAlign: TBGRATypeWriterAlignment);
+var underlinePoly: ArrayOfTPointF;
+  m: TAffineMatrix;
+  i: integer;
+  deltaY: single;
+begin
+  inherited CopyTextPathTo(ADest,ATextUTF8, X, Y, AAlign);
+  if AAlign in [twaBottom,twaBottomLeft,twaBottomRight] then deltaY := -1 else
+  if AAlign in [twaLeft,twaMiddle,twaRight] then deltaY := -0.5 else
+    deltaY := 0;
+  if UnderlineDecoration and (Resolution > 0) then
+  begin
+    underlinePoly := BGRATextUnderline(PointF(0,deltaY), GetTextSize(ATextUTF8).x/FullHeight, FontPixelMetric.Baseline/Resolution,
+      (FontPixelMetric.Baseline-FontPixelMetric.CapLine)/Resolution);
+    if underlinePoly <> nil then
+    begin
+      m := GetTextMatrix(ATextUTF8, X,Y,AAlign);
+      ADest.moveTo(m*underlinePoly[0]);
+      for i := 1 to high(underlinePoly) do
+        ADest.lineTo(m*underlinePoly[i]);
+      ADest.closePath;
+    end;
+  end;
+  if StrikeOutDecoration and (Resolution > 0) then
+  begin
+    underlinePoly := BGRATextStrikeOut(PointF(0,deltaY), GetTextSize(ATextUTF8).x/FullHeight, FontPixelMetric.Baseline/Resolution,
+      (FontPixelMetric.Baseline-FontPixelMetric.CapLine)/Resolution, (FontPixelMetric.Baseline-FontPixelMetric.xLine)/Resolution);
+    if underlinePoly <> nil then
+    begin
+      m := GetTextMatrix(ATextUTF8, X,Y,AAlign);
+      ADest.moveTo(m*underlinePoly[0]);
+      for i := 1 to high(underlinePoly) do
+        ADest.lineTo(m*underlinePoly[i]);
+      ADest.closePath;
+    end;
+  end;
+end;
+
 procedure TBGRAVectorizedFont.DrawTextWordBreak(ADest: TBGRACanvas2D;
   ATextUTF8: string; X, Y, MaxWidth: Single; AAlign: TBGRATypeWriterAlignment);
 var ARemains: string;
@@ -1856,6 +1914,7 @@ begin
       end;
     end;
   until FindNext(SearchRec) <> 0;
+  FindClose(SearchRec);
   SetLength(FDirectoryContent,NbFiles);
 end;
 
@@ -1950,17 +2009,17 @@ procedure TBGRAVectorizedFont.WriteCustomHeader(AStream: TStream);
 var metric: TFontPixelMetric;
 begin
   inherited WriteCustomHeader(AStream);
-  WinWriteLongint(AStream, length(FName));
+  LEWriteLongint(AStream, length(FName));
   AStream.Write(FName[1],length(FName));
-  WinWriteLongint(AStream, integer(FStyle));
-  WinWriteSingle(AStream, FontEmHeightRatio);
-  WinWriteLongint(AStream, Resolution);
+  LEWriteLongint(AStream, integer(FStyle));
+  LEWriteSingle(AStream, FontEmHeightRatio);
+  LEWriteLongint(AStream, Resolution);
   metric := FontPixelMetric;
-  WinWriteLongint(AStream, metric.Baseline);
-  WinWriteLongint(AStream, metric.xLine);
-  WinWriteLongint(AStream, metric.CapLine);
-  WinWriteLongint(AStream, metric.DescentLine);
-  WinWriteLongint(AStream, metric.Lineheight);
+  LEWriteLongint(AStream, metric.Baseline);
+  LEWriteLongint(AStream, metric.xLine);
+  LEWriteLongint(AStream, metric.CapLine);
+  LEWriteLongint(AStream, metric.DescentLine);
+  LEWriteLongint(AStream, metric.Lineheight);
 end;
 
 procedure TBGRAVectorizedFont.ReadAdditionalHeader(AStream: TStream);
@@ -1988,17 +2047,17 @@ end;
 function TBGRAVectorizedFont.ReadVectorizedFontHeader(AStream: TStream): TBGRAVectorizedFontHeader;
 var lNameLength: integer;
 begin
-  lNameLength := WinReadLongint(AStream);
+  lNameLength := LEReadLongint(AStream);
   setlength(result.Name, lNameLength);
   AStream.Read(result.Name[1],length(result.Name));
-  result.Style := TFontStyles(WinReadLongint(AStream));
-  result.EmHeightRatio:= WinReadSingle(AStream);
-  result.Resolution := WinReadLongint(AStream);
-  result.PixelMetric.Baseline := WinReadLongint(AStream);
-  result.PixelMetric.xLine := WinReadLongint(AStream);
-  result.PixelMetric.CapLine := WinReadLongint(AStream);
-  result.PixelMetric.DescentLine := WinReadLongint(AStream);
-  result.PixelMetric.Lineheight := WinReadLongint(AStream);
+  result.Style := TFontStyles(LEReadLongint(AStream));
+  result.EmHeightRatio:= LEReadSingle(AStream);
+  result.Resolution := LEReadLongint(AStream);
+  result.PixelMetric.Baseline := LEReadLongint(AStream);
+  result.PixelMetric.xLine := LEReadLongint(AStream);
+  result.PixelMetric.CapLine := LEReadLongint(AStream);
+  result.PixelMetric.DescentLine := LEReadLongint(AStream);
+  result.PixelMetric.Lineheight := LEReadLongint(AStream);
   result.PixelMetric.Defined := result.PixelMetric.Lineheight > 0;
 end;
 
