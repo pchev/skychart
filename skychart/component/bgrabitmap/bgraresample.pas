@@ -68,6 +68,22 @@ type
     function KernelWidth: single; override;
   end;
 
+  { TLanczosKernel }
+
+  TLanczosKernel = class(TWideKernelFilter)
+  private
+    FNumberOfLobes: integer;
+    FFactor: ValReal;
+    procedure SetNumberOfLobes(AValue: integer);
+  public
+    constructor Create(ANumberOfLobes: integer);
+    function Interpolation(t: single): single; override;
+    function ShouldCheckRange: boolean; override;
+    function KernelWidth: single; override;
+
+    property NumberOfLobes : integer read FNumberOfLobes write SetNumberOfLobes;
+  end;
+
 function CreateInterpolator(style: TSplineStyle): TWideKernelFilter;
 
 {-------------------------------- Fine resample ------------------------------------}
@@ -80,7 +96,7 @@ function WideKernelResample(bmp: TBGRACustomBitmap;
 
 implementation
 
-uses GraphType, Math, BGRABlend;
+uses Math, BGRABlend;
 
 function SimpleStretch(bmp: TBGRACustomBitmap;
   newWidth, newHeight: integer): TBGRACustomBitmap;
@@ -203,7 +219,8 @@ var
   end;
 
 begin
-  if (newWidth <= 0) or (newHeight <= 0) then
+  if (newWidth <= 0) or (newHeight <= 0) or (bmp.Width <= 0)
+    or (bmp.Height <= 0) then
     exit;
 
   targetRect := rect(0,0,NewWidth,NewHeight);
@@ -250,7 +267,7 @@ begin
     if (y_src = prev_y_src) and (y_src2 = prev_y_src2) and not vertSlightlyDifferent then
     begin
       if tempData = nil then
-        move((dest.ScanLine[y_dest-1+OffsetY]+OffsetX+targetRect.Left)^,(dest.ScanLine[y_dest+OffsetY]+OffsetX+targetRect.Left)^,(targetRect.Right-targetRect.Left)*sizeof(TBGRAPenStyle))
+        move((dest.ScanLine[y_dest-1+OffsetY]+OffsetX+targetRect.Left)^,(dest.ScanLine[y_dest+OffsetY]+OffsetX+targetRect.Left)^,(targetRect.Right-targetRect.Left)*sizeof(TBGRAPixel))
       else
         PutPixels(dest.ScanLine[y_dest+OffsetY]+OffsetX+targetRect.Left,tempData,targetRect.right-targetRect.left,ADrawMode,AOpacity);
     end else
@@ -683,7 +700,12 @@ begin
   if ResampleFilter <= rfLinear then
   begin
     if ResampleFilter = rfBox then
-       result := ((t256+128) and not 255) - 128
+    begin
+      if t256 < 128 then
+        result := 0
+      else
+        result := 256;
+    end
     else
       result := t256;
   end else
@@ -785,6 +807,46 @@ end;
 function TSplineKernel.KernelWidth: single;
 begin
   Result := 2;
+end;
+
+{ TLanczosKernel }
+{ by stab }
+procedure TLanczosKernel.SetNumberOfLobes(AValue: integer);
+begin
+  if AValue < 1 then AValue := 1;
+  if FNumberOfLobes=AValue then Exit;
+  FNumberOfLobes:=AValue;
+  if AValue = 1 then FFactor := 1.5 else FFactor := AValue;
+end;
+
+constructor TLanczosKernel.Create(ANumberOfLobes: integer);
+begin
+  NumberOfLobes:= ANumberOfLobes;
+end;
+
+function TLanczosKernel.Interpolation(t: single): single;
+var Pi_t: ValReal;
+begin
+  if t = 0 then
+    Result := 1
+  else if t < FNumberOfLobes then
+  begin
+    Pi_t := pi * t;
+    Result := FFactor * sin(Pi_t) * sin(Pi_t / FNumberOfLobes) /
+      (Pi_t * Pi_t)
+  end
+  else
+    Result := 0;
+end;
+
+function TLanczosKernel.ShouldCheckRange: boolean;
+begin
+  Result := True;
+end;
+
+function TLanczosKernel.KernelWidth: single;
+begin
+  Result := FNumberOfLobes;
 end;
 
 {--------------------------------------------- Fine resample ------------------------------------------------}
@@ -1147,6 +1209,13 @@ begin
     rfSpline:
     begin
       tempFilter1 := TSplineKernel.Create;
+      result := WideKernelResample(bmp,NewWidth,NewHeight,tempFilter1,tempFilter1);
+      tempFilter1.Free;
+      exit;
+    end;
+    rfLanczos2,rfLanczos3,rfLanczos4:
+    begin
+      tempFilter1 := TLanczosKernel.Create(ord(ResampleFilter)-ord(rfLanczos2)+2);
       result := WideKernelResample(bmp,NewWidth,NewHeight,tempFilter1,tempFilter1);
       tempFilter1.Free;
       exit;

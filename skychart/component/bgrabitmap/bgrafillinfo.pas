@@ -36,10 +36,6 @@ type
       //returns integer bounds
       function GetBounds: TRect; override;
 
-      //compute min-max to be drawn on destination bitmap according to cliprect. Returns false if
-      //there is nothing to draw
-      function ComputeMinMax(out minx,miny,maxx,maxy: integer; bmpDest: TBGRACustomBitmap): boolean; override;
-
       //check if the point is inside the filling zone
       function IsPointInside(x,y: single; windingMode: boolean): boolean; override;
 
@@ -232,9 +228,9 @@ type
   end;
 
 procedure AddDensity(dest: PDensity; start,count: integer; value : word); inline;
-function DivByAntialiasPrecision(value: cardinal): cardinal; inline;
-function DivByAntialiasPrecision256(value: cardinal): cardinal; inline;
-function DivByAntialiasPrecision65536(value: cardinal): cardinal; inline;
+function DivByAntialiasPrecision(value: UInt32or64): UInt32or64; inline;
+function DivByAntialiasPrecision256(value: UInt32or64): UInt32or64; inline;
+function DivByAntialiasPrecision65536(value: UInt32or64): UInt32or64; inline;
 procedure ComputeAliasedRowBounds(x1,x2: single; minx,maxx: integer; out ix1,ix2: integer);
 
 function IsPointInPolygon(const points: ArrayOfTPointF; point: TPointF; windingMode: boolean): boolean;
@@ -242,9 +238,53 @@ function IsPointInEllipse(x,y,rx,ry: single; point: TPointF): boolean;
 function IsPointInRoundRectangle(x1, y1, x2, y2, rx, ry: single; point: TPointF): boolean;
 function IsPointInRectangle(x1, y1, x2, y2: single; point: TPointF): boolean;
 
+function BGRAShapeComputeMinMax(AShape: TBGRACustomFillInfo; out minx, miny, maxx, maxy: integer;
+  bmpDest: TBGRACustomBitmap): boolean;
+
 implementation
 
 uses Math;
+
+function BGRAShapeComputeMinMax(AShape: TBGRACustomFillInfo; out minx, miny, maxx, maxy: integer;
+  bmpDest: TBGRACustomBitmap): boolean;
+var clip,bounds: TRect;
+begin
+  result := true;
+  bounds := AShape.GetBounds;
+
+  if (bounds.Right <= bounds.left) or (bounds.bottom <= bounds.top) then
+  begin
+    result := false;
+    exit;
+  end;
+
+  miny := bounds.top;
+  maxy := bounds.bottom - 1;
+  minx := bounds.left;
+  maxx := bounds.right - 1;
+
+  clip := bmpDest.ClipRect;
+
+  if minx < clip.Left then
+    minx := clip.Left;
+  if maxx < clip.Left then
+    result := false;
+
+  if maxx > clip.Right - 1 then
+    maxx := clip.Right- 1;
+  if minx > clip.Right - 1 then
+    result := false;
+
+  if miny < clip.Top then
+    miny := clip.Top;
+  if maxy < clip.Top then
+    result := false;
+
+  if maxy > clip.Bottom - 1 then
+    maxy := clip.Bottom - 1;
+  if miny > clip.Bottom - 1 then
+    result := false;
+end;
 
 procedure ComputeAliasedRowBounds(x1,x2: single; minx,maxx: integer; out ix1,ix2: integer);
 begin
@@ -322,17 +362,17 @@ begin
     dest^ += value;
 end;
 
-function DivByAntialiasPrecision(value: cardinal): cardinal;
+function DivByAntialiasPrecision(value: UInt32or64): UInt32or64;
 begin             //
   result := value shr AntialiasPrecisionShift;// div AntialiasPrecision;
 end;
 
-function DivByAntialiasPrecision256(value: cardinal): cardinal;
+function DivByAntialiasPrecision256(value: UInt32or64): UInt32or64;
 begin             //
   result := value shr (AntialiasPrecisionShift+8);// div (256*AntialiasPrecision);
 end;
 
-function DivByAntialiasPrecision65536(value: cardinal): cardinal;
+function DivByAntialiasPrecision65536(value: UInt32or64): UInt32or64;
 begin             //
   result := value shr (AntialiasPrecisionShift+16);//div (65536*AntialiasPrecision);
 end;
@@ -344,46 +384,6 @@ begin
   Result := rect(0, 0, 0, 0);
 end;
 
-function TFillShapeInfo.ComputeMinMax(out minx, miny, maxx, maxy: integer;
-  bmpDest: TBGRACustomBitmap): boolean;
-var clip,bounds: TRect;
-begin
-  result := true;
-  bounds := GetBounds;
-
-  if (bounds.Right <= bounds.left) or (bounds.bottom <= bounds.top) then
-  begin
-    result := false;
-    exit;
-  end;
-
-  miny := bounds.top;
-  maxy := bounds.bottom - 1;
-  minx := bounds.left;
-  maxx := bounds.right - 1;
-
-  clip := bmpDest.ClipRect;
-
-  if minx < clip.Left then
-    minx := clip.Left;
-  if maxx < clip.Left then
-    result := false;
-
-  if maxx > clip.Right - 1 then
-    maxx := clip.Right- 1;
-  if minx > clip.Right - 1 then
-    result := false;
-
-  if miny < clip.Top then
-    miny := clip.Top;
-  if maxy < clip.Top then
-    result := false;
-
-  if maxy > clip.Bottom - 1 then
-    maxy := clip.Bottom - 1;
-  if miny > clip.Bottom - 1 then
-    result := false;
-end;
 
 function TFillShapeInfo.IsPointInside(x, y: single; windingMode: boolean
   ): boolean;
@@ -619,13 +619,33 @@ var
 begin
   setlength(FPoints, length(points));
   nbP := 0;
+  first := -1;
   for i := 0 to high(points) do
-  if (i=0) or (points[i]<>points[i-1]) then
+  if isEmptyPointF(points[i]) then
   begin
+    if first<>-1 then
+    begin
+      if nbP = first+1 then //is there only one point?
+      begin
+        dec(nbP);
+        first := -1; //remove subpolygon
+      end else
+      if (FPoints[nbP-1] = FPoints[first]) then
+        dec(nbP); //remove just last looping point
+    end;
+    if first<>-1 then
+    begin
+      FPoints[nbP] := points[i];
+      inc(nbP);
+      first := -1;
+    end;
+  end else
+  if (first=-1) or (points[i]<>points[i-1]) then
+  begin
+    if first = -1 then first := nbP;
     FPoints[nbP] := points[i];
     inc(nbP);
   end;
-  if (nbP>0) and (FPoints[nbP-1] = FPoints[0]) then dec(NbP);
   setlength(FPoints, nbP);
 
   //look for empty points, correct coordinate and successors
@@ -1025,6 +1045,7 @@ begin
     if p^.y1 < p^.y2 then
       p^.x1 := FPoints[i].x
     else
+    if p^.y1 > p^.y2 then
     begin
       temp := p^.y1;
       p^.y1 := p^.y2;
@@ -1104,7 +1125,10 @@ begin
   for i := 0 to high(FPoints) do
   begin
     j := FNext[i];
-    FSimple[i].winding:= ComputeWinding(FPoints[i].y,FPoints[j].y);
+    if j <> -1 then
+      FSimple[i].winding:= ComputeWinding(FPoints[i].y,FPoints[j].y)
+    else
+      FSimple[i].winding:= 0;
     if FSlopes[i] <> EmptySingle then
       FSimple[i].data := CreateSegmentData(i, j, FPoints[i].x, FPoints[i].y);
   end;
@@ -1416,6 +1440,10 @@ begin
   FInnerBorder.Free;
   inherited Destroy;
 end;
+
+initialization
+
+  Randomize;
 
 end.
 

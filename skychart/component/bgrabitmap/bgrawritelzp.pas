@@ -32,7 +32,7 @@ type
 
 implementation
 
-uses BGRACompressableBitmap, FPWritePNG;
+uses BGRACompressableBitmap;
 
 { TBGRAWriterLazPaint }
 
@@ -41,8 +41,6 @@ var w,h: integer;
   thumbStream: TStream;
   OldResampleFilter: TResampleFilter;
   thumbnail: TBGRACustomBitmap;
-  p: PBGRAPixel;
-  n: integer;
 begin
   result := false;
   if not (Img is TBGRACustomBitmap) then exit;
@@ -68,14 +66,6 @@ begin
     thumbnail := TBGRACustomBitmap(Img).Resample(w,h,rmFineResample);
     TBGRACustomBitmap(Img).ResampleFilter := OldResampleFilter;
 
-    p := thumbnail.data; //avoid PNG bug with black color transformed into transparent
-    for n := thumbnail.NbPixels-1 downto 0 do
-    begin
-      if (p^.alpha <> 0) and (p^.red = 0) and (p^.green = 0) and (p^.blue = 0) then
-        p^.blue := 1;
-      inc(p);
-    end;
-
     try
       thumbStream := TMemoryStream.Create;
       try
@@ -88,6 +78,17 @@ begin
       end;
     finally
       thumbnail.Free;
+    end;
+  end else
+  begin
+    thumbStream := TMemoryStream.Create;
+    try
+      TBGRACustomBitmap(Img).SaveToStreamAsPng(thumbStream);
+      thumbStream.Position:= 0;
+      Str.CopyFrom(thumbStream, thumbStream.Size);
+      result := true;
+    finally
+      thumbStream.Free;
     end;
   end;
 end;
@@ -196,12 +197,70 @@ var
   PPlane,PPlaneCur: array[0..PossiblePlanes-1] of PByte;
   CompressedPlane: array[0..PossiblePlanes-1] of TMemoryStream;
   NbPixels, NbNonTranspPixels, NbOpaquePixels: integer;
+  Colors: array[0..255] of Int32or64;
+  ColorCount: Int32or64;
+  CompressedRGB: array[0..3] of TMemoryStream;
+  ColorTab: packed array[0..256*3-1] of byte;
+  Indexed: PByte;
+  NonRGBSize,RGBSize: int64;
 
   procedure OutputPlane(AIndex: integer);
   begin
     str.WriteDWord(NtoLE(DWord(CompressedPlane[AIndex].Size)));
     CompressedPlane[AIndex].Position:= 0;
     str.CopyFrom(CompressedPlane[AIndex],CompressedPlane[AIndex].Size);
+  end;
+
+  procedure OutputRGB(AIndex: integer);
+  begin
+    str.WriteDWord(NtoLE(DWord(CompressedRGB[AIndex].Size)));
+    CompressedRGB[AIndex].Position:= 0;
+    str.CopyFrom(CompressedRGB[AIndex],CompressedRGB[AIndex].Size);
+  end;
+
+  function BuildPalette: boolean;
+  var n,i: Int32or64;
+    lastColor,color,colorIndex: Int32or64;
+    found: boolean;
+  begin
+    ColorCount := 0;
+    ColorIndex := 0;
+    lastColor := -1;
+    GetMem(Indexed, NbNonTranspPixels);
+    for n := 0 to NbNonTranspPixels-1 do
+    begin
+      color := (PPlane[0]+n)^+ ((PPlane[1]+n)^ shl 8)+ ((PPlane[2]+n)^ shl 16);
+      if color = lastColor then
+      begin
+        (Indexed+n)^ := ColorIndex;
+        continue;
+      end;
+      found := false;
+      for i := 0 to ColorCount-1 do
+      begin
+        if colors[i] = color then
+        begin
+          found := true;
+          ColorIndex := i;
+          break;
+        end;
+      end;
+      if not found then
+      begin
+        inc(ColorCount);
+        if ColorCount > 256 then
+        begin
+          result := false;
+          ReAllocMem(Indexed,0);
+          exit;
+        end;
+        colors[colorCount-1] := color;
+        ColorIndex := ColorCount-1;
+      end;
+      (Indexed+n)^ := ColorIndex;
+      lastColor := color;
+    end;
+    result := true;
   end;
 
 var
@@ -247,9 +306,52 @@ begin
   if CompareMem(PPlane[1],PPlane[0],NbNonTranspPixels) then PlaneFlags := PlaneFlags or LazpaintChannelGreenFromRed;
   if CompareMem(PPlane[2],PPlane[0],NbNonTranspPixels) then PlaneFlags := PlaneFlags or LazpaintChannelBlueFromRed else
   if CompareMem(PPlane[2],PPlane[1],NbNonTranspPixels) then PlaneFlags := PlaneFlags or LazpaintChannelBlueFromGreen;
+
+  //if we cannot reduce to one plane, maybe we will have more luck with a palette
+  for i := 0 to 3 do CompressedRGB[i] := nil;
+  Indexed := nil;
+  RGBSize := 0;
+  if ((PlaneFlags and LazpaintChannelGreenFromRed) = 0) or
+     ((PlaneFlags and (LazpaintChannelBlueFromRed or LazpaintChannelBlueFromGreen)) = 0) and (NbNonTranspPixels > 0) then
+  begin
+    if BuildPalette then
+    begin
+      if ColorCount shl 1 < NbNonTranspPixels then
+      begin
+        fillchar({%H-}ColorTab, sizeof(ColorTab), 0);
+        for i := 0 to ColorCount-1 do
+        begin
+          colorTab[i] := Colors[i] and 255;
+          colorTab[i+256] := (Colors[i] shr 8) and 255;
+          colorTab[i+512] := (Colors[i] shr 16) and 255;
+        end;
+        CompressedRGB[0] := TMemoryStream.Create;
+        EncodeLazRLE(colorTab[0], ColorCount, CompressedRGB[0]);
+        if (PlaneFlags and LazpaintChannelGreenFromRed) = 0 then
+        begin
+          CompressedRGB[1] := TMemoryStream.Create;
+          EncodeLazRLE(colorTab[256], ColorCount, CompressedRGB[1]);
+        end;
+        if (PlaneFlags and (LazpaintChannelBlueFromRed or LazpaintChannelBlueFromGreen)) = 0 then
+        begin
+          CompressedRGB[2] := TMemoryStream.Create;
+          EncodeLazRLE(colorTab[512], ColorCount, CompressedRGB[2]);
+        end;
+        CompressedRGB[3] := TMemoryStream.Create;
+        EncodeLazRLE(Indexed^,NbNonTranspPixels,CompressedRGB[3]);
+
+        for i := 0 to 3 do
+          if CompressedRGB[i] <> nil then
+            inc(RGBSize,CompressedRGB[i].Size);
+      end;
+      ReAllocMem(Indexed,0);
+    end;
+  end;
+
   if (PlaneFlags and LazpaintChannelGreenFromRed) <> 0 then ReAllocMem(PPlane[1],0);
   if (PlaneFlags and (LazpaintChannelBlueFromRed or LazpaintChannelBlueFromGreen)) <> 0 then ReAllocMem(PPlane[2],0);
 
+  NonRGBSize := 0;
   for i := 0 to PossiblePlanes-1 do
     if PPlane[i] <> nil then
     begin
@@ -258,24 +360,38 @@ begin
         EncodeLazRLE(PPlane[i]^, NbPixels,CompressedPlane[i])
       else
         EncodeLazRLE(PPlane[i]^, NbNonTranspPixels,CompressedPlane[i]);
+      inc(NonRGBSize, CompressedPlane[i].Size);
     end;
+
+  if (CompressedRGB[3] <> nil) and (NonRGBSize > RGBSize) then
+    PlaneFlags:= PlaneFlags or LazpaintPalettedRGB;
 
   str.WriteDWord(NtoLE(DWord(img.width)));
   str.WriteDWord(NtoLE(DWord(img.Height)));
   str.WriteDWord(NtoLE(DWord(length(ACaption))));
-  str.WriteBuffer(ACaption[1],length(ACaption));
+  if length(ACaption)>0 then str.WriteBuffer(ACaption[1],length(ACaption));
   str.WriteByte(PlaneFlags);
 
   if (PlaneFlags and LazpaintChannelNoAlpha) = 0 then OutputPlane(3);
-  OutputPlane(0);
-  if (PlaneFlags and LazpaintChannelGreenFromRed) = 0 then OutputPlane(1);
-  if (PlaneFlags and (LazpaintChannelBlueFromRed or LazpaintChannelBlueFromGreen)) = 0 then OutputPlane(2);
+  if (PlaneFlags and LazpaintPalettedRGB) <> 0 then
+  begin
+    for i := 0 to 3 do
+      if CompressedRGB[i] <> nil then
+        OutputRGB(i);
+  end else
+  begin
+    OutputPlane(0);
+    if (PlaneFlags and LazpaintChannelGreenFromRed) = 0 then OutputPlane(1);
+    if (PlaneFlags and (LazpaintChannelBlueFromRed or LazpaintChannelBlueFromGreen)) = 0 then OutputPlane(2);
+  end;
 
   for i := 0 to PossiblePlanes-1 do
   begin
     freemem(PPlane[i]);
     CompressedPlane[i].Free;
   end;
+  for i := 0 to 3 do
+    CompressedRGB[i].Free;
 end;
 
 initialization

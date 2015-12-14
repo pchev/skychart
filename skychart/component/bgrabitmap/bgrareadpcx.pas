@@ -217,7 +217,7 @@ begin
   result := stream.Read({%H-}magic,SizeOf(magic)) = sizeof(magic);
   stream.Position:= oldPos;
   if result then
-    result := (magic[0] in[$0a,$0c,$cd]) and (magic[1] in [0,2,3,4,5]) and (magic[2] = 1) and (magic[3] in[1,2,4,8])
+    result := (magic[0] in[$0a,$0c,$cd]) and (magic[1] in [0,2,3,4,5]) and (magic[2] in[0,1]) and (magic[3] in[1,2,4,8])
 end;
 
 initialization

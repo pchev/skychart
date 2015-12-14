@@ -155,13 +155,14 @@ class procedure TBGRAReaderLazPaint.LoadRLEImage(Str: TStream; Img: TFPCustomIma
 var channelFlags: byte;
     w,h,NbPixels,nameLen,channelStreamSize: DWord;
     nextPosition: int64;
-    PRed,PGreen,PBlue,PAlpha,
+    PIndexed,PRed,PGreen,PBlue,PAlpha,
     PCurRed, PCurGreen, PCurBlue, PCurAlpha: PByte;
     PDest: PBGRAPixel;
     x,y: DWord;
     c: TFPColor;
     n,NbNonTransp: DWord;
-    a: NativeInt;
+    a,index: NativeInt;
+    ColorTab: packed array[0..256*3-1] of byte;
 begin
   w := LEtoN(str.ReadDWord);
   h := LEtoN(str.ReadDWord);
@@ -182,7 +183,7 @@ begin
         Getmem(PAlpha, NbPixels);
         channelStreamSize := LEtoN(str.ReadDWord);
         nextPosition:= str.Position+channelStreamSize;
-        DecodeLazRLE(Str, PAlpha^, NbPixels);
+        if (channelStreamSize > 0) and (NbPixels > 0) then DecodeLazRLE(Str, PAlpha^, NbPixels);
         Str.Position:= nextPosition;
 
         NbNonTransp := 0;
@@ -197,29 +198,82 @@ begin
 
     if NbNonTransp > 0 then
     begin
-      Getmem(PRed, NbNonTransp);
-      channelStreamSize := LEtoN(str.ReadDWord);
-      nextPosition:= str.Position+channelStreamSize;
-      DecodeLazRLE(Str, PRed^, NbNonTransp);
-      Str.Position:= nextPosition;
-
-      if (channelFlags and LazPaintChannelGreenFromRed) <> 0 then PGreen := PRed else
+      if (channelFlags and LazpaintPalettedRGB) <> 0 then
       begin
-        Getmem(PGreen, NbNonTransp);
+        Getmem(PIndexed, NbNonTransp);
+        try
+          Getmem(PRed, NbNonTransp);
+          Getmem(PGreen, NbNonTransp);
+          Getmem(PBlue, NbNonTransp);
+          fillchar({%H-}ColorTab,sizeof(ColorTab),0);
+
+          channelStreamSize := LEtoN(str.ReadDWord);
+          nextPosition:= str.Position+channelStreamSize;
+          DecodeLazRLE(Str, colorTab[0], 256);
+          Str.Position:= nextPosition;
+
+          if (channelFlags and LazPaintChannelGreenFromRed) <> 0 then
+            move(ColorTab[0],colorTab[256], 256)
+          else
+          begin
+            channelStreamSize := LEtoN(str.ReadDWord);
+            nextPosition:= str.Position+channelStreamSize;
+            DecodeLazRLE(Str, colorTab[256], 256);
+            Str.Position:= nextPosition;
+          end;
+          if (channelFlags and LazPaintChannelBlueFromRed) <> 0 then
+            move(ColorTab[0],colorTab[512], 256)
+          else if (channelFlags and LazpaintChannelBlueFromGreen) <> 0 then
+            move(ColorTab[256],colorTab[512], 256)
+          else
+          begin
+            channelStreamSize := LEtoN(str.ReadDWord);
+            nextPosition:= str.Position+channelStreamSize;
+            DecodeLazRLE(Str, colorTab[512], 256);
+            Str.Position:= nextPosition;
+          end;
+
+          channelStreamSize := LEtoN(str.ReadDWord);
+          nextPosition:= str.Position+channelStreamSize;
+          DecodeLazRLE(Str, PIndexed^, NbNonTransp);
+          Str.Position:= nextPosition;
+
+          for n := 0 to NbNonTransp-1 do
+          begin
+            index := (PIndexed+n)^;
+            (PRed+n)^ := colorTab[index];
+            (PGreen+n)^ := colorTab[index+256];
+            (PBlue+n)^ := colorTab[index+512];
+          end;
+        finally
+          FreeMem(PIndexed);
+        end;
+      end else
+      begin
+        Getmem(PRed, NbNonTransp);
         channelStreamSize := LEtoN(str.ReadDWord);
         nextPosition:= str.Position+channelStreamSize;
-        DecodeLazRLE(Str, PGreen^, NbNonTransp);
+        DecodeLazRLE(Str, PRed^, NbNonTransp);
         Str.Position:= nextPosition;
-      end;
 
-      if (channelFlags and LazPaintChannelBlueFromRed) <> 0 then PBlue := PRed else
-      if (channelFlags and LazPaintChannelBlueFromGreen) <> 0 then PBlue := PGreen else
-      begin
-        Getmem(PBlue, NbNonTransp);
-        channelStreamSize := LEtoN(str.ReadDWord);
-        nextPosition:= str.Position+channelStreamSize;
-        DecodeLazRLE(Str, PBlue^, NbNonTransp);
-        Str.Position:= nextPosition;
+        if (channelFlags and LazPaintChannelGreenFromRed) <> 0 then PGreen := PRed else
+        begin
+          Getmem(PGreen, NbNonTransp);
+          channelStreamSize := LEtoN(str.ReadDWord);
+          nextPosition:= str.Position+channelStreamSize;
+          DecodeLazRLE(Str, PGreen^, NbNonTransp);
+          Str.Position:= nextPosition;
+        end;
+
+        if (channelFlags and LazPaintChannelBlueFromRed) <> 0 then PBlue := PRed else
+        if (channelFlags and LazPaintChannelBlueFromGreen) <> 0 then PBlue := PGreen else
+        begin
+          Getmem(PBlue, NbNonTransp);
+          channelStreamSize := LEtoN(str.ReadDWord);
+          nextPosition:= str.Position+channelStreamSize;
+          DecodeLazRLE(Str, PBlue^, NbNonTransp);
+          Str.Position:= nextPosition;
+        end;
       end;
     end;
 
@@ -241,11 +295,7 @@ begin
                 PDest := TBGRACustomBitmap(Img).ScanLine[y];
                 for x := w-1 downto 0 do
                 begin
-                  {$IFDEF ENDIAN_LITTLE}
-                  PDWord(PDest)^ := PCurBlue^ or (PCurGreen^ shl 8) or (PCurRed^ shl 16) or $ff000000;
-                  {$ELSE}
-                  PDWord(PDest)^ := (PCurBlue^ shl 24) or (PCurGreen^ shl 16) or (PCurRed^ shl 8) or $ff;
-                  {$ENDIF}
+                  PDest^ := BGRA(PCurRed^,PCurGreen^,PCurBlue^);
                   inc(PCurBlue);
                   inc(PCurGreen);
                   inc(PCurRed);
@@ -262,11 +312,7 @@ begin
                 PDest^ := BGRAPixelTransparent
               else
               begin
-                {$IFDEF ENDIAN_LITTLE}
-                PDWord(PDest)^ := PCurBlue^ or (PCurGreen^ shl 8) or (PCurRed^ shl 16) or (PCurAlpha^ shl 24);
-                {$ELSE}
-                PDWord(PDest)^ := (PCurBlue^ shl 24) or (PCurGreen^ shl 16) or (PCurRed^ shl 8) or PCurAlpha^;
-                {$ENDIF}
+                PDest^ := BGRA(PCurRed^,PCurGreen^,PCurBlue^,PCurAlpha^);
                 inc(PCurBlue);
                 inc(PCurGreen);
                 inc(PCurRed);
