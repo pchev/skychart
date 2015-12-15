@@ -107,9 +107,9 @@ begin
 
   RawImage.Init;
   if TBGRAPixel_RGBAOrder then
-    RawImage.Description.Init_BPP32_R8G8B8_BIO_TTB(AWidth, AHeight)
+    RawImage.Description.Init_BPP32_R8G8B8A8_BIO_TTB(AWidth, AHeight)
   else
-    RawImage.Description.Init_BPP32_B8G8R8_BIO_TTB(AWidth, AHeight);
+    RawImage.Description.Init_BPP32_B8G8R8A8_BIO_TTB(AWidth, AHeight);
   RawImage.Description.LineOrder := ALineOrder;
   RawImage.Description.LineEnd := rileDWordBoundary;
   RawImage.Data     := PByte(AData);
