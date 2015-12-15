@@ -16,7 +16,7 @@ type
         {$DEFINE BGRABITMAP_RGBAPIXEL}
       {$ENDIF}
       {$IFDEF DARWIN}
-        {$DEFINE BGRABITMAP_RGBAPIXEL}
+        {$DEFINE BGRABITMAP_BGRAPIXEL}
       {$ENDIF}
     {$ENDIF}
   {$ENDIF}
