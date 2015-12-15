@@ -1929,14 +1929,25 @@ var step,buf:string;
     i:integer;
 begin
 try
-ProcessParams1;
-if VerboseMsg then
- debugln('Enter f_main.formcreate');
+DefaultFormatSettings.DecimalSeparator:='.';
+DefaultFormatSettings.ThousandSeparator:=',';
+DefaultFormatSettings.DateSeparator:='/';
+DefaultFormatSettings.TimeSeparator:=':';
+NeedRestart:=false;
+showsplash:=true;
+ConfirmSaveConfig:=true;
 InitOK:=false;
 ForceClose:=false;
 Closing:=false;
 RestoreState:=false;
 SaveState:=wsNormal;
+ForceConfig:='';
+ForceUserDir:='';
+ConfigAppdir:='';
+ConfigPrivateDir:='';
+ProcessParams1;
+if VerboseMsg then
+ debugln('Check other instance');
 UniqueInstance1:=TCdCUniqueInstance.Create(self);
 UniqueInstance1.Identifier:='skychart';
 UniqueInstance1.OnOtherInstance:=OtherInstance;
@@ -1949,13 +1960,6 @@ if VerboseMsg then
 {$ifdef mswindows}
 Application.UpdateFormatSettings := False;
 {$endif}
-DefaultFormatSettings.DecimalSeparator:='.';
-DefaultFormatSettings.ThousandSeparator:=',';
-DefaultFormatSettings.DateSeparator:='/';
-DefaultFormatSettings.TimeSeparator:=':';
-NeedRestart:=false;
-showsplash:=true;
-ConfirmSaveConfig:=true;
 ImageListCount:=ImageNormal.Count;
 MaxThreadCount:=GetThreadCount;
 DisplayIs32bpp:=true;
@@ -1997,9 +2001,6 @@ cfgs:=Tconf_skychart.Create;
 cfgm:=Tconf_main.Create;
 def_cfgplot:=Tconf_plot.Create;
 cfgp:=Tconf_plot.Create;
-ForceConfig:='';
-ConfigAppdir:='';
-ConfigPrivateDir:='';
 step:='Create cursor';
 if VerboseMsg then
  debugln(step);
