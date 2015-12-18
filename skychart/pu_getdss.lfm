@@ -11,7 +11,8 @@ object f_getdss: Tf_getdss
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   ParentFont = True
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.1'
+  Visible = False
   object Memo1: TMemo
     Left = 8
     Height = 232
@@ -36,7 +37,7 @@ object f_getdss: Tf_getdss
     IntegralHeight = True
     ItemHeight = 0
     ParentFont = False
-    ScrollWidth = 397
+    ScrollWidth = 399
     TabOrder = 1
     TopIndex = -1
   end

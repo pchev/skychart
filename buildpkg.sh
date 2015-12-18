@@ -91,7 +91,6 @@ if [[ $make_linux32 ]]; then
   rsync -a --exclude=.svn system_integration/Linux/debian $builddir
   cd $builddir
   mv bin debian/skychart/usr/
-  mv lib debian/skychart/usr/
   mv share debian/skychart/usr/
   cd debian
   sz=$(du -s skychart/usr | cut -f1)
@@ -162,7 +161,6 @@ if [[ $make_linux64 ]]; then
   rsync -a --exclude=.svn system_integration/Linux/debian $builddir
   cd $builddir
   mv bin debian/skychart64/usr/
-  mv lib debian/skychart64/usr/
   mv share debian/skychart64/usr/
   cd debian
   sz=$(du -s skychart64/usr | cut -f1)
@@ -177,8 +175,6 @@ if [[ $make_linux64 ]]; then
   rsync -a --exclude=.svn system_integration/Linux/rpm $builddir
   cd $builddir
   mv debian/skychart64/usr/* rpm/skychart/usr/
-  # Redhat 64bits lib is lib64 
-  mv rpm/skychart/usr/lib rpm/skychart/usr/lib64
   cd rpm
   sed -i "/Version:/ s/3/$version/"  SPECS/skychart64.spec
   sed -i "/Release:/ s/1/$currentrev/" SPECS/skychart64.spec
