@@ -93,8 +93,6 @@ if [[ $make_linux32 ]]; then
   mv bin debian/skychart/usr/
   mv lib debian/skychart/usr/
   mv share debian/skychart/usr/
-  mv debian/skychart/usr/bin/skychart debian/skychart/usr/bin/skychart-bin
-  cp $wd/system_integration/Linux/bin/skychart debian/skychart/usr/bin/skychart
   cd debian
   sz=$(du -s skychart/usr | cut -f1)
   sed -i "s/%size%/$sz/" skychart/DEBIAN/control
@@ -103,8 +101,6 @@ if [[ $make_linux32 ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.deb $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
-  rm skychart/usr/bin/skychart
-  mv skychart/usr/bin/skychart-bin skychart/usr/bin/skychart
   # rpm
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/rpm $builddir
@@ -168,8 +164,6 @@ if [[ $make_linux64 ]]; then
   mv bin debian/skychart64/usr/
   mv lib debian/skychart64/usr/
   mv share debian/skychart64/usr/
-  mv debian/skychart64/usr/bin/skychart debian/skychart64/usr/bin/skychart-bin
-  cp $wd/system_integration/Linux/bin/skychart debian/skychart64/usr/bin/skychart
   cd debian
   sz=$(du -s skychart64/usr | cut -f1)
   sed -i "s/%size%/$sz/" skychart64/DEBIAN/control
@@ -178,8 +172,6 @@ if [[ $make_linux64 ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.deb $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
-  rm skychart64/usr/bin/skychart
-  mv skychart64/usr/bin/skychart-bin skychart64/usr/bin/skychart
   # rpm
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/rpm $builddir
