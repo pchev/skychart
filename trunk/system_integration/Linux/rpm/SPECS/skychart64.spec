@@ -8,8 +8,8 @@ URL: http://skychart.sourceforge.net
 Packager: Patrick Chevalley
 BuildRoot: %_topdir/%{name}
 BuildArch: x86_64
-Provides: skychart libplan404.so libcdcwcs.so
-Requires: gtk2 glib2 pango libjpeg libpng sqlite xplanet
+Provides: skychart
+Requires: libpasastro gtk2 glib2 pango libjpeg libpng sqlite xplanet
 AutoReqProv: no
 
 %description
@@ -21,9 +21,6 @@ Planetarium software for the advanced amateur astronomer.
 /usr/bin/cdcicon
 /usr/bin/varobs
 /usr/bin/varobs_lpv_bulletin
-/usr/lib64/libplan404.so
-/usr/lib64/libgetdss.so
-/usr/lib64/libcdcwcs.so
 /usr/share/appdata/skychart.appdata.xml
 /usr/share/applications/skychart.desktop
 /usr/share/pixmaps/skychart.png

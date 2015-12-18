@@ -99,7 +99,7 @@ type
   Const dsslibname = 'libgetdss.dll';
   {$endif}
   {$ifdef linux}
-  Const dsslibname = 'libgetdss.so';
+  Const dsslibname = 'libpasgetdss.so.1';
   {$endif}
   {$ifdef freebsd}
   Const dsslibname = 'libgetdss.so';

@@ -1143,8 +1143,8 @@ const
   jdmin404 = 625673.5;
   jdmax404 = 2816787.5;
 {$ifdef linux}
-  lib404 = 'libplan404.so';
-  libcdcwcs = 'libcdcwcs.so';
+  lib404 = 'libpasplan404.so.1';
+  libcdcwcs = 'libpaswcs.so.1';
   libz = 'libz.so.1';
 {$endif}
 {$ifdef freebsd}
