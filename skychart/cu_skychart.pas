@@ -2415,10 +2415,10 @@ end;
 procedure Tskychart.GetCoord(x,y: integer; var ra,dec,a,h,l,b,le,be:double);
 begin
 getadxy(x,y,ra,dec,cfgsc);
-GetAHxy(X,Y,a,h,cfgsc);
+Eq2Hz(cfgsc.CurST-ra,dec,a,h,cfgsc);
 if Fcatalog.cfgshr.AzNorth then a:=rmod(a+pi,pi2);
-GetLBxy(X,Y,l,b,cfgsc);
-GetLBExy(X,Y,le,be,cfgsc);
+Eq2Gal(ra,dec,l,b,cfgsc);
+Eq2Ecl(ra,dec,cfgsc.ecl,le,be);
 ra:=rmod(ra+pi2,pi2);
 a:=rmod(a+pi2,pi2);
 l:=rmod(l+pi2,pi2);
