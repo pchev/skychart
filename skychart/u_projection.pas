@@ -563,9 +563,14 @@ var
    x1,y1: Double;
 begin
 x1:=0;y1:=0;
+if c.ProjPole=Altaz then begin
   XYwindow(x,y,x1,y1,c);
   InvProj2 (x1,y1,-c.acentre,c.hcentre,a,h,c);
-  a:=rmod(pi4-a,pi2);
+end else begin
+  GetADxy(x,y,x1,y1,c);
+  Eq2Hz(c.CurST-x1,y1,a,h,c);
+end;
+a:=rmod(pi4-a,pi2);
 end;
 
 procedure GetAHxyF(x,y:Integer ; var a,h : Double; c: Tconf_skychart);
@@ -573,9 +578,14 @@ var
    x1,y1: Double;
 begin
 x1:=0;y1:=0;
+if c.ProjPole=Altaz then begin
   XYwindow(x,y,x1,y1,c);
   InvProj2 (x1,y1,-c.acentre,c.hcentre,a,h,c);
-  a:=-a;
+end else begin
+  GetADxy(x,y,x1,y1,c);
+  Eq2Hz(c.CurST-x1,y1,a,h,c);
+end;
+a:=-a;
 end;
 
 procedure GetLBxy(x,y:Integer ; var l,b : Double; c: Tconf_skychart);
@@ -583,9 +593,14 @@ var
    x1,y1: Double;
 begin
 x1:=0;y1:=0;
+if c.ProjPole=Gal then begin
   XYwindow(x,y,x1,y1,c);
   InvProj2 (x1,y1,c.lcentre,c.bcentre,l,b,c);
-  l:=rmod(pi4+l,pi2);
+end else begin
+  GetADxy(x,y,x1,y1,c);
+  Eq2Gal(x1,y1,l,b,c);
+end;
+l:=rmod(pi4+l,pi2);
 end;
 
 procedure GetLBExy(x,y:Integer ; var le,be : Double; c: Tconf_skychart);
@@ -593,9 +608,14 @@ var
    x1,y1: Double;
 begin
 x1:=0;y1:=0;
+if c.ProjPole=Ecl then begin
   XYwindow(x,y,x1,y1,c);
   InvProj2 (x1,y1,c.lecentre,c.becentre,le,be,c);
-  le:=rmod(pi4+le,pi2);
+end else begin
+  GetADxy(x,y,x1,y1,c);
+  Eq2Ecl(x1,y1,c.ecl,le,be);
+end;
+le:=rmod(pi4+le,pi2);
 end;
 
 function ObjectInMap(ra,de:double; c: Tconf_skychart) : Boolean;
