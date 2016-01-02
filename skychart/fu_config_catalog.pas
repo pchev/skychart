@@ -275,7 +275,6 @@ type
     procedure CDCNebField1Change(Sender: TObject);
     procedure CDCNebField2Change(Sender: TObject);
     procedure CDCNebPathChange(Sender: TObject);
-    procedure CDCNebSelPathClick(Sender: TObject);
     procedure ActivateGCat;
     procedure ActivateUserObjects;
     procedure ShowFov;
@@ -443,6 +442,7 @@ begin
 textcolor:=clWhite;
 LockCatPath:=false;
 LockActivePath:=false;
+cmain.VOforceactive:=false;
 LockChange:=true;
 ShowGCat;
 ShowVO;
@@ -503,6 +503,7 @@ begin
   f_voconfig.vo_maxrecord := cmain.VOmaxrecord;
   formpos(f_voconfig,left,top);
   f_voconfig.ShowModal;
+  cmain.VOforceactive:=true;
   cmain.VOurl:=f_voconfig.vourlnum;
   cmain.VOmaxrecord := f_voconfig.vo_maxrecord;
   f_voconfig.Free;
@@ -1047,7 +1048,10 @@ if row=0 then exit;
 case col of
 0 : begin
     if stringgrid4.Cells[col,row]='1' then stringgrid4.Cells[col,row]:='0'
-       else  stringgrid4.Cells[col,row]:='1';
+       else  begin
+         cmain.VOforceactive:=true;
+         stringgrid4.Cells[col,row]:='1';
+       end;
     config:=TXMLConfig.Create(self);
     config.Filename:=slash(VODir)+ChangeFileExt(stringgrid4.Cells[2,row],'.config');;
     config.SetValue('VOcat/plot/active',stringgrid4.Cells[col,row]='1');
@@ -1224,11 +1228,6 @@ end;
 finally
 LockCatPath:=false;
 end;
-end;
-
-procedure Tf_config_catalog.CDCNebSelPathClick(Sender: TObject);
-begin
-
 end;
 
 procedure Tf_config_catalog.ActivateGCat;

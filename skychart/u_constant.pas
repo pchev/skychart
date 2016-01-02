@@ -1084,6 +1084,7 @@ type
     savetop, saveleft, saveheight, savewidth: integer;
     ButtonStandard, ButtonNight, AnimDelay, AnimSx, AnimSy,
     AnimSize, VOurl, VOmaxrecord: integer;
+    VOforceactive: boolean;
     PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec: boolean;
     maximized, updall, AutostartServer, keepalive, NewBackgroundImage: boolean;
     TextOnlyDetail, SimpleMove, SimpleDetail, KioskMode, KioskDebug, CenterAtNoon: boolean;
@@ -2709,6 +2710,7 @@ begin
   ButtonNight := Source.ButtonNight;
   VOurl := Source.VOurl;
   VOmaxrecord := Source.VOmaxrecord;
+  VOforceactive := Source.VOforceactive;
   AnimDelay := Source.AnimDelay;
   AnimOpt := Source.AnimOpt;
   Animffmpeg := Source.Animffmpeg;
