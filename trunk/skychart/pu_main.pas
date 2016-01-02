@@ -4114,6 +4114,13 @@ begin
     if starchange then SetStarShape;
     cfgm.updall:=applyall;
     privatedir:=cfgm.persdir;
+    if (cmain<>nil)and(ccat<>nil) then begin
+      if cmain.VOforceactive then begin
+        ShowVO.Checked:=true;
+        ccat.starcatdef[vostar-BaseStar]:=ShowVO.Checked;
+        ccat.nebcatdef[voneb-BaseNeb]:=ShowVO.Checked;
+      end;
+    end;
     if ccat<>nil then begin
       for i:=0 to ccat.GCatNum-1 do begin
         if ccat.GCatLst[i].Actif then begin
