@@ -5432,7 +5432,7 @@ if cfgsc.EyepieceMask then begin
        x2:=x1-cfgsc.flipx*o*spa;
        y2:=y1+cfgsc.flipy*o*cpa;
        WindowXY(x2,y2,x,y,cfgsc);
-       Fplot.PlotCircleMask(x,y,cfgsc.BxGlb*r,cfgsc.WhiteBg);
+       Fplot.PlotCircleMask(x,y,abs(cfgsc.BxGlb*r),cfgsc.WhiteBg);
      end;
   end;
  end;
