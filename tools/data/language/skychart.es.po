@@ -5,14 +5,14 @@ msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-13 19:21+0000\n"
-"PO-Revision-Date: 2015-11-21 12:27+0000\n"
+"PO-Revision-Date: 2015-12-20 18:19+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-12-13 19:24+0000\n"
-"X-Generator: Launchpad (build 17865)\n"
+"X-Launchpad-Export-Date: 2016-01-10 14:52+0000\n"
+"X-Generator: Launchpad (build 17881)\n"
 "Language: es\n"
 
 #: u_translation:rsdeg
@@ -2678,7 +2678,7 @@ msgstr "Descargar detalles del país"
 
 #: u_translation:rsupdate1
 msgid "Update"
-msgstr "Modificar"
+msgstr "Actualizar"
 
 #: u_translation:rsvicinity
 msgid "Vicinity"
@@ -2726,7 +2726,7 @@ msgstr "Trazar la linea aparente de horizonte deprimido"
 
 #: u_translation:rsupdateoraddt
 msgid "Update/add the current location to the database?"
-msgstr "¿Modificar/agregar la ubicación actual a la base de datos ?"
+msgstr "¿Actualizar/añadir la ubicación actual en la base de datos?"
 
 #: u_translation:rsupdatedsucce
 msgid "Updated successfully!"
@@ -6291,4 +6291,4 @@ msgstr "¡Por favor, instale el paquete indistarter!"
 
 #: u_translation:rsactivateallt
 msgid "Activate all the functions when hidden"
-msgstr ""
+msgstr "Activar todas las funciones oculto"

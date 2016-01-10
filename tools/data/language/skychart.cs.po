@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-13 19:21+0000\n"
-"PO-Revision-Date: 2015-03-01 18:07+0000\n"
+"PO-Revision-Date: 2015-12-26 22:29+0000\n"
 "Last-Translator: Václav Houška <vaclav.houska@volny.cz>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-12-13 19:24+0000\n"
-"X-Generator: Launchpad (build 17865)\n"
+"X-Launchpad-Export-Date: 2016-01-10 14:52+0000\n"
+"X-Generator: Launchpad (build 17881)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation:rsdeg
@@ -5401,7 +5401,7 @@ msgstr "Zrušit otočení"
 
 #: u_translation:rsrotatecylind
 msgid "Use oblique cylindrical projections"
-msgstr ""
+msgstr "Použít válcovou projekci v obecné poloze"
 
 #: u_translation:rshammeraitoff
 msgid "Hammer-Aitoff"
@@ -5619,7 +5619,7 @@ msgstr ""
 
 #: u_translation:rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
-msgstr ""
+msgstr "Neměňte nic, pokud si nejste jisti co děláte!"
 
 #: u_translation:rsforceeqsys
 msgid "Force EqSys"
@@ -5770,45 +5770,47 @@ msgstr ""
 
 #: u_translation:rstitle
 msgid "Title"
-msgstr ""
+msgstr "Název"
 
 #: u_translation:rsairmass
 msgid "Airmass"
-msgstr ""
+msgstr "Opt. vzduchová hmota"
 
 #: u_translation:rsaddtoobservi
 msgid "Add %s to observing list"
-msgstr ""
+msgstr "Přidat %s do plánu pozorování"
 
 #: u_translation:rsviewobservin
 msgid "View observing list"
-msgstr ""
+msgstr "Zobrazit plán pozorování"
 
 #: u_translation:rsobservinglis
 msgid "Observing list"
-msgstr ""
+msgstr "Plán pozorování"
 
 #: u_translation:rstheobserving
 msgid "The observing list %s was modified."
-msgstr ""
+msgstr "Plán pozorování %s byl změněn."
 
 #: u_translation:rsdoyouwanttos2
 msgid "Do you want to save it?"
-msgstr ""
+msgstr "Uložit?"
 
 #: u_translation:rsittaketoolon
 msgid ""
 "It take too long to draw the %s from catalog %s, please consider to not use "
 "this catalog for this FOV."
 msgstr ""
+"Vykreslení %s z %s katalogu bude trvat příliš dlouho, zvažte, jestli tento "
+"katalog nevypnout pro toto zorné pole."
 
 #: u_translation:rsonlyobjectsw
 msgid "Only objects within airmass limits tonight"
-msgstr ""
+msgstr "Pouze objekty v limitu optické vzduchové hmoty tuto noc"
 
 #: u_translation:rsonlyobjectsw2
 msgid "Only objects within airmass limits now"
-msgstr ""
+msgstr "Pouze objekty v limitu optické vzduchové hmoty teď"
 
 #: u_translation:rsfirst
 msgid "First"
@@ -5828,27 +5830,27 @@ msgstr ""
 
 #: u_translation:rslimit
 msgid "Limit"
-msgstr ""
+msgstr "Limit"
 
 #: u_translation:rstransit
 msgid "Transit"
-msgstr ""
+msgstr "Trazit"
 
 #: u_translation:rsonlyobjectsw3
 msgid "Only objects within hour angle limits tonight"
-msgstr ""
+msgstr "Pouze objekty splňující limit hodinového úhlu tuto noc"
 
 #: u_translation:rsonlyobjectsw4
 msgid "Only objects within hour angle limits now"
-msgstr ""
+msgstr "Pouze objekty splňující limit hodinového úhlu právě teď"
 
 #: u_translation:rsviewonchart
 msgid "View on chart"
-msgstr ""
+msgstr "Zobrazit v mapě"
 
 #: u_translation:rsupdatecoordi
 msgid "Update coordinates"
-msgstr ""
+msgstr "Přepočítat souřadnice"
 
 #: u_translation:rsduplicate
 msgid "Duplicate"
@@ -5860,11 +5862,11 @@ msgstr ""
 
 #: u_translation:rsalwaysshowth
 msgid "Always show the objects from the list"
-msgstr ""
+msgstr "Vždy zobrazovat objekty ze seznamu"
 
 #: u_translation:rsbewarethisop
 msgid "Beware this option can severly degrade the performance"
-msgstr ""
+msgstr "Pozor! Toto nastavení výrazně degraduje výkon!"
 
 #: u_translation:rstelescopefoc
 msgid "Telescope focal length"
@@ -5892,15 +5894,15 @@ msgstr "Počet pixelů"
 
 #: u_translation:rseastside
 msgid "East side"
-msgstr ""
+msgstr "Východně"
 
 #: u_translation:rscrossmeridia
 msgid "Cross meridian"
-msgstr ""
+msgstr "Průchod meridiánem"
 
 #: u_translation:rswestside
 msgid "West side"
-msgstr ""
+msgstr "Západně"
 
 #: u_translation:rseyepiecevisi
 msgid "Eyepiece vision"
@@ -5924,11 +5926,11 @@ msgstr "en/documentation/"
 
 #: u_translation:rsprintheader
 msgid "Print header"
-msgstr ""
+msgstr "Tisknout záhlaví"
 
 #: u_translation:rsprintfooter
 msgid "Print footer"
-msgstr ""
+msgstr "Tisknout zápatí"
 
 #: u_translation:rssampsendcoor
 msgid "SAMP send coordinates"
