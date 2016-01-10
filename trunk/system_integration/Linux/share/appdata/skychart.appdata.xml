@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application>
  <id type="desktop">skychart.desktop</id>
- <licence>CC0</licence>
+ <metadata_license>CC0-1.0</metadata_license>
+ <project_license>GPL-2.0+</project_license>
+ <name>Skychart</name>
+ <summary>Planetarium software for the advanced amateur astronomer</summary>
  <description>
   <p>
    Skychart is a free and advanced planetarium software for drawing sky charts
    for specific places and times with nicely graphic and for controlling
    telescopes by connecting them to pc.
+  </p>
+  <p>
    It can also calculate Solar System objects visibility and data, like planets,
    comets and asteroids, and display moon and planets in realistic mode.
+  </p>
+  <p>
    Skychart also includes VarObs, a software to help astronomers to get data
    for variable stars observation.
   </p>
  </description>
  <screenshots>
-  <screenshot type="default" width="800" height="600">http://www.ap-i.net/skychart/_media/en/screenshot/vo_m101.jpg</screenshot>
+  <screenshot type="default">
+      <image>http://www.ap-i.net/skychart/_media/en/screenshot/vo_m101.jpg</image>
+      <caption>The main window of Skychart in action.</caption>
+  </screenshot>
  </screenshots>
  <url type="homepage">http://www.ap-i.net/skychart/</url>
  <updatecontact>pch@ap-i.net</updatecontact>
