@@ -814,6 +814,7 @@ if i<1 then i:=maxundo;
 if j>maxundo then j:=1;
 if (i<=validundo)and(i<>lastundo)and((i<lastundo)or(i>=j)) then begin
   curundo:=i;
+  identlabel.Visible:=false;
   sc.cfgsc.Assign(undolist[curundo]);
   sc.plot.init(Image1.width,Image1.height);
   sc.Refresh;
@@ -838,6 +839,7 @@ if i>maxundo then i:=1;
 if j>maxundo then j:=1;
 if (i<=validundo)and(i<>j)and((i<=lastundo)or(i>j)) then begin
   curundo:=i;
+  identlabel.Visible:=false;
   sc.cfgsc.Assign(undolist[curundo]);
   sc.plot.init(Image1.width,Image1.height);
   sc.Refresh;
