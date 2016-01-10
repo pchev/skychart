@@ -286,6 +286,7 @@ end;
 try
 if node.level=0 then begin
    Treeview1.selected:=Treeview1.items[(Treeview1.selected.absoluteindex+1)];
+   TreeView1Change(Sender,Treeview1.selected);
 end else begin
    locktree:=true;
    i:=node.parent.index;
