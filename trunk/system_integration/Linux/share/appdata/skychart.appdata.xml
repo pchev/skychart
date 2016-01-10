@@ -20,10 +20,14 @@
    for variable stars observation.
   </p>
  </description>
+ <keywords>
+  <keyword>astronomy</keyword>
+  <keyword>planetarium</keyword>
+ </keywords>
  <screenshots>
   <screenshot type="default">
       <image>http://www.ap-i.net/skychart/_media/en/screenshot/vo_m101.jpg</image>
-      <caption>The main window of Skychart in action.</caption>
+      <caption>The main window of Skychart in action</caption>
   </screenshot>
  </screenshots>
  <url type="homepage">http://www.ap-i.net/skychart/</url>
