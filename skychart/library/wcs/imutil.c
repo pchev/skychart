@@ -1,8 +1,8 @@
 /*** File libwcs/imutil.c
- *** January 11, 2007
- *** By Doug Mink, dmink@cfa.harvard.edu
+ *** June 17, 2014
+ *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 2006-2007
+ *** Copyright (C) 2006-2014
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
  */
 
@@ -21,6 +21,8 @@
  *	Median filter an image
  * char *medfill (buff, header, ndx, ndy, nlog)
  *	Set blank pixels to the median of a box around each one
+ * medpix (x, ival, ix, iy, nx, ny, ndx, ndy, bitpix)
+ * medpixi1 (x, ival, ix, iy, nx, ny, ndx, ndy)
  * medpixi2 (x, ival, ix, iy, nx, ny, ndx, ndy)
  * medpixi4 (x, ival, ix, iy, nx, ny, ndx, ndy)
  * medpixr4 (x, ival, ix, iy, nx, ny, ndx, ndy)
@@ -31,6 +33,8 @@
  *	Mean filter an image
  * char *meanfill (buff, header, ndx, ndy, nlog)
  *	Set blank pixels to the mean of a box around each one
+ * meanpix (x, ival, ix, iy, nx, ny, ndx, ndy, bitpix)
+ * meanpixi1 (x, ival, ix, iy, nx, ny, ndx, ndy)
  * meanpixi2 (x, ival, ix, iy, nx, ny, ndx, ndy)
  * meanpixi4 (x, ival, ix, iy, nx, ny, ndx, ndy)
  * meanpixr4 (x, ival, ix, iy, nx, ny, ndx, ndy)
@@ -76,6 +80,8 @@ char *meanfill();
 char *gaussfill();
 void gausswt();
 
+unsigned char medpixi1();
+unsigned char meanpixi1();
 short medpixi2();
 short meanpixi2();
 short gausspixi2();
@@ -91,6 +97,7 @@ double gausspixr8();
 
 static int bpvalset = 0;
 static double bpval = -9999.0;
+static unsigned char bpvali1;
 static short bpvali2;
 static int bpvali4;
 static float bpvalr4;
@@ -572,6 +579,7 @@ char	*buff;
 
 /* Median filter an image */
 
+static unsigned char *vi1;	/* Working vector to sort for median */
 static short *vi2;	/* Working vector to sort for median */
 static int *vi4;	/* Working vector to sort for median */
 static float *vr4;	/* Working vector to sort for median */
@@ -813,6 +821,138 @@ int	naxes;
 
 /* Compute median of rectangular group of pixels */
 
+double
+medpix (buff, ix, iy, nx, ny, ndx, ndy, bitpix)
+
+char	*buff;	/* Image buffer */
+int	ix,iy;	/* Pixel around which to compute median */
+int	nx,ny;	/* Number of columns and rows in image */
+int	ndx;	/* Number of columns over which to compute the median */
+int	ndy;	/* Number of rows over which to compute the median */
+int	bitpix;	/* Number of bits in pixels; negative are floating point */
+
+{
+    if (bitpix == 16) {
+	unsigned char cval, *cbuff;
+	cval = (char) 0;
+	cbuff = (unsigned char *) buff;
+	return ((double) medpixi1 (cbuff, cval, ix, iy, nx, ny, ndx, ndy));
+	}
+    else if (bitpix == 16) {
+	short jval, *jbuff;
+	jval = 0;
+	jbuff = (short *) buff;
+	return ((double) medpixi2 (jbuff, jval, ix, iy, nx, ny, ndx, ndy));
+	}
+    else if (bitpix == 32) {
+	int ival, *ibuff;
+	ival = 0;
+	ibuff = (int *) buff;
+	return ((double) medpixi4 (ibuff, ival, ix, iy, nx, ny, ndx, ndy));
+	}
+    else if (bitpix == -32) {
+	float rval, *rbuff;
+	rval = 0.0;
+	rbuff = (float *) buff;
+	return ((double) medpixr4 (rbuff, rval, ix, iy, nx, ny, ndx, ndy));
+	}
+    else if (bitpix == -64) {
+	double dval, *dbuff;
+	dval = 0.0;
+	dbuff = (double *) buff;
+	return (medpixr8 (dbuff, dval, ix, iy, nx, ny, ndx, ndy));
+	}
+    else
+	return (0.0);
+}    
+
+
+unsigned char
+medpixi1 (x, ival, ix, iy, nx, ny, ndx, ndy)
+
+unsigned char	*x;	/* Image buffer */
+unsigned char	ival;	/* Value at this pixel */
+int	ix,iy;	/* Pixel around which to compute median */
+int	nx,ny;	/* Number of columns and rows in image */
+int	ndx;	/* Number of columns over which to compute the median */
+int	ndy;	/* Number of rows over which to compute the median */
+
+{
+    unsigned char xx, *vecj, *img;
+    int n, i, j;
+    int  nx2, ny2, npix;
+    int jx, jx1, jx2, jy, jy1, jy2;
+
+    /* Allocate working buffer if it hasn't already been allocated */
+    npix = ndx * ndy;
+    if (vi1 == NULL) {
+	vi1 = (unsigned char *) calloc (npix, sizeof (unsigned char));
+	if (vi1 == NULL) {
+	    fprintf (stderr, "MEDPIXI1: Could not allocate %d-pixel buffer\n",npix);
+	    return (0);
+	    }
+	}
+
+    n = ndx * ndy;
+    if (n <= 0)
+	return (0.0);
+    else if (n == 1)
+	return (*(x + (iy * ny) + ix));
+
+    /* Compute limits for this pixel */
+    nx2 = ndx / 2;
+    jx1 = ix - nx2;
+    if (jx1 < 0)
+	jx1 = 0;
+    jx2 = ix + nx2 + 1;
+    if (jx2 > nx)
+	jx2 = nx;
+    ny2 = ndy / 2;
+    jy1 = iy - ny2;
+    if (jy1 < 0)
+	jy1 = 0;
+    jy2 = iy + ny2 + 1;
+    if (jy2 > ny)
+	jy2 = ny;
+
+    /* Initialize actual number of pixels used for this pixel */
+    n = 0;
+
+    /* Set up working vector for this pixel */
+    vecj = vi1;
+    for (jy = jy1; jy < jy2; jy++) {
+	img = x + (jy * nx) + jx1;
+	for (jx = jx1; jx < jx2; jx++) {
+	    if (*img != bpvali1) {
+		*vecj++ = *img;
+		n++;
+		}
+	    img++;
+	    }
+	}
+
+    /* If no good pixels, return old value */
+    if (n < 1)
+	return (ival);
+
+    /* Sort numbers in working vector */
+    else {
+	for (j = 2; j <= n; j++) {
+	    xx = vi1[j];
+	    i = j - 1;
+	    while (i > 0 && vi1[i] > xx) {
+		vi1[i+1] = vi1[i];
+		i--;
+		}
+	    vi1[i+1] = xx;
+	    }
+
+	/* Middle number is the median */
+	return (vi1[n/2]);
+	}
+}
+
+
 short
 medpixi2 (x, ival, ix, iy, nx, ny, ndx, ndy)
 
@@ -1043,7 +1183,7 @@ int	ndy;	/* Number of rows over which to compute the median */
     for (jy = jy1; jy < jy2; jy++) {
 	img = x + (jy * nx) + jx1;
 	for (jx = jx1; jx < jx2; jx++) {
-	    if (*img != bpvalr4) {
+	    if (*img != bpvalr4 && !isnan(*img)) {
 		*vecj++ = *img;
 		n++;
 		}
@@ -1129,7 +1269,7 @@ int	ndy;	/* Number of rows over which to compute the median */
     for (jy = jy1; jy < jy2; jy++) {
 	img = x + (jy * nx) + jx1;
 	for (jx = jx1; jx < jx2; jx++) {
-	    if (*img != bpval) {
+	    if (*img != bpval && !isnan(*img)) {
 		*vecj++ = *img;
 		n++;
 		}
@@ -1393,6 +1533,117 @@ int	naxes;
 
 /* Compute mean of rectangular group of pixels */
 
+double
+meanpix (buff, ix, iy, nx, ny, ndx, ndy, bitpix)
+
+char	*buff;	/* Image buffer */
+int	ix,iy;	/* Pixel around which to compute median */
+int	nx,ny;	/* Number of columns and rows in image */
+int	ndx;	/* Number of columns over which to compute the median */
+int	ndy;	/* Number of rows over which to compute the median */
+int	bitpix;	/* Number of bits in pixels; negative are floating point */
+
+{
+    if (bitpix == 8) {
+	unsigned char cval, *cbuff;
+	cval = 0;
+	cbuff = (unsigned char *) buff;
+	return ((double) meanpixi1 (cbuff, cval, ix, iy, nx, ny, ndx, ndy));
+	}
+    else if (bitpix == 16) {
+	short jval, *jbuff;
+	jval = 0;
+	jbuff = (short *) buff;
+	return ((double) meanpixi2 (jbuff, jval, ix, iy, nx, ny, ndx, ndy));
+	}
+    else if (bitpix == 32) {
+	int ival, *ibuff;
+	ival = 0;
+	ibuff = (int *) buff;
+	return ((double) meanpixi4 (ibuff, ival, ix, iy, nx, ny, ndx, ndy));
+	}
+    else if (bitpix == -32) {
+	float rval, *rbuff;
+	rval = 0.0;
+	rbuff = (float *) buff;
+	return ((double) meanpixr4 (rbuff, rval, ix, iy, nx, ny, ndx, ndy));
+	}
+    else if (bitpix == -64) {
+	double dval, *dbuff;
+	dval = 0.0;
+	dbuff = (double *) buff;
+	return (meanpixr8 (dbuff, dval, ix, iy, nx, ny, ndx, ndy));
+	}
+    else
+	return (0.0);
+}    
+
+unsigned char
+meanpixi1 (x, ival, ix, iy, nx, ny, ndx, ndy)
+
+unsigned char	*x;	/* Image buffer */
+unsigned char	ival;	/* Image pixel value */
+int	ix,iy;	/* Pixel around which to compute median */
+int	nx,ny;	/* Number of columns and rows in image */
+int	ndx;	/* Number of columns over which to compute the median */
+int	ndy;	/* Number of rows over which to compute the median */
+
+{
+    double sum, newval;
+    unsigned char *img;
+    int n, nx2, ny2;
+    int jx, jx1, jx2, jy, jy1, jy2;
+
+    n = ndx * ndy;
+    if (n <= 0)
+	return (0.0);
+    else if (n == 1)
+	return (*(x + (iy * ny) + ix));
+
+    /* Compute limits for this pixel */
+    nx2 = ndx / 2;
+    jx1 = ix - nx2;
+    if (jx1 < 0)
+	jx1 = 0;
+    jx2 = ix + nx2 + 1;
+    if (jx2 > nx)
+	jx2 = nx;
+    ny2 = ndy / 2;
+    jy1 = iy - ny2;
+    if (jy1 < 0)
+	jy1 = 0;
+    jy2 = iy + ny2 + 1;
+    if (jy2 > ny)
+	jy2 = ny;
+
+    /* Initialize actual number of pixels used for this pixel */
+    n = 0;
+
+    /* Compute total counts around this pixel */
+    sum = 0.0;
+    for (jy = jy1; jy < jy2; jy++) {
+	img = x + (jy * nx) + jx1;
+	for (jx = jx1; jx < jx2; jx++) {
+	    if (*img != bpvali1) {
+		sum = sum + (double) *img;
+		n++;
+		}
+	    img++;
+	    }
+	}
+
+    if (n < 1)
+	return (ival);
+    else {
+	newval = sum / (double) n;
+	if (newval > 255.0)
+	    newval = 255.0;
+	if (newval < 0.0)
+	    newval = 0.0;
+	return ((unsigned char) newval);
+	}
+}
+
 short
 meanpixi2 (x, ival, ix, iy, nx, ny, ndx, ndy)
 
@@ -1561,7 +1812,7 @@ int	ndy;	/* Number of rows over which to compute the median */
     for (jy = jy1; jy < jy2; jy++) {
 	img = x + (jy * nx) + jx1;
 	for (jx = jx1; jx < jx2; jx++) {
-	    if (*img != bpvalr4) {
+	    if (*img != bpvalr4 && !isnan (*img)) {
 		sum = sum + (double) *img;
 		n++;
 		}
@@ -1622,7 +1873,7 @@ int	ndy;	/* Number of rows over which to compute the median */
     for (jy = jy1; jy < jy2; jy++) {
 	img = x + (jy * nx) + jx1;
 	for (jx = jx1; jx < jx2; jx++) {
-	    if (*img != bpval) {
+	    if (*img != bpval && !isnan (*img)) {
 		sum = sum + (double) *img;
 		n++;
 		}
@@ -1974,9 +2225,9 @@ int	nx,ny;	/* Number of columns and rows in image */
 	ixi = ix + ixbox[i];
 	iyi = iy + iybox[i];
 	if (ixi > -1 && iyi > -1 && ixi < nx && iyi < ny) {
-	    img = image + (iyi * ny) + ixi;
+	    img = image + (iyi * nx) + ixi;
 	    if (*img != bpvali2) {
-		flux = (double) *img;
+		flux = (double) image[ixi + (iyi * nx)];
 		twt = twt + gwt[i];
 		tpix = tpix + gwt[i] * flux;
 		np++;
@@ -2019,9 +2270,9 @@ int	nx,ny;	/* Number of columns and rows in image */
 	ixi = ix + ixbox[i];
 	iyi = iy + iybox[i];
 	if (ixi > -1 && iyi > -1 && ixi < nx && iyi < ny) {
-	    img = image + (iyi * ny) + ixi;
+	    img = image + (iyi * nx) + ixi;
 	    if (*img != bpvali4) {
-		flux = (double) *img;
+		flux = (double) image[ixi + (iyi * nx)];
 		twt = twt + gwt[i];
 		tpix = tpix + gwt[i] * flux;
 		np++;
@@ -2064,9 +2315,10 @@ int	nx,ny;	/* Number of columns and rows in image */
 	ixi = ix + ixbox[i];
 	iyi = iy + iybox[i];
 	if (ixi > -1 && iyi > -1 && ixi < nx && iyi < ny) {
-	    img = image + (iyi * ny) + ixi;
-	    if (*img != bpvalr4) {
-		flux = (double) image[ixi + (iyi * ny)];
+	    img = image + (iyi * nx) + ixi;
+	    /* printf ("%04d,%04d %04d,%04d: %g\n", ix, iy, ixi, iyi, *img); */
+	    if (*img != bpvalr4 && !isnan (*img)) {
+		flux = (double) image[ixi + (iyi * nx)];
 		twt = twt + gwt[i];
 		tpix = tpix + gwt[i] * flux;
 		np++;
@@ -2109,9 +2361,9 @@ int	nx,ny;	/* Number of columns and rows in image */
 	ixi = ix + ixbox[i];
 	iyi = iy + iybox[i];
 	if (ixi > -1 && iyi > -1 && ixi < nx && iyi < ny) {
-	    img = image + (iyi * ny) + ixi;
-	    if (*img != bpval) {
-		flux = image[ixi + (iyi * ny)];
+	    img = image + (iyi * nx) + ixi;
+	    if (*img != bpval && !isnan (*img)) {
+		flux = image[ixi + (iyi * nx)];
 		twt = twt + gwt[i];
 		tpix = tpix + gwt[i] * flux;
 		np++;
@@ -2404,8 +2656,8 @@ static double imapfr();
 /* PhotPix -- Compute counts within a strictly defined circular aperture
  *	      returns sum of pixel flux
  *	      Jul  4 1984 Original Fortran program by Sam Conner at MIT
- *	      Mar  2 1987 Ported to Unix by Doug Mink at SAO
- *	      Jan 30 2002 translated from Fortran to C by Doug Mink at SAO
+ *	      Mar  2 1987 Ported to Unix by Jessica Mink at SAO
+ *	      Jan 30 2002 translated from Fortran to C by Jessica Mink at SAO
  */
 
 double
@@ -2788,4 +3040,9 @@ double	rad;
  *
  * Jan  8 2007	Drop unused variables from SetBadVal()
  * Jan 11 2007	Add circular aperture photometry in PhotPix()
+ *
+ * May 15 2012	Add medpix() and meanpix() to generalize across pixel size
+ * May 16 2012	Add medpixi1() and meanpixi1() to handle 8-bit images
+ *
+ * Jun 17 2014	Ignore NaN pixels
  */

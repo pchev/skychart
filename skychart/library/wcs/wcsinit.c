@@ -1,8 +1,8 @@
 /*** File libwcs/wcsinit.c
- *** September 1, 2011
- *** By Doug Mink, dmink@cfa.harvard.edu
+ *** July 24, 2013
+ *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1998-2011
+ *** Copyright (C) 1998-2013
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -17,11 +17,11 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Correspondence concerning WCSTools should be addressed as follows:
-           Internet email: dmink@cfa.harvard.edu
-           Postal address: Doug Mink
+           Internet email: jmink@cfa.harvard.edu
+           Postal address: Jessica Mink
                            Smithsonian Astrophysical Observatory
                            60 Garden St.
                            Cambridge, MA 02138 USA
@@ -100,7 +100,7 @@ const char *hstring;	/* character string containing FITS header information
 const char *name;		/* Name of WCS conversion to be matched
 			   (case-independent) */
 {
-    char *upname, *uppercase();
+    char *upname;
     char cwcs, charwcs;
     int iwcs;
     char keyword[12];
@@ -143,7 +143,7 @@ const char *name;		/* Name of WCS conversion to be matched
 
 char *
 uppercase (string)
-char *string;
+const char *string;
 {
     int lstring, i;
     char *upstring;
@@ -242,11 +242,7 @@ char *wchar;		/* Suffix character for one of multiple WCS */
     double ut;
     int nax;
     int twod;
-    int iszpx = 0;
-    extern int tnxinit();
     extern int zpxinit();
-    extern int platepos();
-    extern int dsspos();
     void invert_wcs();
 
     wcs = (struct WorldCoor *) calloc (1, sizeof(struct WorldCoor));
@@ -400,32 +396,30 @@ char *wchar;		/* Suffix character for one of multiple WCS */
 	}
 
     /* World coordinate system reference coordinate information */
-    if (hgetsc (hstring, "CTYPE1", &mchar, 16, ctype1)) {
+    if (hgetsc (hstring, "CTYPE1", &mchar, 9, ctype1)) {
 
 	/* Read second coordinate type */
 	strcpy (ctype2, ctype1);
-	if (!hgetsc (hstring, "CTYPE2", &mchar, 16, ctype2))
+	if (!hgetsc (hstring, "CTYPE2", &mchar, 9, ctype2))
 	    twod = 0;
 	else
 	    twod = 1;
-	strcpy (wcs->ctype[0], ctype1);
-	strcpy (wcs->ctype[1], ctype2);
 	if (strsrch (ctype2, "LAT") || strsrch (ctype2, "DEC"))
 	    ilat = 2;
 	else
 	    ilat = 1;
-
-	/* Read third and fourth coordinate types, if present */
-	strcpy (wcs->ctype[2], "");
-	hgetsc (hstring, "CTYPE3", &mchar, 9, wcs->ctype[2]);
-	strcpy (wcs->ctype[3], "");
-	hgetsc (hstring, "CTYPE4", &mchar, 9, wcs->ctype[3]);
 
 	/* Set projection type in WCS data structure */
 	if (wcstype (wcs, ctype1, ctype2)) {
 	    wcsfree (wcs);
 	    return (NULL);
 	    }
+	    
+	/* Read third and fourth coordinate types, if present */
+	strcpy (wcs->ctype[2], "");
+	hgetsc (hstring, "CTYPE3", &mchar, 9, wcs->ctype[2]);
+	strcpy (wcs->ctype[3], "");
+	hgetsc (hstring, "CTYPE4", &mchar, 9, wcs->ctype[3]);
 
 	/* Get units, if present, for linear coordinates */
 	if (wcs->prjcode == WCS_LIN) {
@@ -759,7 +753,7 @@ char *wchar;		/* Suffix character for one of multiple WCS */
 
 	/* SCAMP convention */
 	if (wcs->prjcode == WCS_TAN && wcs->naxis == 2) { 
-	    int n;
+	    int n = 0;
 	    if (wcs->inv_x) {
 		poly_end(wcs->inv_x);
 		wcs->inv_x = NULL;
@@ -784,8 +778,8 @@ char *wchar;		/* Suffix character for one of multiple WCS */
 		    }
 		}
 
-	    /* If any PVi_j are set, add them to the structure */
-	    if (n > 0) {
+	    /* If any PVi_j are set, add them in the structure if no SIRTF distortion*/
+	    if (n > 0 && wcs->distcode != DISTORT_SIRTF) {
 		n = 0;
 
 		for (k = MAXPV; k >= 0; k--) {
@@ -1179,7 +1173,7 @@ invert_wcs( struct WorldCoor *wcs)
 	lngstep = (ymax-ymin)/(WCS_NGRIDPOINTS-1.0);
 	lngmin = ymin;
 	latstep = (xmax-xmin)/(WCS_NGRIDPOINTS-1.0);
-	latmin - xmin;
+	latmin = xmin;
 	}
 
     outpos = (double *)calloc(2*WCS_NGRIDPOINTS2,sizeof(double));
@@ -1607,4 +1601,10 @@ char	*mchar;		/* Suffix character for one of multiple WCS */
  * Mar 18 2011	Add invert_wcs() by Emmanuel Bertin for SCAMP
  * Mar 18 2011	Change Bertin's ARCSEC/DEG to S2D and DEG/ARCSEC to D2S
  * Sep  1 2011	Add TPV as TAN with SCAMP PVs
+ *
+ * Oct 19 2012	Drop unused variable iszpx; fix bug in latmin assignment
+ *
+ * Feb  1 2013	Externalize uppercase()
+ * Feb 07 2013	Avoid SWARP distortion if SIRTF distortion is present
+ * Jul 25 2013	Initialize n=0 when checking for SCAMP distortion terms (fix from Martin Kuemmel)
  */

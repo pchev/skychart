@@ -1,6 +1,6 @@
 /*  Nutation, IAU 2000b model */
 /*  Translated from Pat Wallace's Fortran subroutine iau_nut00b (June 26 2007)
-    into C by Doug Mink on September 5, 2008 */
+    into C by Jessica Mink on September 5, 2008 */
 
 #define NLS	77 /* number of terms in the luni-solar nutation model */
 

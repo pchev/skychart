@@ -1,8 +1,8 @@
 /*** File libwcs/sdssread.c
- *** October 22, 2007
- *** By Doug Mink, dmink@cfa.harvard.edu
+ *** September 16, 2013
+ *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 2004-2007
+ *** Copyright (C) 2004-2013
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -17,11 +17,11 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Correspondence concerning WCSTools should be addressed as follows:
-           Internet email: dmink@cfa.harvard.edu
-           Postal address: Doug Mink
+           Internet email: jmink@cfa.harvard.edu
+           Postal address: Jessica Mink
                            Smithsonian Astrophysical Observatory
                            60 Garden St.
                            Cambridge, MA 02138 USA
@@ -56,9 +56,17 @@ char sdssburl[64]="http://cas.sdss.org/dr5/en/tools/search/x_rect.asp"; */
 char sdssrurl[64]="http://cas.sdss.org/dr6/en/tools/search/x_radial.asp";
 char sdssburl[64]="http://cas.sdss.org/dr6/en/tools/search/x_rect.asp"; */
 
-/* SDSS DR7 search engine URL */
-char sdssrurl[64]="http://cas.sdss.org/dr7/en/tools/search/x_radial.asp";
-char sdssburl[64]="http://cas.sdss.org/dr7/en/tools/search/x_rect.asp";
+/* SDSS DR7 search engine US URL */
+char sdssrurl[64]="http://skyserver.sdss.org/dr7/en/tools/search/x_radial.asp";
+char sdssburl[64]="http://skyserver.sdss.org/dr7/en/tools/search/x_rect.asp";
+
+/* SDSS DR7 search engine former main server URL */
+/* char sdssrurl[64]="http://cas.sdss.org/dr7/en/tools/search/x_radial.asp";
+char sdssburl[64]="http://cas.sdss.org/dr7/en/tools/search/x_rect.asp"; */
+
+/* SDSS DR7 search engine UK alternate URL */
+/* char sdssrurl[64]="http://www.sdss.org.uk/dr7/en/tools/search/x_radial.asp";
+char sdssburl[64]="http://www.sdss.org.uk/dr7/en/tools/search/x_rect.asp"; */
 
 /* SDSS magnitudes */
 char sdssmag[6]="ugriz";
@@ -259,4 +267,10 @@ sdssc2t (csvbuff)
  * Jan  9 2007	Drop refcatname from argument list; it is not used
  * Jan 10 2007	Drop gnum argument from sdssread(); gobj replaced it
  * Oct 22 2007	Change path to Data Release 6
+ *
+ * May 01 2012	Change path to Data Release 7
+ *
+ * Sep 16 2013	Add alternate servers for SDSS
+ *
+ * Jan 13 2015	Add new main server for SDSS DR7
  */

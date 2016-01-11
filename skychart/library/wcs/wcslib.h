@@ -18,7 +18,7 @@
 *   
 *   You should have received a copy of the GNU Lesser General Public
 *   License along with this library; if not, write to the Free Software
-*   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 *
 *   Correspondence concerning WCSLIB may be directed to:
 *      Internet email: mcalabre@atnf.csiro.au
@@ -326,7 +326,7 @@ struct wcsprm {
 };
 
 #if __STDC__ || defined(__cplusplus)
-   int wcsset1(const int,
+   int wcsset(const int,
               const char[][9],
               struct wcsprm *);
 
@@ -342,7 +342,7 @@ struct wcsprm {
               struct linprm *,
               double[]);
 
-   int wcsrev1(const char[][9],
+   int wcsrev(const char[][9],
               struct wcsprm *,
               const double[], 
               struct linprm *,
@@ -372,12 +372,12 @@ struct wcsprm {
               double[]);
 
 #else
-   int wcsset1(), wcsfwd(), wcsrev1(), wcsmix();
+   int wcsset(), wcsfwd(), wcsrev(), wcsmix();
 #endif
 
-extern const char *wcsset1_errmsg[];
+extern const char *wcsset_errmsg[];
 extern const char *wcsfwd_errmsg[];
-extern const char *wcsrev1_errmsg[];
+extern const char *wcsrev_errmsg[];
 extern const char *wcsmix_errmsg[];
 
 #define WCSSET 137

@@ -1,8 +1,8 @@
 /*** File libwcs/wcs.c
- *** September 1, 2011
- *** By Doug Mink, dmink@cfa.harvard.edu
+ *** October 19, 2012
+ *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1994-2011
+ *** Copyright (C) 1994-2012
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -17,11 +17,11 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Correspondence concerning WCSTools should be addressed as follows:
-           Internet email: dmink@cfa.harvard.edu
-           Postal address: Doug Mink
+           Internet email: jmink@cfa.harvard.edu
+           Postal address: Jessica Mink
                            Smithsonian Astrophysical Observatory
                            60 Garden St.
                            Cambridge, MA 02138 USA
@@ -383,26 +383,28 @@ char	*ctype2;	/* FITS WCS projection for axis 2 */
     strcpy (ctypes[33], "TPV");
 
     /* Initialize distortion types */
-    strcpy (dtypes[1], "SIP");
 
     if (!strncmp (ctype1, "LONG",4))
 	strncpy (ctype1, "XLON",4);
-
-    strcpy (wcs->ctype[0], ctype1);
-    strcpy (wcs->c1type, ctype1);
-    strcpy (wcs->ptype, ctype1);
-
+    /* First coordinate type */
+    
     /* Linear coordinates */
-    if (!strncmp (ctype1,"LINEAR",6))
+    if (!strncmp (ctype1,"LINEAR",6)) {
 	wcs->prjcode = WCS_LIN;
+        strcpy (wcs->ctype[0], "LINEAR");
+    }
 
     /* Pixel coordinates */
-    else if (!strncmp (ctype1,"PIXEL",6))
+    else if (!strncmp (ctype1,"PIXEL",5)) {
 	wcs->prjcode = WCS_PIX;
+	strcpy (wcs->ctype[0], "PIXEL");
+    }
 
     /*Detector pixel coordinates */
-    else if (strsrch (ctype1,"DET"))
+    else if (strsrch (ctype1,"DET")) {  
 	wcs->prjcode = WCS_PIX;
+	strcpy (wcs->ctype[0], "PIXEL");
+    }
 
     /* Set up right ascension, declination, latitude, or longitude */
     else if (ctype1[0] == 'R' || ctype1[0] == 'D' ||
@@ -502,8 +504,12 @@ char	*ctype2;	/* FITS WCS projection for axis 2 */
     /* If not sky coordinates, assume linear */
     else {
 	wcs->prjcode = WCS_LIN;
+	strcpy (wcs->ctype[0], "LINEAR");
 	return (0);
 	}
+
+    strcpy (wcs->c1type, wcs->ctype[0]);
+    strcpy (wcs->ptype, wcs->ctype[0]);
 
     /* Second coordinate type */
     if (!strncmp (ctype2, "NPOL",4)) {
@@ -522,16 +528,18 @@ char	*ctype2;	/* FITS WCS projection for axis 2 */
 	}
     else
 	wcs->latbase = 0;
-    strcpy (wcs->ctype[1], ctype2);
-    strcpy (wcs->c2type, ctype2);
 
     /* Linear coordinates */
-    if (!strncmp (ctype2,"LINEAR",6))
+    if (!strncmp (ctype2,"LINEAR",6)) {
 	wcs->prjcode = WCS_LIN;
+	strcpy (wcs->ctype[1], "LINEAR");
+    }
 
     /* Pixel coordinates */
-    else if (!strncmp (ctype2,"PIXEL",6))
+    else if (!strncmp (ctype2,"PIXEL",5)) {  
 	wcs->prjcode = WCS_PIX;
+	strcpy (wcs->ctype[1], "PIXEL");
+    }
 
     /* Set up right ascension, declination, latitude, or longitude */
     else if (ctype2[0] == 'R' || ctype2[0] == 'D' ||
@@ -583,7 +591,9 @@ char	*ctype2;	/* FITS WCS projection for axis 2 */
     /* If not sky coordinates, assume linear */
     else {
 	wcs->prjcode = WCS_LIN;
+	strcpy (wcs->ctype[1], "LINEAR");
 	}
+    strcpy (wcs->c2type, wcs->ctype[1]);
 
     /* Set distortion code from CTYPE1 extension */
     setdistcode (wcs, ctype1);
@@ -1434,7 +1444,7 @@ double	x1,y1;	/* (RA,Dec) or (Long,Lat) in degrees */
 double	x2,y2;	/* (RA,Dec) or (Long,Lat) in degrees */
 
 {
-	double d1, d2, r, diffi;
+	double r, diffi;
 	double pos1[3], pos2[3], w, diff;
 	int i;
 
@@ -1469,7 +1479,7 @@ double	x1,y1;	/* (RA,Dec) or (Long,Lat) in degrees */
 double	x2,y2;	/* (RA,Dec) or (Long,Lat) in degrees */
 
 {
-	double d1, d2, r, diffi;
+	double d1, d2, r;
 	double pos1[3], pos2[3], w, diff;
 	int i;
 
@@ -2223,7 +2233,6 @@ char	*coorsys;	/* Input world coordinate system:
 double	*xpix,*ypix;	/* Image coordinates in pixels */
 int	*offscl;	/* 0 if within bounds, else off scale */
 {
-    struct WorldCoor *depwcs;	/* Dependent WCS structure */
     double xp, yp, xpi, ypi;
     double eqin, eqout;
     int sysin;
@@ -2332,7 +2341,7 @@ double  *ypos;           /* y (dec) coordinate (deg) */
 {
     int offscl;
     int i;
-    int wcsrev1();
+    int wcsrev();
     double wcscrd[4], imgcrd[4], pixcrd[4];
     double phi, theta;
     
@@ -2349,7 +2358,7 @@ double  *ypos;           /* y (dec) coordinate (deg) */
     pixcrd[3] = 1.0;
     for (i = 0; i < 4; i++)
 	imgcrd[i] = 0.0;
-    offscl = wcsrev1 ((void *)&wcs->ctype, &wcs->wcsl, pixcrd, &wcs->lin, imgcrd,
+    offscl = wcsrev ((void *)&wcs->ctype, &wcs->wcsl, pixcrd, &wcs->lin, imgcrd,
 		    &wcs->prj, &phi, &theta, wcs->crval, &wcs->cel, wcscrd);
     if (offscl == 0) {
 	*xpos = wcscrd[wcs->wcsl.lng];
@@ -2380,7 +2389,7 @@ double  *ypix;          /* y pixel number  (dec or lat without rotation) */
     *xpix = 0.0;
     *ypix = 0.0;
     if (wcs->wcsl.flag != WCSSET) {
-	if (wcsset1 (wcs->lin.naxis, (void *)&wcs->ctype, &wcs->wcsl) )
+	if (wcsset (wcs->lin.naxis, (void *)&wcs->ctype, &wcs->wcsl) )
 	    return (1);
 	}
 
@@ -2989,4 +2998,7 @@ char *cwcs;	/* Keyword suffix character for output WCS */
  * Mar 17 2011	Fix WCSDEP bug found by Ed Los
  * May  9 2011	Free WCS structure recursively if WCSDEP is used
  * Sep  1 2011	Add TPV projection type for SCAMP TAN with PVs
+ *
+ * Oct 19 2012	Drop d1 and d2 from wcsdist(); diffi from wcsdist1()
+ * Oct 19 2012	Drop depwcs; it's in main wcs structure
  */

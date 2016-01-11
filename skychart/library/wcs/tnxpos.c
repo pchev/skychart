@@ -1,6 +1,6 @@
 /*** File wcslib/tnxpos.c
  *** September 17, 2008
- *** By Doug Mink, dmink@cfa.harvard.edu
+ *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
  *** After IRAF mwcs/wftnx.x and mwcs/wfgsurfit.x
  *** Copyright (C) 1998-2008
@@ -18,11 +18,11 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Correspondence concerning WCSTools should be addressed as follows:
-           Internet email: dmink@cfa.harvard.edu
-           Postal address: Doug Mink
+           Internet email: jmink@cfa.harvard.edu
+           Postal address: Jessica Mink
                            Smithsonian Astrophysical Observatory
                            60 Garden St.
                            Cambridge, MA 02138 USA
@@ -510,7 +510,7 @@ struct WorldCoor *wcs;		/* pointer to the WCS descriptor */
 
 /* copyright(c) 1986 association of universities for research in astronomy inc.
  * wfgsurfit.x -- surface fitting package used by wcs function drivers.
- * Translated to C from SPP by Doug Mink, SAO, May 26, 1998
+ * Translated to C from SPP by Jessica Mink, SAO, May 26, 1998
  *
  * the following routines are used by the experimental function drivers tnx
  * and zpx to decode polynomial fits stored in the image header in the form

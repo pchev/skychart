@@ -1,10 +1,10 @@
 /*** File wcslib/zpxpos.c
- *** March 8, 2011
+ *** October 31, 2012
  *** By Frank Valdes, valdes@noao.edu
- *** Modified from tnxpos.c by Doug Mink, dmink@cfa.harvard.edu
+ *** Modified from tnxpos.c by Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
  *** After IRAF mwcs/wfzpx.x
- *** Copyright (C) 1998-2011
+ *** Copyright (C) 1998-2012
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -19,11 +19,11 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Correspondence concerning WCSTools should be addressed as follows:
-           Internet email: dmink@cfa.harvard.edu
-           Postal address: Doug Mink
+           Internet email: jmink@cfa.harvard.edu
+           Postal address: Jessica Mink
                            Smithsonian Astrophysical Observatory
                            60 Garden St.
                            Cambridge, MA 02138 USA
@@ -182,12 +182,12 @@ struct WorldCoor *wcs;	/* pointer to WCS structure */
 	    d2 = 0.;
 	    for (j = wcs->zpnp; j >= 1; j--) {
 		d2 = d2 * zd2 + j * wcs->prj.p[j];
-	    }
+		}
 	    if (d2 <= 0.)
 		break;
 	    zd1 = zd2;
 	    d1 = d2;
-	}
+	    }
 
 	/* Find where the derivative is 0. */
 	if (d2 <= 0.0) {
@@ -196,20 +196,22 @@ struct WorldCoor *wcs;	/* pointer to WCS structure */
 		d = 0.;
 		for (j = wcs->zpnp; j >= 1; j--) {
 		    d = d * zd + j * wcs->prj.p[j];
-		}
+		    }
 		if (fabs(d) < TOL)
 		    break;
 		if (d < 0.) {
 		    zd2 = zd;
 		    d2 = d;
-		} else {
+		    }
+		else {
 		    zd1 = zd;
 		    d1 = d;
+		    }
 		}
 	    }
 
 	/* No negative derivative. */
-	} else 
+	else 
 	    zd = PI;
 
 	r = 0.;
@@ -217,7 +219,7 @@ struct WorldCoor *wcs;	/* pointer to WCS structure */
 	    r = r * zd + wcs->prj.p[j];
 	wcs->zpzd = zd;
 	wcs->zpr = r;
-    }
+	}
 
     /* Compute image rotation */
     wcsrotset (wcs);
@@ -288,7 +290,7 @@ double	*xpos, *ypos;	/*o world coordinates (ra, dec) */
 	    }
 	}
 
-    /* get the axis numbers */
+    /* Get the axis numbers */
     if (wcs->coorflip) {
 	ira = 1;
 	idec = 0;
@@ -317,20 +319,22 @@ double	*xpos, *ypos;	/*o world coordinates (ra, dec) */
     y = yp;
     r = sqrt (x * x + y * y) / wcs->rodeg;
 
-    /* Solve. */
+    /* Solve */
 
     /* Constant no solution */
     if (k < 1) {
         *xpos = BADCVAL;
         *ypos = BADCVAL;
 	return (1);
+	}
 
-    /* Linear. */
-    } else if (k == 1) {
+    /* Linear */
+    else if (k == 1) {
         zd = (r - wcs->prj.p[0]) / wcs->prj.p[1];
+	}
 
-    /* Quadratic. */
-    } else if (k == 2) {
+    /* Quadratic */
+    else if (k == 2) {
 
         a = wcs->prj.p[2];
         b = wcs->prj.p[1];
@@ -340,33 +344,42 @@ double	*xpos, *ypos;	/*o world coordinates (ra, dec) */
 	    *xpos = BADCVAL;
 	    *ypos = BADCVAL;
 	    return (1);
-	}
+	    }
 	d = sqrt (d);
 
-	/* Choose solution closest to the pole.
+	/* Choose solution closest to the pole */
 	zd1 = (-b + d) / (2. * a);
 	zd2 = (-b - d) / (2. * a);
-	zd = min (zd1, zd2);
-	if (zd < -TOL)
-	    zd = max (zd1, zd2);
+	if (zd1 < zd2)
+	    zd = zd1;
+	else
+	    zd = zd2;
+	if (zd < -TOL) {
+	    if (zd1 > zd2)
+		zd = zd1;
+	    else
+		zd = zd2;
+	    }
 	if (zd < 0.) {
 	    if (zd < -TOL) {
 		*xpos = BADCVAL;
 		*ypos = BADCVAL;
 		return (1);
+		}
+	    zd = 0.;
 	    }
-	    zd = 0.
-	} else if (zd > PI) {
-	    if (zd > (PI + TOL) {
+	else if (zd > PI) {
+	    if (zd > (PI + TOL)) {
 		*xpos = BADCVAL;
 		*ypos = BADCVAL;
 		return (1);
+		}
+	    zd = PI;
 	    }
-	    zd = PI
 	}
 
-    /* Higher order solve iteratively. */
-    } else {
+    /* Higher order solve iteratively */
+    else {
 
         zd1 = 0.;
 	r1 = wcs->prj.p[0];
@@ -378,16 +391,18 @@ double	*xpos, *ypos;	/*o world coordinates (ra, dec) */
 		*xpos = BADCVAL;
 		*ypos = BADCVAL;
 		return (1);
-	    }
+		}
 	    zd = zd1;
-	} else if (r > r2) {
+	    }
+	else if (r > r2) {
 	    if (r > (r2 + TOL)) {
 		*xpos = BADCVAL;
 		*ypos = BADCVAL;
 		return (1);
-	    }
+		}
 	    zd = zd2;
-	} else {
+	    }
+	else {
 	    for (j=0; j<100; j++) {
 	        lambda = (r2 - r) / (r2 - r1);
 		if (lambda < 0.1)
@@ -403,20 +418,21 @@ double	*xpos, *ypos;	/*o world coordinates (ra, dec) */
 		        break;
 		    r1 = rt;
 		    zd1 = zd;
-		} else {
+		    }
+		else {
 		    if ((rt - r) < TOL)
 		        break;
 		    r2 = rt;
 		    zd2 = zd;
-		}
+		    }
 		lambda = zd2 - zd1;
 		lambda = fabs (zd2 - zd1);
 		if (fabs (zd2 - zd1) < TOL)
 		    break;
+		}
 	    }
 	}
-    }
-		        
+
     /* Compute phi */
     if (r == 0.0)
 	phi = 0.0;
@@ -714,4 +730,6 @@ struct IRAFsurface *sf;	/* the surface descriptor */
 
 /*
  * Mar  8 2011  Created from tnxpos.c and wfzpx.x
+ *
+ * Oct 31 2012	End comment on line 346 after pole; fix code thereafter
  */

@@ -1,8 +1,8 @@
 /*** File libwcs/binread.c
- *** September 25, 2009
- *** By Doug Mink, dmink@cfa.harvard.edu
+ *** September 16, 2011
+ *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1998-2009
+ *** Copyright (C) 1998-2011
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -17,11 +17,11 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Correspondence concerning WCSTools should be addressed as follows:
-           Internet email: dmink@cfa.harvard.edu
-           Postal address: Doug Mink
+           Internet email: jmink@cfa.harvard.edu
+           Postal address: Jessica Mink
                            Smithsonian Astrophysical Observatory
                            60 Garden St.
                            Cambridge, MA 02138 USA
@@ -44,14 +44,15 @@ char bindir[64]="/data/astrocat";
 static double *tdist;	/* Array of distances to sources from search center */
 static int ndist = 0;
 
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <stdio.h>
-#include <math.h>
-#include <string.h>
-#include <strings.h>
-#include <sys/types.h>
 #include <fcntl.h>
+#include <sys/file.h>
+#include <math.h>
+#include <errno.h>
+#include <string.h>
+#include <sys/types.h>
 #include "wcs.h"
 #include "fitsfile.h"
 #include "wcscat.h"
@@ -461,7 +462,7 @@ int	nlog;
 	}
 
     free ((void *)star);
-    free ((void *)tdist);
+    /* free ((void *)tdist); */
     return (nstar);
 }
 
@@ -1312,15 +1313,15 @@ int istar;	/* Star sequence number in binary catalog */
 	    st->num = (double) st->xno;
 	    break;
 	case 2:
-	    bcopy ((char *)&st->xno, (char *) &ino, 4);
+	    memcpy ((char *) &ino, (char *)&st->xno, 4);
 	    st->num = 0.0001 * (double) ino;
 	    break;
 	case 3:
-	    bcopy ((char *)&st->xno, (char *) &ino, 4);
+	    memcpy ((char *) &ino, (char *)&st->xno, 4);
 	    st->num = 0.00001 * (double) ino;
 	    break;
 	case 4:
-	    bcopy ((char *)&st->xno, (char *) &ino, 4);
+	    memcpy ((char *) &ino, (char *)&st->xno, 4);
 	    st->num = (double) ino;
 	    break;
 	default:
@@ -1595,4 +1596,6 @@ char    *filename;      /* Name of file to check */
  * Nov 28 2007	Move moveb() to catutil.c
  *
  * Sep 25 2009	Call movebuff() instead of moveb() and move mvebuff() to catutil.c
+ *
+ * Sep 16 2011	Change depricated bcopy() to memcpy()
  */

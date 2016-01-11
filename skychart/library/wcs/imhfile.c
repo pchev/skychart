@@ -1,8 +1,8 @@
 /*** File imhfile.c
- *** May 20, 2011
- *** By Doug Mink, dmink@cfa.harvard.edu
+ *** March 27, 2012
+ *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1996-2011
+ *** Copyright (C) 1996-2012
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -17,11 +17,11 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Correspondence concerning WCSTools should be addressed as follows:
-           Internet email: dmink@cfa.harvard.edu
-           Postal address: Doug Mink
+           Internet email: jmink@cfa.harvard.edu
+           Postal address: Jessica Mink
                            Smithsonian Astrophysical Observatory
                            60 Garden St.
                            Cambridge, MA 02138 USA
@@ -896,7 +896,7 @@ char	*fitsheader;	/* FITS image header */
     if (!access (hdrname, 0)) {
 	fd = open (hdrname, O_WRONLY);
 	if (fd < 3) {
-	    fprintf (stderr, "IRAFWIMAGE:  file %s not writeable\n", hdrname);
+	    fprintf (stderr, "IRAFWIMAGE:  file %s not writable\n", hdrname);
 	    return (0);
 	    }
 	}
@@ -993,7 +993,7 @@ char	*image;		/* IRAF image */
     if (!access (pixname, 0)) {
 	fd = open (pixname, O_WRONLY);
 	if (fd < 3) {
-	    fprintf (stderr, "IRAFWIMAGE:  file %s not writeable\n", pixname);
+	    fprintf (stderr, "IRAFWIMAGE:  file %s not writable\n", pixname);
 	    return (0);
 	    }
 	}
@@ -1033,7 +1033,7 @@ char	*pixname;	/* IRAF pixel file pathname */
 char	*hdrname;	/* IRAF image header file pathname */
 
 {
-    int len;
+    int len, plen;
     char *newpixname;
 
     newpixname = (char *) calloc (SZ_IM2PIXFILE, 1);
@@ -1053,7 +1053,11 @@ char	*hdrname;	/* IRAF image header file pathname */
 
 	/* add name */
 	newpixname[len] = '\0';
-	(void)strncat (newpixname, &pixname[4], SZ_IM2PIXFILE);
+	plen = strlen (pixname) - 4;
+	if (len + plen > SZ_IM2PIXFILE)
+	    (void)strncat (newpixname, &pixname[4], SZ_IM2PIXFILE - len);
+	else
+	    (void)strncat (newpixname, &pixname[4], plen);
 	}
 
     /* Bare pixel file with no path is assumed to be same as HDR$filename */
@@ -1932,4 +1936,6 @@ FILE *diskfile;		/* Descriptor of file for which to find size */
  * Jan  8 2007	Align header and image buffers properly by 4 and by BITPIX
  *
  * May 20 2011	Free newpixname, not pixname in irafwimage()
+ *
+ * Mar 27 2012	Fix pixname's appending to newpixname to avoid overflow
  */

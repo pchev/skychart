@@ -1,6 +1,6 @@
 /*** File polfit.c
- *** April 3, 2003
- *** By Doug Mink, after Bevington, page 141
+ *** July 26, 2012
+ *** By Jessica Mink, after Bevington, page 141
 
  *--- Polynomial least squares fitting program, almost identical to the
  *    one in Bevington, "Data Reduction and Error Analysis for the
@@ -175,7 +175,7 @@ double	*a;	/* Vector containing coeffiecients */
     xterm = 1.0;
     for (iterm = 0; iterm < norder; iterm++) {
 	y = y + a[iterm] * xterm;
-	xterm = xterm + x;
+	xterm = xterm * x;
 	}
     return (y);
 }
@@ -189,4 +189,7 @@ double	*a;	/* Vector containing coeffiecients */
  * Jul 25 2001	Add polcomp to return computed values
  *
  * Apr  3 2003	Drop unused variable freedom in polfit()
+ *
+ * Jul 26 2012	Fix xterm computation in polcomp() from + to *
+ *		(found by Raymond Carlberg of U.Toronto)
  */
