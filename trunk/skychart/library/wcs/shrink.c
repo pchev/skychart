@@ -1,6 +1,6 @@
 /* File libwcs/shrink.c
  * January 24, 2006
- * By Doug Mink, Harvard-Smithsonian Center for Astrophysics
+ * By Jessica Mink, Harvard-Smithsonian Center for Astrophysics
  */
 
 /* Return image buffer reduced by a given factor */

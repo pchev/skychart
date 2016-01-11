@@ -1,6 +1,6 @@
 /*** File libwcs/imgetwcs.c
  *** September 1, 2011
- *** By Doug Mink, dmink@cfa.harvard.edu (remotely based on UIowa code)
+ *** By Jessica Mink, jmink@cfa.harvard.edu (remotely based on UIowa code)
  *** Harvard-Smithsonian Center for Astrophysics
  *** Copyright (C) 1996-2011
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
@@ -17,11 +17,11 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Correspondence concerning WCSTools should be addressed as follows:
-	   Internet email: dmink@cfa.harvard.edu
-	   Postal address: Doug Mink
+	   Internet email: jmink@cfa.harvard.edu
+	   Postal address: Jessica Mink
 	                   Smithsonian Astrophysical Observatory
 	                   60 Garden St.
 	                   Cambridge, MA 02138 USA
@@ -717,7 +717,7 @@ char *dateobs;
  * Oct 17 1996	Do not print error messages unless verbose is set
  * Oct 30 1996	Keep equinox from image if EQREF is zero
  * Nov  1 1996	Declare undeclared subroutines; remove unused variables
- * Nov  4 1996	Add reference pixel and projection to wcsset1() call
+ * Nov  4 1996	Add reference pixel and projection to wcsset() call
  * Nov 14 1996	Add GetLimits() to deal with search limits around the poles
  * Nov 15 1996	Drop GetLimits(); code moved to individual catalog routines
  * Dec 10 1996	Fix precession and make equinox double

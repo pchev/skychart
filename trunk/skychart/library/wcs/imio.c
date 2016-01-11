@@ -1,8 +1,8 @@
 /*** File wcslib/imio.c
- *** June 11, 2007
- *** By Doug Mink, dmink@cfa.harvard.edu
+ *** October 30, 2012
+ *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1996-2007
+ *** Copyright (C) 1996-2012
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -17,11 +17,11 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Correspondence concerning WCSTools should be addressed as follows:
-           Internet email: dmink@cfa.harvard.edu
-           Postal address: Doug Mink
+           Internet email: jmink@cfa.harvard.edu
+           Postal address: Jessica Mink
                            Smithsonian Astrophysical Observatory
                            60 Garden St.
                            Cambridge, MA 02138 USA
@@ -120,6 +120,7 @@ int	y;		/* Zero-based vertical pixel number */
 {
     short *im2;
     int *im4;
+    unsigned char *im1;
     unsigned short *imu;
     float *imr;
     double *imd;
@@ -135,7 +136,8 @@ int	y;		/* Zero-based vertical pixel number */
     switch (bitpix) {
 
 	case 8:
-	  dpix = (double) image[(y*w) + x];
+	  im1 = (unsigned char *)image;
+	  dpix = (double) im1[(y*w) + x];
 	  break;
 
 	case 16:
@@ -214,11 +216,12 @@ int	y;
 double	dpix;
 
 {
-    short *im2;
-    int *im4;
-    unsigned short *imu;
-    float *imr;
     double *imd;
+    float *imr;
+    int *im4;
+    short *im2;
+    unsigned short *imu;
+    unsigned char *im1;
 
 /* Return if coordinates are not inside image */
     if (x < 0 || x >= w)
@@ -232,10 +235,11 @@ double	dpix;
     switch (bitpix) {
 
 	case 8:
+	    im1 = (unsigned char *)image;
 	    if (dpix < 0)
-		image[(y*w) + x] = (char) (dpix - 0.5);
+		im1[(y*w) + x] = (unsigned char) (dpix - 0.5);
 	    else
-		image[(y*w) + x] = (char) (dpix + 0.5);
+		im1[(y*w) + x] = (unsigned char) (dpix + 0.5);
 	    break;
 
 	case 16:
@@ -318,11 +322,12 @@ int	y;		/* Zero-based vertical pixel number */
 double	dpix;		/* Value to add to pixel */
 
 {
-    short *im2;
-    int *im4;
-    unsigned short *imu;
-    float *imr;
     double *imd;
+    float *imr;
+    int *im4;
+    short *im2;
+    unsigned short *imu;
+    unsigned char *im1;
     int ipix;
 
 /* Return if coordinates are not inside image */
@@ -338,10 +343,11 @@ double	dpix;		/* Value to add to pixel */
     switch (bitpix) {
 
 	case 8:
+	    im1 = (unsigned char *)image;
 	    if (dpix < 0)
-		image[ipix] = image[ipix] + (char) (dpix - 0.5);
+		image[ipix] = im1[ipix] + (unsigned char) (dpix - 0.5);
 	    else
-		image[ipix] = image[ipix] + (char) (dpix + 0.5);
+		image[ipix] = im1[ipix] + (unsigned char) (dpix + 0.5);
 	    break;
 
 	case 16:
@@ -401,11 +407,12 @@ int	w2;		/* Number of horizontal pixels in output image */
 int	x2, y2;		/* Row and column for output pixel */
 
 {
-    short *ims1, *ims2;
-    int *imi1, *imi2;
-    unsigned short *imu1, *imu2;
-    float rpix, *imr1, *imr2;
     double dpix, *imd1, *imd2;
+    float rpix, *imr1, *imr2;
+    int *imi1, *imi2;
+    short *ims1, *ims2;
+    unsigned short *imu1, *imu2;
+    unsigned char *imc1, *imc2;
 
     if (x1 < 0 || x2 < 0 || x1 >= w1 || x2 >= w2)
 	return;
@@ -415,61 +422,59 @@ int	x2, y2;		/* Row and column for output pixel */
     switch (bitpix1) {
 
 	case 8:
+	    imc1 = (unsigned char *)image1;
 	    switch (bitpix2) {
 		case 8:
-		    image2[(y2*w2) + x2] = image1[(y1*w1) + x1];
+		    imc2 = (unsigned char *)image2;
+		    imc2[(y2*w2) + x2] = imc1[(y1*w1) + x1];
 		    break;
 		case 16:
 		    ims2 = (short *)image2;
-		    ims2[(y2*w2) + x2] = image1[(y1*w1) + x1];
+		    ims2[(y2*w2) + x2] = (short) imc1[(y1*w1) + x1];
 		    break;
 		case 32:
 		    imi2 = (int *)image2;
-		    imi2[(y2*w2) + x2] = (int) image1[(y1*w1) + x1];
+		    imi2[(y2*w2) + x2] = (int) imc1[(y1*w1) + x1];
 		    break;
 		case -16:
 		    imu2 = (unsigned short *)image2;
-		    imu2[(y2*w2) + x2] = (unsigned short) image1[(y1*w1) + x1];
+		    imu2[(y2*w2) + x2] = (unsigned short) imc1[(y1*w1) + x1];
 		    break;
 		case -32:
 		    imr2 = (float *)image2;
-		    imr2[(y2*w2) + x2] = (float) image1[(y1*w1) + x1];
+		    imr2[(y2*w2) + x2] = (float) imc1[(y1*w1) + x1];
 		    break;
 		case -64:
 		    imd2 = (double *)image2;
-		    imd2[(y2*w2) + x2] = (double) image1[(y1*w1) + x1];
+		    imd2[(y2*w2) + x2] = (double) imc1[(y1*w1) + x1];
 		    break;
 		}
 	    break;
 
 	case 16:
+	    ims1 = (short *)image1;
 	    switch (bitpix2) {
 		case 8:
-		    ims1 = (short *)image1;
-		    image2[(y2*w2) + x2] = (char) ims1[(y1*w1) + x1];
+		    imc2 = (unsigned char *)image1;
+		    imc2[(y2*w2) + x2] = (unsigned char) ims1[(y1*w1) + x1];
 		    break;
 		case 16:
-		    ims1 = (short *)image1;
 		    ims2 = (short *)image2;
 		    ims2[(y2*w2) + x2] = ims1[(y1*w1) + x1];
 		    break;
 		case 32:
-		    ims1 = (short *)image1;
 		    imi2 = (int *)image2;
 		    imi2[(y2*w2) + x2] = (int) ims1[(y1*w1) + x1];
 		    break;
 		case -16:
-		    ims1 = (short *)image1;
 		    imu2 = (unsigned short *)image2;
 		    imu2[(y2*w2) + x2] = (unsigned short) ims1[(y1*w1) + x1];
 		    break;
 		case -32:
-		    ims1 = (short *)image1;
 		    imr2 = (float *)image2;
 		    imr2[(y2*w2) + x2] = (float) ims1[(y1*w1) + x1];
 		    break;
 		case -64:
-		    ims1 = (short *)image1;
 		    imd2 = (double *)image2;
 		    imd2[(y2*w2) + x2] = (double) ims1[(y1*w1) + x1];
 		    break;
@@ -477,33 +482,29 @@ int	x2, y2;		/* Row and column for output pixel */
 	    break;
 
 	case 32:
+	    imi1 = (int *)image1;
 	    switch (bitpix2) {
 		case 8:
-		    imi1 = (int *)image1;
-		    image2[(y2*w2) + x2] = (char) imi1[(y1*w1) + x1];
+		    imc2 = (unsigned char *)image2;
+		    imc2[(y2*w2) + x2] = (unsigned char) imi1[(y1*w1) + x1];
 		    break;
 		case 16:
-		    imi1 = (int *)image1;
 		    ims2 = (short *)image2;
 		    ims2[(y2*w2) + x2] = (short) imi1[(y1*w1) + x1];
 		    break;
 		case 32:
-		    imi1 = (int *)image1;
 		    imi2 = (int *)image2;
 		    imi2[(y2*w2) + x2] = imi1[(y1*w1) + x1];
 		    break;
 		case -16:
-		    imi1 = (int *)image1;
 		    imu2 = (unsigned short *)image2;
 		    imu2[(y2*w2) + x2] = (unsigned short) imi1[(y1*w1) + x1];
 		    break;
 		case -32:
-		    imi1 = (int *)image1;
 		    imr2 = (float *)image2;
 		    imr2[(y2*w2) + x2] = (float) imi1[(y1*w1) + x1];
 		    break;
 		case -64:
-		    imi1 = (int *)image1;
 		    imd2 = (double *)image2;
 		    imd2[(y2*w2) + x2] = (double) imi1[(y1*w1) + x1];
 		    break;
@@ -511,33 +512,29 @@ int	x2, y2;		/* Row and column for output pixel */
 	    break;
 
 	case -16:
+	    imu1 = (unsigned short *)image1;
 	    switch (bitpix2) {
 		case 8:
-		    imu1 = (unsigned short *)image1;
-		    image2[(y2*w2) + x2] = (char) imu1[(y1*w1) + x1];
+		    imc2 = (unsigned char *)image2;
+		    imc2[(y2*w2) + x2] = (unsigned char) imu1[(y1*w1) + x1];
 		    break;
 		case 16:
-		    imu1 = (unsigned short *)image1;
 		    ims2 = (short *)image2;
 		    ims2[(y2*w2) + x2] = (short) imu1[(y1*w1) + x1];
 		    break;
 		case 32:
-		    imu1 = (unsigned short *)image1;
 		    imi2 = (int *)image2;
 		    imi2[(y2*w2) + x2] = (int) imu1[(y1*w1) + x1];
 		    break;
 		case -16:
-		    imu1 = (unsigned short *)image1;
 		    imu2 = (unsigned short *)image2;
 		    imu2[(y2*w2) + x2] = imu1[(y1*w1) + x1];
 		    break;
 		case -32:
-		    imu1 = (unsigned short *)image1;
 		    imr2 = (float *)image2;
 		    imr2[(y2*w2) + x2] = (float) imu1[(y1*w1) + x1];
 		    break;
 		case -64:
-		    imu1 = (unsigned short *)image1;
 		    imd2 = (double *)image2;
 		    imd2[(y2*w2) + x2] = (double) imu1[(y1*w1) + x1];
 		    break;
@@ -549,10 +546,11 @@ int	x2, y2;		/* Row and column for output pixel */
 	    rpix = imr1[(y1*w1) + x1];
 	    switch (bitpix2) {
 		case 8:
+		    imc2 = (unsigned char *)image2;
 		    if (rpix < 0.0)
-			image2[(y2*w2) + x2] = (char) (rpix - 0.5);
+			imc2[(y2*w2) + x2] = (unsigned char) 0;
 		    else
-			image2[(y2*w2) + x2] = (char) (rpix + 0.5);
+			imc2[(y2*w2) + x2] = (unsigned char) (rpix + 0.5);
 		    break;
 		case 16:
 		    ims2 = (short *)image2;
@@ -591,11 +589,11 @@ int	x2, y2;		/* Row and column for output pixel */
 	    dpix = imd1[(y1*w1) + x1];
 	    switch (bitpix2) {
 		case 8:
-		    imd1 = (double *)image1;
+		    imc2 = (unsigned char *)image2;
 		    if (dpix < 0.0)
-			image2[(y2*w2) + x2] = (char) (dpix - 0.5);
+			imc2[(y2*w2) + x2] = (unsigned char) 0;
 		    else
-			image2[(y2*w2) + x2] = (char) (dpix + 0.5);
+			imc2[(y2*w2) + x2] = (unsigned char) (dpix + 0.5);
 		    break;
 		case 16:
 		    ims2 = (short *)image2;
@@ -656,16 +654,17 @@ int	npix;		/* Number of pixels to check */
     double dmax = 0.0;
     double ipd;
     int ipix, pix2;
-    char imaxc, ipc;
+    unsigned char *imc, imaxc, ipc;
 
     pix2 = pix1 + npix;
 
     switch (bitpix) {
 
 	case 8:
-	    imaxc = *(image + pix1);
+	    imc = (unsigned char *)(image);
+	    imaxc = *(imc + pix1);
 	    for (ipix = pix1; ipix < pix2; ipix++) {
-		ipc = *(image + ipix);
+		ipc = *(imc + ipix);
 		if (ipc > imaxc)
 		    imaxc = ipc;
 		}
@@ -751,23 +750,24 @@ int	pix1;		/* Offset of first pixel to check */
 int	npix;		/* Number of pixels to check */
 
 {
-    short *im2, imin2, *ip2, *il2;
+    short *im2, imin2, ip2;
     int *im4, imin4, ip4;
     unsigned short *imu, iminu, ipu;
     float *imr, iminr, ipr;
     double *imd, ipd;
     double dmin = 0.0;
     int ipix, pix2;
-    char cmin, cp;
+    unsigned char *imc, cmin, cp;
 
     pix2 = pix1 + npix;
 
     switch (bitpix) {
 
 	case 8:
-	    cmin = *(image + pix1);
+	    imc = (unsigned char *)image;
+	    cmin = *(imc + pix1);
 	    for (ipix = pix1; ipix < pix2; ipix++) {
-		cp = *(image + ipix);
+		cp = *(imc + ipix);
 		if (cp < cmin)
 		    cmin = cp;
 		}
@@ -777,12 +777,10 @@ int	npix;		/* Number of pixels to check */
 	case 16:
 	    im2 = (short *)image + pix1;
 	    imin2 = *im2;
-	    il2 = im2 + npix;
-	    ip2 = im2;
-	    while (ip2 < il2) {
-		if (*ip2 < imin2)
-		    imin2 = *ip2;
-		ip2++;
+	    for (ipix = pix1; ipix < pix2; ipix++) {
+		ip2 = *(im2 + ipix);
+		if (ip2 < imin2)
+		    imin2 = ip2;
 		}
 	    dmin = (double) imin2;
 	    break;
@@ -856,7 +854,7 @@ int	npix;		/* Number of pixels to extract */
 double	dpix;		/* Value to add to pixels */
 
 {
-    char *imc, ccon;
+    unsigned char *imc, ccon;
     short *im2, jcon;
     int *im4, icon;
     unsigned short *imu, ucon;
@@ -872,11 +870,11 @@ double	dpix;		/* Value to add to pixels */
     switch (bitpix) {
 
 	case 8:
-	    imc = image + pix1;
+	    imc = (unsigned char *) (image + pix1);
 	    if (dpix < 0)
-		ccon = (char) (dpix - 0.5);
+		ccon = (unsigned char) (dpix - 0.5);
 	    else
-		ccon = (char) (dpix + 0.5);
+		ccon = (unsigned char) (dpix + 0.5);
 	    for (ipix = pix1; ipix < pix2; ipix++)
 		*imc++ += ccon;
 	    break;
@@ -1538,4 +1536,9 @@ imswapped ()
  *
  * Jan  8 2007	Include fitsfile.h instead of imio.h
  * Jun 11 2007	Add minvec() and speed up maxvec()
+ *
+ * Apr 12 2012	Fix 8-bit variables to be unsigned char
+ * Oct 19 2012	Fix errors with character images in minvec() and maxvec()
+ * Oct 31 2012	Fix errors with short images in minvec() and maxvec()
+ * Oct 31 2012	Drop unused variable il2 from minvec()
  */

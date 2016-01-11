@@ -1,8 +1,8 @@
 /*** File libwcs/tabread.c
- *** September 22, 2010
- *** By Doug Mink, dmink@cfa.harvard.edu
+ *** August 29, 2014
+ *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1996-2010
+ *** Copyright (C) 1996-2014
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -17,11 +17,11 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Correspondence concerning WCSTools should be addressed as follows:
-	   Internet email: dmink@cfa.harvard.edu
-	   Postal address: Doug Mink
+	   Internet email: jmink@cfa.harvard.edu
+	   Postal address: Jessica Mink
 	                   Smithsonian Astrophysical Observatory
 	                   60 Garden St.
 	                   Cambridge, MA 02138 USA
@@ -1367,7 +1367,8 @@ int	nbbuff;		/* Number of bytes in buffer; 0=read whole file */
 	    strncpy (keyword, startab->colname[i], startab->lcol[i]);
 	else
 	    strncpy (keyword, startab->colname[i], 15);
-	if (strcsrch (keyword, "mag") && !strcsrch (keyword, "err")) {
+	if (strcsrch (keyword, "mag") && !strcsrch (keyword, "err")
+	    && !strcsrch (keyword, "code")) {
 	    strcpy (sc->keymag[sc->nmag], keyword);
 	    sc->entmag[sc->nmag] = icol;
 	    sc->nmag++;
@@ -1384,6 +1385,7 @@ int	nbbuff;		/* Number of bytes in buffer; 0=read whole file */
 	    }
 	else if ((keyword[0] == 'M' || keyword[0] == 'm') &&
 		 !strcsrch (keyword, "err") &&
+		 !strcsrch (keyword, "code") &&
 		 !strcsrch (keyword, "flag")) {
 	    strcpy (sc->keymag[sc->nmag], keyword);
 	    sc->entmag[sc->nmag] = icol;
@@ -1947,6 +1949,7 @@ int	nbbuff;		/* Number of bytes in buffer; 0=read whole file */
     char *tabnew, *tabline, *lastline;
     char *tabcomma, *nextline;
     char *thisname, *tabname;
+    char tabcstr[4];
     int thistab, itab, nchar, nbtab;
     int formfeed = (char) 12;
     struct TabTable *tabtable;
@@ -2126,6 +2129,12 @@ int	nbbuff;		/* Number of bytes in buffer; 0=read whole file */
 	    (void) fclose (fcat);
 	    tabclose (tabtable);
 	    if (tabcomma != NULL) *tabcomma = ',';
+	    return (NULL);
+	    }
+	tabcstr[0] = tabline[1];
+	tabcstr[1] = (char) 0;
+	if ( tabline[1] != '-' && tabline[1] != (char)9 ) {
+	    sprintf (taberr,"TABOPEN: No - line in tab table %s",tabfile);
 	    return (NULL);
 	    }
 	tabtable->tabhead = lastline;
@@ -2715,20 +2724,43 @@ istab (filename)
 
 char    *filename;      /* Name of file to check */
 {
-    struct TabTable *tabtable;
+    FILE *diskfile;
+    char *line;
+    int ncmax=63;
 
     /* First check file extension */
     if (strsrch (filename, ".tab"))
 	return (1);
 
-    /* If no .tab file extension, try opening the file */
+    /* If no .tab file extension, look for tab on first line */
     else {
-	if ((tabtable = tabopen (filename, 10000)) != NULL) {
-	    tabclose (tabtable);
+	/* Open file */
+	if ((diskfile = fopen (filename, "r")) == NULL)
+	    return (0);
+
+	/* Allocate buffer for first line of file */
+	line = (char *)calloc (1, 63);
+
+	/* Return 0 if no characters in first line */
+	if (!next_line (diskfile, ncmax, line)) {
+	    fclose (diskfile);
+	    free (line);
+	    return (0);
+	    }
+
+	/* Return 0 if there is a tab in the first line */
+	if (strchr (line, (char)9)) {
+	    fclose (diskfile);
+	    free (line);
 	    return (1);
 	    }
-	else
+
+	/* Otherwise, return 0 */
+	else {
+	    fclose (diskfile);
+	    free (line);
 	    return (0);
+	    }
 	}
 }
 
@@ -2900,8 +2932,12 @@ char    *filename;      /* Name of file to check */
  * Jul 23 2007	Add ...dist... as possible "magnitude"
  *
  * Aug 17 2009	Fix columns for declination column name
- * Sep 25 2009	Fix memory leaks found by Douglas Burke
+ * Sep 25 2009	Fix memory leaks found by Jessicalas Burke
  * Sep 30 2009	Fix bugs freeing object names for first pass and farthest star
  *
  * Sep 22 2010	Fix bug when checking file which is not tab table
+ *
+ * Jun 20 2014	Not a tab table if no tab in first line
+ * Aug 28 2014	Fix istab() and tabread()
+ * Aug 29 2014	Exclude "code" from magnitude keywords
  */

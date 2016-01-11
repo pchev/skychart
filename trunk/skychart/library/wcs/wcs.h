@@ -1,8 +1,8 @@
 /*** File libwcs/wcs.h
- *** September 9, 2011
- *** By Doug Mink, dmink@cfa.harvard.edu
+ *** February 1, 2013
+ *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1994-2011
+ *** Copyright (C) 1994-2013
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -17,11 +17,11 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Correspondence concerning WCSTools should be addressed as follows:
-           Internet email: dmink@cfa.harvard.edu
-           Postal address: Doug Mink
+           Internet email: jmink@cfa.harvard.edu
+           Postal address: Jessica Mink
                            Smithsonian Astrophysical Observatory
                            60 Garden St.
                            Cambridge, MA 02138 USA
@@ -190,13 +190,13 @@ struct WorldCoor {
 #define WCS_CSC 24	/* COBE quadrilateralized Spherical Cube */
 #define WCS_QSC 25	/* Quadrilateralized Spherical Cube */
 #define WCS_TSC 26	/* Tangential Spherical Cube */
-#define WCS_NCP 27	/* Special case of SIN */
-#define WCS_GLS 28	/* Same as SFL */
+#define WCS_NCP 27	/* Special case of SIN from AIPS*/
+#define WCS_GLS 28	/* Same as SFL from AIPS*/
 #define WCS_DSS 29	/* Digitized Sky Survey plate solution */
 #define WCS_PLT 30	/* Plate fit polynomials (SAO) */
-#define WCS_TNX 31	/* Gnomonic = Tangent Plane (NOAO with corrections) */
-#define WCS_ZPX 32	/* Gnomonic = Tangent Plane (NOAO with corrections) */
-#define WCS_TPV 33	/* Gnomonic = Tangent Plane (NOAO with corrections) */
+#define WCS_TNX 31	/* Tangent Plane (NOAO corrections) */
+#define WCS_ZPX 32	/* Zenithal Azimuthal Polynomial (NOAO corrections) */
+#define WCS_TPV 33	/* Tangent Plane (SCAMP corrections) */
 #define NWCSTYPE 34	/* Number of WCS types (-1 really means no WCS) */
 
 /* Coordinate systems */
@@ -295,6 +295,8 @@ extern "C" {
 	const char* hstring,	/* FITS header */
 	int len,		/* Length of FITS header */
 	char *wcschar);		/* WCS character (A-Z) */
+    char *uppercase (		/* Convert string of any case to uppercase */
+	const char *string);		/* String to convert */
 
     /* WCS subroutines in wcs.c */
     void wcsfree (		/* Free a WCS structure and its contents */
@@ -735,7 +737,8 @@ struct WorldCoor *wcsinitc(); /* set up a WCS structure from a FITS image header
 struct WorldCoor *wcsninitc(); /* set up a WCS structure from a FITS image header */
 struct WorldCoor *wcsxinit(); /* set up a WCS structure from arguments */
 struct WorldCoor *wcskinit(); /* set up a WCS structure from keyword values */
-void wcsfree(void);		/* Free a WCS structure and its contents */
+char *uppercase();	/* Convert string of any case to uppercase */
+void wcsfree(void);	/* Free a WCS structure and its contents */
 int wcstype();		/* Set projection type from header CTYPEs */
 void wcscdset();	/* Set scaling and rotation from CD matrix */
 void wcsdeltset();	/* set scaling and rotation from CDELTs and CROTA2 */
@@ -865,7 +868,7 @@ extern int zpxpix();	/* Inverse transform (world to physical) gnomonic projectio
  * Jan 16 1998	Add Mark Calabretta's WCSLIB data structures
  * Jan 16 1998	Add LONGPOLE, LATPOLE, and PROJP constants for Calabretta
  * Jan 22 1998	Add ctype[], crpix[], crval[], and cdelt[] for Calabretta
- * Jan 23 1998	Change wcsset1() to wcsxinit() and pcode to prjcode
+ * Jan 23 1998	Change wcsset() to wcsxinit() and pcode to prjcode
  * Jan 23 1998	Define projection type flags
  * Jan 26 1998	Remove chip rotation
  * Jan 26 1998	Add chip correction polynomial
@@ -960,4 +963,7 @@ extern int zpxpix();	/* Inverse transform (world to physical) gnomonic projectio
  * Mar 14 2011	Add SCAMP polynomial projection coefficients
  * Sep  1 2011	Add TPV TAN projectioin with SCAT PV terms
  * Sep  9 2011	Fix comment on TPV declaration
+ *
+ * Feb  1 2013	Add uppercase() from wcsinit()
+ * Feb 25 2013	Pass const string to uppercase()
  */

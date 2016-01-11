@@ -1,7 +1,7 @@
 /*** File libwcs/wcscat.h
- *** April 06, 2010
- *** By Doug Mink, dmink@cfa.harvard.edu
- *** Copyright (C) 1998-2010
+ *** February 15, 2013
+ *** By Jessica Mink, jmink@cfa.harvard.edu
+ *** Copyright (C) 1998-2013
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -16,11 +16,11 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Correspondence concerning WCSTools should be addressed as follows:
-           Internet email: dmink@cfa.harvard.edu
-           Postal address: Doug Mink
+           Internet email: jmink@cfa.harvard.edu
+           Postal address: Jessica Mink
                            Smithsonian Astrophysical Observatory
                            60 Garden St.
                            Cambridge, MA 02138 USA
@@ -206,11 +206,12 @@ struct TabTable {
 #define SKY2K		30	/* SKY2000 Master Catalog */
 #define SKYBOT		31	/* SKYBOT Solar System Objects */
 #define UCAC3		32	/* USNO CCD Astrograph Catalog 3.0 (2009) */
+#define UCAC4		33	/* USNO CCD Astrograph Catalog 4.0 (2013) */
 #define TABCAT		-1	/* StarBase tab table catalog */
 #define BINCAT		-2	/* TDC binary catalog */
 #define TXTCAT		-3	/* TDC ASCII catalog */
 #define WEBCAT		-4	/* Tab catalog via the web */
-#define NUMCAT		31	/* Number of predefined catalogs */
+#define NUMCAT		33	/* Number of predefined catalogs */
 
 #define EP_EP   1	/* Output epoch as fractional year */
 #define EP_JD   2	/* Output epoch as Julian Date */
@@ -225,6 +226,8 @@ struct Range {
     double last;	/* Current maximum value */
     double step;	/* Current step in value */
     double value;	/* Current value */
+    double valmin;	/* Minimum value in all ranges */
+    double valmax;	/* Maximum value in all ranges */
     double ranges[MAXRANGE*3];	/* nranges sets of first, last, step */
     int nvalues;	/* Total number of values in all ranges */
     int nranges;	/* Number of ranges */
@@ -1693,4 +1696,8 @@ double polcomp();	/* Evaluate polynomial from polfit coefficients */
  * Nov  3 2009	Parameterize as MAXNMAG the maximum number of magnitudes
  *
  * Apr 06 2010	Add fillblank argument to agets()
+ *
+ * May 16 2012	Add valmin and valmax to Range data structure
+ *
+ * Feb 15 2013	Add UCAC4 to list of catalog codes
  */

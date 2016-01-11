@@ -1,8 +1,8 @@
 /*** File libwcs/gsc2read.c
- *** August 17, 2009
- *** By Doug Mink, dmink@cfa.harvard.edu
+ *** March 24, 2015
+ *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 2001-2009
+ *** Copyright (C) 2001-2015
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -17,11 +17,11 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Correspondence concerning WCSTools should be addressed as follows:
-           Internet email: dmink@cfa.harvard.edu
-           Postal address: Doug Mink
+           Internet email: jmink@cfa.harvard.edu
+           Postal address: Jessica Mink
                            Smithsonian Astrophysical Observatory
                            60 Garden St.
                            Cambridge, MA 02138 USA
@@ -43,7 +43,7 @@ static void parsex();
 #define LINE    1024
 
 /* URL for GSC II search engine at STScI Catalogs and Surveys Branch */
-char gsc23url[64]="http://gsss.stsci.edu/webservices/GSC2/GSC2DataReturn.aspx";
+char gsc23url[64]="http://gsss.stsci.edu/webservices/vo/CatalogSearch.aspx";
 
 /* GSC2READ -- Read GSC II catalog stars over the web */
 
@@ -85,7 +85,6 @@ int	nlog;		/* 1 for diagnostics */
     double ras, ds;
     char sr[4], sd[4];
     double ra, dec, mag, ddra;
-    char rastr[32], decstr[32];
     char *gsc2url;
 
     /* Set URL for search command */
@@ -106,24 +105,16 @@ int	nlog;		/* 1 for diagnostics */
     dec = cdec;
     if (sysout != WCS_J2000)
 	wcscon (sysout, WCS_J2000, eqout, 2000.0, &ra, &dec, epout);
-    ra2str (rastr, 32, ra, 3);
-    dec2str (decstr, 32, dec, 2);
 
-    parsex (rastr, sr, &rah, &ram, &ras);
-    sprintf (srchurl, "?RAH=%d&RAM=%d&RAS=%.3f&", rah, ram, ras);
-    parsex (decstr, sd, &dd, &dm, &ds);
-    sprintf (temp, "DSN=%1s&DD=%d&DM=%d&DS=%.3f&", sd, dd, dm, ds);
-    strcat (srchurl, temp);
+    sprintf (srchurl, "?RA=%.6f&DEC=%.6f&", ra, dec);
     if (drad != 0.0) {
-	dr = drad * 60.0;
+	dr = drad;
 	}
     else {
 	ddra = dra * cos (degrad (cdec));
-	dr = sqrt (ddra*ddra + ddec*ddec) * 60.0;
+	dr = sqrt (ddra*ddra + ddec*ddec);
 	}
-    sprintf (temp, "EQ=2000&SIZE=%.3f&SRCH=Radius&FORMAT=TSV&CAT=GSC23&", dr);
-    strcat (srchurl, temp);
-    sprintf (temp, "HSTID=&GSC1ID=");
+    sprintf (temp, "EQ=2000&SR=%.3f&FORMAT=tsv&CAT=gsc23&", dr);
     strcat (srchurl, temp);
 
     if (nlog > 0)
@@ -314,21 +305,45 @@ gsc2t2t (tsvbuff)
 
 {
     char *tabbuff;	/* Output tab-separated table */
-    int lbuff, i, j;
+    int lbuff, i, ih, j, k, kfirst;
+    char tsvbi, tsvbj;
     char ctab = (char) 9;
     char clf = '\n';
     char ccr = '\r';
     char csp = ' ';
+    char cdash = '-';
+    char colon = ':';
 
     /* Allocate buffer for tab-separated table with header */
     lbuff = strlen (tsvbuff);
-    tabbuff = (char *) calloc (lbuff, 1);
+    tabbuff = (char *) calloc (2*lbuff, 1);
 
-    /* Copy input into new buffer dropping extra carriage returns */
+    /* Copy input into new buffer dropping first line and extra carriage returns */
+    /* Add a line of dashes after the header line */
     i = 0;
+    ih = 0;
     for (j = 0; j < lbuff; j++) {
-	if (tsvbuff[j] != csp && tsvbuff[j] != ccr)
-	    tabbuff[i++] = tsvbuff[j];
+	tsvbj = tsvbuff[j];
+	if (tsvbj == clf) {
+	    ih++;
+	    if (ih == 1)
+		kfirst = j + 1;
+	    if (ih == 2) {
+		tabbuff[i++] = clf;
+		for (k = kfirst; k < j; k++) {
+		    if (tsvbuff[k] == ctab)
+			tabbuff[i++] = ctab;
+		    else
+			tabbuff[i++] = cdash;
+		    }
+		}
+	    }
+	if (ih > 0 && tsvbj != csp && tsvbj != ccr) {
+	    if (tsvbi == ctab && tsvbj == ctab)
+		tabbuff[i++] = '0';
+	    tabbuff[i++] = tsvbj;
+	    tsvbi = tsvbj;
+	    }
 	}
     tabbuff[i++] = (char) 0;
 
@@ -370,4 +385,9 @@ gsc2t2t (tsvbuff)
  * Oct 24 2008	Add gsc2t2t to drop extra characters from returned table
  *
  * Aug 17 2009	Set proper motion to 0.0 for all versions
+ *
+ * Aug 29 2014	Update to read GSC2.3.3
+ * Aug 29 2014	Add line of dashes after header to returned table
+ *
+ * Mar 24 2015	Drop concatenation of "empty" string to search URL
  */

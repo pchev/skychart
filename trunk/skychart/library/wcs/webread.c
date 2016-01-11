@@ -1,9 +1,9 @@
 /*** File webread.c
- *** October 29, 2010
- *** By Doug Mink, dmink@cfa.harvard.edu
+ *** February 6, 2015
+ *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
  *** (http code from John Roll)
- *** Copyright (C) 2000-2010
+ *** Copyright (C) 2000-2015
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -18,11 +18,11 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Correspondence concerning WCSTools should be addressed as follows:
-           Internet email: dmink@cfa.harvard.edu
-           Postal address: Doug Mink
+           Internet email: jmink@cfa.harvard.edu
+           Postal address: Jessica Mink
                            Smithsonian Astrophysical Observatory
                            60 Garden St.
                            Cambridge, MA 02138 USA
@@ -49,9 +49,15 @@
 
 #include <sys/time.h>
 #include <sys/types.h>
+
+/* for MinGW */
+#ifdef MSWIN
+#include <winsock2.h>
+#else
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#endif
 
 /* static int FileINetParse (char *file,int port,struct sockaddr_in *adrinet);*/
 static int FileINetParse();
@@ -592,46 +598,79 @@ int	*lbuff;	/* Length of buffer (returned) */
     char *newbuff;
     char *urlpath;
     char *servurl;
+    char *port;
     int	status;
     int lserver;
-    int chunked = 0;
     int lread;
     int lchunk, lline;
-    int nbcont = 0;
     int lcbuff;
     int lb;
     int ltbuff;
     int lcom;
+    int i;
+    int chunked = 0;
+    int nport = 80;
+    int nbcont = 0;
     char *cbcont;
     char *newserver;
     char *sokptr;
+    char *newpath;
+    char *encodeURL();
+    char czero;
 
     *lbuff = 0;
     newbuff = NULL;
     diag = 0;
+    czero = (char) 0;
 
     /* Extract server name and path from URL */
     servurl = url;
     if (!strncmp(url, "http://", 7))
 	servurl = servurl + 7;
     urlpath = strchr (servurl, '/');
-    lserver = urlpath - servurl;
-    if ((server = (char *) malloc (lserver+2)) == NULL)
-	return (NULL);
-    strncpy (server, servurl, lserver);
-    server[lserver] = (char) 0;
+    if (urlpath != NULL) {
+	lserver = urlpath - servurl;
+	if ((server = (char *) malloc (lserver+2)) == NULL)
+	    return (NULL);
+	strncpy (server, servurl, lserver);
+	server[lserver] = (char) 0;
+	if ( port = strchr (servurl,':') ) {
+	    *port = '\0';
+	    port++;
+	    nport = atoi (port);
+	    }
+	}
+    else {
+	if ((server = (char *) malloc (4)) == NULL)
+	    return (NULL);
+	server[0] = '/';
+	server[1] = '\0';
+	}
 
     /* Open port to HTTP server */
-    if ( !(sok = SokOpen (server, 80, XFREAD | XFWRITE)) ) {
+    if ( !(sok = SokOpen (server, nport, XFREAD | XFWRITE)) ) {
+	if (port != NULL)
+	    fprintf(stderr, "Can't read URL %s:%s\n", server, port);
+	else
+	    fprintf(stderr, "Can't read URL %s\n", server);
 	free (server);
 	return (NULL);
 	}
 
-    /* Send HTTP GET command */
-    fprintf (sok, "GET %s HTTP/1.1\r\nHost: %s\r\n\r\n",urlpath,server);
-    fflush(sok);
-    free (server);
+    /* Make sure that URL contains only legal characters */
+    /* newpath = encodeURL (urlpath); */
+    newpath = urlpath;
 
+    /* Send HTTP GET command */
+    fprintf (sok, "GET %s HTTP/1.1\r\nHost: %s\n\n", newpath, server);
+    fflush (sok);
+    free (server);
+    if (newpath != urlpath) {
+	free (newpath);
+	}
+
+    for (i = 0; i < LINE; i++)
+	linebuff[i] = czero;
     (void) fscanf(sok, "%*s %d %s\r\n", &status, linebuff);
 
     /* If Redirect code encounter, go to alternate URL at Location: */
@@ -671,10 +710,17 @@ int	*lbuff;	/* Length of buffer (returned) */
 	    return (NULL);
 	    }
 
+	/* Make sure that URL contains only legal characters */
+	/* newpath = encodeURL (urlpath); */
+	newpath = urlpath;
+
 	/* Send HTTP GET command (simbad forward fails if HTTP/1.1 included) */
-	fprintf(sok, "GET %s HTTP/1.1\r\nHost: %s\r\n\r\n",urlpath,server);
-	fflush(sok);
+	fprintf(sok, "GET %s HTTP/1.1\r\nHost: %s\n\n", newpath, server);
+	fflush (sok);
 	free (server);
+	if (newpath != urlpath) {
+	    free (newpath);
+	    }
 
 	(void) fscanf(sok, "%*s %d %*s\r\n", &status);
 	}
@@ -691,6 +737,8 @@ int	*lbuff;	/* Length of buffer (returned) */
 	    fprintf (stderr,"HTTP Code %d from  %s\n", status, server);
 	return (NULL);
 	}
+    for (i = 0; i < LINE; i++)
+	linebuff[i] = czero;
 
     /* Skip over http header of returned stuff */
     while (fgets (linebuff, LINE, sok) ) {
@@ -704,10 +752,14 @@ int	*lbuff;	/* Length of buffer (returned) */
 	    }
 	if (*linebuff == '\n') break;
 	if (*linebuff == '\r') break;
+	for (i = 0; i < LINE; i++)
+	    linebuff[i] = czero;
 	}
 
     /* Read table into buffer in memory a chunk at a time */
     tabbuff = NULL;
+    for (i = 0; i < LINE; i++)
+	linebuff[i] = czero;
     lb = 0;
     if (chunked) {
 	lchunk = 1;
@@ -760,6 +812,8 @@ int	*lbuff;	/* Length of buffer (returned) */
 	    if (diag)
 		fprintf (stderr, "%s\n", buff);
 	    *lbuff = ltbuff;
+	    for (i = 0; i < LINE; i++)
+		linebuff[i] = czero;
 	    }
 	}
 
@@ -976,6 +1030,33 @@ space2tab (tabbuff)
     return (newbuff);
 }
 
+/* The following two subroutines are from Fred Bulback, who has put them
+ * in the public domain. */
+
+/* Converts an integer value to its hex character*/
+char char2hex (char code) {
+    static char hex[] = "0123456789ABCDEF";
+    return hex[code & 15];
+}
+
+/* Returns a url-encoded version of str */
+/* IMPORTANT: be sure to free() the returned string after use */
+char *encodeURL (char *str) {
+    char *pstr = str, *buf = malloc(strlen(str) * 3 + 1), *pbuf = buf;
+  
+    while (*pstr) {
+	if (isalnum(*pstr) || *pstr == '-' || *pstr == '_' || *pstr == '.' || *pstr == '~' || *pstr == '/' || *pstr == '?') 
+	    *pbuf++ = *pstr;
+	else if (*pstr == ' ') 
+	    *pbuf++ = '+';
+	else 
+	    *pbuf++ = '%', *pbuf++ = char2hex(*pstr >> 4), *pbuf++ = char2hex(*pstr & 15);
+	pstr++;
+	}
+    *pbuf = '\0';
+    return buf;
+}
+
 /* Nov 29 2000	New subroutines
  * Dec 11 2000	Do not print messages unless nlog > 0
  * Dec 12 2000	Fix problems with return if no stars
@@ -1036,4 +1117,11 @@ space2tab (tabbuff)
  * Sep 25 2009	Free allocated pointers before returning after Douglas Burke
  *
  * Oct 29 2010	Declare match int in webrnum()
+ *
+ * Sep 16 2011	Add winsock2.h include for MinGW MSWindows C
+ *
+ * Sep 29 2014	Translate characters in URL to those legal for web use using
+ *		http://geekhideout.com/urlcode.shtml
+ * 
+ * Feb  6 2015	Drop URL encoding because GSC2 search fails when used.
  */

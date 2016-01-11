@@ -1,8 +1,8 @@
 /*** File libwcs/fitsfile.c
- *** March 31, 2010
- *** By Doug Mink, dmink@cfa.harvard.edu
+ *** July 25, 2014
+ *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1996-2010
+ *** Copyright (C) 1996-2014
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -17,11 +17,11 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
     Correspondence concerning WCSTools should be addressed as follows:
-           Internet email: dmink@cfa.harvard.edu
-           Postal address: Doug Mink
+           Internet email: jmink@cfa.harvard.edu
+           Postal address: Jessica Mink
                            Smithsonian Astrophysical Observatory
                            60 Garden St.
                            Cambridge, MA 02138 USA
@@ -87,15 +87,15 @@
 
 static int verbose=0;		/* Print diagnostics */
 static char fitserrmsg[80];
-static int fitsinherit = 1;		/* Append primary header to extension header */
+static int fitsinherit = 1;	/* Append primary header to extension header */
 void
 setfitsinherit (inh)
 int inh;
 {fitsinherit = inh; return;}
 
-static int ibhead = 0;		/* Number of bytes read before header starts */
+static off_t ibhead = 0;	/* Number of bytes read before header starts */
 
-int
+off_t
 getfitsskip()
 {return (ibhead);}
 
@@ -211,11 +211,13 @@ int	*nbhead;	/* Number of bytes before start of data (returned) */
     /* Read FITS header from input file one FITS block at a time */
     irec = 0;
     ibhead = 0;
-    while (irec < 200) {
+    while (irec < 500) {
 	nbytes = FITSBLOCK;
 	for (ntry = 0; ntry < 10; ntry++) {
 	    for (i = 0; i < 2884; i++) fitsbuf[i] = 0;
 	    nbr = read (fd, fitsbuf, nbytes);
+	    if (verbose)
+		fprintf (stderr,"FITSRHEAD: %d header bytes read\n",nbr);
 
 	    /* Short records allowed only if they have the last header line */
 	    if (nbr < nbytes) {
@@ -275,34 +277,46 @@ int	*nbhead;	/* Number of bytes before start of data (returned) */
 		break;
 	    }
 
-	/* Move current FITS record into header string */
+	/* Replace control characters and nulls with spaces */
 	for (i = 0; i < 2880; i++)
 	    if (fitsbuf[i] < 32 || i > nbr) fitsbuf[i] = 32;
 	if (nbr < 2880)
 	    nbr = 2880;
+
+	/* Move current FITS record into header string */
 	strncpy (headnext, fitsbuf, nbr);
 	*nbhead = *nbhead + nbr;
 	nrec = nrec + 1;
-	*(headnext+nbr) = 0;
+	*(headnext+nbr+1) = 0;
 	ibhead = ibhead + 2880;
+	if (verbose)
+	    fprintf (stderr,"FITSRHEAD: %d bytes in header\n",ibhead);
 
 	/* Check to see if this is the final record in this header */
 	headend = ksearch (fitsbuf,"END");
 	if (headend == NULL) {
 
-	    /* Increase size of header buffer by 4 blocks if too small */
+	    /* Double size of header buffer if too small */
 	    if (nrec * FITSBLOCK > nbh) {
-		nbh0 = nbh;
-		nbh = (nrec + 4) * FITSBLOCK + 4;
+		nbh0 = nbh - 4;
+		nbh = (nrec * 2 * FITSBLOCK) + 4;
 		newhead = (char *) calloc (1,(unsigned int) nbh);
-		for (i = 0; i < nbh0; i++)
-		    newhead[i] = header[i];
-		free (header);
-		header = newhead;
-		(void) hlength (header, nbh);
-		headnext = header + *nbhead - FITSBLOCK;
+		if (newhead) {
+		    for (i = 0; i < nbh0; i++)
+			newhead[i] = header[i];
+		    free (header);
+		    newhead[nbh-3] = (char) 0;
+		    header = newhead;
+		    (void) hlength (header, nbh);
+		    headnext = header + ((nrec-1) * FITSBLOCK);
+		    }
+		else {
+		    fprintf (stderr,"FITSRHEAD: %d bytes cannot be allocated for header\n",nbh);
+		    exit (1);
+		    }
 		}
-	    headnext = headnext + FITSBLOCK;
+	    else
+		headnext = headnext + FITSBLOCK;
 	    }
 
 	else {
@@ -317,7 +331,8 @@ int	*nbhead;	/* Number of bytes before start of data (returned) */
 		pheader = (char *) calloc ((unsigned int) nbprim, 1);
 		for (i = 0; i < lprim; i++)
 		    pheader[i] = header[i];
-		strncpy (pheader, header, lprim);
+		for (i = lprim; i < nbprim; i++)
+		    pheader[i] = ' ';
 		}
 
 	    /* If header has no data, start with the next record */
@@ -545,7 +560,8 @@ int	*nbhead;	/* Number of bytes before start of data (returned) */
     int fd;
     char *header;	/* FITS image header (filled) */
     int nbytes, i, ndiff;
-    int nbr, irec, offset;
+    int nbr, irec;
+    off_t offset;
     char *mwcs;		/* Pointer to WCS name separated by % */
     char *headstart;
     char *newhead;
@@ -641,7 +657,8 @@ int	nlog;		/* Note progress mod this rows */
     int fd;		/* File descriptor */
     int nbimage, naxis1, naxis2, bytepix, nbread;
     int bitpix, naxis, nblocks, nbytes, nbr;
-    int x1, y1, nbline, impos, nblin, nyleft;
+    int x1, y1, nbline, nyleft;
+    off_t impos, nblin;
     char *image, *imline, *imlast;
     int ilog = 0;
     int row;
@@ -1566,7 +1583,7 @@ char	*image;		/* FITS image pixels */
 	if (!access (filename, 0)) {
 	    fd = open (filename, O_WRONLY);
 	    if (fd < 3) {
-		snprintf (fitserrmsg,79, "FITSWIMAGE:  file %s not writeable\n", filename);
+		snprintf (fitserrmsg,79, "FITSWIMAGE:  file %s not writable\n", filename);
 		return (0);
 		}
 	    }
@@ -1605,7 +1622,7 @@ char	*image;		/* FITS image pixels */
 	if (!access (filename, 0)) {
 	    fd = open (filename, O_WRONLY);
 	    if (fd < 3) {
-		snprintf (fitserrmsg,79, "FITSWEXT:  file %s not writeable\n",
+		snprintf (fitserrmsg,79, "FITSWEXT:  file %s not writable\n",
 			 filename);
 		return (0);
 		}
@@ -1867,7 +1884,7 @@ char	*filename0;	/* Name of input FITS image file */
     if (!access (filename, 0)) {
 	fdout = open (filename, O_WRONLY);
 	if (fdout < 3) {
-	    snprintf (fitserrmsg,79, "FITSCIMAGE:  file %s not writeable\n", filename);
+	    snprintf (fitserrmsg,79, "FITSCIMAGE:  file %s not writable\n", filename);
 	    return (0);
 	    }
 	}
@@ -1953,7 +1970,7 @@ char	*header;	/* FITS image header */
     if (!access (filename, 0)) {
 	fd = open (filename, O_WRONLY);
 	if (fd < 3) {
-	    snprintf (fitserrmsg, 79, "FITSWHEAD:  file %s not writeable\n", filename);
+	    snprintf (fitserrmsg, 79, "FITSWHEAD:  file %s not writable\n", filename);
 	    return (0);
 	    }
 	}
@@ -2055,7 +2072,7 @@ char	*header;	/* FITS image header */
     if (ext != NULL)
 	*ext = cext;
     if (fd < 3) {
-	snprintf (fitserrmsg, 79, "FITSWEXHEAD:  file %s not writeable\n", filename);
+	snprintf (fitserrmsg, 79, "FITSWEXHEAD:  file %s not writable\n", filename);
 	return (-1);
 	}
 
@@ -2091,15 +2108,15 @@ char    *filename;      /* Name of file for which to find size */
     if (strchr (filename, '='))
 	return (0);
 
-    /* Then check file extension */
-    else if (strsrch (filename, ".fit") ||
-	strsrch (filename, ".fits") ||
-	strsrch (filename, ".fts"))
-	return (1);
-
     /* Check for stdin (input from pipe) */
     else if (!strcasecmp (filename,"stdin"))
 	return (1);
+
+    /* Then check file extension
+    else if (strsrch (filename, ".fit") ||
+	strsrch (filename, ".fits") ||
+	strsrch (filename, ".fts"))
+	return (1); */
 
     /* If no FITS file extension, try opening the file */
     else {
@@ -2295,8 +2312,14 @@ char *from, *last, *to;
  * Sep 18 2009	In fitswexhead() write to error string instead of stderr
  * Sep 22 2009	In fitsrthead(), fix lengths for ASCII numeric table entries
  * Sep 25 2009	Add subroutine moveb() and fix calls to it
- * Sep 25 2009	Fix several small errors found by Douglas Burke
+ * Sep 25 2009	Fix several small errors found by Jessicalas Burke
  *
  * Mar 29 2010	In fitswhead(), always pad blocks to 2880 bytes with spaces
  * Mar 31 2010	In fitsrhead(), fix bug reading long primary headers
+ *
+ * Sep 15 2011	In fitsrsect() declare impos and nblin off_t
+ * Sep 15 2011	In fitsrtail() declare offset off_t
+ * Sep 15 2011	Declare global variable ibhead off_t
+ *
+ * Jul 25 2014	Fix bug when reallocating buffer for long headers
  */

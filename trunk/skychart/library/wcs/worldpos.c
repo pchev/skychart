@@ -2,7 +2,7 @@
  *  September 1, 2011
  *  Copyright (C) 1994-2011
  *  Associated Universities, Inc. Washington DC, USA.
- *  With code added by Doug Mink, Smithsonian Astrophysical Observatory
+ *  With code added by Jessica Mink, Smithsonian Astrophysical Observatory
  *                 and Allan Brighton and Andreas Wicenec, ESO
  *                 and Frank Valdes, NOAO
 
@@ -25,7 +25,7 @@
     
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
    
     Correspondence concerning AIPS should be addressed as follows:
 	   Internet email: aipsmail@nrao.edu
