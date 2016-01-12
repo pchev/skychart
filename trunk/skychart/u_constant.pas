@@ -1079,6 +1079,8 @@ type
     db, dbhost, dbuser, dbpass, ImagePath, persdir: string;
     starshape_file, KioskPass: string;
     Paper, PrinterResolution, PrintMethod, PrintColor,
+    btnsize: integer;
+    btncaption: boolean;
     configpage, configpage_i, configpage_j, autorefreshdelay, MaxChildID, dbport: integer;
     PrtLeftMargin, PrtRightMargin, PrtTopMargin, PrtBottomMargin, PrintCopies: integer;
     savetop, saveleft, saveheight, savewidth: integer;
@@ -2693,6 +2695,8 @@ begin
   PrinterResolution := Source.PrinterResolution;
   PrintMethod := Source.PrintMethod;
   PrintColor := Source.PrintColor;
+  btnsize :=Source.btnsize;
+  btncaption := Source.btncaption;
   configpage := Source.configpage;
   configpage_i := Source.configpage_i;
   configpage_j := Source.configpage_j;
