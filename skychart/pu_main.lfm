@@ -45,6 +45,7 @@ object f_main: Tf_main
       TabOrder = 0
       TabStop = True
       Wrapable = False
+      OnMouseDown = MDEditToolBar
       object ChildControl: TPanel
         Left = 846
         Height = 23
@@ -144,6 +145,7 @@ object f_main: Tf_main
       ShowHint = True
       TabOrder = 1
       Wrapable = False
+      OnMouseDown = MDEditToolBar
     end
   end
   object PanelLeft: TPanel
@@ -175,6 +177,7 @@ object f_main: Tf_main
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
+      OnMouseDown = MDEditToolBar
     end
   end
   object PanelRight: TPanel
@@ -210,6 +213,7 @@ object f_main: Tf_main
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
+      OnMouseDown = MDEditToolBar
     end
   end
   object PanelBottom: TPanel
