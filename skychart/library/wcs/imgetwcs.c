@@ -717,7 +717,7 @@ char *dateobs;
  * Oct 17 1996	Do not print error messages unless verbose is set
  * Oct 30 1996	Keep equinox from image if EQREF is zero
  * Nov  1 1996	Declare undeclared subroutines; remove unused variables
- * Nov  4 1996	Add reference pixel and projection to wcsset() call
+ * Nov  4 1996	Add reference pixel and projection to wcsset1() call
  * Nov 14 1996	Add GetLimits() to deal with search limits around the poles
  * Nov 15 1996	Drop GetLimits(); code moved to individual catalog routines
  * Dec 10 1996	Fix precession and make equinox double

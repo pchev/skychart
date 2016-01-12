@@ -326,7 +326,7 @@ struct wcsprm {
 };
 
 #if __STDC__ || defined(__cplusplus)
-   int wcsset(const int,
+   int wcsset1(const int,
               const char[][9],
               struct wcsprm *);
 
@@ -342,7 +342,7 @@ struct wcsprm {
               struct linprm *,
               double[]);
 
-   int wcsrev(const char[][9],
+   int wcsrev1(const char[][9],
               struct wcsprm *,
               const double[], 
               struct linprm *,
@@ -372,12 +372,12 @@ struct wcsprm {
               double[]);
 
 #else
-   int wcsset(), wcsfwd(), wcsrev(), wcsmix();
+   int wcsset1(), wcsfwd(), wcsrev1(), wcsmix();
 #endif
 
-extern const char *wcsset_errmsg[];
+extern const char *wcsset1_errmsg[];
 extern const char *wcsfwd_errmsg[];
-extern const char *wcsrev_errmsg[];
+extern const char *wcsrev1_errmsg[];
 extern const char *wcsmix_errmsg[];
 
 #define WCSSET 137
