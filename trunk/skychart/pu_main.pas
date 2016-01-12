@@ -436,6 +436,8 @@ type
     procedure AnimationExecute(Sender: TObject);
     procedure AnimationTimerTimer(Sender: TObject);
     procedure BlinkImageExecute(Sender: TObject);
+    procedure MDEditToolBar(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure MenuBugReportClick(Sender: TObject);
     procedure CloseTimerTimer(Sender: TObject);
     procedure ConfigPopupExecute(Sender: TObject);
@@ -2895,6 +2897,12 @@ if (MultiFrame1.ActiveObject is Tf_chart)
         end;
      end;
   end;
+end;
+
+procedure Tf_main.MDEditToolBar(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if Button=mbRight then MenuEditToolbar.Click;
 end;
 
 procedure Tf_main.SyncChartExecute(Sender: TObject);
