@@ -651,6 +651,7 @@ type
     Procedure SyncChild;
     procedure GetLanguage;
     Procedure GetAppDir;
+    procedure ResizeBtn;
     procedure ViewTopPanel;
     procedure ApplyConfig(Sender: TObject);
     procedure ApplyConfigTime(Sender: TObject);
@@ -4196,6 +4197,35 @@ begin
     Autorefresh.enabled:=true;
 end;
 
+procedure Tf_main.ResizeBtn;
+var showcapt: boolean;
+begin
+showcapt:=cfgm.btncaption and (cfgm.btnsize>32);
+if (ToolBarMain.ButtonHeight<>cfgm.btnsize) or (ToolBarMain.ShowCaptions<>showcapt) then begin
+  ToolBarMain.ButtonHeight:=cfgm.btnsize;
+  ToolBarMain.ButtonWidth:=cfgm.btnsize;
+  ToolBarMain.Height:=cfgm.btnsize+4;
+  ToolBarMain.ShowCaptions:=showcapt;
+  ToolBarMain.Invalidate;
+  ToolBarObj.ButtonHeight:=cfgm.btnsize;
+  ToolBarObj.ButtonWidth:=cfgm.btnsize;
+  ToolBarObj.Height:=cfgm.btnsize+4;
+  ToolBarObj.ShowCaptions:=showcapt;
+  ToolBarObj.Invalidate;
+  PanelLeft.Width:=cfgm.btnsize+4;
+  ToolBarLeft.ButtonHeight:=cfgm.btnsize;
+  ToolBarLeft.ButtonWidth:=cfgm.btnsize;
+  ToolBarLeft.Width:=cfgm.btnsize+4;
+  ToolBarLeft.Invalidate;
+  PanelRight.Width:=cfgm.btnsize+4;
+  ToolBarRight.ButtonHeight:=cfgm.btnsize;
+  ToolBarRight.ButtonWidth:=cfgm.btnsize;
+  ToolBarRight.Width:=cfgm.btnsize+4;
+  ToolBarRight.Invalidate;
+  ViewTopPanel;
+end;
+end;
+
 procedure Tf_main.ViewTopPanel;
 var i: integer;
 begin
@@ -4465,6 +4495,8 @@ cfgm.MaxChildID:=0;
 cfgm.prtname:='';
 cfgm.SesameUrlNum:=0;
 cfgm.SesameCatNum:=3;
+cfgm.btnsize:=24;
+cfgm.btncaption:=false;
 cfgm.configpage:=0;
 cfgm.configpage_i:=0;
 cfgm.configpage_j:=0;
@@ -5637,6 +5669,8 @@ LinuxDesktop:=ReadInteger(section,'LinuxDesktop',LinuxDesktop);
 if LinuxDesktop>1 then LinuxDesktop:=1;
 OpenFileCMD:=ReadString(section,'OpenFileCMD',OpenFileCMD);
 {$endif}
+cfgm.btnsize:=ReadInteger(section,'BtnSize',cfgm.btnsize);
+cfgm.btncaption:=ReadBool(section,'BtnCaption',cfgm.btncaption);
 NightVision:=ReadBool(section,'NightVision',NightVision);
 cfgm.ClockColor:=ReadInteger(section,'ClockColor',cfgm.ClockColor);
 cfgm.SesameUrlNum:=ReadInteger(section,'SesameUrlNum',cfgm.SesameUrlNum);
@@ -5819,7 +5853,6 @@ MenuViewObjectBar.checked:=ToolBarObj.visible;
 MenuViewLeftBar.checked:=PanelLeft.visible;
 MenuViewRightBar.checked:=PanelRight.visible;
 MenuViewToolsBar.checked:=(MenuViewMainBar.checked and MenuViewObjectBar.checked and MenuViewLeftBar.checked and MenuViewRightBar.checked);
-ViewTopPanel;
 InitialChartNum:=ReadInteger(section,'NumChart',0);
 f_detail.Width:=ReadInteger(section,'Detail_Width',f_detail.Width);
 f_detail.Height:=ReadInteger(section,'Detail_Height',f_detail.Height);
@@ -6500,6 +6533,8 @@ WriteBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
 WriteBool(section,'ConfirmSaveConfig',ConfirmSaveConfig);
 WriteBool(section,'NightVision',NightVision);
 WriteString(section,'language',cfgm.language);
+WriteInteger(section,'BtnSize',cfgm.btnsize);
+WriteBool(section,'BtnCaption',cfgm.btncaption);
 if f_clock<>nil then WriteInteger(section,'ClockColor',f_clock.Font.Color);
 if f_planetinfo<>nil then WriteBool(section,'CenterAtNoon',f_planetinfo.CenterAtNoon);
 WriteInteger(section,'SesameUrlNum',f_search.SesameUrlNum);
@@ -8888,6 +8923,7 @@ end;
 
 procedure Tf_main.InitToolBar;
 begin
+ResizeBtn;
 f_edittoolbar.Images:=ImageNormal;
 f_edittoolbar.DisabledContainer:=ContainerPanel;
 f_edittoolbar.TBOnMouseUp:=ToolButtonMouseUp;
@@ -8925,16 +8961,30 @@ ViewToolsBar(false);
 end;
 
 procedure Tf_main.MenuEditToolbarClick(Sender: TObject);
+var i:integer;
+    buf:string;
 begin
  // load current config
  f_edittoolbar.LoadToolbar(0,configmainbar);
  f_edittoolbar.LoadToolbar(1,configobjectbar);
  f_edittoolbar.LoadToolbar(2,configleftbar);
  f_edittoolbar.LoadToolbar(3,configrightbar);
+ f_edittoolbar.BtnText.Checked:=cfgm.btncaption;
+ buf:=inttostr(cfgm.btnsize);
+ for i:=0 to f_edittoolbar.BtnSize.Items.Count-1 do
+   if f_edittoolbar.BtnSize.Items[i]=buf then
+      f_edittoolbar.BtnSize.ItemIndex:=i;
  FormPos(f_edittoolbar,mouse.cursorpos.x,mouse.cursorpos.y);
  f_edittoolbar.ShowModal;
  if f_edittoolbar.ModalResult=mrOK then begin
     // save the configuration
+    i:=StrToIntDef(f_edittoolbar.BtnSize.Text,24);
+    if (i<>cfgm.btnsize) or (f_edittoolbar.BtnText.Checked<>cfgm.btncaption) then begin
+      cfgm.btnsize:=StrToIntDef(f_edittoolbar.BtnSize.Text,24);
+      cfgm.btncaption:=f_edittoolbar.BtnText.Checked;
+      ResizeBtn;
+      f_edittoolbar.ActivateToolbar;
+    end;
     f_edittoolbar.SaveToolbar(0,configmainbar);
     f_edittoolbar.SaveToolbar(1,configobjectbar);
     f_edittoolbar.SaveToolbar(2,configleftbar);

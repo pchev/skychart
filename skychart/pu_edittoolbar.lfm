@@ -1,18 +1,20 @@
 object f_edittoolbar: Tf_edittoolbar
   Left = 540
-  Height = 368
+  Height = 407
   Top = 124
   Width = 550
+  ActiveControl = ButtonOK
   Caption = 'f_edittoolbar'
-  ClientHeight = 368
+  ClientHeight = 407
   ClientWidth = 550
   OnCreate = FormCreate
   OnResize = FormResize
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.1'
+  Visible = False
   object PanelBottom: TPanel
     Left = 0
     Height = 35
-    Top = 333
+    Top = 372
     Width = 550
     Align = alBottom
     ClientHeight = 35
@@ -75,16 +77,16 @@ object f_edittoolbar: Tf_edittoolbar
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 333
+    Height = 322
     Top = 0
     Width = 248
     Align = alClient
-    ClientHeight = 333
+    ClientHeight = 322
     ClientWidth = 248
     TabOrder = 1
     object ActionTreeView: TTreeView
       Left = 1
-      Height = 263
+      Height = 252
       Top = 35
       Width = 246
       Align = alClient
@@ -97,7 +99,7 @@ object f_edittoolbar: Tf_edittoolbar
     object PanelLbot: TPanel
       Left = 1
       Height = 34
-      Top = 298
+      Top = 287
       Width = 246
       Align = alBottom
       ClientHeight = 34
@@ -193,9 +195,9 @@ object f_edittoolbar: Tf_edittoolbar
       TabOrder = 2
       object Label1: TLabel
         Left = 16
-        Height = 15
+        Height = 16
         Top = 7
-        Width = 92
+        Width = 104
         Caption = 'Available actions'
         ParentColor = False
       end
@@ -203,11 +205,11 @@ object f_edittoolbar: Tf_edittoolbar
   end
   object PanelCentre: TPanel
     Left = 248
-    Height = 333
+    Height = 322
     Top = 0
     Width = 55
     Align = alRight
-    ClientHeight = 333
+    ClientHeight = 322
     ClientWidth = 55
     TabOrder = 2
     object ButtonAdd: TBitBtn
@@ -408,16 +410,16 @@ object f_edittoolbar: Tf_edittoolbar
   end
   object PanelRight: TPanel
     Left = 303
-    Height = 333
+    Height = 322
     Top = 0
     Width = 247
     Align = alRight
-    ClientHeight = 333
+    ClientHeight = 322
     ClientWidth = 247
     TabOrder = 3
     object editbarPanel: TPanel
       Left = 1
-      Height = 297
+      Height = 286
       Top = 35
       Width = 245
       Align = alClient
@@ -435,7 +437,7 @@ object f_edittoolbar: Tf_edittoolbar
       TabOrder = 1
       object ComboBox1: TComboBox
         Left = 8
-        Height = 27
+        Height = 30
         Top = 4
         Width = 230
         ItemHeight = 0
@@ -443,6 +445,48 @@ object f_edittoolbar: Tf_edittoolbar
         Style = csDropDownList
         TabOrder = 0
       end
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 50
+    Top = 322
+    Width = 550
+    Align = alBottom
+    ClientHeight = 50
+    ClientWidth = 550
+    TabOrder = 4
+    object BtnSize: TComboBox
+      Left = 144
+      Height = 28
+      Top = 10
+      Width = 64
+      ItemHeight = 0
+      ItemIndex = 0
+      Items.Strings = (
+        '24'
+        '32'
+        '40'
+        '48'
+      )
+      TabOrder = 0
+      Text = '24'
+    end
+    object Label2: TLabel
+      Left = 19
+      Height = 16
+      Top = 16
+      Width = 68
+      Caption = 'Button size'
+      ParentColor = False
+    end
+    object BtnText: TCheckBox
+      Left = 271
+      Height = 22
+      Top = 13
+      Width = 134
+      Caption = 'Show button text '
+      TabOrder = 1
     end
   end
 end
