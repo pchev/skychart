@@ -40,7 +40,7 @@ uses
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
-  ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame,
+  ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame, BGRABitmap,
   LResources, uniqueinstance, enhedits, downloaddialog, LazHelpHTML, ButtonPanel;
 
 type
@@ -4210,6 +4210,10 @@ var showcapt: boolean;
 begin
 showcapt:=cfgm.btncaption and (cfgm.btnsize>32);
 if (ToolBarMain.ButtonHeight<>cfgm.btnsize) or (ToolBarMain.ShowCaptions<>showcapt) then begin
+  if NightVision then
+    SetButtonImage(cfgm.ButtonNight)
+  else
+    SetButtonImage(cfgm.ButtonStandard);
   ToolBarMain.ButtonHeight:=cfgm.btnsize;
   ToolBarMain.ButtonWidth:=cfgm.btnsize;
   ToolBarMain.Height:=cfgm.btnsize+4;
@@ -8536,22 +8540,32 @@ begin
 end;
 
 procedure Tf_main.SetButtonImage(button: Integer);
-var btn : TPortableNetworkGraphic; //TBitmap;
+var btn : TPortableNetworkGraphic;
+    bmp,sbmp: TBGRABitmap;
+    ns:integer;
     col: Tcolor;
     iconpath: String;
 procedure SetButtonImage1(imagelist:Timagelist);
 var i: Integer;
 begin
+   ns:=cfgm.btnsize*2 div 3;
    imagelist.Clear;
-     for i:=0 to ImageListCount-1 do begin
+   imagelist.Height:=ns;
+   imagelist.Width:=ns;
+   for i:=0 to ImageListCount-1 do begin
        try
-         btn:=TPortableNetworkGraphic.Create;
-         btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.png');
-         imagelist.Add(btn,nil);
-         btn.Free;
+         bmp:=TBGRABitmap.Create;
+         bmp.LoadFromFile(iconpath+'i'+inttostr(i)+'.png');
+         if ns>16 then begin
+           sbmp:=bmp.Resample(ns,ns) as TBGRABitmap;
+           imagelist.Add(sbmp.Bitmap,nil);
+           sbmp.Free;
+         end
+         else
+           imagelist.Add(bmp.Bitmap,nil);
        except
        end;
-     end;
+   end;
    ActionListFile.Images:=imagelist;
    ActionListEdit.Images:=imagelist;
    ActionListSetup.Images:=imagelist;
@@ -9115,34 +9129,36 @@ begin
 end;
 
 procedure Tf_main.ToolBarFOVResize(Sender: TObject);
-var i,w,h: integer;
+var i,w,h,sp: integer;
 begin
  w:=TPanel(sender).Width;
  h:=TPanel(sender).Height;
  if w>h then begin
    i:=0;
-   with tbFOV1 do begin Left:=i*27; Top:=0; end; inc(i);
-   with tbFOV2 do begin Left:=i*27; Top:=0; end; inc(i);
-   with tbFOV3 do begin Left:=i*27; Top:=0; end; inc(i);
-   with tbFOV4 do begin Left:=i*27; Top:=0; end; inc(i);
-   with tbFOV5 do begin Left:=i*27; Top:=0; end; inc(i);
-   with tbFOV6 do begin Left:=i*27; Top:=0; end; inc(i);
-   with tbFOV7 do begin Left:=i*27; Top:=0; end; inc(i);
-   with tbFOV8 do begin Left:=i*27; Top:=0; end; inc(i);
-   with tbFOV9 do begin Left:=i*27; Top:=0; end; inc(i);
-   with tbFOV10 do begin Left:=i*27; Top:=0; end; inc(i);
+   sp:=w div 10;
+   with tbFOV1 do begin Left:=i*sp; Top:=0; end; inc(i);
+   with tbFOV2 do begin Left:=i*sp; Top:=0; end; inc(i);
+   with tbFOV3 do begin Left:=i*sp; Top:=0; end; inc(i);
+   with tbFOV4 do begin Left:=i*sp; Top:=0; end; inc(i);
+   with tbFOV5 do begin Left:=i*sp; Top:=0; end; inc(i);
+   with tbFOV6 do begin Left:=i*sp; Top:=0; end; inc(i);
+   with tbFOV7 do begin Left:=i*sp; Top:=0; end; inc(i);
+   with tbFOV8 do begin Left:=i*sp; Top:=0; end; inc(i);
+   with tbFOV9 do begin Left:=i*sp; Top:=0; end; inc(i);
+   with tbFOV10 do begin Left:=i*sp; Top:=0; end; inc(i);
  end else begin
    i:=0;
-   with tbFOV1 do begin Top:=i*27; Left:=0; end; inc(i);
-   with tbFOV2 do begin Top:=i*27; Left:=0; end; inc(i);
-   with tbFOV3 do begin Top:=i*27; Left:=0; end; inc(i);
-   with tbFOV4 do begin Top:=i*27; Left:=0; end; inc(i);
-   with tbFOV5 do begin Top:=i*27; Left:=0; end; inc(i);
-   with tbFOV6 do begin Top:=i*27; Left:=0; end; inc(i);
-   with tbFOV7 do begin Top:=i*27; Left:=0; end; inc(i);
-   with tbFOV8 do begin Top:=i*27; Left:=0; end; inc(i);
-   with tbFOV9 do begin Top:=i*27; Left:=0; end; inc(i);
-   with tbFOV10 do begin Top:=i*27; Left:=0; end; inc(i);
+   sp:=h div 10;
+   with tbFOV1 do begin Top:=i*sp; Left:=0; end; inc(i);
+   with tbFOV2 do begin Top:=i*sp; Left:=0; end; inc(i);
+   with tbFOV3 do begin Top:=i*sp; Left:=0; end; inc(i);
+   with tbFOV4 do begin Top:=i*sp; Left:=0; end; inc(i);
+   with tbFOV5 do begin Top:=i*sp; Left:=0; end; inc(i);
+   with tbFOV6 do begin Top:=i*sp; Left:=0; end; inc(i);
+   with tbFOV7 do begin Top:=i*sp; Left:=0; end; inc(i);
+   with tbFOV8 do begin Top:=i*sp; Left:=0; end; inc(i);
+   with tbFOV9 do begin Top:=i*sp; Left:=0; end; inc(i);
+   with tbFOV10 do begin Top:=i*sp; Left:=0; end; inc(i);
  end;
 end;
 

@@ -486,7 +486,7 @@ if (result='') and (nam='Divider') then result:=DividerTxt;
 end;
 
 procedure Tf_edittoolbar.ActivateToolbar;
-var i,j,k,n,m,p,lpos,w,h: integer;
+var i,j,k,n,m,p,t,lpos,w,h: integer;
     b: TToolButton;
     act: string;
     visiblebar:boolean;
@@ -553,15 +553,35 @@ if (numeditbar>0) and  (numaction>0) then begin
           editControl[n].Left:=lpos;
           if editControl[n].Name='quicksearch' then begin
             editControl[n].Width:=90;
+            editControl[n].Font.Size:=10*editControl[n].Height div 24;
+          end;
+          if editControl[n].Name='TimeU' then begin
+            editControl[n].Font.Size:=10*editControl[n].Height div 24;
+          end;
+          if editControl[n].Name='TimeValPanel' then begin
+            editControl[n].Font.Size:=10*editControl[n].Height div 24;
+          end;
+          if editControl[n].Name='MagPanel' then begin
+            editControl[n].Width:=editControl[n].Height;
           end;
           if editControl[n].Name='ToolBarFOV' then begin
             if editbar[p].Height>editbar[p].Width then begin
-                w:=25;
-                h:=275;
+                editControl[n].Font.Size:=9*editbar[p].Width div 24;
+                for t:=0 to tpanel(editControl[n]).ControlCount-1 do begin
+                  TSpeedButton(tpanel(editControl[n]).Controls[t]).Width:=editbar[p].Width;
+                  TSpeedButton(tpanel(editControl[n]).Controls[t]).Height:=editbar[p].Width;
+                end;
+                w:=editbar[p].Width;
+                h:=10*(editbar[p].Width);
                 editControl[n].SetBounds(editControl[n].Left,editControl[n].Top,w,h);
             end else begin
-                w:=275;
-                h:=25;
+                editControl[n].Font.Size:=9*editbar[p].Height div 24;
+                for t:=0 to tpanel(editControl[n]).ControlCount-1 do begin
+                  TSpeedButton(tpanel(editControl[n]).Controls[t]).Width:=editbar[p].Height;
+                  TSpeedButton(tpanel(editControl[n]).Controls[t]).Height:=editbar[p].Height;
+                end;
+                w:=10*(editbar[p].Height);
+                h:=editbar[p].Height;
                 editControl[n].SetBounds(editControl[n].Left,editControl[n].Top,w,h);
             end;
           end;
