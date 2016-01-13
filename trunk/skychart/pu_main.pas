@@ -1964,6 +1964,7 @@ if VerboseMsg then
 Application.UpdateFormatSettings := False;
 {$endif}
 ImageListCount:=ImageNormal.Count;
+ImageListSize:=ImageNormal.Width;
 MaxThreadCount:=GetThreadCount;
 DisplayIs32bpp:=true;
 isWin98:=false;
@@ -4208,8 +4209,8 @@ end;
 procedure Tf_main.ResizeBtn;
 var showcapt: boolean;
 begin
-showcapt:=cfgm.btncaption and (cfgm.btnsize>32);
-if (ToolBarMain.ButtonHeight<>cfgm.btnsize) or (ToolBarMain.ShowCaptions<>showcapt) then begin
+showcapt:=cfgm.btncaption and (cfgm.btnsize>32) and (not cfgm.resizeicon);
+if (ToolBarMain.ButtonHeight<>cfgm.btnsize) or (ToolBarMain.ShowCaptions<>showcapt) or ((ImageListSize>16)<>cfgm.resizeicon) then begin
   if NightVision then
     SetButtonImage(cfgm.ButtonNight)
   else
@@ -4509,6 +4510,7 @@ cfgm.SesameUrlNum:=0;
 cfgm.SesameCatNum:=3;
 cfgm.btnsize:=24;
 cfgm.btncaption:=false;
+cfgm.resizeicon:=false;
 cfgm.configpage:=0;
 cfgm.configpage_i:=0;
 cfgm.configpage_j:=0;
@@ -5683,6 +5685,7 @@ OpenFileCMD:=ReadString(section,'OpenFileCMD',OpenFileCMD);
 {$endif}
 cfgm.btnsize:=ReadInteger(section,'BtnSize',cfgm.btnsize);
 cfgm.btncaption:=ReadBool(section,'BtnCaption',cfgm.btncaption);
+cfgm.resizeicon:=ReadBool(section,'ResizeIcon',cfgm.resizeicon);
 NightVision:=ReadBool(section,'NightVision',NightVision);
 cfgm.ClockColor:=ReadInteger(section,'ClockColor',cfgm.ClockColor);
 cfgm.SesameUrlNum:=ReadInteger(section,'SesameUrlNum',cfgm.SesameUrlNum);
@@ -6547,6 +6550,7 @@ WriteBool(section,'NightVision',NightVision);
 WriteString(section,'language',cfgm.language);
 WriteInteger(section,'BtnSize',cfgm.btnsize);
 WriteBool(section,'BtnCaption',cfgm.btncaption);
+WriteBool(section,'ResizeIcon',cfgm.resizeicon);
 if f_clock<>nil then WriteInteger(section,'ClockColor',f_clock.Font.Color);
 if f_planetinfo<>nil then WriteBool(section,'CenterAtNoon',f_planetinfo.CenterAtNoon);
 WriteInteger(section,'SesameUrlNum',f_search.SesameUrlNum);
@@ -7645,16 +7649,16 @@ if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
     AltAzProjection.Checked:= (sc.cfgsc.projpole=AltAz);
     EclipticProjection.Checked:= (sc.cfgsc.projpole=Ecl);
     GalacticProjection.Checked:= (sc.cfgsc.projpole=Gal);
-    tbFOV1.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[0]);
-    tbFOV2.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[1]);
-    tbFOV3.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[2]);
-    tbFOV4.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[3]);
-    tbFOV5.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[4]);
-    tbFOV6.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[5]);
-    tbFOV7.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[6]);
-    tbFOV8.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[7]);
-    tbFOV9.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[8]);
-    tbFOV10.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[9]);
+    tbFOV1.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[0])+blank;
+    tbFOV2.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[1])+blank;
+    tbFOV3.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[2])+blank;
+    tbFOV4.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[3])+blank;
+    tbFOV5.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[4])+blank;
+    tbFOV6.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[5])+blank;
+    tbFOV7.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[6])+blank;
+    tbFOV8.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[7])+blank;
+    tbFOV9.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[8])+blank;
+    tbFOV10.caption:= DEToStrmin(sc.catalog.cfgshr.FieldNum[9])+blank;
     tbFOV1.Hint:='(1) '+rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[0]);
     tbFOV2.Hint:='(2) '+rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[1]);
     tbFOV3.Hint:='(3) '+rsSetFOVTo+blank+DEmToStr(sc.catalog.cfgshr.FieldNum[2]);
@@ -8542,22 +8546,24 @@ end;
 procedure Tf_main.SetButtonImage(button: Integer);
 var btn : TPortableNetworkGraphic;
     bmp,sbmp: TBGRABitmap;
-    ns:integer;
     col: Tcolor;
     iconpath: String;
 procedure SetButtonImage1(imagelist:Timagelist);
 var i: Integer;
 begin
-   ns:=cfgm.btnsize*2 div 3;
+   if cfgm.resizeicon then
+      ImageListSize:=cfgm.btnsize*2 div 3
+   else
+      ImageListSize:=16;
    imagelist.Clear;
-   imagelist.Height:=ns;
-   imagelist.Width:=ns;
+   imagelist.Height:=ImageListSize;
+   imagelist.Width:=ImageListSize;
    for i:=0 to ImageListCount-1 do begin
        try
          bmp:=TBGRABitmap.Create;
          bmp.LoadFromFile(iconpath+'i'+inttostr(i)+'.png');
-         if ns>16 then begin
-           sbmp:=bmp.Resample(ns,ns) as TBGRABitmap;
+         if ImageListSize>16 then begin
+           sbmp:=bmp.Resample(ImageListSize,ImageListSize) as TBGRABitmap;
            imagelist.Add(sbmp.Bitmap,nil);
            sbmp.Free;
          end
@@ -8991,19 +8997,21 @@ begin
  f_edittoolbar.LoadToolbar(1,configobjectbar);
  f_edittoolbar.LoadToolbar(2,configleftbar);
  f_edittoolbar.LoadToolbar(3,configrightbar);
- f_edittoolbar.BtnText.Checked:=cfgm.btncaption;
  buf:=inttostr(cfgm.btnsize);
  for i:=0 to f_edittoolbar.BtnSize.Items.Count-1 do
    if f_edittoolbar.BtnSize.Items[i]=buf then
       f_edittoolbar.BtnSize.ItemIndex:=i;
+ f_edittoolbar.BtnText.Checked:=cfgm.btncaption;
+ f_edittoolbar.ResizeIcon.Checked:=cfgm.resizeicon;
  FormPos(f_edittoolbar,mouse.cursorpos.x,mouse.cursorpos.y);
  f_edittoolbar.ShowModal;
  if f_edittoolbar.ModalResult=mrOK then begin
     // save the configuration
     i:=StrToIntDef(f_edittoolbar.BtnSize.Text,24);
-    if (i<>cfgm.btnsize) or (f_edittoolbar.BtnText.Checked<>cfgm.btncaption) then begin
+    if (i<>cfgm.btnsize) or (f_edittoolbar.BtnText.Checked<>cfgm.btncaption) or (f_edittoolbar.ResizeIcon.Checked<>cfgm.resizeicon) then begin
       cfgm.btnsize:=StrToIntDef(f_edittoolbar.BtnSize.Text,24);
       cfgm.btncaption:=f_edittoolbar.BtnText.Checked;
+      cfgm.resizeicon:=f_edittoolbar.ResizeIcon.Checked;
       ResizeBtn;
       f_edittoolbar.ActivateToolbar;
     end;
