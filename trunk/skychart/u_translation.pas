@@ -1553,6 +1553,9 @@ resourcestring
   rsConnectionTo = 'Connection to INDI server failed!';
   rsPleaseInstal = 'Please install indistarter package!';
   rsActivateAllT = 'Activate all the functions when hidden';
+  rsButtonSize = 'Button size';
+  rsShowButtonTe = 'Show button text';
+  rsResizeIcon = 'Resize icon ';
 
 // also update upsi_translation
 
