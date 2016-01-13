@@ -469,6 +469,7 @@ object f_edittoolbar: Tf_edittoolbar
         '40'
         '48'
       )
+      OnChange = BtnSizeChange
       TabOrder = 0
       Text = '24'
     end
@@ -481,12 +482,22 @@ object f_edittoolbar: Tf_edittoolbar
       ParentColor = False
     end
     object BtnText: TCheckBox
-      Left = 271
+      Left = 368
       Height = 22
       Top = 13
       Width = 134
       Caption = 'Show button text '
+      OnChange = BtnTextChange
       TabOrder = 1
+    end
+    object ResizeIcon: TCheckBox
+      Left = 216
+      Height = 22
+      Top = 13
+      Width = 94
+      Caption = 'Resize icon '
+      OnChange = ResizeIconChange
+      TabOrder = 2
     end
   end
 end

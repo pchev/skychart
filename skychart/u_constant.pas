@@ -1080,7 +1080,7 @@ type
     starshape_file, KioskPass: string;
     Paper, PrinterResolution, PrintMethod, PrintColor,
     btnsize: integer;
-    btncaption: boolean;
+    btncaption,resizeicon: boolean;
     configpage, configpage_i, configpage_j, autorefreshdelay, MaxChildID, dbport: integer;
     PrtLeftMargin, PrtRightMargin, PrtTopMargin, PrtBottomMargin, PrintCopies: integer;
     savetop, saveleft, saveheight, savewidth: integer;
@@ -1257,6 +1257,7 @@ var
   ldeg, lmin, lsec: string;
   MaxThreadCount: integer;
   ImageListCount: integer;
+  ImageListSize: integer;
   nightvision: boolean;
   isWin98: boolean;
   isWOW64: boolean;
@@ -2697,6 +2698,7 @@ begin
   PrintColor := Source.PrintColor;
   btnsize :=Source.btnsize;
   btncaption := Source.btncaption;
+  resizeicon := Source.resizeicon;
   configpage := Source.configpage;
   configpage_i := Source.configpage_i;
   configpage_j := Source.configpage_j;
