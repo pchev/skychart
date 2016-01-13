@@ -9,7 +9,7 @@ object f_edittoolbar: Tf_edittoolbar
   ClientWidth = 550
   OnCreate = FormCreate
   OnResize = FormResize
-  LCLVersion = '1.6.0.1'
+  LCLVersion = '1.6.0.2'
   Visible = False
   object PanelBottom: TPanel
     Left = 0
@@ -195,7 +195,7 @@ object f_edittoolbar: Tf_edittoolbar
       TabOrder = 2
       object Label1: TLabel
         Left = 16
-        Height = 16
+        Height = 15
         Top = 7
         Width = 104
         Caption = 'Available actions'
@@ -437,7 +437,7 @@ object f_edittoolbar: Tf_edittoolbar
       TabOrder = 1
       object ComboBox1: TComboBox
         Left = 8
-        Height = 30
+        Height = 27
         Top = 4
         Width = 230
         ItemHeight = 0
@@ -457,8 +457,8 @@ object f_edittoolbar: Tf_edittoolbar
     ClientWidth = 550
     TabOrder = 4
     object BtnSize: TComboBox
-      Left = 144
-      Height = 28
+      Left = 130
+      Height = 27
       Top = 10
       Width = 64
       ItemHeight = 0
@@ -474,27 +474,27 @@ object f_edittoolbar: Tf_edittoolbar
       Text = '24'
     end
     object Label2: TLabel
-      Left = 19
-      Height = 16
+      Left = 8
+      Height = 15
       Top = 16
-      Width = 68
+      Width = 69
       Caption = 'Button size'
       ParentColor = False
     end
     object BtnText: TCheckBox
-      Left = 368
-      Height = 22
+      Left = 375
+      Height = 24
       Top = 13
-      Width = 134
+      Width = 137
       Caption = 'Show button text '
       OnChange = BtnTextChange
       TabOrder = 1
     end
     object ResizeIcon: TCheckBox
-      Left = 216
-      Height = 22
+      Left = 200
+      Height = 24
       Top = 13
-      Width = 94
+      Width = 98
       Caption = 'Resize icon '
       OnChange = ResizeIconChange
       TabOrder = 2

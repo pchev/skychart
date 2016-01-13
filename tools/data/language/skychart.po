@@ -6102,3 +6102,15 @@ msgstr ""
 msgid "Activate all the functions when hidden"
 msgstr ""
 
+#: u_translation:rsbuttonsize
+msgid "Button size"
+msgstr ""
+
+#: u_translation:rsshowbuttonte
+msgid "Show button text"
+msgstr ""
+
+#: u_translation:rsresizeicon
+msgid "Resize icon "
+msgstr ""
+
