@@ -8555,7 +8555,8 @@ begin
       ImageListSize:=cfgm.btnsize*2 div 3
    else
       ImageListSize:=16;
-   imagelist.Clear;
+   imagelist.Free;
+   imagelist:=TImageList.Create(Self);
    imagelist.Height:=ImageListSize;
    imagelist.Width:=ImageListSize;
    for i:=0 to ImageListCount-1 do begin

@@ -2037,7 +2037,7 @@ function FindWOW64: boolean;
 type
   TIsWow64Process = function(Handle:THandle; var IsWow64 : BOOL) :BOOL; stdcall;
 var
-  hKernel32 : Integer;
+  hKernel32 : HINST;
   IsWow64Process : TIsWow64Process;
   IsWow64 : BOOL;
 begin
