@@ -30,7 +30,7 @@ interface
 
 uses u_constant, u_translation,  u_help,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  ActnList, ExtCtrls, StdCtrls, PairSplitter, Buttons;
+  lazutf8, ActnList, ExtCtrls, StdCtrls, PairSplitter, Buttons;
 
 type
 
@@ -538,6 +538,9 @@ if (numeditbar>0) and  (numaction>0) then begin
         b.AutoSize:=true;
         b.Style:=tbsButton;
         b.Action:=editAction[m].Actions[n];
+        if utf8length(b.Caption)>15 then begin
+           b.Caption:=utf8copy(b.Caption,1,14)+'...';
+        end;
         if assigned(FTBOnMouseUp) then b.OnMouseUp:=FTBOnMouseUp;
         if assigned(FTBOnMouseDown) then b.OnMouseDown:=FTBOnMouseDown;
         b.Left:=lpos;
