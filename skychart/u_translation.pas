@@ -1556,6 +1556,10 @@ resourcestring
   rsButtonSize = 'Button size';
   rsShowButtonTe = 'Show button text';
   rsResizeIcon = 'Resize icon ';
+  rsUp = 'Up';
+  rsDown = 'Down';
+  rsExpand = 'Expand';
+  rsCollapse = 'Collapse';
 
 // also update upsi_translation
 

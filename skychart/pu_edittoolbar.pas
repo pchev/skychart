@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, u_translation,  u_help,
+uses u_constant, u_translation,  u_help, IniFiles,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
   lazutf8, ActnList, ExtCtrls, StdCtrls, PairSplitter, Buttons;
 
@@ -37,6 +37,8 @@ type
   { Tf_edittoolbar }
 
   Tf_edittoolbar = class(TForm)
+    ButtonSave: TBitBtn;
+    ButtonLoad: TBitBtn;
     ButtonHelp: TButton;
     ButtonClear: TBitBtn;
     ButtonDown: TBitBtn;
@@ -51,6 +53,8 @@ type
     ButtonOK: TButton;
     ButtonCancel: TButton;
     BtnText: TCheckBox;
+    OpenDialog1: TOpenDialog;
+    PanelRbot: TPanel;
     ResizeIcon: TCheckBox;
     ComboBox1: TComboBox;
     BtnSize: TComboBox;
@@ -66,18 +70,21 @@ type
     ActionTreeView: TTreeView;
     editbarPanel: TPanel;
     PanelLeft: TPanel;
+    SaveDialog1: TSaveDialog;
     procedure BtnSizeChange(Sender: TObject);
     procedure BtnTextChange(Sender: TObject);
     procedure ButtonEmptyClick(Sender: TObject);
     procedure ButtonCollapseClick(Sender: TObject);
     procedure ButtonExpandClick(Sender: TObject);
     procedure ButtonHelpClick(Sender: TObject);
+    procedure ButtonLoadClick(Sender: TObject);
     procedure ButtonMiniClick(Sender: TObject);
     procedure ButtonClearClick(Sender: TObject);
     procedure ButtonDownClick(Sender: TObject);
     procedure ButtonOKClick(Sender: TObject);
     procedure ButtonAddClick(Sender: TObject);
     procedure ButtonDelClick(Sender: TObject);
+    procedure ButtonSaveClick(Sender: TObject);
     procedure ButtonStdClick(Sender: TObject);
     procedure ButtonUpClick(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
@@ -191,6 +198,15 @@ ButtonEmpty.Caption:=rsEmpty;
 DividerTxt:=rsDivider;
 SeparatorTxt:=rsSeparator;
 SetHelp(self,hlpToolbarEditor);
+ButtonAdd.Hint:=rsAdd;
+ButtonDel.Hint:=rsDelete;
+ButtonUp.Hint:=rsUp;
+ButtonDown.Hint:=rsDown;
+ButtonClear.Hint:=rsClear;
+ButtonExpand.Hint:=rsExpand;
+ButtonCollapse.Hint:=rsCollapse;
+ButtonSave.Hint:=rsSaveToFile;
+ButtonLoad.Hint:=rsLoadFromFile;
 end;
 
 procedure Tf_edittoolbar.SetImages(value: TImageList);
@@ -833,6 +849,60 @@ procedure Tf_edittoolbar.BtnTextChange(Sender: TObject);
 begin
  if BtnSize.ItemIndex<2 then BtnText.Checked:=false;
  if ResizeIcon.Checked  then BtnText.Checked:=false;
+end;
+
+procedure Tf_edittoolbar.ButtonSaveClick(Sender: TObject);
+var str:TStringList;
+    section: string;
+    inif: TMemIniFile;
+    i,j: integer;
+begin
+if SaveDialog1.Execute then begin
+ inif:=TMeminifile.create(SaveDialog1.FileName);
+ str:=TStringList.Create;
+ try
+   for i:=0 to numeditbar-1 do begin
+     section:='bar'+inttostr(i);
+     SaveToolbar(i,str);
+     inif.WriteInteger(section,'btncount',str.Count);
+     for j:=0 to str.Count-1 do begin
+       inif.WriteString(section,'b'+inttostr(j),str[j]);
+     end;
+   end;
+   inif.Updatefile;
+ finally
+   inif.Free;
+   str.Free;
+ end;
+end;
+end;
+
+procedure Tf_edittoolbar.ButtonLoadClick(Sender: TObject);
+var str:TStringList;
+    section,buf: string;
+    inif: TMemIniFile;
+    i,j,n: integer;
+begin
+if OpenDialog1.Execute then begin
+ ButtonEmptyClick(nil);
+ inif:=TMeminifile.create(OpenDialog1.FileName);
+ str:=TStringList.Create;
+ try
+   for i:=0 to numeditbar-1 do begin
+     section:='bar'+inttostr(i);
+     str.Clear;
+     n:=inif.ReadInteger(section,'btncount',0);
+     for j:=0 to n-1 do begin
+       buf:=inif.ReadString(section,'b'+inttostr(j),'');
+       if buf<>'' then str.Add(buf);
+     end;
+     LoadToolbar(i,str);
+   end;
+ finally
+   inif.Free;
+   str.Free;
+ end;
+end;
 end;
 
 end.
