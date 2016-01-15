@@ -1561,6 +1561,8 @@ resourcestring
   rsExpand = 'Expand';
   rsCollapse = 'Collapse';
   rsTrajectories = 'Trajectories simulation';
+  rsStartForward = 'Start forward';
+  rsStartBackwar = 'Start backward';
 
 // also update upsi_translation
 

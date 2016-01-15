@@ -7248,11 +7248,11 @@ TimeReset.Caption:=rsNow;
 TimeReset.hint:=rsNow;
 TimeInc.Caption:=rsIncrementTim;
 TimeInc.hint:=rsIncrementTim;
-Animation.Caption:=rsAnimation;
-Animation.Hint:=rsAnimation;
+Animation.Caption:=rsStartForward;
+Animation.Hint:=rsStartForward;
 Animation.Category:=CatAnimation;
-AnimBackward.Caption:=rsBackward;
-AnimBackward.Hint:=rsBackward;
+AnimBackward.Caption:=rsStartBackwar;
+AnimBackward.Hint:=rsStartBackwar;
 AnimBackward.Category:=CatAnimation;
 
 // Menu without action
