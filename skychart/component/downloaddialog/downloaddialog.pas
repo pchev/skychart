@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  LResources, blcksock, HTTPsend, FTPSend, FileUtil,
+  LResources, blcksock, HTTPsend, FTPSend, FileUtil, ssl_openssl,
   Classes, SysUtils, Dialogs, Buttons, Graphics, Forms, Controls, StdCtrls, ExtCtrls;
 
 type
@@ -143,6 +143,7 @@ constructor TDownloadDialog.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   http:=THTTPSend.Create;
+  http.UserAgent:='Wget/1.16.1 (linux-gnu)';
   ftp :=TFTPSend.Create;
   Timer1:=TTimer.Create(self);
   Timer1.Enabled:=false;
