@@ -48,7 +48,11 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    AnimBackward: TAction;
+    Trajectories: TAction;
     ContainerPanel: TPanel;
+    MenuTrajectory: TMenuItem;
+    N6: TMenuItem;
     MenuUpdSatellite: TMenuItem;
     MenuUpdSoft: TMenuItem;
     MenuUpdComet: TMenuItem;
@@ -407,7 +411,6 @@ type
     MenuShowMark: TMenuItem;
     MenuShowObjectbelowthehorizon: TMenuItem;
     MenuCalendar: TMenuItem;
-    N6: TMenuItem;
     ShowBackgroundImage: TAction;
     Position: TAction;
     SyncChart: TAction;
@@ -485,6 +488,7 @@ type
     procedure TimeUChange(Sender: TObject);
     procedure ToolBarFOVResize(Sender: TObject);
     procedure TrackTelescopeExecute(Sender: TObject);
+    procedure TrajectoriesExecute(Sender: TObject);
     procedure ViewChartInfoExecute(Sender: TObject);
     procedure ViewChartLegendExecute(Sender: TObject);
     procedure ViewNightVisionExecute(Sender: TObject);
@@ -629,6 +633,7 @@ type
     InitialChartNum, Animcount: integer;
     AutoRefreshLock: Boolean;
     AnimationEnabled: Boolean;
+    AnimationDirection: integer;
     Compass,arrow: TBitmap;
     CursorImage1: TCursorImage;
     SaveState: TWindowState;
@@ -2677,7 +2682,9 @@ var fs : TSearchRec;
     fn,cmd,logfile: string;
 begin
 AnimationEnabled:=not AnimationEnabled;
-Animation.Checked:=AnimationEnabled;
+AnimationDirection:=TAction(Sender).tag;
+Animation.Checked:=AnimationEnabled and (AnimationDirection>=0);
+AnimBackward.Checked:=AnimationEnabled and (AnimationDirection<0);
 if AnimationEnabled then begin  // start animation
    if (cfgm.AnimSx>0)and(cfgm.AnimSy>0) then begin
      r:=TStringList.Create;
@@ -2743,7 +2750,10 @@ procedure Tf_main.AnimationTimerTimer(Sender: TObject);
 var fn:string;
 begin
   AnimationTimer.Enabled:=false;
-  TimeInc.Execute;
+  if AnimationDirection>=0 then
+     TimeInc.Execute
+  else
+     TimeDec.Execute;
   if cfgm.AnimRec then begin
     if MultiFrame1.ActiveObject  is Tf_chart then
      with MultiFrame1.ActiveObject as Tf_chart do begin
@@ -3245,6 +3255,10 @@ if MultiFrame1.ActiveObject is Tf_chart then with (MultiFrame1.ActiveObject as T
 end;
 end;
 
+procedure Tf_main.TrajectoriesExecute(Sender: TObject);
+begin
+  SetupTimePage(1);
+end;
 
 procedure Tf_main.PositionExecute(Sender: TObject);
 begin
@@ -7041,6 +7055,9 @@ MouseMode.Category:=CatView;
 ScaleMode.Caption:=rsDistanceMeas;
 ScaleMode.Hint:=rsDistanceMeas;
 ScaleMode.Category:=CatView;
+Trajectories.Caption:=rsTrajectories;
+Trajectories.Hint:=rsTrajectories;
+Trajectories.Category:=CatView;
 // Menu Chart
 EquatorialProjection.caption:='&'+rsEquatorialCo;
 EquatorialProjection.hint:=rsEquatorialCo;
@@ -7233,6 +7250,10 @@ TimeInc.Caption:=rsIncrementTim;
 TimeInc.hint:=rsIncrementTim;
 Animation.Caption:=rsAnimation;
 Animation.Hint:=rsAnimation;
+Animation.Category:=CatAnimation;
+AnimBackward.Caption:=rsBackward;
+AnimBackward.Hint:=rsBackward;
+AnimBackward.Category:=CatAnimation;
 
 // Menu without action
 // Menu File
@@ -7592,7 +7613,8 @@ if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
     end;
     if (abs(sc.cfgsc.theta)>(pi-secarc))and(abs(sc.cfgsc.theta)<(pi+secarc)) then rotate180.ImageIndex:=93
        else rotate180.ImageIndex:=92;
-    Animation.Checked:=AnimationEnabled;
+    Animation.Checked:=AnimationEnabled and (AnimationDirection>=0);
+    AnimBackward.Checked:=AnimationEnabled and (AnimationDirection<0);
     TrackTelescope.Checked:=(sc.cfgsc.TrackOn and (sc.cfgsc.TrackName=rsTelescope));
     Tf_chart(sender).TrackTelescope1.Checked:=MenuTrackTelescope.Checked;
     ShowStars.Checked:=sc.cfgsc.showstars;
@@ -8548,15 +8570,19 @@ var btn : TPortableNetworkGraphic;
     bmp,sbmp: TBGRABitmap;
     col: Tcolor;
     iconpath: String;
-procedure SetButtonImage1(imagelist:Timagelist);
+procedure SetButtonImage1(var imagelist:Timagelist);
 var i: Integer;
 begin
    if cfgm.resizeicon then
       ImageListSize:=cfgm.btnsize*2 div 3
    else
       ImageListSize:=16;
+   {$ifdef mswindows}
    imagelist.Free;
    imagelist:=TImageList.Create(Self);
+   {$else}
+   imagelist.Clear;
+   {$endif}
    imagelist.Height:=ImageListSize;
    imagelist.Width:=ImageListSize;
    for i:=0 to ImageListCount-1 do begin
