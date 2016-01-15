@@ -425,7 +425,7 @@ Satellites.caption:=rsArtificialSa;
 Label8.caption:=rsChart2;
 Label7.caption:=rsLimitingMagn;
 Label6.caption:='TLE';
-tle1.text:='visible.tle';
+tle1.text:='';
 fullday.caption:=rsIncludeDayTi;
 IridiumBox.caption:=rsIncludeIridi;
 appmsg[1]:=rsRA;
@@ -1017,21 +1017,21 @@ ed:=inttostr(a+round(date2.jd-date1.jd));
 dt:=inttostr(1+Trunc(date2.jd-date1.jd));
 srcdir:=SysToUTF8(slash(prgdir));
 wrkdir:=SysToUTF8(slash(satdir));
-DeleteFile(slash(satdir)+'satlist.txt');
+DeleteFile(slash(satdir)+'satlist.out');
 DeleteFile(slash(satdir)+'quicksat.ctl');
-if not fileexists(slash(satdir)+'visible.tle') then CopyFile(srcdir+'sample.tle', wrkdir+'visible.tle');
+if (not fileexists(slash(satdir)+'visible.tle'))and(not fileexists(slash(satdir)+'visible.txt')) then CopyFile(srcdir+'sample.tle', wrkdir+'visible.tle');
 if not fileexists(slash(satdir)+'quicksat.mag') then CopyFile(srcdir+'quicksat.mag', wrkdir+'quicksat.mag');
 SatelliteList(inttostr(j),inttostr(m),inttostr(a),ed,maglimit.text,tle1.text,SatDir,prgdir,formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,MinSatAlt.Text,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,fullday.Checked,false);
-if not Fileexists(slash(SatDir)+'satlist.txt') then begin
+if not Fileexists(slash(SatDir)+'satlist.out') then begin
   Showmessage(rsCannotComput);
   exit;
 end;
-Assignfile(f,slash(SatDir)+'satlist.txt');
+Assignfile(f,slash(SatDir)+'satlist.out');
 reset(f);
 jdi:=1;
 if IridiumBox.Checked then begin
   srcdir:=SysToUTF8(slash(iridir));
-  if not fileexists(slash(SatDir)+'iridium.tle') then CopyFile(srcdir+'sample.tle', wrkdir+'iridium.tle');
+  if (not fileexists(slash(SatDir)+'iridium.tle'))and(not fileexists(slash(SatDir)+'iridium.txt')) then CopyFile(srcdir+'sample.tle', wrkdir+'iridium.tle');
   if not fileexists(slash(SatDir)+'F77L.EER') then CopyFile(srcdir+'F77L.EER', wrkdir+'F77L.EER');
   if not fileexists(slash(SatDir)+'IRIDFLAR.EXE') then CopyFile(srcdir+'IRIDFLAR.EXE', wrkdir+'IRIDFLAR.EXE');
   if not fileexists(slash(SatDir)+'SORT.COM') then CopyFile(srcdir+'SORT.COM', wrkdir+'SORT.COM');
@@ -1992,30 +1992,32 @@ var fn,str,s:string;
     f:textfile;
 begin
   LabelTle.Caption:='';
-  fn:=slash(SatDir)+tle1.text;
-  if FileExists(fn) then begin
-   AssignFile(f,fn);
-   reset(f);
-   str:='';
-   repeat
-     readln(f,str);
-     ok:=(copy(str,1,1)='1');
-   until eof(f) or ok;
-   CloseFile(f);
-   if ok then begin
-      s:=copy(str,19,2);
-      y:=StrToIntDef(s,-1);
-      if y<0 then exit;
-      if y>56 then y:=1900+y
-              else y:=2000+y;
-      s:=copy(str,21,12);
-      dd:=StrToFloatDef(s,-1);
-      if dd<0 then exit;
-      jdt:=jd(y,1,1,0);
-      jdt:=jdt+dd;
-      Djd(jdt,y,m,d,h);
-      LabelTle.Caption:=isodate(y,m,d);
-   end;
+  if tle1.text<>'' then begin
+    fn:=slash(SatDir)+tle1.text;
+    if FileExists(fn) then begin
+     AssignFile(f,fn);
+     reset(f);
+     str:='';
+     repeat
+       readln(f,str);
+       ok:=(copy(str,1,1)='1');
+     until eof(f) or ok;
+     CloseFile(f);
+     if ok then begin
+        s:=copy(str,19,2);
+        y:=StrToIntDef(s,-1);
+        if y<0 then exit;
+        if y>56 then y:=1900+y
+                else y:=2000+y;
+        s:=copy(str,21,12);
+        dd:=StrToFloatDef(s,-1);
+        if dd<0 then exit;
+        jdt:=jd(y,1,1,0);
+        jdt:=jdt+dd;
+        Djd(jdt,y,m,d,h);
+        LabelTle.Caption:=isodate(y,m,d);
+     end;
+    end;
   end;
 end;
 
@@ -2099,7 +2101,12 @@ if (aRow>=0)and(aColumn>=0) then begin
       sattle:=tle1.text;
       if IridiumBox.Checked then begin
          if StrToFloatDef(trim(satmag),6)<10 then satmag:='10';
-         if pos('iridium.tle',sattle)=0 then sattle:=sattle+',iridium.tle';
+         if pos('iridium.t',sattle)=0 then begin
+           if FileExistsUTF8(slash(SatDir)+'iridium.txt') then
+              sattle:=sattle+',iridium.txt'
+           else
+              sattle:=sattle+',iridium.tle';
+         end;
       end;
       DetailSat(p.jd,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,satmag,sattle,SatDir,slash(appdir)+slash('data')+slash('quicksat'),formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,MinSatAlt.Text,false);
       csconfig.racentre:=p.ra;
