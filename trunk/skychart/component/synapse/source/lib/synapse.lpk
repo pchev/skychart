@@ -1,10 +1,13 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <Package Version="3">
+  <Package Version="4">
     <Name Value="synapse"/>
+    <Type Value="RunAndDesignTime"/>
+    <AddToProjectUsesSection Value="True"/>
     <CompilerOptions>
-      <Version Value="9"/>
+      <Version Value="11"/>
       <SearchPaths>
+        <OtherUnitFiles Value="."/>
         <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
       </SearchPaths>
       <Parsing>
@@ -12,11 +15,8 @@
           <UseAnsiStrings Value="False"/>
         </SyntaxOptions>
       </Parsing>
-      <Other>
-        <CompilerPath Value="$(CompPath)"/>
-      </Other>
     </CompilerOptions>
-    <Files Count="4">
+    <Files Count="5">
       <Item1>
         <Filename Value="blcksock.pas"/>
         <UnitName Value="blcksock"/>
@@ -33,8 +33,11 @@
         <Filename Value="synaser.pas"/>
         <UnitName Value="synaser"/>
       </Item4>
+      <Item5>
+        <Filename Value="ssl_openssl.pas"/>
+        <UnitName Value="ssl_openssl"/>
+      </Item5>
     </Files>
-    <Type Value="RunAndDesignTime"/>
     <RequiredPkgs Count="1">
       <Item1>
         <PackageName Value="FCL"/>
@@ -48,5 +51,8 @@
       <Version Value="2"/>
       <IgnoreBinaries Value="False"/>
     </PublishOptions>
+    <CustomOptions Items="ExternHelp" Version="2">
+      <_ExternHelp Items="Count"/>
+    </CustomOptions>
   </Package>
 </CONFIG>
