@@ -1019,8 +1019,9 @@ srcdir:=SysToUTF8(slash(prgdir));
 wrkdir:=SysToUTF8(slash(satdir));
 DeleteFile(slash(satdir)+'satlist.out');
 DeleteFile(slash(satdir)+'quicksat.ctl');
+DeleteFile(slash(satdir)+'quicksat.mag');
 if (not fileexists(slash(satdir)+'visible.tle'))and(not fileexists(slash(satdir)+'visible.txt')) then CopyFile(srcdir+'sample.tle', wrkdir+'visible.tle');
-if not fileexists(slash(satdir)+'quicksat.mag') then CopyFile(srcdir+'quicksat.mag', wrkdir+'quicksat.mag');
+if not fileexists(slash(satdir)+'qs.mag') then CopyFile(srcdir+'qs.mag', wrkdir+'qs.mag');
 SatelliteList(inttostr(j),inttostr(m),inttostr(a),ed,maglimit.text,tle1.text,SatDir,prgdir,formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,MinSatAlt.Text,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,fullday.Checked,false);
 if not Fileexists(slash(SatDir)+'satlist.out') then begin
   Showmessage(rsCannotComput);
