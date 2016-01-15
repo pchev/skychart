@@ -239,9 +239,9 @@ object f_calendar: Tf_calendar
     Height = 385
     Top = 70
     Width = 835
-    ActivePage = Lunar
+    ActivePage = twilight
     Align = alClient
-    TabIndex = 5
+    TabIndex = 0
     TabOrder = 1
     OnChange = PageControl1Change
     object twilight: TTabSheet
@@ -777,16 +777,17 @@ object f_calendar: Tf_calendar
           TabOrder = 6
         end
         object TLEListBox: TFileListBox
-          Left = 336
+          Left = 320
           Height = 56
           Top = 4
-          Width = 110
-          Directory = '/home/pch'
-          ItemHeight = 21
+          Width = 126
+          Directory = '/'
+          ItemHeight = 0
           Mask = '*.tle;*.txt'
           MultiSelect = True
           OnClick = TLEListBoxClick
           TabOrder = 5
+          TopIndex = -1
         end
         object IridiumBox: TCheckBox
           Left = 461

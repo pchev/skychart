@@ -955,6 +955,7 @@ end;
 
 Procedure Tf_calendar.RefreshSatellite;
 var f,fi : textfile;
+    sr:TSearchRec;
     buf,mm,y,d,ed,dt,hh,mi,ss,dat1,s1,s2 : string;
     bufi,prgdir,iridir,srcdir,wrkdir : string;
     h,jda,ar,de,ma : double;
@@ -1024,7 +1025,6 @@ wrkdir:=SysToUTF8(slash(satdir));
 DeleteFile(slash(satdir)+'satlist.out');
 DeleteFile(slash(satdir)+'quicksat.ctl');
 DeleteFile(slash(satdir)+'quicksat.mag');
-if (not fileexists(slash(satdir)+'visible.tle'))and(not fileexists(slash(satdir)+'visible.txt')) then CopyFile(srcdir+'sample.tle', wrkdir+'visible.tle');
 if not fileexists(slash(satdir)+'qs.mag') then CopyFile(srcdir+'qs.mag', wrkdir+'qs.mag');
 SatelliteList(inttostr(j),inttostr(m),inttostr(a),ed,maglimit.text,tle1.text,SatDir,prgdir,formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,MinSatAlt.Text,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,fullday.Checked,false);
 if not Fileexists(slash(SatDir)+'satlist.out') then begin
@@ -1036,7 +1036,6 @@ reset(f);
 jdi:=1;
 if IridiumBox.Checked then begin
   srcdir:=SysToUTF8(slash(iridir));
-  if (not fileexists(slash(SatDir)+'iridium.tle'))and(not fileexists(slash(SatDir)+'iridium.txt')) then CopyFile(srcdir+'sample.tle', wrkdir+'iridium.tle');
   if not fileexists(slash(SatDir)+'F77L.EER') then CopyFile(srcdir+'F77L.EER', wrkdir+'F77L.EER');
   if not fileexists(slash(SatDir)+'IRIDFLAR.EXE') then CopyFile(srcdir+'IRIDFLAR.EXE', wrkdir+'IRIDFLAR.EXE');
   if not fileexists(slash(SatDir)+'SORT.COM') then CopyFile(srcdir+'SORT.COM', wrkdir+'SORT.COM');
@@ -2215,6 +2214,7 @@ case pagecontrol1.ActivePage.TabIndex of
          Dategroup2(false);
          SatPanel.Visible:=true;
          if doscmd='wine' then CheckWine;
+         TLEListBox.UpdateFileList;
          tle1Change(nil);
          //if (dat61<>date1.jd) then RefreshSatellite;
          end;
@@ -2441,6 +2441,7 @@ begin
   ExecuteFile(URL_TLE);
   ExecuteFile(Satdir);
  end;
+ TLEListBox.UpdateFileList;
 end;
 
 procedure Tf_calendar.dgPlanetDrawCell(Sender: TObject; aCol, aRow: Integer;
