@@ -18,6 +18,7 @@ uses unzip, ziputils, paszlib, ctypes,
   Classes, SysUtils;
 
 function FileUnzip(fnzip, TempDir, fn: PChar):boolean;
+function FileUnzipAll(fnzip, TempDir:Pchar):boolean;
 
 const
   CASESENSITIVITY = 0;
@@ -305,6 +306,34 @@ end;
     chdir(olddir);
     unzCloseCurrentFile(uf);
   end;
+
+  function FileUnzipAll(fnzip, TempDir:PChar):boolean;
+  var uf: unzFile;
+      olddir: string;
+      opt_extract_without_path,opt_overwrite: cint;
+      ok:boolean;
+      n: integer;
+  begin
+    result:=false;
+    uf := unzOpen(fnzip);
+    if uf=nil then exit;
+    olddir:=GetCurrentDir;
+    chdir(TempDir);
+    opt_extract_without_path:=1;
+    opt_overwrite:=1;
+    n:=0;
+    if unzGoToFirstFile(uf)=UNZ_OK then begin
+      repeat
+        ok:=do_extract_currentfile(uf,opt_extract_without_path,opt_overwrite)=UNZ_OK;
+        if ok then inc(n);
+        ok:=unzGoToNextFile(uf)=UNZ_OK;
+      until not ok;
+    end;
+    result:=n>0;
+    chdir(olddir);
+    unzCloseCurrentFile(uf);
+  end;
+
 
 end.
 
