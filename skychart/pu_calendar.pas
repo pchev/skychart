@@ -25,11 +25,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, Math, cu_database, u_satellite, Printers,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, FileUtil,
-  Dialogs, StdCtrls, FileCtrl, enhedits, Grids, ComCtrls, IniFiles,
-  jdcalendar, cu_planet, u_constant, pu_image, Buttons, ExtCtrls,
-  ActnList, StdActns, LResources, LazHelpHTML, types;
+uses u_help, u_translation, Math, cu_database, u_satellite, Printers, LCLIntf,
+  SysUtils, Classes, Graphics, Controls, Forms, FileUtil, Dialogs, StdCtrls,
+  FileCtrl, enhedits, Grids, ComCtrls, IniFiles, jdcalendar, cu_planet, u_unzip,
+  u_constant, pu_image, downloaddialog, Buttons, ExtCtrls, ActnList, StdActns,
+  LResources, LazHelpHTML, types;
 
 type
     TScFunc = procedure(csc:Tconf_skychart) of object;
@@ -56,9 +56,10 @@ type
     BtnSave: TButton;
     BtnPrint: TButton;
     BtnReset: TButton;
-    Button3: TButton;
+    BtnTleDownload: TButton;
     Button4: TButton;
     dgPlanet: TDrawGrid;
+    DownloadDialog1: TDownloadDialog;
     IridiumBox:TCheckBox;
     fullday:TCheckBox;
     Label10: TLabel;
@@ -131,7 +132,7 @@ type
     AsteroidGrid: TStringGrid;
     SaveDialog1: TSaveDialog;
     procedure BtnCopyClipClick(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
+    procedure BtnTleDownloadClick(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure dgPlanetDrawCell(Sender: TObject; aCol, aRow: Integer;
       aRect: TRect; aState: TGridDrawState);
@@ -201,9 +202,11 @@ type
     procedure RefreshSolarEclipse;
     procedure RefreshPlanetGraph;
     procedure RefreshSatellite;
+    procedure DownloadTle;
   public
     { Public declarations }
     cdb: Tcdcdb;
+    cmain: Tconf_main;
     AzNorth: boolean;
     config: Tconf_skychart;
     procedure SetLang;
@@ -335,6 +338,7 @@ if cdb=nil then begin
    comet.TabVisible:=false;
    Asteroids.TabVisible:=false;
 end;
+if cmain=nil then BtnTleDownload.Visible:=false;
 lockclick:=true;
 end;
 
@@ -417,7 +421,7 @@ comet.caption:=rsComet;
 Asteroids.caption:=rsAsteroid;
 Button1.caption:=rsFilter;
 Button2.caption:=rsFilter;
-Button3.Caption:=rsDownloadTLE;
+BtnTleDownload.Caption:=rsDownloadTLE;
 Button4.caption:='<- '+rsBrightest;
 Solar.caption:=rsSolarEclipse;
 Lunar.caption:=rsLunarEclipse;
@@ -2422,9 +2426,13 @@ begin {BtnCopyClipClick}
     end; {Grid => String Grid}
 end;
 
-procedure Tf_calendar.Button3Click(Sender: TObject);
+procedure Tf_calendar.BtnTleDownloadClick(Sender: TObject);
 var txt: string;
 begin
+ if cmain.TleUrlList.Count>0 then begin
+   DownloadTle;
+ end
+ else begin
   txt:=Format(rsPutTheFilesW, [satdir]);
   {$ifdef unix}
   txt:=txt+crlf+rsBeSureTheyUs;
@@ -2432,6 +2440,7 @@ begin
   ShowMessage(txt);
   ExecuteFile(URL_TLE);
   ExecuteFile(Satdir);
+ end;
 end;
 
 procedure Tf_calendar.dgPlanetDrawCell(Sender: TObject; aCol, aRow: Integer;
@@ -2852,5 +2861,63 @@ begin
 pagecontrol1.ActivePage.ShowHelp;
 //ExecuteFile(slash(helpdir)+slash('wiki_doc')+stringreplace(rsDocumentatio,'/',PathDelim,[rfReplaceAll]));
 end;
+
+procedure Tf_calendar.DownloadTle;
+var fn,ext,buf: string;
+    i,l,n: integer;
+    ok,zipfile: boolean;
+begin
+ n:=cmain.TleUrlList.Count;
+ if n=0 then exit;
+ fn:=slash(SatDir);
+  if cmain.HttpProxy then begin
+    DownloadDialog1.SocksProxy:='';
+    DownloadDialog1.SocksType:='';
+    DownloadDialog1.HttpProxy:=cmain.ProxyHost;
+    DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
+    DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
+    DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
+ end else if cmain.SocksProxy then begin
+    DownloadDialog1.HttpProxy:='';
+    DownloadDialog1.SocksType:=cmain.SocksType;
+    DownloadDialog1.SocksProxy:=cmain.ProxyHost;
+    DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
+    DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
+    DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
+ end else begin
+    DownloadDialog1.SocksProxy:='';
+    DownloadDialog1.SocksType:='';
+    DownloadDialog1.HttpProxy:='';
+    DownloadDialog1.HttpProxyPort:='';
+    DownloadDialog1.HttpProxyUser:='';
+    DownloadDialog1.HttpProxyPass:='';
+ end;
+ DownloadDialog1.FtpUserName:='anonymous';
+ DownloadDialog1.FtpPassword:=cmain.AnonPass;
+ DownloadDialog1.FtpFwPassive:=cmain.FtpPassive;
+ ok:=false; zipfile:=false;
+ for i:=1 to n do begin
+    DownloadDialog1.URL:=cmain.TleUrlList[i-1];
+    ext:=LowerCase(ExtractFileExt(DownloadDialog1.URL));
+    zipfile:=(ext='.zip');
+    fn:=slash(SatDir)+ExtractFileName(DownloadDialog1.URL);
+    DownloadDialog1.SaveToFile:=fn;
+    DownloadDialog1.ConfirmDownload:=cmain.ConfirmDownload and (i=1);
+    if DownloadDialog1.Execute then begin
+       ok:=true;
+       if zipfile then begin
+         FileUnzipAll(pchar(fn), pchar(SatDir));
+       end;
+    end else begin
+       Showmessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
+       ok:=false;
+       break;
+    end;
+ end;
+ if ok then begin
+   ShowMessage('TLE download OK');
+ end;
+end;
+
 
 end.

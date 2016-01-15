@@ -478,6 +478,15 @@ const
 
   URL_TLE = 'https://www.space-track.org';
   URL_QUICKSAT = 'http://www.prismnet.com/~mmccants/';
+  URL_QSMAG = 'https://www.prismnet.com/~mmccants/programs/qsmag.zip';
+
+  URL_TLEINFO1 = 'http://www.tle.info/data/iridium.txt';
+  URL_TLEINFO2 = 'http://www.tle.info/data/visual.txt';
+  URL_TLEINFO3 = 'http://www.tle.info/data/TLE.ZIP';
+
+  URL_CELESTRAK1 = 'http://celestrak.com/NORAD/elements/iridium.txt';
+  URL_CELESTRAK2 = 'http://celestrak.com/NORAD/elements/visual.txt';
+
 
   URL_GRS = 'http://jupos.privat.t-online.de/rGrs.htm';
   URL_JUPOS = 'http://jupos.org';
@@ -636,7 +645,6 @@ const
     ('http://ned.ipac.caltech.edu/cgi-bin/nph-objsearch?search_type=Near+Position+Search&in_csys=Equatorial&out_csys=Equatorial&out_equinox=J2000.0&of=pre_text&zv_breaker=30000.0&list_limit=5&img_stamp=YES&in_equinox=J2000.0&radius=2.0&lon=$RA&lat=$DE', 'NED'),
     ('http://leda.univ-lyon1.fr/fG.cgi?n=0&c=o&ob=ra&f=5&p=J$RA%20$DE',
     'HyperLeda'));
-
 
   DefaultffmpegOptions = '-b:v 18000k -bt 10000k';
 {$ifdef linux}
@@ -1098,7 +1106,7 @@ type
     AnimFps: double;
     ProxyHost, ProxyPort, ProxyUser, ProxyPass, AnonPass, SocksType: string;
     FtpPassive, HttpProxy, SocksProxy, ConfirmDownload: boolean;
-    CometUrlList, AsteroidUrlList: TStringList;
+    CometUrlList, AsteroidUrlList, TleUrlList: TStringList;
     ObsNameList: TStringList;
     SesameUrlNum, SesameCatNum: integer;
     ClockColor: TColor;
@@ -2631,6 +2639,7 @@ begin
   inherited Create;
   CometUrlList := TStringList.Create;
   AsteroidUrlList := TStringList.Create;
+  TleUrlList := TStringList.Create;
   ObsNameList := TStringList.Create;
 end;
 
@@ -2639,6 +2648,7 @@ begin
   try
   FreeAndNil(CometUrlList);
   FreeAndNil(AsteroidUrlList);
+  FreeAndNil(TleUrlList);
   FreeAndNil(ObsNameList);
   inherited Destroy;
   except
@@ -2767,6 +2777,9 @@ begin
   AsteroidUrlList.Clear;
   for i := 0 to Source.AsteroidUrlList.Count - 1 do
     AsteroidUrlList.Add(Source.AsteroidUrlList.Strings[i]);
+  TleUrlList.Clear;
+  for i := 0 to Source.TleUrlList.Count - 1 do
+    TleUrlList.Add(Source.TleUrlList.Strings[i]);
   ObsNameList.Clear;
   for i := 0 to Source.ObsNameList.Count - 1 do
     ObsNameList.AddObject(Source.ObsNameList.Strings[i], Source.ObsNameList.Objects[i]);

@@ -239,9 +239,9 @@ object f_calendar: Tf_calendar
     Height = 385
     Top = 70
     Width = 835
-    ActivePage = twilight
+    ActivePage = Lunar
     Align = alClient
-    TabIndex = 0
+    TabIndex = 5
     TabOrder = 1
     OnChange = PageControl1Change
     object twilight: TTabSheet
@@ -824,13 +824,13 @@ object f_calendar: Tf_calendar
           MinValue = 0
           MaxValue = 99
         end
-        object Button3: TButton
+        object BtnTleDownload: TButton
           Left = 630
           Height = 25
           Top = 2
           Width = 115
           Caption = 'Download TLE'
-          OnClick = Button3Click
+          OnClick = BtnTleDownloadClick
           TabOrder = 2
         end
         object MinSatAlt: TLongEdit
@@ -868,6 +868,14 @@ object f_calendar: Tf_calendar
     FilterIndex = 0
     Options = [ofOverwritePrompt, ofHideReadOnly, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
     left = 248
+    top = 232
+  end
+  object DownloadDialog1: TDownloadDialog
+    Timeout = 90000
+    FtpFwMode = 0
+    FtpFwPassive = True
+    ConfirmDownload = True
+    left = 408
     top = 232
   end
 end

@@ -1334,6 +1334,7 @@ if VerboseMsg then
  WriteTrace('Init calendar');
  f_calendar.planet:=planet;
  f_calendar.cdb:=cdcdb;
+ f_calendar.cmain:=cfgm;
  f_calendar.OnGetChartConfig:=GetChartConfig;
  f_calendar.OnUpdateChart:=DrawChart;
  f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
@@ -4598,6 +4599,10 @@ cfgm.AnonPass:='skychart@';
 cfgm.ObsNameList.Sorted:=true;
 cfgm.CometUrlList.Add(URL_HTTPCometElements);
 cfgm.AsteroidUrlList.Add(URL_CDCAsteroidElements);
+cfgm.TleUrlList.add(URL_TLEINFO1);
+cfgm.TleUrlList.add(URL_TLEINFO2);
+cfgm.TleUrlList.add(URL_TLEINFO3);
+cfgm.TleUrlList.add(URL_QSMAG);
 cfgm.starshape_file:='';
 cfgm.SampAutoconnect:=false;
 cfgm.SampKeepTables:=false;
@@ -5818,6 +5823,11 @@ if j>0 then begin
     cfgm.AsteroidUrlList.Add(buf);
   end;
 end;
+j:=ReadInteger(section,'TleUrlCount',0);
+if (j>0) then begin
+   cfgm.TleUrlList.Clear;
+   for i:=1 to j do cfgm.TleUrlList.Add(ReadString(section,'TleUrl'+inttostr(i),''));
+end;
 j:=ReadInteger(section,'ObsNameListCount',0);
 cfgm.ObsNameList.Clear;
 if j>0 then for i:=0 to j-1 do begin
@@ -6669,6 +6679,11 @@ j:=cfgm.AsteroidUrlList.Count;
 WriteInteger(section,'AsteroidUrlCount',j);
 if j>0 then begin
    for i:=1 to j do WriteString(section,'AsteroidUrl'+inttostr(i),cfgm.AsteroidUrlList[i-1]);
+end;
+j:=cfgm.TleUrlList.Count;
+WriteInteger(section,'TleUrlCount',j);
+if (j>0) then begin
+   for i:=1 to j do WriteString(section,'TleUrl'+inttostr(i),cfgm.TleUrlList[i-1]);
 end;
 j:=cfgm.ObsNameList.Count;
 WriteInteger(section,'ObsNameListCount',j);
@@ -9095,7 +9110,7 @@ begin
   f_calendar.show;
   f_calendar.bringtofront;
   f_calendar.PageControl1.PageIndex:=6;
-  f_calendar.Button3.Click;
+  f_calendar.BtnTleDownload.Click;
 end;
 
 procedure Tf_main.MenuUpdSoftClick(Sender: TObject);

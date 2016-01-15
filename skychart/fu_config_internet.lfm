@@ -6,8 +6,6 @@ object f_config_internet: Tf_config_internet
   ClientHeight = 511
   ClientWidth = 498
   TabOrder = 0
-  DesignLeft = 110
-  DesignTop = 279
   object MainPanel: TPanel
     Left = 0
     Height = 511
@@ -24,11 +22,11 @@ object f_config_internet: Tf_config_internet
       Height = 511
       Top = 0
       Width = 498
-      ActivePage = Page2
+      ActivePage = Page4
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
       ShowTabs = False
-      TabIndex = 1
+      TabIndex = 3
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Proxy'
@@ -304,9 +302,9 @@ object f_config_internet: Tf_config_internet
         ClientWidth = 494
         object Label8: TLabel
           Left = 20
-          Height = 16
+          Height = 15
           Top = 19
-          Width = 133
+          Width = 144
           Caption = 'Online pictures servers'
           ParentColor = False
         end
@@ -334,6 +332,59 @@ object f_config_internet: Tf_config_internet
           Caption = 'Default'
           OnClick = DefaultDSSClick
           TabOrder = 1
+        end
+      end
+      object Page4: TTabSheet
+        Caption = 'Page4'
+        ClientHeight = 507
+        ClientWidth = 494
+        object Label9: TLabel
+          Left = 28
+          Height = 15
+          Top = 6
+          Width = 244
+          Caption = 'Artificial satellites TLE (one URL by line)'
+          ParentColor = False
+        end
+        object TLEUrlList: TMemo
+          Left = 16
+          Height = 204
+          Top = 30
+          Width = 434
+          Anchors = [akTop, akLeft, akRight]
+          OnExit = TLEUrlListExit
+          ScrollBars = ssAutoBoth
+          TabOrder = 0
+          WordWrap = False
+        end
+        object tlecelestrack: TButton
+          Left = 16
+          Height = 25
+          Top = 248
+          Width = 112
+          BorderSpacing.InnerBorder = 4
+          Caption = 'Celestrak'
+          OnClick = tlecelestrackClick
+          TabOrder = 1
+        end
+        object tleinfo: TButton
+          Left = 184
+          Height = 25
+          Top = 248
+          Width = 112
+          BorderSpacing.InnerBorder = 4
+          Caption = 'Tle.info'
+          OnClick = tleinfoClick
+          TabOrder = 2
+        end
+        object tlemanual: TButton
+          Left = 338
+          Height = 25
+          Top = 248
+          Width = 112
+          Caption = 'Manual'
+          OnClick = tlemanualClick
+          TabOrder = 3
         end
       end
     end

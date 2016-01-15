@@ -1563,6 +1563,8 @@ resourcestring
   rsTrajectories = 'Trajectories simulation';
   rsStartForward = 'Start forward';
   rsStartBackwar = 'Start backward';
+  rsArtificialSa3 = 'Artificial satellites TLE (one URL by line)';
+  rsManual = 'Manual';
 
 // also update upsi_translation
 

@@ -37,7 +37,12 @@ type
   Tf_config_internet = class(TFrame)
     astcdc: TButton;
     astcdcneo: TButton;
+    tlemanual: TButton;
     CheckBox1: TCheckBox;
+    tleinfo: TButton;
+    TLEUrlList: TMemo;
+    tlecelestrack: TButton;
+    Label9: TLabel;
     SocksProxy: TCheckBox;
     SocksType: TComboBox;
     DefaultDSS: TButton;
@@ -71,6 +76,7 @@ type
     PageControl1: TPageControl;
     Page2: TTabSheet;
     DSSpictures: TStringGrid;
+    Page4: TTabSheet;
     procedure astcdcneoClick(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure anonpassChange(Sender: TObject);
@@ -91,12 +97,17 @@ type
     procedure proxyuserChange(Sender: TObject);
     procedure SocksProxyClick(Sender: TObject);
     procedure SocksTypeChange(Sender: TObject);
+    procedure tlecelestrackClick(Sender: TObject);
+    procedure tleinfoClick(Sender: TObject);
+    procedure tlemanualClick(Sender: TObject);
+    procedure TLEUrlListExit(Sender: TObject);
   private
     { Private declarations }
     FApplyConfig: TNotifyEvent;
     LockChange: boolean;
     procedure ShowProxy;
     procedure ShowOrbitalElements;
+    procedure ShowTle;
     procedure ShowDSS;
   public
     { Public declarations }
@@ -141,6 +152,9 @@ astcdcneo.Caption:=rsFirst5000+' NEO + TNO';
 Page3.caption:=rsOnlineDSS;
 Label8.caption:=rsOnlinePictur;
 DefaultDSS.caption:=rsDefault;
+Page4.Caption:=rsArtificialSa;
+Label9.Caption:=rsArtificialSa3;
+tlemanual.Caption:=rsManual;
 SetHelp(self,hlpCfgInt);
 end;
 
@@ -167,6 +181,7 @@ begin
 LockChange:=true;
 ShowProxy;
 ShowOrbitalElements;
+ShowTle;
 ShowDSS;
 LockChange:=false;
 end;
@@ -191,6 +206,11 @@ procedure Tf_config_internet.ShowOrbitalElements;
 begin
 CometUrlList.Lines.Assign(cmain.CometUrlList);
 AsteroidUrlList.Lines.Assign(cmain.AsteroidUrlList);
+end;
+
+procedure Tf_config_internet.ShowTle;
+begin
+TLEUrlList.Lines.Assign(cmain.TleUrlList);
 end;
 
 procedure Tf_config_internet.ShowDSS;
@@ -388,6 +408,38 @@ procedure Tf_config_internet.AsteroidUrlListExit(Sender: TObject);
 begin
 if lockchange then exit;
 cmain.AsteroidUrlList.Assign(AsteroidUrlList.Lines);
+end;
+
+
+procedure Tf_config_internet.tlecelestrackClick(Sender: TObject);
+begin
+TLEUrlList.Clear;
+TLEUrlList.Lines.Add(URL_CELESTRAK1);
+TLEUrlList.Lines.Add(URL_CELESTRAK2);
+TLEUrlList.Lines.Add(URL_QSMAG);
+TLEUrlListExit(Sender);
+end;
+
+procedure Tf_config_internet.tleinfoClick(Sender: TObject);
+begin
+TLEUrlList.Clear;
+TLEUrlList.Lines.Add(URL_TLEINFO1);
+TLEUrlList.Lines.Add(URL_TLEINFO2);
+TLEUrlList.Lines.Add(URL_TLEINFO3);
+TLEUrlList.Lines.Add(URL_QSMAG);
+TLEUrlListExit(Sender);
+end;
+
+procedure Tf_config_internet.tlemanualClick(Sender: TObject);
+begin
+TLEUrlList.Clear;
+TLEUrlListExit(Sender);
+end;
+
+procedure Tf_config_internet.TLEUrlListExit(Sender: TObject);
+begin
+if lockchange then exit;
+cmain.TleUrlList.Assign(TLEUrlList.Lines);
 end;
 
 end.
