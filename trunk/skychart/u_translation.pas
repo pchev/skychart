@@ -1560,6 +1560,7 @@ resourcestring
   rsDown = 'Down';
   rsExpand = 'Expand';
   rsCollapse = 'Collapse';
+  rsTrajectories = 'Trajectories simulation';
 
 // also update upsi_translation
 
