@@ -2179,12 +2179,12 @@ var
    f : textfile;
 const mois : array[1..12]of string = ('Jan ','Feb ','Mar ','Apr ','May ','June','July','Aug ','Sept','Oct ','Nov ','Dec ');
 begin
-if cfgsc.ShowArtSat and Fileexists(slash(SatDir)+'satdetail.txt') then begin
+if cfgsc.ShowArtSat and Fileexists(slash(SatDir)+'satdetail.out') then begin
   CloseSat;
   cfgsc.NewArtSat:=false;
   Filemode:=0;
   try
-  Assignfile(f,slash(SatDir)+'satdetail.txt');
+  Assignfile(f,slash(SatDir)+'satdetail.out');
   reset(f);
   Readln(f,buf);
   Readln(f,buf);
@@ -2268,9 +2268,9 @@ function Tskychart.FindArtSat(x1,y1,x2,y2:double; nextobj:boolean; var nom,ma,de
   begin
   first:=false;
   if not nextobj then begin
-    if not Fileexists(slash(SatDir)+'satdetail.txt') then  begin result:=false; exit; end;
+    if not Fileexists(slash(SatDir)+'satdetail.out') then  begin result:=false; exit; end;
     CloseSat;
-    Assignfile(fsat,slash(SatDir)+'satdetail.txt');
+    Assignfile(fsat,slash(SatDir)+'satdetail.out');
     reset(fsat);
     Readln(fsat,buf);
     Readln(fsat,buf);

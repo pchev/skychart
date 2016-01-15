@@ -702,9 +702,9 @@ object f_calendar: Tf_calendar
       ImageIndex = 5
       object SatGrid: TStringGrid
         Left = 0
-        Height = 282
+        Height = 290
         Top = 66
-        Width = 827
+        Width = 831
         Align = alClient
         Anchors = [akLeft, akRight, akBottom]
         ColCount = 10
@@ -721,46 +721,46 @@ object f_calendar: Tf_calendar
         Left = 0
         Height = 66
         Top = 0
-        Width = 827
+        Width = 831
         Align = alTop
         ClientHeight = 66
-        ClientWidth = 827
+        ClientWidth = 831
         TabOrder = 1
         object Bevel1: TBevel
-          Left = 221
+          Left = 200
           Height = 62
           Top = 2
-          Width = 233
+          Width = 254
           Style = bsRaised
         end
         object Label8: TLabel
-          Left = 124
+          Left = 88
           Height = 15
           Top = 32
-          Width = 30
+          Width = 35
           Alignment = taRightJustify
           Caption = 'map :'
           ParentColor = False
         end
         object Label7: TLabel
-          Left = 30
+          Left = 0
           Height = 15
           Top = 4
-          Width = 134
+          Width = 145
           Alignment = taRightJustify
           Caption = 'Magnitude limite, liste :'
           ParentColor = False
         end
         object Label6: TLabel
-          Left = 230
+          Left = 214
           Height = 15
           Top = 4
-          Width = 26
+          Width = 29
           Caption = 'TLE :'
           ParentColor = False
         end
         object tle1: TEdit
-          Left = 224
+          Left = 208
           Height = 21
           Top = 22
           Width = 97
@@ -770,36 +770,35 @@ object f_calendar: Tf_calendar
         end
         object fullday: TCheckBox
           Left = 462
-          Height = 26
+          Height = 24
           Top = 28
-          Width = 148
+          Width = 162
           Caption = 'Include day time pass'
           TabOrder = 6
         end
         object TLEListBox: TFileListBox
-          Left = 342
+          Left = 336
           Height = 56
           Top = 4
           Width = 110
-          Directory = '/home/compiler/lazarus'
-          ItemHeight = 0
-          Mask = '*.tle'
+          Directory = '/home/pch'
+          ItemHeight = 21
+          Mask = '*.tle;*.txt'
           MultiSelect = True
           OnClick = TLEListBoxClick
           TabOrder = 5
-          TopIndex = -1
         end
         object IridiumBox: TCheckBox
           Left = 461
-          Height = 26
+          Height = 24
           Top = 4
-          Width = 147
+          Width = 155
           Caption = 'Include Iridium flares'
           OnChange = IridiumBoxChange
           TabOrder = 1
         end
         object magchart: TFloatEdit
-          Left = 166
+          Left = 152
           Height = 21
           Hint = '0..99'
           Top = 29
@@ -812,7 +811,7 @@ object f_calendar: Tf_calendar
           MaxValue = 99
         end
         object maglimit: TFloatEdit
-          Left = 166
+          Left = 152
           Height = 21
           Hint = '0..99'
           Top = 0
@@ -850,15 +849,15 @@ object f_calendar: Tf_calendar
           Left = 686
           Height = 15
           Top = 32
-          Width = 92
+          Width = 98
           Caption = 'Minimal altitude'
           ParentColor = False
         end
         object LabelTle: TLabel
-          Left = 230
+          Left = 214
           Height = 15
           Top = 45
-          Width = 46
+          Width = 51
           Caption = 'LabelTle'
           ParentColor = False
         end

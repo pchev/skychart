@@ -101,7 +101,9 @@ begin
 if isWin98 then dcmd:='command.com /C'
    else dcmd:=doscmd;
 curdir:=GetCurrentDir;
-buf:=slash(tmpdir)+'satlist.txt';
+buf:=slash(tmpdir)+'satlist.txt';  // delete old file
+deletefile(buf);
+buf:=slash(tmpdir)+'satlist.out';
 deletefile(buf);
 try
 buf:=slash(tmpdir)+'quicksat.ctl';
@@ -171,7 +173,7 @@ buf:='quicksat.mag';  //quicksat.mag      Intrinsic magnitudes input file
 writeln(satctl,buf);
 buf:='none        ';  //none              Intrinsic magnitudes override file
 writeln(satctl,buf);
-buf:='satlist.txt';    //output.txt        Output file
+buf:='satlist.out';    //output.txt        Output file
 writeln(satctl,buf);
 s1:=tle;
 i:=pos(',',s1);
@@ -214,7 +216,9 @@ begin
 if isWin98 then dcmd:='command.com /C'
    else dcmd:=doscmd;
 curdir:=GetCurrentDir;
-buf:=slash(tmpdir)+'satdetail.txt';
+buf:=slash(tmpdir)+'satdetail.txt'; // delete old file
+deletefile(buf);
+buf:=slash(tmpdir)+'satdetail.out';
 deletefile(buf);
 try
 buf:=slash(tmpdir)+'quicksat.ctl';
@@ -294,7 +298,7 @@ buf:='quicksat.mag';  //quicksat.mag      Intrinsic magnitudes input file
 writeln(satctl,buf);
 buf:='none        ';  //none              Intrinsic magnitudes override file
 writeln(satctl,buf);
-buf:='satdetail.txt';    //output.txt        Output file
+buf:='satdetail.out';    //output.txt        Output file
 writeln(satctl,buf);
 s1:=tle;
 i1:=pos(',',s1);
@@ -343,7 +347,10 @@ assignfile(irictl,slash(tmpdir)+'IRIDFLAR.CFG');
 rewrite(irictl);
 buf:='[IRIDFLAR]';
 writeln(irictl,buf+doslf);
-buf:='EphemFile=iridium.tle';
+if FileExistsUTF8(slash(tmpdir)+'iridium.tle') then
+   buf:='EphemFile=iridium.tle'
+else
+   buf:='EphemFile=iridium.txt';
 writeln(irictl,buf+doslf);
 buf:='CityFile=skymap.cty';
 writeln(irictl,buf+doslf);
