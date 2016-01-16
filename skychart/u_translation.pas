@@ -1560,8 +1560,8 @@ resourcestring
   rsExpand = 'Expand';
   rsCollapse = 'Collapse';
   rsTrajectories = 'Trajectories simulation';
-  rsStartForward = 'Start forward';
-  rsStartBackwar = 'Start backward';
+  rsStartForward = 'Animation forward';
+  rsStartBackwar = 'Animation backward';
   rsArtificialSa3 = 'Artificial satellites TLE (one URL by line)';
   rsManual = 'Manual';
   rsScreenResolu = 'Screen resolution';

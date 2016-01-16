@@ -6131,11 +6131,11 @@ msgid "Trajectories simulation"
 msgstr ""
 
 #: u_translation:rsstartforward
-msgid "Start forward"
+msgid "Animation forward"
 msgstr ""
 
 #: u_translation:rsstartbackwar
-msgid "Start backward"
+msgid "Animation backward"
 msgstr ""
 
 #: u_translation:rsartificialsa3
