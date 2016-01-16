@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-13 17:30+0000\n"
-"PO-Revision-Date: 2014-11-19 16:23+0000\n"
+"POT-Creation-Date: 2016-01-16 15:33+0000\n"
+"PO-Revision-Date: 2016-01-15 09:59+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-13 17:44+0000\n"
+"X-Launchpad-Export-Date: 2016-01-16 15:52+0000\n"
 "X-Generator: Launchpad (build 17886)\n"
 "X-Poedit-Country: CATALONIA\n"
 
@@ -116,7 +116,7 @@ msgstr "Acció"
 
 #: u_translation.rsactivateallt
 msgid "Activate all the functions when hidden"
-msgstr ""
+msgstr "Activa totes les funcions quan estiguin ocultes"
 
 #: u_translation.rsactivatethet
 msgid "Activate the timer event when hidden"
@@ -600,7 +600,7 @@ msgstr "Botó"
 
 #: u_translation.rsbuttonsize
 msgid "Button size"
-msgstr ""
+msgstr "Mida del botó"
 
 #: u_translation.rsby
 msgid "by"
@@ -1020,7 +1020,7 @@ msgstr "Línies de connexió entre posicions"
 
 #: u_translation.rsconnectionto
 msgid "Connection to INDI server failed!"
-msgstr ""
+msgstr "La connexió al servidor INDI ha fallat!"
 
 #: u_translation.rsconnectteles
 msgid "Connect telescope"
@@ -2829,7 +2829,7 @@ msgstr "Latitud"
 
 #: u_translation.rslaunchindist
 msgid "Launch INDIstarter if the server is not running"
-msgstr ""
+msgstr "Engega el INDIstarter si el servidor no està funcionant"
 
 #: u_translation.rsleft
 msgid "Left"
@@ -3997,7 +3997,7 @@ msgstr "Sisplau, primer inicialitzeu l'elevació a 90 graus"
 
 #: u_translation.rspleaseinstal
 msgid "Please install indistarter package!"
-msgstr ""
+msgstr "Si us plau, instal·leu el paquet indistarter!"
 
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
@@ -4905,7 +4905,7 @@ msgstr "Fixeu el lloc d'observació"
 
 #: u_translation.rssetoptionsfo
 msgid "Set options for best performance"
-msgstr ""
+msgstr "Posa les opcions per al millor comportament"
 
 #: u_translation.rssetslewing
 msgid "Set Slewing"
@@ -4957,7 +4957,7 @@ msgstr "Mostra els asteroides en el mapa"
 
 #: u_translation.rsshowbuttonte
 msgid "Show button text"
-msgstr ""
+msgstr "Mostra el text del botó"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
@@ -5356,11 +5356,11 @@ msgid "Start"
 msgstr "Inicia"
 
 #: u_translation.rsstartbackwar
-msgid "Start backward"
+msgid "Animation backward"
 msgstr ""
 
 #: u_translation.rsstartforward
-msgid "Start forward"
+msgid "Animation forward"
 msgstr ""
 
 #: u_translation.rsstartgraphat
@@ -5521,7 +5521,7 @@ msgstr "Longitud focal del telescopi"
 
 #: u_translation.rstelescopenam
 msgid "Telescope name"
-msgstr ""
+msgstr "Nom del telescopi"
 
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
@@ -5978,7 +5978,7 @@ msgstr "Venus"
 
 #: u_translation.rsversion
 msgid "Version"
-msgstr ""
+msgstr "Versió"
 
 #: u_translation.rsverticalaxis
 msgid "Vertical axis encoder origin : %s"
