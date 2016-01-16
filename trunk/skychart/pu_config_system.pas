@@ -26,7 +26,7 @@ interface
 
 uses u_help, u_translation, u_constant, u_util, cu_database, fu_config_system,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
-  LCLIntf, SysUtils, Graphics, Forms, FileUtil,
+  LCLIntf, SysUtils, Graphics, Forms, FileUtil, UScaleDPI,
   ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML;
 
 type
@@ -73,6 +73,7 @@ end;
 
 procedure Tf_configsystem.FormCreate(Sender: TObject);
 begin
+ScaleDPI(Self,96);
 SetLang;
 end;
 

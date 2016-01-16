@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_voconstant,
+uses u_translation, u_voconstant, UScaleDPI,
   Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Grids, ExtCtrls, enhedits, LResources, Buttons;
 
@@ -184,6 +184,7 @@ end;
 
 procedure Tf_vodetail.FormCreate(Sender: TObject);
 begin
+  ScaleDPI(Self,96);
   Setlang;
   needdownload:=true;
   drawtype:=14;

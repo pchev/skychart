@@ -11,7 +11,8 @@ object f_zoom: Tf_zoom
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.4.3.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object Label1: TLabel
     Left = 16
     Height = 15

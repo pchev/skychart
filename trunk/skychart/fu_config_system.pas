@@ -35,8 +35,10 @@ type
   { Tf_config_system }
 
   Tf_config_system = class(TFrame)
+    UseScaling: TCheckBox;
     GetIndiDevices: TButton;
     CheckBox1: TCheckBox;
+    GroupBox2: TGroupBox;
     InternalIndiGui: TCheckBox;
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
@@ -147,6 +149,7 @@ type
     RevertTurnsAz: TCheckBox;
     RevertTurnsAlt: TCheckBox;
     PageControl1: TPageControl;
+    procedure UseScalingChange(Sender: TObject);
     procedure GetIndiDevicesClick(Sender: TObject);
     procedure CheckBox1Change(Sender: TObject);
     procedure CheckBox2Change(Sender: TObject);
@@ -265,6 +268,9 @@ DBtypeGroup.caption:=rsDatabaseType;
 DBtypeGroup.Hint:=rsWarning+crlf+rsChangeToThis;
 GroupBoxLinux.caption:=rsDesktopEnvir;
 Label12.caption:=rsURLLaunchCom;
+GroupBox2.Caption:=rsScreenResolu;
+UseScaling.Caption:=rsAdjustTheWin;
+UseScaling.Hint:=rsWarning+crlf+rsChangeToThis;
 LinuxDesktopBox.items[1]:=rsOther;
 GroupBox3.caption:=rsTCPIPServer;
 Label54.caption:=rsServerIPInte;
@@ -436,6 +442,7 @@ dbport.value:=cmain.dbport;
 dbuser.Text:=cmain.dbuser;
 dbpass.Text:=cmain.dbpass;
 persdir.text:=SysToUTF8(cmain.persdir);
+UseScaling.Checked:=cmain.ScreenScaling;
 {$if defined(linux) or defined(freebsd)}
 LinuxDesktopBox.itemIndex:=min(1,LinuxDesktop);
 LinuxCmd.Text:=OpenFileCMD;
@@ -629,6 +636,21 @@ if LockChange then exit;
 cmain.persdir:=utf8tosys(persdir.text);
 dbnamesqlite.Text:=systoutf8(slash(cmain.persdir)+slash('database')+'cdc.db');
 dbchanged:=true;
+end;
+
+procedure Tf_config_system.UseScalingChange(Sender: TObject);
+begin
+if LockChange then exit;
+if messageDlg(rsWarning+crlf+rsChangeToThis,
+   mtConfirmation, [mbYes, mbNo], 0)=mrYes then begin
+     cmain.ScreenScaling:=UseScaling.Checked;
+     if Assigned(FSaveAndRestart) then FSaveAndRestart(self);
+  end
+  else begin
+   LockChange:=true;
+   UseScaling.Checked:=not UseScaling.Checked;
+   LockChange:=false;
+  end;
 end;
 
 procedure Tf_config_system.LinuxDesktopBoxChange(Sender: TObject);

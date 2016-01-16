@@ -3,11 +3,14 @@ object f_imglist: Tf_imglist
   Height = 319
   Top = 209
   Width = 497
+  ActiveControl = CheckListBox1
   Caption = 'f_imglist'
   ClientHeight = 319
   ClientWidth = 497
+  OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object Panel1: TPanel
     Left = 0
     Height = 85

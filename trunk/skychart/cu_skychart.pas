@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, gcatunit,
+uses u_translation, gcatunit, UScaleDPI,
      BGRABitmap, BGRABitmapTypes, contnrs, FPCanvas,
      cu_plot, cu_catalog, cu_fits, u_constant, cu_planet, cu_database, u_projection, u_util,
      pu_addlabel, SysUtils, Classes, Math, Types, Buttons, dialogs,
@@ -4713,6 +4713,7 @@ f1.ClientHeight:=b1.top+b1.Height+8;
 e1.Text:=txt;
 f1.BorderStyle:=bsDialog;
 f1.Caption:=rsEditLabel;
+ScaleDPI(f1,96);
 formpos(f1,x,y);
 if f1.ShowModal=mrOK then begin
    txt:=e1.Text;

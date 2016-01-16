@@ -6110,7 +6110,47 @@ msgstr ""
 msgid "Show button text"
 msgstr ""
 
-#: u_translation:rsresizeicon
-msgid "Resize icon "
+#: u_translation:rsup
+msgid "Up"
+msgstr ""
+
+#: u_translation:rsdown
+msgid "Down"
+msgstr ""
+
+#: u_translation:rsexpand
+msgid "Expand"
+msgstr ""
+
+#: u_translation:rscollapse
+msgid "Collapse"
+msgstr ""
+
+#: u_translation:rstrajectories
+msgid "Trajectories simulation"
+msgstr ""
+
+#: u_translation:rsstartforward
+msgid "Start forward"
+msgstr ""
+
+#: u_translation:rsstartbackwar
+msgid "Start backward"
+msgstr ""
+
+#: u_translation:rsartificialsa3
+msgid "Artificial satellites TLE (one URL by line)"
+msgstr ""
+
+#: u_translation:rsmanual
+msgid "Manual"
+msgstr ""
+
+#: u_translation:rsscreenresolu
+msgid "Screen resolution"
+msgstr ""
+
+#: u_translation:rsadjustthewin
+msgid "Adjust the window size to the screen DPI"
 msgstr ""
 

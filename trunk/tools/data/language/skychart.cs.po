@@ -166,6 +166,10 @@ msgstr "Jas barev"
 msgid "Adjust the visualisation scale"
 msgstr "Nastavit zobrazení"
 
+#: u_translation.rsadjustthewin
+msgid "Adjust the window size to the screen DPI"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr "Pokročilé"
@@ -330,6 +334,10 @@ msgstr "Satelity"
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
 msgstr "Umělý satelit"
+
+#: u_translation.rsartificialsa3
+msgid "Artificial satellites TLE (one URL by line)"
+msgstr ""
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
@@ -878,6 +886,10 @@ msgstr "Ukončování spojení"
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
 msgstr "Hvězdokupa a mlhovina"
+
+#: u_translation.rscollapse
+msgid "Collapse"
+msgstr ""
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -1643,6 +1655,10 @@ msgstr "Dvojhvězdy"
 msgid "Double star"
 msgstr "Dvojhvězda"
 
+#: u_translation.rsdown
+msgid "Down"
+msgstr ""
+
 #: u_translation.rsdownload
 msgid "Download"
 msgstr "Stáhnout"
@@ -2000,6 +2016,10 @@ msgstr "Konec"
 #: u_translation.rsexiting
 msgid "Exiting ..."
 msgstr "Ukončuji..."
+
+#: u_translation.rsexpand
+msgid "Expand"
+msgstr ""
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -3091,6 +3111,10 @@ msgstr "Proveďte výběr tabulky a sloupce, které chcete do vašeho katalogu."
 
 #: u_translation.rsmanagetoolbo
 msgid "Manage tool box script"
+msgstr ""
+
+#: u_translation.rsmanual
+msgid "Manual"
 msgstr ""
 
 #: u_translation.rsmanualmount
@@ -4477,10 +4501,6 @@ msgstr "Zrušit otočení"
 msgid "Reset to last time the chart was saved"
 msgstr "Vrátit se k poslednímu uloženému nastavení"
 
-#: u_translation.rsresizeicon
-msgid "Resize icon "
-msgstr ""
-
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "Rozlišení:"
@@ -4664,6 +4684,10 @@ msgstr "Prohledat adresář"
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
 msgstr "Scope pokročilé"
+
+#: u_translation.rsscreenresolu
+msgid "Screen resolution"
+msgstr ""
 
 #: u_translation.rsscript
 msgid "Script"
@@ -5333,6 +5357,14 @@ msgstr "Vlastního pohyb hvězd (musí podporovat katalog)"
 msgid "Start"
 msgstr "Začátek"
 
+#: u_translation.rsstartbackwar
+msgid "Start backward"
+msgstr ""
+
+#: u_translation.rsstartforward
+msgid "Start forward"
+msgstr ""
+
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
 msgstr "Začátek grafu v místní poledne"
@@ -5665,6 +5697,10 @@ msgstr "Sledování"
 msgid "Track telescope"
 msgstr "Sledovat dalekohledem"
 
+#: u_translation.rstrajectories
+msgid "Trajectories simulation"
+msgstr ""
+
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr "Transformace"
@@ -5803,6 +5839,10 @@ msgstr "Odemknout mapu"
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
+msgstr ""
+
+#: u_translation.rsup
+msgid "Up"
 msgstr ""
 
 #: u_translation.rsupdate1

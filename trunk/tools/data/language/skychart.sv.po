@@ -168,6 +168,10 @@ msgstr "Justera färgintensitet"
 msgid "Adjust the visualisation scale"
 msgstr "Justera visningsskalan"
 
+#: u_translation.rsadjustthewin
+msgid "Adjust the window size to the screen DPI"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr "Avancerat"
@@ -331,6 +335,10 @@ msgstr "Artificiella satelliter"
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
 msgstr "Artificiell satellit"
+
+#: u_translation.rsartificialsa3
+msgid "Artificial satellites TLE (one URL by line)"
+msgstr ""
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
@@ -879,6 +887,10 @@ msgstr "Stänger anslutning"
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
 msgstr "Kluster och nebulosa"
+
+#: u_translation.rscollapse
+msgid "Collapse"
+msgstr ""
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -1644,6 +1656,10 @@ msgstr "Dubbelstjärnor"
 msgid "Double star"
 msgstr "Dubbelstjärna"
 
+#: u_translation.rsdown
+msgid "Down"
+msgstr ""
+
 #: u_translation.rsdownload
 msgid "Download"
 msgstr "Hämta"
@@ -1999,6 +2015,10 @@ msgstr "Avsluta"
 #: u_translation.rsexiting
 msgid "Exiting ..."
 msgstr "Avslutar..."
+
+#: u_translation.rsexpand
+msgid "Expand"
+msgstr ""
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -3091,6 +3111,10 @@ msgstr "Välj tabell och kolumn som du vill ha i din katalog"
 #: u_translation.rsmanagetoolbo
 msgid "Manage tool box script"
 msgstr "Hantera skript för verktygslåda"
+
+#: u_translation.rsmanual
+msgid "Manual"
+msgstr ""
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -4476,10 +4500,6 @@ msgstr "Återställ rotation"
 msgid "Reset to last time the chart was saved"
 msgstr "Återställ till senaste gången kartan sparades"
 
-#: u_translation.rsresizeicon
-msgid "Resize icon "
-msgstr ""
-
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "Upplösning:"
@@ -4663,6 +4683,10 @@ msgstr "Skanna katalogen"
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
 msgstr "Scope Adv"
+
+#: u_translation.rsscreenresolu
+msgid "Screen resolution"
+msgstr ""
 
 #: u_translation.rsscript
 msgid "Script"
@@ -5332,6 +5356,14 @@ msgstr "Alternativ för stjärnors korrekta rörelse (om tillgängligt i katalog
 msgid "Start"
 msgstr "Starta"
 
+#: u_translation.rsstartbackwar
+msgid "Start backward"
+msgstr ""
+
+#: u_translation.rsstartforward
+msgid "Start forward"
+msgstr ""
+
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
 msgstr "Börja grafen kl. 12.00 lokal tid"
@@ -5664,6 +5696,10 @@ msgstr "Följning på/av"
 msgid "Track telescope"
 msgstr "Följ teleskop på kartan"
 
+#: u_translation.rstrajectories
+msgid "Trajectories simulation"
+msgstr ""
+
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr "Omvandla"
@@ -5803,6 +5839,10 @@ msgstr "Lås upp karta"
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
 msgstr "SAMP hubprofil felaktig. Måste vara en fil-URL"
+
+#: u_translation.rsup
+msgid "Up"
+msgstr ""
 
 #: u_translation.rsupdate1
 msgid "Update"

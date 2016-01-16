@@ -10,7 +10,8 @@ object f_configsystem: Tf_configsystem
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -79,7 +80,8 @@ object f_configsystem: Tf_configsystem
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 520
+          ClientHeight = 516
+          ClientWidth = 494
           inherited MysqlBox: TPanel
             inherited dbpass: TEdit
               Height = 23
@@ -107,6 +109,9 @@ object f_configsystem: Tf_configsystem
               Height = 23
             end
           end
+          inherited GroupBox1: TGroupBox
+            ClientHeight = 96
+          end
           inherited GroupBoxLinux: TGroupBox
             inherited LinuxDesktopBox: TComboBox
               Height = 23
@@ -117,28 +122,72 @@ object f_configsystem: Tf_configsystem
           end
         end
         inherited Page2: TTabSheet
-          ClientHeight = 520
+          ClientHeight = 516
+          ClientWidth = 494
         end
         inherited Page3: TTabSheet
-          ClientHeight = 520
+          ClientHeight = 516
+          ClientWidth = 494
           inherited PageControl2: TPageControl
             ActivePage = nil
             TabIndex = -1
+            inherited TabSheet1: TTabSheet
+              ClientHeight = 348
+              ClientWidth = 470
+              inherited INDI: TPanel
+                ClientHeight = 324
+                ClientWidth = 446
+                inherited ExternalControlPanel: TPanel
+                  ClientHeight = 41
+                  ClientWidth = 440
+                end
+              end
+            end
             inherited TabSheet2: TTabSheet
+              ClientHeight = 348
+              ClientWidth = 470
               inherited TelescopeManual: TPanel
+                ClientHeight = 326
+                ClientWidth = 446
                 inherited PageControl3: TPageControl
                   ActivePage = nil
                   TabIndex = -1
+                  inherited TabSheet5: TTabSheet
+                    ClientHeight = 173
+                    ClientWidth = 382
+                  end
+                  inherited TabSheet6: TTabSheet
+                    ClientHeight = 173
+                    ClientWidth = 382
+                  end
                 end
+              end
+            end
+            inherited TabSheet4: TTabSheet
+              ClientHeight = 348
+              ClientWidth = 470
+              inherited ASCOMPanel: TPanel
+                ClientHeight = 324
+                ClientWidth = 448
+              end
+            end
+            inherited TabSheet3: TTabSheet
+              ClientHeight = 348
+              ClientWidth = 470
+              inherited InterfacePanel: TPanel
+                ClientHeight = 324
+                ClientWidth = 448
               end
             end
           end
         end
         inherited Page4: TTabSheet
-          ClientHeight = 520
+          ClientHeight = 516
+          ClientWidth = 494
         end
         inherited Page5: TTabSheet
-          ClientHeight = 520
+          ClientHeight = 516
+          ClientWidth = 494
         end
       end
     end

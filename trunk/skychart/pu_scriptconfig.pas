@@ -4,7 +4,7 @@ unit pu_scriptconfig;
 
 interface
 
-uses  u_translation, fu_script, u_constant, u_util,
+uses  u_translation, fu_script, u_constant, u_util, UScaleDPI,
   Classes, SysUtils, FileUtil, Forms, Controls,
   Graphics, Dialogs, Grids, StdCtrls, ExtCtrls, Menus;
 
@@ -72,8 +72,9 @@ end;
 procedure Tf_scriptconfig.FormCreate(Sender: TObject);
 var i: integer;
 begin
-  StringGrid1.ColWidths[1]:=150;
-  StringGrid1.ColWidths[2]:=350;
+  ScaleDPI(Self,96);
+  StringGrid1.ColWidths[1]:=DoScaleY(150,96);
+  StringGrid1.ColWidths[2]:=DoScaleY(375,96);
   StringGrid1.RowCount:=numscript+1;
   for i:=1 to numscript do StringGrid1.Cells[0,i]:='F'+inttostr(i);
   SetLang;

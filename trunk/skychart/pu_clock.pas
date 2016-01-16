@@ -4,7 +4,7 @@ unit pu_clock;
 
 interface
 
-uses  u_constant, u_util, u_translation, u_projection, cu_planet,
+uses  u_constant, u_util, u_translation, u_projection, cu_planet, UScaleDPI,
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
   ExtCtrls, StdCtrls, ColorBox;
 
@@ -97,6 +97,7 @@ end;
 
 procedure Tf_clock.FormCreate(Sender: TObject);
 begin
+  ScaleDPI(Self,96);
   SetLang;
 end;
 

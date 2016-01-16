@@ -168,6 +168,10 @@ msgstr "ปรับความสว่างของสี"
 msgid "Adjust the visualisation scale"
 msgstr ""
 
+#: u_translation.rsadjustthewin
+msgid "Adjust the window size to the screen DPI"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr "ขั้นสูง"
@@ -331,6 +335,10 @@ msgstr "ดาวเทียม"
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
 msgstr "ดาวเทียม"
+
+#: u_translation.rsartificialsa3
+msgid "Artificial satellites TLE (one URL by line)"
+msgstr ""
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
@@ -879,6 +887,10 @@ msgstr "กำลังปิดการเชื่อมต่อ"
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
 msgstr "กระจุกดาวและเนบิวลา"
+
+#: u_translation.rscollapse
+msgid "Collapse"
+msgstr ""
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -1644,6 +1656,10 @@ msgstr "ดาวคู่"
 msgid "Double star"
 msgstr "ดาวคู่"
 
+#: u_translation.rsdown
+msgid "Down"
+msgstr ""
+
 #: u_translation.rsdownload
 msgid "Download"
 msgstr "ดาวน์โหลด"
@@ -1999,6 +2015,10 @@ msgstr "ออก"
 #: u_translation.rsexiting
 msgid "Exiting ..."
 msgstr "กำลังออก ..."
+
+#: u_translation.rsexpand
+msgid "Expand"
+msgstr ""
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -3090,6 +3110,10 @@ msgstr "เลือกตารางและคอลัมน์ที่ต
 
 #: u_translation.rsmanagetoolbo
 msgid "Manage tool box script"
+msgstr ""
+
+#: u_translation.rsmanual
+msgid "Manual"
 msgstr ""
 
 #: u_translation.rsmanualmount
@@ -4476,10 +4500,6 @@ msgstr "ยกเลิกการหมุน"
 msgid "Reset to last time the chart was saved"
 msgstr "กลับไปใช้ค่าที่แผนที่ถูกบันทึกครั้งล่าสุด"
 
-#: u_translation.rsresizeicon
-msgid "Resize icon "
-msgstr ""
-
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "ความละเอียด:"
@@ -4662,6 +4682,10 @@ msgstr "สแกนไดเร็กทอรี"
 
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
+msgstr ""
+
+#: u_translation.rsscreenresolu
+msgid "Screen resolution"
 msgstr ""
 
 #: u_translation.rsscript
@@ -5332,6 +5356,14 @@ msgstr "ตัวเลือกการเคลื่อนที่เฉพ
 msgid "Start"
 msgstr "เริ่มต้น"
 
+#: u_translation.rsstartbackwar
+msgid "Start backward"
+msgstr ""
+
+#: u_translation.rsstartforward
+msgid "Start forward"
+msgstr ""
+
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
 msgstr "เริ่มกราฟที่เวลาเที่ยงวัน"
@@ -5664,6 +5696,10 @@ msgstr "ตาม"
 msgid "Track telescope"
 msgstr "ตามกล้องโทรทรรศน์"
 
+#: u_translation.rstrajectories
+msgid "Trajectories simulation"
+msgstr ""
+
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr "การแปลง"
@@ -5802,6 +5838,10 @@ msgstr "ปลดล็อกแผนที่"
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
+msgstr ""
+
+#: u_translation.rsup
+msgid "Up"
 msgstr ""
 
 #: u_translation.rsupdate1

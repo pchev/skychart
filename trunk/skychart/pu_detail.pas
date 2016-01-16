@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_util, u_constant, Clipbrd,
+uses u_help, u_translation, u_util, u_constant, Clipbrd, UScaleDPI,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, FileUtil, IpHtml,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
   Buttons, LazHelpHTML, types;
@@ -212,6 +212,7 @@ end;
 
 procedure Tf_detail.FormCreate(Sender: TObject);
 begin
+ScaleDPI(Self,96);
 FTextOnly:=false;
 SetLang;
 end;

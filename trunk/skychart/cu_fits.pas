@@ -24,8 +24,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation,
-  u_util, u_constant, u_projection, SysUtils, Classes,  passql, pasmysql, passqlite, StrUtils, FileUtil,
+uses u_translation, UScaleDPI,
+  u_util, u_constant, u_projection, SysUtils, Classes,  passql, pasmysql, passqlite, FileUtil,
   Graphics,Math, FPImage, Controls, LCLType, Forms, StdCtrls, ComCtrls, ExtCtrls, Buttons, IntfGraphics;
 
 type Tfitsheader = record
@@ -237,6 +237,7 @@ GetAllHeader(hdr);
 m.Lines:=hdr;
 FormPos(f,mouse.CursorPos.X,mouse.CursorPos.Y);
 f.Caption:=SysToUTF8(FFileName);
+ScaleDPI(f,96);
 f.ShowModal;
 finally
 hdr.free;

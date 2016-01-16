@@ -4,7 +4,7 @@ unit pu_imglist;
 
 interface
 
-uses u_help, u_translation, cu_fits, u_constant,
+uses u_help, u_translation, cu_fits, u_constant, UScaleDPI,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   CheckLst, StdCtrls, Menus;
 
@@ -30,6 +30,7 @@ type
     procedure Button6Click(Sender: TObject);
     procedure CheckListBox1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ViewHeaderClick(Sender: TObject);
   private
@@ -66,6 +67,12 @@ Application.ProcessMessages;
 if Button = mbRight then begin
   PopupMenu1.PopUp;
 end;
+end;
+
+procedure Tf_imglist.FormCreate(Sender: TObject);
+begin
+  ScaleDPI(Self,96);
+  SetLang;
 end;
 
 procedure Tf_imglist.Button5Click(Sender: TObject);

@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_translation, u_constant, u_projection, u_help,
+uses  u_translation, u_constant, u_projection, u_help, UScaleDPI,
   u_scriptsocket, u_util, ActnList, pu_pascaleditor, fpjson, jsonparser,
   cu_database, cu_catalog, cu_fits, cu_planet, math, fu_chart, jdcalendar, upsi_translation,
   uPSComponent, uPSComponent_Default, uPSCompiler, uPSRuntime, uPSComponent_DB,
@@ -1946,6 +1946,7 @@ end;
 procedure Tf_scriptengine.FormCreate(Sender: TObject);
 var i: integer;
 begin
+  ScaleDPI(Self,96);
   grnum:=0;
   btnum:=0;
   ednum:=0;

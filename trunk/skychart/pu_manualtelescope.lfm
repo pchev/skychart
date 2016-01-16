@@ -16,12 +16,13 @@ object f_manualtelescope: Tf_manualtelescope
   OnMouseMove = FormMouseMove
   OnMouseUp = FormMouseUp
   ParentFont = True
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object Label1: TLabel
     Left = 16
     Height = 15
     Top = 8
-    Width = 100
+    Width = 111
     Caption = 'Manual Telescope'
     Font.Color = clRed
     Font.Height = -12
@@ -34,7 +35,7 @@ object f_manualtelescope: Tf_manualtelescope
     Left = 16
     Height = 15
     Top = 24
-    Width = 77
+    Width = 99
     Caption = 'sep                   '
     Font.Color = clRed
     Font.Height = -12
@@ -45,9 +46,9 @@ object f_manualtelescope: Tf_manualtelescope
   end
   object Label4: TLabel
     Left = 16
-    Height = 23
+    Height = 24
     Top = 44
-    Width = 91
+    Width = 98
     Caption = 'RA turns: '
     Font.Color = clRed
     Font.Height = -20
@@ -58,9 +59,9 @@ object f_manualtelescope: Tf_manualtelescope
   end
   object Label5: TLabel
     Left = 16
-    Height = 23
+    Height = 24
     Top = 72
-    Width = 100
+    Width = 113
     Caption = 'DEC turns: '
     Font.Color = clRed
     Font.Height = -20

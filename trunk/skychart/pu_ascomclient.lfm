@@ -14,14 +14,15 @@ object pop_scope: Tpop_scope
   OnDestroy = FormDestroy
   ParentFont = True
   Position = poDefaultPosOnly
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object GroupBox3: TGroupBox
     Left = 8
     Height = 88
     Top = 360
     Width = 290
-    ClientHeight = 84
-    ClientWidth = 286
+    ClientHeight = 86
+    ClientWidth = 288
     TabOrder = 3
     object SpeedButton1: TSpeedButton
       Left = 5
@@ -62,7 +63,7 @@ object pop_scope: Tpop_scope
       Left = 6
       Height = 15
       Top = 41
-      Width = 75
+      Width = 83
       Caption = 'WarningLabel'
       ParentColor = False
     end
@@ -81,14 +82,14 @@ object pop_scope: Tpop_scope
     Top = 144
     Width = 288
     Caption = 'Observatory '
-    ClientHeight = 65
-    ClientWidth = 284
+    ClientHeight = 80
+    ClientWidth = 286
     TabOrder = 1
     object Label15: TLabel
       Left = 0
       Height = 15
       Top = 20
-      Width = 57
+      Width = 63
       Caption = 'Latitude : '
       ParentColor = False
     end
@@ -96,7 +97,7 @@ object pop_scope: Tpop_scope
       Left = 134
       Height = 15
       Top = 20
-      Width = 63
+      Width = 70
       Caption = 'Longitude :'
       ParentColor = False
     end
@@ -153,7 +154,7 @@ object pop_scope: Tpop_scope
       Left = 26
       Height = 15
       Top = 10
-      Width = 18
+      Width = 20
       Caption = 'RA '
       ParentColor = False
     end
@@ -161,7 +162,7 @@ object pop_scope: Tpop_scope
       Left = 157
       Height = 15
       Top = 10
-      Width = 24
+      Width = 25
       Caption = 'DEC'
       ParentColor = False
     end
@@ -169,7 +170,7 @@ object pop_scope: Tpop_scope
       Left = 26
       Height = 15
       Top = 34
-      Width = 14
+      Width = 17
       Caption = 'AZ'
       ParentColor = False
     end
@@ -232,9 +233,9 @@ object pop_scope: Tpop_scope
     end
     object ShowAltAz: TCheckBox
       Left = 8
-      Height = 26
+      Height = 24
       Top = 32
-      Width = 26
+      Width = 24
       TabOrder = 2
     end
     object TrackingBtn: TSpeedButton
@@ -263,8 +264,8 @@ object pop_scope: Tpop_scope
     Top = 0
     Width = 288
     Caption = 'Driver Selection'
-    ClientHeight = 105
-    ClientWidth = 284
+    ClientHeight = 120
+    ClientWidth = 286
     TabOrder = 0
     object SpeedButton3: TSpeedButton
       Left = 182
@@ -278,7 +279,7 @@ object pop_scope: Tpop_scope
       Left = 2
       Height = 15
       Top = 56
-      Width = 78
+      Width = 85
       Caption = 'Refresh rate :'
       ParentColor = False
     end
@@ -310,7 +311,7 @@ object pop_scope: Tpop_scope
     end
     object ReadIntBox: TComboBox
       Left = 110
-      Height = 21
+      Height = 27
       Top = 52
       Width = 64
       ItemHeight = 0

@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  u_translation, u_help, Classes, SysUtils, FileUtil, SynEdit, SynMemo,
+uses  u_translation, u_help, Classes, SysUtils, FileUtil, SynEdit, SynMemo, UScaleDPI,
   SynHighlighterPas, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
   Menus, ActnList, StdActns, Buttons, ComCtrls, uPSComponent, uPSDebugger,
   uPSRuntime, SynGutterBase, SynEditMarks, SynEditMarkupSpecialLine,
@@ -119,6 +119,7 @@ const
 
 procedure Tf_pascaleditor.FormCreate(Sender: TObject);
 begin
+  ScaleDPI(Self,96);
   FDebugResume:=false;
   SetLang;
 end;

@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_util, u_constant, cu_radec,
+uses u_help, u_translation, u_util, u_constant, cu_radec, UScaleDPI,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, ComCtrls, LResources, Math, LazHelpHTML;
 
@@ -106,6 +106,7 @@ end;
 
 procedure Tf_zoom.FormCreate(Sender: TObject);
 begin
+  ScaleDPI(Self,96);
   SetLang;
   Fnightvision:=false;
   LockFov:=false;

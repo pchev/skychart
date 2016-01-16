@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 interface
 
-uses Math, u_util, u_translation,
+uses Math, u_util, u_translation, UScaleDPI,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, Buttons, ComCtrls, cu_zoomimage,
   LResources;
@@ -157,6 +157,7 @@ end;
 
 procedure Tf_image.FormCreate(Sender: TObject);
 begin
+ScaleDPI(Self,96);
 SetLang;
 Image1.Align:=alClient;
 titre:='';

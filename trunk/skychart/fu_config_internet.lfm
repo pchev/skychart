@@ -198,44 +198,6 @@ object f_config_internet: Tf_config_internet
         Caption = 'Orbital Elements'
         ClientHeight = 507
         ClientWidth = 494
-        object Label6: TLabel
-          Left = 28
-          Height = 15
-          Top = 6
-          Width = 305
-          Caption = 'Comet elements in MPC format (one URL by line) '
-          ParentColor = False
-        end
-        object Label7: TLabel
-          Left = 28
-          Height = 15
-          Top = 182
-          Width = 313
-          Caption = 'Asteroid elements in MPC format (one URL by line)'
-          ParentColor = False
-        end
-        object CometUrlList: TMemo
-          Left = 16
-          Height = 108
-          Top = 30
-          Width = 434
-          Anchors = [akTop, akLeft, akRight]
-          OnExit = CometUrlListExit
-          ScrollBars = ssAutoBoth
-          TabOrder = 0
-          WordWrap = False
-        end
-        object AsteroidUrlList: TMemo
-          Left = 14
-          Height = 112
-          Top = 206
-          Width = 434
-          Anchors = [akTop, akLeft, akRight]
-          OnExit = AsteroidUrlListExit
-          ScrollBars = ssAutoBoth
-          TabOrder = 3
-          WordWrap = False
-        end
         object comdefault: TButton
           Left = 371
           Height = 25
@@ -244,7 +206,7 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
           OnClick = comdefaultClick
-          TabOrder = 2
+          TabOrder = 1
         end
         object astdefault: TButton
           Left = 371
@@ -254,7 +216,7 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
           OnClick = astdefaultClick
-          TabOrder = 5
+          TabOrder = 3
         end
         object mpcorb: TButton
           Left = 32
@@ -264,7 +226,7 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'MPCORB > 70Mb!'
           OnClick = mpcorbClick
-          TabOrder = 6
+          TabOrder = 4
         end
         object comhttp: TButton
           Left = 275
@@ -274,7 +236,7 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'MPC Http'
           OnClick = comhttpClick
-          TabOrder = 1
+          TabOrder = 0
         end
         object astcdc: TButton
           Left = 30
@@ -284,7 +246,7 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'First 5000'
           OnClick = astcdcClick
-          TabOrder = 4
+          TabOrder = 2
         end
         object astcdcneo: TButton
           Left = 170
@@ -293,36 +255,57 @@ object f_config_internet: Tf_config_internet
           Width = 163
           Caption = 'First 5000 + NEO + TNO'
           OnClick = astcdcneoClick
+          TabOrder = 5
+        end
+        object GroupBox3: TGroupBox
+          Left = 16
+          Height = 128
+          Top = 8
+          Width = 432
+          Caption = 'Comet elements in MPC format (one URL by line) '
+          ClientHeight = 112
+          ClientWidth = 430
+          TabOrder = 6
+          object CometUrlList: TMemo
+            Left = 0
+            Height = 112
+            Top = 0
+            Width = 430
+            Align = alClient
+            Anchors = [akTop, akLeft, akRight]
+            OnExit = CometUrlListExit
+            ScrollBars = ssAutoBoth
+            TabOrder = 0
+            WordWrap = False
+          end
+        end
+        object GroupBox4: TGroupBox
+          Left = 16
+          Height = 136
+          Top = 184
+          Width = 432
+          Caption = 'Asteroid elements in MPC format (one URL by line)'
+          ClientHeight = 120
+          ClientWidth = 430
           TabOrder = 7
+          object AsteroidUrlList: TMemo
+            Left = 0
+            Height = 120
+            Top = 0
+            Width = 430
+            Align = alClient
+            Anchors = [akTop, akLeft, akRight]
+            OnExit = AsteroidUrlListExit
+            ScrollBars = ssAutoBoth
+            TabOrder = 0
+            WordWrap = False
+          end
         end
       end
       object Page3: TTabSheet
         Caption = 'Online DSS'
         ClientHeight = 507
         ClientWidth = 494
-        object Label8: TLabel
-          Left = 20
-          Height = 15
-          Top = 19
-          Width = 144
-          Caption = 'Online pictures servers'
-          ParentColor = False
-        end
-        object DSSpictures: TStringGrid
-          Left = 16
-          Height = 324
-          Top = 48
-          Width = 454
-          Anchors = [akTop, akLeft, akRight]
-          ColCount = 2
-          DefaultColWidth = 120
-          FixedCols = 0
-          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goAlwaysShowEditor, goSmoothScroll]
-          RowCount = 11
-          TabOrder = 0
-          TitleFont.Height = -11
-          OnEditingDone = DSSpicturesEditingDone
-        end
         object DefaultDSS: TButton
           Left = 394
           Height = 25
@@ -331,32 +314,39 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
           OnClick = DefaultDSSClick
+          TabOrder = 0
+        end
+        object GroupBox5: TGroupBox
+          Left = 16
+          Height = 353
+          Top = 8
+          Width = 457
+          Caption = 'Online pictures servers'
+          ClientHeight = 337
+          ClientWidth = 455
           TabOrder = 1
+          object DSSpictures: TStringGrid
+            Left = 0
+            Height = 337
+            Top = 0
+            Width = 455
+            Align = alClient
+            Anchors = [akTop, akLeft, akRight]
+            ColCount = 2
+            DefaultColWidth = 120
+            FixedCols = 0
+            Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goAlwaysShowEditor, goSmoothScroll]
+            RowCount = 11
+            TabOrder = 0
+            TitleFont.Height = -11
+            OnEditingDone = DSSpicturesEditingDone
+          end
         end
       end
       object Page4: TTabSheet
         Caption = 'Page4'
         ClientHeight = 507
         ClientWidth = 494
-        object Label9: TLabel
-          Left = 28
-          Height = 15
-          Top = 6
-          Width = 244
-          Caption = 'Artificial satellites TLE (one URL by line)'
-          ParentColor = False
-        end
-        object TLEUrlList: TMemo
-          Left = 16
-          Height = 204
-          Top = 30
-          Width = 434
-          Anchors = [akTop, akLeft, akRight]
-          OnExit = TLEUrlListExit
-          ScrollBars = ssAutoBoth
-          TabOrder = 0
-          WordWrap = False
-        end
         object tlecelestrack: TButton
           Left = 16
           Height = 25
@@ -365,7 +355,7 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'Celestrak'
           OnClick = tlecelestrackClick
-          TabOrder = 1
+          TabOrder = 0
         end
         object tleinfo: TButton
           Left = 184
@@ -375,7 +365,7 @@ object f_config_internet: Tf_config_internet
           BorderSpacing.InnerBorder = 4
           Caption = 'Tle.info'
           OnClick = tleinfoClick
-          TabOrder = 2
+          TabOrder = 1
         end
         object tlemanual: TButton
           Left = 338
@@ -384,7 +374,29 @@ object f_config_internet: Tf_config_internet
           Width = 112
           Caption = 'Manual'
           OnClick = tlemanualClick
+          TabOrder = 2
+        end
+        object GroupBox6: TGroupBox
+          Left = 16
+          Height = 233
+          Top = 8
+          Width = 448
+          Caption = 'Artificial satellites TLE (one URL by line)'
+          ClientHeight = 217
+          ClientWidth = 446
           TabOrder = 3
+          object TLEUrlList: TMemo
+            Left = 0
+            Height = 217
+            Top = 0
+            Width = 446
+            Align = alClient
+            Anchors = [akTop, akLeft, akRight]
+            OnExit = TLEUrlListExit
+            ScrollBars = ssAutoBoth
+            TabOrder = 0
+            WordWrap = False
+          end
         end
       end
     end

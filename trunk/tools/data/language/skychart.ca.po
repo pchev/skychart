@@ -166,6 +166,10 @@ msgstr "Ajusta la lluminositat de superfície"
 msgid "Adjust the visualisation scale"
 msgstr "Ajusta l'escala de visualització"
 
+#: u_translation.rsadjustthewin
+msgid "Adjust the window size to the screen DPI"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr "Avançat"
@@ -329,6 +333,10 @@ msgstr "Satèl·lits artificials"
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
 msgstr "Satèl·lit artificial"
+
+#: u_translation.rsartificialsa3
+msgid "Artificial satellites TLE (one URL by line)"
+msgstr ""
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
@@ -877,6 +885,10 @@ msgstr "Tancament de la connexió"
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
 msgstr "Cúmul i nebulosa"
+
+#: u_translation.rscollapse
+msgid "Collapse"
+msgstr ""
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -1642,6 +1654,10 @@ msgstr "Dobles"
 msgid "Double star"
 msgstr "Estel doble"
 
+#: u_translation.rsdown
+msgid "Down"
+msgstr ""
+
 #: u_translation.rsdownload
 msgid "Download"
 msgstr "Descarrega"
@@ -1997,6 +2013,10 @@ msgstr "Surt"
 #: u_translation.rsexiting
 msgid "Exiting ..."
 msgstr "Sortida ..."
+
+#: u_translation.rsexpand
+msgid "Expand"
+msgstr ""
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -3090,6 +3110,10 @@ msgstr "Feu selecció de la taula i columnes que voleu per al catàleg"
 #: u_translation.rsmanagetoolbo
 msgid "Manage tool box script"
 msgstr "Governar script caixa d'eines"
+
+#: u_translation.rsmanual
+msgid "Manual"
+msgstr ""
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -4475,10 +4499,6 @@ msgstr "Refés la rotació"
 msgid "Reset to last time the chart was saved"
 msgstr "Torna a les opcions de la darrera carta desada"
 
-#: u_translation.rsresizeicon
-msgid "Resize icon "
-msgstr ""
-
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "Resolució:"
@@ -4662,6 +4682,10 @@ msgstr "Escaneja el directori"
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
 msgstr "Telescopi avançat"
+
+#: u_translation.rsscreenresolu
+msgid "Screen resolution"
+msgstr ""
 
 #: u_translation.rsscript
 msgid "Script"
@@ -5331,6 +5355,14 @@ msgstr "Opcions del moviment propi dels estels (si hi és en el catàleg)"
 msgid "Start"
 msgstr "Inicia"
 
+#: u_translation.rsstartbackwar
+msgid "Start backward"
+msgstr ""
+
+#: u_translation.rsstartforward
+msgid "Start forward"
+msgstr ""
+
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
 msgstr "Comença el gràfic al migdia local"
@@ -5664,6 +5696,10 @@ msgstr "Seguiment"
 msgid "Track telescope"
 msgstr "Segueix el telescopi"
 
+#: u_translation.rstrajectories
+msgid "Trajectories simulation"
+msgstr ""
+
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr "Transformació"
@@ -5803,6 +5839,10 @@ msgstr "Desbloca la carta"
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
 msgstr "Perfil del terminal SAMP no suportat. Cal un fitxer URL"
+
+#: u_translation.rsup
+msgid "Up"
+msgstr ""
 
 #: u_translation.rsupdate1
 msgid "Update"

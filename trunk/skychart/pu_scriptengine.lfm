@@ -374,7 +374,7 @@ object f_scriptengine: Tf_scriptengine
         end
         object EventComboBox: TComboBox
           Left = 134
-          Height = 23
+          Height = 25
           Top = 210
           Width = 180
           ItemHeight = 0

@@ -6,7 +6,7 @@ interface
 
 uses u_constant, u_translation, Math, u_util, cu_planet, u_projection, process,
   BGRABitmap, BGRABitmapTypes, Classes, SysUtils, FileUtil, Forms, Controls,
-  Types, Graphics, Dialogs, ComCtrls, ExtCtrls, Buttons, StdCtrls;
+  UScaleDPI, Types, Graphics, Dialogs, ComCtrls, ExtCtrls, Buttons, StdCtrls;
 
 type
   TChartDrawingControl = class(TCustomControl)
@@ -169,6 +169,7 @@ Img.DoubleBuffered := true;
 Img.OnPaint:=@ImgPaint;
 end;
 begin
+  ScaleDPI(Self,96);
   Initialized:=false;
   config:=Tconf_skychart.Create;
   plbmp:=TBGRABitmap.Create;

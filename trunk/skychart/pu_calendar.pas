@@ -29,7 +29,7 @@ uses u_help, u_translation, Math, cu_database, u_satellite, Printers, LCLIntf,
   SysUtils, Classes, Graphics, Controls, Forms, FileUtil, Dialogs, StdCtrls,
   FileCtrl, enhedits, Grids, ComCtrls, IniFiles, jdcalendar, cu_planet, u_unzip,
   u_constant, pu_image, downloaddialog, Buttons, ExtCtrls, ActnList, StdActns,
-  LResources, LazHelpHTML, types;
+  UScaleDPI, LResources, LazHelpHTML, types;
 
 type
     TScFunc = procedure(csc:Tconf_skychart) of object;
@@ -239,6 +239,7 @@ procedure Tf_calendar.FormCreate(Sender: TObject);
 var yy,mm,dd: word;
   i: Integer;
 begin
+ScaleDPI(Self,96);
 SetLang;
 config:=Tconf_skychart.Create;
 Fnightvision:=false;

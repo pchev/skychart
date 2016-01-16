@@ -6,7 +6,7 @@ interface
 
 uses  u_help, u_unzip, u_translation, u_constant, u_util, cu_database, LCLType,
   downloaddialog, enhedits, Classes, SysUtils, FileUtil, LResources, Forms,
-  Controls, Graphics, Dialogs, StdCtrls, ComCtrls;
+  UScaleDPI, Controls, Graphics, Dialogs, StdCtrls, ComCtrls;
 
 type
 
@@ -247,6 +247,7 @@ end;
 
 procedure Tf_observatory_db.FormCreate(Sender: TObject);
 begin
+ScaleDPI(Self,96);
 SetLang;
 countrycode:=TStringList.Create;
 citycode:=TStringList.Create;

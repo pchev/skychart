@@ -11,7 +11,8 @@ object f_configobservatory: Tf_configobservatory
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.4.0.1'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -84,12 +85,18 @@ object f_configobservatory: Tf_configobservatory
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 526
-          ClientWidth = 499
+          ClientHeight = 522
+          ClientWidth = 495
+          inherited HScrollBar: TScrollBar
+            Height = 15
+          end
+          inherited VScrollBar: TScrollBar
+            Width = 15
+          end
         end
         inherited Page2: TTabSheet
-          ClientHeight = 526
-          ClientWidth = 499
+          ClientHeight = 522
+          ClientWidth = 495
         end
       end
     end

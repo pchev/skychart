@@ -9,7 +9,7 @@ object f_scriptconfig: Tf_scriptconfig
   ClientWidth = 592
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '1.6.0.1'
+  LCLVersion = '1.6.0.2'
   Visible = False
   object StringGrid1: TStringGrid
     Left = 0

@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_help, u_translation, indibaseclient, indibasedevice, indiapi, indicom,  pu_indigui,
-  LCLIntf, u_util, u_constant, Messages, SysUtils, Classes, Graphics, Controls,
+  LCLIntf, u_util, u_constant, Messages, SysUtils, Classes, Graphics, Controls, UScaleDPI,
   Forms, Dialogs, StdCtrls, Buttons, inifiles, process, ComCtrls, Menus,
   ExtCtrls;
 
@@ -570,6 +570,7 @@ end;
 
 procedure Tpop_indi.FormCreate(Sender: TObject);
 begin
+ScaleDPI(Self,96);
 SlewRateList:=TStringList.Create;
 ClearStatus;
 end;

@@ -10,12 +10,13 @@ object f_print: Tf_print
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object PrinterInfo: TLabel
     Left = 9
     Height = 15
     Top = 14
-    Width = 62
+    Width = 65
     Caption = 'PrinterInfo'
     ParentColor = False
   end
@@ -34,8 +35,8 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 51
-    ClientWidth = 211
+    ClientHeight = 66
+    ClientWidth = 213
     ItemIndex = 0
     Items.Strings = (
       'Color, Line mode'
@@ -60,8 +61,8 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 51
-    ClientWidth = 145
+    ClientHeight = 66
+    ClientWidth = 147
     Items.Strings = (
       'Portrait'
       'Landscape'
@@ -107,14 +108,14 @@ object f_print: Tf_print
     Top = 192
     Width = 380
     Caption = 'Page Margin in millimeter'
-    ClientHeight = 59
-    ClientWidth = 376
+    ClientHeight = 74
+    ClientWidth = 378
     TabOrder = 5
     object Label1: TLabel
       Left = 5
       Height = 15
       Top = 14
-      Width = 24
+      Width = 23
       Caption = 'Left'
       ParentColor = False
     end
@@ -122,7 +123,7 @@ object f_print: Tf_print
       Left = 61
       Height = 15
       Top = 14
-      Width = 31
+      Width = 32
       Caption = 'Right'
       ParentColor = False
     end
@@ -130,7 +131,7 @@ object f_print: Tf_print
       Left = 117
       Height = 15
       Top = 14
-      Width = 20
+      Width = 21
       Caption = 'Top'
       ParentColor = False
     end
@@ -244,7 +245,7 @@ object f_print: Tf_print
       Left = 7
       Height = 15
       Top = 5
-      Width = 104
+      Width = 114
       Caption = 'Number of copies '
       ParentColor = False
     end
@@ -274,9 +275,9 @@ object f_print: Tf_print
   end
   object CheckBox1: TCheckBox
     Left = 9
-    Height = 26
+    Height = 24
     Top = 37
-    Width = 98
+    Width = 104
     Caption = 'Print header'
     Checked = True
     State = cbChecked
@@ -284,9 +285,9 @@ object f_print: Tf_print
   end
   object CheckBox2: TCheckBox
     Left = 231
-    Height = 26
+    Height = 24
     Top = 37
-    Width = 96
+    Width = 97
     Caption = 'Print footer'
     Checked = True
     State = cbChecked

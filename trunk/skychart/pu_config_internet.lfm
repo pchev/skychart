@@ -11,7 +11,8 @@ object f_configinternet: Tf_configinternet
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -85,8 +86,8 @@ object f_configinternet: Tf_configinternet
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 526
-          ClientWidth = 499
+          ClientHeight = 522
+          ClientWidth = 495
           inherited GroupBox1: TGroupBox
             inherited httpproxy: TCheckBox
               Height = 23
@@ -149,12 +150,16 @@ object f_configinternet: Tf_configinternet
           end
         end
         inherited Page2: TTabSheet
-          ClientHeight = 526
-          ClientWidth = 499
+          ClientHeight = 522
+          ClientWidth = 495
         end
         inherited Page3: TTabSheet
-          ClientHeight = 526
-          ClientWidth = 499
+          ClientHeight = 522
+          ClientWidth = 495
+        end
+        inherited Page4: TTabSheet
+          ClientHeight = 522
+          ClientWidth = 495
         end
       end
     end

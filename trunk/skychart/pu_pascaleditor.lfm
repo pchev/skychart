@@ -9,7 +9,8 @@ object f_pascaleditor: Tf_pascaleditor
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object Panel1: TPanel
     Left = 0
     Height = 80
@@ -70,7 +71,7 @@ object f_pascaleditor: Tf_pascaleditor
       Left = 8
       Height = 15
       Top = 9
-      Width = 36
+      Width = 41
       Caption = 'Label1'
       ParentColor = False
     end
@@ -523,7 +524,6 @@ object f_pascaleditor: Tf_pascaleditor
       'SynEdit1'
     )
     VisibleSpecialChars = [vscSpace, vscTabAtLast]
-    SelectedColor.FrameEdges = sfeAround
     SelectedColor.BackPriority = 50
     SelectedColor.ForePriority = 50
     SelectedColor.FramePriority = 50
@@ -531,23 +531,17 @@ object f_pascaleditor: Tf_pascaleditor
     SelectedColor.ItalicPriority = 50
     SelectedColor.UnderlinePriority = 50
     SelectedColor.StrikeOutPriority = 50
-    IncrementColor.FrameEdges = sfeAround
-    HighlightAllColor.FrameEdges = sfeAround
     BracketHighlightStyle = sbhsBoth
     BracketMatchColor.Background = clNone
     BracketMatchColor.Foreground = clNone
-    BracketMatchColor.FrameEdges = sfeAround
     BracketMatchColor.Style = [fsBold]
     FoldedCodeColor.Background = clNone
     FoldedCodeColor.Foreground = clGray
     FoldedCodeColor.FrameColor = clGray
-    FoldedCodeColor.FrameEdges = sfeAround
     MouseLinkColor.Background = clNone
     MouseLinkColor.Foreground = clBlue
-    MouseLinkColor.FrameEdges = sfeAround
     LineHighlightColor.Background = clNone
     LineHighlightColor.Foreground = clNone
-    LineHighlightColor.FrameEdges = sfeAround
     OnGutterClick = SynEdit1GutterClick
     OnSpecialLineColors = SynEdit1SpecialLineColors
     OnStatusChange = SynEdit1StatusChange
@@ -565,14 +559,12 @@ object f_pascaleditor: Tf_pascaleditor
         MouseActions = <>
         MarkupInfo.Background = clWhite
         MarkupInfo.Foreground = clGray
-        MarkupInfo.FrameEdges = sfeAround
       end
       object SynGutterLineNumber1: TSynGutterLineNumber
         Width = 17
         MouseActions = <>
         MarkupInfo.Background = clBtnFace
         MarkupInfo.Foreground = clNone
-        MarkupInfo.FrameEdges = sfeAround
         DigitCount = 2
         ShowOnlyLineNumbersMultiplesOf = 1
         ZeroStart = False
@@ -649,6 +641,7 @@ object f_pascaleditor: Tf_pascaleditor
       end
       object ToolButton7: TToolButton
         Left = 1
+        Height = 22
         Top = 2
         Width = 10
         Caption = 'ToolButton7'
@@ -656,6 +649,7 @@ object f_pascaleditor: Tf_pascaleditor
       end
       object ToolButton8: TToolButton
         Left = 34
+        Height = 22
         Top = 2
         Width = 10
         Caption = 'ToolButton8'
@@ -663,6 +657,7 @@ object f_pascaleditor: Tf_pascaleditor
       end
       object ToolButton9: TToolButton
         Left = 90
+        Height = 22
         Top = 2
         Width = 10
         Caption = 'ToolButton9'
@@ -670,6 +665,7 @@ object f_pascaleditor: Tf_pascaleditor
       end
       object ToolButton10: TToolButton
         Left = 146
+        Height = 22
         Top = 2
         Width = 10
         Caption = 'ToolButton10'
@@ -679,21 +675,10 @@ object f_pascaleditor: Tf_pascaleditor
   end
   object SynPasSyn1: TSynPasSyn
     Enabled = False
-    AsmAttri.FrameEdges = sfeAround
     CommentAttri.Foreground = clBlue
-    CommentAttri.FrameEdges = sfeAround
-    IDEDirectiveAttri.FrameEdges = sfeAround
-    IdentifierAttri.FrameEdges = sfeAround
-    KeyAttri.FrameEdges = sfeAround
     NumberAttri.Foreground = clNavy
-    NumberAttri.FrameEdges = sfeAround
-    SpaceAttri.FrameEdges = sfeAround
     StringAttri.Foreground = clBlue
-    StringAttri.FrameEdges = sfeAround
     SymbolAttri.Foreground = clRed
-    SymbolAttri.FrameEdges = sfeAround
-    CaseLabelAttri.FrameEdges = sfeAround
-    DirectiveAttri.FrameEdges = sfeAround
     CompilerMode = pcmDelphi
     NestedComments = False
     left = 56
