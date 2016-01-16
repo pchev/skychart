@@ -575,8 +575,8 @@ const
     'SOHO EIT 195',
     'SOHO EIT 284',
     'SOHO EIT 304',
-    'SOHO MDI Continuum',
-    'SOHO MDI Magnetogram');
+    'SOHO HMI Continuum',
+    'SOHO HMI Magnetogram');
   URL_SUN_SIZE: array[1..URL_SUN_NUMBER] of integer = (1024,
     1024,
     1024,
@@ -624,8 +624,8 @@ const
     'http://sohowww.nascom.nasa.gov/data/realtime/eit_195/1024/latest.jpg',
     'http://sohowww.nascom.nasa.gov/data/realtime/eit_284/1024/latest.jpg',
     'http://sohowww.nascom.nasa.gov/data/realtime/eit_304/1024/latest.jpg',
-    'http://sohowww.nascom.nasa.gov/data/realtime/mdi_igr/1024/latest.jpg',
-    'http://sohowww.nascom.nasa.gov/data/realtime/mdi_mag/1024/latest.jpg');
+    'http://sohowww.nascom.nasa.gov/data/realtime/hmi_igr/1024/latest.jpg',
+    'http://sohowww.nascom.nasa.gov/data/realtime/hmi_mag/1024/latest.jpg');
   sesame_maxurl = 4;
   sesame_url: array [1..sesame_maxurl, 1..2] of string = (
     ('http://cds.u-strasbg.fr/cgi-bin/nph-sesame', 'CDS - Strasbourg, France'),
