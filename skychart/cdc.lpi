@@ -12,6 +12,9 @@
       <Title Value="Skychart"/>
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
+      <XPManifest>
+        <DpiAware Value="True"/>
+      </XPManifest>
       <Icon Value="0"/>
     </General>
     <BuildModes Count="7">
@@ -374,7 +377,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item24>
     </RequiredPackages>
-    <Units Count="84">
+    <Units Count="85">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -885,6 +888,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit83>
+      <Unit84>
+        <Filename Value="uscaledpi.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UScaleDPI"/>
+      </Unit84>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -166,6 +166,10 @@ msgstr "Juster fargelysstyrken"
 msgid "Adjust the visualisation scale"
 msgstr "Juster visualiseringsskalaen"
 
+#: u_translation.rsadjustthewin
+msgid "Adjust the window size to the screen DPI"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr "Avansert"
@@ -329,6 +333,10 @@ msgstr "Kunstige satellitter"
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
 msgstr "Kunstig satellitt"
+
+#: u_translation.rsartificialsa3
+msgid "Artificial satellites TLE (one URL by line)"
+msgstr ""
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
@@ -877,6 +885,10 @@ msgstr "Lukker forbindelse"
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
 msgstr "Stjernehop og tåke"
+
+#: u_translation.rscollapse
+msgid "Collapse"
+msgstr ""
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -1642,6 +1654,10 @@ msgstr "Dobbelstjerner"
 msgid "Double star"
 msgstr "Dobbelstjerne"
 
+#: u_translation.rsdown
+msgid "Down"
+msgstr ""
+
 #: u_translation.rsdownload
 msgid "Download"
 msgstr "Last ned"
@@ -1997,6 +2013,10 @@ msgstr "Avslutt"
 #: u_translation.rsexiting
 msgid "Exiting ..."
 msgstr "Avslutter ..."
+
+#: u_translation.rsexpand
+msgid "Expand"
+msgstr ""
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -3089,6 +3109,10 @@ msgstr "Velg tabellen og kolonnene du vil ha i katalogen din"
 #: u_translation.rsmanagetoolbo
 msgid "Manage tool box script"
 msgstr "Behandle verktøyboksskript"
+
+#: u_translation.rsmanual
+msgid "Manual"
+msgstr ""
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -4474,10 +4498,6 @@ msgstr "Tilbakestill rotasjon"
 msgid "Reset to last time the chart was saved"
 msgstr "Tilbakestill til siste lagrede kart"
 
-#: u_translation.rsresizeicon
-msgid "Resize icon "
-msgstr ""
-
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "Oppløsning:"
@@ -4660,6 +4680,10 @@ msgstr "Skann mappe"
 
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
+msgstr ""
+
+#: u_translation.rsscreenresolu
+msgid "Screen resolution"
 msgstr ""
 
 #: u_translation.rsscript
@@ -5330,6 +5354,14 @@ msgstr "Stjerners egenbevegelses-alternativer (hvis tilgjengelig i katalogen)"
 msgid "Start"
 msgstr "Start"
 
+#: u_translation.rsstartbackwar
+msgid "Start backward"
+msgstr ""
+
+#: u_translation.rsstartforward
+msgid "Start forward"
+msgstr ""
+
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
 msgstr "Start grafen ved lokal middag"
@@ -5662,6 +5694,10 @@ msgstr "Etterfølging"
 msgid "Track telescope"
 msgstr "Følg teleskop"
 
+#: u_translation.rstrajectories
+msgid "Trajectories simulation"
+msgstr ""
+
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr "Transformasjon"
@@ -5800,6 +5836,10 @@ msgstr "Lås opp kart"
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
+msgstr ""
+
+#: u_translation.rsup
+msgid "Up"
 msgstr ""
 
 #: u_translation.rsupdate1

@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util,
+uses u_help, u_translation, u_constant, u_util, UScaleDPI,
   LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
   ExtCtrls, LResources, Buttons, LazHelpHTML, ComCtrls;
 
@@ -58,9 +58,9 @@ type
     Panel3: TPanel;
     Panel0: TPanel;
     Panel4: TPanel;
+    Panel5: TPanel;
     procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure PageControl1Change(Sender: TObject);
     procedure Panell1Click(Sender: TObject);
   private
     { Private declarations }
@@ -93,16 +93,12 @@ end;
 
 procedure Tf_about.FormCreate(Sender: TObject);
 begin
-SetLang;
+ ScaleDPI(Self,96);
+ SetLang;
  panel1.caption:=URL_WebHome;
  button2.caption:=URL_BugTracker;
  label2.caption:=rsVersion+blank+cdcversion+'-'+RevisionStr+blank+compile_time;
  label4.Caption:=rsCompiledWith+blank+compile_version;
-end;
-
-procedure Tf_about.PageControl1Change(Sender: TObject);
-begin
-
 end;
 
 procedure Tf_about.Button2Click(Sender: TObject);

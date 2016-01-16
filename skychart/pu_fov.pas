@@ -4,7 +4,7 @@ unit pu_fov;
 
 interface
 
-uses u_translation,
+uses u_translation, UScaleDPI,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls, StdCtrls;
 
 type
@@ -54,6 +54,7 @@ type
     Camera: TTabSheet;
     procedure Button6Click(Sender: TObject);
     procedure Button9Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { private declarations }
   public
@@ -107,6 +108,12 @@ cx:=strtofloat(edit15.text);
 cy:=strtofloat(edit16.text);
 Edit14.Text:=FormatFloat(f2,arctan(px/f)*cx*rad2deg*60);
 Edit17.Text:=FormatFloat(f2,arctan(py/f)*cy*rad2deg*60);
+end;
+
+procedure Tf_fov.FormCreate(Sender: TObject);
+begin
+  ScaleDPI(Self,96);
+  SetLang;
 end;
 
 end.

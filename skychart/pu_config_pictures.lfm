@@ -10,7 +10,8 @@ object f_configpictures: Tf_configpictures
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object Panel2: TPanel
     Left = 0
     Height = 50
@@ -84,8 +85,8 @@ object f_configpictures: Tf_configpictures
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 524
-          ClientWidth = 499
+          ClientHeight = 520
+          ClientWidth = 495
           inherited ProgressPanel: TPanel
             inherited ProgressCat: TLabel
               Height = 16
@@ -119,16 +120,16 @@ object f_configpictures: Tf_configpictures
           end
         end
         inherited Page2: TTabSheet
-          ClientHeight = 524
-          ClientWidth = 499
+          ClientHeight = 520
+          ClientWidth = 495
         end
         inherited Page3: TTabSheet
-          ClientHeight = 524
-          ClientWidth = 499
+          ClientHeight = 520
+          ClientWidth = 495
         end
         inherited Page4: TTabSheet
-          ClientHeight = 524
-          ClientWidth = 499
+          ClientHeight = 520
+          ClientWidth = 495
         end
       end
     end

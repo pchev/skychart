@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util,
+uses u_help, u_translation, u_constant, u_util, UScaleDPI,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, enhedits,
   cu_fits, cu_catalog, cu_database,
@@ -228,6 +228,7 @@ end;
 
 procedure Tf_config.FormCreate(Sender: TObject);
 begin
+ScaleDPI(Self,96);
 Fcsc:=Tconf_skychart.Create;
 Fccat:=Tconf_catalog.Create;
 Fcshr:=Tconf_shared.Create;

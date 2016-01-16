@@ -35,7 +35,7 @@ will work with all systems using same protocol
 
 interface
 
-uses u_help, u_translation,
+uses u_help, u_translation, UScaleDPI,
   Messages, SysUtils, Classes, Graphics, Controls, u_constant,
   Forms, Dialogs, u_projection, u_util,
   StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls, EnhEdits;
@@ -562,6 +562,7 @@ end;
 
 procedure Tpop_encoder.formcreate(Sender: TObject);
 begin
+ScaleDPI(Self,96);
 wait_create := true;
 first_show := true;
 Init90Y := 999999;

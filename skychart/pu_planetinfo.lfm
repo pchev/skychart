@@ -3,6 +3,7 @@ object f_planetinfo: Tf_planetinfo
   Height = 600
   Top = 124
   Width = 800
+  ActiveControl = PageControl1
   Caption = 'f_planetinfo'
   ClientHeight = 600
   ClientWidth = 800
@@ -12,26 +13,27 @@ object f_planetinfo: Tf_planetinfo
   OnResize = FormResize
   OnShow = FormShow
   Position = poDefaultPosOnly
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object PageControl1: TPageControl
     Left = 0
     Height = 550
     Top = 50
     Width = 800
-    ActivePage = TabSheet1
+    ActivePage = TabSheet9
     Align = alClient
     ShowTabs = False
-    TabIndex = 0
+    TabIndex = 8
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
-      ClientHeight = 550
-      ClientWidth = 800
+      ClientHeight = 546
+      ClientWidth = 796
       object Panel1: TPanel
         Left = 0
-        Height = 550
+        Height = 546
         Top = 0
-        Width = 800
+        Width = 796
         Align = alClient
         BevelOuter = bvNone
         Color = clBlack
@@ -40,11 +42,10 @@ object f_planetinfo: Tf_planetinfo
       end
       object Next1: TStaticText
         Tag = 1
-        Left = 730
+        Left = 726
         Height = 17
-        Top = 528
+        Top = 8
         Width = 65
-        Anchors = [akRight, akBottom]
         Caption = 'Next'
         Color = clBlack
         Font.Color = clWhite
@@ -57,11 +58,11 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet2: TTabSheet
       Caption = 'TabSheet2'
-      ClientHeight = 550
-      ClientWidth = 800
+      ClientHeight = 546
+      ClientWidth = 796
       object Panel2: TPanel
         Left = 0
-        Height = 571
+        Height = 546
         Top = 0
         Width = 796
         Align = alClient
@@ -74,9 +75,8 @@ object f_planetinfo: Tf_planetinfo
         Tag = 2
         Left = 726
         Height = 17
-        Top = 524
+        Top = 8
         Width = 65
-        Anchors = [akRight, akBottom]
         Caption = 'Next'
         Color = clBlack
         Font.Color = clWhite
@@ -89,9 +89,8 @@ object f_planetinfo: Tf_planetinfo
       object Prev2: TStaticText
         Left = 6
         Height = 17
-        Top = 524
+        Top = 8
         Width = 120
-        Anchors = [akLeft, akBottom]
         Caption = 'Prev'
         Color = clBlack
         Font.Color = clWhite
@@ -104,8 +103,8 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet3: TTabSheet
       Caption = 'TabSheet3'
-      ClientHeight = 550
-      ClientWidth = 800
+      ClientHeight = 546
+      ClientWidth = 796
       object Panel3: TPanel
         Left = 0
         Height = 546
@@ -121,9 +120,8 @@ object f_planetinfo: Tf_planetinfo
         Tag = 3
         Left = 726
         Height = 17
-        Top = 524
+        Top = 8
         Width = 65
-        Anchors = [akRight, akBottom]
         Caption = 'Next'
         Color = clBlack
         Font.Color = clWhite
@@ -137,9 +135,8 @@ object f_planetinfo: Tf_planetinfo
         Tag = 1
         Left = 6
         Height = 17
-        Top = 524
+        Top = 8
         Width = 120
-        Anchors = [akLeft, akBottom]
         Caption = 'Prev'
         Color = clBlack
         Font.Color = clWhite
@@ -152,11 +149,11 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet4: TTabSheet
       Caption = 'TabSheet4'
-      ClientHeight = 550
-      ClientWidth = 800
+      ClientHeight = 546
+      ClientWidth = 796
       object Panel4: TPanel
         Left = 0
-        Height = 596
+        Height = 546
         Top = 0
         Width = 796
         Align = alClient
@@ -169,9 +166,8 @@ object f_planetinfo: Tf_planetinfo
         Tag = 4
         Left = 726
         Height = 17
-        Top = 524
+        Top = 8
         Width = 65
-        Anchors = [akRight, akBottom]
         Caption = 'Next'
         Color = clBlack
         Font.Color = clWhite
@@ -185,9 +181,8 @@ object f_planetinfo: Tf_planetinfo
         Tag = 2
         Left = 6
         Height = 17
-        Top = 524
+        Top = 8
         Width = 120
-        Anchors = [akLeft, akBottom]
         Caption = 'Prev'
         Color = clBlack
         Font.Color = clWhite
@@ -200,11 +195,11 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet5: TTabSheet
       Caption = 'TabSheet5'
-      ClientHeight = 550
-      ClientWidth = 800
+      ClientHeight = 546
+      ClientWidth = 796
       object Panel5: TPanel
         Left = 0
-        Height = 596
+        Height = 546
         Top = 0
         Width = 796
         Align = alClient
@@ -217,9 +212,8 @@ object f_planetinfo: Tf_planetinfo
         Tag = 5
         Left = 726
         Height = 17
-        Top = 524
+        Top = 8
         Width = 65
-        Anchors = [akRight, akBottom]
         Caption = 'Next'
         Color = clBlack
         Font.Color = clWhite
@@ -233,9 +227,8 @@ object f_planetinfo: Tf_planetinfo
         Tag = 3
         Left = 6
         Height = 17
-        Top = 524
+        Top = 8
         Width = 120
-        Anchors = [akLeft, akBottom]
         Caption = 'Prev'
         Color = clBlack
         Font.Color = clWhite
@@ -248,11 +241,11 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet6: TTabSheet
       Caption = 'TabSheet6'
-      ClientHeight = 550
-      ClientWidth = 800
+      ClientHeight = 546
+      ClientWidth = 796
       object Panel6: TPanel
         Left = 0
-        Height = 596
+        Height = 546
         Top = 0
         Width = 796
         Align = alClient
@@ -265,9 +258,8 @@ object f_planetinfo: Tf_planetinfo
         Tag = 6
         Left = 726
         Height = 17
-        Top = 524
+        Top = 8
         Width = 65
-        Anchors = [akRight, akBottom]
         Caption = 'Next'
         Color = clBlack
         Font.Color = clWhite
@@ -281,9 +273,8 @@ object f_planetinfo: Tf_planetinfo
         Tag = 4
         Left = 6
         Height = 17
-        Top = 524
+        Top = 8
         Width = 120
-        Anchors = [akLeft, akBottom]
         Caption = 'Prev'
         Color = clBlack
         Font.Color = clWhite
@@ -296,11 +287,11 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet7: TTabSheet
       Caption = 'TabSheet7'
-      ClientHeight = 550
-      ClientWidth = 800
+      ClientHeight = 546
+      ClientWidth = 796
       object Panel7: TPanel
         Left = 0
-        Height = 596
+        Height = 546
         Top = 0
         Width = 796
         Align = alClient
@@ -313,9 +304,8 @@ object f_planetinfo: Tf_planetinfo
         Tag = 7
         Left = 726
         Height = 17
-        Top = 524
+        Top = 8
         Width = 65
-        Anchors = [akRight, akBottom]
         Caption = 'Next'
         Color = clBlack
         Font.Color = clWhite
@@ -329,9 +319,8 @@ object f_planetinfo: Tf_planetinfo
         Tag = 5
         Left = 6
         Height = 17
-        Top = 524
+        Top = 8
         Width = 120
-        Anchors = [akLeft, akBottom]
         Caption = 'Prev'
         Color = clBlack
         Font.Color = clWhite
@@ -344,11 +333,11 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet8: TTabSheet
       Caption = 'TabSheet8'
-      ClientHeight = 550
-      ClientWidth = 800
+      ClientHeight = 546
+      ClientWidth = 796
       object Panel8: TPanel
         Left = 0
-        Height = 596
+        Height = 546
         Top = 0
         Width = 796
         Align = alClient
@@ -361,9 +350,8 @@ object f_planetinfo: Tf_planetinfo
         Tag = 6
         Left = 6
         Height = 17
-        Top = 524
+        Top = 8
         Width = 120
-        Anchors = [akLeft, akBottom]
         Caption = 'Prev'
         Color = clBlack
         Font.Color = clWhite
@@ -377,9 +365,8 @@ object f_planetinfo: Tf_planetinfo
         Tag = 8
         Left = 726
         Height = 17
-        Top = 524
+        Top = 8
         Width = 65
-        Anchors = [akRight, akBottom]
         Caption = 'Next'
         Color = clBlack
         Font.Color = clWhite
@@ -392,11 +379,11 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet9: TTabSheet
       Caption = 'TabSheet9'
-      ClientHeight = 550
-      ClientWidth = 800
+      ClientHeight = 546
+      ClientWidth = 796
       object Panel9: TPanel
         Left = 0
-        Height = 596
+        Height = 546
         Top = 0
         Width = 796
         Align = alClient
@@ -409,9 +396,8 @@ object f_planetinfo: Tf_planetinfo
         Tag = 7
         Left = 6
         Height = 17
-        Top = 524
+        Top = 8
         Width = 120
-        Anchors = [akLeft, akBottom]
         Caption = 'Prev'
         Color = clBlack
         Font.Color = clWhite
@@ -437,9 +423,9 @@ object f_planetinfo: Tf_planetinfo
     TabOrder = 1
     object CheckBox1: TCheckBox
       Left = 8
-      Height = 26
+      Height = 24
       Top = 0
-      Width = 167
+      Width = 184
       Caption = 'Start graph at local noon'
       OnChange = CheckBox1Change
       TabOrder = 0

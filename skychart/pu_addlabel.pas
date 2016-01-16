@@ -4,7 +4,7 @@ unit pu_addlabel;
 
 interface
 
-uses u_help, u_translation, u_constant,
+uses u_help, u_translation, u_constant, UScaleDPI,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
   Buttons, ExtCtrls, LazHelpHTML;
 
@@ -22,7 +22,6 @@ type
     Label2: TLabel;
     RadioGroup1: TRadioGroup;
     procedure Button3Click(Sender: TObject);
-    procedure ComboBox1Change(Sender: TObject);
     procedure ComboBox1Select(Sender: TObject);
     procedure Edit1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -76,6 +75,7 @@ end;
 
 procedure Tf_addlabel.FormCreate(Sender: TObject);
 begin
+  ScaleDPI(Self,96);
   SetLang;
 end;
 
@@ -100,11 +100,6 @@ end;
 procedure Tf_addlabel.ComboBox1Select(Sender: TObject);
 begin
   labelnum:=ComboBox1.ItemIndex+1;
-end;
-
-procedure Tf_addlabel.ComboBox1Change(Sender: TObject);
-begin
-
 end;
 
 procedure Tf_addlabel.Button3Click(Sender: TObject);

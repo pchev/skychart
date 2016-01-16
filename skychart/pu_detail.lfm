@@ -11,7 +11,8 @@ object f_detail: Tf_detail
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object Memo1: TMemo
     Left = 0
     Height = 425

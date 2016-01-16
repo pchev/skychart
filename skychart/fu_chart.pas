@@ -32,7 +32,7 @@ interface
 uses
      pu_ascomclient, pu_lx200client, pu_encoderclient, pu_indiclient, pu_getdss, pu_imglist,
      u_translation, pu_detail, cu_skychart,  u_constant, u_util,pu_image, gcatunit, pu_obslist,
-     u_projection, Printers, Math, downloaddialog, IntfGraphics, contnrs, LCLType,
+     u_projection, Printers, Math, downloaddialog, IntfGraphics, contnrs, LCLType, UScaleDPI,
      PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs, Types,
      Forms, Controls, StdCtrls, ExtCtrls, Menus, ActnList, SysUtils, LResources, CheckLst;
      
@@ -4565,6 +4565,7 @@ if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width)
          f1.ClientHeight:=b1.top+b1.Height+8;
          f1.BorderStyle:=bsDialog;
          f1.Caption:=rsImageArchive;
+         ScaleDPI(f1,96);
          formpos(f1,mouse.CursorPos.X,mouse.CursorPos.Y);
          if f1.ShowModal=mrOK then begin
             archiveit:=true;
@@ -5221,6 +5222,7 @@ for i:=1 to sc.cfgsc.nummodlabels do begin
      lid[j]:=sc.cfgsc.modlabels[i].id;
    end;
 end;
+ScaleDPI(f,96);
 if l.Items.Count>0 then begin
   FormPos(f,mouse.CursorPos.X,mouse.CursorPos.Y);
   f.ShowModal;

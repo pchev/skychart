@@ -9,20 +9,21 @@ object f_observatory_db: Tf_observatory_db
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object obsname: TGroupBox
     Left = 8
     Height = 248
     Top = 0
     Width = 464
-    ClientHeight = 244
-    ClientWidth = 460
+    ClientHeight = 246
+    ClientWidth = 462
     TabOrder = 0
     object Label2: TLabel
       Left = 320
       Height = 15
       Top = 85
-      Width = 17
+      Width = 18
       Caption = '+/-'
       ParentColor = False
     end
@@ -36,7 +37,7 @@ object f_observatory_db: Tf_observatory_db
     end
     object citylist: TComboBox
       Left = 8
-      Height = 21
+      Height = 27
       Top = 41
       Width = 233
       AutoComplete = True
@@ -58,7 +59,7 @@ object f_observatory_db: Tf_observatory_db
     end
     object countrylist: TComboBox
       Left = 8
-      Height = 27
+      Height = 29
       Top = 1
       Width = 234
       DropDownCount = 10
@@ -141,8 +142,8 @@ object f_observatory_db: Tf_observatory_db
       Top = 83
       Width = 17
       Associate = vicinityrangeEdit
-      Min = 0
       Max = 500
+      Min = 0
       Position = 10
       TabOrder = 7
       Wrap = False
@@ -160,7 +161,7 @@ object f_observatory_db: Tf_observatory_db
       Left = 8
       Height = 15
       Top = 85
-      Width = 100
+      Width = 111
       Caption = 'Designation Code'
       ParentColor = False
     end
@@ -170,20 +171,20 @@ object f_observatory_db: Tf_observatory_db
       Top = 114
       Width = 185
       Caption = 'Latitude'
-      ClientHeight = 37
-      ClientWidth = 181
+      ClientHeight = 52
+      ClientWidth = 183
       TabOrder = 9
       object Label58: TLabel
         Left = 4
         Height = 15
         Top = 4
-        Width = 42
+        Width = 46
         Caption = 'Degree'
         ParentColor = False
       end
       object hemis: TComboBox
         Left = 112
-        Height = 21
+        Height = 27
         Top = 19
         Width = 65
         AutoCompleteText = [cbactSearchAscending]
@@ -246,20 +247,20 @@ object f_observatory_db: Tf_observatory_db
       Top = 114
       Width = 185
       Caption = 'Longitude'
-      ClientHeight = 37
-      ClientWidth = 181
+      ClientHeight = 52
+      ClientWidth = 183
       TabOrder = 10
       object Label61: TLabel
         Left = 4
         Height = 15
         Top = 4
-        Width = 42
+        Width = 46
         Caption = 'Degree'
         ParentColor = False
       end
       object long: TComboBox
         Left = 112
-        Height = 21
+        Height = 27
         Top = 19
         Width = 65
         AutoCompleteText = [cbactSearchAscending]

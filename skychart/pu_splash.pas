@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, u_constant, u_util,
+uses u_translation, u_constant, u_util, UScaleDPI,
   LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
   ExtCtrls, LResources, Buttons;
 
@@ -75,6 +75,7 @@ end;
 
 procedure Tf_splash.FormCreate(Sender: TObject);
 begin
+ScaleDPI(Self,96);
 label2.caption:=rsVersion+blank+cdcversion;
 if pos('svn',cdcversion)>0 then begin
    label2.Caption:=label2.Caption+RevisionStr;

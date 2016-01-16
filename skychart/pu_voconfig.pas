@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses XMLConf, u_translation, u_constant, Messages, SysUtils, Classes,  Graphics, Controls, Forms, FileUtil,
-  Dialogs, StdCtrls, Menus, pr_vodetail, ComCtrls, Grids, ExtCtrls, math,
+  Dialogs, StdCtrls, Menus, pr_vodetail, ComCtrls, Grids, ExtCtrls, math, UScaleDPI,
   LResources, Buttons, u_voconstant, cu_vocatalog, cu_vodetail, cu_vodata;
 
 type
@@ -221,6 +221,7 @@ end;
 
 procedure Tf_voconfig.FormCreate(Sender: TObject);
 begin
+  ScaleDPI(Self,96);
   ra:=0;
   dec:=0;
   fov:=deg2rad;

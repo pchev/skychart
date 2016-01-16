@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, pu_fov,
+uses u_help, u_translation, u_constant, u_util, pu_fov, UScaleDPI,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Grids, Spin, Buttons, StdCtrls, ExtCtrls, ComCtrls, LResources,
   EditBtn, LCLType, enhedits, LazHelpHTML;
@@ -1710,7 +1710,7 @@ var i : integer;
 begin
 for i:=1 to numfont do begin
     cplot.FontName[i]:=DefaultFontName;
-    cplot.FontSize[i]:=DefaultFontSize;
+    cplot.FontSize[i]:=DoScaleX(DefaultFontSize,96);
     cplot.FontBold[i]:=false;
     cplot.FontItalic[i]:=false;
 end;
@@ -2010,7 +2010,7 @@ var i: integer;
 begin
 for i:=1 to numlabtype do begin
    cplot.LabelColor[i]:=clWhite;
-   cplot.LabelSize[i]:=DefaultFontSize;
+   cplot.LabelSize[i]:=DoScaleX(DefaultFontSize,96);
    csc.LabelMagDiff[i]:=4;
    csc.ShowLabel[i]:=true;
 end;
@@ -2020,7 +2020,7 @@ cplot.LabelColor[6]:=clYellow;
 cplot.LabelColor[7]:=clSilver;
 cplot.LabelSize[6]:=cplot.LabelSize[6]+2;
 cplot.LabelColor[9]:=clLime;
-cplot.LabelSize[9]:=DefaultFontSize+1;
+cplot.LabelSize[9]:=DoScaleX(DefaultFontSize+1,96);
 csc.LabelMagDiff[9]:=0;
 csc.ShowLabel[9]:=true;
 csc.Showlabelall:=true;

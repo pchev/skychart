@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_help, u_translation, u_constant, u_projection, u_util, fu_config_chart,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, UScaleDPI,
   StdCtrls, ExtCtrls, enhedits, ComCtrls, LResources,
   Buttons, cu_zoomimage, LazHelpHTML;
 
@@ -81,6 +81,7 @@ end;
 
 procedure Tf_configchart.FormCreate(Sender: TObject);
 begin
+  ScaleDPI(Self,96);
   SetLang;
 end;
 

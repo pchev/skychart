@@ -33,7 +33,7 @@ uses
   {$endif}
   LCLIntf, u_util, u_constant, u_help, u_translation,
   Messages, SysUtils, Classes, Graphics, Controls,
-  Forms, Dialogs,
+  Forms, Dialogs, UScaleDPI,
   StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls;
 
 type
@@ -610,6 +610,7 @@ f.AutoSize:=true;
 FormPos(f,mouse.cursorpos.x,mouse.cursorpos.y);
 feqsys.Checked:=ForceEqSys;
 leqsys.ItemIndex:=EqSysVal;
+ScaleDPI(f,96);
 f.showmodal;
 if f.ModalResult=mrOK then begin
   ForceEqSys := feqsys.Checked;
@@ -636,6 +637,7 @@ end;
 
 procedure Tpop_scope.FormCreate(Sender: TObject);
 begin
+    ScaleDPI(Self,96);
     CoordLock := false;
     Initialized := false;
 end;

@@ -11,7 +11,7 @@ object f_getdss: Tf_getdss
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   ParentFont = True
-  LCLVersion = '1.6.0.1'
+  LCLVersion = '1.6.0.2'
   Visible = False
   object Memo1: TMemo
     Left = 8

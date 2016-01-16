@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_help, u_translation, u_constant, u_util, pu_progressbar, pu_catgenadv, GSCconst, skylibcat, gcatunit,
-  SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  SysUtils, Classes, Graphics, Controls, Forms, Dialogs, UScaleDPI,
   StdCtrls, ExtCtrls, ComCtrls, CheckLst, EnhEdits,
   Buttons, Math, Inifiles, Grids, mwFixedRecSort, mwCompFrom,
   LResources, EditBtn, LazHelpHTML;
@@ -525,6 +525,7 @@ end;
 procedure Tf_catgen.FormCreate(Sender: TObject);
 var i : integer;
 begin
+ScaleDPI(Self,96);
 Fcatgenadv:=Tf_catgenadv.Create(self);
 Fprogress:=Tf_progress.Create(self);
 rejectopen := false;

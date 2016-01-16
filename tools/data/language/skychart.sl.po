@@ -166,6 +166,10 @@ msgstr "Prilagodi barvo svetlosti"
 msgid "Adjust the visualisation scale"
 msgstr ""
 
+#: u_translation.rsadjustthewin
+msgid "Adjust the window size to the screen DPI"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr "Napredno"
@@ -330,6 +334,10 @@ msgstr "Umetni sateliti"
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
 msgstr "Umetni satelit"
+
+#: u_translation.rsartificialsa3
+msgid "Artificial satellites TLE (one URL by line)"
+msgstr ""
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
@@ -878,6 +886,10 @@ msgstr "Zapiram povezavo"
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
 msgstr "Kopica in meglica"
+
+#: u_translation.rscollapse
+msgid "Collapse"
+msgstr ""
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -1643,6 +1655,10 @@ msgstr "Dvozvezdja"
 msgid "Double star"
 msgstr "Dvozvezdje"
 
+#: u_translation.rsdown
+msgid "Down"
+msgstr ""
+
 #: u_translation.rsdownload
 msgid "Download"
 msgstr "Prenesi"
@@ -1999,6 +2015,10 @@ msgstr "Izhod"
 #: u_translation.rsexiting
 msgid "Exiting ..."
 msgstr "Zapuščam..."
+
+#: u_translation.rsexpand
+msgid "Expand"
+msgstr ""
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -3090,6 +3110,10 @@ msgstr "Označi izbiro tabele in stolpca, ki ga želiš za svoj katalog"
 
 #: u_translation.rsmanagetoolbo
 msgid "Manage tool box script"
+msgstr ""
+
+#: u_translation.rsmanual
+msgid "Manual"
 msgstr ""
 
 #: u_translation.rsmanualmount
@@ -4476,10 +4500,6 @@ msgstr "Ponastavi obračanje"
 msgid "Reset to last time the chart was saved"
 msgstr "Ponastavi na stanje karte ob zadnjem shranjevanju"
 
-#: u_translation.rsresizeicon
-msgid "Resize icon "
-msgstr ""
-
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "Ločljivost:"
@@ -4663,6 +4683,10 @@ msgstr "Preišči mapo"
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
 msgstr "Doseg Adv"
+
+#: u_translation.rsscreenresolu
+msgid "Screen resolution"
+msgstr ""
 
 #: u_translation.rsscript
 msgid "Script"
@@ -5332,6 +5356,14 @@ msgstr "Možnosti pravilnega premika zvezd (če je na voljo v katalogu)"
 msgid "Start"
 msgstr ""
 
+#: u_translation.rsstartbackwar
+msgid "Start backward"
+msgstr ""
+
+#: u_translation.rsstartforward
+msgid "Start forward"
+msgstr ""
+
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
 msgstr ""
@@ -5666,6 +5698,10 @@ msgstr "Sledenje"
 msgid "Track telescope"
 msgstr "Sledi teleskopu"
 
+#: u_translation.rstrajectories
+msgid "Trajectories simulation"
+msgstr ""
+
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr "Preoblikovanje"
@@ -5804,6 +5840,10 @@ msgstr "Odkleni karto"
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
+msgstr ""
+
+#: u_translation.rsup
+msgid "Up"
 msgstr ""
 
 #: u_translation.rsupdate1

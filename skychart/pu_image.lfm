@@ -17,7 +17,8 @@ object f_image: Tf_image
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   ParentFont = True
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object Image1: TZoomImage
     Left = 0
     Height = 265
@@ -50,7 +51,7 @@ object f_image: Tf_image
       Left = 320
       Height = 15
       Top = 7
-      Width = 36
+      Width = 41
       Caption = 'Label1'
       ParentColor = False
     end
@@ -95,10 +96,10 @@ object f_image: Tf_image
     end
   end
   object VScrollBar: TScrollBar
-    Left = 599
-    Height = 364
+    Left = 600
+    Height = 365
     Top = 27
-    Width = 16
+    Width = 15
     Align = alRight
     Kind = sbVertical
     PageSize = 0
@@ -107,8 +108,8 @@ object f_image: Tf_image
   end
   object HScrollBar: TScrollBar
     Left = 0
-    Height = 16
-    Top = 391
+    Height = 15
+    Top = 392
     Width = 615
     Align = alBottom
     PageSize = 0

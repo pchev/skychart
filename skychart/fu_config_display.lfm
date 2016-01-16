@@ -6,8 +6,6 @@ object f_config_display: Tf_config_display
   ClientHeight = 528
   ClientWidth = 505
   TabOrder = 0
-  DesignLeft = 548
-  DesignTop = 141
   object MainPanel: TPanel
     Left = 0
     Height = 528
@@ -30,8 +28,8 @@ object f_config_display: Tf_config_display
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Display'
-        ClientHeight = 526
-        ClientWidth = 503
+        ClientHeight = 1520
+        ClientWidth = 1501
         object Panel7: TPanel
           Left = 8
           Height = 242
@@ -222,8 +220,8 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 48
-          ClientWidth = 437
+          ClientHeight = 49
+          ClientWidth = 439
           Columns = 3
           Items.Strings = (
             'Line mode'
@@ -248,8 +246,8 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 48
-          ClientWidth = 437
+          ClientHeight = 49
+          ClientWidth = 439
           Columns = 2
           Items.Strings = (
             'Line mode'
@@ -370,8 +368,8 @@ object f_config_display: Tf_config_display
       end
       object Page2: TTabSheet
         Caption = 'Colour'
-        ClientHeight = 526
-        ClientWidth = 503
+        ClientHeight = 1520
+        ClientWidth = 1501
         object Label181: TLabel
           Left = 86
           Height = 16
@@ -761,8 +759,8 @@ object f_config_display: Tf_config_display
           Top = 309
           Width = 401
           Caption = 'Theme'
-          ClientHeight = 151
-          ClientWidth = 397
+          ClientHeight = 152
+          ClientWidth = 399
           TabOrder = 4
           object ThemeList: TComboBox
             Left = 101
@@ -788,8 +786,8 @@ object f_config_display: Tf_config_display
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
-            ClientHeight = 83
-            ClientWidth = 176
+            ClientHeight = 84
+            ClientWidth = 178
             Items.Strings = (
               'Normal (color)'
               'Red'
@@ -814,8 +812,8 @@ object f_config_display: Tf_config_display
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
-            ClientHeight = 83
-            ClientWidth = 176
+            ClientHeight = 84
+            ClientWidth = 178
             Items.Strings = (
               'Normal (color)'
               'Red'
@@ -832,8 +830,8 @@ object f_config_display: Tf_config_display
           Top = 221
           Width = 402
           Caption = 'Standard Color'
-          ClientHeight = 67
-          ClientWidth = 398
+          ClientHeight = 68
+          ClientWidth = 400
           TabOrder = 3
           object BtnDefaultColor: TButton
             Left = 7
@@ -888,8 +886,8 @@ object f_config_display: Tf_config_display
       end
       object Page3: TTabSheet
         Caption = 'Deep-sky colour'
-        ClientHeight = 526
-        ClientWidth = 503
+        ClientHeight = 1520
+        ClientWidth = 1501
         OnShow = Page3Show
         object lblDSOCScheme: TLabel
           Left = 13
@@ -905,8 +903,8 @@ object f_config_display: Tf_config_display
           Top = 75
           Width = 509
           Caption = ' Choose colours for object type  '
-          ClientHeight = 192
-          ClientWidth = 505
+          ClientHeight = 193
+          ClientWidth = 507
           TabOrder = 0
           object FillPanel2: TPanel
             Left = 420
@@ -1320,8 +1318,8 @@ object f_config_display: Tf_config_display
           Top = 298
           Width = 510
           Caption = ' Adjust colour brightness '
-          ClientHeight = 146
-          ClientWidth = 506
+          ClientHeight = 147
+          ClientWidth = 508
           TabOrder = 1
           object NebGrayBar: TTrackBar
             Left = 8
@@ -1435,8 +1433,8 @@ object f_config_display: Tf_config_display
       end
       object Page4: TTabSheet
         Caption = 'Sky colour'
-        ClientHeight = 526
-        ClientWidth = 503
+        ClientHeight = 1520
+        ClientWidth = 1501
         object Panel2: TPanel
           Left = 24
           Height = 147
@@ -1591,8 +1589,8 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 72
-          ClientWidth = 360
+          ClientHeight = 73
+          ClientWidth = 362
           Columns = 2
           Items.Strings = (
             'Fixed Black'
@@ -1614,8 +1612,8 @@ object f_config_display: Tf_config_display
       end
       object Page5: TTabSheet
         Caption = 'Lines'
-        ClientHeight = 526
-        ClientWidth = 503
+        ClientHeight = 1520
+        ClientWidth = 1501
         object EqGrid: TCheckBox
           Left = 16
           Height = 26
@@ -1667,8 +1665,8 @@ object f_config_display: Tf_config_display
           Top = 192
           Width = 273
           Caption = 'Constellation Figures'
-          ClientHeight = 123
-          ClientWidth = 269
+          ClientHeight = 124
+          ClientWidth = 271
           TabOrder = 11
           object Label132: TLabel
             Left = 29
@@ -1730,8 +1728,8 @@ object f_config_display: Tf_config_display
           Top = 336
           Width = 273
           Caption = 'Constellation Boundaries'
-          ClientHeight = 131
-          ClientWidth = 269
+          ClientHeight = 132
+          ClientWidth = 271
           TabOrder = 13
           object Label72: TLabel
             Left = 29
@@ -1793,8 +1791,8 @@ object f_config_display: Tf_config_display
           Top = 192
           Width = 185
           Caption = 'Milky Way'
-          ClientHeight = 123
-          ClientWidth = 181
+          ClientHeight = 124
+          ClientWidth = 183
           TabOrder = 12
           object milkyway: TCheckBox
             Left = 8
@@ -1910,8 +1908,8 @@ object f_config_display: Tf_config_display
           Top = 336
           Width = 185
           Caption = 'Proper Motion'
-          ClientHeight = 131
-          ClientWidth = 181
+          ClientHeight = 132
+          ClientWidth = 183
           TabOrder = 14
           object Label68: TLabel
             Left = 91
@@ -1999,15 +1997,15 @@ object f_config_display: Tf_config_display
       end
       object Page6: TTabSheet
         Caption = 'Labels'
-        ClientHeight = 526
-        ClientWidth = 503
+        ClientHeight = 1520
+        ClientWidth = 1501
         object GroupBox5: TGroupBox
           Left = 16
           Height = 282
           Top = 69
           Width = 477
-          ClientHeight = 278
-          ClientWidth = 473
+          ClientHeight = 266
+          ClientWidth = 475
           TabOrder = 4
           object Label237: TLabel
             Left = 208
@@ -2203,8 +2201,8 @@ object f_config_display: Tf_config_display
             Top = 45
             Width = 17
             Associate = Edit1
-            Min = 0
             Max = 10
+            Min = 0
             Position = 1
             TabOrder = 2
             Wrap = False
@@ -2225,8 +2223,8 @@ object f_config_display: Tf_config_display
             Top = 69
             Width = 17
             Associate = Edit2
-            Min = 0
             Max = 10
+            Min = 0
             Position = 1
             TabOrder = 7
             Wrap = False
@@ -2238,8 +2236,8 @@ object f_config_display: Tf_config_display
             Top = 93
             Width = 17
             Associate = Edit3
-            Min = 0
             Max = 10
+            Min = 0
             Position = 1
             TabOrder = 12
             Wrap = False
@@ -2260,8 +2258,8 @@ object f_config_display: Tf_config_display
             Top = 117
             Width = 17
             Associate = Edit4
-            Min = 0
             Max = 10
+            Min = 0
             Position = 1
             TabOrder = 17
             Wrap = False
@@ -2282,8 +2280,8 @@ object f_config_display: Tf_config_display
             Top = 141
             Width = 17
             Associate = Edit5
-            Min = 0
             Max = 10
+            Min = 0
             Position = 1
             TabOrder = 22
             Wrap = False
@@ -2313,8 +2311,8 @@ object f_config_display: Tf_config_display
             Top = 45
             Width = 17
             Associate = Edit6
-            Min = 4
             Max = 48
+            Min = 4
             Position = 6
             TabOrder = 4
             Wrap = False
@@ -2335,8 +2333,8 @@ object f_config_display: Tf_config_display
             Top = 69
             Width = 17
             Associate = Edit7
-            Min = 4
             Max = 48
+            Min = 4
             Position = 6
             TabOrder = 9
             Wrap = False
@@ -2357,8 +2355,8 @@ object f_config_display: Tf_config_display
             Top = 93
             Width = 17
             Associate = Edit8
-            Min = 4
             Max = 48
+            Min = 4
             Position = 6
             TabOrder = 14
             Wrap = False
@@ -2379,8 +2377,8 @@ object f_config_display: Tf_config_display
             Top = 117
             Width = 17
             Associate = Edit9
-            Min = 4
             Max = 48
+            Min = 4
             Position = 6
             TabOrder = 19
             Wrap = False
@@ -2401,8 +2399,8 @@ object f_config_display: Tf_config_display
             Top = 141
             Width = 17
             Associate = Edit10
-            Min = 4
             Max = 48
+            Min = 4
             Position = 6
             TabOrder = 24
             Wrap = False
@@ -2423,8 +2421,8 @@ object f_config_display: Tf_config_display
             Top = 165
             Width = 17
             Associate = Edit11
-            Min = 4
             Max = 48
+            Min = 4
             Position = 6
             TabOrder = 27
             Wrap = False
@@ -2445,8 +2443,8 @@ object f_config_display: Tf_config_display
             Top = 189
             Width = 17
             Associate = Edit12
-            Min = 4
             Max = 48
+            Min = 4
             Position = 6
             TabOrder = 30
             Wrap = False
@@ -2467,8 +2465,8 @@ object f_config_display: Tf_config_display
             Top = 213
             Width = 17
             Associate = Edit13
-            Min = 4
             Max = 48
+            Min = 4
             Position = 6
             TabOrder = 33
             Wrap = False
@@ -2513,8 +2511,8 @@ object f_config_display: Tf_config_display
             Top = 237
             Width = 17
             Associate = Edit14
-            Min = 4
             Max = 48
+            Min = 4
             Position = 6
             TabOrder = 35
             Wrap = False
@@ -2543,9 +2541,9 @@ object f_config_display: Tf_config_display
             Top = 45
             Width = 17
             Associate = Edit15
-            Min = 0
-            Max = 360
             Increment = 15
+            Max = 360
+            Min = 0
             Position = 6
             TabOrder = 37
             Wrap = False
@@ -2566,9 +2564,9 @@ object f_config_display: Tf_config_display
             Top = 69
             Width = 17
             Associate = Edit16
-            Min = 0
-            Max = 360
             Increment = 15
+            Max = 360
+            Min = 0
             Position = 6
             TabOrder = 39
             Wrap = False
@@ -2589,9 +2587,9 @@ object f_config_display: Tf_config_display
             Top = 93
             Width = 17
             Associate = Edit17
-            Min = 0
-            Max = 360
             Increment = 15
+            Max = 360
+            Min = 0
             Position = 6
             TabOrder = 41
             Wrap = False
@@ -2612,9 +2610,9 @@ object f_config_display: Tf_config_display
             Top = 117
             Width = 17
             Associate = Edit18
-            Min = 0
-            Max = 360
             Increment = 15
+            Max = 360
+            Min = 0
             Position = 6
             TabOrder = 43
             Wrap = False
@@ -2635,9 +2633,9 @@ object f_config_display: Tf_config_display
             Top = 141
             Width = 17
             Associate = Edit19
-            Min = 0
-            Max = 360
             Increment = 15
+            Max = 360
+            Min = 0
             Position = 6
             TabOrder = 45
             Wrap = False
@@ -2658,9 +2656,9 @@ object f_config_display: Tf_config_display
             Top = 165
             Width = 17
             Associate = Edit20
-            Min = 0
-            Max = 360
             Increment = 15
+            Max = 360
+            Min = 0
             Position = 6
             TabOrder = 47
             Wrap = False
@@ -2681,9 +2679,9 @@ object f_config_display: Tf_config_display
             Top = 189
             Width = 17
             Associate = Edit21
-            Min = 0
-            Max = 360
             Increment = 15
+            Max = 360
+            Min = 0
             Position = 6
             TabOrder = 49
             Wrap = False
@@ -2705,9 +2703,9 @@ object f_config_display: Tf_config_display
             Top = 213
             Width = 17
             Associate = Edit22
-            Min = 0
-            Max = 360
             Increment = 15
+            Max = 360
+            Min = 0
             Position = 6
             TabOrder = 51
             Visible = False
@@ -2730,9 +2728,9 @@ object f_config_display: Tf_config_display
             Top = 237
             Width = 17
             Associate = Edit23
-            Min = 0
-            Max = 360
             Increment = 15
+            Max = 360
+            Min = 0
             Position = 6
             TabOrder = 53
             Visible = False
@@ -2754,8 +2752,8 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 50
-          ClientWidth = 217
+          ClientHeight = 65
+          ClientWidth = 219
           Columns = 2
           ItemIndex = 0
           Items.Strings = (
@@ -2781,8 +2779,8 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 50
-          ClientWidth = 240
+          ClientHeight = 65
+          ClientWidth = 242
           Columns = 2
           ItemIndex = 0
           Items.Strings = (
@@ -2868,8 +2866,8 @@ object f_config_display: Tf_config_display
       end
       object Page7: TTabSheet
         Caption = 'Fonts'
-        ClientHeight = 526
-        ClientWidth = 503
+        ClientHeight = 1520
+        ClientWidth = 1501
         object Bevel10: TBevel
           Left = 8
           Height = 329
@@ -3390,8 +3388,8 @@ object f_config_display: Tf_config_display
       end
       object Page8: TTabSheet
         Caption = 'Finder circle'
-        ClientHeight = 526
-        ClientWidth = 503
+        ClientHeight = 1520
+        ClientWidth = 1501
         object Label307: TLabel
           Left = 26
           Height = 15
@@ -3470,8 +3468,8 @@ object f_config_display: Tf_config_display
       end
       object Page9: TTabSheet
         Caption = 'Finder rectangle'
-        ClientHeight = 526
-        ClientWidth = 503
+        ClientHeight = 1520
+        ClientWidth = 1501
         object Label308: TLabel
           Left = 26
           Height = 15

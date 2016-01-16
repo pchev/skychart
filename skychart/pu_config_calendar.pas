@@ -4,7 +4,7 @@ unit pu_config_calendar;
 
 interface
 
-uses  u_help, u_translation, u_constant, u_util,
+uses  u_help, u_translation, u_constant, u_util,  UScaleDPI,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   StdCtrls, fu_config_calendar;
 
@@ -22,6 +22,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
     { private declarations }
@@ -61,6 +62,12 @@ procedure Tf_configcalendar.FormClose(Sender: TObject; var CloseAction: TCloseAc
   );
 begin
   f_config_calendar1.Lock;
+end;
+
+procedure Tf_configcalendar.FormCreate(Sender: TObject);
+begin
+  ScaleDPI(Self,96);
+  SetLang;
 end;
 
 procedure Tf_configcalendar.FormShow(Sender: TObject);

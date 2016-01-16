@@ -1555,7 +1555,6 @@ resourcestring
   rsActivateAllT = 'Activate all the functions when hidden';
   rsButtonSize = 'Button size';
   rsShowButtonTe = 'Show button text';
-  rsResizeIcon = 'Resize icon ';
   rsUp = 'Up';
   rsDown = 'Down';
   rsExpand = 'Expand';
@@ -1565,6 +1564,8 @@ resourcestring
   rsStartBackwar = 'Start backward';
   rsArtificialSa3 = 'Artificial satellites TLE (one URL by line)';
   rsManual = 'Manual';
+  rsScreenResolu = 'Screen resolution';
+  rsAdjustTheWin = 'Adjust the window size to the screen DPI';
 
 // also update upsi_translation
 

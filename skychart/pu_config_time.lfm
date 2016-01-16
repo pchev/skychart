@@ -11,7 +11,8 @@ object f_configtime: Tf_configtime
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object Panel1: TPanel
     Left = 0
     Height = 54
@@ -87,16 +88,26 @@ object f_configtime: Tf_configtime
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 529
-          ClientWidth = 496
+          ClientHeight = 525
+          ClientWidth = 492
+          inherited Panel9: TPanel
+            inherited ADBC: TRadioGroup
+              ClientHeight = 37
+            end
+          end
         end
         inherited Page2: TTabSheet
-          ClientHeight = 529
-          ClientWidth = 496
+          ClientHeight = 525
+          ClientWidth = 492
           inherited SimObj: TCheckListBox
             Data = {
               0C000000000000000000000000000000
             }
+          end
+          inherited RadioGroup1: TRadioGroup
+            inherited LongEdit1: TLongEdit
+              TabOrder = 5
+            end
           end
           inherited CheckGroup1: TCheckGroup
             Data = {
@@ -110,8 +121,8 @@ object f_configtime: Tf_configtime
           end
         end
         inherited Page3: TTabSheet
-          ClientHeight = 529
-          ClientWidth = 496
+          ClientHeight = 525
+          ClientWidth = 492
         end
       end
     end

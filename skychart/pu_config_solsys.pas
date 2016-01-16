@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, u_projection, cu_database,
+uses u_help, u_translation, u_constant, u_util, u_projection, cu_database, UScaleDPI,
   fu_config_solsys, LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources,
   downloaddialog, jdcalendar, EditBtn, Process, LazHelpHTML, FileUtil;
@@ -74,6 +74,7 @@ end;
 
 procedure Tf_configsolsys.FormCreate(Sender: TObject);
 begin
+ScaleDPI(Self,96);
 SetLang;
 end;
 

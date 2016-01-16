@@ -38,7 +38,7 @@ will work with all systems using same protocol
 
 interface
 
-uses  u_help, u_translation,
+uses  u_help, u_translation, UScaleDPI,
   Messages, SysUtils, Classes, Graphics, Controls,
   Forms, Dialogs, u_constant, u_util,
   StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls,
@@ -217,7 +217,6 @@ type
      {Utility and form functions}
      procedure FormCreate(Sender: TObject);
      procedure kill(Sender: TObject; var CanClose: Boolean);
-     procedure PageControl1Change(Sender: TObject);
      procedure RadioGroup6Click(Sender: TObject);
      procedure Timer1Timer(Sender: TObject);
      procedure setresClick(Sender: TObject);
@@ -942,11 +941,6 @@ if port_opened then begin
 end;
 end;
 
-procedure Tpop_lx200.PageControl1Change(Sender: TObject);
-begin
-
-end;
-
 procedure Tpop_lx200.RadioGroup6Click(Sender: TObject);
 begin
 case RadioGroup6.ItemIndex of
@@ -963,6 +957,7 @@ end;
 
 procedure Tpop_lx200.FormCreate(Sender: TObject);
 begin
+    ScaleDPI(Self,96);
     CoordLock := false;
     Initial := true;
 end;

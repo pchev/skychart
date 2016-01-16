@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation,
+uses u_help, u_translation, UScaleDPI,
   dynlibs, u_constant, u_util, Math,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, LResources, downloaddialog, LazHelpHTML;
@@ -130,6 +130,7 @@ end;
 
 procedure Tf_getdss.FormCreate(Sender: TObject);
 begin
+ScaleDPI(Self,96);
 SetLang;
 cfgdss:=Tconf_dss.Create;
   if VerboseMsg then WriteTrace('Loadlibrary '+dsslibname);

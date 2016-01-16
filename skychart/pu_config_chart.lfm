@@ -10,7 +10,8 @@ object f_configchart: Tf_configchart
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.4.3.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object Panel1: TPanel
     Left = 0
     Height = 50

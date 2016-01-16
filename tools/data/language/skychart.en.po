@@ -167,6 +167,10 @@ msgstr ""
 msgid "Adjust the visualisation scale"
 msgstr ""
 
+#: u_translation.rsadjustthewin
+msgid "Adjust the window size to the screen DPI"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr ""
@@ -329,6 +333,10 @@ msgstr ""
 
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
+msgstr ""
+
+#: u_translation.rsartificialsa3
+msgid "Artificial satellites TLE (one URL by line)"
 msgstr ""
 
 #: u_translation.rsasampapplica
@@ -877,6 +885,10 @@ msgstr ""
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
+msgstr ""
+
+#: u_translation.rscollapse
+msgid "Collapse"
 msgstr ""
 
 #: u_translation.rscolor
@@ -1643,6 +1655,10 @@ msgstr ""
 msgid "Double star"
 msgstr ""
 
+#: u_translation.rsdown
+msgid "Down"
+msgstr ""
+
 #: u_translation.rsdownload
 msgid "Download"
 msgstr ""
@@ -1997,6 +2013,10 @@ msgstr ""
 
 #: u_translation.rsexiting
 msgid "Exiting ..."
+msgstr ""
+
+#: u_translation.rsexpand
+msgid "Expand"
 msgstr ""
 
 #: u_translation.rsexpertmode
@@ -3089,6 +3109,10 @@ msgstr ""
 
 #: u_translation.rsmanagetoolbo
 msgid "Manage tool box script"
+msgstr ""
+
+#: u_translation.rsmanual
+msgid "Manual"
 msgstr ""
 
 #: u_translation.rsmanualmount
@@ -4475,10 +4499,6 @@ msgstr ""
 msgid "Reset to last time the chart was saved"
 msgstr ""
 
-#: u_translation.rsresizeicon
-msgid "Resize icon "
-msgstr ""
-
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr ""
@@ -4661,6 +4681,10 @@ msgstr ""
 
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
+msgstr ""
+
+#: u_translation.rsscreenresolu
+msgid "Screen resolution"
 msgstr ""
 
 #: u_translation.rsscript
@@ -5331,6 +5355,14 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
+#: u_translation.rsstartbackwar
+msgid "Start backward"
+msgstr ""
+
+#: u_translation.rsstartforward
+msgid "Start forward"
+msgstr ""
+
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
 msgstr ""
@@ -5663,6 +5695,10 @@ msgstr ""
 msgid "Track telescope"
 msgstr ""
 
+#: u_translation.rstrajectories
+msgid "Trajectories simulation"
+msgstr ""
+
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr ""
@@ -5801,6 +5837,10 @@ msgstr ""
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
+msgstr ""
+
+#: u_translation.rsup
+msgid "Up"
 msgstr ""
 
 #: u_translation.rsupdate1

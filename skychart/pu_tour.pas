@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses LCLType,
+uses u_translation, LCLType, UScaleDPI,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls;
 
 type
@@ -47,10 +47,12 @@ type
     procedure BtnNextClick(Sender: TObject);
     procedure BtnPrevClick(Sender: TObject);
     procedure BtnSlewClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { private declarations }
     FFirst,FLast,Fprev,Fnext,Fslew: TNotifyEvent;
+    procedure SetLang;
   public
     { public declarations }
     property onFirst: TNotifyEvent read FFirst write FFirst;
@@ -68,6 +70,20 @@ implementation
 {$R *.lfm}
 
 { Tf_tour }
+
+procedure Tf_tour.SetLang;
+begin
+  BtnEnd.Caption:=rsEnd;
+  BtnFirst.Caption:=rsFirst;
+  BtnLast.Caption:=rsLast;
+  BtnSlew.Caption:=rsSlew;
+end;
+
+procedure Tf_tour.FormCreate(Sender: TObject);
+begin
+  ScaleDPI(Self,96);
+  SetLang;
+end;
 
 procedure Tf_tour.BtnFirstClick(Sender: TObject);
 begin

@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses  u_help, u_translation, u_constant, u_util, u_projection, cu_planet,
-  pu_tour,
+  pu_tour, UScaleDPI,
   Math, Classes, SysUtils, FileUtil, Forms, Controls, Graphics,
   Dialogs, ExtCtrls, Grids, EditBtn, StdCtrls, Menus, ComCtrls;
 
@@ -645,6 +645,7 @@ end;
 
 procedure Tf_obslist.FormCreate(Sender: TObject);
 begin
+  ScaleDPI(Self,96);
   FObjLabels:=TStringList.Create;
   FEmptyObjLabels:=TStringList.Create;
   FDefaultList:='NewObsList.txt';

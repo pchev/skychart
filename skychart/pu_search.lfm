@@ -12,7 +12,8 @@ object f_search: Tf_search
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object PlanetPanel: TPanel
     Left = 8
     Height = 41
@@ -27,13 +28,13 @@ object f_search: Tf_search
       Left = 13
       Height = 15
       Top = 14
-      Width = 39
+      Width = 44
       Caption = 'Planet '
       ParentColor = False
     end
     object PlanetBox: TComboBox
       Left = 184
-      Height = 21
+      Height = 27
       Top = 8
       Width = 146
       DropDownCount = 10
@@ -68,7 +69,7 @@ object f_search: Tf_search
     end
     object CometList: TComboBox
       Left = 192
-      Height = 21
+      Height = 27
       Top = 10
       Width = 216
       ItemHeight = 0
@@ -102,7 +103,7 @@ object f_search: Tf_search
     end
     object AsteroidList: TComboBox
       Left = 192
-      Height = 21
+      Height = 27
       Top = 10
       Width = 216
       ItemHeight = 0
@@ -123,13 +124,13 @@ object f_search: Tf_search
       Left = 13
       Height = 15
       Top = 14
-      Width = 39
+      Width = 44
       Caption = 'Nebula'
       ParentColor = False
     end
     object NebNameBox: TComboBox
       Left = 104
-      Height = 21
+      Height = 27
       Top = 11
       Width = 280
       ItemHeight = 0
@@ -150,13 +151,13 @@ object f_search: Tf_search
       Left = 13
       Height = 15
       Top = 14
-      Width = 23
+      Width = 26
       Caption = 'Star'
       ParentColor = False
     end
     object StarNameBox: TComboBox
       Left = 97
-      Height = 21
+      Height = 27
       Top = 11
       Width = 281
       ItemHeight = 0
@@ -177,13 +178,13 @@ object f_search: Tf_search
       Left = 13
       Height = 15
       Top = 14
-      Width = 76
+      Width = 82
       Caption = 'Constellation'
       ParentColor = False
     end
     object ConstBox: TComboBox
       Left = 113
-      Height = 21
+      Height = 27
       Top = 11
       Width = 265
       ItemHeight = 0
@@ -204,7 +205,7 @@ object f_search: Tf_search
       Left = 6
       Height = 15
       Top = 14
-      Width = 75
+      Width = 80
       Caption = 'Object Name'
       ParentColor = False
     end
@@ -534,8 +535,8 @@ object f_search: Tf_search
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 2
-    ClientHeight = 186
-    ClientWidth = 412
+    ClientHeight = 201
+    ClientWidth = 414
     Columns = 2
     ItemIndex = 0
     Items.Strings = (
@@ -604,7 +605,7 @@ object f_search: Tf_search
     end
     object ServerList: TComboBox
       Left = 16
-      Height = 27
+      Height = 29
       Top = 1
       Width = 200
       ItemHeight = 0
@@ -616,7 +617,7 @@ object f_search: Tf_search
       Left = 19
       Height = 15
       Top = 58
-      Width = 66
+      Width = 74
       Caption = 'StatusLabel'
       ParentColor = False
     end
@@ -634,8 +635,8 @@ object f_search: Tf_search
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 4
-      ClientHeight = 28
-      ClientWidth = 388
+      ClientHeight = 30
+      ClientWidth = 390
       Columns = 4
       Items.Strings = (
         'NED'

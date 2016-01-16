@@ -166,6 +166,10 @@ msgstr "調整色彩亮度"
 msgid "Adjust the visualisation scale"
 msgstr ""
 
+#: u_translation.rsadjustthewin
+msgid "Adjust the window size to the screen DPI"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr "進階"
@@ -329,6 +333,10 @@ msgstr "人造衛星"
 
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
+msgstr ""
+
+#: u_translation.rsartificialsa3
+msgid "Artificial satellites TLE (one URL by line)"
 msgstr ""
 
 #: u_translation.rsasampapplica
@@ -878,6 +886,10 @@ msgstr "結束連接"
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
 msgstr "星團和星雲"
+
+#: u_translation.rscollapse
+msgid "Collapse"
+msgstr ""
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -1643,6 +1655,10 @@ msgstr "雙星"
 msgid "Double star"
 msgstr "雙星"
 
+#: u_translation.rsdown
+msgid "Down"
+msgstr ""
+
 #: u_translation.rsdownload
 msgid "Download"
 msgstr "下載"
@@ -1998,6 +2014,10 @@ msgstr "退出"
 #: u_translation.rsexiting
 msgid "Exiting ..."
 msgstr "退出..."
+
+#: u_translation.rsexpand
+msgid "Expand"
+msgstr ""
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -3089,6 +3109,10 @@ msgstr ""
 
 #: u_translation.rsmanagetoolbo
 msgid "Manage tool box script"
+msgstr ""
+
+#: u_translation.rsmanual
+msgid "Manual"
 msgstr ""
 
 #: u_translation.rsmanualmount
@@ -4475,10 +4499,6 @@ msgstr ""
 msgid "Reset to last time the chart was saved"
 msgstr ""
 
-#: u_translation.rsresizeicon
-msgid "Resize icon "
-msgstr ""
-
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "分辨率："
@@ -4661,6 +4681,10 @@ msgstr "掃描目錄"
 
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
+msgstr ""
+
+#: u_translation.rsscreenresolu
+msgid "Screen resolution"
 msgstr ""
 
 #: u_translation.rsscript
@@ -5331,6 +5355,14 @@ msgstr "恆星自行選項（如果星表可用）"
 msgid "Start"
 msgstr ""
 
+#: u_translation.rsstartbackwar
+msgid "Start backward"
+msgstr ""
+
+#: u_translation.rsstartforward
+msgid "Start forward"
+msgstr ""
+
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
 msgstr ""
@@ -5663,6 +5695,10 @@ msgstr ""
 msgid "Track telescope"
 msgstr ""
 
+#: u_translation.rstrajectories
+msgid "Trajectories simulation"
+msgstr ""
+
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr "轉換"
@@ -5801,6 +5837,10 @@ msgstr "不鎖定星圖"
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
+msgstr ""
+
+#: u_translation.rsup
+msgid "Up"
 msgstr ""
 
 #: u_translation.rsupdate1

@@ -165,6 +165,10 @@ msgstr "Farbhelligkeit anpassen"
 msgid "Adjust the visualisation scale"
 msgstr "Passe den Visualisierungsmaßstab an"
 
+#: u_translation.rsadjustthewin
+msgid "Adjust the window size to the screen DPI"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr "Erweitert"
@@ -328,6 +332,10 @@ msgstr "Künstliche Satelliten"
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
 msgstr "Künstlicher Satellit"
+
+#: u_translation.rsartificialsa3
+msgid "Artificial satellites TLE (one URL by line)"
+msgstr ""
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
@@ -876,6 +884,10 @@ msgstr "Beende Verbindung"
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
 msgstr "Sternhaufen und Nebel"
+
+#: u_translation.rscollapse
+msgid "Collapse"
+msgstr ""
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -1641,6 +1653,10 @@ msgstr "Doppelsterne"
 msgid "Double star"
 msgstr "Doppelstern"
 
+#: u_translation.rsdown
+msgid "Down"
+msgstr ""
+
 #: u_translation.rsdownload
 msgid "Download"
 msgstr "Herunterladen"
@@ -1996,6 +2012,10 @@ msgstr "Beenden"
 #: u_translation.rsexiting
 msgid "Exiting ..."
 msgstr "Beenden …"
+
+#: u_translation.rsexpand
+msgid "Expand"
+msgstr ""
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -3088,6 +3108,10 @@ msgstr "Tabelle und Spalte für Ihren Katalog auswählen"
 #: u_translation.rsmanagetoolbo
 msgid "Manage tool box script"
 msgstr "Toolbox-Skripte verwalten"
+
+#: u_translation.rsmanual
+msgid "Manual"
+msgstr ""
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -4473,10 +4497,6 @@ msgstr "Setze Rotation zurück"
 msgid "Reset to last time the chart was saved"
 msgstr "Zur letzten gespeicherten Karte zurücksetzen"
 
-#: u_translation.rsresizeicon
-msgid "Resize icon "
-msgstr ""
-
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "Auflösung:"
@@ -4661,6 +4681,10 @@ msgstr "Verzeichnis durchsuchen"
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
 msgstr "Scope Erw."
+
+#: u_translation.rsscreenresolu
+msgid "Screen resolution"
+msgstr ""
 
 #: u_translation.rsscript
 msgid "Script"
@@ -5330,6 +5354,14 @@ msgstr "Einstellungen zur Eigenbewegung der Sterne (falls im Katalog verfügbar)
 msgid "Start"
 msgstr "Start"
 
+#: u_translation.rsstartbackwar
+msgid "Start backward"
+msgstr ""
+
+#: u_translation.rsstartforward
+msgid "Start forward"
+msgstr ""
+
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
 msgstr "Starte den Graphen zur Mittagszeit"
@@ -5663,6 +5695,10 @@ msgstr "Nachführung"
 msgid "Track telescope"
 msgstr "Teleskop nachführen"
 
+#: u_translation.rstrajectories
+msgid "Trajectories simulation"
+msgstr ""
+
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr "Transformation"
@@ -5802,6 +5838,10 @@ msgstr "Karte freigeben"
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
 msgstr "Profil des SAMP-Hubs nicht unterstützt, muss ein Datei-URL sein"
+
+#: u_translation.rsup
+msgid "Up"
+msgstr ""
 
 #: u_translation.rsupdate1
 msgid "Update"

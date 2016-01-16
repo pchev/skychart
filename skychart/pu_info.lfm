@@ -12,7 +12,8 @@ object f_info: Tf_info
   OnShow = FormShow
   ParentFont = True
   Position = poScreenCenter
-  LCLVersion = '1.2.4.0'
+  LCLVersion = '1.6.0.2'
+  Visible = False
   object Panel1: TPanel
     Left = 0
     Height = 27
@@ -134,9 +135,9 @@ object f_info: Tf_info
       end
       object CheckBox1: TCheckBox
         Left = 104
-        Height = 26
+        Height = 24
         Top = 2
-        Width = 100
+        Width = 102
         Caption = 'AutoRefresh'
         Checked = True
         OnClick = CheckBox1Click
@@ -266,10 +267,10 @@ object f_info: Tf_info
         TabOrder = 0
       end
       object SortLabel: TLabel
-        Left = 46
+        Left = 40
         Height = 15
         Top = 6
-        Width = 53
+        Width = 59
         Alignment = taRightJustify
         Anchors = [akTop, akRight]
         Caption = 'SortLabel'

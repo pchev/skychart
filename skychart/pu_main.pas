@@ -37,7 +37,7 @@ uses
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures, pu_indigui,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
   pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, pu_obslist, fu_script, pu_scriptengine,
-  u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
+  u_constant, u_util, UScaleDPI, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
   ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame, BGRABitmap,
@@ -658,6 +658,7 @@ type
     Procedure SyncChild;
     procedure GetLanguage;
     Procedure GetAppDir;
+    procedure ScaleMainForm;
     procedure ResizeBtn;
     procedure ViewTopPanel;
     procedure ApplyConfig(Sender: TObject);
@@ -1933,6 +1934,23 @@ if VerboseMsg then
  debugln('ZoneDir='+ZoneDir);
 end;
 
+procedure Tf_main.ScaleMainForm;
+var inif: TMemIniFile;
+begin
+  cfgm.ScreenScaling:=true;
+  if fileexists(configfile) then begin
+    inif:=TMeminifile.create(configfile);
+    try
+    cfgm.ScreenScaling:=inif.ReadBool('main','ScreenScaling',cfgm.ScreenScaling);
+    finally
+     inif.Free;
+    end;
+  end;
+  UScaleDPI.UseScaling:=cfgm.ScreenScaling;
+  ScaleDPI(Self,96);
+  ScaleImageList(ImageNormal,96);
+end;
+
 procedure Tf_main.FormCreate(Sender: TObject);
 var step,buf:string;
     i:integer;
@@ -1970,7 +1988,7 @@ if VerboseMsg then
 Application.UpdateFormatSettings := False;
 {$endif}
 ImageListCount:=ImageNormal.Count;
-ImageListSize:=ImageNormal.Width;
+//ImageListSize:=ImageNormal.Width;
 MaxThreadCount:=GetThreadCount;
 DisplayIs32bpp:=true;
 isWin98:=false;
@@ -2031,6 +2049,10 @@ if VerboseMsg then begin
  WriteTrace('Privatedir: '+PrivateDir);
  WriteTrace('Appdir: '+AppDir);
 end;
+step:='Scaling';
+if VerboseMsg then
+ WriteTrace(step);
+ScaleMainForm;
 step:='Language';
 if VerboseMsg then
  WriteTrace(step);
@@ -2297,6 +2319,7 @@ end else begin
       w:=max(f1.Canvas.TextWidth(l1.Caption),p1.Width)+16;
       f1.Width:=w;
       f1.Height:=h;
+      ScaleDPI(f1,96);
       mresult:=f1.ShowModal;
       ConfirmSaveConfig:=not c1.Checked;
       if mresult=mrAbort then
@@ -3045,6 +3068,7 @@ if sender<>nil then begin
   w:=max(f1.Canvas.TextWidth(rsResetInitial),f1.Canvas.TextWidth(rsResetToLastT))+80;
   f1.Height:=h;
   f1.Width:=w;
+  ScaleDPI(f1,96);
   try
   FormPos(f1,mouse.cursorpos.x,mouse.cursorpos.y);
   if f1.ShowModal=mrOK then begin
@@ -4223,32 +4247,30 @@ end;
 
 procedure Tf_main.ResizeBtn;
 var showcapt: boolean;
+    sz:integer;
 begin
-showcapt:=cfgm.btncaption and (cfgm.btnsize>32) and (not cfgm.resizeicon);
-if (ToolBarMain.ButtonHeight<>cfgm.btnsize) or (ToolBarMain.ShowCaptions<>showcapt) or ((ImageListSize>16)<>cfgm.resizeicon) then begin
-  if NightVision then
-    SetButtonImage(cfgm.ButtonNight)
-  else
-    SetButtonImage(cfgm.ButtonStandard);
-  ToolBarMain.ButtonHeight:=cfgm.btnsize;
-  ToolBarMain.ButtonWidth:=cfgm.btnsize;
-  ToolBarMain.Height:=cfgm.btnsize+4;
+showcapt:=cfgm.btncaption and (cfgm.btnsize>32);
+sz:=DoScaleX(cfgm.btnsize,96);
+if (ToolBarMain.ButtonHeight<>sz) or (ToolBarMain.ShowCaptions<>showcapt) then begin
+  ToolBarMain.ButtonHeight:=sz;
+  ToolBarMain.ButtonWidth:=sz;
+  ToolBarMain.Height:=sz+4;
   ToolBarMain.ShowCaptions:=showcapt;
   ToolBarMain.Invalidate;
-  ToolBarObj.ButtonHeight:=cfgm.btnsize;
-  ToolBarObj.ButtonWidth:=cfgm.btnsize;
-  ToolBarObj.Height:=cfgm.btnsize+4;
+  ToolBarObj.ButtonHeight:=sz;
+  ToolBarObj.ButtonWidth:=sz;
+  ToolBarObj.Height:=sz+4;
   ToolBarObj.ShowCaptions:=showcapt;
   ToolBarObj.Invalidate;
-  PanelLeft.Width:=cfgm.btnsize+4;
-  ToolBarLeft.ButtonHeight:=cfgm.btnsize;
-  ToolBarLeft.ButtonWidth:=cfgm.btnsize;
-  ToolBarLeft.Width:=cfgm.btnsize+4;
+  PanelLeft.Width:=sz+4;
+  ToolBarLeft.ButtonHeight:=sz;
+  ToolBarLeft.ButtonWidth:=sz;
+  ToolBarLeft.Width:=sz+4;
   ToolBarLeft.Invalidate;
-  PanelRight.Width:=cfgm.btnsize+4;
-  ToolBarRight.ButtonHeight:=cfgm.btnsize;
-  ToolBarRight.ButtonWidth:=cfgm.btnsize;
-  ToolBarRight.Width:=cfgm.btnsize+4;
+  PanelRight.Width:=sz+4;
+  ToolBarRight.ButtonHeight:=sz;
+  ToolBarRight.ButtonWidth:=sz;
+  ToolBarRight.Width:=sz+4;
   ToolBarRight.Invalidate;
   ViewTopPanel;
 end;
@@ -4525,7 +4547,6 @@ cfgm.SesameUrlNum:=0;
 cfgm.SesameCatNum:=3;
 cfgm.btnsize:=24;
 cfgm.btncaption:=false;
-cfgm.resizeicon:=false;
 cfgm.configpage:=0;
 cfgm.configpage_i:=0;
 cfgm.configpage_j:=0;
@@ -4659,7 +4680,7 @@ f_getdss.cfgdss.OnlineDSS:=true;
 f_getdss.cfgdss.OnlineDSSid:=1;
 for i:=1 to numfont do begin
    def_cfgplot.FontName[i]:=DefaultFontName;
-   def_cfgplot.FontSize[i]:=DefaultFontSize;
+   def_cfgplot.FontSize[i]:=DoScaleX(DefaultFontSize,96);
    def_cfgplot.FontBold[i]:=false;
    def_cfgplot.FontItalic[i]:=false;
 end;
@@ -4667,7 +4688,7 @@ def_cfgplot.FontName[5]:=DefaultFontFixed;
 def_cfgplot.FontName[7]:=DefaultFontSymbol;
 for i:=1 to numlabtype do begin
    def_cfgplot.LabelColor[i]:=clWhite;
-   def_cfgplot.LabelSize[i]:=DefaultFontSize;
+   def_cfgplot.LabelSize[i]:=DoScaleX(DefaultFontSize,96);
    def_cfgsc.LabelMagDiff[i]:=4;
    def_cfgsc.ShowLabel[i]:=true;
    def_cfgsc.LabelOrient[i]:=0;
@@ -4678,7 +4699,7 @@ def_cfgplot.LabelColor[6]:=clYellow;
 def_cfgplot.LabelColor[7]:=clSilver;
 def_cfgplot.LabelSize[6]:=def_cfgplot.LabelSize[6]+2;
 def_cfgplot.LabelColor[9]:=clLime;
-def_cfgplot.LabelSize[9]:=DefaultFontSize+1;
+def_cfgplot.LabelSize[9]:=DoScaleX(DefaultFontSize+1,96);
 def_cfgsc.LabelMagDiff[9]:=0;
 def_cfgsc.ShowLabel[9]:=true;
 def_cfgplot.contrast:=450;
@@ -5704,7 +5725,6 @@ OpenFileCMD:=ReadString(section,'OpenFileCMD',OpenFileCMD);
 {$endif}
 cfgm.btnsize:=ReadInteger(section,'BtnSize',cfgm.btnsize);
 cfgm.btncaption:=ReadBool(section,'BtnCaption',cfgm.btncaption);
-cfgm.resizeicon:=ReadBool(section,'ResizeIcon',cfgm.resizeicon);
 NightVision:=ReadBool(section,'NightVision',NightVision);
 cfgm.ClockColor:=ReadInteger(section,'ClockColor',cfgm.ClockColor);
 cfgm.SesameUrlNum:=ReadInteger(section,'SesameUrlNum',cfgm.SesameUrlNum);
@@ -6574,7 +6594,7 @@ WriteBool(section,'NightVision',NightVision);
 WriteString(section,'language',cfgm.language);
 WriteInteger(section,'BtnSize',cfgm.btnsize);
 WriteBool(section,'BtnCaption',cfgm.btncaption);
-WriteBool(section,'ResizeIcon',cfgm.resizeicon);
+WriteBool(section,'ScreenScaling',cfgm.ScreenScaling);
 if f_clock<>nil then WriteInteger(section,'ClockColor',f_clock.Font.Color);
 if f_planetinfo<>nil then WriteBool(section,'CenterAtNoon',f_planetinfo.CenterAtNoon);
 WriteInteger(section,'SesameUrlNum',f_search.SesameUrlNum);
@@ -8588,32 +8608,15 @@ var btn : TPortableNetworkGraphic;
 procedure SetButtonImage1(var imagelist:Timagelist);
 var i: Integer;
 begin
-   if cfgm.resizeicon then
-      ImageListSize:=cfgm.btnsize*2 div 3
-   else
-      ImageListSize:=16;
-   {$ifdef mswindows}
-   imagelist.Free;
-   imagelist:=TImageList.Create(Self);
-   {$else}
-   imagelist.Clear;
-   {$endif}
-   imagelist.Height:=ImageListSize;
-   imagelist.Width:=ImageListSize;
    for i:=0 to ImageListCount-1 do begin
        try
          bmp:=TBGRABitmap.Create;
          bmp.LoadFromFile(iconpath+'i'+inttostr(i)+'.png');
-         if ImageListSize>16 then begin
-           sbmp:=bmp.Resample(ImageListSize,ImageListSize) as TBGRABitmap;
-           imagelist.Add(sbmp.Bitmap,nil);
-           sbmp.Free;
-         end
-         else
-           imagelist.Add(bmp.Bitmap,nil);
+         imagelist.Add(bmp.Bitmap,nil);
        except
        end;
    end;
+   ScaleImageList(imagelist,96);
    ActionListFile.Images:=imagelist;
    ActionListEdit.Images:=imagelist;
    ActionListSetup.Images:=imagelist;
@@ -9044,16 +9047,14 @@ begin
    if f_edittoolbar.BtnSize.Items[i]=buf then
       f_edittoolbar.BtnSize.ItemIndex:=i;
  f_edittoolbar.BtnText.Checked:=cfgm.btncaption;
- f_edittoolbar.ResizeIcon.Checked:=cfgm.resizeicon;
  FormPos(f_edittoolbar,mouse.cursorpos.x,mouse.cursorpos.y);
  f_edittoolbar.ShowModal;
  if f_edittoolbar.ModalResult=mrOK then begin
     // save the configuration
     i:=StrToIntDef(f_edittoolbar.BtnSize.Text,24);
-    if (i<>cfgm.btnsize) or (f_edittoolbar.BtnText.Checked<>cfgm.btncaption) or (f_edittoolbar.ResizeIcon.Checked<>cfgm.resizeicon) then begin
+    if (i<>cfgm.btnsize) or (f_edittoolbar.BtnText.Checked<>cfgm.btncaption) then begin
       cfgm.btnsize:=StrToIntDef(f_edittoolbar.BtnSize.Text,24);
       cfgm.btncaption:=f_edittoolbar.BtnText.Checked;
-      cfgm.resizeicon:=f_edittoolbar.ResizeIcon.Checked;
       ResizeBtn;
       f_edittoolbar.ActivateToolbar;
     end;

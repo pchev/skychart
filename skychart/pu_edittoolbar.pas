@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_constant, u_translation,  u_help, IniFiles,
+uses u_constant, u_translation,  u_help, IniFiles, UScaleDPI,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
   lazutf8, ActnList, ExtCtrls, StdCtrls, PairSplitter, Buttons;
 
@@ -55,7 +55,6 @@ type
     BtnText: TCheckBox;
     OpenDialog1: TOpenDialog;
     PanelRbot: TPanel;
-    ResizeIcon: TCheckBox;
     ComboBox1: TComboBox;
     BtnSize: TComboBox;
     Label1: TLabel;
@@ -90,7 +89,6 @@ type
     procedure ComboBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
-    procedure ResizeIconChange(Sender: TObject);
   private
     { private declarations }
     numaction,numcontrol,numeditbar: integer;
@@ -191,7 +189,6 @@ ButtonHelp.caption:=rsHelp;
 Label1.Caption:=rsAvailableAct;
 label2.Caption:=rsButtonSize;
 BtnText.Caption:=rsShowButtonTe;
-ResizeIcon.Caption:=rsResizeIcon;
 ButtonMini.Caption:=rsMinimal;
 ButtonStd.Caption:=rsStandard;
 ButtonEmpty.Caption:=rsEmpty;
@@ -301,6 +298,7 @@ end;
 
 procedure Tf_edittoolbar.FormCreate(Sender: TObject);
 begin
+  ScaleDPI(Self,96);
   numaction:=0;
   numeditbar:=0;
   Setlang;
@@ -577,35 +575,19 @@ if (numeditbar>0) and  (numaction>0) then begin
           editControl[n].Left:=lpos;
           if editControl[n].Name='quicksearch' then begin
             editControl[n].Width:=90;
-            if ImageListSize=16 then
-               editControl[n].Font.Size:=0
-            else
-               editControl[n].Font.Size:=10*editControl[n].Height div 24;
+            editControl[n].Font.Size:=0;
           end;
           if editControl[n].Name='TimeU' then begin
-            if ImageListSize=16 then
-               editControl[n].Font.Size:=0
-            else
-               editControl[n].Font.Size:=10*editControl[n].Height div 24;
+            editControl[n].Font.Size:=0;
           end;
           if editControl[n].Name='TimeValPanel' then begin
-            if ImageListSize=16 then
-               editControl[n].Font.Size:=0
-            else
-               editControl[n].Font.Size:=10*editControl[n].Height div 24;
+            editControl[n].Font.Size:=0;
           end;
           if editControl[n].Name='MagPanel' then begin
-            if editbar[p].Height>editbar[p].Width then
-              editControl[n].Height:=editControl[n].Width
-            else
-              editControl[n].Width:=editControl[n].Height;
           end;
           if editControl[n].Name='ToolBarFOV' then begin
             if editbar[p].Height>editbar[p].Width then begin
-                if ImageListSize=16 then
-                    editControl[n].Font.Size:=0
-                else
-                    editControl[n].Font.Size:=9*editbar[p].Width div 24;
+                editControl[n].Font.Size:=9;
                 for t:=0 to tpanel(editControl[n]).ControlCount-1 do begin
                   TSpeedButton(tpanel(editControl[n]).Controls[t]).Width:=editbar[p].Width;
                   TSpeedButton(tpanel(editControl[n]).Controls[t]).Height:=editbar[p].Width;
@@ -614,10 +596,7 @@ if (numeditbar>0) and  (numaction>0) then begin
                 h:=10*(editbar[p].Width);
                 editControl[n].SetBounds(editControl[n].Left,editControl[n].Top,w,h);
             end else begin
-                if ImageListSize=16 then
-                    editControl[n].Font.Size:=0
-                else
-                    editControl[n].Font.Size:=9*editbar[p].Height div 24;
+                editControl[n].Font.Size:=9;
                 for t:=0 to tpanel(editControl[n]).ControlCount-1 do begin
                   TSpeedButton(tpanel(editControl[n]).Controls[t]).Width:=editbar[p].Height;
                   TSpeedButton(tpanel(editControl[n]).Controls[t]).Height:=editbar[p].Height;
@@ -835,20 +814,12 @@ end;
 
 procedure Tf_edittoolbar.BtnSizeChange(Sender: TObject);
 begin
- if BtnSize.ItemIndex=0 then ResizeIcon.Checked:=false;
  if BtnSize.ItemIndex<2 then BtnText.Checked:=false;
-end;
-
-procedure Tf_edittoolbar.ResizeIconChange(Sender: TObject);
-begin
- if BtnSize.ItemIndex=0 then ResizeIcon.Checked:=false;
- if BtnText.Checked     then ResizeIcon.Checked:=false;
 end;
 
 procedure Tf_edittoolbar.BtnTextChange(Sender: TObject);
 begin
  if BtnSize.ItemIndex<2 then BtnText.Checked:=false;
- if ResizeIcon.Checked  then BtnText.Checked:=false;
 end;
 
 procedure Tf_edittoolbar.ButtonSaveClick(Sender: TObject);
