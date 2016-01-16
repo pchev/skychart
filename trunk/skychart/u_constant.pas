@@ -47,8 +47,8 @@ type
 
 const
   cdcversion = '3.11-svn';
-  cdcver = '3.11j';
-  cdccpy = 'Copyright (C) 2002-2014 Patrick Chevalley';
+  cdcver = '3.11k';
+  cdccpy = 'Copyright (C) 2002-2016 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf +
     'Peter Dean,' + crlf + 'John Sunderland' + crlf  + 'Anat Ruangrassamee';
   MaxPlSim = 500;

@@ -2,6 +2,8 @@ Version 3.11 beta, release Notes
 
 New functions:
 
+  * Update the artificial satellites TLE files automatically.
+  * Set the tool bar button size and text in Setup / Toolbar editor.
   * Use INDIstarter to manage the INDI server.
   * New INDI control panel.
   * New performance options from menu File/Reset chart and options...
@@ -17,6 +19,9 @@ New functions:
 
 Corrections:
 
+  * Artificial satellites TLE files can use .txt extension.
+  * Move some menu from File to View and Chart.
+  * Now the program scale the window correctly on high resolution screen. You can set the old behavior in Setup/General.
   * No more store the program data location in the configuration file. If you need a non-standard location use the new command line option "--datadir=".
 
 Incompatibilities with beta versions before 3023:

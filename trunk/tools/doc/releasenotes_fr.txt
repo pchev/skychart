@@ -2,6 +2,8 @@ Version 3.11 beta, Notes de la version
 
 Nouvelles fonctions:
 
+  * Mise à jour automatique des fichiers TLE des satellites artificiels.
+  * Régle la taille des boutons et le texte dans Configuration / éditeur de barre d'outils.
   * Utilise INDIstarter pour gérer le serveur INDI.
   * Nouveau panneau de controle INDI.
   * Nouvelle option de performance depuis le menu Fichier/Carte et options par défaut...
@@ -17,6 +19,9 @@ Nouvelles fonctions:
 
 Corrections:
 
+  * Les fichiers TLE des satellites artificiels peuvent utiliser l'extention .txt.
+  * Déplacement de certains menu depuis Fichier vers Voir et Carte.
+  * Maintenant, le programme met les fenêtres à l'échelle sur un écran à haute résolution. Vous pouvez régler l'ancien comportement dans Configuration / Général.
   * N'enregistre plus l'emplacement des données du programme dans le fichier de configuration. Si vous avez besoin d'un emplacement non standard utilisez la nouvelle option de ligne de commande "--datadir=".
 
 Incompatibilités avec les versions beta inférieur à 3023:
