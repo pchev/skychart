@@ -4540,7 +4540,6 @@ object f_main: Tf_main
       end
       object MenuServerInformation: TMenuItem
         Action = ViewServerInfo
-        Caption = 'Server Information'
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
           2000000000000004000064000000640000000000000000000000D0D2D600D0D2
@@ -5252,7 +5251,6 @@ object f_main: Tf_main
         end
         object MenuEclipticProjection: TMenuItem
           Action = EclipticProjection
-          Caption = 'Ecliptic Coordinate'
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
             2000000000000004000064000000640000000000000000000000EBEBEBFFEBEB
@@ -5293,7 +5291,6 @@ object f_main: Tf_main
         end
         object MenuGalacticProjection: TMenuItem
           Action = GalacticProjection
-          Caption = 'Galactic Coordinate'
           Bitmap.Data = {
             36040000424D3604000000000000360000002800000010000000100000000100
             2000000000000004000064000000640000000000000000000000EBEBEBFFEBEB
@@ -11904,6 +11901,7 @@ object f_main: Tf_main
     end
     object ViewServerInfo: TAction
       Category = 'Information'
+      Caption = 'Server Information'
       ImageIndex = 107
       OnExecute = ViewServerInfoExecute
     end

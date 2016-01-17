@@ -6162,3 +6162,15 @@ msgstr ""
 msgid "JPL ephemeris search order"
 msgstr ""
 
+#: u_translation:rssearchsoftwa
+msgid "Search software update"
+msgstr ""
+
+#: u_translation:rscometelement2
+msgid "Comet elements"
+msgstr ""
+
+#: u_translation:rsasteroidelem2
+msgid "Asteroid elements"
+msgstr ""
+

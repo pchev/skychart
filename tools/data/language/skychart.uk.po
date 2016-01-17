@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-17 10:48+0000\n"
+"POT-Creation-Date: 2016-01-17 12:33+0000\n"
 "PO-Revision-Date: 2014-05-01 08:41+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclubzp@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-17 10:52+0000\n"
+"X-Launchpad-Export-Date: 2016-01-17 12:41+0000\n"
 "X-Generator: Launchpad (build 17886)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -388,6 +388,10 @@ msgstr "Астероїд"
 #: u_translation.rsasteroidelem
 msgid "Sources for asteroid elements in MPC format (one URL per line)"
 msgstr "Елементи астероїдів у МРС форматі (один URL в лінії)"
+
+#: u_translation.rsasteroidelem2
+msgid "Asteroid elements"
+msgstr ""
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
@@ -924,6 +928,10 @@ msgstr "Комета"
 #: u_translation.rscometelement
 msgid "Sources for comet elements in MPC format (one URL per line)"
 msgstr "Елементи комет в МРС форматі (один URL в лінії)"
+
+#: u_translation.rscometelement2
+msgid "Comet elements"
+msgstr ""
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
@@ -4745,6 +4753,10 @@ msgstr "Знайти для"
 #: u_translation.rssearchindex
 msgid "Search index"
 msgstr "Пошуковий індекс"
+
+#: u_translation.rssearchsoftwa
+msgid "Search software update"
+msgstr ""
 
 #: u_translation.rssec
 msgid "s"

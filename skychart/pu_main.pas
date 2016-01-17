@@ -7345,6 +7345,12 @@ MenuMaillist.caption:='&'+rsMailList+Ellipsis;
 MenuBugReport.caption:='&'+rsReportAProbl+Ellipsis;
 MenuHelpAbout.caption:='&'+rsAbout+Ellipsis;
 MenuReleaseNotes.Caption:='&'+rsReleaseNotes+Ellipsis;
+//Menu Update
+SubUpdate.Caption:=rsUpdate1;
+MenuUpdSoft.Caption:=rsSearchSoftwa;
+MenuUpdComet.Caption:=rsCometElement2;
+MenuUpdAsteroid.Caption:=rsAsteroidElem2;
+MenuUpdSatellite.Caption:=rsArtificialSa;
 // popmenu1
 ResetAllLabels1.caption:='&'+rsResetAllLabe;
 

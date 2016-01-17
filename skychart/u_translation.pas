@@ -1568,6 +1568,9 @@ resourcestring
   rsAdjustTheWin = 'Adjust the window size to the screen DPI';
   rsGregorianCal = 'Gregorian calendar start date';
   rsJPLEphemeris = 'JPL ephemeris search order';
+  rsSearchSoftwa = 'Search software update';
+  rsCometElement2 = 'Comet elements';
+  rsAsteroidElem2 = 'Asteroid elements';
 
 // also update upsi_translation
 
