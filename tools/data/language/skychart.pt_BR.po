@@ -4,13 +4,13 @@ msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-17 12:33+0000\n"
-"PO-Revision-Date: 2016-01-16 18:02+0000\n"
+"PO-Revision-Date: 2016-01-17 19:19+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-17 12:41+0000\n"
+"X-Launchpad-Export-Date: 2016-01-17 20:24+0000\n"
 "X-Generator: Launchpad (build 17886)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
@@ -389,7 +389,7 @@ msgstr "Elementos de asteroides em formato MPC (uma URL por linha)"
 
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
-msgstr ""
+msgstr "Elementos de asteroides"
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
@@ -930,7 +930,7 @@ msgstr "Elementos de cometas no formato MPC (uma URL por linha)"
 
 #: u_translation.rscometelement2
 msgid "Comet elements"
-msgstr ""
+msgstr "Elementos de cometas"
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
@@ -2395,7 +2395,7 @@ msgstr "Verde"
 
 #: u_translation.rsgregoriancal
 msgid "Gregorian calendar start date"
-msgstr ""
+msgstr "Data de início do calendário Gregoriano"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -2763,7 +2763,7 @@ msgstr "Calendário JD"
 
 #: u_translation.rsjplephemeris
 msgid "JPL ephemeris search order"
-msgstr ""
+msgstr "Ordem de pesquisa de efemérides JPL"
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="
@@ -4755,7 +4755,7 @@ msgstr "Índice de pesquisa"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
-msgstr ""
+msgstr "Pesquisar atualização de software"
 
 #: u_translation.rssec
 msgid "s"
