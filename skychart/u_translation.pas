@@ -1566,6 +1566,8 @@ resourcestring
   rsManual = 'Manual';
   rsScreenResolu = 'Screen resolution';
   rsAdjustTheWin = 'Adjust the window size to the screen DPI';
+  rsGregorianCal = 'Gregorian calendar start date';
+  rsJPLEphemeris = 'JPL ephemeris search order';
 
 // also update upsi_translation
 

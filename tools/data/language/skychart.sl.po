@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-16 15:33+0000\n"
+"POT-Creation-Date: 2016-01-17 10:48+0000\n"
 "PO-Revision-Date: 2014-05-01 08:38+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-16 15:52+0000\n"
+"X-Launchpad-Export-Date: 2016-01-17 10:52+0000\n"
 "X-Generator: Launchpad (build 17886)\n"
 "Language: en_US\n"
 
@@ -2384,6 +2384,10 @@ msgstr "Grški simbol"
 msgid "Green"
 msgstr "Zeleno"
 
+#: u_translation.rsgregoriancal
+msgid "Gregorian calendar start date"
+msgstr ""
+
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
 msgstr "Razmik mreže"
@@ -2747,6 +2751,10 @@ msgstr "JD"
 #: u_translation.rsjdcalendar
 msgid "JD calendar"
 msgstr "JD koledar"
+
+#: u_translation.rsjplephemeris
+msgid "JPL ephemeris search order"
+msgstr ""
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="

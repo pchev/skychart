@@ -46,6 +46,7 @@ end;
 
 procedure Tf_config_calendar.SetLang;
 begin
+ TabSheet1.Caption:=rsCalendarGrap;
  GroupBox1.Caption:=rsCalendarGrap;
  label2.Caption:=rsGraphHeight;
 end;

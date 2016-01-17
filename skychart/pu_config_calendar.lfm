@@ -80,7 +80,6 @@ object f_configcalendar: Tf_configcalendar
         ActivePage = nil
         TabIndex = -1
         inherited TabSheet1: TTabSheet
-          ClientHeight = 523
           ClientWidth = 489
           inherited GroupBox1: TGroupBox
             inherited LongEdit1: TLongEdit

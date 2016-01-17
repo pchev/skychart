@@ -6154,3 +6154,11 @@ msgstr ""
 msgid "Adjust the window size to the screen DPI"
 msgstr ""
 
+#: u_translation:rsgregoriancal
+msgid "Gregorian calendar start date"
+msgstr ""
+
+#: u_translation:rsjplephemeris
+msgid "JPL ephemeris search order"
+msgstr ""
+

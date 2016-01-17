@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-16 15:33+0000\n"
-"PO-Revision-Date: 2016-01-15 17:01+0000\n"
+"POT-Creation-Date: 2016-01-17 10:48+0000\n"
+"PO-Revision-Date: 2016-01-16 18:07+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-16 15:52+0000\n"
+"X-Launchpad-Export-Date: 2016-01-17 10:52+0000\n"
 "X-Generator: Launchpad (build 17886)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
@@ -169,7 +169,7 @@ msgstr "Ajustar a escala de visualização"
 
 #: u_translation.rsadjustthewin
 msgid "Adjust the window size to the screen DPI"
-msgstr ""
+msgstr "Ajuste o tamanho da janela para tela DPI"
 
 #: u_translation.rsadvanced
 msgid "Advanced"
@@ -337,7 +337,7 @@ msgstr "Satélite artificial"
 
 #: u_translation.rsartificialsa3
 msgid "Artificial satellites TLE (one URL by line)"
-msgstr ""
+msgstr "Satélites artificiais TLE (uma URL por linha)"
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
@@ -890,7 +890,7 @@ msgstr "Aglomerado e Nebulosa"
 
 #: u_translation.rscollapse
 msgid "Collapse"
-msgstr ""
+msgstr "Contrair"
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -1658,7 +1658,7 @@ msgstr "Estrela Binária"
 
 #: u_translation.rsdown
 msgid "Down"
-msgstr ""
+msgstr "Abaixo"
 
 #: u_translation.rsdownload
 msgid "Download"
@@ -2019,7 +2019,7 @@ msgstr "Saindo ..."
 
 #: u_translation.rsexpand
 msgid "Expand"
-msgstr ""
+msgstr "Expandir"
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -2385,6 +2385,10 @@ msgstr "Símbolos em grego"
 msgid "Green"
 msgstr "Verde"
 
+#: u_translation.rsgregoriancal
+msgid "Gregorian calendar start date"
+msgstr ""
+
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
 msgstr "Espaçamento da grelha"
@@ -2748,6 +2752,10 @@ msgstr "JD"
 #: u_translation.rsjdcalendar
 msgid "JD calendar"
 msgstr "Calendário JD"
+
+#: u_translation.rsjplephemeris
+msgid "JPL ephemeris search order"
+msgstr ""
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="
@@ -3115,7 +3123,7 @@ msgstr "Gerenciar script da caixa de ferramentas"
 
 #: u_translation.rsmanual
 msgid "Manual"
-msgstr ""
+msgstr "Manual"
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -4687,7 +4695,7 @@ msgstr "Escopo Adv"
 
 #: u_translation.rsscreenresolu
 msgid "Screen resolution"
-msgstr ""
+msgstr "Resolução da tela"
 
 #: u_translation.rsscript
 msgid "Script"
@@ -5359,11 +5367,11 @@ msgstr "Início"
 
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
-msgstr ""
+msgstr "Animação para trás"
 
 #: u_translation.rsstartforward
 msgid "Animation forward"
-msgstr ""
+msgstr "Animação para frente"
 
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
@@ -5699,7 +5707,7 @@ msgstr "Seguir o telescópio"
 
 #: u_translation.rstrajectories
 msgid "Trajectories simulation"
-msgstr ""
+msgstr "Simulação de trajetórias"
 
 #: u_translation.rstransformati
 msgid "Transformation"
@@ -5843,7 +5851,7 @@ msgstr "Perfil  SAMP hub não suportado. Deve ser uma URL do arquivo"
 
 #: u_translation.rsup
 msgid "Up"
-msgstr ""
+msgstr "Acima"
 
 #: u_translation.rsupdate1
 msgid "Update"
