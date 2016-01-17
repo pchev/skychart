@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-17 10:48+0000\n"
+"POT-Creation-Date: 2016-01-17 12:33+0000\n"
 "PO-Revision-Date: 2015-11-05 19:25+0000\n"
 "Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-17 10:52+0000\n"
+"X-Launchpad-Export-Date: 2016-01-17 12:41+0000\n"
 "X-Generator: Launchpad (build 17886)\n"
 
 #: u_translation.rs102cddss
@@ -384,6 +384,10 @@ msgstr "Planetoïde"
 #: u_translation.rsasteroidelem
 msgid "Sources for asteroid elements in MPC format (one URL per line)"
 msgstr "Planetoïde elementen in MPC format (één URL per regel)"
+
+#: u_translation.rsasteroidelem2
+msgid "Asteroid elements"
+msgstr ""
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
@@ -920,6 +924,10 @@ msgstr "Komeet"
 #: u_translation.rscometelement
 msgid "Sources for comet elements in MPC format (one URL per line)"
 msgstr "Komeet elementen in MPC format (één URL per regel)"
+
+#: u_translation.rscometelement2
+msgid "Comet elements"
+msgstr ""
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
@@ -4742,6 +4750,10 @@ msgstr "Zoek naar"
 #: u_translation.rssearchindex
 msgid "Search index"
 msgstr "Zoek index"
+
+#: u_translation.rssearchsoftwa
+msgid "Search software update"
+msgstr ""
 
 #: u_translation.rssec
 msgid "s"
