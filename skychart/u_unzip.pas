@@ -305,6 +305,7 @@ end;
     result:=do_extract_onefile(uf,fn,1,1)=UNZ_OK;
     chdir(olddir);
     unzCloseCurrentFile(uf);
+    unzClose(uf);
   end;
 
   function FileUnzipAll(fnzip, TempDir:PChar):boolean;
@@ -332,6 +333,7 @@ end;
     result:=n>0;
     chdir(olddir);
     unzCloseCurrentFile(uf);
+    unzClose(uf);
   end;
 
 
