@@ -560,7 +560,7 @@ const
   URL_DSS_NAME19 = 'HST Phase2 (GSC2)';
   URL_DSS19 =
     'http://archive.stsci.edu/cgi-bin/dss_search?v=phase2_gsc2&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
-  URL_SUN_NUMBER = 16;
+  URL_SUN_NUMBER = 17;
   URL_SUN_NAME: array[1..URL_SUN_NUMBER] of string = ('SDO AIA 4500',
     'SDO AIA 304',
     'SDO AIA 193',
@@ -576,8 +576,10 @@ const
     'SOHO EIT 284',
     'SOHO EIT 304',
     'SOHO HMI Continuum',
-    'SOHO HMI Magnetogram');
+    'SOHO HMI Magnetogram',
+    'SOHO Sunspot');
   URL_SUN_SIZE: array[1..URL_SUN_NUMBER] of integer = (1024,
+    1024,
     1024,
     1024,
     1024,
@@ -608,7 +610,8 @@ const
     130,
     130,
     20,
-    12);
+    12,
+    70);
   URL_SUN: array[1..URL_SUN_NUMBER] of
     string = ('http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_4500.jpg',
     'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0304.jpg',
@@ -625,7 +628,8 @@ const
     'http://sohowww.nascom.nasa.gov/data/realtime/eit_284/1024/latest.jpg',
     'http://sohowww.nascom.nasa.gov/data/realtime/eit_304/1024/latest.jpg',
     'http://sohowww.nascom.nasa.gov/data/realtime/hmi_igr/1024/latest.jpg',
-    'http://sohowww.nascom.nasa.gov/data/realtime/hmi_mag/1024/latest.jpg');
+    'http://sohowww.nascom.nasa.gov/data/realtime/hmi_mag/1024/latest.jpg',
+    'http://sohowww.nascom.nasa.gov/data/synoptic/sunspots/mdi_sunspots_1024.jpg');
   sesame_maxurl = 4;
   sesame_url: array [1..sesame_maxurl, 1..2] of string = (
     ('http://cds.u-strasbg.fr/cgi-bin/nph-sesame', 'CDS - Strasbourg, France'),
