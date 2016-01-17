@@ -4620,9 +4620,8 @@ cfgm.AnonPass:='skychart@';
 cfgm.ObsNameList.Sorted:=true;
 cfgm.CometUrlList.Add(URL_HTTPCometElements);
 cfgm.AsteroidUrlList.Add(URL_CDCAsteroidElements);
-cfgm.TleUrlList.add(URL_TLEINFO1);
-cfgm.TleUrlList.add(URL_TLEINFO2);
-cfgm.TleUrlList.add(URL_TLEINFO3);
+cfgm.TleUrlList.add(URL_CELESTRAK1);
+cfgm.TleUrlList.add(URL_CELESTRAK2);
 cfgm.TleUrlList.add(URL_QSMAG);
 cfgm.starshape_file:='';
 cfgm.SampAutoconnect:=false;
@@ -9046,7 +9045,8 @@ begin
  for i:=0 to f_edittoolbar.BtnSize.Items.Count-1 do
    if f_edittoolbar.BtnSize.Items[i]=buf then
       f_edittoolbar.BtnSize.ItemIndex:=i;
- f_edittoolbar.BtnText.Checked:=cfgm.btncaption;
+ f_edittoolbar.BtnText.Checked:=cfgm.btncaption and (f_edittoolbar.BtnSize.ItemIndex>=2);
+ f_edittoolbar.BtnText.Enabled:=(f_edittoolbar.BtnSize.ItemIndex>=2);
  FormPos(f_edittoolbar,mouse.cursorpos.x,mouse.cursorpos.y);
  f_edittoolbar.ShowModal;
  if f_edittoolbar.ModalResult=mrOK then begin

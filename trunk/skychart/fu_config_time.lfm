@@ -6,8 +6,6 @@ object f_config_time: Tf_config_time
   ClientHeight = 530
   ClientWidth = 500
   TabOrder = 0
-  DesignLeft = 319
-  DesignTop = 285
   object MainPanel: TPanel
     Left = 0
     Height = 530
@@ -32,21 +30,21 @@ object f_config_time: Tf_config_time
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Time'
-        ClientHeight = 530
-        ClientWidth = 500
+        ClientHeight = 526
+        ClientWidth = 496
         object Label142: TLabel
           Left = 286
           Height = 15
           Top = 62
-          Width = 47
+          Width = 54
           Caption = 'Seconds'
           ParentColor = False
         end
         object CheckBox2: TCheckBox
           Left = 40
-          Height = 26
+          Height = 24
           Top = 56
-          Width = 137
+          Width = 145
           Caption = 'Auto-refresh every '
           OnClick = CheckBox2Click
           TabOrder = 1
@@ -64,7 +62,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 15
             Top = 64
-            Width = 52
+            Width = 58
             Caption = 'TT - UT  : '
             ParentColor = False
           end
@@ -72,7 +70,7 @@ object f_config_time: Tf_config_time
             Left = 85
             Height = 15
             Top = 64
-            Width = 28
+            Width = 32
             Caption = '0000'
             ParentColor = False
           end
@@ -80,7 +78,7 @@ object f_config_time: Tf_config_time
             Left = 142
             Height = 15
             Top = 64
-            Width = 47
+            Width = 54
             Caption = 'Seconds'
             ParentColor = False
           end
@@ -88,15 +86,15 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 15
             Top = 48
-            Width = 314
+            Width = 343
             Caption = 'Difference between Terrestrial Time and Universal Time'
             ParentColor = False
           end
           object CheckBox4: TCheckBox
             Left = 6
-            Height = 26
+            Height = 24
             Top = 80
-            Width = 164
+            Width = 178
             Caption = 'Use another TT-UT value'
             OnClick = CheckBox4Click
             TabOrder = 1
@@ -105,7 +103,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 15
             Top = 12
-            Width = 58
+            Width = 62
             Caption = 'Time zone'
             ParentColor = False
           end
@@ -138,7 +136,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 15
             Top = 123
-            Width = 167
+            Width = 188
             Caption = 'Gregorian calendar start date'
             ParentColor = False
           end
@@ -215,7 +213,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 15
             Top = 68
-            Width = 28
+            Width = 29
             Caption = 'Time'
             ParentColor = False
           end
@@ -223,7 +221,7 @@ object f_config_time: Tf_config_time
             Left = 127
             Height = 15
             Top = 52
-            Width = 11
+            Width = 10
             Caption = 'M'
             ParentColor = False
           end
@@ -231,7 +229,7 @@ object f_config_time: Tf_config_time
             Left = 195
             Height = 15
             Top = 52
-            Width = 6
+            Width = 8
             Caption = 'S'
             ParentColor = False
           end
@@ -239,7 +237,7 @@ object f_config_time: Tf_config_time
             Left = 56
             Height = 15
             Top = 52
-            Width = 8
+            Width = 9
             Caption = 'H'
             ParentColor = False
           end
@@ -255,7 +253,7 @@ object f_config_time: Tf_config_time
             Left = 127
             Height = 15
             Top = 6
-            Width = 11
+            Width = 10
             Caption = 'M'
             ParentColor = False
           end
@@ -271,7 +269,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 15
             Top = 25
-            Width = 28
+            Width = 30
             Caption = 'Date'
             ParentColor = False
           end
@@ -279,7 +277,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 15
             Top = 102
-            Width = 18
+            Width = 16
             Caption = 'JD:'
             ParentColor = False
           end
@@ -287,7 +285,7 @@ object f_config_time: Tf_config_time
             Left = 267
             Height = 15
             Top = 70
-            Width = 41
+            Width = 43
             Caption = 'tzLabel'
             ParentColor = False
           end
@@ -305,8 +303,8 @@ object f_config_time: Tf_config_time
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 35
-            ClientWidth = 133
+            ClientHeight = 37
+            ClientWidth = 135
             Columns = 2
             Items.Strings = (
               'AD'
@@ -417,13 +415,13 @@ object f_config_time: Tf_config_time
             Height = 22
             Top = 22
             Width = 13
-            Min = -1
             Max = 1
+            Min = -1
+            OnClick = DateClick
             Position = 0
             TabOrder = 1
             Thousands = False
             Wrap = False
-            OnClick = DateClick
           end
           object d_monthEdit: TEdit
             Left = 136
@@ -439,13 +437,13 @@ object f_config_time: Tf_config_time
             Top = 22
             Width = 13
             Associate = d_monthEdit
-            Min = 1
             Max = 12
+            Min = 1
+            OnClick = DateChange
             Position = 1
             TabOrder = 3
             Thousands = False
             Wrap = False
-            OnClick = DateChange
           end
           object d_dayEdit: TEdit
             Left = 195
@@ -461,13 +459,13 @@ object f_config_time: Tf_config_time
             Top = 22
             Width = 13
             Associate = d_dayEdit
-            Min = 1
             Max = 31
+            Min = 1
+            OnClick = DateChange
             Position = 1
             TabOrder = 5
             Thousands = False
             Wrap = False
-            OnClick = DateChange
           end
           object t_hourEdit: TEdit
             Left = 56
@@ -483,13 +481,13 @@ object f_config_time: Tf_config_time
             Top = 65
             Width = 13
             Associate = t_hourEdit
-            Min = 0
             Max = 23
+            Min = 0
+            OnClick = TimeChange
             Position = 0
             TabOrder = 8
             Thousands = False
             Wrap = False
-            OnClick = TimeChange
           end
           object t_minEdit: TEdit
             Left = 127
@@ -505,13 +503,13 @@ object f_config_time: Tf_config_time
             Top = 65
             Width = 13
             Associate = t_minEdit
-            Min = 0
             Max = 59
+            Min = 0
+            OnClick = TimeChange
             Position = 0
             TabOrder = 10
             Thousands = False
             Wrap = False
-            OnClick = TimeChange
           end
           object t_sec: TUpDown
             Left = 242
@@ -519,13 +517,13 @@ object f_config_time: Tf_config_time
             Top = 65
             Width = 13
             Associate = t_secEdit
-            Min = 0
             Max = 59
+            Min = 0
+            OnClick = TimeChange
             Position = 0
             TabOrder = 12
             Thousands = False
             Wrap = False
-            OnClick = TimeChange
           end
           object t_secEdit: TEdit
             Left = 195
@@ -561,7 +559,7 @@ object f_config_time: Tf_config_time
             Left = 236
             Height = 15
             Top = 102
-            Width = 44
+            Width = 49
             Caption = 'UTLabel'
             ParentColor = False
           end
@@ -569,16 +567,16 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 15
             Top = 128
-            Width = 30
+            Width = 31
             Caption = 'dterr'
             ParentColor = False
           end
         end
         object CheckBox1: TCheckBox
           Left = 40
-          Height = 26
+          Height = 24
           Top = 24
-          Width = 123
+          Width = 129
           Caption = 'Use system time'
           OnClick = CheckBox1Click
           TabOrder = 0
@@ -596,8 +594,8 @@ object f_config_time: Tf_config_time
       end
       object Page2: TTabSheet
         Caption = 'Simulation'
-        ClientHeight = 530
-        ClientWidth = 500
+        ClientHeight = 526
+        ClientWidth = 496
         object stepreset: TSpeedButton
           Left = 220
           Height = 25
@@ -647,8 +645,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 119
-          ClientWidth = 133
+          ClientHeight = 120
+          ClientWidth = 135
           Items.Strings = (
             'Days'
             'Hours'
@@ -729,8 +727,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 61
-          ClientWidth = 434
+          ClientHeight = 62
+          ClientWidth = 436
           Columns = 3
           Items.Strings = (
             'None'
@@ -749,7 +747,7 @@ object f_config_time: Tf_config_time
             Width = 137
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 6
+            TabOrder = 5
             OnChange = LongEdit1Change
             Value = 2
             MinValue = 2
@@ -771,8 +769,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 31
-          ClientWidth = 434
+          ClientHeight = 32
+          ClientWidth = 436
           Columns = 3
           Items.Strings = (
             'Object Name'
@@ -800,8 +798,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 6
-          ClientHeight = 31
-          ClientWidth = 434
+          ClientHeight = 32
+          ClientWidth = 436
           Columns = 6
           Items.Strings = (
             'Year'
@@ -852,10 +850,10 @@ object f_config_time: Tf_config_time
           Width = 17
           Associate = nbstep
           Min = 1
+          OnClick = UpDown1Click
           Position = 1
           TabOrder = 2
           Wrap = False
-          OnClick = UpDown1Click
         end
         object UpDown2: TUpDown
           Left = 433
@@ -863,12 +861,12 @@ object f_config_time: Tf_config_time
           Top = 70
           Width = 17
           Associate = stepsize
-          Min = 1
           Max = 999
+          Min = 1
+          OnClick = UpDown2Click
           Position = 1
           TabOrder = 4
           Wrap = False
-          OnClick = UpDown2Click
         end
         object stepmark: TCheckBox
           Left = 318
@@ -882,16 +880,16 @@ object f_config_time: Tf_config_time
       end
       object Page3: TTabSheet
         Caption = 'Animation'
-        ClientHeight = 530
-        ClientWidth = 500
+        ClientHeight = 526
+        ClientWidth = 496
         object GroupBox1: TGroupBox
           Left = 6
           Height = 80
           Top = 14
           Width = 457
           Caption = 'Real time options'
-          ClientHeight = 63
-          ClientWidth = 453
+          ClientHeight = 64
+          ClientWidth = 455
           TabOrder = 0
           object Label2: TLabel
             Left = 3
@@ -921,8 +919,8 @@ object f_config_time: Tf_config_time
           Top = 102
           Width = 457
           Caption = 'Recording options'
-          ClientHeight = 359
-          ClientWidth = 453
+          ClientHeight = 360
+          ClientWidth = 455
           TabOrder = 1
           object DirectoryEdit1: TDirectoryEdit
             Left = 190
@@ -1098,12 +1096,12 @@ object f_config_time: Tf_config_time
             Top = 178
             Width = 17
             Associate = fpsedit
-            Min = 1
             Max = 60
+            Min = 1
+            OnClick = UpDown3Click
             Position = 2
             TabOrder = 5
             Wrap = False
-            OnClick = UpDown3Click
           end
           object fpsedit: TLongEdit
             Left = 190

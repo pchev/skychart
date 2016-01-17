@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-01-16 15:33+0000\n"
+"POT-Creation-Date: 2016-01-17 10:48+0000\n"
 "PO-Revision-Date: 2014-11-10 02:28+0000\n"
 "Last-Translator: observer <observer@263.net>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-16 15:52+0000\n"
+"X-Launchpad-Export-Date: 2016-01-17 10:52+0000\n"
 "X-Generator: Launchpad (build 17886)\n"
 
 #: u_translation.rs102cddss
@@ -2387,6 +2387,10 @@ msgstr "希腊字母"
 msgid "Green"
 msgstr "绿"
 
+#: u_translation.rsgregoriancal
+msgid "Gregorian calendar start date"
+msgstr ""
+
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
 msgstr "网格间距"
@@ -2751,6 +2755,10 @@ msgstr "儒略日"
 #: u_translation.rsjdcalendar
 msgid "JD calendar"
 msgstr "儒略历"
+
+#: u_translation.rsjplephemeris
+msgid "JPL ephemeris search order"
+msgstr ""
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="

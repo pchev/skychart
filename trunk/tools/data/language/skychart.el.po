@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-16 15:33+0000\n"
+"POT-Creation-Date: 2016-01-17 10:48+0000\n"
 "PO-Revision-Date: 2015-09-11 15:51+0000\n"
 "Last-Translator: Aggelos Arnaoutis <angelosarn@hotmail.com>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-16 15:52+0000\n"
+"X-Launchpad-Export-Date: 2016-01-17 10:52+0000\n"
 "X-Generator: Launchpad (build 17886)\n"
 
 #: u_translation.rs102cddss
@@ -2381,6 +2381,10 @@ msgstr "Ελληνικό σύμβολο"
 msgid "Green"
 msgstr "Πράσινο"
 
+#: u_translation.rsgregoriancal
+msgid "Gregorian calendar start date"
+msgstr ""
+
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
 msgstr "Απόσταση πλέγματος"
@@ -2744,6 +2748,10 @@ msgstr "ΙΗ"
 #: u_translation.rsjdcalendar
 msgid "JD calendar"
 msgstr "Ιουλ. Ημερολόγιο"
+
+#: u_translation.rsjplephemeris
+msgid "JPL ephemeris search order"
+msgstr ""
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="
