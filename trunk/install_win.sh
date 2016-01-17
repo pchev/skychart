@@ -25,6 +25,7 @@ if [ $OS_TARGET = win32 ]; then
   strip -v -o $destdir/libgetdss.dll skychart/library/getdss/libgetdss.dll
   unzip -d $destdir system_integration/Windows/data/sqlite3.zip
   unzip -d $destdir system_integration/Windows/data/zlib.zip
+  unzip -d $destdir system_integration/Windows/data/openssl-win32.zip
   install -m 755 -d $destdir/data
   install -m 755 -d $destdir/data/planet
   unzip -d $destdir/data/planet/ system_integration/Windows/data/xplanet-windows.zip
@@ -41,6 +42,7 @@ if [ $OS_TARGET = win64 ]; then
   strip -v -o $destdir/libgetdss.dll skychart/library/getdss/libgetdss.dll
   unzip -d $destdir system_integration/Windows/data/sqlite3_x64.zip
   unzip -d $destdir system_integration/Windows/data/zlib_x64.zip
+  unzip -d $destdir system_integration/Windows/data/openssl-win64.zip
   install -m 755 -d $destdir/data
   install -m 755 -d $destdir/data/planet
   unzip -d $destdir/data/planet/ system_integration/Windows/data/xplanet-windows.zip
