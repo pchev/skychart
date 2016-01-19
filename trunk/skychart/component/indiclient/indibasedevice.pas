@@ -137,13 +137,13 @@ end;
 destructor BaseDevice.Destroy;
 begin
  if Ftrace then writeln('BaseDevice.Destroy');
- pAll.Free;
+ FreeAndNil(pAll);
  inherited Destroy;
 end;
 
 function BaseDevice.getDeviceName(): string;
 begin
-  result:=deviceID;
+  if pAll<>nil then result:=deviceID;
 end;
 
 procedure BaseDevice.setDeviceName(value:string);

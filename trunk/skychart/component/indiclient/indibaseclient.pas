@@ -209,7 +209,9 @@ begin
 if Ftrace then writeln('TIndiBaseClient.Destroy');
 Fdevices.Free;
 FwatchDevices.Free;
+{$ifndef mswindows}
 Inherited destroy;
+{$endif}
 end;
 
 procedure TIndiBaseClient.Execute;
