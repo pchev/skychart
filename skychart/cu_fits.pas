@@ -186,6 +186,7 @@ value:=StringReplace(value,'\\','\',[rfReplaceAll]);
 FWCSvalid:=false;
 Fheader.valid:=false;
 Fheader.coordinate_valid:=false;
+FFileName:='';
 if fileexists(value) and (rightstr(value,1)<>PathDelim) then begin
  cur_axis:=1;
  setlength(imar64,0,0,0);
@@ -388,24 +389,25 @@ var n: integer;
     i: TcdcWCSinfo;
 begin
 try
-n:=cdcwcs_initfitsfile(pchar(FFileName),0);
-n:=cdcwcs_getinfo(addr(i),0);
-if VerboseMsg then
- WriteTrace('cdcwcs_getinfo '+inttostr(n)+' ra:'+formatfloat(f5,i.cra)+' de:'+formatfloat(f5,i.cdec)+' w:'+inttostr(i.wp)+' h:'+inttostr(i.hp)+' s:'+formatfloat(f6,i.secpix) );
-if (n=0)and(i.secpix<>0) then begin
-  Fra:=deg2rad*i.cra;
-  Fde:=deg2rad*i.cdec;
-  y:=trunc(i.eqout);
-  m:=trunc(frac(i.eqout)*12)+1;
-  d:=trunc(frac(frac(i.eqout)*12)*30)+1;
-  Fjd:=jd(y,m,d,12.0);
-  Fimg_width:=deg2rad*i.wp*i.secpix/3600;
-  Fimg_Height:=deg2rad*i.hp*i.secpix/3600;
-  Frotation:=deg2rad*i.rot;
-  FWCSvalid:=True;
-end else begin
-  FWCSvalid:=False;
-  WriteTrace('Invalid WCS in file');
+if FFileName<>'' then begin
+  n:=cdcwcs_initfitsfile(pchar(FFileName),0);
+  n:=cdcwcs_getinfo(addr(i),0);
+  if VerboseMsg then WriteTrace('cdcwcs_getinfo '+inttostr(n)+' ra:'+formatfloat(f5,i.cra)+' de:'+formatfloat(f5,i.cdec)+' w:'+inttostr(i.wp)+' h:'+inttostr(i.hp)+' s:'+formatfloat(f6,i.secpix) );
+  if (n=0)and(i.secpix<>0) then begin
+    Fra:=deg2rad*i.cra;
+    Fde:=deg2rad*i.cdec;
+    y:=trunc(i.eqout);
+    m:=trunc(frac(i.eqout)*12)+1;
+    d:=trunc(frac(frac(i.eqout)*12)*30)+1;
+    Fjd:=jd(y,m,d,12.0);
+    Fimg_width:=deg2rad*i.wp*i.secpix/3600;
+    Fimg_Height:=deg2rad*i.hp*i.secpix/3600;
+    Frotation:=deg2rad*i.rot;
+    FWCSvalid:=True;
+  end else begin
+    FWCSvalid:=False;
+    WriteTrace('Invalid WCS in file');
+  end;
 end;
 except
  FWCSvalid:=False;
