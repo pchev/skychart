@@ -1276,6 +1276,10 @@ while j=0 do begin
   n:=0;
   db.starttransaction;
   while i=0 do begin
+    if f.Name='README.TXT' then begin
+       i:=findnext(f);
+       continue;
+    end;
     inc(n);
     if (n mod ProgressBar.step)=0 then begin ProgressBar.stepit; Application.processmessages; end;
     dummyfile:=uppercase((extractfileext(f.Name)))='.NIL';
@@ -1313,7 +1317,8 @@ while j=0 do begin
       if not db.query(cmd) then
          writetrace(Format(rsDBInsertFail, [f.Name, db.ErrorMessage]));
     end
-    else writetrace(Format(rsInvalidFITSF, [f.Name]));
+    else
+      writetrace(Format(rsInvalidFITSF, [f.Name]));
     i:=findnext(f);
   end;
   db.commit;
