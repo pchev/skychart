@@ -3,16 +3,6 @@
        MenuFileOpen
        MenuFileSave
        MenuFileClose
-       MenuResetChart
-       MenuResetLanguage
-       MenuCalendar
-       MenuObslist
-       MenuVariableStar
-       SubSAMP
-         MenuSAMPConnect
-         MenuSAMPDisconnect
-         MenuSAMPStatus
-         MenuSAMPSetup
        MenuSaveImage
        MenuPrint
        MenuPrintPreview
@@ -26,6 +16,7 @@
        MenuRedo
      SubSetup
        MenuEditToolbar
+       MenuToolboxConfig
        MenuDateConfig
        MenuObsConfig
        MenuChartConfig
@@ -39,6 +30,8 @@
        MenuConfig
        MenuSaveConfigurationNow
        MenuSaveConfigurationOnExit
+       MenuResetLanguage
+       MenuResetChart
      SubView
        MenuFullScreen
        MenuNightVision
@@ -60,8 +53,19 @@
          MenuToolbox8
        MenuViewScrollBar
        MenuServerInformation
+       SubSAMP
+         MenuSAMPConnect
+         MenuSAMPDisconnect
+         MenuSAMPStatus
+         MenuSAMPSetup
+       MenuVariableStar
        MenuViewClock
        MenuViewPlanetInfo
+       MenuCalendar
+       MenuObslist
+       MenuTrajectory
+       MenuMousemode
+       MenuScaleMode
        MenuZoom
        MenuZoomPlus
        MenuZoomMinus
@@ -100,6 +104,10 @@
          MenutoS
          MenutoE
          MenutoW
+       SubAnimation
+         MenuTimeDec
+         MenuTimeInc
+         MenuTimeReset
        SubShowObjects
          MenuShowStars
          MenuShowNebulae
@@ -147,6 +155,11 @@
        MenuWindowTileHor
        MenuWindowTileVert
        MenuMaximize
+     SubUpdate
+       MenuUpdSoft
+       MenuUpdComet
+       MenuUpdAsteroid
+       MenuUpdSatellite
      SubHelp
        MenuHelpContents
        MenuHelpFaq
