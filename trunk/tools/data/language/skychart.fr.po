@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-17 12:33+0000\n"
-"PO-Revision-Date: 2016-01-17 12:38+0000\n"
+"POT-Creation-Date: 2016-01-24 13:48+0000\n"
+"PO-Revision-Date: 2016-01-24 13:53+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-17 20:24+0000\n"
-"X-Generator: Launchpad (build 17886)\n"
+"X-Launchpad-Export-Date: 2016-01-24 13:56+0000\n"
+"X-Generator: Launchpad (build 17902)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -151,6 +151,10 @@ msgstr "Options supplémentaires ffmpeg"
 #: u_translation.rsaddlabel
 msgid "Add label"
 msgstr "Ajout d'un label"
+
+#: u_translation.rsaddlabelfore
+msgid "Add label for every object in the list"
+msgstr "Ajouter un label pour tous les objets de la liste"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
@@ -2394,7 +2398,7 @@ msgstr "Vert"
 
 #: u_translation.rsgregoriancal
 msgid "Gregorian calendar start date"
-msgstr "Date de début du calendrier Grégorien"
+msgstr "Début du calendrier Grégorien"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -3743,19 +3747,19 @@ msgstr "Seulement les numérotés"
 
 #: u_translation.rsonlyobjectsw
 msgid "Only objects within airmass limits tonight"
-msgstr "Seulement les objets dans la limite de masse d'air cette nuit"
+msgstr "Seulement les objets dans la masse d'air cette nuit"
 
 #: u_translation.rsonlyobjectsw2
 msgid "Only objects within airmass limits now"
-msgstr "Seulement les objets dans la limite de masse d'air maintenant"
+msgstr "Seulement les objets dans la masse d'air maintenant"
 
 #: u_translation.rsonlyobjectsw3
 msgid "Only objects within hour angle limits tonight"
-msgstr "Seulement les objets dans la limite d'angle horaire cette nuit"
+msgstr "Seulement les objets dans l'angle horaire cette nuit"
 
 #: u_translation.rsonlyobjectsw4
 msgid "Only objects within hour angle limits now"
-msgstr "Seulement les objets dans la limite d'angle horaire maintenant"
+msgstr "Seulement les objets dans l'angle horaire maintenant"
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -5895,7 +5899,7 @@ msgstr "Lancement d'une URL"
 
 #: u_translation.rsuseanothertt
 msgid "Use another DeltaT value"
-msgstr "Utilise une autre valeur de DeltaT"
+msgstr "Autre valeur de DeltaT"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"

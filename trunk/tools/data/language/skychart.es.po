@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-17 12:33+0000\n"
-"PO-Revision-Date: 2015-12-20 18:19+0000\n"
+"POT-Creation-Date: 2016-01-24 13:48+0000\n"
+"PO-Revision-Date: 2016-01-20 22:56+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-17 20:24+0000\n"
-"X-Generator: Launchpad (build 17886)\n"
+"X-Launchpad-Export-Date: 2016-01-24 13:56+0000\n"
+"X-Generator: Launchpad (build 17902)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -151,6 +151,10 @@ msgstr "Opciones adicionales de ffmpeg"
 msgid "Add label"
 msgstr "Añadir Etiqueta"
 
+#: u_translation.rsaddlabelfore
+msgid "Add label for every object in the list"
+msgstr ""
+
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
 msgstr "Añadir nombres alternativos al índice"
@@ -169,7 +173,7 @@ msgstr "Ajustar la escala de visualización"
 
 #: u_translation.rsadjustthewin
 msgid "Adjust the window size to the screen DPI"
-msgstr ""
+msgstr "Austar tamaño de ventana a los DPI de la pantalla"
 
 #: u_translation.rsadvanced
 msgid "Advanced"
@@ -337,7 +341,7 @@ msgstr "Satélite artificial"
 
 #: u_translation.rsartificialsa3
 msgid "Artificial satellites TLE (one URL by line)"
-msgstr ""
+msgstr "TLE satélites artificiales (una URL por línea)"
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
@@ -389,7 +393,7 @@ msgstr "Elementos de asteroides en formato MPC (una URL por línea)"
 
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
-msgstr ""
+msgstr "Elementos asteroides"
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
@@ -605,7 +609,7 @@ msgstr "Botón"
 
 #: u_translation.rsbuttonsize
 msgid "Button size"
-msgstr ""
+msgstr "Tamaño del botón"
 
 #: u_translation.rsby
 msgid "by"
@@ -893,7 +897,7 @@ msgstr "Cúmulo y nebulosa"
 
 #: u_translation.rscollapse
 msgid "Collapse"
-msgstr ""
+msgstr "Contraer"
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -929,7 +933,7 @@ msgstr "Elementos de cometa en formato MPC (una URL por línea)"
 
 #: u_translation.rscometelement2
 msgid "Comet elements"
-msgstr ""
+msgstr "Elementos cometas"
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
@@ -1665,7 +1669,7 @@ msgstr "Estrella doble"
 
 #: u_translation.rsdown
 msgid "Down"
-msgstr ""
+msgstr "Abajo"
 
 #: u_translation.rsdownload
 msgid "Download"
@@ -2025,7 +2029,7 @@ msgstr "Saliendo ..."
 
 #: u_translation.rsexpand
 msgid "Expand"
-msgstr ""
+msgstr "Expandir"
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -2393,7 +2397,7 @@ msgstr "Verde"
 
 #: u_translation.rsgregoriancal
 msgid "Gregorian calendar start date"
-msgstr ""
+msgstr "Fecha de comienzo del calendario Gregoriano"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -2761,7 +2765,7 @@ msgstr "Calendario juliano"
 
 #: u_translation.rsjplephemeris
 msgid "JPL ephemeris search order"
-msgstr ""
+msgstr "Orden de búsqueda de las efemérides del JPL"
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="
@@ -3129,7 +3133,7 @@ msgstr "Gestionar guión caja de herramientas"
 
 #: u_translation.rsmanual
 msgid "Manual"
-msgstr ""
+msgstr "Manual"
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -4701,7 +4705,7 @@ msgstr "Scope Avnz"
 
 #: u_translation.rsscreenresolu
 msgid "Screen resolution"
-msgstr ""
+msgstr "Resolución de la pantalla"
 
 #: u_translation.rsscript
 msgid "Script"
@@ -4753,7 +4757,7 @@ msgstr "Indice de búsqueda"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
-msgstr ""
+msgstr "Buscar actualizaciones del software"
 
 #: u_translation.rssec
 msgid "s"
@@ -4977,7 +4981,7 @@ msgstr "Mostrar asteroides en la carta"
 
 #: u_translation.rsshowbuttonte
 msgid "Show button text"
-msgstr ""
+msgstr "Mostrar texto del botón"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
@@ -5377,11 +5381,11 @@ msgstr "Inicio"
 
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
-msgstr ""
+msgstr "Retroceso animación"
 
 #: u_translation.rsstartforward
 msgid "Animation forward"
-msgstr ""
+msgstr "Avance animación"
 
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
@@ -5717,7 +5721,7 @@ msgstr "Seguir al telescopio"
 
 #: u_translation.rstrajectories
 msgid "Trajectories simulation"
-msgstr ""
+msgstr "Simulación de trayectorias"
 
 #: u_translation.rstransformati
 msgid "Transformation"
@@ -5861,7 +5865,7 @@ msgstr "Perfil de concentrador SAMP no soportado. Debe ser una URL de archivo"
 
 #: u_translation.rsup
 msgid "Up"
-msgstr ""
+msgstr "Arriba"
 
 #: u_translation.rsupdate1
 msgid "Update"
