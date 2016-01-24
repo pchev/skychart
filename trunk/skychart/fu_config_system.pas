@@ -28,7 +28,7 @@ uses u_help, u_translation, u_constant, u_util, cu_database,
   indibaseclient, indibasedevice,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms, FileUtil, math,
-  ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML;
+  ExtCtrls, StdCtrls, LResources, CdC_EditBtn, LazHelpHTML;
 
 type
 

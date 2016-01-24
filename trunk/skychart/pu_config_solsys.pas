@@ -28,7 +28,7 @@ interface
 uses u_help, u_translation, u_constant, u_util, u_projection, cu_database, UScaleDPI,
   fu_config_solsys, LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources,
-  downloaddialog, jdcalendar, EditBtn, Process, LazHelpHTML, FileUtil;
+  downloaddialog, jdcalendar, CdC_EditBtn, Process, LazHelpHTML, FileUtil;
 
 type
 

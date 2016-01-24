@@ -28,7 +28,7 @@ interface
 uses u_help, u_translation, u_constant, u_util, cu_fits, cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FileUtil,
   StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits, LResources,
-  EditBtn, LazHelpHTML, Grids;
+  CdC_EditBtn, LazHelpHTML, Grids;
 
 type
 

@@ -30,7 +30,7 @@ uses
   u_help, u_translation, u_constant, u_util, cu_database, Math, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FileUtil,
   Buttons, StdCtrls, ExtCtrls, cu_zoomimage, enhedits, ComCtrls, LResources,
-  Spin, downloaddialog, EditBtn, LazHelpHTML;
+  Spin, downloaddialog, CdC_EditBtn, LazHelpHTML;
 
 type
 
