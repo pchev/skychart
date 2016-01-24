@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-17 12:33+0000\n"
-"PO-Revision-Date: 2016-01-17 16:48+0000\n"
+"POT-Creation-Date: 2016-01-24 13:48+0000\n"
+"PO-Revision-Date: 2016-01-18 18:12+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-17 20:24+0000\n"
-"X-Generator: Launchpad (build 17886)\n"
+"X-Launchpad-Export-Date: 2016-01-24 13:56+0000\n"
+"X-Generator: Launchpad (build 17902)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -149,6 +149,10 @@ msgstr "Tilleggsalternativer for ffmpeg"
 #: u_translation.rsaddlabel
 msgid "Add label"
 msgstr "Legg til påskrift"
+
+#: u_translation.rsaddlabelfore
+msgid "Add label for every object in the list"
+msgstr ""
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
@@ -764,7 +768,7 @@ msgstr "Endre musemodus"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
-msgstr "Endring til denne innstilling vil starte programmet på nytt nå!"
+msgstr "Endring av denne innstillingen vil starte programmet på nytt nå!"
 
 #: u_translation.rschart
 msgid "Chart"
@@ -2760,7 +2764,7 @@ msgstr "JD kalender"
 
 #: u_translation.rsjplephemeris
 msgid "JPL ephemeris search order"
-msgstr ""
+msgstr "Søkerekkefølge for JPL-efemerider"
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="
@@ -3128,7 +3132,7 @@ msgstr "Behandle verktøyboksskript"
 
 #: u_translation.rsmanual
 msgid "Manual"
-msgstr ""
+msgstr "Manuelt"
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -3524,7 +3528,7 @@ msgstr "Ingen objekt å låse"
 
 #: u_translation.rsnopicture
 msgid "No picture"
-msgstr "Ingen bilde"
+msgstr "Ikke noe bilde"
 
 #: u_translation.rsnoprinterfou
 msgid "No printer found!"
@@ -4512,7 +4516,7 @@ msgstr "Tilbakestill rotasjon"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
-msgstr "Tilbakestill til siste lagrede kart"
+msgstr "Tilbakestill til sist lagrede kart"
 
 #: u_translation.rsresolution
 msgid "Resolution:"
@@ -4924,7 +4928,7 @@ msgstr "Innstilling av observasjonssted"
 
 #: u_translation.rssetoptionsfo
 msgid "Set options for best performance"
-msgstr ""
+msgstr "Sett alternativer for best ytelse"
 
 #: u_translation.rssetslewing
 msgid "Set Slewing"
@@ -5716,7 +5720,7 @@ msgstr "Følg teleskop"
 
 #: u_translation.rstrajectories
 msgid "Trajectories simulation"
-msgstr ""
+msgstr "Banesimulering"
 
 #: u_translation.rstransformati
 msgid "Transformation"

@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-17 12:33+0000\n"
-"PO-Revision-Date: 2016-01-15 09:59+0000\n"
+"POT-Creation-Date: 2016-01-24 13:48+0000\n"
+"PO-Revision-Date: 2016-01-22 16:04+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-17 20:24+0000\n"
-"X-Generator: Launchpad (build 17886)\n"
+"X-Launchpad-Export-Date: 2016-01-24 13:56+0000\n"
+"X-Generator: Launchpad (build 17902)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -150,6 +150,10 @@ msgstr "Opcions addicionals de ffmpeg"
 msgid "Add label"
 msgstr "Afegeix etiqueta"
 
+#: u_translation.rsaddlabelfore
+msgid "Add label for every object in the list"
+msgstr ""
+
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
 msgstr "Afegeix els noms suplementaris a l'índex"
@@ -168,7 +172,7 @@ msgstr "Ajusta l'escala de visualització"
 
 #: u_translation.rsadjustthewin
 msgid "Adjust the window size to the screen DPI"
-msgstr ""
+msgstr "Ajusta la mida de finestra als PPP de pantalla"
 
 #: u_translation.rsadvanced
 msgid "Advanced"
@@ -336,7 +340,7 @@ msgstr "Satèl·lit artificial"
 
 #: u_translation.rsartificialsa3
 msgid "Artificial satellites TLE (one URL by line)"
-msgstr ""
+msgstr "Satèl·lits artificials TLE (una URL per línia)"
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
@@ -388,7 +392,7 @@ msgstr "Elements dels asteroides en format MPC (una URL per línia)"
 
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
-msgstr ""
+msgstr "Elements dels asteroides"
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
@@ -892,7 +896,7 @@ msgstr "Cúmul i nebulosa"
 
 #: u_translation.rscollapse
 msgid "Collapse"
-msgstr ""
+msgstr "Col·lapsa"
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -928,7 +932,7 @@ msgstr "Elements dels cometes en format MPC (una URL per línia)"
 
 #: u_translation.rscometelement2
 msgid "Comet elements"
-msgstr ""
+msgstr "Elements dels cometes"
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
@@ -1664,7 +1668,7 @@ msgstr "Estel doble"
 
 #: u_translation.rsdown
 msgid "Down"
-msgstr ""
+msgstr "Avall"
 
 #: u_translation.rsdownload
 msgid "Download"
@@ -2024,7 +2028,7 @@ msgstr "Sortida ..."
 
 #: u_translation.rsexpand
 msgid "Expand"
-msgstr ""
+msgstr "Expandeix"
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -2392,7 +2396,7 @@ msgstr "Verd"
 
 #: u_translation.rsgregoriancal
 msgid "Gregorian calendar start date"
-msgstr ""
+msgstr "Data d'inici del calendari gregorià"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -2761,7 +2765,7 @@ msgstr "Calendari DJ"
 
 #: u_translation.rsjplephemeris
 msgid "JPL ephemeris search order"
-msgstr ""
+msgstr "Ordre de cerca d'efemèrides JPL"
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="
@@ -3129,7 +3133,7 @@ msgstr "Governar script caixa d'eines"
 
 #: u_translation.rsmanual
 msgid "Manual"
-msgstr ""
+msgstr "Manual"
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -4701,7 +4705,7 @@ msgstr "Telescopi avançat"
 
 #: u_translation.rsscreenresolu
 msgid "Screen resolution"
-msgstr ""
+msgstr "Resolució de pantalla"
 
 #: u_translation.rsscript
 msgid "Script"
@@ -4753,7 +4757,7 @@ msgstr "Índex de recerca"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
-msgstr ""
+msgstr "Busca actualització del programari"
 
 #: u_translation.rssec
 msgid "s"
@@ -5377,11 +5381,11 @@ msgstr "Inicia"
 
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
-msgstr ""
+msgstr "Animació enrere"
 
 #: u_translation.rsstartforward
 msgid "Animation forward"
-msgstr ""
+msgstr "Animació endavant"
 
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
@@ -5718,7 +5722,7 @@ msgstr "Segueix el telescopi"
 
 #: u_translation.rstrajectories
 msgid "Trajectories simulation"
-msgstr ""
+msgstr "Simulació de trajectòries"
 
 #: u_translation.rstransformati
 msgid "Transformation"
@@ -5862,7 +5866,7 @@ msgstr "Perfil del terminal SAMP no suportat. Cal un fitxer URL"
 
 #: u_translation.rsup
 msgid "Up"
-msgstr ""
+msgstr "Amunt"
 
 #: u_translation.rsupdate1
 msgid "Update"
