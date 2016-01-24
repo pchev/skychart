@@ -1408,6 +1408,7 @@ if cfgm.SampAutoconnect then begin
 end;
 f_print.cm:=cfgm;
 f_obslist.cfgsc:=Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc;
+f_obslist.AllLabels.Checked:=f_obslist.cfgsc.ObslistAlLabels;
 f_obslist.LimitType:=cfgm.ObsListLimitType;
 f_obslist.AirmassCombo.Text:=cfgm.ObslistAirmass;
 f_obslist.LimitAirmassTonight.Checked:=cfgm.ObslistAirmassLimit1;
@@ -4692,6 +4693,7 @@ for i:=1 to numlabtype do begin
    def_cfgsc.ShowLabel[i]:=true;
    def_cfgsc.LabelOrient[i]:=0;
 end;
+def_cfgsc.ObslistAlLabels:=true;
 def_cfgsc.LabelMagDiff[1]:=3;
 def_cfgsc.LabelMagDiff[5]:=2;
 def_cfgplot.LabelColor[6]:=clYellow;
@@ -5570,6 +5572,7 @@ for i:=1 to numlabtype do begin
    csc.LabelMagDiff[i]:=readFloat(section,'LabelMag'+inttostr(i),csc.LabelMagDiff[i]);
    csc.LabelOrient[i]:=readFloat(section,'LabelOrient'+inttostr(i),csc.LabelOrient[i]);
 end;
+csc.ObslistAlLabels:=ReadBool(section,'ObslistAlLabels',csc.ObslistAlLabels);
 csc.TrackOn:=ReadBool(section,'TrackOn',csc.TrackOn);
 csc.TrackType:=ReadInteger(section,'TrackType',csc.TrackType);
 csc.TrackObj:=ReadInteger(section,'TrackObj',csc.TrackObj);
@@ -6500,6 +6503,7 @@ for i:=1 to numlabtype do begin
    WriteFloat(section,'LabelMag'+inttostr(i),csc.LabelMagDiff[i]);
    WriteFloat(section,'LabelOrient'+inttostr(i),csc.LabelOrient[i]);
 end;
+WriteBool(section,'ObslistAlLabels',csc.ObslistAlLabels);
 WriteBool(section,'TrackOn',csc.TrackOn);
 WriteInteger(section,'TrackType',csc.TrackType);
 WriteInteger(section,'TrackObj',csc.TrackObj);

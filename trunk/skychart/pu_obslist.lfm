@@ -3,6 +3,7 @@ object f_obslist: Tf_obslist
   Height = 498
   Top = 34
   Width = 800
+  ActiveControl = Edit1
   Caption = 'f_obslist'
   ClientHeight = 498
   ClientWidth = 800
@@ -77,6 +78,15 @@ object f_obslist: Tf_obslist
       Caption = 'Load'
       OnClick = ButtonLoadClick
       TabOrder = 5
+    end
+    object AllLabels: TCheckBox
+      Left = 480
+      Height = 24
+      Top = 3
+      Width = 247
+      Caption = 'Add label for every object in the list'
+      OnChange = AllLabelsChange
+      TabOrder = 6
     end
   end
   object StringGrid1: TStringGrid

@@ -1003,6 +1003,7 @@ type
     LabelMagDiff: array[1..numlabtype] of double;
     LabelOrient: array[1..numlabtype] of double;
     ShowLabel: array[1..numlabtype] of boolean;
+    ObslistAlLabels: boolean;
     ncircle,nrectangle: integer;
     circle: array of array [1..4] of single; // radius, rotation, offset, mode
     circleok: array of boolean;
@@ -1083,6 +1084,10 @@ type
     constructor Create;
     destructor Destroy; override;
   end;
+
+  TLabelCoord = class(Tobject)
+              ra,dec : double;
+              end;
 
   Tconf_main = class(TObject)    // main form setting
   public
@@ -2412,6 +2417,7 @@ begin
     LabelMagDiff[i] := Source.LabelMagDiff[i];
     LabelOrient[i] := Source.LabelOrient[i];
   end;
+  ObslistAlLabels:=Source.ObslistAlLabels;
   ncircle:=Source.ncircle;
   SetLength(circle,ncircle+1);
   SetLength(circleok,ncircle+1);

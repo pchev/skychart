@@ -43,6 +43,7 @@ type
     Button1: TButton;
     BtnTour: TButton;
     ButtonLoad: TButton;
+    AllLabels: TCheckBox;
     Panel1: TPanel;
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
@@ -79,6 +80,7 @@ type
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     procedure AirmassComboChange(Sender: TObject);
+    procedure AllLabelsChange(Sender: TObject);
     procedure BtnTourClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure ButtonLoadClick(Sender: TObject);
@@ -218,6 +220,7 @@ begin
   MenuDelete.Caption:=rsDelete;
   button1.Caption:=rshelp;
   SetHelp(self,hlpObslist);
+  AllLabels.Caption:=rsAddLabelForE;
 end;
 
 procedure Tf_obslist.Newlist;
@@ -505,6 +508,7 @@ end;
 procedure Tf_obslist.UpdateLabels(sender:TObject);
 var i: integer;
     lbl:string;
+    crd: TLabelCoord;
 begin
 FObjLabels.Clear;
 FObjLabels.Sorted:=False;
@@ -512,7 +516,10 @@ for i:=1 to StringGrid1.RowCount-1 do begin
    if StringGrid1.RowHeights[i]>0 then begin
      lbl:=trim(wordspace(StringGrid1.Cells[7,i]));
      if (lbl<>'') then begin
-       FObjLabels.Add(lbl);
+       crd:=TLabelCoord.Create;
+       crd.ra:=StrToFloatDef(trim(StringGrid1.Cells[2,i]),-9999);
+       crd.dec:=StrToFloatDef(trim(StringGrid1.Cells[3,i]),-9999);
+       FObjLabels.AddObject(lbl,crd);
      end;
    end;
 end;
@@ -929,6 +936,12 @@ if buf<>rsHorizon then begin
   end;
 end;
 Refresh;
+end;
+
+procedure Tf_obslist.AllLabelsChange(Sender: TObject);
+begin
+  cfgsc.ObslistAlLabels:=AllLabels.Checked;
+  if Assigned(FObjLabelChange) then FObjLabelChange(self);
 end;
 
 procedure Tf_obslist.BtnTourClick(Sender: TObject);
