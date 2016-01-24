@@ -91,6 +91,7 @@ type
     procedure CometUrlListExit(Sender: TObject);
     procedure ftppassiveClick(Sender: TObject);
     procedure httpproxyClick(Sender: TObject);
+    procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
     procedure proxyhostChange(Sender: TObject);
     procedure proxypassChange(Sender: TObject);
     procedure proxyportChange(Sender: TObject);
@@ -239,6 +240,12 @@ cmain.HttpProxy:=httpproxy.Checked;
 if cmain.HttpProxy then SocksProxy.Checked:=false;
 panel2.Visible:=cmain.HttpProxy or cmain.SocksProxy;
 SocksType.Visible:=SocksProxy.Checked;
+end;
+
+procedure Tf_config_internet.PageControl1Changing(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+  if parent is TForm then TForm(Parent).ActiveControl:=PageControl1;
 end;
 
 procedure Tf_config_internet.SocksProxyClick(Sender: TObject);

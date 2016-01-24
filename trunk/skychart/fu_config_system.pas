@@ -28,7 +28,7 @@ uses u_help, u_translation, u_constant, u_util, cu_database,
   indibaseclient, indibasedevice,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms, FileUtil, math,
-  ExtCtrls, StdCtrls, LResources, CdC_EditBtn, LazHelpHTML;
+  ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML;
 
 type
 
@@ -149,6 +149,7 @@ type
     RevertTurnsAz: TCheckBox;
     RevertTurnsAlt: TCheckBox;
     PageControl1: TPageControl;
+    procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
     procedure UseScalingChange(Sender: TObject);
     procedure GetIndiDevicesClick(Sender: TObject);
     procedure CheckBox1Change(Sender: TObject);
@@ -651,6 +652,12 @@ if messageDlg(rsWarning+crlf+rsChangeToThis,
    UseScaling.Checked:=not UseScaling.Checked;
    LockChange:=false;
   end;
+end;
+
+procedure Tf_config_system.PageControl1Changing(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+  if parent is TForm then TForm(Parent).ActiveControl:=PageControl1;
 end;
 
 procedure Tf_config_system.LinuxDesktopBoxChange(Sender: TObject);

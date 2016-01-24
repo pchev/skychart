@@ -28,7 +28,7 @@ interface
 uses  XMLConf, u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
   pu_catgenadv, pu_progressbar, FileUtil, pu_voconfig, math, LCLIntf, SysUtils,
   Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, enhedits,
-  downloaddialog, Grids, Buttons, ComCtrls, LResources, CdC_EditBtn, LazHelpHTML;
+  downloaddialog, Grids, Buttons, ComCtrls, LResources, EditBtn, LazHelpHTML;
 
 type
 
@@ -233,6 +233,7 @@ type
     procedure CatgenClick(Sender: TObject);
     procedure delobjClick(Sender: TObject);
     procedure maxrowsChange(Sender: TObject);
+    procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
     procedure StringGrid1DrawCell(Sender: TObject; aCol, aRow: Integer;
       aRect: TRect; aState: TGridDrawState);
     procedure StringGrid1MouseUp(Sender: TObject; Button: TMouseButton;
@@ -456,6 +457,12 @@ end;
 procedure Tf_config_catalog.maxrowsChange(Sender: TObject);
 begin
   cmain.VOmaxrecord := maxrows.Value;
+end;
+
+procedure Tf_config_catalog.PageControl1Changing(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+  if parent is TForm then TForm(Parent).ActiveControl:=PageControl1;
 end;
 
 procedure Tf_config_catalog.Lock;

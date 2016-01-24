@@ -19,6 +19,7 @@ type
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
     procedure LongEdit1Change(Sender: TObject);
+    procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
   private
     { private declarations }
     LockChange: boolean;
@@ -42,6 +43,12 @@ implementation
 procedure Tf_config_calendar.LongEdit1Change(Sender: TObject);
 begin
  csc.CalGraphHeight := LongEdit1.Value;
+end;
+
+procedure Tf_config_calendar.PageControl1Changing(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+  if parent is TForm then TForm(Parent).ActiveControl:=PageControl1;
 end;
 
 procedure Tf_config_calendar.SetLang;

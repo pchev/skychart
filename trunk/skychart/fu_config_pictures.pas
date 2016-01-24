@@ -28,7 +28,7 @@ interface
 uses u_help, u_translation, u_constant, u_util, cu_fits, cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FileUtil,
   StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits, LResources,
-  CdC_EditBtn, LazHelpHTML, Grids;
+  EditBtn, LazHelpHTML, Grids;
 
 type
 
@@ -122,6 +122,7 @@ type
     procedure ImgITT2Change(Sender: TObject);
     procedure ImgTrBar2Change(Sender: TObject);
     procedure MaxImgChange(Sender: TObject);
+    procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
     procedure ResetLumClick(Sender: TObject);
     procedure PageControl1PageChanged(Sender: TObject);
     procedure imgpathChange(Sender: TObject);
@@ -474,6 +475,12 @@ end;
 procedure Tf_config_pictures.MaxImgChange(Sender: TObject);
 begin
   csc.MaxArchiveImg:=MaxImg.ItemIndex+1;
+end;
+
+procedure Tf_config_pictures.PageControl1Changing(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+  if parent is TForm then TForm(Parent).ActiveControl:=PageControl1;
 end;
 
 procedure Tf_config_pictures.ImageTimer1Timer(Sender: TObject);

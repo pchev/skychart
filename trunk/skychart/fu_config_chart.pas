@@ -272,6 +272,7 @@ type
     procedure CheckBox13Click(Sender: TObject);
     procedure CoordTypeClick(Sender: TObject);
     procedure MessierBoxClick(Sender: TObject);
+    procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
     procedure PageControl1PageChanged(Sender: TObject);
     procedure TrackBar1Change(Sender: TObject);
     procedure PMBoxClick(Sender: TObject);
@@ -673,6 +674,12 @@ end;
 procedure Tf_config_chart.MessierBoxClick(Sender: TObject);
 begin
   cshr.NoFilterMessier := MessierBox.Checked;
+end;
+
+procedure Tf_config_chart.PageControl1Changing(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+  if parent is TForm then TForm(Parent).ActiveControl:=PageControl1;
 end;
 
 procedure Tf_config_chart.PageControl1PageChanged(Sender: TObject);

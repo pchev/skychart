@@ -29,6 +29,7 @@ object f_config_chart: Tf_config_chart
       TabIndex = 4
       TabOrder = 0
       OnChange = PageControl1PageChanged
+      OnChanging = PageControl1Changing
       object Page1: TTabSheet
         Caption = 'Page1'
         ClientHeight = 468

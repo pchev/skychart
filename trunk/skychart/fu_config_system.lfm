@@ -6,6 +6,7 @@ object f_config_system: Tf_config_system
   ClientHeight = 524
   ClientWidth = 500
   TabOrder = 0
+  DesignLeft = 53
   object MainPanel: TPanel
     Left = 0
     Height = 524
@@ -26,6 +27,7 @@ object f_config_system: Tf_config_system
       ShowTabs = False
       TabIndex = 0
       TabOrder = 0
+      OnChanging = PageControl1Changing
       object Page1: TTabSheet
         Caption = 'Page1'
         ClientHeight = 518
@@ -114,7 +116,7 @@ object f_config_system: Tf_config_system
             Left = 178
             Height = 15
             Top = 28
-            Width = 77
+            Width = 73
             Caption = 'Host Name:'
             ParentColor = False
           end
@@ -122,7 +124,7 @@ object f_config_system: Tf_config_system
             Left = 16
             Height = 15
             Top = 28
-            Width = 66
+            Width = 61
             Caption = 'DB Name:'
             ParentColor = False
           end
@@ -130,7 +132,7 @@ object f_config_system: Tf_config_system
             Left = 16
             Height = 15
             Top = 3
-            Width = 94
+            Width = 89
             Caption = 'MysqlBoxLabel'
             ParentColor = False
           end
@@ -167,7 +169,7 @@ object f_config_system: Tf_config_system
             Left = 13
             Height = 15
             Top = 12
-            Width = 94
+            Width = 90
             Caption = 'SqliteBoxLabel'
             ParentColor = False
           end
@@ -176,7 +178,7 @@ object f_config_system: Tf_config_system
           Left = 0
           Height = 15
           Top = 0
-          Width = 99
+          Width = 94
           Caption = 'System Setting'
           ParentColor = False
         end
@@ -313,7 +315,7 @@ object f_config_system: Tf_config_system
             Left = 203
             Height = 15
             Top = 8
-            Width = 140
+            Width = 134
             Caption = 'URL launch command'
             ParentColor = False
           end
@@ -355,7 +357,7 @@ object f_config_system: Tf_config_system
             Left = 16
             Height = 24
             Top = 9
-            Width = 290
+            Width = 286
             Caption = 'Adjust the windows size to the screen DPI'
             OnChange = UseScalingChange
             ParentShowHint = False
@@ -489,8 +491,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 450
-              ClientHeight = 328
-              ClientWidth = 450
+              ClientHeight = 324
+              ClientWidth = 446
               TabOrder = 0
               object IndiAutostart: TCheckBox
                 Left = 8
@@ -565,8 +567,8 @@ object f_config_system: Tf_config_system
                 Height = 45
                 Top = 256
                 Width = 444
-                ClientHeight = 45
-                ClientWidth = 444
+                ClientHeight = 41
+                ClientWidth = 440
                 TabOrder = 4
                 object PanelCmd: TEdit
                   Left = 172
@@ -614,8 +616,8 @@ object f_config_system: Tf_config_system
               Height = 330
               Top = 8
               Width = 450
-              ClientHeight = 330
-              ClientWidth = 450
+              ClientHeight = 326
+              ClientWidth = 446
               TabOrder = 0
               object ManualMountType: TRadioGroup
                 Left = 24
@@ -631,7 +633,7 @@ object f_config_system: Tf_config_system
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 2
-                ClientHeight = 39
+                ClientHeight = 25
                 ClientWidth = 359
                 Columns = 2
                 Items.Strings = (
@@ -856,8 +858,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 452
-              ClientHeight = 328
-              ClientWidth = 452
+              ClientHeight = 324
+              ClientWidth = 448
               TabOrder = 0
               object ASCOMLabel: TLabel
                 Left = 21
@@ -880,8 +882,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 452
-              ClientHeight = 328
-              ClientWidth = 452
+              ClientHeight = 324
+              ClientWidth = 448
               TabOrder = 0
               object InterfaceLabel: TLabel
                 Left = 21

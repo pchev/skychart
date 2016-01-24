@@ -28,7 +28,7 @@ interface
 uses u_help, u_translation, u_constant, u_util, pu_fov, UScaleDPI,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Grids, Spin, Buttons, StdCtrls, ExtCtrls, ComCtrls, LResources,
-  CdC_EditBtn, LCLType, enhedits, LazHelpHTML;
+  EditBtn, LCLType, enhedits, LazHelpHTML;
 
 type
 
@@ -409,6 +409,7 @@ type
     procedure OnlyMeridianClick(Sender: TObject);
     procedure OptLabelsClick(Sender: TObject);
     procedure Page3Show(Sender: TObject);
+    procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
     procedure RectangleGridColRowInserted(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
     procedure RectangleGridColRowMoved(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
     procedure RectangleGridDblClick(Sender: TObject);
@@ -2333,6 +2334,12 @@ begin
       FillPanel1.Visible:=true;
       FillPanel2.Visible:=true;
     end;
+end;
+
+procedure Tf_config_display.PageControl1Changing(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+  if parent is TForm then TForm(Parent).ActiveControl:=PageControl1;
 end;
 
 procedure Tf_config_display.RectangleGridColRowInserted(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);

@@ -28,7 +28,7 @@ interface
 uses u_help, u_translation, u_constant, u_util, u_projection, cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math,
   Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources,
-  downloaddialog, jdcalendar, CdC_EditBtn, Process, LazHelpHTML, FileUtil;
+  downloaddialog, jdcalendar, EditBtn, Process, LazHelpHTML, FileUtil;
 
 type
 
@@ -232,6 +232,7 @@ type
     procedure DownloadCometClick(Sender: TObject);
     procedure GRSdriftChange(Sender: TObject);
     procedure GRSJDDateChange(Sender: TObject);
+    procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
     procedure PlanetDirChange(Sender: TObject);
     procedure PlaParalaxeClick(Sender: TObject);
     procedure PlanetBoxClick(Sender: TObject);
@@ -894,6 +895,12 @@ procedure Tf_config_solsys.GRSJDDateChange(Sender: TObject);
 begin
 if LockChange then exit;
 csc.GRSjd := GRSJDDate.JD;
+end;
+
+procedure Tf_config_solsys.PageControl1Changing(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+  if parent is TForm then TForm(Parent).ActiveControl:=PageControl1;
 end;
 
 
