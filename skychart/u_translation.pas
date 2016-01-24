@@ -1571,6 +1571,7 @@ resourcestring
   rsSearchSoftwa = 'Search software update';
   rsCometElement2 = 'Comet elements';
   rsAsteroidElem2 = 'Asteroid elements';
+  rsAddLabelForE = 'Add label for every object in the list';
 
 // also update upsi_translation
 

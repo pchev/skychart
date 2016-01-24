@@ -1033,6 +1033,8 @@ for i:=1 to cfgsc.numcustomlabels do begin
  projection(ra,dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
+    lis:=cfgsc.customlabels[i].txt+FormatFloat(f6,ra)+FormatFloat(f6,dec);
+    lid:=rshash(lis,$7FFFFFFF);
     SetLabel(lid,xx,yy,0,2,labelnum,txt,Lalign,orient,0,false);
     result:=true;
  end;
@@ -1040,19 +1042,42 @@ end;
 end;
 
 procedure Tskychart.DrawObsListLabel;
-var i,lid,lnum,lp: integer;
-    lis,buf:string;
-    ra,de,x1,y1: double;
-    xx,yy: single;
+var i,lid: integer;
+    x1,y1: Double;
+    xx,yy: Single;
+    buf,lbuf,lis:string;
 begin
 if FObjectListLabels.Count>0 then begin
-  buf:=';';
-  for i:=0 to FObjectListLabels.Count-1 do buf:=buf+FObjectListLabels[i]+';';
-  for i:=1 to numlabels do
-    if pos(';'+labels[i].txt+';',buf)>0 then begin
-      labels[i].priority:=0;
-      labels[i].labelnum:=9;
+  if cfgsc.ObslistAlLabels then begin
+    lbuf:=';';
+    for i:=0 to FObjectListLabels.Count-1 do begin
+      with TLabelCoord(FObjectListLabels.Objects[i]) do begin
+        if (ra>-1000)and(dec>-1000) then begin
+          projection(deg2rad*ra,deg2rad*dec,x1,y1,true,cfgsc) ;
+          WindowXY(x1,y1,xx,yy,cfgsc);
+          if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
+            buf:=FObjectListLabels[i];
+            lis:=buf+FormatFloat(f6,ra)+FormatFloat(f6,dec);
+            lid:=rshash(lis,$7FFFFFFF);
+            SetLabel(lid,xx,yy,0,2,9,buf,laLeft,0,0,false);
+            lbuf:=lbuf+buf+';';
+          end;
+        end;
+      end;
     end;
+    for i:=1 to numlabels do
+      if pos(';'+labels[i].txt+';',lbuf)>0 then begin
+        if labels[i].labelnum<>9 then labels[i].x:=-9999;
+      end;
+  end else begin
+    lbuf:=';';
+    for i:=0 to FObjectListLabels.Count-1 do lbuf:=lbuf+FObjectListLabels[i]+';';
+    for i:=1 to numlabels do
+      if pos(';'+labels[i].txt+';',lbuf)>0 then begin
+        labels[i].priority:=0;
+        labels[i].labelnum:=9;
+      end;
+  end;
 end;
 end;
 
