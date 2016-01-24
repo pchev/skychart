@@ -29,7 +29,7 @@ uses  XMLConf, u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
   pu_catgenadv, pu_progressbar, FileUtil, pu_voconfig, fu_config_catalog, math,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, UScaleDPI,
   ExtCtrls, StdCtrls, enhedits, Grids, Buttons, ComCtrls, LResources,
-  CdC_EditBtn, LazHelpHTML;
+  EditBtn, LazHelpHTML;
 
 type
 

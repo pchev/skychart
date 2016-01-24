@@ -28,7 +28,7 @@ interface
 uses u_help, u_translation, u_constant, u_util, u_projection, cu_tz, UScaleDPI,
   fu_config_time, fu_chart, LCLIntf, SysUtils, Classes, Graphics, Controls,
   Forms, Dialogs, Math, StdCtrls, CheckLst, Buttons, ExtCtrls, Spin, enhedits,
-  ComCtrls, LResources, ButtonPanel, jdcalendar, LazHelpHTML, CdC_EditBtn;
+  ComCtrls, LResources, ButtonPanel, jdcalendar, LazHelpHTML, EditBtn;
 
 type
 

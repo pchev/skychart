@@ -30,7 +30,7 @@ uses
   u_help, u_translation, u_constant, u_util, cu_database, Math, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FileUtil,
   Buttons, StdCtrls, ExtCtrls, cu_zoomimage, enhedits, ComCtrls, LResources,
-  Spin, downloaddialog, CdC_EditBtn, LazHelpHTML;
+  Spin, downloaddialog, EditBtn, LazHelpHTML;
 
 type
 
@@ -113,6 +113,7 @@ type
     procedure latKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure longKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
       );
+    procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
     procedure ShowHorizon0Click(Sender: TObject);
     procedure ComboBox1Select(Sender: TObject);
     procedure countrylistSelect(Sender: TObject);
@@ -720,6 +721,12 @@ procedure Tf_config_observatory.longKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
 if key=VK_RETURN then longdegChange(Sender);
+end;
+
+procedure Tf_config_observatory.PageControl1Changing(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+  if parent is TForm then TForm(Parent).ActiveControl:=PageControl1;
 end;
 
 procedure Tf_config_observatory.altmeterChange(Sender: TObject);

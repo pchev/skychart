@@ -28,7 +28,7 @@ interface
 uses u_help, u_translation, u_constant, u_util, u_projection, cu_tz,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math,
   StdCtrls, CheckLst, Buttons, ExtCtrls, enhedits, ComCtrls, LResources,
-  ButtonPanel, jdcalendar, LazHelpHTML, CdC_EditBtn;
+  ButtonPanel, jdcalendar, LazHelpHTML, EditBtn;
 
 type
 
@@ -162,6 +162,7 @@ type
     procedure LongEdit1Change(Sender: TObject);
     procedure LongEdit2Change(Sender: TObject);
     procedure DateChange(Sender: TObject);
+    procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
     procedure RadioGroup1Click(Sender: TObject);
     procedure SimObjItemClick(Sender: TObject; Index: LongInt);
     procedure stepmarkClick(Sender: TObject);
@@ -719,6 +720,12 @@ begin
 {$ifdef darwin}
 DateEditChange(Sender);
 {$endif}
+end;
+
+procedure Tf_config_time.PageControl1Changing(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+  if parent is TForm then TForm(Parent).ActiveControl:=PageControl1;
 end;
 
 procedure Tf_config_time.DateClick(Sender: TObject; Button: TUDBtnType);

@@ -29,7 +29,7 @@ uses
   u_unzip, u_help, u_translation, u_constant, u_util, cu_database, UScaleDPI,
   fu_config_observatory, Math, dynlibs, LCLIntf, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, FileUtil, Buttons, StdCtrls, ExtCtrls, cu_zoomimage,
-  enhedits, ComCtrls, LResources, Spin, downloaddialog, CdC_EditBtn, LazHelpHTML;
+  enhedits, ComCtrls, LResources, Spin, downloaddialog, EditBtn, LazHelpHTML;
 
 type
 
