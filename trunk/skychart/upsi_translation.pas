@@ -1511,8 +1511,6 @@ CL.AddConstantN('rsList','String').SetString(rsList);
 CL.AddConstantN('rsComboBox','String').SetString(rsComboBox);
 CL.AddConstantN('rsActivateTheT','String').SetString(rsActivateTheT);
 CL.AddConstantN('rsCheckList','String').SetString(rsCheckList);
-CL.AddConstantN('rsDonTForgetTo','String').SetString(rsDonTForgetTo);
-CL.AddConstantN('rsDonTForgetTo2','String').SetString(rsDonTForgetTo2);
 CL.AddConstantN('rsRun','String').SetString(rsRun);
 CL.AddConstantN('rsPause','String').SetString(rsPause);
 CL.AddConstantN('rsStepInto','String').SetString(rsStepInto);
