@@ -340,14 +340,6 @@ end;
     DrawCometMark;
     DrawComet;
   end;
-  // then the lines
-  DrawGrid(false);
-  if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
-    DrawConstL;
-    DrawConstB;
-    DrawEcliptic;
-    DrawGalactic;
-  end;
   // the stars
   if cfgsc.showstars then DrawStars;
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
@@ -361,6 +353,14 @@ end;
     if cfgsc.SimLine then DrawOrbitPath;
   end;
   if cfgsc.ShowPlanetValid then DrawPlanet;
+  // then the lines
+  DrawGrid(false);
+  if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
+    DrawConstL;
+    DrawConstB;
+    DrawEcliptic;
+    DrawGalactic;
+  end;
   // Finder mark
   DrawCircle;
   // Artificials satellites
