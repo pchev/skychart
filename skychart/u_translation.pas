@@ -1520,8 +1520,6 @@ resourcestring
   rsComboBox = 'Combo box';
   rsActivateTheT = 'Activate the timer event when hidden';
   rsCheckList = 'CheckList';
-  rsDonTForgetTo = 'Don''t forget to save to a new file!';
-  rsDonTForgetTo2 = 'Don''t forget to save the program configuration!';
   rsRun = 'Run';
   rsPause = 'Pause';
   rsStepInto = 'Step Into';
@@ -1572,6 +1570,7 @@ resourcestring
   rsCometElement2 = 'Comet elements';
   rsAsteroidElem2 = 'Asteroid elements';
   rsAddLabelForE = 'Add label for every object in the list';
+  rsCompilationA = 'Compilation and save successful';
 
 // also update upsi_translation
 

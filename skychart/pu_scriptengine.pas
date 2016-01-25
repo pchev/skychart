@@ -54,11 +54,11 @@ type
     ButtonDown: TBitBtn;
     ButtonSave: TButton;
     ButtonLoad: TButton;
+    ButtonClose: TButton;
     ButtonUp: TBitBtn;
     ButtonUpdate: TButton;
     ButtonAdd: TButton;
     ButtonEditScript: TButton;
-    ButtonApply: TButton;
     ButtonClear: TButton;
     ButtonDelete: TButton;
     BtnMenu: TCheckBox;
@@ -111,15 +111,14 @@ type
     RadioButtonEdit: TRadioButton;
     RadioButtonMemo: TRadioButton;
     RadioButtonSpacer: TRadioButton;
-    SaveDialog1: TSaveDialog;
     TplPSScript: TPSScript;
     TreeView1: TTreeView;
     procedure BtnMenuChange(Sender: TObject);
     procedure ButtonAddClick(Sender: TObject);
     procedure ButtonCaptionEditChange(Sender: TObject);
+    procedure ButtonCloseClick(Sender: TObject);
     procedure ButtonDownClick(Sender: TObject);
     procedure ButtonEditScriptClick(Sender: TObject);
-    procedure ButtonApplyClick(Sender: TObject);
     procedure ButtonClearClick(Sender: TObject);
     procedure ButtonDeleteClick(Sender: TObject);
     procedure ButtonEditTBClick(Sender: TObject);
@@ -274,6 +273,9 @@ type
     function GetScriptTranslation(str:string):string;
     procedure ClearTreeView;
     procedure CompileScripts;
+    procedure ApplyScript;
+    procedure SaveScript;
+    procedure CompileAndSave;
   public
     { public declarations }
     InitialLoad: Boolean;
@@ -329,7 +331,6 @@ begin
   ButtonEditScript.Caption:=rsEditScript;
   ButtonUpdate.Caption:=rsUpdate1;
   ButtonDelete.Caption:=rsDelete;
-  ButtonApply.Caption:=rsApply;
   ButtonSave.Caption:=rsSave;
   ButtonLoad.Caption:=rsLoad;
   ButtonClear.Caption:=rsClearAll;
@@ -994,7 +995,7 @@ begin
   end;
 
   p.free;
-  ButtonApplyClick(nil);
+  ApplyScript;
 end;
 
 
@@ -1363,7 +1364,7 @@ begin
 EventTimer.Enabled:=FTimerReady;
 end;
 
-procedure Tf_scriptengine.ButtonApplyClick(Sender: TObject);
+procedure Tf_scriptengine.ApplyScript;
 var node:TTreeNode;
    curgroup:TGroupBox;
    txt,parm1,parm2,buf,nu: string;
@@ -1443,9 +1444,6 @@ if (not InitialLoad)or CheckBoxAlwaysActive.Checked then begin
   FEventReady:=true;
   evscr[ord(evActivation)].Execute;
   TelescopeConnectEvent(TelescopeChartName,FTelescopeConnected);
-  if CompileMemo.Lines.Count=0 then begin
-    CompileMemo.Lines.Add(rsDonTForgetTo);
-  end;
 end;
 if Assigned(FonApply) then FonApply(self);
 end;
@@ -1606,6 +1604,11 @@ begin
   if ButtonUpdate.Tag=2 then ButtonUpdate.Visible:=true;
 end;
 
+procedure Tf_scriptengine.ButtonCloseClick(Sender: TObject);
+begin
+  Close;
+end;
+
 procedure Tf_scriptengine.BtnMenuChange(Sender: TObject);
 begin
  if ButtonUpdate.Tag=2 then ButtonUpdate.Visible:=true;
@@ -1739,14 +1742,30 @@ end;
 end;
 
 procedure Tf_scriptengine.ButtonSaveClick(Sender: TObject);
+begin
+  CompileAndSave;
+end;
+
+procedure Tf_scriptengine.CompileAndSave;
+begin
+try
+ ApplyScript;
+ if CompileMemo.Lines.Count=0 then begin
+  SaveScript;
+  CompileMemo.Lines.Add(rsCompilationA);
+ end;
+except
+  CompileMemo.Lines.Add(rsError);
+end;
+end;
+
+procedure Tf_scriptengine.SaveScript;
 var ConfigScriptButton, ConfigScript, ConfigCombo, ConfigEvent: Tstringlist;
     fn,section,scrsect,scrline,titl,num,pnum,buf: string;
     inif: TMemIniFile;
     j,n,p: integer;
 begin
-SaveDialog1.FileName:=ExtractFileName(FScriptFilename);
-if SaveDialog1.Execute then begin
-  fn:=SaveDialog1.FileName;
+  fn:=slash(PrivateScriptDir)+ExtractFileName(FScriptFilename);
   FScriptFilename:=fn;
   ConfigScriptButton:=Tstringlist.create;
   ConfigScript:=Tstringlist.create;
@@ -1837,7 +1856,6 @@ if SaveDialog1.Execute then begin
   ConfigScript.Free;
   ConfigEvent.Free;
 end;
-end;
 
 procedure Tf_scriptengine.ButtonUpClick(Sender: TObject);
 var node: TTreeNode;
@@ -1893,6 +1911,7 @@ if (TreeView1.Selected<>nil) then begin
     if Fpascaleditor.ModalResult=mrOK then begin
       s.Assign(Fpascaleditor.SynEdit1.Lines);
       node.Data:=s;
+      CompileAndSave;
     end;
   end;
 end;
@@ -2048,7 +2067,6 @@ end;
 procedure Tf_scriptengine.FormShow(Sender: TObject);
 begin
 OpenDialog1.InitialDir:=PrivateScriptDir;
-SaveDialog1.InitialDir:=PrivateScriptDir;
 CompileMemo.Clear;
 end;
 
