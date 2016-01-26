@@ -1571,6 +1571,7 @@ resourcestring
   rsAsteroidElem2 = 'Asteroid elements';
   rsAddLabelForE = 'Add label for every object in the list';
   rsCompilationA = 'Compilation and save successful';
+  rsMissingScrip = 'Missing script title!';
 
 // also update upsi_translation
 

@@ -1753,9 +1753,13 @@ try
  if CompileMemo.Lines.Count=0 then begin
   SaveScript;
   CompileMemo.Lines.Add(rsCompilationA);
+  CompileMemo.Lines.Add(FScriptFilename);
  end;
 except
-  CompileMemo.Lines.Add(rsError);
+  on E: Exception do begin
+    CompileMemo.Lines.Add(E.Message);
+    CompileMemo.Lines.Add(rsError);
+  end;
 end;
 end;
 
@@ -1765,7 +1769,23 @@ var ConfigScriptButton, ConfigScript, ConfigCombo, ConfigEvent: Tstringlist;
     inif: TMemIniFile;
     j,n,p: integer;
 begin
-  fn:=slash(PrivateScriptDir)+ExtractFileName(FScriptFilename);
+  if trim(FScriptFilename)='' then begin
+     titl:=ScriptTitle.Text;
+     if trim(titl)='' then begin
+        raise Exception.Create(rsMissingScrip);
+     end;
+     FScriptTitle:=titl;
+     FTrScriptTitle:=titl;
+     FScriptFilename:=titl;
+     FScriptFilename:=StringReplace(FScriptFilename,' ','_',[rfReplaceAll]);
+     FScriptFilename:=StringReplace(FScriptFilename,':','_',[rfReplaceAll]);
+     FScriptFilename:=StringReplace(FScriptFilename,'''','_',[rfReplaceAll]);
+     FScriptFilename:=StringReplace(FScriptFilename,'"','_',[rfReplaceAll]);
+     FScriptFilename:=StringReplace(FScriptFilename,'$','_',[rfReplaceAll]);
+     FScriptFilename:=StringReplace(FScriptFilename,'/','_',[rfReplaceAll]);
+     FScriptFilename:=StringReplace(FScriptFilename,'\','_',[rfReplaceAll]);
+  end;
+  fn:=ChangeFileExt(slash(PrivateScriptDir)+ExtractFileName(FScriptFilename),'.cdcps');
   FScriptFilename:=fn;
   ConfigScriptButton:=Tstringlist.create;
   ConfigScript:=Tstringlist.create;
@@ -1851,10 +1871,11 @@ begin
   end;
   finally
    inif.Free;
+   ConfigCombo.Free;
+   ConfigScriptButton.Free;
+   ConfigScript.Free;
+   ConfigEvent.Free;
   end;
-  ConfigScriptButton.Free;
-  ConfigScript.Free;
-  ConfigEvent.Free;
 end;
 
 procedure Tf_scriptengine.ButtonUpClick(Sender: TObject);
