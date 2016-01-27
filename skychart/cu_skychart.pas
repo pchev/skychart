@@ -4033,10 +4033,6 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
        az:=az+45;
     end;
   end;
- // below horizon warning
-  if (not(Fplot.cfgplot.UseBMP and fill))and(cfgsc.hcentre<(-cfgsc.fov/6)) then begin
-     Fplot.PlotText((cfgsc.xmax-cfgsc.xmin)div 2, (cfgsc.ymax-cfgsc.ymin)div 2, 2, Fplot.cfgplot.LabelColor[7], laCenter, laCenter, rsBelowTheHori,cfgsc.WhiteBg);
-  end;
 end;
 result:=true;
 end;
