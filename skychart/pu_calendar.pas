@@ -1990,38 +1990,13 @@ ExecuteFile(URL_QUICKSAT);
 end;
 
 procedure Tf_calendar.tle1Change(Sender: TObject);
-var fn,str,s:string;
-    y,m,d:integer;
-    dd,h,jdt: double;
-    ok:boolean;
-    f:textfile;
+var fn:string;
 begin
   LabelTle.Caption:='';
   if tle1.text<>'' then begin
     fn:=slash(SatDir)+tle1.text;
     if FileExists(fn) then begin
-     AssignFile(f,fn);
-     reset(f);
-     str:='';
-     repeat
-       readln(f,str);
-       ok:=(copy(str,1,1)='1');
-     until eof(f) or ok;
-     CloseFile(f);
-     if ok then begin
-        s:=copy(str,19,2);
-        y:=StrToIntDef(s,-1);
-        if y<0 then exit;
-        if y>56 then y:=1900+y
-                else y:=2000+y;
-        s:=copy(str,21,12);
-        dd:=StrToFloatDef(s,-1);
-        if dd<0 then exit;
-        jdt:=jd(y,1,1,0);
-        jdt:=jdt+dd;
-        Djd(jdt,y,m,d,h);
-        LabelTle.Caption:=isodate(y,m,d);
-     end;
+       LabelTle.Caption:=FormatDateTime('yyyy"-"mm"-"dd',TleDate(fn));
     end;
   end;
 end;
@@ -2865,12 +2840,39 @@ pagecontrol1.ActivePage.ShowHelp;
 end;
 
 procedure Tf_calendar.DownloadTle;
-var fn,ext,buf: string;
+var fn,ext: string;
     i,l,n: integer;
     ok,zipfile: boolean;
+
+procedure ArchiveFile(fn,destdir: string);
+var buf,ext: string;
+begin
+  buf:=ExtractFileNameOnly(fn);
+  ext:=ExtractFileExt(fn);
+  buf:=slash(destdir)+buf+'-'+FormatDateTime('yyyy"-"mm"-"dd',TleDate(fn))+ext;
+  if CopyFile(fn,buf) then DeleteFile(fn);
+end;
+procedure ArchiveFiles(ext:string);
+var fs : TSearchRec;
+    i: integer;
+begin
+  i:=findfirst(slash(SatDir)+'*.'+ext,0,fs);
+  while i=0 do begin
+    ArchiveFile(slash(SatDir)+fs.name,SatArchiveDir);
+    i:=findnext(fs);
+  end;
+  findclose(fs);
+end;
+
 begin
  n:=cmain.TleUrlList.Count;
  if n=0 then exit;
+ // Archive old TLE
+ ArchiveFiles('tle');
+ ArchiveFiles('txt');
+ ArchiveFiles('TLE');
+ ArchiveFiles('TXT');
+ // Download TLE
  fn:=slash(SatDir);
   if cmain.HttpProxy then begin
     DownloadDialog1.SocksProxy:='';

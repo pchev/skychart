@@ -28,6 +28,7 @@ interface
 uses u_translation, u_util, u_projection, u_constant, math, FileUtil,
   Classes, SysUtils, Dialogs;
 
+Function  TleDate(fn:string): TDateTime;
 Procedure SatelliteList(y,m,startd,endd,maglimit,tle,tmpdir,prgdir,timezone,ObsName,altcut : string; ObsLatitude,ObsLongitude,ObsAltitude,boxra1,boxra2,boxde1,boxde2:double; fullday:boolean=false; boxsearch:boolean=false);
 Procedure DetailSat(jds,ObsLatitude,ObsLongitude,ObsAltitude,boxra1,boxra2,boxde1,boxde2 : double; maglimit,tle,tmpdir,prgdir,timezone,ObsName,altcut : string; boxsearch:boolean=false);
 Procedure Iridium(y,mm,d,dt,timezone,tmpdir,ObsName : string; ObsLatitude,ObsLongitude,ObsAltitude,minalt: double);
@@ -49,6 +50,40 @@ const
   {$endif}
 
 implementation
+
+Function  TleDate(fn:string): TDateTime;
+var f:textfile;
+    str,s:string;
+    y,m,d:integer;
+    dd,h,jdt: double;
+    ok:boolean;
+begin
+result:=0;
+if FileExists(fn) then begin
+ AssignFile(f,fn);
+ reset(f);
+ str:='';
+ repeat
+   readln(f,str);
+   ok:=(copy(str,1,1)='1');
+ until eof(f) or ok;
+ CloseFile(f);
+ if ok then begin
+    s:=copy(str,19,2);
+    y:=StrToIntDef(s,-1);
+    if y<0 then exit;
+    if y>56 then y:=1900+y
+            else y:=2000+y;
+    s:=copy(str,21,12);
+    dd:=StrToFloatDef(s,-1);
+    if dd<0 then exit;
+    jdt:=jd(y,1,1,0);
+    jdt:=jdt+dd;
+    Djd(jdt,y,m,d,h);
+    result:=EncodeDate(y,m,d);
+ end;
+end;
+end;
 
 function CheckWine: boolean;
 var cmd,buf: string;
@@ -347,10 +382,10 @@ assignfile(irictl,slash(tmpdir)+'IRIDFLAR.CFG');
 rewrite(irictl);
 buf:='[IRIDFLAR]';
 writeln(irictl,buf+doslf);
-if FileExistsUTF8(slash(tmpdir)+'iridium.tle') then
-   buf:='EphemFile=iridium.tle'
+if FileExistsUTF8(slash(tmpdir)+'iridium.txt') then
+   buf:='EphemFile=iridium.txt'
 else
-   buf:='EphemFile=iridium.txt';
+   buf:='EphemFile=iridium.tle';
 writeln(irictl,buf+doslf);
 buf:='CityFile=skymap.cty';
 writeln(irictl,buf+doslf);
