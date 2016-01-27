@@ -64,7 +64,9 @@ type
     fullday:TCheckBox;
     Label10: TLabel;
     LabelTle: TLabel;
+    DownloadMemo: TMemo;
     MinSatAlt: TLongEdit;
+    DownloadPanel: TPanel;
     tsPGraphs: TTabSheet;
     Time: TTimePicker;
     TLEListBox:TFileListBox;
@@ -203,6 +205,7 @@ type
     procedure RefreshPlanetGraph;
     procedure RefreshSatellite;
     procedure DownloadTle;
+    procedure TLEfeedback(txt:string);
   public
     { Public declarations }
     cdb: Tcdcdb;
@@ -2865,6 +2868,8 @@ begin
 end;
 
 begin
+try
+ DownloadPanel.Visible:=true;
  n:=cmain.TleUrlList.Count;
  if n=0 then exit;
  // Archive old TLE
@@ -2899,14 +2904,20 @@ begin
  DownloadDialog1.FtpUserName:='anonymous';
  DownloadDialog1.FtpPassword:=cmain.AnonPass;
  DownloadDialog1.FtpFwPassive:=cmain.FtpPassive;
+ DownloadDialog1.onFeedback:=TLEfeedback;
+ DownloadDialog1.ConfirmDownload:=false;
  ok:=false; zipfile:=false;
+ DownloadMemo.Clear;
  for i:=1 to n do begin
+    if trim(cmain.TleUrlList[i-1])='' then continue;
     DownloadDialog1.URL:=cmain.TleUrlList[i-1];
+    DownloadMemo.Lines.Add('');
+    DownloadMemo.Lines.Add(DownloadDialog1.URL);
+    DownloadMemo.SelStart:=length(DownloadMemo.Text)-1;
     ext:=LowerCase(ExtractFileExt(DownloadDialog1.URL));
     zipfile:=(ext='.zip');
     fn:=slash(SatDir)+ExtractFileName(DownloadDialog1.URL);
     DownloadDialog1.SaveToFile:=fn;
-    DownloadDialog1.ConfirmDownload:=cmain.ConfirmDownload and (i=1);
     if DownloadDialog1.Execute then begin
        ok:=true;
        if zipfile then begin
@@ -2921,6 +2932,16 @@ begin
  if ok then begin
    ShowMessage('TLE download OK');
  end;
+finally
+  DownloadPanel.Visible:=False;
+end;
+end;
+
+procedure Tf_calendar.TLEfeedback(txt:string);
+begin
+if copy(txt,1,9)='Read Byte' then exit;
+DownloadMemo.Lines.Add(txt);
+DownloadMemo.SelStart:=length(DownloadMemo.Text)-1;
 end;
 
 

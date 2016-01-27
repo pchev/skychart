@@ -280,7 +280,7 @@ type
   public
     { Public declarations }
     cdb: Tcdcdb;
-    autoprocess: boolean;
+    autoprocess, autoOK: boolean;
     mycsc : Tconf_skychart;
     myccat : Tconf_catalog;
     mycshr : Tconf_shared;
@@ -475,6 +475,7 @@ begin
  cplot:=mycplot;
  cmain:=mycmain;
  inherited Create(AOwner);
+  autoOK:= false;
   FConfirmDownload:=true;
   SetLang;
   LockChange:=true;
@@ -676,6 +677,7 @@ begin
     application.ProcessMessages;
     LoadMPCClick(Sender);
  end;
+ autoOK:=ok;
 end;
 
 procedure Tf_config_solsys.CheckBoxPlutoChange(Sender: TObject);
@@ -844,6 +846,7 @@ begin
     application.ProcessMessages;
     LoadcomClick(Sender);
  end;
+ autoOK:=ok;
 end;
 
 procedure Tf_config_solsys.CometFeedback(txt:string);
