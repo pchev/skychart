@@ -2571,7 +2571,8 @@ end;
 
 Procedure Tf_chart.ZoomBox(action,x,y:integer);
 var
-   x1,x2,y1,y2,dx,dy,xc,yc,lc : integer;
+   x1,x2,y1,y2,dx,dy,xc,yc,lc,w,h : integer;
+   boxratio: double;
 begin
 //if VerboseMsg then
 // WriteTrace('zoombox '+inttostr(action));
@@ -2632,7 +2633,7 @@ case action of
       brush.Style:=bsClear;
       if Zoomstep>1 then rectangle(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
       Xzoom2:=x;
-      Yzoom2:=Yzoom1+round(sgn(y-Yzoom1)*abs(Xzoom2-Xzoom1)/sc.cfgsc.windowratio);
+      Yzoom2:=y;
       x1:=round(minvalue([Xzoom1,Xzoom2]));
       x2:=round(maxvalue([Xzoom1,Xzoom2]));
       y1:=round(minvalue([Yzoom1,Yzoom2]));
@@ -2676,7 +2677,35 @@ case action of
      end
      else // zoom aborted, nothing to do.
     end else if zoomstep>=2 then begin
-        zoomstep:=4  // box size fixed, wait confirmation or move
+        zoomstep:=4;  // box size fixed, wait confirmation or move
+        x1:=round(minvalue([Xzoom1,Xzoom2]));
+        x2:=round(maxvalue([Xzoom1,Xzoom2]));
+        y1:=round(minvalue([Yzoom1,Yzoom2]));
+        y2:=round(maxvalue([Yzoom1,Yzoom2]));
+        Xzoom1:=x1;
+        Xzoom2:=x2;
+        Yzoom1:=y1;
+        Yzoom2:=y2;
+        dx:=Xzoom2-Xzoom1;
+        dy:=Yzoom2-Yzoom1;
+        boxratio:=abs(dx/dy);
+        // adjust box size to screen ratio
+        if boxratio>sc.cfgsc.windowratio then begin
+          yc:=Yzoom1+(dy div 2);
+          h:=round(dx/sc.cfgsc.windowratio/2);
+          Yzoom1:=yc-h;
+          Yzoom2:=yc+h;
+        end
+        else begin
+          xc:=Xzoom1+(dx div 2);
+          w:=round(dy*sc.cfgsc.windowratio/2);
+          Xzoom1:=xc-w;
+          Xzoom2:=xc+w;
+        end;
+        XzoomD1:=Xzoom1;
+        XzoomD2:=Xzoom2;
+        YzoomD1:=Yzoom1;
+        YzoomD2:=Yzoom2;
     end else begin
         // zoom aborted or not initialized
         // box cleanup if necessary
