@@ -1266,7 +1266,7 @@ type
 
 // pseudo-constant only here
 var
-  ConfigAppdir, ConfigPrivateDir, Appdir, PrivateDir, SampleDir, SatDir, ArchiveDir,
+  ConfigAppdir, ConfigPrivateDir, Appdir, PrivateDir, SampleDir, SatDir, SatArchiveDir, ArchiveDir,
   TempDir, ZoneDir, HomeDir, VODir, ScriptDir, PrivateScriptDir: string;
   VarObs, CdC, MPCDir, DBDir, PictureDir: string;
   ForceConfig, ForceUserDir, Configfile, Lang: string;
