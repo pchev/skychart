@@ -3648,14 +3648,25 @@ ConfigSolsys.f_config_solsys1.PageControl1.PageIndex:=page;
 if directdownload then begin
    case page of
      2: begin
+          ConfigSolsys.Panel1.Visible:=false;
+          ConfigSolsys.f_config_solsys1.PageControl1.ShowTabs:=false;
+          ConfigSolsys.f_config_solsys1.ComPageControl.ShowTabs:=false;
+          ConfigSolsys.f_config_solsys1.ComPageControl1.ShowTabs:=false;
+          ConfigSolsys.f_config_solsys1.DownloadComet.Visible:=false;
           ConfigSolsys.f_config_solsys1.ConfirmDownload:=false;
           ConfigSolsys.show;
           ConfigSolsys.f_config_solsys1.ComPageControl.ActivePageIndex:=1;
           Application.ProcessMessages;
           ConfigSolsys.f_config_solsys1.DownloadComet.Click;
           RefreshAllChild(false);
+          if ConfigSolsys.f_config_solsys1.autoOK then ShowMessage('comet update successful');
         end;
      3: begin
+          ConfigSolsys.Panel1.Visible:=false;
+          ConfigSolsys.f_config_solsys1.PageControl1.ShowTabs:=false;
+          ConfigSolsys.f_config_solsys1.AstPageControl.ShowTabs:=false;
+          ConfigSolsys.f_config_solsys1.AstPageControl2.ShowTabs:=false;
+          ConfigSolsys.f_config_solsys1.DownloadAsteroid.Visible:=false;
           ConfigSolsys.f_config_solsys1.ConfirmDownload:=false;
           ConfigSolsys.f_config_solsys1.autoprocess:=true;
           ConfigSolsys.show;
@@ -3663,6 +3674,7 @@ if directdownload then begin
           ConfigSolsys.f_config_solsys1.DownloadAsteroid.Click;
           RecomputeAsteroid;
           RefreshAllChild(false);
+          if ConfigSolsys.f_config_solsys1.autoOK then ShowMessage('asteroid update successful');
         end;
    end;
 end
@@ -9114,8 +9126,10 @@ begin
 end;
 
 procedure Tf_main.MenuUpdSatelliteClick(Sender: TObject);
+var calvisible: boolean;
 begin
-  if not f_calendar.Visible then begin
+  calvisible:=f_calendar.Visible;
+  if not calvisible then begin
     if MultiFrame1.ActiveObject is Tf_chart then f_calendar.config.Assign(Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc)
        else f_calendar.config.Assign(def_cfgsc);
   end;
@@ -9125,6 +9139,7 @@ begin
   f_calendar.bringtofront;
   f_calendar.PageControl1.PageIndex:=6;
   f_calendar.BtnTleDownload.Click;
+  if not calvisible then f_calendar.Close;
 end;
 
 procedure Tf_main.MenuUpdSoftClick(Sender: TObject);
