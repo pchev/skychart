@@ -128,7 +128,10 @@ const
   var
     crossid: textfile;
     hdid: integer;
+    bay,flam,chk,chkbayer,chkflam: string;
   begin
+    chkbayer:=':';
+    chkflam:=':';
     for hdid := 0 to hdmax do
     begin
       fl[hdid] := 0;
@@ -141,11 +144,21 @@ const
     begin
       readln(crossid, bufin);
       hdid := StrToInt(trim(copyp(bufin, 1, 6)));      //HD
-      fl[hdid] := strtointdef(trim(copyp(bufin, 65, 67)), 0);  //Flamsteed
+      flam := trim(copyp(bufin, 65, 67));  //Flamsteed
       buf := trim(copyp(bufin, 69, 73)); //Bayer
       buf := StringReplace(buf, 'alf', 'alp', []);
-      bayer[hdid] := capitalize(buf);
+      bay := capitalize(buf);
       cst[hdid] := trim(copyp(bufin, 75, 77));   //Constellation
+      chk:=flam+'-'+cst[hdid]+':';
+      if pos(':'+chk,chkflam)<=0 then begin
+         fl[hdid] := strtointdef(flam,0);
+         chkflam:=chkflam+chk;
+      end;   
+      chk:=bay+'-'+cst[hdid]+':';
+      if pos(':'+chk,chkbayer)<=0 then begin
+         bayer[hdid] := bay;
+         chkbayer:=chkbayer+chk;
+      end;   
     end;
     closefile(crossid);
   end;
