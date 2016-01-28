@@ -1608,8 +1608,12 @@ end;
 
 procedure Tf_chart.SwitchCompass(Sender: TObject);
 begin
-   sc.catalog.cfgshr.ShowCRose:=not sc.catalog.cfgshr.ShowCRose;
-   Refresh;
+  sc.catalog.cfgshr.ShowCRose:=not sc.catalog.cfgshr.ShowCRose;
+  if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+    sc.cfgsc.TrackOn:=true;
+    sc.cfgsc.TrackType:=4;
+  end;
+  Refresh;
 end;
 
 procedure Tf_chart.chart_GridEQExecute(Sender: TObject);
@@ -1617,6 +1621,10 @@ begin
 if VerboseMsg then
  WriteTrace(caption+' GridEQExecute');
  sc.cfgsc.ShowEqGrid := not sc.cfgsc.ShowEqGrid;
+ if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+   sc.cfgsc.TrackOn:=true;
+   sc.cfgsc.TrackType:=4;
+ end;
  Refresh;
 end;
 
@@ -1627,6 +1635,10 @@ if VerboseMsg then
  sc.cfgsc.ShowGrid := not sc.cfgsc.ShowGrid;
 { if sc.cfgsc.projpole=Equat then
     sc.cfgsc.ShowEqGrid:=sc.cfgsc.ShowGrid;   }
+ if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+   sc.cfgsc.TrackOn:=true;
+   sc.cfgsc.TrackType:=4;
+ end;
  Refresh;
 end;
 
@@ -3364,6 +3376,10 @@ if sc.plot.cfgplot.starplot<0 then sc.plot.cfgplot.starplot:=2;
 if sc.plot.cfgplot.starplot=0 then sc.plot.cfgplot.nebplot:=0
                               else sc.plot.cfgplot.nebplot:=1;
 sc.cfgsc.FillMilkyWay:=(sc.plot.cfgplot.nebplot=1);
+if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+  sc.cfgsc.TrackOn:=true;
+  sc.cfgsc.TrackType:=4;
+end;
 Refresh;
 end;
 
@@ -3373,6 +3389,10 @@ begin
 if VerboseMsg then
  WriteTrace(caption+' switchbackgroundExecute');
 sc.plot.cfgplot.autoskycolor:=not sc.plot.cfgplot.autoskycolor;
+if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+  sc.cfgsc.TrackOn:=true;
+  sc.cfgsc.TrackType:=4;
+end;
 Refresh;
 end;
 
@@ -4777,6 +4797,10 @@ else begin
   sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]+0.5;
   if sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]>sc.plot.cfgchart.max_catalog_mag then sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=99;
 end;
+if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+  sc.cfgsc.TrackOn:=true;
+  sc.cfgsc.TrackType:=4;
+end;
 refresh;
 end;
 
@@ -4790,6 +4814,10 @@ else begin
    if sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]>=99 then sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=sc.plot.cfgchart.min_ma
       else sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=max(1,sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]-0.5);
 end;
+if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+  sc.cfgsc.TrackOn:=true;
+  sc.cfgsc.TrackType:=4;
+end;
 refresh;
 end;
 
@@ -4801,6 +4829,10 @@ sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]:=sc.catalog.cfgshr.NebMagFilte
 if sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]>15 then sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]:=99;
 sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]:=sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]/1.5;
 if sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]<0.1 then sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]:=0;
+if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+  sc.cfgsc.TrackOn:=true;
+  sc.cfgsc.TrackType:=4;
+end;
 refresh;
 end;
 
@@ -4814,6 +4846,10 @@ if sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]<6 then sc.catalog.cfgshr.Ne
 if sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]<=0 then sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]:=0.1
    else sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]:=sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]*1.5;
 if sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]>100 then sc.catalog.cfgshr.NebSizeFilter[sc.cfgsc.FieldNum]:=100;
+if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+  sc.cfgsc.TrackOn:=true;
+  sc.cfgsc.TrackType:=4;
+end;
 refresh;
 end;
 
@@ -4955,6 +4991,10 @@ begin
 sc.setfov(field);
 if VerboseMsg then
  WriteTrace(caption+' SetField');
+if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+  sc.cfgsc.TrackOn:=true;
+  sc.cfgsc.TrackType:=4;
+end;
 Refresh;
 end;
 

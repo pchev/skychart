@@ -1548,16 +1548,24 @@ end;
 procedure Tf_main.ViewChartInfoExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   sc.cfgsc.ShowLabel[8]:=not sc.cfgsc.ShowLabel[8];
-   Refresh;
+  sc.cfgsc.ShowLabel[8]:=not sc.cfgsc.ShowLabel[8];
+  if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+    sc.cfgsc.TrackOn:=true;
+    sc.cfgsc.TrackType:=4;
+  end;
+  Refresh;
 end;
 end;
 
 procedure Tf_main.ViewChartLegendExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   sc.cfgsc.ShowLegend:=not sc.cfgsc.ShowLegend;
-   Refresh;
+  sc.cfgsc.ShowLegend:=not sc.cfgsc.ShowLegend;
+  if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+    sc.cfgsc.TrackOn:=true;
+    sc.cfgsc.TrackType:=4;
+  end;
+  Refresh;
 end;
 end;
 
@@ -2623,7 +2631,6 @@ begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do SwitchCompass(Sender);
 end;
 
-
 procedure Tf_main.switchstarsExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do chart_switchstarExecute(Sender);
@@ -2867,7 +2874,11 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    sc.cfgsc.showstars:=not sc.cfgsc.showstars;
 if VerboseMsg then
  WriteTrace('ShowStarsExecute');
-   Refresh;
+  if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+    sc.cfgsc.TrackOn:=true;
+    sc.cfgsc.TrackType:=4;
+  end;
+  Refresh;
 end;
 end;
 
@@ -2877,6 +2888,10 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    sc.cfgsc.shownebulae:=not sc.cfgsc.shownebulae;
 if VerboseMsg then
  WriteTrace('ShowNebulaeExecute');
+   if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+     sc.cfgsc.TrackOn:=true;
+     sc.cfgsc.TrackType:=4;
+   end;
    Refresh;
 end;
 end;
@@ -2956,8 +2971,11 @@ procedure Tf_main.ShowLinesExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowLine:=not sc.cfgsc.ShowLine;
-if VerboseMsg then
- WriteTrace('ShowLinesExecute');
+   if VerboseMsg then WriteTrace('ShowLinesExecute');
+   if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+     sc.cfgsc.TrackOn:=true;
+     sc.cfgsc.TrackType:=4;
+   end;
    Refresh;
 end;
 end;
@@ -2967,6 +2985,10 @@ begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowPlanet:=not sc.cfgsc.ShowPlanet;
    if VerboseMsg then WriteTrace('ShowPlanetsExecute');
+   if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+     sc.cfgsc.TrackOn:=true;
+     sc.cfgsc.TrackType:=4;
+   end;
    Refresh;
 end;
 end;
@@ -2992,6 +3014,10 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    sc.cfgsc.ShowAsteroid:=not sc.cfgsc.ShowAsteroid;
    showast:=sc.cfgsc.ShowAsteroid;
    if VerboseMsg then WriteTrace('ShowAsteroidsExecute');
+   if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+     sc.cfgsc.TrackOn:=true;
+     sc.cfgsc.TrackType:=4;
+   end;
    Refresh;
    if showast and (showast<>sc.cfgsc.ShowAsteroid) then begin
       RecomputeAsteroid;
@@ -3006,6 +3032,10 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    sc.cfgsc.ShowComet:=not sc.cfgsc.ShowComet;
    showcom:=sc.cfgsc.ShowComet;
    if VerboseMsg then WriteTrace('ShowCometsExecute');
+   if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+     sc.cfgsc.TrackOn:=true;
+     sc.cfgsc.TrackType:=4;
+   end;
    Refresh;
    if showcom<>sc.cfgsc.ShowComet then ShowError(rsErrorPleaseC2);
 end;
@@ -3014,20 +3044,26 @@ end;
 procedure Tf_main.ShowMilkyWayExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   sc.cfgsc.ShowMilkyWay:=not sc.cfgsc.ShowMilkyWay;
- if VerboseMsg then
- WriteTrace('ShowMilkyWayExecute');
-  Refresh;
+ sc.cfgsc.ShowMilkyWay:=not sc.cfgsc.ShowMilkyWay;
+ if VerboseMsg then WriteTrace('ShowMilkyWayExecute');
+ if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+   sc.cfgsc.TrackOn:=true;
+   sc.cfgsc.TrackType:=4;
+ end;
+ Refresh;
 end;
 end;
 
 procedure Tf_main.ShowLabelsExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   sc.cfgsc.Showlabelall:=not sc.cfgsc.Showlabelall;
-if VerboseMsg then
- WriteTrace('ShowLabelsExecute');
-   Refresh;
+  sc.cfgsc.Showlabelall:=not sc.cfgsc.Showlabelall;
+  if VerboseMsg then WriteTrace('ShowLabelsExecute');
+  if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+    sc.cfgsc.TrackOn:=true;
+    sc.cfgsc.TrackType:=4;
+  end;
+  Refresh;
 end;
 end;
 
@@ -3129,60 +3165,78 @@ end;
 procedure Tf_main.ShowConstellationLineExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   sc.cfgsc.ShowConstl:=not sc.cfgsc.ShowConstl;
-if VerboseMsg then
- WriteTrace('ShowConstellationLineExecute');
-   Refresh;
+  sc.cfgsc.ShowConstl:=not sc.cfgsc.ShowConstl;
+  if VerboseMsg then WriteTrace('ShowConstellationLineExecute');
+  if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+    sc.cfgsc.TrackOn:=true;
+    sc.cfgsc.TrackType:=4;
+  end;
+  Refresh;
 end;
 end;
 
 procedure Tf_main.ShowConstellationLimitExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   sc.cfgsc.ShowConstB:=not sc.cfgsc.ShowConstB;
-if VerboseMsg then
- WriteTrace('ShowConstellationLimitExecute');
-   Refresh;
+  sc.cfgsc.ShowConstB:=not sc.cfgsc.ShowConstB;
+  if VerboseMsg then WriteTrace('ShowConstellationLimitExecute');
+  if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+    sc.cfgsc.TrackOn:=true;
+    sc.cfgsc.TrackType:=4;
+  end;
+  Refresh;
 end;
 end;
 
 procedure Tf_main.ShowGalacticEquatorExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   sc.cfgsc.ShowGalactic:=not sc.cfgsc.ShowGalactic;
-if VerboseMsg then
- WriteTrace('ShowGalacticEquatorExecute');
-   Refresh;
+  sc.cfgsc.ShowGalactic:=not sc.cfgsc.ShowGalactic;
+  if VerboseMsg then WriteTrace('ShowGalacticEquatorExecute');
+  if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+    sc.cfgsc.TrackOn:=true;
+    sc.cfgsc.TrackType:=4;
+  end;
+  Refresh;
 end;
 end;
 
 procedure Tf_main.ShowEclipticExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   sc.cfgsc.ShowEcliptic:=not sc.cfgsc.ShowEcliptic;
-if VerboseMsg then
- WriteTrace('ShowEclipticExecute');
-   Refresh;
+  sc.cfgsc.ShowEcliptic:=not sc.cfgsc.ShowEcliptic;
+  if VerboseMsg then WriteTrace('ShowEclipticExecute');
+  if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+    sc.cfgsc.TrackOn:=true;
+    sc.cfgsc.TrackType:=4;
+  end;
+  Refresh;
 end;
 end;
 
 procedure Tf_main.ShowMarkExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   sc.cfgsc.ShowCircle:=not sc.cfgsc.ShowCircle;
-if VerboseMsg then
- WriteTrace('ShowMarkExecute');
-   Refresh;
+  sc.cfgsc.ShowCircle:=not sc.cfgsc.ShowCircle;
+  if VerboseMsg then WriteTrace('ShowMarkExecute');
+  if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+    sc.cfgsc.TrackOn:=true;
+    sc.cfgsc.TrackType:=4;
+  end;
+  Refresh;
 end;
 end;
 
 procedure Tf_main.ShowObjectbelowHorizonExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   sc.cfgsc.horizonopaque:=not sc.cfgsc.horizonopaque;
-if VerboseMsg then
- WriteTrace('ShowObjectbelowHorizonExecute');
-   Refresh;
+  sc.cfgsc.horizonopaque:=not sc.cfgsc.horizonopaque;
+  if VerboseMsg then WriteTrace('ShowObjectbelowHorizonExecute');
+  if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+    sc.cfgsc.TrackOn:=true;
+    sc.cfgsc.TrackType:=4;
+  end;
+  Refresh;
 end;
 end;
 
@@ -3965,6 +4019,10 @@ begin
   if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
      ShowUobj.Checked:=not ShowUobj.Checked;
      sc.catalog.cfgcat.nebcatdef[uneb-BaseNeb]:=ShowUobj.Checked;
+     if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+       sc.cfgsc.TrackOn:=true;
+       sc.cfgsc.TrackType:=4;
+     end;
      Refresh;
   end;
 end;
@@ -3975,6 +4033,10 @@ begin
      ShowVO.Checked:=not ShowVO.Checked;
      sc.catalog.cfgcat.starcatdef[vostar-BaseStar]:=ShowVO.Checked;
      sc.catalog.cfgcat.nebcatdef[voneb-BaseNeb]:=ShowVO.Checked;
+     if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+       sc.cfgsc.TrackOn:=true;
+       sc.cfgsc.TrackType:=4;
+     end;
      Refresh;
   end;
 end;
