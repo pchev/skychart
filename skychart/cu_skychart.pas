@@ -340,6 +340,16 @@ end;
     DrawCometMark;
     DrawComet;
   end;
+  if not ( cfgsc.ShowPlanet and FPlot.cfgplot.TransparentPlanet and (FPlot.cfgplot.plaplot=1) ) then begin
+    // then the lines if planet opaque or not line mode
+    DrawGrid(false);
+    if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
+      DrawConstL;
+      DrawConstB;
+      DrawEcliptic;
+      DrawGalactic;
+    end;
+  end;
   // the stars
   if cfgsc.showstars then DrawStars;
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
@@ -353,13 +363,15 @@ end;
     if cfgsc.SimLine then DrawOrbitPath;
   end;
   if cfgsc.ShowPlanetValid then DrawPlanet;
-  // then the lines
-  DrawGrid(false);
-  if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
-    DrawConstL;
-    DrawConstB;
-    DrawEcliptic;
-    DrawGalactic;
+  if ( cfgsc.ShowPlanet and FPlot.cfgplot.TransparentPlanet and (FPlot.cfgplot.plaplot=1)) then begin
+    // then the lines if planet transparent + line mode
+    DrawGrid(false);
+    if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
+      DrawConstL;
+      DrawConstB;
+      DrawEcliptic;
+      DrawGalactic;
+    end;
   end;
   // Finder mark
   DrawCircle;
