@@ -367,6 +367,7 @@ else if nam='Sh2-240' then begin sac.s1:=180; sac.s2:=180 ; sac.ar:=85.250; sac.
 else if nam='Sh2-301' then begin ForcePlate:='s558';  end
 else if nam='UGC1072' then begin ForcePlate:='s827';  end
 else if nam='UGC3647' then begin ForcePlate:='xe122';  end
+else if nam='Mrk18' then begin ForceNil:=true; end
 ;
 
 end;
