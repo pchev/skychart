@@ -3,7 +3,6 @@ object f_calendar: Tf_calendar
   Height = 455
   Top = 95
   Width = 835
-  ActiveControl = TwilightGrid
   Caption = 'f_calendar'
   ClientHeight = 455
   ClientWidth = 835
@@ -702,8 +701,8 @@ object f_calendar: Tf_calendar
       ImageIndex = 5
       object SatGrid: TStringGrid
         Left = 0
-        Height = 285
-        Top = 66
+        Height = 271
+        Top = 80
         Width = 829
         Align = alClient
         Anchors = [akLeft, akRight, akBottom]
@@ -719,16 +718,16 @@ object f_calendar: Tf_calendar
       end
       object Panel4: TPanel
         Left = 0
-        Height = 66
+        Height = 80
         Top = 0
         Width = 829
         Align = alTop
-        ClientHeight = 66
+        ClientHeight = 80
         ClientWidth = 829
         TabOrder = 1
         object Bevel1: TBevel
-          Left = 200
-          Height = 62
+          Left = 192
+          Height = 78
           Top = 2
           Width = 254
           Style = bsRaised
@@ -752,7 +751,7 @@ object f_calendar: Tf_calendar
           ParentColor = False
         end
         object Label6: TLabel
-          Left = 214
+          Left = 206
           Height = 16
           Top = 4
           Width = 27
@@ -760,34 +759,20 @@ object f_calendar: Tf_calendar
           ParentColor = False
         end
         object tle1: TEdit
-          Left = 208
+          Left = 200
           Height = 22
           Top = 22
           Width = 97
           OnChange = tle1Change
           TabOrder = 4
-          Text = 'visible.tle'
         end
         object fullday: TCheckBox
-          Left = 462
+          Left = 461
           Height = 22
-          Top = 28
+          Top = 39
           Width = 154
           Caption = 'Include day time pass'
-          TabOrder = 6
-        end
-        object TLEListBox: TFileListBox
-          Left = 320
-          Height = 56
-          Top = 4
-          Width = 126
-          Directory = '/'
-          ItemHeight = 0
-          Mask = '*.tle;*.txt'
-          MultiSelect = True
-          OnClick = TLEListBoxClick
           TabOrder = 5
-          TopIndex = -1
         end
         object IridiumBox: TCheckBox
           Left = 461
@@ -835,47 +820,57 @@ object f_calendar: Tf_calendar
           TabOrder = 2
         end
         object MinSatAlt: TLongEdit
-          Left = 630
+          Left = 629
           Height = 22
           Hint = '0..30'
-          Top = 28
+          Top = 39
           Width = 48
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 7
+          TabOrder = 6
           Value = 5
           MaxValue = 30
         end
         object Label10: TLabel
-          Left = 686
+          Left = 685
           Height = 16
-          Top = 32
+          Top = 43
           Width = 98
           Caption = 'Minimal altitude'
           ParentColor = False
         end
         object LabelTle: TLabel
-          Left = 214
+          Left = 206
           Height = 16
           Top = 45
           Width = 53
           Caption = 'LabelTle'
           ParentColor = False
         end
+        object TleCheckList: TCheckListBox
+          Left = 304
+          Height = 80
+          Top = 0
+          Width = 150
+          ItemHeight = 0
+          OnClickCheck = TleCheckListClickCheck
+          TabOrder = 7
+          TopIndex = -1
+        end
       end
       object DownloadPanel: TPanel
         Left = 0
-        Height = 285
-        Top = 66
+        Height = 271
+        Top = 80
         Width = 829
         Align = alClient
-        ClientHeight = 285
+        ClientHeight = 271
         ClientWidth = 829
         TabOrder = 2
         Visible = False
         object DownloadMemo: TMemo
           Left = 1
-          Height = 283
+          Height = 269
           Top = 1
           Width = 827
           Align = alClient

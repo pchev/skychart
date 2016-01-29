@@ -29,7 +29,7 @@ uses u_help, u_translation, Math, cu_database, u_satellite, Printers, LCLIntf,
   SysUtils, Classes, Graphics, Controls, Forms, FileUtil, Dialogs, StdCtrls,
   FileCtrl, enhedits, Grids, ComCtrls, IniFiles, jdcalendar, cu_planet, u_unzip,
   u_constant, pu_image, downloaddialog, Buttons, ExtCtrls, ActnList, StdActns,
-  UScaleDPI, LResources, LazHelpHTML, types;
+  UScaleDPI, LResources, LazHelpHTML, CheckLst, types;
 
 type
     TScFunc = procedure(csc:Tconf_skychart) of object;
@@ -58,6 +58,7 @@ type
     BtnReset: TButton;
     BtnTleDownload: TButton;
     Button4: TButton;
+    TleCheckList: TCheckListBox;
     dgPlanet: TDrawGrid;
     DownloadDialog1: TDownloadDialog;
     IridiumBox:TCheckBox;
@@ -69,7 +70,6 @@ type
     DownloadPanel: TPanel;
     tsPGraphs: TTabSheet;
     Time: TTimePicker;
-    TLEListBox:TFileListBox;
     maglimit:TFloatEdit;
     magchart:TFloatEdit;
     AstFilter: TEdit;
@@ -164,7 +164,7 @@ type
     procedure Date2Change(Sender: TObject);
     procedure SatPanelClick(Sender: TObject);
     procedure tle1Change(Sender: TObject);
-    procedure TLEListBoxClick(Sender: TObject);
+    procedure TleCheckListClickCheck(Sender: TObject);
   private
     { Private declarations }
     initial, lockclick: boolean;
@@ -206,6 +206,7 @@ type
     procedure RefreshSatellite;
     procedure DownloadTle;
     procedure TLEfeedback(txt:string);
+    procedure UpdTleList;
   public
     { Public declarations }
     cdb: Tcdcdb;
@@ -263,7 +264,6 @@ for i := low(PlanetGraphs) to high(PlanetGraphs) do begin
  end;
 SatGrid.ColWidths[0]:=130;
 SatGrid.ColWidths[1]:=120;
-TLEListBox.Directory:=SatDir;
 {$ifdef mswindows}
 SaveDialog1.Options:=SaveDialog1.Options-[ofNoReadOnlyReturn]; { TODO : check readonly test on Windows }
 {$endif}
@@ -360,19 +360,6 @@ if date2.JD<=date1.JD then date1.JD:=date2.JD-deltajd;
 deltajd:=date2.JD-date1.JD;
 end;
 
-procedure Tf_calendar.TLEListBoxClick(Sender: TObject);
-var i : integer;
-    buf : string;
-begin
-with TLEListBox do begin
- if selcount>0 then begin
-    buf:='';
-    for i:=0 to Items.Count-1 do if selected[i] then buf:=buf+','+Items.Strings[i];
-    tle1.text:=copy(buf,2,9999);
- end;
-end;
-end;
-
 Procedure Tf_calendar.SetLang;
 var Alabels: TDatesLabelsArray;
 begin
@@ -433,7 +420,6 @@ Satellites.caption:=rsArtificialSa;
 Label8.caption:=rsChart2;
 Label7.caption:=rsLimitingMagn;
 Label6.caption:='TLE';
-tle1.text:='';
 fullday.caption:=rsIncludeDayTi;
 IridiumBox.caption:=rsIncludeIridi;
 appmsg[1]:=rsRA;
@@ -1032,7 +1018,7 @@ DeleteFile(slash(satdir)+'quicksat.mag');
 if not fileexists(slash(satdir)+'qs.mag') then CopyFile(srcdir+'qs.mag', wrkdir+'qs.mag');
 SatelliteList(inttostr(j),inttostr(m),inttostr(a),ed,maglimit.text,tle1.text,SatDir,prgdir,formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,MinSatAlt.Text,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,fullday.Checked,false);
 if not Fileexists(slash(SatDir)+'satlist.out') then begin
-  Showmessage(rsCannotComput);
+  Showmessage(rsCannotComput+crlf+rsPleaseDownlo);
   exit;
 end;
 Assignfile(f,slash(SatDir)+'satlist.out');
@@ -2193,7 +2179,7 @@ case pagecontrol1.ActivePage.TabIndex of
          Dategroup2(false);
          SatPanel.Visible:=true;
          if doscmd='wine' then CheckWine;
-         TLEListBox.UpdateFileList;
+         UpdTleList;
          tle1Change(nil);
          //if (dat61<>date1.jd) then RefreshSatellite;
          end;
@@ -2420,7 +2406,7 @@ begin
   ExecuteFile(URL_TLE);
   ExecuteFile(Satdir);
  end;
- TLEListBox.UpdateFileList;
+ UpdTleList;
 end;
 
 procedure Tf_calendar.dgPlanetDrawCell(Sender: TObject; aCol, aRow: Integer;
@@ -2942,6 +2928,47 @@ begin
 if copy(txt,1,9)='Read Byte' then exit;
 DownloadMemo.Lines.Add(txt);
 DownloadMemo.SelStart:=length(DownloadMemo.Text)-1;
+end;
+
+procedure Tf_calendar.UpdTleList;
+procedure FillList(ext,lst: string);
+var fs: TSearchRec;
+    i,n: integer;
+begin
+   i:=findfirst(slash(SatDir)+'*.'+ext,0,fs);
+   while i=0 do begin
+     n:=TleCheckList.Items.Add(fs.Name);
+     TleCheckList.Checked[n]:=(pos(fs.Name,lst)>0);
+     i:=findnext(fs);
+   end;
+   findclose(fs);
+end;
+var buf:string;
+    j:integer;
+begin
+  buf:=tle1.text;
+  TleCheckList.Clear;
+  FillList('txt',buf);
+  FillList('tle',buf);
+  {$ifndef mswindows}
+  FillList('TXT',buf);
+  FillList('TLE',buf);
+  {$endif}
+  if buf='' then begin
+    for j:=0 to TleCheckList.Count-1 do TleCheckList.Checked[j]:=true;
+    TleCheckListClickCheck(nil);
+  end;
+end;
+
+procedure Tf_calendar.TleCheckListClickCheck(Sender: TObject);
+var i : integer;
+    buf : string;
+begin
+ buf:='';
+ for i:=0 to TleCheckList.Count-1 do begin
+    if TleCheckList.Checked[i] then buf:=buf+','+TleCheckList.Items[i];
+ end;
+ tle1.text:=copy(buf,2,9999);
 end;
 
 

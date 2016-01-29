@@ -1336,6 +1336,7 @@ if VerboseMsg then
  f_calendar.planet:=planet;
  f_calendar.cdb:=cdcdb;
  f_calendar.cmain:=cfgm;
+ f_calendar.tle1.Text:=cfgm.tlelst;
  f_calendar.OnGetChartConfig:=GetChartConfig;
  f_calendar.OnUpdateChart:=DrawChart;
  f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
@@ -4702,6 +4703,7 @@ cfgm.TleUrlList.add(URL_CELESTRAK1);
 cfgm.TleUrlList.add(URL_CELESTRAK2);
 cfgm.TleUrlList.add(URL_QSMAG);
 cfgm.starshape_file:='';
+cfgm.tlelst:='';
 cfgm.SampAutoconnect:=false;
 cfgm.SampKeepTables:=false;
 cfgm.SampKeepImages:=false;
@@ -5909,6 +5911,7 @@ cfgm.ProxyUser:=ReadString(section,'ProxyUser',cfgm.ProxyUser);
 cfgm.ProxyPass:=ReadString(section,'ProxyPass',cfgm.ProxyPass);
 cfgm.AnonPass:=ReadString(section,'AnonPass',cfgm.AnonPass);
 cfgm.starshape_file:=ReadString(section,'starshape_file',cfgm.starshape_file);
+cfgm.tlelst:=ReadString(section,'tlelst',cfgm.tlelst);
 j:=ReadInteger(section,'CometUrlCount',0);
 if (j>0) then begin
    cfgm.CometUrlList.Clear;
@@ -6770,6 +6773,7 @@ WriteString(section,'ProxyUser',cfgm.ProxyUser);
 WriteString(section,'ProxyPass',cfgm.ProxyPass);
 WriteString(section,'AnonPass',cfgm.AnonPass);
 WriteString(section,'starshape_file',cfgm.starshape_file);
+WriteString(section,'tlelst',f_calendar.tle1.Text);
 j:=cfgm.CometUrlList.Count;
 WriteInteger(section,'CometUrlCount',j);
 if j>0 then begin
