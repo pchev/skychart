@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-24 13:48+0000\n"
-"PO-Revision-Date: 2016-01-24 13:53+0000\n"
+"POT-Creation-Date: 2016-01-29 17:42+0000\n"
+"PO-Revision-Date: 2016-01-29 17:52+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-24 18:52+0000\n"
-"X-Generator: Launchpad (build 17902)\n"
+"X-Launchpad-Export-Date: 2016-01-29 17:57+0000\n"
+"X-Generator: Launchpad (build 17908)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -280,6 +280,10 @@ msgstr "Toujours enregistrer sans demander."
 msgid "Always show the objects from the list"
 msgstr "Toujours voir les objets de la liste"
 
+#: u_translation.rsanewversiono
+msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
+msgstr "Une nouvelle version %s de Cartes du Ciel est disponible.%sVoulez-vous la télécharger maintenant?"
+
 #: u_translation.rsanimation
 msgid "Animation"
 msgstr "Animation"
@@ -403,6 +407,10 @@ msgstr "Config. astéroïdes"
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
 msgstr "Astéroïdes du fichier"
+
+#: u_translation.rsasteroidupda
+msgid "Asteroid update successful"
+msgstr "Mise à jour des astéroïdes terminée"
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
@@ -940,6 +948,10 @@ msgstr "Éléments des comètes"
 msgid "Comet settings"
 msgstr "Config. comètes"
 
+#: u_translation.rscometupdates
+msgid "Comet update successful"
+msgstr "Mise à jour des comètes terminée"
+
 #: u_translation.rscommandfound
 msgid "Command found OK."
 msgstr "La commande est trouvée."
@@ -963,6 +975,10 @@ msgstr "Protocole de communication"
 #: u_translation.rscompassroses
 msgid "Compass rose size"
 msgstr "Taille de la boussole"
+
+#: u_translation.rscompilationa
+msgid "Compilation and save successful"
+msgstr "Compilation et sauvegarde réussie"
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
@@ -1647,14 +1663,6 @@ msgstr "Ne changez rien si vous n'êtes pas sûr de ce que vous faites!"
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "Ne pas filtrer les objets Messier"
-
-#: u_translation.rsdontforgetto
-msgid "Don't forget to save to a new file!"
-msgstr "Ne pas oublier de sauvegarder dans un nouveau fichier!"
-
-#: u_translation.rsdontforgetto2
-msgid "Don't forget to save the program configuration!"
-msgstr "Ne pas oublier de sauvegarder la configuration du programme!"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -3293,6 +3301,10 @@ msgstr "Mirroir vertical"
 msgid "Misc. lines"
 msgstr "Autre lignes"
 
+#: u_translation.rsmissingscrip
+msgid "Missing script title!"
+msgstr "Il manque le titre du script!"
+
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
 msgstr "Simulateur du bouton Mode"
@@ -3449,6 +3461,10 @@ msgstr "Neptune"
 msgid "never"
 msgstr "jamais"
 
+#: u_translation.rsnewbetaversi
+msgid "New beta version available"
+msgstr "Une nouvelle version beta est disponible"
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr "Nouvelle carte"
@@ -3460,6 +3476,10 @@ msgstr "Nouveau cercle"
 #: u_translation.rsnewlabel
 msgid "New label"
 msgstr "Nouveau label"
+
+#: u_translation.rsnewversionav
+msgid "New version available"
+msgstr "Une nouvelle version est disponible"
 
 #: u_translation.rsnext
 msgid "Next   >>"
@@ -3992,6 +4012,10 @@ msgstr "Veuillez configurer l'URL pour les éléments orbitaux!"
 #: u_translation.rspleaseconfir
 msgid "Please confirm that the telescope is pointed at %s"
 msgstr "Confirmez que le télescope est centré sur %s"
+
+#: u_translation.rspleasedownlo
+msgid "Please download and select TLE file"
+msgstr "Veuillez télécharger et sélectionner un fichier TLE"
 
 #: u_translation.rspleaseensure
 msgid "Please ensure that ASCOM telescope drivers are installed properly."
@@ -5657,6 +5681,10 @@ msgstr "Zone horaire"
 msgid "Title"
 msgstr "Titre"
 
+#: u_translation.rstledownloado
+msgid "TLE download OK"
+msgstr "Téléchargement des TLE terminé"
+
 #: u_translation.rsto
 msgid "to"
 msgstr "à"
@@ -6148,6 +6176,10 @@ msgstr "années"
 #: u_translation.rsyerrors
 msgid "Y Errors"
 msgstr "Erreur Y"
+
+#: u_translation.rsyoualreadyha
+msgid "You already have the latest available version!"
+msgstr "Vous avez déjà la dernière version disponible!"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."

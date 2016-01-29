@@ -3714,7 +3714,7 @@ if directdownload then begin
           Application.ProcessMessages;
           ConfigSolsys.f_config_solsys1.DownloadComet.Click;
           RefreshAllChild(false);
-          if ConfigSolsys.f_config_solsys1.autoOK then ShowMessage('comet update successful');
+          if ConfigSolsys.f_config_solsys1.autoOK then ShowMessage(rsCometUpdateS);
         end;
      3: begin
           ConfigSolsys.Panel1.Visible:=false;
@@ -3729,7 +3729,7 @@ if directdownload then begin
           ConfigSolsys.f_config_solsys1.DownloadAsteroid.Click;
           RecomputeAsteroid;
           RefreshAllChild(false);
-          if ConfigSolsys.f_config_solsys1.autoOK then ShowMessage('asteroid update successful');
+          if ConfigSolsys.f_config_solsys1.autoOK then ShowMessage(rsAsteroidUpda);
         end;
    end;
 end
@@ -9261,16 +9261,16 @@ begin
  end;
  dl.free;
  if CompareVersion(ver,newver)>0 then begin
-    if MessageDlg('New version available', 'A new version '+newver+' of Skychart is available.'+crlf+'Do you want to download it now?', mtInformation, mbYesNo, 0)=mrYes then begin
+    if MessageDlg(rsNewVersionAv, Format(rsANewVersionO, [newver, crlf]), mtInformation, mbYesNo, 0)=mrYes then begin
        ExecuteFile('http://www.ap-i.net/skychart/en/download');
     end;
  end
- else if CompareVersion(ver,newbeta)>0 then begin
-    if MessageDlg('New beta version', 'A new beta version '+newbeta+' of Skychart is available.'+crlf+'Do you want to download it now?', mtInformation, mbYesNo, 0)=mrYes then begin
+ else if beta and (CompareVersion(ver,newbeta)>0) then begin
+    if MessageDlg(rsNewBetaVersi, Format(rsANewVersionO, [newbeta, crlf]), mtInformation, mbYesNo, 0)=mrYes then begin
        ExecuteFile('http://sourceforge.net/projects/skychart/files/0-beta/');
     end;
  end
- else ShowMessage('You already have the latest available version!');
+ else ShowMessage(rsYouAlreadyHa);
 end;
 
 procedure Tf_main.ToolBarFOVResize(Sender: TObject);

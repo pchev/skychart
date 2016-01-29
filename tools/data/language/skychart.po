@@ -5970,14 +5970,6 @@ msgstr ""
 msgid "CheckList"
 msgstr ""
 
-#: u_translation:rsdontforgetto
-msgid "Don't forget to save to a new file!"
-msgstr ""
-
-#: u_translation:rsdontforgetto2
-msgid "Don't forget to save the program configuration!"
-msgstr ""
-
 #: u_translation:rsrun
 msgid "Run"
 msgstr ""
@@ -6176,5 +6168,45 @@ msgstr ""
 
 #: u_translation:rsaddlabelfore
 msgid "Add label for every object in the list"
+msgstr ""
+
+#: u_translation:rscompilationa
+msgid "Compilation and save successful"
+msgstr ""
+
+#: u_translation:rsmissingscrip
+msgid "Missing script title!"
+msgstr ""
+
+#: u_translation:rspleasedownlo
+msgid "Please download and select TLE file"
+msgstr ""
+
+#: u_translation:rstledownloado
+msgid "TLE download OK"
+msgstr ""
+
+#: u_translation:rscometupdates
+msgid "Comet update successful"
+msgstr ""
+
+#: u_translation:rsasteroidupda
+msgid "Asteroid update successful"
+msgstr ""
+
+#: u_translation:rsnewversionav
+msgid "New version available"
+msgstr ""
+
+#: u_translation:rsnewbetaversi
+msgid "New beta version available"
+msgstr ""
+
+#: u_translation:rsanewversiono
+msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
+msgstr ""
+
+#: u_translation:rsyoualreadyha
+msgid "You already have the latest available version!"
 msgstr ""
 

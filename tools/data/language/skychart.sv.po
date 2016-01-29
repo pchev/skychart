@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-01-24 13:48+0000\n"
+"POT-Creation-Date: 2016-01-29 17:42+0000\n"
 "PO-Revision-Date: 2015-08-22 11:47+0000\n"
 "Last-Translator: Kåre Lekebjer <kare@lekebjer.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-24 18:52+0000\n"
-"X-Generator: Launchpad (build 17902)\n"
+"X-Launchpad-Export-Date: 2016-01-29 17:56+0000\n"
+"X-Generator: Launchpad (build 17908)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -280,6 +280,10 @@ msgstr "Spara alltid utan att fråga."
 msgid "Always show the objects from the list"
 msgstr "Visa alltid objekten från listan"
 
+#: u_translation.rsanewversiono
+msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
+msgstr ""
+
 #: u_translation.rsanimation
 msgid "Animation"
 msgstr "Animering"
@@ -403,6 +407,10 @@ msgstr "Asteroidinställningar"
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
 msgstr "asteroiderna från filen"
+
+#: u_translation.rsasteroidupda
+msgid "Asteroid update successful"
+msgstr ""
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
@@ -940,6 +948,10 @@ msgstr ""
 msgid "Comet settings"
 msgstr "Kometinställningar"
 
+#: u_translation.rscometupdates
+msgid "Comet update successful"
+msgstr ""
+
 #: u_translation.rscommandfound
 msgid "Command found OK."
 msgstr "Kommandot OK."
@@ -963,6 +975,10 @@ msgstr "Kommunikationprotokoll"
 #: u_translation.rscompassroses
 msgid "Compass rose size"
 msgstr "Storlek på kompassros"
+
+#: u_translation.rscompilationa
+msgid "Compilation and save successful"
+msgstr ""
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
@@ -1647,14 +1663,6 @@ msgstr "Ändra inget här om du inte är säker på vad du gör!"
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "Filtrera inte Messierobjekt"
-
-#: u_translation.rsdontforgetto
-msgid "Don't forget to save to a new file!"
-msgstr "Glöm inte att spara den nya filen!"
-
-#: u_translation.rsdontforgetto2
-msgid "Don't forget to save the program configuration!"
-msgstr "Glöm inte att spara den nya konfigurationen!"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -3292,6 +3300,10 @@ msgstr "Spegla vertikalt"
 msgid "Misc. lines"
 msgstr "Div. linjer"
 
+#: u_translation.rsmissingscrip
+msgid "Missing script title!"
+msgstr ""
+
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
 msgstr "Modeknapp simulator"
@@ -3448,6 +3460,10 @@ msgstr "Neptunus"
 msgid "never"
 msgstr "aldrig"
 
+#: u_translation.rsnewbetaversi
+msgid "New beta version available"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr "Ny karta"
@@ -3459,6 +3475,10 @@ msgstr "Ny sökarcirkel"
 #: u_translation.rsnewlabel
 msgid "New label"
 msgstr "Ny etikett"
+
+#: u_translation.rsnewversionav
+msgid "New version available"
+msgstr ""
 
 #: u_translation.rsnext
 msgid "Next   >>"
@@ -3991,6 +4011,10 @@ msgstr "Ställ in URL för kretsande element"
 #: u_translation.rspleaseconfir
 msgid "Please confirm that the telescope is pointed at %s"
 msgstr "Bekräfta att teleskopet pekar på %s"
+
+#: u_translation.rspleasedownlo
+msgid "Please download and select TLE file"
+msgstr ""
 
 #: u_translation.rspleaseensure
 msgid "Please ensure that ASCOM telescope drivers are installed properly."
@@ -5656,6 +5680,10 @@ msgstr "Tidzon"
 msgid "Title"
 msgstr "Rubrik"
 
+#: u_translation.rstledownloado
+msgid "TLE download OK"
+msgstr ""
+
 #: u_translation.rsto
 msgid "to"
 msgstr "Till"
@@ -6147,6 +6175,10 @@ msgstr "År"
 #: u_translation.rsyerrors
 msgid "Y Errors"
 msgstr "Y-fel"
+
+#: u_translation.rsyoualreadyha
+msgid "You already have the latest available version!"
+msgstr ""
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-24 13:48+0000\n"
-"PO-Revision-Date: 2015-12-21 09:30+0000\n"
+"POT-Creation-Date: 2016-01-29 17:42+0000\n"
+"PO-Revision-Date: 2016-01-25 10:54+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-24 18:52+0000\n"
-"X-Generator: Launchpad (build 17902)\n"
+"X-Launchpad-Export-Date: 2016-01-29 17:57+0000\n"
+"X-Generator: Launchpad (build 17908)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -154,7 +154,7 @@ msgstr "Dodaj etykietę"
 
 #: u_translation.rsaddlabelfore
 msgid "Add label for every object in the list"
-msgstr ""
+msgstr "Dodaj etykietę dla każdego elementu na liście"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
@@ -174,7 +174,7 @@ msgstr "Dostosuj skalowanie jasności"
 
 #: u_translation.rsadjustthewin
 msgid "Adjust the window size to the screen DPI"
-msgstr ""
+msgstr "Dostosuj rozmiar okna do DPI ekranu"
 
 #: u_translation.rsadvanced
 msgid "Advanced"
@@ -280,6 +280,10 @@ msgstr "Zawsze zapisuj bez pytania."
 msgid "Always show the objects from the list"
 msgstr "Zawsze pokazuj obiekty z listy."
 
+#: u_translation.rsanewversiono
+msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
+msgstr ""
+
 #: u_translation.rsanimation
 msgid "Animation"
 msgstr "Animacja"
@@ -342,7 +346,7 @@ msgstr "Sztuczny satelita"
 
 #: u_translation.rsartificialsa3
 msgid "Artificial satellites TLE (one URL by line)"
-msgstr ""
+msgstr "Sztuczne Satelity TLE (jeden URL w linii)"
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
@@ -394,7 +398,7 @@ msgstr "Zasoby planetoid w formacie MPC (jeden adres URL w linii)"
 
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
-msgstr ""
+msgstr "Elementy orbitalne asteroid"
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
@@ -403,6 +407,10 @@ msgstr "Ustawienia planetoid"
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
 msgstr "planetoid z wybranego pliku"
+
+#: u_translation.rsasteroidupda
+msgid "Asteroid update successful"
+msgstr ""
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
@@ -610,7 +618,7 @@ msgstr "Przycisk"
 
 #: u_translation.rsbuttonsize
 msgid "Button size"
-msgstr ""
+msgstr "Rozmiar przycisku"
 
 #: u_translation.rsby
 msgid "by"
@@ -898,7 +906,7 @@ msgstr "Gromady i mgławice"
 
 #: u_translation.rscollapse
 msgid "Collapse"
-msgstr ""
+msgstr "Zwiń"
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -934,11 +942,15 @@ msgstr "Zasoby komet w formacie MPC (jeden adres URL w linii)"
 
 #: u_translation.rscometelement2
 msgid "Comet elements"
-msgstr ""
+msgstr "Elementy orbitalne komet"
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
 msgstr "Ustawienia komet"
+
+#: u_translation.rscometupdates
+msgid "Comet update successful"
+msgstr ""
 
 #: u_translation.rscommandfound
 msgid "Command found OK."
@@ -963,6 +975,10 @@ msgstr "Protokół komunikacyjny"
 #: u_translation.rscompassroses
 msgid "Compass rose size"
 msgstr "Wielkość róży wiatrów"
+
+#: u_translation.rscompilationa
+msgid "Compilation and save successful"
+msgstr ""
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
@@ -1648,14 +1664,6 @@ msgstr "Nie wprowadzaj tutaj zmian, jeżeli nie jesteś pewien tego, co robisz!"
 msgid "Do not filter Messier objects"
 msgstr "Nie filtruj obiektów Messiera"
 
-#: u_translation.rsdontforgetto
-msgid "Don't forget to save to a new file!"
-msgstr "Nie zapomnij zapisać do nowego pliku!"
-
-#: u_translation.rsdontforgetto2
-msgid "Don't forget to save the program configuration!"
-msgstr "Nie zapomnij zapisać konfiguracji programu!"
-
 #: u_translation.rsdot1
 msgid "Dot"
 msgstr "Kropka"
@@ -1670,7 +1678,7 @@ msgstr "Gwiazdy podwójne"
 
 #: u_translation.rsdown
 msgid "Down"
-msgstr ""
+msgstr "W dół"
 
 #: u_translation.rsdownload
 msgid "Download"
@@ -2030,7 +2038,7 @@ msgstr "Wychodzenie..."
 
 #: u_translation.rsexpand
 msgid "Expand"
-msgstr ""
+msgstr "Rozwiń"
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -2398,7 +2406,7 @@ msgstr "Zielony"
 
 #: u_translation.rsgregoriancal
 msgid "Gregorian calendar start date"
-msgstr ""
+msgstr "Data startu wg. kalendarza Gregoriańskiego"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -2767,7 +2775,7 @@ msgstr "Kalendarz JD"
 
 #: u_translation.rsjplephemeris
 msgid "JPL ephemeris search order"
-msgstr ""
+msgstr "Kolejność przeszukiwania efemeryd JPL"
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="
@@ -3135,7 +3143,7 @@ msgstr "Zarządzaj skryptem narzędzi"
 
 #: u_translation.rsmanual
 msgid "Manual"
-msgstr ""
+msgstr "Podręcznik"
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -3293,6 +3301,10 @@ msgstr "Odbij pionowo"
 msgid "Misc. lines"
 msgstr "Różne linie"
 
+#: u_translation.rsmissingscrip
+msgid "Missing script title!"
+msgstr ""
+
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
 msgstr "Symulator trybu"
@@ -3449,6 +3461,10 @@ msgstr "Neptun"
 msgid "never"
 msgstr "nigdy"
 
+#: u_translation.rsnewbetaversi
+msgid "New beta version available"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr "Nowa mapa"
@@ -3460,6 +3476,10 @@ msgstr "Nowe koło szukacza"
 #: u_translation.rsnewlabel
 msgid "New label"
 msgstr "Nowa etykieta"
+
+#: u_translation.rsnewversionav
+msgid "New version available"
+msgstr ""
 
 #: u_translation.rsnext
 msgid "Next   >>"
@@ -3992,6 +4012,10 @@ msgstr "Proszę skonfigurować adres URL dla elementu orbit!"
 #: u_translation.rspleaseconfir
 msgid "Please confirm that the telescope is pointed at %s"
 msgstr "Proszę potwierdzić, że teleskop wskazuje na %s"
+
+#: u_translation.rspleasedownlo
+msgid "Please download and select TLE file"
+msgstr ""
 
 #: u_translation.rspleaseensure
 msgid "Please ensure that ASCOM telescope drivers are installed properly."
@@ -4707,7 +4731,7 @@ msgstr "Zakres zaaw."
 
 #: u_translation.rsscreenresolu
 msgid "Screen resolution"
-msgstr ""
+msgstr "Rozdzielczość ekranu"
 
 #: u_translation.rsscript
 msgid "Script"
@@ -4759,7 +4783,7 @@ msgstr "Indeks wyszukiwania"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
-msgstr ""
+msgstr "Sprawdź aktualizacje oprogramowania"
 
 #: u_translation.rssec
 msgid "s"
@@ -4983,7 +5007,7 @@ msgstr "Pokaż planetoidy na mapie"
 
 #: u_translation.rsshowbuttonte
 msgid "Show button text"
-msgstr ""
+msgstr "Pokaż tekst przycisku"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
@@ -5383,11 +5407,11 @@ msgstr "Początek"
 
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
-msgstr ""
+msgstr "Animacja wstecz"
 
 #: u_translation.rsstartforward
 msgid "Animation forward"
-msgstr ""
+msgstr "Animacja w przód"
 
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
@@ -5657,6 +5681,10 @@ msgstr "Strefa czasowa"
 msgid "Title"
 msgstr "Tytuł"
 
+#: u_translation.rstledownloado
+msgid "TLE download OK"
+msgstr ""
+
 #: u_translation.rsto
 msgid "to"
 msgstr "do"
@@ -5723,7 +5751,7 @@ msgstr "Śledź teleskop"
 
 #: u_translation.rstrajectories
 msgid "Trajectories simulation"
-msgstr ""
+msgstr "Symulacja trajektorii"
 
 #: u_translation.rstransformati
 msgid "Transformation"
@@ -5867,7 +5895,7 @@ msgstr "Niewspierany profil koncentratora SAMP. Wymagany URL do pliku"
 
 #: u_translation.rsup
 msgid "Up"
-msgstr ""
+msgstr "W górę"
 
 #: u_translation.rsupdate1
 msgid "Update"
@@ -6148,6 +6176,10 @@ msgstr "lat"
 #: u_translation.rsyerrors
 msgid "Y Errors"
 msgstr "Błędy Y"
+
+#: u_translation.rsyoualreadyha
+msgid "You already have the latest available version!"
+msgstr ""
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
