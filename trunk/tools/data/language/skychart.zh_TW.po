@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-24 13:48+0000\n"
+"POT-Creation-Date: 2016-01-29 17:42+0000\n"
 "PO-Revision-Date: 2015-12-07 08:58+0000\n"
 "Last-Translator: Po-Hsu Lin <po-hsu.lin@canonical.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-24 18:52+0000\n"
-"X-Generator: Launchpad (build 17902)\n"
+"X-Launchpad-Export-Date: 2016-01-29 17:56+0000\n"
+"X-Generator: Launchpad (build 17908)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -279,6 +279,10 @@ msgstr ""
 msgid "Always show the objects from the list"
 msgstr ""
 
+#: u_translation.rsanewversiono
+msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
+msgstr ""
+
 #: u_translation.rsanimation
 msgid "Animation"
 msgstr ""
@@ -402,6 +406,10 @@ msgstr "小行星設定"
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
 msgstr "小行星從檔案"
+
+#: u_translation.rsasteroidupda
+msgid "Asteroid update successful"
+msgstr ""
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
@@ -939,6 +947,10 @@ msgstr ""
 msgid "Comet settings"
 msgstr "彗星設定"
 
+#: u_translation.rscometupdates
+msgid "Comet update successful"
+msgstr ""
+
 #: u_translation.rscommandfound
 msgid "Command found OK."
 msgstr "找到命令。"
@@ -962,6 +974,10 @@ msgstr ""
 #: u_translation.rscompassroses
 msgid "Compass rose size"
 msgstr "羅盤大小"
+
+#: u_translation.rscompilationa
+msgid "Compilation and save successful"
+msgstr ""
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
@@ -1645,14 +1661,6 @@ msgstr ""
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
-msgstr ""
-
-#: u_translation.rsdontforgetto
-msgid "Don't forget to save to a new file!"
-msgstr ""
-
-#: u_translation.rsdontforgetto2
-msgid "Don't forget to save the program configuration!"
 msgstr ""
 
 #: u_translation.rsdot1
@@ -3291,6 +3299,10 @@ msgstr "垂直鏡像"
 msgid "Misc. lines"
 msgstr "雜項線"
 
+#: u_translation.rsmissingscrip
+msgid "Missing script title!"
+msgstr ""
+
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
 msgstr ""
@@ -3447,6 +3459,10 @@ msgstr "海王星"
 msgid "never"
 msgstr ""
 
+#: u_translation.rsnewbetaversi
+msgid "New beta version available"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr "新建星圖"
@@ -3458,6 +3474,10 @@ msgstr "新建尋星鏡圓形"
 #: u_translation.rsnewlabel
 msgid "New label"
 msgstr "新建標籤"
+
+#: u_translation.rsnewversionav
+msgid "New version available"
+msgstr ""
 
 #: u_translation.rsnext
 msgid "Next   >>"
@@ -3990,6 +4010,10 @@ msgstr "請配置軌道要素 URL ！"
 #: u_translation.rspleaseconfir
 msgid "Please confirm that the telescope is pointed at %s"
 msgstr "請確定望遠鏡指向在 %s"
+
+#: u_translation.rspleasedownlo
+msgid "Please download and select TLE file"
+msgstr ""
 
 #: u_translation.rspleaseensure
 msgid "Please ensure that ASCOM telescope drivers are installed properly."
@@ -5655,6 +5679,10 @@ msgstr "時區"
 msgid "Title"
 msgstr ""
 
+#: u_translation.rstledownloado
+msgid "TLE download OK"
+msgstr ""
+
 #: u_translation.rsto
 msgid "to"
 msgstr "到"
@@ -6145,6 +6173,10 @@ msgstr "年"
 
 #: u_translation.rsyerrors
 msgid "Y Errors"
+msgstr ""
+
+#: u_translation.rsyoualreadyha
+msgid "You already have the latest available version!"
 msgstr ""
 
 #: u_translation.rsyouarenowrea

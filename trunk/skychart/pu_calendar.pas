@@ -2916,7 +2916,7 @@ try
     end;
  end;
  if ok then begin
-   ShowMessage('TLE download OK');
+   ShowMessage(rsTLEDownloadO);
  end;
 finally
   DownloadPanel.Visible:=False;

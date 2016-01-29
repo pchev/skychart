@@ -1573,6 +1573,14 @@ resourcestring
   rsCompilationA = 'Compilation and save successful';
   rsMissingScrip = 'Missing script title!';
   rsPleaseDownlo = 'Please download and select TLE file';
+  rsTLEDownloadO = 'TLE download OK';
+  rsCometUpdateS = 'Comet update successful';
+  rsAsteroidUpda = 'Asteroid update successful';
+  rsNewVersionAv = 'New version available';
+  rsNewBetaVersi = 'New beta version available';
+  rsANewVersionO = 'A new version %s of Skychart is available.%sDo you want to'
+    +' download it now?';
+  rsYouAlreadyHa = 'You already have the latest available version!';
 
 // also update upsi_translation
 

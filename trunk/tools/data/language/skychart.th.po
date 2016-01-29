@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-01-24 13:48+0000\n"
+"POT-Creation-Date: 2016-01-29 17:42+0000\n"
 "PO-Revision-Date: 2015-01-03 10:05+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-24 18:52+0000\n"
-"X-Generator: Launchpad (build 17902)\n"
+"X-Launchpad-Export-Date: 2016-01-29 17:56+0000\n"
+"X-Generator: Launchpad (build 17908)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -280,6 +280,10 @@ msgstr "บันทึกเสมอโดยไม่ต้องถาม"
 msgid "Always show the objects from the list"
 msgstr "แสดงวัตถุจากรายการเสมอ"
 
+#: u_translation.rsanewversiono
+msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
+msgstr ""
+
 #: u_translation.rsanimation
 msgid "Animation"
 msgstr "ภาพเคลื่อนไหว"
@@ -403,6 +407,10 @@ msgstr "การตั้งค่าดาวเคราะห์น้อย
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
 msgstr "ดาวเคราะห์น้อยจากแฟ้ม"
+
+#: u_translation.rsasteroidupda
+msgid "Asteroid update successful"
+msgstr ""
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
@@ -940,6 +948,10 @@ msgstr ""
 msgid "Comet settings"
 msgstr "ตั้งค่าดาวหาง"
 
+#: u_translation.rscometupdates
+msgid "Comet update successful"
+msgstr ""
+
 #: u_translation.rscommandfound
 msgid "Command found OK."
 msgstr "พบคำสั่ง"
@@ -963,6 +975,10 @@ msgstr ""
 #: u_translation.rscompassroses
 msgid "Compass rose size"
 msgstr "ขนาดของวงกลมแสดงทิศ"
+
+#: u_translation.rscompilationa
+msgid "Compilation and save successful"
+msgstr ""
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
@@ -1647,14 +1663,6 @@ msgstr "อย่าเปลี่ยนแปลงหากคุณไม่
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "ไม่ต้องกรองวัตถุเมซีเย"
-
-#: u_translation.rsdontforgetto
-msgid "Don't forget to save to a new file!"
-msgstr ""
-
-#: u_translation.rsdontforgetto2
-msgid "Don't forget to save the program configuration!"
-msgstr ""
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -3292,6 +3300,10 @@ msgstr "กลับแผนที่ในแนวตั้ง"
 msgid "Misc. lines"
 msgstr ""
 
+#: u_translation.rsmissingscrip
+msgid "Missing script title!"
+msgstr ""
+
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
 msgstr "Mode Button Simulator"
@@ -3448,6 +3460,10 @@ msgstr "ดาวเนปจูน"
 msgid "never"
 msgstr ""
 
+#: u_translation.rsnewbetaversi
+msgid "New beta version available"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr "แผนที่ใหม่"
@@ -3459,6 +3475,10 @@ msgstr "วงกลมเล็งเป้าวงใหม่"
 #: u_translation.rsnewlabel
 msgid "New label"
 msgstr "ชื่อใหม่"
+
+#: u_translation.rsnewversionav
+msgid "New version available"
+msgstr ""
 
 #: u_translation.rsnext
 msgid "Next   >>"
@@ -3991,6 +4011,10 @@ msgstr "กรุณาปรับแต่ง URL ของรายละเ�
 #: u_translation.rspleaseconfir
 msgid "Please confirm that the telescope is pointed at %s"
 msgstr "กรุณายืนยันว่ากล้องโทรทรรศน์เล็งไปที่ %s"
+
+#: u_translation.rspleasedownlo
+msgid "Please download and select TLE file"
+msgstr ""
 
 #: u_translation.rspleaseensure
 msgid "Please ensure that ASCOM telescope drivers are installed properly."
@@ -5656,6 +5680,10 @@ msgstr "เขตเวลา"
 msgid "Title"
 msgstr ""
 
+#: u_translation.rstledownloado
+msgid "TLE download OK"
+msgstr ""
+
 #: u_translation.rsto
 msgid "to"
 msgstr "ถึง"
@@ -6147,6 +6175,10 @@ msgstr "ปี"
 #: u_translation.rsyerrors
 msgid "Y Errors"
 msgstr "ข้อผิดพลาดทางแกน Y"
+
+#: u_translation.rsyoualreadyha
+msgid "You already have the latest available version!"
+msgstr ""
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."

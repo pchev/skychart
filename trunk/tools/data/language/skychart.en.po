@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-24 13:48+0000\n"
+"POT-Creation-Date: 2016-01-29 17:42+0000\n"
 "PO-Revision-Date: 2011-12-29 14:31+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-24 18:52+0000\n"
-"X-Generator: Launchpad (build 17902)\n"
+"X-Launchpad-Export-Date: 2016-01-29 17:57+0000\n"
+"X-Generator: Launchpad (build 17908)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -279,6 +279,10 @@ msgstr ""
 msgid "Always show the objects from the list"
 msgstr ""
 
+#: u_translation.rsanewversiono
+msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
+msgstr ""
+
 #: u_translation.rsanimation
 msgid "Animation"
 msgstr ""
@@ -401,6 +405,10 @@ msgstr ""
 
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
+msgstr ""
+
+#: u_translation.rsasteroidupda
+msgid "Asteroid update successful"
 msgstr ""
 
 #: u_translation.rsastrometricj
@@ -939,6 +947,10 @@ msgstr ""
 msgid "Comet settings"
 msgstr ""
 
+#: u_translation.rscometupdates
+msgid "Comet update successful"
+msgstr ""
+
 #: u_translation.rscommandfound
 msgid "Command found OK."
 msgstr ""
@@ -961,6 +973,10 @@ msgstr ""
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
+msgstr ""
+
+#: u_translation.rscompilationa
+msgid "Compilation and save successful"
 msgstr ""
 
 #: u_translation.rscompiledwith
@@ -1645,14 +1661,6 @@ msgstr ""
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
-msgstr ""
-
-#: u_translation.rsdontforgetto
-msgid "Don't forget to save to a new file!"
-msgstr ""
-
-#: u_translation.rsdontforgetto2
-msgid "Don't forget to save the program configuration!"
 msgstr ""
 
 #: u_translation.rsdot1
@@ -3291,6 +3299,10 @@ msgstr ""
 msgid "Misc. lines"
 msgstr ""
 
+#: u_translation.rsmissingscrip
+msgid "Missing script title!"
+msgstr ""
+
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
 msgstr ""
@@ -3447,6 +3459,10 @@ msgstr ""
 msgid "never"
 msgstr ""
 
+#: u_translation.rsnewbetaversi
+msgid "New beta version available"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr ""
@@ -3457,6 +3473,10 @@ msgstr ""
 
 #: u_translation.rsnewlabel
 msgid "New label"
+msgstr ""
+
+#: u_translation.rsnewversionav
+msgid "New version available"
 msgstr ""
 
 #: u_translation.rsnext
@@ -3989,6 +4009,10 @@ msgstr ""
 
 #: u_translation.rspleaseconfir
 msgid "Please confirm that the telescope is pointed at %s"
+msgstr ""
+
+#: u_translation.rspleasedownlo
+msgid "Please download and select TLE file"
 msgstr ""
 
 #: u_translation.rspleaseensure
@@ -5655,6 +5679,10 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+#: u_translation.rstledownloado
+msgid "TLE download OK"
+msgstr ""
+
 #: u_translation.rsto
 msgid "to"
 msgstr ""
@@ -6145,6 +6173,10 @@ msgstr ""
 
 #: u_translation.rsyerrors
 msgid "Y Errors"
+msgstr ""
+
+#: u_translation.rsyoualreadyha
+msgid "You already have the latest available version!"
 msgstr ""
 
 #: u_translation.rsyouarenowrea

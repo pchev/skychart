@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-24 13:48+0000\n"
+"POT-Creation-Date: 2016-01-29 17:42+0000\n"
 "PO-Revision-Date: 2016-01-21 20:04+0000\n"
 "Last-Translator: sernik <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-24 18:52+0000\n"
-"X-Generator: Launchpad (build 17902)\n"
+"X-Launchpad-Export-Date: 2016-01-29 17:57+0000\n"
+"X-Generator: Launchpad (build 17908)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -277,6 +277,10 @@ msgstr "Всегда сохранять без подтверждения."
 msgid "Always show the objects from the list"
 msgstr "Всегда показывать объекты из списка"
 
+#: u_translation.rsanewversiono
+msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
+msgstr ""
+
 #: u_translation.rsanimation
 msgid "Animation"
 msgstr "Анимация"
@@ -400,6 +404,10 @@ msgstr "Опции астероидов"
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
 msgstr "астероидов из файла"
+
+#: u_translation.rsasteroidupda
+msgid "Asteroid update successful"
+msgstr ""
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
@@ -937,6 +945,10 @@ msgstr "Кометы"
 msgid "Comet settings"
 msgstr "Опции комет"
 
+#: u_translation.rscometupdates
+msgid "Comet update successful"
+msgstr ""
+
 #: u_translation.rscommandfound
 msgid "Command found OK."
 msgstr "Команда найдена успешно"
@@ -960,6 +972,10 @@ msgstr ""
 #: u_translation.rscompassroses
 msgid "Compass rose size"
 msgstr "Размер компаса"
+
+#: u_translation.rscompilationa
+msgid "Compilation and save successful"
+msgstr ""
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
@@ -1644,14 +1660,6 @@ msgstr "Не делайте никаких изменений, если не у�
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "Не фильтровать объекты каталога Мессье"
-
-#: u_translation.rsdontforgetto
-msgid "Don't forget to save to a new file!"
-msgstr "Не забудьте сохранить в новый файл!"
-
-#: u_translation.rsdontforgetto2
-msgid "Don't forget to save the program configuration!"
-msgstr "Не забудьте сохранить конфигурацию программы!"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -3291,6 +3299,10 @@ msgstr "Зеркально по вертикали"
 msgid "Misc. lines"
 msgstr "Разн. линии"
 
+#: u_translation.rsmissingscrip
+msgid "Missing script title!"
+msgstr ""
+
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
 msgstr ""
@@ -3447,6 +3459,10 @@ msgstr "Нептун"
 msgid "never"
 msgstr "никогда"
 
+#: u_translation.rsnewbetaversi
+msgid "New beta version available"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr "Новая карта"
@@ -3458,6 +3474,10 @@ msgstr "Новый поисковый круг"
 #: u_translation.rsnewlabel
 msgid "New label"
 msgstr "Новая метка"
+
+#: u_translation.rsnewversionav
+msgid "New version available"
+msgstr ""
 
 #: u_translation.rsnext
 msgid "Next   >>"
@@ -3990,6 +4010,10 @@ msgstr "Пожалуйста, задайте URL для загрузки эле�
 #: u_translation.rspleaseconfir
 msgid "Please confirm that the telescope is pointed at %s"
 msgstr "Пожалуйста, подтвердите, что телескоп отцентрирован по %s"
+
+#: u_translation.rspleasedownlo
+msgid "Please download and select TLE file"
+msgstr ""
 
 #: u_translation.rspleaseensure
 msgid "Please ensure that ASCOM telescope drivers are installed properly."
@@ -5655,6 +5679,10 @@ msgstr "Часовой пояс"
 msgid "Title"
 msgstr "Заголовок"
 
+#: u_translation.rstledownloado
+msgid "TLE download OK"
+msgstr ""
+
 #: u_translation.rsto
 msgid "to"
 msgstr "до"
@@ -6146,6 +6174,10 @@ msgstr "лет"
 #: u_translation.rsyerrors
 msgid "Y Errors"
 msgstr "Y ошибки"
+
+#: u_translation.rsyoualreadyha
+msgid "You already have the latest available version!"
+msgstr ""
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
