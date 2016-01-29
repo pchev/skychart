@@ -1572,6 +1572,7 @@ resourcestring
   rsAddLabelForE = 'Add label for every object in the list';
   rsCompilationA = 'Compilation and save successful';
   rsMissingScrip = 'Missing script title!';
+  rsPleaseDownlo = 'Please download and select TLE file';
 
 // also update upsi_translation
 

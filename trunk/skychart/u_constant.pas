@@ -1125,6 +1125,7 @@ type
     ObsListLimitType,ObsListMeridianSide: integer;
     InitObsList,ObslistAirmass,ObslistHourAngle: string;
     ObslistAirmassLimit1,ObslistAirmassLimit2,ObslistHourAngleLimit1,ObslistHourAngleLimit2: boolean;
+    tlelst: string;
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_main);
@@ -2781,6 +2782,7 @@ begin
   SocksType := Source.SocksType;
   ConfirmDownload := Source.ConfirmDownload;
   starshape_file := Source.starshape_file;
+  tlelst := Source.tlelst;
   CometUrlList.Clear;
   for i := 0 to Source.CometUrlList.Count - 1 do
     CometUrlList.Add(Source.CometUrlList.Strings[i]);
