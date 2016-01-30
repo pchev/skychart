@@ -9239,38 +9239,43 @@ begin
     dl.HttpProxyUser:='';
     dl.HttpProxyPass:='';
  end;
- dl.URL:='http://www.ap-i.net/pub/skychart/version.txt';
- fn:=slash(TempDir)+'version.txt';
- dl.SaveToFile:=fn;
  dl.ConfirmDownload:=false;
- if dl.Execute and FileExists(fn) then begin
-    AssignFile(f,fn);
-    reset(f);
-    readln(f,newver);
-    Closefile(f);
- end;
- dl.URL:='http://www.ap-i.net/pub/skychart/beta.txt';
- fn:=slash(TempDir)+'beta.txt';
- dl.SaveToFile:=fn;
- dl.ConfirmDownload:=false;
- if dl.Execute and FileExists(fn) then begin
-    AssignFile(f,fn);
-    reset(f);
-    readln(f,newbeta);
-    Closefile(f);
+ dl.QuickCancel:=true;
+ if beta then begin
+   dl.URL:='http://www.ap-i.net/pub/skychart/beta.txt';
+   fn:=slash(TempDir)+'beta.txt';
+   dl.SaveToFile:=fn;
+   if dl.Execute and FileExists(fn) then begin
+      AssignFile(f,fn);
+      reset(f);
+      readln(f,newbeta);
+      Closefile(f);
+      if (CompareVersion(ver,newbeta)>0) then begin
+        if MessageDlg(rsNewBetaVersi, Format(rsANewVersionO, [newbeta, crlf]), mtInformation, mbYesNo, 0)=mrYes then begin
+           ExecuteFile('http://sourceforge.net/projects/skychart/files/0-beta/');
+        end;
+      end
+      else ShowMessage(rsYouAlreadyHa);
+   end;
+ end
+ else begin
+   dl.URL:='http://www.ap-i.net/pub/skychart/version.txt';
+   fn:=slash(TempDir)+'version.txt';
+   dl.SaveToFile:=fn;
+   if dl.Execute and FileExists(fn) then begin
+      AssignFile(f,fn);
+      reset(f);
+      readln(f,newver);
+      Closefile(f);
+      if CompareVersion(ver,newver)>0 then begin
+        if MessageDlg(rsNewVersionAv, Format(rsANewVersionO, [newver, crlf]), mtInformation, mbYesNo, 0)=mrYes then begin
+           ExecuteFile('http://www.ap-i.net/skychart/en/download');
+        end;
+      end
+      else ShowMessage(rsYouAlreadyHa);
+   end;
  end;
  dl.free;
- if CompareVersion(ver,newver)>0 then begin
-    if MessageDlg(rsNewVersionAv, Format(rsANewVersionO, [newver, crlf]), mtInformation, mbYesNo, 0)=mrYes then begin
-       ExecuteFile('http://www.ap-i.net/skychart/en/download');
-    end;
- end
- else if beta and (CompareVersion(ver,newbeta)>0) then begin
-    if MessageDlg(rsNewBetaVersi, Format(rsANewVersionO, [newbeta, crlf]), mtInformation, mbYesNo, 0)=mrYes then begin
-       ExecuteFile('http://sourceforge.net/projects/skychart/files/0-beta/');
-    end;
- end
- else ShowMessage(rsYouAlreadyHa);
 end;
 
 procedure Tf_main.ToolBarFOVResize(Sender: TObject);
