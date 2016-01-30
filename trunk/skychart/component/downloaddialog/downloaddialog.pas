@@ -69,6 +69,7 @@ type
     FUsername, FPassword, FFWhost, FFWport, FFWUsername, FFWPassword : string;
     FDownloadFile,FCopyfrom,Ftofile,FDownload,FCancel: String;
     FConfirmDownload: Boolean;
+    FQuickCancel: Boolean;
     DF:TForm;
     okButton,cancelButton:TButton;
     progress : Tedit;
@@ -114,6 +115,7 @@ type
     property FtpFwUserName : string read FFWUsername  write FFWUsername ;
     property FtpFwPassword : string read FFWPassword  write FFWPassword ;
     property ConfirmDownload : Boolean read FConfirmDownload  write FConfirmDownload ;
+    property QuickCancel: Boolean read FQuickCancel write FQuickCancel;
     property onFeedback : TDownloadFeedback read FDownloadFeedback write FDownloadFeedback;
   end;
 
@@ -150,6 +152,7 @@ begin
   Timer1.Interval:=2000;
   Timer1.OnTimer:=@Timer1Timer;
   FTimeout:=90000;
+  FQuickCancel:=false;
   Fproxy:='';
   FSocksproxy:='';
   FFWMode:=0;
@@ -273,7 +276,10 @@ end;
 procedure TDownloadDialog.Timer1Timer(Sender: TObject);
 begin
   Timer1.Enabled:=false;
-  DF.ShowModal;
+  if FQuickCancel then
+    BtnCancel(nil)
+  else
+    DF.ShowModal;
 end;
 
 procedure TDownloadDialog.FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -288,6 +294,7 @@ end;
 
 procedure TDownloadDialog.BtnCancel(Sender: TObject);
 begin
+DF.ModalResult:=mrCancel;
 DF.Close;
 end;
 
@@ -299,11 +306,13 @@ if not okButton.Visible then begin // transfert in progress
   if DownloadDaemon.protocol=prHttp then begin
      http.Sock.onStatus:=nil;
      http.Abort;
+     http.Sock.AbortSocket;
   end;
   if DownloadDaemon.protocol=prFtp then begin
      ftp.Sock.onStatus:=nil;
      ftp.onStatus:=nil;
      ftp.Abort;
+     ftp.Sock.AbortSocket;
   end;
 end;
 end;
