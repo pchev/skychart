@@ -252,7 +252,10 @@ case c.projtype of              // AIPS memo 27
       xx:=ar-ac;
       if abs(xx)>pi then xx:=xx-sgn(xx)*pi2;
       yy:=pid2+de;
-      yy:=ln(tan((yy)/2))-ln(tan((pid2+dc)/2));
+      if yy=0 then
+        yy:=200*sgn(de)
+      else
+        yy:=ln(tan((yy)/2))-ln(tan((pid2+dc)/2));
     end;
     xx:=-xx;
     result:=true;
