@@ -2652,15 +2652,22 @@ case pla of
   34..35: pla:=8; // nep sat
   36: pla:=9;     // pluto sat
 end;
-dh:=0;
-if cfgsc.ShowHorizonDepression then dh:=rad2deg*cfgsc.ObsHorizonDepression;
-if dh=0 then dh:=-0.5667;
+if cfgsc.ShowHorizonDepression then
+  dh:=rad2deg*cfgsc.ObsHorizonDepression
+else begin
+  dh:=0;
+  Refraction(dh,false,cfgsc,2);
+  dh:=rad2deg*dh;
+end;
 case pla of
 1..9: ho:=dh;
-10 : ho:=dh-0.2667;
+10 : begin
+     Sun(jd0+(cfgsc.DT_UT/24),ra,de,dist,diam);
+     ho:=dh-diam/2/3600-0.04;
+     end;
 11: begin
     Moon(jd0+(cfgsc.DT_UT/24),ra,de,dist,dm5,diam,dm7,dm8);
-    ho:=(8.794/dist/3600)+dh*cfgsc.ObsRefractionCor-diam/2/3600-0.04;
+    ho:=(8.794/dist/3600)+dh-diam/2/3600-0.04;
     end;
 end;
 sinho:=sin(deg2rad*ho);
