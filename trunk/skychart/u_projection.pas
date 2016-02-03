@@ -1327,9 +1327,13 @@ procedure RiseSet(jd0,ar,de:double; var hr,ht,hs,azr,azs:double;var irc:integer;
 var hoo,hs0,chh0,hh0,m0,m1,m2,a0 : double;
     hsg,hl,h,dm,longref : double;
 begin
-hoo:=0;
-if c.ShowHorizonDepression then hoo:=rad2deg*c.ObsHorizonDepression;
-if hoo=0 then hoo:=-0.5667;
+if c.ShowHorizonDepression then
+  hoo:=rad2deg*c.ObsHorizonDepression
+else begin
+  hoo:=0;
+  Refraction(hoo,false,c,2);
+  hoo:=rad2deg*hoo;
+end;
 longref:=-c.timezone*15;
 hs0 := sidtim(jd0,-c.timezone,longref);
 chh0 :=(sin(deg2rad*hoo)-sin(deg2rad*c.ObsLatitude)*sin(de))/(cos(deg2rad*c.ObsLatitude)*cos(de)) ;
