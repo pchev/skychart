@@ -1331,7 +1331,7 @@ if c.ShowHorizonDepression then
   hoo:=rad2deg*c.ObsHorizonDepression
 else begin
   hoo:=0;
-  Refraction(hoo,false,c,2);
+  Refraction(hoo,false,c,1);
   hoo:=rad2deg*hoo;
 end;
 longref:=-c.timezone*15;

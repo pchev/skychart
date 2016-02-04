@@ -2634,7 +2634,7 @@ sina:=(sin(deg2rad*cfgsc.Obslatitude) * sin(de) + cos(deg2rad*cfgsc.Obslatitude)
 end;
 
 procedure TPlanet.PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ;var i: integer; cfgsc: Tconf_skychart);
-var hr,ht,hs,h1,h2,azr,azs,dist,q,diam,dh : double;
+var hr,ht,hs,h1,h2,azr,azs,dist,q,diam,dh,hmin,hhmax : double;
     ho,sinho,dt,hh,y1,y2,y3,x1,x2,x3,xmax,ymax,xmax2,ymax2,ymax0,ra,de,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13: double;
     frise,fset,ftransit: boolean;
     n: integer;
@@ -2656,18 +2656,20 @@ if cfgsc.ShowHorizonDepression then
   dh:=rad2deg*cfgsc.ObsHorizonDepression
 else begin
   dh:=0;
-  Refraction(dh,false,cfgsc,2);
+  Refraction(dh,false,cfgsc,1);
   dh:=rad2deg*dh;
 end;
 case pla of
 1..9: ho:=dh;
 10 : begin
      Sun(jd0+(cfgsc.DT_UT/24),ra,de,dist,diam);
-     ho:=dh-diam/2/3600-0.04;
+     ho:=dh-diam/2/3600;
+     if dh>-1 then ho:=ho-0.016;
      end;
 11: begin
     Moon(jd0+(cfgsc.DT_UT/24),ra,de,dist,dm5,diam,dm7,dm8);
-    ho:=(8.794/dist/3600)+dh-diam/2/3600-0.04;
+    ho:=(8.794/dist/3600)+dh-diam/2/3600;  // horizontal parallax
+    if dh>-1 then ho:=ho-0.016;
     end;
 end;
 sinho:=sin(deg2rad*ho);
@@ -2676,7 +2678,7 @@ hh:=1;
 PlanetAltitude(pla,dt,hh-1.0,cfgsc,x1,y1);
 if x1>pi then x1:=x1-pi2;
 y1:=y1-sinho;
-// loop for event
+// loop for event by hour
 while ( (hh < 25) and ( (fset=false) or (frise=false) or (ftransit=false) )) do begin
    PlanetAltitude(pla,dt,hh,cfgsc,x2,y2);
    if x2>pi then x2:=x2-pi2;
@@ -2720,11 +2722,67 @@ while ( (hh < 25) and ( (fset=false) or (frise=false) or (ftransit=false) )) do 
    x1 := x3;
    hh:=hh+2;
 end;
+// 1 minute loop for better rise/set precision
+hmin:=1/60;
+if frise then begin
+  hh:=hr-2*hmin;
+  hhmax:=hr+2*hmin;
+  PlanetAltitude(pla,dt,hh-hmin,cfgsc,x1,y1);
+  if x1>pi then x1:=x1-pi2;
+  y1:=y1-sinho;
+  frise:=false;
+  while ((hh < hhmax) and (frise=false)) do begin
+     PlanetAltitude(pla,dt,hh,cfgsc,x2,y2);
+     if x2>pi then x2:=x2-pi2;
+     y2:=y2-sinho;
+     PlanetAltitude(pla,dt,hh+hmin,cfgsc,x3,y3);
+     if x3>pi then x3:=x3-pi2;
+     y3:=y3-sinho;
+     int4(y1,y2,y3,n,h1,h2,xmax,ymax);
+     if (n=1) then begin
+        if (y1<0.0) then begin
+           hr := hh + h1*hmin;
+           frise := true;
+        end;
+     end;
+     y1 := y3;
+     x1 := x3;
+     hh:=hh+2*hmin;
+  end;
+  frise:=true;
+end;
+if fset then begin
+  hh:=hs-2*hmin;
+  hhmax:=hs+2*hmin;
+  PlanetAltitude(pla,dt,hh-hmin,cfgsc,x1,y1);
+  if x1>pi then x1:=x1-pi2;
+  y1:=y1-sinho;
+  fset:=false;
+  while ((hh < hhmax) and (fset=false)) do begin
+     PlanetAltitude(pla,dt,hh,cfgsc,x2,y2);
+     if x2>pi then x2:=x2-pi2;
+     y2:=y2-sinho;
+     PlanetAltitude(pla,dt,hh+hmin,cfgsc,x3,y3);
+     if x3>pi then x3:=x3-pi2;
+     y3:=y3-sinho;
+     int4(y1,y2,y3,n,h1,h2,xmax,ymax);
+     if (n=1) then begin
+        if (y1>=0.0) then begin
+           hs := hh + h1*hmin;
+           fset := true;
+        end;
+     end;
+     y1 := y3;
+     x1 := x3;
+     hh:=hh+2*hmin;
+  end;
+  fset:=true;
+end;
 // format result
 if (frise or fset) then begin    // rise (and/or) set and transit
    i:=0;
    if (frise) then begin       // rise
-        thr:=armtostr(hr);
+        thr:=artostr3(hr);
         jdr:=jd0+(hr-cfgsc.TimeZone)/24;
         case pla of
         1..9: Planet(pla,jdr+cfgsc.DT_UT/24,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
@@ -2747,7 +2805,7 @@ if (frise or fset) then begin    // rise (and/or) set and transit
         tazr:=na;
       end;
    if (fset) then begin       // set
-        ths:=armtostr(hs);
+        ths:=artostr3(hs);
         jds:=jd0+(hs-cfgsc.TimeZone)/24;
         case pla of
         1..9: Planet(pla,jds+cfgsc.DT_UT/24,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
@@ -2770,7 +2828,7 @@ if (frise or fset) then begin    // rise (and/or) set and transit
         tazs:=na;
       end;
    if (ftransit) then begin      // transit
-        tht:=armtostr(ht);
+        tht:=artostr3(ht);
         jdt:=jd0+(ht-cfgsc.TimeZone)/24;
         case pla of
         1..9: Planet(pla,jdt+cfgsc.DT_UT/24,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
