@@ -3295,9 +3295,9 @@ if (sc.cfgsc.Equinoxtype=2) then begin
             Azr:=rmod(Azr+pi,pi2);
             Azs:=rmod(Azs+pi,pi2);
          end;
-         thr:=armtostr(rmod(hr+24,24));
-         tht:=armtostr(rmod(ht+24,24));
-         ths:=armtostr(rmod(hs+24,24));
+         thr:=artostr3(rmod(hr+24,24));
+         tht:=artostr3(rmod(ht+24,24));
+         ths:=artostr3(rmod(hs+24,24));
          tazr:=demtostr(rad2deg*Azr);
          tazs:=demtostr(rad2deg*Azs);
     end;
