@@ -8703,6 +8703,7 @@ begin
          bmp:=TBGRABitmap.Create;
          bmp.LoadFromFile(iconpath+'i'+inttostr(i)+'.png');
          imagelist.Add(bmp.Bitmap,nil);
+         bmp.free;
        except
        end;
    end;
