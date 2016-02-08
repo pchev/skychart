@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  u_unzip, pu_observatory_db, IniFiles, LCLType,
+  u_unzip, pu_observatory_db, IniFiles, LCLType, BGRABitmap, BGRABitmapTypes,
   u_help, u_translation, u_constant, u_util, cu_database, Math, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FileUtil,
   Buttons, StdCtrls, ExtCtrls, cu_zoomimage, enhedits, ComCtrls, LResources,
@@ -166,6 +166,7 @@ type
     Procedure SetObsPos;
     Procedure ShowObsCoord;
     procedure CenterObs;
+    procedure LoadMap(fn:string);
     procedure ShowHorizon;
     procedure ShowObservatory;
     procedure ShowCountryList;
@@ -353,8 +354,6 @@ for i:=0 to countrylist.items.count-1 do
 end;
 
 procedure Tf_config_observatory.ShowObservatory;
-var img:TJPEGImage;
-    pict:TPicture;
 begin
 try
 pressure.value:=csc.obspressure;
@@ -373,16 +372,7 @@ Obsposy:=0;
 ZoomImage1.Xcentre:=Obsposx;
 ZoomImage1.Ycentre:=Obsposy;
 ZoomImage1.ZoomMax:=3;
-if fileexists(cmain.EarthMapFile)and(cmain.EarthMapFile<>ObsMapfile) then begin
-   ObsMapfile:=cmain.EarthMapFile;
-   img:=TJPEGImage.Create;
-   pict:=TPicture.Create;
-   img.LoadFromFile(SysToUTF8(ObsMapfile));
-   pict.Assign(img);
-   ZoomImage1.Picture:=pict;
-   img.Free;
-   pict.free;
-end else ZoomImage1.PictureChange(self);
+LoadMap(cmain.EarthMapFile);
 ZoomImage1.Zoom:=ZoomImage1.ZoomMin;
 SetScrollBar;
 Hscrollbar.Position:=ZoomImage1.SizeX div 2;
@@ -391,6 +381,23 @@ SetObsPos;
 CenterObs;
 except
 end;
+end;
+
+procedure Tf_config_observatory.LoadMap(fn:string);
+var bmp:TBGRABitmap;
+    coln:TBGRAPixel;
+begin
+if fileexists(fn)and(fn<>ObsMapfile) then begin
+   ObsMapfile:=fn;
+   bmp:=TBGRABitmap.Create(ObsMapfile);
+   if nightvision then begin
+     coln:=ColorToBGRA($101040,$c0);
+     bmp.FillRect(0,0,bmp.Width,bmp.Height,coln,dmDrawWithTransparency);
+   end;
+   ZoomImage1.Picture.Assign(bmp);
+   bmp.Free;
+end else
+   ZoomImage1.PictureChange(self);
 end;
 
 procedure Tf_config_observatory.ObsChange(Sender: TObject);
@@ -882,7 +889,7 @@ if opendialog1.execute
    cmain.EarthMapFile:=opendialog1.filename;
    ZoomImage1.Xcentre:=Obsposx;
    ZoomImage1.Ycentre:=Obsposy;
-   ZoomImage1.Picture.LoadFromFile(SysToUTF8(cmain.EarthMapFile));
+   LoadMap(cmain.EarthMapFile);
    SetScrollBar;
    Hscrollbar.Position:=ZoomImage1.SizeX div 2;
    Vscrollbar.Position:=ZoomImage1.SizeY div 2;
