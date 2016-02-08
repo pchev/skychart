@@ -510,6 +510,7 @@ var i: integer;
     lbl:string;
     crd: TLabelCoord;
 begin
+for i:=0 to FObjLabels.Count-1 do FObjLabels.Objects[i].Free;
 FObjLabels.Clear;
 FObjLabels.Sorted:=False;
 for i:=1 to StringGrid1.RowCount-1 do begin
@@ -678,6 +679,7 @@ begin
        mtConfirmation, [mbYes, mbNo], 0) = mrYes
        then SaveObsList;
   end;
+  for i:=0 to FObjLabels.Count-1 do FObjLabels.Objects[i].Free;
   FObjLabels.Free;
   FEmptyObjLabels.Free;
 end;
