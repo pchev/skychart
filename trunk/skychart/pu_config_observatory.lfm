@@ -1,11 +1,13 @@
 object f_configobservatory: Tf_configobservatory
   Left = 552
-  Height = 578
+  Height = 583
   Top = 124
   Width = 501
+  ActiveControl = f_config_observatory1.PageControl1
   BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
   Caption = 'Observatory'
-  ClientHeight = 578
+  ClientHeight = 583
   ClientWidth = 501
   OnClose = FormClose
   OnCreate = FormCreate
@@ -16,7 +18,7 @@ object f_configobservatory: Tf_configobservatory
   object Panel1: TPanel
     Left = 0
     Height = 50
-    Top = 528
+    Top = 533
     Width = 501
     Align = alBottom
     ClientHeight = 50
@@ -69,34 +71,28 @@ object f_configobservatory: Tf_configobservatory
     end
   end
   inline f_config_observatory1: Tf_config_observatory
-    Height = 528
+    Height = 533
     Width = 501
     Align = alClient
-    ClientHeight = 528
+    ClientHeight = 533
     ClientWidth = 501
     inherited MainPanel: TPanel
-      Height = 528
+      Height = 533
       Width = 501
-      ClientHeight = 528
+      ClientHeight = 533
       ClientWidth = 501
       inherited PageControl1: TPageControl
-        Height = 526
+        Height = 531
         Width = 499
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 522
-          ClientWidth = 495
-          inherited HScrollBar: TScrollBar
-            Height = 15
-          end
-          inherited VScrollBar: TScrollBar
-            Width = 15
-          end
+          ClientHeight = 525
+          ClientWidth = 493
         end
         inherited Page2: TTabSheet
-          ClientHeight = 522
-          ClientWidth = 495
+          ClientHeight = 525
+          ClientWidth = 493
         end
       end
     end

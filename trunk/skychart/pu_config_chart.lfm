@@ -3,6 +3,8 @@ object f_configchart: Tf_configchart
   Height = 578
   Top = 331
   Width = 503
+  ActiveControl = Button6
+  BorderStyle = bsSingle
   Caption = 'Charts'
   ClientHeight = 578
   ClientWidth = 503
@@ -82,24 +84,24 @@ object f_configchart: Tf_configchart
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 468
-          ClientWidth = 497
+          ClientHeight = 466
+          ClientWidth = 495
         end
         inherited Page2: TTabSheet
-          ClientHeight = 468
-          ClientWidth = 497
+          ClientHeight = 466
+          ClientWidth = 495
         end
         inherited Page3: TTabSheet
-          ClientHeight = 468
-          ClientWidth = 497
+          ClientHeight = 466
+          ClientWidth = 495
         end
         inherited Page4: TTabSheet
-          ClientHeight = 468
-          ClientWidth = 497
+          ClientHeight = 466
+          ClientWidth = 495
         end
         inherited Page5: TTabSheet
-          ClientHeight = 468
-          ClientWidth = 497
+          ClientHeight = 466
+          ClientWidth = 495
           inherited CheckBox13: TCheckBox
             Height = 23
             Width = 135
@@ -110,8 +112,8 @@ object f_configchart: Tf_configchart
           end
         end
         inherited Page6: TTabSheet
-          ClientHeight = 468
-          ClientWidth = 497
+          ClientHeight = 466
+          ClientWidth = 495
         end
       end
       inherited FOVPanel: TPanel

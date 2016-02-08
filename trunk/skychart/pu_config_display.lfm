@@ -3,6 +3,8 @@ object f_configdisplay: Tf_configdisplay
   Height = 602
   Top = 337
   Width = 502
+  ActiveControl = Button6
+  BorderStyle = bsSingle
   Caption = 'Display'
   ClientHeight = 602
   ClientWidth = 502
@@ -87,43 +89,43 @@ object f_configdisplay: Tf_configdisplay
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
+          ClientHeight = 544
+          ClientWidth = 494
         end
         inherited Page2: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
+          ClientHeight = 544
+          ClientWidth = 494
         end
         inherited Page3: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
+          ClientHeight = 544
+          ClientWidth = 494
         end
         inherited Page4: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
+          ClientHeight = 544
+          ClientWidth = 494
         end
         inherited Page5: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
+          ClientHeight = 544
+          ClientWidth = 494
         end
         inherited Page6: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
+          ClientHeight = 544
+          ClientWidth = 494
           inherited GroupBox5: TGroupBox
             ClientHeight = 280
           end
         end
         inherited Page7: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
+          ClientHeight = 544
+          ClientWidth = 494
         end
         inherited Page8: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
+          ClientHeight = 544
+          ClientWidth = 494
         end
         inherited Page9: TTabSheet
-          ClientHeight = 546
-          ClientWidth = 496
+          ClientHeight = 544
+          ClientWidth = 494
         end
       end
     end
