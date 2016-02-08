@@ -3,6 +3,8 @@ object f_configsolsys: Tf_configsolsys
   Height = 576
   Top = 124
   Width = 500
+  ActiveControl = Button4
+  BorderStyle = bsSingle
   Caption = 'Solar System'
   ClientHeight = 576
   ClientWidth = 500
@@ -86,8 +88,8 @@ object f_configsolsys: Tf_configsolsys
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 520
-          ClientWidth = 494
+          ClientHeight = 518
+          ClientWidth = 492
           inherited Label12: TLabel
             Width = 117
           end
@@ -108,19 +110,14 @@ object f_configsolsys: Tf_configsolsys
             Height = 23
             Width = 282
           end
-          inherited GroupBox2: TGroupBox
-            inherited ListBoxEph: TListBox
-              ScrollWidth = 106
-            end
-          end
         end
         inherited Page2: TTabSheet
-          ClientHeight = 520
-          ClientWidth = 494
+          ClientHeight = 518
+          ClientWidth = 492
         end
         inherited Page3: TTabSheet
-          ClientHeight = 520
-          ClientWidth = 494
+          ClientHeight = 518
+          ClientWidth = 492
           inherited ComPageControl: TPageControl
             ActivePage = nil
             TabIndex = -1
@@ -155,8 +152,8 @@ object f_configsolsys: Tf_configsolsys
           end
         end
         inherited Page4: TTabSheet
-          ClientHeight = 520
-          ClientWidth = 494
+          ClientHeight = 518
+          ClientWidth = 492
           inherited AstPageControl: TPageControl
             ActivePage = nil
             TabIndex = -1

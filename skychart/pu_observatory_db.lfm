@@ -3,6 +3,7 @@ object f_observatory_db: Tf_observatory_db
   Height = 291
   Top = 71
   Width = 488
+  ActiveControl = countrylist
   Caption = 'f_observatory_db'
   ClientHeight = 291
   ClientWidth = 488
@@ -21,15 +22,15 @@ object f_observatory_db: Tf_observatory_db
     TabOrder = 0
     object Label2: TLabel
       Left = 320
-      Height = 15
+      Height = 16
       Top = 85
-      Width = 18
+      Width = 17
       Caption = '+/-'
       ParentColor = False
     end
     object Label3: TLabel
       Left = 428
-      Height = 15
+      Height = 16
       Top = 85
       Width = 22
       Caption = 'Km.'
@@ -37,7 +38,7 @@ object f_observatory_db: Tf_observatory_db
     end
     object citylist: TComboBox
       Left = 8
-      Height = 27
+      Height = 28
       Top = 41
       Width = 233
       AutoComplete = True
@@ -59,7 +60,7 @@ object f_observatory_db: Tf_observatory_db
     end
     object countrylist: TComboBox
       Left = 8
-      Height = 29
+      Height = 30
       Top = 1
       Width = 234
       DropDownCount = 10
@@ -70,7 +71,7 @@ object f_observatory_db: Tf_observatory_db
     end
     object cityfilter: TEdit
       Left = 254
-      Height = 21
+      Height = 22
       Top = 41
       Width = 104
       OnKeyDown = cityfilterKeyDown
@@ -109,7 +110,7 @@ object f_observatory_db: Tf_observatory_db
     object LocCode: TEdit
       Cursor = crHandPoint
       Left = 133
-      Height = 21
+      Height = 22
       Top = 83
       Width = 108
       Color = clBtnFace
@@ -131,14 +132,14 @@ object f_observatory_db: Tf_observatory_db
     end
     object vicinityrangeEdit: TEdit
       Left = 345
-      Height = 21
+      Height = 22
       Top = 83
       Width = 56
       TabOrder = 6
     end
     object vicinityrange: TUpDown
       Left = 401
-      Height = 21
+      Height = 22
       Top = 83
       Width = 17
       Associate = vicinityrangeEdit
@@ -159,9 +160,9 @@ object f_observatory_db: Tf_observatory_db
     end
     object Label1: TLabel
       Left = 8
-      Height = 15
+      Height = 16
       Top = 85
-      Width = 111
+      Width = 108
       Caption = 'Designation Code'
       ParentColor = False
     end
@@ -171,23 +172,24 @@ object f_observatory_db: Tf_observatory_db
       Top = 114
       Width = 185
       Caption = 'Latitude'
-      ClientHeight = 52
+      ClientHeight = 51
       ClientWidth = 183
       TabOrder = 9
       object Label58: TLabel
         Left = 4
-        Height = 15
+        Height = 16
         Top = 4
         Width = 46
         Caption = 'Degree'
         ParentColor = False
       end
       object hemis: TComboBox
-        Left = 112
-        Height = 27
+        Left = 108
+        Height = 22
         Top = 19
-        Width = 65
+        Width = 70
         AutoCompleteText = [cbactSearchAscending]
+        AutoSize = False
         ItemHeight = 0
         ItemIndex = 0
         Items.Strings = (
@@ -200,7 +202,7 @@ object f_observatory_db: Tf_observatory_db
       end
       object latdeg: TLongEdit
         Left = 4
-        Height = 21
+        Height = 22
         Hint = '0..90'
         Top = 20
         Width = 33
@@ -213,8 +215,8 @@ object f_observatory_db: Tf_observatory_db
         OnExit = latdegChange
       end
       object latmin: TLongEdit
-        Left = 48
-        Height = 21
+        Left = 44
+        Height = 22
         Hint = '0..59'
         Top = 20
         Width = 25
@@ -227,8 +229,8 @@ object f_observatory_db: Tf_observatory_db
         OnExit = latdegChange
       end
       object latsec: TLongEdit
-        Left = 80
-        Height = 21
+        Left = 76
+        Height = 22
         Hint = '0..59'
         Top = 20
         Width = 25
@@ -247,23 +249,24 @@ object f_observatory_db: Tf_observatory_db
       Top = 114
       Width = 185
       Caption = 'Longitude'
-      ClientHeight = 52
+      ClientHeight = 51
       ClientWidth = 183
       TabOrder = 10
       object Label61: TLabel
         Left = 4
-        Height = 15
+        Height = 16
         Top = 4
         Width = 46
         Caption = 'Degree'
         ParentColor = False
       end
       object long: TComboBox
-        Left = 112
-        Height = 27
+        Left = 108
+        Height = 22
         Top = 19
-        Width = 65
+        Width = 70
         AutoCompleteText = [cbactSearchAscending]
+        AutoSize = False
         ItemHeight = 0
         ItemIndex = 1
         Items.Strings = (
@@ -276,7 +279,7 @@ object f_observatory_db: Tf_observatory_db
       end
       object longdeg: TLongEdit
         Left = 4
-        Height = 21
+        Height = 22
         Hint = '0..180'
         Top = 20
         Width = 33
@@ -289,8 +292,8 @@ object f_observatory_db: Tf_observatory_db
         OnExit = longdegChange
       end
       object longmin: TLongEdit
-        Left = 48
-        Height = 21
+        Left = 44
+        Height = 22
         Hint = '0..59'
         Top = 20
         Width = 25
@@ -303,8 +306,8 @@ object f_observatory_db: Tf_observatory_db
         OnExit = longdegChange
       end
       object longsec: TLongEdit
-        Left = 80
-        Height = 21
+        Left = 76
+        Height = 22
         Hint = '0..59'
         Top = 20
         Width = 25
@@ -342,7 +345,8 @@ object f_observatory_db: Tf_observatory_db
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True
-    left = 40
-    top = 144
+    QuickCancel = False
+    left = 24
+    top = 248
   end
 end

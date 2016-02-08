@@ -3,6 +3,8 @@ object f_configcatalog: Tf_configcatalog
   Height = 580
   Top = 124
   Width = 500
+  ActiveControl = Button4
+  BorderStyle = bsSingle
   Caption = 'Catalog'
   ClientHeight = 580
   ClientWidth = 500
@@ -89,32 +91,32 @@ object f_configcatalog: Tf_configcatalog
         ActivePage = nil
         TabIndex = -1
         inherited Page2: TTabSheet
-          ClientHeight = 470
-          ClientWidth = 494
+          ClientHeight = 468
+          ClientWidth = 492
         end
         inherited Page3: TTabSheet
-          ClientHeight = 470
-          ClientWidth = 494
+          ClientHeight = 468
+          ClientWidth = 492
         end
         inherited Page1: TTabSheet
-          ClientHeight = 470
-          ClientWidth = 494
+          ClientHeight = 468
+          ClientWidth = 492
         end
         inherited Page1a: TTabSheet
-          ClientHeight = 470
-          ClientWidth = 494
+          ClientHeight = 468
+          ClientWidth = 492
         end
         inherited Page1b: TTabSheet
-          ClientHeight = 470
-          ClientWidth = 494
+          ClientHeight = 468
+          ClientWidth = 492
         end
         inherited Page5: TTabSheet
-          ClientHeight = 470
-          ClientWidth = 494
+          ClientHeight = 468
+          ClientWidth = 492
         end
         inherited Page4: TTabSheet
-          ClientHeight = 470
-          ClientWidth = 494
+          ClientHeight = 468
+          ClientWidth = 492
           inherited Label88: TLabel
             Height = 16
             Width = 284

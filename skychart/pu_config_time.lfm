@@ -3,7 +3,9 @@ object f_configtime: Tf_configtime
   Height = 583
   Top = 124
   Width = 496
+  ActiveControl = Button7
   BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
   Caption = 'Date / Time'
   ClientHeight = 583
   ClientWidth = 496
@@ -88,8 +90,8 @@ object f_configtime: Tf_configtime
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 525
-          ClientWidth = 492
+          ClientHeight = 523
+          ClientWidth = 490
           inherited Panel9: TPanel
             inherited ADBC: TRadioGroup
               ClientHeight = 37
@@ -97,17 +99,12 @@ object f_configtime: Tf_configtime
           end
         end
         inherited Page2: TTabSheet
-          ClientHeight = 525
-          ClientWidth = 492
+          ClientHeight = 523
+          ClientWidth = 490
           inherited SimObj: TCheckListBox
             Data = {
               0C000000000000000000000000000000
             }
-          end
-          inherited RadioGroup1: TRadioGroup
-            inherited LongEdit1: TLongEdit
-              TabOrder = 5
-            end
           end
           inherited CheckGroup1: TCheckGroup
             Data = {
@@ -121,8 +118,8 @@ object f_configtime: Tf_configtime
           end
         end
         inherited Page3: TTabSheet
-          ClientHeight = 525
-          ClientWidth = 492
+          ClientHeight = 523
+          ClientWidth = 490
         end
       end
     end
