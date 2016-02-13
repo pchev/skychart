@@ -1277,6 +1277,7 @@ var
   ImageListCount: integer;
   //ImageListSize: integer;
   nightvision: boolean;
+  AllowAdmin: boolean;
   isWin98: boolean;
   isWOW64: boolean;
   isANSItmpdir: boolean;
