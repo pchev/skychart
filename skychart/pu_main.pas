@@ -4331,13 +4331,14 @@ begin
     end;
     cfgm.NewBackgroundImage:=false;
     RefreshAllChild(cfgm.updall);
-    if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do
+    if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
       if showast and (showast<>sc.cfgsc.ShowAsteroid) then begin
          RecomputeAsteroid;
       end;
-    if (csc<>nil)and f_calendar.Visible then begin
-       f_calendar.config.Assign(csc);
-       f_calendar.BtnRefreshClick(nil);
+      if f_calendar.Visible then begin
+         f_calendar.config.Assign(sc.cfgsc);
+         f_calendar.BtnRefreshClick(nil);
+      end;
     end;
     Autorefresh.enabled:=false;
     Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
