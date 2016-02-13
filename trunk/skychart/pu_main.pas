@@ -1996,6 +1996,7 @@ ForceClose:=false;
 Closing:=false;
 RestoreState:=false;
 SaveState:=wsNormal;
+AllowAdmin:=false;
 ForceConfig:='';
 ForceUserDir:='';
 ConfigAppdir:='';
@@ -2023,7 +2024,7 @@ isWin98:=false;
 isWOW64:=false;
 {$ifdef mswindows}
   step:='Windows spefic';
-  if IsUserAnAdmin then begin
+  if (not AllowAdmin) and IsUserAnAdmin then begin
     MessageDlg('Please, never run this program as administrator.',
               mtError, [mbAbort], 0);
     Halt;
@@ -8177,6 +8178,8 @@ for i:=0 to Params.Count-1 do begin
       if parm<>'' then begin
          ForceConfig:=SafeUTF8ToSys(trim(parm));
       end;
+   end else if cmd='--allowadmin' then begin
+      AllowAdmin:=true;
    end else if cmd='--userdir' then begin
       ForceUserDir:=SafeUTF8ToSys(trim(parm));
    end else if cmd='--datadir' then begin
