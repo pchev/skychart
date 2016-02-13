@@ -1737,6 +1737,7 @@ end;
 Procedure Tf_main.GetAppDir;
 var inif: TMemIniFile;
     buf: string;
+    testfile: TextFile;
 {$ifdef darwin}
     i: integer;
 {$endif}
@@ -1817,6 +1818,20 @@ if not directoryexists(privatedir) then begin
              +rsPleaseTryToC,
              mtError, [mbAbort], 0);
    Halt;
+end;
+
+// Test write access
+try
+assignfile(testfile,slash(PrivateDir)+'testfile.txt');
+rewrite(testfile);
+writeln(testfile,'testfile');
+CloseFile(testfile);
+DeleteFile(slash(PrivateDir)+'testfile.txt');
+except
+  MessageDlg('No write access on directory '+privatedir+crlf
+            +'Please change the access right on this directory, or delete it.',
+            mtError, [mbAbort], 0);
+  Halt;
 end;
 MPCDir:=slash(privatedir)+'MPC';
 if not directoryexists(MPCDir) then CreateDir(MPCDir);
@@ -2008,6 +2023,11 @@ isWin98:=false;
 isWOW64:=false;
 {$ifdef mswindows}
   step:='Windows spefic';
+  if IsUserAnAdmin then begin
+    MessageDlg('Please, never run this program as administrator.',
+              mtError, [mbAbort], 0);
+    Halt;
+  end;
   isWin98:=FindWin98;
   isWOW64:=FindWOW64;
   DisplayIs32bpp:=(ScreenBPP=32);
