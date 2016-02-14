@@ -55,7 +55,8 @@
             <Verbosity>
               <ShowHints Value="False"/>
             </Verbosity>
-            <CustomOptions Value="-CF64"/>
+            <CustomOptions Value="-CF64
+-dWithUpdateMenu"/>
           </Other>
         </CompilerOptions>
       </Item2>
