@@ -1736,7 +1736,7 @@ end;
 
 Procedure Tf_main.GetAppDir;
 var inif: TMemIniFile;
-    buf: string;
+    buf,testfn: string;
     testfile: TextFile;
 {$ifdef darwin}
     i: integer;
@@ -1822,11 +1822,13 @@ end;
 
 // Test write access
 try
-assignfile(testfile,slash(PrivateDir)+'testfile.txt');
+testfn:=tracefile;
+if testfn='' then testfn:='testfile.txt';
+assignfile(testfile,slash(PrivateDir)+testfn);
 rewrite(testfile);
 writeln(testfile,'testfile');
 CloseFile(testfile);
-DeleteFile(slash(PrivateDir)+'testfile.txt');
+DeleteFile(slash(PrivateDir)+testfn);
 except
   MessageDlg('No write access on directory '+privatedir+crlf
             +'Please change the access right on this directory, or delete it.',
