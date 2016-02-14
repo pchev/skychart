@@ -2055,6 +2055,11 @@ CanShowScrollbar:=true;
 {$ifdef darwin}
   step:='Darwin specific';
 {$endif}
+{$ifdef WithUpdateMenu}
+  MenuUpdSoft.Visible:=true;
+{$else}
+  MenuUpdSoft.Visible:=false;
+{$endif}
 step:='Create config';
 if VerboseMsg then
  debugln(step);
