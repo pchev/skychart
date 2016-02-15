@@ -1831,6 +1831,8 @@ CloseFile(testfile);
 DeleteFile(slash(PrivateDir)+testfn);
 except
   MessageDlg('No write access on directory '+privatedir+crlf
+            +'This is probably because you previously run Skychart with administrator right.'+crlf
+            +'You must never run Skychart with administrator right.'+crlf
             +'Please change the access right on this directory, or delete it.',
             mtError, [mbAbort], 0);
   Halt;
@@ -2010,7 +2012,6 @@ ForceClose:=false;
 Closing:=false;
 RestoreState:=false;
 SaveState:=wsNormal;
-AllowAdmin:=false;
 ForceConfig:='';
 ForceUserDir:='';
 ConfigAppdir:='';
@@ -2031,18 +2032,12 @@ if VerboseMsg then
 Application.UpdateFormatSettings := False;
 {$endif}
 ImageListCount:=ImageNormal.Count;
-//ImageListSize:=ImageNormal.Width;
 MaxThreadCount:=GetThreadCount;
 DisplayIs32bpp:=true;
 isWin98:=false;
 isWOW64:=false;
 {$ifdef mswindows}
   step:='Windows spefic';
-  if (not AllowAdmin) and IsUserAnAdmin then begin
-    MessageDlg('Please, never run this program as administrator.',
-              mtError, [mbAbort], 0);
-    Halt;
-  end;
   isWin98:=FindWin98;
   isWOW64:=FindWOW64;
   DisplayIs32bpp:=(ScreenBPP=32);
@@ -8203,8 +8198,6 @@ for i:=0 to Params.Count-1 do begin
       if parm<>'' then begin
          ForceConfig:=SafeUTF8ToSys(trim(parm));
       end;
-   end else if cmd='--allowadmin' then begin
-      AllowAdmin:=true;
    end else if cmd='--userdir' then begin
       ForceUserDir:=SafeUTF8ToSys(trim(parm));
    end else if cmd='--datadir' then begin
