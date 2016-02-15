@@ -1985,6 +1985,7 @@ begin
   UScaleDPI.RunDPI:=Screen.PixelsPerInch;
   {$else}
   rl:=Canvas.TextWidth(teststr);
+  if abs(rl-designlen)<20 then rl:=designlen;
   UScaleDPI.DesignDPI:=designlen;
   UScaleDPI.RunDPI:=rl;
   {$endif}
