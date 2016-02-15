@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses Clipbrd, Printers, FileCtrl,  
+uses Clipbrd, Printers, FileCtrl, UScaleDPI,
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Grids, ExtCtrls, StdCtrls, Buttons, Menus, ExtDlgs, LResources, u_param,
   downloaddialog, cu_voreader, u_util2;
@@ -96,6 +96,7 @@ type
     Shape8: TShape;
     Shape9: TShape;
     RefreshTimer: TTimer;
+    procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -920,6 +921,11 @@ end;
 procedure TDetailForm.FormResize(Sender: TObject);
 begin
  if started then RefreshTimer.Enabled:=true;
+end;
+
+procedure TDetailForm.FormCreate(Sender: TObject);
+begin
+   ScaleDPI(Self);
 end;
 
 procedure TDetailForm.SetOnlineButtons;

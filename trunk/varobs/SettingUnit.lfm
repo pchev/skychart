@@ -9,11 +9,10 @@ object OptForm: TOptForm
   Caption = 'Options'
   ClientHeight = 366
   ClientWidth = 447
-  Font.Height = -11
-  Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '1.2.0.3'
+  LCLVersion = '1.6.0.3'
+  Visible = False
   object BitBtn1: TBitBtn
     Left = 176
     Height = 25
@@ -43,8 +42,8 @@ object OptForm: TOptForm
         Top = 10
         Width = 385
         Caption = 'Observation Entry'
-        ClientHeight = 216
-        ClientWidth = 381
+        ClientHeight = 217
+        ClientWidth = 383
         TabOrder = 0
         object Panel2: TPanel
           Left = 150
@@ -74,7 +73,7 @@ object OptForm: TOptForm
           end
           object FileNameEdit8: TFileNameEdit
             Left = 16
-            Height = 22
+            Height = 20
             Top = 109
             Width = 169
             DialogOptions = []
@@ -116,8 +115,8 @@ object OptForm: TOptForm
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
-            ClientHeight = 72
-            ClientWidth = 200
+            ClientHeight = 74
+            ClientWidth = 202
             ItemIndex = 1
             Items.Strings = (
               'Append data to unique file'
@@ -140,8 +139,8 @@ object OptForm: TOptForm
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 40
-            ClientWidth = 200
+            ClientHeight = 41
+            ClientWidth = 202
             Columns = 2
             ItemIndex = 0
             Items.Strings = (
@@ -152,7 +151,7 @@ object OptForm: TOptForm
           end
           object FileNameEdit3: TFileNameEdit
             Left = 6
-            Height = 22
+            Height = 20
             Top = 73
             Width = 176
             DialogOptions = []
@@ -166,7 +165,7 @@ object OptForm: TOptForm
         end
         object Label16: TLabel
           Left = 6
-          Height = 31
+          Height = 28
           Top = 112
           Width = 53
           Caption = 'Observer'#13#10'Initials :'
@@ -182,9 +181,9 @@ object OptForm: TOptForm
         end
         object Label17: TLabel
           Left = 6
-          Height = 31
+          Height = 28
           Top = 168
-          Width = 83
+          Width = 82
           Caption = 'negative West '#13#10'of Greenwich'
           ParentColor = False
         end
@@ -202,8 +201,8 @@ object OptForm: TOptForm
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 95
-          ClientWidth = 130
+          ClientHeight = 97
+          ClientWidth = 132
           ItemIndex = 0
           Items.Strings = (
             'Internal facility'
@@ -215,7 +214,7 @@ object OptForm: TOptForm
         end
         object Edit4: TEdit
           Left = 89
-          Height = 22
+          Height = 20
           Top = 112
           Width = 53
           TabOrder = 3
@@ -242,7 +241,7 @@ object OptForm: TOptForm
         Width = 249
         Caption = 'VSNET format'
         ClientHeight = 192
-        ClientWidth = 245
+        ClientWidth = 247
         TabOrder = 0
         Visible = False
         object Label9: TLabel
@@ -284,7 +283,7 @@ object OptForm: TOptForm
         Width = 249
         Caption = 'AFOEV base folder'
         ClientHeight = 193
-        ClientWidth = 245
+        ClientWidth = 247
         TabOrder = 1
         Visible = False
         object Label4: TLabel
@@ -316,7 +315,7 @@ object OptForm: TOptForm
         Width = 249
         Caption = 'Other format fields description'
         ClientHeight = 191
-        ClientWidth = 245
+        ClientWidth = 247
         TabOrder = 2
         Visible = False
         object Label1: TLabel
@@ -389,8 +388,8 @@ object OptForm: TOptForm
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 26
-          ClientWidth = 221
+          ClientHeight = 14
+          ClientWidth = 223
           Columns = 2
           ItemIndex = 1
           Items.Strings = (
@@ -437,8 +436,8 @@ object OptForm: TOptForm
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 33
-          ClientWidth = 221
+          ClientHeight = 21
+          ClientWidth = 223
           Columns = 2
           ItemIndex = 0
           Items.Strings = (
@@ -469,7 +468,7 @@ object OptForm: TOptForm
         Width = 249
         Caption = 'AAVSO SUM format'
         ClientHeight = 193
-        ClientWidth = 245
+        ClientWidth = 247
         TabOrder = 3
         Visible = False
         object Label19: TLabel
@@ -510,7 +509,7 @@ object OptForm: TOptForm
         Width = 249
         Caption = 'AAVSO Visual'
         ClientHeight = 193
-        ClientWidth = 245
+        ClientWidth = 247
         TabOrder = 5
         Visible = False
         object Label20: TLabel
@@ -559,8 +558,8 @@ object OptForm: TOptForm
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 193
-        ClientWidth = 133
+        ClientHeight = 194
+        ClientWidth = 135
         ItemIndex = 0
         Items.Strings = (
           'AAVSO Visual'
@@ -593,8 +592,8 @@ object OptForm: TOptForm
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 112
-        ClientWidth = 285
+        ClientHeight = 113
+        ClientWidth = 287
         ItemIndex = 0
         Items.Strings = (
           'AAVSO Quick Look'
@@ -613,8 +612,8 @@ object OptForm: TOptForm
         Top = 122
         Width = 385
         Caption = 'Cartes du Ciel / Sky Charts interface'
-        ClientHeight = 96
-        ClientWidth = 381
+        ClientHeight = 97
+        ClientWidth = 383
         TabOrder = 0
         object Label5: TLabel
           Left = 14
@@ -665,8 +664,8 @@ object OptForm: TOptForm
         Top = 10
         Width = 385
         Caption = 'AAVSO Chart'
-        ClientHeight = 90
-        ClientWidth = 381
+        ClientHeight = 91
+        ClientWidth = 383
         TabOrder = 1
         object DirectoryEdit2: TDirectoryEdit
           Left = 12
@@ -693,8 +692,8 @@ object OptForm: TOptForm
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 44
-          ClientWidth = 344
+          ClientHeight = 46
+          ClientWidth = 346
           Columns = 2
           Items.Strings = (
             'Online charts'

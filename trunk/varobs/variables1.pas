@@ -32,7 +32,7 @@ uses
   {$ifdef unix}
     unix,baseunix,unixutil,
   {$endif}
-  Clipbrd, LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Clipbrd, LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, UScaleDPI,
   StdCtrls, ComCtrls, Buttons,IniFiles, Printers, fileutil, cu_cdcclient, u_util2,
   Menus, ExtCtrls, LResources, PrintersDlgs, Grids, EditBtn, jdcalendar, u_param,
   UniqueInstance;
@@ -119,6 +119,7 @@ type
     UniqueInstance1: TCdCUniqueInstance;
     procedure OtherInstance(Sender : TObject; ParamCount: Integer; Parameters: array of String);
     procedure InstanceRunning(Sender : TObject);
+    procedure ScaleMainForm;
     Procedure GetAppDir;
     Procedure DrawSkyChart;
     procedure SkychartPurge;
@@ -426,7 +427,7 @@ varinfo.i[11]:=curvtype;
 varform.Grid1.Objects[0,r]:=varinfo;
 inc(r);
 until eof(f);
-if aavsodesign then varform.Grid1.ColWidths[1]:=60
+if aavsodesign then varform.Grid1.ColWidths[1]:=120
                else varform.Grid1.ColWidths[1]:=0;
 finally
 closefile(f);
@@ -554,6 +555,24 @@ end;
 ConstDir:=slash(appdir)+slash('data')+slash('varobs');
 end;
 
+procedure TVarForm.ScaleMainForm;
+var rl: integer;
+const teststr = 'The Lazy Fox Jumps';
+      designlen = 120;
+begin
+  UScaleDPI.UseScaling:=true;
+  {$ifdef SCALE_BY_DPI_ONLY}
+  UScaleDPI.DesignDPI:=96;
+  UScaleDPI.RunDPI:=Screen.PixelsPerInch;
+  {$else}
+  rl:=Canvas.TextWidth(teststr);
+  if abs(rl-designlen)<20 then rl:=designlen;
+  UScaleDPI.DesignDPI:=designlen;
+  UScaleDPI.RunDPI:=rl;
+  {$endif}
+  ScaleDPI(Self);
+end;
+
 procedure TVarForm.FormCreate(Sender: TObject);
 begin
 {$ifndef darwin}
@@ -576,11 +595,12 @@ DefaultFormatSettings.TimeSeparator:=':';
 DefaultFormatSettings.ShortdateFormat:='yyyy-mm-dd';
 OpenFileCmd:=DefaultOpenFileCMD;
 Grid1.ColWidths[0]:=60;
-Grid1.ColWidths[1]:=60;
+Grid1.ColWidths[1]:=120;
 Grid1.ColWidths[2]:=45;
 Grid1.ColWidths[3]:=40;
 Grid1.ColWidths[4]:=40;
 Grid1.ColWidths[5]:=30;
+ScaleMainForm;
 end;
 
 procedure TVarForm.Exit1Click(Sender: TObject);

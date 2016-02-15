@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
+  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, UScaleDPI,
   Dialogs, StdCtrls, LResources, u_param, ExtCtrls, u_util2;
 
 type
@@ -54,6 +54,7 @@ type
     OnlinePanel: TPanel;
     procedure Button2Click(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ListBox1Click(Sender: TObject);
   private
@@ -106,6 +107,11 @@ begin
   labelfov.Caption:=aavsochartfov[ComboBox1.ItemIndex];
   labelmag.Caption:=aavsochartmag[ComboBox1.ItemIndex];
   labelnorth.Caption:=aavsochartnorth[ComboBox1.ItemIndex];
+end;
+
+procedure Tchartform.FormCreate(Sender: TObject);
+begin
+  ScaleDPI(Self);
 end;
 
 procedure Tchartform.Button2Click(Sender: TObject);

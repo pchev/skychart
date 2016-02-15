@@ -10,6 +10,9 @@
       <MainUnit Value="0"/>
       <Title Value="varobs"/>
       <UseXPManifest Value="True"/>
+      <XPManifest>
+        <DpiAware Value="True"/>
+      </XPManifest>
       <Icon Value="0"/>
     </General>
     <VersionInfo>
@@ -50,11 +53,10 @@
         <MinVersion Valid="True"/>
       </Item5>
     </RequiredPackages>
-    <Units Count="9">
+    <Units Count="10">
       <Unit0>
         <Filename Value="varobs.lpr"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="varobs"/>
       </Unit0>
       <Unit1>
         <Filename Value="detail1.pas"/>
@@ -62,7 +64,6 @@
         <ComponentName Value="DetailForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="detail1"/>
       </Unit1>
       <Unit2>
         <Filename Value="ObsUnit.pas"/>
@@ -70,7 +71,6 @@
         <ComponentName Value="ObsForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="ObsUnit"/>
       </Unit2>
       <Unit3>
         <Filename Value="variables1.pas"/>
@@ -78,7 +78,6 @@
         <ComponentName Value="VarForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="variables1"/>
       </Unit3>
       <Unit4>
         <Filename Value="aavsochart.pas"/>
@@ -86,7 +85,6 @@
         <ComponentName Value="chartform"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="aavsochart"/>
       </Unit4>
       <Unit5>
         <Filename Value="SettingUnit.pas"/>
@@ -94,7 +92,6 @@
         <ComponentName Value="OptForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="SettingUnit"/>
       </Unit5>
       <Unit6>
         <Filename Value="splashunit.pas"/>
@@ -102,18 +99,20 @@
         <ComponentName Value="splash"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="splashunit"/>
       </Unit6>
       <Unit7>
         <Filename Value="u_param.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="u_param"/>
       </Unit7>
       <Unit8>
         <Filename Value="u_util2.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="u_util2"/>
       </Unit8>
+      <Unit9>
+        <Filename Value="uscaledpi.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UScaleDPI"/>
+      </Unit9>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -143,11 +142,7 @@
       <Verbosity>
         <ShowHints Value="False"/>
       </Verbosity>
-      <CompilerMessages>
-        <UseMsgFile Value="True"/>
-      </CompilerMessages>
       <CustomOptions Value="-dUseCThreads"/>
-      <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>
 </CONFIG>

@@ -7,8 +7,6 @@ object Form1: TForm1
   Caption = 'AAVSO Bulletin'
   ClientHeight = 406
   ClientWidth = 420
-  Font.Height = -11
-  Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poDefaultPosOnly
@@ -56,8 +54,6 @@ object Form1: TForm1
     Caption = 'http://www.aavso.org/aavso-bulletin'
     Color = clBtnFace
     Font.Color = clBlue
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
     ParentColor = False
     ParentFont = False
     Transparent = False
