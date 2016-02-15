@@ -39,7 +39,7 @@ uses
   pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, pu_obslist, fu_script, pu_scriptengine,
   u_constant, u_util, UScaleDPI, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
-  StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
+  StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types, Printers,
   ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame, BGRABitmap,
   LResources, uniqueinstance, enhedits, downloaddialog, LazHelpHTML, ButtonPanel;
 
@@ -4663,7 +4663,10 @@ cfgm.Paper:=2;
 cfgm.PrinterResolution:=300;
 cfgm.PrintColor:=0;
 cfgm.PrintLandscape:=true;
-cfgm.PrintMethod:=0;
+if Printer.PrinterIndex>=0 then
+ cfgm.PrintMethod:=0
+else
+ cfgm.PrintMethod:=1;
 cfgm.PrintCmd1:=DefaultPrintCmd1;
 cfgm.PrintCmd2:=DefaultPrintCmd2;
 cfgm.PrintTmpPath:=expandfilename(TempDir);

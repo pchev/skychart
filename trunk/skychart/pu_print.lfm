@@ -1,11 +1,11 @@
 object f_print: Tf_print
   Left = 513
-  Height = 372
+  Height = 403
   Top = 49
   Width = 403
   ActiveControl = Setup
   Caption = 'Print Chart'
-  ClientHeight = 372
+  ClientHeight = 403
   ClientWidth = 403
   OnCreate = FormCreate
   OnShow = FormShow
@@ -14,7 +14,7 @@ object f_print: Tf_print
   Visible = False
   object PrinterInfo: TLabel
     Left = 9
-    Height = 15
+    Height = 16
     Top = 14
     Width = 65
     Caption = 'PrinterInfo'
@@ -22,7 +22,7 @@ object f_print: Tf_print
   end
   object prtcolor: TRadioGroup
     Left = 9
-    Height = 82
+    Height = 106
     Top = 96
     Width = 215
     AutoFill = True
@@ -35,7 +35,7 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 66
+    ClientHeight = 89
     ClientWidth = 213
     ItemIndex = 0
     Items.Strings = (
@@ -48,7 +48,7 @@ object f_print: Tf_print
   end
   object prtorient: TRadioGroup
     Left = 240
-    Height = 82
+    Height = 104
     Top = 96
     Width = 149
     AutoFill = True
@@ -61,7 +61,7 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 66
+    ClientHeight = 87
     ClientWidth = 147
     Items.Strings = (
       'Portrait'
@@ -73,7 +73,7 @@ object f_print: Tf_print
   object Print: TButton
     Left = 224
     Height = 25
-    Top = 328
+    Top = 360
     Width = 80
     BorderSpacing.InnerBorder = 4
     Caption = 'Print'
@@ -84,7 +84,7 @@ object f_print: Tf_print
   object Cancel: TButton
     Left = 312
     Height = 25
-    Top = 328
+    Top = 360
     Width = 80
     BorderSpacing.InnerBorder = 4
     Cancel = True
@@ -104,48 +104,48 @@ object f_print: Tf_print
   end
   object GroupBox1: TGroupBox
     Left = 9
-    Height = 90
-    Top = 192
+    Height = 104
+    Top = 208
     Width = 380
     Caption = 'Page Margin in millimeter'
-    ClientHeight = 74
+    ClientHeight = 87
     ClientWidth = 378
     TabOrder = 5
     object Label1: TLabel
       Left = 5
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 23
+      Width = 26
       Caption = 'Left'
       ParentColor = False
     end
     object Label2: TLabel
       Left = 61
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 32
+      Width = 33
       Caption = 'Right'
       ParentColor = False
     end
     object Label3: TLabel
       Left = 117
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 21
+      Width = 22
       Caption = 'Top'
       ParentColor = False
     end
     object Label4: TLabel
       Left = 173
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 45
+      Width = 47
       Caption = 'Bottom'
       ParentColor = False
     end
     object LongEdit1: TLongEdit
       Left = 5
-      Height = 21
+      Height = 22
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -158,7 +158,7 @@ object f_print: Tf_print
     end
     object LongEdit2: TLongEdit
       Left = 61
-      Height = 21
+      Height = 22
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -171,7 +171,7 @@ object f_print: Tf_print
     end
     object LongEdit3: TLongEdit
       Left = 117
-      Height = 21
+      Height = 22
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -184,7 +184,7 @@ object f_print: Tf_print
     end
     object LongEdit4: TLongEdit
       Left = 173
-      Height = 21
+      Height = 22
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -219,7 +219,7 @@ object f_print: Tf_print
   object Button3: TButton
     Left = 48
     Height = 25
-    Top = 328
+    Top = 360
     Width = 80
     Caption = 'Help'
     OnClick = Button3Click
@@ -227,7 +227,7 @@ object f_print: Tf_print
   end
   object Edit1: TEdit
     Left = 9
-    Height = 21
+    Height = 22
     Top = 64
     Width = 380
     OnChange = Edit1Change
@@ -236,22 +236,22 @@ object f_print: Tf_print
   object CopyPanel: TPanel
     Left = 9
     Height = 30
-    Top = 288
+    Top = 320
     Width = 380
     ClientHeight = 30
     ClientWidth = 380
     TabOrder = 6
     object Label6: TLabel
       Left = 7
-      Height = 15
+      Height = 16
       Top = 5
-      Width = 114
+      Width = 110
       Caption = 'Number of copies '
       ParentColor = False
     end
     object copies: TLongEdit
       Left = 153
-      Height = 21
+      Height = 22
       Hint = '1..999'
       Top = 2
       Width = 40
@@ -267,7 +267,7 @@ object f_print: Tf_print
   object Preview: TButton
     Left = 136
     Height = 25
-    Top = 328
+    Top = 360
     Width = 80
     Caption = 'Preview'
     ModalResult = 6
@@ -275,9 +275,9 @@ object f_print: Tf_print
   end
   object CheckBox1: TCheckBox
     Left = 9
-    Height = 24
+    Height = 22
     Top = 37
-    Width = 104
+    Width = 100
     Caption = 'Print header'
     Checked = True
     State = cbChecked
@@ -285,9 +285,9 @@ object f_print: Tf_print
   end
   object CheckBox2: TCheckBox
     Left = 231
-    Height = 24
+    Height = 22
     Top = 37
-    Width = 97
+    Width = 96
     Caption = 'Print footer'
     Checked = True
     State = cbChecked
