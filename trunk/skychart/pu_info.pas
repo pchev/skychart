@@ -308,6 +308,7 @@ if Fnightvision<>nightvision then begin
    Fnightvision:=nightvision;
 end;
 {$endif}
+Button6.Visible:=(Printer.PrinterIndex>=0);
 case Activepage of
 0: begin
    panel1.visible:=true;

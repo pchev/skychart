@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 }
 interface
 
-uses Math, u_util, u_translation, UScaleDPI,
+uses Math, u_util, u_translation, UScaleDPI, Printers,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, Buttons, ComCtrls, cu_zoomimage,
   LResources;
@@ -51,6 +51,7 @@ type
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure HScrollBarChange(Sender: TObject);
     procedure VScrollBarChange(Sender: TObject);
   private
@@ -171,6 +172,11 @@ if visible then begin
    Image1.Draw;
    SetScrollBar;
 end;   
+end;
+
+procedure Tf_image.FormShow(Sender: TObject);
+begin
+  if Printer.PrinterIndex<0 then ButtonPrint.Visible:=false;
 end;
 
 Procedure Tf_image.SetScrollBar;
