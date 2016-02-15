@@ -657,6 +657,7 @@ const
   DefaultFontSymbol = 'adobe-symbol';
   // available in core XFree86 75 and 100 dpi fonts
   DefaultFontSize = 10;
+  SysFontSize = 10;
   DefaultHomeDir = '~';
   DefaultPrivateDir = '~/.skychart';
   Defaultconfigfile = '~/.skychart/skychart.ini';
@@ -676,6 +677,7 @@ const
   DefaultFontSymbol = 'adobe-symbol';
   // available in core XFree86 75 and 100 dpi fonts
   DefaultFontSize = 10;
+  SysFontSize = 10;
   DefaultHomeDir = '~';
   DefaultPrivateDir = '~/.skychart';
   Defaultconfigfile = '~/.skychart/skychart.ini';
@@ -694,6 +696,7 @@ const
   DefaultFontFixed = 'Courier';
   DefaultFontSymbol = 'symbol';
   DefaultFontSize = 10;
+  SysFontSize = 13;
   DefaultHomeDir = '~';
   DefaultPrivateDir = '~/Library/Application Support/skychart';
   Defaultconfigfile = '~/Library/Application Support/skychart/skychart.ini';
@@ -712,6 +715,7 @@ const
   DefaultFontFixed = 'Courier';
   DefaultFontSymbol = 'Symbol';
   DefaultFontSize = 10;
+  SysFontSize = 8;
   DefaultHomeDir = '';
   DefaultPrivateDir = 'Skychart';
   Defaultconfigfile = 'skychart.ini';

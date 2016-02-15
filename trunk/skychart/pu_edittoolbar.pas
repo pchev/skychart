@@ -587,7 +587,7 @@ if (numeditbar>0) and  (numaction>0) then begin
           end;
           if editControl[n].Name='ToolBarFOV' then begin
             if editbar[p].Height>editbar[p].Width then begin
-                editControl[n].Font.Size:=DoScaleX(9);
+                editControl[n].Font.Size:=DoScaleX(SysFontSize-2);
                 for t:=0 to tpanel(editControl[n]).ControlCount-1 do begin
                   TSpeedButton(tpanel(editControl[n]).Controls[t]).Width:=editbar[p].Width;
                   TSpeedButton(tpanel(editControl[n]).Controls[t]).Height:=editbar[p].Width;
@@ -596,7 +596,7 @@ if (numeditbar>0) and  (numaction>0) then begin
                 h:=10*(editbar[p].Width);
                 editControl[n].SetBounds(editControl[n].Left,editControl[n].Top,w,h);
             end else begin
-                editControl[n].Font.Size:=DoScaleX(9);
+                editControl[n].Font.Size:=DoScaleX(SysFontSize-2);
                 for t:=0 to tpanel(editControl[n]).ControlCount-1 do begin
                   TSpeedButton(tpanel(editControl[n]).Controls[t]).Width:=editbar[p].Height;
                   TSpeedButton(tpanel(editControl[n]).Controls[t]).Height:=editbar[p].Height;
