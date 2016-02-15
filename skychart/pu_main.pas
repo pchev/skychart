@@ -4678,7 +4678,7 @@ cfgm.PrintLandscape:=true;
 if Printer.PrinterIndex>=0 then
  cfgm.PrintMethod:=0
 else
- cfgm.PrintMethod:=1;
+ cfgm.PrintMethod:=2;
 cfgm.PrintCmd1:=DefaultPrintCmd1;
 cfgm.PrintCmd2:=DefaultPrintCmd2;
 cfgm.PrintTmpPath:=expandfilename(TempDir);
@@ -5860,6 +5860,8 @@ cfgm.PrinterResolution:=ReadInteger(section,'PrinterResolution',cfgm.PrinterReso
 cfgm.PrintColor:=ReadInteger(section,'PrintColor',cfgm.PrintColor);
 cfgm.PrintLandscape:=ReadBool(section,'PrintLandscape',cfgm.PrintLandscape);
 cfgm.PrintMethod:=ReadInteger(section,'PrintMethod',cfgm.PrintMethod);
+if (cfgm.PrintMethod=0)and(Printer.PrinterIndex<0) then
+    cfgm.PrintMethod:=2;
 cfgm.PrintCmd1:=ReadString(section,'PrintCmd1',cfgm.PrintCmd1);
 cfgm.PrintCmd2:=ReadString(section,'PrintCmd2',cfgm.PrintCmd2);
 cfgm.PrintTmpPath:=ReadString(section,'PrintTmpPath',cfgm.PrintTmpPath);;
