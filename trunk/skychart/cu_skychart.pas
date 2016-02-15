@@ -4751,7 +4751,7 @@ f1.ClientHeight:=b1.top+b1.Height+8;
 e1.Text:=txt;
 f1.BorderStyle:=bsDialog;
 f1.Caption:=rsEditLabel;
-ScaleDPI(f1,96);
+ScaleDPI(f1);
 formpos(f1,x,y);
 if f1.ShowModal=mrOK then begin
    txt:=e1.Text;
@@ -4796,7 +4796,7 @@ ra:=NormRA(ra);
 WindowXY(x1,y1,x,y,cfgsc);
 fontnum:=2;
 if f_addlabel=nil then f_addlabel:=Tf_addlabel.Create(application);
-formpos(f_addlabel,trunc(x),trunc(y));
+formpos(f_addlabel,mouse.cursorpos.x,mouse.cursorpos.y);
 f_addlabel.ActiveControl:=f_addlabel.Edit1;
 if f_addlabel.ShowModal=mrOK then begin
    txt:=f_addlabel.txt;

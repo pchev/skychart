@@ -212,7 +212,7 @@ end;
 
 procedure Tf_detail.FormCreate(Sender: TObject);
 begin
-ScaleDPI(Self,96);
+ScaleDPI(Self);
 FTextOnly:=false;
 SetLang;
 end;
@@ -232,6 +232,7 @@ begin
     sstream:=TStringStream.Create(value);
     NewHTML.LoadFromStream(sstream);
     sstream.Free;
+    IpHtmlPanel1.DefaultFontSize:=DoScaleX(12);
     IpHtmlPanel1.SetHtml(NewHTML);
     if FSameposition then begin
       IpHtmlPanel1.Update;

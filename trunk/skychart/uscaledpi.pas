@@ -4,32 +4,40 @@ unit UScaleDPI;
 
 interface
 
-uses
-  Forms, Graphics, Controls, ComCtrls, Grids;
+uses  cu_radec,
+  Forms, Graphics, Controls, ComCtrls, Grids, LCLType;
 
-procedure HighDPI(FromDPI: Integer);
-procedure ScaleDPI(Control: TControl; FromDPI: Integer);
-procedure ScaleImageList(ImgList: TImageList; FromDPI: Integer);
-function DoScaleX(Size: Integer; FromDPI: Integer): integer;
-function DoScaleY(Size: Integer; FromDPI: Integer): integer;
+procedure ScaleDPI(Control: TControl);
+procedure ScaleImageList(ImgList: TImageList);
+function DoScaleX(Size: Integer): integer;
+function DoScaleY(Size: Integer): integer;
 
 var
   UseScaling: boolean = true;
+  DesignDPI: integer = 96;
+  RunDPI   : integer = 96;
 
 implementation
 
 uses BGRABitmap, BGRABitmapTypes;
 
-procedure HighDPI(FromDPI: Integer);
-var
-  i: Integer;
+function DoScaleX(Size: Integer): integer;
 begin
-  for i:=0 to Screen.FormCount-1 do begin
-    ScaleDPI(Screen.Forms[i],FromDPI);
-  end;
+  if (not UseScaling)or(RunDPI <= DesignDPI) then
+    result := Size
+  else
+    result := MulDiv(Size, RunDPI, DesignDPI);
 end;
 
-procedure ScaleImageList(ImgList: TImageList; FromDPI: Integer);
+function DoScaleY(Size: Integer): integer;
+begin
+  if (not UseScaling)or(RunDPI <= DesignDPI) then
+    result := Size
+  else
+    result := MulDiv(Size, RunDPI, DesignDPI);
+end;
+
+procedure ScaleImageList(ImgList: TImageList);
 var
   TempBmp: TBitmap;
   TempBGRA: array of TBGRABitmap;
@@ -37,10 +45,10 @@ var
   i: Integer;
 
 begin
-  if (not UseScaling)or(Screen.PixelsPerInch <= FromDPI*1.1) then exit;
+  if (not UseScaling)or(RunDPI <= DesignDPI*1.2) then exit;
 
-  NewWidth := ScaleX(ImgList.Width,FromDPI);
-  NewHeight := ScaleY(ImgList.Height,FromDPI);
+  NewWidth := DoScaleX(ImgList.Width);
+  NewHeight := DoScaleY(ImgList.Height);
 
   setlength(TempBGRA, ImgList.Count);
   TempBmp := TBitmap.Create;
@@ -67,45 +75,36 @@ begin
   end;
 end;
 
-function DoScaleX(Size: Integer; FromDPI: Integer): integer;
-begin
-  if (not UseScaling)or(Screen.PixelsPerInch <= FromDPI) then
-    result := Size
-  else
-    result := ScaleX(Size, FromDPI);
-end;
-
-function DoScaleY(Size: Integer; FromDPI: Integer): integer;
-begin
-  if (not UseScaling)or(Screen.PixelsPerInch <= FromDPI) then
-    result := Size
-  else
-    result := ScaleY(Size, FromDPI);
-end;
-
-procedure ScaleDPI(Control: TControl; FromDPI: Integer);
+procedure ScaleDPI(Control: TControl);
 var
   n: Integer;
   WinControl: TWinControl;
 begin
-  if (not UseScaling)or(Screen.PixelsPerInch <= FromDPI) then exit;
+  if (not UseScaling)or(RunDPI <= DesignDPI) then exit;
+
+  if Control is TUpDown then begin
+    // do not resize two time
+    if TUpDown(Control).Parent is TRaDec then begin
+      TRaDec(TUpDown(Control).Parent).lockchange:=true;
+      WinControl:=TUpDown(Control).Associate;
+      TUpDown(Control).Associate:=nil;
+      TUpDown(Control).Associate:=WinControl;
+      TRaDec(TUpDown(Control).Parent).lockchange:=true;
+      exit;
+    end;
+  end;
 
   with Control do begin
-    Left:=ScaleX(Left,FromDPI);
-    Top:=ScaleY(Top,FromDPI);
-    Width:=ScaleX(Width,FromDPI);
-    Height:=ScaleY(Height,FromDPI);
-    {$IFDEF LCL Qt}
-      Font.Size := 0;
-    {$ELSE}
-      Font.Height := ScaleY(Font.GetTextHeight('Hg'),FromDPI);
-    {$ENDIF}
+    Left:=DoScaleX(Left);
+    Top:=DoScaleY(Top);
+    Width:=DoScaleX(Width);
+    Height:=DoScaleY(Height);
   end;
 
   if Control is TToolBar then begin
     with TToolBar(Control) do begin
-      ButtonWidth:=ScaleX(ButtonWidth,FromDPI);
-      ButtonHeight:=ScaleY(ButtonHeight,FromDPI);
+      ButtonWidth:=DoScaleX(ButtonWidth);
+      ButtonHeight:=DoScaleY(ButtonHeight);
     end;
     exit;
   end;
@@ -113,18 +112,19 @@ begin
   if Control is TStringGrid then begin
     with TStringGrid(Control) do begin
       for n:=0 to ColCount-1 do begin
-        ColWidths[n]:=ScaleX(ColWidths[n],FromDPI);
+        ColWidths[n]:=DoScaleX(ColWidths[n]);
       end;
     end;
     exit;
   end;
+
 
   if Control is TWinControl then begin
     WinControl:=TWinControl(Control);
     if WinControl.ControlCount > 0 then begin
       for n:=0 to WinControl.ControlCount-1 do begin
         if WinControl.Controls[n] is TControl then begin
-          ScaleDPI(WinControl.Controls[n],FromDPI);
+          ScaleDPI(WinControl.Controls[n]);
         end;
       end;
     end;

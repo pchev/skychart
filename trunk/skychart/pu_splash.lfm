@@ -8407,10 +8407,10 @@ object f_splash: Tf_splash
       Stretch = True
     end
     object Label1: TLabel
-      Left = 283
-      Height = 32
+      Left = 307
+      Height = 30
       Top = 108
-      Width = 158
+      Width = 134
       Alignment = taRightJustify
       Anchors = [akTop, akRight]
       Caption = 'Sky Charts'
@@ -8422,9 +8422,9 @@ object f_splash: Tf_splash
     end
     object Label2: TLabel
       Left = 16
-      Height = 24
+      Height = 23
       Top = 144
-      Width = 113
+      Width = 94
       Caption = 'Version 3 '
       Font.Color = clWhite
       Font.Height = -20
@@ -8459,9 +8459,9 @@ object f_splash: Tf_splash
     end
     object LabelDate: TLabel
       Left = 16
-      Height = 18
+      Height = 17
       Top = 168
-      Width = 35
+      Width = 34
       Caption = 'Date'
       Font.Color = clWhite
       Font.Height = -15

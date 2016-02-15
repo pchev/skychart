@@ -352,6 +352,7 @@ procedure Tf_config_time.Init;
 var i:integer;
     buf: string;
 begin
+d_year.Height:=d_yearEdit.Height;
 LockJD:=false;
 LockChange:=true;
 if csc.ShowPluto and (SimObj.Items[9]<>rsPluto) then SimObj.Items.Insert(9,rsPluto);

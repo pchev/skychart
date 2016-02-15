@@ -243,7 +243,7 @@ procedure Tf_calendar.FormCreate(Sender: TObject);
 var yy,mm,dd: word;
   i: Integer;
 begin
-ScaleDPI(Self,96);
+ScaleDPI(Self);
 SetLang;
 config:=Tconf_skychart.Create;
 Fnightvision:=false;

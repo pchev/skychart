@@ -169,7 +169,7 @@ Img.DoubleBuffered := true;
 Img.OnPaint:=@ImgPaint;
 end;
 begin
-  ScaleDPI(Self,96);
+  ScaleDPI(Self);
   Initialized:=false;
   config:=Tconf_skychart.Create;
   plbmp:=TBGRABitmap.Create;

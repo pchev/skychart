@@ -106,7 +106,7 @@ end;
 
 procedure Tf_zoom.FormCreate(Sender: TObject);
 begin
-  ScaleDPI(Self,96);
+  ScaleDPI(Self);
   SetLang;
   Fnightvision:=false;
   LockFov:=false;

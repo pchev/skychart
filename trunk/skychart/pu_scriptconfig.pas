@@ -72,9 +72,9 @@ end;
 procedure Tf_scriptconfig.FormCreate(Sender: TObject);
 var i: integer;
 begin
-  ScaleDPI(Self,96);
-  StringGrid1.ColWidths[1]:=DoScaleY(150,96);
-  StringGrid1.ColWidths[2]:=DoScaleY(375,96);
+  ScaleDPI(Self);
+  StringGrid1.ColWidths[1]:=DoScaleY(150);
+  StringGrid1.ColWidths[2]:=DoScaleY(375);
   StringGrid1.RowCount:=numscript+1;
   for i:=1 to numscript do StringGrid1.Cells[0,i]:='F'+inttostr(i);
   SetLang;

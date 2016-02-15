@@ -15,7 +15,7 @@ object f_addlabel: Tf_addlabel
   Visible = False
   object Label1: TLabel
     Left = 12
-    Height = 15
+    Height = 16
     Top = 16
     Width = 37
     Caption = 'Label:'
@@ -23,15 +23,15 @@ object f_addlabel: Tf_addlabel
   end
   object Label2: TLabel
     Left = 12
-    Height = 15
+    Height = 16
     Top = 45
-    Width = 31
+    Width = 33
     Caption = 'Type:'
     ParentColor = False
   end
   object Edit1: TEdit
     Left = 56
-    Height = 21
+    Height = 26
     Top = 8
     Width = 192
     OnChange = Edit1Change
@@ -39,7 +39,7 @@ object f_addlabel: Tf_addlabel
   end
   object ComboBox1: TComboBox
     Left = 56
-    Height = 27
+    Height = 28
     Top = 40
     Width = 192
     ItemHeight = 0
@@ -95,8 +95,8 @@ object f_addlabel: Tf_addlabel
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 3
-    ClientHeight = 28
-    ClientWidth = 234
+    ClientHeight = 26
+    ClientWidth = 232
     Columns = 3
     ItemIndex = 0
     Items.Strings = (

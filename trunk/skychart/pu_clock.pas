@@ -97,7 +97,7 @@ end;
 
 procedure Tf_clock.FormCreate(Sender: TObject);
 begin
-  ScaleDPI(Self,96);
+  ScaleDPI(Self);
   SetLang;
 end;
 

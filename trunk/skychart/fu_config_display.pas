@@ -1711,7 +1711,7 @@ var i : integer;
 begin
 for i:=1 to numfont do begin
     cplot.FontName[i]:=DefaultFontName;
-    cplot.FontSize[i]:=DoScaleX(DefaultFontSize,96);
+    cplot.FontSize[i]:=DoScaleX(DefaultFontSize);
     cplot.FontBold[i]:=false;
     cplot.FontItalic[i]:=false;
 end;
@@ -2011,7 +2011,7 @@ var i: integer;
 begin
 for i:=1 to numlabtype do begin
    cplot.LabelColor[i]:=clWhite;
-   cplot.LabelSize[i]:=DoScaleX(DefaultFontSize,96);
+   cplot.LabelSize[i]:=DoScaleX(DefaultFontSize);
    csc.LabelMagDiff[i]:=4;
    csc.ShowLabel[i]:=true;
 end;
@@ -2021,7 +2021,7 @@ cplot.LabelColor[6]:=clYellow;
 cplot.LabelColor[7]:=clSilver;
 cplot.LabelSize[6]:=cplot.LabelSize[6]+2;
 cplot.LabelColor[9]:=clLime;
-cplot.LabelSize[9]:=DoScaleX(DefaultFontSize+1,96);
+cplot.LabelSize[9]:=DoScaleX(DefaultFontSize+1);
 csc.LabelMagDiff[9]:=0;
 csc.ShowLabel[9]:=true;
 csc.Showlabelall:=true;

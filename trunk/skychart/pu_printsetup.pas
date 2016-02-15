@@ -202,7 +202,7 @@ end;
 procedure Tf_printsetup.FormCreate(Sender: TObject);
 var i: integer;
 begin
-ScaleDPI(Self,96);
+ScaleDPI(Self);
 SetLang;
 PaperSize.Clear;
 for i:=1 to PaperNumber do begin

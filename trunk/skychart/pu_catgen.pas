@@ -525,7 +525,7 @@ end;
 procedure Tf_catgen.FormCreate(Sender: TObject);
 var i : integer;
 begin
-ScaleDPI(Self,96);
+ScaleDPI(Self);
 Fcatgenadv:=Tf_catgenadv.Create(self);
 Fprogress:=Tf_progress.Create(self);
 rejectopen := false;

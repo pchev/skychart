@@ -229,7 +229,7 @@ end;
 
 procedure Tf_config.FormCreate(Sender: TObject);
 begin
-ScaleDPI(Self,96);
+ScaleDPI(Self);
 Fcsc:=Tconf_skychart.Create;
 Fccat:=Tconf_catalog.Create;
 Fcshr:=Tconf_shared.Create;

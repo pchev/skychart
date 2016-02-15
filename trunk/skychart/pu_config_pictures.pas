@@ -68,7 +68,7 @@ end;
 
 procedure Tf_configpictures.FormCreate(Sender: TObject);
 begin
- ScaleDPI(Self,96);
+ ScaleDPI(Self);
  SetLang;
 end;
 

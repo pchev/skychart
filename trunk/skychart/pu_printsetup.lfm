@@ -27,8 +27,8 @@ object f_printsetup: Tf_printsetup
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 3
-    ClientHeight = 52
-    ClientWidth = 420
+    ClientHeight = 51
+    ClientWidth = 418
     Columns = 3
     Items.Strings = (
       'System Printer'
@@ -112,7 +112,7 @@ object f_printsetup: Tf_printsetup
     end
     object prtres: TLongEdit
       Left = 214
-      Height = 22
+      Height = 26
       Hint = '0..600'
       Top = 23
       Width = 41
@@ -125,7 +125,7 @@ object f_printsetup: Tf_printsetup
     end
     object cmdreport: TEdit
       Left = 6
-      Height = 22
+      Height = 26
       Top = 84
       Width = 345
       Color = clBtnFace
@@ -134,7 +134,7 @@ object f_printsetup: Tf_printsetup
     end
     object savepath: TDirectoryEdit
       Left = 6
-      Height = 22
+      Height = 26
       Top = 24
       Width = 168
       ShowHidden = False
@@ -146,7 +146,7 @@ object f_printsetup: Tf_printsetup
     end
     object printcmd: TFileNameEdit
       Left = 256
-      Height = 22
+      Height = 26
       Top = 54
       Width = 152
       OnAcceptFileName = printcmdAcceptFileName

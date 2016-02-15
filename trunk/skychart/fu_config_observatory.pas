@@ -299,6 +299,8 @@ VScrollBar.Height:=ZoomImage1.Height;
 HScrollBar.Left:=ZoomImage1.Left;
 HScrollBar.Top:=ZoomImage1.Top+ZoomImage1.Height;
 HScrollBar.Width:=ZoomImage1.Width;
+hemis.Height:=latdeg.Height;
+long.Height:=latdeg.Height;
 end;
 
 Procedure Tf_config_observatory.ShowObsCoord;

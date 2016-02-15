@@ -22,7 +22,7 @@ object f_manualtelescope: Tf_manualtelescope
     Left = 16
     Height = 15
     Top = 8
-    Width = 111
+    Width = 100
     Caption = 'Manual Telescope'
     Font.Color = clRed
     Font.Height = -12
@@ -35,7 +35,7 @@ object f_manualtelescope: Tf_manualtelescope
     Left = 16
     Height = 15
     Top = 24
-    Width = 99
+    Width = 77
     Caption = 'sep                   '
     Font.Color = clRed
     Font.Height = -12
@@ -46,9 +46,9 @@ object f_manualtelescope: Tf_manualtelescope
   end
   object Label4: TLabel
     Left = 16
-    Height = 24
+    Height = 23
     Top = 44
-    Width = 98
+    Width = 91
     Caption = 'RA turns: '
     Font.Color = clRed
     Font.Height = -20
@@ -59,9 +59,9 @@ object f_manualtelescope: Tf_manualtelescope
   end
   object Label5: TLabel
     Left = 16
-    Height = 24
+    Height = 23
     Top = 72
-    Width = 113
+    Width = 100
     Caption = 'DEC turns: '
     Font.Color = clRed
     Font.Height = -20

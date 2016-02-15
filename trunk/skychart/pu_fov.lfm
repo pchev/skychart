@@ -22,8 +22,8 @@ object f_fov: Tf_fov
     TabOrder = 0
     object Eyepiece: TTabSheet
       Caption = 'Eyepiece'
-      ClientHeight = 242
-      ClientWidth = 321
+      ClientHeight = 240
+      ClientWidth = 319
       object Label24: TLabel
         Left = 8
         Height = 16
@@ -167,35 +167,35 @@ object f_fov: Tf_fov
     end
     object Camera: TTabSheet
       Caption = 'Camera'
-      ClientHeight = 242
-      ClientWidth = 321
+      ClientHeight = 240
+      ClientWidth = 319
       object Label49: TLabel
         Left = 8
-        Height = 15
+        Height = 16
         Top = 8
-        Width = 140
+        Width = 141
         Caption = 'Telescope focal length'
         ParentColor = False
       end
       object Label50: TLabel
         Left = 8
-        Height = 15
+        Height = 16
         Top = 34
-        Width = 55
+        Width = 56
         Caption = 'Pixel size'
         ParentColor = False
       end
       object Label52: TLabel
         Left = 126
-        Height = 15
+        Height = 16
         Top = 141
-        Width = 20
+        Width = 14
         Caption = '=>'
         ParentColor = False
       end
       object Label53: TLabel
         Left = 8
-        Height = 15
+        Height = 16
         Top = 62
         Width = 68
         Caption = 'Pixel count'
@@ -203,7 +203,7 @@ object f_fov: Tf_fov
       end
       object Edit11: TEdit
         Left = 214
-        Height = 21
+        Height = 26
         Top = 4
         Width = 41
         TabOrder = 0
@@ -211,7 +211,7 @@ object f_fov: Tf_fov
       end
       object Edit12: TEdit
         Left = 152
-        Height = 21
+        Height = 26
         Top = 30
         Width = 41
         TabOrder = 1
@@ -219,7 +219,7 @@ object f_fov: Tf_fov
       end
       object Edit14: TEdit
         Left = 152
-        Height = 21
+        Height = 26
         Top = 137
         Width = 41
         Color = clBtnFace
@@ -237,7 +237,7 @@ object f_fov: Tf_fov
       end
       object Edit15: TEdit
         Left = 152
-        Height = 21
+        Height = 26
         Top = 58
         Width = 41
         TabOrder = 4
@@ -245,7 +245,7 @@ object f_fov: Tf_fov
       end
       object Label8: TLabel
         Left = 198
-        Height = 15
+        Height = 16
         Top = 34
         Width = 7
         Caption = 'X'
@@ -253,7 +253,7 @@ object f_fov: Tf_fov
       end
       object Label20: TLabel
         Left = 198
-        Height = 15
+        Height = 16
         Top = 62
         Width = 7
         Caption = 'X'
@@ -261,7 +261,7 @@ object f_fov: Tf_fov
       end
       object Label21: TLabel
         Left = 198
-        Height = 15
+        Height = 16
         Top = 141
         Width = 7
         Caption = 'X'
@@ -269,7 +269,7 @@ object f_fov: Tf_fov
       end
       object Edit13: TEdit
         Left = 214
-        Height = 21
+        Height = 26
         Top = 30
         Width = 41
         TabOrder = 5
@@ -277,7 +277,7 @@ object f_fov: Tf_fov
       end
       object Edit16: TEdit
         Left = 214
-        Height = 21
+        Height = 26
         Top = 58
         Width = 41
         TabOrder = 6
@@ -285,7 +285,7 @@ object f_fov: Tf_fov
       end
       object Edit17: TEdit
         Left = 214
-        Height = 21
+        Height = 26
         Top = 137
         Width = 41
         Color = clBtnFace
@@ -294,25 +294,25 @@ object f_fov: Tf_fov
       end
       object Label55: TLabel
         Left = 267
-        Height = 15
+        Height = 16
         Top = 8
-        Width = 32
+        Width = 30
         Caption = '[mm]'
         ParentColor = False
       end
       object Label59: TLabel
         Left = 267
-        Height = 15
+        Height = 16
         Top = 34
-        Width = 29
+        Width = 26
         Caption = '[mu]'
         ParentColor = False
       end
       object Label60: TLabel
         Left = 262
-        Height = 15
+        Height = 16
         Top = 141
-        Width = 13
+        Width = 11
         Caption = '['']'
         ParentColor = False
       end
@@ -327,9 +327,9 @@ object f_fov: Tf_fov
       end
       object Label1: TLabel
         Left = 8
-        Height = 15
+        Height = 16
         Top = 141
-        Width = 24
+        Width = 26
         Caption = 'FOV'
         ParentColor = False
       end

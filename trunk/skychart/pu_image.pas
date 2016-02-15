@@ -158,7 +158,7 @@ end;
 
 procedure Tf_image.FormCreate(Sender: TObject);
 begin
-ScaleDPI(Self,96);
+ScaleDPI(Self);
 SetLang;
 Image1.Align:=alClient;
 titre:='';

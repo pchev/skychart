@@ -49,7 +49,7 @@ object f_image: Tf_image
     TabStop = True
     object Label1: TLabel
       Left = 320
-      Height = 15
+      Height = 16
       Top = 7
       Width = 41
       Caption = 'Label1'

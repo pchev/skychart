@@ -1966,6 +1966,9 @@ end;
 
 procedure Tf_main.ScaleMainForm;
 var inif: TMemIniFile;
+    rl: integer;
+const teststr = 'The Lazy Fox Jumps';
+      designlen = 120;
 begin
   cfgm.ScreenScaling:=true;
   if fileexists(configfile) then begin
@@ -1977,8 +1980,16 @@ begin
     end;
   end;
   UScaleDPI.UseScaling:=cfgm.ScreenScaling;
-  ScaleDPI(Self,96);
-  ScaleImageList(ImageNormal,96);
+  {$ifdef SCALE_BY_DPI_ONLY}
+  UScaleDPI.DesignDPI:=96;
+  UScaleDPI.RunDPI:=Screen.PixelsPerInch;
+  {$else}
+  rl:=Canvas.TextWidth(teststr);
+  UScaleDPI.DesignDPI:=designlen;
+  UScaleDPI.RunDPI:=rl;
+  {$endif}
+  ScaleDPI(Self);
+  ScaleImageList(ImageNormal);
 end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
@@ -2360,7 +2371,7 @@ end else begin
       w:=max(f1.Canvas.TextWidth(l1.Caption),p1.Width)+16;
       f1.Width:=w;
       f1.Height:=h;
-      ScaleDPI(f1,96);
+      ScaleDPI(f1);
       mresult:=f1.ShowModal;
       ConfirmSaveConfig:=not c1.Checked;
       if mresult=mrAbort then
@@ -3137,7 +3148,7 @@ if sender<>nil then begin
   w:=max(f1.Canvas.TextWidth(rsResetInitial),f1.Canvas.TextWidth(rsResetToLastT))+80;
   f1.Height:=h;
   f1.Width:=w;
-  ScaleDPI(f1,96);
+  ScaleDPI(f1);
   try
   FormPos(f1,mouse.cursorpos.x,mouse.cursorpos.y);
   if f1.ShowModal=mrOK then begin
@@ -4358,7 +4369,7 @@ var showcapt: boolean;
     sz:integer;
 begin
 showcapt:=cfgm.btncaption and (cfgm.btnsize>32);
-sz:=DoScaleX(cfgm.btnsize,96);
+sz:=DoScaleX(cfgm.btnsize);
 if (ToolBarMain.ButtonHeight<>sz) or (ToolBarMain.ShowCaptions<>showcapt) then begin
   ToolBarMain.ButtonHeight:=sz;
   ToolBarMain.ButtonWidth:=sz;
@@ -4791,7 +4802,7 @@ f_getdss.cfgdss.OnlineDSS:=true;
 f_getdss.cfgdss.OnlineDSSid:=1;
 for i:=1 to numfont do begin
    def_cfgplot.FontName[i]:=DefaultFontName;
-   def_cfgplot.FontSize[i]:=DoScaleX(DefaultFontSize,96);
+   def_cfgplot.FontSize[i]:=DoScaleX(DefaultFontSize);
    def_cfgplot.FontBold[i]:=false;
    def_cfgplot.FontItalic[i]:=false;
 end;
@@ -4799,7 +4810,7 @@ def_cfgplot.FontName[5]:=DefaultFontFixed;
 def_cfgplot.FontName[7]:=DefaultFontSymbol;
 for i:=1 to numlabtype do begin
    def_cfgplot.LabelColor[i]:=clWhite;
-   def_cfgplot.LabelSize[i]:=DoScaleX(DefaultFontSize,96);
+   def_cfgplot.LabelSize[i]:=DoScaleX(DefaultFontSize);
    def_cfgsc.LabelMagDiff[i]:=4;
    def_cfgsc.ShowLabel[i]:=true;
    def_cfgsc.LabelOrient[i]:=0;
@@ -4811,7 +4822,7 @@ def_cfgplot.LabelColor[6]:=clYellow;
 def_cfgplot.LabelColor[7]:=clSilver;
 def_cfgplot.LabelSize[6]:=def_cfgplot.LabelSize[6]+2;
 def_cfgplot.LabelColor[9]:=clLime;
-def_cfgplot.LabelSize[9]:=DoScaleX(DefaultFontSize+1,96);
+def_cfgplot.LabelSize[9]:=DoScaleX(DefaultFontSize+1);
 def_cfgsc.LabelMagDiff[9]:=0;
 def_cfgsc.ShowLabel[9]:=true;
 def_cfgplot.contrast:=450;
@@ -8741,7 +8752,7 @@ begin
        except
        end;
    end;
-   ScaleImageList(imagelist,96);
+   ScaleImageList(imagelist);
    ActionListFile.Images:=imagelist;
    ActionListEdit.Images:=imagelist;
    ActionListSetup.Images:=imagelist;

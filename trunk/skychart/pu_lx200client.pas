@@ -957,7 +957,7 @@ end;
 
 procedure Tpop_lx200.FormCreate(Sender: TObject);
 begin
-    ScaleDPI(Self,96);
+    ScaleDPI(Self);
     CoordLock := false;
     Initial := true;
 end;

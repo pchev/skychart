@@ -2087,7 +2087,21 @@ if sc.cfgsc.FindOK and (not cmain.SimpleDetail) then begin
    Identlabel.Picture.Bitmap.Canvas.Pen.Mode:=pmCopy;
    Identlabel.Picture.Bitmap.Canvas.font.color:=sc.plot.cfgplot.color[11];
    identlabel.Picture.Bitmap.Canvas.font.name:=sc.plot.cfgplot.fontname[2];
-   identlabel.Picture.Bitmap.Canvas.font.size:=sc.plot.cfgplot.fontSize[2];
+   case sc.cfgsc.FindType of
+    ftAll    : identlabel.Picture.Bitmap.Canvas.font.size:=sc.plot.cfgplot.LabelSize[1];
+    ftStar   : identlabel.Picture.Bitmap.Canvas.font.size:=sc.plot.cfgplot.LabelSize[1];
+    ftVar    : identlabel.Picture.Bitmap.Canvas.font.size:=sc.plot.cfgplot.LabelSize[2];
+    ftDbl    : identlabel.Picture.Bitmap.Canvas.font.size:=sc.plot.cfgplot.LabelSize[3];
+    ftNeb    : identlabel.Picture.Bitmap.Canvas.font.size:=sc.plot.cfgplot.LabelSize[4];
+    ftlin    : identlabel.Picture.Bitmap.Canvas.font.size:=sc.plot.cfgplot.LabelSize[4];
+    ftInv    : identlabel.Picture.Bitmap.Canvas.font.size:=sc.plot.cfgplot.LabelSize[4];
+    ftOnline : identlabel.Picture.Bitmap.Canvas.font.size:=sc.plot.cfgplot.LabelSize[4];
+    ftCat    : identlabel.Picture.Bitmap.Canvas.font.size:=sc.plot.cfgplot.LabelSize[4];
+    ftPla    : identlabel.Picture.Bitmap.Canvas.font.size:=sc.plot.cfgplot.LabelSize[5];
+    ftCom    : identlabel.Picture.Bitmap.Canvas.font.size:=sc.plot.cfgplot.LabelSize[5];
+    ftAst    : identlabel.Picture.Bitmap.Canvas.font.size:=sc.plot.cfgplot.LabelSize[5];
+    else  identlabel.Picture.Bitmap.Canvas.font.size:=sc.plot.cfgplot.LabelSize[1];
+   end;
    identlabel.caption:=trim(sc.cfgsc.FindName);
    ts:=identlabel.Picture.Bitmap.Canvas.TextExtent(identlabel.caption);
    identlabel.Width:=ts.cx+8;
@@ -4614,7 +4628,7 @@ if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width)
          f1.ClientHeight:=b1.top+b1.Height+8;
          f1.BorderStyle:=bsDialog;
          f1.Caption:=rsImageArchive;
-         ScaleDPI(f1,96);
+         ScaleDPI(f1);
          formpos(f1,mouse.CursorPos.X,mouse.CursorPos.Y);
          if f1.ShowModal=mrOK then begin
             archiveit:=true;
@@ -5291,7 +5305,7 @@ for i:=1 to sc.cfgsc.nummodlabels do begin
      lid[j]:=sc.cfgsc.modlabels[i].id;
    end;
 end;
-ScaleDPI(f,96);
+ScaleDPI(f);
 if l.Items.Count>0 then begin
   FormPos(f,mouse.CursorPos.X,mouse.CursorPos.Y);
   f.ShowModal;

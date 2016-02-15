@@ -66,7 +66,7 @@ end;
 
 procedure Tf_configcalendar.FormCreate(Sender: TObject);
 begin
-  ScaleDPI(Self,96);
+  ScaleDPI(Self);
   SetLang;
 end;
 

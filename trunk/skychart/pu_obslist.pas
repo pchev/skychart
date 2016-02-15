@@ -653,7 +653,7 @@ end;
 
 procedure Tf_obslist.FormCreate(Sender: TObject);
 begin
-  ScaleDPI(Self,96);
+  ScaleDPI(Self);
   FObjLabels:=TStringList.Create;
   FEmptyObjLabels:=TStringList.Create;
   FDefaultList:='NewObsList.txt';

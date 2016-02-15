@@ -570,7 +570,7 @@ end;
 
 procedure Tpop_indi.FormCreate(Sender: TObject);
 begin
-ScaleDPI(Self,96);
+ScaleDPI(Self);
 SlewRateList:=TStringList.Create;
 ClearStatus;
 end;

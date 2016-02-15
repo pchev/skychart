@@ -248,7 +248,7 @@ end;
 
 procedure Tf_info.FormCreate(Sender: TObject);
 begin
- ScaleDPI(Self,96);
+ ScaleDPI(Self);
  page1.Align:=alClient;
  page2.Align:=alClient;
  page3.Align:=alClient;

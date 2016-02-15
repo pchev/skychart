@@ -91,7 +91,7 @@ end;
 
 procedure Tf_configinternet.FormCreate(Sender: TObject);
 begin
-  ScaleDPI(Self,96);
+  ScaleDPI(Self);
   SetLang;
 end;
 

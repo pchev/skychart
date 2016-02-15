@@ -93,7 +93,7 @@ end;
 
 procedure Tf_about.FormCreate(Sender: TObject);
 begin
- ScaleDPI(Self,96);
+ ScaleDPI(Self);
  SetLang;
  panel1.caption:=URL_WebHome;
  button2.caption:=URL_BugTracker;

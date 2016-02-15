@@ -26,15 +26,15 @@ object f_search: Tf_search
     Visible = False
     object Label2: TLabel
       Left = 13
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 44
+      Width = 43
       Caption = 'Planet '
       ParentColor = False
     end
     object PlanetBox: TComboBox
       Left = 184
-      Height = 27
+      Height = 28
       Top = 8
       Width = 146
       DropDownCount = 10
@@ -52,7 +52,7 @@ object f_search: Tf_search
     TabOrder = 4
     object CometFilter: TEdit
       Left = 8
-      Height = 21
+      Height = 26
       Top = 10
       Width = 99
       TabOrder = 0
@@ -69,7 +69,7 @@ object f_search: Tf_search
     end
     object CometList: TComboBox
       Left = 192
-      Height = 27
+      Height = 28
       Top = 10
       Width = 216
       ItemHeight = 0
@@ -86,7 +86,7 @@ object f_search: Tf_search
     TabOrder = 6
     object AsteroidFilter: TEdit
       Left = 8
-      Height = 21
+      Height = 26
       Top = 10
       Width = 99
       TabOrder = 0
@@ -103,7 +103,7 @@ object f_search: Tf_search
     end
     object AsteroidList: TComboBox
       Left = 192
-      Height = 27
+      Height = 28
       Top = 10
       Width = 216
       ItemHeight = 0
@@ -122,15 +122,15 @@ object f_search: Tf_search
     Visible = False
     object Label3: TLabel
       Left = 13
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 44
+      Width = 43
       Caption = 'Nebula'
       ParentColor = False
     end
     object NebNameBox: TComboBox
       Left = 104
-      Height = 27
+      Height = 28
       Top = 11
       Width = 280
       ItemHeight = 0
@@ -149,15 +149,15 @@ object f_search: Tf_search
     Visible = False
     object Label4: TLabel
       Left = 13
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 26
+      Width = 25
       Caption = 'Star'
       ParentColor = False
     end
     object StarNameBox: TComboBox
       Left = 97
-      Height = 27
+      Height = 28
       Top = 11
       Width = 281
       ItemHeight = 0
@@ -176,15 +176,15 @@ object f_search: Tf_search
     Visible = False
     object Label5: TLabel
       Left = 13
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 82
+      Width = 83
       Caption = 'Constellation'
       ParentColor = False
     end
     object ConstBox: TComboBox
       Left = 113
-      Height = 27
+      Height = 28
       Top = 11
       Width = 265
       ItemHeight = 0
@@ -203,7 +203,7 @@ object f_search: Tf_search
     TabOrder = 5
     object Label1: TLabel
       Left = 6
-      Height = 15
+      Height = 16
       Top = 14
       Width = 80
       Caption = 'Object Name'
@@ -348,7 +348,7 @@ object f_search: Tf_search
     end
     object Id: TEdit
       Left = 105
-      Height = 21
+      Height = 26
       Top = 10
       Width = 96
       OnKeyDown = IdKeyDown
@@ -535,8 +535,8 @@ object f_search: Tf_search
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 2
-    ClientHeight = 201
-    ClientWidth = 414
+    ClientHeight = 199
+    ClientWidth = 412
     Columns = 2
     ItemIndex = 0
     Items.Strings = (
@@ -597,7 +597,7 @@ object f_search: Tf_search
     TabOrder = 7
     object OnlineEdit: TEdit
       Left = 256
-      Height = 21
+      Height = 26
       Top = 1
       Width = 151
       TabOrder = 1
@@ -605,7 +605,7 @@ object f_search: Tf_search
     end
     object ServerList: TComboBox
       Left = 16
-      Height = 29
+      Height = 30
       Top = 1
       Width = 200
       ItemHeight = 0
@@ -615,9 +615,9 @@ object f_search: Tf_search
     end
     object StatusLabel: TLabel
       Left = 19
-      Height = 15
+      Height = 16
       Top = 58
-      Width = 74
+      Width = 73
       Caption = 'StatusLabel'
       ParentColor = False
     end
@@ -635,8 +635,8 @@ object f_search: Tf_search
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 4
-      ClientHeight = 30
-      ClientWidth = 390
+      ClientHeight = 28
+      ClientWidth = 388
       Columns = 4
       Items.Strings = (
         'NED'

@@ -184,7 +184,7 @@ end;
 
 procedure Tf_vodetail.FormCreate(Sender: TObject);
 begin
-  ScaleDPI(Self,96);
+  ScaleDPI(Self);
   Setlang;
   needdownload:=true;
   drawtype:=14;

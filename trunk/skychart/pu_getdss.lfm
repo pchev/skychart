@@ -82,6 +82,7 @@ object f_getdss: Tf_getdss
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True
+    QuickCancel = False
     left = 264
     top = 16
   end

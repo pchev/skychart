@@ -16,7 +16,7 @@ object f_progress: Tf_progress
   Visible = False
   object Label1: TLabel
     Left = 16
-    Height = 15
+    Height = 16
     Top = 4
     Width = 41
     Caption = 'Label1'
@@ -24,7 +24,7 @@ object f_progress: Tf_progress
   end
   object Label2: TLabel
     Left = 16
-    Height = 15
+    Height = 16
     Top = 56
     Width = 41
     Caption = 'Label2'
