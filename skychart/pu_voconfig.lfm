@@ -26,8 +26,8 @@ object f_voconfig: Tf_voconfig
     TabOrder = 0
     object TabCat: TTabSheet
       Caption = 'Catalog List'
-      ClientHeight = 512
-      ClientWidth = 779
+      ClientHeight = 510
+      ClientWidth = 777
       object Panel1: TPanel
         Left = 0
         Height = 96
@@ -134,14 +134,14 @@ object f_voconfig: Tf_voconfig
     end
     object TabDetail: TTabSheet
       Caption = 'Catalog Detail'
-      ClientHeight = 512
-      ClientWidth = 779
+      ClientHeight = 510
+      ClientWidth = 777
       ImageIndex = 1
       object PageControl2: TPageControl
         Left = 0
-        Height = 447
+        Height = 445
         Top = 31
-        Width = 779
+        Width = 777
         TabStop = False
         Align = alClient
         TabOrder = 1
@@ -150,10 +150,10 @@ object f_voconfig: Tf_voconfig
         Left = 0
         Height = 31
         Top = 0
-        Width = 779
+        Width = 777
         Align = alTop
         ClientHeight = 31
-        ClientWidth = 779
+        ClientWidth = 777
         TabOrder = 0
         object Label6: TLabel
           Left = 9
@@ -167,11 +167,11 @@ object f_voconfig: Tf_voconfig
       object Panel4: TPanel
         Left = 0
         Height = 34
-        Top = 478
-        Width = 779
+        Top = 476
+        Width = 777
         Align = alBottom
         ClientHeight = 34
-        ClientWidth = 779
+        ClientWidth = 777
         TabOrder = 2
         object ButtonClose: TButton
           Left = 676
@@ -203,8 +203,8 @@ object f_voconfig: Tf_voconfig
     end
     object TabData: TTabSheet
       Caption = 'Catalog Data'
-      ClientHeight = 512
-      ClientWidth = 779
+      ClientHeight = 510
+      ClientWidth = 777
       ImageIndex = 2
       object DataGrid: TStringGrid
         Left = 0
@@ -251,8 +251,8 @@ object f_voconfig: Tf_voconfig
     end
     object TabRegistry: TTabSheet
       Caption = 'Registry'
-      ClientHeight = 512
-      ClientWidth = 779
+      ClientHeight = 510
+      ClientWidth = 777
       ImageIndex = 3
       TabVisible = False
       object RadioGroup1: TRadioGroup
@@ -270,8 +270,8 @@ object f_voconfig: Tf_voconfig
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 130
-        ClientWidth = 431
+        ClientHeight = 129
+        ClientWidth = 429
         ItemIndex = 0
         Items.Strings = (
           'VizieR Catalogue Service'

@@ -562,7 +562,7 @@ end;
 
 procedure Tpop_encoder.formcreate(Sender: TObject);
 begin
-ScaleDPI(Self,96);
+ScaleDPI(Self);
 wait_create := true;
 first_show := true;
 Init90Y := 999999;

@@ -33,17 +33,17 @@ object f_vodetail: Tf_vodetail
       TabStop = True
       object Table: TLabel
         Left = 4
-        Height = 15
+        Height = 16
         Top = 12
-        Width = 56
+        Width = 51
         Caption = 'Table......'
         ParentColor = False
       end
       object Rows: TLabel
         Left = 167
-        Height = 15
+        Height = 16
         Top = 12
-        Width = 67
+        Width = 58
         Caption = 'Rows.........'
         ParentColor = False
       end
@@ -71,8 +71,8 @@ object f_vodetail: Tf_vodetail
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 101
-        ClientWidth = 207
+        ClientHeight = 99
+        ClientWidth = 205
         Items.Strings = (
           'Cannot draw                 .'
           'Draw as star                 .'
@@ -83,40 +83,40 @@ object f_vodetail: Tf_vodetail
       end
       object Label9: TLabel
         Left = 8
-        Height = 15
+        Height = 16
         Top = 149
-        Width = 175
+        Width = 150
         Caption = 'Default size '' .......................'
         ParentColor = False
       end
       object Label10: TLabel
         Left = 8
-        Height = 15
+        Height = 16
         Top = 95
-        Width = 168
+        Width = 153
         Caption = 'Default magnitude.............'
         ParentColor = False
       end
       object FullDownload: TCheckBox
         Left = 559
-        Height = 24
+        Height = 22
         Top = 106
-        Width = 220
+        Width = 202
         Caption = 'Download full catalog...............'
         OnChange = FullDownloadChange
         TabOrder = 9
       end
       object Label1: TLabel
         Left = 8
-        Height = 15
+        Height = 16
         Top = 124
-        Width = 179
+        Width = 155
         Caption = 'Object type ..........................'
         ParentColor = False
       end
       object ComboBox1: TComboBox
         Left = 158
-        Height = 25
+        Height = 26
         Top = 119
         Width = 164
         ItemHeight = 0
@@ -156,7 +156,7 @@ object f_vodetail: Tf_vodetail
       end
       object DefMag: TLongEdit
         Left = 160
-        Height = 21
+        Height = 26
         Top = 91
         Width = 80
         TabOrder = 8
@@ -164,7 +164,7 @@ object f_vodetail: Tf_vodetail
       end
       object DefSize: TLongEdit
         Left = 160
-        Height = 21
+        Height = 26
         Hint = '0..36000'
         Top = 145
         Width = 80
@@ -193,16 +193,16 @@ object f_vodetail: Tf_vodetail
       end
       object CheckBox1: TCheckBox
         Left = 8
-        Height = 24
+        Height = 22
         Top = 172
-        Width = 175
+        Width = 153
         Caption = 'Force color....................'
         OnChange = CheckBox1Change
         TabOrder = 13
       end
       object MagField: TComboBox
         Left = 81
-        Height = 29
+        Height = 30
         Top = 56
         Width = 130
         ItemHeight = 0
@@ -212,15 +212,15 @@ object f_vodetail: Tf_vodetail
       end
       object Label2: TLabel
         Left = 8
-        Height = 15
+        Height = 16
         Top = 60
-        Width = 66
+        Width = 65
         Caption = 'Magnitude'
         ParentColor = False
       end
       object SizeField: TComboBox
         Left = 287
-        Height = 29
+        Height = 30
         Top = 56
         Width = 130
         ItemHeight = 0
@@ -230,7 +230,7 @@ object f_vodetail: Tf_vodetail
       end
       object Label3: TLabel
         Left = 239
-        Height = 15
+        Height = 16
         Top = 60
         Width = 24
         Caption = 'Size'
@@ -238,7 +238,7 @@ object f_vodetail: Tf_vodetail
       end
       object NameField: TComboBox
         Left = 613
-        Height = 29
+        Height = 30
         Top = 56
         Width = 130
         ItemHeight = 0
@@ -248,15 +248,15 @@ object f_vodetail: Tf_vodetail
       end
       object Label4: TLabel
         Left = 431
-        Height = 15
+        Height = 16
         Top = 60
-        Width = 36
+        Width = 35
         Caption = 'Name'
         ParentColor = False
       end
       object Prefix: TEdit
         Left = 487
-        Height = 21
+        Height = 26
         Top = 57
         Width = 98
         OnChange = PrefixChange

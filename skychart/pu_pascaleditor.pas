@@ -119,7 +119,7 @@ const
 
 procedure Tf_pascaleditor.FormCreate(Sender: TObject);
 begin
-  ScaleDPI(Self,96);
+  ScaleDPI(Self);
   FDebugResume:=false;
   SetLang;
 end;

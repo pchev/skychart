@@ -81,7 +81,7 @@ object f_catgenadv: Tf_catgenadv
   end
   object Edit1: TEdit
     Left = 24
-    Height = 21
+    Height = 26
     Top = 72
     Width = 110
     OnChange = Edit1Change
@@ -90,7 +90,7 @@ object f_catgenadv: Tf_catgenadv
   end
   object Edit2: TEdit
     Left = 24
-    Height = 21
+    Height = 26
     Top = 106
     Width = 110
     Color = clBtnFace
@@ -99,7 +99,7 @@ object f_catgenadv: Tf_catgenadv
   end
   object Edit3: TEdit
     Left = 24
-    Height = 21
+    Height = 26
     Top = 140
     Width = 110
     OnChange = Edit3Change
@@ -108,7 +108,7 @@ object f_catgenadv: Tf_catgenadv
   end
   object Edit4: TEdit
     Left = 24
-    Height = 21
+    Height = 26
     Top = 176
     Width = 110
     Color = clBtnFace

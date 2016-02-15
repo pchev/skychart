@@ -238,7 +238,7 @@ GetAllHeader(hdr);
 m.Lines:=hdr;
 FormPos(f,mouse.CursorPos.X,mouse.CursorPos.Y);
 f.Caption:=SysToUTF8(FFileName);
-ScaleDPI(f,96);
+ScaleDPI(f);
 f.ShowModal;
 finally
 hdr.free;

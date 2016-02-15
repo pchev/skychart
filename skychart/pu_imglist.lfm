@@ -67,7 +67,7 @@ object f_imglist: Tf_imglist
     end
     object ComboBox1: TComboBox
       Left = 272
-      Height = 27
+      Height = 30
       Top = 46
       Width = 162
       ItemHeight = 0

@@ -40,7 +40,6 @@ type
     ArrowDeg, ArrowMin, ArrowSec : TUpDown;
     LabelDeg, LabelMin, LabelSec : TLabel;
     Fkind : Tradeckind;
-    lockchange: boolean;
     FOnChange: TNotifyEvent;
     procedure Paint; override;
     procedure SetValue(Val: Double);
@@ -52,6 +51,7 @@ type
     function GetEnabled: boolean; override;
   public
     { Public declarations }
+     lockchange: boolean;
      constructor Create(Aowner:Tcomponent); override;
      destructor Destroy; override;
   published
@@ -280,6 +280,7 @@ EditDeg.Text:='0';
 EditDeg.Top:=0;
 EditDeg.Left:=0;
 EditDeg.Width:=dsize;
+ArrowDeg.Left:=EditDeg.Left+EditDeg.Width;
 LabelDeg.Caption:='h';
 LabelDeg.Top:=(EditDeg.Height-LabelDeg.Height) div 2;
 LabelDeg.Left:=ArrowDeg.Left+ArrowDeg.Width+2;
@@ -287,6 +288,7 @@ EditMin.Text:='0';
 EditMin.Top:=0;
 EditMin.Left:=LabelDeg.Left+lsize;
 EditMin.Width:=msize;
+ArrowMin.Left:=EditMin.Left+EditMin.Width;
 LabelMin.Caption:='m';
 LabelMin.Top:=LabelDeg.Top;
 LabelMin.Left:=ArrowMin.Left+ArrowMin.Width+2;
@@ -294,6 +296,7 @@ EditSec.Text:='0';
 EditSec.Top:=0;
 EditSec.Left:=LabelMin.Left+lsize;
 EditSec.Width:=msize;
+ArrowSec.Left:=EditSec.Left+EditSec.Width;
 LabelSec.Caption:='s';
 LabelSec.Top:=LabelDeg.Top;
 LabelSec.Left:=ArrowSec.Left+ArrowSec.Width+2;

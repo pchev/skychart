@@ -610,7 +610,7 @@ f.AutoSize:=true;
 FormPos(f,mouse.cursorpos.x,mouse.cursorpos.y);
 feqsys.Checked:=ForceEqSys;
 leqsys.ItemIndex:=EqSysVal;
-ScaleDPI(f,96);
+ScaleDPI(f);
 f.showmodal;
 if f.ModalResult=mrOK then begin
   ForceEqSys := feqsys.Checked;
@@ -637,7 +637,7 @@ end;
 
 procedure Tpop_scope.FormCreate(Sender: TObject);
 begin
-    ScaleDPI(Self,96);
+    ScaleDPI(Self);
     CoordLock := false;
     Initialized := false;
 end;

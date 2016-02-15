@@ -17,8 +17,8 @@ object f_observatory_db: Tf_observatory_db
     Height = 248
     Top = 0
     Width = 464
-    ClientHeight = 246
-    ClientWidth = 462
+    ClientHeight = 244
+    ClientWidth = 460
     TabOrder = 0
     object Label2: TLabel
       Left = 320
@@ -71,7 +71,7 @@ object f_observatory_db: Tf_observatory_db
     end
     object cityfilter: TEdit
       Left = 254
-      Height = 22
+      Height = 26
       Top = 41
       Width = 104
       OnKeyDown = cityfilterKeyDown
@@ -110,7 +110,7 @@ object f_observatory_db: Tf_observatory_db
     object LocCode: TEdit
       Cursor = crHandPoint
       Left = 133
-      Height = 22
+      Height = 26
       Top = 83
       Width = 108
       Color = clBtnFace
@@ -132,14 +132,14 @@ object f_observatory_db: Tf_observatory_db
     end
     object vicinityrangeEdit: TEdit
       Left = 345
-      Height = 22
+      Height = 26
       Top = 83
       Width = 56
       TabOrder = 6
     end
     object vicinityrange: TUpDown
       Left = 401
-      Height = 22
+      Height = 26
       Top = 83
       Width = 17
       Associate = vicinityrangeEdit
@@ -172,8 +172,8 @@ object f_observatory_db: Tf_observatory_db
       Top = 114
       Width = 185
       Caption = 'Latitude'
-      ClientHeight = 51
-      ClientWidth = 183
+      ClientHeight = 50
+      ClientWidth = 181
       TabOrder = 9
       object Label58: TLabel
         Left = 4
@@ -202,7 +202,7 @@ object f_observatory_db: Tf_observatory_db
       end
       object latdeg: TLongEdit
         Left = 4
-        Height = 22
+        Height = 26
         Hint = '0..90'
         Top = 20
         Width = 33
@@ -216,7 +216,7 @@ object f_observatory_db: Tf_observatory_db
       end
       object latmin: TLongEdit
         Left = 44
-        Height = 22
+        Height = 26
         Hint = '0..59'
         Top = 20
         Width = 25
@@ -230,7 +230,7 @@ object f_observatory_db: Tf_observatory_db
       end
       object latsec: TLongEdit
         Left = 76
-        Height = 22
+        Height = 26
         Hint = '0..59'
         Top = 20
         Width = 25
@@ -249,8 +249,8 @@ object f_observatory_db: Tf_observatory_db
       Top = 114
       Width = 185
       Caption = 'Longitude'
-      ClientHeight = 51
-      ClientWidth = 183
+      ClientHeight = 50
+      ClientWidth = 181
       TabOrder = 10
       object Label61: TLabel
         Left = 4
@@ -279,7 +279,7 @@ object f_observatory_db: Tf_observatory_db
       end
       object longdeg: TLongEdit
         Left = 4
-        Height = 22
+        Height = 26
         Hint = '0..180'
         Top = 20
         Width = 33
@@ -293,7 +293,7 @@ object f_observatory_db: Tf_observatory_db
       end
       object longmin: TLongEdit
         Left = 44
-        Height = 22
+        Height = 26
         Hint = '0..59'
         Top = 20
         Width = 25
@@ -307,7 +307,7 @@ object f_observatory_db: Tf_observatory_db
       end
       object longsec: TLongEdit
         Left = 76
-        Height = 22
+        Height = 26
         Hint = '0..59'
         Top = 20
         Width = 25

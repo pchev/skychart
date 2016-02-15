@@ -537,6 +537,7 @@ object f_chart: Tf_chart
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True
+    QuickCancel = False
     left = 211
     top = 205
   end

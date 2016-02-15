@@ -94,7 +94,7 @@ object f_configtime: Tf_configtime
           ClientWidth = 490
           inherited Panel9: TPanel
             inherited ADBC: TRadioGroup
-              ClientHeight = 37
+              ClientHeight = 35
             end
           end
         end
@@ -105,6 +105,11 @@ object f_configtime: Tf_configtime
             Data = {
               0C000000000000000000000000000000
             }
+          end
+          inherited RadioGroup1: TRadioGroup
+            inherited LongEdit1: TLongEdit
+              TabOrder = 3
+            end
           end
           inherited CheckGroup1: TCheckGroup
             Data = {

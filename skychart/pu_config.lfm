@@ -417,7 +417,7 @@ object f_config: Tf_config
                 end
                 inherited RadioGroup1: TRadioGroup
                   inherited LongEdit1: TLongEdit
-                    TabOrder = 3
+                    TabOrder = 2
                   end
                 end
                 inherited CheckGroup1: TCheckGroup

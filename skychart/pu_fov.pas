@@ -112,7 +112,7 @@ end;
 
 procedure Tf_fov.FormCreate(Sender: TObject);
 begin
-  ScaleDPI(Self,96);
+  ScaleDPI(Self);
   SetLang;
 end;
 

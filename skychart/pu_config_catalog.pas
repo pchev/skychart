@@ -74,7 +74,7 @@ end;
 
 procedure Tf_configcatalog.FormCreate(Sender: TObject);
 begin
-  ScaleDPI(Self,96);
+  ScaleDPI(Self);
   SetLang;
 end;
 

@@ -130,7 +130,7 @@ end;
 
 procedure Tf_getdss.FormCreate(Sender: TObject);
 begin
-ScaleDPI(Self,96);
+ScaleDPI(Self);
 SetLang;
 cfgdss:=Tconf_dss.Create;
   if VerboseMsg then WriteTrace('Loadlibrary '+dsslibname);

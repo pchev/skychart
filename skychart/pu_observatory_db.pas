@@ -247,7 +247,7 @@ end;
 
 procedure Tf_observatory_db.FormCreate(Sender: TObject);
 begin
-ScaleDPI(Self,96);
+ScaleDPI(Self);
 SetLang;
 countrycode:=TStringList.Create;
 citycode:=TStringList.Create;

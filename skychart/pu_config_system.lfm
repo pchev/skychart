@@ -112,7 +112,7 @@ object f_configsystem: Tf_configsystem
             end
           end
           inherited GroupBox1: TGroupBox
-            ClientHeight = 83
+            ClientHeight = 81
           end
           inherited GroupBoxLinux: TGroupBox
             inherited LinuxDesktopBox: TComboBox

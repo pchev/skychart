@@ -1986,7 +1986,7 @@ end;
 procedure Tf_scriptengine.FormCreate(Sender: TObject);
 var i: integer;
 begin
-  ScaleDPI(Self,96);
+  ScaleDPI(Self);
   grnum:=0;
   btnum:=0;
   ednum:=0;

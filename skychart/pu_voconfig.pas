@@ -221,7 +221,7 @@ end;
 
 procedure Tf_voconfig.FormCreate(Sender: TObject);
 begin
-  ScaleDPI(Self,96);
+  ScaleDPI(Self);
   ra:=0;
   dec:=0;
   fov:=deg2rad;

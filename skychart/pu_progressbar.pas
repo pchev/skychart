@@ -65,7 +65,7 @@ end;
 
 procedure Tf_progress.FormCreate(Sender: TObject);
 begin
-  ScaleDPI(Self,96);
+  ScaleDPI(Self);
   SetLang;
 end;
 

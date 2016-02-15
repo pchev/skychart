@@ -27,8 +27,8 @@ object f_planetinfo: Tf_planetinfo
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
-      ClientHeight = 546
-      ClientWidth = 796
+      ClientHeight = 544
+      ClientWidth = 794
       object Panel1: TPanel
         Left = 0
         Height = 546
@@ -58,8 +58,8 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet2: TTabSheet
       Caption = 'TabSheet2'
-      ClientHeight = 546
-      ClientWidth = 796
+      ClientHeight = 544
+      ClientWidth = 794
       object Panel2: TPanel
         Left = 0
         Height = 546
@@ -103,8 +103,8 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet3: TTabSheet
       Caption = 'TabSheet3'
-      ClientHeight = 546
-      ClientWidth = 796
+      ClientHeight = 544
+      ClientWidth = 794
       object Panel3: TPanel
         Left = 0
         Height = 546
@@ -149,8 +149,8 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet4: TTabSheet
       Caption = 'TabSheet4'
-      ClientHeight = 546
-      ClientWidth = 796
+      ClientHeight = 544
+      ClientWidth = 794
       object Panel4: TPanel
         Left = 0
         Height = 546
@@ -195,8 +195,8 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet5: TTabSheet
       Caption = 'TabSheet5'
-      ClientHeight = 546
-      ClientWidth = 796
+      ClientHeight = 544
+      ClientWidth = 794
       object Panel5: TPanel
         Left = 0
         Height = 546
@@ -241,8 +241,8 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet6: TTabSheet
       Caption = 'TabSheet6'
-      ClientHeight = 546
-      ClientWidth = 796
+      ClientHeight = 544
+      ClientWidth = 794
       object Panel6: TPanel
         Left = 0
         Height = 546
@@ -287,8 +287,8 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet7: TTabSheet
       Caption = 'TabSheet7'
-      ClientHeight = 546
-      ClientWidth = 796
+      ClientHeight = 544
+      ClientWidth = 794
       object Panel7: TPanel
         Left = 0
         Height = 546
@@ -333,8 +333,8 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet8: TTabSheet
       Caption = 'TabSheet8'
-      ClientHeight = 546
-      ClientWidth = 796
+      ClientHeight = 544
+      ClientWidth = 794
       object Panel8: TPanel
         Left = 0
         Height = 546
@@ -379,13 +379,13 @@ object f_planetinfo: Tf_planetinfo
     end
     object TabSheet9: TTabSheet
       Caption = 'TabSheet9'
-      ClientHeight = 546
-      ClientWidth = 796
+      ClientHeight = 544
+      ClientWidth = 794
       object Panel9: TPanel
         Left = 0
-        Height = 546
+        Height = 544
         Top = 0
-        Width = 796
+        Width = 794
         Align = alClient
         BevelOuter = bvNone
         Color = clBlack
@@ -423,9 +423,9 @@ object f_planetinfo: Tf_planetinfo
     TabOrder = 1
     object CheckBox1: TCheckBox
       Left = 8
-      Height = 24
+      Height = 22
       Top = 0
-      Width = 184
+      Width = 176
       Caption = 'Start graph at local noon'
       OnChange = CheckBox1Change
       TabOrder = 0

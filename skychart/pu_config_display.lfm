@@ -112,7 +112,7 @@ object f_configdisplay: Tf_configdisplay
           ClientHeight = 544
           ClientWidth = 494
           inherited GroupBox5: TGroupBox
-            ClientHeight = 280
+            ClientHeight = 278
           end
         end
         inherited Page7: TTabSheet
