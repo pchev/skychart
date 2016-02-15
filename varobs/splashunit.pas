@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, UScaleDPI,
   StdCtrls, ExtCtrls, Buttons, LResources, u_param;
 
 type
@@ -40,6 +40,7 @@ type
     Panel1: TPanel;
     Timer1: TTimer;
     BitBtn1: TBitBtn;
+    procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Image1Click(Sender: TObject);
@@ -60,6 +61,11 @@ procedure Tsplash.Timer1Timer(Sender: TObject);
 begin
   Timer1.enabled:=false;
   splash.free;
+end;
+
+procedure Tsplash.FormCreate(Sender: TObject);
+begin
+  ScaleDPI(Self);
 end;
 
 procedure Tsplash.FormShow(Sender: TObject);

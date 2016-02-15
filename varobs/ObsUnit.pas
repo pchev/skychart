@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, UScaleDPI,
   StdCtrls, Buttons, ComCtrls, LResources, jdcalendar, EditBtn, u_param, Menus, u_util2;
 
 type
@@ -82,6 +82,7 @@ type
     TimePicker1: TTimePicker;
     procedure Button1Click(Sender: TObject);
     procedure EditbtnClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure AddClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -207,6 +208,11 @@ end;
 procedure TObsForm.EditbtnClick(Sender: TObject);
 begin
   ExecuteFile(SafeUTF8ToSys(FilenameEdit1.text));
+end;
+
+procedure TObsForm.FormCreate(Sender: TObject);
+begin
+  ScaleDPI(Self);
 end;
 
 procedure TObsForm.AddClick(Sender: TObject);

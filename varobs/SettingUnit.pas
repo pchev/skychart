@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, UScaleDPI,
   StdCtrls, ExtCtrls, Buttons, LResources, u_param, ComCtrls, EditBtn, Spin;
 
 type
@@ -169,6 +169,7 @@ end;
 
 procedure TOptForm.FormCreate(Sender: TObject);
 begin
+ScaleDPI(Self);
 FileNameEdit0.InitialDir:=privatedir;
 FileNameEdit1.InitialDir:=privatedir;
 FileNameEdit2.InitialDir:=privatedir;
