@@ -338,6 +338,7 @@ if initial then begin
   initial:=false;
 end;
 BtnReset.visible:=false;
+BtnPrint.Visible:=(Printer.PrinterIndex>=0);
 if cdb=nil then begin
    comet.TabVisible:=false;
    Asteroids.TabVisible:=false;
