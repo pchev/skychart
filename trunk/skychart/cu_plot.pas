@@ -175,6 +175,9 @@ type
   
 Implementation
 
+const
+   emptysize=10;
+
 constructor TSplot.Create(AOwner:TComponent);
 var i,j : integer;
     MenuItem: TMenuItem;
@@ -195,9 +198,9 @@ for i:=0 to 6 do
  // set safe value
  starbmpw:=1;
  editlabel:=-1;
- cbmp.SetSize(100,100);
- cfgchart.width:=100;
- cfgchart.height:=100;
+ cbmp.SetSize(emptysize,emptysize);
+ cfgchart.width:=emptysize;
+ cfgchart.height:=emptysize;
  cfgchart.min_ma:=6;
  cfgchart.onprinter:=false;
  cfgchart.drawpen:=1;
@@ -430,6 +433,7 @@ end;
 Procedure TSplot.FlushCnv;
 begin
 if cfgplot.UseBMP then begin
+ if (cbmp.Width=emptysize)and(cbmp.Height=emptysize) then exit;
  cbmp.LoadFromBitmapIfNeeded;
  {$ifdef darwin}
  cbmp.Draw(destcnv,0,0,false); // avoid error message: "CGBitmapContextCreate: invalid data bytes/row"

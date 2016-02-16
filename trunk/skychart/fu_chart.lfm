@@ -15,6 +15,7 @@ object f_chart: Tf_chart
     BevelOuter = bvNone
     ClientHeight = 338
     ClientWidth = 508
+    Color = clBlack
     FullRepaint = False
     ParentColor = False
     TabOrder = 0
