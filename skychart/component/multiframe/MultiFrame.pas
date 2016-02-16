@@ -343,8 +343,8 @@ end;
 if Assigned(FOnCreateChild) then FOnCreateChild(FChild[FChildIndex]);
 FChild[FChildIndex].Maximized:=FMaximized;
 SetActiveChild(FChildIndex);
-DefaultPos.X:=DefaultPos.X+FTitleHeight;
-DefaultPos.Y:=DefaultPos.Y+FTitleHeight;
+DefaultPos.X:=DefaultPos.X+2*FTitleHeight;
+DefaultPos.Y:=DefaultPos.Y+2*FTitleHeight;
 if DefaultPos.Y>10*FTitleHeight then begin
    DefaultPos.Y:=0;
    if DefaultPos.X>30*FTitleHeight then DefaultPos.X:=0;
