@@ -2168,11 +2168,10 @@ if (@cdcwcs_initfitsfile=nil)or(@cdcwcs_release=nil)or(@cdcwcs_sky2xy=nil)or(@cd
 end;
 {$ifdef unix}
    step:='Multiframe unix';
-if VerboseMsg then
- WriteTrace(step);
-   MultiFrame1.InactiveBorderColor:=$404040;
-   MultiFrame1.TitleColor:=clBlack;
-   MultiFrame1.BorderColor:=$808080;
+   if VerboseMsg then WriteTrace(step);
+   MultiFrame1.InactiveBorderColor:=$303030;
+   MultiFrame1.TitleColor:=clWhite;
+   MultiFrame1.BorderColor:=$606060;
 {$endif}
 step:='Bitmap';
 if VerboseMsg then

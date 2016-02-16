@@ -518,9 +518,10 @@ end;
 constructor Tf_chart.Create(TheOwner: TComponent);
 var i: integer;
 begin
-if VerboseMsg then
- WriteTrace('Create new chart');
-inherited Create(TheOwner);
+ if VerboseMsg then WriteTrace('Create new chart');
+ inherited Create(TheOwner);
+ Width:=max(Width,2 * Application.MainForm.Width div 3);
+ Height:=max(Height,2 * Application.MainForm.Height div 3);
  locked:=true;
  lockmove:=false;
  lockkey:=false;

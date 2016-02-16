@@ -577,8 +577,8 @@ for i:=0 to FChildIndex do begin
   FChild[i].top:=x;
   FChild[i].left:=y;
   FChild[i].BringToFront;
-  x:=x+FTitleHeight;
-  y:=y+FTitleHeight;
+  x:=x+2*FTitleHeight;
+  y:=y+2*FTitleHeight;
   if y>10*FTitleHeight then begin
      y:=0;
      if x>30*FTitleHeight then x:=0;
