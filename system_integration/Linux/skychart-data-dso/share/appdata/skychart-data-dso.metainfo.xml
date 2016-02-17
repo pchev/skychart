@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="addon">
+  <id>skychart-data-dso</id>
+  <extends>skychart.desktop</extends>
+  <name>Additional Nebulae Catalogs</name>
+  <summary>Standard nebulae catalogs: New General Catalogue; Principal 
+    Galaxies Catalogue; Lynds Bright Nebulae; Open Cluster Data; 
+    Globular Clusters in the Milky Way; Galactic Planetary Nebulae.</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>Public Domain</project_license>
+</component>
