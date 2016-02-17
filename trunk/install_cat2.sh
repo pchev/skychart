@@ -22,7 +22,9 @@ echo Install nebulae catalog data to $destdir
 
 install -m 755 -d $destdir
 install -m 755 -d $destdir/share
+install -m 755 -d $destdir/share/appdata
 install -m 755 -d $destdir/share/skychart
+install -v -m 644 system_integration/Linux/skychart-data-dso/share/appdata/skychart-data-dso.metainfo.xml $destdir/share/appdata/skychart-data-dso.metainfo.xml
 
 InstCat catalog_gcm $destdir/share/skychart
 InstCat catalog_gpn $destdir/share/skychart
