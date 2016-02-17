@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, pu_fov, UScaleDPI,
+uses u_help, u_translation, u_constant, u_util, pu_fov, UScaleDPI, cu_radec,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Grids, Spin, Buttons, StdCtrls, ExtCtrls, ComCtrls, LResources,
   EditBtn, LCLType, enhedits, LazHelpHTML;
@@ -64,21 +64,21 @@ type
     Edit22: TEdit;
     Edit23: TEdit;
     Label260: TLabel;
-    labelRotChartInfo: TUpDown;
-    labelRotConst: TUpDown;
-    labelRotMisc: TUpDown;
-    labelRotMult: TUpDown;
-    labelRotNeb: TUpDown;
-    labelRotobslist: TUpDown;
-    labelRotSol: TUpDown;
-    labelRotStar: TUpDown;
-    labelRotVar: TUpDown;
+    labelRotChartInfo: TMouseUpDown;
+    labelRotConst: TMouseUpDown;
+    labelRotMisc: TMouseUpDown;
+    labelRotMult: TMouseUpDown;
+    labelRotNeb: TMouseUpDown;
+    labelRotobslist: TMouseUpDown;
+    labelRotSol: TMouseUpDown;
+    labelRotStar: TMouseUpDown;
+    labelRotVar: TMouseUpDown;
     linemodemilkyway: TCheckBox;
     Edit14: TEdit;
     ImageList1: TImageList;
     Label15: TLabel;
     labelcolorobslist: TShape;
-    labelsizeobslist: TUpDown;
+    labelsizeobslist: TMouseUpDown;
     OptLabels: TCheckBox;
     Label10: TLabel;
     Label14: TLabel;
@@ -104,18 +104,18 @@ type
     Edit9: TEdit;
     FileNameEdit1: TFileNameEdit;
     Label9: TLabel;
-    labelSizeStar: TUpDown;
-    labelsizeVar: TUpDown;
-    labelsizeMult: TUpDown;
-    labelsizeNeb: TUpDown;
-    labelsizeSol: TUpDown;
-    labelsizeConst: TUpDown;
-    labelsizeMisc: TUpDown;
-    labelsizeChartInfo: TUpDown;
-    labelmagVar: TUpDown;
-    labelmagMult: TUpDown;
-    labelmagNeb: TUpDown;
-    labelmagSol: TUpDown;
+    labelSizeStar: TMouseUpDown;
+    labelsizeVar: TMouseUpDown;
+    labelsizeMult: TMouseUpDown;
+    labelsizeNeb: TMouseUpDown;
+    labelsizeSol: TMouseUpDown;
+    labelsizeConst: TMouseUpDown;
+    labelsizeMisc: TMouseUpDown;
+    labelsizeChartInfo: TMouseUpDown;
+    labelmagVar: TMouseUpDown;
+    labelmagMult: TMouseUpDown;
+    labelmagNeb: TMouseUpDown;
+    labelmagSol: TMouseUpDown;
     lstDSOCScheme: TComboBox;
     DrawAllStarLabel: TCheckBox;
     DrawPmBox: TCheckBox;
@@ -360,7 +360,7 @@ type
     Shape12: TShape;
     Shape11: TShape;
     PageControl1: TPageControl;
-    labelmagStar: TUpDown;
+    labelmagStar: TMouseUpDown;
     procedure antialiasClick(Sender: TObject);
     procedure BtnBWColorClick(Sender: TObject);
     procedure BtnDefaultColorClick(Sender: TObject);

@@ -2195,7 +2195,7 @@ object f_config_display: Tf_config_display
             OnChange = labelmagChange
             TabOrder = 1
           end
-          object labelmagStar: TUpDown
+          object labelmagStar: TMouseUpDown
             Tag = 1
             Left = 246
             Height = 21
@@ -2217,7 +2217,7 @@ object f_config_display: Tf_config_display
             OnChange = labelmagChange
             TabOrder = 6
           end
-          object labelmagVar: TUpDown
+          object labelmagVar: TMouseUpDown
             Tag = 2
             Left = 246
             Height = 21
@@ -2230,7 +2230,7 @@ object f_config_display: Tf_config_display
             TabOrder = 7
             Wrap = False
           end
-          object labelmagMult: TUpDown
+          object labelmagMult: TMouseUpDown
             Tag = 3
             Left = 246
             Height = 21
@@ -2252,7 +2252,7 @@ object f_config_display: Tf_config_display
             OnChange = labelmagChange
             TabOrder = 11
           end
-          object labelmagNeb: TUpDown
+          object labelmagNeb: TMouseUpDown
             Tag = 4
             Left = 246
             Height = 21
@@ -2274,7 +2274,7 @@ object f_config_display: Tf_config_display
             OnChange = labelmagChange
             TabOrder = 16
           end
-          object labelmagSol: TUpDown
+          object labelmagSol: TMouseUpDown
             Tag = 5
             Left = 246
             Height = 21
@@ -2305,7 +2305,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelsizeChange
             TabOrder = 3
           end
-          object labelSizeStar: TUpDown
+          object labelSizeStar: TMouseUpDown
             Tag = 1
             Left = 382
             Height = 21
@@ -2327,7 +2327,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelsizeChange
             TabOrder = 8
           end
-          object labelsizeVar: TUpDown
+          object labelsizeVar: TMouseUpDown
             Tag = 2
             Left = 382
             Height = 21
@@ -2349,7 +2349,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelsizeChange
             TabOrder = 13
           end
-          object labelsizeMult: TUpDown
+          object labelsizeMult: TMouseUpDown
             Tag = 3
             Left = 382
             Height = 21
@@ -2371,7 +2371,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelsizeChange
             TabOrder = 18
           end
-          object labelsizeNeb: TUpDown
+          object labelsizeNeb: TMouseUpDown
             Tag = 4
             Left = 382
             Height = 21
@@ -2393,7 +2393,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelsizeChange
             TabOrder = 23
           end
-          object labelsizeSol: TUpDown
+          object labelsizeSol: TMouseUpDown
             Tag = 5
             Left = 382
             Height = 21
@@ -2415,7 +2415,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelsizeChange
             TabOrder = 26
           end
-          object labelsizeConst: TUpDown
+          object labelsizeConst: TMouseUpDown
             Tag = 6
             Left = 382
             Height = 21
@@ -2437,7 +2437,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelsizeChange
             TabOrder = 29
           end
-          object labelsizeMisc: TUpDown
+          object labelsizeMisc: TMouseUpDown
             Tag = 7
             Left = 382
             Height = 21
@@ -2459,7 +2459,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelsizeChange
             TabOrder = 32
           end
-          object labelsizeChartInfo: TUpDown
+          object labelsizeChartInfo: TMouseUpDown
             Tag = 8
             Left = 382
             Height = 21
@@ -2505,7 +2505,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelsizeChange
             TabOrder = 34
           end
-          object labelsizeobslist: TUpDown
+          object labelsizeobslist: TMouseUpDown
             Tag = 9
             Left = 382
             Height = 21
@@ -2535,7 +2535,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelRotChange
             TabOrder = 36
           end
-          object labelRotStar: TUpDown
+          object labelRotStar: TMouseUpDown
             Tag = 1
             Left = 446
             Height = 21
@@ -2558,7 +2558,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelRotChange
             TabOrder = 38
           end
-          object labelRotVar: TUpDown
+          object labelRotVar: TMouseUpDown
             Tag = 2
             Left = 446
             Height = 21
@@ -2581,7 +2581,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelRotChange
             TabOrder = 40
           end
-          object labelRotMult: TUpDown
+          object labelRotMult: TMouseUpDown
             Tag = 3
             Left = 446
             Height = 21
@@ -2604,7 +2604,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelRotChange
             TabOrder = 42
           end
-          object labelRotNeb: TUpDown
+          object labelRotNeb: TMouseUpDown
             Tag = 4
             Left = 446
             Height = 21
@@ -2627,7 +2627,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelRotChange
             TabOrder = 44
           end
-          object labelRotSol: TUpDown
+          object labelRotSol: TMouseUpDown
             Tag = 5
             Left = 446
             Height = 21
@@ -2650,7 +2650,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelRotChange
             TabOrder = 46
           end
-          object labelRotConst: TUpDown
+          object labelRotConst: TMouseUpDown
             Tag = 6
             Left = 446
             Height = 21
@@ -2673,7 +2673,7 @@ object f_config_display: Tf_config_display
             OnChange = LabelRotChange
             TabOrder = 48
           end
-          object labelRotMisc: TUpDown
+          object labelRotMisc: TMouseUpDown
             Tag = 7
             Left = 446
             Height = 21
@@ -2697,7 +2697,7 @@ object f_config_display: Tf_config_display
             TabOrder = 50
             Visible = False
           end
-          object labelRotChartInfo: TUpDown
+          object labelRotChartInfo: TMouseUpDown
             Tag = 8
             Left = 446
             Height = 21
@@ -2722,7 +2722,7 @@ object f_config_display: Tf_config_display
             TabOrder = 52
             Visible = False
           end
-          object labelRotobslist: TUpDown
+          object labelRotobslist: TMouseUpDown
             Tag = 9
             Left = 446
             Height = 21

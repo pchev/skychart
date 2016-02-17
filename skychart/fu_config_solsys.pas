@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, u_projection, cu_database,
+uses u_help, u_translation, u_constant, u_util, u_projection, cu_database, cu_radec,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math,
   Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources,
   downloaddialog, jdcalendar, EditBtn, Process, LazHelpHTML, FileUtil;
@@ -77,7 +77,7 @@ type
     mpcfile: TFileNameEdit;
     ComPageControl1: TPageControl;
     AstPageControl2: TPageControl;
-    astnummonth: TUpDown;
+    astnummonth: TMouseUpDown;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;

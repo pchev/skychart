@@ -1360,7 +1360,7 @@ object f_config_solsys: Tf_config_solsys
                 Width = 32
                 TabOrder = 1
               end
-              object astnummonth: TUpDown
+              object astnummonth: TMouseUpDown
                 Left = 225
                 Height = 23
                 Top = 46

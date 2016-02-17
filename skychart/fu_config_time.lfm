@@ -120,7 +120,7 @@ object f_config_time: Tf_config_time
           end
           object dt_ut: TFloatEdit
             Left = 215
-            Height = 26
+            Height = 22
             Hint = '-99999999..99999999'
             Top = 82
             Width = 105
@@ -143,7 +143,7 @@ object f_config_time: Tf_config_time
           end
           object GregY: TLongEdit
             Left = 195
-            Height = 26
+            Height = 22
             Top = 120
             Width = 56
             TabOrder = 3
@@ -152,7 +152,7 @@ object f_config_time: Tf_config_time
           end
           object GregM: TLongEdit
             Left = 256
-            Height = 26
+            Height = 22
             Hint = '1..12'
             Top = 120
             Width = 36
@@ -166,7 +166,7 @@ object f_config_time: Tf_config_time
           end
           object GregD: TLongEdit
             Left = 296
-            Height = 26
+            Height = 22
             Hint = '1..31'
             Top = 120
             Width = 40
@@ -190,7 +190,7 @@ object f_config_time: Tf_config_time
         end
         object LongEdit2: TLongEdit
           Left = 230
-          Height = 26
+          Height = 22
           Hint = '10..86400'
           Top = 56
           Width = 41
@@ -304,8 +304,8 @@ object f_config_time: Tf_config_time
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 35
-            ClientWidth = 133
+            ClientHeight = 37
+            ClientWidth = 135
             Columns = 2
             Items.Strings = (
               'AD'
@@ -316,7 +316,7 @@ object f_config_time: Tf_config_time
           end
           object JDEdit: TFloatEdit
             Left = 54
-            Height = 26
+            Height = 22
             Top = 99
             Width = 131
             TabOrder = 13
@@ -411,9 +411,9 @@ object f_config_time: Tf_config_time
             OnClick = BitBtn1Click
             TabOrder = 14
           end
-          object d_year: TUpDown
+          object d_year: TMouseUpDown
             Left = 124
-            Height = 26
+            Height = 22
             Top = 22
             Width = 13
             Max = 1
@@ -426,15 +426,15 @@ object f_config_time: Tf_config_time
           end
           object d_monthEdit: TEdit
             Left = 136
-            Height = 26
+            Height = 22
             Top = 22
             Width = 47
             OnChange = DateEditChange
             TabOrder = 2
           end
-          object d_month: TUpDown
+          object d_month: TMouseUpDown
             Left = 183
-            Height = 26
+            Height = 22
             Top = 22
             Width = 13
             Associate = d_monthEdit
@@ -448,15 +448,15 @@ object f_config_time: Tf_config_time
           end
           object d_dayEdit: TEdit
             Left = 195
-            Height = 26
+            Height = 22
             Top = 22
             Width = 47
             OnChange = DateEditChange
             TabOrder = 4
           end
-          object d_day: TUpDown
+          object d_day: TMouseUpDown
             Left = 242
-            Height = 26
+            Height = 22
             Top = 22
             Width = 13
             Associate = d_dayEdit
@@ -470,15 +470,15 @@ object f_config_time: Tf_config_time
           end
           object t_hourEdit: TEdit
             Left = 56
-            Height = 26
+            Height = 22
             Top = 65
             Width = 47
             OnChange = TimeEditChange
             TabOrder = 7
           end
-          object t_hour: TUpDown
+          object t_hour: TMouseUpDown
             Left = 103
-            Height = 26
+            Height = 22
             Top = 65
             Width = 13
             Associate = t_hourEdit
@@ -492,15 +492,15 @@ object f_config_time: Tf_config_time
           end
           object t_minEdit: TEdit
             Left = 127
-            Height = 26
+            Height = 22
             Top = 65
             Width = 47
             OnChange = TimeEditChange
             TabOrder = 9
           end
-          object t_min: TUpDown
+          object t_min: TMouseUpDown
             Left = 174
-            Height = 26
+            Height = 22
             Top = 65
             Width = 13
             Associate = t_minEdit
@@ -512,9 +512,9 @@ object f_config_time: Tf_config_time
             Thousands = False
             Wrap = False
           end
-          object t_sec: TUpDown
+          object t_sec: TMouseUpDown
             Left = 242
-            Height = 26
+            Height = 22
             Top = 65
             Width = 13
             Associate = t_secEdit
@@ -528,7 +528,7 @@ object f_config_time: Tf_config_time
           end
           object t_secEdit: TEdit
             Left = 195
-            Height = 26
+            Height = 22
             Top = 65
             Width = 47
             OnChange = TimeEditChange
@@ -545,7 +545,7 @@ object f_config_time: Tf_config_time
           end
           object d_yearEdit: TLongEdit
             Left = 56
-            Height = 26
+            Height = 22
             Hint = '0..200000'
             Top = 22
             Width = 68
@@ -646,8 +646,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 118
-          ClientWidth = 133
+          ClientHeight = 119
+          ClientWidth = 135
           Items.Strings = (
             'Days'
             'Hours'
@@ -728,8 +728,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 60
-          ClientWidth = 434
+          ClientHeight = 61
+          ClientWidth = 436
           Columns = 3
           Items.Strings = (
             'None'
@@ -748,7 +748,7 @@ object f_config_time: Tf_config_time
             Width = 137
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 3
+            TabOrder = 2
             OnChange = LongEdit1Change
             Value = 2
             MinValue = 2
@@ -770,8 +770,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 30
-          ClientWidth = 434
+          ClientHeight = 31
+          ClientWidth = 436
           Columns = 3
           Items.Strings = (
             'Object Name'
@@ -799,8 +799,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 6
-          ClientHeight = 30
-          ClientWidth = 434
+          ClientHeight = 31
+          ClientWidth = 436
           Columns = 6
           Items.Strings = (
             'Year'
@@ -844,7 +844,7 @@ object f_config_time: Tf_config_time
           MinValue = 1
           MaxValue = 999
         end
-        object UpDown1: TUpDown
+        object UpDown1: TMouseUpDown
           Left = 295
           Height = 21
           Top = 70
@@ -856,7 +856,7 @@ object f_config_time: Tf_config_time
           TabOrder = 2
           Wrap = False
         end
-        object UpDown2: TUpDown
+        object UpDown2: TMouseUpDown
           Left = 433
           Height = 21
           Top = 70
@@ -889,8 +889,8 @@ object f_config_time: Tf_config_time
           Top = 14
           Width = 457
           Caption = 'Real time options'
-          ClientHeight = 62
-          ClientWidth = 453
+          ClientHeight = 63
+          ClientWidth = 455
           TabOrder = 0
           object Label2: TLabel
             Left = 3
@@ -920,8 +920,8 @@ object f_config_time: Tf_config_time
           Top = 102
           Width = 457
           Caption = 'Recording options'
-          ClientHeight = 358
-          ClientWidth = 453
+          ClientHeight = 359
+          ClientWidth = 455
           TabOrder = 1
           object DirectoryEdit1: TDirectoryEdit
             Left = 190
@@ -1091,7 +1091,7 @@ object f_config_time: Tf_config_time
             TabOrder = 10
             OnChange = FileNameEdit1Change
           end
-          object UpDown3: TUpDown
+          object UpDown3: TMouseUpDown
             Left = 238
             Height = 23
             Top = 178

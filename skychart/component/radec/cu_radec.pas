@@ -261,11 +261,16 @@ end;
 
 procedure TMouseUpDown.UpDownMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
 var FCanChangePos: integer;
+    FCanChangeDir: TUpDownDirection;
+    bt:TUDBtnType;
+    FCanChange: Boolean;
 begin
 if sender is TUpDown then
   with sender as TUpDown do begin
     if WheelDelta<0 then
         begin
+          bt:=btPrev;
+          FCanChangeDir:=updDown;
           if Position - Increment >= Min then
             FCanChangePos := Position - Increment
           else
@@ -276,6 +281,8 @@ if sender is TUpDown then
         end
     else
         begin
+          bt:=btNext;
+          FCanChangeDir:=updUp;
           if Position + Increment <= Max then
             FCanChangePos := Position + Increment
           else
@@ -285,8 +292,11 @@ if sender is TUpDown then
             FCanChangePos := Max;
         end;
     end;
-    if not CanChange then Exit;
+    FCanChange:=true;
+    if Assigned(OnChangingEx) then OnChangingEx(self,FCanChange,FCanChangePos,FCanChangeDir);
+    if not FCanChange then Exit;
     Position := FCanChangePos;
+    if Assigned(OnClick) then OnClick(self,bt);
 end;          
 
 //////////////////////////////////////////////////////////

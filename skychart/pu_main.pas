@@ -35,7 +35,7 @@ uses
   {$endif}
   lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, fu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures, pu_indigui,
-  pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
+  pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet, cu_radec,
   pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, pu_obslist, fu_script, pu_scriptengine,
   u_constant, u_util, UScaleDPI, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
@@ -165,7 +165,7 @@ type
     MenuHelpQuickStart: TMenuItem;
     ThemeTimer: TTimer;
     AnimationTimer: TTimer;
-    TimeVal: TUpDown;
+    TimeVal: TMouseUpDown;
     ViewClock: TAction;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
