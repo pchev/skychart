@@ -798,6 +798,7 @@ if assigned(Fshowinfo) then begin
   end;
   {$endif}
 end;
+Panel1.Color:=clDefault;
 SetScrollBar;
 if VerboseMsg then WriteTrace('Chart '+sc.cfgsc.chartname+': Refresh end');
 end;
