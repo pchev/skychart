@@ -33,11 +33,20 @@ type
   Tradeckind=( RA, DE, Az, Alt );
 
 type
+
+  TMouseUpDown=class(TUpDown)
+  protected
+    procedure UpDownMouseWheel(Sender: TObject; Shift: TShiftState;WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; Override;
+  end;
+
   TRaDec = class(TCustomPanel)
   protected
     { Private declarations }
     EditDeg, EditMin, EditSec : TEdit;
-    ArrowDeg, ArrowMin, ArrowSec : TUpDown;
+    ArrowDeg, ArrowMin, ArrowSec : TMouseUpDown;
     LabelDeg, LabelMin, LabelSec : TLabel;
     Fkind : Tradeckind;
     FOnChange: TNotifyEvent;
@@ -80,6 +89,7 @@ implementation
 procedure Register;
 begin
   RegisterComponents('CDC', [TRaDec]);
+  RegisterComponents('CDC', [TMouseUpDown]);
 end;
 
 //////////////////////////////////////////////////////////
@@ -235,6 +245,50 @@ begin
     str(sec:2:0,s);
     if abs(sec)<9.5 then s:='0'+trim(s);
 end;
+
+//////////////////////////////////////////////////////////
+
+constructor TMouseUpDown.Create(AOwner: TComponent);
+begin
+ inherited Create(AOwner);
+ OnMouseWheel:=@UpDownMouseWheel;
+end;
+
+destructor TMouseUpDown.Destroy;
+begin
+  inherited destroy;
+end;
+
+procedure TMouseUpDown.UpDownMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+var FCanChangePos: integer;
+begin
+if sender is TUpDown then
+  with sender as TUpDown do begin
+    if WheelDelta<0 then
+        begin
+          if Position - Increment >= Min then
+            FCanChangePos := Position - Increment
+          else
+            if Wrap then
+              FCanChangePos := Max + (Position - Increment - Min) + 1
+          else
+            FCanChangePos := Min;
+        end
+    else
+        begin
+          if Position + Increment <= Max then
+            FCanChangePos := Position + Increment
+          else
+            If Wrap then
+              FCanChangePos := Min + (Position + Increment - Max) - 1
+          else
+            FCanChangePos := Max;
+        end;
+    end;
+    if not CanChange then Exit;
+    Position := FCanChangePos;
+end;          
+
 //////////////////////////////////////////////////////////
 
 constructor TRaDec.Create(Aowner:Tcomponent);
@@ -254,10 +308,10 @@ EditSec := TEdit.Create(self);
 LabelDeg := TLabel.Create(self);
 LabelMin := TLabel.Create(self);
 LabelSec := TLabel.Create(self);
-ArrowDeg := TUpDown.Create(self);
+ArrowDeg := TMouseUpDown.Create(self);
 ArrowDeg.Max:=360;
-ArrowMin := TUpDown.Create(self);
-ArrowSec := TUpDown.Create(self);
+ArrowMin := TMouseUpDown.Create(self);
+ArrowSec := TMouseUpDown.Create(self);
 EditDeg.Parent:=self;
 EditMin.Parent:=self;
 EditSec.Parent:=self;
