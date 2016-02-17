@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, u_projection, cu_tz,
+uses u_help, u_translation, u_constant, u_util, u_projection, cu_tz,cu_radec,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math,
   StdCtrls, CheckLst, Buttons, ExtCtrls, enhedits, ComCtrls, LResources,
   ButtonPanel, jdcalendar, LazHelpHTML, EditBtn;
@@ -70,9 +70,9 @@ type
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
     Label10: TLabel;
-    UpDown1: TUpDown;
-    UpDown2: TUpDown;
-    UpDown3: TUpDown;
+    UpDown1: TMouseUpDown;
+    UpDown2: TMouseUpDown;
+    UpDown3: TMouseUpDown;
     UTLabel: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -85,10 +85,10 @@ type
     d_yearEdit: TLongEdit;
     Page3: TTabSheet;
     TrackBar1: TTrackBar;
-    t_hour: TUpDown;
+    t_hour: TMouseUpDown;
     d_monthEdit: TEdit;
     d_dayEdit: TEdit;
-    t_min: TUpDown;
+    t_min: TMouseUpDown;
     t_hourEdit: TEdit;
     JDEdit: TFloatEdit;
     Label1: TLabel;
@@ -127,10 +127,10 @@ type
     AllSim: TButton;
     NoSim: TButton;
     PageControl1: TPageControl;
-    d_year: TUpDown;
-    d_month: TUpDown;
-    d_day: TUpDown;
-    t_sec: TUpDown;
+    d_year: TMouseUpDown;
+    d_month: TMouseUpDown;
+    d_day: TMouseUpDown;
+    t_sec: TMouseUpDown;
     t_minEdit: TEdit;
     t_secEdit: TEdit;
     procedure BitBtn1Click(Sender: TObject);

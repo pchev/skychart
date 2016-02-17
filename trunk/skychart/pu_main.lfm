@@ -3141,7 +3141,7 @@ object f_main: Tf_main
       ClientHeight = 21
       ClientWidth = 58
       TabOrder = 3
-      object TimeVal: TUpDown
+      object TimeVal: TMouseUpDown
         Left = 36
         Height = 21
         Top = 0
