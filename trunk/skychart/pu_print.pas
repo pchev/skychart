@@ -219,8 +219,8 @@ case cm.PrintMethod of
     Preview.Visible:=false;
     end;
 2 : begin
-    PrinterInfo.Caption:=rsBitmap+'  @ '+inttostr(cm.PrinterResolution)+' DPI';
-    GroupBox1.Visible:=true;
+    PrinterInfo.Caption:=rsBitmap+'  @ '+inttostr(cm.PrintBmpWidth)+'x'+inttostr(cm.PrintBmpHeight);
+    GroupBox1.Visible:=false;
     CopyPanel.Visible:=false;
     Preview.Visible:=false;
     end;

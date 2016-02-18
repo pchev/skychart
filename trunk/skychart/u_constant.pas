@@ -1099,7 +1099,7 @@ type
     EarthMapFile, HorizonFile, HorizonPictureFile, Planetdir: string;
     db, dbhost, dbuser, dbpass, ImagePath, persdir: string;
     starshape_file, KioskPass: string;
-    Paper, PrinterResolution, PrintMethod, PrintColor,
+    Paper, PrinterResolution, PrintMethod, PrintColor, PrintBmpWidth, PrintBmpHeight,
     btnsize: integer;
     btncaption, ScreenScaling: boolean;
     configpage, configpage_i, configpage_j, autorefreshdelay, MaxChildID, dbport: integer;
@@ -2721,6 +2721,8 @@ begin
   PrinterResolution := Source.PrinterResolution;
   PrintMethod := Source.PrintMethod;
   PrintColor := Source.PrintColor;
+  PrintBmpWidth:=Source.PrintBmpWidth;
+  PrintBmpHeight:=Source.PrintBmpHeight;
   btnsize :=Source.btnsize;
   btncaption := Source.btncaption;
   ScreenScaling := Source.ScreenScaling;

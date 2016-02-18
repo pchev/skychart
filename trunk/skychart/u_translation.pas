@@ -395,7 +395,7 @@ resourcestring
   rsAbortSlew = 'Abort Slew';
   rsCreatePostsc = 'Create postscript chart. Please wait...';
   rsSendChartToP = 'Send the chart to the printer.';
-  rsCreateRaster = 'Create raster chart at %s dpi. Please wait...';
+  rsCreateRasterWH = 'Create raster chart %d x %d. Please wait...';
   rsOpenTheBitma = 'Open the bitmap.';
   rsAbout2 = 'About %s';
   rsRATurns2 = '%sRA turns:';
