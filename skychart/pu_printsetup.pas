@@ -39,16 +39,25 @@ type
 
   Tf_printsetup = class(TForm)
     Button1: TButton;
+    cmdreport2: TEdit;
+    Label10: TLabel;
+    Label11: TLabel;
     Label5: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    bmpw: TLongEdit;
+    bmph: TLongEdit;
+    printcmd2: TFileNameEdit;
+    bmpoption: TPanel;
     ResolWarning: TLabel;
     PaperSize: TComboBox;
-    printcmd: TFileNameEdit;
+    printcmd1: TFileNameEdit;
     PrintDialog1: TPrintDialog;
     PrinterSetupDialog1: TPrinterSetupDialog;
-    savepath: TDirectoryEdit;
+    savepath1: TDirectoryEdit;
     printmode: TRadioGroup;
-    qtoption: TPanel;
-    customoption: TPanel;
+    printeroption: TPanel;
+    psoption: TPanel;
     qtsetup: TButton;
     qtprintername: TLabel;
     qtprintresol: TLabel;
@@ -58,19 +67,22 @@ type
     Label2: TLabel;
     Label3: TLabel;
     prtres: TLongEdit;
-    cmdreport: TEdit;
+    cmdreport1: TEdit;
     Label4: TLabel;
     Label6: TLabel;
     Label7: TLabel;
+    savepath2: TDirectoryEdit;
+    procedure bmphChange(Sender: TObject);
+    procedure bmpwChange(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PaperSizeChange(Sender: TObject);
-    procedure printcmdAcceptFileName(Sender: TObject; var Value: String);
+    procedure printcmd1AcceptFileName(Sender: TObject; var Value: String);
     procedure qtsetupClick(Sender: TObject);
     procedure printmodeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure prtresChange(Sender: TObject);
-    procedure printcmdChange(Sender: TObject);
+    procedure printcmd1Change(Sender: TObject);
     procedure savepathExit(Sender: TObject);
   private
     { Private declarations }
@@ -99,6 +111,8 @@ Label1.caption:=rsRasterResolu;
 Label4.caption:=rsCommandToUse;
 Label5.caption:=rsSize;
 Label6.caption:=rsPathToSaveTh;
+Label8.Caption:=rsWidth;
+Label11.Caption:=rsHeight;
 printmode.caption:=rsPrintMethod;
 printmode.Items[0]:=rsSystemPrinte;
 printmode.Items[1]:=rsPostscript;
@@ -123,13 +137,14 @@ try
 lockupd:=true;
 if (cm.PrintMethod=0)and(Printer.PrinterIndex<0) then begin
   ShowMessage(rsNoPrinterFou);
-  cm.PrintMethod:=1;
+  cm.PrintMethod:=2;
 end;
 case cm.PrintMethod of
 0: begin
    printmode.ItemIndex:=0;
-   customoption.Visible:=false;
-   qtoption.Visible:=true;
+   bmpoption.Visible:=false;
+   psoption.Visible:=false;
+   printeroption.Visible:=true;
    GetPrinterResolution(cm.prtname,i);
    if i>75 then
       ResolWarning.Caption:=''
@@ -140,12 +155,13 @@ case cm.PrintMethod of
    end;
 1: begin
    printmode.ItemIndex:=1;
-   customoption.Visible:=true;
-   qtoption.Visible:=false;
-   printcmd.Text:=cm.PrintCmd1;
-   savepath.Directory:=SysToUTF8(cm.PrintTmpPath);
+   bmpoption.Visible:=false;
+   psoption.Visible:=true;
+   printeroption.Visible:=false;
+   printcmd1.Text:=cm.PrintCmd1;
+   savepath1.Directory:=SysToUTF8(cm.PrintTmpPath);
    prtres.Value:=cm.PrinterResolution;
-   if cm.PrintCmd1='' then cmdreport.text:=''
+   if cm.PrintCmd1='' then cmdreport1.text:=''
    else begin
      {$ifdef unix}
        ok:=(0=exec('which '+cm.PrintCmd1));
@@ -154,20 +170,22 @@ case cm.PrintMethod of
        ok:=Fileexists(cm.PrintCmd1);
      {$endif}
      if ok then begin
-        cmdreport.text:=rsCommandFound;
+        cmdreport1.text:=rsCommandFound;
      end else begin
-        cmdreport.text:=rsCommandNotFo;
+        cmdreport1.text:=rsCommandNotFo;
      end;
    end;
    end;
 2: begin
    printmode.ItemIndex:=2;
-   customoption.Visible:=true;
-   qtoption.Visible:=false;
-   printcmd.Text:=cm.PrintCmd2;
-   savepath.Text:=cm.PrintTmpPath;
-   prtres.Value:=cm.PrinterResolution;
-   if cm.PrintCmd2='' then cmdreport.text:=''
+   bmpoption.Visible:=true;
+   psoption.Visible:=false;
+   printeroption.Visible:=false;
+   printcmd2.Text:=cm.PrintCmd2;
+   savepath2.Text:=cm.PrintTmpPath;
+   bmpw.Value:=cm.PrintBmpWidth;
+   bmph.Value:=cm.PrintBmpHeight;
+   if cm.PrintCmd2='' then cmdreport2.text:=''
    else begin
      {$ifdef unix}
        ok:=(0=exec('which '+cm.PrintCmd2));
@@ -176,9 +194,9 @@ case cm.PrintMethod of
        ok:=Fileexists(cm.PrintCmd2);
      {$endif}
      if ok then begin
-        cmdreport.text:=rsCommandFound;
+        cmdreport2.text:=rsCommandFound;
      end else begin
-        cmdreport.text:=rsCommandNotFo;
+        cmdreport2.text:=rsCommandNotFo;
      end;
    end;
    end;
@@ -215,6 +233,16 @@ begin
   ShowHelp;
 end;
 
+procedure Tf_printsetup.bmpwChange(Sender: TObject);
+begin
+  cm.PrintBmpWidth := bmpw.Value;
+end;
+
+procedure Tf_printsetup.bmphChange(Sender: TObject);
+begin
+  cm.PrintBmpHeight := bmph.Value;
+end;
+
 procedure Tf_printsetup.PaperSizeChange(Sender: TObject);
 begin
   cm.Paper:=PaperSize.ItemIndex+1;
@@ -233,17 +261,17 @@ cm.PrinterResolution:=prtres.value;
 end;
 
 ////////// duplicate because of filenameedit onchange bug //////////////////////////
-procedure Tf_printsetup.printcmdChange(Sender: TObject);
+procedure Tf_printsetup.printcmd1Change(Sender: TObject);
 begin
 if lockupd then exit;
 case cm.PrintMethod of
-1: cm.PrintCmd1:=printcmd.Text;
-2: cm.PrintCmd2:=printcmd.Text;
+1: cm.PrintCmd1:=printcmd1.Text;
+2: cm.PrintCmd2:=printcmd2.Text;
 end;
 updprtsetup;
 end;
 
-procedure Tf_printsetup.printcmdAcceptFileName(Sender: TObject;
+procedure Tf_printsetup.printcmd1AcceptFileName(Sender: TObject;
   var Value: String);
 begin
 if lockupd then exit;
@@ -256,12 +284,17 @@ end;
 //////////////////////////////////////////
 
 procedure Tf_printsetup.savepathExit(Sender: TObject);
+var buf: string;
 begin
 if lockupd then exit;
-if DirectoryIsWritable(savepath.Text) then
-   cm.PrintTmpPath:=savepath.Text
+case cm.PrintMethod of
+1: buf:=savepath1.Text;
+2: buf:=savepath2.Text;
+end;
+if DirectoryIsWritable(buf) then
+   cm.PrintTmpPath:=buf
 else
-   ShowMessage(rsInvalidPath+savepath.Text);
+   ShowMessage(rsInvalidPath+buf);
 end;
 
 end.

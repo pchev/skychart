@@ -401,7 +401,7 @@ CL.AddConstantN('rsRemoveAllLab','String').SetString(rsRemoveAllLab);
 CL.AddConstantN('rsAbortSlew','String').SetString(rsAbortSlew);
 CL.AddConstantN('rsCreatePostsc','String').SetString(rsCreatePostsc);
 CL.AddConstantN('rsSendChartToP','String').SetString(rsSendChartToP);
-CL.AddConstantN('rsCreateRaster','String').SetString(rsCreateRaster);
+CL.AddConstantN('rsCreateRasterWH','String').SetString(rsCreateRasterWH);
 CL.AddConstantN('rsOpenTheBitma','String').SetString(rsOpenTheBitma);
 CL.AddConstantN('rsAbout2','String').SetString(rsAbout2);
 CL.AddConstantN('rsRATurns2','String').SetString(rsRATurns2);

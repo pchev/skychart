@@ -1412,25 +1412,26 @@ try
     end;
  2: begin  // to bitmap
     InitPrintColor;
-    if assigned(Fshowinfo) then Fshowinfo(Format(rsCreateRaster, [inttostr(printresol)]) , caption);
+    if assigned(Fshowinfo) then Fshowinfo(Format(rsCreateRasterWH, [cm.PrintBmpWidth,cm.PrintBmpHeight]) , caption);
     if DirectoryIsWritable(printpath) then begin
       if PrintLandscape then begin
-         w:=11*printresol;
-         h:=8*printresol;
+         w:=cm.PrintBmpWidth;
+         h:=cm.PrintBmpHeight;
       end else begin
-         w:=8*printresol;
-         h:=11*printresol;
+         w:=cm.PrintBmpHeight;
+         h:=cm.PrintBmpWidth;
       end;
+      printresol:=w div 11;
      // draw the chart to the bitmap
      prtsc.plot.cfgplot.UseBMP:=true;
      prtsc.plot.cfgchart.onprinter:=(PrintColor<2);
      prtsc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
      prtsc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
      prtsc.plot.cfgchart.fontscale:=prtsc.plot.cfgchart.drawsize; // because we cannot set a dpi property for the bitmap
-     prtsc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
-     prtsc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
-     prtsc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin+HeaderHeight,printresol);
-     prtsc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin+FooterHeight,printresol);
+     prtsc.cfgsc.LeftMargin:=0;
+     prtsc.cfgsc.RightMargin:=0;
+     prtsc.cfgsc.TopMargin:=0;
+     prtsc.cfgsc.BottomMargin:=0;
      prtsc.cfgsc.HeaderHeight:=mm2pi(HeaderHeight,printresol);
      prtsc.cfgsc.FooterHeight:=mm2pi(FooterHeight,printresol);
      prtsc.cfgsc.xshift:=prtsc.cfgsc.LeftMargin;

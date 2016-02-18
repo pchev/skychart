@@ -10,7 +10,7 @@ object f_print: Tf_print
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.6.0.2'
+  LCLVersion = '1.6.0.4'
   Visible = False
   object PrinterInfo: TLabel
     Left = 9
@@ -35,8 +35,8 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 88
-    ClientWidth = 211
+    ClientHeight = 89
+    ClientWidth = 213
     ItemIndex = 0
     Items.Strings = (
       'Color, Line mode'
@@ -61,8 +61,8 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 86
-    ClientWidth = 145
+    ClientHeight = 87
+    ClientWidth = 147
     Items.Strings = (
       'Portrait'
       'Landscape'
@@ -108,8 +108,8 @@ object f_print: Tf_print
     Top = 208
     Width = 380
     Caption = 'Page Margin in millimeter'
-    ClientHeight = 86
-    ClientWidth = 376
+    ClientHeight = 87
+    ClientWidth = 378
     TabOrder = 5
     object Label1: TLabel
       Left = 5
@@ -145,7 +145,7 @@ object f_print: Tf_print
     end
     object LongEdit1: TLongEdit
       Left = 5
-      Height = 26
+      Height = 22
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -158,7 +158,7 @@ object f_print: Tf_print
     end
     object LongEdit2: TLongEdit
       Left = 61
-      Height = 26
+      Height = 22
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -171,7 +171,7 @@ object f_print: Tf_print
     end
     object LongEdit3: TLongEdit
       Left = 117
-      Height = 26
+      Height = 22
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -184,7 +184,7 @@ object f_print: Tf_print
     end
     object LongEdit4: TLongEdit
       Left = 173
-      Height = 26
+      Height = 22
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -227,7 +227,7 @@ object f_print: Tf_print
   end
   object Edit1: TEdit
     Left = 9
-    Height = 26
+    Height = 22
     Top = 64
     Width = 380
     OnChange = Edit1Change
@@ -251,7 +251,7 @@ object f_print: Tf_print
     end
     object copies: TLongEdit
       Left = 153
-      Height = 26
+      Height = 22
       Hint = '1..999'
       Top = 2
       Width = 40

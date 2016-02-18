@@ -4668,6 +4668,8 @@ cfgm.ClockColor:=clRed;
 cfgm.Paper:=2;
 cfgm.PrinterResolution:=300;
 cfgm.PrintColor:=0;
+cfgm.PrintBmpWidth:=1920;
+cfgm.PrintBmpHeight:=1080;
 cfgm.PrintLandscape:=true;
 if Printer.PrinterIndex>=0 then
  cfgm.PrintMethod:=0
@@ -5852,6 +5854,8 @@ cfgm.prtname:=ReadString(section,'prtname',cfgm.prtname);
 cfgm.Paper:=ReadInteger(section,'Paper',cfgm.Paper);
 cfgm.PrinterResolution:=ReadInteger(section,'PrinterResolution',cfgm.PrinterResolution);
 cfgm.PrintColor:=ReadInteger(section,'PrintColor',cfgm.PrintColor);
+cfgm.PrintBmpWidth:=ReadInteger(section,'PrintBmpWidth',cfgm.PrintBmpWidth);
+cfgm.PrintBmpHeight:=ReadInteger(section,'PrintBmpHeight',cfgm.PrintBmpHeight);
 cfgm.PrintLandscape:=ReadBool(section,'PrintLandscape',cfgm.PrintLandscape);
 cfgm.PrintMethod:=ReadInteger(section,'PrintMethod',cfgm.PrintMethod);
 if (cfgm.PrintMethod=0)and(Printer.PrinterIndex<0) then
@@ -6726,6 +6730,8 @@ WriteString(section,'prtname',cfgm.prtname);
 WriteInteger(section,'Paper',cfgm.Paper);
 WriteInteger(section,'PrinterResolution',cfgm.PrinterResolution);
 WriteInteger(section,'PrintColor',cfgm.PrintColor);
+WriteInteger(section,'PrintBmpWidth',cfgm.PrintBmpWidth);
+WriteInteger(section,'PrintBmpHeight',cfgm.PrintBmpHeight);
 WriteBool(section,'PrintLandscape',cfgm.PrintLandscape);
 WriteInteger(section,'PrintMethod',cfgm.PrintMethod);
 WriteString(section,'PrintCmd1',cfgm.PrintCmd1);
