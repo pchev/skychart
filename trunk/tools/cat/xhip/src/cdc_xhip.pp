@@ -138,7 +138,7 @@ const
       bayer[hdid] := '';
       cst[hdid] := '';
     end;
-    AssignFile(crossid, 'crossid_catalog.dat');
+    AssignFile(crossid, 'crossid_bymag.dat');
     reset(crossid);
     while not EOF(crossid) do
     begin
@@ -408,7 +408,7 @@ begin
   try
     writeln('Load hip_main.dat');
     gethdbd;
-    writeln('Load crossid_catalog.dat');
+    writeln('Load crossid_bymag.dat');
     getcrossid;
     writeln('Load bsc_catalog.dat');
     gethr;

@@ -33,6 +33,8 @@ if [[ ! -e xhip_biblio.dat ]]; then
   mv biblio.dat xhip_biblio.dat
 fi
 
+sort -n -k1.59,1.63 crossid_catalog.dat > crossid_bymag.dat
+
 fpc cdc_xhip.pp
 ./cdc_xhip
 
