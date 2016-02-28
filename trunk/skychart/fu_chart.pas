@@ -1197,6 +1197,7 @@ var
     prtname:string;
     fname:WideString;
     w,h,x,y :integer;
+    ts:TSize;
     HeaderHeight,FooterHeight: integer;
     pt:TPoint;
     ps:TPostscriptCanvas;
@@ -1428,12 +1429,21 @@ try
      prtsc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
      prtsc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
      prtsc.plot.cfgchart.fontscale:=prtsc.plot.cfgchart.drawsize; // because we cannot set a dpi property for the bitmap
+     if (HeaderHeight>0)or(FooterHeight>0) then begin
+       prtsc.plot.cbmp.FontHeight:=trunc(prtsc.plot.cfgplot.FontSize[6]*prtsc.plot.cfgchart.fontscale*96/72);
+       if prtsc.plot.cfgplot.FontBold[6] then prtsc.plot.cbmp.FontStyle:=[fsBold] else prtsc.plot.cbmp.FontStyle:=[];
+       if prtsc.plot.cfgplot.FontItalic[6] then prtsc.plot.cbmp.FontStyle:=prtsc.plot.cbmp.FontStyle+[fsItalic];
+       prtsc.plot.cbmp.FontName:=prtsc.plot.cfgplot.FontName[6];
+       ts:=prtsc.plot.cbmp.TextSize(cm.PrintDesc);
+       if HeaderHeight>0 then HeaderHeight:=2*ts.cy;
+       if FooterHeight>0 then FooterHeight:=4*ts.cy;
+     end;
      prtsc.cfgsc.LeftMargin:=0;
      prtsc.cfgsc.RightMargin:=0;
-     prtsc.cfgsc.TopMargin:=0;
-     prtsc.cfgsc.BottomMargin:=0;
-     prtsc.cfgsc.HeaderHeight:=mm2pi(HeaderHeight,printresol);
-     prtsc.cfgsc.FooterHeight:=mm2pi(FooterHeight,printresol);
+     prtsc.cfgsc.TopMargin:=HeaderHeight;
+     prtsc.cfgsc.BottomMargin:=FooterHeight;
+     prtsc.cfgsc.HeaderHeight:=HeaderHeight;
+     prtsc.cfgsc.FooterHeight:=FooterHeight;
      prtsc.cfgsc.xshift:=prtsc.cfgsc.LeftMargin;
      prtsc.cfgsc.yshift:=prtsc.cfgsc.TopMargin;
      prtsc.plot.init(w,h);
