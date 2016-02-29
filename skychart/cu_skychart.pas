@@ -3142,7 +3142,8 @@ else if trunc(30*fv/2)>0 then begin l1:='2'+lmin; n:=trunc(30*fv); l2:=inttostr(
 else if trunc(60*fv/2)>0 then begin l1:='1'+lmin; n:=trunc(60*fv); l2:=inttostr(n)+lmin; s:=1; u:=deg2rad/60; end
 else if trunc(360*fv/2)>0 then begin l1:='10'+lsec; n:=trunc(360*fv); l2:=inttostr(n*10)+lsec; s:=10; u:=deg2rad/3600; end
 else if trunc(1800*fv/2)>0 then begin l1:='2'+lsec; n:=trunc(1800*fv); l2:=inttostr(n*2)+lsec; s:=2; u:=deg2rad/3600; end
-else begin l1:='1'+lsec; n:=trunc(3600*fv); l2:=inttostr(n)+lsec; s:=1; u:=deg2rad/3600; end;
+else if trunc(7200*fv/2)>0 then begin l1:='1'+lsec; n:=trunc(3600*fv); l2:=inttostr(n)+lsec; s:=1; u:=deg2rad/3600; end
+else begin l1:='0.5'+lsec; n:=trunc(7200*fv); l2:=inttostr(n)+lsec; s:=1; u:=deg2rad/7200; end;
 if n<1 then n:=1;
 xp:=cfgsc.xmin+10+Fcatalog.cfgshr.CRoseSz*fplot.cfgchart.drawsize+sticksize;
 y:=cfgsc.ymax-sticksize;

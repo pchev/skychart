@@ -107,7 +107,7 @@ const
   abek = secarc * 20.49552;  // aberration constant
   vfr = (365.25 * 86400.0 / km_au) * secarc;
   // Km/s to AU/year * arcsec to radiant. Used for proper motion.
-  FovMin = 2 * secarc;  // 2 seconds
+  FovMin = 1 * secarc;  // 1 seconds
   FovMax = pi2;
   DefaultPrtRes = 300;
   encryptpwd = 'zh6Tiq4h;90uA3.ert';
