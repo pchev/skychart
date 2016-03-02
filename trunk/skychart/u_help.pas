@@ -67,7 +67,7 @@ const
   hlpQStel ='quick_start_telescope.html';
   hlpBarRight = 'right_bar.html';
   hlpSrvCmd ='server_commands.html';
-  hlpSrvInfo = 'server_information.html';
+  hlpSrvInfo = 'menuview.html#server_information';
   hlpSetFov = 'menuview.html#set_fov';
   hlpSoftLic ='software_license.html';
   hlpCfgSol = 'solar_system.html';
