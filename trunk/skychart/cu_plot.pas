@@ -1610,26 +1610,32 @@ begin
    exit;
  end;
  ds:=round(max(diam*pixscale,4*cfgchart.drawpen)*size/(size-2*margin));
- jpg:=TJPEGImage.Create;
  try
- jpg.LoadFromFile(SysToUTF8(fn));
- chdir(appdir);
- if flatten=1 then begin
-   planetbmp.Assign(jpg);
- end else begin
-   planetbmp.Assign(jpg);
-   rbmp:=TBitmap.Create;
-   BitmapRotation(planetbmp,rbmp,rot,WhiteBg);
-   dx:=(rbmp.Width-planetbmp.Width)div 2;
-   dy:=(rbmp.Height-planetbmp.Height)div 2;
-   rot:=0;
-   planetbmp.Width:=size;
-   planetbmp.Height:=round(flatten*planetbmp.Width);
-   PlanetBMP.Canvas.StretchDraw(rect(-dx,-dy,planetbmp.Width+dx,planetbmp.Height+dy),rbmp);
-   rbmp.free;
- end;
- finally
-  jpg.free;
+   jpg:=TJPEGImage.Create;
+   try
+     jpg.LoadFromFile(SysToUTF8(fn));
+     chdir(appdir);
+     if flatten=1 then begin
+       planetbmp.Assign(jpg);
+     end else begin
+       planetbmp.Assign(jpg);
+       rbmp:=TBitmap.Create;
+       BitmapRotation(planetbmp,rbmp,rot,WhiteBg);
+       dx:=(rbmp.Width-planetbmp.Width)div 2;
+       dy:=(rbmp.Height-planetbmp.Height)div 2;
+       rot:=0;
+       planetbmp.Width:=size;
+       planetbmp.Height:=round(flatten*planetbmp.Width);
+       PlanetBMP.Canvas.StretchDraw(rect(-dx,-dy,planetbmp.Width+dx,planetbmp.Height+dy),rbmp);
+       rbmp.free;
+     end;
+   finally
+     jpg.free;
+   end;
+ except
+   PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
+   deletefile(fn);
+   exit;
  end;
  planetbmppla:=ipla;
  planetbmpjd:=jdt;
