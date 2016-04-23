@@ -362,6 +362,7 @@ type
     function cmd_GetScopeRates:string;
     procedure GetScopeRates(rates:TStringList);
     function cmd_ScopeMoveAxis(axis,rate: string):string;
+    function cmd_SetScopeRefreshRate(rate:string):string;
     function cmd_ConnectINDI:string;
     function cmd_DisconnectINDI:string;
     function cmd_DisconnectTelescope:string;
@@ -4043,6 +4044,32 @@ if Connect1.checked then begin
 end;
 end;
 
+function Tf_chart.cmd_SetScopeRefreshRate(rate:string):string;
+var rt,n: integer;
+begin
+result:=msgFailed;
+if Connect1.checked then begin
+  val(rate,rt,n);
+  if n<>0 then exit;
+  if sc.cfgsc.ASCOMTelescope then begin
+    Fpop_scope.SetRefreshRate(rt);
+    result:=msgOK;
+  end;
+  if sc.cfgsc.IndiTelescope then begin
+    Fpop_indi.SetRefreshRate(rt);
+    result:=msgOK;
+  end;
+  if sc.cfgsc.LX200Telescope then begin
+    Fpop_lx200.SetRefreshRate(rt);
+    result:=msgOK;
+  end;
+  if sc.cfgsc.EncoderTelescope then begin
+    Fpop_encoder.SetRefreshRate(rt);
+    result:=msgOK;
+  end;
+end;
+end;
+
 function Tf_chart.cmd_ConnectINDI:string;
 var ok:boolean;
 begin
@@ -5009,6 +5036,7 @@ case n of
  117 : result:= cmd_ObslistTransitSide(arg[1]);
  118 : result:= cmd_GetScopeRates;
  119 : result:= cmd_ScopeMoveAxis(arg[1], arg[2]);
+ 120 : result:= cmd_SetScopeRefreshRate(arg[1]);
 else result:=msgFailed+' Bad command name';
 end;
 end;

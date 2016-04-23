@@ -110,6 +110,7 @@ type
     csc: Tconf_skychart;
     procedure SetLang;
     function  ReadConfig(ConfigPath : shortstring):boolean;
+    procedure SetRefreshRate(rate:integer);
     Procedure ScopeShow;
     Procedure ScopeShowModal(var ok : boolean);
     Procedure ScopeConnect(var ok : boolean);
@@ -133,6 +134,11 @@ type
 
 implementation
 {$R *.lfm}
+
+procedure Tpop_indi.SetRefreshRate(rate:integer);
+begin
+// nothing to do as INDI is event driven
+end;
 
 procedure Tpop_indi.ClearStatus;
 begin

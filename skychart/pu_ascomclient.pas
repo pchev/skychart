@@ -118,6 +118,7 @@ type
     { Public declarations }
     procedure SetLang;
     function  ReadConfig(ConfigPath : shortstring):boolean;
+    procedure SetRefreshRate(rate:integer);
     Procedure ShowCoordinates;
     Procedure ScopeShow;
     Procedure ScopeShowModal(var ok : boolean);
@@ -149,6 +150,13 @@ implementation
            Cartes du Ciel Dll compatibility functions
 
 --------------------------------------------------------------------------------}
+
+procedure Tpop_scope.SetRefreshRate(rate:integer);
+begin
+  Timer1.Interval:=rate;
+  ReadIntBox.text:=inttostr(rate);
+end;
+
 Procedure Tpop_scope.ShowCoordinates;
 begin
 {$ifdef mswindows}

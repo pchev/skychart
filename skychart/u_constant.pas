@@ -1398,7 +1398,7 @@ const
     );
 
   // Chart Commands
-  numcmd = 119;
+  numcmd = 120;
   cmdlist: array[1..numcmd, 1..3] of string = (
     ('ZOOM+', '1', ''),
     ('ZOOM-', '2', ''),
@@ -1520,7 +1520,8 @@ const
     ('OBSLISTTRANSITLIMIT','116','hours'),
     ('OBSLISTTRANSITSIDE','117','EAST/WEST/BOTH'),
     ('GETSCOPERATES','118',''),
-    ('SCOPEMOVEAXIS','119','axis(0/1) rate')
+    ('SCOPEMOVEAXIS','119','axis(0/1) rate'),
+    ('SETSCOPEREFRESHRATE','120','delay [ms]')
     );
 
 // INDI Telescope driver
