@@ -314,6 +314,7 @@ type
     Timezone : Double;                  // Observatory timezone
     procedure SetLang;
     function  ReadConfig(ConfigPath : shortstring):boolean;
+    procedure SetRefreshRate(rate:integer);
     Procedure ShowCoordinates;
     procedure ChangeButton(onoff : boolean);
     procedure ScopeChangeButton(onoff : boolean);
@@ -350,6 +351,12 @@ implementation
                        Cartes du Ciel Dll functions
 
 --------------------------------------------------------------------------------}
+
+procedure Tpop_lx200.SetRefreshRate(rate:integer);
+begin
+  Timer1.Interval:=rate;
+  ReadIntBox.text:=inttostr(rate);
+end;
 
 Procedure Tpop_lx200.ShowCoordinates;
 var s1,s2,s3 : string;

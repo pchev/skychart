@@ -179,6 +179,7 @@ type
     Init90Y : integer;
     procedure SetLang;
     function  ReadConfig(ConfigPath : shortstring):boolean;
+    procedure SetRefreshRate(rate:integer);
     Procedure ScopeShow;
     Procedure ScopeShowModal(var ok : boolean);
     Procedure ScopeConnect(var ok : boolean);
@@ -205,6 +206,12 @@ implementation
     cu_encoderprotocol,
     cu_serial,
     cu_taki;
+
+procedure Tpop_encoder.SetRefreshRate(rate:integer);
+begin
+  Timer1.Interval:=rate;
+  ReadIntBox.text:=inttostr(rate);
+end;
 
 Procedure Tpop_encoder.ScopeConnect(var ok : boolean);
 begin
