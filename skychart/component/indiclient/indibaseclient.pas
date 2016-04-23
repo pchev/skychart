@@ -27,7 +27,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses indiapi, indibasedevice, indicom, blcksock, synsock, XMLRead, DOM, contnrs,
+uses
+  {$ifdef UNIX}
+  netdb,
+  {$endif}
+  indiapi, indibasedevice, indicom, blcksock, synsock, XMLRead, DOM, contnrs,
   Forms, Classes, SysUtils;
 
 type
@@ -476,7 +480,36 @@ result:=(count<maxcount);
 end;
 
 procedure TIndiBaseClient.SetServer(host,port: string);
+{$ifdef UNIX}
+Var
+  H : THostEntry;
+  ok:boolean;
+  buf:string;
+Function FirstWord(Var Line : String) : String;
+  Var
+    I,J : Integer;
+  Const
+    Whitespace = [' ',#9];
+  begin
+    I:=1;
+    While (I<=Length(Line)) and (Line[i] in Whitespace) do
+      inc(I);
+    J:=I;
+    While (J<=Length(Line)) and Not (Line[J] in WhiteSpace) do
+      inc(j);
+    Result:=Copy(Line,I,J-I);
+end;
+{$endif}
 begin
+  {$ifdef UNIX}
+  if (pos('.',host)=0)and(not ResolveHostByName(host,H)) then begin
+    // try to add the default domain
+    buf:=FirstWord(DefaultDomainList);
+    buf:=host+'.'+buf;
+    ok:=ResolveHostByName(buf,H);
+    if ok then host:=buf;
+  end;
+  {$endif}
   FTargetHost:=host;
   FTargetPort:=port;
 end;
