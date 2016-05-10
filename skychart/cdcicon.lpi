@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectOptions>
     <Version Value="9"/>
@@ -18,9 +18,6 @@
     <BuildModes Count="2">
       <Item1 Name="default" Default="True"/>
       <Item2 Name="windows">
-        <MacroValues Count="1">
-          <Macro1 Name="LCLWidgetType" Value="win32"/>
-        </MacroValues>
         <CompilerOptions>
           <Version Value="11"/>
           <SearchPaths>
@@ -56,12 +53,7 @@
             <Verbosity>
               <ShowHints Value="False"/>
             </Verbosity>
-            <CompilerMessages>
-              <UseMsgFile Value="True"/>
-            </CompilerMessages>
-            <CompilerPath Value="$(CompPath)"/>
           </Other>
-          <LCLWidgetType Value="win32"/>
         </CompilerOptions>
       </Item2>
     </BuildModes>
@@ -78,37 +70,42 @@
         <WorkingDirectory Value="/usr/local/bin"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="8">
+    <RequiredPackages Count="10">
       <Item1>
-        <PackageName Value="BGRABitmapPack"/>
+        <PackageName Value="downldialog"/>
       </Item1>
       <Item2>
-        <PackageName Value="zoomimage"/>
+        <PackageName Value="radec"/>
       </Item2>
       <Item3>
-        <PackageName Value="CDCjdcalendar"/>
+        <PackageName Value="BGRABitmapPack"/>
       </Item3>
       <Item4>
-        <PackageName Value="libsql"/>
+        <PackageName Value="zoomimage"/>
       </Item4>
       <Item5>
-        <PackageName Value="Printer4Lazarus"/>
+        <PackageName Value="CDCjdcalendar"/>
       </Item5>
       <Item6>
-        <PackageName Value="enhedit"/>
+        <PackageName Value="libsql"/>
       </Item6>
       <Item7>
-        <PackageName Value="cdccatalog"/>
+        <PackageName Value="Printer4Lazarus"/>
       </Item7>
       <Item8>
-        <PackageName Value="LCL"/>
+        <PackageName Value="enhedit"/>
       </Item8>
+      <Item9>
+        <PackageName Value="cdccatalog"/>
+      </Item9>
+      <Item10>
+        <PackageName Value="LCL"/>
+      </Item10>
     </RequiredPackages>
     <Units Count="4">
       <Unit0>
         <Filename Value="cdcicon.lpr"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cdcicon"/>
       </Unit0>
       <Unit1>
         <Filename Value="pu_tray.pas"/>
@@ -116,7 +113,6 @@
         <ComponentName Value="f_tray"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_tray"/>
       </Unit1>
       <Unit2>
         <Filename Value="pu_clock.pas"/>
@@ -124,7 +120,6 @@
         <ComponentName Value="f_clock"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_clock"/>
       </Unit2>
       <Unit3>
         <Filename Value="pu_calendar.pas"/>
@@ -132,7 +127,6 @@
         <ComponentName Value="f_calendar"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_calendar"/>
       </Unit3>
     </Units>
   </ProjectOptions>
@@ -163,10 +157,6 @@
       <Verbosity>
         <ShowHints Value="False"/>
       </Verbosity>
-      <CompilerMessages>
-        <UseMsgFile Value="True"/>
-      </CompilerMessages>
-      <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>
 </CONFIG>
