@@ -100,7 +100,7 @@ type
     procedure SyncBlobEvent;
     function findDev(root: TDOMNode; createifnotexist: boolean; out errmsg: string):BaseDevice;
     function findDev(root: TDOMNode; out errmsg: string):BaseDevice;
-    procedure ProcessData(line: string);
+    function ProcessData(line: string):boolean;
     procedure setDriverConnection(status: boolean; deviceName: string);
   public
     TcpClient : TTcpclient;
@@ -222,6 +222,7 @@ end;
 procedure TIndiBaseClient.Execute;
 var buf,buf1:string;
     init:boolean;
+    bufretry: integer;
 begin
 try
 tcpclient:=TTCPClient.Create;
@@ -235,13 +236,25 @@ try
  if FConnected then begin
    RefreshProps;
    // main loop
+   buf:='';
+   bufretry:=0;
    repeat
      if terminated then break;
-     buf:=tcpclient.recvstring;
+     buf1:=tcpclient.recvstring;
+     buf:=buf+buf1;
      if terminated then break;
      if (tcpclient.Sock.lastError<>0)and(tcpclient.Sock.lastError<>WSAETIMEDOUT) then break;
      if buf<>'' then begin
-        ProcessData(buf);
+        if not ProcessData(buf) then begin
+          inc(bufretry);
+          if bufretry>100 then begin
+             SyncindiMessage:='INDI message not received completly after 100*timeout. Please increase the Timeout value.';
+             Synchronize(@SyncMessageEvent);
+          end else
+             Continue; // incomplete buffer, read next part
+        end;
+        buf:='';
+        bufretry:=0;
         if init then begin
            if assigned(FServerConnected) then Synchronize(@SyncServerConnected);
            init:=false;
@@ -337,7 +350,7 @@ begin
      end;
 end;
 
-procedure TIndiBaseClient.ProcessData(line:string);
+function TIndiBaseClient.ProcessData(line:string):boolean;
 var Doc: TXMLDocument;
     Node: TDOMNode;
     dp: BaseDevice;
@@ -347,7 +360,15 @@ begin
 //if Ftrace then writeln(line);
 FRecvData:='<INDIMSG>'+line+'</INDIMSG>';
 s:=TStringStream.Create(FRecvData);
+result:=true;
+try
 ReadXMLFile(Doc,s);
+except
+  on E: Exception do begin
+    result:=false;
+    exit;
+  end;
+end;
 try
 Node:=Doc.DocumentElement.FirstChild;
 while Node<>nil do begin
