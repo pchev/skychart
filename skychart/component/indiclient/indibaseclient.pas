@@ -180,9 +180,10 @@ end;
 function TTCPclient.RecvString: string;
 var buf: string;
 begin
-  Result := FSock.RecvPacket(FTimeout);
+  Result:='';
   repeat
-    buf:=FSock.RecvPacket(50);
+    buf:=FSock.RecvPacket(FTimeout);
+    if (FSock.lastError<>0)and(FSock.lastError<>WSAETIMEDOUT) then break;
     Result := Result+buf;
   until buf='';
 end;
@@ -200,7 +201,7 @@ begin
 inherited create(true);
 FTargetHost:='localhost';
 FTargetPort:='7624';
-FTimeout:=50;
+FTimeout:=100;
 FConnected:=false;
 FreeOnTerminate:=true;
 Ftrace:=false;  // for debuging only
@@ -219,7 +220,7 @@ Inherited destroy;
 end;
 
 procedure TIndiBaseClient.Execute;
-var buf:string;
+var buf,buf1:string;
     init:boolean;
 begin
 try
