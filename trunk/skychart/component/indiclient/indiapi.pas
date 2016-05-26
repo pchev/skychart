@@ -39,6 +39,7 @@ type
   IPerm   = (IP_RO,IP_WO,IP_RW);
   INDI_TYPE = (INDI_NUMBER,INDI_SWITCH,INDI_TEXT,INDI_LIGHT,INDI_BLOB,INDI_UNKNOWN);
   BLOBHandling = (B_NEVER, B_ALSO, B_ONLY);
+  TDeviceStatus = (devDisconnected, devConnecting, devConnected);
 
 var
   Ftrace: boolean = false;
