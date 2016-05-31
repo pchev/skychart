@@ -221,13 +221,14 @@ end;
 
 procedure TIndiBaseClient.Execute;
 var buf,buf1:string;
-    init:boolean;
+    init,initProps:boolean;
     bufretry: integer;
 begin
 try
 tcpclient:=TTCPClient.Create;
 try
  init:=true;
+ initProps:=false;
  tcpclient.TargetHost:=FTargetHost;
  tcpclient.TargetPort:=FTargetPort;
  tcpclient.Timeout := FTimeout;
@@ -253,12 +254,13 @@ try
           end else
              Continue; // incomplete buffer, read next part
         end;
+        initProps:=true;
         buf:='';
         bufretry:=0;
-        if init then begin
-           if assigned(FServerConnected) then Synchronize(@SyncServerConnected);
-           init:=false;
-        end;
+     end;
+     if initProps and init then begin
+        if assigned(FServerConnected) then Synchronize(@SyncServerConnected);
+        init:=false;
      end;
      if Fsendbuffer<>'' then begin
         buf:=Fsendbuffer; Fsendbuffer:='';
