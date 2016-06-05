@@ -42,13 +42,13 @@ type
 
   Tpop_scope = class(TForm)
     GroupBox3: TGroupBox;
-    SpeedButton10: TSpeedButton;
+    ButtonAdvSetting: TSpeedButton;
     WarningLabel: TLabel;
     trackingled: TEdit;
-    SpeedButton1: TSpeedButton;
-    TrackingBtn: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    SpeedButton5: TSpeedButton;
+    ButtonConnect: TSpeedButton;
+    ButtonTracking: TSpeedButton;
+    ButtonHide: TSpeedButton;
+    ButtonDisconnect: TSpeedButton;
     led: TEdit;
     GroupBox5: TGroupBox;
     Label15: TLabel;
@@ -68,35 +68,35 @@ type
     Timer1: TTimer;
     GroupBox1: TGroupBox;
     Edit1: TEdit;
-    SpeedButton3: TSpeedButton;
+    ButtonSelect: TSpeedButton;
     ReadIntBox: TComboBox;
     Label1: TLabel;
-    SpeedButton7: TSpeedButton;
-    SpeedButton6: TSpeedButton;
-    SpeedButton8: TSpeedButton;
-    SpeedButton9: TSpeedButton;
-    SpeedButton4: TSpeedButton;
-    SpeedButton11: TSpeedButton;
+    ButtonConfigure: TSpeedButton;
+    ButtonAbort: TSpeedButton;
+    ButtonSetTime: TSpeedButton;
+    ButtonSetLocation: TSpeedButton;
+    ButtonHelp: TSpeedButton;
+    ButtonAbout: TSpeedButton;
     {Utility and form functions}
     procedure FormCreate(Sender: TObject);
     procedure kill(Sender: TObject; var CanClose: Boolean);
-    procedure SpeedButton10Click(Sender: TObject);
+    procedure ButtonAdvSettingClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
-    procedure setresClick(Sender: TObject);
+    procedure ButtonConnectClick(Sender: TObject);
     procedure SaveConfig;
     procedure ReadIntBoxChange(Sender: TObject);
-    procedure SpeedButton5Click(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
-    procedure SpeedButton4Click(Sender: TObject);
-    procedure SpeedButton6Click(Sender: TObject);
-    procedure SpeedButton3Click(Sender: TObject);
-    procedure SpeedButton7Click(Sender: TObject);
-    procedure SpeedButton9Click(Sender: TObject);
-    procedure SpeedButton8Click(Sender: TObject);
+    procedure ButtonDisconnectClick(Sender: TObject);
+    procedure ButtonHideClick(Sender: TObject);
+    procedure ButtonHelpClick(Sender: TObject);
+    procedure ButtonAbortClick(Sender: TObject);
+    procedure ButtonSelectClick(Sender: TObject);
+    procedure ButtonConfigureClick(Sender: TObject);
+    procedure ButtonSetLocationClick(Sender: TObject);
+    procedure ButtonSetTimeClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure TrackingBtnClick(Sender: TObject);
+    procedure ButtonTrackingClick(Sender: TObject);
     procedure UpdTrackingButton;
-    procedure SpeedButton11Click(Sender: TObject);
+    procedure ButtonAboutClick(Sender: TObject);
   private
     { Private declarations }
     feqsys: TCheckBox;
@@ -105,6 +105,9 @@ type
     CoordLock : boolean;
     Initialized : boolean;
     ForceEqSys : boolean;
+    FConnected : boolean;
+    FCanSetTracking: boolean;
+    FScopeEqSys : double;
     EqSysVal: integer;
     T : Variant;
     Longitude : single;                 // Observatory longitude (Negative East of Greenwich}
@@ -114,6 +117,8 @@ type
     cur_az,  cur_alt :double;           // current alt-az position in degrees
     {$endif}
     procedure SetDef(Sender: TObject);
+    Function  ScopeConnectedReal : boolean ;
+    Procedure ScopeGetEqSysReal(var EqSys : double);
   public
     { Public declarations }
     procedure SetLang;
@@ -197,7 +202,9 @@ end;
 Procedure Tpop_scope.ScopeDisconnect(var ok : boolean);
 begin
 {$ifdef mswindows}
+timer1.enabled:=false;
 Initialized:=false;
+FConnected:=false;
 pos_x.text:='';
 pos_y.text:='';
 az_x.text:='';
@@ -210,11 +217,11 @@ if not VarIsEmpty(T) then begin
 end;
 ok:=true;
 led.color:=clRed;
-speedbutton1.enabled:=true;
-speedbutton3.enabled:=true;
-speedbutton7.enabled:=true;
-speedbutton8.enabled:=false;
-speedbutton9.enabled:=false;
+ButtonConnect.enabled:=true;
+ButtonSelect.enabled:=true;
+ButtonConfigure.enabled:=true;
+ButtonSetTime.enabled:=false;
+ButtonSetLocation.enabled:=false;
 UpdTrackingButton;
 except
  on E: EOleException do MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
@@ -231,7 +238,7 @@ begin
 led.color:=clRed;
 led.refresh;
 timer1.enabled:=false;
-speedbutton3.enabled:=true;
+ButtonSelect.enabled:=true;
 ok:=false;
 if trim(edit1.text)='' then exit;
 try
@@ -239,16 +246,19 @@ T:=Unassigned;
 T := CreateOleObject(widestring(edit1.text));
 T.connected:=true;
 if T.connected then begin
+   FConnected:=true;
    Initialized:=true;
+   FCanSetTracking:=T.CanSetTracking;
+   ScopeGetEqSysReal(FScopeEqSys);
    ShowCoordinates;
    led.color:=clLime;
    ok:=true;
    timer1.enabled:=true;
-   speedbutton1.enabled:=false;
-   speedbutton3.enabled:=false;
-   speedbutton7.enabled:=false;
-   speedbutton8.enabled:=true;
-   speedbutton9.enabled:=true;
+   ButtonConnect.enabled:=false;
+   ButtonSelect.enabled:=false;
+   ButtonConfigure.enabled:=false;
+   ButtonSetTime.enabled:=true;
+   ButtonSetLocation.enabled:=true;
 end else scopedisconnect(dis_ok);
 UpdTrackingButton;
 except
@@ -263,6 +273,11 @@ release;
 end;
 
 Function  Tpop_scope.ScopeConnected : boolean ;
+begin
+  result:=FConnected;
+end;
+
+Function  Tpop_scope.ScopeConnectedReal : boolean ;
 begin
 result:=false;
 {$ifdef mswindows}
@@ -289,7 +304,7 @@ begin
    if T.CanSync then begin
       try                 
          if not T.tracking then begin
-            T.tracking:=true;
+            if FCanSetTracking then T.tracking:=true;
             UpdTrackingButton;
          end;
          T.SyncToCoordinates(Ra,Dec);
@@ -369,7 +384,7 @@ begin
 {$endif}
 end;
 
-Procedure Tpop_scope.ScopeGetEqSys(var EqSys : double);
+Procedure Tpop_scope.ScopeGetEqSysReal(var EqSys : double);
 var i: integer;
 begin
 if ForceEqSys then begin
@@ -395,6 +410,11 @@ end else begin
    4 : EqSys:=1950;
    end;
 end;
+end;
+
+Procedure Tpop_scope.ScopeGetEqSys(var EqSys : double);
+begin
+  EqSys:=FScopeEqSys;
 end;
 
 Procedure Tpop_scope.ScopeReset;
@@ -508,21 +528,21 @@ begin
 caption:=rsASCOMTelesc;
 GroupBox1.Caption:=rsDriverSelect;
 Label1.Caption:=rsRefreshRate;
-SpeedButton3.Caption:=rsSelect;
-SpeedButton7.Caption:=rsConfigure;
-SpeedButton11.Caption:=rsAbout;
+ButtonSelect.Caption:=rsSelect;
+ButtonConfigure.Caption:=rsConfigure;
+ButtonAbout.Caption:=rsAbout;
 GroupBox5.Caption:=rsObservatory;
 Label15.Caption:=rsLatitude;
 Label16.Caption:=rsLongitude;
-SpeedButton9.Caption:=rsSetLocation;
-SpeedButton8.Caption:=rsSetTime;
-TrackingBtn.Caption:=rsTracking;
-SpeedButton6.Caption:=rsAbortSlew;
-SpeedButton4.Caption:=rsHelp;
-SpeedButton1.Caption:=rsConnect;
-SpeedButton5.Caption:=rsDisconnect;
-SpeedButton2.Caption:=rsHide;
-SpeedButton10.Caption:=rsAdvancedSett2;
+ButtonSetLocation.Caption:=rsSetLocation;
+ButtonSetTime.Caption:=rsSetTime;
+ButtonTracking.Caption:=rsTracking;
+ButtonAbort.Caption:=rsAbortSlew;
+ButtonHelp.Caption:=rsHelp;
+ButtonConnect.Caption:=rsConnect;
+ButtonDisconnect.Caption:=rsDisconnect;
+ButtonHide.Caption:=rsHide;
+ButtonAdvSetting.Caption:=rsAdvancedSett2;
 
 {$ifdef mswindows}
    WarningLabel.Caption:='';
@@ -565,7 +585,7 @@ if ScopeConnected then begin
 end;
 end;
 
-procedure Tpop_scope.SpeedButton10Click(Sender: TObject);
+procedure Tpop_scope.ButtonAdvSettingClick(Sender: TObject);
 var f: TForm;
     l: Tlabel;
     btok,btcan,btdef: Tbutton;
@@ -648,16 +668,21 @@ begin
     ScaleDPI(Self);
     CoordLock := false;
     Initialized := false;
+    FConnected:=false;
+    FCanSetTracking:=false;
+    FScopeEqSys:=0;
 end;
 
 procedure Tpop_scope.Timer1Timer(Sender: TObject);
 begin
-if not ScopeConnected then exit;
+FConnected:=ScopeConnectedReal;
+if not FConnected then exit;
 try
-if T.connected and (not CoordLock) then begin
+if (not CoordLock) then begin
    CoordLock := true;
    timer1.enabled:=false;
    ShowCoordinates;
+   UpdTrackingButton;
    CoordLock := false;
    timer1.enabled:=true;
 end;
@@ -667,7 +692,7 @@ except
 end;
 end;
 
-procedure Tpop_scope.setresClick(Sender: TObject);
+procedure Tpop_scope.ButtonConnectClick(Sender: TObject);
 var ok : boolean;
 begin
 ScopeConnect(ok);
@@ -693,28 +718,28 @@ begin
      Timer1.Interval:=strtointdef(ReadIntBox.text,1000);
 end;
 
-procedure Tpop_scope.SpeedButton5Click(Sender: TObject);
+procedure Tpop_scope.ButtonDisconnectClick(Sender: TObject);
 var ok : boolean;
 begin
 ScopeDisconnect(ok);
 end;
 
-procedure Tpop_scope.SpeedButton2Click(Sender: TObject);
+procedure Tpop_scope.ButtonHideClick(Sender: TObject);
 begin
 Hide;
 end;
 
-procedure Tpop_scope.SpeedButton4Click(Sender: TObject);
+procedure Tpop_scope.ButtonHelpClick(Sender: TObject);
 begin
 ShowHelp;
 end;
 
-procedure Tpop_scope.SpeedButton6Click(Sender: TObject);
+procedure Tpop_scope.ButtonAbortClick(Sender: TObject);
 begin
 ScopeAbortSlew;
 end;
 
-procedure Tpop_scope.SpeedButton3Click(Sender: TObject);
+procedure Tpop_scope.ButtonSelectClick(Sender: TObject);
 {$ifdef mswindows}
 var
   V: variant;
@@ -743,7 +768,7 @@ try
 {$endif}
 end;
 
-procedure Tpop_scope.SpeedButton7Click(Sender: TObject);
+procedure Tpop_scope.ButtonConfigureClick(Sender: TObject);
 begin
 {$ifdef mswindows}
 try
@@ -763,7 +788,7 @@ end;
 {$endif}
 end;
 
-procedure Tpop_scope.SpeedButton9Click(Sender: TObject);
+procedure Tpop_scope.ButtonSetLocationClick(Sender: TObject);
 begin
 {$ifdef mswindows}
    if ScopeConnected then begin
@@ -777,7 +802,7 @@ begin
 {$endif}
 end;
 
-procedure Tpop_scope.SpeedButton8Click(Sender: TObject);
+procedure Tpop_scope.ButtonSetTimeClick(Sender: TObject);
 {$ifdef mswindows}
 var utc: Tsystemtime;
 {$endif}
@@ -804,11 +829,12 @@ procedure Tpop_scope.UpdTrackingButton;
 begin
 {$ifdef mswindows}
 try
-   if not ScopeConnected then exit;
-   if (not T.CanSetTracking)or(not T.connected) then begin
-      TrackingLed.Enabled:=false;
+   if (not ScopeConnected) or (not FCanSetTracking) then begin
+      ButtonTracking.Enabled:=false;
    end else begin
-      TrackingBtn.Enabled:=true;
+      ButtonTracking.Enabled:=true;
+   end;
+   if ScopeConnected then begin
       if T.Tracking then Trackingled.color:=clLime
       else Trackingled.color:=clRed;
    end;
@@ -818,7 +844,7 @@ end;
 {$endif}
 end;
 
-procedure Tpop_scope.TrackingBtnClick(Sender: TObject);
+procedure Tpop_scope.ButtonTrackingClick(Sender: TObject);
 begin
 {$ifdef mswindows}
    if ScopeConnected then begin
@@ -832,7 +858,7 @@ begin
 {$endif}
 end;
 
-procedure Tpop_scope.SpeedButton11Click(Sender: TObject);
+procedure Tpop_scope.ButtonAboutClick(Sender: TObject);
 {$ifdef mswindows}
 var buf : string;
 {$endif}
