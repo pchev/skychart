@@ -24,29 +24,29 @@ object pop_scope: Tpop_scope
     ClientHeight = 86
     ClientWidth = 288
     TabOrder = 3
-    object SpeedButton1: TSpeedButton
+    object ButtonConnect: TSpeedButton
       Left = 5
       Height = 25
       Top = 6
       Width = 73
       Caption = 'Connect'
-      OnClick = setresClick
+      OnClick = ButtonConnectClick
     end
-    object SpeedButton2: TSpeedButton
+    object ButtonHide: TSpeedButton
       Left = 211
       Height = 25
       Top = 6
       Width = 65
       Caption = 'Hide'
-      OnClick = SpeedButton2Click
+      OnClick = ButtonHideClick
     end
-    object SpeedButton5: TSpeedButton
+    object ButtonDisconnect: TSpeedButton
       Left = 115
       Height = 25
       Top = 6
       Width = 84
       Caption = 'Disconnect'
-      OnClick = SpeedButton5Click
+      OnClick = ButtonDisconnectClick
     end
     object led: TEdit
       Left = 83
@@ -61,19 +61,19 @@ object pop_scope: Tpop_scope
     end
     object WarningLabel: TLabel
       Left = 6
-      Height = 17
+      Height = 18
       Top = 41
-      Width = 84
+      Width = 83
       Caption = 'WarningLabel'
       ParentColor = False
     end
-    object SpeedButton4: TSpeedButton
+    object ButtonHelp: TSpeedButton
       Left = 211
       Height = 25
       Top = 41
       Width = 65
       Caption = 'Help'
-      OnClick = SpeedButton4Click
+      OnClick = ButtonHelpClick
     end
   end
   object GroupBox5: TGroupBox
@@ -82,46 +82,46 @@ object pop_scope: Tpop_scope
     Top = 144
     Width = 288
     Caption = 'Observatory '
-    ClientHeight = 78
+    ClientHeight = 77
     ClientWidth = 286
     TabOrder = 1
     object Label15: TLabel
       Left = 0
-      Height = 17
+      Height = 18
       Top = 20
-      Width = 64
+      Width = 59
       Caption = 'Latitude : '
       ParentColor = False
     end
     object Label16: TLabel
       Left = 134
-      Height = 17
+      Height = 18
       Top = 20
-      Width = 71
+      Width = 68
       Caption = 'Longitude :'
       ParentColor = False
     end
-    object SpeedButton8: TSpeedButton
+    object ButtonSetTime: TSpeedButton
       Left = 150
       Height = 22
       Top = 51
       Width = 126
       Caption = 'Set Time'
       Enabled = False
-      OnClick = SpeedButton8Click
+      OnClick = ButtonSetTimeClick
     end
-    object SpeedButton9: TSpeedButton
+    object ButtonSetLocation: TSpeedButton
       Left = -2
       Height = 22
       Top = 51
       Width = 129
       Caption = 'Set Location'
       Enabled = False
-      OnClick = SpeedButton9Click
+      OnClick = ButtonSetLocationClick
     end
     object lat: TEdit
       Left = 62
-      Height = 23
+      Height = 24
       Top = 16
       Width = 70
       Color = clBtnFace
@@ -132,7 +132,7 @@ object pop_scope: Tpop_scope
     end
     object long: TEdit
       Left = 206
-      Height = 23
+      Height = 24
       Top = 16
       Width = 70
       Color = clBtnFace
@@ -152,37 +152,37 @@ object pop_scope: Tpop_scope
     TabOrder = 2
     object LabelAlpha: TLabel
       Left = 26
-      Height = 17
+      Height = 18
       Top = 10
-      Width = 20
+      Width = 19
       Caption = 'RA '
       ParentColor = False
     end
     object LabelDelta: TLabel
       Left = 157
-      Height = 17
+      Height = 18
       Top = 10
-      Width = 27
+      Width = 24
       Caption = 'DEC'
       ParentColor = False
     end
     object Label11: TLabel
       Left = 26
-      Height = 17
+      Height = 18
       Top = 34
-      Width = 19
+      Width = 15
       Caption = 'AZ'
       ParentColor = False
     end
     object Label12: TLabel
       Left = 157
-      Height = 17
+      Height = 18
       Top = 34
-      Width = 21
+      Width = 22
       Caption = 'ALT'
       ParentColor = False
     end
-    object SpeedButton6: TSpeedButton
+    object ButtonAbort: TSpeedButton
       Left = 96
       Height = 25
       Top = 63
@@ -192,12 +192,12 @@ object pop_scope: Tpop_scope
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      OnClick = SpeedButton6Click
+      OnClick = ButtonAbortClick
       ParentFont = False
     end
     object pos_x: TEdit
       Left = 64
-      Height = 23
+      Height = 24
       Top = 6
       Width = 80
       ReadOnly = True
@@ -206,7 +206,7 @@ object pop_scope: Tpop_scope
     end
     object pos_y: TEdit
       Left = 200
-      Height = 23
+      Height = 24
       Top = 6
       Width = 80
       ReadOnly = True
@@ -215,7 +215,7 @@ object pop_scope: Tpop_scope
     end
     object az_x: TEdit
       Left = 64
-      Height = 23
+      Height = 24
       Top = 30
       Width = 80
       ReadOnly = True
@@ -224,7 +224,7 @@ object pop_scope: Tpop_scope
     end
     object alt_y: TEdit
       Left = 200
-      Height = 23
+      Height = 24
       Top = 30
       Width = 80
       ReadOnly = True
@@ -233,18 +233,18 @@ object pop_scope: Tpop_scope
     end
     object ShowAltAz: TCheckBox
       Left = 8
-      Height = 24
+      Height = 21
       Top = 32
-      Width = 24
+      Width = 21
       TabOrder = 2
     end
-    object TrackingBtn: TSpeedButton
+    object ButtonTracking: TSpeedButton
       Left = 8
       Height = 25
       Top = 63
       Width = 84
       Caption = 'Tracking'
-      OnClick = TrackingBtnClick
+      OnClick = ButtonTrackingClick
     end
     object trackingled: TEdit
       Left = 10
@@ -264,44 +264,44 @@ object pop_scope: Tpop_scope
     Top = 0
     Width = 288
     Caption = 'Driver Selection'
-    ClientHeight = 118
+    ClientHeight = 117
     ClientWidth = 286
     TabOrder = 0
-    object SpeedButton3: TSpeedButton
+    object ButtonSelect: TSpeedButton
       Left = 182
       Height = 22
       Top = 7
       Width = 97
       Caption = 'Select'
-      OnClick = SpeedButton3Click
+      OnClick = ButtonSelectClick
     end
     object Label1: TLabel
       Left = 2
-      Height = 17
+      Height = 18
       Top = 56
-      Width = 85
+      Width = 78
       Caption = 'Refresh rate :'
       ParentColor = False
     end
-    object SpeedButton7: TSpeedButton
+    object ButtonConfigure: TSpeedButton
       Left = 182
       Height = 22
       Top = 32
       Width = 97
       Caption = 'Configure'
-      OnClick = SpeedButton7Click
+      OnClick = ButtonConfigureClick
     end
-    object SpeedButton11: TSpeedButton
+    object ButtonAbout: TSpeedButton
       Left = 182
       Height = 22
       Top = 56
       Width = 97
       Caption = 'About'
-      OnClick = SpeedButton11Click
+      OnClick = ButtonAboutClick
     end
     object Edit1: TEdit
       Left = 2
-      Height = 23
+      Height = 24
       Top = 15
       Width = 172
       Color = clBtnFace
@@ -311,29 +311,28 @@ object pop_scope: Tpop_scope
     end
     object ReadIntBox: TComboBox
       Left = 110
-      Height = 29
+      Height = 24
       Top = 52
       Width = 64
       ItemHeight = 0
-      ItemIndex = 3
       Items.Strings = (
-        '100'
         '250'
         '500'
         '1000'
         '2000'
+        '5000'
       )
       OnChange = ReadIntBoxChange
       TabOrder = 1
       Text = '1000'
     end
-    object SpeedButton10: TSpeedButton
+    object ButtonAdvSetting: TSpeedButton
       Left = 110
       Height = 22
       Top = 88
       Width = 169
       Caption = 'Advanced setting'
-      OnClick = SpeedButton10Click
+      OnClick = ButtonAdvSettingClick
     end
   end
   object Timer1: TTimer
