@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-31 17:12+0000\n"
-"X-Generator: Launchpad (build 17908)\n"
+"X-Launchpad-Export-Date: 2016-07-04 12:09+0000\n"
+"X-Generator: Launchpad (build 18115)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1197,9 +1197,9 @@ msgstr "Створити заголовок"
 msgid "Create postscript chart. Please wait..."
 msgstr "Створення postscript діаграми. Будь ласка почекайте..."
 
-#: u_translation.rscreateraster
-msgid "Create raster chart at %s dpi. Please wait..."
-msgstr "Створення растрової мапи %s dpi. Будь ласка почекайте..."
+#: u_translation.rscreaterasterwh
+msgid "Create raster chart %d x %d. Please wait..."
+msgstr ""
 
 #: u_translation.rscrossmeridia
 msgid "Cross meridian"

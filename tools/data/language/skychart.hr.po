@@ -5,14 +5,14 @@ msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-29 17:42+0000\n"
-"PO-Revision-Date: 2015-01-25 17:43+0000\n"
-"Last-Translator: Zoran Novak <astrofoto.zoki@gmail.com>\n"
+"PO-Revision-Date: 2016-04-24 19:06+0000\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-31 17:12+0000\n"
-"X-Generator: Launchpad (build 17908)\n"
+"X-Launchpad-Export-Date: 2016-07-04 12:08+0000\n"
+"X-Generator: Launchpad (build 18115)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -1195,8 +1195,8 @@ msgstr "Izradi zaglavlje"
 msgid "Create postscript chart. Please wait..."
 msgstr ""
 
-#: u_translation.rscreateraster
-msgid "Create raster chart at %s dpi. Please wait..."
+#: u_translation.rscreaterasterwh
+msgid "Create raster chart %d x %d. Please wait..."
 msgstr ""
 
 #: u_translation.rscrossmeridia
@@ -2297,7 +2297,7 @@ msgstr "FTP pasivni mod"
 
 #: u_translation.rsfullscreen
 msgid "Full screen"
-msgstr "Puni ekran"
+msgstr "Cijeli zaslon"
 
 #: u_translation.rsgalactic
 msgid "Galactic"

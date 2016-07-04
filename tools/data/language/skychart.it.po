@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-29 17:42+0000\n"
-"PO-Revision-Date: 2016-01-28 17:11+0000\n"
+"PO-Revision-Date: 2016-02-13 17:38+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-31 17:12+0000\n"
-"X-Generator: Launchpad (build 17908)\n"
+"X-Launchpad-Export-Date: 2016-07-04 12:08+0000\n"
+"X-Generator: Launchpad (build 18115)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -280,7 +280,7 @@ msgstr "Mostra sempre oggetti dalla lista"
 
 #: u_translation.rsanewversiono
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
-msgstr ""
+msgstr "Una nuova versione %s di Skychart è disponibile.%sVuoi scaricarla ora?"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -408,7 +408,7 @@ msgstr "Asteroidi da file"
 
 #: u_translation.rsasteroidupda
 msgid "Asteroid update successful"
-msgstr ""
+msgstr "Asteroidi aggiornati con successo"
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
@@ -948,7 +948,7 @@ msgstr "Impostazioni comete"
 
 #: u_translation.rscometupdates
 msgid "Comet update successful"
-msgstr ""
+msgstr "Comete aggiornate con successo"
 
 #: u_translation.rscommandfound
 msgid "Command found OK."
@@ -976,7 +976,7 @@ msgstr "Diametro bussola"
 
 #: u_translation.rscompilationa
 msgid "Compilation and save successful"
-msgstr ""
+msgstr "Compilato e salvato con successo"
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
@@ -1194,9 +1194,9 @@ msgstr "Crea intestazione"
 msgid "Create postscript chart. Please wait..."
 msgstr "Creazione cartina postscript. Per favore, attendi..."
 
-#: u_translation.rscreateraster
-msgid "Create raster chart at %s dpi. Please wait..."
-msgstr "Crea una cartina raster a %s dpi. Attendi..."
+#: u_translation.rscreaterasterwh
+msgid "Create raster chart %d x %d. Please wait..."
+msgstr ""
 
 #: u_translation.rscrossmeridia
 msgid "Cross meridian"
@@ -3300,7 +3300,7 @@ msgstr "Linee Varie"
 
 #: u_translation.rsmissingscrip
 msgid "Missing script title!"
-msgstr ""
+msgstr "Manca il titolo dello script!"
 
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
@@ -3460,7 +3460,7 @@ msgstr "mai"
 
 #: u_translation.rsnewbetaversi
 msgid "New beta version available"
-msgstr ""
+msgstr "Nuova versione beta disponibile"
 
 #: u_translation.rsnewchart
 msgid "New chart"
@@ -3476,7 +3476,7 @@ msgstr "Nuova Etichetta"
 
 #: u_translation.rsnewversionav
 msgid "New version available"
-msgstr ""
+msgstr "Nuova versione disponibile"
 
 #: u_translation.rsnext
 msgid "Next   >>"
@@ -4012,7 +4012,7 @@ msgstr "Per favore, conferma che il telescopio è centrato su %s"
 
 #: u_translation.rspleasedownlo
 msgid "Please download and select TLE file"
-msgstr ""
+msgstr "Per favore scarica e seleziona il file TLE"
 
 #: u_translation.rspleaseensure
 msgid "Please ensure that ASCOM telescope drivers are installed properly."
@@ -5680,7 +5680,7 @@ msgstr "Titolo"
 
 #: u_translation.rstledownloado
 msgid "TLE download OK"
-msgstr ""
+msgstr "TLE scaricato OK"
 
 #: u_translation.rsto
 msgid "to"
@@ -6176,7 +6176,7 @@ msgstr "Errori Y"
 
 #: u_translation.rsyoualreadyha
 msgid "You already have the latest available version!"
-msgstr ""
+msgstr "La versione è aggiornata all'ultima disponibile!"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
