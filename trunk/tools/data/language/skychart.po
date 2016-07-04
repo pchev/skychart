@@ -1534,8 +1534,8 @@ msgstr ""
 msgid "Send the chart to the printer."
 msgstr ""
 
-#: u_translation:rscreateraster
-msgid "Create raster chart at %s dpi. Please wait..."
+#: u_translation:rscreaterasterwh
+msgid "Create raster chart %d x %d. Please wait..."
 msgstr ""
 
 #: u_translation:rsopenthebitma

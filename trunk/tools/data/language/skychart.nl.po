@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-29 17:42+0000\n"
-"PO-Revision-Date: 2015-11-05 19:25+0000\n"
+"PO-Revision-Date: 2016-02-04 22:22+0000\n"
 "Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-31 17:12+0000\n"
-"X-Generator: Launchpad (build 17908)\n"
+"X-Launchpad-Export-Date: 2016-07-04 12:08+0000\n"
+"X-Generator: Launchpad (build 18115)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -115,7 +115,7 @@ msgstr "Aktie"
 
 #: u_translation.rsactivateallt
 msgid "Activate all the functions when hidden"
-msgstr ""
+msgstr "Activeer alle functies wanneer verborgen"
 
 #: u_translation.rsactivatethet
 msgid "Activate the timer event when hidden"
@@ -151,7 +151,7 @@ msgstr "Voeg label toe"
 
 #: u_translation.rsaddlabelfore
 msgid "Add label for every object in the list"
-msgstr ""
+msgstr "Voeg labels toe voor elk object in de lijst"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
@@ -171,7 +171,7 @@ msgstr "Aanpassen van de visualisatieschaal"
 
 #: u_translation.rsadjustthewin
 msgid "Adjust the window size to the screen DPI"
-msgstr ""
+msgstr "Pas de venster afmetingen aan op de scherm DPI"
 
 #: u_translation.rsadvanced
 msgid "Advanced"
@@ -279,7 +279,7 @@ msgstr "Toon altijd de objecten van de lijst"
 
 #: u_translation.rsanewversiono
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
-msgstr ""
+msgstr "Een nieuwe versie %s van Skychart is beschikbaar.%sWil je deze nu downloaden?"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -343,7 +343,7 @@ msgstr "Kunstmatige satelliet"
 
 #: u_translation.rsartificialsa3
 msgid "Artificial satellites TLE (one URL by line)"
-msgstr ""
+msgstr "Kunstmatige satellieten TLE (een URL per regel)"
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
@@ -395,7 +395,7 @@ msgstr "Planetoïde elementen in MPC format (één URL per regel)"
 
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
-msgstr ""
+msgstr "Planetoide elementen"
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
@@ -407,7 +407,7 @@ msgstr "Planetoïden van het bestand"
 
 #: u_translation.rsasteroidupda
 msgid "Asteroid update successful"
-msgstr ""
+msgstr "Planetoide gegevens bijwerken succesvol"
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
@@ -615,7 +615,7 @@ msgstr "Knop"
 
 #: u_translation.rsbuttonsize
 msgid "Button size"
-msgstr ""
+msgstr "Knop afmetingen"
 
 #: u_translation.rsby
 msgid "by"
@@ -903,7 +903,7 @@ msgstr "Cluster en nevel"
 
 #: u_translation.rscollapse
 msgid "Collapse"
-msgstr ""
+msgstr "Inklappen"
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -939,7 +939,7 @@ msgstr "Komeet elementen in MPC format (één URL per regel)"
 
 #: u_translation.rscometelement2
 msgid "Comet elements"
-msgstr ""
+msgstr "Komeet elementen"
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
@@ -947,7 +947,7 @@ msgstr "Komeet instelling"
 
 #: u_translation.rscometupdates
 msgid "Comet update successful"
-msgstr ""
+msgstr "Komeetgegevens bijwerken succesvol"
 
 #: u_translation.rscommandfound
 msgid "Command found OK."
@@ -975,7 +975,7 @@ msgstr "Kompasroos grootte"
 
 #: u_translation.rscompilationa
 msgid "Compilation and save successful"
-msgstr ""
+msgstr "Compilatie en opslaan succesvol"
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
@@ -1193,9 +1193,9 @@ msgstr "Creëer 'header'"
 msgid "Create postscript chart. Please wait..."
 msgstr "Creëert Postscript kaart. Alstublieft geduld..."
 
-#: u_translation.rscreateraster
-msgid "Create raster chart at %s dpi. Please wait..."
-msgstr "Creëert raster kaart op %s dpi. Alstublieft geduld..."
+#: u_translation.rscreaterasterwh
+msgid "Create raster chart %d x %d. Please wait..."
+msgstr ""
 
 #: u_translation.rscrossmeridia
 msgid "Cross meridian"
@@ -1675,7 +1675,7 @@ msgstr "Dubbelster"
 
 #: u_translation.rsdown
 msgid "Down"
-msgstr ""
+msgstr "Omlaag"
 
 #: u_translation.rsdownload
 msgid "Download"
@@ -2036,7 +2036,7 @@ msgstr "Bezig met afsluiten ..."
 
 #: u_translation.rsexpand
 msgid "Expand"
-msgstr ""
+msgstr "Uitklappen"
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -2404,7 +2404,7 @@ msgstr "Groen"
 
 #: u_translation.rsgregoriancal
 msgid "Gregorian calendar start date"
-msgstr ""
+msgstr "Gregoriaanse kalender start datum"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -2772,7 +2772,7 @@ msgstr "JD Kalender"
 
 #: u_translation.rsjplephemeris
 msgid "JPL ephemeris search order"
-msgstr ""
+msgstr "JPL efemeriden zoekvolgorde"
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="
@@ -3141,7 +3141,7 @@ msgstr "Beheer gereedschapvensters"
 
 #: u_translation.rsmanual
 msgid "Manual"
-msgstr ""
+msgstr "Handmatig"
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -3301,7 +3301,7 @@ msgstr "Versch. lijnen"
 
 #: u_translation.rsmissingscrip
 msgid "Missing script title!"
-msgstr ""
+msgstr "Script-titel ontbreekt!"
 
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
@@ -3461,7 +3461,7 @@ msgstr "nooit"
 
 #: u_translation.rsnewbetaversi
 msgid "New beta version available"
-msgstr ""
+msgstr "Nieuwe beta-versie beschikbaar"
 
 #: u_translation.rsnewchart
 msgid "New chart"
@@ -3477,7 +3477,7 @@ msgstr "Nieuw label"
 
 #: u_translation.rsnewversionav
 msgid "New version available"
-msgstr ""
+msgstr "Nieuwe versie beschikbaar"
 
 #: u_translation.rsnext
 msgid "Next   >>"
@@ -4013,7 +4013,7 @@ msgstr "Bevestig alstublieft dat uw telescoop op %s gecentreerd staat"
 
 #: u_translation.rspleasedownlo
 msgid "Please download and select TLE file"
-msgstr ""
+msgstr "Download a.u.b. en selecteer TLE bestand"
 
 #: u_translation.rspleaseensure
 msgid "Please ensure that ASCOM telescope drivers are installed properly."
@@ -4729,7 +4729,7 @@ msgstr "Scope Adv"
 
 #: u_translation.rsscreenresolu
 msgid "Screen resolution"
-msgstr ""
+msgstr "Scherm resolutie"
 
 #: u_translation.rsscript
 msgid "Script"
@@ -4781,7 +4781,7 @@ msgstr "Zoek index"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
-msgstr ""
+msgstr "Zoek software update"
 
 #: u_translation.rssec
 msgid "s"
@@ -5005,7 +5005,7 @@ msgstr "Toon planetoïden op de kaart"
 
 #: u_translation.rsshowbuttonte
 msgid "Show button text"
-msgstr ""
+msgstr "Toon knop tekst"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
@@ -5405,11 +5405,11 @@ msgstr "Start"
 
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
-msgstr ""
+msgstr "Animatie achteruit"
 
 #: u_translation.rsstartforward
 msgid "Animation forward"
-msgstr ""
+msgstr "Animatie voouit"
 
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
@@ -5681,7 +5681,7 @@ msgstr "Titel"
 
 #: u_translation.rstledownloado
 msgid "TLE download OK"
-msgstr ""
+msgstr "TLE download OK"
 
 #: u_translation.rsto
 msgid "to"
@@ -5749,7 +5749,7 @@ msgstr "Volg telescoop"
 
 #: u_translation.rstrajectories
 msgid "Trajectories simulation"
-msgstr ""
+msgstr "Trajecten simulatie"
 
 #: u_translation.rstransformati
 msgid "Transformation"
@@ -5893,7 +5893,7 @@ msgstr "Niet ondersteunde SAMP hub profiel. Moet een bestands-URL zijn"
 
 #: u_translation.rsup
 msgid "Up"
-msgstr ""
+msgstr "Omhoog"
 
 #: u_translation.rsupdate1
 msgid "Update"
@@ -6177,7 +6177,7 @@ msgstr "Y Fouten"
 
 #: u_translation.rsyoualreadyha
 msgid "You already have the latest available version!"
-msgstr ""
+msgstr "Je hebt al de laatst beschikbare versie!"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
