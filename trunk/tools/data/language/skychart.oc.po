@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-01-29 17:42+0000\n"
-"PO-Revision-Date: 2016-06-29 20:45+0000\n"
+"PO-Revision-Date: 2016-07-15 16:02+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-04 12:09+0000\n"
-"X-Generator: Launchpad (build 18115)\n"
+"X-Launchpad-Export-Date: 2016-07-17 13:20+0000\n"
+"X-Generator: Launchpad (build 18140)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -162,7 +162,7 @@ msgstr ""
 
 #: u_translation.rsaddtoobservi
 msgid "Add %s to observing list"
-msgstr ""
+msgstr "Apondre %s a la lista d'observacion"
 
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
@@ -170,7 +170,7 @@ msgstr ""
 
 #: u_translation.rsadjustthevis
 msgid "Adjust the visualisation scale"
-msgstr ""
+msgstr "Ajustar l'escala de visualizacion"
 
 #: u_translation.rsadjustthewin
 msgid "Adjust the window size to the screen DPI"
@@ -198,7 +198,7 @@ msgstr "Edat"
 
 #: u_translation.rsairmass
 msgid "Airmass"
-msgstr ""
+msgstr "Massa d'aire"
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -350,15 +350,15 @@ msgstr ""
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
-msgstr ""
+msgstr "Una aplicacion SAMP a mandat una taula"
 
 #: u_translation.rsasampapplica2
 msgid "A SAMP application send an image to load"
-msgstr ""
+msgstr "Una apicacion SAMP a mandat un imatge"
 
 #: u_translation.rsasampapplica3
 msgid "A SAMP application send coordinates location"
-msgstr ""
+msgstr "Una aplicacion SAMP a mandat de coordenadas"
 
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
@@ -370,15 +370,15 @@ msgstr ""
 
 #: u_translation.rsaskforconfir
 msgid "Ask for confirmation before to jump to coordinates"
-msgstr ""
+msgstr "Demanda una confirmacion abans de desplaçar la mapa"
 
 #: u_translation.rsaskforconfir2
 msgid "Ask for confirmation before to load the image"
-msgstr ""
+msgstr "Demanda una confirmacion abans de cargar un imatge"
 
 #: u_translation.rsaskforconfir3
 msgid "Ask for confirmation before to load the table"
-msgstr ""
+msgstr "Demanda una confirmacion abans de cargar una taula"
 
 #: u_translation.rsasonscreenbl
 msgid "As on screen (black background!)"
@@ -474,7 +474,7 @@ msgstr ""
 
 #: u_translation.rsazimuthorigi
 msgid "Azimuth origin"
-msgstr ""
+msgstr "Origina dels azimuts"
 
 #: u_translation.rsazturns
 msgid "%sAz turns:"
@@ -634,7 +634,7 @@ msgstr "Calendièr"
 
 #: u_translation.rscalendargrap
 msgid "Calendar graph setting"
-msgstr ""
+msgstr "Configuracion dels grafics del calendièr"
 
 #: u_translation.rscancel
 msgid "Cancel"
@@ -658,7 +658,7 @@ msgstr ""
 
 #: u_translation.rscannotdraw
 msgid "Cannot draw"
-msgstr ""
+msgstr "Pòt dessenhar"
 
 #: u_translation.rscannotgetyou
 msgid "Cannot get your IP address, or no location found for this address."
@@ -698,7 +698,7 @@ msgstr ""
 
 #: u_translation.rscatalogsavai
 msgid "%s Catalogs available"
-msgstr ""
+msgstr "%s catalògs disponibles"
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
@@ -774,7 +774,7 @@ msgstr ""
 
 #: u_translation.rschangemousem
 msgid "Change mouse mode"
-msgstr ""
+msgstr "Cambiar lo mòde de la mirga"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
@@ -1062,7 +1062,7 @@ msgstr ""
 
 #: u_translation.rsconnecttosam
 msgid "Connect to SAMP hub"
-msgstr ""
+msgstr "Connexion al hub SAM"
 
 #: u_translation.rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
@@ -1278,7 +1278,7 @@ msgstr ""
 
 #: u_translation.rsdatapreview
 msgid "Data preview"
-msgstr ""
+msgstr "Previsualizar"
 
 #: u_translation.rsdatastartonl
 msgid "Data starts on line %s"
@@ -1414,7 +1414,7 @@ msgstr "Etiqueta per defaut"
 
 #: u_translation.rsdefaultmagni
 msgid "Default magnitude"
-msgstr ""
+msgstr "Magnitud per defaut"
 
 #: u_translation.rsdefaultmargi
 msgid "Default margin"
@@ -1518,7 +1518,7 @@ msgstr ""
 
 #: u_translation.rsdeltaterror
 msgid "DeltaT uncertainty"
-msgstr ""
+msgstr "Incertitud sus DeltaT"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -1602,7 +1602,7 @@ msgstr "Se desconnectar"
 
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
-msgstr ""
+msgstr "Desconnexion del hub SAMP"
 
 #: u_translation.rsdisplay
 msgid "Display"
@@ -1650,7 +1650,7 @@ msgstr "Distància"
 
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
-msgstr ""
+msgstr "Mesura de la distància"
 
 #: u_translation.rsdivider
 msgid "Divider"
@@ -1658,7 +1658,7 @@ msgstr "Devesidor"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
-msgstr ""
+msgstr "Cambietz pas res se sètz pas segur de çò que vous fasètz !"
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
@@ -1722,7 +1722,7 @@ msgstr "La volètz cargar ?"
 
 #: u_translation.rsdoyouwanttom
 msgid "Do you want to move the chart there?"
-msgstr ""
+msgstr "Volètz desplaçar la carta aicí ?"
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
@@ -1730,7 +1730,7 @@ msgstr ""
 
 #: u_translation.rsdoyouwanttos2
 msgid "Do you want to save it?"
-msgstr ""
+msgstr "La volètz salvar ?"
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
@@ -1970,7 +1970,7 @@ msgstr ""
 
 #: u_translation.rserrorfilenot
 msgid "Error, file not downloaded:"
-msgstr ""
+msgstr "Error, fichièr pas telecargat :"
 
 #: u_translation.rserroropening
 msgid "Error opening %s"
@@ -2378,7 +2378,7 @@ msgstr ""
 
 #: u_translation.rsgraphheight
 msgid "Graph height"
-msgstr ""
+msgstr "Nautor dels grafics"
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -2450,7 +2450,7 @@ msgstr ""
 
 #: u_translation.rshammeraitoff
 msgid "Hammer-Aitoff"
-msgstr ""
+msgstr "Hammer-Aitoff"
 
 #: u_translation.rshandpad
 msgid "HandPad"
@@ -2554,7 +2554,7 @@ msgstr ""
 
 #: u_translation.rshumidity
 msgid "Humidity %"
-msgstr ""
+msgstr "Umiditat %"
 
 #: u_translation.rsiconclickact
 msgid "Icon click action"
@@ -2757,8 +2757,9 @@ msgid "%s is empty!"
 msgstr ""
 
 #: u_translation.rsittaketoolon
+#, fuzzy,badformat
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
-msgstr ""
+msgstr "Lo dessenh dels %s amb lo catalòg % pren tròp de temps, utilizetz pas aqueste catalòg per aqueste camp."
 
 #: u_translation.rsjd
 msgid "JD:"
@@ -2794,11 +2795,11 @@ msgstr ""
 
 #: u_translation.rskeepimageson
 msgid "Keep images on exit for later use"
-msgstr ""
+msgstr "Conservar los imatges en quitant per una utilizacion ulteriora"
 
 #: u_translation.rskeeptableson
 msgid "Keep tables on exit for later use"
-msgstr ""
+msgstr "Conservar las taulas en quitant per una utilizacion ulteriora"
 
 #: u_translation.rskey
 msgid "Key"
@@ -3190,7 +3191,7 @@ msgstr ""
 
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
-msgstr ""
+msgstr "Enregistraments max."
 
 #: u_translation.rsmbytes
 msgid "MBytes"
@@ -3262,7 +3263,7 @@ msgstr "Via Lactèa"
 
 #: u_translation.rsmillionkm
 msgid "million Km."
-msgstr ""
+msgstr "milion Km."
 
 #: u_translation.rsmin
 msgid "m"
@@ -3330,7 +3331,7 @@ msgstr "Luna"
 
 #: u_translation.rsmoreinformat
 msgid "More informations"
-msgstr ""
+msgstr "Mai d'informacions"
 
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
@@ -3702,7 +3703,7 @@ msgstr ""
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
-msgstr ""
+msgstr "Lista d'observacion"
 
 #: u_translation.rsobservinglis2
 msgid "Observing list elements"
@@ -3766,11 +3767,11 @@ msgstr ""
 
 #: u_translation.rsonlyobjectsw
 msgid "Only objects within airmass limits tonight"
-msgstr ""
+msgstr "Solament los objèctes dins la massa d'aire aquesta nuèit"
 
 #: u_translation.rsonlyobjectsw2
 msgid "Only objects within airmass limits now"
-msgstr ""
+msgstr "Solament los objèctes dins la massa d'aire ara"
 
 #: u_translation.rsonlyobjectsw3
 msgid "Only objects within hour angle limits tonight"
@@ -4382,15 +4383,15 @@ msgstr ""
 
 #: u_translation.rsreceivecoord
 msgid "Receive coordinates from other applications"
-msgstr ""
+msgstr "Recebre de coordenadas d'autras aplicacions"
 
 #: u_translation.rsreceivefitsi
 msgid "Receive FITS images from other applications"
-msgstr ""
+msgstr "Recebre d'imatges FITS d'autras aplicacions"
 
 #: u_translation.rsreceivevotab
 msgid "Receive VO table data from other applications"
-msgstr ""
+msgstr "Recebre de taulas VO d'autras aplicacions"
 
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
@@ -4638,7 +4639,7 @@ msgstr ""
 
 #: u_translation.rssampisamessa
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
-msgstr ""
+msgstr "SAMP es un protocòl de messatjariá que permet als logicials d'astronomia d'interagir ensembles.%sSkychart pòt mandar e recebre de coordenadas, d'imatges FITS e de taulas VO."
 
 #: u_translation.rssampsendcoor
 msgid "SAMP send coordinates"
@@ -4646,7 +4647,7 @@ msgstr ""
 
 #: u_translation.rssampsetup
 msgid "SAMP setup"
-msgstr ""
+msgstr "Configuracion de SAMP"
 
 #: u_translation.rssampstatus
 msgid "SAMP status"
@@ -4762,7 +4763,7 @@ msgstr "Bóstia de recèrca"
 
 #: u_translation.rssearchbyname
 msgid "Search by name"
-msgstr ""
+msgstr "Recercar per nom"
 
 #: u_translation.rssearchbyposi
 msgid "Search by position"
@@ -4818,7 +4819,7 @@ msgstr "Seleccionar tot"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
-msgstr ""
+msgstr "Causir lo catalòg"
 
 #: u_translation.rsselectcircle
 msgid "Select Circle"
@@ -4886,11 +4887,11 @@ msgstr ""
 
 #: u_translation.rssendimageto
 msgid "Send image to"
-msgstr ""
+msgstr "Mandadís de l'imatge a"
 
 #: u_translation.rssendtableto
 msgid "Send table to"
-msgstr ""
+msgstr "Mandadís de la taula a"
 
 #: u_translation.rsseparation
 msgid "Separation"
@@ -5070,7 +5071,7 @@ msgstr ""
 
 #: u_translation.rsshowimagenam
 msgid "Show image name label"
-msgstr ""
+msgstr "Aficha lo nom de l'imatge en labèl"
 
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
@@ -5150,7 +5151,7 @@ msgstr ""
 
 #: u_translation.rsshowthesmall
 msgid "Show the faint satellites of the outer planets"
-msgstr ""
+msgstr "Afichar los pichons satellits de las planetas extèrnas"
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
@@ -5414,7 +5415,7 @@ msgstr ""
 
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
-msgstr ""
+msgstr "Lo grafic comença a miègjorn"
 
 #: u_translation.rsstartmonth
 msgid "Start month"
@@ -5618,7 +5619,7 @@ msgstr ""
 
 #: u_translation.rstheobserving
 msgid "The observing list %s was modified."
-msgstr ""
+msgstr "La lista d'observacion %s es estada modificada."
 
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
@@ -5758,7 +5759,7 @@ msgstr "Transformacion"
 
 #: u_translation.rstransit
 msgid "Transit"
-msgstr ""
+msgstr "Transit"
 
 #: u_translation.rstranslator
 msgid "Translator:"
@@ -5802,7 +5803,7 @@ msgstr ""
 
 #: u_translation.rstrytoautocon
 msgid "Try to auto-connect to a SAMP hub when the program start"
-msgstr ""
+msgstr "Ensajar de se connectar a un hub SAMP a l'aviada del programa"
 
 #: u_translation.rsttut
 msgid "DeltaT: "
@@ -5934,7 +5935,7 @@ msgstr ""
 
 #: u_translation.rsuseasimplepo
 msgid "Use a simple pointer"
-msgstr ""
+msgstr "Utiliza un puntador simplificat"
 
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
@@ -5962,7 +5963,7 @@ msgstr ""
 
 #: u_translation.rsuserdefinedo
 msgid "User defined objects"
-msgstr ""
+msgstr "Objèctes personals"
 
 #: u_translation.rsuserid
 msgid "User id:"
@@ -5974,7 +5975,7 @@ msgstr "Nom d'utilizaire"
 
 #: u_translation.rsusesocksprox
 msgid "Use Socks proxy"
-msgstr ""
+msgstr "Utilizar lo proxy Socks"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"
@@ -6058,7 +6059,7 @@ msgstr ""
 
 #: u_translation.rsviewobservin
 msgid "View observing list"
-msgstr ""
+msgstr "Veire la lista d'observacion"
 
 #: u_translation.rsviewonchart
 msgid "View on chart"
