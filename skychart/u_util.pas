@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 {$mode delphi}{$H+}
 interface
 
-uses Math, SysUtils, Classes, u_constant, LCLType, FileUtil,
+uses Math, SysUtils, Classes, u_constant, LazUTF8, LCLType, LazFileUtils,
   {$ifdef mswindows}
     Windows, Registry,
   {$endif}
@@ -133,6 +133,7 @@ function VisibleControlCount(obj:TWinControl):integer;
 procedure SetMenuAccelerator(Amenu: TMenuItem; level: integer; var AccelList: array of string);
 procedure ISleep(milli:integer);
 function CompareVersion(v1,v2: string):integer;
+function strim(const S: string): string;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -2636,6 +2637,11 @@ begin
   else if (rev2>rev1) then result:=1
   else if (rev2<rev1) then result:=-1
   else result:=0;
+end;
+
+function strim(const S: string): string;
+begin
+  result:=string(trim(s));
 end;
 
 end.

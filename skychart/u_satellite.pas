@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_translation, u_util, u_projection, u_constant, math, FileUtil,
+uses u_translation, u_util, u_projection, u_constant, math, LazUTF8, LazFileUtils,
   Classes, SysUtils, Dialogs;
 
 Function  TleDate(fn:string): TDateTime;

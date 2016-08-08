@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses  FileUtil, BGRABitmap, BGRABitmapTypes, FPReadBMP,
+uses LazUTF8, LazFileUtils, BGRABitmap, BGRABitmapTypes, FPReadBMP,
   u_constant, u_util, u_bitmap, PostscriptCanvas, process,
   SysUtils, Types, StrUtils, FPImage, LCLType, LCLIntf, IntfGraphics, FPCanvas,
   Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics, u_translation;

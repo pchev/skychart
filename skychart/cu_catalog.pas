@@ -1586,7 +1586,6 @@ end;
 
 procedure Tcatalog.FormatGCatS(var rec:GcatRec);
 var bsccat, flam, bayer : boolean;
-    i: integer;
 begin
 rec.ra:=deg2rad*rec.ra;
 rec.dec:=deg2rad*rec.dec;
@@ -3461,7 +3460,7 @@ Procedure Tcatalog.LoadConstL(fname:string);
 var f : textfile;
     i,n:integer;
     ra1,ra2,de1,de2:single;
-    buf,c,h1,h2: string;
+    buf,h1,h2: string;
     filter,ok: boolean;
     ver,ctype: integer;
     rec: GCatrec;
@@ -3502,7 +3501,6 @@ begin
             readln(f,buf);
             if trim(buf)='' then continue;
             if copy(buf,1,1)=';' then continue;
-            c:=copy(buf,1,3);
             h1:=trim(copy(buf,6,5));
             h2:=trim(copy(buf,13,5));
             FindNumGcatRec(cfgcat.StarCatPath[DefStar-BaseStar],'star','HR'+h1,11,rec,ok);

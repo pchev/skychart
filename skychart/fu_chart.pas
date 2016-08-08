@@ -450,6 +450,8 @@ type
   end;
 
 implementation
+uses LazUTF8, LazFileUtils;
+
 {$R *.lfm}
 
 procedure Tf_chart.SetLang;
@@ -1196,7 +1198,7 @@ var
     rs: single;
     printok: boolean;
     prtname:string;
-    fname:WideString;
+    fname:string;
     w,h,x,y :integer;
     ts:TSize;
     HeaderHeight,FooterHeight: integer;
@@ -2906,7 +2908,7 @@ f_detail.BringToFront;
 end;
 
 function Tf_chart.FormatDesc:string;
-var desc,buf,buf2,otype,oname,txt,s1,s2,s3: UTF8String;
+var desc,buf,buf2,otype,oname,txt,s1,s2,s3: string;
     thr,tht,ths,tazr,tazs,tculmalt: string;
     searchdir,fn: string;
     bmp: Tbitmap;

@@ -87,6 +87,7 @@ const
   hlpScriptReference = 'script_reference.html';
 
 implementation
+uses LazUTF8, LazFileUtils;
 
 procedure SetHelpDB(aHelpDB:THTMLHelpDatabase);
 var buf,hdir:string;

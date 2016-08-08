@@ -1036,9 +1036,9 @@ qry:='SELECT epoch FROM cdc_com_elem where id="'+id+'"';
 db.Query(qry);
 if db.Rowcount>0 then
   for i:=0 to db.Rowcount-1 do begin
-      dif:=abs(strtofloat(trim(db.Results[i][0]))-now_jd);
+      dif:=abs(strtofloat(strim(db.Results[i][0]))-now_jd);
       if dif<diff then begin
-         result:=strtofloat(trim(db.Results[i][0]));
+         result:=strtofloat(strim(db.Results[i][0]));
          diff:=dif;
       end;
   end;
@@ -1055,9 +1055,9 @@ qry:='SELECT epoch FROM cdc_ast_elem where id="'+id+'"';
 db.Query(qry);
 if db.Rowcount>0 then
   for i:=0 to db.Rowcount-1 do begin
-      dif:=abs(strtofloat(trim(db.Results[i][0]))-now_jd);
+      dif:=abs(strtofloat(strim(db.Results[i][0]))-now_jd);
       if dif<diff then begin
-         result:=strtofloat(trim(db.Results[i][0]));
+         result:=strtofloat(strim(db.Results[i][0]));
          diff:=dif;
       end;
   end;
@@ -1071,20 +1071,20 @@ try
 qry:='SELECT id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id'
     +' from cdc_ast_elem '
     +' where id="'+id+'"'
-    +' and epoch='+trim(formatfloat(f6s,epoch));
+    +' and epoch='+strim(formatfloat(f6s,epoch));
 db.Query(qry);
 if db.rowcount>0 then begin
-  if not trystrtofloat(trim(db.Results[0][1]),h) then h:=17;
-  if not trystrtofloat(trim(db.Results[0][2]),g) then g:=0.15;
-  ma:=strtofloat(trim(db.Results[0][4]));
-  ap:=strtofloat(trim(db.Results[0][5]));
-  an:=strtofloat(trim(db.Results[0][6]));
-  ic:=strtofloat(trim(db.Results[0][7]));
-  ec:=strtofloat(trim(db.Results[0][8]));
-  sa:=strtofloat(trim(db.Results[0][9]));
+  if not trystrtofloat(strim(db.Results[0][1]),h) then h:=17;
+  if not trystrtofloat(strim(db.Results[0][2]),g) then g:=0.15;
+  ma:=strtofloat(strim(db.Results[0][4]));
+  ap:=strtofloat(strim(db.Results[0][5]));
+  an:=strtofloat(strim(db.Results[0][6]));
+  ic:=strtofloat(strim(db.Results[0][7]));
+  ec:=strtofloat(strim(db.Results[0][8]));
+  sa:=strtofloat(strim(db.Results[0][9]));
   ref:=db.Results[0][10];
   nam:=db.Results[0][11];
-  eq:=strtofloat(trim(db.Results[0][12]));
+  eq:=strtofloat(strim(db.Results[0][12]));
   elem_id:=db.Results[0][13];
   result:=true;
 end else begin
@@ -1105,16 +1105,16 @@ qry:='SELECT id,peri_epoch,peri_dist,eccentricity,arg_perihelion,asc_node,inclin
     +' and epoch='+formatfloat(f1,epoch);
 db.Query(qry);
 if db.Rowcount>0 then begin
-  tp:=strtofloat(trim(db.Results[0][1]));
-  q:=strtofloat(trim(db.Results[0][2]));
-  ec:=strtofloat(trim(db.Results[0][3]));
-  ap:=strtofloat(trim(db.Results[0][4]));
-  an:=strtofloat(trim(db.Results[0][5]));
-  ic:=strtofloat(trim(db.Results[0][6]));
-  h:=strtofloat(trim(db.Results[0][8]));
-  g:=strtofloat(trim(db.Results[0][9]));
+  tp:=strtofloat(strim(db.Results[0][1]));
+  q:=strtofloat(strim(db.Results[0][2]));
+  ec:=strtofloat(strim(db.Results[0][3]));
+  ap:=strtofloat(strim(db.Results[0][4]));
+  an:=strtofloat(strim(db.Results[0][5]));
+  ic:=strtofloat(strim(db.Results[0][6]));
+  h:=strtofloat(strim(db.Results[0][8]));
+  g:=strtofloat(strim(db.Results[0][9]));
   nam:=db.Results[0][10];
-  eq:=strtofloat(trim(db.Results[0][11]));
+  eq:=strtofloat(strim(db.Results[0][11]));
   elem_id:=db.Results[0][12];
   result:=true;
 end else begin
@@ -1136,12 +1136,12 @@ qry:='SELECT id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccen
     +' where id="'+id+'"';
 db.Query(qry);
 if db.Rowcount>0 then begin
-  epoch:=strtofloat(trim(db.Results[0][3]));
+  epoch:=strtofloat(strim(db.Results[0][3]));
   dt:=abs(jd-epoch);
   j:=0;
   i:=1;
   while i<db.Rowcount do begin
-    t:=strtofloat(trim(db.Results[i][3]));
+    t:=strtofloat(strim(db.Results[i][3]));
     if abs(jd-t)<dt then begin
        epoch:=t;
        dt:=abs(jd-t);
@@ -1152,17 +1152,17 @@ if db.Rowcount>0 then begin
   if dt>180 then begin
      FAstmsg:=rsWarningSomeA;
   end;
-  h:=StrToFloatDef(trim(db.Results[j][1]),20);  // H and G not present in file for some poorly observed asteroids
-  g:=StrToFloatDef(trim(db.Results[j][2]),0.15);
-  ma:=strtofloat(trim(db.Results[j][4]));
-  ap:=strtofloat(trim(db.Results[j][5]));
-  an:=strtofloat(trim(db.Results[j][6]));
-  ic:=strtofloat(trim(db.Results[j][7]));
-  ec:=strtofloat(trim(db.Results[j][8]));
-  sa:=strtofloat(trim(db.Results[j][9]));
+  h:=StrToFloatDef(strim(db.Results[j][1]),20);  // H and G not present in file for some poorly observed asteroids
+  g:=StrToFloatDef(strim(db.Results[j][2]),0.15);
+  ma:=strtofloat(strim(db.Results[j][4]));
+  ap:=strtofloat(strim(db.Results[j][5]));
+  an:=strtofloat(strim(db.Results[j][6]));
+  ic:=strtofloat(strim(db.Results[j][7]));
+  ec:=strtofloat(strim(db.Results[j][8]));
+  sa:=strtofloat(strim(db.Results[j][9]));
   ref:=db.Results[j][10];
   nam:=db.Results[j][11];
-  eq:=strtofloat(trim(db.Results[j][12]));
+  eq:=strtofloat(strim(db.Results[j][12]));
   elem_id:=db.Results[j][13];
   result:=true;
 end else begin
@@ -1184,12 +1184,12 @@ qry:='SELECT id,peri_epoch,peri_dist,eccentricity,arg_perihelion,asc_node,inclin
     +' where id="'+id+'"';
 db.Query(qry);
 if db.Rowcount>0 then begin
-  epoch:=strtofloat(trim(db.Results[0][7]));
+  epoch:=strtofloat(strim(db.Results[0][7]));
   dt:=abs(jd-epoch);
   j:=0;
   i:=1;
   while i<db.Rowcount do begin
-    t:=strtofloat(trim(db.Results[i][7]));
+    t:=strtofloat(strim(db.Results[i][7]));
     if abs(jd-t)<dt then begin
        epoch:=t;
        dt:=abs(jd-t);
@@ -1202,16 +1202,16 @@ if db.Rowcount>0 then begin
      FComMindt:=round(dt-1);
   end;
   if dt<36500 then begin // 100 years grace period...
-    tp:=strtofloat(trim(db.Results[j][1]));
-    q:=strtofloat(trim(db.Results[j][2]));
-    ec:=strtofloat(trim(db.Results[j][3]));
-    ap:=strtofloat(trim(db.Results[j][4]));
-    an:=strtofloat(trim(db.Results[j][5]));
-    ic:=strtofloat(trim(db.Results[j][6]));
-    h:=strtofloat(trim(db.Results[j][8]));
-    g:=strtofloat(trim(db.Results[j][9]));
+    tp:=strtofloat(strim(db.Results[j][1]));
+    q:=strtofloat(strim(db.Results[j][2]));
+    ec:=strtofloat(strim(db.Results[j][3]));
+    ap:=strtofloat(strim(db.Results[j][4]));
+    an:=strtofloat(strim(db.Results[j][5]));
+    ic:=strtofloat(strim(db.Results[j][6]));
+    h:=strtofloat(strim(db.Results[j][8]));
+    g:=strtofloat(strim(db.Results[j][9]));
     nam:=db.Results[j][10];
-    eq:=strtofloat(trim(db.Results[j][11]));
+    eq:=strtofloat(strim(db.Results[j][11]));
     elem_id:=db.Results[j][12];
     result:=true;
   end else
@@ -1495,7 +1495,7 @@ if db.Active then begin
          'values ('+
          rec[2]+','+
          '"'+cc+'",'+
-         '"'+trim(rec[22])+'",'+
+         '"'+strim(rec[22])+'",'+
          '"'+rec[10]+'",'+
          rec[3]+','+
          rec[4]+','+
@@ -1561,7 +1561,7 @@ if db.Active then begin
          'values ('+
          rec[0]+','+
          '"US-'+rec[3]+'",'+
-         '"'+Condutf8encode(trim(rec[1]))+'",'+
+         '"'+Condutf8encode(strim(rec[1]))+'",'+
          '"'+rec[2]+'",'+
          rec[9]+','+
          rec[10]+','+

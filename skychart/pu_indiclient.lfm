@@ -14,7 +14,7 @@ object pop_indi: Tpop_indi
   OnDestroy = FormDestroy
   ParentFont = True
   Position = poDefaultPosOnly
-  LCLVersion = '1.6.0.3'
+  LCLVersion = '1.6.0.4'
   Visible = False
   object GroupBox3: TGroupBox
     Left = 0
@@ -22,8 +22,8 @@ object pop_indi: Tpop_indi
     Top = 137
     Width = 279
     Align = alTop
-    ClientHeight = 134
-    ClientWidth = 277
+    ClientHeight = 132
+    ClientWidth = 275
     TabOrder = 2
     object Connect: TButton
       Left = 8
@@ -106,7 +106,7 @@ object pop_indi: Tpop_indi
       Left = 8
       Height = 17
       Top = 20
-      Width = 20
+      Width = 22
       Caption = 'RA '
       ParentColor = False
     end
@@ -114,13 +114,13 @@ object pop_indi: Tpop_indi
       Left = 126
       Height = 17
       Top = 20
-      Width = 27
+      Width = 29
       Caption = 'DEC'
       ParentColor = False
     end
     object pos_x: TEdit
       Left = 30
-      Height = 23
+      Height = 27
       Top = 16
       Width = 86
       ReadOnly = True
@@ -129,7 +129,7 @@ object pop_indi: Tpop_indi
     end
     object pos_y: TEdit
       Left = 158
-      Height = 23
+      Height = 27
       Top = 16
       Width = 86
       ReadOnly = True
@@ -144,12 +144,12 @@ object pop_indi: Tpop_indi
     Width = 279
     Align = alTop
     Caption = 'Current driver'
-    ClientHeight = 63
-    ClientWidth = 277
+    ClientHeight = 62
+    ClientWidth = 275
     TabOrder = 0
     object Edit1: TEdit
       Left = 8
-      Height = 23
+      Height = 27
       Top = 24
       Width = 153
       Color = clBtnFace

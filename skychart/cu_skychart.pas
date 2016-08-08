@@ -1102,7 +1102,7 @@ function Tskychart.DrawStars :boolean;
 var rec:GcatRec;
   x1,y1,cyear,dyear,pra,pdec,timelimit: Double;
   xx,yy,xxp,yyp : single;
-  j,lid,saveplot,n,lnum,lp,rs : integer;
+  j,lid,saveplot,lnum,lp,rs : integer;
   first: boolean;
   firstcat:TSname;
   gk,lis: string;
@@ -1205,7 +1205,7 @@ function Tskychart.DrawVarStars :boolean;
 var rec:GcatRec;
   x1,y1,timelimit: Double;
   xx,yy:single;
-  lid,n,lnum,lp,rs: integer;
+  lid,lnum,lp,rs: integer;
   lis:string;
 begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw variable stars');
@@ -1244,7 +1244,7 @@ function Tskychart.DrawDblStars :boolean;
 var rec:GcatRec;
   x1,y1,x2,y2,rot,timelimit: Double;
   xx,yy:single;
-  lid,n,lnum,lp,rs: integer;
+  lid,lnum,lp,rs: integer;
   lis,buf:string;
 begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw double stars');
@@ -1307,7 +1307,7 @@ function Tskychart.DrawDeepSkyObject :boolean;
 var rec:GcatRec;
   x1,y1,x2,y2,rot,ra,de,timelimit: Double;
   x,y,xx,yy,sz,lsize:single;
-  lid, save_nebplot,lp,n,lnum: integer;
+  lid, save_nebplot,lp,lnum: integer;
   imgfile,CurrentCat,lis: string;
   bmp:Tbitmap;
   save_col: Starcolarray;
@@ -1786,7 +1786,7 @@ var
   xx,yy,lori:single;
   lopt: boolean;
   lalign: TLabelAlign;
-  i,j,jj,k,n,ipla,sunsize,lid: integer;
+  i,j,jj,n,ipla,sunsize,lid: integer;
   draworder : array[1..11] of integer;
   ltxt,lis,buf: string;
   ft: textfile;
@@ -2042,7 +2042,7 @@ var
   xx,yy,lori:single;
   lopt: boolean;
   lalign: TLabelAlign;
-  i,j,jj,k,lid: integer;
+  i,j,jj,lid: integer;
   ltxt,lis:string;
 begin
 if cfgsc.ShowAsteroidValid then begin
@@ -2147,7 +2147,7 @@ var
   xx,yy,cxx,cyy,lori:single;
   lopt: boolean;
   lalign: TLabelAlign;
-  i,j,jj,k,lid,sz : integer;
+  i,j,jj,lid,sz : integer;
   ltxt,lis:string;
 begin
 if cfgsc.ShowCometValid then begin

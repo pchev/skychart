@@ -289,7 +289,7 @@
       <local>
         <FormatVersion Value="1"/>
         <CommandLineParams Value="--nosplash --verbose"/>
-        <WorkingDirectory Value="/usr/local/bin"/>
+        <WorkingDirectory Value="/usr/bin"/>
       </local>
     </RunParams>
     <RequiredPackages Count="24">
@@ -378,7 +378,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item24>
     </RequiredPackages>
-    <Units Count="85">
+    <Units Count="86">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -894,6 +894,10 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UScaleDPI"/>
       </Unit84>
+      <Unit85>
+        <Filename Value="u_ccdconfig.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit85>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
