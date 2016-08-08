@@ -226,7 +226,7 @@ var
 implementation
 {$R *.lfm}
 
-uses u_util, u_projection, Clipbrd;
+uses u_util, u_projection, Clipbrd, LazUTF8, LazFileUtils;
 
 type
   {For Planet graphs}
@@ -946,7 +946,6 @@ end;
 
 Procedure Tf_calendar.RefreshSatellite;
 var f,fi : textfile;
-    sr:TSearchRec;
     buf,mm,y,d,ed,dt,hh,mi,ss,dat1,s1,s2 : string;
     bufi,prgdir,iridir,srcdir,wrkdir : string;
     h,jda,ar,de,ma : double;
@@ -2831,7 +2830,7 @@ end;
 
 procedure Tf_calendar.DownloadTle;
 var fn,ext: string;
-    i,l,n: integer;
+    i,n: integer;
     ok,zipfile: boolean;
 
 procedure ArchiveFile(fn,destdir: string);

@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses u_constant, u_util, blcksock, synsock,
-     Dialogs,FileUtil, LCLIntf, SysUtils, Classes;
+     Dialogs,LazUTF8, LazFileUtils, LCLIntf, SysUtils, Classes;
 
 type
 

@@ -284,7 +284,6 @@ begin
 end;
 
 procedure Tpop_indi.NewNumber(nvp: INumberVectorProperty);
-var n: INumber;
 begin
 //  Memomsg.Lines.Add('NewNumber: '+nvp.name+' '+FloatToStr(nvp.np[0].value));
   if nvp=coord_prop then begin
@@ -319,7 +318,6 @@ begin
 end;
 
 Procedure Tpop_indi.ScopeDisconnect(var ok : boolean; updstatus:boolean=true);
-var i: integer;
 begin
 InitTimer.Enabled:=false;
 pos_x.text:='';
@@ -332,7 +330,6 @@ ok:=true;
 end;
 
 Procedure Tpop_indi.ScopeConnect(var ok : boolean);
-var i : integer;
 begin
 if not connected then begin
   led.color:=clRed;
@@ -448,10 +445,6 @@ begin
 end;
 
 Procedure Tpop_indi.ScopeGoto(ra,de : single; var ok : boolean);
-var svp:ISwitchVectorProperty;
-    s:ISwitch;
-    nvp:INumberVectorProperty;
-    np:INumber;
 begin
  if ready then begin
    IUResetSwitch(oncoordset_prop);

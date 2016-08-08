@@ -5,7 +5,7 @@ unit pu_imglist;
 interface
 
 uses u_help, u_translation, cu_fits, u_constant, UScaleDPI,
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
+  Classes, SysUtils, LazUTF8, LazFileUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   CheckLst, StdCtrls, Menus;
 
 type

@@ -12,7 +12,7 @@ object f_calendar: Tf_calendar
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.6.0.2'
+  LCLVersion = '1.6.0.4'
   Visible = False
   object Panel1: TPanel
     Left = 0
@@ -26,9 +26,9 @@ object f_calendar: Tf_calendar
     TabOrder = 0
     object Label1: TLabel
       Left = 8
-      Height = 16
+      Height = 17
       Top = 14
-      Width = 31
+      Width = 36
       Caption = 'From'
       Color = clBtnFace
       ParentColor = False
@@ -36,9 +36,9 @@ object f_calendar: Tf_calendar
     end
     object Label2: TLabel
       Left = 184
-      Height = 16
+      Height = 17
       Top = 14
-      Width = 14
+      Width = 15
       Caption = 'to'
       Color = clBtnFace
       ParentColor = False
@@ -46,9 +46,9 @@ object f_calendar: Tf_calendar
     end
     object Label5: TLabel
       Left = 30
-      Height = 16
+      Height = 17
       Top = 46
-      Width = 13
+      Width = 14
       Caption = 'at'
       Color = clBtnFace
       ParentColor = False
@@ -56,9 +56,9 @@ object f_calendar: Tf_calendar
     end
     object Label3: TLabel
       Left = 185
-      Height = 16
+      Height = 17
       Top = 46
-      Width = 21
+      Width = 24
       Caption = 'pas'
       Color = clBtnFace
       ParentColor = False
@@ -66,9 +66,9 @@ object f_calendar: Tf_calendar
     end
     object Label4: TLabel
       Left = 256
-      Height = 16
+      Height = 17
       Top = 46
-      Width = 29
+      Width = 35
       Caption = 'jours'
       Color = clBtnFace
       ParentColor = False
@@ -123,7 +123,7 @@ object f_calendar: Tf_calendar
     end
     object step: TLongEdit
       Left = 216
-      Height = 26
+      Height = 27
       Hint = '1..9999'
       Top = 41
       Width = 33
@@ -136,7 +136,7 @@ object f_calendar: Tf_calendar
     end
     object Date1: TJDDatePicker
       Left = 72
-      Height = 26
+      Height = 27
       Top = 8
       Width = 101
       Caption = 'JD calendar'
@@ -144,7 +144,7 @@ object f_calendar: Tf_calendar
     end
     object Date2: TJDDatePicker
       Left = 205
-      Height = 26
+      Height = 27
       Top = 8
       Width = 101
       Caption = 'JD calendar'
@@ -245,13 +245,13 @@ object f_calendar: Tf_calendar
     OnChange = PageControl1Change
     object twilight: TTabSheet
       Caption = 'Twilight'
-      ClientHeight = 351
-      ClientWidth = 829
+      ClientHeight = 354
+      ClientWidth = 831
       object TwilightGrid: TStringGrid
         Left = 0
-        Height = 351
+        Height = 354
         Top = 0
-        Width = 829
+        Width = 831
         Align = alClient
         ColCount = 8
         DefaultColWidth = 100
@@ -266,8 +266,8 @@ object f_calendar: Tf_calendar
     end
     object planets: TTabSheet
       Caption = 'Planets'
-      ClientHeight = 351
-      ClientWidth = 829
+      ClientHeight = 354
+      ClientWidth = 831
       ImageIndex = 1
       object Pagecontrol2: TPageControl
         Left = 0
@@ -523,8 +523,8 @@ object f_calendar: Tf_calendar
     end
     object comet: TTabSheet
       Caption = 'Comets'
-      ClientHeight = 351
-      ClientWidth = 829
+      ClientHeight = 354
+      ClientWidth = 831
       ImageIndex = 2
       object CometGrid: TStringGrid
         Left = 0
@@ -592,8 +592,8 @@ object f_calendar: Tf_calendar
     end
     object Asteroids: TTabSheet
       Caption = 'Asteroids'
-      ClientHeight = 351
-      ClientWidth = 829
+      ClientHeight = 354
+      ClientWidth = 831
       ImageIndex = 6
       object AsteroidGrid: TStringGrid
         Left = 0
@@ -652,8 +652,8 @@ object f_calendar: Tf_calendar
     end
     object Solar: TTabSheet
       Caption = 'Solar Eclipses'
-      ClientHeight = 351
-      ClientWidth = 829
+      ClientHeight = 354
+      ClientWidth = 831
       ImageIndex = 3
       object SolarGrid: TStringGrid
         Left = 0
@@ -674,8 +674,8 @@ object f_calendar: Tf_calendar
     end
     object Lunar: TTabSheet
       Caption = 'Lunar Eclipses'
-      ClientHeight = 351
-      ClientWidth = 829
+      ClientHeight = 354
+      ClientWidth = 831
       ImageIndex = 4
       object LunarGrid: TStringGrid
         Left = 0
@@ -696,8 +696,8 @@ object f_calendar: Tf_calendar
     end
     object Satellites: TTabSheet
       Caption = 'Artificial Satellites'
-      ClientHeight = 351
-      ClientWidth = 829
+      ClientHeight = 354
+      ClientWidth = 831
       ImageIndex = 5
       object SatGrid: TStringGrid
         Left = 0

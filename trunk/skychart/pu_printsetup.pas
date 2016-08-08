@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, FileUtil, UScaleDPI,
+uses u_help, u_translation, u_constant, u_util, LazUTF8, LazFileUtils, UScaleDPI,
   SysUtils, Types, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Printers, ExtCtrls, enhedits, Buttons,
   LResources, PrintersDlgs, EditBtn, LazHelpHTML;

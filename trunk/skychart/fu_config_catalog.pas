@@ -25,8 +25,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses  XMLConf, u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
-  pu_catgenadv, pu_progressbar, FileUtil, pu_voconfig, math, LCLIntf, SysUtils,
+uses  u_ccdconfig, u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
+  pu_catgenadv, pu_progressbar, LazUTF8, LazFileUtils, pu_voconfig, math, LCLIntf, SysUtils,
   Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, enhedits,
   downloaddialog, Grids, Buttons, ComCtrls, LResources, EditBtn, LazHelpHTML;
 
@@ -1048,7 +1048,7 @@ end;
 procedure Tf_config_catalog.StringGrid4MouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var col,row:integer;
-    config:TXMLConfig;
+    config:TCCDconfig;
 begin
 StringGrid4.MouseToCell(X, Y, Col, Row);
 if row=0 then exit;
@@ -1059,7 +1059,7 @@ case col of
          cmain.VOforceactive:=true;
          stringgrid4.Cells[col,row]:='1';
        end;
-    config:=TXMLConfig.Create(self);
+    config:=TCCDconfig.Create(self);
     config.Filename:=slash(VODir)+ChangeFileExt(stringgrid4.Cells[2,row],'.config');;
     config.SetValue('VOcat/plot/active',stringgrid4.Cells[col,row]='1');
     config.Flush;
@@ -1321,7 +1321,7 @@ procedure Tf_config_catalog.ShowVO;
 var i,j,r: integer;
     fs: TSearchRec;
     VOobject,configfile,cname: string;
-    config: TXMLConfig;
+    config: TCCDconfig;
     active,fullcat: boolean;
 const VOo : array[1..3] of string = ('star','dso','samp');
 begin
@@ -1337,7 +1337,7 @@ for j in [1,2,3] do begin
   while i=0 do begin
     configfile:=slash(VODir)+ChangeFileExt(fs.Name,'.config');
     if FileExists(configfile) then begin
-      config:=TXMLConfig.Create(self);
+      config:=TCCDconfig.Create(self);
       config.Filename:=configfile;
       cname:=config.GetValue('VOcat/catalog/name','');
       active:=config.GetValue('VOcat/plot/active',true);

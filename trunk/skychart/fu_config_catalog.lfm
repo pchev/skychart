@@ -6,8 +6,6 @@ object f_config_catalog: Tf_config_catalog
   ClientHeight = 521
   ClientWidth = 499
   TabOrder = 0
-  DesignLeft = 340
-  DesignTop = 244
   object MainPanel: TPanel
     Left = 0
     Height = 521
@@ -31,8 +29,8 @@ object f_config_catalog: Tf_config_catalog
       OnChanging = PageControl1Changing
       object Page2: TTabSheet
         Caption = 'CdC Stars'
-        ClientHeight = 461
-        ClientWidth = 493
+        ClientHeight = 895
+        ClientWidth = 986
         object Label2: TLabel
           Left = 8
           Height = 16
@@ -348,8 +346,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page3: TTabSheet
         Caption = 'CdC Nebulae'
-        ClientHeight = 461
-        ClientWidth = 493
+        ClientHeight = 895
+        ClientWidth = 986
         object Label3: TLabel
           Left = 9
           Height = 16
@@ -895,8 +893,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page1: TTabSheet
         Caption = 'Catalog'
-        ClientHeight = 461
-        ClientWidth = 493
+        ClientHeight = 895
+        ClientWidth = 986
         object Label37: TLabel
           Left = 15
           Height = 16
@@ -1014,8 +1012,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page1a: TTabSheet
         Caption = 'VO Catalog'
-        ClientHeight = 461
-        ClientWidth = 493
+        ClientHeight = 895
+        ClientWidth = 986
         object Label1: TLabel
           Left = 7
           Height = 16
@@ -1140,8 +1138,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page1b: TTabSheet
         Caption = 'User defined objects'
-        ClientHeight = 461
-        ClientWidth = 493
+        ClientHeight = 895
+        ClientWidth = 986
         object Label6: TLabel
           Left = 7
           Height = 16
@@ -1242,8 +1240,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page5: TTabSheet
         Caption = 'Other software'
-        ClientHeight = 461
-        ClientWidth = 493
+        ClientHeight = 895
+        ClientWidth = 986
         object dsgsc3: TDirectoryEdit
           Tag = 13
           Left = 326
@@ -1424,8 +1422,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page4: TTabSheet
         Caption = 'Obsolete'
-        ClientHeight = 461
-        ClientWidth = 493
+        ClientHeight = 895
+        ClientWidth = 986
         object Label88: TLabel
           Left = 9
           Height = 15
@@ -2421,6 +2419,7 @@ object f_config_catalog: Tf_config_catalog
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True
+    QuickCancel = False
     left = 416
     top = 416
   end

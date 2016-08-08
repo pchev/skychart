@@ -357,21 +357,21 @@ if Node=nil then exit;
 Node:=Node.FindNode('Resolver');
 if Node=nil then exit;
 Snode:=Node.Attributes.GetNamedItem('name');
-if Snode<>nil then sesame_resolver:=Snode.TextContent;
+if Snode<>nil then sesame_resolver:=string(Snode.TextContent);
 Node:=Node.FirstChild;
 while Node<>nil do begin
-   k:=Node.NodeName;
+   k:=string(Node.NodeName);
    if k<>'#comment' then begin
-   v:=Node.TextContent;
+   v:=string(Node.TextContent);
    a:='';
    Dnode:=Node.Attributes.Item[0];
-   if Dnode<>nil then a:=Dnode.NodeName+'.'+Dnode.TextContent;
+   if Dnode<>nil then a:=string(Dnode.NodeName)+'.'+string(Dnode.TextContent);
    buf:='';
    Dnode:=Node.FirstChild;
    while Dnode<>nil do begin
-     k1:=Dnode.NodeName;
+     k1:=string(Dnode.NodeName);
      if k1='#text' then break;
-     v1:=Dnode.TextContent;
+     v1:=string(Dnode.TextContent);
      buf:=buf+k+'.'+a+'.'+k1+':'+v1+tab;
      Dnode:=Dnode.NextSibling;
    end;

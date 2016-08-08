@@ -10,7 +10,7 @@ object f_obslist: Tf_obslist
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '1.6.0.2'
+  LCLVersion = '1.6.0.4'
   Visible = False
   object PanelBot: TPanel
     Left = 0
@@ -23,7 +23,7 @@ object f_obslist: Tf_obslist
     TabOrder = 2
     object FileNameEdit1: TFileNameEdit
       Left = 0
-      Height = 26
+      Height = 27
       Top = 3
       Width = 192
       FilterIndex = 0
@@ -81,9 +81,9 @@ object f_obslist: Tf_obslist
     end
     object AllLabels: TCheckBox
       Left = 480
-      Height = 22
+      Height = 24
       Top = 3
-      Width = 245
+      Width = 266
       Caption = 'Add label for every object in the list'
       OnChange = AllLabelsChange
       TabOrder = 6
@@ -143,7 +143,7 @@ object f_obslist: Tf_obslist
     TabOrder = 0
     object Edit1: TEdit
       Left = 8
-      Height = 26
+      Height = 27
       Top = 8
       Width = 176
       TabOrder = 0
@@ -200,8 +200,8 @@ object f_obslist: Tf_obslist
       OnChange = PageControl1Change
       object TabSheet1: TTabSheet
         Caption = 'Airmass'
-        ClientHeight = 72
-        ClientWidth = 515
+        ClientHeight = 74
+        ClientWidth = 517
         object LimitAirmassNow: TCheckBox
           Left = 16
           Height = 24
@@ -259,28 +259,28 @@ object f_obslist: Tf_obslist
       end
       object TabSheet2: TTabSheet
         Caption = 'Transit'
-        ClientHeight = 72
-        ClientWidth = 515
+        ClientHeight = 74
+        ClientWidth = 517
         object LimitHourangleTonight: TCheckBox
           Left = 144
-          Height = 22
+          Height = 24
           Top = 22
-          Width = 293
+          Width = 331
           Caption = 'Only objects within hour angle limits tonight'
           OnChange = LimitHourangleTonightChange
           TabOrder = 2
         end
         object Label3: TLabel
           Left = 144
-          Height = 16
+          Height = 17
           Top = 3
-          Width = 30
+          Width = 35
           Caption = 'Limit'
           ParentColor = False
         end
         object HourAngleCombo: TComboBox
           Left = 240
-          Height = 28
+          Height = 29
           Top = 1
           Width = 72
           ItemHeight = 0
@@ -297,36 +297,36 @@ object f_obslist: Tf_obslist
         end
         object Label4: TLabel
           Left = 320
-          Height = 16
+          Height = 17
           Top = 3
-          Width = 35
+          Width = 42
           Caption = 'Hours'
           ParentColor = False
         end
         object LimitHourangleNow: TCheckBox
           Left = 144
-          Height = 22
+          Height = 24
           Top = 46
-          Width = 271
+          Width = 309
           Caption = 'Only objects within hour angle limits now'
           OnChange = LimitHourangleNowChange
           TabOrder = 3
         end
         object Panel1: TPanel
           Left = 0
-          Height = 72
+          Height = 74
           Top = 0
           Width = 141
           Align = alLeft
           BevelOuter = bvLowered
-          ClientHeight = 72
+          ClientHeight = 74
           ClientWidth = 141
           TabOrder = 0
           object RadioButton1: TRadioButton
             Left = 2
-            Height = 22
+            Height = 24
             Top = 2
-            Width = 107
+            Width = 122
             Caption = 'RadioButton1'
             Checked = True
             OnClick = RadioGroup1Click
@@ -335,18 +335,18 @@ object f_obslist: Tf_obslist
           end
           object RadioButton2: TRadioButton
             Left = 2
-            Height = 22
+            Height = 24
             Top = 26
-            Width = 107
+            Width = 122
             Caption = 'RadioButton2'
             OnClick = RadioGroup1Click
             TabOrder = 1
           end
           object RadioButton3: TRadioButton
             Left = 2
-            Height = 22
+            Height = 24
             Top = 50
-            Width = 107
+            Width = 122
             Caption = 'RadioButton3'
             OnClick = RadioGroup1Click
             TabOrder = 2

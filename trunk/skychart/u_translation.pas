@@ -5,7 +5,7 @@ unit u_translation;
 interface
 
 uses gettext, translations, u_constant, u_util,
-  fileutil, Classes, SysUtils;
+  LazUTF8, LazFileUtils, Classes, SysUtils;
 
 procedure GetDefaultLanguage(var buf1,buf2: string);
 function Translate(lang : string = ''):string;

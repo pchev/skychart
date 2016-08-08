@@ -29,8 +29,8 @@ object f_config_system: Tf_config_system
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
         Caption = 'Page1'
-        ClientHeight = 516
-        ClientWidth = 492
+        ClientHeight = 1007
+        ClientWidth = 986
         object MysqlBox: TPanel
           Left = 17
           Height = 97
@@ -187,8 +187,8 @@ object f_config_system: Tf_config_system
           Top = 248
           Width = 453
           Caption = 'Directory'
-          ClientHeight = 45
-          ClientWidth = 451
+          ClientHeight = 43
+          ClientWidth = 449
           TabOrder = 4
           object Label157: TLabel
             Left = 8
@@ -217,8 +217,8 @@ object f_config_system: Tf_config_system
           Height = 85
           Top = 155
           Width = 453
-          ClientHeight = 83
-          ClientWidth = 451
+          ClientHeight = 66
+          ClientWidth = 449
           TabOrder = 3
           object chkdb: TButton
             Left = 16
@@ -288,8 +288,8 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 31
-          ClientWidth = 294
+          ClientHeight = 29
+          ClientWidth = 292
           Columns = 2
           ItemIndex = 0
           Items.Strings = (
@@ -307,8 +307,8 @@ object f_config_system: Tf_config_system
           Top = 384
           Width = 453
           Caption = 'Desktop environment'
-          ClientHeight = 64
-          ClientWidth = 451
+          ClientHeight = 62
+          ClientWidth = 449
           TabOrder = 5
           object Label12: TLabel
             Left = 203
@@ -349,8 +349,8 @@ object f_config_system: Tf_config_system
           Top = 318
           Width = 453
           Caption = 'Screen resolution'
-          ClientHeight = 45
-          ClientWidth = 451
+          ClientHeight = 43
+          ClientWidth = 449
           TabOrder = 6
           object UseScaling: TCheckBox
             Left = 16
@@ -367,16 +367,16 @@ object f_config_system: Tf_config_system
       end
       object Page2: TTabSheet
         Caption = 'Page2'
-        ClientHeight = 516
-        ClientWidth = 492
+        ClientHeight = 1007
+        ClientWidth = 986
         object GroupBox3: TGroupBox
           Left = 16
           Height = 249
           Top = 8
           Width = 393
           Caption = 'TCP/IP Server'
-          ClientHeight = 232
-          ClientWidth = 391
+          ClientHeight = 230
+          ClientWidth = 389
           TabOrder = 0
           object Label54: TLabel
             Left = 16
@@ -434,8 +434,8 @@ object f_config_system: Tf_config_system
       end
       object Page3: TTabSheet
         Caption = 'Page3'
-        ClientHeight = 516
-        ClientWidth = 492
+        ClientHeight = 1007
+        ClientWidth = 986
         object Label13: TLabel
           Left = 0
           Height = 15
@@ -459,8 +459,8 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 60
-          ClientWidth = 448
+          ClientHeight = 58
+          ClientWidth = 446
           Columns = 3
           Items.Strings = (
             'INDI'
@@ -483,8 +483,8 @@ object f_config_system: Tf_config_system
           TabOrder = 1
           object TabSheet1: TTabSheet
             Caption = 'TabSheet1'
-            ClientHeight = 348
-            ClientWidth = 470
+            ClientHeight = 669
+            ClientWidth = 940
             object INDI: TPanel
               Left = 8
               Height = 328
@@ -608,8 +608,8 @@ object f_config_system: Tf_config_system
           end
           object TabSheet2: TTabSheet
             Caption = 'TabSheet2'
-            ClientHeight = 348
-            ClientWidth = 470
+            ClientHeight = 669
+            ClientWidth = 940
             object TelescopeManual: TPanel
               Left = 8
               Height = 330
@@ -632,8 +632,8 @@ object f_config_system: Tf_config_system
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 2
-                ClientHeight = 24
-                ClientWidth = 359
+                ClientHeight = 22
+                ClientWidth = 357
                 Columns = 2
                 Items.Strings = (
                   'Equatorial'
@@ -671,8 +671,8 @@ object f_config_system: Tf_config_system
                 TabOrder = 1
                 object TabSheet5: TTabSheet
                   Caption = 'TabSheet5'
-                  ClientHeight = 173
-                  ClientWidth = 382
+                  ClientHeight = 319
+                  ClientWidth = 764
                   object EquatorialMount: TPanel
                     Left = 8
                     Height = 161
@@ -759,8 +759,8 @@ object f_config_system: Tf_config_system
                 end
                 object TabSheet6: TTabSheet
                   Caption = 'TabSheet6'
-                  ClientHeight = 173
-                  ClientWidth = 382
+                  ClientHeight = 319
+                  ClientWidth = 764
                   object AltAzMount: TPanel
                     Left = 8
                     Height = 161
@@ -850,8 +850,8 @@ object f_config_system: Tf_config_system
           end
           object TabSheet4: TTabSheet
             Caption = 'TabSheet4'
-            ClientHeight = 348
-            ClientWidth = 470
+            ClientHeight = 669
+            ClientWidth = 940
             object ASCOMPanel: TPanel
               Left = 8
               Height = 328
@@ -874,8 +874,8 @@ object f_config_system: Tf_config_system
           end
           object TabSheet3: TTabSheet
             Caption = 'TabSheet3'
-            ClientHeight = 348
-            ClientWidth = 470
+            ClientHeight = 669
+            ClientWidth = 940
             object InterfacePanel: TPanel
               Left = 8
               Height = 328
@@ -900,8 +900,8 @@ object f_config_system: Tf_config_system
       end
       object Page4: TTabSheet
         Caption = 'Page4'
-        ClientHeight = 516
-        ClientWidth = 492
+        ClientHeight = 1007
+        ClientWidth = 986
         object Label14: TLabel
           Left = 19
           Height = 15
@@ -923,8 +923,8 @@ object f_config_system: Tf_config_system
       end
       object Page5: TTabSheet
         Caption = 'Page5'
-        ClientHeight = 516
-        ClientWidth = 492
+        ClientHeight = 1007
+        ClientWidth = 986
         object Label15: TLabel
           Left = 19
           Height = 15

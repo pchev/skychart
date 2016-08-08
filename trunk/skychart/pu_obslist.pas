@@ -29,7 +29,7 @@ interface
 
 uses  u_help, u_translation, u_constant, u_util, u_projection, cu_planet,
   pu_tour, UScaleDPI,
-  Math, Classes, SysUtils, FileUtil, Forms, Controls, Graphics,
+  Math, Classes, SysUtils, LazUTF8, LazFileUtils, Forms, Controls, Graphics,
   Dialogs, ExtCtrls, Grids, EditBtn, StdCtrls, Menus, ComCtrls;
 
 type

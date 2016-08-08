@@ -5,7 +5,7 @@ unit pu_scriptconfig;
 interface
 
 uses  u_translation, fu_script, u_constant, u_util, UScaleDPI,
-  Classes, SysUtils, FileUtil, Forms, Controls,
+  Classes, SysUtils, LazFileUtils, Forms, Controls,
   Graphics, Dialogs, Grids, StdCtrls, ExtCtrls, Menus;
 
 type

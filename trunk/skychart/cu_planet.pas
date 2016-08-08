@@ -1896,11 +1896,11 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
      qry:='SELECT distinct(jd) from cdc_ast_mag';
      db1.Query(qry);
      if db1.Rowcount>0 then begin
-        jd1:=strtofloat(trim(db1.Results[0][0]));
+        jd1:=strtofloat(strim(db1.Results[0][0]));
         dt:=abs(newjd-jd1);
         i:=1;
         while i<db1.Rowcount do begin
-           t:=strtofloat(trim(db1.Results[i][0]));
+           t:=strtofloat(strim(db1.Results[i][0]));
            if abs(newjd-t)<dt then begin
               jd1:=t;
               dt:=abs(newjd-t);
@@ -1914,7 +1914,7 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
         qry:='SELECT a.id,a.h,a.g,a.epoch,a.mean_anomaly,a.arg_perihelion,a.asc_node,a.inclination,a.eccentricity,a.semi_axis,a.ref,a.name,a.equinox'
             +' FROM cdc_ast_elem a, cdc_ast_mag b'
             +' where b.mag<='+inttostr(lmag)
-            +' and b.jd='+trim(formatfloat(f6s,jd1))
+            +' and b.jd='+strim(formatfloat(f6s,jd1))
             +' and a.id=b.id'
             +' and a.epoch=b.epoch';
         db1.CallBackOnly:=true;
@@ -1956,18 +1956,18 @@ var qry,id : string;
     nam:string;
 begin
              id:=row[0];
-             h:=StrToFloatDef(trim(row[1]),20);
-             g:=StrToFloatDef(trim(row[2]),0.15);
-             epoch:=strtofloat(trim(row[3]));
-             ma:=strtofloat(trim(row[4]));
-             ap:=strtofloat(trim(row[5]));
-             an:=strtofloat(trim(row[6]));
-             ic:=strtofloat(trim(row[7]));
-             ec:=strtofloat(trim(row[8]));
-             sa:=strtofloat(trim(row[9]));
+             h:=StrToFloatDef(strim(row[1]),20);
+             g:=StrToFloatDef(strim(row[2]),0.15);
+             epoch:=strtofloat(strim(row[3]));
+             ma:=strtofloat(strim(row[4]));
+             ap:=strtofloat(strim(row[5]));
+             an:=strtofloat(strim(row[6]));
+             ic:=strtofloat(strim(row[7]));
+             ec:=strtofloat(strim(row[8]));
+             sa:=strtofloat(strim(row[9]));
  //            ref:=row[10];
              nam:=row[11];
-             eq:=strtofloat(trim(row[12]));
+             eq:=strtofloat(strim(row[12]));
              InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
              Asteroid(jdnew,false,ra,dec,dist,r,elong,phase,mag,xc,yc,zc);
              precession(jd2000,jdchart,ra,dec);
@@ -1977,7 +1977,7 @@ begin
              if dist<NEO_dist then nea:=1 else nea:=0;
              qry:='INSERT INTO '+ast_daypos+' (id,epoch,ra,de,mag,near_earth) VALUES ('
                  +'"'+id+'"'
-                 +',"'+trim(formatfloat(f6s,epoch))+'"'
+                 +',"'+strim(formatfloat(f6s,epoch))+'"'
                  +',"'+inttostr(ira)+'"'
                  +',"'+inttostr(idec)+'"'
                  +',"'+inttostr(imag)+'"'
@@ -2143,7 +2143,7 @@ if db2.Rowcount>0 then begin
     st0:=Rmod(cfgsc.CurST+ 1.00273790935*(j*cfgsc.SimD*24+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600)*15*deg2rad,pi2);
     for i:=0 to db2.Rowcount-1 do begin
        id:=db2.Results[i][0];
-       epoch:=strtofloat(trim(db2.Results[i][1]));
+       epoch:=strtofloat(strim(db2.Results[i][1]));
        if cdb.GetAstElem(id,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
           InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
           Asteroid(jdt,true,ra,dec,dist,r,elong,phase,magn,xc,yc,zc);
@@ -2223,7 +2223,7 @@ if db2.Rowcount>0 then begin
     st0:=Rmod(cfgsc.CurST+ 1.00273790935*(j*cfgsc.SimD*24+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600)*15*deg2rad,pi2);
     for i:=0 to db2.Rowcount-1 do begin
        id:=db2.Results[i][0];
-       epoch:=strtofloat(trim(db2.Results[i][1]));
+       epoch:=strtofloat(strim(db2.Results[i][1]));
        if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) then begin
           InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
           Comet(jdt,true,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
@@ -2288,7 +2288,7 @@ if cdb.GetAstElemEpoch(id,cfgsc.CurJDTT,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,e
        imag:=round(mag*10);
        qry:='INSERT INTO '+cfgsc.ast_daypos+' (id,epoch,ra,de,mag) VALUES ('
             +'"'+id+'"'
-            +',"'+trim(formatfloat(f6s,epoch))+'"'
+            +',"'+strim(formatfloat(f6s,epoch))+'"'
             +',"'+inttostr(ira)+'"'
             +',"'+inttostr(idec)+'"'
             +',"'+inttostr(imag)+'")';

@@ -27,7 +27,7 @@ interface
 uses u_help, u_translation, u_constant, u_util, cu_database,
   indibaseclient, indibasedevice,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
-  LCLIntf, SysUtils, Graphics, Forms, FileUtil, math,
+  LCLIntf, SysUtils, Graphics, Forms, LazUTF8, LazFileUtils, math,
   ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML;
 
 type
@@ -474,11 +474,6 @@ CheckBox8.Enabled:=cmain.SampSubscribeTable;
 end;
 
 procedure Tf_config_system.ShowTelescope;
-var i,j,n,k: integer;
-    buf,fn,fdir,val : string;
-    fs : TSearchRec;
-    f: textfile;
-    telescopegroup, newtelescope: boolean;
 begin
 IndiServerHost.text:=csc.IndiServerHost;
 IndiServerPort.text:=csc.IndiServerPort;

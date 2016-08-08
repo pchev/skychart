@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses u_translation, UScaleDPI,
-  u_util, u_constant, u_projection, SysUtils, Classes,  passql, pasmysql, passqlite, FileUtil,
+  u_util, u_constant, u_projection, SysUtils, Classes,  passql, pasmysql, passqlite, LazUTF8, LazFileUtils,
   Graphics,Math, FPImage, Controls, LCLType, Forms, StdCtrls, ComCtrls, ExtCtrls, Buttons, IntfGraphics;
 
 type Tfitsheader = record
@@ -1242,11 +1242,11 @@ try
 if current_result < db1.RowCount then begin
   filename:=db1.Results[current_result][0];
   objname:=db1.Results[current_result][1];
-  ra:=strtofloat(trim(db1.Results[current_result][2]));
-  de:=strtofloat(trim(db1.Results[current_result][3]));
-  width:=strtofloat(trim(db1.Results[current_result][4]));
-  height:=strtofloat(trim(db1.Results[current_result][5]));
-  rot:=strtofloat(trim(db1.Results[current_result][6]));
+  ra:=strtofloat(string(trim(db1.Results[current_result][2])));
+  de:=strtofloat(string(trim(db1.Results[current_result][3])));
+  width:=strtofloat(string(trim(db1.Results[current_result][4])));
+  height:=strtofloat(string(trim(db1.Results[current_result][5])));
+  rot:=strtofloat(string(trim(db1.Results[current_result][6])));
   result:=true;
 end
 else result:=false;

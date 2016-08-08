@@ -37,7 +37,7 @@ uses
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures, pu_indigui,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet, cu_radec,
   pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, pu_obslist, fu_script, pu_scriptengine,
-  u_constant, u_util, UScaleDPI, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
+  u_constant, u_util, UScaleDPI, u_ccdconfig, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types, Printers,
   ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame, BGRABitmap,
@@ -814,11 +814,11 @@ implementation
 
 {$R *.lfm}
 
-uses
+uses  LazFileUtils, LazUTF8,
     {$ifdef LCLgtk2}
      gtk2proc,
     {$endif}
-     LCLProc,pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
+     LCLProc, pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom, pu_edittoolbar,
      pu_scriptconfig, pu_splash, pu_manualtelescope, pu_print, pu_clock;
 
@@ -8738,7 +8738,7 @@ end;
 
 procedure Tf_main.SetButtonImage(button: Integer);
 var btn : TPortableNetworkGraphic;
-    bmp,sbmp: TBGRABitmap;
+    bmp: TBGRABitmap;
     col: Tcolor;
     iconpath: String;
 procedure SetButtonImage1(var imagelist:Timagelist);
@@ -9651,7 +9651,7 @@ procedure Tf_main.SAMPTableLoadVotable(table_name,table_id,url:string);
 var fn,cfn,buf: string;
     i: integer;
     VO_TableData: TVO_TableData;
-    config: TXMLConfig;
+    config: TCCDconfig;
 begin
 if cfgm.SampConfirmTable then begin
    if MessageDlg(rsSAMPConfirma,
@@ -9666,7 +9666,7 @@ if FileExists(fn) then begin
    VO_TableData.Datafile:=ExtractFileName(fn);
    VO_TableData.LoadMeta;
    cfn:=ChangeFileExt(fn,'.config');
-   config:=TXMLConfig.Create(self);
+   config:=TCCDconfig.Create(self);
    config.Filename:=cfn;
    config.SetValue('VOcat/catalog/name',table_id);
    config.SetValue('VOcat/catalog/table',table_name);

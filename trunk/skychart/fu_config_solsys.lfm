@@ -6,7 +6,6 @@ object f_config_solsys: Tf_config_solsys
   ClientHeight = 522
   ClientWidth = 502
   TabOrder = 0
-  DesignLeft = 53
   object MainPanel: TPanel
     Left = 0
     Height = 522
@@ -30,8 +29,8 @@ object f_config_solsys: Tf_config_solsys
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
         Caption = 'Page1'
-        ClientHeight = 516
-        ClientWidth = 496
+        ClientHeight = 1005
+        ClientWidth = 992
         object Label12: TLabel
           Left = 7
           Height = 15
@@ -72,8 +71,8 @@ object f_config_solsys: Tf_config_solsys
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 65
-          ClientWidth = 388
+          ClientHeight = 62
+          ClientWidth = 386
           Columns = 2
           Items.Strings = (
             'Geocentric'
@@ -119,8 +118,8 @@ object f_config_solsys: Tf_config_solsys
           Top = 144
           Width = 390
           Caption = 'JPL ephemeris search order'
-          ClientHeight = 145
-          ClientWidth = 388
+          ClientHeight = 142
+          ClientWidth = 386
           TabOrder = 4
           object ListBoxEph: TListBox
             Left = 264
@@ -188,8 +187,8 @@ object f_config_solsys: Tf_config_solsys
       end
       object Page2: TTabSheet
         Caption = 'Page2'
-        ClientHeight = 516
-        ClientWidth = 496
+        ClientHeight = 1005
+        ClientWidth = 992
         object Label5: TLabel
           Left = 0
           Height = 15
@@ -228,8 +227,8 @@ object f_config_solsys: Tf_config_solsys
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 101
-          ClientWidth = 354
+          ClientHeight = 98
+          ClientWidth = 352
           Items.Strings = (
             'Star'
             'Line mode drawing'
@@ -493,8 +492,8 @@ object f_config_solsys: Tf_config_solsys
       end
       object Page3: TTabSheet
         Caption = 'Page3'
-        ClientHeight = 516
-        ClientWidth = 496
+        ClientHeight = 1005
+        ClientWidth = 992
         object ComPageControl: TPageControl
           Left = 0
           Height = 516
@@ -506,8 +505,8 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 0
           object comsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 512
-            ClientWidth = 492
+            ClientHeight = 997
+            ClientWidth = 984
             ImageIndex = 3
             object GroupBox13: TGroupBox
               Left = 8
@@ -515,8 +514,8 @@ object f_config_solsys: Tf_config_solsys
               Top = 10
               Width = 441
               Caption = 'Chart Setting'
-              ClientHeight = 300
-              ClientWidth = 439
+              ClientHeight = 297
+              ClientWidth = 437
               TabOrder = 0
               object Label154: TLabel
                 Left = 32
@@ -583,8 +582,8 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 80
-                ClientWidth = 391
+                ClientHeight = 77
+                ClientWidth = 389
                 Color = clBtnFace
                 ItemIndex = 1
                 Items.Strings = (
@@ -624,8 +623,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object comload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 512
-            ClientWidth = 492
+            ClientHeight = 997
+            ClientWidth = 984
             ImageIndex = 1
             object Label232: TLabel
               Left = 15
@@ -655,8 +654,8 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 0
               object TabSheet1: TTabSheet
                 Caption = 'Load MPC format file'
-                ClientHeight = 100
-                ClientWidth = 432
+                ClientHeight = 173
+                ClientWidth = 864
                 object Label2: TLabel
                   Left = 13
                   Height = 16
@@ -678,8 +677,8 @@ object f_config_solsys: Tf_config_solsys
               end
               object TabSheet2: TTabSheet
                 Caption = 'Or use a local file :'
-                ClientHeight = 100
-                ClientWidth = 432
+                ClientHeight = 173
+                ClientWidth = 864
                 object comfile: TFileNameEdit
                   Left = 13
                   Height = 23
@@ -709,8 +708,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object comdelete: TTabSheet
             Caption = 'Data Maintenance'
-            ClientHeight = 512
-            ClientWidth = 492
+            ClientHeight = 997
+            ClientWidth = 984
             ImageIndex = 3
             object Label238: TLabel
               Left = 8
@@ -726,8 +725,8 @@ object f_config_solsys: Tf_config_solsys
               Top = 10
               Width = 441
               Caption = 'Delete MPC data selectively'
-              ClientHeight = 44
-              ClientWidth = 439
+              ClientHeight = 41
+              ClientWidth = 437
               TabOrder = 0
               object comelemlist: TComboBox
                 Left = 16
@@ -756,8 +755,8 @@ object f_config_solsys: Tf_config_solsys
               Top = 80
               Width = 441
               Caption = 'Quick Delete'
-              ClientHeight = 47
-              ClientWidth = 439
+              ClientHeight = 44
+              ClientWidth = 437
               TabOrder = 1
               object Label239: TLabel
                 Left = 12
@@ -791,8 +790,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object Addsinglecom: TTabSheet
             Caption = 'Add'
-            ClientHeight = 512
-            ClientWidth = 492
+            ClientHeight = 997
+            ClientWidth = 984
             ImageIndex = 4
             object Label241: TLabel
               Left = 8
@@ -1019,8 +1018,8 @@ object f_config_solsys: Tf_config_solsys
       end
       object Page4: TTabSheet
         Caption = 'Page4'
-        ClientHeight = 516
-        ClientWidth = 496
+        ClientHeight = 1005
+        ClientWidth = 992
         object AstPageControl: TPageControl
           Left = 0
           Height = 516
@@ -1032,8 +1031,8 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 0
           object astsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 512
-            ClientWidth = 492
+            ClientHeight = 997
+            ClientWidth = 984
             ImageIndex = 3
             object GroupBox9: TGroupBox
               Left = 8
@@ -1041,8 +1040,8 @@ object f_config_solsys: Tf_config_solsys
               Top = 10
               Width = 441
               Caption = 'Chart Setting'
-              ClientHeight = 324
-              ClientWidth = 439
+              ClientHeight = 321
+              ClientWidth = 437
               TabOrder = 0
               object Label203: TLabel
                 Left = 25
@@ -1109,8 +1108,8 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 73
-                ClientWidth = 391
+                ClientHeight = 70
+                ClientWidth = 389
                 Color = clBtnFace
                 ItemIndex = 1
                 Items.Strings = (
@@ -1159,8 +1158,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object astload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 512
-            ClientWidth = 492
+            ClientHeight = 997
+            ClientWidth = 984
             ImageIndex = 1
             object Label206: TLabel
               Left = 8
@@ -1186,8 +1185,8 @@ object f_config_solsys: Tf_config_solsys
               Top = 107
               Width = 441
               Caption = 'Options'
-              ClientHeight = 72
-              ClientWidth = 439
+              ClientHeight = 69
+              ClientWidth = 437
               TabOrder = 1
               object Label215: TLabel
                 Left = 258
@@ -1246,8 +1245,8 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 0
               object TabSheet3: TTabSheet
                 Caption = 'Load MPC format file'
-                ClientHeight = 92
-                ClientWidth = 437
+                ClientHeight = 157
+                ClientWidth = 874
                 object Label1: TLabel
                   Left = 22
                   Height = 16
@@ -1269,8 +1268,8 @@ object f_config_solsys: Tf_config_solsys
               end
               object TabSheet4: TTabSheet
                 Caption = 'Or use a local file :'
-                ClientHeight = 92
-                ClientWidth = 437
+                ClientHeight = 157
+                ClientWidth = 874
                 object mpcfile: TFileNameEdit
                   Left = 14
                   Height = 23
@@ -1300,8 +1299,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object astprepare: TTabSheet
             Caption = 'Prepare Monthly Data'
-            ClientHeight = 512
-            ClientWidth = 492
+            ClientHeight = 997
+            ClientWidth = 984
             ImageIndex = 2
             object Label210: TLabel
               Left = 8
@@ -1317,8 +1316,8 @@ object f_config_solsys: Tf_config_solsys
               Top = 7
               Width = 441
               Caption = 'Prepare data '
-              ClientHeight = 78
-              ClientWidth = 439
+              ClientHeight = 75
+              ClientWidth = 437
               TabOrder = 0
               object Label7: TLabel
                 Left = 9
@@ -1393,8 +1392,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object astdelete: TTabSheet
             Caption = 'Data Maintenance'
-            ClientHeight = 512
-            ClientWidth = 492
+            ClientHeight = 997
+            ClientWidth = 984
             ImageIndex = 3
             object Label211: TLabel
               Left = 8
@@ -1410,8 +1409,8 @@ object f_config_solsys: Tf_config_solsys
               Top = 10
               Width = 441
               Caption = 'Delete MPC data selectively'
-              ClientHeight = 44
-              ClientWidth = 439
+              ClientHeight = 41
+              ClientWidth = 437
               TabOrder = 0
               object astelemlist: TComboBox
                 Left = 16
@@ -1440,8 +1439,8 @@ object f_config_solsys: Tf_config_solsys
               Top = 128
               Width = 441
               Caption = 'Quick Delete'
-              ClientHeight = 33
-              ClientWidth = 439
+              ClientHeight = 30
+              ClientWidth = 437
               TabOrder = 2
               object Label209: TLabel
                 Left = 12
@@ -1478,8 +1477,8 @@ object f_config_solsys: Tf_config_solsys
               Top = 72
               Width = 441
               Caption = 'Delete Monthly data '
-              ClientHeight = 41
-              ClientWidth = 439
+              ClientHeight = 38
+              ClientWidth = 437
               TabOrder = 1
               object Label214: TLabel
                 Left = 12
@@ -1518,8 +1517,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object AddsingleAst: TTabSheet
             Caption = 'Add'
-            ClientHeight = 512
-            ClientWidth = 492
+            ClientHeight = 997
+            ClientWidth = 984
             ImageIndex = 4
             object Label217: TLabel
               Left = 8
@@ -1759,6 +1758,7 @@ object f_config_solsys: Tf_config_solsys
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True
+    QuickCancel = False
     left = 419
     top = 72
   end

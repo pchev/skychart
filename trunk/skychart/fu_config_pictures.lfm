@@ -6,8 +6,6 @@ object f_config_pictures: Tf_config_pictures
   ClientHeight = 524
   ClientWidth = 503
   TabOrder = 0
-  DesignLeft = 553
-  DesignTop = 124
   object MainPanel: TPanel
     Left = 0
     Height = 524
@@ -32,8 +30,8 @@ object f_config_pictures: Tf_config_pictures
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
         Caption = 'Objects'
-        ClientHeight = 518
-        ClientWidth = 497
+        ClientHeight = 1009
+        ClientWidth = 994
         object Label3: TLabel
           Left = 17
           Height = 96
@@ -199,8 +197,8 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page2: TTabSheet
         Caption = 'Background'
-        ClientHeight = 518
-        ClientWidth = 497
+        ClientHeight = 1009
+        ClientWidth = 994
         object Label270: TLabel
           Left = 7
           Height = 16
@@ -387,16 +385,16 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page3: TTabSheet
         Caption = 'DSS - Realsky'
-        ClientHeight = 518
-        ClientWidth = 497
+        ClientHeight = 1009
+        ClientWidth = 994
         object GroupBox1: TGroupBox
           Left = 4
           Height = 69
           Top = 8
           Width = 484
           Caption = 'Online DSS'
-          ClientHeight = 53
-          ClientWidth = 482
+          ClientHeight = 50
+          ClientWidth = 480
           TabOrder = 0
           object OnlineDSS: TCheckBox
             Left = 8
@@ -424,8 +422,8 @@ object f_config_pictures: Tf_config_pictures
           Top = 181
           Width = 484
           Caption = 'RealSky®'
-          ClientHeight = 264
-          ClientWidth = 482
+          ClientHeight = 261
+          ClientWidth = 480
           TabOrder = 2
           object Panel2: TPanel
             Left = 4
@@ -586,8 +584,8 @@ object f_config_pictures: Tf_config_pictures
           Top = 85
           Width = 484
           Caption = 'Download archive'
-          ClientHeight = 72
-          ClientWidth = 482
+          ClientHeight = 69
+          ClientWidth = 480
           TabOrder = 1
           object ArchiveBox: TCheckBox
             Left = 8
@@ -623,8 +621,8 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page4: TTabSheet
         Caption = 'Image archive'
-        ClientHeight = 518
-        ClientWidth = 497
+        ClientHeight = 1009
+        ClientWidth = 994
         object StringGrid1: TStringGrid
           Left = 21
           Height = 296

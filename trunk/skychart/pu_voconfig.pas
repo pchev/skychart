@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses XMLConf, u_translation, u_constant, Messages, SysUtils, Classes,  Graphics, Controls, Forms, FileUtil,
+uses u_ccdconfig, u_translation, u_constant, Messages, SysUtils, Classes,  Graphics, Controls, Forms, FileUtil,
   Dialogs, StdCtrls, Menus, pr_vodetail, ComCtrls, Grids, ExtCtrls, math, UScaleDPI,
   LResources, Buttons, u_voconstant, cu_vocatalog, cu_vodetail, cu_vodata;
 
@@ -578,7 +578,7 @@ var i,j,n,fs,fm,fn,nactive: integer;
     tb:TTabsheet;
     fr:Tf_vodetail;
     votype:Tvo_type;
-    config: TXMLConfig;
+    config: TCCDconfig;
     ActiveFields: TStringList;
     ActiveFieldNum: integer;
 begin
@@ -586,7 +586,7 @@ screen.Cursor:=crHourGlass;
 try
   Fcurrentconfig:=cn;
   ActiveFields:=TStringList.Create;
-  config:=TXMLConfig.Create(self);
+  config:=TCCDconfig.Create(self);
   config.Filename:=cn;
   CatName:=config.GetValue('VOcat/catalog/name','');
   tablen:=config.GetValue('VOcat/catalog/table','');
@@ -774,7 +774,7 @@ end;
 procedure Tf_voconfig.GetData(Sender: TObject);
 var coordselection, objtype, extfn: string;
     i: integer;
-    config: TXMLConfig;
+    config: TCCDconfig;
 begin
 screen.Cursor:=crHourGlass;
 try
@@ -807,7 +807,7 @@ if sender is Tf_vodetail then
        end;
        VO_TableData1.GetData(tn.Caption,objtype,false);
        extfn:=slash(VO_TableData1.CachePath)+ChangeFileExt(VO_TableData1.Datafile,'.config');
-       config:=TXMLConfig.Create(self);
+       config:=TCCDconfig.Create(self);
        config.Filename:=extfn;
        config.SetValue('VOcat/catalog/name',CatName);
        config.SetValue('VOcat/catalog/table',tn.Caption);
@@ -859,11 +859,11 @@ procedure Tf_voconfig.ReloadVO(fn: string);
 var objtype, extfn, baseurl,table: string;
     i, fieldcount: integer;
     votype:Tvo_type;
-    config: TXMLConfig;
+    config: TCCDconfig;
 begin
 try
    extfn:=slash(VO_TableData1.CachePath)+ChangeFileExt(fn,'.config');
-   config:=TXMLConfig.Create(self);
+   config:=TCCDconfig.Create(self);
    config.Filename:=extfn;
    CatName:=config.GetValue('VOcat/catalog/name','');
    table:=config.GetValue('VOcat/catalog/table','');
@@ -894,7 +894,7 @@ end;
 procedure Tf_voconfig.Updateconfig(Sender: TObject);
 var objtype, extfn: string;
     i: integer;
-    config: TXMLConfig;
+    config: TCCDconfig;
 begin
 screen.Cursor:=crHourGlass;
 try
@@ -913,7 +913,7 @@ if sender is Tf_vodetail then
          2: objtype:='dso';
        end;
        extfn:=Fcurrentconfig;
-       config:=TXMLConfig.Create(self);
+       config:=TCCDconfig.Create(self);
        config.Filename:=extfn;
        config.SetValue('VOcat/catalog/objtype',objtype);
        config.SetValue('VOcat/update/fullcat',FullDownload.Checked);
