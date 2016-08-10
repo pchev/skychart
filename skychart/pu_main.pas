@@ -1777,13 +1777,13 @@ appdir:=SafeUTF8ToSys(buf);
 buf:='';
 SHGetSpecialFolderLocation(0, CSIDL_LOCAL_APPDATA, PIDL);
 SHGetPathFromIDList(PIDL, Folder);
-buf:=systoutf8(Folder);
+buf:=WinCPToUTF8(Folder);
 buf:=trim(buf);
 buf:=SafeUTF8ToSys(buf);
 if buf='' then begin  // old windows version
    SHGetSpecialFolderLocation(0, CSIDL_APPDATA, PIDL);
    SHGetPathFromIDList(PIDL, Folder);
-   buf:=trim(Folder);
+   buf:=trim(WinCPToUTF8(Folder));
 end;
 if buf='' then begin
    buf:='C:\skychart';
@@ -1792,7 +1792,7 @@ privatedir:=slash(buf)+privatedir;
 configfile:=slash(privatedir)+configfile;
 SHGetSpecialFolderLocation(0, CSIDL_PERSONAL, PIDL);
 SHGetPathFromIDList(PIDL, Folder);
-homedir:=trim(systoutf8(Folder));
+homedir:=trim(WinCPToUTF8(Folder));
 {$endif}
 
 if ForceConfig<>'' then Configfile:=ForceConfig;
