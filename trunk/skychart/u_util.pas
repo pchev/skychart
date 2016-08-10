@@ -2418,6 +2418,7 @@ function GetXPlanetVersion: string;
 var p:TProcess;
     r:TStringList;
     buf:string;
+    i:integer;
     ok: boolean;
 begin
  result:='0.0.0';
@@ -2450,8 +2451,13 @@ begin
   if ok and (p.ExitStatus=0) then begin
     r.LoadFromStream(p.Output);
     if r.Count>0 then begin
-      buf:=r[0];
-      result:=trim(words(buf,'',2,1));
+      for i:=0 to r.count-1 do begin
+        buf:=r[i];
+        if copy(buf,1,7)='Xplanet' then begin
+          result:=trim(words(buf,'',2,1));
+          break;
+        end;
+      end;
     end;
   end;
   finally
@@ -2483,7 +2489,7 @@ begin
  {$ifdef mswindows}
    p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet.exe';
    if not isANSItmpdir then begin
-     GetShortPathName(pchar(TempDir),@shorttmp,1024);
+     GetShortPathName(PChar(UTF8ToWinCP(TempDir)),@shorttmp,1024);
      outfile:=slash(shorttmp)+extractfilename(outfile);
      if (originfile<>'') and FileExists(originfile) then
          originfile:=slash(shorttmp)+extractfilename(originfile);
