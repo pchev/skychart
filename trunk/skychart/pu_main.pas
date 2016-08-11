@@ -7880,7 +7880,6 @@ end;
 procedure Tf_main.ChartMove(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject=sender then begin   // active chart refresh
-//  application.processmessages;
   if cfgm.SyncChart then SyncChild;
 end;
 end;

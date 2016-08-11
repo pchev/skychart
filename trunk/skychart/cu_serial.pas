@@ -147,7 +147,6 @@ begin
           buf:=buf+char(n)
         else
           break;
-        // Application.ProcessMessages; // TMa no!!!  it causes problem with timer's showcoordinates
       until (length(buf)>=count)or(GetTick-Tick > Tot_timout)or not com_opened;
       count:=length(buf);
       result:=(ser.LastError=0)or(ser.LastError=ErrTimeout);

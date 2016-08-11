@@ -602,9 +602,9 @@ if VerboseMsg then
  WriteTrace('Destroy chart '+sc.cfgsc.chartname);
 try
  locked:=true;
- while lock_refresh do Application.ProcessMessages;
+ while lock_refresh do begin sleep(10); application.ProcessMessages; end;
  RefreshTimer.Enabled:=false;
- while TelescopeLock do Application.ProcessMessages;
+ while TelescopeLock do begin sleep(10); application.ProcessMessages; end;
  TelescopeTimer.Enabled:=false;
  if sc<>nil then sc.free;
  Image1.Free;
@@ -907,7 +907,6 @@ with sc do begin
  HorScrollBar.SmallChange:=i;
  HorScrollBar.LargeChange:=8*HorScrollBar.SmallChange;
  HorScrollBar.PageSize:=HorScrollBar.LargeChange;
-// application.ProcessMessages;
  ShowCoord(Image1.Width div 2, Image1.Height div 2);
 end;
 finally
