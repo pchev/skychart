@@ -890,7 +890,7 @@ var ar,de,dist,illum,phase,diam,jdt,magn,st0,dkm,q,P,a,b,be,dp,sb,pha,xp,yp,zp,v
 begin
 result:=true;
 try
-while lockpla do application.ProcessMessages; lockpla:=true;
+while lockpla do begin sleep(10); application.ProcessMessages; end; lockpla:=true;
 cfgsc.SmallSatActive:=cfgsc.ShowSmallsat and (cfgsc.CurYear>1900) and (cfgsc.CurYear<2100);
 cfgsc.SimNb:=min(cfgsc.SimNb,MaxPlSim);
 for j:=0 to cfgsc.SimNb-1 do begin
@@ -2096,7 +2096,7 @@ var ra,dec,dist,r,elong,phase,magn,jdt,st0,q : double;
   j,i,SimNb: integer;
 begin
 try
-while lockdb do application.ProcessMessages; lockdb:=true;
+while lockdb do begin sleep(10); application.ProcessMessages; end; lockdb:=true;
 cdb.AstMsg:='';
 cfgsc.ast_day:='cdc_ast_day_'+cfgsc.chartname;
 cfgsc.ast_daypos:='cdc_ast_day_pos_'+cfgsc.chartname;
@@ -2177,7 +2177,7 @@ var ra,dec,dist,r,elong,phase,magn,jdt,st0,q : double;
   j,i,SimNb: integer;
 begin
 try
-while lockdb do application.ProcessMessages; lockdb:=true;
+while lockdb do begin sleep(10); application.ProcessMessages; end; lockdb:=true;
 cdb.ComMinDT:=MaxInt;
 cfgsc.com_day:='cdc_com_day_'+cfgsc.chartname;
 cfgsc.com_daypos:='cdc_com_day_pos_'+cfgsc.chartname;

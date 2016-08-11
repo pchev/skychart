@@ -225,7 +225,7 @@ Function Tcatalog.OpenCat(c: Tconf_skychart):boolean;
 var ac,dc,rac,ddc: double;
 begin
 // get a lock before to do anything, libcatalog is NOT thread safe.
-  while lockcat do application.ProcessMessages;
+  while lockcat do begin sleep(10); application.ProcessMessages; end;
   lockcat:=true;
   case c.ProjPole of
   Gal   : begin
@@ -2662,7 +2662,7 @@ end;
 function Tcatalog.FindNum(cat: integer; id: string; var ra,dec: double ):boolean ;
 begin
 result:=false;
-while lockcat do application.ProcessMessages;
+while lockcat do begin sleep(10); application.ProcessMessages; end;
 try
   lockcat:=true;
   FFindId:='';

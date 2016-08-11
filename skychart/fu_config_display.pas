@@ -810,7 +810,6 @@ ShowLine;
 Showlabel;
 ShowCircle;
 ShowRectangle;
-//Application.ProcessMessages;
 FileNameEdit1.InitialDir:=slash(appdir)+slash('data')+'stars';;
 LockChange:=false;
 end;
@@ -1198,7 +1197,6 @@ begin
  StarSizeBar1.position:=cplot.starsize;
  StarDynBar1.position:=cplot.stardyn;
  FileNameEdit1.FileName:=cmain.starshape_file;
-// Application.ProcessMessages;
 end;
 
 procedure Tf_config_display.ShowFonts;
