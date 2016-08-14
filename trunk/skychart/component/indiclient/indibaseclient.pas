@@ -76,6 +76,8 @@ type
     SyncindiSwitch: ISwitchVectorProperty;
     SyncindiLight: ILightVectorProperty;
     SyncindiBlob: IBLOB;
+    MessageCriticalSection: TRTLCriticalSection;
+    SendCriticalSection: TRTLCriticalSection;
     procedure IndiDeviceEvent(dp: Basedevice);
     procedure IndiDeleteDeviceEvent(dp: Basedevice);
     procedure IndiMessageEvent(msg: string);
@@ -90,7 +92,7 @@ type
     procedure SyncServerDisonnected;
     procedure SyncDeviceEvent;
     procedure SyncDeleteDeviceEvent;
-    procedure SyncMessageEvent;
+    procedure ASyncMessageEvent(Data: PtrInt);
     procedure SyncPropertyEvent;
     procedure SyncDeletePropertyEvent;
     procedure SyncNumberEvent;
@@ -122,9 +124,9 @@ type
     procedure sendNewNumber(nvp: INumberVectorProperty);
     procedure sendNewText(tvp: ITextVectorProperty);
     procedure sendNewSwitch(svp: ISwitchVectorProperty);
-    function WaitBusy(nvp: INumberVectorProperty; timeout:integer=5000):boolean;
-    function WaitBusy(tvp: ITextVectorProperty; timeout:integer=5000):boolean;
-    function WaitBusy(svp: ISwitchVectorProperty; timeout:integer=5000):boolean;
+    function WaitBusy(nvp: INumberVectorProperty; timeout:integer=5000;minwait:integer=0):boolean;
+    function WaitBusy(tvp: ITextVectorProperty; timeout:integer=5000;minwait:integer=0):boolean;
+    function WaitBusy(svp: ISwitchVectorProperty; timeout:integer=5000;minwait:integer=0):boolean;
     property Timeout : integer read FTimeout write FTimeout;
     property Terminated;
     property Connected: boolean read FConnected;
@@ -204,6 +206,7 @@ FTargetPort:='7624';
 FTimeout:=100;
 FConnected:=false;
 FreeOnTerminate:=true;
+SyncindiMessage:='';
 Ftrace:=false;  // for debuging only
 Fdevices:=TObjectList.Create;
 FwatchDevices:=TStringlist.Create;
@@ -249,8 +252,7 @@ try
         if not ProcessData(buf) then begin
           inc(bufretry);
           if bufretry>100 then begin
-             SyncindiMessage:='INDI message not received completly after 100*timeout. Please increase the Timeout value.';
-             Synchronize(@SyncMessageEvent);
+             IndiMessageEvent('INDI message not received completly after 100*timeout. Please increase the Timeout value.');
           end else
              Continue; // incomplete buffer, read next part
         end;
@@ -262,11 +264,17 @@ try
         if assigned(FServerConnected) then Synchronize(@SyncServerConnected);
         init:=false;
      end;
+     EnterCriticalsection(SendCriticalSection);
+     try
      if Fsendbuffer<>'' then begin
-        buf:=Fsendbuffer; Fsendbuffer:='';
+        buf:=Fsendbuffer;
+        Fsendbuffer:='';
         if Ftrace then WriteLn('Send : '+buf);
         tcpclient.Sock.SendString(buf);
         if tcpclient.Sock.lastError<>0 then break;
+     end;
+     finally
+     LeaveCriticalsection(SendCriticalSection);
      end;
    until false;
  end;
@@ -285,7 +293,12 @@ end;
 procedure TIndiBaseClient.Send(const Value: string);
 begin
  if Value>'' then begin
+   EnterCriticalsection(SendCriticalSection);
+   try
    Fsendbuffer:=Fsendbuffer+Value+crlf;
+   finally
+   LeaveCriticalsection(SendCriticalSection);
+   end;
  end;
 end;
 
@@ -343,11 +356,13 @@ procedure TIndiBaseClient.deleteDevice(deviceName: string; out errmsg: string);
 var dp: BaseDevice;
     i: integer;
 begin
+  errmsg:='Device '+deviceName+' not found!';
   for i:=0 to Fdevices.Count-1 do
      if (deviceName = BaseDevice(Fdevices[i]).getDeviceName) then begin
         dp:=(BaseDevice(Fdevices[i]));
         if assigned(FIndiDeleteDeviceEvent) then IndiDeleteDeviceEvent(dp);
         Fdevices.Delete(i);
+        errmsg:='';
         break;
      end;
 end;
@@ -464,9 +479,16 @@ begin
   Send(buf);
 end;
 
-function TIndiBaseClient.WaitBusy(nvp: INumberVectorProperty; timeout:integer=5000):boolean;
-var count,maxcount:integer;
+function TIndiBaseClient.WaitBusy(nvp: INumberVectorProperty; timeout:integer=5000;minwait:integer=0):boolean;
+var count,maxcount,mincount:integer;
 begin
+mincount:=minwait div 100;
+count:=0;
+if mincount>0 then while (count<mincount) do begin
+   sleep(100);
+   Application.ProcessMessages;
+   inc(count);
+end;
 maxcount:=timeout div 100;
 count:=0;
 while (nvp.s=IPS_BUSY)and(count<maxcount) do begin
@@ -477,9 +499,16 @@ end;
 result:=(count<maxcount);
 end;
 
-function TIndiBaseClient.WaitBusy(tvp: ITextVectorProperty; timeout:integer=5000):boolean;
-var count,maxcount:integer;
+function TIndiBaseClient.WaitBusy(tvp: ITextVectorProperty; timeout:integer=5000;minwait:integer=0):boolean;
+var count,maxcount,mincount:integer;
 begin
+mincount:=minwait div 100;
+count:=0;
+if mincount>0 then while (count<mincount) do begin
+   sleep(100);
+   Application.ProcessMessages;
+   inc(count);
+end;
 maxcount:=timeout div 100;
 count:=0;
 while (tvp.s=IPS_BUSY)and(count<maxcount) do begin
@@ -490,9 +519,16 @@ end;
 result:=(count<maxcount);
 end;
 
-function TIndiBaseClient.WaitBusy(svp: ISwitchVectorProperty; timeout:integer=5000):boolean;
-var count,maxcount:integer;
+function TIndiBaseClient.WaitBusy(svp: ISwitchVectorProperty; timeout:integer=5000;minwait:integer=0):boolean;
+var count,maxcount,mincount:integer;
 begin
+mincount:=minwait div 100;
+count:=0;
+if mincount>0 then while (count<mincount) do begin
+   sleep(100);
+   Application.ProcessMessages;
+   inc(count);
+end;
 maxcount:=timeout div 100;
 count:=0;
 while (svp.s=IPS_BUSY)and(count<maxcount) do begin
@@ -630,8 +666,16 @@ begin
 end;
 procedure TIndiBaseClient.IndiMessageEvent(msg: string);
 begin
-  SyncindiMessage:=msg;
-  Synchronize(@SyncMessageEvent);
+  EnterCriticalSection(MessageCriticalSection);
+  try
+  if SyncindiMessage='' then
+    SyncindiMessage:=msg
+  else
+    SyncindiMessage:=SyncindiMessage+crlf+msg;
+  finally
+  LeaveCriticalsection(MessageCriticalSection);
+  end;
+  Application.QueueAsyncCall(@ASyncMessageEvent,0);
 end;
 procedure TIndiBaseClient.IndiPropertyEvent(indiProp: IndiProperty);
 begin
@@ -686,9 +730,20 @@ procedure TIndiBaseClient.SyncDeleteDeviceEvent;
 begin
   if assigned(FIndiDeleteDeviceEvent) then FIndiDeleteDeviceEvent(SyncindiDev);
 end;
-procedure TIndiBaseClient.SyncMessageEvent;
+procedure TIndiBaseClient.ASyncMessageEvent(Data: PtrInt);
+var msg: string;
 begin
-  if assigned(FIndiMessageEvent) then FIndiMessageEvent(SyncindiMessage);
+  msg:='';
+  EnterCriticalSection(MessageCriticalSection);
+  try
+  if SyncindiMessage<>'' then begin
+    msg:=SyncindiMessage;
+    SyncindiMessage:='';
+  end;
+  finally
+  LeaveCriticalsection(MessageCriticalSection);
+  end;
+  if (msg<>'') and assigned(FIndiMessageEvent) then FIndiMessageEvent(Msg);
 end;
 procedure TIndiBaseClient.SyncPropertyEvent;
 begin
