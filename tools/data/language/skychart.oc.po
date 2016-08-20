@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-01-29 17:42+0000\n"
-"PO-Revision-Date: 2016-07-15 16:02+0000\n"
+"PO-Revision-Date: 2016-08-10 16:36+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-07-17 13:20+0000\n"
-"X-Generator: Launchpad (build 18140)\n"
+"X-Launchpad-Export-Date: 2016-08-20 13:01+0000\n"
+"X-Generator: Launchpad (build 18176)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -38,7 +38,7 @@ msgstr ""
 
 #: u_translation.rsabandonyourc
 msgid "Abandon your changes?"
-msgstr ""
+msgstr "Abandonar vòstras modificacions ?"
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
@@ -118,11 +118,11 @@ msgstr "Accion"
 
 #: u_translation.rsactivateallt
 msgid "Activate all the functions when hidden"
-msgstr ""
+msgstr "Activar totas las foncions quand l'escript es amagat"
 
 #: u_translation.rsactivatethet
 msgid "Activate the timer event when hidden"
-msgstr ""
+msgstr "Activar lo minutador quand lo panèl es amagat"
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -154,7 +154,7 @@ msgstr ""
 
 #: u_translation.rsaddlabelfore
 msgid "Add label for every object in the list"
-msgstr ""
+msgstr "Apondre un labèl per totes los objèctes de la lista"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
@@ -174,7 +174,7 @@ msgstr "Ajustar l'escala de visualizacion"
 
 #: u_translation.rsadjustthewin
 msgid "Adjust the window size to the screen DPI"
-msgstr ""
+msgstr "Ajustar la talha de las fenèstras a la resolucion de l'ecran"
 
 #: u_translation.rsadvanced
 msgid "Advanced"
@@ -270,7 +270,7 @@ msgstr "totjorn"
 
 #: u_translation.rsalwaysaddmer
 msgid "Always add meridian"
-msgstr ""
+msgstr "Apondre totjorn lo meridian"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -278,7 +278,7 @@ msgstr ""
 
 #: u_translation.rsalwaysshowth
 msgid "Always show the objects from the list"
-msgstr ""
+msgstr "Veire totjorn los objèctes de la lista"
 
 #: u_translation.rsanewversiono
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
@@ -346,7 +346,7 @@ msgstr ""
 
 #: u_translation.rsartificialsa3
 msgid "Artificial satellites TLE (one URL by line)"
-msgstr ""
+msgstr "TLE dels Satellits artificials (una URL per linha)"
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
@@ -398,7 +398,7 @@ msgstr ""
 
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
-msgstr ""
+msgstr "Elements dels asteroïds"
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
@@ -522,7 +522,7 @@ msgstr ""
 
 #: u_translation.rsbewarethisop
 msgid "Beware this option can severly degrade the performance"
-msgstr ""
+msgstr "Atencion qu'aquesta opcion pòt degradar las performàncias"
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -618,7 +618,7 @@ msgstr "Boton"
 
 #: u_translation.rsbuttonsize
 msgid "Button size"
-msgstr ""
+msgstr "Talha dels botons"
 
 #: u_translation.rsby
 msgid "by"
@@ -790,7 +790,7 @@ msgstr ""
 
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
-msgstr ""
+msgstr "Apondre un reticul al centre de la carta"
 
 #: u_translation.rschartcoordin
 msgid "Chart, coordinates"
@@ -826,7 +826,7 @@ msgstr "Verificar"
 
 #: u_translation.rschecklist
 msgid "CheckList"
-msgstr ""
+msgstr "Lista de marcar"
 
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
@@ -930,7 +930,7 @@ msgstr "Colomnas"
 
 #: u_translation.rscombobox
 msgid "Combo box"
-msgstr ""
+msgstr "Lista desenrotlanta"
 
 #: u_translation.rscomet
 msgid "Comet"
@@ -942,7 +942,7 @@ msgstr ""
 
 #: u_translation.rscometelement2
 msgid "Comet elements"
-msgstr ""
+msgstr "Elements de las comètas"
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
@@ -978,7 +978,7 @@ msgstr ""
 
 #: u_translation.rscompilationa
 msgid "Compilation and save successful"
-msgstr ""
+msgstr "Compilacion e salvament reüssits"
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
@@ -1050,7 +1050,7 @@ msgstr ""
 
 #: u_translation.rsconnectionto
 msgid "Connection to INDI server failed!"
-msgstr ""
+msgstr "La connexion al servidor INDI a fracassat !"
 
 #: u_translation.rsconnectteles
 msgid "Connect telescope"
@@ -1462,7 +1462,7 @@ msgstr "Suprimir"
 
 #: u_translation.rsdeleteallthe
 msgid "Delete %s, all the child nodes and the scripts?"
-msgstr ""
+msgstr "Suprimir %s, totes los components e los escripts?"
 
 #: u_translation.rsdeletecomple
 msgid "Delete completed"
@@ -1678,7 +1678,7 @@ msgstr ""
 
 #: u_translation.rsdown
 msgid "Down"
-msgstr ""
+msgstr "Cap aval"
 
 #: u_translation.rsdownload
 msgid "Download"
@@ -2234,7 +2234,7 @@ msgstr ""
 
 #: u_translation.rsforcecolor
 msgid "Force color"
-msgstr ""
+msgstr "Forçar la color"
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
@@ -2346,7 +2346,7 @@ msgstr "Geocentric"
 
 #: u_translation.rsgeometricalt
 msgid "Geometric altitude"
-msgstr ""
+msgstr "Nautor geometrica"
 
 #: u_translation.rsget
 msgid "Get"
@@ -2406,7 +2406,7 @@ msgstr "Verd"
 
 #: u_translation.rsgregoriancal
 msgid "Gregorian calendar start date"
-msgstr ""
+msgstr "Començament del calendièr Gregorian"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -2454,7 +2454,7 @@ msgstr "Hammer-Aitoff"
 
 #: u_translation.rshandpad
 msgid "HandPad"
-msgstr ""
+msgstr "Raqueta"
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -2538,7 +2538,7 @@ msgstr ""
 
 #: u_translation.rshourlymotion
 msgid "Hourly motion"
-msgstr ""
+msgstr "Desplaçament orari"
 
 #: u_translation.rshours
 msgid "hours"
@@ -2754,7 +2754,7 @@ msgstr ""
 
 #: u_translation.rsisempty
 msgid "%s is empty!"
-msgstr ""
+msgstr "%s es void !"
 
 #: u_translation.rsittaketoolon
 #, fuzzy,badformat
@@ -2775,7 +2775,7 @@ msgstr ""
 
 #: u_translation.rsjplephemeris
 msgid "JPL ephemeris search order"
-msgstr ""
+msgstr "Òrdre de recèrca de las efemeridas JPL"
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="
@@ -2859,7 +2859,7 @@ msgstr "Latitud"
 
 #: u_translation.rslaunchindist
 msgid "Launch INDIstarter if the server is not running"
-msgstr ""
+msgstr "Aviatz INDIstarter se lo servidor es pas aviat"
 
 #: u_translation.rsleft
 msgid "Left"
@@ -3027,7 +3027,7 @@ msgstr ""
 
 #: u_translation.rslocationtime
 msgid "Location / Time"
-msgstr ""
+msgstr "Luòc / Data"
 
 #: u_translation.rslock
 msgid "Lock"
@@ -3139,7 +3139,7 @@ msgstr ""
 
 #: u_translation.rsmanagetoolbo
 msgid "Manage tool box script"
-msgstr ""
+msgstr "Gerir las bóstias d'aisinas"
 
 #: u_translation.rsmanual
 msgid "Manual"
@@ -3571,7 +3571,7 @@ msgstr "Nòrd"
 
 #: u_translation.rsnosamphubpro
 msgid "No SAMP hub profile found, no hub is running."
-msgstr ""
+msgstr "Perfil del hub SAMP pas trobat, lo hub es pas en cors d'execucion."
 
 #: u_translation.rsnotafitsfile
 msgid "Not a FITS file, SIMPLE = T keyword missing"
@@ -3627,7 +3627,7 @@ msgstr ""
 
 #: u_translation.rsnumberofigno
 msgid "Number of ignored invalid rows: %s"
-msgstr ""
+msgstr "Nombre de linhas pas validas ignoradas : %s"
 
 #: u_translation.rsnumberofmont
 msgid "Number of months"
@@ -3699,7 +3699,7 @@ msgstr ""
 
 #: u_translation.rsobservertool
 msgid "Observer tools"
-msgstr ""
+msgstr "Aisinas per l'observacion"
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -3719,7 +3719,7 @@ msgstr "Desactivar"
 
 #: u_translation.rsofficialname
 msgid "Official name"
-msgstr ""
+msgstr "Nom oficial"
 
 #: u_translation.rsoffset
 msgid "Offset"
@@ -3775,11 +3775,11 @@ msgstr "Solament los objèctes dins la massa d'aire ara"
 
 #: u_translation.rsonlyobjectsw3
 msgid "Only objects within hour angle limits tonight"
-msgstr ""
+msgstr "Sonque los objèctes dins l'angle orari aquesta nuèit"
 
 #: u_translation.rsonlyobjectsw4
 msgid "Only objects within hour angle limits now"
-msgstr ""
+msgstr "Sonque los objèctes dins l'angle orari ara"
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -3803,7 +3803,7 @@ msgstr "Molon dobèrt"
 
 #: u_translation.rsopenscript
 msgid "Open script"
-msgstr ""
+msgstr "Dobrir l'escript"
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
@@ -4043,7 +4043,7 @@ msgstr ""
 
 #: u_translation.rspleaseinstal
 msgid "Please install indistarter package!"
-msgstr ""
+msgstr "Mercé d'installar lo paquet indistarter!"
 
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
@@ -4423,7 +4423,7 @@ msgstr ""
 
 #: u_translation.rsrecoverhidde
 msgid "Recover hidden label"
-msgstr ""
+msgstr "Recuperar los labèls amagats"
 
 #: u_translation.rsred
 msgid "Red"
@@ -4479,7 +4479,7 @@ msgstr ""
 
 #: u_translation.rsremoveallbre
 msgid "Remove all breakpoints"
-msgstr ""
+msgstr "Suprimir totes los punts d'arrèst"
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
@@ -4635,7 +4635,7 @@ msgstr "Confirmacion SAMP"
 
 #: u_translation.rssamphubprofi
 msgid "SAMP hub profile %s found, but it is missing a required value."
-msgstr ""
+msgstr "Perfil del hub SAMP %s trobat, mas manca una valor requesida."
 
 #: u_translation.rssampisamessa
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
@@ -4643,7 +4643,7 @@ msgstr "SAMP es un protocòl de messatjariá que permet als logicials d'astronom
 
 #: u_translation.rssampsendcoor
 msgid "SAMP send coordinates"
-msgstr ""
+msgstr "SAMP mandadís de las coordenadas"
 
 #: u_translation.rssampsetup
 msgid "SAMP setup"
@@ -4739,11 +4739,11 @@ msgstr "Escript"
 
 #: u_translation.rsscripteditor
 msgid "Script editor"
-msgstr ""
+msgstr "Editor d'escript"
 
 #: u_translation.rsscriptisalre
 msgid "Script is already assigned to %s are you sure you want to duplicate it to %s ?"
-msgstr ""
+msgstr "L'escript es ja afectat a la tòca %s sètz segur que lo volètz duplicar a %s ?"
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
@@ -4783,7 +4783,7 @@ msgstr ""
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
-msgstr ""
+msgstr "Recercar una mesa a jorn del logicial"
 
 #: u_translation.rssec
 msgid "s"
@@ -4839,7 +4839,7 @@ msgstr ""
 
 #: u_translation.rsselectnone
 msgid "Select none"
-msgstr ""
+msgstr "Deseleccionar tot"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -4851,7 +4851,7 @@ msgstr "Seleccion dels rectangles"
 
 #: u_translation.rsselectscript
 msgid "Select script"
-msgstr ""
+msgstr "Seleccion de l'escript"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
@@ -4871,7 +4871,7 @@ msgstr ""
 
 #: u_translation.rsselecttimeun
 msgid "Select time units"
-msgstr ""
+msgstr "Seleccion de las unitats de temps"
 
 #: u_translation.rssemi
 msgid "Semi"
@@ -4987,7 +4987,7 @@ msgstr "H"
 
 #: u_translation.rsshow0horizon
 msgid "Show 0d horizon line"
-msgstr ""
+msgstr "Afichar linha d'orizont 0d"
 
 #: u_translation.rsshowallsky
 msgid "Show all sky"
@@ -5007,7 +5007,7 @@ msgstr ""
 
 #: u_translation.rsshowbuttonte
 msgid "Show button text"
-msgstr ""
+msgstr "Afichar lo tèxte"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
@@ -5239,7 +5239,7 @@ msgstr "M."
 
 #: u_translation.rssocketconfig
 msgid "Socket configuration"
-msgstr ""
+msgstr "Configuracion del socket"
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
@@ -5363,7 +5363,7 @@ msgstr "Estela"
 
 #: u_translation.rsstarandnebul
 msgid "Star and nebula limit"
-msgstr ""
+msgstr "limit de las estelas e nebulosas"
 
 #: u_translation.rsstarcolourbv
 msgid "Star colour (B-V):"
@@ -5407,11 +5407,11 @@ msgstr "Aviar"
 
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
-msgstr ""
+msgstr "Animacion en arrièr"
 
 #: u_translation.rsstartforward
 msgid "Animation forward"
-msgstr ""
+msgstr "Animacion en avant"
 
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
@@ -5567,7 +5567,7 @@ msgstr "Telescòpi"
 
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
-msgstr ""
+msgstr "Focala del telescòpi"
 
 #: u_translation.rstelescopenam
 msgid "Telescope name"
@@ -5707,7 +5707,7 @@ msgstr "Barra d'aisinas"
 
 #: u_translation.rstoolbaredito
 msgid "Tool bar editor"
-msgstr ""
+msgstr "Editor de barra d'aisinas"
 
 #: u_translation.rstoolbox
 msgid "Tool box"
@@ -5751,7 +5751,7 @@ msgstr ""
 
 #: u_translation.rstrajectories
 msgid "Trajectories simulation"
-msgstr ""
+msgstr "Simulacion de trajectòrias"
 
 #: u_translation.rstransformati
 msgid "Transformation"
@@ -5891,11 +5891,11 @@ msgstr ""
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
-msgstr ""
+msgstr "Perfil del hub SAMP pas suportat. Deu èsser una URL de fichièr"
 
 #: u_translation.rsup
 msgid "Up"
-msgstr ""
+msgstr "Cap amont"
 
 #: u_translation.rsupdate1
 msgid "Update"
@@ -5903,7 +5903,7 @@ msgstr "Metre a jorn"
 
 #: u_translation.rsupdatecoordi
 msgid "Update coordinates"
-msgstr ""
+msgstr "Mesa a jorn de las coordenadas"
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
@@ -6063,7 +6063,7 @@ msgstr "Veire la lista d'observacion"
 
 #: u_translation.rsviewonchart
 msgid "View on chart"
-msgstr ""
+msgstr "Veire sus la carta"
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "
