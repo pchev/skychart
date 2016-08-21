@@ -230,6 +230,8 @@ begin
 try
 tcpclient:=TTCPClient.Create;
 try
+ InitCriticalSection(MessageCriticalSection);
+ InitCriticalSection(SendCriticalSection);
  init:=true;
  initProps:=false;
  tcpclient.TargetHost:=FTargetHost;
@@ -283,6 +285,8 @@ FConnected:=false;
 terminate;
 tcpclient.Disconnect;
 tcpclient.Free;
+DoneCriticalsection(MessageCriticalSection);
+DoneCriticalsection(SendCriticalSection);
 if assigned(FServerDisconnected) then Synchronize(@SyncServerDisonnected);
 if Ftrace then writeln('Indi client stopped');
 end;
