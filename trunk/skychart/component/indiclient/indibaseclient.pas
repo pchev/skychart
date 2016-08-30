@@ -268,15 +268,15 @@ try
      end;
      EnterCriticalsection(SendCriticalSection);
      try
-     if Fsendbuffer<>'' then begin
-        buf:=Fsendbuffer;
-        Fsendbuffer:='';
+     buf:=Fsendbuffer;
+     Fsendbuffer:='';
+     finally
+     LeaveCriticalsection(SendCriticalSection);
+     end;
+     if buf<>'' then begin
         if Ftrace then WriteLn('Send : '+buf);
         tcpclient.Sock.SendString(buf);
         if tcpclient.Sock.lastError<>0 then break;
-     end;
-     finally
-     LeaveCriticalsection(SendCriticalSection);
      end;
    until false;
  end;
