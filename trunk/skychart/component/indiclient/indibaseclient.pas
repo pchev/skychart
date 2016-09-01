@@ -738,14 +738,14 @@ procedure TIndiBaseClient.ASyncMessageEvent(Data: PtrInt);
 var msg: string;
 begin
   msg:='';
-  EnterCriticalSection(MessageCriticalSection);
+  if not terminated then EnterCriticalSection(MessageCriticalSection);
   try
   if SyncindiMessage<>'' then begin
     msg:=SyncindiMessage;
     SyncindiMessage:='';
   end;
   finally
-  LeaveCriticalsection(MessageCriticalSection);
+  if not terminated then LeaveCriticalsection(MessageCriticalSection);
   end;
   if (msg<>'') and assigned(FIndiMessageEvent) then FIndiMessageEvent(Msg);
 end;
