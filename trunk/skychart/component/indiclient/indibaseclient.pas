@@ -50,6 +50,7 @@ type
 
   TIndiBaseClient = class(TThread)
   private
+    FinitProps: boolean;
     FTargetHost,FTargetPort,FErrorDesc,FRecvData,Fsendbuffer : string;
     FTimeout : integer;
     FConnected: boolean;
@@ -212,7 +213,7 @@ end;
 
 procedure TIndiBaseClient.Execute;
 var buf:string;
-    init,initProps:boolean;
+    init:boolean;
     buffer:array[0..255] of char;
     s:TMemoryStream;
     i,n,level:integer;
@@ -265,7 +266,7 @@ try
  InitCriticalSection(MessageCriticalSection);
  InitCriticalSection(SendCriticalSection);
  init:=true;
- initProps:=false;
+ FinitProps:=false;
  tcpclient.TargetHost:=FTargetHost;
  tcpclient.TargetPort:=FTargetPort;
  tcpclient.Timeout := FTimeout;
@@ -290,11 +291,10 @@ try
             end;
             s.Clear;
             s.WriteBuffer('<INDIMSG>',9);
-            initProps:=true;
           end;
        end;
      end;
-     if initProps and init then begin
+     if FinitProps and init then begin
         if assigned(FServerConnected) then Synchronize(@SyncServerConnected);
         init:=false;
      end;
@@ -440,8 +440,13 @@ while Node<>nil do begin
       end;
    end;
    buf:=copy(GetNodeName(Node),1,3);
-   if buf='set' then dp.setValue(Node,errmsg)
-   else if buf='def' then  dp.buildProp(Node,errmsg);
+   if buf='set' then begin
+     FinitProps:=true;
+     dp.setValue(Node,errmsg)
+   end
+   else if buf='def' then begin
+     dp.buildProp(Node,errmsg);
+   end;
    Node:=Node.NextSibling;
 end;
 finally
