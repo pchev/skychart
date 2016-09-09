@@ -214,7 +214,7 @@ end;
 procedure TIndiBaseClient.Execute;
 var buf:string;
     init:boolean;
-    buffer:array[0..255] of char;
+    buffer:array[0..4096] of char;
     s:TMemoryStream;
     i,n,level,c:integer;
     closing: boolean;
@@ -282,7 +282,7 @@ try
    c:=0;
    repeat
      if terminated then break;
-     n:=tcpclient.Sock.RecvBufferEx(@buffer,256,FTimeout);
+     n:=tcpclient.Sock.RecvBufferEx(@buffer,4096,FTimeout);
      if (tcpclient.Sock.lastError<>0)and(tcpclient.Sock.lastError<>WSAETIMEDOUT) then break;
      if n>0 then begin
        for i:=0 to n-1 do begin
