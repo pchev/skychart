@@ -43,7 +43,6 @@ type
     destructor Destroy; override;
     function Connect: Boolean;
     procedure Disconnect;
-    function RecvString: string;
     function GetErrorDesc: string;
   published
     property Sock: TTCPBlockSocket read FSock;
@@ -102,7 +101,7 @@ type
     procedure SyncBlobEvent;
     function findDev(root: TDOMNode; createifnotexist: boolean; out errmsg: string):BaseDevice;
     function findDev(root: TDOMNode; out errmsg: string):BaseDevice;
-    function ProcessData(line: string):boolean;
+    function ProcessData(s: TMemoryStream):boolean;
     procedure setDriverConnection(status: boolean; deviceName: string);
   public
     TcpClient : TTcpclient;
@@ -179,17 +178,6 @@ begin
   FSock.CloseSocket;
 end;
 
-function TTCPclient.RecvString: string;
-var buf: string;
-begin
-  Result:='';
-  repeat
-    buf:=FSock.RecvPacket(FTimeout);
-    if (FSock.lastError<>0)and(FSock.lastError<>WSAETIMEDOUT) then break;
-    Result := Result+buf;
-  until buf='';
-end;
-
 function TTCPclient.GetErrorDesc: string;
 begin
   Result := FSock.GetErrorDesc(FSock.LastError);
@@ -223,12 +211,56 @@ Inherited destroy;
 end;
 
 procedure TIndiBaseClient.Execute;
-var buf,buf1:string;
+var buf:string;
     init,initProps:boolean;
-    bufretry: integer;
+    buffer:array[0..255] of char;
+    s:TMemoryStream;
+    i,n,level:integer;
+    closing: boolean;
+    lastc: char;
+
+function ReadElement(newc:char):boolean; inline;
+begin
+  result:=false;
+  case newc of
+    chr(0): begin
+              s.Clear;
+              s.WriteBuffer('<INDIMSG>',9);
+              level:=0;
+            end;
+    '/' :   begin
+             s.Write(newc,1);
+             if (lastc='<') then begin
+              dec(level);
+              closing:=true;
+             end;
+            end;
+    '<' :   begin
+              inc(level);
+              closing:=false;
+              s.Write(newc,1);
+            end;
+    '>' :   begin
+              s.Write(newc,1);
+              if (lastc='/') or closing then begin
+                dec(level);
+                if level=0 then begin
+                   s.WriteBuffer('</INDIMSG>',10);
+                   result:=true;
+                end;
+              end;
+            end;
+     else begin
+        s.Write(newc,1);
+     end;
+  end;
+  lastc:=newc;
+end;
+
 begin
 try
 tcpclient:=TTCPClient.Create;
+s:=TMemoryStream.Create;
 try
  InitCriticalSection(MessageCriticalSection);
  InitCriticalSection(SendCriticalSection);
@@ -243,24 +275,24 @@ try
    RefreshProps;
    // main loop
    buf:='';
-   bufretry:=0;
+   level:=0;
+   s.Clear;
+   s.WriteBuffer('<INDIMSG>',9);
    repeat
      if terminated then break;
-     buf1:=tcpclient.recvstring;
-     buf:=buf+buf1;
-     if terminated then break;
+     n:=tcpclient.Sock.RecvBufferEx(@buffer,256,FTimeout);
      if (tcpclient.Sock.lastError<>0)and(tcpclient.Sock.lastError<>WSAETIMEDOUT) then break;
-     if buf<>'' then begin
-        if not ProcessData(buf) then begin
-          inc(bufretry);
-          if bufretry>100 then begin
-             IndiMessageEvent('INDI message not received completly after 100*timeout. Please increase the Timeout value.');
-          end else
-             Continue; // incomplete buffer, read next part
-        end;
-        initProps:=true;
-        buf:='';
-        bufretry:=0;
+     if n>0 then begin
+       for i:=0 to n-1 do begin
+          if ReadElement(buffer[i]) then begin
+            if not ProcessData(s) then begin
+               IndiMessageEvent('Bad INDI message : '+buf);
+            end;
+            s.Clear;
+            s.WriteBuffer('<INDIMSG>',9);
+            initProps:=true;
+          end;
+       end;
      end;
      if initProps and init then begin
         if assigned(FServerConnected) then Synchronize(@SyncServerConnected);
@@ -281,6 +313,7 @@ try
    until false;
  end;
 finally
+s.free;
 FConnected:=false;
 terminate;
 tcpclient.Disconnect;
@@ -371,16 +404,13 @@ begin
      end;
 end;
 
-function TIndiBaseClient.ProcessData(line:string):boolean;
+function TIndiBaseClient.ProcessData(s: TMemoryStream):boolean;
 var Doc: TXMLDocument;
     Node: TDOMNode;
     dp: BaseDevice;
-    s: TStringStream;
     buf,errmsg,dname,pname: string;
 begin
-//if Ftrace then writeln(line);
-FRecvData:='<INDIMSG>'+line+'</INDIMSG>';
-s:=TStringStream.Create(FRecvData);
+s.Position:=0;
 result:=true;
 try
 ReadXMLFile(Doc,s);
@@ -415,7 +445,6 @@ while Node<>nil do begin
    Node:=Node.NextSibling;
 end;
 finally
- s.Free;
  Doc.Free;
 end;
 end;
