@@ -216,7 +216,7 @@ var buf:string;
     init:boolean;
     buffer:array[0..255] of char;
     s:TMemoryStream;
-    i,n,level:integer;
+    i,n,level,c:integer;
     closing: boolean;
     lastc: char;
 
@@ -279,6 +279,7 @@ try
    level:=0;
    s.Clear;
    s.WriteBuffer('<INDIMSG>',9);
+   c:=0;
    repeat
      if terminated then break;
      n:=tcpclient.Sock.RecvBufferEx(@buffer,256,FTimeout);
@@ -294,9 +295,13 @@ try
           end;
        end;
      end;
-     if FinitProps and init then begin
-        if assigned(FServerConnected) then Synchronize(@SyncServerConnected);
-        init:=false;
+     if init then begin
+       inc(c);
+       if c>20 then FinitProps:=true;
+       if FinitProps then begin
+          if assigned(FServerConnected) then Synchronize(@SyncServerConnected);
+          init:=false;
+       end;
      end;
      EnterCriticalsection(SendCriticalSection);
      try
