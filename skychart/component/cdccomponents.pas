@@ -7,13 +7,12 @@ unit CDCcomponents;
 interface
 
 uses
-  cdc_version, LazarusPackageIntf;
+  LazarusPackageIntf;
 
 implementation
 
 procedure Register;
 begin
-  RegisterUnit('cdc_version', @cdc_version.Register);
 end;
 
 initialization
