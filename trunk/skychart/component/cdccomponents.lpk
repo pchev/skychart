@@ -2,6 +2,7 @@
 <CONFIG>
   <Package Version="4">
     <Name Value="CDCcomponents"/>
+    <Type Value="RunAndDesignTime"/>
     <AddToProjectUsesSection Value="True"/>
     <CompilerOptions>
       <Version Value="11"/>
@@ -13,23 +14,8 @@
           <UseAnsiStrings Value="False"/>
         </SyntaxOptions>
       </Parsing>
-      <Other>
-        <CompilerPath Value="$(CompPath)"/>
-      </Other>
     </CompilerOptions>
     <Description Value="Requires packages for Cartes du Ciel"/>
-    <Files Count="2">
-      <Item1>
-        <Filename Value="cdc_version.lfm"/>
-        <Type Value="LFM"/>
-      </Item1>
-      <Item2>
-        <Filename Value="cdc_version.pas"/>
-        <HasRegisterProc Value="True"/>
-        <UnitName Value="cdc_version"/>
-      </Item2>
-    </Files>
-    <Type Value="RunAndDesignTime"/>
     <RequiredPkgs Count="16">
       <Item1>
         <PackageName Value="indiclient"/>
