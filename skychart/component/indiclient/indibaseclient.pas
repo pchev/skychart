@@ -56,6 +56,8 @@ type
     FConnected: boolean;
     Fdevices: TObjectlist;
     FwatchDevices: TStringlist;
+    FMissedFrameCount: Cardinal;
+    FAllowFrameSkipping, FlockBlobEvent: boolean;
     FServerConnected: TNotifyEvent;
     FServerDisconnected: TNotifyEvent;
     FIndiDeviceEvent: TIndiDeviceEvent;
@@ -132,6 +134,8 @@ type
     property Connected: boolean read FConnected;
     property ErrorDesc : string read FErrorDesc;
     property RecvData : string read FRecvData;
+    property MissedFrameCount: Cardinal read FMissedFrameCount;
+    property AllowFrameSkipping: boolean read FAllowFrameSkipping write FAllowFrameSkipping;
     property onServerConnected: TNotifyEvent read FServerConnected write FServerConnected;
     property onServerDisconnected: TNotifyEvent read FServerDisconnected write FServerDisconnected;
     property onNewDevice: TIndiDeviceEvent read FIndiDeviceEvent write FIndiDeviceEvent;
@@ -196,6 +200,9 @@ FTimeout:=100;
 FConnected:=false;
 FreeOnTerminate:=true;
 SyncindiMessage:='';
+FAllowFrameSkipping:=false;
+FlockBlobEvent:=false;
+FMissedFrameCount:=0;
 Ftrace:=false;  // for debuging only
 Fdevices:=TObjectList.Create;
 FwatchDevices:=TStringlist.Create;
@@ -752,8 +759,22 @@ begin
 end;
 procedure TIndiBaseClient.IndiBlobEvent(bp: IBLOB);
 begin
-  SyncindiBlob:=bp;
-  Synchronize(@SyncBlobEvent);
+  if FAllowFrameSkipping then begin
+    if FlockBlobEvent then begin
+      inc(FMissedFrameCount);
+    end else begin
+     try
+      FlockBlobEvent:=true;
+      SyncindiBlob:=bp;
+      Synchronize(@SyncBlobEvent);
+     finally
+      FlockBlobEvent:=false;
+     end;
+    end;
+  end else begin
+     SyncindiBlob:=bp;
+     Synchronize(@SyncBlobEvent);
+  end;
 end;
 
 procedure TIndiBaseClient.SyncServerConnected;
