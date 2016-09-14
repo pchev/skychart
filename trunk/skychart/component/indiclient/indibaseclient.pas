@@ -48,6 +48,28 @@ type
     property Sock: TTCPBlockSocket read FSock;
   end;
 
+  TDataBuffer = Class(TObject)
+    public
+    dataptr:PtrInt;
+  end;
+
+  TProcessDataProc = procedure (s: TMemoryStream) of object;
+
+  TProcessData = class(TThread)
+    private
+      dataqueue: TObjectList;
+      FProcessData: TProcessDataProc;
+      BufferCriticalSection : TRTLCriticalSection;
+      function getCount: integer;
+    public
+      constructor Create;
+      destructor Destroy; override;
+      procedure Add(data:TMemoryStream);
+      procedure Execute; override;
+      property count: integer read getCount;
+      property onProcessData: TProcessDataProc read FProcessData write FProcessData;
+  end;
+
   TIndiBaseClient = class(TThread)
   private
     FinitProps: boolean;
@@ -57,7 +79,7 @@ type
     Fdevices: TObjectlist;
     FwatchDevices: TStringlist;
     FMissedFrameCount: Cardinal;
-    FAllowFrameSkipping, FlockBlobEvent: boolean;
+    FlockBlobEvent: boolean;
     FServerConnected: TNotifyEvent;
     FServerDisconnected: TNotifyEvent;
     FIndiDeviceEvent: TIndiDeviceEvent;
@@ -80,6 +102,7 @@ type
     SyncindiBlob: IBLOB;
     MessageCriticalSection: TRTLCriticalSection;
     SendCriticalSection: TRTLCriticalSection;
+    FProcessData:TProcessData;
     procedure IndiDeviceEvent(dp: Basedevice);
     procedure IndiDeleteDeviceEvent(dp: Basedevice);
     procedure IndiMessageEvent(msg: string);
@@ -101,10 +124,12 @@ type
     procedure SyncTextEvent;
     procedure SyncSwitchEvent;
     procedure SyncLightEvent;
-    procedure SyncBlobEvent;
+    procedure ASyncBlobEvent(Data: PtrInt);
     function findDev(root: TDOMNode; createifnotexist: boolean; out errmsg: string):BaseDevice;
     function findDev(root: TDOMNode; out errmsg: string):BaseDevice;
     function ProcessData(s: TMemoryStream):boolean;
+    procedure ProcessDataThread(s: TMemoryStream);
+    procedure ProcessDataAsync(Data: PtrInt);
     procedure setDriverConnection(status: boolean; deviceName: string);
   public
     TcpClient : TTcpclient;
@@ -135,7 +160,6 @@ type
     property ErrorDesc : string read FErrorDesc;
     property RecvData : string read FRecvData;
     property MissedFrameCount: Cardinal read FMissedFrameCount;
-    property AllowFrameSkipping: boolean read FAllowFrameSkipping write FAllowFrameSkipping;
     property onServerConnected: TNotifyEvent read FServerConnected write FServerConnected;
     property onServerDisconnected: TNotifyEvent read FServerDisconnected write FServerDisconnected;
     property onNewDevice: TIndiDeviceEvent read FIndiDeviceEvent write FIndiDeviceEvent;
@@ -188,6 +212,61 @@ begin
   Result := FSock.GetErrorDesc(FSock.LastError);
 end;
 
+///////////////////////  TProcessData //////////////////////////
+
+Constructor TProcessData.Create ;
+begin
+inherited create(false);
+FreeOnTerminate:=true;
+dataqueue:=TObjectList.Create;
+InitCriticalSection(BufferCriticalSection);
+end;
+
+destructor TProcessData.Destroy;
+begin
+dataqueue.Free;
+DoneCriticalsection(BufferCriticalSection);
+{$ifndef mswindows}
+Inherited destroy;
+{$endif}
+end;
+
+procedure TProcessData.Add(data:TMemoryStream);
+var buf: TDataBuffer;
+begin
+  buf:=TDataBuffer.Create;
+  buf.dataptr:=PtrInt(data);
+  EnterCriticalsection(BufferCriticalSection);
+  try
+  dataqueue.Add(buf);
+  finally
+  LeaveCriticalsection(BufferCriticalSection);
+  end;
+end;
+
+function TProcessData.getCount: integer;
+begin
+ result:=dataqueue.Count;
+end;
+
+procedure TProcessData.Execute;
+var s:TMemoryStream;
+begin
+  while not Terminated do begin
+      sleep(100);
+      while dataqueue.Count>0 do begin
+         s:=TMemoryStream(TDataBuffer(dataqueue.Items[0]).dataptr);
+         FProcessData(s);
+         EnterCriticalsection(BufferCriticalSection);
+         try
+         dataqueue.Delete(0);
+         finally
+         LeaveCriticalsection(BufferCriticalSection);
+         end;
+      end;
+  end;
+end;
+
 ///////////////////////  TIndiBaseClient //////////////////////////
 
 Constructor TIndiBaseClient.Create ;
@@ -200,17 +279,19 @@ FTimeout:=100;
 FConnected:=false;
 FreeOnTerminate:=true;
 SyncindiMessage:='';
-FAllowFrameSkipping:=false;
 FlockBlobEvent:=false;
 FMissedFrameCount:=0;
 Ftrace:=false;  // for debuging only
 Fdevices:=TObjectList.Create;
 FwatchDevices:=TStringlist.Create;
+FProcessData:=TProcessData.Create;
+FProcessData.onProcessData:=@ProcessDataThread;
 end;
 
 destructor TIndiBaseClient.Destroy;
 begin
 if Ftrace then writeln('TIndiBaseClient.Destroy');
+FProcessData.Terminate;
 Fdevices.Free;
 FwatchDevices.Free;
 {$ifndef mswindows}
@@ -268,7 +349,6 @@ end;
 begin
 try
 tcpclient:=TTCPClient.Create;
-s:=TMemoryStream.Create;
 try
  InitCriticalSection(MessageCriticalSection);
  InitCriticalSection(SendCriticalSection);
@@ -284,7 +364,7 @@ try
    // main loop
    buf:='';
    level:=0;
-   s.Clear;
+   s:=TMemoryStream.Create;
    s.WriteBuffer('<INDIMSG>',9);
    c:=0;
    repeat
@@ -294,10 +374,8 @@ try
      if n>0 then begin
        for i:=0 to n-1 do begin
           if ReadElement(buffer[i]) then begin
-            if not ProcessData(s) then begin
-               IndiMessageEvent('Bad INDI message : '+buf);
-            end;
-            s.Clear;
+            FProcessData.Add(s);
+            s:=TMemoryStream.Create;
             s.WriteBuffer('<INDIMSG>',9);
           end;
        end;
@@ -325,9 +403,9 @@ try
    until false;
  end;
 finally
-s.free;
 FConnected:=false;
 terminate;
+s.Free;
 tcpclient.Disconnect;
 tcpclient.Free;
 DoneCriticalsection(MessageCriticalSection);
@@ -416,10 +494,32 @@ begin
      end;
 end;
 
+procedure TIndiBaseClient.ProcessDataAsync(Data: PtrInt);
+begin
+try
+ if not terminated then begin
+  if not ProcessData(TMemoryStream(Data)) then begin
+     IndiMessageEvent('Bad INDI message');
+  end;
+ end;
+finally
+ TMemoryStream(Data).Free;
+end;
+end;
+
+
+procedure TIndiBaseClient.ProcessDataThread(s: TMemoryStream);
+begin
+ if not terminated then begin
+    Application.QueueAsyncCall(@ProcessDataAsync,PtrInt(s));
+ end;
+end;
+
 function TIndiBaseClient.ProcessData(s: TMemoryStream):boolean;
 var Doc: TXMLDocument;
     Node: TDOMNode;
     dp: BaseDevice;
+    isBlob: boolean;
     buf,errmsg,dname,pname: string;
 begin
 s.Position:=0;
@@ -453,8 +553,14 @@ while Node<>nil do begin
    end;
    buf:=copy(GetNodeName(Node),1,3);
    if buf='set' then begin
-     FinitProps:=true;
-     dp.setValue(Node,errmsg)
+     isBlob:=copy(GetNodeName(Node),1,13)='setBLOBVector';
+     if FlockBlobEvent and isBlob then begin  // do not decode blob for nothing
+       inc(FMissedFrameCount);
+       if Ftrace then writeln('missed frames: '+inttostr(FMissedFrameCount));
+     end else begin
+       FinitProps:=true;
+       dp.setValue(Node,errmsg);
+     end;
    end
    else if buf='def' then begin
      dp.buildProp(Node,errmsg);
@@ -759,21 +865,13 @@ begin
 end;
 procedure TIndiBaseClient.IndiBlobEvent(bp: IBLOB);
 begin
-  if FAllowFrameSkipping then begin
-    if FlockBlobEvent then begin
-      inc(FMissedFrameCount);
-    end else begin
-     try
-      FlockBlobEvent:=true;
-      SyncindiBlob:=bp;
-      Synchronize(@SyncBlobEvent);
-     finally
-      FlockBlobEvent:=false;
-     end;
-    end;
+  if FlockBlobEvent then begin
+    inc(FMissedFrameCount);
+    if Ftrace then writeln('missed frames: '+inttostr(FMissedFrameCount));
   end else begin
-     SyncindiBlob:=bp;
-     Synchronize(@SyncBlobEvent);
+    FlockBlobEvent:=true; // drop extra frames until we are ready
+    SyncindiBlob:=bp;
+    Application.QueueAsyncCall(@AsyncBlobEvent,0);
   end;
 end;
 
@@ -833,9 +931,16 @@ procedure TIndiBaseClient.SyncLightEvent;
 begin
   if assigned(FIndiLightEvent) then FIndiLightEvent(SyncindiLight);
 end;
-procedure TIndiBaseClient.SyncBlobEvent;
+procedure TIndiBaseClient.ASyncBlobEvent(Data: PtrInt);
 begin
-  if assigned(FIndiBlobEvent) then FIndiBlobEvent(SyncindiBlob);
+ try
+  if not terminated then begin
+    if assigned(FIndiBlobEvent) then FIndiBlobEvent(SyncindiBlob);
+  end;
+ finally
+    // blob processing terminated, we can process next
+    FlockBlobEvent:=false;
+ end;
 end;
 
 end.
