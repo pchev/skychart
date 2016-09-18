@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-01-29 17:42+0000\n"
-"PO-Revision-Date: 2016-08-10 16:36+0000\n"
+"PO-Revision-Date: 2016-09-05 19:46+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-08-20 13:01+0000\n"
-"X-Generator: Launchpad (build 18176)\n"
+"X-Launchpad-Export-Date: 2016-09-18 18:44+0000\n"
+"X-Generator: Launchpad (build 18186)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -142,7 +142,7 @@ msgstr ""
 
 #: u_translation.rsaddequatoria
 msgid "Show equatorial grid"
-msgstr ""
+msgstr "Afichar la grasilha eqüatoriala"
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"
@@ -2358,7 +2358,7 @@ msgstr ""
 
 #: u_translation.rsgetdssimage
 msgid "Get the DSS image"
-msgstr ""
+msgstr "Aficha un imatge DSS"
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
@@ -4999,7 +4999,7 @@ msgstr ""
 
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
-msgstr ""
+msgstr "Afichar los asteroïds"
 
 #: u_translation.rsshowasteroid3
 msgid "Show asteroids on the chart"
@@ -5011,7 +5011,7 @@ msgstr "Afichar lo tèxte"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
-msgstr ""
+msgstr "Afichar las comètas"
 
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
@@ -5039,7 +5039,7 @@ msgstr ""
 
 #: u_translation.rsshowcoordina
 msgid "Show coordinates grid"
-msgstr ""
+msgstr "Afichar las grasilhas de coordenadas"
 
 #: u_translation.rsshowdsolines
 msgid "Show nebulae outlines"
@@ -5095,7 +5095,7 @@ msgstr ""
 
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
-msgstr ""
+msgstr "Afichar la via lactèa"
 
 #: u_translation.rsshowneareart
 msgid "Show near Earth asteroids independently of the magnitude"
@@ -5103,7 +5103,7 @@ msgstr ""
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
-msgstr ""
+msgstr "Afichar las nebulosas"
 
 #: u_translation.rsshowobjectbe
 msgid "Show objects below the horizon"
@@ -5127,7 +5127,7 @@ msgstr ""
 
 #: u_translation.rsshowpictures
 msgid "Show pictures"
-msgstr ""
+msgstr "Afichar los imatges"
 
 #: u_translation.rsshowplaneton
 msgid "Show planets on the chart"
@@ -5135,7 +5135,7 @@ msgstr ""
 
 #: u_translation.rsshowplanets
 msgid "Show planets"
-msgstr ""
+msgstr "Afichar los planetas"
 
 #: u_translation.rsshowposition
 msgid "Show position in title bar"
@@ -5143,7 +5143,7 @@ msgstr ""
 
 #: u_translation.rsshowstars
 msgid "Show stars"
-msgstr ""
+msgstr "Afichar las estelas"
 
 #: u_translation.rsshowtheimage
 msgid "Show the images on the map"
