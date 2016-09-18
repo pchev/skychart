@@ -309,6 +309,7 @@ const
     'Janus   ', 'Epimetheus', 'Helene', 'Telesto', 'Calypso', 'Atlas', 'Prometheus', 'Pandora', 'Pan', 'Daphnis',
     'Cordelia', 'Ophelia', 'Bianca', 'Cressida', 'Desdemona', 'Juliet', 'Portia', 'Rosalind', 'Belinda', 'Puck', 'Perdita', 'Mab', 'Cupid',
     'Naiad', 'Thalassa', 'Despina', 'Galatea', 'Larissa', 'Proteus');
+  CentralPlanet: array[1..32]of integer=(1,2,3,4,5,6,7,8,9,10,11,5,5,5,5,6,6,6,6,6,6,6,6,7,7,7,7,7,4,4,6,3);
   planetcolor: array[1..11] of double = (0.7, 0, 0, 1.5, 0.7, 0.7, -1.5, -1.5, 0, 0.7, 0);
   V0mar: array [1..2] of double = (11.80, 12.89);
   V0jup: array [1..8] of double = (-1.68, -1.41, -2.09, -1.05,7.4,9.0,12.4,10.8);
