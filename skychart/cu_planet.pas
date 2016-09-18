@@ -576,13 +576,11 @@ if result=0 then begin
 end;
 end;
 
-
 Procedure TPlanet.PlanetOrientation(jde:double; ipla:integer; var P,De,Ds,w1,w2,w3 : double);
 // Report of the IAU Working Group on Cartographic
 // Coordinates and Rotational Elements: 2009
 // + 2011 Erratum
-
-const VP : array[1..10,1..4] of double = (
+const VP : array[1..15,1..4] of double = (
           (281.0097,-0.0328,61.4143,-0.0049), //mercure
           (272.76,0,67.16,0),             //venus
           (0,-0.641,90,-0.557),           //earth
@@ -592,8 +590,13 @@ const VP : array[1..10,1..4] of double = (
           (257.311,0,-15.175,0),          //uranus
           (299.36,0.70,43.46,-0.51),      //neptune !
           (132.993,0,-6.163,0),           //pluto
-          (286.13,0,63.87,0));            //sun
-      W : array[1..10,1..2] of double =(
+          (286.13,0,63.87,0),             //sun
+          (0,0,0,0),                      //moon not computed here
+          (268.05,-0.009,64.50,0.003),    //Io
+          (268.08,-0.009,64.51,0.003),    //Europa
+          (268.20,-0.009,64.57,0.003),    //Ganymede
+          (268.72,-0.009,64.83,0.003));   //Callisto
+      W : array[1..15,1..2] of double =(
           (329.5469,6.1385025),
           (160.20,-1.4813688),
           (190.147,360.9856235),
@@ -603,9 +606,14 @@ const VP : array[1..10,1..4] of double = (
           (203.81,-501.1600928),
           (253.18,536.3128492),
           (302.695,56.3625225),
-          (84.176,14.1844000));
+          (84.176,14.1844000),  //sun
+          (0,0),                //moon not computed here
+          (200.39,203.4889538), //Io
+          (36.022,101.3747235), //Europa
+          (44.064,50.3176081),  //Ganymede
+          (259.51,21.5710715)); //Callisto
 var d,T,N,a0,d0,l0,b0,r0,l1,b1,r1,x,y,z,del,eps,als,des,u,v,al,dl,f,th,k,i : double;
-    M1,M2,M3,M4,M5,Ja,Jb,Jc,Jd,Je : double;
+    M1,M2,M3,M4,M5,Ja,Jb,Jc,Jd,Je,J1,J2,J3,J4,J5,J6,J7,J8 : double;
     pl :TPlanData;
 begin
 d := (jde-jd2000);
@@ -632,7 +640,7 @@ d0:=deg2rad*(VP[ipla,3]+VP[ipla,4]*N);
 if ipla=8 then N:=sin(deg2rad*(357.85+52.316*T))
           else N:=T;
 a0:=deg2rad*(VP[ipla,1]+VP[ipla,2]*N);
-if ipla=5 then begin
+if ipla=5 then begin                        //jupiter
   Ja:=deg2rad*(99.360714+4850.4046*T);
   Jb:=deg2rad*(175.895369+1191.9605*T);
   Jc:=deg2rad*(300.323162+262.5475*T);
@@ -640,6 +648,32 @@ if ipla=5 then begin
   Je:=deg2rad*(49.511251+64.3000*T);
   a0:=a0+0.000117*sin(Ja)+0.000938*sin(Jb)+0.001432*sin(Jc)+0.000030*sin(Jd)+0.002150*sin(Je);
   d0:=d0+0.000050*cos(Ja)+0.000404*cos(Jb)+0.000617*cos(Jc)-0.000013*cos(Jd)+0.000926*cos(Je);
+end;
+if (ipla>=12)and(ipla<=15) then begin
+  J1:=deg2rad*(73.32+91472.9*T);
+  J2:=deg2rad*(24.62+45137.2*T);
+  J3:=deg2rad*(283.90+4850.7*T);
+  J4:=deg2rad*(355.80+1191.3*T);
+  J5:=deg2rad*(119.90+262.1*T);
+  J6:=deg2rad*(229.80+64.3*T);
+  J7:=deg2rad*(352.25+2382.6*T);
+  J8:=deg2rad*(113.35+6070.0*T);
+end;
+if ipla=12 then begin    // Io
+  a0:=a0+0.094*sin(J3)+0.024*sin(J4);
+  d0:=d0+0.040*cos(J3)+0.011*cos(J4);
+end;
+if ipla=13 then begin    // Europa
+  a0:=a0+1.086*sin(J4)+0.060*sin(J5)+0.015*sin(J6)+0.009*sin(J7);
+  d0:=d0+0.468*cos(J4)+0.026*cos(J5)+0.007*cos(J6)+0.002*cos(J7);
+end;
+if ipla=14 then begin    // Ganymede
+  a0:=a0-0.037*sin(J4)+0.431*sin(J5)+0.091*sin(J6);
+  d0:=d0-0.016*cos(J4)+0.186*cos(J5)+0.039*cos(J6);
+end;
+if ipla=15 then begin    // Callisto
+  a0:=a0-0.068*sin(J5)+0.590*sin(J6)+0.010*sin(J8);
+  d0:=d0-0.029*cos(J5)+0.254*cos(J6)-0.004*cos(J8);
 end;
 precession(jd2000,jde,a0,d0);
 // rotation
@@ -663,18 +697,30 @@ end else begin
    w2:=-999;
    w3:=-999;
 end;
+if ipla=12 then begin    // Io
+  w1:=w1-0.085*sin(J3)-0.022*sin(J4);
+end;
+if ipla=13 then begin    // Europa
+  w1:=w1-0.980*sin(J4)-0.054*sin(J5)-0.014*sin(J6)-0.008*sin(J7);
+end;
+if ipla=14 then begin    // Ganymede
+  w1:=w1+0.033*sin(J4)-0.389*sin(J5)-0.082*sin(J6);
+end;
+if ipla=15 then begin    // Callisto
+  w1:=w1+0.061*sin(J5)-0.533*sin(J6)-0.009*sin(J8);
+end;
 // view from Earth
 Plan(3,jde,pl);
 PrecessionEcl(jd2000,jde,pl.l,pl.b);
 l0:=pl.l; b0:=pl.b; r0:=pl.r;
-Plan(ipla,jde,pl);
+Plan(CentralPlanet[ipla],jde,pl);
 PrecessionEcl(jd2000,jde,pl.l,pl.b);
 l1:=pl.l; b1:=pl.b; r1:=pl.r;
 x := r1 * cos(b1) * cos(l1) - r0 * cos(l0);
 y := r1 * cos(b1) * sin(l1) - r0 * sin(l0);
 z := r1 * sin(b1) - r0 * sin(b0);
 del := sqrt( x*x + y*y + z*z);
-Plan(ipla,jde-del*tlight,pl);
+Plan(CentralPlanet[ipla],jde-del*tlight,pl);
 PrecessionEcl(jd2000,jde,pl.l,pl.b);
 l1:=pl.l; b1:=pl.b; r1:=pl.r;
 x := r1 * cos(b1) * cos(l1) - r0 * cos(l0);
