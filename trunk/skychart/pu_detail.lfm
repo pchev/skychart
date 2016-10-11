@@ -79,10 +79,6 @@ object f_detail: Tf_detail
     DefaultFontSize = 12
     FlagErrors = False
     PopupMenu = PopupMenu1
-    PrintSettings.MarginLeft = 0.5
-    PrintSettings.MarginTop = 0.5
-    PrintSettings.MarginRight = 0.5
-    PrintSettings.MarginBottom = 0.5
     TabOrder = 1
     OnHotClick = IpHtmlPanel1HotClick
   end
