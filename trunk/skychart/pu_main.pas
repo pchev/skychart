@@ -1641,8 +1641,12 @@ begin
      f_planetinfo.ActivePage:=-1;
   end;
   f_planetinfo.CenterAtNoon:=cfgm.CenterAtNoon;
+  //SZ added
+  f_planetinfo.View_Index := pg;
+  f_planetinfo.LinkedChartData := Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc;
+  ///
   f_planetinfo.Show;
-  f_planetinfo.PageControl1.ActivePageIndex:=pg;
+  // f_planetinfo.PageControl1.ActivePageIndex:=pg;
   f_planetinfo.RefreshInfo;
 end;
 

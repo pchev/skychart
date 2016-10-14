@@ -1,4 +1,14 @@
 unit pu_planetinfo;
+{
+2016-02-18 Toolbar icons (new)
+2016-02-18 Rest of outer planets added
+2016-02-19 Planet labels added
+2016-02-19 Live simulation ability added
+2016-02-22 Zoom in/out ability added
+2016-02-22 Earth projectory view added
+2016-02-27 Fixed list of times for navigation added
+2016-02-27 Chart Sync added
+}
 
 {$mode objfpc}{$H+}
 
@@ -6,84 +16,171 @@ interface
 
 uses u_constant, u_translation, Math, u_util, cu_planet, u_projection, process,
   BGRABitmap, BGRABitmapTypes, Classes, SysUtils, FileUtil, Forms, Controls,
-  UScaleDPI, Types, Graphics, Dialogs, ComCtrls, ExtCtrls, Buttons, StdCtrls;
-
-type
-  TChartDrawingControl = class(TCustomControl)
-  public
-    procedure Paint; override;
-    property onMouseDown;
-    property onMouseMove;
-    property onMouseUp;
-  end;
-
+  UScaleDPI, Types, Graphics, Dialogs, ComCtrls, ExtCtrls, Buttons, StdCtrls,
+  ActnList, u_Orbits;
 
 type
 
   { Tf_planetinfo }
 
   Tf_planetinfo = class(TForm)
-    CheckBox1: TCheckBox;
-    HeaderControl1: THeaderControl;
-    Next2: TStaticText;
-    Next3: TStaticText;
-    Next4: TStaticText;
-    Next5: TStaticText;
-    Next6: TStaticText;
-    Next7: TStaticText;
-    Next8: TStaticText;
-    Next1: TStaticText;
-    PageControl1: TPageControl;
+    acPlanetsVisibility: TAction;
+    acSim1: TAction;
+    acSim2: TAction;
+    acMars: TAction;
+    acMoon: TAction;
+    acMercury: TAction;
+    acEarth: TAction;
+    acSun: TAction;
+    acFreePlanetView: TAction;
+    acVenus: TAction;
+    acJupiter: TAction;
+    acSaturn: TAction;
+    acUranus: TAction;
+    acNeptune: TAction;
+    acPluto: TAction;
+    ActionList1: TActionList;
+    cbRectangular: TCheckBox;
+    cbIcons: TCheckBox;
+    cbLabels: TCheckBox;
+    cbChartSync: TCheckBox;
+    cbDistance: TCheckBox;
+    ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
+    PaintBox1: TPaintBox;
     Panel1: TPanel;
-    PanelTop: TPanel;
     Panel2: TPanel;
-    Panel3: TPanel;
-    Panel4: TPanel;
-    Panel5: TPanel;
-    Panel6: TPanel;
-    Panel7: TPanel;
-    Panel8: TPanel;
-    Panel9: TPanel;
-    Prev2: TStaticText;
-    Prev3: TStaticText;
-    Prev4: TStaticText;
-    Prev5: TStaticText;
-    Prev6: TStaticText;
-    Prev7: TStaticText;
-    Prev8: TStaticText;
-    Prev9: TStaticText;
-    TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
-    TabSheet3: TTabSheet;
-    TabSheet4: TTabSheet;
-    TabSheet5: TTabSheet;
-    TabSheet6: TTabSheet;
-    TabSheet7: TTabSheet;
-    TabSheet8: TTabSheet;
-    TabSheet9: TTabSheet;
+    rgOrigin: TRadioGroup;
+    rgTarget: TRadioGroup;
+    Timer1: TTimer;
+    tbtnEarth: TToolButton;
+    tbtnSun: TToolButton;
+    ToolButton1: TToolButton;
+    txtFOV: TStaticText;
+    txtNext: TStaticText;
+    txtJDdx: TStaticText;
+    txtJDdxDec: TStaticText;
+    txJDdxInc: TStaticText;
+    txtPlay: TStaticText;
+    txtPlayPrev: TStaticText;
+    txtStepForward: TStaticText;
+    txtStepPrev: TStaticText;
+    txtPlay5: TStaticText;
+    txtPrev: TStaticText;
+    CheckBox1: TCheckBox;
+    ImageList1: TImageList;
+    PanelTop: TPanel;
+    tbPlanets: TToolBar;
+    tbtnPlanetVisibility: TToolButton;
+    tbtnSim1: TToolButton;
+    tbtnSim2: TToolButton;
+    tbtnMars: TToolButton;
+    tbtnMercury: TToolButton;
+    tbtnVenus: TToolButton;
+    tbtnJupiter: TToolButton;
+    tbtnSaturn: TToolButton;
+    tbtnUranus: TToolButton;
+    ToolButton8: TToolButton;
+    tbtnPluto: TToolButton;
+    procedure acEarthExecute(Sender: TObject);
+    procedure acFreePlanetViewExecute(Sender: TObject);
+    procedure acMarsExecute(Sender: TObject);
+    procedure acPlutoExecute(Sender: TObject);
+    procedure acSim1Execute(Sender: TObject);
+    procedure acSim2Execute(Sender: TObject);
+    procedure acPlanetsVisibilityExecute(Sender: TObject);
+    procedure acMercuryExecute(Sender: TObject);
+    procedure acSunExecute(Sender: TObject);
+    procedure acVenusExecute(Sender: TObject);
+    procedure acJupiterExecute(Sender: TObject);
+    procedure acSaturnExecute(Sender: TObject);
+    procedure acUranusExecute(Sender: TObject);
+    procedure acNeptuneExecute(Sender: TObject);
+    procedure cbChartSyncChange(Sender: TObject);
+    procedure cbDistanceChange(Sender: TObject);
+    procedure cbIconsChange(Sender: TObject);
+    procedure cbLabelsChange(Sender: TObject);
+    procedure cbRectangularChange(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormKeyPress(Sender: TObject; var Key: char);
+    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure PaintBox1Paint(Sender: TObject);
+    procedure rgOriginClick(Sender: TObject);
+    procedure rgTargetClick(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure txJDdxIncClick(Sender: TObject);
+    procedure txtPlayPrevClick(Sender: TObject);
+    procedure txtStepForwardClick(Sender: TObject);
+    procedure txtStepPrevClick(Sender: TObject);
+    procedure txtPlay5Click(Sender: TObject);
+    procedure txtPlayClick(Sender: TObject);
+    procedure txtJDdxDecClick(Sender: TObject);
+    procedure txtNextClick(Sender: TObject);
+    procedure txtPrevClick(Sender: TObject);
     procedure CheckBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure HeaderControl1SectionClick(HeaderControl: TCustomHeaderControl;
-      Section: THeaderSection);
-    procedure SetPage(Sender: TObject);
+
   private
     { private declarations }
-    Image1,Image2,Image3,Image4,Image5,Image6,Image7,Image8,Image9 : TChartDrawingControl;
-    Fplanet : Tplanet;
+
+    firstuse : Boolean;
+
+    EnableEvents: Boolean;
+
+    ElapsedTime: cardinal;
+
+    dxJD: Double;
+    TimeIndex : integer;
+
+    IsProcessingPlanets : Boolean;
+
+    FOV : Double;
     xmin,xmax,ymin,ymax: integer;
     Initialized, ActiveNoon: boolean;
     ActiveDate, ActiveSizeX,ActiveSizeY: integer;
     TextZoom: single;
-    procedure ImgPaint(Sender: TObject);
+
+    txtCurrent: TStaticText;
+
+    CurJDTT_OLD : double;
+
+    Orbit: TOrbits;
+
+    procedure SetDefaultFOV;
+    procedure SetRadioButtons;
+    procedure SetView(AViewIndex, AMoonIndex: integer);
+
+    procedure Rescale_Internal;
+
   public
     { public declarations }
+
+    FPlanet : Tplanet;
+
+    Planet_Origin       : integer;
+    Planet_Origin_Index : integer;
+
+    Planet_Target       : integer;
+    Planet_Target_Index : integer;
+
+    View_Index    : integer;
+
     config: Tconf_skychart;
     plbmp: TBGRABitmap;
     CenterAtNoon, ShowCurrentObject: boolean;
     ActivePage: integer;
+
+    //SZ Pointer to linked chart to sync data
+    LinkedChartData: Tconf_skychart;
+
+    ChartSync: Boolean;
+
     Procedure SetLang;
     Procedure RefreshInfo;
     procedure PlotLine(bmp:TBGRABitmap; lbl:string; y:integer; des,h1,h2,ht:double);
@@ -91,88 +188,357 @@ type
     Procedure PlotPlanet(bmp:TBGRABitmap);
     Procedure PlotSelection(bmp:TBGRABitmap);
     Procedure PlotFrame(bmp:TBGRABitmap);
-    Procedure PlotPlanetImage(bmp:TBGRABitmap; ipla:integer);
-    Procedure PlotOrbit1(bmp:TBGRABitmap);
-    Procedure PlotOrbit2(bmp:TBGRABitmap);
+    procedure PlotPlanetImage(bmp:TBGRABitmap; ATarget, AOrigin : integer);
     Procedure PlotHeader(bmp:TBGRABitmap; title:string; showobs,showtime: boolean);
     property planet: Tplanet read Fplanet write Fplanet;
+
+    //SZ Inc/Dec and get string for navigation speed
+    procedure SetTimeSpeed(ATimeIndex: integer);
+    procedure IncTimeSpeed;
+    procedure DecTimeSpeed;
+    function GetTimeSpeed_Str: string;
+
   end;
 
 var
   f_planetinfo: Tf_planetinfo;
 
+type
+  TFOV = array[C_Mercury..C_Callisto] of double;
+
 const
-  marginleft=90;
-  marginright=90;
-  margintop=100;
-  marginbottom=40;
+  marginleft   =  90;
+  marginright  =  90;
+  margintop    = 100;
+  marginbottom =  40;
+
+
+  CFOV_FromEarth: TFov =
+   (
+   0.002727, // Mercury
+   0.006000, // Venus
+   0.232000, // Earth
+   0.004900, // Mars
+   0.023000, // Jupiter
+   0.011288, // Saturn
+   0.001818, // Uranus
+   0.001182, // Neptune
+   0.000050, // Pluto
+   1.500,    // Sun
+   1.100000, // Moon
+   0.000636, // Io
+   0.000546, // Europe
+   0.000900, // Ganymed
+   0.000818  // Callisto
+
+   );
+
+   CFOV_FromSun: TFov =
+    (
+    0.007972, // Mercury
+    0.012723, // Venus
+    0.010000, // Earth
+    0.003039, // Mars
+    0.019008, // Jupiter
+    0.011270, // Saturn
+    0.002000, // Uranus
+    0.001182, // Neptune
+    0.000054, // Pluto
+    1.500,    // Sun
+    0.002722, // Moon
+    0.000478, // Io
+    0.000410, // Europe
+    0.000744, // Ganymed
+    0.000676  // Callisto
+
+    );
+
+   CFOV_FromPlanet: TFov =
+    (
+    0.220000, // Mercury
+    0.220000, // Venus
+    0.220000, // Earth
+    0.220000, // Mars
+    0.200000, // Jupiter
+    0.200000, // Saturn
+    0.220000, // Uranus
+    0.220000, // Neptune
+    0.220000, // Pluto
+    0.220000, // Sun
+    1.100000, // Moon
+    1.000000, // Io
+    0.500000, // Europe
+    0.500000, // Ganymed
+    0.300000  // Callisto
+
+    );
+
+   C_OneSec   = 1.0/86400;
+   C_OneMin   = 1.0/1440;
+   C_OneHour  = 1.0/24;
+   C_OneDay   = 1.0;
+   C_OneMonth = 31;
+   C_OneYear  = 365.256;
+
+
+   //SZ Revolution of planets
+   CRevolution: array [C_Mercury..C_Callisto] of double =
+    (
+    87.969,              // Mercury
+    224.701,             // Venus
+    C_OneYear,           // Earth
+    686.98,              // Mars
+    C_OneYear * 11.862,  // Jupiter
+    C_OneYear * 29.457,  // Saturn
+    C_OneYear * 84.011,  // Uranus
+    C_OneYear * 164.79,  // Neptune
+    C_OneYear * 247.68 , // Pluto
+    0, // Sun
+    0, // Moon
+    0, // Io
+    0, // Europe
+    0, // Ganymed
+    0  // Callisto
+
+    );
+
+var
+   VTimeSpeed : array of double;
+
+const
+
+    View_PlanetVisibility = 0;
+
+    View_Sun     = 1;
+    View_Mercury = 2;
+    View_Venus   = 3;
+    View_Earth   = 4;
+    View_Mars    = 5;
+    View_Jupiter = 6;
+    View_Saturn  = 7;
+    View_Uranus  = 8;
+    View_Neptune = 9;
+    View_Pluto   = 10;
+    View_Sim1    = 11;
+    View_Sim2    = 12;
+    View_FreePlanet = 13;
+
+var
+  CFOV: TFov;
 
 implementation
 
 {$R *.lfm}
 
-procedure TChartDrawingControl.Paint;
+{ Tf_planetinfo }
+
+procedure Tf_planetinfo.SetTimeSpeed(ATimeIndex: integer);
 begin
-  inherited Paint;
+
+  TimeIndex := ATimeIndex;
+
+  if TimeIndex < low(VTimeSpeed) then
+    TimeIndex := low(VTimeSpeed);
+
+  if TimeIndex > high(VTimeSpeed) then
+    TimeIndex := high(VTimeSpeed);
+
+  dxJD := VTimeSpeed[TimeIndex]
+
 end;
 
-{ Tf_planetinfo }
+procedure Tf_planetinfo.IncTimeSpeed;
+begin
+
+  if TimeIndex+1 <= high(VTimeSpeed) then
+    inc(TimeIndex);
+
+  if TimeIndex = 0 then
+    inc(TimeIndex);
+
+  SetTimeSpeed(TimeIndex);
+
+end;
+
+procedure Tf_planetinfo.DecTimeSpeed;
+begin
+
+  if TimeIndex-1 >= low(VTimeSpeed) then
+    dec(TimeIndex);
+
+  SetTimeSpeed(TimeIndex);
+
+end;
+
+function Tf_planetinfo.GetTimeSpeed_Str: string;
+var
+  idx: integer;
+  d: double;
+  c: integer;
+begin
+
+  Result := '';
+
+  idx := TimeIndex;
+
+  try
+
+    d := VTimeSpeed[idx];
+
+    if d = CRevolution[C_Mercury] then Result := rsMercury else
+    if d = CRevolution[C_Venus]   then Result := rsVenus   else
+    if d = CRevolution[C_Mars ]   then Result := rsMars    else
+    if d = CRevolution[C_Jupiter] then Result := rsJupiter else
+    if d = CRevolution[C_Saturn]  then Result := rsSaturn  else
+    if d = CRevolution[C_Uranus]  then Result := rsUranus  else
+    if d = CRevolution[C_Neptune] then Result := rsNeptune else
+    if d = CRevolution[C_Pluto]   then Result := rsPluto   else
+
+    begin
+
+      c := round (d / C_OneYear);
+      if c > 0 then
+      begin
+
+        result := result + IntToStr(round(c)) + ' ';
+
+        if c=1 then
+          result := result + LowerCase(rsYear)
+        else
+          result := result + LowerCase(rsYears);
+
+        exit;
+      end;
+
+      c := round (d / C_OneMonth);
+      if c > 0 then
+      begin
+        result := result + IntToStr(round(c)) + ' ';
+
+        //SZ there is no plural for months
+        result := result + LowerCase(rsMonth);
+
+        exit;
+      end;
+
+      c := round (d / C_OneDay);
+      if c > 0 then
+      begin
+
+        result := result + IntToStr(round(c)) + ' ';
+
+        if c=1 then
+          result := result + LowerCase(rsDay)
+        else
+          result := result + LowerCase(rsDays);
+
+        exit;
+      end;
+
+      c := round (d / C_OneHour);
+      if c > 0 then
+      begin
+
+        result := result + IntToStr(round(c)) + ' ';
+
+        if c=1 then
+          result := result + LowerCase(rsHour)
+        else
+          result := result + LowerCase(rsHours);
+
+        exit;
+      end;
+
+      c := round (d / C_OneMin);
+      if c > 0 then
+      begin
+
+        result := result + IntToStr(round(c)) + ' ';
+
+        if c=1 then
+          result := result + LowerCase(rsMinute)
+        else
+          result := result + LowerCase(rsMinutes);
+
+        exit;
+      end;
+
+      result := result + IntToStr(round(c)) + ' ';
+
+    end;
+
+  finally
+  end;
+
+end;
 
 procedure Tf_planetinfo.SetLang;
 begin
-caption:=rsSolarSystemI;
-Next1.caption:=rsNext;
-Next2.caption:=rsNext;
-Next3.caption:=rsNext;
-Next4.caption:=rsNext;
-Next5.caption:=rsNext;
-Next6.caption:=rsNext;
-Next7.caption:=rsNext;
-Next8.caption:=rsNext;
-Prev2.caption:=rsPrev;
-Prev3.caption:=rsPrev;
-Prev4.caption:=rsPrev;
-Prev5.caption:=rsPrev;
-Prev6.caption:=rsPrev;
-Prev7.caption:=rsPrev;
-Prev8.caption:=rsPrev;
-Prev9.caption:=rsPrev;
-CheckBox1.Caption:=rsStartGraphAt;
-HeaderControl1.Sections[0].Text:=rsPlanetVisibi;
-HeaderControl1.Sections[1].Text:=pla[11];
-HeaderControl1.Sections[2].Text:=pla[1];
-HeaderControl1.Sections[3].Text:=pla[2];
-HeaderControl1.Sections[4].Text:=pla[4];
-HeaderControl1.Sections[5].Text:=pla[5];
-HeaderControl1.Sections[6].Text:=pla[6];
-HeaderControl1.Sections[7].Text:=rsInnerSolarSy;
-HeaderControl1.Sections[8].Text:=rsOuterSolarSy;
-HeaderControl1.Invalidate;
-FormResize(self);
-end;
+  caption:=rsSolarSystemI;
+  txtNext.caption:=rsNext;
+  txtPrev.caption:=rsPrev;
 
-procedure Tf_planetinfo.SetPage(Sender: TObject);
-var p: integer;
-begin
-  p:=TStaticText(sender).tag;
-  PageControl1.ActivePageIndex:=p;
-  RefreshInfo;
+  CheckBox1.Caption:=rsStartGraphAt;
+
+  acPlanetsVisibility.Hint:=rsPlanetVisibi;
+  acSun.Hint     := pla[C_Sun];
+  acMoon.Hint    := pla[C_Moon];
+  acMercury.Hint := pla[C_Mercury];
+  acVenus.Hint   := pla[C_Venus];
+  acEarth.Hint   := rsEarth;
+  acMars.Hint    := pla[C_Mars];
+  acJupiter.Hint := pla[C_Jupiter];
+  acSaturn.Hint  := pla[C_Saturn];
+  acUranus.Hint  := pla[C_Uranus];
+  acNeptune.Hint := pla[C_Neptune];
+  acPluto.Hint   := pla[C_Pluto];
+
+  acSim1.Hint     := rsInnerSolarSy;
+  acSim2.Hint     := rsOuterSolarSy;
+
+  txtJDdx.Caption := GetTimeSpeed_Str;
+
+  rgOrigin.Items[0] := rsEarth;
+  rgOrigin.Items[1] := rsSun;
+  rgOrigin.Items[2] := rsPlanet;
+
+  FormResize(self);
 end;
 
 procedure Tf_planetinfo.FormCreate(Sender: TObject);
-procedure InitImg(var img:TChartDrawingControl;par:TPanel);
 begin
-Img:= TChartDrawingControl.Create(Self);
-Img.Parent := par;
-Img.Align:=alClient;
-Img.DoubleBuffered := true;
-Img.OnPaint:=@ImgPaint;
-end;
-begin
+
+  firstuse := true;
+
+  EnableEvents:= false;
+
+  ChartSync := false;
+
+  View_Index := View_PlanetVisibility;
+
+  rgTarget.Visible := False;
+  rgOrigin.Visible := False;
+
+  Planet_Target := 1;
+  Planet_Target_Index := 0;
+
+  Planet_Origin := 1;
+  Planet_Origin_Index := 0;
+
+  IsProcessingPlanets := false;
+
+  FOV := 1.0;
+
+  ElapsedTime :=0;
+
   ScaleDPI(Self);
+
   Initialized:=false;
+
   config:=Tconf_skychart.Create;
   plbmp:=TBGRABitmap.Create;
+
+
   CenterAtNoon:=true;
   ShowCurrentObject:=true;
   setlang;
@@ -182,15 +548,20 @@ begin
   ActiveSizeY:=-1;
   ActiveNoon:=false;
   TextZoom:=1;
-  InitImg(Image1,Panel1);
-  InitImg(Image2,Panel2);
-  InitImg(Image3,Panel3);
-  InitImg(Image4,Panel4);
-  InitImg(Image5,Panel5);
-  InitImg(Image6,Panel6);
-  InitImg(Image7,Panel7);
-  InitImg(Image8,Panel8);
-  InitImg(Image9,Panel9);
+
+  //SZ 3h dxJP by default
+  SetTimeSpeed(6);
+  txtJDdx.Caption := GetTimeSpeed_Str;
+
+  IsProcessingPlanets := false;
+
+  txtCurrent := txtPlay;
+
+  CurJDTT_OLD := config.CurJDTT;
+
+  Orbit:= TOrbits.Create(plbmp,TextZoom);
+
+  //
 end;
 
 procedure Tf_planetinfo.CheckBox1Change(Sender: TObject);
@@ -199,143 +570,916 @@ begin
   RefreshInfo;
 end;
 
+procedure Tf_planetinfo.SetView(AViewIndex, AMoonIndex: integer);
+begin
+
+  EnableEvents := false;
+
+  try
+
+    //  plbmp.SetSize(Panel1.ClientWidth, Panel1.ClientHeight);
+    plbmp.Fill(ColorToBGRA(clBlack));
+
+
+    View_Index := AViewIndex;
+
+    rgTarget.Visible := False;
+    rgOrigin.Visible := False;
+
+    ComboBox1.Visible := False;
+    ComboBox2.Visible := False;
+
+    cbDistance.Visible := False;
+
+    Orbit.SetPlanet(Fplanet);
+    Orbit.SetConfig(Config);
+
+    Orbit.SetShowLabel(cbLabels.Checked);
+
+    cbLabels.Visible:= not (View_Index = View_PlanetVisibility);
+
+    rgTarget.Visible := not (View_Index = View_PlanetVisibility);
+    rgOrigin.Visible := not (View_Index = View_PlanetVisibility);
+
+    case View_Index of
+
+      View_PlanetVisibility:
+      begin
+        //rgTarget.Visible := False;
+        //rgOrigin.Visible := False;
+      end;
+
+      View_Sun:
+      begin
+
+        Planet_Target := C_Sun;
+        Planet_Target_Index := AMoonIndex;
+
+        SetRadioButtons
+      end;
+
+      View_Earth   :
+      begin
+        Planet_Target := C_Earth;
+        Planet_Target_Index := AMoonIndex;
+
+        if AMoonIndex > 0 then
+          Planet_Target := Earth_Sat[AMoonIndex];
+
+        SetRadioButtons
+      end;
+
+      View_Mercury :
+      begin
+        Planet_Target := C_Mercury;
+        Planet_Target_Index := AMoonIndex;
+
+        SetRadioButtons
+      end;
+
+      View_Venus:
+      begin
+        Planet_Target := C_Venus;
+        Planet_Target_Index := AMoonIndex;
+
+        SetRadioButtons
+      end;
+
+      View_Mars    :
+      begin
+        Planet_Target := C_Mars;
+        Planet_Target_Index := AMoonIndex;
+
+        if AMoonIndex > 0 then
+            Planet_Target := Mars_Sat[AMoonIndex];
+
+        SetRadioButtons
+      end;
+
+      View_Jupiter :
+      begin
+        Planet_Target := C_Jupiter;
+        Planet_Target_Index := AMoonIndex;
+
+        if AMoonIndex > 0 then
+            Planet_Target := Jupiter_Sat[AMoonIndex];
+
+        SetRadioButtons
+      end;
+
+      View_Saturn  :
+      begin
+        Planet_Target := C_Saturn;
+        Planet_Target_Index := AMoonIndex;
+
+        if AMoonIndex > 0 then
+          Planet_Target := Saturn_Sat[AMoonIndex];
+
+        SetRadioButtons
+      end;
+
+      View_Uranus  :
+      begin
+        Planet_Target := C_Uranus;
+        Planet_Target_Index := AMoonIndex;
+
+        if AMoonIndex > 0 then
+          Planet_Target := Uranus_Sat[AMoonIndex];
+
+        SetRadioButtons
+      end;
+
+      View_Neptune :
+      begin
+        Planet_Target := C_Neptune;
+        Planet_Target_Index := AMoonIndex;
+
+        if AMoonIndex > 0 then
+          Planet_Target := Neptune_Sat[AMoonIndex];
+
+        SetRadioButtons
+      end;
+
+      View_Pluto   :
+      begin
+        Planet_Target := C_Pluto;
+        Planet_Target_Index := AMoonIndex;
+
+        if AMoonIndex > 0 then
+          Planet_Target := Pluto_Sat[AMoonIndex];
+
+        SetRadioButtons
+      end;
+
+      View_Sim1:
+      begin
+        rgTarget.Visible := False;
+        rgOrigin.Visible := False;
+
+        ComboBox1.Visible := False;
+        ComboBox2.Visible := False;
+
+        cbDistance.Visible := True;
+
+        Orbit.RefreshOrbit := True;
+        Orbit.TypeOfOrbit := 0;
+
+        Orbit.SetDrawnRegion(xmax,xmin,ymax,ymin);
+
+      end;
+
+      View_Sim2:
+      begin
+        rgTarget.Visible := False;
+        rgOrigin.Visible := False;
+
+        ComboBox1.Visible := False;
+        ComboBox2.Visible := False;
+
+        cbDistance.Visible := True;
+
+        Orbit.RefreshOrbit := True;
+        Orbit.TypeOfOrbit := 1;
+
+        Orbit.SetDrawnRegion(xmax,xmin,ymax,ymin);
+      end;
+
+      View_FreePlanet:
+      begin
+        ComboBox1.Visible := True;
+        ComboBox2.Visible := True;
+      end;
+
+    end;
+
+    SetDefaultFOV;
+    RefreshInfo;
+
+  finally
+    EnableEvents:= true;
+  end;
+
+end;
+
+procedure Tf_planetinfo.acPlanetsVisibilityExecute(Sender: TObject);
+begin
+  SetView(View_PlanetVisibility, 0);
+end;
+
+procedure Tf_planetinfo.acSunExecute(Sender: TObject);
+begin
+  SetView(View_Sun, 0);
+end;
+
+procedure Tf_planetinfo.acMercuryExecute(Sender: TObject);
+begin
+  SetView(View_Mercury, 0);
+end;
+
+procedure Tf_planetinfo.acVenusExecute(Sender: TObject);
+begin
+  SetView(View_Venus, 0);
+end;
+
+procedure Tf_planetinfo.acEarthExecute(Sender: TObject);
+begin
+  SetView(View_Earth, 0);
+end;
+
+procedure Tf_planetinfo.acFreePlanetViewExecute(Sender: TObject);
+begin
+  SetView(View_FreePlanet, 0);
+end;
+
+procedure Tf_planetinfo.acMarsExecute(Sender: TObject);
+begin
+  SetView(View_Mars, 0);
+end;
+
+procedure Tf_planetinfo.acJupiterExecute(Sender: TObject);
+begin
+  SetView(View_Jupiter, 0);
+end;
+
+procedure Tf_planetinfo.acSaturnExecute(Sender: TObject);
+begin
+  SetView(View_Saturn, 0);
+end;
+
+procedure Tf_planetinfo.acUranusExecute(Sender: TObject);
+begin
+  SetView(View_Uranus, 0);
+end;
+
+procedure Tf_planetinfo.acNeptuneExecute(Sender: TObject);
+begin
+  SetView(View_Neptune, 0);
+end;
+
+procedure Tf_planetinfo.acPlutoExecute(Sender: TObject);
+begin
+  SetView(View_Pluto, 0);
+end;
+
+procedure Tf_planetinfo.acSim1Execute(Sender: TObject);
+begin
+  SetView(View_Sim1, 0);
+end;
+
+procedure Tf_planetinfo.acSim2Execute(Sender: TObject);
+begin
+  SetView(View_Sim2, 0);
+end;
+
+procedure Tf_planetinfo.cbChartSyncChange(Sender: TObject);
+begin
+  ChartSync := cbChartSync.Checked;
+
+  if ChartSync then
+  begin
+    txtCurrent :=  txtJDdx;
+    txtJDdx.Caption := 'Chart sync';
+  end
+  else
+  begin
+     txtCurrent :=  txtPlay;
+     txtJDdx.Caption := GetTimeSpeed_Str;
+  end;
+
+  Timer1.Enabled := ChartSync;
+
+end;
+
+procedure Tf_planetinfo.cbDistanceChange(Sender: TObject);
+begin
+  Orbit.IsDisplayDistance := cbDistance.Checked;
+  RefreshInfo;
+end;
+
+procedure Tf_planetinfo.cbIconsChange(Sender: TObject);
+begin
+  tbPlanets.Visible:= cbIcons.Checked;
+  FormResize(self);
+end;
+
+procedure Tf_planetinfo.cbLabelsChange(Sender: TObject);
+begin
+  Orbit.SetShowLabel(cbLabels.Checked);
+
+  RefreshInfo;
+end;
+
+procedure Tf_planetinfo.cbRectangularChange(Sender: TObject);
+begin
+  RefreshInfo;
+end;
+
+procedure Tf_planetinfo.FormClose(Sender: TObject; var CloseAction: TCloseAction
+  );
+begin
+  //SZ Wait until finish processing, otherwise AV will happens
+
+  Timer1.Enabled := false;
+
+  while IsProcessingPlanets do
+     Application.ProcessMessages;
+
+end;
+
+procedure Tf_planetinfo.FormKeyPress(Sender: TObject; var Key: char);
+begin
+  //SZ Zoom in/out with keyboard
+
+  if key='+' then
+    fov := fov / 2;
+
+  if key='-' then
+    fov := fov * 2;
+
+  RefreshInfo;
+end;
+
+procedure Tf_planetinfo.FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+  //SZ Zoom in/out with mouse wheel
+
+  if fov < 1e3 then
+  begin
+    fov := fov * 1.1;
+    RefreshInfo;
+  end;
+
+end;
+
+procedure Tf_planetinfo.FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+  //SZ Zoom in/out with mouse wheel
+
+  if fov > 1e-6 then
+  begin
+    fov := fov / 1.1;
+    RefreshInfo;
+  end;
+
+end;
+
+procedure Tf_planetinfo.PaintBox1Paint(Sender: TObject);
+begin
+  plbmp.Draw(PaintBox1.Canvas, 0, 0, false);
+end;
+
+procedure Tf_planetinfo.rgOriginClick(Sender: TObject);
+begin
+  if EnableEvents then
+  begin
+    SetDefaultFOV;
+    RefreshInfo;
+  end;
+
+end;
+
+procedure Tf_planetinfo.rgTargetClick(Sender: TObject);
+begin
+  if EnableEvents then
+    SetView(View_Index, rgTarget.ItemIndex);
+end;
+
+procedure Tf_planetinfo.Timer1Timer(Sender: TObject);
+begin
+
+  if not IsProcessingPlanets then
+  begin
+
+    if ChartSync then
+    begin
+
+      if CurJDTT_OLD <> LinkedChartData.CurJDTT then
+      begin
+        config.CurJDTT := LinkedChartData.CurJDTT;
+        CurJDTT_OLD := config.CurJDTT;
+
+        RefreshInfo;
+
+      end;
+    end
+    else
+    begin
+
+      if txtCurrent = txtPlay then
+        config.CurJDTT := config.CurJDTT + dxJD;
+
+      if txtCurrent = txtPlayPrev then
+          config.CurJDTT := config.CurJDTT - dxJD;
+
+      RefreshInfo;
+
+    end;
+
+  end;
+
+  //SZ This must be performed in order to avoid freezing
+  Application.ProcessMessages;
+
+end;
+
+procedure Tf_planetinfo.txtPlayClick(Sender: TObject);
+begin
+  txtCurrent := txtPlay;
+
+  Timer1.Enabled := not Timer1.Enabled;
+end;
+
+procedure Tf_planetinfo.txtJDdxDecClick(Sender: TObject);
+begin
+  DecTimeSpeed;
+  txtJDdx.Caption := GetTimeSpeed_Str;
+end;
+
+procedure Tf_planetinfo.txJDdxIncClick(Sender: TObject);
+begin
+  IncTimeSpeed;
+  txtJDdx.Caption := GetTimeSpeed_Str;
+end;
+
+procedure Tf_planetinfo.txtStepForwardClick(Sender: TObject);
+begin
+
+  txtCurrent := txtStepForward;
+
+  Timer1.Enabled := false;
+
+  config.CurJDTT := config.CurJDTT + dxJD;
+  RefreshInfo;
+
+end;
+
+procedure Tf_planetinfo.txtPlayPrevClick(Sender: TObject);
+begin
+  txtCurrent := txtPlayPrev;
+
+  Timer1.Enabled := not Timer1.Enabled;
+end;
+
+procedure Tf_planetinfo.txtStepPrevClick(Sender: TObject);
+begin
+  txtCurrent := txtStepPrev;
+
+  Timer1.Enabled := false;
+
+  config.CurJDTT := config.CurJDTT - dxJD;
+  RefreshInfo;
+
+end;
+
+procedure Tf_planetinfo.txtPlay5Click(Sender: TObject);
+begin
+  txtCurrent := txtPlay5;
+
+  Timer1.Enabled := false;
+
+  config.CurJDTT := config.JDChart;
+  RefreshInfo;
+
+  txtCurrent := txtPlay;
+end;
+
+procedure Tf_planetinfo.txtPrevClick(Sender: TObject);
+begin
+
+  if View_Index>0 then
+  begin
+    dec(View_Index);
+    SetView(View_Index,0);
+  end;
+
+end;
+
+procedure Tf_planetinfo.txtNextClick(Sender: TObject);
+begin
+
+  if View_Index < tbPlanets.ButtonList.Count-1 then
+  begin
+    inc(View_Index);
+    SetView(View_Index,0);
+  end;
+
+end;
+
 procedure Tf_planetinfo.FormDestroy(Sender: TObject);
 begin
   plbmp.Free;
   config.Free;
-  Image1.Free;
-  Image2.Free;
-  Image3.Free;
-  Image4.Free;
-  Image5.Free;
-  Image6.Free;
-  Image7.Free;
-  Image8.Free;
-  Image9.Free;
-end;
-
-procedure Tf_planetinfo.ImgPaint(Sender: TObject);
-begin
-  case PageControl1.ActivePageIndex of
-     0: plbmp.Draw(Image1.Canvas, 0, 0, false);
-     1: plbmp.Draw(Image2.Canvas, 0, 0, false);
-     2: plbmp.Draw(Image3.Canvas, 0, 0, false);
-     3: plbmp.Draw(Image4.Canvas, 0, 0, false);
-     4: plbmp.Draw(Image5.Canvas, 0, 0, false);
-     5: plbmp.Draw(Image6.Canvas, 0, 0, false);
-     6: plbmp.Draw(Image7.Canvas, 0, 0, false);
-     7: plbmp.Draw(Image8.Canvas, 0, 0, false);
-     8: plbmp.Draw(Image9.Canvas, 0, 0, false);
-  end;
+  Orbit.Free;
 end;
 
 procedure Tf_planetinfo.FormResize(Sender: TObject);
-var i:integer;
-    ts: tsize;
 begin
-for i:=0 to HeaderControl1.Sections.Count-1 do begin
-  ts:=canvas.TextExtent(HeaderControl1.Sections[i].Text);
-  HeaderControl1.Sections[i].MinWidth:=ts.cx+8;
-end;
-plbmp.SetSize(PageControl1.ClientWidth,PageControl1.ClientHeight);
-if Initialized then RefreshInfo;
+
+  if firstuse then exit;
+
+  while IsProcessingPlanets do
+    Application.ProcessMessages;
+
+  Rescale_Internal;
+
+  plbmp.SetSize(Panel1.ClientWidth, Panel1.ClientHeight);
+  plbmp.Fill(ColorToBGRA(clBlack));
+
+  if (View_Index = View_Sim1) or (View_Index = View_Sim2) then
+    Orbit.SetDrawnRegion(xmax,xmin,ymax,ymin);
+
+  if Initialized then RefreshInfo;
+
 end;
 
 procedure Tf_planetinfo.FormShow(Sender: TObject);
 begin
-    ActivePage:=-1;
+  ActivePage:=-1;
+
+  if firstuse then
+  begin
+
+    Rescale_Internal;
+
+//  plbmp.SetSize(Panel1.ClientWidth, Panel1.ClientHeight);
+//  plbmp.Fill(ColorToBGRA(clBlack));
+
+    firstuse := false;
+
+    //SetView(View_Index,0);
+  end;
+
 end;
 
-procedure Tf_planetinfo.HeaderControl1SectionClick(
-  HeaderControl: TCustomHeaderControl; Section: THeaderSection);
+procedure Tf_planetinfo.SetDefaultFOV;
+
+  function Fov_Calc(ATarget, AOrigin: integer; AConst: double): double;
+  var
+    dist,fov : double;
+  begin
+    Fov :=  CFov[ATarget];
+
+    if AOrigin in[C_Sun,C_Earth] then
+    begin
+      dist:=  Orbit.PlanetDistance(AOrigin, ATarget, config.CurJDTT);
+      Fov :=  1/AConst/dist ;
+    end;
+
+    Result := fov;
+  end;
+
+  procedure SetFovInternal;
+  var
+    dist: double;
+  begin
+
+    case View_Index of
+
+      View_Sun       : Fov := CFov[C_Sun];
+      View_Mercury   : Fov := Fov_Calc(C_Mercury, Planet_Origin, 267.5);
+      View_Venus     : Fov := Fov_Calc(C_Venus,   Planet_Origin, 109.4);
+      View_Earth     :
+        begin
+
+          if Planet_Target_Index = 0 then
+            Fov := CFov[C_Earth]
+          else
+            Fov := CFov[C_Moon];
+
+        end;
+
+      View_Mars      : Fov := Fov_Calc(C_Mars,   Planet_Origin, 195.7);
+
+             //fov := Earth_Radius/km_au * diam_real[C_Mars] / dist;
+             //fov := arctan(fov) ;
+             //fov := radtodeg(fov);
+             //fov := 1/fov/dist;
+
+           {
+           case Subindex of
+              0: Fov := CFov[C_Mars];
+              1: Fov := CFov[C_Phobos];
+              2: Fov := CFov[C_Deimos];
+           end;
+           }
+
+      View_Jupiter   :
+         begin
+
+           case Planet_Target_Index of
+             0: Fov := Fov_Calc(C_Jupiter,   Planet_Origin, 10.2);
+             1: Fov := CFov[C_Io];
+             2: Fov := CFov[C_Europa];
+             3: Fov := CFov[C_Ganymede];
+             4: Fov := CFov[C_Callisto];
+           end;
+
+         end;
+
+      View_Saturn      : Fov := Fov_Calc(C_Saturn,   Planet_Origin,   9.20);
+      View_Uranus      : Fov := Fov_Calc(C_Uranus,   Planet_Origin,  26.80);
+      View_Neptune     : Fov := Fov_Calc(C_Neptune,  Planet_Origin,  26.28);
+      View_Pluto       : Fov := Fov_Calc(C_Pluto,    Planet_Origin, 578.31);
+      View_FreePlanet  : Fov := 1.0;
+
+    end;
+
+  end;
+
+  procedure SetFromEarth;
+  begin
+    Planet_Origin := C_Earth;
+    Planet_Origin_Index:= 0;
+
+    CFOV := CFOV_FromEarth;
+    SetFovInternal;
+  end;
+
+
+  procedure SetFromSun;
+  begin
+    Planet_Origin := C_Sun;
+    Planet_Origin_Index:= 1;
+
+    CFOV := CFov_FromSun;
+    SetFovInternal;
+  end;
+
+  procedure SetFromPlanet;
+  begin
+
+    Planet_Origin := GetPlanetParent(Planet_Target);
+    Planet_Origin_Index:= 2;
+
+    CFOV := CFov_FromPlanet;
+    SetFovInternal;
+  end;
+
 begin
-  PageControl1.ActivePageIndex:=Section.OriginalIndex;
-  RefreshInfo;
+
+  if not( View_Index in [View_PlanetVisibility, View_Sim1, View_Sim2, View_FreePlanet]) then
+  begin;
+
+    case rgOrigin.ItemIndex of
+      0: SetFromEarth;
+      1: SetFromSun;
+      2: SetFromPlanet;
+    end;
+
+  end;
+
+end;
+
+procedure Tf_planetinfo.SetRadioButtons;
+var
+    i: integer;
+begin
+
+  rgTarget.Visible := not( View_Index in [View_PlanetVisibility, View_Sim1, View_Sim2]);
+  rgOrigin.Visible := rgTarget.Visible;
+
+  rgTarget.Items.Clear;
+
+  //Planet(ipla : integer; t0 : double ; var alpha,delta,distance,illum,phase,diameter,magn,dp,xp,yp,zp,vel : double);
+
+  case View_Index of
+
+    View_Sun       : rgTarget.Items.Add(rsSun);
+    View_Mercury   : rgTarget.Items.Add(rsMercury);
+    View_Venus     : rgTarget.Items.Add(rsVenus);
+    View_Earth     :
+      begin
+        rgTarget.Items.Add(rsEarth);
+        rgTarget.Items.Add(rsMoon);
+      end;
+
+    View_Mars      :
+      begin
+        rgTarget.Items.Add(rsMars);
+
+        for i in Mars_Sat do
+          rgTarget.Items.Add(GetPlanetNameLang(i));
+
+      end;
+
+    View_Jupiter   :
+    begin
+      rgTarget.Items.Add(rsJupiter);
+
+      for i in Jupiter_Sat do
+        rgTarget.Items.Add(GetPlanetNameLang(i));
+
+    end;
+
+    View_Saturn    :
+       begin
+         rgTarget.Items.Add(rsSaturn);
+
+         for i in Saturn_Sat do
+           rgTarget.Items.Add(GetPlanetNameLang(i));
+
+       end;
+
+    View_Uranus    :
+       begin
+         rgTarget.Items.Add(rsUranus);
+
+         for i in Uranus_Sat do
+           rgTarget.Items.Add(GetPlanetNameLang(i));
+
+       end;
+
+    View_Neptune   :
+    begin
+      rgTarget.Items.Add(rsNeptune);
+
+      for i in Neptune_Sat do
+        rgTarget.Items.Add(GetPlanetNameLang(i));
+
+    end;
+
+    View_Pluto     :
+      begin
+        rgTarget.Items.Add(rsPluto);
+        for i in Pluto_Sat do
+          rgTarget.Items.Add(GetPlanetNameLang(i));
+
+      end;
+
+    View_FreePlanet     :
+      begin
+        rgTarget.Items.Add('Free Planet View');
+        //for i in Pluto_Sat do
+        //  rgTarget.Items.Add(GetPlanetNameLang(i));
+
+      end;
+
+  end;
+
+  if rgTarget.Items.Count > 0 then
+    rgTarget.ItemIndex := Planet_Target_Index;
+
+end;
+
+procedure Tf_planetinfo.Rescale_Internal;
+var
+  tmp: integer;
+  MB,MT, ML, MR: integer; // Margines zoomed
+begin
+
+  plbmp.SetSize(Panel1.Width, Panel1.Height);
+  plbmp.Fill(ColorToBGRA(clBlack));
+
+  TextZoom:=plbmp.Width/800;
+
+  MT := round(margintop     * TextZoom);
+  MB := round(marginbottom  * TextZoom);
+  ML := round(marginleft    * TextZoom);
+  MR := round(marginright   * TextZoom);
+
+  xmin := ML;
+  xmax :=plbmp.Width-MR;
+
+  ymin := MT;
+  ymax := plbmp.Height - MB ;
+
+  //SZ if shown Earth projection, adapt resolution
+  if View_Index = View_Earth then
+  begin
+    tmp := (ymax-ymin) * 2;
+
+    xmin := ((plbmp.Width - tmp) div 2);
+    xmax := xmin + tmp;
+
+  end;
+
 end;
 
 procedure Tf_planetinfo.RefreshInfo;
-var yy: integer;
+
+  procedure Plot_Internal(const Aarr: array of integer; APlanet: Integer; ASubindex: integer);
+  begin
+
+    if ASubindex > 0 then
+      Aplanet := Aarr[ASubindex-1];
+
+    PlotHeader(plbmp, GetPlanetNameLang(Aplanet), false, true);
+    PlotPlanetImage(plbmp,Aplanet, Planet_Origin);
+
+  end;
+
 begin
-if (ActivePage=PageControl1.ActivePageIndex) and
-   (ActiveDate=trunc(config.CurJDTT)) and
-   (ActiveNoon=CenterAtNoon) and
-   (ActiveSizeX=PageControl1.ClientWidth) and
-   (ActiveSizeY=PageControl1.ClientHeight) and
-   (ActiveSizeX=plbmp.Width) and
-   (ActiveSizeY=plbmp.Height) then begin
-     BringToFront;
-     Exit;
-   end;
+
+  if IsProcessingPlanets then exit;
+
+  IsProcessingPlanets := true;
+
+  txtCurrent.Font.Color:=clRed;
+  txtCurrent.Repaint;
+
+  txtPrev.Visible := View_Index <> 0;
+  txtNext.Visible := View_Index <> tbPlanets.ButtonList.Count-1;
 
 try
-Initialized:=false;
-plbmp.SetSize(PageControl1.ClientWidth,PageControl1.ClientHeight);
-plbmp.Fill(ColorToBGRA(clBlack));
-TextZoom:=TabSheet1.ClientWidth/800;
-xmin:=round(marginleft*TextZoom);
-xmax:=plbmp.Width-round(marginright*TextZoom);
-if  PageControl1.ClientWidth>PageControl1.ClientHeight then begin
-  ymin:=margintop;
-  ymax:=plbmp.Height-marginbottom;
-end else begin
-  yy:=(PageControl1.ClientHeight-PageControl1.ClientWidth) div 2;
-  ymin:=margintop+yy;
-  ymax:=plbmp.Height-marginbottom-yy;
+
+  Initialized := false;
+
+  //
+  Rescale_Internal;
+
+  ActivePage  := View_Index;
+  ActiveDate  := trunc(config.CurJDTT);
+  ActiveNoon  := CenterAtNoon;
+  ActiveSizeX := Panel1.Width;
+  ActiveSizeY := Panel1.Height;
+
+  //SZ Set desired interval for timer to 20 ms
+  if Timer1.Interval <> 20 then Timer1.Interval := 20;
+
+  case View_Index of
+
+    View_PlanetVisibility:
+       begin
+        PlotHeader(plbmp, rsPlanetVisibi, true, false);
+        PlotTwilight(plbmp);
+        PlotPlanet(plbmp);
+        PlotSelection(plbmp);
+        PlotFrame(plbmp);
+     end;
+
+     View_Sun:
+        begin
+          PlotHeader(plbmp,pla[C_Sun], false, true);
+          PlotPlanetImage(plbmp,C_Sun, Planet_Origin);
+        end;
+
+     View_Earth   : Plot_Internal(Earth_Sat, C_Earth, Planet_Target_Index);
+     View_Mercury :
+        begin
+          PlotHeader(plbmp,pla[C_Mercury], false, true);
+          PlotPlanetImage(plbmp,C_Mercury, Planet_Origin);
+        end;
+
+     View_Venus:
+        begin
+          PlotHeader(plbmp,pla[C_Venus], false, true);
+          PlotPlanetImage(plbmp,C_Venus, Planet_Origin);
+        end;
+
+     View_Mars    : Plot_Internal(Mars_Sat,    C_Mars,    Planet_Target_Index);
+     View_Jupiter : Plot_Internal(Jupiter_Sat, C_Jupiter, Planet_Target_Index);
+     View_Saturn  : Plot_Internal(Saturn_Sat,  C_Saturn,  Planet_Target_Index);
+     View_Uranus  : Plot_Internal(Uranus_Sat,  C_Uranus,  Planet_Target_Index);
+     View_Neptune : Plot_Internal(Neptune_Sat, C_Neptune, Planet_Target_Index);
+     View_Pluto   : Plot_Internal(Pluto_Sat,   C_Pluto,   Planet_Target_Index);
+
+     View_Sim1:
+        begin
+           Orbit.PlotOrbit(config.CurJDTT);
+           PlotHeader(plbmp, rsInnerSolarSy, false, false);
+        end;
+
+     View_Sim2:
+        begin
+           Orbit.PlotOrbit(config.CurJDTT);
+           PlotHeader(plbmp, rsOuterSolarSy, false, false);
+        end;
+
+     View_FreePlanet:
+      begin
+        //rgTarget.Items.Add(rsPluto);
+        //for i in Pluto_Sat do
+        //  rgTarget.Items.Add(GetPlanetNameLang(i));
+
+      end;
+
+  end;
+
+  CheckBox1.Checked := not CenterAtNoon;
+  CheckBox1.Visible := View_Index=0;
+
+  PaintBox1.Repaint;
+
+//  SetRadioButtons;
+
+  if fov >= 1e-6 then
+    txtFOV.Caption:= format('FOV %10.6f',[fov])
+  else
+    txtFOV.Caption:= format('FOV %e',[fov]);
+
+  finally
+    IsProcessingPlanets := false;
+    Initialized:=true;
+
+    txtCurrent.Font.Color:=clWhite;
+
+    //SZ Invalidate;
+
+  end;
 end;
-ActivePage:=PageControl1.ActivePageIndex;
-ActiveDate:=trunc(config.CurJDTT);
-ActiveNoon:=CenterAtNoon;
-ActiveSizeX:=PageControl1.ClientWidth;
-ActiveSizeY:=PageControl1.ClientHeight;
-case PageControl1.ActivePageIndex of
-   0: begin
-      PlotHeader(plbmp, rsPlanetVisibi, true, false);
-      PlotTwilight(plbmp);
-      PlotPlanet(plbmp);
-      PlotSelection(plbmp);
-      PlotFrame(plbmp);
-   end;
-   1: begin
-      PlotHeader(plbmp,pla[11], false, true);
-      PlotPlanetImage(plbmp,11);
-      end;
-   2: begin
-      PlotHeader(plbmp,pla[1], false, true);
-      PlotPlanetImage(plbmp,1);
-      end;
-   3: begin
-      PlotHeader(plbmp,pla[2], false, true);
-      PlotPlanetImage(plbmp,2);
-      end;
-   4: begin
-      PlotHeader(plbmp,pla[4], false, true);
-      PlotPlanetImage(plbmp,4);
-      end;
-   5: begin
-      PlotHeader(plbmp,pla[5], false, true);
-      PlotPlanetImage(plbmp,5);
-      end;
-   6: begin
-      PlotHeader(plbmp,pla[6], false, true);
-      PlotPlanetImage(plbmp,6);
-      end;
-   7: begin
-      PlotHeader(plbmp, rsInnerSolarSy, false, false);
-      PlotOrbit1(plbmp);
-      end;
-   8: begin
-      PlotHeader(plbmp, rsOuterSolarSy, false, false);
-      PlotOrbit2(plbmp);
-      end;
-end;
-CheckBox1.Checked:=not CenterAtNoon;
-CheckBox1.Visible:=PageControl1.ActivePageIndex=0;
-finally
-Initialized:=true;
-Invalidate;
-BringToFront;
-end;
-end;
+
 
 Procedure Tf_planetinfo.PlotTwilight(bmp:TBGRABitmap);
 var ars,des,dist,diam,hp1,hp2,h : double;
@@ -367,6 +1511,7 @@ var ars,des,dist,diam,hp1,hp2,h : double;
   end;
 
 begin
+
   Fplanet.Sun(config.CurJDTT,ars,des,dist,diam);
   precession(jd2000,config.CurJDUT,ars,des);
   if (ars<0) then ars:=ars+pi2;
@@ -444,7 +1589,7 @@ else
   ys:=trunc((ymax-ymin)/10);
 yc:=ymin+ys;
 // sun first
-ipla:=10;
+ipla:=C_Sun;
 Fplanet.Sun(config.CurJDTT,ar,de,dist,diam);
 precession(jd2000,config.CurJDUT,ar,de);
 if (ar<0) then ar:=ar+pi2;
@@ -455,7 +1600,7 @@ case i of
   2: PlotLine(bmp,pla[ipla],yc,de,-100,-100,-100);
 end;
 // moon second
-ipla:=11;
+ipla:=C_Moon;
 yc:=yc+ys;
 Fplanet.Moon(config.CurJDTT,ar,de,dist,dkm,diam,phase,illum);
 precession(jd2000,config.CurJDUT,ar,de);
@@ -467,8 +1612,8 @@ case i of
   2: PlotLine(bmp,pla[ipla],yc,de,-100,-100,-100);
 end;
 // other planets
-for ipla:=1 to 8 do begin
-  if ipla=3 then continue; // skip earth
+for ipla:=C_Mercury to C_Neptune do begin
+  if ipla=C_Earth then continue; // skip earth
   yc:=yc+ys;
   Fplanet.Planet(ipla,config.CurJDTT,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel);
   precession(jd2000,config.CurJDUT,ar,de);
@@ -500,9 +1645,15 @@ end;
 end;
 
 Procedure Tf_planetinfo.PlotHeader(bmp:TBGRABitmap; title:String; showobs,showtime: boolean);
-var c:TBGRAPixel;
-    buf: string;
+var
+  c:TBGRAPixel;
+  buf: string;
+  JD: Double;
 begin
+
+  JD := config.CurTime;
+  //JD := config.CurJDTT;
+
   c:=ColorToBGRA(clWhite);
   bmp.FontHeight:=round(24*TextZoom);
   bmp.FontStyle:=[fsBold];
@@ -515,16 +1666,26 @@ begin
     bmp.TextOut(bmp.Width-20,40,buf,c,taRightJustify);
   end else
    if showtime then begin
-     buf:=ArmToStr(config.CurTime);
+     buf:=ArmToStr(JD);
      bmp.TextOut(bmp.Width-20,40,buf,c,taRightJustify);
    end;
+
+    buf := jddate2(config.CurJDTT);
+    bmp.TextOut(20,20,buf,c,taLeftJustify);
+
 end;
 
 Procedure Tf_planetinfo.PlotFrame(bmp:TBGRABitmap);
-var x,y,i: integer;
-    l: string;
-    c:TBGRAPixel;
+var
+  x,y,i: integer;
+  l: string;
+  c:TBGRAPixel;
+  JD: Double;
 begin
+
+JD := config.CurTime;
+//  JD := config.CurJDTT;
+
   c:=ColorToBGRA(clWhite);
   bmp.FontHeight:=round(12*TextZoom);
   bmp.FontStyle:=[fsBold];
@@ -537,31 +1698,135 @@ begin
          else l:=inttostr((i+12) mod 24);
       if (i mod 2)=0 then bmp.TextOut(x,y-15,l,c,taCenter);
   end;
-  if CenterAtNoon then x:=xmin+trunc(config.CurTime*((xmax-xmin)/24))
-                  else x:=xmin+trunc(rmod(config.CurTime+12,24)*((xmax-xmin)/24));
+  if CenterAtNoon then x:=xmin+trunc(JD*((xmax-xmin)/24))
+                  else x:=xmin+trunc(rmod(JD+12,24)*((xmax-xmin)/24));
   bmp.DrawVertLine(x,ymin,ymax,ColorToBGRA(clRed));
 end;
 
-Procedure Tf_planetinfo.PlotPlanetImage(bmp:TBGRABitmap; ipla:integer);
-var searchdir,sz,buf : string;
-    s,irc,j: integer;
-    gw: double;
-    b: TBGRABitmap;
-    r:TStringList;
+procedure Tf_planetinfo.PlotPlanetImage(bmp:TBGRABitmap; ATarget, AOrigin : integer);
+var
+   rectangular, searchdir,sz,buf : string;
+   irc,j: integer;
+   gw: double;
+   b: TBGRABitmap;
+   r: TStringList;
+   W,H: integer;
+   targetLat, targetLong: double;
+   originLat, originLong: double;
+   origin, target: string;
+   UseOrigin, UseLatLong, UseTarget, UseOriginFile:Boolean;
 begin
-  s:=min((xmax-xmin),(ymax-xmin));
-  s:=min(s,600);
-  sz:=inttostr(s)+'x'+inttostr(s);
+
+  W := xmax-xmin;
+  H := ymax-ymin;
+
+  sz := inttostr(W)+'x'+inttostr(H);
+
   searchdir:=slash(appdir)+slash('data')+'planet';
   r:=TStringList.Create;
-  if ipla=5 then gw:=planet.JupGRS(config.GRSlongitude,config.GRSdrift,config.GRSjd,config.CurJDTT)
+  if ATarget=C_Jupiter then gw:=Fplanet.JupGRS(config.GRSlongitude,config.GRSdrift,config.GRSjd,config.CurJDTT)
             else gw:=0;
-  GetXplanet(Xplanetversion,'',searchdir,sz,slash(Tempdir)+'info2.png',ipla,0,gw,config.CurJDTT,irc,r );
-  if (irc=0)and(FileExists(slash(Tempdir)+'info2.png')) then begin
+
+  //SZ For dosplay erath in different projection
+
+  if cbRectangular.Checked then
+    rectangular := 'rectangular'
+  else
+    rectangular := '';
+
+  if ( ATarget >= low(CFov) ) and ( ATarget <= high(CFov) ) then
+    searchdir:=ScaledPlanetMapDir (ATarget,  round(H * CFov[ATarget] / fov))
+  else
+    searchdir:=ScaledPlanetMapDir (ATarget,  H);
+
+  //SZ determinate target and origin
+  target := GetPlanetName(ATarget);
+  origin := GetPlanetParentName(AOrigin);
+
+  originLat  :=  config.ObsLatitude;
+  originLong := -config.ObsLongitude;
+
+  targetLat  :=  config.ObsLatitude;
+  targetLong := -config.ObsLongitude;
+
+  //SZ Autoset
+  if cbRectangular.Checked then
+  begin
+    UseOriginFile := false;
+    UseOrigin     := false;
+    UseTarget     := true;
+    UseLatLong    := false;
+  end
+  else
+  begin
+     if origin=target then
+     begin
+       UseOriginFile := false;
+       UseOrigin     := false;
+       UseTarget     := true;
+
+       if target = 'earth' then
+         UseLatLong    := true
+       else
+         UseLatLong    := false;
+
+     end
+     else
+
+    if (origin='earth') then
+    begin
+      UseOriginFile := true;
+      UseLatLong    := false;
+      UseOrigin     := true;
+      UseTarget     := true;
+    end
+    else
+
+    if (origin='sun') then
+    begin
+      UseOriginFile := false;
+      UseOrigin     := true;
+      UseTarget     := true;
+
+      if (target='earth') then
+        UseLatLong    := true
+      else;
+        UseLatLong    := false
+    end
+    else
+
+    begin
+      UseOriginFile := false;
+      UseOrigin     := true;
+      UseTarget     := true;
+      UseLatLong    := false;
+    end;
+
+  end;
+
+  GetXplanet_Plain(
+    Xplanetversion,searchdir,sz,slash(Tempdir)+'info2.png',
+      0,gw,config.CurJDTT,irc,r,rectangular, fov,
+      UseOriginFile, UseLatLong,
+      UseOrigin, origin,
+      UseTarget, target,
+      originLat, originLong,
+      targetLat, targetLong,
+      '','',
+      'xplanet2.config',
+      cbLabels.Checked
+    );
+
+
+  if (irc=0)and(FileExists(slash(Tempdir)+'info2.png')) then
+  begin
     b:=TBGRABitmap.Create(slash(Tempdir)+'info2.png');
-    bmp.PutImage(xmin+((xmax-xmin-s)div 2),ymin+((ymax-ymin-s)div 2),b,dmSet);
+
+    bmp.PutImage(xmin, ymin,b,dmSet);
+
     b.Free;
-  end else begin // something go wrong with xplanet
+  end else
+  begin // something go wrong with xplanet
      buf:='';
      if r.Count>0 then for j:=0 to r.Count-1 do begin
       buf:=buf+r[j]+crlf;
@@ -569,101 +1834,57 @@ begin
      writetrace('Return code '+inttostr(irc)+' from xplanet');
      writetrace(buf);
  end;
- r.Free;
+
+  r.Free;
+
 end;
 
-Procedure Tf_planetinfo.PlotOrbit1(bmp:TBGRABitmap);
-var p: ArrayOfTPointF;
-    s,ipla,txtp,txts,ps,ss: integer;
-    cx,cy,fx: single;
-    jdt,sd:double;
-    pl: TPlanData;
-const nbstep=100;
-      per: array[1..4] of integer = (88,225,365,687);
-      col: array[1..4] of TColor = (clGray,clWhite,clAqua,clRed);
-
-  Procedure PlanetOrbit;
-  var i:integer;
-      px,py: double;
-  begin
-    sd:=per[ipla]/nbstep;
-    jdt:=config.CurJDTT;
-    for i:=0 to nbstep do begin
-      planet.Plan(ipla,jdt,pl);
-      // rotate equatorial to ecliptic
-      px:=pl.x;
-      py:= coseps2k*pl.y + sineps2k*pl.z;
-      p[i].x:=fx*px+cx;
-      p[i].y:=-fx*py+cy;
-      jdt:=jdt+sd;
-    end;
-    bmp.DrawPolyLineAntialias(p,ColorToBGRA(clGray),0.5,true);
-    bmp.FillEllipseAntialias(p[0].x,p[0].y,ps,ps,ColorToBGRA(col[ipla]));
-    if ipla=3 then bmp.TextOut(20, txtp+txts*ipla, rsEarth, ColorToBGRA(col[ipla]), taLeftJustify)
-              else bmp.TextOut(20,txtp+txts*ipla,pla[ipla],ColorToBGRA(col[ipla]),taLeftJustify);
-  end;
-
+procedure init;
+var
+  i: integer;
 begin
-s:=min((xmax-xmin),(ymax-xmin));
-cx:=xmin+(xmax-xmin)/2;
-cy:=ymin+(ymax-ymin)/2;
-fx:=s/3.5;
-ps:=round(5*TextZoom);
-ss:=round(8*TextZoom);
-txts:=round(30*TextZoom);
-txtp:=ymax-6*txts;
-bmp.FillEllipseAntialias(cx,cy,ss,ss,ColorToBGRA(clYellow));  // sun
-bmp.FontHeight:=round(24*TextZoom);
-bmp.TextOut(20,txtp,pla[10],ColorToBGRA(clYellow),taLeftJustify);
-SetLength(p,nbstep+1);
-for ipla:=1 to 4 do PlanetOrbit;
+
+  SetLength(VTimeSpeed, 30);
+
+  i := 0; VTimeSpeed[i] := C_OneMin;
+  inc(i); VTimeSpeed[i] := C_OneMin * 3;
+  inc(i); VTimeSpeed[i] := C_OneMin * 5;
+  inc(i); VTimeSpeed[i] := C_OneMin * 10;
+  inc(i); VTimeSpeed[i] := C_OneMin * 30;
+  inc(i); VTimeSpeed[i] := C_OneHour;
+  inc(i); VTimeSpeed[i] := C_OneHour * 3;
+  inc(i); VTimeSpeed[i] := C_OneHour * 6;
+  inc(i); VTimeSpeed[i] := C_OneHour * 12;
+  inc(i); VTimeSpeed[i] := C_OneDay;
+  inc(i); VTimeSpeed[i] := C_OneDay * 3;
+  inc(i); VTimeSpeed[i] := C_OneDay * 10;
+  inc(i); VTimeSpeed[i] := C_OneMonth;
+  inc(i); VTimeSpeed[i] := CRevolution[C_Mercury];  // Mercury revolution
+  inc(i); VTimeSpeed[i] := C_OneMonth * 3;
+  inc(i); VTimeSpeed[i] := C_OneMonth * 6;
+  inc(i); VTimeSpeed[i] := CRevolution[C_Venus];    // Venus   revolution
+  inc(i); VTimeSpeed[i] := CRevolution[C_Earth];    // Earth   revolution
+  inc(i); VTimeSpeed[i] := CRevolution[C_Mars];     // Mars    revolution
+  inc(i); VTimeSpeed[i] := CRevolution[C_Jupiter];  // Jupiter revolution
+  inc(i); VTimeSpeed[i] := CRevolution[C_Saturn];   // Saturn  revolution
+  inc(i); VTimeSpeed[i] := CRevolution[C_Uranus];   // Uranus  revolution
+  inc(i); VTimeSpeed[i] := CRevolution[C_Neptune];  // Neptune revolution
+  inc(i); VTimeSpeed[i] := CRevolution[C_Pluto];    // Pluto   revolution
+
+  SetLength(VTimeSpeed, i+1);
+
 end;
 
-Procedure Tf_planetinfo.PlotOrbit2(bmp:TBGRABitmap);
-var p: ArrayOfTPointF;
-    s,ipla,txtp,txts,ps,ss: integer;
-    cx,cy,fx: single;
-    jdt,sd:double;
-    pl: TPlanData;
-const nbstep=100;
-      per: array[1..6] of integer = (687,4332,10760,30590,59799,90553);
-      col: array[1..6] of TColor = (clred,clOlive,clWhite,clAqua,clBlue,clGray);
-
-  Procedure PlanetOrbit;
-  var i:integer;
-      px,py: double;
-  begin
-    sd:=per[ipla]/nbstep;
-    jdt:=config.CurJDTT;
-    for i:=0 to nbstep do begin
-      planet.Plan(ipla+3,jdt,pl);
-      // rotate equatorial to ecliptic
-      px:=pl.x;
-      py:= coseps2k*pl.y + sineps2k*pl.z;
-      p[i].x:=fx*px+cx;
-      p[i].y:=-fx*py+cy;
-      jdt:=jdt+sd;
-    end;
-    bmp.DrawPolyLineAntialias(p,ColorToBGRA(clGray),0.5,true);
-    bmp.FillEllipseAntialias(p[0].x,p[0].y,ps,ps,ColorToBGRA(col[ipla]));
-    bmp.TextOut(20,txtp+txts*ipla,pla[ipla+3],ColorToBGRA(col[ipla]),taLeftJustify);
-  end;
-
+procedure fin;
 begin
-s:=min((xmax-xmin),(ymax-xmin));
-cx:=xmin+(xmax-xmin)/2;
-cy:=ymin+(ymax-ymin)/2;
-fx:=s/65;
-ps:=round(5*TextZoom);
-ss:=round(8*TextZoom);
-txts:=round(30*TextZoom);
-txtp:=ymax-7*txts;
-bmp.FillEllipseAntialias(cx,cy,ss,ss,ColorToBGRA(clYellow));  // sun
-bmp.FontHeight:=round(24*TextZoom);
-bmp.TextOut(20,txtp,pla[10],ColorToBGRA(clYellow),taLeftJustify);
-SetLength(p,nbstep+1);
-for ipla:=1 to 6 do PlanetOrbit;
+  SetLength(VTimeSpeed, 0);
 end;
+
+initialization
+  init;
+
+finalization
+  fin
 
 end.
 
