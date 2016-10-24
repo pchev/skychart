@@ -1618,35 +1618,43 @@ end;
 procedure Tf_main.PlanetInfoPage(pg:Integer;cursorpos:boolean=false);
 var pt:TPoint;
 begin
-  if f_planetinfo=nil then begin
-    f_planetinfo:=Tf_planetinfo.Create(self);
-    f_planetinfo.planet:=planet;
-  end;
-  if MultiFrame1.ActiveObject is Tf_chart then f_planetinfo.config.Assign(Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc)
-     else f_planetinfo.config.Assign(def_cfgsc);
-  if cfgm.KioskMode then begin
-     pt.X:=0; pt.Y:=0;
-     pt:=self.ClientToScreen(pt);
-     f_planetinfo.BorderStyle:=bsNone;
-     f_planetinfo.PanelTop.Visible:=false;
-     f_planetinfo.ShowCurrentObject:=false;
-     f_planetinfo.Show;
-     f_planetinfo.Width:=Width;
-     f_planetinfo.Height:=Height;
-     f_planetinfo.top:=pt.Y; f_planetinfo.left:=pt.X;
-     Application.ProcessMessages;
-  end else begin
-     if cursorpos and (not f_planetinfo.Visible) then
-        formpos(f_planetinfo,mouse.cursorpos.x,mouse.cursorpos.y);
-     f_planetinfo.ActivePage:=-1;
-  end;
-  f_planetinfo.CenterAtNoon:=cfgm.CenterAtNoon;
-  //SZ added
-  f_planetinfo.View_Index := pg;
+  if f_planetinfo=nil then
+    begin
+      f_planetinfo:=Tf_planetinfo.Create(self);
+      f_planetinfo.planet:=planet;
+
+      f_planetinfo.CenterAtNoon:=cfgm.CenterAtNoon;
+      f_planetinfo.View_Index := pg;
+    end;
+
+  if MultiFrame1.ActiveObject is Tf_chart
+    then
+      f_planetinfo.config.Assign(Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc)
+    else
+      f_planetinfo.config.Assign(def_cfgsc);
+
+  if cfgm.KioskMode then
+    begin
+      pt.X:=0; pt.Y:=0;
+      pt:=self.ClientToScreen(pt);
+      f_planetinfo.BorderStyle:=bsNone;
+      f_planetinfo.PanelTop.Visible:=false;
+      f_planetinfo.ShowCurrentObject:=false;
+      f_planetinfo.Show;
+      f_planetinfo.Width:=Width;
+      f_planetinfo.Height:=Height;
+      f_planetinfo.top:=pt.Y; f_planetinfo.left:=pt.X;
+      Application.ProcessMessages;
+    end else
+    begin
+      if cursorpos and (not f_planetinfo.Visible) then
+      formpos(f_planetinfo,mouse.cursorpos.x,mouse.cursorpos.y);
+      f_planetinfo.ActivePage:=-1;
+    end;
+
   f_planetinfo.LinkedChartData := Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc;
-  ///
   f_planetinfo.Show;
-  // f_planetinfo.PageControl1.ActivePageIndex:=pg;
+
   f_planetinfo.RefreshInfo;
 end;
 
