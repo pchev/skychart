@@ -1,6 +1,0 @@
-#!/bin/sh
-# install new key to fix error: "uses weak digest algorithm (SHA1)"
-set -e
-if [ "$1" = "configure" ]; then
-	/usr/bin/apt-key adv --keyserver keyserver.ubuntu.com --recv-keys AA716FC2
-fi
