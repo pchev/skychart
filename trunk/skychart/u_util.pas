@@ -134,6 +134,7 @@ procedure SetMenuAccelerator(Amenu: TMenuItem; level: integer; var AccelList: ar
 procedure ISleep(milli:integer);
 function CompareVersion(v1,v2: string):integer;
 function strim(const S: string): string;
+procedure DeleteFilesInDir(dir:string);
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -2648,6 +2649,18 @@ end;
 function strim(const S: string): string;
 begin
   result:=string(trim(s));
+end;
+
+procedure DeleteFilesInDir(dir:string);
+var i: integer;
+    fs:TSearchRec;
+begin
+i:=findfirst(slash(dir)+'*',0,fs);
+ while i=0 do begin
+   DeleteFileUTF8(slash(dir)+fs.name);
+   i:=findnext(fs);
+ end;
+ findclose(fs);
 end;
 
 end.

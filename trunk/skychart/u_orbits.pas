@@ -316,11 +316,6 @@ begin
     body_in := GetPlanetName(Aipla);
     body_out := body_in;
 
-    if body_in = 'jupiter' then
-      body_in := 'jupiter-0';
-
-    //SZ It seem that xplanet require map 'jupiter.jpg' to be 'jupiter-0.jpg'
-
     body_in  := body_in  + '.jpg';
     body_out := body_out + '.jpg';
   end;
@@ -360,7 +355,7 @@ begin
         CopyFile( fn , slash(tmpdir) +'xplanet.config' );
 
       //SZ This is full variant show labels from satellites,
-      //   have full magnitude for Sun and jupiter-0 does not exists
+      //   have full magnitude for Sun
 
       fn :=slash(searchdir)+'xplanet2.config';
 
@@ -404,14 +399,6 @@ begin
 
               fn := slash(tmpdir) + body_out;
               JPG.SaveToFile(fn);
-
-              //SZ for jupiter, copy to jupiter-0 as well
-
-              if Aipla=C_Jupiter then
-              begin
-                fn := slash(tmpdir) + 'jupiter-0.jpg';
-                JPG.SaveToFile(fn);
-              end;
 
               pass := FileExistsUTF8(fn);
 

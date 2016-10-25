@@ -6298,8 +6298,16 @@ if  Config_Version < '3.11j' then begin
      if (pos('Soft00Bright',cfgm.AsteroidUrlList[i])>0)then cfgm.AsteroidUrlList[i]:=URL_CDCAsteroidElements;
   end;
   if b1 then cfgm.AsteroidUrlList.Add(URL_HTTPAsteroidElements2);
-
 end;
+// cleanup xplanet tmp directories after each version change, see: u_orbits ScaledPlanetMapDir_Individual
+DeleteFilesInDir(slash(TempDir)+'32');
+DeleteFilesInDir(slash(TempDir)+'64');
+DeleteFilesInDir(slash(TempDir)+'120');
+DeleteFilesInDir(slash(TempDir)+'240');
+DeleteFilesInDir(slash(TempDir)+'320');
+DeleteFilesInDir(slash(TempDir)+'480');
+DeleteFilesInDir(slash(TempDir)+'512');
+DeleteFilesInDir(slash(TempDir)+'1024');
 end;
 
 procedure Tf_main.SaveVersion;
