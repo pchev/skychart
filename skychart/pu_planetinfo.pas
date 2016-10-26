@@ -922,11 +922,13 @@ begin
   begin
     NAV_Current :=  NAV_ChartSync;
     txtJDdx.Caption := 'Chart sync';
+    PaintBox2.Visible:=false;
   end
   else
   begin
      NAV_Current :=  NAV_Play;
      txtJDdx.Caption := GetTimeSpeed_Str;
+     PaintBox2.Visible:=true;
   end;
 
   Timer1.Enabled := ChartSync;
