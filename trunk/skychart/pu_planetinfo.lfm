@@ -1,11 +1,11 @@
 object f_planetinfo: Tf_planetinfo
   Left = 239
-  Height = 488
+  Height = 600
   Top = 197
   Width = 777
   ActiveControl = PanelTop
   Caption = 'f_planetinfo'
-  ClientHeight = 488
+  ClientHeight = 600
   ClientWidth = 777
   Color = clBtnFace
   OnClose = FormClose
@@ -77,7 +77,7 @@ object f_planetinfo: Tf_planetinfo
       Transparent = False
     end
     object Panel2: TPanel
-      Left = 150
+      Left = 152
       Height = 26
       Top = 24
       Width = 416
@@ -275,23 +275,24 @@ object f_planetinfo: Tf_planetinfo
       Left = 703
       Top = 0
       Action = acFreePlanetView
+      Visible = False
     end
   end
   object Panel1: TPanel
     Left = 0
-    Height = 376
+    Height = 488
     Top = 112
     Width = 777
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 376
+    ClientHeight = 488
     ClientWidth = 777
     Color = clBlack
     ParentColor = False
     TabOrder = 2
     object PaintBox1: TPaintBox
       Left = 0
-      Height = 376
+      Height = 488
       Top = 0
       Width = 777
       Align = alClient
