@@ -1612,7 +1612,7 @@ end;
 
 procedure Tf_main.PlanetInfoExecute(Sender: TObject);
 begin
-PlanetInfoPage(0,true);
+PlanetInfoPage(-1,true);
 end;
 
 procedure Tf_main.PlanetInfoPage(pg:Integer;cursorpos:boolean=false);
@@ -1624,7 +1624,6 @@ begin
       f_planetinfo.planet:=planet;
 
       f_planetinfo.CenterAtNoon:=cfgm.CenterAtNoon;
-      f_planetinfo.View_Index := pg;
     end;
 
   if MultiFrame1.ActiveObject is Tf_chart
@@ -1651,6 +1650,8 @@ begin
       formpos(f_planetinfo,mouse.cursorpos.x,mouse.cursorpos.y);
       f_planetinfo.ActivePage:=-1;
     end;
+
+  if pg>=0 then f_planetinfo.View_Index := pg;
 
   f_planetinfo.LinkedChartData := Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc;
   f_planetinfo.Show;

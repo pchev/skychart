@@ -1512,6 +1512,9 @@ end;
 
 procedure Tf_planetinfo.RefreshInfo;
 
+var y,m,d: integer;
+    h: double;
+
   procedure Plot_Internal(const Aarr: array of integer; APlanet: Integer; ASubindex: integer);
   begin
 
@@ -1537,6 +1540,12 @@ begin
 try
 
   Initialized := false;
+
+  // time
+  config.CurJDUT:=config.CurJDTT-config.DT_UT/24;
+  Djd(config.CurJDUT,y,m,d,h);
+  config.jd0:=jd(y,m,d,0);
+  config.CurST:=Sidtim(config.jd0,h-config.TimeZone,config.ObsLongitude,config.eqeq);
 
   //
   Rescale_Internal;
@@ -1865,7 +1874,8 @@ var
    targetLat, targetLong: double;
    originLat, originLong: double;
    origin, target: string;
-   UseOrigin, UseLatLong, UseTarget, UseOriginFile:Boolean;
+   UseOrigin, UseLatLong, UseTarget, UseOriginFile, BelowHorizon:Boolean;
+   ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel,az,alt: double;
 begin
 
   W := xmax-xmin;
@@ -1875,6 +1885,17 @@ begin
 
   searchdir:=slash(appdir)+slash('data')+'planet';
   r:=TStringList.Create;
+
+  // check if the planet is below the horizon to avoid to draw earth surface in front
+  if (AOrigin=C_Earth)and(ATarget<=36) then begin
+    Fplanet.Planet(CentralPlanet[ATarget],config.CurJDTT,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel);
+    precession(jd2000,config.CurJDUT,ar,de);
+    Eq2Hz(config.CurST-ar,de,az,alt,config);
+    BelowHorizon:=(alt<0);
+  end
+  else
+     BelowHorizon:=false;
+
   if ATarget=C_Jupiter then gw:=Fplanet.JupGRS(config.GRSlongitude,config.GRSdrift,config.GRSjd,config.CurJDTT)
             else gw:=0;
 
@@ -1926,7 +1947,7 @@ begin
 
     if (origin='earth') then
     begin
-      UseOriginFile := true;
+      UseOriginFile := not BelowHorizon;
       UseLatLong    := false;
       UseOrigin     := true;
       UseTarget     := true;
