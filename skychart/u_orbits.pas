@@ -678,7 +678,7 @@ begin
  end;
 
  r.LoadFromStream(p.Output);
- r.SaveToFile(outfile+'.log');
+ //r.SaveToFile(outfile+'.log');
 
  irc:=p.ExitStatus;
  p.free;
