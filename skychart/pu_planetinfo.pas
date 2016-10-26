@@ -49,10 +49,17 @@ type
     ComboBox1: TComboBox;
     ComboBox2: TComboBox;
     Image1: TImage;
+    Label1: TLabel;
     PaintBox1: TPaintBox;
     PaintBox2: TPaintBox;
     Panel1: TPanel;
     Panel2: TPanel;
+    Panel3: TPanel;
+    PanelMain: TPanel;
+    PanelLeft: TPanel;
+    PanelrgTarget: TPanel;
+    PanelrgOrigin: TPanel;
+    PanelTop: TPanel;
     rgOrigin: TRadioGroup;
     rgTarget: TRadioGroup;
     Timer1: TTimer;
@@ -65,7 +72,6 @@ type
     txtPrev: TStaticText;
     CheckBox1: TCheckBox;
     ImageList1: TImageList;
-    PanelTop: TPanel;
     tbPlanets: TToolBar;
     tbtnPlanetVisibility: TToolButton;
     tbtnSim1: TToolButton;
@@ -99,9 +105,9 @@ type
     procedure cbRectangularChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormKeyPress(Sender: TObject; var Key: char);
-    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+    procedure PaintBoxMouseWheelDown(Sender: TObject; Shift: TShiftState;
       MousePos: TPoint; var Handled: Boolean);
-    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+    procedure PaintboxMouseWheelUp(Sender: TObject; Shift: TShiftState;
       MousePos: TPoint; var Handled: Boolean);
     procedure Image1Click(Sender: TObject);
     procedure PaintBox1Paint(Sender: TObject);
@@ -138,6 +144,7 @@ type
     Initialized, ActiveNoon: boolean;
     ActiveDate, ActiveSizeX,ActiveSizeY: integer;
     TextZoom: single;
+    zoomlock: boolean;
 
     NAV_Current: integer;
     NAV_On: boolean;
@@ -492,7 +499,7 @@ begin
   txtNext.caption:=rsNext;
   txtPrev.caption:=rsPrev;
 
-  CheckBox1.Caption:=rsStartGraphAt;
+  Label1.Caption:=rsStartGraphAt;
 
   acPlanetsVisibility.Hint:=rsPlanetVisibi;
   acSun.Hint     := pla[C_Sun];
@@ -571,6 +578,10 @@ end;
 
 procedure Tf_planetinfo.FormCreate(Sender: TObject);
 begin
+  {$ifdef lclgtk2}
+  PanelLeft.Color:=clBlack;
+  PanelLeft.Font.Color:=clWhite;
+  {$endif}
 
   firstuse := true;
 
@@ -581,14 +592,16 @@ begin
 
   ChartSync := false;
 
+  zoomlock:=false;
+
   View_Index := View_PlanetVisibility;
 
   NAV_Coloring(clRed, NAV_Image);
 
   NAV_TurnOFF;
 
-  rgTarget.Visible := False;
-  rgOrigin.Visible := False;
+  PanelrgTarget.Visible := False;
+  PanelrgOrigin.Visible := False;
 
   Planet_Target := 1;
   Planet_Target_Index := 0;
@@ -651,8 +664,8 @@ begin
 
     View_Index := AViewIndex;
 
-    rgTarget.Visible := False;
-    rgOrigin.Visible := False;
+    PanelrgTarget.Visible := False;
+    PanelrgOrigin.Visible := False;
 
     ComboBox1.Visible := False;
     ComboBox2.Visible := False;
@@ -666,8 +679,8 @@ begin
 
     cbLabels.Visible:= not (View_Index = View_PlanetVisibility);
 
-    rgTarget.Visible := not (View_Index = View_PlanetVisibility);
-    rgOrigin.Visible := not (View_Index = View_PlanetVisibility);
+    PanelrgTarget.Visible := not (View_Index = View_PlanetVisibility);
+    PanelrgOrigin.Visible := not (View_Index = View_PlanetVisibility);
 
     case View_Index of
 
@@ -781,8 +794,8 @@ begin
 
       View_Sim1:
       begin
-        rgTarget.Visible := False;
-        rgOrigin.Visible := False;
+        PanelrgTarget.Visible := False;
+        PanelrgOrigin.Visible := False;
 
         ComboBox1.Visible := False;
         ComboBox2.Visible := False;
@@ -798,8 +811,8 @@ begin
 
       View_Sim2:
       begin
-        rgTarget.Visible := False;
-        rgOrigin.Visible := False;
+        PanelrgTarget.Visible := False;
+        PanelrgOrigin.Visible := False;
 
         ComboBox1.Visible := False;
         ComboBox2.Visible := False;
@@ -974,30 +987,40 @@ begin
   RefreshInfo;
 end;
 
-procedure Tf_planetinfo.FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+procedure Tf_planetinfo.PaintBoxMouseWheelDown(Sender: TObject; Shift: TShiftState;
   MousePos: TPoint; var Handled: Boolean);
 begin
   //SZ Zoom in/out with mouse wheel
-
+  if zoomlock then exit;
+  zoomlock:=true;
+  try
   if fov < 1e3 then
   begin
     fov := fov * 1.1;
     RefreshInfo;
   end;
-
+  Application.ProcessMessages;
+  finally
+    zoomlock:=false;
+  end;
 end;
 
-procedure Tf_planetinfo.FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+procedure Tf_planetinfo.PaintboxMouseWheelUp(Sender: TObject; Shift: TShiftState;
   MousePos: TPoint; var Handled: Boolean);
 begin
   //SZ Zoom in/out with mouse wheel
-
+  if zoomlock then exit;
+  zoomlock:=true;
+  try
   if fov > 1e-6 then
   begin
     fov := fov / 1.1;
     RefreshInfo;
   end;
-
+  Application.ProcessMessages;
+  finally
+    zoomlock:=false;
+  end;
 end;
 
 procedure Tf_planetinfo.Image1Click(Sender: TObject);
@@ -1389,8 +1412,8 @@ var
     i: integer;
 begin
 
-  rgTarget.Visible := not( View_Index in [View_PlanetVisibility, View_Sim1, View_Sim2]);
-  rgOrigin.Visible := rgTarget.Visible;
+  PanelrgTarget.Visible := not( View_Index in [View_PlanetVisibility, View_Sim1, View_Sim2]);
+  PanelrgOrigin.Visible := PanelrgTarget.Visible;
 
   rgTarget.Items.Clear;
 
@@ -1542,10 +1565,15 @@ try
   Initialized := false;
 
   // time
-  config.CurJDUT:=config.CurJDTT-config.DT_UT/24;
+  config.CurJDUT:=config.CurJDTT-config.DT_UT/24;  // UT from TT
   Djd(config.CurJDUT,y,m,d,h);
-  config.jd0:=jd(y,m,d,0);
-  config.CurST:=Sidtim(config.jd0,h-config.TimeZone,config.ObsLongitude,config.eqeq);
+  config.jd0:=jd(y,m,d,0);                         // JD at 0h UT
+  config.CurST:=Sidtim(config.jd0,h,config.ObsLongitude,config.eqeq); // Sidereal time
+  Djd(config.CurJDUT+config.TimeZone/24,y,m,d,h);  // Local time
+  config.CurYear:=y;
+  config.CurMonth:=m;
+  config.CurDay:=d;
+  config.CurTime:=h;
 
   //
   Rescale_Internal;
@@ -1620,6 +1648,7 @@ try
 
   CheckBox1.Checked := not CenterAtNoon;
   CheckBox1.Visible := View_Index=0;
+  Label1.Visible:=CheckBox1.Visible;
 
   NAV_On := false;
   PaintBox1.Repaint;
@@ -1812,7 +1841,6 @@ var
 begin
 
   JD := config.CurTime;
-  //JD := config.CurJDTT;
 
   c:=ColorToBGRA(clWhite);
   bmp.FontHeight:=round(24*TextZoom);
@@ -1830,9 +1858,6 @@ begin
      bmp.TextOut(bmp.Width-20,40,buf,c,taRightJustify);
    end;
 
-    buf := jddate2(config.CurJDTT);
-    bmp.TextOut(20,20,buf,c,taLeftJustify);
-
 end;
 
 Procedure Tf_planetinfo.PlotFrame(bmp:TBGRABitmap);
@@ -1844,7 +1869,6 @@ var
 begin
 
 JD := config.CurTime;
-//  JD := config.CurJDTT;
 
   c:=ColorToBGRA(clWhite);
   bmp.FontHeight:=round(12*TextZoom);
