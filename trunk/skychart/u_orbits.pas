@@ -362,6 +362,13 @@ begin
       if FileExistsUTF8(fn) then
          CopyFile( fn , slash(tmpdir) +'xplanet2.config' );
 
+      // On windows we need the font for the labels
+
+      fn :=slash(searchdir)+'FreeMonoBold.ttf';
+
+      if FileExistsUTF8(fn) then
+         CopyFile( fn , slash(tmpdir) +'FreeMonoBold.ttf' );
+
 
       pass :=
         FileExistsUTF8(slash(searchdir) + body_in) and
@@ -671,6 +678,7 @@ begin
  end;
 
  r.LoadFromStream(p.Output);
+ r.SaveToFile(outfile+'.log');
 
  irc:=p.ExitStatus;
  p.free;

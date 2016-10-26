@@ -1637,7 +1637,7 @@ begin
       pt.X:=0; pt.Y:=0;
       pt:=self.ClientToScreen(pt);
       f_planetinfo.BorderStyle:=bsNone;
-      f_planetinfo.PanelTop.Visible:=false;
+      f_planetinfo.PanelLeft.Visible:=false;
       f_planetinfo.ShowCurrentObject:=false;
       f_planetinfo.Show;
       f_planetinfo.Width:=Width;
