@@ -25,16 +25,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 {$mode delphi}{$H+}
 interface
 
-uses Math, SysUtils, Classes, u_constant, LazUTF8, LCLType, LazFileUtils,
+uses
   {$ifdef mswindows}
     Windows, Registry,
   {$endif}
   {$ifdef unix}
     unix,baseunix,unixutil,
   {$endif}
-    Controls, Process, MTPCPU,
-    MaskEdit,enhedits,Menus,Spin,CheckLst,Buttons, ExtCtrls, ActnList,
-    Forms,Graphics,StdCtrls,ComCtrls,Dialogs,Grids,PrintersDlgs,Printers;
+   Math, SysUtils, Classes, u_constant,
+   LazUTF8, LCLType, LazFileUtils, Controls, Process, MTPCPU,
+   MaskEdit,enhedits,Menus,Spin,CheckLst,Buttons, ExtCtrls, ActnList,
+   Forms,Graphics,StdCtrls,ComCtrls,Dialogs,Grids,PrintersDlgs,Printers;
 
 function rmod(x,y:Double):Double;
 Function NormRA(ra : double):double;
