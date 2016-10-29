@@ -291,8 +291,8 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
-        <CommandLineParams Value="--nosplash --verbose"/>
-        <WorkingDirectory Value="/usr/bin"/>
+        <CommandLineParams Value="--nosplash"/>
+        <WorkingDirectory Value="/usr/local/bin"/>
       </local>
     </RunParams>
     <RequiredPackages Count="24">
