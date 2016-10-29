@@ -678,7 +678,7 @@ begin
  end;
 
  r.LoadFromStream(p.Output);
- //r.SaveToFile(outfile+'.log');
+// r.SaveToFile(outfile+'.log');  // to debug xplanet call. also increase -verbosity above
 
  irc:=p.ExitStatus;
  p.free;

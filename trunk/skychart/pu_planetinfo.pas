@@ -1658,7 +1658,7 @@ try
   CheckBox1.Checked := not CenterAtNoon;
   CheckBox1.Visible := View_Index=0;
   Label1.Visible := CheckBox1.Visible;
-  cbRectangular.Visible := View_Index>0;
+  cbRectangular.Visible := (View_Index>0)and(View_Index<11);
 
   NAV_On := false;
   PaintBox1.Repaint;
@@ -1909,7 +1909,7 @@ var
    originLat, originLong: double;
    origin, target: string;
    UseOrigin, UseLatLong, UseTarget, UseOriginFile, BelowHorizon:Boolean;
-   ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel,az,alt: double;
+   ar,de,dist,illum,phase,diam,dkm,magn,dp,xp,yp,zp,vel,az,alt: double;
 begin
 
   W := xmax-xmin;
@@ -1921,8 +1921,16 @@ begin
   r:=TStringList.Create;
 
   // check if the planet is below the horizon to avoid to draw earth surface in front
-  if (AOrigin=C_Earth)and(ATarget<=36) then begin
-    Fplanet.Planet(CentralPlanet[ATarget],config.CurJDTT,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel);
+  if (AOrigin=C_Earth)and(ATarget<=C_Charon)and(ATarget<>C_Earth) then begin
+    if ATarget=C_Sun then begin
+      FPlanet.Sun(config.CurJDTT,ar,de,dist,diam);
+    end
+    else if ATarget=C_Moon then begin
+      FPlanet.Moon(config.CurJDTT,ar,de,dist,dkm,diam,phase,illum);
+    end
+    else begin
+      Fplanet.Planet(CentralPlanet[ATarget],config.CurJDTT,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel);
+    end;
     precession(jd2000,config.CurJDUT,ar,de);
     Eq2Hz(config.CurST-ar,de,az,alt,config);
     BelowHorizon:=(alt<0);
