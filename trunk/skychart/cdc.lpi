@@ -292,7 +292,7 @@
       <local>
         <FormatVersion Value="1"/>
         <CommandLineParams Value="--nosplash --verbose"/>
-        <WorkingDirectory Value="/usr/local/bin"/>
+        <WorkingDirectory Value="/usr/bin"/>
       </local>
     </RunParams>
     <RequiredPackages Count="24">
