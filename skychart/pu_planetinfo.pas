@@ -105,6 +105,7 @@ type
     procedure cbRectangularChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormKeyPress(Sender: TObject; var Key: char);
+    procedure Label1Click(Sender: TObject);
     procedure PaintBoxMouseWheelDown(Sender: TObject; Shift: TShiftState;
       MousePos: TPoint; var Handled: Boolean);
     procedure PaintboxMouseWheelUp(Sender: TObject; Shift: TShiftState;
@@ -216,10 +217,10 @@ type
   TFOV = array[C_Mercury..C_Callisto] of double;
 
 const
-  marginleft   =  90;
-  marginright  =  90;
-  margintop    = 100;
-  marginbottom =  40;
+  marginleft   =  80;
+  marginright  =  80;
+  margintop    = 80;
+  marginbottom =  20;
 
 
   CFOV_FromEarth: TFov =
@@ -989,6 +990,11 @@ begin
   RefreshInfo;
 end;
 
+procedure Tf_planetinfo.Label1Click(Sender: TObject);
+begin
+ CheckBox1.Checked:=not CheckBox1.Checked;
+end;
+
 procedure Tf_planetinfo.PaintBoxMouseWheelDown(Sender: TObject; Shift: TShiftState;
   MousePos: TPoint; var Handled: Boolean);
 begin
@@ -1523,7 +1529,8 @@ begin
   ymax := plbmp.Height - MB ;
 
   //SZ if shown Earth projection, adapt resolution
-  if View_Index = View_Earth then
+  //PCH why? this is the reason  of text overflow with earth
+{  if View_Index = View_Earth then
   begin
 
     tmp := (ymax-ymin) * 2;
@@ -1531,7 +1538,7 @@ begin
     xmin := ((plbmp.Width - tmp) div 2);
     xmax := xmin + tmp;
 
-  end;
+  end; }
 
 end;
 
@@ -1650,7 +1657,8 @@ try
 
   CheckBox1.Checked := not CenterAtNoon;
   CheckBox1.Visible := View_Index=0;
-  Label1.Visible:=CheckBox1.Visible;
+  Label1.Visible := CheckBox1.Visible;
+  cbRectangular.Visible := View_Index>0;
 
   NAV_On := false;
   PaintBox1.Repaint;
