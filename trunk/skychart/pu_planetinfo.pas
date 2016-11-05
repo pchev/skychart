@@ -167,6 +167,7 @@ type
     procedure NAV_TurnON;
     procedure NAV_TurnOFF;
 
+    procedure rgTargetAsync(Data: PtrInt);
 
   public
     { public declarations }
@@ -1179,8 +1180,14 @@ end;
 
 procedure Tf_planetinfo.rgTargetClick(Sender: TObject);
 begin
+  // use async call to not alter radio button in their own event
   if EnableEvents then
-    SetView(View_Index, rgTarget.ItemIndex);
+    Application.QueueAsyncCall(@rgTargetAsync,0);
+end;
+
+procedure Tf_planetinfo.rgTargetAsync(Data: PtrInt);
+begin
+  SetView(View_Index, rgTarget.ItemIndex);
 end;
 
 procedure Tf_planetinfo.Timer1Timer(Sender: TObject);
