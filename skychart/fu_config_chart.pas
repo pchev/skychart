@@ -599,7 +599,7 @@ procedure Tf_config_chart.ShowProjection;
      cb.items.add('HAI '+rsHammerAitoff);
      cb.items.add('MER '+rsMercator);
      cb.items.add('CAR '+rsCartesian);
-     if cshr.fieldnum[n]<=250 then cb.items.add('ARC '+rsZenitalEquid);
+     if cshr.fieldnum[n]<=310 then cb.items.add('ARC '+rsZenitalEquid);
      if cshr.fieldnum[n]<=180 then cb.items.add('TAN '+rsGnomonic);
      if cshr.fieldnum[n]<=90 then cb.items.add('SIN '+rsSlantOrthogr);
      i:=(pos(csc.projname[n],pn)-1) div 4;
