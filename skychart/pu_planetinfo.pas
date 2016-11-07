@@ -1,14 +1,23 @@
 unit pu_planetinfo;
 {
-2016-02-18 Toolbar icons (new)
-2016-02-18 Rest of outer planets added
-2016-02-19 Planet labels added
-2016-02-19 Live simulation ability added
-2016-02-22 Zoom in/out ability added
-2016-02-22 Earth projectory view added
-2016-02-27 Fixed list of times for navigation added
-2016-02-27 Chart Sync added
-2016-10-23 New navigation buttons
+Copyright (C) 2016 Patrick Chevalley
+
+http://www.ap-i.net
+pch@ap-i.net
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 }
 
 {$mode objfpc}{$H+}
@@ -187,7 +196,7 @@ type
     CenterAtNoon, ShowCurrentObject: boolean;
     ActivePage: integer;
 
-    //SZ Pointer to linked chart to sync data
+    //Pointer to linked chart to sync data
     LinkedChartData: Tconf_skychart;
 
     ChartSync: Boolean;
@@ -203,7 +212,7 @@ type
     Procedure PlotHeader(bmp:TBGRABitmap; title:string; showobs,showtime: boolean);
     property planet: Tplanet read Fplanet write Fplanet;
 
-    //SZ Inc/Dec and get string for navigation speed
+    // Inc/Dec and get string for navigation speed
     procedure SetTimeSpeed(ATimeIndex: integer);
     procedure IncTimeSpeed;
     procedure DecTimeSpeed;
@@ -291,7 +300,7 @@ const
    C_OneMonth = 31;
    C_OneYear  = 365.256;
 
-   //SZ Revolution of planets
+   // Revolution of planets
    CRevolution: array [C_Mercury..C_Callisto] of double =
     (
     87.969,              // Mercury
@@ -438,7 +447,7 @@ begin
       begin
         result := result + IntToStr(round(c)) + ' ';
 
-        //SZ there is no plural for months
+        // there is no plural for months
         result := result + LowerCase(rsMonth);
 
         exit;
@@ -634,7 +643,7 @@ begin
   ActiveNoon:=false;
   TextZoom:=1;
 
-  //SZ 3h dxJP by default
+  //3h dxJP by default
   SetTimeSpeed(6);
   txtJDdx.Caption := GetTimeSpeed_Str;
 
@@ -963,9 +972,7 @@ end;
 
 procedure Tf_planetinfo.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
-  //SZ Wait until finish processing, otherwise AV will happens
-
-//Timer1.Enabled := false;
+  // Wait until finish processing, otherwise AV will happens
 
 cbChartSync.Checked := false;
 cbChartSyncChange(self);
@@ -980,7 +987,7 @@ end;
 
 procedure Tf_planetinfo.FormKeyPress(Sender: TObject; var Key: char);
 begin
-  //SZ Zoom in/out with keyboard
+  // Zoom in/out with keyboard
 
   if key='+' then
     fov := fov / 2;
@@ -999,7 +1006,7 @@ end;
 procedure Tf_planetinfo.PaintBoxMouseWheelDown(Sender: TObject; Shift: TShiftState;
   MousePos: TPoint; var Handled: Boolean);
 begin
-  //SZ Zoom in/out with mouse wheel
+  // Zoom in/out with mouse wheel
   if zoomlock then exit;
   zoomlock:=true;
   try
@@ -1017,7 +1024,7 @@ end;
 procedure Tf_planetinfo.PaintboxMouseWheelUp(Sender: TObject; Shift: TShiftState;
   MousePos: TPoint; var Handled: Boolean);
 begin
-  //SZ Zoom in/out with mouse wheel
+  // Zoom in/out with mouse wheel
   if zoomlock then exit;
   zoomlock:=true;
   try
@@ -1223,7 +1230,7 @@ begin
 
   end;
 
-  //SZ This must be performed in order to avoid freezing
+  // This must be performed in order to avoid freezing
   Application.ProcessMessages;
 
 end;
@@ -1600,7 +1607,7 @@ try
   ActiveSizeX := Panel1.Width;
   ActiveSizeY := Panel1.Height;
 
-  //SZ Set desired interval for timer to 20 ms
+  // Set desired interval for timer to 20 ms
   if Timer1.Interval <> 20 then Timer1.Interval := 20;
 
   case View_Index of
@@ -1948,7 +1955,7 @@ begin
   if ATarget=C_Jupiter then gw:=Fplanet.JupGRS(config.GRSlongitude,config.GRSdrift,config.GRSjd,config.CurJDTT)
             else gw:=0;
 
-  //SZ For dosplay Earth in different projection
+  // For display Earth in different projection
 
   if cbRectangular.Checked then
     rectangular := 'rectangular'
@@ -1960,7 +1967,7 @@ begin
   else
     searchdir:=ScaledPlanetMapDir (ATarget,  H);
 
-  //SZ determinate target and origin
+  // determinate target and origin
   target := GetPlanetName(ATarget);
   origin := GetPlanetParentName(AOrigin);
 
@@ -1970,7 +1977,7 @@ begin
   targetLat  :=  config.ObsLatitude;
   targetLong := -config.ObsLongitude;
 
-  //SZ Autoset
+  // Autoset
   if cbRectangular.Checked then
   begin
     UseOriginFile := false;
