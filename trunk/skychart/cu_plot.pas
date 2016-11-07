@@ -29,8 +29,8 @@ interface
 uses LazUTF8, LazFileUtils, BGRABitmap, BGRABitmapTypes, FPReadBMP,
   u_constant, u_util, u_bitmap, PostscriptCanvas, process,
   SysUtils, Types, StrUtils, FPImage, LCLType, LCLIntf, IntfGraphics, FPCanvas,
-  Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics, u_translation;
-
+  Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics, u_translation,
+  u_orbits; //, u_CacheBMP;
 
 type
 
@@ -58,11 +58,9 @@ type
      FDeleteLabel: Tintfunc;
      FDeleteAllLabel: Tvoidfunc;
      FLabelClick: Tintfunc;
+
      PlanetBMP : Tbitmap;
-     XplanetImg: TPicture;
-     PlanetBMPjd,PlanetBMProt,PlanetBMPgrs : double;
-     PlanetBMPpla : integer;
-     OldGRSlong: double;
+
      TransparentColor : TFPColor;
      bmpreader:TFPReaderBMP;
      obmp : TBitmap;
@@ -182,76 +180,82 @@ constructor TSplot.Create(AOwner:TComponent);
 var i,j : integer;
     MenuItem: TMenuItem;
 begin
- inherited Create(AOwner);
-for i:=0 to 6 do
+
+  inherited Create(AOwner);
+
+  for i:=0 to 6 do
   for j:=0 to 10 do begin
     Astarbmp[i,j]:=Tbitmap.create;
     Bstarbmp[i,j]:=TBGRABitmap.create;
   end;
- starbmp:=Tbitmap.Create;
- cbmp:=TBGRABitmap.Create;
- obmp:= TBitmap.Create;
- bmpreader:=TFPReaderBMP.Create;
- cnv:=obmp.canvas;
- cfgplot:=Tconf_plot.Create;
- cfgchart:=Tconf_chart.Create;
- // set safe value
- starbmpw:=1;
- editlabel:=-1;
- cbmp.SetSize(emptysize,emptysize);
- cfgchart.width:=emptysize;
- cfgchart.height:=emptysize;
- cfgchart.min_ma:=6;
- cfgchart.onprinter:=false;
- cfgchart.drawpen:=1;
- cfgchart.drawsize:=1;
- cfgchart.fontscale:=1;
- TransparentColor.red:= 0;
- TransparentColor.green:=0;
- TransparentColor.blue:= 0;
- TransparentColor.alpha:=65535;
- InitXPlanetRender;
- if Xplanetrender then begin
+
+  starbmp:=Tbitmap.Create;
+  cbmp:=TBGRABitmap.Create;
+  obmp:= TBitmap.Create;
+  bmpreader:=TFPReaderBMP.Create;
+  cnv:=obmp.canvas;
+  cfgplot:=Tconf_plot.Create;
+  cfgchart:=Tconf_chart.Create;
+
+  // set safe value
+  starbmpw:=1;
+  editlabel:=-1;
+  cbmp.SetSize(emptysize,emptysize);
+  cfgchart.width:=emptysize;
+  cfgchart.height:=emptysize;
+  cfgchart.min_ma:=6;
+  cfgchart.onprinter:=false;
+  cfgchart.drawpen:=1;
+  cfgchart.drawsize:=1;
+  cfgchart.fontscale:=1;
+  TransparentColor.red:= 0;
+  TransparentColor.green:=0;
+  TransparentColor.blue:= 0;
+  TransparentColor.alpha:=65535;
+  InitXPlanetRender;
+
+  if Xplanetrender then
+  begin
     planetbmp:=Tbitmap.create;
-    planetbmp.Width:=512;
-    planetbmp.Height:=512;
-    xplanetimg:=TPicture.create;
- end;
- editlabelmenu:=Tpopupmenu.Create(self);
- editlabelmenu.AutoPopup:=true;
- editlabelmenu.OnPopup:=editlabelmenuPopup;
- MenuItem := TMenuItem.Create(editlabelmenu);
- editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := '';
- MenuItem.Enabled:=false;
- MenuItem := TMenuItem.Create(editlabelmenu);
- editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := '-';
- MenuItem := TMenuItem.Create(editlabelmenu);
- editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := rsMoveLabel;
- MenuItem.OnClick := MovelabelRaDec;
- MenuItem := TMenuItem.Create(editlabelmenu);
- editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := rsOffsetLabel;
- MenuItem.OnClick := Movelabel;
- MenuItem := TMenuItem.Create(editlabelmenu);
- editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := rsEditLabel;
- MenuItem.OnClick := EditLabelTxt;
- MenuItem := TMenuItem.Create(editlabelmenu);
- editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := rsDefaultLabel;
- MenuItem.OnClick := DefaultLabel;
- MenuItem := TMenuItem.Create(editlabelmenu);
- editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := rsHideLabel;
- MenuItem.OnClick := DeleteLabel;
- MenuItem := TMenuItem.Create(editlabelmenu);
- editlabelmenu.Items.Add(MenuItem);
- MenuItem.Caption := rsResetAllLabe;
- MenuItem.OnClick := DeleteAllLabel;
- for i:=1 to maxlabels do begin
+  end;
+
+  editlabelmenu:=Tpopupmenu.Create(self);
+  editlabelmenu.AutoPopup:=true;
+  editlabelmenu.OnPopup:=editlabelmenuPopup;
+  MenuItem := TMenuItem.Create(editlabelmenu);
+  editlabelmenu.Items.Add(MenuItem);
+  MenuItem.Caption := '';
+  MenuItem.Enabled:=false;
+  MenuItem := TMenuItem.Create(editlabelmenu);
+  editlabelmenu.Items.Add(MenuItem);
+  MenuItem.Caption := '-';
+  MenuItem := TMenuItem.Create(editlabelmenu);
+  editlabelmenu.Items.Add(MenuItem);
+  MenuItem.Caption := rsMoveLabel;
+  MenuItem.OnClick := MovelabelRaDec;
+  MenuItem := TMenuItem.Create(editlabelmenu);
+  editlabelmenu.Items.Add(MenuItem);
+  MenuItem.Caption := rsOffsetLabel;
+  MenuItem.OnClick := Movelabel;
+  MenuItem := TMenuItem.Create(editlabelmenu);
+  editlabelmenu.Items.Add(MenuItem);
+  MenuItem.Caption := rsEditLabel;
+  MenuItem.OnClick := EditLabelTxt;
+  MenuItem := TMenuItem.Create(editlabelmenu);
+  editlabelmenu.Items.Add(MenuItem);
+  MenuItem.Caption := rsDefaultLabel;
+  MenuItem.OnClick := DefaultLabel;
+  MenuItem := TMenuItem.Create(editlabelmenu);
+  editlabelmenu.Items.Add(MenuItem);
+  MenuItem.Caption := rsHideLabel;
+  MenuItem.OnClick := DeleteLabel;
+  MenuItem := TMenuItem.Create(editlabelmenu);
+  editlabelmenu.Items.Add(MenuItem);
+  MenuItem.Caption := rsResetAllLabe;
+  MenuItem.OnClick := DeleteAllLabel;
+
+  for i:=1 to maxlabels do
+  begin
     ilabels[i]:=TImage.Create(nil);
     ilabels[i].parent:=TWinControl(AOwner);
     ilabels[i].tag:=i;
@@ -262,52 +266,69 @@ for i:=0 to 6 do
     ilabels[i].OnMouseUp:=labelmouseup;
     ilabels[i].OnMouseMove:=labelmousemove;
     ilabels[i].OnMouseLeave:=labelmouseleave;
- end;
+  end;
+
 end;
 
 destructor TSplot.Destroy;
-var i,j:integer;
+var
+  i,j:integer;
+
 begin
-try
- for i:=1 to maxlabels do ilabels[i].Free;
- for i:=0 to 6 do
-  for j:=0 to 10 do begin
-     Astarbmp[i,j].free;
-     Bstarbmp[i,j].free;
-  end;
- starbmp.Free;
- cbmp.Free;
- obmp.free;
- bmpreader.Free;
- cfgplot.Free;
- cfgchart.Free;
- if Xplanetrender then begin
+
+  try
+
+    for i:=1 to maxlabels do ilabels[i].Free;
+
+    for i:=0 to 6 do
+      for j:=0 to 10 do
+      begin
+       Astarbmp[i,j].free;
+       Bstarbmp[i,j].free;
+     end;
+
+    starbmp.Free;
+    cbmp.Free;
+    obmp.free;
+    bmpreader.Free;
+    cfgplot.Free;
+    cfgchart.Free;
+
+  if Xplanetrender then
+  begin
     planetbmp.Free;
-    xplanetimg.Free;
- end;
- inherited destroy;
-except
-writetrace('error destroy '+name);
-end;
+  end;
+
+  inherited destroy;
+
+  except
+    writetrace('error destroy '+name);
+  end;
+
 end;
 
 procedure TSplot.SetImage(value:TCanvas);
 begin
- destcnv:=value;
+  destcnv := value;
 end;
 
 procedure TSplot.ClearImage;
 begin
-if cfgplot.UseBMP then begin
-   cbmp.Fill(cfgplot.Color[0]);
-end else  if cnv<>nil then with cnv do begin
- Brush.Color:=cfgplot.Color[0];
- Pen.Color:=cfgplot.Color[0];
- Brush.style:=bsSolid;
- Pen.Mode:=pmCopy;
- Pen.Style:=psSolid;
- Rectangle(0,0,cfgchart.Width,cfgchart.Height);
-end;
+
+  if cfgplot.UseBMP then
+    cbmp.Fill(cfgplot.Color[0])
+  else
+  if cnv<>nil then
+  with cnv do
+  begin
+    Brush.Color:=cfgplot.Color[0];
+    Pen.Color:=cfgplot.Color[0];
+    Brush.style:=bsSolid;
+    Pen.Mode:=pmCopy;
+    Pen.Style:=psSolid;
+    Rectangle(0,0,cfgchart.Width,cfgchart.Height);
+  end;
+
 end;
 
 function TSplot.Init(w,h : integer) : boolean;
@@ -425,7 +446,6 @@ end;
 
 procedure TSplot.InitXPlanetRender;
 begin
- OldGRSlong:=-9999;
  Xplanetversion:=GetXPlanetVersion;
  Xplanetrender:=(Xplanetversion<>'0.0.0');
 end;
@@ -1280,21 +1300,26 @@ var ds,ico : integer;
     ci,si: extended;
     plotphase,fillphase: boolean;
 begin
-ds:=round(max(diam*pixscale/2,2*cfgchart.drawpen));
-case Ipla of
- 1: begin ico := 4; end;
- 2: begin ico := 2; end;
- 3: begin ico := 2; end;
- 4: begin ico := 6; end;
- 5: begin ico := 4; end;
- 6: begin ico := 4; end;
- 7: begin ico := 1; end;
- 8: begin ico := 1; end;
- 9: begin ico := 2; end;
- 10:begin ico := 4; end;
- 11:begin ico := 2; end;
- else begin ico:=2; end;
-end;
+
+  ds:=round(max(diam*pixscale/2,2*cfgchart.drawpen));
+
+  case Ipla of
+
+     1: ico := 4;
+     2: ico := 2;
+     3: ico := 2;
+     4: ico := 6;
+     5: ico := 4;
+     6: ico := 4;
+     7: ico := 1;
+     8: ico := 1;
+     9: ico := 2;
+    10: ico := 4;
+    11: ico := 2;
+  else
+    ico:=2;
+  end;
+
 plotphase:=false;
 fillphase:=false;
 if (ipla=11)and(phase>-900) then begin
@@ -1547,143 +1572,259 @@ begin
 end;
 
 procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,pa,gw:double;WhiteBg:boolean);
-var ds,j,mode,irc : integer;
-    buf, searchdir, bsize: string;
-    ok: boolean;
-    r:TStringList;
+var
+  ds,j,mode,irc : integer;
+  buf, searchdir, bsize: string;
+  ok: boolean;
+  r:TStringList;
+  XplanetImg: TPicture;
+  OutputFile, origin, target: string;
+
 begin
-ok:=true;
-if ipla=6 then ds:=round(max(2.2261*diam*pixscale,4*cfgchart.drawpen))
-          else ds:=round(max(diam*pixscale,4*cfgchart.drawpen));
-if ipla=11 then bsize:='1024x1024'
-           else bsize:='512x512';
-if (planetBMPpla<>ipla)or(abs(PlanetBMPjd-jdt)>0.000693)or(abs(PlanetBMProt-pa)>0.2)or(PlanetBMPgrs<>gw) then begin
-   searchdir:=slash(appdir)+slash('data')+'planet';
-   r:=TStringList.Create;
-   GetXplanet(Xplanetversion,slash(Tempdir)+'origin.txt',searchdir,bsize,slash(Tempdir)+'planet.png',ipla,pa,gw,jdt,irc,r );
-   if (irc=0)and(FileExists(slash(Tempdir)+'planet.png')) then begin
-      xplanetimg.LoadFromFile(SysToUTF8(slash(Tempdir)+'planet.png'));
-      chdir(appdir);
-      if flatten=1 then begin
-        planetbmp.Assign(xplanetimg.Bitmap);
-      end else begin
-        planetbmp.Height:=round(flatten*planetbmp.Width);
-        PlanetBMP.Canvas.StretchDraw(rect(0,0,planetbmp.Width,planetbmp.Height),XplanetImg.Bitmap);
+
+  ok := true;
+
+  if ipla = C_Saturn then
+    ds:=round(max(2.2261*diam*pixscale,4*cfgchart.drawpen))
+  else
+    ds:=round(max(diam*pixscale,4*cfgchart.drawpen));
+
+   {
+  if (planetBMPpla<>ipla) or
+     (abs(PlanetBMPjd-jdt)>0.000693) or
+     (abs(PlanetBMProt-pa)>0.2) or
+     (PlanetBMPgrs<>gw)
+  then
+  }
+  begin
+
+    searchdir:=ScaledPlanetMapDir (ipla,  ds);
+
+    r := TStringList.Create;
+
+    OutputFile := slash(Tempdir)+'planet.png';
+
+    bsize := Format('%dx%d',[ds, ds]);
+
+    origin := GetPlanetName(C_Earth);
+    target := GetPlanetName(ipla);
+
+    GetXplanet_Plain(
+      Xplanetversion,
+      searchdir,
+      bsize,
+      OutputFile,
+      pa,gw,jdt,irc,r, '', 0, //Afov,
+      true, false,    // UseOriginFile, UseLatLong,
+      true, origin,    // UseOrigin, origin,
+      true, target,    // UseTarget, target,
+      0,0,             // originLat, originLong,
+      0,0,             // targetLat, targetLong,
+      '',
+      '50',
+      'xplanet.config',
+      false,
+      slash(Tempdir)+'origin.txt'  // our origin file for parallax
+    );
+
+
+
+    if (irc=0) and (FileExists(slash(Tempdir)+'planet.png')) then
+    begin
+
+      XplanetImg:= TPicture.Create;
+
+      try
+
+        xplanetimg.LoadFromFile(SysToUTF8(slash(Tempdir)+'planet.png'));
+        chdir(appdir);
+
+        if flatten=1 then
+          planetbmp.Assign(xplanetimg.Bitmap)
+        else
+        begin
+          planetbmp.Height:=round(flatten*planetbmp.Width);
+          PlanetBMP.Canvas.StretchDraw(rect(0,0,planetbmp.Width,planetbmp.Height),XplanetImg.Bitmap);
+        end;
+
+      finally
+        XplanetImg.Free;
       end;
-      PlanetBMPpla:=ipla;
-      PlanetBMPjd:=jdt;
-      PlanetBMProt:=pa;
-      PlanetBMPgrs:=gw;
-   end
-   else begin // something go wrong with xplanet
-      buf:='';
-      if r.Count>0 then for j:=0 to r.Count-1 do begin
-        buf:=buf+r[j]+crlf;
-      end;
+
+    end
+    else
+    begin // something go wrong with xplanet
+
+     buf := '';
+
+     if r.Count > 0 then
+
+       for j := 0 to r.Count-1 do
+         buf := buf + r[j] + crlf;
+
       writetrace('Return code '+inttostr(irc)+' from xplanet');
       writetrace(buf);
       PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
+
       ok:=false;
-      planetbmpjd:=0;
-   end;
-   r.free;
-end;
-if cfgplot.TransparentPlanet then mode:=0
-   else mode:=2;
-if ok then PlotImage(xx,yy,ds,ds*flatten,0,flipx,flipy,WhiteBg,true,planetbmp,mode);
+
+    end;
+
+    r.free;
+
+  end;
+
+  if cfgplot.TransparentPlanet then
+    mode:=0
+  else
+    mode:=2;
+
+  if ok then
+     PlotImage(xx,yy,ds,ds*flatten,0,flipx,flipy,WhiteBg,true,planetbmp,mode);
+
 end;
 
 procedure TSplot.PlotPlanet5(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,rot:double;WhiteBg:boolean; size,margin:integer);
 var ds,mode,dx,dy : integer;
     jpg:TJPEGImage;
-    rbmp:TBitmap;
+    rbmp,sbmp:TBitmap;
     fn:string;
 begin
- if size=0 then exit;
- fn:=slash(Tempdir)+'sun.jpg';
- if not FileExists(fn) then begin  // use default image
-   fn:=slash(appdir)+slash('data')+slash('planet')+'sun-0.jpg';
-   size:=1024; margin:=107;
- end;
- if not FileExists(fn) then begin
-   PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
-   exit;
- end;
+
+  if size=0 then exit;
+
+  fn:=slash(Tempdir)+'sun.jpg';
+
+  if not FileExists(fn) then
+  begin  // use default image
+    fn:=slash(appdir)+slash('data')+slash('planet')+'sun-0.jpg';
+    size:=1024; margin:=107;
+  end;
+
+  if not FileExists(fn) then
+  begin
+    PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
+    exit;
+  end;
+
  ds:=round(max(diam*pixscale,4*cfgchart.drawpen)*size/(size-2*margin));
+
  try
+
    jpg:=TJPEGImage.Create;
+   sbmp:=TBitmap.Create;
+
    try
      jpg.LoadFromFile(SysToUTF8(fn));
      chdir(appdir);
-     if flatten=1 then begin
-       planetbmp.Assign(jpg);
-     end else begin
-       planetbmp.Assign(jpg);
+
+     if flatten=1 then
+       sbmp.Assign(jpg)
+     else
+     begin
+
+       sbmp.Assign(jpg);
+
        rbmp:=TBitmap.Create;
-       BitmapRotation(planetbmp,rbmp,rot,WhiteBg);
-       dx:=(rbmp.Width-planetbmp.Width)div 2;
-       dy:=(rbmp.Height-planetbmp.Height)div 2;
-       rot:=0;
-       planetbmp.Width:=size;
-       planetbmp.Height:=round(flatten*planetbmp.Width);
-       PlanetBMP.Canvas.StretchDraw(rect(-dx,-dy,planetbmp.Width+dx,planetbmp.Height+dy),rbmp);
-       rbmp.free;
+
+       try
+
+         BitmapRotation(sbmp,rbmp,rot,WhiteBg);
+         dx:=(rbmp.Width-sbmp.Width)div 2;
+         dy:=(rbmp.Height-sbmp.Height)div 2;
+         rot:=0;
+
+         sbmp.Width:=size;
+         sbmp.Height:=round(flatten*sbmp.Width);
+         sbmp.Canvas.StretchDraw(rect(-dx,-dy,sbmp.Width+dx,sbmp.Height+dy),rbmp);
+
+       finally
+         rbmp.free;
+       end;
+
      end;
+
+   if cfgplot.TransparentPlanet then
+     mode:=0
+   else
+     mode:=2;
+
+   PlotImage(xx,yy,ds,ds*flatten,rot,flipx,flipy,WhiteBg,true,sbmp,mode);
+
    finally
      jpg.free;
+     sbmp.free;
    end;
- except
-   PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
-   deletefile(fn);
-   exit;
- end;
- planetbmppla:=ipla;
- planetbmpjd:=jdt;
- planetbmprot:=0;
- if cfgplot.TransparentPlanet then mode:=0
-    else mode:=2;
- PlotImage(xx,yy,ds,ds*flatten,rot,flipx,flipy,WhiteBg,true,planetbmp,mode);
+
+  except
+    PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
+    deletefile(fn);
+    exit;
+  end;
+
 end;
 
 procedure TSplot.PlotPlanet4(xx,yy,ipla:integer; pixscale,phase:double;WhiteBg:boolean);
-var symbol,ph: string;
-    ds,mode: integer;
-    spng: TPortableNetworkGraphic;
-    sbmp: TBitmap;
+var
+  symbol,ph: string;
+  ds,mode: integer;
+  spng: TPortableNetworkGraphic;
+  sbmp: TBitmap;
+  path: string;
 begin
- if ipla=11 then begin
-   ph:='';
-   if (phase>165)and(phase<195) then ph:='_n'
-   else if (phase>50)and(phase<=165) then ph:='_fq'
-   else if (phase<=50)or(phase>310) then ph:='_f'
-   else ph:='_lq';
-   symbol:=slash(appdir)+slash('data')+slash('planet')+'symbol'+inttostr(ipla)+ph+'.png';
-   if not fileexists(symbol) then symbol:=slash(appdir)+slash('data')+slash('planet')+'symbol'+inttostr(ipla)+'.png';
- end else begin
-   symbol:=slash(appdir)+slash('data')+slash('planet')+'symbol'+inttostr(ipla)+'.png';
- end;
- if fileexists(symbol) then begin
-   spng:=TPortableNetworkGraphic.Create;
-   sbmp:=TBitmap.Create;
-   try
-   spng.LoadFromFile(symbol);
-   sbmp.Assign(spng);
-   if WhiteBg then BitmapNegative(sbmp);
-   BitmapResize(sbmp,PlanetBMP,cfgchart.drawsize);
-   finally
-   spng.Free;
-   sbmp.Free;
-   end;
-   planetbmppla:=ipla;
-   planetbmpjd:=MaxInt;
-   planetbmprot:=999;
+
+  if ipla=11 then
+  begin
+
+    ph:='';
+
+    if (phase>165)and(phase<195) then ph:='_n'
+    else if (phase>50)and(phase<=165) then ph:='_fq'
+    else if (phase<=50)or(phase>310) then ph:='_f'
+    else ph:='_lq';
+
+    path := slash(appdir)+slash('data')+slash('planet')+'symbol'+inttostr(ipla);
+
+    symbol := path + ph +'.png';
+
+    if not fileexists(symbol) then
+      symbol := path + '.png';
+
+    end
+  else
+    symbol := path +'.png';
+
+  if fileexists(symbol) then
+  begin
+    spng:=TPortableNetworkGraphic.Create;
+    sbmp:=TBitmap.Create;
+
+    try
+
+      spng.LoadFromFile(symbol);
+      sbmp.Assign(spng);
+
+      if WhiteBg then BitmapNegative(sbmp);
+
+      BitmapResize(sbmp,PlanetBMP,cfgchart.drawsize);
+
+    finally
+      spng.Free;
+      sbmp.Free;
+    end;
+
    ds:=planetbmp.Width;
-   if cfgplot.TransparentPlanet then mode:=0
-       else
-        if ds=20 then mode:=2
-           else mode:=4;
+
+   if cfgplot.TransparentPlanet then
+      mode:=0
+   else
+     if ds=20 then mode:=2
+              else mode:=4;
+
    PlotImage(xx,yy,ds,ds,0,1,1,WhiteBg,true,planetbmp,mode);
- end;
+
+  end;
+
 end;
 
 procedure TSplot.PlotEarthShadow(x,y: single; r1,r2,pixscale: double);

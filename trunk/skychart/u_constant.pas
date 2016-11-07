@@ -50,7 +50,10 @@ const
   cdcver = '3.11m';
   cdccpy = 'Copyright (C) 2002-2016 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf +
-    'Peter Dean,' + crlf + 'John Sunderland' + crlf  + 'Anat Ruangrassamee';
+    'Peter Dean,' + crlf +
+    'John Sunderland' + crlf  +
+    'Anat Ruangrassamee'+ crlf  +
+    'Sasa Zeman';
   MaxPlSim = 500;
   MaxAstSim = 100;
   MaxComet = 500;
@@ -283,7 +286,7 @@ const
   pla: array[1..MaxPla] of string =
     ('Mercury ', 'Venus   ', '*       ', 'Mars    ', 'Jupiter ',
     'Saturn  ', 'Uranus  ', 'Neptune ', 'Pluto   ', 'Sun     ', 'Moon    ',
-    'Io      ', 'Europa  ', 'Ganymede', 'Callisto', 'Mimas   ', 'Encelade',
+    'Io      ', 'Europa  ', 'Ganymede', 'Callisto', 'Mimas   ', 'Enceladus',
     'Tethys  ', 'Dione   ',
     'Rhea    ', 'Titan   ', 'Hyperion', 'Iapetus ', 'Miranda ', 'Ariel   ',
     'Umbriel ', 'Titania ',
@@ -299,7 +302,7 @@ const
   epla: array[1..MaxPla] of string =
     ('Mercury ', 'Venus   ', '*       ', 'Mars    ', 'Jupiter ',
     'Saturn  ', 'Uranus  ', 'Neptune ', 'Pluto   ', 'Sun     ', 'Moon    ',
-    'Io      ', 'Europa  ', 'Ganymede', 'Callisto', 'Mimas   ', 'Encelade',
+    'Io      ', 'Europa  ', 'Ganymede', 'Callisto', 'Mimas   ', 'Enceladus',
     'Tethys  ', 'Dione   ',
     'Rhea    ', 'Titan   ', 'Hyperion', 'Iapetus ', 'Miranda ', 'Ariel   ',
     'Umbriel ', 'Titania ',

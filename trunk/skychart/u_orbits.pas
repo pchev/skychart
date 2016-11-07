@@ -1,4 +1,25 @@
 unit u_orbits;
+{
+Copyright (C) 2016 Patrick Chevalley
+
+http://www.ap-i.net
+pch@ap-i.net
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+}
+
 
 {$mode objfpc}{$H+}
 
@@ -13,7 +34,7 @@ uses
   u_constant, u_translation, cu_planet;
 
 const
-  //SZ Around Solar eclipse in August 1999, seen GRS on Jupiter
+  // Around Solar eclipse in August 1999, seen GRS on Jupiter
   JDBase1999 = 2451402.086111;
 
 const
@@ -89,6 +110,7 @@ const
    C_Juliet     = 56;
    C_Portia     = 57;
    C_Rosalind   = 58;
+   C_Mab        = 62;
    C_Cupid      = 63;
 
    // Meptune
@@ -104,13 +126,9 @@ const
    // Pluto
    C_Charon   = 36;
 
-   //SZ Patrick, on what should refer this one?
-   C_Mab        = 62;
 
-   //SZ Planets and main sattelites
+   // Planets and main sattelites
 
-//type
-//  TArrInt= array of integer;
 
 const
   Earth_Sat   : array [1..1] of integer =
@@ -139,7 +157,7 @@ const
                  {,    C_Puck,    C_Cordelia, C_Ophelia,
                  C_Belinda,   C_Perdita, C_Bianca,   C_Cressida,
                  C_Desdemona, C_Juliet,  C_Portia,   C_Rosalind,
-                 C_Cupid];}
+                 C_Mab, C_Cupid];}
 
 
  Neptune_Sat : array [1..1] of integer =
@@ -156,10 +174,10 @@ const
   per  : array[1..9] of integer = (88,225,365,687,4332,10760,30590,59799,90553);
   col  : array[1..9] of TColor  = (clGray,clWhite,clAqua,clRed,clOlive,clWhite,clAqua,clBlue,clGray);
 
-  //SZ real planets diameter ratio
+  // real planets diameter ratio
   diam_real : array[1..9] of double  = (0.38, 0.95, 1.00, 0.53, 11.19, 9.40, 4.04, 3.88, 0.18);
 
-  //SZ fake diameter ratio for display
+  // fake diameter ratio for display
   //diam_fake : array[1..9] of double  = (0.38, 0.95, 1.00, 0.70, 1.3, 1.5, 1.2, 1.2, 0.18);
 
   diam_fake : array[1..9] of double  = (0.80, 0.95, 1.00, 0.80, 1.20, 2.00, 1.00, 0.90, 0.80);
@@ -246,7 +264,8 @@ procedure GetXplanet_Plain(Xplanetversion, searchdir,bsize,outfile : string;
   ANorth: string;
   ARadius: string;
   AConfig: string;
-  AUseLabels: Boolean
+  AUseLabels: Boolean;
+  originfile: string = ''
 );
 
  function GetXplanet_Image(
@@ -277,7 +296,7 @@ implementation
 uses
   math,u_util, process;
 
-//SZ Scale planet body map and saving in dedicated tmp dir, then call xplanet from it
+// Scale planet body map and saving in dedicated tmp dir, then call xplanet from it
 // TODO
 
 function ScaledPlanetMapDir_Individual (Aipla, ADiameter: integer): string;
@@ -299,7 +318,7 @@ begin
 
   searchdir :=slash(appdir)+slash('data')+'planet';
 
-  //SZ JPG only exists?
+  // JPG only exists?
   if Aipla = C_Earth then
   begin
     body_in  := 'earth.jpg';
@@ -339,7 +358,7 @@ begin
   begin
     tmpdir := slash(Tempdir) + inttostr(resY[idx]);
 
-    //SZ process execution check
+    // process execution check
     pass := DirectoryExistsUTF8(tmpdir);
     if not pass then
       CreateDirUTF8(tmpdir);
@@ -354,8 +373,8 @@ begin
       if FileExistsUTF8(fn) then
         CopyFile( fn , slash(tmpdir) +'xplanet.config' );
 
-      //SZ This is full variant show labels from satellites,
-      //   have full magnitude for Sun
+      // This is full variant show labels from satellites,
+      // have full magnitude for Sun
 
       fn :=slash(searchdir)+'xplanet2.config';
 
@@ -436,14 +455,14 @@ end;
 function ScaledPlanetMapDir(Aipla, ADiameter: integer): string;
 begin
 
-  //SZ If look on Erath, ensure Moon exists
+  // If look on Earth, ensure Moon exists
   if Aipla = C_Earth then
     ScaledPlanetMapDir_Individual (C_Moon, ADiameter);
 
   if Aipla = C_moon then
     ScaledPlanetMapDir_Individual (C_Earth, ADiameter);
 
-  //SZ If look on Jupiter, ensure 4 main sattelites exists
+  // If look on Jupiter, ensure 4 main sattelites exists
   if Aipla = C_Jupiter then
   begin
     ScaledPlanetMapDir_Individual (C_Io,       ADiameter);
@@ -452,7 +471,7 @@ begin
     ScaledPlanetMapDir_Individual (C_Callisto, ADiameter);
   end;
 
-  //SZ If look on Saturn, ensure 5 main sattelites exists
+  // If look on Saturn, ensure 5 main sattelites exists
   if Aipla = C_Saturn then
   begin
     ScaledPlanetMapDir_Individual (C_Mimas,     ADiameter);
@@ -484,7 +503,7 @@ begin
 
 end;
 
-//SZ New plain version, additional options
+// New plain version, additional options
 procedure GetXplanet_Plain(Xplanetversion, searchdir,bsize,outfile : string;
   pa,grsl,jd : double; var irc:integer; var r:TStringList;
   AProjection: string; AFov: double;
@@ -498,12 +517,13 @@ procedure GetXplanet_Plain(Xplanetversion, searchdir,bsize,outfile : string;
   ANorth: string;
   ARadius: string;
   AConfig: string;
-  AUseLabels: Boolean
+  AUseLabels: Boolean;
+  originfile: string = ''  // if not blank, use this file and ignore AOriginLat, AOriginLong
 );
 
 var
 
- t,originfile: string;
+ t: string;
 
  p:TProcess;
   {$ifdef mswindows}
@@ -533,15 +553,15 @@ begin
    end;
  {$endif}
 
- //SZ prepare origin lat/long
+ // prepare origin lat/long
 
-  if AUseOrigFile then
+  if AUseOrigFile and (originfile = '') then  // PCH
   begin
     originfile:= slash(Tempdir) + 'Orbit_xplanet.txt';
 
     DeleteFileUTF8(originfile);
 
-    //SZ prepare observer's position for xplanet
+    // prepare observer's position for xplanet
     PrepareFileForXplanet(
       originfile, jd,
       AOriginLat, AOriginLong
@@ -549,12 +569,7 @@ begin
 
   end;
 
-  //SZ Determinate target
-
-// if (ipla = C_Earth) and  (AProjection = '') then
-//   origin := 'sun';
-
-//and (Aorigin <> Atarget)
+  // Determinate target
 
   if AUseOrigin then
   begin
@@ -568,10 +583,10 @@ begin
       p.Parameters.Add(originfile);
     end;
 
-  //SZ Lon/Lat of observer
+  // Lon/Lat of observer
   if AUseLatLong then
   begin
-    //SZ This lat/lon of target object
+    // This lat/lon of target object
 
     p.Parameters.Add('-latitude');
     t:=formatfloat(f6,ATargetLat);
@@ -583,7 +598,7 @@ begin
 
   end;
 
- //SZ If target is not Earth
+ // If target is not Earth
  if AUseTarget then
  begin
    p.Parameters.Add('-body');
@@ -607,7 +622,7 @@ begin
  p.Parameters.Add('-searchdir');
  p.Parameters.Add(searchdir);
 
- //SZ Revert this in order not to display planet/satellite labels by xplanet
+ // Revert this in order not to display planet/satellite labels by xplanet
 
  if trim(AConfig) <> '' then
  begin
@@ -642,14 +657,14 @@ begin
     p.Parameters.Add(formatfloat(f1,grsl));
  end;
 
- //SZ Projection
+ // Projection
  if trim(AProjection) <> '' then
  begin
    p.Parameters.Add('-projection');
    p.Parameters.Add(AProjection);
  end;
 
- //SZ Fov
+ // Fov
  if (AFov) <> 0 then
  begin
    p.Parameters.Add('-fov');
@@ -685,7 +700,6 @@ begin
 end;
 
 function GetXplanet_Image(
-    //Asearchdir : string;
     ABMP: TBGRABitmap;
     Aplanet:TPlanet;
     Aconfig: Tconf_skychart;
@@ -737,13 +751,13 @@ begin
     else
       gw:=0;
 
-    //SZ with small sattelites, it is mandatory to use maps for parent planet if
+    // with small sattelites, it is mandatory to use maps for parent planet if
     //   it is background, otherwise
     // TODO: determinate planet is a background or not.
 
     searchdir := ScaledPlanetMapDir (ATarget,  H);
 
-    //SZ determinate target
+    // determinate target
     target := GetPlanetName(ATarget);
     origin := GetPlanetParentName(AOrigin);
 
@@ -753,7 +767,7 @@ begin
     targetLat  :=  Aconfig.ObsLatitude;
     targetLong := -Aconfig.ObsLongitude;
 
-    //SZ Autoset
+    // Autoset
     if trim(AProjection) <> '' then
     begin
       UseOriginFile := false;
@@ -885,10 +899,6 @@ begin
       result := LowerCase(trim(epla[Aipla]))
     else
       result := 'earth';
-
-    //SZ not the same name in CDC and xplanet
-    if result = 'encelade' then
-      result := 'enceladus';
 
   finally
   end;
@@ -1047,7 +1057,7 @@ begin
 
 end;
 
-//SZ Distance from desired planets/satelittes in AU
+// Distance from desired planets/satelittes in AU
 function TOrbits.PlanetDistance(pla1,pla2: integer; JD: double): double;
 var
   p1,p2: TPlanData;
@@ -1142,18 +1152,9 @@ procedure TOrbits.PlotOrbit(ACurrJDTT: double);
     r1,r2: integer;
   begin
 
-    //bmp.FontHeight:=round(24*FTextZoom);
-    //bmp.FontStyle:=[fsBold];
-
-    {
-    if ipla=C_Earth
-      then bmp.TextOut(20, txtp+txts*ipla, rsEarth, ColorToBGRA(col[ipla]), taLeftJustify)
-      else bmp.TextOut(20, txtp+txts*ipla,pla[ipla],ColorToBGRA(col[ipla]), taLeftJustify);
-    }
-
     r := Distance[i].r;
 
-    //SZ Fake planet image
+    // Fake planet image
 
     r1 := round((ymax-ymin)/20 * diam_fake[i]);
 
@@ -1184,7 +1185,6 @@ procedure TOrbits.PlotOrbit(ACurrJDTT: double);
     begin
       r2 := PlanetImage[i].Height div 2;
 
-      //bmp.PutImage(round(r.x)-r2, round(r.y)-r2, PlanetImage[i], dmDrawWithTransparency);
       bmp.BlendImage(round(r.x)-r2, round(r.y)-r2, PlanetImage[i], boScreen );
 
     end;
@@ -1223,11 +1223,9 @@ begin
 
   FCurrJDTT := ACurrJDTT;
 
-  //SZ When refresh orbit is required
+  // When refresh orbit is required
   if RefreshOrbit then
   begin
-
-    //Orbit_bmp.SetSize(xmax-xmin, ymax-ymin);
 
     Orbit_bmp.SetSize(xmax, ymax);
     Orbit_bmp.Fill(ColorToBGRA(clBlack));
@@ -1242,7 +1240,7 @@ begin
     else
     begin
 
-      //SZ Use no Mars orbit here anymore
+      // Use no Mars orbit here anymore
       for i := C_Jupiter to C_Pluto do
         RecalculateOrbit(i);
 
@@ -1256,7 +1254,7 @@ begin
 
   bmp.Assign(Orbit_bmp);
 
-  //SZ Sun label
+  // Sun label
   if IsShowLabels then
   begin
     bmp.FontHeight := FTextlabels;
@@ -1281,7 +1279,7 @@ begin
 
   end;
 
-  //SZ Show labels
+  // Show labels
   if IsShowLabels then
   begin
 
