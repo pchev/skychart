@@ -5760,6 +5760,7 @@ for i:=1 to csc.nummodlabels do begin
    csc.modlabels[i].id:=ReadInteger(section,'labelid'+inttostr(i),0);
    csc.modlabels[i].dx:=ReadInteger(section,'labeldx'+inttostr(i),0);
    csc.modlabels[i].dy:=ReadInteger(section,'labeldy'+inttostr(i),0);
+   csc.modlabels[i].orientation:=ReadFloat(section,'orientation'+inttostr(i),0);
    csc.modlabels[i].ra:=ReadFloat(section,'labelra'+inttostr(i),0);
    csc.modlabels[i].dec:=ReadFloat(section,'labeldec'+inttostr(i),0);
    csc.modlabels[i].labelnum:=ReadInteger(section,'labelnum'+inttostr(i),1);
@@ -6689,6 +6690,7 @@ for i:=1 to csc.nummodlabels do begin
    WriteInteger(section,'labelid'+inttostr(i),csc.modlabels[i].id);
    WriteInteger(section,'labeldx'+inttostr(i),csc.modlabels[i].dx);
    WriteInteger(section,'labeldy'+inttostr(i),csc.modlabels[i].dy);
+   WriteFloat(section,'orientation'+inttostr(i),csc.modlabels[i].orientation);
    WriteFloat(section,'labelra'+inttostr(i),csc.modlabels[i].ra);
    WriteFloat(section,'labeldec'+inttostr(i),csc.modlabels[i].dec);
    WriteInteger(section,'labelnum'+inttostr(i),csc.modlabels[i].labelnum);

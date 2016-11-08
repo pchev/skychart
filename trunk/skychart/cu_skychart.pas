@@ -4703,7 +4703,8 @@ var i,j,id: integer;
     orient: single;
     txt: string;
     f1:Tform;
-    e1:Tedit;
+    e1,e2:Tedit;
+    l1:Tlabel;
     b1,b2:Tbutton;
 begin
 i:=-1;
@@ -4725,19 +4726,29 @@ for j:=1 to cfgsc.nummodlabels do
      end;
 f1:=Tform.Create(self);
 e1:=Tedit.Create(f1);
+e2:=Tedit.Create(f1);
+l1:=TLabel.Create(f1);
 b1:=Tbutton.Create(f1);
 b2:=Tbutton.Create(f1);
 try
 e1.Parent:=f1;
+l1.Parent:=f1;
+e2.Parent:=f1;
 b1.Parent:=f1;
 b2.Parent:=f1;
 e1.Font.Name:=fplot.cfgplot.FontName[fontnum];
 e1.Top:=8;
 e1.Left:=8;
 e1.Width:=150;
+l1.Top:=e1.Top+e1.Height+8;
+l1.Left:=8;
+l1.Caption:='Rotation';
+e2.Top:=l1.top;
+e2.Left:=l1.Width+8;
+e2.Width:=50;
 b1.Width:=65;
 b2.Width:=65;
-b1.Top:=e1.Top+e1.Height+8;
+b1.Top:=e2.Top+e2.Height+8;
 b2.Top:=b1.Top;
 b1.Left:=8;
 b2.Left:=b1.Left+b2.Width+8;
@@ -4750,6 +4761,7 @@ b2.Cancel:=true;
 f1.ClientWidth:=e1.Width+16;
 f1.ClientHeight:=b1.top+b1.Height+8;
 e1.Text:=txt;
+e2.Text:=FormatFloat('0.0',orient);
 f1.BorderStyle:=bsDialog;
 f1.Caption:=rsEditLabel;
 ScaleDPI(f1);
@@ -4769,7 +4781,7 @@ if f1.ShowModal=mrOK then begin
    end;
    cfgsc.modlabels[i].txt:=txt;
    cfgsc.modlabels[i].align:=Lalign;
-   cfgsc.modlabels[i].orientation:=orient;
+   cfgsc.modlabels[i].orientation:=StrToFloatDef(e2.Text,orient);
    cfgsc.modlabels[i].labelnum:=labelnum;
    cfgsc.modlabels[i].fontnum:=fontnum;
    cfgsc.modlabels[i].id:=id;
@@ -5110,6 +5122,7 @@ for i:=1 to numlabels do begin
   for j:=1 to cfgsc.nummodlabels do
      if labels[i].id=cfgsc.modlabels[j].id then begin
         skiplabel:=cfgsc.modlabels[j].hiden;
+        orient:=cfgsc.modlabels[j].orientation;
         if i>constlabelindex then txt:=cfgsc.modlabels[j].txt;
         if cfgsc.modlabels[j].useradec then begin
           projection(cfgsc.modlabels[j].ra,cfgsc.modlabels[j].dec,x1,y1,false,cfgsc) ;
