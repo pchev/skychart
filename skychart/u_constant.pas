@@ -2469,6 +2469,7 @@ begin
     modlabels[i].id := Source.modlabels[i].id;
     modlabels[i].dx := Source.modlabels[i].dx;
     modlabels[i].dy := Source.modlabels[i].dy;
+    modlabels[i].orientation := Source.modlabels[i].orientation;
     modlabels[i].ra := Source.modlabels[i].ra;
     modlabels[i].Dec := Source.modlabels[i].Dec;
     modlabels[i].labelnum := Source.modlabels[i].labelnum;
