@@ -1643,7 +1643,8 @@ begin
           planetbmp.Assign(xplanetimg.Bitmap)
         else
         begin
-          planetbmp.Height:=round(flatten*planetbmp.Width);
+          planetbmp.Height:=round(flatten*XplanetImg.Bitmap.Height);
+          planetbmp.Width:=XplanetImg.Bitmap.Width;
           PlanetBMP.Canvas.StretchDraw(rect(0,0,planetbmp.Width,planetbmp.Height),XplanetImg.Bitmap);
         end;
 
