@@ -965,7 +965,7 @@ type
     IndiAutostart, ShowCircle, ShowCrosshair, IndiTelescope, ASCOMTelescope,
     LX200Telescope, EncoderTelescope, ManualTelescope, ShowImages, EyepieceMask,
     ShowImageList, ShowImageLabel, ShowBackgroundImage, showstars, shownebulae, showline,
-    showlabelall, Editlabels, OptimizeLabels: boolean;
+    showlabelall, Editlabels, OptimizeLabels, RotLabel : boolean;
     BackgroundImage: string;
     MaxArchiveImg: integer;
     ArchiveDir: array[1..MaxArchiveDir] of string;
@@ -2278,6 +2278,7 @@ begin
   showlabelall := Source.showlabelall;
   Editlabels := Source.Editlabels;
   OptimizeLabels := Source.OptimizeLabels;
+  RotLabel := Source.RotLabel;
   BackgroundImage := Source.BackgroundImage;
   HorizonMax := Source.HorizonMax;
   rap2000 := Source.rap2000;

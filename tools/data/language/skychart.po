@@ -6210,3 +6210,7 @@ msgstr ""
 msgid "You already have the latest available version!"
 msgstr ""
 
+#: u_translation:rsorienttothep
+msgid "Orient to the pole"
+msgstr ""
+

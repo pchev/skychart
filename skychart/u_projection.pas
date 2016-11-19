@@ -47,6 +47,7 @@ procedure GetAHxy(x,y:Integer ; var a,h : Double; c: Tconf_skychart);
 procedure GetAHxyF(x,y:Integer ; var a,h : Double; c: Tconf_skychart);
 procedure GetLBxy(x,y:Integer ; var l,b : Double; c: Tconf_skychart);
 procedure GetLBExy(x,y:Integer ; var le,be : Double; c: Tconf_skychart);
+function labrotation(ra,de: double; lnum:integer; c:Tconf_skychart):double;
 function ObjectInMap(ra,de:double; c: Tconf_skychart) : Boolean;
 function NorthPoleInMap(c:Tconf_skychart) : Boolean;
 function SouthPoleInMap(c:Tconf_skychart) : Boolean;
@@ -619,6 +620,44 @@ end else begin
   Eq2Ecl(x1,y1,c.ecl,le,be);
 end;
 le:=rmod(pi4+le,pi2);
+end;
+
+function labrotation(ra,de: double; lnum:integer; c:Tconf_skychart):double;
+var a,d,ac,dc,x1,x2,y1,y2: double;
+
+begin
+  if c.RotLabel then begin
+    case c.Projpole of
+    Altaz: begin
+           Eq2Hz(c.CurST-ra,de,a,d,c);
+           a:=-a;
+           ac:=-c.acentre;
+           dc:=c.hcentre;
+           end;
+    Equat: begin
+           a:=ra;
+           d:=de;
+           ac:=c.racentre;
+           dc:=c.decentre;
+           end;
+    Gal:   begin
+           Eq2Gal(ra,de,a,d,c);
+           ac:=c.lcentre;
+           dc:=c.bcentre;
+           end;
+    Ecl:   begin
+           Eq2Ecl(ra,de,c.ecl,a,d);
+           ac:=c.lecentre;
+           dc:=c.becentre;
+           end;
+      else raise exception.Create('Bad projection type');
+    end;
+    Proj2(a,d,ac,dc,x1,y1,c);
+    Proj2(a,d+0.001,ac,dc,x2,y2,c);
+    result:=rad2deg*RotationAngle(x1,y1,x2,y2,c);
+  end else begin
+    result:=c.LabelOrient[lnum];
+  end;
 end;
 
 function ObjectInMap(ra,de:double; c: Tconf_skychart) : Boolean;

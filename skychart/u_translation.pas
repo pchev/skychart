@@ -1581,6 +1581,7 @@ resourcestring
   rsANewVersionO = 'A new version %s of Skychart is available.%sDo you want to'
     +' download it now?';
   rsYouAlreadyHa = 'You already have the latest available version!';
+  rsOrientToTheP = 'Orient to the pole';
 
 // also update upsi_translation
 
