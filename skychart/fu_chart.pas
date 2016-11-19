@@ -1366,6 +1366,7 @@ try
  1: begin  // to postscript canvas
     InitPrintColor;
     if assigned(Fshowinfo) then Fshowinfo(rsCreatePostsc , caption);
+    Application.ProcessMessages;
     if DirectoryIsWritable(printpath) then begin
       ps:=TPostscriptCanvas.Create;
       ps.XDPI := printresol;
@@ -1416,6 +1417,7 @@ try
  2: begin  // to bitmap
     InitPrintColor;
     if assigned(Fshowinfo) then Fshowinfo(Format(rsCreateRasterWH, [cm.PrintBmpWidth,cm.PrintBmpHeight]) , caption);
+    Application.ProcessMessages;
     if DirectoryIsWritable(printpath) then begin
       if PrintLandscape then begin
          w:=cm.PrintBmpWidth;
@@ -1467,7 +1469,9 @@ try
      if printcmd2<>'' then begin
         if assigned(Fshowinfo) then Fshowinfo(rsOpenTheBitma , caption);
         execnowait(printcmd2+' "'+fname+'"','',false);
-     end;
+     end
+     else
+        if assigned(Fshowinfo) then Fshowinfo('');
  end
    else if assigned(Fshowinfo) then Fshowinfo(rsInvalidPath+printpath , caption);
  end;
