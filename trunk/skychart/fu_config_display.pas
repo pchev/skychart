@@ -54,6 +54,7 @@ type
     CheckBox6: TCheckBox;
     CheckBox7: TCheckBox;
     CheckBox8: TCheckBox;
+    CheckBox9: TCheckBox;
     Edit15: TEdit;
     Edit16: TEdit;
     Edit17: TEdit;
@@ -82,6 +83,7 @@ type
     OptLabels: TCheckBox;
     Label10: TLabel;
     Label14: TLabel;
+    PanelRot: TPanel;
     ShowLineShape: TShape;
     ShowLines: TCheckBox;
     OnlyMeridian: TCheckBox;
@@ -379,6 +381,7 @@ type
     procedure CheckBox6Click(Sender: TObject);
     procedure CheckBox7Click(Sender: TObject);
     procedure CheckBox8Click(Sender: TObject);
+    procedure CheckBox9Click(Sender: TObject);
     procedure CirclegridColRowInserted(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
     procedure CirclegridColRowMoved(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
     procedure CirclegridDblClick(Sender: TObject);
@@ -723,6 +726,7 @@ showlabelMisc.caption:=rsOtherLabel;
 ShowLabelChartInfo.caption:=rsChartInforma;
 Label15.Caption:=rsObservingLis2;
 CheckBox5.Caption:=rsChartLegend;
+CheckBox9.Caption:=rsOrientToTheP;
 Button9.Caption:=rsDefault;
 
 Page7.caption:=rsFonts;
@@ -1471,6 +1475,8 @@ begin
  LabelLine.Checked := csc.MovedLabelLine;
  OptLabels.Checked:= csc.OptimizeLabels;
  CheckBox5.Checked := csc.ShowLegend;
+ CheckBox9.Checked:=csc.RotLabel;
+ PanelRot.Visible:=not CheckBox9.Checked;
 end;
 
 procedure Tf_config_display.ShowCircle;
@@ -2090,6 +2096,12 @@ end;
 procedure Tf_config_display.CheckBox8Click(Sender: TObject);
 begin
 csc.ShowAlwaysMeridian:=CheckBox8.Checked;
+end;
+
+procedure Tf_config_display.CheckBox9Click(Sender: TObject);
+begin
+ csc.RotLabel:=CheckBox9.Checked;
+  PanelRot.Visible:=not CheckBox9.Checked;
 end;
 
 procedure Tf_config_display.RectangleGridSetEditText(Sender: TObject; ACol,ARow: Integer; const Value: String);

@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-29 17:42+0000\n"
+"POT-Creation-Date: 2016-11-19 11:24+0000\n"
 "PO-Revision-Date: 2015-12-26 22:29+0000\n"
 "Last-Translator: Václav Houška <vaclav.houska@volny.cz>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-09-18 18:44+0000\n"
-"X-Generator: Launchpad (build 18186)\n"
+"X-Launchpad-Export-Date: 2016-11-19 11:32+0000\n"
+"X-Generator: Launchpad (build 18269)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -3824,6 +3824,10 @@ msgstr "Elementy oběžných drah"
 #: u_translation.rsorientation
 msgid "Orientation"
 msgstr "Orientace"
+
+#: u_translation.rsorienttothep
+msgid "Orient to the pole"
+msgstr ""
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file:"
