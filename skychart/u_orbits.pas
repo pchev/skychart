@@ -20,7 +20,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 }
 
-
 {$mode objfpc}{$H+}
 
 interface
@@ -30,53 +29,54 @@ uses
     Windows,
   {$endif}
   Classes, SysUtils, fileutil,
-  BGRABitmap, BGRABitmapTypes, BGRADefaultBitmap,Graphics,
-  u_constant, u_translation, cu_planet;
+  BGRABitmap, BGRABitmapTypes, BGRADefaultBitmap, Graphics,
+  LazUTF8, LazFileUtils,
+  u_constant, u_translation, cu_planet, u_CacheBMP;
 
 const
   // Around Solar eclipse in August 1999, seen GRS on Jupiter
   JDBase1999 = 2451402.086111;
 
 const
-   C_Mercury  =  1;
-   C_Venus    =  2;
-   C_Earth    =  3;
-   C_Mars     =  4;
-   C_Jupiter  =  5;
-   C_Saturn   =  6;
-   C_Uranus   =  7;
-   C_Neptune  =  8;
-   C_Pluto    =  9;
-   C_Sun      = 10;
-   C_Moon     = 11;
+   C_Mercury    =  1;
+   C_Venus      =  2;
+   C_Earth      =  3;
+   C_Mars       =  4;
+   C_Jupiter    =  5;
+   C_Saturn     =  6;
+   C_Uranus     =  7;
+   C_Neptune    =  8;
+   C_Pluto      =  9;
+   C_Sun        = 10;
+   C_Moon       = 11;
 
    ///////////////////////////
    // Satelittes
    ///////////////////////////
 
     // Mars
-   C_Phobos   = 29;
-   C_Deimos   = 30;
+   C_Phobos     = 29;
+   C_Deimos     = 30;
 
    // Jupiter
-   C_Io       = 12;
-   C_Europa   = 13;
-   C_Ganymede = 14;
-   C_Callisto = 15;
-   C_Amalthea = 37;
-   C_Thebe    = 38;
+   C_Io         = 12;
+   C_Europa     = 13;
+   C_Ganymede   = 14;
+   C_Callisto   = 15;
+   C_Amalthea   = 37;
+   C_Thebe      = 38;
    C_Adrastea   = 39;
    C_Metis      = 40;
 
    // Saturn
-   C_Mimas     = 16;
-   C_Enceladus = 17;
-   C_Tethys    = 18;
-   C_Dione     = 19;
-   C_Rhea      = 20;
-   C_Titan     = 21;
-   C_Hyperion  = 22;
-   C_Iapetus   = 23;
+   C_Mimas      = 16;
+   C_Enceladus  = 17;
+   C_Tethys     = 18;
+   C_Dione      = 19;
+   C_Rhea       = 20;
+   C_Titan      = 21;
+   C_Hyperion   = 22;
+   C_Iapetus    = 23;
    C_Phoebe     = 33;
    C_Janus      = 41;
    C_Epimetheus = 42;
@@ -89,16 +89,16 @@ const
    C_Pan        = 49;
    C_Daphnis    = 50;
    //
-   C_SatRing  = 31;
-   C_EShadow  = 32;
+   C_SatRing    = 31;
+   C_EShadow    = 32;
 
 
    // Uranus
-   C_Miranda   = 24;
-   C_Ariel     = 25;
-   C_Umbriel   = 26;
-   C_Titania   = 27;
-   C_Oberon    = 28;
+   C_Miranda    = 24;
+   C_Ariel      = 25;
+   C_Umbriel    = 26;
+   C_Titania    = 27;
+   C_Oberon     = 28;
    C_Puck       = 60;
    C_Cordelia   = 51;
    C_Ophelia    = 52;
@@ -114,7 +114,7 @@ const
    C_Cupid      = 63;
 
    // Meptune
-   C_Triton   = 34;
+   C_Triton     = 34;
    C_Nereid     = 35;
    C_Naiad      = 64;
    C_Thalassa   = 65;
@@ -124,7 +124,7 @@ const
    C_Proteus    = 69;
 
    // Pluto
-   C_Charon   = 36;
+   C_Charon     = 36;
 
 
    // Planets and main sattelites
@@ -152,7 +152,7 @@ const
 
  Uranus_Sat  : array [1..5] of integer =
                (C_Miranda,   C_Ariel,   C_Umbriel,  C_Titania,
-                 C_Oberon);
+                C_Oberon);
 
                  {,    C_Puck,    C_Cordelia, C_Ophelia,
                  C_Belinda,   C_Perdita, C_Bianca,   C_Cressida,
@@ -174,12 +174,10 @@ const
   per  : array[1..9] of integer = (88,225,365,687,4332,10760,30590,59799,90553);
   col  : array[1..9] of TColor  = (clGray,clWhite,clAqua,clRed,clOlive,clWhite,clAqua,clBlue,clGray);
 
-  // real planets diameter ratio
+  // Real planets diameter ratio
   diam_real : array[1..9] of double  = (0.38, 0.95, 1.00, 0.53, 11.19, 9.40, 4.04, 3.88, 0.18);
 
-  // fake diameter ratio for display
-  //diam_fake : array[1..9] of double  = (0.38, 0.95, 1.00, 0.70, 1.3, 1.5, 1.2, 1.2, 0.18);
-
+  // Fake diameter ratio for display
   diam_fake : array[1..9] of double  = (0.80, 0.95, 1.00, 0.80, 1.20, 2.00, 1.00, 0.90, 0.80);
 
   Earth_Radius = 6371; // in km
@@ -215,11 +213,11 @@ type
 
       FTextlabels: integer;
 
+      PlanetImage: TCacheBMP;
+
       procedure RecalculateOrbit(ipla: integer);
 
     public
-
-      PlanetImage: array of TBGRABitmap;
 
       TypeOfOrbit : integer;
 
@@ -269,7 +267,6 @@ procedure GetXplanet_Plain(Xplanetversion, searchdir,bsize,outfile : string;
 );
 
  function GetXplanet_Image(
-      //Asearchdir : string;
       ABMP: TBGRABitmap;
       Aplanet:TPlanet;
       Aconfig: Tconf_skychart;
@@ -296,9 +293,6 @@ implementation
 uses
   math,u_util, process;
 
-// Scale planet body map and saving in dedicated tmp dir, then call xplanet from it
-// TODO
-
 function ScaledPlanetMapDir_Individual (Aipla, ADiameter: integer): string;
 // As result, temp dir is returned
 // ADiameter - Diameter of the resulted planet image
@@ -322,12 +316,6 @@ begin
   if Aipla = C_Earth then
   begin
     body_in  := 'earth.jpg';
-    body_out := body_in;
-  end
-  else
-  if Aipla = C_Enceladus then
-  begin
-    body_in := 'enceladus.jpg';
     body_out := body_in;
   end
   else
@@ -376,18 +364,17 @@ begin
       // This is full variant show labels from satellites,
       // have full magnitude for Sun
 
-      fn :=slash(searchdir)+'xplanet2.config';
+      fn := slash(searchdir)+'xplanet2.config';
 
       if FileExistsUTF8(fn) then
          CopyFile( fn , slash(tmpdir) +'xplanet2.config' );
 
       // On windows we need the font for the labels
 
-      fn :=slash(searchdir)+'FreeMonoBold.ttf';
+      fn := slash(searchdir)+'FreeMonoBold.ttf';
 
       if FileExistsUTF8(fn) then
          CopyFile( fn , slash(tmpdir) +'FreeMonoBold.ttf' );
-
 
       pass :=
         FileExistsUTF8(slash(searchdir) + body_in) and
@@ -490,8 +477,8 @@ end;
 
 procedure PrepareFileForXplanet(AFilename: string; AJD, Alat, Along: double);
 var
- ft : textfile;
- buf: string;
+  ft : textfile;
+  buf: string;
 begin
 
   buf:=jddate2(AJD);
@@ -948,8 +935,6 @@ begin
 end;
 
 constructor TOrbits.Create(Aplbmp:TBGRABitmap; ATextZoom: Double);
-var
-   i: integer;
 begin
 
   TypeOfOrbit:= 0;
@@ -970,32 +955,16 @@ begin
 
   RefreshOrbit := true;
 
-  SetLength(PlanetImage, C_Callisto+1);
-
-  for i := low(PlanetImage) to high(PlanetImage) do
-    PlanetImage[i] := nil;
+  PlanetImage:= TCacheBMP.Create;
 
 end;
 
 destructor TOrbits.Destroy;
-var
-   i: integer;
 begin
 
- Orbit_bmp.Free;
+  Orbit_bmp.Free;
 
-  for i := low(PlanetImage) to high(PlanetImage) do
-  begin
-
-    if PlanetImage[i] <> nil then
-    begin
-      PlanetImage[i].Free;
-      PlanetImage[i] :=nil;
-    end;
-
-  end;
-
-  SetLength(PlanetImage, 0);
+  PlanetImage.Free;
 
 end;
 
@@ -1024,35 +993,33 @@ var
   r: TPointF;
 
 begin
-  SetLength(p,nbstep+1);
 
-  sd := per[ipla]/(nbstep-1);
+  try
 
-  jdt:=JDBase1999; //FCurrJDTT;
+    SetLength(p,nbstep+1);
 
-  for i:=0 to nbstep do
-  begin
-    //Fplanet.Plan(ipla,jdt,pl);
+    sd := per[ipla]/(nbstep-1);
 
-    // rotate equatorial to ecliptic
+    jdt := JDBase1999;
 
-    r := PointXY(ipla,jdt);
-
-    p[i].x:= r.x;
-    p[i].y:= r.y;
-
-    jdt:=jdt+sd;
-  end;
-
-  Orbit_bmp.DrawPolyLineAntialias(p,ColorToBGRA(clGray),0.5,true);
-
-  for i := low(PlanetImage) to high(PlanetImage) do
-  begin
-    if PlanetImage[i] <> nil then
+    for i:=0 to nbstep do
     begin
-       PlanetImage[i].Free;
-       PlanetImage[i]:= nil
+
+      // rotate equatorial to ecliptic
+
+      r := PointXY(ipla,jdt);
+
+      p[i].x:= r.x;
+      p[i].y:= r.y;
+
+      jdt := jdt + sd;
     end;
+
+    Orbit_bmp.DrawPolyLineAntialias(p,ColorToBGRA(clGray),0.5,true);
+
+  finally
+    SetLength(p, 0);
+    PlanetImage.Clear;
   end;
 
 end;
@@ -1091,6 +1058,7 @@ procedure TOrbits.PlotOrbit(ACurrJDTT: double);
   begin
 
      bmp.FontHeight := round(FTextlabels);
+
      bmp.FontStyle := [];
 
      bmp.TextOut(xmin +  70, ymin, rsSun,   ColorToBGRA(clWhite), taLeftJustify);
@@ -1099,8 +1067,8 @@ procedure TOrbits.PlotOrbit(ACurrJDTT: double);
      for i := C_Mercury to C_Pluto do
      begin
 
-        x:= xmin;
-        y:= ymin + FTextlabels* (i+1);
+        x := xmin;
+        y := ymin + FTextlabels * (i+1);
 
        if i = C_Earth then
           s := rsEarth
@@ -1150,6 +1118,8 @@ procedure TOrbits.PlotOrbit(ACurrJDTT: double);
   var
     r: TPointF;
     r1,r2: integer;
+    idx: integer;
+    b: TBGRABitmap;
   begin
 
     r := Distance[i].r;
@@ -1158,16 +1128,17 @@ procedure TOrbits.PlotOrbit(ACurrJDTT: double);
 
     r1 := round((ymax-ymin)/20 * diam_fake[i]);
 
-    if PlanetImage[i] = nil then
+    idx := PlanetImage.Search(IntToStr(i));
+
+    if idx < 0 then
     begin
 
-      PlanetImage[i] := TBGRABitmap.Create();
+      b := TBGRABitmap.Create();
 
       GetXplanet_Image(
-        PlanetImage[i],
+        b,
         Fplanet,Fconfig,
         r1,r1,0,0,
-        //Fconfig.CurJDTT,
         JDBase1999,
         0,false,true,
         true,C_Sun,true,i,
@@ -1177,15 +1148,21 @@ procedure TOrbits.PlotOrbit(ACurrJDTT: double);
         False
       );
 
+      idx := PlanetImage.Add(IntToStr(i), b);
+
+      b.Free;
+
     end;
 
-    if PlanetImage[i] = nil then
+    b := PlanetImage.GetBMP(idx);
+
+    if b = nil then
       bmp.FillEllipseAntialias(r.x,r.y,ps,ps,ColorToBGRA(col[i]))
     else
     begin
-      r2 := PlanetImage[i].Height div 2;
+      r2 := b.Height div 2;
 
-      bmp.BlendImage(round(r.x)-r2, round(r.y)-r2, PlanetImage[i], boScreen );
+      bmp.BlendImage(round(r.x)-r2, round(r.y)-r2, b, boScreen );
 
     end;
 
@@ -1212,7 +1189,6 @@ procedure TOrbits.PlotOrbit(ACurrJDTT: double);
     y := round(r.y - FTextlabels div 2);
 
     bmp.TextOut(x,y, s, ColorToBGRA(clWhite), taLeftJustify);
-
 
   end;
 
@@ -1344,7 +1320,7 @@ begin
   if TypeOfOrbit = 0 then
     fx:=s/3.5
   else
-    fx:=s/70.0;
+    fx:=s/90.0;
 
   ps   := round(5*FTextZoom);
   ss   := round(8*FTextZoom);
@@ -1353,7 +1329,7 @@ begin
 
   FTextlabels := round(12*FTextZoom);
 
-  RefreshOrbit := true;;
+  RefreshOrbit := true;
 
 end;
 
