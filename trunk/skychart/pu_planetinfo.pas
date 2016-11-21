@@ -64,6 +64,7 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
+    Panel4: TPanel;
     PanelMain: TPanel;
     PanelLeft: TPanel;
     PanelrgTarget: TPanel;
@@ -670,10 +671,11 @@ begin
 
   try
 
-    //  plbmp.SetSize(Panel1.ClientWidth, Panel1.ClientHeight);
-    plbmp.Fill(ColorToBGRA(clBlack));
-
     View_Index := AViewIndex;
+
+    Rescale_Internal;
+
+    PaintBox1.Repaint;
 
     PanelrgTarget.Visible := False;
     PanelrgOrigin.Visible := False;
@@ -1177,6 +1179,7 @@ end;
 
 procedure Tf_planetinfo.rgOriginClick(Sender: TObject);
 begin
+
   if EnableEvents then
   begin
     SetDefaultFOV;
@@ -1255,7 +1258,7 @@ end;
 procedure Tf_planetinfo.txtNextClick(Sender: TObject);
 begin
 
-  //SZ Unable last tab until finish
+//  Unable last tab until finish
 //  if View_Index < tbPlanets.ButtonList.Count-1 then
     if View_Index < tbPlanets.ButtonList.Count-2 then
   begin
@@ -1285,7 +1288,9 @@ begin
 
   Rescale_Internal;
 
-  plbmp.SetSize(Panel1.ClientWidth, Panel1.ClientHeight);
+  PaintBox1.Repaint;
+
+  plbmp.SetSize(Panel4.ClientWidth, Panel4.ClientHeight);
   plbmp.Fill(ColorToBGRA(clBlack));
 
   if (View_Index = View_Sim1) or (View_Index = View_Sim2) then
@@ -1522,12 +1527,14 @@ end;
 
 procedure Tf_planetinfo.Rescale_Internal;
 var
-  tmp: integer;
   MB,MT, ML, MR: integer; // Margines zoomed
+  W, H, W1, H1: integer;
 begin
 
-  plbmp.SetSize(Panel1.Width, Panel1.Height);
+  plbmp.SetSize(Panel4.Width, Panel4.Height);
   plbmp.Fill(ColorToBGRA(clBlack));
+
+//  PaintBox1.Repaint;
 
   TextZoom:=plbmp.Width/800;
 
@@ -1536,23 +1543,80 @@ begin
   ML := round(marginleft    * TextZoom);
   MR := round(marginright   * TextZoom);
 
-  xmin := ML;
-  xmax :=plbmp.Width-MR;
+  xmin := 0;
+  xmax := plbmp.Width;
 
-  ymin := MT;
-  ymax := plbmp.Height - MB ;
+  ymin := 0;
+  ymax := plbmp.Height;
 
-  //SZ if shown Earth projection, adapt resolution
-  //PCH why? this is the reason  of text overflow with earth
-{  if View_Index = View_Earth then
+  if (View_Index in [View_PlanetVisibility]) then
   begin
 
-    tmp := (ymax-ymin) * 2;
+    xmin := ML;
+    xmax := plbmp.Width-MR;
 
-    xmin := ((plbmp.Width - tmp) div 2);
-    xmax := xmin + tmp;
+    ymin := MT;
+    ymax := plbmp.Height-MB;
 
-  end; }
+  end
+  else
+
+  if not cbRectangular.Checked and
+    (View_Index in [View_Sun..View_Pluto])   then
+  begin
+
+    ymin := MT;
+    ymax := plbmp.Height;
+
+  end
+  else
+
+  if (View_Index in [View_Sim1..View_Sim2]) then
+  begin
+
+    ymin := MT;
+    ymax := plbmp.Height;
+
+  end
+  else
+
+  //if shown rectangular projection, adopt resolution
+
+  if cbRectangular.Checked and
+    (View_Index in [View_Sun..View_Pluto])
+  then
+  begin
+
+    ymin := MT;
+    ymax := plbmp.Height;
+
+    W := xmax - xmin;
+    H := ymax - ymin;
+
+    // Ensure 2:1 ratio
+
+    W1 := W;
+    H1 := W1 div 2;
+
+    if H1 > H then
+    begin
+      H1 := H;
+      W1 := H1*2;
+    end;
+
+    if W1 > W then
+    begin
+      W1 := W;
+      H1 := W1 div 2;
+    end;
+
+    xmin := ((W - W1) div 2);
+    xmax := xmin + W1;
+
+    ymin := ((H - H1 + MT) div 2);
+    ymax := ymin + H1;
+
+  end;
 
 end;
 
@@ -1935,17 +1999,20 @@ begin
   r:=TStringList.Create;
 
   // check if the planet is below the horizon to avoid to draw earth surface in front
-  if (AOrigin=C_Earth)and(ATarget<=C_Charon)and(ATarget<>C_Earth) then begin
-    if ATarget=C_Sun then begin
-      FPlanet.Sun(config.CurJDTT,ar,de,dist,diam);
-    end
-    else if ATarget=C_Moon then begin
-      FPlanet.Moon(config.CurJDTT,ar,de,dist,dkm,diam,phase,illum);
-    end
-    else begin
+  if (AOrigin=C_Earth)and(ATarget<=C_Charon)and(ATarget<>C_Earth) then
+  begin
+
+    case ATarget of
+
+      C_Sun : FPlanet.Sun(config.CurJDTT,ar,de,dist,diam);
+      C_Moon :  FPlanet.Moon(config.CurJDTT,ar,de,dist,dkm,diam,phase,illum);
+
+    else
       Fplanet.Planet(CentralPlanet[ATarget],config.CurJDTT,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel);
+
     end;
-    precession(jd2000,config.CurJDUT,ar,de);
+
+    Precession(jd2000,config.CurJDUT,ar,de);
     Eq2Hz(config.CurST-ar,de,az,alt,config);
     BelowHorizon:=(alt<0);
   end
