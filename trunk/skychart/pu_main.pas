@@ -2386,6 +2386,8 @@ end else begin
          Action:=caNone;
       if mresult=mrYes then
          SaveDefault;
+      if mresult=mrNo then
+         SaveQuickSearch(configfile);
      finally
       b1.free;
       b2.free;
