@@ -291,7 +291,7 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
-        <CommandLineParams Value="--nosplash"/>
+        <CommandLineParams Value="--nosplash --verbose"/>
         <WorkingDirectory Value="/usr/local/bin"/>
       </local>
     </RunParams>
@@ -921,6 +921,9 @@
         <CStyleOperator Value="False"/>
       </SyntaxOptions>
     </Parsing>
+    <CodeGeneration>
+      <TargetCPU Value="i386"/>
+    </CodeGeneration>
     <Linking>
       <Debugging>
         <GenerateDebugInfo Value="False"/>
