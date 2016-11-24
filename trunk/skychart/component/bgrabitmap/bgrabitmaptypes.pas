@@ -71,6 +71,16 @@ type
         square shapes in the resulting image }
     rbBox);
 
+  TEmbossOption = (eoTransparent, eoPreserveHue);
+  TEmbossOptions = set of TEmbossOption;
+
+  TTextLayout = BGRAGraphics.TTextLayout;
+
+const
+  tlTop = BGRAGraphics.tlTop;
+  tlCenter = BGRAGraphics.tlCenter;
+  tlBottom = BGRAGraphics.tlBottom;
+
   // checks the bounds of an image in the given clipping rectangle
   function CheckPutImageBounds(x, y, tx, ty: integer; out minxb, minyb, maxxb, maxyb, ignoreleft: integer; const cliprect: TRect): boolean;
 
@@ -395,6 +405,8 @@ type
     ifLazPaint,
     {** OpenRaster format, layers, lossless compression }
     ifOpenRaster,
+    {** Phoxo format, layers }
+    ifPhoxo,
     {** Photoshop format, layers, rudimentary lossless compression }
     ifPsd,
     {** Targa format (TGA), transparency, rudimentary lossless compression }
@@ -407,6 +419,16 @@ type
     ifXPixMap,
     {** iGO BMP, limited support }
     ifBmpMioMap);
+
+  {* Options when loading an image }
+  TBGRALoadingOption = (
+     {** Do not clear RGB channels when alpha is zero (not recommended) }
+     loKeepTransparentRGB,
+     {** Consider BMP to be opaque if no alpha value is provided (for compatibility) }
+     loBmpAutoOpaque,
+     {** Load JPEG quickly however with a lower quality }
+     loJpegQuick);
+  TBGRALoadingOptions = set of TBGRALoadingOption;
 
 var
   {** List of stream readers for images }
@@ -724,8 +746,8 @@ var
         if AStream.Read(dwords,10*4) = 10*4 then
         begin
           for i := 0 to 6 do dwords[i] := LEtoN(dwords[i]);
-          if (dwords[0] = 0) and (dwords[1] <= expectedFileSize) and (dwords[5] <= expectedFileSize) and
-             (dwords[9] <= expectedFileSize) and
+          if (dwords[0] = 0) and (dwords[1] <= maxFileSize) and (dwords[5] <= maxFileSize) and
+             (dwords[9] <= maxFileSize) and
             (dwords[6] = 0) then inc(scores[ifLazPaint],2);
         end;
       end else //without header
@@ -813,6 +835,13 @@ var
       end;
     end;
 
+    if (copy(magicAsText,1,4) = 'oXo ') then
+    begin
+      inc(scores[ifPhoxo],1);
+      if (magic[4] = 1) and (magic[5] = 0) and (magic[6] = 0) and (magic[7] = 0) then
+        inc(scores[ifPhoxo],1);
+    end;
+
     DetectLazPaint;
 
     if (magic[0] = $50) and (magic[1] = $4b) and (magic[2] = $03) and (magic[3] = $04) then
@@ -868,11 +897,14 @@ end;
 
 function SuggestImageFormat(AFilenameOrExtensionUTF8: string): TBGRAImageFormat;
 var ext: string;
+  posDot: integer;
 begin
   result := ifUnknown;
 
   ext := ExtractFileName(AFilenameOrExtensionUTF8);
-  if pos('.', ext) <> 0 then ext := ExtractFileExt(ext) else ext := '.'+ext;
+  posDot := LastDelimiter('.', ext);
+  if posDot <> 0 then ext := copy(ext,posDot,length(ext)-posDot+1)
+  else ext := '.'+ext;
   ext := UTF8LowerCase(ext);
 
   if (ext = '.jpg') or (ext = '.jpeg') then result := ifJpeg else
@@ -888,7 +920,8 @@ begin
   if (ext = '.tga') then result := ifTarga else
   if (ext = '.tif') or (ext = '.tiff') then result := ifTiff else
   if (ext = '.xwd') then result := ifXwd else
-  if (ext = '.xpm') then result := ifXPixMap;
+  if (ext = '.xpm') then result := ifXPixMap else
+  if (ext = '.oxo') then result := ifPhoxo;
 end;
 
 function SuggestImageExtension(AFormat: TBGRAImageFormat): string;

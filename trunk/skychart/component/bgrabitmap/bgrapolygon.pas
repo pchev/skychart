@@ -32,7 +32,7 @@ unit BGRAPolygon;
 interface
 
 uses
-  Classes, SysUtils, BGRAGraphics, BGRABitmapTypes, BGRAFillInfo;
+  Classes, SysUtils, BGRAGraphics, BGRABitmapTypes, BGRAFillInfo, BGRAPath;
 
 procedure FillShapeAntialias(bmp: TBGRACustomBitmap; shapeInfo: TBGRACustomFillInfo;
   c: TBGRAPixel; EraseMode: boolean; scan: IBGRAScanner; NonZeroWinding: boolean; LinearBlend: boolean = false);
@@ -58,6 +58,7 @@ type
       end;
     procedure AddShape(AInfo: TBGRACustomFillInfo; AInternalInfo: boolean; ATexture: IBGRAScanner; AInternalTexture: TObject; AColor: TBGRAPixel);
     function CheckRectangleBorderBounds(var x1, y1, x2, y2: single; w: single): boolean;
+    procedure InternalAddStroke(const APoints: array of TPointF; AClosed: boolean; AData: Pointer);
   public
     FillMode : TFillMode;
     PolygonOrder: TPolygonOrder;
@@ -69,10 +70,23 @@ type
     procedure AddShape(AShape: TBGRACustomFillInfo; ATexture: IBGRAScanner);
     procedure AddPolygon(const points: array of TPointF; AColor: TBGRAPixel);
     procedure AddPolygon(const points: array of TPointF; ATexture: IBGRAScanner);
+    procedure AddPathStroke(APath: TBGRAPath; AColor: TBGRAPixel; AWidth: single; AStroker: TBGRACustomPenStroker);
+    procedure AddPathStroke(APath: TBGRAPath; ATexture: IBGRAScanner; AWidth: single; AStroker: TBGRACustomPenStroker);
+    procedure AddPathStroke(APath: TBGRAPath; AMatrix: TAffineMatrix; AColor: TBGRAPixel; AWidth: single; AStroker: TBGRACustomPenStroker);
+    procedure AddPathStroke(APath: TBGRAPath; AMatrix: TAffineMatrix; ATexture: IBGRAScanner; AWidth: single; AStroker: TBGRACustomPenStroker);
+    procedure AddPathFill(APath: TBGRAPath; AColor: TBGRAPixel);
+    procedure AddPathFill(APath: TBGRAPath; ATexture: IBGRAScanner);
+    procedure AddPathFill(APath: TBGRAPath; AMatrix: TAffineMatrix; AColor: TBGRAPixel);
+    procedure AddPathFill(APath: TBGRAPath; AMatrix: TAffineMatrix; ATexture: IBGRAScanner);
+    procedure AddPolylineStroke(const points: array of TPointF; AColor: TBGRAPixel; AWidth: single; AStroker: TBGRACustomPenStroker);
+    procedure AddPolylineStroke(const points: array of TPointF; ATexture: IBGRAScanner; AWidth: single; AStroker: TBGRACustomPenStroker);
+    procedure AddPolygonStroke(const points: array of TPointF; AColor: TBGRAPixel; AWidth: single; AStroker: TBGRACustomPenStroker);
+    procedure AddPolygonStroke(const points: array of TPointF; ATexture: IBGRAScanner; AWidth: single; AStroker: TBGRACustomPenStroker);
     procedure AddTriangleLinearColor(pt1, pt2, pt3: TPointF; c1, c2, c3: TBGRAPixel);
     procedure AddTriangleLinearMapping(pt1, pt2, pt3: TPointF; texture: IBGRAScanner; tex1, tex2, tex3: TPointF);
     procedure AddQuadLinearColor(pt1, pt2, pt3, pt4: TPointF; c1, c2, c3, c4: TBGRAPixel);
-    procedure AddQuadLinearMapping(pt1, pt2, pt3, pt4: TPointF; texture: IBGRAScanner; tex1, tex2, tex3, tex4: TPointF);
+    procedure AddQuadLinearMapping(pt1, pt2, pt3, pt4: TPointF; texture: IBGRAScanner; tex1, tex2, {%H-}tex3, tex4: TPointF;
+       ACulling: TFaceCulling = fcNone);
     procedure AddQuadPerspectiveMapping(pt1, pt2, pt3, pt4: TPointF; texture: IBGRAScanner; tex1, tex2, tex3, tex4: TPointF);
     procedure AddEllipse(x, y, rx, ry: single; AColor: TBGRAPixel);
     procedure AddEllipse(x, y, rx, ry: single; ATexture: IBGRAScanner);
@@ -125,8 +139,17 @@ implementation
 
 uses Math, BGRABlend, BGRAGradientScanner, BGRATransform;
 
+type
+  TPathStrokeData = record
+    Stroker: TBGRACustomPenStroker;
+    Texture: IBGRAScanner;
+    Color: TBGRAPixel;
+    Width: Single;
+  end;
+
 procedure FillShapeAntialias(bmp: TBGRACustomBitmap; shapeInfo: TBGRACustomFillInfo;
   c: TBGRAPixel; EraseMode: boolean; scan: IBGRAScanner; NonZeroWinding: boolean; LinearBlend: boolean);
+const oneOver512 = 1/512;
 var
   inter:   array of TIntersectionInfo;
   nbInter: integer;
@@ -134,6 +157,7 @@ var
   firstScan, lastScan: record
     inter:   array of TIntersectionInfo;
     nbInter: integer;
+    sliceIndex: integer;
   end;
 
   miny, maxy, minx, maxx,
@@ -264,10 +288,16 @@ begin
     if not curvedSeg then
     begin
       with firstScan do
+      begin
         shapeInfo.ComputeAndSort(yb+1/256,inter,nbInter,NonZeroWinding);
+        sliceIndex:= shapeInfo.GetSliceIndex;
+      end;
       with lastScan do
+      begin
         shapeInfo.ComputeAndSort(yb+255/256,inter,nbInter,NonZeroWinding);
-      if (firstScan.nbInter = lastScan.nbInter) and (firstScan.nbInter >= 2) then
+        sliceIndex:= shapeInfo.GetSliceIndex;
+      end;
+      if (firstScan.sliceIndex = lastScan.sliceIndex) and (firstScan.nbInter = lastScan.nbInter) then
       begin
         optimised := true;
         for i := 0 to firstScan.nbInter-1 do
@@ -285,25 +315,137 @@ begin
         begin
           x1 := firstScan.inter[i+i].interX;
           x1b := lastScan.inter[i+i].interX;
-          if (x1 > x1b) then
-          begin
-            temp := x1;
-            x1 := x1b;
-            x1b := temp;
-          end;
           x2 := firstScan.inter[i+i+1].interX;
           x2b := lastScan.inter[i+i+1].interX;
-          if (x2 < x2b) then
+          if (abs(x1-x1b)<oneOver512) and (abs(x2-x2b)<oneOver512) and
+             ((i+i+2 >= firstScan.nbInter) or
+              ((firstScan.inter[i+i+2].interX >= x2+1) and
+               (lastScan.inter[i+i+2].interX >= x2b+1))) then
           begin
-            temp := x2;
-            x2 := x2b;
-            x2b := temp;
+            x1 := (x1+x1b)*0.5;
+            x2 := (x2+x2b)*0.5;
+            ix1 := floor(x1);
+            ix2 := floor(x2);
+            if ix1 < minx then ix1 := minx;
+            if ix2 > maxx then ix2 := maxx;
+            if ix1>ix2 then continue;
+            if ix1=ix2 then
+            begin
+              tempDensity:= round((x2-x1)*256);
+              if scan <> nil then //with texture scan
+              begin
+                scan.ScanMoveTo(ix1,yb);
+                c := scan.ScanNextPixel;
+                c.alpha := c.alpha*tempDensity shr 8;
+                if linearBlend then
+                  bmp.DrawPixel(ix1, yb, c, dmLinearBlend)
+                else
+                  bmp.DrawPixel(ix1, yb, c, dmDrawWithTransparency);
+              end else
+              if EraseMode then //erase with alpha
+                bmp.ErasePixel(ix1,yb,c.alpha*tempDensity shr 8)
+              else
+              begin  //solid color
+                c2.alpha := c.alpha*tempDensity shr 8;
+                if linearBlend then
+                  bmp.DrawPixel(ix1, yb, c2, dmLinearBlend)
+                else
+                  bmp.DrawPixel(ix1, yb, c2, dmDrawWithTransparency);
+              end;
+            end else
+            begin
+              tempDensity:= round((ix1+1-x1)*256);
+              if scan <> nil then scan.ScanMoveTo(ix1,yb);
+              if tempDensity < 256 then
+              begin
+                if scan <> nil then //with texture scan
+                begin
+                  c := scan.ScanNextPixel;
+                  c.alpha := c.alpha*tempDensity shr 8;
+                  if linearBlend then
+                    bmp.DrawPixel(ix1, yb, c, dmLinearBlend)
+                  else
+                    bmp.DrawPixel(ix1, yb, c, dmDrawWithTransparency);
+                end else
+                if EraseMode then //erase with alpha
+                  bmp.ErasePixel(ix1,yb, c.alpha*tempDensity shr 8)
+                else
+                begin  //solid color
+                  c2.alpha := c.alpha*tempDensity shr 8;
+                  if linearBlend then
+                    bmp.DrawPixel(ix1, yb, c2, dmLinearBlend)
+                  else
+                    bmp.DrawPixel(ix1, yb, c2, dmDrawWithTransparency);
+                end;
+                inc(ix1);
+              end;
+              tempDensity:= round((x2-ix2)*256);
+              if tempDensity < 256 then dec(ix2);
+              if ix2 >= ix1 then
+              begin
+                if scan <> nil then //with texture scan
+                begin
+                  if linearBlend then
+                    ScannerPutPixels(scan, bmp.ScanLine[yb] + ix1, ix2-ix1+1, dmLinearBlend)
+                  else
+                    ScannerPutPixels(scan, bmp.ScanLine[yb] + ix1, ix2-ix1+1, dmDrawWithTransparency);
+                end else
+                if EraseMode then //erase with alpha
+                  bmp.EraseLine(ix1,yb,ix2,yb,c.alpha,True)
+                else
+                begin  //solid color
+                  if LinearBlend then
+                    bmp.HorizLine(ix1,yb,ix2,c,dmLinearBlend)
+                  else
+                    bmp.HorizLine(ix1,yb,ix2,c,dmDrawWithTransparency);
+                end;
+              end;
+              if tempDensity < 256 then
+              begin
+                inc(ix2);
+                if scan <> nil then //with texture scan
+                begin
+                  c := scan.ScanNextPixel;
+                  c.alpha := c.alpha*tempDensity shr 8;
+                  if linearBlend then
+                    bmp.DrawPixel(ix2, yb, c, dmLinearBlend)
+                  else
+                    bmp.DrawPixel(ix2, yb, c, dmDrawWithTransparency);
+                end else
+                if EraseMode then //erase with alpha
+                  bmp.ErasePixel(ix2,yb,c.alpha*tempDensity shr 8)
+                else
+                begin  //solid color
+                  c2.alpha := c.alpha*tempDensity shr 8;
+                  if linearBlend then
+                    bmp.DrawPixel(ix2, yb, c2, dmLinearBlend)
+                  else
+                    bmp.DrawPixel(ix2, yb, c2, dmDrawWithTransparency);
+                end;
+              end;
+            end;
+            continue;
+          end else
+          begin
+            if (x1 > x1b) then
+            begin
+              temp := x1;
+              x1 := x1b;
+              x1b := temp;
+            end;
+            if (x2 < x2b) then
+            begin
+              temp := x2;
+              x2 := x2b;
+              x2b := temp;
+            end;
+
+  	    {$DEFINE INCLUDE_FILLDENSITY}
+  	    {$DEFINE PARAM_SINGLESEGMENT}
+            {$i density256.inc}
+            SubTriangleDensity(x1,256,x1b,0);
+            SubTriangleDensity(x2b,0,x2,256);
           end;
-		  {$DEFINE INCLUDE_FILLDENSITY}
-		  {$DEFINE PARAM_SINGLESEGMENT}
-          {$i density256.inc}
-          SubTriangleDensity(x1,256,x1b,0);
-          SubTriangleDensity(x2b,0,x2,256);
         end;
       end else
       begin
@@ -312,7 +454,7 @@ begin
           //find intersections
           shapeInfo.ComputeAndSort(GetYScan(yc),inter,nbInter,NonZeroWinding);
 
-		  {$DEFINE INCLUDE_FILLDENSITY}
+	  {$DEFINE INCLUDE_FILLDENSITY}
           {$i density256.inc}
         end;
       end;
@@ -325,7 +467,7 @@ begin
         //find intersections
         shapeInfo.ComputeAndSort(GetYScan(yc),inter,nbInter,NonZeroWinding);
 
-		{$DEFINE INCLUDE_FILLDENSITY}
+	{$DEFINE INCLUDE_FILLDENSITY}
         {$i density256.inc}
       end;
     end;
@@ -333,11 +475,11 @@ begin
     if LinearBlend then
     begin
       if optimised then
-		{$DEFINE INCLUDE_RENDERDENSITY}
+	{$DEFINE INCLUDE_RENDERDENSITY}
         {$define PARAM_LINEARANTIALIASING}
         {$i density256.inc}
       else
-		{$DEFINE INCLUDE_RENDERDENSITY}
+	{$DEFINE INCLUDE_RENDERDENSITY}
         {$define PARAM_LINEARANTIALIASING}
         {$define PARAM_ANTIALIASINGFACTOR}
         {$i density256.inc}
@@ -539,7 +681,7 @@ procedure BorderEllipseAntialias(bmp: TBGRACustomBitmap; x, y, rx, ry, w: single
 var
   info: TFillBorderEllipseInfo;
 begin
-  if (rx = 0) or (ry = 0) or (w=0) or (x = EmptySingle) or (y = EmptySingle) then
+  if ((rx = 0) and (ry = 0)) or (w=0) or (x = EmptySingle) or (y = EmptySingle) then
     exit;
   info := TFillBorderEllipseInfo.Create(x, y, rx, ry, w);
   FillShapeAntialias(bmp, info, c, EraseMode, nil, False, LinearBlend);
@@ -551,7 +693,7 @@ procedure BorderEllipseAntialiasWithTexture(bmp: TBGRACustomBitmap; x, y, rx,
 var
   info: TFillBorderEllipseInfo;
 begin
-  if (rx = 0) or (ry = 0) or (w=0) or (x = EmptySingle) or (y = EmptySingle) then
+  if ((rx = 0) and (ry = 0)) or (w=0) or (x = EmptySingle) or (y = EmptySingle) then
     exit;
   info := TFillBorderEllipseInfo.Create(x, y, rx, ry, w);
   FillShapeAntialiasWithTexture(bmp, info, scan, False, LinearBlend);
@@ -592,6 +734,23 @@ begin
     y2 := temp;
   end;
   result := (x2-x1 > w) and (y2-y1 > w);
+end;
+
+procedure TBGRAMultishapeFiller.InternalAddStroke(
+  const APoints: array of TPointF; AClosed: boolean; AData: Pointer);
+var pts: ArrayOfTPointF;
+begin
+  with TPathStrokeData(AData^) do
+  begin
+    if AClosed then
+      pts := Stroker.ComputePolygon(APoints, Width)
+    else
+      pts := Stroker.ComputePolylineAutoCycle(APoints, Width);
+    if Texture <> nil then
+      AddPolygon(pts, Texture)
+    else
+      AddPolygon(pts, Color);
+  end;
 end;
 
 constructor TBGRAMultishapeFiller.Create;
@@ -642,13 +801,104 @@ begin
   AddShape(TOnePassFillPolyInfo.Create(points),True,ATexture,nil,BGRAPixelTransparent);
 end;
 
+procedure TBGRAMultishapeFiller.AddPathStroke(APath: TBGRAPath;
+  AColor: TBGRAPixel; AWidth: single; AStroker: TBGRACustomPenStroker);
+begin
+  AddPathStroke(APath,AffineMatrixIdentity,AColor,AWidth,AStroker);
+end;
+
+procedure TBGRAMultishapeFiller.AddPathStroke(APath: TBGRAPath;
+  ATexture: IBGRAScanner; AWidth: single; AStroker: TBGRACustomPenStroker);
+begin
+  AddPathStroke(APath,AffineMatrixIdentity,ATexture,AWidth,AStroker);
+end;
+
+procedure TBGRAMultishapeFiller.AddPathStroke(APath: TBGRAPath;
+  AMatrix: TAffineMatrix; AColor: TBGRAPixel; AWidth: single;
+  AStroker: TBGRACustomPenStroker);
+var data: TPathStrokeData;
+begin
+  data.Stroker := AStroker;
+  data.Color := AColor;
+  data.Texture := nil;
+  data.Width := AWidth;
+  APath.stroke(@InternalAddStroke, AMatrix, 0.1, @data);
+end;
+
+procedure TBGRAMultishapeFiller.AddPathStroke(APath: TBGRAPath;
+  AMatrix: TAffineMatrix; ATexture: IBGRAScanner; AWidth: single;
+  AStroker: TBGRACustomPenStroker);
+var data: TPathStrokeData;
+begin
+  data.Stroker := AStroker;
+  data.Color := BGRAPixelTransparent;
+  data.Texture := ATexture;
+  data.Width := AWidth;
+  APath.stroke(@InternalAddStroke, AMatrix, 0.1, @data);
+end;
+
+procedure TBGRAMultishapeFiller.AddPathFill(APath: TBGRAPath; AColor: TBGRAPixel);
+begin
+  AddPolygon(APath.ToPoints, AColor);
+end;
+
+procedure TBGRAMultishapeFiller.AddPathFill(APath: TBGRAPath;
+  ATexture: IBGRAScanner);
+begin
+  AddPolygon(APath.ToPoints, ATexture);
+end;
+
+procedure TBGRAMultishapeFiller.AddPathFill(APath: TBGRAPath;
+  AMatrix: TAffineMatrix; AColor: TBGRAPixel);
+begin
+  AddPolygon(APath.ToPoints(AMatrix), AColor);
+end;
+
+procedure TBGRAMultishapeFiller.AddPathFill(APath: TBGRAPath;
+  AMatrix: TAffineMatrix; ATexture: IBGRAScanner);
+begin
+  AddPolygon(APath.ToPoints(AMatrix), ATexture);
+end;
+
+procedure TBGRAMultishapeFiller.AddPolylineStroke(
+  const points: array of TPointF; AColor: TBGRAPixel; AWidth: single;
+  AStroker: TBGRACustomPenStroker);
+begin
+  AddPolygon(AStroker.ComputePolyline(points,AWidth,AColor), AColor);
+end;
+
+procedure TBGRAMultishapeFiller.AddPolylineStroke(
+  const points: array of TPointF; ATexture: IBGRAScanner; AWidth: single;
+  AStroker: TBGRACustomPenStroker);
+begin
+  AddPolygon(AStroker.ComputePolyline(points,AWidth), ATexture);
+end;
+
+procedure TBGRAMultishapeFiller.AddPolygonStroke(
+  const points: array of TPointF; AColor: TBGRAPixel; AWidth: single;
+  AStroker: TBGRACustomPenStroker);
+begin
+  AddPolygon(AStroker.ComputePolygon(points,AWidth), AColor);
+end;
+
+procedure TBGRAMultishapeFiller.AddPolygonStroke(
+  const points: array of TPointF; ATexture: IBGRAScanner; AWidth: single;
+  AStroker: TBGRACustomPenStroker);
+begin
+  AddPolygon(AStroker.ComputePolygon(points,AWidth), ATexture);
+end;
+
 procedure TBGRAMultishapeFiller.AddTriangleLinearColor(pt1, pt2, pt3: TPointF; c1, c2,
   c3: TBGRAPixel);
-var
-  grad: TBGRAGradientTriangleScanner;
+var grad: TBGRAGradientTriangleScanner;
 begin
-  grad := TBGRAGradientTriangleScanner.Create(pt1,pt2,pt3, c1,c2,c3);
-  AddShape(TOnePassFillPolyInfo.Create([pt1,pt2,pt3]),True,grad,grad,BGRAPixelTransparent);
+  if (c1 = c2) and (c2 = c3) then
+    AddPolygon([pt1,pt2,pt3],c1)
+  else
+  begin
+    grad := TBGRAGradientTriangleScanner.Create(pt1,pt2,pt3, c1,c2,c3);
+    AddShape(TOnePassFillPolyInfo.Create([pt1,pt2,pt3]),True,grad,grad,BGRAPixelTransparent);
+  end;
 end;
 
 procedure TBGRAMultishapeFiller.AddTriangleLinearMapping(pt1, pt2,
@@ -666,27 +916,31 @@ var
   center: TPointF;
   centerColor: TBGRAPixel;
 begin
-  center := (pt1+pt2+pt3+pt4)*(1/4);
-  centerColor := GammaCompression( MergeBGRA(MergeBGRA(GammaExpansion(c1),GammaExpansion(c2)),
-                    MergeBGRA(GammaExpansion(c3),GammaExpansion(c4))) );
-  AddTriangleLinearColor(pt1,pt2,center, c1,c2,centerColor);
-  AddTriangleLinearColor(pt2,pt3,center, c2,c3,centerColor);
-  AddTriangleLinearColor(pt3,pt4,center, c3,c4,centerColor);
-  AddTriangleLinearColor(pt4,pt1,center, c4,c1,centerColor);
+  if (c1 = c2) and (c2 = c3) and (c3 = c4) then
+    AddPolygon([pt1,pt2,pt3,pt4],c1)
+  else
+  begin
+    center := (pt1+pt2+pt3+pt4)*(1/4);
+    centerColor := GammaCompression( MergeBGRA(MergeBGRA(GammaExpansion(c1),GammaExpansion(c2)),
+                      MergeBGRA(GammaExpansion(c3),GammaExpansion(c4))) );
+    AddTriangleLinearColor(pt1,pt2,center, c1,c2,centerColor);
+    AddTriangleLinearColor(pt2,pt3,center, c2,c3,centerColor);
+    AddTriangleLinearColor(pt3,pt4,center, c3,c4,centerColor);
+    AddTriangleLinearColor(pt4,pt1,center, c4,c1,centerColor);
+  end;
 end;
 
 procedure TBGRAMultishapeFiller.AddQuadLinearMapping(pt1, pt2, pt3,
-  pt4: TPointF; texture: IBGRAScanner; tex1, tex2, tex3, tex4: TPointF);
+  pt4: TPointF; texture: IBGRAScanner; tex1, tex2, tex3, tex4: TPointF;
+  ACulling: TFaceCulling);
 var
-  center: TPointF;
-  centerTex: TPointF;
+  mapping: TBGRAQuadLinearScanner;
 begin
-  center := (pt1+pt2+pt3+pt4)*(1/4);
-  centerTex := (tex1+tex2+tex3+tex4)*(1/4);
-  AddTriangleLinearMapping(pt1,pt2,center, texture,tex1,tex2,centerTex);
-  AddTriangleLinearMapping(pt2,pt3,center, texture,tex2,tex3,centerTex);
-  AddTriangleLinearMapping(pt3,pt4,center, texture,tex3,tex4,centerTex);
-  AddTriangleLinearMapping(pt4,pt1,center, texture,tex4,tex1,centerTex);
+  mapping := TBGRAQuadLinearScanner.Create(texture,
+    [tex1,tex2,tex3,tex4],
+    [pt1,pt2,pt3,pt4]);
+  mapping.Culling := ACulling;
+  AddShape(TOnePassFillPolyInfo.Create([pt1,pt2,pt3,pt4]),True,mapping,mapping,BGRAPixelTransparent);
 end;
 
 procedure TBGRAMultishapeFiller.AddQuadPerspectiveMapping(pt1, pt2, pt3,

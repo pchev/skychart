@@ -64,7 +64,11 @@ uses
 			{$IFDEF LCLqt}
 		BGRAQtBitmap,
 			{$ELSE}
+              {$IFDEF DARWIN}
+        BGRAMacBitmap,
+              {$ELSE}
 		BGRALCLBitmap,
+              {$ENDIF}
 			{$ENDIF}
 		  {$ENDIF}
 		{$ENDIF}
@@ -77,28 +81,32 @@ uses
 
 type
 {$IFDEF BGRABITMAP_USE_FPGUI}
-  TBGRABitmap = TBGRAfpGUIBitmap;
+  TBGRABitmap = class(TBGRAfpGUIBitmap);
 {$ELSE}
     {$IFDEF BGRABITMAP_USE_LCL}
       {$IFDEF LCLwin32}
-        TBGRABitmap = TBGRAWinBitmap;
+        TBGRABitmap = class(TBGRAWinBitmap);
       {$ELSE}
         {$IFDEF LCLgtk}
-        TBGRABitmap = TBGRAGtkBitmap;
+        TBGRABitmap = class(TBGRAGtkBitmap);
         {$ELSE}
           {$IFDEF LCLgtk2}
-        TBGRABitmap = TBGRAGtkBitmap;
+        TBGRABitmap = class(TBGRAGtkBitmap);
           {$ELSE}
             {$IFDEF LCLqt}
-        TBGRABitmap = TBGRAQtBitmap;
+        TBGRABitmap = class(TBGRAQtBitmap);
             {$ELSE}
-        TBGRABitmap = TBGRALCLBitmap;
+              {$IFDEF DARWIN}
+        TBGRABitmap = class(TBGRAMacBitmap);
+              {$ELSE}
+        TBGRABitmap = class(TBGRALCLBitmap);
+              {$ENDIF}
             {$ENDIF}
           {$ENDIF}
         {$ENDIF}
       {$ENDIF}
     {$ELSE}
-      TBGRABitmap = TBGRANoGUIBitmap;
+      TBGRABitmap = class(TBGRANoGUIBitmap);
     {$ENDIF}
 {$ENDIF}
 

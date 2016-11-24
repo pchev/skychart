@@ -44,7 +44,8 @@ type
     peQuadraticBezierTo, peCubicBezierTo, peArc, peOpenedSpline,
     peClosedSpline);
 
-  TBGRAPathDrawProc = procedure(const APoints: array of TPointF; AClosed: boolean) of object;
+  TBGRAPathDrawProc = procedure(const APoints: array of TPointF; AClosed: boolean; AData: Pointer) of object;
+  TBGRAPathFillProc = procedure(const APoints: array of TPointF; AData: pointer) of object;
 
   TBGRAPath = class;
 
@@ -57,6 +58,8 @@ type
     FAcceptedDeviation: single;
     FPathLength: single;
     FPathLengthComputed: boolean;
+    FBounds: TRectF;
+    FBoundsComputed: boolean;
     FArcPos: Single;
 
     FStartCoordinate: TPointF;
@@ -90,6 +93,7 @@ type
     function GetArcPos: single; override;
     function GetCurrentTangent: TPointF; override;
     procedure SetArcPos(AValue: single); override;
+    function GetBounds: TRectF; override;
     function GetPathLength: single; override;
     procedure PrepareCurrentElement; virtual;
     function GetCurrentCoord: TPointF; override;
@@ -104,6 +108,7 @@ type
     property Position: single read GetArcPos write SetArcPos;
     property PathLength: single read GetPathLength;
     property Path: TBGRAPath read GetPath;
+    property Bounds: TRectF read GetBounds;
     property StartCoordinate: TPointF read GetStartCoordinate;
     property LoopClosedShapes: boolean read GetLoopClosedShapes write SetLoopClosedShapes;
     property LoopPath: boolean read GetLoopPath write SetLoopPath;
@@ -113,12 +118,6 @@ type
   { TBGRAPath }
 
   TBGRAPath = class(IBGRAPath)
-  private
-    FDrawProcBitmap: TBGRACustomBitmap;
-    FDrawProcTexture: IBGRAScanner;
-    FDrawProcColor: TBGRAPixel;
-    FDrawProcWidth: Single;
-    procedure BitmapDrawProc(const APoints: array of TPointF; AClosed: boolean);
   protected
     FData: PByte;
     FDataCapacity: PtrInt;
@@ -133,6 +132,7 @@ type
                             //orientation in order to preserve arcs
     FScale,FAngleRadCW: single;
     FCursors: array of TBGRAPathCursor;
+    FInternalDrawOffset: TPointF;
     procedure OnModify;
     procedure OnMatrixChange;
     procedure NeedSpace(count: integer);
@@ -160,9 +160,11 @@ type
     function LastCoordDefined: boolean; inline;
     function GetPolygonalApprox(APos: IntPtr; AAcceptedDeviation: single; AIncludeFirstPoint: boolean): ArrayOfTPointF;
     function getPoints: ArrayOfTPointF;
+    function getPoints(AMatrix: TAffineMatrix): ArrayOfTPointF;
     function getCursor: TBGRACustomPathCursor;
-    procedure InternalDraw(ADrawProc: TBGRAPathDrawProc; AAcceptedDeviation: single);
-    procedure InternalDrawOn(ABitmap: TBGRACustomBitmap; AColor: TBGRAPixel; ATexture: IBGRAScanner; AWidth: single; AAcceptedDeviation: single);
+    procedure InternalDraw(ADrawProc: TBGRAPathDrawProc; const AMatrix: TAffineMatrix; AAcceptedDeviation: single; AData: pointer);
+    procedure BitmapDrawSubPathProc(const APoints: array of TPointF; AClosed: boolean; AData: pointer);
+    function CorrectAcceptedDeviation(AAcceptedDeviation: single; const AMatrix: TAffineMatrix): single;
   public
     constructor Create; overload;
     constructor Create(ASvgString: string); overload;
@@ -217,13 +219,28 @@ type
     procedure closedSpline(const pts: array of TPointF; style: TSplineStyle);
     property SvgString: string read GetSvgString write SetSvgString;
     function ComputeLength(AAcceptedDeviation: single = 0.1): single;
-    function ToPoints(AAcceptedDeviation: single = 0.1): ArrayOfTPointF;
+    function ToPoints(AAcceptedDeviation: single = 0.1): ArrayOfTPointF; overload;
+    function ToPoints(AMatrix: TAffineMatrix; AAcceptedDeviation: single = 0.1): ArrayOfTPointF; overload;
+    function IsEmpty: boolean;
+    function GetBounds(AAcceptedDeviation: single = 0.1): TRectF;
     procedure SetPoints(const APoints: ArrayOfTPointF);
     procedure stroke(ABitmap: TBGRACustomBitmap; AColor: TBGRAPixel; AWidth: single; AAcceptedDeviation: single = 0.1);
     procedure stroke(ABitmap: TBGRACustomBitmap; ATexture: IBGRAScanner; AWidth: single; AAcceptedDeviation: single = 0.1);
+    procedure stroke(ABitmap: TBGRACustomBitmap; x,y: single; AColor: TBGRAPixel; AWidth: single; AAcceptedDeviation: single = 0.1);
+    procedure stroke(ABitmap: TBGRACustomBitmap; x,y: single; ATexture: IBGRAScanner; AWidth: single; AAcceptedDeviation: single = 0.1);
+    procedure stroke(ABitmap: TBGRACustomBitmap; const AMatrix: TAffineMatrix; AColor: TBGRAPixel; AWidth: single; AAcceptedDeviation: single = 0.1);
+    procedure stroke(ABitmap: TBGRACustomBitmap; const AMatrix: TAffineMatrix; ATexture: IBGRAScanner; AWidth: single; AAcceptedDeviation: single = 0.1);
+    procedure stroke(ADrawProc: TBGRAPathDrawProc; const AMatrix: TAffineMatrix; AAcceptedDeviation: single = 0.1; AData: pointer = nil);
     procedure fill(ABitmap: TBGRACustomBitmap; AColor: TBGRAPixel; AAcceptedDeviation: single = 0.1);
     procedure fill(ABitmap: TBGRACustomBitmap; ATexture: IBGRAScanner; AAcceptedDeviation: single = 0.1);
+    procedure fill(ABitmap: TBGRACustomBitmap; x,y: single; AColor: TBGRAPixel; AAcceptedDeviation: single = 0.1);
+    procedure fill(ABitmap: TBGRACustomBitmap; x,y: single; ATexture: IBGRAScanner; AAcceptedDeviation: single = 0.1);
+    procedure fill(ABitmap: TBGRACustomBitmap; const AMatrix: TAffineMatrix; AColor: TBGRAPixel; AAcceptedDeviation: single = 0.1);
+    procedure fill(ABitmap: TBGRACustomBitmap; const AMatrix: TAffineMatrix; ATexture: IBGRAScanner; AAcceptedDeviation: single = 0.1);
+    procedure fill(AFillProc: TBGRAPathFillProc; const AMatrix: TAffineMatrix; AAcceptedDeviation: single = 0.1; AData: pointer = nil);
     function CreateCursor(AAcceptedDeviation: single = 0.1): TBGRAPathCursor;
+    procedure Fit(ARect: TRectF; AAcceptedDeviation: single = 0.1);
+    procedure FitInto(ADest: TBGRAPath; ARect: TRectF; AAcceptedDeviation: single = 0.1);
   protected
     function QueryInterface({$IFDEF FPC_HAS_CONSTREF}constref{$ELSE}const{$ENDIF} IID: TGUID; out Obj): HResult; {$IF (not defined(WINDOWS)) AND (FPC_FULLVERSION>=20501)}cdecl{$ELSE}stdcall{$IFEND};
     function _AddRef: Integer; {$IF (not defined(WINDOWS)) AND (FPC_FULLVERSION>=20501)}cdecl{$ELSE}stdcall{$IFEND};
@@ -261,6 +278,13 @@ implementation
 uses Math, BGRAResample, SysUtils;
 
 type
+  TStrokeData = record
+    Bitmap: TBGRACustomBitmap;
+    Texture: IBGRAScanner;
+    Color: TBGRAPixel;
+    Width: Single;
+  end;
+
   PPathElementHeader = ^TPathElementHeader;
   TPathElementHeader = record
     ElementType: TBGRAPathElementType;
@@ -458,6 +482,7 @@ begin
 
   kernel := CreateInterpolator(style);
   setlength(Result, nb);
+  idx := 0;
   for i := 0 to high(points) do
   begin
     ptPrev2 := points[(i + length(points) - 1) mod length(points)];
@@ -466,10 +491,9 @@ begin
     ptNext2 := points[(i + 2) mod length(points)];
     pre     := ComputeCurvePartPrecision(ptPrev2, ptPrev, ptNext, ptNext2, AAcceptedDeviation);
     if i=0 then
-    begin
-      j := 0;
-      idx := 0;
-    end else j := 1;
+      j := 0
+    else
+      j := 1;
     while j <= pre do
     begin
       t := j/pre;
@@ -864,6 +888,8 @@ begin
           (FCurrentElementPoints[FCurrentSegment+1]-
            FCurrentElementPoints[FCurrentSegment])*FCurrentSegmentPos;
       end;
+    else
+      raise Exception.Create('Unknown element type');
   end;
 end;
 
@@ -1134,6 +1160,16 @@ begin
   end;
 end;
 
+function TBGRAPathCursor.GetBounds: TRectF;
+begin
+  if not FBoundsComputed then
+  begin
+    FBounds:= Path.GetBounds(FAcceptedDeviation);
+    FBoundsComputed := true;
+  end;
+  result := FBounds;
+end;
+
 function TBGRAPathCursor.GoToNextElement(ACanJump: boolean): boolean;
 begin
   if (FCurrentElementType = peCloseSubPath) and
@@ -1227,6 +1263,7 @@ constructor TBGRAPathCursor.Create(APath: TBGRAPath; AAcceptedDeviation: single)
 begin
   FPath := APath;
   FPathLengthComputed := false;
+  FBoundsComputed:= false;
   FDataPos := 0;
   FArcPos:= 0;
   FAcceptedDeviation:= AAcceptedDeviation;
@@ -1284,7 +1321,11 @@ var
   newArcPos: Single;
   step: Single;
 begin
-  if ADistance = 0 then exit;
+  if ADistance = 0 then
+  begin
+    result := 0;
+    exit;
+  end;
   if ADistance < 0 then
   begin
     result := -MoveForward(-ADistance, ACanJump);
@@ -1416,6 +1457,83 @@ begin
   result := ConcatPointsF(sub);
 end;
 
+function TBGRAPath.ToPoints(AMatrix: TAffineMatrix; AAcceptedDeviation: single): ArrayOfTPointF;
+begin
+  AAcceptedDeviation:= CorrectAcceptedDeviation(AAcceptedDeviation,AMatrix);
+  result := ToPoints(AAcceptedDeviation);
+  if not IsAffineMatrixIdentity(AMatrix) then
+    result := AMatrix*result;
+end;
+
+function TBGRAPath.IsEmpty: boolean;
+begin
+  result := FDataPos = 0;
+end;
+
+function TBGRAPath.GetBounds(AAcceptedDeviation: single): TRectF;
+var empty: boolean;
+    pos: PtrInt;
+    elemType: TBGRAPathElementType;
+    elem: pointer;
+    temp: array of TPointF;
+    i: integer;
+
+  procedure Include(pt: TPointF);
+  begin
+    if empty then
+    begin
+      result.TopLeft := pt;
+      result.BottomRight := pt;
+      empty := false;
+    end else
+    begin
+      if pt.x < result.Left then result.Left := pt.x
+      else if pt.x > result.Right then result.Right := pt.x;
+      if pt.y < result.Top then result.Top := pt.y
+      else if pt.y > result.Bottom then result.Bottom := pt.y;
+    end;
+  end;
+
+  procedure IncludeRect(r: TRectF);
+  begin
+    Include(r.TopLeft);
+    Include(r.BottomRight);
+  end;
+
+begin
+  empty := true;
+  result := RectF(0,0,0,0);
+  pos := 0;
+  repeat
+    GetElementAt(pos, elemType, elem);
+    if elem = nil then break;
+    case elemType of
+      peMoveTo,peLineTo,peCloseSubPath: begin
+          Include(PPointF(elem)^);
+          while PeekNextElement(pos) in[peLineTo,peCloseSubPath] do
+          begin
+            GoToNextElement(pos);
+            GetElementAt(pos, elemType, elem);
+            Include(PPointF(elem)^);
+          end;
+        end;
+      peCubicBezierTo:
+        with PCubicBezierToElement(elem)^ do
+          IncludeRect(BGRABitmapTypes.BezierCurve(GetElementStartCoord(pos),ControlPoint1,ControlPoint2,Destination).GetBounds);
+      peQuadraticBezierTo:
+        with PQuadraticBezierToElement(elem)^ do
+          IncludeRect(BGRABitmapTypes.BezierCurve(GetElementStartCoord(pos),ControlPoint,Destination).GetBounds);
+      peArc, peOpenedSpline, peClosedSpline:
+        begin
+          temp := GetPolygonalApprox(pos, AAcceptedDeviation, False);
+          for i := 0 to high(temp) do
+            Include(temp[i]);
+        end;
+    end;
+  until not GoToNextElement(pos);
+  if empty then raise exception.Create('Path is empty');
+end;
+
 procedure TBGRAPath.SetPoints(const APoints: ArrayOfTPointF);
 var i: integer;
     nextIsMoveTo: boolean;
@@ -1451,30 +1569,138 @@ end;
 procedure TBGRAPath.stroke(ABitmap: TBGRACustomBitmap; AColor: TBGRAPixel;
   AWidth: single; AAcceptedDeviation: single);
 begin
-  InternalDrawOn(ABitmap,AColor,nil,AWidth,AAcceptedDeviation);
+  stroke(ABitmap,AffineMatrixIdentity,AColor,AWidth,AAcceptedDeviation);
 end;
 
 procedure TBGRAPath.stroke(ABitmap: TBGRACustomBitmap; ATexture: IBGRAScanner;
   AWidth: single; AAcceptedDeviation: single);
 begin
-  InternalDrawOn(ABitmap,BGRAPixelTransparent,ATexture,AWidth,AAcceptedDeviation);
+  stroke(ABitmap,AffineMatrixIdentity,ATexture,AWidth,AAcceptedDeviation);
+end;
+
+procedure TBGRAPath.stroke(ABitmap: TBGRACustomBitmap; x, y: single;
+  AColor: TBGRAPixel; AWidth: single; AAcceptedDeviation: single);
+begin
+  stroke(ABitmap,AffineMatrixTranslation(x,y),AColor,AWidth,AAcceptedDeviation);
+end;
+
+procedure TBGRAPath.stroke(ABitmap: TBGRACustomBitmap; x, y: single;
+  ATexture: IBGRAScanner; AWidth: single; AAcceptedDeviation: single);
+begin
+  stroke(ABitmap,AffineMatrixTranslation(x,y),ATexture,AWidth,AAcceptedDeviation);
+end;
+
+procedure TBGRAPath.stroke(ABitmap: TBGRACustomBitmap; const AMatrix: TAffineMatrix;
+  AColor: TBGRAPixel; AWidth: single; AAcceptedDeviation: single);
+var data: TStrokeData;
+begin
+  data.Bitmap := ABitmap;
+  data.Texture := nil;
+  data.Color := AColor;
+  data.Width := AWidth;
+  InternalDraw(@BitmapDrawSubPathProc, AMatrix, AAcceptedDeviation, @data);
+end;
+
+procedure TBGRAPath.stroke(ABitmap: TBGRACustomBitmap; const AMatrix: TAffineMatrix;
+  ATexture: IBGRAScanner; AWidth: single; AAcceptedDeviation: single);
+var data: TStrokeData;
+begin
+  data.Bitmap := ABitmap;
+  data.Texture := ATexture;
+  data.Color := BGRAPixelTransparent;
+  data.Width := AWidth;
+  InternalDraw(@BitmapDrawSubPathProc, AMatrix, AAcceptedDeviation, @data);
+end;
+
+procedure TBGRAPath.stroke(ADrawProc: TBGRAPathDrawProc;
+  const AMatrix: TAffineMatrix; AAcceptedDeviation: single; AData: pointer);
+begin
+  InternalDraw(ADrawProc,AMatrix,AAcceptedDeviation,AData);
 end;
 
 procedure TBGRAPath.fill(ABitmap: TBGRACustomBitmap; AColor: TBGRAPixel;
   AAcceptedDeviation: single);
 begin
-  ABitmap.FillPolyAntialias(ToPoints(AAcceptedDeviation), AColor);
+  fill(ABitmap,AffineMatrixIdentity,AColor,AAcceptedDeviation);
 end;
 
 procedure TBGRAPath.fill(ABitmap: TBGRACustomBitmap; ATexture: IBGRAScanner;
   AAcceptedDeviation: single);
 begin
-  ABitmap.FillPolyAntialias(ToPoints(AAcceptedDeviation), ATexture);
+  fill(ABitmap,AffineMatrixIdentity,ATexture,AAcceptedDeviation);
+end;
+
+procedure TBGRAPath.fill(ABitmap: TBGRACustomBitmap; x, y: single;
+  AColor: TBGRAPixel; AAcceptedDeviation: single);
+begin
+  fill(ABitmap,AffineMatrixTranslation(x,y),AColor,AAcceptedDeviation);
+end;
+
+procedure TBGRAPath.fill(ABitmap: TBGRACustomBitmap; x, y: single;
+  ATexture: IBGRAScanner; AAcceptedDeviation: single);
+begin
+  fill(ABitmap,AffineMatrixTranslation(x,y),ATexture,AAcceptedDeviation);
+end;
+
+procedure TBGRAPath.fill(ABitmap: TBGRACustomBitmap; const AMatrix: TAffineMatrix;
+  AColor: TBGRAPixel; AAcceptedDeviation: single);
+begin
+  ABitmap.FillPolyAntialias(ToPoints(AMatrix,AAcceptedDeviation), AColor);
+end;
+
+procedure TBGRAPath.fill(ABitmap: TBGRACustomBitmap; const AMatrix: TAffineMatrix;
+  ATexture: IBGRAScanner; AAcceptedDeviation: single);
+begin
+  ABitmap.FillPolyAntialias(ToPoints(AMatrix,AAcceptedDeviation), ATexture);
+end;
+
+procedure TBGRAPath.fill(AFillProc: TBGRAPathFillProc; const AMatrix: TAffineMatrix;
+  AAcceptedDeviation: single; AData: pointer);
+begin
+  AFillProc(ToPoints(AMatrix,AAcceptedDeviation), AData);
 end;
 
 function TBGRAPath.CreateCursor(AAcceptedDeviation: single): TBGRAPathCursor;
 begin
   result := TBGRAPathCursor.Create(self, AAcceptedDeviation);
+end;
+
+procedure TBGRAPath.Fit(ARect: TRectF; AAcceptedDeviation: single);
+var
+  temp: TBGRAPath;
+begin
+  temp := TBGRAPath.Create;
+  copyTo(temp);
+  temp.FitInto(self, ARect, AAcceptedDeviation);
+  temp.Free;
+end;
+
+procedure TBGRAPath.FitInto(ADest: TBGRAPath; ARect: TRectF;
+  AAcceptedDeviation: single);
+var bounds: TRectF;
+    zoomX,zoomY: single;
+begin
+  bounds := GetBounds(AAcceptedDeviation);
+  ADest.beginPath;
+  ADest.translate((ARect.Left+ARect.Right)*0.5, (ARect.Bottom+ARect.Top)*0.5);
+  if bounds.Right-bounds.Left <> 0 then
+  begin
+    zoomX := (ARect.Right-ARect.Left)/(bounds.Right-bounds.Left);
+    if bounds.Bottom-bounds.Top > 0 then
+    begin
+      zoomY := (ARect.Bottom-ARect.Top)/(bounds.Bottom-bounds.Top);
+      if zoomY < zoomX then ADest.scale(zoomY) else ADest.scale(zoomX);
+    end else
+      ADest.scale(zoomX);
+  end else
+  if bounds.Bottom-bounds.Top > 0 then
+  begin
+    zoomY := (ARect.Bottom-ARect.Top)/(bounds.Bottom-bounds.Top);
+    ADest.scale(zoomY);
+  end;
+  ADest.translate(-(bounds.Left+bounds.Right)*0.5, -(bounds.Bottom+bounds.Top)*0.5);
+  copyTo(ADest);
+  ADest.resetTransform;
 end;
 
 function TBGRAPath.GetSvgString: string;
@@ -1679,13 +1905,18 @@ begin
   result := ToPoints;
 end;
 
+function TBGRAPath.getPoints(AMatrix: TAffineMatrix): ArrayOfTPointF;
+begin
+  result := ToPoints(AMatrix);
+end;
+
 function TBGRAPath.getCursor: TBGRACustomPathCursor;
 begin
   result := CreateCursor;
 end;
 
 procedure TBGRAPath.InternalDraw(ADrawProc: TBGRAPathDrawProc;
-  AAcceptedDeviation: single);
+  const AMatrix: TAffineMatrix; AAcceptedDeviation: single; AData: pointer);
 var
   nbSub: NativeInt;
 
@@ -1749,10 +1980,12 @@ var
       GoToNextElement(pos);
     end;
     temp := ConcatPointsF(sub);
+    if not IsAffineMatrixIdentity(AMatrix) then
+      temp := AMatrix*temp;
     if (elemType = peCloseSubPath) or ((curSub = 2) and (elemType = peClosedSpline)) then
-      ADrawProc(temp, True)
+      ADrawProc(temp, True, AData)
     else
-      ADrawProc(temp, False);
+      ADrawProc(temp, False, AData);
   end;
 
 var
@@ -1761,6 +1994,7 @@ var
   elemType: TBGRAPathElementType;
   elem: pointer;
 begin
+  AAcceptedDeviation := CorrectAcceptedDeviation(AAcceptedDeviation, AMatrix);
   pos := 0;
   nbSub := 0;
   subPathStartPos := pos;
@@ -1790,16 +2024,6 @@ begin
   if nbSub > 0 then OutputSub(subPathStartPos,pos);
 end;
 
-procedure TBGRAPath.InternalDrawOn(ABitmap: TBGRACustomBitmap;
-  AColor: TBGRAPixel; ATexture: IBGRAScanner; AWidth: single; AAcceptedDeviation: single);
-begin
-  FDrawProcBitmap := ABitmap;
-  FDrawProcTexture := ATexture;
-  FDrawProcColor := AColor;
-  FDrawProcWidth := AWidth;
-  InternalDraw(@BitmapDrawProc, AAcceptedDeviation);
-end;
-
 procedure TBGRAPath.addPath(const AValue: string);
 var p: integer;
     numberError: boolean;
@@ -1813,19 +2037,22 @@ var p: integer;
     numberStart:= p;
     if (p <= length(AValue)) and (AValue[p] in['+','-']) then inc(p);
     while (p <= length(AValue)) and (AValue[p] in['0'..'9','.']) do inc(p);
-    if (p <= length(AValue)) and (AValue[p] in['e','E']) then inc(p);
-    if (p <= length(AValue)) and (AValue[p] in['+','-']) then inc(p);
-    while (p <= length(AValue)) and (AValue[p] in['0'..'9','.']) do inc(p);
+    if (p <= length(AValue)) and (AValue[p] in['e','E']) then
+    begin
+      inc(p);
+      if (p <= length(AValue)) and (AValue[p] in['+','-']) then inc(p);
+      while (p <= length(AValue)) and (AValue[p] in['0'..'9','.']) do inc(p);
+    end;
     val(copy(AValue,numberStart,p-numberStart),result,errPos);
     if errPos <> 0 then numberError := true;
   end;
 
   function parseCoord(relative: boolean): TPointF;
   begin
-    result := PointF(parseFloat,parseFloat);
+    result.x := parseFloat;
+    result.y := parseFloat;
     if relative and not isEmptyPointF(lastCoord) then result += lastCoord;
     if isEmptyPointF(lastCoord) then startCoord := result;
-    lastCoord := result;
   end;
 
 var
@@ -1861,13 +2088,21 @@ begin
          end;
     'M': begin
            p1 := parseCoord(relative);
-           if not numberError then moveTo(p1);
+           if not numberError then
+           begin
+             moveTo(p1);
+             lastCoord := p1;
+           end;
            if relative then implicitCommand:= 'l' else
              implicitCommand:= 'L';
       end;
     'L': begin
            p1 := parseCoord(relative);
-           if not numberError then lineTo(p1);
+           if not numberError then
+           begin
+             lineTo(p1);
+             lastCoord := p1;
+           end;
       end;
     'H': begin
         if not isEmptyPointF(lastCoord) then
@@ -1881,7 +2116,11 @@ begin
           lastCoord := p1;
           startCoord := p1;
         end;
-        if not numberError then lineTo(p1);
+        if not numberError then
+        begin
+          lineTo(p1);
+          lastCoord := p1;
+        end;
       end;
     'V': begin
         if not isEmptyPointF(lastCoord) then
@@ -1895,28 +2134,48 @@ begin
           lastCoord := p1;
           startCoord := p1;
         end;
-        if not numberError then lineTo(p1);
+        if not numberError then
+        begin
+          lineTo(p1);
+          lastCoord := p1;
+        end;
       end;
     'C': begin
         c1 := parseCoord(relative);
         c2 := parseCoord(relative);
         p1 := parseCoord(relative);
-        if not numberError then bezierCurveTo(c1,c2,p1);
+        if not numberError then
+        begin
+          bezierCurveTo(c1,c2,p1);
+          lastCoord := p1;
+        end;
       end;
     'S': begin
         c2 := parseCoord(relative);
         p1 := parseCoord(relative);
-        if not numberError then smoothBezierCurveTo(c2,p1);
+        if not numberError then
+        begin
+          smoothBezierCurveTo(c2,p1);
+          lastCoord := p1;
+        end;
       end;
     'Q': begin
         c1 := parseCoord(relative);
         p1 := parseCoord(relative);
-        if not numberError then quadraticCurveTo(c1,p1);
+        if not numberError then
+        begin
+          quadraticCurveTo(c1,p1);
+          lastCoord := p1;
+        end;
       end;
     'T': begin
         p1 := parseCoord(relative);
-        if not numberError then smoothQuadraticCurveTo(p1);
-      end;
+        if not numberError then
+        begin
+          smoothQuadraticCurveTo(p1);
+          lastCoord := p1;
+        end;
+    end;
     'A':
       begin
         a.radius.x := parseFloat;
@@ -1926,7 +2185,10 @@ begin
         a.anticlockwise:= parseFloat=0;
         p1 := parseCoord(relative);
         if not numberError then
+        begin
           arcTo(a.radius.x,a.radius.y,a.xAngleRadCW,largeArc,a.anticlockwise,p1.x,p1.y);
+          lastCoord := p1;
+        end;
       end;
     end;
   end;
@@ -1984,22 +2246,38 @@ begin
   PInteger(p)^ := length(pts);
 end;
 
-procedure TBGRAPath.BitmapDrawProc(const APoints: array of TPointF;
-  AClosed: boolean);
+procedure TBGRAPath.BitmapDrawSubPathProc(const APoints: array of TPointF;
+  AClosed: boolean; AData: pointer);
 begin
+  with TStrokeData(AData^) do
   if AClosed then
   begin
-    if FDrawProcTexture <> nil then
-      FDrawProcBitmap.DrawPolygonAntialias(APoints, FDrawProcTexture, FDrawProcWidth)
+    if Texture <> nil then
+      Bitmap.DrawPolygonAntialias(APoints, Texture, Width)
     else
-      FDrawProcBitmap.DrawPolygonAntialias(APoints, FDrawProcColor, FDrawProcWidth);
+      Bitmap.DrawPolygonAntialias(APoints, Color, Width);
   end else
   begin
-      if FDrawProcTexture <> nil then
-        FDrawProcBitmap.DrawPolyLineAntialias(APoints, FDrawProcTexture, FDrawProcWidth)
-      else
-        FDrawProcBitmap.DrawPolyLineAntialias(APoints, FDrawProcColor, FDrawProcWidth);
+    if Texture <> nil then
+      Bitmap.DrawPolyLineAntialiasAutocycle(APoints, Texture, Width)
+    else
+      Bitmap.DrawPolyLineAntialiasAutocycle(APoints, Color, Width);
   end;
+end;
+
+function TBGRAPath.CorrectAcceptedDeviation(AAcceptedDeviation: single;
+  const AMatrix: TAffineMatrix): single;
+var maxZoom: single;
+begin
+  //determine the zoom of the matrix
+  maxZoom := Max(VectLen(PointF(AMatrix[1,1],AMatrix[2,1])),
+     VectLen(PointF(AMatrix[1,2],AMatrix[2,2])));
+  //make the accepted deviation smaller if the matrix zooms to avoid that
+  // curves would look angular
+  if maxZoom = 0 then
+    result:= 1e10
+  else
+    result := AAcceptedDeviation / maxZoom;
 end;
 
 procedure TBGRAPath.OnModify;
@@ -2172,13 +2450,13 @@ begin
   peCubicBezierTo: with PCubicBezierToElement(elem)^ do
       result := BGRABitmapTypes.BezierCurve(GetElementStartCoord(APos),ControlPoint1,ControlPoint2,Destination).ComputeLength(AAcceptedDeviation);
   peArc: begin
-      result += VectLen(ArcStartPoint(PArcElement(elem)^) - GetElementStartCoord(APos));
+      result := VectLen(ArcStartPoint(PArcElement(elem)^) - GetElementStartCoord(APos));
       result += PolylineLen(ComputeArc(PArcElement(elem)^, 0.1/AAcceptedDeviation));
     end;
   peClosedSpline,peOpenedSpline:
     begin
       pts := GetPolygonalApprox(APos, AAcceptedDeviation, true);
-      result += PolylineLen(pts) + VectLen(pts[0]-GetElementStartCoord(APos));
+      result := PolylineLen(pts) + VectLen(pts[0]-GetElementStartCoord(APos));
     end
   else
     result := 0;
