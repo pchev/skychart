@@ -49,6 +49,10 @@ type
       //nbInter gets the number of computed intersections
       procedure ComputeAndSort(cury: single; var inter: ArrayOfTIntersectionInfo; out nbInter: integer; windingMode: boolean); override;
 
+      //can be called after ComputeAndSort or ComputeIntersection to determine the current horizontal slice
+      //so that it can be checked if the intermediates scanlines can be skipped
+      function GetSliceIndex: integer; override;
+
   end;
 
   { TFillEllipseInfo }
@@ -56,6 +60,7 @@ type
   TFillEllipseInfo = class(TFillShapeInfo)
   private
     FX, FY, FRX, FRY: single;
+    FSliceIndex: integer;
     function GetCenter: TPointF;
   protected
     function NbMaxIntersection: integer; override;
@@ -66,6 +71,7 @@ type
     constructor Create(x, y, rx, ry: single);
     function GetBounds: TRect; override;
     function SegmentsCurved: boolean; override;
+    function GetSliceIndex: integer; override;
     property Center: TPointF read GetCenter;
     property RadiusX: single read FRX;
     property RadiusY: single read FRY;
@@ -85,6 +91,7 @@ type
     function GetBounds: TRect; override;
     function SegmentsCurved: boolean; override;
     destructor Destroy; override;
+    function GetSliceIndex: integer; override;
     property InnerBorder: TFillEllipseInfo read FInnerBorder;
     property OuterBorder: TFillEllipseInfo read FOuterBorder;
   end;
@@ -174,6 +181,7 @@ type
   public
     constructor Create(const points: array of TPointF);
     destructor Destroy; override;
+    function GetSliceIndex: integer; override;
   end;
 
   POnePassRecord = ^TOnePassRecord;
@@ -203,11 +211,13 @@ type
     FSortedByY: array of POnePassRecord;
     FFirstWaiting, FFirstDrawing: POnePassRecord;
     FShouldInitializeDrawing: boolean;
+    FSliceIndex: integer;
     procedure ComputeIntersection(cury: single;
       var inter: ArrayOfTIntersectionInfo; var nbInter: integer); override;
   public
     constructor Create(const points: array of TPointF);
     function CreateIntersectionArray: ArrayOfTIntersectionInfo; override;
+    function GetSliceIndex: integer; override;
     destructor Destroy; override;
   end;
 
@@ -488,6 +498,11 @@ begin
   if nbInter < 2 then exit;
   SortIntersection(inter,nbInter);
   if windingMode then ConvertFromNonZeroWinding(inter,nbInter);
+end;
+
+function TFillShapeInfo.GetSliceIndex: integer;
+begin
+  result := 0;
 end;
 
 function TFillShapeInfo.CreateIntersectionArray: ArrayOfTIntersectionInfo;
@@ -885,6 +900,11 @@ begin
   inherited Destroy;
 end;
 
+function TFillPolyInfo.GetSliceIndex: integer;
+begin
+  Result:= FCurSlice;
+end;
+
 { TOnePassFillPolyInfo }
 
 function TOnePassFillPolyInfo.PartitionByY(left,right: integer): integer;
@@ -982,6 +1002,7 @@ begin
       begin
         p^.nextDrawing := FFirstDrawing;
         FFirstDrawing := p;
+        inc(FSliceIndex);
       end;
     end
       else break;
@@ -1012,6 +1033,7 @@ begin
       else
         FFirstDrawing:= pnext;
       p := pnext;
+      Inc(FSliceIndex);
       continue;
     end;
     pprev := p;
@@ -1055,6 +1077,7 @@ begin
   end;
 
   SortByY;
+  FSliceIndex := 0;
 end;
 
 function TOnePassFillPolyInfo.CreateIntersectionArray: ArrayOfTIntersectionInfo;
@@ -1085,6 +1108,13 @@ begin
   end;
 
   setlength(result, NbMaxIntersection);
+  for i := 0 to high(result) do
+    result[i] := nil;
+end;
+
+function TOnePassFillPolyInfo.GetSliceIndex: integer;
+begin
+  Result:= FSliceIndex;
 end;
 
 destructor TOnePassFillPolyInfo.Destroy;
@@ -1153,6 +1183,7 @@ begin
   FRX := abs(rx);
   FRY := abs(ry);
   WindingFactor := 1;
+  FSliceIndex:= -1;
 end;
 
 function TFillEllipseInfo.GetBounds: TRect;
@@ -1163,6 +1194,11 @@ end;
 function TFillEllipseInfo.SegmentsCurved: boolean;
 begin
   Result:= true;
+end;
+
+function TFillEllipseInfo.GetSliceIndex: integer;
+begin
+  Result:= FSliceIndex;
 end;
 
 function TFillEllipseInfo.GetCenter: TPointF;
@@ -1189,6 +1225,13 @@ begin
     Inc(nbinter);
     inter[nbinter].SetValues( FX + d, windingFactor, 1);
     Inc(nbinter);
+    FSliceIndex := 0;
+  end else
+  begin
+    if cury < FY then
+      FSliceIndex:= -1
+    else
+      FSliceIndex:= 1;
   end;
 end;
 
@@ -1240,6 +1283,11 @@ begin
   if FInnerBorder <> nil then
     FInnerBorder.Free;
   inherited Destroy;
+end;
+
+function TFillBorderEllipseInfo.GetSliceIndex: integer;
+begin
+  Result:= FOuterBorder.GetSliceIndex;
 end;
 
 { TFillRoundRectangleInfo }

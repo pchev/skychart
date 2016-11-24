@@ -20,7 +20,10 @@ uses
   UnzipperExt, BGRALzpCommon, BGRAWriteLzp, BGRAReadXPM, BGRASVG, BGRAUnits, 
   BGRASVGShapes, BGRASVGType, BGRAReadBmpMioMap, BGRAArrow, BGRAPalette, 
   BGRAColorQuantization, BGRADithering, BGRAUTF8, BGRALCLBitmap, BGRAWritePNG, 
-  BGRAGifFormat, BGRAGraphics;
+  BGRAGifFormat, BGRAGraphics, BGRASceneTypes, BGRARenderer3D, 
+  BGRAWriteBmpMioMap, BGRAOpenGLType, BGRASpriteGL, BGRAOpenGL, BGRACanvasGL, 
+  BGRAFontGL, BGRAOpenGL3D, BGRAPhoxo, BGRAFilterScanner, BGRAFilterType, 
+  BGRAFilterBlur;
 
 implementation
 

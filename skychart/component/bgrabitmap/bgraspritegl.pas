@@ -5,7 +5,7 @@ unit BGRASpriteGL;
 interface
 
 uses
-  Classes, SysUtils, BGRAGraphics, BGRAOpenGLType,
+  Classes, SysUtils, BGRAOpenGLType,
   BGRABitmapTypes;
 
 type
@@ -121,6 +121,7 @@ type
     function GetCount: integer; virtual; abstract;
   public
     procedure Add(ASprite: TBGLCustomSprite); virtual; abstract;
+    procedure Remove(ASprite: TBGLCustomSprite); virtual; abstract;
     procedure OnDraw; virtual; abstract;
     procedure OnTimer; virtual; abstract;
     procedure Clear; virtual; abstract;
@@ -133,6 +134,7 @@ type
 
   TBGLDefaultSpriteEngine = class(TBGLCustomSpriteEngine)
   protected
+    FSpriteRemoved: TBGLCustomSprite;
     FSprites: array of TBGLDefaultSprite;
     FSpritesCount: integer;
     function GetSprite(AIndex: integer): TBGLCustomSprite; override;
@@ -140,6 +142,7 @@ type
   public
     constructor Create;
     procedure Add(ASprite: TBGLCustomSprite); override;
+    procedure Remove(ASprite: TBGLCustomSprite); override;
     procedure OnDraw; override;
     procedure OnTimer; override;
     procedure Clear; override;
@@ -171,14 +174,31 @@ begin
 end;
 
 procedure TBGLDefaultSpriteEngine.Add(ASprite: TBGLCustomSprite);
+var
+  i: Integer;
 begin
   if ASprite = nil then exit;
   if not (ASprite is TBGLDefaultSprite) then
     raise exception.Create('Invalid class');
+  for i := 0 to Count-1 do
+    if FSprites[i] = ASprite then exit;
   if Count = length(FSprites) then
     setlength(FSprites, length(FSprites)*2 + 1);
   FSprites[Count] := TBGLDefaultSprite(ASprite);
   Inc(FSpritesCount);
+end;
+
+procedure TBGLDefaultSpriteEngine.Remove(ASprite: TBGLCustomSprite);
+var
+  i: Integer;
+begin
+  if ASprite = FSpriteRemoved then exit;
+  for i := 0 to Count-1 do
+    if FSprites[i] = ASprite then
+    begin
+      Delete(i);
+      exit;
+    end;
 end;
 
 procedure TBGLDefaultSpriteEngine.OnDraw;
@@ -215,20 +235,27 @@ procedure TBGLDefaultSpriteEngine.Clear;
 var i: integer;
 begin
   for i := 0 to Count-1 do
-    FSprites[i].Free;
+  begin
+    FSpriteRemoved := FSprites[i];
+    FSpriteRemoved.Free;
+    FSpriteRemoved := nil;
+  end;
   FSprites := nil;
+  FSpritesCount := 0;
 end;
 
 procedure TBGLDefaultSpriteEngine.Delete(AIndex: integer);
 var i: integer;
 begin
   if (AIndex < 0) or (AIndex >= Count) then exit;
-  FSprites[AIndex].Free;
+  FSpriteRemoved := FSprites[AIndex];
   for i := AIndex to Count-1 do
     FSprites[i] := FSprites[i+1];
   dec(FSpritesCount);
   if FSpritesCount <= length(FSprites) div 2 then
     setlength(FSprites,FSpritesCount);
+  FSpriteRemoved.Free;
+  FSpriteRemoved := nil;
 end;
 
 { TBGLDefaultSprite }
@@ -474,6 +501,8 @@ end;
 
 destructor TBGLCustomSprite.Destroy;
 begin
+  if Assigned(BGLSpriteEngine) then
+    BGLSpriteEngine.Remove(self);
   inherited Destroy;
 end;
 

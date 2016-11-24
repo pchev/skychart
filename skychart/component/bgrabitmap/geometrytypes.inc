@@ -11,8 +11,29 @@ type
   {* Pointer to a ''TPointF'' structure }
   PPointF = ^TPointF;
   {* Contains a point with single-precision floating point coordinates }
+  {$if FPC_FULLVERSION>=030001}
+  TPointF = Types.TPointF;
+  {$else}
   TPointF = packed record x, y: single;
-            end;
+  end;
+  {$endif}
+
+  TAffineMatrix = array[1..2,1..3] of single;
+
+  {$if FPC_FULLVERSION>=030001}
+  TRectF = Types.TRectF;
+  {$else}
+  TRectF =
+  {$ifndef FPC_REQUIRES_PROPER_ALIGNMENT}
+  packed
+  {$endif FPC_REQUIRES_PROPER_ALIGNMENT}
+  record
+    case Integer of
+     0: (Left, Top, Right, Bottom: Single);
+     1: (TopLeft, BottomRight: TPointF);
+  end;
+  {$endif}
+  function RectF(Left, Top, Right, Bottom: Single): TRectF;
 
   const
     {** Value indicating that there is an empty ''TPointF'' structure.
@@ -42,8 +63,10 @@ type
   function VectLen(dx,dy: single): single; overload;
   {** Returns the length of the vector represented by (''x'',''y'') }
   function VectLen(v: TPointF): single; overload;
+  function VectDet(v1,v2: TPointF): double; inline;
 
 type
+  TFaceCulling = (fcNone, fcKeepCW, fcKeepCCW);
   {* Contains an array of points with single-precision floating point coordinates }
   ArrayOfTPointF = array of TPointF;
 
@@ -112,6 +135,7 @@ type
        maximum orthogonal distance that is ignored and approximated by a straight line.
        ''AIncludeFirstPoint'' indicates if the first point must be included in the array }
     function ToPoints(AAcceptedDeviation: single = 0.1; AIncludeFirstPoint: boolean = true): ArrayOfTPointF;
+    function GetBounds: TRectF;
   end;
 
   {** Creates a structure for a cubic Bézier curve }
@@ -141,6 +165,7 @@ type
        maximum orthogonal distance that is ignored and approximated by a straight line.
        ''AIncludeFirstPoint'' indicates if the first point must be included in the array }
     function ToPoints(AAcceptedDeviation: single = 0.1; AIncludeFirstPoint: boolean = true): ArrayOfTPointF;
+    function GetBounds: TRectF;
   end;
 
   {** Creates a structure for a quadratic Bézier curve }
@@ -182,6 +207,83 @@ type
 
   TBGRAArrowStyle = (asNone, asNormal, asCut, asTriangle, asHollowTriangle, asFlipped, asFlippedCut, asTail, asTailRepeat);
 
+  { TBGRACustomArrow }
+
+  TBGRACustomArrow = class
+  protected
+    function GetEndOffsetX: single; virtual; abstract;
+    function GetEndRepeatCount: integer; virtual; abstract;
+    function GetEndSizeFactor: TPointF; virtual; abstract;
+    function GetIsEndDefined: boolean; virtual; abstract;
+    function GetIsStartDefined: boolean; virtual; abstract;
+    function GetStartOffsetX: single; virtual; abstract;
+    function GetStartRepeatCount: integer; virtual; abstract;
+    function GetStartSizeFactor: TPointF; virtual; abstract;
+    procedure SetEndOffsetX(AValue: single); virtual; abstract;
+    procedure SetEndRepeatCount(AValue: integer); virtual; abstract;
+    procedure SetEndSizeFactor(AValue: TPointF); virtual; abstract;
+    procedure SetStartOffsetX(AValue: single); virtual; abstract;
+    procedure SetStartRepeatCount(AValue: integer); virtual; abstract;
+    procedure SetStartSizeFactor(AValue: TPointF); virtual; abstract;
+    function GetLineCap: TPenEndCap; virtual; abstract;
+    procedure SetLineCap(AValue: TPenEndCap); virtual; abstract;
+  public
+    function ComputeStartAt(const APosition: TPointF; const ADirection: TPointF; const AWidth: single; const ACurrentPos: single): ArrayOfTPointF; virtual; abstract;
+    function ComputeEndAt(const APosition: TPointF; const ADirection: TPointF; const AWidth: single; const ACurrentPos: single): ArrayOfTPointF; virtual; abstract;
+    procedure StartAsNone; virtual; abstract;
+    procedure StartAsClassic(AFlipped: boolean = false; ACut: boolean = false; ARelativePenWidth: single = 1); virtual; abstract;
+    procedure StartAsTriangle(ABackOffset: single = 0; ARounded: boolean = false; AHollow: boolean = false; AHollowPenWidth: single = 0.5); virtual; abstract;
+    procedure StartAsTail; virtual; abstract;
+    procedure EndAsNone; virtual; abstract;
+    procedure EndAsClassic(AFlipped: boolean = false; ACut: boolean = false; ARelativePenWidth: single = 1); virtual; abstract;
+    procedure EndAsTriangle(ABackOffset: single = 0; ARounded: boolean = false; AHollow: boolean = false; AHollowPenWidth: single = 0.5); virtual; abstract;
+    procedure EndAsTail; virtual; abstract;
+    property IsStartDefined: boolean read GetIsStartDefined;
+    property IsEndDefined: boolean read GetIsEndDefined;
+    property StartOffsetX: single read GetStartOffsetX write SetStartOffsetX;
+    property EndOffsetX: single read GetEndOffsetX write SetEndOffsetX;
+    property LineCap: TPenEndCap read GetLineCap write SetLineCap;
+    property StartSize: TPointF read GetStartSizeFactor write SetStartSizeFactor;
+    property EndSize: TPointF read GetEndSizeFactor write SetEndSizeFactor;
+    property StartRepeatCount: integer read GetStartRepeatCount write SetStartRepeatCount;
+    property EndRepeatCount: integer read GetEndRepeatCount write SetEndRepeatCount;
+  end;
+
+  { TBGRACustomPenStroker }
+
+  TBGRACustomPenStroker = class
+  protected
+      function GetArrow: TBGRACustomArrow; virtual; abstract;
+      function GetArrowOwned: boolean; virtual; abstract;
+      function GetCustomPenStyle: TBGRAPenStyle; virtual; abstract;
+      function GetJoinStyle: TPenJoinStyle; virtual; abstract;
+      function GetLineCap: TPenEndCap; virtual; abstract;
+      function GetMiterLimit: single; virtual; abstract;
+      function GetPenStyle: TPenStyle; virtual; abstract;
+      function GetStrokeMatrix: TAffineMatrix; virtual; abstract;
+      procedure SetArrow(AValue: TBGRACustomArrow); virtual; abstract;
+      procedure SetArrowOwned(AValue: boolean); virtual; abstract;
+      procedure SetCustomPenStyle(AValue: TBGRAPenStyle); virtual; abstract;
+      procedure SetJoinStyle(AValue: TPenJoinStyle); virtual; abstract;
+      procedure SetLineCap(AValue: TPenEndCap); virtual; abstract;
+      procedure SetMiterLimit(AValue: single); virtual; abstract;
+      procedure SetPenStyle(AValue: TPenStyle); virtual; abstract;
+      procedure SetStrokeMatrix(const AValue: TAffineMatrix); virtual; abstract;
+  public
+      function ComputePolyline(const APoints: array of TPointF; AWidth: single; AClosedCap: boolean = true): ArrayOfTPointF; virtual; abstract;
+      function ComputePolyline(const APoints: array of TPointF; AWidth: single; APenColor: TBGRAPixel; AClosedCap: boolean = true): ArrayOfTPointF; virtual; abstract;
+      function ComputePolylineAutoCycle(const APoints: array of TPointF; AWidth: single): ArrayOfTPointF; virtual; abstract;
+      function ComputePolygon(const APoints: array of TPointF; AWidth: single): ArrayOfTPointF; virtual; abstract;
+      property Style: TPenStyle read GetPenStyle write SetPenStyle;
+      property CustomPenStyle: TBGRAPenStyle read GetCustomPenStyle write SetCustomPenStyle;
+      property Arrow: TBGRACustomArrow read GetArrow write SetArrow;
+      property ArrowOwned: boolean read GetArrowOwned write SetArrowOwned;
+      property StrokeMatrix: TAffineMatrix read GetStrokeMatrix write SetStrokeMatrix;
+      property LineCap: TPenEndCap read GetLineCap write SetLineCap;
+      property JoinStyle: TPenJoinStyle read GetJoinStyle write SetJoinStyle;
+      property MiterLimit: single read GetMiterLimit write SetMiterLimit;
+  end;
+
 type
   {* Point in 3D with single-precision floating point coordinates }
   TPoint3D = record x,y,z: single;
@@ -208,6 +310,7 @@ type
   procedure VectProduct3D(u,v: TPoint3D; out w: TPoint3D);
   {** Normalize the vector, i.e. scale it so that its length be 1 }
   procedure Normalize3D(var v: TPoint3D); inline;
+  function VectLen3D(const v: TPoint3D): single;
 
 type
   {* Defition of a line in the euclidian plane }
@@ -229,6 +332,7 @@ type
   {** Checks if the polygon formed by the given points is convex. ''IgnoreAlign''
       specifies that if the points are aligned, it should still be considered as convex }
   function IsConvex(const pts: array of TPointF; IgnoreAlign: boolean = true): boolean;
+  function IsClockwise(const pts: array of TPointF): boolean;
   {** Checks if the quad formed by the 4 given points intersects itself }
   function DoesQuadIntersect(pt1,pt2,pt3,pt4: TPointF): boolean;
   {** Checks if two segment intersect }
@@ -262,6 +366,8 @@ type
     procedure copyTo(dest: IBGRAPath);
     {** Returns the content of the path as an array of points }
     function getPoints: ArrayOfTPointF;
+    {** Returns the content of the path as an array of points with the transformation specified by ''AMatrix'' }
+    function getPoints(AMatrix: TAffineMatrix): ArrayOfTPointF;
     {** Returns a cursor to go through the path. The cursor must be freed by calling ''Free''. }
     function getCursor: TBGRACustomPathCursor;
   end;
@@ -276,6 +382,7 @@ type
     function GetLoopClosedShapes: boolean; virtual; abstract;
     function GetLoopPath: boolean; virtual; abstract;
     function GetPathLength: single; virtual; abstract;
+    function GetBounds: TRectF; virtual; abstract;
     function GetStartCoordinate: TPointF; virtual; abstract;
     procedure SetArcPos(AValue: single); virtual; abstract;
     procedure SetLoopClosedShapes(AValue: boolean); virtual; abstract;
@@ -379,6 +486,8 @@ type
           ''nbInter'' receives the number of computed intersections. ''windingMode'' specifies if
           the winding method must be used to determine what is inside of the shape }
       procedure ComputeAndSort(cury: single; var inter: ArrayOfTIntersectionInfo; out nbInter: integer; windingMode: boolean); virtual; abstract;
+
+      function GetSliceIndex: integer; virtual; abstract;
   end;
 
 type
@@ -408,11 +517,14 @@ type
     {** Returns the color at a given ''position''. The reference range is
         from 0 to 65535, however values beyond are possible as well }
     function GetColorAt(position: integer): TBGRAPixel; virtual; abstract;
+    function GetExpandedColorAt(position: integer): TExpandedPixel; virtual;
     {** Returns the color at a given ''position''. The reference range is
         from 0 to 1, however values beyond are possible as well }
     function GetColorAtF(position: single): TBGRAPixel; virtual;
+    function GetExpandedColorAtF(position: single): TExpandedPixel; virtual;
     {** Returns the average color of the gradient }
     function GetAverageColor: TBGRAPixel; virtual; abstract;
+    function GetAverageExpandedColor: TExpandedPixel; virtual;
     function GetMonochrome: boolean; virtual; abstract;
     {** This property is True if the gradient contains only one color,
         and thus is not really a gradient }
@@ -441,6 +553,12 @@ end;
 
 { TBGRACustomGradient }
 
+function TBGRACustomGradient.GetExpandedColorAt(position: integer
+  ): TExpandedPixel;
+begin
+  result := GammaExpansion(GetColorAt(position));
+end;
+
 function TBGRACustomGradient.GetColorAtF(position: single): TBGRAPixel;
 begin
   position *= 65536;
@@ -450,6 +568,22 @@ begin
     result := GetColorAt(high(Integer))
   else
     result := GetColorAt(round(position));
+end;
+
+function TBGRACustomGradient.GetExpandedColorAtF(position: single): TExpandedPixel;
+begin
+  position *= 65536;
+  if position < low(integer) then
+    result := GetExpandedColorAt(low(Integer))
+  else if position > high(integer) then
+    result := GetExpandedColorAt(high(Integer))
+  else
+    result := GetExpandedColorAt(round(position));
+end;
+
+function TBGRACustomGradient.GetAverageExpandedColor: TExpandedPixel;
+begin
+  result := GammaExpansion(GetAverageColor);
 end;
 
 { TIntersectionInfo }
@@ -636,6 +770,11 @@ begin
   v.z /= len;
 end;
 
+function VectLen3D(const v: TPoint3D): single;
+begin
+  result := sqrt(v.x*v.x + v.y*v.y + v.z*v.z);
+end;
+
 procedure VectProduct3D(u,v: TPoint3D; out w: TPoint3D);
 begin
   w.x := u.y*v.z-u.z*v.y;
@@ -684,6 +823,14 @@ begin
   result.y := pt1.y*factor;
 end;
 
+function RectF(Left, Top, Right, Bottom: Single): TRectF;
+begin
+  result.Left:= Left;
+  result.Top:= Top;
+  result.Right:= Right;
+  result.Bottom:= Bottom;
+end;
+
 function PointF(x, y: single): TPointF;
 begin
   Result.x := x;
@@ -722,6 +869,11 @@ begin
   result := sqrt(v*v);
 end;
 
+function VectDet(v1, v2: TPointF): double;
+begin
+  result := v1.x*v2.y - v1.y*v2.x;
+end;
+
 function VectLen(dx, dy: single): single;
 begin
   result := sqrt(dx*dx+dy*dy);
@@ -745,13 +897,13 @@ begin
 end;
 
 {----------- Line and polygon functions -----------}
-{$OPTIMIZATION OFF}  // Modif J.P  5/2013
+{$PUSH}{$OPTIMIZATION OFF}
 function IntersectLine(line1, line2: TLineDef): TPointF;
 var parallel: boolean;
 begin
   result := IntersectLine(line1,line2,parallel);
 end;
-{$OPTIMIZATION ON}
+{$POP}
 
 function IntersectLine(line1, line2: TLineDef; out parallel: boolean): TPointF;
 var divFactor: double;
@@ -892,6 +1044,22 @@ begin
         result := false;
     end;
   end;
+end;
+
+function IsClockwise(const pts: array of TPointF): boolean;
+var
+  i: Integer;
+begin
+  for i := 0 to high(pts) do
+  begin
+    if (pts[(i+1) mod length(pts)].x-pts[i].x)*(pts[(i+2) mod length(pts)].y-pts[i].y) -
+       (pts[(i+1) mod length(pts)].y-pts[i].y)*(pts[(i+2) mod length(pts)].x-pts[i].x) < 0 then
+    begin
+       result := false;
+       exit;
+    end;
+  end;
+  result := true;
 end;
 
 { Check if a quaduadrilateral intersects itself }
@@ -1093,6 +1261,58 @@ begin
   end;
 end;}
 
+function TCubicBezierCurve.GetBounds: TRectF;
+const precision = 1e-5;
+
+  procedure Include(pt: TPointF);
+  begin
+    if pt.x < result.Left then result.Left := pt.x
+    else if pt.x > result.Right then result.Right := pt.x;
+    if pt.y < result.Top then result.Top := pt.y
+    else if pt.y > result.Bottom then result.Bottom := pt.y;
+  end;
+
+  procedure IncludeT(t: single);
+  begin
+    if (t > 0) and (t < 1) then
+      Include(ComputePointAt(t));
+  end;
+
+  procedure IncludeABC(a,b,c: single);
+  var b2ac, sqrtb2ac: single;
+  begin
+    if abs(a) < precision then
+    begin
+      if abs(b) < precision then exit;
+      IncludeT(-c/b);
+    end else
+    begin
+      b2ac := sqr(b) - 4 * a * c;
+      if b2ac >= 0 then
+      begin
+        sqrtb2ac := sqrt(b2ac);
+        IncludeT((-b + sqrtb2ac) / (2 * a));
+        IncludeT((-b - sqrtb2ac) / (2 * a));
+      end;
+    end;
+  end;
+
+var
+  va, vb, vc: TPointF;
+
+begin
+  result.TopLeft := p1;
+  result.BottomRight := p1;
+  Include(p2);
+
+  vb := 6 * p1 - 12 * c1 + 6 * c2;
+  va := -3 * p1 + 9 * c1 - 9 * c2 + 3 * p2;
+  vc := 3 * c1 - 3 * p1;
+
+  IncludeABC(va.x,vb.x,vc.x);
+  IncludeABC(va.y,vb.y,vc.y);
+end;
+
 { TQuadraticBezierCurve }
 
 function TQuadraticBezierCurve.SimpleComputePoints(AAcceptedDeviation: single;
@@ -1213,6 +1433,40 @@ function TQuadraticBezierCurve.ToPoints(AAcceptedDeviation: single;
   AIncludeFirstPoint: boolean = true): ArrayOfTPointF;
 begin
   result := SimpleComputePoints(AAcceptedDeviation, AIncludeFirstPoint);
+end;
+
+function TQuadraticBezierCurve.GetBounds: TRectF;
+const precision = 1e-5;
+
+  procedure Include(pt: TPointF);
+  begin
+    if pt.x < result.Left then result.Left := pt.x
+    else if pt.x > result.Right then result.Right := pt.x;
+    if pt.y < result.Top then result.Top := pt.y
+    else if pt.y > result.Bottom then result.Bottom := pt.y;
+  end;
+
+  procedure IncludeT(t: single);
+  begin
+    if (t > 0) and (t < 1) then
+      Include(ComputePointAt(t));
+  end;
+
+  procedure IncludeABC(a,b,c: single);
+  var denom: single;
+  begin
+    denom := a-2*b+c;
+    if abs(denom) < precision then exit;
+    IncludeT((a-b)/denom);
+  end;
+
+begin
+  result.TopLeft := p1;
+  result.BottomRight := p1;
+  Include(p2);
+
+  IncludeABC(p1.x,c.x,p2.x);
+  IncludeABC(p1.y,c.y,p2.y);
 end;
 
 {//The following function computes by splitting the curve. It is slower than the simple function
