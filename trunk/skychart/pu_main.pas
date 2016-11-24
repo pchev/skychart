@@ -2382,7 +2382,7 @@ end else begin
       ScaleDPI(f1);
       mresult:=f1.ShowModal;
       ConfirmSaveConfig:=not c1.Checked;
-      if mresult=mrAbort then
+      if (mresult=mrAbort)or(mresult=mrCancel) then
          Action:=caNone;
       if mresult=mrYes then
          SaveDefault;
