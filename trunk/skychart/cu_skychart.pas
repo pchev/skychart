@@ -1060,7 +1060,7 @@ end;
 
 procedure Tskychart.DrawObsListLabel;
 var i,lid: integer;
-    x1,y1: Double;
+    x1,y1,lra,lde: Double;
     xx,yy: Single;
     buf,lbuf,lis:string;
 begin
@@ -1070,13 +1070,16 @@ if FObjectListLabels.Count>0 then begin
     for i:=0 to FObjectListLabels.Count-1 do begin
       with TLabelCoord(FObjectListLabels.Objects[i]) do begin
         if (ra>-1000)and(dec>-1000) then begin
-          projection(deg2rad*ra,deg2rad*dec,x1,y1,true,cfgsc) ;
+          lra:=deg2rad*ra;
+          lde:=deg2rad*dec;
+          Precession(jd2000,cfgsc.CurJDUT,lra,lde);
+          projection(lra,lde,x1,y1,true,cfgsc) ;
           WindowXY(x1,y1,xx,yy,cfgsc);
           if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
             buf:=FObjectListLabels[i];
             lis:=buf+FormatFloat(f6,ra)+FormatFloat(f6,dec);
             lid:=rshash(lis,$7FFFFFFF);
-            SetLabel(lid,xx,yy,0,2,9,buf,laLeft,labrotation(ra,dec,1,cfgsc),0,false);
+            SetLabel(lid,xx,yy,0,2,9,buf,laLeft,labrotation(lra,lde,1,cfgsc),0,false);
             lbuf:=lbuf+buf+';';
           end;
         end;
