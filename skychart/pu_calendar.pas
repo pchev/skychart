@@ -2298,6 +2298,7 @@ var
   grid: TStringGrid;
   buf,d,z1,z2 : string;
   x : double;
+  planetgrid:boolean;
   i, j: Integer;
 procedure AddToBuff(vals: array of double); {of BtnCopyClipClick}
 var
@@ -2311,9 +2312,12 @@ begin {BtnCopyClipClick}
    stores numbers such that they should become numbers when pasted into a
    spreadsheet}
   grid := nil;
+  planetgrid:=false;
   case pagecontrol1.ActivePage.TabIndex of
-//    0 : Grid:=TwilightGrid;
-    1 : case pagecontrol2.ActivePage.TabIndex of
+    0 : Grid:=TwilightGrid;
+    1 : begin
+      planetgrid:=true;
+      case pagecontrol2.ActivePage.TabIndex of
       0  : Grid:=SoleilGrid;
       1  : Grid:=MercureGrid;
       2  : Grid:=VenusGrid;
@@ -2326,69 +2330,81 @@ begin {BtnCopyClipClick}
       9  : Grid:=PlutonGrid;
       10 : Clipboard.Assign(PlanetGraphs[dgPlanet.Selection.Top+1]);
       end {case};
+      end;
+    2: Grid:=CometGrid;
+    3: Grid:=AsteroidGrid;
+    4: Grid:=SolarGrid;
+    5: Grid:=LunarGrid;
+    6: Grid:=SatGrid;
   else
     ShowMessage(rsSorryCopyIsN);
   end {case};
   if assigned(grid) then begin
-    buf:=config.ObsName;
-    x:=abs(config.ObsLongitude);
-    if config.ObsLongitude>0 then d:=west else d:=east;
-    buf:=buf+blank+appmsg[32]+'='+copy(detostr(x),2,99)+d+blank+appmsg[31]+'='+detostr(config.ObsLatitude);
-    config.tz.JD:=date1.JD;
-    z1:=config.tz.ZoneName;
-    config.tz.JD:=date2.JD;
-    z2:=config.tz.ZoneName;
-    if z1<>z2 then z1:=z1+'/'+z2;
-    buf:=buf+blank+rsTimeZone+'='+TzGMT2UTC(z1)+LineEnding;
-    {At this stage we have something like
-     "Churchill Longitude=146Â°24'55"East Latitude=-38Â°21'50" Time Zone=LHST"}
-    for i := 0 to 1 do begin
-      for j := 0 to grid.ColCount - 1 do
-        buf := buf + grid.Cells[j,i]+tab; {it will have a spurious last cloumn, but too bad!}
-      buf := buf + LineEnding;
-      end;
-    {Now have added titles}
-    {Churchill Longitude=146Â°24'55"East Latitude=-38Â°21'50" Time Zone=LHST
-    Venus	Date Coord.
-    7h37m UT	RA	DE	Magn.	Diam.	Illum.	Rise	Culmination
-    }
-    for i := 2 to grid.RowCount - 1 do begin
-      buf := buf + grid.Cells[0,i] + tab;
-      if assigned(grid.Objects[0,i]) then
-        with grid.Objects[0,i] as TObjCoord do
-          AddToBuff([rad2deg*ra/15, rad2deg*dec])
-      else
-        buf := buf + tab + tab;
-      if (grid.ColCount>=4) and assigned(grid.Objects[3,i]) then
-        with grid.Objects[3,i] as TObjCoord do
-          AddToBuff([jd, ra, dec])
-      else
-        buf := buf + tab + tab + tab;
-      if (grid.ColCount>=7) and assigned(grid.Objects[6,i]) then
-        with grid.Objects[6,i] as TObjCoord do
-          AddToBuff([frac(jd-0.5+config.tz.SecondsOffset/(3600*24))])
-      else
-        buf := buf + tab;
-      if (grid.ColCount>=8) and assigned(grid.Objects[7,i]) then
-        with grid.Objects[7,i] as TObjCoord do
-          AddToBuff([frac(jd-0.5+config.tz.SecondsOffset/(3600*24))])
-      else
-        buf := buf + tab;
-      if (grid.ColCount>=9) and assigned(grid.Objects[8,i]) then
-        with grid.Objects[8,i] as TObjCoord do
-          AddToBuff([frac(jd-0.5+config.tz.SecondsOffset/(3600*24))])
-      else
-        buf := buf + tab;
-      if (grid.ColCount>=10) and assigned(grid.Objects[9,i]) then
-        with grid.Objects[9,i] as TObjCoord do
-          AddToBuff([ra, dec])
-      else
-        buf := buf + tab + tab;
-      buf := buf + LineEnding;
-      end;
-    buf := buf + 'Times are in days - format rise/transit/set columns as time' + LineEnding;
-    Clipboard.AsText:=buf;
-    end; {Grid => String Grid}
+    if planetgrid then begin
+      buf:=config.ObsName;
+      x:=abs(config.ObsLongitude);
+      if config.ObsLongitude>0 then d:=west else d:=east;
+      buf:=buf+blank+appmsg[32]+'='+copy(detostr(x),2,99)+d+blank+appmsg[31]+'='+detostr(config.ObsLatitude);
+      config.tz.JD:=date1.JD;
+      z1:=config.tz.ZoneName;
+      config.tz.JD:=date2.JD;
+      z2:=config.tz.ZoneName;
+      if z1<>z2 then z1:=z1+'/'+z2;
+      buf:=buf+blank+rsTimeZone+'='+TzGMT2UTC(z1)+LineEnding;
+      {At this stage we have something like
+       "Churchill Longitude=146Â°24'55"East Latitude=-38Â°21'50" Time Zone=LHST"}
+      for i := 0 to 1 do begin
+        for j := 0 to grid.ColCount - 1 do
+          buf := buf + grid.Cells[j,i]+tab; {it will have a spurious last cloumn, but too bad!}
+        buf := buf + LineEnding;
+        end;
+      {Now have added titles}
+      {Churchill Longitude=146Â°24'55"East Latitude=-38Â°21'50" Time Zone=LHST
+      Venus	Date Coord.
+      7h37m UT	RA	DE	Magn.	Diam.	Illum.	Rise	Culmination
+      }
+      for i := 2 to grid.RowCount - 1 do begin
+        buf := buf + grid.Cells[0,i] + tab;
+        if assigned(grid.Objects[0,i]) then
+          with grid.Objects[0,i] as TObjCoord do
+            AddToBuff([rad2deg*ra/15, rad2deg*dec])
+        else
+          buf := buf + tab + tab;
+        if (grid.ColCount>=4) and assigned(grid.Objects[3,i]) then
+          with grid.Objects[3,i] as TObjCoord do
+            AddToBuff([jd, ra, dec])
+        else
+          buf := buf + tab + tab + tab;
+        if (grid.ColCount>=7) and assigned(grid.Objects[6,i]) then
+          with grid.Objects[6,i] as TObjCoord do
+            AddToBuff([frac(jd-0.5+config.tz.SecondsOffset/(3600*24))])
+        else
+          buf := buf + tab;
+        if (grid.ColCount>=8) and assigned(grid.Objects[7,i]) then
+          with grid.Objects[7,i] as TObjCoord do
+            AddToBuff([frac(jd-0.5+config.tz.SecondsOffset/(3600*24))])
+        else
+          buf := buf + tab;
+        if (grid.ColCount>=9) and assigned(grid.Objects[8,i]) then
+          with grid.Objects[8,i] as TObjCoord do
+            AddToBuff([frac(jd-0.5+config.tz.SecondsOffset/(3600*24))])
+        else
+          buf := buf + tab;
+        if (grid.ColCount>=10) and assigned(grid.Objects[9,i]) then
+          with grid.Objects[9,i] as TObjCoord do
+            AddToBuff([ra, dec])
+        else
+          buf := buf + tab + tab;
+        buf := buf + LineEnding;
+        end;
+      buf := buf + 'Times are in days - format rise/transit/set columns as time' + LineEnding;
+      Clipboard.AsText:=buf;
+    end {planet grid}
+    else begin
+       { TODO : Add number formating for other grid }
+       grid.CopyToClipboard(false);
+    end;
+  end;
 end;
 
 procedure Tf_calendar.BtnTleDownloadClick(Sender: TObject);
