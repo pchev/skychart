@@ -856,6 +856,7 @@ end;
          cfgsc.TrackRA:=cfgsc.racentre;
          cfgsc.TrackDec:=cfgsc.decentre;
          cfgsc.TrackEpoch:=cfgsc.JDChart;
+         cfgsc.lastJDchart:=cfgsc.JDchart;
          Planet.FormatPlanet(0,cfgsc.Trackobj,cfgsc,nom,ma,date,desc);
          end;
      2 : begin
@@ -872,6 +873,7 @@ end;
             cfgsc.TrackRA:=cfgsc.racentre;
             cfgsc.TrackDec:=cfgsc.decentre;
             cfgsc.TrackEpoch:=cfgsc.JDChart;
+            cfgsc.lastJDchart:=cfgsc.JDchart;
           end
           else cfgsc.TrackOn:=false;
          end;
@@ -889,6 +891,7 @@ end;
             cfgsc.TrackRA:=cfgsc.racentre;
             cfgsc.TrackDec:=cfgsc.decentre;
             cfgsc.TrackEpoch:=cfgsc.JDChart;
+            cfgsc.lastJDchart:=cfgsc.JDchart;
           end
           else cfgsc.TrackOn:=false;
          end;
