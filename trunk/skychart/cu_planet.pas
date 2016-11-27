@@ -1406,7 +1406,7 @@ var
    yy,mm,dd : integer;
    ar,de : double;
    dist,illum,phase,diam,jdt,magn,dkm,hh,dp,p,pde,pds,w1,w2,w3,jd0,st0,q,xp,yp,zp,vel : double;
-   sar,sde,sdist,sillum,sphase,sdiam,smagn,shh,sdp : string;
+   sar,sde,sdist,skm,sillum,sphase,sdiam,smagn,shh,sdp,sdpkm : string;
 const d1='0.0'; d2='0.00';
 begin
   CurrentStep:=St;
@@ -1429,7 +1429,6 @@ begin
   sde := DEpToStr(rad2deg*cfgsc.FindDec) ;
   jdt:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,3];
   cfgsc.FindSimjd:=jdt;
-//  str(jdt:12:4,sjd);
   djd(jdt+(cfgsc.TimeZone-cfgsc.DT_UT)/24,yy,mm,dd,hh);
   shh := ARtoStr3(rmod(hh,24));
   date:=Date2Str(yy,mm,dd)+blank+shh;
@@ -1444,9 +1443,11 @@ if (currentplanet<10) then begin
   cfgsc.FindX:=xp;
   cfgsc.FindY:=yp;
   cfgsc.FindZ:=zp;
-  str(dp:7:4,sdp);
+  str(dp:12:9,sdp);
+  str((dp*km_au):12:0,sdpkm);
   str(illum:5:3,sillum);
-  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,6]:7:4,sdist);
+  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,6]:12:9,sdist);
+  str((cfgsc.PlanetLst[CurrentStep,CurrentPlanet,6]*km_au):12:0,skm);
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,7]:4:0,sphase);
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:1,sdiam);
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
@@ -1459,7 +1460,9 @@ if (currentplanet<10) then begin
           +'illum:'+sillum+tab
           +'phase:'+sphase+blank+ldeg+tab
           +'dist:'+sdist+' au'+tab
-          +'rsol:'+sdp+' au'+tab;
+          +'dist:'+skm+' km'+tab
+          +'rsol:'+sdp+' au'+tab
+          +'rsol:'+sdpkm+' km'+tab;
   if vel<>0 then Desc:=Desc+'vel:'+formatfloat(f1,vel)+'km/s'+tab;
   PlanetOrientation(jdt,CurrentPlanet,p,pde,pds,w1,w2,w3);
   Desc:=Desc+'pa:'+formatfloat(d1,p)+tab
@@ -1492,15 +1495,17 @@ if (currentplanet<10) then begin
 end;
 if (currentplanet=10) then begin
   Sun(jdt,ar,de,dist,diam);
-  str(dist:7:4,sdist);
-  str(diam/60:5:1,sdiam);
+  str(dist:12:9,sdist);
+  str((dist*km_au):12:0,skm);
+  sdiam:=DEToStrShort(diam/3600,1);
   nom:=pla[CurrentPlanet];
   ma:='-26';
   Desc := sar+tab+sde+tab
           +'  S*'+tab+nom+tab
           +'m:-26'+tab
-          +'diam:'+sdiam+blank+lmin+tab
-          +'dist:'+sdist+' au'+tab;
+          +'diam:'+sdiam+tab
+          +'dist:'+sdist+' au'+tab
+          +'dist:'+skm+' km'+tab;
   PlanetOrientation(jdt,CurrentPlanet,p,pde,pds,w1,w2,w3);
   Desc:=Desc+'pa:'+formatfloat(d1,p)+tab
           +'PoleIncl:'+formatfloat(d1,pde)+tab
@@ -1519,7 +1524,7 @@ if (currentplanet=11) then begin
   end;
   ar:=cfgsc.FindRA ; de:=cfgsc.FindDEC;    // reset original position value
   str(dkm:8:1,sdist);
-  str(diam/60:5:1,sdiam);
+  sdiam:=DEToStrShort(diam/3600,1);
   str(illum:5:3,sillum);
   str(phase:4:0,sphase);
   nom:=pla[CurrentPlanet];
@@ -1529,7 +1534,7 @@ if (currentplanet=11) then begin
   Desc := sar+tab+sde+tab
           +'  Ps'+tab+nom+tab
           +'m:'+smagn+tab
-          +'diam:'+sdiam+blank+lmin+tab
+          +'diam:'+sdiam+tab
           +'illum:'+sillum+tab
           +'phase:'+sphase+blank+ldeg+tab
           +'dist:'+sdist+' km'+tab;
@@ -1544,7 +1549,6 @@ end;
 if (currentplanet=32) then begin   // Earth umbra
   jdt:=cfgsc.PlanetLst[CurrentStep,10,3];  // date from the Sun
   cfgsc.FindSimjd:=jdt;
-//  str(jdt:12:4,sjd);
   djd(jdt+(cfgsc.TimeZone-cfgsc.DT_UT)/24,yy,mm,dd,hh);
   shh := ARmtoStr(rmod(hh,24));
   date:=Date2Str(yy,mm,dd)+blank+shh;
