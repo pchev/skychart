@@ -2034,17 +2034,12 @@ var
   j, irc : integer;
 
   buf, searchdir, bsize: string;
-  //ok: boolean;
   r:TStringList;
-  XplanetImg: TPicture;
+  XplanetImg, BGRA: TBGRABitmap;
   OutputFile, origin, target: string;
 
   idx: integer;
   NewScan: Boolean;
-
-  b:TBitmap;
-
-  BGRA : TBGRABitmap;
 
 begin
   Result := -1;
@@ -2110,28 +2105,18 @@ begin
       if (irc=0) and (FileExists(slash(Tempdir)+'planet.png')) then
       begin
 
-        XplanetImg := TPicture.Create;
-        b := TBitmap.Create ;
+        xplanetimg:=TBGRABitmap.Create(SysToUTF8(slash(Tempdir)+'planet.png'));
 
         try
-
-          b.PixelFormat:=pf32bit;
-
-          xplanetimg.LoadFromFile(SysToUTF8(slash(Tempdir)+'planet.png'));
           chdir(appdir);
 
           if flatten=1 then
-            b.Assign(xplanetimg.Bitmap)
+            BGRA := TBGRABitmap.Create(XplanetImg)
           else
           begin
-            b.Width := xplanetimg.Bitmap.Width;
-            b.Height:=round(flatten*b.Width);
-            b.Canvas.StretchDraw(rect(0,0,b.Width,b.Height),XplanetImg.Bitmap);
+            BGRA := TBGRABitmap.Create(xplanetimg.Width,round(flatten*xplanetimg.Width));
+            BGRA.StretchPutImage(rect(0,0,BGRA.Width,BGRA.Height),XplanetImg,dmSet,255);
           end;
-
-          XplanetImg.Clear;
-
-          BGRA := TBGRABitmap.Create(b);
 
           try
 
@@ -2147,7 +2132,6 @@ begin
           end;
 
         finally
-          b.Free;
           XplanetImg.Free;
         end;
 
@@ -2165,10 +2149,7 @@ begin
          writetrace('Return code '+inttostr(irc)+' from xplanet');
          writetrace(buf);
 
-        // ok := false;
-
       end;
-
 
     finally
       r.free;
@@ -2182,7 +2163,7 @@ end;
 
 procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,pa,gw:double;WhiteBg:boolean);
 var
-  ds,mode : integer;
+  ds,bds,mode : integer;
   ok: boolean;
 
   b:TBitmap;
@@ -2198,7 +2179,9 @@ begin
   else
     ds:=round(max(diam*pixscale,4*cfgchart.drawpen));
 
-  idx := GetBodyImage(ipla, ds, jdt, flatten, gw, pa);
+  // do not ask xplanet to make an image bigger than 1000x1000
+  bds:=min(ds,1000);
+  idx := GetBodyImage(ipla, bds, jdt, flatten, gw, pa);
 
   ok := idx >= 0;
 
