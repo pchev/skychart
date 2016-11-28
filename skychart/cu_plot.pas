@@ -2210,9 +2210,13 @@ end;
 procedure TSplot.PlotPlanet5(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,rot:double;WhiteBg:boolean; size,margin:integer);
 var
   ds,mode,dx,dy : integer;
+  dt : double;
   jpg:TJPEGImage;
   rbmp,sbmp:TBitmap;
   fn:string;
+  idx: integer;
+  BGRA : TBGRABitmap;
+  NewUpdate : Boolean;
 begin
 
   if size=0 then exit;
@@ -2233,55 +2237,95 @@ begin
 
   ds :=round(max(diam*pixscale,4*cfgchart.drawpen)*size/(size-2*margin));
 
+  // check date of last downloaded image instead of current jd
+  dt:=FileAgeUTF8(fn);
+
   try
 
-    jpg:=TJPEGImage.Create;
-    sbmp:=TBitmap.Create;
 
-    try
-      jpg.LoadFromFile(SysToUTF8(fn));
-      chdir(appdir);
+    idx := FCacheBMP.Search(IntToStr(C_Sun));
 
-      if flatten=1 then
-        sbmp.Assign(jpg)
-      else
-      begin
+    NewUpdate := idx<0;
 
-        sbmp.Assign(jpg);
+    if not NewUpdate then
+       NewUpdate :=
+         (FCacheBMP.GetJD(idx)<>dt) or
+         (FCacheBMP.GetDiameter(idx) <> ds);
 
-        rbmp:=TBitmap.Create;
+    if NewUpdate then
+    begin
 
-        try
+      jpg:=TJPEGImage.Create;
+      sbmp:=TBitmap.Create;
 
-          BitmapRotation(sbmp,rbmp,rot,WhiteBg);
+      try
+        jpg.LoadFromFile(SysToUTF8(fn));
+        chdir(appdir);
 
-          dx := (rbmp.Width-sbmp.Width)div 2;
-          dy := (rbmp.Height-sbmp.Height)div 2;
+        if flatten=1 then
+          sbmp.Assign(jpg)
+        else
+        begin
 
-          rot := 0;
+          sbmp.Assign(jpg);
 
-          sbmp.Width:=size;
-          sbmp.Height:=round(flatten*sbmp.Width);
+          rbmp:=TBitmap.Create;
 
-          sbmp.Canvas.StretchDraw(rect(-dx,-dy,sbmp.Width+dx,sbmp.Height+dy),rbmp);
+          try
 
-        finally
-          rbmp.free;
+            BitmapRotation(sbmp,rbmp,rot,WhiteBg);
+
+            dx := (rbmp.Width-sbmp.Width)div 2;
+            dy := (rbmp.Height-sbmp.Height)div 2;
+
+            rot := 0;
+
+            sbmp.Width:=size;
+            sbmp.Height:=round(flatten*sbmp.Width);
+
+            sbmp.Canvas.StretchDraw(rect(-dx,-dy,sbmp.Width+dx,sbmp.Height+dy),rbmp);
+
+
+          finally
+
+            rbmp.free;
+          end;
+
         end;
 
+        BGRA := TBGRABitmap.create(sbmp);
+
+        try
+          FCacheBMP.Add(IntToStr(C_Sun),BGRA,ds,dt);
+
+        finally
+          BGRA.Free;
+        end;
+
+
+      finally
+        jpg.free;
+        sbmp.free;
       end;
+
+    end;
 
     if cfgplot.TransparentPlanet then
       mode:=0
     else
       mode:=2;
 
-    PlotImage(xx,yy,ds,ds*flatten,rot,flipx,flipy,WhiteBg,true,sbmp,mode);
 
-    finally
-      jpg.free;
-      sbmp.free;
-    end;
+    idx := FCacheBMP.Search(IntToStr(C_Sun));
+
+    if idx>=0 then
+    begin
+      sbmp := FCacheBMP.GetBMP(idx).Bitmap;
+
+      PlotImage(xx,yy,ds,ds*flatten,rot,flipx,flipy,WhiteBg,true,sbmp,mode);
+    end
+    else
+      PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
 
   except
     PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
