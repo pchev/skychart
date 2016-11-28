@@ -108,6 +108,10 @@ type
      function BGRATextOut(x, y, o: single; s: string; c: TBGRAPixel; abmp:TBGRABitmap; forceantialias:boolean=false):TRect;
      procedure BGRARectangle(x1,y1,x2,y2: single; c: TBGRAPixel; w: single; abmp:TBGRABitmap);
      procedure ClearImage;
+
+
+     function GetBodyImage(ipla:integer; ds: integer; jdt, flatten,gw, pa: double): integer;
+
   protected
     { Protected declarations }
   public
@@ -2025,30 +2029,25 @@ begin
 
 end;
 
-procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,pa,gw:double;WhiteBg:boolean);
+function TSplot.GetBodyImage(ipla:integer; ds:  integer; jdt, flatten,gw, pa: double): integer;
 var
-  ds,j,mode,irc : integer;
+  j, irc : integer;
+
   buf, searchdir, bsize: string;
-  ok: boolean;
+  //ok: boolean;
   r:TStringList;
   XplanetImg: TPicture;
   OutputFile, origin, target: string;
 
   idx: integer;
   NewScan: Boolean;
+
   b:TBitmap;
 
   BGRA : TBGRABitmap;
 
 begin
-
-
-  ok := true;
-
-  if ipla = C_Saturn then
-    ds:=round(max(2.2261*diam*pixscale,4*cfgchart.drawpen))
-  else
-    ds:=round(max(diam*pixscale,4*cfgchart.drawpen));
+  Result := -1;
 
   idx := FCacheBMP.Search(IntToStr(ipla));
 
@@ -2166,11 +2165,10 @@ begin
          writetrace('Return code '+inttostr(irc)+' from xplanet');
          writetrace(buf);
 
-         PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
-
-         ok := false;
+        // ok := false;
 
       end;
+
 
     finally
       r.free;
@@ -2178,32 +2176,58 @@ begin
 
   end;
 
-  if cfgplot.TransparentPlanet then
-    mode := 0
+  Result := idx;
+
+end;
+
+procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,pa,gw:double;WhiteBg:boolean);
+var
+  ds,mode : integer;
+  ok: boolean;
+
+  b:TBitmap;
+  BGRA : TBGRABitmap;
+
+  idx: integer;
+begin
+
+  ok := true;
+
+  if ipla = C_Saturn then
+    ds:=round(max(2.2261*diam*pixscale,4*cfgchart.drawpen))
   else
-    mode := 2;
+    ds:=round(max(diam*pixscale,4*cfgchart.drawpen));
+
+  idx := GetBodyImage(ipla, ds, jdt, flatten, gw, pa);
+
+  ok := idx >= 0;
 
   if ok then
   begin
 
-    if idx >= 0 then
+    BGRA := FCacheBMP.GetBMP(idx);
+
+    if BGRA <> nil then
     begin
 
-      BGRA := FCacheBMP.GetBMP(idx);
+      b := FCacheBMP.GetBMP(idx).Bitmap;
 
-      if BGRA <> nil then
+      if b <> nil then
       begin
 
-        b := FCacheBMP.GetBMP(idx).Bitmap;
+        if cfgplot.TransparentPlanet then
+          mode := 0
+        else
+          mode := 2;
 
-        if b <> nil then
-           PlotImage(xx,yy,ds,ds*flatten,0,flipx,flipy,WhiteBg,true,b,mode);
-
+         PlotImage(xx,yy,ds,ds*flatten,0,flipx,flipy,WhiteBg,true,b,mode);
       end;
 
     end;
 
-  end;
+  end
+  else
+    PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
 
 end;
 
