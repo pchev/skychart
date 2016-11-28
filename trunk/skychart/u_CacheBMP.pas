@@ -162,9 +162,6 @@ begin
 end;
 
 function TCacheBMP.Search(AID: shortstring): integer;
-var
-  idx: integer;
-  p : PCacheBMP_Data;
 begin
   Result := FList.FindIndexOf(AID);
 end;
