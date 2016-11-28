@@ -1559,6 +1559,18 @@ CL.AddConstantN('rsSearchSoftwa','String').SetString(rsSearchSoftwa);
 CL.AddConstantN('rsCometElement2','String').SetString(rsCometElement2);
 CL.AddConstantN('rsAsteroidElem2','String').SetString(rsAsteroidElem2);
 CL.AddConstantN('rsAbandonYourC','String').SetString(rsAbandonYourC);
+CL.AddConstantN('rsAddLabelForE','String').SetString(rsAddLabelForE);
+CL.AddConstantN('rsCompilationA','String').SetString(rsCompilationA);
+CL.AddConstantN('rsMissingScrip','String').SetString(rsMissingScrip);
+CL.AddConstantN('rsPleaseDownlo','String').SetString(rsPleaseDownlo);
+CL.AddConstantN('rsTLEDownloadO','String').SetString(rsTLEDownloadO);
+CL.AddConstantN('rsCometUpdateS','String').SetString(rsCometUpdateS);
+CL.AddConstantN('rsAsteroidUpda','String').SetString(rsAsteroidUpda);
+CL.AddConstantN('rsNewVersionAv','String').SetString(rsNewVersionAv);
+CL.AddConstantN('rsNewBetaVersi','String').SetString(rsNewBetaVersi);
+CL.AddConstantN('rsANewVersionO','String').SetString(rsANewVersionO);
+CL.AddConstantN('rsYouAlreadyHa','String').SetString(rsYouAlreadyHa);
+CL.AddConstantN('rsOrientToTheP','String').SetString(rsOrientToTheP);
 
 end;
 
