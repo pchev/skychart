@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  LazUTF8, LazFileUtils, BGRABitmap, BGRABitmapTypes, FPReadBMP,
+  LazUTF8, LazFileUtils, BGRABitmap, BGRABitmapTypes, BGRATransform, FPReadBMP,
   u_constant, u_util, u_bitmap, PostscriptCanvas, process,
   SysUtils, Types, StrUtils, FPImage, LCLType, LCLIntf, IntfGraphics, FPCanvas,
   Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics, u_translation,
@@ -1800,14 +1800,11 @@ end;
 
 procedure TSplot.PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean; var ibmp:TBitmap; TransparentMode:integer=0; forcealpha:integer=0);
 var
-  dsx,dsy,zoom : single;
+  zoom : single;
   DestX,DestY :integer;
-  SrcR: TRect;
-  memstream: TMemoryStream;
-  imabmp:Tbitmap;
-  rbmp: Tbitmap;
-  outbmp:TBGRABitmap;
   trWhiteBg: boolean;
+  bgraibmp,bgra1bmp: TBGRABitmap;
+  transform: TBGRAAffineBitmapTransform;
 begin
 
   if (iWidth<2) or (iHeight<2) then
@@ -1815,16 +1812,7 @@ begin
 
   zoom := iWidth/ibmp.Width;
 
-  imabmp := Tbitmap.Create;
-  rbmp   := Tbitmap.Create;
-
-  if not DisplayIs32bpp then
-  begin
-    imabmp.PixelFormat:=pf32bit;
-    rbmp.PixelFormat:=pf32bit;
-  end;
-
-  memstream := TMemoryStream.create;
+  bgraibmp:=TBGRABitmap.Create(ibmp);
 
   try
 
@@ -1832,6 +1820,7 @@ begin
 
     if cfgplot.UseBMP and WhiteBg then
     begin
+      // invert color in SetBGRATransparencyFromLuminance
       WhiteBg:=false;
       trWhiteBg:=true;
     end;
@@ -1840,139 +1829,126 @@ begin
     begin
       // image smaller than chart, write in full
 
-      if (zoom>1) or ( (ibmp.Height<=1024) and (ibmp.Width<=1024) ) then
-      begin
-        BitmapRotation(ibmp,rbmp,Rotation,WhiteBg); // rotation first for best quality
-        dsx:=(rbmp.Width/ibmp.Width)*iWidth/2;
-        dsy:=(rbmp.Height/ibmp.Height)*iHeight/2;
-        BitmapResize(rbmp,imabmp,zoom);
-      end else
-      begin
-        BitmapResize(ibmp,rbmp,zoom);               // resize first for best performance
-        BitmapRotation(rbmp,imabmp,Rotation,WhiteBg);
-        dsx:=(imabmp.Width/rbmp.Width)*iWidth/2;
-        dsy:=(imabmp.Height/rbmp.Height)*iHeight/2;
-      end;
+      if WhiteBg then bgraibmp.LinearNegative;
 
-      DestX:=round(xx-dsx);
-      DestY:=round(yy-dsy);
+      // make new image with enough space for rotation
+      bgra1bmp:=TBGRABitmap.Create(round(1.5*zoom*bgraibmp.Width),round(1.5*zoom*bgraibmp.Height));
+      transform := TBGRAAffineBitmapTransform.Create(bgraibmp,false);
+      try
+        // prepare transformation matrix
+        // set rotation center
+        transform.Translate(-bgraibmp.Width/2, -bgraibmp.Height/2);
+        // rotate
+        transform.RotateRad(Rotation);
+        // put in center of new image
+        transform.Translate(1.5*bgraibmp.Width/2, 1.5*bgraibmp.Height/2);
+        if (flipx<0) then begin
+          // mirror x
+          transform.scale(-1,1);
+          transform.Translate(1.5*bgraibmp.Width,0);
+        end;
+        if (flipy<0) then begin
+          // mirror y
+          transform.scale(1,-1);
+          transform.Translate(0,1.5*bgraibmp.Width);
+        end;
+        // zoom image
+        transform.Scale(zoom);
+        // apply transformation
+        bgra1bmp.fill(transform);
 
-      BitmapFlip(imabmp,(flipx<0),(flipy<0));
+        DestX:=round(xx-bgra1bmp.Width/2);
+        DestY:=round(yy-bgra1bmp.Height/2);
 
-      if cfgplot.UseBMP then
-      begin
-        imabmp.SaveToStream(memstream);
-        memstream.position := 0;
-
-        outbmp := TBGRABitmap.Create;
-
-        outbmp.LoadFromStream(memstream, bmpreader);
-        memstream.Clear;
-
-        if iTransparent then
+        if cfgplot.UseBMP then
         begin
-          SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg,forcealpha);
-          cbmp.PutImage(DestX,DestY,outbmp,dmDrawWithTransparency);
+
+          if iTransparent then
+          begin
+            SetBGRATransparencyFromLuminance(bgra1bmp,TransparentMode,trWhiteBg,forcealpha);
+            cbmp.PutImage(DestX,DestY,bgra1bmp,dmDrawWithTransparency);
+          end
+          else
+            cbmp.PutImage(DestX,DestY,bgra1bmp,dmSet);
+
         end
         else
-          cbmp.PutImage(DestX,DestY,outbmp,dmSet);
+        begin
 
-        outbmp.free;
-      end
-      else
-      begin
-        {$IFNDEF OLD_MASK_TRANSPARENCY}
-        rbmp.PixelFormat:=pf32bit;
-        {$endif}
+          cnv.CopyMode:=cmSrcCopy;
+          cnv.Draw(DestX,DestY,bgra1bmp.Bitmap);
 
-        rbmp.Width:=imabmp.Width;
-        rbmp.Height:=imabmp.Height;
-        rbmp.Canvas.Draw(0,0,imabmp);
-        cnv.CopyMode:=cmSrcCopy;
-        cnv.Draw(DestX,DestY,rbmp);
+        end;
+
+      finally
+        transform.free;
+        bgra1bmp.Free;
       end;
 
     end
     else
     begin
 
-      // only a part of the image is displayed
-      BitmapRotation(ibmp,rbmp,Rotation,WhiteBg);
+      // only a part of the image is displayed in the screen
 
-      BitmapFlip(rbmp,(flipx<0),(flipy<0));
+      if WhiteBg then bgraibmp.LinearNegative;
 
-      xx:=(rbmp.Width/2)+((cfgchart.Width/2)-xx)/zoom;
-      yy:=(rbmp.Height/2)+((cfgchart.Height/2)-yy)/zoom;
-      dsx:=cfgchart.Width/2/zoom;
-      dsy:=dsx*cfgchart.height/cfgchart.width;
-      SrcR:=Rect(round(xx-dsx),round(yy-dsy),round(xx+dsx),round(yy+dsy));
-      imabmp.Width:=round(2*dsx);
-      imabmp.Height:=round(2*dsy);
-
-      if WhiteBg then
-      begin
-        imabmp.Canvas.Brush.Color:=clWhite;
-        imabmp.Canvas.Pen.Color:=clWhite;
-      end else
-      begin
-        imabmp.Canvas.Brush.Color:=clBlack;
-        imabmp.Canvas.Pen.Color:=clBlack;
-      end;
-
-      imabmp.Canvas.Rectangle(0,0,imabmp.Width,imabmp.Height);
-      imabmp.canvas.CopyRect(Rect(0,0,imabmp.Width,imabmp.Height),rbmp.Canvas,SrcR);
-
-      BitmapResize(imabmp,rbmp,zoom);
+      // make new image the size of the screen
+      bgra1bmp:=TBGRABitmap.Create(cfgchart.Width,cfgchart.Height);
+      transform := TBGRAAffineBitmapTransform.Create(bgraibmp,false);
+      try
+        // prepare transformation matrix
+        // set rotation center
+        transform.Translate(-bgraibmp.Width/2, -bgraibmp.Height/2);
+        // rotate
+        transform.RotateRad(Rotation);
+        // restore original center
+        transform.Translate(bgraibmp.Width/2, bgraibmp.Height/2);
+        if (flipx<0) then begin
+          // mirror x
+          transform.scale(-1,1);
+          transform.Translate(1.5*bgraibmp.Width,0);
+        end;
+        if (flipy<0) then begin
+          // mirror y
+          transform.scale(1,-1);
+          transform.Translate(0,1.5*bgraibmp.Width);
+        end;
+        // zoom image
+        transform.Scale(zoom);
+        // offset to request position
+        transform.Translate(round(xx-bgraibmp.Width*zoom/2),round(yy-bgraibmp.Height*zoom/2));
+        // apply transformation
+        bgra1bmp.fill(transform);
 
       if cfgplot.UseBMP then
       begin
-        rbmp.SaveToStream(memstream);
-        memstream.position := 0;
-
-        outbmp:=TBGRABitmap.Create;
-
-        try
-
-          outbmp.LoadFromStream(memstream,bmpreader);
-          memstream.Clear;
 
           if iTransparent then
           begin
-            SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg);
-            cbmp.PutImage(0,0,outbmp,dmDrawWithTransparency);
+            SetBGRATransparencyFromLuminance(bgra1bmp,TransparentMode,trWhiteBg,forcealpha);
+            cbmp.PutImage(0,0,bgra1bmp,dmDrawWithTransparency);
           end
           else
-            cbmp.PutImage(0,0,outbmp,dmSet);
-
-        finally
-          outbmp.free;
-        end
+            cbmp.PutImage(0,0,bgra1bmp,dmSet);
 
       end else
       begin
 
-        {$IFNDEF OLD_MASK_TRANSPARENCY}
-        imabmp.PixelFormat:=pf32bit;
-        {$endif}
-
-        imabmp.Width:=rbmp.Width;
-        imabmp.Height:=rbmp.Height;
-
-        imabmp.Canvas.Draw(0,0,rbmp);
-
         cnv.CopyMode:=cmSrcCopy;
-        cnv.Draw(0,0,imabmp);
+        cnv.Draw(0,0,bgra1bmp.Bitmap);
 
+      end;
+
+      finally
+        transform.free;
+        bgra1bmp.Free;
       end;
 
     end;
 
   finally
-
-    rbmp.Free;
-    memstream.Free;
-    imabmp.Free;
-
+    bgraibmp.free;
   end;
 
 end;
