@@ -29,7 +29,7 @@ interface
 
 uses
   LazUTF8, LazFileUtils, BGRABitmap, BGRABitmapTypes, BGRATransform, FPReadBMP,
-  u_constant, u_util, u_bitmap, PostscriptCanvas, process,
+  u_constant, u_util, PostscriptCanvas, process,
   SysUtils, Types, StrUtils, FPImage, LCLType, LCLIntf, IntfGraphics, FPCanvas,
   Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics, u_translation,
   u_orbits, u_CacheBMP;
@@ -66,7 +66,8 @@ type
      TransparentColor : TFPColor;
      bmpreader:TFPReaderBMP;
      obmp : TBitmap;
-     Fstarshape,starbmp: Tbitmap;
+     Fstarshape: Tbitmap;
+     starbmp: Tbitmap;
      Bstarbmp: array [0..6,0..10] of TBGRABitmap;
      starbmpw:integer;
      function PlotStar0(x,y: single; ma,b_v : Double):integer;
@@ -122,7 +123,7 @@ type
     Astarbmp: array [0..6,0..10] of Tbitmap;
     cnv  : Tcanvas;
     destcnv  : Tcanvas;
-    compassrose,compassarrow: Tbitmap;
+    compassrose,compassarrow: TBGRAbitmap;
     editlabelmenu: Tpopupmenu;
     constructor Create(AOwner:TComponent); override;
     destructor  Destroy; override;
@@ -140,7 +141,7 @@ type
     procedure PlotCRose(rosex,rosey,roserd,rot:single;flipx,flipy:integer; WhiteBg:boolean; RoseType: integer);
     procedure PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
     procedure PlotSimMark(x,y: single; mcolor: Tcolor);
-    procedure PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean;var ibmp:TBitmap; TransparentMode:integer=0; forcealpha:integer=0);
+    procedure PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean;var bgraibmp:TBGRABitmap; TransparentMode:integer=0; forcealpha:integer=0);
     procedure PlotBGImage( ibmp:TBitmap; WhiteBg: boolean; alpha:integer=200);
     procedure PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean;size:integer=0;margin:integer=0);
     procedure PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
@@ -201,7 +202,7 @@ begin
     Bstarbmp[i,j]:=TBGRABitmap.create;
   end;
 
-  starbmp:=Tbitmap.Create;
+  starbmp:=TBitmap.Create;
   cbmp:=TBGRABitmap.Create;
   obmp:= TBitmap.Create;
   bmpreader:=TFPReaderBMP.Create;
@@ -337,7 +338,7 @@ begin
 end;
 
 function TSplot.Init(w,h : integer) : boolean;
-//var Rgn : HRGN;
+var bmp1,bmp2:TBGRABitmap;
 begin
 
   cfgchart.Width:=w;
@@ -386,7 +387,11 @@ begin
   if (cfgplot.starplot>0)and(cfgchart.drawsize<>starbmpw)and(Fstarshape<>nil) then
   begin
     starbmpw:=cfgchart.drawsize;
-    BitmapResize(Fstarshape,starbmp,starbmpw);
+    bmp1:=TBGRABitmap.Create(Fstarshape);
+    bmp2:=bmp1.Resample(bmp1.Width*starbmpw,bmp1.Height*starbmpw) as TBGRABitmap;
+    starbmp.Assign(bmp2);
+    bmp1.free;
+    bmp2.free;
     InitStarBmp;
   end;
 
@@ -1798,23 +1803,19 @@ begin
 
 end;
 
-procedure TSplot.PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean; var ibmp:TBitmap; TransparentMode:integer=0; forcealpha:integer=0);
+procedure TSplot.PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean; var bgraibmp:TBGRABitmap; TransparentMode:integer=0; forcealpha:integer=0);
 var
   zoom : single;
   DestX,DestY :integer;
   trWhiteBg: boolean;
-  bgraibmp,bgra1bmp: TBGRABitmap;
+  bgra1bmp: TBGRABitmap;
   transform: TBGRAAffineBitmapTransform;
 begin
 
   if (iWidth<2) or (iHeight<2) then
      exit;
 
-  zoom := iWidth/ibmp.Width;
-
-  bgraibmp:=TBGRABitmap.Create(ibmp);
-
-  try
+  zoom := iWidth/bgraibmp.Width;
 
     trWhiteBg := false;
 
@@ -1947,30 +1948,20 @@ begin
 
     end;
 
-  finally
-    bgraibmp.free;
-  end;
-
 end;
 
 procedure TSplot.PlotBGImage( ibmp:TBitmap; WhiteBg: boolean; alpha:integer=200);
 var
   outbmp:TBGRABitmap;
-  memstream: TMemoryStream;
   blacklevel:byte;
 begin
 
   if cfgplot.UseBMP then
   begin
 
-    memstream:=TMemoryStream.Create;
-    outbmp:=TBGRABitmap.Create;
+    outbmp:=TBGRABitmap.Create(ibmp);
 
     try
-      ibmp.SaveToStream(memstream);
-      memstream.position := 0;
-      outbmp.LoadFromStream(memstream,bmpreader);
-      memstream.Clear;
       blacklevel:=MaxIntValue([cfgplot.backgroundcolor and $FF ,(cfgplot.backgroundcolor div $100) and $FF ,(cfgplot.backgroundcolor div $10000) and $FF]);
 
       if whitebg then
@@ -1989,7 +1980,6 @@ begin
       cbmp.PutImage(0,0,outbmp,dmSet);
 
     finally
-      memstream.Free;
       outbmp.free;
     end;
 
@@ -2141,10 +2131,7 @@ procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,f
 var
   ds,bds,mode : integer;
   ok: boolean;
-
-  b:TBitmap;
   BGRA : TBGRABitmap;
-
   idx: integer;
 begin
 
@@ -2169,18 +2156,12 @@ begin
     if BGRA <> nil then
     begin
 
-      b := FCacheBMP.GetBMP(idx).Bitmap;
+      if cfgplot.TransparentPlanet then
+        mode := 0
+      else
+        mode := 2;
 
-      if b <> nil then
-      begin
-
-        if cfgplot.TransparentPlanet then
-          mode := 0
-        else
-          mode := 2;
-
-         PlotImage(xx,yy,ds,ds*flatten,0,flipx,flipy,WhiteBg,true,b,mode);
-      end;
+       PlotImage(xx,yy,ds,ds*flatten,0,flipx,flipy,WhiteBg,true,BGRA,mode);
 
     end;
 
@@ -2192,10 +2173,9 @@ end;
 
 procedure TSplot.PlotPlanet5(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,rot:double;WhiteBg:boolean; size,margin:integer);
 var
-  ds,mode,dx,dy : integer;
+  ds,mode,dsf : integer;
   dt : double;
-  jpg:TJPEGImage;
-  rbmp,sbmp:TBitmap;
+  rbmp:TBGRABitmap;
   fn:string;
   idx: integer;
   BGRA : TBGRABitmap;
@@ -2223,6 +2203,9 @@ begin
   // check date of last downloaded image instead of current jd
   dt:=FileAgeUTF8(fn);
 
+  // check flattened diameter because the date do not change
+  dsf:=round(ds*flatten);
+
   try
 
 
@@ -2233,41 +2216,26 @@ begin
     if not NewUpdate then
        NewUpdate :=
          (FCacheBMP.GetJD(idx)<>dt) or
-         (FCacheBMP.GetDiameter(idx) <> ds);
+         (FCacheBMP.GetDiameter(idx) <> dsf);
 
     if NewUpdate then
     begin
 
-      jpg:=TJPEGImage.Create;
-      sbmp:=TBitmap.Create;
+      BGRA:=TBGRABitmap.Create;
 
       try
-        jpg.LoadFromFile(SysToUTF8(fn));
+        BGRA.LoadFromFileUTF8(SysToUTF8(fn));
         chdir(appdir);
 
-        if flatten=1 then
-          sbmp.Assign(jpg)
-        else
+        if flatten<>1 then
         begin
 
-          sbmp.Assign(jpg);
-
-          rbmp:=TBitmap.Create;
+          rbmp:=BGRA.FilterRotate(pointf(BGRA.Width/2,BGRA.Height/2),rad2deg*rot) as TBGRABitmap;
 
           try
 
-            BitmapRotation(sbmp,rbmp,rot,WhiteBg);
-
-            dx := (rbmp.Width-sbmp.Width)div 2;
-            dy := (rbmp.Height-sbmp.Height)div 2;
-
-            rot := 0;
-
-            sbmp.Width:=size;
-            sbmp.Height:=round(flatten*sbmp.Width);
-
-            sbmp.Canvas.StretchDraw(rect(-dx,-dy,sbmp.Width+dx,sbmp.Height+dy),rbmp);
-
+            BGRA.SetSize(size,round(flatten*BGRA.Width));
+            BGRA.StretchPutImage(rect(0,0,BGRA.Width,BGRA.Height),rbmp,dmSet,255);
 
           finally
 
@@ -2276,20 +2244,11 @@ begin
 
         end;
 
-        BGRA := TBGRABitmap.create(sbmp);
+          FCacheBMP.Add(IntToStr(C_Sun),BGRA,dsf,dt);
 
-        try
-          FCacheBMP.Add(IntToStr(C_Sun),BGRA,ds,dt);
-
-        finally
-          BGRA.Free;
-        end;
-
-
-      finally
-        jpg.free;
-        sbmp.free;
-      end;
+     finally
+         BGRA.Free;
+     end;
 
     end;
 
@@ -2303,9 +2262,13 @@ begin
 
     if idx>=0 then
     begin
-      sbmp := FCacheBMP.GetBMP(idx).Bitmap;
 
-      PlotImage(xx,yy,ds,ds*flatten,rot,flipx,flipy,WhiteBg,true,sbmp,mode);
+      BGRA := FCacheBMP.GetBMP(idx);
+
+      if flatten<>1 then rot := 0;
+
+      PlotImage(xx,yy,ds,ds*flatten,rot,flipx,flipy,WhiteBg,true,BGRA,mode);
+
     end
     else
       PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
@@ -2321,18 +2284,16 @@ procedure TSplot.PlotPlanet4(xx,yy,ipla:integer; pixscale,phase:double;WhiteBg:b
 var
   symbol,ph: string;
   ds,mode: integer;
-  spng: TPortableNetworkGraphic;
-  sbmp: TBitmap;
+  sbmp: TBGRABitmap;
   path: string;
-
-  PlanetBMP : Tbitmap;
+  PlanetBMP : TBGRAbitmap;
 
 begin
 
+  path := slash(appdir)+slash('data')+slash('planet')+'symbol'+inttostr(ipla);
+
   if ipla = C_Moon then
   begin
-
-    planetbmp:=Tbitmap.create;
 
     ph:='';
 
@@ -2341,7 +2302,6 @@ begin
     else if (phase<=50)or(phase>310) then ph:='_f'
     else ph:='_lq';
 
-    path := slash(appdir)+slash('data')+slash('planet')+'symbol'+inttostr(ipla);
 
     symbol := path + ph +'.png';
 
@@ -2354,24 +2314,19 @@ begin
 
   if fileexists(symbol) then
   begin
-    spng := TPortableNetworkGraphic.Create;
-    sbmp := TBitmap.Create;
-
+    sbmp := TBGRABitmap.Create;
+    planetbmp:=TBGRABitmap.create;
     try
 
-      spng.LoadFromFile(symbol);
-      sbmp.Assign(spng);
+      sbmp.LoadFromFile(symbol);
 
-      if WhiteBg then BitmapNegative(sbmp);
-
-      BitmapResize(sbmp,PlanetBMP,cfgchart.drawsize);
+      PlanetBMP:=sbmp.Resample(sbmp.Width*cfgchart.drawsize,sbmp.Height*cfgchart.drawsize) as TBGRABitmap;
 
     finally
-      spng.Free;
       sbmp.Free;
     end;
 
-    ds:=planetbmp.Width;
+    ds:=PlanetBMP.Width;
 
     if cfgplot.TransparentPlanet then
        mode:=0
@@ -2379,7 +2334,7 @@ begin
       if ds=20 then mode:=2
                else mode:=4;
 
-    PlotImage(xx,yy,ds,ds,0,1,1,WhiteBg,true,planetbmp,mode);
+    PlotImage(xx,yy,ds,ds,0,1,1,WhiteBg,true,PlanetBMP,mode);
 
     planetbmp.Free;
 
@@ -2390,7 +2345,6 @@ end;
 procedure TSplot.PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
 var
   ds1,ds2,xx,yy,xm,ym : Integer;
-  mbmp,mask:tbitmap;
   mc: TBGRABitmap;
 begin
 
@@ -2449,54 +2403,13 @@ begin
       if cnv<>nil then with cnv do
       begin
 
-        case  cfgplot.nebplot of
-
-          0: begin
-               Pen.Width := cfgchart.drawpen;
-               Pen.Color := cfgplot.Color[11];
-               Brush.style:=bsClear;
-               Ellipse(xx-ds1,yy-ds1,xx+ds1,yy+ds1);
-               Brush.style:=bsClear;
-               Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
-             end;
-
-         1: begin
-              mbmp:=Tbitmap.Create;
-              mask:=Tbitmap.Create;
-
-              mbmp.Width:=2*ds2;
-              mbmp.Height:=mbmp.Width;
-              // get source bitmap from the chart
-              mbmp.Canvas.CopyRect(rect(0,0,mbmp.Width,mbmp.Height),cnv,rect(xx-ds2,yy-ds2,xx+ds2,yy+ds2));
-              // mask=shadow to substract from the moon
-              xm:=ds2;
-              ym:=ds2;
-              mask.Width:=mbmp.Width;
-              mask.Height:=mbmp.Height;
-              mask.Canvas.Pen.Color:=clBlack;
-              mask.Canvas.Brush.Color:=clBlack;
-              mask.Canvas.Rectangle(0,0,mask.Width,mask.Height);
-              mask.Canvas.Pen.Color:=$080800;
-              mask.Canvas.Brush.Color:=$080800;
-              mask.Canvas.Ellipse(xm-ds2,ym-ds2,xm+ds2,ym+ds2);
-              mask.Canvas.Pen.Color:=$606000;
-              mask.Canvas.Brush.Color:=$606000;
-              mask.Canvas.Ellipse(xm-ds1,ym-ds1,xm+ds1,ym+ds1);
-              // substract the shadow
-              BitmapSubstract(mbmp,mask);
-              // finally copy back the image
-              mbmp.Transparent:=false;
-              copymode:=cmSrcCopy;
-              copyrect(rect(xx-ds2,yy-ds2,xx+ds2,yy+ds2),mbmp.Canvas,rect(0,0,mbmp.Width,mbmp.Height));
-
-              mbmp.Free;
-              mask.Free;
-
-            end;  // 1
-
-          end; // case
-
-      end; // with
+         Pen.Width := cfgchart.drawpen;
+         Pen.Color := clGray;
+         Brush.style:=bsClear;
+         Ellipse(xx-ds1,yy-ds1,xx+ds1,yy+ds1);
+         Brush.style:=bsClear;
+         Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
+      end;
 
     end;  // if xx
 

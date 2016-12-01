@@ -634,7 +634,7 @@ type
     AutoRefreshLock: Boolean;
     AnimationEnabled: Boolean;
     AnimationDirection: integer;
-    Compass,arrow: TBitmap;
+    Compass,arrow: TBGRABitmap;
     CursorImage1: TCursorImage;
     SaveState: TWindowState;
     samp: TSampClient;
@@ -2189,8 +2189,8 @@ end;
 step:='Bitmap';
 if VerboseMsg then
  WriteTrace(step);
-compass:=TBitmap.create;
-arrow:=TBitmap.create;
+compass:=TBGRABitmap.create;
+arrow:=TBGRABitmap.create;
 step:='Load timezone';
 // check computer clock
 buf:=FormatDateTime('YYYY',now);
