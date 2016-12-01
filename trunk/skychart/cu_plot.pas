@@ -1959,7 +1959,7 @@ begin
   if cfgplot.UseBMP then
   begin
 
-    outbmp:=TBGRABitmap.Create(ibmp);
+    outbmp:=TBGRABitmap.Create(ibmp,false);
 
     try
       blacklevel:=MaxIntValue([cfgplot.backgroundcolor and $FF ,(cfgplot.backgroundcolor div $100) and $FF ,(cfgplot.backgroundcolor div $10000) and $FF]);
