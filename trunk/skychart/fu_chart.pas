@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses
+uses BGRABitmap, BGRABitmapTypes,
      pu_ascomclient, pu_lx200client, pu_encoderclient, pu_indiclient, pu_getdss, pu_imglist,
      u_translation, pu_detail, cu_skychart,  u_constant, u_util,pu_image, gcatunit, pu_obslist,
      u_projection, Printers, Math, downloaddialog, IntfGraphics, contnrs, LCLType, UScaleDPI,
@@ -2914,7 +2914,7 @@ function Tf_chart.FormatDesc:string;
 var desc,buf,buf2,otype,oname,txt,s1,s2,s3: string;
     thr,tht,ths,tazr,tazs,tculmalt: string;
     searchdir,fn: string;
-    bmp: Tbitmap;
+    bmp: TBGRAbitmap;
     ipla,isat:integer;
     i,p,l,y,m,d,precision,pa : integer;
     isStar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
@@ -3060,11 +3060,11 @@ if sc.Fits.GetFileName(sc.cfgsc.FindCat,oname,fn) then begin
   if (ExtractFileExt(fn)<>'.nil') then begin
        sc.Fits.FileName:=fn;
        if sc.Fits.Header.valid then begin
-         bmp:=Tbitmap.Create;
+         bmp:=TBGRABitmap.Create;
          try
          sc.Fits.min_sigma:=sc.cfgsc.NEBmin_sigma;
          sc.Fits.max_sigma:=sc.cfgsc.NEBmax_sigma;
-         sc.Fits.GetBitmap(bmp);
+         sc.Fits.GetBGRABitmap(bmp);
          fn:=slash(systoutf8(TempDir))+'info.bmp';
          DeleteFileutf8(fn);
          bmp.SaveToFile(fn);

@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, cu_fits, cu_database,
+uses u_help, u_translation, u_constant, u_util, cu_fits, cu_database, BGRABitmap, BGRABitmapTypes,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, LazUTF8, LazFileUtils,
   StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits, LResources,
   EditBtn, LazHelpHTML, Grids;
@@ -572,14 +572,14 @@ end;
 //////////////////////////
 
 Procedure  Tf_config_pictures.RefreshImage;
-var bmp: TBitmap;
+var bmp,bmp2: TBGRABitmap;
     c1,c2:double;
     x,y,dx,dy:integer;
 begin
-bmp:=Tbitmap.create;
+bmp:=TBGRABitmap.create;
 FFits.min_sigma:=csc.BGmin_sigma;
 FFits.max_sigma:=csc.BGmax_sigma;
-FFits.GetBitmap(bmp);
+FFits.GetBGRABitmap(bmp);
 if bmp.Width>1 then begin
   c1:=Image1.width/Image1.Height;
   c2:=bmp.width/bmp.Height;
@@ -594,10 +594,13 @@ if bmp.Width>1 then begin
     x:=0;
     y:=round((Image1.Height-dy)/2);
   end;
-  Image1.canvas.brush.color:=clBlack;
-  Image1.canvas.pen.color:=clBlack;
-  Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
-  Image1.canvas.stretchdraw(rect(x,y,x+dx,y+dy),bmp);
+  bmp2:=bmp.Resample(dx,dy) as TBGRABitmap;
+  try
+  bmp2.Draw(Image1.canvas,0,0);
+  finally
+    bmp2.Free;
+  end;
+  Image1.Invalidate;
 end;
 bmp.Free;
 end;
