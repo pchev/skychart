@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_translation, UScaleDPI,
+uses u_translation, UScaleDPI, BGRABitmap, BGRABitmapTypes,
   u_util, u_constant, u_projection, SysUtils, Classes,  passql, pasmysql, passqlite, LazUTF8, LazFileUtils,
   Graphics,Math, FPImage, Controls, LCLType, Forms, StdCtrls, ComCtrls, ExtCtrls, Buttons, IntfGraphics;
 
@@ -78,6 +78,10 @@ Tfitslistlabel = record lid: longword;
                  end;
 
 const    maxl = 20000;
+  Cittsqrt=MaxWord/sqrt(MaxWord);
+  Cittlog=MaxWord/ln(MaxWord);
+  Cittsqrt8=MAXBYTE/sqrt(MaxWord);
+  Cittlog8=MAXBYTE/ln(MaxWord);
 
 type
   TFits = class(TComponent)
@@ -104,6 +108,7 @@ type
     Procedure FITSCoord ;
     Procedure ReadFitsImage;
     function Citt(value: Word):Word;
+    function Citt8(value: Word):byte;
   protected
     { Protected declarations }
   public
@@ -129,6 +134,7 @@ type
      Procedure ViewHeaders;
      procedure GetBitmap(var imabmp:Tbitmap);
      procedure GetIntfImg(var IntfImg: TLazIntfImage);
+     procedure GetBGRABitmap(var bgra:TBGRAbitmap);
      Procedure InfoWCScoord;
      procedure GetProjBitmap(var imabmp:Tbitmap; c:Tconf_skychart);
      procedure GetProjList(var imabmp:Tbitmap; c:Tconf_skychart);
@@ -724,8 +730,6 @@ end;
 end;
 
 function TFits.Citt(value: Word):Word;
-var
-  c:double;
 begin
 case Fitt of
 ittlinear: begin
@@ -738,15 +742,37 @@ ittramp: begin
          end;
 ittsqrt: begin
           // sqrt
-          c:=MaxWord/sqrt(MaxWord);
           if value=0 then result:=0
-          else result:=round(c*sqrt(value));
+          else result:=round(Cittsqrt*sqrt(value));
          end;
 ittlog:  begin
           // Log
-          c:=MaxWord/ln(MaxWord);
           if value=0 then result:=0
-          else result:=round(c*ln(value));
+          else result:=round(Cittlog*ln(value));
+          end;
+end;
+end;
+
+function TFits.Citt8(value: Word):byte;
+begin
+case Fitt of
+ittlinear: begin
+          // Linear
+         result:=value div 256;
+         end;
+ittramp: begin
+          // Ramp
+          result:=value div 256;
+         end;
+ittsqrt: begin
+          // sqrt
+          if value=0 then result:=0
+          else result:=round(Cittsqrt8*sqrt(value));
+         end;
+ittlog:  begin
+          // Log
+          if value=0 then result:=0
+          else result:=round(Cittlog8*ln(value));
           end;
 end;
 end;
@@ -910,6 +936,159 @@ if Fheader.naxis1>0 then begin
   imabmp.SetHandles(ImgHandle,ImgMaskHandle);
   IntfImg.Free;
 end;
+end;
+
+{procedure TFits.GetBGRABitmap(var bgra: TBGRABitmap);
+var i,j,row : integer;
+    x : word;
+    xx: extended;
+    c: double;
+    color: TFPColor;
+begin
+ReadFitsImage;
+bgra.SetSize(Fwidth,Fheight);
+dmin:=Fheader.dmin+Fmin_sigma*Fsigma;
+dmax:=Fheader.dmax-Fmax_sigma*Fsigma;
+if dmin>=dmax then dmax:=dmin+1;
+c:=MaxWord/(dmax-dmin);
+color.alpha:=255;
+case Fheader.bitpix of
+     -64 : for i:=0 to Fheight-1 do begin
+           if invertY then row:=Fheight-1-i
+                      else row:=i;
+           for j := 0 to Fwidth-1 do begin
+               xx:=Fheader.bzero+Fheader.bscale*imar64[0,i,j];
+               x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+               color.red:=Citt8(x);
+               if n_axis=3 then begin
+                 xx:=Fheader.bzero+Fheader.bscale*imar64[1,i,j];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.green:=Citt8(x);
+                 xx:=Fheader.bzero+Fheader.bscale*imar64[2,i,j];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.blue:=Citt8(x);
+               end else begin
+                 color.green:=color.red;
+                 color.blue:=color.red;
+               end;
+               if invertX then begin
+                  bgra.Colors[Fwidth-j,row]:=color;
+               end else begin
+                  bgra.Colors[j,row]:=color;
+               end;
+           end;
+           end;
+     -32 : for i:=0 to Fheight-1 do begin
+           if invertY then row:=Fheight-1-i
+                      else row:=i;
+           for j := 0 to Fwidth-1 do begin
+               xx:=Fheader.bzero+Fheader.bscale*imar32[0,i,j];
+               x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+               color.red:=Citt8(x);
+               if n_axis=3 then begin
+                 xx:=Fheader.bzero+Fheader.bscale*imar32[1,i,j];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.green:=Citt8(x);
+                 xx:=Fheader.bzero+Fheader.bscale*imar32[2,i,j];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.blue:=Citt8(x);
+               end else begin
+                 color.green:=color.red;
+                 color.blue:=color.red;
+               end;
+               if invertX then begin
+                  bgra.Colors[Fwidth-j,row]:=color;
+               end else begin
+                  bgra.Colors[j,row]:=color;
+               end;
+           end;
+           end;
+       8 : for i:=0 to Fheight-1 do begin
+           if invertY then row:=Fheight-1-i
+                      else row:=i;
+           for j := 0 to Fwidth-1 do begin
+               xx:=Fheader.bzero+Fheader.bscale*imai8[0,i,j];
+               x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+               color.red:=Citt8(x);
+               if n_axis=3 then begin
+                 xx:=Fheader.bzero+Fheader.bscale*imai8[1,i,j];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.green:=Citt8(x);
+                 xx:=Fheader.bzero+Fheader.bscale*imai8[2,i,j];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.blue:=Citt8(x);
+               end else begin
+                 color.green:=color.red;
+                 color.blue:=color.red;
+               end;
+               if invertX then begin
+                  bgra.Colors[Fwidth-j,row]:=color;
+               end else begin
+                  bgra.Colors[j,row]:=color;
+               end;
+           end;
+           end;
+      16 : for i:=0 to Fheight-1 do begin
+           if invertY then row:=Fheight-1-i
+                      else row:=i;
+           for j := 0 to Fwidth-1 do begin
+               xx:=Fheader.bzero+Fheader.bscale*imai16[0,i,j];
+               x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+               color.red:=Citt8(x);
+               if n_axis=3 then begin
+                 xx:=Fheader.bzero+Fheader.bscale*imai16[1,i,j];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.green:=Citt8(x);
+                 xx:=Fheader.bzero+Fheader.bscale*imai16[2,i,j];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.blue:=Citt8(x);
+               end else begin
+                 color.green:=color.red;
+                 color.blue:=color.red;
+               end;
+               if invertX then begin
+                  bgra.Colors[Fwidth-j,row]:=color;
+               end else begin
+                  bgra.Colors[j,row]:=color;
+               end;
+           end;
+           end;
+      32 : for i:=0 to Fheight-1 do begin
+           if invertY then row:=Fheight-1-i
+                      else row:=i;
+           for j := 0 to Fwidth-1 do begin
+               xx:=Fheader.bzero+Fheader.bscale*imai32[0,i,j];
+               x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+               color.red:=Citt8(x);
+               if n_axis=3 then begin
+                 xx:=Fheader.bzero+Fheader.bscale*imai32[1,i,j];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.green:=Citt8(x);
+                 xx:=Fheader.bzero+Fheader.bscale*imai32[2,i,j];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.blue:=Citt8(x);
+               end else begin
+                 color.green:=color.red;
+                 color.blue:=color.red;
+               end;
+               if invertX then begin
+                  bgra.Colors[Fwidth-j,row]:=color;
+               end else begin
+                  bgra.Colors[j,row]:=color;
+               end;
+           end;
+           end;
+      end;
+end; }
+
+procedure TFits.GetBGRABitmap(var bgra:TBGRAbitmap);
+var bmp:Tbitmap;
+begin
+{ TODO : make real bgra interface }
+bmp:=Tbitmap.Create;
+GetBitmap(bmp);
+bgra.Assign(bmp);
+bmp.Free;
 end;
 
 procedure pixelatcoord(ra,de: double; var x,y: integer; wcsnum:integer=0);

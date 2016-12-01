@@ -1768,6 +1768,10 @@ end;
 procedure Tf_config_display.Button3Click(Sender: TObject);
 begin
 cplot.SkyColor:=dfSkyColor;
+cplot.bgcolor:=cplot.SkyColor[0];
+cplot.color[0]:=cplot.bgcolor;
+cplot.color[11]:=clWhite;
+ShowColor;
 ShowSkyColor;
 end;
 
