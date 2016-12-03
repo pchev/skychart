@@ -3046,6 +3046,14 @@ if (otype='P')or((otype='Ps')and(oname=pla[11])) then begin
     r.Free;
     if i=0 then txt:=txt+'<img src="'+slash(TempDir)+'info.png" alt="'+oname+'" border="0" width="200" height="200">'+html_br;
  end;
+end
+else if (otype='Ps')and(isat>0) then begin
+  searchdir:=slash(appdir)+slash('data')+'planet';
+  r:=TStringList.Create;
+  gw:=0;
+  GetXplanet(Xplanetversion,'',searchdir,'200x200',slash(Tempdir)+'info.png',isat,0,gw,cjd,i,r );
+  r.Free;
+  if i=0 then txt:=txt+'<img src="'+slash(TempDir)+'info.png" alt="'+oname+'" border="0" width="200" height="200">'+html_br;
 end;
 // Sun picture
 if (otype='S*')and(oname=pla[10]) then begin
