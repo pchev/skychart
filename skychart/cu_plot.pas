@@ -145,7 +145,7 @@ type
     procedure PlotBGImage( ibmp:TBitmap; WhiteBg: boolean; alpha:integer=200);
     procedure PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean;size:integer=0;margin:integer=0);
     procedure PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
-    procedure PlotSatel(x,y:single;ipla:integer; JD,pixscale,ma,diam : double; hidesat, showhide : boolean);
+    procedure PlotSatel(x,y:single;ipla:integer; JD, pixscale,ma,diam,rot : double; hidesat, showhide, whitebg : boolean; flipx,flipy: integer);
     procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
     procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
     function  PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; var px,py: integer; sizex:single=1):integer;
@@ -2000,7 +2000,7 @@ var
 
   buf, searchdir, bsize: string;
   r:TStringList;
-  XplanetImg, BGRA: TBGRABitmap;
+  XplanetImg, BGRA, mask: TBGRABitmap;
   OutputFile, origin, target: string;
 
   idx: integer;
@@ -2071,8 +2071,11 @@ begin
       begin
 
         xplanetimg:=TBGRABitmap.Create(SysToUTF8(slash(Tempdir)+'planet.png'));
-
+        mask := TBGRABitmap.Create(xplanetimg.Width,xplanetimg.Height,BGRABlack);
         try
+          mask.FillEllipseInRect(rect(0,0,mask.Width,mask.Height),BGRAWhite,dmSet);
+          xplanetimg.ApplyMask(mask);
+
           chdir(appdir);
 
           if flatten=1 then
@@ -2098,6 +2101,7 @@ begin
 
         finally
           XplanetImg.Free;
+          mask.free;
         end;
 
       end
@@ -2416,9 +2420,9 @@ begin
 
 end;
 
-procedure TSplot.PlotSatel(x,y:single;ipla:integer; JD, pixscale,ma,diam : double; hidesat, showhide : boolean);
+procedure TSplot.PlotSatel(x,y:single;ipla:integer; JD, pixscale,ma,diam,rot : double; hidesat, showhide, whitebg : boolean; flipx,flipy: integer);
 var
-  ds,ds2,xx,yy,n : Integer;
+  ds,ds2,xx,yy,n,mode : Integer;
   ds1: single;
   idx : integer;
   b: TBGRABitmap;
@@ -2450,8 +2454,10 @@ begin
       if cfgplot.UseBMP then
       begin
 
+        rot := rad2deg * rot * flipx * flipy;
+
         if n=2 then
-          idx := GetBodyImage(ipla, ds2, JD, 1, 0, 0)
+          idx := GetBodyImage(ipla, ds2, JD, 1, 0, rot)
         else
           idx:=-1;
 
@@ -2459,7 +2465,12 @@ begin
         begin
           b:= FCacheBMP.GetBMP(idx);
 
-          PlotImage(xx,yy,b.Width,b.Height,0,0,0,false,true,b,0);
+          if cfgplot.TransparentPlanet then
+            mode := 0
+          else
+            mode := 1;
+
+          PlotImage(xx,yy,b.Width,b.Height,0,flipx,flipy,whitebg,true,b,mode);
 
         end else
         begin
