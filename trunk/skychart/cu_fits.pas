@@ -396,10 +396,15 @@ Procedure TFits.InfoWCScoord;
 var n: integer;
     y,m,d: word;
     i: TcdcWCSinfo;
+    fn: string;
 begin
 try
 if FFileName<>'' then begin
-  n:=cdcwcs_initfitsfile(pchar(FFileName),0);
+  fn:=FFileName;
+  {$ifdef mswindows}
+  fn:=UTF8ToWinCP(fn);
+  {$endif}
+  n:=cdcwcs_initfitsfile(pchar(fn),0);
   n:=cdcwcs_getinfo(addr(i),0);
   if VerboseMsg then WriteTrace('cdcwcs_getinfo '+inttostr(n)+' ra:'+formatfloat(f5,i.cra)+' de:'+formatfloat(f5,i.cdec)+' w:'+inttostr(i.wp)+' h:'+inttostr(i.hp)+' s:'+formatfloat(f6,i.secpix) );
   if (n=0)and(i.secpix<>0) then begin
@@ -1226,6 +1231,7 @@ var IntfImg: TDrawListImg;
     working,timingout: boolean;
     timelimit: TDateTime;
     thread: array[0..7] of TDrawListThread;
+    fn: string;
 begin
 try
 imabmp.freeimage;
@@ -1242,7 +1248,11 @@ n:=0;
 for i:=0 to fitslist.Count-1 do begin
  if n>maxfitslist then break;
  if fitslistactive[i] then begin
-   r:=cdcwcs_initfitsfile(pchar(fitslist[i]),n);
+   fn:=fitslist[i];
+   {$ifdef mswindows}
+   fn:=UTF8ToWinCP(fn);
+   {$endif}
+   r:=cdcwcs_initfitsfile(pchar(fn),n);
    r:=cdcwcs_getinfo(addr(iwcs),n);
    if (r=0)and(iwcs.secpix<>0) then begin
     if VerboseMsg then WriteTrace('SkyChart '+c.chartname+': load '+fitslist[i]);

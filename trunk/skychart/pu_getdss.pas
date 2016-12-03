@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses u_help, u_translation, UScaleDPI,
-  dynlibs, u_constant, u_util, Math,
+  dynlibs, u_constant, u_util, Math, LazUTF8,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, LResources, downloaddialog, LazHelpHTML;
 
@@ -172,7 +172,7 @@ var i : SImageConfig;
     gzbuf : array[0..4095]of char;
     rc,datasource,n,l,imgy : integer;
     subsample,wi,he,npix,imgsize,fovx,fovy : double;
-    ima,app,platename,buf,dd,mm,ss : string;
+    ima,app,platename,buf,dd,mm,ss,gzfn : string;
     firstrec: boolean;
     gzf:pointer;
     fitsfile:file;
@@ -235,10 +235,14 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
   buf:=StringReplace(buf,'$PIXX',inttostr(imgx),[rfReplaceAll]);
   buf:=StringReplace(buf,'$PIXY',inttostr(imgy),[rfReplaceAll]);
   DownloadDialog1.URL:=buf;
-  DownloadDialog1.SaveToFile:=ExpandFileName(cfgdss.dssfile+'.gz');
+  gzfn:=ExpandFileName(cfgdss.dssfile+'.gz');
+  DownloadDialog1.SaveToFile:=gzfn;
   if DownloadDialog1.Execute then begin
      try
-     gzf:=gzopen(pchar(DownloadDialog1.SaveToFile),pchar('rb'));
+     {$ifdef mswindows}
+     gzfn:=UTF8ToWinCP(gzfn);
+     {$endif}
+     gzf:=gzopen(pchar(gzfn),pchar('rb'));
      Filemode:=2;
      assignfile(fitsfile,ExpandFileName(cfgdss.dssfile));
      rewrite(fitsfile,1);

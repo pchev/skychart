@@ -518,28 +518,6 @@ var
   {$endif}
 begin
  p:=TProcess.Create(nil);
- {$ifdef linux}
-   p.Environment.Add('LC_ALL=C');
-   p.Executable:='xplanet';
- {$endif}
- {$ifdef freebsd}
-   p.Environment.Add('LC_ALL=C');
-   p.Executable:='xplanet';
- {$endif}
- {$ifdef darwin}
-   p.Environment.Add('LC_ALL=C');
-   p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet';
- {$endif}
- {$ifdef mswindows}
-   p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet.exe';
-   if not isANSItmpdir then begin
-     GetShortPathName(pchar(TempDir),@shorttmp,1024);
-     outfile:=slash(shorttmp)+extractfilename(outfile);
-     if (originfile<>'') and FileExists(originfile) then
-         originfile:=slash(shorttmp)+extractfilename(originfile);
-   end;
- {$endif}
-
  // prepare origin lat/long
 
   if AUseOrigFile and (originfile = '') then  // PCH
@@ -555,6 +533,30 @@ begin
      );
 
   end;
+
+ {$ifdef linux}
+   p.Environment.Add('LC_ALL=C');
+   p.Executable:='xplanet';
+ {$endif}
+ {$ifdef freebsd}
+   p.Environment.Add('LC_ALL=C');
+   p.Executable:='xplanet';
+ {$endif}
+ {$ifdef darwin}
+   p.Environment.Add('LC_ALL=C');
+   p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet';
+ {$endif}
+ {$ifdef mswindows}
+   p.Executable:=slash(appdir)+slash(xplanet_dir)+'xplanet.exe';
+   if not isANSItmpdir then begin
+     GetShortPathName(PChar(UTF8ToWinCP(TempDir)),@shorttmp,1024);
+     outfile:=slash(shorttmp)+extractfilename(outfile);
+     if (originfile<>'') and FileExists(originfile) then
+         originfile:=slash(shorttmp)+extractfilename(originfile);
+     if (searchdir<>'') and DirectoryExists(searchdir) then
+         searchdir:=StringReplace(searchdir,TempDir,shorttmp,[]);
+   end;
+ {$endif}
 
   // Determinate target
 
