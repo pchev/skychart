@@ -145,7 +145,7 @@ type
     procedure PlotBGImage( ibmp:TBitmap; WhiteBg: boolean; alpha:integer=200);
     procedure PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean;size:integer=0;margin:integer=0);
     procedure PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
-    procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
+    procedure PlotSatel(x,y:single;ipla:integer; JD,pixscale,ma,diam : double; hidesat, showhide : boolean);
     procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
     procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
     function  PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; var px,py: integer; sizex:single=1):integer;
@@ -1581,8 +1581,7 @@ begin
     if ((xx+ds)>0) and ((xx-ds)<cfgchart.Width) and ((yy+ds)>0) and ((yy-ds)<cfgchart.Height) then
     begin
 
-      if (n=2) and ((ds<5) or (ds>1500)) then n:=1;
-      if (n=1) and (ds<5)  then n:=0;
+      if ((n=2)or(n=1)) and (ds<5)  then n:=0;
       if ((not use_xplanet)) and (n=2) then n:=1;
 
       case n of
@@ -2417,29 +2416,57 @@ begin
 
 end;
 
-procedure TSplot.PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
+procedure TSplot.PlotSatel(x,y:single;ipla:integer; JD, pixscale,ma,diam : double; hidesat, showhide : boolean);
 var
-  ds,ds2,xx,yy : Integer;
+  ds,ds2,xx,yy,n : Integer;
   ds1: single;
+  idx : integer;
+  b: TBGRABitmap;
 begin
+
+  ds:=round(diam*pixscale/2)*cfgchart.drawsize;
+
+  n:=cfgplot.plaplot;
+  if ((n=2)or(n=1)) and (ds<5)  then n:=0;
+  if ((not use_xplanet)) and (n=2) then n:=1;
+  if n=3 then n:=0;
 
   xx:=RoundInt(x);
   yy:=RoundInt(y);
+
+  if ((xx+ds)>0) and ((xx-ds)<cfgchart.Width) and ((yy+ds)>0) and ((yy-ds)<cfgchart.Height) then
+  begin
 
   if not cfgplot.Invisible then
 
   if not (hidesat xor showhide) then
   begin
-    ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
+    ds := round(max(10,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
     ds2:=round(diam*pixscale);
 
-    if ds2>ds then
+    if (n<>0)and(ds2>ds) then
     begin
       ds1:=ds2/2;
       if cfgplot.UseBMP then
       begin
-        cbmp.FillEllipseAntialias(x,y,ds1,ds1,ColorToBGRA(cfgplot.Color[20]));
-        cbmp.EllipseAntialias(x,y,ds1,ds1,ColorToBGRA(cfgplot.Color[0]),cfgchart.drawpen);
+
+        if n=2 then
+          idx := GetBodyImage(ipla, ds2, JD, 1, 0, 0)
+        else
+          idx:=-1;
+
+        if idx>= 0 then
+        begin
+          b:= FCacheBMP.GetBMP(idx);
+
+          PlotImage(xx,yy,b.Width,b.Height,0,0,0,false,true,b,0);
+
+        end else
+        begin
+          cbmp.FillEllipseAntialias(x,y,ds1,ds1,ColorToBGRA(cfgplot.Color[20]));
+          cbmp.EllipseAntialias(x,y,ds1,ds1,ColorToBGRA(cfgplot.Color[0]),cfgchart.drawpen);
+        end;
+
       end
       else
 
@@ -2449,7 +2476,6 @@ begin
         Pen.Width := cfgchart.drawpen;
         Brush.style:=bsSolid;
         Pen.Mode := pmCopy;
-        //brush.color:=cfgplot.Color[11];
         brush.color:=cfgplot.Color[20];
         ds2:= round(ds/2);
 
@@ -2477,6 +2503,7 @@ begin
       PlotStar(x,y,ma,1020)
 
   end;
+ end;
 
 end;
 
