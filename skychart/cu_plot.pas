@@ -1907,12 +1907,12 @@ begin
         if (flipx<0) then begin
           // mirror x
           transform.scale(-1,1);
-          transform.Translate(1.5*bgraibmp.Width,0);
+          transform.Translate(bgraibmp.Width,0);
         end;
         if (flipy<0) then begin
           // mirror y
           transform.scale(1,-1);
-          transform.Translate(0,1.5*bgraibmp.Width);
+          transform.Translate(0,bgraibmp.Width);
         end;
         // zoom image
         transform.Scale(zoom);
