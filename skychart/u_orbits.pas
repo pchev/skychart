@@ -141,18 +141,16 @@ const
                (C_Io,       C_Europa,     C_Ganymede,   C_Callisto);
                 {,C_Amalthea, C_Thebe,      C_Adrastea,   C_Metis}
 
- Saturn_Sat  : array [1..10] of integer =
+ Saturn_Sat  : array [1..8] of integer =
                (C_Mimas,     C_Enceladus,  C_Tethys,     C_Dione,
-                C_Rhea,      C_Titan,      C_Hyperion,   C_Iapetus,
-                C_Phoebe,    C_Janus);
-               {C_Epimetheus, C_Helene     ,
+                C_Rhea,      C_Titan,      C_Hyperion,   C_Iapetus);
+               {C_Phoebe,    C_Janus,      C_Epimetheus, C_Helene,
                 C_Telesto,   C_Calypso,    C_Atlas,      C_Prometheus ,
                 C_Pandora,   C_Pan,        C_Daphnis   }
 
  Uranus_Sat  : array [1..5] of integer =
                (C_Miranda,   C_Ariel,   C_Umbriel,  C_Titania,
                 C_Oberon);
-
                  {,    C_Puck,    C_Cordelia, C_Ophelia,
                  C_Belinda,   C_Perdita, C_Bianca,   C_Cressida,
                  C_Desdemona, C_Juliet,  C_Portia,   C_Rosalind,
@@ -161,7 +159,6 @@ const
 
  Neptune_Sat : array [1..1] of integer =
                (C_Triton);
-
                {,  C_Nereid,  C_Naiad  ,  C_Thalassa,
                 C_Despina, C_Galatea, C_Larissa,  C_Proteus];}
 
@@ -250,6 +247,7 @@ type
   function GetPlanetParent(Aipla: integer): integer;
   function GetPlanetParentName(Aipla: integer): string;
   function GetPlanetNameLang(Aipla: integer): string;
+  function HasPlanetImage(Aipla: integer): boolean;
 
 
 procedure GetXplanet_Plain(Xplanetversion, searchdir,bsize,outfile : string;
@@ -939,6 +937,19 @@ begin
   ipla := GetPlanetParent(Aipla);
   result := GetPlanetName(ipla);
 
+end;
+
+function HasPlanetImage(Aipla: integer): boolean;
+begin
+  result := false;
+
+  if IsInArray( Aipla, Main_Bodies ) then result := true
+  else if IsInArray( Aipla, Mars_Sat    ) then result := true
+  else if IsInArray( Aipla, Jupiter_Sat ) then result := true
+  else if IsInArray( Aipla, Saturn_Sat  ) then result := true
+  else if IsInArray( Aipla, Uranus_Sat  ) then result := true
+  else if IsInArray( Aipla, Neptune_Sat ) then result := true
+  else if IsInArray( Aipla, Pluto_Sat   ) then result := true;
 end;
 
 constructor TOrbits.Create(Aplbmp:TBGRABitmap; ATextZoom: Double);
