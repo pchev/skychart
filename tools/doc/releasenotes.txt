@@ -2,6 +2,7 @@ Version 3.11 beta, release Notes
 
 New functions:
 
+  * Plot images for the main planetary satellites
   * Update the artificial satellites TLE files automatically.
   * Set the tool bar button size and text in Setup / Toolbar editor.
   * Use INDIstarter to manage the INDI server.
@@ -19,6 +20,7 @@ New functions:
 
 Corrections:
 
+  * Performance improvement with image display
   * Artificial satellites TLE files can use .txt extension.
   * Move some menu from File to View and Chart.
   * Now the program scale the window correctly on high resolution screen. You can set the old behavior in Setup/General.
