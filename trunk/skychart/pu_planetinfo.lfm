@@ -121,10 +121,10 @@ object f_planetinfo: Tf_planetinfo
       Left = 152
       Height = 26
       Top = 0
-      Width = 416
+      Width = 480
       BevelOuter = bvNone
       ClientHeight = 26
-      ClientWidth = 416
+      ClientWidth = 480
       Color = clBlack
       Font.Color = clBlack
       ParentColor = False
@@ -651,20 +651,20 @@ object f_planetinfo: Tf_planetinfo
         TabOrder = 1
         object PanelrgTarget: TPanel
           Left = 0
-          Height = 19
+          Height = 16
           Top = 160
           Width = 136
           Align = alTop
           AutoSize = True
           BevelOuter = bvNone
-          ClientHeight = 19
+          ClientHeight = 16
           ClientWidth = 136
           TabOrder = 1
           object rgTarget: TRadioGroup
             Left = 0
-            Height = 19
+            Height = 16
             Top = 0
-            Width = 56
+            Width = 59
             AutoFill = True
             AutoSize = True
             Caption = 'Look at:'
@@ -681,21 +681,21 @@ object f_planetinfo: Tf_planetinfo
         end
         object PanelrgOrigin: TPanel
           Left = 0
-          Height = 82
-          Top = 179
+          Height = 79
+          Top = 176
           Width = 136
           Align = alTop
           Alignment = taLeftJustify
           AutoSize = True
           BevelOuter = bvNone
-          ClientHeight = 82
+          ClientHeight = 79
           ClientWidth = 136
           TabOrder = 3
           object rgOrigin: TRadioGroup
             Left = 0
-            Height = 82
+            Height = 79
             Top = 0
-            Width = 76
+            Width = 78
             AutoFill = True
             AutoSize = True
             Caption = 'From:'
@@ -707,7 +707,7 @@ object f_planetinfo: Tf_planetinfo
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
             ClientHeight = 63
-            ClientWidth = 74
+            ClientWidth = 76
             ItemIndex = 0
             Items.Strings = (
               'Earth'
@@ -720,8 +720,8 @@ object f_planetinfo: Tf_planetinfo
         end
         object ComboBox1: TComboBox
           Left = 0
-          Height = 24
-          Top = 261
+          Height = 21
+          Top = 255
           Width = 136
           Align = alTop
           ItemHeight = 0
@@ -732,8 +732,8 @@ object f_planetinfo: Tf_planetinfo
         end
         object ComboBox2: TComboBox
           Left = 0
-          Height = 24
-          Top = 285
+          Height = 21
+          Top = 276
           Width = 136
           Align = alTop
           ItemHeight = 0
@@ -756,7 +756,7 @@ object f_planetinfo: Tf_planetinfo
             Left = 8
             Height = 21
             Top = 40
-            Width = 56
+            Width = 57
             Caption = 'Icons'
             Checked = True
             OnChange = cbIconsChange
@@ -768,7 +768,7 @@ object f_planetinfo: Tf_planetinfo
             Left = 8
             Height = 21
             Top = 112
-            Width = 62
+            Width = 65
             Caption = 'Labels'
             Checked = True
             OnChange = cbLabelsChange
@@ -780,7 +780,7 @@ object f_planetinfo: Tf_planetinfo
             Left = 8
             Height = 21
             Top = 136
-            Width = 75
+            Width = 80
             Caption = 'Distance'
             Checked = True
             OnChange = cbDistanceChange
@@ -792,7 +792,7 @@ object f_planetinfo: Tf_planetinfo
             Left = 8
             Height = 21
             Top = 88
-            Width = 96
+            Width = 99
             Caption = 'Rectangular'
             OnChange = cbRectangularChange
             TabOrder = 3
@@ -801,7 +801,7 @@ object f_planetinfo: Tf_planetinfo
             Left = 8
             Height = 21
             Top = 64
-            Width = 87
+            Width = 92
             Caption = 'Chart sync'
             OnChange = cbChartSyncChange
             TabOrder = 4
