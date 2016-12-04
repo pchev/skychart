@@ -1352,9 +1352,17 @@ procedure Tf_planetinfo.SetDefaultFOV;
 
         end;
 
-      View_Mars      : Fov := Fov_Calc(C_Mars,   Planet_Origin, 195.7);
+      View_Mars      :
+         begin
 
-             //fov := Earth_Radius/km_au * diam_real[C_Mars] / dist;
+           case Planet_Target_Index of
+             0:    Fov := Fov_Calc(C_Mars,   Planet_Origin, 195.7);
+             1..2: Fov := Fov_Calc(C_Mars,   Planet_Origin,  10000);
+           end;
+
+         end;
+
+            //fov := Earth_Radius/km_au * diam_real[C_Mars] / dist;
              //fov := arctan(fov) ;
              //fov := radtodeg(fov);
              //fov := 1/fov/dist;
@@ -1380,9 +1388,41 @@ procedure Tf_planetinfo.SetDefaultFOV;
 
          end;
 
-      View_Saturn      : Fov := Fov_Calc(C_Saturn,   Planet_Origin,   9.20);
-      View_Uranus      : Fov := Fov_Calc(C_Uranus,   Planet_Origin,  26.80);
-      View_Neptune     : Fov := Fov_Calc(C_Neptune,  Planet_Origin,  26.28);
+      View_Saturn      :
+       begin
+
+         case Planet_Target_Index of
+           0:    Fov := Fov_Calc(C_Saturn,   Planet_Origin, 9.20);
+           1..2: Fov := Fov_Calc(C_Saturn,   Planet_Origin,  1000);
+           3..5: Fov := Fov_Calc(C_Saturn,   Planet_Origin,  500);
+           6:    Fov := Fov_Calc(C_Saturn,   Planet_Origin,  180);
+           7:    Fov := Fov_Calc(C_Saturn,   Planet_Origin,  1000);
+           8:    Fov := Fov_Calc(C_Saturn,   Planet_Origin,  500);
+         end;
+
+       end;
+
+      View_Uranus      :
+       begin
+
+         case Planet_Target_Index of
+           0:    Fov := Fov_Calc(C_Uranus,   Planet_Origin,  26.80);
+           1..3: Fov := Fov_Calc(C_Uranus,   Planet_Origin,  1000);
+           4..5: Fov := Fov_Calc(C_Uranus,   Planet_Origin,  500);
+         end;
+
+       end;
+
+      View_Neptune     :
+       begin
+
+         case Planet_Target_Index of
+           0:    Fov := Fov_Calc(C_Neptune,  Planet_Origin,  26.28);
+           1:    Fov := Fov_Calc(C_Neptune,  Planet_Origin,  250);
+         end;
+
+       end;
+
       View_Pluto       : Fov := Fov_Calc(C_Pluto,    Planet_Origin, 578.31);
       View_FreePlanet  : Fov := 1.0;
 
