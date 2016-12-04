@@ -6214,3 +6214,19 @@ msgstr ""
 msgid "Orient to the pole"
 msgstr ""
 
+#: u_translation:rsicons
+msgid "Icons"
+msgstr ""
+
+#: u_translation:rschartsync
+msgid "Chart sync"
+msgstr ""
+
+#: u_translation:rsrectangular
+msgid "Rectangular"
+msgstr ""
+
+#: u_translation:rslookat
+msgid "Look at:"
+msgstr ""
+

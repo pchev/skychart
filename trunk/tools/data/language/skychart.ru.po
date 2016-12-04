@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-19 11:24+0000\n"
+"POT-Creation-Date: 2016-12-04 21:39+0000\n"
 "PO-Revision-Date: 2016-05-23 05:00+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-04 17:12+0000\n"
+"X-Launchpad-Export-Date: 2016-12-04 21:48+0000\n"
 "X-Generator: Launchpad (build 18282)\n"
 "Language: ru_UA\n"
 
@@ -812,6 +812,10 @@ msgstr "Карты"
 #: u_translation.rschartsetting
 msgid "Chart settings"
 msgstr "Параметры карты"
+
+#: u_translation.rschartsync
+msgid "Chart sync"
+msgstr ""
 
 #: u_translation.rschart_
 msgid "Chart_"
@@ -2557,6 +2561,10 @@ msgstr "Влажность %"
 msgid "Icon click action"
 msgstr "Действие после нажатия значка"
 
+#: u_translation.rsicons
+msgid "Icons"
+msgstr ""
+
 #: u_translation.rsiconsize
 msgid "Icon size"
 msgstr "Размер значка"
@@ -3049,6 +3057,10 @@ msgstr "Долгота"
 #: u_translation.rslongitudeasc
 msgid "Longitude ascending node"
 msgstr "Долгота восходящего узла"
+
+#: u_translation.rslookat
+msgid "Look at:"
+msgstr ""
 
 #: u_translation.rslosange
 msgid "Lozenge"
@@ -4425,6 +4437,10 @@ msgstr "Запись протокола в файл трассировки"
 #: u_translation.rsrecoverhidde
 msgid "Recover hidden label"
 msgstr "Восстановление скрытых меток"
+
+#: u_translation.rsrectangular
+msgid "Rectangular"
+msgstr ""
 
 #: u_translation.rsred
 msgid "Red"
