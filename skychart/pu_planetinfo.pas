@@ -2029,10 +2029,7 @@ begin
   else
     rectangular := '';
 
-  if ( ATarget >= low(CFov) ) and ( ATarget <= high(CFov) ) then
-    searchdir:=ScaledPlanetMapDir (ATarget,  round(H * CFov[ATarget] / fov))
-  else
-    searchdir:=ScaledPlanetMapDir (ATarget,  H);
+  searchdir:=ScaledPlanetMapDir (ATarget,  H);
 
   // determinate target and origin
   target := GetPlanetName(ATarget);
