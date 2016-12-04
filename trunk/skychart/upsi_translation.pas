@@ -1571,6 +1571,10 @@ CL.AddConstantN('rsNewBetaVersi','String').SetString(rsNewBetaVersi);
 CL.AddConstantN('rsANewVersionO','String').SetString(rsANewVersionO);
 CL.AddConstantN('rsYouAlreadyHa','String').SetString(rsYouAlreadyHa);
 CL.AddConstantN('rsOrientToTheP','String').SetString(rsOrientToTheP);
+CL.AddConstantN('rsIcons','String').SetString(rsIcons);
+CL.AddConstantN('rsChartSync','String').SetString(rsChartSync);
+CL.AddConstantN('rsRectangular','String').SetString(rsRectangular);
+CL.AddConstantN('rsLookAt','String').SetString(rsLookAt);
 
 end;
 

@@ -1582,6 +1582,10 @@ resourcestring
     +' download it now?';
   rsYouAlreadyHa = 'You already have the latest available version!';
   rsOrientToTheP = 'Orient to the pole';
+  rsIcons = 'Icons';
+  rsChartSync = 'Chart sync';
+  rsRectangular = 'Rectangular';
+  rsLookAt = 'Look at:';
 
 // also update upsi_translation
 
