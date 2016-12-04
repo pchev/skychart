@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-19 11:24+0000\n"
+"POT-Creation-Date: 2016-12-04 21:39+0000\n"
 "PO-Revision-Date: 2016-02-04 22:22+0000\n"
 "Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-04 17:12+0000\n"
+"X-Launchpad-Export-Date: 2016-12-04 21:48+0000\n"
 "X-Generator: Launchpad (build 18282)\n"
 
 #: u_translation.rs102cddss
@@ -812,6 +812,10 @@ msgstr "Kaarten"
 #: u_translation.rschartsetting
 msgid "Chart settings"
 msgstr "Kaart instellingen"
+
+#: u_translation.rschartsync
+msgid "Chart sync"
+msgstr ""
 
 #: u_translation.rschart_
 msgid "Chart_"
@@ -2558,6 +2562,10 @@ msgstr "Vochtigheid %"
 msgid "Icon click action"
 msgstr "Icoon klik-actie"
 
+#: u_translation.rsicons
+msgid "Icons"
+msgstr ""
+
 #: u_translation.rsiconsize
 msgid "Icon size"
 msgstr "Icoon grootte"
@@ -3050,6 +3058,10 @@ msgstr "lengtegraad"
 #: u_translation.rslongitudeasc
 msgid "Longitude ascending node"
 msgstr "Lengte klimmende knoop"
+
+#: u_translation.rslookat
+msgid "Look at:"
+msgstr ""
 
 #: u_translation.rslosange
 msgid "Lozenge"
@@ -4426,6 +4438,10 @@ msgstr "Neem protocol op in een logbestand"
 #: u_translation.rsrecoverhidde
 msgid "Recover hidden label"
 msgstr "Herstel verborgen labels"
+
+#: u_translation.rsrectangular
+msgid "Rectangular"
+msgstr ""
 
 #: u_translation.rsred
 msgid "Red"
