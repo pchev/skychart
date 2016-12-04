@@ -2495,7 +2495,7 @@ begin
           if cfgplot.TransparentPlanet then
             mode := 0
           else
-            mode := 1;
+            mode := 2;
 
           PlotImage(xx,yy,b.Width,b.Height,0,flipx,flipy,whitebg,true,b,mode);
 
