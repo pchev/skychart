@@ -2020,6 +2020,8 @@ begin
     else begin
       WriteLn(f,'['+buf+']');
       WriteLn(f,'image=none');
+      WriteLn(f,'color={0,0,0}');
+      WriteLn(f,'magnify=0.001');
       WriteLn(f,'');
     end;
   end;
@@ -2074,9 +2076,9 @@ begin
       AssignFile(f,config);
       Rewrite(f);
       WriteLn(f,'[default]');
-      WriteLn(f,'color={0,0,0}');
-      WriteLn(f,'magnify=0.001');
       WriteLn(f,'min_radius_for_label=10000');
+      WriteLn(f,'magnify=1');
+      WriteLn(f,'color={255,255,255}');
       WriteLn(f,'');
       wrtconf(Main_Bodies);
       case cpla of

@@ -141,12 +141,11 @@ const
                (C_Io,       C_Europa,     C_Ganymede,   C_Callisto);
                 {,C_Amalthea, C_Thebe,      C_Adrastea,   C_Metis}
 
- Saturn_Sat  : array [1..8] of integer =
+ Saturn_Sat  : array [1..10] of integer =
                (C_Mimas,     C_Enceladus,  C_Tethys,     C_Dione,
-                C_Rhea,      C_Titan,      C_Hyperion,   C_Iapetus);
-
-                {
-                C_Phoebe,    C_Janus,      C_Epimetheus, C_Helene     ,
+                C_Rhea,      C_Titan,      C_Hyperion,   C_Iapetus,
+                C_Phoebe,    C_Janus);
+               {C_Epimetheus, C_Helene     ,
                 C_Telesto,   C_Calypso,    C_Atlas,      C_Prometheus ,
                 C_Pandora,   C_Pan,        C_Daphnis   }
 
