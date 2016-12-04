@@ -2000,11 +2000,13 @@ var
 
   buf, searchdir, bsize: string;
   r:TStringList;
-  XplanetImg, BGRA, mask: TBGRABitmap;
-  OutputFile, origin, target: string;
-
+  XplanetImg, BGRA : TBGRABitmap;
+  OutputFile, origin, target, config: string;
+  f: TextFile;
   idx: integer;
   NewScan: Boolean;
+
+const JupSys=[5,12,13,14,15];
 
 begin
   Result := -1;
@@ -2049,6 +2051,35 @@ begin
       origin := GetPlanetName(C_Earth);
       target := GetPlanetName(ipla);
 
+      config := slash(searchdir)+'xplanet.config';
+
+      // Special config to not show artefact around galilean satellite during transit over Jupiter
+      if ipla in JupSys then begin
+         config := slash(TempDir)+'tmp.config';
+         AssignFile(f,config);
+         Rewrite(f);
+         WriteLn(f,'[default]');
+         WriteLn(f,'color={0,0,0}');
+         WriteLn(f,'magnify=0.001');
+         WriteLn(f,'min_radius_for_label=10000');
+         WriteLn(f,'');
+         for j in JupSys do begin
+           buf:=lowercase(trim(epla[j]));
+           if j=ipla then begin
+             WriteLn(f,'['+buf+']');
+             WriteLn(f,'image='+buf+'.jpg');
+             WriteLn(f,'magnify=1');
+             WriteLn(f,'');
+           end
+           else begin
+             WriteLn(f,'['+buf+']');
+             WriteLn(f,'image=none');
+             WriteLn(f,'');
+           end;
+         end;
+         CloseFile(f);
+      end;
+
       GetXplanet_Plain(
         Xplanetversion,
         searchdir,
@@ -2062,7 +2093,7 @@ begin
         0,0,             // targetLat, targetLong,
         '',
         '50',
-        'xplanet.config',
+        config,
         false,
         slash(Tempdir)+'origin.txt'  // our origin file for parallax
       );
@@ -2071,10 +2102,7 @@ begin
       begin
 
         xplanetimg:=TBGRABitmap.Create(SysToUTF8(slash(Tempdir)+'planet.png'));
-        mask := TBGRABitmap.Create(xplanetimg.Width,xplanetimg.Height,BGRABlack);
         try
-          mask.FillEllipseInRect(rect(0,0,mask.Width,mask.Height),BGRAWhite,dmSet);
-          xplanetimg.ApplyMask(mask);
 
           chdir(appdir);
 
@@ -2101,7 +2129,6 @@ begin
 
         finally
           XplanetImg.Free;
-          mask.free;
         end;
 
       end
