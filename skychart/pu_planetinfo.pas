@@ -614,6 +614,7 @@ begin
 
   PanelrgTarget.Visible := False;
   PanelrgOrigin.Visible := False;
+  txtFOV.Visible := False;
 
   Planet_Target := 1;
   Planet_Target_Index := 0;
@@ -694,6 +695,8 @@ begin
 
     PanelrgTarget.Visible := not (View_Index = View_PlanetVisibility);
     PanelrgOrigin.Visible := not (View_Index = View_PlanetVisibility);
+
+    txtFOV.Visible := (View_Index >= View_Sun) and (View_Index <= View_Pluto);
 
     case View_Index of
 
@@ -1783,10 +1786,10 @@ try
 
 //  SetRadioButtons;
 
-  if fov >= 1e-6 then
-    txtFOV.Caption:= format('FOV %10.6f',[fov])
+  if fov >= (1/3600) then
+    txtFOV.Caption:= rsFOV2 + DEToStrShort(fov,1)
   else
-    txtFOV.Caption:= format('FOV %e',[fov]);
+    txtFOV.Caption:= rsFOV2 + DEToStrShort(fov,3);
 
   finally
     IsProcessingPlanets := false;
