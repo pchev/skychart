@@ -652,7 +652,7 @@ object f_planetinfo: Tf_planetinfo
         object PanelrgTarget: TPanel
           Left = 0
           Height = 16
-          Top = 160
+          Top = 176
           Width = 136
           Align = alTop
           AutoSize = True
@@ -682,7 +682,7 @@ object f_planetinfo: Tf_planetinfo
         object PanelrgOrigin: TPanel
           Left = 0
           Height = 79
-          Top = 176
+          Top = 192
           Width = 136
           Align = alTop
           Alignment = taLeftJustify
@@ -721,7 +721,7 @@ object f_planetinfo: Tf_planetinfo
         object ComboBox1: TComboBox
           Left = 0
           Height = 21
-          Top = 255
+          Top = 271
           Width = 136
           Align = alTop
           ItemHeight = 0
@@ -733,7 +733,7 @@ object f_planetinfo: Tf_planetinfo
         object ComboBox2: TComboBox
           Left = 0
           Height = 21
-          Top = 276
+          Top = 292
           Width = 136
           Align = alTop
           ItemHeight = 0
@@ -744,18 +744,18 @@ object f_planetinfo: Tf_planetinfo
         end
         object Panel3: TPanel
           Left = 0
-          Height = 160
+          Height = 176
           Top = 0
           Width = 136
           Align = alTop
           BevelOuter = bvNone
-          ClientHeight = 160
+          ClientHeight = 176
           ClientWidth = 136
           TabOrder = 4
           object cbIcons: TCheckBox
             Left = 8
             Height = 21
-            Top = 40
+            Top = 48
             Width = 57
             Caption = 'Icons'
             Checked = True
@@ -767,7 +767,7 @@ object f_planetinfo: Tf_planetinfo
           object cbLabels: TCheckBox
             Left = 8
             Height = 21
-            Top = 112
+            Top = 120
             Width = 65
             Caption = 'Labels'
             Checked = True
@@ -779,7 +779,7 @@ object f_planetinfo: Tf_planetinfo
           object cbDistance: TCheckBox
             Left = 8
             Height = 21
-            Top = 136
+            Top = 144
             Width = 80
             Caption = 'Distance'
             Checked = True
@@ -791,7 +791,7 @@ object f_planetinfo: Tf_planetinfo
           object cbRectangular: TCheckBox
             Left = 8
             Height = 21
-            Top = 88
+            Top = 96
             Width = 99
             Caption = 'Rectangular'
             OnChange = cbRectangularChange
@@ -800,7 +800,7 @@ object f_planetinfo: Tf_planetinfo
           object cbChartSync: TCheckBox
             Left = 8
             Height = 21
-            Top = 64
+            Top = 72
             Width = 92
             Caption = 'Chart sync'
             OnChange = cbChartSyncChange
@@ -818,7 +818,7 @@ object f_planetinfo: Tf_planetinfo
           end
           object Label1: TLabel
             Left = 30
-            Height = 34
+            Height = 44
             Top = 4
             Width = 106
             AutoSize = False

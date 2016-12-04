@@ -512,6 +512,11 @@ begin
   txtPrev.caption:=rsPrev;
 
   Label1.Caption:=rsStartGraphAt;
+  cbIcons.Caption:=rsIcons;
+  cbLabels.Caption:=rsLabels;
+  cbDistance.Caption:=rsDistance;
+  cbChartSync.Caption:=rsChartSync;
+  cbRectangular.Caption:=rsRectangular;
 
   acPlanetsVisibility.Hint:=rsPlanetVisibi;
   acSun.Hint     := pla[C_Sun];
@@ -531,9 +536,13 @@ begin
 
   txtJDdx.Caption := GetTimeSpeed_Str;
 
+  rgTarget.Caption:=rsLookAt;
+  rgOrigin.Caption:=rsFrom+':';
   rgOrigin.Items[0] := rsEarth;
   rgOrigin.Items[1] := rsSun;
   rgOrigin.Items[2] := rsPlanet;
+
+
 
   FormResize(self);
 end;
