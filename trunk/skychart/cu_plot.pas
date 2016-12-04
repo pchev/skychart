@@ -2030,6 +2030,8 @@ end;
 begin
   Result := -1;
 
+  if not HasPlanetImage(ipla) then exit;
+
   idx := FCacheBMP.Search(IntToStr(ipla));
 
   if idx >= 0 then

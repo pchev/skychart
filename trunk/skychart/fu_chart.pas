@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses BGRABitmap, BGRABitmapTypes,
+uses BGRABitmap, BGRABitmapTypes, u_orbits,
      pu_ascomclient, pu_lx200client, pu_encoderclient, pu_indiclient, pu_getdss, pu_imglist,
      u_translation, pu_detail, cu_skychart,  u_constant, u_util,pu_image, gcatunit, pu_obslist,
      u_projection, Printers, Math, downloaddialog, IntfGraphics, contnrs, LCLType, UScaleDPI,
@@ -3047,7 +3047,7 @@ if (otype='P')or((otype='Ps')and(oname=pla[11])) then begin
     if i=0 then txt:=txt+'<img src="'+slash(TempDir)+'info.png" alt="'+oname+'" border="0" width="200" height="200">'+html_br;
  end;
 end
-else if (otype='Ps')and(isat>0) then begin
+else if (otype='Ps')and(HasPlanetImage(isat)) then begin
   searchdir:=slash(appdir)+slash('data')+'planet';
   r:=TStringList.Create;
   gw:=0;
