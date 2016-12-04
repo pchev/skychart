@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-11-19 11:24+0000\n"
-"PO-Revision-Date: 2016-10-04 08:43+0000\n"
+"PO-Revision-Date: 2016-12-03 20:12+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-11-19 11:32+0000\n"
-"X-Generator: Launchpad (build 18269)\n"
+"X-Launchpad-Export-Date: 2016-12-04 17:12+0000\n"
+"X-Generator: Launchpad (build 18282)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2963,7 +2963,7 @@ msgstr ""
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
-msgstr ""
+msgstr "Ligar totas las mapas"
 
 #: u_translation.rslist
 msgid "List"
@@ -3547,7 +3547,7 @@ msgstr ""
 
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
-msgstr ""
+msgstr "Pas cap d'objècte de blocar"
 
 #: u_translation.rsnopicture
 msgid "No picture"
@@ -5027,11 +5027,11 @@ msgstr ""
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"
-msgstr ""
+msgstr "Veire las figuras de las constellacions"
 
 #: u_translation.rsshowconstell2
 msgid "Show constellation limits"
-msgstr ""
+msgstr "Veire los limits de las constellacions"
 
 #: u_translation.rsshowconstell3
 msgid "Show constellation figures"
@@ -5055,11 +5055,11 @@ msgstr ""
 
 #: u_translation.rsshowecliptic
 msgid "Show ecliptic"
-msgstr ""
+msgstr "Veire l'ecliptic"
 
 #: u_translation.rsshowgalactic
 msgid "Show galactic equator"
-msgstr ""
+msgstr "Veire l'eqüator galactic"
 
 #: u_translation.rsshowgrid
 msgid "Show grid"
@@ -5083,7 +5083,7 @@ msgstr ""
 
 #: u_translation.rsshowlabels
 msgid "Show labels"
-msgstr ""
+msgstr "Veire los labèls"
 
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
@@ -5091,7 +5091,7 @@ msgstr ""
 
 #: u_translation.rsshowmark
 msgid "Show mark"
-msgstr ""
+msgstr "Veire las marcas"
 
 #: u_translation.rsshowmarkinde
 msgid "Show mark index"
@@ -5111,7 +5111,7 @@ msgstr "Afichar las nebulosas"
 
 #: u_translation.rsshowobjectbe
 msgid "Show objects below the horizon"
-msgstr ""
+msgstr "Veire los objèctes jos l'orizont"
 
 #: u_translation.rsshowobjectpi
 msgid "Show object pictures on the chart"
@@ -5187,7 +5187,7 @@ msgstr "Talha"
 
 #: u_translation.rsskybackgroun
 msgid "Sky background colour"
-msgstr ""
+msgstr "Veire la color del cèl"
 
 #: u_translation.rsskycharthome
 msgid "Skychart homepage"
