@@ -169,6 +169,10 @@ const
  Pluto_Sat   : array [1..1] of integer =
                (C_Charon);
 
+ Main_Bodies : array [1..11] of integer =
+               (C_Mercury, C_Venus, C_Earth, C_Mars, C_Jupiter,
+               C_Saturn, C_Uranus, C_Neptune, C_Pluto, C_Sun, C_Moon);
+
 
 const
   per  : array[1..9] of integer = (88,225,365,687,4332,10760,30590,59799,90553);

@@ -1996,7 +1996,7 @@ end;
 
 function TSplot.GetBodyImage(ipla:integer; ds:  integer; jdt, flatten,gw, pa: double): integer;
 var
-  j, irc : integer;
+  j,cpla, irc : integer;
 
   buf, searchdir, bsize: string;
   r:TStringList;
@@ -2006,7 +2006,24 @@ var
   idx: integer;
   NewScan: Boolean;
 
-const JupSys=[5,12,13,14,15];
+procedure wrtconf(sats: array of integer);
+var i:integer;
+begin
+    for i:=low(sats) to high(sats) do begin
+    buf:=GetPlanetName(sats[i]);
+    if sats[i]=ipla then begin
+      WriteLn(f,'['+buf+']');
+      WriteLn(f,'image='+buf+'.jpg');
+      WriteLn(f,'magnify=1');
+      WriteLn(f,'');
+    end
+    else begin
+      WriteLn(f,'['+buf+']');
+      WriteLn(f,'image=none');
+      WriteLn(f,'');
+    end;
+  end;
+end;
 
 begin
   Result := -1;
@@ -2051,34 +2068,26 @@ begin
       origin := GetPlanetName(C_Earth);
       target := GetPlanetName(ipla);
 
-      config := slash(searchdir)+'xplanet.config';
-
-      // Special config to not show artefact around galilean satellite during transit over Jupiter
-      if ipla in JupSys then begin
-         config := slash(TempDir)+'tmp.config';
-         AssignFile(f,config);
-         Rewrite(f);
-         WriteLn(f,'[default]');
-         WriteLn(f,'color={0,0,0}');
-         WriteLn(f,'magnify=0.001');
-         WriteLn(f,'min_radius_for_label=10000');
-         WriteLn(f,'');
-         for j in JupSys do begin
-           buf:=lowercase(trim(epla[j]));
-           if j=ipla then begin
-             WriteLn(f,'['+buf+']');
-             WriteLn(f,'image='+buf+'.jpg');
-             WriteLn(f,'magnify=1');
-             WriteLn(f,'');
-           end
-           else begin
-             WriteLn(f,'['+buf+']');
-             WriteLn(f,'image=none');
-             WriteLn(f,'');
-           end;
-         end;
-         CloseFile(f);
+      // Special config to not show artefact around satellite during transit over main planet or during planet occultation
+      cpla:=GetPlanetParent(ipla);
+      config := slash(TempDir)+'tmp.config';
+      AssignFile(f,config);
+      Rewrite(f);
+      WriteLn(f,'[default]');
+      WriteLn(f,'color={0,0,0}');
+      WriteLn(f,'magnify=0.001');
+      WriteLn(f,'min_radius_for_label=10000');
+      WriteLn(f,'');
+      wrtconf(Main_Bodies);
+      case cpla of
+        C_Mars    : wrtconf(Mars_Sat);
+        C_Jupiter : wrtconf(Jupiter_Sat);
+        C_Saturn  : wrtconf(Saturn_Sat);
+        C_Uranus  : wrtconf(Uranus_Sat);
+        C_Neptune : wrtconf(Neptune_Sat);
+        C_Pluto   : wrtconf(Pluto_Sat);
       end;
+      CloseFile(f);
 
       GetXplanet_Plain(
         Xplanetversion,
