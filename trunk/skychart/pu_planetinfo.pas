@@ -946,7 +946,7 @@ begin
   if ChartSync then
   begin
     NAV_Current :=  NAV_ChartSync;
-    txtJDdx.Caption := 'Chart sync';
+    txtJDdx.Caption := rsChartSync;
     PaintBox2.Visible:=false;
   end
   else
