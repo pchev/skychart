@@ -559,6 +559,8 @@ begin
          originfile:=slash(shorttmp)+extractfilename(originfile);
      if (searchdir<>'') and DirectoryExists(searchdir) then
          searchdir:=StringReplace(searchdir,TempDir,shorttmp,[]);
+     if (AConfig<>'') then
+         AConfig:=StringReplace(AConfig,TempDir,shorttmp,[]);
    end;
  {$endif}
 
