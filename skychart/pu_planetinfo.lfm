@@ -118,13 +118,13 @@ object f_planetinfo: Tf_planetinfo
     ParentColor = False
     TabOrder = 1
     object Panel2: TPanel
-      Left = 152
+      Left = 109
       Height = 26
       Top = 0
-      Width = 480
+      Width = 691
       BevelOuter = bvNone
       ClientHeight = 26
-      ClientWidth = 480
+      ClientWidth = 691
       Color = clBlack
       Font.Color = clBlack
       ParentColor = False
@@ -132,10 +132,10 @@ object f_planetinfo: Tf_planetinfo
       TabOrder = 0
       object txtJDdx: TStaticText
         Tag = 2
-        Left = 248
+        Left = 224
         Height = 20
         Top = 4
-        Width = 80
+        Width = 104
         Caption = 'JD_dx'
         Color = clBlack
         Font.Color = clWhite
@@ -146,7 +146,7 @@ object f_planetinfo: Tf_planetinfo
       end
       object txtFOV: TStaticText
         Tag = 8
-        Left = 344
+        Left = 328
         Height = 20
         Top = 4
         Width = 126
@@ -159,7 +159,7 @@ object f_planetinfo: Tf_planetinfo
         Transparent = False
       end
       object PaintBox2: TPaintBox
-        Left = 24
+        Left = 16
         Height = 24
         Top = 0
         Width = 208
@@ -167,6 +167,20 @@ object f_planetinfo: Tf_planetinfo
         ParentColor = False
         OnClick = PaintBox2Click
         OnPaint = PaintBox2Paint
+      end
+      object txtMSG: TStaticText
+        Tag = 8
+        Left = 456
+        Height = 20
+        Top = 4
+        Width = 226
+        Caption = 'msg'
+        Color = clBlack
+        Font.Color = clWhite
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 2
+        Transparent = False
       end
     end
     object txtNext: TStaticText
@@ -189,7 +203,7 @@ object f_planetinfo: Tf_planetinfo
       Left = 6
       Height = 20
       Top = 4
-      Width = 122
+      Width = 103
       Caption = 'Prev'
       Color = clBlack
       Font.Color = clWhite
