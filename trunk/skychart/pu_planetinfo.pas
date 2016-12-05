@@ -77,6 +77,7 @@ type
     tbtnSun: TToolButton;
     ToolButton1: TToolButton;
     txtFOV: TStaticText;
+    txtMSG: TStaticText;
     txtNext: TStaticText;
     txtJDdx: TStaticText;
     txtPrev: TStaticText;
@@ -624,6 +625,8 @@ begin
   PanelrgTarget.Visible := False;
   PanelrgOrigin.Visible := False;
   txtFOV.Visible := False;
+
+  txtMSG.Caption:='';
 
   Planet_Target := 1;
   Planet_Target_Index := 0;
@@ -2071,6 +2074,11 @@ begin
   end
   else
      BelowHorizon:=false;
+
+  if BelowHorizon then
+     txtMSG.Caption:=rsBelowHorizon
+  else
+     txtMSG.Caption:='';
 
   if ATarget=C_Jupiter then gw:=Fplanet.JupGRS(config.GRSlongitude,config.GRSdrift,config.GRSjd,config.CurJDTT)
             else gw:=0;
