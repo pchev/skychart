@@ -1226,8 +1226,7 @@ begin
 
       if CurJDTT_OLD <> LinkedChartData.CurJDTT then
       begin
-
-        config.Assign(LinkedChartData);
+        config.CurJDTT := LinkedChartData.CurJDTT;
         CurJDTT_OLD := config.CurJDTT;
 
         RefreshInfo;
