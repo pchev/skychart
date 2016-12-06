@@ -1583,7 +1583,7 @@ resourcestring
   rsYouAlreadyHa = 'You already have the latest available version!';
   rsOrientToTheP = 'Orient to the pole';
   rsIcons = 'Icons';
-  rsChartSync = 'Chart sync';
+  rsChartSync = 'Time sync';
   rsRectangular = 'Rectangular';
   rsLookAt = 'Look at:';
 
