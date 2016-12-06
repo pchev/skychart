@@ -77,7 +77,6 @@ type
     tbtnSun: TToolButton;
     ToolButton1: TToolButton;
     txtFOV: TStaticText;
-    txtMSG: TStaticText;
     txtNext: TStaticText;
     txtJDdx: TStaticText;
     txtPrev: TStaticText;
@@ -625,8 +624,6 @@ begin
   PanelrgTarget.Visible := False;
   PanelrgOrigin.Visible := False;
   txtFOV.Visible := False;
-
-  txtMSG.Caption:='';
 
   Planet_Target := 1;
   Planet_Target_Index := 0;
@@ -2032,7 +2029,7 @@ end;
 
 procedure Tf_planetinfo.PlotPlanetImage(bmp:TBGRABitmap; ATarget, AOrigin : integer);
 var
-   rectangular, searchdir,sz,buf : string;
+   rectangular, searchdir,sz,buf,aConfig : string;
    irc,j: integer;
    gw: double;
    b: TBGRABitmap;
@@ -2041,7 +2038,7 @@ var
    targetLat, targetLong: double;
    originLat, originLong: double;
    origin, target: string;
-   UseOrigin, UseLatLong, UseTarget, UseOriginFile, BelowHorizon:Boolean;
+   UseOrigin, UseLatLong, UseTarget, UseOriginFile: Boolean;
    ar,de,dist,illum,phase,diam,dkm,magn,dp,xp,yp,zp,vel,az,alt: double;
 begin
 
@@ -2052,32 +2049,6 @@ begin
 
   searchdir:=slash(appdir)+slash('data')+'planet';
   r:=TStringList.Create;
-
-  // check if the planet is below the horizon to avoid to draw earth surface in front
-  if (AOrigin=C_Earth)and(ATarget<=C_Charon)and(ATarget<>C_Earth) then
-  begin
-
-    case ATarget of
-
-      C_Sun : FPlanet.Sun(config.CurJDTT,ar,de,dist,diam);
-      C_Moon :  FPlanet.Moon(config.CurJDTT,ar,de,dist,dkm,diam,phase,illum);
-
-    else
-      Fplanet.Planet(CentralPlanet[ATarget],config.CurJDTT,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel);
-
-    end;
-
-    Precession(jd2000,config.CurJDUT,ar,de);
-    Eq2Hz(config.CurST-ar,de,az,alt,config);
-    BelowHorizon:=(alt<0);
-  end
-  else
-     BelowHorizon:=false;
-
-  if BelowHorizon then
-     txtMSG.Caption:=rsBelowHorizon
-  else
-     txtMSG.Caption:='';
 
   if ATarget=C_Jupiter then gw:=Fplanet.JupGRS(config.GRSlongitude,config.GRSdrift,config.GRSjd,config.CurJDTT)
             else gw:=0;
@@ -2127,7 +2098,7 @@ begin
 
     if (origin='earth') then
     begin
-      UseOriginFile := not BelowHorizon;
+      UseOriginFile := true;
       UseLatLong    := false;
       UseOrigin     := true;
       UseTarget     := true;
@@ -2156,6 +2127,11 @@ begin
 
   end;
 
+  if (target='earth')or(origin<>'earth') then
+    aConfig:='xplanet2.config'    // config with Earth
+  else
+    aConfig:='xplanet3.config';   // config without Earth, to avoid to draw earth surface in front of the planet
+
   GetXplanet_Plain(
     Xplanetversion,searchdir,sz,slash(Tempdir)+'info2.png',
       0,gw,config.CurJDTT,irc,r,rectangular, fov,
@@ -2165,7 +2141,7 @@ begin
       originLat, originLong,
       targetLat, targetLong,
       '','',
-      'xplanet2.config',
+      aConfig,
       cbLabels.Checked
     );
 
