@@ -370,6 +370,15 @@ begin
       if FileExistsUTF8(fn) then
          CopyFile( fn , slash(tmpdir) +'xplanet2.config' );
 
+      // Same as xplanet2.config but with minimized Earth
+      // to not hide below the horizon planet
+
+      fn := slash(searchdir)+'xplanet3.config';
+
+      if FileExistsUTF8(fn) then
+         CopyFile( fn , slash(tmpdir) +'xplanet3.config' );
+
+
       // On windows we need the font for the labels
 
       fn := slash(searchdir)+'FreeMonoBold.ttf';

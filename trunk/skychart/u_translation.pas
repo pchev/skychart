@@ -1586,7 +1586,6 @@ resourcestring
   rsChartSync = 'Chart sync';
   rsRectangular = 'Rectangular';
   rsLookAt = 'Look at:';
-  rsBelowHorizon = 'Below horizon, Geocentric';
 
 // also update upsi_translation
 

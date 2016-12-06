@@ -1575,7 +1575,6 @@ CL.AddConstantN('rsIcons','String').SetString(rsIcons);
 CL.AddConstantN('rsChartSync','String').SetString(rsChartSync);
 CL.AddConstantN('rsRectangular','String').SetString(rsRectangular);
 CL.AddConstantN('rsLookAt','String').SetString(rsLookAt);
-CL.AddConstantN('rsBelowHorizon','String').SetString(rsBelowHorizon);
 
 end;
 
