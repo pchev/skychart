@@ -5295,7 +5295,7 @@ end;
 function TSplot.BGRATextOut(x, y, o: single; s: string; c: TBGRAPixel; abmp:TBGRABitmap; forceantialias:boolean=false):TRect;
 
 const
-  aafactor=4;
+  aafactor=2;
 
 var
   size:  TSize;
