@@ -4606,8 +4606,8 @@ begin
       WindowXY(x1,y1,xx,yy,cfgsc);
       lis:=Fcatalog.cfgshr.ConstelName[i,2]+FormatFloat(f6,ra)+FormatFloat(f6,de);
       lid:=rshash(lis,$7FFFFFFF);
-      if cfgsc.ConstFullLabel then SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,2],laCenter,labrotation(ra,de,6,cfgsc),0,false)
-                              else SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,1],laCenter,labrotation(ra,de,6,cfgsc),0,false);
+      if cfgsc.ConstFullLabel then SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,2],laCenter,labrotation(ra,de,6,cfgsc),0,true)
+                              else SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,1],laCenter,labrotation(ra,de,6,cfgsc),0,true);
   end;
   constlabelindex:=numlabels;
 end;
@@ -4996,8 +4996,6 @@ for i:=1 to numlabels do begin
     else if labels[i].lsize>(nebmagmax-((nebmagmax-nebmagmin)*3/4)) then lsize:=1
      else lsize:=1.1
       end else lsize:=1;
-  if labels[i].txt='Lynx' then
-     labels[i].txt:='Lynx';
   ts:=Fplot.GetTextSize(labels[i].fontnum,labels[i].txt,labels[i].labelnum,lsize);
   maxtl:=max(maxtl,ts.cx);
   if labels[i].optimizable then begin
