@@ -6219,7 +6219,7 @@ msgid "Icons"
 msgstr ""
 
 #: u_translation:rschartsync
-msgid "Chart sync"
+msgid "Time sync"
 msgstr ""
 
 #: u_translation:rsrectangular

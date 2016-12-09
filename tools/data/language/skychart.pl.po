@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-04 21:39+0000\n"
-"PO-Revision-Date: 2016-11-21 20:28+0000\n"
+"POT-Creation-Date: 2016-12-06 21:12+0000\n"
+"PO-Revision-Date: 2016-12-09 14:10+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-04 21:48+0000\n"
-"X-Generator: Launchpad (build 18282)\n"
+"X-Launchpad-Export-Date: 2016-12-09 21:25+0000\n"
+"X-Generator: Launchpad (build 18292)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -817,8 +817,8 @@ msgid "Chart settings"
 msgstr "Ustawienia mapy"
 
 #: u_translation.rschartsync
-msgid "Chart sync"
-msgstr ""
+msgid "Time sync"
+msgstr "Synchronizacja czasu"
 
 #: u_translation.rschart_
 msgid "Chart_"
@@ -1202,7 +1202,7 @@ msgstr "Tworzenie mapy w PostScript. Proszę czekać..."
 
 #: u_translation.rscreaterasterwh
 msgid "Create raster chart %d x %d. Please wait..."
-msgstr ""
+msgstr "Tworzenie mapy rastrowej %d x %d. Czekaj..."
 
 #: u_translation.rscrossmeridia
 msgid "Cross meridian"
@@ -2566,7 +2566,7 @@ msgstr "Akcja po kliknięciu ikony"
 
 #: u_translation.rsicons
 msgid "Icons"
-msgstr ""
+msgstr "Ikony"
 
 #: u_translation.rsiconsize
 msgid "Icon size"
@@ -3063,7 +3063,7 @@ msgstr "Węzeł podnoszenia długości"
 
 #: u_translation.rslookat
 msgid "Look at:"
-msgstr ""
+msgstr "Spójrz na:"
 
 #: u_translation.rslosange
 msgid "Lozenge"
@@ -4443,7 +4443,7 @@ msgstr "Pokaż ukrytą etykietę"
 
 #: u_translation.rsrectangular
 msgid "Rectangular"
-msgstr ""
+msgstr "Prostokątny"
 
 #: u_translation.rsred
 msgid "Red"
