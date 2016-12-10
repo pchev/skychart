@@ -715,6 +715,7 @@ procedure Tf_chart.Refresh(setfocus:boolean=true);
 var  savebg:Tcolor;
      saveantialias: boolean;
      i: integer;
+     sra,sde,mag: double;
 {$ifdef showtime}
      starttime:TDateTime;
 {$endif}
@@ -768,7 +769,32 @@ try
     if lastundo>maxundo then lastundo:=1;
     undolist[lastundo].Assign(sc.cfgsc);
     curundo:=lastundo;
-    if sc.cfgsc.FindOk and (not cmain.SimpleDetail) and (sc.cfgsc.FindName=sc.cfgsc.TrackName) then ShowIdentLabel(false);
+    if sc.cfgsc.FindOk and (not cmain.SimpleDetail) and (sc.cfgsc.FindName=sc.cfgsc.TrackName) then begin
+      case sc.cfgsc.FindType of
+        ftPla: begin
+               sc.planet.FindPlanetName(sc.cfgsc.FindName,sra,sde,sc.cfgsc,true);
+               sc.cfgsc.FindRA2000:=sra;
+               sc.cfgsc.FindDec2000:=sde;
+               ShowIdentLabel(false);
+               Fshowinfo(sc.cfgsc.FindDesc,caption,false,nil,sc.cfgsc.FindDesc2);
+               end;
+        ftCom: begin
+               sc.planet.FindCometName(sc.cfgsc.FindName,sra,sde,mag,sc.cfgsc,false,true);
+               sc.cfgsc.FindRA2000:=sra;
+               sc.cfgsc.FindDec2000:=sde;
+               ShowIdentLabel(false);
+               Fshowinfo(sc.cfgsc.FindDesc,caption,false,nil,sc.cfgsc.FindDesc2);
+               end;
+        ftAst: begin
+               sc.planet.FindAsteroidName(sc.cfgsc.FindName,sra,sde,mag,sc.cfgsc,false,true);
+               sc.cfgsc.FindRA2000:=sra;
+               sc.cfgsc.FindDec2000:=sde;
+               ShowIdentLabel(false);
+               Fshowinfo(sc.cfgsc.FindDesc,caption,false,nil,sc.cfgsc.FindDesc2);
+               end;
+      else ShowIdentLabel(false);
+      end;
+    end;
     if assigned(FShowTopMessage) then FShowTopMessage(sc.GetChartInfo,self);
     if assigned(FShowTitleMessage) then FShowTitleMessage(sc.GetChartPos,self);
     Image1.Cursor:=ChartCursor;

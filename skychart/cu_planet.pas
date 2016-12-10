@@ -70,8 +70,8 @@ type
      procedure SetDE(folder:string);
      function load_de(t: double): boolean;
      function ComputePlanet(cfgsc: Tconf_skychart):boolean;
-     Procedure FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Tconf_skychart);
-     function  FindPlanetName(planetname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
+     Procedure FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Tconf_skychart;MeanPos:boolean=false);
+     function  FindPlanetName(planetname: String; var ra,de:double; cfgsc: Tconf_skychart;MeanPos:boolean=false):boolean;
      function  FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,ma,date,desc:string;trunc:boolean=true):boolean;
      procedure FormatPlanet(St,Pl:integer; cfgsc: Tconf_skychart; var nom,ma,date,desc:string);
      Procedure Plan(ipla: integer; t: double ; var p: TPlanData);
@@ -104,13 +104,13 @@ type
      Function NewAstDay(newjd,limitmag:double; cfgsc: Tconf_skychart):boolean;
      Procedure NewAstDayCallback(Sender:TObject; Row:TResultRow);
      function  FindAsteroid(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string; trunc:boolean=true):boolean;
-     function  FindAsteroidName(astname: String; var ra,de,mag:double; cfgsc: Tconf_skychart; upddb:boolean):boolean;
+     function  FindAsteroidName(astname: String; var ra,de,mag:double; cfgsc: Tconf_skychart; upddb:boolean; MeanPos:boolean=false):boolean;
      function PrepareAsteroid(jd1,jd2,step:double; msg:Tstrings):boolean;
      Procedure PrepareAsteroidCallback(Sender:TObject; Row:TResultRow);
      Function NewComDay(newjd,limitmag:double; cfgsc: Tconf_skychart):boolean;
      Procedure NewComDayCallback(Sender:TObject; Row:TResultRow);
      function FindComet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,mag,date,desc:string; trunc:boolean=true):boolean;
-     function FindCometName(comname: String; var ra,de,mag:double; cfgsc: Tconf_skychart; upddb:boolean):boolean;
+     function FindCometName(comname: String; var ra,de,mag:double; cfgsc: Tconf_skychart; upddb:boolean; MeanPos:boolean=false):boolean;
      procedure PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ; var i: integer; cfgsc: Tconf_skychart);
      procedure PlanetAltitude(pla: integer; jd0,hh:double; cfgsc: Tconf_skychart; var har,sina: double);
      procedure Twilight(jd0,obslat,obslon: double; out astrom,nautm,civm,cive,naute,astroe: double);
@@ -1292,19 +1292,25 @@ finally
 end;
 end;
 
-Procedure TPlanet.FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Tconf_skychart);
+Procedure TPlanet.FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Tconf_skychart;MeanPos:boolean=false);
 begin
 ok:=false;
 if (not cfgsc.ephvalid) or (id<1) or (id>MaxPla)or(id=31)or(id=32) then exit;
 ok:=true;
-ar:=cfgsc.Planetlst[0,id,1];
-de:=cfgsc.Planetlst[0,id,2];
-// back to j2000
-if cfgsc.ApparentPos then mean_equatorial(ar,de,cfgsc,id<>11,false);
-precession(cfgsc.JDchart,jd2000,ar,de);
+if MeanPos then begin
+  ar:=normra(cfgsc.Planetlst[0,id,8]);
+  de:=cfgsc.Planetlst[0,id,9];
+end
+else begin
+  ar:=cfgsc.Planetlst[0,id,1];
+  de:=cfgsc.Planetlst[0,id,2];
+  // back to j2000
+  if cfgsc.ApparentPos then mean_equatorial(ar,de,cfgsc,id<>11,false);
+  precession(cfgsc.JDchart,jd2000,ar,de);
+end;
 end;
 
-function TPlanet.FindPlanetName(planetname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
+function TPlanet.FindPlanetName(planetname: String; var ra,de:double; cfgsc: Tconf_skychart;MeanPos:boolean=false):boolean;
 var i : integer;
 begin
 result:=false;
@@ -1315,7 +1321,7 @@ if cfgsc.ephvalid then  for i:=1 to MaxPla do begin
      if (uppercase(trim(planetname))=uppercase(trim(pla[i]))) or
         (uppercase(trim(planetname))=uppercase(trim(epla[i])))
         then begin
-         FindNumPla(i,ra,de,result,cfgsc);
+         FindNumPla(i,ra,de,result,cfgsc,MeanPos);
          break;
         end;
    end;
@@ -2311,7 +2317,7 @@ finally
 end;
 end;
 
-function TPlanet.FindAsteroidName(astname: String; var ra,de,mag:double; cfgsc: Tconf_skychart; upddb:boolean):boolean;
+function TPlanet.FindAsteroidName(astname: String; var ra,de,mag:double; cfgsc: Tconf_skychart; upddb:boolean; MeanPos:boolean=false):boolean;
 var dist,r,elong,phase,rad,ded : double;
   epoch,h,g,ma,ap,an,ic,ec,sa,eq,xc,yc,zc : double;
   qry,id,ref,nam,elem_id :string;
@@ -2328,6 +2334,8 @@ if id='' then exit;
 if cdb.GetAstElemEpoch(id,cfgsc.CurJDTT,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
    Asteroid(cfgsc.CurJDTT,true,ra,de,dist,r,elong,phase,mag,xc,yc,zc);
+   result:=true;
+   if MeanPos then exit;
    if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,ra,de,ra,de,r,cfgsc);
    if upddb then begin
        rad:=ra;
@@ -2346,12 +2354,11 @@ if cdb.GetAstElemEpoch(id,cfgsc.CurJDTT,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,e
        db1.flush('tables');
        searchid:=id;
    end;
-   result:=true;
 end
  else result:=false;
 end;
 
-function TPlanet.FindCometName(comname: String; var ra,de,mag:double; cfgsc: Tconf_skychart; upddb:boolean):boolean;
+function TPlanet.FindCometName(comname: String; var ra,de,mag:double; cfgsc: Tconf_skychart; upddb:boolean; MeanPos:boolean=false):boolean;
 var dist,r,elong,phase,rad,ded : double;
   epoch,h,g,ap,an,ic,ec,eq,tp,q,diam,lc,car,cde,rc,xc,yc,zc : double;
   qry,id,nam,elem_id :string;
@@ -2368,6 +2375,8 @@ if id='' then exit;
 if cdb.GetComElemEpoch(id,cfgsc.CurJDTT,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) then begin
    InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
    Comet(cfgsc.CurJDTT,true,ra,de,dist,r,elong,phase,mag,diam,lc,car,cde,rc,xc,yc,zc);
+   result:=true;
+   if MeanPos then exit;
    if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,ra,de,ra,de,r,cfgsc);
    if upddb then begin
        rad:=ra;
@@ -2387,7 +2396,6 @@ if cdb.GetComElemEpoch(id,cfgsc.CurJDTT,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_i
        db1.flush('tables');
        searchid:=id;
    end;
-   result:=true;
 end
  else result:=false;
 end;
