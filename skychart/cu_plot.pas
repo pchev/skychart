@@ -557,7 +557,7 @@ begin
         for x:=0 to IntfImage.Width-1 do
         begin
           CurColor:=IntfImage.Colors[x,y];
-          newalpha:=MaxIntValue([CurColor.red,CurColor.green,CurColor.blue]);
+          newalpha:=(CurColor.red+CurColor.green+CurColor.blue) div 3;
 
           case method of
 
@@ -3191,7 +3191,7 @@ begin
         tbmp.FontName:=cfgplot.FontName[fontnum];
         lcolor:=cfgplot.LabelColor[labelnum];
 
-        if WhiteBg then lcolor:=cfgplot.Color[11];
+        if WhiteBg and (lcolor=cfgplot.Color[0]) then lcolor:=cfgplot.Color[11];
         if lcolor=cfgplot.backgroundcolor then lcolor:=(not lcolor)and $FFFFFF;
         if cfgplot.FontBold[fontnum] then tbmp.FontStyle:=[fsBold] else tbmp.FontStyle:=[];
         if cfgplot.FontItalic[fontnum] then tbmp.FontStyle:=tbmp.FontStyle+[fsItalic];
