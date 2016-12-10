@@ -7437,10 +7437,13 @@ Maximize.Category:=CatWindow;
 // No Menu
 TimeDec.Caption:=rsDecrementTim;
 TimeDec.hint:=rsDecrementTim;
+TimeDec.Category:=CatAnimation;
 TimeReset.Caption:=rsNow;
 TimeReset.hint:=rsNow;
+TimeReset.Category:=CatAnimation;
 TimeInc.Caption:=rsIncrementTim;
 TimeInc.hint:=rsIncrementTim;
+TimeInc.Category:=CatAnimation;
 Animation.Caption:=rsStartForward;
 Animation.Hint:=rsStartForward;
 Animation.Category:=CatAnimation;
@@ -7464,8 +7467,8 @@ MenuPrintPreview.Caption:='&'+rsPrintPreview;
 SubEdit.caption:='&'+rsEdit;
 // Menu Setup
 SubSetup.caption:='&'+rsSetup;
-MenuEditToolbar.Caption:='&'+rsToolBarEdito;
-MenuToolboxConfig.Caption:='&'+rsManageToolbo;
+MenuEditToolbar.Caption:='&'+rsToolBarEdito+Ellipsis;
+MenuToolboxConfig.Caption:='&'+rsManageToolbo+Ellipsis;
 // Menu View
 SubView.caption:='&'+rsView;
 SubToolBar.caption:='&'+rsToolBar;

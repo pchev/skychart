@@ -113,8 +113,8 @@ resourcestring
   rsView = 'View';
   rsFullScreen = 'Full screen';
   rsNightVision = 'Night vision';
-  rsToolBar = 'Tool bar';
-  rsAllToolsBar = 'All tool bars';
+  rsToolBar = 'Toolbar';
+  rsAllToolsBar = 'All toolbars';
   rsMainBar = 'Main bar';
   rsObjectBar = 'Object bar';
   rsLeftBar = 'Left bar';
@@ -1484,7 +1484,7 @@ resourcestring
   rsOfficialName = 'Official name';
   rsLocalizedNam = 'Localized name';
   rsIsEmpty      = '%s is empty!';
-  rsToolBarEdito = 'Tool bar editor';
+  rsToolBarEdito = 'Toolbar editor';
   rsAvailableAct = 'Available actions';
   rsMinimal = 'Minimal';
   rsStandard = 'Standard';
