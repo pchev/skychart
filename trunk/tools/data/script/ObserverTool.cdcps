@@ -1,5 +1,5 @@
 [Panel]
-Title=Observer tools
+Title=%rsObserverTool
 HidenTimer=0
 NumToolbar1=3
 toolbar1_0=48;TelescopeConnect
