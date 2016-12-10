@@ -2327,7 +2327,7 @@ else if trim(lin.typ)='?'  then rec.neb.nebtype:=0
 else if lin.typ='   '  then rec.neb.nebtype:=0
 else if trim(lin.typ)='-'  then rec.neb.nebtype:=-1
 else if trim(lin.typ)='PD'  then rec.neb.nebtype:=-1;
-if (rec.neb.mag>70)or(rec.neb.mag<-70) then rec.neb.mag:=99.9;    // undefined magnitude
+if (rec.neb.mag>70)or(rec.neb.mag<-70) then rec.neb.mag:=99;    // undefined magnitude
 rec.neb.dim2:=lin.s2;
 if rec.neb.nebtype=4 then begin // arc second units for PN
    rec.neb.dim1:=rec.neb.dim1*60;
@@ -2423,8 +2423,8 @@ if result then begin
    else if trim(lin.typ)='PD'  then rec.neb.nebtype:=-1;
    if rec.neb.dim1<=0 then rec.neb.dim1:=1;
    if (rec.neb.mag>70)or(rec.neb.mag<-70) then begin
-     rec.neb.mag:=99.9;     // undefined magnitude
-     rec.neb.sbr:=99.9;
+     rec.neb.mag:=99;     // undefined magnitude
+     rec.neb.sbr:=99;
    end else begin;
      rec.neb.sbr:= rec.neb.mag + 5*log10(rec.neb.dim1) - 0.26;
    end;
@@ -2463,8 +2463,8 @@ if result then begin
    rec.neb.dim2:=lin.d2;
    if rec.neb.dim1<=0 then rec.neb.dim1:=1;
    if (rec.neb.mag>70)or(rec.neb.mag<-70) then begin
-     rec.neb.mag:=99.9;     // undefined magnitude
-     rec.neb.sbr:=99.9;
+     rec.neb.mag:=99;     // undefined magnitude
+     rec.neb.sbr:=99;
    end else begin;
      rec.neb.sbr:= rec.neb.mag + 5*log10(rec.neb.dim1) - 0.26;
    end;
