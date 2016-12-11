@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-06 21:12+0000\n"
-"PO-Revision-Date: 2016-12-07 17:41+0000\n"
+"POT-Creation-Date: 2016-12-10 16:03+0000\n"
+"PO-Revision-Date: 2016-12-11 07:42+0000\n"
 "Last-Translator: grofaty <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-09 21:25+0000\n"
+"X-Launchpad-Export-Date: 2016-12-11 09:08+0000\n"
 "X-Generator: Launchpad (build 18292)\n"
 "Language: en_US\n"
 
@@ -223,7 +223,7 @@ msgid "%sAll table structures exist."
 msgstr "%s obstoja sestave vseh tabel."
 
 #: u_translation.rsalltoolsbar
-msgid "All tool bars"
+msgid "All toolbars"
 msgstr "Vse orodne vrstice"
 
 #: u_translation.rsalsobesureth
@@ -397,7 +397,7 @@ msgstr "Elementi asteroida v MPC obliki (en URL naslov za vsako vrstico)"
 
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
-msgstr "Deli asteroida"
+msgstr "Dele asteroida"
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
@@ -945,7 +945,7 @@ msgstr "Elementi kometa v MPC obliki (en URL naslov za vsako vrstico)"
 
 #: u_translation.rscometelement2
 msgid "Comet elements"
-msgstr "Deli kometa"
+msgstr "Dele kometa"
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
@@ -4658,7 +4658,7 @@ msgstr "Profil SAMP vozlišča %s najden, vendar manjka zahtevana vrednost."
 
 #: u_translation.rssampisamessa
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
-msgstr "SAMP je sporočilni protokol, ki omogoči izmenjavo in in sporazumevanje med astronomskimi programskimi orodji.%sSkyhart lahko pošlilja in sprejema položaje koordinat, FITS slike in VO tabele."
+msgstr "SAMP je sporočilni protokol, ki omogoči izmenjavo in sporazumevanje med astronomskimi programskimi orodji.%sSkyhart lahko pošilja in sprejema položaje koordinat, FITS slike in VO tabele."
 
 #: u_translation.rssampsendcoor
 msgid "SAMP send coordinates"
@@ -4962,7 +4962,7 @@ msgstr "Nastavi FOV na"
 
 #: u_translation.rssethowthemou
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
-msgstr "Nastavi kako se premika držalo za vsako os, ko zavrtiš vozeči gumb. Klik na 'Poveži teleskop' gumb bo pokazal, koliko obratov moraš narediti, da se prikaže drug predmet."
+msgstr "Nastavi, kako se premika držalo za vsako os, ko zavrtiš vozeči gumb. Klik na 'Poveži teleskop' gumb bo pokazal, koliko obratov moraš narediti, da se prikaže drug predmet."
 
 #: u_translation.rssetlocation
 msgid "Set Location"
@@ -5723,11 +5723,11 @@ msgid "Tonight"
 msgstr "Drevi"
 
 #: u_translation.rstoolbar
-msgid "Tool bar"
+msgid "Toolbar"
 msgstr "Orodna vrstica"
 
 #: u_translation.rstoolbaredito
-msgid "Tool bar editor"
+msgid "Toolbar editor"
 msgstr "Urejevalnik orodne vrstice"
 
 #: u_translation.rstoolbox

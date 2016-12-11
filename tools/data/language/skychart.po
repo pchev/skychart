@@ -407,11 +407,11 @@ msgid "Night vision"
 msgstr ""
 
 #: u_translation:rstoolbar
-msgid "Tool bar"
+msgid "Toolbar"
 msgstr ""
 
 #: u_translation:rsalltoolsbar
-msgid "All tool bars"
+msgid "All toolbars"
 msgstr ""
 
 #: u_translation:rsmainbar
@@ -5827,7 +5827,7 @@ msgid "%s is empty!"
 msgstr ""
 
 #: u_translation:rstoolbaredito
-msgid "Tool bar editor"
+msgid "Toolbar editor"
 msgstr ""
 
 #: u_translation:rsavailableact
