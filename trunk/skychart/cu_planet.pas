@@ -1293,6 +1293,7 @@ end;
 end;
 
 Procedure TPlanet.FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Tconf_skychart;MeanPos:boolean=false);
+var nom,ma,date,desc: string;
 begin
 ok:=false;
 if (not cfgsc.ephvalid) or (id<1) or (id>MaxPla)or(id=31)or(id=32) then exit;
@@ -1300,6 +1301,7 @@ ok:=true;
 if MeanPos then begin
   ar:=normra(cfgsc.Planetlst[0,id,8]);
   de:=cfgsc.Planetlst[0,id,9];
+  FormatPlanet(0,id,cfgsc, nom,ma,date,desc);
 end
 else begin
   ar:=cfgsc.Planetlst[0,id,1];
