@@ -2,11 +2,11 @@ object f_planetinfo: Tf_planetinfo
   Left = 80
   Height = 600
   Top = 105
-  Width = 936
+  Width = 1024
   ActiveControl = ComboBox1
   Caption = 'f_planetinfo'
   ClientHeight = 600
-  ClientWidth = 936
+  ClientWidth = 1024
   Color = clBtnFace
   OnClose = FormClose
   OnCreate = FormCreate
@@ -21,7 +21,7 @@ object f_planetinfo: Tf_planetinfo
     Left = 0
     Height = 54
     Top = 0
-    Width = 936
+    Width = 1024
     AutoSize = True
     ButtonHeight = 54
     ButtonWidth = 54
@@ -109,11 +109,11 @@ object f_planetinfo: Tf_planetinfo
     Left = 0
     Height = 26
     Top = 54
-    Width = 936
+    Width = 1024
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 26
-    ClientWidth = 936
+    ClientWidth = 1024
     Color = clBlack
     ParentColor = False
     TabOrder = 1
@@ -171,7 +171,7 @@ object f_planetinfo: Tf_planetinfo
     end
     object txtNext: TStaticText
       Tag = 2
-      Left = 824
+      Left = 912
       Height = 20
       Top = 4
       Width = 108
@@ -204,21 +204,21 @@ object f_planetinfo: Tf_planetinfo
     Left = 0
     Height = 520
     Top = 80
-    Width = 936
+    Width = 1024
     Align = alClient
     BevelOuter = bvNone
     ClientHeight = 520
-    ClientWidth = 936
+    ClientWidth = 1024
     TabOrder = 2
     object Panel1: TPanel
       Left = 0
       Height = 520
       Top = 0
-      Width = 936
+      Width = 1024
       Align = alClient
       BevelOuter = bvNone
       ClientHeight = 520
-      ClientWidth = 936
+      ClientWidth = 1024
       Color = clBlack
       ParentColor = False
       TabOrder = 0
@@ -641,11 +641,11 @@ object f_planetinfo: Tf_planetinfo
         Left = 800
         Height = 520
         Top = 0
-        Width = 136
+        Width = 224
         Align = alRight
         BevelOuter = bvNone
         ClientHeight = 520
-        ClientWidth = 136
+        ClientWidth = 224
         Color = clBtnFace
         ParentColor = False
         TabOrder = 1
@@ -653,12 +653,12 @@ object f_planetinfo: Tf_planetinfo
           Left = 0
           Height = 16
           Top = 176
-          Width = 136
+          Width = 224
           Align = alTop
           AutoSize = True
           BevelOuter = bvNone
           ClientHeight = 16
-          ClientWidth = 136
+          ClientWidth = 224
           TabOrder = 1
           object rgTarget: TRadioGroup
             Left = 0
@@ -683,13 +683,13 @@ object f_planetinfo: Tf_planetinfo
           Left = 0
           Height = 79
           Top = 192
-          Width = 136
+          Width = 224
           Align = alTop
           Alignment = taLeftJustify
           AutoSize = True
           BevelOuter = bvNone
           ClientHeight = 79
-          ClientWidth = 136
+          ClientWidth = 224
           TabOrder = 3
           object rgOrigin: TRadioGroup
             Left = 0
@@ -722,7 +722,7 @@ object f_planetinfo: Tf_planetinfo
           Left = 0
           Height = 21
           Top = 271
-          Width = 136
+          Width = 224
           Align = alTop
           ItemHeight = 0
           ParentColor = True
@@ -734,7 +734,7 @@ object f_planetinfo: Tf_planetinfo
           Left = 0
           Height = 21
           Top = 292
-          Width = 136
+          Width = 224
           Align = alTop
           ItemHeight = 0
           ParentColor = True
@@ -746,11 +746,11 @@ object f_planetinfo: Tf_planetinfo
           Left = 0
           Height = 176
           Top = 0
-          Width = 136
+          Width = 224
           Align = alTop
           BevelOuter = bvNone
           ClientHeight = 176
-          ClientWidth = 136
+          ClientWidth = 224
           TabOrder = 4
           object cbIcons: TCheckBox
             Left = 8
@@ -834,7 +834,7 @@ object f_planetinfo: Tf_planetinfo
   object ImageList1: TImageList
     Height = 50
     Width = 50
-    left = 360
+    left = 336
     top = 232
     Bitmap = {
       4C690F0000003200000032000000000000FF000000FF000000FF000000FF0000
@@ -5529,7 +5529,7 @@ object f_planetinfo: Tf_planetinfo
   end
   object ActionList1: TActionList
     Images = ImageList1
-    left = 408
+    left = 416
     top = 232
     object acPlanetsVisibility: TAction
       ImageIndex = 0
@@ -5602,7 +5602,7 @@ object f_planetinfo: Tf_planetinfo
     Enabled = False
     Interval = 5000
     OnTimer = Timer1Timer
-    left = 448
+    left = 496
     top = 232
   end
 end

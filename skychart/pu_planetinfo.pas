@@ -166,13 +166,14 @@ type
 
     NAV_Orig: TBGRABitmap;
     NAV_Image: TBGRABitmap;
+    NAV_Disabled: TBGRABitmap;
 
     procedure SetDefaultFOV;
-    procedure SetRadioButtons;
     procedure SetView(AViewIndex, AMoonIndex: integer);
 
     procedure Rescale_Internal;
     procedure NAV_Coloring(col: TColor; bmp:TBGRABitmap);
+    procedure NAV_Disable(bmp:TBGRABitmap);
 
     procedure NAV_TurnON;
     procedure NAV_TurnOFF;
@@ -204,6 +205,7 @@ type
 
     Procedure SetLang;
     Procedure RefreshInfo;
+    procedure SetRadioButtons;
     procedure PlotLine(bmp:TBGRABitmap; lbl:string; y:integer; des,h1,h2,ht:double);
     Procedure PlotTwilight(bmp:TBGRABitmap);
     Procedure PlotPlanet(bmp:TBGRABitmap);
@@ -228,10 +230,10 @@ type
   TFOV = array[C_Mercury..C_Callisto] of double;
 
 const
-  marginleft   =  80;
-  marginright  =  80;
+  marginleft   = 80;
+  marginright  = 80;
   margintop    = 80;
-  marginbottom =  20;
+  marginbottom = 20;
 
 
   CFOV_FromEarth: TFov =
@@ -519,17 +521,17 @@ begin
   cbRectangular.Caption:=rsRectangular;
 
   acPlanetsVisibility.Hint:=rsPlanetVisibi;
-  acSun.Hint     := pla[C_Sun];
-  acMoon.Hint    := pla[C_Moon];
-  acMercury.Hint := pla[C_Mercury];
-  acVenus.Hint   := pla[C_Venus];
-  acEarth.Hint   := rsEarth;
-  acMars.Hint    := pla[C_Mars];
-  acJupiter.Hint := pla[C_Jupiter];
-  acSaturn.Hint  := pla[C_Saturn];
-  acUranus.Hint  := pla[C_Uranus];
-  acNeptune.Hint := pla[C_Neptune];
-  acPluto.Hint   := pla[C_Pluto];
+  acSun.Hint     := GetPlanetNameLang(C_Sun);
+  acMoon.Hint    := GetPlanetNameLang(C_Moon);
+  acMercury.Hint := GetPlanetNameLang(C_Mercury);
+  acVenus.Hint   := GetPlanetNameLang(C_Venus);
+  acEarth.Hint   := GetPlanetNameLang(C_Earth);
+  acMars.Hint    := GetPlanetNameLang(C_Mars);
+  acJupiter.Hint := GetPlanetNameLang(C_Jupiter);
+  acSaturn.Hint  := GetPlanetNameLang(C_Saturn);
+  acUranus.Hint  := GetPlanetNameLang(C_Uranus);
+  acNeptune.Hint := GetPlanetNameLang(C_Neptune);
+  acPluto.Hint   := GetPlanetNameLang(C_Pluto);
 
   acSim1.Hint     := rsInnerSolarSy;
   acSim2.Hint     := rsOuterSolarSy;
@@ -541,8 +543,6 @@ begin
   rgOrigin.Items[0] := rsEarth;
   rgOrigin.Items[1] := rsSun;
   rgOrigin.Items[2] := rsPlanet;
-
-
 
   FormResize(self);
 end;
@@ -597,6 +597,47 @@ begin
 
 end;
 
+procedure Tf_planetinfo.NAV_Disable(bmp:TBGRABitmap);
+var
+  x, y : integer;
+  black:TBGRAPixel;
+  p: PBGRAPixel;
+  W, H: integer;
+begin
+
+  try
+
+    bmp.Assign(NAV_Orig);
+
+    black := ColorToBGRA(clBlack);
+
+    W := bmp.Width;
+    H := bmp.Height;
+
+    for y := 0 to H -1 do
+    begin
+       p := bmp.Data ;
+
+       for x := 0 to W*H -1 do
+       begin
+
+          if (x mod W) > NAV_btnLen then
+            p^ := black;
+
+        inc(p);
+
+       end;
+
+    end;
+
+    bmp.InvalidateBitmap;
+
+  finally
+
+  end;
+
+end;
+
 procedure Tf_planetinfo.FormCreate(Sender: TObject);
 begin
   {$ifdef lclgtk2}
@@ -608,6 +649,7 @@ begin
 
   NAV_Orig := TBGRABitmap.Create(Image1.Picture.Bitmap);
   NAV_Image:= TBGRABitmap.Create(Image1.Picture.Bitmap);
+  NAV_Disabled:= TBGRABitmap.Create(Image1.Picture.Bitmap);
 
   EnableEvents:= false;
 
@@ -618,6 +660,7 @@ begin
   View_Index := View_PlanetVisibility;
 
   NAV_Coloring(clRed, NAV_Image);
+  NAV_Disable(NAV_Disabled);
 
   NAV_TurnOFF;
 
@@ -947,14 +990,14 @@ begin
   begin
     NAV_Current :=  NAV_ChartSync;
     txtJDdx.Caption := rsChartSync;
-    PaintBox2.Visible:=false;
   end
   else
   begin
      NAV_Current :=  NAV_Play;
      txtJDdx.Caption := GetTimeSpeed_Str;
-     PaintBox2.Visible:=true;
   end;
+
+  PaintBox2.Invalidate;
 
   Timer1.Enabled := ChartSync;
 
@@ -981,6 +1024,7 @@ end;
 
 procedure Tf_planetinfo.cbRectangularChange(Sender: TObject);
 begin
+  PanelrgOrigin.Visible := PanelrgTarget.Visible and (not cbRectangular.Checked);
   RefreshInfo;
 end;
 
@@ -1004,10 +1048,10 @@ begin
   // Zoom in/out with keyboard
 
   if key='+' then
-    fov := fov / 2;
+    fov := fov / 1.1;
 
   if key='-' then
-    fov := fov * 2;
+    fov := fov * 1.1;
 
   RefreshInfo;
 end;
@@ -1174,7 +1218,10 @@ var
   x: integer;
 begin
 
-  NAV_Orig.Draw(PaintBox2.Canvas, 0, 0, false);
+  if ChartSync then
+    NAV_Disabled.Draw(PaintBox2.Canvas, 0, 0, false)
+  else
+    NAV_Orig.Draw(PaintBox2.Canvas, 0, 0, false);
 
   if NAV_On then
   begin
@@ -1237,7 +1284,7 @@ begin
         config.CurJDTT := config.CurJDTT + dxJD;
 
       if NAV_Current = NAV_PlayPrev then
-          config.CurJDTT := config.CurJDTT - dxJD;
+        config.CurJDTT := config.CurJDTT - dxJD;
 
       RefreshInfo;
 
@@ -1284,6 +1331,7 @@ procedure Tf_planetinfo.FormDestroy(Sender: TObject);
 begin
   NAV_Orig.Free;
   NAV_Image.Free;
+  NAV_Disabled.Free;
 
   plbmp.Free;
   config.Free;
@@ -1489,14 +1537,36 @@ end;
 procedure Tf_planetinfo.SetRadioButtons;
 var
     i: integer;
+    origbody: string;
 begin
 
   PanelrgTarget.Visible := not( View_Index in [View_PlanetVisibility, View_Sim1, View_Sim2]);
-  PanelrgOrigin.Visible := PanelrgTarget.Visible;
+  PanelrgOrigin.Visible := PanelrgTarget.Visible and (not cbRectangular.Checked);
 
   rgTarget.Items.Clear;
 
-  //Planet(ipla : integer; t0 : double ; var alpha,delta,distance,illum,phase,diameter,magn,dp,xp,yp,zp,vel : double);
+  while rgOrigin.Items.Count<3 do
+    rgOrigin.Items.Add('');
+
+  rgOrigin.Items[0] := config.ObsName;
+  rgOrigin.Items[1] := rsSun;
+
+  if View_Index=View_Sun then
+     origbody:=rsSun
+  else
+     origbody:=GetPlanetNameLang(View_Index-1);
+
+  if Planet_Target_Index=0 then
+     rgOrigin.Items[2] := Format(rsAbove, [origbody])
+  else
+     rgOrigin.Items[2] := origbody;
+
+  if View_Index = View_Sun then
+  begin
+    if rgOrigin.Items.Count=3 then
+      rgOrigin.Items.Delete(2);
+    rgOrigin.Items[1] := Format(rsAbove, [origbody])
+  end;
 
   case View_Index of
 
@@ -1507,6 +1577,7 @@ begin
       begin
         rgTarget.Items.Add(rsEarth);
         rgTarget.Items.Add(rsMoon);
+        if Planet_Target_Index=0 then rgOrigin.Items[0] := Format(rsAbove, [config.ObsName]);
       end;
 
     View_Mars      :
@@ -1912,39 +1983,17 @@ Procedure Tf_planetinfo.PlotPlanet(bmp:TBGRABitmap);
 var ipla,yc,ys,i:integer;
     ar,de,dist,diam,dkm,phase,illum,magn,dp,xp,yp,zp,vel,hp1,hp2,ht,azr,azs: double;
 begin
-if ShowCurrentObject and config.FindOK and (config.FindType<>ftPla) then
-  ys:=trunc((ymax-ymin)/11)
-else
-  ys:=trunc((ymax-ymin)/10);
-yc:=ymin+ys;
-// sun first
-ipla:=C_Sun;
-Fplanet.Sun(config.CurJDTT,ar,de,dist,diam);
-precession(jd2000,config.CurJDUT,ar,de);
-if (ar<0) then ar:=ar+pi2;
-RiseSet(config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);
-case i of
-  0: PlotLine(bmp,pla[ipla],yc,de,hp1,hp2,ht);
-  1: PlotLine(bmp,pla[ipla],yc,de,0,24,ht);
-  2: PlotLine(bmp,pla[ipla],yc,de,-100,-100,-100);
-end;
-// moon second
-ipla:=C_Moon;
-yc:=yc+ys;
-Fplanet.Moon(config.CurJDTT,ar,de,dist,dkm,diam,phase,illum);
-precession(jd2000,config.CurJDUT,ar,de);
-if (ar<0) then ar:=ar+pi2;
-RiseSet(config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);
-case i of
-  0: PlotLine(bmp,pla[ipla],yc,de,hp1,hp2,ht);
-  1: PlotLine(bmp,pla[ipla],yc,de,0,24,ht);
-  2: PlotLine(bmp,pla[ipla],yc,de,-100,-100,-100);
-end;
-// other planets
-for ipla:=C_Mercury to C_Neptune do begin
-  if ipla=C_Earth then continue; // skip earth
-  yc:=yc+ys;
-  Fplanet.Planet(ipla,config.CurJDTT,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel);
+
+  if ShowCurrentObject and config.FindOK and (config.FindType<>ftPla) then
+    ys:=trunc((ymax-ymin)/11)
+  else
+    ys:=trunc((ymax-ymin)/10);
+
+  yc:=ymin+ys;
+
+  // sun first
+  ipla:=C_Sun;
+  Fplanet.Sun(config.CurJDTT,ar,de,dist,diam);
   precession(jd2000,config.CurJDUT,ar,de);
   if (ar<0) then ar:=ar+pi2;
   RiseSet(config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);
@@ -1953,24 +2002,56 @@ for ipla:=C_Mercury to C_Neptune do begin
     1: PlotLine(bmp,pla[ipla],yc,de,0,24,ht);
     2: PlotLine(bmp,pla[ipla],yc,de,-100,-100,-100);
   end;
-end;
-end;
 
-Procedure Tf_planetinfo.PlotSelection(bmp:TBGRABitmap);
-var yc,ys,i:integer;
-    hp1,hp2,ht,azr,azs: double;
-
-begin
-if ShowCurrentObject and config.FindOK and (config.FindType<>ftPla) then begin
-  ys:=trunc((ymax-ymin)/11);
-  yc:=ymax-ys;
-  RiseSet(config.jd0,config.FindRA,config.FindDec,hp1,ht,hp2,azr,azs,i,config);
+  // moon second
+  ipla:=C_Moon;
+  yc:=yc+ys;
+  Fplanet.Moon(config.CurJDTT,ar,de,dist,dkm,diam,phase,illum);
+  precession(jd2000,config.CurJDUT,ar,de);
+  if (ar<0) then ar:=ar+pi2;
+  RiseSet(config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);
   case i of
-    0: PlotLine(bmp,config.FindName,yc,config.FindDec,hp1,hp2,ht);
-    1: PlotLine(bmp,config.FindName,yc,config.FindDec,0,24,ht);
-    2: PlotLine(bmp,config.FindName,yc,config.FindDec,-100,-100,-100);
+    0: PlotLine(bmp,pla[ipla],yc,de,hp1,hp2,ht);
+    1: PlotLine(bmp,pla[ipla],yc,de,0,24,ht);
+    2: PlotLine(bmp,pla[ipla],yc,de,-100,-100,-100);
+  end;
+
+  // other planets
+  for ipla:=C_Mercury to C_Neptune do
+  begin
+    if ipla=C_Earth then continue; // skip earth
+    yc:=yc+ys;
+    Fplanet.Planet(ipla,config.CurJDTT,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel);
+    precession(jd2000,config.CurJDUT,ar,de);
+    if (ar<0) then ar:=ar+pi2;
+    RiseSet(config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);
+    case i of
+      0: PlotLine(bmp,pla[ipla],yc,de,hp1,hp2,ht);
+      1: PlotLine(bmp,pla[ipla],yc,de,0,24,ht);
+      2: PlotLine(bmp,pla[ipla],yc,de,-100,-100,-100);
+    end;
   end;
 end;
+
+procedure Tf_planetinfo.PlotSelection(bmp:TBGRABitmap);
+var
+  yc,ys,i:integer;
+  hp1,hp2,ht,azr,azs: double;
+
+begin
+
+  if ShowCurrentObject and config.FindOK and (config.FindType<>ftPla) then
+  begin
+    ys:=trunc((ymax-ymin)/11);
+    yc:=ymax-ys;
+    RiseSet(config.jd0,config.FindRA,config.FindDec,hp1,ht,hp2,azr,azs,i,config);
+    case i of
+      0: PlotLine(bmp,config.FindName,yc,config.FindDec,hp1,hp2,ht);
+      1: PlotLine(bmp,config.FindName,yc,config.FindDec,0,24,ht);
+      2: PlotLine(bmp,config.FindName,yc,config.FindDec,-100,-100,-100);
+    end;
+  end;
+
 end;
 
 Procedure Tf_planetinfo.PlotHeader(bmp:TBGRABitmap; title:String; showobs,showtime: boolean);
@@ -1989,14 +2070,18 @@ begin
   bmp.FontHeight:=round(16*TextZoom);
   buf:=Date2Str(config.CurYear,config.CurMonth,config.CurDay)+blank+'  ( '+TzGMT2UTC(config.tz.ZoneName)+' )';
   bmp.TextOut(20,40,buf,c,taLeftJustify);
-  if showobs then begin
+
+  if showobs then
+  begin
     buf:=config.ObsName;
     bmp.TextOut(bmp.Width-20,40,buf,c,taRightJustify);
-  end else
-   if showtime then begin
+  end
+  else
+  if showtime then
+  begin
      buf:=ArmToStr(JD);
      bmp.TextOut(bmp.Width-20,40,buf,c,taRightJustify);
-   end;
+  end;
 
 end;
 
@@ -2008,7 +2093,7 @@ var
   JD: Double;
 begin
 
-JD := config.CurTime;
+  JD := config.CurTime;
 
   c:=ColorToBGRA(clWhite);
   bmp.FontHeight:=round(12*TextZoom);
@@ -2039,7 +2124,6 @@ var
    originLat, originLong: double;
    origin, target: string;
    UseOrigin, UseLatLong, UseTarget, UseOriginFile: Boolean;
-   ar,de,dist,illum,phase,diam,dkm,magn,dp,xp,yp,zp,vel,az,alt: double;
 begin
 
   W := xmax-xmin;
@@ -2088,7 +2172,7 @@ begin
        UseOrigin     := false;
        UseTarget     := true;
 
-       if target = 'earth' then
+       if (target = 'earth')and(Planet_Origin_Index=0) then
          UseLatLong    := true
        else
          UseLatLong    := false;
@@ -2098,7 +2182,10 @@ begin
 
     if (origin='earth') then
     begin
-      UseOriginFile := true;
+      if (target='moon') then
+        UseOriginFile:=(Planet_Origin_Index=0)
+      else
+        UseOriginFile := true;
       UseLatLong    := false;
       UseOrigin     := true;
       UseTarget     := true;

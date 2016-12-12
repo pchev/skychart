@@ -1586,6 +1586,7 @@ resourcestring
   rsChartSync = 'Time sync';
   rsRectangular = 'Rectangular';
   rsLookAt = 'Look at:';
+  rsAbove = 'Above %s';
 
 // also update upsi_translation
 

@@ -1656,6 +1656,7 @@ begin
   f_planetinfo.LinkedChartData := Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc;
   f_planetinfo.Show;
 
+  f_planetinfo.SetRadioButtons;
   f_planetinfo.RefreshInfo;
 end;
 
