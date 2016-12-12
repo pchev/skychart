@@ -820,7 +820,7 @@ object f_planetinfo: Tf_planetinfo
             Left = 30
             Height = 44
             Top = 4
-            Width = 106
+            Width = 186
             AutoSize = False
             Caption = 'Start graph at local noon'
             ParentColor = False
