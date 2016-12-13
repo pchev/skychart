@@ -974,7 +974,7 @@ if MultiFrame1.ActiveObject is Tf_chart then begin
       sc.cfgsc.decentre:=de;
 if VerboseMsg then
  WriteTrace('SyncChild');
-      Refresh;
+      Refresh(true,false);
      end;
 end;
 end;
@@ -1554,7 +1554,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
     sc.cfgsc.TrackOn:=true;
     sc.cfgsc.TrackType:=4;
   end;
-  Refresh;
+  Refresh(true,true);
 end;
 end;
 
@@ -1566,7 +1566,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
     sc.cfgsc.TrackOn:=true;
     sc.cfgsc.TrackType:=4;
   end;
-  Refresh;
+  Refresh(true,true);
 end;
 end;
 
@@ -2444,7 +2444,7 @@ if VerboseMsg then
     try
       if savelabel then begin
          sc.cfgsc.Editlabels:=false;
-         sc.Refresh;
+         sc.Refresh(false);
       end;
       bmp.Assign(sc.plot.cbmp);
       Clipboard.Assign(bmp);
@@ -2452,7 +2452,7 @@ if VerboseMsg then
       bmp.free;
       if savelabel then begin
          sc.cfgsc.Editlabels:=true;
-         sc.Refresh;
+         sc.Refresh(false);
       end;
     end;
  end;
@@ -2532,7 +2532,7 @@ begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
   sc.setfov(deg2rad*f_zoom.fov);
   if VerboseMsg then WriteTrace('ZoomBarExecute');
-  Refresh;
+  Refresh(true,true);
 end;
 end;
 
@@ -2578,7 +2578,7 @@ procedure Tf_main.ResetRotationExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.theta:=0;
-   Refresh;
+   Refresh(true,true);
 end;
 end;
 
@@ -2828,7 +2828,7 @@ begin
   if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
      sc.cfgsc.ShowScale:=not sc.cfgsc.ShowScale;
      if MeasureOn then MeasureDistance(4,0,0);
-     Refresh;
+     Refresh(true,true);
   end;
 end;
 
@@ -2911,7 +2911,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
       sc.cfgsc.TrackType:=4;
    end;
    if VerboseMsg then WriteTrace('TimeResetExecute');
-   Refresh;
+   Refresh(true,true);
    if showast and (showast<>sc.cfgsc.ShowAsteroid) then begin
       RecomputeAsteroid;
    end;
@@ -2929,7 +2929,7 @@ if VerboseMsg then
     sc.cfgsc.TrackOn:=true;
     sc.cfgsc.TrackType:=4;
   end;
-  Refresh;
+  Refresh(true,true);
 end;
 end;
 
@@ -2943,7 +2943,7 @@ if VerboseMsg then
      sc.cfgsc.TrackOn:=true;
      sc.cfgsc.TrackType:=4;
    end;
-   Refresh;
+   Refresh(true,true);
 end;
 end;
 
@@ -2991,7 +2991,7 @@ if (MultiFrame1.ActiveObject is Tf_chart)
         sc.cfgsc.ShowImageList:=true;
         sc.cfgsc.ShowBackgroundImage:=SaveBlinkBG;
         if VerboseMsg then WriteTrace('BlinkImageExecute');
-        Refresh;
+        Refresh(true,true);
      end else begin
         if sc.cfgsc.ShowImageList then begin
            SaveBlinkBG := sc.cfgsc.ShowBackgroundImage;
@@ -3027,7 +3027,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
      sc.cfgsc.TrackOn:=true;
      sc.cfgsc.TrackType:=4;
    end;
-   Refresh;
+   Refresh(true,true);
 end;
 end;
 
@@ -3040,7 +3040,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
      sc.cfgsc.TrackOn:=true;
      sc.cfgsc.TrackType:=4;
    end;
-   Refresh;
+   Refresh(true,true);
 end;
 end;
 
@@ -3052,7 +3052,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
   f_info.ProgressMemo.lines.add(rsComputeAster);
   if Planet.PrepareAsteroid(sc.cfgsc.curjdtt, sc.cfgsc.curjdtt, 1, f_info.ProgressMemo.lines) then begin
      sc.cfgsc.ShowAsteroid:=true;
-     Refresh;
+     Refresh(true,true);
   end;
   f_info.hide;
 end;
@@ -3069,7 +3069,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
      sc.cfgsc.TrackOn:=true;
      sc.cfgsc.TrackType:=4;
    end;
-   Refresh;
+   Refresh(true,true);
    if showast and (showast<>sc.cfgsc.ShowAsteroid) then begin
       RecomputeAsteroid;
    end;
@@ -3087,7 +3087,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
      sc.cfgsc.TrackOn:=true;
      sc.cfgsc.TrackType:=4;
    end;
-   Refresh;
+   Refresh(true,true);
    if showcom<>sc.cfgsc.ShowComet then ShowError(rsErrorPleaseC2);
 end;
 end;
@@ -3101,7 +3101,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    sc.cfgsc.TrackOn:=true;
    sc.cfgsc.TrackType:=4;
  end;
- Refresh;
+ Refresh(true,true);
 end;
 end;
 
@@ -3114,7 +3114,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
     sc.cfgsc.TrackOn:=true;
     sc.cfgsc.TrackType:=4;
   end;
-  Refresh;
+  Refresh(true,true);
 end;
 end;
 
@@ -3176,7 +3176,7 @@ if sender<>nil then begin
           MultiFrame1.Maximized:=true;
           with MultiFrame1.ActiveObject as Tf_chart do begin
             ReadChartConfig(configfile,true,true,sc.plot.cfgplot,sc.cfgsc);
-            Refresh;
+            Refresh(true,true);
           end;
          end;
       2: begin
@@ -3198,7 +3198,7 @@ end else begin
   MultiFrame1.Maximized:=true;
   with MultiFrame1.ActiveObject as Tf_chart do begin
     ReadChartConfig(configfile,true,true,sc.plot.cfgplot,sc.cfgsc);
-    Refresh;
+    Refresh(true,true);
   end;
 end;
 end;
@@ -3209,7 +3209,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    sc.cfgsc.Editlabels:=not sc.cfgsc.Editlabels;
 if VerboseMsg then
  WriteTrace('EditLabelsExecute');
-   Refresh;
+   Refresh(true,true);
 end;
 end;
 
@@ -3222,7 +3222,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
     sc.cfgsc.TrackOn:=true;
     sc.cfgsc.TrackType:=4;
   end;
-  Refresh;
+  Refresh(true,true);
 end;
 end;
 
@@ -3235,7 +3235,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
     sc.cfgsc.TrackOn:=true;
     sc.cfgsc.TrackType:=4;
   end;
-  Refresh;
+  Refresh(true,true);
 end;
 end;
 
@@ -3248,7 +3248,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
     sc.cfgsc.TrackOn:=true;
     sc.cfgsc.TrackType:=4;
   end;
-  Refresh;
+  Refresh(true,true);
 end;
 end;
 
@@ -3261,7 +3261,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
     sc.cfgsc.TrackOn:=true;
     sc.cfgsc.TrackType:=4;
   end;
-  Refresh;
+  Refresh(true,true);
 end;
 end;
 
@@ -3274,7 +3274,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
     sc.cfgsc.TrackOn:=true;
     sc.cfgsc.TrackType:=4;
   end;
-  Refresh;
+  Refresh(true,true);
 end;
 end;
 
@@ -3287,7 +3287,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
     sc.cfgsc.TrackOn:=true;
     sc.cfgsc.TrackType:=4;
   end;
-  Refresh;
+  Refresh(true,true);
 end;
 end;
 
@@ -3299,7 +3299,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    sc.cfgsc.theta:=0; // rotation = 0
 if VerboseMsg then
  WriteTrace('EquatorialProjectionExecute');
-   Refresh;
+   Refresh(true,true);
 end;
 end;
 
@@ -3321,7 +3321,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    end;
 if VerboseMsg then
  WriteTrace('AltAzProjectionExecute');
-   Refresh;
+   Refresh(true,true);
 end;
 end;
 
@@ -3333,7 +3333,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    sc.cfgsc.theta:=0; // rotation = 0
 if VerboseMsg then
  WriteTrace('EclipticProjectionExecute');
-   Refresh;
+   Refresh(true,true);
 end;
 end;
 
@@ -3345,7 +3345,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    sc.cfgsc.theta:=0; // rotation = 0
 if VerboseMsg then
  WriteTrace('GalacticProjectionExecute');
-   Refresh;
+   Refresh(true,true);
 end;
 end;
 
@@ -3368,13 +3368,13 @@ if MultiFrame1.ActiveObject is Tf_chart then with (MultiFrame1.ActiveObject as T
      if VerboseMsg then
       WriteTrace('TrackExecute 1');
      sc.cfgsc.TrackOn:=false;
-     Refresh;
+     Refresh(true,true);
   end else if (((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3)) or(sc.cfgsc.TrackType=6))and(sc.cfgsc.TrackName<>'')
   then begin
      if VerboseMsg then
       WriteTrace('TrackExecute 2');
      sc.cfgsc.TrackOn:=true;
-     Refresh;
+     Refresh(true,true);
   end else begin
     sc.cfgsc.TrackOn:=false;
     UpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,MultiFrame1.ActiveObject);
@@ -3424,7 +3424,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
   sc.cfgsc.fov:=deg2rad*f_position.fov.value;
   sc.cfgsc.theta:=deg2rad*f_position.rot.value;
   if VerboseMsg then WriteTrace('PositionExecute');
-  refresh;
+  refresh(true,true);
 end;
 end;
 
@@ -3544,7 +3544,7 @@ if MultiFrame1.ActiveObject is Tf_chart then
    sc.cfgsc.Assign(csc);
 if VerboseMsg then
  WriteTrace('DrawChart');
-   Refresh;
+   Refresh(true,true);
 end;
 end;
 
@@ -4074,7 +4074,7 @@ begin
        sc.cfgsc.TrackOn:=true;
        sc.cfgsc.TrackType:=4;
      end;
-     Refresh;
+     Refresh(true,true);
   end;
 end;
 
@@ -4088,7 +4088,7 @@ begin
        sc.cfgsc.TrackOn:=true;
        sc.cfgsc.TrackType:=4;
      end;
-     Refresh;
+     Refresh(true,true);
   end;
 end;
 
@@ -4468,7 +4468,7 @@ for i:=0 to MultiFrame1.ChildCount-1 do
   if MultiFrame1.Childs[i].DockedObject is Tf_chart then begin
     (MultiFrame1.Childs[i].DockedObject as Tf_chart).VertScrollBar.Visible:=MenuViewScrollBar.Checked;
     (MultiFrame1.Childs[i].DockedObject as Tf_chart).HorScrollBar.Visible:=MenuViewScrollBar.Checked;
-    (MultiFrame1.Childs[i].DockedObject as Tf_chart).Refresh;
+    (MultiFrame1.Childs[i].DockedObject as Tf_chart).Refresh(true,true);
   end;
 end;
 
@@ -7641,7 +7641,7 @@ end;
 
 procedure Tf_main.ObsListChange(Sender: TObject);
 begin
-  Tf_chart(MultiFrame1.ActiveObject).Refresh;
+  Tf_chart(MultiFrame1.ActiveObject).Refresh(true,true);
 end;
 
 procedure Tf_main.ObsListSearch(obj:string; ra,de:double);
@@ -8563,7 +8563,7 @@ for i:=0 to MultiFrame1.ChildCount-1 do
      sc.cfgsc.TrackOn:=false;
 if VerboseMsg then
  WriteTrace('CenterFindObj');
-     Refresh;
+     Refresh(true,true);
      break;
 end;
 end;
@@ -9724,7 +9724,7 @@ if FileExists(fn) then begin
    if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
       sc.catalog.cfgcat.starcatdef[vostar-BaseStar]:=true;
       sc.catalog.cfgcat.nebcatdef[voneb-BaseNeb]:=true;
-      Refresh;
+      Refresh(true,true);
    end;
 end;
 end;
@@ -9741,7 +9741,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    sc.catalog.cfgcat.SampSelectedRec[0]:=StrToIntDef(row,0);
    samp.LockTableSelectRow:=true;
    sc.cfgsc.FindOK:=false;
-   Refresh;
+   Refresh(true,true);
    samp.LockTableSelectRow:=false;
 end;
 end;
@@ -9760,7 +9760,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    for i:=0 to rowlist.Count-1 do
       sc.catalog.cfgcat.SampSelectedRec[i]:=StrToIntDef(rowlist[i],0);
    sc.cfgsc.FindOK:=false;
-   Refresh;
+   Refresh(true,true);
    samp.LockTableSelectRow:=true;
    if sc.catalog.cfgcat.SampSelectFirst then IdentXY(sc.catalog.cfgcat.SampSelectX,sc.catalog.cfgcat.SampSelectY);
    samp.LockTableSelectRow:=false;
@@ -9934,7 +9934,7 @@ begin
     mx:=min(arg.Count-1,1000);
     for i:=0 to mx do
         Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.CometMark.Add(arg[i]);
-    Tf_chart(MultiFrame1.ActiveObject).Refresh;
+    Tf_chart(MultiFrame1.ActiveObject).Refresh(true,true);
     result:=msgOK;
  end;
 end;
@@ -9948,7 +9948,7 @@ begin
     mx:=min(arg.Count-1,1000);
     for i:=0 to mx do
         Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.AsteroidMark.Add(arg[i]);
-    Tf_chart(MultiFrame1.ActiveObject).Refresh;
+    Tf_chart(MultiFrame1.ActiveObject).Refresh(true,true);
     result:=msgOK;
  end;
 end;

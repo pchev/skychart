@@ -98,9 +98,9 @@ Tskychart = class (TComponent)
     property Fits: TFits read FFits write FFits;
     property ObjectListLabels: TStringList read FObjectListLabels write FObjectListLabels;
     property UpdObsList: boolean read FUpdObsList write FUpdObsList;
-    function Refresh : boolean;
+    function Refresh(newtime:boolean) : boolean;
     function InitCatalog : boolean;
-    function InitTime : boolean;
+    function InitTime(newtime:boolean) : boolean;
     function InitChart(full: boolean=true): boolean;
     function InitColor : boolean;
     function GetFieldNum(fov:double):integer;
@@ -268,7 +268,7 @@ begin
 FPlot.Image:=value;
 end;
 
-function Tskychart.Refresh :boolean;
+function Tskychart.Refresh(newtime:boolean) :boolean;
 var savmag: double;
     savebg:Tcolor;
     savfilter,saveautofilter,savfillmw,scopemark,savApparentPos:boolean;
@@ -300,7 +300,7 @@ if isWin98 and (Fplot.cfgplot.starplot=1) then begin
 end;
 {$endif}
   InitObservatory;
-  InitTime;
+  InitTime(newtime);
   InitChart;
   InitCoordinates; // now include ComputePlanet
   if cfgsc.quick and FPlot.cfgplot.red_move then begin
@@ -558,11 +558,11 @@ if cfgsc.quick and FPlot.cfgplot.red_move and (Fplot.cfgchart.min_ma=Fcatalog.cf
 result:=true;
 end;
 
-function Tskychart.InitTime:boolean;
+function Tskychart.InitTime(newtime:boolean):boolean;
 var xp,yp,MJD,A,C : double;
 begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': Init time');
-if cfgsc.UseSystemTime and (not cfgsc.quick) then SetCurrentTime(cfgsc);
+if newtime and cfgsc.UseSystemTime and (not cfgsc.quick) then SetCurrentTime(cfgsc);
 cfgsc.DT_UT:=DTminusUT(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc);
 cfgsc.DT_UTerr:=DTminusUTError(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc);
 cfgsc.CurJDTT:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT);  // TT
@@ -4702,7 +4702,7 @@ cfgsc.modlabels[i].labelnum:=labelnum;
 cfgsc.modlabels[i].fontnum:=fontnum;
 cfgsc.modlabels[i].id:=id;
 cfgsc.modlabels[i].hiden:=false;
-Refresh;
+Refresh(false);
 end;
 
 procedure Tskychart.EditLabelTxt(lnum,x,y,w,h: integer;mode:boolean);
@@ -4796,7 +4796,7 @@ if f1.ShowModal=mrOK then begin
    cfgsc.modlabels[i].id:=id;
    cfgsc.modlabels[i].hiden:=false;
    if VerboseMsg then WriteTrace('EditLabelTxt');
-   Refresh;
+   Refresh(false);
 end;
 finally
 e1.Free;
@@ -4839,7 +4839,7 @@ if f_addlabel.ShowModal=mrOK then begin
    SetLabel(lid,x,y,0,fontnum,cfgsc.customlabels[i].labelnum,txt,cfgsc.customlabels[i].align,cfgsc.customlabels[i].orientation);
    DrawLabels;
    if VerboseMsg then WriteTrace('AddNewLabel');
-   Refresh;
+   Refresh(false);
 end;
 end;
 
@@ -4886,7 +4886,7 @@ cfgsc.modlabels[i].fontnum:=fontnum;
 cfgsc.modlabels[i].id:=id;
 cfgsc.modlabels[i].hiden:=true;
 DrawLabels;
-Refresh;
+Refresh(false);
 end;
 
 procedure Tskychart.ResetAllLabel;
@@ -4895,7 +4895,7 @@ cfgsc.nummodlabels:=0;
 cfgsc.posmodlabels:=0;
 cfgsc.poscustomlabels:=0;
 cfgsc.numcustomlabels:=0;
-Refresh;
+Refresh(false);
 end;
 
 procedure Tskychart.DefaultLabel(lnum: integer);
@@ -4913,7 +4913,7 @@ for j:=i+1 to cfgsc.nummodlabels do cfgsc.modlabels[j-1]:=cfgsc.modlabels[j];
 dec(cfgsc.nummodlabels);
 cfgsc.posmodlabels:=cfgsc.nummodlabels;
 DrawLabels;
-Refresh;
+Refresh(false);
 end;
 
 procedure Tskychart.LabelClick(lnum: integer);
@@ -5779,7 +5779,7 @@ if (dist>cfgsc.fov/10)and(cfgsc.TrackOn) then begin
       end;
       MovetoRaDec(cfgsc.ScopeRa,cfgsc.ScopeDec);
       if VerboseMsg then WriteTrace('TelescopeMove');
-      Refresh;
+      Refresh(true);
       cfgsc.scopelock:=false;
    end;
 end;
@@ -5810,7 +5810,7 @@ if not cfgsc.scopelock then begin
   end;
   if (dist>cfgsc.fov/10)and(cfgsc.TrackOn) then MovetoRaDec(cfgsc.Scope2Ra,cfgsc.Scope2Dec);
   if VerboseMsg then WriteTrace('Telescope2Move');
-  Refresh;
+  Refresh(true);
   cfgsc.scopelock:=false;
 end;
 end;
