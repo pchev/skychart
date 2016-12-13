@@ -1309,7 +1309,6 @@ else begin
   // back to j2000
   if cfgsc.ApparentPos then mean_equatorial(ar,de,cfgsc,id<>11,false);
   precession(cfgsc.JDchart,jd2000,ar,de);
-  FormatPlanet(0,id,cfgsc, nom,ma,date,desc);
 end;
 end;
 
