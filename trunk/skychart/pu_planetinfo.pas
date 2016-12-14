@@ -1122,6 +1122,7 @@ procedure Tf_planetinfo.PaintBox2Click(Sender: TObject);
 var
     p : tPoint;
     index : integer;
+    NAV_OldPlay: integer;
 begin
 
   if ChartSync then exit;
@@ -1189,11 +1190,17 @@ begin
 
      begin
 
+       NAV_OldPlay:= NAV_Current;
+
        DecTimeSpeed;
        NAV_Current := NAV_DecTimeSpeed;
        txtJDdx.Caption := GetTimeSpeed_Str;
 
-       NAV_Current := NAV_Play;
+       if NAV_OldPlay = NAV_Play then
+         NAV_Current := NAV_Play
+       else
+       if NAV_OldPlay = NAV_PlayPrev then
+         NAV_Current := NAV_PlayPrev;
 
      end;
 
@@ -1201,11 +1208,17 @@ begin
 
      begin
 
+       NAV_OldPlay:= NAV_Current;
+
        IncTimeSpeed;
        Nav_Current := NAV_IncTimeSpeed;
        txtJDdx.Caption := GetTimeSpeed_Str;
 
-       NAV_Current := NAV_Play;
+       if NAV_OldPlay = NAV_Play then
+         NAV_Current := NAV_Play
+       else
+       if NAV_OldPlay = NAV_PlayPrev then
+         NAV_Current := NAV_PlayPrev;
 
      end;
 
