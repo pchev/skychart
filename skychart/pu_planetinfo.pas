@@ -27,7 +27,7 @@ interface
 uses u_constant, u_translation, Math, u_util, cu_planet, u_projection, process,
   BGRABitmap, BGRABitmapTypes, Classes, SysUtils, FileUtil, Forms, Controls,
   UScaleDPI, Types, Graphics, Dialogs, ComCtrls, ExtCtrls, Buttons, StdCtrls,
-  ActnList, u_Orbits;
+  ActnList, LCLType, u_Orbits;
 
 type
 
@@ -114,7 +114,7 @@ type
     procedure cbLabelsChange(Sender: TObject);
     procedure cbRectangularChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
-    procedure FormKeyPress(Sender: TObject; var Key: char);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Label1Click(Sender: TObject);
     procedure PaintBoxMouseWheelDown(Sender: TObject; Shift: TShiftState;
       MousePos: TPoint; var Handled: Boolean);
@@ -1043,17 +1043,28 @@ cbChartSyncChange(self);
 
 end;
 
-procedure Tf_planetinfo.FormKeyPress(Sender: TObject; var Key: char);
+procedure Tf_planetinfo.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+var z: double;
 begin
-  // Zoom in/out with keyboard
-
-  if key='+' then
-    fov := fov / 1.1;
-
-  if key='-' then
-    fov := fov * 1.1;
-
-  RefreshInfo;
+  if ssShift in Shift then
+    z:=2
+  else
+    z:=1.1;
+  case key of
+    VK_ADD,VK_OEM_PLUS        :
+     if fov > 2e-6 then
+     begin
+       fov := fov / z;
+       RefreshInfo;
+     end;
+    VK_SUBTRACT,VK_OEM_MINUS  :
+     if fov < 1e3 then
+     begin
+       fov := fov * z;
+       RefreshInfo;
+     end;
+  end;
 end;
 
 procedure Tf_planetinfo.Label1Click(Sender: TObject);
@@ -1063,6 +1074,7 @@ end;
 
 procedure Tf_planetinfo.PaintBoxMouseWheelDown(Sender: TObject; Shift: TShiftState;
   MousePos: TPoint; var Handled: Boolean);
+var z: double;
 begin
   // Zoom in/out with mouse wheel
   if zoomlock then exit;
@@ -1070,7 +1082,11 @@ begin
   try
   if fov < 1e3 then
   begin
-    fov := fov * 1.1;
+    if ssShift in Shift then
+      z:=2
+    else
+      z:=1.1;
+    fov := fov * z;
     RefreshInfo;
   end;
   Application.ProcessMessages;
@@ -1081,14 +1097,19 @@ end;
 
 procedure Tf_planetinfo.PaintboxMouseWheelUp(Sender: TObject; Shift: TShiftState;
   MousePos: TPoint; var Handled: Boolean);
+var z: double;
 begin
   // Zoom in/out with mouse wheel
   if zoomlock then exit;
   zoomlock:=true;
   try
-  if fov > 1e-6 then
+  if fov > 2e-6 then
   begin
-    fov := fov / 1.1;
+    if ssShift in Shift then
+      z:=2
+    else
+      z:=1.1;
+    fov := fov / z;
     RefreshInfo;
   end;
   Application.ProcessMessages;

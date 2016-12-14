@@ -12,7 +12,7 @@ object f_planetinfo: Tf_planetinfo
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  OnKeyPress = FormKeyPress
+  OnKeyDown = FormKeyDown
   OnResize = FormResize
   OnShow = FormShow
   Position = poDefaultPosOnly
