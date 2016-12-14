@@ -1,12 +1,12 @@
 object f_planetinfo: Tf_planetinfo
-  Left = 80
+  Left = 164
   Height = 600
   Top = 105
-  Width = 1024
+  Width = 852
   ActiveControl = ComboBox1
   Caption = 'f_planetinfo'
   ClientHeight = 600
-  ClientWidth = 1024
+  ClientWidth = 852
   Color = clBtnFace
   KeyPreview = True
   OnClose = FormClose
@@ -22,7 +22,7 @@ object f_planetinfo: Tf_planetinfo
     Left = 0
     Height = 54
     Top = 0
-    Width = 1024
+    Width = 852
     AutoSize = True
     ButtonHeight = 54
     ButtonWidth = 54
@@ -110,11 +110,11 @@ object f_planetinfo: Tf_planetinfo
     Left = 0
     Height = 26
     Top = 54
-    Width = 1024
+    Width = 852
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 26
-    ClientWidth = 1024
+    ClientWidth = 852
     Color = clBlack
     ParentColor = False
     TabOrder = 1
@@ -166,13 +166,16 @@ object f_planetinfo: Tf_planetinfo
         Width = 208
         Color = clTeal
         ParentColor = False
+        ParentShowHint = False
+        ShowHint = True
         OnClick = PaintBox2Click
+        OnMouseMove = PaintBox2MouseMove
         OnPaint = PaintBox2Paint
       end
     end
     object txtNext: TStaticText
       Tag = 2
-      Left = 912
+      Left = 740
       Height = 20
       Top = 4
       Width = 108
@@ -205,21 +208,21 @@ object f_planetinfo: Tf_planetinfo
     Left = 0
     Height = 520
     Top = 80
-    Width = 1024
+    Width = 852
     Align = alClient
     BevelOuter = bvNone
     ClientHeight = 520
-    ClientWidth = 1024
+    ClientWidth = 852
     TabOrder = 2
     object Panel1: TPanel
       Left = 0
       Height = 520
       Top = 0
-      Width = 1024
+      Width = 852
       Align = alClient
       BevelOuter = bvNone
       ClientHeight = 520
-      ClientWidth = 1024
+      ClientWidth = 852
       Color = clBlack
       ParentColor = False
       TabOrder = 0
@@ -227,7 +230,7 @@ object f_planetinfo: Tf_planetinfo
         Left = 0
         Height = 520
         Top = 0
-        Width = 800
+        Width = 680
         Align = alClient
         OnClick = Image1Click
         Picture.Data = {
@@ -619,17 +622,17 @@ object f_planetinfo: Tf_planetinfo
         Left = 0
         Height = 520
         Top = 0
-        Width = 800
+        Width = 680
         Align = alClient
         BevelOuter = bvNone
         ClientHeight = 520
-        ClientWidth = 800
+        ClientWidth = 680
         TabOrder = 0
         object PaintBox1: TPaintBox
           Left = 0
           Height = 520
           Top = 0
-          Width = 800
+          Width = 680
           Align = alClient
           Color = clBlack
           ParentColor = False
@@ -639,14 +642,14 @@ object f_planetinfo: Tf_planetinfo
         end
       end
       object PanelLeft: TPanel
-        Left = 800
+        Left = 680
         Height = 520
         Top = 0
-        Width = 224
+        Width = 172
         Align = alRight
         BevelOuter = bvNone
         ClientHeight = 520
-        ClientWidth = 224
+        ClientWidth = 172
         Color = clBtnFace
         ParentColor = False
         TabOrder = 1
@@ -654,12 +657,12 @@ object f_planetinfo: Tf_planetinfo
           Left = 0
           Height = 16
           Top = 176
-          Width = 224
+          Width = 172
           Align = alTop
           AutoSize = True
           BevelOuter = bvNone
           ClientHeight = 16
-          ClientWidth = 224
+          ClientWidth = 172
           TabOrder = 1
           object rgTarget: TRadioGroup
             Left = 0
@@ -684,13 +687,13 @@ object f_planetinfo: Tf_planetinfo
           Left = 0
           Height = 79
           Top = 192
-          Width = 224
+          Width = 172
           Align = alTop
           Alignment = taLeftJustify
           AutoSize = True
           BevelOuter = bvNone
           ClientHeight = 79
-          ClientWidth = 224
+          ClientWidth = 172
           TabOrder = 3
           object rgOrigin: TRadioGroup
             Left = 0
@@ -723,7 +726,7 @@ object f_planetinfo: Tf_planetinfo
           Left = 0
           Height = 21
           Top = 271
-          Width = 224
+          Width = 172
           Align = alTop
           ItemHeight = 0
           ParentColor = True
@@ -735,7 +738,7 @@ object f_planetinfo: Tf_planetinfo
           Left = 0
           Height = 21
           Top = 292
-          Width = 224
+          Width = 172
           Align = alTop
           ItemHeight = 0
           ParentColor = True
@@ -747,11 +750,11 @@ object f_planetinfo: Tf_planetinfo
           Left = 0
           Height = 176
           Top = 0
-          Width = 224
+          Width = 172
           Align = alTop
           BevelOuter = bvNone
           ClientHeight = 176
-          ClientWidth = 224
+          ClientWidth = 172
           TabOrder = 4
           object cbIcons: TCheckBox
             Left = 8
@@ -818,10 +821,11 @@ object f_planetinfo: Tf_planetinfo
             TabOrder = 5
           end
           object Label1: TLabel
-            Left = 30
-            Height = 44
-            Top = 4
-            Width = 186
+            Left = 32
+            Height = 40
+            Top = 8
+            Width = 136
+            Anchors = [akTop, akLeft, akRight]
             AutoSize = False
             Caption = 'Start graph at local noon'
             ParentColor = False
@@ -5599,11 +5603,18 @@ object f_planetinfo: Tf_planetinfo
       OnExecute = acFreePlanetViewExecute
     end
   end
-  object Timer1: TTimer
+  object MainTimer: TTimer
     Enabled = False
     Interval = 5000
-    OnTimer = Timer1Timer
-    left = 496
-    top = 232
+    OnTimer = MainTimerTimer
+    left = 336
+    top = 304
+  end
+  object NAVTimer: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = NAVTimerTimer
+    left = 416
+    top = 304
   end
 end
