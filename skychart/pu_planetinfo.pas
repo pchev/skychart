@@ -72,9 +72,10 @@ type
     PanelTop: TPanel;
     rgOrigin: TRadioGroup;
     rgTarget: TRadioGroup;
-    Timer1: TTimer;
+    MainTimer: TTimer;
     tbtnEarth: TToolButton;
     tbtnSun: TToolButton;
+    NAVTimer: TTimer;
     ToolButton1: TToolButton;
     txtFOV: TStaticText;
     txtNext: TStaticText;
@@ -116,6 +117,8 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Label1Click(Sender: TObject);
+    procedure PaintBox2MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
     procedure PaintBoxMouseWheelDown(Sender: TObject; Shift: TShiftState;
       MousePos: TPoint; var Handled: Boolean);
     procedure PaintboxMouseWheelUp(Sender: TObject; Shift: TShiftState;
@@ -126,7 +129,8 @@ type
     procedure PaintBox2Paint(Sender: TObject);
     procedure rgOriginClick(Sender: TObject);
     procedure rgTargetClick(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
+    procedure MainTimerTimer(Sender: TObject);
+    procedure NAVTimerTimer(Sender: TObject);
     procedure txtJDdxDecClick(Sender: TObject);
     procedure txtNextClick(Sender: TObject);
     procedure txtPrevClick(Sender: TObject);
@@ -159,6 +163,10 @@ type
 
     NAV_Current: integer;
     NAV_On: boolean;
+
+    NAV_Bits: TBits;
+
+    NAV_Hint_Index: Integer;
 
     CurJDTT_OLD : double;
 
@@ -607,7 +615,7 @@ begin
 
   try
 
-    bmp.Assign(NAV_Orig);
+    //bmp.Assign(NAV_Orig);
 
     black := ColorToBGRA(clBlack);
 
@@ -647,9 +655,13 @@ begin
 
   firstuse := true;
 
-  NAV_Orig := TBGRABitmap.Create(Image1.Picture.Bitmap);
-  NAV_Image:= TBGRABitmap.Create(Image1.Picture.Bitmap);
-  NAV_Disabled:= TBGRABitmap.Create(Image1.Picture.Bitmap);
+  //NAV Status bits
+  NAV_Bits := TBits.Create(8);
+  NAV_Bits.Clearall;
+
+  NAV_Orig     := TBGRABitmap.Create(Image1.Picture.Bitmap);
+  NAV_Image    := TBGRABitmap.Create(NAV_Orig);
+  NAV_Disabled := TBGRABitmap.Create(NAV_Orig);
 
   EnableEvents:= false;
 
@@ -659,7 +671,9 @@ begin
 
   View_Index := View_PlanetVisibility;
 
-  NAV_Coloring(clRed, NAV_Image);
+  NAV_Coloring(clRed,  NAV_Image);
+  NAV_Coloring(clGray, NAV_Disabled);
+
   NAV_Disable(NAV_Disabled);
 
   NAV_TurnOFF;
@@ -989,17 +1003,22 @@ begin
   if ChartSync then
   begin
     NAV_Current :=  NAV_ChartSync;
+    NAV_Bits.Bits[NAV_Current] := true;
+    PaintBox2.Hint:= '';
+
     txtJDdx.Caption := rsChartSync;
   end
   else
   begin
      NAV_Current :=  NAV_Play;
+     NAV_Bits.Bits[NAV_Current] := true;
+
      txtJDdx.Caption := GetTimeSpeed_Str;
   end;
 
   PaintBox2.Invalidate;
 
-  Timer1.Enabled := ChartSync;
+  MainTimer.Enabled := ChartSync;
 
 end;
 
@@ -1018,7 +1037,6 @@ end;
 procedure Tf_planetinfo.cbLabelsChange(Sender: TObject);
 begin
   Orbit.SetShowLabel(cbLabels.Checked);
-
   RefreshInfo;
 end;
 
@@ -1032,9 +1050,8 @@ procedure Tf_planetinfo.FormClose(Sender: TObject; var CloseAction: TCloseAction
 begin
   // Wait until finish processing, otherwise AV will happens
 
-cbChartSync.Checked := false;
-cbChartSyncChange(self);
-
+  cbChartSync.Checked := false;
+  cbChartSyncChange(self);
 
   while IsProcessingPlanets do
      Application.ProcessMessages;
@@ -1070,6 +1087,44 @@ end;
 procedure Tf_planetinfo.Label1Click(Sender: TObject);
 begin
  CheckBox1.Checked:=not CheckBox1.Checked;
+end;
+
+procedure Tf_planetinfo.PaintBox2MouseMove(Sender: TObject; Shift: TShiftState;
+  X, Y: Integer);
+var
+  p : tPoint;
+  index : integer;
+begin
+  if ChartSync then exit;
+
+  p := Mouse.CursorPos;
+  p := PaintBox2.ScreenToClient(p);
+
+  index := p.X div NAV_btnLen;
+
+  if index <> NAV_Hint_Index then
+  begin
+
+    case index of
+
+      NAV_ResetTime    : PaintBox2.Hint:= rsResetTime;
+      NAV_StepPrev     : PaintBox2.Hint:= rsStepBackward;
+      NAV_StepForward  : PaintBox2.Hint:= rsStepForward;
+      NAV_PlayPrev     : PaintBox2.Hint:= rsPlayBackward;
+      NAV_Play         : PaintBox2.Hint:= rsPlayForward;
+      NAV_DecTimeSpeed : PaintBox2.Hint:= rsDecrementTim2;
+      NAV_IncTimeSpeed : PaintBox2.Hint:= rsIncrementTim2;
+
+    else
+      PaintBox2.Hint:= '';
+    end;
+
+    Application.ActivateHint(PaintBox2.ClientToScreen(Point(x,y)));
+
+    NAV_Hint_Index := index;
+
+  end;
+
 end;
 
 procedure Tf_planetinfo.PaintBoxMouseWheelDown(Sender: TObject; Shift: TShiftState;
@@ -1141,9 +1196,16 @@ end;
 
 procedure Tf_planetinfo.PaintBox2Click(Sender: TObject);
 var
-    p : tPoint;
-    index : integer;
-    NAV_OldPlay: integer;
+  p : tPoint;
+  index : integer;
+  NAV_OldPlay: integer;
+
+  procedure Blink_Internal;
+  begin
+    NAV_TurnON;
+    NAVTimer.Enabled:=true;
+  end;
+
 begin
 
   if ChartSync then exit;
@@ -1159,8 +1221,9 @@ begin
      begin
 
        NAV_Current := NAV_ResetTime;
+       MainTimer.Enabled := false;
 
-       Timer1.Enabled := false;
+       NAV_Bits.Bits[NAV_Current] := true;
 
        config.CurJDTT := config.JDChart;
        RefreshInfo;
@@ -1172,8 +1235,10 @@ begin
      begin
 
       NAV_Current := NAV_StepPrev;
+      MainTimer.Enabled := false;
 
-      Timer1.Enabled := false;
+      NAV_Bits.Bits[NAV_Current] := true;
+
       config.CurJDTT := config.CurJDTT - dxJD;
       RefreshInfo;
 
@@ -1184,7 +1249,9 @@ begin
      begin
 
        NAV_Current:= NAV_StepForward;
-       Timer1.Enabled := false;
+       MainTimer.Enabled := false;
+
+       NAV_Bits.Bits[NAV_Current] := true;
 
        config.CurJDTT := config.CurJDTT + dxJD;
        RefreshInfo;
@@ -1197,14 +1264,18 @@ begin
 
      begin
       NAV_Current:= NAV_PlayPrev;
-      Timer1.Enabled := not Timer1.Enabled;
+      MainTimer.Enabled := not MainTimer.Enabled;
+
+      NAV_Bits.Bits[NAV_Current] := true;
      end;
 
     NAV_Play:
 
      begin
        NAV_Current:= NAV_Play;
-       Timer1.Enabled := not Timer1.Enabled;
+       MainTimer.Enabled := not MainTimer.Enabled;
+
+       NAV_Bits.Bits[NAV_Current] := true;
      end;
 
     NAV_DecTimeSpeed:
@@ -1216,6 +1287,10 @@ begin
        DecTimeSpeed;
        NAV_Current := NAV_DecTimeSpeed;
        txtJDdx.Caption := GetTimeSpeed_Str;
+
+       NAV_Bits.Bits[NAV_Current] := true;
+
+       Blink_Internal;
 
        if NAV_OldPlay = NAV_Play then
          NAV_Current := NAV_Play
@@ -1235,6 +1310,10 @@ begin
        Nav_Current := NAV_IncTimeSpeed;
        txtJDdx.Caption := GetTimeSpeed_Str;
 
+       NAV_Bits.Bits[NAV_Current] := true;
+
+       Blink_Internal;
+
        if NAV_OldPlay = NAV_Play then
          NAV_Current := NAV_Play
        else
@@ -1249,7 +1328,7 @@ end;
 
 procedure Tf_planetinfo.PaintBox2Paint(Sender: TObject);
 var
-  x: integer;
+  i,x: integer;
 begin
 
   if ChartSync then
@@ -1260,12 +1339,30 @@ begin
   if NAV_On then
   begin
 
-    if NAV_Current = NAV_ChartSync then
-      x:=0
-    else
-      x := NAV_Current * NAV_btnLen;
+    //First index bit set to true
+    if NAV_Bits.OpenBit >= 0 then
+    begin
 
-    NAV_Image.DrawPart(rect(x, 0, x+NAV_btnLen-1, NAV_Image.Height), PaintBox2.Canvas, x, 0, true);
+      for i:=0 to NAV_Bits.Size-1 do
+      begin
+
+        if NAV_Bits.Bits[i] then
+        begin
+
+          if i = NAV_ChartSync then
+            x:=0
+          else
+            x := i * NAV_btnLen;
+
+          NAV_Image.DrawPart(rect(x, 0, x + NAV_btnLen-1, NAV_Image.Height), PaintBox2.Canvas, x, 0, true);
+
+        end;
+      end;
+
+    end
+    else
+      NAV_On:= false;
+
   end;
 
 end;
@@ -1293,7 +1390,7 @@ begin
   SetView(View_Index, rgTarget.ItemIndex);
 end;
 
-procedure Tf_planetinfo.Timer1Timer(Sender: TObject);
+procedure Tf_planetinfo.MainTimerTimer(Sender: TObject);
 begin
 
   if not IsProcessingPlanets then
@@ -1331,6 +1428,22 @@ begin
 
 end;
 
+procedure Tf_planetinfo.NAVTimerTimer(Sender: TObject);
+begin
+
+  if not IsProcessingPlanets then
+  begin
+    NAVTimer.Enabled:=false;
+
+    NAV_Bits[NAV_IncTimeSpeed]:= false;
+    NAV_Bits[NAV_DecTimeSpeed]:= false;
+
+    NAV_TurnOFF;
+
+  end;
+
+end;
+
 procedure Tf_planetinfo.txtJDdxDecClick(Sender: TObject);
 begin
   DecTimeSpeed;
@@ -1363,9 +1476,12 @@ end;
 
 procedure Tf_planetinfo.FormDestroy(Sender: TObject);
 begin
+
   NAV_Orig.Free;
   NAV_Image.Free;
   NAV_Disabled.Free;
+
+  NAV_Bits.Free;
 
   plbmp.Free;
   config.Free;
@@ -1799,6 +1915,8 @@ begin
 
   IsProcessingPlanets := true;
 
+  NAV_Bits.Bits[NAV_Current] := true;
+
   NAV_TurnON;
 
   txtPrev.Visible := View_Index <> 0;
@@ -1829,7 +1947,7 @@ try
   ActiveSizeY := Panel1.Height;
 
   // Set desired interval for timer to 20 ms
-  if Timer1.Interval <> 20 then Timer1.Interval := 20;
+  if MainTimer.Interval <> 20 then MainTimer.Interval := 20;
 
   case View_Index of
 
@@ -1904,6 +2022,13 @@ try
     txtFOV.Caption:= rsFOV2 + DEToStrShort(fov,1)
   else
     txtFOV.Caption:= rsFOV2 + DEToStrShort(fov,3);
+
+  NAV_Bits.Bits[NAV_ResetTime]   := false;
+  NAV_Bits.Bits[NAV_StepForward] := false;
+  NAV_Bits.Bits[NAV_StepPrev]    := false;
+  NAV_Bits.Bits[NAV_Play]        := false;
+  NAV_Bits.Bits[NAV_PlayPrev]    := false;
+  NAV_Bits.Bits[NAV_ChartSync]   := false;
 
   finally
     IsProcessingPlanets := false;
