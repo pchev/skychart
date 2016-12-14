@@ -8,6 +8,7 @@ object f_planetinfo: Tf_planetinfo
   ClientHeight = 600
   ClientWidth = 1024
   Color = clBtnFace
+  KeyPreview = True
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
