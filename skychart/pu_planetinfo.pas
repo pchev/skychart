@@ -1119,6 +1119,7 @@ begin
       PaintBox2.Hint:= '';
     end;
 
+    Application.HideHint;
     Application.ActivateHint(PaintBox2.ClientToScreen(Point(x,y)));
 
     NAV_Hint_Index := index;
