@@ -167,6 +167,7 @@ type
     NAV_Bits: TBits;
 
     NAV_Hint_Index: Integer;
+    NAV_isPainting : Boolean;
 
     CurJDTT_OLD : double;
 
@@ -676,6 +677,8 @@ begin
 
   NAV_Disable(NAV_Disabled);
 
+  NAV_isPainting := false;
+
   NAV_TurnOFF;
 
   PanelrgTarget.Visible := False;
@@ -1011,7 +1014,7 @@ begin
   else
   begin
      NAV_Current :=  NAV_Play;
-     NAV_Bits.Bits[NAV_Current] := true;
+     NAV_TurnOFF;
 
      txtJDdx.Caption := GetTimeSpeed_Str;
   end;
@@ -1192,6 +1195,7 @@ end;
 procedure Tf_planetinfo.NAV_TurnOFF;
 begin
   NAV_On := false;
+  NAV_Bits.Clearall;
   PaintBox2.Repaint;
 end;
 
@@ -1267,7 +1271,7 @@ begin
       NAV_Current:= NAV_PlayPrev;
       MainTimer.Enabled := not MainTimer.Enabled;
 
-      NAV_Bits.Bits[NAV_Current] := true;
+      NAV_Bits.Bits[NAV_Current] := MainTimer.Enabled;
      end;
 
     NAV_Play:
@@ -1276,7 +1280,7 @@ begin
        NAV_Current:= NAV_Play;
        MainTimer.Enabled := not MainTimer.Enabled;
 
-       NAV_Bits.Bits[NAV_Current] := true;
+       NAV_Bits.Bits[NAV_Current] := MainTimer.Enabled;
      end;
 
     NAV_DecTimeSpeed:
@@ -1332,38 +1336,50 @@ var
   i,x: integer;
 begin
 
+  // Avoding flickering and possible AV
+  if NAV_isPainting then exit;
+
+  NAV_isPainting := true;
+
   if ChartSync then
     NAV_Disabled.Draw(PaintBox2.Canvas, 0, 0, false)
   else
     NAV_Orig.Draw(PaintBox2.Canvas, 0, 0, false);
 
-  if NAV_On then
-  begin
+  try
 
-    //First index bit set to true
-    if NAV_Bits.OpenBit >= 0 then
+    if NAV_On then
     begin
 
-      for i:=0 to NAV_Bits.Size-1 do
+      //First index bit set to true
+      if NAV_Bits.OpenBit >= 0 then
       begin
 
-        if NAV_Bits.Bits[i] then
+        for i:=0 to NAV_Bits.Size-1 do
         begin
 
-          if i = NAV_ChartSync then
-            x:=0
-          else
-            x := i * NAV_btnLen;
+          if NAV_Bits.Bits[i] then
+          begin
 
-          NAV_Image.DrawPart(rect(x, 0, x + NAV_btnLen-1, NAV_Image.Height), PaintBox2.Canvas, x, 0, true);
+            if i = NAV_ChartSync then
+              x := 0
+            else
+              x := i * NAV_btnLen;
+
+            NAV_Image.DrawPart(rect(x, 0, x + NAV_btnLen-1, NAV_Image.Height), PaintBox2.Canvas, x, 0, true);
+
+          end;
 
         end;
-      end;
 
-    end
-    else
-      NAV_On:= false;
+      end
+      else
+        NAV_On:= false;
 
+    end;
+
+  finally
+    NAV_isPainting := false;
   end;
 
 end;
@@ -1439,7 +1455,7 @@ begin
     NAV_Bits[NAV_IncTimeSpeed]:= false;
     NAV_Bits[NAV_DecTimeSpeed]:= false;
 
-    NAV_TurnOFF;
+    PaintBox2.Repaint;
 
   end;
 
@@ -2014,7 +2030,6 @@ try
   Label1.Visible := CheckBox1.Visible;
   cbRectangular.Visible := (View_Index>0)and(View_Index<11);
 
-  NAV_On := false;
   PaintBox1.Repaint;
 
 //  SetRadioButtons;
@@ -2035,11 +2050,9 @@ try
     IsProcessingPlanets := false;
     Initialized:=true;
 
-    NAV_TurnOFF;
-
+    PaintBox2.Repaint;
   end;
 end;
-
 
 Procedure Tf_planetinfo.PlotTwilight(bmp:TBGRABitmap);
 var ars,des,dist,diam,hp1,hp2,h : double;
