@@ -1247,7 +1247,7 @@ begin
       config.CurJDTT := config.CurJDTT - dxJD;
       RefreshInfo;
 
-      NAV_Current := -1;
+      NAV_Current := NAV_Play;
      end;
 
     NAV_StepForward:
@@ -1261,7 +1261,7 @@ begin
        config.CurJDTT := config.CurJDTT + dxJD;
        RefreshInfo;
 
-       NAV_Current := -1;
+       NAV_Current := NAV_Play;
 
     end;
 
