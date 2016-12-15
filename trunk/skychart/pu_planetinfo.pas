@@ -241,7 +241,7 @@ type
 const
   marginleft   = 80;
   marginright  = 80;
-  margintop    = 80;
+  margintop    = 100;
   marginbottom = 20;
 
 
