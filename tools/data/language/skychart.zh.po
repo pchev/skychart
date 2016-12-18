@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 16:03+0000\n"
+"POT-Creation-Date: 2016-12-18 14:36+0000\n"
 "PO-Revision-Date: 2013-11-17 14:47+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-11 09:08+0000\n"
-"X-Generator: Launchpad (build 18292)\n"
+"X-Launchpad-Export-Date: 2016-12-18 14:44+0000\n"
+"X-Generator: Launchpad (build 18298)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -61,6 +61,10 @@ msgstr "關於"
 #: u_translation.rsabout2
 msgid "About %s"
 msgstr "關於 %s"
+
+#: u_translation.rsabove
+msgid "Above %s"
+msgstr ""
 
 #: u_translation.rsabrevasteroid
 msgid "Ast"
@@ -2089,6 +2093,10 @@ msgstr "問題與回答"
 
 #: u_translation.rsfast
 msgid "Fast"
+msgstr ""
+
+#: u_translation.rsfaster
+msgid "Faster"
 msgstr ""
 
 #: u_translation.rsfavorite
@@ -4559,6 +4567,10 @@ msgstr ""
 msgid "Reset rotation"
 msgstr ""
 
+#: u_translation.rsresettime
+msgid "Reset time"
+msgstr ""
+
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
 msgstr ""
@@ -5237,6 +5249,10 @@ msgstr ""
 
 #: u_translation.rsslow
 msgid "Slow"
+msgstr ""
+
+#: u_translation.rsslower
+msgid "Slower"
 msgstr ""
 
 #: u_translation.rsslowest

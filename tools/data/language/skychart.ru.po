@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 16:03+0000\n"
-"PO-Revision-Date: 2016-12-11 09:01+0000\n"
+"POT-Creation-Date: 2016-12-18 14:36+0000\n"
+"PO-Revision-Date: 2016-12-12 15:54+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-11 09:08+0000\n"
-"X-Generator: Launchpad (build 18292)\n"
+"X-Launchpad-Export-Date: 2016-12-18 14:44+0000\n"
+"X-Generator: Launchpad (build 18298)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -60,6 +60,10 @@ msgstr "О программе"
 #: u_translation.rsabout2
 msgid "About %s"
 msgstr "%s"
+
+#: u_translation.rsabove
+msgid "Above %s"
+msgstr ""
 
 #: u_translation.rsabrevasteroid
 msgid "Ast"
@@ -1647,7 +1651,7 @@ msgstr "Показать контур горизонта"
 
 #: u_translation.rsdistance
 msgid "Distance"
-msgstr "Расстояние от Земли"
+msgstr "Расстояние"
 
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
@@ -2088,6 +2092,10 @@ msgstr "Часто задаваемые вопросы"
 #: u_translation.rsfast
 msgid "Fast"
 msgstr "Быстро"
+
+#: u_translation.rsfaster
+msgid "Faster"
+msgstr ""
 
 #: u_translation.rsfavorite
 msgid "Favorite"
@@ -4558,6 +4566,10 @@ msgstr "Сброс к настройкам по умолчанию и перез
 msgid "Reset rotation"
 msgstr "Сбросить вращение"
 
+#: u_translation.rsresettime
+msgid "Reset time"
+msgstr ""
+
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
 msgstr "Сброс ко времени последнего сохранения карты"
@@ -5237,6 +5249,10 @@ msgstr "Повернуть в точку курсора"
 #: u_translation.rsslow
 msgid "Slow"
 msgstr "Медленно"
+
+#: u_translation.rsslower
+msgid "Slower"
+msgstr ""
 
 #: u_translation.rsslowest
 msgid "Slowest"

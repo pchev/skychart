@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 16:03+0000\n"
-"PO-Revision-Date: 2016-12-11 08:45+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2016-12-18 14:36+0000\n"
+"PO-Revision-Date: 2016-12-12 18:06+0000\n"
+"Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-11 09:08+0000\n"
-"X-Generator: Launchpad (build 18292)\n"
+"X-Launchpad-Export-Date: 2016-12-18 14:44+0000\n"
+"X-Generator: Launchpad (build 18298)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -62,6 +62,10 @@ msgstr "Sobre"
 #: u_translation.rsabout2
 msgid "About %s"
 msgstr "Sobre %s"
+
+#: u_translation.rsabove
+msgid "Above %s"
+msgstr "Acima de %s"
 
 #: u_translation.rsabrevasteroid
 msgid "Ast"
@@ -819,7 +823,7 @@ msgstr "Configurações da carta"
 
 #: u_translation.rschartsync
 msgid "Time sync"
-msgstr ""
+msgstr "Sincronizar tempo"
 
 #: u_translation.rschart_
 msgid "Chart_"
@@ -1203,7 +1207,7 @@ msgstr "Criando carta postscript. Aguarde, por favor."
 
 #: u_translation.rscreaterasterwh
 msgid "Create raster chart %d x %d. Please wait..."
-msgstr ""
+msgstr "Criando gráfico %d x %d. Por favor, espere..."
 
 #: u_translation.rscrossmeridia
 msgid "Cross meridian"
@@ -2094,6 +2098,10 @@ msgstr "FAQ"
 msgid "Fast"
 msgstr "Rápido"
 
+#: u_translation.rsfaster
+msgid "Faster"
+msgstr ""
+
 #: u_translation.rsfavorite
 msgid "Favorite"
 msgstr "Favorito"
@@ -2568,7 +2576,7 @@ msgstr "Ícone Ação"
 
 #: u_translation.rsicons
 msgid "Icons"
-msgstr ""
+msgstr "Ícones"
 
 #: u_translation.rsiconsize
 msgid "Icon size"
@@ -3064,7 +3072,7 @@ msgstr "Long. do nodo asc."
 
 #: u_translation.rslookat
 msgid "Look at:"
-msgstr ""
+msgstr "Olhar para:"
 
 #: u_translation.rslosange
 msgid "Lozenge"
@@ -3840,7 +3848,7 @@ msgstr "Orientação"
 
 #: u_translation.rsorienttothep
 msgid "Orient to the pole"
-msgstr ""
+msgstr "Oriente para o polo"
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file:"
@@ -4444,7 +4452,7 @@ msgstr "Restaurar as legendas ocultas"
 
 #: u_translation.rsrectangular
 msgid "Rectangular"
-msgstr ""
+msgstr "Retangular"
 
 #: u_translation.rsred
 msgid "Red"
@@ -4561,6 +4569,10 @@ msgstr "Redefinir o padrão inicial e reiniciar"
 #: u_translation.rsresetrotatio
 msgid "Reset rotation"
 msgstr "Reiniciar rotação"
+
+#: u_translation.rsresettime
+msgid "Reset time"
+msgstr ""
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
@@ -5241,6 +5253,10 @@ msgstr "Girar posição do cursor"
 #: u_translation.rsslow
 msgid "Slow"
 msgstr "Lento"
+
+#: u_translation.rsslower
+msgid "Slower"
+msgstr ""
 
 #: u_translation.rsslowest
 msgid "Slowest"

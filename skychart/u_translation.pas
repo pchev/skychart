@@ -1588,12 +1588,8 @@ resourcestring
   rsLookAt = 'Look at:';
   rsAbove = 'Above %s';
   rsResetTime = 'Reset time';
-  rsStepBackward = 'Step backward';
-  rsStepForward = 'Step forward';
-  rsPlayBackward = 'Play backward';
-  rsPlayForward = 'Play forward';
-  rsDecrementTim2 = 'Decrement time speed';
-  rsIncrementTim2 = 'Increment time speed';
+  rsSlower = 'Slower';
+  rsFaster = 'Faster';
 
 // also update upsi_translation
 
