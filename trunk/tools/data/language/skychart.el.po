@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 16:03+0000\n"
+"POT-Creation-Date: 2016-12-18 14:36+0000\n"
 "PO-Revision-Date: 2016-12-11 08:52+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-11 09:09+0000\n"
-"X-Generator: Launchpad (build 18292)\n"
+"X-Launchpad-Export-Date: 2016-12-18 14:44+0000\n"
+"X-Generator: Launchpad (build 18298)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -60,6 +60,10 @@ msgstr "Περί..."
 #: u_translation.rsabout2
 msgid "About %s"
 msgstr "Σχετικά με %s"
+
+#: u_translation.rsabove
+msgid "Above %s"
+msgstr ""
 
 #: u_translation.rsabrevasteroid
 msgid "Ast"
@@ -2088,6 +2092,10 @@ msgstr "Συχνές ερωτήσεις"
 #: u_translation.rsfast
 msgid "Fast"
 msgstr "Γρήγορα"
+
+#: u_translation.rsfaster
+msgid "Faster"
+msgstr ""
 
 #: u_translation.rsfavorite
 msgid "Favorite"
@@ -4557,6 +4565,10 @@ msgstr "Καθαρισμός σε προεπιλεγμένες ρυθμίσει�
 msgid "Reset rotation"
 msgstr "Καθαρισμός περιστροφής"
 
+#: u_translation.rsresettime
+msgid "Reset time"
+msgstr ""
+
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
 msgstr "Επαναφορά στην τελευταία αποθήκευση του χάρτη"
@@ -5236,6 +5248,10 @@ msgstr "Μετακίνηση στη θέση του δείκτη"
 #: u_translation.rsslow
 msgid "Slow"
 msgstr "Αργά"
+
+#: u_translation.rsslower
+msgid "Slower"
+msgstr ""
 
 #: u_translation.rsslowest
 msgid "Slowest"

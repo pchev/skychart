@@ -6230,3 +6230,19 @@ msgstr ""
 msgid "Look at:"
 msgstr ""
 
+#: u_translation:rsabove
+msgid "Above %s"
+msgstr ""
+
+#: u_translation:rsresettime
+msgid "Reset time"
+msgstr ""
+
+#: u_translation:rsslower
+msgid "Slower"
+msgstr ""
+
+#: u_translation:rsfaster
+msgid "Faster"
+msgstr ""
+

@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 16:03+0000\n"
+"POT-Creation-Date: 2016-12-18 14:36+0000\n"
 "PO-Revision-Date: 2016-12-11 08:44+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-11 09:09+0000\n"
-"X-Generator: Launchpad (build 18292)\n"
+"X-Launchpad-Export-Date: 2016-12-18 14:44+0000\n"
+"X-Generator: Launchpad (build 18298)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -62,6 +62,10 @@ msgstr "Acerca de"
 #: u_translation.rsabout2
 msgid "About %s"
 msgstr "Acerca de %s"
+
+#: u_translation.rsabove
+msgid "Above %s"
+msgstr ""
 
 #: u_translation.rsabrevasteroid
 msgid "Ast"
@@ -2090,6 +2094,10 @@ msgstr "Preguntas más frecuentes"
 #: u_translation.rsfast
 msgid "Fast"
 msgstr "Rápido"
+
+#: u_translation.rsfaster
+msgid "Faster"
+msgstr ""
 
 #: u_translation.rsfavorite
 msgid "Favorite"
@@ -4559,6 +4567,10 @@ msgstr "Restablecer a valores prefijados y reiniciar"
 msgid "Reset rotation"
 msgstr "Restablecer Rotación"
 
+#: u_translation.rsresettime
+msgid "Reset time"
+msgstr ""
+
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
 msgstr "Restablecer a la última vez que la carta fue guardada"
@@ -5238,6 +5250,10 @@ msgstr "Desplazar a la posición del cursor"
 #: u_translation.rsslow
 msgid "Slow"
 msgstr "Lenta"
+
+#: u_translation.rsslower
+msgid "Slower"
+msgstr ""
 
 #: u_translation.rsslowest
 msgid "Slowest"

@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-12-10 16:03+0000\n"
+"POT-Creation-Date: 2016-12-18 14:36+0000\n"
 "PO-Revision-Date: 2013-11-14 18:08+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-11 09:08+0000\n"
-"X-Generator: Launchpad (build 18292)\n"
+"X-Launchpad-Export-Date: 2016-12-18 14:44+0000\n"
+"X-Generator: Launchpad (build 18298)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -62,6 +62,10 @@ msgstr ""
 
 #: u_translation.rsabout2
 msgid "About %s"
+msgstr ""
+
+#: u_translation.rsabove
+msgid "Above %s"
 msgstr ""
 
 #: u_translation.rsabrevasteroid
@@ -2090,6 +2094,10 @@ msgstr ""
 
 #: u_translation.rsfast
 msgid "Fast"
+msgstr ""
+
+#: u_translation.rsfaster
+msgid "Faster"
 msgstr ""
 
 #: u_translation.rsfavorite
@@ -4560,6 +4568,10 @@ msgstr ""
 msgid "Reset rotation"
 msgstr ""
 
+#: u_translation.rsresettime
+msgid "Reset time"
+msgstr ""
+
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
 msgstr ""
@@ -5238,6 +5250,10 @@ msgstr ""
 
 #: u_translation.rsslow
 msgid "Slow"
+msgstr ""
+
+#: u_translation.rsslower
+msgid "Slower"
 msgstr ""
 
 #: u_translation.rsslowest

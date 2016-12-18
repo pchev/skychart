@@ -1111,12 +1111,12 @@ begin
     case index of
 
       NAV_ResetTime    : PaintBox2.Hint:= rsResetTime;
-      NAV_StepPrev     : PaintBox2.Hint:= rsStepBackward;
-      NAV_StepForward  : PaintBox2.Hint:= rsStepForward;
-      NAV_PlayPrev     : PaintBox2.Hint:= rsPlayBackward;
-      NAV_Play         : PaintBox2.Hint:= rsPlayForward;
-      NAV_DecTimeSpeed : PaintBox2.Hint:= rsDecrementTim2;
-      NAV_IncTimeSpeed : PaintBox2.Hint:= rsIncrementTim2;
+      NAV_StepPrev     : PaintBox2.Hint:= rsDecrementTim;
+      NAV_StepForward  : PaintBox2.Hint:= rsIncrementTim;
+      NAV_PlayPrev     : PaintBox2.Hint:= rsStartBackwar;
+      NAV_Play         : PaintBox2.Hint:= rsStartForward;
+      NAV_DecTimeSpeed : PaintBox2.Hint:= rsSlower;
+      NAV_IncTimeSpeed : PaintBox2.Hint:= rsFaster;
 
     else
       PaintBox2.Hint:= '';
