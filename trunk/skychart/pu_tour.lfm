@@ -11,21 +11,21 @@ object f_tour: Tf_tour
   KeyPreview = True
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
-  LCLVersion = '1.6.0.2'
+  LCLVersion = '1.6.2.0'
   Visible = False
   object TourName: TLabel
     Left = 27
-    Height = 16
+    Height = 17
     Top = 8
-    Width = 61
+    Width = 71
     Caption = 'TourName'
     ParentColor = False
   end
   object ObjectName: TLabel
     Left = 26
-    Height = 16
+    Height = 17
     Top = 37
-    Width = 77
+    Width = 86
     Caption = 'ObjectName'
     ParentColor = False
   end

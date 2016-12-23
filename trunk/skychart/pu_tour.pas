@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_translation, LCLType, UScaleDPI,
+uses u_translation, LCLType, UScaleDPI, u_speech,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls;
 
 type
@@ -77,6 +77,7 @@ begin
   BtnFirst.Caption:=rsFirst;
   BtnLast.Caption:=rsLast;
   BtnSlew.Caption:=rsSlew;
+  u_speech.setlang;
 end;
 
 procedure Tf_tour.FormCreate(Sender: TObject);
@@ -88,6 +89,7 @@ end;
 procedure Tf_tour.BtnFirstClick(Sender: TObject);
 begin
   if Assigned(FFirst) then FFirst(self);
+  speak(ObjectName.Caption);
 end;
 
 procedure Tf_tour.BtnEndClick(Sender: TObject);
@@ -98,21 +100,25 @@ end;
 procedure Tf_tour.BtnLastClick(Sender: TObject);
 begin
   if Assigned(FLast) then FLast(self);
+  speak(ObjectName.Caption);
 end;
 
 procedure Tf_tour.BtnNextClick(Sender: TObject);
 begin
   if Assigned(Fnext) then Fnext(self);
+  speak(ObjectName.Caption);
 end;
 
 procedure Tf_tour.BtnPrevClick(Sender: TObject);
 begin
   if Assigned(Fprev) then Fprev(self);
+  speak(ObjectName.Caption);
 end;
 
 procedure Tf_tour.BtnSlewClick(Sender: TObject);
 begin
   if Assigned(Fslew) then Fslew(self);
+  speak(rsSlew+' '+ ObjectName.Caption);
 end;
 
 procedure Tf_tour.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);

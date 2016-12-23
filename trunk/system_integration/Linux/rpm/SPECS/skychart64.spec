@@ -9,7 +9,7 @@ Packager: Patrick Chevalley
 BuildRoot: %_topdir/%{name}
 BuildArch: x86_64
 Provides: skychart
-Requires: libpasastro gtk2 glib2 pango libjpeg libpng sqlite xplanet
+Requires: libpasastro gtk2 glib2 pango libjpeg libpng sqlite xplanet espeak
 AutoReqProv: no
 
 %description
