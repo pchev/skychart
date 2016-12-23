@@ -17,6 +17,7 @@ Nouvelles fonctions:
   * Ajout de la connexion Tcp/Ip à l'interface télescope LX200. 
   * Affiche le déplacement horaire des comètes et astéroïdes dans la fenêtre de détail.
   * Mise à jour du téléchargement des comètes et astéroïdes.
+  * Ajout de la position du curseur ou du télescope à la liste d'observation
 
 Corrections:
 

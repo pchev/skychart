@@ -17,6 +17,7 @@ New functions:
   * Add Tcp/Ip connection to the LX200 telescope interface.
   * Show comet and asteroid hourly motion in the detail window.
   * Update download URL for asteroids and comets
+  * Add cursor or telescope position to observing list
 
 Corrections:
 
