@@ -54,7 +54,7 @@ begin
       SavedCW := Get8087CW;
       try
       Set8087CW(SavedCW or $4);
-      SpVoice.Speak(text, 0);
+      SpVoice.Speak(widestring(text), 0);
       finally
       Set8087CW(SavedCW);
       end;
