@@ -7656,21 +7656,8 @@ begin
     ra:=deg2rad*ra;
     de:=deg2rad*de;
     Tf_chart(MultiFrame1.ActiveObject).CoordJ2000toChart(ra,de);
-    Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.Scope2Ra:=-1;
-    Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.Scope2Dec:=0;
-    ra:=rad2deg*ra;
-    de:=rad2deg*de;
-    arg:=Tstringlist.Create;
-    arg.Clear;
-    arg.Add('MOVESCOPE');
-    arg.Add(formatfloat(f5,ra/15));
-    arg.Add(formatfloat(f5,de));
-    ExecuteCmd(cname,arg);
-    arg.Clear;
-    arg.Add('TRACKTELESCOPE');
-    arg.Add('OFF');
-    ExecuteCmd(cname,arg);
-    arg.Free;
+    Tf_chart(MultiFrame1.ActiveObject).sc.movetoradec(ra,de);
+    Tf_chart(MultiFrame1.ActiveObject).Refresh(false,false);
   end;
 end;
 
@@ -7682,11 +7669,10 @@ begin
   ra:=deg2rad*ra;
   de:=deg2rad*de;
   Tf_chart(MultiFrame1.ActiveObject).CoordJ2000toChart(ra,de);
-  Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindName:=obj;
-  Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindRA:=ra;
-  Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindDec:=de;
   arg:=Tstringlist.Create;
   arg.Add('SLEW');
+  arg.Add(FormatFloat(f5,rad2deg*ra/15));
+  arg.Add(FormatFloat(f5,rad2deg*de));
   ExecuteCmd(cname,arg);
   arg.Free;
 end;

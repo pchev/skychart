@@ -1590,6 +1590,7 @@ resourcestring
   rsResetTime = 'Reset time';
   rsSlower = 'Slower';
   rsFaster = 'Faster';
+  rsCursor = 'Cursor';
 
 // also update upsi_translation
 

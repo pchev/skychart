@@ -370,6 +370,7 @@ FObjName:=trim(StringGrid1.Cells[1,r]);
 ra:=StrToFloatDef(trim(StringGrid1.Cells[2,r]),-1);
 de:=StrToFloatDef(trim(StringGrid1.Cells[3,r]),0);
 if (ra>=0) and assigned(FSelectObject) then FSelectObject(FObjName,ra,de);
+if (FObjName=rsTelescope)or(FObjName=rsCursor) then FObjName:=trim(StringGrid1.Cells[7,r]);
 end;
 
 function Tf_obslist.FirstObj: boolean;
@@ -874,8 +875,15 @@ end;
 procedure Tf_obslist.StringGrid1ValidateEntry(sender: TObject; aCol,
   aRow: Integer; const OldValue: string; var NewValue: String);
 begin
-if aCol in [0,4,5,7] then NewValue:=OldValue
-  else if OldValue<>NewValue then gridchanged:=true;
+if aCol in [0,4,5] then NewValue:=OldValue
+  else if OldValue<>NewValue then begin
+    gridchanged:=true;
+    if (aCol=1)and((OldValue=rsTelescope)or(OldValue=rsCursor)) then begin
+      StringGrid1.Cells[7,aRow]:=NewValue;
+      aCol:=7;
+    end;
+    if aCol=7 then UpdateLabels(nil);
+  end;
 end;
 
 procedure Tf_obslist.PageControl1Change(Sender: TObject);
@@ -1074,6 +1082,7 @@ var ra,de: double;
 begin
 r:=StringGrid1.Row;
 FObjName:=trim(StringGrid1.Cells[1,r]);
+if (FObjName=rsTelescope)or(FObjName=rsCursor) then FObjName:=trim(StringGrid1.Cells[7,r]);
 ra:=StrToFloatDef(trim(StringGrid1.Cells[2,r]),-1);
 de:=StrToFloatDef(trim(StringGrid1.Cells[3,r]),0);
 if (ra>=0) and assigned(FSlew) then FSlew(FObjName,ra,de);

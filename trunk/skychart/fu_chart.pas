@@ -74,6 +74,8 @@ type
     MenuCircle9: TMenuItem;
     MenuCircle10: TMenuItem;
     EyepieceMask: TMenuItem;
+    MenuTelescopeToObsList: TMenuItem;
+    MenuCursorToObsList: TMenuItem;
     Resetalllabel: TMenuItem;
     RecoverLabel: TMenuItem;
     MenuObslistFirst: TMenuItem;
@@ -182,6 +184,8 @@ type
     procedure chart_imglistExecute(Sender: TObject);
     procedure MenuCircleClick(Sender: TObject);
     procedure MenuAddToObsListClick(Sender: TObject);
+    procedure MenuCursorToObsListClick(Sender: TObject);
+    procedure MenuTelescopeToObsListClick(Sender: TObject);
     procedure ResetalllabelClick(Sender: TObject);
     procedure MenuObslistFirstClick(Sender: TObject);
     procedure MenuObslistLastClick(Sender: TObject);
@@ -4235,9 +4239,10 @@ function Tf_chart.cmd_Slew(RA1,DE1:string):string;
 var ra,dec:double;
     ok:boolean;
 begin
-  Result:=msgFailed;
+ Result:=msgFailed;
+ if Connect1.checked then begin
   if (RA1='') and (DE1='') then begin
-    if Connect1.checked then begin
+
       if sc.cfgsc.ASCOMTelescope then begin
          SlewASCOM(self);
          result:=msgOK;
@@ -4254,7 +4259,7 @@ begin
         SlewINDI(self);
         result:=msgOK;
       end;
-    end;
+
   end
   else begin
     ra:=StrToFloatDef(RA1,9999);
@@ -4282,6 +4287,7 @@ begin
     end
     else result:=msgFailed+' out of range';
   end;
+ end;
 end;
 
 function Tf_chart.cmd_AbortSlew:string;
@@ -4597,6 +4603,23 @@ end;
 procedure Tf_chart.MenuAddToObsListClick(Sender: TObject);
 begin
  f_obslist.Add(sc.cfgsc.FindName,rad2deg*sc.cfgsc.FindRA2000,rad2deg*sc.cfgsc.FindDec2000);
+end;
+
+procedure Tf_chart.MenuCursorToObsListClick(Sender: TObject);
+var a,d: double;
+begin
+   GetAdXy(Xcursor,Ycursor,a,d,sc.cfgsc);
+   CoordCharttoJ2000(a,d);
+   f_obslist.Add(rsCursor, rad2deg*a, rad2deg*d);
+end;
+
+procedure Tf_chart.MenuTelescopeToObsListClick(Sender: TObject);
+var a,d: double;
+begin
+  a:=sc.cfgsc.ScopeRa;
+  d:=sc.cfgsc.ScopeDec;
+  CoordCharttoJ2000(a,d);
+  f_obslist.Add(rsTelescope,rad2deg*a,rad2deg*d);
 end;
 
 procedure Tf_chart.ResetalllabelClick(Sender: TObject);

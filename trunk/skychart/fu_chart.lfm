@@ -450,6 +450,14 @@ object f_chart: Tf_chart
         ShortCut = 49231
         OnClick = MenuAddToObsListClick
       end
+      object MenuTelescopeToObsList: TMenuItem
+        Caption = 'Add telescope position'
+        OnClick = MenuTelescopeToObsListClick
+      end
+      object MenuCursorToObsList: TMenuItem
+        Caption = 'Add cursor position'
+        OnClick = MenuCursorToObsListClick
+      end
     end
     object MenuLabel: TMenuItem
       Caption = 'Labels'
