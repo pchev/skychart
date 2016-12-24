@@ -5050,6 +5050,8 @@ for i:=1 to def_cfgsc.nrectangle do begin
   def_cfgsc.rectanglelbl[i]:='';
 end;
 def_cfgsc.CalGraphHeight:=100;
+def_cfgsc.PlanisphereTime:=false;
+def_cfgsc.PlanisphereDate:=false;
 def_cfgsc.CircleLabel:=true;
 def_cfgsc.RectangleLabel:=true;
 def_cfgsc.marknumlabel:=true;

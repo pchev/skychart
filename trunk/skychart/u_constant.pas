@@ -1025,6 +1025,8 @@ type
     CometMark,AsteroidMark: Tstringlist;
     // Calendar
     CalGraphHeight: integer;
+    // Planisphere
+    PlanisphereDate, PlanisphereTime: boolean;
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_skychart);
@@ -1402,7 +1404,7 @@ const
     );
 
   // Chart Commands
-  numcmd = 120;
+  numcmd = 122;
   cmdlist: array[1..numcmd, 1..3] of string = (
     ('ZOOM+', '1', ''),
     ('ZOOM-', '2', ''),
@@ -1525,7 +1527,9 @@ const
     ('OBSLISTTRANSITSIDE','117','EAST/WEST/BOTH'),
     ('GETSCOPERATES','118',''),
     ('SCOPEMOVEAXIS','119','axis(0/1) rate'),
-    ('SETSCOPEREFRESHRATE','120','delay [ms]')
+    ('SETSCOPEREFRESHRATE','120','delay [ms]'),
+    ('PLANISPHEREDATE','121','ON/OFF'),
+    ('PLANISPHERETIME','122','ON/OFF')
     );
 
 // INDI Telescope driver
@@ -2454,6 +2458,8 @@ begin
   end;
   CircleLabel := Source.CircleLabel;
   CalGraphHeight := Source.CalGraphHeight;
+  PlanisphereDate := Source.PlanisphereDate;
+  PlanisphereTime := Source.PlanisphereTime;
   RectangleLabel := Source.RectangleLabel;
   CometMark.Clear;
   for i := 0 to Source.CometMark.Count - 1 do

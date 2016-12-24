@@ -383,6 +383,8 @@ type
     function cmd_ShowCircle(numlist: string):string;
     function cmd_ShowRectangle(numlist: string):string;
     function cmd_MarkCenter(onoff: string):string;
+    function cmd_SetPlanisphereTime(onoff:string):string;
+    function cmd_SetPlanisphereDate(onoff:string):string;
     function ExecuteCmd(arg:Tstringlist):string;
     function SaveChartImage(format,fn : string; quality: integer=95):boolean;
     Procedure ZoomBox(action,x,y:integer);
@@ -5099,6 +5101,8 @@ case n of
  118 : result:= cmd_GetScopeRates;
  119 : result:= cmd_ScopeMoveAxis(arg[1], arg[2]);
  120 : result:= cmd_SetScopeRefreshRate(arg[1]);
+ 121 : result:= cmd_SetPlanisphereDate(arg[1]);
+ 122 : result:= cmd_SetPlanisphereTime(arg[1]);
 else result:=msgFailed+' Bad command name';
 end;
 end;
@@ -5506,6 +5510,18 @@ end;
 function Tf_chart.cmd_MarkCenter(onoff: string):string;
 begin
   sc.cfgsc.ShowCircle:=(onoff='ON');
+  result:=msgOK;
+end;
+
+function Tf_chart.cmd_SetPlanisphereTime(onoff:string):string;
+begin
+  sc.cfgsc.PlanisphereTime:=(onoff='ON');
+  result:=msgOK;
+end;
+
+function Tf_chart.cmd_SetPlanisphereDate(onoff:string):string;
+begin
+  sc.cfgsc.PlanisphereDate:=(onoff='ON');
   result:=msgOK;
 end;
 
