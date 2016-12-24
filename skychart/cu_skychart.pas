@@ -141,6 +141,8 @@ Tskychart = class (TComponent)
     function DrawHorizon:boolean;
     function DrawEcliptic:boolean;
     function DrawGalactic:boolean;
+    function DrawPlanisphereDate:boolean;
+    function DrawPlanisphereTime:boolean;
     Procedure OptimizeLabels;
     function DrawLabels:boolean;
     Procedure DrawLegend;
@@ -395,6 +397,10 @@ end;
   // the compass and scale
   DrawCompass;
   DrawTarget;
+
+  // Planisphere
+  DrawPlanisphereDate;
+  DrawPlanisphereTime;
 
   // Draw the chart border
   DrawBorder;
@@ -4585,6 +4591,225 @@ for i:=0 to (360 div mult) do begin
   end;
   x1:=x2;
   y1:=y2;
+end;
+result:=true;
+end;
+
+function Tskychart.DrawPlanisphereDate:boolean;
+var ar,de,de1,de11,de2,de3,b,b1,b11,b2,b3,xxm,yym,xx2,yy2,xx4,yy4,xx6,yy6 : double;
+    et,eq,dd,th: double;
+    m,md,i,h,color,lx,ly,rot : integer;
+    xm,ym,x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6:single;
+    first : boolean;
+    mask:TBGRABitmap;
+    cbg,ctr:TBGRAPixel;
+    pt: array[0..365] of TPointF;
+    txt: string;
+
+const day2deg = 360/365;
+      hrefr = 34/60;
+      MonthStart: array [1..13] of integer = (1,32,60,91,121,152,182,213,244,274,305,335,366);
+      MonthName: array [1..12] of string =('January','February','March','April','May','June','July','August','September','October','November','December');
+begin
+result:=false;
+if not cfgsc.PlanisphereDate then exit;
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw planisphere date');
+th:=Fplot.cfgplot.FontSize[1]*Fplot.cfgchart.fontscale*96/72;
+th:=1.2*rad2deg*th/cfgsc.BxGlb;
+if cfgsc.ObsLatitude>0 then begin
+  b:=cfgsc.ObsLatitude-90-hrefr;
+  b1:=b-th/8;
+  b11:=b-th/4;
+  b2:=b-th;
+  b3:=b2-th;
+end
+else begin
+  b:=cfgsc.ObsLatitude+90+hrefr;
+  b1:=b+th/8;
+  b11:=b+th/4;
+  b2:=b+th;
+  b3:=b2+th;
+end;
+
+{ TODO : Compute the following values to allow to make planisphere for other centuries. }
+eq:=79.5; // mean equinox day number (March 20 12h)
+et:=440;  // equation of time on the equinox day (7m20s)
+dd:=eq+et/240;  // day number corresponding to RA=0
+
+// mask , use same polygone as date
+for i:=0 to 365 do begin
+  ar:=deg2rad*day2deg*(i-dd);
+  ar:=rmod(ar+pi2,pi2);
+  de:=deg2rad*b;
+  projection(ar,de,xx2,yy2,true,cfgsc) ;
+  WindowXY(xx2,yy2,x2,y2,cfgsc);
+  pt[i].x:=x2;
+  pt[i].y:=y2;
+end;
+cbg:=ColorToBGRA(fplot.cfgplot.bgcolor);
+ctr:=ColorToBGRA(clBlack);
+mask:=TBGRABitmap.Create(fplot.cfgchart.Width,fplot.cfgchart.Height,cbg);
+mask.FillPoly(pt,ctr,dmSet);
+Fplot.PlotImage(mask.Width/2,mask.Height/2,mask.Width,mask.Height,0,1,1,false,true,mask,2);
+mask.free;
+color := Fplot.cfgplot.Color[15];
+// date scale
+first:=true;
+x1:=0; y1:=0;
+x3:=0; y3:=0;
+m:=1; md:=1;
+for i:=0 to 365 do begin
+  ar:=deg2rad*day2deg*(i-dd);
+  ar:=rmod(ar+pi2,pi2);
+  de:=deg2rad*b;
+  de1:=deg2rad*b1;
+  de11:=deg2rad*b11;
+  de2:=deg2rad*b2;
+  projection(ar,de,xx2,yy2,true,cfgsc) ;
+  WindowXY(xx2,yy2,x2,y2,cfgsc);
+  projection(ar,de2,xx4,yy4,true,cfgsc) ;
+  WindowXY(xx4,yy4,x4,y4,cfgsc);
+  if (md mod 5) = 0 then
+    projection(ar,de11,xxm,yym,true,cfgsc)
+  else
+    projection(ar,de1,xxm,yym,true,cfgsc) ;
+  WindowXY(xxm,yym,xm,ym,cfgsc);
+  if first then
+     first:=false
+  else begin
+    if ((intpower(x2-x1,2)+intpower(y2-y1,2))<cfgsc.x2) then begin
+       FPlot.PlotLine(x1,y1,x2,y2,color,1);
+       FPlot.PlotLine(x2,y2,xm,ym,color,1);
+       FPlot.PlotLine(x3,y3,x4,y4,color,1);
+    end;
+    if i=MonthStart[m] then begin
+       FPlot.PlotLine(x2,y2,x4,y4,color,1);
+       md:=1;
+    end;
+    if i=(MonthStart[m]+20) then begin
+      txt:=MonthName[m];
+      lx:=round(x2);
+      ly:=round(y2);
+      rot:=round(rad2deg * RotationAngle(xx4, yy4, xx2, yy2, cfgsc))+5;
+      Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laTop,txt,cfgsc.WhiteBg,false,false,0,rot);
+      inc(m);
+    end;
+  end;
+  inc(md);
+  x1:=x2;
+  y1:=y2;
+  x3:=x4;
+  y3:=y4;
+end;
+// RA scale
+first:=true;
+h:=0;
+x3:=0; y3:=0;
+x5:=0; y5:=0;
+for i:=0 to 360 do begin
+  ar:=deg2rad*i;
+  de2:=deg2rad*b2;
+  de3:=deg2rad*b3;
+  projection(ar,de2,xx4,yy4,true,cfgsc) ;
+  WindowXY(xx4,yy4,x4,y4,cfgsc);
+  projection(ar,de3,xx6,yy6,true,cfgsc) ;
+  WindowXY(xx6,yy6,x6,y6,cfgsc);
+  if first then
+     first:=false
+  else begin
+    if ((intpower(x4-x3,2)+intpower(y4-y3,2))<cfgsc.x2) then begin
+       FPlot.PlotLine(x5,y5,x6,y6,color,1);
+    end;
+    if (i mod 15)=0 then begin
+       FPlot.PlotLine(x4,y4,x6,y6,color,1);
+       h:=i div 15;
+    end;
+    if (i mod 15)=5 then begin
+       txt:=IntToStr(h)+'h';
+       lx:=round(x4);
+       ly:=round(y4);
+       rot:=round(rad2deg * RotationAngle(xx6, yy6, xx4, yy4, cfgsc));
+       Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laTop,txt,cfgsc.WhiteBg,false,false,0,rot);
+    end;
+  end;
+  x3:=x4;
+  y3:=y4;
+  x5:=x6;
+  y5:=y6;
+end;
+result:=true;
+end;
+
+function Tskychart.DrawPlanisphereTime:boolean;
+var ar,de,de1,de11,de2,b,b1,b11,b2,xxm,yym,xx2,yy2,xx4,yy4,th,st : double;
+    i,h,color,lx,ly,rot : integer;
+    xm,ym,x1,y1,x2,y2,x3,y3,x4,y4:single;
+    first : boolean;
+    txt: string;
+
+const hrefr = 34/60;
+begin
+result:=false;
+if not cfgsc.PlanisphereTime then exit;
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw planisphere time');
+th:=Fplot.cfgplot.FontSize[1]*Fplot.cfgchart.fontscale*96/72;
+th:=1.2*rad2deg*th/cfgsc.BxGlb;
+if cfgsc.ObsLatitude>0 then begin
+  b:=cfgsc.ObsLatitude-90-hrefr;
+  b1:=b+th/8;
+  b11:=b+th/4;
+  b2:=b+th;
+end
+else begin
+  b:=cfgsc.ObsLatitude+90+hrefr;
+  b1:=b-th/8;
+  b11:=b-th/4;
+  b2:=b-th;
+end;
+color := Fplot.cfgplot.Color[15];
+// Time scale
+st:=cfgsc.CurST;
+first:=true;
+x1:=0; y1:=0;
+x3:=0; y3:=0;
+for i:=0 to 288 do begin //  1/288 = 5 minutes
+  ar:=st-pi+deg2rad*i*360/288;
+  ar:=rmod(ar+pi2,pi2);
+  de:=deg2rad*b;
+  de1:=deg2rad*b1;
+  de11:=deg2rad*b11;
+  de2:=deg2rad*b2;
+  projection(ar,de,xx2,yy2,true,cfgsc) ;
+  WindowXY(xx2,yy2,x2,y2,cfgsc);
+  projection(ar,de2,xx4,yy4,true,cfgsc) ;
+  WindowXY(xx4,yy4,x4,y4,cfgsc);
+  if (i mod 3) = 0 then
+    projection(ar,de11,xxm,yym,true,cfgsc)
+  else
+    projection(ar,de1,xxm,yym,true,cfgsc) ;
+  WindowXY(xxm,yym,xm,ym,cfgsc);
+  if first then
+     first:=false
+  else begin
+    if ((intpower(x2-x1,2)+intpower(y2-y1,2))<cfgsc.x2) then begin
+       FPlot.PlotLine(x1,y1,x2,y2,color,1);
+       FPlot.PlotLine(x2,y2,xm,ym,color,1);
+       FPlot.PlotLine(x3,y3,x4,y4,color,1);
+    end;
+    if (i mod 12)=0 then begin
+      FPlot.PlotLine(x2,y2,x4,y4,color,1);
+      h:=24-(i div 12);
+      txt:=inttostr(h)+'h';
+      lx:=round(x2);
+      ly:=round(y2);
+      rot:=round(rad2deg * RotationAngle(xx4, yy4, xx2, yy2, cfgsc))+5;
+      Fplot.PlotText(lx,ly,1,Fplot.cfgplot.LabelColor[7],laLeft,laTop,txt,cfgsc.WhiteBg,false,false,0,rot);
+    end;
+  end;
+  x1:=x2;
+  y1:=y2;
+  x3:=x4;
+  y3:=y4;
 end;
 result:=true;
 end;
