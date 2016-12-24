@@ -4743,8 +4743,11 @@ end;
 function Tskychart.DrawPlanisphereTime:boolean;
 var ar,de,de1,de11,de2,b,b1,b11,b2,xxm,yym,xx2,yy2,xx4,yy4,th,st : double;
     i,h,color,lx,ly,rot : integer;
-    xm,ym,x1,y1,x2,y2,x3,y3,x4,y4:single;
+    xm,ym,x1,y1,x2,y2,x4,y4:single;
     first : boolean;
+    mask:TBGRABitmap;
+    cbg,ctr:TBGRAPixel;
+    pt: array[0..365] of TPointF;
     txt: string;
 
 const hrefr = 34/60;
@@ -4766,12 +4769,27 @@ else begin
   b11:=b-th/4;
   b2:=b-th;
 end;
+st:=cfgsc.CurST;
+// mask
+for i:=0 to 288 do begin
+  ar:=st-pi+deg2rad*i*360/288;
+  ar:=rmod(ar+pi2,pi2);
+  de:=deg2rad*b;
+  projection(ar,de,xx2,yy2,true,cfgsc) ;
+  WindowXY(xx2,yy2,x2,y2,cfgsc);
+  pt[i].x:=x2;
+  pt[i].y:=y2;
+end;
+cbg:=ColorToBGRA(fplot.cfgplot.bgcolor);
+ctr:=ColorToBGRA(clBlack);
+mask:=TBGRABitmap.Create(fplot.cfgchart.Width,fplot.cfgchart.Height,cbg);
+mask.FillPoly(pt,ctr,dmSet);
+Fplot.PlotImage(mask.Width/2,mask.Height/2,mask.Width,mask.Height,0,1,1,false,true,mask,2);
+mask.free;
 color := Fplot.cfgplot.Color[15];
 // Time scale
-st:=cfgsc.CurST;
 first:=true;
 x1:=0; y1:=0;
-x3:=0; y3:=0;
 for i:=0 to 288 do begin //  1/288 = 5 minutes
   ar:=st-pi+deg2rad*i*360/288;
   ar:=rmod(ar+pi2,pi2);
@@ -4794,7 +4812,6 @@ for i:=0 to 288 do begin //  1/288 = 5 minutes
     if ((intpower(x2-x1,2)+intpower(y2-y1,2))<cfgsc.x2) then begin
        FPlot.PlotLine(x1,y1,x2,y2,color,1);
        FPlot.PlotLine(x2,y2,xm,ym,color,1);
-       FPlot.PlotLine(x3,y3,x4,y4,color,1);
     end;
     if (i mod 12)=0 then begin
       FPlot.PlotLine(x2,y2,x4,y4,color,1);
@@ -4808,8 +4825,6 @@ for i:=0 to 288 do begin //  1/288 = 5 minutes
   end;
   x1:=x2;
   y1:=y2;
-  x3:=x4;
-  y3:=y4;
 end;
 result:=true;
 end;
