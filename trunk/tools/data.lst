@@ -362,6 +362,7 @@ data/script/LocationTime.cdcps
 data/script/ObserverTool.cdcps
 data/script/PHDguiding.cdcps
 data/script/SolarSystem.cdcps
+data/script/Planisphere.cdcps
 data/stars
 data/stars/PhotoBW.bmp
 data/stars/PhotoColor.bmp
