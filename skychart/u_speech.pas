@@ -64,7 +64,7 @@ begin
 end;
 {$endif}
 
-{$ifdef linux}
+{$if defined(linux) or defined(freebsd)}
 procedure GetLang;
 var ll:TStringList;
     sl,buf,buf1:string;
