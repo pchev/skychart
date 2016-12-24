@@ -2104,10 +2104,11 @@ var i: integer;
   procedure ProcessMenu(Amenu: TMenuItem);
   var k: integer;
   begin
-    for k:=0 to Amenu.Count-1 do begin
-       TPSScript(Sender).AddRegisteredVariable(Amenu.Items[k].Name, 'TMenuItem');
-       ProcessMenu(Amenu[k]);
-    end;
+    for k:=0 to Amenu.Count-1 do
+      if trim(Amenu.Items[k].Name)<>'' then begin
+         TPSScript(Sender).AddRegisteredVariable(Amenu.Items[k].Name, 'TMenuItem');
+         ProcessMenu(Amenu[k]);
+      end;
   end;
 
 begin
