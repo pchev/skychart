@@ -4595,6 +4595,10 @@ end;
 result:=true;
 end;
 
+{ TODO : Check FPC bug on ARM }
+{$IFDEF CPUARM}
+{$OPTIMIZATION NOREGVAR}
+{$ENDIF}
 function Tskychart.DrawPlanisphereDate:boolean;
 var ar,de,de1,de11,de2,de3,b,b1,b11,b2,b3,xxm,yym,xx2,yy2,xx4,yy4,xx6,yy6 : double;
     et,eq,dd,th: double;
@@ -4828,6 +4832,9 @@ for i:=0 to 288 do begin //  1/288 = 5 minutes
 end;
 result:=true;
 end;
+{$IFDEF CPUARM}
+{$OPTIMIZATION DEFAULT}
+{$ENDIF}
 
 Procedure Tskychart.InitLabels;
 var i,lid : integer;
