@@ -32,7 +32,7 @@ LAZDIR=%LAZDIR%
 # Compiler options
 ifndef fpcopts 
 #fpcopts=-O1 -g -gl -Ci -Cr -Co -Ct  // debug
-fpcopts=-O1 -OoREGVAR -Ch2000000 -CX -XX -Xs 
+fpcopts=-O3  -CX -XX -Xs 
 endif
 # LCL Platform
 ifndef LCL_PLATFORM

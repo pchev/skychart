@@ -28,7 +28,7 @@ files=$(wildcard $(COMPILER_UNITTARGETDIR)/*$(OEXT)) \
 LAZDIR=%LAZDIR%
 # Compiler options
 ifndef fpcopts 
-fpcopts=-O3 -OoREGVAR -Ch524288 -CX -XX -Xs 
+fpcopts=-O3  -CX -XX -Xs 
 endif
 # LCL Platform
 ifndef LCL_PLATFORM
