@@ -360,6 +360,7 @@ const
   Altaz = 1;
   Gal = 2;
   Ecl = 3;
+  ProjectionName='HAI MER CAR ARC TAN SIN';
   ftAll = 0;
   ftStar = 1;
   ftVar = 2;
@@ -1404,7 +1405,7 @@ const
     );
 
   // Chart Commands
-  numcmd = 122;
+  numcmd = 125;
   cmdlist: array[1..numcmd, 1..3] of string = (
     ('ZOOM+', '1', ''),
     ('ZOOM-', '2', ''),
@@ -1529,7 +1530,10 @@ const
     ('SCOPEMOVEAXIS','119','axis(0/1) rate'),
     ('SETSCOPEREFRESHRATE','120','delay [ms]'),
     ('PLANISPHEREDATE','121','ON/OFF'),
-    ('PLANISPHERETIME','122','ON/OFF')
+    ('PLANISPHERETIME','122','ON/OFF'),
+    ('SETFOVPROJECTION','123','FOV_NUM HAI/MER/CAR/ARC/TAN/SIN'),
+    ('SHOWONLYMERIDIAN','124','ON/OFF'),
+    ('SHOWALWAYSMERIDIAN','125','ON/OFF')
     );
 
 // INDI Telescope driver

@@ -385,6 +385,9 @@ type
     function cmd_MarkCenter(onoff: string):string;
     function cmd_SetPlanisphereTime(onoff:string):string;
     function cmd_SetPlanisphereDate(onoff:string):string;
+    function cmd_SetFOVProjection(fnum,proj:string):string;
+    function cmd_ShowOnlyMeridian(onoff:string):string;
+    function cmd_ShowAlwaysMeridian(onoff:string):string;
     function ExecuteCmd(arg:Tstringlist):string;
     function SaveChartImage(format,fn : string; quality: integer=95):boolean;
     Procedure ZoomBox(action,x,y:integer);
@@ -5103,6 +5106,9 @@ case n of
  120 : result:= cmd_SetScopeRefreshRate(arg[1]);
  121 : result:= cmd_SetPlanisphereDate(arg[1]);
  122 : result:= cmd_SetPlanisphereTime(arg[1]);
+ 123 : result:= cmd_SetFOVProjection(arg[1], arg[2]);
+ 124 : result:= cmd_ShowOnlyMeridian(arg[1]);
+ 125 : result:= cmd_ShowAlwaysMeridian(arg[1]);
 else result:=msgFailed+' Bad command name';
 end;
 end;
@@ -5522,6 +5528,30 @@ end;
 function Tf_chart.cmd_SetPlanisphereDate(onoff:string):string;
 begin
   sc.cfgsc.PlanisphereDate:=(onoff='ON');
+  result:=msgOK;
+end;
+
+function Tf_chart.cmd_SetFOVProjection(fnum,proj:string):string;
+var i,n: integer;
+begin
+ result:=msgFailed;
+ i:=StrToIntDef(fnum,-1);
+ n:=pos(proj,ProjectionName);
+ if (i>=0)and(i<=MaxField)and(n>=0)and(length(proj)=3) then begin
+   sc.cfgsc.projname[i]:=proj;
+   result:=msgOK;
+ end;
+end;
+
+function Tf_chart.cmd_ShowOnlyMeridian(onoff:string):string;
+begin
+  sc.cfgsc.ShowOnlyMeridian:=(onoff='ON');
+  result:=msgOK;
+end;
+
+function Tf_chart.cmd_ShowAlwaysMeridian(onoff:string):string;
+begin
+  sc.cfgsc.ShowAlwaysMeridian:=(onoff='ON');
   result:=msgOK;
 end;
 
