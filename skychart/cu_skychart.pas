@@ -3323,74 +3323,76 @@ end else begin
   linestyle:=cfgsc.StyleGrid;
 end;
 DrawPole(Equat);
-n:=cfgsc.FieldNum;
-dde:=Fcatalog.cfgshr.DegreeGridSpacing[n];
-lda1:=Fcatalog.cfgshr.HourGridSpacing[n]*15*cos(cfgsc.decentre);
-lda2:=lda1;
-while (lda1<dde)and(n<MaxField) do begin
-  lda2:=lda1;
-  n:=n+1;
+if not cfgsc.ShowOnlyMeridian then begin
+  n:=cfgsc.FieldNum;
+  dde:=Fcatalog.cfgshr.DegreeGridSpacing[n];
   lda1:=Fcatalog.cfgshr.HourGridSpacing[n]*15*cos(cfgsc.decentre);
-end;
-lda1:=abs(dde-lda1);
-lda2:=abs(dde-lda2);
-if lda2<lda1 then n:=min(n-1,MaxField);
-dra:=Fcatalog.cfgshr.HourGridSpacing[n];
-if dde>1000 then dde:=dde-1000;
-ra1:=deg2rad*trunc(rad2deg*cfgsc.racentre/15/dra)*dra*15;
-de1:=deg2rad*trunc(rad2deg*cfgsc.decentre/dde)*dde;
-dra:=deg2rad*dra*15;
-dde:=deg2rad*dde;
-ac:=ra1; dc:=de1;
-lh:=2*fplot.GetTextSize(1,'1',7).cy;
-lt:=round(abs(1.2*cfgsc.BxGlb*dde/3));
-dir:=1;
-rot:=rmod(720+rad2deg*CenterRot,360);
-case round(rot) of
-0..45    : if cfgsc.decentre>0 then dir:=1 else dir:=2;
-46..135  : if cfgsc.decentre>0 then dir:=4 else dir:=3;
-136..225 : if cfgsc.decentre>0 then dir:=2 else dir:=1;
-226..315 : if cfgsc.decentre>0 then dir:=3 else dir:=4;
-316..360 : if cfgsc.decentre>0 then dir:=1 else dir:=2;
-end;
-repeat
-  labelok:=false;
-  if cfgsc.decentre>0 then begin
-    ok:=DrawRAline(ac,dc,-dde);
-    ok:=DrawRAline(ac,dc,dde) or ok;
-  end else begin
-    ok:=DrawRAline(ac,dc,dde);
-    ok:=DrawRAline(ac,dc,-dde) or ok;
+  lda2:=lda1;
+  while (lda1<dde)and(n<MaxField) do begin
+    lda2:=lda1;
+    n:=n+1;
+    lda1:=Fcatalog.cfgshr.HourGridSpacing[n]*15*cos(cfgsc.decentre);
   end;
-  ac:=ac+dra;
-until (not ok)or(ac>ra1+pi+musec);
-ac:=ra1; dc:=de1;
-repeat
-  labelok:=false;
-  if cfgsc.decentre>0 then begin
-    ok:=DrawRAline(ac,dc,-dde);
-    ok:=DrawRAline(ac,dc,dde) or ok;
-  end else begin
-    ok:=DrawRAline(ac,dc,dde);
-    ok:=DrawRAline(ac,dc,-dde) or ok;
+  lda1:=abs(dde-lda1);
+  lda2:=abs(dde-lda2);
+  if lda2<lda1 then n:=min(n-1,MaxField);
+  dra:=Fcatalog.cfgshr.HourGridSpacing[n];
+  if dde>1000 then dde:=dde-1000;
+  ra1:=deg2rad*trunc(rad2deg*cfgsc.racentre/15/dra)*dra*15;
+  de1:=deg2rad*trunc(rad2deg*cfgsc.decentre/dde)*dde;
+  dra:=deg2rad*dra*15;
+  dde:=deg2rad*dde;
+  ac:=ra1; dc:=de1;
+  lh:=2*fplot.GetTextSize(1,'1',7).cy;
+  lt:=round(abs(1.2*cfgsc.BxGlb*dde/3));
+  dir:=1;
+  rot:=rmod(720+rad2deg*CenterRot,360);
+  case round(rot) of
+  0..45    : if cfgsc.decentre>0 then dir:=1 else dir:=2;
+  46..135  : if cfgsc.decentre>0 then dir:=4 else dir:=3;
+  136..225 : if cfgsc.decentre>0 then dir:=2 else dir:=1;
+  226..315 : if cfgsc.decentre>0 then dir:=3 else dir:=4;
+  316..360 : if cfgsc.decentre>0 then dir:=1 else dir:=2;
   end;
-  ac:=ac-dra;
-until (not ok)or(ac<ra1-pi-musec);
-ac:=ra1; dc:=de1;
-lt:=round(abs(1.2*cfgsc.BxGlb*dra/3));
-repeat
-  labelok:=false;
-  ok:=DrawDEline(ac,dc,dra);
-  ok:=DrawDEline(ac,dc,-dra) or ok;
-  dc:=dc+dde;
-until (not ok)or(dc>pid2);
-ac:=ra1; dc:=de1;
-repeat
-  labelok:=false;
-  ok:=DrawDEline(ac,dc,dra);
-  ok:=DrawDEline(ac,dc,-dra) or ok;
-  dc:=dc-dde;
-until (not ok)or(dc<-pid2);
+  repeat
+    labelok:=false;
+    if cfgsc.decentre>0 then begin
+      ok:=DrawRAline(ac,dc,-dde);
+      ok:=DrawRAline(ac,dc,dde) or ok;
+    end else begin
+      ok:=DrawRAline(ac,dc,dde);
+      ok:=DrawRAline(ac,dc,-dde) or ok;
+    end;
+    ac:=ac+dra;
+  until (not ok)or(ac>ra1+pi+musec);
+  ac:=ra1; dc:=de1;
+  repeat
+    labelok:=false;
+    if cfgsc.decentre>0 then begin
+      ok:=DrawRAline(ac,dc,-dde);
+      ok:=DrawRAline(ac,dc,dde) or ok;
+    end else begin
+      ok:=DrawRAline(ac,dc,dde);
+      ok:=DrawRAline(ac,dc,-dde) or ok;
+    end;
+    ac:=ac-dra;
+  until (not ok)or(ac<ra1-pi-musec);
+  ac:=ra1; dc:=de1;
+  lt:=round(abs(1.2*cfgsc.BxGlb*dra/3));
+  repeat
+    labelok:=false;
+    ok:=DrawDEline(ac,dc,dra);
+    ok:=DrawDEline(ac,dc,-dra) or ok;
+    dc:=dc+dde;
+  until (not ok)or(dc>pid2);
+  ac:=ra1; dc:=de1;
+  repeat
+    labelok:=false;
+    ok:=DrawDEline(ac,dc,dra);
+    ok:=DrawDEline(ac,dc,-dra) or ok;
+    dc:=dc-dde;
+  until (not ok)or(dc<-pid2);
+end;
 end;
 
 procedure Tskychart.DrawAzGrid(drawlabel:boolean);
