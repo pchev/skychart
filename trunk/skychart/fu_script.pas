@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses  u_translation, u_constant, u_help, pu_edittoolbar, pu_scriptengine, u_util,
-  fu_chart, cu_database, cu_catalog, cu_fits, cu_planet,
+  fu_chart, cu_database, cu_catalog, cu_fits, cu_planet, MultiFrame,
   ActnList, Menus, Classes, SysUtils, FileUtil, Forms, Controls, ExtCtrls,
   StdCtrls, ComCtrls, Buttons;
 
@@ -68,6 +68,7 @@ type
     FTimeVal,FMainTimeVal: TUpDown;
     FTimeU,FMainTimeU: TComboBox;
     FMainmenu: TMenu;
+    FMultiFrame: TMultiframe;
     Fcdb: TCDCdb;
     Fcatalog: TCatalog;
     Ffits : TFits;
@@ -94,6 +95,7 @@ type
     procedure SetSendInfo(value:TSendInfo);
     procedure SetActiveChart(value:Tf_chart);
     procedure SetMainmenu(value:TMenu);
+    procedure SetMultiFrame(value:TMultiFrame);
     procedure SetCDB(value:TCDCdb);
     procedure SetCatalog(value:TCatalog);
     procedure SetPlanet(value:TPlanet);
@@ -139,6 +141,7 @@ type
     property TimeVal: TUpDown read FTimeVal  write SetTimeVal ;
     property TimeU: TComboBox read FTimeU  write SetTimeU ;
     property Mainmenu: TMenu read FMainmenu  write SetMainmenu;
+    property MultiFrame: TMultiFrame read FMultiFrame  write SetMultiFrame;
     property cdb: TCDCdb read Fcdb  write SetCDB;
     property planet: Tplanet read Fplanet write Setplanet;
     property fits: Tfits read Ffits write Setfits;
@@ -248,6 +251,7 @@ begin
   fscriptengine.SendInfo:=FSendInfo;
   fscriptengine.Activechart:=FActivechart;
   fscriptengine.Mainmenu:=FMainmenu;
+  fscriptengine.MultiFrame:=FMultiFrame;
   fscriptengine.cdb:=Fcdb;
   fscriptengine.catalog:=Fcatalog;
   fscriptengine.fits:=Ffits;
@@ -404,6 +408,12 @@ procedure Tf_script.SetMainmenu(value:TMenu);
 begin
  FMainmenu:=value;
  if fscriptengine<>nil then fscriptengine.Mainmenu:=FMainmenu;
+end;
+
+procedure Tf_script.SetMultiFrame(value:TMultiFrame);
+begin
+ FMultiFrame:=value;
+ if fscriptengine<>nil then fscriptengine.MultiFrame:=FMultiFrame;
 end;
 
 procedure Tf_script.SetCDB(value:TCDCdb);

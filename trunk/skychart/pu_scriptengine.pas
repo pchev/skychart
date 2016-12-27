@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses  u_translation, u_constant, u_projection, u_help, UScaleDPI,
-  u_scriptsocket, u_util, ActnList, pu_pascaleditor, fpjson, jsonparser,
+  u_scriptsocket, u_util, ActnList, pu_pascaleditor, fpjson, jsonparser, MultiFrame,
   cu_database, cu_catalog, cu_fits, cu_planet, math, fu_chart, jdcalendar, upsi_translation,
   uPSComponent, uPSComponent_Default, uPSCompiler, uPSRuntime, uPSComponent_DB,
   uPSComponent_Forms, uPSComponent_Controls, uPSI_CheckLst, uPSComponent_StdCtrls,
@@ -193,6 +193,7 @@ type
     FGetScopeRates: TExecuteCmd;
     FSendInfo: TSendInfo;
     FMainmenu: TMenu;
+    FMultiFrame: TMultiframe;
     Fcdb: TCDCdb;
     Fcatalog: TCatalog;
     Ffits : TFits;
@@ -305,6 +306,7 @@ type
     property GetScopeRates: TExecuteCmd read FGetScopeRates write FGetScopeRates;
     property SendInfo: TSendInfo read FSendInfo write FSendInfo;
     property Mainmenu: TMenu read FMainmenu write FMainmenu;
+    property MultiFrame: TMultiframe read FMultiFrame write FMultiFrame;
     property cdb: TCDCdb read Fcdb  write Fcdb;
     property catalog: TCatalog read Fcatalog write Fcatalog;
     property fits: TFits read Ffits write Ffits;
@@ -621,6 +623,7 @@ begin
   varname:=uppercase(varname);
   if varname='TELESCOPERA' then x:=TelescopeRA
   else if varname='TELESCOPEDE' then x:=TelescopeDE
+  else if varname='SIDEREALTIME' then x:=ActiveChart.sc.cfgsc.CurST
   else if varname='TIMENOW' then x:=now
   else if varname='DOUBLE1' then x:=dlist[0]
   else if varname='DOUBLE2' then x:=dlist[1]
@@ -656,7 +659,9 @@ function  Tf_scriptengine.doGetI(varname:string; var i: Integer):Boolean;
 begin
   result:=true;
   varname:=uppercase(varname);
-  if varname='INT1' then i:=ilist[0]
+  if varname='CLIENTWIDTH' then i:=FMultiFrame.ClientWidth
+  else if varname='CLIENTHEIGHT' then i:=FMultiFrame.ClientHeight
+  else if varname='INT1' then i:=ilist[0]
   else if varname='INT2' then i:=ilist[1]
   else if varname='INT3' then i:=ilist[2]
   else if varname='INT4' then i:=ilist[3]

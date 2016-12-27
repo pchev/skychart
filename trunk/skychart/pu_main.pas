@@ -9808,6 +9808,7 @@ for i:=0 to numscript-1 do begin
   Fscript[i].TimeVal:=TimeVal;           // keep in sequence! 3 //
   Fscript[i].TimeU:=TimeU;
   Fscript[i].Mainmenu:=MainMenu1;
+  Fscript[i].MultiFrame:=MultiFrame1;
   Fscript[i].cdb:=cdcdb;
   Fscript[i].catalog:=catalog;
   Fscript[i].Fits:=Fits;
