@@ -4753,7 +4753,7 @@ var ar,de,de1,de11,de2,b,b1,b11,b2,xxm,yym,xx2,yy2,xx4,yy4,th,st : double;
     first : boolean;
     mask:TBGRABitmap;
     cbg,ctr:TBGRAPixel;
-    pt: array[0..365] of TPointF;
+    pt: array[0..288] of TPointF;
     txt: string;
 
 const hrefr = 34/60;
