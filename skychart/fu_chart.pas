@@ -717,7 +717,7 @@ if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
   sc.cfgsc.TrackOn:=true;
   sc.cfgsc.TrackType:=4;
 end;
-Refresh(true,true);
+Refresh(false,true);  // do not steal focus with autorefresh
 end;
 
 procedure Tf_chart.Refresh(setfocus,newtime:boolean);
