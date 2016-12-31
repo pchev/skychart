@@ -1591,6 +1591,7 @@ resourcestring
   rsSlower = 'Slower';
   rsFaster = 'Faster';
   rsCursor = 'Cursor';
+  rsLy = 'ly';
 
 // also update upsi_translation
 

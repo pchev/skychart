@@ -1117,7 +1117,7 @@ var rec:GcatRec;
   j,lid,saveplot,lnum,lp,rs : integer;
   first: boolean;
   firstcat:TSname;
-  gk,lis: string;
+  gk,lis,dlbl: string;
   al: TLabelAlign;
   p: coordvector;
 begin
@@ -1187,21 +1187,25 @@ if Fcatalog.OpenStar then
        if (rec.star.b_v>0.28)and(rec.star.b_v<0.30) then begin
           y1:=0;
        end;
-       if cfgsc.MagLabel then SetLabel(lid,xx,yy,rs,2,lnum,formatfloat(f2,rec.star.magv),al,labrotation(rec.ra,rec.dec,lnum,cfgsc),4,true)
-       else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, rs, 2, lnum, rec.str[3],al,labrotation(rec.ra,rec.dec,lnum,cfgsc),lp,true)
+       if cfgsc.DistLabel and rec.star.valid[vsPx] and (rec.star.px>0) then begin
+         str(parsec2ly/rec.star.px:5:0,dlbl);
+         dlbl:=' '+rsLy+':'+trim(dlbl);
+       end
+       else dlbl:='';
+       if cfgsc.MagLabel then
+          SetLabel(lid,xx,yy,rs,2,lnum,formatfloat(f2,rec.star.magv)+dlbl,al,labrotation(rec.ra,rec.dec,lnum,cfgsc),4,true)
+       else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then
+          SetLabel(lid, xx, yy, rs, 2, lnum, rec.str[3]+dlbl,al,labrotation(rec.ra,rec.dec,lnum,cfgsc),lp,true)
        else if rec.star.valid[vsGreekSymbol] then begin
           gk:=GreekSymbolUtf8(rec.star.greeksymbol);
           {$ifdef mswindows}
-          SetLabel(lid,xx,yy,rs,7,1,gk,al,labrotation(rec.ra,rec.dec,lnum,cfgsc),lp,true);
+          SetLabel(lid,xx,yy,rs,7,1,gk+dlbl,al,labrotation(rec.ra,rec.dec,lnum,cfgsc),lp,true);
           {$else}
-          if plot.cfgchart.onprinter and (not plot.cfgplot.UseBMP) then begin
-            plot.cfgplot.FontName[7]:='symbol';
-            SetLabel(lid,xx,yy,rs,7,lnum,gk,al,labrotation(rec.ra,rec.dec,lnum,cfgsc),lp,true);
-          end else SetLabel(lid,xx,yy,rs,2,lnum,gk,al,labrotation(rec.ra,rec.dec,lnum,cfgsc),lp,true);
+          SetLabel(lid,xx,yy,rs,2,lnum,gk+dlbl,al,labrotation(rec.ra,rec.dec,lnum,cfgsc),lp,true);
           {$endif}
         end else begin
            if lp>0 then lp:=4;
-           SetLabel(lid,xx,yy,rs,2,lnum,rec.star.id,al,labrotation(rec.ra,rec.dec,lnum,cfgsc),lp,true);
+           SetLabel(lid,xx,yy,rs,2,lnum,rec.star.id+dlbl,al,labrotation(rec.ra,rec.dec,lnum,cfgsc),lp,true);
         end;
     end;
  end;
@@ -2636,7 +2640,7 @@ begin
             str(rec.star.px*1000:6:1,txt);
             Desc:=Desc+trim(rec.options.flabel[lOffset+vsPx])+dp+txt+b+'[mas]'+tab;
             if rec.star.px>0 then begin
-               str(3.2616/rec.star.px:5:1,txt);
+               str(parsec2ly/rec.star.px:5:1,txt);
                Desc:=Desc+'Dist:'+txt+b+'[ly]'+tab;
             end;
          end;

@@ -2774,6 +2774,15 @@ object f_config_display: Tf_config_display
           )
           OnClick = MagLabelClick
           TabOrder = 5
+          object DistLabel: TCheckBox
+            Left = 95
+            Height = 25
+            Top = 31
+            Width = 116
+            Caption = 'Distance'
+            OnClick = DistLabelClick
+            TabOrder = 4
+          end
         end
         object constlabel: TRadioGroup
           Left = 247

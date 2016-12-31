@@ -46,6 +46,7 @@ type
     Button8: TButton;
     Button9: TButton;
     CheckBox1: TCheckBox;
+    DistLabel: TCheckBox;
     CheckBox2: TCheckBox;
     antialias: TCheckBox;
     CheckBox3: TCheckBox;
@@ -391,6 +392,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure CirclegridSelectCell(Sender: TObject; aCol, aRow: Integer;
       var CanSelect: Boolean);
+    procedure DistLabelClick(Sender: TObject);
     procedure labelmagChange(Sender: TObject);
     procedure LabelsizeChange(Sender: TObject);
     procedure LabelRotChange(Sender: TObject);
@@ -1463,6 +1465,7 @@ begin
  if csc.NameLabel then MagLabel.ItemIndex:=1
  else if csc.MagLabel then MagLabel.ItemIndex:=2
                       else MagLabel.itemindex:=0;
+ DistLabel.Checked:=csc.DistLabel;
  if csc.ConstFullLabel then begin
     if csc.ConstLatinLabel then constlabel.ItemIndex:=0
                            else constlabel.ItemIndex:=2;
@@ -2056,6 +2059,11 @@ procedure Tf_config_display.MagLabelClick(Sender: TObject);
 begin
 csc.MagLabel:=(MagLabel.ItemIndex=2);
 csc.NameLabel:=(MagLabel.ItemIndex=1);
+end;
+
+procedure Tf_config_display.DistLabelClick(Sender: TObject);
+begin
+  csc.DistLabel:=DistLabel.Checked;
 end;
 
 procedure Tf_config_display.constlabelClick(Sender: TObject);
