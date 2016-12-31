@@ -2595,7 +2595,7 @@ if result then begin
    rec.neb.id:=rec.neb.id+inttostr(lin.num);
    rec.str[1]:=inttostr(lin.ocl);
    rec.neb.morph:=lin.conc+lin.range+lin.rich+lin.neb;
-   rec.num[1]:=3.2616*lin.dist;
+   rec.num[1]:=parsec2ly*lin.dist;
    if lin.age>0 then rec.num[2]:=power(10,frac(lin.age/100));
    rec.num[3]:=lin.b_v/100;
    rec.num[4]:=lin.ns;

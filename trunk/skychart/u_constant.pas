@@ -100,6 +100,7 @@ const
   deg2rad = pi / 180;
   rad2deg = 180 / pi;
   au2parsec = deg2rad / 3600;
+  parsec2ly = 3.2615638;
   pi2 = 2 * pi;
   pi4 = 4 * pi;
   pid2 = pi / 2;
@@ -990,7 +991,7 @@ type
     FindPMde, FindPMEpoch, FindPMpx, FindPMrv, FindDist, FindBV, FindMag: double;
     Scope2Ra,Scope2Dec: double;
     DrawAllStarLabel, MovedLabelLine, StarFilter, NebFilter,
-    FindOK, WhiteBg, ShowLegend, MagLabel, NameLabel, ConstFullLabel, ConstLatinLabel,
+    FindOK, WhiteBg, ShowLegend, MagLabel, NameLabel, DistLabel, ConstFullLabel, ConstLatinLabel,
     ScopeMark, Scope2Mark, ScopeLock, FindPM, FindStarPM, FindPMfullmotion, AstNEO: boolean;
     EquinoxName, TargetName, TrackName, TrackId, FindName,
     FindDesc, FindDesc2, FindNote, FindCat, FindCatname, FindId: string;
@@ -2386,6 +2387,7 @@ begin
   FindOK := Source.FindOK;
   WhiteBg := Source.WhiteBg;
   MagLabel := Source.MagLabel;
+  DistLabel := Source.DistLabel;
   NameLabel := Source.NameLabel;
   ConstFullLabel := Source.ConstFullLabel;
   DrawAllStarLabel := Source.DrawAllStarLabel;
