@@ -1199,6 +1199,7 @@ if Fcatalog.OpenStar then
        else if rec.star.valid[vsGreekSymbol] then begin
           gk:=GreekSymbolUtf8(rec.star.greeksymbol);
           {$ifdef mswindows}
+          dlbl:=StringReplace(dlbl,rsLy,'',[]);
           SetLabel(lid,xx,yy,rs,7,1,gk+dlbl,al,labrotation(rec.ra,rec.dec,lnum,cfgsc),lp,true);
           {$else}
           SetLabel(lid,xx,yy,rs,2,lnum,gk+dlbl,al,labrotation(rec.ra,rec.dec,lnum,cfgsc),lp,true);
