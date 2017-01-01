@@ -1592,6 +1592,20 @@ resourcestring
   rsFaster = 'Faster';
   rsCursor = 'Cursor';
   rsLy = 'ly';
+  rsAddTelescope = 'Add telescope position';
+  rsAddCursorPos = 'Add cursor position';
+  rsJanuary = 'January';
+  rsFebruary = 'February';
+  rsMarch = 'March';
+  rsApril = 'April';
+  rsMay = 'May';
+  rsJune = 'June';
+  rsJuly = 'July';
+  rsAugust = 'August';
+  rsSeptember = 'September';
+  rsOctober = 'October';
+  rsNovember = 'November';
+  rsDecember = 'December';
 
 // also update upsi_translation
 

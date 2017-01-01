@@ -4619,8 +4619,6 @@ var ar,de,de1,de11,de2,de3,b,b1,b11,b2,b3,xxm,yym,xx2,yy2,xx4,yy4,xx6,yy6 : doub
 
 const day2deg = 360/365;
       hrefr = 34/60;
-      MonthStart: array [1..13] of integer = (1,32,60,91,121,152,182,213,244,274,305,335,366);
-      MonthName: array [1..12] of string =('January','February','March','April','May','June','July','August','September','October','November','December');
 begin
 result:=false;
 if not cfgsc.PlanisphereDate then exit;

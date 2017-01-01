@@ -7588,6 +7588,20 @@ pla[31]:=rsSatRing;
 pla[32]:=rsEarthShadow;
 for i:=1 to MaxPla do pla[i]:=trim(pla[i]);
 
+// Month
+MonthName[1]:=rsJanuary;
+MonthName[2]:=rsFebruary;
+MonthName[3]:=rsMarch;
+MonthName[4]:=rsApril;
+MonthName[5]:=rsMay;
+MonthName[6]:=rsJune;
+MonthName[7]:=rsJuly;
+MonthName[8]:=rsAugust;
+MonthName[9]:=rsSeptember;
+MonthName[10]:=rsOctober;
+MonthName[11]:=rsNovember;
+MonthName[12]:=rsDecember;
+
 // Menu accelerator
 for i:=0 to MaxMenulevel do AccelList[i]:='';
 SetMenuAccelerator(MainMenu1.items,0,AccelList);

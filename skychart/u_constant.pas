@@ -86,6 +86,8 @@ const
   // julian - gregorian calendar switch
   DefaultGregorianStart=15821015;
   DefaultGregorianStartJD=2299161;
+  MonthStart: array [1..13] of integer = (1,32,60,91,121,152,182,213,244,274,305,335,366);
+  MonthName: array [1..12] of string =('January','February','March','April','May','June','July','August','September','October','November','December');
   km_au = 149597870.691;
   clight = 299792.458;
   grsun = 1.974126e-8;  // twice the gravitational radius of the Sun
