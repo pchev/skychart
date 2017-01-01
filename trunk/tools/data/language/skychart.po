@@ -6246,3 +6246,67 @@ msgstr ""
 msgid "Faster"
 msgstr ""
 
+#: u_translation:rscursor
+msgid "Cursor"
+msgstr ""
+
+#: u_translation:rsly
+msgid "ly"
+msgstr ""
+
+#: u_translation:rsaddtelescope
+msgid "Add telescope position"
+msgstr ""
+
+#: u_translation:rsaddcursorpos
+msgid "Add cursor position"
+msgstr ""
+
+#: u_translation:rsjanuary
+msgid "January"
+msgstr ""
+
+#: u_translation:rsfebruary
+msgid "February"
+msgstr ""
+
+#: u_translation:rsmarch
+msgid "March"
+msgstr ""
+
+#: u_translation:rsapril
+msgid "April"
+msgstr ""
+
+#: u_translation:rsmay
+msgid "May"
+msgstr ""
+
+#: u_translation:rsjune
+msgid "June"
+msgstr ""
+
+#: u_translation:rsjuly
+msgid "July"
+msgstr ""
+
+#: u_translation:rsaugust
+msgid "August"
+msgstr ""
+
+#: u_translation:rsseptember
+msgid "September"
+msgstr ""
+
+#: u_translation:rsoctober
+msgid "October"
+msgstr ""
+
+#: u_translation:rsnovember
+msgid "November"
+msgstr ""
+
+#: u_translation:rsdecember
+msgid "December"
+msgstr ""
+

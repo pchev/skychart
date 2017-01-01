@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-12-18 14:36+0000\n"
+"POT-Creation-Date: 2017-01-01 16:00+0000\n"
 "PO-Revision-Date: 2015-03-17 04:47+0000\n"
 "Last-Translator: Fumiaki Tsumuraya <tsumutsumu@mac.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-18 14:44+0000\n"
+"X-Launchpad-Export-Date: 2017-01-01 16:16+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: u_translation.rs102cddss
@@ -144,6 +144,10 @@ msgstr ""
 msgid "Add a single element to the database. All fields are mandatory."
 msgstr ""
 
+#: u_translation.rsaddcursorpos
+msgid "Add cursor position"
+msgstr ""
+
 #: u_translation.rsaddequatoria
 msgid "Show equatorial grid"
 msgstr ""
@@ -158,6 +162,10 @@ msgstr ""
 
 #: u_translation.rsaddlabelfore
 msgid "Add label for every object in the list"
+msgstr ""
+
+#: u_translation.rsaddtelescope
+msgid "Add telescope position"
 msgstr ""
 
 #: u_translation.rsaddthealtern
@@ -324,6 +332,10 @@ msgstr ""
 msgid "Apply changes to all charts"
 msgstr ""
 
+#: u_translation.rsapril
+msgid "April"
+msgstr ""
+
 #: u_translation.rsarchivethisi
 msgid "Archive this image?"
 msgstr ""
@@ -434,6 +446,10 @@ msgstr ""
 
 #: u_translation.rsatmosphericr
 msgid "Atmospheric refraction"
+msgstr ""
+
+#: u_translation.rsaugust
+msgid "August"
 msgstr ""
 
 #: u_translation.rsauthors
@@ -1224,6 +1240,10 @@ msgstr ""
 msgid "Current driver"
 msgstr ""
 
+#: u_translation.rscursor
+msgid "Cursor"
+msgstr ""
+
 #: u_translation.rscustom
 msgid "Custom"
 msgstr ""
@@ -1358,6 +1378,10 @@ msgstr ""
 
 #: u_translation.rsdecelslewrat
 msgid "DEC/El Slew Rate"
+msgstr ""
+
+#: u_translation.rsdecember
+msgid "December"
 msgstr ""
 
 #: u_translation.rsdecimaldegre
@@ -2104,6 +2128,10 @@ msgstr ""
 msgid "Favorite"
 msgstr ""
 
+#: u_translation.rsfebruary
+msgid "February"
+msgstr ""
+
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
 msgstr ""
@@ -2776,6 +2804,10 @@ msgstr ""
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
 msgstr ""
 
+#: u_translation.rsjanuary
+msgid "January"
+msgstr ""
+
 #: u_translation.rsjd
 msgid "JD:"
 msgstr ""
@@ -2798,6 +2830,14 @@ msgstr ""
 
 #: u_translation.rsjulianyear
 msgid "Julian Year"
+msgstr ""
+
+#: u_translation.rsjuly
+msgid "July"
+msgstr ""
+
+#: u_translation.rsjune
+msgid "June"
 msgstr ""
 
 #: u_translation.rsjupiter
@@ -3096,6 +3136,10 @@ msgstr ""
 msgid "Lunar eclipses"
 msgstr ""
 
+#: u_translation.rsly
+msgid "ly"
+msgstr ""
+
 #: u_translation.rsmag
 msgid "Mag:"
 msgstr ""
@@ -3176,6 +3220,10 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
+#: u_translation.rsmarch
+msgid "March"
+msgstr ""
+
 #: u_translation.rsmark
 msgid "Mark"
 msgstr ""
@@ -3210,6 +3258,10 @@ msgstr ""
 
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
+msgstr ""
+
+#: u_translation.rsmay
+msgid "May"
 msgstr ""
 
 #: u_translation.rsmbytes
@@ -3632,6 +3684,10 @@ msgstr ""
 msgid "Not initialised"
 msgstr ""
 
+#: u_translation.rsnovember
+msgid "November"
+msgstr ""
+
 #: u_translation.rsnow
 msgid "Now"
 msgstr ""
@@ -3730,6 +3786,10 @@ msgstr ""
 
 #: u_translation.rsobsolete
 msgid "Obsolete"
+msgstr ""
+
+#: u_translation.rsoctober
+msgid "October"
 msgstr ""
 
 #: u_translation.rsoff
@@ -4930,6 +4990,10 @@ msgstr ""
 
 #: u_translation.rsseparator
 msgid "Separator"
+msgstr ""
+
+#: u_translation.rsseptember
+msgid "September"
 msgstr ""
 
 #: u_translation.rsserialport

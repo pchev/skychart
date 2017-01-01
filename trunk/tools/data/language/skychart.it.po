@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-18 14:36+0000\n"
+"POT-Creation-Date: 2017-01-01 16:00+0000\n"
 "PO-Revision-Date: 2016-12-11 08:42+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-18 14:44+0000\n"
+"X-Launchpad-Export-Date: 2017-01-01 16:16+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 "Language: it\n"
 
@@ -142,6 +142,10 @@ msgstr "Aggiungi"
 msgid "Add a single element to the database. All fields are mandatory."
 msgstr "Aggiungi un singolo elemento al database. Tutti i campi sono obbligatori."
 
+#: u_translation.rsaddcursorpos
+msgid "Add cursor position"
+msgstr ""
+
 #: u_translation.rsaddequatoria
 msgid "Show equatorial grid"
 msgstr "Mostra griglia equatoriale"
@@ -157,6 +161,10 @@ msgstr "Aggiungi Etichetta"
 #: u_translation.rsaddlabelfore
 msgid "Add label for every object in the list"
 msgstr "Aggiungi etichetta per ogni elemento in lista"
+
+#: u_translation.rsaddtelescope
+msgid "Add telescope position"
+msgstr ""
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
@@ -322,6 +330,10 @@ msgstr "Applica"
 msgid "Apply changes to all charts"
 msgstr "Applica a tutte le cartine"
 
+#: u_translation.rsapril
+msgid "April"
+msgstr ""
+
 #: u_translation.rsarchivethisi
 msgid "Archive this image?"
 msgstr "Archivia l'immagine?"
@@ -433,6 +445,10 @@ msgstr "alle"
 #: u_translation.rsatmosphericr
 msgid "Atmospheric refraction"
 msgstr "Rifrazione Atmosferica"
+
+#: u_translation.rsaugust
+msgid "August"
+msgstr ""
 
 #: u_translation.rsauthors
 msgid "Authors"
@@ -1222,6 +1238,10 @@ msgstr "Data corrente"
 msgid "Current driver"
 msgstr "Driver corrente"
 
+#: u_translation.rscursor
+msgid "Cursor"
+msgstr ""
+
 #: u_translation.rscustom
 msgid "Custom"
 msgstr "Personalizzato"
@@ -1357,6 +1377,10 @@ msgstr "Compensazione DEC/EL PEC"
 #: u_translation.rsdecelslewrat
 msgid "DEC/El Slew Rate"
 msgstr "Passo DEC/EL"
+
+#: u_translation.rsdecember
+msgid "December"
+msgstr ""
 
 #: u_translation.rsdecimaldegre
 msgid "Decimal degrees"
@@ -2102,6 +2126,10 @@ msgstr ""
 msgid "Favorite"
 msgstr "Preferito"
 
+#: u_translation.rsfebruary
+msgid "February"
+msgstr ""
+
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
 msgstr "Percorso ffmpeg"
@@ -2774,6 +2802,10 @@ msgstr "%s è vuoto!"
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
 msgstr "Mostrare %s dal catalogo %s richiede troppo tempo, prova a non utilizzare questo catalogo a questo FOV."
 
+#: u_translation.rsjanuary
+msgid "January"
+msgstr ""
+
 #: u_translation.rsjd
 msgid "JD:"
 msgstr "JD:"
@@ -2797,6 +2829,14 @@ msgstr "Giorno Giuliano ="
 #: u_translation.rsjulianyear
 msgid "Julian Year"
 msgstr "Anno Giuliano"
+
+#: u_translation.rsjuly
+msgid "July"
+msgstr ""
+
+#: u_translation.rsjune
+msgid "June"
+msgstr ""
 
 #: u_translation.rsjupiter
 msgid "Jupiter"
@@ -3094,6 +3134,10 @@ msgstr "Lunare"
 msgid "Lunar eclipses"
 msgstr "Eclissi di Luna"
 
+#: u_translation.rsly
+msgid "ly"
+msgstr ""
+
 #: u_translation.rsmag
 msgid "Mag:"
 msgstr "Mag:"
@@ -3174,6 +3218,10 @@ msgstr "Telescopio manuale"
 msgid "Map"
 msgstr "Mappa"
 
+#: u_translation.rsmarch
+msgid "March"
+msgstr ""
+
 #: u_translation.rsmark
 msgid "Mark"
 msgstr "Segna"
@@ -3209,6 +3257,10 @@ msgstr "Massimo numero immagini da visualizzare contemporaneamente"
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
 msgstr "Righe massime"
+
+#: u_translation.rsmay
+msgid "May"
+msgstr ""
 
 #: u_translation.rsmbytes
 msgid "MBytes"
@@ -3630,6 +3682,10 @@ msgstr "%s Non trovato!%sProbabilmente il catalogo non è installato oppure il p
 msgid "Not initialised"
 msgstr "Non inizializzato"
 
+#: u_translation.rsnovember
+msgid "November"
+msgstr ""
+
 #: u_translation.rsnow
 msgid "Now"
 msgstr "Adesso"
@@ -3729,6 +3785,10 @@ msgstr "Elementi nella lista d'osservazione"
 #: u_translation.rsobsolete
 msgid "Obsolete"
 msgstr "Obsoleti"
+
+#: u_translation.rsoctober
+msgid "October"
+msgstr ""
 
 #: u_translation.rsoff
 msgid "Off"
@@ -4929,6 +4989,10 @@ msgstr "Separazione"
 #: u_translation.rsseparator
 msgid "Separator"
 msgstr "Separatore"
+
+#: u_translation.rsseptember
+msgid "September"
+msgstr ""
 
 #: u_translation.rsserialport
 msgid "Serial Port"

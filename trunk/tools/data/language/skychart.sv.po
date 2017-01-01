@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-12-18 14:36+0000\n"
+"POT-Creation-Date: 2017-01-01 16:00+0000\n"
 "PO-Revision-Date: 2016-12-11 09:02+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-18 14:44+0000\n"
+"X-Launchpad-Export-Date: 2017-01-01 16:16+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: u_translation.rs102cddss
@@ -144,6 +144,10 @@ msgstr "Lägg till"
 msgid "Add a single element to the database. All fields are mandatory."
 msgstr "Lägg till ett enskilt element till databasen. Alla fält är obligatoriska."
 
+#: u_translation.rsaddcursorpos
+msgid "Add cursor position"
+msgstr ""
+
 #: u_translation.rsaddequatoria
 msgid "Show equatorial grid"
 msgstr "Visa ekvatoriellt rutnät"
@@ -158,6 +162,10 @@ msgstr "Lägg till etikett"
 
 #: u_translation.rsaddlabelfore
 msgid "Add label for every object in the list"
+msgstr ""
+
+#: u_translation.rsaddtelescope
+msgid "Add telescope position"
 msgstr ""
 
 #: u_translation.rsaddthealtern
@@ -324,6 +332,10 @@ msgstr "Använd"
 msgid "Apply changes to all charts"
 msgstr "Använd ändringar på alla kartor"
 
+#: u_translation.rsapril
+msgid "April"
+msgstr ""
+
 #: u_translation.rsarchivethisi
 msgid "Archive this image?"
 msgstr "Arkivera denna bild?"
@@ -435,6 +447,10 @@ msgstr "klockan"
 #: u_translation.rsatmosphericr
 msgid "Atmospheric refraction"
 msgstr "Atmosfärisk refraktion"
+
+#: u_translation.rsaugust
+msgid "August"
+msgstr ""
 
 #: u_translation.rsauthors
 msgid "Authors"
@@ -1224,6 +1240,10 @@ msgstr "Giltighetsdatum"
 msgid "Current driver"
 msgstr "Aktuell drivrutin"
 
+#: u_translation.rscursor
+msgid "Cursor"
+msgstr ""
+
 #: u_translation.rscustom
 msgid "Custom"
 msgstr "Egendefinierad"
@@ -1359,6 +1379,10 @@ msgstr "DEC/EL PEC-kompensering"
 #: u_translation.rsdecelslewrat
 msgid "DEC/El Slew Rate"
 msgstr "DEC/El sökhastighet"
+
+#: u_translation.rsdecember
+msgid "December"
+msgstr ""
 
 #: u_translation.rsdecimaldegre
 msgid "Decimal degrees"
@@ -2104,6 +2128,10 @@ msgstr ""
 msgid "Favorite"
 msgstr "Favorit"
 
+#: u_translation.rsfebruary
+msgid "February"
+msgstr ""
+
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
 msgstr "Sökväg till ffmpeg program"
@@ -2776,6 +2804,10 @@ msgstr "%s är tom!"
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
 msgstr "Det tar för lång tid att rita upp %s från katalog %s. Använd helst inte denna katalog för aktuell FOV"
 
+#: u_translation.rsjanuary
+msgid "January"
+msgstr ""
+
 #: u_translation.rsjd
 msgid "JD:"
 msgstr "JD:"
@@ -2799,6 +2831,14 @@ msgstr "Juliansk dag="
 #: u_translation.rsjulianyear
 msgid "Julian Year"
 msgstr "Julianskt år"
+
+#: u_translation.rsjuly
+msgid "July"
+msgstr ""
+
+#: u_translation.rsjune
+msgid "June"
+msgstr ""
 
 #: u_translation.rsjupiter
 msgid "Jupiter"
@@ -3096,6 +3136,10 @@ msgstr "Månen"
 msgid "Lunar eclipses"
 msgstr "Månförmörkelser"
 
+#: u_translation.rsly
+msgid "ly"
+msgstr ""
+
 #: u_translation.rsmag
 msgid "Mag:"
 msgstr "Mag:"
@@ -3176,6 +3220,10 @@ msgstr "Manuellt teleskop"
 msgid "Map"
 msgstr "Karta"
 
+#: u_translation.rsmarch
+msgid "March"
+msgstr ""
+
 #: u_translation.rsmark
 msgid "Mark"
 msgstr "Markera"
@@ -3211,6 +3259,10 @@ msgstr "Max antal bilder som visas samtidigt"
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
 msgstr "Max antal rader"
+
+#: u_translation.rsmay
+msgid "May"
+msgstr ""
 
 #: u_translation.rsmbytes
 msgid "MBytes"
@@ -3632,6 +3684,10 @@ msgstr "%s Hittades ej!%sKatalogen kanske inte är installerad, eller så kan s�
 msgid "Not initialised"
 msgstr "Ej initierad"
 
+#: u_translation.rsnovember
+msgid "November"
+msgstr ""
+
 #: u_translation.rsnow
 msgid "Now"
 msgstr "Nu"
@@ -3731,6 +3787,10 @@ msgstr "Detaljer i observationslistan"
 #: u_translation.rsobsolete
 msgid "Obsolete"
 msgstr "Föråldrade"
+
+#: u_translation.rsoctober
+msgid "October"
+msgstr ""
 
 #: u_translation.rsoff
 msgid "Off"
@@ -4931,6 +4991,10 @@ msgstr "Separation"
 #: u_translation.rsseparator
 msgid "Separator"
 msgstr "Avskiljare"
+
+#: u_translation.rsseptember
+msgid "September"
+msgstr ""
 
 #: u_translation.rsserialport
 msgid "Serial Port"

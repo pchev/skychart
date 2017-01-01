@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-12-18 14:36+0000\n"
+"POT-Creation-Date: 2017-01-01 16:00+0000\n"
 "PO-Revision-Date: 2016-12-11 09:07+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-12-18 14:44+0000\n"
+"X-Launchpad-Export-Date: 2017-01-01 16:16+0000\n"
 "X-Generator: Launchpad (build 18298)\n"
 
 #: u_translation.rs102cddss
@@ -144,6 +144,10 @@ msgstr "添加"
 msgid "Add a single element to the database. All fields are mandatory."
 msgstr "将一个轨道根数添加到数据库中。所有字段均必填。"
 
+#: u_translation.rsaddcursorpos
+msgid "Add cursor position"
+msgstr ""
+
 #: u_translation.rsaddequatoria
 msgid "Show equatorial grid"
 msgstr "显示赤道坐标网格"
@@ -158,6 +162,10 @@ msgstr "添加标签"
 
 #: u_translation.rsaddlabelfore
 msgid "Add label for every object in the list"
+msgstr ""
+
+#: u_translation.rsaddtelescope
+msgid "Add telescope position"
 msgstr ""
 
 #: u_translation.rsaddthealtern
@@ -325,6 +333,10 @@ msgstr "应用"
 msgid "Apply changes to all charts"
 msgstr "将修改应用到所有星图"
 
+#: u_translation.rsapril
+msgid "April"
+msgstr ""
+
 #: u_translation.rsarchivethisi
 msgid "Archive this image?"
 msgstr ""
@@ -436,6 +448,10 @@ msgstr "在"
 #: u_translation.rsatmosphericr
 msgid "Atmospheric refraction"
 msgstr "大气折射"
+
+#: u_translation.rsaugust
+msgid "August"
+msgstr ""
 
 #: u_translation.rsauthors
 msgid "Authors"
@@ -1225,6 +1241,10 @@ msgstr "有效日期"
 msgid "Current driver"
 msgstr "当前驱动"
 
+#: u_translation.rscursor
+msgid "Cursor"
+msgstr ""
+
 #: u_translation.rscustom
 msgid "Custom"
 msgstr "自定义"
@@ -1359,6 +1379,10 @@ msgstr "DEC/EL PEC 补偿"
 
 #: u_translation.rsdecelslewrat
 msgid "DEC/El Slew Rate"
+msgstr ""
+
+#: u_translation.rsdecember
+msgid "December"
 msgstr ""
 
 #: u_translation.rsdecimaldegre
@@ -2107,6 +2131,10 @@ msgstr ""
 msgid "Favorite"
 msgstr "收藏夹"
 
+#: u_translation.rsfebruary
+msgid "February"
+msgstr ""
+
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
 msgstr "ffmpeg程序目录"
@@ -2780,6 +2808,10 @@ msgstr ""
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
 msgstr ""
 
+#: u_translation.rsjanuary
+msgid "January"
+msgstr ""
+
 #: u_translation.rsjd
 msgid "JD:"
 msgstr "儒略日："
@@ -2803,6 +2835,14 @@ msgstr "儒略日="
 #: u_translation.rsjulianyear
 msgid "Julian Year"
 msgstr "儒略年"
+
+#: u_translation.rsjuly
+msgid "July"
+msgstr ""
+
+#: u_translation.rsjune
+msgid "June"
+msgstr ""
 
 #: u_translation.rsjupiter
 msgid "Jupiter"
@@ -3100,6 +3140,10 @@ msgstr ""
 msgid "Lunar eclipses"
 msgstr "月食"
 
+#: u_translation.rsly
+msgid "ly"
+msgstr ""
+
 #: u_translation.rsmag
 msgid "Mag:"
 msgstr "星等："
@@ -3180,6 +3224,10 @@ msgstr "手动望远镜"
 msgid "Map"
 msgstr "地图"
 
+#: u_translation.rsmarch
+msgid "March"
+msgstr ""
+
 #: u_translation.rsmark
 msgid "Mark"
 msgstr "标记"
@@ -3215,6 +3263,10 @@ msgstr "可同时显示的最大图片数量"
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
 msgstr "最大行数"
+
+#: u_translation.rsmay
+msgid "May"
+msgstr ""
 
 #: u_translation.rsmbytes
 msgid "MBytes"
@@ -3637,6 +3689,10 @@ msgstr "%s 未找到！%s星表未安装或路径错误。"
 msgid "Not initialised"
 msgstr "未初始化"
 
+#: u_translation.rsnovember
+msgid "November"
+msgstr ""
+
 #: u_translation.rsnow
 msgid "Now"
 msgstr "现在"
@@ -3736,6 +3792,10 @@ msgstr "观测列表元素"
 #: u_translation.rsobsolete
 msgid "Obsolete"
 msgstr "过时"
+
+#: u_translation.rsoctober
+msgid "October"
+msgstr ""
 
 #: u_translation.rsoff
 msgid "Off"
@@ -4935,6 +4995,10 @@ msgstr "分离"
 
 #: u_translation.rsseparator
 msgid "Separator"
+msgstr ""
+
+#: u_translation.rsseptember
+msgid "September"
 msgstr ""
 
 #: u_translation.rsserialport

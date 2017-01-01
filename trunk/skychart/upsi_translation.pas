@@ -1576,6 +1576,25 @@ CL.AddConstantN('rsChartSync','String').SetString(rsChartSync);
 CL.AddConstantN('rsRectangular','String').SetString(rsRectangular);
 CL.AddConstantN('rsLookAt','String').SetString(rsLookAt);
 CL.AddConstantN('rsAbove','String').SetString(rsAbove);
+CL.AddConstantN('rsResetTime','String').SetString(rsResetTime);
+CL.AddConstantN('rsSlower','String').SetString(rsSlower);
+CL.AddConstantN('rsFaster','String').SetString(rsFaster);
+CL.AddConstantN('rsCursor','String').SetString(rsCursor);
+CL.AddConstantN('rsLy','String').SetString(rsLy);
+CL.AddConstantN('rsAddTelescope','String').SetString(rsAddTelescope);
+CL.AddConstantN('rsAddCursorPos','String').SetString(rsAddCursorPos);
+CL.AddConstantN('rsJanuary','String').SetString(rsJanuary);
+CL.AddConstantN('rsFebruary','String').SetString(rsFebruary);
+CL.AddConstantN('rsMarch','String').SetString(rsMarch);
+CL.AddConstantN('rsApril','String').SetString(rsApril);
+CL.AddConstantN('rsMay','String').SetString(rsMay);
+CL.AddConstantN('rsJune','String').SetString(rsJune);
+CL.AddConstantN('rsJuly','String').SetString(rsJuly);
+CL.AddConstantN('rsAugust','String').SetString(rsAugust);
+CL.AddConstantN('rsSeptember','String').SetString(rsSeptember);
+CL.AddConstantN('rsOctober','String').SetString(rsOctober);
+CL.AddConstantN('rsNovember','String').SetString(rsNovember);
+CL.AddConstantN('rsDecember','String').SetString(rsDecember);
 
 end;
 
