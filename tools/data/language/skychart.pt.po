@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-01 16:00+0000\n"
-"PO-Revision-Date: 2016-12-24 21:13+0000\n"
+"PO-Revision-Date: 2017-01-03 17:33+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-01 16:16+0000\n"
-"X-Generator: Launchpad (build 18298)\n"
+"X-Launchpad-Export-Date: 2017-01-08 17:04+0000\n"
+"X-Generator: Launchpad (build 18302)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -145,7 +145,7 @@ msgstr "Adicionar um elemento simples no banco de dados. Todos os campos são ob
 
 #: u_translation.rsaddcursorpos
 msgid "Add cursor position"
-msgstr ""
+msgstr "Adicionar posição do cursor"
 
 #: u_translation.rsaddequatoria
 msgid "Show equatorial grid"
@@ -165,7 +165,7 @@ msgstr "Adicionar rótulo para cada objeto na lista"
 
 #: u_translation.rsaddtelescope
 msgid "Add telescope position"
-msgstr ""
+msgstr "Adicionar posição do telescópio"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
@@ -334,7 +334,7 @@ msgstr "Aplicar alterações a todas as cartas"
 
 #: u_translation.rsapril
 msgid "April"
-msgstr ""
+msgstr "Abril"
 
 #: u_translation.rsarchivethisi
 msgid "Archive this image?"
@@ -450,7 +450,7 @@ msgstr "Refração Atmosférica"
 
 #: u_translation.rsaugust
 msgid "August"
-msgstr ""
+msgstr "Agosto"
 
 #: u_translation.rsauthors
 msgid "Authors"
@@ -1243,7 +1243,7 @@ msgstr "Driver atual"
 
 #: u_translation.rscursor
 msgid "Cursor"
-msgstr ""
+msgstr "Cursor"
 
 #: u_translation.rscustom
 msgid "Custom"
@@ -1383,7 +1383,7 @@ msgstr "Taxa de Movimentação DEC/El"
 
 #: u_translation.rsdecember
 msgid "December"
-msgstr ""
+msgstr "Dezembro"
 
 #: u_translation.rsdecimaldegre
 msgid "Decimal degrees"
@@ -2132,7 +2132,7 @@ msgstr "Favorito"
 
 #: u_translation.rsfebruary
 msgid "February"
-msgstr ""
+msgstr "Fevereiro"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -2808,7 +2808,7 @@ msgstr "Ela leva muito tempo para desenhar o %s de catálogo %s, por favor, cons
 
 #: u_translation.rsjanuary
 msgid "January"
-msgstr ""
+msgstr "Janeiro"
 
 #: u_translation.rsjd
 msgid "JD:"
@@ -2836,11 +2836,11 @@ msgstr "Ano Juliano"
 
 #: u_translation.rsjuly
 msgid "July"
-msgstr ""
+msgstr "Julho"
 
 #: u_translation.rsjune
 msgid "June"
-msgstr ""
+msgstr "Junho"
 
 #: u_translation.rsjupiter
 msgid "Jupiter"
@@ -3140,7 +3140,7 @@ msgstr "Eclipses Lunares"
 
 #: u_translation.rsly
 msgid "ly"
-msgstr ""
+msgstr "al"
 
 #: u_translation.rsmag
 msgid "Mag:"
@@ -3224,7 +3224,7 @@ msgstr "Mapa"
 
 #: u_translation.rsmarch
 msgid "March"
-msgstr ""
+msgstr "Março"
 
 #: u_translation.rsmark
 msgid "Mark"
@@ -3264,7 +3264,7 @@ msgstr "Máximo de linhas"
 
 #: u_translation.rsmay
 msgid "May"
-msgstr ""
+msgstr "Maio"
 
 #: u_translation.rsmbytes
 msgid "MBytes"
@@ -3688,7 +3688,7 @@ msgstr "Não inicializado"
 
 #: u_translation.rsnovember
 msgid "November"
-msgstr ""
+msgstr "Novembro"
 
 #: u_translation.rsnow
 msgid "Now"
@@ -3792,7 +3792,7 @@ msgstr "Obsoleto"
 
 #: u_translation.rsoctober
 msgid "October"
-msgstr ""
+msgstr "Outubro"
 
 #: u_translation.rsoff
 msgid "Off"
@@ -4996,7 +4996,7 @@ msgstr "Separador"
 
 #: u_translation.rsseptember
 msgid "September"
-msgstr ""
+msgstr "Setembro"
 
 #: u_translation.rsserialport
 msgid "Serial Port"
