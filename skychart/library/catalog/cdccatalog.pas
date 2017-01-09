@@ -7,9 +7,10 @@ unit cdccatalog;
 interface
 
 uses
-  bscunit, dscat, findunit, gcatunit, gcmunit, gcvunit, gpnunit, gsccompact, gscconst, gscfits, gscunit, lbnunit, 
-  microcatunit, ngcunit, oclunit, pgcunit, sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit, 
-  wdsunit, rc3unit, vocat, usnobunit;
+  bscunit, dscat, findunit, gcatunit, gcmunit, gcvunit, gpnunit, gsccompact, 
+  gscconst, gscfits, gscunit, lbnunit, microcatunit, oclunit, pgcunit, 
+  sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit, wdsunit, 
+  rc3unit, vocat, usnobunit;
 
 implementation
 

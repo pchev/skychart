@@ -21,12 +21,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 }
 {$mode objfpc}{$H+}
 interface
-Uses sysutils,skylibcat,ngcunit,wdsunit,gcvunit,gscunit,gscfits,gsccompact,
+Uses sysutils,skylibcat,wdsunit,gcvunit,gscunit,gscfits,gsccompact,
      bscunit,pgcunit,sacunit,tyc2unit,usnoaunit,usnobunit,gcatunit;
 
-Procedure FindNumNGC(id:Integer ;var ar,de:double; var ok:boolean);
-Procedure FindNumIC(id:Integer ;var ar,de:double; var ok:boolean);
-Procedure FindNumMessier(id:Integer ;var ar,de:double; var ok:boolean);
 Procedure FindNumGCVS(id:string; var lin:GCVrec; var ok:boolean);
 Procedure FindNumGSC(id : string ;var ar,de:double; var ok:boolean);
 Procedure FindNumGSCF(id : string ;var ar,de:double; var ok:boolean);
@@ -206,21 +203,6 @@ if ok then begin
    n:=lin.n;
    r:=lin.r;
 end;
-end;
-
-Procedure FindNumNGC(id:Integer ;var ar,de:double; var ok:boolean);
-begin
-FindIdx(NGCpath+slashchar+'ngc.idx',id,ar,de,ok);
-end;
-
-Procedure FindNumIC(id:Integer ;var ar,de:double; var ok:boolean);
-begin
-FindIdx(NGCpath+slashchar+'ic.idx',id,ar,de,ok);
-end;
-
-Procedure FindNumMessier(id:Integer ;var ar,de:double; var ok:boolean);
-begin
-FindIdx(NGCpath+slashchar+'messier.idx',id,ar,de,ok);
 end;
 
 {$NOTES OFF}
