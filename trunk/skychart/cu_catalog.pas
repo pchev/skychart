@@ -29,7 +29,7 @@ interface
 
 uses
     bscunit, dscat, findunit, gcatunit, gcmunit, gcvunit, gpnunit, gsccompact,
-    gscfits, gscunit, lbnunit, microcatunit, ngcunit, oclunit, pgcunit, vocat,
+    gscfits, gscunit, lbnunit, microcatunit, oclunit, pgcunit, vocat,
     sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit, usnobunit, wdsunit,
     rc3unit, BGRABitmap, BGRABitmapTypes, Graphics,
     u_translation, u_constant, u_util, u_projection,
@@ -88,11 +88,17 @@ type
      function GetWDS(var rec:GcatRec):boolean;
      procedure FormatWDS(lin : WDSrec; var rec:GcatRec);
      procedure FindWDS(id: string; var ra,dec: double; var ok:boolean);
+     procedure CheckMessierColumn;
      function OpenNebCat:boolean;
      function CloseNebCat:boolean;
      function GetSAC(var rec:GcatRec):boolean;
      procedure FormatSAC(lin : SACrec; var rec:GcatRec);
      procedure FindSAC(id: string; var ra,dec: double; var ok:boolean);
+     Function IsNGCpath(path : string) : Boolean;
+     function OpenNGC:boolean;
+     Procedure OpenNGCPos(ar1,ar2,de1,de2: double ; var ok : boolean);
+     function CloseNGC:boolean;
+     procedure FindNGC(id:shortstring; var ar,de:double ; var ok:boolean);
      function GetNGC(var rec:GcatRec):boolean;
      function GetLBN(var rec:GcatRec):boolean;
      function GetRC3(var rec:GcatRec):boolean;
@@ -608,14 +614,28 @@ until result;
 end;
 end;
 
-function Tcatalog.OpenNebCat:boolean;
+procedure Tcatalog.CheckMessierColumn;
 var i: integer;
     trec:GCatrec;
+begin
+// Messier object ?
+GetEmptyRec(trec);
+for i:=1 to 10 do
+ if trec.vstr[i] and trec.options.altname[i] and
+    trec.options.altprefix[i] and
+    (trim(trec.options.flabel[15+i])='M')
+    then begin
+      MessierStrPos:=i;
+      break;
+    end;
+end;
+
+function Tcatalog.OpenNebCat:boolean;
 begin
 InitRec(curcat);
 case curcat of
    sac     : begin SetSacPath(cfgcat.nebcatpath[sac-BaseNeb]); OpenSACwin(result); end;
-   ngc     : begin SetngcPath(cfgcat.nebcatpath[ngc-BaseNeb]); Openngcwin(result); end;
+   ngc     : result:=OpenNGC;
    lbn     : begin SetlbnPath(cfgcat.nebcatpath[lbn-BaseNeb]); Openlbnwin(result); end;
    rc3     : begin Setrc3Path(cfgcat.nebcatpath[rc3-BaseNeb]); Openrc3win(result); end;
    pgc     : begin SetpgcPath(cfgcat.nebcatpath[pgc-BaseNeb]); Openpgcwin(result); end;
@@ -631,16 +651,7 @@ case curcat of
                       OpenGCatWin(result);
                       if result then break;
                    end;
-                   // Messier object ?
-                   GetEmptyRec(trec);
-                   for i:=1 to 10 do
-                    if trec.vstr[i] and trec.options.altname[i] and
-                       trec.options.altprefix[i] and
-                       (trim(trec.options.flabel[15+i])='M')
-                       then begin
-                         MessierStrPos:=i;
-                         break;
-                       end;
+                   CheckMessierColumn;
             end;
    voneb  : begin
                 VOobject:='dso';
@@ -1728,7 +1739,7 @@ repeat
   if rec.neb.valid[vnColor] then begin
      rec.options.UseColor:=1;
   end else begin
-    if cfgcat.GCatLst[CurGCat-1].ForceColor then begin
+    if (CurGCat>0) and cfgcat.GCatLst[CurGCat-1].ForceColor then begin
       rec.options.UseColor:=1;
       rec.neb.color:=cfgcat.GCatLst[CurGCat-1].col;
     end;
@@ -2427,53 +2438,73 @@ if ok then begin
 end;
 end;
 
-function Tcatalog.GetNGC(var rec:GcatRec):boolean;
-var lin : NGCrec;
+Function Tcatalog.IsNGCpath(path : string) : Boolean;
 begin
-rec:=EmptyRec;
-result:=true;
-repeat
-  ReadNGC(lin,result);
-  if not result then break;
-  rec.neb.dim1:=lin.dim/10;
-  if cfgshr.NebFilter and (rec.neb.dim1<cfgcat.NebSizeMin) then continue;
-  rec.neb.mag:=lin.ma/100;
-  if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
-  if cfgshr.BigNebFilter and (rec.neb.dim1>=cfgshr.BigNebLimit) and (trim(lin.typ)<>'Gx') then continue; // filter big object except M31, LMC, SMC
-  break;
-until not result;
-if result then begin
-   rec.ra:=deg2rad*lin.ar/100000;
-   rec.dec:=deg2rad*lin.de/100000;
-   rec.neb.nebtype:=-1;
-   if trim(lin.typ)='Gx'  then rec.neb.nebtype:=1
-   else if trim(lin.typ)='OC'  then rec.neb.nebtype:=2
-   else if trim(lin.typ)='Gb'  then rec.neb.nebtype:=3
-   else if trim(lin.typ)='Pl'  then rec.neb.nebtype:=4
-   else if trim(lin.typ)='Nb'  then rec.neb.nebtype:=5
-   else if trim(lin.typ)='C+N'  then rec.neb.nebtype:=6
-   else if trim(lin.typ)='*'  then rec.neb.nebtype:=7
-   else if trim(lin.typ)='D*'  then rec.neb.nebtype:=8
-   else if trim(lin.typ)='***'  then rec.neb.nebtype:=9
-   else if trim(lin.typ)='Ast'  then rec.neb.nebtype:=10
-   else if trim(lin.typ)='Kt'  then rec.neb.nebtype:=11
-   else if trim(lin.typ)='?'  then rec.neb.nebtype:=0
-   else if lin.typ='   '  then rec.neb.nebtype:=0
-   else if trim(lin.typ)='-'  then rec.neb.nebtype:=-1
-   else if trim(lin.typ)='PD'  then rec.neb.nebtype:=-1;
-   if rec.neb.dim1<=0 then rec.neb.dim1:=1;
-   if (rec.neb.mag>70)or(rec.neb.mag<-70) then begin
-     rec.neb.mag:=99;     // undefined magnitude
-     rec.neb.sbr:=99;
-   end else begin;
-     rec.neb.sbr:= rec.neb.mag + 5*log10(rec.neb.dim1) - 0.26;
-   end;
-   str(lin.id:4,rec.neb.id);
-   if lin.ic='I' then rec.neb.id:='IC '+rec.neb.id
-                 else rec.neb.id:='NGC'+rec.neb.id;
-   rec.str[1]:=lin.cons;
-   rec.neb.comment:=lin.desc;
+result:= FileExists(slash(path)+'ongc.hdr');
 end;
+
+function Tcatalog.OpenNGC:boolean;
+var GcatH : TCatHeader;
+    info:TCatHdrInfo;
+    v : integer;
+begin
+ CurGCat:=0;
+ SetGcatPath(cfgcat.nebcatpath[ngc-BaseNeb],'ongc');
+ GetGCatInfo(GcatH,info,v,GCatFilter,result);
+ CheckMessierColumn;
+ if result then result:=(v=rtNeb);
+ if result then OpenGCatWin(result);
+end;
+
+Procedure Tcatalog.OpenNGCPos(ar1,ar2,de1,de2: double ; var ok : boolean);
+var GcatH : TCatHeader;
+    info:TCatHdrInfo;
+    v : integer;
+begin
+ CurGCat:=0;
+ SetGcatPath(cfgcat.nebcatpath[ngc-BaseNeb],'ongc');
+ GetGCatInfo(GcatH,info,v,GCatFilter,ok);
+ CheckMessierColumn;
+ if ok then ok:=(v=rtNeb);
+ if ok then OpenGCat(ar1,ar2,de1,de2,ok);
+end;
+
+function Tcatalog.CloseNGC:boolean;
+begin
+ CloseGcat;
+ result:=true;
+end;
+
+function Tcatalog.GetNGC(var rec:GcatRec):boolean;
+begin
+  result:=GetGCatN(rec);
+end;
+
+procedure Tcatalog.FindNGC(id:shortstring; var ar,de:double ; var ok:boolean);
+var
+   H : TCatHeader;
+   info:TCatHdrInfo;
+   rec:GCatrec;
+   version : integer;
+   iid:string;
+begin
+ok:=false;
+iid:=id;
+if fileexists(slash(cfgcat.nebcatpath[ngc-BaseNeb])+'ongc'+'.ixr') then begin
+   SetGcatPath(cfgcat.nebcatpath[ngc-BaseNeb],'ongc');
+   GetGCatInfo(H,info,version,GCatFilter,ok);
+   CheckMessierColumn;
+   if ok then FindNumGcatRec(cfgcat.nebcatpath[ngc-BaseNeb],'ongc',iid,H.ixkeylen,rec,ok);
+   if ok then begin
+      ar:=rec.ra/15;
+      de:=rec.dec;
+      FormatGCatN(rec);
+      FFindId:=id;
+      FFindRecOK:=true;
+      FFindRec:=rec;
+   end;
+end
+else ok:=false;
 end;
 
 function Tcatalog.GetLBN(var rec:GcatRec):boolean;
@@ -2708,16 +2739,13 @@ try
   FFindId:='';
   case cat of
         S_Messier  : if IsNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]) then begin
-                     SetNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]);
-                     FindNumMessier(strtointdef(id,0),ra,dec,result) ;
+                     FindNGC(id,ra,dec,result);
                      end;
         S_NGC      : if IsNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]) then begin
-                     SetNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]);
-                     FindNumNGC(strtointdef(id,0),ra,dec,result) ;
+                     FindNGC(id,ra,dec,result);
                      end;
         S_IC       : if IsNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]) then begin
-                     SetNGCPath(cfgcat.NebCatPath[ngc-BaseNeb]);
-                     FindNumIC(strtointdef(id,0),ra,dec,result) ;
+                     FindNGC(id,ra,dec,result);
                      end;
         S_PGC      : if IsPGCPath(cfgcat.NebCatPath[pgc-BaseNeb]) then begin
                      SetPGCPath(cfgcat.NebCatPath[pgc-BaseNeb]);
@@ -2847,21 +2875,16 @@ begin
       de1:=deg2rad*de1;
       exit;
    end;
-   result:=FindNum(S_SAC,Num,ar1,de1) ;
-   if result then exit;
    if uppercase(copy(Num,1,1))='M' then begin
-      buf:=StringReplace(Num,'m','',[rfReplaceAll,rfIgnoreCase]);
-      result:=FindNum(S_messier,buf,ar1,de1) ;
+      result:=FindNum(S_messier,Num,ar1,de1) ;
       if result then exit;
    end;
    if uppercase(copy(Num,1,3))='NGC' then begin
-      buf:=StringReplace(Num,'ngc','',[rfReplaceAll,rfIgnoreCase]);
-      result:=FindNum(S_NGC,buf,ar1,de1) ;
+      result:=FindNum(S_NGC,Num,ar1,de1) ;
       if result then exit;
    end;
    if uppercase(copy(Num,1,2))='IC' then begin
-      buf:=StringReplace(Num,'ic','',[rfReplaceAll,rfIgnoreCase]);
-      result:=FindNum(S_IC,buf,ar1,de1) ;
+      result:=FindNum(S_IC,Num,ar1,de1) ;
       if result then exit;
    end;
    if uppercase(copy(Num,1,3))='PGC' then begin
@@ -2869,6 +2892,7 @@ begin
       result:=FindNum(S_PGC,buf,ar1,de1) ;
       if result then exit;
    end;
+   result:=FindNum(S_SAC,Num,ar1,de1) ;
 end;
 
 function Tcatalog.SearchStarName(Num:string; var ar1,de1: double): boolean;
@@ -3119,7 +3143,7 @@ if not nextobj then begin
    gcvs    : OpenGCV(xx1,xx2,yy1,yy2,ok);
    wds     : OpenWDS(xx1,xx2,yy1,yy2,ok);
    sac     : OpenSAC(xx1,xx2,yy1,yy2,ok);
-   ngc     : OpenNGC(xx1,xx2,yy1,yy2,ok);
+   ngc     : OpenNGCPos(xx1,xx2,yy1,yy2,ok);
    lbn     : OpenLBN(xx1,xx2,yy1,yy2,ok);
    rc3     : OpenRC3(xx1,xx2,yy1,yy2,ok);
    pgc     : OpenPGC(xx1,xx2,yy1,yy2,ok);

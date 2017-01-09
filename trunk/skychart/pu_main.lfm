@@ -150,12 +150,12 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 398
+    Height = 401
     Top = 80
     Width = 28
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 398
+    ClientHeight = 401
     ClientWidth = 28
     Font.Height = 10
     FullRepaint = False
@@ -163,7 +163,7 @@ object f_main: Tf_main
     TabOrder = 1
     object ToolBarLeft: TToolBar
       Left = 0
-      Height = 398
+      Height = 401
       Top = 0
       Width = 28
       Align = alClient
@@ -182,18 +182,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 848
-    Height = 398
+    Height = 401
     Top = 80
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 398
+    ClientHeight = 401
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBarRight: TToolBar
       Left = 0
-      Height = 398
+      Height = 401
       Top = 0
       Width = 28
       Align = alClient
@@ -219,7 +219,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 478
+    Top = 481
     Width = 876
     Align = alBottom
     BevelOuter = bvNone
@@ -3306,7 +3306,7 @@ object f_main: Tf_main
   end
   object ScriptPanel: TPanel
     Left = 28
-    Height = 398
+    Height = 401
     Top = 80
     Width = 276
     Align = alLeft
@@ -3316,7 +3316,7 @@ object f_main: Tf_main
   end
   object Splitter1: TSplitter
     Left = 304
-    Height = 398
+    Height = 401
     Top = 80
     Width = 5
     ResizeStyle = rsLine

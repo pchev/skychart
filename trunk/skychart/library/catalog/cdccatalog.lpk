@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <Package Version="4">
     <Name Value="cdccatalog"/>
@@ -15,10 +15,9 @@
       </Parsing>
       <Other>
         <CustomOptions Value="-CF64"/>
-        <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
-    <Files Count="27">
+    <Files Count="26">
       <Item1>
         <Filename Value="bscunit.pas"/>
         <UnitName Value="bscunit"/>
@@ -72,61 +71,57 @@
         <UnitName Value="microcatunit"/>
       </Item13>
       <Item14>
-        <Filename Value="ngcunit.pas"/>
-        <UnitName Value="ngcunit"/>
-      </Item14>
-      <Item15>
         <Filename Value="oclunit.pas"/>
         <UnitName Value="oclunit"/>
-      </Item15>
-      <Item16>
+      </Item14>
+      <Item15>
         <Filename Value="pgcunit.pas"/>
         <UnitName Value="pgcunit"/>
-      </Item16>
-      <Item17>
+      </Item15>
+      <Item16>
         <Filename Value="sacunit.pas"/>
         <UnitName Value="sacunit"/>
-      </Item17>
-      <Item18>
+      </Item16>
+      <Item17>
         <Filename Value="skylibcat.pas"/>
         <UnitName Value="skylibcat"/>
-      </Item18>
-      <Item19>
+      </Item17>
+      <Item18>
         <Filename Value="skyunit.pas"/>
         <UnitName Value="skyunit"/>
-      </Item19>
-      <Item20>
+      </Item18>
+      <Item19>
         <Filename Value="ticunit.pas"/>
         <UnitName Value="ticunit"/>
-      </Item20>
-      <Item21>
+      </Item19>
+      <Item20>
         <Filename Value="tyc2unit.pas"/>
         <UnitName Value="tyc2unit"/>
-      </Item21>
-      <Item22>
+      </Item20>
+      <Item21>
         <Filename Value="tycunit.pas"/>
         <UnitName Value="tycunit"/>
-      </Item22>
-      <Item23>
+      </Item21>
+      <Item22>
         <Filename Value="usnoaunit.pas"/>
         <UnitName Value="usnoaunit"/>
-      </Item23>
-      <Item24>
+      </Item22>
+      <Item23>
         <Filename Value="wdsunit.pas"/>
         <UnitName Value="wdsunit"/>
-      </Item24>
-      <Item25>
+      </Item23>
+      <Item24>
         <Filename Value="rc3unit.pas"/>
         <UnitName Value="rc3unit"/>
-      </Item25>
-      <Item26>
+      </Item24>
+      <Item25>
         <Filename Value="vocat.pas"/>
         <UnitName Value="vocat"/>
-      </Item26>
-      <Item27>
+      </Item25>
+      <Item26>
         <Filename Value="usnobunit.pas"/>
         <UnitName Value="usnobunit"/>
-      </Item27>
+      </Item26>
     </Files>
     <RequiredPkgs Count="2">
       <Item1>

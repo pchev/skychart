@@ -5219,7 +5219,7 @@ catalog.cfgcat.nebcatfield[voneb-BaseNeb,2]:=10;
 catalog.cfgcat.nebcatpath[sac-BaseNeb]:='cat'+PathDelim+'sac';
 catalog.cfgcat.nebcatdef[sac-BaseNeb]:=true;
 catalog.cfgcat.nebcatfield[sac-BaseNeb,2]:=10;
-catalog.cfgcat.nebcatpath[ngc-BaseNeb]:='cat'+PathDelim+'ngc2000';
+catalog.cfgcat.nebcatpath[ngc-BaseNeb]:='cat'+PathDelim+'openngc';
 catalog.cfgcat.nebcatfield[ngc-BaseNeb,2]:=10;
 catalog.cfgcat.nebcatpath[lbn-BaseNeb]:='cat'+PathDelim+'lbn';
 catalog.cfgcat.nebcatfield[lbn-BaseNeb,2]:=5;
@@ -6309,6 +6309,10 @@ if  Config_Version < '3.11j' then begin
      if (pos('Soft00Bright',cfgm.AsteroidUrlList[i])>0)then cfgm.AsteroidUrlList[i]:=URL_CDCAsteroidElements;
   end;
   if b1 then cfgm.AsteroidUrlList.Add(URL_HTTPAsteroidElements2);
+end;
+if  Config_Version < '3.11q' then begin
+  catalog.cfgcat.nebcatpath[ngc-BaseNeb]:='cat'+PathDelim+'openngc';
+  catalog.cfgcat.nebcatfield[ngc-BaseNeb,2]:=10;
 end;
 // cleanup xplanet tmp directories after each version change, see: u_orbits ScaledPlanetMapDir_Individual
 DeleteFilesInDir(slash(TempDir)+'32');
