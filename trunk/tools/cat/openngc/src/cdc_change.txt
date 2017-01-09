@@ -1,0 +1,20 @@
+col R 
+- label  M   
+- format #
+
+col S 
+-format #
+
+col T 
+- format #
+
+col A
+-replace "IC" "IC "
+-replace "NGC" "NGC "
+-replace "NGC 0" "NGC " x3
+
+save as NGC.csv
+- fixed column width
+
+Catgen
+- shortname ONGC
