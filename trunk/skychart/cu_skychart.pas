@@ -1326,7 +1326,7 @@ var rec:GcatRec;
   x1,y1,x2,y2,rot,ra,de,timelimit: Double;
   x,y,xx,yy,sz,lsize:single;
   lid, save_nebplot,lp,lnum: integer;
-  imgfile,CurrentCat,lis: string;
+  imgfile,CurrentCat,ImgCat,lis: string;
   bmp:TBGRAbitmap;
   save_col: Starcolarray;
   al: TLabelAlign;
@@ -1354,10 +1354,10 @@ var rec:GcatRec;
           rec.neb.pa:=Deg2Rad*rec.neb.pa+rot;
           if rec.options.UseColor=1 then begin
              if cfgsc.WhiteBg then rec.neb.color:=FPlot.cfgplot.Color[11];
-             Fplot.PlotDSOGxy(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.morph,true,rec.neb.color)
+             Fplot.PlotDSOGxy(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebunit,rec.neb.morph,true,rec.neb.color);
           end
           else
-             Fplot.PlotDSOGxy(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.morph,false,rec.neb.color);
+             Fplot.PlotDSOGxy(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebunit,rec.neb.morph,false,rec.neb.color);
         end;
       end;
 
@@ -1417,13 +1417,14 @@ var rec:GcatRec;
                 inc(numdsopos);
                 dsopos[numdsopos]:=Point(round(xx),round(yy));
               end;
-              if (not cfgsc.Quick)and cfgsc.ShowImages and (rec.options.ShortName<>CurrentCat) then begin
-                 CurrentCat:=rec.options.ShortName;
+              ImgCat:=rec.options.ShortName;
+              if ImgCat='ONGC' then ImgCat:='SAC';
+              if (not cfgsc.Quick)and cfgsc.ShowImages and (ImgCat<>CurrentCat) then begin
+                 CurrentCat:=ImgCat;
                  imageok:=FFits.ImagesForCatalog(CurrentCat);
               end;
-              if (not cfgsc.Quick)and cfgsc.ShowImages and imageok and
-                 FFits.GetFileName(rec.options.ShortName,rec.neb.id,imgfile) then
-                begin
+              if (not cfgsc.Quick)and cfgsc.ShowImages and imageok then begin
+                if FFits.GetFileName(ImgCat,rec.neb.id,imgfile) then begin
                  if (ExtractFileExt(imgfile)<>'.nil') then begin
                   if (sz>6) then
                     begin
@@ -1452,6 +1453,8 @@ var rec:GcatRec;
                   else if (Fplot.cfgplot.nebplot=0) then Drawing else Drawing_Gray;
                  end;
                 end
+                else if (Fplot.cfgplot.nebplot=0) then Drawing else Drawing_Gray;
+              end
               else
                 if cfgsc.shownebulae or Fcatalog.cfgcat.nebcatdef[uneb-BaseNeb] then
                   begin
@@ -2747,7 +2750,7 @@ begin
             Desc:=Desc+trim(rec.options.flabel[lOffset+vnMag])+dp+txt+tab;
          end;
          for i:=1 to 10 do begin
-            if rec.vstr[i] and rec.options.altname[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
+            if rec.vstr[i] and rec.options.altname[i] and (trim(rec.str[i])>'') then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
          end;
          if rec.neb.valid[vnSbr] then begin
             if (rec.neb.sbr<90) then str(rec.neb.sbr:5:2,txt) else txt:=b5;
@@ -2792,7 +2795,7 @@ begin
             Desc:=Desc+trim(rec.options.flabel[lOffset+vnRv])+dp+txt+tab;
          end;
          if rec.neb.valid[vnMorph] then Desc:=Desc+trim(rec.options.flabel[lOffset+vnMorph])+dp+rec.neb.morph+tab;
-         if rec.neb.valid[vnComment] then Desc:=Desc+trim(rec.options.flabel[lOffset+vnComment])+dp+rec.neb.comment+tab;
+         if rec.neb.valid[vnComment]and (trim(rec.neb.comment)>'') then Desc:=Desc+trim(rec.options.flabel[lOffset+vnComment])+dp+rec.neb.comment+tab;
          end;
  end;
  if trim(rec.options.ShortName)='d2k' then begin
@@ -2803,7 +2806,7 @@ begin
    Desc:=Desc+tab;
  end else begin
    for i:=1 to 10 do begin
-      if rec.vstr[i] and (not rec.options.altname[i]) then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
+      if rec.vstr[i] and (not rec.options.altname[i]) and (trim(rec.str[i])>'') then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
    end;
  end;
  for i:=1 to 10 do
@@ -5497,7 +5500,7 @@ if cfgsc.FooterHeight>0 then begin
   Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevGalaxyCluster, cfgsc.WhiteBg, false);
   // GX
   xx:=round(xx+2*ws);
-  Fplot.PlotDSOGxy(xx,yy,sz,sz div 3,45,0,100,100,0,0,1,'',drawgray,clGray);
+  Fplot.PlotDSOGxy(xx,yy,sz,sz div 3,45,0,100,100,0,0,1,3600,'',drawgray,clGray);
   Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevGalaxy, cfgsc.WhiteBg, false);
   // OC
   xx:=round(xx+2*ws);
@@ -5642,7 +5645,7 @@ if w>0 then begin
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevGalaxyCluster, cfgsc.WhiteBg, false);
     // GX
     xx:=round(xx+1.5*ls);
-    Fplot.PlotDSOGxy(xx,yy,sz,sz div 3,45,0,100,100,0,0,1,'',drawgray,clGray);
+    Fplot.PlotDSOGxy(xx,yy,sz,sz div 3,45,0,100,100,0,0,1,3600,'',drawgray,clGray);
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevGalaxy, cfgsc.WhiteBg, false);
     // line 3
     h0:=h0+2*ls;

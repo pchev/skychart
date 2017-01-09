@@ -137,7 +137,7 @@ type
     function PlotVarStar(x,y: single; vmax,vmin : Double):integer;
     function PlotDblStar(x,y,r: single; ma,sep,pa,b_v : Double):integer;
     procedure PlotDeepSkyObject(Axx,Ayy: single;Adim,Ama,Asbr,Apixscale:Double;Atyp:Integer;Amorph:String;whitebg:boolean; forcecolor:boolean; col:Tcolor=clWhite);
-    procedure PlotDSOGxy(Ax,Ay: single; Ar1,Ar2,Apa,Arnuc,Ab_vt,Ab_ve,Ama,Asbr,Apixscale : double;Amorph:string; forcecolor:boolean; col:Tcolor);
+    procedure PlotDSOGxy(Ax,Ay: single; Ar1,Ar2,Apa,Arnuc,Ab_vt,Ab_ve,Ama,Asbr,Apixscale,sizeunit : double;Amorph:string; forcecolor:boolean; col:Tcolor);
     procedure PlotCRose(rosex,rosey,roserd,rot:single;flipx,flipy:integer; WhiteBg:boolean; RoseType: integer);
     procedure PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
     procedure PlotSimMark(x,y: single; mcolor: Tcolor);
@@ -4240,7 +4240,7 @@ begin
 
 end;
 
-Procedure TSplot.PlotDSOGxy(Ax,Ay: single; Ar1,Ar2,Apa,Arnuc,Ab_vt,Ab_ve,Ama,Asbr,Apixscale : double;Amorph:string; forcecolor:boolean; col:Tcolor);
+Procedure TSplot.PlotDSOGxy(Ax,Ay: single; Ar1,Ar2,Apa,Arnuc,Ab_vt,Ab_ve,Ama,Asbr,Apixscale,sizeunit : double;Amorph:string; forcecolor:boolean; col:Tcolor);
 {
 Plots galaxies - Arnuc comes thru as 0, Ab_vt and Ab_ve come thru as 100
 }
@@ -4271,12 +4271,15 @@ begin
     Nebgray:=max(50,cfgplot.Nebgray);
   end;
   // always compute an approximative but homogeneous sbr
+  if sizeunit=0 then sizeunit:=60;
+  Ar1:=Ar1*3600/sizeunit;
+  Ar2:=Ar2*3600/sizeunit;
   if Ar1<=0 then Ar1:=1;
   if Ar2<=0 then Ar2:=Ar1;
   Asbr:= Ama + 2.5*log10(Ar1*Ar2) - 0.26;
   Asbr:=max(Asbr,Ama); // do not overbright small objects
   icol := maxintvalue([Nebgray,minintvalue([Nebbright,
-                trunc(Nebbright-((Asbr-12)/4)*(Nebbright-Nebgray))]
+                trunc(Nebbright-((Asbr-22)/4)*(Nebbright-Nebgray))]
                 )]);
   if icol>200 then lw:=2*cfgchart.drawpen
   else if icol>150 then lw:=1.5*cfgchart.drawpen

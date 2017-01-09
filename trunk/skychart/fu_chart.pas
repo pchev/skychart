@@ -2950,7 +2950,7 @@ end;
 function Tf_chart.FormatDesc:string;
 var desc,buf,buf2,otype,oname,txt,s1,s2,s3: string;
     thr,tht,ths,tazr,tazs,tculmalt: string;
-    searchdir,fn: string;
+    searchdir,fn,ImgCat: string;
     bmp: TBGRAbitmap;
     ipla,isat:integer;
     i,p,l,y,m,d,precision,pa : integer;
@@ -3101,7 +3101,9 @@ if (otype='S*')and(oname=pla[10]) then begin
   if FileExistsutf8(fn) then txt:=txt+'<img src="'+utf8tosys(fn)+'" alt="'+oname+'" border="0" width="200" height="200">'+html_br;
 end;
 // DSO picture
-if sc.Fits.GetFileName(sc.cfgsc.FindCat,oname,fn) then begin
+ImgCat:=sc.cfgsc.FindCat;
+if ImgCat='ONGC' then ImgCat:='SAC';
+if sc.Fits.GetFileName(ImgCat,oname,fn) then begin
   if (ExtractFileExt(fn)<>'.nil') then begin
        sc.Fits.FileName:=fn;
        if sc.Fits.Header.valid then begin
@@ -3542,10 +3544,6 @@ function Tf_Chart.cmd_SetShowPicture(onoff:string):string;
 begin
 result:=msgOK;
 sc.cfgsc.ShowImages:=(uppercase(onoff)='ON');
-if sc.cfgsc.ShowImages then begin
-  sc.catalog.cfgcat.nebcatdef[sac-BaseNeb]:=true;
-  sc.catalog.cfgcat.nebcatfield[sac-BaseNeb,2]:=10;
-end;
 if sc.cfgsc.ShowImages and (not sc.Fits.dbconnected) then begin
    sc.cfgsc.ShowImages:=false;
    WriteTrace(rsErrorPleaseC3);

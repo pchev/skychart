@@ -212,6 +212,7 @@ Procedure ReadGCat(var lin : GCatrec; var ok : boolean; MultiRegion: boolean=tru
 Procedure NextGCat( var ok : boolean);
 procedure CloseGCat ;
 procedure CleanCache;
+procedure GetEmptyRec(var lin : GCatrec);
 // for use by catgen and search index only:
 Function ReadGCatHeader : boolean;
 Procedure OpenGCatfile(nomfich : string; var ok : boolean);
@@ -1257,6 +1258,11 @@ if ok then begin
     if catheader.flen[35]>0 then lin.num[10]:=GetRecSingle(35);
   end else ok:=false;
   end;
+end;
+
+procedure GetEmptyRec(var lin : GCatrec);
+begin
+lin:=emptyrec;
 end;
 
 end.

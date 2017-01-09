@@ -41,7 +41,7 @@ type
   private
     { Private declarations }
     LockCat : boolean;
-    NumCat,CurCat,CurGCat,VerGCat,CurrentUserObj,DSLcolor : integer;
+    NumCat,CurCat,CurGCat,VerGCat,CurrentUserObj,DSLcolor,MessierStrPos : integer;
     GcatFilter, DSLForceColor: boolean;
     EmptyRec : GCatRec;
     FFindId : string;
@@ -105,6 +105,7 @@ type
      function OpenLinCat:boolean;
      function CloseLinCat:boolean;
      procedure FormatGCatS(var rec:GcatRec);
+     procedure FormatGCatN(var rec:GcatRec);
   public
     { Public declarations }
      cfgcat : Tconf_catalog;
@@ -608,6 +609,8 @@ end;
 end;
 
 function Tcatalog.OpenNebCat:boolean;
+var i: integer;
+    trec:GCatrec;
 begin
 InitRec(curcat);
 case curcat of
@@ -622,11 +625,22 @@ case curcat of
    gcneb  : begin
                    VerGCat:=rtNeb;
                    CurGCat:=0;
+                   MessierStrPos:=-1;
                    result:=false;
                    while NewGCat do begin
                       OpenGCatWin(result);
                       if result then break;
                    end;
+                   // Messier object ?
+                   GetEmptyRec(trec);
+                   for i:=1 to 10 do
+                    if trec.vstr[i] and trec.options.altname[i] and
+                       trec.options.altprefix[i] and
+                       (trim(trec.options.flabel[15+i])='M')
+                       then begin
+                         MessierStrPos:=i;
+                         break;
+                       end;
             end;
    voneb  : begin
                 VOobject:='dso';
@@ -1671,13 +1685,34 @@ repeat
 until not result;
 end;
 
+procedure Tcatalog.FormatGCatN(var rec:GcatRec);
+var buf:string;
+begin
+ rec.ra:=deg2rad*rec.ra;
+ rec.dec:=deg2rad*rec.dec;
+ // Messier object
+ if (MessierStrPos>0) then begin
+   if (trim(rec.str[MessierStrPos])>'') then begin
+     // swap primary id
+     buf:=rec.neb.id;
+     rec.neb.id:=trim(rec.options.flabel[16])+blank+trim(rec.str[MessierStrPos]);
+     rec.neb.messierobject:=true;
+     rec.str[MessierStrPos]:=buf;
+     rec.options.flabel[15+MessierStrPos]:='Id';
+   end
+   else
+     rec.vstr[MessierStrPos]:=false;
+ end;
+end;
+
 function Tcatalog.GetGCatN(var rec:GcatRec):boolean;
 begin
 result:=true;
 repeat
   ReadGCat(rec,result);
   if not result then break;
-  if cfgshr.NebFilter and
+  FormatGCatN(rec);
+  if (not (cfgshr.NoFilterMessier and(MessierStrPos>0))) and cfgshr.NebFilter and
      rec.neb.valid[vnMag] and
     (rec.neb.mag>cfgcat.NebMagMax) then begin
              if GCatFilter then NextGCat(result);
@@ -1685,13 +1720,11 @@ repeat
   end;
   if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
   if not rec.neb.valid[vnDim1] then rec.neb.dim1:=rec.options.Size;
-  if cfgshr.NebFilter and
+  if (not (cfgshr.NoFilterMessier and rec.neb.messierobject)) and cfgshr.NebFilter and
      rec.neb.valid[vnDim1] and
      (rec.neb.dim1*60/rec.neb.nebunit<cfgcat.NebSizeMin) then continue;
   if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
   if cfgshr.NebFilter and cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue; // filter big object except M31, LMC, SMC
-  rec.ra:=deg2rad*rec.ra;
-  rec.dec:=deg2rad*rec.dec;
   if rec.neb.valid[vnColor] then begin
      rec.options.UseColor:=1;
   end else begin
@@ -1741,7 +1774,14 @@ for i:=0 to cfgcat.GCatNum-1 do begin
      if ok then begin
         ar:=rec.ra/15;
         de:=rec.dec;
-        FormatGCatS(rec);
+        if ctype=rtStar then
+          FormatGCatS(rec)
+        else if ctype=rtNeb then
+          FormatGCatN(rec)
+        else begin
+          rec.ra:=deg2rad*rec.ra;
+          rec.dec:=deg2rad*rec.dec;
+        end;
         FFindId:=id;
         FFindRecOK:=true;
         FFindRec:=rec;
@@ -2801,6 +2841,12 @@ begin
      CloseVOCat;
      if result then exit;
    end;
+   FindNGcat(Num,ar1,de1,result,rtNeb) ;
+   if result then begin
+      ar1:=deg2rad*15*ar1;
+      de1:=deg2rad*de1;
+      exit;
+   end;
    result:=FindNum(S_SAC,Num,ar1,de1) ;
    if result then exit;
    if uppercase(copy(Num,1,1))='M' then begin
@@ -2822,12 +2868,6 @@ begin
       buf:=StringReplace(Num,'pgc','',[rfReplaceAll,rfIgnoreCase]);
       result:=FindNum(S_PGC,buf,ar1,de1) ;
       if result then exit;
-   end;
-   FindNGcat(Num,ar1,de1,result,rtNeb) ;
-   if result then begin
-      ar1:=deg2rad*15*ar1;
-      de1:=deg2rad*de1;
-      exit;
    end;
 end;
 
