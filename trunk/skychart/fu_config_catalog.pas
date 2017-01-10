@@ -47,6 +47,7 @@ type
     Button7: TButton;
     Button8: TButton;
     Button9: TButton;
+    defnBox: TCheckBox;
     ColorDialog1: TColorDialog;
     ComboBox1: TComboBox;
     delcat: TButton;
@@ -92,6 +93,7 @@ type
     gpn3: TDirectoryEdit;
     GPNbox: TCheckBox;
     ImageList1: TImageList;
+    Label121: TLabel;
     Label4: TLabel;
     Label6: TLabel;
     Label89: TLabel;
@@ -102,7 +104,6 @@ type
     Label1: TLabel;
     Label95: TLabel;
     LabelWarning: TLabel;
-    Label119: TLabel;
     Label22: TLabel;
     Label23: TLabel;
     Label24: TLabel;
@@ -110,25 +111,23 @@ type
     Label26: TLabel;
     Label5: TLabel;
     fw10: TLabel;
-    Label69: TLabel;
     lbn3: TDirectoryEdit;
     LBNbox: TCheckBox;
     ngc3: TDirectoryEdit;
-    NGCbox: TCheckBox;
     FOVPanel: TPanel;
     ocl3: TDirectoryEdit;
     OCLbox: TCheckBox;
     OpenDialog2: TOpenDialog;
     Page5: TTabSheet;
     PanelDef: TPanel;
-    PanelGen: TPanel;
     PanelSpec: TPanel;
     pgc3: TDirectoryEdit;
     PGCBox: TCheckBox;
+    btnsac: TRadioButton;
+    btnongc: TRadioButton;
     rc33: TDirectoryEdit;
     RC3box: TCheckBox;
     sac3: TDirectoryEdit;
-    SACbox: TCheckBox;
     Page1a: TTabSheet;
     SaveDialog1: TSaveDialog;
     sky3: TDirectoryEdit;
@@ -231,6 +230,7 @@ type
     procedure Button8Click(Sender: TObject);
     procedure Button9Click(Sender: TObject);
     procedure CatgenClick(Sender: TObject);
+    procedure defnBoxClick(Sender: TObject);
     procedure delobjClick(Sender: TObject);
     procedure maxrowsChange(Sender: TObject);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
@@ -358,12 +358,11 @@ Label23.caption:=rsGalaxies;
 Label24.caption:=rsOpenCluster;
 Label25.caption:=rsGlobularClus;
 Label26.caption:=rsPlanetaryNeb;
-Label69.caption:=rsGeneral;
 Label15.caption:=rsFieldNumber;
 Label116.caption:=rsMin2;
 Label117.caption:=rsMax2;
 Label118.caption:=rsFilesPath;
-Label119.caption:=rsDefault;
+Label121.caption:=rsDefault;
 Label120.caption:=rsUseOnlyCatal;
 Page5.caption:=rsOtherSoftwar;
 Page4.caption:=rsObsolete;
@@ -624,10 +623,13 @@ begin
 end;
 
 procedure Tf_config_catalog.ShowCDCNeb;
-var spec,def,gen: boolean;
+var spec,def: boolean;
 begin
-sacbox.Checked:=ccat.NebCatDef[sac-BaseNeb];
-ngcbox.Checked:=ccat.NebCatDef[ngc-BaseNeb];
+defnBox.Checked:=ccat.NebCatDef[sac-BaseNeb] or ccat.NebCatDef[ngc-BaseNeb];
+if ccat.NebCatDef[sac-BaseNeb] then
+   btnsac.Checked:=true
+else if ccat.NebCatDef[ngc-BaseNeb] then
+   btnongc.Checked:=true;
 lbnbox.Checked:=ccat.NebCatDef[lbn-BaseNeb];
 rc3box.Checked:=ccat.NebCatDef[rc3-BaseNeb];
 pgcbox.Checked:=ccat.NebCatDef[pgc-BaseNeb];
@@ -658,10 +660,9 @@ pgc3.Text:=changetext(systoutf8(ccat.NebCatPath[pgc-BaseNeb]),pgc3.Text);
 ocl3.Text:=changetext(systoutf8(ccat.NebCatPath[ocl-BaseNeb]),ocl3.Text);
 gcm3.Text:=changetext(systoutf8(ccat.NebCatPath[gcm-BaseNeb]),gcm3.Text);
 gpn3.Text:=changetext(systoutf8(ccat.NebCatPath[gpn-BaseNeb]),gpn3.Text);
-def:= sacbox.Checked;
-gen:=ngcbox.Checked;
+def:= defnBox.Checked;
 spec:=lbnbox.Checked or rc3box.Checked or pgcbox.Checked or oclbox.Checked or gcmbox.Checked or gpnbox.Checked;
-LabelWarning.Visible:=(def and gen) or (def and spec) or (gen and spec);
+LabelWarning.Visible:=(def and spec);
 end;
 
 procedure Tf_config_catalog.ShowCDCStar;
@@ -1192,6 +1193,24 @@ LockCatPath:=true;
 finally
 LockCatPath:=false;
 end;
+end;
+
+procedure Tf_config_catalog.defnBoxClick(Sender: TObject);
+begin
+if LockChange then exit;
+if defnBox.Checked then begin
+  if btnsac.Checked then begin
+     ccat.NebCatDef[1]:=true;
+     ccat.NebCatDef[2]:=false;
+  end else begin
+     ccat.NebCatDef[1]:=false;
+     ccat.NebCatDef[2]:=true;
+  end;
+end else begin
+  ccat.NebCatDef[1]:=false;
+  ccat.NebCatDef[2]:=false;
+end;
+ShowCDCNeb;
 end;
 
 procedure Tf_config_catalog.CDCNebSelClick(Sender: TObject);

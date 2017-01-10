@@ -5217,10 +5217,13 @@ catalog.cfgcat.nebcatfield[uneb-BaseNeb,2]:=10;
 catalog.cfgcat.nebcatdef[voneb-BaseNeb]:=false;
 catalog.cfgcat.nebcatfield[voneb-BaseNeb,2]:=10;
 catalog.cfgcat.nebcatpath[sac-BaseNeb]:='cat'+PathDelim+'sac';
-catalog.cfgcat.nebcatdef[sac-BaseNeb]:=true;
 catalog.cfgcat.nebcatfield[sac-BaseNeb,2]:=10;
 catalog.cfgcat.nebcatpath[ngc-BaseNeb]:='cat'+PathDelim+'openngc';
 catalog.cfgcat.nebcatfield[ngc-BaseNeb,2]:=10;
+if catalog.CheckPath(sac,catalog.cfgcat.nebcatpath[sac-BaseNeb]) then
+   catalog.cfgcat.nebcatdef[sac-BaseNeb]:=true
+else
+   catalog.cfgcat.nebcatdef[ngc-BaseNeb]:=true;
 catalog.cfgcat.nebcatpath[lbn-BaseNeb]:='cat'+PathDelim+'lbn';
 catalog.cfgcat.nebcatfield[lbn-BaseNeb,2]:=5;
 catalog.cfgcat.nebcatpath[rc3-BaseNeb]:='cat'+PathDelim+'rc3';
