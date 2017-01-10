@@ -411,45 +411,31 @@ object f_config_catalog: Tf_config_catalog
         end
         object PanelDef: TPanel
           Left = 0
-          Height = 45
-          Top = 36
+          Height = 97
+          Top = 32
           Width = 488
           BevelInner = bvRaised
-          ClientHeight = 45
+          ClientHeight = 97
           ClientWidth = 488
           TabOrder = 0
-          object Label119: TLabel
+          object Label121: TLabel
             Left = 9
             Height = 15
-            Top = 19
+            Top = 7
             Width = 46
             Caption = 'Default'
             ParentColor = False
           end
-          object SACbox: TCheckBox
-            Tag = 1
-            Left = 92
-            Height = 21
-            Hint = 'Saguaro Astronomy Club Database  8.1'
-            Top = 16
-            Width = 55
-            HelpContext = 107
-            Caption = 'SAC '
-            OnClick = CDCNebSelClick
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 0
-          end
           object fsac1: TLongEdit
             Tag = 1
-            Left = 277
+            Left = 278
             Height = 21
             Hint = '0..10'
-            Top = 16
+            Top = 36
             Width = 30
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 1
+            TabOrder = 0
             OnChange = CDCNebField1Change
             Value = 0
             MaxValue = 10
@@ -459,70 +445,38 @@ object f_config_catalog: Tf_config_catalog
             Left = 317
             Height = 21
             Hint = '0..10'
-            Top = 16
+            Top = 36
             Width = 30
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 2
+            TabOrder = 1
             OnChange = CDCNebField2Change
             Value = 0
             MaxValue = 10
           end
           object sac3: TDirectoryEdit
             Tag = 1
-            Left = 352
+            Left = 354
             Height = 21
-            Top = 16
+            Top = 36
             Width = 104
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
             MaxLength = 0
-            TabOrder = 3
+            TabOrder = 2
             OnChange = CDCNebPathChange
-          end
-        end
-        object PanelGen: TPanel
-          Left = 0
-          Height = 45
-          Top = 84
-          Width = 488
-          BevelInner = bvRaised
-          ClientHeight = 45
-          ClientWidth = 488
-          TabOrder = 1
-          object Label69: TLabel
-            Left = 9
-            Height = 15
-            Top = 14
-            Width = 50
-            Caption = 'General'
-            ParentColor = False
-          end
-          object NGCbox: TCheckBox
-            Tag = 2
-            Left = 92
-            Height = 21
-            Hint = 'A license friendly NGC (New General Catalogue) database'
-            Top = 11
-            Width = 95
-            HelpContext = 107
-            Caption = 'Open NGC '
-            OnClick = CDCNebSelClick
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 0
           end
           object fngc1: TLongEdit
             Tag = 2
             Left = 277
             Height = 21
             Hint = '0..10'
-            Top = 11
+            Top = 66
             Width = 30
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 1
+            TabOrder = 3
             OnChange = CDCNebField1Change
             Value = 0
             MaxValue = 10
@@ -532,27 +486,61 @@ object f_config_catalog: Tf_config_catalog
             Left = 317
             Height = 21
             Hint = '0..10'
-            Top = 11
+            Top = 66
             Width = 30
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 2
+            TabOrder = 4
             OnChange = CDCNebField2Change
             Value = 0
             MaxValue = 10
           end
           object ngc3: TDirectoryEdit
             Tag = 2
-            Left = 353
+            Left = 354
             Height = 21
-            Top = 11
+            Top = 66
             Width = 104
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
             MaxLength = 0
-            TabOrder = 3
+            TabOrder = 5
             OnChange = CDCNebPathChange
+          end
+          object defnBox: TCheckBox
+            Left = 93
+            Height = 21
+            Top = 5
+            Width = 202
+            Caption = 'CDC default nebula catalog '
+            OnClick = defnBoxClick
+            TabOrder = 6
+          end
+          object btnsac: TRadioButton
+            Left = 93
+            Height = 21
+            Hint = 'Saguaro Astronomy Club Database  8.1'
+            Top = 36
+            Width = 51
+            Caption = 'SAC'
+            Checked = True
+            OnClick = defnBoxClick
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 7
+          end
+          object btnongc: TRadioButton
+            Left = 93
+            Height = 21
+            Hint = 'A license friendly NGC (New General Catalogue) database'
+            Top = 66
+            Width = 91
+            Caption = 'Open NGC'
+            OnClick = defnBoxClick
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 8
           end
         end
         object PanelSpec: TPanel
@@ -563,7 +551,7 @@ object f_config_catalog: Tf_config_catalog
           BevelInner = bvRaised
           ClientHeight = 250
           ClientWidth = 488
-          TabOrder = 2
+          TabOrder = 1
           object Label22: TLabel
             Left = 9
             Height = 31
