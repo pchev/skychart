@@ -1,6 +1,10 @@
 program convpgc;
 
 {
+    OBSOLETE! nom[16] is too short for new identification in hyperleda
+}    
+
+{
 extract the data from an Hyperleda database mirror :
 psql -c "CREATE OR REPLACE FUNCTION cdc_name(integer) RETURNS character varying AS 'SELECT design FROM designation WHERE PGC = \$1 and iref in (1,2,3,4,5,6,7,67,88) order by iref asc;' LANGUAGE SQL" hl
 psql -o pgc.txt -c "select pgc, cdc_name(pgc), al2000, de2000, bt, bvt, brief, objtype, type, to_char((10 ^ logd25)/10,9990.99), to_char((10 ^ logd25)/10 / (10 ^ logr25),9990.99), pa, v from meandata where (objtype in ('G','Q','g') or (objtype='M' and multiple='M'))" hl
