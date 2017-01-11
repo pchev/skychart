@@ -5228,7 +5228,7 @@ catalog.cfgcat.nebcatpath[lbn-BaseNeb]:='cat'+PathDelim+'lbn';
 catalog.cfgcat.nebcatfield[lbn-BaseNeb,2]:=5;
 catalog.cfgcat.nebcatpath[rc3-BaseNeb]:='cat'+PathDelim+'rc3';
 catalog.cfgcat.nebcatfield[rc3-BaseNeb,2]:=5;
-catalog.cfgcat.nebcatpath[pgc-BaseNeb]:='cat'+PathDelim+'pgc';
+catalog.cfgcat.nebcatpath[pgc-BaseNeb]:='cat'+PathDelim+'leda';
 catalog.cfgcat.nebcatfield[pgc-BaseNeb,2]:=5;
 catalog.cfgcat.nebcatpath[ocl-BaseNeb]:='cat'+PathDelim+'ocl';
 catalog.cfgcat.nebcatfield[ocl-BaseNeb,2]:=5;
@@ -6094,6 +6094,12 @@ for i:=1 to maxnebcatalog do begin
    buf:=ReadString(section,'nebcatpath'+inttostr(i),catalog.cfgcat.nebcatpath[i]);
    buf:=ExtractSubPath(slash(ConfigAppdir),buf);
    if DirectoryExists(buf) then catalog.cfgcat.nebcatpath[i]:=buf;
+end;
+// New leda catalog replace pgc
+if pos('leda',catalog.cfgcat.nebcatpath[pgc-BaseNeb])<=0 then begin
+   buf:=StringReplace(catalog.cfgcat.nebcatpath[pgc-BaseNeb],'pgc','leda',[]);
+   if FileExists(slash(buf)+'pgc.hdr') then
+      catalog.cfgcat.nebcatpath[pgc-BaseNeb]:=buf;
 end;
 except
   ShowError('Error reading '+filename+' catalog');

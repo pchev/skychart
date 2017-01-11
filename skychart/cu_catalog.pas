@@ -42,7 +42,7 @@ type
     { Private declarations }
     LockCat : boolean;
     NumCat,CurCat,CurGCat,VerGCat,CurrentUserObj,DSLcolor,MessierStrPos : integer;
-    GcatFilter, DSLForceColor: boolean;
+    GcatFilter, DSLForceColor,PgcLeda: boolean;
     EmptyRec : GCatRec;
     FFindId : string;
     FFindRecOK : boolean;
@@ -103,8 +103,14 @@ type
      function GetLBN(var rec:GcatRec):boolean;
      function GetRC3(var rec:GcatRec):boolean;
      procedure FormatPGC(lin : PGCrec; var rec:GcatRec);
+     Function IsPGCpath(path : string) : Boolean;
+     function OpenPGC:boolean;
+     Procedure OpenPGCPos(ar1,ar2,de1,de2: double ; var ok : boolean);
+     function ClosePGC:boolean;
+     procedure FindPGC(id:shortstring; var ar,de:double ; var ok:boolean);
      function GetPGC(var rec:GcatRec):boolean;
-     procedure FindPGC(id: integer; var ra,dec: double; var ok:boolean);
+     function GetOldPGC(var rec:GcatRec):boolean;
+     procedure FindOldPGC(id: integer; var ra,dec: double; var ok:boolean);
      function GetOCL(var rec:GcatRec):boolean;
      function GetGCM(var rec:GcatRec):boolean;
      function GetGPN(var rec:GcatRec):boolean;
@@ -633,19 +639,19 @@ end;
 function Tcatalog.OpenNebCat:boolean;
 begin
 InitRec(curcat);
+MessierStrPos:=-1;
 case curcat of
    sac     : begin SetSacPath(cfgcat.nebcatpath[sac-BaseNeb]); OpenSACwin(result); end;
    ngc     : result:=OpenNGC;
    lbn     : begin SetlbnPath(cfgcat.nebcatpath[lbn-BaseNeb]); Openlbnwin(result); end;
    rc3     : begin Setrc3Path(cfgcat.nebcatpath[rc3-BaseNeb]); Openrc3win(result); end;
-   pgc     : begin SetpgcPath(cfgcat.nebcatpath[pgc-BaseNeb]); Openpgcwin(result); end;
+   pgc     : result:=OpenPGC;
    ocl     : begin SetoclPath(cfgcat.nebcatpath[ocl-BaseNeb]); Openoclwin(result); end;
    gcm     : begin SetgcmPath(cfgcat.nebcatpath[gcm-BaseNeb]); Opengcmwin(result); end;
    gpn     : begin SetgpnPath(cfgcat.nebcatpath[gpn-BaseNeb]); Opengpnwin(result); end;
    gcneb  : begin
                    VerGCat:=rtNeb;
                    CurGCat:=0;
-                   MessierStrPos:=-1;
                    result:=false;
                    while NewGCat do begin
                       OpenGCatWin(result);
@@ -1698,6 +1704,7 @@ end;
 
 procedure Tcatalog.FormatGCatN(var rec:GcatRec);
 var buf:string;
+    i:integer;
 begin
  rec.ra:=deg2rad*rec.ra;
  rec.dec:=deg2rad*rec.dec;
@@ -1713,6 +1720,18 @@ begin
    end
    else
      rec.vstr[MessierStrPos]:=false;
+ end;
+ // Leda catalog
+ if PgcLeda and (rec.options.ShortName='PGC ') then begin
+    rec.neb.id:='PGC'+trim(rec.neb.id);
+    i:=length(trim(rec.str[1]));
+    if (i>0)and(i<15) then begin
+      // swap primary id
+      buf:=rec.neb.id;
+      rec.neb.id:=trim(rec.str[1]);
+      rec.str[1]:=buf;
+      rec.options.flabel[15+1]:='Id';
+    end;
  end;
 end;
 
@@ -2585,6 +2604,98 @@ if result then begin
 end;
 end;
 
+Function Tcatalog.IsPGCpath(path : string) : Boolean;
+begin
+  result:= FileExists(slash(path)+'pgc.hdr');
+  PgcLeda:=result;
+  if not result then result:=pgcunit.IsPGCpath(path);
+end;
+
+function Tcatalog.OpenPGC:boolean;
+var GcatH : TCatHeader;
+    info:TCatHdrInfo;
+    v : integer;
+begin
+IsPGCpath(cfgcat.nebcatpath[pgc-BaseNeb]);
+if PgcLeda then begin
+ CurGCat:=0;
+ SetGcatPath(cfgcat.nebcatpath[pgc-BaseNeb],'pgc');
+ GetGCatInfo(GcatH,info,v,GCatFilter,result);
+ if result then result:=(v=rtNeb);
+ if result then OpenGCatWin(result);
+end else begin
+ pgcunit.SetpgcPath(cfgcat.nebcatpath[pgc-BaseNeb]);
+ pgcunit.Openpgcwin(result);
+end;
+end;
+
+Procedure Tcatalog.OpenPGCPos(ar1,ar2,de1,de2: double ; var ok : boolean);
+var GcatH : TCatHeader;
+    info:TCatHdrInfo;
+    v : integer;
+begin
+IsPGCpath(cfgcat.nebcatpath[pgc-BaseNeb]);
+if PgcLeda then begin
+ CurGCat:=0;
+ SetGcatPath(cfgcat.nebcatpath[pgc-BaseNeb],'pgc');
+ GetGCatInfo(GcatH,info,v,GCatFilter,ok);
+ if ok then ok:=(v=rtNeb);
+ if ok then OpenGCat(ar1,ar2,de1,de2,ok);
+end else begin
+ pgcunit.OpenPGC(ar1,ar2,de1,de2,ok);
+end;
+end;
+
+function Tcatalog.ClosePGC:boolean;
+begin
+if PgcLeda then begin
+ CloseGcat;
+ PgcLeda:=false;
+ result:=true;
+end else begin
+ pgcunit.ClosePGC;
+end;
+end;
+
+function Tcatalog.GetPGC(var rec:GcatRec):boolean;
+begin
+if PgcLeda then
+  result:=GetGCatN(rec)
+else
+  result:=GetOldPGC(rec);
+end;
+
+procedure Tcatalog.FindPGC(id:shortstring; var ar,de:double ; var ok:boolean);
+var
+   H : TCatHeader;
+   info:TCatHdrInfo;
+   rec:GCatrec;
+   version : integer;
+   iid:string;
+begin
+if PgcLeda then begin
+  ok:=false;
+  iid:=id;
+  if fileexists(slash(cfgcat.nebcatpath[pgc-BaseNeb])+'pgc'+'.ixr') then begin
+     SetGcatPath(cfgcat.nebcatpath[pgc-BaseNeb],'pgc');
+     GetGCatInfo(H,info,version,GCatFilter,ok);
+     if ok then FindNumGcatRec(cfgcat.nebcatpath[pgc-BaseNeb],'pgc',iid,H.ixkeylen,rec,ok);
+     if ok then begin
+        ar:=rec.ra/15;
+        de:=rec.dec;
+        FormatGCatN(rec);
+        FFindId:=id;
+        FFindRecOK:=true;
+        FFindRec:=rec;
+     end;
+  end
+  else ok:=false;
+end else begin
+  pgcunit.SetPGCPath(cfgcat.NebCatPath[pgc-BaseNeb]);
+  FindOldPGC(strtointdef(id,0),ar,de,ok) ;
+end;
+end;
+
 procedure Tcatalog.FormatPGC(lin : PGCrec; var rec:GcatRec);
 begin
 rec.neb.mag:=min(99,abs(lin.mb/100));
@@ -2602,14 +2713,14 @@ if lin.pa=255 then rec.neb.pa:=90
 if lin.hrv>-999999 then rec.neb.rv:=lin.hrv;
 end;
 
-function Tcatalog.GetPGC(var rec:GcatRec):boolean;
+function Tcatalog.GetOldPGC(var rec:GcatRec):boolean;
 var lin : PGCrec;
     ma,sz: double;
 begin
 rec:=EmptyRec;
 result:=true;
 repeat
-  ReadPGC(lin,result);
+  pgcunit.ReadPGC(lin,result);
   if not result then break;
   ma:=min(99,abs(lin.mb/100));
   if cfgshr.NebFilter and (ma>cfgcat.NebMagMax) then continue;
@@ -2623,13 +2734,13 @@ if result then begin
 end;
 end;
 
-procedure Tcatalog.FindPGC(id: integer; var ra,dec: double; var ok:boolean);
+procedure Tcatalog.FindOldPGC(id: integer; var ra,dec: double; var ok:boolean);
 var lin: PGCrec;
     rec: GCatrec;
 begin
 InitRec(pgc);
 rec:=EmptyRec;
-FindNumPGC(id,lin,ok);
+findunit.FindNumPGC(id,lin,ok);
 if ok then begin
    FormatPGC(lin,rec);
    ra:=rad2deg*rec.ra/15;
@@ -2748,8 +2859,7 @@ try
                      FindNGC(id,ra,dec,result);
                      end;
         S_PGC      : if IsPGCPath(cfgcat.NebCatPath[pgc-BaseNeb]) then begin
-                     SetPGCPath(cfgcat.NebCatPath[pgc-BaseNeb]);
-                     FindPGC(strtointdef(id,0),ra,dec,result) ;
+                     FindPGC(id,ra,dec,result);
                      end;
         S_GCVS     : if IsGCVPath(cfgcat.VarStarCatPath[gcvs-BaseVar]) then begin
                      SetGCVPath(cfgcat.VarStarCatPath[gcvs-BaseVar]);
@@ -3146,7 +3256,7 @@ if not nextobj then begin
    ngc     : OpenNGCPos(xx1,xx2,yy1,yy2,ok);
    lbn     : OpenLBN(xx1,xx2,yy1,yy2,ok);
    rc3     : OpenRC3(xx1,xx2,yy1,yy2,ok);
-   pgc     : OpenPGC(xx1,xx2,yy1,yy2,ok);
+   pgc     : OpenPGCPos(xx1,xx2,yy1,yy2,ok);
    ocl     : OpenOCL(xx1,xx2,yy1,yy2,ok);
    gcm     : OpenGCM(xx1,xx2,yy1,yy2,ok);
    gpn     : OpenGPN(xx1,xx2,yy1,yy2,ok);
