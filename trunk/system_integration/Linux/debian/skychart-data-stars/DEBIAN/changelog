@@ -1,3 +1,9 @@
+skychart-data-stars (4.0) experimental; urgency=low
+
+  * New version of WDS and GCVS
+
+ -- Patrick Chevalley <pch@ap-i.net>  Wed Jan 11 16:58:07 CET 2017
+
 skychart-data-stars (3.2) experimental; urgency=low
 
   * Remove sky2000 catalog

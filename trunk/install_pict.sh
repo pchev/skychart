@@ -24,4 +24,4 @@ install -m 755 -d $destdir
 install -m 755 -d $destdir/share
 install -m 755 -d $destdir/share/skychart
 
-InstPict pictures_sac_3.2 $destdir/share/skychart
+InstPict pictures_sac_4.0 $destdir/share/skychart

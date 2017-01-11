@@ -17,6 +17,9 @@ AutoReqProv: no
 Pictures of Deepsky objects to use with Skychart planetarium software. 
 
 %changelog
+* Wed Jan 11 2017 Patrick Chevalley
+ - Better object coordinates from Open NGC
+
 * Fri May 1 2015 Patrick Chevalley
  - Pictures improvement
 

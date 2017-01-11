@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-version=3.2
+version=4.0
 
 builddir=/tmp/skychart  # Be sure this is set to a non existent directory, it is removed after the run!
 innosetup="C:\Program Files (x86)\Inno Setup 5\ISCC.exe"  # Install under Wine from http://www.jrsoftware.org/isinfo.php
@@ -37,7 +37,7 @@ LANG=$lang
 
 # make Linux 
 if [[ $make_linux ]]; then
-  ./configure $configopt prefix=$builddir target=i386-linux,x86_64-linux
+  ./configure $configopt prefix=$builddir 
   if [[ $? -ne 0 ]]; then exit 1;fi
   make install_pict
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -53,6 +53,8 @@ if [[ $make_linux ]]; then
   cd $builddir
   mv share debian/skychart-data-pictures/usr/
   cd debian
+  sz=$(du -s skychart-data-pictures/usr | cut -f1)
+  sed -i "s/%size%/$sz/" skychart-data-pictures/DEBIAN/control  
   sed -i "/Version:/ s/3/$version-$currentrev/" skychart-data-pictures/DEBIAN/control
   fakeroot dpkg-deb --build skychart-data-pictures .
   if [[ $? -ne 0 ]]; then exit 1;fi

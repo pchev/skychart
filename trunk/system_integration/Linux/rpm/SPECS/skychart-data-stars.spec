@@ -16,6 +16,9 @@ AutoReqProv: no
 Stars catalog data for use with Skychart planetarium software. 
 
 %changelog
+* Wed Jan 11 2017 Patrick Chevalley
+  - New version of WDS and GCVS catalog
+
 * Mon Dec 26 2011 Patrick Chevalley
   - Remove sky2000 catalog
 
@@ -25,3 +28,4 @@ Stars catalog data for use with Skychart planetarium software.
 %files
 %defattr(-,root,root)
 /usr/share/skychart
+/usr/share/appdata/skychart-data-stars.metainfo.xml

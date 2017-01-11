@@ -25,7 +25,6 @@ install -m 755 -d $destdir
 InstCat catalog_gcm $destdir
 InstCat catalog_gpn $destdir
 InstCat catalog_lbn $destdir
-InstCat catalog_ngc $destdir
 InstCat catalog_ocl $destdir
-InstCat catalog_pgc $destdir
+InstCat catalog_leda $destdir
 

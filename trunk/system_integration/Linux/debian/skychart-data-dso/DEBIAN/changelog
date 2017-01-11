@@ -1,3 +1,9 @@
+skychart-data-dso (4.0) experimental; urgency=low
+
+  * New version of PGC/Leda, remove NGC 
+
+ -- Patrick Chevalley <pch@ap-i.net>  Wed Jan 11 16:58:07 CET 2017
+ 
 skychart-data-dso (3.1) experimental; urgency=low
 
   * New DSO catalog package

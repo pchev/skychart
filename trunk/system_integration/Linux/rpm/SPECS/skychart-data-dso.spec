@@ -16,9 +16,10 @@ AutoReqProv: no
 DSO catalog data for use with Skychart planetarium software. 
 
 %changelog
-* Thu Sep 9 2010 Patrick Chevalley
- - Initial release
+* Wed Jan 11 2017 Patrick Chevalley
+ - Remove NGC and update PGC/Leda
 
 %files
 %defattr(-,root,root)
 /usr/share/skychart
+/usr/share/appdata/skychart-data-dso.metainfo.xml

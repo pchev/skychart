@@ -29,13 +29,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses dynlibs,
+uses dynlibs, gcatunit, findunit,
   LCLIntf, LCLType, LMessages, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, FileUtil;
 
 type
+
+  { TForm1 }
+
   TForm1 = class(TForm)
     Button1: TButton;
+    Edit6: TEdit;
     Label1: TLabel;
     Edit1: TEdit;
     Edit2: TEdit;
@@ -45,11 +49,17 @@ type
     Edit4: TEdit;
     Label4: TLabel;
     Edit5: TEdit;
+    Label5: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
-  public
+    ngcH : TCatHeader;
+    ngcinfo:TCatHdrInfo;
+    ngcversion : integer;
+    ngcGCatFilter: Boolean;
+    procedure FindNGC(id:shortstring; var ar,de:double ; var ok:boolean);
+ public
     { Public declarations }
   end;
 
@@ -60,7 +70,7 @@ implementation
 
 {$R *.lfm}
 
-uses unix, passql, passqlite, sacunit, math;
+uses unix, passql, passqlite, sacunit,  math;
 
 type
   SImageConfig = record
@@ -372,6 +382,20 @@ else if nam='Mrk18' then begin ForceNil:=true; end
 
 end;
 
+procedure TForm1.FindNGC(id:shortstring; var ar,de:double ; var ok:boolean);
+var
+   rec:GCatrec;
+   iid:string;
+begin
+   ok:=false;
+   iid:=id;
+   FindNumGcatRec(edit6.text,'ongc',iid,ngcH.ixkeylen,rec,ok);
+   if ok then begin
+      ar:=rec.ra;
+      de:=rec.dec;
+   end;
+end;
+
 Function Exec(cmd: string; hide: boolean=true): integer;
 begin
  result:=fpSystem(cmd);
@@ -379,14 +403,14 @@ end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 var sac : SACrec;
-    ok : boolean;
+    ok,ngcok : boolean;
     sub,i : integer;
     outdir,cmd,dbn: string;
     db:TLiteDB;
     img : SImageConfig;
     pl: Plate_data;
     rc,datasource,n,margin : integer;
-    size,exposure : double;
+    size,exposure,ngcra,ngcde : double;
     dir,drv,ima,app,platename,nam : string;
 const b=' ';
       f5='0.00000';
@@ -418,6 +442,12 @@ end;
 i:=0;
 assignfile(log,'error.log');
 rewrite(log);
+SetGcatPath(edit6.text,'ongc');
+GetGCatInfo(ngcH,ngcinfo,ngcversion,ngcGCatFilter,ok);
+if not ok then begin
+  edit5.text:='Wrong Open NGC path';
+  exit;
+end;
 SetSACpath(edit1.Text);
 OpenSAC(0,24,-90,90,ok);
 if ok then
@@ -432,7 +462,14 @@ if ok then
       end;
 
       nam:=stringreplace(sac.nom1,' ','',[rfReplaceAll]);
-    
+
+     // get better coordinates from Open NGC
+      FindNGC(nam,ngcra,ngcde,ngcok);
+      if ngcok then begin
+        sac.ar:=ngcra;
+        sac.de:=ngcde;
+      end;
+
     // use the following line for selective re-do.
     //if pos(nam+' ',' UGC3647 ')=0 then continue;
 

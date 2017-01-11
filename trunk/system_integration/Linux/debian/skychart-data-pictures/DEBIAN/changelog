@@ -1,4 +1,10 @@
-skychart-data-pictures (3.2) experimental; urgency=low
+skychart-data-pictures (4.0) experimental; urgency=low
+
+  * Better object coordinates from Open NGC 
+
+ -- Patrick Chevalley <pch@ap-i.net>  Wed Jan 11 16:58:07 CET 2017
+
+ skychart-data-pictures (3.2) experimental; urgency=low
 
   * Pictures improvement
     
