@@ -4,6 +4,7 @@ Section: education
 Priority: optional
 Maintainer: Patrick Chevalley <pch@ap-i.net>
 Architecture: all
+Installed-Size: %size%
 Depends: skychart
 Description: Star catalog data for Skychart / Cartes du Ciel planetarium software
  Contain the catalogs: Tycho2, GCVS, WDS and search index for SAO, BD, HD, GC

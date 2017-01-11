@@ -29,6 +29,5 @@ install -v -m 644 system_integration/Linux/skychart-data-dso/share/appdata/skych
 InstCat catalog_gcm $destdir/share/skychart
 InstCat catalog_gpn $destdir/share/skychart
 InstCat catalog_lbn $destdir/share/skychart
-InstCat catalog_ngc $destdir/share/skychart
 InstCat catalog_ocl $destdir/share/skychart
-InstCat catalog_pgc $destdir/share/skychart
+InstCat catalog_leda $destdir/share/skychart

@@ -4,6 +4,7 @@ Section: education
 Priority: optional
 Maintainer: Patrick Chevalley <pch@ap-i.net>
 Architecture: all
+Installed-Size: %size%
 Depends: skychart
 Replaces: skychart-pictures
 Description: DSO pictures for Skychart / Cartes du Ciel planetarium software
