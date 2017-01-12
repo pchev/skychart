@@ -593,6 +593,7 @@ case curcat of
                 result:=NewGcat;
                 if result then begin
                    OpenGCatWin(result);
+                   CheckMessierColumn;
                    result:=ReadNeb(rec);
                 end;
              end;
@@ -625,6 +626,7 @@ var i: integer;
     trec:GCatrec;
 begin
 // Messier object ?
+MessierStrPos:=-1;
 GetEmptyRec(trec);
 for i:=1 to 10 do
  if trec.vstr[i] and trec.options.altname[i] and
@@ -3307,6 +3309,7 @@ if not nextobj then begin
              ok:=false;
              while NewGCat do begin
                  OpenGCat(xx1,xx2,yy1,yy2,ok);
+                 CheckMessierColumn;
                  if ok then break;
              end;
              end;
@@ -3408,6 +3411,7 @@ repeat
                 ok:=NewGcat;
                 if not ok then break;
                 OpenGCat(xx1,xx2,yy1,yy2,ok);
+                CheckMessierColumn;
                 ok:=GetGcatN(rec);
              end;
              radius:=GetRadius(rec);
