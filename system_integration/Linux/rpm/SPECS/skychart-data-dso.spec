@@ -17,7 +17,7 @@ DSO catalog data for use with Skychart planetarium software.
 
 %changelog
 * Wed Jan 11 2017 Patrick Chevalley
- - Remove NGC and update PGC/Leda
+ - Remove NGC, add Sharpless HII Regions,Barnard Dark Objects and update PGC/Leda
 
 %files
 %defattr(-,root,root)

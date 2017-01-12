@@ -540,7 +540,6 @@ resourcestring
   rsNebulae = 'Deep sky objects';
   rsGalaxies = 'Galaxies';
   rsGeneral = 'General';
-  rsUseOnlyCatal = 'Use only catalogs from one single group.';
   rsDefault = 'Default';
   rsCDCObsoleteC = 'Obsolete CdC catalogs and settings (you can still use them)';
   rsReplacedBy = 'Replaced by';

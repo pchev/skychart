@@ -524,6 +524,8 @@ if cfgsc.shownebulae then begin
   InitNebC(sac);
   InitNebC(ngc);
   InitNebC(lbn);
+  InitNebC(sh2);
+  InitNebC(drk);
   InitNebC(rc3);
   InitNebC(pgc);
   InitNebC(ocl);
@@ -1394,7 +1396,6 @@ var rec:GcatRec;
           if catalog.cfgshr.NebFilter then begin
              if (not (catalog.cfgshr.NoFilterMessier and rec.neb.messierobject)) and rec.neb.valid[vnMag] and (rec.neb.mag>catalog.cfgcat.NebMagMax) then continue;
              if (not (catalog.cfgshr.NoFilterMessier and rec.neb.messierobject)) and rec.neb.valid[vnDim1] and (rec.neb.dim1*60/rec.neb.nebunit<catalog.cfgcat.NebSizeMin) then continue;
-             if catalog.cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=catalog.cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue;
           end;
           lis:=rec.neb.id+FormatFloat(f6,rec.ra)+FormatFloat(f6,rec.dec);
           lid:=rshash(lis,$7FFFFFFF);
@@ -3044,6 +3045,8 @@ try
      if Fcatalog.cfgcat.nebcaton[sac-BaseNeb] then FindAtPosCat(sac);
      if Fcatalog.cfgcat.nebcaton[ngc-BaseNeb] then FindAtPosCat(ngc);
      if Fcatalog.cfgcat.nebcaton[lbn-BaseNeb] then FindAtPosCat(lbn);
+     if Fcatalog.cfgcat.nebcaton[sh2-BaseNeb] then FindAtPosCat(sh2);
+     if Fcatalog.cfgcat.nebcaton[drk-BaseNeb] then FindAtPosCat(drk);
      if Fcatalog.cfgcat.nebcaton[rc3-BaseNeb] then FindAtPosCat(rc3);
      if Fcatalog.cfgcat.nebcaton[pgc-BaseNeb] then FindAtPosCat(pgc);
      if Fcatalog.cfgcat.nebcaton[ocl-BaseNeb] then FindAtPosCat(ocl);
