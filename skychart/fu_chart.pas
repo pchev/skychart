@@ -2226,7 +2226,8 @@ else begin
   dx:=abs(radius/sc.cfgsc.BxGlb); // search a 2 pixel radius
   result:=sc.FindatRaDec(ra,dec,dx,searchcenter,false,ftype);
   if (not result) then result:=sc.FindatRaDec(ra,dec,3*dx,searchcenter,false,ftype);  //else 6 pixel
-  if showlabel then ShowIdentLabel;
+  if showlabel then ShowIdentLabel
+               else Identlabel.Visible:=false;
   if result and showdist then begin
      ra:=sc.cfgsc.FindRA;
      dec:=sc.cfgsc.FindDEC;
@@ -2498,7 +2499,7 @@ if (ssLeft in shift)and(not(ssShift in shift)) then begin
           else ZoomBox(2,X,Y);
 end else if ((ssMiddle in shift)and(not(ssCtrl in Shift)))or((ssLeft in shift)and(ssShift in shift))or(cmain.SimpleMove and (ssLeft in shift)) then begin
      TrackCursor(X,Y,1);
-end else if Shift=[ssCtrl] then begin
+end else if Shift=[ssAlt] then begin
      try
      lockmove:=true;
      IdentXY(x,y,true,false);
