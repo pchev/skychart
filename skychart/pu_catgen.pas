@@ -1077,7 +1077,7 @@ case radiogroup1.itemindex of
        curpos:=curpos+catheader.flen[n]; inc(n);
        if CheckListBox1.Checked[nextpos+10] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=textpos[nextpos+10,2]; end;// Comment
        curpos:=curpos+catheader.flen[n]; inc(n);
-       if CheckListBox1.Checked[nextpos+11] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=textpos[nextpos+11,2]; end;// Color
+       if CheckListBox1.Checked[nextpos+11] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=sizeof(cardinal); end;// Color
        curpos:=curpos+catheader.flen[n]; inc(n);
        inc(n);
        nextpos:=nextpos+12;
@@ -2356,7 +2356,8 @@ procedure Tf_catgen.Shape1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
 with sender as Tshape do begin
-if colordialog1.Execute then Brush.color:=colordialog1.Color;
+ ColorDialog1.Color:=Brush.color;
+ if colordialog1.Execute then Brush.color:=colordialog1.Color;
 end;
 end;
 
