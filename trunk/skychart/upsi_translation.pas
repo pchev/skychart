@@ -545,7 +545,6 @@ CL.AddConstantN('rsCDCNebulaeCa','String').SetString(rsCDCNebulaeCa);
 CL.AddConstantN('rsNebulae','String').SetString(rsNebulae);
 CL.AddConstantN('rsGalaxies','String').SetString(rsGalaxies);
 CL.AddConstantN('rsGeneral','String').SetString(rsGeneral);
-CL.AddConstantN('rsUseOnlyCatal','String').SetString(rsUseOnlyCatal);
 CL.AddConstantN('rsDefault','String').SetString(rsDefault);
 CL.AddConstantN('rsCDCObsoleteC','String').SetString(rsCDCObsoleteC);
 CL.AddConstantN('rsReplacedBy','String').SetString(rsReplacedBy);

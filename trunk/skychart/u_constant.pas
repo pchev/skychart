@@ -404,7 +404,7 @@ const
   wds = 3001;
   gcdbl = 3002;
   BaseNeb = 4000;
-  MaxNebCatalog = 11;
+  MaxNebCatalog = 13;
   sac = 4001;
   ngc = 4002;
   lbn = 4003;
@@ -416,6 +416,8 @@ const
   gcneb = 4009;
   voneb = 4010;
   uneb = 4011;
+  sh2 = 4012;
+  drk = 4013;
   BaseLin = 5000;
   MaxLinCatalog = 1;
   gclin = 5001;
@@ -450,6 +452,8 @@ const
   S_Common = 28;
   S_UNA = 29;
   S_UNB = 30;
+  S_SH2 = 31;
+  S_DRK = 32;
   StarLabel: Tlabellst = ('RA', 'DEC', 'Id', 'mV', 'b-v', 'mB', 'mR',
     'sp', 'pmRA', 'pmDE', 'date', 'px', 'desc', '', '', 'Str1', 'Str2', 'Str3',
     'Str4', 'Str5', 'Str6', 'Str7', 'Str8', 'Str9', 'Str10', 'Num1', 'Num2',

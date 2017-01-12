@@ -389,19 +389,10 @@ object f_config_catalog: Tf_config_catalog
           Caption = 'Files Path'
           ParentColor = False
         end
-        object Label120: TLabel
-          Left = 9
-          Height = 15
-          Top = 389
-          Width = 399
-          Alignment = taCenter
-          Caption = 'Use only catalog from one of the three block at the same time'
-          ParentColor = False
-        end
         object LabelWarning: TLabel
-          Left = 9
+          Left = 7
           Height = 38
-          Top = 405
+          Top = 420
           Width = 481
           AutoSize = False
           Caption = 'Warning'
@@ -469,7 +460,7 @@ object f_config_catalog: Tf_config_catalog
           end
           object fngc1: TLongEdit
             Tag = 2
-            Left = 277
+            Left = 278
             Height = 21
             Hint = '0..10'
             Top = 66
@@ -529,6 +520,7 @@ object f_config_catalog: Tf_config_catalog
             ParentShowHint = False
             ShowHint = True
             TabOrder = 7
+            TabStop = True
           end
           object btnongc: TRadioButton
             Left = 93
@@ -544,16 +536,16 @@ object f_config_catalog: Tf_config_catalog
           end
         end
         object PanelSpec: TPanel
-          Left = 0
-          Height = 250
-          Top = 132
-          Width = 488
+          Left = -8
+          Height = 284
+          Top = 138
+          Width = 494
           BevelInner = bvRaised
-          ClientHeight = 250
-          ClientWidth = 488
+          ClientHeight = 284
+          ClientWidth = 494
           TabOrder = 1
           object Label22: TLabel
-            Left = 9
+            Left = 16
             Height = 31
             Top = 12
             Width = 81
@@ -563,40 +555,40 @@ object f_config_catalog: Tf_config_catalog
             WordWrap = True
           end
           object Label23: TLabel
-            Left = 9
+            Left = 12
             Height = 32
-            Top = 60
-            Width = 82
+            Top = 98
+            Width = 83
             AutoSize = False
             Caption = 'Galaxies'
             ParentColor = False
             WordWrap = True
           end
           object Label24: TLabel
-            Left = 9
+            Left = 12
             Height = 30
-            Top = 108
-            Width = 82
+            Top = 146
+            Width = 83
             AutoSize = False
             Caption = 'Open clusters'
             ParentColor = False
             WordWrap = True
           end
           object Label25: TLabel
-            Left = 9
+            Left = 12
             Height = 30
-            Top = 157
-            Width = 81
+            Top = 195
+            Width = 82
             AutoSize = False
             Caption = 'Globular clusters'
             ParentColor = False
             WordWrap = True
           end
           object Label26: TLabel
-            Left = 9
+            Left = 12
             Height = 38
-            Top = 204
-            Width = 82
+            Top = 242
+            Width = 83
             AutoSize = False
             Caption = 'Planetary nebulae'
             ParentColor = False
@@ -604,10 +596,10 @@ object f_config_catalog: Tf_config_catalog
           end
           object OCLbox: TCheckBox
             Tag = 6
-            Left = 93
+            Left = 97
             Height = 21
             Hint = 'Open Cluster Data 5th Edition    (Lynga 1987)'
-            Top = 105
+            Top = 143
             Width = 142
             HelpContext = 110
             Caption = 'Open Cluster Data'
@@ -618,10 +610,10 @@ object f_config_catalog: Tf_config_catalog
           end
           object GCMbox: TCheckBox
             Tag = 7
-            Left = 93
+            Left = 97
             Height = 21
             Hint = 'Globular Clusters in the Milky Way (Harris, 1997)'
-            Top = 153
+            Top = 191
             Width = 201
             HelpContext = 111
             Caption = 'Globular Cl. in the Milky Way'
@@ -632,10 +624,10 @@ object f_config_catalog: Tf_config_catalog
           end
           object GPNbox: TCheckBox
             Tag = 8
-            Left = 93
+            Left = 97
             Height = 21
             Hint = 'Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)'
-            Top = 201
+            Top = 239
             Width = 207
             HelpContext = 112
             Caption = 'Cat, Galactic Planetary Neb. '
@@ -646,7 +638,7 @@ object f_config_catalog: Tf_config_catalog
           end
           object LBNbox: TCheckBox
             Tag = 3
-            Left = 93
+            Left = 100
             Height = 21
             Hint = 'Lynds'' Catalogue of Bright Nebulae    (Lynds 1965)'
             Top = 9
@@ -660,10 +652,10 @@ object f_config_catalog: Tf_config_catalog
           end
           object PGCBox: TCheckBox
             Tag = 5
-            Left = 93
+            Left = 97
             Height = 21
             Hint = 'PGC/LEDA  (Paturel+ 2009)'
-            Top = 58
+            Top = 96
             Width = 97
             HelpContext = 116
             Caption = 'PGC / LEDA'
@@ -674,7 +666,7 @@ object f_config_catalog: Tf_config_catalog
           end
           object flbn1: TLongEdit
             Tag = 3
-            Left = 278
+            Left = 283
             Height = 21
             Hint = '0..10'
             Top = 9
@@ -688,7 +680,7 @@ object f_config_catalog: Tf_config_catalog
           end
           object flbn2: TLongEdit
             Tag = 3
-            Left = 318
+            Left = 325
             Height = 21
             Hint = '0..10'
             Top = 9
@@ -702,10 +694,10 @@ object f_config_catalog: Tf_config_catalog
           end
           object fpgc1: TLongEdit
             Tag = 5
-            Left = 278
+            Left = 284
             Height = 21
             Hint = '0..10'
-            Top = 58
+            Top = 96
             Width = 30
             ParentShowHint = False
             ShowHint = True
@@ -716,10 +708,10 @@ object f_config_catalog: Tf_config_catalog
           end
           object fpgc2: TLongEdit
             Tag = 5
-            Left = 318
+            Left = 325
             Height = 21
             Hint = '0..10'
-            Top = 58
+            Top = 96
             Width = 30
             ParentShowHint = False
             ShowHint = True
@@ -730,10 +722,10 @@ object f_config_catalog: Tf_config_catalog
           end
           object focl1: TLongEdit
             Tag = 6
-            Left = 277
+            Left = 283
             Height = 21
             Hint = '0..10'
-            Top = 105
+            Top = 143
             Width = 30
             ParentShowHint = False
             ShowHint = True
@@ -744,10 +736,10 @@ object f_config_catalog: Tf_config_catalog
           end
           object focl2: TLongEdit
             Tag = 6
-            Left = 317
+            Left = 324
             Height = 21
             Hint = '0..10'
-            Top = 105
+            Top = 143
             Width = 30
             ParentShowHint = False
             ShowHint = True
@@ -758,10 +750,10 @@ object f_config_catalog: Tf_config_catalog
           end
           object fgcm1: TLongEdit
             Tag = 7
-            Left = 278
+            Left = 284
             Height = 21
             Hint = '0..10'
-            Top = 153
+            Top = 191
             Width = 30
             ParentShowHint = False
             ShowHint = True
@@ -772,10 +764,10 @@ object f_config_catalog: Tf_config_catalog
           end
           object fgcm2: TLongEdit
             Tag = 7
-            Left = 318
+            Left = 325
             Height = 21
             Hint = '0..10'
-            Top = 153
+            Top = 191
             Width = 30
             ParentShowHint = False
             ShowHint = True
@@ -786,10 +778,10 @@ object f_config_catalog: Tf_config_catalog
           end
           object fgpn1: TLongEdit
             Tag = 8
-            Left = 278
+            Left = 284
             Height = 21
             Hint = '0..10'
-            Top = 201
+            Top = 239
             Width = 30
             ParentShowHint = False
             ShowHint = True
@@ -800,10 +792,10 @@ object f_config_catalog: Tf_config_catalog
           end
           object fgpn2: TLongEdit
             Tag = 8
-            Left = 318
+            Left = 325
             Height = 21
             Hint = '0..10'
-            Top = 201
+            Top = 239
             Width = 30
             ParentShowHint = False
             ShowHint = True
@@ -814,7 +806,7 @@ object f_config_catalog: Tf_config_catalog
           end
           object lbn3: TDirectoryEdit
             Tag = 3
-            Left = 354
+            Left = 361
             Height = 21
             Top = 9
             Width = 104
@@ -827,10 +819,10 @@ object f_config_catalog: Tf_config_catalog
           end
           object pgc3: TDirectoryEdit
             Tag = 5
-            Left = 354
+            Left = 361
             Height = 21
-            Top = 58
-            Width = 104
+            Top = 96
+            Width = 105
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
@@ -840,10 +832,10 @@ object f_config_catalog: Tf_config_catalog
           end
           object ocl3: TDirectoryEdit
             Tag = 6
-            Left = 353
+            Left = 360
             Height = 21
-            Top = 105
-            Width = 104
+            Top = 143
+            Width = 105
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
@@ -853,10 +845,10 @@ object f_config_catalog: Tf_config_catalog
           end
           object gcm3: TDirectoryEdit
             Tag = 7
-            Left = 354
+            Left = 361
             Height = 21
-            Top = 153
-            Width = 104
+            Top = 191
+            Width = 105
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
@@ -866,15 +858,121 @@ object f_config_catalog: Tf_config_catalog
           end
           object gpn3: TDirectoryEdit
             Tag = 8
-            Left = 354
+            Left = 361
             Height = 21
-            Top = 201
-            Width = 104
+            Top = 239
+            Width = 105
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
             MaxLength = 0
             TabOrder = 19
+            OnChange = CDCNebPathChange
+          end
+          object sh2box: TCheckBox
+            Tag = 12
+            Left = 100
+            Height = 21
+            Hint = 'Sharpless Catalogue of HII Regions'
+            Top = 34
+            Width = 53
+            Caption = 'Sh 2'
+            OnClick = CDCNebSelClick
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 20
+          end
+          object drkbox: TCheckBox
+            Tag = 13
+            Left = 100
+            Height = 21
+            Hint = 'Barnard''s Catalogue of Dark Objects'
+            Top = 59
+            Width = 109
+            Caption = 'Dark nebulae'
+            OnClick = CDCNebSelClick
+            TabOrder = 21
+          end
+          object fsh21: TLongEdit
+            Tag = 12
+            Left = 283
+            Height = 21
+            Hint = '0..10'
+            Top = 34
+            Width = 30
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 22
+            OnChange = CDCNebField1Change
+            Value = 0
+            MaxValue = 10
+          end
+          object fsh22: TLongEdit
+            Tag = 12
+            Left = 326
+            Height = 21
+            Hint = '0..10'
+            Top = 34
+            Width = 30
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 23
+            OnChange = CDCNebField2Change
+            Value = 0
+            MaxValue = 10
+          end
+          object sh23: TDirectoryEdit
+            Tag = 12
+            Left = 360
+            Height = 21
+            Top = 34
+            Width = 104
+            ShowHidden = False
+            ButtonWidth = 23
+            NumGlyphs = 1
+            MaxLength = 0
+            TabOrder = 24
+            OnChange = CDCNebPathChange
+          end
+          object fdrk1: TLongEdit
+            Tag = 13
+            Left = 283
+            Height = 21
+            Hint = '0..10'
+            Top = 59
+            Width = 30
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 25
+            OnChange = CDCNebField1Change
+            Value = 0
+            MaxValue = 10
+          end
+          object fdrk2: TLongEdit
+            Tag = 13
+            Left = 325
+            Height = 21
+            Hint = '0..10'
+            Top = 59
+            Width = 30
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 26
+            OnChange = CDCNebField2Change
+            Value = 0
+            MaxValue = 10
+          end
+          object drk3: TDirectoryEdit
+            Tag = 13
+            Left = 361
+            Height = 21
+            Top = 59
+            Width = 104
+            ShowHidden = False
+            ButtonWidth = 23
+            NumGlyphs = 1
+            MaxLength = 0
+            TabOrder = 27
             OnChange = CDCNebPathChange
           end
         end

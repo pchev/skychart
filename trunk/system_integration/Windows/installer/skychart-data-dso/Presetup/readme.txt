@@ -7,6 +7,8 @@ This file install all the standard nebulae catalog:
 - GPN
 - LBN
 - OCL
+- SH 2
+- Barnard
 
 Be sure to install in the directory where you already install Skychart.
 

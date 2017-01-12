@@ -100,6 +100,18 @@ type
      function CloseNGC:boolean;
      procedure FindNGC(id:shortstring; var ar,de:double ; var ok:boolean);
      function GetNGC(var rec:GcatRec):boolean;
+     Function IsSH2path(path : string) : Boolean;
+     function OpenSH2:boolean;
+     Procedure OpenSH2Pos(ar1,ar2,de1,de2: double ; var ok : boolean);
+     function CloseSH2:boolean;
+     procedure FindSH2(id:shortstring; var ar,de:double ; var ok:boolean);
+     function GetSH2(var rec:GcatRec):boolean;
+     Function IsDRKpath(path : string) : Boolean;
+     function OpenDRK:boolean;
+     Procedure OpenDRKPos(ar1,ar2,de1,de2: double ; var ok : boolean);
+     function CloseDRK:boolean;
+     procedure FindDRK(id:shortstring; var ar,de:double ; var ok:boolean);
+     function GetDRK(var rec:GcatRec):boolean;
      function GetLBN(var rec:GcatRec):boolean;
      function GetRC3(var rec:GcatRec):boolean;
      procedure FormatPGC(lin : PGCrec; var rec:GcatRec);
@@ -582,6 +594,8 @@ case curcat of
    sac     : result:=GetSAC(rec);
    ngc     : result:=GetNGC(rec);
    lbn     : result:=GetLBN(rec);
+   sh2     : result:=GetSH2(rec);
+   drk     : result:=GetDRK(rec);
    rc3     : result:=GetRC3(rec);
    pgc     : result:=GetPGC(rec);
    ocl     : result:=GetOCL(rec);
@@ -646,6 +660,8 @@ case curcat of
    sac     : begin SetSacPath(cfgcat.nebcatpath[sac-BaseNeb]); OpenSACwin(result); end;
    ngc     : result:=OpenNGC;
    lbn     : begin SetlbnPath(cfgcat.nebcatpath[lbn-BaseNeb]); Openlbnwin(result); end;
+   sh2     : result:=OpenSH2;
+   drk     : result:=OpenDRK;
    rc3     : begin Setrc3Path(cfgcat.nebcatpath[rc3-BaseNeb]); Openrc3win(result); end;
    pgc     : result:=OpenPGC;
    ocl     : begin SetoclPath(cfgcat.nebcatpath[ocl-BaseNeb]); Openoclwin(result); end;
@@ -681,6 +697,8 @@ case curcat of
    sac     : CloseSAC;
    ngc     : CloseNGC;
    lbn     : CloseLBN;
+   sh2     : CloseSH2;
+   drk     : CloseDRK;
    rc3     : CloseRC3;
    pgc     : ClosePGC;
    ocl     : CloseOCL;
@@ -1557,7 +1575,6 @@ repeat
      (not rec.neb.valid[vnDim1] and (rec.neb.dim1<>0)) and
      (rec.neb.dim1*60/rec.neb.nebunit<cfgcat.NebSizeMin) then continue;
   if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
-  if filter and cfgshr.NebFilter and cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue; // filter big object except M31, LMC, SMC
   if (cfgcat.SampSelectedNum>0)and(cfgcat.SampSelectedTable=vocat.SAMPid) then begin
      for i:=0 to cfgcat.SampSelectedNum-1 do
        if cfgcat.SampSelectedRec[i]=vocat.VOcatrec then begin
@@ -1756,7 +1773,6 @@ repeat
      rec.neb.valid[vnDim1] and
      (rec.neb.dim1*60/rec.neb.nebunit<cfgcat.NebSizeMin) then continue;
   if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
-  if cfgshr.NebFilter and cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue; // filter big object except M31, LMC, SMC
   if rec.neb.valid[vnColor] then begin
      rec.options.UseColor:=1;
   end else begin
@@ -2528,6 +2544,144 @@ end
 else ok:=false;
 end;
 
+Function Tcatalog.IsSH2path(path : string) : Boolean;
+begin
+result:= FileExists(slash(path)+'sh 2.hdr');
+end;
+
+function Tcatalog.OpenSH2:boolean;
+var GcatH : TCatHeader;
+    info:TCatHdrInfo;
+    v : integer;
+begin
+ CurGCat:=0;
+ MessierStrPos:=-1;
+ SetGcatPath(cfgcat.nebcatpath[sh2-BaseNeb],'sh 2');
+ GetGCatInfo(GcatH,info,v,GCatFilter,result);
+ if result then result:=(v=rtNeb);
+ if result then OpenGCatWin(result);
+end;
+
+Procedure Tcatalog.OpenSH2Pos(ar1,ar2,de1,de2: double ; var ok : boolean);
+var GcatH : TCatHeader;
+    info:TCatHdrInfo;
+    v : integer;
+begin
+ CurGCat:=0;
+ MessierStrPos:=-1;
+ SetGcatPath(cfgcat.nebcatpath[sh2-BaseNeb],'sh 2');
+ GetGCatInfo(GcatH,info,v,GCatFilter,ok);
+ if ok then ok:=(v=rtNeb);
+ if ok then OpenGCat(ar1,ar2,de1,de2,ok);
+end;
+
+function Tcatalog.CloseSH2:boolean;
+begin
+ CloseGcat;
+ result:=true;
+end;
+
+function Tcatalog.GetSH2(var rec:GcatRec):boolean;
+begin
+  result:=GetGCatN(rec);
+end;
+
+procedure Tcatalog.FindSH2(id:shortstring; var ar,de:double ; var ok:boolean);
+var
+   H : TCatHeader;
+   info:TCatHdrInfo;
+   rec:GCatrec;
+   version : integer;
+   iid:string;
+begin
+ok:=false;
+iid:=id;
+if fileexists(slash(cfgcat.nebcatpath[sh2-BaseNeb])+'sh 2'+'.ixr') then begin
+   SetGcatPath(cfgcat.nebcatpath[sh2-BaseNeb],'sh 2');
+   GetGCatInfo(H,info,version,GCatFilter,ok);
+   MessierStrPos:=-1;
+   if ok then FindNumGcatRec(cfgcat.nebcatpath[sh2-BaseNeb],'sh 2',iid,H.ixkeylen,rec,ok);
+   if ok then begin
+      ar:=rec.ra/15;
+      de:=rec.dec;
+      FormatGCatN(rec);
+      FFindId:=id;
+      FFindRecOK:=true;
+      FFindRec:=rec;
+   end;
+end
+else ok:=false;
+end;
+
+Function Tcatalog.IsDRKpath(path : string) : Boolean;
+begin
+result:= FileExists(slash(path)+'b.hdr');
+end;
+
+function Tcatalog.OpenDRK:boolean;
+var GcatH : TCatHeader;
+    info:TCatHdrInfo;
+    v : integer;
+begin
+ CurGCat:=0;
+ MessierStrPos:=-1;
+ SetGcatPath(cfgcat.nebcatpath[drk-BaseNeb],'b');
+ GetGCatInfo(GcatH,info,v,GCatFilter,result);
+ if result then result:=(v=rtNeb);
+ if result then OpenGCatWin(result);
+end;
+
+Procedure Tcatalog.OpenDRKPos(ar1,ar2,de1,de2: double ; var ok : boolean);
+var GcatH : TCatHeader;
+    info:TCatHdrInfo;
+    v : integer;
+begin
+ CurGCat:=0;
+ MessierStrPos:=-1;
+ SetGcatPath(cfgcat.nebcatpath[drk-BaseNeb],'b');
+ GetGCatInfo(GcatH,info,v,GCatFilter,ok);
+ if ok then ok:=(v=rtNeb);
+ if ok then OpenGCat(ar1,ar2,de1,de2,ok);
+end;
+
+function Tcatalog.CloseDRK:boolean;
+begin
+ CloseGcat;
+ result:=true;
+end;
+
+function Tcatalog.GetDRK(var rec:GcatRec):boolean;
+begin
+  result:=GetGCatN(rec);
+end;
+
+procedure Tcatalog.FindDRK(id:shortstring; var ar,de:double ; var ok:boolean);
+var
+   H : TCatHeader;
+   info:TCatHdrInfo;
+   rec:GCatrec;
+   version : integer;
+   iid:string;
+begin
+ok:=false;
+iid:=id;
+if fileexists(slash(cfgcat.nebcatpath[drk-BaseNeb])+'b'+'.ixr') then begin
+   SetGcatPath(cfgcat.nebcatpath[drk-BaseNeb],'b');
+   GetGCatInfo(H,info,version,GCatFilter,ok);
+   MessierStrPos:=-1;
+   if ok then FindNumGcatRec(cfgcat.nebcatpath[drk-BaseNeb],'b',iid,H.ixkeylen,rec,ok);
+   if ok then begin
+      ar:=rec.ra/15;
+      de:=rec.dec;
+      FormatGCatN(rec);
+      FFindId:=id;
+      FFindRecOK:=true;
+      FFindRec:=rec;
+   end;
+end
+else ok:=false;
+end;
+
 function Tcatalog.GetLBN(var rec:GcatRec):boolean;
 var lin : LBNrec;
 begin
@@ -2546,7 +2700,6 @@ repeat
   else rec.neb.mag:=18;
   end;
   if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
-  if cfgshr.BigNebFilter and (rec.neb.dim1>=cfgshr.BigNebLimit) then continue;
   break;
 until not result;
 if result then begin
@@ -2763,7 +2916,6 @@ repeat
   if not result then break;
   rec.neb.dim1:=lin.dim/10;
   if cfgshr.NebFilter and (rec.neb.dim1<cfgcat.NebSizeMin) then continue;
-  if cfgshr.BigNebFilter and (rec.neb.dim1>=cfgshr.BigNebLimit) then continue; // filter big object except M31, LMC, SMC
   rec.neb.mag:=lin.mt/100;
   if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
   break;
@@ -2799,7 +2951,6 @@ repeat
   if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
   rec.neb.dim1:=(lin.rc/100)*power(10,(lin.c/100));
   if cfgshr.NebFilter and (rec.neb.dim1<cfgcat.NebSizeMin) then continue;
-  if cfgshr.BigNebFilter and (rec.neb.dim1>=cfgshr.BigNebLimit) then continue; // filter big object except M31, LMC, SMC
   break;
 until not result;
 if result then begin
@@ -2934,6 +3085,12 @@ try
                      SetUSNOBpath(cfgcat.StarCatPath[usnob-BaseStar]);
                      FindNumUSNOB(id,ra,dec,result) ;
                      end;
+        S_SH2      : if IsSH2path(cfgcat.NebCatPath[sh2-BaseNeb]) then begin
+                     FindSH2(id,ra,dec,result);
+                     end;
+        S_DRK      : if IsDRKpath(cfgcat.NebCatPath[drk-BaseNeb]) then begin
+                     FindDRK(id,ra,dec,result);
+                     end;
    end;
    if result and (FFindId='') then FFindId:=id;
    ra:=deg2rad*15*ra;
@@ -2997,6 +3154,14 @@ begin
    end;
    if uppercase(copy(Num,1,2))='IC' then begin
       result:=FindNum(S_IC,Num,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,2))='SH' then begin
+      result:=FindNum(S_SH2,Num,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,1))='B' then begin
+      result:=FindNum(S_DRK,Num,ar1,de1) ;
       if result then exit;
    end;
    if uppercase(copy(Num,1,3))='PGC' then begin
@@ -3257,6 +3422,8 @@ if not nextobj then begin
    sac     : OpenSAC(xx1,xx2,yy1,yy2,ok);
    ngc     : OpenNGCPos(xx1,xx2,yy1,yy2,ok);
    lbn     : OpenLBN(xx1,xx2,yy1,yy2,ok);
+   sh2     : OpenSH2Pos(xx1,xx2,yy1,yy2,ok);
+   drk     : OpenDRKPos(xx1,xx2,yy1,yy2,ok);
    rc3     : OpenRC3(xx1,xx2,yy1,yy2,ok);
    pgc     : OpenPGCPos(xx1,xx2,yy1,yy2,ok);
    ocl     : OpenOCL(xx1,xx2,yy1,yy2,ok);
@@ -3347,6 +3514,14 @@ repeat
              end;
    lbn     : begin
              ok:=GetLBN(rec);
+             radius:=GetRadius(rec);
+             end;
+   sh2     : begin
+             ok:=GetSH2(rec);
+             radius:=GetRadius(rec);
+             end;
+   drk     : begin
+             ok:=GetDRK(rec);
              radius:=GetRadius(rec);
              end;
    rc3     : begin
@@ -3495,6 +3670,8 @@ if cfgsc.shownebulae and ((ftype=ftAll)or(ftype=ftNeb)) then begin
   if (not ok) and cfgcat.nebcaton[sac-BaseNeb] then begin ok:=FindAtPos(sac,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseSAC; end;
   if (not ok) and cfgcat.nebcaton[ngc-BaseNeb] then begin ok:=FindAtPos(ngc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseNGC; end;
   if (not ok) and cfgcat.nebcaton[lbn-BaseNeb] then begin ok:=FindAtPos(lbn,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseLBN; end;
+  if (not ok) and cfgcat.nebcaton[sh2-BaseNeb] then begin ok:=FindAtPos(sh2,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseSH2; end;
+  if (not ok) and cfgcat.nebcaton[drk-BaseNeb] then begin ok:=FindAtPos(drk,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseDRK; end;
   if (not ok) and cfgcat.nebcaton[rc3-BaseNeb] then begin ok:=FindAtPos(rc3,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseRC3; end;
   if (not ok) and cfgcat.nebcaton[pgc-BaseNeb] then begin ok:=FindAtPos(pgc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); ClosePGC; end;
   if (not ok) and cfgcat.nebcaton[ocl-BaseNeb] then begin ok:=FindAtPos(ocl,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseOCL; end;
@@ -3569,6 +3746,8 @@ begin
    sac     : result:=IsSACPath(catpath);
    ngc     : result:=IsNGCPath(catpath);
    lbn     : result:=IsLBNPath(catpath);
+   sh2     : result:=IsSH2Path(catpath);
+   drk     : result:=IsDRKPath(catpath);
    rc3     : result:=IsRC3Path(catpath);
    pgc     : result:=IsPGCPath(catpath);
    ocl     : result:=IsOCLPath(catpath);
@@ -3955,7 +4134,7 @@ else if txt='Gx' then txt:=rsGalaxy
 else if txt='Nb' then txt:=rsBrightNebula
 else if txt='Pl' then txt:=rsPlanetaryNeb
 else if txt='C+N' then txt:=rsClusterAndNe
-else if txt='N' then txt:=rsNebula
+else if txt='N' then txt:=rsBrightNebula
 else if txt='*' then txt:=rsStar
 else if txt='DS*' then txt:=rsStar
 else if txt='**' then txt:=rsDoubleStar
