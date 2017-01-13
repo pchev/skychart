@@ -421,7 +421,7 @@ const
   BaseLin = 5000;
   MaxLinCatalog = 1;
   gclin = 5001;
-  MaxSearchCatalog = 30;
+  MaxSearchCatalog = 33;
   S_Messier = 1;
   S_NGC = 2;
   S_IC = 3;
@@ -454,6 +454,7 @@ const
   S_UNB = 30;
   S_SH2 = 31;
   S_DRK = 32;
+  S_GPN = 33;
   StarLabel: Tlabellst = ('RA', 'DEC', 'Id', 'mV', 'b-v', 'mB', 'mR',
     'sp', 'pmRA', 'pmDE', 'date', 'px', 'desc', '', '', 'Str1', 'Str2', 'Str3',
     'Str4', 'Str5', 'Str6', 'Str7', 'Str8', 'Str9', 'Str10', 'Num1', 'Num2',

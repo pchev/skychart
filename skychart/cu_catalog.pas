@@ -42,7 +42,7 @@ type
     { Private declarations }
     LockCat : boolean;
     NumCat,CurCat,CurGCat,VerGCat,CurrentUserObj,DSLcolor,MessierStrPos : integer;
-    GcatFilter, DSLForceColor,PgcLeda: boolean;
+    GcatFilter, DSLForceColor,PgcLeda, GpnNew: boolean;
     EmptyRec : GCatRec;
     FFindId : string;
     FFindRecOK : boolean;
@@ -125,7 +125,13 @@ type
      procedure FindOldPGC(id: integer; var ra,dec: double; var ok:boolean);
      function GetOCL(var rec:GcatRec):boolean;
      function GetGCM(var rec:GcatRec):boolean;
+     Function IsGPNpath(path : string) : Boolean;
+     function OpenGPN:boolean;
+     Procedure OpenGPNPos(ar1,ar2,de1,de2: double ; var ok : boolean);
+     function CloseGPN:boolean;
+     procedure FindGPN(id:shortstring; var ar,de:double ; var ok:boolean);
      function GetGPN(var rec:GcatRec):boolean;
+     function GetGPNold(var rec:GcatRec):boolean;
      function OpenLinCat:boolean;
      function CloseLinCat:boolean;
      procedure FormatGCatS(var rec:GcatRec);
@@ -666,7 +672,7 @@ case curcat of
    pgc     : result:=OpenPGC;
    ocl     : begin SetoclPath(cfgcat.nebcatpath[ocl-BaseNeb]); Openoclwin(result); end;
    gcm     : begin SetgcmPath(cfgcat.nebcatpath[gcm-BaseNeb]); Opengcmwin(result); end;
-   gpn     : begin SetgpnPath(cfgcat.nebcatpath[gpn-BaseNeb]); Opengpnwin(result); end;
+   gpn     : result:=OpenGPN;
    gcneb  : begin
                    VerGCat:=rtNeb;
                    CurGCat:=0;
@@ -2968,13 +2974,104 @@ if result then begin
 end;
 end;
 
+Function Tcatalog.IsGPNpath(path : string) : Boolean;
+begin
+  result:= FileExists(slash(path)+'gpn.hdr');
+  GpnNew:=result;
+  if not result then result:=gpnunit.IsGPNpath(path);
+end;
+
+function Tcatalog.OpenGPN:boolean;
+var GcatH : TCatHeader;
+    info:TCatHdrInfo;
+    v : integer;
+begin
+IsGPNpath(cfgcat.nebcatpath[gpn-BaseNeb]);
+if GpnNew then begin
+ CurGCat:=0;
+ SetGcatPath(cfgcat.nebcatpath[gpn-BaseNeb],'gpn');
+ GetGCatInfo(GcatH,info,v,GCatFilter,result);
+ if result then result:=(v=rtNeb);
+ if result then OpenGCatWin(result);
+end else begin
+ gpnunit.SetgpnPath(cfgcat.nebcatpath[gpn-BaseNeb]);
+ gpnunit.Opengpnwin(result);
+end;
+end;
+
+Procedure Tcatalog.OpenGPNPos(ar1,ar2,de1,de2: double ; var ok : boolean);
+var GcatH : TCatHeader;
+    info:TCatHdrInfo;
+    v : integer;
+begin
+IsGPNpath(cfgcat.nebcatpath[gpn-BaseNeb]);
+if GpnNew then begin
+ CurGCat:=0;
+ SetGcatPath(cfgcat.nebcatpath[gpn-BaseNeb],'gpn');
+ GetGCatInfo(GcatH,info,v,GCatFilter,ok);
+ if ok then ok:=(v=rtNeb);
+ if ok then OpenGCat(ar1,ar2,de1,de2,ok);
+end else begin
+ gpnunit.OpenGPN(ar1,ar2,de1,de2,ok);
+end;
+end;
+
+function Tcatalog.CloseGPN:boolean;
+begin
+if GpnNew then begin
+ CloseGcat;
+ GpnNew:=false;
+ result:=true;
+end else begin
+ gpnunit.CloseGPN;
+end;
+end;
+
 function Tcatalog.GetGPN(var rec:GcatRec):boolean;
+begin
+if GpnNew then
+  result:=GetGCatN(rec)
+else
+  result:=GetGPNold(rec);
+end;
+
+procedure Tcatalog.FindGPN(id:shortstring; var ar,de:double ; var ok:boolean);
+var
+   H : TCatHeader;
+   info:TCatHdrInfo;
+   rec:GCatrec;
+   version : integer;
+   iid:string;
+begin
+if GpnNew then begin
+  ok:=false;
+  iid:=id;
+  if fileexists(slash(cfgcat.nebcatpath[gpn-BaseNeb])+'gpn'+'.ixr') then begin
+     SetGcatPath(cfgcat.nebcatpath[gpn-BaseNeb],'gpn');
+     GetGCatInfo(H,info,version,GCatFilter,ok);
+     if ok then FindNumGcatRec(cfgcat.nebcatpath[gpn-BaseNeb],'gpn',iid,H.ixkeylen,rec,ok);
+     if ok then begin
+        ar:=rec.ra/15;
+        de:=rec.dec;
+        FormatGCatN(rec);
+        FFindId:=id;
+        FFindRecOK:=true;
+        FFindRec:=rec;
+     end;
+  end
+  else ok:=false;
+end else begin
+  ok:=false;
+end;
+end;
+
+function Tcatalog.GetGPNold(var rec:GcatRec):boolean;
 var lin : GPNrec;
 begin
 rec:=EmptyRec;
 result:=true;
 repeat
-  ReadGPN(lin,result);
+  gpnunit.ReadGPN(lin,result);
   if not result then break;
   rec.neb.mag:=lin.mv/100;
   if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
@@ -3091,6 +3188,9 @@ try
         S_DRK      : if IsDRKpath(cfgcat.NebCatPath[drk-BaseNeb]) then begin
                      FindDRK(id,ra,dec,result);
                      end;
+        S_GPN      : if IsGPNpath(cfgcat.NebCatPath[gpn-BaseNeb]) then begin
+                     FindGPN(id,ra,dec,result);
+                     end;
    end;
    if result and (FFindId='') then FFindId:=id;
    ra:=deg2rad*15*ra;
@@ -3164,6 +3264,8 @@ begin
       result:=FindNum(S_DRK,Num,ar1,de1) ;
       if result then exit;
    end;
+   result:=FindNum(S_GPN,Num,ar1,de1) ;
+   if result then exit;
    if uppercase(copy(Num,1,3))='PGC' then begin
       buf:=StringReplace(Num,'pgc','',[rfReplaceAll,rfIgnoreCase]);
       result:=FindNum(S_PGC,buf,ar1,de1) ;
@@ -3428,7 +3530,7 @@ if not nextobj then begin
    pgc     : OpenPGCPos(xx1,xx2,yy1,yy2,ok);
    ocl     : OpenOCL(xx1,xx2,yy1,yy2,ok);
    gcm     : OpenGCM(xx1,xx2,yy1,yy2,ok);
-   gpn     : OpenGPN(xx1,xx2,yy1,yy2,ok);
+   gpn     : OpenGPNPos(xx1,xx2,yy1,yy2,ok);
    vostar  : begin
                 VOobject:='star';
                 SetVOCatpath(slash(VODir));
