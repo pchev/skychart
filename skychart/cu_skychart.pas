@@ -290,6 +290,7 @@ savfillmw:=cfgsc.FillMilkyWay;
 scopemark:=cfgsc.ScopeMark;
 saveplaplot:=Fplot.cfgplot.plaplot;
 savebg:=Fplot.cfgplot.color[0];
+newtime:= newtime or (cfgsc.fov>(10*minarc));
 try
   chdir(appdir);
   // initialize chart value
