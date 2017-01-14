@@ -1594,6 +1594,7 @@ CL.AddConstantN('rsSeptember','String').SetString(rsSeptember);
 CL.AddConstantN('rsOctober','String').SetString(rsOctober);
 CL.AddConstantN('rsNovember','String').SetString(rsNovember);
 CL.AddConstantN('rsDecember','String').SetString(rsDecember);
+CL.AddConstantN('rsSlewToChartC','String').SetString(rsSlewToChartC);
 
 end;
 

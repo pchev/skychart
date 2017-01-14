@@ -22,10 +22,10 @@ object f_chart: Tf_chart
     OnResize = ChartResize
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 493
-      Height = 323
+      Left = 488
+      Height = 318
       Top = 0
-      Width = 15
+      Width = 20
       Align = alRight
       Kind = sbVertical
       LargeChange = 10
@@ -38,8 +38,8 @@ object f_chart: Tf_chart
     object HorScrollBar: TScrollBar
       Cursor = crArrow
       Left = 0
-      Height = 15
-      Top = 323
+      Height = 20
+      Top = 318
       Width = 508
       Align = alBottom
       LargeChange = 10
@@ -487,6 +487,10 @@ object f_chart: Tf_chart
       object SlewCursor: TMenuItem
         Caption = 'Slew to cursor position'
         OnClick = SlewCursorClick
+      end
+      object SlewCenter: TMenuItem
+        Caption = 'Slew to chart center'
+        OnClick = SlewCenterClick
       end
       object Slew1: TMenuItem
         Caption = 'Slew'

@@ -74,6 +74,7 @@ type
     MenuCircle9: TMenuItem;
     MenuCircle10: TMenuItem;
     EyepieceMask: TMenuItem;
+    SlewCenter: TMenuItem;
     MenuTelescopeToObsList: TMenuItem;
     MenuCursorToObsList: TMenuItem;
     Resetalllabel: TMenuItem;
@@ -204,6 +205,7 @@ type
     procedure RemoveLastLabel1Click(Sender: TObject);
     procedure SAMPsendcoordClick(Sender: TObject);
     procedure search1Click(Sender: TObject);
+    procedure SlewCenterClick(Sender: TObject);
     procedure SlewCursorClick(Sender: TObject);
     procedure Target1Click(Sender: TObject);
     procedure TrackTelescope1Click(Sender: TObject);
@@ -505,6 +507,7 @@ search3.Caption:=infocoord_url[3,2];
 Telescope1.caption:=rsTelescope;
 TrackTelescope1.Caption:=rsTrackTelesco;
 SlewCursor.Caption:=rsSlewToCursor;
+SlewCenter.Caption:=rsSlewToChartC;
 Slew1.caption:=rsSlew;
 Sync1.caption:=rsSync;
 CopyCoord1.Caption:=rsCopyCoordina;
@@ -1161,6 +1164,14 @@ begin
   sc.cfgsc.FindRA:=ra;
   sc.cfgsc.FindDEC:=dec;
   sc.cfgsc.FindName:='cursor';
+  Slew1Click(sender);
+end;
+
+procedure Tf_chart.SlewCenterClick(Sender: TObject);
+begin
+  sc.cfgsc.FindRA:=sc.cfgsc.racentre;
+  sc.cfgsc.FindDEC:=sc.cfgsc.decentre;
+  sc.cfgsc.FindName:='center';
   Slew1Click(sender);
 end;
 
