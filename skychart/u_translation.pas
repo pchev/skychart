@@ -1309,7 +1309,7 @@ resourcestring
   rsShowUserDefi = 'Show User defined objects';
   rsMaximumRows = 'Maximum rows';
   rsSelectColorB = 'Select color (black for catalog default)';
-  rsShowOnlyMeri = 'Show only meridian in Alt/Az';
+  rsShowOnlyMeri = 'Show only meridian';
   rsOneEvery = 'One every';
   rsComponent = 'Component';
   rsShowDSOLines = 'Show nebulae outlines';
