@@ -909,7 +909,7 @@ procedure Tf_chart.EyepieceMaskClick(Sender: TObject);
 begin
   sc.cfgsc.EyepieceMask:=not sc.cfgsc.EyepieceMask;
   EyepieceMask.Checked:=sc.cfgsc.EyepieceMask;
-  Refresh(true,true);
+  Refresh(true,false);
 end;
 
 procedure Tf_chart.SetScrollBar;
@@ -980,7 +980,7 @@ with sc do begin
     cfgsc.racentre:=rmod(pi2-deg2rad*HorScrollBar.Position/3600+pi2,pi2);
 end;
 end;
-Refresh(true,true);
+Refresh(true,false);
 RefreshTimer.enabled:=false;
 RefreshTimer.enabled:=true;
 finally
@@ -1021,7 +1021,7 @@ with sc do begin
     if cfgsc.decentre>pid2 then cfgsc.decentre:=pi-cfgsc.decentre;
 end;
 end;
-Refresh(true,true);
+Refresh(true,false);
 RefreshTimer.enabled:=false;
 RefreshTimer.enabled:=true;
 finally
@@ -1095,7 +1095,7 @@ if sc.cfgsc.poscustomlabels>0 then begin
   dec(sc.cfgsc.numcustomlabels);
   sc.cfgsc.poscustomlabels:=sc.cfgsc.numcustomlabels;
 end;
-Refresh(true,true);
+Refresh(true,false);
 end;
 
 procedure Tf_chart.SAMPsendcoordClick(Sender: TObject);
@@ -1170,7 +1170,7 @@ if sc.cfgsc.TargetOn then begin
    if VerboseMsg then
     WriteTrace('Target click 1');
    sc.cfgsc.TargetOn:=false;
-   Refresh(true,true);
+   Refresh(true,false);
 end else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6)
 then begin
    if VerboseMsg then
@@ -1179,7 +1179,7 @@ then begin
    sc.cfgsc.TargetName:=sc.cfgsc.TrackName;
    sc.cfgsc.TargetRA:=sc.cfgsc.TrackRA;
    sc.cfgsc.TargetDec:=sc.cfgsc.TrackDec;
-   Refresh(true,true);
+   Refresh(true,false);
 end;
 end;
 
@@ -1542,7 +1542,7 @@ if VerboseMsg then
    rotation(180);
  end;
  if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
- Refresh(true,true);
+ Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_FlipYExecute(Sender: TObject);
@@ -1556,7 +1556,7 @@ if (sc.cfgsc.FlipX<0)and(sc.cfgsc.Flipy<0) then begin // chart_FlipX+y=rotation
   rotation(180);
 end;
  if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
- Refresh(true,true);
+ Refresh(true,false);
 end;
 
 procedure Tf_chart.MoveCamera(angle:single);
@@ -1649,7 +1649,7 @@ begin
 if VerboseMsg then
  WriteTrace(caption+' rotation');
  sc.cfgsc.theta:=rmod(sc.cfgsc.theta+deg2rad*rot+pi2,pi2);
- Refresh(true,true);
+ Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_rot_plusExecute(Sender: TObject);
@@ -1669,7 +1669,7 @@ begin
     sc.cfgsc.TrackOn:=true;
     sc.cfgsc.TrackType:=4;
   end;
-  Refresh(true,true);
+  Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_GridEQExecute(Sender: TObject);
@@ -1681,7 +1681,7 @@ if VerboseMsg then
    sc.cfgsc.TrackOn:=true;
    sc.cfgsc.TrackType:=4;
  end;
- Refresh(true,true);
+ Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_GridExecute(Sender: TObject);
@@ -1695,7 +1695,7 @@ if VerboseMsg then
    sc.cfgsc.TrackOn:=true;
    sc.cfgsc.TrackType:=4;
  end;
- Refresh(true,true);
+ Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_zoomplusExecute(Sender: TObject);
@@ -1724,7 +1724,7 @@ else
     sc.MovetoXY(xcursor,ycursor);
 sc.zoom(zoomfactor);
 sc.cfgsc.TrackOn:=false;
-Refresh(true,true);
+Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_zoomminusmoveExecute(Sender: TObject);
@@ -1737,7 +1737,7 @@ else
     sc.MovetoXY(xcursor,ycursor);
 sc.zoom(1/zoomfactor);
 sc.cfgsc.TrackOn:=false;
-Refresh(true,true);
+Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_MoveWestExecute(Sender: TObject);
@@ -1745,7 +1745,7 @@ begin
 if VerboseMsg then
  WriteTrace(caption+' MoveWestExecute');
  sc.MoveChart(0,-1,movefactor);
- Refresh(true,true);
+ Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_MoveEastExecute(Sender: TObject);
@@ -1753,7 +1753,7 @@ begin
 if VerboseMsg then
  WriteTrace(caption+' MoveEastExecute');
  sc.MoveChart(0,1,movefactor);
- Refresh(true,true);
+ Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_MoveNorthExecute(Sender: TObject);
@@ -1761,7 +1761,7 @@ begin
 if VerboseMsg then
  WriteTrace(caption+' MoveNorthExecute');
  sc.MoveChart(1,0,movefactor);
- Refresh(true,true);
+ Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_MoveSouthExecute(Sender: TObject);
@@ -1769,7 +1769,7 @@ begin
  sc.MoveChart(-1,0,movefactor);
 if VerboseMsg then
  WriteTrace(caption+' MoveSouthExecute');
- Refresh(true,true);
+ Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_MoveNorthWestExecute(Sender: TObject);
@@ -1777,7 +1777,7 @@ begin
  sc.MoveChart(1,-1,movefactor);
 if VerboseMsg then
  WriteTrace(caption+' MoveNorthWestExecute');
- Refresh(true,true);
+ Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_MoveNorthEastExecute(Sender: TObject);
@@ -1785,7 +1785,7 @@ begin
  sc.MoveChart(1,1,movefactor);
 if VerboseMsg then
  WriteTrace(caption+' MoveNorthEastExecute');
- Refresh(true,true);
+ Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_MoveSouthWestExecute(Sender: TObject);
@@ -1793,7 +1793,7 @@ begin
  sc.MoveChart(-1,-1,movefactor);
 if VerboseMsg then
  WriteTrace(caption+' MoveSouthWestExecute');
- Refresh(true,true);
+ Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_MoveSouthEastExecute(Sender: TObject);
@@ -1801,7 +1801,7 @@ begin
  sc.MoveChart(-1,1,movefactor);
 if VerboseMsg then
  WriteTrace(caption+' MoveSouthEastExecute');
- Refresh(true,true);
+ Refresh(true,false);
 end;
 
 procedure Tf_chart.CKeyDown(Key: Word; Shift: TShiftState);
@@ -1850,39 +1850,39 @@ else begin
     case key of
      VK_Q: if sc.plot.cfgplot.partsize<=4.8 then begin  // ctrl+q
             sc.plot.cfgplot.partsize:=sc.plot.cfgplot.partsize+0.2;
-            Refresh(true,true);
+            Refresh(true,false);
           end;
      VK_A: if sc.plot.cfgplot.partsize>=0.3 then begin  // ctrl+a
             sc.plot.cfgplot.partsize:=sc.plot.cfgplot.partsize-0.2;
-            Refresh(true,true);
+            Refresh(true,false);
           end;
      VK_W: if sc.plot.cfgplot.magsize<=9.5  then begin   // ctrl+w
             sc.plot.cfgplot.magsize:=sc.plot.cfgplot.magsize+0.5;
-            Refresh(true,true);
+            Refresh(true,false);
           end;
      VK_S: if sc.plot.cfgplot.magsize>=1.5   then begin   // ctrl+s
             sc.plot.cfgplot.magsize:=sc.plot.cfgplot.magsize-0.5;
-            Refresh(true,true);
+            Refresh(true,false);
           end;
      VK_E: if sc.plot.cfgplot.contrast<=980 then begin   // ctrl+e
             sc.plot.cfgplot.contrast:=sc.plot.cfgplot.contrast+20;
-            Refresh(true,true);
+            Refresh(true,false);
           end;
      VK_D: if sc.plot.cfgplot.contrast>=120  then begin   // ctrl+d
             sc.plot.cfgplot.contrast:=sc.plot.cfgplot.contrast-20;
-            Refresh(true,true);
+            Refresh(true,false);
           end;
      VK_R : if sc.plot.cfgplot.saturation<=250 then begin  // ctrl+r
             sc.plot.cfgplot.saturation:=sc.plot.cfgplot.saturation+20;
-            Refresh(true,true);
+            Refresh(true,false);
           end;
      VK_F: if sc.plot.cfgplot.saturation>=5 then begin  // ctrl+f
             sc.plot.cfgplot.saturation:=sc.plot.cfgplot.saturation-20;
-            Refresh(true,true);
+            Refresh(true,false);
           end;
      VK_L: begin                                        // ctrl+l
             sc.cfgsc.ShowLabel[8]:=not sc.cfgsc.ShowLabel[8];
-            Refresh(true,true);
+            Refresh(true,false);
            end;
     end;
   end else if (Shift=[ssCtrl,ssShift])and (key<>VK_CONTROL) then begin
@@ -1890,7 +1890,7 @@ else begin
     case key of
      VK_L: begin                                        // ctrl+shift+l
             sc.cfgsc.ShowLegend:=not sc.cfgsc.ShowLegend;
-            Refresh(true,true);
+            Refresh(true,false);
            end;
     end;
   end else begin
@@ -2061,7 +2061,7 @@ begin
   sc.cfgsc.TrackOn:=true;
 if VerboseMsg then
  WriteTrace(caption+' TrackOn1Click');
-  Refresh(true,true);
+  Refresh(true,false);
 end;
 
 procedure Tf_chart.TrackOff1Click(Sender: TObject);
@@ -2070,7 +2070,7 @@ begin
   sc.cfgsc.TrackOn:=false;
 if VerboseMsg then
  WriteTrace(caption+' TrackOff1Click');
-  Refresh(true,true);
+  Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_CentreExecute(Sender: TObject);
@@ -2082,7 +2082,7 @@ begin
   sc.cfgsc.TrackOn:=false;
 if VerboseMsg then
  WriteTrace(caption+' CentreExecute');
-  Refresh(true,true);
+  Refresh(true,false);
 end;
 
 procedure Tf_chart.CopyCoord1Click(Sender: TObject);
@@ -2420,7 +2420,7 @@ if MovingCircle then begin
    if button=mbLeft then begin
       inc(sc.cfgsc.NumCircle);
       GetAdXy(Xcursor,Ycursor,sc.cfgsc.CircleLst[sc.cfgsc.NumCircle,1],sc.cfgsc.CircleLst[sc.cfgsc.NumCircle,2],sc.cfgsc);
-      Refresh(true,true);
+      Refresh(true,false);
    end;
 end
 else if (button=mbLeft)and sc.cfgsc.ShowScale then begin
@@ -2449,7 +2449,7 @@ if (button=mbMiddle)or((button=mbLeft)and(ssShift in shift))or((button=mbLeft)an
    Image1.Cursor:=ChartCursor;
    if TrackCursorMove then begin
      TrackCursor(X,Y,2);
-     Refresh(true,true);
+     Refresh(true,false);
    end;
 end;
 end;
@@ -2902,7 +2902,7 @@ begin
   sc.cfgsc.ShowImageList:=not sc.cfgsc.ShowImageList;
   sc.cfgsc.ShowBackgroundImage:=sc.cfgsc.ShowImageList;
   if VerboseMsg then WriteTrace(caption+' BlinkTimerTimer');
-  Refresh(true,true);
+  Refresh(true,false);
   finally
   lockblink:=false;
   end;
@@ -3461,7 +3461,7 @@ if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
   sc.cfgsc.TrackOn:=true;
   sc.cfgsc.TrackType:=4;
 end;
-Refresh(true,true);
+Refresh(true,false);
 end;
 
 procedure Tf_chart.chart_switchbackgroundExecute(Sender: TObject);
@@ -3474,7 +3474,7 @@ if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
   sc.cfgsc.TrackOn:=true;
   sc.cfgsc.TrackType:=4;
 end;
-Refresh(true,true);
+Refresh(true,false);
 end;
 
 
@@ -3522,7 +3522,7 @@ if loadnew and sc.cfgsc.ShowBackgroundImage and (not sc.Fits.Header.valid) then 
   end;
 end
   else result:=msgOK;
-Refresh(true,true);
+Refresh(true,false);
 end;
 
 function Tf_Chart.cmd_LoadBGimage(fn:string):string;
@@ -3550,7 +3550,7 @@ if sc.cfgsc.ShowImages and (not sc.Fits.dbconnected) then begin
    WriteTrace(rsErrorPleaseC3);
    result:=msgFailed;
 end;
-Refresh(true,true);
+Refresh(true,false);
 end;
 
 function Tf_Chart.cmd_SetGridEQ(onoff:string):string;
@@ -3731,7 +3731,7 @@ if VerboseMsg then
  WriteTrace(caption+' cmd_Resize');
 width:=StrToIntDef(w,width);
 height:=StrToIntDef(h,height);
-refresh(true,true);
+refresh(true,false);
 result:=msgOK;
 end;
 
@@ -4603,7 +4603,7 @@ with sender as TMenuItem do begin
   checked:=not checked;
   sc.cfgsc.circleok[tag]:=checked;
 end;
-Refresh(true,true);
+Refresh(true,false);
 end;
 
 procedure Tf_chart.MenuAddToObsListClick(Sender: TObject);
@@ -4666,7 +4666,7 @@ with sender as TMenuItem do begin
   checked:=not checked;
   sc.cfgsc.rectangleok[tag]:=checked;
 end;
-Refresh(true,true);
+Refresh(true,false);
 end;
 
 function Tf_chart.cmd_PDSS(DssDir,ImagePath,ImageName, useexisting: string):string;
@@ -4769,7 +4769,7 @@ if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width)
       end;
       result:=msgOK;
       sc.bgsettingchange:=true;
-      Refresh(true,true);
+      Refresh(true,false);
    end;
 end;
 end;
@@ -4923,7 +4923,7 @@ if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
   sc.cfgsc.TrackOn:=true;
   sc.cfgsc.TrackType:=4;
 end;
-refresh(true,true);
+refresh(true,false);
 end;
 
 procedure Tf_chart.cmd_LessStar;
@@ -4940,7 +4940,7 @@ if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
   sc.cfgsc.TrackOn:=true;
   sc.cfgsc.TrackType:=4;
 end;
-refresh(true,true);
+refresh(true,false);
 end;
 
 procedure Tf_chart.cmd_MoreNeb;
@@ -4955,7 +4955,7 @@ if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
   sc.cfgsc.TrackOn:=true;
   sc.cfgsc.TrackType:=4;
 end;
-refresh(true,true);
+refresh(true,false);
 end;
 
 procedure Tf_chart.cmd_LessNeb;
@@ -4972,7 +4972,7 @@ if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
   sc.cfgsc.TrackOn:=true;
   sc.cfgsc.TrackType:=4;
 end;
-refresh(true,true);
+refresh(true,false);
 end;
 
 function Tf_chart.ExecuteCmd(arg:Tstringlist):string;
@@ -5057,10 +5057,10 @@ case n of
  65 : cmd_LessNeb;
  66 : chart_GridEQExecute(Self);
  67 : chart_GridExecute(Self);
- 68 : begin result:=cmd_SwitchGridNum; Refresh(true,true); end;
- 69 : begin result:=cmd_SwitchConstL; Refresh(true,true); end;
- 70 : begin result:=cmd_SwitchConstB; Refresh(true,true); end;
- 71 : begin if sc.cfgsc.projpole<>equat then sc.cfgsc.projpole:=equat else sc.cfgsc.projpole:=altaz; refresh(true,true); end;
+ 68 : begin result:=cmd_SwitchGridNum; Refresh(true,false); end;
+ 69 : begin result:=cmd_SwitchConstL; Refresh(true,false); end;
+ 70 : begin result:=cmd_SwitchConstB; Refresh(true,false); end;
+ 71 : begin if sc.cfgsc.projpole<>equat then sc.cfgsc.projpole:=equat else sc.cfgsc.projpole:=altaz; refresh(true,false); end;
  77 : result:=cmd_SetGridNum(arg[1]);
  78 : result:=cmd_SetConstL(arg[1]);
  79 : result:=cmd_SetConstB(arg[1]);
@@ -5123,7 +5123,7 @@ if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
   sc.cfgsc.TrackOn:=true;
   sc.cfgsc.TrackType:=4;
 end;
-Refresh(true,true);
+Refresh(true,false);
 end;
 
 procedure Tf_chart.SetZenit(field : double; redraw:boolean=true);
@@ -5333,7 +5333,7 @@ begin
 if sc.cfgsc.NumCircle>0 then dec(sc.cfgsc.NumCircle);
 if VerboseMsg then
  WriteTrace(caption+' RemoveLastCircle1Click');
-Refresh(true,true);
+Refresh(true,false);
 end;
 
 procedure Tf_chart.RemoveAllCircles1Click(Sender: TObject);
@@ -5341,7 +5341,7 @@ begin
 sc.cfgsc.NumCircle:=0;
 if VerboseMsg then
  WriteTrace(caption+' RemoveAllCircles1Click');
-Refresh(true,true);
+Refresh(true,false);
 end;
 
 procedure Tf_chart.MenuSaveCircleClick(Sender: TObject);
@@ -5433,7 +5433,7 @@ if l.Items.Count>0 then begin
       end;
     end;
   end;
-  Refresh(true,true);
+  Refresh(true,false);
 end;
 finally
 b1.Free;
@@ -5591,7 +5591,7 @@ begin
 if OpenDialog1.InitialDir='' then OpenDialog1.InitialDir:=HomeDir;
 if OpenDialog1.Execute then begin
   cmd_LoadCircle(UTF8ToSys(OpenDialog1.FileName));
-  Refresh(true,true);
+  Refresh(true,false);
 end;
 end;
 
