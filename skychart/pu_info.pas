@@ -493,6 +493,17 @@ StringGrid2.Cells[2,0]:=rsDEC;
 StringGrid2.Cells[3,0]:=rsType;
 StringGrid2.Cells[4,0]:=rsName;
 StringGrid2.Cells[5,0]:=rsMagn;
+ComboBox1.Clear;
+ComboBox1.Items.Add('');
+ComboBox1.Items.Add(rsRA);
+ComboBox1.Items.Add(rsDEC);
+ComboBox1.Items.Add(rsType);
+ComboBox1.Items.Add(rsName);
+ComboBox1.Items.Add(rsMagn);
+for i:=6 to colc-1 do begin
+  StringGrid2.Cells[i,0]:=IntToStr(i);
+  ComboBox1.Items.Add(rsColumns+blank+IntToStr(i));
+end;
 // fill the table
 rowc:=1;
 colc:=0;
