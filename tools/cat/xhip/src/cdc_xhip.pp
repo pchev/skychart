@@ -192,7 +192,7 @@ const
     st: textfile;
     hr, p: integer;
   begin
-    maxname := 0;
+    maxname := 26;
     for hr := 0 to hrmax do
     begin
       starname[hr] := '';
@@ -211,7 +211,10 @@ const
         if p > 0 then
           buf := copy(buf, 1, p - 1);
         starname[hr] := capitalize(buf);
-        maxname := max(maxname, length(starname[hr]));
+        if length(starname[hr])>maxname then begin
+           maxname := length(starname[hr]);
+           writeln('Warning! star name length increased to '+inttostr(maxname));       
+        end;
       end;
     end;
     closefile(st);
