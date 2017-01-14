@@ -2110,10 +2110,6 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: u_translation:rsuseonlycatal
-msgid "Use only catalogs from one single group."
-msgstr ""
-
 #: u_translation:rsdefault
 msgid "Default"
 msgstr ""
@@ -6308,5 +6304,9 @@ msgstr ""
 
 #: u_translation:rsdecember
 msgid "December"
+msgstr ""
+
+#: u_translation:rsslewtochartc
+msgid "Slew to chart center"
 msgstr ""
 

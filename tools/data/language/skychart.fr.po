@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-01 16:00+0000\n"
-"PO-Revision-Date: 2017-01-01 16:13+0000\n"
+"POT-Creation-Date: 2017-01-14 16:51+0000\n"
+"PO-Revision-Date: 2017-01-14 16:56+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-08 17:04+0000\n"
+"X-Launchpad-Export-Date: 2017-01-14 17:04+0000\n"
 "X-Generator: Launchpad (build 18302)\n"
 "Language: fr\n"
 
@@ -5309,6 +5309,10 @@ msgstr "Goto"
 msgid " Slew Speed"
 msgstr " Vitesse de pointage"
 
+#: u_translation.rsslewtochartc
+msgid "Slew to chart center"
+msgstr "Goto centre de la carte"
+
 #: u_translation.rsslewtocursor
 msgid "Slew to cursor position"
 msgstr "Goto position du curseur"
@@ -6056,10 +6060,6 @@ msgstr "Utilise le DSS en ligne à la place de Realsky"
 #: u_translation.rsuseonlinesun
 msgid "Use online Sun image from SDO or SOHO"
 msgstr "Affiche une image du soleil de SDO ou SOHO par Internet"
-
-#: u_translation.rsuseonlycatal
-msgid "Use only catalogs from one single group."
-msgstr "Utilisez seulement les catalogues du même groupe"
 
 #: u_translation.rsuserdefinedo
 msgid "User defined objects"
