@@ -5143,7 +5143,7 @@ msgid "Select color (black for catalog default)"
 msgstr ""
 
 #: u_translation:rsshowonlymeri
-msgid "Show only meridian in Alt/Az"
+msgid "Show only meridian"
 msgstr ""
 
 #: u_translation:rsoneevery
