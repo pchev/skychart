@@ -8292,6 +8292,10 @@ for i:=0 to Params.Count-1 do begin
       cmd:=trim(parms);
       parm:='';
    end;
+   if (ExtractFileExt(cmd)='.cdc3')and(parm='') then begin
+      parm:=cmd;
+      cmd:='--load';
+   end;
    if cmd='--loaddef' then begin
       pp.Add('LOADDEFAULT');
       pp.Add(parm);
