@@ -7682,13 +7682,10 @@ end;
 
 procedure Tf_main.ObsListSearch(obj:string; ra,de:double);
 var ok: boolean;
-    cname: string;
     ar1,de1: double;
-    arg:Tstringlist;
 begin
   ok:=GenericSearch('',obj,ar1,de1);
   if (not ok)and(ra>=0) then begin
-    cname:=MultiFrame1.ActiveChild.Caption;
     ra:=deg2rad*ra;
     de:=deg2rad*de;
     Tf_chart(MultiFrame1.ActiveObject).CoordJ2000toChart(ra,de);

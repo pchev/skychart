@@ -1605,6 +1605,7 @@ resourcestring
   rsOctober = 'October';
   rsNovember = 'November';
   rsDecember = 'December';
+  rsSlewToChartC = 'Slew to chart center';
 
 // also update upsi_translation
 

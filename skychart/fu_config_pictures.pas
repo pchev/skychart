@@ -574,7 +574,7 @@ end;
 Procedure  Tf_config_pictures.RefreshImage;
 var bmp,bmp2: TBGRABitmap;
     c1,c2:double;
-    x,y,dx,dy:integer;
+    dx,dy:integer;
 begin
 bmp:=TBGRABitmap.create;
 FFits.min_sigma:=csc.BGmin_sigma;
@@ -586,13 +586,9 @@ if bmp.Width>1 then begin
   if c1>c2 then begin
     dy:=Image1.Height;
     dx:=round(c2*dy);
-    y:=0;
-    x:=round((Image1.width-dx)/2);
   end else begin
     dx:=Image1.width;
     dy:=round(dx/c2);
-    x:=0;
-    y:=round((Image1.Height-dy)/2);
   end;
   bmp2:=bmp.Resample(dx,dy) as TBGRABitmap;
   try
