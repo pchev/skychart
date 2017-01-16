@@ -30,9 +30,9 @@ EOF
 
 # download doc
 cd $verdir/tools
-if [ -f /home/transfert/daily_build/doc_skychart.tgz ]; then
+if [ -f /data/transfert/daily_build/doc_skychart.tgz ]; then
   cd doc
-  tar xzf /home/transfert/daily_build/doc_skychart.tgz
+  tar xzf /data/transfert/daily_build/doc_skychart.tgz
 else
   ./refresh_wiki_doc.sh 
 fi
