@@ -1,27 +1,36 @@
 Version 3.11 beta, release Notes
 
+This version can be considered as a 4.0 release candidate
+
 New functions:
 
-  * Plot images for the main planetary satellites
-  * Update the artificial satellites TLE files automatically.
   * Set the tool bar button size and text in Setup / Toolbar editor.
-  * Use INDIstarter to manage the INDI server.
-  * New INDI control panel.
   * New performance options from menu File/Reset chart and options...
   * New tool box function you can activate with the keys F1 to F8.
   * Scripting functions and custom tool box capabilities.
   * The tool bar editor allow you to edit the button bar layout. The function is available from the menu Setup / Tool bar editor.
   * New representation for the Milky Way. This can be activated from the menu Setup / Display / Lines by unchecking "Milky Way - Line mode".
+  * Updated Solar system information window with more functionallity
+  * Plot images for the main planetary satellites
+  * Update the artificial satellites TLE files automatically.
   * Option to add a crosshair to the chart center.
   * Option to add the meridian line with any projection.
-  * Add Tcp/Ip connection to the LX200 telescope interface.
   * Show comet and asteroid hourly motion in the detail window.
   * Update download URL for asteroids and comets
   * Add cursor or telescope position to observing list
+  * Add Tcp/Ip connection to the LX200 telescope interface.
+  * Use INDIstarter to manage the INDI server.
+  * New INDI control panel.
   
 Catalog:
 
   * OpenNGC replace NGC2000, it is now include with the base version
+  * The following catalog change require to install the new version with 4.0 in the file name from https://sourceforge.net/projects/skychart/files/2-catalogs/
+    * New version of GCVS and WDS catalog
+    * New version of PGC/LEDA with 5 million galaxies
+    * Add index to search planetary nebula by name
+    * Add Sh2 and Barnard catalog
+    * Update the pictures using better coordinates from OpenNGC
 
 Corrections:
 
