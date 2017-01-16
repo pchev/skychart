@@ -1,5 +1,7 @@
 Version 3.11 beta, Notes de la version
 
+Cette version peut être considérée comme un candidat pour la release 4.0
+
 Nouvelles fonctions:
 
   * Image des principaux satellites planétaires.
@@ -22,6 +24,12 @@ Nouvelles fonctions:
 Catalogues:
 
   * OpenNGC remplace NGC2000, il est mantenant inclu avec la version de base 
+  * Les catalogues suivant demandent d'installer la nouvelle version avec 4.0 dans le nom depuis https://sourceforge.net/projects/skychart/files/2-catalogs/
+    * Nouvelle version des catalogues GCVS and WDS
+    * Nouvelle version de PGC/LEDA avec 5 million galaxies
+    * Ajout d'un index de recherche des nébuleuses planétaires par nom
+    * Ajout des catalogues Sh2 et Barnard
+    * Mise à jours des images en utilisant de meilleures coordonnées de OpenNGC
   
 Corrections:
 
