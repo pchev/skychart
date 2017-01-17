@@ -1950,13 +1950,20 @@ end;
 end;
 
 procedure Tf_chart.PopupMenu1Popup(Sender: TObject);
-var i:integer;
+var i,xc,yc :integer;
     MenuItem: TMenuItem;
 begin
  if assigned(FImageSetFocus) then FImageSetFocus(self);
- xcursor:=Image1.ScreenToClient(mouse.cursorpos).x;
- ycursor:=Image1.ScreenToClient(mouse.cursorpos).y;
- IdentXY(xcursor, ycursor);
+ xc:=Image1.ScreenToClient(mouse.cursorpos).x;
+ yc:=Image1.ScreenToClient(mouse.cursorpos).y;
+ if (not Identlabel.Visible) or
+    (abs(xcursor-xc)>6) or
+    (abs(ycursor-yc)>6)
+    then begin
+    xcursor:=xc;
+    ycursor:=yc;
+    IdentXY(xcursor, ycursor);
+ end;
  if sc.cfgsc.TrackOn then begin
     TrackOff1.visible:=true;
     TrackOn1.visible:=false;
@@ -2404,6 +2411,9 @@ else begin
       ShowIdentLabel;
   end;
 end;
+// new pos is chart center
+xcursor:=Image1.Width div 2;
+ycursor:=Image1.Height div 2;
 if assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,true,self,sc.cfgsc.FindDesc2);
 end;
 
