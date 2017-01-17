@@ -4,13 +4,13 @@ msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-14 17:27+0000\n"
-"PO-Revision-Date: 2017-01-14 17:50+0000\n"
+"PO-Revision-Date: 2017-01-17 13:50+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-14 17:56+0000\n"
+"X-Launchpad-Export-Date: 2017-01-17 13:52+0000\n"
 "X-Generator: Launchpad (build 18302)\n"
 "Language: en_US\n"
 
@@ -144,7 +144,7 @@ msgstr "Dodaj eden element v podatkovno zbirko. Vsa polja so obvezna."
 
 #: u_translation.rsaddcursorpos
 msgid "Add cursor position"
-msgstr ""
+msgstr "Dodaj položaj kazalca"
 
 #: u_translation.rsaddequatoria
 msgid "Show equatorial grid"
@@ -164,7 +164,7 @@ msgstr "Dodaj oznako za vsak predmed na seznamu"
 
 #: u_translation.rsaddtelescope
 msgid "Add telescope position"
-msgstr ""
+msgstr "Dodaj položaj teleskopa"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
@@ -333,7 +333,7 @@ msgstr "Uveljavi spremembe za vse karte"
 
 #: u_translation.rsapril
 msgid "April"
-msgstr ""
+msgstr "april"
 
 #: u_translation.rsarchivethisi
 msgid "Archive this image?"
@@ -449,7 +449,7 @@ msgstr "Atmosferski odboj"
 
 #: u_translation.rsaugust
 msgid "August"
-msgstr ""
+msgstr "avgust"
 
 #: u_translation.rsauthors
 msgid "Authors"
@@ -1241,7 +1241,7 @@ msgstr "Trenutni gonilnik"
 
 #: u_translation.rscursor
 msgid "Cursor"
-msgstr ""
+msgstr "Kazalec"
 
 #: u_translation.rscustom
 msgid "Custom"
@@ -1381,7 +1381,7 @@ msgstr "DEC/El Slew stopnja"
 
 #: u_translation.rsdecember
 msgid "December"
-msgstr ""
+msgstr "december"
 
 #: u_translation.rsdecimaldegre
 msgid "Decimal degrees"
@@ -1968,9 +1968,8 @@ msgid "Equatorial coordinates"
 msgstr "Ekvatorske koordinate"
 
 #: u_translation.rsequatorialco2
-#, fuzzy,badformat
 msgid "Equatorial coordinates, equinox: %s"
-msgstr "Ekvatorske koordinate, enakonočje:"
+msgstr "Ekvatorske koordinate, enakonočje: %s"
 
 #: u_translation.rsequatorialco3
 msgid "Equatorial coord."
@@ -2122,7 +2121,7 @@ msgstr "Hitro"
 
 #: u_translation.rsfaster
 msgid "Faster"
-msgstr ""
+msgstr "Hitreje"
 
 #: u_translation.rsfavorite
 msgid "Favorite"
@@ -2130,7 +2129,7 @@ msgstr "Priljubljeno"
 
 #: u_translation.rsfebruary
 msgid "February"
-msgstr ""
+msgstr "februar"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -2806,7 +2805,7 @@ msgstr "Traja predolgo, da bi narisal %s iz kataloga %s, prosim preučite možno
 
 #: u_translation.rsjanuary
 msgid "January"
-msgstr ""
+msgstr "januar"
 
 #: u_translation.rsjd
 msgid "JD:"
@@ -2834,11 +2833,11 @@ msgstr "Julijansko leto"
 
 #: u_translation.rsjuly
 msgid "July"
-msgstr ""
+msgstr "julij"
 
 #: u_translation.rsjune
 msgid "June"
-msgstr ""
+msgstr "junij"
 
 #: u_translation.rsjupiter
 msgid "Jupiter"
@@ -3138,7 +3137,7 @@ msgstr "Lunini mrki"
 
 #: u_translation.rsly
 msgid "ly"
-msgstr ""
+msgstr "ly"
 
 #: u_translation.rsmag
 msgid "Mag:"
@@ -3222,7 +3221,7 @@ msgstr "Karta"
 
 #: u_translation.rsmarch
 msgid "March"
-msgstr ""
+msgstr "marec"
 
 #: u_translation.rsmark
 msgid "Mark"
@@ -3262,7 +3261,7 @@ msgstr "Maksimalno vrstic"
 
 #: u_translation.rsmay
 msgid "May"
-msgstr ""
+msgstr "maj"
 
 #: u_translation.rsmbytes
 msgid "MBytes"
@@ -3686,7 +3685,7 @@ msgstr "Ni nastavljene začetne vrednosti"
 
 #: u_translation.rsnovember
 msgid "November"
-msgstr ""
+msgstr "november"
 
 #: u_translation.rsnow
 msgid "Now"
@@ -3790,7 +3789,7 @@ msgstr "Zastarel"
 
 #: u_translation.rsoctober
 msgid "October"
-msgstr ""
+msgstr "oktober"
 
 #: u_translation.rsoff
 msgid "Off"
@@ -3982,7 +3981,7 @@ msgstr "Pot"
 
 #: u_translation.rspathtosaveth
 msgid "Path to save the file:"
-msgstr "Pot do shranjene datoteke:"
+msgstr "Shrani datoteko v pot:"
 
 #: u_translation.rspathwidth
 msgid "Path width"
@@ -4630,7 +4629,7 @@ msgstr "Ponastavi obračanje"
 
 #: u_translation.rsresettime
 msgid "Reset time"
-msgstr ""
+msgstr "Ponastavi čas"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
@@ -4994,7 +4993,7 @@ msgstr "Ločilo"
 
 #: u_translation.rsseptember
 msgid "September"
-msgstr ""
+msgstr "september"
 
 #: u_translation.rsserialport
 msgid "Serial Port"
@@ -5310,7 +5309,7 @@ msgstr " Hitrost vrtenja"
 
 #: u_translation.rsslewtochartc
 msgid "Slew to chart center"
-msgstr ""
+msgstr "Obrni na sredino karte"
 
 #: u_translation.rsslewtocursor
 msgid "Slew to cursor position"
@@ -5322,7 +5321,7 @@ msgstr "Počasen"
 
 #: u_translation.rsslower
 msgid "Slower"
-msgstr ""
+msgstr "Počasneje"
 
 #: u_translation.rsslowest
 msgid "Slowest"
