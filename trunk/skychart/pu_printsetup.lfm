@@ -10,8 +10,205 @@ object f_printsetup: Tf_printsetup
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.2.0'
   Visible = False
+  object psoption: TPanel
+    Left = 10
+    Height = 130
+    Top = 88
+    Width = 423
+    ClientHeight = 130
+    ClientWidth = 423
+    FullRepaint = False
+    TabOrder = 2
+    object Label1: TLabel
+      Left = 184
+      Height = 15
+      Top = 8
+      Width = 110
+      Caption = 'Raster Resolution'
+      ParentColor = False
+    end
+    object Label4: TLabel
+      Left = 6
+      Height = 15
+      Top = 58
+      Width = 233
+      Caption = 'Command to use to process the file.'
+      ParentColor = False
+    end
+    object Label6: TLabel
+      Left = 7
+      Height = 15
+      Top = 8
+      Width = 134
+      Caption = 'Path to save the file :'
+      ParentColor = False
+    end
+    object Label5: TLabel
+      Left = 310
+      Height = 15
+      Top = 8
+      Width = 27
+      Caption = 'Size'
+      ParentColor = False
+    end
+    object prtres: TLongEdit
+      Left = 214
+      Height = 21
+      Hint = '0..600'
+      Top = 23
+      Width = 41
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnChange = prtresChange
+      Value = 0
+      MaxValue = 600
+    end
+    object cmdreport1: TEdit
+      Left = 6
+      Height = 21
+      Top = 84
+      Width = 401
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 4
+    end
+    object savepath1: TDirectoryEdit
+      Left = 6
+      Height = 21
+      Top = 24
+      Width = 168
+      ShowHidden = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      MaxLength = 0
+      TabOrder = 0
+      OnExit = savepathExit
+    end
+    object printcmd1: TFileNameEdit
+      Left = 280
+      Height = 21
+      Top = 56
+      Width = 128
+      OnAcceptFileName = printcmd1AcceptFileName
+      DialogOptions = []
+      FilterIndex = 0
+      HideDirectories = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      MaxLength = 0
+      TabOrder = 3
+      OnChange = printcmd1Change
+    end
+    object PaperSize: TComboBox
+      Left = 310
+      Height = 23
+      Top = 21
+      Width = 96
+      ItemHeight = 0
+      OnChange = PaperSizeChange
+      Style = csDropDownList
+      TabOrder = 2
+    end
+  end
+  object bmpoption: TPanel
+    Left = 10
+    Height = 130
+    Top = 88
+    Width = 423
+    ClientHeight = 130
+    ClientWidth = 423
+    FullRepaint = False
+    TabOrder = 6
+    object Label8: TLabel
+      Left = 206
+      Height = 15
+      Top = 8
+      Width = 33
+      Caption = 'width'
+      ParentColor = False
+    end
+    object Label9: TLabel
+      Left = 6
+      Height = 15
+      Top = 58
+      Width = 233
+      Caption = 'Command to use to process the file.'
+      ParentColor = False
+    end
+    object Label10: TLabel
+      Left = 7
+      Height = 15
+      Top = 8
+      Width = 134
+      Caption = 'Path to save the file :'
+      ParentColor = False
+    end
+    object Label11: TLabel
+      Left = 310
+      Height = 15
+      Top = 8
+      Width = 40
+      Caption = 'height'
+      ParentColor = False
+    end
+    object cmdreport2: TEdit
+      Left = 6
+      Height = 21
+      Top = 84
+      Width = 399
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 2
+    end
+    object savepath2: TDirectoryEdit
+      Left = 6
+      Height = 21
+      Top = 24
+      Width = 168
+      ShowHidden = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      MaxLength = 0
+      TabOrder = 0
+      OnExit = savepathExit
+    end
+    object printcmd2: TFileNameEdit
+      Left = 280
+      Height = 21
+      Top = 54
+      Width = 128
+      OnAcceptFileName = printcmd1AcceptFileName
+      DialogOptions = []
+      FilterIndex = 0
+      HideDirectories = False
+      ButtonWidth = 23
+      NumGlyphs = 1
+      MaxLength = 0
+      TabOrder = 1
+      OnChange = printcmd1Change
+    end
+    object bmpw: TLongEdit
+      Left = 206
+      Height = 21
+      Top = 24
+      Width = 74
+      TabOrder = 3
+      OnChange = bmpwChange
+      Value = 0
+    end
+    object bmph: TLongEdit
+      Left = 310
+      Height = 21
+      Top = 24
+      Width = 74
+      TabOrder = 4
+      OnChange = bmphChange
+      Value = 0
+    end
+  end
   object printmode: TRadioGroup
     Left = 10
     Height = 69
@@ -27,8 +224,8 @@ object f_printsetup: Tf_printsetup
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 3
-    ClientHeight = 50
-    ClientWidth = 418
+    ClientHeight = 53
+    ClientWidth = 420
     Columns = 3
     Items.Strings = (
       'System Printer'
@@ -69,107 +266,6 @@ object f_printsetup: Tf_printsetup
     OnClick = Button1Click
     TabOrder = 3
   end
-  object psoption: TPanel
-    Left = 10
-    Height = 130
-    Top = 88
-    Width = 423
-    ClientHeight = 130
-    ClientWidth = 423
-    FullRepaint = False
-    TabOrder = 2
-    object Label1: TLabel
-      Left = 184
-      Height = 17
-      Top = 8
-      Width = 121
-      Caption = 'Raster Resolution'
-      ParentColor = False
-    end
-    object Label4: TLabel
-      Left = 6
-      Height = 17
-      Top = 58
-      Width = 244
-      Caption = 'Command to use to process the file.'
-      ParentColor = False
-    end
-    object Label6: TLabel
-      Left = 7
-      Height = 17
-      Top = 8
-      Width = 142
-      Caption = 'Path to save the file :'
-      ParentColor = False
-    end
-    object Label5: TLabel
-      Left = 310
-      Height = 17
-      Top = 8
-      Width = 27
-      Caption = 'Size'
-      ParentColor = False
-    end
-    object prtres: TLongEdit
-      Left = 214
-      Height = 27
-      Hint = '0..600'
-      Top = 23
-      Width = 41
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 1
-      OnChange = prtresChange
-      Value = 0
-      MaxValue = 600
-    end
-    object cmdreport1: TEdit
-      Left = 6
-      Height = 27
-      Top = 84
-      Width = 401
-      Color = clBtnFace
-      ReadOnly = True
-      TabOrder = 4
-    end
-    object savepath1: TDirectoryEdit
-      Left = 6
-      Height = 27
-      Top = 24
-      Width = 168
-      ShowHidden = False
-      ButtonWidth = 23
-      NumGlyphs = 1
-      MaxLength = 0
-      TabOrder = 0
-      OnExit = savepathExit
-    end
-    object printcmd1: TFileNameEdit
-      Left = 256
-      Height = 27
-      Top = 54
-      Width = 152
-      OnAcceptFileName = printcmd1AcceptFileName
-      DialogOptions = []
-      FilterIndex = 0
-      HideDirectories = False
-      ButtonWidth = 23
-      NumGlyphs = 1
-      MaxLength = 0
-      TabOrder = 3
-      OnChange = printcmd1Change
-    end
-    object PaperSize: TComboBox
-      Left = 310
-      Height = 31
-      Top = 21
-      Width = 96
-      ItemHeight = 0
-      OnChange = PaperSizeChange
-      Style = csDropDownList
-      TabOrder = 2
-    end
-  end
   object printeroption: TPanel
     Left = 10
     Height = 130
@@ -180,50 +276,50 @@ object f_printsetup: Tf_printsetup
     FullRepaint = False
     TabOrder = 1
     object qtprintername: TLabel
-      Left = 197
-      Height = 17
-      Top = 49
-      Width = 48
+      Left = 240
+      Height = 15
+      Top = 48
+      Width = 64
       Caption = '                '
       ParentColor = False
     end
     object qtprintresol: TLabel
-      Left = 197
-      Height = 17
-      Top = 71
-      Width = 57
+      Left = 240
+      Height = 15
+      Top = 70
+      Width = 76
       Caption = '                   '
       ParentColor = False
     end
     object Label2: TLabel
-      Left = 120
-      Height = 17
-      Top = 49
-      Width = 52
+      Left = 160
+      Height = 15
+      Top = 48
+      Width = 46
       Caption = 'Printer:'
       ParentColor = False
     end
     object Label3: TLabel
-      Left = 120
-      Height = 17
-      Top = 71
-      Width = 78
+      Left = 160
+      Height = 15
+      Top = 70
+      Width = 69
       Caption = 'Resolution:'
       ParentColor = False
     end
     object Label7: TLabel
-      Left = 16
-      Height = 17
+      Left = 8
+      Height = 15
       Top = 16
-      Width = 365
+      Width = 346
       Caption = 'Select the system printer and options you want to use'
       ParentColor = False
     end
     object qtsetup: TButton
-      Left = 12
+      Left = 8
       Height = 25
-      Top = 58
-      Width = 95
+      Top = 48
+      Width = 140
       BorderSpacing.InnerBorder = 4
       Caption = 'Printer Setup'
       OnClick = qtsetupClick
@@ -240,102 +336,6 @@ object f_printsetup: Tf_printsetup
       ParentColor = False
       ParentFont = False
       WordWrap = True
-    end
-  end
-  object bmpoption: TPanel
-    Left = 10
-    Height = 130
-    Top = 88
-    Width = 423
-    ClientHeight = 130
-    ClientWidth = 423
-    FullRepaint = False
-    TabOrder = 6
-    object Label8: TLabel
-      Left = 206
-      Height = 17
-      Top = 8
-      Width = 40
-      Caption = 'width'
-      ParentColor = False
-    end
-    object Label9: TLabel
-      Left = 6
-      Height = 17
-      Top = 58
-      Width = 244
-      Caption = 'Command to use to process the file.'
-      ParentColor = False
-    end
-    object Label10: TLabel
-      Left = 7
-      Height = 17
-      Top = 8
-      Width = 142
-      Caption = 'Path to save the file :'
-      ParentColor = False
-    end
-    object Label11: TLabel
-      Left = 310
-      Height = 17
-      Top = 8
-      Width = 45
-      Caption = 'height'
-      ParentColor = False
-    end
-    object cmdreport2: TEdit
-      Left = 6
-      Height = 27
-      Top = 84
-      Width = 399
-      Color = clBtnFace
-      ReadOnly = True
-      TabOrder = 2
-    end
-    object savepath2: TDirectoryEdit
-      Left = 6
-      Height = 27
-      Top = 24
-      Width = 168
-      ShowHidden = False
-      ButtonWidth = 23
-      NumGlyphs = 1
-      MaxLength = 0
-      TabOrder = 0
-      OnExit = savepathExit
-    end
-    object printcmd2: TFileNameEdit
-      Left = 256
-      Height = 27
-      Top = 54
-      Width = 152
-      OnAcceptFileName = printcmd1AcceptFileName
-      DialogOptions = []
-      FilterIndex = 0
-      HideDirectories = False
-      ButtonWidth = 23
-      NumGlyphs = 1
-      MaxLength = 0
-      TabOrder = 1
-      OnChange = printcmd1Change
-    end
-    object bmpw: TLongEdit
-      Left = 206
-      Height = 27
-      Top = 24
-      Width = 74
-      TabOrder = 3
-      OnChange = bmpwChange
-      Value = 0
-    end
-    object bmph: TLongEdit
-      Left = 310
-      Height = 27
-      Top = 24
-      Width = 74
-      TabOrder = 4
-      OnChange = bmphChange
-      Value = 0
     end
   end
   object PrinterSetupDialog1: TPrinterSetupDialog
