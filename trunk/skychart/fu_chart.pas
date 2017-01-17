@@ -2461,11 +2461,15 @@ else if (button=mbLeft)and((shift=[])or(shift=[ssLeft]))then begin
 end
 else if (button=mbLeft)and(ssCtrl in shift) then begin
    IdentXY(x,y,false);
+   xcursor:=x;
+   ycursor:=y;
 end
 else if (button=mbLeft)and(ssShift in shift)and(not lastquick) then begin
    ZoomBox(4,0,0);
    ListXY(x,y);
-end;
+   xcursor:=x;
+   ycursor:=y;
+eend;
 if (button=mbMiddle)or((button=mbLeft)and(ssShift in shift))or((button=mbLeft)and cmain.SimpleMove) then begin
    Image1.Cursor:=ChartCursor;
    if TrackCursorMove then begin
