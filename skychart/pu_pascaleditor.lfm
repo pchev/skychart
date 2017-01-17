@@ -3,13 +3,14 @@ object f_pascaleditor: Tf_pascaleditor
   Height = 500
   Top = 175
   Width = 700
+  ActiveControl = Button1
   Caption = 'Editor'
   ClientHeight = 500
   ClientWidth = 700
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '1.6.0.2'
+  LCLVersion = '1.6.2.0'
   Visible = False
   object Panel1: TPanel
     Left = 0
@@ -41,7 +42,7 @@ object f_pascaleditor: Tf_pascaleditor
       end
     end
     object Button1: TButton
-      Left = 608
+      Left = 504
       Height = 25
       Top = 9
       Width = 75
@@ -50,7 +51,7 @@ object f_pascaleditor: Tf_pascaleditor
       TabOrder = 0
     end
     object Button2: TButton
-      Left = 504
+      Left = 608
       Height = 25
       Top = 9
       Width = 75
@@ -69,9 +70,9 @@ object f_pascaleditor: Tf_pascaleditor
     end
     object Label1: TLabel
       Left = 8
-      Height = 16
+      Height = 15
       Top = 9
-      Width = 41
+      Width = 42
       Caption = 'Label1'
       ParentColor = False
     end

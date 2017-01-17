@@ -3141,6 +3141,7 @@ if sender<>nil then begin
   r1.top:=8;
   r1.Left:=8;
   btn:= TButtonPanel.Create(f1);
+  btn.ButtonOrder:=boCloseOKCancel;
   btn.ShowButtons:=[pbOK,pbCancel];
   btn.OKButton.Caption:=rsOK;
   btn.CancelButton.Caption:=rsCancel;
