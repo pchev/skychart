@@ -4541,6 +4541,7 @@ P:=point(0,110);
      f_clock:=Tf_clock.Create(application);
      f_clock.cfgsc:=def_cfgsc;
      f_clock.planet:=planet;
+     f_clock.SetLang;
   end;
   if f_clock.visible then  begin
      f_clock.hide;
@@ -7096,6 +7097,7 @@ if samp<>nil then begin
   samp.hubmissingvalue:=rsSAMPHubProfi;
   samp.nohuberror:=rsNoSAMPHubPro;
 end;
+if f_clock<>nil then f_clock.SetLang;
 InitToolBar;
 except
 end;
