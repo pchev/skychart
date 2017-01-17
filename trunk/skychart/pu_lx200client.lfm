@@ -17,23 +17,23 @@ object pop_lx200: Tpop_lx200
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poDefaultPosOnly
-  LCLVersion = '1.6.0.3'
+  LCLVersion = '1.6.2.0'
   Visible = False
   object PageControl1: TPageControl
     Left = 0
     Height = 521
     Top = 0
     Width = 374
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
     Align = alClient
     MultiLine = True
-    TabIndex = 6
+    TabIndex = 0
     TabOrder = 0
     Options = [nboMultiLine]
     object TabSheet1: TTabSheet
       Caption = 'Coordinates'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 500
+      ClientWidth = 372
       object SpeedButton9: TSpeedButton
         Left = 192
         Height = 25
@@ -52,7 +52,7 @@ object pop_lx200: Tpop_lx200
         TabOrder = 0
         object LabelAlpha: TLabel
           Left = 24
-          Height = 14
+          Height = 13
           Top = 8
           Width = 18
           Caption = 'RA '
@@ -60,7 +60,7 @@ object pop_lx200: Tpop_lx200
         end
         object LabelDelta: TLabel
           Left = 165
-          Height = 14
+          Height = 13
           Top = 8
           Width = 23
           Caption = 'DEC'
@@ -68,7 +68,7 @@ object pop_lx200: Tpop_lx200
         end
         object Label11: TLabel
           Left = 24
-          Height = 14
+          Height = 13
           Top = 32
           Width = 16
           Caption = 'AZ'
@@ -76,7 +76,7 @@ object pop_lx200: Tpop_lx200
         end
         object Label12: TLabel
           Left = 165
-          Height = 14
+          Height = 13
           Top = 32
           Width = 18
           Caption = 'ALT'
@@ -84,7 +84,7 @@ object pop_lx200: Tpop_lx200
         end
         object pos_x: TEdit
           Left = 43
-          Height = 20
+          Height = 19
           Top = 4
           Width = 81
           ReadOnly = True
@@ -92,7 +92,7 @@ object pop_lx200: Tpop_lx200
         end
         object pos_y: TEdit
           Left = 197
-          Height = 20
+          Height = 19
           Top = 4
           Width = 85
           ReadOnly = True
@@ -100,7 +100,7 @@ object pop_lx200: Tpop_lx200
         end
         object az_x: TEdit
           Left = 43
-          Height = 20
+          Height = 19
           Top = 26
           Width = 79
           ReadOnly = True
@@ -108,7 +108,7 @@ object pop_lx200: Tpop_lx200
         end
         object alt_y: TEdit
           Left = 197
-          Height = 20
+          Height = 19
           Top = 28
           Width = 85
           ReadOnly = True
@@ -116,9 +116,9 @@ object pop_lx200: Tpop_lx200
         end
         object ShowAltAz: TCheckBox
           Left = 1
-          Height = 24
+          Height = 21
           Top = 24
-          Width = 24
+          Width = 21
           TabOrder = 2
         end
       end
@@ -128,7 +128,7 @@ object pop_lx200: Tpop_lx200
         Top = 73
         Width = 339
         Caption = 'Move '
-        ClientHeight = 226
+        ClientHeight = 227
         ClientWidth = 337
         TabOrder = 1
         object Shape1: TShape
@@ -243,7 +243,7 @@ object pop_lx200: Tpop_lx200
         end
         object Label3: TLabel
           Left = 223
-          Height = 17
+          Height = 15
           Top = 28
           Width = 11
           Caption = 'N'
@@ -256,7 +256,7 @@ object pop_lx200: Tpop_lx200
         end
         object Label4: TLabel
           Left = 283
-          Height = 17
+          Height = 15
           Top = 91
           Width = 14
           Caption = 'W'
@@ -269,7 +269,7 @@ object pop_lx200: Tpop_lx200
         end
         object Label6: TLabel
           Left = 224
-          Height = 17
+          Height = 15
           Top = 152
           Width = 9
           Caption = 'S'
@@ -282,7 +282,7 @@ object pop_lx200: Tpop_lx200
         end
         object Label14: TLabel
           Left = 161
-          Height = 17
+          Height = 15
           Top = 91
           Width = 9
           Caption = 'E'
@@ -308,7 +308,7 @@ object pop_lx200: Tpop_lx200
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 107
+          ClientHeight = 108
           ClientWidth = 129
           Enabled = False
           ItemIndex = 2
@@ -326,23 +326,23 @@ object pop_lx200: Tpop_lx200
           Top = 126
           Width = 128
           Caption = 'Swap button'
-          ClientHeight = 93
+          ClientHeight = 94
           ClientWidth = 126
           TabOrder = 1
           object CheckBox3: TCheckBox
             Left = 6
-            Height = 24
+            Height = 21
             Top = 2
-            Width = 80
+            Width = 78
             Caption = 'N <-> S'
             OnClick = CheckBox3Click
             TabOrder = 0
           end
           object CheckBox4: TCheckBox
             Left = 6
-            Height = 24
+            Height = 21
             Top = 30
-            Width = 80
+            Width = 78
             Caption = 'E <-> W'
             OnClick = CheckBox4Click
             TabOrder = 1
@@ -406,7 +406,7 @@ object pop_lx200: Tpop_lx200
         Top = 318
         Width = 176
         Caption = 'High Precision Pointing'
-        ClientHeight = 59
+        ClientHeight = 60
         ClientWidth = 174
         TabOrder = 2
         Visible = False
@@ -422,8 +422,8 @@ object pop_lx200: Tpop_lx200
     end
     object MotorTab: TTabSheet
       Caption = 'Motor'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 500
+      ClientWidth = 372
       ImageIndex = 6
       object Lx200GPSMotorSpeeds: TGroupBox
         Left = 16
@@ -431,13 +431,13 @@ object pop_lx200: Tpop_lx200
         Top = 232
         Width = 318
         Caption = 'Motor Speeds '
-        ClientHeight = 146
+        ClientHeight = 147
         ClientWidth = 316
         TabOrder = 6
         Visible = False
         object LabelGuideSpeed: TLabel
           Left = 14
-          Height = 14
+          Height = 13
           Top = 2
           Width = 108
           Caption = 'Guide Rate [arc"/s]'
@@ -445,7 +445,7 @@ object pop_lx200: Tpop_lx200
         end
         object LabelRaAzSpeed: TLabel
           Left = 14
-          Height = 14
+          Height = 13
           Top = 34
           Width = 119
           Caption = 'RA/Az Slew Rate [°/s]'
@@ -453,7 +453,7 @@ object pop_lx200: Tpop_lx200
         end
         object LabelDecSlewRate: TLabel
           Left = 14
-          Height = 14
+          Height = 13
           Top = 66
           Width = 126
           Caption = 'DEC/El Slew Rate [°/s]'
@@ -461,7 +461,7 @@ object pop_lx200: Tpop_lx200
         end
         object LxGuideRate: TFloatEdit
           Left = 172
-          Height = 20
+          Height = 19
           Top = 2
           Width = 33
           Enabled = False
@@ -484,7 +484,7 @@ object pop_lx200: Tpop_lx200
         end
         object RASlewRate: TFloatEdit
           Left = 172
-          Height = 20
+          Height = 19
           Top = 34
           Width = 33
           Enabled = False
@@ -507,7 +507,7 @@ object pop_lx200: Tpop_lx200
         end
         object DECSlewRate: TFloatEdit
           Left = 172
-          Height = 20
+          Height = 19
           Top = 66
           Width = 33
           Enabled = False
@@ -531,9 +531,9 @@ object pop_lx200: Tpop_lx200
       end
       object FanControl: TCheckBox
         Left = 32
-        Height = 24
+        Height = 21
         Top = 184
-        Width = 48
+        Width = 46
         Caption = 'Fan'
         OnClick = FanControlClick
         TabOrder = 2
@@ -557,12 +557,12 @@ object pop_lx200: Tpop_lx200
         Top = 232
         Width = 326
         Caption = ' Slew Speed '
-        ClientHeight = 146
+        ClientHeight = 147
         ClientWidth = 324
         TabOrder = 5
         object LabelSetSlewSpeed: TLabel
           Left = 23
-          Height = 28
+          Height = 26
           Top = 27
           Width = 74
           Caption = 'Set Slewing '#13#10' Speed (2..4)'
@@ -587,13 +587,13 @@ object pop_lx200: Tpop_lx200
         Top = 16
         Width = 326
         Caption = 'Tracking '
-        ClientHeight = 106
+        ClientHeight = 107
         ClientWidth = 324
         Enabled = False
         TabOrder = 0
         object TrackingRateLabel: TLabel
           Left = 134
-          Height = 14
+          Height = 13
           Top = 46
           Width = 21
           Caption = '[Hz]'
@@ -601,7 +601,7 @@ object pop_lx200: Tpop_lx200
         end
         object TrackingDecreaseLabel: TLabel
           Left = 14
-          Height = 28
+          Height = 26
           Top = 74
           Width = 54
           Caption = 'Decrease'#13#10' 0.1 Hz'
@@ -609,7 +609,7 @@ object pop_lx200: Tpop_lx200
         end
         object TrackingIncreaseLabel: TLabel
           Left = 182
-          Height = 28
+          Height = 26
           Top = 74
           Width = 49
           Caption = 'Increase'#13#10'0.1 Hz'
@@ -657,7 +657,7 @@ object pop_lx200: Tpop_lx200
         end
         object TrackingRateEdit: TFloatEdit
           Left = 78
-          Height = 20
+          Height = 19
           Hint = '0..999'
           Top = 42
           Width = 49
@@ -718,12 +718,12 @@ object pop_lx200: Tpop_lx200
         Top = 144
         Width = 326
         Caption = 'Field Rotation'
-        ClientHeight = 26
+        ClientHeight = 27
         ClientWidth = 324
         TabOrder = 1
         object FRLabel: TLabel
           Left = 124
-          Height = 14
+          Height = 13
           Top = 6
           Width = 48
           Caption = 'FR Angle'
@@ -732,10 +732,10 @@ object pop_lx200: Tpop_lx200
         end
         object FieldRotation: TCheckBox
           Left = 14
-          Height = 24
+          Height = 21
           Hint = 'Turn on or off field rotation. If turning off, abort slew. Initial state unknown.'
           Top = 2
-          Width = 63
+          Width = 61
           Caption = 'Motor'
           Enabled = False
           OnClick = ScopeFieldRotationClick
@@ -756,7 +756,7 @@ object pop_lx200: Tpop_lx200
         end
         object FRAngle: TFloatEdit
           Left = 180
-          Height = 20
+          Height = 19
           Top = 2
           Width = 49
           Enabled = False
@@ -773,9 +773,9 @@ object pop_lx200: Tpop_lx200
       end
       object LX200GPSRate: TCheckBox
         Left = 120
-        Height = 24
+        Height = 21
         Top = 184
-        Width = 165
+        Width = 163
         Caption = 'Gps-16" Adv. Settings'
         OnClick = LX200GPSRateClick
         TabOrder = 3
@@ -783,8 +783,8 @@ object pop_lx200: Tpop_lx200
     end
     object Focus: TTabSheet
       Caption = 'Focus'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 500
+      ClientWidth = 372
       ImageIndex = 3
       object Bevel1: TBevel
         Left = 24
@@ -808,7 +808,7 @@ object pop_lx200: Tpop_lx200
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 58
+        ClientHeight = 59
         ClientWidth = 303
         Columns = 2
         ItemIndex = 1
@@ -909,7 +909,7 @@ object pop_lx200: Tpop_lx200
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 4
-        ClientHeight = 58
+        ClientHeight = 57
         ClientWidth = 303
         Columns = 4
         ItemIndex = 0
@@ -937,7 +937,7 @@ object pop_lx200: Tpop_lx200
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 58
+        ClientHeight = 59
         ClientWidth = 300
         Columns = 2
         ItemIndex = 0
@@ -982,8 +982,8 @@ object pop_lx200: Tpop_lx200
     end
     object VirtHP: TTabSheet
       Caption = 'VirtHP'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 500
+      ClientWidth = 372
       ImageIndex = 4
       TabVisible = False
       object VHPTitleLabel: TLabel
@@ -1013,7 +1013,7 @@ object pop_lx200: Tpop_lx200
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 303
+        ClientHeight = 304
         ClientWidth = 303
         Columns = 2
         Enabled = False
@@ -1051,7 +1051,7 @@ object pop_lx200: Tpop_lx200
         Top = 40
         Width = 305
         Caption = 'Mode Button Simulator'
-        ClientHeight = 50
+        ClientHeight = 51
         ClientWidth = 303
         Enabled = False
         TabOrder = 1
@@ -1092,8 +1092,8 @@ object pop_lx200: Tpop_lx200
     end
     object Adv: TTabSheet
       Caption = 'Scope Adv'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 500
+      ClientWidth = 372
       ImageIndex = 5
       TabVisible = False
       object ADVTitleLabel: TLabel
@@ -1113,7 +1113,7 @@ object pop_lx200: Tpop_lx200
         Top = 40
         Width = 89
         Caption = 'Speed settings'
-        ClientHeight = 266
+        ClientHeight = 267
         ClientWidth = 87
         Enabled = False
         TabOrder = 1
@@ -1207,7 +1207,7 @@ object pop_lx200: Tpop_lx200
         Top = 40
         Width = 121
         Caption = 'Initialize'
-        ClientHeight = 130
+        ClientHeight = 131
         ClientWidth = 119
         Enabled = False
         ParentShowHint = False
@@ -1253,8 +1253,8 @@ object pop_lx200: Tpop_lx200
     end
     object PEC: TTabSheet
       Caption = 'PEC'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 500
+      ClientWidth = 372
       ImageIndex = 7
       TabVisible = False
       object RAPEC: TGroupBox
@@ -1263,7 +1263,7 @@ object pop_lx200: Tpop_lx200
         Top = 56
         Width = 217
         Caption = 'RA/AZ PEC Compensation'
-        ClientHeight = 58
+        ClientHeight = 59
         ClientWidth = 215
         TabOrder = 0
         object RAPECOn: TButton
@@ -1291,7 +1291,7 @@ object pop_lx200: Tpop_lx200
         Top = 168
         Width = 217
         Caption = 'DEC/EL PEC Compensation'
-        ClientHeight = 58
+        ClientHeight = 59
         ClientWidth = 215
         TabOrder = 1
         object DECPECOn: TButton
@@ -1316,8 +1316,8 @@ object pop_lx200: Tpop_lx200
     end
     object TabSheet2: TTabSheet
       Caption = 'Configuration'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 500
+      ClientWidth = 372
       ImageIndex = 1
       object SaveButton1: TButton
         Left = 210
@@ -1334,12 +1334,12 @@ object pop_lx200: Tpop_lx200
         Top = 264
         Width = 337
         Caption = 'Observatory '
-        ClientHeight = 121
+        ClientHeight = 122
         ClientWidth = 335
         TabOrder = 4
         object Label15: TLabel
           Left = 22
-          Height = 14
+          Height = 13
           Top = 6
           Width = 57
           Caption = 'Latitude : '
@@ -1347,7 +1347,7 @@ object pop_lx200: Tpop_lx200
         end
         object Label16: TLabel
           Left = 22
-          Height = 42
+          Height = 39
           Top = 31
           Width = 85
           Caption = 'Longitude :'#13#10'(negative east '#13#10'of Greenwich)'
@@ -1355,7 +1355,7 @@ object pop_lx200: Tpop_lx200
         end
         object lat: TEdit
           Left = 142
-          Height = 20
+          Height = 19
           Top = 2
           Width = 121
           OnChange = latChange
@@ -1364,7 +1364,7 @@ object pop_lx200: Tpop_lx200
         end
         object long: TEdit
           Left = 142
-          Height = 20
+          Height = 19
           Top = 28
           Width = 121
           OnChange = longChange
@@ -1381,9 +1381,9 @@ object pop_lx200: Tpop_lx200
         end
         object UTCBox: TCheckBox
           Left = 16
-          Height = 24
+          Height = 21
           Top = 74
-          Width = 88
+          Width = 86
           Caption = 'Send UTC'
           TabOrder = 2
         end
@@ -1394,12 +1394,12 @@ object pop_lx200: Tpop_lx200
         Top = 0
         Width = 178
         Caption = 'LX200'
-        ClientHeight = 104
+        ClientHeight = 105
         ClientWidth = 176
         TabOrder = 0
         object Label1: TLabel
           Left = 6
-          Height = 14
+          Height = 13
           Top = 14
           Width = 33
           Caption = 'Model'
@@ -1407,7 +1407,7 @@ object pop_lx200: Tpop_lx200
         end
         object Label2: TLabel
           Left = 6
-          Height = 14
+          Height = 13
           Top = 46
           Width = 75
           Caption = 'Refresh rate '
@@ -1425,7 +1425,7 @@ object pop_lx200: Tpop_lx200
         end
         object cbo_type: TComboBox
           Left = 85
-          Height = 27
+          Height = 21
           Top = 10
           Width = 81
           ItemHeight = 0
@@ -1443,7 +1443,7 @@ object pop_lx200: Tpop_lx200
         end
         object ReadIntBox: TComboBox
           Left = 85
-          Height = 27
+          Height = 21
           Top = 42
           Width = 81
           ItemHeight = 0
@@ -1462,7 +1462,7 @@ object pop_lx200: Tpop_lx200
         end
         object EqSys1: TComboBox
           Left = 85
-          Height = 27
+          Height = 21
           Top = 73
           Width = 81
           ItemHeight = 0
@@ -1483,7 +1483,7 @@ object pop_lx200: Tpop_lx200
         Top = 1
         Width = 154
         Caption = 'Product Info'
-        ClientHeight = 107
+        ClientHeight = 108
         ClientWidth = 152
         TabOrder = 1
         object QueryFirmwareButton: TButton
@@ -1511,7 +1511,7 @@ object pop_lx200: Tpop_lx200
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 41
+        ClientHeight = 42
         ClientWidth = 335
         Columns = 2
         ItemIndex = 0
@@ -1528,14 +1528,14 @@ object pop_lx200: Tpop_lx200
         Top = 192
         Width = 338
         Caption = 'High Precision Pointing'
-        ClientHeight = 47
+        ClientHeight = 48
         ClientWidth = 336
         TabOrder = 3
         object CheckBox1: TCheckBox
           Left = 6
-          Height = 24
+          Height = 21
           Top = 4
-          Width = 81
+          Width = 79
           Caption = 'Use HPP'
           Enabled = False
           OnClick = CheckBox1Click
@@ -1553,7 +1553,7 @@ object pop_lx200: Tpop_lx200
         end
         object HPP: TEdit
           Left = 206
-          Height = 20
+          Height = 19
           Top = 5
           Width = 97
           ReadOnly = True
@@ -1562,18 +1562,18 @@ object pop_lx200: Tpop_lx200
       end
       object CheckBox2: TCheckBox
         Left = 24
-        Height = 24
+        Height = 21
         Top = 416
-        Width = 148
+        Width = 146
         Caption = 'Form always visible'
         OnClick = CheckBox2Click
         TabOrder = 6
       end
       object CheckBox5: TCheckBox
         Left = 24
-        Height = 24
+        Height = 21
         Top = 396
-        Width = 213
+        Width = 211
         Caption = 'Record protocol to a trace file'
         OnClick = CheckBox5Click
         TabOrder = 5
@@ -1581,8 +1581,8 @@ object pop_lx200: Tpop_lx200
     end
     object TabSheet3: TTabSheet
       Caption = 'Comm Settings'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 500
+      ClientWidth = 372
       ImageIndex = 2
       object GroupBox9: TGroupBox
         Left = 22
@@ -1590,7 +1590,7 @@ object pop_lx200: Tpop_lx200
         Top = 56
         Width = 311
         Caption = 'Socket configuration'
-        ClientHeight = 243
+        ClientHeight = 244
         ClientWidth = 309
         TabOrder = 4
         object Label22: TLabel
@@ -1648,7 +1648,7 @@ object pop_lx200: Tpop_lx200
         Top = 56
         Width = 311
         Caption = 'Port Configuration'
-        ClientHeight = 243
+        ClientHeight = 244
         ClientWidth = 309
         TabOrder = 0
         object Label5: TLabel
@@ -1866,7 +1866,7 @@ object pop_lx200: Tpop_lx200
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 34
+        ClientHeight = 35
         ClientWidth = 311
         Columns = 2
         ItemIndex = 0

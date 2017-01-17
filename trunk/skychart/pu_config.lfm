@@ -172,7 +172,7 @@ object f_config: Tf_config
       TabOrder = 0
     end
     object OKBtn: TButton
-      Left = 270
+      Left = 358
       Height = 25
       Top = 8
       Width = 75
@@ -184,7 +184,7 @@ object f_config: Tf_config
       TabOrder = 1
     end
     object Apply: TButton
-      Left = 358
+      Left = 446
       Height = 25
       Top = 8
       Width = 75
@@ -194,7 +194,7 @@ object f_config: Tf_config
       TabOrder = 2
     end
     object CancelBtn: TButton
-      Left = 446
+      Left = 534
       Height = 25
       Top = 8
       Width = 75
@@ -205,7 +205,7 @@ object f_config: Tf_config
       TabOrder = 3
     end
     object HelpBtn: TButton
-      Left = 534
+      Left = 270
       Height = 25
       Top = 8
       Width = 75
@@ -485,32 +485,60 @@ object f_config: Tf_config
           inherited MainPanel: TPanel
             Height = 526
             Width = 499
-            ClientHeight = 526
-            ClientWidth = 499
+            ClientHeight = 522
+            ClientWidth = 495
             inherited PageControl1: TPageControl
               Height = 470
               Width = 497
               ActivePage = nil
               TabIndex = -1
               inherited Page1: TTabSheet
-                ClientHeight = 468
-                ClientWidth = 495
+                ClientHeight = 466
+                ClientWidth = 493
+                inherited PanelExpert: TPanel
+                  ClientHeight = 188
+                  ClientWidth = 449
+                end
+                inherited PanelCoord: TPanel
+                  ClientHeight = 188
+                  ClientWidth = 449
+                end
               end
               inherited Page2: TTabSheet
-                ClientHeight = 468
-                ClientWidth = 495
+                ClientHeight = 466
+                ClientWidth = 493
               end
               inherited Page3: TTabSheet
-                ClientHeight = 468
-                ClientWidth = 495
+                ClientHeight = 466
+                ClientWidth = 493
               end
               inherited Page4: TTabSheet
-                ClientHeight = 468
-                ClientWidth = 495
+                ClientHeight = 466
+                ClientWidth = 493
+                inherited GroupBox2: TGroupBox
+                  inherited Panel4: TPanel
+                    ClientHeight = 133
+                    ClientWidth = 438
+                    inherited Panel2: TPanel
+                      ClientHeight = 101
+                      ClientWidth = 430
+                    end
+                    inherited Panel3: TPanel
+                      ClientHeight = 41
+                      ClientWidth = 430
+                    end
+                  end
+                end
+                inherited GroupBox1: TGroupBox
+                  inherited Panel5: TPanel
+                    ClientHeight = 189
+                    ClientWidth = 438
+                  end
+                end
               end
               inherited Page5: TTabSheet
-                ClientHeight = 468
-                ClientWidth = 495
+                ClientHeight = 466
+                ClientWidth = 493
                 inherited CheckBox13: TCheckBox
                   Height = 23
                   Width = 135
@@ -521,14 +549,15 @@ object f_config: Tf_config
                 end
               end
               inherited Page6: TTabSheet
-                ClientHeight = 468
-                ClientWidth = 495
+                ClientHeight = 466
+                ClientWidth = 493
               end
             end
             inherited FOVPanel: TPanel
               Top = 471
               Width = 497
-              ClientWidth = 497
+              ClientHeight = 50
+              ClientWidth = 493
             end
           end
         end
@@ -1402,16 +1431,16 @@ object f_config: Tf_config
           inherited Mainpanel: TPanel
             Height = 526
             Width = 499
-            ClientHeight = 526
-            ClientWidth = 499
+            ClientHeight = 522
+            ClientWidth = 495
             inherited PageControl1: TPageControl
               Height = 524
               Width = 497
               ActivePage = nil
               TabIndex = -1
               inherited TabSheet1: TTabSheet
-                ClientHeight = 522
-                ClientWidth = 495
+                ClientHeight = 520
+                ClientWidth = 493
                 inherited GroupBox1: TGroupBox
                   inherited LongEdit1: TLongEdit
                     Height = 23
