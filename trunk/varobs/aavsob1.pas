@@ -30,7 +30,7 @@ uses
   Windows,
 {$endif}
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, LResources, EditBtn, Fileutil, u_param, u_util2, Spin;
+  StdCtrls, LResources, EditBtn, LazFileUtils, u_param, u_util2, Spin;
 
 type
 

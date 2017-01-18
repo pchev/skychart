@@ -878,7 +878,7 @@ var
   col: TBGRAPixel;
 
 begin
-
+  result:=0;
   if not cfgplot.Usebmp then
   begin
     PlotStar1(x,y,ma,b_v);
@@ -1022,6 +1022,7 @@ var
 begin
   xx:=round(x);
   yy:=round(y);
+  result:=0;
 
   if not cfgplot.Invisible then
   begin
@@ -1110,12 +1111,15 @@ var
   rd: Double;
   ds,ds2,xx,yy : Integer;
 begin
+  result:=0;
 
   xx:=round(x);
   yy:=round(y);
 
   if not cfgplot.Invisible then
-    ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
+    ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize)
+  else
+    ds := 0;
 
   ds2:= trunc(ds/2);
   rd:=max(r,ds2 + cfgchart.drawsize*(2+2*(0.7+ln(min(50,max(0.5,sep))))));
@@ -1664,6 +1668,7 @@ begin
 
   plotphase:=false;
   fillphase:=false;
+  fx:=0; fy:=0; p[0].x:=0;
 
   if (ipla=C_Moon) and (phase>-900) then
   begin
@@ -2582,6 +2587,7 @@ begin
   if cfgplot.UseBMP then
   begin
     col := ColorToBGRA(cfgplot.Color[5]);
+    exf0:=0; eyf0:=0;
 
     if WhiteBg then col := ColorToBGRA(clBlack);
 
@@ -3330,8 +3336,9 @@ begin
 
     result:=cnv.TextExtent(txt);
 
-  end;
-
+  end
+  else
+    result.cx:=0;
 end;
 
 procedure TSplot.PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; WhiteBg: boolean; opaque:boolean=true; clip:boolean=false; marge: integer=5; orient: integer=0);
@@ -3600,6 +3607,7 @@ var
   end;
 
 begin
+  x:=0;y:=0;
   xL:=-cfgchart.cliparea;
   xR:=cfgchart.Width+cfgchart.cliparea;
   yU:=-cfgchart.cliparea;

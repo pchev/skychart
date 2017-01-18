@@ -10,7 +10,7 @@ object f_scriptengine: Tf_scriptengine
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '1.6.0.2'
+  LCLVersion = '1.6.2.0'
   Visible = False
   object Panel1: TPanel
     Left = 0
@@ -78,7 +78,7 @@ object f_scriptengine: Tf_scriptengine
       TabOrder = 0
       object ScriptTitle: TEdit
         Left = 112
-        Height = 26
+        Height = 21
         Top = 8
         Width = 268
         TabOrder = 0
@@ -245,14 +245,14 @@ object f_scriptengine: Tf_scriptengine
         Top = 8
         Width = 400
         Caption = 'Component'
-        ClientHeight = 306
-        ClientWidth = 396
+        ClientHeight = 308
+        ClientWidth = 398
         TabOrder = 8
         object RadioButtonGroup: TRadioButton
           Left = 14
-          Height = 22
+          Height = 21
           Top = 0
-          Width = 61
+          Width = 63
           Caption = 'Group'
           Checked = True
           OnClick = RadioButtonClick
@@ -261,16 +261,16 @@ object f_scriptengine: Tf_scriptengine
         end
         object RadioButtonButton: TRadioButton
           Left = 14
-          Height = 22
+          Height = 21
           Top = 26
-          Width = 66
+          Width = 67
           Caption = 'Button'
           OnClick = RadioButtonClick
           TabOrder = 1
         end
         object ButtonCaptionEdit: TEdit
           Left = 187
-          Height = 26
+          Height = 21
           Top = 29
           Width = 80
           OnChange = ButtonCaptionEditChange
@@ -279,23 +279,23 @@ object f_scriptengine: Tf_scriptengine
         end
         object Label3: TLabel
           Left = 134
-          Height = 16
+          Height = 15
           Top = 32
-          Width = 48
+          Width = 49
           Caption = 'Caption'
           ParentColor = False
         end
         object Label2: TLabel
           Left = 134
-          Height = 16
+          Height = 15
           Top = 6
-          Width = 48
+          Width = 49
           Caption = 'Caption'
           ParentColor = False
         end
         object GroupCaptionEdit: TEdit
           Left = 187
-          Height = 26
+          Height = 21
           Top = 3
           Width = 80
           OnChange = GroupCaptionEditChange
@@ -304,15 +304,15 @@ object f_scriptengine: Tf_scriptengine
         end
         object Label1: TLabel
           Left = 275
-          Height = 16
+          Height = 15
           Top = 6
-          Width = 52
+          Width = 56
           Caption = 'Columns'
           ParentColor = False
         end
         object GroupRowEdit: TEdit
           Left = 336
-          Height = 26
+          Height = 21
           Top = 3
           Width = 32
           OnChange = GroupRowEditChange
@@ -321,7 +321,7 @@ object f_scriptengine: Tf_scriptengine
         end
         object RadioButtonEdit: TRadioButton
           Left = 14
-          Height = 22
+          Height = 21
           Top = 52
           Width = 48
           Caption = 'Edit'
@@ -330,25 +330,25 @@ object f_scriptengine: Tf_scriptengine
         end
         object RadioButtonMemo: TRadioButton
           Left = 14
-          Height = 22
+          Height = 21
           Top = 78
-          Width = 62
+          Width = 64
           Caption = 'Memo'
           OnClick = RadioButtonClick
           TabOrder = 6
         end
         object RadioButtonSpacer: TRadioButton
           Left = 14
-          Height = 22
+          Height = 21
           Top = 182
-          Width = 66
+          Width = 69
           Caption = 'Spacer'
           OnClick = RadioButtonClick
           TabOrder = 7
         end
         object MemoHeightEdit: TEdit
           Left = 187
-          Height = 26
+          Height = 21
           Top = 81
           Width = 80
           OnChange = MemoHeightEditChange
@@ -357,7 +357,7 @@ object f_scriptengine: Tf_scriptengine
         end
         object Label4: TLabel
           Left = 134
-          Height = 16
+          Height = 15
           Top = 82
           Width = 42
           Caption = 'Height'
@@ -365,16 +365,16 @@ object f_scriptengine: Tf_scriptengine
         end
         object RadioButtonEvent: TRadioButton
           Left = 14
-          Height = 22
+          Height = 21
           Top = 208
-          Width = 59
+          Width = 60
           Caption = 'Event'
           OnClick = RadioButtonClick
           TabOrder = 9
         end
         object EventComboBox: TComboBox
           Left = 134
-          Height = 26
+          Height = 19
           Top = 210
           Width = 180
           ItemHeight = 0
@@ -398,7 +398,7 @@ object f_scriptengine: Tf_scriptengine
         end
         object TimerIntervalEdit: TEdit
           Left = 318
-          Height = 26
+          Height = 21
           Top = 212
           Width = 50
           OnClick = TimerIntervalEditClick
@@ -408,16 +408,16 @@ object f_scriptengine: Tf_scriptengine
         end
         object RadioButtonCombo: TRadioButton
           Left = 14
-          Height = 22
+          Height = 21
           Top = 156
-          Width = 68
+          Width = 70
           Caption = 'Combo'
           OnClick = RadioButtonClick
           TabOrder = 12
         end
         object RadioButtonList: TRadioButton
           Left = 14
-          Height = 22
+          Height = 21
           Top = 104
           Width = 46
           Caption = 'List'
@@ -426,7 +426,7 @@ object f_scriptengine: Tf_scriptengine
         end
         object Label5: TLabel
           Left = 134
-          Height = 16
+          Height = 15
           Top = 112
           Width = 42
           Caption = 'Height'
@@ -434,7 +434,7 @@ object f_scriptengine: Tf_scriptengine
         end
         object ListHeightEdit: TEdit
           Left = 187
-          Height = 26
+          Height = 21
           Top = 109
           Width = 80
           OnChange = ListHeightEditChange
@@ -443,15 +443,15 @@ object f_scriptengine: Tf_scriptengine
         end
         object CheckBoxHidenTimer: TCheckBox
           Left = 14
-          Height = 22
+          Height = 21
           Top = 256
-          Width = 257
+          Width = 263
           Caption = 'Activate the timer event when hidden'
           TabOrder = 15
         end
         object RadioButtonCheckList: TRadioButton
           Left = 14
-          Height = 22
+          Height = 21
           Top = 130
           Width = 85
           Caption = 'CheckList'
@@ -460,7 +460,7 @@ object f_scriptengine: Tf_scriptengine
         end
         object Label6: TLabel
           Left = 134
-          Height = 16
+          Height = 15
           Top = 138
           Width = 42
           Caption = 'Height'
@@ -468,7 +468,7 @@ object f_scriptengine: Tf_scriptengine
         end
         object CheckListHeightEdit: TEdit
           Left = 187
-          Height = 26
+          Height = 21
           Top = 135
           Width = 80
           OnChange = CheckListHeightEditChange
@@ -477,7 +477,7 @@ object f_scriptengine: Tf_scriptengine
         end
         object RadioButtonLabel: TRadioButton
           Left = 14
-          Height = 22
+          Height = 21
           Top = 232
           Width = 58
           Caption = 'Label'
@@ -486,15 +486,15 @@ object f_scriptengine: Tf_scriptengine
         end
         object Label7: TLabel
           Left = 134
-          Height = 16
+          Height = 15
           Top = 240
-          Width = 48
+          Width = 49
           Caption = 'Caption'
           ParentColor = False
         end
         object LabelCaptionEdit: TEdit
           Left = 187
-          Height = 26
+          Height = 21
           Top = 238
           Width = 80
           OnChange = LabelCaptionEditChange
@@ -503,18 +503,18 @@ object f_scriptengine: Tf_scriptengine
         end
         object BtnMenu: TCheckBox
           Left = 275
-          Height = 22
+          Height = 21
           Top = 29
-          Width = 57
+          Width = 59
           Caption = 'Menu'
           OnChange = BtnMenuChange
           TabOrder = 20
         end
         object CheckBoxAlwaysActive: TCheckBox
           Left = 14
-          Height = 22
+          Height = 21
           Top = 280
-          Width = 259
+          Width = 265
           Caption = 'Activate all the functions when hidden'
           TabOrder = 21
         end

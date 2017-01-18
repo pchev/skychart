@@ -153,7 +153,6 @@ begin
 end;
 
 destructor TIndiProp.Destroy;
-var i: integer;
 begin
   // objects are destroyed by TForms
   ctrl.Free;
@@ -371,7 +370,6 @@ end;
 
 procedure Tf_indigui.DeleteProperty(indiProp: IndiProperty);
 var devname,groupname,propname,proplbl: string;
-    proptype: INDI_TYPE;
     sb: TScrollBox;
     tb: TTabSheet;
     iprop: TIndiProp;
@@ -383,7 +381,6 @@ begin
   propname:=indiProp.getName;
   proplbl:=indiProp.getLabel;
   if proplbl='' then proplbl:=propname;
-  proptype:=indiProp.getType;
   i:=devlist.IndexOf(devname);
   if i<0 then exit;
   idev:=TIndiDev(devlist.Objects[i]);
@@ -891,6 +888,7 @@ var iprop:TIndiProp;
     sname: string;
     i:integer;
 begin
+  sname:='';
   iprop:=TIndiProp(TSpeedButton(Sender).Tag);
   svp:=iprop.iprop.getSwitch;
   for i:=0 to iprop.ctrl.Count-1 do begin

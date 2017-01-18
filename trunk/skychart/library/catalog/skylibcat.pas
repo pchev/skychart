@@ -364,6 +364,9 @@ begin
       acc:=lecentre;
       dcc:=becentre;
       end;
+    else begin
+      acc:=0; dcc:=0;
+    end;
    end;
    sofa_Ir(EqpMAT);
    sofa_Rz(deg2rad*acc, EqpMAT);
@@ -597,6 +600,9 @@ case Projpole of
        ac:=lecentre;
        dc:=becentre;
        end;
+   else begin
+      ac:=0; dc:=0;
+   end;
 end;
 InvProj2(xx*deg2rad,yy*deg2rad,ac*deg2rad,dc*deg2rad,ar,de);
 ar:=rad2deg*ar;

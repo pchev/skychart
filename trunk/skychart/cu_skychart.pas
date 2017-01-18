@@ -769,7 +769,7 @@ Fplot.cfgchart.cliparea:=max(Fplot.cfgchart.hw,Fplot.cfgchart.hh);
 case trunc(rad2deg*cfgsc.fov) of
   0..1: outr:=100;
   2..5: outr:=20;
-  6..999: outr:=10;
+  else outr:=10;
 end;
 Fplot.cfgplot.outradius:=abs(round(min(outr*cfgsc.fov,0.98*pi2)*cfgsc.BxGlb/2));
 if cfgsc.projtype='T' then begin
@@ -1005,6 +1005,10 @@ Gal: begin
 Ecl: begin
    acc:=cfgsc.lecentre;
    dcc:=cfgsc.becentre;
+   end;
+else begin
+   acc:=0;
+   dcc:=0;
    end;
 end;
 sofa_Ir(cfgsc.EqpMAT);
@@ -2334,6 +2338,7 @@ function Tskychart.FindArtSat(x1,y1,x2,y2:double; nextobj:boolean; var nom,ma,de
   const mois : array[1..12]of string = ('Jan ','Feb ','Mar ','Apr ','May ','June','July','Aug ','Sept','Oct ','Nov ','Dec ');
   begin
   first:=false;
+  last:=''; heure:=''; dist:='';
   if not nextobj then begin
     if not Fileexists(slash(SatDir)+'satdetail.out') then  begin result:=false; exit; end;
     CloseSat;
@@ -2341,7 +2346,6 @@ function Tskychart.FindArtSat(x1,y1,x2,y2:double; nextobj:boolean; var nom,ma,de
     reset(fsat);
     Readln(fsat,buf);
     Readln(fsat,buf);
-    last:='';
     first:=true;
     if eof(fsat) then begin result:=false; exit; end;
   end;
@@ -2428,7 +2432,7 @@ case trunc(rad2deg*cfgsc.fov) of
   6..9: begin dx:=10*cfgsc.xmax; dy:=10*cfgsc.ymax; end;
   10..29: begin dx:=5*cfgsc.xmax; dy:=5*cfgsc.ymax; end;
   30..89: begin dx:=3*cfgsc.xmax; dy:=3*cfgsc.ymax; end;
-  90..999: begin dx:=2*cfgsc.xmax; dy:=2*cfgsc.ymax; end;
+  else begin dx:=2*cfgsc.xmax; dy:=2*cfgsc.ymax; end;
 end;
 dx:=Min(dx,maxSmallint);
 dy:=Min(dy,maxSmallint);
@@ -2476,7 +2480,8 @@ if cfgsc.SimObject[12] then for i:=1 to cfgsc.AsteroidNb do
     yp:=yy;
   end;
 result:=true;
-end;
+end
+else result:=false;
 end;
 
 procedure Tskychart.GetCoord(x,y: integer; var ra,dec,a,h,l,b,le,be:double);
@@ -3223,6 +3228,7 @@ Ecl:   begin
          projection(ar,de,x2,y2,false,cfgsc) ;
          result:=-arctan2((x2-x1),(y2-y1));
        end;
+else result:=0;
 end;
 end;
 
@@ -3675,6 +3681,7 @@ if id=(num-1) then
 else
   endline:=(id+1)*i-1;
 p2line:=false;
+p2:=nil;
 for i:=startline to endline do begin
    p:=hbmp.ScanLine[i];
    if lowquality and (i<endline) then begin
@@ -3743,6 +3750,7 @@ var i,n,timeout: integer;
 begin
   n:=min(8,MaxThreadCount);
   timeout:=round(max(10,hbmp.Width*hbmp.Height/n/50000));
+  thread[0]:=nil;
   for i:=0 to n-1 do begin
     thread[i]:=TDrawHorizonThread.Create(true);
     thread[i].horizonpicture:=Fcatalog.cfgshr.horizonpicture;
@@ -3868,6 +3876,7 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
       daz:=abs(0.5/cfgsc.BxGlb); // 0.5 pixel polygon overlap to avoid banding
       if cfgsc.ShowHorizon and (cfgsc.HorizonMax>0)and(cfgsc.horizonlist<>nil) then begin
         // Use horizon file data
+        azp:=0; hpstep:=0;
         for i:=1 to 361 do begin
           h:=cfgsc.horizonlist^[i];
           az:=deg2rad*rmod(360+i-1-180,360);
@@ -3954,6 +3963,7 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
  end else begin
   if cfgsc.ShowHorizon and (cfgsc.HorizonMax>0)and(cfgsc.horizonlist<>nil) then begin
     // Use horizon file data
+     azp:=0; hpstep:=0;
      for i:=1 to 361 do begin
        h:=cfgsc.horizonlist^[i];
        az:=deg2rad*rmod(360+i-1-180,360);
@@ -4473,6 +4483,7 @@ result:=false;
 if not cfgsc.ShowConstl then exit;
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw constellation figures');
 color := Fplot.cfgplot.Color[16];
+dyear:=0;
 if cfgsc.PMon then begin
    cyear:=cfgsc.CurYear+DayofYear(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay)/365.25;
    dyear:=cyear-Fcatalog.cfgshr.ConstLepoch
@@ -5248,6 +5259,7 @@ for j:=1 to cfgsc.nummodlabels do
 // sort labels by priority
 SortLabels;
 // compute text box
+labbox[1,1].Top:=0;
 for i:=1 to numlabels do begin
   if (labels[i].lsize>0)and((nebmagmax-nebmagmin)>=2) then begin
    if labels[i].lsize>(nebmagmax-((nebmagmax-nebmagmin)/4)) then lsize:=0.8
@@ -6088,6 +6100,7 @@ begin
       1: cep:=rsMeanOfTheDat;
       2: cep:=rsMeanJ2000;
       3: cep:=rsAstrometricJ;
+      else cep:='';
       end;
     dat:=Date2Str(cfgsc.CurYear,cfgsc.curmonth,cfgsc.curday)+sep+ArToStr3(cfgsc.Curtime);
     dat:=dat+' ('+TzGMT2UTC(cfgsc.tz.ZoneName)+')';

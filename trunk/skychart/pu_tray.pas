@@ -541,6 +541,10 @@ begin
         buf1:=f_clock.clock5.Caption;
         buf2:=f_clock.label5.Caption;
       end;
+  else begin
+        buf1:='';
+        buf2:='';
+      end;
   end;
   TrayMsg(copy(buf1,1,2),copy(buf1,4,2),buf2+blank+buf1);
   if (f_clock<>nil)and f_clock.Visible then begin

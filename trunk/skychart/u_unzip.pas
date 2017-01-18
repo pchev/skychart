@@ -119,6 +119,7 @@ end;
     c:      char;
   begin
     fout := nil;
+    filename_inzip:='';
 
     err := unzGetCurrentFileInfo(uf, @file_info, filename_inzip,
       sizeof(filename_inzip), nil, 0, nil, 0);

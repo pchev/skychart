@@ -3455,6 +3455,7 @@ end else begin
    f_search.HttpProxyPass:='';
 end;
  formpos(f_search,mouse.cursorpos.x,mouse.cursorpos.y);
+ ok:='';
  repeat
    f_search.showmodal;
    if f_search.modalresult=mrOk then begin
@@ -3510,7 +3511,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
             ok:=true;
            end;
       11 : begin ok:=catalog.SearchConstAbrev(num,ar1,de1); itype:=ftlin; stype:=''; end;
-      else ok:=false;
+      else begin ok:=false; stype:=''; end;
       end;
       if ok then begin
         IdentSearchResult(num,stype,itype,ar1,de1,f_search.sesame_resolver,f_search.sesame_name,f_search.sesame_desc);
@@ -7735,6 +7736,8 @@ end else begin
       if MultiFrame1.Childs[i].caption=cname then chart:=MultiFrame1.Childs[i].DockedObject;
 end;
 if chart is Tf_chart then with chart as Tf_chart do begin
+   ok:=false;
+   itype:=ftAll;
    catalog.ClearSearch;
    if sc.cfgsc.shownebulae or catalog.cfgcat.nebcatdef[uneb-BaseNeb] or catalog.cfgcat.nebcatdef[voneb-BaseNeb] then begin
      stype:='N';  itype:=ftNeb;
@@ -8036,6 +8039,7 @@ var i,n,w,h : integer;
     chart:TFrame;
     child:TChildFrame;
 begin
+result:=msgFailed;
 if VerboseMsg then begin
   cmd:=cname+' Receive command:';
   for i:=0 to arg.Count-1 do cmd:=cmd+blank+arg[i];
@@ -8070,6 +8074,7 @@ case n of
  18 : result:=GetSelectedObject;
 else begin
  result:='Bad chart name '+cname;
+ chart:=nil; child:=nil;
  if cname='' then begin
     if MultiFrame1.ActiveObject is Tf_chart then begin
       chart:=MultiFrame1.ActiveObject;

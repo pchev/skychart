@@ -292,6 +292,7 @@ if lockupd then exit;
 case cm.PrintMethod of
 1: buf:=savepath1.Text;
 2: buf:=savepath2.Text;
+else buf:='';
 end;
 if DirectoryIsWritable(buf) then
    cm.PrintTmpPath:=buf

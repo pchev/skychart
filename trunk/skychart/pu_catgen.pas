@@ -2427,6 +2427,7 @@ begin
           2:  key:=rec.double.id;
           3:  key:=rec.neb.id;
           4:  key:=rec.outlines.id;
+          else key:='';
           end;
           key:=uppercase(StringReplace(key,' ','',[rfReplaceAll]));
           if key<>'' then begin

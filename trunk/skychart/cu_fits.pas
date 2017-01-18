@@ -759,6 +759,7 @@ ittlog:  begin
           if value=0 then result:=0
           else result:=round(Cittlog*ln(value));
           end;
+else result:=value;
 end;
 end;
 
@@ -783,6 +784,7 @@ ittlog:  begin
           if value=0 then result:=0
           else result:=round(Cittlog8*ln(value));
           end;
+else result:=value div 256;
 end;
 end;
 
@@ -1182,6 +1184,7 @@ var
     ra,dec,ra0,dec0:double;
     i,j,k,startline,endline,x,y: integer;
 begin
+ra:=0;dec:=0;
 i:=cfgsc.ymax div num;
 startline:=id*i;
 if id=(num-1) then

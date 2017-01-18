@@ -117,11 +117,11 @@ object VarForm: TVarForm
   OnCreate = FormCreate
   OnShow = FormShow
   ShowHint = True
-  LCLVersion = '1.6.0.3'
+  LCLVersion = '1.6.2.0'
   Visible = False
   object Grid1: TStringGrid
     Left = 0
-    Height = 382
+    Height = 372
     Hint = 'Right click on a line to show menu'
     Top = 70
     Width = 800
@@ -245,8 +245,6 @@ object VarForm: TVarForm
       Top = 6
       Width = 80
       CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
-      OKCaption = 'OK'
-      CancelCaption = 'Cancel'
       DateOrder = doYMd
       ButtonWidth = 23
       Glyph.Data = {
@@ -279,7 +277,7 @@ object VarForm: TVarForm
       OnChange = DateEdit1Change
       OnExit = DateEdit1Change
       TabOrder = 6
-      Text = '    .  .  '
+      Text = '    /  /  '
     end
     object TimePicker1: TTimePicker
       Left = 176

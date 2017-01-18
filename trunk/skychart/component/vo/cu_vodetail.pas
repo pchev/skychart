@@ -216,6 +216,7 @@ case Fvo_type of
                    url:=Fbaseurl+'-source='+FCatalogName+'/*&-out.all&-oc.form=dec&-c=0%2b0&-c.rs=1&-out.max=1'; // table description from empty data search, because the previous form do not work for all the catalogs
               end;
   ConeSearch: url:=Fbaseurl+'RA=0&DEC=0&SR=0';
+  else url:='';
 end;
 http.Clear;
 http.Sock.SocksIP:='';

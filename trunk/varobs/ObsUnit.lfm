@@ -13,59 +13,59 @@ object ObsForm: TObsForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '1.6.0.3'
+  LCLVersion = '1.6.2.0'
   Visible = False
   object Label1: TLabel
     Left = 8
-    Height = 14
+    Height = 15
     Top = 66
-    Width = 65
+    Width = 74
     Caption = 'Star Name '
     ParentColor = False
   end
   object Label2: TLabel
     Left = 422
-    Height = 14
+    Height = 15
     Top = 17
-    Width = 63
+    Width = 71
     Caption = 'UT decimal'
     ParentColor = False
   end
   object Label3: TLabel
     Left = 200
-    Height = 14
+    Height = 15
     Top = 66
-    Width = 34
+    Width = 39
     Caption = 'Magn.'
     ParentColor = False
   end
   object Label4: TLabel
     Left = 13
-    Height = 14
+    Height = 15
     Top = 17
-    Width = 53
+    Width = 58
     Caption = 'Observer'
     ParentColor = False
   end
   object Label5: TLabel
     Left = 392
-    Height = 14
+    Height = 15
     Top = 66
-    Width = 55
+    Width = 64
     Caption = 'Comment'
     ParentColor = False
   end
   object Label6: TLabel
     Left = 162
-    Height = 14
+    Height = 15
     Top = 102
-    Width = 72
+    Width = 81
     Caption = 'Comp Star 1'
     ParentColor = False
   end
   object Label7: TLabel
     Left = 136
-    Height = 17
+    Height = 15
     Top = 16
     Width = 31
     Caption = 'Date'
@@ -74,31 +74,31 @@ object ObsForm: TObsForm
   end
   object Label9: TLabel
     Left = 416
-    Height = 14
+    Height = 15
     Top = 102
-    Width = 31
+    Width = 35
     Caption = 'Chart'
     ParentColor = False
   end
   object Label10: TLabel
     Left = 8
-    Height = 14
+    Height = 15
     Top = 140
-    Width = 50
+    Width = 55
     Caption = 'Remarks'
     ParentColor = False
   end
   object Label11: TLabel
     Left = 288
-    Height = 14
+    Height = 15
     Top = 102
-    Width = 72
+    Width = 81
     Caption = 'Comp Star 2'
     ParentColor = False
   end
   object Edit1: TEdit
     Left = 72
-    Height = 20
+    Height = 21
     Top = 64
     Width = 113
     CharCase = ecUppercase
@@ -106,7 +106,7 @@ object ObsForm: TObsForm
   end
   object Edit2: TEdit
     Left = 488
-    Height = 20
+    Height = 21
     Top = 15
     Width = 121
     CharCase = ecUppercase
@@ -116,7 +116,7 @@ object ObsForm: TObsForm
   end
   object Edit3: TEdit
     Left = 240
-    Height = 20
+    Height = 21
     Top = 64
     Width = 41
     CharCase = ecUppercase
@@ -124,7 +124,7 @@ object ObsForm: TObsForm
   end
   object Edit4: TEdit
     Left = 72
-    Height = 20
+    Height = 21
     Top = 15
     Width = 47
     CharCase = ecUppercase
@@ -134,7 +134,7 @@ object ObsForm: TObsForm
   end
   object Edit5: TEdit
     Left = 456
-    Height = 20
+    Height = 21
     Top = 64
     Width = 88
     CharCase = ecUppercase
@@ -142,7 +142,7 @@ object ObsForm: TObsForm
   end
   object Edit6: TEdit
     Left = 240
-    Height = 20
+    Height = 21
     Top = 100
     Width = 41
     CharCase = ecUppercase
@@ -180,7 +180,7 @@ object ObsForm: TObsForm
   end
   object Edit7: TEdit
     Left = 456
-    Height = 20
+    Height = 21
     Top = 100
     Width = 88
     CharCase = ecUppercase
@@ -188,7 +188,7 @@ object ObsForm: TObsForm
   end
   object Edit8: TEdit
     Left = 64
-    Height = 20
+    Height = 21
     Top = 138
     Width = 397
     MaxLength = 100
@@ -196,9 +196,9 @@ object ObsForm: TObsForm
   end
   object CheckBox2: TCheckBox
     Left = 296
-    Height = 24
+    Height = 21
     Top = 64
-    Width = 102
+    Width = 100
     Caption = 'Fainter than'
     TabOrder = 11
     TabStop = False
@@ -215,12 +215,10 @@ object ObsForm: TObsForm
   end
   object DateEdit1: TDateEdit
     Left = 176
-    Height = 20
+    Height = 21
     Top = 14
     Width = 80
     CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
-    OKCaption = 'OK'
-    CancelCaption = 'Cancel'
     DateOrder = doNone
     ButtonWidth = 23
     Glyph.Data = {
@@ -256,7 +254,7 @@ object ObsForm: TObsForm
   end
   object Edit9: TEdit
     Left = 368
-    Height = 20
+    Height = 21
     Top = 100
     Width = 41
     CharCase = ecUppercase
@@ -264,7 +262,7 @@ object ObsForm: TObsForm
   end
   object FileNameEdit1: TFileNameEdit
     Left = 14
-    Height = 20
+    Height = 21
     Top = 335
     Width = 378
     DialogOptions = []

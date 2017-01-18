@@ -534,7 +534,7 @@ if (numeditbar>0) and  (numaction>0) then begin
     for i:=0 to ToolbarTreeview[p].Items.Count-1 do begin
       act:=ToolbarTreeview[p].Items[i].Text;
       // search action by caption
-      n:=-1;
+      n:=-1; m:=-1;
       for k:=0 to numaction-1 do begin
         for j:=0 to editAction[k].ActionCount-1 do begin
           if TAction(editAction[k].Actions[j]).hint=act then begin

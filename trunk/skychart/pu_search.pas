@@ -419,6 +419,7 @@ case SesameCatNum of
   1 : cat:='S';
   2 : cat:='V';
   3 : cat:='NSV';
+  else cat:='';
 end;
 url:=sesame_url[SesameUrlNum+1,1];
 url:=url+'/-oxFI/'+cat+'?'+trim(StringReplace(num,' ','%20',[rfReplaceAll]));

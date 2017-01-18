@@ -595,7 +595,7 @@ var i : integer;
     intag: boolean;
     tag: string;
 begin
-result:='';
+result:=''; intag:=false; tag:='';
 for i:=1 to length(html) do begin
   c:=html[i];
   case c of
@@ -1877,6 +1877,7 @@ procedure PrintStrings(str: TStrings; PrtTitle, PrtText, PrtTextDate:string; ori
     end;
    end;
 begin
+  y:=0;
   StrDate:=PrtTextDate+DateToStr(Date);
   With Printer do begin
    Title:=PrtTitle;
@@ -1976,6 +1977,7 @@ Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string; orien
     end;
    end;
  begin
+  y:=0;
   GetMem(Cols,Grid.ColCount*SizeOf(Integer));
   StrDate:=PrtTextDate+DateToStr(Date);
   With Printer do begin

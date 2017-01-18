@@ -26,7 +26,7 @@ interface
 
 uses
   LResources, blcksock, HTTPsend, FTPSend, FileUtil, ssl_openssl,
-  Classes, SysUtils, Dialogs, Buttons, Graphics, Forms, Controls, StdCtrls, ExtCtrls;
+  Classes, SysUtils, LazUTF8, Dialogs, Buttons, Graphics, Forms, Controls, StdCtrls, ExtCtrls;
 
 type
 

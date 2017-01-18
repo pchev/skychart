@@ -265,6 +265,7 @@ begin
   case port_type of
     serial: result:=ReadCom(LX200_port,buf,count);
     tcpip : result:=ReadTcpip(LX200_Sock,buf,count);
+    else result:=false;
   end;
 end;
 
@@ -273,6 +274,7 @@ begin
 case port_type of
   serial: result:=ReadComTerm(LX200_port,buf);
   tcpip : result:=ReadTcpipTerm(LX200_Sock,buf);
+  else result:=false;
 end;
 end;
 
@@ -281,6 +283,7 @@ begin
 case port_type of
   serial: result:=WriteCom(LX200_port,buf,count);
   tcpip : result:=WriteTcpip(LX200_Sock,buf,count);
+  else result:=false;
 end;
 end;
 
@@ -780,6 +783,7 @@ case LX200_type of
     else exit;
     end;
     end;
+else buf:='';
 end;
 count:=length(buf);
 if LX200_Write(buf,count)= false then exit;
@@ -825,6 +829,7 @@ case LX200_type of
 2 : begin // Autostar
     buf:='#:Q#';
     end;
+else buf:='';
 end;
 count:=length(buf);
 if LX200_Write(buf,count)= false then exit;
