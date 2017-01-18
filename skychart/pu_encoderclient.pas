@@ -660,8 +660,7 @@ b:integer;
 begin
 Affmsg('');
      if port_opened then s1:= rsConnected else s1:=rsDiconnected;
-     if resolution_sent then s2:=Format(rsResolutionXY, [inttostr(reso_x),
-       inttostr(reso_y)]);
+     if resolution_sent then s2:=Format(rsResolutionXY, [inttostr(reso_x),inttostr(reso_y)]) else s2:='';
      if alpha_inversion then s4:=rsInversionAlp else s4:='';
      if delta_inversion then s4:=Format(rsInversionDel, [s4]) ;
      if init90y=999999 then s5:=rsVerticalAxis2

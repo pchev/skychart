@@ -488,7 +488,8 @@ if fileexists(Gcatpath+slashchar+catname+'.hdr') then begin
   if buf='CDCLINE' then catversion:=rtLin;
   buf:=copy(catheader.version,8,1);
   cattype:=strtointdef(buf,0);
-end;
+end
+else result:=false;
 end;
 
 Function ReadCatHeader : boolean;
@@ -718,7 +719,7 @@ var lin : GCatrec;
     n: integer;
 begin
 if onCache and (CacheZone[CurCache,sm]=0) then begin
- n:=-1;
+ n:=-1; ok:=false;
  repeat
    ReadGCat(lin,ok,false);
    if ok then case catversion of
@@ -1139,6 +1140,7 @@ const
   zone_lst7: array [0..23] of integer = (    48 ,    95 ,   140 ,  183  ,   223 ,   259 ,   291 ,  318  ,  339  ,   354 ,   363 ,  366  ,   414 ,   461 ,   506 ,   549 ,   589 ,   625 ,   657 ,   684 ,   705 ,   720 ,   729 ,   732 );
   zone_nam : array [0..23] of string  = ('n0000','n0730','n1500','n2230','n3000','n3730','n4500','n5230','n6000','n6730','n7500','n8230','s0000','s0730','s1500','s2230','s3000','s3730','s4500','s5230','s6000','s6730','s7500','s8230');
 begin
+m:=0;
 case catheader.FileNum of
   1      : fn:=lowercase(trim(catheader.ShortName))+'.dat';
   50     : fn:=lowercase(trim(catheader.ShortName))+padzeros(inttostr(fnum),2)+'.dat';
@@ -1151,6 +1153,7 @@ case catheader.FileNum of
              for n:=0 to 23 do if fnum <= zone_lst[n] then begin; m:=n; break; end;
              fn:=slash(zone_nam[m])+lowercase(trim(catheader.ShortName))+padzeros(inttostr(fnum),4)+'.dat';
            end;
+  else fn:='';
 end;
 OpenFile(GCatpath+slashchar+fn,ok);
 end;

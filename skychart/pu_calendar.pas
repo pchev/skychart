@@ -1542,6 +1542,7 @@ var
  i, lix, liy: Integer; {last x,y coordinate (as graph integer)}
  ir, lir: Boolean; {in range, last point in range}
 begin {TimeLine of DrawGraph of RefreshPlanetGraph}
+  ir:=false;
   i := 2; {First row of grid with times}
   {Skip past any lines with missing values}
   while (i < grd.RowCount) and not ScaledTime(Grd, C, i, lix) do
@@ -2477,7 +2478,8 @@ function SorCompare(c1,c2:Tmaglist):integer;
     begin
      if c1.mag<c2.mag then result:=-1
      else if c1.mag=c2.mag then result:=0
-     else if c1.mag>c2.mag then result:=1;
+     else if c1.mag>c2.mag then result:=1
+     else result:=-1;
     end;
 begin
 list:=TStringList.Create;

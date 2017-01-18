@@ -66,7 +66,6 @@ Type idxfil = record
               end;
 var
     imin,imax,i : integer;
-    pnum : string;
     fx : file of idxfil ;
     lin : idxfil;
 begin
@@ -81,7 +80,6 @@ imin:=0;
 imax := filesize(fx);
 lin.num:='';
 repeat
-  pnum:=lin.num;
   i:=imin + ((imax-imin) div 2);
   seek(fx,i);
   read(fx,lin);
@@ -101,7 +99,7 @@ type idxfil = record num :longint ;
                  ar,de :single;
                  end;
 var
-    imin,imax,i,pnum : integer;
+    imin,imax,i : integer;
     fx : file of idxfil ;
     lin : idxfil;
 begin
@@ -116,7 +114,6 @@ imin:=0;
 imax := filesize(fx);
 lin.num:=-MaxInt;
 repeat
-  pnum:=lin.num;
   i:=imin + ((imax-imin) div 2);
   seek(fx,i);
   read(fx,lin);
@@ -138,7 +135,6 @@ Type filixr = packed record n: smallint;
          end;
 var
     imin,imax,i : integer;
-    pnum : string;
     fx : file of filixr ;
     lin : filixr;
 begin
@@ -153,7 +149,6 @@ imin:=0;
 imax := filesize(fx);
 lin.key:='';
 repeat
-  pnum:=lin.key;
   i:=imin + ((imax-imin) div 2);
   seek(fx,i);
   read(fx,lin);
@@ -175,7 +170,6 @@ Type filixr = packed record n: smallint;
          end;
 var
     imin,imax,i : integer;
-    pnum : integer;
     fx : file of filixr ;
     lin : filixr;
 begin
@@ -190,7 +184,6 @@ imin:=0;
 imax := filesize(fx);
 lin.key:=0;
 repeat
-  pnum:=lin.key;
   i:=imin + ((imax-imin) div 2);
   seek(fx,i);
   read(fx,lin);
@@ -459,7 +452,7 @@ var buf,b0,b1,b,n,c: string;
     rec: GCatrec;
     GCatFilter: boolean;
 begin
-b0:='';
+b0:=''; n:='';c:='';
 p:=pos(' ',id);
 if p>0 then begin      // must be at least two words (alpha cygni)
   b1:=copy(id,1,p-1);
@@ -605,7 +598,7 @@ Type filixr = packed record n: smallint;
          end;
 var
     imin,imax,i,n,r : integer;
-    pnum,idx,buf : string;
+    idx,buf : string;
     fx : file of filixr ;
     lin : filixr;
 begin
@@ -623,7 +616,6 @@ imin:=0;
 imax := filesize(fx);
 lin.key:='';
 repeat
-  pnum:=lin.key;
   i:=imin + ((imax-imin) div 2);
   seek(fx,i);
   read(fx,lin);

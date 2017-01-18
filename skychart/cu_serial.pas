@@ -196,7 +196,8 @@ if com_opened then begin
   ser.SendString(buf);
   result:=(ser.LastError=0);
   if debug then writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+' Write : '+inttostr(count)+' *'+buf+'*');
-end;
+end
+else result:=false;
 end;
 
 Procedure CloseCom(var ser:TBlockSerial);

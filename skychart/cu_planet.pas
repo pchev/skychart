@@ -373,7 +373,7 @@ case isat of
    41..50 : begin ipl:=6; ix:=isat-40+9; end;
    51..63 : begin ipl:=7; ix:=isat-50+5; end;
    64..69 : begin ipl:=8; ix:=isat-63+2; end;
-   else ipl:=0;
+   else begin ipl:=0; ix:=0; end;
 end;
 if ipl<>0 then begin
    Planet(ipl,jde,pra,pdec,dist,illum,phase,diam,magn,rp,xp,yp,zp,vel);
@@ -424,7 +424,7 @@ if result=0 then begin
     alpha:=arctan2(y,x);
     if (alpha<0) then alpha:=alpha+2*pi;
     qr:=sqrt(x*x+y*y);
-    if qr<>0 then delta:=arctan(z/qr);
+    if qr<>0 then delta:=arctan(z/qr) else delta:=0;
     xsat[i]:=alpha;
     ysat[i]:=delta;
     supconj[i]:=(d2>d1);
@@ -453,7 +453,7 @@ if result=0 then begin
     alpha:=arctan2(y,x);
     if (alpha<0) then alpha:=alpha+2*pi;
     qr:=sqrt(x*x+y*y);
-    if qr<>0 then delta:=arctan(z/qr);
+    if qr<>0 then delta:=arctan(z/qr) else delta:=0;
     xsat[i]:=alpha;
     ysat[i]:=delta;
     supconj[i]:=(d2>d1);
@@ -482,7 +482,7 @@ if result=0 then begin
     alpha:=arctan2(y,x);
     if (alpha<0) then alpha:=alpha+2*pi;
     qr:=sqrt(x*x+y*y);
-    if qr<>0 then delta:=arctan(z/qr);
+    if qr<>0 then delta:=arctan(z/qr) else delta:=0;
     xsat[i]:=alpha;
     ysat[i]:=delta;
     supconj[i]:=(d2>d1);
@@ -511,7 +511,7 @@ if result=0 then begin
     alpha:=arctan2(y,x);
     if (alpha<0) then alpha:=alpha+2*pi;
     qr:=sqrt(x*x+y*y);
-    if qr<>0 then delta:=arctan(z/qr);
+    if qr<>0 then delta:=arctan(z/qr) else delta:=0;
     xsat[i]:=alpha;
     ysat[i]:=delta;
     supconj[i]:=(d2>d1);
@@ -540,7 +540,7 @@ if result=0 then begin
     alpha:=arctan2(y,x);
     if (alpha<0) then alpha:=alpha+2*pi;
     qr:=sqrt(x*x+y*y);
-    if qr<>0 then delta:=arctan(z/qr);
+    if qr<>0 then delta:=arctan(z/qr) else delta:=0;
     xsat[i]:=alpha;
     ysat[i]:=delta;
     supconj[i]:=(d2>d1);
@@ -568,7 +568,7 @@ if result=0 then begin
     alpha:=arctan2(y,x);
     if (alpha<0) then alpha:=alpha+2*pi;
     qr:=sqrt(x*x+y*y);
-    if qr<>0 then delta:=arctan(z/qr);
+    if qr<>0 then delta:=arctan(z/qr) else delta:=0;
     xsat[i]:=alpha;
     ysat[i]:=delta;
     supconj[i]:=(d2>d1);
@@ -613,7 +613,7 @@ const VP : array[1..15,1..4] of double = (
           (44.064,50.3176081),  //Ganymede
           (259.51,21.5710715)); //Callisto
 var d,T,N,a0,d0,l0,b0,r0,l1,b1,r1,x,y,z,del,eps,als,des,u,v,al,dl,f,th,k,i : double;
-    M1,M2,M3,M4,M5,Ja,Jb,Jc,Jd,Je,J1,J2,J3,J4,J5,J6,J7,J8 : double;
+    M1,M2,M3,M4,M5,Ja,Jb,Jc,Jd,Je,{J1,J2,}J3,J4,J5,J6,J7,J8 : double;
     pl :TPlanData;
 begin
 d := (jde-jd2000);
@@ -650,15 +650,17 @@ if ipla=5 then begin                        //jupiter
   d0:=d0+0.000050*cos(Ja)+0.000404*cos(Jb)+0.000617*cos(Jc)-0.000013*cos(Jd)+0.000926*cos(Je);
 end;
 if (ipla>=12)and(ipla<=15) then begin
-  J1:=deg2rad*(73.32+91472.9*T);
-  J2:=deg2rad*(24.62+45137.2*T);
+  // only need for Amalthea and Thebe
+{  J1:=deg2rad*(73.32+91472.9*T);
+  J2:=deg2rad*(24.62+45137.2*T); }
   J3:=deg2rad*(283.90+4850.7*T);
   J4:=deg2rad*(355.80+1191.3*T);
   J5:=deg2rad*(119.90+262.1*T);
   J6:=deg2rad*(229.80+64.3*T);
   J7:=deg2rad*(352.25+2382.6*T);
   J8:=deg2rad*(113.35+6070.0*T);
-end;
+end
+  else begin J3:=0;J4:=0;J5:=0;J6:=0;J7:=0;J8:=0;end;
 if ipla=12 then begin    // Io
   a0:=a0+0.094*sin(J3)+0.024*sin(J4);
   d0:=d0+0.040*cos(J3)+0.011*cos(J4);
@@ -1339,6 +1341,7 @@ var
 begin
 ar:=(x2+x1)/2;
 de:=(y2+y1)/2;
+distancetocenter[0,1]:=maxdouble;
 if not nextobj then  begin
    CurrentStep:=0;
    CurrentPlanet:=0;
@@ -1772,6 +1775,7 @@ begin
 end ;
 
 BEGIN
+  nu:=0;
   if comelem.oe<1 then eliptique ;
   if comelem.oe=1 then parabolique;
   if comelem.oe>1 then hyperbolique;
@@ -2700,7 +2704,7 @@ var hr,ht,hs,h1,h2,azr,azs,dist,q,diam,dh,hmin,hhmax : double;
     n: integer;
 const  na='      ';
 begin
-jdr:=0;jdt:=0;jds:=0;ymax0:=0;
+jdr:=0;jdt:=0;jds:=0;ymax0:=0; hr:=0;ht:=0;hs:=0;
 frise := false;fset := false;ftransit := false;
 case pla of
   12..15 : pla:=5; //jup sat
@@ -2731,6 +2735,7 @@ case pla of
     ho:=(8.794/dist/3600)+dh-diam/2/3600;  // horizontal parallax
     if dh>-1 then ho:=ho-0.016;
     end;
+else ho:=dh;
 end;
 sinho:=sin(deg2rad*ho);
 dt := jd0;

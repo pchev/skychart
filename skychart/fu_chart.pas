@@ -1106,6 +1106,7 @@ var cn,client: string;
     i:integer;
     ra,de,a,h,l,b,le,be:double;
 begin
+client:='';
 cn:=TMenuItem(sender).Caption;
 for i:=0 to SampClientName.Count-1 do begin
     if SampClientName[i]=cn then begin
@@ -1573,6 +1574,7 @@ end;
 procedure Tf_chart.MoveCamera(angle:single);
 var rot: single;
 begin
+rot:=0;
 if movecam then begin
   sc.cfgsc.rectangle[movecamnum,3]:=sc.cfgsc.rectangle[movecamnum,3]+angle;
   sc.cfgsc.rectangle[movecamnum,3]:=rmod(sc.cfgsc.rectangle[movecamnum,3]+360,360);
@@ -2572,6 +2574,7 @@ begin
           txt:=rsL+':'+deptostr(rad2deg*le)+blank+rsB+':'+deptostr(rad2deg*be)+crlf
               +rsRA+':'+arptostr(rad2deg*ra/15)+blank+rsDE+':'+deptostr(rad2deg*dec);
           end;
+   else txt:='';
    end;
    if assigned(Fshowcoord) then Fshowcoord(txt);
 end;
@@ -2582,6 +2585,7 @@ var ra,de,dx,dy,dist,x1,y1: double;
     pa: integer;
     txt:string;
 begin
+txt:='';
 case action of
 1 : begin    // mouse down
      // cleanup last measure
@@ -3706,6 +3710,7 @@ equat :  result:='EQUAT';
 altaz :  result:='ALTAZ';
 gal   :  result:='GALACTIC';
 ecl   :  result:='ECLIPTIC';
+else result:='';
 end;
 result:=msgOK+blank+result;
 end;
@@ -4903,6 +4908,9 @@ var PrintMethod,printcolor: integer;
     PrintTmpPath: string;
 begin
 ok:=true;
+PrintMethod:=0;
+printlandscape:=false;
+printcolor:=0;
 Method:=UpperCase(Trim(Method));
 if Method='' then PrintMethod:=cmain.PrintMethod
 else if Method='PRT' then PrintMethod:=0

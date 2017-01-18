@@ -218,8 +218,10 @@ begin
         L += dL;
         result:=true;
         end;
-    else
+    else begin
         result:=false;
+        a:=0;L:=0;e:=0;P:=0;I:=0;K:=0;N:=0;J:=0;
+        end;
     end;
     if result then begin
       ma := L - P;
@@ -839,8 +841,10 @@ begin
 
      result:=true;
     end;
-    else
+    else begin
          result:=false;
+         radius:=0;lon:=0;psi:=0;upsilon:=0;zeta:=0;
+         end;
     end; // case b
     if result then begin
       // Jupiter equatorial coordinates
@@ -1006,6 +1010,7 @@ var elem: array [0..5] of double = ( 0, 0, 0, 0, 0, 0 );
     AIA,OMA,ci,si,co,so: double;
     index: integer;
 begin
+    aam:=0;tmas:=0;
     if (b = PHOEBE) then begin
         t := jd - 2433282.5;
         TT := t/365.25;
@@ -1682,8 +1687,10 @@ begin
         N := 3.522 * deg_to_rad;
         result:=true;
     end;
-    else
+    else begin
         result:=false;
+        e:=0;ma:=0;a:=0;N:=0;J:=0;o:=0;i:=0;w:=0;
+        end;
     end;
 
     if result then begin

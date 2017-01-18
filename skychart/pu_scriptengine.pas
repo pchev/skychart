@@ -373,6 +373,7 @@ end;
 function Tf_scriptengine.doExecuteCmd(cname:string; arg:Tstringlist):string;
 var i: integer;
 begin
+  result:=msgFailed;
   for i:=arg.count to MaxCmdArg do arg.add('');
   if assigned(FExecuteCmd) then result:=FExecuteCmd(cname,arg);
 end;
@@ -435,6 +436,7 @@ end;
 function Tf_scriptengine.doCometMark(list:TstringList):boolean;
 var str: string;
 begin
+  str:='';
   if assigned(FCometMark) then str:=FCometMark('',list);
   result:=(pos(msgOK,str)>0);
 end;
@@ -452,6 +454,7 @@ end;
 function Tf_scriptengine.doAsteroidMark(list:TstringList):boolean;
 var str: string;
 begin
+  str:='';
   if assigned(FAsteroidMark) then str:=FAsteroidMark('',list);
   result:=(pos(msgOK,str)>0);
 end;
@@ -459,6 +462,7 @@ end;
 function Tf_scriptengine.doGetScopeRates(list:TstringList):boolean;
 var str: string;
 begin
+  str:='';
   if assigned(FGetScopeRates) then str:=FGetScopeRates(TelescopeChartName,list);
   result:=(pos(msgOK,str)>0);
 end;
@@ -476,7 +480,7 @@ var str,buf,cobs,clat,clon,calt,ctz: string;
 begin
 list.clear;
 addcobs:=true;
-cobs:='';
+cobs:=''; clat:=''; clon:=''; calt:=''; ctz:='';
 cmd:=Tstringlist.Create;
 cmd.add('GETOBS');
 str:=ExecuteCmd('',cmd);
@@ -1395,6 +1399,7 @@ lsnum:=0; SetLength(ls,0);
 cknum:=0; SetLength(ck,0);
 grnum:=0; SetLength(gr,0);
 groupseq:=0;
+curgroup:=nil;
 node:=TreeView1.Items.GetFirstNode;
 while node<>nil do begin
   buf:=words(node.Text,'',1,1,';');
@@ -2234,7 +2239,7 @@ procedure Tf_scriptengine.SetMenu(aMenu: TMenuItem);
 var tm,sm: TMenuItem;
     i,k,n,m: integer;
 begin
-  m:=0;
+  m:=0; tm:=nil;
   if FEventReady then begin
    for i:=0 to btnum-1 do begin
      n:=bt[i].Tag;

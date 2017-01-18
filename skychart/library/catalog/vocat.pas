@@ -5,10 +5,10 @@ unit vocat;
 interface
 
 uses  skylibcat, gcatunit, XMLRead, DOM, math, XMLConf,
-  Classes, SysUtils, FileUtil ;
+  Classes, SysUtils, LazFileUtils ;
 
 procedure SetVOCatpath(path:string);
-Procedure OpenVOCat(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenVOCat(var ok : boolean);
 Procedure OpenVOCatwin(var ok : boolean);
 Procedure ReadVOCat(out lin : GCatrec; var ok : boolean);
 Procedure NextVOCat( var ok : boolean);
@@ -391,10 +391,10 @@ catname:=ExtractFileName(catfile);
 config:=TXMLConfig.Create(nil);
 try
 config.Filename:=deffile;
-VOname:=config.GetValue('VOcat/catalog/name','');
-VOobject:=config.GetValue('VOcat/catalog/objtype',VOobject);
-SAMPid:=config.GetValue('VOcat/catalog/sampid','skychart_'+ExtractFileNameOnly(catfile));
-SAMPurl:=config.GetValue('VOcat/catalog/sampurl','file://'+catfile);
+VOname:=string(config.GetValue('VOcat/catalog/name',widestring('')));
+VOobject:=string(config.GetValue('VOcat/catalog/objtype',widestring(VOobject)));
+SAMPid:=string(config.GetValue('VOcat/catalog/sampid',widestring('skychart_'+ExtractFileNameOnly(catfile))));
+SAMPurl:=string(config.GetValue('VOcat/catalog/sampurl',widestring('file://'+catfile)));
 field_size:=config.GetValue('VOcat/data/sizeposition',-1);
 forcesize:=field_size;
 field_mag:=config.GetValue('VOcat/data/magposition',-1);
@@ -402,7 +402,7 @@ forcemag:=field_mag;
 field_b_v:=-1;
 field_name:=config.GetValue('VOcat/data/nameposition',-1);
 forcename:=field_name;
-nameprefix:=config.GetValue('VOcat/data/nameprefix','');
+nameprefix:=string(config.GetValue('VOcat/data/nameprefix',''));
 if field_name<0 then nameprefix:='';
 active:=config.GetValue('VOcat/plot/active',false);
 drawtype:=config.GetValue('VOcat/plot/drawtype',14);
@@ -435,19 +435,19 @@ end else begin
   for i:=0 to VOFields.Count-1 do VOFields.Objects[i].Free;
   VOFields.Clear;
   while Assigned(VoNode) do begin
-    buf:=VoNode.NodeName;
+    buf:=string(VoNode.NodeName);
     if buf='FIELD' then begin
       fielddata:=TFieldData.Create;
       fieldnode:=VoNode.FindNode('DESCRIPTION');
       if fieldnode<>nil then begin
-         fielddata.description:=fieldnode.TextContent;
+         fielddata.description:=string(fieldnode.TextContent);
       end;
       fieldnode:=VoNode.Attributes.GetNamedItem('name');
-      if fieldnode<>nil then k:=fieldnode.NodeValue;
+      if fieldnode<>nil then k:=string(fieldnode.NodeValue);
       fielddata.name:=k;
       fieldnode:=VoNode.Attributes.GetNamedItem('ucd');
       if fieldnode<>nil then begin
-        ucd:=fieldnode.NodeValue;
+        ucd:=string(fieldnode.NodeValue);
         p:=pos(':',ucd);
         if p>0 then delete(ucd,1,p);
         p:=pos('_',ucd);
@@ -460,9 +460,9 @@ end else begin
         fielddata.ucd:=ucd;
       end;
       fieldnode:=VoNode.Attributes.GetNamedItem('datatype');
-      if fieldnode<>nil then fielddata.datatype:=fieldnode.NodeValue;
+      if fieldnode<>nil then fielddata.datatype:=string(fieldnode.NodeValue);
       fieldnode:=VoNode.Attributes.GetNamedItem('unit');
-      if fieldnode<>nil then fielddata.units:=fieldnode.NodeValue;
+      if fieldnode<>nil then fielddata.units:=string(fieldnode.NodeValue);
       j:=VOFields.AddObject(k,fielddata);
       if (pos('pos.pm',fielddata.ucd)=1)and(pos('error',fielddata.ucd)=0) then begin
         if (pos('pos.eq.ra',fielddata.ucd)>0) then begin
@@ -513,7 +513,7 @@ end else begin
   VoNode:=VoNode.FirstChild;   // TABLEDATA
   VoNode:=VoNode.FirstChild;   // first TR
   if Assigned(VoNode) then begin
-    buf:=VoNode.NodeName;
+    buf:=string(VoNode.NodeName);
     if buf='TR' then begin
       result:=true;
       InitRec;
@@ -547,7 +547,7 @@ else begin
 end;
 end;
 
-Procedure OpenVOCat(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenVOCat(var ok : boolean);
 begin
 OpenVOCatwin(ok);
 end;
@@ -665,7 +665,7 @@ if Assigned(VoNode) then begin
           end;
   end;
   while Assigned(cell) do begin
-    buf:=cell.TextContent;
+    buf:=string(cell.TextContent);
     // always ask vizier to add j2000 coordinates.
     if VOFields[i]='_RAJ2000' then begin
        lin.ra:=deg2rad*StrToFloatDef(buf,0);

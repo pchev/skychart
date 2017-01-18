@@ -81,9 +81,9 @@ var i: integer;
      with oRESOURCE.ChildNodes do
      try
        for i := 0 to (Count - 1) do begin
-         if Item[i].NodeName='DESCRIPTION' then fResourceDescription:=Item[i].TextContent;
+         if Item[i].NodeName='DESCRIPTION' then fResourceDescription:=string(Item[i].TextContent);
          if Item[i].NodeName='TABLE' then begin
-            if (tablename='')or( Item[i].Attributes.GetNamedItem('name').NodeValue=tablename) then begin
+            if (tablename='')or( string(Item[i].Attributes.GetNamedItem('name').NodeValue)=tablename) then begin
                OpenTable(Item[i]);
                break;
             end;
@@ -121,33 +121,33 @@ begin
  with TABLE.ChildNodes do
  try
    for i := 0 to (Count - 1) do begin
-     if Item[i].NodeName='DESCRIPTION' then fTableDescription:=Item[i].TextContent;
+     if Item[i].NodeName='DESCRIPTION' then fTableDescription:=string(Item[i].TextContent);
      if Item[i].NodeName='FIELD' then begin
         inc(FFieldcount);
         if Item[i].Attributes.GetNamedItem('name')=nil then
           ffieldname.Add('')
         else
-          ffieldname.Add(Item[i].Attributes.GetNamedItem('name').NodeValue);
+          ffieldname.Add(string(Item[i].Attributes.GetNamedItem('name').NodeValue));
         if Item[i].Attributes.GetNamedItem('ucd')=nil then
           ffielducd.Add('')
         else
-          ffielducd.Add(Item[i].Attributes.GetNamedItem('ucd').NodeValue);
+          ffielducd.Add(string(Item[i].Attributes.GetNamedItem('ucd').NodeValue));
         if Item[i].Attributes.GetNamedItem('datatype')=nil then
           ffielddatatype.Add('')
         else
-          ffielddatatype.Add(Item[i].Attributes.GetNamedItem('datatype').NodeValue);
+          ffielddatatype.Add(string(Item[i].Attributes.GetNamedItem('datatype').NodeValue));
         if Item[i].Attributes.GetNamedItem('unit')=nil then
           ffieldunit.Add('')
         else
-          ffieldunit.Add(Item[i].Attributes.GetNamedItem('unit').NodeValue);
+          ffieldunit.Add(string(Item[i].Attributes.GetNamedItem('unit').NodeValue));
         if Item[i].Attributes.GetNamedItem('ref')=nil then
           ffieldref.Add('')
         else
-          ffieldref.Add(Item[i].Attributes.GetNamedItem('ref').NodeValue);
+          ffieldref.Add(string(Item[i].Attributes.GetNamedItem('ref').NodeValue));
         if Item[i].FindNode('DESCRIPTION')=nil then
           ffielddesc.Add('')
         else
-          ffielddesc.Add(Item[i].FindNode('DESCRIPTION').TextContent);
+          ffielddesc.Add(string(Item[i].FindNode('DESCRIPTION').TextContent));
      end;
      if Item[i].NodeName='DATA' then begin
          OpenData(Item[i]);
@@ -185,7 +185,7 @@ begin
    with CurrentRow.ChildNodes do
    try
      for i := 0 to (Count - 1) do begin
-       if FUseField[i] then row.Add(Item[i].TextContent);
+       if FUseField[i] then row.Add(string(Item[i].TextContent));
      end;
    finally
      Free;

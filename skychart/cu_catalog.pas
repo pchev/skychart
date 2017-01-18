@@ -1459,6 +1459,8 @@ var GcatH : TCatHeader;
     info:TCatHdrInfo;
     v : integer;
 begin
+result:=false;
+v:=0;
 repeat
    inc(CurGCat);
    if CurGCat>cfgcat.GCatNum then begin
@@ -1555,6 +1557,7 @@ end;
 
 function Tcatalog.GetVOCatS(var rec:GcatRec; filter:boolean=true):boolean;
 begin
+result:=false;
 repeat
   ReadVOCat(rec,result);
   if not result then break;
@@ -1566,6 +1569,7 @@ end;
 function Tcatalog.GetVOCatN(var rec:GcatRec; filter:boolean=true):boolean;
 var i: integer;
 begin
+result:=true;
 repeat
   ReadVOCat(rec,result);
   cfgcat.SampSelectIdent:=false;
@@ -2815,6 +2819,7 @@ if PgcLeda then begin
  result:=true;
 end else begin
  pgcunit.ClosePGC;
+ result:=true;
 end;
 end;
 
@@ -3024,6 +3029,7 @@ if GpnNew then begin
  result:=true;
 end else begin
  gpnunit.CloseGPN;
+ result:=true;
 end;
 end;
 
@@ -3534,12 +3540,12 @@ if not nextobj then begin
    vostar  : begin
                 VOobject:='star';
                 SetVOCatpath(slash(VODir));
-                OpenVOCat(xx1,xx2,yy1,yy2,ok);
+                OpenVOCat(ok);
              end;
    voneb   : begin
                 VOobject:='dso';
                 SetVOCatpath(slash(VODir));
-                OpenVOCat(xx1,xx2,yy1,yy2,ok);
+                OpenVOCat(ok);
              end;
    uneb    : begin
                 CurrentUserObj:=-1;
@@ -3696,7 +3702,7 @@ repeat
    else ok:=false;
   end;
   if not ok then break;
-  cfgsc.FindStarPM:=false;
+  cfgsc.FindStarPM:=false; epoch:=0;fullmotion:=false;
   if cfgsc.PMon and (rec.options.rectype=rtStar) and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
     if rec.star.valid[vsEpoch] then epoch:=rec.star.epoch
                                else epoch:=rec.options.Epoch;

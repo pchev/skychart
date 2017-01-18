@@ -33,7 +33,7 @@ uses
     unix,baseunix,unixutil,
   {$endif}
   Clipbrd, LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, UScaleDPI,
-  StdCtrls, ComCtrls, Buttons,IniFiles, Printers, fileutil, cu_cdcclient, u_util2,
+  StdCtrls, ComCtrls, Buttons,IniFiles, Printers, FileUtil, LazUTF8, cu_cdcclient, u_util2,
   Menus, ExtCtrls, LResources, PrintersDlgs, Grids, EditBtn, jdcalendar, u_param,
   UniqueInstance;
 
@@ -141,7 +141,7 @@ var
 implementation
 {$R *.lfm}
 
-Uses detail1,SettingUnit,ObsUnit, splashunit, aavsochart ;
+Uses detail1,SettingUnit,ObsUnit, splashunit, aavsochart,LazFileUtils ;
 
 
 Procedure FreeInfo(var gr : TStringgrid);
@@ -233,6 +233,7 @@ case varform.RadioGroup1.ItemIndex of
     str((hm/24):1:4,result);
     result:=formatdatetime('yyyymmdd',encodedate(yy,mm,dd))+copy(result,2,9);
     end;
+else result:='';
 end;
 end;
 
@@ -970,6 +971,7 @@ Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string);
     end;
    end;
  begin
+  y:=0;
   GetMem(Cols,Grid.ColCount*SizeOf(Integer));
   StrDate:=PrtTextDate+DateToStr(Date);
   With Printer do begin

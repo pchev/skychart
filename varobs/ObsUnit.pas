@@ -252,6 +252,7 @@ case OptForm.RadioGroup4.ItemIndex of
     if checkbox2.checked then s:='<'+s;
     buf:=edit1.text+' '+edit2.text+' '+s+' '+edit4.text+' '+edit5.text+' '+edit6.text+' '+edit7.text+' '+edit8.text;
     end;
+else buf:='';
 end;
 memo1.Lines.Add(buf);
 end;

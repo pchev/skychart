@@ -5,7 +5,7 @@ unit cu_sampclient;
 interface
 
 uses cu_sampserver, ExtCtrls, LibXmlParser, LibXmlComps, Math,
-  Classes, SysUtils,FileUtil,HTTPSend, synautil;
+  Classes, SysUtils,LazFileUtils, LazUTF8,HTTPSend, synautil;
 
 type
 
@@ -195,6 +195,7 @@ function TSampClient.doRpcCall(p:string):boolean;
 var buf:array [0..8192] of char;
     i: integer;
 begin
+  buf:='';
   aHTTP.Clear;
   WriteStrToStream(aHTTP.Document, p);
   aHTTP.MimeType := 'application/xml';
@@ -573,6 +574,7 @@ var buf:array [0..8192] of char;
     i: integer;
     map: Tmap;
 begin
+  buf:='';
   InitScanner;
   i:=min(data.Size,SizeOf(buf));
   FillByte(buf,SizeOf(buf),0);

@@ -215,7 +215,7 @@ with sender as TStringGrid do begin
    s1:=Cells[ACol,ARow];
    s2:=Cells[BCol,BRow];
 end;
-i1:=1; i2:=1;
+i1:=1; i2:=1; n1:=0; n2:=0;
 if (ACol=5) and (BCol=5) then begin  //magnitude
    p:=pos(':',s1);
    if p>0 then buf:=copy(s1,p+1,999) else buf:=s1;

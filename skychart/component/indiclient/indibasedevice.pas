@@ -143,7 +143,8 @@ end;
 
 function BaseDevice.getDeviceName(): string;
 begin
-  if pAll<>nil then result:=deviceID;
+  if pAll<>nil then result:=deviceID
+  else result:='';
 end;
 
 procedure BaseDevice.setDeviceName(value:string);
@@ -201,7 +202,7 @@ begin
 end;
 
 function BaseDevice.buildProp(root: TDOMNode; out errmsg: string):integer;
-var perm: IPerm;
+var perm: IPerm = IP_RW;
     state: IPState;
     timeout: double;
     rtag,rname,rdev: string;
@@ -457,7 +458,7 @@ begin
     pAll.Add(indiProp);
     if assigned(FIndiPropertyEvent) then FIndiPropertyEvent(indiProp);
   end;
-
+  result:=0;
 end;
 
 function BaseDevice.removeProperty(pname: string; out errmsg: string):integer;
@@ -483,8 +484,8 @@ begin
 end;
 
 function BaseDevice.setValue(root: TDOMNode; out errmsg: string):integer;
-var state: IPState;
-    timeout: double;
+var state: IPState = IPS_IDLE;
+    timeout: double = 0;
     swState: ISState;
     lState: IPState;
     stateSet: boolean = false;
@@ -840,31 +841,41 @@ end;
 function IndiProperty.getNumber():INumberVectorProperty;
 begin
 if (pType = INDI_NUMBER) then
-    result := INumberVectorProperty(pPtr);
+    result := INumberVectorProperty(pPtr)
+else
+   result:=nil;
 end;
 
 function IndiProperty.getText():ITextVectorProperty;
 begin
 if (pType = INDI_TEXT) then
-    result := iTextVectorProperty(pPtr);
+    result := iTextVectorProperty(pPtr)
+else
+   result:=nil;
 end;
 
 function IndiProperty.getSwitch():ISwitchVectorProperty;
 begin
 if (pType = INDI_SWITCH) then
-    result := ISwitchVectorProperty(pPtr);
+    result := ISwitchVectorProperty(pPtr)
+else
+   result:=nil;
 end;
 
 function IndiProperty.getLight():ILightVectorProperty;
 begin
 if (pType = INDI_LIGHT) then
-    result := ILightVectorProperty(pPtr);
+    result := ILightVectorProperty(pPtr)
+else
+   result:=nil;
 end;
 
 function IndiProperty.getBLOB():IBLOBVectorProperty;
 begin
 if (pType = INDI_BLOB) then
-    result := IBLOBVectorProperty(pPtr);
+    result := IBLOBVectorProperty(pPtr)
+else
+   result:=nil;
 end;
 
 end.

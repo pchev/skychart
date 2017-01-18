@@ -10,12 +10,13 @@ object Form1: TForm1
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poDefaultPosOnly
-  LCLVersion = '1.0.8.0'
+  LCLVersion = '1.6.2.0'
+  Visible = False
   object Label2: TLabel
     Left = 32
     Height = 15
     Top = 224
-    Width = 196
+    Width = 220
     Caption = 'AAVSO LPV Bulletin Single CSV file'
     ParentColor = False
   end
@@ -31,7 +32,7 @@ object Form1: TForm1
     Left = 32
     Height = 15
     Top = 288
-    Width = 223
+    Width = 249
     Caption = 'Varobs GCVS by constellation directory'
     ParentColor = False
   end
@@ -50,7 +51,7 @@ object Form1: TForm1
     Left = 32
     Height = 15
     Top = 144
-    Width = 205
+    Width = 224
     Caption = 'http://www.aavso.org/aavso-bulletin'
     Color = clBtnFace
     Font.Color = clBlue
@@ -63,7 +64,7 @@ object Form1: TForm1
     Left = 32
     Height = 15
     Top = 120
-    Width = 273
+    Width = 307
     Caption = 'Get the AAVSO LPV Bulletin in CSV format from:'
     ParentColor = False
   end
@@ -86,7 +87,7 @@ object Form1: TForm1
   end
   object FileNameEdit1: TFileNameEdit
     Left = 32
-    Height = 22
+    Height = 21
     Top = 248
     Width = 304
     DialogOptions = []
@@ -99,7 +100,7 @@ object Form1: TForm1
   end
   object SpinEdit1: TSpinEdit
     Left = 88
-    Height = 22
+    Height = 21
     Top = 181
     Width = 80
     MaxValue = 3000
@@ -110,7 +111,7 @@ object Form1: TForm1
   end
   object DirectoryEdit1: TDirectoryEdit
     Left = 32
-    Height = 22
+    Height = 21
     Top = 312
     Width = 304
     ShowHidden = False

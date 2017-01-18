@@ -265,6 +265,7 @@ var FCanChangePos: integer;
     bt:TUDBtnType;
     FCanChange: Boolean;
 begin
+FCanChangePos:=0;FCanChangeDir:=updNone; bt:=btPrev;
 if sender is TUpDown then
   with sender as TUpDown do begin
     if WheelDelta<0 then
@@ -412,6 +413,7 @@ case Fkind of
  Alt:begin
      AltToStr(Val,d,m,s);
      end;
+ else begin d:='';m:='';s:='';end;
 end;
 EditDeg.Text:=d;
 EditMin.Text:=m;

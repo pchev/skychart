@@ -138,22 +138,16 @@ type
 
   { TJDDatePicker }
 
- {$if (lcl_major<2) and (lcl_minor<3)}
-  TJDDatePicker = class(TEditButton)
- {$ELSE}
+//  TJDDatePicker = class(TEditButton)
   TJDDatePicker = class(TCustomEditButton)
- {$ENDIF}
   private
     savejd: double;
     Flabels: TDatesLabelsArray;
     Fcaption: string;
     procedure UpdDate;
   protected
-    {$if (lcl_major<2) and (lcl_minor<3)}
-    procedure DoButtonClick(Sender: TObject); override;
-    {$ELSE}
-    procedure ButtonClick(Sender: TObject);
-    {$ENDIF}
+//    procedure DoButtonClick(Sender: TObject); override;  // commented for new lcl  version
+    procedure ButtonClick(Sender: TObject);  // weird compilation failed if adding override here?
     procedure SetJD(Value: double);
   public
     constructor Create(AOwner: TComponent); override;
@@ -818,11 +812,8 @@ begin
   Color := clBtnFace;
   ReadOnly := True;
   Button.Glyph.LoadFromLazarusResource('BtnDatePicker');
-  {$if (lcl_major<2) and (lcl_minor<3)}
-  Button.OnClick := @DoButtonClick;
-  {$ELSE}
+//  Button.OnClick := @DoButtonClick;
   Button.OnClick := @ButtonClick;
-  {$ENDIF}
   Button.Enabled := True;
   UpdDate;
 end;
@@ -832,19 +823,13 @@ begin
   inherited Destroy;
 end;
 
-{$if (lcl_major<2) and (lcl_minor<3)}
-procedure TJDDatePicker.DoButtonClick(Sender: TObject);//or onClick
-{$ELSE}
+//procedure TJDDatePicker.DoButtonClick(Sender: TObject);//or onClick
 procedure TJDDatePicker.ButtonClick(Sender: TObject);//or onClick
-{$ENDIF}
 var
   CD: TJDCalendarDialog;
 begin
-  {$if (lcl_major<2) and (lcl_minor<3)}
-  inherited DoButtonClick(Sender);
-  {$ELSE}
+//  inherited DoButtonClick(Sender);
   inherited ButtonClick;
-  {$ENDIF}
 
   CD := TJDCalendarDialog.Create(Self);
   CD.JD := savejd;

@@ -576,7 +576,7 @@ end;
 hemis:=dirlst[i,1];
 zone:=strtoint(copy(dirlst[i],2,4));
 OpenRegionNocache(hemis,zone,Smnum,ok);
-ok:=false;
+ok:=false; fok:=false;
 repeat
     ReadTY2Nocache(lin,buf,fok);
     if lin.gscn=num then begin

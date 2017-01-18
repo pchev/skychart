@@ -455,6 +455,7 @@ var ok: boolean;
     cr1,cr2,t1,t2: double;
     astrom,nautm,civm,cive,naute,astroe: double;
 begin
+ cr1:=0; cr2:=0;
  if (limitairmass and LimitAirmassTonight.Checked) or (limittransit and LimitHourangleTonight.Checked) then begin
    planet.Twilight(cfgsc.jd0,cfgsc.ObsLatitude,cfgsc.ObsLongitude,astrom,nautm,civm,cive,naute,astroe);
    if abs(astrom)<90 then begin

@@ -95,6 +95,7 @@ function pad_zeros(num:integer):string;
 var i:integer;
     sgn,str:string;
 begin
+result:='';
 case encoder_type of
 1,2,3,4 : begin
      if num < 0 then sgn:='-' else sgn:='+';
