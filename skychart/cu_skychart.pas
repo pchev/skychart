@@ -1864,7 +1864,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
     end
       else flatten:=1;
     distc:=rad2deg*AngularDistance(ra,dec,cfgsc.racentre,cfgsc.decentre);
-    projection(ra,dec,x1,y1,true,cfgsc) ;
+    projection(ra,dec,x1,y1,false,cfgsc) ;
     WindowXY(x1,y1,xx,yy,cfgsc);
     if ((xx>-5*cfgsc.Xmax) and (xx<6*cfgsc.Xmax) and (yy>-5*cfgsc.Ymax) and (yy<6*cfgsc.Ymax))or(distc<2) then begin
       saverefraction:=cfgsc.ObsRefractionCor;
