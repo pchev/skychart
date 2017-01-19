@@ -3212,6 +3212,7 @@ var buf : string;
     rec: Gcatrec;
     ok: boolean;
 begin
+   // search user object first
    if cfgcat.nebcatdef[uneb-BaseNeb] then begin
      buf:=uppercase(Num);
      for i:=0 to Length(cfgcat.UserObjects)-1 do begin
@@ -3223,6 +3224,7 @@ begin
        end;
      end;
    end;
+   // search VO data
    if cfgcat.nebcatdef[voneb-BaseNeb] then begin
      buf:=uppercase(Num);
      VOobject:='dso';
@@ -3244,40 +3246,58 @@ begin
      CloseVOCat;
      if result then exit;
    end;
+   // search other catgen catalog
    FindNGcat(Num,ar1,de1,result,rtNeb) ;
    if result then begin
       ar1:=deg2rad*15*ar1;
       de1:=deg2rad*de1;
       exit;
    end;
+   // Messier
    if uppercase(copy(Num,1,1))='M' then begin
-      result:=FindNum(S_messier,Num,ar1,de1) ;
+      if cfgcat.nebcaton[sac-BaseNeb] then
+         result:=FindNum(S_SAC,Num,ar1,de1)
+      else
+         result:=FindNum(S_messier,Num,ar1,de1) ;
       if result then exit;
    end;
+   // NGC
    if uppercase(copy(Num,1,3))='NGC' then begin
-      result:=FindNum(S_NGC,Num,ar1,de1) ;
+      if cfgcat.nebcaton[sac-BaseNeb] then
+         result:=FindNum(S_SAC,Num,ar1,de1)
+      else
+         result:=FindNum(S_NGC,Num,ar1,de1) ;
       if result then exit;
    end;
+   // IC
    if uppercase(copy(Num,1,2))='IC' then begin
-      result:=FindNum(S_IC,Num,ar1,de1) ;
+      if cfgcat.nebcaton[sac-BaseNeb] then
+         result:=FindNum(S_SAC,Num,ar1,de1)
+      else
+         result:=FindNum(S_IC,Num,ar1,de1) ;
       if result then exit;
    end;
+   // SH 2
    if uppercase(copy(Num,1,2))='SH' then begin
       result:=FindNum(S_SH2,Num,ar1,de1) ;
       if result then exit;
    end;
+   // Barnard
    if uppercase(copy(Num,1,1))='B' then begin
       result:=FindNum(S_DRK,Num,ar1,de1) ;
       if result then exit;
    end;
+   // Planetary neb
    result:=FindNum(S_GPN,Num,ar1,de1) ;
    if result then exit;
+   // PGC
    if uppercase(copy(Num,1,3))='PGC' then begin
       buf:=StringReplace(Num,'pgc','',[rfReplaceAll,rfIgnoreCase]);
       result:=FindNum(S_PGC,buf,ar1,de1) ;
       if result then exit;
    end;
-   result:=FindNum(S_SAC,Num,ar1,de1) ;
+   // finally try various id in SAC
+   result:=FindNum(S_SAC,Num,ar1,de1);
 end;
 
 function Tcatalog.SearchStarName(Num:string; var ar1,de1: double): boolean;
