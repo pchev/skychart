@@ -751,7 +751,7 @@ end;
 
 function Tskychart.InitCoordinates:boolean;
 var w,h,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,saveaz : double;
-    acc,dcc,pxsec: double;
+    acc,dcc: double;
     se,ce : extended;
     s1,s2,s3: string;
     nom,ma,date,desc:string;
@@ -780,9 +780,6 @@ if Fplot.cfgplot.outradius>maxSmallint then Fplot.cfgplot.outradius:=maxSmallint
 if Fplot.cfgplot.outradius<Fplot.cfgchart.hw then Fplot.cfgplot.outradius:=Fplot.cfgchart.hw;
 if Fplot.cfgplot.outradius<Fplot.cfgchart.hh then Fplot.cfgplot.outradius:=Fplot.cfgchart.hh;
 // nutation constant
-pxsec:=abs(1/cfgsc.BxGlb)*rad2deg*3600;
-if pxsec>30 then  // compute only if effect is visible on map
-   cfgsc.ApparentPos:=false;
 if cfgsc.ApparentPos then
    Fplanet.nutation(cfgsc.CurJDTT,cfgsc.nutl,cfgsc.nuto)
 else begin
