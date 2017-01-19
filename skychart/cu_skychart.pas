@@ -1865,7 +1865,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
     end
       else flatten:=1;
     distc:=rad2deg*AngularDistance(ra,dec,cfgsc.racentre,cfgsc.decentre);
-    projection(ra,dec,x1,y1,false,cfgsc) ;
+    projection(ra,dec,x1,y1,(h<(-deg2rad)),cfgsc) ;
     WindowXY(x1,y1,xx,yy,cfgsc);
     if ((xx>-5*cfgsc.Xmax) and (xx<6*cfgsc.Xmax) and (yy>-5*cfgsc.Ymax) and (yy<6*cfgsc.Ymax))or(distc<2) then begin
       saverefraction:=cfgsc.ObsRefractionCor;
@@ -3784,7 +3784,7 @@ var az,h,hstep,azp,hpstep,x1,y1,hlimit,daz,fillfov,hh,de : double;
     hbmp : TBGRABitmap;
     col: TColor;
     col1,col2: TBGRAPixel;
-    xx2,yy2 :single;
+    xx2,yy2,poslimit :single;
     x2,y2 : double;
 
 function CheckBelowHorizon(x,y:integer):boolean;
@@ -3853,7 +3853,7 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
       // Render bitmap
       Fplot.cbmp.PutImage(0,0,hbmp,dmDrawWithTransparency);
     end else begin                                      // use line definition
-      fill:=cfgsc.FillHorizon and (cfgsc.fov>(0.5*deg2rad));
+      fill:=cfgsc.FillHorizon;// and (cfgsc.fov>(0.5*deg2rad));
       case cfgsc.projtype of
         'C' : fillfov:=357*deg2rad;
         'H' : fillfov:=230*deg2rad;
@@ -3890,16 +3890,16 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
               WindowXY(x1,y1,ps[0,j],ps[1,j],cfgsc);
               proj2(-az-daz,(hdiv-j)*hstep,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
               WindowXY(x1,y1,ps[0,j+hdiv+1],ps[1,j+hdiv+1],cfgsc);
-                if (abs(ps[0,j]-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
+                if (cfgsc.fov>0.1)and((abs(ps[0,j]-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
                    ((abs(ps[1,j]-Fplot.cfgchart.hh)>20*Fplot.cfgchart.hh)and(abs(cfgsc.hcentre)<0.05))or
                    (abs(ps[0,j+hdiv+1]-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
-                   ((abs(ps[1,j+hdiv+1]-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)and(abs(cfgsc.hcentre)<0.05))
+                   ((abs(ps[1,j+hdiv+1]-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)and(abs(cfgsc.hcentre)<0.05)))
                    then begin
                      ok:=false;
                      break;
                    end;
             end;
-            if (abs(ps[0,hdiv]-ps[0,hdiv+1])>(cfgsc.xmax/2))or(abs(ps[1,hdiv]-ps[1,hdiv+1])>(cfgsc.ymax/2)) then ok:=false;
+            if (cfgsc.fov>0.1)and((abs(ps[0,hdiv]-ps[0,hdiv+1])>(cfgsc.xmax/2))or(abs(ps[1,hdiv]-ps[1,hdiv+1])>(cfgsc.ymax/2))) then ok:=false;
             if ok then begin
               if fill then begin
                 SetLength(psf,2*hdiv+2);
@@ -3920,6 +3920,10 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
         end;
       end;
       // Horizon line
+      if (cfgsc.fov > 5*minarc) then
+         poslimit:=5
+      else
+         poslimit:=30;
       if cfgsc.ShowHorizon0 then begin
         first:=true; xph:=0;yph:=0;x0h:=0;y0h:=0;
         for i:=1 to 360 do begin
@@ -3931,7 +3935,7 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
                 x0h:=xh;
                 y0h:=yh;
              end else begin
-               if (xh>-5*cfgsc.Xmax)and(xh<5*cfgsc.Xmax)and(yh>-5*cfgsc.Ymax)and(yh<5*cfgsc.Ymax)and((cfgsc.fov<0.1)or(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2))) then begin
+               if (xh>-poslimit*cfgsc.Xmax)and(xh<poslimit*cfgsc.Xmax)and(yh>-poslimit*cfgsc.Ymax)and(yh<poslimit*cfgsc.Ymax)and((cfgsc.fov<0.1)or(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2))) then begin
                     Fplot.BGRADrawLine(xph,yph,xh,yh,col2,2,hbmp);
                     hlplot:=true;
                end;
