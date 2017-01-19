@@ -4815,7 +4815,7 @@ f_getdss.cfgdss.DSSurl[18,1]:=URL_DSS18;
 f_getdss.cfgdss.DSSurl[19,0]:=URL_DSS_NAME19;
 f_getdss.cfgdss.DSSurl[19,1]:=URL_DSS19;
 f_getdss.cfgdss.OnlineDSS:=true;
-f_getdss.cfgdss.OnlineDSSid:=1;
+f_getdss.cfgdss.OnlineDSSid:=5;
 for i:=1 to numfont do begin
    def_cfgplot.FontName[i]:=DefaultFontName;
    def_cfgplot.FontSize[i]:=DoScaleX(DefaultFontSize);
@@ -7739,51 +7739,42 @@ if chart is Tf_chart then with chart as Tf_chart do begin
    ok:=false;
    itype:=ftAll;
    catalog.ClearSearch;
-   if sc.cfgsc.shownebulae or catalog.cfgcat.nebcatdef[uneb-BaseNeb] or catalog.cfgcat.nebcatdef[voneb-BaseNeb] then begin
-     stype:='N';  itype:=ftNeb;
-     ok:=catalog.SearchNebulae(Num,ar1,de1) ;
-     if ok then goto findit;
-   end;
-   if sc.cfgsc.showstars then begin
-     stype:='V*'; itype:=ftVar;
-     ok:=catalog.SearchVarStar(Num,ar1,de1) ;
-     if ok then goto findit;
-   end;
-   if sc.cfgsc.showstars then begin
-     stype:='D*'; itype:=ftDbl;
-     ok:=catalog.SearchDblStar(Num,ar1,de1) ;
-     if ok then goto findit;
-   end;
-   if sc.cfgsc.showstars or catalog.cfgcat.StarCatDef[vostar-BaseStar] then begin
-     stype:='*';  itype:=ftStar;
-     ok:=catalog.SearchStar(Num,ar1,de1) ;
-     if ok then goto findit;
-   end;
-   if sc.cfgsc.ShowPlanet then begin
-     stype:='P';  itype:=ftPla;
-     ok:=planet.FindPlanetName(trim(Num),ar1,de1,sc.cfgsc);
-     if ok then goto findit;
-   end;
-   if sc.cfgsc.showstars then begin
-     stype:='*';  itype:=ftStar;
-     ok:=catalog.SearchStarName(Num,ar1,de1) ;
-     if ok then goto findit;
-   end;
-   if sc.cfgsc.shownebulae then begin
-     stype:='N';  itype:=ftNeb;
-     ok:=f_search.SearchNebName(Num,ar1,de1) ;
-     if ok then goto findit;
-   end;
-   if sc.cfgsc.ShowAsteroid then begin
-     stype:='As';  itype:=ftAst;
-     ok:=planet.FindAsteroidName(trim(Num),ar1,de1,mag,sc.cfgsc,true);
-     if ok then goto findit;
-   end;
-   if sc.cfgsc.ShowComet then begin
-     stype:='Cm'; itype:=ftCom;
-     ok:=planet.FindCometName(trim(Num),ar1,de1,mag,sc.cfgsc,true);
-     if ok then goto findit;
-   end;
+   // nebula
+   stype:='N';  itype:=ftNeb;
+   ok:=catalog.SearchNebulae(Num,ar1,de1) ;
+   if ok then goto findit;
+   // variable star
+   stype:='V*'; itype:=ftVar;
+   ok:=catalog.SearchVarStar(Num,ar1,de1) ;
+   if ok then goto findit;
+   // double star
+   stype:='D*'; itype:=ftDbl;
+   ok:=catalog.SearchDblStar(Num,ar1,de1) ;
+   if ok then goto findit;
+   // star
+   stype:='*';  itype:=ftStar;
+   ok:=catalog.SearchStar(Num,ar1,de1) ;
+   if ok then goto findit;
+   // planet
+   stype:='P';  itype:=ftPla;
+   ok:=planet.FindPlanetName(trim(Num),ar1,de1,sc.cfgsc);
+   if ok then goto findit;
+   // star common name
+   stype:='*';  itype:=ftStar;
+   ok:=catalog.SearchStarName(Num,ar1,de1) ;
+   if ok then goto findit;
+   // nebula common name
+   stype:='N';  itype:=ftNeb;
+   ok:=f_search.SearchNebName(Num,ar1,de1) ;
+   if ok then goto findit;
+   // asteroid
+   stype:='As';  itype:=ftAst;
+   ok:=planet.FindAsteroidName(trim(Num),ar1,de1,mag,sc.cfgsc,true);
+   if ok then goto findit;
+   // comet
+   stype:='Cm'; itype:=ftCom;
+   ok:=planet.FindCometName(trim(Num),ar1,de1,mag,sc.cfgsc,true);
+   if ok then goto findit;
 
 Findit:
    result:=ok;
