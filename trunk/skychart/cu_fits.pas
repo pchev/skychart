@@ -219,6 +219,7 @@ var hdr: Tstringlist;
     p: TPanel;
     b: TButton;
 begin
+if not Fheader.valid then exit;
 f:=TForm.create(self);
 m:=Tmemo.create(f);
 p:=TPanel.Create(f);
