@@ -173,6 +173,7 @@ function TCDCdb.CheckForUpgrade(memo:Tmemo; updversion:string):boolean;
 var updcountry:boolean;
     i,k: integer;
     buf: string;
+    bb: TStringList;
 begin
 result:=false;
 updcountry:=false;
@@ -232,6 +233,28 @@ if db.Active then begin
     k:=2;
     db.Query('CREATE INDEX '+sqlindex[dbtype,k,1]+' on '+sqlindex[dbtype,k,2]);
   end;
+  // change ast_day_pos primary index , drop the table to rebuild in cu_planet
+  if (updversion<cdcver)and(updversion<'3.11w') then begin
+    bb:=TStringList.Create;
+    try
+    if DBtype=mysql then begin
+      db.Query('show tables like "cdc_ast_day_%"');
+    end
+    else begin
+      db.Query('select name from sqlite_master where type="table" and name like "cdc_ast_day_%"');
+    end;
+    for i:=0 to db.RowCount-1 do begin
+      bb.add(db.Results[i][0]);
+    end;
+    for i:=0 to bb.Count-1 do begin
+      buf:=bb[i];
+      db.Query('drop table '+buf);
+    end;
+    finally
+      bb.Free;
+    end;
+  end;
+
 end;
 end;
 

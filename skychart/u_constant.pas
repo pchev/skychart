@@ -47,7 +47,7 @@ type
 
 const
   cdcversion = '3.11-svn';
-  cdcver = '3.11v';
+  cdcver = '3.11w';
   cdccpy = 'Copyright (C) 2002-2016 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf +
     'Peter Dean,' + crlf +
@@ -1584,7 +1584,7 @@ const
     '( id varchar(7) NOT NULL default "", epoch double NOT NULL default "0",' +
     'ra smallint(6) NOT NULL default "0",  de smallint(6) NOT NULL default "0",'
     +
-    'mag smallint(6) NOT NULL default "0", near_earth smallint(1) NOT NULL default "0", PRIMARY KEY (ra,de,mag))';
+    'mag smallint(6) NOT NULL default "0", near_earth smallint(1) NOT NULL default "0", PRIMARY KEY (ra,de,mag,id))';
   create_table_com_day =
     ' ( jd int(11) NOT NULL default "0", limit_mag smallint(6) NOT NULL default "0")';
   create_table_com_day_pos =
