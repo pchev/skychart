@@ -1926,16 +1926,6 @@ var qry : string;
     i: integer;
 begin
 try
-// check for old table version
-qry:='select distinct(near_earth) from '+cfgsc.ast_daypos;
-db1.Query(qry);
-if db1.Rowcount=0 then begin
-  qry:='drop table '+cfgsc.ast_daypos;
-  db1.Query(qry);
-  qry:='drop table '+cfgsc.ast_day;
-  db1.Query(qry);
-end;
-/////
 lmag:=round(limitmag*10);
 qry:='SELECT jd,limit_mag from '+cfgsc.ast_day;
 db1.Query(qry);
@@ -2053,16 +2043,6 @@ var qry : string;
     currentmag,lmag:integer;
 begin
 try
-// check for old table version
-qry:='select distinct(near_earth) from '+cfgsc.com_daypos;
-db1.Query(qry);
-if db1.Rowcount=0 then begin
-  qry:='drop table '+cfgsc.com_daypos;
-  db1.Query(qry);
-  qry:='drop table '+cfgsc.com_day;
-  db1.Query(qry);
-end;
-/////
 lmag:=round(limitmag*10);
 qry:='SELECT jd,limit_mag from '+cfgsc.com_day;
 db1.Query(qry);
