@@ -2663,6 +2663,9 @@ end;
 function Tcatalog.GetDRK(var rec:GcatRec):boolean;
 begin
   result:=GetGCatN(rec);
+  rec.neb.mag:=11;  // for mag filter
+  rec.neb.valid[vnMag]:=true;
+  rec.options.flabel[5]:='DrkMagFilter';
 end;
 
 procedure Tcatalog.FindDRK(id:shortstring; var ar,de:double ; var ok:boolean);
