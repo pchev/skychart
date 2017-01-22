@@ -2749,7 +2749,7 @@ begin
             end;
          end;
          Desc:=Desc+tab+txt+tab;
-         if rec.neb.valid[vnMag] then begin
+         if rec.neb.valid[vnMag] and  (rec.options.flabel[5]<>'DrkMagFilter') then begin
             if (rec.neb.mag<90) then str(rec.neb.mag:5:2,txt) else txt:=b5;
             Desc:=Desc+trim(rec.options.flabel[lOffset+vnMag])+dp+txt+tab;
          end;
