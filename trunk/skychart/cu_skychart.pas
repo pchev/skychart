@@ -400,8 +400,8 @@ end;
   DrawTarget;
 
   // Planisphere
-  DrawPlanisphereDate;
   DrawPlanisphereTime;
+  DrawPlanisphereDate;
 
   // Draw the chart border
   DrawBorder;
