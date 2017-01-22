@@ -4475,7 +4475,7 @@ end;
 function Tskychart.DrawConstL:boolean;
 var
   xx1,yy1,xx2,yy2,ra1,de1,ra2,de2 : Double;
-  cyear,dyear : double;
+  cyear,dyear,r1,r2,d : double;
   i,color : Integer;
   pmok: boolean;
   x1,y1,x2,y2:single;
@@ -4505,7 +4505,10 @@ for i:=0 to Fcatalog.cfgshr.ConstLnum-1 do begin
   precession(jd2000,cfgsc.JDChart,ra2,de2);
   if cfgsc.ApparentPos then apparent_equatorial(ra2,de2,cfgsc,true,false);
   projection(ra2,de2,xx2,yy2,true,cfgsc) ;
-  if (xx1<199)and(xx2<199) then begin
+  r1:=rad2deg*abs(xx1-xx2);
+  r2:=rad2deg*abs(yy1-yy2);
+  d:=sqrt(r1*r1+r2*r2);
+  if (xx1<199)and(xx2<199)and(d<50) then begin
      WindowXY(xx1,yy1,x1,y1,cfgsc);
      WindowXY(xx2,yy2,x2,y2,cfgsc);
      if (intpower(x2-x1,2)+intpower(y2-y1,2))<cfgsc.x2 then
