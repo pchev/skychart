@@ -2002,6 +2002,8 @@ begin
    SearchName1.Visible:=true;
    MenuAddToObsList.Caption:=Format(rsAddToObservi, [sc.cfgsc.FindName]);
    MenuAddToObsList.Visible:=true;
+   Slew1.Caption:=rsSlew+': '+sc.cfgsc.FindName;
+   Sync1.Caption:=rsSync+': '+sc.cfgsc.FindName;
  end
  else begin
    About1.visible:=False;
