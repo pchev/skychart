@@ -484,6 +484,10 @@ object f_chart: Tf_chart
     end
     object Telescope1: TMenuItem
       Caption = 'Telescope'
+      object Slew1: TMenuItem
+        Caption = 'Slew'
+        OnClick = Slew1Click
+      end
       object SlewCursor: TMenuItem
         Caption = 'Slew to cursor position'
         OnClick = SlewCursorClick
@@ -491,10 +495,6 @@ object f_chart: Tf_chart
       object SlewCenter: TMenuItem
         Caption = 'Slew to chart center'
         OnClick = SlewCenterClick
-      end
-      object Slew1: TMenuItem
-        Caption = 'Slew'
-        OnClick = Slew1Click
       end
       object Sync1: TMenuItem
         Caption = 'Sync'
