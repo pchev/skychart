@@ -2000,6 +2000,8 @@ begin
    About1.visible:=true;
    About2.visible:=true;
    SearchName1.Visible:=true;
+   Slew1.Visible:=true;
+   Sync1.Visible:=true;
    MenuAddToObsList.Caption:=Format(rsAddToObservi, [sc.cfgsc.FindName]);
    MenuAddToObsList.Visible:=true;
    Slew1.Caption:=rsSlew+': '+sc.cfgsc.FindName;
@@ -2010,6 +2012,8 @@ begin
    About2.visible:=False;
    SearchName1.Visible:=False;
    MenuAddToObsList.Visible:=False;
+   Slew1.Visible:=False;
+   Sync1.Visible:=False;
  end;
  if sc.cfgsc.ManualTelescope then
     Telescope1.Visible:=false
@@ -5332,6 +5336,7 @@ end;
 
 procedure Tf_chart.Sync1Click(Sender: TObject);
 begin
+if sc.cfgsc.FindName<>'' then begin
 if Connect1.checked and
    (mrYes=MessageDlg(Format(rsPleaseConfir, [sc.cfgsc.FindName]),
      mtConfirmation, [mbYes, mbNo], 0))
@@ -5351,6 +5356,8 @@ else if sc.cfgsc.IndiTelescope then begin
 end;
 end
 else if assigned(Fshowinfo) then Fshowinfo(rsTelescopeNot);
+end
+else Fshowinfo(rsNoTargetObje);
 end;
 
 procedure Tf_chart.NewFinderCircle1Click(Sender: TObject);
@@ -5770,6 +5777,7 @@ procedure Tf_chart.SlewINDI(Sender: TObject);
 var ra,dec:double;
     ok:boolean;
 begin
+if sc.cfgsc.FindName<>'' then begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
@@ -5780,6 +5788,8 @@ end else begin
 end;
 ra:=rmod(ra+pi2,pi2);
 Fpop_indi.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
+end
+else Fshowinfo(rsNoTargetObje);
 end;
 
 procedure Tf_chart.AbortSlewINDI(Sender: TObject);
@@ -5790,6 +5800,7 @@ end;
 procedure Tf_chart.SyncINDI(Sender: TObject);
 var ra,dec:double;
 begin
+if sc.cfgsc.FindName<>'' then begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
@@ -5800,6 +5811,8 @@ end else begin
 end;
 ra:=rmod(ra+pi2,pi2);
 Fpop_indi.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
+end
+else Fshowinfo(rsNoTargetObje);
 end;
 
 // LX200 interface
@@ -5833,6 +5846,7 @@ procedure Tf_chart.SlewLX200(Sender: TObject);
 var ra,dec:double;
     ok:boolean;
 begin
+if sc.cfgsc.FindName<>'' then begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
@@ -5843,6 +5857,8 @@ end else begin
 end;
 ra:=rmod(ra+pi2,pi2);
 Fpop_lx200.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
+end
+else Fshowinfo(rsNoTargetObje);
 end;
 
 procedure Tf_chart.AbortSlewLX200(Sender: TObject);
@@ -5853,6 +5869,7 @@ end;
 procedure Tf_chart.SyncLX200(Sender: TObject);
 var ra,dec:double;
 begin
+if sc.cfgsc.FindName<>'' then begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
@@ -5863,6 +5880,8 @@ end else begin
 end;
 ra:=rmod(ra+pi2,pi2);
 Fpop_lx200.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
+end
+else Fshowinfo(rsNoTargetObje);
 end;
 
 // Encoder interface
@@ -5895,6 +5914,7 @@ end;
 procedure Tf_chart.SyncEncoder(Sender: TObject);
 var ra,dec:double;
 begin
+if sc.cfgsc.FindName<>'' then begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
@@ -5905,6 +5925,8 @@ end else begin
 end;
 ra:=rmod(ra+pi2,pi2);
 Fpop_encoder.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
+end
+else Fshowinfo(rsNoTargetObje);
 end;
 
 
@@ -5939,6 +5961,7 @@ procedure Tf_chart.SlewASCOM(Sender: TObject);
 var ra,dec:double;
     ok:boolean;
 begin
+if sc.cfgsc.FindName<>'' then begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
@@ -5949,6 +5972,8 @@ end else begin
 end;
 ra:=rmod(ra+pi2,pi2);
 Fpop_scope.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
+end
+else Fshowinfo(rsNoTargetObje);
 end;
 
 procedure Tf_chart.AbortSlewASCOM(Sender: TObject);
@@ -5959,6 +5984,7 @@ end;
 procedure Tf_chart.SyncASCOM(Sender: TObject);
 var ra,dec:double;
 begin
+if sc.cfgsc.FindName<>'' then begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
@@ -5969,6 +5995,8 @@ end else begin
 end;
 ra:=rmod(ra+pi2,pi2);
 Fpop_scope.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
+end
+else Fshowinfo(rsNoTargetObje);
 end;
 
 procedure Tf_chart.TelescopeTimerTimer(Sender: TObject);
