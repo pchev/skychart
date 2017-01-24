@@ -47,7 +47,7 @@ type
     currentitem: integer;
     http: THTTPSend;
     XmlScanner: TEasyXmlScanner;
-    votable,description,resource,info,tname,ArrayOfResource,aurl : boolean;
+    votable,description,resource,info,table,tname,ArrayOfResource,aurl : boolean;
     catalog,catalog_desc,catalog_info,base_url,catalog_url : string;
     procedure XmlStartTag(Sender: TObject; TagName: String; Attributes: TAttrList);
     procedure XmlContent(Sender: TObject; Content: String);
@@ -169,6 +169,14 @@ procedure TVO_Catalogs.LoadCats;
 var i : integer;
 begin
 FCatList.Clear;
+votable:=false;
+description:=false;
+resource:=false;
+info:=false;
+table:=false;
+tname:=false;
+ArrayOfResource:=false;
+aurl:=false;
 i:=pos('?',FListUrl);
 base_url:=copy(FListUrl,1,i)+'-source=';
 XmlScanner.LoadFromFile(slash(Fvopath)+vo_list[Fvo_source]);
@@ -264,6 +272,7 @@ if Fvo_source=Vizier then
 if TagName='VOTABLE' then votable:=true
 else if TagName='DESCRIPTION' then description:=true
 else if TagName='INFO' then info:=true
+else if TagName='TABLE' then table:=true
 else if TagName='RESOURCE' then begin
         resource:=true;
         catalog:=Attributes.Value('name');
@@ -293,7 +302,7 @@ procedure TVO_Catalogs.XmlContent(Sender: TObject; Content: String);
 begin
 // Vizier
 if Fvo_source=Vizier then
-if votable and resource and description then begin
+if votable and resource and description and (not table) then begin
    catalog_desc:=Content;
 end
 {else if votable and resource and info then begin
@@ -326,6 +335,7 @@ if TagName='VOTABLE' then begin
         votable:=false;
      end
 else if TagName='DESCRIPTION' then description:=false
+else if TagName='TABLE' then table:=false
 else if TagName='RESOURCE' then begin
         resource:=false;
         if catalog<>'META' then
