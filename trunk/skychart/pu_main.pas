@@ -8600,7 +8600,7 @@ for i:=0 to MultiFrame1.ChildCount-1 do
    if MultiFrame1.Childs[i].caption=chart then with MultiFrame1.Childs[i].DockedObject as Tf_chart do begin
      projection(sc.cfgsc.FindRa,sc.cfgsc.FindDec,x1,y1,true,sc.cfgsc) ;
      WindowXY(x1,y1,x,y,sc.cfgsc);
-     ListXY(round(x),round(y));
+     ListXY(round(x),round(y),50);
      break;
 end;
 end;
