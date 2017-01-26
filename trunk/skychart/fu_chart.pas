@@ -352,6 +352,7 @@ type
     Function cmd_IdentTelescope: string;
     function cmd_SaveImage(format,fn,quality:string):string;
     function cmd_Print(Method,Orient,Col,path:string):string;
+    function cmd_getriseset: string;
     function cmd_MoveScope(RA,DE:string):string;
     function cmd_MoveScopeH(H,D:string):string;
     function cmd_TrackTelescope(onoff: string): string;
@@ -4941,6 +4942,14 @@ if ok then result:=msgOK
    else result:=msgFailed;
 end;
 
+function Tf_chart.cmd_getriseset: string;
+begin
+if sc.cfgsc.FindName<>'' then
+  result:=msgOK+blank+sc.cfgsc.FindName+blank+sc.cfgsc.FindDesc2
+else
+  result:=msgFailed;
+end;
+
 function Tf_chart.cmd_SaveImage(format,fn,quality:string):string;
 var i : integer;
 begin
@@ -5106,7 +5115,7 @@ case n of
  79 : result:=cmd_SetConstB(arg[1]);
  80 : result:=cmd_resize(arg[1],arg[2]);
  81 : result:=cmd_print(arg[1],arg[2],arg[3],arg[4]);
- 82 : result:=sc.cfgsc.FindName+blank+sc.cfgsc.FindDesc2;
+ 82 : result:=cmd_getriseset;
  83 : result:=cmd_MoveScope(arg[1],arg[2]);
  84 : result:=cmd_MoveScopeH(arg[1],arg[2]);
  85 : result:=cmd_IdentCenter;
