@@ -181,6 +181,9 @@ const
       if buf <> '' then
       begin
         hdid := StrToInt(buf);
+        if hdid=12447 then hdid:=12446; // fix alp psc name
+        if hdid=68255 then continue;    // fix zet cnc name
+        if hdid=68257 then hdid:=68255;
         hr[hdid] := strtointdef(trim(copyp(bufin, 1, 4)), 0);  //HR
       end;
     end;
@@ -428,6 +431,8 @@ begin
     reset(fbib);
     writeln('Process xhip_main.dat');
     n := 0;
+    hdn := hd[9487];
+    i := hr[hdn];
     while not EOF(fmain) do
     begin
       Inc(n);
