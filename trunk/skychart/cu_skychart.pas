@@ -2849,6 +2849,10 @@ begin
          thr:=artostr3(rmod(hr+24,24));
          tht:=artostr3(rmod(ht+24,24));
          ths:=artostr3(rmod(hs+24,24));
+         if catalog.cfgshr.AzNorth then Azr:=rmod(Azr+pi,pi2);
+         if catalog.cfgshr.AzNorth then Azs:=rmod(Azs+pi,pi2);
+         tazr:=LONmToStr(rad2deg*Azr);
+         tazs:=LONmToStr(rad2deg*Azs);
     end;
     txt:='';
     if trim(thr)='' then thr:='N/A';
@@ -2856,9 +2860,9 @@ begin
     if trim(ths)='' then ths:='N/A';
     case i of
     0 : begin
-        txt:=txt+rsRise+':'+thr+blank+blank+blank;
-        txt:=txt+rsCulmination+':'+tht+blank+blank+blank;
-        txt:=txt+rsSet+':'+ths+blank;
+        txt:=txt+rsRise+':'+thr+blank+rsAz+':'+tazr+blank+blank;
+        txt:=txt+rsCulmination+':'+tht+blank+blank;
+        txt:=txt+rsSet+':'+ths+blank+rsAz+':'+tazs+blank;
         end;
     1 : begin
         txt:=txt+rsCircumpolar+blank+blank+blank;

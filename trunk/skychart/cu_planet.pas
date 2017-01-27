@@ -2843,7 +2843,7 @@ if (frise or fset) then begin    // rise (and/or) set and transit
         end;
         Eq2Hz(sidtim(jd0,hr-cfgsc.TimeZone,cfgsc.ObsLongitude)-ra,de,azr,dist,cfgsc);
         if AzNorth then Azr:=rmod(Azr+pi,pi2);
-        tazr:=demtostr(rad2deg*Azr);
+        tazr:=LONmToStr(rad2deg*Azr);
       end
       else begin
         thr:=na;
@@ -2866,7 +2866,7 @@ if (frise or fset) then begin    // rise (and/or) set and transit
         end;
         Eq2Hz(sidtim(jd0,hs-cfgsc.TimeZone,cfgsc.ObsLongitude)-ra,de,azs,dist,cfgsc);
         if AzNorth then Azs:=rmod(Azs+pi,pi2);
-        tazs:=demtostr(rad2deg*Azs);
+        tazs:=LONmToStr(rad2deg*Azs);
       end
       else begin
         ths:=na;
