@@ -3385,7 +3385,7 @@ if (sc.cfgsc.Equinoxtype=2) then begin
   if sc.catalog.cfgshr.AzNorth then a:=Rmod(a+pi,pi2);
   txt:=txt+html_b+rsLocalSideral+': '+htms_b+artostr3(rmod(rad2deg*cst/15+24,24))+html_br;
   txt:=txt+html_b+rsHourAngle+': '+htms_b+ARToStr3(rmod(rad2deg*(cst-ra)/15+24,24))+html_br;
-  txt:=txt+html_b+rsAzimuth+': '+htms_b+deptostr(rad2deg*a,1)+html_br;
+  txt:=txt+html_b+rsAzimuth+': '+htms_b+LONToStr(rad2deg*a)+html_br;
   if h>=sc.cfgsc.ObsHorizonDepression then txt:=txt+html_b+rsAltitude+': '+htms_b+deptostr(rad2deg*h,1)+html_br; // show refracted altitude only if above the horizon
   txt:=txt+html_b+rsGeometricAlt+': '+htms_b+deptostr(rad2deg*hg, 1)+html_br;
   if h>0 then begin
@@ -3416,8 +3416,8 @@ if (sc.cfgsc.Equinoxtype=2) then begin
          thr:=artostr3(rmod(hr+24,24));
          tht:=artostr3(rmod(ht+24,24));
          ths:=artostr3(rmod(hs+24,24));
-         tazr:=demtostr(rad2deg*Azr);
-         tazs:=demtostr(rad2deg*Azs);
+         tazr:=LONmToStr(rad2deg*Azr);
+         tazs:=LONmToStr(rad2deg*Azs);
     end;
     culmalt:= 90 - sc.cfgsc.ObsLatitude + rad2deg*sc.cfgsc.FindDec;
     if culmalt>90 then culmalt:=180-culmalt;
@@ -3428,11 +3428,11 @@ if (sc.cfgsc.Equinoxtype=2) then begin
     case i of
     0 : begin
         txt:=txt+html_b+rsRise+':'+htms_b+thr+blank;
-        if (not cmain.SimpleDetail) and (trim(tazr)>'') then txt:=txt+rsAzimuth+tAzr+html_br
+        if (not cmain.SimpleDetail) and (trim(tazr)>'') then txt:=txt+rsAzimuth+':'+tAzr+html_br
                          else txt:=txt+html_br;
         txt:=txt+html_b+rsTransit+':'+htms_b+tht+blank+tculmalt+html_br;
         txt:=txt+html_b+rsSet+':'+htms_b+ths+blank;
-        if (not cmain.SimpleDetail) and (trim(tazs)>'') then txt:=txt+rsAzimuth+tAzs+html_br
+        if (not cmain.SimpleDetail) and (trim(tazs)>'') then txt:=txt+rsAzimuth+':'+tAzs+html_br
                          else txt:=txt+html_br;
         end;
     1 : begin
