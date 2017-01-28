@@ -4,17 +4,28 @@ col R
 
 col S 
 -format #
+- replace ^0 ""
+- replace ,0 ,
 
 col T 
 - format #
+- replace ^0 ""
 
 col A
 -replace "IC" "IC "
 -replace "NGC" "NGC "
 -replace "NGC 0" "NGC " x3
 
-save as NGC.csv
-- fixed column width
+enregistrer sous NGC.csv
+- largeur colonne fixe
 
 Catgen
 - shortname ONGC
+- label7 D -> Dim
+- label8 D -> Dim
+- label15 Messier -> M
+- outputdir = ../
+
+
+
+
