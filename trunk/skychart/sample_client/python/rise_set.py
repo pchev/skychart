@@ -25,7 +25,7 @@ PORT = 3292
 starlist = os.getcwd()+'/rise_set_list.txt'
 
 if PORT==0 :
-   sys.stderr.write('Skychart is not running');
+   sys.stderr.write('Skychart is not running\n')
    exit(1)
    
 # function to clear the receive buffer
@@ -53,7 +53,7 @@ def cdccmd(cmd,prterr=True):
     if ("OK!" in resp)or("Failed!" in resp)or("Not found!" in resp):
       break
   if (prterr)and("OK!" not in resp) :
-     sys.stderr.write(cmd+' '+data);
+     sys.stderr.write(cmd+' '+data)
   return data
  
 
@@ -73,11 +73,13 @@ def decimaldeg(dms):
     
 
 # Connect to Skychart
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((HOST, PORT))
-data = s.recv(1024)
-#print data 
-
+try:
+  s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+  s.connect((HOST, PORT))
+  data = s.recv(1024)
+except:
+  sys.stderr.write('Connection error. Is Skychart running?\n') 
+  exit(1)
 
 # Set chart option
 cdccmd('SETFOV 90')
@@ -110,7 +112,3 @@ f.close
 
 # Close connexion to Skychart
 s.close()
-
-
-  
-  
