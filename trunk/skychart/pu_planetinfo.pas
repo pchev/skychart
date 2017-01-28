@@ -2006,13 +2006,13 @@ try
      View_Sim1:
         begin
            Orbit.PlotOrbit(config.CurJDTT);
-           PlotHeader(plbmp, rsInnerSolarSy, false, false);
+           PlotHeader(plbmp, rsInnerSolarSy, false, true);
         end;
 
      View_Sim2:
         begin
            Orbit.PlotOrbit(config.CurJDTT);
-           PlotHeader(plbmp, rsOuterSolarSy, false, false);
+           PlotHeader(plbmp, rsOuterSolarSy, false, true);
         end;
 
      View_FreePlanet:
