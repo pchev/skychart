@@ -5,14 +5,14 @@ msgstr ""
 "Project-Id-Version: skychart.nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-14 17:27+0000\n"
-"PO-Revision-Date: 2017-01-14 17:45+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"PO-Revision-Date: 2017-01-29 16:48+0000\n"
+"Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-01-17 13:52+0000\n"
-"X-Generator: Launchpad (build 18302)\n"
+"X-Launchpad-Export-Date: 2017-01-30 10:53+0000\n"
+"X-Generator: Launchpad (build 18315)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -64,7 +64,7 @@ msgstr "Om %s"
 
 #: u_translation.rsabove
 msgid "Above %s"
-msgstr ""
+msgstr "Over %s"
 
 #: u_translation.rsabrevasteroid
 msgid "Ast"
@@ -332,7 +332,7 @@ msgstr "Bruk endringer på alle kart"
 
 #: u_translation.rsapril
 msgid "April"
-msgstr ""
+msgstr "April"
 
 #: u_translation.rsarchivethisi
 msgid "Archive this image?"
@@ -408,7 +408,7 @@ msgstr "Asteroide"
 
 #: u_translation.rsasteroidelem
 msgid "Sources for asteroid elements in MPC format (one URL per line)"
-msgstr "Kilder for asteroide-elementer i MPC-format (en nettadresse pr. linje)"
+msgstr "Kilder for asteroideelementer i MPC-format (en nettadresse pr. linje)"
 
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
@@ -424,7 +424,7 @@ msgstr "asteroider fra filen"
 
 #: u_translation.rsasteroidupda
 msgid "Asteroid update successful"
-msgstr ""
+msgstr "Asteroideoppdatering fullført"
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
@@ -448,7 +448,7 @@ msgstr "Atmosfærisk refraksjon"
 
 #: u_translation.rsaugust
 msgid "August"
-msgstr ""
+msgstr "August"
 
 #: u_translation.rsauthors
 msgid "Authors"
@@ -836,7 +836,7 @@ msgstr "Kartinnstillinger"
 
 #: u_translation.rschartsync
 msgid "Time sync"
-msgstr ""
+msgstr "Tidssynkronisering"
 
 #: u_translation.rschart_
 msgid "Chart_"
@@ -960,7 +960,7 @@ msgstr "Komet"
 
 #: u_translation.rscometelement
 msgid "Sources for comet elements in MPC format (one URL per line)"
-msgstr "Kilder for komet-elementer i MPC-format (en nettadresse pr. linje)"
+msgstr "Kilder for kometelementer i MPC-format (en nettadresse pr. linje)"
 
 #: u_translation.rscometelement2
 msgid "Comet elements"
@@ -972,7 +972,7 @@ msgstr "Kometinnstillinger"
 
 #: u_translation.rscometupdates
 msgid "Comet update successful"
-msgstr ""
+msgstr "Kometoppdatering fullført"
 
 #: u_translation.rscommandfound
 msgid "Command found OK."
@@ -1220,7 +1220,7 @@ msgstr "Oppretter postscript-kart. Vent..."
 
 #: u_translation.rscreaterasterwh
 msgid "Create raster chart %d x %d. Please wait..."
-msgstr ""
+msgstr "Oppretter raster-kart %d x %d. Vent..."
 
 #: u_translation.rscrossmeridia
 msgid "Cross meridian"
@@ -1380,7 +1380,7 @@ msgstr "DEC/El svinghastighet"
 
 #: u_translation.rsdecember
 msgid "December"
-msgstr ""
+msgstr "Desember"
 
 #: u_translation.rsdecimaldegre
 msgid "Decimal degrees"
@@ -1432,7 +1432,7 @@ msgstr "Standard"
 
 #: u_translation.rsdefaultbutto
 msgid "Default button"
-msgstr "Standard-knapp"
+msgstr "Standardknapp"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
@@ -1740,7 +1740,7 @@ msgstr "Last ned fullstendig katalog"
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
-msgstr "Last ned de siste bane-elementer"
+msgstr "Last ned de siste baneelementene"
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
@@ -1756,7 +1756,7 @@ msgstr ""
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
-msgstr "--   Vil du lagre programinnstillingene nå?   --"
+msgstr "Vil du lagre programinnstillingene nå?"
 
 #: u_translation.rsdoyouwanttos2
 msgid "Do you want to save it?"
@@ -2120,7 +2120,7 @@ msgstr "Rask"
 
 #: u_translation.rsfaster
 msgid "Faster"
-msgstr ""
+msgstr "Fortere"
 
 #: u_translation.rsfavorite
 msgid "Favorite"
@@ -2128,7 +2128,7 @@ msgstr "Favoritter"
 
 #: u_translation.rsfebruary
 msgid "February"
-msgstr ""
+msgstr "Februar"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -2600,7 +2600,7 @@ msgstr "Handling ved ikon-klikk"
 
 #: u_translation.rsicons
 msgid "Icons"
-msgstr ""
+msgstr "Ikoner"
 
 #: u_translation.rsiconsize
 msgid "Icon size"
@@ -2804,7 +2804,7 @@ msgstr ""
 
 #: u_translation.rsjanuary
 msgid "January"
-msgstr ""
+msgstr "Januar"
 
 #: u_translation.rsjd
 msgid "JD:"
@@ -2832,11 +2832,11 @@ msgstr "Juliansk år"
 
 #: u_translation.rsjuly
 msgid "July"
-msgstr ""
+msgstr "Juli"
 
 #: u_translation.rsjune
 msgid "June"
-msgstr ""
+msgstr "Juni"
 
 #: u_translation.rsjupiter
 msgid "Jupiter"
@@ -3108,7 +3108,7 @@ msgstr "Oppstigende nodes lengdegr."
 
 #: u_translation.rslookat
 msgid "Look at:"
-msgstr ""
+msgstr "Se på:"
 
 #: u_translation.rslosange
 msgid "Lozenge"
@@ -3220,7 +3220,7 @@ msgstr "Kart"
 
 #: u_translation.rsmarch
 msgid "March"
-msgstr ""
+msgstr "Mars"
 
 #: u_translation.rsmark
 msgid "Mark"
@@ -3260,7 +3260,7 @@ msgstr "Maksimum rekker"
 
 #: u_translation.rsmay
 msgid "May"
-msgstr ""
+msgstr "Mai"
 
 #: u_translation.rsmbytes
 msgid "MBytes"
@@ -3548,7 +3548,7 @@ msgstr "Ny påskrift"
 
 #: u_translation.rsnewversionav
 msgid "New version available"
-msgstr ""
+msgstr "Ny versjon tilgjengelig"
 
 #: u_translation.rsnext
 msgid "Next   >>"
@@ -3568,7 +3568,7 @@ msgstr "Nattmodus"
 
 #: u_translation.rsnightvisionb
 msgid "Night vision button"
-msgstr "Nattmodus-knapp"
+msgstr "Nattmodusknapp"
 
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
@@ -3684,7 +3684,7 @@ msgstr "Ikke initialisert"
 
 #: u_translation.rsnovember
 msgid "November"
-msgstr ""
+msgstr "November"
 
 #: u_translation.rsnow
 msgid "Now"
@@ -3788,7 +3788,7 @@ msgstr "Foreldet"
 
 #: u_translation.rsoctober
 msgid "October"
-msgstr ""
+msgstr "Oktober"
 
 #: u_translation.rsoff
 msgid "Off"
@@ -3896,7 +3896,7 @@ msgstr "Bane"
 
 #: u_translation.rsorbitaleleme
 msgid "Orbital elements"
-msgstr "Bane-elementer"
+msgstr "Baneelementer"
 
 #: u_translation.rsorientation
 msgid "Orientation"
@@ -3904,7 +3904,7 @@ msgstr "Orientering"
 
 #: u_translation.rsorienttothep
 msgid "Orient to the pole"
-msgstr ""
+msgstr "Orienter mot polen"
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file:"
@@ -4088,7 +4088,7 @@ msgstr "Still inn DSS-filbane."
 
 #: u_translation.rspleaseconfig2
 msgid "Please configure the orbital elements URL!"
-msgstr "Sett opp bane-elementenes nettadresse!"
+msgstr "Sett opp baneelementenes nettadresse!"
 
 #: u_translation.rspleaseconfir
 msgid "Please confirm that the telescope is pointed at %s"
@@ -4508,7 +4508,7 @@ msgstr "Gjenopprett skjult påskrift"
 
 #: u_translation.rsrectangular
 msgid "Rectangular"
-msgstr ""
+msgstr "Rektangulær"
 
 #: u_translation.rsred
 msgid "Red"
@@ -4628,7 +4628,7 @@ msgstr "Tilbakestill rotasjon"
 
 #: u_translation.rsresettime
 msgid "Reset time"
-msgstr ""
+msgstr "Tilbakestill tid"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
@@ -4992,7 +4992,7 @@ msgstr "Separator"
 
 #: u_translation.rsseptember
 msgid "September"
-msgstr ""
+msgstr "September"
 
 #: u_translation.rsserialport
 msgid "Serial Port"
@@ -5320,7 +5320,7 @@ msgstr "Langsom"
 
 #: u_translation.rsslower
 msgid "Slower"
-msgstr ""
+msgstr "Saktere"
 
 #: u_translation.rsslowest
 msgid "Slowest"
@@ -5840,7 +5840,7 @@ msgstr "Total radius"
 
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
-msgstr "Før du kan bruke de nye bane-elementene, må du beregne de månedlige dataene."
+msgstr "Før du kan bruke de nye baneelementene, må du beregne de månedlige dataene."
 
 #: u_translation.rstracking
 msgid "Tracking"
@@ -6032,7 +6032,7 @@ msgstr "Bruk en annen DeltaT-verdi"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
-msgstr "Bruk et predefinert fargeskjema:"
+msgstr "Bruk et forhåndsinnstilt fargevalg:"
 
 #: u_translation.rsuseasimplepo
 msgid "Use a simple pointer"
@@ -6212,11 +6212,11 @@ msgstr ""
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated. Load element valid for the current map date."
-msgstr "Advarsel! Noen asteroide-elementer er utdaterte. Last elementer gyldig for gjeldende kart-dato."
+msgstr "Advarsel! Noen asteroideelementer er utdaterte. Last elementer gyldig for den gjeldende kartdatoen."
 
 #: u_translation.rswarningsomec
 msgid "Warning! Some comet elements are outdated. Load element valid for the current map date."
-msgstr "Advarsel! Noen komet-elementer er utdaterte. Last elementer gyldig for gjeldende kart-dato."
+msgstr "Advarsel! Noen kometelementer er utdaterte. Last elementer gyldig for den gjeldende kartdatoen."
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
@@ -6276,7 +6276,7 @@ msgstr "Y feil"
 
 #: u_translation.rsyoualreadyha
 msgid "You already have the latest available version!"
-msgstr ""
+msgstr "Du har allerede den siste tilgjengelige versjonen!"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
