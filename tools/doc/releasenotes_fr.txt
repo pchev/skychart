@@ -4,26 +4,29 @@ Cette version peut être considérée comme un candidat pour la release 4.0
 
 Nouvelles fonctions:
 
-  * Image des principaux satellites planétaires.
-  * Mise à jour automatique des fichiers TLE des satellites artificiels.
-  * Régle la taille des boutons et le texte dans Configuration / éditeur de barre d'outils.
-  * Utilise INDIstarter pour gérer le serveur INDI.
-  * Nouveau panneau de controle INDI.
+  * Régle la disposition, la taille et le texte des boutons dans Configuration / éditeur de barre d'outils.
+  * L'éditeur de barre d'outils vous permet de modifier la disposition des boutons. La fonction est disponible depuis la menu Configuration / éditeur de barre d'outils.
   * Nouvelle option de performance depuis le menu Fichier/Carte et options par défaut...
   * Nouvelles boites à outils que vous pouvez activer avec les touches F1 à F8.
   * Fonctions de script et boites à outils personnalisées.
-  * L'éditeur de barre d'outils vous permet de modifier la disposition des boutons. La fonction est disponible depuis la menu Configuration / Éditeur de barre d'outils.
   * Nouvelle représentation pour la Voie Lactée. Vous pouvez l'activer à partir du menu Configuration / Affichage / Lignes, en décochant "Voie lactée - Mode ligne".
+  * Amélioration de la fenêtre d'information du système solaire avec plus de fonctionnalités
+  * Image des principaux satellites planétaires.
+  * Plus d'options pour les couleurs et les labels
+  * Mise à jour automatique des fichiers TLE des satellites artificiels.
   * Possibilité d'ajouter un réticule au centre de la carte. 
   * Option pour ajouter la ligne méridienne avec toute projection.
-  * Ajout de la connexion Tcp/Ip à l'interface télescope LX200. 
   * Affiche le déplacement horaire des comètes et astéroïdes dans la fenêtre de détail.
   * Mise à jour du téléchargement des comètes et astéroïdes.
   * Ajout de la position du curseur ou du télescope à la liste d'observation
+  * Ajout de la connexion Tcp/Ip à l'interface télescope LX200. 
+  * Utilise INDIstarter pour gérer le serveur INDI.
+  * Nouveau panneau de controle INDI.
 
 Catalogues:
 
   * OpenNGC remplace NGC2000, il est mantenant inclu avec la version de base 
+  * Utilisation du nom officiel IAU pour les étoiles
   * Les catalogues suivant demandent d'installer la nouvelle version avec 4.0 dans le nom depuis https://sourceforge.net/projects/skychart/files/2-catalogs/
     * Nouvelle version des catalogues GCVS and WDS
     * Nouvelle version de PGC/LEDA avec 5 million galaxies
