@@ -4,14 +4,15 @@ This version can be considered as a 4.0 release candidate
 
 New functions:
 
-  * Set the tool bar button size and text in Setup / Toolbar editor.
+  * Set the tool bar button arangement, size and text in Setup / Toolbar editor.
+  * The tool bar editor allow you to edit the button bar layout. The function is available from the menu Setup / Tool bar editor.
   * New performance options from menu File/Reset chart and options...
   * New tool box function you can activate with the keys F1 to F8.
   * Scripting functions and custom tool box capabilities.
-  * The tool bar editor allow you to edit the button bar layout. The function is available from the menu Setup / Tool bar editor.
   * New representation for the Milky Way. This can be activated from the menu Setup / Display / Lines by unchecking "Milky Way - Line mode".
   * Updated Solar system information window with more functionallity
   * Plot images for the main planetary satellites
+  * More color and label options
   * Update the artificial satellites TLE files automatically.
   * Option to add a crosshair to the chart center.
   * Option to add the meridian line with any projection.
@@ -25,6 +26,7 @@ New functions:
 Catalog:
 
   * OpenNGC replace NGC2000, it is now include with the base version
+  * Use official IAU star name
   * The following catalog change require to install the new version with 4.0 in the file name from https://sourceforge.net/projects/skychart/files/2-catalogs/
     * New version of GCVS and WDS catalog
     * New version of PGC/LEDA with 5 million galaxies
