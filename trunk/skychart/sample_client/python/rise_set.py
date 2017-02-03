@@ -92,7 +92,7 @@ print 'Star;AzRise;AzSet'
 
 for l in f:
    obj = l.strip()
-   cdccmd('SEARCH '+obj)
+   cdccmd('SEARCH "'+obj+'"')
    data = cdccmd('GETRISESET')
    try:
       p = data.index("Az:")+3
