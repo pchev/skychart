@@ -184,6 +184,8 @@ const
         if hdid=12447 then hdid:=12446; // fix alp psc name
         if hdid=68255 then continue;    // fix zet cnc name
         if hdid=68257 then hdid:=68255;
+        if hdid=129989 then hdid:=129988; // fix eps boo name
+        if hdid=98231 then hdid:=98230;   // fix ksi uma name
         hr[hdid] := strtointdef(trim(copyp(bufin, 1, 4)), 0);  //HR
       end;
     end;
