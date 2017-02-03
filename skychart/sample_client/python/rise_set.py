@@ -88,11 +88,16 @@ cdccmd('REDRAW')
 
 f = open(starlist,'r')
 
-print 'Star;AzRise;AzSet'
+print 'Star;Magn;AzRise;AzSet'
 
 for l in f:
    obj = l.strip()
-   cdccmd('SEARCH "'+obj+'"')
+   data = cdccmd('SEARCH "'+obj+'"')
+   try:
+      p = data.index("mV:")+3
+      mv = data[p:p+5]
+   except:
+      mv = ''
    data = cdccmd('GETRISESET')
    try:
       p = data.index("Az:")+3
@@ -102,7 +107,7 @@ for l in f:
       p = buf.index("Az:")+3
       azs = buf[p:p+8]
       azs = decimaldeg(azs)
-      print obj+';'+azr+';'+azs
+      print obj+';'+mv+';'+azr+';'+azs
       
    except:
       sys.stderr.write('Ignore: '+data) 
