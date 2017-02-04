@@ -7759,13 +7759,13 @@ if chart is Tf_chart then with chart as Tf_chart do begin
    stype:='*';  itype:=ftStar;
    ok:=catalog.SearchStarName(Num,ar1,de1) ;
    if ok then goto findit;
-   // nebula common name
-   stype:='N';  itype:=ftNeb;
-   ok:=f_search.SearchNebName(Num,ar1,de1) ;
-   if ok then goto findit;
    // planet
    stype:='P';  itype:=ftPla;
    ok:=planet.FindPlanetName(trim(Num),ar1,de1,sc.cfgsc);
+   if ok then goto findit;
+   // nebula common name
+   stype:='N';  itype:=ftNeb;
+   ok:=f_search.SearchNebName(Num,ar1,de1) ;
    if ok then goto findit;
    // comet
    stype:='Cm'; itype:=ftCom;

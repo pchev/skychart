@@ -1413,7 +1413,7 @@ const
     );
 
   // Chart Commands
-  numcmd = 125;
+  numcmd = 126;
   cmdlist: array[1..numcmd, 1..3] of string = (
     ('ZOOM+', '1', ''),
     ('ZOOM-', '2', ''),
@@ -1541,7 +1541,8 @@ const
     ('PLANISPHERETIME','122','ON/OFF'),
     ('SETFOVPROJECTION','123','FOV_NUM HAI/MER/CAR/ARC/TAN/SIN'),
     ('SHOWONLYMERIDIAN','124','ON/OFF'),
-    ('SHOWALWAYSMERIDIAN','125','ON/OFF')
+    ('SHOWALWAYSMERIDIAN','125','ON/OFF'),
+    ('CLEANUPMAP','126','')
     );
 
 // INDI Telescope driver

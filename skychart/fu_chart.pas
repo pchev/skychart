@@ -391,6 +391,7 @@ type
     function cmd_SetFOVProjection(fnum,proj:string):string;
     function cmd_ShowOnlyMeridian(onoff:string):string;
     function cmd_ShowAlwaysMeridian(onoff:string):string;
+    function cmd_Cleanup:string;
     function ExecuteCmd(arg:Tstringlist):string;
     function SaveChartImage(format,fn : string; quality: integer=95):boolean;
     Procedure ZoomBox(action,x,y:integer);
@@ -5159,6 +5160,7 @@ case n of
  123 : result:= cmd_SetFOVProjection(arg[1], arg[2]);
  124 : result:= cmd_ShowOnlyMeridian(arg[1]);
  125 : result:= cmd_ShowAlwaysMeridian(arg[1]);
+ 126 : result:= cmd_Cleanup;
 else result:=msgFailed+' Bad command name';
 end;
 end;
@@ -5605,6 +5607,12 @@ end;
 function Tf_chart.cmd_ShowAlwaysMeridian(onoff:string):string;
 begin
   sc.cfgsc.ShowAlwaysMeridian:=(onoff='ON');
+  result:=msgOK;
+end;
+
+function Tf_chart.cmd_Cleanup:string;
+begin
+  Cleanupmap1Click(nil);
   result:=msgOK;
 end;
 
