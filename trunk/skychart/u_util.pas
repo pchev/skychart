@@ -1347,7 +1347,7 @@ else begin
   case year of
   minyeardt..-2000:begin    // use JPL Horizon value
                 u:=(y-1820)/100;
-                result:=(31*u*u)/3600;
+                result:=(-20+32*u*u)/3600;
                 end;
   -1999..-501:begin         // Use Espenak value
                 u:=(y-1820)/100;
@@ -1408,16 +1408,20 @@ else begin
                 t:=y-2013;
                 result:=(66.9+t*0.4667)/3600;  // (68.3-66.9)/3 = 0.4667
                 end;
-  2016..2020  : begin
+  2016        : begin
                 t:=y-2016;
-                result:=(68.3+t*0.54)/3600;  // (71-68.3)/5 = 0.54
+                result:=(68.3+t*0.38)/3600;  // (69.18-68.3)/1-0.5 = 0.38
+                end;
+  2017..2020  : begin
+                t:=y-2017;                     // 2017.0 -> 69.18
+                result:=(69.18+t*0.455)/3600;  // (71-69.18)/4 = 0.455
                 end;
   2021..2024  : begin
-                t:=y-2021;
+                t:=y-2021;                // 2021.0 -> 71.0
                 result:=(71+t*0.5)/3600;  // (73-71)/4 = 0.5
                 end;
   2025..2049  : begin
-                t:=y-2000;
+                t:=y-2000;                // 2025.0 -> 73.0
                 //2005-2050: result:=(62.92+t*(0.32217+t*(0.005589)))/3600;
                 // > 2025 : 62.92+(0.32217*25)+(0.005589*25^2)=74.46
                 // 62.92-74.46+73 = 61.46
@@ -1435,7 +1439,7 @@ else begin
                 end;
   3000..maxyeardt:begin    // use JPL Horizon value
                 u:=(y-1820)/100;
-                result:=(31*u*u)/3600;
+                result:=(-20+32*u*u)/3600;
                 end;
   else  result:=0; // we don't need deltat for very distant epoch as there is no available ephemeris
   end;
