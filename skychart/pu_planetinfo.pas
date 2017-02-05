@@ -1001,7 +1001,13 @@ end;
 procedure Tf_planetinfo.cbChartSyncChange(Sender: TObject);
 begin
 
-  ChartSync := cbChartSync.Checked;
+  try
+    ChartSync := cbChartSync.Checked and (LinkedChartData<>nil) and (LinkedChartData.CurJDTT>MinFloat);
+  except
+    ChartSync:=false;
+    LinkedChartData:=nil;
+    Close;
+  end;
 
   if ChartSync then
   begin
@@ -1416,6 +1422,7 @@ begin
     if ChartSync then
     begin
 
+      try
       if CurJDTT_OLD <> LinkedChartData.CurJDTT then
       begin
         config.CurJDTT := LinkedChartData.CurJDTT;
@@ -1423,6 +1430,11 @@ begin
 
         RefreshInfo;
 
+      end;
+      except
+        ChartSync:=false;
+        LinkedChartData:=nil;
+        Close;
       end;
     end
     else
