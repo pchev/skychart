@@ -1597,6 +1597,10 @@ end;
 procedure Tf_main.MultiFrame1DeleteChild(Sender: TObject);
 var i: integer;
 begin
+if (f_planetinfo<>nil)and(f_planetinfo.LinkedChartData=Tf_chart(TChildFrame(Sender).DockedObject).sc.cfgsc) then begin
+   f_planetinfo.LinkedChartData:=nil;
+   f_planetinfo.Close;
+end;
 for i:=0 to TabControl1.Tabs.Count-1 do begin
    if TabControl1.Tabs[i]=TChildFrame(Sender).Caption then begin
       TabControl1.Tabs.Delete(i);
