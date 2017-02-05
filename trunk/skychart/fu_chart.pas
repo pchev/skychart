@@ -908,6 +908,7 @@ RefreshTimer.Enabled:=true;
 if sc<>nil then begin
   sc.plot.init(Image1.width,Image1.height);
 end;
+Image1.Invalidate;
 end;
 
 procedure Tf_chart.EyepieceMaskClick(Sender: TObject);
