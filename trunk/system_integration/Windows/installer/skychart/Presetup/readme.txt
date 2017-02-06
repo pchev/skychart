@@ -6,7 +6,7 @@ If you want to reinstall to a new location you must uninstall the old version fi
 
 To avoid to reboot your computer please close the Skychart Clock Icon now if it is running in the task bar.
 
-Copyright (C) 2014 Patrick Chevalley
+Copyright (C) 2017 Patrick Chevalley
 
 http://ap-i.net/skychart
 http://skychart.sourceforge.net
