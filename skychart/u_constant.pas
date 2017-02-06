@@ -48,7 +48,7 @@ type
 const
   cdcversion = '3.11-svn';
   cdcver = '3.11w';
-  cdccpy = 'Copyright (C) 2002-2016 Patrick Chevalley';
+  cdccpy = 'Copyright (C) 2002-2017 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf +
     'Peter Dean,' + crlf +
     'John Sunderland' + crlf  +

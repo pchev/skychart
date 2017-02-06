@@ -2,7 +2,7 @@ Skychart / Cartes du Ciel
 Version 3.11 beta
 
 
-Copyright (C) 2014 Patrick Chevalley
+Copyright (C) 2017 Patrick Chevalley
 
 http://ap-i.net/skychart
 http://skychart.sourceforge.net
