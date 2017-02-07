@@ -2701,7 +2701,7 @@ var f : integer;
 begin
 with Sender as TSpeedButton do f:=tag;
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   SetField(deg2rad*sc.catalog.cfgshr.FieldNum[f]);
+   SetField(deg2rad*sc.catalog.cfgshr.FieldNum[f],(f>1));
 end;
 end;
 
@@ -2710,7 +2710,7 @@ var f : integer;
 begin
 with Sender as TAction do f:=tag;
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   SetField(deg2rad*sc.catalog.cfgshr.FieldNum[f]);
+   SetField(deg2rad*sc.catalog.cfgshr.FieldNum[f],(f>1));
 end;
 end;
 

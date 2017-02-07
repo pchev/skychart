@@ -398,7 +398,7 @@ type
     Procedure MeasureDistance(action,x,y:integer);
     Procedure TrackCursor(X,Y : integer; step: integer);
     Procedure ZoomCursor(yy : double);
-    procedure SetField(field : double);
+    procedure SetField(field : double; trackAltAz: boolean=true);
     procedure SetZenit(field : double; redraw:boolean=true);
     procedure SetAz(Az : double; redraw:boolean=true);
     procedure SetDateUT(y,m,d,h,n,s:integer);
@@ -5166,12 +5166,12 @@ else result:=msgFailed+' Bad command name';
 end;
 end;
 
-procedure Tf_chart.SetField(field : double);
+procedure Tf_chart.SetField(field : double; trackAltAz: boolean=true);
 begin
 sc.setfov(field);
 if VerboseMsg then
  WriteTrace(caption+' SetField');
-if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
+if trackAltAz and (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
   sc.cfgsc.TrackOn:=true;
   sc.cfgsc.TrackType:=4;
 end;
