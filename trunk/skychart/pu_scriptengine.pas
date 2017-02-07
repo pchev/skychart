@@ -358,6 +358,7 @@ begin
   SetHelp(self,hlpToolboxEditor);
   if (evscr[ord(evTranslation)]<>nil) and
      (evscr[ord(evTranslation)].Script.Count>0)
+     and (not evscr[ord(evTranslation)].Running)
      then begin
       evscr[ord(evTranslation)].Compile;
       evscr[ord(evTranslation)].Execute;
@@ -1214,7 +1215,7 @@ var n: integer;
 begin
 n:=TButton(sender).tag;
 if n>=10000 then n:=n-10000;
-if (n<btscrnum)and(btscr[n].Script.Count>0) then begin
+if (n<btscrnum)and(btscr[n].Script.Count>0)and(not btscr[n].Running) then begin
   ok:=btscr[n].Execute;
   if visible then begin
     CompileMemo.Clear;
@@ -1231,7 +1232,7 @@ var n: integer;
     ok: boolean;
 begin
 n:=TComboBox(sender).tag;
-if (n<cbscrnum)and(cbscr[n].Script.Count>0) then begin
+if (n<cbscrnum)and(cbscr[n].Script.Count>0)and(not cbscr[n].Running) then begin
   ok:=cbscr[n].Execute;
   if visible then begin
     CompileMemo.Clear;
@@ -1448,11 +1449,11 @@ while node<>nil do begin
 end;
 ReorderGroup;
 CompileScripts;
-evscr[ord(evInitialisation)].Execute;
-evscr[ord(evTranslation)].Execute;
+if not evscr[ord(evInitialisation)].Running then evscr[ord(evInitialisation)].Execute;
+if not evscr[ord(evTranslation)].Running then evscr[ord(evTranslation)].Execute;
 if (not InitialLoad)or CheckBoxAlwaysActive.Checked then begin
   FEventReady:=true;
-  evscr[ord(evActivation)].Execute;
+  if not evscr[ord(evActivation)].Running then evscr[ord(evActivation)].Execute;
   TelescopeConnectEvent(TelescopeChartName,FTelescopeConnected);
 end;
 if Assigned(FonApply) then FonApply(self);
@@ -2231,7 +2232,7 @@ end;
 procedure Tf_scriptengine.EventTimerTimer(Sender: TObject);
 begin
 EventTimer.Enabled:=false;
-evscr[ord(evTimer)].Execute;
+if not evscr[ord(evTimer)].Running then evscr[ord(evTimer)].Execute;
 EventTimer.Enabled:=true;
 end;
 
@@ -2266,7 +2267,7 @@ procedure Tf_scriptengine.ChartRefreshEvent(origin,str:string);
 begin
 if origin<>'' then ChartName:=origin;
 RefreshText:=str;
-if FEventReady then evscr[ord(evChart_refresh)].Execute;
+if FEventReady and (not evscr[ord(evChart_refresh)].Running) then evscr[ord(evChart_refresh)].Execute;
 end;
 
 procedure Tf_scriptengine.ObjectSelectionEvent(origin,str,longstr:string);
@@ -2274,7 +2275,7 @@ begin
 if origin<>'' then ChartName:=origin;
 SelectionText:=str;
 DescriptionText:=longstr;
-if FEventReady then
+if FEventReady and (not evscr[ord(evObject_identification)].Running) then
    evscr[ord(evObject_identification)].Execute;
 end;
 
@@ -2282,7 +2283,7 @@ procedure Tf_scriptengine.DistanceMeasurementEvent(origin,str:string);
 begin
 if origin<>'' then ChartName:=origin;
 DistanceText:=str;
-if FEventReady then evscr[ord(evDistance_measurement)].Execute;
+if FEventReady and (not evscr[ord(evDistance_measurement)].Running) then evscr[ord(evDistance_measurement)].Execute;
 end;
 
 procedure Tf_scriptengine.TelescopeMoveEvent(origin:string; ra,de: double);
@@ -2290,7 +2291,7 @@ begin
 if origin<>'' then ChartName:=origin;
 TelescopeRA:=ra;
 TelescopeDE:=de;
-if FEventReady then evscr[ord(evTelescope_move)].Execute;
+if FEventReady and (not evscr[ord(evTelescope_move)].Running) then evscr[ord(evTelescope_move)].Execute;
 end;
 
 procedure Tf_scriptengine.TelescopeConnectEvent(origin:string; connected:boolean);
@@ -2298,14 +2299,18 @@ begin
 if origin<>'' then TelescopeChartName:=origin;
 FTelescopeConnected:=connected;
 if FEventReady then begin
-  if connected then evscr[ord(evTelescope_connect)].Execute
-     else evscr[ord(evTelescope_disconnect)].Execute;
+  if connected then begin
+     if (not evscr[ord(evTelescope_connect)].Running) then evscr[ord(evTelescope_connect)].Execute;
+  end
+  else begin
+     if (not evscr[ord(evTelescope_disconnect)].Running) then evscr[ord(evTelescope_disconnect)].Execute;
+  end;
 end;
 end;
 
 procedure Tf_scriptengine.ActivateEvent;
 begin
-if FEventReady then evscr[ord(evActivation)].Execute;
+if FEventReady and (not evscr[ord(evActivation)].Running) then evscr[ord(evActivation)].Execute;
 end;
 
 function Tf_scriptengine.doTcpConnect(socknum:integer; ipaddr,port,timeout:string):boolean;
