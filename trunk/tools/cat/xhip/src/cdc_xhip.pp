@@ -143,9 +143,10 @@ const
     while not EOF(crossid) do
     begin
       readln(crossid, bufin);
-      hdid := StrToInt(trim(copyp(bufin, 1, 6)));      //HD
-      flam := trim(copyp(bufin, 65, 67));  //Flamsteed
-      buf := trim(copyp(bufin, 69, 73)); //Bayer
+      if trim(copy(bufin,32,6))='' then continue;  // not in Hipparcos
+      hdid := StrToInt(trim(copyp(bufin, 1, 6))); //HD
+      flam := trim(copyp(bufin, 65, 67));         //Flamsteed
+      buf := trim(copyp(bufin, 69, 73));          //Bayer
       buf := StringReplace(buf, 'alf', 'alp', []);
       bay := capitalize(buf);
       cst[hdid] := trim(copyp(bufin, 75, 77));   //Constellation
@@ -514,7 +515,9 @@ begin
       buf := copyp(bufin, 140, 145); //B-V
       bufout := bufout + buf + sep;
       readln(fbib, bufin);
-      buf := copyp(bufin, 15, 17); //Const
+      buf:=copy(cst[hdn]+blank,1,3);  //Const from crossid
+      if trim(buf)='' then
+         buf := copyp(bufin, 15, 17); //Const
       bufout := bufout + buf + sep;
       if hrn > 0 then
       begin
