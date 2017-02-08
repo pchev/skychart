@@ -111,6 +111,7 @@ const
       readln(hipmain, bufin);
       hip := StrToInt(trim(copyp(bufin, 9, 14))); // HIP
       buf := copyp(bufin, 391, 396); // HD
+      if hip=40167 then buf:='68257'; // fix zet cnc
       hd[hip] := strtointdef(trim(buf), 0);
       buf := 'BD' + copyp(bufin, 399, 407); // BD
       if trim(buf) = 'BD' then
@@ -148,6 +149,7 @@ const
       flam := trim(copyp(bufin, 65, 67));         //Flamsteed
       buf := trim(copyp(bufin, 69, 73));          //Bayer
       buf := StringReplace(buf, 'alf', 'alp', []);
+      if hdid=68273 then buf:='gam';                  //Fix Gam Vel
       bay := capitalize(buf);
       cst[hdid] := trim(copyp(bufin, 75, 77));   //Constellation
       chk:=flam+'-'+cst[hdid]+':';
@@ -184,7 +186,13 @@ const
         hdid := StrToInt(buf);
         if hdid=12447 then hdid:=12446; // fix alp psc name
         if hdid=68255 then continue;    // fix zet cnc name
-        if hdid=68257 then hdid:=68255;
+        if hdid=68256 then continue;    // fix zet cnc name
+        if hdid=68257 then begin        // fix zet cnc name
+          hr[68256]:=3208;
+          hr[68257]:=3208;
+          hdid:=68255;
+          bufin:='3208';
+        end;
         if hdid=129989 then hdid:=129988; // fix eps boo name
         if hdid=98231 then hdid:=98230;   // fix ksi uma name
         hr[hdid] := strtointdef(trim(copyp(bufin, 1, 4)), 0);  //HR
@@ -310,8 +318,6 @@ begin
         if hip=hip2_missing_id[k] then begin
           bufout:='';
           bufhr := '';
-          if hip=55203 then
-            writeln;
           hipn:=hip;
           buf:=copyp(bufin, 9, 14);   // HIP
           bufout := bufout + buf + sep;
@@ -339,6 +345,7 @@ begin
           else
             buf := '';
           buf := copy(buf + blank, 1, 3); //Flamsteed
+          if hipn=1902 then  buf:='47 '; // hip1902 = ksi Tuc = 47 Tuc = NGC 104
           buffl := buf;
           bufout := bufout + buf + sep;
           buf := copy(bayer[hdn] + blank, 1, 5); // Bayer
@@ -383,7 +390,7 @@ begin
           bufout := bufout + buf + sep;
           buf:=copy(cst[hdn]+blank,1,3);         //Const
           bufout := bufout + buf + sep;
-          if hrn > 0 then
+          if (trim(bufbay)<>'')or(trim(buffl)<>'') then
           begin
             bufbay := stringreplace(bufbay, '.', ' ', []);
             if trim(buffl) > '' then
@@ -434,8 +441,6 @@ begin
     reset(fbib);
     writeln('Process xhip_main.dat');
     n := 0;
-    hdn := hd[9487];
-    i := hr[hdn];
     while not EOF(fmain) do
     begin
       Inc(n);
@@ -519,7 +524,7 @@ begin
       if trim(buf)='' then
          buf := copyp(bufin, 15, 17); //Const
       bufout := bufout + buf + sep;
-      if hrn > 0 then
+      if (trim(bufbay)<>'')or(trim(buffl)<>'') then
       begin
         bufbay := stringreplace(bufbay, '.', ' ', []);
         if trim(buffl) > '' then
