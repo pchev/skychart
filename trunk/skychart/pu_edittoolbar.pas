@@ -814,7 +814,7 @@ end;
 
 procedure Tf_edittoolbar.BtnSizeChange(Sender: TObject);
 begin
- if BtnSize.ItemIndex<2 then begin
+ if BtnSize.ItemIndex<3 then begin
     BtnText.Checked:=false;
     BtnText.Enabled:=false;
  end
@@ -824,7 +824,7 @@ end;
 
 procedure Tf_edittoolbar.BtnTextChange(Sender: TObject);
 begin
- if BtnSize.ItemIndex<2 then BtnText.Checked:=false;
+ if BtnSize.ItemIndex<3 then BtnText.Checked:=false;
 end;
 
 procedure Tf_edittoolbar.ButtonSaveClick(Sender: TObject);

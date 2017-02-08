@@ -451,7 +451,7 @@ object f_edittoolbar: Tf_edittoolbar
       TabOrder = 1
       object ComboBox1: TComboBox
         Left = 8
-        Height = 23
+        Height = 25
         Top = 4
         Width = 230
         ItemHeight = 0
@@ -576,13 +576,13 @@ object f_edittoolbar: Tf_edittoolbar
     TabOrder = 4
     object BtnSize: TComboBox
       Left = 130
-      Height = 21
+      Height = 23
       Top = 10
       Width = 64
       ItemHeight = 0
-      ItemIndex = 0
       Items.Strings = (
         '24'
+        '28'
         '32'
         '40'
         '48'
@@ -601,9 +601,9 @@ object f_edittoolbar: Tf_edittoolbar
     end
     object BtnText: TCheckBox
       Left = 250
-      Height = 21
+      Height = 23
       Top = 12
-      Width = 137
+      Width = 138
       Caption = 'Show button text '
       OnChange = BtnTextChange
       TabOrder = 1
