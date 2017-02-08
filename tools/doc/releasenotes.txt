@@ -4,7 +4,7 @@ This version can be considered as a 4.0 release candidate
 
 New functions:
 
-  * Set the tool bar button arangement, size and text in Setup / Toolbar editor.
+  * Set the tool bar button arangement, size and text in Setup / Toolbar editor. Increase default button size.
   * The tool bar editor allow you to edit the button bar layout. The function is available from the menu Setup / Tool bar editor.
   * New performance options from menu File/Reset chart and options...
   * New tool box function you can activate with the keys F1 to F8.

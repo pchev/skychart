@@ -4,7 +4,7 @@ Cette version peut être considérée comme un candidat pour la release 4.0
 
 Nouvelles fonctions:
 
-  * Régle la disposition, la taille et le texte des boutons dans Configuration / éditeur de barre d'outils.
+  * Régle la disposition, la taille et le texte des boutons dans Configuration / éditeur de barre d'outils. Augmente la taille par défaut des bouttons.
   * L'éditeur de barre d'outils vous permet de modifier la disposition des boutons. La fonction est disponible depuis la menu Configuration / éditeur de barre d'outils.
   * Nouvelle option de performance depuis le menu Fichier/Carte et options par défaut...
   * Nouvelles boites à outils que vous pouvez activer avec les touches F1 à F8.

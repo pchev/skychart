@@ -4682,7 +4682,7 @@ cfgm.MaxChildID:=0;
 cfgm.prtname:='';
 cfgm.SesameUrlNum:=0;
 cfgm.SesameCatNum:=3;
-cfgm.btnsize:=24;
+cfgm.btnsize:=28;
 cfgm.btncaption:=false;
 cfgm.configpage:=0;
 cfgm.configpage_i:=0;
@@ -6343,6 +6343,9 @@ end;
 if  Config_Version < '3.11q' then begin
   catalog.cfgcat.nebcatpath[ngc-BaseNeb]:='cat'+PathDelim+'openngc';
   catalog.cfgcat.nebcatfield[ngc-BaseNeb,2]:=10;
+end;
+if  Config_Version < '3.11x' then begin
+  if (cfgm.btnsize=24) then cfgm.btnsize:=28;
 end;
 // cleanup xplanet tmp directories after each version change, see: u_orbits ScaledPlanetMapDir_Individual
 DeleteFilesInDir(slash(TempDir)+'32');
@@ -9250,15 +9253,15 @@ begin
  for i:=0 to f_edittoolbar.BtnSize.Items.Count-1 do
    if f_edittoolbar.BtnSize.Items[i]=buf then
       f_edittoolbar.BtnSize.ItemIndex:=i;
- f_edittoolbar.BtnText.Checked:=cfgm.btncaption and (f_edittoolbar.BtnSize.ItemIndex>=2);
- f_edittoolbar.BtnText.Enabled:=(f_edittoolbar.BtnSize.ItemIndex>=2);
+ f_edittoolbar.BtnText.Checked:=cfgm.btncaption and (f_edittoolbar.BtnSize.ItemIndex>=3);
+ f_edittoolbar.BtnText.Enabled:=(f_edittoolbar.BtnSize.ItemIndex>=3);
  FormPos(f_edittoolbar,mouse.cursorpos.x,mouse.cursorpos.y);
  f_edittoolbar.ShowModal;
  if f_edittoolbar.ModalResult=mrOK then begin
     // save the configuration
-    i:=StrToIntDef(f_edittoolbar.BtnSize.Text,24);
+    i:=StrToIntDef(f_edittoolbar.BtnSize.Text,28);
     if (i<>cfgm.btnsize) or (f_edittoolbar.BtnText.Checked<>cfgm.btncaption) then begin
-      cfgm.btnsize:=StrToIntDef(f_edittoolbar.BtnSize.Text,24);
+      cfgm.btnsize:=StrToIntDef(f_edittoolbar.BtnSize.Text,28);
       cfgm.btncaption:=f_edittoolbar.BtnText.Checked;
       ResizeBtn;
       f_edittoolbar.ActivateToolbar;
