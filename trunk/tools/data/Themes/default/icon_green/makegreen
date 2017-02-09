@@ -2,14 +2,9 @@
 
 cp -f ../icon_color/*.png .
 
-# image list
-convert -size 10x100  gradient:\#30C030-\#004000 -depth 8 color.png
-ls i*.png | xargs -i+ -n1 convert + -fx intensity -depth 8 +
-ls i*.png | xargs -i+ -n1 convert + color.png -fx 'v.p{0,u*v.h}' -depth 8 +
+convert -size 10x100  gradient:\#D0FFD0-\#004000 -depth 8 color.png
+ls b*.png i*.png | xargs -i+ -n1 convert + -grayscale Rec709Luminance  -normalize -depth 8 +
+ls b*.png i*.png | xargs -i+ -n1 convert + color.png -fx 'v.p{0,u*v.h}' -depth 8 +
 
-# special open/close button
-convert -size 10x100  gradient:\#30FF30-\#000000 -depth 8 color.png
-ls b*.png | xargs -i+ -n1 convert + -fx intensity -depth 8 +
-ls b*.png | xargs -i+ -n1 convert + color.png -fx 'v.p{0,u*v.h}' -depth 8 +
 
 rm color.png
