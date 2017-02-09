@@ -8814,10 +8814,10 @@ var btn : TPortableNetworkGraphic;
 procedure SetButtonImage1(var imagelist:Timagelist);
 var i: Integer;
 begin
+   imagelist.Clear;
    for i:=0 to ImageListCount-1 do begin
        try
-         bmp:=TBGRABitmap.Create;
-         bmp.LoadFromFile(iconpath+'i'+inttostr(i)+'.png');
+         bmp:=TBGRABitmap.Create(iconpath+'i'+inttostr(i)+'.png');
          imagelist.Add(bmp.Bitmap,nil);
          bmp.free;
        except
