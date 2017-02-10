@@ -21,6 +21,8 @@ enregistrer sous NGC.csv
 
 Catgen
 - shortname ONGC
+- Other -> unknown
+- max mag = 20
 - label7 D -> Dim
 - label8 D -> Dim
 - label15 Messier -> M
