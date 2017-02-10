@@ -95,7 +95,6 @@ type
     Fcplot : Tconf_plot;
     Fcmain : Tconf_main;
     Fcdss : Tconf_dss;
-    Fnightvision: boolean;
     astpage,compage,dbpage: integer;
     lastSelectedNode: TTreeNode;
     FApplyConfig: TNotifyEvent;
@@ -240,7 +239,6 @@ SetLang;
 compage:=25;
 astpage:=26;
 dbpage:=43;
-Fnightvision:=false;
 f_config_solsys1.onShowDB:=ShowDBSetting;
 f_config_solsys1.onPrepareAsteroid:=SolSysPrepareAsteroid;
 f_config_system1.onShowAsteroid:=ShowAsteroidSetting;
@@ -255,12 +253,6 @@ procedure Tf_config.FormShow(Sender: TObject);
 {$ifdef mswindows}var i:integer;{$endif}
 begin
 locktree:=false;
-{$ifdef mswindows}
-if Fnightvision<>nightvision then begin
-   SetFormNightVision(self,nightvision);
-   Fnightvision:=nightvision;
-end;
-{$endif}
 f_config_time1.Init;
 f_config_observatory1.Init;
 f_config_chart1.Init;

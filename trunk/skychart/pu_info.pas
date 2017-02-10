@@ -104,7 +104,6 @@ type
     FPrintSetup: TNotifyEvent;
     Fdetailinfo: Tdetinfo;
     RowClick,ColClick :integer;
-    Fnightvision:boolean;
     ActivePage:Integer;
     MouseX, MouseY: Integer;
     SearchStr: string;
@@ -254,7 +253,6 @@ begin
  page3.Align:=alClient;
  page4.Align:=alClient;
  SetLang;
- Fnightvision:=false;
  {$ifdef mswindows}
  SaveDialog1.Options:=SaveDialog1.Options-[ofNoReadOnlyReturn]; { TODO : check readonly test on Windows }
  {$endif}
@@ -302,12 +300,6 @@ end;
 
 procedure Tf_info.FormShow(Sender: TObject);
 begin
-{$ifdef mswindows}
-if Fnightvision<>nightvision then begin
-   SetFormNightVision(self,nightvision);
-   Fnightvision:=nightvision;
-end;
-{$endif}
 Button6.Visible:=(Printer.PrinterIndex>=0);
 case Activepage of
 0: begin

@@ -5667,9 +5667,6 @@ if FNightVision then begin
    for i:=1 to numlabtype do SaveLabelColor[i]:=sc.plot.cfgplot.labelcolor[i];
    sc.plot.cfgplot.color:=DfRedColor;
    for i:=1 to numlabtype do sc.plot.cfgplot.labelcolor[i]:=$000000A0;
-   {$ifdef mswindows}
-     Panel1.Color:=nv_dark;
-   {$endif}
 end else begin
    if (Savecolor[2]=DfRedColor[2])and(Savecolor[11]=DfRedColor[11]) then begin // started with night vision, return to default color as save is also red. 
       sc.plot.cfgplot.color:=DfColor;
@@ -5681,9 +5678,6 @@ end else begin
       sc.plot.cfgplot.bgColor:=SavebgColor;
       for i:=1 to numlabtype do sc.plot.cfgplot.labelcolor[i]:=SaveLabelColor[i];
    end;
-   {$ifdef mswindows}
-     Panel1.Color:=clBtnFace;
-   {$endif}
 end;
 Refresh(true,true);
 end;

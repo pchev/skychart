@@ -201,12 +201,6 @@ end;
 
 procedure Tf_search.FormShow(Sender: TObject);
 begin
-{$ifdef mswindows}
-if Fnightvision<>nightvision then begin
-   SetFormNightVision(self,nightvision);
-   Fnightvision:=nightvision;
-end;
-{$endif}
 // return cursor to corresponding input box
 case RadioGroup1.itemindex of
   0 : begin                      //neb

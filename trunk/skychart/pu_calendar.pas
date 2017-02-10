@@ -170,7 +170,6 @@ type
     initial, lockclick: boolean;
     ShowImage: Tf_image;
     Fplanet : Tplanet;
-    Fnightvision: boolean;
     FGetChartConfig: TScFunc;
     Fupdchart: TScFunc;
     Feclipsepath: string;
@@ -246,7 +245,6 @@ begin
 ScaleDPI(Self);
 SetLang;
 config:=Tconf_skychart.Create;
-Fnightvision:=false;
 AzNorth:=true;
 if VerboseMsg then
 WriteTrace('Create Tf_image');
@@ -316,13 +314,6 @@ end;
 procedure Tf_calendar.FormShow(Sender: TObject);
 var i: integer;
 begin
-{$ifdef mswindows}
-if Fnightvision<>nightvision then begin
-   SetFormNightVision(self,nightvision);
-   Fnightvision:=nightvision;
-   PageControl1.Invalidate;
-end;
-{$endif}
 // apply graph setting (config is not available in formcreate)
 dgPlanet.DefaultRowHeight:=config.CalGraphHeight;
 for i := low(PlanetGraphs) to high(PlanetGraphs) do begin

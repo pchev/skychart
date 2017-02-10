@@ -162,11 +162,6 @@ const
     clBlack, clBlack, clBlack, clBlack, clBlack, clBlack, clBlack, clBlack);
   dfskycolor: Tskycolor =
     ($00200000, $00f03c3c, $00c83232, $00a02828, $00780000, $00640010, $003c0010, $00000000);
-  nv_light = $004040ff;
-  nv_middle = $003030c0;
-  nv_dim = $00000060;
-  nv_dark = $00000040;
-  nv_black = $00000000;
 
   //  End of deep-sky objects colour
 
