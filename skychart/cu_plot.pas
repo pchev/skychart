@@ -1149,27 +1149,6 @@ begin
   we do it this way so that we can (in future) plot using different symbol sets
   it also clears the way for introducing more deep sky object types based on the CdS
   heirarchy.
-
-  NOTE: We are using here a cut down version of the SACv7.1 list.
-        And the NGC2000,rather than Steinecke's NGC/IC lists.
-
-  confusingly the existing code sets up the rec.neb.nebtype array differently
-  for the SAC and NGC base catalogs
-  The default values for rec.neb.nebtype(1..18) is:
-    nebtype: array[1..18] of string=(' - ',' ? ',' Gx',' OC',' Gb',' Pl',' Nb','C+N','  *',' D*','***','Ast',' Kt','Gcl','Drk','Cat','Cat','Cat');
-
---------------------------------------------------------------------------------------------------------------------
- The SAC read routine loads in:
-    nebtype: array[1..18] of string=(' - ',' ? ',' Gx',' OC',' Gb',' Pl',' Nb','C+N','  *',' D*','***','Ast',' Kt','Gcl','Drk','Cat','Cat','Cat');
-   not found=-1,Gx=1,OC=2,Gb=3,Pl=4,Nb=5,C+N=6,*=7,D*=8,***=9,Ast=10,Kt=11,Gcl=12,Drk=13,'?'=0,spaces=0,'-'=-1,PD=-1;
-   (PD = plate defect. where has this come from (it's the NGC)..?)
-
- The NGC read routine ignores 12 and 13:
-   not found=-1,Gx=1,OC=2,Gb=3,Pl=4,Nb=5,C+N=6,*=7,D*=8,***=9,Ast=10,Kt=11,?=0,spaces=0,'-'=-1,PD=-1;
-
---------------------------------------------------------------------------------------------------------------------
- For v3 we continue to use these old types
- the case cconstruct is ordered by *** frequency *** of object occurence
 }
   if not cfgplot.Invisible then  // if its above the horizon...
     begin
