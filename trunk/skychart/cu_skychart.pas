@@ -296,12 +296,6 @@ try
   // initialize chart value
   if VerboseMsg then  WriteTrace('SkyChart '+cfgsc.chartname+': Init');
   cfgsc.msg:='';
-{$ifdef mswindows}
-if isWin98 and (Fplot.cfgplot.starplot=1) then begin
-   Fplot.cfgplot.starplot:=0;
-   cfgsc.msg:='Cannot use this star drawing mode with Win98. Change star drawing mode to Line or Parametric.';
-end;
-{$endif}
   InitObservatory;
   InitTime(newtime);
   InitChart;

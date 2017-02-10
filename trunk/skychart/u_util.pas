@@ -141,7 +141,6 @@ function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string=''
 function CdcSigAction(const action: pointer):boolean;
 {$endif}
 {$ifdef mswindows}
-function FindWin98: boolean;
 function FindWOW64: boolean;
 function ScreenBPP: integer;
 {$endif}
@@ -2033,17 +2032,6 @@ Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string; orien
  end;
 
 {$ifdef mswindows}
-function FindWin98: boolean;
-var lpversioninfo: TOSVERSIONINFO;
-begin
-lpversioninfo.dwOSVersionInfoSize:=sizeof(TOSVERSIONINFO);
-if GetVersionEx(lpversioninfo) then begin
-   result:=lpversioninfo.dwMajorVersion<=4;
-end
-else
- result:=false;
-end;
-
 function FindWOW64: boolean;
 type
   TIsWow64Process = function(Handle:THandle; var IsWow64 : BOOL) :BOOL; stdcall;

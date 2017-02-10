@@ -188,7 +188,7 @@ end;
 procedure TFits.SetFile(value:string);
 begin
 try
-{$ifdef mswindows} // Win98 do not accept \\ as path delimiter
+{$ifdef mswindows} // Windows sometime do not accept \\ as path delimiter
 value:=StringReplace(value,'\\','\',[rfReplaceAll]);
 {$endif}
 FWCSvalid:=false;
