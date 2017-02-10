@@ -1254,7 +1254,10 @@ end;
 
 function LeapYear(Year: longint): boolean;
 begin
-  Result := (Year mod 4 = 0) and ((Year mod 100 <> 0) or (Year mod 400 = 0));
+  if Year>1582 then
+    Result := (Year mod 4 = 0) and ((Year mod 100 <> 0) or (Year mod 400 = 0))
+  else
+    Result := (Year mod 4 = 0)
 end;
 
 function DayofYear(y,m,d: integer):integer;
