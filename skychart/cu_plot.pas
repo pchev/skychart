@@ -576,17 +576,10 @@ begin
              {$ENDIF}
              end;
           1: begin  // hard contrast for bitmap stars
-       //      {$IF DEFINED(OLD_MASK_TRANSPARENCY) or DEFINED(LCLGTK2)}
                 if newalpha<(50*255) then
                     CurColor:=colTransparent
                 else
                     CurColor.alpha:=alphaOpaque;
-    //         {$ELSE}
-     {           if (newalpha>200*255) then newalpha:=alphaOpaque;
-                if (newalpha<100*255) then newalpha:=newalpha div 2;
-                if (newalpha<500) then newalpha:=alphaTransparent;
-                CurColor.alpha:=newalpha;  }
-     //        {$ENDIF}
              end;
           2: begin  // black transparent
                 if newalpha<=(0) then
@@ -614,7 +607,6 @@ begin
 
       IntfImage.CreateBitmaps(ImgHandle, ImgMaskHandle);
       bmp.SetHandles(ImgHandle, ImgMaskHandle);
-//     {$IF DEFINED(OLD_MASK_TRANSPARENCY) or DEFINED(LCLGTK2)}
 
       memstream:=Tmemorystream.create;
       bmp.SaveToStream(memstream);
@@ -622,20 +614,9 @@ begin
       bmp.LoadFromStream(memstream);
       bmp.Transparent:=true;
 
-//      {$ELSE}
- {      if isWin98 then begin
-         memstream:=Tmemorystream.create;
-         bmp.SaveToStream(memstream);
-         memstream.position := 0;
-         bmp.LoadFromStream(memstream);
-         memstream.free;
-       end;   }
-//      {$ENDIF}
     finally
       IntfImage.Free;
-//      {$IF DEFINED(OLD_MASK_TRANSPARENCY) or DEFINED(LCLGTK2)}
       memstream.free;
-//      {$ENDIF}
     end;
 
   except

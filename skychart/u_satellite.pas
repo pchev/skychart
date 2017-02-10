@@ -133,8 +133,7 @@ var i : integer;
     a1,a2,d1,d2,d,decentre,dummy_double : double;
 const b = '          ';
 begin
-if isWin98 then dcmd:='command.com /C'
-   else dcmd:=doscmd;
+dcmd:=doscmd;
 curdir:=GetCurrentDir;
 buf:=slash(tmpdir)+'satlist.txt';  // delete old file
 deletefile(buf);
@@ -248,8 +247,7 @@ var
 const b = '          ';
       dt = 0.1 ; // heures
 begin
-if isWin98 then dcmd:='command.com /C'
-   else dcmd:=doscmd;
+dcmd:=doscmd;
 curdir:=GetCurrentDir;
 buf:=slash(tmpdir)+'satdetail.txt'; // delete old file
 deletefile(buf);
@@ -372,8 +370,7 @@ const doslf = chr(13);
 const doslf = '';
 {$endif}
 begin
-if isWin98 then dcmd:='command.com /C'
-  else if isWOW64 then dcmd:=dosboxdef
+if isWOW64 then dcmd:=dosboxdef
   else dcmd:=dosbox;
 curdir:=GetCurrentDir;
 deletefile(slash(tmpdir)+'IRIDFLAR.OUT');

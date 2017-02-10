@@ -1286,7 +1286,7 @@ if VerboseMsg then
  ConnectDB(Config_Version);
 if VerboseMsg then
  WriteTrace('Cursor');
- if (not isWin98) and fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur') then begin
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur') then begin
     try
     CursorImage1.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur'));
     Screen.Cursors[crRetic]:=CursorImage1.Handle;
@@ -2039,22 +2039,12 @@ Application.UpdateFormatSettings := False;
 ImageListCount:=ImageNormal.Count;
 MaxThreadCount:=GetThreadCount;
 DisplayIs32bpp:=true;
-isWin98:=false;
 isWOW64:=false;
 {$ifdef mswindows}
   step:='Windows spefic';
-  isWin98:=FindWin98;
   isWOW64:=FindWOW64;
   DisplayIs32bpp:=(ScreenBPP=32);
   configfile:=Defaultconfigfile;
-  if isWin98 then begin
-    step:='Windows 98 spefic';
-    MenuItem24.Visible:=false;  // config all not working
-    MenuItem25.Visible:=false;
-    N26.Visible:=false;
-    MenuConfig.Visible:=false;
-    if FileExists(Win98DefaultBrowser) then HTMLBrowserHelpViewer1.BrowserPath:=Win98DefaultBrowser;
-  end;
   SaveDialog.Options:=SaveDialog.Options-[ofNoReadOnlyReturn]; { TODO : check readonly test on Windows }
 {$endif}
 CanShowScrollbar:=true;

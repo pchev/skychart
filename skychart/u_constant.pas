@@ -736,7 +736,6 @@ const
   DefaultCdC = 'skychart.exe';
   Defaultffmpeg = 'ffmpeg.exe';
   DefaultSerialPort = 'COM1';
-  Win98DefaultBrowser = 'C:\Program Files\Internet Explorer\Iexplore.exe';
 {$endif}
 
 type
@@ -1291,7 +1290,6 @@ var
   ImageListCount: integer;
   //ImageListSize: integer;
   nightvision: boolean;
-  isWin98: boolean;
   isWOW64: boolean;
   isANSItmpdir: boolean;
   DisplayIs32bpp: boolean;
