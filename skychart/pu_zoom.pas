@@ -59,7 +59,6 @@ type
     { Déclarations privées }
     FApply: TNotifyEvent;
     LockFov:boolean;
-    Fnightvision:boolean;
     procedure Setfov(value:double);
   public
     { Déclarations publiques }
@@ -108,7 +107,6 @@ procedure Tf_zoom.FormCreate(Sender: TObject);
 begin
   ScaleDPI(Self);
   SetLang;
-  Fnightvision:=false;
   LockFov:=false;
 end;
 
@@ -132,12 +130,6 @@ end;
 
 procedure Tf_zoom.FormShow(Sender: TObject);
 begin
-{$ifdef mswindows}
-if Fnightvision<>nightvision then begin
-   SetFormNightVision(self,nightvision);
-   Fnightvision:=nightvision;
-end;
-{$endif}
 setfov(fov);
 RaDec1.value:=fov;
 TrackBar1.SetTick(-78);

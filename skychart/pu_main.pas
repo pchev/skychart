@@ -643,9 +643,6 @@ type
     ActiveScript: integer;
     FTelescopeConnected: boolean;
     AccelList: array[0..MaxMenulevel] of string;
-  {$ifdef mswindows}
-    savwincol  : array[0..25] of Tcolor;
-  {$endif}
     procedure OtherInstance(Sender : TObject; ParamCount: Integer; Parameters: array of String);
     procedure InstanceRunning(Sender : TObject);
     procedure ProcessParams1;
@@ -710,10 +707,6 @@ type
     procedure IndiGUIdestroy(Sender: TObject);
     procedure PositionApply(Sender: TObject);
     procedure ZoomBarApply(Sender: TObject);
-  {$ifdef mswindows}
-    Procedure SaveWinColor;
-    Procedure ResetWinColor;
-  {$endif}
   public
     { Public declarations }
     cfgm : Tconf_main;
@@ -821,12 +814,6 @@ uses  LazFileUtils, LazUTF8,
      LCLProc, pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom, pu_edittoolbar,
      pu_scriptconfig, pu_splash, pu_manualtelescope, pu_print, pu_clock;
-
-{$ifdef mswindows}
-const
-win32_color_num = 26;
-win32_color_elem : array[0..win32_color_num-1] of integer = (COLOR_BACKGROUND,COLOR_BTNFACE,COLOR_ACTIVEBORDER,COLOR_INACTIVEBORDER ,COLOR_ACTIVECAPTION,COLOR_BTNTEXT,COLOR_CAPTIONTEXT,COLOR_HIGHLIGHT,COLOR_BTNHIGHLIGHT,COLOR_HIGHLIGHTTEXT,COLOR_INACTIVECAPTION,COLOR_APPWORKSPACE,COLOR_INACTIVECAPTIONTEXT,COLOR_INFOBK,COLOR_INFOTEXT,COLOR_MENU,COLOR_MENUTEXT,COLOR_SCROLLBAR,COLOR_WINDOW,COLOR_WINDOWTEXT,COLOR_WINDOWFRAME,COLOR_3DDKSHADOW,COLOR_3DLIGHT,COLOR_BTNSHADOW,COLOR_GRAYTEXT,COLOR_MENUBAR);
-{$endif}
 
 procedure Tf_main.ShowError(msg: string);
 begin
@@ -2184,13 +2171,11 @@ if (@cdcwcs_initfitsfile=nil)or(@cdcwcs_release=nil)or(@cdcwcs_sky2xy=nil)or(@cd
              mtError, [mbAbort], 0);
    Halt;
 end;
-{$ifdef unix}
-   step:='Multiframe unix';
-   if VerboseMsg then WriteTrace(step);
-   MultiFrame1.InactiveBorderColor:=$303030;
-   MultiFrame1.TitleColor:=clWhite;
-   MultiFrame1.BorderColor:=$606060;
-{$endif}
+step:='Multiframe border';
+if VerboseMsg then WriteTrace(step);
+MultiFrame1.InactiveBorderColor:=$404040;
+MultiFrame1.TitleColor:=clWhite;
+MultiFrame1.BorderColor:=$808080;
 step:='Bitmap';
 if VerboseMsg then
  WriteTrace(step);
@@ -2408,9 +2393,6 @@ end else begin
      if (not NeedRestart)and(not cfgm.KioskMode) then SaveQuickSearch(configfile);
   end;
   if Action<>caNone then begin
-    {$ifdef mswindows}
-    if NightVision then ResetWinColor;
-    {$endif}
     SAMPstop;
     StopServer;
     writetrace(rsExiting);
@@ -3582,7 +3564,6 @@ if ConfigCalendar=nil then begin
    ConfigCalendar.f_config_calendar1.PageControl1.PageIndex:=0;
    ConfigCalendar.f_config_calendar1.onApplyConfig:=ApplyConfigCalendar;
 end;
-{$ifdef mswindows}SetFormNightVision(ConfigCalendar,NightVision);{$endif}
 ConfigCalendar.f_config_calendar1.csc.Assign(def_cfgsc);
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    ConfigCalendar.f_config_calendar1.csc.Assign(sc.cfgsc);
@@ -3611,7 +3592,6 @@ if ConfigTime=nil then begin
    ConfigTime.f_config_time1.onApplyConfig:=ApplyConfigTime;
    ConfigTime.f_config_time1.onGetTwilight:=GetTwilight;
 end;
-{$ifdef mswindows}SetFormNightVision(ConfigTime,NightVision);{$endif}
 ConfigTime.f_config_time1.ccat.Assign(catalog.cfgcat);
 ConfigTime.f_config_time1.cshr.Assign(catalog.cfgshr);
 ConfigTime.f_config_time1.cplot.Assign(def_cfgplot);
@@ -3702,7 +3682,6 @@ if ConfigChart=nil then begin
    ConfigChart.f_config_chart1.PageControl1.PageIndex:=0;
    ConfigChart.f_config_chart1.onApplyConfig:=ApplyConfigChart;
 end;
-{$ifdef mswindows}SetFormNightVision(ConfigChart,NightVision);{$endif}
 ConfigChart.f_config_chart1.ccat.Assign(catalog.cfgcat);
 ConfigChart.f_config_chart1.cshr.Assign(catalog.cfgshr);
 ConfigChart.f_config_chart1.cplot.Assign(def_cfgplot);
@@ -3742,7 +3721,6 @@ if ConfigSolsys=nil then begin
    ConfigSolsys.f_config_solsys1.onApplyConfig:=ApplyConfigSolsys;
    ConfigSolsys.f_config_solsys1.onPrepareAsteroid:=PrepareAsteroid;
 end;
-{$ifdef mswindows}SetFormNightVision(ConfigSolsys,NightVision);{$endif}
 ConfigSolsys.f_config_solsys1.cdb:=cdcdb;
 ConfigSolsys.f_config_solsys1.ccat.Assign(catalog.cfgcat);
 ConfigSolsys.f_config_solsys1.cshr.Assign(catalog.cfgshr);
@@ -3835,7 +3813,6 @@ if ConfigSystem=nil then begin
    ConfigSystem.f_config_system1.onDBChange:=ConfigDBChange;
    ConfigSystem.f_config_system1.onSaveAndRestart:=SaveAndRestart;
 end;
-{$ifdef mswindows}SetFormNightVision(ConfigSystem,NightVision);{$endif}
 ConfigSystem.f_config_system1.cdb:=cdcdb;
 ConfigSystem.f_config_system1.ccat.Assign(catalog.cfgcat);
 ConfigSystem.f_config_system1.cshr.Assign(catalog.cfgshr);
@@ -3905,7 +3882,6 @@ if ConfigInternet=nil then begin
    ConfigInternet.f_config_internet1.PageControl1.PageIndex:=0;
    ConfigInternet.f_config_internet1.onApplyConfig:=ApplyConfigInternet;
 end;
-{$ifdef mswindows}SetFormNightVision(ConfigInternet,NightVision);{$endif}
 cfgm.persdir:=privatedir;
 ConfigInternet.f_config_internet1.cmain.Assign(cfgm);
 ConfigInternet.f_config_internet1.cdss.Assign(f_getdss.cfgdss);
@@ -3932,7 +3908,6 @@ if ConfigPictures=nil then begin
    ConfigPictures.f_config_pictures1.PageControl1.PageIndex:=0;
    ConfigPictures.f_config_pictures1.onApplyConfig:=ApplyConfigPictures;
 end;
-{$ifdef mswindows}SetFormNightVision(ConfigPictures,NightVision);{$endif}
 ConfigPictures.f_config_pictures1.cdb:=cdcdb;
 ConfigPictures.f_config_pictures1.cdss.Assign(f_getdss.cfgdss);
 ConfigPictures.f_config_pictures1.Fits:=Fits;
@@ -3986,7 +3961,6 @@ if ConfigObservatory=nil then begin
    ConfigObservatory.f_config_observatory1.PageControl1.PageIndex:=0;
    ConfigObservatory.f_config_observatory1.onApplyConfig:=ApplyConfigObservatory;
 end;
-{$ifdef mswindows}SetFormNightVision(ConfigObservatory,NightVision);{$endif}
 ConfigObservatory.f_config_observatory1.cdb:=cdcdb;
 ConfigObservatory.f_config_observatory1.ccat.Assign(catalog.cfgcat);
 ConfigObservatory.f_config_observatory1.cshr.Assign(catalog.cfgshr);
@@ -4037,7 +4011,6 @@ if ConfigCatalog=nil then begin
    ConfigCatalog.f_config_catalog1.onApplyConfig:=ApplyConfigCatalog;
    ConfigCatalog.f_config_catalog1.onSendVoTable:=SendVoTable;
 end;
-{$ifdef mswindows}SetFormNightVision(ConfigCatalog,NightVision);{$endif}
 ConfigCatalog.f_config_catalog1.ccat.Assign(catalog.cfgcat);
 ConfigCatalog.f_config_catalog1.cshr.Assign(catalog.cfgshr);
 ConfigCatalog.f_config_catalog1.cplot.Assign(def_cfgplot);
@@ -4111,7 +4084,6 @@ if ConfigDisplay=nil then begin
    ConfigDisplay.f_config_display1.PageControl1.PageIndex:=0;
    ConfigDisplay.f_config_display1.onApplyConfig:=ApplyConfigDisplay;
 end;
-{$ifdef mswindows}SetFormNightVision(ConfigDisplay,NightVision);{$endif}
 ConfigDisplay.f_config_display1.ccat.Assign(catalog.cfgcat);
 ConfigDisplay.f_config_display1.cshr.Assign(catalog.cfgshr);
 ConfigDisplay.f_config_display1.cplot.Assign(def_cfgplot);
@@ -8993,93 +8965,6 @@ for i:=0 to MultiFrame1.ChildCount-1 do
 end;
 
 {$ifdef mswindows}
-// NightVision change Windows system color
-Procedure Tf_main.SaveWinColor;
-var n : integer;
-begin
-for n:=0 to win32_color_num-1 do
-   savwincol[n]:=getsyscolor(win32_color_elem[n]);
-end;
-
-Procedure Tf_main.ResetWinColor;
-begin
-setsyscolors(win32_color_num,win32_color_elem,savwincol);
-end;
-
-procedure Tf_main.SetNightVision(night: boolean);
-const rgb  : array[0..win32_color_num-1] of Tcolor =  (nv_black        ,nv_dark      ,nv_dark           ,nv_dark,nv_dim            ,nv_middle    ,nv_middle        ,nv_dark        ,nv_dark           ,nv_light           ,nv_dark              ,nv_black          ,nv_dark                  ,nv_black    ,nv_middle     ,nv_dark   ,nv_middle     ,nv_black       ,nv_black    ,nv_middle       ,nv_black         ,nv_black     ,nv_middle      ,nv_black        ,nv_dark       ,nv_black);
-begin
-if night then begin
- if (Color<>nv_dark) then begin
-   SaveWinColor;
-   SetButtonImage(cfgm.ButtonNight);
-   setsyscolors(win32_color_num,win32_color_elem,rgb);
-   Color:=nv_dark;
-   Font.Color:=nv_middle;
-   quicksearch.Color:=nv_dark;
-   quicksearch.Font.Color:=nv_middle;
-   timeu.Color:=nv_dark;
-   timeu.Font.Color:=nv_middle;
-   edittimeval.Color:=nv_dark;
-   edittimeval.Font.Color:=nv_middle;
-   Shape1.Pen.Color:=nv_black;
-   Shape1.Brush.Color:=nv_black;
-   f_zoom.Color:=nv_dark;
-   f_zoom.Font.Color:=nv_middle;
-   f_calendar.Color:=nv_dark;
-   f_calendar.Font.Color:=nv_middle;
-   f_detail.Color:=nv_dark;
-   f_detail.Font.Color:=nv_middle;
-   f_getdss.Color:=nv_dark;
-   f_getdss.Font.Color:=nv_middle;
-   f_position.Color:=nv_dark;
-   f_position.Font.Color:=nv_middle;
-   f_search.Color:=nv_dark;
-   f_search.Font.Color:=nv_middle;
-   f_info.Color:=nv_dark;
-   f_info.Font.Color:=nv_middle;
-   f_printsetup.Color:=nv_dark;
-   f_printsetup.Font.Color:=nv_middle;
-   f_print.Color:=nv_dark;
-   f_print.Font.Color:=nv_middle;
-   f_edittoolbar.Color:=nv_dark;
-   f_edittoolbar.Font.Color:=nv_middle;
- end;
-end else begin
-   ResetWinColor;
-   SetButtonImage(cfgm.ButtonStandard);
-   Color:=clBtnFace;
-   Font.Color:=clWindowText;
-   quicksearch.Color:=clWindow;
-   quicksearch.Font.Color:=clWindowText;
-   timeu.Color:=clWindow;
-   timeu.Font.Color:=clWindowText;
-   edittimeval.Color:=clWindow;
-   edittimeval.Font.Color:=clWindowText;
-   Shape1.Pen.Color:=clBtnShadow;
-   Shape1.Brush.Color:=clBtnShadow;
-   f_zoom.Color:=clBtnFace;
-   f_zoom.Font.Color:=clWindowText;
-   f_calendar.Color:=clBtnFace;
-   f_calendar.Font.Color:=clWindowText;
-   f_detail.Color:=clBtnFace;
-   f_detail.Font.Color:=clWindowText;
-   f_getdss.Color:=clBtnFace;
-   f_getdss.Font.Color:=clWindowText;
-   f_position.Color:=clBtnFace;
-   f_position.Font.Color:=clWindowText;
-   f_search.Color:=clBtnFace;
-   f_search.Font.Color:=clWindowText;
-   f_info.Color:=clBtnFace;
-   f_info.Font.Color:=clWindowText;
-   f_printsetup.Color:=clBtnFace;
-   f_printsetup.Font.Color:=clWindowText;
-   f_print.Color:=clBtnFace;
-   f_print.Font.Color:=clWindowText;
-   f_edittoolbar.Color:=clBtnFace;
-   f_edittoolbar.Font.Color:=clWindowText;
-end;
-end;
 
 // View fullscreen without border
 procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
@@ -9111,15 +8996,14 @@ end;
 // end of windows specific code:
 {$endif}
 
-{$ifdef unix}
 procedure Tf_main.SetNightVision(night: boolean);
 var i: integer;
 begin
 if night then begin
    SetButtonImage(cfgm.ButtonNight);
-   MultiFrame1.InactiveBorderColor:=nv_black;
-   MultiFrame1.TitleColor:=nv_middle;
-   MultiFrame1.BorderColor:=nv_dark;
+   MultiFrame1.InactiveBorderColor:=$00000000;
+   MultiFrame1.TitleColor:=$003030c0;
+   MultiFrame1.BorderColor:=$00000040;
  end else begin
    SetButtonImage(cfgm.ButtonStandard);
    MultiFrame1.InactiveBorderColor:=$404040;
@@ -9133,6 +9017,7 @@ for i:=0 to MultiFrame1.ChildCount-1 do
      MultiFrame1.Childs[i].SetBorderColor(MultiFrame1.InactiveBorderColor);
 end;
 
+{$ifdef unix}
 procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
 begin
 if cfgm.KioskMode then MenuFullScreen.Checked:=true
