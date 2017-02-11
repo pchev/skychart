@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-01-14 17:27+0000\n"
-"PO-Revision-Date: 2017-01-31 19:45+0000\n"
+"POT-Creation-Date: 2017-02-11 20:45+0000\n"
+"PO-Revision-Date: 2017-02-09 22:08+0000\n"
 "Last-Translator: Rokar <Unknown>\n"
 "Language-Team: Kurdish <ku@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-02-05 09:32+0000\n"
-"X-Generator: Launchpad (build 18322)\n"
+"X-Launchpad-Export-Date: 2017-02-11 20:53+0000\n"
+"X-Generator: Launchpad (build 18326)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -58,7 +58,7 @@ msgstr ""
 
 #: u_translation.rsabout
 msgid "About"
-msgstr ""
+msgstr "Der barê"
 
 #: u_translation.rsabout2
 msgid "About %s"
@@ -118,7 +118,7 @@ msgstr ""
 
 #: u_translation.rsaction
 msgid "Action"
-msgstr ""
+msgstr "Çalakî"
 
 #: u_translation.rsactivateallt
 msgid "Activate all the functions when hidden"
@@ -246,7 +246,7 @@ msgstr ""
 
 #: u_translation.rsalt
 msgid "Alt"
-msgstr ""
+msgstr "Jêr"
 
 #: u_translation.rsaltaz
 msgid "Alt-Az"
@@ -334,7 +334,7 @@ msgstr ""
 
 #: u_translation.rsapril
 msgid "April"
-msgstr ""
+msgstr "Avrêl"
 
 #: u_translation.rsarchivethisi
 msgid "Archive this image?"
@@ -450,7 +450,7 @@ msgstr ""
 
 #: u_translation.rsaugust
 msgid "August"
-msgstr ""
+msgstr "tebax"
 
 #: u_translation.rsauthors
 msgid "Authors"
@@ -502,11 +502,11 @@ msgstr ""
 
 #: u_translation.rsb
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: u_translation.rsback
 msgid "Back"
-msgstr ""
+msgstr "Paşve"
 
 #: u_translation.rsbackground
 msgid "Background"
@@ -518,7 +518,7 @@ msgstr ""
 
 #: u_translation.rsbattery
 msgid "Battery"
-msgstr ""
+msgstr "Pîl"
 
 #: u_translation.rsbayerletter
 msgid "Bayer letter"
@@ -614,7 +614,7 @@ msgstr ""
 
 #: u_translation.rsbrightness
 msgid "Brightness"
-msgstr ""
+msgstr "Ronahî"
 
 #: u_translation.rsbrightstars
 msgid "Bright stars"
@@ -634,7 +634,7 @@ msgstr ""
 
 #: u_translation.rsbutton
 msgid "Button"
-msgstr ""
+msgstr "Bişkojk"
 
 #: u_translation.rsbuttonsize
 msgid "Button size"
@@ -658,7 +658,7 @@ msgstr ""
 
 #: u_translation.rscancel
 msgid "Cancel"
-msgstr ""
+msgstr "Betal bike"
 
 #: u_translation.rscancel2
 msgid "Cancel %s"
@@ -694,7 +694,7 @@ msgstr ""
 
 #: u_translation.rscaption
 msgid "Caption"
-msgstr ""
+msgstr "Manşet"
 
 #: u_translation.rscartesian
 msgid "Cartesian"
@@ -866,7 +866,7 @@ msgstr ""
 
 #: u_translation.rsclass
 msgid "Class"
-msgstr ""
+msgstr "Pol"
 
 #: u_translation.rscleanupmap
 msgid "Cleanup map"
@@ -874,11 +874,11 @@ msgstr ""
 
 #: u_translation.rsclear
 msgid "Clear"
-msgstr ""
+msgstr "Paqij bike"
 
 #: u_translation.rsclearall
 msgid "Clear all"
-msgstr ""
+msgstr "Hemûyan paqij bike"
 
 #: u_translation.rscleartarget
 msgid "Clear Target"
@@ -930,7 +930,7 @@ msgstr ""
 
 #: u_translation.rscollapse
 msgid "Collapse"
-msgstr ""
+msgstr "Tengtir Bike"
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -950,7 +950,7 @@ msgstr ""
 
 #: u_translation.rscolumns
 msgid "Columns"
-msgstr ""
+msgstr "Sitûn"
 
 #: u_translation.rscombobox
 msgid "Combo box"
@@ -1010,7 +1010,7 @@ msgstr ""
 
 #: u_translation.rscomponent
 msgid "Component"
-msgstr ""
+msgstr "Pêkhatî"
 
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
@@ -1038,7 +1038,7 @@ msgstr "Veavakirin"
 
 #: u_translation.rsconfigure
 msgid "Configure"
-msgstr ""
+msgstr "Mîheng Bike"
 
 #: u_translation.rsconfigurethe
 msgid "Configure the program"
@@ -1054,11 +1054,11 @@ msgstr ""
 
 #: u_translation.rsconnect
 msgid "Connect"
-msgstr ""
+msgstr "Bê girêdan"
 
 #: u_translation.rsconnected
 msgid "Connected"
-msgstr ""
+msgstr "Hate girêdan"
 
 #: u_translation.rsconnectedfro
 msgid "%s connected with %s, using chart %s, connected time:%s"
@@ -1242,11 +1242,11 @@ msgstr ""
 
 #: u_translation.rscursor
 msgid "Cursor"
-msgstr ""
+msgstr "Nîşanker"
 
 #: u_translation.rscustom
 msgid "Custom"
-msgstr ""
+msgstr "Bijare"
 
 #: u_translation.rscw
 msgid "%sCW"
@@ -1314,11 +1314,11 @@ msgstr ""
 
 #: u_translation.rsdatatype
 msgid "Data Type"
-msgstr ""
+msgstr "Cureyê Daneyan"
 
 #: u_translation.rsdate
 msgid "Date"
-msgstr ""
+msgstr "Roj"
 
 #: u_translation.rsdateandortim
 msgid "Date and/or time cannot be changed"
@@ -1382,7 +1382,7 @@ msgstr ""
 
 #: u_translation.rsdecember
 msgid "December"
-msgstr ""
+msgstr "kanûn"
 
 #: u_translation.rsdecimaldegre
 msgid "Decimal degrees"
@@ -1562,7 +1562,7 @@ msgstr ""
 
 #: u_translation.rsdescription
 msgid "Description"
-msgstr ""
+msgstr "Şîrove"
 
 #: u_translation.rsdesignation
 msgid "Designation"
@@ -1602,7 +1602,7 @@ msgstr ""
 
 #: u_translation.rsdimension
 msgid "Dimension"
-msgstr ""
+msgstr "Mezinahî"
 
 #: u_translation.rsdimensionand
 msgid "Dimension and units"
@@ -1614,7 +1614,7 @@ msgstr ""
 
 #: u_translation.rsdirection2
 msgid "Direction"
-msgstr ""
+msgstr "Hêl"
 
 #: u_translation.rsdirectory
 msgid "Directory"
@@ -1630,7 +1630,7 @@ msgstr ""
 
 #: u_translation.rsdisconnect
 msgid "Disconnect"
-msgstr ""
+msgstr "Veqetîne"
 
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
@@ -1710,7 +1710,7 @@ msgstr ""
 
 #: u_translation.rsdown
 msgid "Down"
-msgstr ""
+msgstr "Jêr"
 
 #: u_translation.rsdownload
 msgid "Download"
@@ -1778,7 +1778,7 @@ msgstr ""
 
 #: u_translation.rsdrawing
 msgid "Drawing"
-msgstr ""
+msgstr "Xîzdan"
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
@@ -1906,7 +1906,7 @@ msgstr ""
 
 #: u_translation.rsempty
 msgid "Empty"
-msgstr ""
+msgstr "Vala Bike"
 
 #: u_translation.rsencoderconfi
 msgid "Encoder Configuration"
@@ -1994,7 +1994,7 @@ msgstr ""
 
 #: u_translation.rserror
 msgid "Error"
-msgstr ""
+msgstr "Çewtî"
 
 #: u_translation.rserrorcreatin
 msgid "%sError creating table %s"
@@ -2046,7 +2046,7 @@ msgstr ""
 
 #: u_translation.rsevent
 msgid "Event"
-msgstr ""
+msgstr "Buyêr"
 
 #: u_translation.rsevery
 msgid "every "
@@ -2070,7 +2070,7 @@ msgstr ""
 
 #: u_translation.rsexpand
 msgid "Expand"
-msgstr ""
+msgstr "Firehtir Bike"
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -2118,19 +2118,19 @@ msgstr ""
 
 #: u_translation.rsfast
 msgid "Fast"
-msgstr ""
+msgstr "Lez"
 
 #: u_translation.rsfaster
 msgid "Faster"
-msgstr ""
+msgstr "Leztir"
 
 #: u_translation.rsfavorite
 msgid "Favorite"
-msgstr ""
+msgstr "Bijarte"
 
 #: u_translation.rsfebruary
 msgid "February"
-msgstr ""
+msgstr "Sibat"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -2138,7 +2138,7 @@ msgstr ""
 
 #: u_translation.rsfieldname
 msgid "Field Name"
-msgstr ""
+msgstr "Navê herêmê"
 
 #: u_translation.rsfieldnumber
 msgid "Field Number"
@@ -2198,7 +2198,7 @@ msgstr ""
 
 #: u_translation.rsfilter2
 msgid "Filter"
-msgstr ""
+msgstr "Parzûn"
 
 #: u_translation.rsfilternebula
 msgid "Filter deep sky objects"
@@ -2210,7 +2210,7 @@ msgstr ""
 
 #: u_translation.rsfind
 msgid "Find"
-msgstr ""
+msgstr "Bibîne"
 
 #: u_translation.rsfindercircle
 msgid "Finder circle (eyepiece)"
@@ -2226,7 +2226,7 @@ msgstr ""
 
 #: u_translation.rsfirst
 msgid "First"
-msgstr ""
+msgstr "Yekemîn"
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
@@ -2258,7 +2258,7 @@ msgstr ""
 
 #: u_translation.rsfocus
 msgid "Focus"
-msgstr ""
+msgstr "Mêzedan"
 
 #: u_translation.rsfocusspeed
 msgid "Focus Speed"
@@ -2326,7 +2326,7 @@ msgstr ""
 
 #: u_translation.rsfrom
 msgid "From"
-msgstr ""
+msgstr "Ji"
 
 #: u_translation.rsftp
 msgid "FTP "
@@ -2426,7 +2426,7 @@ msgstr ""
 
 #: u_translation.rsgraphs
 msgid "Graphs"
-msgstr ""
+msgstr "Grafîk"
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -2454,7 +2454,7 @@ msgstr ""
 
 #: u_translation.rsgroup
 msgid "Group"
-msgstr ""
+msgstr "Kom"
 
 #: u_translation.rsgrstransit
 msgid "GRS transit"
@@ -2510,7 +2510,7 @@ msgstr ""
 
 #: u_translation.rshelp
 msgid "Help"
-msgstr ""
+msgstr "Alîkarî"
 
 #: u_translation.rshelpbasedir
 msgid "en/documentation/"
@@ -2518,11 +2518,11 @@ msgstr ""
 
 #: u_translation.rshelpcontents
 msgid "Help contents"
-msgstr ""
+msgstr "Naveroka alîkariyê"
 
 #: u_translation.rshide
 msgid "Hide"
-msgstr ""
+msgstr "Veşêre"
 
 #: u_translation.rshidelabel
 msgid "Hide label"
@@ -2534,7 +2534,7 @@ msgstr ""
 
 #: u_translation.rshigh
 msgid "High"
-msgstr ""
+msgstr "Bilind"
 
 #: u_translation.rshighcolor
 msgid "High colour"
@@ -2542,7 +2542,7 @@ msgstr ""
 
 #: u_translation.rshighest
 msgid "Highest"
-msgstr ""
+msgstr "Bilintirîn"
 
 #: u_translation.rshighprecisio
 msgid "High Precision Pointing"
@@ -2582,7 +2582,7 @@ msgstr ""
 
 #: u_translation.rshours
 msgid "hours"
-msgstr ""
+msgstr "saet"
 
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, seconds"
@@ -2602,7 +2602,7 @@ msgstr ""
 
 #: u_translation.rsicons
 msgid "Icons"
-msgstr ""
+msgstr "Îkon"
 
 #: u_translation.rsiconsize
 msgid "Icon size"
@@ -2634,7 +2634,7 @@ msgstr ""
 
 #: u_translation.rsimagelist
 msgid "Image list"
-msgstr ""
+msgstr "Lîsteya Wêneyan"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -2806,7 +2806,7 @@ msgstr ""
 
 #: u_translation.rsjanuary
 msgid "January"
-msgstr ""
+msgstr "Çile"
 
 #: u_translation.rsjd
 msgid "JD:"
@@ -2834,11 +2834,11 @@ msgstr ""
 
 #: u_translation.rsjuly
 msgid "July"
-msgstr ""
+msgstr "tîrmeh"
 
 #: u_translation.rsjune
 msgid "June"
-msgstr ""
+msgstr "hezîran"
 
 #: u_translation.rsjupiter
 msgid "Jupiter"
@@ -2858,7 +2858,7 @@ msgstr ""
 
 #: u_translation.rskey
 msgid "Key"
-msgstr ""
+msgstr "Mifte"
 
 #: u_translation.rskm
 msgid "Km."
@@ -2906,7 +2906,7 @@ msgstr ""
 
 #: u_translation.rslast
 msgid "Last"
-msgstr ""
+msgstr "Dawî"
 
 #: u_translation.rslatitude
 msgid "Latitude"
@@ -2970,7 +2970,7 @@ msgstr ""
 
 #: u_translation.rslimit
 msgid "Limit"
-msgstr ""
+msgstr "Sînor"
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
@@ -3022,7 +3022,7 @@ msgstr ""
 
 #: u_translation.rslist
 msgid "List"
-msgstr ""
+msgstr "Lîste"
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
@@ -3086,7 +3086,7 @@ msgstr ""
 
 #: u_translation.rslock
 msgid "Lock"
-msgstr ""
+msgstr "Qufl Bike"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -3094,7 +3094,7 @@ msgstr ""
 
 #: u_translation.rslog
 msgid "Log"
-msgstr ""
+msgstr "Tomar"
 
 #: u_translation.rslogarithmics
 msgid "Logarithmic scale"
@@ -3118,7 +3118,7 @@ msgstr ""
 
 #: u_translation.rslow
 msgid "Low"
-msgstr ""
+msgstr "Nizim"
 
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
@@ -3138,7 +3138,7 @@ msgstr ""
 
 #: u_translation.rsly
 msgid "ly"
-msgstr ""
+msgstr "Lîbya"
 
 #: u_translation.rsmag
 msgid "Mag:"
@@ -3206,7 +3206,7 @@ msgstr ""
 
 #: u_translation.rsmanual
 msgid "Manual"
-msgstr ""
+msgstr "Bi Destan"
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -3222,7 +3222,7 @@ msgstr ""
 
 #: u_translation.rsmarch
 msgid "March"
-msgstr ""
+msgstr "Adar"
 
 #: u_translation.rsmark
 msgid "Mark"
@@ -3246,7 +3246,7 @@ msgstr ""
 
 #: u_translation.rsmaximize
 msgid "Maximize"
-msgstr ""
+msgstr "Mezintirîn"
 
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
@@ -3262,7 +3262,7 @@ msgstr ""
 
 #: u_translation.rsmay
 msgid "May"
-msgstr ""
+msgstr "gulan"
 
 #: u_translation.rsmbytes
 msgid "MBytes"
@@ -3326,7 +3326,7 @@ msgstr ""
 
 #: u_translation.rsmiddle
 msgid "Middle"
-msgstr ""
+msgstr "Navend"
 
 #: u_translation.rsmilkyway
 msgid "Milky Way"
@@ -3358,7 +3358,7 @@ msgstr "Deqe"
 
 #: u_translation.rsminutes
 msgid "minutes"
-msgstr ""
+msgstr "deqîqe"
 
 #: u_translation.rsmirrorhorizo
 msgid "Mirror horizontally"
@@ -3382,7 +3382,7 @@ msgstr ""
 
 #: u_translation.rsmodel
 msgid "Model"
-msgstr ""
+msgstr "Mînak"
 
 #: u_translation.rsmodify
 msgid "Modify"
@@ -3450,7 +3450,7 @@ msgstr ""
 
 #: u_translation.rsmove
 msgid "Move"
-msgstr ""
+msgstr "Guhestin"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3530,7 +3530,7 @@ msgstr ""
 
 #: u_translation.rsnever
 msgid "never"
-msgstr ""
+msgstr "tu car"
 
 #: u_translation.rsnewbetaversi
 msgid "New beta version available"
@@ -3558,7 +3558,7 @@ msgstr ""
 
 #: u_translation.rsnext2
 msgid "Next"
-msgstr ""
+msgstr "Pêşve"
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
@@ -3666,7 +3666,7 @@ msgstr ""
 
 #: u_translation.rsnote
 msgid "Note"
-msgstr ""
+msgstr "Nîşe"
 
 #: u_translation.rsnotfound
 msgid "%s not found"
@@ -3686,11 +3686,11 @@ msgstr ""
 
 #: u_translation.rsnovember
 msgid "November"
-msgstr ""
+msgstr "mijdar"
 
 #: u_translation.rsnow
 msgid "Now"
-msgstr ""
+msgstr "Niha"
 
 #: u_translation.rsnumberofcopi
 msgid "Number of copies"
@@ -3790,11 +3790,11 @@ msgstr ""
 
 #: u_translation.rsoctober
 msgid "October"
-msgstr ""
+msgstr "cotmeh"
 
 #: u_translation.rsoff
 msgid "Off"
-msgstr ""
+msgstr "Girtî"
 
 #: u_translation.rsofficialname
 msgid "Official name"
@@ -3810,11 +3810,11 @@ msgstr ""
 
 #: u_translation.rsok
 msgid "OK"
-msgstr ""
+msgstr "BAŞ E"
 
 #: u_translation.rson
 msgid "On"
-msgstr ""
+msgstr "Vekirî"
 
 #: u_translation.rsoneevery
 msgid "One every"
@@ -3990,7 +3990,7 @@ msgstr ""
 
 #: u_translation.rspause
 msgid "Pause"
-msgstr ""
+msgstr "Raweste"
 
 #: u_translation.rspec
 msgid "PEC"
@@ -4014,7 +4014,7 @@ msgstr ""
 
 #: u_translation.rsperiod
 msgid "Period"
-msgstr ""
+msgstr "Perîod"
 
 #: u_translation.rspersonaldata
 msgid "Personal data"
@@ -4238,11 +4238,11 @@ msgstr ""
 
 #: u_translation.rspreview
 msgid "Preview"
-msgstr ""
+msgstr "Pêş dîtin"
 
 #: u_translation.rsprevious
 msgid "Previous"
-msgstr ""
+msgstr "Paş de"
 
 #: u_translation.rsprint
 msgid "Print"
@@ -4274,7 +4274,7 @@ msgstr ""
 
 #: u_translation.rsprintheader
 msgid "Print header"
-msgstr ""
+msgstr "Sernavê Danivîsînê"
 
 #: u_translation.rsprintmethod
 msgid "Print method"
@@ -4282,7 +4282,7 @@ msgstr ""
 
 #: u_translation.rsprintpreview
 msgid "Print Preview"
-msgstr ""
+msgstr "Pêşdîtina Çapê"
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
@@ -4386,7 +4386,7 @@ msgstr ""
 
 #: u_translation.rsquery
 msgid "Query"
-msgstr ""
+msgstr "Lêbigere"
 
 #: u_translation.rsquickdelete
 msgid "Quick delete"
@@ -4558,7 +4558,7 @@ msgstr ""
 
 #: u_translation.rsreload
 msgid "Reload"
-msgstr ""
+msgstr "Ji nû ve bar bike"
 
 #: u_translation.rsreloadforcur
 msgid "Reload %s for current chart"
@@ -4714,11 +4714,11 @@ msgstr ""
 
 #: u_translation.rsrows
 msgid "Rows"
-msgstr ""
+msgstr "Rêz"
 
 #: u_translation.rsrun
 msgid "Run"
-msgstr ""
+msgstr "Bixebitîne"
 
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
@@ -4806,7 +4806,7 @@ msgstr ""
 
 #: u_translation.rsscaled
 msgid "Scaled"
-msgstr ""
+msgstr "Pîvankirî"
 
 #: u_translation.rsscanarchives
 msgid "Scan archives"
@@ -4902,7 +4902,7 @@ msgstr ""
 
 #: u_translation.rsselect
 msgid "Select"
-msgstr ""
+msgstr "Hilbijêre"
 
 #: u_translation.rsselectall
 msgid "Select all"
@@ -4990,11 +4990,11 @@ msgstr ""
 
 #: u_translation.rsseparator
 msgid "Separator"
-msgstr ""
+msgstr "Veqetîner"
 
 #: u_translation.rsseptember
 msgid "September"
-msgstr ""
+msgstr "îlon"
 
 #: u_translation.rsserialport
 msgid "Serial Port"
@@ -5022,7 +5022,7 @@ msgstr ""
 
 #: u_translation.rsset
 msgid "Set"
-msgstr ""
+msgstr "Nîşan Bide"
 
 #: u_translation.rssetdateandti
 msgid "Set date and time"
@@ -5318,7 +5318,7 @@ msgstr ""
 
 #: u_translation.rsslow
 msgid "Slow"
-msgstr ""
+msgstr "Hêdî"
 
 #: u_translation.rsslower
 msgid "Slower"
@@ -5414,7 +5414,7 @@ msgstr ""
 
 #: u_translation.rsspeed
 msgid "Speed"
-msgstr ""
+msgstr "Lez"
 
 #: u_translation.rsspeedselecti
 msgid "Speed Selection"
@@ -5454,7 +5454,7 @@ msgstr ""
 
 #: u_translation.rsstandard
 msgid "Standard"
-msgstr ""
+msgstr "Standart"
 
 #: u_translation.rsstandardcolo
 msgid "Standard  colour"
@@ -5462,7 +5462,7 @@ msgstr ""
 
 #: u_translation.rsstar
 msgid "Star"
-msgstr ""
+msgstr "Stêrk"
 
 #: u_translation.rsstarandnebul
 msgid "Star and nebula limit"
@@ -5506,7 +5506,7 @@ msgstr ""
 
 #: u_translation.rsstart
 msgid "Start"
-msgstr ""
+msgstr "Dest pê bike"
 
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
@@ -5530,7 +5530,7 @@ msgstr ""
 
 #: u_translation.rsstatus
 msgid "Status"
-msgstr ""
+msgstr "Rewş"
 
 #: u_translation.rsstatusbar
 msgid "Status bar"
@@ -5538,11 +5538,11 @@ msgstr ""
 
 #: u_translation.rsstepinto
 msgid "Step Into"
-msgstr ""
+msgstr "Gava Hundir"
 
 #: u_translation.rsstepover
 msgid "Step Over"
-msgstr ""
+msgstr "Gava Ser"
 
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
@@ -5558,7 +5558,7 @@ msgstr ""
 
 #: u_translation.rsstop
 msgid "Stop"
-msgstr ""
+msgstr "Sekinandin"
 
 #: u_translation.rsstopbits
 msgid "Stop bits"
@@ -5570,7 +5570,7 @@ msgstr ""
 
 #: u_translation.rssun
 msgid "Sun"
-msgstr ""
+msgstr "Roj"
 
 #: u_translation.rssunalt
 msgid "Sun alt."
@@ -5634,7 +5634,7 @@ msgstr ""
 
 #: u_translation.rstable
 msgid "Table"
-msgstr ""
+msgstr "Tablo"
 
 #: u_translation.rstabledonotex
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
@@ -5646,7 +5646,7 @@ msgstr ""
 
 #: u_translation.rstarget
 msgid "Target"
-msgstr ""
+msgstr "Armanc"
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
@@ -5782,7 +5782,7 @@ msgstr ""
 
 #: u_translation.rstitle
 msgid "Title"
-msgstr ""
+msgstr "Sernav"
 
 #: u_translation.rstledownloado
 msgid "TLE download OK"
@@ -5790,7 +5790,7 @@ msgstr ""
 
 #: u_translation.rsto
 msgid "to"
-msgstr ""
+msgstr "li"
 
 #: u_translation.rstoday
 msgid "Today"
@@ -5818,7 +5818,7 @@ msgstr ""
 
 #: u_translation.rstools
 msgid "Tools"
-msgstr ""
+msgstr "Amûr"
 
 #: u_translation.rstoomanyopenw
 msgid "Too many open windows, please close some charts."
@@ -5838,6 +5838,10 @@ msgstr ""
 
 #: u_translation.rstotalradius
 msgid "Total radius"
+msgstr ""
+
+#: u_translation.rstour
+msgid "Tour"
 msgstr ""
 
 #: u_translation.rstousethisnew
@@ -5870,7 +5874,7 @@ msgstr ""
 
 #: u_translation.rstransparency
 msgid "Transparency"
-msgstr ""
+msgstr "Zelaltî"
 
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
@@ -5974,7 +5978,7 @@ msgstr ""
 
 #: u_translation.rsunits
 msgid "Units"
-msgstr ""
+msgstr "Yeke"
 
 #: u_translation.rsuniversaltim
 msgid "Universal Time"
@@ -5998,7 +6002,7 @@ msgstr ""
 
 #: u_translation.rsup
 msgid "Up"
-msgstr ""
+msgstr "Jor"
 
 #: u_translation.rsupdate1
 msgid "Update"
@@ -6130,7 +6134,7 @@ msgstr ""
 
 #: u_translation.rsversion
 msgid "Version"
-msgstr ""
+msgstr "Guherto"
 
 #: u_translation.rsverticalaxis
 msgid "Vertical axis encoder origin : %s"
@@ -6202,7 +6206,7 @@ msgstr ""
 
 #: u_translation.rswarning
 msgid "Warning!"
-msgstr ""
+msgstr "Baldarbe!"
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
@@ -6258,7 +6262,7 @@ msgstr ""
 
 #: u_translation.rswindow
 msgid "Window"
-msgstr ""
+msgstr "Pencere"
 
 #: u_translation.rsxerrors
 msgid "X Errors"
@@ -6306,7 +6310,7 @@ msgstr ""
 
 #: u_translation.rszoom3
 msgid "Zoom"
-msgstr ""
+msgstr "Mezinkirin"
 
 #: u_translation.rszoomcentre
 msgid "Zoom + and centre on"

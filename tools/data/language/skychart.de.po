@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-14 17:27+0000\n"
-"PO-Revision-Date: 2017-01-14 17:40+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2017-02-11 20:45+0000\n"
+"PO-Revision-Date: 2017-02-10 14:43+0000\n"
+"Last-Translator: Rokar <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-02-05 09:32+0000\n"
-"X-Generator: Launchpad (build 18322)\n"
+"X-Launchpad-Export-Date: 2017-02-11 20:52+0000\n"
+"X-Generator: Launchpad (build 18326)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -63,7 +63,7 @@ msgstr "Über %s"
 
 #: u_translation.rsabove
 msgid "Above %s"
-msgstr ""
+msgstr "Höher als %s"
 
 #: u_translation.rsabrevasteroid
 msgid "Ast"
@@ -119,7 +119,7 @@ msgstr "Funktion"
 
 #: u_translation.rsactivateallt
 msgid "Activate all the functions when hidden"
-msgstr ""
+msgstr "Aktivieren Sie alle Funktionen, wenn sie ausgeblendet sind"
 
 #: u_translation.rsactivatethet
 msgid "Activate the timer event when hidden"
@@ -159,7 +159,7 @@ msgstr "Beschriftung hinzufügen"
 
 #: u_translation.rsaddlabelfore
 msgid "Add label for every object in the list"
-msgstr ""
+msgstr "Beschriftung für jedes Objekt in der Liste hinzufügen"
 
 #: u_translation.rsaddtelescope
 msgid "Add telescope position"
@@ -183,7 +183,7 @@ msgstr "Passe den Visualisierungsmaßstab an"
 
 #: u_translation.rsadjustthewin
 msgid "Adjust the window size to the screen DPI"
-msgstr ""
+msgstr "Passen Sie die Größe des Fensters auf dem Bildschirm DPI"
 
 #: u_translation.rsadvanced
 msgid "Advanced"
@@ -290,8 +290,9 @@ msgid "Always show the objects from the list"
 msgstr "Zeige immer die Objekte aus der Liste"
 
 #: u_translation.rsanewversiono
+#, fuzzy,badformat
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
-msgstr ""
+msgstr "Eine neue Version %s von SkyChart ist verfügbar. Möchten Sie sie jetzt herunterladen?"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -359,7 +360,7 @@ msgstr "Künstlicher Satellit"
 
 #: u_translation.rsartificialsa3
 msgid "Artificial satellites TLE (one URL by line)"
-msgstr ""
+msgstr "Künstliche Satelliten TLE (eine URL pro Zeile)"
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
@@ -411,7 +412,7 @@ msgstr "Quellen für Asteroidbahnelemente im MPC Format (eine URL pro Zeile)"
 
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
-msgstr ""
+msgstr "Asteroid Elemente"
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
@@ -423,7 +424,7 @@ msgstr "Asteroiden aus der Datei"
 
 #: u_translation.rsasteroidupda
 msgid "Asteroid update successful"
-msgstr ""
+msgstr "Asteroid Update erfolgreich"
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
@@ -927,7 +928,7 @@ msgstr "Sternhaufen und Nebel"
 
 #: u_translation.rscollapse
 msgid "Collapse"
-msgstr ""
+msgstr "Zuklappen"
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -963,7 +964,7 @@ msgstr "Quellen für Kometenbahnelemente im MPC Format (eine URL pro Zeile)"
 
 #: u_translation.rscometelement2
 msgid "Comet elements"
-msgstr ""
+msgstr "Kometenelemente"
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
@@ -971,7 +972,7 @@ msgstr "Kometen-Einstellungen"
 
 #: u_translation.rscometupdates
 msgid "Comet update successful"
-msgstr ""
+msgstr "Comet-Update erfolgreich"
 
 #: u_translation.rscommandfound
 msgid "Command found OK."
@@ -999,7 +1000,7 @@ msgstr "Größe der Kompassrose"
 
 #: u_translation.rscompilationa
 msgid "Compilation and save successful"
-msgstr ""
+msgstr "Compilation und speichern erfolgreich"
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
@@ -1071,7 +1072,7 @@ msgstr "Verbindungslinien zwischen jeder Position"
 
 #: u_translation.rsconnectionto
 msgid "Connection to INDI server failed!"
-msgstr ""
+msgstr "Verbindung zum INDI-Server fehlgeschlagen!"
 
 #: u_translation.rsconnectteles
 msgid "Connect telescope"
@@ -1219,7 +1220,7 @@ msgstr "PostScript-Karte wird erstellt. Bitte warten …"
 
 #: u_translation.rscreaterasterwh
 msgid "Create raster chart %d x %d. Please wait..."
-msgstr ""
+msgstr "Erstelle Rasterkarte %d x %d. Bitte warten..."
 
 #: u_translation.rscrossmeridia
 msgid "Cross meridian"
@@ -1239,7 +1240,7 @@ msgstr "Aktueller Treiber"
 
 #: u_translation.rscursor
 msgid "Cursor"
-msgstr ""
+msgstr "Mauszeiger"
 
 #: u_translation.rscustom
 msgid "Custom"
@@ -1707,7 +1708,7 @@ msgstr "Doppelstern"
 
 #: u_translation.rsdown
 msgid "Down"
-msgstr ""
+msgstr "Runter"
 
 #: u_translation.rsdownload
 msgid "Download"
@@ -2067,7 +2068,7 @@ msgstr "Beenden …"
 
 #: u_translation.rsexpand
 msgid "Expand"
-msgstr ""
+msgstr "Vergrößern"
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
@@ -2443,7 +2444,7 @@ msgstr "Grün"
 
 #: u_translation.rsgregoriancal
 msgid "Gregorian calendar start date"
-msgstr ""
+msgstr "Gregorianisches Kalenderstartdatum"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -2599,7 +2600,7 @@ msgstr "Symbol-Klick Funktion"
 
 #: u_translation.rsicons
 msgid "Icons"
-msgstr ""
+msgstr "Symbole"
 
 #: u_translation.rsiconsize
 msgid "Icon size"
@@ -2819,7 +2820,7 @@ msgstr "Julianischer Kalender"
 
 #: u_translation.rsjplephemeris
 msgid "JPL ephemeris search order"
-msgstr ""
+msgstr "JPL Ephemeriden suchen Reihenfolge"
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="
@@ -2911,7 +2912,7 @@ msgstr "Breitengrad"
 
 #: u_translation.rslaunchindist
 msgid "Launch INDIstarter if the server is not running"
-msgstr ""
+msgstr "Starten Sie INDIstarter, wenn der Server nicht läuft"
 
 #: u_translation.rsleft
 msgid "Left"
@@ -3107,7 +3108,7 @@ msgstr "Argument des aufst. Knotens"
 
 #: u_translation.rslookat
 msgid "Look at:"
-msgstr ""
+msgstr "sehen Sie hier:"
 
 #: u_translation.rslosange
 msgid "Lozenge"
@@ -3203,7 +3204,7 @@ msgstr "Toolbox-Skripte verwalten"
 
 #: u_translation.rsmanual
 msgid "Manual"
-msgstr ""
+msgstr "Handbuch"
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -3371,7 +3372,7 @@ msgstr "Sonstige Linien"
 
 #: u_translation.rsmissingscrip
 msgid "Missing script title!"
-msgstr ""
+msgstr "Fehlender Script-Titel!"
 
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
@@ -3531,7 +3532,7 @@ msgstr "nie"
 
 #: u_translation.rsnewbetaversi
 msgid "New beta version available"
-msgstr ""
+msgstr "Neue Betaversion verfügbar"
 
 #: u_translation.rsnewchart
 msgid "New chart"
@@ -3903,7 +3904,7 @@ msgstr "Ausrichtung"
 
 #: u_translation.rsorienttothep
 msgid "Orient to the pole"
-msgstr ""
+msgstr "Orient an den Pol"
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file:"
@@ -4095,7 +4096,7 @@ msgstr "Bitte bestätigen Sie, dass das Teleskop auf %s ausgerichtet ist."
 
 #: u_translation.rspleasedownlo
 msgid "Please download and select TLE file"
-msgstr ""
+msgstr "Bitte laden und wählen Sie TLE-Datei"
 
 #: u_translation.rspleaseensure
 msgid "Please ensure that ASCOM telescope drivers are installed properly."
@@ -4123,7 +4124,7 @@ msgstr "Bitte zuerst die 90° Höhe initialisieren"
 
 #: u_translation.rspleaseinstal
 msgid "Please install indistarter package!"
-msgstr ""
+msgstr "Bitte installieren Sie indistarter Paket!"
 
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
@@ -4627,7 +4628,7 @@ msgstr "Setze Rotation zurück"
 
 #: u_translation.rsresettime
 msgid "Reset time"
-msgstr ""
+msgstr "Zeit zurücksetzen"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
@@ -4820,7 +4821,7 @@ msgstr "Scope Erw."
 
 #: u_translation.rsscreenresolu
 msgid "Screen resolution"
-msgstr ""
+msgstr "Bildschirmauflösung"
 
 #: u_translation.rsscript
 msgid "Script"
@@ -4872,7 +4873,7 @@ msgstr "Suchindex"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
-msgstr ""
+msgstr "Software-Update suchen"
 
 #: u_translation.rssec
 msgid "s"
@@ -5048,7 +5049,7 @@ msgstr "Beobachtungsort einstellen"
 
 #: u_translation.rssetoptionsfo
 msgid "Set options for best performance"
-msgstr ""
+msgstr "Legen Sie Optionen für die beste Leistung fest"
 
 #: u_translation.rssetslewing
 msgid "Set Slewing"
@@ -5100,7 +5101,7 @@ msgstr "Asteroiden in der Karte anzeigen"
 
 #: u_translation.rsshowbuttonte
 msgid "Show button text"
-msgstr ""
+msgstr "Knopftext anzeigen"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
@@ -5308,7 +5309,7 @@ msgstr " Schwenkgeschwindigkeit"
 
 #: u_translation.rsslewtochartc
 msgid "Slew to chart center"
-msgstr ""
+msgstr "Schwenke nach Kartenzentrum"
 
 #: u_translation.rsslewtocursor
 msgid "Slew to cursor position"
@@ -5508,11 +5509,11 @@ msgstr "Start"
 
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
-msgstr ""
+msgstr "Animation rückwärts"
 
 #: u_translation.rsstartforward
 msgid "Animation forward"
-msgstr ""
+msgstr "Animation vorwärts"
 
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
@@ -5672,7 +5673,7 @@ msgstr "Teleskop-Brennweite"
 
 #: u_translation.rstelescopenam
 msgid "Telescope name"
-msgstr ""
+msgstr "Teleskop Name"
 
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
@@ -5785,7 +5786,7 @@ msgstr "Überschrift"
 
 #: u_translation.rstledownloado
 msgid "TLE download OK"
-msgstr ""
+msgstr "TLE herunterladen OK"
 
 #: u_translation.rsto
 msgid "to"
@@ -5839,6 +5840,10 @@ msgstr "Totalität"
 msgid "Total radius"
 msgstr "Gesamtradius"
 
+#: u_translation.rstour
+msgid "Tour"
+msgstr ""
+
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
 msgstr "Bevor die neuen Orbitalelemente benutzt werden können, müssen die monatlichen Daten berechnet werden."
@@ -5853,7 +5858,7 @@ msgstr "Teleskop nachführen"
 
 #: u_translation.rstrajectories
 msgid "Trajectories simulation"
-msgstr ""
+msgstr "Trajektorische Simulation"
 
 #: u_translation.rstransformati
 msgid "Transformation"
@@ -5997,7 +6002,7 @@ msgstr "Profil des SAMP-Hubs nicht unterstützt, muss ein Datei-URL sein"
 
 #: u_translation.rsup
 msgid "Up"
-msgstr ""
+msgstr "Hinauf"
 
 #: u_translation.rsupdate1
 msgid "Update"
@@ -6277,7 +6282,7 @@ msgstr "Fehler in Y-Achse"
 
 #: u_translation.rsyoualreadyha
 msgid "You already have the latest available version!"
-msgstr ""
+msgstr "Sie haben bereits die neuerste Version!"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."

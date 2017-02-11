@@ -6310,3 +6310,7 @@ msgstr ""
 msgid "Slew to chart center"
 msgstr ""
 
+#: u_translation:rstour
+msgid "Tour"
+msgstr ""
+
