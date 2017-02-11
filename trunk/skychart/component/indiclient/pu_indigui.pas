@@ -517,7 +517,7 @@ begin
     then result:=SXToStr(x)
   else begin
     try
-      fmt:=StringReplace(fmt,'+','',[]); // "%+06.2f" not supported by FPC
+      fmt:=StringReplace(fmt,'%+','%',[]); // "%+06.2f" not supported by FPC
       result:=Format(fmt,[x]);
       if result='' then result:=FloatToStr(x);
     except
