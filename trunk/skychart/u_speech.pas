@@ -102,7 +102,7 @@ end;
 procedure speak(text: string);
 begin
  if splang='' then GetLang;
- ExecNoWait('espeak -v '+spLang+' "'+text+'"');
+ ExecNoWait('espeak -v '+spLang+' "'+LowerCase(text)+'"');
 end;
 {$endif}
 

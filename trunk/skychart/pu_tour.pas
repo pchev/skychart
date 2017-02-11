@@ -118,25 +118,27 @@ end;
 procedure Tf_tour.BtnSlewClick(Sender: TObject);
 begin
   if Assigned(Fslew) then Fslew(self);
-  speak(rsSlew+' '+ ObjectName.Caption);
+  speak(rsSlew);
 end;
 
 procedure Tf_tour.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   case Key of
-    VK_HOME: BtnFirstClick(nil);
-    VK_END: BtnLastClick(nil);
-    VK_RIGHT,VK_DOWN: begin
+    VK_F,VK_HOME: BtnFirstClick(nil);
+    VK_L,VK_END: BtnLastClick(nil);
+    VK_I: speak(ObjectName.Caption);
+    VK_N,VK_RIGHT,VK_DOWN,VK_NEXT: begin
             BtnNextClick(nil);
             if Shift=[ssCtrl] then BtnSlewClick(nil);
     end;
-    VK_LEFT,VK_UP: begin
+    VK_P,VK_LEFT,VK_UP,VK_PRIOR: begin
             BtnPrevClick(nil);
             if Shift=[ssCtrl] then BtnSlewClick(nil);
     end;
     VK_S: begin
             if Shift=[ssCtrl] then BtnSlewClick(nil);
     end;
+    VK_TAB: BtnSlewClick(nil);
   end;
 end;
 
