@@ -862,7 +862,7 @@ ctBin : begin  // binary catalog
     case catversion of
     rtstar : begin  // Star 1
         if catheader.flen[3]>0 then lin.star.id:=GetRecString(3);
-        if catheader.flen[4]>0 then begin lin.star.magv:=GetRecSmallint(4)/1000; if lin.star.magv>32 then lin.star.magv:=99;end else lin.star.magv:=99;;
+        if catheader.flen[4]>0 then begin lin.star.magv:=GetRecSmallint(4)/1000; if lin.star.magv>32 then lin.star.magv:=99;end else lin.star.magv:=99;
         if catheader.flen[5]>0 then begin lin.star.b_v:=GetRecSmallint(5)/1000;  if lin.star.b_v>32  then lin.star.b_v:=99.9;end else lin.star.b_v:=99.9;
         if catheader.flen[6]>0 then begin lin.star.magb:=GetRecSmallint(6)/1000; if lin.star.magb>32 then lin.star.magb:=99;end else lin.star.magb:=99;
         if catheader.flen[7]>0 then begin lin.star.magr:=GetRecSmallint(7)/1000; if lin.star.magr>32 then lin.star.magr:=99;end else lin.star.magr:=99;
@@ -878,8 +878,8 @@ ctBin : begin  // binary catalog
         end;
     rtvar : begin  // variables stars 1
         if catheader.flen[3]>0 then lin.variable.id:=GetRecString(3);
-        if catheader.flen[4]>0 then begin lin.variable.magmax:=GetRecSmallint(4)/1000; if lin.variable.magmax>32 then lin.variable.magmax:=99.9;end;
-        if catheader.flen[5]>0 then begin lin.variable.magmin:=GetRecSmallint(5)/1000; if lin.variable.magmin>32 then lin.variable.magmin:=99.9;end;
+        if catheader.flen[4]>0 then begin lin.variable.magmax:=GetRecSmallint(4)/1000; if lin.variable.magmax>32 then lin.variable.magmax:=99;end;
+        if catheader.flen[5]>0 then begin lin.variable.magmin:=GetRecSmallint(5)/1000; if lin.variable.magmin>32 then lin.variable.magmin:=99;end;
         if catheader.flen[6]>0 then lin.variable.period:=GetRecSingle(6);
         if catheader.flen[7]>0 then lin.variable.vartype:=GetRecString(7);
         if catheader.flen[8]>0 then lin.variable.maxepoch:=GetRecSingle(8);
@@ -890,8 +890,8 @@ ctBin : begin  // binary catalog
         end;
     rtdbl : begin  // doubles stars 1
         if catheader.flen[3]>0 then lin.double.id:=GetRecString(3);
-        if catheader.flen[4]>0 then begin lin.double.mag1:=GetRecSmallint(4)/1000; if lin.double.mag1>32 then lin.double.mag1:=99.9;end;
-        if catheader.flen[5]>0 then begin lin.double.mag2:=GetRecSmallint(5)/1000; if lin.double.mag2>32 then lin.double.mag2:=99.9;end;
+        if catheader.flen[4]>0 then begin lin.double.mag1:=GetRecSmallint(4)/1000; if lin.double.mag1>32 then lin.double.mag1:=99;end;
+        if catheader.flen[5]>0 then begin lin.double.mag2:=GetRecSmallint(5)/1000; if lin.double.mag2>32 then lin.double.mag2:=99;end;
         if catheader.flen[6]>0 then lin.double.sep:=GetRecSmallint(6)/10;
         if catheader.flen[7]>0 then lin.double.pa:=GetRecSmallint(7);
         if catheader.flen[8]>0 then lin.double.epoch:=GetRecSingle(8);
@@ -903,7 +903,7 @@ ctBin : begin  // binary catalog
     rtneb : begin  // nebulae 1
         if catheader.flen[3]>0 then lin.neb.id:=GetRecString(3);
         if catheader.flen[4]>0 then lin.neb.nebtype:=GetRecByte(4);
-        if catheader.flen[5]>0 then begin lin.neb.mag:=GetRecSmallint(5)/1000; if lin.neb.mag>32 then lin.neb.mag:=99.9;end;
+        if catheader.flen[5]>0 then begin lin.neb.mag:=GetRecSmallint(5)/1000; if lin.neb.mag>32 then lin.neb.mag:=99;end;
         if catheader.flen[6]>0 then begin lin.neb.sbr:=GetRecSmallint(6)/1000; if lin.neb.sbr>32 then lin.neb.sbr:=99.9;end;
         if catheader.flen[7]>0 then lin.neb.dim1:=GetRecSingle(7);
         if catheader.flen[8]>0 then lin.neb.dim2:=GetRecSingle(8);

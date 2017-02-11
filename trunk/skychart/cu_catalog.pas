@@ -1771,7 +1771,6 @@ repeat
   ReadGCat(rec,result);
   if not result then break;
   FormatGCatN(rec);
-
   if (not (cfgshr.NoFilterMessier and(MessierStrPos>0))) and cfgshr.NebFilter and
      rec.neb.valid[vnMag] and
     (rec.neb.mag>cfgcat.NebMagMax) then begin
@@ -1779,10 +1778,8 @@ repeat
              if result then continue;
   end
   else  if (not (cfgshr.NoFilterMessier and rec.neb.messierobject)) and cfgshr.NebFilter and
-     rec.neb.valid[vnMag] and
     (rec.neb.mag>cfgcat.NebMagMax) then
              continue;
-
   if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
   if not rec.neb.valid[vnDim1] then rec.neb.dim1:=rec.options.Size;
   if (not (cfgshr.NoFilterMessier and rec.neb.messierobject)) and cfgshr.NebFilter and
