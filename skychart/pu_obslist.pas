@@ -199,6 +199,7 @@ begin
   StringGrid1.Columns[5].Title.Caption:=rsDescription;
   StringGrid1.Columns[6].Title.Caption:=rsLabel2;
   AirmassCombo.Items[6]:=rsHorizon;
+  BtnTour.Caption:=rsTour;
   ButtonSave.Caption:=rsSave;
   ButtonClear.Caption:=rsClear;
   UpdAllCoord.Caption:=rsUpdateCoordi;

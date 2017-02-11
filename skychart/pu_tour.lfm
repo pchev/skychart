@@ -15,17 +15,17 @@ object f_tour: Tf_tour
   Visible = False
   object TourName: TLabel
     Left = 27
-    Height = 17
+    Height = 15
     Top = 8
-    Width = 71
+    Width = 65
     Caption = 'TourName'
     ParentColor = False
   end
   object ObjectName: TLabel
     Left = 26
-    Height = 17
+    Height = 15
     Top = 37
-    Width = 86
+    Width = 80
     Caption = 'ObjectName'
     ParentColor = False
   end

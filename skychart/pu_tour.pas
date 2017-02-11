@@ -73,6 +73,7 @@ implementation
 
 procedure Tf_tour.SetLang;
 begin
+  Caption:=rsTour;
   BtnEnd.Caption:=rsEnd;
   BtnFirst.Caption:=rsFirst;
   BtnLast.Caption:=rsLast;
