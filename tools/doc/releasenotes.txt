@@ -18,6 +18,7 @@ New functions:
   * Option to add the meridian line with any projection.
   * Show comet and asteroid hourly motion in the detail window.
   * Update download URL for asteroids and comets
+  * New observing list Tour function 
   * Add cursor or telescope position to observing list
   * Add Tcp/Ip connection to the LX200 telescope interface.
   * Use INDIstarter to manage the INDI server.
