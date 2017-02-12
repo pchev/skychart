@@ -14,7 +14,7 @@ object f_tour: Tf_tour
   LCLVersion = '1.6.2.0'
   Visible = False
   object TourName: TLabel
-    Left = 27
+    Left = 16
     Height = 15
     Top = 8
     Width = 65
@@ -22,9 +22,9 @@ object f_tour: Tf_tour
     ParentColor = False
   end
   object ObjectName: TLabel
-    Left = 26
+    Left = 16
     Height = 15
-    Top = 37
+    Top = 32
     Width = 80
     Caption = 'ObjectName'
     ParentColor = False
@@ -33,7 +33,7 @@ object f_tour: Tf_tour
     Left = 104
     Height = 25
     Hint = 'Previous object [Left] and slew [Ctrl+Left]'
-    Top = 72
+    Top = 88
     Width = 43
     Caption = '<'
     OnClick = BtnPrevClick
@@ -45,7 +45,7 @@ object f_tour: Tf_tour
     Left = 160
     Height = 25
     Hint = 'Next object [Right] and slew [Ctrl+Right]'
-    Top = 72
+    Top = 88
     Width = 40
     Caption = '>'
     OnClick = BtnNextClick
@@ -57,7 +57,7 @@ object f_tour: Tf_tour
     Left = 224
     Height = 25
     Hint = 'Close Tour window'
-    Top = 120
+    Top = 130
     Width = 75
     Cancel = True
     Caption = 'End'
@@ -70,7 +70,7 @@ object f_tour: Tf_tour
     Left = 16
     Height = 25
     Hint = 'Center first object on the observation list  [Home]'
-    Top = 72
+    Top = 88
     Width = 75
     Caption = 'First'
     OnClick = BtnFirstClick
@@ -82,7 +82,7 @@ object f_tour: Tf_tour
     Left = 224
     Height = 25
     Hint = 'Center last object on the observation list  [End]'
-    Top = 72
+    Top = 88
     Width = 75
     Caption = 'Last'
     OnClick = BtnLastClick
@@ -94,12 +94,22 @@ object f_tour: Tf_tour
     Left = 104
     Height = 25
     Hint = 'Slew telescope to this object [Ctrl+S]'
-    Top = 120
+    Top = 130
     Width = 96
     Caption = 'Slew'
     OnClick = BtnSlewClick
     ParentShowHint = False
     ShowHint = True
     TabOrder = 5
+  end
+  object Sound: TCheckBox
+    Left = 16
+    Height = 23
+    Top = 56
+    Width = 66
+    Caption = 'Sound'
+    Checked = True
+    State = cbChecked
+    TabOrder = 6
   end
 end

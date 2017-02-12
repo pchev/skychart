@@ -1607,6 +1607,7 @@ resourcestring
   rsDecember = 'December';
   rsSlewToChartC = 'Slew to chart center';
   rsTour = 'Tour';
+  rsActivateVoic = 'Activate voice';
 
 // also update upsi_translation
 
