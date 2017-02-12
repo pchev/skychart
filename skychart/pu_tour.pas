@@ -39,6 +39,7 @@ type
     BtnFirst: TButton;
     BtnLast: TButton;
     BtnSlew: TButton;
+    Sound: TCheckBox;
     TourName: TLabel;
     ObjectName: TLabel;
     procedure BtnEndClick(Sender: TObject);
@@ -74,6 +75,7 @@ implementation
 procedure Tf_tour.SetLang;
 begin
   Caption:=rsTour;
+  Sound.Caption:=rsActivateVoic;
   BtnEnd.Caption:=rsEnd;
   BtnFirst.Caption:=rsFirst;
   BtnLast.Caption:=rsLast;
@@ -90,7 +92,7 @@ end;
 procedure Tf_tour.BtnFirstClick(Sender: TObject);
 begin
   if Assigned(FFirst) then FFirst(self);
-  speak(ObjectName.Caption);
+  if Sound.Checked then speak(ObjectName.Caption);
 end;
 
 procedure Tf_tour.BtnEndClick(Sender: TObject);
@@ -101,25 +103,25 @@ end;
 procedure Tf_tour.BtnLastClick(Sender: TObject);
 begin
   if Assigned(FLast) then FLast(self);
-  speak(ObjectName.Caption);
+  if Sound.Checked then speak(ObjectName.Caption);
 end;
 
 procedure Tf_tour.BtnNextClick(Sender: TObject);
 begin
   if Assigned(Fnext) then Fnext(self);
-  speak(ObjectName.Caption);
+  if Sound.Checked then speak(ObjectName.Caption);
 end;
 
 procedure Tf_tour.BtnPrevClick(Sender: TObject);
 begin
   if Assigned(Fprev) then Fprev(self);
-  speak(ObjectName.Caption);
+  if Sound.Checked then speak(ObjectName.Caption);
 end;
 
 procedure Tf_tour.BtnSlewClick(Sender: TObject);
 begin
   if Assigned(Fslew) then Fslew(self);
-  speak(rsSlew);
+  if Sound.Checked then speak(rsSlew);
 end;
 
 procedure Tf_tour.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -127,7 +129,7 @@ begin
   case Key of
     VK_F,VK_HOME: BtnFirstClick(nil);
     VK_L,VK_END: BtnLastClick(nil);
-    VK_I: speak(ObjectName.Caption);
+    VK_I: if Sound.Checked then speak(ObjectName.Caption);
     VK_N,VK_RIGHT,VK_DOWN,VK_NEXT: begin
             BtnNextClick(nil);
             if Shift=[ssCtrl] then BtnSlewClick(nil);
