@@ -199,7 +199,7 @@ end;
 function init_de_file(ephemeris_filename: string): boolean;
 var
   i, j : integer;
-    Title : array[0..83] of Char;
+    Title : array[0..83] of AnsiChar;
     itemp : integer;
 begin
     for j := 0 to 2 do
