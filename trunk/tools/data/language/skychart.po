@@ -6314,3 +6314,7 @@ msgstr ""
 msgid "Tour"
 msgstr ""
 
+#: u_translation:rsactivatevoic
+msgid "Activate voice"
+msgstr ""
+
