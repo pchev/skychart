@@ -1585,65 +1585,19 @@ if (currentplanet=32) then begin   // Earth umbra
           +'  P'+tab+nom+tab
           +date+tab;
 end;
-if (currentplanet>11) and (currentplanet<=15) then begin
-  nom:=pla[CurrentPlanet];
-  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
-  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
-  ma:=smagn;
-  Desc := sar+tab+sde+tab
-          +' Ps'+tab+nom+tab
-          +'m:'+smagn+tab
-          +'diam:'+sdiam+blank+lsec+tab
-          +'date:'+date+tab
-          +'TT:'+datett;
-end;
-if (currentplanet>15) and (currentplanet<=23) then begin
-  nom:=pla[CurrentPlanet];
-  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
-  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
-  ma:=smagn;
-  Desc := sar+tab+sde+tab
-          +' Ps'+tab+nom+tab
-          +'m:'+smagn+tab
-          +'diam:'+sdiam+blank+lsec+tab
-          +'date:'+date+tab
-          +'TT:'+datett;
-end;
-if (currentplanet>23) and (currentplanet<=28) then begin
-  nom:=pla[CurrentPlanet];
-  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
-  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
-  ma:=smagn;
-  Desc := sar+tab+sde+tab
-          +' Ps'+tab+nom+tab
-          +'m:'+smagn+tab
-          +'diam:'+sdiam+blank+lsec+tab
-          +'date:'+date+tab
-          +'TT:'+datett;
-end;
-if (currentplanet>28) and (currentplanet<=30) then begin
-  nom:=pla[CurrentPlanet];
-  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
-  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
-  ma:=smagn;
-  Desc := sar+tab+sde+tab
-          +' Ps'+tab+nom+tab
-          +'m:'+smagn+tab
-          +'diam:'+sdiam+blank+lsec+tab
-          +'date:'+date+tab
-          +'TT:'+datett;
-end;
-if (currentplanet>32) and (currentplanet<=MaxPla) then begin
-  nom:=pla[CurrentPlanet];
-  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
-  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
-  ma:=smagn;
-  Desc := sar+tab+sde+tab
-          +' Ps'+tab+nom+tab
-          +'m:'+smagn+tab
-          +'diam:'+sdiam+blank+lsec+tab
-          +'date:'+date+tab
-          +'TT:'+datett;
+if ((currentplanet>11) and (currentplanet<=30)) or
+   ((currentplanet>32) and (currentplanet<=MaxPla))
+   then begin
+    nom:=pla[CurrentPlanet];
+    str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
+    str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
+    ma:=smagn;
+    Desc := sar+tab+sde+tab
+            +' Ps'+tab+nom+tab
+            +'m:'+smagn+tab
+            +'diam:'+sdiam+blank+lsec+tab
+            +'date:'+date+tab
+            +'TT:'+datett;
 end;
 cfgsc.FindIpla:=CurrentPlanet;
 cfgsc.FindId:=nom;
