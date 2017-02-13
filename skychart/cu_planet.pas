@@ -76,7 +76,7 @@ type
      procedure FormatPlanet(St,Pl:integer; cfgsc: Tconf_skychart; var nom,ma,date,desc:string);
      Procedure Plan(ipla: integer; t: double ; var p: TPlanData);
      Procedure Planet(ipla : integer; t0 : double ; var alpha,delta,distance,illum,phase,diameter,magn,dp,xp,yp,zp,vel : double);
-     Procedure SunRect(t0 : double ; astrometric : boolean; var x,y,z : double;barycenter:boolean=true);
+     Procedure SunRect(t0 : double ; astrometric : boolean; var x,y,z : double;barycenter:boolean=false);
      Procedure Sun(t0 : double; var alpha,delta,dist,diam : double);
      Procedure SunEcl(t0 : double ; var l,b : double);
      procedure PlanSat(isat:integer; jde:double; var alpha,delta,distance: double; var supconj:boolean);
@@ -159,7 +159,7 @@ var v2: Array_5D;
     x,y,z,qr: double;
 begin
 if load_de(t) then begin    // use jpl DE-
-  Calc_Planet_de(t, ipla, v2,true,12,false);
+  Calc_Planet_de(t, ipla, v2,true,11,false);
   p.x:=v2[0];
   p.y:=v2[1];
   p.z:=v2[2];
@@ -205,32 +205,38 @@ const
 
 var  v1: double6;
      w : array[1..3] of double;
-     tjd,t : double;
+     t : double;
      pl :TPlanData;
      lt,rt,dt,lp,rp,lsol,pha,qr,xt,yt,zt : double;
 begin
 if (ipla<1) or (ipla=3) or (ipla>9) then exit;
 // always do this computation for phase sign
   // Earth position
-  Plan(3,t0-tlight,pl);
+  Plan(3,t0,pl);
   lt:=pl.l; rt:=pl.r;
-  xt:=pl.x; yt:=pl.y; zt:=pl.z;
+  v1[1]:=-pl.x;
+  v1[2]:=-pl.y;
+  v1[3]:=-pl.z;
   dt:=rt;
   // planet position
   Plan(ipla,t0,pl);
   lp:=pl.l; rp:=pl.r;
   dp:=rp;
  // get distance for light time correction
- xt:=pl.x-xt;
- yt:=pl.y-yt;
- zt:=pl.z-zt;
+ xt:=pl.x+v1[1];
+ yt:=pl.y+v1[2];
+ zt:=pl.z+v1[3];
  distance:=sqrt(xt*xt+yt*yt+zt*zt);
  // planet using light correction
- tjd:=t0;
- SunRect(tjd,false,v1[1],v1[2],v1[3]);
- dt:=sqrt(v1[1]*v1[1]+v1[2]*v1[2]+v1[3]*v1[3]);
- t:=tjd-distance*tlight;
+ t:=t0-distance*tlight;
  Plan(ipla,t,pl);
+ // get light corrected distance
+ dp:=pl.r;
+ xt:=pl.x+v1[1];
+ yt:=pl.y+v1[2];
+ zt:=pl.z+v1[3];
+ distance:=sqrt(xt*xt+yt*yt+zt*zt);
+ // equatorial coord
  w[1]:=pl.x+v1[1];
  w[2]:=pl.y+v1[2];
  w[3]:=pl.z+v1[3];
@@ -238,6 +244,7 @@ if (ipla<1) or (ipla=3) or (ipla>9) then exit;
  if (alpha<0) then alpha:=alpha+2*pi;
  qr:=sqrt(w[1]*w[1]+w[2]*w[2]);
  if qr<>0 then delta:=arctan(w[3]/qr);
+ // rectangular coord
  xp:=pl.x;
  yp:=pl.y;
  zp:=pl.z;
@@ -276,7 +283,7 @@ case ipla of
 end;
 end;
 
-Procedure TPlanet.SunRect(t0 : double ; astrometric : boolean; var x,y,z : double;barycenter:boolean=true);
+Procedure TPlanet.SunRect(t0 : double ; astrometric : boolean; var x,y,z : double;barycenter:boolean=false);
 var p :TPlanetData;
     planet_arr: Array_5D;
     tjd : double;
@@ -327,7 +334,7 @@ end;
 Procedure TPlanet.Sun(t0 : double; var alpha,delta,dist,diam : double);
 var x,y,z,qr : double;
 begin
-  SunRect(t0,false,x,y,z,true);
+  SunRect(t0,false,x,y,z,false);
   dist:=sqrt(x*x+y*y+z*z);
   alpha:=arctan2(y,x);
   if (alpha<0) then alpha:=alpha+pi2;
@@ -339,7 +346,7 @@ end;
 Procedure TPlanet.SunEcl(t0 : double ; var l,b : double);
 var x1,y1,z1,x,y,z,qr : double;
 begin
-SunRect(t0,false,x1,y1,z1,true);
+SunRect(t0,false,x1,y1,z1,false);
 // rotate equatorial to ecliptic
 x:=x1;
 y:= coseps2k*y1 + sineps2k*z1;
@@ -1417,7 +1424,7 @@ var
    yy,mm,dd : integer;
    ar,de : double;
    dist,illum,phase,diam,jdt,magn,dkm,hh,dp,p,pde,pds,w1,w2,w3,jd0,st0,q,xp,yp,zp,vel : double;
-   sar,sde,sdist,skm,sillum,sphase,sdiam,smagn,shh,sdp,sdpkm : string;
+   sar,sde,sdist,skm,sillum,sphase,sdiam,smagn,shh,sdp,sdpkm,datett : string;
 const d1='0.0'; d2='0.00';
 begin
   CurrentStep:=St;
@@ -1440,6 +1447,9 @@ begin
   sde := DEpToStr(rad2deg*cfgsc.FindDec) ;
   jdt:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,3];
   cfgsc.FindSimjd:=jdt;
+  djd(jdt,yy,mm,dd,hh);
+  shh := ARtoStr3(rmod(hh,24));
+  datett:=Date2Str(yy,mm,dd)+blank+shh;
   djd(jdt+(cfgsc.TimeZone-cfgsc.DT_UT)/24,yy,mm,dd,hh);
   shh := ARtoStr3(rmod(hh,24));
   date:=Date2Str(yy,mm,dd)+blank+shh;
@@ -1502,7 +1512,8 @@ if (currentplanet<10) then begin
      Desc:=Desc+'CM:'+formatfloat(d1,w1)+tab
   end;
   Desc:=Desc+'ephemeris:'+eph_method+tab;
-  Desc:=Desc+'date:'+date;
+  Desc:=Desc+'date:'+date+tab;
+  Desc:=Desc+'TT:'+datett;
 end;
 if (currentplanet=10) then begin
   Sun(jdt,ar,de,dist,diam);
@@ -1522,7 +1533,8 @@ if (currentplanet=10) then begin
           +'PoleIncl:'+formatfloat(d1,pde)+tab
           +'CM:'+formatfloat(d1,w1)+tab
           +'ephemeris:'+eph_method+tab
-          +'date:'+date;
+          +'date:'+date+tab
+          +'TT:'+datett;
 end;
 if (currentplanet=11) then begin
   Moon(jdt,ar,de,dist,dkm,diam,phase,illum);
@@ -1555,7 +1567,8 @@ if (currentplanet=11) then begin
           +'llon:'+formatfloat(d2,w1)+tab
           +'SunIncl:'+formatfloat(d2,pds)+tab
           +'ephemeris:'+eph_method+tab
-          +'date:'+date;
+          +'date:'+date+tab
+          +'TT:'+datett;
 end;
 if (currentplanet=32) then begin   // Earth umbra
   jdt:=cfgsc.PlanetLst[CurrentStep,10,3];  // date from the Sun
@@ -1581,7 +1594,8 @@ if (currentplanet>11) and (currentplanet<=15) then begin
           +' Ps'+tab+nom+tab
           +'m:'+smagn+tab
           +'diam:'+sdiam+blank+lsec+tab
-          +date+tab;
+          +'date:'+date+tab
+          +'TT:'+datett;
 end;
 if (currentplanet>15) and (currentplanet<=23) then begin
   nom:=pla[CurrentPlanet];
@@ -1592,7 +1606,8 @@ if (currentplanet>15) and (currentplanet<=23) then begin
           +' Ps'+tab+nom+tab
           +'m:'+smagn+tab
           +'diam:'+sdiam+blank+lsec+tab
-          +date+tab;
+          +'date:'+date+tab
+          +'TT:'+datett;
 end;
 if (currentplanet>23) and (currentplanet<=28) then begin
   nom:=pla[CurrentPlanet];
@@ -1603,7 +1618,8 @@ if (currentplanet>23) and (currentplanet<=28) then begin
           +' Ps'+tab+nom+tab
           +'m:'+smagn+tab
           +'diam:'+sdiam+blank+lsec+tab
-          +date+tab;
+          +'date:'+date+tab
+          +'TT:'+datett;
 end;
 if (currentplanet>28) and (currentplanet<=30) then begin
   nom:=pla[CurrentPlanet];
@@ -1614,7 +1630,8 @@ if (currentplanet>28) and (currentplanet<=30) then begin
           +' Ps'+tab+nom+tab
           +'m:'+smagn+tab
           +'diam:'+sdiam+blank+lsec+tab
-          +date+tab;
+          +'date:'+date+tab
+          +'TT:'+datett;
 end;
 if (currentplanet>32) and (currentplanet<=MaxPla) then begin
   nom:=pla[CurrentPlanet];
@@ -1625,7 +1642,8 @@ if (currentplanet>32) and (currentplanet<=MaxPla) then begin
           +' Ps'+tab+nom+tab
           +'m:'+smagn+tab
           +'diam:'+sdiam+blank+lsec+tab
-          +date+tab;
+          +'date:'+date+tab
+          +'TT:'+datett;
 end;
 cfgsc.FindIpla:=CurrentPlanet;
 cfgsc.FindId:=nom;
