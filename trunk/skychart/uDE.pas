@@ -404,7 +404,7 @@ begin
         if k = 12 then lista[2] := list_val; //EMBary state additionaly
     end;
     //make call to state
-    jpl_state( eph, ephinfo, et, lista, pv, rrd, 0);
+    jpl_state( eph, ephinfo, et, lista, pv, rrd, 1);
     //Solar System barycentric Sun state goes to pv[10][]
     if (ntarg = 11) or (ncent = 11) then
         for i := 0 to 5 do pv[10,i] := eph.pvsun[i];
