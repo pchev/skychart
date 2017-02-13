@@ -4,14 +4,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-11 20:45+0000\n"
+"POT-Creation-Date: 2017-02-12 11:39+0000\n"
 "PO-Revision-Date: 2016-12-11 08:48+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-02-11 20:52+0000\n"
+"X-Launchpad-Export-Date: 2017-02-13 19:04+0000\n"
 "X-Generator: Launchpad (build 18326)\n"
 "Language: fr\n"
 
@@ -125,6 +125,10 @@ msgstr ""
 
 #: u_translation.rsactivatethet
 msgid "Activate the timer event when hidden"
+msgstr ""
+
+#: u_translation.rsactivatevoic
+msgid "Activate voice"
 msgstr ""
 
 #: u_translation.rsactualsystem

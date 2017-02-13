@@ -4,14 +4,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-11 20:45+0000\n"
-"PO-Revision-Date: 2017-01-19 00:20+0000\n"
+"POT-Creation-Date: 2017-02-12 11:39+0000\n"
+"PO-Revision-Date: 2017-02-13 14:48+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-02-11 20:52+0000\n"
+"X-Launchpad-Export-Date: 2017-02-13 19:04+0000\n"
 "X-Generator: Launchpad (build 18326)\n"
 "Language: es\n"
 
@@ -126,6 +126,10 @@ msgstr "Activar todas las funciones oculto"
 #: u_translation.rsactivatethet
 msgid "Activate the timer event when hidden"
 msgstr "Activar la alarma cuando esté oculto"
+
+#: u_translation.rsactivatevoic
+msgid "Activate voice"
+msgstr "Activar voz"
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -1257,7 +1261,7 @@ msgstr "Nebulosa oscura"
 
 #: u_translation.rsdarknight
 msgid "Dark night"
-msgstr "Noche oscura"
+msgstr "Noche cerrada"
 
 #: u_translation.rsdash1
 msgid "Dash"
@@ -5841,7 +5845,7 @@ msgstr "Radio Total"
 
 #: u_translation.rstour
 msgid "Tour"
-msgstr ""
+msgstr "Gira"
 
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
