@@ -80,7 +80,7 @@ var
 
 Function IsDSbasepath(path : string) : Boolean;
 begin
-result:= FileExists(slash(path)+'star5.dat');
+result:= FileExists(slash(path)+'STAR1.DAT');
 end;
 
 Function IsDStycpath(path : string) : Boolean;
@@ -261,7 +261,7 @@ Procedure OpenRegionBase(var ok:boolean);
 var nomfich :string;
 begin
 if not OnCache then begin
-   nomfich:=DSpath+slashchar+'star1.dat';
+   nomfich:=DSpath+slashchar+'STAR1.DAT';
    if not FileExists(nomfich) then begin
       ok:=false;
       exit;
