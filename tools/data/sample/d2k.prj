@@ -4,7 +4,8 @@ type=3
 shortname=d2k
 longname=DeepSky2000
 numfiles=1
-inputfiles0=/home/pch/.skychart/ds2000/ds2000.dat
+inputfiles0=ds2000.dat
+caturl=
 
 [Page2]
 ratype=1
@@ -22,7 +23,7 @@ drawingtype=0
 closedline=1
 
 [Page3]
-numitem=33
+numitem=34
 field0=1
 field1=1
 field2=1
@@ -56,6 +57,7 @@ field29=0
 field30=0
 field31=0
 field32=0
+field33=0
 label1=RA
 label2=DEC
 label3=Id
@@ -89,6 +91,8 @@ label30=Num7
 label31=Num8
 label32=Num9
 label33=Num10
+label34=Num10
+label35=
 fieldindex0=21
 fieldlength0=10
 calcA0=1
@@ -263,13 +267,22 @@ altname7=0
 altname8=0
 altname9=0
 altname10=0
+altprefix1=0
+altprefix2=0
+altprefix3=0
+altprefix4=0
+altprefix5=0
+altprefix6=0
+altprefix7=0
+altprefix8=0
+altprefix9=0
+altprefix10=0
 
 [Page4]
 numfile=0
-ouputdir=/home/pch/.skychart/ds2000
+ouputdir=
 index=1
 altindex=0
-prefalt=1
 prefname=0
 append=0
 
@@ -289,6 +302,7 @@ nebtype12=***,3STAR
 nebtype13=Ast,ASTER,4STAR,5STAR,6STAR,7STAR,8STAR
 nebtype14=-,PD,NONEX
 nebtype15=Unk
+nebtype16=Circle
 unit1=d,°
 unit2=m,'
 unit3=s,"
@@ -297,6 +311,7 @@ unit3=s,"
 linetype1=start,0
 linetype2=end,1
 linetype3=vertex, ,2
+linetype4=
 
 [Page7]
 colorstr1=White,W,1
