@@ -3856,6 +3856,9 @@ for i:=1 to 10 do begin
      end;
   end;
 end;
+if trim(txt)='' then txt:=rec.options.ShortName;
+if trim(txt)='' then txt:=rec.options.LongName;
+if trim(txt)='' then txt:='?';
 end;
 
 function Tcatalog.CheckPath(cat: integer; catpath:string):boolean;
