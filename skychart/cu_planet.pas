@@ -878,15 +878,17 @@ var
    q : double;
    t,sm,mm,md : double;
    w : array[1..3] of double;
-   planet_arr: Array_5D;
+   planet_arr,sun_arr: Array_5D;
    i : integer;
    pp : double;
 begin
-t0:=t0-(1.27/3600/24); // mean lighttime
 if load_de(t0) then begin
-   Calc_Planet_de(t0, 10, planet_arr,false,3,false);
-   for i:=0 to 2 do w[i+1]:=planet_arr[i];
-   dkm:=sqrt(w[1]*w[1]+w[2]*w[2]+w[3]*w[3]);
+   SunRect(t0,false,sun_arr[0],sun_arr[1],sun_arr[2]);
+   Calc_Planet_de(t0, 10, planet_arr,true,3,false);
+   t0:=t0-tlight*(sqrt(planet_arr[0]*planet_arr[0]+planet_arr[1]*planet_arr[1]+planet_arr[2]*planet_arr[2]));
+   Calc_Planet_de(t0, 10, planet_arr,true,11,false);
+   for i:=0 to 2 do w[i+1]:=planet_arr[i]+sun_arr[i];
+   dkm:=km_au*sqrt(w[1]*w[1]+w[2]*w[2]+w[3]*w[3]);
    alpha:=arctan2(w[2],w[1]);
    if (alpha<0) then alpha:=alpha+2*pi;
    pp:=sqrt(w[1]*w[1]+w[2]*w[2]);
@@ -895,6 +897,7 @@ if load_de(t0) then begin
    Feph_method:='DE'+inttostr(de_type);
 end
 else  if (t0>jdmin404)and(t0<jdmax404) then  begin  // use plan404
+   t0:=t0-(1.27/3600/24); // mean lighttime
    p.JD:=t0;
    p.ipla:=11;
    Plan404(addr(p));
