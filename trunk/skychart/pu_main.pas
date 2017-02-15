@@ -3647,7 +3647,7 @@ try
  f_config.TreeView1.enabled:=true;
  f_config.previous.enabled:=true;
  f_config.next.enabled:=true;
- f_config.showmodal;
+ ShowModalForm(f_config);
  if f_config.ModalResult=mrOK then begin
    activateconfig(f_config.cmain,f_config.csc,f_config.ccat,f_config.cshr,f_config.cplot,f_config.cdss,f_config.Applyall.Checked);
  end;
@@ -4017,7 +4017,7 @@ cfgm.persdir:=privatedir;
 ConfigCatalog.f_config_catalog1.cmain.Assign(cfgm);
 formpos(ConfigCatalog,mouse.cursorpos.x,mouse.cursorpos.y);
 ConfigCatalog.f_config_catalog1.PageControl1.PageIndex:=page;
-ConfigCatalog.showmodal;
+ShowModalForm(ConfigCatalog);
 if ConfigCatalog.ModalResult=mrOK then begin
  ConfigCatalog.f_config_catalog1.ActivateGCat;
  ConfigCatalog.f_config_catalog1.ActivateUserObjects;
@@ -4102,7 +4102,7 @@ ConfigDisplay.f_config_display1.cmain.Assign(cfgm);
 ///////////////////////////////
 {$endif}
 ConfigDisplay.f_config_display1.PageControl1.PageIndex:=pagegroup;
-ConfigDisplay.showmodal;
+ShowModalForm(ConfigDisplay);
 if ConfigDisplay.ModalResult=mrOK then begin
  activateconfig(ConfigDisplay.f_config_display1.cmain,ConfigDisplay.f_config_display1.csc,ConfigDisplay.f_config_display1.ccat,ConfigDisplay.f_config_display1.cshr,ConfigDisplay.f_config_display1.cplot,nil,false);
 end;

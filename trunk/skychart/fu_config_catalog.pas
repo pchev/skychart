@@ -479,7 +479,7 @@ procedure Tf_config_catalog.CatgenClick(Sender: TObject);
 begin
 if Fcatgen=nil then Fcatgen:=Tf_catgen.create(self);
 FormPos(Fcatgen,mouse.CursorPos.x,mouse.CursorPos.y);
-Fcatgen.ShowModal;
+ShowModalForm(Fcatgen);
 end;
 
 procedure Tf_config_catalog.Button5Click(Sender: TObject);
@@ -514,7 +514,7 @@ begin
   f_voconfig.vourlnum := cmain.VOurl;
   f_voconfig.vo_maxrecord := cmain.VOmaxrecord;
   formpos(f_voconfig,left,top);
-  f_voconfig.ShowModal;
+  ShowModalForm(f_voconfig);
   cmain.VOforceactive:=true;
   cmain.VOurl:=f_voconfig.vourlnum;
   cmain.VOmaxrecord := f_voconfig.vo_maxrecord;
@@ -561,7 +561,7 @@ f_voconfig.vourlnum := cmain.VOurl;
 f_voconfig.vo_maxrecord := cmain.VOmaxrecord;
 f_voconfig.UpdateCatalog(fn);
 formpos(f_voconfig,left,top);
-f_voconfig.ShowModal;
+ShowModalForm(f_voconfig);
 cmain.VOurl:=f_voconfig.vourlnum;
 cmain.VOmaxrecord := f_voconfig.vo_maxrecord;
 f_voconfig.Free;
