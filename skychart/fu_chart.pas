@@ -443,6 +443,10 @@ type
     procedure MoveCamera(angle:single);
     Procedure cmdEq2Hz(ra,de : double ; var a,h : double);
     Procedure cmdHz2Eq(a,h : double; var ra,de : double);
+    Procedure cmdEq2Gal(ra,de : double ; var l,b : double);
+    Procedure cmdGal2Eq(l,b : double; var ra,de : double);
+    Procedure cmdEq2Ecl(ra,de : double ; var l,b : double);
+    Procedure cmdEcl2Eq(l,b : double; var ra,de : double);
     property OnImageSetFocus: TNotifyEvent read FImageSetFocus write FImageSetFocus;
     property OnSetScriptMenu: TnotifyEvent read FSetScriptMenu write FSetScriptMenu;
     property OnSetFocus: TNotifyEvent read FSetFocus write FSetFocus;
@@ -6143,6 +6147,26 @@ begin
  a:=rmod(a-pi,pi2);
  Hz2Eq(a,h,ra,de,sc.cfgsc);
  ra:=Rmod(sc.cfgsc.CurST-ra+pi2,pi2);
+end;
+
+Procedure Tf_chart.cmdEq2Gal(ra,de : double ; var l,b : double);
+begin
+ Eq2Gal(ra,de,l,b,sc.cfgsc) ;
+end;
+
+Procedure Tf_chart.cmdGal2Eq(l,b : double; var ra,de : double);
+begin
+ Gal2Eq(l,b,ra,de,sc.cfgsc) ;
+end;
+
+Procedure Tf_chart.cmdEq2Ecl(ra,de : double ; var l,b : double);
+begin
+ Eq2Ecl(ra,de,sc.cfgsc.ecl,l,b) ;
+end;
+
+Procedure Tf_chart.cmdEcl2Eq(l,b : double; var ra,de : double);
+begin
+ Ecl2Eq(l,b,sc.cfgsc.ecl,ra,de) ;
 end;
 
 end.
