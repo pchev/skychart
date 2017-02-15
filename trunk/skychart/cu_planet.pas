@@ -54,7 +54,7 @@ type
     Feph_method: string;
     searchid: string;
     smsg:Tstrings;
-    SolAstrometric, SolBarycenter : boolean;
+    SolBarycenter : boolean;
     CurrentStep,CurrentPlanet,n_com,n_ast,jdastnstep : integer;
     CurrentAstStep,CurrentAsteroid : integer;
     CurrentComStep,CurrentComet : integer;
@@ -76,7 +76,7 @@ type
      procedure FormatPlanet(St,Pl:integer; cfgsc: Tconf_skychart; var nom,ma,date,desc:string);
      Procedure Plan(ipla: integer; t: double ; var p: TPlanData);
      Procedure Planet(ipla : integer; t0 : double ; var alpha,delta,distance,illum,phase,diameter,magn,dp,xp,yp,zp,vel : double);
-     Procedure SunRect(t0 : double ; astrometric : boolean; var x,y,z : double;barycenter:boolean=false);
+     Procedure SunRect(t0 : double ; var x,y,z : double;barycenter:boolean=false);
      Procedure Sun(t0 : double; var alpha,delta,dist,diam : double);
      Procedure SunEcl(t0 : double ; var l,b : double);
      procedure PlanSat(isat:integer; jde:double; var alpha,delta,distance: double; var supconj:boolean);
@@ -283,24 +283,22 @@ case ipla of
 end;
 end;
 
-Procedure TPlanet.SunRect(t0 : double ; astrometric : boolean; var x,y,z : double;barycenter:boolean=false);
+Procedure TPlanet.SunRect(t0 : double ; var x,y,z : double;barycenter:boolean=false);
 var p :TPlanetData;
     planet_arr: Array_5D;
-    tjd : double;
     i,sol : integer;
 begin
-if (t0=SolT0)and(astrometric=Solastrometric)and(SolBarycenter=barycenter) then begin
+if (t0=SolT0)and(SolBarycenter=barycenter) then begin
    x:=XSol;
    y:=YSol;
    z:=ZSol;
    end
 else begin
-if astrometric then tjd:=t0-tlight
-               else tjd:=t0;
-if load_de(tjd) then begin    // use jpl DE-
-  if barycenter then sol:=12
+if load_de(t0) then begin    // use jpl DE-
+  if barycenter
+     then sol:=12
      else sol:=11;
-  Calc_Planet_de(tjd, sol, planet_arr,true,3,false);
+  Calc_Planet_de(t0, sol, planet_arr,true,3,false);
   x:=planet_arr[0];
   y:=planet_arr[1];
   z:=planet_arr[2];
@@ -308,7 +306,7 @@ if load_de(tjd) then begin    // use jpl DE-
 end
 else if (t0>jdmin404)and(t0<jdmax404) then begin    // use Plan404
      p.ipla:=3;
-     p.JD:=tjd;
+     p.JD:=t0;
      i:=Plan404(addr(p));
      if (i<>0) then exit;
      x:=-p.x;
@@ -323,7 +321,6 @@ end else begin
 end;
 // save result for repetitive call
 SolBarycenter:=barycenter;
-Solastrometric:=astrometric;
 SolT0:=t0;
 XSol:=x;
 YSol:=y;
@@ -334,7 +331,7 @@ end;
 Procedure TPlanet.Sun(t0 : double; var alpha,delta,dist,diam : double);
 var x,y,z,qr : double;
 begin
-  SunRect(t0,false,x,y,z,false);
+  SunRect(t0,x,y,z);
   dist:=sqrt(x*x+y*y+z*z);
   alpha:=arctan2(y,x);
   if (alpha<0) then alpha:=alpha+pi2;
@@ -346,7 +343,7 @@ end;
 Procedure TPlanet.SunEcl(t0 : double ; var l,b : double);
 var x1,y1,z1,x,y,z,qr : double;
 begin
-SunRect(t0,false,x1,y1,z1,false);
+SunRect(t0,x1,y1,z1);
 // rotate equatorial to ecliptic
 x:=x1;
 y:= coseps2k*y1 + sineps2k*z1;
@@ -393,7 +390,7 @@ if ipl<>0 then begin
       8: NepSatOne(jde-lighttime,ix,satx,saty,satz);
       9: PluSatOne(jde-lighttime,ix,satx,saty,satz);
    end;
-   SunRect(jde,false,xs,ys,zs);
+   SunRect(jde,xs,ys,zs);
    x:=xp+xs;
    y:=yp+ys;
    z:=zp+zs;
@@ -418,7 +415,7 @@ var i : integer;
 begin
 result:=MarSatAll(jde-lighttime,xst,yst,zst);
 if result=0 then begin
-  SunRect(jde,false,xs,ys,zs);
+  SunRect(jde,xs,ys,zs);
   x:=xp+xs;
   y:=yp+ys;
   z:=zp+zs;
@@ -447,7 +444,7 @@ begin
 if smallsat then n:=8 else n:=4;
 result:=JupSatAll(jde-lighttime,smallsat, xst,yst,zst);
 if result=0 then begin
-  SunRect(jde,false,xs,ys,zs);
+  SunRect(jde,xs,ys,zs);
   x:=xp+xs;
   y:=yp+ys;
   z:=zp+zs;
@@ -476,7 +473,7 @@ begin
 if smallsat then n:=19 else n:=9;
 result:=SatSatAll(jde-lighttime,smallsat,xst,yst,zst);
 if result=0 then begin
-  SunRect(jde,false,xs,ys,zs);
+  SunRect(jde,xs,ys,zs);
   x:=xp+xs;
   y:=yp+ys;
   z:=zp+zs;
@@ -505,7 +502,7 @@ begin
 if smallsat then n:=18 else n:=5;
 result:=UraSatAll(jde-lighttime,smallsat,xst,yst,zst);
 if result=0 then begin
-  SunRect(jde,false,xs,ys,zs);
+  SunRect(jde,xs,ys,zs);
   x:=xp+xs;
   y:=yp+ys;
   z:=zp+zs;
@@ -534,7 +531,7 @@ begin
 if smallsat then n:=8 else n:=2;
 result:=NepSatAll(jde-lighttime,smallsat,xst,yst,zst);
 if result=0 then begin
-  SunRect(jde,false,xs,ys,zs);
+  SunRect(jde,xs,ys,zs);
   x:=xp+xs;
   y:=yp+ys;
   z:=zp+zs;
@@ -562,7 +559,7 @@ var i : integer;
 begin
 result:=PluSatAll(jde-lighttime,xst,yst,zst);
 if result=0 then begin
-  SunRect(jde,false,xs,ys,zs);
+  SunRect(jde,xs,ys,zs);
   x:=xp+xs;
   y:=yp+ys;
   z:=zp+zs;
@@ -883,7 +880,7 @@ var
    pp : double;
 begin
 if load_de(t0) then begin
-   SunRect(t0,false,sun_arr[0],sun_arr[1],sun_arr[2]);
+   SunRect(t0,sun_arr[0],sun_arr[1],sun_arr[2]);
    Calc_Planet_de(t0, 10, planet_arr,true,3,false);
    t0:=t0-tlight*(sqrt(planet_arr[0]*planet_arr[0]+planet_arr[1]*planet_arr[1]+planet_arr[2]*planet_arr[2]));
    Calc_Planet_de(t0, 10, planet_arr,true,11,false);
@@ -1763,7 +1760,7 @@ PROCEDURE TPlanet.Comet(jd :Double; lightcor:boolean; VAR ar,de,dist,r,elong,pha
 VAR xs,ys,zs,rr,cxc,cyc,czc,n1,ll :Double;
     n:integer;
 BEGIN
-SunRect(jd,false,xs,ys,zs);
+SunRect(jd,xs,ys,zs);
 OrbRect(jd,xc,yc,zc,r);
 dist:=sqrt((xc+xs)*(xc+xs)+(yc+ys)*(yc+ys)+(zc+zs)*(zc+zs));
 if lightcor then begin
@@ -1858,7 +1855,7 @@ end;
 BEGIN
 da:=astelem.Aa ;                     { meeus 25.12 }
 n0:=0.01720209895/(da*sqrt(da));
-SunRect(jd,false,xs,ys,zs);
+SunRect(jd,xs,ys,zs);
 AstGeom;
 if highprec then begin
    jd:=jd-dist*tlight;
@@ -2572,7 +2569,7 @@ jdaststep:=step;
 jdastnstep:=round((jd2-jd1)/step)+1;
 SetLength(AstSol,jdastnstep);
 for i:=0 to jdastnstep-1 do begin
-  SunRect(jd1+i*step,false,x,y,z);
+  SunRect(jd1+i*step,x,y,z);
   AstSol[i,0]:=jd1+i*step;
   AstSol[i,1]:=x;
   AstSol[i,2]:=y;
@@ -2985,7 +2982,7 @@ if not ok then begin
   abm:=false;
 end;
 // Sun light deflection
-SunRect(j,false,sx,sy,sz,false);
+SunRect(j,sx,sy,sz);
 if  Feph_method<>'' then begin
   // twice the gravitational radius of the Sun divided by the Sun-Earth distance
   gr2e:=grsun/(sqr(sx*sx+sy*sy+sz*sz));

@@ -821,7 +821,7 @@ else begin
    cfgsc.asl:=false;
 end;
 // Earth barycentric position in parsec for parallax
-fplanet.SunRect(cfgsc.CurJDTT,false,v1,v2,v3,true);
+fplanet.SunRect(cfgsc.CurJDTT,v1,v2,v3,true);
 cfgsc.EarthB[1]:=-v1*au2parsec;
 cfgsc.EarthB[2]:=-v2*au2parsec;
 cfgsc.EarthB[3]:=-v3*au2parsec;
