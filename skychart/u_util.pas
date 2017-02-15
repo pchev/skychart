@@ -136,6 +136,7 @@ procedure ISleep(milli:integer);
 function CompareVersion(v1,v2: string):integer;
 function strim(const S: string): string;
 procedure DeleteFilesInDir(dir:string);
+function ShowModalForm(f:TForm):TModalResult;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -2527,6 +2528,33 @@ i:=findfirst(slash(dir)+'*',0,fs);
    i:=findnext(fs);
  end;
  findclose(fs);
+end;
+
+function ShowModalForm(f:TForm):TModalResult;
+{$ifdef darwin}
+var fstyle:TFormStyle;
+{$endif}
+begin
+{ TODO : Mac OSX: Test if bug with colordialog in a modal form still present and remove that }
+{$ifdef darwin}
+  f.ModalResult:=mrNone;
+  fstyle:=f.FormStyle;
+  try
+  f.FormStyle:=fsStayOnTop;
+  f.Show;
+  while (f.visible)and(f.ModalResult=mrNone) do begin
+    sleep(100);
+    Application.ProcessMessages;
+  end;
+  result:=f.ModalResult;
+  if result=mrNone then result:=mrCancel;
+  finally
+   f.FormStyle:=fstyle;
+  end;
+{$else}
+  result:=f.ShowModal;
+{$endif}
+
 end;
 
 end.
