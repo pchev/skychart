@@ -485,7 +485,7 @@ end else begin
   // aberration and light deflection constant
   f_calendar.planet.aberration(f_calendar.config.CurJDTT,f_calendar.config.abv,f_calendar.config.ehn,f_calendar.config.ab1,f_calendar.config.abe,f_calendar.config.abp,f_calendar.config.gr2e,f_calendar.config.abm,f_calendar.config.asl);
   // Earth barycentric position in parsec for parallax
-  f_calendar.planet.SunRect(f_calendar.config.CurJDTT,false,v1,v2,v3,true);
+  f_calendar.planet.SunRect(f_calendar.config.CurJDTT,v1,v2,v3,true);
   f_calendar.config.EarthB[1]:=-v1*au2parsec;
   f_calendar.config.EarthB[2]:=-v2*au2parsec;
   f_calendar.config.EarthB[3]:=-v3*au2parsec;
