@@ -157,6 +157,7 @@ type
     property ReadOnly default True;
     property Caption: string read Fcaption write Fcaption;
     property JD: double read savejd write SetJD;
+    property OnChange;
   end;
 
 { TTimePicker }
