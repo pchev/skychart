@@ -235,8 +235,12 @@ type
     Function doDEtoStr(var de: Double) : string;
     Function doStrtoAR(str:string; var ar: Double) : boolean;
     Function doStrtoDE(str:string; var de: Double) : boolean;
-    Procedure doEq2Hz(ra,de : double ; var a,h : double);
-    Procedure doHz2Eq(a,h : double; var ra,de : double);
+    Procedure doEq2Hz(var ra,de : double ; var a,h : double);
+    Procedure doHz2Eq(var a,h : double; var ra,de : double);
+    Procedure doEq2Gal(var ra,de : double ; var l,b : double);
+    Procedure doGal2Eq(var l,b : double; var ra,de : double);
+    Procedure doEq2Ecl(var ra,de : double ; var l,b : double);
+    Procedure doEcl2Eq(var l,b : double; var ra,de : double);
     function doFormatFloat(Const Format : String; var Value : double) : String;
     function doFormat(Const Fmt : String; const Args : Array of const) : String;
     Procedure doStrtoFloatD(str:string; var defval: Double; var val: Double);
@@ -379,14 +383,34 @@ begin
   if assigned(FExecuteCmd) then result:=FExecuteCmd(cname,arg);
 end;
 
-Procedure Tf_scriptengine.doEq2Hz(ra,de : double ; var a,h : double);
+Procedure Tf_scriptengine.doEq2Hz(var ra,de : double ; var a,h : double);
 begin
   if assigned(FActiveChart) then FActiveChart.cmdEq2Hz(ra,de,a,h);
 end;
 
-Procedure Tf_scriptengine.doHz2Eq(a,h : double; var ra,de : double);
+Procedure Tf_scriptengine.doHz2Eq(var a,h : double; var ra,de : double);
 begin
   if assigned(FActiveChart) then FActiveChart.cmdHz2Eq(a,h,ra,de);
+end;
+
+Procedure Tf_scriptengine.doEq2Gal(var ra,de : double ; var l,b : double);
+begin
+  if assigned(FActiveChart) then FActiveChart.cmdEq2Gal(ra,de,l,b);
+end;
+
+Procedure Tf_scriptengine.doGal2Eq(var l,b : double; var ra,de : double);
+begin
+  if assigned(FActiveChart) then FActiveChart.cmdGal2Eq(l,b,ra,de);
+end;
+
+Procedure Tf_scriptengine.doEq2Ecl(var ra,de : double ; var l,b : double);
+begin
+  if assigned(FActiveChart) then FActiveChart.cmdEq2Ecl(ra,de,l,b);
+end;
+
+Procedure Tf_scriptengine.doEcl2Eq(var l,b : double; var ra,de : double);
+begin
+  if assigned(FActiveChart) then FActiveChart.cmdEcl2Eq(l,b,ra,de);
 end;
 
 function Tf_scriptengine.doFormatFloat(Const Format : String; var Value : double) : String;
@@ -2153,8 +2177,12 @@ with Sender as TPSScript do begin
   AddMethod(self, @Tf_scriptengine.doStrtoDE, 'Function StrtoDE(str:string; var de: Double) : boolean;');
   AddMethod(self, @Tf_scriptengine.doJDtoStr, 'Function JDtoStr(var jd: Double) : string;');
   AddMethod(self, @Tf_scriptengine.doStrtoJD, 'Function StrtoJD(dt:string; var jdt: Double) : boolean;');
-  AddMethod(self, @Tf_scriptengine.doEq2Hz, 'Procedure Eq2Hz(ra,de : double ; var a,h : double);');
-  AddMethod(self, @Tf_scriptengine.doHz2Eq, 'Procedure Hz2Eq(a,h : double; var ra,de : double);');
+  AddMethod(self, @Tf_scriptengine.doEq2Hz, 'Procedure Eq2Hz(var ra,de : double ; var a,h : double);');
+  AddMethod(self, @Tf_scriptengine.doHz2Eq, 'Procedure Hz2Eq(var a,h : double; var ra,de : double);');
+  AddMethod(self, @Tf_scriptengine.doEq2Gal, 'Procedure Eq2Gal(var ra,de : double ; var l,b : double);');
+  AddMethod(self, @Tf_scriptengine.doGal2Eq, 'Procedure Gal2Eq(var l,b : double; var ra,de : double);');
+  AddMethod(self, @Tf_scriptengine.doEq2Ecl, 'Procedure Eq2Ecl(var ra,de : double ; var l,b : double);');
+  AddMethod(self, @Tf_scriptengine.doEcl2Eq, 'Procedure Ecl2Eq(var l,b : double; var ra,de : double);');
   AddMethod(self, @Tf_scriptengine.doFormatFloat, 'function FormatFloat(Const Format : String; var Value : double) : String;');
   AddMethod(self, @Tf_scriptengine.doStrtoFloatD, 'Procedure StrtoFloatD(str:string; var defval: Double; var val: Double);');
   AddMethod(self, @Tf_scriptengine.doStringReplace, 'function StringReplace(str,s1,s2: String): string;');
