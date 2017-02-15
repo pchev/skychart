@@ -4994,9 +4994,9 @@ def_cfgsc.MovedLabelLine:=true;
 def_cfgsc.ConstLatinLabel:=false;
 def_cfgsc.PlanetParalaxe:=true;
 def_cfgsc.ShowEarthShadow:=false;
-def_cfgsc.GRSlongitude:=208.0;
-def_cfgsc.GRSjd:=jd(2014,1,31,0);
-def_cfgsc.GRSdrift:=16.5/365.25;
+def_cfgsc.GRSlongitude:=262.5;
+def_cfgsc.GRSjd:=jd(2017,2,1,0);
+def_cfgsc.GRSdrift:=18.2/365.25;
 def_cfgsc.FindOk:=false;
 def_cfgsc.nummodlabels:=0;
 def_cfgsc.posmodlabels:=0;
@@ -6309,6 +6309,13 @@ end;
 if  Config_Version < '3.11x' then begin
   if (cfgm.btnsize=24) then cfgm.btnsize:=28;
 end;
+if  Config_Version < '3.11y' then begin
+  // update Jupiter GRS default values
+  def_cfgsc.GRSlongitude:=262.5;
+  def_cfgsc.GRSjd:=jd(2017,2,1,0);
+  def_cfgsc.GRSdrift:=18.2/365.25;
+end;
+
 // cleanup xplanet tmp directories after each version change, see: u_orbits ScaledPlanetMapDir_Individual
 DeleteFilesInDir(slash(TempDir)+'32');
 DeleteFilesInDir(slash(TempDir)+'64');

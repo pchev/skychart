@@ -47,7 +47,7 @@ type
 
 const
   cdcversion = '3.11-svn';
-  cdcver = '3.11x';
+  cdcver = '3.11y';
   cdccpy = 'Copyright (C) 2002-2017 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf +
     'Peter Dean,' + crlf +
@@ -496,7 +496,7 @@ const
   URL_CELESTRAK2 = 'http://celestrak.com/NORAD/elements/visual.txt';
 
 
-  URL_GRS = 'http://jupos.privat.t-online.de/rGrs.htm';
+  URL_GRS = 'http://www.ap-i.net/pub/virtualplanet/grs.txt';
   URL_JUPOS = 'http://jupos.org';
 
   URL_IERSBulletins = 'http://www.iers.org/IERS/EN/Publications/Bulletins/bulletins.html';

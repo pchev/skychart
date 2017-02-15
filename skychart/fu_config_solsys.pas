@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses u_help, u_translation, u_constant, u_util, u_projection, cu_database, cu_radec,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math,
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math, IniFiles,
   Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources,
   downloaddialog, jdcalendar, EditBtn, Process, LazHelpHTML, LazUTF8, LazFileUtils;
 
@@ -913,9 +913,46 @@ csc.ShowEarthShadow:=PlanetBox3.checked;
 end;
 
 procedure Tf_config_solsys.BitBtn37Click(Sender: TObject);
+var dl:TDownloadDialog;
+    inif: TMeminifile;
+    fn,section: string;
+    y,m,d: Integer;
+    h: double;
 begin
-ExecuteFile(URL_GRS);
+ dl:=TDownloadDialog.Create(self);
+ dl.SocksProxy:='';
+ dl.SocksType:='';
+ dl.HttpProxy:='';
+ dl.HttpProxyPort:='';
+ dl.HttpProxyUser:='';
+ dl.HttpProxyPass:='';
+ dl.ConfirmDownload:=false;
+ dl.QuickCancel:=true;
+ dl.URL:=URL_GRS;
+ fn:=slash(TempDir)+'grs.txt';
+ dl.SaveToFile:=fn;
+ if dl.Execute and FileExists(fn) then begin
+   inif:=TMeminifile.create(fn);
+   try
+   section:='grs';
+   djd(GRSJDDate.JD,y,m,d,h);
+   GRS.Value:=inif.ReadFloat(section,'RefGRSLon',GRS.Value);
+   GRSdrift.Value:=inif.ReadFloat(section,'RefGRSdrift',GRSdrift.Value);
+   y:=inif.ReadInteger(section,'RefGRSY',y);
+   m:=inif.ReadInteger(section,'RefGRSM',m);
+   d:=inif.ReadInteger(section,'RefGRSD',d);
+   GRSJDDate.JD:=jd(y,m,d,0);
+   csc.GRSlongitude:=grs.value;
+   csc.GRSdrift := GRSdrift.Value/365.25;
+   csc.GRSjd := GRSJDDate.JD;
+   ShowMessage(rsUpdatedSucce);
+   finally
+    inif.Free;
+   end;
+ end;
+ dl.free;
 end;
+
 
 procedure Tf_config_solsys.UpdComList;
 begin
