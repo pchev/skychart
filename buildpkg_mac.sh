@@ -33,7 +33,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   ./configure $configopt prefix=$builddir target=x86_64-darwin
   if [[ $? -ne 0 ]]; then exit 1;fi
   make clean
-  make
+  fpcopts="-CX -XX -Xs" make
   if [[ $? -ne 0 ]]; then exit 1;fi
   make install
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -68,7 +68,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   cd $wd
   rm -rf $basedir
   make clean
-  fpcopts="-O1 -g -gl -Ci -Co -Ct" make
+  fpcopts="-g -gl -Ci -Co -Ct" make
   if [[ $? -ne 0 ]]; then exit 1;fi
   mkdir $basedir
   mkdir $basedir/debug
