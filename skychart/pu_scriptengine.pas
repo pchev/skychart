@@ -1085,7 +1085,7 @@ begin
     n:=ReadInteger(section,'NumToolbar1',0);
     ConfigToolbar1.Clear;
     for j:=0 to n-1 do ConfigToolbar1.Add(ReadString(section,'toolbar1_'+inttostr(j),''));
-    n:=ReadInteger(section,'NumNoolbar2',0);
+    n:=ReadInteger(section,'NumToolbar2',0);
     ConfigToolbar2.Clear;
     for j:=0 to n-1 do ConfigToolbar2.Add(ReadString(section,'toolbar2_'+inttostr(j),''));
     n:=ReadInteger(section,'NumComponent',0);
