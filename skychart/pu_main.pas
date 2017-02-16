@@ -1937,6 +1937,9 @@ end;
 {$ifdef mswindows}
 tracefile:=slash(privatedir)+tracefile;
 {$endif}
+{$ifdef darwin}
+tracefile:=slash(privatedir)+tracefile;
+{$endif}
 VarObs:=slash(appdir)+DefaultVarObs;     // varobs normally at same location as skychart
 if not FileExists(VarObs) then VarObs:=DefaultVarObs; // if not try in $PATH
 helpdir:=slash(appdir)+slash('doc');

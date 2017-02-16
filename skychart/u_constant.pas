@@ -1337,7 +1337,7 @@ var
   xplanet_dir: string = '';
 {$endif}
 {$ifdef darwin}
-  tracefile: string = ''; // to stdout
+  tracefile: string = 'cdc_trace.txt';
   dcd_cmd: string = 'cd /usr/local/dcd ; python ./dcd.py';
   use_xplanet: boolean = True;
   xplanet_dir: string = 'data/planet';

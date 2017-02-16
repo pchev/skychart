@@ -1318,6 +1318,7 @@ if VerboseMsg then WriteTrace('SkyChart '+c.chartname+': end thread');
 if timingout then begin
   for i:=0 to r-1 do thread[i].Terminate;
   sleep(10);
+  WriteTrace('FITS Image timeout');
 end;
 ProjImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
 imabmp.freeimage;
