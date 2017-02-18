@@ -3192,6 +3192,7 @@ object f_main: Tf_main
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
+        OnMouseUp = tbFOVMouseUp
       end
       object tbFOV2: TSpeedButton
         Tag = 1
@@ -3204,6 +3205,7 @@ object f_main: Tf_main
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
+        OnMouseUp = tbFOVMouseUp
       end
       object tbFOV3: TSpeedButton
         Tag = 2
@@ -3216,6 +3218,7 @@ object f_main: Tf_main
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
+        OnMouseUp = tbFOVMouseUp
       end
       object tbFOV4: TSpeedButton
         Tag = 3
@@ -3228,6 +3231,7 @@ object f_main: Tf_main
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
+        OnMouseUp = tbFOVMouseUp
       end
       object tbFOV5: TSpeedButton
         Tag = 4
@@ -3240,6 +3244,7 @@ object f_main: Tf_main
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
+        OnMouseUp = tbFOVMouseUp
       end
       object tbFOV6: TSpeedButton
         Tag = 5
@@ -3252,6 +3257,7 @@ object f_main: Tf_main
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
+        OnMouseUp = tbFOVMouseUp
       end
       object tbFOV7: TSpeedButton
         Tag = 6
@@ -3264,6 +3270,7 @@ object f_main: Tf_main
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
+        OnMouseUp = tbFOVMouseUp
       end
       object tbFOV8: TSpeedButton
         Tag = 7
@@ -3276,6 +3283,7 @@ object f_main: Tf_main
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
+        OnMouseUp = tbFOVMouseUp
       end
       object tbFOV9: TSpeedButton
         Tag = 8
@@ -3288,6 +3296,7 @@ object f_main: Tf_main
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
+        OnMouseUp = tbFOVMouseUp
       end
       object tbFOV10: TSpeedButton
         Tag = 9
@@ -3301,6 +3310,7 @@ object f_main: Tf_main
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
+        OnMouseUp = tbFOVMouseUp
       end
     end
   end
@@ -11519,14 +11529,6 @@ object f_main: Tf_main
       EB00A53900FFA53900FFEBEBEB00
     }
   end
-  object PopupMenu1: TPopupMenu
-    left = 144
-    top = 168
-    object ResetAllLabels1: TMenuItem
-      Caption = 'Reset All Labels'
-      OnClick = ResetAllLabels1Click
-    end
-  end
   object PopupConfig: TPopupMenu
     left = 56
     top = 168
@@ -12408,6 +12410,18 @@ object f_main: Tf_main
       Hint = 'Track'
       ImageIndex = 80
       OnExecute = TrackExecute
+    end
+  end
+  object PopupToolbar: TPopupMenu
+    left = 168
+    top = 172
+    object PopupToolbar1: TMenuItem
+      Caption = 'Edit Toolbar'
+      OnClick = MenuEditToolbarClick
+    end
+    object PopupToolbar2: TMenuItem
+      Caption = 'New Item2'
+      OnClick = PopupToolbar2Click
     end
   end
 end
