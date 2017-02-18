@@ -12415,13 +12415,13 @@ object f_main: Tf_main
   object PopupToolbar: TPopupMenu
     left = 168
     top = 172
+    object PopupToolbar2: TMenuItem
+      Caption = 'specific menu'
+      OnClick = PopupToolbar2Click
+    end
     object PopupToolbar1: TMenuItem
       Caption = 'Edit Toolbar'
       OnClick = MenuEditToolbarClick
-    end
-    object PopupToolbar2: TMenuItem
-      Caption = 'New Item2'
-      OnClick = PopupToolbar2Click
     end
   end
 end
