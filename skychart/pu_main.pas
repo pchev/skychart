@@ -49,6 +49,9 @@ type
 
   Tf_main = class(TForm)
     AnimBackward: TAction;
+    PopupToolbar1: TMenuItem;
+    PopupToolbar2: TMenuItem;
+    PopupToolbar: TPopupMenu;
     Trajectories: TAction;
     ContainerPanel: TPanel;
     MenuTrajectory: TMenuItem;
@@ -218,8 +221,6 @@ type
     P0L1: TLabel;
     MenuReleaseNotes: TMenuItem;
     MenuViewScrollBar: TMenuItem;
-    ResetAllLabels1: TMenuItem;
-    PopupMenu1: TPopupMenu;
     SetupCatalog: TAction;
     MenuHomePage: TMenuItem;
     MenuMaillist: TMenuItem;
@@ -477,6 +478,7 @@ type
     procedure MultiFrame1CreateChild(Sender: TObject);
     procedure MultiFrame1DeleteChild(Sender: TObject);
     procedure PlanetInfoExecute(Sender: TObject);
+    procedure PopupToolbar2Click(Sender: TObject);
     procedure ResetRotationExecute(Sender: TObject);
     procedure rotate180Execute(Sender: TObject);
     procedure ScaleModeExecute(Sender: TObject);
@@ -484,6 +486,8 @@ type
     procedure ShowCompassExecute(Sender: TObject);
     procedure ShowUobjExecute(Sender: TObject);
     procedure ShowVOExecute(Sender: TObject);
+    procedure tbFOVMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure TelescopeSetupExecute(Sender: TObject);
     procedure TimeUChange(Sender: TObject);
     procedure ToolBarFOVResize(Sender: TObject);
@@ -1712,12 +1716,6 @@ end;
 for i:=0 to numscript-1 do begin
   Fscript[i].TimeVal.Position:=TimeVal.Position;
 end;
-end;
-
-procedure Tf_main.MagPanelMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
- if Button=mbRight then SetupChartPage(3);
 end;
 
 procedure Tf_main.FileExit1Execute(Sender: TObject);
@@ -2981,12 +2979,6 @@ if (MultiFrame1.ActiveObject is Tf_chart)
         end;
      end;
   end;
-end;
-
-procedure Tf_main.MDEditToolBar(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  if Button=mbRight then MenuEditToolbar.Click;
 end;
 
 procedure Tf_main.SyncChartExecute(Sender: TObject);
@@ -7529,8 +7521,8 @@ MenuUpdSoft.Caption:=rsSearchSoftwa;
 MenuUpdComet.Caption:=rsCometElement2;
 MenuUpdAsteroid.Caption:=rsAsteroidElem2;
 MenuUpdSatellite.Caption:=rsArtificialSa;
-// popmenu1
-ResetAllLabels1.caption:='&'+rsResetAllLabe;
+//Menu toolbar
+PopupToolbar1.Caption:=rsToolBarEdito+Ellipsis;
 
 // Other control
 // Mag panel
@@ -9315,54 +9307,167 @@ begin
 end;
 
 
-procedure Tf_main.ToolButtonMouseUp(Sender: TObject; Button: TMouseButton;  Shift: TShiftState; X, Y: Integer);
+procedure Tf_main.MDEditToolBar(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var sp: TPoint;
+begin
+  if Button=mbRight then begin
+    if (sender is TToolBar) then begin
+         PopupToolbar1.Caption:=rsToolBarEdito+Ellipsis;
+         PopupToolbar1.Visible:=true;
+         PopupToolbar2.Visible:=false;
+         sp:=TToolButton(sender).ClientToScreen(point(x,y));
+         PopupToolbar.PopUp(sp.x,sp.y);
+  end;
+end;
+end;
+
+procedure Tf_main.MagPanelMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var sp: TPoint;
+begin
+ if Button=mbRight then begin
+   PopupToolbar1.Caption:=rsToolBarEdito+Ellipsis;
+   PopupToolbar1.Visible:=true;
+   PopupToolbar2.Caption:=rsSetup+' / '+rsChartCoordin+' / '+rsObjectFilter+Ellipsis;
+   PopupToolbar2.Tag:=0;
+   PopupToolbar2.Visible:=true;
+   sp:=TControl(sender).ClientToScreen(point(x,y));
+   PopupToolbar.PopUp(sp.x,sp.y);
+ end;
+end;
+
+Procedure Tf_main.ToolButtonMouseUp(Sender: TObject; Button: TMouseButton;  Shift: TShiftState; X, Y: Integer);
 var act: string;
+    sp: TPoint;
+procedure SetMenu2(txt:string;n:integer);
+begin
+   PopupToolbar2.Caption:=txt;
+   PopupToolbar2.Tag:=n;
+   PopupToolbar2.Visible:=true;
+end;
 begin
 if (sender is TToolButton)and(TToolButton(sender).Action<>nil ) then begin
   act:=TToolButton(sender).Action.Name;
   if Button=mbRight then begin
-    if act='ShowStars'          then SetupCatalogPage(0)
-    else if act='ShowNebulae'   then SetupCatalogPage(1)
-    else if act='ShowLines'     then SetupDisplayPage(4)
-    else if act='ShowPictures'  then SetupPicturesPage(0)
-    else if act='ShowVO'        then SetupCatalogPage(3)
-    else if act='ShowUobj'      then SetupCatalogPage(4)
-    else if act='DSSImage'      then SetupPicturesPage(2)
-    else if act='SetPictures'   then SetupPicturesPage(1)
-    else if act='ShowPlanets'   then SetupSolsysPage(1)
-    else if act='ShowAsteroids' then SetupSolsysPage(3)
-    else if act='ShowComets'    then SetupSolsysPage(2)
-    else if act='ShowLine'      then SetupDisplayPage(4)
-    else if act='ShowMilkyWay'      then SetupDisplayPage(4)
-    else if act='Grid'          then SetupDisplayPage(4)
-    else if act='GridEQ'        then SetupDisplayPage(4)
-    else if act='ShowConstellationLine'   then SetupDisplayPage(4)
-    else if act='ShowConstellationLimit'  then SetupDisplayPage(4)
-    else if act='ShowGalacticEquator'     then SetupDisplayPage(4)
-    else if act='ShowEcliptic'  then SetupDisplayPage(4)
-    else if act='ShowCompass'   then SetupChartPage(4)
-    else if act='ShowMark'      then SetupDisplayPage(7)
-    else if act='ShowLabels'    then SetupDisplayPage(5)
-    else if act='EditLabels'    then PopupMenu1.PopUp
-    else if act='ShowObjectbelowHorizon'  then SetupObservatoryPage(1)
-    else if act='switchbackground'        then SetupDisplayPage(3)
-    else if act='switchstars'   then SetupDisplayPage(0)
-    else if act='ZoomBar'       then SetupChartPage(1)
-    else if act='listobj'       then SetupChartPage(5)
-    else if act='Animation'     then SetupTimePage(2)
-    else if act='TelescopeConnect'        then SetupSystemPage(2)
-    else if act='TelescopeSync'           then SetupSystemPage(2)
-    else if act='TelescopeSlew'           then SetupSystemPage(2)
-    else if act='TelescopeAbortSlew'      then SetupSystemPage(2)
-    else if act='EquatorialProjection'    then SetupChartPage(0)
-    else if act='AltAzProjection'         then SetupChartPage(0)
-    else if act='EclipticProjection'      then SetupChartPage(0)
-    else if act='GalacticProjection'      then SetupChartPage(0)
-    else if act='rot_plus'      then ResetRotationExecute(sender)
-    else if act='rot_minus'     then ResetRotationExecute(sender)
-    else if act='rotate180'     then ResetRotationExecute(sender)
+    PopupToolbar1.Caption:=rsToolBarEdito+Ellipsis;
+    PopupToolbar1.Visible:=true;
+    PopupToolbar2.Visible:=false;
+    if act='ShowStars'          then SetMenu2(rsSetup+' / '+rsCatalog+' / '+rsCdCStars+Ellipsis,1)
+    else if act='ShowNebulae'   then SetMenu2(rsSetup+' / '+rsCatalog+' / '+rsCdCNebulae+Ellipsis,2)
+    else if act='ShowLines'     then SetMenu2(rsSetup+' / '+rsDisplay+' / '+rsLines+Ellipsis,3)
+    else if act='ShowPictures'  then SetMenu2(rsSetup+' / '+rsPictures+' / '+rsDSOCatalogPi+Ellipsis,4)
+    else if act='ShowVO'        then SetMenu2(rsSetup+' / '+rsCatalog+' / '+rsVOCatalog+Ellipsis,5)
+    else if act='ShowUobj'      then SetMenu2(rsSetup+' / '+rsCatalog+' / '+rsUserDefinedO+Ellipsis,6)
+    else if act='DSSImage'      then SetMenu2(rsSetup+' / '+rsPictures+' / '+rsDSSRealSky+Ellipsis,7)
+    else if act='SetPictures'   then SetMenu2(rsSetup+' / '+rsPictures+' / '+rsBackgroundPi+Ellipsis,8)
+    else if act='ShowPlanets'   then SetMenu2(rsSetup+' / '+rsSolarSystem+' / '+rsPlanet+Ellipsis,9)
+    else if act='ShowAsteroids' then SetMenu2(rsSetup+' / '+rsSolarSystem+' / '+rsAsteroid+Ellipsis,10)
+    else if act='ShowComets'    then SetMenu2(rsSetup+' / '+rsSolarSystem+' / '+rsComet+Ellipsis,11)
+    else if act='ShowLine'      then SetMenu2(rsSetup+' / '+rsDisplay+' / '+rsLines+Ellipsis,12)
+    else if act='ShowMilkyWay'  then SetMenu2(rsSetup+' / '+rsDisplay+' / '+rsLines+Ellipsis,13)
+    else if act='Grid'          then SetMenu2(rsSetup+' / '+rsDisplay+' / '+rsLines+Ellipsis,14)
+    else if act='GridEQ'        then SetMenu2(rsSetup+' / '+rsDisplay+' / '+rsLines+Ellipsis,15)
+    else if act='ShowConstellationLine'   then SetMenu2(rsSetup+' / '+rsDisplay+' / '+rsLines+Ellipsis,16)
+    else if act='ShowConstellationLimit'  then SetMenu2(rsSetup+' / '+rsDisplay+' / '+rsLines+Ellipsis,17)
+    else if act='ShowGalacticEquator'     then SetMenu2(rsSetup+' / '+rsDisplay+' / '+rsLines+Ellipsis,18)
+    else if act='ShowEcliptic'  then SetMenu2(rsSetup+' / '+rsDisplay+' / '+rsLines+Ellipsis,19)
+    else if act='ShowCompass'   then SetMenu2(rsSetup+' / '+rsChartCoordin+' / '+rsGridSpacing+Ellipsis,20)
+    else if act='ShowMark'      then SetMenu2(rsSetup+' / '+rsDisplay+' / '+rsFinderCircle+Ellipsis,21)
+    else if act='ShowLabels'    then SetMenu2(rsSetup+' / '+rsDisplay+' / '+rsLabel2+Ellipsis,22)
+    else if act='EditLabels'    then SetMenu2(rsResetAllLabe,23)
+    else if act='ShowObjectbelowHorizon'  then SetMenu2(rsSetup+' / '+rsObservatory+' / '+rsHorizon+Ellipsis,24)
+    else if act='switchbackground'        then SetMenu2(rsSetup+' / '+rsDisplay+' / '+rsSkyColour+Ellipsis,25)
+    else if act='switchstars'   then SetMenu2(rsSetup+' / '+rsDisplay+Ellipsis,26)
+    else if act='ZoomBar'       then SetMenu2(rsSetup+' / '+rsChartCoordin+' / '+rsFieldOfVisio+Ellipsis,27)
+    else if act='listobj'       then SetMenu2(rsSetup+' / '+rsChartCoordin+' / '+rsObjectList+Ellipsis,28)
+    else if act='Animation'     then SetMenu2(rsSetup+' / '+rsDateTime+' / '+rsAnimation+Ellipsis,29)
+    else if act='TelescopeConnect'        then SetMenu2(rsSetup+' / '+rsGeneral+' / '+rsTelescope+Ellipsis,30)
+    else if act='TelescopeSync'           then SetMenu2(rsSetup+' / '+rsGeneral+' / '+rsTelescope+Ellipsis,31)
+    else if act='TelescopeSlew'           then SetMenu2(rsSetup+' / '+rsGeneral+' / '+rsTelescope+Ellipsis,32)
+    else if act='TelescopeAbortSlew'      then SetMenu2(rsSetup+' / '+rsGeneral+' / '+rsTelescope+Ellipsis,33)
+    else if act='EquatorialProjection'    then SetMenu2(rsSetup+' / '+rsChartCoordin+Ellipsis,34)
+    else if act='AltAzProjection'         then SetMenu2(rsSetup+' / '+rsChartCoordin+Ellipsis,35)
+    else if act='EclipticProjection'      then SetMenu2(rsSetup+' / '+rsChartCoordin+Ellipsis,36)
+    else if act='GalacticProjection'      then SetMenu2(rsSetup+' / '+rsChartCoordin+Ellipsis,37)
+    else if act='rot_plus'      then SetMenu2(rsResetRotatio,38)
+    else if act='rot_minus'     then SetMenu2(rsResetRotatio,39)
+    else if act='rotate180'     then SetMenu2(rsResetRotatio,40)
+    else if act='zoomplus'      then SetMenu2(rsSetup+' / '+rsChartCoordin+' / '+rsFieldOfVisio+Ellipsis,41)
+    else if act='zoomminus'     then SetMenu2(rsSetup+' / '+rsChartCoordin+' / '+rsFieldOfVisio+Ellipsis,42)
+    else if act='ViewNightVision' then SetMenu2(rsSetup+' / '+rsDisplay+' / '+rsColor+Ellipsis,43)
+    else if act='Print1'        then SetMenu2(rsFile+' / '+rsPrinterSetup+Ellipsis,44)
     ;
+    sp:=TToolButton(sender).ClientToScreen(point(x,y));
+    PopupToolbar.PopUp(sp.x,sp.y);
   end;
+end;
+end;
+
+procedure Tf_main.tbFOVMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var sp: TPoint;
+begin
+ if Button=mbRight then begin
+   PopupToolbar1.Caption:=rsToolBarEdito+Ellipsis;
+   PopupToolbar1.Visible:=true;
+   PopupToolbar2.Caption:=rsSetup+' / '+rsChartCoordin+' / '+rsFieldOfVisio+Ellipsis;
+   PopupToolbar2.Tag:=45;
+   PopupToolbar2.Visible:=true;
+   sp:=TControl(sender).ClientToScreen(point(x,y));
+   PopupToolbar.PopUp(sp.x,sp.y);
+ end;
+end;
+
+procedure Tf_main.PopupToolbar2Click(Sender: TObject);
+begin
+case TMenuItem(sender).tag of
+  0 : SetupChartPage(3);
+  1 : SetupCatalogPage(0);
+  2 : SetupCatalogPage(1);
+  3 : SetupDisplayPage(4);
+  4 : SetupPicturesPage(0);
+  5 : SetupCatalogPage(3);
+  6 : SetupCatalogPage(4);
+  7 : SetupPicturesPage(2);
+  8 : SetupPicturesPage(1);
+  9 : SetupSolsysPage(1);
+  10 : SetupSolsysPage(3);
+  11 : SetupSolsysPage(2);
+  12 : SetupDisplayPage(4);
+  13 : SetupDisplayPage(4);
+  14 : SetupDisplayPage(4);
+  15 : SetupDisplayPage(4);
+  16 : SetupDisplayPage(4);
+  17 : SetupDisplayPage(4);
+  18 : SetupDisplayPage(4);
+  19 : SetupDisplayPage(4);
+  20 : SetupChartPage(4);
+  21 : SetupDisplayPage(7);
+  22 : SetupDisplayPage(5);
+  23 : ResetAllLabels1Click(Sender);
+  24 : SetupObservatoryPage(1);
+  25 : SetupDisplayPage(3);
+  26 : SetupDisplayPage(0);
+  27 : SetupChartPage(1);
+  28 : SetupChartPage(5);
+  29 : SetupTimePage(2);
+  30 : SetupSystemPage(2);
+  31 : SetupSystemPage(2);
+  32 : SetupSystemPage(2);
+  33 : SetupSystemPage(2);
+  34 : SetupChartPage(0);
+  35 : SetupChartPage(0);
+  36 : SetupChartPage(0);
+  37 : SetupChartPage(0);
+  38 : ResetRotationExecute(sender);
+  39 : ResetRotationExecute(sender);
+  40 : ResetRotationExecute(sender);
+  41 : SetupChartPage(1);
+  42 : SetupChartPage(1);
+  43 : SetupDisplayPage(1);
+  44 : PrintSetup(sender);
+  45 : SetupChartPage(1);
 end;
 end;
 
