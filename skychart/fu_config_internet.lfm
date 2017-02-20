@@ -6,7 +6,6 @@ object f_config_internet: Tf_config_internet
   ClientHeight = 511
   ClientWidth = 498
   TabOrder = 0
-  DesignLeft = 53
   object MainPanel: TPanel
     Left = 0
     Height = 511
@@ -23,11 +22,11 @@ object f_config_internet: Tf_config_internet
       Height = 511
       Top = 0
       Width = 498
-      ActivePage = Page4
+      ActivePage = Page2
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
       ShowTabs = False
-      TabIndex = 3
+      TabIndex = 1
       TabOrder = 0
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
@@ -40,8 +39,8 @@ object f_config_internet: Tf_config_internet
           Top = 12
           Width = 401
           Caption = 'HTTP Proxy'
-          ClientHeight = 185
-          ClientWidth = 399
+          ClientHeight = 184
+          ClientWidth = 397
           TabOrder = 0
           object httpproxy: TCheckBox
             Left = 30
@@ -157,8 +156,8 @@ object f_config_internet: Tf_config_internet
           Top = 222
           Width = 401
           Caption = 'FTP '
-          ClientHeight = 104
-          ClientWidth = 399
+          ClientHeight = 103
+          ClientWidth = 397
           TabOrder = 1
           object Label1: TLabel
             Left = 39
@@ -221,40 +220,40 @@ object f_config_internet: Tf_config_internet
           TabOrder = 3
         end
         object mpcorb: TButton
-          Left = 32
+          Left = 24
           Height = 25
           Top = 368
-          Width = 120
+          Width = 138
           BorderSpacing.InnerBorder = 4
           Caption = 'MPCORB > 70Mb!'
           OnClick = mpcorbClick
           TabOrder = 4
         end
         object comhttp: TButton
-          Left = 275
+          Left = 248
           Height = 25
           Top = 142
-          Width = 75
+          Width = 102
           BorderSpacing.InnerBorder = 4
           Caption = 'MPC Http'
           OnClick = comhttpClick
           TabOrder = 0
         end
         object astcdc: TButton
-          Left = 30
+          Left = 24
           Height = 25
           Top = 326
-          Width = 122
+          Width = 138
           BorderSpacing.InnerBorder = 4
           Caption = 'First 5000'
           OnClick = astcdcClick
           TabOrder = 2
         end
         object astcdcneo: TButton
-          Left = 170
+          Left = 176
           Height = 25
           Top = 326
-          Width = 163
+          Width = 180
           Caption = 'First 5000 + NEO + TNO'
           OnClick = astcdcneoClick
           TabOrder = 5
@@ -265,14 +264,14 @@ object f_config_internet: Tf_config_internet
           Top = 8
           Width = 432
           Caption = 'Comet elements in MPC format (one URL by line) '
-          ClientHeight = 112
-          ClientWidth = 430
+          ClientHeight = 111
+          ClientWidth = 428
           TabOrder = 6
           object CometUrlList: TMemo
             Left = 0
-            Height = 112
+            Height = 111
             Top = 0
-            Width = 430
+            Width = 428
             Align = alClient
             Anchors = [akTop, akLeft, akRight]
             OnExit = CometUrlListExit
@@ -287,14 +286,14 @@ object f_config_internet: Tf_config_internet
           Top = 184
           Width = 432
           Caption = 'Asteroid elements in MPC format (one URL by line)'
-          ClientHeight = 120
-          ClientWidth = 430
+          ClientHeight = 119
+          ClientWidth = 428
           TabOrder = 7
           object AsteroidUrlList: TMemo
             Left = 0
-            Height = 120
+            Height = 119
             Top = 0
-            Width = 430
+            Width = 428
             Align = alClient
             Anchors = [akTop, akLeft, akRight]
             OnExit = AsteroidUrlListExit
@@ -324,8 +323,8 @@ object f_config_internet: Tf_config_internet
           Top = 8
           Width = 457
           Caption = 'Online pictures servers'
-          ClientHeight = 337
-          ClientWidth = 455
+          ClientHeight = 336
+          ClientWidth = 453
           TabOrder = 1
           object DSSpictures: TStringGrid
             Left = 0
@@ -384,14 +383,14 @@ object f_config_internet: Tf_config_internet
           Top = 8
           Width = 448
           Caption = 'Artificial satellites TLE (one URL by line)'
-          ClientHeight = 217
-          ClientWidth = 446
+          ClientHeight = 216
+          ClientWidth = 444
           TabOrder = 3
           object TLEUrlList: TMemo
             Left = 0
-            Height = 217
+            Height = 216
             Top = 0
-            Width = 446
+            Width = 444
             Align = alClient
             Anchors = [akTop, akLeft, akRight]
             OnExit = TLEUrlListExit

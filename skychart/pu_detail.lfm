@@ -11,7 +11,7 @@ object f_detail: Tf_detail
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.6.2.0'
   Visible = False
   object Memo1: TMemo
     Left = 0
@@ -37,7 +37,7 @@ object f_detail: Tf_detail
     FullRepaint = False
     TabOrder = 0
     object Button1: TButton
-      Left = 261
+      Left = 296
       Height = 25
       Top = 6
       Width = 91
@@ -51,14 +51,14 @@ object f_detail: Tf_detail
       Left = 4
       Height = 25
       Top = 6
-      Width = 125
+      Width = 164
       BorderSpacing.InnerBorder = 4
       Caption = 'Center Object'
       OnClick = Button2Click
       TabOrder = 0
     end
     object Button3: TButton
-      Left = 138
+      Left = 176
       Height = 25
       Top = 6
       Width = 117
