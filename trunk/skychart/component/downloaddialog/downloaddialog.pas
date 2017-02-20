@@ -229,6 +229,7 @@ begin
   okButton:=TButton.Create(self);
   with okButton do begin
     Parent:=DF;
+    AutoSize:=true;
     Caption:=FDownload;
     onClick:=@BtnDownload;
     top:=progress.Top+progress.Height+4;
@@ -239,6 +240,7 @@ begin
   cancelButton:=TButton.Create(self);
   with cancelButton do begin
     Parent:=DF;
+    AutoSize:=true;
     Caption:=FCancel;
     onClick:=@BtnCancel;
     top:=okButton.top;

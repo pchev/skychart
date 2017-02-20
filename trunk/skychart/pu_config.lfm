@@ -1,12 +1,12 @@
 object f_config: Tf_config
   Left = 258
-  Height = 571
+  Height = 600
   Top = 197
   Width = 740
   ActiveControl = Panel1
   BorderStyle = bsSingle
   Caption = 'Configuration'
-  ClientHeight = 571
+  ClientHeight = 600
   ClientWidth = 740
   Icon.Data = {
     BE1000000000010001002020000001002000A810000016000000280000002000
@@ -155,7 +155,7 @@ object f_config: Tf_config
   object Panel2: TPanel
     Left = 0
     Height = 41
-    Top = 530
+    Top = 559
     Width = 740
     Align = alBottom
     ClientHeight = 41
@@ -163,9 +163,9 @@ object f_config: Tf_config
     TabOrder = 0
     object Applyall: TCheckBox
       Left = 16
-      Height = 21
+      Height = 23
       Top = 12
-      Width = 187
+      Width = 188
       Caption = 'Apply Change To All Chart'
       Checked = True
       State = cbChecked
@@ -217,16 +217,16 @@ object f_config: Tf_config
   end
   object Panel1: TPanel
     Left = 0
-    Height = 530
+    Height = 559
     Top = 0
     Width = 232
     Align = alLeft
-    ClientHeight = 530
+    ClientHeight = 559
     ClientWidth = 232
     TabOrder = 1
     object TreeView1: TTreeView
       Left = 1
-      Height = 488
+      Height = 517
       Top = 1
       Width = 230
       Align = alClient
@@ -326,7 +326,7 @@ object f_config: Tf_config
     object Panel3: TPanel
       Left = 1
       Height = 40
-      Top = 489
+      Top = 518
       Width = 230
       Align = alBottom
       ClientHeight = 40
@@ -358,16 +358,16 @@ object f_config: Tf_config
   end
   object Panel4: TPanel
     Left = 237
-    Height = 530
+    Height = 559
     Top = 0
     Width = 503
     Align = alClient
-    ClientHeight = 530
+    ClientHeight = 559
     ClientWidth = 503
     TabOrder = 2
     object PageControl1: TPageControl
       Left = 1
-      Height = 528
+      Height = 557
       Top = 1
       Width = 501
       ActivePage = TabSheet4
@@ -377,8 +377,8 @@ object f_config: Tf_config
       TabOrder = 0
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
-        ClientHeight = 526
-        ClientWidth = 499
+        ClientHeight = 553
+        ClientWidth = 497
         inline f_config_time1: Tf_config_time
           Height = 524
           Width = 497
@@ -436,8 +436,8 @@ object f_config: Tf_config
       end
       object TabSheet2: TTabSheet
         Caption = 'TabSheet2'
-        ClientHeight = 526
-        ClientWidth = 499
+        ClientHeight = 553
+        ClientWidth = 497
         inline f_config_observatory1: Tf_config_observatory
           Height = 524
           Width = 497
@@ -457,12 +457,6 @@ object f_config: Tf_config
               inherited Page1: TTabSheet
                 ClientHeight = 518
                 ClientWidth = 491
-                inherited HScrollBar: TScrollBar
-                  Height = 20
-                end
-                inherited VScrollBar: TScrollBar
-                  Width = 20
-                end
               end
               inherited Page2: TTabSheet
                 ClientHeight = 518
@@ -474,8 +468,8 @@ object f_config: Tf_config
       end
       object TabSheet3: TTabSheet
         Caption = 'TabSheet3'
-        ClientHeight = 526
-        ClientWidth = 499
+        ClientHeight = 553
+        ClientWidth = 497
         inline f_config_chart1: Tf_config_chart
           Height = 526
           Width = 499
@@ -564,20 +558,25 @@ object f_config: Tf_config
       end
       object TabSheet4: TTabSheet
         Caption = 'TabSheet4'
-        ClientHeight = 526
-        ClientWidth = 499
+        ClientHeight = 553
+        ClientWidth = 497
         inline f_config_catalog1: Tf_config_catalog
-          Height = 526
+          Height = 553
+          Width = 497
           Align = alClient
-          ClientHeight = 526
+          ClientHeight = 553
+          ClientWidth = 497
           inherited MainPanel: TPanel
-            Height = 526
-            ClientHeight = 526
+            Height = 553
+            Width = 497
+            ClientHeight = 553
+            ClientWidth = 497
             inherited PageControl1: TPageControl
-              Height = 470
+              Height = 497
+              Width = 495
               inherited Page2: TTabSheet
-                ClientHeight = 468
-                ClientWidth = 495
+                ClientHeight = 493
+                ClientWidth = 491
                 inherited Label2: TLabel
                   Height = 17
                   Width = 162
@@ -674,28 +673,153 @@ object f_config: Tf_config
                 end
               end
               inherited Page3: TTabSheet
-                ClientHeight = 468
-                ClientWidth = 495
+                ClientHeight = 493
+                ClientWidth = 491
+                inherited PanelDef: TPanel
+                  inherited fsac1: TLongEdit
+                    Height = 23
+                  end
+                  inherited fsac2: TLongEdit
+                    Height = 23
+                  end
+                  inherited sac3: TDirectoryEdit
+                    Height = 23
+                  end
+                  inherited fngc1: TLongEdit
+                    Height = 23
+                  end
+                  inherited fngc2: TLongEdit
+                    Height = 23
+                  end
+                  inherited ngc3: TDirectoryEdit
+                    Height = 23
+                  end
+                  inherited defnBox: TCheckBox
+                    Height = 23
+                    Width = 203
+                  end
+                  inherited btnsac: TRadioButton
+                    Height = 23
+                    Width = 52
+                  end
+                  inherited btnongc: TRadioButton
+                    Height = 23
+                    Width = 92
+                  end
+                end
+                inherited PanelSpec: TPanel
+                  inherited OCLbox: TCheckBox
+                    Height = 23
+                    Width = 143
+                  end
+                  inherited GCMbox: TCheckBox
+                    Height = 23
+                    Width = 202
+                  end
+                  inherited GPNbox: TCheckBox
+                    Height = 23
+                    Width = 208
+                  end
+                  inherited LBNbox: TCheckBox
+                    Height = 23
+                    Width = 160
+                  end
+                  inherited PGCBox: TCheckBox
+                    Height = 23
+                    Width = 98
+                  end
+                  inherited flbn1: TLongEdit
+                    Height = 23
+                  end
+                  inherited flbn2: TLongEdit
+                    Height = 23
+                  end
+                  inherited fpgc1: TLongEdit
+                    Height = 23
+                  end
+                  inherited fpgc2: TLongEdit
+                    Height = 23
+                  end
+                  inherited focl1: TLongEdit
+                    Height = 23
+                  end
+                  inherited focl2: TLongEdit
+                    Height = 23
+                  end
+                  inherited fgcm1: TLongEdit
+                    Height = 23
+                  end
+                  inherited fgcm2: TLongEdit
+                    Height = 23
+                  end
+                  inherited fgpn1: TLongEdit
+                    Height = 23
+                  end
+                  inherited fgpn2: TLongEdit
+                    Height = 23
+                  end
+                  inherited lbn3: TDirectoryEdit
+                    Height = 23
+                  end
+                  inherited pgc3: TDirectoryEdit
+                    Height = 23
+                  end
+                  inherited ocl3: TDirectoryEdit
+                    Height = 23
+                  end
+                  inherited gcm3: TDirectoryEdit
+                    Height = 23
+                  end
+                  inherited gpn3: TDirectoryEdit
+                    Height = 23
+                  end
+                  inherited sh2box: TCheckBox
+                    Height = 23
+                    Width = 54
+                  end
+                  inherited drkbox: TCheckBox
+                    Height = 23
+                    Width = 110
+                  end
+                  inherited fsh21: TLongEdit
+                    Height = 23
+                  end
+                  inherited fsh22: TLongEdit
+                    Height = 23
+                  end
+                  inherited sh23: TDirectoryEdit
+                    Height = 23
+                  end
+                  inherited fdrk1: TLongEdit
+                    Height = 23
+                  end
+                  inherited fdrk2: TLongEdit
+                    Height = 23
+                  end
+                  inherited drk3: TDirectoryEdit
+                    Height = 23
+                  end
+                end
               end
               inherited Page1: TTabSheet
-                ClientHeight = 468
-                ClientWidth = 495
+                ClientHeight = 493
+                ClientWidth = 491
               end
               inherited Page1a: TTabSheet
-                ClientHeight = 468
-                ClientWidth = 495
+                ClientHeight = 493
+                ClientWidth = 491
               end
               inherited Page1b: TTabSheet
-                ClientHeight = 468
-                ClientWidth = 495
+                ClientHeight = 493
+                ClientWidth = 491
               end
               inherited Page5: TTabSheet
-                ClientHeight = 468
-                ClientWidth = 495
+                ClientHeight = 493
+                ClientWidth = 491
               end
               inherited Page4: TTabSheet
-                ClientHeight = 468
-                ClientWidth = 495
+                ClientHeight = 493
+                ClientWidth = 491
                 inherited Label88: TLabel
                   Height = 16
                   Width = 284
@@ -850,15 +974,17 @@ object f_config: Tf_config
               end
             end
             inherited FOVPanel: TPanel
-              Top = 471
+              Top = 498
+              Width = 495
+              ClientWidth = 495
             end
           end
         end
       end
       object TabSheet5: TTabSheet
         Caption = 'TabSheet5'
-        ClientHeight = 526
-        ClientWidth = 499
+        ClientHeight = 553
+        ClientWidth = 497
         inline f_config_solsys1: Tf_config_solsys
           Height = 524
           Width = 497
@@ -887,21 +1013,11 @@ object f_config: Tf_config
                 inherited Label3: TLabel
                   Width = 332
                 end
-                inherited planetdir: TDirectoryEdit
-                  Height = 23
-                end
                 inherited CheckBoxPluto: TCheckBox
-                  Height = 23
                   Width = 118
                 end
                 inherited smallsat: TCheckBox
-                  Height = 23
                   Width = 282
-                end
-                inherited GroupBox2: TGroupBox
-                  inherited ListBoxEph: TListBox
-                    ScrollWidth = 104
-                  end
                 end
               end
               inherited Page2: TTabSheet
@@ -998,8 +1114,8 @@ object f_config: Tf_config
       end
       object TabSheet6: TTabSheet
         Caption = 'TabSheet6'
-        ClientHeight = 526
-        ClientWidth = 499
+        ClientHeight = 553
+        ClientWidth = 497
         inline f_config_display1: Tf_config_display
           Height = 524
           Width = 497
@@ -1121,8 +1237,8 @@ object f_config: Tf_config
       end
       object TabSheet7: TTabSheet
         Caption = 'TabSheet7'
-        ClientHeight = 526
-        ClientWidth = 499
+        ClientHeight = 553
+        ClientWidth = 497
         inline f_config_pictures1: Tf_config_pictures
           Width = 497
           Align = alClient
@@ -1205,8 +1321,8 @@ object f_config: Tf_config
       end
       object TabSheet8: TTabSheet
         Caption = 'TabSheet8'
-        ClientHeight = 526
-        ClientWidth = 499
+        ClientHeight = 553
+        ClientWidth = 497
         inline f_config_system1: Tf_config_system
           Width = 497
           Align = alClient
@@ -1318,8 +1434,8 @@ object f_config: Tf_config
       end
       object TabSheet9: TTabSheet
         Caption = 'TabSheet9'
-        ClientHeight = 526
-        ClientWidth = 499
+        ClientHeight = 553
+        ClientWidth = 497
         inline f_config_internet1: Tf_config_internet
           Height = 524
           Width = 497
@@ -1420,8 +1536,8 @@ object f_config: Tf_config
       end
       object TabSheet10: TTabSheet
         Caption = 'TabSheet10'
-        ClientHeight = 526
-        ClientWidth = 499
+        ClientHeight = 553
+        ClientWidth = 497
         inline f_config_calendar1: Tf_config_calendar
           Height = 526
           Width = 499
@@ -1459,7 +1575,7 @@ object f_config: Tf_config
   end
   object Splitter1: TSplitter
     Left = 232
-    Height = 530
+    Height = 559
     Top = 0
     Width = 5
     Beveled = True

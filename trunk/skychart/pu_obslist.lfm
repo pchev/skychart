@@ -91,8 +91,8 @@ object f_obslist: Tf_obslist
   end
   object StringGrid1: TStringGrid
     Left = 0
-    Height = 352
-    Top = 80
+    Height = 338
+    Top = 94
     Width = 800
     Align = alClient
     ColCount = 8
@@ -134,11 +134,11 @@ object f_obslist: Tf_obslist
   end
   object PanelTop: TPanel
     Left = 0
-    Height = 80
+    Height = 94
     Top = 0
     Width = 800
     Align = alTop
-    ClientHeight = 80
+    ClientHeight = 94
     ClientWidth = 800
     TabOrder = 0
     object Edit1: TEdit
@@ -188,7 +188,7 @@ object f_obslist: Tf_obslist
     end
     object PageControl1: TPageControl
       Left = 278
-      Height = 78
+      Height = 92
       Top = 1
       Width = 521
       ActivePage = TabSheet2
@@ -200,37 +200,37 @@ object f_obslist: Tf_obslist
       OnChange = PageControl1Change
       object TabSheet1: TTabSheet
         Caption = 'Airmass'
-        ClientHeight = 74
+        ClientHeight = 88
         ClientWidth = 517
         object LimitAirmassNow: TCheckBox
           Left = 16
-          Height = 24
+          Height = 23
           Top = 46
-          Width = 281
+          Width = 265
           Caption = 'Only objects within airmass limits now'
           OnChange = LimitAirmassNowChange
           TabOrder = 2
         end
         object LimitAirmassTonight: TCheckBox
           Left = 16
-          Height = 24
+          Height = 23
           Top = 22
-          Width = 303
+          Width = 285
           Caption = 'Only objects within airmass limits tonight'
           OnChange = LimitAirmassTonightChange
           TabOrder = 1
         end
         object Label2: TLabel
           Left = 192
-          Height = 17
+          Height = 15
           Top = 3
-          Width = 45
+          Width = 42
           Caption = 'Label2'
           ParentColor = False
         end
         object AirmassCombo: TComboBox
           Left = 112
-          Height = 29
+          Height = 23
           Top = 1
           Width = 72
           ItemHeight = 0
@@ -250,16 +250,16 @@ object f_obslist: Tf_obslist
         end
         object Label1: TLabel
           Left = 16
-          Height = 17
+          Height = 15
           Top = 3
-          Width = 35
+          Width = 31
           Caption = 'Limit'
           ParentColor = False
         end
       end
       object TabSheet2: TTabSheet
         Caption = 'Transit'
-        ClientHeight = 74
+        ClientHeight = 88
         ClientWidth = 517
         object LimitHourangleTonight: TCheckBox
           Left = 144
@@ -314,12 +314,12 @@ object f_obslist: Tf_obslist
         end
         object Panel1: TPanel
           Left = 0
-          Height = 74
+          Height = 88
           Top = 0
           Width = 141
           Align = alLeft
           BevelOuter = bvLowered
-          ClientHeight = 74
+          ClientHeight = 88
           ClientWidth = 141
           TabOrder = 0
           object RadioButton1: TRadioButton

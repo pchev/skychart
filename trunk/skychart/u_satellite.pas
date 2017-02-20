@@ -86,7 +86,7 @@ end;
 end;
 
 function CheckWine: boolean;
-var cmd,buf: string;
+var cmd,buf,msg: string;
     i,j: integer;
     r: Tstringlist;
 begin
@@ -99,8 +99,11 @@ if not result then begin
      buf:='';
      for j:=0 to r.Count-1 do  buf:=buf+r[j];
    end else buf:='';
-   ShowMessage(rsPleaseInstWine+crlf+rsIfItIsNotIns+crlf+'apt-get install wine'+crlf
-     +'yum install wine'+crlf+'wine return: '+buf);
+   msg:=rsPleaseInstWine;
+   {$ifdef linux}
+   msg:=msg+crlf+rsIfItIsNotIns+crlf+'apt-get install wine'+crlf+'yum install wine';
+   {$endif}
+   ShowMessage(msg+crlf+'wine return: '+buf);
 end;
 r.free;
 end;
