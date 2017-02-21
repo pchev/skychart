@@ -478,8 +478,6 @@ type
     procedure NebGrayBarChange(Sender: TObject);
     procedure NebBrightBarChange(Sender: TObject);
     procedure DefNebColorButtonClick(Sender: TObject);
-    procedure NebShapeMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
     procedure ShowlabelallClick(Sender: TObject);
     procedure ShowChartInfoClick(Sender: TObject);
 
@@ -1783,75 +1781,13 @@ procedure Tf_config_display.ShapeDSOMouseUp(Sender: TObject; Button: TMouseButto
 begin
 if sender is TShape then
    with sender as TShape do begin
-   ColorDialog1.color:=cplot.Color[23];
-   if ColorDialog1.Execute then begin
-      if sender = shpAst then begin
-         cplot.Color[23]:=ColorDialog1.Color;
-         shpAst.Brush.Color:= cplot.Color[23]
-//         ShowSkyColor;
-      end;
-      if sender = shpOCl then begin
-          cplot.Color[24]:=ColorDialog1.Color;
-          shpOCl.Brush.Color:= cplot.Color[24];
-//         ShowSkyColor;
-      end;
-      if sender = shpGCl then begin
-          cplot.Color[25]:=ColorDialog1.Color;
-          shpGCl.Brush.Color:= cplot.Color[25];
-//         ShowSkyColor;
-      end;
-      if sender = shpPNe then begin
-          cplot.Color[26]:=ColorDialog1.Color;
-          shpPNe.Brush.Color:= cplot.Color[26];
-//         ShowSkyColor;
-      end;
-      if sender = shpDN then begin
-          cplot.Color[27]:=ColorDialog1.Color;
-          shpDN.Brush.Color:= cplot.Color[27];
-//         ShowSkyColor;
-      end;
-      if sender = shpEN then begin
-          cplot.Color[28]:=ColorDialog1.Color;
-          shpEN.Brush.Color:= cplot.Color[28];
-//         ShowSkyColor;
-      end;
-      if sender = shpRN then begin
-          cplot.Color[29]:=ColorDialog1.Color;
-          shpRN.Brush.Color:= cplot.Color[29];
-//         ShowSkyColor;
-      end;
-      if sender = shpSN then begin
-          cplot.Color[30]:=ColorDialog1.Color;
-          shpSN.Brush.Color:= cplot.Color[30];
-//         ShowSkyColor;
-      end;
-      if sender = shpGxy then begin
-          cplot.Color[31]:=ColorDialog1.Color;
-          shpGxy.Brush.Color:= cplot.Color[31]
-//         ShowSkyColor;
-      end;
-      if sender = shpGxyCl then begin
-          cplot.Color[32]:=ColorDialog1.Color;
-          shpGxyCl.Brush.Color:= cplot.Color[32];
-//         ShowSkyColor;
-      end;
-      if sender = shpQ then begin
-          cplot.Color[33]:=ColorDialog1.Color;
-          shpQ.Brush.Color:= cplot.Color[33];
-//         ShowSkyColor;
-      end;
-      if sender = shpGL then begin
-          cplot.Color[34]:=ColorDialog1.Color;
-          shpGL.Brush.Color:= cplot.Color[34];
-//         ShowSkyColor;
-      end;
-      if sender = shpNE then begin
-          cplot.Color[35]:=ColorDialog1.Color;
-          shpNE.Brush.Color:= cplot.Color[35];
-//         ShowSkyColor;
+      ColorDialog1.color:=cplot.Color[tag];
+      if ColorDialog1.Execute then begin
+         cplot.Color[tag]:=ColorDialog1.Color;
+         Brush.Color:= cplot.Color[tag];
+         if tag=31 then UpdNebColor;
       end;
    end;
-end;
 end;
 
 procedure Tf_config_display.FillDSOMouseUp(Sender: TObject; Button: TMouseButton;
@@ -1875,20 +1811,8 @@ procedure Tf_config_display.UpdNebColor;
    end;
 begin
 NebColorPanel.color:=cplot.Color[0];
-shape29.brush.color:=SetColor(8,cplot.NebGray);
-shape30.brush.color:=SetColor(8,cplot.NebBright);
-end;
-
-procedure Tf_config_display.NebShapeMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-if sender is TShape then with sender as TShape do begin
-   ColorDialog1.color:=cplot.Color[tag];
-   if ColorDialog1.Execute then begin
-      cplot.Color[tag]:=ColorDialog1.Color;
-      UpdNebColor;
-   end;
-end;
+shape29.brush.color:=SetColor(31,cplot.NebGray);
+shape30.brush.color:=SetColor(31,cplot.NebBright);
 end;
 
 procedure Tf_config_display.NebGrayBarChange(Sender: TObject);
