@@ -393,6 +393,8 @@ type
     procedure CirclegridSelectCell(Sender: TObject; aCol, aRow: Integer;
       var CanSelect: Boolean);
     procedure DistLabelClick(Sender: TObject);
+    procedure LineStyleMeasureItem(Control: TWinControl; Index: Integer;
+      var AHeight: Integer);
     procedure labelmagChange(Sender: TObject);
     procedure LabelsizeChange(Sender: TObject);
     procedure LabelRotChange(Sender: TObject);
@@ -1109,6 +1111,13 @@ with  TComboBox(Control).Canvas do begin
   lineto(ARect.Right,(ARect.Top+ARect.Bottom) div 2);
 end;
 end;
+
+procedure Tf_config_display.LineStyleMeasureItem(Control: TWinControl;
+  Index: Integer; var AHeight: Integer);
+begin
+  AHeight:=round(16*UScaleDPI.scale);
+end;
+
 
 procedure Tf_config_display.DrawPmBoxClick(Sender: TObject);
 begin

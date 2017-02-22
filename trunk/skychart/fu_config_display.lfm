@@ -21,10 +21,10 @@ object f_config_display: Tf_config_display
       Height = 526
       Top = 1
       Width = 503
-      ActivePage = Page3
+      ActivePage = Page5
       Align = alClient
       ShowTabs = False
-      TabIndex = 2
+      TabIndex = 4
       TabOrder = 0
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
@@ -133,33 +133,33 @@ object f_config_display: Tf_config_display
           end
           object Label257: TLabel
             Left = 24
-            Height = 16
+            Height = 15
             Top = 79
-            Width = 152
+            Width = 166
             Caption = 'Increment for Bright Stars'
             ParentColor = False
           end
           object Label263: TLabel
             Left = 24
-            Height = 16
+            Height = 15
             Top = 161
-            Width = 93
+            Width = 102
             Caption = 'Color saturation'
             ParentColor = False
           end
           object Label262: TLabel
             Left = 24
-            Height = 16
+            Height = 15
             Top = 120
-            Width = 52
+            Width = 55
             Caption = 'Contrast'
             ParentColor = False
           end
           object Label256: TLabel
             Left = 24
-            Height = 16
+            Height = 15
             Top = 38
-            Width = 89
+            Width = 103
             Caption = 'Faint Stars Size '
             ParentColor = False
           end
@@ -175,9 +175,9 @@ object f_config_display: Tf_config_display
           Visible = False
           object Label9: TLabel
             Left = 38
-            Height = 16
+            Height = 15
             Top = 48
-            Width = 94
+            Width = 105
             Caption = 'Stars bitmap file'
             ParentColor = False
           end
@@ -261,7 +261,7 @@ object f_config_display: Tf_config_display
           Left = 28
           Height = 23
           Top = 421
-          Width = 236
+          Width = 260
           Caption = 'Reduce detail when moving the chart'
           OnClick = red_moveBoxClick
           TabOrder = 5
@@ -270,7 +270,7 @@ object f_config_display: Tf_config_display
           Left = 28
           Height = 23
           Top = 441
-          Width = 82
+          Width = 92
           Caption = 'Anti Alias  '
           OnClick = antialiasClick
           TabOrder = 6
@@ -279,7 +279,7 @@ object f_config_display: Tf_config_display
           Left = 28
           Height = 23
           Top = 461
-          Width = 200
+          Width = 221
           Caption = 'Show only text in detail window'
           OnClick = CheckBox6Click
           TabOrder = 7
@@ -351,17 +351,17 @@ object f_config_display: Tf_config_display
           end
           object Label259: TLabel
             Left = 24
-            Height = 16
+            Height = 15
             Top = 75
-            Width = 52
+            Width = 55
             Caption = 'Contrast'
             ParentColor = False
           end
           object Label258: TLabel
             Left = 24
-            Height = 16
+            Height = 15
             Top = 38
-            Width = 97
+            Width = 111
             Caption = 'Bright Stars Size '
             ParentColor = False
           end
@@ -1630,45 +1630,45 @@ object f_config_display: Tf_config_display
         ClientWidth = 499
         object EqGrid: TCheckBox
           Left = 16
-          Height = 26
+          Height = 23
           Top = 104
-          Width = 146
+          Width = 148
           Caption = 'Add Equatorial Grid'
           OnClick = EqGridClick
           TabOrder = 7
         end
         object CGrid: TCheckBox
           Left = 16
-          Height = 26
+          Height = 23
           Top = 55
-          Width = 160
+          Width = 163
           Caption = 'Show Coordinate Grid'
           OnClick = CGridClick
           TabOrder = 2
         end
         object ecliptic: TCheckBox
           Left = 277
-          Height = 26
+          Height = 23
           Top = 55
-          Width = 108
+          Width = 107
           Caption = 'Show Ecliptic'
           OnClick = eclipticClick
           TabOrder = 3
         end
         object galactic: TCheckBox
           Left = 277
-          Height = 26
+          Height = 23
           Top = 104
-          Width = 164
+          Width = 168
           Caption = 'Show Galactic Equator'
           OnClick = galacticClick
           TabOrder = 8
         end
         object GridNum: TCheckBox
           Left = 16
-          Height = 26
+          Height = 23
           Top = 5
-          Width = 125
+          Width = 127
           Caption = 'Show Grid Label'
           OnClick = GridNumClick
           TabOrder = 0
@@ -1684,24 +1684,24 @@ object f_config_display: Tf_config_display
           TabOrder = 11
           object Label132: TLabel
             Left = 29
-            Height = 16
+            Height = 15
             Top = 75
-            Width = 196
+            Width = 204
             Caption = 'Constellation Figure File Name : '
             ParentColor = False
           end
           object Constl: TCheckBox
             Left = 8
-            Height = 26
+            Height = 23
             Top = 11
-            Width = 187
+            Width = 188
             Caption = 'Show Constellation Figure'
             OnClick = ConstlClick
             TabOrder = 0
           end
           object ConstlFile: TFileNameEdit
             Left = 29
-            Height = 22
+            Height = 23
             Top = 90
             Width = 208
             OnAcceptFileName = ConstlFileAcceptFileName
@@ -1720,6 +1720,7 @@ object f_config_display: Tf_config_display
             Height = 28
             Top = 32
             Width = 100
+            AutoSize = False
             ItemHeight = 16
             ItemIndex = 0
             Items.Strings = (
@@ -1731,7 +1732,9 @@ object f_config_display: Tf_config_display
             )
             OnChange = CFStyleChange
             OnDrawItem = StyleDrawItem
-            Style = csOwnerDrawFixed
+            OnMeasureItem = LineStyleMeasureItem
+            ReadOnly = True
+            Style = csOwnerDrawVariable
             TabOrder = 1
             Text = 'Line'
           end
@@ -1747,24 +1750,24 @@ object f_config_display: Tf_config_display
           TabOrder = 13
           object Label72: TLabel
             Left = 29
-            Height = 16
+            Height = 15
             Top = 75
-            Width = 215
+            Width = 227
             Caption = 'Constellation Boundary File Name : '
             ParentColor = False
           end
           object Constb: TCheckBox
             Left = 8
-            Height = 26
+            Height = 23
             Top = 11
-            Width = 206
+            Width = 211
             Caption = 'Show Constellation Boundary'
             OnClick = ConstbClick
             TabOrder = 0
           end
           object ConstbFile: TFileNameEdit
             Left = 29
-            Height = 22
+            Height = 23
             Top = 90
             Width = 208
             OnAcceptFileName = ConstbFileAcceptFileName
@@ -1783,6 +1786,7 @@ object f_config_display: Tf_config_display
             Height = 28
             Top = 32
             Width = 100
+            AutoSize = False
             ItemHeight = 16
             ItemIndex = 0
             Items.Strings = (
@@ -1794,7 +1798,9 @@ object f_config_display: Tf_config_display
             )
             OnChange = CBStyleChange
             OnDrawItem = StyleDrawItem
-            Style = csOwnerDrawFixed
+            OnMeasureItem = LineStyleMeasureItem
+            ReadOnly = True
+            Style = csOwnerDrawVariable
             TabOrder = 1
             Text = 'Line'
           end
@@ -1810,7 +1816,7 @@ object f_config_display: Tf_config_display
           TabOrder = 12
           object milkyway: TCheckBox
             Left = 8
-            Height = 26
+            Height = 23
             Top = 8
             Width = 123
             Caption = 'Show Milky Way'
@@ -1819,18 +1825,18 @@ object f_config_display: Tf_config_display
           end
           object fillmilkyway: TCheckBox
             Left = 8
-            Height = 26
+            Height = 23
             Top = 72
-            Width = 109
+            Width = 104
             Caption = 'Fill Milky Way'
             OnClick = fillmilkywayClick
             TabOrder = 1
           end
           object linemodemilkyway: TCheckBox
             Left = 8
-            Height = 26
+            Height = 23
             Top = 40
-            Width = 140
+            Width = 141
             Caption = 'linemodemilkyway'
             OnClick = linemodemilkywayClick
             TabOrder = 2
@@ -1841,6 +1847,7 @@ object f_config_display: Tf_config_display
           Height = 28
           Top = 76
           Width = 100
+          AutoSize = False
           ItemHeight = 16
           ItemIndex = 0
           Items.Strings = (
@@ -1852,7 +1859,9 @@ object f_config_display: Tf_config_display
           )
           OnChange = GridStyleChange
           OnDrawItem = StyleDrawItem
-          Style = csOwnerDrawFixed
+          OnMeasureItem = LineStyleMeasureItem
+          ReadOnly = True
+          Style = csOwnerDrawVariable
           TabOrder = 4
           Text = 'Line'
         end
@@ -1861,6 +1870,7 @@ object f_config_display: Tf_config_display
           Height = 28
           Top = 76
           Width = 100
+          AutoSize = False
           ItemHeight = 16
           ItemIndex = 0
           Items.Strings = (
@@ -1872,7 +1882,9 @@ object f_config_display: Tf_config_display
           )
           OnChange = EclipticStyleChange
           OnDrawItem = StyleDrawItem
-          Style = csOwnerDrawFixed
+          OnMeasureItem = LineStyleMeasureItem
+          ReadOnly = True
+          Style = csOwnerDrawVariable
           TabOrder = 5
           Text = 'Line'
         end
@@ -1881,6 +1893,7 @@ object f_config_display: Tf_config_display
           Height = 28
           Top = 128
           Width = 100
+          AutoSize = False
           ItemHeight = 16
           ItemIndex = 0
           Items.Strings = (
@@ -1892,7 +1905,9 @@ object f_config_display: Tf_config_display
           )
           OnChange = EqGridStyleChange
           OnDrawItem = StyleDrawItem
-          Style = csOwnerDrawFixed
+          OnMeasureItem = LineStyleMeasureItem
+          ReadOnly = True
+          Style = csOwnerDrawVariable
           TabOrder = 9
           Text = 'Line'
         end
@@ -1901,6 +1916,7 @@ object f_config_display: Tf_config_display
           Height = 28
           Top = 128
           Width = 100
+          AutoSize = False
           ItemHeight = 16
           ItemIndex = 0
           Items.Strings = (
@@ -1912,7 +1928,9 @@ object f_config_display: Tf_config_display
           )
           OnChange = GalEqStyleChange
           OnDrawItem = StyleDrawItem
-          Style = csOwnerDrawFixed
+          OnMeasureItem = LineStyleMeasureItem
+          ReadOnly = True
+          Style = csOwnerDrawVariable
           TabOrder = 10
           Text = 'Line'
         end
@@ -1927,9 +1945,9 @@ object f_config_display: Tf_config_display
           TabOrder = 14
           object Label68: TLabel
             Left = 91
-            Height = 16
+            Height = 15
             Top = 95
-            Width = 33
+            Width = 35
             Caption = 'years'
             ParentColor = False
           end
@@ -1945,15 +1963,15 @@ object f_config_display: Tf_config_display
           end
           object DrawPmBox: TCheckBox
             Left = 8
-            Height = 26
+            Height = 23
             Top = 11
-            Width = 26
+            Width = 23
             OnClick = DrawPmBoxClick
             TabOrder = 0
           end
           object DrawPMy: TLongEdit
             Left = 22
-            Height = 22
+            Height = 23
             Hint = '-99999..99999'
             Top = 90
             Width = 56
@@ -1968,18 +1986,18 @@ object f_config_display: Tf_config_display
         end
         object OnlyMeridian: TCheckBox
           Left = 277
-          Height = 26
+          Height = 23
           Top = 160
-          Width = 198
+          Width = 205
           Caption = 'Show only meridian in Alt/Az'
           OnClick = OnlyMeridianClick
           TabOrder = 6
         end
         object ShowLines: TCheckBox
           Left = 277
-          Height = 26
+          Height = 23
           Top = 5
-          Width = 91
+          Width = 92
           Caption = 'ShowLines'
           OnClick = ShowLinesClick
           TabOrder = 1
@@ -1993,17 +2011,17 @@ object f_config_display: Tf_config_display
         end
         object Label10: TLabel
           Left = 324
-          Height = 16
+          Height = 15
           Top = 33
-          Width = 48
+          Width = 50
           Caption = 'Label10'
           ParentColor = False
         end
         object CheckBox8: TCheckBox
           Left = 16
-          Height = 26
+          Height = 23
           Top = 160
-          Width = 151
+          Width = 156
           Caption = 'Always add meridian'
           OnClick = CheckBox8Click
           TabOrder = 15

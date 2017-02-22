@@ -4,7 +4,7 @@ unit UScaleDPI;
 
 interface
 
-uses  cu_radec, math, Types,
+uses  cu_radec, math, Types, StdCtrls,
   Forms, Graphics, Controls, ComCtrls, Grids, LCLType;
 
 procedure SetScale(cnv:TCanvas);
@@ -12,6 +12,7 @@ procedure ScaleDPI(Control: TControl);
 procedure ScaleImageList(ImgList: TImageList);
 function DoScaleX(Size: Integer): integer;
 function DoScaleY(Size: Integer): integer;
+function scale: double;
 
 var
   UseScaling: boolean = true;
@@ -38,6 +39,12 @@ begin
   if abs(1-sc)<0.1 then sc:=1;
   RunDPI:=round(DesignDPI*sc);
   {$endif}
+end;
+
+function scale: double;
+begin
+ result:=UScaleDPI.RunDPI/UScaleDPI.DesignDPI;
+ if result<1 then result:=1;
 end;
 
 function DoScaleX(Size: Integer): integer;
@@ -110,6 +117,14 @@ begin
       TUpDown(Control).Associate:=WinControl;
       TRaDec(TUpDown(Control).Parent).lockchange:=true;
       exit;
+    end
+    else begin
+       if TUpDown(Control).Associate<>nil then begin
+         WinControl:=TUpDown(Control).Associate;
+         TUpDown(Control).Associate:=nil;
+         TUpDown(Control).Associate:=WinControl;
+         exit;
+       end;
     end;
   end;
 
