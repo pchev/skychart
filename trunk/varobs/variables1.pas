@@ -557,19 +557,12 @@ ConstDir:=slash(appdir)+slash('data')+slash('varobs');
 end;
 
 procedure TVarForm.ScaleMainForm;
-var rl: integer;
-const teststr = 'The Lazy Fox Jumps';
-      designlen = 120;
 begin
   UScaleDPI.UseScaling:=true;
   {$ifdef SCALE_BY_DPI_ONLY}
-  UScaleDPI.DesignDPI:=96;
   UScaleDPI.RunDPI:=Screen.PixelsPerInch;
   {$else}
-  rl:=Canvas.TextWidth(teststr);
-  if abs(rl-designlen)<20 then rl:=designlen;
-  UScaleDPI.DesignDPI:=designlen;
-  UScaleDPI.RunDPI:=rl;
+  UScaleDPI.SetScale(Canvas);
   {$endif}
   ScaleDPI(Self);
 end;

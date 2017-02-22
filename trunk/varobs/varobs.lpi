@@ -33,25 +33,31 @@
         <WorkingDirectory Value="/usr/local/bin"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="5">
+    <RequiredPackages Count="7">
       <Item1>
-        <PackageName Value="uniqueinstance_package"/>
+        <PackageName Value="BGRABitmapPack"/>
       </Item1>
       <Item2>
-        <PackageName Value="LCL"/>
+        <PackageName Value="radec"/>
       </Item2>
       <Item3>
-        <PackageName Value="Printer4Lazarus"/>
-        <MinVersion Minor="5" Valid="True"/>
+        <PackageName Value="uniqueinstance_package"/>
       </Item3>
       <Item4>
-        <PackageName Value="CDCjdcalendar"/>
-        <MinVersion Valid="True"/>
+        <PackageName Value="LCL"/>
       </Item4>
       <Item5>
+        <PackageName Value="Printer4Lazarus"/>
+        <MinVersion Minor="5" Valid="True"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="CDCjdcalendar"/>
+        <MinVersion Valid="True"/>
+      </Item6>
+      <Item7>
         <PackageName Value="downldialog"/>
         <MinVersion Valid="True"/>
-      </Item5>
+      </Item7>
     </RequiredPackages>
     <Units Count="10">
       <Unit0>
