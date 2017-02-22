@@ -1974,9 +1974,6 @@ end;
 
 procedure Tf_main.ScaleMainForm;
 var inif: TMemIniFile;
-    rl: integer;
-const teststr = 'The Lazy Fox Jumps';
-      designlen = 120;
 begin
   cfgm.ScreenScaling:=true;
   if fileexists(configfile) then begin
@@ -1988,15 +1985,9 @@ begin
     end;
   end;
   UScaleDPI.UseScaling:=cfgm.ScreenScaling;
-  {$ifdef SCALE_BY_DPI_ONLY}
-  UScaleDPI.DesignDPI:=96;
-  UScaleDPI.RunDPI:=Screen.PixelsPerInch;
-  {$else}
-  rl:=Canvas.TextWidth(teststr);
-  if abs(rl-designlen)<20 then rl:=designlen;
-  UScaleDPI.DesignDPI:=designlen;
-  UScaleDPI.RunDPI:=rl;
-  {$endif}
+  UScaleDPI.SetScale(Canvas);
+  WriteTrace('Screen scaling : '+BoolToStr(cfgm.ScreenScaling,True));
+  WriteTrace('Screen scale : '+FormatFloat(f0,100*UScaleDPI.RunDPI/UScaleDPI.DesignDPI)+'%');
   ScaleDPI(Self);
   ScaleImageList(ImageNormal);
 end;
