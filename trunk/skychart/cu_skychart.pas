@@ -5672,7 +5672,7 @@ if w>0 then begin
     xx:=-ls+5;
     // OC
     xx:=round(xx+1.5*ls);
-    Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,2,'',cfgsc.WhiteBg,drawgray,clGray);
+    Fplot.PlotDeepSkyObject(xx,yy,sz,0,1,1,2,'',cfgsc.WhiteBg,drawgray,clGray);
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevOpenCluster, cfgsc.WhiteBg, false);
     // GB
     xx:=round(xx+1.5*ls);
