@@ -4,9 +4,10 @@ unit UScaleDPI;
 
 interface
 
-uses  cu_radec,
+uses  cu_radec, math, Types,
   Forms, Graphics, Controls, ComCtrls, Grids, LCLType;
 
+procedure SetScale(cnv:TCanvas);
 procedure ScaleDPI(Control: TControl);
 procedure ScaleImageList(ImgList: TImageList);
 function DoScaleX(Size: Integer): integer;
@@ -20,6 +21,24 @@ var
 implementation
 
 uses BGRABitmap, BGRABitmapTypes;
+
+procedure SetScale(cnv:TCanvas);
+var rs: TSize;
+    sc: double;
+const teststr = 'The Lazy Fox Jumps';
+      designlen = 125;
+      designhig = 15;
+begin
+  {$ifdef SCALE_BY_DPI_ONLY}
+  RunDPI:=Screen.PixelsPerInch;
+  {$else}
+  rs:=cnv.TextExtent(teststr);
+  sc:=rs.cx/designlen;
+  sc:=max(sc,rs.cy/designhig);
+  if abs(1-sc)<0.1 then sc:=1;
+  RunDPI:=round(DesignDPI*sc);
+  {$endif}
+end;
 
 function DoScaleX(Size: Integer): integer;
 begin
