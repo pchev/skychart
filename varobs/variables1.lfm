@@ -121,7 +121,7 @@ object VarForm: TVarForm
   Visible = False
   object Grid1: TStringGrid
     Left = 0
-    Height = 372
+    Height = 376
     Hint = 'Right click on a line to show menu'
     Top = 70
     Width = 800
@@ -181,7 +181,7 @@ object VarForm: TVarForm
     end
     object Edit1: TEdit
       Left = 48
-      Height = 21
+      Height = 23
       Top = 42
       Width = 89
       OnExit = Edit1Change
@@ -190,7 +190,7 @@ object VarForm: TVarForm
     end
     object Edit2: TEdit
       Left = 176
-      Height = 21
+      Height = 23
       Top = 42
       Width = 97
       OnExit = Edit2Change
@@ -212,8 +212,8 @@ object VarForm: TVarForm
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 3
-      ClientHeight = 22
-      ClientWidth = 327
+      ClientHeight = 21
+      ClientWidth = 325
       Columns = 3
       ItemIndex = 0
       Items.Strings = (
@@ -225,7 +225,7 @@ object VarForm: TVarForm
     end
     object Edit4: TEdit
       Left = 376
-      Height = 21
+      Height = 23
       Top = 3
       Width = 121
       TabOrder = 5
@@ -241,7 +241,7 @@ object VarForm: TVarForm
     end
     object DateEdit1: TDateEdit
       Left = 48
-      Height = 21
+      Height = 23
       Top = 6
       Width = 80
       CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
