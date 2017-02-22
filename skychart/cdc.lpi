@@ -206,20 +206,27 @@
           <Parsing>
             <SyntaxOptions>
               <CStyleOperator Value="False"/>
+              <IncludeAssertionCode Value="True"/>
             </SyntaxOptions>
           </Parsing>
           <CodeGeneration>
-            <SmartLinkUnit Value="True"/>
+            <Checks>
+              <IOChecks Value="True"/>
+              <RangeChecks Value="True"/>
+              <OverflowChecks Value="True"/>
+              <StackChecks Value="True"/>
+            </Checks>
+            <VerifyObjMethodCallValidity Value="True"/>
             <TargetCPU Value="x86_64"/>
             <TargetOS Value="win64"/>
+            <Optimizations>
+              <OptimizationLevel Value="0"/>
+            </Optimizations>
           </CodeGeneration>
           <Linking>
             <Debugging>
-              <GenerateDebugInfo Value="False"/>
-              <UseLineInfoUnit Value="False"/>
               <StripSymbols Value="True"/>
             </Debugging>
-            <LinkSmart Value="True"/>
             <Options>
               <Win32>
                 <GraphicApplication Value="True"/>
