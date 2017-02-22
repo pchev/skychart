@@ -4320,7 +4320,6 @@ begin
             Adim:=1;
           Asbr:= Ama + 5*log10(Adim) - 0.26;
         end;
-      if Asbr<10 then Asbr:=10;  //some very bright cluster make too bright surface
 //    adjust colour by using Asbr and UI options
       icol:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
       r:=col and $FF;
