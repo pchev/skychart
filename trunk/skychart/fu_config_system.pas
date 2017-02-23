@@ -28,13 +28,14 @@ uses u_help, u_translation, u_constant, u_util, cu_database,
   indibaseclient, indibasedevice,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms, LazUTF8, LazFileUtils, math,
-  ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML;
+  ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML, CheckLst;
 
 type
 
   { Tf_config_system }
 
   Tf_config_system = class(TFrame)
+    LanguageList: TCheckListBox;
     UseScaling: TCheckBox;
     GetIndiDevices: TButton;
     CheckBox1: TCheckBox;
@@ -72,7 +73,6 @@ type
     TabSheet6: TTabSheet;
     Page5: TTabSheet;
     TelescopeManualLabel: TLabel;
-    LanguageList: TComboBox;
     Label14: TLabel;
     Language: TTabSheet;
     Page4: TTabSheet;
@@ -149,6 +149,7 @@ type
     RevertTurnsAz: TCheckBox;
     RevertTurnsAlt: TCheckBox;
     PageControl1: TPageControl;
+    procedure LanguageListItemClick(Sender: TObject; Index: integer);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
     procedure UseScalingChange(Sender: TObject);
     procedure GetIndiDevicesClick(Sender: TObject);
@@ -164,7 +165,6 @@ type
     procedure IndiTimerTimer(Sender: TObject);
     procedure InternalIndiGuiClick(Sender: TObject);
     procedure Label18Click(Sender: TObject);
-    procedure LanguageListSelect(Sender: TObject);
     procedure LinuxCmdChange(Sender: TObject);
     procedure LinuxDesktopBoxChange(Sender: TObject);
     procedure dbnameChange(Sender: TObject);
@@ -409,7 +409,11 @@ CloseFile(f);
 except
 end;
 for i:=0 to LanguageList.Items.Count-1 do begin
-  if cmain.language=words(LanguageList.Items[i],'',1,1) then LanguageList.itemindex:=i;
+  LanguageList.Checked[i]:=(((cmain.language='')and(i=0)) or (cmain.language=words(LanguageList.Items[i],'',1,1)));
+  if LanguageList.Checked[i] then begin
+     LanguageList.Selected[i]:=true;
+     LanguageList.TopIndex:=i;
+  end;
 end;
 end;
 
@@ -686,11 +690,20 @@ begin
   ExecuteFile(Label18.Caption);
 end;
 
-procedure Tf_config_system.LanguageListSelect(Sender: TObject);
+procedure Tf_config_system.LanguageListItemClick(Sender: TObject; Index: integer);
+var i: integer;
 begin
-if LockChange then exit;
-  if LeftStr(LanguageList.Text,1)=blank then cmain.language:=''
-     else cmain.language:=words(LanguageList.Text,'',1,1);
+  if LockChange then exit;
+  if LeftStr(LanguageList.Items[Index],1)=blank then
+     cmain.language:=''
+  else
+     cmain.language:=words(LanguageList.Items[Index],'',1,1);
+  for i:=0 to LanguageList.Items.Count-1 do begin
+    LanguageList.Checked[i]:=(((cmain.language='')and(i=0)) or (cmain.language=words(LanguageList.Items[i],'',1,1)));
+    if LanguageList.Checked[i] then begin
+       LanguageList.Selected[i]:=true;
+  end;
+end;
 end;
 
 procedure Tf_config_system.Lock;
