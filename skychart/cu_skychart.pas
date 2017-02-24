@@ -5613,7 +5613,7 @@ if w>0 then begin
     Fplot.PlotTextCR(5,5,fontnum,labelnum,txtl,cfgsc.WhiteBg,false);
   end;
   if cfgsc.showlegend then begin
-    Fplot.cfgplot.FontSize[fontnum]:=Fplot.cfgplot.FontSize[fontnum]-2;
+    Fplot.cfgplot.FontSize[fontnum]:=Fplot.cfgplot.LabelSize[labelnum];
     drawgray:=false;//cfgsc.ShowImages;
     // line 1
     // Stars magnitude
@@ -5629,7 +5629,7 @@ if w>0 then begin
     end;
     // line 2
     h0:=h0+2*ls;
-    sz:=10*Fplot.cfgchart.drawsize;
+    sz:=max(10*Fplot.cfgchart.drawsize,ls-4);
     yy:=h0;
     xx:=-ls+5;
     // Ast
@@ -5667,7 +5667,6 @@ if w>0 then begin
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevGalaxy, cfgsc.WhiteBg, false);
     // line 3
     h0:=h0+2*ls;
-    sz:=10*Fplot.cfgchart.drawsize;
     yy:=h0;
     xx:=-ls+5;
     // OC
