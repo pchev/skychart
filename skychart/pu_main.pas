@@ -711,6 +711,7 @@ type
     procedure IndiGUIdestroy(Sender: TObject);
     procedure PositionApply(Sender: TObject);
     procedure ZoomBarApply(Sender: TObject);
+    function QuickDownload(url,fn: string; quickcancel:boolean=true): boolean;
   public
     { Public declarations }
     cfgm : Tconf_main;
@@ -1512,12 +1513,100 @@ end;
 
 procedure Tf_main.MenuHelpPDFClick(Sender: TObject);
 const pdflang='ca en es fr it nl uk ';
-var l,pdfurl:string;
+var lg,buf,lsturl,pdfurl,pdfname,lstfn,pdffn: string;
+    i:integer;
+    beta:boolean;
+    f: textfile;
+    fs : TSearchRec;
+  // function to download the list of available pdf
+  function GetPdfList:boolean;
+  var a:integer;
+      fdate:TDateTime;
+  begin
+    // replace the list only once a day
+    if FileExistsUTF8(lstfn) then begin
+      a:=FileAgeUTF8(lstfn);
+      fdate:=FileDateToDateTime(a);
+      if (now-fdate)<1 then begin
+        result:=true;
+        exit;
+      end;
+    end;
+    // get the list according to the program version
+    if beta then
+      lsturl:=URL_DocPDF+'beta_pdflist.txt'
+    else
+      lsturl:=URL_DocPDF+'pdflist.txt';
+    // download
+    result:=QuickDownload(lsturl,lstfn);
+  end;
+
 begin
-l:=trim(Lang);
-if pos(l+blank,pdflang)=0 then l:='en';
-pdfurl:=StringReplace(URL_DocPDF,'$LANG',l,[]);;
-ExecuteFile(pdfurl);
+ // default pdf name
+ pdfname:='doc_'+cdcversion+'_en.pdf';
+ // get pdf doc language
+ lg:=trim(Lang);
+ if pos(lg+blank,pdflang)=0 then lg:='en';
+ // check program version
+ beta:=Pos('-svn',cdcversion)>0;
+ lstfn:=slash(TempDir)+'pdflist.txt';
+ // get the list
+ if GetPdfList or FileExistsUTF8(lstfn) then begin
+   // list is available
+   AssignFile(f,lstfn);
+   reset(f);
+   // loop every file in list and get the one for our language
+   while not eof(f) do begin
+     readln(f,buf);
+     if pos(lg+'.pdf',buf)>0 then begin
+        pdfname:=trim(buf);
+        break;
+     end;
+     if pos('en.pdf',buf)>0 then begin  // english by default in case of problem
+        pdfname:=trim(buf);
+     end;
+   end;
+   Closefile(f);
+ end
+ else begin
+   // list is not available (no internet connection)
+   // try to find an existing pdf
+   i:=FindFirstUTF8(slash(TempDir)+'doc_*.pdf',0,fs);
+   if i=0 then
+     // pdf doc found
+     pdfname:=fs.name
+   else begin
+     // we cannot go further for now
+     ShowMessage(rsCannotDownlo);
+     exit;
+   end;
+   FindCloseUTF8(fs);
+ end;
+ // pdf file full path
+ pdffn:=slash(TempDir)+pdfname;
+ // check if file already there
+ if not FileExistsUTF8(pdffn) then begin
+   // download pdf
+   pdfurl:=URL_DocPDF+pdfname;
+   if QuickDownload(pdfurl,pdffn,false) then begin
+     // delete old pdf files
+     i:=FindFirstUTF8(slash(TempDir)+'doc_*.pdf',0,fs);
+     while i=0 do begin
+       if fs.Name<>pdfname then begin
+         DeleteFileUTF8(slash(TempDir)+fs.name);
+       end;
+       i:=FindNextUTF8(fs);
+     end;
+     FindCloseUTF8(fs);
+   end
+   else begin
+     // download failed
+     ShowMessage(rsCannotDownlo);
+     exit;
+   end;
+ end;
+ // open pdf in default application
+ ExecuteFile(pdffn);
 end;
 
 procedure Tf_main.HelpQS1Execute(Sender: TObject);
@@ -9217,44 +9306,55 @@ begin
   if not calvisible then f_calendar.Close;
 end;
 
+function Tf_main.QuickDownload(url,fn: string; quickcancel:boolean=true): boolean;
+var     dl:TDownloadDialog;
+begin
+result:=false;
+dl:=TDownloadDialog.Create(self);
+try
+ if cfgm.HttpProxy then begin
+   dl.SocksProxy:='';
+   dl.SocksType:='';
+   dl.HttpProxy:=cfgm.ProxyHost;
+   dl.HttpProxyPort:=cfgm.ProxyPort;
+   dl.HttpProxyUser:=cfgm.ProxyUser;
+   dl.HttpProxyPass:=cfgm.ProxyPass;
+end else if cfgm.SocksProxy then begin
+   dl.HttpProxy:='';
+   dl.SocksType:=cfgm.SocksType;
+   dl.SocksProxy:=cfgm.ProxyHost;
+   dl.HttpProxyPort:=cfgm.ProxyPort;
+   dl.HttpProxyUser:=cfgm.ProxyUser;
+   dl.HttpProxyPass:=cfgm.ProxyPass;
+end else begin
+   dl.SocksProxy:='';
+   dl.SocksType:='';
+   dl.HttpProxy:='';
+   dl.HttpProxyPort:='';
+   dl.HttpProxyUser:='';
+   dl.HttpProxyPass:='';
+end;
+dl.ConfirmDownload:=false;
+dl.QuickCancel:=quickcancel;
+dl.URL:=url;
+dl.SaveToFile:=fn;
+result:=dl.Execute and FileExists(fn);
+finally
+dl.free;
+end;
+end;
+
 procedure Tf_main.MenuUpdSoftClick(Sender: TObject);
-var ver,newver,newbeta,fn: string;
+var ver,newver,newbeta,fn,url: string;
     beta:boolean;
-    dl:TDownloadDialog;
     f: textfile;
 begin
  ver:=cdcversion+'-'+RevisionStr;
  beta:=Pos('-svn-',ver)>0;
- dl:=TDownloadDialog.Create(self);
-  if cfgm.HttpProxy then begin
-    dl.SocksProxy:='';
-    dl.SocksType:='';
-    dl.HttpProxy:=cfgm.ProxyHost;
-    dl.HttpProxyPort:=cfgm.ProxyPort;
-    dl.HttpProxyUser:=cfgm.ProxyUser;
-    dl.HttpProxyPass:=cfgm.ProxyPass;
- end else if cfgm.SocksProxy then begin
-    dl.HttpProxy:='';
-    dl.SocksType:=cfgm.SocksType;
-    dl.SocksProxy:=cfgm.ProxyHost;
-    dl.HttpProxyPort:=cfgm.ProxyPort;
-    dl.HttpProxyUser:=cfgm.ProxyUser;
-    dl.HttpProxyPass:=cfgm.ProxyPass;
- end else begin
-    dl.SocksProxy:='';
-    dl.SocksType:='';
-    dl.HttpProxy:='';
-    dl.HttpProxyPort:='';
-    dl.HttpProxyUser:='';
-    dl.HttpProxyPass:='';
- end;
- dl.ConfirmDownload:=false;
- dl.QuickCancel:=true;
  if beta then begin
-   dl.URL:='http://www.ap-i.net/pub/skychart/beta.txt';
+   url:='http://www.ap-i.net/pub/skychart/beta.txt';
    fn:=slash(TempDir)+'beta.txt';
-   dl.SaveToFile:=fn;
-   if dl.Execute and FileExists(fn) then begin
+   if QuickDownload(url,fn) then begin
       AssignFile(f,fn);
       reset(f);
       readln(f,newbeta);
@@ -9268,10 +9368,9 @@ begin
    end;
  end
  else begin
-   dl.URL:='http://www.ap-i.net/pub/skychart/version.txt';
+   url:='http://www.ap-i.net/pub/skychart/version.txt';
    fn:=slash(TempDir)+'version.txt';
-   dl.SaveToFile:=fn;
-   if dl.Execute and FileExists(fn) then begin
+   if QuickDownload(url,fn) then begin
       AssignFile(f,fn);
       reset(f);
       readln(f,newver);
@@ -9284,7 +9383,6 @@ begin
       else ShowMessage(rsYouAlreadyHa);
    end;
  end;
- dl.free;
 end;
 
 procedure Tf_main.ToolBarFOVResize(Sender: TObject);
