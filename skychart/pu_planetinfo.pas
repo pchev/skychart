@@ -1925,7 +1925,8 @@ end;
 procedure Tf_planetinfo.RefreshInfo;
 
 var y,m,d: integer;
-    h: double;
+    h,ars,des,dist,diam: double;
+    buf: string;
 
   procedure Plot_Internal(const Aarr: array of integer; APlanet: Integer; ASubindex: integer);
   begin
@@ -1966,6 +1967,7 @@ try
   config.CurDay:=d;
   config.CurTime:=h;
 
+
   //
   Rescale_Internal;
 
@@ -1974,6 +1976,19 @@ try
   ActiveNoon  := CenterAtNoon;
   ActiveSizeX := Panel1.Width;
   ActiveSizeY := Panel1.Height;
+
+  // Test we have a valid ephemeris for this date
+  Fplanet.Sun(config.CurJDTT,ars,des,dist,diam);
+  if Fplanet.eph_method='' then begin
+    y:=pos(',',rsEphemerisPro);
+    if y>1 then buf:=copy(rsEphemerisPro,1,y-1)
+           else buf:=rsEphemerisPro;
+    PlotHeader(plbmp, buf, false, true);
+    PaintBox1.Repaint;
+    MainTimer.Enabled := false;
+    exit;
+  end;
+
 
   // Set desired interval for timer to 20 ms
   if MainTimer.Interval <> 20 then MainTimer.Interval := 20;
