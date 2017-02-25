@@ -7,7 +7,7 @@
 #    - install wkhtmltopdf from http://code.google.com/p/wkhtmltopdf/
 #
 
-langs='ca  en  es  fr  it  nl  ru  tr  uk'
+langs='ca  en  es  fr  it  nl  uk'
 
 rm doc_*.pdf
 
