@@ -1608,6 +1608,7 @@ resourcestring
   rsSlewToChartC = 'Slew to chart center';
   rsTour = 'Tour';
   rsActivateVoic = 'Activate voice';
+  rsCannotDownlo = 'Cannot download PDF help now';
 
 // also update upsi_translation
 
