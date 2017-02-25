@@ -2953,7 +2953,7 @@ var x1,x2,y1,y2,xx1,yy1:double;
     saveStarFilter,saveNebFilter,ok:boolean;
     i:integer;
     xx,yy:single;
-const maxln : integer = 2000;
+const maxln : integer = 100000;
 Procedure FindatPosCat(cat:integer);
 begin
  ok:=fcatalog.FindatPos(cat,x1,y1,x2,y2,false,trunc,true,cfgsc,rec);
