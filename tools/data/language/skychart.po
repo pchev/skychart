@@ -6318,3 +6318,7 @@ msgstr ""
 msgid "Activate voice"
 msgstr ""
 
+#: u_translation:rscannotdownlo
+msgid "Cannot download PDF help now"
+msgstr ""
+
