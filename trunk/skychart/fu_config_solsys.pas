@@ -220,6 +220,8 @@ type
     OpenDialog1: TOpenDialog;
     PageControl1: TPageControl;
     procedure AstNeoClick(Sender: TObject);
+    procedure AstPageControl2Changing(Sender: TObject; var AllowChange: Boolean
+      );
     procedure ButtonEphAddClick(Sender: TObject);
     procedure ButtonEphDefaultClick(Sender: TObject);
     procedure ButtonEphDelClick(Sender: TObject);
@@ -228,6 +230,8 @@ type
     procedure CheckBoxPlutoChange(Sender: TObject);
     procedure ComboBox1Select(Sender: TObject);
     procedure ComboBox2Select(Sender: TObject);
+    procedure ComPageControl1Changing(Sender: TObject; var AllowChange: Boolean
+      );
     procedure DownloadAsteroidClick(Sender: TObject);
     procedure DownloadCometClick(Sender: TObject);
     procedure GRSdriftChange(Sender: TObject);
@@ -701,9 +705,25 @@ begin
   csc.sunrefreshtime:=StrToInt(ComboBox2.Text);
 end;
 
+procedure Tf_config_solsys.ComPageControl1Changing(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+  if LockChange then exit;
+  // remove focus from filenamedit to avoid focus bug
+  MemoCom.SetFocus;
+end;
+
 procedure Tf_config_solsys.AstNeoClick(Sender: TObject);
 begin
   csc.AstNEO := AstNeo.Checked;
+end;
+
+procedure Tf_config_solsys.AstPageControl2Changing(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+  if LockChange then exit;
+  // remove focus from filenamedit to avoid focus bug
+  MemoMPC.SetFocus;
 end;
 
 procedure Tf_config_solsys.ButtonEphAddClick(Sender: TObject);
