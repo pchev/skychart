@@ -5583,9 +5583,12 @@ if cfgsc.showlabel[8] then begin
     h:=h+ls;
   until p=0;
 end;
+{$ifdef darwin}
+ls:=round(1.25*ls);
+{$endif}
 h0:=h;
 if cfgsc.showlegend then begin
-  w:=max(w,10*ls)+12;
+  w:=max(w,round(10.5*ls));
   h:=h+6*ls;
   tr:=255;
 end
