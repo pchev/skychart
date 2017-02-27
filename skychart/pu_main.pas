@@ -983,7 +983,7 @@ Autorefresh.enabled:=false;
 for i:=0 to MultiFrame1.ChildCount-1 do
   if MultiFrame1.Childs[i].DockedObject is Tf_chart then
      with MultiFrame1.Childs[i].DockedObject as Tf_chart do begin
-      if sc.cfgsc.autorefresh and sc.cfgsc.UseSystemTime then AutoRefresh;
+      if sc.cfgsc.autorefresh and sc.cfgsc.UseSystemTime and (not sc.cfgsc.ShowScale) then AutoRefresh;
      end;
 finally
 AutoRefreshLock:=false;
