@@ -5444,7 +5444,7 @@ var lbmp : TBGRABitmap;
     col: TBGRAPixel;
     txtl,txt,buf: string;
     drawgray: boolean;
-    w,h,h0,fontnum,labelnum,p,ls,ws,i,xx,yy,sz,tr:integer;
+    w,h,h0,fontnum,labelnum,p,lsp,ls,ws,i,xx,yy,sz,tr:integer;
     mag,dma: double;
     ts: TSize;
     lcol: Tcolor;
@@ -5583,12 +5583,10 @@ if cfgsc.showlabel[8] then begin
     h:=h+ls;
   until p=0;
 end;
-{$ifdef darwin}
-ls:=round(1.25*ls);
-{$endif}
 h0:=h;
 if cfgsc.showlegend then begin
-  w:=max(w,round(10.5*ls));
+  ts:=lbmp.TextSize(rsAbrevAsteroid+rsAbrevComet+rsAbrevVariable+rsAbrevDouble+rsAbrevDark+rsAbrevGalaxyCluster+rsAbrevGalaxy);
+  w:=max(w,round(1.3*ts.cx));
   h:=h+6*ls;
   tr:=255;
 end
@@ -5622,82 +5620,83 @@ if w>0 then begin
     // Stars magnitude
     dma:=max(1,fplot.cfgchart.min_ma/6);
     mag:=-dma;
+    lsp:=w div 7;
     yy:=h0;
-    xx:=-ls+5;
+    xx:=-(lsp div 2);
     for i:=0 to 6 do begin
       mag:=mag+dma;
-      xx:=round(xx+1.5*ls);
+      xx:=round(xx+lsp);
       Fplot.PlotStar(xx,yy,mag,0);
       Fplot.PlotText(xx,yy+ls,fontnum,Fplot.cfgplot.LabelColor[labelnum],laCenter,laCenter,inttostr(round(mag)),cfgsc.WhiteBg,false);
     end;
     // line 2
     h0:=h0+2*ls;
-    sz:=max(10*Fplot.cfgchart.drawsize,ls-4);
+    sz:=max(10*Fplot.cfgchart.drawsize,round(ls*0.6));
     yy:=h0;
-    xx:=-ls+5;
+    xx:=-(lsp div 2);
     // Ast
-    xx:=round(xx+1.5*ls);
+    xx:=round(xx+lsp);
     mag:=5*dma;
     Fplot.PlotAsteroid(xx,yy,cfgsc.AstSymbol,mag);
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum],laCenter, laCenter, rsAbrevAsteroid, cfgsc.WhiteBg, false);
     // Com
-    xx:=round(xx+1.5*ls);
+    xx:=round(xx+lsp);
     mag:=4*dma;
     Fplot.PlotComet(xx,yy,xx+sz,yy+sz,cfgsc.ComSymbol,mag,1.5*sz,1);
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevComet, cfgsc.WhiteBg, false);
     // Var
-    xx:=round(xx+1.5*ls);
+    xx:=round(xx+lsp);
     mag:=4*dma;
     Fplot.PlotStar(xx,yy,mag,0);
     Fplot.PlotVarStar(xx,yy,0,mag);
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevVariable, cfgsc.WhiteBg, false);
     // Dbl
-    xx:=round(xx+1.5*ls);
+    xx:=round(xx+lsp);
     mag:=4*dma;
     Fplot.PlotDblStar(xx,yy,0.8*sz,mag,0,-45,0);
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevDouble, cfgsc.WhiteBg, false);
     // Drk
-    xx:=round(xx+1.5*ls);
+    xx:=round(xx+lsp);
     Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,13,'',cfgsc.WhiteBg,drawgray,clGray);
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevDark, cfgsc.WhiteBg, false);
     // Gcl
-    xx:=round(xx+1.5*ls);
+    xx:=round(xx+lsp);
     Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,12,'',cfgsc.WhiteBg,drawgray,clGray);
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevGalaxyCluster, cfgsc.WhiteBg, false);
     // GX
-    xx:=round(xx+1.5*ls);
+    xx:=round(xx+lsp);
     Fplot.PlotDSOGxy(xx,yy,sz,sz div 3,45,0,100,100,0,0,1,3600,'',drawgray,clGray);
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevGalaxy, cfgsc.WhiteBg, false);
     // line 3
     h0:=h0+2*ls;
     yy:=h0;
-    xx:=-ls+5;
+    xx:=-(lsp div 2);
     // OC
-    xx:=round(xx+1.5*ls);
+    xx:=round(xx+lsp);
     Fplot.PlotDeepSkyObject(xx,yy,sz,0,1,1,2,'',cfgsc.WhiteBg,drawgray,clGray);
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevOpenCluster, cfgsc.WhiteBg, false);
     // GB
-    xx:=round(xx+1.5*ls);
+    xx:=round(xx+lsp);
     Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,3,'',cfgsc.WhiteBg,drawgray,clGray);
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevGlobularCluster, cfgsc.WhiteBg, false);
     // PL
-    xx:=round(xx+1.5*ls);
+    xx:=round(xx+lsp);
     Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,4,'',cfgsc.WhiteBg,drawgray,clGray);
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevPlanetaryNebula, cfgsc.WhiteBg, false);
     // NB
-    xx:=round(xx+1.5*ls);
+    xx:=round(xx+lsp);
     Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,5,'',cfgsc.WhiteBg,drawgray,clGray);
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevNebula, cfgsc.WhiteBg, false);
     // C+N
-    xx:=round(xx+1.5*ls);
+    xx:=round(xx+lsp);
     Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,6,'',cfgsc.WhiteBg,drawgray,clGray);
     Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevClusterNebula, cfgsc.WhiteBg, false);
     // *
-    xx:=round(xx+1.5*ls);
+    xx:=round(xx+lsp);
     Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,7,'',cfgsc.WhiteBg,drawgray,clGray);
     Fplot.PlotText(xx,yy+ls,fontnum,Fplot.cfgplot.LabelColor[labelnum],laCenter,laCenter,nebtype[9],cfgsc.WhiteBg,false);
     // ?
-    xx:=round(xx+1.5*ls);
+    xx:=round(xx+lsp);
     Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,0,'',cfgsc.WhiteBg,drawgray,clGray);
     Fplot.PlotText(xx,yy+ls,fontnum,Fplot.cfgplot.LabelColor[labelnum],laCenter,laCenter,nebtype[2],cfgsc.WhiteBg,false);
   end;
