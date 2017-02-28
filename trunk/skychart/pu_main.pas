@@ -1136,9 +1136,10 @@ begin
 if OpenDialog.InitialDir='' then OpenDialog.InitialDir:=HomeDir;
 OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
 OpenDialog.Title:=rsOpenAChart;
-if OpenDialog.Execute then
+if OpenDialog.Execute then begin
     Savedialog.InitialDir:=ExtractFilePath(OpenDialog.FileName);
     OpenChart(OpenDialog.FileName);
+end;
 end;
 
 procedure Tf_main.FormActivate(Sender: TObject);
