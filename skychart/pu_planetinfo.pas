@@ -153,6 +153,7 @@ type
     TimeIndex : integer;
 
     IsProcessingPlanets : Boolean;
+    IsRecoveringDate : Boolean;
 
     FOV : Double;
     xmin,xmax,ymin,ymax: integer;
@@ -692,6 +693,7 @@ begin
   Planet_Origin_Index := 0;
 
   IsProcessingPlanets := false;
+  IsRecoveringDate := false;
 
   FOV := 1.0;
 
@@ -1985,7 +1987,26 @@ try
            else buf:=rsEphemerisPro;
     PlotHeader(plbmp, buf, false, true);
     PaintBox1.Repaint;
+    Application.ProcessMessages;
+    sleep(500);
+    // try to revert last step
     MainTimer.Enabled := false;
+    if ((NAV_Current = NAV_Play)or(NAV_Current = NAV_StepForward)) and (not IsRecoveringDate) then begin
+      config.CurJDTT := config.CurJDTT - dxJD;
+      IsProcessingPlanets := false;
+      IsRecoveringDate := true;
+      RefreshInfo;
+      IsRecoveringDate := false;
+      exit;
+    end;
+    if ((NAV_Current = NAV_PlayPrev)or(NAV_Current = NAV_StepPrev))  and (not IsRecoveringDate) then begin
+      config.CurJDTT := config.CurJDTT + dxJD;
+      IsProcessingPlanets := false;
+      IsRecoveringDate := true;
+      RefreshInfo;
+      IsRecoveringDate := false;
+      exit;
+    end;
     NAV_Bits.Bits[NAV_ResetTime]   := false;
     NAV_Bits.Bits[NAV_StepForward] := false;
     NAV_Bits.Bits[NAV_StepPrev]    := false;
