@@ -1986,6 +1986,13 @@ try
     PlotHeader(plbmp, buf, false, true);
     PaintBox1.Repaint;
     MainTimer.Enabled := false;
+    NAV_Bits.Bits[NAV_ResetTime]   := false;
+    NAV_Bits.Bits[NAV_StepForward] := false;
+    NAV_Bits.Bits[NAV_StepPrev]    := false;
+    NAV_Bits.Bits[NAV_Play]        := false;
+    NAV_Bits.Bits[NAV_PlayPrev]    := false;
+    NAV_Bits.Bits[NAV_ChartSync]   := false;
+    PaintBox2.Invalidate;
     exit;
   end;
 
