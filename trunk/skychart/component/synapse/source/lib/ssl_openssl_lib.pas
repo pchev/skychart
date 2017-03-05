@@ -1844,8 +1844,8 @@ end;
 
 function InitSSLInterface: Boolean;
 var
-  s: string;
-  x: integer;
+  s,lver: string;
+  x,lver1,lver2,lver3: integer;
 begin
   {pf}
   if SSLLoaded then
@@ -1864,6 +1864,28 @@ begin
 {$ELSE}
       SSLUtilHandle := LoadLib(DLLUtilName);
       SSLLibHandle := LoadLib(DLLSSLName);
+      {$IFDEF Linux}
+         if SSLLibHandle=0 then begin    // try versioned library name
+           for lver1:=1 downto 0 do begin
+             lver:='.'+IntToStr(lver1);
+             SSLLibHandle := LoadLib(DLLSSLName+lver);
+             if SSLLibHandle<>0 then break;
+             for lver2:=9 downto 0 do begin
+               lver:='.'+IntToStr(lver1)+'.'+IntToStr(lver2);
+               SSLLibHandle := LoadLib(DLLSSLName+lver);
+               if SSLLibHandle<>0 then break;
+               for lver3:=9 downto 0 do begin
+                 lver:='.'+IntToStr(lver1)+'.'+IntToStr(lver2)+'.'+IntToStr(lver3);
+                 SSLLibHandle := LoadLib(DLLSSLName+lver);
+                 if SSLLibHandle<>0 then break;
+               end;
+               if SSLLibHandle<>0 then break;
+             end;
+             if SSLLibHandle<>0 then break;
+           end;
+           SSLUtilHandle := LoadLib(DLLUtilName+lver);
+         end;
+      {$ENDIF}
   {$IFDEF MSWINDOWS}
       if (SSLLibHandle = 0) then
         SSLLibHandle := LoadLib(DLLSSLName2);
