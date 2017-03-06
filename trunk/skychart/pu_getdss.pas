@@ -343,8 +343,8 @@ end else if Fenabled then begin    // RealSky cdrom
   i.pPrompt2:=Pchar(rsInDrive);
   {$ifdef unix}
   exec('export LC_ALL=C');
-  chdir(TempDir);
   {$endif}
+  chdir(TempDir);
   if cfgdss.dssplateprompt then begin
     rc:=GetPlateList(addr(i),addr(pl));
     if (rc<>0) then exit;
