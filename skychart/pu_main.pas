@@ -1864,6 +1864,10 @@ PrivateDir:=expandfilename(PrivateDir);
 HomeDir:=expandfilename(HomeDir);
 {$endif}
 {$ifdef mswindows}
+if IsUserAnAdmin then begin
+  PrivateDir:=PrivateDir+'-admin';
+  basecaption:=basecaption+'-admin';
+end;
 buf:=systoutf8(appdir);
 buf:=trim(buf);
 appdir:=SafeUTF8ToSys(buf);
@@ -2161,6 +2165,7 @@ CursorImage1:=TCursorImage.Create;
 step:='Application directory';
 if VerboseMsg then
  debugln(step);
+basecaption:=caption;
 GetAppDir;
 chdir(appdir);
 step:='Trace';
@@ -2188,7 +2193,6 @@ step:='Multiframe';
 if VerboseMsg then
  WriteTrace(step);
 TabControl1.Visible:=false;
-basecaption:=caption;
 MultiFrame1.WindowList:=SubWindow;
 MultiFrame1.KeepLastChild:=true;
 ChildControl.visible:=false;
