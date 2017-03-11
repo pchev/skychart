@@ -45,9 +45,9 @@ type
 
 {$i revision.inc}
 
+{$i cdc_version.inc}
+
 const
-  cdcversion = '3.11-svn';
-  cdcver = '3.11y';
   cdccpy = 'Copyright (C) 2002-2017 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf +
     'Peter Dean,' + crlf +
