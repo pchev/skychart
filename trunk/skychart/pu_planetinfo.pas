@@ -315,18 +315,18 @@ const
    C_SixMonth = 183;
    C_OneYear  = 365.25;
 
-   // Revolution of planets
+   // Revolution of planets    https://nssdc.gsfc.nasa.gov/planetary/factsheet/
    CRevolution: array [C_Mercury..C_Callisto] of double =
     (
     87.969,              // Mercury
     224.701,             // Venus
     C_OneYear,           // Earth
     686.98,              // Mars
-    C_OneYear * 11.862,  // Jupiter
-    C_OneYear * 29.457,  // Saturn
-    C_OneYear * 84.011,  // Uranus
-    C_OneYear * 164.79,  // Neptune
-    C_OneYear * 247.68 , // Pluto
+    4332.59,             // Jupiter
+    10759.22,            // Saturn
+    30685.4,             // Uranus
+    60189.0,             // Neptune
+    90560.0,             // Pluto
     0, // Sun
     0, // Moon
     0, // Io
