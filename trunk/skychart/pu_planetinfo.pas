@@ -311,6 +311,8 @@ const
    C_OneHour  = 1.0/24;
    C_OneDay   = 1.0;
    C_OneMonth = 31;
+   C_ThreeMonth = 91;
+   C_SixMonth = 183;
    C_OneYear  = 365.25;
 
    // Revolution of planets
@@ -2503,8 +2505,8 @@ begin
   inc(i); VTimeSpeed[i] := C_OneDay * 10;
   inc(i); VTimeSpeed[i] := C_OneMonth;
   inc(i); VTimeSpeed[i] := CRevolution[C_Mercury];  // Mercury revolution
-  inc(i); VTimeSpeed[i] := C_OneMonth * 3;
-  inc(i); VTimeSpeed[i] := C_OneMonth * 6;
+  inc(i); VTimeSpeed[i] := C_ThreeMonth;
+  inc(i); VTimeSpeed[i] := C_SixMonth;
   inc(i); VTimeSpeed[i] := CRevolution[C_Venus];    // Venus   revolution
   inc(i); VTimeSpeed[i] := CRevolution[C_Earth];    // Earth   revolution
   inc(i); VTimeSpeed[i] := CRevolution[C_Mars];     // Mars    revolution
