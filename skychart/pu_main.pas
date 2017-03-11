@@ -6408,17 +6408,16 @@ if  Config_Version < '3.11y' then begin
   def_cfgsc.GRSlongitude:=262.5;
   def_cfgsc.GRSjd:=jd(2017,2,1,0);
   def_cfgsc.GRSdrift:=18.2/365.25;
+  // cleanup xplanet tmp directories
+  DeleteFilesInDir(slash(TempDir)+'32');
+  DeleteFilesInDir(slash(TempDir)+'64');
+  DeleteFilesInDir(slash(TempDir)+'120');
+  DeleteFilesInDir(slash(TempDir)+'240');
+  DeleteFilesInDir(slash(TempDir)+'320');
+  DeleteFilesInDir(slash(TempDir)+'480');
+  DeleteFilesInDir(slash(TempDir)+'512');
+  DeleteFilesInDir(slash(TempDir)+'1024');
 end;
-
-// cleanup xplanet tmp directories after each version change, see: u_orbits ScaledPlanetMapDir_Individual
-DeleteFilesInDir(slash(TempDir)+'32');
-DeleteFilesInDir(slash(TempDir)+'64');
-DeleteFilesInDir(slash(TempDir)+'120');
-DeleteFilesInDir(slash(TempDir)+'240');
-DeleteFilesInDir(slash(TempDir)+'320');
-DeleteFilesInDir(slash(TempDir)+'480');
-DeleteFilesInDir(slash(TempDir)+'512');
-DeleteFilesInDir(slash(TempDir)+'1024');
 end;
 
 procedure Tf_main.SaveVersion;
