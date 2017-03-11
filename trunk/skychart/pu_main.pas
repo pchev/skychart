@@ -1864,10 +1864,6 @@ PrivateDir:=expandfilename(PrivateDir);
 HomeDir:=expandfilename(HomeDir);
 {$endif}
 {$ifdef mswindows}
-if IsUserAnAdmin then begin
-  PrivateDir:=PrivateDir+'-admin';
-  basecaption:=basecaption+'-admin';
-end;
 buf:=systoutf8(appdir);
 buf:=trim(buf);
 appdir:=SafeUTF8ToSys(buf);
