@@ -1826,6 +1826,20 @@ for j:=0 to cfgsc.SimNb-1 do begin
        draworder[i]:=n;
     end;
   end;
+  if (Fplot.cfgplot.plaplot=2) and cfgsc.PlanetParalaxe and (cfgsc.CurYear>1000) then begin
+    buf:=jddate2(cfgsc.Planetlst[j,10,3]);
+    buf:=buf+' 1.0 '+formatfloat(f5,cfgsc.ObsLatitude)+blank+formatfloat(f5,-cfgsc.ObsLongitude);
+    AssignFile(ft,slash(Tempdir)+'origin.txt');
+    rewrite(ft);
+    writeln(ft,buf);
+    CloseFile(ft);
+    if VerboseMsg then WriteTrace('Created '+slash(Tempdir)+'origin.txt');
+  end else begin
+    if FileExists(slash(Tempdir)+'origin.txt') then begin
+       DeleteFile(slash(Tempdir)+'origin.txt');
+       if VerboseMsg then WriteTrace('Deleted '+slash(Tempdir)+'origin.txt');
+    end;
+  end;
   for n:=1 to 11 do begin
     ipla:=draworder[n];
     if (j>0) and (not cfgsc.SimObject[ipla]) then continue;
@@ -1837,16 +1851,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
     diam:=cfgsc.Planetlst[j,ipla,4];
     magn:=cfgsc.Planetlst[j,ipla,5];
     phase:=cfgsc.Planetlst[j,ipla,7];
-    DeleteFile(slash(Tempdir)+'origin.txt');
     Eq2Hz(cfgsc.CurST-ra,dec,a,h,cfgsc,0) ;
-    if (Fplot.cfgplot.plaplot=2) and cfgsc.PlanetParalaxe and (h>0) and (cfgsc.CurYear>1000) then begin
-      buf:=jddate2(cfgsc.Planetlst[j,10,3]);
-      buf:=buf+' 1.0 '+formatfloat(f5,cfgsc.ObsLatitude)+blank+formatfloat(f5,-cfgsc.ObsLongitude);
-      AssignFile(ft,slash(Tempdir)+'origin.txt');
-      rewrite(ft);
-      writeln(ft,buf);
-      CloseFile(ft);
-    end;
     if cfgsc.ProjPole=Altaz then begin
       dh:=abs(deg2rad*diam/3600);
       h1:=h+dh/2;
