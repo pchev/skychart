@@ -311,7 +311,7 @@ const
    C_OneHour  = 1.0/24;
    C_OneDay   = 1.0;
    C_OneMonth = 31;
-   C_OneYear  = 365.256;
+   C_OneYear  = 365.25;
 
    // Revolution of planets
    CRevolution: array [C_Mercury..C_Callisto] of double =
@@ -441,7 +441,7 @@ begin
 
     begin
 
-      c := round (d / C_OneYear);
+      c := trunc (d / C_OneYear);
       if c > 0 then
       begin
 
