@@ -14,6 +14,9 @@
         </SyntaxOptions>
       </Parsing>
       <Other>
+        <Verbosity>
+          <ShowHints Value="False"/>
+        </Verbosity>
         <CustomOptions Value="-CF64"/>
       </Other>
     </CompilerOptions>
@@ -133,7 +136,7 @@
       </Item2>
     </RequiredPkgs>
     <UsageOptions>
-      <UnitPath Value="$(PkgOutDir)/"/>
+      <UnitPath Value="$(PkgOutDir)"/>
     </UsageOptions>
     <PublishOptions>
       <Version Value="2"/>
