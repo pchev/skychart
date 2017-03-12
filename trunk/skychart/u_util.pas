@@ -222,6 +222,7 @@ var p: TStringList;
 begin
 p:=TStringList.Create;
 p.clear;
+{$WARN SYMBOL_PLATFORM OFF}
 {$ifdef linux}
   i:=findfirst('/dev/ttyS*',faSysFile,fs);
   while i=0 do begin
@@ -281,6 +282,7 @@ p.clear;
   reg.Free;
   l.Free;
 {$endif}
+{$WARN SYMBOL_PLATFORM ON}
 p.Sort;
 buf := c.text;
 try
