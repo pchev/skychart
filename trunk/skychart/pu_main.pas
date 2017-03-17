@@ -1514,7 +1514,7 @@ end;
 
 procedure Tf_main.MenuHelpPDFClick(Sender: TObject);
 const pdflang='ca en es fr it nl uk ';
-var lg,buf,lsturl,pdfurl,pdfname,lstfn,pdffn: string;
+var lg,dlg,buf,lsturl,pdfurl,pdfname,lstfn,pdffn: string;
     i:integer;
     beta:boolean;
     f: textfile;
@@ -1548,6 +1548,7 @@ begin
  // get pdf doc language
  lg:=trim(Lang);
  if pos(lg+blank,pdflang)=0 then lg:='en';
+ dlg:=lg;
  // check program version
  beta:=Pos('-svn',cdcversion)>0;
  lstfn:=slash(TempDir)+'pdflist.txt';
@@ -1561,10 +1562,12 @@ begin
      readln(f,buf);
      if pos(lg+'.pdf',buf)>0 then begin
         pdfname:=trim(buf);
+        dlg:=lg;
         break;
      end;
      if pos('en.pdf',buf)>0 then begin  // english by default in case of problem
         pdfname:=trim(buf);
+        dlg:='en';
      end;
    end;
    Closefile(f);
@@ -1591,7 +1594,7 @@ begin
    pdfurl:=URL_DocPDF+pdfname;
    if QuickDownload(pdfurl,pdffn,false) then begin
      // delete old pdf files
-     i:=FindFirstUTF8(slash(TempDir)+'doc_*.pdf',0,fs);
+     i:=FindFirstUTF8(slash(TempDir)+'doc_*_'+dlg+'.pdf',0,fs);
      while i=0 do begin
        if fs.Name<>pdfname then begin
          DeleteFileUTF8(slash(TempDir)+fs.name);
