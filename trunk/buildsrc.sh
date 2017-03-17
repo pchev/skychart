@@ -2,7 +2,7 @@
 
 # Script to make the full source tar for release
 
-version=3.11
+version=4.0
 pkg=trunk
 #pkg=tags/V310
 repo=http://svn.code.sf.net/p/skychart/code
