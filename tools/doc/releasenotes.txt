@@ -1,6 +1,4 @@
-Version 3.11 beta, release Notes
-
-This version can be considered as a 4.0 release candidate
+Version 4.0, release Notes
 
 New functions:
 

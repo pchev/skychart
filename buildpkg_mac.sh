@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-version=3.11
+version=4.0
 
 basedir=/tmp/skychart   # Be sure this is set to a non existent directory, it is removed after the run!
 
@@ -25,7 +25,7 @@ echo $lastrev ' - ' $currentrev
 if [[ $lastrev -ne $currentrev ]]; then
 
 # delete old files
-  rm skychart-3*.dmg
+  rm skychart-*.dmg
   rm bin-*.bz2
   rm -rf $basedir
 

@@ -1,6 +1,4 @@
-Version 3.11 beta, Notes de la version
-
-Cette version peut être considérée comme un candidat pour la release 4.0
+Version 4.0, Notes de la version
 
 Nouvelles fonctions:
 

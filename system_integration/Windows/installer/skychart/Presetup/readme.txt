@@ -1,5 +1,5 @@
 Skychart / Cartes du Ciel
-Version 3.11 beta
+Version 4.0
 
 If your are upgrading, be sure to install in the directory where you already install Skychart.
 If you want to reinstall to a new location you must uninstall the old version first.
