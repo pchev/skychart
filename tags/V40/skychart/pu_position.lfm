@@ -1,0 +1,217 @@
+object f_position: Tf_position
+  Left = 481
+  Height = 282
+  Top = 108
+  Width = 510
+  ActiveControl = Panel2
+  Caption = 'Position'
+  ClientHeight = 282
+  ClientWidth = 510
+  OnCreate = FormCreate
+  OnShow = FormShow
+  ParentFont = True
+  LCLVersion = '1.6.2.0'
+  Visible = False
+  object Button1: TButton
+    Left = 216
+    Height = 25
+    Top = 240
+    Width = 75
+    BorderSpacing.InnerBorder = 4
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 4
+  end
+  object Button2: TButton
+    Left = 397
+    Height = 25
+    Top = 240
+    Width = 75
+    BorderSpacing.InnerBorder = 4
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 5
+  end
+  object Panel1: TPanel
+    Left = 8
+    Height = 77
+    Top = 88
+    Width = 496
+    ClientHeight = 77
+    ClientWidth = 496
+    FullRepaint = False
+    TabOrder = 1
+    object coord1: TLabel
+      Left = 8
+      Height = 15
+      Top = 36
+      Width = 16
+      Caption = 'Az'
+      ParentColor = False
+    end
+    object coord2: TLabel
+      Left = 256
+      Height = 15
+      Top = 36
+      Width = 17
+      Caption = 'Alt'
+      ParentColor = False
+    end
+    object coord: TLabel
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 36
+      Caption = 'coord'
+      ParentColor = False
+    end
+    object long: TRaDec
+      Left = 39
+      Height = 23
+      Top = 32
+      Width = 210
+      kind = Az
+      value = 0
+      Enabled = True
+      OnChange = CoordChange
+      TabOrder = 0
+    end
+    object lat: TRaDec
+      Left = 280
+      Height = 23
+      Top = 32
+      Width = 210
+      kind = Alt
+      value = 0
+      Enabled = True
+      OnChange = CoordChange
+      TabOrder = 1
+    end
+  end
+  object Panel2: TPanel
+    Left = 8
+    Height = 77
+    Top = 3
+    Width = 495
+    ClientHeight = 77
+    ClientWidth = 495
+    FullRepaint = False
+    TabOrder = 0
+    object eq1: TLabel
+      Left = 8
+      Height = 15
+      Top = 36
+      Width = 16
+      Caption = 'RA'
+      ParentColor = False
+    end
+    object eq2: TLabel
+      Left = 256
+      Height = 15
+      Top = 36
+      Width = 18
+      Caption = 'DE'
+      ParentColor = False
+    end
+    object Equinox: TLabel
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 50
+      Caption = 'Equinox'
+      ParentColor = False
+    end
+    object ra: TRaDec
+      Left = 39
+      Height = 23
+      Top = 32
+      Width = 210
+      kind = RA
+      value = 0
+      Enabled = True
+      OnChange = EqChange
+      TabOrder = 0
+    end
+    object de: TRaDec
+      Left = 280
+      Height = 23
+      Top = 32
+      Width = 210
+      kind = DE
+      value = 0
+      Enabled = True
+      OnChange = EqChange
+      TabOrder = 1
+    end
+  end
+  object Panel3: TPanel
+    Left = 8
+    Height = 49
+    Top = 176
+    Width = 496
+    ClientHeight = 49
+    ClientWidth = 496
+    FullRepaint = False
+    TabOrder = 2
+    object Label3: TLabel
+      Left = 8
+      Height = 15
+      Top = 14
+      Width = 26
+      Caption = 'FOV'
+      ParentColor = False
+    end
+    object Label4: TLabel
+      Left = 289
+      Height = 15
+      Top = 14
+      Width = 52
+      Caption = 'Rotation'
+      ParentColor = False
+    end
+    object Fov: TRaDec
+      Left = 72
+      Height = 23
+      Top = 9
+      Width = 210
+      kind = Az
+      value = 0
+      Enabled = True
+      TabOrder = 0
+    end
+    object rot: TFloatEdit
+      Left = 353
+      Height = 21
+      Hint = '-180..180'
+      Top = 10
+      Width = 73
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      Value = 0
+      MinValue = -180
+      MaxValue = 180
+      Digits = 5
+    end
+  end
+  object Button3: TButton
+    Left = 120
+    Height = 25
+    Top = 240
+    Width = 75
+    Caption = 'Help'
+    OnClick = Button3Click
+    TabOrder = 3
+  end
+  object Button4: TButton
+    Left = 304
+    Height = 25
+    Top = 240
+    Width = 75
+    Caption = 'Apply'
+    OnClick = Button4Click
+    TabOrder = 6
+  end
+end

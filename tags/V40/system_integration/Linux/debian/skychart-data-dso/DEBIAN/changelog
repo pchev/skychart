@@ -1,0 +1,11 @@
+skychart-data-dso (4.0) experimental; urgency=low
+
+  * New version of PGC/Leda, add Sharpless HII Regions and Barnard Dark Objects, remove NGC 
+
+ -- Patrick Chevalley <pch@ap-i.net>  Wed Jan 11 16:58:07 CET 2017
+ 
+skychart-data-dso (3.1) experimental; urgency=low
+
+  * New DSO catalog package
+
+ -- Patrick Chevalley <pch@ap-i.net>  Thu, 9 Sep 2010 10:00:00 +0100

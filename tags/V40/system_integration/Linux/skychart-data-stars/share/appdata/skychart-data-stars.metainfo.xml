@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="addon">
+  <id>skychart-data-stars</id>
+  <extends>skychart.desktop</extends>
+  <name>Additional Star Catalogs</name>
+  <summary>Additional stars catalog down to magnitude 12, variable and 
+    double stars: Tycho 2; General Catalogue of Variable Stars; 
+    Washington Double Stars.</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>Public Domain</project_license>
+</component>

@@ -1,0 +1,864 @@
+
+        QuickSat Satellite Prediction Program
+        Version 2.15N            June 4, 2010
+
+
+        Description of the Documentation
+
+This documentation consists of the following parts:
+
+1. Introduction                                     line  20
+2. Operation of the program                         line  69
+3. How to run the test                              line 128
+4. Description of the control file                  line 144
+5. Description of the intrinsic magnitudes file(s)  line 577
+6. Description of the orbital elements file(s)      line 670
+7. Description of the prediction output             line 708
+
+
+
+        Introduction
+
+This program has gradually evolved over many years.  Its purpose has always
+been to support visual observations of satellites.  For that reason, the
+normal execution of the program produces a single prediction for each
+satellite.  That prediction point is the culmination point if that point is
+outside the Earth's shadow.  Otherwise, a point outside the Earth's shadow
+that is nearest the culmination point is chosen.  Multiple predictions for
+each satellite may also be chosen.  The prediction of an object's magnitude
+is a primary goal.  The probable error in time of prediction is computed by
+a heuristic.  The observer may create his own "intrinsic magnitudes override"
+file so that his own information will "override" the information in the
+default "intrinsic magnitudes" file.  There is a "radio" predictions flag
+that will bypass all of the parts of the program having to do with magnitudes,
+the Earth's shadow, RA and Dec.
+
+This program is freeware.  There are no restrictions on its distribution.
+
+The program is written in Fortran. This version requires the use of a
+coprocessor.  This is a "DOS" program.
+
+The program has certain "built-in" limits:  1) No more than 5000 names and
+magnitudes may be stored from the "intrinsic magnitudes" file.  2) If the
+"store elements in memory" option is chosen, no more than 5000 element sets
+may be stored from the orbital elements files.  3) No more than 600 different
+set of "size" values can be stored.
+
+The following files are provided:
+1. quicksat.txt - this file
+2. quicksat.exe - the executable
+3. quicksat.mag - a file of intrinsic magnitudes, sizes, and RCS values
+4. quicksat.ctl - an input test control file
+5. quicksat.dat - an input test elements file (these elsets are 11 years old)
+6. quicksat.ref - the output file from the test
+
+The author of the program is Mike McCants.  I can be reached at
+"mmccants@io.com" on the Internet.  The current version of Quicksat is
+located in my ftp area, which can be accessed from my home page.
+(http://www.io.com/~mmccants/)
+
+Changes for version 2.15N:  This is a 32-bit executable.  It was generated
+by using f2c to convert the Fortran files to C and then by using Digital
+Mars C to generate the program.  The limit on the number of input tles has
+been increased to 5000.  The limit on the number of satellite names has
+been increased to 5000.  The limit on the number of output predictions
+that can be generated has been increased to 5000.
+
+
+
+        Operation of the Program
+
+
+The user is expected to operate the program in the following way:
+
+I. Input data preparation
+   1. Orbital elements are obtained.  Note: the elements file must have
+      a carriage return character at the end of each line.  If you obtain
+      a file from kilroy.jpl.nasa.gov/pub/elements and you fail to add
+      a carriage return character to the end of each line, the message
+      "no elements were loaded" will be printed.  The program ADDCR can
+      be used with the command "ADDCR input-file output-file".
+   2. Optionally, names, intrinsic magnitude, sizes, or comments
+      can be added to an "intrinsic magnitudes override" file.
+
+II. Control file preparation
+   1. The control file is edited to specify either "tonight" or the year,
+      month and day (or zero) for the time of predictions, the latitude
+      and longitude for the observing site, and the name(s) of the satellite
+      elements input file(s).
+
+III. Program execution
+   1. The program is executed.  (This is a DOS program.)
+   2. The name of the control file to be used can be placed on the command
+      line as a single parameter.  If no control file is specified on the
+      command line and there is a control file named QUICKSAT.CTL in the
+      current directory, then that file is used.  If there is not a file
+      named QUICKSAT.CTL in the current directory, the program prompts for
+      the name of the control file to be used.
+   3. As determined by the control file, the user may be requested for the
+      day of the month for the desired predictions.
+   4. As determined by the control file, the user may be requested to enter
+      up to 20 NCAT numbers of objects to be predicted for.
+   5. As determined by the control file, the user may be requested for the
+      name of the file to contain output.
+   6. As determined by the control file, the user may be requested for the
+      name of a file containing orbital elements.
+
+IV. After the program completes, the output file may then be printed or
+    displayed.
+
+The program operates in the following way:
+
+1. The control file is read.
+2. The intrinsic magnitudes data is read into memory.
+   (Note: the program will continue even if this file is not present.)
+3. The intrinsic magnitudes override data is read into memory.
+4. The orbital elements are read into memory (if the "store elements
+   in memory" flag is true).
+5. All predictions for the first night are generated and stored in memory.
+6. The predictions are sorted into time order and written to the output file.
+Steps 5 and 6 are repeated for subsequent days.
+
+However, if a "combine" operation is specified, predictions for only one night
+should be specified and steps 1, 4, and 5 are repeated for each set of control
+lines.  Then step 6 is performed.
+
+
+
+        How to Run the Test
+
+
+1. Enter QUICKSAT to execute the program.
+
+2. Compare the generated file, OUTPUT.TXT to the reference file, QUICKSAT.REF.
+
+Note:  Of course, lower case file names may be used, upper case is shown here
+for clarity.
+
+Note: the elements in the QUICKSAT.DAT test file are from 1990 and the
+test output is for 1990.  You must obtain current elements in order to
+compute current predictions.
+
+
+
+        Description of the Control File
+
+
+This file controls the operation of the program.  If the name of a control
+file is entered on the command line, that file is processed.  If no filename
+parameter is given and a control file named QUICKSAT.CTL exists in the
+current directory, it will be used.  If not, the user will be prompted to
+enter the name of the control file to be used.
+
+There are at least 21 lines in this file.  Each will be described in turn.
+
+NOTE:  Each line is in a "free form" format.  Values may be separated by
+spaces or a comma.  Comments may be placed after the data values.
+
+NOTE:  Two or more complete sets of control information may be "combined"
+so that a single output file will contain output generated by any of them.
+
+Example test input control file (QUICKSAT.CTL):
+
+1990  7 Year, month number
+26 0 Start date, end date
+-0.3 -5.5   Start time, end time, "A" flag
+30.3340  97.7600  520.  5105 Crestway Dr.
+-5 CDT 12 correction for UT to time zone, time zone name, 12/24 flag
+2000 Epoch of predicted RA, Dec
+6.5 Magnitude limit
+15 Altitude cut-off value
+1.0 The search/step parameter value
+T True means store all elements in memory
+T True means accept only the most recent elements for each object
+F True means ignore shadow test
+T  1 True means generate multiple prediction points, how many each way
+T True means output distance values in miles
+T True means generate a blank line before each object's prediction.
+           Up to 10 non-blank flags to select class(es) of objects
+A        Output format flag, R/P option, D/C/N option, Azimuth option
+quicksat.mag      Intrinsic magnitudes input file
+none              Intrinsic magnitudes override file
+output.txt        Output file
+quicksat.dat      Elements input file
+EOF               End of input file list
+
+
+Line 1:  This line is either the word "tonight" or the year and
+         month number.
+
+tonight  Use current computer date
+1990  7 Year, month number
+
+If the word "tonight" appears in lower case, then the current computer
+date will be used to obtain the year, month, and day. In this case,
+line 2 must NOT be present in the control file.  Note: the computer time
+is ignored.  If it is 1AM on the 18th, predictions will be generated
+for the evening of the 18th and/or the morning of the 19th, not for the
+morning of the 18th.
+
+
+Line 2:  This line gives the dates for prediction.
+
+26  0 Start date, end date
+
+Note: if line 1 has the word "tonight", line 2 must NOT be present.
+
+The first number is first day for predictions, the second number is the
+last day for predictions.  An end date of zero means perform predictions
+for only one day.  If the start date is specified as zero, the user will
+be prompted and asked to supply the start date and stop date from the
+terminal.  If only one number is entered, predictions for only that day
+will be performed.
+
+NOTE:  Due to the way the date is used in the program, the user must NORMALLY
+enter the date which ENDS at midnight.  In the test case, the number 26 is
+given as the date.  This means that predictions will be performed for the
+evening of July 26 and the morning of July 27.  July 26 was a Thursday.  The
+title, "July 26  Thu evening", will appear at the top of the predictions.
+The user should ALWAYS double check to make sure that a one day error is
+not being made.
+
+If it is desired to run predictions for only the morning of July 27, then
+the date must STILL be entered as 26.  The start time, end time values
+should be changed to +5.5, +0.3 to run morning predictions only.
+
+Note:  This is NOT the case if the "A" flag is set or the "radio" predictions
+flag is set.  In these cases, the actual UT date must be entered.
+
+
+Line 3:  This line specifies the prediction time limits and the "A" flag.
+
+-0.3 -5.5   Start time, end time, "A" flag
+
+The prediction time limits values are in hours.  A negative number means
+"before", a positive number means "after".  Unless "absolute" mode or "radio"
+predictions mode has been specified, the reference times are the times that
+the sun is 10 degrees below the observer's horizon.  Therefore a value of
+-0.3 means begin predictions 18 minutes BEFORE the time that the sun is 10
+degrees below the observer's horizon in the EVENING.  A value of -5.5 means
+end the predictions at the time which is 5 hours 30 minutes BEFORE the time
+the sun is 10 degrees below the observer's horizon in the MORNING.  These
+10 degree reference times are printed as part of the output title.
+
+To run evening predictions, a span of 0 to -6 is appropriate.  To run morning
+predictions, a span of +6 to 0 is appropriate.  A span of 0 to 0 runs
+predictions for both morning and evening.  But, of course, the "-6" value
+depends greatly on the latitude and time of year.
+
+If the start/stop times are followed by the letter "A", then absolute times
+(UT) are specified.
+
+If The "A" flag or "radio" predictions have been specified, then these times
+are relative to zero hours UT.  That is, -5.0 +2.0 would be a 7 hour span
+beginning 5 hours before 0 hours UT and ending 2 hours after 0 hours UT.
+Remember, in these cases, the start date is the actual UT date.
+
+
+Line 4:  This line gives the latitude, longitude, height, and site name
+of the observer.
+
+30.334  97.760  520.  5105 Crestway Dr.
+
+The site name text can be up to 24 characters in length.
+The longitude is positive for WEST longitude, negative for east longitude.
+Note that this is the opposite from most prediction programs.
+Height is in feet.
+
+
+Line 5:  This line gives the UT correction value, the time zone name,
+         and the 12/24 hour flag.
+
+-5 CDT 12 Correction for UT to time zone, time zone name, 12/24 flag
+
+The time zone correction value is added to the UT time of prediction to
+produce a local time of prediction.  If the resulting value is zero or
+negative, 24 will be added to make it greater than zero.  If the resulting
+value is greater than or equal to 24, then 24 will be subtracted.  In
+either case, the date will be adjusted.  The result is a time from 0 to 23.
+The designation AM or PM is based on this value.
+
+If the 12/24 flag is not 12, then this result is the output.  If the flag
+is 12, then the time value is adjusted to be from 1 to 12.
+
+
+Line 6:  This line gives the epoch of the RA and Dec values.
+
+2000 Epoch of RA, Dec
+
+
+Line 7:  This line gives the "cut-off" magnitude.
+
+6.5 Magnitude limit
+
+Any prediction whose magnitude is fainter than the "cut-off" magnitude
+will be suppressed.  If the intrinsic magnitude of an object is unknown
+but an RCS value is known, then an intrinsic magnitude for the object will
+be computed from the RCS value for use by this "cut-off" test.  If the
+RCS value is unknown, then the intrinsic magnitude is assumed to be either
+4.0 or 7.0 for this magnitude limit test.  For objects whose NORAD catalog
+number is less than or equal to the "7.0 test value", an intrinsic magnitude
+of 7.0 is assumed.  For objects with a greater number, 4.0 is assumed.
+
+
+Line 8:  This line gives the altitude "cut-off" value.
+
+15 Altitude cut-off value
+
+Any prediction which has an altitude below this "cut-off" value will be
+suppressed.
+
+
+Line 9:  This line gives the search/step parameter value.
+
+1.0 The search/step parameter value
+
+This parameter value is used as a "step size" value in two situations.
+If multiple points of prediction are specified, this value gives the step
+size between each.  If the culmination point is inside the Earth's shadow,
+then 1/2 of this value is used as the step size to search for a point that
+is outside of the Earth's shadow.
+
+If multiple points of prediction are specified, this parameter should be
+adjusted to provide the desired spacing between the points.  A value of 1.0
+will give the following results:  For an object at 400 miles, about a 1
+minute spacing.  For an object at 600 miles, about a 1:30 spacing.  For an
+object at 1000 miles, about a 2 minute spacing.  If an object will pass
+through the observer's zenith, then a step size of 1.0 will give predictions
+at an altitude of about 50 degrees before and after the zenith prediction.
+
+If multiple points of prediction are not specified, 1/2 of the value is
+used to search for a position that is about 20 miles outside of the Earth's
+shadow.  Thus a smaller search size value would require more computation,
+but would often find a point higher in the sky that has a shadow height
+of more than 20 miles.
+
+
+Line 10:  This line gives the "store elements in memory" flag.
+
+T True means store all elements in memory
+
+If this flag is true, elements are read from the input file(s) and
+stored in memory.  No more than 5000 elements may be stored.  The
+"keep only the most recent elements" flag works across files.
+
+If this flag is false, elements are read in and processed, so there is
+no limit on the number of elements that can be processed.  However,
+the "keep only the most recent elements" works only when the multiple
+element sets for an object are grouped together in an element file.
+If the elements for an object are not together in the file or appear
+in multiple files, then multiple predictions will be generated.
+
+
+Line 11:  This line gives the "keep only the most recent elements" flag.
+
+T True means keep only the most recent elements for each object
+
+If this flag is false, all elements in all input files will be accepted
+for predictions.  If there are duplicate element sets for an object, then
+there will be multiple predictions for that object.  If this flag is true,
+each element set will be checked to see if it is for the same object as an
+element set already read in.  If so, then the element set which has the
+older epoch will be discarded.  Thus only the latest data for each object
+will remain for prediction purposes.  But, see limitations on this process
+described under line 10.
+
+
+Line 12:  This line gives the shadow test flag.
+
+F True means ignore shadow test
+
+If this flag is false, no prediction will be generated for any point
+where the height of the object is less than about 20 miles above the
+Earth's shadow.  If this flag is true, such prediction points will not be
+suppressed, so predictions inside the Earth's shadow will be generated.
+Such predictions will have negative shadow height values.
+
+
+Line 13:  This line has the multiple points flag (T/F) and the limit on
+          the number of points that will be generated.
+
+T  1 True means generate multiple prediction points, how many each way
+
+If this flag is false, only one prediction point will be generated for each
+pass of each object.  If this flag is true, multiple points may be generated.
+Each point must satisfy the shadow test, altitude cut-off, and magnitude
+cut-off.  The time difference between the points is determined by the step
+size parameter value and the object's mean height.  The number of points
+is the limit on how many points can be generated "on each side" of the
+culmination prediction.  In the normal case, a value of 1 will generate
+3 prediction points - the culmination point and one point both before and
+after it.  However, if the culmination point is in the Earth's shadow, then
+only one point will be generated.  Similarly, a value of 2 would normally
+generate 5 points, but could generate only 1 or 2.
+
+Note: a value of 99 means "no limit".
+
+Note: the step size parameter is the value on line 9.
+
+
+Line 14:  This line specifies the miles/kilometers flag.
+
+T True means output distance values in miles
+
+
+Line 15:  This line specifies the blank line flag.
+
+T True means generate a blank line before each object's prediction.
+
+
+Line 16:  This line specifies flags for "classes" of objects.
+          Or specific NCAT numbers may be entered from the terminal.
+          Or alt/azi or RA/dec output limits may be specified.
+
+    1. Classes of objects
+
+f t s      Up to 10 non-blank flags to select class(es) of objects
+
+If there are no classes specified, then all objects will be predicted for.
+If there are non-blank characters for the classes, then only those objects
+which have one of these characters as their "flag" value will be predicted
+for.  In general, "c" means a classified object, "f" or "t" means a tumbling
+object whose tumble period is of interest, and "s" means an object that is
+now steady (but has tumbled in the past).  (See the definition of the flag
+value in the intrinsic magnitudes file description.)
+
+    2. Specific objects
+
+If the word "prompt" (in lower case) appears in the first 6 columns, then
+the prompt "Enter next NCAT number" will be given.  A single NCAT number
+can be entered. If the entered value is non-zero, then the prompt will be
+repeated.  If a blank or zero is entered, then predictions will be generated
+for just the objects specified.  Up to 20 NCAT numbers may be entered.
+
+    3. Limits for a "box"
+
+If the letters "AA" are given in columns 1 and 2, then alt/azi output limits
+are read from the next line.  The format for this line is:
+
+all alh azl azh   alt low lim, alt high, azi low, azi high in degrees
+
+The four values, altitude lower limit, altitude upper limit, azimuth lower
+limit, and azimuth upper limit are in degrees.  Only predictions which
+are inside this "box" will be generated.  Note: the limits 340 and 20
+could be specified for a box around azimuth 0.
+
+Note: all other limits are still in effect.  In particular, the altitude
+limit (line 8) is still in effect.  The magnitude limit and the Earth's
+shadow are still in effect.
+
+Note: it is normally advisable to lower the step size parameter to a "small"
+value (line 8) and increase the number of steps (line 13) so that one or
+more predictions for an object going through the box will be generated.
+
+If the letters "RD" are given in columns 1 and 2, then RA/dec output limits
+are read from the next line.  The format for this line is:
+
+rhl rml rhh rmh dcl dch   RA hrs low, RA mns low, RA hr/mn high, dec low, high
+
+The six values, RA hours/minutes low limit, high limit, dec low limit, and
+dec high limit must be specified.  Only predictions which are inside this
+"box" will be generated.  The values 23 40 and 0 20 could be used to specify
+a box around 0 hours RA.  See notes for AA option above.
+
+
+Line 17:  This line specifies the output format and options.
+
+12345678901
+A          Output format flag, R/P option, D/C/N option, azimuth option,
+           Range Limit option
+
+The standard output format is A.  Each set of predictions for an object is
+preceded by a title line containing the name, sizes, intrinsic magnitude, and
+comments.  Format D is the same as A except that azimuth is followed by
+elevation.  The alternate formats B and C are "one-line" formats where the
+name appears on the same line as the prediction.  These formats are described
+below.  The format letter must be in upper case.  If the format is A or D and
+a D appears in column 5, then the object designation will be printed after the
+satellite name.  (The designation comes from the intrinsic magnitudes file.)
+
+If the output format is B or C, then column 3 may contain the letter P indi-
+cating that the phase angle is to be printed instead of the range.  If column
+5 contains the letter N, then the comments information will not be printed.
+
+If the output format is R, then "radio" predictions will be generated.  There
+is no output of magnitude, shadow height, RA, or Dec.
+
+If column 7 contains the letter A, then the azimuth will be adjusted by 180
+degrees so that 0 means south, 90 means west, and 180 means north.
+
+If columns 9-10 contain the letters RL, then the range limit value is
+specified on the next line.  The range limit is in miles if the miles
+flag is true and in kilometers if the miles flag is false.  Any prediction
+with a range greater than the specified value will be discarded.
+
+Note: the format flag may be in column 1 or 2, the R/P flag may be in
+column 3 or 4, the D/C/N flag may be in column 5 or 6, the azimuth
+option flag may be in column 7 or 8, and the range limit flag may be
+in columns 9-10 or 10-11.  All letters must be upper case.
+
+
+Line 18:  This line specifies the intrinsic magnitudes input filename.
+
+quicksat.mag      Intrinsic magnitudes input file
+
+This file contains information on the name and intrinsic magnitude of
+objects.  Comments may be retrieved for display with any prediction.
+The physical size may also be included.  If this file is not found,
+a message will be printed and no such data will be available.
+(See further description below.)  The filename must be in columns 1-40.
+
+
+Line 19:  This line specifies the intrinsic magnitudes override filename.
+
+none              Intrinsic magnitudes override file
+
+This file contains information that will "override" or supplement the
+information in the quicksat.mag file.  The format is the same as the
+quicksat.mag file.  The NCAT number is required.  Other fields are
+optional.  Any non-blank field will override the corresponding field
+in the quicksat.mag field.  If there is no entry in the quicksat.mag
+file for this object, this entry will be used. (See the intrinsic
+magnitude file description below.)  The filename must be in columns 1-40.
+
+
+Line 20:  This line specifies the output filename.
+
+output.txt        Output file
+
+The name of the output file may be specified.  Alternatively, the
+keyword "prompt" may be specified (in lower case). In this case, a
+prompt message is issued at the terminal and the user must enter the
+output filename.
+
+
+Line 21:  This line specifies the first orbital elements filename.
+
+quicksat.dat      Elements input file
+
+The name of the first elements file may be specified.  Alternatively,
+the keyword "prompt" may be specified (in lower case).  In this case, a
+prompt message is issued at the terminal and the user may enter a simgle
+elements filename.
+
+The elements file must contain elements in standard "2-line" element form.
+Preceding each set of elements, an optional object name may appear.  The
+name will be obtained from columns 1-14.  This name will only be used if
+there is no entry for the object in the intrinsic magnitudes file.
+
+2-line elements are recognized by the digits 1 or 2 in column 1 followed by
+a blank space.  Any lines which do not match this format will be ignored.
+
+Note:  Any element set with a mean motion less than 4.0 will be ignored.
+A separate program (HighFly) is available in my ftp area for generating
+predictions for these objects.
+
+Note:  If the elements file does not have proper DOS CR/LF characters at
+the end of each line, no elsets will be recognized.  If there are no CR
+characters at the end of each line, the program ADDCR may be used to add them.
+
+If the keyword "prompt" is NOT present on line 21, then additional input
+files may be specified on subsequent lines.  Normally the "T" flag on line
+11 would be used to tell the program to keep only the most recent element
+set for each object.  The end of the input file list is specified by either
+the physical end of the control file or a line which contains "end" or "EOF".
+
+No more than 10 input files may be specified.
+
+If the keyword "combine" is present, then a complete new set of control lines
+follows this keyword and the output file will contain the combined results.
+Each set of control lines should specify the same site location and the
+same (single) day for prediction output.  Each should agree in the type of
+output that will be generated.  The intrinsic magnitudes file and the
+intrinsic magnitudes override file will not be processed.
+
+
+
+        Description of the Intrinsic Magnitudes File
+
+
+This file contains information about satellites.  Each line contains the
+NORAD catalog number, the designation, class, name, size, RCS value and
+comments.  A line could be up to 87 characters in length.
+
+The format for the "name" part of the line is:
+
+         1         2         3
+1234567890123456789012345678901234567
+catno f desig...  name.......... mag.
+00005   58 B2     Vanguard 1      9.0
+
+Columns 1-5 contain the NORAD catalog number.
+
+Column 7 contains either a "code" letter or the "class" letter of the object.
+The following code letters are used:  "d" means that the object has decayed
+or returned.  "h" means that the object is in a high altitude orbit.  The
+class letter "c" means the object has a classified orbit.  The class letters
+"f" and "t" indicate that the object is of interest because it is tumbling.
+The class letter "s" indicates that the object has tumbled in the past, but
+is currently steady.  Objects with a "d", "h", or "g" are not stored in memory
+by Quicksat.
+
+Columns 9-16 contain the designation.  This information is saved and printed
+when the A output format is chosen and the D flag appears in column 6 of
+line 16.
+
+Columns 19-32 contain the satellite name.
+
+Columns 34-37 contain the intrinsic magnitude, which is defined to be the
+maximum apparent brightness of the satellite when it is seen at full phase
+at a range of 1000 kilometers.  The program will adjust this value according
+to the actual circumstances of the prediction to determine a maximum possible
+apparent magnitude.  Of course many cylindrical objects are often one or two
+magnitudes fainter than this predicted magnitude when their actual orientation
+is unfavorable on a particular pass.
+
+
+The format for the "size" part of the line is:
+
+ 4         5
+901234567890
+ 7.4 2.4 0.0
+
+The three numbers are the size values.  Many of the values given in this
+file were obtained from data posted to the Canadian Space Society BBS by
+Ted Molczan.  He normally obtains these values from the RAE Tables.  I have
+"adjusted" some of the values to bring the computed intrinsic magnitude into
+better agreement with my observations.  Some sizes have been obtained from
+Joel Runes' catalog.
+
+If there is only one value, the object is assumed to be a sphere and the
+value is its diameter in meters.  If there are two values, the object is
+assumed to be a cylinder - the first value is its length and the second
+value is its diameter.  If there are three values, then the object is
+assumed to be rectangular and the values are for its three sides.
+
+
+The format for the "RCS" part of the line is:
+
+5
+1234
+ 6.4
+
+The RCS (Radar Cross Section) value is the "median" of all of the "different"
+values that appeared in the Satellite Situation Reports from about 5 years
+ago to the present.  The RCS value is in square meters, so it should be
+closely related to the size values for the object.
+
+
+The format for the "comments" part of the line is:
+
+5   6         7         8
+67890123456789012345678901234567
+observational information
+
+Columns 56-87 contain the observational comments.  These comments will be
+printed above each prediction with the name or after the first line of each
+prediction when "one-line" output is specified (unless the "N" flag is set).
+
+The quicksat.mag file may have the following comments:
+1. date: per nn (dec) - the tumble period in seconds (was decreasing)
+3. var n - the object is sometimes fainter than its maximum brightness
+           by the specified value (in magnitudes).
+4. fl nn - the object sometimes "flashes" and increases brightness
+           by the specified amount.
+5. fl to nnn - the object has be observed to "flash" up to the given
+               magnitude.
+
+
+
+        Description of the Orbital Elements File(s)
+
+
+An orbital elements input file must be in the form of NORAD two-line
+elements.  Each may be preceded by the satellite name.  Any line that does
+not have a "1" or "2" in column 1 and a blank in column 2 will be ignored.
+
+Examples of two-line elements:
+
+Alouette 1
+1 00424U 62B-A  1 90192.70736421  .00000170  00000-0  19423-3 0  3322
+2 00424  80.4633 261.8991 0022426 207.0003 152.9977 13.67365462386044
+ATS 3
+1 03029U 67111  A 90194.54223643 -.00000074  00000-0  99999-4 0  3953
+2 03029  13.2438  21.0153 0013818 204.7992 155.1757  1.00272749 83052
+Cosmos 398
+1 04966U 71 16  A 90200.49713217  .00042980  17752-4  27181-3 0  9862
+2 04966  51.5262 157.4892 2249896 208.4414 137.3099 11.10705110595285
+
+The name field is read, but is only used when no entry appears in the
+intrinsic magnitudes file.
+
+Note that only 14 characters of a name field will be remembered.  This
+means that there is a chance that an object and its rocket body may
+have the "same" name if the first 14 characters are the same.
+
+Note:  There is no attempt to check the "check-digit" value.
+
+Note:  The drag term which appears after the epoch is used.  The change in
+the drag term value is not used.  The Bstar term is not used.
+
+Note:  The ATS object is discarded because its mean motion is less than 4.
+
+Note:  If carriage return characters are not present at the end of each line,
+the program ADDCR may be used to add them.
+
+
+
+        Description of the Prediction Output
+
+
+The first line is an "echo" of some of the input values from
+the control file:
+
+  30.334  97.760  520.   5105 Crestway Dr.        2000  6.5 15 F F T T T
+
+The latitude, longitude, height, and site name are listed.  The epoch
+of RA and Dec is given.  The magnitude cut-off and altitude cut-off
+are given.  Five true/false flags are given.
+
+
+The next line gives the date and time zone:
+
+***  1990 July 26  Thu evening  *** Times are PM CDT  ***  2116  558
+
+For the prediction date of July 26, the evening predictions are for
+Thursday.  The predictions times are PM for the time zone CDT.  The
+value 2116 is the local time of twilight when the sun is 10 degrees below
+the horizon.  The value 558 is the local time of morning twilight when
+the sun is 10 degrees below the horizon.
+
+
+--- The following describes the "A" two-line output format information ---
+
+The next line gives the titles for each data line:
+
+ H  M  S Tim Al Azi C Dir  Mag Dys F  Hgt Shd  Rng  EW Phs  R A   Dec
+
+Each of these fields will be discussed below.
+
+
+The object header line is given before the predictions for each object:
+
+20625 Cosmos 2082 Rk 10.4 3.9      23   2.0 
+
+The NORAD catalog number is given.  The name is given.  The three size
+values, and the RCS value are given if they are available.  The class
+value is given.  The observed intrinsic magnitude is given (if available).
+Finally, the comments field from the intrinsic magnitudes file is given.
+
+Each set of predictions has the following form:
+
+ H  M  S Tim Al Azi C Dir  Mag Dys F  Hgt Shd  Rng  EW Phs  R A   Dec
+ 9 41 54  16 36 261    66  4.0  31 4  536 493  830 0.9 115 1251  10.7
+ 9 43 22  16 41 297 C  92  3.9  31 4  536 499  759 1.0 123 1234  38.7
+ 9 44 49  16 34 331   117  4.3  31 4  537 505  856 1.0 124 1140  64.8
+
+The time is UT unless a time zone was specified in the input file.
+In the current example, -5 was given to convert UT to CDT.
+
+The Tim value is the estimated uncertainty in the time of prediction
+(in seconds).  So, 18 seconds is a "likely" error in this prediction.
+If the time error is less than or equal to 3 seconds, then the field
+is left blank.
+
+The Al value is the altitude of the prediction point.
+The Azi value is the azimuth of the prediction point.
+The letter C after the azimuth indicates that this is the point of
+culmination.  The absence of the C would indicate that this is not a
+culmination prediction.
+
+The Dir value is the direction that the satellite is traveling.  A value
+of 0 means traveling "up".  A value of 90 means "right".  A value of 180
+means "down".  A value of 270 means "left".  In the given example, the
+satellite travels right and a little up from the southwest until the
+culmination point is reached.  Then it travels right and a little down
+as it moves into the northwest.
+
+The Mag value is the predicted maximum magnitude if an observed intrinsic
+magnitude was avaliable.  This does not mean that the satellite cannot be
+brighter or fainter than this magnitude.  The satellite can be brighter
+if it reflects the sun better than expected at this phase angle.  It can
+be fainter than expected if it reflects the sun worse than expected at this
+phase angle or if it is a non-spherical object and its particular orientation
+is unfavorable on this pass.  Since the comment "var 2.5" appears, then it
+is likely that the object can change in brightness from this "maximum
+predicted magnitude" to a brightness that is 2.5 magnitudes fainter.  Often
+such a variation will take place in less than 2 minutes.  If "var att"
+appears, then the object varies very slowly and is usually constant at
+some brightness equal to or less than the prediction.  However, the comment
+"var att" applies to a large percent of all objects, so I do not normally
+explicitly include this as a comment.
+
+If an observed intrinsic magnitude is not available, then the special value
+"20" is used for the intrinsic magnitude.  This will normally produce a
+predicted magnitude between 18 and 24.  If the observer has an expection of
+the intrinsic brightness because of a knowledge of the expected size, then
+this "20" magnitude can be transformed as follows: 20 is subtracted and the
+expected intrinsic magnitude is added.  For example, if 20.4 appears, but
+the observer expects an intrinsic magnitude of 3.5, then 20.4 - 20 + 3.5 =
+3.9 and the expected magnitude is 3.9.  If the object is observed to be
+about 4.4, then an intrinsic magnitude of 4.0 would be appropriate.
+
+ H  M  S Tim Al Azi C Dir  Mag Dys F  Hgt Shd  Rng  EW Phs  R A   Dec
+ 9 41 54  18 36 261    66  4.0  31 4  536 493  830  .9 115 1251  10.7
+ 9 43 22  18 41 297 C  92  3.9  31 4  536 499  759 1.0 123 1234  38.7
+ 9 44 49  18 34 331   117  4.3  31 4  537 505  856 1.0 124 1140  64.8
+
+The Dys value is the number of days from the epch of the elements to the
+prediction date.
+
+The F value is the fraction of a revoltion (in tenths) that the object has
+made since its last perigee.  A fractional value of 9, 0, or 1 indicates
+that the object is near perigee.  A fractional value of 4, 5, or 6 indicates
+that the object is near apogee.  A value of 2 indicates the object is rising
+from perigee to apogee.
+
+The Hgt value is the height of the object in miles or kilometers.
+
+The Shd value is the height of the object above the Earth's shadow.
+
+The Rng value is the range of the object.
+
+The EW value is the distance east/west that the orbital plane moves in
+one minute.  If this satellite is one minute early, it will be 1.0 degrees
+to the east of the predicted position.  If it is one minute late, it will
+be 1.0 degrees west of the predicted position.
+
+The Phs value is the sun-object-observer angle.  A value of 0 indicates
+full phase, a value of 180 indicates new phase.
+
+The R A value is the right ascension of the prediction.
+
+The Dec value is the declination of the prediction.
+
+
+---- The following describes the "B" output format information -----
+
+The NORAD catalog number, EW displacement/minute and phase angle are not
+displayed.  The object name is given on the first output line only.  If
+there is any comment information, it is given only after the first line.
+
+ H  M  S Tim Azi ElC Dir  Mag Dys F  Hgt Shd  Rng  R A  Dec RCS  Name
+ 9 41 54  18 261 36   67  4.0  31 4  536 493  830 1251 10.7  23 pCosmos 2082 Rk
+        var 2.5
+ 9 43 22  18 297 41C  92  3.9  31 4  536 499  759 1234 38.7
+ 9 44 49  18 331 34  117  4.3  31 4  537 505  856 1140 64.8
+
+But if the "P" format flag is present, the phase angle is displayed instead
+of the range.  If the "N" flag is present, any comments are suppressed.
+
+
+---- The following describes the "C" output format information -----
+
+The "C" format is the same as the "B" format except that the altitude
+precedes the azimuth and the title says "Al Azi".
+
+
+---- The following describes the "Radio" output format information -----
+
+ H  M  S Tim Al Azi C Dys F  Hgt  Rng
+20625 Cosmos 2082 Rk
+ 9 41 54  16 36 261    31 4  536  830
+ 9 43 22  16 41 297 C  31 4  536  759
+ 9 44 49  16 34 331    31 4  537  856

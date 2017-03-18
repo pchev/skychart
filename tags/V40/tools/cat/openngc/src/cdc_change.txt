@@ -1,0 +1,33 @@
+col R 
+- label  M   
+- format #
+
+col S 
+-format #
+- replace ^0 ""
+- replace ,0 ,
+
+col T 
+- format #
+- replace ^0 ""
+
+col A
+-replace "IC" "IC "
+-replace "NGC" "NGC "
+-replace "NGC 0" "NGC " x3
+
+enregistrer sous NGC.csv
+- largeur colonne fixe
+
+Catgen
+- shortname ONGC
+- Other -> unknown
+- max mag = 20
+- label7 D -> Dim
+- label8 D -> Dim
+- label15 Messier -> M
+- outputdir = ../
+
+
+
+

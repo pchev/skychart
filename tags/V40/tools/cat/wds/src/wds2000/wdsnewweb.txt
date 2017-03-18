@@ -1,0 +1,136 @@
+                       WDS BIBLE
+ 
+ 
+    COLUMN     Format                     DATA
+    --------   ------         ----------------------------
+    1  -  10   A10             2000 Coordinates
+    12 -  18   A7              Discoverer & Number
+    20 -  24   A4              Components
+    26 -  29   I4              Date (first)
+    31 -  34   I4              Date (last)
+    36 -  37   I2              Number of Observations
+    39 -  41   A3              Position Angle (first - XXX)
+    43 -  45   A3              Position Angle (last  - XXX)
+    47 -  51   F5.1            Separation (first)
+    53 -  57   F5.1            Separation (last)
+    59 -  63   F5.2            Magnitude of First Component
+    65 -  69   F5.2            Magnitude of Second Component
+    71 -  79   A9              Spectral Type (Primary/Secondary)
+    81 -  84   I4              Proper Motion (RA)
+    86 -  89   I4              Proper Motion (Dec)
+    91 -  98   A8              Durchmusterung Number
+   100 - 102   A3              Notes
+                                                                                 
+                                                                                 
+                          Description of Data in the WDS                         
+                                                                                 
+Columns   1- 10:    The  hours, minutes, and tenths of minutes of Right Ascen-
+                    sion for 2000, followed by the degrees and minutes of
+                    Declination for 2000, with + and - indicating north and
+                    south declinations. The positions given represent our best
+                    estimates of these values. Where possible, these are based
+                    on the ACRS and PPM data, with proper motion incorporated.
+                                                                                 
+Columns  12- 18:    The discoverer, identified by his one-to-three letter code,
+                    and his discoverer's number, if assigned. The reference list 
+                    should be consulted first to identify individuals. However,  
+                    some discoverer designations do not appear in this list, for 
+                    various reasons, and a supplementary list is provided.
+                                                                                 
+Columns  20- 24:    Components, when the object has more than two. The Lick IDS
+                    scheme has been discontinued, and components are now
+                    referred to by the traditionally employed lower-case letters.
+                    The rather awkward upper-case designations, e.g. ABXC, have
+                    been changed to the form AB-C, etc.
+                    We have noted some confusion on the part of observers and
+                    students alike, as to how to designate components in multi-
+                    ple systems. Traditionally, these have been designated in
+                    order of separation, thus AB, AC,...., or in the cases where
+                    close pairs are observed blended, AB-C, AB-D,.... In some
+                    instances, differing resolution limits produce situations
+                    where observations are intermixed, thus AC, AB-C, and so
+                    forth. (In all too many cases, carelessness on the part of
+                    the observer does not permit us to determine with certainty
+                    how the observation is to be interpreted). There are also
+                    many instances where later observations have revealed a
+                    closer companion; these are designated Aa, Bb, etc. In a
+                    few cases wider, later discoveries have also been so denoted.
+         
+Columns  26- 29:    The dates of the first and last observations of an object
+         31- 34:    (of satisfactory accuracy), up to the closing date of 1996.0.
+                                                                                 
+Columns  36- 37:    The number of measures of the object. When there are more
+                    than 99, the number 99 is used. For smaller numbers of
+                    observations, the value in these columns is intended to
+                    accurately reflect the actual number.
+                                                                                 
+Columns  39- 41:    Position angles in degrees for the dates listed in columns
+         43- 45:    26-34. For some pairs, the discoverers have given only crude
+                    estimates, such as NF or SP; in such cases these are listed. 
+                    Position angles are unprecessed in this catalog (i.e. they   
+                    are for the mean date of observation).                       
+                                                                                 
+Columns  47- 51:    The distances in seconds of arc, and tenths, for the dates
+         53- 57:    listed in columns 26-34. Some separations are treated by the
+                    codes found in columns 100-101, or in the Notes.
+                                                                                 
+                    In cases where there has been no appreciable motion observed 
+                    over the duration of observation, only one position angle    
+                    and separation is listed.                                    
+                                                                                 
+Columns  59- 63:    Magnitudes of the two components. See the Introduction for
+         65- 69:    discussion.
+                                                                                 
+Columns  71- 79:    Spectral type of A, or of two components, if space permits.
+                    See the Introduction for discussion.
+                                                                                 
+Columns  81- 84:    The components of the proper motion in seconds of arc per
+         86- 89:    1000 years, in right ascension reduced to great circle, and
+                    in declination. Specifically, this catalog lists 15mu(alpha) 
+                    cos(delta), where mu(alpha) is in seconds of time, and       
+                    mu(delta) is in seconds of arc. Both quantities are reduced
+                    to a time unit of 1000 years. The exceptions are those ob-
+                    jects coded P, Q, and R, for which an explanation is given
+                    under the description for Columns 79 and 80. + and - indicate
+                    eastward and westward motions in Right Ascension, and + and -
+                    those north and south in Declination.
+                                                                                 
+Columns  91- 98:    Durchmusterung number of the object in the system used by
+                    the Henry Draper Catalogue: Bonn from +89 degrees to -22
+                    degrees inclusive, Cordoba from -23 degrees to -51 degrees
+                    inclusive, Cape Photographic from -52 degrees to -89 de-
+                    grees inclusive. When a star is not contained in the Durch-  
+                    musterung proper to its declination zone, but is contained   
+                    in another Durchmusterung, this is so indicated in the       
+                    Notes. Other compnents having different Durchmusterung
+                    numbers are also indicated in the Notes.
+                                                                                 
+Columns 100-102:    The following codes are contained in these columns:
+                                                                                 
+                        D: Delta Magnitude given.
+                        N: Notes found in the Notes table.                       
+                        O: Orbit. Where motion has exceeded 360 degrees, no      
+                           values are listed in the position angle and sepa-     
+                           ration columns. Orbits may be found in the "Fourth    
+                           Catalog of Orbits of Visual Binary Stars" (Worley     
+                           and Heintz, 1983), and in the Information Circulars   
+                           published by Commission 26 of the IAU, as well as     
+                           in the literature.                                    
+                        P: 100 year proper motion in right ascension.            
+                        Q: 100 year proper motion in declination.                
+                        R: 100 year proper motion in right ascension and decli-  
+                           nation.                                               
+                        a: Pair appears in an appendix list, not part of the
+                           discoverer's regular numbering system.
+                        p: Coordinates and proper motions from the ACRS, PPM,
+                           IRS, and FK5 catalogs.
+                        r: Pair was listed, but in a "rejected" list, not part
+                           of the discoverer's regular numbering sequence.
+                        s: Pair has other discoverer's designations and num-
+                           bers in the literature due to duplicate discovery.
+                           We have given credit to the earliest discovery
+                           observation (and correct identification) reported
+                           in the literature. The List of Synonyms follows the
+                           List of Additional Discoverers.
+                        6: Separation given in minutes of arc rather than
+                           seconds.

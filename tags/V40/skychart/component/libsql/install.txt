@@ -1,0 +1,15 @@
+In case of delphi, kylix or lazarus it is recommended to install as component.
+You may want to use crosskylix or freepascal, in that case make sure this library is in your path.
+
+Install as package:
+* Select File - Open
+* Browse to the libsql.dpk package
+* Compile and install
+
+Install as components:
+* Choose 'Install Component' from the main menu (Component)
+* Select 'sqlcomponents.pas'
+* Install them.
+
+Add the path to your envirenment variables (library path):
+* (Delphi) Tools - Environment Options - (Tabsheet) Library - (Edit) Library path - (Button) ..

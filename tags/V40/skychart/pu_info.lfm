@@ -1,0 +1,320 @@
+object f_info: Tf_info
+  Left = 480
+  Height = 498
+  Top = 102
+  Width = 718
+  ActiveControl = TitlePanel
+  Caption = 'Info'
+  ClientHeight = 498
+  ClientWidth = 718
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  ParentFont = True
+  Position = poScreenCenter
+  LCLVersion = '1.6.2.0'
+  Visible = False
+  object Panel1: TPanel
+    Left = 0
+    Height = 27
+    Top = 471
+    Width = 718
+    Align = alBottom
+    ClientHeight = 27
+    ClientWidth = 718
+    FullRepaint = False
+    TabOrder = 5
+    object Button1: TButton
+      Left = 632
+      Height = 25
+      Top = 1
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Close'
+      Default = True
+      OnClick = Button1Click
+      TabOrder = 1
+    end
+    object Button4: TButton
+      Left = 544
+      Height = 25
+      Top = 1
+      Width = 77
+      Anchors = [akTop, akRight]
+      Caption = 'Help'
+      OnClick = Button4Click
+      TabOrder = 0
+    end
+  end
+  object TitlePanel: TPanel
+    Left = 0
+    Height = 26
+    Top = 0
+    Width = 718
+    Align = alTop
+    Alignment = taLeftJustify
+    TabOrder = 0
+  end
+  object Page3: TPanel
+    Left = 110
+    Height = 343
+    Top = 70
+    Width = 554
+    ClientHeight = 343
+    ClientWidth = 554
+    TabOrder = 3
+    Visible = False
+    object ProgressMemo: TMemo
+      Left = 1
+      Height = 341
+      Top = 1
+      Width = 552
+      Align = alClient
+      TabOrder = 0
+    end
+  end
+  object Page4: TPanel
+    Left = 150
+    Height = 343
+    Top = 80
+    Width = 554
+    ClientHeight = 343
+    ClientWidth = 554
+    TabOrder = 4
+    Visible = False
+    object InfoMemo: TMemo
+      Left = 1
+      Height = 341
+      Top = 1
+      Width = 552
+      Align = alClient
+      Lines.Strings = (
+        ''
+      )
+      ScrollBars = ssAutoVertical
+      TabOrder = 0
+    end
+  end
+  object Page1: TPanel
+    Left = 56
+    Height = 343
+    Top = 30
+    Width = 554
+    ClientHeight = 343
+    ClientWidth = 554
+    TabOrder = 1
+    object Panel2: TPanel
+      Left = 1
+      Height = 28
+      Top = 314
+      Width = 552
+      Align = alBottom
+      ClientHeight = 28
+      ClientWidth = 552
+      FullRepaint = False
+      TabOrder = 1
+      object serverinfo: TLabel
+        Left = 536
+        Height = 1
+        Top = 6
+        Width = 1
+        Alignment = taRightJustify
+        Anchors = [akTop, akRight]
+        ParentColor = False
+      end
+      object Button2: TButton
+        Left = 12
+        Height = 25
+        Top = 2
+        Width = 75
+        BorderSpacing.InnerBorder = 4
+        Caption = 'Refresh'
+        OnClick = Button2Click
+        TabOrder = 0
+      end
+      object CheckBox1: TCheckBox
+        Left = 104
+        Height = 23
+        Top = 2
+        Width = 102
+        Caption = 'AutoRefresh'
+        Checked = True
+        OnClick = CheckBox1Click
+        State = cbChecked
+        TabOrder = 1
+      end
+    end
+    object StringGrid1: TStringGrid
+      Left = 1
+      Height = 313
+      Top = 1
+      Width = 552
+      Align = alClient
+      ColCount = 1
+      DefaultColWidth = 800
+      FixedCols = 0
+      FixedRows = 0
+      GridLineWidth = 0
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goRowSelect]
+      PopupMenu = PopupMenu1
+      RowCount = 10
+      ScrollBars = ssVertical
+      TabOrder = 0
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      OnMouseDown = StringGrid1MouseDown
+    end
+  end
+  object Page2: TPanel
+    Left = 83
+    Height = 343
+    Top = 50
+    Width = 554
+    ClientHeight = 343
+    ClientWidth = 554
+    TabOrder = 2
+    Visible = False
+    object StringGrid2: TStringGrid
+      Left = 1
+      Height = 314
+      Top = 1
+      Width = 552
+      Align = alClient
+      DefaultColWidth = 70
+      FixedCols = 0
+      FixedRows = 0
+      HeaderHotZones = [gzNormal, gzFixedCols]
+      HeaderPushZones = [gzNormal, gzFixedCols]
+      MouseWheelOption = mwGrid
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect, goRelaxedRowSelect, goSmoothScroll, goScrollKeepVisible]
+      PopupMenu = PopupMenu2
+      TabOrder = 1
+      TitleFont.Height = -11
+      OnCompareCells = StringGrid2CompareCells
+      OnDblClick = StringGrid2DblClick
+      OnMouseDown = StringGrid2MouseDown
+      OnMouseUp = StringGrid2MouseUp
+      ColWidths = (
+        109
+        109
+        109
+        109
+        112
+      )
+    end
+    object Panel3: TPanel
+      Left = 1
+      Height = 27
+      Top = 315
+      Width = 552
+      Align = alBottom
+      ClientHeight = 27
+      ClientWidth = 552
+      FullRepaint = False
+      TabOrder = 0
+      object Button3: TButton
+        Left = 300
+        Height = 25
+        Top = 1
+        Width = 75
+        Anchors = [akTop, akRight]
+        BorderSpacing.InnerBorder = 4
+        Caption = 'Search'
+        OnClick = Button3Click
+        TabOrder = 2
+      end
+      object Edit1: TEdit
+        Left = 212
+        Height = 23
+        Top = 3
+        Width = 85
+        Anchors = [akTop, akRight]
+        OnKeyUp = Edit1KeyUp
+        TabOrder = 1
+      end
+      object Button6: TButton
+        Left = 380
+        Height = 25
+        Top = 1
+        Width = 75
+        Anchors = [akTop, akRight]
+        BorderSpacing.InnerBorder = 4
+        Caption = 'Print'
+        OnClick = Button6Click
+        TabOrder = 3
+      end
+      object Button7: TButton
+        Left = 468
+        Height = 25
+        Top = 0
+        Width = 75
+        Anchors = [akTop, akRight]
+        BorderSpacing.InnerBorder = 4
+        Caption = 'Save'
+        OnClick = Button7Click
+        TabOrder = 4
+      end
+      object ComboBox1: TComboBox
+        Left = 108
+        Height = 25
+        Top = 0
+        Width = 96
+        Anchors = [akTop, akRight]
+        ItemHeight = 0
+        OnChange = ComboBox1Change
+        Style = csDropDownList
+        TabOrder = 0
+      end
+      object SortLabel: TLabel
+        Left = 38
+        Height = 15
+        Top = 6
+        Width = 61
+        Alignment = taRightJustify
+        Anchors = [akTop, akRight]
+        Caption = 'SortLabel'
+        ParentColor = False
+      end
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    left = 16
+    top = 272
+    object closeconnection: TMenuItem
+      Caption = 'Close Connection'
+      OnClick = closeconnectionClick
+    end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 2000
+    OnTimer = Timer1Timer
+    left = 16
+    top = 56
+  end
+  object PopupMenu2: TPopupMenu
+    left = 16
+    top = 344
+    object outslectionner1: TMenuItem
+      Caption = '&Tout sélectionner'
+      Hint = 'Tout sélectionner|Sélectionner l''intégralité du document'
+      ShortCut = 16449
+      OnClick = EditSelectAll1Execute
+    end
+    object Copier1: TMenuItem
+      Caption = '&Copier'
+      Hint = 'Copier|Copier la sélection et la mettre dans le Presse-papiers'
+      ImageIndex = 1
+      ShortCut = 16451
+      OnClick = EditCopy1Execute
+    end
+  end
+  object SaveDialog1: TSaveDialog
+    FilterIndex = 0
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofExtensionDifferent, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
+    left = 24
+    top = 128
+  end
+end

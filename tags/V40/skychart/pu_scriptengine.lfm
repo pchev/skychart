@@ -1,0 +1,639 @@
+object f_scriptengine: Tf_scriptengine
+  Left = 403
+  Height = 485
+  Top = 124
+  Width = 758
+  ActiveControl = TreeView1
+  Caption = 'Script'
+  ClientHeight = 485
+  ClientWidth = 758
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  LCLVersion = '1.6.2.0'
+  Visible = False
+  object Panel1: TPanel
+    Left = 0
+    Height = 485
+    Top = 0
+    Width = 226
+    Align = alLeft
+    Caption = 'Panel1'
+    ClientHeight = 485
+    ClientWidth = 226
+    TabOrder = 0
+    object TreeView1: TTreeView
+      Left = 1
+      Height = 451
+      Top = 33
+      Width = 224
+      Align = alClient
+      AutoExpand = True
+      DefaultItemHeight = 18
+      DragMode = dmAutomatic
+      ReadOnly = True
+      TabOrder = 0
+      OnChange = TreeView1Change
+      OnDragDrop = TreeView1DragDrop
+      OnDragOver = TreeView1DragOver
+      Options = [tvoAutoExpand, tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+    end
+    object Panel4: TPanel
+      Left = 1
+      Height = 32
+      Top = 1
+      Width = 224
+      Align = alTop
+      ClientHeight = 32
+      ClientWidth = 224
+      TabOrder = 1
+      object ButtonEditTB: TButton
+        Left = 44
+        Height = 25
+        Top = 5
+        Width = 139
+        Caption = 'Tool bar editor'
+        OnClick = ButtonEditTBClick
+        TabOrder = 0
+      end
+    end
+  end
+  object PanelLeft: TPanel
+    Left = 234
+    Height = 485
+    Top = 0
+    Width = 524
+    Align = alClient
+    ClientHeight = 485
+    ClientWidth = 524
+    TabOrder = 1
+    object Panel2: TPanel
+      Left = 1
+      Height = 39
+      Top = 1
+      Width = 522
+      Align = alTop
+      ClientHeight = 39
+      ClientWidth = 522
+      TabOrder = 0
+      object ScriptTitle: TEdit
+        Left = 112
+        Height = 21
+        Top = 8
+        Width = 268
+        TabOrder = 0
+      end
+    end
+    object CompileMemo: TMemo
+      Left = 1
+      Height = 76
+      Top = 408
+      Width = 522
+      Align = alClient
+      Lines.Strings = (
+        'CompileMemo'
+      )
+      TabOrder = 1
+    end
+    object Panel3: TPanel
+      Left = 1
+      Height = 368
+      Top = 40
+      Width = 522
+      Align = alTop
+      Caption = 'Panel3'
+      ClientHeight = 368
+      ClientWidth = 522
+      TabOrder = 2
+      object ButtonHelp: TButton
+        Left = 328
+        Height = 25
+        Top = 336
+        Width = 75
+        Caption = 'Help'
+        OnClick = ButtonHelpClick
+        TabOrder = 0
+      end
+      object ButtonDown: TBitBtn
+        Left = 40
+        Height = 30
+        Top = 192
+        Width = 42
+        Glyph.Data = {
+          7A030000424D7A030000000000007A0000006C00000010000000100000000100
+          18000000000000030000120B0000120B00000000000000000000424752730000
+          0000000000000000000000000000000000000000000000000000000000000000
+          000000000000000000000000000002000000000000000000000000000000E7E7
+          E7E7E7E7E7E7E7E7E7E7E7E7E7E4E4E4BCBCBC424242BCBCBCE4E4E4E7E7E7E7
+          E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E4E4E4BFBFBF
+          565656ABABAB565656BFBFBFE4E4E4E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7
+          E7E7E7E7E7E7E7E4E4E4BFBFBF565656BFBFBFE1E1E1BFBFBF565656BFBFBFE4
+          E4E4E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E4E4E4BFBFBF565656BFBFBF
+          E4E4E4E7E7E7E4E4E4BFBFBF565656BFBFBFE4E4E4E7E7E7E7E7E7E7E7E7E7E7
+          E7E4E4E4BFBFBF565656BFBFBFE4E4E4E7E7E7E7E7E7E7E7E7E4E4E4BFBFBF56
+          5656BFBFBFE4E4E4E7E7E7E7E7E7E4E4E4BFBFBF565656BFBFBFE4E4E4E7E7E7
+          E7E7E7E7E7E7E7E7E7E7E7E7E4E4E4BFBFBF565656BFBFBFE4E4E4E7E7E7B9B9
+          B93F3F3FA5A5A5CACACAD0D0D0E4E4E4E7E7E7E7E7E7E7E7E7E4E4E4D0D0D0CA
+          CACAA5A5A53F3F3FBCBCBCE4E4E4313131202020313131313131343434D0D0D0
+          E7E7E7E7E7E7E7E7E7D0D0D0343434313131313131202020454545D3D3D3CDCD
+          CDCDCDCDCDCDCDB6B6B6313131CDCDCDE7E7E7E7E7E7E7E7E7CDCDCD313131B6
+          B6B6CDCDCDCDCDCDD0D0D0E4E4E4E7E7E7E7E7E7E7E7E7CDCDCD343434CDCDCD
+          E7E7E7E7E7E7E7E7E7CDCDCD343434CDCDCDE7E7E7E7E7E7E7E7E7E7E7E7E7E7
+          E7E7E7E7E7E7E7CDCDCD343434CDCDCDE7E7E7E7E7E7E7E7E7CDCDCD343434CD
+          CDCDE7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7CDCDCD343434CDCDCD
+          E7E7E7E7E7E7E7E7E7CDCDCD343434CDCDCDE7E7E7E7E7E7E7E7E7E7E7E7E7E7
+          E7E7E7E7E7E7E7CDCDCD343434CDCDCDE7E7E7E7E7E7E7E7E7CDCDCD343434CD
+          CDCDE7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7CDCDCD313131B6B6B6
+          CDCDCDCDCDCDCDCDCDB6B6B6313131CDCDCDE7E7E7E7E7E7E7E7E7E7E7E7E7E7
+          E7E7E7E7E7E7E7D0D0D0343434313131343434343434343434313131343434D0
+          D0D0E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E4E4E4D0D0D0CDCDCD
+          CDCDCDCDCDCDCDCDCDCDCDCDD0D0D0E4E4E4E7E7E7E7E7E7E7E7E7E7E7E7
+        }
+        GlyphShowMode = gsmAlways
+        OnClick = ButtonDownClick
+        TabOrder = 1
+      end
+      object ButtonUp: TBitBtn
+        Left = 40
+        Height = 30
+        Top = 144
+        Width = 42
+        Glyph.Data = {
+          7A030000424D7A030000000000007A0000006C00000010000000100000000100
+          18000000000000030000120B0000120B00000000000000000000424752730000
+          0000000000000000000000000000000000000000000000000000000000000000
+          000000000000000000000000000002000000000000000000000000000000E7E7
+          E7E7E7E7E7E7E7CDCDCD1D1D1D1717171A1A1A1A1A1A1A1A1A1717171D1D1DCD
+          CDCDE7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7CDCDCD313131B6B6B6
+          CDCDCDCDCDCDCDCDCDB6B6B6313131CDCDCDE7E7E7E7E7E7E7E7E7E7E7E7E7E7
+          E7E7E7E7E7E7E7CDCDCD343434CDCDCDE7E7E7E7E7E7E7E7E7CDCDCD343434CD
+          CDCDE7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7CDCDCD343434CDCDCD
+          E7E7E7E7E7E7E7E7E7CDCDCD343434CDCDCDE7E7E7E7E7E7E7E7E7E7E7E7E7E7
+          E7E7E7E7E7E7E7CDCDCD343434CDCDCDE7E7E7E7E7E7E7E7E7CDCDCD343434CD
+          CDCDE7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7CDCDCD343434CDCDCD
+          E7E7E7E7E7E7E7E7E7CDCDCD343434CDCDCDE7E7E7E7E7E7E7E7E7E7E7E7CDCD
+          CDCDCDCDCDCDCDB6B6B6313131CDCDCDE7E7E7E7E7E7E7E7E7CDCDCD313131B6
+          B6B6CDCDCDCDCDCDD0D0D0E4E4E4313131202020313131313131343434D0D0D0
+          E7E7E7E7E7E7E7E7E7D0D0D0343434313131313131202020454545D3D3D3B9B9
+          B93F3F3FA5A5A5CACACAD0D0D0E4E4E4E7E7E7E7E7E7E7E7E7E4E4E4D0D0D0CA
+          CACAA5A5A53F3F3FBCBCBCE4E4E4E4E4E4BFBFBF565656BFBFBFE4E4E4E7E7E7
+          E7E7E7E7E7E7E7E7E7E7E7E7E4E4E4BFBFBF565656BFBFBFE4E4E4E7E7E7E7E7
+          E7E4E4E4BFBFBF565656BFBFBFE4E4E4E7E7E7E7E7E7E7E7E7E4E4E4BFBFBF56
+          5656BFBFBFE4E4E4E7E7E7E7E7E7E7E7E7E7E7E7E4E4E4BFBFBF565656BFBFBF
+          E4E4E4E7E7E7E4E4E4BFBFBF565656BFBFBFE4E4E4E7E7E7E7E7E7E7E7E7E7E7
+          E7E7E7E7E7E7E7E4E4E4BFBFBF565656BFBFBFE1E1E1BFBFBF565656BFBFBFE4
+          E4E4E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E4E4E4BFBFBF
+          565656ABABAB565656BFBFBFE4E4E4E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7
+          E7E7E7E7E7E7E7E7E7E7E7E7E7E4E4E4BFBFBF565656BFBFBFE4E4E4E7E7E7E7
+          E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7
+          E4E4E4D3D3D3E4E4E4E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7E7
+        }
+        GlyphShowMode = gsmAlways
+        OnClick = ButtonUpClick
+        TabOrder = 2
+      end
+      object ButtonLoad: TButton
+        Left = 224
+        Height = 25
+        Top = 336
+        Width = 88
+        Caption = 'Load'
+        OnClick = ButtonLoadClick
+        TabOrder = 3
+      end
+      object ButtonSave: TButton
+        Left = 120
+        Height = 25
+        Top = 336
+        Width = 91
+        Caption = 'Save'
+        OnClick = ButtonSaveClick
+        TabOrder = 4
+      end
+      object ButtonUpdate: TButton
+        Left = 16
+        Height = 25
+        Top = 64
+        Width = 85
+        Caption = '< Update'
+        OnClick = ButtonUpdateClick
+        TabOrder = 5
+        Visible = False
+      end
+      object ButtonEditScript: TButton
+        Left = 2
+        Height = 25
+        Top = 248
+        Width = 110
+        Caption = 'Edit Script'
+        OnClick = ButtonEditScriptClick
+        TabOrder = 6
+        Visible = False
+      end
+      object ButtonAdd: TButton
+        Left = 16
+        Height = 25
+        Top = 24
+        Width = 85
+        Caption = '< Add'
+        OnClick = ButtonAddClick
+        TabOrder = 7
+      end
+      object GroupBox1: TGroupBox
+        Left = 112
+        Height = 324
+        Top = 8
+        Width = 400
+        Caption = 'Component'
+        ClientHeight = 308
+        ClientWidth = 398
+        TabOrder = 8
+        object RadioButtonGroup: TRadioButton
+          Left = 14
+          Height = 21
+          Top = 0
+          Width = 63
+          Caption = 'Group'
+          Checked = True
+          OnClick = RadioButtonClick
+          TabOrder = 0
+          TabStop = True
+        end
+        object RadioButtonButton: TRadioButton
+          Left = 14
+          Height = 21
+          Top = 26
+          Width = 67
+          Caption = 'Button'
+          OnClick = RadioButtonClick
+          TabOrder = 1
+        end
+        object ButtonCaptionEdit: TEdit
+          Left = 187
+          Height = 21
+          Top = 29
+          Width = 80
+          OnChange = ButtonCaptionEditChange
+          TabOrder = 2
+          Text = 'Button'
+        end
+        object Label3: TLabel
+          Left = 134
+          Height = 15
+          Top = 32
+          Width = 49
+          Caption = 'Caption'
+          ParentColor = False
+        end
+        object Label2: TLabel
+          Left = 134
+          Height = 15
+          Top = 6
+          Width = 49
+          Caption = 'Caption'
+          ParentColor = False
+        end
+        object GroupCaptionEdit: TEdit
+          Left = 187
+          Height = 21
+          Top = 3
+          Width = 80
+          OnChange = GroupCaptionEditChange
+          TabOrder = 3
+          Text = 'Group'
+        end
+        object Label1: TLabel
+          Left = 275
+          Height = 15
+          Top = 6
+          Width = 56
+          Caption = 'Columns'
+          ParentColor = False
+        end
+        object GroupRowEdit: TEdit
+          Left = 336
+          Height = 21
+          Top = 3
+          Width = 32
+          OnChange = GroupRowEditChange
+          TabOrder = 4
+          Text = '2'
+        end
+        object RadioButtonEdit: TRadioButton
+          Left = 14
+          Height = 21
+          Top = 52
+          Width = 48
+          Caption = 'Edit'
+          OnClick = RadioButtonClick
+          TabOrder = 5
+        end
+        object RadioButtonMemo: TRadioButton
+          Left = 14
+          Height = 21
+          Top = 78
+          Width = 64
+          Caption = 'Memo'
+          OnClick = RadioButtonClick
+          TabOrder = 6
+        end
+        object RadioButtonSpacer: TRadioButton
+          Left = 14
+          Height = 21
+          Top = 182
+          Width = 69
+          Caption = 'Spacer'
+          OnClick = RadioButtonClick
+          TabOrder = 7
+        end
+        object MemoHeightEdit: TEdit
+          Left = 187
+          Height = 21
+          Top = 81
+          Width = 80
+          OnChange = MemoHeightEditChange
+          TabOrder = 8
+          Text = '50'
+        end
+        object Label4: TLabel
+          Left = 134
+          Height = 15
+          Top = 82
+          Width = 42
+          Caption = 'Height'
+          ParentColor = False
+        end
+        object RadioButtonEvent: TRadioButton
+          Left = 14
+          Height = 21
+          Top = 208
+          Width = 60
+          Caption = 'Event'
+          OnClick = RadioButtonClick
+          TabOrder = 9
+        end
+        object EventComboBox: TComboBox
+          Left = 134
+          Height = 19
+          Top = 210
+          Width = 180
+          ItemHeight = 0
+          ItemIndex = 0
+          Items.Strings = (
+            'Initialisation'
+            'Activation'
+            'Timer'
+            'Telescope move'
+            'Chart refresh'
+            'Object identification click'
+            'Distance measurement'
+            'Telescope connected'
+            'Telescope disconnected'
+            'Translation'
+          )
+          OnChange = EventComboBoxChange
+          Style = csDropDownList
+          TabOrder = 10
+          Text = 'Initialisation'
+        end
+        object TimerIntervalEdit: TEdit
+          Left = 318
+          Height = 21
+          Top = 212
+          Width = 50
+          OnClick = TimerIntervalEditClick
+          TabOrder = 11
+          Text = '60'
+          Visible = False
+        end
+        object RadioButtonCombo: TRadioButton
+          Left = 14
+          Height = 21
+          Top = 156
+          Width = 70
+          Caption = 'Combo'
+          OnClick = RadioButtonClick
+          TabOrder = 12
+        end
+        object RadioButtonList: TRadioButton
+          Left = 14
+          Height = 21
+          Top = 104
+          Width = 46
+          Caption = 'List'
+          OnClick = RadioButtonClick
+          TabOrder = 13
+        end
+        object Label5: TLabel
+          Left = 134
+          Height = 15
+          Top = 112
+          Width = 42
+          Caption = 'Height'
+          ParentColor = False
+        end
+        object ListHeightEdit: TEdit
+          Left = 187
+          Height = 21
+          Top = 109
+          Width = 80
+          OnChange = ListHeightEditChange
+          TabOrder = 14
+          Text = '50'
+        end
+        object CheckBoxHidenTimer: TCheckBox
+          Left = 14
+          Height = 21
+          Top = 256
+          Width = 263
+          Caption = 'Activate the timer event when hidden'
+          TabOrder = 15
+        end
+        object RadioButtonCheckList: TRadioButton
+          Left = 14
+          Height = 21
+          Top = 130
+          Width = 85
+          Caption = 'CheckList'
+          OnClick = RadioButtonClick
+          TabOrder = 16
+        end
+        object Label6: TLabel
+          Left = 134
+          Height = 15
+          Top = 138
+          Width = 42
+          Caption = 'Height'
+          ParentColor = False
+        end
+        object CheckListHeightEdit: TEdit
+          Left = 187
+          Height = 21
+          Top = 135
+          Width = 80
+          OnChange = CheckListHeightEditChange
+          TabOrder = 17
+          Text = '50'
+        end
+        object RadioButtonLabel: TRadioButton
+          Left = 14
+          Height = 21
+          Top = 232
+          Width = 58
+          Caption = 'Label'
+          OnClick = RadioButtonClick
+          TabOrder = 18
+        end
+        object Label7: TLabel
+          Left = 134
+          Height = 15
+          Top = 240
+          Width = 49
+          Caption = 'Caption'
+          ParentColor = False
+        end
+        object LabelCaptionEdit: TEdit
+          Left = 187
+          Height = 21
+          Top = 238
+          Width = 80
+          OnChange = LabelCaptionEditChange
+          TabOrder = 19
+          Text = 'Label'
+        end
+        object BtnMenu: TCheckBox
+          Left = 275
+          Height = 21
+          Top = 29
+          Width = 59
+          Caption = 'Menu'
+          OnChange = BtnMenuChange
+          TabOrder = 20
+        end
+        object CheckBoxAlwaysActive: TCheckBox
+          Left = 14
+          Height = 21
+          Top = 280
+          Width = 265
+          Caption = 'Activate all the functions when hidden'
+          TabOrder = 21
+        end
+      end
+      object ButtonDelete: TButton
+        Left = 16
+        Height = 25
+        Top = 104
+        Width = 85
+        Caption = 'Delete'
+        OnClick = ButtonDeleteClick
+        TabOrder = 9
+      end
+      object ButtonClear: TButton
+        Left = 424
+        Height = 25
+        Top = 336
+        Width = 88
+        Caption = 'Clear all'
+        OnClick = ButtonClearClick
+        TabOrder = 10
+      end
+      object ButtonClose: TButton
+        Left = 16
+        Height = 25
+        Top = 336
+        Width = 91
+        Caption = 'Close'
+        OnClick = ButtonCloseClick
+        TabOrder = 11
+      end
+    end
+  end
+  object Splitter1: TSplitter
+    Left = 226
+    Height = 485
+    Top = 0
+    Width = 8
+  end
+  object TplPSScript: TPSScript
+    CompilerOptions = []
+    OnLine = TplPSScriptLine
+    OnCompile = TplPSScriptCompile
+    OnExecute = TplPSScriptExecute
+    Plugins = <    
+      item
+        Plugin = PSImport_Classes1
+      end    
+      item
+        Plugin = PSImport_Controls1
+      end    
+      item
+        Plugin = PSImport_StdCtrls1
+      end    
+      item
+        Plugin = PSImport_Forms1
+      end    
+      item
+        Plugin = PSImport_DateUtils1
+      end    
+      item
+        Plugin = PSDllPlugin1
+      end    
+      item
+        Plugin = PSCustomPlugin1
+      end>
+    UsePreProcessor = False
+    left = 48
+    top = 16
+  end
+  object PSImport_Classes1: TPSImport_Classes
+    EnableStreams = True
+    EnableClasses = True
+    left = 48
+    top = 73
+  end
+  object PSImport_DateUtils1: TPSImport_DateUtils
+    left = 48
+    top = 128
+  end
+  object PSImport_Forms1: TPSImport_Forms
+    EnableForms = True
+    EnableMenus = True
+    left = 48
+    top = 192
+  end
+  object PSImport_Controls1: TPSImport_Controls
+    EnableStreams = True
+    EnableGraphics = True
+    EnableControls = True
+    left = 48
+    top = 248
+  end
+  object PSImport_StdCtrls1: TPSImport_StdCtrls
+    EnableExtCtrls = True
+    EnableButtons = True
+    left = 48
+    top = 312
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = '.cdcps'
+    Filter = 'CdC script|*.cdcps'
+    left = 152
+    top = 16
+  end
+  object EventTimer: TTimer
+    Enabled = False
+    OnTimer = EventTimerTimer
+    left = 152
+    top = 128
+  end
+  object PSDllPlugin1: TPSDllPlugin
+    left = 48
+    top = 368
+  end
+  object PSCustomPlugin1: TPSCustomPlugin
+    OnCompileImport1 = PSCustomPlugin1CompileImport1
+    OnExecImport1 = PSCustomPlugin1ExecImport1
+    left = 152
+    top = 192
+  end
+end
