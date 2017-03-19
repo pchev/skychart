@@ -30,7 +30,7 @@ uses
   Windows,
 {$endif}
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, LResources, EditBtn, LazFileUtils, u_param, u_util2, Spin;
+  StdCtrls, LResources, EditBtn, LazFileUtils, LazUTF8, u_param, u_util2, Spin;
 
 type
 
@@ -112,11 +112,11 @@ configfile:=expandfilename(configfile);
 {$ifdef mswindows}
 SHGetSpecialFolderLocation(0, CSIDL_LOCAL_APPDATA, PIDL);
 SHGetPathFromIDList(PIDL, Folder);
-buf:=trim(Folder);
+buf:=trim(WinCPToUTF8(Folder));
 if buf='' then begin  // old windows version
    SHGetSpecialFolderLocation(0, CSIDL_APPDATA, PIDL);
    SHGetPathFromIDList(PIDL, Folder);
-   buf:=trim(Folder);
+   buf:=trim(WinCPToUTF8(Folder));
 end;
 privatedir:=slash(buf)+privatedir;
 configfile:=slash(privatedir)+configfile;

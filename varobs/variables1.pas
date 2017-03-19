@@ -497,13 +497,13 @@ appdir:=safeutf8tosys(buf);
 buf:='';
 SHGetSpecialFolderLocation(0, CSIDL_LOCAL_APPDATA, PIDL);
 SHGetPathFromIDList(PIDL, Folder);
-buf:=systoutf8(Folder);
+buf:=WinCPToUTF8(Folder);
 buf:=trim(buf);
 buf:=safeutf8tosys(buf);
 if buf='' then begin  // old windows version
    SHGetSpecialFolderLocation(0, CSIDL_APPDATA, PIDL);
    SHGetPathFromIDList(PIDL, Folder);
-   buf:=trim(Folder);
+   buf:=trim(WinCPToUTF8(Folder));
 end;
 privatedir:=slash(buf)+privatedir;
 configfile:=slash(privatedir)+configfile;
