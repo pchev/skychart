@@ -240,7 +240,6 @@ object f_config: Tf_config
       RightClickSelect = True
       RowSelect = True
       ScrollBars = ssNone
-      SelectionColor = clBtnFace
       SortType = stBoth
       TabOrder = 0
       OnChange = TreeView1Change
