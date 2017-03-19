@@ -1,5 +1,5 @@
 Skychart / Cartes du Ciel
-Version 4.0
+Version 4.1 beta
 
 
 Copyright (C) 2017 Patrick Chevalley
