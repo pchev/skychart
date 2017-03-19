@@ -9,7 +9,7 @@ uses
   windows,
 {$endif}
   u_help, u_translation, u_util, u_constant, u_projection, cu_planet, cu_database, Inifiles,
-  Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
+  Classes, SysUtils, FileUtil, LazUTF8, LResources, Forms, Controls, Graphics, Dialogs,
   Menus, ExtCtrls, StdCtrls, ComCtrls, ColorBox, Spin, dynlibs, Math, LCLProc;
 
 type
@@ -597,11 +597,12 @@ configfile:=expandfilename(Defaultconfigfile);
 {$ifdef mswindows}
 SHGetSpecialFolderLocation(0, CSIDL_LOCAL_APPDATA, PIDL);
 SHGetPathFromIDList(PIDL, Folder);
-buf:=trim(Folder);
+buf:=WinCPToUTF8(Folder);
+buf:=trim(buf);
 if buf='' then begin  // old windows version
    SHGetSpecialFolderLocation(0, CSIDL_APPDATA, PIDL);
    SHGetPathFromIDList(PIDL, Folder);
-   buf:=trim(Folder);
+   buf:=trim(WinCPToUTF8(Folder));
 end;
 privatedir:=slash(buf)+privatedir;
 configfile:=slash(privatedir)+Defaultconfigfile;
