@@ -41,7 +41,7 @@ function RotationAngle(x1, y1, x2, y2: double; c: Tconf_skychart): double;
 procedure WindowXY(x, y: double; out WindowX, WindowY: single; c: Tconf_skychart);
 procedure XYWindow(x, y: integer; var Xwindow, Ywindow: double; c: Tconf_skychart);
 function Projection(ar, de: double; var X, Y: double; clip: boolean;
-  c: Tconf_skychart; tohrz: boolean = False): boolean;
+  c: Tconf_skychart; tohrz: boolean = False; radius: double = 0): boolean;
 function Proj2(ar, de, ac, dc: double; var X, Y: double; c: Tconf_skychart;
   rot: boolean = True; inithai: boolean = False): boolean;
 procedure InvProj(xx, yy: double; var ar, de: double; c: Tconf_skychart);
@@ -396,7 +396,7 @@ begin
 end;
 
 function Projection(ar, de: double; var X, Y: double; clip: boolean;
-  c: Tconf_skychart; tohrz: boolean = False): boolean;
+  c: Tconf_skychart; tohrz: boolean = False; radius: double = 0): boolean;
 var
   a, h, ac, dc, d1, d2: double;
   a1, a2, i1, i2: integer;
@@ -437,7 +437,7 @@ begin
     else
       raise Exception.Create('Bad projection type');
   end;
-  if clip and (c.projpole = AltAz) and c.horizonopaque and (h <= c.HorizonMax) then
+  if clip and (c.projpole = AltAz) and c.horizonopaque and (h <= (c.HorizonMax - radius)) then
   begin
 
     if (h < (c.ObsHorizonDepression - musec)) then
