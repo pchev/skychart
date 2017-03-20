@@ -1321,7 +1321,7 @@ end;
 
 function Tskychart.DrawDeepSkyObject :boolean;
 var rec:GcatRec;
-  x1,y1,x2,y2,rot,ra,de,timelimit: Double;
+  x1,y1,x2,y2,rot,ra,de,radius,timelimit: Double;
   x,y,xx,yy,sz,lsize:single;
   lid, save_nebplot,lp,lnum: integer;
   imgfile,CurrentCat,ImgCat,lis: string;
@@ -1397,10 +1397,11 @@ var rec:GcatRec;
           lid:=rshash(lis,$7FFFFFFF);
           precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
           if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,true);
-          projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
+          radius:=(deg2rad/rec.neb.nebunit)*(rec.neb.dim1/2);
+          projection(rec.ra,rec.dec,x1,y1,true,cfgsc,false,radius) ;
           WindowXY(x1,y1,xx,yy,cfgsc);
           if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
-          sz:=(abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit)*(rec.neb.dim1/2);
+          sz:=abs(cfgsc.BxGlb)*radius;
           if Fcatalog.cfgcat.SampSelectIdent then begin
              Fcatalog.cfgcat.SampSelectX:=round(xx);
              Fcatalog.cfgcat.SampSelectY:=round(yy);
@@ -1433,12 +1434,12 @@ var rec:GcatRec;
                             de:=FFits.Center_DE;
                             precession(jd2000,cfgsc.JDChart,ra,de);
                             if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc,true,true);
-                            projection(ra,de,x1,y1,true,cfgsc) ;
+                            projection(ra,de,x1,y1,true,cfgsc,false,radius) ;
                             WindowXY(x1,y1,x,y,cfgsc);
                             FFits.min_sigma:=cfgsc.NEBmin_sigma;
                             FFits.max_sigma:=cfgsc.NEBmax_sigma;
                             FFits.GetBGRABitmap(bmp);  // keep this method instead of GetProjBitmap for performance
-                            projection(ra,de+0.001,x2,y2,false,cfgsc) ;
+                            projection(ra,de+0.001,x2,y2,false,cfgsc,false,radius) ;
                             rot:=FFits.Rotation-arctan2((x2-x1),(y2-y1));
                             Fplot.plotimage(x,y,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,true,bmp,0);
                             if (Fplot.cfgplot.nebplot=0) then Drawing;
