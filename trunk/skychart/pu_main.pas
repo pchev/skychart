@@ -4066,7 +4066,7 @@ else begin
    formpos(ConfigObservatory,posx,posy)
 end;
 ConfigObservatory.f_config_observatory1.PageControl1.PageIndex:=page;
-ConfigObservatory.showmodal;
+ShowModalForm(ConfigObservatory);
 if ConfigObservatory.ModalResult=mrOK then begin
  activateconfig(ConfigObservatory.f_config_observatory1.cmain,ConfigObservatory.f_config_observatory1.csc,ConfigObservatory.f_config_observatory1.ccat,ConfigObservatory.f_config_observatory1.cshr,ConfigObservatory.f_config_observatory1.cplot,nil,false);
 end;
