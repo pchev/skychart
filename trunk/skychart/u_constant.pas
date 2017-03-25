@@ -2676,6 +2676,7 @@ begin
   AsteroidUrlList := TStringList.Create;
   TleUrlList := TStringList.Create;
   ObsNameList := TStringList.Create;
+  ObsNameList.Sorted:=true;
 end;
 
 destructor Tconf_main.Destroy;
