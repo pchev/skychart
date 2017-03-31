@@ -109,6 +109,12 @@ end;
 
 procedure Tf_manualtelescope.FormCreate(Sender: TObject);
 begin
+  {$ifdef darwin}
+  FormStyle:=fsNormal;
+  {$endif}
+  {$ifdef lclgtk2}
+  FormStyle:=fsNormal;
+  {$endif}
   ScaleDPI(Self);
   SetLang;
 end;

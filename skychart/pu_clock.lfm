@@ -4,13 +4,15 @@ object f_clock: Tf_clock
   Top = 161
   Width = 375
   ActiveControl = ColorBox1
-  BorderIcons = []
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsToolWindow
   Caption = 'Clock'
   ClientHeight = 198
   ClientWidth = 375
   Color = clBlack
   Font.Color = clRed
   Font.Height = -20
+  FormStyle = fsStayOnTop
   Icon.Data = {
     BE0800000000010001002020000001000800A808000016000000280000002000
     0000400000000100080000000000000000000000000000000000000000000000
@@ -92,8 +94,39 @@ object f_clock: Tf_clock
   OnMouseMove = FormMouseMove
   OnMouseUp = FormMouseUp
   OnShow = FormShow
-  LCLVersion = '1.6.2.0'
+  LCLVersion = '1.6.4.0'
   Visible = False
+  object Panel1: TPanel
+    Left = 293
+    Height = 24
+    Top = 0
+    Width = 82
+    BevelOuter = bvNone
+    ClientHeight = 24
+    ClientWidth = 82
+    ParentFont = False
+    TabOrder = 0
+    OnMouseEnter = Panel1MouseEnter
+    OnMouseLeave = Panel1MouseLeave
+    object ColorBox1: TColorBox
+      Left = 0
+      Height = 24
+      Top = 0
+      Width = 82
+      Style = [cbStandardColors, cbExtendedColors, cbPrettyNames]
+      Align = alClient
+      AutoSize = False
+      Color = clBlack
+      Font.Color = clRed
+      ItemHeight = 16
+      OnChange = ColorBox1Change
+      OnMouseEnter = Panel1MouseEnter
+      OnMouseLeave = Panel1MouseLeave
+      ParentFont = False
+      TabOrder = 0
+      Visible = False
+    end
+  end
   object Label1: TLabel
     Left = 16
     Height = 24
@@ -237,35 +270,6 @@ object f_clock: Tf_clock
     Transparent = False
     OnMouseDown = FormMouseDown
     OnMouseUp = FormMouseUp
-  end
-  object Panel1: TPanel
-    Left = 304
-    Height = 43
-    Top = 0
-    Width = 71
-    BevelOuter = bvNone
-    ClientHeight = 43
-    ClientWidth = 71
-    ParentFont = False
-    TabOrder = 0
-    OnMouseEnter = Panel1MouseEnter
-    OnMouseLeave = Panel1MouseLeave
-    object ColorBox1: TColorBox
-      Left = 0
-      Height = 23
-      Top = 0
-      Width = 71
-      Style = [cbStandardColors, cbExtendedColors, cbPrettyNames]
-      Align = alTop
-      Color = clBlack
-      ItemHeight = 0
-      OnChange = ColorBox1Change
-      OnMouseEnter = Panel1MouseEnter
-      OnMouseLeave = Panel1MouseLeave
-      ParentFont = False
-      TabOrder = 0
-      Visible = False
-    end
   end
   object Timer1: TTimer
     Enabled = False

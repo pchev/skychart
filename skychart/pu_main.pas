@@ -2653,7 +2653,11 @@ end;
 procedure Tf_main.TelescopeConnectExecute(Sender: TObject);
 var P : Tpoint;
 begin
-P:=point(0,0);
+if ScriptPanel.Visible then
+  P:=point(ScriptPanel.Left+ScriptPanel.Width,PanelTop.Top+PanelTop.Height)
+else
+  P:=point(PanelLeft.Width,PanelTop.Top+PanelTop.Height);
+P:=ClientToScreen(P);
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    Connect1Click(Sender);
    if sc.cfgsc.ManualTelescope then begin
@@ -4600,9 +4604,13 @@ end;
 procedure Tf_main.ViewClockExecute(Sender: TObject);
 var P : Tpoint;
 begin
-P:=point(0,110);
+  if ScriptPanel.Visible then
+    P:=point(ScriptPanel.Left+ScriptPanel.Width,PanelTop.Top+PanelTop.Height)
+  else
+    P:=point(PanelLeft.Width,PanelTop.Top+PanelTop.Height);
+  P:=ClientToScreen(P);
   if f_clock=nil then begin
-     f_clock:=Tf_clock.Create(application);
+     f_clock:=Tf_clock.Create(self);
      f_clock.cfgsc:=def_cfgsc;
      f_clock.planet:=planet;
      f_clock.SetLang;
