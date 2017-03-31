@@ -97,6 +97,12 @@ end;
 
 procedure Tf_clock.FormCreate(Sender: TObject);
 begin
+  {$ifdef darwin}
+  FormStyle:=fsNormal;
+  {$endif}
+  {$ifdef lclgtk2}
+  FormStyle:=fsNormal;
+  {$endif}
   ScaleDPI(Self);
   SetLang;
 end;
@@ -104,6 +110,7 @@ end;
 procedure Tf_clock.ColorBox1Change(Sender: TObject);
 begin
   Font.Color:=ColorBox1.Selected;
+  ColorBox1.Font.Color:=ColorBox1.Selected;
   ColorBox1.Visible:=false;
 end;
 
