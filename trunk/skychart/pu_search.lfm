@@ -12,184 +12,134 @@ object f_search: Tf_search
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.6.2.0'
+  LCLVersion = '1.6.4.0'
   Visible = False
-  object PlanetPanel: TPanel
+  object RadioGroup1: TRadioGroup
+    Left = 7
+    Height = 217
+    Top = 8
+    Width = 416
+    AutoFill = True
+    Caption = 'Search for '
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.TopBottomSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 2
+    ClientHeight = 200
+    ClientWidth = 412
+    Columns = 2
+    ItemIndex = 0
+    Items.Strings = (
+      'Nebulae'
+      'Nebula Common Name'
+      'Stars'
+      'Star Common Name'
+      'Variable Stars'
+      'Double Stars'
+      'Comets'
+      'Asteroids'
+      'Planets'
+      'Constellation'
+      'Online NED, Simbad, Vizier'
+    )
+    OnClick = RadioGroup1Click
+    TabOrder = 0
+  end
+  object Button1: TButton
+    Left = 248
+    Height = 25
+    Top = 312
+    Width = 75
+    BorderSpacing.InnerBorder = 4
+    Caption = 'Find'
+    Default = True
+    OnClick = Button1Click
+    TabOrder = 10
+  end
+  object Button2: TButton
+    Left = 348
+    Height = 25
+    Top = 312
+    Width = 75
+    BorderSpacing.InnerBorder = 4
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 11
+  end
+  object Button5: TButton
+    Left = 152
+    Height = 25
+    Top = 312
+    Width = 75
+    Caption = 'Help'
+    OnClick = Button5Click
+    TabOrder = 9
+  end
+  object OnlinePanel: TPanel
     Left = 8
-    Height = 41
-    Top = 232
+    Height = 80
+    Top = 224
     Width = 416
-    ClientHeight = 41
+    ClientHeight = 80
     ClientWidth = 416
     FullRepaint = False
-    TabOrder = 8
-    Visible = False
-    object Label2: TLabel
-      Left = 13
-      Height = 15
-      Top = 14
-      Width = 44
-      Caption = 'Planet '
-      ParentColor = False
-    end
-    object PlanetBox: TComboBox
-      Left = 184
-      Height = 21
-      Top = 8
-      Width = 146
-      DropDownCount = 10
-      ItemHeight = 0
-      TabOrder = 0
-    end
-  end
-  object CometPanel: TPanel
-    Left = 7
-    Height = 41
-    Top = 232
-    Width = 416
-    ClientHeight = 41
-    ClientWidth = 416
-    TabOrder = 4
-    object CometFilter: TEdit
-      Left = 8
-      Height = 21
-      Top = 10
-      Width = 99
-      TabOrder = 0
-    end
-    object Button3: TButton
-      Left = 113
-      Height = 25
-      Top = 8
-      Width = 75
-      BorderSpacing.InnerBorder = 4
-      Caption = 'Filter ->'
-      OnClick = Button3Click
+    TabOrder = 7
+    object OnlineEdit: TEdit
+      Left = 256
+      Height = 23
+      Top = 1
+      Width = 151
       TabOrder = 1
+      Text = 'ngc4556'
     end
-    object CometList: TComboBox
-      Left = 192
-      Height = 21
-      Top = 10
-      Width = 216
-      ItemHeight = 0
-      TabOrder = 2
-    end
-  end
-  object AsteroidPanel: TPanel
-    Left = 8
-    Height = 41
-    Top = 232
-    Width = 416
-    ClientHeight = 41
-    ClientWidth = 416
-    TabOrder = 6
-    object AsteroidFilter: TEdit
-      Left = 8
-      Height = 21
-      Top = 10
-      Width = 99
-      TabOrder = 0
-    end
-    object Button4: TButton
-      Left = 112
+    object ServerList: TComboBox
+      Left = 16
       Height = 25
-      Top = 8
-      Width = 75
-      BorderSpacing.InnerBorder = 4
-      Caption = 'Filter ->'
-      OnClick = Button4Click
-      TabOrder = 1
-    end
-    object AsteroidList: TComboBox
-      Left = 192
-      Height = 21
-      Top = 10
-      Width = 216
+      Top = 1
+      Width = 200
       ItemHeight = 0
+      OnChange = ServerListChange
+      Style = csDropDownList
+      TabOrder = 0
+    end
+    object StatusLabel: TLabel
+      Left = 19
+      Height = 15
+      Top = 58
+      Width = 76
+      Caption = 'StatusLabel'
+      ParentColor = False
+    end
+    object RadioGroup2: TRadioGroup
+      Left = 16
+      Height = 32
+      Top = 25
+      Width = 392
+      AutoFill = True
+      ChildSizing.LeftRightSpacing = 6
+      ChildSizing.TopBottomSpacing = 6
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 4
+      ClientHeight = 28
+      ClientWidth = 388
+      Columns = 4
+      Items.Strings = (
+        'NED'
+        'Simbad'
+        'Vizier'
+        'All'
+      )
+      OnClick = RadioGroup2Click
       TabOrder = 2
-    end
-  end
-  object NebNamePanel: TPanel
-    Left = 7
-    Height = 41
-    Top = 232
-    Width = 416
-    ClientHeight = 41
-    ClientWidth = 416
-    FullRepaint = False
-    TabOrder = 3
-    Visible = False
-    object Label3: TLabel
-      Left = 13
-      Height = 15
-      Top = 14
-      Width = 45
-      Caption = 'Nebula'
-      ParentColor = False
-    end
-    object NebNameBox: TComboBox
-      Left = 104
-      Height = 21
-      Top = 11
-      Width = 280
-      ItemHeight = 0
-      TabOrder = 0
-    end
-  end
-  object StarNamePanel: TPanel
-    Left = 7
-    Height = 41
-    Top = 232
-    Width = 416
-    ClientHeight = 41
-    ClientWidth = 416
-    FullRepaint = False
-    TabOrder = 1
-    Visible = False
-    object Label4: TLabel
-      Left = 13
-      Height = 15
-      Top = 14
-      Width = 27
-      Caption = 'Star'
-      ParentColor = False
-    end
-    object StarNameBox: TComboBox
-      Left = 97
-      Height = 21
-      Top = 11
-      Width = 281
-      ItemHeight = 0
-      TabOrder = 0
-    end
-  end
-  object ConstPanel: TPanel
-    Left = 7
-    Height = 41
-    Top = 232
-    Width = 416
-    ClientHeight = 41
-    ClientWidth = 416
-    FullRepaint = False
-    TabOrder = 2
-    Visible = False
-    object Label5: TLabel
-      Left = 13
-      Height = 15
-      Top = 14
-      Width = 83
-      Caption = 'Constellation'
-      ParentColor = False
-    end
-    object ConstBox: TComboBox
-      Left = 113
-      Height = 21
-      Top = 11
-      Width = 265
-      ItemHeight = 0
-      Sorted = True
-      TabOrder = 0
     end
   end
   object IDPanel: TPanel
@@ -348,7 +298,7 @@ object f_search: Tf_search
     end
     object Id: TEdit
       Left = 105
-      Height = 21
+      Height = 23
       Top = 10
       Width = 96
       OnKeyDown = IdKeyDown
@@ -520,132 +470,188 @@ object f_search: Tf_search
       end
     end
   end
-  object RadioGroup1: TRadioGroup
-    Left = 7
-    Height = 217
-    Top = 8
-    Width = 416
-    AutoFill = True
-    Caption = 'Search for '
-    ChildSizing.LeftRightSpacing = 6
-    ChildSizing.TopBottomSpacing = 6
-    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-    ChildSizing.EnlargeVertical = crsHomogenousChildResize
-    ChildSizing.ShrinkHorizontal = crsScaleChilds
-    ChildSizing.ShrinkVertical = crsScaleChilds
-    ChildSizing.Layout = cclLeftToRightThenTopToBottom
-    ChildSizing.ControlsPerLine = 2
-    ClientHeight = 201
-    ClientWidth = 414
-    Columns = 2
-    ItemIndex = 0
-    Items.Strings = (
-      'Nebulae'
-      'Nebula Common Name'
-      'Stars'
-      'Star Common Name'
-      'Variable Stars'
-      'Double Stars'
-      'Comets'
-      'Asteroids'
-      'Planets'
-      'Constellation'
-      'Online NED, Simbad, Vizier'
-    )
-    OnClick = RadioGroup1Click
-    TabOrder = 0
-  end
-  object Button1: TButton
-    Left = 248
-    Height = 25
-    Top = 312
-    Width = 75
-    BorderSpacing.InnerBorder = 4
-    Caption = 'Find'
-    Default = True
-    OnClick = Button1Click
-    TabOrder = 10
-  end
-  object Button2: TButton
-    Left = 348
-    Height = 25
-    Top = 312
-    Width = 75
-    BorderSpacing.InnerBorder = 4
-    Cancel = True
-    Caption = 'Cancel'
-    ModalResult = 2
-    TabOrder = 11
-  end
-  object Button5: TButton
-    Left = 152
-    Height = 25
-    Top = 312
-    Width = 75
-    Caption = 'Help'
-    OnClick = Button5Click
-    TabOrder = 9
-  end
-  object OnlinePanel: TPanel
+  object PlanetPanel: TPanel
     Left = 8
-    Height = 80
-    Top = 224
+    Height = 41
+    Top = 232
     Width = 416
-    ClientHeight = 80
+    ClientHeight = 41
     ClientWidth = 416
     FullRepaint = False
-    TabOrder = 7
-    object OnlineEdit: TEdit
-      Left = 256
-      Height = 21
-      Top = 1
-      Width = 151
-      TabOrder = 1
-      Text = 'ngc4556'
+    TabOrder = 8
+    Visible = False
+    object Label2: TLabel
+      Left = 13
+      Height = 15
+      Top = 14
+      Width = 44
+      Caption = 'Planet '
+      ParentColor = False
     end
-    object ServerList: TComboBox
-      Left = 16
+    object PlanetBox: TComboBox
+      Left = 184
       Height = 23
-      Top = 1
-      Width = 200
+      Top = 8
+      Width = 146
+      DropDownCount = 10
       ItemHeight = 0
-      OnChange = ServerListChange
       Style = csDropDownList
       TabOrder = 0
     end
-    object StatusLabel: TLabel
-      Left = 19
+  end
+  object CometPanel: TPanel
+    Left = 7
+    Height = 41
+    Top = 232
+    Width = 416
+    ClientHeight = 41
+    ClientWidth = 416
+    TabOrder = 4
+    object CometFilter: TEdit
+      Left = 8
+      Height = 23
+      Top = 10
+      Width = 99
+      TabOrder = 0
+    end
+    object Button3: TButton
+      Left = 113
+      Height = 25
+      Top = 8
+      Width = 75
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Filter ->'
+      OnClick = Button3Click
+      TabOrder = 1
+    end
+    object CometList: TComboBox
+      Left = 192
+      Height = 23
+      Top = 10
+      Width = 216
+      ItemHeight = 0
+      Style = csDropDownList
+      TabOrder = 2
+    end
+  end
+  object AsteroidPanel: TPanel
+    Left = 8
+    Height = 41
+    Top = 232
+    Width = 416
+    ClientHeight = 41
+    ClientWidth = 416
+    TabOrder = 6
+    object AsteroidFilter: TEdit
+      Left = 8
+      Height = 23
+      Top = 10
+      Width = 99
+      TabOrder = 0
+    end
+    object Button4: TButton
+      Left = 112
+      Height = 25
+      Top = 8
+      Width = 75
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Filter ->'
+      OnClick = Button4Click
+      TabOrder = 1
+    end
+    object AsteroidList: TComboBox
+      Left = 192
+      Height = 23
+      Top = 10
+      Width = 216
+      ItemHeight = 0
+      Style = csDropDownList
+      TabOrder = 2
+    end
+  end
+  object ConstPanel: TPanel
+    Left = 7
+    Height = 41
+    Top = 232
+    Width = 416
+    ClientHeight = 41
+    ClientWidth = 416
+    FullRepaint = False
+    TabOrder = 2
+    Visible = False
+    object Label5: TLabel
+      Left = 13
       Height = 15
-      Top = 58
-      Width = 76
-      Caption = 'StatusLabel'
+      Top = 14
+      Width = 83
+      Caption = 'Constellation'
       ParentColor = False
     end
-    object RadioGroup2: TRadioGroup
-      Left = 16
-      Height = 32
-      Top = 25
-      Width = 392
-      AutoFill = True
-      ChildSizing.LeftRightSpacing = 6
-      ChildSizing.TopBottomSpacing = 6
-      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-      ChildSizing.EnlargeVertical = crsHomogenousChildResize
-      ChildSizing.ShrinkHorizontal = crsScaleChilds
-      ChildSizing.ShrinkVertical = crsScaleChilds
-      ChildSizing.Layout = cclLeftToRightThenTopToBottom
-      ChildSizing.ControlsPerLine = 4
-      ClientHeight = 30
-      ClientWidth = 390
-      Columns = 4
-      Items.Strings = (
-        'NED'
-        'Simbad'
-        'Vizier'
-        'All'
-      )
-      OnClick = RadioGroup2Click
-      TabOrder = 2
+    object ConstBox: TComboBox
+      Left = 113
+      Height = 23
+      Top = 11
+      Width = 265
+      ItemHeight = 0
+      Sorted = True
+      Style = csDropDownList
+      TabOrder = 0
+    end
+  end
+  object StarNamePanel: TPanel
+    Left = 7
+    Height = 41
+    Top = 232
+    Width = 416
+    ClientHeight = 41
+    ClientWidth = 416
+    FullRepaint = False
+    TabOrder = 1
+    Visible = False
+    object Label4: TLabel
+      Left = 13
+      Height = 15
+      Top = 14
+      Width = 27
+      Caption = 'Star'
+      ParentColor = False
+    end
+    object StarNameBox: TComboBox
+      Left = 97
+      Height = 23
+      Top = 11
+      Width = 281
+      ItemHeight = 0
+      Style = csDropDownList
+      TabOrder = 0
+    end
+  end
+  object NebNamePanel: TPanel
+    Left = 7
+    Height = 41
+    Top = 232
+    Width = 416
+    ClientHeight = 41
+    ClientWidth = 416
+    FullRepaint = False
+    TabOrder = 3
+    Visible = False
+    object Label3: TLabel
+      Left = 13
+      Height = 15
+      Top = 14
+      Width = 45
+      Caption = 'Nebula'
+      ParentColor = False
+    end
+    object NebNameBox: TComboBox
+      Left = 104
+      Height = 25
+      Top = 10
+      Width = 280
+      ItemHeight = 0
+      Style = csDropDownList
+      TabOrder = 0
     end
   end
 end
