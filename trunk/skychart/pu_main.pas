@@ -9365,7 +9365,7 @@ begin
  if beta then begin
    url:='http://www.ap-i.net/pub/skychart/beta.txt';
    fn:=slash(TempDir)+'beta.txt';
-   if QuickDownload(url,fn) then begin
+   if QuickDownload(url,fn,false) then begin
       AssignFile(f,fn);
       reset(f);
       readln(f,newbeta);
@@ -9376,12 +9376,14 @@ begin
         end;
       end
       else ShowMessage(rsYouAlreadyHa);
-   end;
+   end
+   else
+     ShowMessage('Cannot check version now, please check your Internet connection');
  end
  else begin
    url:='http://www.ap-i.net/pub/skychart/version.txt';
    fn:=slash(TempDir)+'version.txt';
-   if QuickDownload(url,fn) then begin
+   if QuickDownload(url,fn,false) then begin
       AssignFile(f,fn);
       reset(f);
       readln(f,newver);
@@ -9392,7 +9394,9 @@ begin
         end;
       end
       else ShowMessage(rsYouAlreadyHa);
-   end;
+   end
+   else
+     ShowMessage('Cannot check version now, please check your Internet connection');
  end;
 end;
 
