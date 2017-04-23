@@ -245,7 +245,8 @@ type
     LT_TLSv1,
     LT_TLSv1_1,
     LT_TLSv1_2,
-    LT_SSHv2
+    LT_SSHv2,
+    LT_TLS
     );
 
   {:Specify type of socket delayed option.}

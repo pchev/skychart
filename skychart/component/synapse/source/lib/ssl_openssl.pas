@@ -430,8 +430,11 @@ begin
       Fctx := SslCtxNew(SslMethodTLSV11);
     LT_TLSv1_2:
       Fctx := SslCtxNew(SslMethodTLSV12);
-    LT_all:
-      Fctx := SslCtxNew(SslMethodV23);
+    LT_all: begin
+      Fctx := SslCtxNew(SslMethodTLS);
+      if Fctx=nil then
+         Fctx := SslCtxNew(SslMethodV23);
+    end
   else
     Exit;
   end;
