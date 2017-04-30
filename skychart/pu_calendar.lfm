@@ -13,7 +13,7 @@ object f_calendar: Tf_calendar
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.6.2.0'
+  LCLVersion = '1.6.4.0'
   Visible = False
   object Panel1: TPanel
     Left = 0
@@ -27,7 +27,7 @@ object f_calendar: Tf_calendar
     TabOrder = 0
     object Label1: TLabel
       Left = 8
-      Height = 15
+      Height = 18
       Top = 14
       Width = 32
       Caption = 'From'
@@ -37,7 +37,7 @@ object f_calendar: Tf_calendar
     end
     object Label2: TLabel
       Left = 184
-      Height = 15
+      Height = 18
       Top = 14
       Width = 13
       Caption = 'to'
@@ -47,9 +47,9 @@ object f_calendar: Tf_calendar
     end
     object Label5: TLabel
       Left = 30
-      Height = 15
+      Height = 18
       Top = 46
-      Width = 13
+      Width = 12
       Caption = 'at'
       Color = clBtnFace
       ParentColor = False
@@ -57,9 +57,9 @@ object f_calendar: Tf_calendar
     end
     object Label3: TLabel
       Left = 185
-      Height = 15
+      Height = 18
       Top = 46
-      Width = 23
+      Width = 21
       Caption = 'pas'
       Color = clBtnFace
       ParentColor = False
@@ -67,9 +67,9 @@ object f_calendar: Tf_calendar
     end
     object Label4: TLabel
       Left = 256
-      Height = 15
+      Height = 18
       Top = 46
-      Width = 31
+      Width = 30
       Caption = 'jours'
       Color = clBtnFace
       ParentColor = False
@@ -124,7 +124,7 @@ object f_calendar: Tf_calendar
     end
     object step: TLongEdit
       Left = 216
-      Height = 21
+      Height = 24
       Hint = '1..9999'
       Top = 41
       Width = 33
@@ -246,18 +246,18 @@ object f_calendar: Tf_calendar
     OnChange = PageControl1Change
     object twilight: TTabSheet
       Caption = 'Twilight'
-      ClientHeight = 362
+      ClientHeight = 359
       ClientWidth = 833
       object TwilightGrid: TStringGrid
         Left = 0
-        Height = 362
+        Height = 359
         Top = 0
         Width = 833
         Align = alClient
         ColCount = 8
         DefaultColWidth = 100
         FixedRows = 2
-        Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing]
+        Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
         RowCount = 3
         TabOrder = 0
         TitleFont.Height = -11
@@ -267,7 +267,7 @@ object f_calendar: Tf_calendar
     end
     object planets: TTabSheet
       Caption = 'Planets'
-      ClientHeight = 362
+      ClientHeight = 359
       ClientWidth = 833
       ImageIndex = 1
       object Pagecontrol2: TPageControl
@@ -293,7 +293,7 @@ object f_calendar: Tf_calendar
             ColCount = 11
             DefaultColWidth = 100
             FixedRows = 2
-            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing]
+            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
             TitleFont.Height = -11
@@ -314,7 +314,7 @@ object f_calendar: Tf_calendar
             ColCount = 11
             DefaultColWidth = 100
             FixedRows = 2
-            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing]
+            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
             TitleFont.Height = -11
@@ -336,7 +336,7 @@ object f_calendar: Tf_calendar
             ColCount = 11
             DefaultColWidth = 100
             FixedRows = 2
-            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing]
+            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
             TitleFont.Height = -11
@@ -358,7 +358,7 @@ object f_calendar: Tf_calendar
             ColCount = 11
             DefaultColWidth = 100
             FixedRows = 2
-            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing]
+            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
             TitleFont.Height = -11
@@ -380,7 +380,7 @@ object f_calendar: Tf_calendar
             ColCount = 11
             DefaultColWidth = 100
             FixedRows = 2
-            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing]
+            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
             TitleFont.Height = -11
@@ -402,7 +402,7 @@ object f_calendar: Tf_calendar
             ColCount = 11
             DefaultColWidth = 100
             FixedRows = 2
-            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing]
+            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
             TitleFont.Height = -11
@@ -424,7 +424,7 @@ object f_calendar: Tf_calendar
             ColCount = 11
             DefaultColWidth = 100
             FixedRows = 2
-            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing]
+            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
             TitleFont.Height = -11
@@ -446,7 +446,7 @@ object f_calendar: Tf_calendar
             ColCount = 11
             DefaultColWidth = 100
             FixedRows = 2
-            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing]
+            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
             TitleFont.Height = -11
@@ -468,7 +468,7 @@ object f_calendar: Tf_calendar
             ColCount = 11
             DefaultColWidth = 100
             FixedRows = 2
-            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing]
+            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
             TitleFont.Height = -11
@@ -490,7 +490,7 @@ object f_calendar: Tf_calendar
             ColCount = 11
             DefaultColWidth = 100
             FixedRows = 2
-            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing]
+            Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
             TitleFont.Height = -11
@@ -524,7 +524,7 @@ object f_calendar: Tf_calendar
     end
     object comet: TTabSheet
       Caption = 'Comets'
-      ClientHeight = 362
+      ClientHeight = 359
       ClientWidth = 833
       ImageIndex = 2
       object CometGrid: TStringGrid
@@ -537,7 +537,7 @@ object f_calendar: Tf_calendar
         ColCount = 13
         DefaultColWidth = 100
         FixedRows = 2
-        Options = [goVertLine, goHorzLine, goColSizing]
+        Options = [goVertLine, goHorzLine, goColSizing, goFixedColSizing]
         RowCount = 3
         TabOrder = 0
         TitleFont.Height = -11
@@ -593,7 +593,7 @@ object f_calendar: Tf_calendar
     end
     object Asteroids: TTabSheet
       Caption = 'Asteroids'
-      ClientHeight = 362
+      ClientHeight = 359
       ClientWidth = 833
       ImageIndex = 6
       object AsteroidGrid: TStringGrid
@@ -606,7 +606,7 @@ object f_calendar: Tf_calendar
         ColCount = 9
         DefaultColWidth = 100
         FixedRows = 2
-        Options = [goVertLine, goHorzLine, goColSizing]
+        Options = [goVertLine, goHorzLine, goColSizing, goFixedColSizing]
         RowCount = 3
         TabOrder = 0
         TitleFont.Height = -11
@@ -653,7 +653,7 @@ object f_calendar: Tf_calendar
     end
     object Solar: TTabSheet
       Caption = 'Solar Eclipses'
-      ClientHeight = 362
+      ClientHeight = 359
       ClientWidth = 833
       ImageIndex = 3
       object SolarGrid: TStringGrid
@@ -665,7 +665,7 @@ object f_calendar: Tf_calendar
         ColCount = 12
         DefaultColWidth = 100
         FixedRows = 2
-        Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing]
+        Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
         RowCount = 3
         TabOrder = 0
         TitleFont.Height = -11
@@ -675,7 +675,7 @@ object f_calendar: Tf_calendar
     end
     object Lunar: TTabSheet
       Caption = 'Lunar Eclipses'
-      ClientHeight = 362
+      ClientHeight = 359
       ClientWidth = 833
       ImageIndex = 4
       object LunarGrid: TStringGrid
@@ -687,7 +687,7 @@ object f_calendar: Tf_calendar
         ColCount = 9
         DefaultColWidth = 100
         FixedRows = 2
-        Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing]
+        Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
         RowCount = 3
         TabOrder = 0
         TitleFont.Height = -11
@@ -697,20 +697,20 @@ object f_calendar: Tf_calendar
     end
     object Satellites: TTabSheet
       Caption = 'Artificial Satellites'
-      ClientHeight = 362
+      ClientHeight = 359
       ClientWidth = 833
       ImageIndex = 5
       object SatGrid: TStringGrid
         Left = 0
-        Height = 271
+        Height = 279
         Top = 80
-        Width = 829
+        Width = 833
         Align = alClient
         Anchors = [akLeft, akRight, akBottom]
         ColCount = 10
         DefaultColWidth = 60
         FixedRows = 2
-        Options = [goVertLine, goHorzLine, goColSizing]
+        Options = [goVertLine, goHorzLine, goColSizing, goFixedColSizing]
         RowCount = 3
         TabOrder = 0
         TitleFont.Height = -11
@@ -721,10 +721,10 @@ object f_calendar: Tf_calendar
         Left = 0
         Height = 80
         Top = 0
-        Width = 829
+        Width = 833
         Align = alTop
         ClientHeight = 80
-        ClientWidth = 829
+        ClientWidth = 833
         TabOrder = 1
         object Bevel1: TBevel
           Left = 192
@@ -735,25 +735,25 @@ object f_calendar: Tf_calendar
         end
         object Label8: TLabel
           Left = 88
-          Height = 16
+          Height = 18
           Top = 32
-          Width = 32
+          Width = 33
           Alignment = taRightJustify
           Caption = 'map :'
           ParentColor = False
         end
         object Label7: TLabel
           Left = 0
-          Height = 16
+          Height = 18
           Top = 4
-          Width = 142
+          Width = 138
           Alignment = taRightJustify
           Caption = 'Magnitude limite, liste :'
           ParentColor = False
         end
         object Label6: TLabel
           Left = 206
-          Height = 16
+          Height = 18
           Top = 4
           Width = 27
           Caption = 'TLE :'
@@ -761,7 +761,7 @@ object f_calendar: Tf_calendar
         end
         object tle1: TEdit
           Left = 200
-          Height = 22
+          Height = 24
           Top = 22
           Width = 97
           OnChange = tle1Change
@@ -769,24 +769,24 @@ object f_calendar: Tf_calendar
         end
         object fullday: TCheckBox
           Left = 461
-          Height = 22
+          Height = 21
           Top = 39
-          Width = 154
+          Width = 153
           Caption = 'Include day time pass'
           TabOrder = 5
         end
         object IridiumBox: TCheckBox
           Left = 461
-          Height = 22
+          Height = 21
           Top = 4
-          Width = 149
+          Width = 150
           Caption = 'Include Iridium flares'
           OnChange = IridiumBoxChange
           TabOrder = 1
         end
         object magchart: TFloatEdit
           Left = 152
-          Height = 22
+          Height = 24
           Hint = '0..99'
           Top = 29
           Width = 33
@@ -799,7 +799,7 @@ object f_calendar: Tf_calendar
         end
         object maglimit: TFloatEdit
           Left = 152
-          Height = 22
+          Height = 24
           Hint = '0..99'
           Top = 0
           Width = 33
@@ -822,7 +822,7 @@ object f_calendar: Tf_calendar
         end
         object MinSatAlt: TLongEdit
           Left = 629
-          Height = 22
+          Height = 24
           Hint = '0..30'
           Top = 39
           Width = 48
@@ -834,17 +834,17 @@ object f_calendar: Tf_calendar
         end
         object Label10: TLabel
           Left = 685
-          Height = 16
+          Height = 18
           Top = 43
-          Width = 98
+          Width = 97
           Caption = 'Minimal altitude'
           ParentColor = False
         end
         object LabelTle: TLabel
           Left = 206
-          Height = 16
+          Height = 18
           Top = 45
-          Width = 53
+          Width = 49
           Caption = 'LabelTle'
           ParentColor = False
         end
@@ -861,19 +861,19 @@ object f_calendar: Tf_calendar
       end
       object DownloadPanel: TPanel
         Left = 0
-        Height = 271
+        Height = 279
         Top = 80
-        Width = 829
+        Width = 833
         Align = alClient
-        ClientHeight = 271
-        ClientWidth = 829
+        ClientHeight = 279
+        ClientWidth = 833
         TabOrder = 2
         Visible = False
         object DownloadMemo: TMemo
           Left = 1
-          Height = 269
+          Height = 277
           Top = 1
-          Width = 827
+          Width = 831
           Align = alClient
           TabOrder = 0
         end

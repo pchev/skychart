@@ -242,6 +242,8 @@ procedure Tf_calendar.FormCreate(Sender: TObject);
 var yy,mm,dd: word;
   i: Integer;
 begin
+SatGrid.ColWidths[0]:=130;
+SatGrid.ColWidths[1]:=120;
 ScaleDPI(Self);
 SetLang;
 config:=Tconf_skychart.Create;
@@ -260,8 +262,6 @@ for i := low(PlanetGraphs) to high(PlanetGraphs) do begin
   PlanetGraphs[i] := TBitmap.Create;
   PlanetGraphs[i].SetSize(dgPlanet.DefaultColWidth, dgPlanet.DefaultRowHeight);
  end;
-SatGrid.ColWidths[0]:=130;
-SatGrid.ColWidths[1]:=120;
 {$ifdef mswindows}
 SaveDialog1.Options:=SaveDialog1.Options-[ofNoReadOnlyReturn]; { TODO : check readonly test on Windows }
 {$endif}
