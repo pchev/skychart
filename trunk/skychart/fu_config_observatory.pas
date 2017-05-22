@@ -37,6 +37,7 @@ type
   { Tf_config_observatory }
 
   Tf_config_observatory = class(TFrame)
+    altmeter: TFloatEdit;
     ShowHorizon0: TCheckBox;
     HorizonQuality: TCheckBox;
     displayhorizonpicture: TCheckBox;
@@ -65,7 +66,6 @@ type
     longsec: TFloatEdit;
     Label2: TLabel;
     Label3: TLabel;
-    altmeter: TLongEdit;
     ObsName: TEdit;
     TZComboBox: TComboBox;
     fillhorizon: TCheckBox;
@@ -308,7 +308,7 @@ var d,m,s : string;
 begin
 try
 obslock:=true;
-altmeter.value:=round(csc.obsaltitude);
+altmeter.value:=csc.obsaltitude;
 ArToStr4(abs(csc.ObsLatitude),f1,d,m,s);
 latdeg.Text:=d;
 latmin.Text:=m;
