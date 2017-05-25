@@ -1,18 +1,19 @@
-col R 
+col S (messier)
 - label  M   
 - format #
 
-col S 
+col T (ngc)
 -format #
 - replace ^0 ""
 - replace ,0 ,
 
-col T 
+col U (ic)
 - format #
 - replace ^0 ""
 
-col A
+col A (name)
 -replace "IC" "IC "
+-replace "IC 0" "IC " x3
 -replace "NGC" "NGC "
 -replace "NGC 0" "NGC " x3
 
