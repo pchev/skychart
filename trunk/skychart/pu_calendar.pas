@@ -1547,7 +1547,8 @@ begin {TimeLine of DrawGraph of RefreshPlanetGraph}
 //  LineEnds.P1.x := lix;
 //  LineEnds.P1.y := liy;
   inc(i);
-  repeat  {late note - can't see how this stays in sync if there are missing points 201103}
+  {late note - can't see how this stays in sync if there are missing points 201103}
+  while i<grd.RowCount do begin
     y := y + ytick; iy := trunc(y);
     if ScaledTime(Grd, C, i, ix) then begin {otherwise just skip completely}
       ir := (ix >= xts) and (ix <= xte);
@@ -1570,7 +1571,7 @@ begin {TimeLine of DrawGraph of RefreshPlanetGraph}
       lir := ir;
       end;
     inc(i);
-  until i >= Grd.RowCount;
+  end;
   {record last point drawn - also a bit of a guess, 201103}
 //  LineEnds.P2.x:= ix;
 //  LineEnds.P2.y:= iy;
@@ -1688,7 +1689,7 @@ begin {DrawZone of of DrawGraph of RefreshPlanetGraph}
   grdrw := 2; {First row of grid with times}
   dzReadRow(grdrw, lrow);
   inc(grdrw);
-  while grdrw >= rowcount do begin
+  while grdrw < rowcount do begin
     y := y + ytick; iy := trunc(y); {bump y to next point}
     dzReadRow(grdrw, crow);
     for k := 0 to 6 do
@@ -1746,13 +1747,13 @@ begin {DrawGraph of RefreshPlanetGraph}
     iy := ygtop - txtsz.cy div 2; {very close to 0 !!!}
     y := iy;
     ix := 1;
-    repeat
+    while i<gr.RowCount do begin
       s := gr.Cells[0,i]; {isodate}
       TextOut(ix, iy, s[9]+s[10]+'/'+s[6]+s[7]);
       inc(i, yskip);
       y := y + ytick*yskip;
       iy := trunc(y);
-    until i >= gr.RowCount;
+    end;
     Rectangle(xts, ygtop, xte, ygBtm);
     ix    := xts + xtick;
     x     := xSStrt + xSInc;
@@ -1818,12 +1819,12 @@ begin {DrawGraph of RefreshPlanetGraph}
     iy := ygtop; y := iy;
     MoveTo(ix, iy);
     i := 3;
-    repeat
+    while i<Gr.RowCount do begin
       y := y + ytick; iy := trunc(y);
       ix := trunc((tstrt - (gr.Objects[3,i] as TObjCoord).jd) * tsc) + xts;
       lineto(ix, iy);
       inc(i);
-    until i >= Gr.RowCount;
+    end;
     LineTo(ix, ygbtm);
     pen.Width:= 1;
     TextOut(xts+2, ygtop+2, 'Mag');
@@ -1853,12 +1854,12 @@ begin {DrawGraph of RefreshPlanetGraph}
     iy := ygtop; y := iy;
     MoveTo(ix, iy);
     i := 3;
-    repeat
+    while i<gr.RowCount do begin
       y := y + ytick; iy := trunc(y);
       ix := trunc(((gr.Objects[3,i] as TObjCoord).ra - xSStrt) * tsc) + xts;
       lineto(ix, iy);
       inc(i);
-    until i >= Gr.RowCount;
+    end;
     LineTo(ix, ygbtm);
     pen.Width:=1;
     TextOut(xts+2, ygtop+2, 'Diam(")');
@@ -1888,18 +1889,23 @@ begin {DrawGraph of RefreshPlanetGraph}
     iy := ygtop; y := iy;
     MoveTo(ix, iy);
     i := 3;
-    repeat
+    while i<gr.RowCount do begin
       y := y + ytick; iy := trunc(y);
       ix := trunc(((gr.Objects[3,i] as TObjCoord).dec * 100 - xSStrt) * tsc) + xts;
       lineto(ix, iy);
       inc(i);
-    until i >= Gr.RowCount;
+    end;
     LineTo(ix, ygbtm);
     pen.Width:=1;
     TextOut(xts+2, ygtop+2, 'Illum(%)');
     end;
 end; {DrawGraph of RefreshPlanetGraph}
 begin {RefreshPlanetGraph}
+if  Mercuregrid.RowCount<4 then begin
+  tsPGraphs.TabVisible:=false;
+  tsPGraphs.Visible:=false;
+  exit;
+end;
 try
   tsPGraphs.Visible:=true;
   tsPGraphs.TabVisible:=true;
