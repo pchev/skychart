@@ -1688,7 +1688,7 @@ begin {DrawZone of of DrawGraph of RefreshPlanetGraph}
   grdrw := 2; {First row of grid with times}
   dzReadRow(grdrw, lrow);
   inc(grdrw);
-  repeat
+  while grdrw >= rowcount do begin
     y := y + ytick; iy := trunc(y); {bump y to next point}
     dzReadRow(grdrw, crow);
     for k := 0 to 6 do
@@ -1696,7 +1696,7 @@ begin {DrawZone of of DrawGraph of RefreshPlanetGraph}
     lrow := crow;
     ily := iy;
     inc(grdrw);
-  until grdrw >= rowcount;
+  end;
 end; {DrawZone of of DrawGraph RefreshPlanetGraph}
 begin {DrawGraph of RefreshPlanetGraph}
   with bm.Canvas do begin
