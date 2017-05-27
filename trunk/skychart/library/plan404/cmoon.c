@@ -855,6 +855,11 @@ int moon1()
 {
 double a;
 
+l1 = 0;
+l2 = 0;
+l3 = 0;
+l4 = 0;
+
 /* Mean anomaly of sun = l' (J. Laskar) */
 M =  mods3600(   129596581.038354 * T +  1287104.76154 );
 M += ((((((((
