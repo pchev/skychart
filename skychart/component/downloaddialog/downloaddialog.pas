@@ -36,11 +36,15 @@ type
   
   TDownloadDaemon = class(TThread)
   private
+    //SZ
+    FFileSize : int64;
+
     FonDownloadComplete: TDownloadProc;
     FonProgress: TDownloadProc;
     LastRead, LastWrite: integer;
     procedure SockStatus(Sender: TObject; Reason: THookSocketReason; Const Value: string) ;  public
     procedure FTPStatus(Sender: TObject; Response: Boolean; Const Value: string);
+
   public
     Phttp: ^THTTPSend;
     Pftp : ^TFTPSend;
@@ -48,10 +52,15 @@ type
     Fsockreadcount,Fsockwritecount : integer;
     Durl,Dftpdir,Dftpfile,progresstext:string;
     ok:boolean;
+
     Constructor Create;
     procedure Execute; override;
     property onDownloadComplete: TDownloadProc read FonDownloadComplete write FonDownloadComplete;
     property onProgress : TDownloadProc read FonProgress write FonProgress;
+
+    //SZ Add in needed
+    //property FileSize: int64 read FFileSize;
+
   end;
 
   TDownloadDialog = class(TCommonDialog)
@@ -86,7 +95,9 @@ type
     procedure FTPComplete;
     procedure progressreport;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+
   public
+
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     function Execute: Boolean; override;
@@ -129,21 +140,27 @@ begin
 end;
 
 Procedure FormPos(form : Tform; x,y : integer);
-const bot=36; //minimal distance from screen bottom
+const
+  bot=36; //minimal distance from screen bottom
 begin
-with Form do begin
-  left:=x;
-  if left+width>Screen.Width then left:=Screen.Width-width;
-  if left<0 then left:=0;
-  top:=y;
-  if top+height>(Screen.height-bot) then top:=Screen.height-height-bot;
-  if top<0 then top:=0;
-end;
+
+  with Form do
+  begin
+    left:=x;
+    if left+width>Screen.Width then left:=Screen.Width-width;
+    if left<0 then left:=0;
+    top:=y;
+    if top+height>(Screen.height-bot) then top:=Screen.height-height-bot;
+    if top<0 then top:=0;
+  end;
+
 end;
 
 constructor TDownloadDialog.Create(AOwner: TComponent);
 begin
+
   inherited Create(AOwner);
+
   http:=THTTPSend.Create;
   http.UserAgent:='Wget/1.16.1 (linux-gnu)';
   ftp :=TFTPSend.Create;
@@ -163,6 +180,7 @@ begin
   Ftofile:='to file:';
   FDownload:='Download';
   FCancel:='Cancel';
+
 end;
 
 destructor TDownloadDialog.Destroy;
@@ -170,13 +188,15 @@ begin
   http.Free;
   ftp.Free;
   Timer1.Free;
+
   inherited Destroy;
 end;
 
 function TDownloadDialog.Execute:boolean;
-var urltxt,filetxt: TLabeledEdit;
-    pos: TPoint;
-    i: integer;
+var
+  urltxt,filetxt: TLabeledEdit;
+  pos: TPoint;
+  i: integer;
 begin
   FResponse:='';
   Ffirsturl:=Furl;
@@ -190,7 +210,8 @@ begin
   DF.OnClose:=@FormClose;
 
   urltxt:=TLabeledEdit.Create(self);
-  with urltxt do begin
+  with urltxt do
+  begin
     Parent:=DF;
     width:=400;
     text:=Furl;
@@ -251,7 +272,8 @@ begin
   DF.Width:=urltxt.Width+16;
   DF.Height:=okButton.Top+okButton.Height+8;
 
-  if not FConfirmDownload then begin
+  if not FConfirmDownload then
+  begin
    //  DF.OnShow:=@BtnDownload;
     DF.modalresult:=mrNone;
     Timer1.Enabled:=true;
@@ -291,96 +313,115 @@ end;
 
 procedure TDownloadDialog.BtnDownload(Sender: TObject);
 begin
-StartDownload;
+  StartDownload;
 end;
 
 procedure TDownloadDialog.BtnCancel(Sender: TObject);
 begin
-DF.ModalResult:=mrCancel;
-DF.Close;
+  DF.ModalResult:=mrCancel;
+  DF.Close;
 end;
 
 procedure TDownloadDialog.doCancel(Sender: TObject);
 begin
-if not okButton.Visible then begin // transfert in progress
-  DownloadDaemon.onProgress:=nil;
-  DownloadDaemon.onDownloadComplete:=nil;
-  if DownloadDaemon.protocol=prHttp then begin
-     http.Sock.onStatus:=nil;
-     http.Abort;
-     http.Sock.AbortSocket;
+
+  if not okButton.Visible then
+  begin // transfert in progress
+    DownloadDaemon.onProgress:=nil;
+    DownloadDaemon.onDownloadComplete:=nil;
+
+    if DownloadDaemon.protocol=prHttp then
+    begin
+       http.Sock.onStatus:=nil;
+       http.Abort;
+       http.Sock.AbortSocket;
+    end;
+
+    if DownloadDaemon.protocol=prFtp then
+    begin
+       ftp.Sock.onStatus:=nil;
+       ftp.onStatus:=nil;
+       ftp.Abort;
+       ftp.Sock.AbortSocket;
+    end;
+
   end;
-  if DownloadDaemon.protocol=prFtp then begin
-     ftp.Sock.onStatus:=nil;
-     ftp.onStatus:=nil;
-     ftp.Abort;
-     ftp.Sock.AbortSocket;
-  end;
-end;
+
 end;
 
 procedure TDownloadDialog.StartDownload;
-var buf,ftpdir,ftpfile: string;
-    i: integer;
+var
+  buf,ftpdir,ftpfile: string;
+  i: integer;
 begin
-FResponse:='';
-if copy(Furl,1,4)='http' then begin        // HTTP protocol
-  http.Clear;
-  http.Timeout:=FTimeout;
-  http.Sock.SocksIP:='';
-  http.ProxyHost:='';
-  if FSocksproxy<>'' then begin
-    http.Sock.SocksIP:=FSocksproxy;
-    if Fproxyport<>'' then http.Sock.SocksPort:=Fproxyport;
-    if FSockstype='Socks4' then http.Sock.SocksType:=ST_Socks4
-                           else http.Sock.SocksType:=ST_Socks5;
-    if Fproxyuser<>'' then http.Sock.SocksUsername:=Fproxyuser;
-    if Fproxypass<>'' then http.Sock.SocksPassword:=Fproxypass;
+
+  FResponse:='';
+  if copy(Furl,1,4)='http' then
+  begin        // HTTP protocol
+    http.Clear;
+    http.Timeout:=FTimeout;
+    http.Sock.SocksIP:='';
+    http.ProxyHost:='';
+
+    if FSocksproxy<>'' then
+    begin
+      http.Sock.SocksIP:=FSocksproxy;
+      if Fproxyport<>'' then http.Sock.SocksPort:=Fproxyport;
+      if FSockstype='Socks4' then http.Sock.SocksType:=ST_Socks4
+                             else http.Sock.SocksType:=ST_Socks5;
+      if Fproxyuser<>'' then http.Sock.SocksUsername:=Fproxyuser;
+      if Fproxypass<>'' then http.Sock.SocksPassword:=Fproxypass;
+    end
+    else if Fproxy<>'' then
+    begin
+        http.ProxyHost:=Fproxy;
+        if Fproxyport<>'' then http.ProxyPort:=Fproxyport;
+        if Fproxyuser<>'' then http.ProxyUser :=Fproxyuser;
+        if Fproxypass<>'' then http.ProxyPass :=Fproxypass;
+    end;
+
+    okButton.Visible:=false;
+
+    DownloadDaemon:=TDownloadDaemon.Create;
+    DownloadDaemon.Phttp:=@http;
+    DownloadDaemon.Durl:=Furl;
+    DownloadDaemon.protocol:=prHttp;
+    DownloadDaemon.onProgress:=@progressreport;
+    DownloadDaemon.onDownloadComplete:=@HTTPComplete;
+    DownloadDaemon.Start;
   end
-  else if Fproxy<>'' then  begin
-      http.ProxyHost:=Fproxy;
-      if Fproxyport<>'' then http.ProxyPort:=Fproxyport;
-      if Fproxyuser<>'' then http.ProxyUser :=Fproxyuser;
-      if Fproxypass<>'' then http.ProxyPass :=Fproxypass;
+  else
+  begin                // FTP protocol
+    if copy(Furl,1,3)<>'ftp' then exit;
+    i:=pos('://',Furl);
+    buf:=copy(Furl,i+3,999);
+    i:=pos('/',buf);
+    ftp.Targethost:=copy(buf,1,i-1);
+    ftp.PassiveMode:=FFWpassive;
+    ftp.UserName:=FUserName;
+    ftp.Password:=FPassword;
+    ftp.FWMode:=FFWMode;
+    if FFWhost<>'' then ftp.FWHost:=FFWHost;
+    if FFWport<>'' then ftp.FWPort:=FFWPort;
+    if FFWUsername<>'' then ftp.FWUsername:=FFWUsername;
+    if FFWPassword<>'' then ftp.FWPassword:=FFWPassword;
+    buf:=copy(buf,i,999);
+    i:=LastDelimiter('/',buf);
+    ftpdir:=copy(buf,1,i);
+    ftpfile:=copy(buf,i+1,999);
+    ftp.DirectFile:=true;
+    ftp.DirectFileName:=FFile;
+    okButton.Visible:=false;
+
+    DownloadDaemon:=TDownloadDaemon.Create;
+    DownloadDaemon.Pftp:=@ftp;
+    DownloadDaemon.Dftpdir:=ftpdir;
+    DownloadDaemon.Dftpfile:=ftpfile;
+    DownloadDaemon.protocol:=prFtp;
+    DownloadDaemon.onProgress:=@progressreport;
+    DownloadDaemon.onDownloadComplete:=@FTPComplete;
+    DownloadDaemon.Start;
   end;
-  okButton.Visible:=false;
-  DownloadDaemon:=TDownloadDaemon.Create;
-  DownloadDaemon.Phttp:=@http;
-  DownloadDaemon.Durl:=Furl;
-  DownloadDaemon.protocol:=prHttp;
-  DownloadDaemon.onProgress:=@progressreport;
-  DownloadDaemon.onDownloadComplete:=@HTTPComplete;
-  DownloadDaemon.Start;
-end else begin                // FTP protocol
-  if copy(Furl,1,3)<>'ftp' then exit;
-  i:=pos('://',Furl);
-  buf:=copy(Furl,i+3,999);
-  i:=pos('/',buf);
-  ftp.Targethost:=copy(buf,1,i-1);
-  ftp.PassiveMode:=FFWpassive;
-  ftp.UserName:=FUserName;
-  ftp.Password:=FPassword;
-  ftp.FWMode:=FFWMode;
-  if FFWhost<>'' then ftp.FWHost:=FFWHost;
-  if FFWport<>'' then ftp.FWPort:=FFWPort;
-  if FFWUsername<>'' then ftp.FWUsername:=FFWUsername;
-  if FFWPassword<>'' then ftp.FWPassword:=FFWPassword;
-  buf:=copy(buf,i,999);
-  i:=LastDelimiter('/',buf);
-  ftpdir:=copy(buf,1,i);
-  ftpfile:=copy(buf,i+1,999);
-  ftp.DirectFile:=true;
-  ftp.DirectFileName:=FFile;
-  okButton.Visible:=false;
-  DownloadDaemon:=TDownloadDaemon.Create;
-  DownloadDaemon.Pftp:=@ftp;
-  DownloadDaemon.Dftpdir:=ftpdir;
-  DownloadDaemon.Dftpfile:=ftpfile;
-  DownloadDaemon.protocol:=prFtp;
-  DownloadDaemon.onProgress:=@progressreport;
-  DownloadDaemon.onDownloadComplete:=@FTPComplete;
-  DownloadDaemon.Start;
-end;
 end;
 
 function StripHTML(S: string): string;
@@ -405,76 +446,110 @@ var ok:boolean;
     newurl:string;
     abuf: string;
 begin
+
  ok:=DownloadDaemon.ok;
- if ok
-    and ((http.ResultCode=200)
-    or (http.ResultCode=0))
-    then begin  // success
-      http.Document.Position:=0;
-      http.Document.SaveToFile(FFile);
-      FResponse:='Finished: '+progress.text;
-    end else if (http.ResultCode=301)or(http.ResultCode=302)or(http.ResultCode=307) then begin
-      for i:=0 to http.Headers.Count-1 do begin
-         if uppercase(copy(http.Headers[i],1,9))='LOCATION:' then begin
-            newurl:=trim(copy(http.Headers[i],10,9999));
-            if (newurl=Furl)or(newurl=Ffirsturl) then ok:=false
-              else begin
-                progress.text:='Redirect to: '+newurl;
-                if assigned(FDownloadFeedback) then FDownloadFeedback(progress.text);
-                Furl:=newurl;
-                StartDownload;
-                exit;
-              end;
-         end;
+
+  if ok and
+    (
+      (http.ResultCode=200) or
+      (http.ResultCode=0)
+    )
+ then
+ begin  // success
+    http.Document.Position:=0;
+    http.Document.SaveToFile(FFile);
+    FResponse:='Finished: '+progress.text;
+  end
+  else if (http.ResultCode=301)or(http.ResultCode=302)or(http.ResultCode=307) then
+  begin
+
+    for i:=0 to http.Headers.Count-1 do
+    begin
+      if uppercase(copy(http.Headers[i],1,9))='LOCATION:' then
+      begin
+        newurl:=trim(copy(http.Headers[i],10,9999));
+        if (newurl=Furl)or(newurl=Ffirsturl) then
+          ok:=false
+        else
+        begin
+          progress.text:='Redirect to: '+newurl;
+          if assigned(FDownloadFeedback) then FDownloadFeedback(progress.text);
+          Furl:=newurl;
+          StartDownload;
+          exit;
+        end;
       end;
-      ok:=false;
-    end else if (http.ResultCode=300) then begin
-        ok:=false;
-        FResponse:='Error 300: ';
-        http.Document.Position:=0;
-        SetString(abuf, http.Document.Memory, http.Document.Size);
-        abuf:=StripHTML(abuf);
-        FResponse:=FResponse+abuf;
-    end else
-    begin // error
-      ok:=false;
-      if  http.ResultCode=0 then
-          FResponse:='Finished: '+progress.text+' / Error: Timeout '+http.ResultString
-      else
-          FResponse:='Finished: '+progress.text+' / Error: '+inttostr(http.ResultCode)+' '+http.ResultString+' '+http.Sock.LastErrorDesc;
-      progress.Text:=FResponse;
- end;
- if assigned(FDownloadFeedback) then FDownloadFeedback(FResponse);
- okButton.Visible:=true;
- http.Clear;
- if ok then DF.modalresult:=mrOK
-       else DF.modalresult:=mrCancel;
+    end;
+
+    ok:=false;
+
+  end
+  else if (http.ResultCode=300) then
+  begin
+    ok:=false;
+    FResponse:='Error 300: ';
+    http.Document.Position:=0;
+    SetString(abuf, http.Document.Memory, http.Document.Size);
+    abuf:=StripHTML(abuf);
+    FResponse:=FResponse+abuf;
+  end else
+  begin // error
+    ok:=false;
+    if  http.ResultCode=0 then
+       FResponse:='Finished: '+progress.text+' / Error: Timeout '+http.ResultString
+    else
+      FResponse:='Finished: '+progress.text+' / Error: '+inttostr(http.ResultCode)+' '+http.ResultString+' '+http.Sock.LastErrorDesc;
+
+    progress.Text:=FResponse;
+  end;
+
+  if assigned(FDownloadFeedback) then
+     FDownloadFeedback(FResponse);
+
+  okButton.Visible:=true;
+  http.Clear;
+
+  if ok then DF.modalresult:= mrOK
+        else DF.modalresult:= mrCancel;
 end;
 
 procedure TDownloadDialog.FTPComplete;
-var ok:boolean;
+var
+  ok:boolean;
 begin
+
  ok:=DownloadDaemon.ok;
  FResponse:=progress.text;
- if ok then begin
+
+ if ok then
+ begin
     ftp.Sock.onStatus:=nil;
     ftp.onStatus:=nil;
     ftp.logout;
- end else begin
+ end
+ else
+ begin
     ftp.Sock.onStatus:=nil;
     ftp.onStatus:=nil;
     ftp.abort;
     progress.Text:=FResponse;
  end;
+
  okButton.Visible:=true;
- if ok then DF.modalresult:=mrOK
-       else DF.modalresult:=mrCancel;
+
+ if ok then DF.modalresult:= mrOK
+       else DF.modalresult:= mrCancel;
+
 end;
 
 procedure TDownloadDialog.progressreport;
 begin
-  progress.text:=DownloadDaemon.progresstext;
-  if assigned(FDownloadFeedback) then FDownloadFeedback(progress.text);
+
+  progress.text := DownloadDaemon.progresstext;
+
+  if assigned(FDownloadFeedback) then
+    FDownloadFeedback(progress.text);
+
 end;
 
 Constructor TDownloadDaemon.Create;
@@ -485,59 +560,138 @@ begin
 end;
 
 procedure TDownloadDaemon.Execute;
+var
+  //SZ To get size of file on HTTP request
+  head: string;
+  i: integer;
 begin
-Fsockreadcount:=0;
-Fsockwritecount:=0;
-LastRead:=0;
-LastWrite:=0;
-if protocol=prHttp then begin
-  phttp^.Sock.OnStatus:=@SockStatus;
-  ok:=phttp^.HTTPMethod('GET', Durl)
-end;
-if protocol=prFtp then begin
-  pftp^.OnStatus:=@FTPStatus;
-  if pftp^.Login then begin
-    pftp^.ChangeWorkingDir(Dftpdir);
-    ok:=pftp^.RetrieveFile(Dftpfile,false);
+  Fsockreadcount:=0;
+  Fsockwritecount:=0;
+  LastRead:=0;
+  LastWrite:=0;
+  FFileSize := 0;
+
+  if protocol=prHttp then
+  begin
+    phttp^.Sock.OnStatus:=@SockStatus;
+
+
+    //SZ Added code to retrieve file size for download progress
+
+    phttp^.HTTPMethod('HEAD',Durl);
+    head := phttp^.Headers.Text;
+
+    i := pos('content-length:',LowerCase(head));
+
+    if i > 0 then
+    begin
+
+      head := RightStr(head, length(head) - ( i + 15));
+      head := Trim(head);
+
+      i := 1;
+      while i < length(head) do
+      begin
+
+        if head[i] in ['0'..'9'] then
+          FFileSize := FFileSize * 10 + ord(head[i]) - 48
+        else
+          break;
+
+        inc(i);
+
+      end;
+
+    end;
+
+    phttp^.Headers.Clear;
+    phttp^.Document.Clear;
+
+
+    ok:=phttp^.HTTPMethod('GET', Durl)
+  end
+  else
+  if protocol=prFtp then
+  begin
+
+    pftp^.OnStatus:=@FTPStatus;
+
+    if pftp^.Login then
+    begin
+      pftp^.ChangeWorkingDir(Dftpdir);
+
+      //SZ
+      FFileSize := pftp^.FileSize(Dftpfile);
+      ok:=pftp^.RetrieveFile(Dftpfile,false);
+    end;
+
   end;
-end;
-if assigned(FonDownloadComplete) then synchronize(FonDownloadComplete);
+
+  if Assigned(FonDownloadComplete) then
+     Synchronize(FonDownloadComplete);
+
 end;
 
 procedure TDownloadDaemon.SockStatus(Sender: TObject; Reason: THookSocketReason; Const Value: string) ;
-var reasontxt:string;
+var
+  reasontxt:string;
 begin
-reasontxt:='';
-case reason of
-HR_ResolvingBegin : reasontxt:='Resolving '+value;
-HR_Connect        : reasontxt:='Connect '+value;
-HR_Accept         : reasontxt:='Accept '+value;
-HR_ReadCount      : begin
-                    FSockreadcount:=FSockreadcount+strtoint(value);
-                    if (FSockreadcount-LastRead)>100000 then begin
-                      reasontxt:='Read Bytes: '+inttostr(FSockreadcount);
-                      LastRead:=FSockreadcount;
-                    end;
-                    end;
-HR_WriteCount     : begin
-                    FSockwritecount:=FSockwritecount+strtoint(value);
-                    reasontxt:='Request sent, waiting response';
-                    end;
-else reasontxt:='';
-end;
-if (reasontxt>'')and assigned(FonProgress) then begin
-  progresstext:=reasontxt;
-  synchronize(FonProgress);
-end;
-end;
 
+  reasontxt:='';
+
+  case reason of
+    HR_ResolvingBegin : reasontxt:='Resolving '+value;
+    HR_Connect        : reasontxt:='Connect '+value;
+    HR_Accept         : reasontxt:='Accept '+value;
+
+    HR_ReadCount      :
+
+      begin
+        FSockreadcount:=FSockreadcount+strtoint(value);
+
+        if (FSockreadcount-LastRead)>100000 then
+        begin
+          // SZ Added percentage
+
+          reasontxt:= format('Read Bytes: %.0n', [1.0*FSockreadcount]);
+
+          if FFileSize > 0 then
+            reasontxt:= reasontxt +
+              format(' of %.0n (%5.2f%%)',[1.0*FFileSize, FSockreadcount*100/FFileSize ] );
+
+          LastRead:=FSockreadcount;
+        end;
+
+      end;
+
+    HR_WriteCount     :
+      begin
+        FSockwritecount:=FSockwritecount+strtoint(value);
+        reasontxt:='Request sent, waiting response';
+      end;
+
+
+  else
+    reasontxt:='';
+  end;
+
+  if (reasontxt>'')and assigned(FonProgress) then
+  begin
+    progresstext:=reasontxt;
+    synchronize(FonProgress);
+  end;
+
+end;
 
 procedure TDownloadDaemon.FTPStatus(Sender: TObject; Response: Boolean; Const Value: string);
 begin
-if response and assigned(FonProgress) then begin
-  progresstext:=value;
-  synchronize(FonProgress);
-end;
+
+  if response and assigned(FonProgress) then
+  begin
+    progresstext:=value;
+    synchronize(FonProgress);
+  end;
+
 end;
 
 initialization
