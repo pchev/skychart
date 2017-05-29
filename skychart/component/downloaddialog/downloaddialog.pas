@@ -202,7 +202,6 @@ begin
   Ffirsturl:=Furl;
   DF:=TForm.Create(Self);
   DF.Caption:=FDownloadFile;
-  DF.FormStyle:=fsStayOnTop;
   DF.BorderStyle:=bsDialog;
   DF.AutoSize:=false;
   pos:=mouse.CursorPos;
