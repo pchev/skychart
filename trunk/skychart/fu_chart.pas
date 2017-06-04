@@ -2981,7 +2981,7 @@ f_detail.ra:=ra2000;
 f_detail.de:=de2000;
 sameobj:=(f_detail.objname=sc.cfgsc.FindName);
 f_detail.objname:=sc.cfgsc.FindName;
-f_detail.IpHtmlPanel1.DefaultFontSize:=sc.plot.cfgplot.FontSize[4];
+f_detail.HtmlFontSize:=sc.plot.cfgplot.FontSize[4];
 f_detail.IpHtmlPanel1.DefaultTypeFace:=sc.plot.cfgplot.FontName[4];
 f_detail.TextOnly:=cmain.TextOnlyDetail;
 f_detail.show;

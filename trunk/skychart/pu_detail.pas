@@ -76,6 +76,7 @@ type
     FTextOnly: boolean;
     FSameposition: boolean;
     Fkeydown: TKeyEvent;
+    FHtmlFontSize: integer;
     procedure SetHTMLText(const value: string);
   public
     { Public declarations }
@@ -85,6 +86,7 @@ type
     InfoUrlNum: integer;
     property text: string read FHTMLText write SetHTMLText;
     property TextOnly: boolean read FTextOnly write FTextOnly;
+    property HtmlFontSize: integer read FHtmlFontSize write FHtmlFontSize;
     property Sameposition: boolean read FSameposition write FSameposition;
     property OnCenterObj: Tstr1func read FCenter write FCenter;
     property OnNeighborObj: Tstr1func read FNeighbor write FNeighbor;
@@ -232,7 +234,7 @@ begin
     sstream:=TStringStream.Create(value);
     NewHTML.LoadFromStream(sstream);
     sstream.Free;
-    IpHtmlPanel1.DefaultFontSize:=DoScaleX(SysFontSize);
+    IpHtmlPanel1.DefaultFontSize:=DoScaleX(FHtmlFontSize);
     IpHtmlPanel1.SetHtml(NewHTML);
     if FSameposition then begin
       IpHtmlPanel1.Update;
