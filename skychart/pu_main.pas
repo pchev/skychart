@@ -3104,12 +3104,17 @@ end;
 end;
 
 procedure Tf_main.RecomputeAsteroid;
+var jd1,jd2,h:double;
+    y,m,d:integer;
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
   f_info.setpage(2);
   f_info.show;
   f_info.ProgressMemo.lines.add(rsComputeAster);
-  if Planet.PrepareAsteroid(sc.cfgsc.curjdtt, sc.cfgsc.curjdtt, 1, f_info.ProgressMemo.lines) then begin
+  djd(sc.cfgsc.CurJDUT,y,m,d,h);
+  jd1:=jd(y,m,1,0);
+  jd2:=jd(y,m+1,1,0);
+  if Planet.PrepareAsteroid(jd1, jd2, 1, f_info.ProgressMemo.lines) then begin
      sc.cfgsc.ShowAsteroid:=true;
      Refresh(true,true);
   end;
