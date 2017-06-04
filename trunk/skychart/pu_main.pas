@@ -3850,7 +3850,7 @@ if directdownload then begin
           if ConfigSolsys.f_config_solsys1.autoOK then begin
              RecomputeAsteroid;
              RefreshAllChild(false);
-             if ConfigSolsys.f_config_solsys1.autoOK then ShowMessage(rsAsteroidUpda);
+             ShowMessage(rsAsteroidUpda);
           end;
         end;
    end;
