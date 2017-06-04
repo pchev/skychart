@@ -2295,7 +2295,7 @@ begin
 //   If not found, then use first one
 
   qry:='SELECT id,name FROM cdc_ast_name' +
-       ' where name like "%'+astname+'%"';
+       ' where name like "%'+astname+'%" limit 1000';
 
   id := '';
 
@@ -2377,7 +2377,7 @@ searchid:='';
 if (not db1.Active)or(not cfgsc.ephvalid) then exit;
 
 qry:='SELECT id,name FROM cdc_com_name'
-    +' where name like "%'+comname+'%"';
+    +' where name like "%'+comname+'%" limit 100';
 
 id:='';
 
