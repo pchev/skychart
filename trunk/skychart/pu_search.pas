@@ -28,22 +28,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, cu_database,
+uses
+  u_help, u_translation, u_constant, u_util, cu_database,
   httpsend, blcksock, XMLRead, DOM, LCLType, UScaleDPI,
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, Buttons, LResources, LazHelpHTML;
+  Dialogs, StdCtrls, ExtCtrls, Buttons, LResources, LazHelpHTML, ComCtrls, Types;
 
-const maxcombo = 500;
+const
+  maxcombo = 500;
 
 type
 
   { Tf_search }
 
   Tf_search = class(TForm)
-    Button3: TButton;
-    Button4: TButton;
+    btnCometFilter: TButton;
+    btnAstFilter: TButton;
     AsteroidList: TComboBox;
-    Button5: TButton;
+    btnHelp: TButton;
+    PageControl1: TPageControl;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
     RadioGroup2: TRadioGroup;
     ServerList: TComboBox;
     CometList: TComboBox;
@@ -56,8 +63,8 @@ type
     OnlinePanel: TPanel;
     RadioGroup1: TRadioGroup;
     IDPanel: TPanel;
-    Button1: TButton;
-    Button2: TButton;
+    btnFind: TButton;
+    btnCancel: TButton;
     Id: TEdit;
     NumPanel: TPanel;
     SpeedButton1: TSpeedButton;
@@ -85,6 +92,14 @@ type
     SpeedButton20: TSpeedButton;
     SpeedButton22: TSpeedButton;
     SpeedButton23: TSpeedButton;
+    tsStarName: TTabSheet;
+    tsConst: TTabSheet;
+    tsStars: TTabSheet;
+    tsOnline: TTabSheet;
+    tsPlanet: TTabSheet;
+    tsComet: TTabSheet;
+    tsAsteroid: TTabSheet;
+    tsNebName: TTabSheet;
     VarPanel: TPanel;
     SpeedButton21: TSpeedButton;
     SpeedButton24: TSpeedButton;
@@ -108,17 +123,18 @@ type
     ConstPanel: TPanel;
     Label5: TLabel;
     ConstBox: TComboBox;
-    procedure Button3Click(Sender: TObject);
-    procedure Button4Click(Sender: TObject);
-    procedure Button5Click(Sender: TObject);
+    procedure btnCometFilterClick(Sender: TObject);
+    procedure btnAstFilterClick(Sender: TObject);
+    procedure btnHelpClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure NumButtonClick(Sender: TObject);
+    procedure PageControl1Change(Sender: TObject);
     procedure RadioGroup2Click(Sender: TObject);
     procedure ServerListChange(Sender: TObject);
     procedure SpeedButton11Click(Sender: TObject);
     procedure SpeedButton13Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure btnFindClick(Sender: TObject);
     procedure CatButtonClick(Sender: TObject);
     procedure IdKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -173,583 +189,676 @@ implementation
 
 procedure Tf_search.SetLang;
 begin
-Caption:=rsSearch;
-Button3.caption:=rsFilter;
-Button4.caption:=rsFilter;
-Label2.caption:=rsSolarSystemO;
-Label3.caption:=rsNebula;
-Label4.caption:=rsStar;
-Label5.caption:=rsConstellatio;
-Label1.caption:=rsObjectName;
-RadioGroup1.caption:=rsSearchFor;
-RadioGroup1.Items[0]:=rsNebula;
-RadioGroup1.Items[1]:=rsNebulaCommon;
-RadioGroup1.Items[2]:=rsStar;
-RadioGroup1.Items[3]:=rsStarCommonNa;
-RadioGroup1.Items[4]:=rsVariableStar;
-RadioGroup1.Items[5]:=rsDoubleStar;
-RadioGroup1.Items[6]:=rsComet;
-RadioGroup1.Items[7]:=rsAsteroid;
-RadioGroup1.Items[8]:=rsSolarSystem;
-RadioGroup1.Items[9]:=rsConstellatio;
-RadioGroup1.Items[10]:=rsInternet+' NED, Simbad, Vizier';
-Button1.caption:=rsFind;
-Button2.caption:=rsCancel;
-Button5.caption:=rsHelp;
-SetHelp(self,hlpSearch);
+
+  Caption:=rsSearch;
+
+  btnCometFilter.caption:=rsFilter;
+  btnAstFilter.caption:=rsFilter;
+  Label2.caption:=rsSolarSystemO;
+  Label3.caption:=rsNebula;
+  Label4.caption:=rsStar;
+  Label5.caption:=rsConstellatio;
+  Label1.caption:=rsObjectName;
+  RadioGroup1.caption:=rsSearchFor;
+  RadioGroup1.Items[0]:=rsNebula;
+  RadioGroup1.Items[1]:=rsNebulaCommon;
+  RadioGroup1.Items[2]:=rsStar;
+  RadioGroup1.Items[3]:=rsStarCommonNa;
+  RadioGroup1.Items[4]:=rsVariableStar;
+  RadioGroup1.Items[5]:=rsDoubleStar;
+  RadioGroup1.Items[6]:=rsComet;
+  RadioGroup1.Items[7]:=rsAsteroid;
+  RadioGroup1.Items[8]:=rsSolarSystem;
+  RadioGroup1.Items[9]:=rsConstellatio;
+  RadioGroup1.Items[10]:=rsInternet+' NED, Simbad, Vizier';
+  btnFind.caption:=rsFind;
+  btnCancel.caption:=rsCancel;
+  btnHelp.caption:=rsHelp;
+  SetHelp(self,hlpSearch);
 end;
 
 procedure Tf_search.FormShow(Sender: TObject);
 begin
-// return cursor to corresponding input box
-case RadioGroup1.itemindex of
-  0 : begin                      //neb
-      ActiveControl:=Id;
-      end;
-  1 : begin                      //neb name
-      ActiveControl:=NebNameBox;
-      end;
-  2 : begin                      //star
-      ActiveControl:=Id;
-      end;
-  3 : begin                      //star name
-      ActiveControl:=StarNameBox;
-      end;
-  4 : begin                      //var
-      ActiveControl:=Id;
-      end;
-  5 : begin                      //dbl
-      ActiveControl:=Id;
-      end;
-  6 : begin                      //comet
-      ActiveControl:=CometList;
-      end;
-  7 : begin                      //asteroid
-      ActiveControl:=AsteroidList;
-      end;
-  8 : begin                      //planet
-      ActiveControl:=PlanetBox;
-      end;
-  9 : begin                      //const
-      ActiveControl:=ConstBox;
-      end;
-  10 : begin                      // online
-      ActiveControl:=OnlineEdit;
-      end;
-end;
+
+  PageControl1Change(Self);
+
 end;
 
 procedure Tf_search.CatButtonClick(Sender: TObject);
 begin
-with sender as TspeedButton do begin
-  Id.text:=caption;
-end;
-Id.SelStart:=length(Id.Text);
+
+  with sender as TSpeedButton do
+  begin
+    Id.text := caption;
+  end;
+
+  Id.SelStart:=length(Id.Text);
+
 end;
 
 procedure Tf_search.NumButtonClick(Sender: TObject);
 begin
-with sender as TspeedButton do begin
-  Id.text:=Id.text+caption;
+
+  with sender as TSpeedButton do
+  begin
+    Id.text := Id.text+caption;
+  end;
+
+  Id.SelStart := length(Id.Text);
+
 end;
-Id.SelStart:=length(Id.Text);
+
+procedure Tf_search.PageControl1Change(Sender: TObject);
+begin
+  // return cursor to corresponding input box
+
+  case RadioGroup1.itemindex of
+
+    0 : ActiveControl:=Id;             //neb
+    1 : ActiveControl:=NebNameBox;     //neb name
+    2 : ActiveControl:=Id;             //star
+    3 : ActiveControl:=StarNameBox;    //star name
+    4 : ActiveControl:=Id;             //var
+    5 : ActiveControl:=Id;             //comet
+    6 : ActiveControl:=CometFilter;    //comet
+    7 : ActiveControl:=AsteroidFilter; //asteroid
+    8 : ActiveControl:=PlanetBox;      //planet
+    9 : ActiveControl:=ConstBox;       //const
+   10 : ActiveControl:=OnlineEdit;     //online
+
+  end;
 end;
 
 procedure Tf_search.RadioGroup2Click(Sender: TObject);
 begin
-  SesameCatNum:=RadioGroup2.ItemIndex;
+  SesameCatNum := RadioGroup2.ItemIndex;
 end;
 
 procedure Tf_search.ServerListChange(Sender: TObject);
 begin
-  SesameUrlNum:=ServerList.ItemIndex;
+  SesameUrlNum := ServerList.ItemIndex;
 end;
 
 procedure Tf_search.FormCreate(Sender: TObject);
 begin
-ScaleDPI(Self);
-SetLang;
-Fnightvision:=false;
-StatusLabel.Caption:='';
-CometFilter.Text:='C/'+FormatDateTime('yyyy',now);
-RadioGroup1Click(Sender);
-http := THTTPSend.Create;
-Fproxy:='';
-FSocksproxy:='';
+
+  //SZ
+  PageControl1.ShowTabs := false;
+  PageControl1.AutoSize := True;
+
+  ScaleDPI(Self);
+  SetLang;
+  Fnightvision:=false;
+  StatusLabel.Caption:='';
+  CometFilter.Text:='C/'+FormatDateTime('yyyy',now);
+  RadioGroup1Click(Sender);
+
+  http := THTTPSend.Create;
+
+  Fproxy:='';
+  FSocksproxy:='';
+
 end;
 
 procedure Tf_search.FormDestroy(Sender: TObject);
 begin
-http.Free;
+  http.Free;
 end;
 
-procedure Tf_search.Button3Click(Sender: TObject);
-var list: TStringList;
+procedure Tf_search.btnCometFilterClick(Sender: TObject);
+var
+  list: TStringList;
 begin
-list:=TStringList.Create;
-Cdb.GetCometList(CometFilter.Text,maxcombo,list,cometid);
-CometList.Items.Assign(list);
-CometList.ItemIndex:=0;
+
+  list := TStringList.Create;
+
+  try
+
+    Cdb.GetCometList(CometFilter.Text,maxcombo,list,cometid);
+    CometList.Items.Assign(list);
+    CometList.ItemIndex:=0;
+
+  finally
+    list.Free;
+  end;
+
 end;
 
-procedure Tf_search.Button4Click(Sender: TObject);
-var list: TStringList;
+procedure Tf_search.btnAstFilterClick(Sender: TObject);
+var
+  list: TStringList;
 begin
-list:=TStringList.Create;
-Cdb.GetAsteroidList(AsteroidFilter.Text,maxcombo,list,Astid);
-AsteroidList.Items.Assign(list);
-AsteroidList.ItemIndex:=0;
+
+  list := TStringList.Create;
+
+  try
+
+    Cdb.GetAsteroidList(AsteroidFilter.Text,maxcombo,list,Astid);
+    AsteroidList.Items.Assign(list);
+    AsteroidList.ItemIndex:=0;
+
+  finally
+    List.Free
+  end;
+
 end;
 
-procedure Tf_search.Button5Click(Sender: TObject);
+procedure Tf_search.btnHelpClick(Sender: TObject);
 begin
   ShowHelp;
 end;
 
 procedure Tf_search.SpeedButton11Click(Sender: TObject);
-var buf : string;
+var
+  buf : string;
 begin
-buf:=Id.text;
-delete(buf,length(buf),1);
-Id.text:=buf;
-Id.SelStart:=length(Id.Text);
+  buf:=Id.text;
+  delete(buf,length(buf),1);
+  Id.text:=buf;
+  Id.SelStart:=length(Id.Text);
 end;
 
 procedure Tf_search.SpeedButton13Click(Sender: TObject);
 begin
-Id.text:='';
+  Id.text:='';
 end;
 
 function Tf_search.SearchNebName(Num:string; var ar1,de1: double): boolean;
-var i,p: integer;
-    buf: string;
+var
+  i,p: integer;
+  buf: string;
 begin
-buf:=uppercase(Num);
-result:=false;
-for i:=0 to NebNameBox.Items.Count-1 do begin
-   p:=pos(buf,uppercase(NebNameBox.Items[i]));
-   if p=1 then begin
+
+  buf := uppercase(Num);
+
+  result:=false;
+
+  for i:=0 to NebNameBox.Items.Count-1 do
+  begin
+
+    p:=pos(buf,uppercase(NebNameBox.Items[i]));
+
+    if p=1 then
+    begin
       ar1:=NebNameAR[i];
       de1:=NebNameDE[i];
       result:=true;
       break;
-   end;
-end;
+    end;
+
+  end;
+
 end;
 
 function Tf_search.LoadSesame(fn:string): boolean;
-var Doc: TXMLDocument;
-    Node,Snode,Dnode: TDOMNode;
-    k,v,a,buf,k1,v1: string;
+var
+  Doc: TXMLDocument;
+  Node,Snode,Dnode: TDOMNode;
+  k,v,a,buf,k1,v1: string;
 begin
-result:=false;
-sesame_resolver:='';sesame_name:='';sesame_desc:='';
-ReadXMLFile( Doc, fn);
-try
-Node:=Doc.DocumentElement.FindNode('Target');
-if Node=nil then exit;
-Node:=Node.FindNode('Resolver');
-if Node=nil then exit;
-Snode:=Node.Attributes.GetNamedItem('name');
-if Snode<>nil then sesame_resolver:=string(Snode.TextContent);
-Node:=Node.FirstChild;
-while Node<>nil do begin
-   k:=string(Node.NodeName);
-   if k<>'#comment' then begin
-   v:=string(Node.TextContent);
-   a:='';
-   Dnode:=Node.Attributes.Item[0];
-   if Dnode<>nil then a:=string(Dnode.NodeName)+'.'+string(Dnode.TextContent);
-   buf:='';
-   Dnode:=Node.FirstChild;
-   while Dnode<>nil do begin
-     k1:=string(Dnode.NodeName);
-     if k1='#text' then break;
-     v1:=string(Dnode.TextContent);
-     buf:=buf+k+'.'+a+'.'+k1+':'+v1+tab;
-     Dnode:=Dnode.NextSibling;
-   end;
-   if buf='' then sesame_desc:=sesame_desc+k+':'+v+tab
-             else sesame_desc:=sesame_desc+buf;
-   if k='oname' then sesame_name:=v;
-   if k='jradeg' then begin
-      ra:=StrToFloatDef(v,-9999);
-      if ra=-9999 then exit;
-      ra:=deg2rad*ra;
-   end;
-   if k='jdedeg' then begin
-      de:=StrToFloatDef(v,-9999);
-      if de=-9999 then exit;
-      de:=deg2rad*de;
-   end;
-   end;
-   Node:=Node.NextSibling;
-end;
-if sesame_name='' then sesame_name:=num;
-result:=true;
-finally
-Doc.Free;
-end;
+
+  result:=false;
+
+  sesame_resolver:='';
+  sesame_name:='';
+  sesame_desc:='';
+
+  Doc := nil;
+
+  ReadXMLFile( Doc, fn);
+
+  if Doc = nil then
+    exit;
+
+  try
+
+    Node := Doc.DocumentElement.FindNode('Target');
+
+    if Node = nil then
+      exit;
+
+    Node := Node.FindNode('Resolver');
+
+    if Node = nil then
+      exit;
+
+    Snode := Node.Attributes.GetNamedItem('name');
+
+    if Snode <> nil then
+      sesame_resolver := string(Snode.TextContent);
+
+    Node := Node.FirstChild;
+
+    while Node <> nil do
+    begin
+
+      k := string(Node.NodeName);
+
+      if k <> '#comment' then
+      begin
+
+        v := string(Node.TextContent);
+        a := '';
+
+        Dnode := Node.Attributes.Item[0];
+
+        if Dnode <> nil then
+           a := string(Dnode.NodeName) + '.' + string(Dnode.TextContent);
+
+        buf :='';
+        Dnode := Node.FirstChild;
+
+        while Dnode <> nil do
+        begin
+          k1 := string(Dnode.NodeName);
+
+          if k1 = '#text' then break;
+
+          v1 := string(Dnode.TextContent);
+
+          buf := buf+k+'.'+a+'.'+k1+':'+v1+tab;
+          Dnode := Dnode.NextSibling;
+        end;
+
+        if buf='' then sesame_desc:=sesame_desc+k+':'+v+tab
+                  else sesame_desc:=sesame_desc+buf;
+
+        if k = 'oname' then sesame_name := v;
+
+        if k ='jradeg' then
+        begin
+          ra := StrToFloatDef(v,-9999);
+          if ra = -9999 then
+            exit;
+
+          ra := deg2rad * ra;
+        end;
+
+        if k = 'jdedeg' then
+        begin
+          de := StrToFloatDef(v,-9999);
+          if de = -9999 then
+            exit;
+
+          de := deg2rad * de;
+        end;
+
+      end;
+
+      Node := Node.NextSibling;
+
+    end;
+
+    if sesame_name = '' then
+      sesame_name := num;
+
+    result := true;
+
+  finally
+    Doc.Free;
+  end;
+
 end;
 
 procedure Tf_search.SetServerList;
-var i : integer;
+var
+  i : integer;
 begin
+
   ServerList.Items.Clear;
+
   for i:=1 to sesame_maxurl do
     if sesame_url[i,2]<>'' then
       ServerList.Items.Add(sesame_url[i,2]);
+
   ServerList.ItemIndex:=SesameUrlNum;
   RadioGroup2.ItemIndex:=SesameCatNum;
+
 end;
 
 function Tf_search.SearchOnline: boolean;
-var url,cat,vo_sesame:string;
+var
+  url,cat,vo_sesame:string;
 begin
-result:=false;
-vo_sesame:=slash(VODir)+'vo_sesame.xml';
-case SesameCatNum of
-  0 : cat:='N';
-  1 : cat:='S';
-  2 : cat:='V';
-  3 : cat:='NSV';
-  else cat:='';
-end;
-url:=sesame_url[SesameUrlNum+1,1];
-url:=url+'/-oxFI/'+cat+'?'+trim(StringReplace(num,' ','%20',[rfReplaceAll]));
-http.Clear;
-http.Sock.SocksIP:='';
-http.ProxyHost:='';
-if FSocksproxy<>'' then begin
-  http.Sock.SocksIP:=FSocksproxy;
-  if Fproxyport<>'' then http.Sock.SocksPort:=Fproxyport;
-  if FSockstype='Socks4' then http.Sock.SocksType:=ST_Socks4
-                         else http.Sock.SocksType:=ST_Socks5;
-  if Fproxyuser<>'' then http.Sock.SocksUsername:=Fproxyuser;
-  if Fproxypass<>'' then http.Sock.SocksPassword:=Fproxypass;
-end
-else if Fproxy<>'' then  begin
-    http.ProxyHost:=Fproxy;
-    if Fproxyport<>'' then http.ProxyPort:=Fproxyport;
-    if Fproxyuser<>'' then http.ProxyUser :=Fproxyuser;
-    if Fproxypass<>'' then http.ProxyPass :=Fproxypass;
-end;
-http.Timeout:=10000;
-http.Sock.OnStatus:=httpstatus;
-Sockreadcount:=0;
-if http.HTTPMethod('GET', url)
-   and ((http.ResultCode=200)
-   or (http.ResultCode=0))
-     then begin
-       StatusLabel.Caption:='Completed';
-       http.Document.SaveToFile(vo_sesame);
-       result:=LoadSesame(vo_sesame);
-       if not Result then StatusLabel.Caption:=format(rsNotFound,[num]);
-     end
-     else StatusLabel.Caption:=StatusLabel.Caption+' '+rsOnlineSearch;
-http.Clear;
+
+  result:=false;
+
+  vo_sesame:=slash(VODir)+'vo_sesame.xml';
+
+  case SesameCatNum of
+    0 : cat:='N';
+    1 : cat:='S';
+    2 : cat:='V';
+    3 : cat:='NSV';
+  else
+    cat:='';
+  end;
+
+  url:=sesame_url[SesameUrlNum+1,1];
+  url:=url+'/-oxFI/'+cat+'?'+trim(StringReplace(num,' ','%20',[rfReplaceAll]));
+  http.Clear;
+  http.Sock.SocksIP:='';
+  http.ProxyHost:='';
+
+  if FSocksproxy<>'' then
+  begin
+    http.Sock.SocksIP:=FSocksproxy;
+    if Fproxyport<>'' then http.Sock.SocksPort:=Fproxyport;
+    if FSockstype='Socks4' then http.Sock.SocksType:=ST_Socks4
+                           else http.Sock.SocksType:=ST_Socks5;
+    if Fproxyuser<>'' then http.Sock.SocksUsername:=Fproxyuser;
+    if Fproxypass<>'' then http.Sock.SocksPassword:=Fproxypass;
+  end
+
+  else if Fproxy<>'' then  begin
+      http.ProxyHost:=Fproxy;
+      if Fproxyport<>'' then http.ProxyPort:=Fproxyport;
+      if Fproxyuser<>'' then http.ProxyUser :=Fproxyuser;
+      if Fproxypass<>'' then http.ProxyPass :=Fproxypass;
+  end;
+
+  http.Timeout:=10000;
+  http.Sock.OnStatus:=httpstatus;
+  Sockreadcount:=0;
+
+  if http.HTTPMethod('GET', url) and
+    (
+      (http.ResultCode=200) or
+      (http.ResultCode=0)
+    )
+  then
+  begin
+     StatusLabel.Caption:='Completed';
+     http.Document.SaveToFile(vo_sesame);
+     result:=LoadSesame(vo_sesame);
+
+     if not Result then
+        StatusLabel.Caption:=format(rsNotFound,[num]);
+  end
+  else
+    StatusLabel.Caption:=StatusLabel.Caption+' '+rsOnlineSearch;
+
+  http.Clear;
+
 end;
 
-procedure Tf_search.Button1Click(Sender: TObject);
+procedure Tf_search.btnFindClick(Sender: TObject);
 begin
-searchkind:=RadioGroup1.itemindex;
-case searchkind of
-  1 : begin
-      num:=NebNameBox.Text;
-      ra:=NebNameAR[NebNameBox.itemindex];
-      de:=NebNameDE[NebNameBox.itemindex];
+
+  searchkind := RadioGroup1.itemindex;
+
+  case searchkind of
+
+    1 :
+      begin
+        num := NebNameBox.Text;
+
+        ra := NebNameAR[NebNameBox.itemindex];
+        de := NebNameDE[NebNameBox.itemindex];
       end;
-  3 : num:='HR'+inttostr(cfgshr.StarNameHR[starnamebox.itemindex]);
-  6 : num:=CometList.Text;
-  7 : num:=AsteroidList.Text;
-  8 : num:=PlanetBox.Text;
-  9 : num:=ConstBox.Text;
-  10: begin
-      num:=OnlineEdit.Text;
-      if not SearchOnline then exit;
+
+    3 : num := 'HR'+inttostr(cfgshr.StarNameHR[starnamebox.itemindex]);
+    6 : num := CometList.Text;
+    7 : num := AsteroidList.Text;
+    8 : num := PlanetBox.Text;
+    9 : num := ConstBox.Text;
+
+   10 :
+      begin
+        num:=OnlineEdit.Text;
+
+        if not SearchOnline then
+           exit;
       end;
-  else num:=Id.text;
-end;
-if trim(num)='' then ShowMessage(rsPleaseEnterA)
-                else ModalResult := mrOk;
+
+    else
+      num:=Id.text;
+
+  end;
+
+  if trim(num)='' then ShowMessage(rsPleaseEnterA)
+                  else ModalResult := mrOk;
+
 end;
 
 procedure Tf_search.IdKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-if key=VK_RETURN then Button1.Click;
+  if key=VK_RETURN then
+    btnFind.Click;
 end;
 
 procedure Tf_search.RadioGroup1Click(Sender: TObject);
 begin
-case RadioGroup1.itemindex of
-  0 : begin                      //neb
-      IDPanel.Visible:=true;
-      NumPanel.Visible:=true;
-      NebPanel.Visible:=true;
-      StarPanel.Visible:=false;
-      VarPanel.Visible:=false;
-      DblPanel.Visible:=false;
-      PlanetPanel.Visible:=false;
-      NebNamePanel.Visible:=false;
-      StarNamePanel.Visible:=false;
-      ConstPanel.Visible:=false;
-      CometPanel.Visible:=false;
-      AsteroidPanel.Visible:=false;
-      OnlinePanel.Visible:=false;
+
+  NumPanel.Visible  :=false;
+  NebPanel.Visible  :=false;
+  StarPanel.Visible :=false;
+  VarPanel.Visible  :=false;
+  DblPanel.Visible  :=false;
+
+  case RadioGroup1.itemindex of
+
+    0 :                       //neb
+      begin
+        NumPanel.Visible:=true;
+        NebPanel.Visible:=true;
+
+        PageControl1.ActivePage := tsStars;
       end;
-  1 : begin                      //neb name
-      IDPanel.Visible:=false;
-      PlanetPanel.Visible:=false;
-      NebNamePanel.Visible:=true;
-      StarNamePanel.Visible:=false;
-      ConstPanel.Visible:=false;
-      CometPanel.Visible:=false;
-      AsteroidPanel.Visible:=false;
-      OnlinePanel.Visible:=false;
+
+    1 : PageControl1.ActivePage := tsNebName; //neb name
+
+    2 :                       //star
+      begin
+        //IDPanel.Visible:=true;
+        NumPanel.Visible:=true;
+        StarPanel.Visible:=true;
+
+        PageControl1.ActivePage := tsStars;
+
       end;
-  2 : begin                      //star
-      IDPanel.Visible:=true;
-      NumPanel.Visible:=true;
-      NebPanel.Visible:=false;
-      StarPanel.Visible:=true;
-      VarPanel.Visible:=false;
-      DblPanel.Visible:=false;
-      PlanetPanel.Visible:=false;
-      NebNamePanel.Visible:=false;
-      StarNamePanel.Visible:=false;
-      ConstPanel.Visible:=false;
-      CometPanel.Visible:=false;
-      AsteroidPanel.Visible:=false;
-      OnlinePanel.Visible:=false;
+
+    3 : PageControl1.ActivePage := tsStarName; //star name
+
+    4 :                       //var
+      begin
+        //IDPanel.Visible:=true;
+        NumPanel.Visible:=true;
+        VarPanel.Visible:=true;
+
+        PageControl1.ActivePage := tsStars;
       end;
-  3 : begin                      //star name
-      IDPanel.Visible:=false;
-      PlanetPanel.Visible:=false;
-      NebNamePanel.Visible:=false;
-      StarNamePanel.Visible:=true;
-      ConstPanel.Visible:=false;
-      CometPanel.Visible:=false;
-      AsteroidPanel.Visible:=false;
-      OnlinePanel.Visible:=false;
+
+    5 :                       //dbl
+      begin
+        //IDPanel.Visible:=true;
+        NumPanel.Visible:=true;
+        DblPanel.Visible:=true;
+
+        PageControl1.ActivePage := tsStars;
+
       end;
-  4 : begin                      //var
-      IDPanel.Visible:=true;
-      NumPanel.Visible:=true;
-      NebPanel.Visible:=false;
-      StarPanel.Visible:=false;
-      VarPanel.Visible:=true;
-      DblPanel.Visible:=false;
-      PlanetPanel.Visible:=false;
-      NebNamePanel.Visible:=false;
-      StarNamePanel.Visible:=false;
-      ConstPanel.Visible:=false;
-      CometPanel.Visible:=false;
-      AsteroidPanel.Visible:=false;
-      OnlinePanel.Visible:=false;
-      end;
-  5 : begin                      //dbl
-      IDPanel.Visible:=true;
-      NumPanel.Visible:=true;
-      NebPanel.Visible:=false;
-      StarPanel.Visible:=false;
-      VarPanel.Visible:=false;
-      DblPanel.Visible:=true;
-      PlanetPanel.Visible:=false;
-      NebNamePanel.Visible:=false;
-      StarNamePanel.Visible:=false;
-      ConstPanel.Visible:=false;
-      CometPanel.Visible:=false;
-      AsteroidPanel.Visible:=false;
-      OnlinePanel.Visible:=false;
-      end;
-  6 : begin                      //comet
-      IDPanel.Visible:=false;
-      PlanetPanel.Visible:=false;
-      NebNamePanel.Visible:=false;
-      StarNamePanel.Visible:=false;
-      ConstPanel.Visible:=false;
-      CometPanel.Visible:=true;
-      OnlinePanel.Visible:=false;
-      AsteroidPanel.Visible:=false;
-      end;
-  7 : begin                      //asteroid
-      IDPanel.Visible:=false;
-      PlanetPanel.Visible:=false;
-      NebNamePanel.Visible:=false;
-      StarNamePanel.Visible:=false;
-      ConstPanel.Visible:=false;
-      CometPanel.Visible:=false;
-      AsteroidPanel.Visible:=true;
-      OnlinePanel.Visible:=false;
-      end;
-  8 : begin                      //planet
-      IDPanel.Visible:=false;
-      PlanetPanel.Visible:=true;
-      NebNamePanel.Visible:=false;
-      StarNamePanel.Visible:=false;
-      ConstPanel.Visible:=false;
-      CometPanel.Visible:=false;
-      AsteroidPanel.Visible:=false;
-      OnlinePanel.Visible:=false;
-      end;
-  9 : begin                      //const
-      IDPanel.Visible:=false;
-      PlanetPanel.Visible:=false;
-      NebNamePanel.Visible:=false;
-      StarNamePanel.Visible:=false;
-      ConstPanel.Visible:=true;
-      CometPanel.Visible:=false;
-      AsteroidPanel.Visible:=false;
-      OnlinePanel.Visible:=false;
-      end;
-  10 :begin                      // online
-      IDPanel.Visible:=false;
-      PlanetPanel.Visible:=false;
-      NebNamePanel.Visible:=false;
-      StarNamePanel.Visible:=false;
-      ConstPanel.Visible:=false;
-      CometPanel.Visible:=false;
-      AsteroidPanel.Visible:=false;
-      OnlinePanel.Visible:=true;
-      end;
-  {  10 : begin                      //Other Line Catalog , not active at the moment as Catgen do not allow to create the index for line cat.
-        IDPanel.Visible:=true;
-        NumPanel.Visible:=false;
-        NebPanel.Visible:=false;
-        StarPanel.Visible:=false;
-        VarPanel.Visible:=false;
-        DblPanel.Visible:=false;
-        PlanetPanel.Visible:=false;
-        NebNamePanel.Visible:=false;
-        StarNamePanel.Visible:=false;
-        ConstPanel.Visible:=false;
-        CometPanel.Visible:=false;
-        AsteroidPanel.Visible:=false;
-        OnlinePanel.Visible:=false;
-        end;  }
+
+    6 : PageControl1.ActivePage := tsComet;    //comet
+    7 : PageControl1.ActivePage := tsAsteroid; //asteroid
+    8 : PageControl1.ActivePage := tsPlanet;   //planet
+    9 : PageControl1.ActivePage := tsConst;    //const
+   10 : PageControl1.ActivePage := tsOnline;   //online
+
+   {  10 : begin                      //Other Line Catalog , not active at the moment as Catgen do not allow to create the index for line cat.
+          IDPanel.Visible:=true;
+   }
+  end;
+
 end;
-end;
+
 
 procedure Tf_search.Init;
 begin
-InitPlanet;
-InitConst;
-InitNebName;
-InitStarName;
-SetServerList;
+  InitPlanet;
+  InitConst;
+  InitNebName;
+  InitStarName;
+  SetServerList;
 end;
 
 procedure Tf_search.InitPlanet;
-var i : integer;
+var
+  i : integer;
 begin
-PlanetBox.Clear;
-for i:=1 to 11 do begin
-  if i=3 then continue;
-  if (i=9) and (not ShowPluto) then continue;
-  PlanetBox.Items.Add(pla[i]);
-end;
-PlanetBox.ItemIndex:=0;
+
+  PlanetBox.Clear;
+
+  for i:=1 to 11 do begin
+    if i=3 then continue;
+    if (i=9) and (not ShowPluto) then continue;
+    PlanetBox.Items.Add(pla[i]);
+  end;
+
+  PlanetBox.ItemIndex:=0;
 end;
 
 procedure Tf_search.InitConst;
-var i : integer;
+var
+  i : integer;
 begin
-ConstBox.Clear;
-for i:=0 to cfgshr.ConstelNum-1 do
-  ConstBox.Items.Add(cfgshr.ConstelName[i,2]);
-if ConstBox.items.Count=0 then
-   ConstBox.items.add(blank);
-ConstBox.ItemIndex:=0;
+
+  ConstBox.Clear;
+
+  for i:=0 to cfgshr.ConstelNum-1 do
+    ConstBox.Items.Add(cfgshr.ConstelName[i,2]);
+
+  if ConstBox.items.Count=0 then
+     ConstBox.items.add(blank);
+
+  ConstBox.ItemIndex:=0;
 end;
 
 procedure Tf_search.InitStarName;
 var
-    i : integer;
+  i : integer;
 begin
-starnamebox.Clear;
-for i:=0 to cfgshr.StarNameNum-1 do
-   starnamebox.items.Add(cfgshr.StarName[i]);
-if starnamebox.items.Count=0 then
-   starnamebox.items.add(blank);
-starnamebox.itemindex:=0;
+  starnamebox.Clear;
+
+  for i:=0 to cfgshr.StarNameNum-1 do
+     starnamebox.items.Add(cfgshr.StarName[i]);
+
+  if starnamebox.items.Count=0 then
+     starnamebox.items.add(blank);
+
+  starnamebox.itemindex:=0;
 end;
 
 procedure Tf_search.InitNebName;
 var
-    n,fn : string;
-    buf : string;
-    f : textfile;
-    i,p : integer;
+  n,fn : string;
+  buf : string;
+  f : textfile;
+  i,p : integer;
 begin
-try
-NebNameBox.Clear;
-i:=0;
-fn:=slash(appdir)+slash('data')+slash('common_names')+'NebulaNames_'+lang+'.txt';
-if not fileexists(fn) then fn:=slash(appdir)+slash('data')+slash('common_names')+'NebulaNames.txt';
-numNebName:=100;
-setlength(NebNameAR,numNebName);
-setlength(NebNameDE,numNebName);
-if FileExists(fn) then begin
-  AssignFile(f,fn);
-  FileMode:=0;
-  reset(f);
-  repeat
-    if i>=numNebName then begin
-       numNebName:=numNebName+50;
-       setlength(NebNameAR,numNebName);
-       setlength(NebNameDE,numNebName);
+
+  try
+
+    NebNameBox.Clear;
+
+    i:=0;
+    fn:=slash(appdir)+slash('data')+slash('common_names')+'NebulaNames_'+lang+'.txt';
+
+    if not fileexists(fn) then
+      fn:=slash(appdir)+slash('data')+slash('common_names')+'NebulaNames.txt';
+
+    numNebName:=100;
+
+    setlength(NebNameAR,numNebName);
+    setlength(NebNameDE,numNebName);
+
+    if FileExists(fn) then
+    begin
+      AssignFile(f,fn);
+      FileMode:=0;
+      reset(f);
+
+      repeat
+
+        if i >= numNebName then
+        begin
+          numNebName:=numNebName+50;
+          setlength(NebNameAR,numNebName);
+          setlength(NebNameDE,numNebName);
+        end;
+
+        Readln(f,buf);
+        buf:=CondUTF8Decode(buf);
+        p:=pos(';',buf);
+
+        if p=0 then continue;
+        if not isnumber(trim(copy(buf,1,p-1))) then continue;
+
+        NebNameAR[i]:=deg2rad*15*strtofloat(trim(copy(buf,1,p-1)));
+        delete(buf,1,p);
+        p:=pos(';',buf);
+
+        if p=0 then continue;
+
+        NebNameDE[i]:=deg2rad*strtofloat(trim(copy(buf,1,p-1)));
+        delete(buf,1,p);
+        n:=trim(buf);
+        NebNameBox.items.Add(n);
+        inc(i);
+      until eof(f);
+
+      numNebName:=i-1;
+      CloseFile(f);
     end;
-    Readln(f,buf);
-    buf:=CondUTF8Decode(buf);
-    p:=pos(';',buf);
-    if p=0 then continue;
-    if not isnumber(trim(copy(buf,1,p-1))) then continue;
-    NebNameAR[i]:=deg2rad*15*strtofloat(trim(copy(buf,1,p-1)));
-    delete(buf,1,p);
-    p:=pos(';',buf);
-    if p=0 then continue;
-    NebNameDE[i]:=deg2rad*strtofloat(trim(copy(buf,1,p-1)));
-    delete(buf,1,p);
-    n:=trim(buf);
-    NebNameBox.items.Add(n);
-    inc(i);
-  until eof(f);
-  numNebName:=i-1;
-  CloseFile(f);
-end;
-finally
-if NebNameBox.items.Count=0 then begin
-  NebNameBox.items.add(blank);
-end;
-NebNameBox.ItemIndex:=0;
-end;
+
+  finally
+
+    if NebNameBox.items.Count=0 then
+      NebNameBox.items.add(blank);
+
+    NebNameBox.ItemIndex:=0;
+  end;
+
 end;
 
 procedure Tf_search.httpstatus(Sender: TObject; Reason: THookSocketReason; const Value: String);
-var txt: string;
+var
+  txt: string;
 begin
-txt:='';
-case reason of
-  HR_ResolvingBegin : txt:='Resolving '+value;
-  HR_Connect        : txt:='Connect '+value;
-  HR_Accept         : txt:='Accept '+value;
-  HR_ReadCount      : begin
-                      Sockreadcount:=Sockreadcount+strtoint(value);
-                      if (Sockreadcount-LastRead)>100000 then begin
-                        txt:='Read data: '+inttostr(Sockreadcount div 1024)+' KB';
-                        LastRead:=Sockreadcount;
-                      end;
-                      end;
-  HR_WriteCount     : begin
-                      txt:='Request sent ...';
-                      end;
-  else txt:='';
-end;
-if (txt>'')then begin
-  StatusLabel.Caption:=txt;
-  Application.ProcessMessages;
-end;
+
+  txt:='';
+
+  case reason of
+
+    HR_ResolvingBegin : txt:='Resolving '+value;
+    HR_Connect        : txt:='Connect '+value;
+    HR_Accept         : txt:='Accept '+value;
+
+    HR_ReadCount      :
+      begin
+        Sockreadcount:=Sockreadcount+strtoint(value);
+
+        if (Sockreadcount-LastRead)>100000 then
+        begin
+          txt:='Read data: '+inttostr(Sockreadcount div 1024)+' KB';
+          LastRead:=Sockreadcount;
+        end;
+
+      end;
+
+    HR_WriteCount     : txt:='Request sent ...';
+
+  else
+    txt:='';
+  end;
+
+  if (txt>'')then
+  begin
+    StatusLabel.Caption:=txt;
+    Application.ProcessMessages;
+  end;
+
 end;
 
 end.
