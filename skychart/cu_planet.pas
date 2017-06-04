@@ -2276,60 +2276,139 @@ end;
 end;
 
 function TPlanet.FindAsteroidName(astname: String; var ra,de,mag:double; cfgsc: Tconf_skychart; upddb:boolean; MeanPos:boolean=false):boolean;
-var dist,r,elong,phase,rad,ded : double;
+var
+  dist,r,elong,phase,rad,ded : double;
   epoch,h,g,ma,ap,an,ic,ec,sa,eq,xc,yc,zc : double;
   qry,id,ref,nam,elem_id :string;
   ira,idec,imag: integer;
+
+  i: integer;
+  s1,s2: String;
 begin
-result:=false;
-searchid:='';
-if (not db1.Active)or(not cfgsc.ephvalid) then exit;
-qry:='SELECT id FROM cdc_ast_name'
-    +' where name like "%'+astname+'%"'
-    +' limit 1';
-id:=db1.QueryOne(qry);
-if id='' then exit;
-if cdb.GetAstElemEpoch(id,cfgsc.CurJDTT,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
+  result:=false;
+  searchid:='';
+
+  if (not db1.Active) or (not cfgsc.ephvalid) then exit;
+
+//SZ Look for similar names, however do not limit to first one.
+//   Furthermore loop inside results and try to find exact name.
+//   If not found, then use first one
+
+  qry:='SELECT id,name FROM cdc_ast_name' +
+       ' where name like "%'+astname+'%"';
+
+  id := '';
+
+  db1.Query(qry);
+
+  if db1.Rowcount > 0 then
+  begin
+
+    s1 := UpperCase(trim(astname));
+
+    for i:=0 to db1.Rowcount-1 do
+    begin
+
+      s2:= UpperCase(Trim( string(db1.Results[i][1]) ) );
+
+      if s1 = s2 then
+      begin
+        id := db1.Results[i][0];
+        break
+      end;
+
+    end;
+
+    if id='' then
+      id := db1.Results[0][0];
+
+
+  end
+  else exit;
+
+  if id='' then exit;
+
+  if cdb.GetAstElemEpoch(id,cfgsc.CurJDTT,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then
+  begin
    InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
    Asteroid(cfgsc.CurJDTT,true,ra,de,dist,r,elong,phase,mag,xc,yc,zc);
    result:=true;
+
    if MeanPos then exit;
-   if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,ra,de,ra,de,r,cfgsc);
-   if upddb then begin
+
+   if cfgsc.PlanetParalaxe then
+      Paralaxe(cfgsc.CurST,dist,ra,de,ra,de,r,cfgsc);
+
+   if upddb then
+   begin
        rad:=ra;
        ded:=de;
        precession(jd2000,cfgsc.jdchart,rad,ded);
        ira:=round(rad*1000);
        idec:=round(ded*1000);
        imag:=round(mag*10);
+
        qry:='INSERT INTO '+cfgsc.ast_daypos+' (id,epoch,ra,de,mag) VALUES ('
             +'"'+id+'"'
             +',"'+strim(formatfloat(f6s,epoch))+'"'
             +',"'+inttostr(ira)+'"'
             +',"'+inttostr(idec)+'"'
             +',"'+inttostr(imag)+'")';
+
        db1.Query(qry);
        db1.flush('tables');
        searchid:=id;
-   end;
-end
- else result:=false;
+
+     end;
+   end
+   else
+     result:=false;
+
 end;
 
 function TPlanet.FindCometName(comname: String; var ra,de,mag:double; cfgsc: Tconf_skychart; upddb:boolean; MeanPos:boolean=false):boolean;
 var dist,r,elong,phase,rad,ded : double;
   epoch,h,g,ap,an,ic,ec,eq,tp,q,diam,lc,car,cde,rc,xc,yc,zc : double;
-  qry,id,nam,elem_id :string;
-  ira,idec,imag: integer;
+  qry,id,nam,elem_id,s1,s2 :string;
+  i,ira,idec,imag: integer;
 begin
 result:=false;
 searchid:='';
 if (not db1.Active)or(not cfgsc.ephvalid) then exit;
-qry:='SELECT id FROM cdc_com_name'
-    +' where name like "%'+comname+'%"'
-    +' limit 1';
-id:=db1.QueryOne(qry);
+
+qry:='SELECT id,name FROM cdc_com_name'
+    +' where name like "%'+comname+'%"';
+
+id:='';
+
+db1.Query(qry);
+
+if db1.Rowcount > 0 then
+begin
+
+  s1 := UpperCase(trim(comname));
+
+  for i:=0 to db1.Rowcount-1 do
+  begin
+
+    s2:= UpperCase(Trim( db1.Results[i][1] ) );
+
+    if s1 = s2 then
+    begin
+      id := db1.Results[i][0];
+      break
+    end;
+
+  end;
+
+  if id='' then
+    id := db1.Results[0][0];
+
+end
+else exit;
+
 if id='' then exit;
+
 if cdb.GetComElemEpoch(id,cfgsc.CurJDTT,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) then begin
    InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
    Comet(cfgsc.CurJDTT,true,ra,de,dist,r,elong,phase,mag,diam,lc,car,cde,rc,xc,yc,zc);
