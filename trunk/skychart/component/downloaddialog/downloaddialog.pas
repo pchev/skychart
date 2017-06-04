@@ -36,20 +36,34 @@ type
   
   TDownloadDaemon = class(TThread)
   private
-    //SZ
+
     FFileSize : int64;
 
     FonDownloadComplete: TDownloadProc;
     FonProgress: TDownloadProc;
-    LastRead, LastWrite: integer;
-    procedure SockStatus(Sender: TObject; Reason: THookSocketReason; Const Value: string) ;  public
+
+    FMillis : Cardinal; // passed ms
+
+    procedure SockStatus(Sender: TObject; Reason: THookSocketReason; Const Value: string) ;
+    procedure SockMonitor (Sender: TObject; Writing: Boolean;
+              const Buffer: Pointer; Len: Integer);
+              //const Buffer: TMemory; Len: Integer);
+
+
+
+  public
+
     procedure FTPStatus(Sender: TObject; Response: Boolean; Const Value: string);
+
+    procedure UpdateSizeText(ASize: int64);
 
   public
     Phttp: ^THTTPSend;
     Pftp : ^TFTPSend;
     protocol:TDownloadProtocol;
+
     Fsockreadcount,Fsockwritecount : integer;
+
     Durl,Dftpdir,Dftpfile,progresstext:string;
     ok:boolean;
 
@@ -58,7 +72,7 @@ type
     property onDownloadComplete: TDownloadProc read FonDownloadComplete write FonDownloadComplete;
     property onProgress : TDownloadProc read FonProgress write FonProgress;
 
-    //SZ Add in needed
+    //SZ Add if needed
     //property FileSize: int64 read FFileSize;
 
   end;
@@ -85,6 +99,7 @@ type
     http: THTTPSend;
     ftp : TFTPSend;
     Timer1: TTimer;
+
   protected
     procedure BtnDownload(Sender: TObject);
     procedure BtnCancel(Sender: TObject);
@@ -332,13 +347,15 @@ begin
     if DownloadDaemon.protocol=prHttp then
     begin
        http.Sock.onStatus:=nil;
+       http.Sock.OnMonitor:=nil;
        http.Abort;
        http.Sock.AbortSocket;
     end;
 
     if DownloadDaemon.protocol=prFtp then
     begin
-       ftp.Sock.onStatus:=nil;
+       ftp.DSock.onStatus:=nil;
+       ftp.DSock.OnMonitor:=nil;
        ftp.onStatus:=nil;
        ftp.Abort;
        ftp.Sock.AbortSocket;
@@ -439,6 +456,7 @@ begin
   Result := S;                   // give the result
 end;
 
+
 procedure TDownloadDialog.HTTPComplete;
 var ok:boolean;
     i: integer;
@@ -457,6 +475,11 @@ begin
  begin  // success
     http.Document.Position:=0;
     http.Document.SaveToFile(FFile);
+
+    //SZ Update exact size
+    DownloadDaemon.UpdateSizeText(http.Document.Size);
+    progressreport;
+
     FResponse:='Finished: '+progress.text;
   end
   else if (http.ResultCode=301)or(http.ResultCode=302)or(http.ResultCode=307) then
@@ -522,13 +545,26 @@ begin
 
  if ok then
  begin
-    ftp.Sock.onStatus:=nil;
-    ftp.onStatus:=nil;
-    ftp.logout;
+
+   //SZ Update exact size
+
+   if ftp.DirectFile then
+     DownloadDaemon.UpdateSizeText(FileSize(ftp.DirectFileName))
+   else
+     DownloadDaemon.UpdateSizeText(ftp.DataStream.Size);
+
+   progressreport;
+
+
+   ftp.DSock.onStatus:=nil;
+   ftp.DSock.OnMonitor:=nil;
+   ftp.onStatus:=nil;
+   ftp.logout;
  end
  else
  begin
-    ftp.Sock.onStatus:=nil;
+    ftp.DSock.onStatus:=nil;
+    ftp.DSock.OnMonitor:=nil;
     ftp.onStatus:=nil;
     ftp.abort;
     progress.Text:=FResponse;
@@ -558,42 +594,68 @@ begin
   inherited create(true);
 end;
 
-procedure TDownloadDaemon.Execute;
+
+//SZ Update size  and text
+procedure TDownloadDaemon.UpdateSizeText(ASize: int64);
+begin
+  FSockreadcount := ASize;
+
+  progresstext := format('Read Bytes: %.0n', [1.0*FSockreadcount]);
+
+  if FFileSize > 0 then
+    progresstext := progresstext +
+      format(' of %.0n (%5.2f%%)',[1.0*FFileSize, FSockreadcount*100/FFileSize ] );
+
+end;
+
+
+function HTTP_FileSize(AHTTP: THTTPSend; AURL: string): int64;
+{
+  //SZ To get size of the file on HTTP request
+
+  AHTTP - HTTP instance
+  AURL  - URL of the file
+}
+
 var
-  //SZ To get size of file on HTTP request
   head: string;
   i: integer;
+  Size: int64;
 begin
-  Fsockreadcount:=0;
-  Fsockwritecount:=0;
-  LastRead:=0;
-  LastWrite:=0;
-  FFileSize := 0;
 
-  if protocol=prHttp then
-  begin
-    phttp^.Sock.OnStatus:=@SockStatus;
+  Size := 0;
 
+  try
 
-    //SZ Added code to retrieve file size for download progress
+    AHTTP.Headers.Clear;
+    AHTTP.Document.Clear;
 
-    phttp^.HTTPMethod('HEAD',Durl);
-    head := phttp^.Headers.Text;
+    AHTTP.HTTPMethod('HEAD', AURL);
+    head := AHTTP.Headers.Text;
 
-    i := pos('content-length:',LowerCase(head));
+    i := pos('content-length', LowerCase(head));
 
     if i > 0 then
     begin
 
-      head := RightStr(head, length(head) - ( i + 15));
-      head := Trim(head);
+      inc(i, 14);
 
-      i := 1;
-      while i < length(head) do
+      // Skip colon and white space chars
+      while i <= length(head) do
+      begin
+
+	if not (head[i] in [' ', ':',#9, #10, #13]) then
+          break;
+
+        inc(i);
+
+      end;
+
+      while i <= length(head) do
       begin
 
         if head[i] in ['0'..'9'] then
-          FFileSize := FFileSize * 10 + ord(head[i]) - 48
+          Size := Size * 10 + ord(head[i]) - 48
         else
           break;
 
@@ -603,25 +665,55 @@ begin
 
     end;
 
-    phttp^.Headers.Clear;
-    phttp^.Document.Clear;
+    AHTTP.Headers.Clear;
+    AHTTP.Document.Clear;
 
+  finally
+  end;
 
-    ok:=phttp^.HTTPMethod('GET', Durl)
+  Result := Size;
+
+end;
+
+procedure TDownloadDaemon.Execute;
+begin
+  Fsockreadcount:=0;
+  Fsockwritecount:=0;
+
+  FFileSize := 0;
+
+  if protocol=prHttp then
+  begin
+    phttp^.Sock.OnStatus:=@SockStatus;
+    phttp^.sock.OnMonitor:=@SockMonitor;
+
+    //SZ Added code to retrieve file size for download progress
+    FFileSize := HTTP_FileSize(phttp^, Durl);
+
+    FSockreadcount := 0;
+
+    ok := phttp^.HTTPMethod('GET', Durl);
+
   end
   else
   if protocol=prFtp then
   begin
 
     pftp^.OnStatus:=@FTPStatus;
+    //pftp^.DSock.OnStatus:=@SockStatus;
+    pftp^.DSock.OnStatus:=nil;
+    pftp^.Dsock.OnMonitor:=@SockMonitor;
 
     if pftp^.Login then
     begin
       pftp^.ChangeWorkingDir(Dftpdir);
 
-      //SZ
       FFileSize := pftp^.FileSize(Dftpfile);
+
+      FSockreadcount := 0;
+
       ok:=pftp^.RetrieveFile(Dftpfile,false);
+
     end;
 
   end;
@@ -642,26 +734,7 @@ begin
     HR_ResolvingBegin : reasontxt:='Resolving '+value;
     HR_Connect        : reasontxt:='Connect '+value;
     HR_Accept         : reasontxt:='Accept '+value;
-
-    HR_ReadCount      :
-
-      begin
-        FSockreadcount:=FSockreadcount+strtoint(value);
-
-        if (FSockreadcount-LastRead)>100000 then
-        begin
-          // SZ Added percentage
-
-          reasontxt:= format('Read Bytes: %.0n', [1.0*FSockreadcount]);
-
-          if FFileSize > 0 then
-            reasontxt:= reasontxt +
-              format(' of %.0n (%5.2f%%)',[1.0*FFileSize, FSockreadcount*100/FFileSize ] );
-
-          LastRead:=FSockreadcount;
-        end;
-
-      end;
+    HR_ReadCount      : ; //SZ Dummy
 
     HR_WriteCount     :
       begin
@@ -669,15 +742,46 @@ begin
         reasontxt:='Request sent, waiting response';
       end;
 
-
   else
     reasontxt:='';
   end;
 
-  if (reasontxt>'')and assigned(FonProgress) then
+  if (reasontxt<>'') and assigned(FonProgress) then
   begin
     progresstext:=reasontxt;
     synchronize(FonProgress);
+  end;
+
+end;
+
+procedure TDownloadDaemon.SockMonitor (Sender: TObject; Writing: Boolean;
+    const Buffer: Pointer; Len: Integer);
+
+begin
+
+
+  if not Writing then
+  begin
+
+    FSockreadcount := FSockreadcount + len ;
+
+    //SZ Update text every second
+
+    if abs(GetTickCount - FMillis) > 1000 then
+    begin
+      FMillis := GetTickCount;
+
+      // SZ Added percentage
+
+      UpdateSizeText(FSockreadcount);
+
+      FMillis := GetTickCount;
+
+      if (progresstext <> '') and assigned(FonProgress) then
+         synchronize(FonProgress);
+
+    end;
+
   end;
 
 end;
