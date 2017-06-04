@@ -3831,8 +3831,10 @@ if directdownload then begin
           ConfigSolsys.f_config_solsys1.ComPageControl.ActivePageIndex:=1;
           Application.ProcessMessages;
           ConfigSolsys.f_config_solsys1.DownloadComet.Click;
-          RefreshAllChild(false);
-          if ConfigSolsys.f_config_solsys1.autoOK then ShowMessage(rsCometUpdateS);
+          if ConfigSolsys.f_config_solsys1.autoOK then begin
+            RefreshAllChild(false);
+            ShowMessage(rsCometUpdateS);
+          end;
         end;
      3: begin
           ConfigSolsys.Panel1.Visible:=false;
@@ -3845,9 +3847,11 @@ if directdownload then begin
           ConfigSolsys.show;
           ConfigSolsys.f_config_solsys1.AstPageControl.ActivePageIndex:=1;
           ConfigSolsys.f_config_solsys1.DownloadAsteroid.Click;
-          RecomputeAsteroid;
-          RefreshAllChild(false);
-          if ConfigSolsys.f_config_solsys1.autoOK then ShowMessage(rsAsteroidUpda);
+          if ConfigSolsys.f_config_solsys1.autoOK then begin
+             RecomputeAsteroid;
+             RefreshAllChild(false);
+             if ConfigSolsys.f_config_solsys1.autoOK then ShowMessage(rsAsteroidUpda);
+          end;
         end;
    end;
 end
