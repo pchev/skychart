@@ -1787,7 +1787,7 @@ end else begin
     ra:=Fcatalog.cfgshr.Milkywaydot[i].ra;
     de:=Fcatalog.cfgshr.Milkywaydot[i].de;
     precession(jd2000,cfgsc.JDChart,ra,de);
-    projection(ra,de,x1,y1,false,cfgsc) ;
+    projection(ra,de,x1,y1,true,cfgsc) ;
     WindowXY(x1,y1,xx,yy,cfgsc);
     if (xx>xmi) and (xx<xma) and (yy>ymi) and (yy<yma) then begin
        col:=round(Fcatalog.cfgshr.Milkywaydot[i].val);
