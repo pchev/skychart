@@ -2290,41 +2290,32 @@ begin
 
   if (not db1.Active) or (not cfgsc.ephvalid) then exit;
 
-//SZ Look for similar names, however do not limit to first one.
-//   Furthermore loop inside results and try to find exact name.
-//   If not found, then use first one
+  s1 := UpperCase(trim(astname));
+  if s1 = '' then exit;
 
-  qry:='SELECT id,name FROM cdc_ast_name' +
-       ' where name like "%'+astname+'%" limit 1000';
+  id:='';
 
-  id := '';
+  qry := 'SELECT id FROM cdc_ast_name' +
+         ' where UPPER(name) = "' + s1 + '"';
 
   db1.Query(qry);
 
   if db1.Rowcount > 0 then
+    id := db1.Results[0][0];
+
+  if id = '' then
   begin
 
-    s1 := UpperCase(trim(astname));
+    qry := 'SELECT id FROM cdc_ast_name' +
+           ' where UPPER(name) like "%'+ s1 +'%"' +
+           ' limit 1';
 
-    for i:=0 to db1.Rowcount-1 do
-    begin
+    db1.Query(qry);
 
-      s2:= UpperCase(Trim( string(db1.Results[i][1]) ) );
-
-      if s1 = s2 then
-      begin
-        id := db1.Results[i][0];
-        break
-      end;
-
-    end;
-
-    if id='' then
+    if db1.RowCount > 0 then
       id := db1.Results[0][0];
 
-
-  end
-  else exit;
+  end;
 
   if id='' then exit;
 
@@ -2376,36 +2367,32 @@ result:=false;
 searchid:='';
 if (not db1.Active)or(not cfgsc.ephvalid) then exit;
 
-qry:='SELECT id,name FROM cdc_com_name'
-    +' where name like "%'+comname+'%" limit 100';
+s1 := UpperCase(trim(comname));
+if s1 = '' then exit;
 
 id:='';
+
+qry := 'SELECT id FROM cdc_com_name' +
+       ' where UPPER(name) = "' + s1 + '"';
 
 db1.Query(qry);
 
 if db1.Rowcount > 0 then
+  id := db1.Results[0][0];
+
+if id = '' then
 begin
 
-  s1 := UpperCase(trim(comname));
+  qry := 'SELECT id FROM cdc_com_name' +
+         ' where UPPER(name) like "%'+ s1 +'%"' +
+         ' limit 1';
 
-  for i:=0 to db1.Rowcount-1 do
-  begin
+  db1.Query(qry);
 
-    s2:= UpperCase(Trim( db1.Results[i][1] ) );
-
-    if s1 = s2 then
-    begin
-      id := db1.Results[i][0];
-      break
-    end;
-
-  end;
-
-  if id='' then
+  if db1.RowCount > 0 then
     id := db1.Results[0][0];
 
-end
-else exit;
+end;
 
 if id='' then exit;
 
