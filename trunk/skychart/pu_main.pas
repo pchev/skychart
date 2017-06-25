@@ -3848,7 +3848,6 @@ if directdownload then begin
           ConfigSolsys.f_config_solsys1.AstPageControl.ActivePageIndex:=1;
           ConfigSolsys.f_config_solsys1.DownloadAsteroid.Click;
           if ConfigSolsys.f_config_solsys1.autoOK then begin
-             RecomputeAsteroid;
              RefreshAllChild(false);
              ShowMessage(rsAsteroidUpda);
           end;
