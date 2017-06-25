@@ -2455,8 +2455,11 @@ begin
 list:=TStringList.Create;
 Cdb.GetCometList(CometFilter.Text,maxcombo,list,cometid);
 Combobox1.Items.Assign(list);
-Combobox1.ItemIndex:=0;
-RefreshComet;
+list.Free;
+if Combobox1.Items.Count>0 then begin
+  Combobox1.ItemIndex:=0;
+  RefreshComet;
+end;
 end;
 
 procedure Tf_calendar.Button4Click(Sender: TObject);
@@ -2480,9 +2483,11 @@ function SorCompare(c1,c2:Tmaglist):integer;
     end;
 begin
 list:=TStringList.Create;
+try
 Cdb.GetCometList('',maxcombo,list,cometid);
 jda:=date1.JD;
 n:=list.Count;
+if n=0 then exit;
 for i:=0 to n-1 do begin
  maglist[i+1].cname:=list[i];
  maglist[i+1].cid:=cometid[i];
@@ -2537,7 +2542,9 @@ end;
 Combobox1.Items.Assign(list);
 Combobox1.ItemIndex:=0;
 RefreshComet;
+finally
 list.Free;
+end;
 end;
 
 
@@ -2722,8 +2729,10 @@ list:=TstringList.create;
 Cdb.GetAsteroidList(AstFilter.Text,maxcombo,list,astid);
 Combobox2.Items.Assign(list);
 list.Free;
-Combobox2.ItemIndex:=0;
-RefreshAsteroid;
+if Combobox2.Items.Count>0 then begin
+  Combobox2.ItemIndex:=0;
+  RefreshAsteroid;
+end;
 end;
 
 procedure Tf_calendar.ComboBox2Change(Sender: TObject);
@@ -2742,6 +2751,7 @@ var id,nam,elem_id,ref : string;
     hr1,ht1,hs1,hr2,ht2,hs2 : double;
     ra1,dec1,ra2,dec2,ra3,dec3: double;
 begin
+if Combobox2.Items.Count=0 then exit;
 screen.cursor:=crHourGlass;
 try
 cjd:=(date1.JD+date2.JD)/2;
