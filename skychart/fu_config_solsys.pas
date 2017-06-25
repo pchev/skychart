@@ -1081,18 +1081,16 @@ end;
 procedure Tf_config_solsys.LoadMPCClick(Sender: TObject);
 var ok:boolean;
 begin
-if Sender=LoadMPC then MemoMpc.Clear;
+MemoMpc.Clear;
 screen.cursor:=crHourGlass;
 ok:=cdb.LoadAsteroidFile(SafeUTF8ToSys(mpcfile.text),astnumbered.checked,aststoperr.checked,astlimitbox.checked,astlimit.value,MemoMPC);
 UpdAstList;
 screen.cursor:=crDefault;
 if ok then begin
-  if autoprocess then AstComputeClick(Sender)
-  else begin
+  if not autoprocess then
      Showmessage(rsToUseThisNew);
-     AstPageControl.activepage:=astprepare;
-     AstComputeClick(Sender);
-  end;
+  AstPageControl.activepage:=astprepare;
+  AstComputeClick(Sender);
 end;
 end;
 
