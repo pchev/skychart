@@ -1,0 +1,38 @@
+Index: source/lib/synaser.pas
+===================================================================
+--- source/lib/synaser.pas	(révision 3607)
++++ source/lib/synaser.pas	(copie de travail)
+@@ -200,7 +200,11 @@
+   {$IFDEF BSD}
+   MaxRates = 18;  //MAC
+   {$ELSE}
+-   MaxRates = 30; //UNIX
++    {$IFDEF CPUARM}
++       MaxRates = 19;  //UNIX ARM
++    {$ELSE}
++       MaxRates = 30; //UNIX
++    {$ENDIF}  
+   {$ENDIF}
+ {$ELSE}
+   MaxRates = 19;  //WIN
+@@ -229,6 +233,7 @@
+ {$IFNDEF BSD}
+     ,(460800, B460800)
+   {$IFDEF UNIX}
++    {$IFNDEF CPUARM}
+     ,(500000, B500000),
+     (576000, B576000),
+     (921600, B921600),
+@@ -240,6 +245,7 @@
+     (3000000, B3000000),
+     (3500000, B3500000),
+     (4000000, B4000000)
++    {$ENDIF}
+   {$ENDIF}
+ {$ENDIF}
+     );
+@@ -2354,4 +2360,4 @@
+ end;
+ {$ENDIF}
+ 
+-end.+end.
