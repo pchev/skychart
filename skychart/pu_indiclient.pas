@@ -435,24 +435,32 @@ end;
 Procedure Tpop_indi.ScopeAlign(source : string; ra,dec : single);
 begin
  if ready then begin
-   IUResetSwitch(oncoordset_prop);
-   setsync_prop.s:=ISS_ON;
-   client.sendNewSwitch(oncoordset_prop);
-   coord_ra.value:=ra;
-   coord_dec.value:=dec;
-   client.sendNewNumber(coord_prop);
+   if (oncoordset_prop<>nil) and (settrack_prop<>nil) then begin
+     IUResetSwitch(oncoordset_prop);
+     setsync_prop.s:=ISS_ON;
+     client.sendNewSwitch(oncoordset_prop);
+     coord_ra.value:=ra;
+     coord_dec.value:=dec;
+     client.sendNewNumber(coord_prop);
+   end
+   else
+     Memomsg.Lines.Add('SYNC '+rsNotAvailable);
  end;
 end;
 
 Procedure Tpop_indi.ScopeGoto(ra,de : single; var ok : boolean);
 begin
  if ready then begin
-   IUResetSwitch(oncoordset_prop);
-   settrack_prop.s:=ISS_ON;
-   client.sendNewSwitch(oncoordset_prop);
-   coord_ra.value:=ra;
-   coord_dec.value:=de;
-   client.sendNewNumber(coord_prop);
+   if (oncoordset_prop<>nil) and (settrack_prop<>nil) then begin
+     IUResetSwitch(oncoordset_prop);
+     settrack_prop.s:=ISS_ON;
+     client.sendNewSwitch(oncoordset_prop);
+     coord_ra.value:=ra;
+     coord_dec.value:=de;
+     client.sendNewNumber(coord_prop);
+   end
+   else
+     Memomsg.Lines.Add('GOTO '+rsNotAvailable);
  end;
 end;
 
