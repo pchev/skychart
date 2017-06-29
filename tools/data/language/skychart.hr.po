@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-25 16:15+0000\n"
+"POT-Creation-Date: 2017-06-29 09:21+0000\n"
 "PO-Revision-Date: 2016-12-11 08:48+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-17 20:20+0000\n"
-"X-Generator: Launchpad (build 18332)\n"
+"X-Launchpad-Export-Date: 2017-06-29 09:29+0000\n"
+"X-Generator: Launchpad (build 18418)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -5745,6 +5745,10 @@ msgstr "Ova će akcija prebrisati sav sadržaj za zemlju %s, sa svježim podacim
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
+msgstr ""
+
+#: u_translation.rsthisdirectdr
+msgid "This direct driver is kept for compatibility, it may work or not for you. But the preference is to use the INDI or ASCOM driver for your telescope."
 msgstr ""
 
 #: u_translation.rsthisfilewasn

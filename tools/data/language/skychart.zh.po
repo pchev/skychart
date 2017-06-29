@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-25 16:15+0000\n"
+"POT-Creation-Date: 2017-06-29 09:21+0000\n"
 "PO-Revision-Date: 2013-11-17 14:47+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-17 20:21+0000\n"
-"X-Generator: Launchpad (build 18332)\n"
+"X-Launchpad-Export-Date: 2017-06-29 09:29+0000\n"
+"X-Generator: Launchpad (build 18418)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -5745,6 +5745,10 @@ msgstr "這個動作從 NGA 和 GNIS 更新資料，復寫國家 %s 所有資料
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
+msgstr ""
+
+#: u_translation.rsthisdirectdr
+msgid "This direct driver is kept for compatibility, it may work or not for you. But the preference is to use the INDI or ASCOM driver for your telescope."
 msgstr ""
 
 #: u_translation.rsthisfilewasn

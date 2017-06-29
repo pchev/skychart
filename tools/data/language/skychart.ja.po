@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-02-25 16:15+0000\n"
-"PO-Revision-Date: 2015-03-17 04:47+0000\n"
-"Last-Translator: Fumiaki Tsumuraya <tsumutsumu@mac.com>\n"
+"POT-Creation-Date: 2017-06-29 09:21+0000\n"
+"PO-Revision-Date: 2017-06-18 03:42+0000\n"
+"Last-Translator: Osamu <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-03-17 20:21+0000\n"
-"X-Generator: Launchpad (build 18332)\n"
+"X-Launchpad-Export-Date: 2017-06-29 09:29+0000\n"
+"X-Generator: Launchpad (build 18418)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -798,7 +798,7 @@ msgstr ""
 
 #: u_translation.rschangedrawin
 msgid "Change drawing mode"
-msgstr ""
+msgstr "表示モードの変更"
 
 #: u_translation.rschangemousem
 msgid "Change mouse mode"
@@ -914,7 +914,7 @@ msgstr ""
 
 #: u_translation.rsclosechart
 msgid "Close chart"
-msgstr ""
+msgstr "チャートを閉じる"
 
 #: u_translation.rscloseconnect
 msgid "Close connection"
@@ -1086,7 +1086,7 @@ msgstr ""
 
 #: u_translation.rsconnectteles
 msgid "Connect telescope"
-msgstr ""
+msgstr "望遠鏡を接続"
 
 #: u_translation.rsconnecttofai
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
@@ -2174,7 +2174,7 @@ msgstr ""
 
 #: u_translation.rsfile
 msgid "File"
-msgstr ""
+msgstr "ファイル"
 
 #: u_translation.rsfilenamewith
 msgid "Filename without path or extension"
@@ -2406,7 +2406,7 @@ msgstr ""
 
 #: u_translation.rsgetdssimage
 msgid "Get the DSS image"
-msgstr ""
+msgstr "DSSイメージの取得"
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
@@ -3026,7 +3026,7 @@ msgstr ""
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
-msgstr ""
+msgstr "すべてのチャートをリンク"
 
 #: u_translation.rslist
 msgid "List"
@@ -3546,7 +3546,7 @@ msgstr ""
 
 #: u_translation.rsnewchart
 msgid "New chart"
-msgstr ""
+msgstr "新しいチャート"
 
 #: u_translation.rsnewfindercir
 msgid "New finder circle"
@@ -3626,7 +3626,7 @@ msgstr ""
 
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
-msgstr ""
+msgstr "ロックするオブジェクトがありません"
 
 #: u_translation.rsnopicture
 msgid "No picture"
@@ -3878,7 +3878,7 @@ msgstr ""
 
 #: u_translation.rsopen
 msgid "Open"
-msgstr ""
+msgstr "開く(O)..."
 
 #: u_translation.rsopenachart
 msgid "Open a chart"
@@ -4782,7 +4782,7 @@ msgstr ""
 
 #: u_translation.rssaveas
 msgid "Save as..."
-msgstr ""
+msgstr "名前を付けて保存..."
 
 #: u_translation.rssaveconfigur
 msgid "Save configuration now"
@@ -4794,7 +4794,7 @@ msgstr ""
 
 #: u_translation.rssaveimage
 msgid "Save image..."
-msgstr ""
+msgstr "イメージの保存"
 
 #: u_translation.rssaveproject
 msgid "Save project"
@@ -5102,7 +5102,7 @@ msgstr ""
 
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
-msgstr ""
+msgstr "小惑星の表示"
 
 #: u_translation.rsshowasteroid3
 msgid "Show asteroids on the chart"
@@ -5114,7 +5114,7 @@ msgstr ""
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
-msgstr ""
+msgstr "彗星の表示"
 
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
@@ -5230,7 +5230,7 @@ msgstr ""
 
 #: u_translation.rsshowpictures
 msgid "Show pictures"
-msgstr ""
+msgstr "写真の表示"
 
 #: u_translation.rsshowplaneton
 msgid "Show planets on the chart"
@@ -5238,7 +5238,7 @@ msgstr ""
 
 #: u_translation.rsshowplanets
 msgid "Show planets"
-msgstr ""
+msgstr "惑星を表示"
 
 #: u_translation.rsshowposition
 msgid "Show position in title bar"
@@ -5246,7 +5246,7 @@ msgstr ""
 
 #: u_translation.rsshowstars
 msgid "Show stars"
-msgstr ""
+msgstr "星の表示"
 
 #: u_translation.rsshowtheimage
 msgid "Show the images on the map"
@@ -5286,7 +5286,7 @@ msgstr ""
 
 #: u_translation.rsskybackgroun
 msgid "Sky background colour"
-msgstr ""
+msgstr "空の背景色"
 
 #: u_translation.rsskycharthome
 msgid "Skychart homepage"
@@ -5310,7 +5310,7 @@ msgstr ""
 
 #: u_translation.rsslew
 msgid "Slew"
-msgstr ""
+msgstr "導入"
 
 #: u_translation.rsslewspeed
 msgid " Slew Speed"
@@ -5626,7 +5626,7 @@ msgstr ""
 
 #: u_translation.rssync
 msgid "Sync"
-msgstr ""
+msgstr "同期"
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
@@ -5746,6 +5746,10 @@ msgstr ""
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
+msgstr ""
+
+#: u_translation.rsthisdirectdr
+msgid "This direct driver is kept for compatibility, it may work or not for you. But the preference is to use the INDI or ASCOM driver for your telescope."
 msgstr ""
 
 #: u_translation.rsthisfilewasn
