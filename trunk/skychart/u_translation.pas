@@ -1609,6 +1609,9 @@ resourcestring
   rsTour = 'Tour';
   rsActivateVoic = 'Activate voice';
   rsCannotDownlo = 'Cannot download PDF help now';
+  rsThisDirectDr = 'This direct driver is kept for compatibility, it may work '
+    +'or not for you. But the preference is to use the INDI or ASCOM driver '
+    +'for your telescope.';
 
 // also update upsi_translation
 

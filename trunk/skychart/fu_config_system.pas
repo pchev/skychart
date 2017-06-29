@@ -326,7 +326,7 @@ ASCOMLabel.Caption:=rsASCOMTelesc+crlf+Format(rsUseTheMenuOr, [rsConnectTeles]);
 {$else}
 ASCOMLabel.Caption:=rsASCOMTelesc+crlf+Format(rsNotAvailon,[compile_system]);
 {$endif}
-InterfaceLabel.Caption:=rsIntTelesco+crlf+Format(rsUseTheMenuOr, [rsConnectTeles]);
+InterfaceLabel.Caption:=rsIntTelesco+crlf+crlf+rsThisDirectDr+crlf+crlf+Format(rsUseTheMenuOr, [rsConnectTeles]);
 SetHelp(self,hlpCfgSys);
 end;
 
