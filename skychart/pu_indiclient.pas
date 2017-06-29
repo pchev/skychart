@@ -435,7 +435,7 @@ end;
 Procedure Tpop_indi.ScopeAlign(source : string; ra,dec : single);
 begin
  if ready then begin
-   if (oncoordset_prop<>nil) and (settrack_prop<>nil) then begin
+   if (oncoordset_prop<>nil) and (setsync_prop<>nil) then begin
      IUResetSwitch(oncoordset_prop);
      setsync_prop.s:=ISS_ON;
      client.sendNewSwitch(oncoordset_prop);
