@@ -28,7 +28,6 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  InterfaceBase, LCLVersion, // version number
   Forms, Classes, Sysutils, Dialogs, LResources, cu_catalog, cu_skychart,
   cu_plot, cu_planet, cu_fits, cu_database, pu_info, pu_image, pu_getdss,
   pu_detail, fu_chart, pu_calendar, pu_zoom, pu_search, pu_printsetup,
@@ -79,12 +78,6 @@ begin
   end;
   if buf<>'' then Params.Add(buf);
 
-  lclver:=lcl_version;
-  buf:=LCLPlatformDirNames[WidgetSet.LCLPlatform];
-  if buf='win32' then buf:='mswindows';
-  compile_time:={$I %DATE%}+' '+{$I %TIME%};
-  compile_version:='Lazarus '+lcl_version+' Free Pascal '+{$I %FPCVERSION%}+' '+{$I %FPCTARGETOS%}+'-'+{$I %FPCTARGETCPU%}+'-'+buf;
-  compile_system:={$I %FPCTARGETOS%};
   Application.Title:='Skychart';
   Application.Initialize;
   try
