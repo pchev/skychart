@@ -159,6 +159,7 @@ var
   
 {$ifdef lclgtk2} {$define cdcutf8} {$define greekutf8} {$endif}
 {$ifdef lclqt} {$define cdcutf8} {$define greekutf8} {$endif}
+{$ifdef lclqt5} {$define cdcutf8} {$define greekutf8} {$endif}
 {$ifdef lclcarbon} {$define cdcutf8} {$define greekutf8} {$endif}
 {$ifdef lclwin32} {$define cdcutf8} {$endif}
 {$ifdef lclwin64} {$define cdcutf8} {$endif}
