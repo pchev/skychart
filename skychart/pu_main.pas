@@ -38,7 +38,7 @@ uses
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet, cu_radec,
   pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, pu_obslist, fu_script, pu_scriptengine,
   u_constant, u_util, UScaleDPI, u_ccdconfig, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
-  LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
+  InterfaceBase, LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types, Printers,
   ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame, BGRABitmap,
   LResources, uniqueinstance, enhedits, downloaddialog, LazHelpHTML, ButtonPanel;
@@ -815,6 +815,9 @@ implementation
 uses  LazFileUtils, LazUTF8,
     {$ifdef LCLgtk2}
      gtk2proc,
+    {$endif}
+    {$if (lcl_fullversion >= 1070000)}
+     lclplatformdef,
     {$endif}
      LCLProc, pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom, pu_edittoolbar,
@@ -2090,6 +2093,12 @@ var step,buf:string;
     i:integer;
 begin
 try
+lclver:=lcl_version;
+buf:=LCLPlatformDirNames[WidgetSet.LCLPlatform];
+if buf='win32' then buf:='mswindows';
+compile_time:={$I %DATE%}+' '+{$I %TIME%};
+compile_version:='Lazarus '+lcl_version+' Free Pascal '+{$I %FPCVERSION%}+' '+{$I %FPCTARGETOS%}+'-'+{$I %FPCTARGETCPU%}+'-'+buf;
+compile_system:={$I %FPCTARGETOS%};
 DefaultFormatSettings.DecimalSeparator:='.';
 DefaultFormatSettings.ThousandSeparator:=',';
 DefaultFormatSettings.DateSeparator:='/';
