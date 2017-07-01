@@ -897,6 +897,15 @@ object f_config_system: Tf_config_system
             end
           end
         end
+        object ShowObsoleteDrivers: TCheckBox
+          Left = 224
+          Height = 23
+          Top = 6
+          Width = 165
+          Caption = 'Show obsolete drivers'
+          OnChange = ShowObsoleteDriversChange
+          TabOrder = 2
+        end
       end
       object Page4: TTabSheet
         Caption = 'Page4'

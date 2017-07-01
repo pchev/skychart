@@ -1612,6 +1612,7 @@ resourcestring
   rsThisDirectDr = 'This direct driver is kept for compatibility, it may work '
     +'or not for you. But the preference is to use the INDI or ASCOM driver '
     +'for your telescope.';
+  rsShowObsolete = 'Show obsolete drivers';
 
 // also update upsi_translation
 
