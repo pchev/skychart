@@ -1231,7 +1231,7 @@ end else if cbo_type.text='Magellan-I' then begin
   SpeedButton8.visible:=false;
   SpeedButton9.visible:=false;
 end;
-Caption:=cbo_type.text;
+Caption:=rsObsolete+': '+cbo_type.text;
 end;
 
 procedure Tpop_lx200.CheckBox1Click(Sender: TObject);
@@ -1270,7 +1270,7 @@ end;
 
 procedure Tpop_lx200.FormShow(Sender: TObject);
 begin
-Caption:=cbo_type.text;
+Caption:=rsObsolete+': '+cbo_type.text;
 GetSerialPorts(cbo_port);
 end;
 
