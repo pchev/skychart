@@ -510,7 +510,7 @@ end;
 
 procedure Tpop_encoder.SetLang;
 begin
-caption:=rsEncoders;
+caption:=rsObsolete+': '+rsEncoders;
 TabSheet1.Caption:=rsCoordinates;
 Label11.Caption:=rsAzimuth;
 Label12.Caption:=rsAltitude;
