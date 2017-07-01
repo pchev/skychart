@@ -35,6 +35,7 @@ type
   { Tf_config_system }
 
   Tf_config_system = class(TFrame)
+    ShowObsoleteDrivers: TCheckBox;
     LanguageList: TCheckListBox;
     UseScaling: TCheckBox;
     GetIndiDevices: TButton;
@@ -151,6 +152,7 @@ type
     PageControl1: TPageControl;
     procedure LanguageListItemClick(Sender: TObject; Index: integer);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
+    procedure ShowObsoleteDriversChange(Sender: TObject);
     procedure UseScalingChange(Sender: TObject);
     procedure GetIndiDevicesClick(Sender: TObject);
     procedure CheckBox1Change(Sender: TObject);
@@ -305,9 +307,12 @@ ManualMountType.Items[1]:=rsAltAzMount;
 TelescopeSelect.Caption:=rsSelectTheTel;
 TelescopeSelect.Items[0]:=rsINDIDriver;
 TelescopeSelect.Items[1]:=rsManualMount;
+TelescopeSelect.Items[2]:='ASCOM';
 if TelescopeSelect.Items.Count>4 then begin
+   TelescopeSelect.Items[3]:='LX200';
    TelescopeSelect.Items[4]:=rsEncoders;
 end;
+ShowObsoleteDrivers.Caption:=rsShowObsolete;
 label15.Caption:=rsVOSAMPSettin;
 label16.Caption:=Format(rsSAMPIsAMessa, [crlf]);
 label17.Caption:=rsForMoreInfor;
@@ -326,7 +331,7 @@ ASCOMLabel.Caption:=rsASCOMTelesc+crlf+Format(rsUseTheMenuOr, [rsConnectTeles]);
 {$else}
 ASCOMLabel.Caption:=rsASCOMTelesc+crlf+Format(rsNotAvailon,[compile_system]);
 {$endif}
-InterfaceLabel.Caption:=rsIntTelesco+crlf+crlf+rsThisDirectDr+crlf+crlf+Format(rsUseTheMenuOr, [rsConnectTeles]);
+InterfaceLabel.Caption:=rsObsolete+crlf+crlf+rsIntTelesco+crlf+crlf+rsThisDirectDr+crlf+crlf+Format(rsUseTheMenuOr, [rsConnectTeles]);
 SetHelp(self,hlpCfgSys);
 end;
 
@@ -494,6 +499,8 @@ RevertTurnsAz.checked:=csc.TelescopeTurnsX<0;
 RevertTurnsAlt.checked:=csc.TelescopeTurnsY<0;
 ManualMountType.itemindex:=csc.ManualTelescopeType;
 ManualMountTypeClick(nil);
+ShowObsoleteDrivers.Checked:=(csc.LX200Telescope or csc.EncoderTelescope);
+ShowObsoleteDriversChange(nil);
 if csc.IndiTelescope then Telescopeselect.itemindex:=0
    else if csc.EncoderTelescope then Telescopeselect.itemindex:=4
    else if csc.LX200Telescope then Telescopeselect.itemindex:=3
@@ -656,6 +663,22 @@ procedure Tf_config_system.PageControl1Changing(Sender: TObject;
   var AllowChange: Boolean);
 begin
   if parent is TForm then TForm(Parent).ActiveControl:=PageControl1;
+end;
+
+procedure Tf_config_system.ShowObsoleteDriversChange(Sender: TObject);
+begin
+  if ShowObsoleteDrivers.Checked then begin
+     if TelescopeSelect.Items.Count<4 then begin
+        TelescopeSelect.Items.Add('LX200');
+        TelescopeSelect.Items.Add(rsEncoders);
+     end;
+  end else begin
+     if TelescopeSelect.ItemIndex>2 then TelescopeSelect.ItemIndex:=1;
+     if TelescopeSelect.Items.Count>4 then begin
+        TelescopeSelect.Items.Delete(4);
+        TelescopeSelect.Items.Delete(3);
+     end;
+  end;
 end;
 
 procedure Tf_config_system.LinuxDesktopBoxChange(Sender: TObject);
