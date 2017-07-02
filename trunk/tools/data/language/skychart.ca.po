@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-29 09:21+0000\n"
-"PO-Revision-Date: 2017-03-20 11:03+0000\n"
+"POT-Creation-Date: 2017-07-02 10:18+0000\n"
+"PO-Revision-Date: 2017-06-30 07:45+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-29 09:29+0000\n"
-"X-Generator: Launchpad (build 18418)\n"
+"X-Launchpad-Export-Date: 2017-07-02 11:08+0000\n"
+"X-Generator: Launchpad (build 18419)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -5219,6 +5219,10 @@ msgstr "Mostra les imatges en el mapa"
 msgid "Show objects"
 msgstr "Mostra els objectes"
 
+#: u_translation.rsshowobsolete
+msgid "Show obsolete drivers"
+msgstr ""
+
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian"
 msgstr "Mostra el meridià sols"
@@ -5750,7 +5754,7 @@ msgstr "Aquest catàleg té %s registres. No és possible descarregar-lo sencer 
 
 #: u_translation.rsthisdirectdr
 msgid "This direct driver is kept for compatibility, it may work or not for you. But the preference is to use the INDI or ASCOM driver for your telescope."
-msgstr ""
+msgstr "Aquest controlador directe es manté per compatibilitat, potser que us vagi bé o que no. Però la preferència es usar els controladors INDI o ASCOM per al telescopi,"
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
