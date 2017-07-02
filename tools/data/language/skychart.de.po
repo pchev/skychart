@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-29 09:21+0000\n"
-"PO-Revision-Date: 2017-02-10 14:43+0000\n"
-"Last-Translator: Rokar ✌ <Unknown>\n"
+"POT-Creation-Date: 2017-07-02 10:18+0000\n"
+"PO-Revision-Date: 2017-06-29 18:27+0000\n"
+"Last-Translator: Daniel Schweikert <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-29 09:29+0000\n"
-"X-Generator: Launchpad (build 18418)\n"
+"X-Launchpad-Export-Date: 2017-07-02 11:08+0000\n"
+"X-Generator: Launchpad (build 18419)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -680,7 +680,7 @@ msgstr "Kann nicht mit Server verbinden. %s"
 
 #: u_translation.rscannotdownlo
 msgid "Cannot download PDF help now"
-msgstr ""
+msgstr "Kann PDF-Hilfedatei jetzt nicht herunterladen"
 
 #: u_translation.rscannotdraw
 msgid "Cannot draw"
@@ -5218,6 +5218,10 @@ msgstr "Objektbilder in der Karte anzeigen"
 #: u_translation.rsshowobjects
 msgid "Show objects"
 msgstr "Zeige Objekte"
+
+#: u_translation.rsshowobsolete
+msgid "Show obsolete drivers"
+msgstr ""
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian"
