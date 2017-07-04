@@ -54,8 +54,10 @@ type
     SpeedButton6: TButton;
     SpeedButton4: TButton;
     InitTimer: TTimer;
+    ConnectTimer: TTimer;
     {Utility and form functions}
     procedure BtnIndiGuiClick(Sender: TObject);
+    procedure ConnectTimerTimer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure InitTimerTimer(Sender: TObject);
     procedure kill(Sender: TObject; var CanClose: Boolean);
@@ -173,11 +175,19 @@ end;
 procedure Tpop_indi.ServerConnected(Sender: TObject);
 begin
    Memomsg.Lines.Add('Server connected');
-   client.connectDevice(csc.IndiDevice);
+   ConnectTimer.Enabled:=true;
 end;
+
+procedure Tpop_indi.ConnectTimerTimer(Sender: TObject);
+begin
+  ConnectTimer.Enabled:=false;
+  client.connectDevice(csc.IndiDevice);
+end;
+
 
 procedure Tpop_indi.ServerDisconnected(Sender: TObject);
 begin
+  ConnectTimer.Enabled:=false;
   if InitTimer.Enabled then begin
      if csc.IndiAutostart then begin
         InitTimer.Enabled:=false;
