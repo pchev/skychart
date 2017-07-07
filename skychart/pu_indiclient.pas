@@ -38,6 +38,7 @@ type
 
   Tpop_indi = class(TForm)
     BtnIndiGui: TButton;
+    ProtocolTrace: TCheckBox;
     GroupBox3: TGroupBox;
     Connect: TButton;
     Memomsg: TMemo;
@@ -62,6 +63,7 @@ type
     procedure InitTimerTimer(Sender: TObject);
     procedure kill(Sender: TObject; var CanClose: Boolean);
     procedure ConnectClick(Sender: TObject);
+    procedure ProtocolTraceChange(Sender: TObject);
     procedure SaveConfig;
     procedure DisconnectClick(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
@@ -345,7 +347,7 @@ if not connected then begin
   led.color:=clRed;
   Memomsg.Clear;
   led.refresh;
-  if (client=nil)or(not client.Connected) then begin
+  if (client=nil)or(client.Terminated)or(not client.Connected) then begin
     client:=TIndiBaseClient.Create;
     client.onNewDevice:=@NewDevice;
     client.onNewMessage:=@NewMessage;
@@ -362,6 +364,11 @@ if not connected then begin
     Memomsg.Lines.Add('Already connected');
     exit;
   end;
+
+  client.ProtocolTraceFile:=slash(HomeDir)+'cdc_inditrace.log';
+  client.ProtocolTrace:=ProtocolTrace.Checked;
+  if client.ProtocolTrace then Memomsg.Lines.Add('Trace started to file: '+client.ProtocolTraceFile);
+
   client.SetServer(csc.IndiServerHost,csc.IndiServerPort);
   client.watchDevice(csc.IndiDevice);
   client.ConnectServer;
@@ -629,6 +636,16 @@ procedure Tpop_indi.ConnectClick(Sender: TObject);
 var ok : boolean;
 begin
 ScopeConnect(ok);
+end;
+
+procedure Tpop_indi.ProtocolTraceChange(Sender: TObject);
+begin
+ if (client<>nil) and ScopeConnected  then begin
+    if (ProtocolTrace.Checked<>client.ProtocolTrace) then Memomsg.Lines.Add('Cannot change protocol trace when the telescope is connected');
+    ProtocolTrace.Checked:=client.ProtocolTrace;
+ end else begin
+    if ProtocolTrace.Checked then Memomsg.Lines.Add('Warning! the trace file can be very big.');
+ end;
 end;
 
 procedure Tpop_indi.SaveConfig;
