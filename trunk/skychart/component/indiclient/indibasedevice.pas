@@ -219,6 +219,7 @@ var perm: IPerm = IP_RW;
     bvp: IBLOBVectorProperty;
     bp:  IBLOB;
 begin
+  errmsg:='';
   rtag:=GetNodeName(root);
   node:=GetAttrib(root,'name');
   if node=nil then begin
@@ -465,6 +466,7 @@ function BaseDevice.removeProperty(pname: string; out errmsg: string):integer;
 var indiProp: IndiProperty;
     i: integer;
 begin
+ errmsg:='';
  indiProp:=getProperty(pname);
  if indiProp<>nil then begin
   if assigned(FIndiDeletePropertyEvent) then FIndiDeletePropertyEvent(indiProp);
@@ -502,6 +504,7 @@ var state: IPState = IPS_IDLE;
     lp:  ILight;
     bvp: IBLOBVectorProperty;
 begin
+  errmsg:='';
   rtag:=GetNodeName(root);
   node:=GetAttrib(root,'name');
   if node=nil then begin

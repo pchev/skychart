@@ -76,6 +76,9 @@ type
     FTargetHost,FTargetPort,FErrorDesc,FRecvData,Fsendbuffer : string;
     FTimeout : integer;
     FConnected: boolean;
+    FProtocolTrace: boolean;
+    FProtocolTraceFile: string;
+    FPTfile : textfile;
     Fdevices: TObjectlist;
     FwatchDevices: TStringlist;
     FMissedFrameCount: Cardinal;
@@ -131,6 +134,9 @@ type
     procedure ProcessDataThread(s: TMemoryStream);
     procedure ProcessDataAsync(Data: PtrInt);
     procedure setDriverConnection(status: boolean; deviceName: string);
+    Procedure OpenProtocolTrace(fn:string);
+    Procedure CloseProtocolTrace;
+    Procedure WriteProtocolTrace( buf : string);
   public
     TcpClient : TTcpclient;
     constructor Create;
@@ -155,6 +161,8 @@ type
     function WaitBusy(tvp: ITextVectorProperty; timeout:integer=5000;minwait:integer=0):boolean;
     function WaitBusy(svp: ISwitchVectorProperty; timeout:integer=5000;minwait:integer=0):boolean;
     property Timeout : integer read FTimeout write FTimeout;
+    property ProtocolTrace: boolean read FProtocolTrace write FProtocolTrace;
+    property ProtocolTraceFile: string read FProtocolTraceFile write FProtocolTraceFile;
     property Terminated;
     property Connected: boolean read FConnected;
     property ErrorDesc : string read FErrorDesc;
@@ -277,6 +285,8 @@ FTargetHost:='localhost';
 FTargetPort:='7624';
 FTimeout:=100;
 FConnected:=false;
+FProtocolTrace:=False;
+FProtocolTraceFile:='';
 FreeOnTerminate:=true;
 SyncindiMessage:='';
 FlockBlobEvent:=false;
@@ -299,10 +309,57 @@ Inherited destroy;
 {$endif}
 end;
 
+Procedure TIndiBaseClient.OpenProtocolTrace(fn:string);
+begin
+try
+ if not FProtocolTrace then exit;
+ if fn<>'' then fn:=expandfilename(fn);
+ Filemode:=2;
+ assignfile(FPTfile,fn);
+ rewrite(FPTfile);
+ writeln(FPTfile,FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz',Now)+'  Start trace');
+except
+{$I-}
+ FProtocolTrace:=false;
+ CloseFile(FPTfile);
+ IOResult;
+{$I+}
+end;
+end;
+
+Procedure TIndiBaseClient.CloseProtocolTrace;
+begin
+ if not FProtocolTrace then exit;
+ try
+  FProtocolTrace:=false;
+  CloseFile(FPTfile);
+ except
+ {$I-}
+  IOResult;
+ {$I+}
+ end;
+end;
+
+Procedure TIndiBaseClient.WriteProtocolTrace( buf : string);
+begin
+try
+ if not FProtocolTrace then exit;
+ WriteLn(FPTfile,FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz',Now)+'  '+buf);
+except
+{$I-}
+ FProtocolTrace:=false;
+ CloseFile(FPTfile);
+ IOResult;
+{$I+}
+end;
+end;
+
 procedure TIndiBaseClient.Execute;
+const buffersize=8192;
 var buf:string;
     init:boolean;
-    buffer:array[0..4096] of char;
+    buffer:array[0..buffersize] of char;
+    tbuf:array[0..120] of char;
     s:TMemoryStream;
     i,n,level,c:integer;
     closing: boolean;
@@ -350,15 +407,17 @@ begin
 try
 tcpclient:=TTCPClient.Create;
 try
+ OpenProtocolTrace(FProtocolTraceFile);
  InitCriticalSection(MessageCriticalSection);
  InitCriticalSection(SendCriticalSection);
  init:=true;
  FinitProps:=false;
+ if FProtocolTrace then WriteProtocolTrace('Connect host='+FTargetHost+' port='+FTargetPort+' timeout='+inttostr(FTimeout));
  tcpclient.TargetHost:=FTargetHost;
  tcpclient.TargetPort:=FTargetPort;
  tcpclient.Timeout := FTimeout;
  FConnected:=tcpclient.Connect;
- if Ftrace then writeln(tcpclient.GetErrorDesc);
+ if FProtocolTrace then WriteProtocolTrace('Connection result='+tcpclient.GetErrorDesc);
  if FConnected then begin
    RefreshProps;
    // main loop
@@ -369,11 +428,17 @@ try
    c:=0;
    repeat
      if terminated then break;
-     n:=tcpclient.Sock.RecvBufferEx(@buffer,4096,FTimeout);
+     n:=tcpclient.Sock.RecvBufferEx(@buffer,buffersize,FTimeout);
      if (tcpclient.Sock.lastError<>0)and(tcpclient.Sock.lastError<>WSAETIMEDOUT) then break;
      if n>0 then begin
+       if FProtocolTrace then WriteProtocolTrace('Receive buffer size='+inttostr(n)+' data='+buffer);
        for i:=0 to n-1 do begin
           if ReadElement(buffer[i]) then begin
+            if FProtocolTrace then begin
+              s.Position:=0;
+              s.Read(tbuf,120);
+              WriteProtocolTrace('Process data='+StringReplace(StringReplace(tbuf,cr,'',[rfReplaceAll]),lf,'',[rfReplaceAll])+'...');
+            end;
             FProcessData.Add(s);
             s:=TMemoryStream.Create;
             s.WriteBuffer('<INDIMSG>',9);
@@ -384,6 +449,7 @@ try
        inc(c);
        if c>20 then FinitProps:=true;
        if FinitProps then begin
+          if FProtocolTrace then WriteProtocolTrace('Initialized');
           if assigned(FServerConnected) then Synchronize(@SyncServerConnected);
           init:=false;
        end;
@@ -396,13 +462,14 @@ try
      LeaveCriticalsection(SendCriticalSection);
      end;
      if buf<>'' then begin
-        if Ftrace then WriteLn('Send : '+buf);
+        if FProtocolTrace then WriteProtocolTrace('Send buffer='+buf);
         tcpclient.Sock.SendString(buf);
         if tcpclient.Sock.lastError<>0 then break;
      end;
    until false;
  end;
 finally
+if FProtocolTrace then WriteProtocolTrace('Disconnect, socket status='+tcpclient.Sock.LastErrorDesc);
 FConnected:=false;
 terminate;
 s.Free;
@@ -411,9 +478,11 @@ tcpclient.Free;
 DoneCriticalsection(MessageCriticalSection);
 DoneCriticalsection(SendCriticalSection);
 if assigned(FServerDisconnected) then Synchronize(@SyncServerDisonnected);
-if Ftrace then writeln('Indi client stopped');
+if FProtocolTrace then WriteProtocolTrace('Indi client stopped');
+CloseProtocolTrace;
 end;
 except
+CloseProtocolTrace;
 end;
 end;
 
@@ -434,8 +503,8 @@ var i: integer;
     buf: string;
 begin
  result:=nil;
- errmsg:='Device not found';
  buf:=GetNodeValue(GetAttrib(root,'device'));
+ errmsg:='Device not found '+buf;
  for i:=0 to Fdevices.Count-1 do begin
      if BaseDevice(Fdevices[i]).getDeviceName=buf then begin
         result:= BaseDevice(Fdevices[i]);
@@ -452,6 +521,7 @@ begin
  if (result=nil) and createifnotexist then begin
    buf:=GetNodeValue(GetAttrib(root,'device'));
    if buf<>'' then begin
+     errmsg:='';
      result:=BaseDevice.Create;
      result.setDeviceName(buf);
      result.onNewMessage:=@IndiMessageEvent;
@@ -520,6 +590,7 @@ var Doc: TXMLDocument;
     Node: TDOMNode;
     dp: BaseDevice;
     isBlob: boolean;
+    ebuf:array[0..1024] of char;
     buf,errmsg,dname,pname: string;
 begin
 s.Position:=0;
@@ -528,6 +599,12 @@ try
 ReadXMLFile(Doc,s);
 except
   on E: Exception do begin
+    if FProtocolTrace then begin
+      WriteProtocolTrace('Read XML error:'+ e.Message);
+      s.Position:=0;
+      s.Read(ebuf,1024);
+      WriteProtocolTrace('Error data='+trim(StringReplace(StringReplace(ebuf,cr,'',[rfReplaceAll]),lf,'',[rfReplaceAll]))+'...');
+    end;
     result:=false;
     exit;
   end;
@@ -537,6 +614,7 @@ Node:=Doc.DocumentElement.FirstChild;
 while Node<>nil do begin
    if terminated then break;
    dp:=findDev(Node,true,errmsg);
+   if FProtocolTrace and (errmsg<>'') then WriteProtocolTrace('FindDev error: '+errmsg);
    if Node.NodeName='message' then begin
       dp.checkMessage(Node);
    end;
@@ -545,10 +623,12 @@ while Node<>nil do begin
       if dname='' then dname:='Unnamed_device';
       pname:=GetNodeValue(GetAttrib(Node,'name'));
       if pname='' then begin
-         deleteDevice(dname,errmsg)
+         deleteDevice(dname,errmsg);
+         if FProtocolTrace and (errmsg<>'') then WriteProtocolTrace('deleteDevice error: '+errmsg);
       end
       else begin
          dp.removeProperty(pname,errmsg);
+         if FProtocolTrace and (errmsg<>'') then WriteProtocolTrace('removeProperty error: '+errmsg);
       end;
    end;
    buf:=copy(GetNodeName(Node),1,3);
@@ -560,10 +640,12 @@ while Node<>nil do begin
      end else begin
        FinitProps:=true;
        dp.setValue(Node,errmsg);
+       if FProtocolTrace and (errmsg<>'') then WriteProtocolTrace('setValue error: '+errmsg);
      end;
    end
    else if buf='def' then begin
      dp.buildProp(Node,errmsg);
+     if FProtocolTrace and (errmsg<>'') then WriteProtocolTrace('buildProp error: '+errmsg);
    end;
    Node:=Node.NextSibling;
 end;
