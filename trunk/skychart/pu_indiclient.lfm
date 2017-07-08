@@ -178,7 +178,7 @@ object pop_indi: Tpop_indi
   end
   object InitTimer: TTimer
     Enabled = False
-    Interval = 5000
+    Interval = 30000
     OnTimer = InitTimerTimer
     left = 232
     top = 40
