@@ -293,7 +293,11 @@ begin
 inherited create(true);
 FTargetHost:='localhost';
 FTargetPort:='7624';
+{$ifdef darwin}
+FTimeout:=500;
+{$else}
 FTimeout:=100;
+{$endif}
 FConnected:=false;
 FProtocolTrace:=False;
 FProtocolTraceFile:='';
