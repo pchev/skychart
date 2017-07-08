@@ -366,6 +366,7 @@ if not connected then begin
   end;
 
   client.ProtocolTraceFile:=slash(HomeDir)+'cdc_inditrace.log';
+  client.ProtocolErrorFile:=slash(HomeDir)+'cdc_indierror.log';
   client.ProtocolTrace:=ProtocolTrace.Checked;
   if client.ProtocolTrace then Memomsg.Lines.Add('Trace started to file: '+client.ProtocolTraceFile);
 
