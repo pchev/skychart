@@ -294,9 +294,9 @@ inherited create(true);
 FTargetHost:='localhost';
 FTargetPort:='7624';
 {$ifdef darwin}
-FTimeout:=500;
+FTimeout:=400;
 {$else}
-FTimeout:=100;
+FTimeout:=200;
 {$endif}
 FConnected:=false;
 FProtocolTrace:=False;
@@ -484,7 +484,7 @@ try
      end;
      if init then begin
        inc(c);
-       if c>100 then FinitProps:=true;  // no response? continue
+       if c>50 then FinitProps:=true;  // no response? continue
        if FinitProps then begin
           if FProtocolTrace then WriteProtocolTrace('Initialized');
           if assigned(FServerConnected) then Synchronize(@SyncServerConnected);
