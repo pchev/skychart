@@ -246,11 +246,15 @@ var buf: TDataBuffer;
 begin
   buf:=TDataBuffer.Create;
   buf.dataptr:=PtrInt(data);
+  {$ifndef darwin}
   EnterCriticalsection(BufferCriticalSection);
+  {$endif}
   try
   dataqueue.Add(buf);
   finally
+  {$ifndef darwin}
   LeaveCriticalsection(BufferCriticalSection);
+  {$endif}
   end;
 end;
 
@@ -267,11 +271,15 @@ begin
       while dataqueue.Count>0 do begin
          s:=TMemoryStream(TDataBuffer(dataqueue.Items[0]).dataptr);
          FProcessData(s);
+         {$ifndef darwin}
          EnterCriticalsection(BufferCriticalSection);
+         {$endif}
          try
          dataqueue.Delete(0);
          finally
+         {$ifndef darwin}
          LeaveCriticalsection(BufferCriticalSection);
+         {$endif}
          end;
       end;
   end;
@@ -479,12 +487,16 @@ try
           init:=false;
        end;
      end;
+     {$ifndef darwin}
      EnterCriticalsection(SendCriticalSection);
+     {$endif}
      try
      buf:=Fsendbuffer;
      Fsendbuffer:='';
      finally
+     {$ifndef darwin}
      LeaveCriticalsection(SendCriticalSection);
+     {$endif}
      end;
      if buf<>'' then begin
         if FProtocolTrace then WriteProtocolTrace('Send buffer='+buf);
@@ -514,11 +526,15 @@ end;
 procedure TIndiBaseClient.Send(const Value: string);
 begin
  if Value>'' then begin
+   {$ifndef darwin}
    EnterCriticalsection(SendCriticalSection);
+   {$endif}
    try
    Fsendbuffer:=Fsendbuffer+Value+crlf;
    finally
+   {$ifndef darwin}
    LeaveCriticalsection(SendCriticalSection);
+   {$endif}
    end;
  end;
 end;
@@ -930,14 +946,18 @@ begin
 end;
 procedure TIndiBaseClient.IndiMessageEvent(msg: string);
 begin
+  {$ifndef darwin}
   EnterCriticalSection(MessageCriticalSection);
+  {$endif}
   try
   if SyncindiMessage='' then
     SyncindiMessage:=msg
   else
     SyncindiMessage:=SyncindiMessage+crlf+msg;
   finally
+  {$ifndef darwin}
   LeaveCriticalsection(MessageCriticalSection);
+  {$endif}
   end;
   Application.QueueAsyncCall(@ASyncMessageEvent,0);
 end;
@@ -1004,14 +1024,18 @@ procedure TIndiBaseClient.ASyncMessageEvent(Data: PtrInt);
 var msg: string;
 begin
   msg:='';
+  {$ifndef darwin}
   if not terminated then EnterCriticalSection(MessageCriticalSection);
+  {$endif}
   try
   if SyncindiMessage<>'' then begin
     msg:=SyncindiMessage;
     SyncindiMessage:='';
   end;
   finally
+  {$ifndef darwin}
   if not terminated then LeaveCriticalsection(MessageCriticalSection);
+  {$endif}
   end;
   if (msg<>'') and assigned(FIndiMessageEvent) then FIndiMessageEvent(Msg);
 end;
