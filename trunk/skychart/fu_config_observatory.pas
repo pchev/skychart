@@ -528,7 +528,8 @@ savename:=csc.ObsName;
 savelat:=csc.ObsLatitude;
 savelon:=csc.ObsLongitude;
 FormPos(f_observatory_db,Mouse.CursorPos.X,Mouse.CursorPos.Y);
-if f_observatory_db.ShowModal=mrOK then begin
+ShowModalForm(f_observatory_db,true);
+if f_observatory_db.ModalResult=mrOK then begin
   csc.ObsCountry:=f_observatory_db.csc.ObsCountry;
   csc.ObsName:=f_observatory_db.csc.ObsName;
   csc.ObsLatitude:=f_observatory_db.csc.ObsLatitude;

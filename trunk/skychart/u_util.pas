@@ -136,7 +136,7 @@ procedure ISleep(milli:integer);
 function CompareVersion(v1,v2: string):integer;
 function strim(const S: string): string;
 procedure DeleteFilesInDir(dir:string);
-function ShowModalForm(f:TForm):TModalResult;
+function ShowModalForm(f:TForm; setfocus:boolean=false):TModalResult;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -2533,7 +2533,7 @@ i:=findfirst(slash(dir)+'*',0,fs);
  findclose(fs);
 end;
 
-function ShowModalForm(f:TForm):TModalResult;
+function ShowModalForm(f:TForm; setfocus:boolean=false):TModalResult;
 {$ifdef darwin}
 var fstyle:TFormStyle;
 {$endif}
@@ -2547,6 +2547,7 @@ begin
   f.Show;
   while (f.visible)and(f.ModalResult=mrNone) do begin
     sleep(100);
+    if setfocus then f.setfocus;
     Application.ProcessMessages;
   end;
   result:=f.ModalResult;
