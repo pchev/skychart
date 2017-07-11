@@ -572,7 +572,7 @@ begin
     bmp.Assign(NAV_Orig);
 
     coln := ColorToBGRA(col);
-    black := ColorToBGRA(clBlack);
+    black := ColorToBGRA(clBlack,0);
 
     W := bmp.Width;
     H := bmp.Height;
