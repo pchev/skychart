@@ -561,8 +561,8 @@ end;
 
 procedure Tf_planetinfo.NAV_Coloring(col: TColor; bmp:TBGRABitmap);
 var
-  x, y : integer;
-  coln,black:TBGRAPixel;
+  x : integer;
+  coln:TBGRAPixel;
   p: PBGRAPixel;
   W, H: integer;
 begin
@@ -572,32 +572,22 @@ begin
     bmp.Assign(NAV_Orig);
 
     coln := ColorToBGRA(col);
-    black := ColorToBGRA(clBlack,0);
 
     W := bmp.Width;
     H := bmp.Height;
 
-    for y := 0 to H -1 do
+    p := bmp.Data ;
+
+    for x := 0 to W*H -1 do
     begin
-       p := bmp.Data ;
 
-       {
-       inc(p, y*w);
+      if (p^.red <> 0) or
+         (p^.green <> 0) or
+         (p^.blue <> 0)
+      then
+          p^ := coln;
 
-       pp := index * NAV_btnLen;
-       inc(p,pp);
-       }
-
-       //for x := 0 to NAV_btnLen -1 do
-       for x := 0 to W*H -1 do
-       begin
-
-          if p^ <> black then
-            p^ := coln;
-
-        inc(p);
-
-       end;
+    inc(p);
 
     end;
 
@@ -611,7 +601,7 @@ end;
 
 procedure Tf_planetinfo.NAV_Disable(bmp:TBGRABitmap);
 var
-  x, y : integer;
+  x : integer;
   black:TBGRAPixel;
   p: PBGRAPixel;
   W, H: integer;
@@ -619,26 +609,20 @@ begin
 
   try
 
-    //bmp.Assign(NAV_Orig);
-
     black := ColorToBGRA(clBlack);
 
     W := bmp.Width;
     H := bmp.Height;
 
-    for y := 0 to H -1 do
+    p := bmp.Data ;
+
+    for x := 0 to W*H -1 do
     begin
-       p := bmp.Data ;
 
-       for x := 0 to W*H -1 do
-       begin
+      if (x mod W) > NAV_btnLen then
+        p^ := black;
 
-          if (x mod W) > NAV_btnLen then
-            p^ := black;
-
-        inc(p);
-
-       end;
+    inc(p);
 
     end;
 
