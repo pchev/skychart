@@ -111,6 +111,7 @@ type
       function setValue(root: TDOMNode; out errmsg: string):integer;
       function setBLOB(bvp: IBLOBVectorProperty; root: TDOMNode; out errmsg:string): integer;
       procedure checkMessage(root: TDOMNode);
+      function getDriverInterface(): word;
 
       property onNewMessage  : TIndiMessageEvent read FIndiMessageEvent write FIndiMessageEvent;
       property onNewProperty : TIndiPropertyEvent read FIndiPropertyEvent write FIndiPropertyEvent;
@@ -687,6 +688,18 @@ begin
      buf:=GetNodeValue(node);
      if assigned(FIndiMessageEvent) then FIndiMessageEvent(buf);
   end;
+end;
+
+function BaseDevice.getDriverInterface(): word;
+var tvp: ITextVectorProperty;
+    tp:  IText;
+begin
+  result:=0;
+  tvp := getText('DRIVER_INFO');
+  if tvp=nil then exit;
+  tp:=IUFindText(tvp,'DRIVER_INTERFACE');
+  if tp=nil then exit;
+  result:=StrToIntDef(tp.text,0);
 end;
 
 ////////////////////// IndiProperty /////////////////////////////
