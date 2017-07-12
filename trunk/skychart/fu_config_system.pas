@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses u_help, u_translation, u_constant, u_util, cu_database,
-  indibaseclient, indibasedevice,
+  indibaseclient, indibasedevice, indiapi,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms, LazUTF8, LazFileUtils, math,
   ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML, CheckLst;
@@ -209,6 +209,7 @@ type
     dbchanged,skipDBtypeGroupClick,LockChange,LockMsg: boolean;
     indiclient: TIndiBaseClient;
     mountsavedev: string;
+    receiveindidevice: boolean;
     procedure ShowSYS;
     procedure ShowServer;
     procedure ShowTelescope;
@@ -850,6 +851,7 @@ procedure Tf_config_system.GetIndiDevicesClick(Sender: TObject);
 begin
   mountsavedev:=MountIndiDevice.Text;
   MountIndiDevice.Clear;
+  receiveindidevice:=false;
   indiclient:=TIndiBaseClient.Create;
   indiclient.onNewDevice:=IndiNewDevice;
   indiclient.SetServer(IndiServerHost.Text,IndiServerPort.Text);
@@ -860,12 +862,24 @@ end;
 
 procedure Tf_config_system.IndiTimerTimer(Sender: TObject);
 var i: integer;
+    drint: word;
 begin
+  if not receiveindidevice then begin
+     receiveindidevice:=true;  // only one retry if no response
+     exit;
+  end;
   IndiTimer.Enabled:=false;
+  for i:=0 to indiclient.devices.Count-1 do begin
+     drint:=BaseDevice(indiclient.devices[i]).getDriverInterface();
+     if (drint and TELESCOPE_INTERFACE)<>0 then
+        MountIndiDevice.Items.Add(BaseDevice(indiclient.devices[i]).getDeviceName);
+  end;
   if indiclient.Connected then begin
     indiclient.DisconnectServer;
+    if MountIndiDevice.Items.Count>0 then MountIndiDevice.ItemIndex:=0; // set first entry
     for i:=0 to MountIndiDevice.Items.Count-1 do
-       if MountIndiDevice.Items[i]=mountsavedev then MountIndiDevice.ItemIndex:=i;
+       if MountIndiDevice.Items[i]=mountsavedev then MountIndiDevice.ItemIndex:=i; // reset last entry
+    csc.IndiDevice:=MountIndiDevice.Text;
   end else begin
     if csc.IndiAutostart then begin
       ExecNoWait('nohup indistarter');
@@ -881,7 +895,7 @@ end;
 
 procedure Tf_config_system.IndiNewDevice(dp: Basedevice);
 begin
-   MountIndiDevice.Items.Add(dp.getDeviceName);
+   receiveindidevice:=true;
 end;
 
 procedure Tf_config_system.IndiDevChange(Sender: TObject);

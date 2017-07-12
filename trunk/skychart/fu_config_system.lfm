@@ -1060,7 +1060,7 @@ object f_config_system: Tf_config_system
   end
   object IndiTimer: TTimer
     Enabled = False
-    Interval = 2000
+    Interval = 5000
     OnTimer = IndiTimerTimer
     left = 298
     top = 468
