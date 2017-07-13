@@ -2389,7 +2389,10 @@ else begin
     sc.movetoradec(ar1,de1);
     Refresh(true,false);
     // try to get more information and show the label
-    if (itype=ftOnline) or (not IdentXY(sc.cfgsc.Xcentre,sc.cfgsc.Ycentre,false,true,itype)) then begin
+    if (itype=ftPla) then begin
+       ShowIdentLabel;
+    end
+    else if (itype=ftOnline) or (not IdentXY(sc.cfgsc.Xcentre,sc.cfgsc.Ycentre,false,true,itype)) then begin
       // object not found
       // online search result
       if itype=ftOnline then begin
