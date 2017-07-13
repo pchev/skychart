@@ -1307,6 +1307,7 @@ begin
 ok:=false;
 if (not cfgsc.ephvalid) or (id<1) or (id>MaxPla)or(id=31)or(id=32) then exit;
 ok:=true;
+cfgsc.FindOK:=true;
 if MeanPos then begin
   ar:=normra(cfgsc.Planetlst[0,id,8]);
   de:=cfgsc.Planetlst[0,id,9];
@@ -1318,6 +1319,7 @@ else begin
   // back to j2000
   if cfgsc.ApparentPos then mean_equatorial(ar,de,cfgsc,id<>11,false);
   precession(cfgsc.JDchart,jd2000,ar,de);
+  FormatPlanet(0,id,cfgsc, nom,ma,date,desc);
 end;
 end;
 
