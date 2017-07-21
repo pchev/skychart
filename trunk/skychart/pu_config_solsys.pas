@@ -25,7 +25,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, u_projection, cu_database, UScaleDPI,
+uses
+  u_help, u_translation, u_constant, u_util, u_projection, cu_database, UScaleDPI,
   fu_config_solsys, LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources,
   downloaddialog, jdcalendar, EditBtn, Process, LazHelpHTML, FileUtil;
@@ -55,16 +56,17 @@ type
   end;
 
 implementation
+
 {$R *.lfm}
 
 procedure Tf_configsolsys.SetLang;
 begin
-Caption:=rsSolarSystem;
-Button1.caption:=rsOK;
-Button2.caption:=rsApply;
-Button3.caption:=rsCancel;
-Button4.caption:=rsHelp;
-SetHelp(self,hlpCfgSol);
+  Caption := rsSolarSystem;
+  Button1.Caption := rsOK;
+  Button2.Caption := rsApply;
+  Button3.Caption := rsCancel;
+  Button4.Caption := rsHelp;
+  SetHelp(self, hlpCfgSol);
 end;
 
 procedure Tf_configsolsys.FormShow(Sender: TObject);
@@ -74,20 +76,20 @@ end;
 
 procedure Tf_configsolsys.FormCreate(Sender: TObject);
 begin
-ScaleDPI(Self);
-SetLang;
+  ScaleDPI(Self);
+  SetLang;
 end;
 
-procedure Tf_configsolsys.FormClose(Sender: TObject;
-  var CloseAction: TCloseAction);
+procedure Tf_configsolsys.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   f_config_solsys1.lock;
 end;
 
 procedure Tf_configsolsys.Button2Click(Sender: TObject);
 begin
- f_config_solsys1.ActivateJplEph;
- if assigned(f_config_solsys1.onApplyConfig) then f_config_solsys1.onApplyConfig(f_config_solsys1);
+  f_config_solsys1.ActivateJplEph;
+  if assigned(f_config_solsys1.onApplyConfig) then
+    f_config_solsys1.onApplyConfig(f_config_solsys1);
 end;
 
 procedure Tf_configsolsys.Button1Click(Sender: TObject);

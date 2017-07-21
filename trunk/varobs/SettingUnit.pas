@@ -122,123 +122,136 @@ var
   OptForm: TOptForm;
 
 implementation
+
 {$R *.lfm}
 
-Uses variables1;
+uses variables1;
 
 procedure TOptForm.RadioGroup1Click(Sender: TObject);
 begin
-case radiogroup1.itemindex of
-0 : begin
-    GroupBox0.visible:=true;
-    GroupBox1.visible:=false;
-    GroupBox2.visible:=false;
-    GroupBox3.visible:=false;
-    GroupBox4.visible:=false;
+  case radiogroup1.ItemIndex of
+    0:
+    begin
+      GroupBox0.Visible := True;
+      GroupBox1.Visible := False;
+      GroupBox2.Visible := False;
+      GroupBox3.Visible := False;
+      GroupBox4.Visible := False;
     end;
-1 : begin
-    GroupBox0.visible:=false;
-    GroupBox1.visible:=true;
-    GroupBox2.visible:=false;
-    GroupBox3.visible:=false;
-    GroupBox4.visible:=false;
+    1:
+    begin
+      GroupBox0.Visible := False;
+      GroupBox1.Visible := True;
+      GroupBox2.Visible := False;
+      GroupBox3.Visible := False;
+      GroupBox4.Visible := False;
     end;
-2 : begin
-    GroupBox0.visible:=false;
-    GroupBox1.visible:=false;
-    GroupBox2.visible:=true;
-    GroupBox3.visible:=false;
-    GroupBox4.visible:=false;
+    2:
+    begin
+      GroupBox0.Visible := False;
+      GroupBox1.Visible := False;
+      GroupBox2.Visible := True;
+      GroupBox3.Visible := False;
+      GroupBox4.Visible := False;
     end;
-3 : begin
-    GroupBox0.visible:=false;
-    GroupBox1.visible:=false;
-    GroupBox2.visible:=false;
-    GroupBox3.visible:=true;
-    GroupBox4.visible:=false;
+    3:
+    begin
+      GroupBox0.Visible := False;
+      GroupBox1.Visible := False;
+      GroupBox2.Visible := False;
+      GroupBox3.Visible := True;
+      GroupBox4.Visible := False;
     end;
-4 : begin
-    GroupBox0.visible:=false;
-    GroupBox1.visible:=false;
-    GroupBox2.visible:=false;
-    GroupBox3.visible:=false;
-    GroupBox4.visible:=true;
+    4:
+    begin
+      GroupBox0.Visible := False;
+      GroupBox1.Visible := False;
+      GroupBox2.Visible := False;
+      GroupBox3.Visible := False;
+      GroupBox4.Visible := True;
     end;
-end;
+  end;
 end;
 
 procedure TOptForm.FormCreate(Sender: TObject);
 begin
-ScaleDPI(Self);
-FileNameEdit0.InitialDir:=privatedir;
-FileNameEdit1.InitialDir:=privatedir;
-FileNameEdit2.InitialDir:=privatedir;
-FileNameEdit3.InitialDir:=privatedir;
-FileNameEdit4.InitialDir:=privatedir;
-FileNameEdit8.InitialDir:=privatedir;
+  ScaleDPI(Self);
+  FileNameEdit0.InitialDir := privatedir;
+  FileNameEdit1.InitialDir := privatedir;
+  FileNameEdit2.InitialDir := privatedir;
+  FileNameEdit3.InitialDir := privatedir;
+  FileNameEdit4.InitialDir := privatedir;
+  FileNameEdit8.InitialDir := privatedir;
 end;
 
 procedure TOptForm.Button1Click(Sender: TObject);
 begin
-qlurl.Text:=defqlurl;
-afoevurl.Text:=defafoevurl;
-charturl.Text:=defaavsocharturl;
-webobsurl.Text:=defwebobsurl;
-opencmd.Text:=DefaultOpenFileCMD;
+  qlurl.Text := defqlurl;
+  afoevurl.Text := defafoevurl;
+  charturl.Text := defaavsocharturl;
+  webobsurl.Text := defwebobsurl;
+  opencmd.Text := DefaultOpenFileCMD;
 end;
 
 procedure TOptForm.RadioGroup3Click(Sender: TObject);
 begin
-case Radiogroup3.itemindex of
-0 : begin
-      Label12.caption:='Field No';
-      Label13.caption:='Field No';
-      Label14.caption:='Field No';
+  case Radiogroup3.ItemIndex of
+    0:
+    begin
+      Label12.Caption := 'Field No';
+      Label13.Caption := 'Field No';
+      Label14.Caption := 'Field No';
     end;
-1 : begin
-      Label12.caption:='Start.End col';
-      Label13.caption:='Start.End col';
-      Label14.caption:='Start.End col';
+    1:
+    begin
+      Label12.Caption := 'Start.End col';
+      Label13.Caption := 'Start.End col';
+      Label14.Caption := 'Start.End col';
     end;
-end;
+  end;
 end;
 
 procedure TOptForm.FormShow(Sender: TObject);
 begin
-radiogroup1click(sender);
-RadioGroup5Click(Sender);
-RadioGroup8Click(Sender);
+  radiogroup1click(Sender);
+  RadioGroup5Click(Sender);
+  RadioGroup8Click(Sender);
 end;
 
 procedure TOptForm.RadioGroup5Click(Sender: TObject);
 begin
-case radiogroup5.itemindex of
-0 : begin
-    Panel1.visible:=true;
-    Panel2.visible:=False;
+  case radiogroup5.ItemIndex of
+    0:
+    begin
+      Panel1.Visible := True;
+      Panel2.Visible := False;
     end;
-1 : begin
-    Panel1.visible:=False;
-    Panel2.visible:=true;
+    1:
+    begin
+      Panel1.Visible := False;
+      Panel2.Visible := True;
     end;
-2 : begin
-    Panel1.visible:=False;
-    Panel2.visible:=False;
+    2:
+    begin
+      Panel1.Visible := False;
+      Panel2.Visible := False;
     end;
-end;
+  end;
 end;
 
 
 procedure TOptForm.RadioGroup8Click(Sender: TObject);
 begin
-case radiogroup8.ItemIndex of
-  0 : begin // online
-        DirectoryEdit2.visible:=false;
-      end;
-  1 : begin  // cdrom
-        DirectoryEdit2.visible:=true;
-      end;
-end;
+  case radiogroup8.ItemIndex of
+    0:
+    begin // online
+      DirectoryEdit2.Visible := False;
+    end;
+    1:
+    begin  // cdrom
+      DirectoryEdit2.Visible := True;
+    end;
+  end;
 end;
 
 end.

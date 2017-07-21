@@ -24,7 +24,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_constant, u_translation, Math, u_util, cu_planet, u_projection, process,
+uses
+  u_constant, u_translation, Math, u_util, cu_planet, u_projection, process,
   BGRABitmap, BGRABitmapTypes, Classes, SysUtils, FileUtil, Forms, Controls,
   UScaleDPI, Types, Graphics, Dialogs, ComCtrls, ExtCtrls, Buttons, StdCtrls,
   ActnList, LCLType, u_Orbits;

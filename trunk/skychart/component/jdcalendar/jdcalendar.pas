@@ -138,7 +138,7 @@ type
 
   { TJDDatePicker }
 
-//  TJDDatePicker = class(TEditButton)
+  //  TJDDatePicker = class(TEditButton)
   TJDDatePicker = class(TCustomEditButton)
   private
     savejd: double;
@@ -146,8 +146,9 @@ type
     Fcaption: string;
     procedure UpdDate;
   protected
-//    procedure DoButtonClick(Sender: TObject); override;  // commented for new lcl  version
-    procedure ButtonClick(Sender: TObject);  // weird compilation failed if adding override here?
+    //    procedure DoButtonClick(Sender: TObject); override;  // commented for new lcl  version
+    procedure ButtonClick(Sender: TObject);
+    // weird compilation failed if adding override here?
     procedure SetJD(Value: double);
   public
     constructor Create(AOwner: TComponent); override;
@@ -267,7 +268,7 @@ begin
   DownYear.Width := DownYear.Height;
   DownYear.Caption := '<';
   DownYear.Left := 2;
-  DownYear.Top := FYear.Top-2;
+  DownYear.Top := FYear.Top - 2;
   FYear.Left := DownYear.Left + DownYear.Width + 2;
   UpYear := TButton.Create(self);
   UpYear.Parent := TopPanel;
@@ -328,8 +329,8 @@ begin
   Julian.Height := 21;
   Julian.Left := JDLabel.Left + JDLabel.Width + 12;
   Julian.BorderStyle := bsNone;
-  Julian.MinValue:=-5583575;
-  Julian.MaxValue:=9026275;
+  Julian.MinValue := -5583575;
+  Julian.MaxValue := 9026275;
 
   jdt := CalendarGrid.JD;
   UpdVal;
@@ -486,7 +487,7 @@ procedure TJDMonthlyCalendar.DownYearClick(Sender: TObject);
 begin
   FYear.Value := FYear.Value - 1;
   {$ifdef darwin}
-    DateChange(Sender);
+  DateChange(Sender);
   {$endif}
 end;
 
@@ -500,7 +501,7 @@ begin
   else
     FMonth.Value := FMonth.Value + 1;
   {$ifdef darwin}
-    DateChange(Sender);
+  DateChange(Sender);
   {$endif}
 end;
 
@@ -514,7 +515,7 @@ begin
   else
     FMonth.Value := FMonth.Value - 1;
   {$ifdef darwin}
-    DateChange(Sender);
+  DateChange(Sender);
   {$endif}
 end;
 
@@ -813,7 +814,7 @@ begin
   Color := clBtnFace;
   ReadOnly := True;
   Button.Glyph.LoadFromLazarusResource('BtnDatePicker');
-//  Button.OnClick := @DoButtonClick;
+  //  Button.OnClick := @DoButtonClick;
   Button.OnClick := @ButtonClick;
   Button.Enabled := True;
   UpdDate;
@@ -829,7 +830,7 @@ procedure TJDDatePicker.ButtonClick(Sender: TObject);//or onClick
 var
   CD: TJDCalendarDialog;
 begin
-//  inherited DoButtonClick(Sender);
+  //  inherited DoButtonClick(Sender);
   inherited ButtonClick;
 
   CD := TJDCalendarDialog.Create(Self);
@@ -901,8 +902,8 @@ begin
   LabelH.ParentFont := True;
   LabelM.ParentFont := True;
   EditH.Value := 0;
-  EditH.MinValue:=0;
-  EditH.MaxValue:=23;
+  EditH.MinValue := 0;
+  EditH.MaxValue := 23;
   EditH.Top := 0;
   EditH.Left := 0;
   EditH.Width := dsize;
@@ -910,8 +911,8 @@ begin
   LabelH.Top := (EditH.Height - LabelH.Height) div 2;
   LabelH.Left := EditH.Left + EditH.Width + 2;
   EditM.Value := 0;
-  EditM.MinValue:=0;
-  EditM.MaxValue:=59;
+  EditM.MinValue := 0;
+  EditM.MaxValue := 59;
   EditM.Top := 0;
   EditM.Left := LabelH.Left + lsize;
   EditM.Width := dsize;
@@ -919,8 +920,8 @@ begin
   LabelM.Top := LabelH.Top;
   LabelM.Left := EditM.Left + EditM.Width + 2;
   EditS.Value := 0;
-  EditS.MinValue:=0;
-  EditS.MaxValue:=59;
+  EditS.MinValue := 0;
+  EditS.MaxValue := 59;
   EditS.Top := 0;
   EditS.Left := LabelM.Left + lsize;
   EditS.Width := dsize;
@@ -1000,4 +1001,3 @@ initialization
   {$I jdcalendar.lrs}
 
 end.
-

@@ -26,298 +26,350 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_constant, u_util, blcksock, synsock,
-     Dialogs,LazUTF8, LazFileUtils, LCLIntf, SysUtils, Classes;
+uses
+  u_constant, u_util, blcksock, synsock,
+  Dialogs, LazUTF8, LazFileUtils, LCLIntf, SysUtils, Classes;
 
 type
 
   TStringProc = procedure(var S: string) of object;
   TIntProc = procedure(var i: integer) of object;
-  TExCmd = function(S:string; L:Tstringlist):string of object;
+  TExCmd = function(S: string; L: TStringList): string of object;
 
   TTCPThrd = class(TThread)
   private
-    FSock:TTCPBlockSocket;
+    FSock: TTCPBlockSocket;
     CSock: TSocket;
-    cmd : TStringlist;
-    cmdresult : string;
-    FConnectTime : double;
-    FTerminate : TIntProc;
+    cmd: TStringList;
+    cmdresult: string;
+    FConnectTime: double;
+    FTerminate: TIntProc;
     FExecuteCmd: TExCmd;
   public
-    id : integer;
-    keepalive,abort,lockexecutecmd,stoping : boolean;
-    active_chart,remoteip,remoteport : string;
-    Constructor Create (hsock:tSocket);
+    id: integer;
+    keepalive, abort, lockexecutecmd, stoping: boolean;
+    active_chart, remoteip, remoteport: string;
+    constructor Create(hsock: tSocket);
     procedure Execute; override;
-    procedure SendData(str:string);
+    procedure SendData(str: string);
     procedure ExecuteCmd;
-    property sock : TTCPBlockSocket read FSock;
-    property ConnectTime : double read FConnectTime;
+    property sock: TTCPBlockSocket read FSock;
+    property ConnectTime: double read FConnectTime;
     property Terminated;
-    property onTerminate : TIntProc read FTerminate write FTerminate;
-    property onExecuteCmd : TExCmd read FExecuteCmd write FExecuteCmd;
+    property onTerminate: TIntProc read FTerminate write FTerminate;
+    property onExecuteCmd: TExCmd read FExecuteCmd write FExecuteCmd;
   end;
 
   TTCPDaemon = class(TThread)
   private
-    Sock:TTCPBlockSocket;
-    active_chart : string;
-    FGetActiveChart : TStringProc;
-    FErrorMsg : TStringProc;
+    Sock: TTCPBlockSocket;
+    active_chart: string;
+    FGetActiveChart: TStringProc;
+    FErrorMsg: TStringProc;
     FShowSocket: TStringProc;
-    FIPaddr,FIPport : string;
+    FIPaddr, FIPport: string;
     FExecuteCmd: TExCmd;
     procedure ShowError;
-    procedure ThrdTerminate(var i : integer);
+    procedure ThrdTerminate(var i: integer);
   public
-    keepalive, stoping : boolean;
-    TCPThrd: array [1..Maxwindow] of TTCPThrd ;
-    ThrdActive: array [1..Maxwindow] of boolean ;
-    Constructor Create;
+    keepalive, stoping: boolean;
+    TCPThrd: array [1..Maxwindow] of TTCPThrd;
+    ThrdActive: array [1..Maxwindow] of boolean;
+    constructor Create;
     procedure Execute; override;
     procedure ShowSocket;
     procedure GetActiveChart;
-    property IPaddr : string read FIPaddr write FIPaddr;
-    property IPport : string read FIPport write FIPport;
-    property onGetACtiveChart : TStringProc read FGetActiveChart write FGetActiveChart;
-    property onErrorMsg : TStringProc read FErrorMsg write FErrorMsg;
-    property onShowSocket : TStringProc read  FShowSocket write FShowSocket;
-    property onExecuteCmd : TExCmd read FExecuteCmd write FExecuteCmd;
+    property IPaddr: string read FIPaddr write FIPaddr;
+    property IPport: string read FIPport write FIPport;
+    property onGetACtiveChart: TStringProc read FGetActiveChart write FGetActiveChart;
+    property onErrorMsg: TStringProc read FErrorMsg write FErrorMsg;
+    property onShowSocket: TStringProc read FShowSocket write FShowSocket;
+    property onExecuteCmd: TExCmd read FExecuteCmd write FExecuteCmd;
   end;
 
 implementation
+
 {$ifdef darwin}
 uses BaseUnix;       //  to catch SIGPIPE
-var NewSigRec, OldSigRec: SigActionRec;
-    res: Integer;
+
+var
+  NewSigRec, OldSigRec: SigActionRec;
+  res: integer;
+
 {$endif}
 
-Constructor TTCPDaemon.Create;
+constructor TTCPDaemon.Create;
 begin
-  FreeOnTerminate:=true;
-  inherited create(true);
-  keepalive:=false;
+  FreeOnTerminate := True;
+  inherited Create(True);
+  keepalive := False;
 end;
 
 procedure TTCPDaemon.ShowError;
-var msg: string;
+var
+  msg: string;
 begin
-msg:=inttostr(sock.lasterror)+' '+sock.GetErrorDesc(sock.lasterror);
-if assigned(FErrorMsg) then FErrorMsg(msg);
+  msg := IntToStr(sock.lasterror) + ' ' + sock.GetErrorDesc(sock.lasterror);
+  if assigned(FErrorMsg) then
+    FErrorMsg(msg);
 end;
 
 procedure TTCPDaemon.ShowSocket;
-var locport:string;
+var
+  locport: string;
 begin
-sock.GetSins;
-locport:=inttostr(sock.GetLocalSinPort);
-if assigned(FShowSocket) then FShowSocket(locport);
+  sock.GetSins;
+  locport := IntToStr(sock.GetLocalSinPort);
+  if assigned(FShowSocket) then
+    FShowSocket(locport);
 end;
 
-procedure TTCPDaemon.ThrdTerminate(var i : integer);
+procedure TTCPDaemon.ThrdTerminate(var i: integer);
 begin
-ThrdActive[i]:=false;
+  ThrdActive[i] := False;
 end;
 
 procedure TTCPDaemon.GetActiveChart;
 begin
-if assigned(FGetActiveChart) then FGetActiveChart(active_chart);
+  if assigned(FGetActiveChart) then
+    FGetActiveChart(active_chart);
 end;
 
 procedure TTCPDaemon.Execute;
 var
-  ClientSock:TSocket;
-  i,n : integer;
+  ClientSock: TSocket;
+  i, n: integer;
 begin
-//writetrace('start tcp deamon');
-stoping:=false;
-for i:=1 to MaxWindow do ThrdActive[i]:=false;
-sock:=TTCPBlockSocket.create;
-//writetrace('blocksocked created');
-try
-  with sock do
+  //writetrace('start tcp deamon');
+  stoping := False;
+  for i := 1 to MaxWindow do
+    ThrdActive[i] := False;
+  sock := TTCPBlockSocket.Create;
+  //writetrace('blocksocked created');
+  try
+    with sock do
     begin
       //writetrace('create socket');
       CreateSocket;
-      if lasterror<>0 then Synchronize(ShowError);
-      MaxLineLength:=1024;
+      if lasterror <> 0 then
+        Synchronize(ShowError);
+      MaxLineLength := 1024;
       //writetrace('setlinger');
-      setLinger(true,1000);
-      if lasterror<>0 then Synchronize(ShowError);
+      setLinger(True, 1000);
+      if lasterror <> 0 then
+        Synchronize(ShowError);
       //writetrace('bind to '+fipaddr+' '+fipport);
-      bind(FIPaddr,FIPport);
-      if lasterror<>0 then Synchronize(ShowError);
+      bind(FIPaddr, FIPport);
+      if lasterror <> 0 then
+        Synchronize(ShowError);
       //writetrace('listen');
       listen;
-      if lasterror<>0 then Synchronize(ShowError);
+      if lasterror <> 0 then
+        Synchronize(ShowError);
       Synchronize(ShowSocket);
       //writetrace('start main loop');
       repeat
-        if stoping or terminated then break;
+        if stoping or terminated then
+          break;
         if canread(500) and (not terminated) and (not stoping) then
+        begin
+          ClientSock := accept;
+          if lastError = 0 then
           begin
-            ClientSock:=accept;
-            if lastError=0 then begin
-              n:=-1;
-              for i:=1 to Maxwindow do
-                 if (not ThrdActive[i])
-                    or(TCPThrd[i]=nil)
-                    or(TCPThrd[i].Fsock=nil)
-                    or(TCPThrd[i].terminated)
-                    then begin
-                      n:=i;
-                      break;
-                    end;
-              if n>0 then begin
-                 TCPThrd[n]:=TTCPThrd.create(ClientSock);
-                 TCPThrd[n].onTerminate:=ThrdTerminate;
-                 TCPThrd[n].onExecuteCmd:=FExecuteCmd;
-                 TCPThrd[n].keepalive:=keepalive;
-                 TCPThrd[n].Start;
-                 i:=0; while (TCPThrd[n].Fsock=nil)and(i<100) do begin sleep(100); inc(i); end;
-                 if not TCPThrd[n].terminated then begin
-                      TCPThrd[n].id:=n;
-                      ThrdActive[n]:=true;
-                      Synchronize(GetActiveChart);
-                      if active_chart=msgFailed then
-                        TCPThrd[n].senddata(msgFailed+' Cannot activate a chart.')
-                      else begin
-                        TCPThrd[n].active_chart:=active_chart;
-                        TCPThrd[n].senddata(msgOK+' id='+inttostr(n)+' chart='+active_chart);
-                      end;
-                 end;
-              end else
-                 with TTCPThrd.create(ClientSock) do begin
-                   i:=0; while (sock=nil)and(i<100) do begin sleep(100); inc(i); end;
-                   if not terminated then begin
-                      if Sock<>nil then Sock.SendString(msgFailed+' Maximum connection reach!'+CRLF);
-                      terminate;
-                   end;
+            n := -1;
+            for i := 1 to Maxwindow do
+              if (not ThrdActive[i]) or
+                (TCPThrd[i] = nil) or (TCPThrd[i].Fsock = nil) or
+                (TCPThrd[i].terminated) then
+              begin
+                n := i;
+                break;
+              end;
+            if n > 0 then
+            begin
+              TCPThrd[n] := TTCPThrd.Create(ClientSock);
+              TCPThrd[n].onTerminate := ThrdTerminate;
+              TCPThrd[n].onExecuteCmd := FExecuteCmd;
+              TCPThrd[n].keepalive := keepalive;
+              TCPThrd[n].Start;
+              i := 0;
+              while (TCPThrd[n].Fsock = nil) and (i < 100) do
+              begin
+                sleep(100);
+                Inc(i);
+              end;
+              if not TCPThrd[n].terminated then
+              begin
+                TCPThrd[n].id := n;
+                ThrdActive[n] := True;
+                Synchronize(GetActiveChart);
+                if active_chart = msgFailed then
+                  TCPThrd[n].senddata(msgFailed + ' Cannot activate a chart.')
+                else
+                begin
+                  TCPThrd[n].active_chart := active_chart;
+                  TCPThrd[n].senddata(msgOK + ' id=' + IntToStr(
+                    n) + ' chart=' + active_chart);
+                end;
               end;
             end
-            else Synchronize(ShowError);
-          end;
-      until false;
+            else
+              with TTCPThrd.Create(ClientSock) do
+              begin
+                i := 0;
+                while (sock = nil) and (i < 100) do
+                begin
+                  sleep(100);
+                  Inc(i);
+                end;
+                if not terminated then
+                begin
+                  if Sock <> nil then
+                    Sock.SendString(msgFailed + ' Maximum connection reach!' + CRLF);
+                  terminate;
+                end;
+              end;
+          end
+          else
+            Synchronize(ShowError);
+        end;
+      until False;
     end;
-finally
-//  Suspended:=true;
-  Sock.CloseSocket;
-  Sock.free;
-//  terminate;
-end;
+  finally
+    //  Suspended:=true;
+    Sock.CloseSocket;
+    Sock.Free;
+    //  terminate;
+  end;
 end;
 
-Constructor TTCPThrd.Create(Hsock:TSocket);
+constructor TTCPThrd.Create(Hsock: TSocket);
 begin
-  FreeOnTerminate:=true;
-  inherited create(true);
+  FreeOnTerminate := True;
+  inherited Create(True);
   Csock := Hsock;
-  cmd:=TStringlist.create;
-  keepalive:=false;
-  abort:=false;
-  lockexecutecmd:=false;
+  cmd := TStringList.Create;
+  keepalive := False;
+  abort := False;
+  lockexecutecmd := False;
 end;
 
 procedure TTCPThrd.Execute;
 var
-  s,msg: string;
-  i,keepalivecount: integer;
+  s, msg: string;
+  i, keepalivecount: integer;
 begin
-try
-  Fsock:=TTCPBlockSocket.create;
-  FConnectTime:=now;
-  stoping:=false;
-  keepalivecount:=0;
   try
-    Fsock.socket:=CSock;
-    Fsock.GetSins;
-    Fsock.MaxLineLength:=1024;
-    remoteip:=Fsock.GetRemoteSinIP;
-    remoteport:=inttostr(Fsock.GetRemoteSinPort);
-    with Fsock do
+    Fsock := TTCPBlockSocket.Create;
+    FConnectTime := now;
+    stoping := False;
+    keepalivecount := 0;
+    try
+      Fsock.socket := CSock;
+      Fsock.GetSins;
+      Fsock.MaxLineLength := 1024;
+      remoteip := Fsock.GetRemoteSinIP;
+      remoteport := IntToStr(Fsock.GetRemoteSinPort);
+      with Fsock do
       begin
         repeat
-          if stoping or terminated then break;
-          msg:='RecvString';
+          if stoping or terminated then
+            break;
+          msg := 'RecvString';
           s := RecvString(500);
           //if s<>'' then writetrace(s);   // for debuging only, not thread safe!
-          if lastError=0 then begin
-             if (uppercase(s)='QUIT')or(uppercase(s)='EXIT') then break;
-             splitarg(s,blank,cmd);
-             for i:=cmd.count to MaxCmdArg do cmd.add('');
-             msg:='ExecuteCmd '+s;
-             Synchronize(ExecuteCmd);
-             msg:='SendString '+cmdresult;
-             SendString(cmdresult+crlf);
-             if lastError<>0 then break;
-             if (cmdresult=msgOK)and(uppercase(cmd[0])='SELECTCHART') then active_chart:=cmd[1];
-          end else begin
-            inc(keepalivecount);
-            if keepalive and ((keepalivecount mod 10)=0) then begin
-               keepalivecount:=0;
-               msg:='SendString keepalive';
-               SendString('.'+crlf);      // keepalive check
-               if lastError<>0 then break;  // if send failed we close the connection
+          if lastError = 0 then
+          begin
+            if (uppercase(s) = 'QUIT') or (uppercase(s) = 'EXIT') then
+              break;
+            splitarg(s, blank, cmd);
+            for i := cmd.Count to MaxCmdArg do
+              cmd.add('');
+            msg := 'ExecuteCmd ' + s;
+            Synchronize(ExecuteCmd);
+            msg := 'SendString ' + cmdresult;
+            SendString(cmdresult + crlf);
+            if lastError <> 0 then
+              break;
+            if (cmdresult = msgOK) and (uppercase(cmd[0]) = 'SELECTCHART') then
+              active_chart := cmd[1];
+          end
+          else
+          begin
+            Inc(keepalivecount);
+            if keepalive and ((keepalivecount mod 10) = 0) then
+            begin
+              keepalivecount := 0;
+              msg := 'SendString keepalive';
+              SendString('.' + crlf);      // keepalive check
+              if lastError <> 0 then
+                break;  // if send failed we close the connection
             end;
           end;
-        until false;
+        until False;
       end;
-  finally
-    if VerboseMsg then begin
-       WriteTrace('Stop tcp/ip server:'+crlf+msg+crlf+s+crlf+inttostr(fsock.LastError)+' '+FSock.LastErrorDesc);
+    finally
+      if VerboseMsg then
+      begin
+        WriteTrace('Stop tcp/ip server:' + crlf + msg + crlf + s + crlf + IntToStr(
+          fsock.LastError) + ' ' + FSock.LastErrorDesc);
+      end;
+      if assigned(FTerminate) then
+        FTerminate(id);
+      Fsock.SendString(msgBye + crlf);
+      Fsock.CloseSocket;
+      Fsock.Free;
+      cmd.Free;
+      //    Suspended:=true;
+      //    terminate;
     end;
-    if assigned(FTerminate) then FTerminate(id);
-    Fsock.SendString(msgBye+crlf);
-    Fsock.CloseSocket;
-    Fsock.Free;
-    cmd.free;
-//    Suspended:=true;
-//    terminate;
+  except
   end;
-except
-end;
 end;
 
-procedure TTCPThrd.Senddata(str:string);
+procedure TTCPThrd.Senddata(str: string);
 begin
-try
-if Fsock<>nil then
- with Fsock do begin
-   if terminated then exit;
-   SendString(UTF8ToSys(str)+CRLF);
-   if LastError<>0 then
-      terminate;
- end;
-except
-terminate;
-end;
+  try
+    if Fsock <> nil then
+      with Fsock do
+      begin
+        if terminated then
+          exit;
+        SendString(UTF8ToSys(str) + CRLF);
+        if LastError <> 0 then
+          terminate;
+      end;
+  except
+    terminate;
+  end;
 end;
 
 procedure TTCPThrd.ExecuteCmd;
 begin
-if lockexecutecmd then exit;
-lockexecutecmd:=true;
-try
-  if Assigned(FExecuteCmd) then cmdresult:=FExecuteCmd(active_chart,cmd);
-  lockexecutecmd:=false;
-except
-  lockexecutecmd:=false;
-  cmdresult:=msgFailed+blank+cmdresult;
-end;
+  if lockexecutecmd then
+    exit;
+  lockexecutecmd := True;
+  try
+    if Assigned(FExecuteCmd) then
+      cmdresult := FExecuteCmd(active_chart, cmd);
+    lockexecutecmd := False;
+  except
+    lockexecutecmd := False;
+    cmdresult := msgFailed + blank + cmdresult;
+  end;
 end;
 
 initialization
 
- {$ifdef darwin}           //  ignore SIGPIPE
+ {$ifdef darwin}//  ignore SIGPIPE
  {$ifdef CPU32}
- with NewSigRec do begin
-   Integer(@Sa_Handler):=SIG_IGN; // ignore signal
-   Sa_Mask[0]:=0;
-   Sa_Flags:=0;
-   end;
- res:=fpsigaction(SIGPIPE,@NewSigRec,@OldSigRec);
+  with NewSigRec do
+  begin
+    integer(@Sa_Handler) := SIG_IGN; // ignore signal
+    Sa_Mask[0] := 0;
+    Sa_Flags := 0;
+  end;
+  res := fpsigaction(SIGPIPE, @NewSigRec, @OldSigRec);
  {$endif}
  {$endif}
 end.
-

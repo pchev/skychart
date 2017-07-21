@@ -1,4 +1,5 @@
 unit u_speech;
+
 {
 Copyright (C) 2016 Patrick Chevalley
 
@@ -26,98 +27,108 @@ interface
 
 uses
  {$ifdef mswindows}
-   ComObj, Variants,
+  ComObj, Variants,
  {$endif}
   u_util, u_constant,
   Classes, SysUtils;
 
 procedure setlang;
-procedure speak(text: string);
+procedure speak(Text: string);
 
 
 implementation
 
 var
-  SpVoice: Variant;
-  spLang: string='';
-
+  SpVoice: variant;
+  spLang: string = '';
 
 {$ifdef mswindows}
-procedure speak(text: string);
+procedure speak(Text: string);
 var
-    SavedCW: Word;
+  SavedCW: word;
 begin
- try
-   if VarIsEmpty(SpVoice) then
+  try
+    if VarIsEmpty(SpVoice) then
       SpVoice := CreateOleObject('SAPI.SpVoice');
-   if not VarIsEmpty(SpVoice) then begin
+    if not VarIsEmpty(SpVoice) then
+    begin
       SavedCW := Get8087CW;
       try
-      Set8087CW(SavedCW or $4);
-      SpVoice.Speak(widestring(text), 0);
+        Set8087CW(SavedCW or $4);
+        SpVoice.Speak(WideString(Text), 0);
       finally
-      Set8087CW(SavedCW);
+        Set8087CW(SavedCW);
       end;
-   end;
- except
- end;
+    end;
+  except
+  end;
 end;
+
 {$endif}
 
 {$if defined(linux) or defined(freebsd)}
 procedure GetLang;
-var ll:TStringList;
-    sl,buf,buf1:string;
-    i,p:integer;
+var
+  ll: TStringList;
+  sl, buf, buf1: string;
+  i, p: integer;
 begin
- spLang:='en';
- sl:=Lang;
- p:=pos('-',sl);
- if p>0 then sl:=copy(sl,1,p-1);
- ll:=TStringList.Create;
- try
- ExecProcess('espeak --voices',ll);
- for i:=0 to ll.Count-1 do begin
-   buf:=words(ll[i],'',2,1);
-   if buf=Lang then begin
-      spLang:=buf;
-      break;
-   end;
-   if buf=sl then begin
-      spLang:=buf;
-   end;
-   p:=pos('-',buf);
-   if p>0 then begin
-      buf1:=copy(buf,1,p-1);
-      if buf1=sl then begin
-         spLang:=buf;
+  spLang := 'en';
+  sl := Lang;
+  p := pos('-', sl);
+  if p > 0 then
+    sl := copy(sl, 1, p - 1);
+  ll := TStringList.Create;
+  try
+    ExecProcess('espeak --voices', ll);
+    for i := 0 to ll.Count - 1 do
+    begin
+      buf := words(ll[i], '', 2, 1);
+      if buf = Lang then
+      begin
+        spLang := buf;
+        break;
       end;
-   end;
- end;
- finally
-  ll.Free;
- end;
+      if buf = sl then
+      begin
+        spLang := buf;
+      end;
+      p := pos('-', buf);
+      if p > 0 then
+      begin
+        buf1 := copy(buf, 1, p - 1);
+        if buf1 = sl then
+        begin
+          spLang := buf;
+        end;
+      end;
+    end;
+  finally
+    ll.Free;
+  end;
 end;
 
-procedure speak(text: string);
+procedure speak(Text: string);
 begin
- if splang='' then GetLang;
- ExecNoWait('espeak -v '+spLang+' "'+LowerCase(text)+'"');
+  if splang = '' then
+    GetLang;
+  ExecNoWait('espeak -v ' + spLang + ' "' + LowerCase(Text) + '"');
 end;
+
 {$endif}
 
 {$ifdef darwin}
-procedure speak(text: string);
+procedure speak(Text: string);
 begin
- ExecNoWait('osascript -e ''say "' + text + '"''');
+  ExecNoWait('osascript -e ''say "' + Text + '"''');
 end;
+
 {$endif}
 
 procedure setlang;
 begin
- spLang:='';
- SpVoice:=Unassigned;
+  spLang := '';
+  SpVoice := Unassigned;
 end;
 
 end.
-

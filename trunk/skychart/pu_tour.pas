@@ -25,7 +25,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_translation, LCLType, UScaleDPI, u_speech,
+uses
+  u_translation, LCLType, UScaleDPI, u_speech,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls;
 
 type
@@ -49,10 +50,10 @@ type
     procedure BtnPrevClick(Sender: TObject);
     procedure BtnSlewClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
   private
     { private declarations }
-    FFirst,FLast,Fprev,Fnext,Fslew: TNotifyEvent;
+    FFirst, FLast, Fprev, Fnext, Fslew: TNotifyEvent;
     procedure SetLang;
   public
     { public declarations }
@@ -74,12 +75,12 @@ implementation
 
 procedure Tf_tour.SetLang;
 begin
-  Caption:=rsTour;
-  Sound.Caption:=rsActivateVoic;
-  BtnEnd.Caption:=rsEnd;
-  BtnFirst.Caption:=rsFirst;
-  BtnLast.Caption:=rsLast;
-  BtnSlew.Caption:=rsSlew;
+  Caption := rsTour;
+  Sound.Caption := rsActivateVoic;
+  BtnEnd.Caption := rsEnd;
+  BtnFirst.Caption := rsFirst;
+  BtnLast.Caption := rsLast;
+  BtnSlew.Caption := rsSlew;
   u_speech.setlang;
 end;
 
@@ -91,8 +92,10 @@ end;
 
 procedure Tf_tour.BtnFirstClick(Sender: TObject);
 begin
-  if Assigned(FFirst) then FFirst(self);
-  if Sound.Checked then speak(ObjectName.Caption);
+  if Assigned(FFirst) then
+    FFirst(self);
+  if Sound.Checked then
+    speak(ObjectName.Caption);
 end;
 
 procedure Tf_tour.BtnEndClick(Sender: TObject);
@@ -102,48 +105,62 @@ end;
 
 procedure Tf_tour.BtnLastClick(Sender: TObject);
 begin
-  if Assigned(FLast) then FLast(self);
-  if Sound.Checked then speak(ObjectName.Caption);
+  if Assigned(FLast) then
+    FLast(self);
+  if Sound.Checked then
+    speak(ObjectName.Caption);
 end;
 
 procedure Tf_tour.BtnNextClick(Sender: TObject);
 begin
-  if Assigned(Fnext) then Fnext(self);
-  if Sound.Checked then speak(ObjectName.Caption);
+  if Assigned(Fnext) then
+    Fnext(self);
+  if Sound.Checked then
+    speak(ObjectName.Caption);
 end;
 
 procedure Tf_tour.BtnPrevClick(Sender: TObject);
 begin
-  if Assigned(Fprev) then Fprev(self);
-  if Sound.Checked then speak(ObjectName.Caption);
+  if Assigned(Fprev) then
+    Fprev(self);
+  if Sound.Checked then
+    speak(ObjectName.Caption);
 end;
 
 procedure Tf_tour.BtnSlewClick(Sender: TObject);
 begin
-  if Assigned(Fslew) then Fslew(self);
-  if Sound.Checked then speak(rsSlew);
+  if Assigned(Fslew) then
+    Fslew(self);
+  if Sound.Checked then
+    speak(rsSlew);
 end;
 
-procedure Tf_tour.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure Tf_tour.FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
 begin
   case Key of
-    VK_F,VK_HOME: BtnFirstClick(nil);
-    VK_L,VK_END: BtnLastClick(nil);
-    VK_I: if Sound.Checked then speak(ObjectName.Caption);
-    VK_N,VK_RIGHT,VK_DOWN,VK_NEXT: begin
-            BtnNextClick(nil);
-            if Shift=[ssCtrl] then BtnSlewClick(nil);
+    VK_F, VK_HOME: BtnFirstClick(nil);
+    VK_L, VK_END: BtnLastClick(nil);
+    VK_I: if Sound.Checked then
+        speak(ObjectName.Caption);
+    VK_N, VK_RIGHT, VK_DOWN, VK_NEXT:
+    begin
+      BtnNextClick(nil);
+      if Shift = [ssCtrl] then
+        BtnSlewClick(nil);
     end;
-    VK_P,VK_LEFT,VK_UP,VK_PRIOR: begin
-            BtnPrevClick(nil);
-            if Shift=[ssCtrl] then BtnSlewClick(nil);
+    VK_P, VK_LEFT, VK_UP, VK_PRIOR:
+    begin
+      BtnPrevClick(nil);
+      if Shift = [ssCtrl] then
+        BtnSlewClick(nil);
     end;
-    VK_S: begin
-            if Shift=[ssCtrl] then BtnSlewClick(nil);
+    VK_S:
+    begin
+      if Shift = [ssCtrl] then
+        BtnSlewClick(nil);
     end;
     VK_TAB: BtnSlewClick(nil);
   end;
 end;
 
 end.
-

@@ -28,7 +28,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_help, u_translation, u_util, u_constant, cu_radec, UScaleDPI,
+uses
+  u_help, u_translation, u_util, u_constant, cu_radec, UScaleDPI,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, ComCtrls, LResources, Math, LazHelpHTML;
 
@@ -58,64 +59,68 @@ type
   private
     { Déclarations privées }
     FApply: TNotifyEvent;
-    LockFov:boolean;
-    procedure Setfov(value:double);
+    LockFov: boolean;
+    procedure Setfov(Value: double);
   public
     { Déclarations publiques }
-    fov,logfov : double;
+    fov, logfov: double;
     procedure SetLang;
-    property onApply : TNotifyEvent read FApply write FApply;
+    property onApply: TNotifyEvent read FApply write FApply;
   end;
 
 var
   f_zoom: Tf_zoom;
 
 implementation
+
 {$R *.lfm}
 
 procedure Tf_zoom.SetLang;
 begin
-Caption:=rsSetFOV;
-BitBtn1.caption:=rsOK;
-BitBtn2.caption:=rsCancel;
-Button1.caption:=rsHelp;
-SetHelp(self,hlpSetFov);
+  Caption := rsSetFOV;
+  BitBtn1.Caption := rsOK;
+  BitBtn2.Caption := rsCancel;
+  Button1.Caption := rsHelp;
+  SetHelp(self, hlpSetFov);
 end;
 
-procedure Tf_zoom.Setfov(value:double);
+procedure Tf_zoom.Setfov(Value: double);
 begin
-fov:=value;
-logfov:=100*log10(fov);
-LockFov:=true;
-TrackBar1.Position := Round(logfov);
-LockFov:=false;
+  fov := Value;
+  logfov := 100 * log10(fov);
+  LockFov := True;
+  TrackBar1.Position := Round(logfov);
+  LockFov := False;
 end;
 
 procedure Tf_zoom.TrackBar1Change(Sender: TObject);
 begin
-  if LockFov then exit;
-  LockFov:=true;
-  logfov:=TrackBar1.Position;
-  fov:=power(10,logfov/100);
-  fov:=min(360,fov);
-  if fov>3 then fov:=round(fov);
-  RaDec1.value:=fov;
-  LockFov:=false;
+  if LockFov then
+    exit;
+  LockFov := True;
+  logfov := TrackBar1.Position;
+  fov := power(10, logfov / 100);
+  fov := min(360, fov);
+  if fov > 3 then
+    fov := round(fov);
+  RaDec1.Value := fov;
+  LockFov := False;
 end;
 
 procedure Tf_zoom.FormCreate(Sender: TObject);
 begin
   ScaleDPI(Self);
   SetLang;
-  LockFov:=false;
+  LockFov := False;
 end;
 
 procedure Tf_zoom.RaDec1Change(Sender: TObject);
 begin
-  if LockFov then exit;
-  LockFov:=true;
-  Setfov(RaDec1.value);
-  LockFov:=false;
+  if LockFov then
+    exit;
+  LockFov := True;
+  Setfov(RaDec1.Value);
+  LockFov := False;
 end;
 
 procedure Tf_zoom.Button1Click(Sender: TObject);
@@ -125,17 +130,18 @@ end;
 
 procedure Tf_zoom.BitBtn3Click(Sender: TObject);
 begin
-  if assigned(FApply) then FApply(self);
+  if assigned(FApply) then
+    FApply(self);
 end;
 
 procedure Tf_zoom.FormShow(Sender: TObject);
 begin
-setfov(fov);
-RaDec1.value:=fov;
-TrackBar1.SetTick(-78);
-TrackBar1.SetTick(0);
-TrackBar1.SetTick(100);
-TrackBar1.SetTick(200);
+  setfov(fov);
+  RaDec1.Value := fov;
+  TrackBar1.SetTick(-78);
+  TrackBar1.SetTick(0);
+  TrackBar1.SetTick(100);
+  TrackBar1.SetTick(200);
 end;
 
 end.

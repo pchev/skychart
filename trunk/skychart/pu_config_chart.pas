@@ -22,10 +22,11 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 }
-                            
+
 interface
 
-uses u_help, u_translation, u_constant, u_projection, u_util, fu_config_chart,
+uses
+  u_help, u_translation, u_constant, u_projection, u_util, fu_config_chart,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, UScaleDPI,
   StdCtrls, ExtCtrls, enhedits, ComCtrls, LResources,
   Buttons, cu_zoomimage, LazHelpHTML;
@@ -54,18 +55,19 @@ type
     { Public declarations }
     procedure SetLang;
   end;
-  
+
 implementation
+
 {$R *.lfm}
 
 procedure Tf_configchart.SetLang;
 begin
-Caption:=rsChartCoordin;
-Button3.caption:=rsOK;
-Button4.caption:=rsApply;
-Button5.caption:=rsCancel;
-Button6.caption:=rsHelp;
-SetHelp(self,hlpCfgChart);
+  Caption := rsChartCoordin;
+  Button3.Caption := rsOK;
+  Button4.Caption := rsApply;
+  Button5.Caption := rsCancel;
+  Button6.Caption := rsHelp;
+  SetHelp(self, hlpCfgChart);
 end;
 
 procedure Tf_configchart.FormShow(Sender: TObject);
@@ -73,8 +75,7 @@ begin
   f_config_chart1.init;
 end;
 
-procedure Tf_configchart.FormClose(Sender: TObject;
-  var CloseAction: TCloseAction);
+procedure Tf_configchart.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   f_config_chart1.lock;
 end;
@@ -87,7 +88,8 @@ end;
 
 procedure Tf_configchart.Button4Click(Sender: TObject);
 begin
- if assigned(f_config_chart1.onApplyConfig) then f_config_chart1.onApplyConfig(f_config_chart1);
+  if assigned(f_config_chart1.onApplyConfig) then
+    f_config_chart1.onApplyConfig(f_config_chart1);
 end;
 
 procedure Tf_configchart.Button6Click(Sender: TObject);

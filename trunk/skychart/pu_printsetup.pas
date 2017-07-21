@@ -28,7 +28,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, LazUTF8, LazFileUtils, UScaleDPI,
+uses
+  u_help, u_translation, u_constant, u_util, LazUTF8, LazFileUtils, UScaleDPI,
   SysUtils, Types, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Printers, ExtCtrls, enhedits, Buttons,
   LResources, PrintersDlgs, EditBtn, LazHelpHTML;
@@ -77,7 +78,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PaperSizeChange(Sender: TObject);
-    procedure printcmd1AcceptFileName(Sender: TObject; var Value: String);
+    procedure printcmd1AcceptFileName(Sender: TObject; var Value: string);
     procedure qtsetupClick(Sender: TObject);
     procedure printmodeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -98,136 +99,154 @@ var
   f_printsetup: Tf_printsetup;
 
 implementation
+
 {$R *.lfm}
 
 procedure Tf_printsetup.SetLang;
 begin
-Caption:=rsPrinterSetup;
-Label2.caption:=rsPrinter;
-Label3.caption:=rsResolution;
-Label7.caption:=rsSelectTheSys;
-qtsetup.caption:=rsPrinterSetup;
-Label1.caption:=rsRasterResolu;
-Label4.caption:=StringReplace(rsCommandToUse,'.',':',[]);
-Label5.caption:=rsSize;
-Label6.caption:=rsPathToSaveTh;
-Label8.Caption:=rsWidth;
-Label9.caption:=Label4.caption;
-Label10.caption:=rsPathToSaveTh;
-Label11.Caption:=rsHeight;
-printmode.caption:=rsPrintMethod;
-printmode.Items[0]:=rsSystemPrinte;
-printmode.Items[1]:=rsPostscript;
-printmode.Items[2]:=rsBitmapFile;
-Ok.Caption:=rsOK;
-Cancel.Caption:=rsCancel;
-Button1.caption:=rsHelp;
-SetHelp(self,hlpMenuFile);
+  Caption := rsPrinterSetup;
+  Label2.Caption := rsPrinter;
+  Label3.Caption := rsResolution;
+  Label7.Caption := rsSelectTheSys;
+  qtsetup.Caption := rsPrinterSetup;
+  Label1.Caption := rsRasterResolu;
+  Label4.Caption := StringReplace(rsCommandToUse, '.', ':', []);
+  Label5.Caption := rsSize;
+  Label6.Caption := rsPathToSaveTh;
+  Label8.Caption := rsWidth;
+  Label9.Caption := Label4.Caption;
+  Label10.Caption := rsPathToSaveTh;
+  Label11.Caption := rsHeight;
+  printmode.Caption := rsPrintMethod;
+  printmode.Items[0] := rsSystemPrinte;
+  printmode.Items[1] := rsPostscript;
+  printmode.Items[2] := rsBitmapFile;
+  Ok.Caption := rsOK;
+  Cancel.Caption := rsCancel;
+  Button1.Caption := rsHelp;
+  SetHelp(self, hlpMenuFile);
 end;
 
 procedure Tf_printsetup.FormShow(Sender: TObject);
 begin
-PaperSize.ItemIndex:=cm.Paper-1;
-updprtsetup;
+  PaperSize.ItemIndex := cm.Paper - 1;
+  updprtsetup;
 end;
 
 procedure Tf_printsetup.updprtsetup;
-var i:integer;
-    ok:boolean;
+var
+  i: integer;
+  ok: boolean;
 begin
-try
-lockupd:=true;
-if (cm.PrintMethod=0)and(Printer.PrinterIndex<0) then begin
-  ShowMessage(rsNoPrinterFou);
-  cm.PrintMethod:=2;
-end;
-case cm.PrintMethod of
-0: begin
-   printmode.ItemIndex:=0;
-   bmpoption.Visible:=false;
-   psoption.Visible:=false;
-   printeroption.Visible:=true;
-   GetPrinterResolution(cm.prtname,i);
-   if i>75 then
-      ResolWarning.Caption:=''
-   else
-      ResolWarning.Caption:=rsWarningLowRe;
-   qtprintername.Caption:=cm.prtname;
-   qtprintresol.Caption:=inttostr(i);
-   end;
-1: begin
-   printmode.ItemIndex:=1;
-   bmpoption.Visible:=false;
-   psoption.Visible:=true;
-   printeroption.Visible:=false;
-   printcmd1.Text:=cm.PrintCmd1;
-   savepath1.Directory:=SysToUTF8(cm.PrintTmpPath);
-   prtres.Value:=cm.PrinterResolution;
-   if cm.PrintCmd1='' then cmdreport1.text:=''
-   else begin
+  try
+    lockupd := True;
+    if (cm.PrintMethod = 0) and (Printer.PrinterIndex < 0) then
+    begin
+      ShowMessage(rsNoPrinterFou);
+      cm.PrintMethod := 2;
+    end;
+    case cm.PrintMethod of
+      0:
+      begin
+        printmode.ItemIndex := 0;
+        bmpoption.Visible := False;
+        psoption.Visible := False;
+        printeroption.Visible := True;
+        GetPrinterResolution(cm.prtname, i);
+        if i > 75 then
+          ResolWarning.Caption := ''
+        else
+          ResolWarning.Caption := rsWarningLowRe;
+        qtprintername.Caption := cm.prtname;
+        qtprintresol.Caption := IntToStr(i);
+      end;
+      1:
+      begin
+        printmode.ItemIndex := 1;
+        bmpoption.Visible := False;
+        psoption.Visible := True;
+        printeroption.Visible := False;
+        printcmd1.Text := cm.PrintCmd1;
+        savepath1.Directory := SysToUTF8(cm.PrintTmpPath);
+        prtres.Value := cm.PrinterResolution;
+        if cm.PrintCmd1 = '' then
+          cmdreport1.Text := ''
+        else
+        begin
      {$ifdef unix}
-       ok:=(0=exec('which '+cm.PrintCmd1));
+          ok := (0 = exec('which ' + cm.PrintCmd1));
      {$endif}
      {$ifdef mswindows}
-       ok:=Fileexists(cm.PrintCmd1);
+          ok := Fileexists(cm.PrintCmd1);
      {$endif}
-     if ok then begin
-        cmdreport1.text:=rsCommandFound;
-     end else begin
-        cmdreport1.text:=rsCommandNotFo;
-     end;
-   end;
-   end;
-2: begin
-   printmode.ItemIndex:=2;
-   bmpoption.Visible:=true;
-   psoption.Visible:=false;
-   printeroption.Visible:=false;
-   printcmd2.Text:=cm.PrintCmd2;
-   savepath2.Text:=cm.PrintTmpPath;
-   bmpw.Value:=cm.PrintBmpWidth;
-   bmph.Value:=cm.PrintBmpHeight;
-   if cm.PrintCmd2='' then cmdreport2.text:=''
-   else begin
+          if ok then
+          begin
+            cmdreport1.Text := rsCommandFound;
+          end
+          else
+          begin
+            cmdreport1.Text := rsCommandNotFo;
+          end;
+        end;
+      end;
+      2:
+      begin
+        printmode.ItemIndex := 2;
+        bmpoption.Visible := True;
+        psoption.Visible := False;
+        printeroption.Visible := False;
+        printcmd2.Text := cm.PrintCmd2;
+        savepath2.Text := cm.PrintTmpPath;
+        bmpw.Value := cm.PrintBmpWidth;
+        bmph.Value := cm.PrintBmpHeight;
+        if cm.PrintCmd2 = '' then
+          cmdreport2.Text := ''
+        else
+        begin
      {$ifdef unix}
-       ok:=(0=exec('which '+cm.PrintCmd2));
+          ok := (0 = exec('which ' + cm.PrintCmd2));
      {$endif}
      {$ifdef mswindows}
-       ok:=Fileexists(cm.PrintCmd2);
+          ok := Fileexists(cm.PrintCmd2);
      {$endif}
-     if ok then begin
-        cmdreport2.text:=rsCommandFound;
-     end else begin
-        cmdreport2.text:=rsCommandNotFo;
-     end;
-   end;
-   end;
-end;
-finally
-lockupd:=false;
-end;
+          if ok then
+          begin
+            cmdreport2.Text := rsCommandFound;
+          end
+          else
+          begin
+            cmdreport2.Text := rsCommandNotFo;
+          end;
+        end;
+      end;
+    end;
+  finally
+    lockupd := False;
+  end;
 end;
 
 procedure Tf_printsetup.qtsetupClick(Sender: TObject);
 begin
 {$ifdef mswindows}
-  PrinterSetupDialog1.execute;
+  PrinterSetupDialog1.Execute;
 {$endif}
 {$ifdef unix}
-  PrintDialog1.execute;
+  PrintDialog1.Execute;
 {$endif}
   updprtsetup;
 end;
 
 procedure Tf_printsetup.FormCreate(Sender: TObject);
-var i: integer;
+var
+  i: integer;
 begin
-ScaleDPI(Self);
-SetLang;
-PaperSize.Clear;
-for i:=1 to PaperNumber do begin
-   PaperSize.Items.Add(Papername[i]);
-end;
+  ScaleDPI(Self);
+  SetLang;
+  PaperSize.Clear;
+  for i := 1 to PaperNumber do
+  begin
+    PaperSize.Items.Add(Papername[i]);
+  end;
 end;
 
 procedure Tf_printsetup.Button1Click(Sender: TObject);
@@ -247,57 +266,62 @@ end;
 
 procedure Tf_printsetup.PaperSizeChange(Sender: TObject);
 begin
-  cm.Paper:=PaperSize.ItemIndex+1;
+  cm.Paper := PaperSize.ItemIndex + 1;
 end;
 
 procedure Tf_printsetup.printmodeClick(Sender: TObject);
 begin
-cm.PrintMethod:=printmode.ItemIndex;
-updprtsetup;
+  cm.PrintMethod := printmode.ItemIndex;
+  updprtsetup;
 end;
 
 procedure Tf_printsetup.prtresChange(Sender: TObject);
 begin
-if lockupd then exit;
-cm.PrinterResolution:=prtres.value;
+  if lockupd then
+    exit;
+  cm.PrinterResolution := prtres.Value;
 end;
 
 ////////// duplicate because of filenameedit onchange bug //////////////////////////
 procedure Tf_printsetup.printcmd1Change(Sender: TObject);
 begin
-if lockupd then exit;
-case cm.PrintMethod of
-1: cm.PrintCmd1:=printcmd1.Text;
-2: cm.PrintCmd2:=printcmd2.Text;
-end;
-updprtsetup;
+  if lockupd then
+    exit;
+  case cm.PrintMethod of
+    1: cm.PrintCmd1 := printcmd1.Text;
+    2: cm.PrintCmd2 := printcmd2.Text;
+  end;
+  updprtsetup;
 end;
 
-procedure Tf_printsetup.printcmd1AcceptFileName(Sender: TObject;
-  var Value: String);
+procedure Tf_printsetup.printcmd1AcceptFileName(Sender: TObject; var Value: string);
 begin
-if lockupd then exit;
-case cm.PrintMethod of
-1: cm.PrintCmd1:=value;
-2: cm.PrintCmd2:=value;
-end;
-updprtsetup;
+  if lockupd then
+    exit;
+  case cm.PrintMethod of
+    1: cm.PrintCmd1 := Value;
+    2: cm.PrintCmd2 := Value;
+  end;
+  updprtsetup;
 end;
 //////////////////////////////////////////
 
 procedure Tf_printsetup.savepathExit(Sender: TObject);
-var buf: string;
+var
+  buf: string;
 begin
-if lockupd then exit;
-case cm.PrintMethod of
-1: buf:=savepath1.Text;
-2: buf:=savepath2.Text;
-else buf:='';
-end;
-if DirectoryIsWritable(buf) then
-   cm.PrintTmpPath:=buf
-else
-   ShowMessage(rsInvalidPath+buf);
+  if lockupd then
+    exit;
+  case cm.PrintMethod of
+    1: buf := savepath1.Text;
+    2: buf := savepath2.Text;
+    else
+      buf := '';
+  end;
+  if DirectoryIsWritable(buf) then
+    cm.PrintTmpPath := buf
+  else
+    ShowMessage(rsInvalidPath + buf);
 end;
 
 end.

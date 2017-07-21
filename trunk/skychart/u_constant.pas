@@ -28,7 +28,7 @@ interface
 
 uses gcatunit,
   cu_tz, dynlibs, BGRABitmap,
-  Classes, sysutils, Controls, FPCanvas, Graphics;
+  Classes, SysUtils, Controls, FPCanvas, Graphics;
 
 const
   MaxColor = 35;
@@ -38,10 +38,10 @@ type
   Starcolarray = array [0..Maxcolor] of Tcolor;
   // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid  23-35: dso
   TSkycolor = array[0..7] of Tcolor;
-  Titt = (ittlinear,ittramp,ittlog,ittsqrt);
+  Titt = (ittlinear, ittramp, ittlog, ittsqrt);
 
-  TExecuteCmd = function(cname:string; arg:Tstringlist):string of object;
-  TSendInfo = procedure(Sender: TObject; origin,str:string) of object;
+  TExecuteCmd = function(cname: string; arg: TStringList): string of object;
+  TSendInfo = procedure(Sender: TObject; origin, str: string) of object;
 
 {$i revision.inc}
 
@@ -49,11 +49,8 @@ type
 
 const
   cdccpy = 'Copyright (C) 2002-2017 Patrick Chevalley';
-  cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf +
-    'Peter Dean,' + crlf +
-    'John Sunderland' + crlf  +
-    'Anat Ruangrassamee'+ crlf  +
-    'Sasa Zeman';
+  cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf + 'Peter Dean,' +
+    crlf + 'John Sunderland' + crlf + 'Anat Ruangrassamee' + crlf + 'Sasa Zeman';
   MaxPlSim = 500;
   MaxAstSim = 100;
   MaxComet = 500;
@@ -84,10 +81,13 @@ const
   minjdnut = 2378496.5; // 1800   //limit for nutation calculation using Meeus function
   maxjdnut = 2524593.5; // 2200
   // julian - gregorian calendar switch
-  DefaultGregorianStart=15821015;
-  DefaultGregorianStartJD=2299161;
-  MonthStart: array [1..13] of integer = (1,32,60,91,121,152,182,213,244,274,305,335,366);
-  MonthName: array [1..12] of string =('January','February','March','April','May','June','July','August','September','October','November','December');
+  DefaultGregorianStart = 15821015;
+  DefaultGregorianStartJD = 2299161;
+  MonthStart: array [1..13] of integer =
+    (1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366);
+  MonthName: array [1..12] of
+    string = ('January', 'February', 'March', 'April', 'May', 'June', 'July',
+    'August', 'September', 'October', 'November', 'December');
   km_au = 149597870.691;
   clight = 299792.458;
   grsun = 1.974126e-8;  // twice the gravitational radius of the Sun
@@ -117,8 +117,8 @@ const
   FovMax = pi2;
   DefaultPrtRes = 300;
   encryptpwd = 'zh6Tiq4h;90uA3.ert';
-  maxscriptsock=10;
-  MaxMenulevel=10;
+  maxscriptsock = 10;
+  MaxMenulevel = 10;
   //                          0         1                                       5                                                 10                                                15                                                20                            23        24        25        26        27        28        29        30        31        32        33        34        35
   //                          sky       -0.3      -0.1      0.2       0.5       0.8       1.3       1.3+      galaxy    cluster   neb       -white-   az grid   eq grid   orbit     const     boundary  eyepiece  misc      horizon   asteroid  comet     milkyway  ColorAst  ColorOCl  ColorGCl  ColorPNe  ColorDN   ColorEN   ColorRN   ColorSN   ColorGxy  ColorGxyCl ColorQ   ColorGL   ColorNE
   DfColor: Starcolarray =
@@ -153,7 +153,8 @@ const
     $000000ff, $000000ff, $00ff00ff, $008080ff, $000000ff, $00000040, $00000040,
     $00000080, $00000040, $00000040, $000000A0, $00000080, $00000040, clYellow,
     $000000A0, $00000020, $000000A0, $000000A0, $000000A0, $000000A0, $000000A0,
-    $000000A0, $000000A0, $000000A0, $000000A0, $000000A0, $000000A0, $000000A0, $000000A0);
+    $000000A0, $000000A0, $000000A0, $000000A0, $000000A0, $000000A0,
+    $000000A0, $000000A0);
   DfWBColor: Starcolarray =
     (clWhite, clBlack, clBlack, clBlack, clBlack, clBlack, clBlack,
     clBlack, clBlack, clBlack, clBlack, clBlack, clBlack, clBlack,
@@ -161,7 +162,8 @@ const
     clBlack, clWhite, clBlack, clBlack, clBlack, clBlack, clBlack,
     clBlack, clBlack, clBlack, clBlack, clBlack, clBlack, clBlack, clBlack);
   dfskycolor: Tskycolor =
-    ($00200000, $00f03c3c, $00c83232, $00a02828, $00780000, $00640010, $003c0010, $00000000);
+    ($00200000, $00f03c3c, $00c83232, $00a02828, $00780000, $00640010,
+    $003c0010, $00000000);
 
   //  End of deep-sky objects colour
 
@@ -174,113 +176,116 @@ const
   PaperHeight: array[1..PaperNumber] of
     single = (8.27, 11.69, 16.54, 23.39, 33.11, 46.81, 11.0, 14.0, 17.0);
 
-  maxconst=88;
-  constel: array[1..maxconst,1..3] of string =(
-  ('AND','ANDROMEDA','ANDROMEDAE'),
-  ('ANT','ANTLIA','ANTLIAE'),
-  ('APS','APUS','APODIS'),
-  ('AQR','AQUARIUS','AQUARII'),
-  ('AQL','AQUILA','AQUILAE'),
-  ('ARA','ARA','ARAE'),
-  ('ARI','ARIES','ARIETIS'),
-  ('AUR','AURIGA','AURIGAE'),
-  ('BOO','BOOTES','BOOTIS'),
-  ('CAE','CAELUM','CAELI'),
-  ('CAM','CAMELOPARDALIS','CAMELOPARDALIS'),
-  ('CNC','CANCER','CANCRI'),
-  ('CVN','CANES VENATICI','CANUM VENATICORUM'),
-  ('CMA','CANIS MAJOR','CANIS MAJORIS'),
-  ('CMI','CANIS MINOR','CANIS MINORIS'),
-  ('CAP','CAPRICORNUS','CAPRICORNI'),
-  ('CAR','CARINA','CARINAE'),
-  ('CAS','CASSIOPEIA','CASSIOPEIAE'),
-  ('CEN','CENTAURUS','CENTAURI'),
-  ('CEP','CEPHEUS','CEPHEI'),
-  ('CET','CETUS','CETI'),
-  ('CHA','CHAMAELEON','CHAMAELEONTIS'),
-  ('CIR','CIRCINUS','CIRCINI'),
-  ('COL','COLUMBA','COLUMBAE'),
-  ('COM','COMA BERENICES','COMAE BERENICES'),
-  ('CRA','CORONA AUSTRALIS','CORONAE AUSTRALIS'),
-  ('CRB','CORONA BOREALIS','CORONAE BOREALIS'),
-  ('CRV','CORVUS','CORVI'),
-  ('CRT','CRATER','CRATERIS'),
-  ('CRU','CRUX','CRUCIS'),
-  ('CYG','CYGNUS','CYGNI'),
-  ('DEL','DELPHINUS','DELPHINI'),
-  ('DOR','DORADO','DORADUS'),
-  ('DRA','DRACO','DRACONIS'),
-  ('EQU','EQUULEUS','EQUULEI'),
-  ('ERI','ERIDANUS','ERIDANI'),
-  ('FOR','FORNAX','FORNACIS'),
-  ('GEM','GEMINI','GEMINORUM'),
-  ('GRU','GRUS','GRUIS'),
-  ('HER','HERCULES','HERCULIS'),
-  ('HOR','HOROLOGIUM','HOROLOGII'),
-  ('HYA','HYDRA','HYDRAE'),
-  ('HYI','HYDRUS','HYDRI'),
-  ('IND','INDUS','INDI'),
-  ('LAC','LACERTA','LACERTAE'),
-  ('LEO','LEO','LEONIS'),
-  ('LMI','LEO MINOR','LEONIS MINORIS'),
-  ('LEP','LEPUS','LEPORIS'),
-  ('LIB','LIBRA','LIBRAE'),
-  ('LUP','LUPUS','LUPI'),
-  ('LYN','LYNX','LYNCIS'),
-  ('LYR','LYRA','LYRAE'),
-  ('MEN','MENSA','MENSAE'),
-  ('MIC','MICROSCOPIUM','MICROSCOPII'),
-  ('MON','MONOCEROS','MONOCEROTIS'),
-  ('MUS','MUSCA','MUSCAE'),
-  ('NOR','NORMA','NORMAE'),
-  ('OCT','OCTANS','OCTANTIS'),
-  ('OPH','OPHIUCHUS','OPHIUCHI'),
-  ('ORI','ORION','ORIONIS'),
-  ('PAV','PAVO','PAVONI'),
-  ('PEG','PEGASUS','PEGASI'),
-  ('PER','PERSEUS','PERSEI'),
-  ('PHE','PHOENIX','PHOENICIS'),
-  ('PIC','PICTOR','PICTORIS'),
-  ('PSC','PISCES','PISCIUM'),
-  ('PSA','PISCIS AUSTRINUS','PISCIS AUSTRINI'),
-  ('PUP','PUPPIS','PUPPIS'),
-  ('PYX','PYXIS','PYXIDIS'),
-  ('RET','RETICULUM','RETICULI'),
-  ('SGE','SAGITTA','SAGITTAE'),
-  ('SGR','SAGITTARIUS','SAGITTARII'),
-  ('SCO','SCORPIUS','SCORPII'),
-  ('SCL','SCULPTOR','SCULPTORIS'),
-  ('SCT','SCUTUM','SCUTI'),
-  ('SER','SERPENS','SERPENTIS'),
-  ('SEX','SEXTANS','SEXTANTIS'),
-  ('TAU','TAURUS','TAURI'),
-  ('TEL','TELESCOPIUM','TELESCOPII'),
-  ('TRI','TRIANGULUM','TRIANGULI'),
-  ('TRA','TRIANGULUM AUSTRALE','TRIANGULI AUSTRALIS'),
-  ('TUC','TUCANA','TUCANAE'),
-  ('UMA','URSA MAJOR','URSAE MAJORIS'),
-  ('UMI','URSA MINOR','URSAE MINORIS'),
-  ('VEL','VELA','VELORUM'),
-  ('VIR','VIRGO','VIRGINIS'),
-  ('VOL','VOLANS','VOLANTIS'),
-  ('VUL','VULPECULA','VULPECULAE')
-  );
+  maxconst = 88;
+  constel: array[1..maxconst, 1..3] of string = (
+    ('AND', 'ANDROMEDA', 'ANDROMEDAE'),
+    ('ANT', 'ANTLIA', 'ANTLIAE'),
+    ('APS', 'APUS', 'APODIS'),
+    ('AQR', 'AQUARIUS', 'AQUARII'),
+    ('AQL', 'AQUILA', 'AQUILAE'),
+    ('ARA', 'ARA', 'ARAE'),
+    ('ARI', 'ARIES', 'ARIETIS'),
+    ('AUR', 'AURIGA', 'AURIGAE'),
+    ('BOO', 'BOOTES', 'BOOTIS'),
+    ('CAE', 'CAELUM', 'CAELI'),
+    ('CAM', 'CAMELOPARDALIS', 'CAMELOPARDALIS'),
+    ('CNC', 'CANCER', 'CANCRI'),
+    ('CVN', 'CANES VENATICI', 'CANUM VENATICORUM'),
+    ('CMA', 'CANIS MAJOR', 'CANIS MAJORIS'),
+    ('CMI', 'CANIS MINOR', 'CANIS MINORIS'),
+    ('CAP', 'CAPRICORNUS', 'CAPRICORNI'),
+    ('CAR', 'CARINA', 'CARINAE'),
+    ('CAS', 'CASSIOPEIA', 'CASSIOPEIAE'),
+    ('CEN', 'CENTAURUS', 'CENTAURI'),
+    ('CEP', 'CEPHEUS', 'CEPHEI'),
+    ('CET', 'CETUS', 'CETI'),
+    ('CHA', 'CHAMAELEON', 'CHAMAELEONTIS'),
+    ('CIR', 'CIRCINUS', 'CIRCINI'),
+    ('COL', 'COLUMBA', 'COLUMBAE'),
+    ('COM', 'COMA BERENICES', 'COMAE BERENICES'),
+    ('CRA', 'CORONA AUSTRALIS', 'CORONAE AUSTRALIS'),
+    ('CRB', 'CORONA BOREALIS', 'CORONAE BOREALIS'),
+    ('CRV', 'CORVUS', 'CORVI'),
+    ('CRT', 'CRATER', 'CRATERIS'),
+    ('CRU', 'CRUX', 'CRUCIS'),
+    ('CYG', 'CYGNUS', 'CYGNI'),
+    ('DEL', 'DELPHINUS', 'DELPHINI'),
+    ('DOR', 'DORADO', 'DORADUS'),
+    ('DRA', 'DRACO', 'DRACONIS'),
+    ('EQU', 'EQUULEUS', 'EQUULEI'),
+    ('ERI', 'ERIDANUS', 'ERIDANI'),
+    ('FOR', 'FORNAX', 'FORNACIS'),
+    ('GEM', 'GEMINI', 'GEMINORUM'),
+    ('GRU', 'GRUS', 'GRUIS'),
+    ('HER', 'HERCULES', 'HERCULIS'),
+    ('HOR', 'HOROLOGIUM', 'HOROLOGII'),
+    ('HYA', 'HYDRA', 'HYDRAE'),
+    ('HYI', 'HYDRUS', 'HYDRI'),
+    ('IND', 'INDUS', 'INDI'),
+    ('LAC', 'LACERTA', 'LACERTAE'),
+    ('LEO', 'LEO', 'LEONIS'),
+    ('LMI', 'LEO MINOR', 'LEONIS MINORIS'),
+    ('LEP', 'LEPUS', 'LEPORIS'),
+    ('LIB', 'LIBRA', 'LIBRAE'),
+    ('LUP', 'LUPUS', 'LUPI'),
+    ('LYN', 'LYNX', 'LYNCIS'),
+    ('LYR', 'LYRA', 'LYRAE'),
+    ('MEN', 'MENSA', 'MENSAE'),
+    ('MIC', 'MICROSCOPIUM', 'MICROSCOPII'),
+    ('MON', 'MONOCEROS', 'MONOCEROTIS'),
+    ('MUS', 'MUSCA', 'MUSCAE'),
+    ('NOR', 'NORMA', 'NORMAE'),
+    ('OCT', 'OCTANS', 'OCTANTIS'),
+    ('OPH', 'OPHIUCHUS', 'OPHIUCHI'),
+    ('ORI', 'ORION', 'ORIONIS'),
+    ('PAV', 'PAVO', 'PAVONI'),
+    ('PEG', 'PEGASUS', 'PEGASI'),
+    ('PER', 'PERSEUS', 'PERSEI'),
+    ('PHE', 'PHOENIX', 'PHOENICIS'),
+    ('PIC', 'PICTOR', 'PICTORIS'),
+    ('PSC', 'PISCES', 'PISCIUM'),
+    ('PSA', 'PISCIS AUSTRINUS', 'PISCIS AUSTRINI'),
+    ('PUP', 'PUPPIS', 'PUPPIS'),
+    ('PYX', 'PYXIS', 'PYXIDIS'),
+    ('RET', 'RETICULUM', 'RETICULI'),
+    ('SGE', 'SAGITTA', 'SAGITTAE'),
+    ('SGR', 'SAGITTARIUS', 'SAGITTARII'),
+    ('SCO', 'SCORPIUS', 'SCORPII'),
+    ('SCL', 'SCULPTOR', 'SCULPTORIS'),
+    ('SCT', 'SCUTUM', 'SCUTI'),
+    ('SER', 'SERPENS', 'SERPENTIS'),
+    ('SEX', 'SEXTANS', 'SEXTANTIS'),
+    ('TAU', 'TAURUS', 'TAURI'),
+    ('TEL', 'TELESCOPIUM', 'TELESCOPII'),
+    ('TRI', 'TRIANGULUM', 'TRIANGULI'),
+    ('TRA', 'TRIANGULUM AUSTRALE', 'TRIANGULI AUSTRALIS'),
+    ('TUC', 'TUCANA', 'TUCANAE'),
+    ('UMA', 'URSA MAJOR', 'URSAE MAJORIS'),
+    ('UMI', 'URSA MINOR', 'URSAE MINORIS'),
+    ('VEL', 'VELA', 'VELORUM'),
+    ('VIR', 'VIRGO', 'VIRGINIS'),
+    ('VOL', 'VOLANS', 'VOLANTIS'),
+    ('VUL', 'VULPECULA', 'VULPECULAE')
+    );
 
-  maxgreek=25;
+  maxgreek = 25;
   greek: array[1..2, 1..maxgreek] of
     string = (('Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta', 'Eta',
     'Theta', 'Iota', 'Kappa', 'Lambda', 'Mu', 'Nu', 'Xi', 'Omicron', 'Pi', 'Rho',
-    'Sigma', 'Tau', 'Upsilon', 'Phi', 'Chi', 'Psi', 'Omega','Xi'),
+    'Sigma', 'Tau', 'Upsilon', 'Phi', 'Chi', 'Psi', 'Omega', 'Xi'),
     ('alp', 'bet', 'gam', 'del', 'eps', 'zet', 'eta', 'the', 'iot',
-    'kap', 'lam', 'mu', 'nu', 'xi', 'omi', 'pi', 'rho', 'sig', 'tau', 'ups', 'phi', 'chi', 'psi', 'ome','ksi'));
+    'kap', 'lam', 'mu', 'nu', 'xi', 'omi', 'pi', 'rho', 'sig', 'tau',
+    'ups', 'phi', 'chi', 'psi', 'ome', 'ksi'));
   greeksymbol: array[1..2, 1..maxgreek] of
     string = (('alp', 'bet', 'gam', 'del', 'eps', 'zet', 'eta', 'the', 'iot', 'kap',
-    'lam', 'mu', 'nu', 'xi', 'omi', 'pi', 'rho', 'sig', 'tau', 'ups', 'phi', 'chi', 'psi', 'ome', 'ksi'),
+    'lam', 'mu', 'nu', 'xi', 'omi', 'pi', 'rho', 'sig', 'tau', 'ups',
+    'phi', 'chi', 'psi', 'ome', 'ksi'),
     ('a', 'b', 'g', 'd', 'e', 'z', 'h', 'q', 'i', 'k', 'l', 'm',
     'n', 'x', 'o', 'p', 'r', 's', 't', 'u', 'f', 'c', 'y', 'w', 'x'));
   greekUTF8: array[1..maxgreek] of
     word = ($CEB1, $CEB2, $CEB3, $CEB4, $CEB5, $CEB6, $CEB7, $CEB8, $CEB9, $CEBA,
-    $CEBB, $CEBC, $CEBD, $CEBE, $CEBF, $CF80, $CF81, $CF83, $CF84, $CF85, $CF86, $CF87, $CF88, $CF89, $CEBE);
+    $CEBB, $CEBC, $CEBD, $CEBE, $CEBF, $CF80, $CF81, $CF83, $CF84,
+    $CF85, $CF86, $CF87, $CF88, $CF89, $CEBE);
   pla: array[1..MaxPla] of string =
     ('Mercury ', 'Venus   ', '*       ', 'Mars    ', 'Jupiter ',
     'Saturn  ', 'Uranus  ', 'Neptune ', 'Pluto   ', 'Sun     ', 'Moon    ',
@@ -291,8 +296,10 @@ const
     'Oberon  ', 'Phobos  ', 'Deimos  ', 'Sat.Ring', 'E.Shadow',
     'Phoebe  ', 'Triton  ', 'Nereid  ', 'Charon  ',
     'Amalthea', 'Thebe   ', 'Adrastea', 'Metis   ',
-    'Janus   ', 'Epimetheus', 'Helene', 'Telesto', 'Calypso', 'Atlas', 'Prometheus', 'Pandora', 'Pan', 'Daphnis',
-    'Cordelia', 'Ophelia', 'Bianca', 'Cressida', 'Desdemona', 'Juliet', 'Portia', 'Rosalind', 'Belinda', 'Puck', 'Perdita', 'Mab', 'Cupid',
+    'Janus   ', 'Epimetheus', 'Helene', 'Telesto', 'Calypso', 'Atlas',
+    'Prometheus', 'Pandora', 'Pan', 'Daphnis',
+    'Cordelia', 'Ophelia', 'Bianca', 'Cressida', 'Desdemona', 'Juliet',
+    'Portia', 'Rosalind', 'Belinda', 'Puck', 'Perdita', 'Mab', 'Cupid',
     'Naiad', 'Thalassa', 'Despina', 'Galatea', 'Larissa', 'Proteus');
 
 
@@ -307,25 +314,35 @@ const
     'Oberon  ', 'Phobos  ', 'Deimos  ', 'Sat.Ring', 'E.Shadow',
     'Phoebe  ', 'Triton  ', 'Nereid  ', 'Charon  ',
     'Amalthea', 'Thebe   ', 'Adrastea', 'Metis   ',
-    'Janus   ', 'Epimetheus', 'Helene', 'Telesto', 'Calypso', 'Atlas', 'Prometheus', 'Pandora', 'Pan', 'Daphnis',
-    'Cordelia', 'Ophelia', 'Bianca', 'Cressida', 'Desdemona', 'Juliet', 'Portia', 'Rosalind', 'Belinda', 'Puck', 'Perdita', 'Mab', 'Cupid',
+    'Janus   ', 'Epimetheus', 'Helene', 'Telesto', 'Calypso', 'Atlas',
+    'Prometheus', 'Pandora', 'Pan', 'Daphnis',
+    'Cordelia', 'Ophelia', 'Bianca', 'Cressida', 'Desdemona', 'Juliet',
+    'Portia', 'Rosalind', 'Belinda', 'Puck', 'Perdita', 'Mab', 'Cupid',
     'Naiad', 'Thalassa', 'Despina', 'Galatea', 'Larissa', 'Proteus');
-  CentralPlanet: array[1..36]of integer=(1,2,3,4,5,6,7,8,9,10,11,5,5,5,5,6,6,6,6,6,6,6,6,7,7,7,7,7,4,4,6,3,6,8,8,9);
-  planetcolor: array[1..11] of double = (0.7, 0, 0, 1.5, 0.7, 0.7, -1.5, -1.5, 0, 0.7, 0);
+  CentralPlanet: array[1..36] of
+    integer = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 4, 4, 6, 3, 6, 8, 8, 9);
+  planetcolor: array[1..11] of double =
+    (0.7, 0, 0, 1.5, 0.7, 0.7, -1.5, -1.5, 0, 0.7, 0);
   V0mar: array [1..2] of double = (11.80, 12.89);
-  V0jup: array [1..8] of double = (-1.68, -1.41, -2.09, -1.05,7.4,9.0,12.4,10.8);
-  V0sat: array [1..19] of double = (3.30, 2.10, 0.60, 0.80, 0.10, -1.28, 4.63, 1.50, 6.7,4.9,6.1,8.8,9.1,9.4,9.5,6.2,6.9,12,13);
-  V0ura: array [1..18] of double = (3.60, 1.45, 2.10, 1.02, 1.23,11.4,11.1,10.3,9.5,9.8,8.8,8.3,9.8,9.4,7.5,15,15,15);
-  V0nep: array [1..8] of double = (-1.22, 4.0,10.0,9.1,7.9,7.6,7.3,5.6);
+  V0jup: array [1..8] of double = (-1.68, -1.41, -2.09, -1.05, 7.4, 9.0, 12.4, 10.8);
+  V0sat: array [1..19] of double =
+    (3.30, 2.10, 0.60, 0.80, 0.10, -1.28, 4.63, 1.50,
+    6.7, 4.9, 6.1, 8.8, 9.1, 9.4, 9.5, 6.2, 6.9, 12, 13);
+  V0ura: array [1..18] of double =
+    (3.60, 1.45, 2.10, 1.02, 1.23, 11.4, 11.1, 10.3, 9.5, 9.8, 8.8, 8.3, 9.8, 9.4, 7.5, 15, 15, 15);
+  V0nep: array [1..8] of double = (-1.22, 4.0, 10.0, 9.1, 7.9, 7.6, 7.3, 5.6);
   V0plu: array [1..1] of double = (1.0);
   D0mar: array [1..2] of double = (11, 6);
-  D0jup: array [1..8] of double = (1821, 1565, 2634, 2403,125,58,10,20);
-  D0sat: array [1..19] of double = (199, 249, 530, 560, 764, 2575, 143, 718, 110,97,69,16,15,15,18.5,74,55,10,4);
-  D0ura: array [1..18] of double = (236, 581, 585, 789, 761,13,16,22,33,29,42,55,29,34,77,5,5,5);
-  D0nep: array [1..8] of double = (1350, 170,29,40,74,79,104,218);
+  D0jup: array [1..8] of double = (1821, 1565, 2634, 2403, 125, 58, 10, 20);
+  D0sat: array [1..19] of double =
+    (199, 249, 530, 560, 764, 2575, 143, 718, 110, 97, 69, 16, 15, 15, 18.5, 74, 55, 10, 4);
+  D0ura: array [1..18] of double =
+    (236, 581, 585, 789, 761, 13, 16, 22, 33, 29, 42, 55, 29, 34, 77, 5, 5, 5);
+  D0nep: array [1..8] of double = (1350, 170, 29, 40, 74, 79, 104, 218);
   D0plu: array [1..1] of double = (605);
   DefaultnJPL_DE = 9;
-  DefaultJPL_DE: array [1..DefaultnJPL_DE] of integer = (430, 431 ,423, 421, 422, 405, 406, 403, 200);
+  DefaultJPL_DE: array [1..DefaultnJPL_DE] of integer =
+    (430, 431, 423, 421, 422, 405, 406, 403, 200);
   // JPL ephemeris to try, order by preference
 
   blank15 = '               ';
@@ -333,7 +350,7 @@ const
   tab = #09;
   Ellipsis = '...';
   deftxt = '?';
-  plusminus='+/-'; // #$0b1;
+  plusminus = '+/-'; // #$0b1;
   f0 = '0';
   f1 = '0.0';
   f1s = '0.#';
@@ -358,7 +375,7 @@ const
   Altaz = 1;
   Gal = 2;
   Ecl = 3;
-  ProjectionName='HAI MER CAR ARC TAN SIN';
+  ProjectionName = 'HAI MER CAR ARC TAN SIN';
   ftAll = 0;
   ftStar = 1;
   ftVar = 2;
@@ -501,13 +518,14 @@ const
 
   URL_IERSBulletins = 'http://www.iers.org/IERS/EN/Publications/Bulletins/bulletins.html';
 
-  URL_HTTPCometElements ='http://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt';
+  URL_HTTPCometElements = 'http://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt';
 
-  URL_MPCORBAsteroidElements= 'http://www.minorplanetcenter.net/iau/MPCORB/MPCORB.DAT.gz';
+  URL_MPCORBAsteroidElements =
+    'http://www.minorplanetcenter.net/iau/MPCORB/MPCORB.DAT.gz';
   URL_HTTPAsteroidElements1 = 'http://www.minorplanetcenter.net/iau/MPCORB/Unusual.txt';
   URL_HTTPAsteroidElements2 = 'http://www.minorplanetcenter.net/iau/MPCORB/NEA.txt';
   URL_HTTPAsteroidElements3 = 'http://www.minorplanetcenter.net/iau/MPCORB/Distant.txt';
-  URL_CDCAsteroidElements   = 'http://www.ap-i.net/pub/skychart/mpc/mpc5000.dat';
+  URL_CDCAsteroidElements = 'http://www.ap-i.net/pub/skychart/mpc/mpc5000.dat';
 
   URL_IVOASAMP = 'http://www.ivoa.net/documents/SAMP/';
 
@@ -775,7 +793,7 @@ type
   end;
 
   TMilkywaydot = record
-    ra,de: single;
+    ra, de: single;
     val: byte;
   end;
 
@@ -787,9 +805,9 @@ type
   Tobjlabel = record
     id: integer;
     x, y, r, orientation, lsize: single;
-    px,py: integer;
-    labelnum, fontnum,priority: byte;
-    optimizable,optimized: boolean;
+    px, py: integer;
+    labelnum, fontnum, priority: byte;
+    optimizable, optimized: boolean;
     align: TLabelAlign;
     txt: string;  //txt:shortstring
   end;
@@ -834,10 +852,10 @@ type
     GCatNum: integer;
     UserObjects: array of TUserObjects;
     StarmagMax, NebMagMax, NebSizeMin: double;
-    SampSelectedTable,SampFindTable,SampFindUrl: string;
-    SampSelectedNum,SampSelectX,SampSelectY,SampFindRec: integer;
+    SampSelectedTable, SampFindTable, SampFindUrl: string;
+    SampSelectedNum, SampSelectX, SampSelectY, SampFindRec: integer;
     SampSelectedRec: array of integer;
-    SampSelectFirst,SampSelectIdent: boolean;
+    SampSelectFirst, SampSelectIdent: boolean;
     // limit to extract from catalog
     StarCatPath: array [1..MaxStarCatalog] of string;
     // path to each catalog
@@ -845,24 +863,22 @@ type
     // is the catalog defined
     StarCatOn: array [1..MaxStarCatalog] of boolean;
     // is the catalog used for current chart
-    StarCatField: array [1..MaxStarCatalog, 1..2] of
-    integer; // Field min and max the catalog is active
-    VarStarCatPath: array [1..MaxVarStarCatalog] of
-    string;   // path to each catalog
+    StarCatField: array [1..MaxStarCatalog, 1..2] of integer;
+    // Field min and max the catalog is active
+    VarStarCatPath: array [1..MaxVarStarCatalog] of string;   // path to each catalog
     VarStarCatDef: array [1..MaxVarStarCatalog] of boolean;
     // is the catalog defined
     VarStarCatOn: array [1..MaxVarStarCatalog] of boolean;
     // is the catalog used for current chart
-    VarStarCatField: array [1..MaxVarStarCatalog, 1..2] of
-    integer; // Field min and max the catalog is active
-    DblStarCatPath: array [1..MaxDblStarCatalog] of
-    string;   // path to each catalog
+    VarStarCatField: array [1..MaxVarStarCatalog, 1..2] of integer;
+    // Field min and max the catalog is active
+    DblStarCatPath: array [1..MaxDblStarCatalog] of string;   // path to each catalog
     DblStarCatDef: array [1..MaxDblStarCatalog] of boolean;
     // is the catalog defined
     DblStarCatOn: array [1..MaxDblStarCatalog] of boolean;
     // is the catalog used for current chart
-    DblStarCatField: array [1..MaxDblStarCatalog, 1..2] of
-    integer; // Field min and max the catalog is active
+    DblStarCatField: array [1..MaxDblStarCatalog, 1..2] of integer;
+    // Field min and max the catalog is active
     NebCatPath: array [1..MaxNebCatalog] of string;
     // path to each catalog
     NebCatDef: array [1..MaxNebCatalog] of boolean;
@@ -885,7 +901,7 @@ type
     FieldNum: array [0..MaxField] of double;  // Field of vision limit
     StarFilter, NebFilter: boolean;   // filter by magnitude
     BigNebFilter: boolean;           // filter big nebulae
-    NoFilterMessier: Boolean;
+    NoFilterMessier: boolean;
     BigNebLimit: double;
     AutoStarFilter: boolean;         // automatic limit
     AutoStarFilterMag: double;       // automatic limit reference magnitude
@@ -907,16 +923,17 @@ type
     ConstelPos: array of Tconstpos;
     ConstL: array of Tconstl;
     ConstB: array of Tconstb;
-    Milkywaydotradius : single;
+    Milkywaydotradius: single;
     MilkywaydotNum: integer;
     Milkywaydot: array of TMilkywaydot;
     horizonlist: Thorizonlist;
     horizonpicture: TBGRABitmap;
     horizonpicturename: string;
-    horizonpicturevalid: Boolean;
+    horizonpicturevalid: boolean;
     StarName: array of string;
     StarNameHR: array of integer;
-    ffove_tfl, ffove_efl, ffove_efv, ffovc_tfl, ffovc_px, ffovc_py, ffovc_cx, ffovc_cy : string;
+    ffove_tfl, ffove_efl, ffove_efv, ffovc_tfl, ffovc_px, ffovc_py,
+    ffovc_cx, ffovc_cy: string;
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_shared);
@@ -926,76 +943,81 @@ type
   public
     tz: TCdCTimeZone;
     racentre, decentre, fov, theta, acentre, hcentre, lcentre,
-    bcentre, lecentre, becentre, ecl, eqeq, nutl, nuto, sunl, sunb, ab1, abe, abp,
-    gr2e, raprev, deprev: double;
+    bcentre, lecentre, becentre, ecl, eqeq, nutl, nuto, sunl, sunb,
+    ab1, abe, abp, gr2e, raprev, deprev: double;
     EarthB, abv, ehn: coordvector;
     NutMAT, EqpMAT, EqtMAT: rotmatrix;
     ProjEquatorCentered: boolean;
     EquinoxType: integer;
     DefaultJDchart: double;
     EquinoxChart: string;
-    Force_DT_UT, horizonopaque, autorefresh, TrackOn, TargetOn,
-    Quick, NP, SP, moved, abm, asl, ShowScale: boolean;
+    Force_DT_UT, horizonopaque, autorefresh, TrackOn, TargetOn, Quick,
+    NP, SP, moved, abm, asl, ShowScale: boolean;
     projtype: char;
     projname: array [0..MaxField] of string[3];
-    FlipX, FlipY, ProjPole, TrackType, TrackObj, AstSymbol,
-    ComSymbol: integer;
+    FlipX, FlipY, ProjPole, TrackType, TrackObj, AstSymbol, ComSymbol: integer;
     SimNb, SimD, SimH, SimM, SimS, SimLabel: integer;
     SimObject: array[1..NumSimObject] of boolean;
-    SimLine, SimMark, SimDateLabel, SimNameLabel, SimMagLabel, ShowPlanet,
-    PlanetParalaxe, ShowEarthShadow, ShowAsteroid, ShowComet, ShowArtSat, NewArtSat, ShowSmallsat: boolean;
-    SimDateYear, SimDateMonth, SimDateDay, SimDateHour,
-    SimDateMinute, SimDateSecond: boolean;
-    ObsLatitude, ObsLongitude, ObsAltitude,ObsXP,ObsYP,ObsRH,ObsTlr: double;
+    SimLine, SimMark, SimDateLabel, SimNameLabel, SimMagLabel,
+    ShowPlanet, PlanetParalaxe, ShowEarthShadow, ShowAsteroid, ShowComet,
+    ShowArtSat, NewArtSat, ShowSmallsat: boolean;
+    SimDateYear, SimDateMonth, SimDateDay, SimDateHour, SimDateMinute,
+    SimDateSecond: boolean;
+    ObsLatitude, ObsLongitude, ObsAltitude, ObsXP, ObsYP, ObsRH, ObsTlr: double;
     ObsTZ: string;
-    ObsTemperature, ObsPressure : double;
-    ObsName, ObsCountry, chartname, ast_day, ast_daypos,
-    com_day, com_daypos, sunurlname, sunurl: string;
+    ObsTemperature, ObsPressure: double;
+    ObsName, ObsCountry, chartname, ast_day, ast_daypos, com_day,
+    com_daypos, sunurlname, sunurl: string;
     CurYear, CurMonth, CurDay, DrawPMyear, sunurlsize, sunurlmargin,
     sunrefreshtime: integer;
-    ShowPluto, ShowConstl, ShowConstB, ShowEqGrid, ShowGrid,
-    ShowGridNum, ShowOnlyMeridian, ShowAlwaysMeridian, UseSystemTime, countrytz: boolean;
-    StyleGrid, StyleEqGrid, StyleConstL, StyleConstB,
-    StyleEcliptic, StyleGalEq: TFPPenStyle;
+    ShowPluto, ShowConstl, ShowConstB, ShowEqGrid, ShowGrid, ShowGridNum,
+    ShowOnlyMeridian, ShowAlwaysMeridian, UseSystemTime, countrytz: boolean;
+    StyleGrid, StyleEqGrid, StyleConstL, StyleConstB, StyleEcliptic,
+    StyleGalEq: TFPPenStyle;
     ShowEcliptic, ShowGalactic, ShowMilkyWay, FillMilkyWay, LinemodeMilkyway,
-    ShowHorizon, ShowHorizonPicture, HorizonPictureLowQuality, FillHorizon, ShowHorizon0, ShowHorizonDepression: boolean;
-    CurTime, DT_UT_val, GRSlongitude, GRSjd, GRSdrift,
-    TelescopeTurnsX, TelescopeTurnsY, TelescopeJD, HorizonPictureRotate: double;
-    PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline,
-    DSLforcecolor: boolean;
+    ShowHorizon, ShowHorizonPicture, HorizonPictureLowQuality, FillHorizon,
+    ShowHorizon0, ShowHorizonDepression: boolean;
+    CurTime, DT_UT_val, GRSlongitude, GRSjd, GRSdrift, TelescopeTurnsX,
+    TelescopeTurnsY, TelescopeJD, HorizonPictureRotate: double;
+    PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline, DSLforcecolor: boolean;
     ManualTelescopeType, CoordType, DSLcolor: integer;
     IndiServerHost, IndiServerPort, IndiDevice: string;
     IndiAutostart, ShowCircle, ShowCrosshair, IndiTelescope, ASCOMTelescope,
-    LX200Telescope, EncoderTelescope, ManualTelescope, ShowImages, EyepieceMask,
-    ShowImageList, ShowImageLabel, ShowBackgroundImage, showstars, shownebulae, showline,
-    showlabelall, Editlabels, OptimizeLabels, RotLabel : boolean;
+    LX200Telescope, EncoderTelescope, ManualTelescope, ShowImages,
+    EyepieceMask, ShowImageList, ShowImageLabel, ShowBackgroundImage,
+    showstars, shownebulae, showline, showlabelall, Editlabels,
+    OptimizeLabels, RotLabel: boolean;
     BackgroundImage: string;
     MaxArchiveImg: integer;
     ArchiveDir: array[1..MaxArchiveDir] of string;
     ArchiveDirActive: array[1..MaxArchiveDir] of boolean;
     // working variable
-    ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid, SmallSatActive,
-    ShowEarthShadowValid, ShowEclipticValid, PlotImageFirst: boolean;
-    HorizonMax, rap2000, dep2000, RefractionOffset,ObsRAU,ObsZAU,Diurab: double;
-    haicx,haicy,ObsRefractionCor, ObsRefA, ObsRefB, ObsHorizonDepression, ObsELONG,ObsPHI,ObsDAZ: double;
+    ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid,
+    SmallSatActive, ShowEarthShadowValid, ShowEclipticValid, PlotImageFirst: boolean;
+    HorizonMax, rap2000, dep2000, RefractionOffset, ObsRAU, ObsZAU, Diurab: double;
+    haicx, haicy, ObsRefractionCor, ObsRefA, ObsRefB, ObsHorizonDepression,
+    ObsELONG, ObsPHI, ObsDAZ: double;
     WindowRatio, BxGlb, ByGlb, AxGlb, AyGlb, sintheta, costheta, x2: double;
     Xwrldmin, Xwrldmax, Ywrldmin, Ywrldmax: double;
     xmin, xmax, ymin, ymax, xshift, yshift, FieldNum, winx, winy,
     wintop, winleft, FindType, FindIpla: integer;
-    LeftMargin, RightMargin, TopMargin, BottomMargin,HeaderHeight,FooterHeight, Xcentre, Ycentre: integer;
-    ObsRoSinPhi, ObsRoCosPhi, StarmagMax, NebMagMax, FindRA,
-    FindDec, FindRA2000, FindDec2000, FindPX, FindSize, FindX, FindY, FindZ,
+    LeftMargin, RightMargin, TopMargin, BottomMargin, HeaderHeight, FooterHeight,
+    Xcentre, Ycentre: integer;
+    ObsRoSinPhi, ObsRoCosPhi, StarmagMax, NebMagMax, FindRA, FindDec,
+    FindRA2000, FindDec2000, FindPX, FindSize, FindX, FindY, FindZ,
     FindSimjd, AstmagMax, AstMagDiff, CommagMax, Commagdiff: double;
     TimeZone, DT_UT, DT_UTerr, CurST, CurJDTT, CurJDUT, LastJD, jd0,
-    JDChart, YPmon, LastJDChart, FindJD, CurSunH, CurMoonH, CurMoonIllum, ScopeRa,
-    ScopeDec, TrackElemEpoch, TrackEpoch, TrackRA, TrackDec, TargetRA, TargetDec, FindPMra,
-    FindPMde, FindPMEpoch, FindPMpx, FindPMrv, FindDist, FindBV, FindMag: double;
-    Scope2Ra,Scope2Dec: double;
-    DrawAllStarLabel, MovedLabelLine, StarFilter, NebFilter,
-    FindOK, WhiteBg, ShowLegend, MagLabel, NameLabel, DistLabel, ConstFullLabel, ConstLatinLabel,
-    ScopeMark, Scope2Mark, ScopeLock, FindPM, FindStarPM, FindPMfullmotion, AstNEO: boolean;
-    EquinoxName, TargetName, TrackName, TrackId, FindName,
-    FindDesc, FindDesc2, FindNote, FindCat, FindCatname, FindId: string;
+    JDChart, YPmon, LastJDChart, FindJD, CurSunH, CurMoonH, CurMoonIllum,
+    ScopeRa, ScopeDec, TrackElemEpoch, TrackEpoch, TrackRA, TrackDec,
+    TargetRA, TargetDec, FindPMra, FindPMde, FindPMEpoch, FindPMpx,
+    FindPMrv, FindDist, FindBV, FindMag: double;
+    Scope2Ra, Scope2Dec: double;
+    DrawAllStarLabel, MovedLabelLine, StarFilter, NebFilter, FindOK,
+    WhiteBg, ShowLegend, MagLabel, NameLabel, DistLabel, ConstFullLabel,
+    ConstLatinLabel, ScopeMark, Scope2Mark, ScopeLock, FindPM,
+    FindStarPM, FindPMfullmotion, AstNEO: boolean;
+    EquinoxName, TargetName, TrackName, TrackId, FindName, FindDesc,
+    FindDesc2, FindNote, FindCat, FindCatname, FindId: string;
     BGalpha: integer;
     BGitt: Titt;
     BGmin_sigma, BGmax_sigma, NEBmin_sigma, NEBmax_sigma: double;
@@ -1015,17 +1037,17 @@ type
     LabelOrient: array[1..numlabtype] of double;
     ShowLabel: array[1..numlabtype] of boolean;
     ObslistAlLabels: boolean;
-    ncircle,nrectangle: integer;
+    ncircle, nrectangle: integer;
     circle: array of array [1..4] of single; // radius, rotation, offset, mode
     circleok: array of boolean;
-    circlelbl: array  of string;
+    circlelbl: array of string;
     rectangle: array of array [1..5] of single; // width, height, rotation, offset, mode
     rectangleok: array of boolean;
     rectanglelbl: array of string;
     CircleLst: array[0..MaxCircle, 1..2] of double;
     CircleLabel, RectangleLabel, marknumlabel: boolean;
     msg: string;
-    CometMark,AsteroidMark: Tstringlist;
+    CometMark, AsteroidMark: TStringList;
     // Calendar
     CalGraphHeight: integer;
     // Planisphere
@@ -1091,16 +1113,16 @@ type
 
   TObsDetail = class(TObject)
   public
-    country,tz,horizonfn,horizonpictfn: string;
-    lat, lon, alt,pictureangleoffset: double;
-    countrytz,showhorizonline,showhorizonpicture: boolean;
+    country, tz, horizonfn, horizonpictfn: string;
+    lat, lon, alt, pictureangleoffset: double;
+    countrytz, showhorizonline, showhorizonpicture: boolean;
     constructor Create;
     destructor Destroy; override;
   end;
 
-  TLabelCoord = class(Tobject)
-              ra,dec : double;
-              end;
+  TLabelCoord = class(TObject)
+    ra, Dec: double;
+  end;
 
   Tconf_main = class(TObject)    // main form setting
   public
@@ -1108,21 +1130,23 @@ type
     EarthMapFile, HorizonFile, HorizonPictureFile, Planetdir: string;
     db, dbhost, dbuser, dbpass, ImagePath, persdir: string;
     starshape_file, KioskPass: string;
-    Paper, PrinterResolution, PrintMethod, PrintColor, PrintBmpWidth, PrintBmpHeight,
-    btnsize: integer;
+    Paper, PrinterResolution, PrintMethod, PrintColor, PrintBmpWidth,
+    PrintBmpHeight, btnsize: integer;
     btncaption, ScreenScaling: boolean;
-    configpage, configpage_i, configpage_j, autorefreshdelay, MaxChildID, dbport: integer;
+    configpage, configpage_i, configpage_j, autorefreshdelay, MaxChildID,
+    dbport: integer;
     PrtLeftMargin, PrtRightMargin, PrtTopMargin, PrtBottomMargin, PrintCopies: integer;
     savetop, saveleft, saveheight, savewidth: integer;
-    ButtonStandard, ButtonNight, AnimDelay, AnimSx, AnimSy,
-    AnimSize, VOurl, VOmaxrecord: integer;
+    ButtonStandard, ButtonNight, AnimDelay, AnimSx, AnimSy, AnimSize,
+    VOurl, VOmaxrecord: integer;
     VOforceactive: boolean;
     PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec: boolean;
     maximized, updall, AutostartServer, keepalive, NewBackgroundImage: boolean;
-    TextOnlyDetail, SimpleMove, SimpleDetail, KioskMode, KioskDebug, CenterAtNoon: boolean;
+    TextOnlyDetail, SimpleMove, SimpleDetail, KioskMode, KioskDebug,
+    CenterAtNoon: boolean;
     PrintDesc, PrintCmd1, PrintCmd2: string;
     PrintTmpPath, ThemeName, IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt: string;
-    PrintHeader,PrintFooter,InternalIndiPanel: boolean;
+    PrintHeader, PrintFooter, InternalIndiPanel: boolean;
     AnimOpt, Animffmpeg: string;
     ServerIPaddr, ServerIPport: shortstring;
     AnimFps: double;
@@ -1132,12 +1156,13 @@ type
     ObsNameList: TStringList;
     SesameUrlNum, SesameCatNum: integer;
     ClockColor: TColor;
-    SampAutoconnect,SampKeepTables,SampKeepImages: boolean;
-    SampConfirmCoord,SampConfirmImage,SampConfirmTable: boolean;
-    SampSubscribeCoord,SampSubscribeImage,SampSubscribeTable: boolean;
-    ObsListLimitType,ObsListMeridianSide: integer;
-    InitObsList,ObslistAirmass,ObslistHourAngle: string;
-    ObslistAirmassLimit1,ObslistAirmassLimit2,ObslistHourAngleLimit1,ObslistHourAngleLimit2: boolean;
+    SampAutoconnect, SampKeepTables, SampKeepImages: boolean;
+    SampConfirmCoord, SampConfirmImage, SampConfirmTable: boolean;
+    SampSubscribeCoord, SampSubscribeImage, SampSubscribeTable: boolean;
+    ObsListLimitType, ObsListMeridianSide: integer;
+    InitObsList, ObslistAirmass, ObslistHourAngle: string;
+    ObslistAirmassLimit1, ObslistAirmassLimit2, ObslistHourAngleLimit1,
+    ObslistHourAngleLimit2: boolean;
     tlelst: string;
     constructor Create;
     destructor Destroy; override;
@@ -1146,8 +1171,9 @@ type
 
   Tconf_dss = class(TObject)    // DSS image setting
   public
-    dssdir, dssdrive, dssfile,dssarchivedir: string;
-    dss102, dssnorth, dsssouth, dsssampling, dssplateprompt,dssarchive,dssarchiveprompt: boolean;
+    dssdir, dssdrive, dssfile, dssarchivedir: string;
+    dss102, dssnorth, dsssouth, dsssampling,
+    dssplateprompt, dssarchive, dssarchiveprompt: boolean;
     dssmaxsize: integer;
     OnlineDSS: boolean;
     OnlineDSSid: integer;
@@ -1159,7 +1185,7 @@ type
 
 
 type
-  TPrepareAsteroid = function(jd1,jd2,step: double; msg: TStrings): boolean of object;
+  TPrepareAsteroid = function(jd1, jd2, step: double; msg: TStrings): boolean of object;
   TGetTwilight = procedure(jd0: double; out ht: double) of object;
 
 type
@@ -1229,10 +1255,10 @@ type
     wp, hp, sysout: integer;
   end;
   PcdcWCSinfo = ^TcdcWCSinfo;
-  Tcdcwcs_initfitsfile = function(fn: PChar; wcsnum:integer): integer; cdecl;
-  Tcdcwcs_release = function(wcsnum:integer): integer; cdecl;
-  Tcdcwcs_sky2xy = function(p: PcdcWCScoord; wcsnum:integer): integer; cdecl;
-  Tcdcwcs_getinfo = function(p: PcdcWCSinfo; wcsnum:integer): integer; cdecl;
+  Tcdcwcs_initfitsfile = function(fn: PChar; wcsnum: integer): integer; cdecl;
+  Tcdcwcs_release = function(wcsnum: integer): integer; cdecl;
+  Tcdcwcs_sky2xy = function(p: PcdcWCScoord; wcsnum: integer): integer; cdecl;
+  Tcdcwcs_getinfo = function(p: PcdcWCSinfo; wcsnum: integer): integer; cdecl;
 
 var
   cdcwcslib: TLibHandle;
@@ -1242,7 +1268,7 @@ var
   cdcwcs_sky2xy: Tcdcwcs_sky2xy;
 
 const
-  maxfitslist=15;  // must corespond to value in cdcwcs.c
+  maxfitslist = 15;  // must corespond to value in cdcwcs.c
 
 //  zlib
 type
@@ -1280,8 +1306,9 @@ type
 
 // pseudo-constant only here
 var
-  ConfigAppdir, ConfigPrivateDir, Appdir, PrivateDir, SampleDir, SatDir, SatArchiveDir, ArchiveDir,
-  TempDir, ZoneDir, HomeDir, VODir, ScriptDir, PrivateScriptDir: string;
+  ConfigAppdir, ConfigPrivateDir, Appdir, PrivateDir, SampleDir,
+  SatDir, SatArchiveDir, ArchiveDir, TempDir, ZoneDir, HomeDir, VODir,
+  ScriptDir, PrivateScriptDir: string;
   VarObs, CdC, MPCDir, DBDir, PictureDir: string;
   ForceConfig, ForceUserDir, Configfile, Lang: string;
   compile_time, compile_version, compile_system, lclver: string;
@@ -1297,8 +1324,8 @@ var
   LinuxDesktop: integer = 0;  // FreeDesktop=0, Other=1
   crRetic: TCursor = 5;
   Params: TStringList;
-  de_folder,de_filename: string;
-  de_type, de_jdcheck : integer;
+  de_folder, de_filename: string;
+  de_type, de_jdcheck: integer;
   de_jdstart, de_jdend: double;
   VerboseMsg: boolean = False;
   WideLine: integer = 2;
@@ -1306,18 +1333,20 @@ var
   MarkType: integer = 1;
   IndiGUIready: boolean;
   SampConnected: boolean;
-  SampClientId,SampClientName,SampClientDesc: Tstringlist;
-  SampClientCoordpointAtsky,SampClientImageLoadFits,SampClientTableLoadVotable: Tstringlist;
+  SampClientId, SampClientName, SampClientDesc: TStringList;
+  SampClientCoordpointAtsky, SampClientImageLoadFits, SampClientTableLoadVotable:
+  TStringList;
   Xplanetrender: boolean;
   Xplanetversion: string;
-  nummainbar,numobjectbar,numleftbar,numrightbar: integer;
-  configmainbar,configobjectbar,configleftbar,configrightbar: TStringList;
-  CatAnimation,CatDirection,CatDrawing,CatEdit,CatFile,CatFilter,CatFOV,CatGrid,CatInformation,CatLabel,
-  CatLines,CatLock,CatObject,CatOrientation,CatPictures,CatPrint,CatProjection,CatSearch,CatSetup,
-  CatSetupOption,CatTelescope,CatTools,CatUndo,CatView,CatWindow,CatZoom :string;
+  nummainbar, numobjectbar, numleftbar, numrightbar: integer;
+  configmainbar, configobjectbar, configleftbar, configrightbar: TStringList;
+  CatAnimation, CatDirection, CatDrawing, CatEdit, CatFile, CatFilter,
+  CatFOV, CatGrid, CatInformation, CatLabel, CatLines, CatLock, CatObject,
+  CatOrientation, CatPictures, CatPrint, CatProjection, CatSearch, CatSetup,
+  CatSetupOption, CatTelescope, CatTools, CatUndo, CatView, CatWindow, CatZoom: string;
   nJPL_DE: integer;
   JPL_DE: array of integer;
-  GregorianStart,GregorianStartJD: integer;
+  GregorianStart, GregorianStartJD: integer;
 
 {$ifdef darwin}
   OpenFileCMD: string = 'open';
@@ -1512,30 +1541,30 @@ const
     ('SLEWINDI', '100', 'RAhr in decimal and Dec in decimal'),
     ('ABORTSLEWINDI', '101', ''),
     ('SYNCINDI', '102', 'RAhr in decimal and Dec in decimal'),
-    ('TRACKTELESCOPE','103','ON/OFF'),
+    ('TRACKTELESCOPE', '103', 'ON/OFF'),
     ('CONNECTTELESCOPE', '104', ''),
     ('DISCONNECTTELESCOPE', '105', ''),
-    ('SYNC','106','RAhr in decimal and Dec in decimal'),
-    ('SLEW','107',''),
-    ('ABORTSLEW','108',''),
-    ('OBSLISTLOAD','109','list_file_name'),
-    ('OBSLISTFIRST','110',''),
-    ('OBSLISTLAST','111',''),
-    ('OBSLISTNEXT','112',''),
-    ('OBSLISTPREV','113',''),
-    ('OBSLISTLIMIT','114','ON/OFF'),
-    ('OBSLISTAIRMASSLIMIT','115','num'),
-    ('OBSLISTTRANSITLIMIT','116','hours'),
-    ('OBSLISTTRANSITSIDE','117','EAST/WEST/BOTH'),
-    ('GETSCOPERATES','118',''),
-    ('SCOPEMOVEAXIS','119','axis(0/1) rate'),
-    ('SETSCOPEREFRESHRATE','120','delay [ms]'),
-    ('PLANISPHEREDATE','121','ON/OFF'),
-    ('PLANISPHERETIME','122','ON/OFF'),
-    ('SETFOVPROJECTION','123','FOV_NUM HAI/MER/CAR/ARC/TAN/SIN'),
-    ('SHOWONLYMERIDIAN','124','ON/OFF'),
-    ('SHOWALWAYSMERIDIAN','125','ON/OFF'),
-    ('CLEANUPMAP','126','')
+    ('SYNC', '106', 'RAhr in decimal and Dec in decimal'),
+    ('SLEW', '107', ''),
+    ('ABORTSLEW', '108', ''),
+    ('OBSLISTLOAD', '109', 'list_file_name'),
+    ('OBSLISTFIRST', '110', ''),
+    ('OBSLISTLAST', '111', ''),
+    ('OBSLISTNEXT', '112', ''),
+    ('OBSLISTPREV', '113', ''),
+    ('OBSLISTLIMIT', '114', 'ON/OFF'),
+    ('OBSLISTAIRMASSLIMIT', '115', 'num'),
+    ('OBSLISTTRANSITLIMIT', '116', 'hours'),
+    ('OBSLISTTRANSITSIDE', '117', 'EAST/WEST/BOTH'),
+    ('GETSCOPERATES', '118', ''),
+    ('SCOPEMOVEAXIS', '119', 'axis(0/1) rate'),
+    ('SETSCOPEREFRESHRATE', '120', 'delay [ms]'),
+    ('PLANISPHEREDATE', '121', 'ON/OFF'),
+    ('PLANISPHERETIME', '122', 'ON/OFF'),
+    ('SETFOVPROJECTION', '123', 'FOV_NUM HAI/MER/CAR/ARC/TAN/SIN'),
+    ('SHOWONLYMERIDIAN', '124', 'ON/OFF'),
+    ('SHOWALWAYSMERIDIAN', '125', 'ON/OFF'),
+    ('CLEANUPMAP', '126', '')
     );
 
 // INDI Telescope driver
@@ -1576,30 +1605,27 @@ const
     ' ( jd int(11) NOT NULL default "0", limit_mag smallint(6) NOT NULL default "0")';
   create_table_ast_day_pos =
     '( id varchar(7) NOT NULL default "", epoch double NOT NULL default "0",' +
-    'ra smallint(6) NOT NULL default "0",  de smallint(6) NOT NULL default "0",'
-    +
+    'ra smallint(6) NOT NULL default "0",  de smallint(6) NOT NULL default "0",' +
     'mag smallint(6) NOT NULL default "0", near_earth smallint(1) NOT NULL default "0", PRIMARY KEY (ra,de,mag,id))';
   create_table_com_day =
     ' ( jd int(11) NOT NULL default "0", limit_mag smallint(6) NOT NULL default "0")';
   create_table_com_day_pos =
     '( id varchar(12) NOT NULL default "", epoch double NOT NULL default "0",' +
-    'ra smallint(6) NOT NULL default "0", de smallint(6) NOT NULL default "0",'
-    +
+    'ra smallint(6) NOT NULL default "0", de smallint(6) NOT NULL default "0",' +
     'mag smallint(6) NOT NULL default "0", near_earth smallint(1) NOT NULL default "0", PRIMARY KEY (ra,de,mag))';
   numsqltable = 10;
   sqltable: array[mysql..sqlite, 1..numsqltable, 1..3] of string = (
     (  // mysql tables
     ('cdc_ast_name',
-    ' ( id varchar(7) binary NOT NULL default "0", name varchar(27) NOT NULL default "",' +
+    ' ( id varchar(7) binary NOT NULL default "0", name varchar(27) NOT NULL default "",'
+    +
     'PRIMARY KEY (id))', ''),
     ('cdc_ast_elem_list',
-    ' ( elem_id smallint(6) NOT NULL default "0", filedesc varchar(80) NOT NULL default "",' +
-    'PRIMARY KEY (elem_id))', ''),
+    ' ( elem_id smallint(6) NOT NULL default "0", filedesc varchar(80) NOT NULL default "",'
+    + 'PRIMARY KEY (elem_id))', ''),
     ('cdc_ast_elem', ' ( id varchar(7) binary NOT NULL default "0",' +
-    'h double NOT NULL default "0", g double NOT NULL default "0",'
-    +
-    'epoch double NOT NULL default "0", mean_anomaly double NOT NULL default "0",'
-    +
+    'h double NOT NULL default "0", g double NOT NULL default "0",' +
+    'epoch double NOT NULL default "0", mean_anomaly double NOT NULL default "0",' +
     'arg_perihelion double NOT NULL default "0", asc_node double NOT NULL default "0",'
     +
     'inclination double NOT NULL default "0", eccentricity double NOT NULL default "0",'
@@ -1610,20 +1636,18 @@ const
     +
     'elem_id smallint(6) NOT NULL default "0", PRIMARY KEY (id,epoch))', ''),
     ('cdc_ast_mag', ' ( id varchar(7) binary NOT NULL default "",' +
-    'jd double NOT NULL default "0", epoch double NOT NULL default "0",'
-    +
+    'jd double NOT NULL default "0", epoch double NOT NULL default "0",' +
     'mag smallint(6) NOT NULL default "0", elem_id smallint(6) NOT NULL default "0",'
     +
     'PRIMARY KEY (jd,id))', '1'),
     ('cdc_com_name',
-    ' ( id varchar(12) binary NOT NULL default "0", name varchar(27) NOT NULL default "",' +
-    'PRIMARY KEY (id))', ''),
+    ' ( id varchar(12) binary NOT NULL default "0", name varchar(27) NOT NULL default "",'
+    + 'PRIMARY KEY (id))', ''),
     ('cdc_com_elem_list',
-    ' ( elem_id smallint(6) NOT NULL default "0", filedesc varchar(80) NOT NULL default "",' +
-    'PRIMARY KEY (elem_id))', ''),
+    ' ( elem_id smallint(6) NOT NULL default "0", filedesc varchar(80) NOT NULL default "",'
+    + 'PRIMARY KEY (elem_id))', ''),
     ('cdc_com_elem', ' ( id varchar(12) binary NOT NULL default "0",' +
-    'peri_epoch double NOT NULL default "0", peri_dist double NOT NULL default "0",'
-    +
+    'peri_epoch double NOT NULL default "0", peri_dist double NOT NULL default "0",' +
     'eccentricity double NOT NULL default "0",' +
     'arg_perihelion double NOT NULL default "0", asc_node double NOT NULL default "0",'
     +
@@ -1635,24 +1659,17 @@ const
     ('cdc_fits', ' (filename varchar(255) NOT NULL default "", ' +
     'catalogname varchar(255)  NOT NULL default "", ' +
     'objectname varchar(25) NOT NULL default "", ' +
-    'ra double NOT NULL default "0",' +
-    'de double NOT NULL default "0", ' +
-    'width double NOT NULL default "0", ' +
-    'height double NOT NULL default "0", ' +
+    'ra double NOT NULL default "0",' + 'de double NOT NULL default "0", ' +
+    'width double NOT NULL default "0", ' + 'height double NOT NULL default "0", ' +
     'rotation  double NOT NULL default "0", ' +
     'PRIMARY KEY (catalogname,ra,de))', '2'),
     ('cdc_country', '(country varchar(5) NOT NULL default "",' +
     'isocode varchar(5) NOT NULL default "",' +
-    'name varchar(50) NOT NULL default "",' +
-    'PRIMARY KEY (country))', ''),
-    ('cdc_location', '(locid integer NOT NULL ,' +
-    'country varchar(5) NOT NULL ,' +
-    'location varchar(50) NOT NULL ,' +
-    'type varchar(5) NOT NULL ,' +
-    'latitude double NOT NULL ,' +
-    'longitude double NOT NULL ,' +
-    'elevation double NOT NULL ,' +
-    'timezone double NOT NULL ,' +
+    'name varchar(50) NOT NULL default "",' + 'PRIMARY KEY (country))', ''),
+    ('cdc_location', '(locid integer NOT NULL ,' + 'country varchar(5) NOT NULL ,' +
+    'location varchar(50) NOT NULL ,' + 'type varchar(5) NOT NULL ,' +
+    'latitude double NOT NULL ,' + 'longitude double NOT NULL ,' +
+    'elevation double NOT NULL ,' + 'timezone double NOT NULL ,' +
     'PRIMARY KEY (locid))', '3,4')
     ),
     (   // sqlite tables
@@ -1664,24 +1681,17 @@ const
     ' ( elem_id INTEGER NOT NULL default "0", filedesc TEXT NOT NULL default "",' +
     'PRIMARY KEY (elem_id))', ''),
     ('cdc_ast_elem', ' ( id TEXT NOT NULL default "0",' +
-    'h NUMERIC NOT NULL default "0", g NUMERIC NOT NULL default "0",'
-    +
-    'epoch NUMERIC NOT NULL default "0", mean_anomaly NUMERIC NOT NULL default "0",'
-    +
+    'h NUMERIC NOT NULL default "0", g NUMERIC NOT NULL default "0",' +
+    'epoch NUMERIC NOT NULL default "0", mean_anomaly NUMERIC NOT NULL default "0",' +
     'arg_perihelion NUMERIC NOT NULL default "0", asc_node NUMERIC NOT NULL default "0",'
     +
     'inclination NUMERIC NOT NULL default "0", eccentricity NUMERIC NOT NULL default "0",'
-    +
-    'semi_axis NUMERIC NOT NULL default "0", ref TEXT NOT NULL default "",'
-    +
-    'name TEXT NOT NULL default "", equinox INTEGER NOT NULL default "0",'
-    +
+    + 'semi_axis NUMERIC NOT NULL default "0", ref TEXT NOT NULL default "",' +
+    'name TEXT NOT NULL default "", equinox INTEGER NOT NULL default "0",' +
     'elem_id INTEGER NOT NULL default "0", PRIMARY KEY (id,epoch))', ''),
     ('cdc_ast_mag', ' ( id TEXT NOT NULL default "",' +
-    'jd NUMERIC NOT NULL default "0", epoch NUMERIC NOT NULL default "0",'
-    +
-    'mag INTEGER NOT NULL default "0", elem_id INTEGER NOT NULL default "0",'
-    +
+    'jd NUMERIC NOT NULL default "0", epoch NUMERIC NOT NULL default "0",' +
+    'mag INTEGER NOT NULL default "0", elem_id INTEGER NOT NULL default "0",' +
     'PRIMARY KEY (jd,id))', '1'),
     ('cdc_com_name',
     ' ( id TEXT NOT NULL default "0", name TEXT NOT NULL default "",' +
@@ -1702,24 +1712,18 @@ const
     'elem_id INTEGER NOT NULL default "0", PRIMARY KEY (id,epoch))', ''),
     ('cdc_fits', ' (filename TEXT NOT NULL default "", ' +
     'catalogname TEXT  NOT NULL default "", ' +
-    'objectname TEXT NOT NULL default "", ' +
-    'ra NUMERIC NOT NULL default "0",' +
-    'de NUMERIC NOT NULL default "0", ' +
-    'width NUMERIC NOT NULL default "0", ' +
+    'objectname TEXT NOT NULL default "", ' + 'ra NUMERIC NOT NULL default "0",' +
+    'de NUMERIC NOT NULL default "0", ' + 'width NUMERIC NOT NULL default "0", ' +
     'height NUMERIC NOT NULL default "0", ' +
     'rotation  NUMERIC NOT NULL default "0", ' +
     'PRIMARY KEY (catalogname,ra,de))', '2'),
     ('cdc_country', '(country TEXT NOT NULL default "",' +
-    'isocode TEXT NOT NULL default "",' +
-    'name TEXT NOT NULL default "",' + 'PRIMARY KEY (country))', ''),
-    ('cdc_location', '(locid INTEGER NOT NULL ,' +
-    'country TEXT NOT NULL ,' +
-    'location TEXT NOT NULL ,' +
-    'type TEXT NOT NULL ,' +
-    'latitude NUMERIC NOT NULL ,' +
-    'longitude NUMERIC NOT NULL ,' +
-    'elevation NUMERIC NOT NULL ,' +
-    'timezone NUMERIC NOT NULL ,' +
+    'isocode TEXT NOT NULL default "",' + 'name TEXT NOT NULL default "",' +
+    'PRIMARY KEY (country))', ''),
+    ('cdc_location', '(locid INTEGER NOT NULL ,' + 'country TEXT NOT NULL ,' +
+    'location TEXT NOT NULL ,' + 'type TEXT NOT NULL ,' +
+    'latitude NUMERIC NOT NULL ,' + 'longitude NUMERIC NOT NULL ,' +
+    'elevation NUMERIC NOT NULL ,' + 'timezone NUMERIC NOT NULL ,' +
     'PRIMARY KEY (locid))', '3,4')
     ));
   numsqlindex = 4;
@@ -1737,131 +1741,131 @@ const
     ));
 
 const
-// Minimal main toolbar
-numminimalmainbar = 19;
-minimalmainbar: array[1..numminimalmainbar] of string=(
-('38;toN'),
-('37;toE'),
-('39;toS'),
-('40;toW'),
-('41;toZenith'),
-('100;Divider'),
-('72;AltAzProjection'),
-('71;EquatorialProjection'),
-('92;rotate180'),
-('102;quicksearch'),
-('100;Divider'),
-('6;zoomplus'),
-('7;zoomminus'),
-('100;Divider'),
-('43;TimeDec'),
-('84;TimeReset'),
-('44;TimeInc'),
-('103;TimeValPanel'),
-('104;TimeU'));
+  // Minimal main toolbar
+  numminimalmainbar = 19;
+  minimalmainbar: array[1..numminimalmainbar] of string = (
+    ('38;toN'),
+    ('37;toE'),
+    ('39;toS'),
+    ('40;toW'),
+    ('41;toZenith'),
+    ('100;Divider'),
+    ('72;AltAzProjection'),
+    ('71;EquatorialProjection'),
+    ('92;rotate180'),
+    ('102;quicksearch'),
+    ('100;Divider'),
+    ('6;zoomplus'),
+    ('7;zoomminus'),
+    ('100;Divider'),
+    ('43;TimeDec'),
+    ('84;TimeReset'),
+    ('44;TimeInc'),
+    ('103;TimeValPanel'),
+    ('104;TimeU'));
 
-// Standard main toolbar
-numstandardmainbar = 35;
-standardmainbar: array[1..numstandardmainbar] of string=(
-('0;FileNew1'),
-('1;FileOpen1'),
-('2;FileSaveAs1'),
-('3;Print1'),
-('82;ViewNightVision'),
-('100;Divider'),
-('4;Cascade1'),
-('14;TileVertical1'),
-('100;Divider'),
-('19;Undo'),
-('20;Redo'),
-('6;zoomplus'),
-('7;zoomminus'),
-('8;ZoomBar'),
-('99;MagPanel'),
-('102;quicksearch'),
-('100;Divider'),
-('76;Search1'),
-('78;Position'),
-('46;listobj'),
-('98;Obslist'),
-('75;Calendar'),
-('94;PlanetInfo'),
-('100;Divider'),
-('43;TimeDec'),
-('84;TimeReset'),
-('44;TimeInc'),
-('88;Animation'),
-('103;TimeValPanel'),
-('104;TimeU'),
-('100;Divider'),
-('48;TelescopeConnect'),
-('51;TelescopeSync'),
-('50;TelescopeSlew'),
-('95;TelescopeAbortSlew'));
+  // Standard main toolbar
+  numstandardmainbar = 35;
+  standardmainbar: array[1..numstandardmainbar] of string = (
+    ('0;FileNew1'),
+    ('1;FileOpen1'),
+    ('2;FileSaveAs1'),
+    ('3;Print1'),
+    ('82;ViewNightVision'),
+    ('100;Divider'),
+    ('4;Cascade1'),
+    ('14;TileVertical1'),
+    ('100;Divider'),
+    ('19;Undo'),
+    ('20;Redo'),
+    ('6;zoomplus'),
+    ('7;zoomminus'),
+    ('8;ZoomBar'),
+    ('99;MagPanel'),
+    ('102;quicksearch'),
+    ('100;Divider'),
+    ('76;Search1'),
+    ('78;Position'),
+    ('46;listobj'),
+    ('98;Obslist'),
+    ('75;Calendar'),
+    ('94;PlanetInfo'),
+    ('100;Divider'),
+    ('43;TimeDec'),
+    ('84;TimeReset'),
+    ('44;TimeInc'),
+    ('88;Animation'),
+    ('103;TimeValPanel'),
+    ('104;TimeU'),
+    ('100;Divider'),
+    ('48;TelescopeConnect'),
+    ('51;TelescopeSync'),
+    ('50;TelescopeSlew'),
+    ('95;TelescopeAbortSlew'));
 
-// Standard object toolbar
-numstandardobjectbar = 32;
-standardobjectbar: array[1..numstandardobjectbar] of string=(
-('56;ShowStars'),
-('57;ShowNebulae'),
-('59;ShowLines'),
-('58;ShowPictures'),
-('89;ShowVO'),
-('52;ShowUobj'),
-('81;DSSImage'),
-('77;SetPictures'),
-('86;BlinkImage'),
-('62;ShowPlanets'),
-('60;ShowAsteroids'),
-('61;ShowComets'),
-('63;ShowMilkyWay'),
-('25;Grid'),
-('24;GridEQ'),
-('91;ShowCompass'),
-('65;ShowConstellationLine'),
-('66;ShowConstellationLimit'),
-('67;ShowGalacticEquator'),
-('68;ShowEcliptic'),
-('69;ShowMark'),
-('90;ScaleMode'),
-('64;ShowLabels'),
-('83;EditLabels'),
-('70;ShowObjectbelowHorizon'),
-('35;switchbackground'),
-('100;Divider'),
-('97;MouseMode'),
-('79;SyncChart'),
-('80;Track'),
-('100;Divider'),
-('34;switchstars'));
+  // Standard object toolbar
+  numstandardobjectbar = 32;
+  standardobjectbar: array[1..numstandardobjectbar] of string = (
+    ('56;ShowStars'),
+    ('57;ShowNebulae'),
+    ('59;ShowLines'),
+    ('58;ShowPictures'),
+    ('89;ShowVO'),
+    ('52;ShowUobj'),
+    ('81;DSSImage'),
+    ('77;SetPictures'),
+    ('86;BlinkImage'),
+    ('62;ShowPlanets'),
+    ('60;ShowAsteroids'),
+    ('61;ShowComets'),
+    ('63;ShowMilkyWay'),
+    ('25;Grid'),
+    ('24;GridEQ'),
+    ('91;ShowCompass'),
+    ('65;ShowConstellationLine'),
+    ('66;ShowConstellationLimit'),
+    ('67;ShowGalacticEquator'),
+    ('68;ShowEcliptic'),
+    ('69;ShowMark'),
+    ('90;ScaleMode'),
+    ('64;ShowLabels'),
+    ('83;EditLabels'),
+    ('70;ShowObjectbelowHorizon'),
+    ('35;switchbackground'),
+    ('100;Divider'),
+    ('97;MouseMode'),
+    ('79;SyncChart'),
+    ('80;Track'),
+    ('100;Divider'),
+    ('34;switchstars'));
 
-// Standard left toolbar
-numstandardleftbar = 12;
-standardleftbar: array[1..numstandardleftbar] of string=(
-('85;SetupObservatory'),
-('45;SetupTime'),
-('10;ConfigPopup'),
-('71;EquatorialProjection'),
-('72;AltAzProjection'),
-('73;EclipticProjection'),
-('74;GalacticProjection'),
-('15;FlipX'),
-('17;FlipY'),
-('21;rot_plus'),
-('22;rot_minus'),
-('92;rotate180'));
+  // Standard left toolbar
+  numstandardleftbar = 12;
+  standardleftbar: array[1..numstandardleftbar] of string = (
+    ('85;SetupObservatory'),
+    ('45;SetupTime'),
+    ('10;ConfigPopup'),
+    ('71;EquatorialProjection'),
+    ('72;AltAzProjection'),
+    ('73;EclipticProjection'),
+    ('74;GalacticProjection'),
+    ('15;FlipX'),
+    ('17;FlipY'),
+    ('21;rot_plus'),
+    ('22;rot_minus'),
+    ('92;rotate180'));
 
-// Standard right toolbar
-numstandardrightbar = 8;
-standardrightbar: array[1..numstandardrightbar] of string=(
-('32;ToolBarFOV'),
-('100;Divider'),
-('42;allSky'),
-('38;toN'),
-('39;toS'),
-('37;toE'),
-('40;toW'),
-('41;toZenith'));
+  // Standard right toolbar
+  numstandardrightbar = 8;
+  standardrightbar: array[1..numstandardrightbar] of string = (
+    ('32;ToolBarFOV'),
+    ('100;Divider'),
+    ('42;allSky'),
+    ('38;toN'),
+    ('39;toS'),
+    ('37;toE'),
+    ('40;toW'),
+    ('41;toZenith'));
 
 
 
@@ -1873,8 +1877,8 @@ implementation
 constructor Tconf_catalog.Create;
 begin
   inherited Create;
-  SampSelectIdent:=false;
-  SampSelectedNum:=0;
+  SampSelectIdent := False;
+  SampSelectedNum := 0;
 end;
 
 destructor Tconf_catalog.Destroy;
@@ -1898,11 +1902,12 @@ begin
   StarmagMax := Source.StarmagMax;
   NebMagMax := Source.NebMagMax;
   NebSizeMin := Source.NebSizeMin;
-  SampSelectedTable:=Source.SampSelectedTable;
-  SampSelectedNum:=Source.SampSelectedNum;
-  SetLength(SampSelectedRec,SampSelectedNum+1);
-  if SampSelectedNum>0 then for i:=0 to SampSelectedNum do
-     SampSelectedRec[i]:=Source.SampSelectedRec[i];
+  SampSelectedTable := Source.SampSelectedTable;
+  SampSelectedNum := Source.SampSelectedNum;
+  SetLength(SampSelectedRec, SampSelectedNum + 1);
+  if SampSelectedNum > 0 then
+    for i := 0 to SampSelectedNum do
+      SampSelectedRec[i] := Source.SampSelectedRec[i];
   for i := 1 to MaxStarCatalog do
   begin
     StarCatPath[i] := Source.StarCatPath[i];
@@ -1946,8 +1951,8 @@ end;
 constructor Tconf_shared.Create;
 begin
   inherited Create;
-  horizonpicture:=TBGRABitmap.Create;
-  horizonpicturevalid:=false;
+  horizonpicture := TBGRABitmap.Create;
+  horizonpicturevalid := False;
 end;
 
 destructor Tconf_shared.Destroy;
@@ -2028,9 +2033,9 @@ begin
   Setlength(Milkywaydot, MilkywaydotNum);
   for i := 0 to MilkywaydotNum - 1 do
   begin
-    Milkywaydot[i].ra:=Source.Milkywaydot[i].ra;
-    Milkywaydot[i].de:=Source.Milkywaydot[i].de;
-    Milkywaydot[i].val:=Source.Milkywaydot[i].val;
+    Milkywaydot[i].ra := Source.Milkywaydot[i].ra;
+    Milkywaydot[i].de := Source.Milkywaydot[i].de;
+    Milkywaydot[i].val := Source.Milkywaydot[i].val;
   end;
   StarNameNum := Source.StarNameNum;
   Setlength(StarName, StarNameNum);
@@ -2045,14 +2050,14 @@ begin
   horizonpicture.Assign(Source.horizonpicture);
   horizonpicturevalid := Source.horizonpicturevalid;
   horizonpicturename := Source.horizonpicturename;
-  ffove_tfl :=Source.ffove_tfl;
-  ffove_efl :=Source.ffove_efl;
-  ffove_efv :=Source.ffove_efv;
-  ffovc_tfl :=Source.ffovc_tfl;
-  ffovc_px :=Source.ffovc_px;
-  ffovc_py :=Source.ffovc_py;
-  ffovc_cx :=Source.ffovc_cx;
-  ffovc_cy :=Source.ffovc_cy;
+  ffove_tfl := Source.ffove_tfl;
+  ffove_efl := Source.ffove_efl;
+  ffove_efv := Source.ffove_efv;
+  ffovc_tfl := Source.ffovc_tfl;
+  ffovc_px := Source.ffovc_px;
+  ffovc_py := Source.ffovc_py;
+  ffovc_cx := Source.ffovc_cx;
+  ffovc_cy := Source.ffovc_cy;
 end;
 
 { Tconf_skychart }
@@ -2061,31 +2066,31 @@ constructor Tconf_skychart.Create;
 begin
   inherited Create;
   tz := TCdCTimeZone.Create;
-  ncircle:=10;
-  SetLength(circle,ncircle+1);
-  SetLength(circleok,ncircle+1);
-  SetLength(circlelbl,ncircle+1);
-  nrectangle:=10;
-  SetLength(rectangle,nrectangle+1);
-  SetLength(rectangleok,nrectangle+1);
-  SetLength(rectanglelbl,nrectangle+1);
-  PlotImageFirst:=false;
-  HeaderHeight:=0;
-  FooterHeight:=0;
-  CometMark:=Tstringlist.Create;
-  AsteroidMark:=Tstringlist.Create;
+  ncircle := 10;
+  SetLength(circle, ncircle + 1);
+  SetLength(circleok, ncircle + 1);
+  SetLength(circlelbl, ncircle + 1);
+  nrectangle := 10;
+  SetLength(rectangle, nrectangle + 1);
+  SetLength(rectangleok, nrectangle + 1);
+  SetLength(rectanglelbl, nrectangle + 1);
+  PlotImageFirst := False;
+  HeaderHeight := 0;
+  FooterHeight := 0;
+  CometMark := TStringList.Create;
+  AsteroidMark := TStringList.Create;
 end;
 
 destructor Tconf_skychart.Destroy;
 begin
   CometMark.Free;
   AsteroidMark.Free;
-  SetLength(circle,0);
-  SetLength(circleok,0);
-  SetLength(circlelbl,0);
-  SetLength(rectangle,0);
-  SetLength(rectangleok,0);
-  SetLength(rectanglelbl,0);
+  SetLength(circle, 0);
+  SetLength(circleok, 0);
+  SetLength(circlelbl, 0);
+  SetLength(rectangle, 0);
+  SetLength(rectangleok, 0);
+  SetLength(rectanglelbl, 0);
   SetLength(AsteroidLst, 0);
   SetLength(CometLst, 0);
   SetLength(AsteroidName, 0);
@@ -2205,7 +2210,7 @@ begin
   ObsXP := Source.ObsXP;
   ObsYP := Source.ObsYP;
   ObsRH := Source.ObsRH;
-  ObsTlr:= Source.ObsTlr;
+  ObsTlr := Source.ObsTlr;
   ObsTZ := Source.ObsTZ;
   countrytz := Source.countrytz;
   ObsTemperature := Source.ObsTemperature;
@@ -2232,7 +2237,7 @@ begin
   ShowGrid := Source.ShowGrid;
   ShowGridNum := Source.ShowGridNum;
   ShowOnlyMeridian := Source.ShowOnlyMeridian;
-  ShowAlwaysMeridian := source.ShowAlwaysMeridian;
+  ShowAlwaysMeridian := Source.ShowAlwaysMeridian;
   UseSystemTime := Source.UseSystemTime;
   StyleGrid := Source.StyleGrid;
   StyleEqGrid := Source.StyleEqGrid;
@@ -2296,9 +2301,9 @@ begin
   RefractionOffset := Source.RefractionOffset;
   ObsRAU := Source.ObsRAU;
   ObsZAU := Source.ObsZAU;
-  ObsELONG:=Source.ObsELONG;
-  ObsPHI:=Source.ObsPHI;
-  ObsDAZ:=Source.ObsDAZ;
+  ObsELONG := Source.ObsELONG;
+  ObsPHI := Source.ObsPHI;
+  ObsDAZ := Source.ObsDAZ;
   Diurab := Source.Diurab;
   WindowRatio := Source.WindowRatio;
   BxGlb := Source.BxGlb;
@@ -2327,8 +2332,8 @@ begin
   RightMargin := Source.RightMargin;
   TopMargin := Source.TopMargin;
   BottomMargin := Source.BottomMargin;
-  HeaderHeight:=Source.HeaderHeight;
-  FooterHeight:=Source.FooterHeight;
+  HeaderHeight := Source.HeaderHeight;
+  FooterHeight := Source.FooterHeight;
   Xcentre := Source.Xcentre;
   Ycentre := Source.Ycentre;
   ObsRoSinPhi := Source.ObsRoSinPhi;
@@ -2439,23 +2444,25 @@ begin
     LabelMagDiff[i] := Source.LabelMagDiff[i];
     LabelOrient[i] := Source.LabelOrient[i];
   end;
-  ObslistAlLabels:=Source.ObslistAlLabels;
-  ncircle:=Source.ncircle;
-  SetLength(circle,ncircle+1);
-  SetLength(circleok,ncircle+1);
-  SetLength(circlelbl,ncircle+1);
-  for i := 1 to ncircle do begin
+  ObslistAlLabels := Source.ObslistAlLabels;
+  ncircle := Source.ncircle;
+  SetLength(circle, ncircle + 1);
+  SetLength(circleok, ncircle + 1);
+  SetLength(circlelbl, ncircle + 1);
+  for i := 1 to ncircle do
+  begin
     circle[i, 1] := Source.circle[i, 1];
     circle[i, 2] := Source.circle[i, 2];
     circle[i, 3] := Source.circle[i, 3];
     circleok[i] := Source.circleok[i];
     circlelbl[i] := Source.circlelbl[i];
   end;
-  nrectangle:=Source.nrectangle;
-  SetLength(rectangle,nrectangle+1);
-  SetLength(rectangleok,nrectangle+1);
-  SetLength(rectanglelbl,nrectangle+1);
-  for i := 1 to nrectangle do begin
+  nrectangle := Source.nrectangle;
+  SetLength(rectangle, nrectangle + 1);
+  SetLength(rectangleok, nrectangle + 1);
+  SetLength(rectanglelbl, nrectangle + 1);
+  for i := 1 to nrectangle do
+  begin
     rectangle[i, 1] := Source.rectangle[i, 1];
     rectangle[i, 2] := Source.rectangle[i, 2];
     rectangle[i, 3] := Source.rectangle[i, 3];
@@ -2506,28 +2513,32 @@ begin
     for j := 1 to MaxPla do
       for k := 1 to 7 do
         PlanetLst[i, j, k] := Source.PlanetLst[i, j, k];
-  if SimObject[12] then begin
+  if SimObject[12] then
+  begin
     SetLength(AsteroidLst, Source.SimNb);
-      for i := 0 to Source.SimNb - 1 do
-        for j := 1 to Source.AsteroidNb do
-          for k := 1 to 5 do
-            AsteroidLst[i, j, k] := Source.AsteroidLst[i, j, k];
+    for i := 0 to Source.SimNb - 1 do
+      for j := 1 to Source.AsteroidNb do
+        for k := 1 to 5 do
+          AsteroidLst[i, j, k] := Source.AsteroidLst[i, j, k];
     SetLength(AsteroidName, Source.SimNb);
-      for i := 0 to Source.SimNb - 1 do
-        for j := 1 to Source.AsteroidNb do
-          for k := 1 to 2 do
-            AsteroidName[i, j, k] := Source.AsteroidName[i, j, k];
-  end else begin
-    Setlength(AsteroidLst,1);
+    for i := 0 to Source.SimNb - 1 do
+      for j := 1 to Source.AsteroidNb do
+        for k := 1 to 2 do
+          AsteroidName[i, j, k] := Source.AsteroidName[i, j, k];
+  end
+  else
+  begin
+    Setlength(AsteroidLst, 1);
     for j := 1 to Source.AsteroidNb do
       for k := 1 to 5 do
         AsteroidLst[0, j, k] := Source.AsteroidLst[0, j, k];
-    SetLength(AsteroidName,1);
+    SetLength(AsteroidName, 1);
     for j := 1 to Source.AsteroidNb do
       for k := 1 to 2 do
         AsteroidName[0, j, k] := Source.AsteroidName[0, j, k];
   end;
-  if SimObject[13] then begin
+  if SimObject[13] then
+  begin
     SetLength(CometLst, Source.SimNb);
     for i := 0 to Source.SimNb - 1 do
       for j := 1 to Source.CometNb do
@@ -2538,19 +2549,23 @@ begin
       for j := 1 to Source.CometNb do
         for k := 1 to 2 do
           CometName[i, j, k] := Source.CometName[i, j, k];
-  end else begin
+  end
+  else
+  begin
     SetLength(CometLst, 1);
     for j := 1 to Source.CometNb do
       for k := 1 to 8 do
         CometLst[0, j, k] := Source.CometLst[0, j, k];
     SetLength(CometName, 1);
-      for j := 1 to Source.CometNb do
-        for k := 1 to 2 do
-          CometName[0, j, k] := Source.CometName[0, j, k];
+    for j := 1 to Source.CometNb do
+      for k := 1 to 2 do
+        CometName[0, j, k] := Source.CometName[0, j, k];
   end;
   MaxArchiveImg := Source.MaxArchiveImg;
-  for i:=1 to MaxArchiveDir do ArchiveDir[i]:=Source.ArchiveDir[i];
-  for i:=1 to MaxArchiveDir do ArchiveDirActive[i]:=Source.ArchiveDirActive[i];
+  for i := 1 to MaxArchiveDir do
+    ArchiveDir[i] := Source.ArchiveDir[i];
+  for i := 1 to MaxArchiveDir do
+    ArchiveDirActive[i] := Source.ArchiveDirActive[i];
 end;
 
 { Tconf_plot }
@@ -2649,7 +2664,7 @@ begin
   Height := Source.Height;
   drawpen := Source.drawpen;
   drawsize := Source.drawsize;
-  cliparea:=Source.cliparea;
+  cliparea := Source.cliparea;
   fontscale := Source.fontscale;
   hw := Source.hw;
   hh := Source.hh;
@@ -2676,17 +2691,17 @@ begin
   AsteroidUrlList := TStringList.Create;
   TleUrlList := TStringList.Create;
   ObsNameList := TStringList.Create;
-  ObsNameList.Sorted:=true;
+  ObsNameList.Sorted := True;
 end;
 
 destructor Tconf_main.Destroy;
 begin
   try
-  FreeAndNil(CometUrlList);
-  FreeAndNil(AsteroidUrlList);
-  FreeAndNil(TleUrlList);
-  FreeAndNil(ObsNameList);
-  inherited Destroy;
+    FreeAndNil(CometUrlList);
+    FreeAndNil(AsteroidUrlList);
+    FreeAndNil(TleUrlList);
+    FreeAndNil(ObsNameList);
+    inherited Destroy;
   except
   end;
 end;
@@ -2695,30 +2710,30 @@ procedure Tconf_main.Assign(Source: Tconf_main);
 var
   i: integer;
 begin
-  InitObsList:=Source.InitObsList;
-  ObsListLimitType:=Source.ObsListLimitType;
-  ObsListMeridianSide:=Source.ObsListMeridianSide;
-  ObslistAirmass:=Source.ObslistAirmass;
-  ObslistAirmassLimit1:=Source.ObslistAirmassLimit1;
-  ObslistAirmassLimit2:=Source.ObslistAirmassLimit2;
-  ObslistHourAngle:=Source.ObslistHourAngle;
-  ObslistHourAngleLimit1:=Source.ObslistHourAngleLimit1;
-  ObslistHourAngleLimit2:=Source.ObslistHourAngleLimit2;
-  SampAutoconnect:=Source.SampAutoconnect;
-  SampKeepTables:=Source.SampKeepTables;
-  SampKeepImages:=Source.SampKeepImages;
-  SampConfirmCoord:=Source.SampConfirmCoord;
-  SampConfirmImage:=Source.SampConfirmImage;
-  SampConfirmTable:=Source.SampConfirmTable;
-  SampSubscribeCoord:=Source.SampSubscribeCoord;
-  SampSubscribeImage:=Source.SampSubscribeImage;
-  SampSubscribeTable:=Source.SampSubscribeTable;
-  SimpleMove:=Source.SimpleMove;
-  SimpleDetail:=Source.SimpleDetail;
-  KioskPass:=Source.KioskPass;
-  KioskMode:=Source.KioskMode;
-  KioskDebug:=Source.KioskDebug;
-  CenterAtNoon:=Source.CenterAtNoon;
+  InitObsList := Source.InitObsList;
+  ObsListLimitType := Source.ObsListLimitType;
+  ObsListMeridianSide := Source.ObsListMeridianSide;
+  ObslistAirmass := Source.ObslistAirmass;
+  ObslistAirmassLimit1 := Source.ObslistAirmassLimit1;
+  ObslistAirmassLimit2 := Source.ObslistAirmassLimit2;
+  ObslistHourAngle := Source.ObslistHourAngle;
+  ObslistHourAngleLimit1 := Source.ObslistHourAngleLimit1;
+  ObslistHourAngleLimit2 := Source.ObslistHourAngleLimit2;
+  SampAutoconnect := Source.SampAutoconnect;
+  SampKeepTables := Source.SampKeepTables;
+  SampKeepImages := Source.SampKeepImages;
+  SampConfirmCoord := Source.SampConfirmCoord;
+  SampConfirmImage := Source.SampConfirmImage;
+  SampConfirmTable := Source.SampConfirmTable;
+  SampSubscribeCoord := Source.SampSubscribeCoord;
+  SampSubscribeImage := Source.SampSubscribeImage;
+  SampSubscribeTable := Source.SampSubscribeTable;
+  SimpleMove := Source.SimpleMove;
+  SimpleDetail := Source.SimpleDetail;
+  KioskPass := Source.KioskPass;
+  KioskMode := Source.KioskMode;
+  KioskDebug := Source.KioskDebug;
+  CenterAtNoon := Source.CenterAtNoon;
   ClockColor := Source.ClockColor;
   SesameUrlNum := Source.SesameUrlNum;
   SesameCatNum := Source.SesameCatNum;
@@ -2742,9 +2757,9 @@ begin
   PrinterResolution := Source.PrinterResolution;
   PrintMethod := Source.PrintMethod;
   PrintColor := Source.PrintColor;
-  PrintBmpWidth:=Source.PrintBmpWidth;
-  PrintBmpHeight:=Source.PrintBmpHeight;
-  btnsize :=Source.btnsize;
+  PrintBmpWidth := Source.PrintBmpWidth;
+  PrintBmpHeight := Source.PrintBmpHeight;
+  btnsize := Source.btnsize;
   btncaption := Source.btncaption;
   ScreenScaling := Source.ScreenScaling;
   configpage := Source.configpage;
@@ -2861,4 +2876,3 @@ end;
 
 
 end.
-

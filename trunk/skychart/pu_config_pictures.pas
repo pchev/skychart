@@ -25,7 +25,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, cu_fits, cu_database, UScaleDPI,
+uses
+  u_help, u_translation, u_constant, u_util, cu_fits, cu_database, UScaleDPI,
   fu_config_pictures, LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, FileUtil, StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits,
   LResources, EditBtn, LazHelpHTML;
@@ -54,22 +55,23 @@ type
   end;
 
 implementation
+
 {$R *.lfm}
 
 procedure Tf_configpictures.SetLang;
 begin
-Caption:=rsPictures;
-Button1.caption:=rsOK;
-Button2.caption:=rsApply;
-Button3.caption:=rsCancel;
-Button4.caption:=rsHelp;
-SetHelp(self,hlpCfgPict);
+  Caption := rsPictures;
+  Button1.Caption := rsOK;
+  Button2.Caption := rsApply;
+  Button3.Caption := rsCancel;
+  Button4.Caption := rsHelp;
+  SetHelp(self, hlpCfgPict);
 end;
 
 procedure Tf_configpictures.FormCreate(Sender: TObject);
 begin
- ScaleDPI(Self);
- SetLang;
+  ScaleDPI(Self);
+  SetLang;
 end;
 
 procedure Tf_configpictures.FormShow(Sender: TObject);
@@ -79,7 +81,8 @@ end;
 
 procedure Tf_configpictures.Button2Click(Sender: TObject);
 begin
-if assigned(f_config_pictures1.onApplyConfig) then f_config_pictures1.onApplyConfig(f_config_pictures1);
+  if assigned(f_config_pictures1.onApplyConfig) then
+    f_config_pictures1.onApplyConfig(f_config_pictures1);
 end;
 
 procedure Tf_configpictures.Button4Click(Sender: TObject);
@@ -87,10 +90,9 @@ begin
   ShowHelp;
 end;
 
-procedure Tf_configpictures.FormClose(Sender: TObject;
-  var CloseAction: TCloseAction);
+procedure Tf_configpictures.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
-f_config_pictures1.lock;
+  f_config_pictures1.lock;
 end;
 
 end.

@@ -81,9 +81,11 @@ elements available from ftp://ssd.jpl.nasa.gov/pub/eph/satellites/rckin
 
 interface
 
-uses math;
+uses
+  Math;
 
-function evaluate_rock( jde: double; jpl_id: integer; var output_vect: array of double): boolean;
+function evaluate_rock(jde: double; jpl_id: integer;
+  var output_vect: array of double): boolean;
 
 type
   //define ROCK struct rock
@@ -96,7 +98,7 @@ type
 
 const
   N_ROCKS = 36;
-  deg2rad = pi/180;
+  deg2rad = pi / 180;
 
   rocks: array [1..N_ROCKS] of Trock = (
     (jpl_id: 401;             { Phobos: MAR080 data }
@@ -110,8 +112,10 @@ const
     apsis_rate: 5.037011787882128E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 1.306533283449532E-02 * deg2rad;   { mean motion (deg/sec)         }
     node_rate: -5.043841563630776E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 3.176707407767539E+02 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 5.289299367003886E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 3.176707407767539E+02 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 5.289299367003886E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 402;             { Deimos:  MAR080 data }
     epoch_jd: 2433282.50;                           { element epoch Julian date     }
@@ -124,8 +128,10 @@ const
     apsis_rate: 2.076162603566793E-07 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 3.300484710930912E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -2.091750616728367E-07 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 3.166569791010836E+02 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 5.352937471037383E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 3.166569791010836E+02 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 5.352937471037383E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 505;            { Amalthea: JUP250 }
     epoch_jd: 2450000.500000000;                   { element epoch Julian date     }
@@ -138,8 +144,10 @@ const
     apsis_rate: 2.908651473226303E-05 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 8.363792987058621E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -2.898772964219916E-05 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 2.680573067077756E+02 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 6.449433514883954E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 2.680573067077756E+02 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 6.449433514883954E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 514;                { Thebe: JUP250 }
     epoch_jd: 2450000.500000000;                    { element epoch Julian date     }
@@ -152,8 +160,10 @@ const
     apsis_rate: 1.433399183927280E-05 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 6.177086242379696E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -1.430832006152276E-05 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 2.680573566856980E+02 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 6.449436369487705E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 2.680573566856980E+02 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 6.449436369487705E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 515;           { Adrastea: JUP250 }
     epoch_jd: 2450000.500000000;                    { element epoch Julian date     }
@@ -166,8 +176,10 @@ const
     apsis_rate: 9.721724518582802E-05 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 1.396989430143032E-02 * deg2rad;     { mean motion (deg/sec)         }
     node_rate: -9.865593193437598E-05 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 2.680565964128937E+02 * deg2rad;     { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 6.449530295172036E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 2.680565964128937E+02 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 6.449530295172036E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 516;           { Metis: JUP250 }
     epoch_jd: 2450000.500000000;                    { element epoch Julian date     }
@@ -180,8 +192,10 @@ const
     apsis_rate: 9.905391637419158E-05 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 1.413489189624821E-02 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -9.817915317723091E-05 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 2.680565964128937E+02 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 6.449530295172036E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 2.680565964128937E+02 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 6.449530295172036E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 610;      { Janus:  SAT080 data }
     epoch_jd: 2444786.5;                            { element epoch Julian date     }
@@ -194,8 +208,10 @@ const
     apsis_rate: 2.378317712273239E-05 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 5.998806000756397E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -2.367392401124433E-05 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 4.057999864473820E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 8.353999955183330E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 4.057999864473820E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 8.353999955183330E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 611;      { Epimetheus:  SAT080 data }
     epoch_jd: 2444786.5;                            { element epoch Julian date     }
@@ -208,8 +224,10 @@ const
     apsis_rate: 2.379040740977320E-05 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 6.001665785000491E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -2.367577385695356E-05 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 4.057999864473820E+01 * deg2rad;     { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 8.353999955183330E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 4.057999864473820E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 8.353999955183330E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 612;      { Helene:  SAT080 data }
     epoch_jd: 2444786.5;                            { element epoch Julian date     }
@@ -222,8 +240,10 @@ const
     apsis_rate: -6.777890900303528E-07 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 1.522394989535369E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -9.680289928992843E-07 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 4.057615013244320E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 8.354534172579820E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 4.057615013244320E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 8.354534172579820E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 613;      { Telesto:  SAT080 data }
     epoch_jd: 2444786.5;                            { element epoch Julian date     }
@@ -236,8 +256,10 @@ const
     apsis_rate: 2.297061650453675E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 2.207149546064677E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -2.290176906415847E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 4.057999864473820E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 8.353999955183330E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 4.057999864473820E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 8.353999955183330E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 614;      { Calypso:  SAT080 data }
     epoch_jd: 2444786.5;                            { element epoch Julian date     }
@@ -250,8 +272,10 @@ const
     apsis_rate: 2.297022164277979E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 2.207149553889344E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -2.289705897532556E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 4.057999864473820E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 8.353999955183330E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 4.057999864473820E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 8.353999955183330E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 615;           { Atlas: SAT080 data }
     epoch_jd: 2444786.50;                           { element epoch Julian date     }
@@ -264,8 +288,10 @@ const
     apsis_rate: 3.334584985561025E-05 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 6.924845572071244E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -3.318681015315788E-05 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 4.058861887893110E+01 * deg2rad;     { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 8.352533375484340E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 4.058861887893110E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 8.352533375484340E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 616;              { Prometheus: SAT127 data }
     epoch_jd: 2444940.;                       { element epoch Julian date     }
@@ -306,8 +332,10 @@ const
     apsis_rate: 3.711667873563986E-05 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 7.245737663080527E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -3.692848983924850E-05 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 4.058266021370071E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 8.353762557532015E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 4.058266021370071E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 8.353762557532015E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 635;             { Daphnis SAT357eq }
     epoch_jd: 2451545.0;                            { element epoch Julian date     }
@@ -320,8 +348,10 @@ const
     apsis_rate: 3.436678564527815E-05 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 7.013647605763186E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -3.420001234488550E-05 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 4.058266021370071E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 8.353762557532015E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 4.058266021370071E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 8.353762557532015E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 706;             { Cordelia URA091}
     epoch_jd: 2446450.0;                            { element epoch Julian date     }
@@ -334,8 +364,10 @@ const
     apsis_rate: 1.738799696981362E-05 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 1.243656183299048E-02 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -1.736377492435019E-05 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 707;             { Ophelia URA091}
     epoch_jd: 2446450.0;                            { element epoch Julian date     }
@@ -348,8 +380,10 @@ const
     apsis_rate: 1.324712040631912E-05 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 1.106966008118268E-02 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -1.323133607399601E-05 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 708;             { Bianca URA091}
     epoch_jd: 2446450.0;                            { element epoch Julian date     }
@@ -362,8 +396,10 @@ const
     apsis_rate: 9.467105548594393E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 9.587823207439880E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -9.457950543934906E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 709;             { Cressida URA091}
     epoch_jd: 2446450.0;                            { element epoch Julian date     }
@@ -376,8 +412,10 @@ const
     apsis_rate: 8.142357893631056E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 8.988222143978887E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -8.135007925901379E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 710;             { Desdemona URA091}
     epoch_jd: 2446450.0;                            { element epoch Julian date     }
@@ -390,8 +428,10 @@ const
     apsis_rate: 7.743633229159851E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 8.796938545302438E-03 * deg2rad;     { mean motion (deg/sec)         }
     node_rate: -7.736867825787147E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 711;             { Juliet URA091}
     epoch_jd: 2446450.0;                            { element epoch Julian date     }
@@ -404,8 +444,10 @@ const
     apsis_rate: 7.050789555402506E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 8.450533525589351E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -7.044928085318312E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 712;             { Portia URA091}
     epoch_jd: 2446450.0;                            { element epoch Julian date     }
@@ -418,8 +460,10 @@ const
     apsis_rate: 6.422466432321616E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 8.119056168010097E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -6.417420983992342E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),     { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 713;             { Rosalind URA091}
     epoch_jd: 2446450.0;                            { element epoch Julian date     }
@@ -432,8 +476,10 @@ const
     apsis_rate: 5.273919837749587E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 7.460999947254308E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -5.270264644406115E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),     { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 714;             { Belinda URA091}
     epoch_jd: 2446450.0;                            { element epoch Julian date     }
@@ -446,8 +492,10 @@ const
     apsis_rate: 4.080592112111099E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 6.682410769071078E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -4.078118716334471E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 715;             { Puck URA091}
     epoch_jd: 2446450.0;                            { element epoch Julian date     }
@@ -460,8 +508,10 @@ const
     apsis_rate: 2.563927692592904E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 5.469265726829639E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -2.562898939602568E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 725;             { Perdita URA091}
     epoch_jd: 2453243.0;                            { element epoch Julian date     }
@@ -474,8 +524,10 @@ const
     apsis_rate: 7.254635422562736E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 6.530622640638519E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -1.264570087799819E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 726;             { Mab URA091}
     epoch_jd: 2453243.0;                            { element epoch Julian date     }
@@ -488,8 +540,10 @@ const
     apsis_rate: 2.045092348282713E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 4.514456799305884E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -1.920887916143170E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 727;             { Cupid URA091}
     epoch_jd: 2453243.0;                            { element epoch Julian date     }
@@ -502,8 +556,10 @@ const
     apsis_rate: 4.009533113969465E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 6.799110491893427E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -3.448340803322791E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 7.731359116506646E+01 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 1.517445781731228E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     { NOTE that the following elements for Triton DO NOT WORK. }
     { They lead to prograde motion.  No idea what's going on!  }
@@ -519,8 +575,10 @@ const
     apsis_rate: 1.211953824000000E-08 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: -7.089961076000000E-04 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: 1.657793254000000E-08 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 2.989472940000000E+02 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 4.331890600000000E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 2.989472940000000E+02 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 4.331890600000000E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 803;  { Naiad; a.k.a. 1989N6: NEP050 }
     epoch_jd: 2447757.0;                           { element epoch Julian date     }
@@ -533,8 +591,10 @@ const
     apsis_rate: 1.964161049323076E-05 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 1.415326558087714E-02 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -1.985180471594082E-05 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 2.993634890000000E+02 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 4.344909600000000E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 2.993634890000000E+02 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 4.344909600000000E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 804;   { Thalassa; a.k.a. 1989N5: NEP050 }
     epoch_jd: 2447757.0;                            { element epoch Julian date     }
@@ -547,8 +607,10 @@ const
     apsis_rate: 1.745544005794959E-05 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 1.337678870805562E-02 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -1.746377282651943E-05 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 2.993634890000000E+02 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 4.344909600000000E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 2.993634890000000E+02 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 4.344909600000000E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 805;   { Despina;  a.k.a. 1989N3: NEP050 }
     epoch_jd: 2447757.0;                            { element epoch Julian date     }
@@ -561,8 +623,10 @@ const
     apsis_rate: 1.475565828888696E-05 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 1.245059755574818E-02 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -1.476785707594837E-05 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 2.993634890000000E+02 * deg2rad;     { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 4.344909600000000E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 2.993634890000000E+02 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 4.344909600000000E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 806;   { Galatea; a.k.a. 1989N4: NEP050 }
     epoch_jd: 2447757.0;                            { element epoch Julian date     }
@@ -575,8 +639,10 @@ const
     apsis_rate: 8.264989830842901E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 9.718285365249440E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -8.284262531923991E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 2.993634890000000E+02 * deg2rad;     { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 4.344909600000000E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 2.993634890000000E+02 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 4.344909600000000E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 807;   { Larissa; a.k.a. 1989N2: NEP050 }
     epoch_jd: 2447757.0;                            { element epoch Julian date     }
@@ -589,8 +655,10 @@ const
     apsis_rate: 4.526939181068548E-06 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 7.512183377052987E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -4.555573945715664E-06 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 2.993634890000000E+02 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 4.344909600000000E+01 * deg2rad),    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 2.993634890000000E+02 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 4.344909600000000E+01 * deg2rad),
+    { Laplacian plane pole dec (deg)}
 
     (jpl_id: 808;   { Proteus;  a.k.a. 1989N1: NEP050 }
     epoch_jd: 2447757.0;                            { element epoch Julian date     }
@@ -603,101 +671,108 @@ const
     apsis_rate: 8.764111065373391E-07 * deg2rad;   { apsis rate (deg/sec)          }
     mean_motion: 3.712548540365151E-03 * deg2rad;    { mean motion (deg/sec)         }
     node_rate: -9.086814828264133E-07 * deg2rad;   { node rate (deg/sec)           }
-    laplacian_pole_ra: 2.993634890000000E+02 * deg2rad;    { Laplacian plane pole ra (deg) }
-    laplacian_pole_dec: 4.344909600000000E+01 * deg2rad)    { Laplacian plane pole dec (deg)}
+    laplacian_pole_ra: 2.993634890000000E+02 * deg2rad;
+    { Laplacian plane pole ra (deg) }
+    laplacian_pole_dec: 4.344909600000000E+01 * deg2rad)
+    { Laplacian plane pole dec (deg)}
     );
 
 
 implementation
 
-function evaluate_rock( jde: double; jpl_id: integer; var output_vect: array of double): boolean;
-{ Given a JDE and a JPL ID number (see list at the top of this file), }
-{ evaluate_rock( ) will compute the J2000 equatorial Cartesian        }
-{ position for that "rock" and will return 0.  Otherwise,  it returns }
-{ -1 as an error condition.  No other errors are returned... though   }
-{ hypothetically,  something indicating you're outside the valid time }
-{ coverage for the orbit in question would be nice.}
+function evaluate_rock(jde: double; jpl_id: integer;
+  var output_vect: array of double): boolean;
+  { Given a JDE and a JPL ID number (see list at the top of this file), }
+  { evaluate_rock( ) will compute the J2000 equatorial Cartesian        }
+  { position for that "rock" and will return 0.  Otherwise,  it returns }
+  { -1 as an error condition.  No other errors are returned... though   }
+  { hypothetically,  something indicating you're outside the valid time }
+  { coverage for the orbit in question would be nice.}
 const
-   seconds_per_day = 86400.0;
+  seconds_per_day = 86400.0;
 var
-   i,j : integer;
-   rptr: Trock;
-   dt_seconds,mean_lon,h, k, p, q, tsin, tcos, r, e, omega, true_lon : double;
-   a_fraction, b_fraction, c_fraction, dot_prod : double;
-   avect, bvect, cvect : array [0..2] of double;
+  i, j: integer;
+  rptr: Trock;
+  dt_seconds, mean_lon, h, k, p, q, tsin, tcos, r, e, omega, true_lon: double;
+  a_fraction, b_fraction, c_fraction, dot_prod: double;
+  avect, bvect, cvect: array [0..2] of double;
 begin
-   result:=false;
-   for i:=1 to N_ROCKS do begin
-      if( rocks[i].jpl_id = jpl_id) then begin
-         rptr := rocks[i];
-         dt_seconds := (jde - rptr.epoch_jd) * seconds_per_day;
-         mean_lon := rptr.mean_lon0 + dt_seconds * rptr.mean_motion;
-                        { avect is at right angles to Laplacian pole, }
-                        { but in plane of the J2000 equator:          }
-         avect[0] := -sin( rptr.laplacian_pole_ra);
-         avect[1] := cos( rptr.laplacian_pole_ra);
-         avect[2] := 0.0;
+  Result := False;
+  for i := 1 to N_ROCKS do
+  begin
+    if (rocks[i].jpl_id = jpl_id) then
+    begin
+      rptr := rocks[i];
+      dt_seconds := (jde - rptr.epoch_jd) * seconds_per_day;
+      mean_lon := rptr.mean_lon0 + dt_seconds * rptr.mean_motion;
+      { avect is at right angles to Laplacian pole, }
+      { but in plane of the J2000 equator:          }
+      avect[0] := -sin(rptr.laplacian_pole_ra);
+      avect[1] := cos(rptr.laplacian_pole_ra);
+      avect[2] := 0.0;
 
-                        { bvect is at right angles to Laplacian pole  }
-                        { _and_ to avect:                             }
-         tsin := sin( rptr.laplacian_pole_dec);
-         tcos := cos( rptr.laplacian_pole_dec);
-         bvect[0] := -avect[1] * tsin;
-         bvect[1] := avect[0] * tsin;
-         bvect[2] := tcos;
+      { bvect is at right angles to Laplacian pole  }
+      { _and_ to avect:                             }
+      tsin := sin(rptr.laplacian_pole_dec);
+      tcos := cos(rptr.laplacian_pole_dec);
+      bvect[0] := -avect[1] * tsin;
+      bvect[1] := avect[0] * tsin;
+      bvect[2] := tcos;
 
-                        { cvect is the Laplacian pole vector:  }
-         cvect[0] := avect[1] * tcos;
-         cvect[1] := -avect[0] * tcos;
-         cvect[2] := tsin;
+      { cvect is the Laplacian pole vector:  }
+      cvect[0] := avect[1] * tcos;
+      cvect[1] := -avect[0] * tcos;
+      cvect[2] := tsin;
 
-                           { Rotate the (h, k) vector to account for }
-                           { a constant apsidal motion:              }
-         tsin := sin( dt_seconds * rptr.apsis_rate);
-         tcos := cos( dt_seconds * rptr.apsis_rate);
-         h := rptr.k * tsin + rptr.h * tcos;
-         k := rptr.k * tcos - rptr.h * tsin;
+      { Rotate the (h, k) vector to account for }
+      { a constant apsidal motion:              }
+      tsin := sin(dt_seconds * rptr.apsis_rate);
+      tcos := cos(dt_seconds * rptr.apsis_rate);
+      h := rptr.k * tsin + rptr.h * tcos;
+      k := rptr.k * tcos - rptr.h * tsin;
 
-                           { I'm sure there's a better way to do this...  }
-                           { all I do here is to compute the eccentricity }
-                           { and omega,  a.k.a. longitude of perihelion,  }
-                           { and do a first-order correction to get the   }
-                           { 'actual' r and true longitude values.        }
-         e := sqrt( h * h + k * k);
-         omega := arctan2( h, k);
-         true_lon := mean_lon + 2. * e * sin( mean_lon - omega)
-                          + 1.25 * e * e * sin( 2. * (mean_lon - omega));
-         r := rptr.a * (1. - e * e) / (1 + e * cos( true_lon - omega));
+      { I'm sure there's a better way to do this...  }
+      { all I do here is to compute the eccentricity }
+      { and omega,  a.k.a. longitude of perihelion,  }
+      { and do a first-order correction to get the   }
+      { 'actual' r and true longitude values.        }
+      e := sqrt(h * h + k * k);
+      omega := arctan2(h, k);
+      true_lon := mean_lon + 2. * e * sin(
+        mean_lon - omega) + 1.25 * e * e * sin(
+        2. * (mean_lon - omega));
+      r := rptr.a * (1. - e * e) / (1 + e * cos(true_lon - omega));
 
-                           { Just as we rotated (h,k),  we gotta rotate }
-                           { the (p,q) vector to account for precession }
-                           { in the Laplacian plane:                    }
+      { Just as we rotated (h,k),  we gotta rotate }
+      { the (p,q) vector to account for precession }
+      { in the Laplacian plane:                    }
 
-         tsin := sin( dt_seconds * rptr.node_rate);
-         tcos := cos( dt_seconds * rptr.node_rate);
-         p := rptr.q * tsin + rptr.p * tcos;
-         q := rptr.q * tcos - rptr.p * tsin;
+      tsin := sin(dt_seconds * rptr.node_rate);
+      tcos := cos(dt_seconds * rptr.node_rate);
+      p := rptr.q * tsin + rptr.p * tcos;
+      q := rptr.q * tcos - rptr.p * tsin;
 
-                           { Now we evaluate the position in components }
-                           { along avect, bvect, cvect.  I derived the  }
-                           { formulae from scratch... sorry I can't     }
-                           { give references:                           }
-         tsin := sin( true_lon);
-         tcos := cos( true_lon);
-         dot_prod := 2. * (q * tsin - p * tcos) / (1. + p * p + q * q);
-         a_fraction := tcos + p * dot_prod;
-         b_fraction := tsin - q * dot_prod;
-         c_fraction := dot_prod;
+      { Now we evaluate the position in components }
+      { along avect, bvect, cvect.  I derived the  }
+      { formulae from scratch... sorry I can't     }
+      { give references:                           }
+      tsin := sin(true_lon);
+      tcos := cos(true_lon);
+      dot_prod := 2. * (q * tsin - p * tcos) / (1. + p * p + q * q);
+      a_fraction := tcos + p * dot_prod;
+      b_fraction := tsin - q * dot_prod;
+      c_fraction := dot_prod;
 
-                           { Now that we've got components on each axis, }
-                           { the remainder is trivial: }
-         for j := 0 to 2 do begin
-            output_vect[j] := r * (a_fraction * avect[j]
-                                + b_fraction * bvect[j]
-                                + c_fraction * cvect[j]);
-         end;
-         result:=true;
-     end;
+      { Now that we've got components on each axis, }
+      { the remainder is trivial: }
+      for j := 0 to 2 do
+      begin
+        output_vect[j] :=
+          r * (a_fraction * avect[j] + b_fraction *
+          bvect[j] + c_fraction * cvect[j]);
+      end;
+      Result := True;
+    end;
   end;
 end;
 

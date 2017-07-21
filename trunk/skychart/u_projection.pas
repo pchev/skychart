@@ -28,8 +28,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 {$mode objfpc}{$H+}
 interface
 
-uses u_constant, u_util,
-  Math, SysUtils, Graphics;
+uses
+  u_constant, u_util, Math, SysUtils, Graphics;
 
 const
   refmethod = 1;    // Refraction method: 0=norefraction, 1=Bennett, 2=slalib
@@ -144,8 +144,7 @@ procedure sla_REFCO(HM, TDK, PMB, RH, WL, PHI, TLR, EPS: double;
   var REFA, REFB: double);
 procedure cdc_REFCO(HM, TDK, PMB, RH, WL, PHI, TLR, EPS, H1, H2: double;
   var REFA, REFB: double);
-procedure sla_REFRO(ZOBS, HM, TDK, PMB, RH, WL, PHI, TLR, EPS: double;
-  var REF: double);
+procedure sla_REFRO(ZOBS, HM, TDK, PMB, RH, WL, PHI, TLR, EPS: double; var REF: double);
 procedure sla_REFCOQ(TDK, PMB, RH, WL: double; var REFA, REFB: double);
 procedure sla_REFZ(ZU, REFA, REFB: double; var ZR: double);
 procedure sla_GEOC(P, H: double; var R, Z: double);
@@ -437,7 +436,8 @@ begin
     else
       raise Exception.Create('Bad projection type');
   end;
-  if clip and (c.projpole = AltAz) and c.horizonopaque and (h <= (c.HorizonMax - radius)) then
+  if clip and (c.projpole = AltAz) and c.horizonopaque and
+    (h <= (c.HorizonMax - radius)) then
   begin
 
     if (h < (c.ObsHorizonDepression - musec)) then
@@ -1087,7 +1087,8 @@ begin
   I2 := (TF - TI) / 36524.2199;
   I3 := deg2rad * ((1.8E-2 * I2 + 3.02E-1) * I2 + (2304.25 + 1.396 * I1)) * I2 / 3600.0;
   I4 := deg2rad * I2 * I2 * (7.91E-1 + I2 / 1000.0) / 3600.0 + I3;
-  I5 := deg2rad * ((2004.682 - 8.35E-1 * I1) - (4.2E-2 * I2 + 4.26E-1) * I2) * I2 / 3600.0;
+  I5 := deg2rad * ((2004.682 - 8.35E-1 * I1) - (4.2E-2 * I2 + 4.26E-1) * I2) *
+    I2 / 3600.0;
   I6 := COS(DEI) * SIN(ARI + I3);
   I7 := COS(I5) * COS(DEI) * COS(ARI + I3) - SIN(I5) * SIN(DEI);
   DEI := double(ArcSIN(SIN(I5) * COS(DEI) * COS(ARI + I3) + COS(I5) * SIN(DEI)));
@@ -1104,12 +1105,12 @@ begin
     exit;
   I1 := (TI - 2451545.0) / 36525;
   I2 := (TF - TI) / 36525;
-  I3 := deg2rad * ((2306.2181 + 1.39656 * i1 - 1.39e-4 * i1 * i1) * i2 +
-    (0.30188 - 3.44e-4 * i1) * i2 * i2 + 1.7998e-2 * i2 * i2 * i2) / 3600;
-  I4 := deg2rad * ((2306.2181 + 1.39656 * i1 - 1.39e-4 * i1 * i1) * i2 +
-    (1.09468 + 6.6e-5 * i1) * i2 * i2 + 1.8203e-2 * i2 * i2 * i2) / 3600;
-  I5 := deg2rad * ((2004.3109 - 0.85330 * i1 - 2.17e-4 * i1 * i1) * i2 -
-    (0.42665 + 2.17e-4 * i1) * i2 * i2 - 4.1833e-2 * i2 * i2 * i2) / 3600;
+  I3 := deg2rad * ((2306.2181 + 1.39656 * i1 - 1.39e-4 * i1 * i1) *
+    i2 + (0.30188 - 3.44e-4 * i1) * i2 * i2 + 1.7998e-2 * i2 * i2 * i2) / 3600;
+  I4 := deg2rad * ((2306.2181 + 1.39656 * i1 - 1.39e-4 * i1 * i1) *
+    i2 + (1.09468 + 6.6e-5 * i1) * i2 * i2 + 1.8203e-2 * i2 * i2 * i2) / 3600;
+  I5 := deg2rad * ((2004.3109 - 0.85330 * i1 - 2.17e-4 * i1 * i1) *
+    i2 - (0.42665 + 2.17e-4 * i1) * i2 * i2 - 4.1833e-2 * i2 * i2 * i2) / 3600;
   I6 := COS(DEI) * SIN(ARI + I3);
   I7 := COS(I5) * COS(DEI) * COS(ARI + I3) - SIN(I5) * SIN(DEI);
   i1 := (SIN(I5) * COS(DEI) * COS(ARI + I3) + COS(I5) * SIN(DEI));
@@ -1129,12 +1130,12 @@ var
 begin
   i1 := (ti - 2451545.0) / 36525;
   i2 := (tf - ti) / 36525;
-  i3 := deg2rad * (((47.0029 - 0.06603 * i1 + 0.000598 * i1 * i1) * i2 +
-    (-0.03302 + 0.000598 * i1) * i2 * i2 + 0.000060 * i2 * i2 * i2) / 3600);
-  i4 := deg2rad * ((174.876384 * 3600 + 3289.4789 * i1 + 0.60622 * i1 * i1 -
-    (869.8089 + 0.50491 * i1) * i2 + 0.03536 * i2 * i2) / 3600);
-  i5 := deg2rad * (((5029.0966 + 2.22226 * i1 - 0.000042 * i1 * i1) * i2 +
-    (1.11113 - 0.000042 * i1) * i2 * i2 - 0.000006 * i2 * i2 * i2) / 3600);
+  i3 := deg2rad * (((47.0029 - 0.06603 * i1 + 0.000598 * i1 * i1) *
+    i2 + (-0.03302 + 0.000598 * i1) * i2 * i2 + 0.000060 * i2 * i2 * i2) / 3600);
+  i4 := deg2rad * ((174.876384 * 3600 + 3289.4789 * i1 + 0.60622 *
+    i1 * i1 - (869.8089 + 0.50491 * i1) * i2 + 0.03536 * i2 * i2) / 3600);
+  i5 := deg2rad * (((5029.0966 + 2.22226 * i1 - 0.000042 * i1 * i1) *
+    i2 + (1.11113 - 0.000042 * i1) * i2 * i2 - 0.000006 * i2 * i2 * i2) / 3600);
   i6 := cos(i3) * cos(b) * sin(i4 - l) - sin(i3) * sin(b);
   i7 := cos(b) * cos(i4 - l);
   i8 := cos(i3) * sin(b) + sin(i3) * cos(b) * sin(i4 - l);
@@ -1271,7 +1272,8 @@ begin
             begin
               // Compute refraction using current estimate of observed ZD
               sla_REFRO(h, c.ObsAltitude, 273 + c.ObsTemperature,
-                c.ObsPressure, c.ObsRH, 0.55, deg2rad * c.ObsLatitude, c.ObsTlr, 1E-8, R);
+                c.ObsPressure, c.ObsRH, 0.55, deg2rad * c.ObsLatitude,
+                c.ObsTlr, 1E-8, R);
               // Remaining discrepancy
               DZD := h + R - h1;
               // Update the estimate
@@ -1283,7 +1285,8 @@ begin
           h := pid2 - h;
         end
         else
-          h := h + deg2rad * c.ObsRefractionCor * 0.64658062088 * (rad2deg * h + 90) / 89;
+          h := h + deg2rad * c.ObsRefractionCor * 0.64658062088 *
+            (rad2deg * h + 90) / 89;
       end;
     end;
   end
@@ -1319,7 +1322,8 @@ begin
           h := pid2 - h1;
         end
         else
-          h := h - deg2rad * c.ObsRefractionCor * 0.65705159 * (rad2deg * h + 90) / 89.64658;
+          h := h - deg2rad * c.ObsRefractionCor * 0.65705159 *
+            (rad2deg * h + 90) / 89.64658;
       end;
     end;
   end;
@@ -1340,75 +1344,81 @@ begin
     t := (j - jd2000) / 36525;
     // high precision. using meeus91 table 21.A
     //longitude of the asc.node of the Moon's mean orbit on the ecliptic
-    om := deg2rad * (125.04452 - 1934.136261 * t + 0.0020708 * t * t + t * t * t / 4.5e+5);
+    om := deg2rad * (125.04452 - 1934.136261 * t + 0.0020708 * t *
+      t + t * t * t / 4.5e+5);
     //mean elongation of the Moon from Sun
-    me := deg2rad * (297.85036 + 445267.11148 * t - 0.0019142 * t * t + t * t * t / 189474);
+    me := deg2rad * (297.85036 + 445267.11148 * t - 0.0019142 * t *
+      t + t * t * t / 189474);
     //mean anomaly of the Sun (Earth)
     mas := deg2rad * (357.52772 + 35999.05034 * t - 1.603e-4 * t * t - t * t * t / 3e+5);
     //mean anomaly of the Moon
-    mam := deg2rad * (134.96298 + 477198.867398 * t + 0.0086972 * t * t + t * t * t / 56250);
+    mam := deg2rad * (134.96298 + 477198.867398 * t + 0.0086972 * t *
+      t + t * t * t / 56250);
     //Moon's argument of latitude
-    al := deg2rad * (93.27191 + 483202.017538 * t - 0.0036825 * t * t + t * t * t / 327270);
+    al := deg2rad * (93.27191 + 483202.017538 * t - 0.0036825 * t *
+      t + t * t * t / 327270);
     //periodic terms for the nutation in longitude.The unit is 0".0001.
     nutl := secarc * ((-171996 - 174.2 * t) * sin(1 * om) +
       (-13187 - 1.6 * t) * sin(-2 * me + 2 * al + 2 * om) +
-      (-2274 - 0.2 * t) * sin(2 * al + 2 * om) + (2062 + 0.2 * t) * sin(2 * om) +
-      (1426 - 3.4 * t) * sin(1 * mas) + (712 + 0.1 * t) * sin(1 * mam) +
-      (-517 + 1.2 * t) * sin(-2 * me + 1 * mas + 2 * al + 2 * om) +
+      (-2274 - 0.2 * t) * sin(2 * al + 2 * om) + (2062 + 0.2 * t) *
+      sin(2 * om) + (1426 - 3.4 * t) * sin(1 * mas) + (712 + 0.1 * t) *
+      sin(1 * mam) + (-517 + 1.2 * t) * sin(-2 * me + 1 * mas + 2 * al + 2 * om) +
       (-386 - 0.4 * t) * sin(2 * al + 1 * om) - 301 * sin(1 * mam + 2 * al + 2 * om) +
-      (217 - 0.5 * t) * sin(-2 * me - 1 * mas + 2 * al + 2 * om) - 158 * sin(
-      -2 * me + 1 * mam) + (129 + 0.1 * t) * sin(-2 * me + 2 * al + 1 * om) +
-      123 * sin(-1 * mam + 2 * al + 2 * om) + 63 * sin(2 * me) +
-      (63 + 0.1 * t) * sin(1 * mam + 1 * om) - 59 * sin(2 * me - 1 * mam + 2 * al + 2 * om) +
-      (-58 - 0.1 * t) * sin(-1 * mam + 1 * om) - 51 * sin(1 * mam + 2 * al + 1 * om) +
-      48 * sin(-2 * me + 2 * mam) + 46 * sin(-2 * mam + 2 * al + 1 * om) -
+      (217 - 0.5 * t) * sin(-2 * me - 1 * mas + 2 * al + 2 * om) -
+      158 * sin(-2 * me + 1 * mam) + (129 + 0.1 * t) *
+      sin(-2 * me + 2 * al + 1 * om) + 123 * sin(-1 * mam + 2 * al + 2 * om) +
+      63 * sin(2 * me) + (63 + 0.1 * t) * sin(1 * mam + 1 * om) - 59 *
+      sin(2 * me - 1 * mam + 2 * al + 2 * om) + (-58 - 0.1 * t) *
+      sin(-1 * mam + 1 * om) - 51 * sin(1 * mam + 2 * al + 1 * om) + 48 *
+      sin(-2 * me + 2 * mam) + 46 * sin(-2 * mam + 2 * al + 1 * om) -
       38 * sin(2 * me + 2 * al + 2 * om) - 31 * sin(2 * mam + 2 * al + 2 * om) +
       29 * sin(2 * mam) + 29 * sin(-2 * me + 1 * mam + 2 * al + 2 * om) +
       26 * sin(2 * al) - 22 * sin(-2 * me + 2 * al) + 21 *
       sin(-1 * mam + 2 * al + 1 * om) + (17 - 0.1 * t) * sin(2 * mas) +
-      16 * sin(2 * me - 1 * mam + 1 * om) - 16 * sin(-2 * me + 2 * mas + 2 * al + 2 * om) -
-      15 * sin(1 * mas + 1 * om) - 13 * sin(-2 * me + 1 * mam + 1 * om) -
-      12 * sin(-1 * mas + 1 * om) + 11 * sin(2 * mam - 2 * al) -
-      10 * sin(2 * me - 1 * mam + 2 * al + 1 * om) - 8 * sin(
-      2 * me + 1 * mam + 2 * al + 2 * om) + 7 * sin(1 * mas + 2 * al + 2 * om) -
-      7 * sin(-2 * me + 1 * mas + 1 * mam) - 7 * sin(-1 * mas + 2 * al + 2 * om) - 7 *
-      sin(2 * me + 2 * al + 1 * om) + 6 * sin(2 * me + 1 * mam) +
-      6 * sin(-2 * me + 2 * mam + 2 * al + 2 * om) + 6 * sin(
-      -2 * me + 1 * mam + 2 * al + 1 * om) - 6 * sin(2 * me - 2 * mam + 1 * om) -
-      6 * sin(2 * me + 1 * om) + 5 * sin(-1 * mas + 1 * mam) -
-      5 * sin(-2 * me - 1 * mas + 2 * al + 1 * om) - 5 * sin(-2 * me + 1 * om) -
-      5 * sin(2 * mam + 2 * al + 1 * om) + 4 * sin(-2 * me + 2 * mam + 1 * om) +
-      4 * sin(-2 * me + 1 * mas + 2 * al + 1 * om) + 4 * sin(1 * mam - 2 * al) -
-      4 * sin(-1 * me + 1 * mam) - 4 * sin(-2 * me + 1 * mas) -
-      4 * sin(1 * me) + 3 * sin(1 * mam + 2 * al) - 3 * sin(
-      -2 * mam + 2 * al + 2 * om) - 3 * sin(-1 * me - 1 * mas + 1 * mam) -
-      3 * sin(1 * mas + 1 * mam) - 3 * sin(-1 * mas + 1 * mam + 2 * al + 2 * om) - 3 *
+      16 * sin(2 * me - 1 * mam + 1 * om) - 16 * sin(-2 * me + 2 *
+      mas + 2 * al + 2 * om) - 15 * sin(1 * mas + 1 * om) - 13 *
+      sin(-2 * me + 1 * mam + 1 * om) - 12 * sin(-1 * mas + 1 * om) +
+      11 * sin(2 * mam - 2 * al) - 10 * sin(2 * me - 1 * mam + 2 * al + 1 * om) -
+      8 * sin(2 * me + 1 * mam + 2 * al + 2 * om) + 7 *
+      sin(1 * mas + 2 * al + 2 * om) - 7 * sin(-2 * me + 1 * mas + 1 * mam) -
+      7 * sin(-1 * mas + 2 * al + 2 * om) - 7 * sin(2 * me + 2 * al + 1 * om) +
+      6 * sin(2 * me + 1 * mam) + 6 * sin(-2 * me + 2 * mam + 2 * al + 2 * om) +
+      6 * sin(-2 * me + 1 * mam + 2 * al + 1 * om) - 6 *
+      sin(2 * me - 2 * mam + 1 * om) - 6 * sin(2 * me + 1 * om) + 5 *
+      sin(-1 * mas + 1 * mam) - 5 * sin(-2 * me - 1 * mas + 2 * al + 1 * om) -
+      5 * sin(-2 * me + 1 * om) - 5 * sin(2 * mam + 2 * al + 1 * om) +
+      4 * sin(-2 * me + 2 * mam + 1 * om) + 4 * sin(-2 * me + 1 *
+      mas + 2 * al + 1 * om) + 4 * sin(1 * mam - 2 * al) - 4 *
+      sin(-1 * me + 1 * mam) - 4 * sin(-2 * me + 1 * mas) - 4 *
+      sin(1 * me) + 3 * sin(1 * mam + 2 * al) - 3 * sin(-2 * mam + 2 * al + 2 * om) -
+      3 * sin(-1 * me - 1 * mas + 1 * mam) - 3 * sin(1 * mas + 1 * mam) -
+      3 * sin(-1 * mas + 1 * mam + 2 * al + 2 * om) - 3 *
       sin(2 * me - 1 * mas - 1 * mam + 2 * al + 2 * om) - 3 * sin(
       3 * mam + 2 * al + 2 * om) - 3 * sin(2 * me - 1 * mas + 2 * al + 2 * om));
     nutl := nutl * 0.0001;
     // periodic terms for the nutation in obliquity
-    nuto := secarc * ((92025 + 8.9 * t) * cos(1 * om) +
-      (5736 - 3.1 * t) * cos(-2 * me + 2 * al + 2 * om) +
-      (977 - 0.5 * t) * cos(2 * al + 2 * om) + (-895 + 0.5 * t) * cos(2 * om) +
-      (54 - 0.1 * t) * cos(1 * mas) - 7 * cos(1 * mam) +
-      (224 - 0.6 * t) * cos(-2 * me + 1 * mas + 2 * al + 2 * om) + 200 * cos(
-      2 * al + 1 * om) + (129 - 0.1 * t) * cos(1 * mam + 2 * al + 2 * om) +
-      (-95 + 0.3 * t) * cos(-2 * me + -1 * mas + 2 * al + 2 * om) - 70 * cos(
-      -2 * me + 2 * al + 1 * om) - 53 * cos(-1 * mam + 2 * al + 2 * om) - 33 *
-      cos(1 * mam + 1 * om) + 26 * cos(2 * me + -1 * mam + 2 * al + 2 * om) +
+    nuto := secarc * ((92025 + 8.9 * t) * cos(1 * om) + (5736 - 3.1 * t) *
+      cos(-2 * me + 2 * al + 2 * om) + (977 - 0.5 * t) * cos(2 * al + 2 * om) +
+      (-895 + 0.5 * t) * cos(2 * om) + (54 - 0.1 * t) * cos(1 * mas) -
+      7 * cos(1 * mam) + (224 - 0.6 * t) * cos(-2 * me + 1 * mas + 2 * al + 2 * om) +
+      200 * cos(2 * al + 1 * om) + (129 - 0.1 * t) * cos(1 * mam + 2 * al + 2 * om) +
+      (-95 + 0.3 * t) * cos(-2 * me + -1 * mas + 2 * al + 2 * om) -
+      70 * cos(-2 * me + 2 * al + 1 * om) - 53 * cos(-1 * mam + 2 * al + 2 * om) -
+      33 * cos(1 * mam + 1 * om) + 26 * cos(2 * me + -1 * mam + 2 * al + 2 * om) +
       32 * cos(-1 * mam + 1 * om) + 27 * cos(1 * mam + 2 * al + 1 * om) -
       24 * cos(-2 * mam + 2 * al + 1 * om) + 16 * cos(2 * me + 2 * al + 2 * om) +
-      13 * cos(2 * mam + 2 * al + 2 * om) - 12 * cos(-2 * me + 1 * mam + 2 * al + 2 * om) -
-      10 * cos(-1 * mam + 2 * al + 1 * om) - 8 * cos(2 * me - 1 * mam + 1 * om) +
-      7 * cos(-2 * me + 2 * mas + 2 * al + 2 * om) + 9 * cos(1 * mas + 1 * om) + 7 *
-      cos(-2 * me + 1 * mam + 1 * om) + 6 * cos(-1 * mas + 1 * om) +
-      5 * cos(2 * me - 1 * mam + 2 * al + 1 * om) + 3 * cos(
-      2 * me + 1 * mam + 2 * al + 2 * om) - 3 * cos(1 * mas + 2 * al + 2 * om) +
-      3 * cos(-1 * mas + 2 * al + 2 * om) + 3 * cos(2 * me + 2 * al + 1 * om) -
-      3 * cos(-2 * me + 2 * mam + 2 * al + 2 * om) - 3 * cos(
-      -2 * me + 1 * mam + 2 * al + 1 * om) + 3 * cos(2 * me - 2 * mam + 1 * om) +
-      3 * cos(2 * me + 1 * om) + 3 * cos(-2 * me - 1 * mas + 2 * al + 1 * om) +
-      3 * cos(-2 * me + 1 * om) + 3 * cos(2 * mam + 2 * al + 1 * om));
+      13 * cos(2 * mam + 2 * al + 2 * om) - 12 * cos(-2 * me + 1 *
+      mam + 2 * al + 2 * om) - 10 * cos(-1 * mam + 2 * al + 1 * om) -
+      8 * cos(2 * me - 1 * mam + 1 * om) + 7 * cos(-2 * me + 2 * mas + 2 * al + 2 * om) +
+      9 * cos(1 * mas + 1 * om) + 7 * cos(-2 * me + 1 * mam + 1 * om) + 6 *
+      cos(-1 * mas + 1 * om) + 5 * cos(2 * me - 1 * mam + 2 * al + 1 * om) +
+      3 * cos(2 * me + 1 * mam + 2 * al + 2 * om) - 3 *
+      cos(1 * mas + 2 * al + 2 * om) + 3 * cos(-1 * mas + 2 * al + 2 * om) +
+      3 * cos(2 * me + 2 * al + 1 * om) - 3 * cos(-2 * me + 2 * mam + 2 * al + 2 * om) -
+      3 * cos(-2 * me + 1 * mam + 2 * al + 1 * om) + 3 *
+      cos(2 * me - 2 * mam + 1 * om) + 3 * cos(2 * me + 1 * om) + 3 *
+      cos(-2 * me - 1 * mas + 2 * al + 1 * om) + 3 * cos(-2 * me + 1 * om) +
+      3 * cos(2 * mam + 2 * al + 1 * om));
     nuto := nuto * 0.0001;
   end
   else
@@ -1485,9 +1495,10 @@ begin
       sincos(c.sunl, sls, cls);
       sincos(c.abp, sp, cp);
       te := tan(c.ecl);
-      da := -abek * (cra * cls * ce + sra * sls) / cde + c.abe * abek * (cra * cp * ce + sra * sp) / cde;
-      dd := -abek * (cls * ce * (te * cde - sra * sde) + cra * sde * sls) + c.abe * abek *
-        (cp * ce * (te * cde - sra * sde) + cra * sde * sp);
+      da := -abek * (cra * cls * ce + sra * sls) / cde + c.abe *
+        abek * (cra * cp * ce + sra * sp) / cde;
+      dd := -abek * (cls * ce * (te * cde - sra * sde) + cra * sde * sls) +
+        c.abe * abek * (cp * ce * (te * cde - sra * sde) + cra * sde * sp);
       ra := ra + da;
       de := de + dd;
       sofa_S2C(ra, de, p1);
@@ -1551,9 +1562,10 @@ begin
       sincos(c.sunl, sls, cls);
       sincos(c.abp, sp, cp);
       te := tan(c.ecl);
-      da := -abek * (cra * cls * ce + sra * sls) / cde + c.abe * abek * (cra * cp * ce + sra * sp) / cde;
-      dd := -abek * (cls * ce * (te * cde - sra * sde) + cra * sde * sls) + c.abe * abek *
-        (cp * ce * (te * cde - sra * sde) + cra * sde * sp);
+      da := -abek * (cra * cls * ce + sra * sls) / cde + c.abe *
+        abek * (cra * cp * ce + sra * sp) / cde;
+      dd := -abek * (cls * ce * (te * cde - sra * sde) + cra * sde * sls) +
+        c.abe * abek * (cp * ce * (te * cde - sra * sde) + cra * sde * sp);
       ra := ra - da;
       de := de - dd;
       sofa_S2C(ra, de, p1);
@@ -2255,15 +2267,15 @@ const
   xyper: array[1..5, 1..nper] of double = (
     (256.75, 708.15, 274.2, 241.45, 2309, 492.2, 396.1, 288.9, 231.1,
     1610, 620, 157.87, 220.3, 1200),
-    (-819.940624, -8444.676815, 2600.009459, 2755.17563,
-    -167.659835, 871.855056, 44.769698, -512.313065, -819.415595, -538.071099,
+    (-819.940624, -8444.676815, 2600.009459, 2755.17563, -167.659835,
+    871.855056, 44.769698, -512.313065, -819.415595, -538.071099,
     -189.793622, -402.922932, 179.516345, -9.814756),
     (75004.344875, 624.033993, 1251.136893, -1102.212834, -2660.66498,
     699.291817, 153.16722, -950.865637, 499.754645, -145.18821, 558.116553,
     -23.923029, -165.405086, 9.344131),
     (81491.287984, 787.163481, 1251.296102, -1257.950837, -2966.79973,
-    639.744522, 131.600209, -445.040117, 584.522874, -89.756563, 524.42963,
-    -13.549067, -210.157124, -44.919798),
+    639.744522, 131.600209, -445.040117, 584.522874, -89.756563,
+    524.42963, -13.549067, -210.157124, -44.919798),
     (1558.515853, 7774.939698, -2219.534038, -2523.969396,
     247.850422, -846.485643, -1393.124055, 368.526116, 749.045012, 444.704518,
     235.934465, 374.049623, -171.33018, -22.899655));
@@ -2561,8 +2573,7 @@ begin
   RDNDR := R * (-C3 * TT0GM2 + (C4 - C6 / TT0) * TT0DM2);
 end;
 
-procedure sla_REFRO(ZOBS, HM, TDK, PMB, RH, WL, PHI, TLR, EPS: double;
-  var REF: double);
+procedure sla_REFRO(ZOBS, HM, TDK, PMB, RH, WL, PHI, TLR, EPS: double; var REF: double);
 //  Atmospheric refraction for radio and optical/IR wavelengths.
 
 //  Given:
@@ -2606,12 +2617,12 @@ const
 var
   IS1, K, N, I, J: integer;
   OPTIC, LOOP: boolean;
-  ZOBS1, ZOBS2, HMOK, TDKOK, PMBOK, RHOK, WLOK, ALPHA,
-  TOL, WLSQ, GB, A, GAMAL, GAMMA, GAMM2, DELM2, TDC, PSAT, PWO, W,
-  C1, C2, C3, C4, C5, C6, R0, TEMPO, DN0, RDNDR0, SK0, F0,
-  RT, TT, DNT, RDNDRT, SINE, ZT, FT, DNTS, RDNDRP, ZTS, FTS,
-  RS, DNS, RDNDRS, ZS, FS, REFOLD, Z0, ZRANGE, FB, FF, FO, FE,
-  H, R, SZ, RG, DR, TG, DN, RDNDR, T, F, REFP, REFT: double;
+  ZOBS1, ZOBS2, HMOK, TDKOK, PMBOK, RHOK, WLOK, ALPHA, TOL, WLSQ,
+  GB, A, GAMAL, GAMMA, GAMM2, DELM2, TDC, PSAT, PWO, W, C1, C2, C3,
+  C4, C5, C6, R0, TEMPO, DN0, RDNDR0, SK0, F0, RT, TT, DNT, RDNDRT,
+  SINE, ZT, FT, DNTS, RDNDRP, ZTS, FTS, RS, DNS, RDNDRS, ZS, FS,
+  REFOLD, Z0, ZRANGE, FB, FF, FO, FE, H, R, SZ, RG, DR, TG, DN, RDNDR,
+  T, F, REFP, REFT: double;
 
   //  Normalize angle into range +/- pi  (double precision)
   function sla_DRANGE(ANGLE: double): double;
@@ -2688,7 +2699,8 @@ begin
 
   //  Conditions at the observer.
   R0 := S + HMOK;
-  sla__ATMT(R0, TDKOK, ALPHA, GAMM2, DELM2, C1, C2, C3, C4, C5, C6, R0, TEMPO, DN0, RDNDR0);
+  sla__ATMT(R0, TDKOK, ALPHA, GAMM2, DELM2, C1, C2, C3, C4, C5, C6,
+    R0, TEMPO, DN0, RDNDR0);
   SK0 := DN0 * R0 * SIN(ZOBS2);
   F0 := REFI(DN0, RDNDR0);
 
@@ -2795,7 +2807,8 @@ begin
 
         //           Find the refractive index and integrand at R.
         if (K = 1) then
-          sla__ATMT(R0, TDKOK, ALPHA, GAMM2, DELM2, C1, C2, C3, C4, C5, C6, R, T, DN, RDNDR)
+          sla__ATMT(R0, TDKOK, ALPHA, GAMM2, DELM2, C1, C2, C3, C4,
+            C5, C6, R, T, DN, RDNDR)
         else
           sla__ATMS(RT, TT, DNT, GAMAL, R, DN, RDNDR);
         F := REFI(DN, RDNDR);
@@ -2969,7 +2982,8 @@ begin
   if (P > 0) then
   begin
     TDC := T - 273.15;
-    PS := 10 ** ((0.7859 + 0.03477 * TDC) / (1 + 0.00412 * TDC)) * (1 + P * (4.5E-6 + 6E-10 * TDC * TDC));
+    PS := 10 ** ((0.7859 + 0.03477 * TDC) / (1 + 0.00412 * TDC)) *
+      (1 + P * (4.5E-6 + 6E-10 * TDC * TDC));
     PW := R * PS / (1 - (1 - R) * PS / P);
   end
   else
@@ -2981,7 +2995,8 @@ begin
   if OPTIC then
   begin
     WLSQ := W * W;
-    GAMMA := ((77.53484E-6 + (4.39108E-7 + 3.666E-9 / WLSQ) / WLSQ) * P - 11.2684E-6 * PW) / T;
+    GAMMA := ((77.53484E-6 + (4.39108E-7 + 3.666E-9 / WLSQ) / WLSQ) *
+      P - 11.2684E-6 * PW) / T;
   end
   else
   begin
@@ -3053,7 +3068,8 @@ begin
   T := S / C;
   TSQ := T * T;
   TCU := T * TSQ;
-  REF := ZU1 - ZL + (ZL - ZU1 + REFA * T + REFB * TCU) / (1 + (REFA + 3 * REFB * TSQ) / (C * C));
+  REF := ZU1 - ZL + (ZL - ZU1 + REFA * T + REFB * TCU) /
+    (1 + (REFA + 3 * REFB * TSQ) / (C * C));
 
   // Special handling for large ZU
   if (ZU > ZU1) then
@@ -3118,7 +3134,8 @@ procedure sla_POLMO(ELONGM, PHIM, XP, YP: double; var ELONG, PHI, DAZ: double);
 //     DAZ      d      azimuth correction (terrestrial-celestial, radians)
 
 var
-  SEL, CEL, SPH, CPH, XM, YM, ZM, XNM, YNM, ZNM, SXP, CXP, SYP, CYP, ZW, XT, YT, ZT, XNT, YNT: double;
+  SEL, CEL, SPH, CPH, XM, YM, ZM, XNM, YNM, ZNM, SXP, CXP, SYP, CYP,
+  ZW, XT, YT, ZT, XNT, YNT: double;
 
 begin
   //  Site mean longitude and mean geodetic latitude as a Cartesian vector

@@ -2,20 +2,20 @@
 This source is only used to compile and install the package.
  }
 
-unit downldialog; 
+unit downldialog;
 
 interface
 
 uses
-  downloaddialog, LazarusPackageIntf; 
+  downloaddialog, LazarusPackageIntf;
 
 implementation
 
-procedure Register; 
+procedure Register;
 begin
-  RegisterUnit('downloaddialog', @downloaddialog.Register); 
-end; 
+  RegisterUnit('downloaddialog', @downloaddialog.Register);
+end;
 
 initialization
-  RegisterPackage('downldialog', @Register); 
+  RegisterPackage('downldialog', @Register);
 end.

@@ -24,7 +24,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 }
 interface
 
-uses Math, u_util, u_translation, UScaleDPI, Printers,
+uses
+  Math, u_util, u_translation, UScaleDPI, Printers,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, Buttons, ComCtrls, cu_zoomimage,
   LResources;
@@ -43,12 +44,12 @@ type
     Button2: TButton;
     Button3: TButton;
     Label1: TLabel;
-    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormKeyPress(Sender: TObject; var Key: char);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormMouseWheel(Sender: TObject; Shift: TShiftState;
-      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+      WheelDelta: integer; MousePos: TPoint; var Handled: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -56,158 +57,169 @@ type
     procedure VScrollBarChange(Sender: TObject);
   private
     { Private declarations }
-    scrollw, scrollh : integer;
+    scrollw, scrollh: integer;
     ScrollLock: boolean;
     procedure SetScrollBar;
   public
     { Public declarations }
-    titre,labeltext: string;
-    imagewidth,imageheight: integer;
+    titre, labeltext: string;
+    imagewidth, imageheight: integer;
     procedure SetLang;
-    Procedure LoadImage(f : string);
-    Procedure ZoomN(n:double);
-    Procedure Zoomplus;
-    Procedure Zoommoins;
-    Procedure Init;
+    procedure LoadImage(f: string);
+    procedure ZoomN(n: double);
+    procedure Zoomplus;
+    procedure Zoommoins;
+    procedure Init;
   end;
 
 var
   f_image: Tf_image;
 
 implementation
+
 {$R *.lfm}
 
 procedure Tf_image.SetLang;
 begin
-Button1.caption:=rsClose;
-Button2.caption:=rsZoom;
-Button3.caption:=rsZoom2;
-ButtonPrint.Caption:=rsPrint;
+  Button1.Caption := rsClose;
+  Button2.Caption := rsZoom;
+  Button3.Caption := rsZoom2;
+  ButtonPrint.Caption := rsPrint;
 end;
 
-Procedure Tf_image.LoadImage(f : string);
+procedure Tf_image.LoadImage(f: string);
 begin
- image1.Zoom:=1;
- image1.picture.LoadFromFile(f);
- imagewidth:=image1.picture.width;
- imageheight:=image1.picture.height;
+  image1.Zoom := 1;
+  image1.picture.LoadFromFile(f);
+  imagewidth := image1.picture.Width;
+  imageheight := image1.picture.Height;
 end;
 
-Procedure Tf_image.ZoomN(n:double);
+procedure Tf_image.ZoomN(n: double);
 begin
-   Image1.Zoom:=n;
-   Image1.Draw;
-   SetScrollBar;
-   Caption:=titre+' x'+formatfloat('0.#',Image1.Zoom);
+  Image1.Zoom := n;
+  Image1.Draw;
+  SetScrollBar;
+  Caption := titre + ' x' + formatfloat('0.#', Image1.Zoom);
 end;
 
-Procedure Tf_image.Zoomplus;
+procedure Tf_image.Zoomplus;
 begin
-   Image1.Zoom:=sqrt(2)*Image1.Zoom;
-   Image1.Draw;
-   SetScrollBar;
-   Caption:=titre+' x'+formatfloat('0.#',Image1.Zoom);
+  Image1.Zoom := sqrt(2) * Image1.Zoom;
+  Image1.Draw;
+  SetScrollBar;
+  Caption := titre + ' x' + formatfloat('0.#', Image1.Zoom);
 end;
 
-Procedure Tf_image.Zoommoins;
+procedure Tf_image.Zoommoins;
 begin
-   Image1.Zoom:=Image1.Zoom/sqrt(2);
-   if abs(Image1.Zoom-1)<0.2 then Image1.Zoom:=1;
-   Image1.Draw;
-   SetScrollBar;
-   Caption:=titre+' x'+formatfloat('0.#',Image1.Zoom);
+  Image1.Zoom := Image1.Zoom / sqrt(2);
+  if abs(Image1.Zoom - 1) < 0.2 then
+    Image1.Zoom := 1;
+  Image1.Draw;
+  SetScrollBar;
+  Caption := titre + ' x' + formatfloat('0.#', Image1.Zoom);
 end;
 
-procedure Tf_image.FormKeyPress(Sender: TObject; var Key: Char);
+procedure Tf_image.FormKeyPress(Sender: TObject; var Key: char);
 begin
-if key=chr(27) then Close;
-if (key='+') then Zoomplus;
-if (key='-') then Zoommoins;
+  if key = chr(27) then
+    Close;
+  if (key = '+') then
+    Zoomplus;
+  if (key = '-') then
+    Zoommoins;
 end;
 
 procedure Tf_image.Init;
 begin
-Image1.Draw;
-Hscrollbar.Position:=Image1.SizeX div 2;
-Vscrollbar.Position:=Image1.SizeY div 2;
-Caption:=titre+' x'+formatfloat('0.#',Image1.Zoom);
-label1.Caption:=labeltext;
+  Image1.Draw;
+  Hscrollbar.Position := Image1.SizeX div 2;
+  Vscrollbar.Position := Image1.SizeY div 2;
+  Caption := titre + ' x' + formatfloat('0.#', Image1.Zoom);
+  label1.Caption := labeltext;
 end;
 
 procedure Tf_image.Button2Click(Sender: TObject);
 begin
-Zoomplus;
+  Zoomplus;
 end;
 
 procedure Tf_image.Button3Click(Sender: TObject);
 begin
-Zoommoins;
+  Zoommoins;
 end;
 
 procedure Tf_image.Button1Click(Sender: TObject);
 begin
-close;
+  Close;
 end;
 
 procedure Tf_image.FormMouseWheel(Sender: TObject; Shift: TShiftState;
-  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+  WheelDelta: integer; MousePos: TPoint; var Handled: boolean);
 begin
-if wheeldelta>0 then Zoomplus
-                else Zoommoins;
+  if wheeldelta > 0 then
+    Zoomplus
+  else
+    Zoommoins;
 end;
 
 procedure Tf_image.FormCreate(Sender: TObject);
 begin
-ScaleDPI(Self);
-SetLang;
-Image1.Align:=alClient;
-titre:='';
-labeltext:='';
-VScrollBar.Width:=15;
+  ScaleDPI(Self);
+  SetLang;
+  Image1.Align := alClient;
+  titre := '';
+  labeltext := '';
+  VScrollBar.Width := 15;
 end;
 
 procedure Tf_image.FormResize(Sender: TObject);
 begin
-if visible then begin
-   Image1.Draw;
-   SetScrollBar;
-end;   
+  if Visible then
+  begin
+    Image1.Draw;
+    SetScrollBar;
+  end;
 end;
 
 procedure Tf_image.FormShow(Sender: TObject);
 begin
-  if Printer.PrinterIndex<0 then ButtonPrint.Visible:=false;
+  if Printer.PrinterIndex < 0 then
+    ButtonPrint.Visible := False;
 end;
 
-Procedure Tf_image.SetScrollBar;
+procedure Tf_image.SetScrollBar;
 begin
-try
-ScrollLock:=true;
-scrollw:=min(Image1.SizeX-1,round(Image1.Width/Image1.zoom)) div 2;
-Hscrollbar.SetParams(Hscrollbar.Position, scrollw, Image1.SizeX-scrollw,1);
-Hscrollbar.LargeChange:=scrollw;
-Hscrollbar.SmallChange:=scrollw div 10;
-scrollh:=min(Image1.SizeY-1,round(Image1.Height/Image1.zoom)) div 2;
-Vscrollbar.SetParams(Vscrollbar.Position, scrollh, Image1.SizeY-scrollh,1);
-Vscrollbar.LargeChange:=scrollh;
-Vscrollbar.SmallChange:=scrollh div 10;
-finally
-ScrollLock:=false;
-end;
+  try
+    ScrollLock := True;
+    scrollw := min(Image1.SizeX - 1, round(Image1.Width / Image1.zoom)) div 2;
+    Hscrollbar.SetParams(Hscrollbar.Position, scrollw, Image1.SizeX - scrollw, 1);
+    Hscrollbar.LargeChange := scrollw;
+    Hscrollbar.SmallChange := scrollw div 10;
+    scrollh := min(Image1.SizeY - 1, round(Image1.Height / Image1.zoom)) div 2;
+    Vscrollbar.SetParams(Vscrollbar.Position, scrollh, Image1.SizeY - scrollh, 1);
+    Vscrollbar.LargeChange := scrollh;
+    Vscrollbar.SmallChange := scrollh div 10;
+  finally
+    ScrollLock := False;
+  end;
 end;
 
 procedure Tf_image.HScrollBarChange(Sender: TObject);
 begin
-if scrolllock then exit;
-Image1.Xcentre:=HScrollBar.Position;
-Image1.Draw;
+  if scrolllock then
+    exit;
+  Image1.Xcentre := HScrollBar.Position;
+  Image1.Draw;
 end;
 
 procedure Tf_image.VScrollBarChange(Sender: TObject);
 begin
-if scrolllock then exit;
-Image1.Ycentre:=VScrollBar.Position;
-Image1.Draw;
+  if scrolllock then
+    exit;
+  Image1.Ycentre := VScrollBar.Position;
+  Image1.Draw;
 end;
 
 end.

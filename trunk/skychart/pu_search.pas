@@ -259,7 +259,7 @@ begin
     2 : ActiveControl:=Id;             //star
     3 : ActiveControl:=StarNameBox;    //star name
     4 : ActiveControl:=Id;             //var
-    5 : ActiveControl:=Id;             //comet
+    5 : ActiveControl:=Id;             //dbl
     6 : ActiveControl:=CometFilter;    //comet
     7 : ActiveControl:=AsteroidFilter; //asteroid
     8 : ActiveControl:=PlanetBox;      //planet
@@ -282,7 +282,6 @@ end;
 procedure Tf_search.FormCreate(Sender: TObject);
 begin
 
-  //SZ
   PageControl1.ShowTabs := false;
   PageControl1.AutoSize := True;
 

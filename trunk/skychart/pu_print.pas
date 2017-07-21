@@ -1,4 +1,5 @@
 unit pu_print;
+
 {
 Copyright (C) 2006 Patrick Chevalley
 
@@ -24,7 +25,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses  u_help, u_translation, u_constant, u_util, UScaleDPI,
+uses
+  u_help, u_translation, u_constant, u_util, UScaleDPI,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   Buttons, StdCtrls, enhedits, Printers, LazHelpHTML;
 
@@ -74,7 +76,7 @@ type
     procedure SetupClick(Sender: TObject);
   private
     { private declarations }
-    Procedure ShowPrtInfo;
+    procedure ShowPrtInfo;
   public
     { public declarations }
     cm: Tconf_main;
@@ -85,65 +87,69 @@ var
   f_print: Tf_print;
 
 implementation
+
 {$R *.lfm}
 
 uses pu_printsetup;
 
 procedure Tf_print.SetLang;
 begin
-Caption:=rsPrintChart;
-prtcolor.caption:=rsColor;
-prtcolor.Items[0]:=rsColorLineMod;
-prtcolor.Items[1]:=rsBlackWhiteLi;
-if prtcolor.Items.Count>=3 then prtcolor.Items[2]:=rsAsOnScreenBl;
-prtorient.caption:=rsOrientation;
-prtorient.Items[0]:=rsPortrait;
-prtorient.Items[1]:=rsLandscape;
-GroupBox1.caption:=rsPageMarginIn;
-Label1.caption:=rsLeft;
-Label2.caption:=rsRight;
-Label3.caption:=rsTop;
-Label4.caption:=rsBottom;
-Label6.Caption:=rsNumberOfCopi;
-CheckBox1.Caption:=rsPrintHeader;
-CheckBox2.Caption:=rsPrintFooter;
-Button1.caption:=rsNoMargin;
-Button2.caption:=rsDefaultMargi;
-Button3.caption:=rsHelp;
-Setup.caption:=rsSetup;
-Print.caption:=rsPrint;
-Preview.Caption:=rsPreview;
-Cancel.Caption:=rsCancel;
-SetHelp(self,hlpMenuFile);
+  Caption := rsPrintChart;
+  prtcolor.Caption := rsColor;
+  prtcolor.Items[0] := rsColorLineMod;
+  prtcolor.Items[1] := rsBlackWhiteLi;
+  if prtcolor.Items.Count >= 3 then
+    prtcolor.Items[2] := rsAsOnScreenBl;
+  prtorient.Caption := rsOrientation;
+  prtorient.Items[0] := rsPortrait;
+  prtorient.Items[1] := rsLandscape;
+  GroupBox1.Caption := rsPageMarginIn;
+  Label1.Caption := rsLeft;
+  Label2.Caption := rsRight;
+  Label3.Caption := rsTop;
+  Label4.Caption := rsBottom;
+  Label6.Caption := rsNumberOfCopi;
+  CheckBox1.Caption := rsPrintHeader;
+  CheckBox2.Caption := rsPrintFooter;
+  Button1.Caption := rsNoMargin;
+  Button2.Caption := rsDefaultMargi;
+  Button3.Caption := rsHelp;
+  Setup.Caption := rsSetup;
+  Print.Caption := rsPrint;
+  Preview.Caption := rsPreview;
+  Cancel.Caption := rsCancel;
+  SetHelp(self, hlpMenuFile);
 end;
 
 procedure Tf_print.FormShow(Sender: TObject);
 begin
-if cm.PrintLandscape then prtorient.ItemIndex:=1
-                     else prtorient.ItemIndex:=0;
-LongEdit1.Value:=cm.PrtLeftMargin;
-LongEdit2.Value:=cm.PrtRightMargin;
-LongEdit3.Value:=cm.PrtTopMargin;
-LongEdit4.Value:=cm.PrtBottomMargin;
-edit1.Text:=cm.PrintDesc;
-copies.Value:=cm.PrintCopies;
-ShowPrtInfo;
+  if cm.PrintLandscape then
+    prtorient.ItemIndex := 1
+  else
+    prtorient.ItemIndex := 0;
+  LongEdit1.Value := cm.PrtLeftMargin;
+  LongEdit2.Value := cm.PrtRightMargin;
+  LongEdit3.Value := cm.PrtTopMargin;
+  LongEdit4.Value := cm.PrtBottomMargin;
+  edit1.Text := cm.PrintDesc;
+  copies.Value := cm.PrintCopies;
+  ShowPrtInfo;
 end;
 
 procedure Tf_print.Button1Click(Sender: TObject);
 begin
-LongEdit1.Value:=0;
-LongEdit2.Value:=0;
-LongEdit3.Value:=0;
-LongEdit4.Value:=0;
+  LongEdit1.Value := 0;
+  LongEdit2.Value := 0;
+  LongEdit3.Value := 0;
+  LongEdit4.Value := 0;
 end;
 
 procedure Tf_print.Button2Click(Sender: TObject);
 begin
-LongEdit1.Value:=15;
-LongEdit2.Value:=15;
-LongEdit3.Value:=10;
-LongEdit4.Value:=5;
+  LongEdit1.Value := 15;
+  LongEdit2.Value := 15;
+  LongEdit3.Value := 10;
+  LongEdit4.Value := 5;
 end;
 
 procedure Tf_print.Button3Click(Sender: TObject);
@@ -158,7 +164,7 @@ end;
 
 procedure Tf_print.Edit1Change(Sender: TObject);
 begin
-  cm.PrintDesc:=Edit1.Text;
+  cm.PrintDesc := Edit1.Text;
 end;
 
 procedure Tf_print.FormCreate(Sender: TObject);
@@ -169,92 +175,108 @@ end;
 
 procedure Tf_print.LongEdit1Change(Sender: TObject);
 begin
-cm.PrtLeftMargin:=LongEdit1.Value;
+  cm.PrtLeftMargin := LongEdit1.Value;
 end;
 
 procedure Tf_print.LongEdit2Change(Sender: TObject);
 begin
-cm.PrtRightMargin:=LongEdit2.Value;
+  cm.PrtRightMargin := LongEdit2.Value;
 end;
 
 procedure Tf_print.LongEdit3Change(Sender: TObject);
 begin
-cm.PrtTopMargin:=LongEdit3.Value;
+  cm.PrtTopMargin := LongEdit3.Value;
 end;
 
 procedure Tf_print.LongEdit4Change(Sender: TObject);
 begin
-cm.PrtBottomMargin:=LongEdit4.Value;
+  cm.PrtBottomMargin := LongEdit4.Value;
 end;
 
 procedure Tf_print.ShowPrtInfo;
-var i: integer;
+var
+  i: integer;
 begin
-if (cm.PrintMethod=0)and(Printer.PrinterIndex<0) then begin
-  cm.PrintMethod:=1;
-end;
-prtcolor.ItemIndex:=cm.PrintColor;
-if ((cm.PrintMethod=0)or(cm.PrintMethod=1)) then begin
-  if prtcolor.ItemIndex=2 then prtcolor.ItemIndex:=0;
-    if prtcolor.Items.Count>=3 then prtcolor.Items.Delete(2);
-end else begin
-  if prtcolor.Items.Count<3 then
-     prtcolor.Items.Add(rsAsOnScreenBl)
+  if (cm.PrintMethod = 0) and (Printer.PrinterIndex < 0) then
+  begin
+    cm.PrintMethod := 1;
+  end;
+  prtcolor.ItemIndex := cm.PrintColor;
+  if ((cm.PrintMethod = 0) or (cm.PrintMethod = 1)) then
+  begin
+    if prtcolor.ItemIndex = 2 then
+      prtcolor.ItemIndex := 0;
+    if prtcolor.Items.Count >= 3 then
+      prtcolor.Items.Delete(2);
+  end
   else
-     prtcolor.Items[2]:=rsAsOnScreenBl;
-end;
-cm.PrintColor:=prtcolor.ItemIndex;
-case cm.PrintMethod of
-0 : begin
-    GetPrinterResolution(cm.prtname,i);
-    PrinterInfo.Caption:=rsprinter+blank+cm.prtname+' @ '+inttostr(i)+' DPI';
-    GroupBox1.Visible:=true;
-    CopyPanel.Visible:=true;
-    Preview.Visible:=true;
+  begin
+    if prtcolor.Items.Count < 3 then
+      prtcolor.Items.Add(rsAsOnScreenBl)
+    else
+      prtcolor.Items[2] := rsAsOnScreenBl;
+  end;
+  cm.PrintColor := prtcolor.ItemIndex;
+  case cm.PrintMethod of
+    0:
+    begin
+      GetPrinterResolution(cm.prtname, i);
+      PrinterInfo.Caption := rsprinter + blank + cm.prtname + ' @ ' + IntToStr(i) + ' DPI';
+      GroupBox1.Visible := True;
+      CopyPanel.Visible := True;
+      Preview.Visible := True;
     end;
-1 : begin
-    PrinterInfo.Caption:=rsPostscript+' @ '+inttostr(cm.PrinterResolution)+' DPI';
-    GroupBox1.Visible:=true;
-    CopyPanel.Visible:=false;
-    Preview.Visible:=false;
+    1:
+    begin
+      PrinterInfo.Caption := rsPostscript + ' @ ' + IntToStr(cm.PrinterResolution) + ' DPI';
+      GroupBox1.Visible := True;
+      CopyPanel.Visible := False;
+      Preview.Visible := False;
     end;
-2 : begin
-    PrinterInfo.Caption:=rsBitmap+'  @ '+inttostr(cm.PrintBmpWidth)+'x'+inttostr(cm.PrintBmpHeight);
-    GroupBox1.Visible:=false;
-    CopyPanel.Visible:=false;
-    Preview.Visible:=false;
+    2:
+    begin
+      PrinterInfo.Caption := rsBitmap + '  @ ' + IntToStr(cm.PrintBmpWidth) +
+        'x' + IntToStr(cm.PrintBmpHeight);
+      GroupBox1.Visible := False;
+      CopyPanel.Visible := False;
+      Preview.Visible := False;
     end;
-end;
+  end;
 end;
 
 procedure Tf_print.prtcolorClick(Sender: TObject);
 begin
-if ((cm.PrintMethod=0)or(cm.PrintMethod=1))and(prtcolor.ItemIndex=2) then prtcolor.ItemIndex:=0;
-cm.PrintColor:=prtcolor.ItemIndex;
+  if ((cm.PrintMethod = 0) or (cm.PrintMethod = 1)) and (prtcolor.ItemIndex = 2) then
+    prtcolor.ItemIndex := 0;
+  cm.PrintColor := prtcolor.ItemIndex;
 end;
 
 procedure Tf_print.prtorientClick(Sender: TObject);
 begin
-cm.PrintLandscape:=(prtorient.ItemIndex=1);
+  cm.PrintLandscape := (prtorient.ItemIndex = 1);
 end;
 
 procedure Tf_print.SetupClick(Sender: TObject);
-var savecfgm:Tconf_main;
+var
+  savecfgm: Tconf_main;
 begin
-savecfgm:=Tconf_main.Create;
-try
-savecfgm.Assign(cm);
-f_printsetup.cm:=cm;
-formpos(f_printsetup,mouse.cursorpos.x,mouse.cursorpos.y);
-if f_printsetup.showmodal=mrOK then begin
- cm:=f_printsetup.cm;
- ShowPrtInfo;
-end else begin
- cm.Assign(savecfgm);
-end;
-finally
-savecfgm.Free;
-end;
+  savecfgm := Tconf_main.Create;
+  try
+    savecfgm.Assign(cm);
+    f_printsetup.cm := cm;
+    formpos(f_printsetup, mouse.cursorpos.x, mouse.cursorpos.y);
+    if f_printsetup.showmodal = mrOk then
+    begin
+      cm := f_printsetup.cm;
+      ShowPrtInfo;
+    end
+    else
+    begin
+      cm.Assign(savecfgm);
+    end;
+  finally
+    savecfgm.Free;
+  end;
 end;
 
 end.
