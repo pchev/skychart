@@ -48,19 +48,20 @@ type
     { Déclarations privées }
   public
     { Déclarations publiques }
-    SplashTimer: Boolean;
+    SplashTimer: boolean;
   end;
 
 var
   splash: Tsplash;
 
 implementation
+
 {$R *.lfm}
 
 procedure Tsplash.Timer1Timer(Sender: TObject);
 begin
-  Timer1.enabled:=false;
-  splash.free;
+  Timer1.Enabled := False;
+  splash.Free;
 end;
 
 procedure Tsplash.FormCreate(Sender: TObject);
@@ -70,13 +71,14 @@ end;
 
 procedure Tsplash.FormShow(Sender: TObject);
 begin
-  if SplashTimer then Timer1.enabled:=true;
+  if SplashTimer then
+    Timer1.Enabled := True;
 end;
 
 
 procedure Tsplash.Image1Click(Sender: TObject);
 begin
-modalresult:=mrCancel;
+  modalresult := mrCancel;
 end;
 
 end.

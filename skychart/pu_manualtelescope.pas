@@ -25,7 +25,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_translation, UScaleDPI,
+uses
+  u_translation, UScaleDPI,
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, LResources;
 
@@ -41,18 +42,17 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDblClick(Sender: TObject);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
+      Shift: TShiftState; X, Y: integer);
+    procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+      Shift: TShiftState; X, Y: integer);
   private
     { Private declarations }
     startpoint: TPoint;
     moving, lockmove: boolean;
   public
     { Public declarations }
-    procedure SetTurn(txt:string);
+    procedure SetTurn(txt: string);
     procedure SetLang;
   end;
 
@@ -60,60 +60,68 @@ var
   f_manualtelescope: Tf_manualtelescope;
 
 implementation
+
 {$R *.lfm}
 
 uses u_constant;
 
 procedure Tf_manualtelescope.SetLang;
 begin
-Caption:=rsManualTelesc;
-Label1.caption:=rsManualTelesc;
-Label4.caption:=rsRATurns;
-Label5.caption:=rsDECTurns;
-Label2.Caption:='';
+  Caption := rsManualTelesc;
+  Label1.Caption := rsManualTelesc;
+  Label4.Caption := rsRATurns;
+  Label5.Caption := rsDECTurns;
+  Label2.Caption := '';
 end;
 
-procedure Tf_manualtelescope.SetTurn(txt:string);
-var i:integer;
+procedure Tf_manualtelescope.SetTurn(txt: string);
+var
+  i: integer;
 begin
-  i:=pos(tab,txt);
-  if i=0 then exit;
-  label1.Caption:=copy(txt,1,i-1);
-  delete(txt,1,i);
-  i:=pos(tab,txt);
-  if i=0 then exit;
-  label2.Caption:=copy(txt,1,i-1);
-  delete(txt,1,i);
-  i:=pos(tab,txt);
-  if i=0 then exit;
-  label2.Caption:=label2.Caption+blank+copy(txt,1,i-1);
-  delete(txt,1,i);
-  i:=pos(tab,txt);
-  if i=0 then exit;
-  label4.Caption:=copy(txt,1,i-1);
-  delete(txt,1,i);
-  i:=pos(tab,txt);
-  if i=0 then exit;
-  label5.Caption:=copy(txt,1,i-1);
-  delete(txt,1,i);
-if (label2.width+label2.left+8)>width then width:=label2.width+label2.left+8;
+  i := pos(tab, txt);
+  if i = 0 then
+    exit;
+  label1.Caption := copy(txt, 1, i - 1);
+  Delete(txt, 1, i);
+  i := pos(tab, txt);
+  if i = 0 then
+    exit;
+  label2.Caption := copy(txt, 1, i - 1);
+  Delete(txt, 1, i);
+  i := pos(tab, txt);
+  if i = 0 then
+    exit;
+  label2.Caption := label2.Caption + blank + copy(txt, 1, i - 1);
+  Delete(txt, 1, i);
+  i := pos(tab, txt);
+  if i = 0 then
+    exit;
+  label4.Caption := copy(txt, 1, i - 1);
+  Delete(txt, 1, i);
+  i := pos(tab, txt);
+  if i = 0 then
+    exit;
+  label5.Caption := copy(txt, 1, i - 1);
+  Delete(txt, 1, i);
+  if (label2.Width + label2.left + 8) > Width then
+    Width := label2.Width + label2.left + 8;
 end;
 
 procedure Tf_manualtelescope.FormMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+  Button: TMouseButton; Shift: TShiftState; X, Y: integer);
 begin
-startpoint:=clienttoscreen(point(X,Y));
-moving:=true;
-lockmove:=false;
+  startpoint := clienttoscreen(point(X, Y));
+  moving := True;
+  lockmove := False;
 end;
 
 procedure Tf_manualtelescope.FormCreate(Sender: TObject);
 begin
   {$ifdef darwin}
-  FormStyle:=fsNormal;
+  FormStyle := fsNormal;
   {$endif}
   {$ifdef lclgtk2}
-  FormStyle:=fsNormal;
+  FormStyle := fsNormal;
   {$endif}
   ScaleDPI(Self);
   SetLang;
@@ -121,33 +129,39 @@ end;
 
 procedure Tf_manualtelescope.FormDblClick(Sender: TObject);
 begin
-moving:=false;
-Hide;
+  moving := False;
+  Hide;
 end;
 
-procedure Tf_manualtelescope.FormMouseMove(Sender: TObject;
-  Shift: TShiftState; X, Y: Integer);
-var P: Tpoint;
+procedure Tf_manualtelescope.FormMouseMove(Sender: TObject; Shift: TShiftState;
+  X, Y: integer);
+var
+  P: Tpoint;
 begin
-if moving and (not lockmove) then begin
-  lockmove:=true;
-  P:=clienttoscreen(Point(X,Y));
-  top:=top+P.Y-startpoint.Y;
-  if top<0 then top:=0;
-  if top>(screen.Height-Height) then top:=screen.Height-Height;
-  left:=left+P.X-startpoint.X;
-  if left<0 then left:=0;
-  if left>(screen.Width-Width) then left:=screen.Width-Width;
-  startpoint:=P;
-  application.ProcessMessages;
-  lockmove:=false;
-end;
+  if moving and (not lockmove) then
+  begin
+    lockmove := True;
+    P := clienttoscreen(Point(X, Y));
+    top := top + P.Y - startpoint.Y;
+    if top < 0 then
+      top := 0;
+    if top > (screen.Height - Height) then
+      top := screen.Height - Height;
+    left := left + P.X - startpoint.X;
+    if left < 0 then
+      left := 0;
+    if left > (screen.Width - Width) then
+      left := screen.Width - Width;
+    startpoint := P;
+    application.ProcessMessages;
+    lockmove := False;
+  end;
 end;
 
-procedure Tf_manualtelescope.FormMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure Tf_manualtelescope.FormMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: integer);
 begin
-moving:=false;
+  moving := False;
 end;
 
 end.

@@ -2,20 +2,20 @@
 This source is only used to compile and install the package.
  }
 
-unit enhedit; 
+unit enhedit;
 
 interface
 
 uses
-  enhedits, LazarusPackageIntf; 
+  enhedits, LazarusPackageIntf;
 
 implementation
 
-procedure Register; 
+procedure Register;
 begin
-  RegisterUnit('enhedits', @enhedits.Register); 
-end; 
+  RegisterUnit('enhedits', @enhedits.Register);
+end;
 
 initialization
-  RegisterPackage('enhedit', @Register); 
+  RegisterPackage('enhedit', @Register);
 end.

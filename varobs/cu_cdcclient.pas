@@ -28,17 +28,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses blcksock, Classes, SysUtils, Forms;
+uses
+  blcksock, Classes, SysUtils, Forms;
 
 type
   TCDCclient = class(TSynaClient)
   private
     FSock: TTCPBlockSocket;
-    FSendBuffer,FResultBuffer: string;
+    FSendBuffer, FResultBuffer: string;
   public
     constructor Create;
     destructor Destroy; override;
-    function Connect: Boolean;
+    function Connect: boolean;
     procedure Disconnect;
     function RecvString: string;
     function GetErrorDesc: string;
@@ -48,42 +49,43 @@ type
     property ResultBuffer: string read FResultBuffer write FResultBuffer;
   end;
 
-  TClientDataEvent = procedure(Sender : TObject; const data : string) of object;
+  TClientDataEvent = procedure(Sender: TObject; const Data: string) of object;
 
   TCDCclientThrd = class(TThread)
   private
-    FTargetHost,FTargetPort,FErrorDesc,FRecvData,FClientId,FClientName : string;
-    FTimeout : integer;
-    FCmdTimeout : double;
-    procedure SetCmdTimeout(value:double);
-    function GetCmdTimeout:double;
+    FTargetHost, FTargetPort, FErrorDesc, FRecvData, FClientId, FClientName: string;
+    FTimeout: integer;
+    FCmdTimeout: double;
+    procedure SetCmdTimeout(Value: double);
+    function GetCmdTimeout: double;
     procedure DisplayMessagesyn;
     procedure ProcessDataSyn;
-    procedure DisplayMessage(msg:string);
-    procedure ProcessData(line:string);
+    procedure DisplayMessage(msg: string);
+    procedure ProcessData(line: string);
   public
     onShowMessage: TClientDataEvent;
     onReceiveData: TClientDataEvent;
-    TcpClient : TCDCclient;
-    Constructor Create;
+    TcpClient: TCDCclient;
+    constructor Create;
     procedure Execute; override;
-    function Send(const Value: string):string;
+    function Send(const Value: string): string;
   published
     property Terminated;
-    property TargetHost : string read FTargetHost write FTargetHost;
-    property TargetPort : string read FTargetPort write FTargetPort;
-    property Timeout : integer read FTimeout write FTimeout;
+    property TargetHost: string read FTargetHost write FTargetHost;
+    property TargetPort: string read FTargetPort write FTargetPort;
+    property Timeout: integer read FTimeout write FTimeout;
     property CmdTimeout: double read GetCmdTimeout write SetCmdTimeout;
-    property ErrorDesc : string read FErrorDesc;
-    property RecvData : string read FRecvData;
-    property ClientId : string read FClientId;
-    property ClientName : string read FClientName;
+    property ErrorDesc: string read FErrorDesc;
+    property RecvData: string read FRecvData;
+    property ClientId: string read FClientId;
+    property ClientName: string read FClientName;
   end;
 
-const msgTimeout='Timeout!';
-      msgOK='OK';
-      msgFailed='Failed!';
-      msgBye='Bye!';
+const
+  msgTimeout = 'Timeout!';
+  msgOK = 'OK';
+  msgFailed = 'Failed!';
+  msgBye = 'Bye!';
 
 implementation
 
@@ -91,8 +93,8 @@ constructor TCDCclient.Create;
 begin
   inherited Create;
   FSock := TTCPBlockSocket.Create;
-  Fsendbuffer:='';
-  Fresultbuffer:='';
+  Fsendbuffer := '';
+  Fresultbuffer := '';
 end;
 
 destructor TCDCclient.Destroy;
@@ -101,7 +103,7 @@ begin
   inherited Destroy;
 end;
 
-function TCDCclient.Connect: Boolean;
+function TCDCclient.Connect: boolean;
 begin
   FSock.CloseSocket;
   FSock.LineBuffer := '';
@@ -125,136 +127,160 @@ begin
   Result := FSock.GetErrorDesc(FSock.LastError);
 end;
 
-procedure TCDCclientThrd.SetCmdTimeout(value:double);
+procedure TCDCclientThrd.SetCmdTimeout(Value: double);
 begin
- FCmdTimeout := value / 86400;  // store timeout value in days
+  FCmdTimeout := Value / 86400;  // store timeout value in days
 end;
 
-function TCDCclientThrd.GetCmdTimeout:double;
+function TCDCclientThrd.GetCmdTimeout: double;
 begin
- result := FCmdTimeout * 86400;
+  Result := FCmdTimeout * 86400;
 end;
 
-Constructor TCDCclientThrd.Create ;
+constructor TCDCclientThrd.Create;
 begin
-freeonterminate:=true;
-// start suspended to let time to the main thread to set the parameters
-inherited create(true);
+  freeonterminate := True;
+  // start suspended to let time to the main thread to set the parameters
+  inherited Create(True);
 end;
 
 procedure TCDCclientThrd.Execute;
-var buf:string;
-    dateto : double;
-    i : integer;
-    ending : boolean;
+var
+  buf: string;
+  dateto: double;
+  i: integer;
+  ending: boolean;
 begin
-ending:=false;
-tcpclient:=TCDCclient.Create;
-try
- tcpclient.TargetHost:=FTargetHost;
- tcpclient.TargetPort:=FTargetPort;
- tcpclient.Timeout := FTimeout;
- // connect
- if tcpclient.Connect then begin
-    // wait connect message
-    dateto:=now+Fcmdtimeout;
-    repeat
-      buf:=tcpclient.recvstring;
-      if (buf='')or(buf='.') then continue;  // keepalive
-      if copy(buf,1,1)='>' then ProcessData(buf) // mouse click
-      else
-        if copy(buf,1,2)=msgOK then begin
-           // success, parse response
-           ProcessData(buf);
-           i:=pos('id=',buf);
-           Fclientid:=trim(copy(buf,i+3,2));
-           i:=pos('chart=',buf);
-           buf:=copy(buf,i+6,999)+' ';
-           i:=pos(' ',buf);
-           FclientName:=trim(copy(buf,1,i-1));
-           break;
-        end else begin
-           // failure, close thread
-           ProcessData(buf);
-           terminate;
-           break;
+  ending := False;
+  tcpclient := TCDCclient.Create;
+  try
+    tcpclient.TargetHost := FTargetHost;
+    tcpclient.TargetPort := FTargetPort;
+    tcpclient.Timeout := FTimeout;
+    // connect
+    if tcpclient.Connect then
+    begin
+      // wait connect message
+      dateto := now + Fcmdtimeout;
+      repeat
+        buf := tcpclient.recvstring;
+        if (buf = '') or (buf = '.') then
+          continue;  // keepalive
+        if copy(buf, 1, 1) = '>' then
+          ProcessData(buf) // mouse click
+        else
+        if copy(buf, 1, 2) = msgOK then
+        begin
+          // success, parse response
+          ProcessData(buf);
+          i := pos('id=', buf);
+          Fclientid := trim(copy(buf, i + 3, 2));
+          i := pos('chart=', buf);
+          buf := copy(buf, i + 6, 999) + ' ';
+          i := pos(' ', buf);
+          FclientName := trim(copy(buf, 1, i - 1));
+          break;
+        end
+        else
+        begin
+          // failure, close thread
+          ProcessData(buf);
+          terminate;
+          break;
         end;
-   until now>dateto;
-   if tcpclient.resultbuffer='' then tcpclient.resultbuffer:=msgTimeout;
-   DisplayMessage(tcpclient.GetErrorDesc);
-   // main loop
-   repeat
-     if terminated then break;
-     // handle unattended messages (mouseclick...)
-     buf:=tcpclient.recvstring;
-     if ending and (tcpclient.FSock.LastError<>0) then break; // finish to read data before to exit
-     if (buf<>'')and(buf<>'.') then ProcessData(buf);
-     if buf=msgBye then ending:=true;
-     // handle synchronous command and response
-     if tcpclient.sendbuffer<>'' then begin
-        tcpclient.resultbuffer:='';
-        // send command
-        tcpclient.Sock.SendString(tcpclient.sendbuffer+crlf);
-        if tcpclient.FSock.LastError<>0 then begin
-           terminate;
-           break;
+      until now > dateto;
+      if tcpclient.resultbuffer = '' then
+        tcpclient.resultbuffer := msgTimeout;
+      DisplayMessage(tcpclient.GetErrorDesc);
+      // main loop
+      repeat
+        if terminated then
+          break;
+        // handle unattended messages (mouseclick...)
+        buf := tcpclient.recvstring;
+        if ending and (tcpclient.FSock.LastError <> 0) then
+          break; // finish to read data before to exit
+        if (buf <> '') and (buf <> '.') then
+          ProcessData(buf);
+        if buf = msgBye then
+          ending := True;
+        // handle synchronous command and response
+        if tcpclient.sendbuffer <> '' then
+        begin
+          tcpclient.resultbuffer := '';
+          // send command
+          tcpclient.Sock.SendString(tcpclient.sendbuffer + crlf);
+          if tcpclient.FSock.LastError <> 0 then
+          begin
+            terminate;
+            break;
+          end;
+          tcpclient.sendbuffer := '';
+          // wait response
+          dateto := now + Fcmdtimeout;
+          repeat
+            buf := tcpclient.recvstring;
+            if (buf = '') or (buf = '.') then
+              continue;  // keepalive
+            if copy(buf, 1, 1) = '>' then
+              ProcessData(buf) // mouse click
+            else
+              tcpclient.resultbuffer := buf;   // set result
+          until (tcpclient.resultbuffer > '') or (now > dateto);
+          if tcpclient.resultbuffer = '' then
+            tcpclient.resultbuffer := msgTimeout;
         end;
-        tcpclient.sendbuffer:='';
-        // wait response
-        dateto:=now+Fcmdtimeout;
-        repeat
-          buf:=tcpclient.recvstring;
-          if (buf='')or(buf='.') then continue;  // keepalive
-          if copy(buf,1,1)='>' then ProcessData(buf) // mouse click
-             else tcpclient.resultbuffer:=buf;   // set result
-        until (tcpclient.resultbuffer>'')or(now>dateto);
-        if tcpclient.resultbuffer='' then tcpclient.resultbuffer:=msgTimeout;
-     end;
-   until false;
- end;
-DisplayMessage(tcpclient.GetErrorDesc);
-finally
-terminate;
-tcpclient.Disconnect;
-tcpclient.Free;
-end;
+      until False;
+    end;
+    DisplayMessage(tcpclient.GetErrorDesc);
+  finally
+    terminate;
+    tcpclient.Disconnect;
+    tcpclient.Free;
+  end;
 end;
 
-procedure TCDCclientThrd.DisplayMessage(msg:string);
+procedure TCDCclientThrd.DisplayMessage(msg: string);
 begin
-FErrorDesc:=msg;
-Synchronize(DisplayMessageSyn);
+  FErrorDesc := msg;
+  Synchronize(DisplayMessageSyn);
 end;
 
 procedure TCDCclientThrd.DisplayMessageSyn;
 begin
-if assigned(onShowMessage) then onShowMessage(self,FErrorDesc);
+  if assigned(onShowMessage) then
+    onShowMessage(self, FErrorDesc);
 end;
 
-procedure TCDCclientThrd.ProcessData(line:string);
+procedure TCDCclientThrd.ProcessData(line: string);
 begin
-FRecvData:=line;
-Synchronize(ProcessDataSyn);
+  FRecvData := line;
+  Synchronize(ProcessDataSyn);
 end;
 
 procedure TCDCclientThrd.ProcessDataSyn;
 begin
-if assigned(onReceiveData) then onReceiveData(self,FRecvData);
+  if assigned(onReceiveData) then
+    onReceiveData(self, FRecvData);
 end;
 
-function TCDCclientThrd.Send(const Value: string):string;
-// this function is called in the main thread only!
-var dateto:double;
+function TCDCclientThrd.Send(const Value: string): string;
+  // this function is called in the main thread only!
+var
+  dateto: double;
 begin
- tcpclient.resultbuffer:='';
- if Value>'' then begin
-   tcpclient.sendbuffer:=Value;
-   // set a double timeout just in case Execute is no more running.
-   dateto:=now+2*Fcmdtimeout;
-   while (tcpclient.resultbuffer='')and(now<dateto) do application.ProcessMessages;
- end;
- if tcpclient.resultbuffer='' then tcpclient.resultbuffer:=msgTimeout;
- result:=tcpclient.resultbuffer;
+  tcpclient.resultbuffer := '';
+  if Value > '' then
+  begin
+    tcpclient.sendbuffer := Value;
+    // set a double timeout just in case Execute is no more running.
+    dateto := now + 2 * Fcmdtimeout;
+    while (tcpclient.resultbuffer = '') and (now < dateto) do
+      application.ProcessMessages;
+  end;
+  if tcpclient.resultbuffer = '' then
+    tcpclient.resultbuffer := msgTimeout;
+  Result := tcpclient.resultbuffer;
 end;
 
 end.

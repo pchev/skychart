@@ -4,93 +4,101 @@ unit u_scriptsocket;
 
 interface
 
-uses  blcksock, synsock,
+uses
+  blcksock, synsock,
   Classes, SysUtils;
 
 type
-TScriptSocket = Class (TObject)
-   private
-     FSock: TTCPBlockSocket;
-     FTcpip_opened: boolean;
-     FTcp_timout: integer;
-   public
-     Constructor Create;
-     Destructor Destroy; override;
-     function Connect(ipaddr,port:string;Timeout:integer=100): boolean;
-     function Disconnect: boolean;
-     Function ReadCount(var buf : string; var count : integer) : boolean;
-     Function Read(var buf : string; termchar:string = CRLF) : boolean;
-     Function Write(var buf : string; var count : integer) : boolean;
-     Procedure PurgeBuffer;
-     property Tcpip_opened: boolean read FTcpip_opened;
-end;
+  TScriptSocket = class(TObject)
+  private
+    FSock: TTCPBlockSocket;
+    FTcpip_opened: boolean;
+    FTcp_timout: integer;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    function Connect(ipaddr, port: string; Timeout: integer = 100): boolean;
+    function Disconnect: boolean;
+    function ReadCount(var buf: string; var Count: integer): boolean;
+    function Read(var buf: string; termchar: string = CRLF): boolean;
+    function Write(var buf: string; var Count: integer): boolean;
+    procedure PurgeBuffer;
+    property Tcpip_opened: boolean read FTcpip_opened;
+  end;
 
 implementation
 
-Constructor TScriptSocket.Create;
+constructor TScriptSocket.Create;
 begin
-  Inherited Create;
-  FTcpip_opened:=false;
-  FTcp_timout:=100;
+  inherited Create;
+  FTcpip_opened := False;
+  FTcp_timout := 100;
 end;
 
-Destructor TScriptSocket.Destroy;
+destructor TScriptSocket.Destroy;
 begin
-  if FSock<>nil then FreeAndNil(FSock);
-  Inherited Destroy;
+  if FSock <> nil then
+    FreeAndNil(FSock);
+  inherited Destroy;
 end;
 
-function TScriptSocket.Connect(ipaddr,port:string;Timeout:integer=100): boolean;
+function TScriptSocket.Connect(ipaddr, port: string; Timeout: integer = 100): boolean;
 begin
-  FSock:=TTCPBlockSocket.Create;
-  FSock.Connect(ipaddr,port);
-  result:=FSock.LastError=0;
-  FTcpip_opened:=result;
-  FTcp_timout:=Timeout;
-  if FTcpip_opened then FSock.SetTimeout(FTcp_timout);
+  FSock := TTCPBlockSocket.Create;
+  FSock.Connect(ipaddr, port);
+  Result := FSock.LastError = 0;
+  FTcpip_opened := Result;
+  FTcp_timout := Timeout;
+  if FTcpip_opened then
+    FSock.SetTimeout(FTcp_timout);
 end;
 
 function TScriptSocket.Disconnect: boolean;
 begin
-  if FSock<>nil then FreeAndNil(FSock);
-  FTcpip_opened:=false;
-  result:=true;
+  if FSock <> nil then
+    FreeAndNil(FSock);
+  FTcpip_opened := False;
+  Result := True;
 end;
 
-Function TScriptSocket.ReadCount(var buf : string; var count : integer) : boolean;
+function TScriptSocket.ReadCount(var buf: string; var Count: integer): boolean;
 begin
-result:=false;
-if FTcpip_opened then begin
-  buf:=FSock.RecvBufferStr(count,FTcp_timout);
-  result:=(FSock.LastError=0)or(FSock.LastError=WSAETIMEDOUT);
-end;
+  Result := False;
+  if FTcpip_opened then
+  begin
+    buf := FSock.RecvBufferStr(Count, FTcp_timout);
+    Result := (FSock.LastError = 0) or (FSock.LastError = WSAETIMEDOUT);
+  end;
 end;
 
-Function TScriptSocket.Read(var buf : string; termchar:string = CRLF) : boolean;
+function TScriptSocket.Read(var buf: string; termchar: string = CRLF): boolean;
 begin
-result:=false;
-if termchar='' then termchar:=CRLF;
-if FTcpip_opened then begin
-  buf:=FSock.RecvTerminated(FTcp_timout,termchar);
-  result:=(FSock.LastError=0);
-end;
+  Result := False;
+  if termchar = '' then
+    termchar := CRLF;
+  if FTcpip_opened then
+  begin
+    buf := FSock.RecvTerminated(FTcp_timout, termchar);
+    Result := (FSock.LastError = 0);
+  end;
 end;
 
-Function TScriptSocket.Write(var buf : string; var count : integer) : boolean;
+function TScriptSocket.Write(var buf: string; var Count: integer): boolean;
 begin
-result:=false;
-if FTcpip_opened then begin
-  Fsock.SendString(buf+CRLF);
-  result:=(FSock.LastError=0);
-end;
+  Result := False;
+  if FTcpip_opened then
+  begin
+    Fsock.SendString(buf + CRLF);
+    Result := (FSock.LastError = 0);
+  end;
 end;
 
-Procedure TScriptSocket.PurgeBuffer;
+procedure TScriptSocket.PurgeBuffer;
 begin
-if FTcpip_opened then begin
-  FSock.Purge;
-end;
+  if FTcpip_opened then
+  begin
+    FSock.Purge;
+  end;
 end;
 
 end.
-

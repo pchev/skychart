@@ -2,20 +2,20 @@
 This source is only used to compile and install the package.
  }
 
-unit radec; 
+unit radec;
 
 interface
 
 uses
-  cu_radec, LazarusPackageIntf; 
+  cu_radec, LazarusPackageIntf;
 
 implementation
 
-procedure Register; 
+procedure Register;
 begin
-  RegisterUnit('cu_radec', @cu_radec.Register); 
-end; 
+  RegisterUnit('cu_radec', @cu_radec.Register);
+end;
 
 initialization
-  RegisterPackage('radec', @Register); 
+  RegisterPackage('radec', @Register);
 end.

@@ -1,4 +1,5 @@
 unit pu_progressbar;
+
 {
 Copyright (C) 2006 Patrick Chevalley
 
@@ -24,7 +25,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_translation, UScaleDPI,
+uses
+  u_translation, UScaleDPI,
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ComCtrls, Buttons, LResources;
 
@@ -50,17 +52,19 @@ type
   end;
 
 implementation
+
 {$R *.lfm}
 
 procedure Tf_progress.SetLang;
 begin
-Caption:=rsProgress;
-SpeedButton2.caption:=rsAbort;
+  Caption := rsProgress;
+  SpeedButton2.Caption := rsAbort;
 end;
 
 procedure Tf_progress.SpeedButton2Click(Sender: TObject);
 begin
-if assigned(Fabort) then Fabort(self);
+  if assigned(Fabort) then
+    Fabort(self);
 end;
 
 procedure Tf_progress.FormCreate(Sender: TObject);

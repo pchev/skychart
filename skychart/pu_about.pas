@@ -28,7 +28,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, UScaleDPI,
+uses
+  u_help, u_translation, u_constant, u_util, UScaleDPI,
   LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
   ExtCtrls, LResources, Buttons, LazHelpHTML, ComCtrls;
 
@@ -73,37 +74,41 @@ var
   f_about: Tf_about;
 
 implementation
+
 {$R *.lfm}
 
 procedure Tf_about.SetLang;
 begin
-Caption:=rsAbout;
-if rsSkyCharts='Cartes du Ciel' then  Label5.caption:=''
-   else Label5.caption:=rsSkyCharts;
-Label7.caption:=rsThisProgramI;
-Button1.Caption:=rsClose;
-Label8.caption:=cdccpy;
-Label3.caption:=rsPleaseReport;
-page1.Caption:=rsAbout;
-page2.Caption:=rsAuthors;
-page3.Caption:=rsLicenseAgree;
-memo1.Text:=rsProgrammer+crlf+cdcauthors+crlf+crlf+rsTranslator+crlf+rsCDCTranslator+crlf+crlf;
-SetHelp(self,hlpIndex);
+  Caption := rsAbout;
+  if rsSkyCharts = 'Cartes du Ciel' then
+    Label5.Caption := ''
+  else
+    Label5.Caption := rsSkyCharts;
+  Label7.Caption := rsThisProgramI;
+  Button1.Caption := rsClose;
+  Label8.Caption := cdccpy;
+  Label3.Caption := rsPleaseReport;
+  page1.Caption := rsAbout;
+  page2.Caption := rsAuthors;
+  page3.Caption := rsLicenseAgree;
+  memo1.Text := rsProgrammer + crlf + cdcauthors + crlf + crlf + rsTranslator + crlf +
+    rsCDCTranslator + crlf + crlf;
+  SetHelp(self, hlpIndex);
 end;
 
 procedure Tf_about.FormCreate(Sender: TObject);
 begin
- ScaleDPI(Self);
- SetLang;
- panel1.caption:=URL_WebHome;
- button2.caption:=URL_BugTracker;
- label2.caption:=rsVersion+blank+cdcversion+'-'+RevisionStr+blank+compile_time;
- label4.Caption:=rsCompiledWith+blank+compile_version;
+  ScaleDPI(Self);
+  SetLang;
+  panel1.Caption := URL_WebHome;
+  button2.Caption := URL_BugTracker;
+  label2.Caption := rsVersion + blank + cdcversion + '-' + RevisionStr + blank + compile_time;
+  label4.Caption := rsCompiledWith + blank + compile_version;
 end;
 
 procedure Tf_about.Button2Click(Sender: TObject);
 begin
- ExecuteFile(URL_BugTracker);
+  ExecuteFile(URL_BugTracker);
 end;
 
 procedure Tf_about.Panell1Click(Sender: TObject);

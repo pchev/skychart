@@ -56,22 +56,23 @@ type
   end;
 
 implementation
+
 {$R *.lfm}
 
 procedure Tf_configobservatory.SetLang;
 begin
-Caption:=rsObservatory;
-Button1.caption:=rsOK;
-Button2.caption:=rsApply;
-Button3.caption:=rsCancel;
-Button4.caption:=rsHelp;
-SetHelp(self,hlpCfgObs);
+  Caption := rsObservatory;
+  Button1.Caption := rsOK;
+  Button2.Caption := rsApply;
+  Button3.Caption := rsCancel;
+  Button4.Caption := rsHelp;
+  SetHelp(self, hlpCfgObs);
 end;
 
 procedure Tf_configobservatory.FormCreate(Sender: TObject);
 begin
-ScaleDPI(Self);
-SetLang;
+  ScaleDPI(Self);
+  SetLang;
 end;
 
 procedure Tf_configobservatory.FormShow(Sender: TObject);
@@ -86,13 +87,14 @@ end;
 
 procedure Tf_configobservatory.Button2Click(Sender: TObject);
 begin
-f_config_observatory1.Button6Click(nil);
-if assigned(f_config_observatory1.onApplyConfig) then f_config_observatory1.onApplyConfig(f_config_observatory1);
+  f_config_observatory1.Button6Click(nil);
+  if assigned(f_config_observatory1.onApplyConfig) then
+    f_config_observatory1.onApplyConfig(f_config_observatory1);
 end;
 
 procedure Tf_configobservatory.Button1Click(Sender: TObject);
 begin
-f_config_observatory1.Button6Click(nil);
+  f_config_observatory1.Button6Click(nil);
 end;
 
 procedure Tf_configobservatory.Button4Click(Sender: TObject);

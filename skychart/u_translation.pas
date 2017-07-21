@@ -4,11 +4,12 @@ unit u_translation;
 
 interface
 
-uses gettext, translations, u_constant, u_util,
+uses
+  gettext, translations, u_constant, u_util,
   LazUTF8, LazFileUtils, Classes, SysUtils;
 
-procedure GetDefaultLanguage(var buf1,buf2: string);
-function Translate(lang : string = ''):string;
+procedure GetDefaultLanguage(var buf1, buf2: string);
+function Translate(lang: string = ''): string;
 
 resourcestring
   rsdeg = 'd';
@@ -248,8 +249,10 @@ resourcestring
   rsDoYouWantToS = 'Do you want to save the program settings now?';
   rsErrorPleaseC = 'Error! Please check the database parameters.';
   rsComputeAster = 'Compute asteroid data for this month';
-  rsErrorPleaseC2 = 'Error! Please check the database parameters and load the comete data file.';
-  rsNotFoundMayb = '%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting.';
+  rsErrorPleaseC2 =
+    'Error! Please check the database parameters and load the comete data file.';
+  rsNotFoundMayb =
+    '%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting.';
   rsUnlockChart = 'Unlock chart';
   rsLockOn = 'Lock on %s';
   rsNotFoundInAn = '%s  Not found in any of the installed catalog indices.';
@@ -411,19 +414,22 @@ resourcestring
   rsTelescopeNot = 'Telescope not connected';
   rsPleaseConfir = 'Please confirm that the telescope is pointed at %s';
   rsSkyCharts = 'Sky Charts';
-  rsThisProgramI = 'This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License';
+  rsThisProgramI =
+    'This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License';
   rsLabel = 'Label:';
   rsType2 = 'Type:';
   rsMultipleStar = 'Multiple star';
   rsSolarSystem = 'Solar System';
   rsOtherLabel = 'Other label';
   rsChartInforma = 'Chart information';
-  rsIndicateHere = 'Indicate here how to compute the required values from the data stored in the catalog text file.';
+  rsIndicateHere =
+    'Indicate here how to compute the required values from the data stored in the catalog text file.';
   rsSelectTheTyp = 'Select the type of objects in your catalog';
   rsInputCatalog = 'Input catalog files';
   rsCatalogShort = 'Catalog short name';
   rsCatalogLongN = 'Catalog long name';
-  rsForALargeCat = 'For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility.';
+  rsForALargeCat =
+    'For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility.';
   rsCatalogType = 'Catalog type';
   rsOutputCatalo = 'Output catalog type';
   rsGeneralCatal = 'General catalog options';
@@ -498,8 +504,10 @@ resourcestring
   rsSortingFiles = 'Sorting files by magnitude';
   rsSomeRecordsW = 'Some records where rejected, see the file %sreject.txt for details.';
   rsPleaseIndica3 = 'Please indicate the directory where the catalog must be built';
-  rsWARNINGYouHa = 'WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, '
-                   +'otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?';
+  rsWARNINGYouHa =
+    'WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, '
+    +
+    'otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?';
   rsDateTime2 = 'Date/time';
   rsTimeSimulati = 'Time simulation';
   rsHorizon = 'Horizon';
@@ -676,13 +684,15 @@ resourcestring
   rsLocalHorizon = 'Local horizon';
   rsDisplayTheLo = 'Display the local horizon line';
   rsDepressionOf = 'Depression of the visible horizon';
-  rsYouLiveOnABi = 'If you observe high on a mountain, the horizon line will be lower than it would be at sea level.';
+  rsYouLiveOnABi =
+    'If you observe high on a mountain, the horizon line will be lower than it would be at sea level.';
   rsDrawTheAppar = 'Draw the apparent depressed horizon line';
   rsUpdateOrAddT = 'Update/add the current location to the database?';
   rsUpdatedSucce = 'Updated successfully!';
   rsDeleteTheCur = 'Delete the current location from the database?';
   rsDeletedSucce = 'Deleted successfully!';
-  rsThisActionRe = 'This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?';
+  rsThisActionRe =
+    'This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?';
   rsCancel2 = 'Cancel %s';
   rsCancelWrongZ = 'Cancel, wrong zip file ?? %s';
   rsDisplayImage = 'Display images of catalogued objects';
@@ -762,7 +772,8 @@ resourcestring
   rsReference = 'Reference';
   rsPleaseConfig2 = 'Please configure the orbital elements URL!';
   rsDownload2 = 'Download %s';
-  rsToUseThisNew = 'Before you can use the new orbital elements, you must compute the monthly data.';
+  rsToUseThisNew =
+    'Before you can use the new orbital elements, you must compute the monthly data.';
   rsNoAsteroidDa = 'No asteroids data found!%sPlease load a MPC file first.';
   rsYouAreNowRea = 'You are now ready to display the asteroid for this time period.';
   rsMySQLDatabas = 'MySQL database';
@@ -789,7 +800,8 @@ resourcestring
   rsClientConnec = 'Client connection keep alive';
   rsTelescopeSet = 'Telescope settings';
   rsManualMount = 'Manual mount';
-  rsSetHowTheMou = 'Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the ''Connect telescope'' button will show you how many turns you must make to go from one object to another.';
+  rsSetHowTheMou =
+    'Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the ''Connect telescope'' button will show you how many turns you must make to go from one object to another.';
   rsRightAscensi = 'Right Ascension';
   rsDeclination = 'Declination';
   rsTurnsHour = 'turns / hour';
@@ -803,8 +815,10 @@ resourcestring
   rsINDIServerPo = 'INDI server port';
   rsTelescopeNam = 'Telescope name';
   rsControlPanel2 = 'Control panel command ';
-  rsAlsoBeSureTh = '%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?';
-  rsWarningYouAr = 'Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?';
+  rsAlsoBeSureTh =
+    '%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?';
+  rsWarningYouAr =
+    'Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?';
   rsTime = 'Time';
   rsSeconds = 'Seconds';
   rsAutoRefreshE = 'Auto-refresh every ';
@@ -841,7 +855,8 @@ resourcestring
   rsPrintChart = 'Print chart';
   rsProgress = 'Progress';
   rsExiting = 'Exiting ...';
-  rsErrorPleaseC3 = 'Error! Please check the database parameters and load the picture package.';
+  rsErrorPleaseC3 =
+    'Error! Please check the database parameters and load the picture package.';
   rsMoreThanObje = 'More than %s objects, the result is truncated.';
   rsThereAreObjec = 'There are %s objects in this field.';
   rsEditLabel = 'Edit label';
@@ -852,7 +867,8 @@ resourcestring
   rsMag = 'Mag:';
   rsFOV2 = 'FOV:';
   rsConnectToSuc = 'Connection to %s, %s successful.%s';
-  rsConnectToFai = 'Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password.';
+  rsConnectToFai =
+    'Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password.';
   rsDatabaseOpen = '%sDatabase %s opened.%s';
   rsCannotOpenDa = '%sCannot open database %s! %s';
   rsTableExist = '%sThis table exists: %s';
@@ -962,13 +978,15 @@ resourcestring
   rsJulianDay = 'Julian Day =';
   rsToday = 'Today';
   rsJDCalendar = 'JD calendar';
-  rsWarningTheCu = 'Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, '
-                   +'and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?';
+  rsWarningTheCu =
+    'Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, '
+    +
+    'and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?';
   rsCoordinates = 'Coordinates:';
   rsPleaseReport = 'Please report any problem to:';
-  rsProgrammer ='Programmer:';
-  rsTranslator ='Translator:';
-  rsCDCTranslator ='Patrick Chevalley, Marc Fokker';
+  rsProgrammer = 'Programmer:';
+  rsTranslator = 'Translator:';
+  rsCDCTranslator = 'Patrick Chevalley, Marc Fokker';
   rsAuthors = 'Authors';
   rsLicenseAgree = 'License agreement';
   rsPlutoIsAPlan = 'Pluto is a planet.';
@@ -992,7 +1010,8 @@ resourcestring
   rsProgramInfor = 'Program information';
   rsCountryTimez = 'Country timezone';
   rsMoreOptions = 'More options';
-  rsWarningYouAr2 = 'Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want.';
+  rsWarningYouAr2 =
+    'Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want.';
   rsReleaseNotes = 'Release notes';
   rsBlinkingPict = 'Blinking picture';
   rsExpertMode = 'Expert mode';
@@ -1010,12 +1029,14 @@ resourcestring
   rsEpoch = 'Epoch';
   rsAlignment = 'Alignment';
   rsCenter = 'Center';
-  rsRequestTimeo = 'Request timeout. You probably asked a too wide area which demanded too much processing time on the remote server.';
+  rsRequestTimeo =
+    'Request timeout. You probably asked a too wide area which demanded too much processing time on the remote server.';
   rsUnableToCrea = 'Unable to create directory ';
   rsPleaseTryToC = 'Please try to create this directory yourself and restart the program.';
   rsCouldNotLoad = 'Could not load library ';
   rsPleaseTryToR = 'Please try to reinstall the program.';
-  rsSomethingGoW = 'Something went wrong during the initialization of the program. The program needs to be closed.';
+  rsSomethingGoW =
+    'Something went wrong during the initialization of the program. The program needs to be closed.';
   rsStopTCPIPSer = 'Stop TCP/IP server';
   rsDateFormat = 'Date format';
   rsFixedSkyColo = 'Fixed sky colour';
@@ -1056,10 +1077,12 @@ resourcestring
   rsPastel = 'Pastel';
   rsCannotWriteT = 'Cannot write to';
   rsMagnitudeEcl = 'Eclipse magnitude';
-  rsWarningSomeC = 'Warning! Some comet elements are outdated. Load element valid for the current map date.';
-  rsWarningSomeA = 'Warning! Some asteroid elements are outdated. Load element valid for the current map date.';
+  rsWarningSomeC =
+    'Warning! Some comet elements are outdated. Load element valid for the current map date.';
+  rsWarningSomeA =
+    'Warning! Some asteroid elements are outdated. Load element valid for the current map date.';
   rsDirectoryNot2 = 'Directory not found! Please install the Skychart '
-    +'Pictures package.';
+    + 'Pictures package.';
   rsWarning = 'Warning!';
   rsChangeToThis = 'Change to this setting will restart the program now!';
   rsDownloadFile = 'Download File';
@@ -1087,11 +1110,12 @@ resourcestring
   rsIncludeDayTi = 'Include day time pass';
   rsIncludeIridi = 'Include Iridium flare';
   rsCannotComput = 'Cannot compute satellites.';
-  rsPleaseInstWine = 'Please install wine http://www.winehq.org/ to compute artificial satellites on your computer.';
+  rsPleaseInstWine =
+    'Please install wine http://www.winehq.org/ to compute artificial satellites on your computer.';
   rsPleaseInstDosbox = 'Please install "Dosbox" http://www.dosbox.com/ to compute '
-    +'Iridium flares on your computer.';
-  rsIfItIsNotIns =  'If it is not installed try the following depending on '
-    +'your system:';
+    + 'Iridium flares on your computer.';
+  rsIfItIsNotIns = 'If it is not installed try the following depending on '
+    + 'your system:';
   rsSorryCopyIsN = 'Sorry, copy is not yet implemented for this page';
   rsDownloadTLE = 'Download TLE';
   rsAnimation = 'Animation';
@@ -1110,7 +1134,7 @@ resourcestring
   rsFreeSize = 'Free size';
   rsEphemeris = 'Ephemeris';
   rsCannotGetYou = 'Cannot get your IP address, or no location found for this '
-    +'address.';
+    + 'address.';
   rsLocationCode = 'Location code';
   rsUseOnlineSun = 'Use online Sun image from SDO or SOHO';
   rsSunImageSour = 'Sun image source';
@@ -1143,7 +1167,7 @@ resourcestring
   rsDisconnect = 'Disconnect';
   rsHide = 'Hide';
   rsPleaseEnsure = 'Please ensure that ASCOM telescope drivers are installed '
-    +'properly.';
+    + 'properly.';
   rsSeeHttpAscom = 'See %s for more information.';
   rsCurrentDrive = 'Current driver';
   rsDeviceStatus = 'Device status';
@@ -1250,7 +1274,7 @@ resourcestring
   rsSwitchHPP = 'Switch HPP';
   rsNegativeEast = '(negative east of Greenwich)';
   rsErrorOpening3 = 'Error opening %s on port %sCheck if device is connected '
-    +'and power on';
+    + 'and power on';
   rsHighest = 'Highest';
   rsMiddle = 'Middle';
   rsSlowest = 'Slowest';
@@ -1274,15 +1298,15 @@ resourcestring
   rsDataType = 'Data Type';
   rsUnits = 'Units';
   rsNoCatalogSel = 'No catalog selected, or no table from the selected catalog '
-    +'contain coordinates information.';
+    + 'contain coordinates information.';
   rsNoData = 'No Data';
   rsLoadingCatal = 'Loading catalog list. Please wait ...';
   rsThisCatalogC = 'This catalog contain %s records. It is not possible to '
-    +'download in full for performance reason.';
+    + 'download in full for performance reason.';
   rsTheNumberOfR = 'The number of records for this catalog is unknow. The '
-    +'download will be limited to %s records';
+    + 'download will be limited to %s records';
   rsMakeSelectio = 'Make selection of the table and column you want to your '
-    +'catalog';
+    + 'catalog';
   rsTable = 'Table';
   rsRows = 'Rows';
   rsDefaultMagni = 'Default magnitude';
@@ -1350,7 +1374,7 @@ resourcestring
   rsSlantOrthogr = 'Slant orthographic';
   rsMinimalAltit = 'Minimal altitude';
   rsEphemerisPro = 'Ephemeris probably out of range, disabling any solar '
-    +'system object';
+    + 'system object';
   rsHumidity = 'Humidity %';
   rsTroposphereT = 'Troposphere temperature lapse rate (K/km)';
   rsPolarMotionA = 'Polar motion (arc sec)';
@@ -1360,12 +1384,13 @@ resourcestring
   rsOuterSolarSy = 'Outer Solar System';
   rsSolarSystemI = 'Solar System Information';
   rsWarningLowRe = 'Warning! Low resolution mode. Use PostScript instead and '
-    +'print the result file.';
+    + 'print the result file.';
   rsDisplayTheHo = 'Display the horizon picture';
   rsPictureAngle = 'Picture angle offset';
   rsMillionKm = 'million Km.';
   rsDSOCatalogPi = 'DSO Catalog pictures';
-  rsTheImageDire = 'The image directory contains sub-directories with the same names as the DSO catalogs. Each sub-directory contains FITS files with the names of the catalog objects. These images are used to replace the DSO symbols on the map.';
+  rsTheImageDire =
+    'The image directory contains sub-directories with the same names as the DSO catalogs. Each sub-directory contains FITS files with the names of the catalog objects. These images are used to replace the DSO symbols on the map.';
   rsShowASingleP = 'Show a single picture on the map.';
   rsViewHeader = 'View header';
   rsImageArchive = 'Image archive';
@@ -1407,8 +1432,9 @@ resourcestring
   rsDoYouWantToM = 'Do you want to move the chart there?';
   rsSAMPStatus = 'SAMP status';
   rsClientList = 'Client list';
-  rsSAMPIsAMessa = 'SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate'
-    +'.%sSkychart can send and receive coordinates position, FITS images and VO tables.';
+  rsSAMPIsAMessa =
+    'SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate'
+    + '.%sSkychart can send and receive coordinates position, FITS images and VO tables.';
   rsVOSAMPSettin = 'VO SAMP settings';
   rsForMoreInfor = 'For more information, see :';
   rsAskForConfir = 'Ask for confirmation before to jump to coordinates';
@@ -1441,7 +1467,7 @@ resourcestring
   rsTheObserving = 'The observing list %s was modified.';
   rsDoYouWantToS2 = 'Do you want to save it?';
   rsItTakeTooLon = 'It take too long to draw the %s from catalog %s, please '
-    +'consider to not use this catalog for this FOV.';
+    + 'consider to not use this catalog for this FOV.';
   rsOnlyObjectsW = 'Only objects within airmass limits tonight';
   rsOnlyObjectsW2 = 'Only objects within airmass limits now';
   rsFirst = 'First';
@@ -1471,7 +1497,7 @@ resourcestring
   rsObservingLis2 = 'Observing list elements';
   rsSelectLabels = 'Select labels to recover';
   rsRecoverHidde = 'Recover hidden label';
-  rsHelpBaseDir =  'en/documentation/';
+  rsHelpBaseDir = 'en/documentation/';
   rsPrintHeader = 'Print header';
   rsPrintFooter = 'Print footer';
   rsSAMPSendCoor = 'SAMP send coordinates';
@@ -1482,7 +1508,7 @@ resourcestring
   rsNumberOfIgno = 'Number of ignored invalid rows: %s';
   rsOfficialName = 'Official name';
   rsLocalizedNam = 'Localized name';
-  rsIsEmpty      = '%s is empty!';
+  rsIsEmpty = '%s is empty!';
   rsToolBarEdito = 'Toolbar editor';
   rsAvailableAct = 'Available actions';
   rsMinimal = 'Minimal';
@@ -1542,7 +1568,8 @@ resourcestring
   rsManageToolbo = 'Manage tool box script';
   rsSelectScript = 'Select script';
   rsOpenScript = 'Open script';
-  rsScriptIsAlre = 'Script is already assigned to %s are you sure you want to duplicate it to %s ?';
+  rsScriptIsAlre =
+    'Script is already assigned to %s are you sure you want to duplicate it to %s ?';
   rsShow0Horizon = 'Show 0d horizon line';
   rsSetOptionsFo = 'Set options for best performance';
   rsVersion = 'Version';
@@ -1578,7 +1605,7 @@ resourcestring
   rsNewVersionAv = 'New version available';
   rsNewBetaVersi = 'New beta version available';
   rsANewVersionO = 'A new version %s of Skychart is available.%sDo you want to'
-    +' download it now?';
+    + ' download it now?';
   rsYouAlreadyHa = 'You already have the latest available version!';
   rsOrientToTheP = 'Orient to the pole';
   rsIcons = 'Icons';
@@ -1610,61 +1637,76 @@ resourcestring
   rsActivateVoic = 'Activate voice';
   rsCannotDownlo = 'Cannot download PDF help now';
   rsThisDirectDr = 'This direct driver is kept for compatibility, it may work '
-    +'or not for you. But the preference is to use the INDI or ASCOM driver '
-    +'for your telescope.';
+    + 'or not for you. But the preference is to use the INDI or ASCOM driver '
+    + 'for your telescope.';
   rsShowObsolete = 'Show obsolete drivers';
 
 // also update upsi_translation
 
 implementation
 
-procedure GetDefaultLanguage(var buf1,buf2: string);
-var i : integer;
+procedure GetDefaultLanguage(var buf1, buf2: string);
+var
+  i: integer;
  {$ifdef darwin}
-    response:Tstringlist;
+  response: TStringList;
  {$endif}
 begin
- GetLanguageIDs(buf1,buf2);
- i:=pos('.',buf1);
- if i>0 then buf1:=copy(buf1,1,i-1);
+  GetLanguageIDs(buf1, buf2);
+  i := pos('.', buf1);
+  if i > 0 then
+    buf1 := copy(buf1, 1, i - 1);
  {$ifdef darwin}
- if (trim(buf1)='') and (trim(buf2)='') then begin
+  if (trim(buf1) = '') and (trim(buf2) = '') then
+  begin
     writetrace('No language environment, try to read language from user database');
-    response:=TStringList.Create;
-    ExecProcess('defaults read -g AppleLocale',response);
-    if response.Count>0 then begin
-      buf1:=response[0];
-      i:=pos('_',buf1);
-      if i>0 then buf2:=copy(buf1,1,i-1);
+    response := TStringList.Create;
+    ExecProcess('defaults read -g AppleLocale', response);
+    if response.Count > 0 then
+    begin
+      buf1 := response[0];
+      i := pos('_', buf1);
+      if i > 0 then
+        buf2 := copy(buf1, 1, i - 1);
     end;
-    response.free;
- end;
+    response.Free;
+  end;
  {$endif}
 end;
 
-function Translate(lang : string = ''):string;
-var lang2,pofile: string;
+function Translate(lang: string = ''): string;
+var
+  lang2, pofile: string;
 begin
- lang2:='';
- if lang='ua' then lang:='uk'; // new Ukranian code
- if lang='' then GetDefaultLanguage(lang,lang2);
- writetrace('Try language: '+lang+', '+lang2);
- pofile:=format(slash(appdir)+slash('data')+slash('language')+'skychart.%s.po',[lang]);
- if FileExists(pofile) then result:=lang
- else begin
-    pofile:=format(slash(appdir)+slash('data')+slash('language')+'skychart.%s.po',[lang2]);
-    if FileExists(pofile) then result:=lang2
-    else begin
-        pofile:=format(slash(appdir)+slash('data')+slash('language')+'skychart.%s.po',['en']);
-        result:='en';
+  lang2 := '';
+  if lang = 'ua' then
+    lang := 'uk'; // new Ukranian code
+  if lang = '' then
+    GetDefaultLanguage(lang, lang2);
+  writetrace('Try language: ' + lang + ', ' + lang2);
+  pofile := format(slash(appdir) + slash('data') + slash('language') + 'skychart.%s.po', [lang]);
+  if FileExists(pofile) then
+    Result := lang
+  else
+  begin
+    pofile := format(slash(appdir) + slash('data') + slash('language') +
+      'skychart.%s.po', [lang2]);
+    if FileExists(pofile) then
+      Result := lang2
+    else
+    begin
+      pofile := format(slash(appdir) + slash('data') + slash('language') +
+        'skychart.%s.po', ['en']);
+      Result := 'en';
     end;
- end;
- // translate CDC messages
- TranslateUnitResourceStrings('u_translation',systoutf8(slash(appdir)+slash('data')+slash('language')+'skychart.%s.po'),result,'');
- // translate LCL messages
- TranslateUnitResourceStrings('LCLStrConsts',systoutf8(slash(appdir)+slash('data')+slash('language')+'lclstrconsts.%s.po'),result,'');
- writetrace('Language: '+result);
+  end;
+  // translate CDC messages
+  TranslateUnitResourceStrings('u_translation', systoutf8(
+    slash(appdir) + slash('data') + slash('language') + 'skychart.%s.po'), Result, '');
+  // translate LCL messages
+  TranslateUnitResourceStrings('LCLStrConsts', systoutf8(
+    slash(appdir) + slash('data') + slash('language') + 'lclstrconsts.%s.po'), Result, '');
+  writetrace('Language: ' + Result);
 end;
 
 end.
-

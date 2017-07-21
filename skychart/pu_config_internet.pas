@@ -25,7 +25,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, fu_config_internet, UScaleDPI,
+uses
+  u_help, u_translation, u_constant, u_util, fu_config_internet, UScaleDPI,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, CheckLst, Buttons, Spin, ExtCtrls, enhedits, ComCtrls, LResources,
   ButtonPanel, Grids, LazHelpHTML;
@@ -56,16 +57,17 @@ type
   end;
 
 implementation
+
 {$R *.lfm}
 
 procedure Tf_configinternet.SetLang;
 begin
-Caption:=rsInternet;
-Button1.caption:=rsOK;
-Button2.caption:=rsApply;
-Button3.caption:=rsCancel;
-Button6.caption:=rsHelp;
-SetHelp(self,hlpCfgInt);
+  Caption := rsInternet;
+  Button1.Caption := rsOK;
+  Button2.Caption := rsApply;
+  Button3.Caption := rsCancel;
+  Button6.Caption := rsHelp;
+  SetHelp(self, hlpCfgInt);
 end;
 
 procedure Tf_configinternet.FormShow(Sender: TObject);
@@ -73,15 +75,15 @@ begin
   f_config_internet1.init;
 end;
 
-procedure Tf_configinternet.FormClose(Sender: TObject;
-  var CloseAction: TCloseAction);
+procedure Tf_configinternet.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   f_config_internet1.lock;
 end;
 
 procedure Tf_configinternet.Button2Click(Sender: TObject);
 begin
- if assigned(f_config_internet1.onApplyConfig) then f_config_internet1.onApplyConfig(f_config_internet1);
+  if assigned(f_config_internet1.onApplyConfig) then
+    f_config_internet1.onApplyConfig(f_config_internet1);
 end;
 
 procedure Tf_configinternet.Button6Click(Sender: TObject);

@@ -33,16 +33,17 @@ unit MultiFrame;
 interface
 
 uses
-  LCLIntf,LCLType,ChildFrame,
-  Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls, Menus, GraphType;
+  LCLIntf, LCLType, ChildFrame,
+  Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs,
+  ExtCtrls, Menus, GraphType;
 
 type
 
   ChildArray = array of TChildFrame;
-  
+
 {  TMultiFrame
    The docking area for a TChildFrame component.
-   
+
    Use:
    Create a child frame of your composition.
    On the application main form place a TMultiFrame
@@ -50,7 +51,7 @@ type
    Create a new child from TMultiFrame.NewChild
    Create a child frame with the new childframe as owner.
    Assign the frame to the DockedObject property.
-   
+
    Replace the standard MDI function as below:
    MDIChildCount   -> MultiFrame1.ChildCount
    ActiveMdiChild  -> MultiFrame1.ActiveObject
@@ -61,24 +62,24 @@ type
   TMultiFrame = class(TCustomPanel)
   private
     { Private declarations }
-    FChildIndex,FActiveChild: integer;
+    FChildIndex, FActiveChild: integer;
     FMaximized, FKeepLastChild, FWireframeMoveResize: boolean;
     FBorderWidth, FTitleHeight: integer;
     FBorderColor, FInactiveColor, FTitleColor: TColor;
-    FonMaximize : TNotifyEvent;
-    FOnResize : TNotifyEvent;
-    FonActiveChildChange : TNotifyEvent;
-    FOnCreateChild : TNotifyEvent;
-    FOnDeleteChild : TNotifyEvent;
+    FonMaximize: TNotifyEvent;
+    FOnResize: TNotifyEvent;
+    FonActiveChildChange: TNotifyEvent;
+    FOnCreateChild: TNotifyEvent;
+    FOnDeleteChild: TNotifyEvent;
     FChild: ChildArray;
-    DestroyTimer:TTimer;
+    DestroyTimer: TTimer;
     DestroyPending: array of TChildFrame;
     DestroyPendingCount: integer;
     DestroyCriticalSection: TCriticalSection;
     FWindowList: TmenuItem;
-    FWindowListOffset:integer;
-    DefaultPos:TPoint;
-    function GetChildCount:integer;
+    FWindowListOffset: integer;
+    DefaultPos: TPoint;
+    function GetChildCount: integer;
     function GetActiveChild: TChildFrame;
     function GetActiveObject: TFrame;
     procedure ChildClose(Sender: TObject);
@@ -88,22 +89,22 @@ type
     procedure ChildEnter(Sender: TObject);
     procedure FocusChildClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
-    procedure SetMaximized(value:boolean);
-    procedure SetBorderWidth(value:integer);
-    procedure SetTitleHeight(value:integer);
-    procedure SetBorderColor(value:TColor);
-    procedure SetInactiveColor(value:TColor);
-    procedure SetTitleColor(value:TColor);
-    procedure SetWindowList(value:TmenuItem);
-    procedure SetWireframeMoveResize(value:boolean);
+    procedure SetMaximized(Value: boolean);
+    procedure SetBorderWidth(Value: integer);
+    procedure SetTitleHeight(Value: integer);
+    procedure SetBorderColor(Value: TColor);
+    procedure SetInactiveColor(Value: TColor);
+    procedure SetTitleColor(Value: TColor);
+    procedure SetWindowList(Value: TmenuItem);
+    procedure SetWireframeMoveResize(Value: boolean);
     procedure SetResize(Sender: TObject);
     procedure DestroyChildTimer(Sender: TObject);
   protected
     { Protected declarations }
   public
     { Public declarations }
-    constructor Create(AOwner:TComponent); override;
-    destructor  Destroy; override;
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
     {
      The list of child window
     }
@@ -111,11 +112,11 @@ type
     {
      Create a new child window
     }
-    function NewChild(Aname:string=''):TChildFrame;
+    function NewChild(Aname: string = ''): TChildFrame;
     {
      Focus next child on list
     }
-    function NexChild:integer;
+    function NexChild: integer;
     {
      Cascade the windows
     }
@@ -131,7 +132,7 @@ type
     {
      Give the focus to a specific window.
     }
-    procedure SetActiveChild(n:integer);
+    procedure SetActiveChild(n: integer);
     {
      The number of child actually defined
     }
@@ -178,7 +179,8 @@ type
      Set WireframeMoveResize to true to not show the window content during
      move or resize.
     }
-    property WireframeMoveResize: boolean read FWireframeMoveResize write SetWireframeMoveResize;
+    property WireframeMoveResize: boolean read FWireframeMoveResize
+      write SetWireframeMoveResize;
     {
      When the Maximize property change.
      Generally used to draw or hide the resize and close button on the main form.
@@ -188,7 +190,8 @@ type
      When the active child change
      Can be use to update the main form title.
     }
-    property onActiveChildChange: TNotifyEvent read FonActiveChildChange write FonActiveChildChange;
+    property onActiveChildChange: TNotifyEvent
+      read FonActiveChildChange write FonActiveChildChange;
     {
      When resizings
     }
@@ -196,13 +199,13 @@ type
     {
      When new child is created
     }
-    property OnCreateChild : TNotifyEvent read FOnCreateChild write FOnCreateChild;
+    property OnCreateChild: TNotifyEvent read FOnCreateChild write FOnCreateChild;
     {
      When a child is deleted
     }
-    property OnDeleteChild : TNotifyEvent read FOnDeleteChild write FOnDeleteChild;
+    property OnDeleteChild: TNotifyEvent read FOnDeleteChild write FOnDeleteChild;
 
-    published
+  published
     property Align;
     property Alignment;
     property Anchors;
@@ -260,419 +263,500 @@ implementation
 
 procedure Register;
 begin
-  RegisterComponents('Misc',[TMultiFrame]);
+  RegisterComponents('Misc', [TMultiFrame]);
 end;
 
 
-constructor TMultiFrame.Create(AOwner:TComponent);
+constructor TMultiFrame.Create(AOwner: TComponent);
 begin
-inherited Create(AOwner);
-DoubleBuffered:=true;
-FChildIndex:=-1;
-FActiveChild:=-1;
-FWindowListOffset:=0;
-setlength(FChild,0);
-color:=clBlack;
-//align:=alClient;
-BevelOuter:=bvNone;
-BevelWidth:=1;
-FBorderWidth:=3;  FTitleHeight:=12;
-FBorderColor:=clActiveCaption;
-FInactiveColor:=clInactiveCaption;
-FTitleColor:=clCaptionText;
+  inherited Create(AOwner);
+  DoubleBuffered := True;
+  FChildIndex := -1;
+  FActiveChild := -1;
+  FWindowListOffset := 0;
+  setlength(FChild, 0);
+  color := clBlack;
+  //align:=alClient;
+  BevelOuter := bvNone;
+  BevelWidth := 1;
+  FBorderWidth := 3;
+  FTitleHeight := 12;
+  FBorderColor := clActiveCaption;
+  FInactiveColor := clInactiveCaption;
+  FTitleColor := clCaptionText;
 {$ifdef lclgtk}
-FBorderColor:=$C00000;
-FInactiveColor:=clGray;
-FTitleColor:=clWhite;
+  FBorderColor := $C00000;
+  FInactiveColor := clGray;
+  FTitleColor := clWhite;
 {$endif}
-DefaultPos:=Point(0,0);
-FOnResize:=nil;
-Inherited onResize:=@SetResize;
-InitializeCriticalSection(DestroyCriticalSection);
-DestroyPendingCount:=0;
-SetLength(DestroyPending,DestroyPendingCount);
-DestroyTimer:=TTimer.Create(self);
-DestroyTimer.Enabled:=false;
-DestroyTimer.Interval:=100;
-DestroyTimer.OnTimer:=@DestroyChildTimer;
+  DefaultPos := Point(0, 0);
+  FOnResize := nil;
+  inherited onResize := @SetResize;
+  InitializeCriticalSection(DestroyCriticalSection);
+  DestroyPendingCount := 0;
+  SetLength(DestroyPending, DestroyPendingCount);
+  DestroyTimer := TTimer.Create(self);
+  DestroyTimer.Enabled := False;
+  DestroyTimer.Interval := 100;
+  DestroyTimer.OnTimer := @DestroyChildTimer;
 end;
 
-destructor  TMultiFrame.Destroy;
+destructor TMultiFrame.Destroy;
 begin
-try
-DeleteCriticalSection(DestroyCriticalSection);
-FActiveChild:=-1;
-inherited destroy;
-except
-end;
-end;
-
-Function TMultiFrame.NewChild(Aname:string=''):TChildFrame;
-var m: TmenuItem;
-begin
-inc(FChildIndex);
-setlength(FChild,FChildIndex+1);
-FChild[FChildIndex]:=TChildFrame.Create(self);
-FChild[FChildIndex].Caption:=Aname;
-FChild[FChildIndex].Parent:=self;
-FChild[FChildIndex].SetBorderWdth(BorderWidth);
-FChild[FChildIndex].SetBorderColor(BorderColor);
-FChild[FChildIndex].SetTitleHeight(TitleHeight);
-FChild[FChildIndex].SetTitleColor(TitleColor);
-FChild[FChildIndex].WireframeMoveResize:=WireframeMoveResize;
-FChild[FChildIndex].onClose:=@ChildClose;
-FChild[FChildIndex].onMaximize:=@ChildMaximize;
-FChild[FChildIndex].onRestore:=@ChildRestore;
-FChild[FChildIndex].onCaptionChange:=@CaptionChange;
-FChild[FChildIndex].onEnter:=@ChildEnter;
-FChild[FChildIndex].onCloseQuery:=@FormCloseQuery;
-FChild[FChildIndex].Tag:=FChildIndex;
-FChild[FChildIndex].Top:=DefaultPos.Y;
-FChild[FChildIndex].Left:=DefaultPos.X;
-FActiveChild:=FChildIndex;
-if Assigned(FWindowList) then begin
   try
-  m:=TmenuItem.Create(self);
-  m.Caption:='Child '+ inttostr(FChildIndex);
-  m.Tag:=100+FChildIndex;
-  m.OnClick:=@FocusChildClick;
-  FWindowList.Add(m);
+    DeleteCriticalSection(DestroyCriticalSection);
+    FActiveChild := -1;
+    inherited Destroy;
   except
   end;
 end;
-if Assigned(FOnCreateChild) then FOnCreateChild(FChild[FChildIndex]);
-FChild[FChildIndex].Maximized:=FMaximized;
-SetActiveChild(FChildIndex);
-DefaultPos.X:=DefaultPos.X+2*FTitleHeight;
-DefaultPos.Y:=DefaultPos.Y+2*FTitleHeight;
-if DefaultPos.Y>10*FTitleHeight then begin
-   DefaultPos.Y:=0;
-   if DefaultPos.X>30*FTitleHeight then DefaultPos.X:=0;
-end;
-result:=FChild[FChildIndex];
+
+function TMultiFrame.NewChild(Aname: string = ''): TChildFrame;
+var
+  m: TmenuItem;
+begin
+  Inc(FChildIndex);
+  setlength(FChild, FChildIndex + 1);
+  FChild[FChildIndex] := TChildFrame.Create(self);
+  FChild[FChildIndex].Caption := Aname;
+  FChild[FChildIndex].Parent := self;
+  FChild[FChildIndex].SetBorderWdth(BorderWidth);
+  FChild[FChildIndex].SetBorderColor(BorderColor);
+  FChild[FChildIndex].SetTitleHeight(TitleHeight);
+  FChild[FChildIndex].SetTitleColor(TitleColor);
+  FChild[FChildIndex].WireframeMoveResize := WireframeMoveResize;
+  FChild[FChildIndex].onClose := @ChildClose;
+  FChild[FChildIndex].onMaximize := @ChildMaximize;
+  FChild[FChildIndex].onRestore := @ChildRestore;
+  FChild[FChildIndex].onCaptionChange := @CaptionChange;
+  FChild[FChildIndex].onEnter := @ChildEnter;
+  FChild[FChildIndex].onCloseQuery := @FormCloseQuery;
+  FChild[FChildIndex].Tag := FChildIndex;
+  FChild[FChildIndex].Top := DefaultPos.Y;
+  FChild[FChildIndex].Left := DefaultPos.X;
+  FActiveChild := FChildIndex;
+  if Assigned(FWindowList) then
+  begin
+    try
+      m := TmenuItem.Create(self);
+      m.Caption := 'Child ' + IntToStr(FChildIndex);
+      m.Tag := 100 + FChildIndex;
+      m.OnClick := @FocusChildClick;
+      FWindowList.Add(m);
+    except
+    end;
+  end;
+  if Assigned(FOnCreateChild) then
+    FOnCreateChild(FChild[FChildIndex]);
+  FChild[FChildIndex].Maximized := FMaximized;
+  SetActiveChild(FChildIndex);
+  DefaultPos.X := DefaultPos.X + 2 * FTitleHeight;
+  DefaultPos.Y := DefaultPos.Y + 2 * FTitleHeight;
+  if DefaultPos.Y > 10 * FTitleHeight then
+  begin
+    DefaultPos.Y := 0;
+    if DefaultPos.X > 30 * FTitleHeight then
+      DefaultPos.X := 0;
+  end;
+  Result := FChild[FChildIndex];
 end;
 
-function TMultiFrame.NexChild:integer;
-var i: integer;
+function TMultiFrame.NexChild: integer;
+var
+  i: integer;
 begin
-result:=0;
-if FChildIndex>0 then begin
-   i:=FActiveChild;
-   inc(i);
-   if i>FChildIndex then i:=0;
-   SetActiveChild(i);
-   result:=i;
-end;
+  Result := 0;
+  if FChildIndex > 0 then
+  begin
+    i := FActiveChild;
+    Inc(i);
+    if i > FChildIndex then
+      i := 0;
+    SetActiveChild(i);
+    Result := i;
+  end;
 end;
 
 procedure TMultiFrame.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
-CanClose:= not (KeepLastChild and (ChildCount=1));
+  CanClose := not (KeepLastChild and (ChildCount = 1));
 end;
 
 procedure TMultiFrame.ChildClose(Sender: TObject);
-var i,j,n: integer;
+var
+  i, j, n: integer;
 begin
-if Assigned(FOnDeleteChild) then FOnDeleteChild(Sender);
-n:=(Sender as TChildFrame).Tag;
-if Assigned(FWindowList) then begin
-  j:=FWindowList.Count;
-  for i:=0 to FWindowList.Count-1 do
-   if FWindowList.Items[i].tag=100+n then begin
-      FWindowList.Delete(i);
-      j:=i;
-      break;
-   end;
-  for i:=j to FWindowList.Count-1 do FWindowList.Items[i].tag:=FWindowList.Items[i].tag-1;
-end;
-for i:=n to FChildIndex-1 do begin
-   FChild[i]:=FChild[i+1];
-   FChild[i].Tag:=i;
-end;
-dec(FChildIndex);
-setlength(FChild,FChildIndex+1);
-SetActiveChild(FChildIndex);
-EnterCriticalSection(DestroyCriticalSection);
-inc(DestroyPendingCount);
-SetLength(DestroyPending,DestroyPendingCount);
-DestroyPending[DestroyPendingCount-1]:=TChildFrame(Sender);
-DestroyTimer.Enabled:=true;
-LeaveCriticalSection(DestroyCriticalSection);
+  if Assigned(FOnDeleteChild) then
+    FOnDeleteChild(Sender);
+  n := (Sender as TChildFrame).Tag;
+  if Assigned(FWindowList) then
+  begin
+    j := FWindowList.Count;
+    for i := 0 to FWindowList.Count - 1 do
+      if FWindowList.Items[i].tag = 100 + n then
+      begin
+        FWindowList.Delete(i);
+        j := i;
+        break;
+      end;
+    for i := j to FWindowList.Count - 1 do
+      FWindowList.Items[i].tag := FWindowList.Items[i].tag - 1;
+  end;
+  for i := n to FChildIndex - 1 do
+  begin
+    FChild[i] := FChild[i + 1];
+    FChild[i].Tag := i;
+  end;
+  Dec(FChildIndex);
+  setlength(FChild, FChildIndex + 1);
+  SetActiveChild(FChildIndex);
+  EnterCriticalSection(DestroyCriticalSection);
+  Inc(DestroyPendingCount);
+  SetLength(DestroyPending, DestroyPendingCount);
+  DestroyPending[DestroyPendingCount - 1] := TChildFrame(Sender);
+  DestroyTimer.Enabled := True;
+  LeaveCriticalSection(DestroyCriticalSection);
 end;
 
 procedure TMultiFrame.ChildMaximize(Sender: TObject);
-var i: integer;
+var
+  i: integer;
 begin
-for i:=0 to FChildIndex do begin
-   FChild[i].maximized:=true;
-end;
-FMaximized:=true;
-if assigned(FonMaximize) then FonMaximize(self);
+  for i := 0 to FChildIndex do
+  begin
+    FChild[i].maximized := True;
+  end;
+  FMaximized := True;
+  if assigned(FonMaximize) then
+    FonMaximize(self);
 end;
 
 procedure TMultiFrame.ChildRestore(Sender: TObject);
-var i: integer;
+var
+  i: integer;
 begin
-for i:=0 to FChildIndex do begin
-   FChild[i].maximized:=false;
-end;
-FMaximized:=false;
-if assigned(FonMaximize) then FonMaximize(self);
+  for i := 0 to FChildIndex do
+  begin
+    FChild[i].maximized := False;
+  end;
+  FMaximized := False;
+  if assigned(FonMaximize) then
+    FonMaximize(self);
 end;
 
-procedure TMultiFrame.SetMaximized(value:boolean);
-var i: integer;
+procedure TMultiFrame.SetMaximized(Value: boolean);
+var
+  i: integer;
 begin
-FMaximized:=value;
-for i:=0 to FChildIndex do begin
-  FChild[i].maximized:=FMaximized;
-end;
-if assigned(FonMaximize) then FonMaximize(self);
+  FMaximized := Value;
+  for i := 0 to FChildIndex do
+  begin
+    FChild[i].maximized := FMaximized;
+  end;
+  if assigned(FonMaximize) then
+    FonMaximize(self);
 end;
 
 procedure TMultiFrame.CaptionChange(Sender: TObject);
-var i,n: integer;
+var
+  i, n: integer;
 begin
-n:=(Sender as TChildFrame).Tag+100;
-if Assigned(FWindowList) then
- for i:=0 to FWindowList.Count-1 do
-   if FWindowList.Items[i].tag=n then begin
-      FWindowList.Items[i].Caption:=(Sender as TChildFrame).Caption;
-      break;
-   end;
+  n := (Sender as TChildFrame).Tag + 100;
+  if Assigned(FWindowList) then
+    for i := 0 to FWindowList.Count - 1 do
+      if FWindowList.Items[i].tag = n then
+      begin
+        FWindowList.Items[i].Caption := (Sender as TChildFrame).Caption;
+        break;
+      end;
 end;
 
-function TMultiFrame.GetChildCount:integer;
+function TMultiFrame.GetChildCount: integer;
 begin
-result:= FChildIndex+1;
+  Result := FChildIndex + 1;
 end;
 
 function TMultiFrame.GetActiveChild: TChildFrame;
 begin
-if FActiveChild>=0 then
-   result:=FChild[FActiveChild]
-else
-   result:=nil;
+  if FActiveChild >= 0 then
+    Result := FChild[FActiveChild]
+  else
+    Result := nil;
 end;
 
 function TMultiFrame.GetActiveObject: TFrame;
 begin
-if FActiveChild>=0 then
-   result:=FChild[FActiveChild].DockedObject
-else
-   result:=nil;
+  if FActiveChild >= 0 then
+    Result := FChild[FActiveChild].DockedObject
+  else
+    Result := nil;
 end;
 
-procedure TMultiFrame.SetActiveChild(n:integer);
-var i:integer;
-    change: boolean;
+procedure TMultiFrame.SetActiveChild(n: integer);
+var
+  i: integer;
+  change: boolean;
 begin
-try
-if (n<0)or(n>FChildIndex) then exit;
-if (parent<>nil) and parent.visible and (n>=0) then begin
-  FChild[n].BringToFront;
-end;
-except
-end;
-change:=(FActiveChild<>n);
-FActiveChild:=n;
-try
-for i:=0 to FChildIndex do begin
-  if i=n then FChild[i].SetBorderColor(FBorderColor)
-         else FChild[i].SetBorderColor(FInactiveColor);
-end;
-if change and assigned(FonActiveChildChange) then FonActiveChildChange(self);
-except
-end;
+  try
+    if (n < 0) or (n > FChildIndex) then
+      exit;
+    if (parent <> nil) and parent.Visible and (n >= 0) then
+    begin
+      FChild[n].BringToFront;
+    end;
+  except
+  end;
+  change := (FActiveChild <> n);
+  FActiveChild := n;
+  try
+    for i := 0 to FChildIndex do
+    begin
+      if i = n then
+        FChild[i].SetBorderColor(FBorderColor)
+      else
+        FChild[i].SetBorderColor(FInactiveColor);
+    end;
+    if change and assigned(FonActiveChildChange) then
+      FonActiveChildChange(self);
+  except
+  end;
 end;
 
 procedure TMultiFrame.FocusChildClick(Sender: TObject);
 begin
-SetActiveChild((Sender as TmenuItem).Tag-100);
+  SetActiveChild((Sender as TmenuItem).Tag - 100);
 end;
 
 procedure TMultiFrame.ChildEnter(Sender: TObject);
 begin
-SetActiveChild((Sender as TChildFrame).Tag);
+  SetActiveChild((Sender as TChildFrame).Tag);
 end;
 
-procedure TMultiFrame.SetBorderWidth(value:integer);
-var i:integer;
+procedure TMultiFrame.SetBorderWidth(Value: integer);
+var
+  i: integer;
 begin
-FBorderWidth:=value;
-for i:=0 to FChildIndex do begin
-  FChild[i].BorderWidth:=FBorderWidth;
-end;
+  FBorderWidth := Value;
+  for i := 0 to FChildIndex do
+  begin
+    FChild[i].BorderWidth := FBorderWidth;
+  end;
 end;
 
-procedure TMultiFrame.SetTitleHeight(value:integer);
-var i:integer;
+procedure TMultiFrame.SetTitleHeight(Value: integer);
+var
+  i: integer;
 begin
-FTitleHeight:=value;
-for i:=0 to FChildIndex do begin
-  FChild[i].SetTitleHeight(FTitleHeight);
-end;
+  FTitleHeight := Value;
+  for i := 0 to FChildIndex do
+  begin
+    FChild[i].SetTitleHeight(FTitleHeight);
+  end;
 end;
 
-procedure TMultiFrame.SetBorderColor(value:TColor);
+procedure TMultiFrame.SetBorderColor(Value: TColor);
 begin
-FBorderColor:=value;
-if FActiveChild>=0 then FChild[FActiveChild].SetBorderColor(FBorderColor);
+  FBorderColor := Value;
+  if FActiveChild >= 0 then
+    FChild[FActiveChild].SetBorderColor(FBorderColor);
 end;
 
-procedure TMultiFrame.SetInactiveColor(value:TColor);
-var i:integer;
+procedure TMultiFrame.SetInactiveColor(Value: TColor);
+var
+  i: integer;
 begin
-FInactiveColor:=value;
-for i:=0 to FChildIndex do begin
-  if i<>FActiveChild then FChild[i].SetBorderColor(FBorderColor);
-end;
+  FInactiveColor := Value;
+  for i := 0 to FChildIndex do
+  begin
+    if i <> FActiveChild then
+      FChild[i].SetBorderColor(FBorderColor);
+  end;
 end;
 
-procedure TMultiFrame.SetTitleColor(value:TColor);
-var i:integer;
+procedure TMultiFrame.SetTitleColor(Value: TColor);
+var
+  i: integer;
 begin
-FTitleColor:=value;
-for i:=0 to FChildIndex do begin
-  FChild[i].SetTitleColor(FTitleColor);
-end;
+  FTitleColor := Value;
+  for i := 0 to FChildIndex do
+  begin
+    FChild[i].SetTitleColor(FTitleColor);
+  end;
 end;
 
-procedure TMultiFrame.SetWireframeMoveResize(value:boolean);
-var i:integer;
+procedure TMultiFrame.SetWireframeMoveResize(Value: boolean);
+var
+  i: integer;
 begin
-FWireframeMoveResize:=value;
-for i:=0 to FChildIndex do begin
-  FChild[i].WireframeMoveResize:=FWireframeMoveResize;
-end;
+  FWireframeMoveResize := Value;
+  for i := 0 to FChildIndex do
+  begin
+    FChild[i].WireframeMoveResize := FWireframeMoveResize;
+  end;
 end;
 
-procedure TMultiFrame.SetWindowList(value:TmenuItem);
+procedure TMultiFrame.SetWindowList(Value: TmenuItem);
 begin
-FWindowList:=value;
-FWindowListOffset:=FWindowList.Count;
+  FWindowList := Value;
+  FWindowListOffset := FWindowList.Count;
 end;
 
 procedure TMultiFrame.SetResize(Sender: TObject);
-var i: integer;
+var
+  i: integer;
 begin
-if Maximized then
-  for i:=0 to FChildIndex do begin
-    FChild[i].top:=0;
-    FChild[i].left:=0;
-    FChild[i].Width:=ClientWidth;
-    FChild[i].Height:=ClientHeight;
-  end;
-if Assigned(FOnResize) then  FOnResize(Sender);
+  if Maximized then
+    for i := 0 to FChildIndex do
+    begin
+      FChild[i].top := 0;
+      FChild[i].left := 0;
+      FChild[i].Width := ClientWidth;
+      FChild[i].Height := ClientHeight;
+    end;
+  if Assigned(FOnResize) then
+    FOnResize(Sender);
 end;
 
 procedure TMultiFrame.Cascade;
-var i,x,y:integer;
+var
+  i, x, y: integer;
 begin
-Maximized:=false;
-if ChildCount>0 then begin
-x:=0; y:=0;
-for i:=0 to FChildIndex do begin
-  FChild[i].RestoreSize;
-  FChild[i].top:=x;
-  FChild[i].left:=y;
-  FChild[i].BringToFront;
-  x:=x+2*FTitleHeight;
-  y:=y+2*FTitleHeight;
-  if y>10*FTitleHeight then begin
-     y:=0;
-     if x>30*FTitleHeight then x:=0;
+  Maximized := False;
+  if ChildCount > 0 then
+  begin
+    x := 0;
+    y := 0;
+    for i := 0 to FChildIndex do
+    begin
+      FChild[i].RestoreSize;
+      FChild[i].top := x;
+      FChild[i].left := y;
+      FChild[i].BringToFront;
+      x := x + 2 * FTitleHeight;
+      y := y + 2 * FTitleHeight;
+      if y > 10 * FTitleHeight then
+      begin
+        y := 0;
+        if x > 30 * FTitleHeight then
+          x := 0;
+      end;
+    end;
+    SetActiveChild(FChildIndex);
   end;
-end;
-SetActiveChild(FChildIndex);
-end;
 end;
 
 procedure TMultiFrame.TileVertical;
-var i,j,dx,dy,nx,ny,x,y,n:integer;
-    d: double;
+var
+  i, j, dx, dy, nx, ny, x, y, n: integer;
+  d: double;
 begin
-Maximized:=false;
-if ChildCount>0 then begin
-  d:=round(100*sqrt(FChildIndex+1))/100;
-  ny:=trunc(d);
-  if frac(d)=0 then nx:=ny
-    else if frac(d)<0.5 then nx:=ny+1
-         else begin ny:=ny+1; nx:=ny; end;
-  dx:=clientwidth div nx;
-  dy:=clientheight div ny;
-  for i:=0 to nx-1 do begin
-   for j:=0 to ny-1 do begin
-    x:=i*dx;
-    y:=j*dy;
-    n:=i*ny+j;
-    if n<FChildIndex then begin
-      FChild[n].top:=y;
-      FChild[n].left:=x;
-      FChild[n].width:=dx;
-      FChild[n].height:=dy;
+  Maximized := False;
+  if ChildCount > 0 then
+  begin
+    d := round(100 * sqrt(FChildIndex + 1)) / 100;
+    ny := trunc(d);
+    if frac(d) = 0 then
+      nx := ny
+    else if frac(d) < 0.5 then
+      nx := ny + 1
+    else
+    begin
+      ny := ny + 1;
+      nx := ny;
     end;
-    if n=FChildIndex then begin
-      FChild[n].top:=y;
-      FChild[n].left:=x;
-      FChild[n].width:=dx;
-      FChild[n].height:=clientheight-y;
+    dx := clientwidth div nx;
+    dy := clientheight div ny;
+    for i := 0 to nx - 1 do
+    begin
+      for j := 0 to ny - 1 do
+      begin
+        x := i * dx;
+        y := j * dy;
+        n := i * ny + j;
+        if n < FChildIndex then
+        begin
+          FChild[n].top := y;
+          FChild[n].left := x;
+          FChild[n].Width := dx;
+          FChild[n].Height := dy;
+        end;
+        if n = FChildIndex then
+        begin
+          FChild[n].top := y;
+          FChild[n].left := x;
+          FChild[n].Width := dx;
+          FChild[n].Height := clientheight - y;
+        end;
+      end;
     end;
-   end;
   end;
-end;
 end;
 
 procedure TMultiFrame.TileHorizontal;
-var i,j,dx,dy,nx,ny,x,y,n:integer;
-    d: double;
+var
+  i, j, dx, dy, nx, ny, x, y, n: integer;
+  d: double;
 begin
-Maximized:=false;
-if ChildCount>0 then begin
-  d:=round(100*sqrt(FChildIndex+1))/100;
-  nx:=trunc(d);
-  if frac(d)=0 then ny:=nx
-    else if frac(d)<0.5 then ny:=nx+1
-         else begin nx:=nx+1; ny:=nx; end;
-  dx:=clientwidth div nx;
-  dy:=clientheight div ny;
-  for i:=0 to ny-1 do begin
-   for j:=0 to nx-1 do begin
-    x:=j*dx;
-    y:=i*dy;
-    n:=i*nx+j;
-    if n<FChildIndex then begin
-      FChild[n].top:=y;
-      FChild[n].left:=x;
-      FChild[n].width:=dx;
-      FChild[n].height:=dy;
+  Maximized := False;
+  if ChildCount > 0 then
+  begin
+    d := round(100 * sqrt(FChildIndex + 1)) / 100;
+    nx := trunc(d);
+    if frac(d) = 0 then
+      ny := nx
+    else if frac(d) < 0.5 then
+      ny := nx + 1
+    else
+    begin
+      nx := nx + 1;
+      ny := nx;
     end;
-    if n=FChildIndex then begin
-      FChild[n].top:=y;
-      FChild[n].left:=x;
-      FChild[n].width:=clientwidth-x;
-      FChild[n].height:=dy;
+    dx := clientwidth div nx;
+    dy := clientheight div ny;
+    for i := 0 to ny - 1 do
+    begin
+      for j := 0 to nx - 1 do
+      begin
+        x := j * dx;
+        y := i * dy;
+        n := i * nx + j;
+        if n < FChildIndex then
+        begin
+          FChild[n].top := y;
+          FChild[n].left := x;
+          FChild[n].Width := dx;
+          FChild[n].Height := dy;
+        end;
+        if n = FChildIndex then
+        begin
+          FChild[n].top := y;
+          FChild[n].left := x;
+          FChild[n].Width := clientwidth - x;
+          FChild[n].Height := dy;
+        end;
+      end;
     end;
-   end;
   end;
-end;
 end;
 
 procedure TMultiFrame.DestroyChildTimer(Sender: TObject);
-var i,n: integer;
+var
+  i, n: integer;
 begin
-DestroyTimer.Enabled:=false;
-EnterCriticalSection(DestroyCriticalSection);
-n:=DestroyPendingCount-1;
-if n>=0 then begin
-  for i:=0 to n do begin
-     if DestroyPending[i]<>nil then
+  DestroyTimer.Enabled := False;
+  EnterCriticalSection(DestroyCriticalSection);
+  n := DestroyPendingCount - 1;
+  if n >= 0 then
+  begin
+    for i := 0 to n do
+    begin
+      if DestroyPending[i] <> nil then
         DestroyPending[i].Free;
+    end;
   end;
-end;
-DestroyPendingCount:=0;
-SetLength(DestroyPending,DestroyPendingCount);
-LeaveCriticalSection(DestroyCriticalSection);
+  DestroyPendingCount := 0;
+  SetLength(DestroyPending, DestroyPendingCount);
+  LeaveCriticalSection(DestroyCriticalSection);
 end;
 
 end.

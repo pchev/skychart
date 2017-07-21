@@ -1,4 +1,5 @@
 unit indibaseclient;
+
 {
 Copyright (C) 2014 Patrick Chevalley
 
@@ -41,47 +42,47 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    function Connect: Boolean;
+    function Connect: boolean;
     procedure Disconnect;
     function GetErrorDesc: string;
   published
     property Sock: TTCPBlockSocket read FSock;
   end;
 
-  TDataBuffer = Class(TObject)
-    public
-    dataptr:PtrInt;
+  TDataBuffer = class(TObject)
+  public
+    dataptr: PtrInt;
   end;
 
-  TProcessDataProc = procedure (s: TMemoryStream) of object;
+  TProcessDataProc = procedure(s: TMemoryStream) of object;
 
   TProcessData = class(TThread)
-    private
-      dataqueue: TObjectList;
-      FProcessData: TProcessDataProc;
-      BufferCriticalSection : TRTLCriticalSection;
-      function getCount: integer;
-    public
-      constructor Create;
-      destructor Destroy; override;
-      procedure Add(data:TMemoryStream);
-      procedure Execute; override;
-      property count: integer read getCount;
-      property onProcessData: TProcessDataProc read FProcessData write FProcessData;
+  private
+    dataqueue: TObjectList;
+    FProcessData: TProcessDataProc;
+    BufferCriticalSection: TRTLCriticalSection;
+    function getCount: integer;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure Add(Data: TMemoryStream);
+    procedure Execute; override;
+    property Count: integer read getCount;
+    property onProcessData: TProcessDataProc read FProcessData write FProcessData;
   end;
 
   TIndiBaseClient = class(TThread)
   private
     FinitProps: boolean;
-    FTargetHost,FTargetPort,FErrorDesc,FRecvData,Fsendbuffer : string;
-    FTimeout : integer;
+    FTargetHost, FTargetPort, FErrorDesc, FRecvData, Fsendbuffer: string;
+    FTimeout: integer;
     FConnected: boolean;
     FProtocolTrace: boolean;
-    FProtocolTraceFile,FProtocolErrorFile: string;
-    FPTlog,FPTerr : textfile;
-    Fdevices: TObjectlist;
-    FwatchDevices: TStringlist;
-    FMissedFrameCount: Cardinal;
+    FProtocolTraceFile, FProtocolErrorFile: string;
+    FPTlog, FPTerr: textfile;
+    Fdevices: TObjectList;
+    FwatchDevices: TStringList;
+    FMissedFrameCount: cardinal;
     FlockBlobEvent: boolean;
     FServerConnected: TNotifyEvent;
     FServerDisconnected: TNotifyEvent;
@@ -105,7 +106,7 @@ type
     SyncindiBlob: IBLOB;
     MessageCriticalSection: TRTLCriticalSection;
     SendCriticalSection: TRTLCriticalSection;
-    FProcessData:TProcessData;
+    FProcessData: TProcessData;
     procedure IndiDeviceEvent(dp: Basedevice);
     procedure IndiDeleteDeviceEvent(dp: Basedevice);
     procedure IndiMessageEvent(msg: string);
@@ -128,60 +129,70 @@ type
     procedure SyncSwitchEvent;
     procedure SyncLightEvent;
     procedure ASyncBlobEvent(Data: PtrInt);
-    function findDev(root: TDOMNode; createifnotexist: boolean; out errmsg: string):BaseDevice;
-    function findDev(root: TDOMNode; out errmsg: string):BaseDevice;
-    function ProcessData(s: TMemoryStream):boolean;
+    function findDev(root: TDOMNode; createifnotexist: boolean;
+      out errmsg: string): BaseDevice;
+    function findDev(root: TDOMNode; out errmsg: string): BaseDevice;
+    function ProcessData(s: TMemoryStream): boolean;
     procedure ProcessDataThread(s: TMemoryStream);
     procedure ProcessDataAsync(Data: PtrInt);
     procedure setDriverConnection(status: boolean; deviceName: string);
-    Procedure OpenProtocolTrace(fnlog,fnerr:string);
-    Procedure CloseProtocolTrace;
-    Procedure WriteProtocolTrace( buf : string);
-    Procedure WriteProtocolError( buf : string);
+    procedure OpenProtocolTrace(fnlog, fnerr: string);
+    procedure CloseProtocolTrace;
+    procedure WriteProtocolTrace(buf: string);
+    procedure WriteProtocolError(buf: string);
   public
-    TcpClient : TTcpclient;
+    TcpClient: TTcpclient;
     constructor Create;
     destructor Destroy; override;
     procedure RefreshProps;
     procedure Execute; override;
-    procedure SetServer(host,port: string);
+    procedure SetServer(host, port: string);
     procedure watchDevice(devicename: string);
-    procedure setBLOBMode(blobH: BLOBHandling; dev: string; prop:string='');
+    procedure setBLOBMode(blobH: BLOBHandling; dev: string; prop: string = '');
     procedure ConnectServer;
     procedure DisconnectServer;
     procedure connectDevice(deviceName: string);
     procedure disconnectDevice(deviceName: string);
     procedure Send(const Value: string);
-    property devices: TObjectlist read Fdevices;
+    property devices: TObjectList read Fdevices;
     function getDevice(deviceName: string): Basedevice;
     procedure deleteDevice(deviceName: string; out errmsg: string);
     procedure sendNewNumber(nvp: INumberVectorProperty);
     procedure sendNewText(tvp: ITextVectorProperty);
     procedure sendNewSwitch(svp: ISwitchVectorProperty);
-    function WaitBusy(nvp: INumberVectorProperty; timeout:integer=5000;minwait:integer=0):boolean;
-    function WaitBusy(tvp: ITextVectorProperty; timeout:integer=5000;minwait:integer=0):boolean;
-    function WaitBusy(svp: ISwitchVectorProperty; timeout:integer=5000;minwait:integer=0):boolean;
-    property Timeout : integer read FTimeout write FTimeout;
+    function WaitBusy(nvp: INumberVectorProperty; timeout: integer = 5000;
+      minwait: integer = 0): boolean;
+    function WaitBusy(tvp: ITextVectorProperty; timeout: integer = 5000;
+      minwait: integer = 0): boolean;
+    function WaitBusy(svp: ISwitchVectorProperty; timeout: integer = 5000;
+      minwait: integer = 0): boolean;
+    property Timeout: integer read FTimeout write FTimeout;
     property ProtocolTrace: boolean read FProtocolTrace write FProtocolTrace;
     property ProtocolTraceFile: string read FProtocolTraceFile write FProtocolTraceFile;
     property ProtocolErrorFile: string read FProtocolErrorFile write FProtocolErrorFile;
     property Terminated;
     property Connected: boolean read FConnected;
-    property ErrorDesc : string read FErrorDesc;
-    property RecvData : string read FRecvData;
-    property MissedFrameCount: Cardinal read FMissedFrameCount;
-    property onServerConnected: TNotifyEvent read FServerConnected write FServerConnected;
-    property onServerDisconnected: TNotifyEvent read FServerDisconnected write FServerDisconnected;
+    property ErrorDesc: string read FErrorDesc;
+    property RecvData: string read FRecvData;
+    property MissedFrameCount: cardinal read FMissedFrameCount;
+    property onServerConnected: TNotifyEvent read FServerConnected
+      write FServerConnected;
+    property onServerDisconnected: TNotifyEvent
+      read FServerDisconnected write FServerDisconnected;
     property onNewDevice: TIndiDeviceEvent read FIndiDeviceEvent write FIndiDeviceEvent;
-    property onDeleteDevice: TIndiDeviceEvent read FIndiDeleteDeviceEvent write FIndiDeleteDeviceEvent;
-    property onNewMessage : TIndiMessageEvent read FIndiMessageEvent write FIndiMessageEvent;
-    property onNewProperty : TIndiPropertyEvent read FIndiPropertyEvent write FIndiPropertyEvent;
-    property onDeleteProperty : TIndiPropertyEvent read FIndiDeletePropertyEvent write FIndiDeletePropertyEvent;
-    property onNewNumber : TIndiNumberEvent read FIndiNumberEvent write FIndiNumberEvent;
-    property onNewText   : TIndiTextEvent read FIndiTextEvent write FIndiTextEvent;
-    property onNewSwitch : TIndiSwitchEvent read FIndiSwitchEvent write FIndiSwitchEvent;
-    property onNewLight  : TIndiLightEvent read FIndiLightEvent write FIndiLightEvent;
-    property onNewBlob   : TIndiBlobEvent read FIndiBlobEvent write FIndiBlobEvent;
+    property onDeleteDevice: TIndiDeviceEvent
+      read FIndiDeleteDeviceEvent write FIndiDeleteDeviceEvent;
+    property onNewMessage: TIndiMessageEvent
+      read FIndiMessageEvent write FIndiMessageEvent;
+    property onNewProperty: TIndiPropertyEvent
+      read FIndiPropertyEvent write FIndiPropertyEvent;
+    property onDeleteProperty: TIndiPropertyEvent
+      read FIndiDeletePropertyEvent write FIndiDeletePropertyEvent;
+    property onNewNumber: TIndiNumberEvent read FIndiNumberEvent write FIndiNumberEvent;
+    property onNewText: TIndiTextEvent read FIndiTextEvent write FIndiTextEvent;
+    property onNewSwitch: TIndiSwitchEvent read FIndiSwitchEvent write FIndiSwitchEvent;
+    property onNewLight: TIndiLightEvent read FIndiLightEvent write FIndiLightEvent;
+    property onNewBlob: TIndiBlobEvent read FIndiBlobEvent write FIndiBlobEvent;
   end;
 
 implementation
@@ -196,14 +207,14 @@ end;
 
 destructor TTCPclient.Destroy;
 begin
-try
-  FSock.Free;
-  inherited Destroy;
-except
-end;
+  try
+    FSock.Free;
+    inherited Destroy;
+  except
+  end;
 end;
 
-function TTCPclient.Connect: Boolean;
+function TTCPclient.Connect: boolean;
 begin
   FSock.CloseSocket;
   FSock.LineBuffer := '';
@@ -224,638 +235,761 @@ end;
 
 ///////////////////////  TProcessData //////////////////////////
 
-Constructor TProcessData.Create ;
+constructor TProcessData.Create;
 begin
-inherited create(false);
-FreeOnTerminate:=true;
-dataqueue:=TObjectList.Create;
-InitCriticalSection(BufferCriticalSection);
+  inherited Create(False);
+  FreeOnTerminate := True;
+  dataqueue := TObjectList.Create;
+  InitCriticalSection(BufferCriticalSection);
 end;
 
 destructor TProcessData.Destroy;
 begin
-dataqueue.Free;
-DoneCriticalsection(BufferCriticalSection);
+  dataqueue.Free;
+  DoneCriticalsection(BufferCriticalSection);
 {$ifndef mswindows}
-Inherited destroy;
+  inherited Destroy;
 {$endif}
 end;
 
-procedure TProcessData.Add(data:TMemoryStream);
-var buf: TDataBuffer;
+procedure TProcessData.Add(Data: TMemoryStream);
+var
+  buf: TDataBuffer;
 begin
-  buf:=TDataBuffer.Create;
-  buf.dataptr:=PtrInt(data);
+  buf := TDataBuffer.Create;
+  buf.dataptr := PtrInt(Data);
   {$ifndef darwin}
   EnterCriticalsection(BufferCriticalSection);
   {$endif}
   try
-  dataqueue.Add(buf);
+    dataqueue.Add(buf);
   finally
   {$ifndef darwin}
-  LeaveCriticalsection(BufferCriticalSection);
+    LeaveCriticalsection(BufferCriticalSection);
   {$endif}
   end;
 end;
 
 function TProcessData.getCount: integer;
 begin
- result:=dataqueue.Count;
+  Result := dataqueue.Count;
 end;
 
 procedure TProcessData.Execute;
-var s:TMemoryStream;
+var
+  s: TMemoryStream;
 begin
-  while not Terminated do begin
-      sleep(100);
-      while dataqueue.Count>0 do begin
-         s:=TMemoryStream(TDataBuffer(dataqueue.Items[0]).dataptr);
-         FProcessData(s);
+  while not Terminated do
+  begin
+    sleep(100);
+    while dataqueue.Count > 0 do
+    begin
+      s := TMemoryStream(TDataBuffer(dataqueue.Items[0]).dataptr);
+      FProcessData(s);
          {$ifndef darwin}
-         EnterCriticalsection(BufferCriticalSection);
+      EnterCriticalsection(BufferCriticalSection);
          {$endif}
-         try
-         dataqueue.Delete(0);
-         finally
+      try
+        dataqueue.Delete(0);
+      finally
          {$ifndef darwin}
-         LeaveCriticalsection(BufferCriticalSection);
+        LeaveCriticalsection(BufferCriticalSection);
          {$endif}
-         end;
       end;
+    end;
   end;
 end;
 
 ///////////////////////  TIndiBaseClient //////////////////////////
 
-Constructor TIndiBaseClient.Create ;
+constructor TIndiBaseClient.Create;
 begin
-// start suspended to let time to the main thread to set the parameters
-inherited create(true);
-FTargetHost:='localhost';
-FTargetPort:='7624';
+  // start suspended to let time to the main thread to set the parameters
+  inherited Create(True);
+  FTargetHost := 'localhost';
+  FTargetPort := '7624';
 {$ifdef darwin}
-FTimeout:=400;
+  FTimeout := 400;
 {$else}
-FTimeout:=200;
+  FTimeout := 200;
 {$endif}
-FConnected:=false;
-FProtocolTrace:=False;
-FProtocolTraceFile:='';
-FProtocolErrorFile:='';
-FreeOnTerminate:=true;
-SyncindiMessage:='';
-FlockBlobEvent:=false;
-FMissedFrameCount:=0;
-Ftrace:=false;  // for debuging only
-Fdevices:=TObjectList.Create;
-FwatchDevices:=TStringlist.Create;
-FProcessData:=TProcessData.Create;
-FProcessData.onProcessData:=@ProcessDataThread;
+  FConnected := False;
+  FProtocolTrace := False;
+  FProtocolTraceFile := '';
+  FProtocolErrorFile := '';
+  FreeOnTerminate := True;
+  SyncindiMessage := '';
+  FlockBlobEvent := False;
+  FMissedFrameCount := 0;
+  Ftrace := False;  // for debuging only
+  Fdevices := TObjectList.Create;
+  FwatchDevices := TStringList.Create;
+  FProcessData := TProcessData.Create;
+  FProcessData.onProcessData := @ProcessDataThread;
 end;
 
 destructor TIndiBaseClient.Destroy;
 begin
-if Ftrace then writeln('TIndiBaseClient.Destroy');
-FProcessData.Terminate;
-Fdevices.Free;
-FwatchDevices.Free;
+  if Ftrace then
+    writeln('TIndiBaseClient.Destroy');
+  FProcessData.Terminate;
+  Fdevices.Free;
+  FwatchDevices.Free;
 {$ifndef mswindows}
-Inherited destroy;
+  inherited Destroy;
 {$endif}
 end;
 
-Procedure TIndiBaseClient.OpenProtocolTrace(fnlog,fnerr:string);
+procedure TIndiBaseClient.OpenProtocolTrace(fnlog, fnerr: string);
 begin
-try
- if not FProtocolTrace then exit;
- if fnlog<>'' then fnlog:=expandfilename(fnlog);
- if fnerr<>'' then fnerr:=expandfilename(fnerr);
- Filemode:=2;
- assignfile(FPTlog,fnlog);
- rewrite(FPTlog);
- writeln(FPTlog,FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz',Now)+'  Start trace');
- assignfile(FPTerr,fnerr);
- rewrite(FPTerr);
- writeln(FPTerr,FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz',Now)+'  Start trace');
-except
+  try
+    if not FProtocolTrace then
+      exit;
+    if fnlog <> '' then
+      fnlog := expandfilename(fnlog);
+    if fnerr <> '' then
+      fnerr := expandfilename(fnerr);
+    Filemode := 2;
+    assignfile(FPTlog, fnlog);
+    rewrite(FPTlog);
+    writeln(FPTlog, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) +
+      '  Start trace');
+    assignfile(FPTerr, fnerr);
+    rewrite(FPTerr);
+    writeln(FPTerr, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) +
+      '  Start trace');
+  except
 {$I-}
- FProtocolTrace:=false;
- CloseFile(FPTlog);
- CloseFile(FPTerr);
- IOResult;
+    FProtocolTrace := False;
+    CloseFile(FPTlog);
+    CloseFile(FPTerr);
+    IOResult;
 {$I+}
-end;
+  end;
 end;
 
-Procedure TIndiBaseClient.CloseProtocolTrace;
+procedure TIndiBaseClient.CloseProtocolTrace;
 begin
- if not FProtocolTrace then exit;
- try
-  FProtocolTrace:=false;
-  CloseFile(FPTlog);
-  CloseFile(FPTerr);
- except
+  if not FProtocolTrace then
+    exit;
+  try
+    FProtocolTrace := False;
+    CloseFile(FPTlog);
+    CloseFile(FPTerr);
+  except
  {$I-}
-  IOResult;
+    IOResult;
  {$I+}
- end;
+  end;
 end;
 
-Procedure TIndiBaseClient.WriteProtocolTrace( buf : string);
+procedure TIndiBaseClient.WriteProtocolTrace(buf: string);
 begin
-try
- if not FProtocolTrace then exit;
- WriteLn(FPTlog,FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz',Now)+'  '+buf);
-except
+  try
+    if not FProtocolTrace then
+      exit;
+    WriteLn(FPTlog, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) +
+      '  ' + buf);
+  except
 {$I-}
- FProtocolTrace:=false;
- CloseFile(FPTlog);
- CloseFile(FPTerr);
- IOResult;
+    FProtocolTrace := False;
+    CloseFile(FPTlog);
+    CloseFile(FPTerr);
+    IOResult;
 {$I+}
-end;
+  end;
 end;
 
-Procedure TIndiBaseClient.WriteProtocolError( buf : string);
+procedure TIndiBaseClient.WriteProtocolError(buf: string);
 begin
-try
- if not FProtocolTrace then exit;
- WriteLn(FPTerr,FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz',Now)+'  '+buf);
-except
+  try
+    if not FProtocolTrace then
+      exit;
+    WriteLn(FPTerr, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) +
+      '  ' + buf);
+  except
 {$I-}
- FProtocolTrace:=false;
- CloseFile(FPTlog);
- CloseFile(FPTerr);
- IOResult;
+    FProtocolTrace := False;
+    CloseFile(FPTlog);
+    CloseFile(FPTerr);
+    IOResult;
 {$I+}
-end;
+  end;
 end;
 
 procedure TIndiBaseClient.Execute;
-const buffersize=8192;
-var buf:string;
-    init:boolean;
-    buffer:array[0..buffersize] of char;
-    tbuf:array[0..120] of char;
-    s:TMemoryStream;
-    i,n,level,c,tl:integer;
-    closing: boolean;
-    lastc: char;
+const
+  buffersize = 8192;
+var
+  buf: string;
+  init: boolean;
+  buffer: array[0..buffersize] of char;
+  tbuf: array[0..120] of char;
+  s: TMemoryStream;
+  i, n, level, c, tl: integer;
+  closing: boolean;
+  lastc: char;
 
-function ReadElement(newc:char):boolean; inline;
+  function ReadElement(newc: char): boolean; inline;
+  begin
+    Result := False;
+    case newc of
+      chr(0):
+      begin
+        s.Clear;
+        s.WriteBuffer('<INDIMSG>', 9);
+        level := 0;
+      end;
+      '/':
+      begin
+        s.Write(newc, 1);
+        if (lastc = '<') then
+        begin
+          Dec(level);
+          closing := True;
+        end;
+      end;
+      '<':
+      begin
+        Inc(level);
+        closing := False;
+        s.Write(newc, 1);
+      end;
+      '>':
+      begin
+        s.Write(newc, 1);
+        if (lastc = '/') or closing then
+        begin
+          Dec(level);
+          if level = 0 then
+          begin
+            s.WriteBuffer('</INDIMSG>', 10);
+            Result := True;
+          end;
+        end;
+      end;
+      else
+      begin
+        s.Write(newc, 1);
+      end;
+    end;
+    lastc := newc;
+  end;
+
 begin
-  result:=false;
-  case newc of
-    chr(0): begin
-              s.Clear;
-              s.WriteBuffer('<INDIMSG>',9);
-              level:=0;
-            end;
-    '/' :   begin
-             s.Write(newc,1);
-             if (lastc='<') then begin
-              dec(level);
-              closing:=true;
-             end;
-            end;
-    '<' :   begin
-              inc(level);
-              closing:=false;
-              s.Write(newc,1);
-            end;
-    '>' :   begin
-              s.Write(newc,1);
-              if (lastc='/') or closing then begin
-                dec(level);
-                if level=0 then begin
-                   s.WriteBuffer('</INDIMSG>',10);
-                   result:=true;
+  try
+    tcpclient := TTCPClient.Create;
+    try
+      OpenProtocolTrace(FProtocolTraceFile, FProtocolErrorFile);
+      InitCriticalSection(MessageCriticalSection);
+      InitCriticalSection(SendCriticalSection);
+      init := True;
+      FinitProps := False;
+      if FProtocolTrace then
+        WriteProtocolTrace('Connect host=' + FTargetHost + ' port=' +
+          FTargetPort + ' timeout=' + IntToStr(FTimeout));
+      tcpclient.TargetHost := FTargetHost;
+      tcpclient.TargetPort := FTargetPort;
+      tcpclient.Timeout := FTimeout;
+      FConnected := tcpclient.Connect;
+      if FProtocolTrace then
+        WriteProtocolTrace('Connection result=' + tcpclient.GetErrorDesc);
+      if FConnected then
+      begin
+        RefreshProps;
+        // main loop
+        buf := '';
+        level := 0;
+        s := TMemoryStream.Create;
+        s.WriteBuffer('<INDIMSG>', 9);
+        c := 0;
+        repeat
+          if terminated then
+            break;
+          n := tcpclient.Sock.RecvBufferEx(@buffer, buffersize, FTimeout);
+          if (tcpclient.Sock.lastError <> 0) and
+            (tcpclient.Sock.lastError <> WSAETIMEDOUT) then
+            break;
+          if n > 0 then
+          begin
+            if FProtocolTrace then
+              WriteProtocolTrace('Receive buffer size=' + IntToStr(n) +
+                ' data=' + buffer);
+            for i := 0 to n - 1 do
+            begin
+              if ReadElement(buffer[i]) then
+              begin
+                if FProtocolTrace then
+                begin
+                  s.Position := 0;
+                  tl := s.Read(tbuf, 120);
+                  WriteProtocolTrace('Process data=' + StringReplace(
+                    StringReplace(copy(tbuf, 1, tl), cr, '', [rfReplaceAll]),
+                    lf, '', [rfReplaceAll]) + '...');
                 end;
+                FProcessData.Add(s);
+                s := TMemoryStream.Create;
+                s.WriteBuffer('<INDIMSG>', 9);
               end;
             end;
-     else begin
-        s.Write(newc,1);
-     end;
-  end;
-  lastc:=newc;
-end;
-
-begin
-try
-tcpclient:=TTCPClient.Create;
-try
- OpenProtocolTrace(FProtocolTraceFile,FProtocolErrorFile);
- InitCriticalSection(MessageCriticalSection);
- InitCriticalSection(SendCriticalSection);
- init:=true;
- FinitProps:=false;
- if FProtocolTrace then WriteProtocolTrace('Connect host='+FTargetHost+' port='+FTargetPort+' timeout='+inttostr(FTimeout));
- tcpclient.TargetHost:=FTargetHost;
- tcpclient.TargetPort:=FTargetPort;
- tcpclient.Timeout := FTimeout;
- FConnected:=tcpclient.Connect;
- if FProtocolTrace then WriteProtocolTrace('Connection result='+tcpclient.GetErrorDesc);
- if FConnected then begin
-   RefreshProps;
-   // main loop
-   buf:='';
-   level:=0;
-   s:=TMemoryStream.Create;
-   s.WriteBuffer('<INDIMSG>',9);
-   c:=0;
-   repeat
-     if terminated then break;
-     n:=tcpclient.Sock.RecvBufferEx(@buffer,buffersize,FTimeout);
-     if (tcpclient.Sock.lastError<>0)and(tcpclient.Sock.lastError<>WSAETIMEDOUT) then break;
-     if n>0 then begin
-       if FProtocolTrace then WriteProtocolTrace('Receive buffer size='+inttostr(n)+' data='+buffer);
-       for i:=0 to n-1 do begin
-          if ReadElement(buffer[i]) then begin
-            if FProtocolTrace then begin
-              s.Position:=0;
-              tl:=s.Read(tbuf,120);
-              WriteProtocolTrace('Process data='+StringReplace(StringReplace(copy(tbuf,1,tl),cr,'',[rfReplaceAll]),lf,'',[rfReplaceAll])+'...');
-            end;
-            FProcessData.Add(s);
-            s:=TMemoryStream.Create;
-            s.WriteBuffer('<INDIMSG>',9);
           end;
-       end;
-     end;
-     if init then begin
-       inc(c);
-       if c>50 then FinitProps:=true;  // no response? continue
-       if FinitProps then begin
-          if FProtocolTrace then WriteProtocolTrace('Initialized');
-          if assigned(FServerConnected) then Synchronize(@SyncServerConnected);
-          init:=false;
-       end;
-     end;
+          if init then
+          begin
+            Inc(c);
+            if c > 50 then
+              FinitProps := True;  // no response? continue
+            if FinitProps then
+            begin
+              if FProtocolTrace then
+                WriteProtocolTrace('Initialized');
+              if assigned(FServerConnected) then
+                Synchronize(@SyncServerConnected);
+              init := False;
+            end;
+          end;
      {$ifndef darwin}
-     EnterCriticalsection(SendCriticalSection);
+          EnterCriticalsection(SendCriticalSection);
      {$endif}
-     try
-     buf:=Fsendbuffer;
-     Fsendbuffer:='';
-     finally
+          try
+            buf := Fsendbuffer;
+            Fsendbuffer := '';
+          finally
      {$ifndef darwin}
-     LeaveCriticalsection(SendCriticalSection);
+            LeaveCriticalsection(SendCriticalSection);
      {$endif}
-     end;
-     if buf<>'' then begin
-        if FProtocolTrace then WriteProtocolTrace('Send buffer='+buf);
-        tcpclient.Sock.SendString(buf);
-        if tcpclient.Sock.lastError<>0 then break;
-     end;
-   until false;
- end;
-finally
-if FProtocolTrace then WriteProtocolTrace('Disconnect, socket status='+tcpclient.Sock.LastErrorDesc);
-FConnected:=false;
-terminate;
-s.Free;
-tcpclient.Disconnect;
-tcpclient.Free;
-DoneCriticalsection(MessageCriticalSection);
-DoneCriticalsection(SendCriticalSection);
-if assigned(FServerDisconnected) then Synchronize(@SyncServerDisonnected);
-if FProtocolTrace then WriteProtocolTrace('Indi client stopped');
-CloseProtocolTrace;
-end;
-except
-CloseProtocolTrace;
-end;
+          end;
+          if buf <> '' then
+          begin
+            if FProtocolTrace then
+              WriteProtocolTrace('Send buffer=' + buf);
+            tcpclient.Sock.SendString(buf);
+            if tcpclient.Sock.lastError <> 0 then
+              break;
+          end;
+        until False;
+      end;
+    finally
+      if FProtocolTrace then
+        WriteProtocolTrace('Disconnect, socket status=' + tcpclient.Sock.LastErrorDesc);
+      FConnected := False;
+      terminate;
+      s.Free;
+      tcpclient.Disconnect;
+      tcpclient.Free;
+      DoneCriticalsection(MessageCriticalSection);
+      DoneCriticalsection(SendCriticalSection);
+      if assigned(FServerDisconnected) then
+        Synchronize(@SyncServerDisonnected);
+      if FProtocolTrace then
+        WriteProtocolTrace('Indi client stopped');
+      CloseProtocolTrace;
+    end;
+  except
+    CloseProtocolTrace;
+  end;
 end;
 
 procedure TIndiBaseClient.Send(const Value: string);
 begin
- if Value>'' then begin
+  if Value > '' then
+  begin
    {$ifndef darwin}
-   EnterCriticalsection(SendCriticalSection);
+    EnterCriticalsection(SendCriticalSection);
    {$endif}
-   try
-   Fsendbuffer:=Fsendbuffer+Value+crlf;
-   finally
+    try
+      Fsendbuffer := Fsendbuffer + Value + crlf;
+    finally
    {$ifndef darwin}
-   LeaveCriticalsection(SendCriticalSection);
+      LeaveCriticalsection(SendCriticalSection);
    {$endif}
-   end;
- end;
+    end;
+  end;
 end;
 
-function TIndiBaseClient.findDev(root: TDOMNode; out errmsg: string):BaseDevice;
-var i: integer;
-    buf: string;
+function TIndiBaseClient.findDev(root: TDOMNode; out errmsg: string): BaseDevice;
+var
+  i: integer;
+  buf: string;
 begin
- result:=nil;
- buf:=GetNodeValue(GetAttrib(root,'device'));
- errmsg:='Device not found '+buf;
- for i:=0 to Fdevices.Count-1 do begin
-     if BaseDevice(Fdevices[i]).getDeviceName=buf then begin
-        result:= BaseDevice(Fdevices[i]);
-        errmsg:='';
-        break;
-     end;
- end;
+  Result := nil;
+  buf := GetNodeValue(GetAttrib(root, 'device'));
+  errmsg := 'Device not found ' + buf;
+  for i := 0 to Fdevices.Count - 1 do
+  begin
+    if BaseDevice(Fdevices[i]).getDeviceName = buf then
+    begin
+      Result := BaseDevice(Fdevices[i]);
+      errmsg := '';
+      break;
+    end;
+  end;
 end;
 
-function TIndiBaseClient.findDev(root: TDOMNode; createifnotexist: boolean; out errmsg: string):BaseDevice;
-var buf: string;
+function TIndiBaseClient.findDev(root: TDOMNode; createifnotexist: boolean;
+  out errmsg: string): BaseDevice;
+var
+  buf: string;
 begin
- result:=findDev(root,errmsg);
- if (result=nil) and createifnotexist then begin
-   buf:=GetNodeValue(GetAttrib(root,'device'));
-   if buf<>'' then begin
-     errmsg:='';
-     result:=BaseDevice.Create;
-     result.setDeviceName(buf);
-     result.onNewMessage:=@IndiMessageEvent;
-     result.onNewProperty:=@IndiPropertyEvent;
-     result.onDeleteProperty:=@IndiDeletePropertyEvent;
-     result.onNewNumber:=@IndiNumberEvent;
-     result.onNewText:=@IndiTextEvent;
-     result.onNewSwitch:=@IndiSwitchEvent;
-     result.onNewLight:=@IndiLightEvent;
-     result.onNewBlob:=@IndiBlobEvent;
-     Fdevices.Add(result);
-     if assigned(FIndiDeviceEvent) then IndiDeviceEvent(result);
-   end else begin
-     errmsg:='No device name';
-   end;
- end;
+  Result := findDev(root, errmsg);
+  if (Result = nil) and createifnotexist then
+  begin
+    buf := GetNodeValue(GetAttrib(root, 'device'));
+    if buf <> '' then
+    begin
+      errmsg := '';
+      Result := BaseDevice.Create;
+      Result.setDeviceName(buf);
+      Result.onNewMessage := @IndiMessageEvent;
+      Result.onNewProperty := @IndiPropertyEvent;
+      Result.onDeleteProperty := @IndiDeletePropertyEvent;
+      Result.onNewNumber := @IndiNumberEvent;
+      Result.onNewText := @IndiTextEvent;
+      Result.onNewSwitch := @IndiSwitchEvent;
+      Result.onNewLight := @IndiLightEvent;
+      Result.onNewBlob := @IndiBlobEvent;
+      Fdevices.Add(Result);
+      if assigned(FIndiDeviceEvent) then
+        IndiDeviceEvent(Result);
+    end
+    else
+    begin
+      errmsg := 'No device name';
+    end;
+  end;
 end;
 
 function TIndiBaseClient.getDevice(deviceName: string): Basedevice;
-var i: integer;
+var
+  i: integer;
 begin
-  for i:=0 to Fdevices.Count-1 do
-     if (deviceName = BaseDevice(Fdevices[i]).getDeviceName) then
-            exit (BaseDevice(Fdevices[i]));
-    exit(nil);
+  for i := 0 to Fdevices.Count - 1 do
+    if (deviceName = BaseDevice(Fdevices[i]).getDeviceName) then
+      exit(BaseDevice(Fdevices[i]));
+  exit(nil);
 end;
 
 procedure TIndiBaseClient.deleteDevice(deviceName: string; out errmsg: string);
-var dp: BaseDevice;
-    i: integer;
+var
+  dp: BaseDevice;
+  i: integer;
 begin
-  errmsg:='Device '+deviceName+' not found!';
-  for i:=0 to Fdevices.Count-1 do
-     if (deviceName = BaseDevice(Fdevices[i]).getDeviceName) then begin
-        dp:=(BaseDevice(Fdevices[i]));
-        if assigned(FIndiDeleteDeviceEvent) then IndiDeleteDeviceEvent(dp);
-        Fdevices.Delete(i);
-        errmsg:='';
-        break;
-     end;
+  errmsg := 'Device ' + deviceName + ' not found!';
+  for i := 0 to Fdevices.Count - 1 do
+    if (deviceName = BaseDevice(Fdevices[i]).getDeviceName) then
+    begin
+      dp := (BaseDevice(Fdevices[i]));
+      if assigned(FIndiDeleteDeviceEvent) then
+        IndiDeleteDeviceEvent(dp);
+      Fdevices.Delete(i);
+      errmsg := '';
+      break;
+    end;
 end;
 
 procedure TIndiBaseClient.ProcessDataAsync(Data: PtrInt);
 begin
-try
- if not terminated then begin
-  if not ProcessData(TMemoryStream(Data)) then begin
-     IndiMessageEvent('Bad INDI message');
+  try
+    if not terminated then
+    begin
+      if not ProcessData(TMemoryStream(Data)) then
+      begin
+        IndiMessageEvent('Bad INDI message');
+      end;
+    end;
+  finally
+    TMemoryStream(Data).Free;
   end;
- end;
-finally
- TMemoryStream(Data).Free;
-end;
 end;
 
 
 procedure TIndiBaseClient.ProcessDataThread(s: TMemoryStream);
 begin
- if not terminated then begin
-    Application.QueueAsyncCall(@ProcessDataAsync,PtrInt(s));
- end;
-end;
-
-function TIndiBaseClient.ProcessData(s: TMemoryStream):boolean;
-var Doc: TXMLDocument;
-    Node: TDOMNode;
-    dp: BaseDevice;
-    isBlob: boolean;
-    ebuf:array[0..1024] of char;
-    n:integer;
-    buf,errmsg,dname,pname: string;
-begin
-s.Position:=0;
-result:=true;
-try
-ReadXMLFile(Doc,s);
-except
-  on E: Exception do begin
-    if FProtocolTrace then begin
-      WriteProtocolError('Read XML error:'+ e.Message);
-      s.Position:=0;
-      n:=s.Read(ebuf,1024);
-      WriteProtocolError('Error data='+trim(StringReplace(StringReplace(copy(ebuf,1,n),cr,'',[rfReplaceAll]),lf,'',[rfReplaceAll]))+'...');
-    end;
-    result:=false;
-    exit;
+  if not terminated then
+  begin
+    Application.QueueAsyncCall(@ProcessDataAsync, PtrInt(s));
   end;
 end;
-try
-Node:=Doc.DocumentElement.FirstChild;
-while Node<>nil do begin
-   if terminated then break;
-   dp:=findDev(Node,true,errmsg);
-   if FProtocolTrace and (errmsg<>'') then WriteProtocolError('FindDev error: '+errmsg);
-   if Node.NodeName='message' then begin
-      dp.checkMessage(Node);
-   end;
-   if Node.NodeName='delProperty' then begin
-      dname:=GetNodeValue(GetAttrib(Node,'device'));
-      if dname='' then dname:='Unnamed_device';
-      pname:=GetNodeValue(GetAttrib(Node,'name'));
-      if pname='' then begin
-         deleteDevice(dname,errmsg);
-         if FProtocolTrace and (errmsg<>'') then WriteProtocolError('deleteDevice error: '+errmsg);
-      end
-      else begin
-         dp.removeProperty(pname,errmsg);
-         if FProtocolTrace and (errmsg<>'') then WriteProtocolError('removeProperty error: '+errmsg);
+
+function TIndiBaseClient.ProcessData(s: TMemoryStream): boolean;
+var
+  Doc: TXMLDocument;
+  Node: TDOMNode;
+  dp: BaseDevice;
+  isBlob: boolean;
+  ebuf: array[0..1024] of char;
+  n: integer;
+  buf, errmsg, dname, pname: string;
+begin
+  s.Position := 0;
+  Result := True;
+  try
+    ReadXMLFile(Doc, s);
+  except
+    on E: Exception do
+    begin
+      if FProtocolTrace then
+      begin
+        WriteProtocolError('Read XML error:' + e.Message);
+        s.Position := 0;
+        n := s.Read(ebuf, 1024);
+        WriteProtocolError('Error data=' + trim(
+          StringReplace(StringReplace(copy(ebuf, 1, n), cr, '', [rfReplaceAll]),
+          lf, '', [rfReplaceAll])) + '...');
       end;
-   end;
-   buf:=copy(GetNodeName(Node),1,3);
-   if buf='set' then begin
-     isBlob:=copy(GetNodeName(Node),1,13)='setBLOBVector';
-     if FlockBlobEvent and isBlob then begin  // do not decode blob for nothing
-       inc(FMissedFrameCount);
-       if Ftrace then writeln('missed frames: '+inttostr(FMissedFrameCount));
-     end else begin
-       FinitProps:=true;
-       dp.setValue(Node,errmsg);
-       if FProtocolTrace and (errmsg<>'') then WriteProtocolError('setValue error: '+errmsg);
-     end;
-   end
-   else if buf='def' then begin
-     dp.buildProp(Node,errmsg);
-     if FProtocolTrace and (errmsg<>'') then WriteProtocolError('buildProp error: '+errmsg);
-   end;
-   Node:=Node.NextSibling;
-end;
-finally
- Doc.Free;
-end;
+      Result := False;
+      exit;
+    end;
+  end;
+  try
+    Node := Doc.DocumentElement.FirstChild;
+    while Node <> nil do
+    begin
+      if terminated then
+        break;
+      dp := findDev(Node, True, errmsg);
+      if FProtocolTrace and (errmsg <> '') then
+        WriteProtocolError('FindDev error: ' + errmsg);
+      if Node.NodeName = 'message' then
+      begin
+        dp.checkMessage(Node);
+      end;
+      if Node.NodeName = 'delProperty' then
+      begin
+        dname := GetNodeValue(GetAttrib(Node, 'device'));
+        if dname = '' then
+          dname := 'Unnamed_device';
+        pname := GetNodeValue(GetAttrib(Node, 'name'));
+        if pname = '' then
+        begin
+          deleteDevice(dname, errmsg);
+          if FProtocolTrace and (errmsg <> '') then
+            WriteProtocolError('deleteDevice error: ' + errmsg);
+        end
+        else
+        begin
+          dp.removeProperty(pname, errmsg);
+          if FProtocolTrace and (errmsg <> '') then
+            WriteProtocolError('removeProperty error: ' + errmsg);
+        end;
+      end;
+      buf := copy(GetNodeName(Node), 1, 3);
+      if buf = 'set' then
+      begin
+        isBlob := copy(GetNodeName(Node), 1, 13) = 'setBLOBVector';
+        if FlockBlobEvent and isBlob then
+        begin  // do not decode blob for nothing
+          Inc(FMissedFrameCount);
+          if Ftrace then
+            writeln('missed frames: ' + IntToStr(FMissedFrameCount));
+        end
+        else
+        begin
+          FinitProps := True;
+          dp.setValue(Node, errmsg);
+          if FProtocolTrace and (errmsg <> '') then
+            WriteProtocolError('setValue error: ' + errmsg);
+        end;
+      end
+      else if buf = 'def' then
+      begin
+        dp.buildProp(Node, errmsg);
+        if FProtocolTrace and (errmsg <> '') then
+          WriteProtocolError('buildProp error: ' + errmsg);
+      end;
+      Node := Node.NextSibling;
+    end;
+  finally
+    Doc.Free;
+  end;
 end;
 
 procedure TIndiBaseClient.sendNewNumber(nvp: INumberVectorProperty);
-var buf: string;
-    i: integer;
+var
+  buf: string;
+  i: integer;
 begin
   nvp.s := IPS_BUSY;
-  buf:='<newNumberVector';
-  buf:=buf+'  device="'+nvp.device+'"';
-  buf:=buf+'  name="'+nvp.name+'">';
-  for i:=0 to nvp.nnp-1 do begin
-      buf:=buf+'  <oneNumber';
-      buf:=buf+'    name="'+nvp.np[i].name+'">';
-      buf:=buf+'   '+FloatToStr(nvp.np[i].value);
-      buf:=buf+'  </oneNumber>';
+  buf := '<newNumberVector';
+  buf := buf + '  device="' + nvp.device + '"';
+  buf := buf + '  name="' + nvp.Name + '">';
+  for i := 0 to nvp.nnp - 1 do
+  begin
+    buf := buf + '  <oneNumber';
+    buf := buf + '    name="' + nvp.np[i].Name + '">';
+    buf := buf + '   ' + FloatToStr(nvp.np[i].Value);
+    buf := buf + '  </oneNumber>';
   end;
-  buf:=buf+'</newNumberVector>';
+  buf := buf + '</newNumberVector>';
   Send(buf);
 end;
 
 procedure TIndiBaseClient.sendNewText(tvp: ITextVectorProperty);
-var buf: string;
-    i: integer;
+var
+  buf: string;
+  i: integer;
 begin
   tvp.s := IPS_BUSY;
-  buf:='<newTextVector';
-  buf:=buf+'  device="'+tvp.device+'"';
-  buf:=buf+'  name="'+tvp.name+'">';
-  for i:=0 to tvp.ntp-1 do begin
-      buf:=buf+'  <oneText';
-      buf:=buf+'    name="'+tvp.tp[i].name+'">';
-      buf:=buf+'   '+tvp.tp[i].text;
-      buf:=buf+'  </oneText>';
+  buf := '<newTextVector';
+  buf := buf + '  device="' + tvp.device + '"';
+  buf := buf + '  name="' + tvp.Name + '">';
+  for i := 0 to tvp.ntp - 1 do
+  begin
+    buf := buf + '  <oneText';
+    buf := buf + '    name="' + tvp.tp[i].Name + '">';
+    buf := buf + '   ' + tvp.tp[i].Text;
+    buf := buf + '  </oneText>';
   end;
-  buf:=buf+'</newTextVector>';
+  buf := buf + '</newTextVector>';
   Send(buf);
 end;
 
 procedure TIndiBaseClient.sendNewSwitch(svp: ISwitchVectorProperty);
-var buf: string;
-    i: integer;
-    onSwitch: ISwitch;
+var
+  buf: string;
+  i: integer;
+  onSwitch: ISwitch;
 begin
   svp.s := IPS_BUSY;
   onSwitch := IUFindOnSwitch(svp);
-  buf:='<newSwitchVector';
-  buf:=buf+'  device="'+svp.device+'"';
-  buf:=buf+'  name="'+svp.name+'">';
-  if (svp.r = ISR_1OFMANY) and (onSwitch<>nil) then begin
-    buf:=buf+'  <oneSwitch';
-    buf:=buf+'    name="'+onSwitch.name+'">';
-    buf:=buf+'      On ';
-    buf:=buf+'  </oneSwitch>';
-  end else begin
-    for i:=0 to svp.nsp-1 do begin
-        buf:=buf+'  <oneSwitch';
-        buf:=buf+'    name="'+svp.sp[i].name+'">';
-        if svp.sp[i].s=ISS_ON then buf:=buf+'    On' else buf:=buf+'    Off';
-        buf:=buf+'  </oneSwitch>';
+  buf := '<newSwitchVector';
+  buf := buf + '  device="' + svp.device + '"';
+  buf := buf + '  name="' + svp.Name + '">';
+  if (svp.r = ISR_1OFMANY) and (onSwitch <> nil) then
+  begin
+    buf := buf + '  <oneSwitch';
+    buf := buf + '    name="' + onSwitch.Name + '">';
+    buf := buf + '      On ';
+    buf := buf + '  </oneSwitch>';
+  end
+  else
+  begin
+    for i := 0 to svp.nsp - 1 do
+    begin
+      buf := buf + '  <oneSwitch';
+      buf := buf + '    name="' + svp.sp[i].Name + '">';
+      if svp.sp[i].s = ISS_ON then
+        buf := buf + '    On'
+      else
+        buf := buf + '    Off';
+      buf := buf + '  </oneSwitch>';
     end;
   end;
-  buf:=buf+'</newSwitchVector>';
+  buf := buf + '</newSwitchVector>';
   Send(buf);
 end;
 
-function TIndiBaseClient.WaitBusy(nvp: INumberVectorProperty; timeout:integer=5000;minwait:integer=0):boolean;
-var count,maxcount,mincount:integer;
+function TIndiBaseClient.WaitBusy(nvp: INumberVectorProperty;
+  timeout: integer = 5000; minwait: integer = 0): boolean;
+var
+  Count, maxcount, mincount: integer;
 begin
-mincount:=minwait div 100;
-count:=0;
-if mincount>0 then while (count<mincount) do begin
-   sleep(100);
-   Application.ProcessMessages;
-   inc(count);
-end;
-maxcount:=timeout div 100;
-count:=0;
-while (nvp.s=IPS_BUSY)and(count<maxcount) do begin
-   sleep(100);
-   Application.ProcessMessages;
-   inc(count);
-end;
-result:=(count<maxcount);
-end;
-
-function TIndiBaseClient.WaitBusy(tvp: ITextVectorProperty; timeout:integer=5000;minwait:integer=0):boolean;
-var count,maxcount,mincount:integer;
-begin
-mincount:=minwait div 100;
-count:=0;
-if mincount>0 then while (count<mincount) do begin
-   sleep(100);
-   Application.ProcessMessages;
-   inc(count);
-end;
-maxcount:=timeout div 100;
-count:=0;
-while (tvp.s=IPS_BUSY)and(count<maxcount) do begin
-   sleep(100);
-   Application.ProcessMessages;
-   inc(count);
-end;
-result:=(count<maxcount);
-end;
-
-function TIndiBaseClient.WaitBusy(svp: ISwitchVectorProperty; timeout:integer=5000;minwait:integer=0):boolean;
-var count,maxcount,mincount:integer;
-begin
-mincount:=minwait div 100;
-count:=0;
-if mincount>0 then while (count<mincount) do begin
-   sleep(100);
-   Application.ProcessMessages;
-   inc(count);
-end;
-maxcount:=timeout div 100;
-count:=0;
-while (svp.s=IPS_BUSY)and(count<maxcount) do begin
-   sleep(100);
-   Application.ProcessMessages;
-   inc(count);
-end;
-result:=(count<maxcount);
-end;
-
-procedure TIndiBaseClient.SetServer(host,port: string);
-{$ifdef UNIX}
-Var
-  H : THostEntry;
-  ok:boolean;
-  buf:string;
-Function FirstWord(Var Line : String) : String;
-  Var
-    I,J : Integer;
-  Const
-    Whitespace = [' ',#9];
+  mincount := minwait div 100;
+  Count := 0;
+  if mincount > 0 then
+    while (Count < mincount) do
+    begin
+      sleep(100);
+      Application.ProcessMessages;
+      Inc(Count);
+    end;
+  maxcount := timeout div 100;
+  Count := 0;
+  while (nvp.s = IPS_BUSY) and (Count < maxcount) do
   begin
-    I:=1;
-    While (I<=Length(Line)) and (Line[i] in Whitespace) do
-      inc(I);
-    J:=I;
-    While (J<=Length(Line)) and Not (Line[J] in WhiteSpace) do
-      inc(j);
-    Result:=Copy(Line,I,J-I);
+    sleep(100);
+    Application.ProcessMessages;
+    Inc(Count);
+  end;
+  Result := (Count < maxcount);
 end;
+
+function TIndiBaseClient.WaitBusy(tvp: ITextVectorProperty;
+  timeout: integer = 5000; minwait: integer = 0): boolean;
+var
+  Count, maxcount, mincount: integer;
+begin
+  mincount := minwait div 100;
+  Count := 0;
+  if mincount > 0 then
+    while (Count < mincount) do
+    begin
+      sleep(100);
+      Application.ProcessMessages;
+      Inc(Count);
+    end;
+  maxcount := timeout div 100;
+  Count := 0;
+  while (tvp.s = IPS_BUSY) and (Count < maxcount) do
+  begin
+    sleep(100);
+    Application.ProcessMessages;
+    Inc(Count);
+  end;
+  Result := (Count < maxcount);
+end;
+
+function TIndiBaseClient.WaitBusy(svp: ISwitchVectorProperty;
+  timeout: integer = 5000; minwait: integer = 0): boolean;
+var
+  Count, maxcount, mincount: integer;
+begin
+  mincount := minwait div 100;
+  Count := 0;
+  if mincount > 0 then
+    while (Count < mincount) do
+    begin
+      sleep(100);
+      Application.ProcessMessages;
+      Inc(Count);
+    end;
+  maxcount := timeout div 100;
+  Count := 0;
+  while (svp.s = IPS_BUSY) and (Count < maxcount) do
+  begin
+    sleep(100);
+    Application.ProcessMessages;
+    Inc(Count);
+  end;
+  Result := (Count < maxcount);
+end;
+
+procedure TIndiBaseClient.SetServer(host, port: string);
+{$ifdef UNIX}
+var
+  H: THostEntry;
+  ok: boolean;
+  buf: string;
+
+  function FirstWord(var Line: string): string;
+  var
+    I, J: integer;
+  const
+    Whitespace = [' ', #9];
+  begin
+    I := 1;
+    while (I <= Length(Line)) and (Line[i] in Whitespace) do
+      Inc(I);
+    J := I;
+    while (J <= Length(Line)) and not (Line[J] in WhiteSpace) do
+      Inc(j);
+    Result := Copy(Line, I, J - I);
+  end;
+
 {$endif}
 begin
   {$ifdef UNIX}
-  if (pos('.',host)=0)and(not ResolveHostByName(host,H)) then begin
+  if (pos('.', host) = 0) and (not ResolveHostByName(host, H)) then
+  begin
     // try to add the default domain
-    buf:=FirstWord(DefaultDomainList);
-    buf:=host+'.'+buf;
-    ok:=ResolveHostByName(buf,H);
-    if ok then host:=buf;
+    buf := FirstWord(DefaultDomainList);
+    buf := host + '.' + buf;
+    ok := ResolveHostByName(buf, H);
+    if ok then
+      host := buf;
   end;
   {$endif}
-  FTargetHost:=host;
-  FTargetPort:=port;
+  FTargetHost := host;
+  FTargetPort := port;
 end;
 
 procedure TIndiBaseClient.watchDevice(devicename: string);
@@ -863,63 +997,73 @@ begin
   FwatchDevices.Add(devicename);
 end;
 
-procedure TIndiBaseClient.setBLOBMode(blobH: BLOBHandling; dev: string; prop:string='');
-var buf: string;
+procedure TIndiBaseClient.setBLOBMode(blobH: BLOBHandling; dev: string;
+  prop: string = '');
+var
+  buf: string;
 begin
- if (prop<>'') then
-    buf:='<enableBLOB device="'+dev+'" name="'+prop+'">'
- else
-    buf:='<enableBLOB device="'+dev+'">';
- case blobH of
-   B_NEVER:
-          buf:=buf+'Never</enableBLOB>';
-   B_ALSO:
-          buf:=buf+'Also</enableBLOB>';
-   B_ONLY:
-          buf:=buf+'Only</enableBLOB>';
- end;
- send(buf);
+  if (prop <> '') then
+    buf := '<enableBLOB device="' + dev + '" name="' + prop + '">'
+  else
+    buf := '<enableBLOB device="' + dev + '">';
+  case blobH of
+    B_NEVER:
+      buf := buf + 'Never</enableBLOB>';
+    B_ALSO:
+      buf := buf + 'Also</enableBLOB>';
+    B_ONLY:
+      buf := buf + 'Only</enableBLOB>';
+  end;
+  send(buf);
 end;
 
 procedure TIndiBaseClient.ConnectServer;
 begin
- Start;
+  Start;
 end;
 
 procedure TIndiBaseClient.DisconnectServer;
 begin
- Terminate;
+  Terminate;
 end;
 
 procedure TIndiBaseClient.connectDevice(deviceName: string);
 begin
- setDriverConnection(true, deviceName);
+  setDriverConnection(True, deviceName);
 end;
 
 procedure TIndiBaseClient.disconnectDevice(deviceName: string);
 begin
- setDriverConnection(false, deviceName);
+  setDriverConnection(False, deviceName);
 end;
 
 procedure TIndiBaseClient.setDriverConnection(status: boolean; deviceName: string);
-var drv: BaseDevice;
-    drv_connection: ISwitchVectorProperty;
+var
+  drv: BaseDevice;
+  drv_connection: ISwitchVectorProperty;
 begin
-  drv:=getDevice(deviceName);
-  if drv=nil then exit;
+  drv := getDevice(deviceName);
+  if drv = nil then
+    exit;
 
   drv_connection := drv.getSwitch('CONNECTION');
-  if drv_connection=nil then exit;
+  if drv_connection = nil then
+    exit;
 
-  if status then begin
-    if (drv_connection.sp[0].s = ISS_ON) then exit;
+  if status then
+  begin
+    if (drv_connection.sp[0].s = ISS_ON) then
+      exit;
     IUResetSwitch(drv_connection);
     drv_connection.s := IPS_BUSY;
     drv_connection.sp[0].s := ISS_ON;
     drv_connection.sp[1].s := ISS_OFF;
     sendNewSwitch(drv_connection);
-  end else begin
-    if (drv_connection.sp[1].s = ISS_ON) then exit;
+  end
+  else
+  begin
+    if (drv_connection.sp[1].s = ISS_ON) then
+      exit;
     IUResetSwitch(drv_connection);
     drv_connection.s := IPS_BUSY;
     drv_connection.sp[0].s := ISS_OFF;
@@ -929,155 +1073,195 @@ begin
 end;
 
 procedure TIndiBaseClient.RefreshProps;
-var i: integer;
+var
+  i: integer;
 begin
-  if FwatchDevices.Count=0 then
-     Send('<getProperties version="'+INDIV+'"/>')
+  if FwatchDevices.Count = 0 then
+    Send('<getProperties version="' + INDIV + '"/>')
   else
-     for i:=0 to FwatchDevices.Count-1 do
-        Send('<getProperties version="'+INDIV+'" device="'+FwatchDevices[i]+'"/>');
+    for i := 0 to FwatchDevices.Count - 1 do
+      Send('<getProperties version="' + INDIV + '" device="' + FwatchDevices[i] + '"/>');
 end;
 
 procedure TIndiBaseClient.IndiDeviceEvent(dp: Basedevice);
 begin
-  SyncindiDev:=dp;
+  SyncindiDev := dp;
   Synchronize(@SyncDeviceEvent);
 end;
+
 procedure TIndiBaseClient.IndiDeleteDeviceEvent(dp: Basedevice);
 begin
-  SyncindiDev:=dp;
+  SyncindiDev := dp;
   Synchronize(@SyncDeleteDeviceEvent);
 end;
+
 procedure TIndiBaseClient.IndiMessageEvent(msg: string);
 begin
   {$ifndef darwin}
   EnterCriticalSection(MessageCriticalSection);
   {$endif}
   try
-  if SyncindiMessage='' then
-    SyncindiMessage:=msg
-  else
-    SyncindiMessage:=SyncindiMessage+crlf+msg;
+    if SyncindiMessage = '' then
+      SyncindiMessage := msg
+    else
+      SyncindiMessage := SyncindiMessage + crlf + msg;
   finally
   {$ifndef darwin}
-  LeaveCriticalsection(MessageCriticalSection);
+    LeaveCriticalsection(MessageCriticalSection);
   {$endif}
   end;
-  Application.QueueAsyncCall(@ASyncMessageEvent,0);
+  Application.QueueAsyncCall(@ASyncMessageEvent, 0);
 end;
+
 procedure TIndiBaseClient.IndiPropertyEvent(indiProp: IndiProperty);
 begin
-  SyncindiProp:=indiProp;
+  SyncindiProp := indiProp;
   Synchronize(@SyncPropertyEvent);
 end;
+
 procedure TIndiBaseClient.IndiDeletePropertyEvent(indiProp: IndiProperty);
 begin
-  SyncindiProp:=indiProp;
+  SyncindiProp := indiProp;
   Synchronize(@SyncDeletePropertyEvent);
 end;
+
 procedure TIndiBaseClient.IndiNumberEvent(nvp: INumberVectorProperty);
 begin
-  SyncindiNumber:=nvp;
+  SyncindiNumber := nvp;
   Synchronize(@SyncNumberEvent);
 end;
+
 procedure TIndiBaseClient.IndiTextEvent(tvp: ITextVectorProperty);
 begin
-  SyncindiText:=tvp;
+  SyncindiText := tvp;
   Synchronize(@SyncTextEvent);
 end;
+
 procedure TIndiBaseClient.IndiSwitchEvent(svp: ISwitchVectorProperty);
 begin
-  SyncindiSwitch:=svp;
+  SyncindiSwitch := svp;
   Synchronize(@SyncSwitchEvent);
 end;
+
 procedure TIndiBaseClient.IndiLightEvent(lvp: ILightVectorProperty);
 begin
-  SyncindiLight:=lvp;
+  SyncindiLight := lvp;
   Synchronize(@SyncLightEvent);
 end;
+
 procedure TIndiBaseClient.IndiBlobEvent(bp: IBLOB);
 begin
-  if FlockBlobEvent then begin
-    inc(FMissedFrameCount);
-    if Ftrace then writeln('missed frames: '+inttostr(FMissedFrameCount));
-  end else begin
-    FlockBlobEvent:=true; // drop extra frames until we are ready
-    SyncindiBlob:=bp;
-    Application.QueueAsyncCall(@AsyncBlobEvent,0);
+  if FlockBlobEvent then
+  begin
+    Inc(FMissedFrameCount);
+    if Ftrace then
+      writeln('missed frames: ' + IntToStr(FMissedFrameCount));
+  end
+  else
+  begin
+    FlockBlobEvent := True; // drop extra frames until we are ready
+    SyncindiBlob := bp;
+    Application.QueueAsyncCall(@AsyncBlobEvent, 0);
   end;
 end;
 
 procedure TIndiBaseClient.SyncServerConnected;
 begin
-  if assigned(FServerConnected) then FServerConnected(self);
+  if assigned(FServerConnected) then
+    FServerConnected(self);
 end;
+
 procedure TIndiBaseClient.SyncServerDisonnected;
 begin
-  if assigned(FServerDisconnected) then FServerDisconnected(self);
+  if assigned(FServerDisconnected) then
+    FServerDisconnected(self);
 end;
 
 procedure TIndiBaseClient.SyncDeviceEvent;
 begin
-  if assigned(FIndiDeviceEvent) then FIndiDeviceEvent(SyncindiDev);
+  if assigned(FIndiDeviceEvent) then
+    FIndiDeviceEvent(SyncindiDev);
 end;
+
 procedure TIndiBaseClient.SyncDeleteDeviceEvent;
 begin
-  if assigned(FIndiDeleteDeviceEvent) then FIndiDeleteDeviceEvent(SyncindiDev);
+  if assigned(FIndiDeleteDeviceEvent) then
+    FIndiDeleteDeviceEvent(SyncindiDev);
 end;
+
 procedure TIndiBaseClient.ASyncMessageEvent(Data: PtrInt);
-var msg: string;
+var
+  msg: string;
 begin
-  msg:='';
+  msg := '';
   {$ifndef darwin}
-  if not terminated then EnterCriticalSection(MessageCriticalSection);
+  if not terminated then
+    EnterCriticalSection(MessageCriticalSection);
   {$endif}
   try
-  if SyncindiMessage<>'' then begin
-    msg:=SyncindiMessage;
-    SyncindiMessage:='';
-  end;
+    if SyncindiMessage <> '' then
+    begin
+      msg := SyncindiMessage;
+      SyncindiMessage := '';
+    end;
   finally
   {$ifndef darwin}
-  if not terminated then LeaveCriticalsection(MessageCriticalSection);
+    if not terminated then
+      LeaveCriticalsection(MessageCriticalSection);
   {$endif}
   end;
-  if (msg<>'') and assigned(FIndiMessageEvent) then FIndiMessageEvent(Msg);
+  if (msg <> '') and assigned(FIndiMessageEvent) then
+    FIndiMessageEvent(Msg);
 end;
+
 procedure TIndiBaseClient.SyncPropertyEvent;
 begin
-  if assigned(FIndiPropertyEvent) then FIndiPropertyEvent(SyncindiProp);
+  if assigned(FIndiPropertyEvent) then
+    FIndiPropertyEvent(SyncindiProp);
 end;
+
 procedure TIndiBaseClient.SyncDeletePropertyEvent;
 begin
-  if assigned(FIndiDeletePropertyEvent) then FIndiDeletePropertyEvent(SyncindiProp);
+  if assigned(FIndiDeletePropertyEvent) then
+    FIndiDeletePropertyEvent(SyncindiProp);
 end;
+
 procedure TIndiBaseClient.SyncNumberEvent;
 begin
-  if assigned(FIndiNumberEvent) then FIndiNumberEvent(SyncindiNumber);
+  if assigned(FIndiNumberEvent) then
+    FIndiNumberEvent(SyncindiNumber);
 end;
+
 procedure TIndiBaseClient.SyncTextEvent;
 begin
-  if assigned(FIndiTextEvent) then FIndiTextEvent(SyncindiText);
+  if assigned(FIndiTextEvent) then
+    FIndiTextEvent(SyncindiText);
 end;
+
 procedure TIndiBaseClient.SyncSwitchEvent;
 begin
-  if assigned(FIndiSwitchEvent) then FIndiSwitchEvent(SyncindiSwitch);
+  if assigned(FIndiSwitchEvent) then
+    FIndiSwitchEvent(SyncindiSwitch);
 end;
+
 procedure TIndiBaseClient.SyncLightEvent;
 begin
-  if assigned(FIndiLightEvent) then FIndiLightEvent(SyncindiLight);
+  if assigned(FIndiLightEvent) then
+    FIndiLightEvent(SyncindiLight);
 end;
+
 procedure TIndiBaseClient.ASyncBlobEvent(Data: PtrInt);
 begin
- try
-  if not terminated then begin
-    if assigned(FIndiBlobEvent) then FIndiBlobEvent(SyncindiBlob);
-  end;
- finally
+  try
+    if not terminated then
+    begin
+      if assigned(FIndiBlobEvent) then
+        FIndiBlobEvent(SyncindiBlob);
+    end;
+  finally
     // blob processing terminated, we can process next
-    FlockBlobEvent:=false;
- end;
+    FlockBlobEvent := False;
+  end;
 end;
 
 end.
-

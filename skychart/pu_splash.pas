@@ -28,7 +28,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_translation, u_constant, u_util, UScaleDPI,
+uses
+  u_translation, u_constant, u_util, UScaleDPI,
   LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
   ExtCtrls, LResources, Buttons;
 
@@ -46,8 +47,8 @@ type
     Panel1: TPanel;
     Timer1: TTimer;
     procedure FormCreate(Sender: TObject);
-    procedure FormMouseUp(Sender: TOBject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+    procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: integer);
     procedure Timer1Timer(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure logoDblClick(Sender: TObject);
@@ -62,50 +63,55 @@ var
   f_splash: Tf_splash;
 
 implementation
+
 {$R *.lfm}
 
 procedure Tf_splash.SetLang;
 begin
-Caption:=rsAbout;
-if rsSkyCharts='Cartes du Ciel' then  Label1.caption:=''
-   else Label1.caption:=rsSkyCharts;
-Label3.caption:=cdccpy;
-Label4.caption:=rsThisProgramI;
+  Caption := rsAbout;
+  if rsSkyCharts = 'Cartes du Ciel' then
+    Label1.Caption := ''
+  else
+    Label1.Caption := rsSkyCharts;
+  Label3.Caption := cdccpy;
+  Label4.Caption := rsThisProgramI;
 end;
 
 procedure Tf_splash.FormCreate(Sender: TObject);
 begin
-ScaleDPI(Self);
-label2.caption:=rsVersion+blank+cdcversion;
-if pos('svn',cdcversion)>0 then begin
-   label2.Caption:=label2.Caption+RevisionStr;
-   LabelDate.caption:=compile_time;
-   LabelDate.Visible:=true;
-end else
-   LabelDate.Visible:=false;
-SetLang;
+  ScaleDPI(Self);
+  label2.Caption := rsVersion + blank + cdcversion;
+  if pos('svn', cdcversion) > 0 then
+  begin
+    label2.Caption := label2.Caption + RevisionStr;
+    LabelDate.Caption := compile_time;
+    LabelDate.Visible := True;
+  end
+  else
+    LabelDate.Visible := False;
+  SetLang;
 end;
 
 procedure Tf_splash.FormShow(Sender: TObject);
 begin
-   Timer1.Enabled:=true;
+  Timer1.Enabled := True;
 end;
 
 procedure Tf_splash.Timer1Timer(Sender: TObject);
 begin
-Timer1.Enabled:=false;
-Close;
+  Timer1.Enabled := False;
+  Close;
 end;
 
 procedure Tf_splash.logoDblClick(Sender: TObject);
 begin
-Timer1Timer(Sender);
+  Timer1Timer(Sender);
 end;
 
-procedure Tf_splash.FormMouseUp(Sender: TOBject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+procedure Tf_splash.FormMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: integer);
 begin
-logoDblClick(Sender);
+  logoDblClick(Sender);
 end;
 
 end.

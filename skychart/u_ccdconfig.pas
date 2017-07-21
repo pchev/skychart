@@ -30,43 +30,46 @@ uses XMLConf, DOM,
 
 type
   TCCDconfig = class(TXMLConfig)
-     function  GetValue(const APath: String; const ADefault: String): String; overload;
-     function  GetValue(const APath: String; const ADefault: Double): Double; overload;
-     function  GetValue(const APath: String; const ADefault: Boolean): Boolean; overload;
-     procedure SetValue(const APath: String; const AValue: String); overload;
-     procedure SetValue(const APath: String; const AValue: Double); overload;
-     procedure SetValue(const APath: String; const AValue: Boolean); overload;
+    function GetValue(const APath: string; const ADefault: string): string; overload;
+    function GetValue(const APath: string; const ADefault: double): double; overload;
+    function GetValue(const APath: string; const ADefault: boolean): boolean; overload;
+    procedure SetValue(const APath: string; const AValue: string); overload;
+    procedure SetValue(const APath: string; const AValue: double); overload;
+    procedure SetValue(const APath: string; const AValue: boolean); overload;
   end;
 
 implementation
 
 /////////////////////  TCCDconfig  /////////////////////////////////
 
-function  TCCDconfig.GetValue(const APath: String; const ADefault: String): String;
+function TCCDconfig.GetValue(const APath: string; const ADefault: string): string;
 begin
-   Result:=string(GetValue(DOMString(APath),DOMString(ADefault)));
+  Result := string(GetValue(DOMString(APath), DOMString(ADefault)));
 end;
 
-procedure TCCDconfig.SetValue(const APath: String; const AValue: String);
+procedure TCCDconfig.SetValue(const APath: string; const AValue: string);
 begin
-  SetValue(DOMString(APath),DOMString(AValue));
+  SetValue(DOMString(APath), DOMString(AValue));
 end;
 
-function  TCCDconfig.GetValue(const APath: String; const ADefault: Double): Double; overload;
+function TCCDconfig.GetValue(const APath: string; const ADefault: double): double;
+  overload;
 begin
-  Result:=StrToFloatDef(String(GetValue(DOMString(APath),DOMString(FloatToStr(ADefault)))),ADefault);
+  Result := StrToFloatDef(string(GetValue(DOMString(APath), DOMString(
+    FloatToStr(ADefault)))), ADefault);
 end;
 
-procedure TCCDconfig.SetValue(const APath: String; const AValue: Double); overload;
+procedure TCCDconfig.SetValue(const APath: string; const AValue: double); overload;
 begin
-  SetValue(DOMString(APath),DOMString(FloatToStr(AValue)));
+  SetValue(DOMString(APath), DOMString(FloatToStr(AValue)));
 end;
 
-function  TCCDconfig.GetValue(const APath: String; const ADefault: Boolean): Boolean; overload;
+function TCCDconfig.GetValue(const APath: string; const ADefault: boolean): boolean;
+  overload;
 var
-  s: String;
+  s: string;
 begin
-  s := String(GetValue(DOMString(APath), DOMString('')));
+  s := string(GetValue(DOMString(APath), DOMString('')));
   if SameText(s, 'TRUE') then
     Result := True
   else if SameText(s, 'FALSE') then
@@ -75,13 +78,12 @@ begin
     Result := ADefault;
 end;
 
-procedure TCCDconfig.SetValue(const APath: String; const AValue: Boolean); overload;
+procedure TCCDconfig.SetValue(const APath: string; const AValue: boolean); overload;
 begin
-if AValue then
-  SetValue(DOMString(APath),DOMString('True'))
-else
-  SetValue(DOMString(APath),DOMString('False'));
+  if AValue then
+    SetValue(DOMString(APath), DOMString('True'))
+  else
+    SetValue(DOMString(APath), DOMString('False'));
 end;
 
 end.
-

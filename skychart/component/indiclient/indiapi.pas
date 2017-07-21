@@ -27,64 +27,64 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses contnrs,
-  Classes, SysUtils;
-
+uses
+  contnrs, Classes, SysUtils;
 
 // derived from indiapi.h
 type
-  ISState = (ISS_OFF, ISS_ON);
-  IPState = (IPS_IDLE, IPS_OK, IPS_BUSY, IPS_ALERT);
-  ISRule  = (ISR_1OFMANY, ISR_ATMOST1, ISR_NOFMANY);
-  IPerm   = (IP_RO,IP_WO,IP_RW);
-  INDI_TYPE = (INDI_NUMBER,INDI_SWITCH,INDI_TEXT,INDI_LIGHT,INDI_BLOB,INDI_UNKNOWN);
-  BLOBHandling = (B_NEVER, B_ALSO, B_ONLY);
+  ISState       = (ISS_OFF, ISS_ON);
+  IPState       = (IPS_IDLE, IPS_OK, IPS_BUSY, IPS_ALERT);
+  ISRule        = (ISR_1OFMANY, ISR_ATMOST1, ISR_NOFMANY);
+  IPerm         = (IP_RO,IP_WO,IP_RW);
+  INDI_TYPE     = (INDI_NUMBER,INDI_SWITCH,INDI_TEXT,INDI_LIGHT,INDI_BLOB,INDI_UNKNOWN);
+  BLOBHandling  = (B_NEVER, B_ALSO, B_ONLY);
   TDeviceStatus = (devDisconnected, devConnecting, devConnected);
-  TPierSide = (pierEast, pierWest, pierUnknown);
+  TPierSide     = (pierEast, pierWest, pierUnknown);
 
 var
   Ftrace: boolean = false;
 
 const
-INDIV = '1.7';
-MAXINDINAME     =64;
-MAXINDILABEL	=64;
-MAXINDIDEVICE	=64;
-MAXINDIGROUP	=64;
-MAXINDIFORMAT	=64;
-MAXINDIBLOBFMT	=64;
-MAXINDITSTAMP	=64;
-INDI_DEVICE_NOT_FOUND=-1;
-INDI_PROPERTY_INVALID=-2;
-INDI_PROPERTY_DUPLICATED = -3;
-INDI_DISPATCH_ERROR=-4;
+  INDIV = '1.7';
 
-// DRIVER_INTERFACE
-GENERAL_INTERFACE       = 0;                //**< Default interface for all INDI devices */
-TELESCOPE_INTERFACE     = (1 << 0);         //**< Telescope interface, must subclass INDI::Telescope */
-CCD_INTERFACE           = (1 << 1);         //**< CCD interface, must subclass INDI::CCD */
-GUIDER_INTERFACE        = (1 << 2);         //**< Guider interface, must subclass INDI::GuiderInterface */
-FOCUSER_INTERFACE       = (1 << 3);         //**< Focuser interface, must subclass INDI::FocuserInterface */
-FILTER_INTERFACE        = (1 << 4);         //**< Filter interface, must subclass INDI::FilterInterface */
-DOME_INTERFACE          = (1 << 5);         //**< Dome interface, must subclass INDI::Dome */
-GPS_INTERFACE           = (1 << 6);         //**< GPS interface, must subclass INDI::GPS */
-WEATHER_INTERFACE       = (1 << 7);         //**< Weather interface, must subclass INDI::Weather */
-AO_INTERFACE            = (1 << 8);         //**< Adaptive Optics Interface */
-DUSTCAP_INTERFACE       = (1 << 9);         //**< Dust Cap Interface */
-LIGHTBOX_INTERFACE      = (1 << 10);        //**< Light Box Interface */
-AUX_INTERFACE           = (1 << 15);        //**< Auxiliary interface */
+  MAXINDINAME      = 64;
+  MAXINDILABEL	   = 64;
+  MAXINDIDEVICE	   = 64;
+  MAXINDIGROUP	   = 64;
+  MAXINDIFORMAT	   = 64;
+  MAXINDIBLOBFMT   = 64;
+  MAXINDITSTAMP	   = 64;
 
+  INDI_DEVICE_NOT_FOUND    = -1;
+  INDI_PROPERTY_INVALID    = -2;
+  INDI_PROPERTY_DUPLICATED = -3;
+  INDI_DISPATCH_ERROR      = -4;
+
+  // DRIVER_INTERFACE
+  GENERAL_INTERFACE       = 0;                // Default interface for all INDI devices
+  TELESCOPE_INTERFACE     = (1 << 0);         // Telescope interface, must subclass INDI::Telescope
+  CCD_INTERFACE           = (1 << 1);         // CCD interface, must subclass INDI::CCD
+  GUIDER_INTERFACE        = (1 << 2);         // Guider interface, must subclass INDI::GuiderInterface
+  FOCUSER_INTERFACE       = (1 << 3);         // Focuser interface, must subclass INDI::FocuserInterface
+  FILTER_INTERFACE        = (1 << 4);         // Filter interface, must subclass INDI::FilterInterface
+  DOME_INTERFACE          = (1 << 5);         // Dome interface, must subclass INDI::Dome
+  GPS_INTERFACE           = (1 << 6);         // GPS interface, must subclass INDI::GPS
+  WEATHER_INTERFACE       = (1 << 7);         // Weather interface, must subclass INDI::Weather
+  AO_INTERFACE            = (1 << 8);         // Adaptive Optics Interface
+  DUSTCAP_INTERFACE       = (1 << 9);         // Dust Cap Interface
+  LIGHTBOX_INTERFACE      = (1 << 10);        // Light Box Interface
+  AUX_INTERFACE           = (1 << 15);        // Auxiliary interface
 
 type
-  ITextVectorProperty=class;
+  ITextVectorProperty = class;
   IText = class(TObject)
   public
-      name: string;
-      lbl:  string;
-      text: string;
-      tvp:  ITextVectorProperty;
-      aux0: LongInt;
-      aux1: LongInt;
+    name: string;
+    lbl : string;
+    text: string;
+    tvp : ITextVectorProperty;
+    aux0: LongInt;
+    aux1: LongInt;
   end;
 
   ITextList = class(TObjectList)
@@ -97,33 +97,35 @@ type
 
   ITextVectorProperty = class(TObject)
   public
-      constructor Create;
-      destructor Destroy; override;
+    constructor Create;
+    destructor Destroy; override;
   public
-      device: string;
-      name:   string;
-      lbl:    string;
-      group:  string;
-      p:      IPerm;
-      timeout: double;
-      s:      IPState;
-      tp:     ITextList;
-      ntp:    integer;
-      timestamp: string;
-      aux:    LongInt;
+    device   : string;
+    name     : string;
+    lbl      : string;
+    group    : string;
+    p        : IPerm;
+    timeout  : double;
+    s        : IPState;
+    tp       : ITextList;
+    ntp      : integer;
+    timestamp: string;
+    aux      : LongInt;
   end;
 
   INumberVectorProperty= class;
   INumber = class(TObject)
   public
-      name:   string;
-      lbl :   string;
-      format: string;
-      min, max: double;
-      step:  double;
-      value: double;
-      nvp:   INumberVectorProperty;
-      aux0, aux1: LongInt;
+    name  : string;
+    lbl   : string;
+    format: string;
+    min   : double;
+    max   : double;
+    step  : double;
+    value : double;
+    nvp   : INumberVectorProperty;
+    aux0  : LongInt;
+    aux1  : LongInt;
   end;
 
   INumberList = class(TObjectList)
@@ -136,30 +138,30 @@ type
 
   INumberVectorProperty = class(TObject)
   public
-      constructor Create;
-      destructor Destroy; override;
+    constructor Create;
+    destructor Destroy; override;
   public
-      device: string;
-      name:   string;
-      lbl:    string;
-      group:  string;
-      p:      IPerm;
-      timeout: double;
-      s:      IPState;
-      np:     INumberList;
-      nnp:    integer;
-      timestamp: string;
-      aux:    LongInt;
+    device   : string;
+    name     : string;
+    lbl      : string;
+    group    : string;
+    p        : IPerm;
+    timeout  : double;
+    s        : IPState;
+    np       : INumberList;
+    nnp      : integer;
+    timestamp: string;
+    aux      : LongInt;
   end;
 
   ISwitchVectorProperty = class;
   ISwitch = class(TObject)
   public
-      name:   string;
-      lbl :   string;
-      s:      ISState;
-      svp:    ISwitchVectorProperty;
-      aux:    LongInt;
+    name: string;
+    lbl : string;
+    s   : ISState;
+    svp : ISwitchVectorProperty;
+    aux : LongInt;
   end;
 
   ISwitchList = class(TObjectList)
@@ -172,31 +174,31 @@ type
 
   ISwitchVectorProperty = class(TObject)
   public
-      constructor Create;
-      destructor Destroy; override;
+    constructor Create;
+    destructor Destroy; override;
   public
-      device: string;
-      name:   string;
-      lbl:    string;
-      group:  string;
-      p:      IPerm;
-      r:      ISRule;
-      timeout: double;
-      s:      IPState;
-      sp:     ISwitchList;
-      nsp:    integer;
-      timestamp: string;
-      aux:    LongInt;
+    device   : string;
+    name     : string;
+    lbl      : string;
+    group    : string;
+    p        : IPerm;
+    r        : ISRule;
+    timeout  : double;
+    s        : IPState;
+    sp       : ISwitchList;
+    nsp      : integer;
+    timestamp: string;
+    aux      : LongInt;
   end;
 
   ILightVectorProperty = class;
   ILight = class(TObject)
   public
-      name:   string;
-      lbl :   string;
-      s:      IPState;
-      lvp:    ILightVectorProperty;
-      aux:    LongInt;
+    name: string;
+    lbl : string;
+    s   : IPState;
+    lvp : ILightVectorProperty;
+    aux : LongInt;
   end;
 
   ILightList = class(TObjectList)
@@ -209,33 +211,35 @@ type
 
   ILightVectorProperty = class(TObject)
   public
-      constructor Create;
-      destructor Destroy; override;
+    constructor Create;
+    destructor Destroy; override;
   public
-      device: string;
-      name:   string;
-      lbl:    string;
-      group:  string;
-      s:      IPState;
-      lp:     ILightList;
-      nlp:    integer;
-      timestamp: string;
-      aux:    LongInt;
+    device   : string;
+    name     : string;
+    lbl      : string;
+    group    : string;
+    s        : IPState;
+    lp       : ILightList;
+    nlp      : integer;
+    timestamp: string;
+    aux      : LongInt;
   end;
 
   IBLOBVectorProperty = class;
   IBLOB = class(TObject)
   public
-      name:   string;
-      lbl :   string;
-      format: string;
-      blob:   TMemoryStream;
-      bloblen:integer;
-      size:   integer;
-      bvp:    IBLOBVectorProperty;
-      aux0,aux1,aux2: LongInt;
-      constructor Create;
-      destructor Destroy; override;
+    name   : string;
+    lbl    : string;
+    format : string;
+    blob   : TMemoryStream;
+    bloblen: integer;
+    size   : integer;
+    bvp    : IBLOBVectorProperty;
+    aux0   : LongInt;
+    aux1   : LongInt;
+    aux2   : LongInt;
+    constructor Create;
+    destructor Destroy; override;
   end;
 
   IBLOBList = class(TObjectList)
@@ -248,22 +252,21 @@ type
 
   IBLOBVectorProperty = class(TObject)
   public
-      constructor Create;
-      destructor Destroy; override;
+    constructor Create;
+    destructor Destroy; override;
   public
-      device: string;
-      name:   string;
-      lbl:    string;
-      group:  string;
-      p:      IPerm;
-      timeout: double;
-      s:      IPState;
-      bp:     IBLOBList;
-      nbp     : integer;
-      timestamp: string;
-      aux:    LongInt;
+    device   : string;
+    name     : string;
+    lbl      : string;
+    group    : string;
+    p        : IPerm;
+    timeout  : double;
+    s        : IPState;
+    bp       : IBLOBList;
+    nbp      : integer;
+    timestamp: string;
+    aux      : LongInt;
   end;
-
 
 implementation
 
@@ -272,6 +275,7 @@ function ITextList.GetItem(Index: Integer): IText;
 begin
   Result := IText(inherited Items[Index]);
 end;
+
 procedure ITextList.SetItem(Index: Integer; AValue: IText);
 begin
   inherited Items[Index] := AValue;
@@ -280,8 +284,9 @@ end;
 constructor ITextVectorProperty.Create;
 begin
   inherited Create;
-  tp:=ITextList.Create;
+  tp := ITextList.Create;
 end;
+
 destructor ITextVectorProperty.Destroy;
 begin
   tp.Free;
@@ -293,6 +298,7 @@ function INumberList.GetItem(Index: Integer): INumber;
 begin
   Result := INumber(inherited Items[Index]);
 end;
+
 procedure INumberList.SetItem(Index: Integer; AValue: INumber);
 begin
   inherited Items[Index] := AValue;
@@ -301,8 +307,9 @@ end;
 constructor INumberVectorProperty.Create;
 begin
   inherited Create;
-  np:=INumberList.Create;
+  np := INumberList.Create;
 end;
+
 destructor INumberVectorProperty.Destroy;
 begin
   np.Free;
@@ -314,6 +321,7 @@ function ISwitchList.GetItem(Index: Integer): ISwitch;
 begin
   Result := ISwitch(inherited Items[Index]);
 end;
+
 procedure ISwitchList.SetItem(Index: Integer; AValue: ISwitch);
 begin
   inherited Items[Index] := AValue;
@@ -322,8 +330,9 @@ end;
 constructor ISwitchVectorProperty.Create;
 begin
   inherited Create;
-  sp:=ISwitchList.Create;
+  sp := ISwitchList.Create;
 end;
+
 destructor ISwitchVectorProperty.Destroy;
 begin
   sp.Free;
@@ -335,6 +344,7 @@ function ILightList.GetItem(Index: Integer): ILight;
 begin
   Result := ILight(inherited Items[Index]);
 end;
+
 procedure ILightList.SetItem(Index: Integer; AValue: ILight);
 begin
   inherited Items[Index] := AValue;
@@ -343,8 +353,9 @@ end;
 constructor ILightVectorProperty.Create;
 begin
   inherited Create;
-  lp:=ILightList.Create;
+  lp := ILightList.Create;
 end;
+
 destructor ILightVectorProperty.Destroy;
 begin
   lp.Free;
@@ -370,6 +381,7 @@ function IBLOBList.GetItem(Index: Integer): IBLOB;
 begin
   Result := IBLOB(inherited Items[Index]);
 end;
+
 procedure IBLOBList.SetItem(Index: Integer; AValue: IBLOB);
 begin
   inherited Items[Index] := AValue;
@@ -378,14 +390,14 @@ end;
 constructor IBLOBVectorProperty.Create;
 begin
   inherited Create;
-  bp:=IBLOBList.Create;
+  bp := IBLOBList.Create;
 end;
+
 destructor IBLOBVectorProperty.Destroy;
 begin
   bp.Free;
   inherited Destroy;
 end;
-
 
 end.
 

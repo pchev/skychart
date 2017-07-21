@@ -4,7 +4,8 @@ unit pu_config_calendar;
 
 interface
 
-uses  u_help, u_translation, u_constant, u_util,  UScaleDPI,
+uses
+  u_help, u_translation, u_constant, u_util, UScaleDPI,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   StdCtrls, fu_config_calendar;
 
@@ -40,17 +41,18 @@ implementation
 
 procedure Tf_configcalendar.SetLang;
 begin
-Caption:=rsCalendar;
-Button1.caption:=rsOK;
-Button2.caption:=rsApply;
-Button3.caption:=rsCancel;
-Button7.caption:=rsHelp;
-SetHelp(self,hlpCfgDate);
+  Caption := rsCalendar;
+  Button1.Caption := rsOK;
+  Button2.Caption := rsApply;
+  Button3.Caption := rsCancel;
+  Button7.Caption := rsHelp;
+  SetHelp(self, hlpCfgDate);
 end;
 
 procedure Tf_configcalendar.Button2Click(Sender: TObject);
 begin
-  if assigned(f_config_calendar1.onApplyConfig) then f_config_calendar1.onApplyConfig(f_config_calendar1);
+  if assigned(f_config_calendar1.onApplyConfig) then
+    f_config_calendar1.onApplyConfig(f_config_calendar1);
 end;
 
 procedure Tf_configcalendar.Button7Click(Sender: TObject);
@@ -58,8 +60,7 @@ begin
   ShowHelp;
 end;
 
-procedure Tf_configcalendar.FormClose(Sender: TObject; var CloseAction: TCloseAction
-  );
+procedure Tf_configcalendar.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   f_config_calendar1.Lock;
 end;

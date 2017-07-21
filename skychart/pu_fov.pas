@@ -68,8 +68,8 @@ var
 implementation
 
 const
-f2 = '0.00';
-rad2deg = 180 / pi;
+  f2 = '0.00';
+  rad2deg = 180 / pi;
 
 {$R *.lfm}
 
@@ -77,37 +77,39 @@ rad2deg = 180 / pi;
 
 procedure Tf_fov.SetLang;
 begin
-Caption:=rsFieldOfVisio;
-Button1.Caption:=rsOK;
-Button2.Caption:=rsOK;
-Button6.Caption:=rsCompute;
-Button9.Caption:=rsCompute;
-label1.Caption:=rsFOV;
-Label24.Caption:=rsTelescopeFoc;
-Label25.Caption:=rsEyepieceFoca;
-Label26.Caption:=rsEyepieceAppa;
-Label28.Caption:=rsPower;
-Label49.Caption:=rsTelescopeFoc;
-Label50.Caption:=rsPixelSize;
-Label53.Caption:=rsPixelCount;
+  Caption := rsFieldOfVisio;
+  Button1.Caption := rsOK;
+  Button2.Caption := rsOK;
+  Button6.Caption := rsCompute;
+  Button9.Caption := rsCompute;
+  label1.Caption := rsFOV;
+  Label24.Caption := rsTelescopeFoc;
+  Label25.Caption := rsEyepieceFoca;
+  Label26.Caption := rsEyepieceAppa;
+  Label28.Caption := rsPower;
+  Label49.Caption := rsTelescopeFoc;
+  Label50.Caption := rsPixelSize;
+  Label53.Caption := rsPixelCount;
 end;
 
 procedure Tf_fov.Button6Click(Sender: TObject);
 begin
-edit10.Text:=inttostr(round((strtofloat(edit6.text)/strtofloat(edit7.text)) ));
-edit9.Text:=inttostr(round(60* strtofloat(edit8.text)/(strtofloat(edit6.text)/strtofloat(edit7.text)) ));
+  edit10.Text := IntToStr(round((strtofloat(edit6.Text) / strtofloat(edit7.Text))));
+  edit9.Text := IntToStr(round(60 * strtofloat(edit8.Text) /
+    (strtofloat(edit6.Text) / strtofloat(edit7.Text))));
 end;
 
 procedure Tf_fov.Button9Click(Sender: TObject);
-var f,px,py,cx,cy: single;
+var
+  f, px, py, cx, cy: single;
 begin
-f:=strtofloat(edit11.text);
-px:=strtofloat(edit12.text)/1000;
-py:=strtofloat(edit13.text)/1000;
-cx:=strtofloat(edit15.text);
-cy:=strtofloat(edit16.text);
-Edit14.Text:=FormatFloat(f2,arctan(px/f)*cx*rad2deg*60);
-Edit17.Text:=FormatFloat(f2,arctan(py/f)*cy*rad2deg*60);
+  f := strtofloat(edit11.Text);
+  px := strtofloat(edit12.Text) / 1000;
+  py := strtofloat(edit13.Text) / 1000;
+  cx := strtofloat(edit15.Text);
+  cy := strtofloat(edit16.Text);
+  Edit14.Text := FormatFloat(f2, arctan(px / f) * cx * rad2deg * 60);
+  Edit17.Text := FormatFloat(f2, arctan(py / f) * cy * rad2deg * 60);
 end;
 
 procedure Tf_fov.FormCreate(Sender: TObject);
@@ -117,4 +119,3 @@ begin
 end;
 
 end.
-

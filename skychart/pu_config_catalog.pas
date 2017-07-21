@@ -25,8 +25,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses  XMLConf, u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
-  pu_catgenadv, pu_progressbar, FileUtil, pu_voconfig, fu_config_catalog, math,
+uses
+  XMLConf, u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
+  pu_catgenadv, pu_progressbar, FileUtil, pu_voconfig, fu_config_catalog, Math,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, UScaleDPI,
   ExtCtrls, StdCtrls, enhedits, Grids, Buttons, ComCtrls, LResources,
   EditBtn, LazHelpHTML;
@@ -55,21 +56,22 @@ type
   end;
 
 implementation
+
 {$R *.lfm}
 
 procedure Tf_configcatalog.SetLang;
 begin
-Caption:=rsCatalog;
-Button1.caption:=rsOK;
-Button2.caption:=rsApply;
-Button3.caption:=rsCancel;
-Button4.caption:=rsHelp;
-SetHelp(self,hlpCatalog);
+  Caption := rsCatalog;
+  Button1.Caption := rsOK;
+  Button2.Caption := rsApply;
+  Button3.Caption := rsCancel;
+  Button4.Caption := rsHelp;
+  SetHelp(self, hlpCatalog);
 end;
 
 procedure Tf_configcatalog.FormShow(Sender: TObject);
 begin
-  f_config_catalog1.init
+  f_config_catalog1.init;
 end;
 
 procedure Tf_configcatalog.FormCreate(Sender: TObject);
@@ -78,15 +80,15 @@ begin
   SetLang;
 end;
 
-procedure Tf_configcatalog.FormClose(Sender: TObject;
-  var CloseAction: TCloseAction);
+procedure Tf_configcatalog.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   f_config_catalog1.lock;
 end;
 
 procedure Tf_configcatalog.Button2Click(Sender: TObject);
 begin
- if assigned(f_config_catalog1.onApplyConfig) then f_config_catalog1.onApplyConfig(f_config_catalog1);
+  if assigned(f_config_catalog1.onApplyConfig) then
+    f_config_catalog1.onApplyConfig(f_config_catalog1);
 end;
 
 procedure Tf_configcatalog.Button4Click(Sender: TObject);

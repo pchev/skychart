@@ -25,7 +25,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, u_projection, cu_tz, UScaleDPI,
+uses
+  u_help, u_translation, u_constant, u_util, u_projection, cu_tz, UScaleDPI,
   fu_config_time, fu_chart, LCLIntf, SysUtils, Classes, Graphics, Controls,
   Forms, Dialogs, Math, StdCtrls, CheckLst, Buttons, ExtCtrls, Spin, enhedits,
   ComCtrls, LResources, ButtonPanel, jdcalendar, LazHelpHTML, EditBtn;
@@ -54,21 +55,23 @@ type
   end;
 
 implementation
+
 {$R *.lfm}
 
 procedure Tf_configtime.SetLang;
 begin
-Caption:=rsDateTime;
-Button1.caption:=rsOK;
-Button2.caption:=rsApply;
-Button3.caption:=rsCancel;
-Button7.caption:=rsHelp;
-SetHelp(self,hlpCfgDate);
+  Caption := rsDateTime;
+  Button1.Caption := rsOK;
+  Button2.Caption := rsApply;
+  Button3.Caption := rsCancel;
+  Button7.Caption := rsHelp;
+  SetHelp(self, hlpCfgDate);
 end;
 
 procedure Tf_configtime.Button2Click(Sender: TObject);
 begin
-  if assigned(f_config_time1.onApplyConfig) then f_config_time1.onApplyConfig(f_config_time1);
+  if assigned(f_config_time1.onApplyConfig) then
+    f_config_time1.onApplyConfig(f_config_time1);
 end;
 
 procedure Tf_configtime.Button7Click(Sender: TObject);
@@ -76,8 +79,7 @@ begin
   ShowHelp;
 end;
 
-procedure Tf_configtime.FormClose(Sender: TObject; var CloseAction: TCloseAction
-  );
+procedure Tf_configtime.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   f_config_time1.Lock;
 end;

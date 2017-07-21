@@ -28,9 +28,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses cu_vocatalog, cu_vodetail, cu_vodata, 
-     LibXmlParser,
-     LResources, Classes, SysUtils;
+uses
+  cu_vocatalog, cu_vodetail, cu_vodata,
+  LibXmlParser,
+  LResources, Classes, SysUtils;
 
 procedure Register;
 
@@ -38,7 +39,7 @@ implementation
 
 procedure Register;
 begin
-  RegisterComponents('CDC', [TVO_Catalogs,TVO_Detail,TVO_TableData]);
+  RegisterComponents('CDC', [TVO_Catalogs, TVO_Detail, TVO_TableData]);
 end;
 
 //////////////////////////////////////////////////////////

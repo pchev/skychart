@@ -25,7 +25,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, fu_config_display, UScaleDPI,
+uses
+  u_help, u_translation, u_constant, u_util, fu_config_display, UScaleDPI,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Grids, Spin, Buttons, StdCtrls, ExtCtrls, ComCtrls, LResources,
   EditBtn, LCLType, enhedits, LazHelpHTML;
@@ -54,16 +55,17 @@ type
   end;
 
 implementation
+
 {$R *.lfm}
 
 procedure Tf_configdisplay.SetLang;
 begin
-Caption:=rsDisplay;
-Button2.caption:=rsOK;
-Button4.caption:=rsApply;
-Button5.caption:=rsCancel;
-Button6.caption:=rsHelp;
-SetHelp(self,hlpCfgDispl);
+  Caption := rsDisplay;
+  Button2.Caption := rsOK;
+  Button4.Caption := rsApply;
+  Button5.Caption := rsCancel;
+  Button6.Caption := rsHelp;
+  SetHelp(self, hlpCfgDispl);
 end;
 
 procedure Tf_configdisplay.FormCreate(Sender: TObject);
@@ -77,15 +79,15 @@ begin
   f_config_display1.init;
 end;
 
-procedure Tf_configdisplay.FormClose(Sender: TObject;
-  var CloseAction: TCloseAction);
+procedure Tf_configdisplay.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   f_config_display1.lock;
 end;
 
 procedure Tf_configdisplay.Button4Click(Sender: TObject);
 begin
- if assigned(f_config_display1.onApplyConfig) then f_config_display1.onApplyConfig(f_config_display1);
+  if assigned(f_config_display1.onApplyConfig) then
+    f_config_display1.onApplyConfig(f_config_display1);
 end;
 
 procedure Tf_configdisplay.Button6Click(Sender: TObject);

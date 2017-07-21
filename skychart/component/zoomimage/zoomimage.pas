@@ -2,20 +2,20 @@
 This source is only used to compile and install the package.
  }
 
-unit zoomimage; 
+unit zoomimage;
 
 interface
 
 uses
-  cu_zoomimage, u_bitmap, LazarusPackageIntf; 
+  cu_zoomimage, u_bitmap, LazarusPackageIntf;
 
 implementation
 
-procedure Register; 
+procedure Register;
 begin
-  RegisterUnit('cu_zoomimage', @cu_zoomimage.Register); 
-end; 
+  RegisterUnit('cu_zoomimage', @cu_zoomimage.Register);
+end;
 
 initialization
-  RegisterPackage('zoomimage', @Register); 
+  RegisterPackage('zoomimage', @Register);
 end.
