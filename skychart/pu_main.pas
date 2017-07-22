@@ -32,11 +32,16 @@ uses
   {$ifdef mswindows}
   Windows, ShlObj, Registry,
   {$endif}
-  lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, fu_chart,
-  cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures, pu_indigui,
-  pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet, cu_radec,
-  pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, pu_obslist, fu_script, pu_scriptengine,
-  u_constant, u_util, UScaleDPI, u_ccdconfig, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
+  lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet,
+  cu_fits, cu_database, fu_chart,
+  cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display,
+  pu_config_pictures, pu_indigui,
+  pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system,
+  pu_config_internet, cu_radec,
+  pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata,
+  pu_obslist, fu_script, pu_scriptengine,
+  u_constant, u_util, UScaleDPI, u_ccdconfig, blcksock, synsock,
+  dynlibs, FileUtil, LCLVersion, LCLType,
   InterfaceBase, LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types, Printers,
   ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame, BGRABitmap,
@@ -440,7 +445,7 @@ type
     procedure AnimationTimerTimer(Sender: TObject);
     procedure BlinkImageExecute(Sender: TObject);
     procedure MDEditToolBar(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+      Shift: TShiftState; X, Y: integer);
     procedure MenuBugReportClick(Sender: TObject);
     procedure CloseTimerTimer(Sender: TObject);
     procedure ConfigPopupExecute(Sender: TObject);
@@ -460,7 +465,7 @@ type
     procedure InitTimerTimer(Sender: TObject);
     procedure ListImgExecute(Sender: TObject);
     procedure MagPanelMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+      Shift: TShiftState; X, Y: integer);
     procedure MenuMaillistClick(Sender: TObject);
     procedure MenuSAMPConnectClick(Sender: TObject);
     procedure MenuSAMPDisconnectClick(Sender: TObject);
@@ -486,7 +491,7 @@ type
     procedure ShowUobjExecute(Sender: TObject);
     procedure ShowVOExecute(Sender: TObject);
     procedure tbFOVMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+      Shift: TShiftState; X, Y: integer);
     procedure TelescopeSetupExecute(Sender: TObject);
     procedure TimeUChange(Sender: TObject);
     procedure ToolBarFOVResize(Sender: TObject);
@@ -516,8 +521,8 @@ type
     procedure SetupSystemExecute(Sender: TObject);
     procedure SetupTimeExecute(Sender: TObject);
     procedure ThemeTimerTimer(Sender: TObject);
-    procedure TimeValChangingEx(Sender: TObject; var AllowChange: Boolean;
-      NewValue: SmallInt; Direction: TUpDownDirection);
+    procedure TimeValChangingEx(Sender: TObject; var AllowChange: boolean;
+      NewValue: smallint; Direction: TUpDownDirection);
     procedure MenuVariableStarClick(Sender: TObject);
     procedure SubViewClick(Sender: TObject);
     procedure MenuViewToolsBarClick(Sender: TObject);
@@ -526,7 +531,7 @@ type
     procedure zoomplusExecute(Sender: TObject);
     procedure zoomminusExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure quicksearchKeyDown(Sender: TObject; var Key: Word;
+    procedure quicksearchKeyDown(Sender: TObject; var Key: word;
       Shift: TShiftState);
     procedure FormResize(Sender: TObject);
     procedure quicksearchClick(Sender: TObject);
@@ -608,15 +613,16 @@ type
     procedure WindowCascade1Execute(Sender: TObject);
     procedure WindowTileHorizontal1Execute(Sender: TObject);
     procedure WindowTileVertical1Execute(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure MaximizeExecute(Sender: TObject);
     procedure TelescopePanelExecute(Sender: TObject);
     procedure ViewFullScreenExecute(Sender: TObject);
     procedure SetTheme;
     procedure SetStarShape;
-    procedure ToolButtonMouseUp(Sender: TObject; Button: TMouseButton;  Shift: TShiftState; X, Y: Integer);
-    procedure ToolButtonMouseDown(Sender: TObject; Button: TMouseButton;  Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: integer);
+    procedure ToolButtonMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: integer);
   private
     { Private declarations }
     UniqueInstance1: TCdCUniqueInstance;
@@ -630,14 +636,15 @@ type
     ConfigPictures: Tf_configpictures;
     ConfigCatalog: Tf_configcatalog;
     ConfigCalendar: Tf_configcalendar;
-    cryptedpwd,basecaption,kioskpwd :string;
+    cryptedpwd, basecaption, kioskpwd: string;
     rotspeed: double;
-    NeedRestart,NeedToInitializeDB,ConfirmSaveConfig,InitOK,RestoreState,ForceClose,SaveBlinkBG : Boolean;
+    NeedRestart, NeedToInitializeDB, ConfirmSaveConfig, InitOK, RestoreState,
+    ForceClose, SaveBlinkBG: boolean;
     InitialChartNum, Animcount: integer;
-    AutoRefreshLock: Boolean;
-    AnimationEnabled: Boolean;
+    AutoRefreshLock: boolean;
+    AnimationEnabled: boolean;
     AnimationDirection: integer;
-    Compass,arrow: TBGRABitmap;
+    Compass, arrow: TBGRABitmap;
     CursorImage1: TCursorImage;
     SaveState: TWindowState;
     samp: TSampClient;
@@ -646,18 +653,20 @@ type
     ActiveScript: integer;
     FTelescopeConnected: boolean;
     AccelList: array[0..MaxMenulevel] of string;
-    procedure OtherInstance(Sender : TObject; ParamCount: Integer; Parameters: array of String);
-    procedure InstanceRunning(Sender : TObject);
+    procedure OtherInstance(Sender: TObject; ParamCount: integer;
+      Parameters: array of string);
+    procedure InstanceRunning(Sender: TObject);
     procedure ProcessParams1;
     procedure ProcessParams2;
     procedure ProcessParamsQuit;
     procedure ShowError(msg: string);
-    procedure SetButtonImage(button: Integer);
-    function CreateChild(const CName: string; copyactive: boolean; cfg1 : Tconf_skychart; cfgp : Tconf_plot; locked:boolean=false):boolean;
-    Procedure RefreshAllChild(applydef:boolean);
-    Procedure SyncChild;
+    procedure SetButtonImage(button: integer);
+    function CreateChild(const CName: string; copyactive: boolean;
+      cfg1: Tconf_skychart; cfgp: Tconf_plot; locked: boolean = False): boolean;
+    procedure RefreshAllChild(applydef: boolean);
+    procedure SyncChild;
     procedure GetLanguage;
-    Procedure GetAppDir;
+    procedure GetAppDir;
     procedure ScaleMainForm;
     procedure ResizeBtn;
     procedure ViewTopPanel;
@@ -669,114 +678,120 @@ type
     procedure ApplyConfigCatalog(Sender: TObject);
     procedure SetChildFocus(Sender: TObject);
     procedure SetNightVision(night: boolean);
-    procedure SetupObservatoryPage(page:integer; posx:integer=0; posy:integer=0);
-    procedure SetupCalendarPage(page:integer);
+    procedure SetupObservatoryPage(page: integer; posx: integer = 0; posy: integer = 0);
+    procedure SetupCalendarPage(page: integer);
     procedure ApplyConfigCalendar(Sender: TObject);
-    procedure SetupTimePage(page:integer);
-    procedure SetupDisplayPage(pagegroup:integer);
-    procedure SetupPicturesPage(page:integer; action:integer=0);
-    procedure SetupCatalogPage(page:integer);
-    procedure SetupChartPage(page:integer);
+    procedure SetupTimePage(page: integer);
+    procedure SetupDisplayPage(pagegroup: integer);
+    procedure SetupPicturesPage(page: integer; action: integer = 0);
+    procedure SetupCatalogPage(page: integer);
+    procedure SetupChartPage(page: integer);
     procedure ApplyConfigChart(Sender: TObject);
-    procedure SetupSolsysPage(page:integer; directdownload:boolean=false);
+    procedure SetupSolsysPage(page: integer; directdownload: boolean = False);
     procedure ApplyConfigSolsys(Sender: TObject);
-    procedure SetupSystemPage(page:integer);
+    procedure SetupSystemPage(page: integer);
     procedure ApplyConfigSystem(Sender: TObject);
-    procedure SetupInternetPage(page:integer);
+    procedure SetupInternetPage(page: integer);
     procedure ApplyConfigInternet(Sender: TObject);
     procedure FirstSetup;
-    procedure ShowReleaseNotes(shownext:boolean);
-    function Find(kind:integer; num:string; def_ra:double=0;def_de:double=0): string;
+    procedure ShowReleaseNotes(shownext: boolean);
+    function Find(kind: integer; num: string; def_ra: double = 0; def_de: double = 0): string;
     function SaveChart(fn: string): string;
     function OpenChart(fn: string): string;
     function LoadDefaultChart(fn: string): string;
     function ShowPlanetInfo(pg: string): string;
-    procedure PlanetInfoPage(pg:Integer;cursorpos:boolean=false);
-    function SetGCat(path,shortname,active,min,max: string): string;
+    procedure PlanetInfoPage(pg: integer; cursorpos: boolean = False);
+    function SetGCat(path, shortname, active, min, max: string): string;
     procedure UpdateSAMPmenu;
-    procedure SAMPStart(auto:boolean=false);
+    procedure SAMPStart(auto: boolean = False);
     procedure SAMPStop;
-    procedure SAMPurlToFile(url,nam,typ: string; var fn: string);
+    procedure SAMPurlToFile(url, nam, typ: string; var fn: string);
     procedure SAMPClientChange(Sender: TObject);
     procedure SAMPDisconnect(Sender: TObject);
-    procedure SAMPcoordpointAtsky(ra,dec:double);
-    procedure SAMPImageLoadFits(image_name,image_id,url:string);
-    procedure SAMPTableLoadVotable(table_name,table_id,url:string);
-    procedure SAMPTableHighlightRow(table_id,url,row:string);
-    procedure SAMPTableSelectRowlist(table_id,url:string;rowlist:Tstringlist);
-    procedure TelescopeMove(origin: string; ra,de: double);
-    procedure TelescopeChange(origin: string; tc:boolean);
+    procedure SAMPcoordpointAtsky(ra, Dec: double);
+    procedure SAMPImageLoadFits(image_name, image_id, url: string);
+    procedure SAMPTableLoadVotable(table_name, table_id, url: string);
+    procedure SAMPTableHighlightRow(table_id, url, row: string);
+    procedure SAMPTableSelectRowlist(table_id, url: string; rowlist: TStringList);
+    procedure TelescopeMove(origin: string; ra, de: double);
+    procedure TelescopeChange(origin: string; tc: boolean);
     procedure ApplyScript(Sender: TObject);
     procedure IndiGUIdestroy(Sender: TObject);
     procedure PositionApply(Sender: TObject);
     procedure ZoomBarApply(Sender: TObject);
-    function QuickDownload(url,fn: string; quickcancel:boolean=true): boolean;
+    function QuickDownload(url, fn: string; quickcancel: boolean = True): boolean;
   public
     { Public declarations }
-    cfgm : Tconf_main;
-    def_cfgsc,cfgs : Tconf_skychart;
-    def_cfgplot,cfgp : Tconf_plot;
-    catalog : Tcatalog;
-    fits : TFits;
-    planet  : Tplanet;
+    cfgm: Tconf_main;
+    def_cfgsc, cfgs: Tconf_skychart;
+    def_cfgplot, cfgp: Tconf_plot;
+    catalog: Tcatalog;
+    fits: TFits;
+    planet: Tplanet;
     cdcdb: TCDCdb;
-    serverinfo,topmsg : string;
+    serverinfo, topmsg: string;
     TCPDaemon: TTCPDaemon;
     CanShowScrollbar: boolean;
-    Config_Version : string;
+    Config_Version: string;
     showsplash: boolean;
     Closing: boolean;
-    procedure ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:Tconf_plot ;var csc:Tconf_skychart);
-    procedure ReadPrivateConfig(filename:string);
+    procedure ReadChartConfig(filename: string; usecatalog, resizemain: boolean;
+      var cplot: Tconf_plot; var csc: Tconf_skychart);
+    procedure ReadPrivateConfig(filename: string);
     procedure ReadDefault;
     procedure UpdateConfig;
-    procedure SavePrivateConfig(filename:string);
-    procedure SaveQuickSearch(filename:string);
-    procedure SaveChartConfig(filename:string; child: TChildFrame; overwrite:boolean=false);
+    procedure SavePrivateConfig(filename: string);
+    procedure SaveQuickSearch(filename: string);
+    procedure SaveChartConfig(filename: string; child: TChildFrame;
+      overwrite: boolean = False);
     procedure SaveVersion;
     procedure SaveDefault;
     procedure SetDefault;
     procedure SetLang;
-    procedure ChangeLanguage(newlang:string);
-    Procedure InitFonts;
-    Procedure activateconfig(cmain:Tconf_main; csc:Tconf_skychart; ccat:Tconf_catalog; cshr:Tconf_shared; cplot:Tconf_plot; cdss:Tconf_dss; applyall:boolean );
-    Procedure SetLPanel1(txt1:string; origin:string='';sendmsg:boolean=false; Sender: TObject=nil; txt2:string='');
-    Procedure SetLPanel0(txt:string);
-    Procedure SetTopMessage(txt:string;sender:TObject);
-    Procedure SetTitleMessage(txt:string;sender:TObject);
-    procedure updatebtn(fx,fy:integer;tc:boolean;sender:TObject);
-    function NewChart(cname:string):string;
-    function CloseChart(cname:string):string;
-    function ListChart:string;
-    function SelectChart(cname:string):string;
-    function HelpCmd(cname:string):string;
-    function GetSelectedObject:string;
-    function ExecuteCmd(cname:string; arg:Tstringlist):string;
-    function CometMark(cname:string; arg:Tstringlist):string;
-    function AsteroidMark(cname:string; arg:Tstringlist):string;
-    function GetScopeRates(cname:string; arg:Tstringlist):string;
-    procedure SendInfo(Sender: TObject; origin,str:string);
-    function GenericSearch(cname,Num:string; var ar1,de1: double; idresult:boolean=true):boolean;
-    procedure ObsListSearch(obj:string; ra,de:double);
-    procedure ObsListSlew(obj:string; ra,de:double);
-    procedure GetObjectCoord(obj:string; var lbl:string; var ra,de:double);
+    procedure ChangeLanguage(newlang: string);
+    procedure InitFonts;
+    procedure activateconfig(cmain: Tconf_main; csc: Tconf_skychart;
+      ccat: Tconf_catalog; cshr: Tconf_shared; cplot: Tconf_plot; cdss: Tconf_dss;
+      applyall: boolean);
+    procedure SetLPanel1(txt1: string; origin: string = ''; sendmsg: boolean = False;
+      Sender: TObject = nil; txt2: string = '');
+    procedure SetLPanel0(txt: string);
+    procedure SetTopMessage(txt: string; Sender: TObject);
+    procedure SetTitleMessage(txt: string; Sender: TObject);
+    procedure updatebtn(fx, fy: integer; tc: boolean; Sender: TObject);
+    function NewChart(cname: string): string;
+    function CloseChart(cname: string): string;
+    function ListChart: string;
+    function SelectChart(cname: string): string;
+    function HelpCmd(cname: string): string;
+    function GetSelectedObject: string;
+    function ExecuteCmd(cname: string; arg: TStringList): string;
+    function CometMark(cname: string; arg: TStringList): string;
+    function AsteroidMark(cname: string; arg: TStringList): string;
+    function GetScopeRates(cname: string; arg: TStringList): string;
+    procedure SendInfo(Sender: TObject; origin, str: string);
+    function GenericSearch(cname, Num: string; var ar1, de1: double;
+      idresult: boolean = True): boolean;
+    procedure ObsListSearch(obj: string; ra, de: double);
+    procedure ObsListSlew(obj: string; ra, de: double);
+    procedure GetObjectCoord(obj: string; var lbl: string; var ra, de: double);
     procedure ObsListChange(Sender: TObject);
     procedure StartServer;
     procedure StopServer;
-    function GetUniqueName(cname:string; forcenumeric:boolean):string;
-    procedure showdetailinfo(chart:string;ra,dec:double;cat,nm,desc:string);
-    procedure CenterFindObj(chart:string);
-    procedure NeighborObj(chart:string);
-    procedure ConnectDB(updversion:string='');
+    function GetUniqueName(cname: string; forcenumeric: boolean): string;
+    procedure showdetailinfo(chart: string; ra, Dec: double; cat, nm, desc: string);
+    procedure CenterFindObj(chart: string);
+    procedure NeighborObj(chart: string);
+    procedure ConnectDB(updversion: string = '');
     procedure ImageSetFocus(Sender: TObject);
     procedure SetScriptMenu(Sender: TObject);
-    procedure ListInfo(buf,msg:string);
-    function  TCPClientConnected: boolean;
-    procedure GetTCPInfo(i:integer; var buf:string);
-    procedure KillTCPClient(i:integer);
+    procedure ListInfo(buf, msg: string);
+    function TCPClientConnected: boolean;
+    procedure GetTCPInfo(i: integer; var buf: string);
+    procedure KillTCPClient(i: integer);
     procedure PrintSetup(Sender: TObject);
-    procedure GetChartConfig(csc:Tconf_skychart);
-    procedure DrawChart(csc:Tconf_skychart);
+    procedure GetChartConfig(csc: Tconf_skychart);
+    procedure DrawChart(csc: Tconf_skychart);
     procedure ConfigDBChange(Sender: TObject);
     procedure SaveAndRestart(Sender: TObject);
     procedure ClearAndRestart;
@@ -786,11 +801,11 @@ type
     procedure InitToolBar;
     procedure InitScriptPanel;
     procedure SetScriptMenuCaption;
-    procedure ShowScriptPanel(n:integer); overload;
-    procedure ShowScriptPanel(n:integer; showonly:boolean); overload;
-    procedure ViewToolsBar(ForceVisible:boolean);
-    Procedure InitDS2000;
-    function PrepareAsteroid(jd1,jd2,step:double; msg:Tstrings):boolean;
+    procedure ShowScriptPanel(n: integer); overload;
+    procedure ShowScriptPanel(n: integer; showonly: boolean); overload;
+    procedure ViewToolsBar(ForceVisible: boolean);
+    procedure InitDS2000;
+    function PrepareAsteroid(jd1, jd2, step: double; msg: TStrings): boolean;
     procedure RecomputeAsteroid;
     procedure ChartMove(Sender: TObject);
     procedure ImageSetup(Sender: TObject);
@@ -798,10 +813,10 @@ type
     procedure TCPShowError(var msg: string);
     procedure TCPShowSocket(var msg: string);
     procedure GetTwilight(jd0: double; out ht: double);
-    procedure SendCoordpointAtsky(client: string; ra,de: double);
-    procedure SendVoTable(client,tname,tid,url: string);
-    procedure SendImageFits(client,imgname,imgid,url: string);
-    procedure SendSelectRow(tableid,url,row: string);
+    procedure SendCoordpointAtsky(client: string; ra, de: double);
+    procedure SendVoTable(client, tname, tid, url: string);
+    procedure SendImageFits(client, imgname, imgid, url: string);
+    procedure SendSelectRow(tableid, url, row: string);
   end;
 
 var
@@ -1133,7 +1148,8 @@ var
   i, j, x, v: integer;
 begin
   if VerboseMsg then
-    WriteTrace('SetGCat ' + path + blank + shortname + blank + active + blank + min + blank + max);
+    WriteTrace('SetGCat ' + path + blank + shortname + blank + active +
+      blank + min + blank + max);
   Result := msgFailed;
   val(min, x, v);
   if v <> 0 then
@@ -1175,10 +1191,8 @@ begin
   if catalog.cfgcat.GCatLst[i].Actif then
   begin
     if not catalog.GetInfo(catalog.cfgcat.GCatLst[i].path,
-      catalog.cfgcat.GCatLst[i].shortname,
-      catalog.cfgcat.GCatLst[i].magmax,
-      catalog.cfgcat.GCatLst[i].cattype,
-      catalog.cfgcat.GCatLst[i].version,
+      catalog.cfgcat.GCatLst[i].shortname, catalog.cfgcat.GCatLst[i].magmax,
+      catalog.cfgcat.GCatLst[i].cattype, catalog.cfgcat.GCatLst[i].version,
       catalog.cfgcat.GCatLst[i].Name) then
       catalog.cfgcat.GCatLst[i].Actif := False;
   end;
@@ -1283,7 +1297,8 @@ begin
     // Upgrade
     for i := 1 to numfn do
     begin
-      if fileexists(dsdir + fn[i]) and (FileAge(srcdir + fn[i]) > FileAge(dsdir + fn[i])) then
+      if fileexists(dsdir + fn[i]) and (FileAge(srcdir + fn[i]) >
+        FileAge(dsdir + fn[i])) then
       begin
         DeleteFile(dsdir + fn[i]);
         CopyFile(srcdir + fn[i], dsdir + fn[i], True);
@@ -1315,9 +1330,11 @@ begin
     if VerboseMsg then
       WriteTrace('ReadDefault');
     ReadDefault;
-    if (def_cfgsc.ObsTZ = '') and FileExists(slash(appdir) + 'skychart_valdereuil.ini') then
+    if (def_cfgsc.ObsTZ = '') and FileExists(slash(appdir) +
+      'skychart_valdereuil.ini') then
     begin
-      CopyFile(SysToUTF8(slash(appdir) + 'skychart_valdereuil.ini'), SysToUTF8(Configfile));
+      CopyFile(SysToUTF8(slash(appdir) + 'skychart_valdereuil.ini'),
+        SysToUTF8(Configfile));
       ReadDefault;
     end;
     // InitToolBar;
@@ -1362,7 +1379,8 @@ begin
     catalog.LoadConstL(cfgm.ConstLfile);
     catalog.LoadConstB(cfgm.ConstBfile);
     catalog.LoadHorizon(cfgm.horizonfile, def_cfgsc);
-    catalog.LoadMilkywaydot(slash(appdir) + slash('data') + slash('milkyway') + 'milkyway.dat');
+    catalog.LoadMilkywaydot(slash(appdir) + slash('data') + slash('milkyway') +
+      'milkyway.dat');
     if def_cfgsc.ShowHorizonPicture then
       catalog.LoadHorizonPicture(cfgm.HorizonPictureFile);
     catalog.LoadStarName(slash(appdir) + slash('data') + slash('common_names'), Lang);
@@ -1376,8 +1394,8 @@ begin
     ConnectDB(Config_Version);
     if VerboseMsg then
       WriteTrace('Cursor');
-    if fileexists(slash(appdir) + slash('data') + slash('Themes') + slash(
-      'default') + 'retic.cur') then
+    if fileexists(slash(appdir) + slash('data') + slash('Themes') +
+      slash('default') + 'retic.cur') then
     begin
       try
         CursorImage1.LoadFromFile(SysToUTF8(slash(appdir) + slash('data') +
@@ -1391,14 +1409,14 @@ begin
       crRetic := crCross;
     if VerboseMsg then
       WriteTrace('Compass');
-    if fileexists(slash(appdir) + slash('data') + slash('Themes') + slash(
-      'default') + 'compass.bmp') then
-      Compass.LoadFromFile(SysToUTF8(slash(appdir) + slash('data') + slash(
-        'Themes') + slash('default') + 'compass.bmp'));
-    if fileexists(slash(appdir) + slash('data') + slash('Themes') + slash(
-      'default') + 'arrow.bmp') then
-      arrow.LoadFromFile(SysToUTF8(slash(appdir) + slash('data') + slash(
-        'Themes') + slash('default') + 'arrow.bmp'));
+    if fileexists(slash(appdir) + slash('data') + slash('Themes') +
+      slash('default') + 'compass.bmp') then
+      Compass.LoadFromFile(SysToUTF8(slash(appdir) + slash('data') +
+        slash('Themes') + slash('default') + 'compass.bmp'));
+    if fileexists(slash(appdir) + slash('data') + slash('Themes') +
+      slash('default') + 'arrow.bmp') then
+      arrow.LoadFromFile(SysToUTF8(slash(appdir) + slash('data') +
+        slash('Themes') + slash('default') + 'arrow.bmp'));
     if VerboseMsg then
       WriteTrace('Starshape file');
     if (cfgm.starshape_file <> '') and (FileExists(utf8tosys(cfgm.starshape_file))) then
@@ -1409,8 +1427,8 @@ begin
       WriteTrace('Timezone');
     def_cfgsc.tz.GregorianStart := GregorianStart;
     def_cfgsc.tz.GregorianStartJD := GregorianStartJD;
-    def_cfgsc.tz.TimeZoneFile := ZoneDir + StringReplace(def_cfgsc.ObsTZ,
-      '/', PathDelim, [rfReplaceAll]);
+    def_cfgsc.tz.TimeZoneFile :=
+      ZoneDir + StringReplace(def_cfgsc.ObsTZ, '/', PathDelim, [rfReplaceAll]);
     if def_cfgsc.tz.TimeZoneFile = '' then
       firstuse := True;
     if firstuse and Application.ShowMainForm then
@@ -1556,7 +1574,8 @@ begin
   begin
     f_info.setpage(3);
     f_info.TitlePanel.Caption :=
-      f_info.TitlePanel.Caption + ', ' + rsVersion + blank + cdcversion + '-' + RevisionStr;
+      f_info.TitlePanel.Caption + ', ' + rsVersion + blank + cdcversion +
+      '-' + RevisionStr;
     if shownext then
       f_info.Button1.Caption := rsNext
     else
@@ -1572,8 +1591,8 @@ procedure Tf_main.FirstSetup;
 begin
   ShowReleaseNotes(True);
   SetupObservatoryPage(0, -1);
-  def_cfgsc.tz.TimeZoneFile := ZoneDir + StringReplace(def_cfgsc.ObsTZ,
-    '/', PathDelim, [rfReplaceAll]);
+  def_cfgsc.tz.TimeZoneFile :=
+    ZoneDir + StringReplace(def_cfgsc.ObsTZ, '/', PathDelim, [rfReplaceAll]);
   if def_cfgsc.tz.TimeZoneFile = '' then
   begin
     def_cfgsc.ObsTZ := 'Etc/GMT';
@@ -2228,7 +2247,8 @@ begin
               begin
                 MessageDlg('Could not found the application data directory.' +
                   crlf + 'Please reinstall the program at a standard location' +
-                  crlf + 'or use the option --datadir= to indicate where you install the data.',
+                  crlf +
+                  'or use the option --datadir= to indicate where you install the data.',
                   mtError, [mbAbort], 0);
                 Halt;
               end;
@@ -2251,7 +2271,8 @@ begin
 {$ifdef darwin}
   tracefile := slash(privatedir) + tracefile;
 {$endif}
-  VarObs := slash(appdir) + DefaultVarObs;     // varobs normally at same location as skychart
+  VarObs := slash(appdir) + DefaultVarObs;
+  // varobs normally at same location as skychart
   if not FileExists(VarObs) then
     VarObs := DefaultVarObs; // if not try in $PATH
   helpdir := slash(appdir) + slash('doc');
@@ -2290,21 +2311,24 @@ begin
 end;
 
 procedure Tf_main.ScaleMainForm;
-var inif: TMemIniFile;
+var
+  inif: TMemIniFile;
 begin
-  cfgm.ScreenScaling:=true;
-  if fileexists(configfile) then begin
-    inif:=TMeminifile.create(configfile);
+  cfgm.ScreenScaling := True;
+  if fileexists(configfile) then
+  begin
+    inif := TMeminifile.Create(configfile);
     try
-    cfgm.ScreenScaling:=inif.ReadBool('main','ScreenScaling',cfgm.ScreenScaling);
+      cfgm.ScreenScaling := inif.ReadBool('main', 'ScreenScaling', cfgm.ScreenScaling);
     finally
-     inif.Free;
+      inif.Free;
     end;
   end;
-  UScaleDPI.UseScaling:=cfgm.ScreenScaling;
+  UScaleDPI.UseScaling := cfgm.ScreenScaling;
   UScaleDPI.SetScale(Canvas);
-  WriteTrace('Screen scaling : '+BoolToStr(cfgm.ScreenScaling,True));
-  WriteTrace('Screen scale : '+FormatFloat(f0,100*UScaleDPI.RunDPI/UScaleDPI.DesignDPI)+'%');
+  WriteTrace('Screen scaling : ' + BoolToStr(cfgm.ScreenScaling, True));
+  WriteTrace('Screen scale : ' + FormatFloat(f0, 100 * UScaleDPI.RunDPI /
+    UScaleDPI.DesignDPI) + '%');
   ScaleDPI(Self);
   ScaleImageList(ImageNormal);
 end;
@@ -2323,9 +2347,9 @@ begin
     if buf = 'win32' then
       buf := 'mswindows';
 
-    compile_time:={$I %DATE%}+' '+{$I %TIME%};
-    compile_version:='Lazarus '+lcl_version+' Free Pascal '+{$I %FPCVERSION%}+' '+{$I %FPCTARGETOS%}+'-'+{$I %FPCTARGETCPU%}+'-'+buf;
-    compile_system:={$I %FPCTARGETOS%};
+    compile_time := {$I %DATE%}+' '+{$I %TIME%};
+    compile_version := 'Lazarus '+lcl_version+' Free Pascal '+{$I %FPCVERSION%}+' '+{$I %FPCTARGETOS%}+'-'+{$I %FPCTARGETCPU%}+'-'+buf;
+    compile_system := {$I %FPCTARGETOS%};
     DefaultFormatSettings.DecimalSeparator := '.';
     DefaultFormatSettings.ThousandSeparator := ',';
     DefaultFormatSettings.DateSeparator := '/';
@@ -2490,13 +2514,15 @@ begin
     begin
       cdcwcs_initfitsfile := Tcdcwcs_initfitsfile(
         GetProcedureAddress(cdcwcslib, 'cdcwcs_initfitsfile'));
-      cdcwcs_release := Tcdcwcs_release(GetProcedureAddress(cdcwcslib, 'cdcwcs_release'));
+      cdcwcs_release := Tcdcwcs_release(GetProcedureAddress(cdcwcslib,
+        'cdcwcs_release'));
       cdcwcs_sky2xy := Tcdcwcs_sky2xy(GetProcedureAddress(cdcwcslib, 'cdcwcs_sky2xy'));
-      cdcwcs_getinfo := Tcdcwcs_getinfo(GetProcedureAddress(cdcwcslib, 'cdcwcs_getinfo'));
+      cdcwcs_getinfo := Tcdcwcs_getinfo(GetProcedureAddress(cdcwcslib,
+        'cdcwcs_getinfo'));
     end;
 
-    if (@cdcwcs_initfitsfile = nil) or (@cdcwcs_release = nil) or (@cdcwcs_sky2xy = nil) or
-      (@cdcwcs_getinfo = nil) then
+    if (@cdcwcs_initfitsfile = nil) or (@cdcwcs_release = nil) or
+      (@cdcwcs_sky2xy = nil) or (@cdcwcs_getinfo = nil) then
     begin
       MessageDlg(rsCouldNotLoad + libcdcwcs + crlf + rsPleaseTryToR,
         mtError, [mbAbort], 0);
@@ -2518,8 +2544,8 @@ begin
     buf := FormatDateTime('YYYY', now);
     if buf < '2000' then
     begin
-      MessageDlg('Your computer clock is back in year ' + buf + crlf
-        + 'Please set your computer clock and restart skychart',
+      MessageDlg('Your computer clock is back in year ' + buf +
+        crlf + 'Please set your computer clock and restart skychart',
         mtError, [mbAbort], 0);
       Halt;
     end;
@@ -2585,8 +2611,8 @@ begin
     on E: Exception do
     begin
       WriteTrace(step + ': ' + E.Message);
-      MessageDlg(step + ': ' + E.Message + crlf + rsSomethingGoW + crlf +
-        rsPleaseTryToR,
+      MessageDlg(step + ': ' + E.Message + crlf + rsSomethingGoW +
+        crlf + rsPleaseTryToR,
         mtError, [mbAbort], 0);
       Halt;
     end;
@@ -2818,10 +2844,10 @@ begin
   if MultiFrame1.ActiveObject is Tf_chart then
   begin
     buf := rsSkyCharts + ', ' + rsObservatory + blank + Tf_chart(
-      MultiFrame1.ActiveObject).sc.cfgsc.ObsName + ', ' +
-      rsCenter + blank + rsRA + ':' + ARmtoStr(rad2deg * Tf_chart(
-      MultiFrame1.ActiveObject).sc.cfgsc.racentre / 15) +
-      blank + rsDEC + ':' + DEmtoStr(rad2deg * Tf_chart(
+      MultiFrame1.ActiveObject).sc.cfgsc.ObsName + ', ' + rsCenter +
+      blank + rsRA + ':' + ARmtoStr(rad2deg * Tf_chart(
+      MultiFrame1.ActiveObject).sc.cfgsc.racentre / 15) + blank +
+      rsDEC + ':' + DEmtoStr(rad2deg * Tf_chart(
       MultiFrame1.ActiveObject).sc.cfgsc.decentre);
     if Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindName > '' then
       buf := buf + ', ' + Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindName;
@@ -2836,7 +2862,8 @@ begin
       cfgm.PrintFooter := f_print.CheckBox2.Checked;
       Tf_chart(MultiFrame1.ActiveObject).PrintChart(
         cfgm.printlandscape, cfgm.printcolor, cfgm.PrintMethod, cfgm.PrinterResolution,
-        cfgm.PrintCmd1, cfgm.PrintCmd2, cfgm.PrintTmpPath, cfgm, (f_print.ModalResult = mrYes));
+        cfgm.PrintCmd1, cfgm.PrintCmd2, cfgm.PrintTmpPath, cfgm,
+        (f_print.ModalResult = mrYes));
     end;
     MenuPrintPreview.Visible := (cfgm.PrintMethod = 0);
   end;
@@ -2849,10 +2876,10 @@ begin
   if MultiFrame1.ActiveObject is Tf_chart then
   begin
     buf := rsSkyCharts + ', ' + rsObservatory + blank + Tf_chart(
-      MultiFrame1.ActiveObject).sc.cfgsc.ObsName + ', ' +
-      rsCenter + blank + rsRA + ':' + ARmtoStr(rad2deg * Tf_chart(
-      MultiFrame1.ActiveObject).sc.cfgsc.racentre / 15) +
-      blank + rsDEC + ':' + DEmtoStr(rad2deg * Tf_chart(
+      MultiFrame1.ActiveObject).sc.cfgsc.ObsName + ', ' + rsCenter +
+      blank + rsRA + ':' + ARmtoStr(rad2deg * Tf_chart(
+      MultiFrame1.ActiveObject).sc.cfgsc.racentre / 15) + blank +
+      rsDEC + ':' + DEmtoStr(rad2deg * Tf_chart(
       MultiFrame1.ActiveObject).sc.cfgsc.decentre);
     if Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindName > '' then
       buf := buf + ', ' + Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindName;
@@ -3269,10 +3296,12 @@ begin
       i := 0;
       repeat
         Inc(i);
-        fn := slash(cfgm.AnimRecDir) + cfgm.AnimRecPrefix + IntToStr(i) + cfgm.AnimRecExt;
+        fn := slash(cfgm.AnimRecDir) + cfgm.AnimRecPrefix + IntToStr(i) +
+          cfgm.AnimRecExt;
       until (not FileExistsutf8(fn)) or (i > 1000);
-      cmd := cfgm.Animffmpeg + ' -r ' + formatfloat(f1, cfgm.AnimFps) + ' -i "' +
-        slash(TempDir) + '%06d.jpg" ' + cfgm.AnimOpt + ' "' + utf8tosys(fn) + '"';
+      cmd := cfgm.Animffmpeg + ' -r ' + formatfloat(f1, cfgm.AnimFps) +
+        ' -i "' + slash(TempDir) + '%06d.jpg" ' + cfgm.AnimOpt +
+        ' "' + utf8tosys(fn) + '"';
       rc := ExecProcess(cmd, r, True);
       logfile := slash(TempDir) + 'ffmpeg.log';
       r.SaveToFile(logfile);
@@ -3350,22 +3379,22 @@ begin
       DtoS(hh, h, n, s);
 
       case TimeU.ItemIndex of
-        0:SetJD(sc.cfgsc.CurJDUT + mult / 24);
-        1:SetJD(sc.cfgsc.CurJDUT + mult / 1440);
-        2:SetJD(sc.cfgsc.CurJDUT + mult / 86400);
-        3:SetJD(sc.cfgsc.CurJDUT + mult);
+        0: SetJD(sc.cfgsc.CurJDUT + mult / 24);
+        1: SetJD(sc.cfgsc.CurJDUT + mult / 1440);
+        2: SetJD(sc.cfgsc.CurJDUT + mult / 86400);
+        3: SetJD(sc.cfgsc.CurJDUT + mult);
 
         4:
-          begin
-            Inc(m, mult);
-            SetDateUT(y, m, d, h, n, s);
-          end;
+        begin
+          Inc(m, mult);
+          SetDateUT(y, m, d, h, n, s);
+        end;
 
         5:
-          begin
-            Inc(y, mult);
-            SetDateUT(y, m, d, h, n, s);
-          end;
+        begin
+          Inc(y, mult);
+          SetDateUT(y, m, d, h, n, s);
+        end;
 
         6: SetJD(sc.cfgsc.CurJDUT + mult * 365.25);      // julian year
         7: SetJD(sc.cfgsc.CurJDUT + mult * 365.2421988); // tropical year
@@ -3707,7 +3736,8 @@ begin
     r1.AdjustSize;
     btn.AdjustSize;
     h := r1.Height + btn.Height + 16;
-    w := max(f1.Canvas.TextWidth(rsResetInitial), f1.Canvas.TextWidth(rsResetToLastT)) + 80;
+    w := max(f1.Canvas.TextWidth(rsResetInitial),
+      f1.Canvas.TextWidth(rsResetToLastT)) + 80;
     f1.Height := h;
     f1.Width := w;
     ScaleDPI(f1);
@@ -3970,8 +4000,8 @@ begin
         sc.cfgsc.TrackOn := False;
         Refresh(True, False);
       end
-      else if (((sc.cfgsc.TrackType >= 1) and (sc.cfgsc.TrackType <= 3)) or (sc.cfgsc.TrackType = 6)) and
-        (sc.cfgsc.TrackName <> '') then
+      else if (((sc.cfgsc.TrackType >= 1) and (sc.cfgsc.TrackType <= 3)) or
+        (sc.cfgsc.TrackType = 6)) and (sc.cfgsc.TrackName <> '') then
       begin
         if VerboseMsg then
           WriteTrace('TrackExecute 2');
@@ -3981,7 +4011,8 @@ begin
       else
       begin
         sc.cfgsc.TrackOn := False;
-        UpdateBtn(sc.cfgsc.flipx, sc.cfgsc.flipy, Connect1.Checked, MultiFrame1.ActiveObject);
+        UpdateBtn(sc.cfgsc.flipx, sc.cfgsc.flipy, Connect1.Checked,
+          MultiFrame1.ActiveObject);
       end;
     end;
 end;
@@ -4087,7 +4118,8 @@ begin
   until (ok = msgOK) or (f_search.ModalResult <> mrOk);
 end;
 
-function Tf_main.Find(kind: integer; num: string; def_ra: double = 0; def_de: double = 0): string;
+function Tf_main.Find(kind: integer; num: string; def_ra: double = 0;
+  def_de: double = 0): string;
 var
   ok: boolean;
   ar1, de1, mag: double;
@@ -4281,7 +4313,8 @@ begin
     ConfigCalendar.showmodal;
     if ConfigCalendar.ModalResult = mrOk then
     begin
-      activateconfig(nil, ConfigCalendar.f_config_calendar1.csc, nil, nil, nil, nil, False);
+      activateconfig(nil, ConfigCalendar.f_config_calendar1.csc, nil,
+        nil, nil, nil, False);
     end;
   finally
     ConfigCalendar.Free;
@@ -4522,7 +4555,8 @@ begin
       begin
         activateconfig(ConfigSolsys.f_config_solsys1.cmain,
           ConfigSolsys.f_config_solsys1.csc, ConfigSolsys.f_config_solsys1.ccat,
-          ConfigSolsys.f_config_solsys1.cshr, ConfigSolsys.f_config_solsys1.cplot, nil, False);
+          ConfigSolsys.f_config_solsys1.cshr, ConfigSolsys.f_config_solsys1.cplot,
+          nil, False);
       end;
     end;
   finally
@@ -4591,7 +4625,8 @@ begin
     if ConfigSystem.ModalResult = mrOk then
     begin
       ConfigSystem.f_config_system1.ActivateDBchange;
-      activateconfig(ConfigSystem.f_config_system1.cmain, ConfigSystem.f_config_system1.csc,
+      activateconfig(ConfigSystem.f_config_system1.cmain,
+        ConfigSystem.f_config_system1.csc,
         ConfigSystem.f_config_system1.ccat, ConfigSystem.f_config_system1.cshr,
         ConfigSystem.f_config_system1.cplot, nil, False);
     end;
@@ -4745,7 +4780,8 @@ begin
   SetupObservatoryPage(0);
 end;
 
-procedure Tf_main.SetupObservatoryPage(page: integer; posx: integer = 0; posy: integer = 0);
+procedure Tf_main.SetupObservatoryPage(page: integer; posx: integer = 0;
+  posy: integer = 0);
 begin
   if ConfigObservatory <> nil then
     exit;
@@ -4783,7 +4819,8 @@ begin
     if ConfigObservatory.ModalResult = mrOk then
     begin
       activateconfig(ConfigObservatory.f_config_observatory1.cmain,
-        ConfigObservatory.f_config_observatory1.csc, ConfigObservatory.f_config_observatory1.ccat,
+        ConfigObservatory.f_config_observatory1.csc,
+        ConfigObservatory.f_config_observatory1.ccat,
         ConfigObservatory.f_config_observatory1.cshr,
         ConfigObservatory.f_config_observatory1.cplot, nil, False);
     end;
@@ -4796,7 +4833,8 @@ end;
 procedure Tf_main.ApplyConfigObservatory(Sender: TObject);
 begin
   activateconfig(ConfigObservatory.f_config_observatory1.cmain,
-    ConfigObservatory.f_config_observatory1.csc, ConfigObservatory.f_config_observatory1.ccat,
+    ConfigObservatory.f_config_observatory1.csc,
+    ConfigObservatory.f_config_observatory1.ccat,
     ConfigObservatory.f_config_observatory1.cshr,
     ConfigObservatory.f_config_observatory1.cplot, nil, False);
 end;
@@ -4843,7 +4881,8 @@ begin
       ConfigCatalog.f_config_catalog1.ActivateUserObjects;
       activateconfig(ConfigCatalog.f_config_catalog1.cmain,
         ConfigCatalog.f_config_catalog1.csc, ConfigCatalog.f_config_catalog1.ccat,
-        ConfigCatalog.f_config_catalog1.cshr, ConfigCatalog.f_config_catalog1.cplot, nil, False);
+        ConfigCatalog.f_config_catalog1.cshr, ConfigCatalog.f_config_catalog1.cplot,
+        nil, False);
     end;
   finally
     ConfigCatalog.Free;
@@ -4857,7 +4896,8 @@ begin
   ConfigCatalog.f_config_catalog1.ActivateUserObjects;
   activateconfig(ConfigCatalog.f_config_catalog1.cmain,
     ConfigCatalog.f_config_catalog1.csc, ConfigCatalog.f_config_catalog1.ccat,
-    ConfigCatalog.f_config_catalog1.cshr, ConfigCatalog.f_config_catalog1.cplot, nil, False);
+    ConfigCatalog.f_config_catalog1.cshr, ConfigCatalog.f_config_catalog1.cplot,
+    nil, False);
 end;
 
 procedure Tf_main.ShowUobjExecute(Sender: TObject);
@@ -4944,7 +4984,8 @@ begin
   begin
     activateconfig(ConfigDisplay.f_config_display1.cmain,
       ConfigDisplay.f_config_display1.csc, ConfigDisplay.f_config_display1.ccat,
-      ConfigDisplay.f_config_display1.cshr, ConfigDisplay.f_config_display1.cplot, nil, False);
+      ConfigDisplay.f_config_display1.cshr, ConfigDisplay.f_config_display1.cplot,
+      nil, False);
   end;
   ConfigDisplay.Free;
   ConfigDisplay := nil;
@@ -4954,7 +4995,8 @@ procedure Tf_main.ApplyConfigDisplay(Sender: TObject);
 begin
   activateconfig(ConfigDisplay.f_config_display1.cmain,
     ConfigDisplay.f_config_display1.csc, ConfigDisplay.f_config_display1.ccat,
-    ConfigDisplay.f_config_display1.cshr, ConfigDisplay.f_config_display1.cplot, nil, False);
+    ConfigDisplay.f_config_display1.cshr, ConfigDisplay.f_config_display1.cplot,
+    nil, False);
 end;
 
 function Tf_main.PrepareAsteroid(jd1, jd2, step: double; msg: TStrings): boolean;
@@ -5081,8 +5123,8 @@ begin
 end;
 
 procedure Tf_main.activateconfig(cmain: Tconf_main; csc: Tconf_skychart;
-  ccat: Tconf_catalog; cshr: Tconf_shared; cplot: Tconf_plot; cdss: Tconf_dss;
-  applyall: boolean);
+  ccat: Tconf_catalog; cshr: Tconf_shared; cplot: Tconf_plot;
+  cdss: Tconf_dss; applyall: boolean);
 var
   i: integer;
   dbchange, themechange, langchange, starchange, showast: boolean;
@@ -5135,12 +5177,9 @@ begin
     begin
       if ccat.GCatLst[i].Actif then
       begin
-        if not catalog.GetInfo(ccat.GCatLst[i].path,
-          ccat.GCatLst[i].shortname,
-          ccat.GCatLst[i].magmax,
-          ccat.GCatLst[i].cattype,
-          ccat.GCatLst[i].version,
-          ccat.GCatLst[i].Name) then
+        if not catalog.GetInfo(ccat.GCatLst[i].path, ccat.GCatLst[i].shortname,
+          ccat.GCatLst[i].magmax, ccat.GCatLst[i].cattype,
+          ccat.GCatLst[i].version, ccat.GCatLst[i].Name) then
           ccat.GCatLst[i].Actif := False;
       end;
     end;
@@ -5198,7 +5237,8 @@ begin
             'BKG', sc.Fits.Center_RA, sc.Fits.Center_DE, sc.Fits.Img_Width,
             sc.Fits.Img_Height, sc.Fits.Rotation) then
             sc.Fits.InsertDB(sc.cfgsc.BackgroundImage, 'OTHER',
-              'BKG', sc.Fits.Center_RA + 0.00001, sc.Fits.Center_DE + 0.00001, sc.Fits.Img_Width,
+              'BKG', sc.Fits.Center_RA + 0.00001, sc.Fits.Center_DE +
+              0.00001, sc.Fits.Img_Width,
               sc.Fits.Img_Height, sc.Fits.Rotation);
           sc.cfgsc.TrackOn := True;
           sc.cfgsc.TrackType := 5;
@@ -5285,14 +5325,16 @@ procedure Tf_main.ViewToolsBar(ForceVisible: boolean);
 begin
   MenuViewMainBar.Checked := (VisibleControlCount(ToolBarMain) > 0) and
     (ForceVisible or MenuViewMainBar.Checked);
-  MenuViewObjectBar.Checked := (VisibleControlCount(ToolBarObj) > 0) and
-    (ForceVisible or MenuViewObjectBar.Checked);
+  MenuViewObjectBar.Checked :=
+    (VisibleControlCount(ToolBarObj) > 0) and (ForceVisible or
+    MenuViewObjectBar.Checked);
   MenuViewLeftBar.Checked := (VisibleControlCount(ToolBarLeft) > 0) and
     (ForceVisible or MenuViewLeftBar.Checked);
   MenuViewRightBar.Checked := (VisibleControlCount(ToolBarRight) > 0) and
     (ForceVisible or MenuViewRightBar.Checked);
-  MenuViewToolsBar.Checked := MenuViewMainBar.Checked and MenuViewObjectBar.Checked and
-    MenuViewLeftBar.Checked and MenuViewRightBar.Checked and MenuViewStatusBar.Checked;
+  MenuViewToolsBar.Checked := MenuViewMainBar.Checked and
+    MenuViewObjectBar.Checked and MenuViewLeftBar.Checked and
+    MenuViewRightBar.Checked and MenuViewStatusBar.Checked;
   ToolBarMain.Visible := MenuViewMainBar.Checked;
   ToolBarObj.Visible := MenuViewObjectBar.Checked;
   PanelLeft.Visible := MenuViewLeftBar.Checked;
@@ -5306,8 +5348,8 @@ begin
   MenuViewToolsBar.Checked := not MenuViewToolsBar.Checked;
   MenuViewMainBar.Checked := MenuViewToolsBar.Checked and
     (VisibleControlCount(ToolBarMain) > 0);
-  MenuViewObjectBar.Checked := MenuViewToolsBar.Checked and
-    (VisibleControlCount(ToolBarObj) > 0);
+  MenuViewObjectBar.Checked :=
+    MenuViewToolsBar.Checked and (VisibleControlCount(ToolBarObj) > 0);
   MenuViewLeftBar.Checked := MenuViewToolsBar.Checked and
     (VisibleControlCount(ToolBarLeft) > 0);
   MenuViewRightBar.Checked := MenuViewToolsBar.Checked and
@@ -5360,7 +5402,8 @@ begin
   if not MenuViewMainBar.Checked then
     MenuViewToolsBar.Checked := False;
   if MenuViewMainBar.Checked and MenuViewObjectBar.Checked and
-    MenuViewLeftBar.Checked and MenuViewRightBar.Checked and MenuViewStatusBar.Checked then
+    MenuViewLeftBar.Checked and MenuViewRightBar.Checked and
+    MenuViewStatusBar.Checked then
     MenuViewToolsBar.Checked := True;
   ViewTopPanel;
   FormResize(Sender);
@@ -5378,7 +5421,8 @@ begin
   if not MenuViewObjectBar.Checked then
     MenuViewToolsBar.Checked := False;
   if MenuViewMainBar.Checked and MenuViewObjectBar.Checked and
-    MenuViewLeftBar.Checked and MenuViewRightBar.Checked and MenuViewStatusBar.Checked then
+    MenuViewLeftBar.Checked and MenuViewRightBar.Checked and
+    MenuViewStatusBar.Checked then
     MenuViewToolsBar.Checked := True;
   ViewTopPanel;
   FormResize(Sender);
@@ -5396,7 +5440,8 @@ begin
   if not MenuViewLeftBar.Checked then
     MenuViewToolsBar.Checked := False;
   if MenuViewMainBar.Checked and MenuViewObjectBar.Checked and
-    MenuViewLeftBar.Checked and MenuViewRightBar.Checked and MenuViewStatusBar.Checked then
+    MenuViewLeftBar.Checked and MenuViewRightBar.Checked and
+    MenuViewStatusBar.Checked then
     MenuViewToolsBar.Checked := True;
   FormResize(Sender);
 end;
@@ -5413,7 +5458,8 @@ begin
   if not MenuViewRightBar.Checked then
     MenuViewToolsBar.Checked := False;
   if MenuViewMainBar.Checked and MenuViewObjectBar.Checked and
-    MenuViewLeftBar.Checked and MenuViewRightBar.Checked and MenuViewStatusBar.Checked then
+    MenuViewLeftBar.Checked and MenuViewRightBar.Checked and
+    MenuViewStatusBar.Checked then
     MenuViewToolsBar.Checked := True;
   FormResize(Sender);
 end;
@@ -5425,7 +5471,8 @@ begin
   if not MenuViewStatusBar.Checked then
     MenuViewToolsBar.Checked := False;
   if MenuViewMainBar.Checked and MenuViewObjectBar.Checked and
-    MenuViewLeftBar.Checked and MenuViewRightBar.Checked and MenuViewStatusBar.Checked then
+    MenuViewLeftBar.Checked and MenuViewRightBar.Checked and
+    MenuViewStatusBar.Checked then
     MenuViewToolsBar.Checked := True;
   if PanelBottom.Visible then
     InitFonts;
@@ -5479,8 +5526,8 @@ begin
   P0L1.Align := alClient;
 end;
 
-procedure Tf_main.SetLPanel1(txt1: string;
-  origin: string = ''; sendmsg: boolean = False; Sender: TObject = nil; txt2: string = '');
+procedure Tf_main.SetLPanel1(txt1: string; origin: string = '';
+  sendmsg: boolean = False; Sender: TObject = nil; txt2: string = '');
 var
   txt, buf, buf1, buf2, k: string;
   p: integer;
@@ -5512,7 +5559,8 @@ begin
     txt := txt + catalog.LongLabel(buf1) + blank + blank;            // Magnitude
     Delete(buf, 1, p);
     p := pos(tab, buf);
-    buf2 := trim(copy(buf, 1, p - 1));                             // save Alt name for the end
+    buf2 := trim(copy(buf, 1, p - 1));
+    // save Alt name for the end
     Delete(buf, 1, p);
     while buf > '' do
     begin                                    // Search for size
@@ -5593,7 +5641,8 @@ begin
   if MultiFrame1.ActiveObject = Sender then
   begin
     if cfgm.ShowTitlePos then
-      Caption := basecaption + ' - ' + MultiFrame1.ActiveChild.Caption + blank + blank + txt
+      Caption := basecaption + ' - ' + MultiFrame1.ActiveChild.Caption +
+        blank + blank + txt
     else
       Caption := basecaption + ' - ' + MultiFrame1.ActiveChild.Caption;
     for i := 0 to numscript - 1 do
@@ -5605,8 +5654,8 @@ procedure Tf_main.FormResize(Sender: TObject);
 begin
   SaveState := WindowState;
   if Divider_ToolBarMain_end <> nil then
-    quicksearch.Width := min(300, max(90,
-      (quicksearch.Width + ChildControl.left - Divider_ToolBarMain_end.Left -
+    quicksearch.Width := min(300, max(90, (quicksearch.Width +
+      ChildControl.left - Divider_ToolBarMain_end.Left -
       Divider_ToolBarMain_end.Width)));
 end;
 
@@ -5791,7 +5840,8 @@ begin
   def_cfgplot.magsize := 4;
   def_cfgplot.saturation := 255;
   cfgm.Constellationpath := 'data' + Pathdelim + 'constellation';
-  cfgm.ConstLfile := 'data' + Pathdelim + 'constellation' + Pathdelim + 'DefaultConstL.cln';
+  cfgm.ConstLfile := 'data' + Pathdelim + 'constellation' + Pathdelim +
+    'DefaultConstL.cln';
   cfgm.ConstBfile := 'data' + Pathdelim + 'constellation' + Pathdelim + 'constb.cby';
   cfgm.EarthMapFile := 'data' + Pathdelim + 'earthmap' + Pathdelim + 'earthmap1k.jpg';
   cfgm.PlanetDir := 'data' + Pathdelim + 'planet';
@@ -5857,7 +5907,8 @@ begin
   else
     def_cfgsc.WindowRatio := 1;
   def_cfgsc.acentre := 0;
-  def_cfgsc.hcentre := MinValue([def_cfgsc.fov, def_cfgsc.fov / def_cfgsc.windowratio]) / 2;
+  def_cfgsc.hcentre := MinValue([def_cfgsc.fov, def_cfgsc.fov /
+    def_cfgsc.windowratio]) / 2;
   def_cfgsc.FlipX := 1;
   def_cfgsc.FlipY := 1;
   def_cfgsc.BxGlb := 1;
@@ -6366,8 +6417,8 @@ begin
           f_main.SetBounds(l, t, w, h);
         end;
         for i := 0 to MaxField do
-          catalog.cfgshr.FieldNum[i] := ReadFloat(section, 'FieldNum' + IntToStr(
-            i), catalog.cfgshr.FieldNum[i]);
+          catalog.cfgshr.FieldNum[i] :=
+            ReadFloat(section, 'FieldNum' + IntToStr(i), catalog.cfgshr.FieldNum[i]);
       except
         ShowError('Error reading ' + filename + ' chart main');
       end;
@@ -6375,41 +6426,52 @@ begin
         section := 'font';
         for i := 1 to numfont do
         begin
-          cplot.FontName[i] := ReadString(section, 'FontName' + IntToStr(i), cplot.FontName[i]);
-          cplot.FontSize[i] := ReadInteger(section, 'FontSize' + IntToStr(i), cplot.FontSize[i]);
-          cplot.FontBold[i] := ReadBool(section, 'FontBold' + IntToStr(i), cplot.FontBold[i]);
-          cplot.FontItalic[i] := ReadBool(section, 'FontItalic' + IntToStr(i), cplot.FontItalic[i]);
+          cplot.FontName[i] :=
+            ReadString(section, 'FontName' + IntToStr(i), cplot.FontName[i]);
+          cplot.FontSize[i] :=
+            ReadInteger(section, 'FontSize' + IntToStr(i), cplot.FontSize[i]);
+          cplot.FontBold[i] :=
+            ReadBool(section, 'FontBold' + IntToStr(i), cplot.FontBold[i]);
+          cplot.FontItalic[i] :=
+            ReadBool(section, 'FontItalic' + IntToStr(i), cplot.FontItalic[i]);
         end;
         for i := 1 to numlabtype do
         begin
-          cplot.LabelColor[i] := ReadInteger(section, 'LabelColor' + IntToStr(
-            i), cplot.LabelColor[i]);
-          cplot.LabelSize[i] := ReadInteger(section, 'LabelSize' + IntToStr(i), cplot.LabelSize[i]);
+          cplot.LabelColor[i] :=
+            ReadInteger(section, 'LabelColor' + IntToStr(i), cplot.LabelColor[i]);
+          cplot.LabelSize[i] :=
+            ReadInteger(section, 'LabelSize' + IntToStr(i), cplot.LabelSize[i]);
         end;
       except
         ShowError('Error reading ' + filename + ' font');
       end;
       try
         section := 'filter';
-        catalog.cfgshr.StarFilter := ReadBool(section, 'StarFilter', catalog.cfgshr.StarFilter);
+        catalog.cfgshr.StarFilter :=
+          ReadBool(section, 'StarFilter', catalog.cfgshr.StarFilter);
         catalog.cfgshr.AutoStarFilter :=
           ReadBool(section, 'AutoStarFilter', catalog.cfgshr.AutoStarFilter);
         catalog.cfgshr.AutoStarFilterMag :=
           ReadFloat(section, 'AutoStarFilterMag', catalog.cfgshr.AutoStarFilterMag);
-        catalog.cfgshr.NebFilter := ReadBool(section, 'NebFilter', catalog.cfgshr.NebFilter);
+        catalog.cfgshr.NebFilter :=
+          ReadBool(section, 'NebFilter', catalog.cfgshr.NebFilter);
         catalog.cfgshr.BigNebFilter :=
           ReadBool(section, 'BigNebFilter', catalog.cfgshr.BigNebFilter);
-        catalog.cfgshr.BigNebLimit := ReadFloat(section, 'BigNebLimit', catalog.cfgshr.BigNebLimit);
+        catalog.cfgshr.BigNebLimit :=
+          ReadFloat(section, 'BigNebLimit', catalog.cfgshr.BigNebLimit);
         catalog.cfgshr.NoFilterMessier :=
           ReadBool(section, 'NoFilterMessier', catalog.cfgshr.NoFilterMessier);
         for i := 1 to maxfield do
         begin
           catalog.cfgshr.StarMagFilter[i] :=
-            ReadFloat(section, 'StarMagFilter' + IntToStr(i), catalog.cfgshr.StarMagFilter[i]);
+            ReadFloat(section, 'StarMagFilter' + IntToStr(i),
+            catalog.cfgshr.StarMagFilter[i]);
           catalog.cfgshr.NebMagFilter[i] :=
-            ReadFloat(section, 'NebMagFilter' + IntToStr(i), catalog.cfgshr.NebMagFilter[i]);
+            ReadFloat(section, 'NebMagFilter' + IntToStr(i),
+            catalog.cfgshr.NebMagFilter[i]);
           catalog.cfgshr.NebSizeFilter[i] :=
-            ReadFloat(section, 'NebSizeFilter' + IntToStr(i), catalog.cfgshr.NebSizeFilter[i]);
+            ReadFloat(section, 'NebSizeFilter' + IntToStr(i),
+            catalog.cfgshr.NebSizeFilter[i]);
         end;
       except
         ShowError('Error reading ' + filename + ' filter');
@@ -6425,21 +6487,25 @@ begin
           begin
             Inc(j);
             catalog.cfgcat.GCatLst[j].shortname :=
-              Readstring(section, 'CatName' + IntToStr(i), catalog.cfgcat.GCatLst[i].shortname);
+              Readstring(section, 'CatName' + IntToStr(i),
+              catalog.cfgcat.GCatLst[i].shortname);
             catalog.cfgcat.GCatLst[j].Name :=
-              Readstring(section, 'CatLongName' + IntToStr(i), catalog.cfgcat.GCatLst[i].Name);
+              Readstring(section, 'CatLongName' + IntToStr(i),
+              catalog.cfgcat.GCatLst[i].Name);
             catalog.cfgcat.GCatLst[j].path :=
-              ExtractSubPath(ConfigAppdir, Readstring(section, 'CatPath' + IntToStr(
-              i), catalog.cfgcat.GCatLst[i].path));
+              ExtractSubPath(ConfigAppdir, Readstring(section,
+              'CatPath' + IntToStr(i), catalog.cfgcat.GCatLst[i].path));
             catalog.cfgcat.GCatLst[j].min :=
               ReadFloat(section, 'CatMin' + IntToStr(i), catalog.cfgcat.GCatLst[i].min);
             catalog.cfgcat.GCatLst[j].max :=
               ReadFloat(section, 'CatMax' + IntToStr(i), catalog.cfgcat.GCatLst[i].max);
             catalog.cfgcat.GCatLst[j].Actif :=
-              ReadBool(section, 'CatActif' + IntToStr(i), catalog.cfgcat.GCatLst[i].Actif);
+              ReadBool(section, 'CatActif' + IntToStr(i),
+              catalog.cfgcat.GCatLst[i].Actif);
             catalog.cfgcat.GCatLst[j].ForceColor :=
               ReadBool(section, 'CatForceColor' + IntToStr(i), False);
-            catalog.cfgcat.GCatLst[j].Col := ReadInteger(section, 'CatColor' + IntToStr(i), 0);
+            catalog.cfgcat.GCatLst[j].Col :=
+              ReadInteger(section, 'CatColor' + IntToStr(i), 0);
             catalog.cfgcat.GCatLst[j].magmax := 0;
             catalog.cfgcat.GCatLst[j].cattype := 0;
             if catalog.cfgcat.GCatLst[j].Actif then
@@ -6461,40 +6527,56 @@ begin
           for i := 0 to n - 1 do
           begin
             catalog.cfgcat.UserObjects[i].active :=
-              ReadBool(section, 'UObjActive' + IntToStr(i), catalog.cfgcat.UserObjects[i].active);
+              ReadBool(section, 'UObjActive' + IntToStr(i),
+              catalog.cfgcat.UserObjects[i].active);
             catalog.cfgcat.UserObjects[i].otype :=
-              ReadInteger(section, 'UObjType' + IntToStr(i), catalog.cfgcat.UserObjects[i].otype);
+              ReadInteger(section, 'UObjType' + IntToStr(i),
+              catalog.cfgcat.UserObjects[i].otype);
             catalog.cfgcat.UserObjects[i].oname :=
-              ReadString(section, 'UObjName' + IntToStr(i), catalog.cfgcat.UserObjects[i].oname);
+              ReadString(section, 'UObjName' + IntToStr(i),
+              catalog.cfgcat.UserObjects[i].oname);
             catalog.cfgcat.UserObjects[i].ra :=
-              ReadFloat(section, 'UObjRA' + IntToStr(i), catalog.cfgcat.UserObjects[i].ra);
+              ReadFloat(section, 'UObjRA' + IntToStr(i),
+              catalog.cfgcat.UserObjects[i].ra);
             catalog.cfgcat.UserObjects[i].Dec :=
-              ReadFloat(section, 'UObjDEC' + IntToStr(i), catalog.cfgcat.UserObjects[i].Dec);
+              ReadFloat(section, 'UObjDEC' + IntToStr(i),
+              catalog.cfgcat.UserObjects[i].Dec);
             catalog.cfgcat.UserObjects[i].mag :=
-              ReadFloat(section, 'UObjMag' + IntToStr(i), catalog.cfgcat.UserObjects[i].mag);
+              ReadFloat(section, 'UObjMag' + IntToStr(i),
+              catalog.cfgcat.UserObjects[i].mag);
             catalog.cfgcat.UserObjects[i].size :=
-              ReadFloat(section, 'UObjSize' + IntToStr(i), catalog.cfgcat.UserObjects[i].size);
+              ReadFloat(section, 'UObjSize' + IntToStr(i),
+              catalog.cfgcat.UserObjects[i].size);
             catalog.cfgcat.UserObjects[i].color :=
-              ReadInteger(section, 'UObjColor' + IntToStr(i), catalog.cfgcat.UserObjects[i].color);
+              ReadInteger(section, 'UObjColor' + IntToStr(i),
+              catalog.cfgcat.UserObjects[i].color);
             catalog.cfgcat.UserObjects[i].comment :=
-              ReadString(section, 'UObjComment' + IntToStr(i), catalog.cfgcat.UserObjects[i].comment);
+              ReadString(section, 'UObjComment' + IntToStr(i),
+              catalog.cfgcat.UserObjects[i].comment);
           end;
-          catalog.cfgcat.StarmagMax := ReadFloat(section, 'StarmagMax', catalog.cfgcat.StarmagMax);
-          catalog.cfgcat.NebmagMax := ReadFloat(section, 'NebmagMax', catalog.cfgcat.NebmagMax);
-          catalog.cfgcat.NebSizeMin := ReadFloat(section, 'NebSizeMin', catalog.cfgcat.NebSizeMin);
+          catalog.cfgcat.StarmagMax :=
+            ReadFloat(section, 'StarmagMax', catalog.cfgcat.StarmagMax);
+          catalog.cfgcat.NebmagMax :=
+            ReadFloat(section, 'NebmagMax', catalog.cfgcat.NebmagMax);
+          catalog.cfgcat.NebSizeMin :=
+            ReadFloat(section, 'NebSizeMin', catalog.cfgcat.NebSizeMin);
           catalog.cfgcat.UseUSNOBrightStars :=
             ReadBool(section, 'UseUSNOBrightStars', catalog.cfgcat.UseUSNOBrightStars);
-          catalog.cfgcat.UseGSVSIr := ReadBool(section, 'UseGSVSIr', catalog.cfgcat.UseGSVSIr);
+          catalog.cfgcat.UseGSVSIr :=
+            ReadBool(section, 'UseGSVSIr', catalog.cfgcat.UseGSVSIr);
           for i := 1 to maxstarcatalog do
           begin
             catalog.cfgcat.starcatdef[i] :=
-              ReadBool(section, 'starcatdef' + IntToStr(i), catalog.cfgcat.starcatdef[i]);
+              ReadBool(section, 'starcatdef' + IntToStr(i),
+              catalog.cfgcat.starcatdef[i]);
             catalog.cfgcat.starcaton[i] :=
               ReadBool(section, 'starcaton' + IntToStr(i), catalog.cfgcat.starcaton[i]);
             catalog.cfgcat.starcatfield[i, 1] :=
-              ReadInteger(section, 'starcatfield1' + IntToStr(i), catalog.cfgcat.starcatfield[i, 1]);
+              ReadInteger(section, 'starcatfield1' + IntToStr(i),
+              catalog.cfgcat.starcatfield[i, 1]);
             catalog.cfgcat.starcatfield[i, 2] :=
-              ReadInteger(section, 'starcatfield2' + IntToStr(i), catalog.cfgcat.starcatfield[i, 2]);
+              ReadInteger(section, 'starcatfield2' + IntToStr(i),
+              catalog.cfgcat.starcatfield[i, 2]);
           end;
           if pos('bsc5', catalog.cfgcat.starcatpath[DefStar - BaseStar]) > 0 then
           begin    // Upgrade to new default catalog
@@ -6503,24 +6585,32 @@ begin
           for i := 1 to maxvarstarcatalog do
           begin
             catalog.cfgcat.varstarcatdef[i] :=
-              ReadBool(section, 'varstarcatdef' + IntToStr(i), catalog.cfgcat.varstarcatdef[i]);
+              ReadBool(section, 'varstarcatdef' + IntToStr(i),
+              catalog.cfgcat.varstarcatdef[i]);
             catalog.cfgcat.varstarcaton[i] :=
-              ReadBool(section, 'varstarcaton' + IntToStr(i), catalog.cfgcat.varstarcaton[i]);
+              ReadBool(section, 'varstarcaton' + IntToStr(i),
+              catalog.cfgcat.varstarcaton[i]);
             catalog.cfgcat.varstarcatfield[i, 1] :=
-              ReadInteger(section, 'varstarcatfield1' + IntToStr(i), catalog.cfgcat.varstarcatfield[i, 1]);
+              ReadInteger(section, 'varstarcatfield1' + IntToStr(i),
+              catalog.cfgcat.varstarcatfield[i, 1]);
             catalog.cfgcat.varstarcatfield[i, 2] :=
-              ReadInteger(section, 'varstarcatfield2' + IntToStr(i), catalog.cfgcat.varstarcatfield[i, 2]);
+              ReadInteger(section, 'varstarcatfield2' + IntToStr(i),
+              catalog.cfgcat.varstarcatfield[i, 2]);
           end;
           for i := 1 to maxdblstarcatalog do
           begin
             catalog.cfgcat.dblstarcatdef[i] :=
-              ReadBool(section, 'dblstarcatdef' + IntToStr(i), catalog.cfgcat.dblstarcatdef[i]);
+              ReadBool(section, 'dblstarcatdef' + IntToStr(i),
+              catalog.cfgcat.dblstarcatdef[i]);
             catalog.cfgcat.dblstarcaton[i] :=
-              ReadBool(section, 'dblstarcaton' + IntToStr(i), catalog.cfgcat.dblstarcaton[i]);
+              ReadBool(section, 'dblstarcaton' + IntToStr(i),
+              catalog.cfgcat.dblstarcaton[i]);
             catalog.cfgcat.dblstarcatfield[i, 1] :=
-              ReadInteger(section, 'dblstarcatfield1' + IntToStr(i), catalog.cfgcat.dblstarcatfield[i, 1]);
+              ReadInteger(section, 'dblstarcatfield1' + IntToStr(i),
+              catalog.cfgcat.dblstarcatfield[i, 1]);
             catalog.cfgcat.dblstarcatfield[i, 2] :=
-              ReadInteger(section, 'dblstarcatfield2' + IntToStr(i), catalog.cfgcat.dblstarcatfield[i, 2]);
+              ReadInteger(section, 'dblstarcatfield2' + IntToStr(i),
+              catalog.cfgcat.dblstarcatfield[i, 2]);
           end;
           for i := 1 to maxnebcatalog do
           begin
@@ -6529,9 +6619,11 @@ begin
             catalog.cfgcat.nebcaton[i] :=
               ReadBool(section, 'nebcaton' + IntToStr(i), catalog.cfgcat.nebcaton[i]);
             catalog.cfgcat.nebcatfield[i, 1] :=
-              ReadInteger(section, 'nebcatfield1' + IntToStr(i), catalog.cfgcat.nebcatfield[i, 1]);
+              ReadInteger(section, 'nebcatfield1' + IntToStr(i),
+              catalog.cfgcat.nebcatfield[i, 1]);
             catalog.cfgcat.nebcatfield[i, 2] :=
-              ReadInteger(section, 'nebcatfield2' + IntToStr(i), catalog.cfgcat.nebcatfield[i, 2]);
+              ReadInteger(section, 'nebcatfield2' + IntToStr(i),
+              catalog.cfgcat.nebcatfield[i, 2]);
           end;
         except
           ShowError('Error reading ' + filename + ' chart catalog');
@@ -6542,7 +6634,8 @@ begin
         cplot.AntiAlias := ReadBool(section, 'AntiAlias', cplot.AntiAlias);
         cplot.starplot := ReadInteger(section, 'starplot', cplot.starplot);
         cplot.nebplot := ReadInteger(section, 'nebplot', cplot.nebplot);
-        cplot.TransparentPlanet := ReadBool(section, 'TransparentPlanet', cplot.TransparentPlanet);
+        cplot.TransparentPlanet :=
+          ReadBool(section, 'TransparentPlanet', cplot.TransparentPlanet);
         cplot.plaplot := ReadInteger(section, 'plaplot', cplot.plaplot);
         cplot.Nebgray := ReadInteger(section, 'Nebgray', cplot.Nebgray);
         cplot.NebBright := ReadInteger(section, 'NebBright', cplot.NebBright);
@@ -6558,42 +6651,60 @@ begin
         cplot.magsize := max(cplot.magsize, 1.0);
         cplot.magsize := min(cplot.magsize, 10.0);
         cplot.AutoSkycolor := ReadBool(section, 'AutoSkycolor', cplot.AutoSkycolor);
-        cplot.DSOColorFillAst := ReadBool(section, 'DSOColorFillAst', cplot.DSOColorFillAst);
-        cplot.DSOColorFillOCl := ReadBool(section, 'DSOColorFillOCl', cplot.DSOColorFillOCl);
-        cplot.DSOColorFillGCl := ReadBool(section, 'DSOColorFillGCl', cplot.DSOColorFillGCl);
-        cplot.DSOColorFillPNe := ReadBool(section, 'DSOColorFillPNe', cplot.DSOColorFillPNe);
-        cplot.DSOColorFillDN := ReadBool(section, 'DSOColorFillDN', cplot.DSOColorFillDN);
-        cplot.DSOColorFillEN := ReadBool(section, 'DSOColorFillEN', cplot.DSOColorFillEN);
-        cplot.DSOColorFillRN := ReadBool(section, 'DSOColorFillRN', cplot.DSOColorFillRN);
-        cplot.DSOColorFillSN := ReadBool(section, 'DSOColorFillSN', cplot.DSOColorFillSN);
-        cplot.DSOColorFillGxy := ReadBool(section, 'DSOColorFillGxy', cplot.DSOColorFillGxy);
-        cplot.DSOColorFillGxyCl := ReadBool(section, 'DSOColorFillGxyCl', cplot.DSOColorFillGxyCl);
+        cplot.DSOColorFillAst :=
+          ReadBool(section, 'DSOColorFillAst', cplot.DSOColorFillAst);
+        cplot.DSOColorFillOCl :=
+          ReadBool(section, 'DSOColorFillOCl', cplot.DSOColorFillOCl);
+        cplot.DSOColorFillGCl :=
+          ReadBool(section, 'DSOColorFillGCl', cplot.DSOColorFillGCl);
+        cplot.DSOColorFillPNe :=
+          ReadBool(section, 'DSOColorFillPNe', cplot.DSOColorFillPNe);
+        cplot.DSOColorFillDN :=
+          ReadBool(section, 'DSOColorFillDN', cplot.DSOColorFillDN);
+        cplot.DSOColorFillEN :=
+          ReadBool(section, 'DSOColorFillEN', cplot.DSOColorFillEN);
+        cplot.DSOColorFillRN :=
+          ReadBool(section, 'DSOColorFillRN', cplot.DSOColorFillRN);
+        cplot.DSOColorFillSN :=
+          ReadBool(section, 'DSOColorFillSN', cplot.DSOColorFillSN);
+        cplot.DSOColorFillGxy :=
+          ReadBool(section, 'DSOColorFillGxy', cplot.DSOColorFillGxy);
+        cplot.DSOColorFillGxyCl :=
+          ReadBool(section, 'DSOColorFillGxyCl', cplot.DSOColorFillGxyCl);
         cplot.DSOColorFillQ := ReadBool(section, 'DSOColorFillQ', cplot.DSOColorFillQ);
-        cplot.DSOColorFillGL := ReadBool(section, 'DSOColorFillGL', cplot.DSOColorFillGL);
-        cplot.DSOColorFillNE := ReadBool(section, 'DSOColorFillNE', cplot.DSOColorFillNE);
+        cplot.DSOColorFillGL :=
+          ReadBool(section, 'DSOColorFillGL', cplot.DSOColorFillGL);
+        cplot.DSOColorFillNE :=
+          ReadBool(section, 'DSOColorFillNE', cplot.DSOColorFillNE);
         for i := 0 to maxcolor do
           cplot.color[i] := ReadInteger(section, 'color' + IntToStr(i), cplot.color[i]);
         for i := 0 to 7 do
-          cplot.skycolor[i] := ReadInteger(section, 'skycolor' + IntToStr(i), cplot.skycolor[i]);
+          cplot.skycolor[i] :=
+            ReadInteger(section, 'skycolor' + IntToStr(i), cplot.skycolor[i]);
         cplot.bgColor := ReadInteger(section, 'bgColor', cplot.bgColor);
       except
         ShowError('Error reading ' + filename + ' display');
       end;
       try
         section := 'grid';
-        catalog.cfgshr.ShowCRose := ReadBool(section, 'ShowCRose', catalog.cfgshr.ShowCRose);
+        catalog.cfgshr.ShowCRose :=
+          ReadBool(section, 'ShowCRose', catalog.cfgshr.ShowCRose);
         catalog.cfgshr.SimplePointer :=
           ReadBool(section, 'SimplePointer', catalog.cfgshr.SimplePointer);
-        catalog.cfgshr.CRoseSz := ReadInteger(section, 'CRoseSz', catalog.cfgshr.CRoseSz);
+        catalog.cfgshr.CRoseSz :=
+          ReadInteger(section, 'CRoseSz', catalog.cfgshr.CRoseSz);
         for i := 0 to maxfield do
           catalog.cfgshr.HourGridSpacing[i] :=
-            ReadFloat(section, 'HourGridSpacing' + IntToStr(i), catalog.cfgshr.HourGridSpacing[i]);
+            ReadFloat(section, 'HourGridSpacing' + IntToStr(i),
+            catalog.cfgshr.HourGridSpacing[i]);
         for i := 0 to maxfield do
         begin
           catalog.cfgshr.DegreeGridSpacing[i] :=
-            ReadFloat(section, 'DegreeGridSpacing' + IntToStr(i), catalog.cfgshr.DegreeGridSpacing[i]);
+            ReadFloat(section, 'DegreeGridSpacing' + IntToStr(i),
+            catalog.cfgshr.DegreeGridSpacing[i]);
           if catalog.cfgshr.DegreeGridSpacing[i] > 1000 then
-            catalog.cfgshr.DegreeGridSpacing[i] := catalog.cfgshr.DegreeGridSpacing[i] - 1000;
+            catalog.cfgshr.DegreeGridSpacing[i] :=
+              catalog.cfgshr.DegreeGridSpacing[i] - 1000;
         end;
       except
         ShowError('Error reading ' + filename + ' grid');
@@ -6616,31 +6727,42 @@ begin
         SetLength(csc.circleok, csc.ncircle + 1);
         SetLength(csc.circlelbl, csc.ncircle + 1);
         for i := 1 to csc.ncircle do
-          csc.circle[i, 1] := ReadFloat(section, 'Circle' + IntToStr(i), csc.circle[i, 1]);
+          csc.circle[i, 1] := ReadFloat(section, 'Circle' + IntToStr(i),
+            csc.circle[i, 1]);
         for i := 1 to csc.ncircle do
-          csc.circle[i, 2] := ReadFloat(section, 'CircleR' + IntToStr(i), csc.circle[i, 2]);
+          csc.circle[i, 2] := ReadFloat(section, 'CircleR' + IntToStr(i),
+            csc.circle[i, 2]);
         for i := 1 to csc.ncircle do
-          csc.circle[i, 3] := ReadFloat(section, 'CircleOffset' + IntToStr(i), csc.circle[i, 3]);
+          csc.circle[i, 3] := ReadFloat(section, 'CircleOffset' +
+            IntToStr(i), csc.circle[i, 3]);
         for i := 1 to csc.ncircle do
-          csc.circleok[i] := ReadBool(section, 'ShowCircle' + IntToStr(i), csc.circleok[i]);
+          csc.circleok[i] := ReadBool(section, 'ShowCircle' +
+            IntToStr(i), csc.circleok[i]);
         for i := 1 to csc.ncircle do
-          csc.circlelbl[i] := ReadString(section, 'CircleLbl' + IntToStr(i), csc.circlelbl[i]);
+          csc.circlelbl[i] := ReadString(section, 'CircleLbl' +
+            IntToStr(i), csc.circlelbl[i]);
         csc.nrectangle := ReadInteger(section, 'nrectangle', csc.nrectangle);
         SetLength(csc.rectangle, csc.nrectangle + 1);
         SetLength(csc.rectangleok, csc.nrectangle + 1);
         SetLength(csc.rectanglelbl, csc.nrectangle + 1);
         for i := 1 to csc.nrectangle do
-          csc.rectangle[i, 1] := ReadFloat(section, 'RectangleW' + IntToStr(i), csc.rectangle[i, 1]);
+          csc.rectangle[i, 1] :=
+            ReadFloat(section, 'RectangleW' + IntToStr(i), csc.rectangle[i, 1]);
         for i := 1 to csc.nrectangle do
-          csc.rectangle[i, 2] := ReadFloat(section, 'RectangleH' + IntToStr(i), csc.rectangle[i, 2]);
+          csc.rectangle[i, 2] :=
+            ReadFloat(section, 'RectangleH' + IntToStr(i), csc.rectangle[i, 2]);
         for i := 1 to csc.nrectangle do
-          csc.rectangle[i, 3] := ReadFloat(section, 'RectangleR' + IntToStr(i), csc.rectangle[i, 3]);
+          csc.rectangle[i, 3] :=
+            ReadFloat(section, 'RectangleR' + IntToStr(i), csc.rectangle[i, 3]);
         for i := 1 to csc.nrectangle do
-          csc.rectangle[i, 4] := ReadFloat(section, 'RectangleOffset' + IntToStr(i), csc.rectangle[i, 4]);
+          csc.rectangle[i, 4] :=
+            ReadFloat(section, 'RectangleOffset' + IntToStr(i), csc.rectangle[i, 4]);
         for i := 1 to csc.nrectangle do
-          csc.rectangleok[i] := ReadBool(section, 'ShowRectangle' + IntToStr(i), csc.rectangleok[i]);
+          csc.rectangleok[i] :=
+            ReadBool(section, 'ShowRectangle' + IntToStr(i), csc.rectangleok[i]);
         for i := 1 to csc.nrectangle do
-          csc.rectanglelbl[i] := ReadString(section, 'RectangleLbl' + IntToStr(i), csc.rectanglelbl[i]);
+          csc.rectanglelbl[i] :=
+            ReadString(section, 'RectangleLbl' + IntToStr(i), csc.rectanglelbl[i]);
       except
         ShowError('Error reading ' + filename + ' Finder');
       end;
@@ -6663,14 +6785,16 @@ begin
         csc.decentre := ReadFloat(section, 'decentre', csc.decentre);
         csc.acentre := ReadFloat(section, 'acentre', csc.acentre);
         csc.hcentre := ReadFloat(section, 'hcentre', csc.hcentre);
-        csc.fov := round(ReadFloat(section, 'fov', csc.fov) / secarc) * secarc; // round to 1 arcsec
+        csc.fov := round(ReadFloat(section, 'fov', csc.fov) / secarc) * secarc;
+        // round to 1 arcsec
         csc.fov := max(csc.fov, secarc);
         csc.fov := min(csc.fov, pi2);
         csc.theta := ReadFloat(section, 'theta', csc.theta);
         buf := trim(ReadString(section, 'projtype', csc.projtype)) + 'A';
         csc.projtype := buf[1];
         csc.ProjPole := ReadInteger(section, 'ProjPole', csc.ProjPole);
-        csc.ProjEquatorCentered := ReadBool(section, 'ProjEquatorCentered', csc.ProjEquatorCentered);
+        csc.ProjEquatorCentered :=
+          ReadBool(section, 'ProjEquatorCentered', csc.ProjEquatorCentered);
         csc.FlipX := ReadInteger(section, 'FlipX', csc.FlipX);
         csc.FlipY := ReadInteger(section, 'FlipY', csc.FlipY);
         if csc.FlipY < 0 then
@@ -6684,14 +6808,15 @@ begin
         csc.DrawPMyear := ReadInteger(section, 'DrawPMyear', csc.DrawPMyear);
         csc.horizonopaque := ReadBool(section, 'horizonopaque', csc.horizonopaque);
         csc.ShowHorizon := ReadBool(section, 'ShowHorizon', csc.ShowHorizon);
-        csc.ShowHorizonPicture := ReadBool(section, 'ShowHorizonPicture', csc.ShowHorizonPicture);
+        csc.ShowHorizonPicture :=
+          ReadBool(section, 'ShowHorizonPicture', csc.ShowHorizonPicture);
         csc.HorizonPictureLowQuality :=
           ReadBool(section, 'HorizonPictureLowQuality', csc.HorizonPictureLowQuality);
-        csc.HorizonPictureRotate := ReadFloat(section, 'HorizonPictureRotate',
-          csc.HorizonPictureRotate);
+        csc.HorizonPictureRotate :=
+          ReadFloat(section, 'HorizonPictureRotate', csc.HorizonPictureRotate);
         csc.FillHorizon := ReadBool(section, 'FillHorizon', csc.FillHorizon);
-        csc.ShowHorizonDepression := ReadBool(section, 'ShowHorizonDepression',
-          csc.ShowHorizonDepression);
+        csc.ShowHorizonDepression :=
+          ReadBool(section, 'ShowHorizonDepression', csc.ShowHorizonDepression);
         csc.ShowHorizon0 := ReadBool(section, 'ShowHorizon0', csc.ShowHorizon0);
         csc.ShowEqGrid := ReadBool(section, 'ShowEqGrid', csc.ShowEqGrid);
         csc.ShowLabelAll := ReadBool(section, 'ShowLabelAll', csc.ShowLabelAll);
@@ -6700,15 +6825,18 @@ begin
         csc.RotLabel := ReadBool(section, 'RotLabel', csc.RotLabel);
         csc.ShowGrid := ReadBool(section, 'ShowGrid', csc.ShowGrid);
         csc.ShowGridNum := ReadBool(section, 'ShowGridNum', csc.ShowGridNum);
-        csc.ShowOnlyMeridian := ReadBool(section, 'ShowOnlyMeridian', csc.ShowOnlyMeridian);
-        csc.ShowAlwaysMeridian := ReadBool(section, 'ShowAlwaysMeridian', csc.ShowAlwaysMeridian);
+        csc.ShowOnlyMeridian :=
+          ReadBool(section, 'ShowOnlyMeridian', csc.ShowOnlyMeridian);
+        csc.ShowAlwaysMeridian :=
+          ReadBool(section, 'ShowAlwaysMeridian', csc.ShowAlwaysMeridian);
         csc.ShowConstL := ReadBool(section, 'ShowConstL', csc.ShowConstL);
         csc.ShowConstB := ReadBool(section, 'ShowConstB', csc.ShowConstB);
         csc.ShowEcliptic := ReadBool(section, 'ShowEcliptic', csc.ShowEcliptic);
         csc.ShowGalactic := ReadBool(section, 'ShowGalactic', csc.ShowGalactic);
         csc.ShowMilkyWay := ReadBool(section, 'ShowMilkyWay', csc.ShowMilkyWay);
         csc.FillMilkyWay := ReadBool(section, 'FillMilkyWay', csc.FillMilkyWay);
-        csc.LinemodeMilkyway := ReadBool(section, 'LinemodeMilkyway', csc.LinemodeMilkyway);
+        csc.LinemodeMilkyway :=
+          ReadBool(section, 'LinemodeMilkyway', csc.LinemodeMilkyway);
         csc.sunurlname := ReadString(section, 'URL_SUN_NAME', csc.sunurlname);
         csc.sunurl := ReadString(section, 'URL_SUN', csc.sunurl);
         csc.sunurlsize := ReadInteger(section, 'URL_SUN_SIZE', csc.sunurlsize);
@@ -6728,7 +6856,8 @@ begin
         csc.showline := ReadBool(section, 'ShowLine', csc.showline);
         csc.ShowImageList := ReadBool(section, 'ShowImageList', csc.ShowImageList);
         csc.ShowImageLabel := ReadBool(section, 'ShowImageLabel', csc.ShowImageLabel);
-        csc.ShowBackgroundImage := ReadBool(section, 'ShowBackgroundImage', csc.ShowBackgroundImage);
+        csc.ShowBackgroundImage :=
+          ReadBool(section, 'ShowBackgroundImage', csc.ShowBackgroundImage);
         buf := ReadString(section, 'BackgroundImage', csc.BackgroundImage);
         if (ConfigPrivateDir = '') or (ConfigPrivateDir = PrivateDir) or
           (pos(ConfigPrivateDir, buf) = 0) then
@@ -6748,7 +6877,8 @@ begin
         csc.MagLabel := ReadBool(section, 'MagLabel', csc.MagLabel);
         csc.NameLabel := ReadBool(section, 'NameLabel', csc.NameLabel);
         csc.DistLabel := ReadBool(section, 'DistLabel', csc.DistLabel);
-        csc.DrawAllStarLabel := ReadBool(section, 'DrawAllStarLabel', csc.DrawAllStarLabel);
+        csc.DrawAllStarLabel :=
+          ReadBool(section, 'DrawAllStarLabel', csc.DrawAllStarLabel);
         csc.MovedLabelLine := ReadBool(section, 'MovedLabelLine', csc.MovedLabelLine);
         csc.ConstFullLabel := ReadBool(section, 'ConstFullLabel', csc.ConstFullLabel);
         csc.ConstLatinLabel := ReadBool(section, 'ConstLatinLabel', csc.ConstLatinLabel);
@@ -6757,13 +6887,18 @@ begin
         csc.GRSlongitude := ReadFloat(section, 'GRSlongitude', csc.GRSlongitude);
         csc.GRSjd := ReadFloat(section, 'GRSjd', csc.GRSjd);
         csc.GRSdrift := ReadFloat(section, 'GRSdrift', csc.GRSdrift);
-        csc.StyleGrid := TPenStyle(ReadInteger(section, 'StyleGrid', Ord(csc.StyleGrid)));
-        csc.StyleEqGrid := TPenStyle(ReadInteger(section, 'StyleEqGrid', Ord(csc.StyleEqGrid)));
-        csc.StyleConstL := TPenStyle(ReadInteger(section, 'StyleConstL', Ord(csc.StyleConstL)));
-        csc.StyleConstB := TPenStyle(ReadInteger(section, 'StyleConstB', Ord(csc.StyleConstB)));
-        csc.StyleEcliptic := TPenStyle(ReadInteger(section, 'StyleEcliptic', Ord(
-          csc.StyleEcliptic)));
-        csc.StyleGalEq := TPenStyle(ReadInteger(section, 'StyleGalEq', Ord(csc.StyleGalEq)));
+        csc.StyleGrid := TPenStyle(ReadInteger(section, 'StyleGrid',
+          Ord(csc.StyleGrid)));
+        csc.StyleEqGrid := TPenStyle(ReadInteger(section, 'StyleEqGrid',
+          Ord(csc.StyleEqGrid)));
+        csc.StyleConstL := TPenStyle(ReadInteger(section, 'StyleConstL',
+          Ord(csc.StyleConstL)));
+        csc.StyleConstB := TPenStyle(ReadInteger(section, 'StyleConstB',
+          Ord(csc.StyleConstB)));
+        csc.StyleEcliptic := TPenStyle(ReadInteger(section, 'StyleEcliptic',
+          Ord(csc.StyleEcliptic)));
+        csc.StyleGalEq := TPenStyle(ReadInteger(section, 'StyleGalEq',
+          Ord(csc.StyleGalEq)));
         csc.BGalpha := ReadInteger(section, 'BGalpha', csc.BGalpha);
         csc.BGitt := Titt(ReadInteger(section, 'BGitt', Ord(csc.BGitt)));
         csc.BGmin_sigma := ReadFloat(section, 'BGmin_sigma', csc.BGmin_sigma);
@@ -6772,10 +6907,12 @@ begin
         csc.NEBmax_sigma := ReadFloat(section, 'NEBmax_sigma', csc.NEBmax_sigma);
         csc.MaxArchiveImg := ReadInteger(section, 'MaxArchiveImg', csc.MaxArchiveImg);
         for i := 1 to MaxArchiveDir do
-          csc.ArchiveDir[i] := ReadString(section, 'ArchiveDir' + IntToStr(i), csc.ArchiveDir[i]);
+          csc.ArchiveDir[i] :=
+            ReadString(section, 'ArchiveDir' + IntToStr(i), csc.ArchiveDir[i]);
         for i := 1 to MaxArchiveDir do
-          csc.ArchiveDirActive[i] := ReadBool(section, 'ArchiveDirActive' + IntToStr(
-            i), csc.ArchiveDirActive[i]);
+          csc.ArchiveDirActive[i] :=
+            ReadBool(section, 'ArchiveDirActive' + IntToStr(i),
+            csc.ArchiveDirActive[i]);
         csc.Simnb := ReadInteger(section, 'Simnb', csc.Simnb);
         csc.SimLabel := ReadInteger(section, 'SimLabel', csc.SimLabel);
         if csc.SimLabel > 3 then
@@ -6797,12 +6934,16 @@ begin
         csc.SimLine := ReadBool(section, 'SimLine', csc.SimLine);
         csc.SimMark := ReadBool(section, 'SimMark', csc.SimMark);
         for i := 1 to NumSimObject do
-          csc.SimObject[i] := ReadBool(section, 'SimObject' + IntToStr(i), csc.SimObject[i]);
+          csc.SimObject[i] := ReadBool(section, 'SimObject' +
+            IntToStr(i), csc.SimObject[i]);
         for i := 1 to numlabtype do
         begin
-          csc.ShowLabel[i] := readBool(section, 'ShowLabel' + IntToStr(i), csc.ShowLabel[i]);
-          csc.LabelMagDiff[i] := readFloat(section, 'LabelMag' + IntToStr(i), csc.LabelMagDiff[i]);
-          csc.LabelOrient[i] := readFloat(section, 'LabelOrient' + IntToStr(i), csc.LabelOrient[i]);
+          csc.ShowLabel[i] := readBool(section, 'ShowLabel' +
+            IntToStr(i), csc.ShowLabel[i]);
+          csc.LabelMagDiff[i] :=
+            readFloat(section, 'LabelMag' + IntToStr(i), csc.LabelMagDiff[i]);
+          csc.LabelOrient[i] :=
+            readFloat(section, 'LabelOrient' + IntToStr(i), csc.LabelOrient[i]);
         end;
         csc.ObslistAlLabels := ReadBool(section, 'ObslistAlLabels', csc.ObslistAlLabels);
         csc.TrackOn := ReadBool(section, 'TrackOn', csc.TrackOn);
@@ -6849,7 +6990,8 @@ begin
       try
         section := 'projection';
         for i := 1 to maxfield do
-          csc.projname[i] := ReadString(section, 'ProjName' + IntToStr(i), csc.projname[i]);
+          csc.projname[i] := ReadString(section, 'ProjName' +
+            IntToStr(i), csc.projname[i]);
       except
         ShowError('Error reading ' + filename + ' projection');
       end;
@@ -6862,15 +7004,17 @@ begin
           csc.modlabels[i].id := ReadInteger(section, 'labelid' + IntToStr(i), 0);
           csc.modlabels[i].dx := ReadInteger(section, 'labeldx' + IntToStr(i), 0);
           csc.modlabels[i].dy := ReadInteger(section, 'labeldy' + IntToStr(i), 0);
-          csc.modlabels[i].orientation := ReadFloat(section, 'orientation' + IntToStr(i), 0);
+          csc.modlabels[i].orientation :=
+            ReadFloat(section, 'orientation' + IntToStr(i), 0);
           csc.modlabels[i].ra := ReadFloat(section, 'labelra' + IntToStr(i), 0);
           csc.modlabels[i].Dec := ReadFloat(section, 'labeldec' + IntToStr(i), 0);
           csc.modlabels[i].labelnum := ReadInteger(section, 'labelnum' + IntToStr(i), 1);
           csc.modlabels[i].fontnum := ReadInteger(section, 'labelfont' + IntToStr(i), 2);
           csc.modlabels[i].txt := ReadString(section, 'labeltxt' + IntToStr(i), '');
-          csc.modlabels[i].align := TLabelAlign(
-            ReadInteger(section, 'labelalign' + IntToStr(i), Ord(laLeft)));
-          csc.modlabels[i].useradec := ReadBool(section, 'labeluseradec' + IntToStr(i), False);
+          csc.modlabels[i].align :=
+            TLabelAlign(ReadInteger(section, 'labelalign' + IntToStr(i), Ord(laLeft)));
+          csc.modlabels[i].useradec :=
+            ReadBool(section, 'labeluseradec' + IntToStr(i), False);
           csc.modlabels[i].hiden := ReadBool(section, 'labelhiden' + IntToStr(i), False);
         end;
       except
@@ -6884,7 +7028,8 @@ begin
         begin
           csc.customlabels[i].ra := ReadFloat(section, 'labelra' + IntToStr(i), 0);
           csc.customlabels[i].Dec := ReadFloat(section, 'labeldec' + IntToStr(i), 0);
-          csc.customlabels[i].labelnum := ReadInteger(section, 'labelnum' + IntToStr(i), 7);
+          csc.customlabels[i].labelnum :=
+            ReadInteger(section, 'labelnum' + IntToStr(i), 7);
           csc.customlabels[i].txt := ReadString(section, 'labeltxt' + IntToStr(i), '');
           csc.customlabels[i].align :=
             TLabelAlign(ReadInteger(section, 'labelalign' + IntToStr(i), Ord(laLeft)));
@@ -6896,7 +7041,8 @@ begin
     try
       csc.tz.GregorianStart := GregorianStart;
       csc.tz.GregorianStartJD := GregorianStartJD;
-      csc.tz.TimeZoneFile := ZoneDir + StringReplace(def_cfgsc.ObsTZ, '/', PathDelim, [rfReplaceAll]);
+      csc.tz.TimeZoneFile := ZoneDir + StringReplace(def_cfgsc.ObsTZ,
+        '/', PathDelim, [rfReplaceAll]);
       csc.tz.JD := jd(csc.CurYear, csc.CurMonth, csc.CurDay, csc.CurTime);
       csc.TimeZone := csc.tz.SecondsOffset / 3600;
       if not csc.CoordExpertMode then
@@ -6963,7 +7109,8 @@ begin
       section := 'main';
       try
         Config_Version := ReadString(section, 'version', cdcver);
-        SaveConfigOnExit.Checked := ReadBool(section, 'SaveConfigOnExit', SaveConfigOnExit.Checked);
+        SaveConfigOnExit.Checked :=
+          ReadBool(section, 'SaveConfigOnExit', SaveConfigOnExit.Checked);
         ConfirmSaveConfig := ReadBool(section, 'ConfirmSaveConfig', ConfirmSaveConfig);
 {$if defined(linux) or defined(freebsd)}
         LinuxDesktop := ReadInteger(section, 'LinuxDesktop', LinuxDesktop);
@@ -6979,10 +7126,12 @@ begin
         cfgm.SesameCatNum := ReadInteger(section, 'SesameCatNum', cfgm.SesameCatNum);
         cfgm.prtname := ReadString(section, 'prtname', cfgm.prtname);
         cfgm.Paper := ReadInteger(section, 'Paper', cfgm.Paper);
-        cfgm.PrinterResolution := ReadInteger(section, 'PrinterResolution', cfgm.PrinterResolution);
+        cfgm.PrinterResolution :=
+          ReadInteger(section, 'PrinterResolution', cfgm.PrinterResolution);
         cfgm.PrintColor := ReadInteger(section, 'PrintColor', cfgm.PrintColor);
         cfgm.PrintBmpWidth := ReadInteger(section, 'PrintBmpWidth', cfgm.PrintBmpWidth);
-        cfgm.PrintBmpHeight := ReadInteger(section, 'PrintBmpHeight', cfgm.PrintBmpHeight);
+        cfgm.PrintBmpHeight :=
+          ReadInteger(section, 'PrintBmpHeight', cfgm.PrintBmpHeight);
         cfgm.PrintLandscape := ReadBool(section, 'PrintLandscape', cfgm.PrintLandscape);
         cfgm.PrintMethod := ReadInteger(section, 'PrintMethod', cfgm.PrintMethod);
         if (cfgm.PrintMethod = 0) and (Printer.PrinterIndex < 0) then
@@ -6992,9 +7141,11 @@ begin
         cfgm.PrintTmpPath := ReadString(section, 'PrintTmpPath', cfgm.PrintTmpPath);
         ;
         cfgm.PrtLeftMargin := ReadInteger(section, 'PrtLeftMargin', cfgm.PrtLeftMargin);
-        cfgm.PrtRightMargin := ReadInteger(section, 'PrtRightMargin', cfgm.PrtRightMargin);
+        cfgm.PrtRightMargin :=
+          ReadInteger(section, 'PrtRightMargin', cfgm.PrtRightMargin);
         cfgm.PrtTopMargin := ReadInteger(section, 'PrtTopMargin', cfgm.PrtTopMargin);
-        cfgm.PrtBottomMargin := ReadInteger(section, 'PrtBottomMargin', cfgm.PrtBottomMargin);
+        cfgm.PrtBottomMargin :=
+          ReadInteger(section, 'PrtBottomMargin', cfgm.PrtBottomMargin);
         cfgm.PrintHeader := ReadBool(section, 'PrintHeader', cfgm.PrintHeader);
         cfgm.PrintFooter := ReadBool(section, 'PrintFooter', cfgm.PrintFooter);
         cfgm.ThemeName := ReadString(section, 'Theme', cfgm.ThemeName);
@@ -7003,11 +7154,13 @@ begin
         cfgm.KioskMode := (cfgm.KioskPass > '');
         cfgm.SimpleDetail := cfgm.KioskMode;
         cfgm.SimpleDetail := ReadBool(section, 'SimpleDetail', cfgm.SimpleDetail);
-        cfgm.SimpleMove := cfgm.SimpleDetail or ReadBool(section, 'SimpleMove', cfgm.SimpleMove);
+        cfgm.SimpleMove := cfgm.SimpleDetail or ReadBool(section,
+          'SimpleMove', cfgm.SimpleMove);
         cfgm.CenterAtNoon := ReadBool(section, 'CenterAtNoon', cfgm.CenterAtNoon);
         if (ReadBool(section, 'WinMaximize', False)) then
           f_main.WindowState := wsMaximized;
-        cfgm.autorefreshdelay := ReadInteger(section, 'autorefreshdelay', cfgm.autorefreshdelay);
+        cfgm.autorefreshdelay :=
+          ReadInteger(section, 'autorefreshdelay', cfgm.autorefreshdelay);
         buf := ReadString(section, 'ConstLfile', cfgm.ConstLfile);
         buf := ExtractSubPath(ConfigAppdir, buf);
         if FileExists(buf) then
@@ -7025,15 +7178,17 @@ begin
         if DirectoryExists(buf) then
           cfgm.PlanetDir := buf;
         cfgm.horizonfile := ReadString(section, 'horizonfile', cfgm.horizonfile);
-        cfgm.HorizonPictureFile := ReadString(section, 'HorizonPictureFile',
-          cfgm.HorizonPictureFile);
+        cfgm.HorizonPictureFile :=
+          ReadString(section, 'HorizonPictureFile', cfgm.HorizonPictureFile);
         cfgm.ServerIPaddr := ReadString(section, 'ServerIPaddr', cfgm.ServerIPaddr);
         cfgm.ServerIPport := ReadString(section, 'ServerIPport', cfgm.ServerIPport);
         cfgm.IndiPanelCmd := ReadString(section, 'IndiPanelCmd', cfgm.IndiPanelCmd);
-        cfgm.InternalIndiPanel := ReadBool(section, 'InternalIndiPanel', cfgm.InternalIndiPanel);
+        cfgm.InternalIndiPanel :=
+          ReadBool(section, 'InternalIndiPanel', cfgm.InternalIndiPanel);
         cfgm.keepalive := ReadBool(section, 'keepalive', cfgm.keepalive);
         cfgm.TextOnlyDetail := ReadBool(section, 'TextOnlyDetail', cfgm.TextOnlyDetail);
-        cfgm.AutostartServer := ReadBool(section, 'AutostartServer', cfgm.AutostartServer);
+        cfgm.AutostartServer :=
+          ReadBool(section, 'AutostartServer', cfgm.AutostartServer);
         DBtype := TDBtype(ReadInteger(section, 'dbtype', 1));
         cfgm.dbhost := ReadString(section, 'dbhost', cfgm.dbhost);
         cfgm.dbport := ReadInteger(section, 'dbport', cfgm.dbport);
@@ -7056,19 +7211,27 @@ begin
         cfgm.ShowChartInfo := ReadBool(section, 'ShowChartInfo', cfgm.ShowChartInfo);
         cfgm.ShowTitlePos := ReadBool(section, 'ShowTitlePos', cfgm.ShowTitlePos);
         cfgm.SyncChart := ReadBool(section, 'SyncChart', cfgm.SyncChart);
-        cfgm.ButtonStandard := ReadInteger(section, 'ButtonStandard', cfgm.ButtonStandard);
+        cfgm.ButtonStandard :=
+          ReadInteger(section, 'ButtonStandard', cfgm.ButtonStandard);
         cfgm.ButtonNight := ReadInteger(section, 'ButtonNight', cfgm.ButtonNight);
         cfgm.VOurl := ReadInteger(section, 'VOurl', cfgm.VOurl);
         cfgm.VOmaxrecord := ReadInteger(section, 'VOmaxrecord', cfgm.VOmaxrecord);
-        cfgm.SampAutoconnect := ReadBool(section, 'SampAutoconnect', cfgm.SampAutoconnect);
+        cfgm.SampAutoconnect :=
+          ReadBool(section, 'SampAutoconnect', cfgm.SampAutoconnect);
         cfgm.SampKeepTables := ReadBool(section, 'SampKeepTables', cfgm.SampKeepTables);
         cfgm.SampKeepImages := ReadBool(section, 'SampKeepImages', cfgm.SampKeepImages);
-        cfgm.SampConfirmCoord := ReadBool(section, 'SampConfirmCoord', cfgm.SampConfirmCoord);
-        cfgm.SampConfirmImage := ReadBool(section, 'SampConfirmImage', cfgm.SampConfirmImage);
-        cfgm.SampConfirmTable := ReadBool(section, 'SampConfirmTable', cfgm.SampConfirmTable);
-        cfgm.SampSubscribeCoord := ReadBool(section, 'SampSubscribeCoord', cfgm.SampSubscribeCoord);
-        cfgm.SampSubscribeImage := ReadBool(section, 'SampSubscribeImage', cfgm.SampSubscribeImage);
-        cfgm.SampSubscribeTable := ReadBool(section, 'SampSubscribeTable', cfgm.SampSubscribeTable);
+        cfgm.SampConfirmCoord :=
+          ReadBool(section, 'SampConfirmCoord', cfgm.SampConfirmCoord);
+        cfgm.SampConfirmImage :=
+          ReadBool(section, 'SampConfirmImage', cfgm.SampConfirmImage);
+        cfgm.SampConfirmTable :=
+          ReadBool(section, 'SampConfirmTable', cfgm.SampConfirmTable);
+        cfgm.SampSubscribeCoord :=
+          ReadBool(section, 'SampSubscribeCoord', cfgm.SampSubscribeCoord);
+        cfgm.SampSubscribeImage :=
+          ReadBool(section, 'SampSubscribeImage', cfgm.SampSubscribeImage);
+        cfgm.SampSubscribeTable :=
+          ReadBool(section, 'SampSubscribeTable', cfgm.SampSubscribeTable);
         cfgm.AnimDelay := ReadInteger(section, 'AnimDelay', cfgm.AnimDelay);
         AnimationTimer.Interval := max(100, cfgm.AnimDelay);
         cfgm.AnimFps := ReadFloat(section, 'AnimFps', cfgm.AnimFps);
@@ -7085,13 +7248,15 @@ begin
         cfgm.SocksProxy := ReadBool(section, 'SocksProxy', cfgm.SocksProxy);
         cfgm.SocksType := ReadString(section, 'SocksType', cfgm.SocksType);
         cfgm.FtpPassive := ReadBool(section, 'FtpPassive', cfgm.FtpPassive);
-        cfgm.ConfirmDownload := ReadBool(section, 'ConfirmDownload', cfgm.ConfirmDownload);
+        cfgm.ConfirmDownload :=
+          ReadBool(section, 'ConfirmDownload', cfgm.ConfirmDownload);
         cfgm.ProxyHost := ReadString(section, 'ProxyHost', cfgm.ProxyHost);
         cfgm.ProxyPort := ReadString(section, 'ProxyPort', cfgm.ProxyPort);
         cfgm.ProxyUser := ReadString(section, 'ProxyUser', cfgm.ProxyUser);
         cfgm.ProxyPass := ReadString(section, 'ProxyPass', cfgm.ProxyPass);
         cfgm.AnonPass := ReadString(section, 'AnonPass', cfgm.AnonPass);
-        cfgm.starshape_file := ReadString(section, 'starshape_file', cfgm.starshape_file);
+        cfgm.starshape_file :=
+          ReadString(section, 'starshape_file', cfgm.starshape_file);
         cfgm.tlelst := ReadString(section, 'tlelst', cfgm.tlelst);
         j := ReadInteger(section, 'CometUrlCount', 0);
         if (j > 0) then
@@ -7130,43 +7295,63 @@ begin
             obsdetail.lon := ReadFloat(section, 'ObsLon' + IntToStr(i), 0);
             obsdetail.alt := ReadFloat(section, 'ObsAlt' + IntToStr(i), 0);
             obsdetail.horizonfn := ReadString(section, 'Obshorizonfn' + IntToStr(i), '');
-            obsdetail.horizonpictfn := ReadString(section, 'Obshorizonpictfn' + IntToStr(i), '');
-            obsdetail.pictureangleoffset := ReadFloat(section, 'Obspictureangleoffset' + IntToStr(i), 0);
-            obsdetail.showhorizonline := ReadBool(section, 'Obsshowhorizonline' + IntToStr(i), False);
+            obsdetail.horizonpictfn :=
+              ReadString(section, 'Obshorizonpictfn' + IntToStr(i), '');
+            obsdetail.pictureangleoffset :=
+              ReadFloat(section, 'Obspictureangleoffset' + IntToStr(i), 0);
+            obsdetail.showhorizonline :=
+              ReadBool(section, 'Obsshowhorizonline' + IntToStr(i), False);
             obsdetail.showhorizonpicture :=
               ReadBool(section, 'Obsshowhorizonpicture' + IntToStr(i), False);
-            cfgm.ObsNameList.AddObject(ReadString(section, 'ObsName' + IntToStr(i), ''), obsdetail);
+            cfgm.ObsNameList.AddObject(ReadString(section, 'ObsName' + IntToStr(i), ''),
+              obsdetail);
           end;
         catalog.cfgshr.AzNorth := ReadBool(section, 'AzNorth', catalog.cfgshr.AzNorth);
-        catalog.cfgshr.ListStar := ReadBool(section, 'ListStar', catalog.cfgshr.ListStar);
+        catalog.cfgshr.ListStar :=
+          ReadBool(section, 'ListStar', catalog.cfgshr.ListStar);
         catalog.cfgshr.ListNeb := ReadBool(section, 'ListNeb', catalog.cfgshr.ListNeb);
         catalog.cfgshr.ListVar := ReadBool(section, 'ListVar', catalog.cfgshr.ListVar);
         catalog.cfgshr.ListDbl := ReadBool(section, 'ListDbl', catalog.cfgshr.ListDbl);
         catalog.cfgshr.ListPla := ReadBool(section, 'ListPla', catalog.cfgshr.ListPla);
-        catalog.cfgshr.ffove_tfl := ReadString(section, 'ffove_tfl', catalog.cfgshr.ffove_tfl);
-        catalog.cfgshr.ffove_efl := ReadString(section, 'ffove_efl', catalog.cfgshr.ffove_efl);
-        catalog.cfgshr.ffove_efv := ReadString(section, 'ffove_efv', catalog.cfgshr.ffove_efv);
-        catalog.cfgshr.ffovc_tfl := ReadString(section, 'ffovc_tfl', catalog.cfgshr.ffovc_tfl);
-        catalog.cfgshr.ffovc_px := ReadString(section, 'ffovc_px', catalog.cfgshr.ffovc_px);
-        catalog.cfgshr.ffovc_py := ReadString(section, 'ffovc_py', catalog.cfgshr.ffovc_py);
-        catalog.cfgshr.ffovc_cx := ReadString(section, 'ffovc_cx', catalog.cfgshr.ffovc_cx);
-        catalog.cfgshr.ffovc_cy := ReadString(section, 'ffovc_cy', catalog.cfgshr.ffovc_cy);
-        def_cfgsc.IndiAutostart := ReadBool(section, 'IndiAutostart', def_cfgsc.IndiAutostart);
-        def_cfgsc.IndiServerHost := ReadString(section, 'IndiServerHost', def_cfgsc.IndiServerHost);
-        def_cfgsc.IndiServerPort := ReadString(section, 'IndiServerPort', def_cfgsc.IndiServerPort);
+        catalog.cfgshr.ffove_tfl :=
+          ReadString(section, 'ffove_tfl', catalog.cfgshr.ffove_tfl);
+        catalog.cfgshr.ffove_efl :=
+          ReadString(section, 'ffove_efl', catalog.cfgshr.ffove_efl);
+        catalog.cfgshr.ffove_efv :=
+          ReadString(section, 'ffove_efv', catalog.cfgshr.ffove_efv);
+        catalog.cfgshr.ffovc_tfl :=
+          ReadString(section, 'ffovc_tfl', catalog.cfgshr.ffovc_tfl);
+        catalog.cfgshr.ffovc_px :=
+          ReadString(section, 'ffovc_px', catalog.cfgshr.ffovc_px);
+        catalog.cfgshr.ffovc_py :=
+          ReadString(section, 'ffovc_py', catalog.cfgshr.ffovc_py);
+        catalog.cfgshr.ffovc_cx :=
+          ReadString(section, 'ffovc_cx', catalog.cfgshr.ffovc_cx);
+        catalog.cfgshr.ffovc_cy :=
+          ReadString(section, 'ffovc_cy', catalog.cfgshr.ffovc_cy);
+        def_cfgsc.IndiAutostart :=
+          ReadBool(section, 'IndiAutostart', def_cfgsc.IndiAutostart);
+        def_cfgsc.IndiServerHost :=
+          ReadString(section, 'IndiServerHost', def_cfgsc.IndiServerHost);
+        def_cfgsc.IndiServerPort :=
+          ReadString(section, 'IndiServerPort', def_cfgsc.IndiServerPort);
         def_cfgsc.IndiDevice := ReadString(section, 'IndiDevice', def_cfgsc.IndiDevice);
-        def_cfgsc.IndiTelescope := ReadBool(section, 'IndiTelescope', def_cfgsc.IndiTelescope);
-        def_cfgsc.ASCOMTelescope := ReadBool(section, 'ASCOMTelescope', def_cfgsc.ASCOMTelescope);
-        def_cfgsc.LX200Telescope := ReadBool(section, 'LX200Telescope', def_cfgsc.LX200Telescope);
-        def_cfgsc.EncoderTelescope := ReadBool(section, 'EncoderTelescope',
-          def_cfgsc.EncoderTelescope);
-        def_cfgsc.ManualTelescope := ReadBool(section, 'ManualTelescope', def_cfgsc.ManualTelescope);
+        def_cfgsc.IndiTelescope :=
+          ReadBool(section, 'IndiTelescope', def_cfgsc.IndiTelescope);
+        def_cfgsc.ASCOMTelescope :=
+          ReadBool(section, 'ASCOMTelescope', def_cfgsc.ASCOMTelescope);
+        def_cfgsc.LX200Telescope :=
+          ReadBool(section, 'LX200Telescope', def_cfgsc.LX200Telescope);
+        def_cfgsc.EncoderTelescope :=
+          ReadBool(section, 'EncoderTelescope', def_cfgsc.EncoderTelescope);
+        def_cfgsc.ManualTelescope :=
+          ReadBool(section, 'ManualTelescope', def_cfgsc.ManualTelescope);
         def_cfgsc.ManualTelescopeType :=
           ReadInteger(section, 'ManualTelescopeType', def_cfgsc.ManualTelescopeType);
-        def_cfgsc.TelescopeTurnsX := ReadFloat(section, 'TelescopeTurnsX',
-          def_cfgsc.TelescopeTurnsX);
-        def_cfgsc.TelescopeTurnsY := ReadFloat(section, 'TelescopeTurnsY',
-          def_cfgsc.TelescopeTurnsY);
+        def_cfgsc.TelescopeTurnsX :=
+          ReadFloat(section, 'TelescopeTurnsX', def_cfgsc.TelescopeTurnsX);
+        def_cfgsc.TelescopeTurnsY :=
+          ReadFloat(section, 'TelescopeTurnsY', def_cfgsc.TelescopeTurnsY);
         if not (def_cfgsc.IndiTelescope or def_cfgsc.ASCOMTelescope or
           def_cfgsc.LX200Telescope or def_cfgsc.EncoderTelescope or
           def_cfgsc.ManualTelescope) then
@@ -7183,14 +7368,16 @@ begin
         PanelLeft.Visible := ReadBool(section, 'ViewLeftBar', True);
         PanelRight.Visible := ReadBool(section, 'ViewRightBar', True);
         ToolBarObj.Visible := ReadBool(section, 'ViewObjectBar', True);
-        MenuViewScrollBar.Checked := ReadBool(section, 'ViewScrollBar', True) and CanShowScrollbar;
+        MenuViewScrollBar.Checked :=
+          ReadBool(section, 'ViewScrollBar', True) and CanShowScrollbar;
         PanelBottom.Visible := ReadBool(section, 'ViewStatusBar', True);
         MenuViewStatusBar.Checked := PanelBottom.Visible;
         MenuViewMainBar.Checked := ToolBarMain.Visible;
         MenuViewObjectBar.Checked := ToolBarObj.Visible;
         MenuViewLeftBar.Checked := PanelLeft.Visible;
         MenuViewRightBar.Checked := PanelRight.Visible;
-        MenuViewToolsBar.Checked := (MenuViewMainBar.Checked and MenuViewObjectBar.Checked and
+        MenuViewToolsBar.Checked :=
+          (MenuViewMainBar.Checked and MenuViewObjectBar.Checked and
           MenuViewLeftBar.Checked and MenuViewRightBar.Checked);
         InitialChartNum := ReadInteger(section, 'NumChart', 0);
         f_detail.Width := ReadInteger(section, 'Detail_Width', f_detail.Width);
@@ -7205,7 +7392,8 @@ begin
         section := 'catalog';
         for i := 1 to maxstarcatalog do
         begin
-          buf := ReadString(section, 'starcatpath' + IntToStr(i), catalog.cfgcat.starcatpath[i]);
+          buf := ReadString(section, 'starcatpath' + IntToStr(i),
+            catalog.cfgcat.starcatpath[i]);
           buf := ExtractSubPath(slash(ConfigAppdir), buf);
           if DirectoryExists(buf) then
             catalog.cfgcat.starcatpath[i] := buf;
@@ -7228,7 +7416,8 @@ begin
         end;
         for i := 1 to maxnebcatalog do
         begin
-          buf := ReadString(section, 'nebcatpath' + IntToStr(i), catalog.cfgcat.nebcatpath[i]);
+          buf := ReadString(section, 'nebcatpath' + IntToStr(i),
+            catalog.cfgcat.nebcatpath[i]);
           buf := ExtractSubPath(slash(ConfigAppdir), buf);
           if DirectoryExists(buf) then
             catalog.cfgcat.nebcatpath[i] := buf;
@@ -7236,7 +7425,8 @@ begin
         // New leda catalog replace pgc
         if pos('leda', catalog.cfgcat.nebcatpath[pgc - BaseNeb]) <= 0 then
         begin
-          buf := StringReplace(catalog.cfgcat.nebcatpath[pgc - BaseNeb], 'pgc', 'leda', []);
+          buf := StringReplace(catalog.cfgcat.nebcatpath[pgc - BaseNeb],
+            'pgc', 'leda', []);
           if FileExists(slash(buf) + 'pgc.hdr') then
             catalog.cfgcat.nebcatpath[pgc - BaseNeb] := buf;
         end;
@@ -7252,19 +7442,23 @@ begin
         f_getdss.cfgdss.dssplateprompt := ReadBool(section, 'dssplateprompt', True);
         f_getdss.cfgdss.dssarchive := ReadBool(section, 'dssarchive', False);
         f_getdss.cfgdss.dssarchiveprompt := ReadBool(section, 'dssarchiveprompt', True);
-        f_getdss.cfgdss.dssarchivedir := ReadString(section, 'dssarchivedir', ArchiveDir);
+        f_getdss.cfgdss.dssarchivedir :=
+          ReadString(section, 'dssarchivedir', ArchiveDir);
         f_getdss.cfgdss.dssmaxsize := ReadInteger(section, 'dssmaxsize', 2048);
-        f_getdss.cfgdss.dssdir := ReadString(section, 'dssdir', slash('cat') + 'RealSky');
+        f_getdss.cfgdss.dssdir :=
+          ReadString(section, 'dssdir', slash('cat') + 'RealSky');
         f_getdss.cfgdss.dssdrive := ReadString(section, 'dssdrive', default_dssdrive);
         f_getdss.cfgdss.dssfile := slash(PictureDir) + '$temp.fit';
         for i := 1 to MaxDSSurl do
         begin
           f_getdss.cfgdss.DSSurl[i, 0] :=
-            ReadString(section, 'DSSurlName' + IntToStr(i), f_getdss.cfgdss.DSSurl[i, 0]);
+            ReadString(section, 'DSSurlName' + IntToStr(i),
+            f_getdss.cfgdss.DSSurl[i, 0]);
           f_getdss.cfgdss.DSSurl[i, 1] :=
             ReadString(section, 'DSSurl' + IntToStr(i), f_getdss.cfgdss.DSSurl[i, 1]);
         end;
-        f_getdss.cfgdss.OnlineDSS := ReadBool(section, 'OnlineDSS', f_getdss.cfgdss.OnlineDSS);
+        f_getdss.cfgdss.OnlineDSS :=
+          ReadBool(section, 'OnlineDSS', f_getdss.cfgdss.OnlineDSS);
         f_getdss.cfgdss.OnlineDSSid :=
           ReadInteger(section, 'OnlineDSSid', f_getdss.cfgdss.OnlineDSSid);
         section := 'jpleph';
@@ -7284,18 +7478,21 @@ begin
         end;
         section := 'obslist';
         cfgm.InitObsList := ReadString(section, 'listname', '');
-        cfgm.ObslistAirmass := ReadString(section, 'airmass', f_obslist.AirmassCombo.Text);
-        cfgm.ObslistAirmassLimit1 := ReadBool(section, 'airmasslimit1',
-          f_obslist.LimitAirmassTonight.Checked);
-        cfgm.ObslistAirmassLimit2 := ReadBool(section, 'airmasslimit2',
-          f_obslist.LimitAirmassNow.Checked);
-        cfgm.ObslistHourAngle := ReadString(section, 'hourangle', f_obslist.HourAngleCombo.Text);
+        cfgm.ObslistAirmass :=
+          ReadString(section, 'airmass', f_obslist.AirmassCombo.Text);
+        cfgm.ObslistAirmassLimit1 :=
+          ReadBool(section, 'airmasslimit1', f_obslist.LimitAirmassTonight.Checked);
+        cfgm.ObslistAirmassLimit2 :=
+          ReadBool(section, 'airmasslimit2', f_obslist.LimitAirmassNow.Checked);
+        cfgm.ObslistHourAngle :=
+          ReadString(section, 'hourangle', f_obslist.HourAngleCombo.Text);
         cfgm.ObslistHourAngleLimit1 :=
           ReadBool(section, 'houranglelimit1', f_obslist.LimitHourangleTonight.Checked);
         cfgm.ObslistHourAngleLimit2 :=
           ReadBool(section, 'houranglelimit2', f_obslist.LimitHourangleNow.Checked);
         cfgm.ObsListLimitType := ReadInteger(section, 'limittype', f_obslist.LimitType);
-        cfgm.ObsListMeridianSide := ReadInteger(section, 'meridianside', f_obslist.MeridianSide);
+        cfgm.ObsListMeridianSide :=
+          ReadInteger(section, 'meridianside', f_obslist.MeridianSide);
       except
         ShowError('Error reading ' + filename + ' dss');
       end;
@@ -7333,7 +7530,8 @@ begin
         begin
           section := 'ScriptPanel' + IntToStr(i);
           ok := ReadBool(section, 'visible', False);
-          Fscript[i].ScriptFilename := ReadString(section, 'ScriptFile', Fscript[i].ScriptFilename);
+          Fscript[i].ScriptFilename :=
+            ReadString(section, 'ScriptFile', Fscript[i].ScriptFilename);
           if ok then
           begin
             ActiveScript := i;
@@ -7644,36 +7842,50 @@ begin
         WriteBool(section, 'NoFilterMessier', catalog.cfgshr.NoFilterMessier);
         for i := 1 to maxfield do
         begin
-          WriteFloat(section, 'StarMagFilter' + IntToStr(i), catalog.cfgshr.StarMagFilter[i]);
-          WriteFloat(section, 'NebMagFilter' + IntToStr(i), catalog.cfgshr.NebMagFilter[i]);
-          WriteFloat(section, 'NebSizeFilter' + IntToStr(i), catalog.cfgshr.NebSizeFilter[i]);
+          WriteFloat(section, 'StarMagFilter' + IntToStr(i),
+            catalog.cfgshr.StarMagFilter[i]);
+          WriteFloat(section, 'NebMagFilter' + IntToStr(i),
+            catalog.cfgshr.NebMagFilter[i]);
+          WriteFloat(section, 'NebSizeFilter' + IntToStr(i),
+            catalog.cfgshr.NebSizeFilter[i]);
         end;
         section := 'catalog';
         Writeinteger(section, 'GCatNum', catalog.cfgcat.GCatNum);
         for i := 0 to catalog.cfgcat.GCatNum - 1 do
         begin
-          Writestring(section, 'CatName' + IntToStr(i), catalog.cfgcat.GCatLst[i].shortname);
-          Writestring(section, 'CatLongName' + IntToStr(i), catalog.cfgcat.GCatLst[i].Name);
+          Writestring(section, 'CatName' + IntToStr(i),
+            catalog.cfgcat.GCatLst[i].shortname);
+          Writestring(section, 'CatLongName' + IntToStr(i),
+            catalog.cfgcat.GCatLst[i].Name);
           Writestring(section, 'CatPath' + IntToStr(i), catalog.cfgcat.GCatLst[i].path);
           WriteFloat(section, 'CatMin' + IntToStr(i), catalog.cfgcat.GCatLst[i].min);
           WriteFloat(section, 'CatMax' + IntToStr(i), catalog.cfgcat.GCatLst[i].max);
           WriteBool(section, 'CatActif' + IntToStr(i), catalog.cfgcat.GCatLst[i].Actif);
-          WriteBool(section, 'CatForceColor' + IntToStr(i), catalog.cfgcat.GCatLst[i].ForceColor);
+          WriteBool(section, 'CatForceColor' + IntToStr(i),
+            catalog.cfgcat.GCatLst[i].ForceColor);
           WriteInteger(section, 'CatColor' + IntToStr(i), catalog.cfgcat.GCatLst[i].Col);
         end;
         n := Length(catalog.cfgcat.UserObjects);
         WriteInteger(section, 'UserObjectsNum', n);
         for i := 0 to n - 1 do
         begin
-          WriteBool(section, 'UObjActive' + IntToStr(i), catalog.cfgcat.UserObjects[i].active);
-          WriteInteger(section, 'UObjType' + IntToStr(i), catalog.cfgcat.UserObjects[i].otype);
-          WriteString(section, 'UObjName' + IntToStr(i), catalog.cfgcat.UserObjects[i].oname);
+          WriteBool(section, 'UObjActive' + IntToStr(i),
+            catalog.cfgcat.UserObjects[i].active);
+          WriteInteger(section, 'UObjType' + IntToStr(i),
+            catalog.cfgcat.UserObjects[i].otype);
+          WriteString(section, 'UObjName' + IntToStr(i),
+            catalog.cfgcat.UserObjects[i].oname);
           WriteFloat(section, 'UObjRA' + IntToStr(i), catalog.cfgcat.UserObjects[i].ra);
-          WriteFloat(section, 'UObjDEC' + IntToStr(i), catalog.cfgcat.UserObjects[i].Dec);
-          WriteFloat(section, 'UObjMag' + IntToStr(i), catalog.cfgcat.UserObjects[i].mag);
-          WriteFloat(section, 'UObjSize' + IntToStr(i), catalog.cfgcat.UserObjects[i].size);
-          WriteInteger(section, 'UObjColor' + IntToStr(i), catalog.cfgcat.UserObjects[i].color);
-          WriteString(section, 'UObjComment' + IntToStr(i), catalog.cfgcat.UserObjects[i].comment);
+          WriteFloat(section, 'UObjDEC' + IntToStr(i),
+            catalog.cfgcat.UserObjects[i].Dec);
+          WriteFloat(section, 'UObjMag' + IntToStr(i),
+            catalog.cfgcat.UserObjects[i].mag);
+          WriteFloat(section, 'UObjSize' + IntToStr(i),
+            catalog.cfgcat.UserObjects[i].size);
+          WriteInteger(section, 'UObjColor' + IntToStr(i),
+            catalog.cfgcat.UserObjects[i].color);
+          WriteString(section, 'UObjComment' + IntToStr(i),
+            catalog.cfgcat.UserObjects[i].comment);
         end;
         WriteFloat(section, 'StarmagMax', catalog.cfgcat.StarmagMax);
         WriteFloat(section, 'NebmagMax', catalog.cfgcat.NebmagMax);
@@ -7684,13 +7896,17 @@ begin
         begin
           WriteBool(section, 'starcatdef' + IntToStr(i), catalog.cfgcat.starcatdef[i]);
           WriteBool(section, 'starcaton' + IntToStr(i), catalog.cfgcat.starcaton[i]);
-          WriteInteger(section, 'starcatfield1' + IntToStr(i), catalog.cfgcat.starcatfield[i, 1]);
-          WriteInteger(section, 'starcatfield2' + IntToStr(i), catalog.cfgcat.starcatfield[i, 2]);
+          WriteInteger(section, 'starcatfield1' + IntToStr(i),
+            catalog.cfgcat.starcatfield[i, 1]);
+          WriteInteger(section, 'starcatfield2' + IntToStr(i),
+            catalog.cfgcat.starcatfield[i, 2]);
         end;
         for i := 1 to maxvarstarcatalog do
         begin
-          WriteBool(section, 'varstarcatdef' + IntToStr(i), catalog.cfgcat.varstarcatdef[i]);
-          WriteBool(section, 'varstarcaton' + IntToStr(i), catalog.cfgcat.varstarcaton[i]);
+          WriteBool(section, 'varstarcatdef' + IntToStr(i),
+            catalog.cfgcat.varstarcatdef[i]);
+          WriteBool(section, 'varstarcaton' + IntToStr(i),
+            catalog.cfgcat.varstarcaton[i]);
           WriteInteger(section, 'varstarcatfield1' + IntToStr(i),
             catalog.cfgcat.varstarcatfield[i, 1]);
           WriteInteger(section, 'varstarcatfield2' + IntToStr(i),
@@ -7698,8 +7914,10 @@ begin
         end;
         for i := 1 to maxdblstarcatalog do
         begin
-          WriteBool(section, 'dblstarcatdef' + IntToStr(i), catalog.cfgcat.dblstarcatdef[i]);
-          WriteBool(section, 'dblstarcaton' + IntToStr(i), catalog.cfgcat.dblstarcaton[i]);
+          WriteBool(section, 'dblstarcatdef' + IntToStr(i),
+            catalog.cfgcat.dblstarcatdef[i]);
+          WriteBool(section, 'dblstarcaton' + IntToStr(i),
+            catalog.cfgcat.dblstarcaton[i]);
           WriteInteger(section, 'dblstarcatfield1' + IntToStr(i),
             catalog.cfgcat.dblstarcatfield[i, 1]);
           WriteInteger(section, 'dblstarcatfield2' + IntToStr(i),
@@ -7709,8 +7927,10 @@ begin
         begin
           WriteBool(section, 'nebcatdef' + IntToStr(i), catalog.cfgcat.nebcatdef[i]);
           WriteBool(section, 'nebcaton' + IntToStr(i), catalog.cfgcat.nebcaton[i]);
-          WriteInteger(section, 'nebcatfield1' + IntToStr(i), catalog.cfgcat.nebcatfield[i, 1]);
-          WriteInteger(section, 'nebcatfield2' + IntToStr(i), catalog.cfgcat.nebcatfield[i, 2]);
+          WriteInteger(section, 'nebcatfield1' + IntToStr(i),
+            catalog.cfgcat.nebcatfield[i, 1]);
+          WriteInteger(section, 'nebcatfield2' + IntToStr(i),
+            catalog.cfgcat.nebcatfield[i, 2]);
         end;
         section := 'display';
         WriteBool(section, 'AntiAlias', cplot.AntiAlias);
@@ -7764,9 +7984,11 @@ begin
         WriteBool(section, 'SimplePointer', catalog.cfgshr.SimplePointer);
         WriteInteger(section, 'CRoseSz', catalog.cfgshr.CRoseSz);
         for i := 0 to maxfield do
-          WriteFloat(section, 'HourGridSpacing' + IntToStr(i), catalog.cfgshr.HourGridSpacing[i]);
+          WriteFloat(section, 'HourGridSpacing' + IntToStr(i),
+            catalog.cfgshr.HourGridSpacing[i]);
         for i := 0 to maxfield do
-          WriteFloat(section, 'DegreeGridSpacing' + IntToStr(i), catalog.cfgshr.DegreeGridSpacing[i]);
+          WriteFloat(section, 'DegreeGridSpacing' + IntToStr(i),
+            catalog.cfgshr.DegreeGridSpacing[i]);
 
         section := 'Calendar';
         WriteInteger(section, 'CalGraphHeight', csc.CalGraphHeight);
@@ -8003,7 +8225,8 @@ begin
           WriteFloat(section, 'labeldec' + IntToStr(i), csc.customlabels[i].Dec);
           WriteInteger(section, 'labelnum' + IntToStr(i), csc.customlabels[i].labelnum);
           WriteString(section, 'labeltxt' + IntToStr(i), csc.customlabels[i].txt);
-          WriteInteger(section, 'labelalign' + IntToStr(i), Ord(csc.customlabels[i].align));
+          WriteInteger(section, 'labelalign' + IntToStr(i),
+            Ord(csc.customlabels[i].align));
         end;
         Updatefile;
       end;
@@ -8154,7 +8377,8 @@ begin
         if j > 0 then
         begin
           for i := 1 to j do
-            WriteString(section, 'AsteroidUrl' + IntToStr(i), cfgm.AsteroidUrlList[i - 1]);
+            WriteString(section, 'AsteroidUrl' + IntToStr(i),
+              cfgm.AsteroidUrlList[i - 1]);
         end;
         j := cfgm.TleUrlList.Count;
         WriteInteger(section, 'TleUrlCount', j);
@@ -8170,24 +8394,28 @@ begin
           begin
             if cfgm.ObsNameList.Objects[i] <> nil then
             begin
-              WriteString(section, 'ObsCountry' + IntToStr(i), TObsDetail(
-                cfgm.ObsNameList.Objects[i]).country);
-              WriteBool(section, 'ObsCountryTZ' + IntToStr(i), TObsDetail(
-                cfgm.ObsNameList.Objects[i]).countrytz);
-              WriteString(section, 'ObsTZ' + IntToStr(i), TObsDetail(cfgm.ObsNameList.Objects[i]).tz);
-              WriteFloat(section, 'ObsLat' + IntToStr(i), TObsDetail(cfgm.ObsNameList.Objects[i]).lat);
-              WriteFloat(section, 'ObsLon' + IntToStr(i), TObsDetail(cfgm.ObsNameList.Objects[i]).lon);
-              WriteFloat(section, 'ObsAlt' + IntToStr(i), TObsDetail(cfgm.ObsNameList.Objects[i]).alt);
-              WriteString(section, 'Obshorizonfn' + IntToStr(i), TObsDetail(
-                cfgm.ObsNameList.Objects[i]).horizonfn);
-              WriteString(section, 'Obshorizonpictfn' + IntToStr(i), TObsDetail(
-                cfgm.ObsNameList.Objects[i]).horizonpictfn);
-              WriteFloat(section, 'Obspictureangleoffset' + IntToStr(i), TObsDetail(
-                cfgm.ObsNameList.Objects[i]).pictureangleoffset);
-              WriteBool(section, 'Obsshowhorizonline' + IntToStr(i), TObsDetail(
-                cfgm.ObsNameList.Objects[i]).showhorizonline);
-              WriteBool(section, 'Obsshowhorizonpicture' + IntToStr(i), TObsDetail(
-                cfgm.ObsNameList.Objects[i]).showhorizonpicture);
+              WriteString(section, 'ObsCountry' + IntToStr(i),
+                TObsDetail(cfgm.ObsNameList.Objects[i]).country);
+              WriteBool(section, 'ObsCountryTZ' + IntToStr(i),
+                TObsDetail(cfgm.ObsNameList.Objects[i]).countrytz);
+              WriteString(section, 'ObsTZ' + IntToStr(i),
+                TObsDetail(cfgm.ObsNameList.Objects[i]).tz);
+              WriteFloat(section, 'ObsLat' + IntToStr(i),
+                TObsDetail(cfgm.ObsNameList.Objects[i]).lat);
+              WriteFloat(section, 'ObsLon' + IntToStr(i),
+                TObsDetail(cfgm.ObsNameList.Objects[i]).lon);
+              WriteFloat(section, 'ObsAlt' + IntToStr(i),
+                TObsDetail(cfgm.ObsNameList.Objects[i]).alt);
+              WriteString(section, 'Obshorizonfn' + IntToStr(i),
+                TObsDetail(cfgm.ObsNameList.Objects[i]).horizonfn);
+              WriteString(section, 'Obshorizonpictfn' + IntToStr(i),
+                TObsDetail(cfgm.ObsNameList.Objects[i]).horizonpictfn);
+              WriteFloat(section, 'Obspictureangleoffset' + IntToStr(i),
+                TObsDetail(cfgm.ObsNameList.Objects[i]).pictureangleoffset);
+              WriteBool(section, 'Obsshowhorizonline' + IntToStr(i),
+                TObsDetail(cfgm.ObsNameList.Objects[i]).showhorizonline);
+              WriteBool(section, 'Obsshowhorizonpicture' + IntToStr(i),
+                TObsDetail(cfgm.ObsNameList.Objects[i]).showhorizonpicture);
               WriteString(section, 'ObsName' + IntToStr(i), cfgm.ObsNameList[i]);
             end;
           end;
@@ -8219,15 +8447,18 @@ begin
         section := 'catalog';
         for i := 1 to maxstarcatalog do
         begin
-          WriteString(section, 'starcatpath' + IntToStr(i), catalog.cfgcat.starcatpath[i]);
+          WriteString(section, 'starcatpath' + IntToStr(i),
+            catalog.cfgcat.starcatpath[i]);
         end;
         for i := 1 to maxvarstarcatalog do
         begin
-          WriteString(section, 'varstarcatpath' + IntToStr(i), catalog.cfgcat.varstarcatpath[i]);
+          WriteString(section, 'varstarcatpath' + IntToStr(i),
+            catalog.cfgcat.varstarcatpath[i]);
         end;
         for i := 1 to maxdblstarcatalog do
         begin
-          WriteString(section, 'dblstarcatpath' + IntToStr(i), catalog.cfgcat.dblstarcatpath[i]);
+          WriteString(section, 'dblstarcatpath' + IntToStr(i),
+            catalog.cfgcat.dblstarcatpath[i]);
         end;
         for i := 1 to maxnebcatalog do
         begin
@@ -9235,13 +9466,15 @@ begin
         TelescopeSlew.Enabled := True;
         TelescopeSync.Enabled := True;
       end;
-      if (abs(sc.cfgsc.theta) > (pi - secarc)) and (abs(sc.cfgsc.theta) < (pi + secarc)) then
+      if (abs(sc.cfgsc.theta) > (pi - secarc)) and
+        (abs(sc.cfgsc.theta) < (pi + secarc)) then
         rotate180.ImageIndex := 93
       else
         rotate180.ImageIndex := 92;
       Animation.Checked := AnimationEnabled and (AnimationDirection >= 0);
       AnimBackward.Checked := AnimationEnabled and (AnimationDirection < 0);
-      TrackTelescope.Checked := (sc.cfgsc.TrackOn and (sc.cfgsc.TrackName = rsTelescope));
+      TrackTelescope.Checked :=
+        (sc.cfgsc.TrackOn and (sc.cfgsc.TrackName = rsTelescope));
       Tf_chart(Sender).TrackTelescope1.Checked := MenuTrackTelescope.Checked;
       ShowStars.Checked := sc.cfgsc.showstars;
       ShowNebulae.Checked := sc.cfgsc.shownebulae;
@@ -9316,16 +9549,26 @@ begin
       tbFOV8.Caption := DEToStrmin(sc.catalog.cfgshr.FieldNum[7]) + blank;
       tbFOV9.Caption := DEToStrmin(sc.catalog.cfgshr.FieldNum[8]) + blank;
       tbFOV10.Caption := DEToStrmin(sc.catalog.cfgshr.FieldNum[9]) + blank;
-      tbFOV1.Hint := '(1) ' + rsSetFOVTo + blank + DEmToStr(sc.catalog.cfgshr.FieldNum[0]);
-      tbFOV2.Hint := '(2) ' + rsSetFOVTo + blank + DEmToStr(sc.catalog.cfgshr.FieldNum[1]);
-      tbFOV3.Hint := '(3) ' + rsSetFOVTo + blank + DEmToStr(sc.catalog.cfgshr.FieldNum[2]);
-      tbFOV4.Hint := '(4) ' + rsSetFOVTo + blank + DEmToStr(sc.catalog.cfgshr.FieldNum[3]);
-      tbFOV5.Hint := '(5) ' + rsSetFOVTo + blank + DEmToStr(sc.catalog.cfgshr.FieldNum[4]);
-      tbFOV6.Hint := '(6) ' + rsSetFOVTo + blank + DEmToStr(sc.catalog.cfgshr.FieldNum[5]);
-      tbFOV7.Hint := '(7) ' + rsSetFOVTo + blank + DEmToStr(sc.catalog.cfgshr.FieldNum[6]);
-      tbFOV8.Hint := '(8) ' + rsSetFOVTo + blank + DEmToStr(sc.catalog.cfgshr.FieldNum[7]);
-      tbFOV9.Hint := '(9) ' + rsSetFOVTo + blank + DEmToStr(sc.catalog.cfgshr.FieldNum[8]);
-      tbFOV10.Hint := '(0) ' + rsSetFOVTo + blank + DEmToStr(sc.catalog.cfgshr.FieldNum[9]);
+      tbFOV1.Hint := '(1) ' + rsSetFOVTo + blank +
+        DEmToStr(sc.catalog.cfgshr.FieldNum[0]);
+      tbFOV2.Hint := '(2) ' + rsSetFOVTo + blank +
+        DEmToStr(sc.catalog.cfgshr.FieldNum[1]);
+      tbFOV3.Hint := '(3) ' + rsSetFOVTo + blank +
+        DEmToStr(sc.catalog.cfgshr.FieldNum[2]);
+      tbFOV4.Hint := '(4) ' + rsSetFOVTo + blank +
+        DEmToStr(sc.catalog.cfgshr.FieldNum[3]);
+      tbFOV5.Hint := '(5) ' + rsSetFOVTo + blank +
+        DEmToStr(sc.catalog.cfgshr.FieldNum[4]);
+      tbFOV6.Hint := '(6) ' + rsSetFOVTo + blank +
+        DEmToStr(sc.catalog.cfgshr.FieldNum[5]);
+      tbFOV7.Hint := '(7) ' + rsSetFOVTo + blank +
+        DEmToStr(sc.catalog.cfgshr.FieldNum[6]);
+      tbFOV8.Hint := '(8) ' + rsSetFOVTo + blank +
+        DEmToStr(sc.catalog.cfgshr.FieldNum[7]);
+      tbFOV9.Hint := '(9) ' + rsSetFOVTo + blank +
+        DEmToStr(sc.catalog.cfgshr.FieldNum[8]);
+      tbFOV10.Hint := '(0) ' + rsSetFOVTo + blank +
+        DEmToStr(sc.catalog.cfgshr.FieldNum[9]);
       SetFov01.Caption := tbFOV1.hint;
       SetFov02.Caption := tbFOV2.hint;
       SetFov03.Caption := tbFOV3.hint;
@@ -9559,7 +9802,8 @@ begin
                   w := w + VertScrollBar.Width;
                 if HorScrollBar.Visible then
                   h := h + HorScrollBar.Height;
-                h := h + child.TopBar.Height + child.BotBar.Height + child.MenuBar.Height;
+                h := h + child.TopBar.Height + child.BotBar.Height +
+                  child.MenuBar.Height;
                 w := w + child.LeftBar.Width + child.RightBar.Width;
               end;
               child.Width := w;
@@ -10300,8 +10544,8 @@ begin
       end
       else
       begin
-        buf := Format(rsConnectedFro, [IntToStr(i), TCPThrd[i].RemoteIP + blank +
-          TCPThrd[i].RemotePort, TCPThrd[i].active_chart,
+        buf := Format(rsConnectedFro, [IntToStr(i), TCPThrd[i].RemoteIP +
+          blank + TCPThrd[i].RemotePort, TCPThrd[i].active_chart,
           datetimetostr(TCPThrd[i].connecttime)]);
       end;
     end
@@ -10384,20 +10628,20 @@ begin
            Tf_chart(MultiFrame1.Childs[i].DockedObject).ChartCursor:=crRetic;
  end;  *)
 
-  if fileexists(slash(appdir) + slash('data') + slash('Themes') + slash(
-    cfgm.ThemeName) + 'compass.bmp') then
+  if fileexists(slash(appdir) + slash('data') + slash('Themes') +
+    slash(cfgm.ThemeName) + 'compass.bmp') then
   begin
-    Compass.LoadFromFile(SysToUTF8(slash(appdir) + slash('data') + slash(
-      'Themes') + slash(cfgm.ThemeName) + 'compass.bmp'));
+    Compass.LoadFromFile(SysToUTF8(slash(appdir) + slash('data') +
+      slash('Themes') + slash(cfgm.ThemeName) + 'compass.bmp'));
     for i := 0 to MultiFrame1.ChildCount - 1 do
       if MultiFrame1.Childs[i].DockedObject is Tf_chart then
         Tf_chart(MultiFrame1.Childs[i].DockedObject).sc.plot.compassrose := Compass;
   end;
-  if fileexists(slash(appdir) + slash('data') + slash('Themes') + slash(
-    cfgm.ThemeName) + 'arrow.bmp') then
+  if fileexists(slash(appdir) + slash('data') + slash('Themes') +
+    slash(cfgm.ThemeName) + 'arrow.bmp') then
   begin
-    arrow.LoadFromFile(SysToUTF8(slash(appdir) + slash('data') + slash(
-      'Themes') + slash(cfgm.ThemeName) + 'arrow.bmp'));
+    arrow.LoadFromFile(SysToUTF8(slash(appdir) + slash('data') +
+      slash('Themes') + slash(cfgm.ThemeName) + 'arrow.bmp'));
     for i := 0 to MultiFrame1.ChildCount - 1 do
       if MultiFrame1.Childs[i].DockedObject is Tf_chart then
         Tf_chart(MultiFrame1.Childs[i].DockedObject).sc.plot.compassarrow := arrow;
@@ -10416,8 +10660,8 @@ begin
   end;
   if (cfgm.starshape_file = '') then
   begin
-    defaultfile := slash(appdir) + slash('data') + slash('Themes') + slash(
-      cfgm.ThemeName) + 'starshape.bmp';
+    defaultfile := slash(appdir) + slash('data') + slash('Themes') +
+      slash(cfgm.ThemeName) + 'starshape.bmp';
     if not FileExists(defaultfile) then
       defaultfile := slash(appdir) + slash('data') + slash('Themes') +
         slash('default') + 'starshape.bmp';
@@ -10491,29 +10735,29 @@ begin
     case button of
       1:
       begin    // color
-        iconpath := systoutf8(slash(appdir) + slash('data') + slash('Themes') +
-          slash(cfgm.ThemeName) + slash('icon_color'));
+        iconpath := systoutf8(slash(appdir) + slash('data') +
+          slash('Themes') + slash(cfgm.ThemeName) + slash('icon_color'));
         col := clNavy;
         SetButtonImage1(ImageNormal);
       end;
       2:
       begin  // red
-        iconpath := systoutf8(slash(appdir) + slash('data') + slash('Themes') +
-          slash(cfgm.ThemeName) + slash('icon_red'));
+        iconpath := systoutf8(slash(appdir) + slash('data') +
+          slash('Themes') + slash(cfgm.ThemeName) + slash('icon_red'));
         col := $acb5f5;
         SetButtonImage1(ImageList2);
       end;
       3:
       begin   // blue
-        iconpath := systoutf8(slash(appdir) + slash('data') + slash('Themes') +
-          slash(cfgm.ThemeName) + slash('icon_blue'));
+        iconpath := systoutf8(slash(appdir) + slash('data') +
+          slash('Themes') + slash(cfgm.ThemeName) + slash('icon_blue'));
         col := clNavy;
         SetButtonImage1(ImageList2);
       end;
       4:
       begin   // Green
-        iconpath := systoutf8(slash(appdir) + slash('data') + slash('Themes') +
-          slash(cfgm.ThemeName) + slash('icon_green'));
+        iconpath := systoutf8(slash(appdir) + slash('data') +
+          slash('Themes') + slash(cfgm.ThemeName) + slash('icon_green'));
         col := clLime;
         SetButtonImage1(ImageList2);
       end;
@@ -10539,8 +10783,8 @@ begin
   if MultiFrame1.ActiveObject <> nil then
   begin
     if cfgm.ShowTitlePos then
-      Caption := basecaption + ' - ' + MultiFrame1.ActiveChild.Caption + blank +
-        blank + Tf_chart(MultiFrame1.ActiveObject).sc.GetChartPos
+      Caption := basecaption + ' - ' + MultiFrame1.ActiveChild.Caption +
+        blank + blank + Tf_chart(MultiFrame1.ActiveObject).sc.GetChartPos
     else
       Caption := basecaption + ' - ' + MultiFrame1.ActiveChild.Caption;
     Tf_chart(MultiFrame1.ActiveObject).ChartActivate;
@@ -10620,7 +10864,8 @@ begin
     if MultiFrame1.Childs[i].DockedObject = Sender then
     begin
       if VerboseMsg then
-        WriteTrace('SetChildFocus ' + tf_chart(MultiFrame1.Childs[i].DockedObject).Caption);
+        WriteTrace('SetChildFocus ' +
+          tf_chart(MultiFrame1.Childs[i].DockedObject).Caption);
       MultiFrame1.setActiveChild(i);
       ActiveControl := MultiFrame1;
       ImageSetFocus(Sender);
@@ -10788,8 +11033,8 @@ begin
   b2 := cfgm.SampSubscribeImage;
   b3 := cfgm.SampSubscribeTable;
   SetupSystemPage(4);
-  if SampConnected and ((b1 <> cfgm.SampSubscribeCoord) or (b2 <> cfgm.SampSubscribeImage) or
-    (b3 <> cfgm.SampSubscribeTable)) then
+  if SampConnected and ((b1 <> cfgm.SampSubscribeCoord) or
+    (b2 <> cfgm.SampSubscribeImage) or (b3 <> cfgm.SampSubscribeTable)) then
     samp.SampSubscribe(cfgm.SampSubscribeCoord, cfgm.SampSubscribeImage,
       cfgm.SampSubscribeTable);
 end;
@@ -10813,7 +11058,8 @@ begin
   f_edittoolbar.ClearControl;
   f_edittoolbar.AddOtherControl(MagPanel, rsStarAndNebul, CatFilter, rsChart, 99);
   f_edittoolbar.AddOtherControl(quicksearch, rsSearchBox, CatSearch, rsEdit, 102);
-  f_edittoolbar.AddOtherControl(TimeValPanel, rsEditTimeIncr, CatAnimation, rsChart, 103);
+  f_edittoolbar.AddOtherControl(TimeValPanel, rsEditTimeIncr, CatAnimation,
+    rsChart, 103);
   f_edittoolbar.AddOtherControl(TimeU, rsSelectTimeUn, CatAnimation, rsChart, 104);
   f_edittoolbar.AddOtherControl(ToolBarFOV, rsFOVBar, CatFOV, rsChart, 32);
   f_edittoolbar.ClearToolbar;
@@ -10847,7 +11093,8 @@ begin
   for i := 0 to f_edittoolbar.BtnSize.Items.Count - 1 do
     if f_edittoolbar.BtnSize.Items[i] = buf then
       f_edittoolbar.BtnSize.ItemIndex := i;
-  f_edittoolbar.BtnText.Checked := cfgm.btncaption and (f_edittoolbar.BtnSize.ItemIndex >= 3);
+  f_edittoolbar.BtnText.Checked :=
+    cfgm.btncaption and (f_edittoolbar.BtnSize.ItemIndex >= 3);
   f_edittoolbar.BtnText.Enabled := (f_edittoolbar.BtnSize.ItemIndex >= 3);
   FormPos(f_edittoolbar, mouse.cursorpos.x, mouse.cursorpos.y);
   f_edittoolbar.ShowModal;
