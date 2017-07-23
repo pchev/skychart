@@ -4,13 +4,13 @@ msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-02 10:18+0000\n"
-"PO-Revision-Date: 2017-07-16 08:17+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"PO-Revision-Date: 2017-07-18 14:47+0000\n"
+"Last-Translator: Tobias Bannert <tobannert@gmail.com>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-16 08:21+0000\n"
+"X-Launchpad-Export-Date: 2017-07-23 18:28+0000\n"
 "X-Generator: Launchpad (build 18419)\n"
 
 #: u_translation.rs102cddss
@@ -1132,11 +1132,11 @@ msgstr "Kontrast"
 
 #: u_translation.rscontrolpanel
 msgid "Control panel"
-msgstr "Bedienfeld"
+msgstr "Steuerleiste"
 
 #: u_translation.rscontrolpanel2
 msgid "Control panel command "
-msgstr "Bedienkommando "
+msgstr "Steuerleistenbefehl "
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
@@ -1228,7 +1228,7 @@ msgstr "PostScript-Karte wird erstellt. Bitte warten …"
 
 #: u_translation.rscreaterasterwh
 msgid "Create raster chart %d x %d. Please wait..."
-msgstr "Erstelle Rasterkarte %d x %d. Bitte warten..."
+msgstr "Rasterkarte wird erstellt %d x %d. Bitte warten …"
 
 #: u_translation.rscrossmeridia
 msgid "Cross meridian"
@@ -5685,7 +5685,7 @@ msgstr "Teleskop-Brennweite"
 
 #: u_translation.rstelescopenam
 msgid "Telescope name"
-msgstr "Teleskop Name"
+msgstr "Teleskopname"
 
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
@@ -5858,7 +5858,7 @@ msgstr "Gesamtradius"
 
 #: u_translation.rstour
 msgid "Tour"
-msgstr ""
+msgstr "Reiseplan"
 
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
