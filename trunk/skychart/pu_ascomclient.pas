@@ -114,9 +114,9 @@ type
     FScopeEqSys: double;
     EqSysVal: integer;
     T: variant;
-    FLongitude: single;                // Observatory longitude (Negative East of Greenwich}
-    FLatitude: single;                 // Observatory latitude
-    FElevation: single;                 // Observatory elevation
+    FLongitude: double;                // Observatory longitude (Positive East of Greenwich}
+    FLatitude: double;                 // Observatory latitude
+    FElevation: double;                // Observatory elevation
     {$ifdef mswindows}
     curdeg_x, curdeg_y: double;        // current equatorial position in degrees
     cur_az, cur_alt: double;           // current alt-az position in degrees
@@ -152,9 +152,9 @@ type
     procedure GetScopeRates(var nrates0, nrates1: integer;
       axis0rates, axis1rates: Pdoublearray);
     procedure ScopeMoveAxis(axis: integer; rate: double);
-    property Longitude: single read FLongitude;
-    property Latitude: single read FLatitude;
-    property Elevation: single read FElevation;
+    property Longitude: double read FLongitude;
+    property Latitude: double read FLatitude;
+    property Elevation: double read FElevation;
     property onObservatoryCoord: TNotifyEvent read FObservatoryCoord write FObservatoryCoord;
   end;
 
@@ -486,7 +486,7 @@ end;
 procedure Tpop_scope.ScopeSetObs(la, lo, alt: double);
 begin
   Flatitude := la;
-  Flongitude := -lo;
+  Flongitude := lo;
   FElevation := alt;
   lat.Text := detostr(Flatitude);
   long.Text := detostr(Flongitude);

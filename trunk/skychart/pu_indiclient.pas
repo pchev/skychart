@@ -111,9 +111,9 @@ type
     eod_coord: boolean;
     ready, connected: boolean;
     SlewRateList: TStringList;
-    FLongitude: single;                 // Observatory longitude (Negative East of Greenwich}
-    FLatitude: single;                  // Observatory latitude
-    FElevation: single;                 // Observatory elevation
+    FLongitude: double;                 // Observatory longitude (Positive East of Greenwich}
+    FLatitude: double;                  // Observatory latitude
+    FElevation: double;                 // Observatory elevation
     FObservatoryCoord: TNotifyEvent;
     procedure ClearStatus;
     procedure CheckStatus;
@@ -155,9 +155,9 @@ type
     procedure ScopeReadConfig(ConfigPath: shortstring);
     procedure GetScopeRates(var nrates: integer; var srate: TStringList);
     procedure ScopeMoveAxis(axis: integer; rate: string);
-    property Longitude: single read FLongitude;
-    property Latitude: single read FLatitude;
-    property Elevation: single read FElevation;
+    property Longitude: double read FLongitude;
+    property Latitude: double read FLatitude;
+    property Elevation: double read FElevation;
     property onObservatoryCoord: TNotifyEvent read FObservatoryCoord write FObservatoryCoord;
   end;
 
@@ -519,7 +519,7 @@ end;
 procedure Tpop_indi.ScopeSetObs(la, lo, el: double);
 begin
   Flatitude := la;
-  Flongitude := -lo;
+  Flongitude := lo;
   FElevation := el;
   lat.Text := detostr(Flatitude);
   long.Text := detostr(Flongitude);

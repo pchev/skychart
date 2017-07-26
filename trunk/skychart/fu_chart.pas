@@ -5187,7 +5187,7 @@ begin
   end;
 
   Fpop_indi.ScopeReadConfig(ExtractFilePath(Configfile));
-  Fpop_indi.ScopeSetObs(sc.cfgsc.ObsLatitude, sc.cfgsc.ObsLongitude, sc.cfgsc.ObsAltitude);
+  Fpop_indi.ScopeSetObs(sc.cfgsc.ObsLatitude, -sc.cfgsc.ObsLongitude, sc.cfgsc.ObsAltitude);
   TelescopeTimer.Interval := 2000;
   TelescopeTimer.Enabled := True;
 
@@ -7220,7 +7220,7 @@ begin
   else
   begin
     Fpop_indi.ScopeReadConfig(ExtractFilePath(Configfile));
-    Fpop_indi.ScopeSetObs(sc.cfgsc.ObsLatitude, sc.cfgsc.ObsLongitude, sc.cfgsc.ObsAltitude);
+    Fpop_indi.ScopeSetObs(sc.cfgsc.ObsLatitude, -sc.cfgsc.ObsLongitude, sc.cfgsc.ObsAltitude);
     if autoconnect then
     begin
       Fpop_indi.ScopeConnect(ok);
@@ -7466,7 +7466,7 @@ begin
   else
   begin
     Fpop_scope.ScopeReadConfig(ExtractFilePath(Configfile));
-    Fpop_scope.ScopeSetObs(sc.cfgsc.ObsLatitude, sc.cfgsc.ObsLongitude, sc.cfgsc.ObsAltitude);
+    Fpop_scope.ScopeSetObs(sc.cfgsc.ObsLatitude, -sc.cfgsc.ObsLongitude, sc.cfgsc.ObsAltitude);
     if autoconnect then
     begin
       Fpop_scope.ScopeConnect(ok);
@@ -7729,7 +7729,7 @@ begin
   if Sender = Fpop_indi then
   begin
      sc.cfgsc.ObsLatitude:=Fpop_indi.Latitude;
-     sc.cfgsc.ObsLongitude:=Fpop_indi.Longitude;
+     sc.cfgsc.ObsLongitude:=-Fpop_indi.Longitude;
      sc.cfgsc.ObsAltitude:=Fpop_indi.Elevation;
      sc.cfgsc.ObsName:='Telescope';
   end
@@ -7737,7 +7737,7 @@ begin
   if Sender = Fpop_scope then
   begin
      sc.cfgsc.ObsLatitude:=Fpop_scope.Latitude;
-     sc.cfgsc.ObsLongitude:=Fpop_scope.Longitude;
+     sc.cfgsc.ObsLongitude:=-Fpop_scope.Longitude;
      sc.cfgsc.ObsAltitude:=Fpop_scope.Elevation;
      sc.cfgsc.ObsName:='Telescope';
   end;
