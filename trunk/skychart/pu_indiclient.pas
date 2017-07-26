@@ -40,6 +40,15 @@ type
 
   Tpop_indi = class(TForm)
     BtnIndiGui: TButton;
+    ButtonGetLocation: TSpeedButton;
+    ButtonSetLocation: TSpeedButton;
+    Elev: TEdit;
+    GroupBox5: TGroupBox;
+    Label1: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    lat: TEdit;
+    long: TEdit;
     ProtocolTrace: TCheckBox;
     GroupBox3: TGroupBox;
     Connect: TButton;
@@ -60,6 +69,8 @@ type
     ConnectTimer: TTimer;
     {Utility and form functions}
     procedure BtnIndiGuiClick(Sender: TObject);
+    procedure ButtonGetLocationClick(Sender: TObject);
+    procedure ButtonSetLocationClick(Sender: TObject);
     procedure ConnectTimerTimer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure InitTimerTimer(Sender: TObject);
@@ -87,6 +98,9 @@ type
     abortmotion_prop: ISwitchVectorProperty;
     abort_prop: ISwitch;
     GeographicCoord_prop: INumberVectorProperty;
+    geo_lat: INumber;
+    geo_lon: INumber;
+    geo_elev: INumber;
     SlewRate_prop: ISwitchVectorProperty;
     moveNS_prop: ISwitchVectorProperty;
     moveN_prop: ISwitch;
@@ -97,6 +111,10 @@ type
     eod_coord: boolean;
     ready, connected: boolean;
     SlewRateList: TStringList;
+    FLongitude: single;                 // Observatory longitude (Negative East of Greenwich}
+    FLatitude: single;                  // Observatory latitude
+    FElevation: single;                 // Observatory elevation
+    FObservatoryCoord: TNotifyEvent;
     procedure ClearStatus;
     procedure CheckStatus;
     procedure NewDevice(dp: Basedevice);
@@ -124,7 +142,7 @@ type
     procedure ScopeGetInfo(var scName: shortstring;
       var QueryOK, SyncOK, GotoOK: boolean; var refreshrate: integer);
     procedure ScopeGetEqSys(var EqSys: double);
-    procedure ScopeSetObs(la, lo: double);
+    procedure ScopeSetObs(la, lo, el: double);
     procedure ScopeAlign(Source: string; ra, Dec: single);
     procedure ScopeGetRaDec(var ra, de: double; var ok: boolean);
     procedure ScopeGetAltAz(var alt, az: double; var ok: boolean);
@@ -137,6 +155,10 @@ type
     procedure ScopeReadConfig(ConfigPath: shortstring);
     procedure GetScopeRates(var nrates: integer; var srate: TStringList);
     procedure ScopeMoveAxis(axis: integer; rate: string);
+    property Longitude: single read FLongitude;
+    property Latitude: single read FLatitude;
+    property Elevation: single read FElevation;
+    property onObservatoryCoord: TNotifyEvent read FObservatoryCoord write FObservatoryCoord;
   end;
 
 implementation
@@ -290,7 +312,10 @@ begin
   end
   else if (proptype = INDI_NUMBER) and (propname = 'GEOGRAPHIC_COORD') then
   begin
-
+    GeographicCoord_prop := indiProp.getNumber();
+    geo_lat := IUFindNumber(GeographicCoord_prop, 'LAT');
+    geo_lon := IUFindNumber(GeographicCoord_prop, 'LONG');
+    geo_elev := IUFindNumber(GeographicCoord_prop, 'ELEV');
   end
   else if (proptype = INDI_SWITCH) and ((propname = 'TELESCOPE_SLEW_RATE') or
     (propname = 'SLEWMODE')) then
@@ -491,10 +516,14 @@ procedure Tpop_indi.ScopeReset;
 begin
 end;
 
-procedure Tpop_indi.ScopeSetObs(la, lo: double);
+procedure Tpop_indi.ScopeSetObs(la, lo, el: double);
 begin
-  //latitude:=la;
-  //longitude:=-lo;
+  Flatitude := la;
+  Flongitude := -lo;
+  FElevation := el;
+  lat.Text := detostr(Flatitude);
+  long.Text := detostr(Flongitude);
+  Elev.Text := FormatFloat(f1,FElevation);
 end;
 
 procedure Tpop_indi.ScopeAlign(Source: string; ra, Dec: single);
@@ -623,6 +652,43 @@ begin
     end;
   end;
 end;
+
+procedure Tpop_indi.ButtonGetLocationClick(Sender: TObject);
+begin
+  if ready then
+  begin
+    if (GeographicCoord_prop <> nil) and (geo_lon <> nil) and (geo_lat <> nil) then
+    begin
+      FLongitude := geo_lon.Value;
+      FLatitude  := geo_lat.Value;
+      FElevation := geo_elev.Value;
+      lat.Text := detostr(Flatitude);
+      long.Text := detostr(Flongitude);
+      Elev.Text := FormatFloat(f1,FElevation);
+      if assigned(FObservatoryCoord) then
+        FObservatoryCoord(self);
+    end
+    else
+      Memomsg.Lines.Add('Geographic Coord ' + rsNotAvailable);
+  end;
+end;
+
+procedure Tpop_indi.ButtonSetLocationClick(Sender: TObject);
+begin
+  if ready then
+  begin
+    if (GeographicCoord_prop <> nil) and (geo_lon <> nil) and (geo_lat <> nil) and (geo_elev <> nil) then
+    begin
+      geo_lon.Value := FLongitude;
+      geo_lat.Value := FLatitude;
+      geo_elev.Value := FElevation;
+      client.sendNewNumber(GeographicCoord_prop);
+    end
+    else
+      Memomsg.Lines.Add('Geographic Coord ' + rsNotAvailable);
+  end;
+end;
+
 
 {-------------------------------------------------------------------------------
 

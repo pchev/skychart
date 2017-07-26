@@ -1,28 +1,28 @@
 object pop_scope: Tpop_scope
   Left = 276
-  Height = 467
+  Height = 481
   Top = 124
   Width = 305
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   ActiveControl = Edit1
   Caption = 'ASCOM Telescope Interface'
-  ClientHeight = 467
+  ClientHeight = 481
   ClientWidth = 305
   OnCloseQuery = kill
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   ParentFont = True
   Position = poDefaultPosOnly
-  LCLVersion = '1.6.0.3'
   Visible = False
   object GroupBox3: TGroupBox
-    Left = 8
+    Left = 0
     Height = 88
-    Top = 360
-    Width = 290
-    ClientHeight = 86
-    ClientWidth = 288
+    Top = 384
+    Width = 305
+    Align = alTop
+    ClientHeight = 84
+    ClientWidth = 301
     TabOrder = 3
     object ButtonConnect: TSpeedButton
       Left = 5
@@ -77,53 +77,54 @@ object pop_scope: Tpop_scope
     end
   end
   object GroupBox5: TGroupBox
-    Left = 8
-    Height = 96
-    Top = 144
-    Width = 288
+    Left = 0
+    Height = 141
+    Top = 131
+    Width = 305
+    Align = alTop
     Caption = 'Observatory '
-    ClientHeight = 77
-    ClientWidth = 286
+    ClientHeight = 121
+    ClientWidth = 301
     TabOrder = 1
     object Label15: TLabel
-      Left = 0
+      Left = 16
       Height = 18
-      Top = 20
+      Top = 12
       Width = 59
       Caption = 'Latitude : '
       ParentColor = False
     end
     object Label16: TLabel
-      Left = 134
+      Left = 115
       Height = 18
-      Top = 20
+      Top = 12
       Width = 68
       Caption = 'Longitude :'
       ParentColor = False
     end
     object ButtonSetTime: TSpeedButton
-      Left = 150
+      Left = 16
       Height = 22
-      Top = 51
-      Width = 126
+      Top = 92
+      Width = 128
       Caption = 'Set Time'
       Enabled = False
       OnClick = ButtonSetTimeClick
     end
     object ButtonSetLocation: TSpeedButton
-      Left = -2
+      Left = 16
       Height = 22
-      Top = 51
-      Width = 129
+      Top = 64
+      Width = 126
       Caption = 'Set Location'
       Enabled = False
       OnClick = ButtonSetLocationClick
     end
     object lat: TEdit
-      Left = 62
-      Height = 24
-      Top = 16
-      Width = 70
+      Left = 16
+      Height = 26
+      Top = 32
+      Width = 80
       Color = clBtnFace
       ReadOnly = True
       TabStop = False
@@ -131,9 +132,9 @@ object pop_scope: Tpop_scope
       Text = '0'
     end
     object long: TEdit
-      Left = 206
-      Height = 24
-      Top = 16
+      Left = 115
+      Height = 26
+      Top = 32
       Width = 70
       Color = clBtnFace
       ReadOnly = True
@@ -141,14 +142,41 @@ object pop_scope: Tpop_scope
       TabOrder = 1
       Text = '0'
     end
+    object ButtonGetLocation: TSpeedButton
+      Left = 157
+      Height = 22
+      Top = 64
+      Width = 131
+      Caption = 'Get Location'
+      Enabled = False
+      OnClick = ButtonGetLocationClick
+    end
+    object Label2: TLabel
+      Left = 209
+      Height = 18
+      Top = 12
+      Width = 47
+      Caption = 'Altitude'
+      ParentColor = False
+    end
+    object elev: TEdit
+      Left = 209
+      Height = 26
+      Top = 32
+      Width = 80
+      ReadOnly = True
+      TabOrder = 2
+      Text = '0'
+    end
   end
   object Panel1: TPanel
-    Left = 8
+    Left = 0
     Height = 112
-    Top = 248
-    Width = 288
+    Top = 272
+    Width = 305
+    Align = alTop
     ClientHeight = 112
-    ClientWidth = 288
+    ClientWidth = 305
     TabOrder = 2
     object LabelAlpha: TLabel
       Left = 26
@@ -197,7 +225,7 @@ object pop_scope: Tpop_scope
     end
     object pos_x: TEdit
       Left = 64
-      Height = 24
+      Height = 26
       Top = 6
       Width = 80
       ReadOnly = True
@@ -206,7 +234,7 @@ object pop_scope: Tpop_scope
     end
     object pos_y: TEdit
       Left = 200
-      Height = 24
+      Height = 26
       Top = 6
       Width = 80
       ReadOnly = True
@@ -215,7 +243,7 @@ object pop_scope: Tpop_scope
     end
     object az_x: TEdit
       Left = 64
-      Height = 24
+      Height = 26
       Top = 30
       Width = 80
       ReadOnly = True
@@ -224,7 +252,7 @@ object pop_scope: Tpop_scope
     end
     object alt_y: TEdit
       Left = 200
-      Height = 24
+      Height = 26
       Top = 30
       Width = 80
       ReadOnly = True
@@ -233,9 +261,9 @@ object pop_scope: Tpop_scope
     end
     object ShowAltAz: TCheckBox
       Left = 8
-      Height = 21
+      Height = 23
       Top = 32
-      Width = 21
+      Width = 23
       TabOrder = 2
     end
     object ButtonTracking: TSpeedButton
@@ -259,13 +287,14 @@ object pop_scope: Tpop_scope
     end
   end
   object GroupBox1: TGroupBox
-    Left = 8
-    Height = 136
+    Left = 0
+    Height = 131
     Top = 0
-    Width = 288
+    Width = 305
+    Align = alTop
     Caption = 'Driver Selection'
-    ClientHeight = 117
-    ClientWidth = 286
+    ClientHeight = 111
+    ClientWidth = 301
     TabOrder = 0
     object ButtonSelect: TSpeedButton
       Left = 182
@@ -301,7 +330,7 @@ object pop_scope: Tpop_scope
     end
     object Edit1: TEdit
       Left = 2
-      Height = 24
+      Height = 26
       Top = 15
       Width = 172
       Color = clBtnFace
@@ -311,10 +340,11 @@ object pop_scope: Tpop_scope
     end
     object ReadIntBox: TComboBox
       Left = 110
-      Height = 24
+      Height = 26
       Top = 52
       Width = 64
       ItemHeight = 0
+      ItemIndex = 2
       Items.Strings = (
         '250'
         '500'

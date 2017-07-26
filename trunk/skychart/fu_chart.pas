@@ -316,6 +316,7 @@ type
     procedure RefreshImage(Sender: TObject);
     function GetTelescopeMove: Tfloat2func;
     procedure SetTelescopeMove(Value: Tfloat2func);
+    procedure ObservatoryFromTelescope(Sender: TObject);
   public
     { Public declarations }
     Image1: TChartDrawingControl;
@@ -5186,7 +5187,7 @@ begin
   end;
 
   Fpop_indi.ScopeReadConfig(ExtractFilePath(Configfile));
-  Fpop_indi.ScopeSetObs(sc.cfgsc.ObsLatitude, sc.cfgsc.ObsLongitude);
+  Fpop_indi.ScopeSetObs(sc.cfgsc.ObsLatitude, sc.cfgsc.ObsLongitude, sc.cfgsc.ObsAltitude);
   TelescopeTimer.Interval := 2000;
   TelescopeTimer.Enabled := True;
 
@@ -7209,6 +7210,7 @@ begin
   begin
     Fpop_indi := Tpop_indi.Create(self);
     Fpop_indi.csc := sc.cfgsc;
+    Fpop_indi.onObservatoryCoord:=ObservatoryFromTelescope;
     Fpop_indi.SetLang;
   end;
   if Connect1.Checked then
@@ -7218,7 +7220,7 @@ begin
   else
   begin
     Fpop_indi.ScopeReadConfig(ExtractFilePath(Configfile));
-    Fpop_indi.ScopeSetObs(sc.cfgsc.ObsLatitude, sc.cfgsc.ObsLongitude);
+    Fpop_indi.ScopeSetObs(sc.cfgsc.ObsLatitude, sc.cfgsc.ObsLongitude, sc.cfgsc.ObsAltitude);
     if autoconnect then
     begin
       Fpop_indi.ScopeConnect(ok);
@@ -7455,6 +7457,7 @@ begin
   begin
     Fpop_scope := Tpop_scope.Create(self);
     Fpop_scope.SetLang;
+    Fpop_scope.onObservatoryCoord:=ObservatoryFromTelescope;
   end;
   if Connect1.Checked then
   begin
@@ -7463,7 +7466,7 @@ begin
   else
   begin
     Fpop_scope.ScopeReadConfig(ExtractFilePath(Configfile));
-    Fpop_scope.ScopeSetObs(sc.cfgsc.ObsLatitude, sc.cfgsc.ObsLongitude);
+    Fpop_scope.ScopeSetObs(sc.cfgsc.ObsLatitude, sc.cfgsc.ObsLongitude, sc.cfgsc.ObsAltitude);
     if autoconnect then
     begin
       Fpop_scope.ScopeConnect(ok);
@@ -7719,6 +7722,26 @@ end;
 procedure Tf_chart.cmdEcl2Eq(l, b: double; var ra, de: double);
 begin
   Ecl2Eq(l, b, sc.cfgsc.ecl, ra, de);
+end;
+
+procedure Tf_chart.ObservatoryFromTelescope(Sender: TObject);
+begin
+  if Sender = Fpop_indi then
+  begin
+     sc.cfgsc.ObsLatitude:=Fpop_indi.Latitude;
+     sc.cfgsc.ObsLongitude:=Fpop_indi.Longitude;
+     sc.cfgsc.ObsAltitude:=Fpop_indi.Elevation;
+     sc.cfgsc.ObsName:='Telescope';
+  end
+  else
+  if Sender = Fpop_scope then
+  begin
+     sc.cfgsc.ObsLatitude:=Fpop_scope.Latitude;
+     sc.cfgsc.ObsLongitude:=Fpop_scope.Longitude;
+     sc.cfgsc.ObsAltitude:=Fpop_scope.Elevation;
+     sc.cfgsc.ObsName:='Telescope';
+  end;
+  AutoRefresh;
 end;
 
 end.

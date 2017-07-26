@@ -41,8 +41,11 @@ type
   { Tpop_scope }
 
   Tpop_scope = class(TForm)
+    ButtonGetLocation: TSpeedButton;
+    elev: TEdit;
     GroupBox3: TGroupBox;
     ButtonAdvSetting: TSpeedButton;
+    Label2: TLabel;
     WarningLabel: TLabel;
     trackingled: TEdit;
     ButtonConnect: TSpeedButton;
@@ -78,6 +81,7 @@ type
     ButtonHelp: TSpeedButton;
     ButtonAbout: TSpeedButton;
     {Utility and form functions}
+    procedure ButtonGetLocationClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure kill(Sender: TObject; var CanClose: boolean);
     procedure ButtonAdvSettingClick(Sender: TObject);
@@ -110,13 +114,14 @@ type
     FScopeEqSys: double;
     EqSysVal: integer;
     T: variant;
-    Longitude: single;
-    // Observatory longitude (Negative East of Greenwich}
-    Latitude: single;                  // Observatory latitude
+    FLongitude: single;                // Observatory longitude (Negative East of Greenwich}
+    FLatitude: single;                 // Observatory latitude
+    FElevation: single;                 // Observatory elevation
     {$ifdef mswindows}
     curdeg_x, curdeg_y: double;        // current equatorial position in degrees
     cur_az, cur_alt: double;           // current alt-az position in degrees
     {$endif}
+    FObservatoryCoord: TNotifyEvent;
     procedure SetDef(Sender: TObject);
     function ScopeConnectedReal: boolean;
     procedure ScopeGetEqSysReal(var EqSys: double);
@@ -133,7 +138,7 @@ type
     procedure ScopeGetInfo(var scName: shortstring;
       var QueryOK, SyncOK, GotoOK: boolean; var refreshrate: integer);
     procedure ScopeGetEqSys(var EqSys: double);
-    procedure ScopeSetObs(la, lo: double);
+    procedure ScopeSetObs(la, lo, alt: double);
     procedure ScopeAlign(Source: string; ra, Dec: single);
     procedure ScopeGetRaDec(var ar, de: double; var ok: boolean);
     procedure ScopeGetAltAz(var alt, az: double; var ok: boolean);
@@ -147,6 +152,10 @@ type
     procedure GetScopeRates(var nrates0, nrates1: integer;
       axis0rates, axis1rates: Pdoublearray);
     procedure ScopeMoveAxis(axis: integer; rate: double);
+    property Longitude: single read FLongitude;
+    property Latitude: single read FLatitude;
+    property Elevation: single read FElevation;
+    property onObservatoryCoord: TNotifyEvent read FObservatoryCoord write FObservatoryCoord;
   end;
 
 
@@ -239,6 +248,7 @@ begin
     ButtonConfigure.Enabled := True;
     ButtonSetTime.Enabled := False;
     ButtonSetLocation.Enabled := False;
+    ButtonGetLocation.Enabled := False;
     UpdTrackingButton;
   except
     on E: EOleException do
@@ -280,6 +290,7 @@ begin
       ButtonConfigure.Enabled := False;
       ButtonSetTime.Enabled := True;
       ButtonSetLocation.Enabled := True;
+      ButtonGetLocation.Enabled := True;
     end
     else
       scopedisconnect(dis_ok);
@@ -472,12 +483,14 @@ procedure Tpop_scope.ScopeReset;
 begin
 end;
 
-procedure Tpop_scope.ScopeSetObs(la, lo: double);
+procedure Tpop_scope.ScopeSetObs(la, lo, alt: double);
 begin
-  latitude := la;
-  longitude := -lo;
-  lat.Text := detostr(latitude);
-  long.Text := detostr(longitude);
+  Flatitude := la;
+  Flongitude := -lo;
+  FElevation := alt;
+  lat.Text := detostr(Flatitude);
+  long.Text := detostr(Flongitude);
+  elev.Text := FormatFloat(f1,FElevation);
 end;
 
 procedure Tpop_scope.ScopeGoto(ar, de: single; var ok: boolean);
@@ -872,14 +885,37 @@ begin
 {$endif}
 end;
 
+procedure Tpop_scope.ButtonGetLocationClick(Sender: TObject);
+begin
+{$ifdef mswindows}
+  if ScopeConnected then
+  begin
+    try
+      Flongitude := T.SiteLongitude;
+      Flatitude := T.SiteLatitude;
+      FElevation := T.SiteElevation;
+      lat.Text := detostr(Flatitude);
+      long.Text := detostr(Flongitude);
+      elev.Text := FormatFloat(f1,FElevation);
+      if assigned(FObservatoryCoord) then
+        FObservatoryCoord(self);
+    except
+      on E: EOleException do
+        MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+    end;
+  end;
+{$endif}
+end;
+
 procedure Tpop_scope.ButtonSetLocationClick(Sender: TObject);
 begin
 {$ifdef mswindows}
   if ScopeConnected then
   begin
     try
-      T.SiteLongitude := longitude;
-      T.SiteLatitude := latitude;
+      T.SiteLongitude := Flongitude;
+      T.SiteLatitude := Flatitude;
+      T.SiteElevation := FElevation;
     except
       on E: EOleException do
         MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
