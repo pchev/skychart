@@ -8,6 +8,10 @@
 	<string>skychart</string>
 	<key>CFBundleIconFile</key>
 	<string>cdcIcon2</string>
+        <key>CFBundleIdentifier</key>
+        <string>net.ap-i.skychart</string>
+        <key>CFBundleName</key>
+        <string>skychart</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
