@@ -260,7 +260,6 @@ object f_calendar: Tf_calendar
         Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
         RowCount = 3
         TabOrder = 0
-        TitleFont.Height = -11
         OnDblClick = GridDblClick
         OnMouseUp = GridMouseUp
       end
@@ -296,7 +295,6 @@ object f_calendar: Tf_calendar
             Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
-            TitleFont.Height = -11
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
           end
@@ -317,7 +315,6 @@ object f_calendar: Tf_calendar
             Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
-            TitleFont.Height = -11
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
           end
@@ -339,7 +336,6 @@ object f_calendar: Tf_calendar
             Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
-            TitleFont.Height = -11
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
           end
@@ -361,7 +357,6 @@ object f_calendar: Tf_calendar
             Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
-            TitleFont.Height = -11
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
           end
@@ -383,7 +378,6 @@ object f_calendar: Tf_calendar
             Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
-            TitleFont.Height = -11
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
           end
@@ -405,7 +399,6 @@ object f_calendar: Tf_calendar
             Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
-            TitleFont.Height = -11
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
           end
@@ -427,7 +420,6 @@ object f_calendar: Tf_calendar
             Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
-            TitleFont.Height = -11
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
           end
@@ -449,7 +441,6 @@ object f_calendar: Tf_calendar
             Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
-            TitleFont.Height = -11
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
           end
@@ -471,7 +462,6 @@ object f_calendar: Tf_calendar
             Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
-            TitleFont.Height = -11
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
           end
@@ -493,7 +483,6 @@ object f_calendar: Tf_calendar
             Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
             RowCount = 15
             TabOrder = 0
-            TitleFont.Height = -11
             OnDblClick = GridDblClick
             OnMouseUp = GridMouseUp
           end
@@ -516,7 +505,6 @@ object f_calendar: Tf_calendar
             FixedRows = 0
             RowCount = 10
             TabOrder = 0
-            TitleFont.Height = -11
             OnDrawCell = dgPlanetDrawCell
           end
         end
@@ -540,7 +528,6 @@ object f_calendar: Tf_calendar
         Options = [goVertLine, goHorzLine, goColSizing, goFixedColSizing]
         RowCount = 3
         TabOrder = 0
-        TitleFont.Height = -11
         OnDblClick = GridDblClick
         OnMouseUp = GridMouseUp
       end
@@ -609,7 +596,6 @@ object f_calendar: Tf_calendar
         Options = [goVertLine, goHorzLine, goColSizing, goFixedColSizing]
         RowCount = 3
         TabOrder = 0
-        TitleFont.Height = -11
         OnDblClick = GridDblClick
         OnMouseUp = GridMouseUp
       end
@@ -668,7 +654,6 @@ object f_calendar: Tf_calendar
         Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
         RowCount = 3
         TabOrder = 0
-        TitleFont.Height = -11
         OnDblClick = GridDblClick
         OnMouseUp = GridMouseUp
       end
@@ -690,7 +675,6 @@ object f_calendar: Tf_calendar
         Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
         RowCount = 3
         TabOrder = 0
-        TitleFont.Height = -11
         OnDblClick = GridDblClick
         OnMouseUp = GridMouseUp
       end
@@ -713,7 +697,6 @@ object f_calendar: Tf_calendar
         Options = [goVertLine, goHorzLine, goColSizing, goFixedColSizing]
         RowCount = 3
         TabOrder = 0
-        TitleFont.Height = -11
         OnDblClick = GridDblClick
         OnMouseUp = GridMouseUp
       end
