@@ -162,7 +162,6 @@ object f_info: Tf_info
       RowCount = 10
       ScrollBars = ssVertical
       TabOrder = 0
-      TitleFont.Height = -11
       TitleFont.Name = 'MS Sans Serif'
       OnMouseDown = StringGrid1MouseDown
     end
@@ -191,7 +190,6 @@ object f_info: Tf_info
       Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect, goRelaxedRowSelect, goSmoothScroll, goScrollKeepVisible]
       PopupMenu = PopupMenu2
       TabOrder = 1
-      TitleFont.Height = -11
       OnCompareCells = StringGrid2CompareCells
       OnDblClick = StringGrid2DblClick
       OnMouseDown = StringGrid2MouseDown

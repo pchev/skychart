@@ -127,7 +127,6 @@ object f_voconfig: Tf_voconfig
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goRowSelect]
         RowCount = 2
         TabOrder = 1
-        TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
         OnDblClick = SelectCatalog
       end
@@ -216,7 +215,6 @@ object f_voconfig: Tf_voconfig
         GridLineWidth = 0
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing]
         TabOrder = 0
-        TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
       end
       object Panel2: TPanel

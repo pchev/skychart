@@ -3735,7 +3735,6 @@ object f_catgen: Tf_catgen
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAlwaysShowEditor]
         RowCount = 20
         TabOrder = 0
-        TitleFont.Height = -11
         ColWidths = (
           120
           193
@@ -3777,7 +3776,6 @@ object f_catgen: Tf_catgen
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAlwaysShowEditor]
         RowCount = 4
         TabOrder = 0
-        TitleFont.Height = -11
         ColWidths = (
           120
           193
@@ -3818,7 +3816,6 @@ object f_catgen: Tf_catgen
         GridLineWidth = 0
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAlwaysShowEditor]
         TabOrder = 0
-        TitleFont.Height = -11
         ColWidths = (
           120
           193
@@ -3948,7 +3945,6 @@ object f_catgen: Tf_catgen
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAlwaysShowEditor]
         RowCount = 11
         TabOrder = 0
-        TitleFont.Height = -11
       end
       object Button10: TButton
         Left = 134

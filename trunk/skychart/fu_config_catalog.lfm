@@ -1060,7 +1060,6 @@ object f_config_catalog: Tf_config_catalog
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
           RowCount = 2
           TabOrder = 1
-          TitleFont.Height = -11
           TitleStyle = tsStandard
           OnDrawCell = StringGrid3DrawCell
           OnMouseUp = StringGrid3MouseUp
@@ -1137,7 +1136,6 @@ object f_config_catalog: Tf_config_catalog
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goRowSelect, goAlwaysShowEditor]
           RowCount = 2
           TabOrder = 1
-          TitleFont.Height = -11
           TitleStyle = tsStandard
           OnDrawCell = StringGrid4DrawCell
           OnMouseMove = StringGrid4MouseMove

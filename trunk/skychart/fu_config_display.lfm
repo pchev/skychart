@@ -3471,7 +3471,6 @@ object f_config_display: Tf_config_display
           RowCount = 11
           ScrollBars = ssVertical
           TabOrder = 0
-          TitleFont.Height = -11
           OnColRowInserted = CirclegridColRowInserted
           OnColRowMoved = CirclegridColRowMoved
           OnDblClick = CirclegridDblClick
@@ -3551,7 +3550,6 @@ object f_config_display: Tf_config_display
           RowCount = 11
           ScrollBars = ssVertical
           TabOrder = 0
-          TitleFont.Height = -11
           OnColRowInserted = RectangleGridColRowInserted
           OnColRowMoved = RectangleGridColRowMoved
           OnDblClick = RectangleGridDblClick
