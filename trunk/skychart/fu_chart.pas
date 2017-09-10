@@ -361,6 +361,7 @@ type
     function cmd_SetProjection(proj: string): string;
     function cmd_SetFov(fov: string): string;
     function cmd_Resize(w, h: string): string;
+    function cmd_GetChartEqsys: string;
     function cmd_SetRa(param1: string): string;
     function cmd_SetDec(param1: string): string;
     function cmd_SetDate(dt: string): string;
@@ -4667,6 +4668,14 @@ begin
   Result := msgOK;
 end;
 
+function Tf_chart.cmd_GetChartEqsys: string;
+begin
+  if sc.cfgsc.EquinoxChart=rsDate then
+     result:='Date'
+  else
+     result:=stringreplace(stringreplace(sc.cfgsc.EquinoxChart, 'J', '', []), 'B', '', []);
+end;
+
 function Tf_chart.cmd_SetRa(param1: string): string;
 var
   buf: string;
@@ -6480,6 +6489,7 @@ begin
     124: Result := cmd_ShowOnlyMeridian(arg[1]);
     125: Result := cmd_ShowAlwaysMeridian(arg[1]);
     126: Result := cmd_Cleanup;
+    127: Result := cmd_GetChartEqsys;
     else
       Result := msgFailed + ' Bad command name';
   end;
