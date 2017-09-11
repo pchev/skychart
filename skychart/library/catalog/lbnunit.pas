@@ -33,6 +33,7 @@ LBNrec = record ar,de :longint ;
                 end;
 Function IsLBNpath(path : string) : Boolean;
 procedure SetLBNpath(path : string);
+Procedure OpenLBNAll(var ok : boolean);
 Procedure OpenLBN(ar1,ar2,de1,de2: double ; var ok : boolean);
 Procedure OpenLBNwin(var ok : boolean);
 Procedure ReadLBN(var lin : LBNrec; var ok : boolean);
@@ -84,6 +85,17 @@ SMname:=nomreg;
 FileMode:=0;
 reset(flbn);
 ok:=true ;
+end;
+
+Procedure OpenLBNAll(var ok : boolean);
+var i:integer;
+begin
+JDCatalog:=jd2000;
+curSM:=1;
+nSM:=50;
+for i:=1 to nSM do SMlst[i]:=i;
+Sm := Smlst[curSM];
+OpenRegion(Sm,ok);
 end;
 
 Procedure OpenLBN(ar1,ar2,de1,de2: double ; var ok : boolean);

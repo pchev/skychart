@@ -116,6 +116,8 @@ type
     procedure FindDRK(id: shortstring; var ar, de: double; var ok: boolean);
     function GetDRK(var rec: GcatRec): boolean;
     function GetLBN(var rec: GcatRec): boolean;
+    procedure FormatLBN(lin: LBNrec; var rec: GcatRec);
+    procedure FindLBN(id : string ;var ar,de:double; var ok:boolean);
     function GetRC3(var rec: GcatRec): boolean;
     procedure FormatPGC(lin: PGCrec; var rec: GcatRec);
     function IsPGCpath(path: string): boolean;
@@ -1569,7 +1571,7 @@ begin
       EmptyRec.options.Equinox := 2000;
       EmptyRec.options.EquinoxJD := jd2000;
       EmptyRec.options.MagMax := 12;
-      EmptyRec.options.UsePrefix := 0;
+      EmptyRec.options.UsePrefix := 1;
       EmptyRec.options.Units := 60;
       EmptyRec.options.LogSize := 0;
       EmptyRec.options.ObjType := 5;
@@ -1579,6 +1581,7 @@ begin
       Emptyrec.neb.valid[vnDim1] := True;
       Emptyrec.neb.valid[vnDim2] := True;
       EmptyRec.options.altname[1] := True;
+      EmptyRec.options.altprefix[1] := True;
       EmptyRec.vstr[1] := True;
       EmptyRec.options.flabel[16] := 'LBN';
       EmptyRec.vnum[1] := True;
@@ -3299,6 +3302,39 @@ begin
     ok := False;
 end;
 
+procedure Tcatalog.FormatLBN(lin: LBNrec; var rec: GcatRec);
+begin
+  rec.ra := deg2rad * lin.ar / 100000;
+  rec.Dec := deg2rad * lin.de / 100000;
+  rec.neb.dim2 := lin.d2;
+  if rec.neb.dim1 <= 0 then
+    rec.neb.dim1 := 1;
+  case lin.bright of
+    0..1: rec.neb.mag := 8;
+    2: rec.neb.mag := 13;
+    3: rec.neb.mag := 15;
+    4: rec.neb.mag := 16;
+    else
+      rec.neb.mag := 18;
+  end;
+  if (rec.neb.mag > 70) or (rec.neb.mag < -70) then
+  begin
+    rec.neb.mag := 99;     // undefined magnitude
+    rec.neb.sbr := 99;
+  end
+  else
+  begin
+    ;
+    rec.neb.sbr := rec.neb.mag + 5 * log10(rec.neb.dim1) - 0.26;
+  end;
+  rec.neb.id := lin.Name;
+  rec.str[1] := IntToStr(lin.num);
+  rec.num[1] := lin.id;
+  rec.num[2] := lin.bright;
+  rec.num[3] := lin.color;
+  rec.num[4] := lin.area;
+end;
+
 function Tcatalog.GetLBN(var rec: GcatRec): boolean;
 var
   lin: LBNrec;
@@ -3326,27 +3362,43 @@ begin
   until not Result;
   if Result then
   begin
-    rec.ra := deg2rad * lin.ar / 100000;
-    rec.Dec := deg2rad * lin.de / 100000;
-    rec.neb.dim2 := lin.d2;
-    if rec.neb.dim1 <= 0 then
-      rec.neb.dim1 := 1;
-    if (rec.neb.mag > 70) or (rec.neb.mag < -70) then
-    begin
-      rec.neb.mag := 99;     // undefined magnitude
-      rec.neb.sbr := 99;
-    end
-    else
-    begin
-      ;
-      rec.neb.sbr := rec.neb.mag + 5 * log10(rec.neb.dim1) - 0.26;
+    FormatLBN(lin,rec);
+  end;
+end;
+
+procedure Tcatalog.FindLBN(id : string ;var ar,de:double; var ok:boolean);
+var lin: LBNrec;
+    rok: boolean;
+    buf:string;
+    n: integer;
+begin
+  ok:=false;
+  buf:=trim(copy(id,4,9));
+  n:=StrToIntDef(buf,-1);
+  if n>=0 then begin
+    try
+    OpenLBNAll(rok);
+    if not rok then
+      exit;
+    repeat
+      ReadLBN(lin, rok);
+      if not rok then
+        break;
+      if n=lin.num then begin
+        ok:=true;
+        InitRec(lbn);
+        FFindRec := EmptyRec;
+        FormatLBN(lin,FFindRec);
+        ar := rad2deg*FFindRec.ra/15;
+        de := rad2deg*FFindRec.Dec;
+        FFindId := id;
+        FFindRecOK := True;
+        break;
+      end;
+    until not rok;
+    finally
+      CloseLBN;
     end;
-    rec.neb.id := lin.Name;
-    rec.str[1] := IntToStr(lin.num);
-    rec.num[1] := lin.id;
-    rec.num[2] := lin.bright;
-    rec.num[3] := lin.color;
-    rec.num[4] := lin.area;
   end;
 end;
 
@@ -3942,6 +3994,10 @@ begin
         begin
           FindGPN(id, ra, Dec, Result);
         end;
+      S_LBN: if IsLBNpath(cfgcat.NebCatPath[lbn - BaseNeb]) then
+        begin
+          FindLBN(id, ra, Dec, Result);
+        end;
     end;
     if Result and (FFindId = '') then
       FFindId := id;
@@ -4061,6 +4117,13 @@ begin
   begin
     buf := StringReplace(Num, 'pgc', '', [rfReplaceAll, rfIgnoreCase]);
     Result := FindNum(S_PGC, buf, ar1, de1);
+    if Result then
+      exit;
+  end;
+  // LBN
+  if uppercase(copy(Num, 1, 3)) = 'LBN' then
+  begin
+    Result := FindNum(S_LBN, Num, ar1, de1);
     if Result then
       exit;
   end;
