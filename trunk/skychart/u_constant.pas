@@ -467,6 +467,7 @@ const
   S_SH2 = 31;
   S_DRK = 32;
   S_GPN = 33;
+  S_LBN = 34;
   StarLabel: Tlabellst = ('RA', 'DEC', 'Id', 'mV', 'b-v', 'mB', 'mR',
     'sp', 'pmRA', 'pmDE', 'date', 'px', 'desc', '', '', 'Str1', 'Str2', 'Str3',
     'Str4', 'Str5', 'Str6', 'Str7', 'Str8', 'Str9', 'Str10', 'Num1', 'Num2',
