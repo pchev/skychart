@@ -1,0 +1,66 @@
+#
+#   Makefile.fpc for Time Memo
+#
+
+[package]
+name=timememo
+version=2
+
+[target]
+dirs=synapse
+programs=timememo
+
+[require]
+libc=y
+packages=rtl
+
+[compiler]
+unittargetdir=units/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
+includedir=./
+options= $(opt_target) $(fpcopts) -CF64 -dWithUpdateMenu -dUseCThreads -dLCL -dLCL$(LCL_PLATFORM) -MObjFPC -Sgi -vewni -l
+unitdir=synapse/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/components/lazutils/lib/$(CPU_TARGET)-$(OS_TARGET) $(LAZDIR)/ideintf/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM) ./
+
+[clean]
+files=$(wildcard $(COMPILER_UNITTARGETDIR)/*$(OEXT)) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*$(PPUEXT)) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*$(RSTEXT)) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*.compiled) \
+      $(wildcard *$(OEXT)) $(wildcard *$(PPUEXT)) $(wildcard *$(RSTEXT))
+
+[prerules]
+LAZDIR=%LAZDIR%
+# Compiler options
+ifndef fpcopts 
+#fpcopts=-O1 -g -gl -Ci -Cr -Co -Ct  // debug
+fpcopts=-O3  -CX -XX -Xs 
+endif
+# LCL Platform
+ifndef LCL_PLATFORM
+ifeq ($(OS_TARGET),win32)
+LCL_PLATFORM=win32
+opt_target= -WG
+else
+ifeq ($(OS_TARGET),win64)
+LCL_PLATFORM=win32
+opt_target= -WG
+else
+ifeq ($(OS_TARGET),darwin)
+LCL_PLATFORM=qt
+opt_target= -k-macosx_version_min -k10.6
+else
+LCL_PLATFORM=gtk2
+opt_target=
+endif
+endif
+endif
+endif
+export LCL_PLATFORM
+
+[rules]
+.PHONY: all
+
+outdir:
+	mkdir -p units/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
+
+all: outdir synapse_all timememo$(EXEEXT)
+

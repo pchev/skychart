@@ -1,0 +1,345 @@
+object form_memo: Tform_memo
+  Left = 336
+  Height = 451
+  Top = 131
+  Width = 668
+  HorzScrollBar.Range = 561
+  HorzScrollBar.Visible = False
+  VertScrollBar.Range = 173
+  VertScrollBar.Visible = False
+  Caption = 'Time Memo'
+  ClientHeight = 451
+  ClientWidth = 668
+  KeyPreview = True
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poDefaultPosOnly
+  ShowInTaskBar = stAlways
+  LCLVersion = '1.8.0.4'
+  object Panel8: TPanel
+    Left = 0
+    Height = 171
+    Top = 0
+    Width = 668
+    Align = alTop
+    Caption = 'Panel8'
+    ClientHeight = 171
+    ClientWidth = 668
+    TabOrder = 0
+    object Panel7: TPanel
+      Left = 1
+      Height = 169
+      Top = 1
+      Width = 426
+      Align = alLeft
+      ClientHeight = 169
+      ClientWidth = 426
+      TabOrder = 0
+      object Panel2: TPanel
+        Left = 1
+        Height = 30
+        Top = 1
+        Width = 424
+        Align = alTop
+        BevelOuter = bvNone
+        ClientHeight = 30
+        ClientWidth = 424
+        TabOrder = 0
+        object Label1: TLabel
+          Left = 8
+          Height = 18
+          Top = 8
+          Width = 279
+          Caption = 'Control the PC clock with the NTP server every '
+          ParentColor = False
+        end
+        object Label2: TLabel
+          Left = 352
+          Height = 18
+          Top = 8
+          Width = 52
+          Caption = 'seconds '
+          ParentColor = False
+        end
+        object EditInterval: TEdit
+          Left = 304
+          Height = 24
+          Top = 4
+          Width = 41
+          OnExit = EditIntervalExit
+          TabOrder = 0
+          Text = '15'
+        end
+      end
+      object Panel3: TPanel
+        Left = 1
+        Height = 96
+        Top = 31
+        Width = 424
+        Align = alTop
+        BevelOuter = bvNone
+        ClientHeight = 96
+        ClientWidth = 424
+        TabOrder = 1
+        object Label3: TLabel
+          Left = 120
+          Height = 18
+          Top = 20
+          Width = 160
+          Caption = 'if the offset is greater than '
+          ParentColor = False
+        end
+        object Label4: TLabel
+          Left = 352
+          Height = 18
+          Top = 20
+          Width = 52
+          Caption = 'seconds '
+          ParentColor = False
+        end
+        object Label6: TLabel
+          Left = 352
+          Height = 18
+          Top = 44
+          Width = 49
+          Caption = 'seconds'
+          ParentColor = False
+        end
+        object Label5: TLabel
+          Left = 103
+          Height = 18
+          Top = 44
+          Width = 177
+          Caption = 'but no more than once every '
+          ParentColor = False
+        end
+        object Label9: TLabel
+          Left = 352
+          Height = 18
+          Top = 68
+          Width = 49
+          Caption = 'seconds'
+          ParentColor = False
+        end
+        object Label10: TLabel
+          Left = 44
+          Height = 18
+          Top = 68
+          Width = 236
+          Caption = 'nor if the time difference is greater than'
+          ParentColor = False
+        end
+        object EditMaxofffset: TEdit
+          Left = 304
+          Height = 24
+          Top = 16
+          Width = 41
+          OnExit = EditMaxofffsetExit
+          TabOrder = 0
+          Text = '0.1'
+        end
+        object EditUpdateInterval: TEdit
+          Left = 304
+          Height = 24
+          Top = 40
+          Width = 41
+          OnExit = EditUpdateIntervalExit
+          TabOrder = 1
+          Text = '60'
+        end
+        object EditMaxDifference: TEdit
+          Left = 304
+          Height = 24
+          Top = 64
+          Width = 41
+          OnExit = EditMaxDifferenceExit
+          TabOrder = 2
+          Text = '3600'
+        end
+        object CheckBoxSetTime: TCheckBox
+          Left = 2
+          Height = 21
+          Top = 0
+          Width = 127
+          Caption = 'Set the PC clock : '
+          Color = clBtnFace
+          OnClick = CheckBoxSetTimeClick
+          ParentColor = False
+          TabOrder = 3
+        end
+      end
+      object Panel4: TPanel
+        Left = 1
+        Height = 35
+        Top = 127
+        Width = 424
+        Align = alTop
+        BevelOuter = bvNone
+        ClientHeight = 35
+        ClientWidth = 424
+        TabOrder = 2
+        object Label7: TLabel
+          Left = 8
+          Height = 18
+          Top = 8
+          Width = 105
+          Caption = 'NTP server to use'
+          ParentColor = False
+        end
+        object Panel1: TPanel
+          Left = 352
+          Height = 27
+          Top = 5
+          Width = 59
+          BevelOuter = bvNone
+          ClientHeight = 27
+          ClientWidth = 59
+          Color = clRed
+          ParentColor = False
+          TabOrder = 0
+          object BtnStart: TButton
+            Left = 1
+            Height = 25
+            Top = 1
+            Width = 57
+            Caption = 'Start'
+            OnClick = BtnStartClick
+            TabOrder = 0
+          end
+        end
+        object ServerList: TComboBox
+          Left = 144
+          Height = 24
+          Top = 5
+          Width = 200
+          ItemHeight = 0
+          ItemIndex = 0
+          Items.Strings = (
+            'pool.ntp.org'
+            'swisstime.ethz.ch'
+          )
+          TabOrder = 1
+          Text = 'pool.ntp.org'
+        end
+      end
+    end
+    object Panel6: TPanel
+      Left = 427
+      Height = 169
+      Top = 1
+      Width = 230
+      Align = alLeft
+      BevelOuter = bvNone
+      ClientHeight = 169
+      ClientWidth = 230
+      TabOrder = 1
+      object GroupBox2: TGroupBox
+        Left = 0
+        Height = 80
+        Top = 0
+        Width = 230
+        Align = alTop
+        Caption = 'Immediat actions'
+        ClientHeight = 61
+        ClientWidth = 228
+        TabOrder = 0
+        object BtnSetTime: TButton
+          Left = 96
+          Height = 33
+          Top = 12
+          Width = 73
+          Caption = 'Set Time'
+          OnClick = BtnSetTimeClick
+          TabOrder = 0
+        end
+        object BtnShowTime: TButton
+          Left = 8
+          Height = 33
+          Top = 12
+          Width = 81
+          Caption = 'Show Time'
+          OnClick = BtnShowTimeClick
+          TabOrder = 1
+        end
+        object BtnExit: TButton
+          Left = 176
+          Height = 33
+          Top = 12
+          Width = 41
+          Caption = 'Exit'
+          OnClick = BtnExitClick
+          TabOrder = 2
+        end
+      end
+      object GroupBox1: TGroupBox
+        Left = 0
+        Height = 80
+        Top = 80
+        Width = 230
+        Align = alTop
+        Caption = 'Log file'
+        ClientHeight = 61
+        ClientWidth = 228
+        TabOrder = 1
+        object EditLog: TEdit
+          Left = 40
+          Height = 24
+          Top = 32
+          Width = 161
+          TabOrder = 0
+          Text = 'timememo.txt'
+        end
+        object CheckBoxLog: TCheckBox
+          Left = 16
+          Height = 21
+          Top = 8
+          Width = 109
+          Caption = 'Record to file :'
+          Checked = True
+          State = cbChecked
+          TabOrder = 1
+        end
+      end
+    end
+  end
+  object Panel5: TPanel
+    Left = 0
+    Height = 280
+    Top = 171
+    Width = 668
+    Align = alClient
+    Anchors = [akTop, akLeft, akBottom]
+    ClientHeight = 280
+    ClientWidth = 668
+    TabOrder = 1
+    object Memo1: TMemo
+      Left = 1
+      Height = 260
+      Top = 19
+      Width = 666
+      Align = alClient
+      Font.Pitch = fpFixed
+      ParentFont = False
+      ScrollBars = ssVertical
+      TabOrder = 0
+    end
+    object Label8: TLabel
+      Left = 1
+      Height = 18
+      Top = 1
+      Width = 666
+      Align = alTop
+      Caption = 'Local PC time UT              | NTP Server Time UT         | Offset | Delay  | Sync. '
+      Font.Pitch = fpFixed
+      ParentColor = False
+      ParentFont = False
+    end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    OnTimer = Timer1Timer
+    left = 32
+    top = 208
+  end
+end
