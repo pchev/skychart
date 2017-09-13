@@ -16,7 +16,7 @@ computer clock (on Windows only).
 
 Time Memo is free software, it is distributed under the terms of 
 the GNU General Public License, Version 2.
-The source code can be found at http://www.ap-i.net/timememo/
+The source code can be found at https://sourceforge.net/p/skychart/code/HEAD/tree/timememo/
 The source code for the Synapse component is at http://www.ararat.cz/synapse/
 Compile with Free Pascal and Lazarus available from https://www.lazarus-ide.org/
 
