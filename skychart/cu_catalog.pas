@@ -3377,6 +3377,7 @@ begin
   n:=StrToIntDef(buf,-1);
   if n>=0 then begin
     try
+    SetLBNpath(cfgcat.nebcatpath[lbn - BaseNeb]);
     OpenLBNAll(rok);
     if not rok then
       exit;
