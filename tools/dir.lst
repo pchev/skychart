@@ -21,10 +21,14 @@ data/script
 data/stars
 data/Themes
 data/Themes/default
-data/Themes/default/icon_blue
-data/Themes/default/icon_color
-data/Themes/default/icon_green
-data/Themes/default/icon_red
+data/Themes/default/daylight
+data/Themes/default/daylight/16x16
+data/Themes/default/daylight/22x22
+data/Themes/default/daylight/32x32
+data/Themes/default/night-vision
+data/Themes/default/night-vision/16x16
+data/Themes/default/night-vision/22x22
+data/Themes/default/night-vision/32x32
 data/varobs
 doc
 

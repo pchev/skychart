@@ -601,8 +601,8 @@ resourcestring
   rsMilkyWay = 'Milky Way';
   rsStandardColo = 'Standard  colour';
   rsTheme = 'Theme';
-  rsNightVisionB = 'Night vision button';
-  rsDefaultButto = 'Default button';
+//  rsNightVisionB = 'Night vision button';
+//  rsDefaultButto = 'Default button';
   rsDeepSkyColou = 'Deep sky colour';
   rsUseAPresetCo = 'Use a preset colour scheme:';
   rsChooseColour = 'Choose colours for the object types';
@@ -939,8 +939,8 @@ resourcestring
   rsRed = 'Red';
   rsWhiteOnBlack = 'White on black';
   rsBlackOnWhite = 'Black on white';
-  rsNormalColor = 'Normal (colour)';
-  rsBlue = 'Blue';
+  //rsNormalColor = 'Normal (colour)';
+//  rsBlue = 'Blue';
   rsGreen = 'Green';
   rsFixedBlack = 'Fixed black';
   rsAbbreviation = 'Abbreviation';

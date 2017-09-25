@@ -163,8 +163,6 @@ type
     Page7: TTabSheet;
     Page8: TTabSheet;
     Page9: TTabSheet;
-    NightButton: TRadioGroup;
-    StandardButton: TRadioGroup;
     stardisplay: TRadioGroup;
     nebuladisplay: TRadioGroup;
     Label256: TLabel;
@@ -442,8 +440,6 @@ type
     procedure StarSizeBar1Change(Sender: TObject);
     procedure StyleDrawItem(Control: TWinControl; Index: integer;
       ARect: TRect; State: TOwnerDrawState);
-    procedure NightButtonClick(Sender: TObject);
-    procedure StandardButtonClick(Sender: TObject);
     procedure ThemeListChange(Sender: TObject);
     procedure nebuladisplayClick(Sender: TObject);
     procedure red_moveBoxClick(Sender: TObject);
@@ -601,16 +597,6 @@ begin
   BtnBWColor.Caption := rsWhiteOnBlack;
   BtnWBColor.Caption := rsBlackOnWhite;
   GroupBox6.Caption := rsTheme;
-  NightButton.Caption := rsNightVisionB;
-  NightButton.Items[0] := rsNormalColor;
-  NightButton.Items[1] := rsRed;
-  NightButton.Items[2] := rsBlue;
-  NightButton.Items[3] := rsGreen;
-  StandardButton.Caption := rsDefaultButto;
-  StandardButton.Items[0] := rsNormalColor;
-  StandardButton.Items[1] := rsRed;
-  StandardButton.Items[2] := rsBlue;
-  StandardButton.Items[3] := rsGreen;
 
   Page3.Caption := rsDeepSkyColou;
   lblDSOCScheme.Caption := rsUseAPresetCo;
@@ -1188,17 +1174,6 @@ begin
   csc.DrawPMyear := DrawPMy.Value;
 end;
 
-
-procedure Tf_config_display.NightButtonClick(Sender: TObject);
-begin
-  cmain.ButtonNight := NightButton.ItemIndex + 1;
-end;
-
-procedure Tf_config_display.StandardButtonClick(Sender: TObject);
-begin
-  cmain.ButtonStandard := StandardButton.ItemIndex + 1;
-end;
-
 procedure Tf_config_display.ThemeListChange(Sender: TObject);
 begin
   if LockChange then
@@ -1316,8 +1291,6 @@ begin
   shape26.brush.color := cplot.color[20];
   shape27.brush.color := cplot.color[21];
   shape28.brush.color := cplot.color[22];
-  StandardButton.ItemIndex := cmain.ButtonStandard - 1;
-  NightButton.ItemIndex := cmain.ButtonNight - 1;
   ThemeList.Clear;
   n := 0;
   i := findfirst(slash(appdir) + slash('data') + slash('Themes') + '*', faDirectory, fs);
@@ -1326,9 +1299,12 @@ begin
     if ((fs.attr and faDirectory) <> 0) and (fs.Name <> '.') and (fs.Name <> '..') then
     begin
       buf := extractfilename(fs.Name);
-      ThemeList.items.Add(buf);
-      if cmain.ThemeName = buf then
-        ThemeList.ItemIndex := n;
+      if DirectoryExists(slash(appdir) + slash('data') + slash('Themes') + slash(buf) + 'daylight' ) then
+      begin
+        ThemeList.items.Add(buf);
+        if cmain.ThemeName = buf then
+          ThemeList.ItemIndex := n;
+      end;
       Inc(n);
     end;
     i := findnext(fs);

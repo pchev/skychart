@@ -1138,7 +1138,7 @@ type
     dbport: integer;
     PrtLeftMargin, PrtRightMargin, PrtTopMargin, PrtBottomMargin, PrintCopies: integer;
     savetop, saveleft, saveheight, savewidth: integer;
-    ButtonStandard, ButtonNight, AnimDelay, AnimSx, AnimSy, AnimSize,
+    AnimDelay, AnimSx, AnimSy, AnimSize,
     VOurl, VOmaxrecord: integer;
     VOforceactive: boolean;
     PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec: boolean;
@@ -1316,8 +1316,8 @@ var
   ldeg, lmin, lsec: string;
   MaxThreadCount: integer;
   ImageListCount: integer;
-  //ImageListSize: integer;
-  nightvision: boolean;
+  nightvision, DarkTheme: boolean;
+  CurrentTheme: string;
   isWOW64: boolean;
   isANSItmpdir: boolean;
   DisplayIs32bpp: boolean;
@@ -2777,8 +2777,6 @@ begin
   saveleft := Source.saveleft;
   saveheight := Source.saveheight;
   savewidth := Source.savewidth;
-  ButtonStandard := Source.ButtonStandard;
-  ButtonNight := Source.ButtonNight;
   VOurl := Source.VOurl;
   VOmaxrecord := Source.VOmaxrecord;
   VOforceactive := Source.VOforceactive;

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 16 16"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="night-vision-on.svg"
+   width="16"
+   height="16"
+   inkscape:export-filename="/mnt/partizione/icone/originali/replace/i82.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="0.92+devel unknown">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     inkscape:document-rotation="0"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     id="namedview8"
+     showgrid="true"
+     inkscape:snap-bbox="false"
+     inkscape:bbox-nodes="false"
+     inkscape:bbox-paths="true"
+     inkscape:snap-nodes="true"
+     inkscape:snap-others="false"
+     inkscape:object-nodes="false"
+     inkscape:object-paths="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:snap-midpoints="true"
+     inkscape:zoom="38.545455"
+     inkscape:cx="11"
+     inkscape:cy="7.8867925"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4269" />
+  </sodipodi:namedview>
+  <defs
+     id="defs3051">
+    <style
+       type="text/css"
+       id="current-color-scheme">
+      .ColorScheme-Text {
+        color:#4d4d4d;
+      }
+    </style>
+  </defs>
+  <path
+     d="m 8,1.9992264 v 0.00147 c -2.6662753,-5.9e-6 -3.9999996,1.4900059 -3.9999996,3.2996442 0,1.9500106 2.5902775,5.7011294 2.5902775,5.7011294 l 2.8194446,-0.0029 C 9.4097225,10.998544 12,7.2503521 12,5.300346 12,3.4907213 10.667057,1.9992264 8,1.9992264 Z"
+     style="fill:#da4453;fill-opacity:1;stroke:none;stroke-width:0.81659824;stroke-opacity:1"
+     class="ColorScheme-Text"
+     id="path4"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="ccsccsc" />
+  <path
+     d="m 6.5,11.375 v 1.3125 C 6.5,13.414625 7.0017503,14 7.6249999,14 H 8.3750001 C 8.9982497,14 9.5,13.414625 9.5,12.6875 V 11.375 H 8.3750001 7.6249999 Z"
+     style="fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:0.81009263"
+     class="ColorScheme-Text"
+     id="path4-3"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="csssscccc" />
+</svg>
