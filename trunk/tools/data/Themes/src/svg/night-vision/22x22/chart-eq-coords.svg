@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 22 22"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="chart-eq-coords.svg"
+   inkscape:export-filename="/mnt/partizione/icone/originali/22x22/chart-az-coords.svg.png"
+   inkscape:export-xdpi="279.27274"
+   inkscape:export-ydpi="279.27274"
+   inkscape:version="0.92+devel unknown">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     inkscape:document-rotation="0"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     id="namedview8"
+     showgrid="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:zoom="27.255752"
+     inkscape:cx="13.944809"
+     inkscape:cy="11.792901"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4269" />
+  </sodipodi:namedview>
+  <defs
+     id="defs3051">
+    <style
+       type="text/css"
+       id="current-color-scheme">
+      .ColorScheme-Text {
+        color:#f2f2f2;
+      }
+      </style>
+  </defs>
+  <path
+     style="fill:#f2f2f2;fill-opacity:1;stroke:none;stroke-width:0.99999994"
+     d="m 5.9667969,2.0000001 3.2636719,1.517563 C 8.6880476,4.619572 8.0002834,5.6238536 7.2050781,6.5238616 L 2.9199219,2.0226503 h -0.90625 v 1.1263324 l 4.1875,4.3941377 C 5.3902367,8.2830582 4.4981574,8.9222963 3.5292969,9.433382 L 2.6386719,7.3166185 v -0.00412 L 2.0332031,5.8217056 2.0175781,9.4086728 2.2695312,10.007873 C 2.1778863,10.04394 2.0926196,10.091314 2,10.125243 v 1.552568 c 0.2851136,-0.09351 0.5548225,-0.220059 0.8320312,-0.331517 l 2.1777344,5.178658 C 4.0404714,16.927027 3.0376048,17.258052 2,17.494793 v 1.505208 C 3.236574,18.736942 4.4265472,18.346547 5.5742188,17.865432 L 6,18.878514 V 15.314196 L 4.0917969,10.769743 C 4.7616483,10.419222 5.3961517,10.00934 6,9.5569287 V 9.3798453 H 6.2324219 C 6.5596614,9.1242219 6.879618,8.8602639 7.1855469,8.5767929 l 0.765625,0.8030524 H 9.921875 L 8.1875,7.5575342 C 9.1020752,6.5291872 9.8845089,5.3724487 10.5,4.1064682 L 15.441406,6.398256 C 14.95154,7.4479847 14.370691,8.4410198 13.724609,9.3798453 h 1.675782 c 0.477942,-0.7687655 0.924835,-1.5609679 1.310547,-2.3926842 l 3.216796,1.4949128 0.0039,-1.5958092 -2.66211,-1.2169331 C 17.725449,4.4974775 18.100099,3.2826193 18.361328,2.0205911 H 16.931641 C 16.696927,3.0780826 16.380258,4.1006584 15.998047,5.088663 L 11.042969,2.8277617 C 11.14505,2.5585748 11.263995,2.297113 11.351562,2.0205911 H 9.8710938 c -0.027578,0.077861 -0.066822,0.1493265 -0.095703,0.226502 L 9.2363281,2.0000001 Z"
+     id="path4"
+     inkscape:connector-curvature="0" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="5.9687495"
+     y="17.78125"
+     id="text4273"><tspan
+       sodipodi:role="line"
+       id="tspan4271"
+       x="5.9687495"
+       y="17.78125"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#f2f2f2;fill-opacity:1">Eq</tspan></text>
+</svg>

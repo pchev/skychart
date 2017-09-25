@@ -598,8 +598,6 @@ begin
   CL.AddConstantN('rsMilkyWay', 'String').SetString(rsMilkyWay);
   CL.AddConstantN('rsStandardColo', 'String').SetString(rsStandardColo);
   CL.AddConstantN('rsTheme', 'String').SetString(rsTheme);
-  CL.AddConstantN('rsNightVisionB', 'String').SetString(rsNightVisionB);
-  CL.AddConstantN('rsDefaultButto', 'String').SetString(rsDefaultButto);
   CL.AddConstantN('rsDeepSkyColou', 'String').SetString(rsDeepSkyColou);
   CL.AddConstantN('rsUseAPresetCo', 'String').SetString(rsUseAPresetCo);
   CL.AddConstantN('rsChooseColour', 'String').SetString(rsChooseColour);
@@ -929,8 +927,6 @@ begin
   CL.AddConstantN('rsRed', 'String').SetString(rsRed);
   CL.AddConstantN('rsWhiteOnBlack', 'String').SetString(rsWhiteOnBlack);
   CL.AddConstantN('rsBlackOnWhite', 'String').SetString(rsBlackOnWhite);
-  CL.AddConstantN('rsNormalColor', 'String').SetString(rsNormalColor);
-  CL.AddConstantN('rsBlue', 'String').SetString(rsBlue);
   CL.AddConstantN('rsGreen', 'String').SetString(rsGreen);
   CL.AddConstantN('rsFixedBlack', 'String').SetString(rsFixedBlack);
   CL.AddConstantN('rsAbbreviation', 'String').SetString(rsAbbreviation);

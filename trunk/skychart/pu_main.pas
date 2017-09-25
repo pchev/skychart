@@ -44,7 +44,7 @@ uses
   dynlibs, FileUtil, LCLVersion, LCLType,
   InterfaceBase, LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types, Printers,
-  ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame, BGRABitmap,
+  ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame, BGRABitmap, BGRABitmapTypes,
   LResources, uniqueinstance, enhedits, downloaddialog, LazHelpHTML, ButtonPanel;
 
 type
@@ -53,6 +53,12 @@ type
 
   Tf_main = class(TForm)
     AnimBackward: TAction;
+    Img16Night: TImageList;
+    Img16Day: TImageList;
+    Img32Night: TImageList;
+    Img32Day: TImageList;
+    Img22Night: TImageList;
+    Img22Day: TImageList;
     PopupToolbar1: TMenuItem;
     PopupToolbar2: TMenuItem;
     PopupToolbar: TPopupMenu;
@@ -170,7 +176,6 @@ type
     MenuViewClock: TMenuItem;
     MenuHelpFaq: TMenuItem;
     MenuHelpQuickStart: TMenuItem;
-    ThemeTimer: TTimer;
     AnimationTimer: TTimer;
     TimeVal: TMouseUpDown;
     ViewClock: TAction;
@@ -247,7 +252,6 @@ type
     ButtonLessStar: TImage;
     ButtonMoreNeb: TImage;
     ButtonLessNeb: TImage;
-    ImageNormal: TImageList;
     Shape1: TShape;
     topmessage: TMenuItem;
     MainMenu1: TMainMenu;
@@ -422,7 +426,6 @@ type
     Track: TAction;
     ZoomBar: TAction;
     DSSImage: TAction;
-    ImageList2: TImageList;
     MenuNightVision: TMenuItem;
     EditLabels: TAction;
     N7: TMenuItem;
@@ -520,7 +523,6 @@ type
     procedure SetupSolSysExecute(Sender: TObject);
     procedure SetupSystemExecute(Sender: TObject);
     procedure SetupTimeExecute(Sender: TObject);
-    procedure ThemeTimerTimer(Sender: TObject);
     procedure TimeValChangingEx(Sender: TObject; var AllowChange: boolean;
       NewValue: smallint; Direction: TUpDownDirection);
     procedure MenuVariableStarClick(Sender: TObject);
@@ -617,6 +619,7 @@ type
     procedure MaximizeExecute(Sender: TObject);
     procedure TelescopePanelExecute(Sender: TObject);
     procedure ViewFullScreenExecute(Sender: TObject);
+    procedure LoadTheme(ThemeName:string);
     procedure SetTheme;
     procedure SetStarShape;
     procedure ToolButtonMouseUp(Sender: TObject; Button: TMouseButton;
@@ -660,7 +663,7 @@ type
     procedure ProcessParams2;
     procedure ProcessParamsQuit;
     procedure ShowError(msg: string);
-    procedure SetButtonImage(button: integer);
+    procedure SetButtonImage;
     function CreateChild(const CName: string; copyactive: boolean;
       cfg1: Tconf_skychart; cfgp: Tconf_plot; locked: boolean = False): boolean;
     procedure RefreshAllChild(applydef: boolean);
@@ -1228,8 +1231,6 @@ begin
   try
     if VerboseMsg then
       WriteTrace('Enter Tf_main.FormShow');
-    if NightVision or (cfgm.ThemeName <> 'default') or (cfgm.ButtonStandard > 1) then
-      ThemeTimer.Enabled := True;
     InitFonts;
     SetLpanel1('');
   except
@@ -1240,6 +1241,13 @@ begin
     end;
   end;
   // Init tool bar
+  if NightVision then
+  begin
+    if VerboseMsg then
+      WriteTrace('Night vision');
+    ViewNightVision.Checked := NightVision;
+  end;
+  SetTheme;
   InitToolBar;
   InitTimer.Enabled := True;
   InitOK := True;
@@ -1337,7 +1345,6 @@ begin
         SysToUTF8(Configfile));
       ReadDefault;
     end;
-    // InitToolBar;
     if VerboseMsg then
       WriteTrace('Create forms');
     planet := Tplanet.Create(self);
@@ -1381,8 +1388,11 @@ begin
     catalog.LoadHorizon(cfgm.horizonfile, def_cfgsc);
     catalog.LoadMilkywaydot(slash(appdir) + slash('data') + slash('milkyway') +
       'milkyway.dat');
-    if def_cfgsc.ShowHorizonPicture then
+    if def_cfgsc.ShowHorizonPicture then begin
+      if VerboseMsg then
+         WriteTrace('Load horizon picture');
       catalog.LoadHorizonPicture(cfgm.HorizonPictureFile);
+    end;
     catalog.LoadStarName(slash(appdir) + slash('data') + slash('common_names'), Lang);
     f_search.cfgshr := catalog.cfgshr;
     f_search.showpluto := def_cfgsc.ShowPluto;
@@ -2330,13 +2340,13 @@ begin
   WriteTrace('Screen scale : ' + FormatFloat(f0, 100 * UScaleDPI.RunDPI /
     UScaleDPI.DesignDPI) + '%');
   ScaleDPI(Self);
-  ScaleImageList(ImageNormal);
 end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
 var
   step, buf: string;
   i: integer;
+  c: TBGRAPixel;
 begin
 
   try
@@ -2366,6 +2376,7 @@ begin
     ForceUserDir := '';
     ConfigAppdir := '';
     ConfigPrivateDir := '';
+    CurrentTheme := 'default';
     ProcessParams1;
     if VerboseMsg then
       debugln('Check other instance');
@@ -2381,7 +2392,7 @@ begin
     {$ifdef mswindows}
     Application.UpdateFormatSettings := False;
     {$endif}
-    ImageListCount := ImageNormal.Count;
+    ImageListCount := Img16Day.Count;
     MaxThreadCount := GetThreadCount;
     DisplayIs32bpp := True;
     isWOW64 := False;
@@ -2474,6 +2485,10 @@ begin
       * Screen.PixelsPerInch / 96
 {$endif}
       );
+    // detect if theme color is dark
+    c:=ColorToBGRA(ColorToRGB(clBtnFace));
+    i:=round((c.red+c.green+c.blue)/3);
+    DarkTheme:=(i<128);
     step := 'Load zlib';
     if VerboseMsg then
       WriteTrace(step);
@@ -4572,19 +4587,6 @@ begin
     ConfigSolsys.f_config_solsys1.cplot, nil, False);
 end;
 
-procedure Tf_main.ThemeTimerTimer(Sender: TObject);
-begin
-  ThemeTimer.Enabled := False;
-  if NightVision then
-  begin
-    if VerboseMsg then
-      WriteTrace('Night vision');
-    ViewNightVision.Checked := NightVision;
-  end;
-  if NightVision or (cfgm.ThemeName <> 'default') or (cfgm.ButtonStandard > 1) then
-    SetTheme;
-end;
-
 procedure Tf_main.TelescopeSetupExecute(Sender: TObject);
 begin
   SetupSystemPage(2);
@@ -5143,9 +5145,7 @@ begin
     ChangeLanguage(cmain.language);
   if cmain <> nil then
   begin
-    if (cfgm.ButtonNight <> cmain.ButtonNight) or
-      (cfgm.ButtonStandard <> cmain.ButtonStandard) or
-      (cfgm.ThemeName <> cmain.ThemeName) then
+    if cfgm.ThemeName <> cmain.ThemeName then
       themechange := True;
     if cfgm.starshape_file <> cmain.starshape_file then
       starchange := True;
@@ -5276,6 +5276,7 @@ begin
   sz := DoScaleX(cfgm.btnsize);
   if (ToolBarMain.ButtonHeight <> sz) or (ToolBarMain.ShowCaptions <> showcapt) then
   begin
+    SetButtonImage;
     ToolBarMain.ButtonHeight := sz;
     ToolBarMain.ButtonWidth := sz;
     ToolBarMain.Height := sz + 4;
@@ -5296,6 +5297,11 @@ begin
     ToolBarRight.ButtonWidth := sz;
     ToolBarRight.Width := sz + 4;
     ToolBarRight.Invalidate;
+    BtnRestoreChild.Height:=sz;
+    BtnRestoreChild.Width:=sz;
+    BtnCloseChild.Height:=sz;
+    BtnCloseChild.Width:=sz;
+    BtnCloseChild.Left:=sz;
     ViewTopPanel;
   end;
 end;
@@ -5720,8 +5726,6 @@ begin
   cfgm.ShowTitlePos := False;
   cfgm.SyncChart := False;
   cfgm.ThemeName := 'default';
-  cfgm.ButtonStandard := 1;
-  cfgm.ButtonNight := 2;
   cfgm.VOurl := 0;
   cfgm.VOmaxrecord := 10000;
   cfgm.AnimDelay := 500;
@@ -7211,9 +7215,6 @@ begin
         cfgm.ShowChartInfo := ReadBool(section, 'ShowChartInfo', cfgm.ShowChartInfo);
         cfgm.ShowTitlePos := ReadBool(section, 'ShowTitlePos', cfgm.ShowTitlePos);
         cfgm.SyncChart := ReadBool(section, 'SyncChart', cfgm.SyncChart);
-        cfgm.ButtonStandard :=
-          ReadInteger(section, 'ButtonStandard', cfgm.ButtonStandard);
-        cfgm.ButtonNight := ReadInteger(section, 'ButtonNight', cfgm.ButtonNight);
         cfgm.VOurl := ReadInteger(section, 'VOurl', cfgm.VOurl);
         cfgm.VOmaxrecord := ReadInteger(section, 'VOmaxrecord', cfgm.VOmaxrecord);
         cfgm.SampAutoconnect :=
@@ -8329,8 +8330,6 @@ begin
         WriteBool(section, 'ShowChartInfo', cfgm.ShowChartInfo);
         WriteBool(section, 'ShowTitlePos', cfgm.ShowTitlePos);
         WriteBool(section, 'SyncChart', cfgm.SyncChart);
-        WriteInteger(section, 'ButtonStandard', cfgm.ButtonStandard);
-        WriteInteger(section, 'ButtonNight', cfgm.ButtonNight);
         WriteInteger(section, 'VOurl', cfgm.VOurl);
         WriteInteger(section, 'VOmaxrecord', cfgm.VOmaxrecord);
         WriteBool(section, 'SampAutoconnect', cfgm.SampAutoconnect);
@@ -10607,26 +10606,60 @@ begin
   end;
 end;
 
+procedure Tf_main.LoadTheme(ThemeName:string);
+var ok: boolean;
+  procedure Load1Theme(dir: string; img:TImageList);
+  var i: integer;
+      bmp: TBGRABitmap;
+      err: boolean;
+  begin
+    err:=false;
+    if DirectoryExistsUTF8(dir) then begin
+      img.Clear;
+      bmp := TBGRABitmap.Create;
+      for i := 0 to ImageListCount - 1 do
+      begin
+        try
+          bmp.LoadFromFile(dir + 'i' + IntToStr(i) + '.png');
+          img.Add(bmp.Bitmap, nil);
+        except
+          err:=true;
+          ok:=false;
+        end;
+      end;
+      bmp.Free;
+      if err then begin
+        SetLPanel1('Error loading icons from '+dir);
+        Application.ProcessMessages;
+        sleep(500);
+      end;
+    end;
+  end;
+var tdir:string;
+begin
+  ok:=true;
+  CurrentTheme:=ThemeName;
+  tdir := slash(appdir) + slash('data') + slash('Themes') + slash(ThemeName);
+  Load1Theme(slash(tdir)+slash('daylight')+slash('16x16'),Img16Day);
+  Load1Theme(slash(tdir)+slash('daylight')+slash('22x22'),Img22Day);
+  Load1Theme(slash(tdir)+slash('daylight')+slash('32x32'),Img32Day);
+  Load1Theme(slash(tdir)+slash('night-vision')+slash('16x16'),Img16Night);
+  Load1Theme(slash(tdir)+slash('night-vision')+slash('22x22'),Img22Night);
+  Load1Theme(slash(tdir)+slash('night-vision')+slash('32x32'),Img32Night);
+  if not ok then ShowMessage('Error loading theme '+crlf+tdir+crlf+'Button can be mixed up');
+end;
+
 procedure Tf_main.SetTheme;
 var
   i: integer;
 begin
   if NightVision then
-    SetNightVision(True)
-  else
-    SetButtonImage(cfgm.ButtonStandard);
+    SetNightVision(True);
 
-(* if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur') then begin
-   if lclver<'0.9.29' then CursorImage1.FreeImage;
-   CursorImage1.Free;
-   CursorImage1:=TCursorImage.Create;
-   CursorImage1.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur'));
- //  inc(crRetic);
-   Screen.Cursors[crRetic]:=CursorImage1.Handle;
-   for i:=0 to MultiFrame1.ChildCount-1 do
-        if MultiFrame1.Childs[i].DockedObject is Tf_chart then
-           Tf_chart(MultiFrame1.Childs[i].DockedObject).ChartCursor:=crRetic;
- end;  *)
+  if cfgm.ThemeName<>CurrentTheme then
+    LoadTheme(cfgm.ThemeName);
+
+  SetButtonImage;
 
   if fileexists(slash(appdir) + slash('data') + slash('Themes') +
     slash(cfgm.ThemeName) + 'compass.bmp') then
@@ -10673,97 +10706,66 @@ begin
         starshape.Picture.Bitmap;
 end;
 
-procedure Tf_main.SetButtonImage(button: integer);
+procedure Tf_main.SetButtonImage;
 var
   btn: TPortableNetworkGraphic;
-  bmp: TBGRABitmap;
-  col: Tcolor;
-  iconpath: string;
-
-  procedure SetButtonImage1(var imagelist: Timagelist);
-  var
-    i: integer;
-  begin
-    imagelist.Clear;
-    for i := 0 to ImageListCount - 1 do
-    begin
-      try
-        bmp := TBGRABitmap.Create(iconpath + 'i' + IntToStr(i) + '.png');
-        imagelist.Add(bmp.Bitmap, nil);
-        bmp.Free;
-      except
-      end;
-    end;
-    ScaleImageList(imagelist);
-    ActionListFile.Images := imagelist;
-    ActionListEdit.Images := imagelist;
-    ActionListSetup.Images := imagelist;
-    ActionListView.Images := imagelist;
-    ActionListChart.Images := imagelist;
-    ActionListTelescope.Images := imagelist;
-    ActionListWindow.Images := imagelist;
-    ToolBarMain.Images := imagelist;
-    ToolBarLeft.Images := imagelist;
-    ToolBarRight.Images := imagelist;
-    ToolBarObj.Images := imagelist;
-    MainMenu1.Images := imagelist;
-    f_edittoolbar.Images := imagelist;
-    btn := TPortableNetworkGraphic.Create;
-    btn.LoadFromFile(iconpath + 'b1.png');
-    BtnCloseChild.Glyph.Assign(btn);
-    btn.LoadFromFile(iconpath + 'b2.png');
-    BtnRestoreChild.Glyph.Assign(btn);
-    btn.canvas.pen.color := clBlack;
-    btn.canvas.brush.color := clBlack;
-    btn.canvas.brush.style := bsSolid;
-    imagelist.GetBitmap(52, btn);
-    ButtonMoreStar.Picture.Assign(btn);
-    btn.canvas.rectangle(0, 0, btn.Width, btn.Height);
-    imagelist.GetBitmap(53, btn);
-    ButtonLessStar.Picture.Assign(btn);
-    btn.canvas.rectangle(0, 0, btn.Width, btn.Height);
-    imagelist.GetBitmap(54, btn);
-    ButtonMoreNeb.Picture.Assign(btn);
-    btn.canvas.rectangle(0, 0, btn.Width, btn.Height);
-    imagelist.GetBitmap(55, btn);
-    ButtonLessNeb.Picture.Assign(btn);
-    btn.Free;
-  end;
-
+  Ilist: Timagelist;
 begin
   try
-    case button of
-      1:
-      begin    // color
-        iconpath := systoutf8(slash(appdir) + slash('data') +
-          slash('Themes') + slash(cfgm.ThemeName) + slash('icon_color'));
-        col := clNavy;
-        SetButtonImage1(ImageNormal);
-      end;
-      2:
-      begin  // red
-        iconpath := systoutf8(slash(appdir) + slash('data') +
-          slash('Themes') + slash(cfgm.ThemeName) + slash('icon_red'));
-        col := $acb5f5;
-        SetButtonImage1(ImageList2);
-      end;
-      3:
-      begin   // blue
-        iconpath := systoutf8(slash(appdir) + slash('data') +
-          slash('Themes') + slash(cfgm.ThemeName) + slash('icon_blue'));
-        col := clNavy;
-        SetButtonImage1(ImageList2);
-      end;
-      4:
-      begin   // Green
-        iconpath := systoutf8(slash(appdir) + slash('data') +
-          slash('Themes') + slash(cfgm.ThemeName) + slash('icon_green'));
-        col := clLime;
-        SetButtonImage1(ImageList2);
-      end;
+    if DarkTheme then begin
+      // dark theme, use night-vision
+      if cfgm.btncaption then
+         Ilist:=Img22Night
+      else if cfgm.btnsize<=24 then
+         Ilist:=Img16Night
+      else if cfgm.btnsize<=32 then
+         Ilist:=Img22Night
+      else
+         Ilist:=Img32Night;
+      ToolBarFOV.Font.Color:=clSilver;
+    end
+    else begin
+      // light theme, use daylight
+      if cfgm.btncaption then
+         Ilist:=Img22Day
+      else if cfgm.btnsize<=24 then
+         Ilist:=Img16Day
+      else if cfgm.btnsize<=32 then
+         Ilist:=Img22Day
+      else
+         Ilist:=Img32Day;
+      ToolBarFOV.Font.Color:=clGray;
     end;
+    //replace image list
+    ActionListFile.Images := Ilist;
+    ActionListEdit.Images := Ilist;
+    ActionListSetup.Images := Ilist;
+    ActionListView.Images := Ilist;
+    ActionListChart.Images := Ilist;
+    ActionListTelescope.Images := Ilist;
+    ActionListWindow.Images := Ilist;
+    ToolBarMain.Images := Ilist;
+    ToolBarLeft.Images := Ilist;
+    ToolBarRight.Images := Ilist;
+    ToolBarObj.Images := Ilist;
+    MainMenu1.Images := Ilist;
+    f_edittoolbar.Images := Ilist;
+    // replace individual button
+    btn := TPortableNetworkGraphic.Create;
+    Ilist.GetBitmap(121, btn);
+    BtnCloseChild.Glyph.Assign(btn);
+    Ilist.GetBitmap(122, btn);
+    BtnRestoreChild.Glyph.Assign(btn);
+    Ilist.GetBitmap(52, btn);
+    ButtonMoreStar.Picture.Assign(btn);
+    Ilist.GetBitmap(53, btn);
+    ButtonLessStar.Picture.Assign(btn);
+    Ilist.GetBitmap(54, btn);
+    ButtonMoreNeb.Picture.Assign(btn);
+    Ilist.GetBitmap(55, btn);
+    ButtonLessNeb.Picture.Assign(btn);
+    btn.Free;
     ChildControl.Left := ToolBarMain.Width - ChildControl.Width;
-    ToolBarFOV.font.color := col;
   except
   end;
 end;
@@ -10937,14 +10939,12 @@ var
 begin
   if night then
   begin
-    SetButtonImage(cfgm.ButtonNight);
     MultiFrame1.InactiveBorderColor := $00000000;
     MultiFrame1.TitleColor := $003030c0;
     MultiFrame1.BorderColor := $00000040;
   end
   else
   begin
-    SetButtonImage(cfgm.ButtonStandard);
     MultiFrame1.InactiveBorderColor := $404040;
     MultiFrame1.TitleColor := clBlack;
     MultiFrame1.BorderColor := $808080;
@@ -11042,7 +11042,6 @@ end;
 procedure Tf_main.InitToolBar;
 begin
   ResizeBtn;
-  f_edittoolbar.Images := ImageNormal;
   f_edittoolbar.DisabledContainer := ContainerPanel;
   f_edittoolbar.TBOnMouseUp := ToolButtonMouseUp;
   f_edittoolbar.TBOnMouseDown := ToolButtonMouseDown;
@@ -12092,7 +12091,10 @@ begin
     WriteTrace('InitScript');
   for i := 0 to numscript - 1 do
   begin
-    Fscript[i].ImageNormal := ImageNormal;
+    if DarkTheme then
+      Fscript[i].ImageNormal:=Img16Night
+    else
+      Fscript[i].ImageNormal:=Img16Day;
     Fscript[i].ContainerPanel := ContainerPanel;
     Fscript[i].ToolButtonMouseUp := ToolButtonMouseUp;
     Fscript[i].ToolButtonMouseDown := ToolButtonMouseDown;

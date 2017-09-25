@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 22 22"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="chart-gl-coords.svg"
+   inkscape:version="0.92+devel unknown">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     inkscape:document-rotation="0"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     id="namedview8"
+     showgrid="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:zoom="27.255752"
+     inkscape:cx="11"
+     inkscape:cy="8.8577408"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4269" />
+  </sodipodi:namedview>
+  <defs
+     id="defs3051">
+    <style
+       type="text/css"
+       id="current-color-scheme">
+      .ColorScheme-Text {
+        color:#f2f2f2;
+      }
+      </style>
+  </defs>
+  <path
+     style="fill:#f2f2f2;fill-opacity:1;stroke:none;stroke-width:0.99999994"
+     d="M 5.9667969 2 L 9.2304688 3.4394531 C 8.6880476 4.4847409 8.0002834 5.4373315 7.2050781 6.2910156 L 2.9199219 2.0214844 L 2.0136719 2.0214844 L 2.0136719 3.0898438 L 6.2011719 7.2578125 C 5.3902367 7.9596652 4.4981574 8.5660014 3.5292969 9.0507812 L 2.6386719 7.0429688 L 2.6386719 7.0390625 L 2.0332031 5.625 L 2.0175781 9.0273438 L 2.2695312 9.5957031 C 2.1778863 9.6299131 2.0926196 9.6748487 2 9.7070312 L 2 11.179688 C 2.2851136 11.090988 2.5548225 10.970956 2.8320312 10.865234 L 5.0097656 15.777344 C 4.0404714 16.158724 3.0376048 16.472711 2 16.697266 L 2 18.125 C 3.236574 17.875481 4.4265472 17.50518 5.5742188 17.048828 L 6.8515625 19.931641 L 8 19.931641 L 8 19.142578 L 6.8320312 16.503906 C 7.2297387 16.31469 7.6167177 16.107539 8 15.894531 L 8 14.28125 C 7.4384069 14.623247 6.8650947 14.947386 6.2675781 15.232422 L 4.0917969 10.318359 C 5.2164963 9.7601153 6.2516243 9.0591049 7.1855469 8.2382812 L 9.9609375 11 L 11.929688 11 L 8.1875 7.2714844 C 9.1020752 6.2960671 9.8845089 5.1988666 10.5 3.9980469 L 15.441406 6.171875 C 14.565472 7.9522931 13.420599 9.5745247 12.070312 11 L 13.925781 11 C 15.016535 9.6996556 15.957806 8.2708722 16.710938 6.7304688 L 19.927734 8.1484375 L 19.931641 6.6347656 L 17.269531 5.4804688 C 17.725449 4.3689307 18.100099 3.216602 18.361328 2.0195312 L 16.931641 2.0195312 C 16.696927 3.022593 16.380258 3.9925361 15.998047 4.9296875 L 11.042969 2.7851562 C 11.14505 2.5298245 11.263995 2.2818203 11.351562 2.0195312 L 9.8710938 2.0195312 C 9.8435157 2.0933843 9.8042716 2.1611718 9.7753906 2.234375 L 9.2363281 2 L 5.9667969 2 z "
+     id="path4" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="8.489583"
+     y="19.848959"
+     id="text4273"><tspan
+       sodipodi:role="line"
+       id="tspan4271"
+       x="8.489583"
+       y="19.848959"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#f2f2f2;fill-opacity:1">Gl</tspan></text>
+</svg>

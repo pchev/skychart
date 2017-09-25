@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="16"
+   height="16"
+   viewBox="0 0 4.2333332 4.2333335"
+   version="1.1"
+   id="svg4275"
+   inkscape:export-filename="/mnt/partizione/icone/originali/replace/i62.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="0.92+devel unknown"
+   sodipodi:docname="show-planets.svg">
+  <defs
+     id="defs4269" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="31.678384"
+     inkscape:cx="6.3910809"
+     inkscape:cy="6.434949"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4820" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4272">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Livello 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-292.76665)">
+    <ellipse
+       style="fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:0.29999998;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="path4822"
+       cx="0.75833333"
+       cy="295.97708"
+       r="0.30000001" />
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#4d4d4d;stroke-width:0.26499999;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;paint-order:stroke fill markers;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path4824"
+       cx="2.1166666"
+       cy="294.8833"
+       rx="1.728611"
+       ry="1.7286144" />
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#4d4d4d;stroke-width:0.26458333;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path4826"
+       cx="2.1166668"
+       cy="294.88333"
+       rx="1.1571751"
+       ry="1.1571807" />
+    <ellipse
+       style="fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:0.29999998;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="path4822-3"
+       cx="2.9458332"
+       cy="295.64163"
+       r="0.30000001" />
+    <ellipse
+       style="fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:0.52916408;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="path4822-3-6"
+       cx="2.1166666"
+       cy="294.88333"
+       rx="0.52916664"
+       ry="0.52916145" />
+    <ellipse
+       style="fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:0.26500112;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke fill markers"
+       id="path4270"
+       cx="0.79374999"
+       cy="295.94165"
+       rx="0.26458332"
+       ry="0.26458555" />
+    <ellipse
+       style="fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:0.26500112;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke fill markers"
+       id="path4270-3"
+       cx="2.9104166"
+       cy="295.67706"
+       rx="0.26458332"
+       ry="0.26458558" />
+  </g>
+</svg>
