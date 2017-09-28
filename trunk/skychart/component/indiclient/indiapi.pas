@@ -74,6 +74,8 @@ const
   AO_INTERFACE = (1 shl 8);          // Adaptive Optics Interface
   DUSTCAP_INTERFACE = (1 shl 9);     // Dust Cap Interface
   LIGHTBOX_INTERFACE = (1 shl 10);   // Light Box Interface
+  DETECTOR_INTERFACE  = (1 << 11);   // Detector interface, must subclass INDI::Detector
+  ROTATOR_INTERFACE   = (1 << 12);   // Rotator interface, must subclass INDI::RotatorInterface
   AUX_INTERFACE = (1 shl 15);        // Auxiliary interface
 
 type
