@@ -663,7 +663,7 @@ type
     procedure ProcessParams2;
     procedure ProcessParamsQuit;
     procedure ShowError(msg: string);
-    procedure SetButtonImage;
+    procedure SetButtonImage(bsize:integer);
     function CreateChild(const CName: string; copyactive: boolean;
       cfg1: Tconf_skychart; cfgp: Tconf_plot; locked: boolean = False): boolean;
     procedure RefreshAllChild(applydef: boolean);
@@ -5276,7 +5276,7 @@ begin
   sz := DoScaleX(cfgm.btnsize);
   if (ToolBarMain.ButtonHeight <> sz) or (ToolBarMain.ShowCaptions <> showcapt) then
   begin
-    SetButtonImage;
+    SetButtonImage(sz);
     ToolBarMain.ButtonHeight := sz;
     ToolBarMain.ButtonWidth := sz;
     ToolBarMain.Height := sz + 4;
@@ -10659,7 +10659,7 @@ begin
   if cfgm.ThemeName<>CurrentTheme then
     LoadTheme(cfgm.ThemeName);
 
-  SetButtonImage;
+  SetButtonImage(ToolBarMain.ButtonHeight);
 
   if fileexists(slash(appdir) + slash('data') + slash('Themes') +
     slash(cfgm.ThemeName) + 'compass.bmp') then
@@ -10706,21 +10706,19 @@ begin
         starshape.Picture.Bitmap;
 end;
 
-procedure Tf_main.SetButtonImage;
+procedure Tf_main.SetButtonImage(bsize:integer);
 var
   btn: TPortableNetworkGraphic;
   Ilist: Timagelist;
-  sz: integer;
 begin
   try
-    sz := DoScaleX(cfgm.btnsize);
     if DarkTheme then begin
       // dark theme, use night-vision
       if cfgm.btncaption then
          Ilist:=Img22Night
-      else if sz<=24 then
+      else if bsize<=24 then
          Ilist:=Img16Night
-      else if sz<=32 then
+      else if bsize<=32 then
          Ilist:=Img22Night
       else
          Ilist:=Img32Night;
@@ -10730,9 +10728,9 @@ begin
       // light theme, use daylight
       if cfgm.btncaption then
          Ilist:=Img22Day
-      else if sz<=24 then
+      else if bsize<=24 then
          Ilist:=Img16Day
-      else if sz<=32 then
+      else if bsize<=32 then
          Ilist:=Img22Day
       else
          Ilist:=Img32Day;
