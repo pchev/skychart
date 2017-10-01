@@ -10710,15 +10710,17 @@ procedure Tf_main.SetButtonImage;
 var
   btn: TPortableNetworkGraphic;
   Ilist: Timagelist;
+  sz: integer;
 begin
   try
+    sz := DoScaleX(cfgm.btnsize);
     if DarkTheme then begin
       // dark theme, use night-vision
       if cfgm.btncaption then
          Ilist:=Img22Night
-      else if cfgm.btnsize<=24 then
+      else if sz<=24 then
          Ilist:=Img16Night
-      else if cfgm.btnsize<=32 then
+      else if sz<=32 then
          Ilist:=Img22Night
       else
          Ilist:=Img32Night;
@@ -10728,9 +10730,9 @@ begin
       // light theme, use daylight
       if cfgm.btncaption then
          Ilist:=Img22Day
-      else if cfgm.btnsize<=24 then
+      else if sz<=24 then
          Ilist:=Img16Day
-      else if cfgm.btnsize<=32 then
+      else if sz<=32 then
          Ilist:=Img22Day
       else
          Ilist:=Img32Day;
