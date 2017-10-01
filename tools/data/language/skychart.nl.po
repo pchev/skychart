@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-02 10:18+0000\n"
+"POT-Creation-Date: 2017-10-01 14:00+0000\n"
 "PO-Revision-Date: 2017-01-14 17:46+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-23 18:28+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-10-01 14:08+0000\n"
+"X-Generator: Launchpad (build 18471)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -580,10 +580,6 @@ msgstr "Zwart/wit, lijnmodus"
 #: u_translation.rsblinkingpict
 msgid "Blinking picture"
 msgstr "Knipperende afbeelding"
-
-#: u_translation.rsblue
-msgid "Blue"
-msgstr "Blauw"
 
 #: u_translation.rsbluemagnitud
 msgid "Blue magnitude"
@@ -1436,10 +1432,6 @@ msgstr "Deep sky objectkleur"
 #: u_translation.rsdefault
 msgid "Default"
 msgstr "Standaard"
-
-#: u_translation.rsdefaultbutto
-msgid "Default button"
-msgstr "Standaard knop"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
@@ -3575,10 +3567,6 @@ msgstr "Volgende kaart"
 msgid "Night vision"
 msgstr "Nachtzicht"
 
-#: u_translation.rsnightvisionb
-msgid "Night vision button"
-msgstr "Nachtzicht knop"
-
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
 msgstr "Nachtzicht kleur"
@@ -3638,10 +3626,6 @@ msgstr "Geen printer gevonden!"
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
 msgstr "(Niet gecorrigeerd voor eigenbeweging, geen eigenbewegingsinformatie beschikbaar in deze catalogus.)"
-
-#: u_translation.rsnormalcolor
-msgid "Normal (colour)"
-msgstr "Normaal (kleur)"
 
 #: u_translation.rsnorth
 msgid "North"

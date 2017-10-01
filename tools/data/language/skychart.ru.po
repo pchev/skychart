@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-02 10:18+0000\n"
+"POT-Creation-Date: 2017-10-01 14:00+0000\n"
 "PO-Revision-Date: 2017-04-21 09:10+0000\n"
 "Last-Translator: sernik <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-23 18:29+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-10-01 14:08+0000\n"
+"X-Generator: Launchpad (build 18471)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -580,10 +580,6 @@ msgstr "Чёрно-белое, метод линий"
 #: u_translation.rsblinkingpict
 msgid "Blinking picture"
 msgstr "Блинкование"
-
-#: u_translation.rsblue
-msgid "Blue"
-msgstr "Синий"
 
 #: u_translation.rsbluemagnitud
 msgid "Blue magnitude"
@@ -1436,10 +1432,6 @@ msgstr "Цвет объектов Deep Sky"
 #: u_translation.rsdefault
 msgid "Default"
 msgstr "Стандарт"
-
-#: u_translation.rsdefaultbutto
-msgid "Default button"
-msgstr "Кнопки по умолчанию"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
@@ -3574,10 +3566,6 @@ msgstr "Следующая карта"
 msgid "Night vision"
 msgstr "Ночной режим"
 
-#: u_translation.rsnightvisionb
-msgid "Night vision button"
-msgstr "Кнопки в ночном режиме"
-
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
 msgstr "Ночной режим"
@@ -3637,10 +3625,6 @@ msgstr "Принтер не найден!"
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
 msgstr "(без коррекции собственного движения)"
-
-#: u_translation.rsnormalcolor
-msgid "Normal (colour)"
-msgstr "Нормально (цветные)"
 
 #: u_translation.rsnorth
 msgid "North"

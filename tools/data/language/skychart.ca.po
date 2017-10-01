@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-02 10:18+0000\n"
-"PO-Revision-Date: 2017-06-30 07:45+0000\n"
+"POT-Creation-Date: 2017-10-01 14:00+0000\n"
+"PO-Revision-Date: 2017-07-30 16:56+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-23 18:28+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-10-01 14:08+0000\n"
+"X-Generator: Launchpad (build 18471)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -581,10 +581,6 @@ msgstr "Blanc/negre, mode línia"
 #: u_translation.rsblinkingpict
 msgid "Blinking picture"
 msgstr "Imatge parpellejant"
-
-#: u_translation.rsblue
-msgid "Blue"
-msgstr "Blau"
 
 #: u_translation.rsbluemagnitud
 msgid "Blue magnitude"
@@ -1437,10 +1433,6 @@ msgstr "Color objectes  cel profund"
 #: u_translation.rsdefault
 msgid "Default"
 msgstr "Per defecte"
-
-#: u_translation.rsdefaultbutto
-msgid "Default button"
-msgstr "Botó per defecte"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
@@ -3575,10 +3567,6 @@ msgstr "Proper mapa"
 msgid "Night vision"
 msgstr "Visió de nit"
 
-#: u_translation.rsnightvisionb
-msgid "Night vision button"
-msgstr "Botó visió de nit"
-
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
 msgstr "Color visió de nit"
@@ -3638,10 +3626,6 @@ msgstr "No trobo la impressora!"
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
 msgstr ", sense dades de catàleg per al moviment propi"
-
-#: u_translation.rsnormalcolor
-msgid "Normal (colour)"
-msgstr "Normal (color)"
 
 #: u_translation.rsnorth
 msgid "North"
@@ -5221,7 +5205,7 @@ msgstr "Mostra els objectes"
 
 #: u_translation.rsshowobsolete
 msgid "Show obsolete drivers"
-msgstr ""
+msgstr "Mostra controladors obsolets"
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian"

@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-02 10:18+0000\n"
+"POT-Creation-Date: 2017-10-01 14:00+0000\n"
 "PO-Revision-Date: 2016-12-11 08:54+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-23 18:28+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-10-01 14:08+0000\n"
+"X-Generator: Launchpad (build 18471)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -580,10 +580,6 @@ msgstr "Svart/hvítt, línuhamur"
 #: u_translation.rsblinkingpict
 msgid "Blinking picture"
 msgstr "Blikkandi mynd"
-
-#: u_translation.rsblue
-msgid "Blue"
-msgstr "Blár"
 
 #: u_translation.rsbluemagnitud
 msgid "Blue magnitude"
@@ -1436,10 +1432,6 @@ msgstr "Litur djúpfyrirbæra"
 #: u_translation.rsdefault
 msgid "Default"
 msgstr "Sjálfg."
-
-#: u_translation.rsdefaultbutto
-msgid "Default button"
-msgstr "Sjálfgefið"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
@@ -3573,10 +3565,6 @@ msgstr "Næsta kort"
 msgid "Night vision"
 msgstr "Rautt fyrir næturaðlögun"
 
-#: u_translation.rsnightvisionb
-msgid "Night vision button"
-msgstr "Hnappur fyrir næturaðlögun"
-
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
 msgstr "Rautt fyrir næturaðlögun"
@@ -3636,10 +3624,6 @@ msgstr "Enginn prentari finnst!"
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
 msgstr ", engin eiginhreyfing"
-
-#: u_translation.rsnormalcolor
-msgid "Normal (colour)"
-msgstr "Venjulegur (litur)"
 
 #: u_translation.rsnorth
 msgid "North"
