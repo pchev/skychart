@@ -2,4 +2,8 @@ Version 4.1 beta, release Notes
 
 New functions:
 
-Only change version number    
+- New icon for the buttons, use larger image for big buttons.
+- Set observatory coordinates from telescope GPS, use "Telescope" observatory name .
+- Improve download progress display.
+- Many bug fix.
+
