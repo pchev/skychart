@@ -2322,14 +2322,6 @@ msgstr ""
 msgid "Theme"
 msgstr ""
 
-#: u_translation:rsnightvisionb
-msgid "Night vision button"
-msgstr ""
-
-#: u_translation:rsdefaultbutto
-msgid "Default button"
-msgstr ""
-
 #: u_translation:rsdeepskycolou
 msgid "Deep sky colour"
 msgstr ""
@@ -3640,14 +3632,6 @@ msgstr ""
 
 #: u_translation:rsblackonwhite
 msgid "Black on white"
-msgstr ""
-
-#: u_translation:rsnormalcolor
-msgid "Normal (colour)"
-msgstr ""
-
-#: u_translation:rsblue
-msgid "Blue"
 msgstr ""
 
 #: u_translation:rsgreen

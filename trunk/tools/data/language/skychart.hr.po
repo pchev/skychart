@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-02 10:18+0000\n"
+"POT-Creation-Date: 2017-10-01 14:00+0000\n"
 "PO-Revision-Date: 2016-12-11 08:48+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-23 18:28+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-10-01 14:08+0000\n"
+"X-Generator: Launchpad (build 18471)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -582,10 +582,6 @@ msgstr "Crno/bijelo, linijski način"
 #: u_translation.rsblinkingpict
 msgid "Blinking picture"
 msgstr "Trepteća slika"
-
-#: u_translation.rsblue
-msgid "Blue"
-msgstr "Plavo"
 
 #: u_translation.rsbluemagnitud
 msgid "Blue magnitude"
@@ -1438,10 +1434,6 @@ msgstr "Boja objekata dubokog svemira"
 #: u_translation.rsdefault
 msgid "Default"
 msgstr "Zadano"
-
-#: u_translation.rsdefaultbutto
-msgid "Default button"
-msgstr "Zadani gumb"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
@@ -3575,10 +3567,6 @@ msgstr "Sljedeća karta"
 msgid "Night vision"
 msgstr "Nočni pogled"
 
-#: u_translation.rsnightvisionb
-msgid "Night vision button"
-msgstr "Gumb nočnog pogleda"
-
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
 msgstr "Boja nočnog pogleda"
@@ -3638,10 +3626,6 @@ msgstr "Nije pronađen pisač!"
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
 msgstr ""
-
-#: u_translation.rsnormalcolor
-msgid "Normal (colour)"
-msgstr "Normalno (boja)"
 
 #: u_translation.rsnorth
 msgid "North"

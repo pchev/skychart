@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-07-02 10:18+0000\n"
+"POT-Creation-Date: 2017-10-01 14:00+0000\n"
 "PO-Revision-Date: 2016-12-11 09:07+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-23 18:29+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-10-01 14:08+0000\n"
+"X-Generator: Launchpad (build 18471)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -584,10 +584,6 @@ msgstr "黑白，线模式"
 #: u_translation.rsblinkingpict
 msgid "Blinking picture"
 msgstr ""
-
-#: u_translation.rsblue
-msgid "Blue"
-msgstr "蓝"
 
 #: u_translation.rsbluemagnitud
 msgid "Blue magnitude"
@@ -1439,10 +1435,6 @@ msgstr "深空天体颜色"
 
 #: u_translation.rsdefault
 msgid "Default"
-msgstr "默认"
-
-#: u_translation.rsdefaultbutto
-msgid "Default button"
 msgstr "默认"
 
 #: u_translation.rsdefaultcolor
@@ -3581,10 +3573,6 @@ msgstr "下一个星图"
 msgid "Night vision"
 msgstr "夜间模式"
 
-#: u_translation.rsnightvisionb
-msgid "Night vision button"
-msgstr "夜间模式"
-
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
 msgstr "夜间模式"
@@ -3644,10 +3632,6 @@ msgstr "未找到打印机！"
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
 msgstr "（未修正的自行，本星表无可用自行数据）"
-
-#: u_translation.rsnormalcolor
-msgid "Normal (colour)"
-msgstr "默认(彩色)"
 
 #: u_translation.rsnorth
 msgid "North"

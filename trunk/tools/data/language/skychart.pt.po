@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-02 10:18+0000\n"
+"POT-Creation-Date: 2017-10-01 14:00+0000\n"
 "PO-Revision-Date: 2017-07-14 22:39+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-23 18:28+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-10-01 14:08+0000\n"
+"X-Generator: Launchpad (build 18471)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -583,10 +583,6 @@ msgstr "Preto/Branco, modo linha"
 #: u_translation.rsblinkingpict
 msgid "Blinking picture"
 msgstr "Imagem Piscando"
-
-#: u_translation.rsblue
-msgid "Blue"
-msgstr "Azul"
 
 #: u_translation.rsbluemagnitud
 msgid "Blue magnitude"
@@ -1440,10 +1436,6 @@ msgstr "Cor do objecto do céu profundo"
 #: u_translation.rsdefault
 msgid "Default"
 msgstr "Predefinido"
-
-#: u_translation.rsdefaultbutto
-msgid "Default button"
-msgstr "Botão padrão"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
@@ -3578,10 +3570,6 @@ msgstr "Próxima Carta"
 msgid "Night vision"
 msgstr "Visão Noturna"
 
-#: u_translation.rsnightvisionb
-msgid "Night vision button"
-msgstr "Botão de visão nocturna"
-
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
 msgstr "Cor da Visão Noturna"
@@ -3641,10 +3629,6 @@ msgstr "Impressora não encontrada!"
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
 msgstr ", nenhum movimento próprio"
-
-#: u_translation.rsnormalcolor
-msgid "Normal (colour)"
-msgstr "Normal (cor)"
 
 #: u_translation.rsnorth
 msgid "North"

@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-07-02 10:18+0000\n"
+"POT-Creation-Date: 2017-10-01 14:00+0000\n"
 "PO-Revision-Date: 2017-06-15 12:13+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-07-23 18:29+0000\n"
-"X-Generator: Launchpad (build 18419)\n"
+"X-Launchpad-Export-Date: 2017-10-01 14:08+0000\n"
+"X-Generator: Launchpad (build 18471)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -583,10 +583,6 @@ msgstr "Svart/vit, linje-mode"
 #: u_translation.rsblinkingpict
 msgid "Blinking picture"
 msgstr "Blinkande bild"
-
-#: u_translation.rsblue
-msgid "Blue"
-msgstr "Blå"
 
 #: u_translation.rsbluemagnitud
 msgid "Blue magnitude"
@@ -1439,10 +1435,6 @@ msgstr "Färg på deep sky objekt"
 #: u_translation.rsdefault
 msgid "Default"
 msgstr "Standard"
-
-#: u_translation.rsdefaultbutto
-msgid "Default button"
-msgstr "Standardknapp"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
@@ -3576,10 +3568,6 @@ msgstr "Nästa karta"
 msgid "Night vision"
 msgstr "Nattvisning"
 
-#: u_translation.rsnightvisionb
-msgid "Night vision button"
-msgstr "Nattvisningsknapp"
-
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
 msgstr "Nattvisning"
@@ -3639,10 +3627,6 @@ msgstr "Hittade ingen skrivare!"
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
 msgstr "(ej korrigerad för korrekt rörelse, finns inte data för detta i katalogen)"
-
-#: u_translation.rsnormalcolor
-msgid "Normal (colour)"
-msgstr "Normal (färg)"
 
 #: u_translation.rsnorth
 msgid "North"
