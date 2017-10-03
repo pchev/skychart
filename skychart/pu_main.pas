@@ -9099,6 +9099,8 @@ begin
   ButtonLessStar.Hint := rsLessStars;
   ButtonMoreNeb.Hint := rsMoreNebulae;
   ButtonLessNeb.Hint := rsLessNebulae;
+  BtnRestoreChild.Hint := rsCascade;
+  BtnCloseChild.Hint:= rsCloseChart;
   // time control bar
   TimeU.Items.Clear;
   TimeU.Items.Add(rsHour);
@@ -9397,6 +9399,7 @@ var
   i: integer;
 begin
   UpdateSAMPmenu;
+  BtnCloseChild.Visible := (MultiFrame1.ChildCount > 1);
   if (Sender <> nil) and (MultiFrame1.ActiveObject = Sender) then
   begin
     if fx > 0 then
