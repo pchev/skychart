@@ -50,7 +50,7 @@ type
 const
   cdccpy = 'Copyright (C) 2002-2017 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf + 'Peter Dean,' +
-    crlf + 'John Sunderland' + crlf + 'Anat Ruangrassamee' + crlf + 'Sasa Zeman';
+    crlf + 'John Sunderland' + crlf + 'Anat Ruangrassamee' + crlf + 'Sasa Zeman'+ crlf + 'Mattia Verga';
   MaxPlSim = 500;
   MaxAstSim = 100;
   MaxComet = 500;
