@@ -663,7 +663,7 @@ type
     procedure ProcessParams2;
     procedure ProcessParamsQuit;
     procedure ShowError(msg: string);
-    procedure SetButtonImage(bsize:integer);
+    procedure SetButtonImage(bsize,msize:integer);
     function CreateChild(const CName: string; copyactive: boolean;
       cfg1: Tconf_skychart; cfgp: Tconf_plot; locked: boolean = False): boolean;
     procedure RefreshAllChild(applydef: boolean);
@@ -5270,13 +5270,14 @@ end;
 procedure Tf_main.ResizeBtn;
 var
   showcapt: boolean;
-  sz: integer;
+  sz,msz: integer;
 begin
   showcapt := cfgm.btncaption and (cfgm.btnsize > 32);
   sz := DoScaleX(cfgm.btnsize);
+  msz :=  DoScaleX(16);
   if (ToolBarMain.ButtonHeight <> sz) or (ToolBarMain.ShowCaptions <> showcapt) then
   begin
-    SetButtonImage(sz);
+    SetButtonImage(sz,msz);
     ToolBarMain.ButtonHeight := sz;
     ToolBarMain.ButtonWidth := sz;
     ToolBarMain.Height := sz + 4;
@@ -10659,7 +10660,7 @@ begin
   if cfgm.ThemeName<>CurrentTheme then
     LoadTheme(cfgm.ThemeName);
 
-  SetButtonImage(ToolBarMain.ButtonHeight);
+  SetButtonImage(ToolBarMain.ButtonHeight,MainMenu1.Images.Height);
 
   if fileexists(slash(appdir) + slash('data') + slash('Themes') +
     slash(cfgm.ThemeName) + 'compass.bmp') then
@@ -10706,10 +10707,10 @@ begin
         starshape.Picture.Bitmap;
 end;
 
-procedure Tf_main.SetButtonImage(bsize:integer);
+procedure Tf_main.SetButtonImage(bsize,msize:integer);
 var
   btn: TPortableNetworkGraphic;
-  Ilist: Timagelist;
+  Ilist,MenuIlist: Timagelist;
 begin
   try
     if DarkTheme then begin
@@ -10722,6 +10723,12 @@ begin
          Ilist:=Img22Night
       else
          Ilist:=Img32Night;
+      if msize<=24 then
+         MenuIlist:=Img16Night
+      else if msize<=32 then
+         MenuIlist:=Img22Night
+      else
+         MenuIlist:=Img32Night;
       ToolBarFOV.Font.Color:=clSilver;
     end
     else begin
@@ -10734,6 +10741,12 @@ begin
          Ilist:=Img22Day
       else
          Ilist:=Img32Day;
+      if msize<=24 then
+         MenuIlist:=Img16Day
+      else if msize<=32 then
+         MenuIlist:=Img22Day
+      else
+         MenuIlist:=Img32Day;
       ToolBarFOV.Font.Color:=clGray;
     end;
     //replace image list
@@ -10748,7 +10761,7 @@ begin
     ToolBarLeft.Images := Ilist;
     ToolBarRight.Images := Ilist;
     ToolBarObj.Images := Ilist;
-    MainMenu1.Images := Ilist;
+    MainMenu1.Images := MenuIlist;
     f_edittoolbar.Images := Ilist;
     // replace individual button
     btn := TPortableNetworkGraphic.Create;
