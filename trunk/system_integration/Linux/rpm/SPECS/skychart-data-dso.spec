@@ -22,4 +22,4 @@ DSO catalog data for use with Skychart planetarium software.
 %files
 %defattr(-,root,root)
 /usr/share/skychart
-/usr/share/appdata/skychart-data-dso.metainfo.xml
+/usr/share/metainfo/skychart-data-dso.metainfo.xml

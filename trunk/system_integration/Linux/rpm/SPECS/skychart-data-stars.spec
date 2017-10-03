@@ -28,4 +28,4 @@ Stars catalog data for use with Skychart planetarium software.
 %files
 %defattr(-,root,root)
 /usr/share/skychart
-/usr/share/appdata/skychart-data-stars.metainfo.xml
+/usr/share/metainfo/skychart-data-stars.metainfo.xml
