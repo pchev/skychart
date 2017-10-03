@@ -5660,6 +5660,7 @@ end;
 procedure Tf_main.FormResize(Sender: TObject);
 begin
   SaveState := WindowState;
+  ChildControl.Left := ToolBarMain.Width - ChildControl.Width;
   if Divider_ToolBarMain_end <> nil then
     quicksearch.Width := min(300, max(90, (quicksearch.Width +
       ChildControl.left - Divider_ToolBarMain_end.Left -
