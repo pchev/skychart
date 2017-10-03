@@ -11,7 +11,10 @@
    version="1.1"
    id="svg6"
    sodipodi:docname="night-vision.svg"
-   inkscape:version="0.92+devel unknown">
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   inkscape:export-filename="/mnt/partizione/icone/Skychart-breeze/icons/night-vision/64x64/i82.png"
+   inkscape:export-xdpi="279.27274"
+   inkscape:export-ydpi="279.27274">
   <metadata
      id="metadata10">
     <rdf:RDF>
@@ -20,6 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -38,7 +42,7 @@
      id="namedview8"
      showgrid="true"
      inkscape:zoom="27.255752"
-     inkscape:cx="11"
+     inkscape:cx="2.2312087"
      inkscape:cy="11"
      inkscape:window-x="0"
      inkscape:window-y="0"
@@ -56,11 +60,20 @@
       .ColorScheme-Text {
         color:#4d4d4d;
       }
-      </style>
+    </style>
   </defs>
   <path
+     d="m 9,16 v 1.5 c 0,0.831 0.669,1.5 1.5,1.5 h 1 C 12.331,19 13,18.331 13,17.5 V 16 h -1.5 -1 z"
      style="fill:#f2f2f2;fill-opacity:1;stroke:none"
-     d="M 11 3 L 11 3.0019531 C 8.00044 3.0019531 6.5 4.9881406 6.5 7.4003906 C 6.5 9.9997541 9.4140625 15 9.4140625 15 L 12.585938 14.996094 C 12.585938 14.996094 15.5 9.999751 15.5 7.4003906 C 15.5 4.9881646 14.00044 3 11 3 z M 11 4.0019531 C 13.33368 4.0019531 14.5 5.6577086 14.5 7.6679688 C 14.5 9.834169 12.234375 13.998047 12.234375 13.998047 L 9.765625 14.001953 C 9.765625 14.001953 7.5 9.8341689 7.5 7.6679688 C 7.5 5.6576788 8.66702 4.0039063 11 4.0039062 L 11 4.0019531 z M 9 16 L 9 17.5 C 9 18.331 9.669 19 10.5 19 L 11.5 19 C 12.331 19 13 18.331 13 17.5 L 13 16 L 11.5 16 L 10.5 16 L 9 16 z "
      class="ColorScheme-Text"
-     id="path4" />
+     id="path4"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="csssscccc" />
+  <path
+     inkscape:connector-curvature="0"
+     d="m 11,3 v 0.00195 c -2.99956,0 -4.5,1.9861875 -4.5,4.3984375 C 6.5,9.9997541 9.414062,15 9.414062,15 l 3.171876,-0.0039 c 0,0 2.914062,-4.996343 2.914062,-7.5957034 C 15.5,4.9881646 14.00044,3 11,3 Z"
+     style="fill:#da4453;fill-opacity:1;stroke:none"
+     class="ColorScheme-Text"
+     id="path4-3"
+     sodipodi:nodetypes="ccsccsc" />
 </svg>
