@@ -4128,7 +4128,10 @@ begin
     if Result then
       exit;
   end;
-  // finally try various id in SAC
+  // finally try various id in OpenNGC and SAC
+  Result := FindNum(S_NGC, Num, ar1, de1);
+  if Result then
+    exit;
   Result := FindNum(S_SAC, Num, ar1, de1);
 end;
 

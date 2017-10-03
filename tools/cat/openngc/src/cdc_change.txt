@@ -1,3 +1,5 @@
+NGC:
+
 col S (messier)
 - label  M   
 - format #
@@ -30,5 +32,18 @@ Catgen
 - outputdir = ../
 
 
+Addendum:
 
+col S (messier)
+- label  M   
+- format #
+
+enregistrer sous addendum.csv
+- largeur colonne fixe
+
+Catgen
+- copy from openNGV.prj
+- Input catalog files: addendum.csv
+- add type DrkN
+- Check: Append to existing catalog
 
