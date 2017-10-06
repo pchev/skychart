@@ -1630,7 +1630,7 @@ begin
           de_offset[n] := de_offset[n] - c.decentre;
           iwidth[n] := Fwidth;
           iheight[n] := Fheight;
-          smallfov := smallfov and ((iwcs.wp * iwcs.secpix / 3600) < 1);
+          smallfov := smallfov and ((iwcs.wp * iwcs.secpix / 3600) < 1) and (abs(iwcs.cdec)<80);
           Inc(n);
         end;
       end;
