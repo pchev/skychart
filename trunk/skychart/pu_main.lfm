@@ -30,36 +30,84 @@ object f_main: Tf_main
     FullRepaint = False
     TabOrder = 0
     TabStop = True
-    object ToolBarMain: TToolBar
+    object TabControl1: TTabControl
       Left = 0
-      Height = 25
-      Top = 30
+      Height = 30
+      Top = 0
       Width = 876
+      TabStop = False
+      OnChange = TabControl1Change
+      Align = alTop
+      TabOrder = 1
+      Visible = False
+    end
+    object ToolBarObj: TToolBar
+      Left = 0
+      Height = 27
+      Top = 53
+      Width = 876
+      Align = alBottom
       ButtonHeight = 24
       ButtonWidth = 24
-      Caption = 'Main bar'
+      Caption = 'Object bar'
+      EdgeBorders = [ebTop, ebBottom]
       Images = Img16Day
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
-      TabStop = True
       Wrapable = False
       OnMouseDown = MDEditToolBar
+    end
+    object PanelToolBarMain: TPanel
+      Left = 0
+      Height = 25
+      Top = 28
+      Width = 876
+      Align = alBottom
+      BevelOuter = bvNone
+      Caption = 'PanelToolBarMain'
+      ClientHeight = 25
+      ClientWidth = 876
+      TabOrder = 2
+      object ToolBarMain: TToolBar
+        Left = 0
+        Height = 25
+        Top = 0
+        Width = 844
+        Align = alClient
+        ButtonHeight = 24
+        ButtonWidth = 24
+        Caption = 'Main bar'
+        Images = Img16Day
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        TabStop = True
+        Wrapable = False
+        OnMouseDown = MDEditToolBar
+        object Divider_ToolBarMain_end: TToolButton
+          Left = 1
+          Height = 24
+          Width = 5
+          Top = 2
+          Caption = 'Divider_ToolBarMain_end'
+          Style = tbsDivider
+        end
+      end
       object ChildControl: TPanel
-        Left = 846
-        Height = 23
-        Top = 2
-        Width = 30
+        Left = 844
+        Height = 25
+        Top = 0
+        Width = 32
         Align = alRight
         AutoSize = True
-        BevelOuter = bvNone
-        ClientHeight = 23
-        ClientWidth = 30
-        TabOrder = 0
+        ClientHeight = 25
+        ClientWidth = 32
+        TabOrder = 1
         object BtnRestoreChild: TSpeedButton
-          Left = 0
+          Left = 1
           Height = 15
-          Top = 0
+          Top = 1
           Width = 15
           Flat = True
           Glyph.Data = {
@@ -83,9 +131,9 @@ object f_main: Tf_main
           OnClick = BtnRestoreChildClick
         end
         object BtnCloseChild: TSpeedButton
-          Left = 15
+          Left = 16
           Height = 15
-          Top = 0
+          Top = 1
           Width = 15
           Flat = True
           Glyph.Data = {
@@ -109,42 +157,6 @@ object f_main: Tf_main
           OnClick = BtnCloseChildClick
         end
       end
-      object Divider_ToolBarMain_end: TToolButton
-        Left = 1
-        Height = 24
-        Top = 2
-        Width = 5
-        Caption = 'Divider_ToolBarMain_end'
-        Style = tbsDivider
-      end
-    end
-    object TabControl1: TTabControl
-      Left = 0
-      Height = 30
-      Top = 0
-      Width = 876
-      TabStop = False
-      OnChange = TabControl1Change
-      Align = alTop
-      TabOrder = 2
-      Visible = False
-    end
-    object ToolBarObj: TToolBar
-      Left = 0
-      Height = 27
-      Top = 53
-      Width = 876
-      Align = alBottom
-      ButtonHeight = 24
-      ButtonWidth = 24
-      Caption = 'Object bar'
-      EdgeBorders = [ebTop, ebBottom]
-      Images = Img16Day
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 1
-      Wrapable = False
-      OnMouseDown = MDEditToolBar
     end
   end
   object PanelLeft: TPanel
