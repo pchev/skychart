@@ -59,6 +59,7 @@ type
     Img32Day: TImageList;
     Img22Night: TImageList;
     Img22Day: TImageList;
+    PanelToolBarMain: TPanel;
     PopupToolbar1: TMenuItem;
     PopupToolbar2: TMenuItem;
     PopupToolbar: TPopupMenu;
@@ -1473,17 +1474,17 @@ begin
       SubWindow.Visible := False;
       SubHelp.Visible := False;
       topmessage.Visible := False;
-      ToolBarMain.Visible := False;
-      PanelLeft.Visible := ToolBarMain.Visible;
-      PanelRight.Visible := ToolBarMain.Visible;
-      ToolBarObj.Visible := ToolBarMain.Visible;
-      PanelBottom.Visible := ToolBarMain.Visible;
-      MenuViewToolsBar.Checked := ToolBarMain.Visible;
-      MenuViewMainBar.Checked := ToolBarMain.Visible;
-      MenuViewObjectBar.Checked := ToolBarMain.Visible;
-      MenuViewLeftBar.Checked := ToolBarMain.Visible;
-      MenuViewRightBar.Checked := ToolBarMain.Visible;
-      MenuViewStatusBar.Checked := ToolBarMain.Visible;
+      PanelToolBarMain.Visible := False;
+      PanelLeft.Visible := PanelToolBarMain.Visible;
+      PanelRight.Visible := PanelToolBarMain.Visible;
+      ToolBarObj.Visible := PanelToolBarMain.Visible;
+      PanelBottom.Visible := PanelToolBarMain.Visible;
+      MenuViewToolsBar.Checked := PanelToolBarMain.Visible;
+      MenuViewMainBar.Checked := PanelToolBarMain.Visible;
+      MenuViewObjectBar.Checked := PanelToolBarMain.Visible;
+      MenuViewLeftBar.Checked := PanelToolBarMain.Visible;
+      MenuViewRightBar.Checked := PanelToolBarMain.Visible;
+      MenuViewStatusBar.Checked := PanelToolBarMain.Visible;
       ViewTopPanel;
       FormResize(nil);
     end;
@@ -5278,6 +5279,7 @@ begin
   if (ToolBarMain.ButtonHeight <> sz) or (ToolBarMain.ShowCaptions <> showcapt) then
   begin
     SetButtonImage(sz,msz);
+    PanelToolBarMain.Height:=sz+4;
     ToolBarMain.ButtonHeight := sz;
     ToolBarMain.ButtonWidth := sz;
     ToolBarMain.Height := sz + 4;
@@ -5312,8 +5314,8 @@ var
   i: integer;
 begin
   i := 0;
-  if ToolBarMain.Visible then
-    i := i + ToolBarMain.Height;
+  if PanelToolBarMain.Visible then
+    i := i + PanelToolBarMain.Height;
   if ToolBarObj.Visible then
     i := i + ToolBarObj.Height;
   if TabControl1.Visible then
@@ -5342,7 +5344,7 @@ begin
   MenuViewToolsBar.Checked := MenuViewMainBar.Checked and
     MenuViewObjectBar.Checked and MenuViewLeftBar.Checked and
     MenuViewRightBar.Checked and MenuViewStatusBar.Checked;
-  ToolBarMain.Visible := MenuViewMainBar.Checked;
+  PanelToolBarMain.Visible := MenuViewMainBar.Checked;
   ToolBarObj.Visible := MenuViewObjectBar.Checked;
   PanelLeft.Visible := MenuViewLeftBar.Checked;
   PanelRight.Visible := MenuViewRightBar.Checked;
@@ -5363,7 +5365,7 @@ begin
     (VisibleControlCount(ToolBarRight) > 0);
   MenuViewStatusBar.Checked := MenuViewToolsBar.Checked;
 
-  ToolBarMain.Visible := MenuViewMainBar.Checked;
+  PanelToolBarMain.Visible := MenuViewMainBar.Checked;
   ToolBarObj.Visible := MenuViewObjectBar.Checked;
   PanelLeft.Visible := MenuViewLeftBar.Checked;
   PanelRight.Visible := MenuViewRightBar.Checked;
@@ -5405,7 +5407,7 @@ begin
   if c = 0 then
     SetLPanel1(format(rsIsEmpty, [rsMainBar]));
   MenuViewMainBar.Checked := not MenuViewMainBar.Checked and (c > 0);
-  ToolBarMain.Visible := MenuViewMainBar.Checked;
+  PanelToolBarMain.Visible := MenuViewMainBar.Checked;
   if not MenuViewMainBar.Checked then
     MenuViewToolsBar.Checked := False;
   if MenuViewMainBar.Checked and MenuViewObjectBar.Checked and
@@ -5660,10 +5662,9 @@ end;
 procedure Tf_main.FormResize(Sender: TObject);
 begin
   SaveState := WindowState;
-  ChildControl.Left := ToolBarMain.Width - ChildControl.Width;
   if Divider_ToolBarMain_end <> nil then
     quicksearch.Width := min(300, max(90, (quicksearch.Width +
-      ChildControl.left - Divider_ToolBarMain_end.Left -
+      ToolBarMain.Width - Divider_ToolBarMain_end.Left -
       Divider_ToolBarMain_end.Width)));
 end;
 
@@ -7367,7 +7368,7 @@ begin
   {$endif}
         end;
         TelescopePanel.Visible := def_cfgsc.IndiTelescope;
-        ToolBarMain.Visible := ReadBool(section, 'ViewMainBar', True);
+        PanelToolBarMain.Visible := ReadBool(section, 'ViewMainBar', True);
         PanelLeft.Visible := ReadBool(section, 'ViewLeftBar', True);
         PanelRight.Visible := ReadBool(section, 'ViewRightBar', True);
         ToolBarObj.Visible := ReadBool(section, 'ViewObjectBar', True);
@@ -7375,7 +7376,7 @@ begin
           ReadBool(section, 'ViewScrollBar', True) and CanShowScrollbar;
         PanelBottom.Visible := ReadBool(section, 'ViewStatusBar', True);
         MenuViewStatusBar.Checked := PanelBottom.Visible;
-        MenuViewMainBar.Checked := ToolBarMain.Visible;
+        MenuViewMainBar.Checked := PanelToolBarMain.Visible;
         MenuViewObjectBar.Checked := ToolBarObj.Visible;
         MenuViewLeftBar.Checked := PanelLeft.Visible;
         MenuViewRightBar.Checked := PanelRight.Visible;
@@ -8432,7 +8433,7 @@ begin
         WriteInteger(section, 'ManualTelescopeType', def_cfgsc.ManualTelescopeType);
         WriteFloat(section, 'TelescopeTurnsX', def_cfgsc.TelescopeTurnsX);
         WriteFloat(section, 'TelescopeTurnsY', def_cfgsc.TelescopeTurnsY);
-        WriteBool(section, 'ViewMainBar', ToolBarMain.Visible);
+        WriteBool(section, 'ViewMainBar', PanelToolBarMain.Visible);
         WriteBool(section, 'ViewLeftBar', PanelLeft.Visible);
         WriteBool(section, 'ViewRightBar', PanelRight.Visible);
         WriteBool(section, 'ViewObjectBar', ToolBarObj.Visible);
@@ -10782,7 +10783,7 @@ begin
     Ilist.GetBitmap(55, btn);
     ButtonLessNeb.Picture.Assign(btn);
     btn.Free;
-    ChildControl.Left := ToolBarMain.Width - ChildControl.Width;
+    //ChildControl.Left := ToolBarMain.Width - ChildControl.Width;
   except
   end;
 end;
