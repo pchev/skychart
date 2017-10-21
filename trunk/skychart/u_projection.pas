@@ -96,6 +96,8 @@ procedure Gal2Eq(l, b: double; var ar, de: double; c: Tconf_skychart);
 procedure Eq2Gal(ar, de: double; var l, b: double; c: Tconf_skychart);
 //Function int3(n,y1,y2,y3 : double): double;
 procedure int4(y1, y2, y3: double; var n: integer; var x1, x2, xmax, ymax: double);
+function ObjRise(ra,de: double; c:Tconf_skychart; out hr,a: double; out i:integer):boolean;
+function ObjSet(ra,de: double; c:Tconf_skychart; out hs,a:double; out i:integer):boolean;
 procedure RiseSet(jd0, ar, de: double; var hr, ht, hs, azr, azs: double;
   var irc: integer; c: Tconf_skychart);
           (* Only for ponctual objects, see cu_planet.pas TPlanet.PlanetRiseSet for the planets
@@ -1851,6 +1853,220 @@ end else begin
     end;
 end;
 end;}
+
+procedure RiseTime(ar, de, alt: double; c:Tconf_skychart; out hr, azr: double; out irc: integer );
+var
+  hoo, hs0, chh0, hh0, m0, m1,  a0: double;
+  hsg, hl, h, dm, longref: double;
+begin
+  hoo := alt;
+  Refraction(hoo, False,c,refmethod);
+  hoo := rad2deg * hoo;
+  longref := -c.TimeZone * 15;
+  hs0 := sidtim(c.jd0, -c.TimeZone, longref);
+  chh0 := (sin(deg2rad * hoo) - sin(deg2rad * c.ObsLatitude) * sin(de)) /
+    (cos(deg2rad * c.ObsLatitude) * cos(de));
+  if abs(chh0) <= 1 then
+  begin
+    hh0 := arccos(chh0);
+    m0 := (ar + deg2rad * c.ObsLongitude - deg2rad * longref - hs0) / pi2;
+    m1 := m0 - hh0 / pi2;
+    while m1 < 0 do
+      m1 := m1 + 1;
+    while m1 > 1 do
+      m1 := m1 - 1;
+    // rise
+    hsg := hs0 + deg2rad * 360.985647 * m1;
+    hl := hsg - deg2rad * c.Obslongitude + deg2rad * longref - ar;
+    h := rad2deg * (arcsin(sin(deg2rad * c.Obslatitude) * sin(de) +
+      cos(deg2rad * c.Obslatitude) * cos(de) * cos(hl)));
+    dm := (h - hoo) / (360 * cos(de) * cos(deg2rad * c.Obslatitude) * sin(hl));
+    hr := (m1 + dm) * 24;
+    // azimuth
+    a0 := arctan2(sin(hh0), cos(hh0) * sin(deg2rad * c.Obslatitude) -
+      tan(de) * cos(deg2rad * c.Obslatitude));
+    azr := pi2 - a0;
+    irc := 0;
+  end
+  else
+  begin
+    hr := 0;
+    azr := 0;
+    if sgn(de) = sgn(c.ObsLatitude) then
+      irc := 1  (* circumpolar *)
+    else
+      irc := 2; (* invisible *)
+  end;
+end;
+
+procedure SetTime(ar, de, alt: double; c:Tconf_skychart; out hs, azs: double; out irc: integer );
+var
+  hoo, hs0, chh0, hh0, m0, m2, a0: double;
+  hsg, hl, h, dm, longref: double;
+begin
+  hoo := alt;
+  Refraction(hoo, False,c,refmethod);
+  hoo := rad2deg * hoo;
+  longref := -c.TimeZone * 15;
+  hs0 := sidtim(c.jd0, -c.TimeZone, longref);
+  chh0 := (sin(deg2rad * hoo) - sin(deg2rad * c.ObsLatitude) * sin(de)) /
+    (cos(deg2rad * c.ObsLatitude) * cos(de));
+  if abs(chh0) <= 1 then
+  begin
+    hh0 := arccos(chh0);
+    m0 := (ar + deg2rad * c.ObsLongitude - deg2rad * longref - hs0) / pi2;
+    m2 := m0 + hh0 / pi2;
+    while m2 < 0 do
+      m2 := m2 + 1;
+    while m2 > 1 do
+      m2 := m2 - 1;
+    // set
+    hsg := hs0 + deg2rad * 360.985647 * m2;
+    hl := hsg - deg2rad * c.Obslongitude + deg2rad * longref - ar;
+    h := rad2deg * (arcsin(sin(deg2rad * c.Obslatitude) * sin(de) +
+      cos(deg2rad * c.Obslatitude) * cos(de) * cos(hl)));
+    dm := (h - hoo) / (360 * cos(de) * cos(deg2rad * c.Obslatitude) * sin(hl));
+    hs := (m2 + dm) * 24;
+    // azimuth
+    a0 := arctan2(sin(hh0), cos(hh0) * sin(deg2rad * c.Obslatitude) -
+      tan(de) * cos(deg2rad * c.Obslatitude));
+    azs := a0;
+    irc := 0;
+  end
+  else
+  begin
+    hs := 0;
+    azs := 0;
+    if sgn(de) = sgn(c.ObsLatitude) then
+      irc := 1  (* circumpolar *)
+    else
+      irc := 2; (* invisible *)
+  end;
+end;
+
+procedure TransitTime(ar, de: double; c:Tconf_skychart; out ht: double; out irc: integer );
+var
+  hoo, hs0, chh0,  m0: double;
+  hsg, hl, dm, longref: double;
+begin
+  hoo := 0;
+  Refraction(hoo, False, c, refmethod);
+  hoo := rad2deg * hoo;
+  longref := -c.TimeZone * 15;
+  hs0 := sidtim(c.jd0, -c.TimeZone, longref);
+  chh0 := (sin(deg2rad * hoo) - sin(deg2rad * c.ObsLatitude) * sin(de)) /
+    (cos(deg2rad * c.ObsLatitude) * cos(de));
+  if abs(chh0) <= 1 then
+  begin
+    m0 := (ar + deg2rad * c.ObsLongitude - deg2rad * longref - hs0) / pi2;
+    while m0 < 0 do
+      m0 := m0 + 1;
+    while m0 > 1 do
+      m0 := m0 - 1;
+    // transit
+    hsg := hs0 + deg2rad * 360.985647 * m0;
+    hl := hsg - deg2rad * c.Obslongitude + deg2rad * longref - ar;
+    dm := -(hl / pi2);
+    ht := rmod((m0 + dm) * 24 + 24, 24);
+    if (ht < 10) and (m0 > 0.6) then
+      ht := ht + 24;
+    if (ht > 14) and (m0 < 0.4) then
+      ht := ht - 24;
+    irc := 0;
+  end
+  else
+  begin
+    if sgn(de) = sgn(c.ObsLatitude) then
+    begin
+      m0 := (ar + deg2rad * c.ObsLongitude - hs0) / pi2;     (* circumpolar *)
+      if m0 < 0 then
+        m0 := m0 + 1;
+      if m0 > 1 then
+        m0 := m0 - 1;
+      hsg := hs0 + deg2rad * 360.985647 * m0;
+      hl := hsg - deg2rad * c.ObsLongitude - ar;
+      dm := -(hl / pi2);
+      ht := rmod((m0 + dm) * 24 + c.TimeZone + 24, 24);
+      irc := 1;
+    end
+    else
+    begin
+      ht := 0;      (* invisible *)
+      irc := 2;
+    end;
+  end;
+end;
+
+
+function ObjRise(ra,de: double; c:Tconf_skychart;  out hr,a: double; out i:integer):boolean;
+var azr,hhr,hht,h,ch,st: double;
+    aa: integer;
+begin
+  result:=false;
+  i:=2;
+  if c.HorizonMax <= musec then exit;
+  h:=c.HorizonMin;
+  RiseTime(ra,de,h,c,hhr,azr,i);
+  if i=1 then begin
+    // circumpolar, look for minimal altitude
+    TransitTime(ra,de,c,hht,i);
+    hhr:=rmod(hht+12,24);
+    azr:=pi;
+    i:=0;
+  end;
+  if i=0 then begin
+    aa:=round(rmod(azr + pi, pi2)*rad2deg);
+    if (aa<0)or(aa>360) then exit;
+    ch:=c.horizonlist^[aa];
+    while h<ch do begin
+     hhr:=hhr+(1/60);
+     st:=SidTim(c.jd0,hhr-c.TimeZone,c.ObsLongitude);
+     Eq2Hz(st-ra,de,a,h,c);
+     a:=rmod(a + pi, pi2);
+     aa:=round(a*rad2deg);
+     if aa=360 then aa:=0;
+     if (aa>180)or(aa<0)or(aa>360) then exit;
+     ch:=c.horizonlist^[aa];
+    end;
+    hr:=rmod(hhr+24,24);
+    result:=true;
+  end;
+end;
+
+function ObjSet(ra,de: double; c:Tconf_skychart; out hs,a:double; out i:integer):boolean;
+var azs,hhs,hht,h,ch,st: double;
+    aa: integer;
+begin
+  result:=false;
+  i:=2;
+  if c.HorizonMax <= musec then exit;
+  h:=c.HorizonMin;
+  SetTime(ra,de,h,c,hhs,azs,i);
+  if i=1 then begin
+    // circumpolar, look for minimal altitude
+    TransitTime(ra,de,c,hht,i);
+    hhs:=rmod(hht+12,24);
+    azs:=pi;
+    i:=0;
+  end;
+  if i=0 then begin
+    aa:=round(rmod(azs + pi, pi2)*rad2deg);
+    if (aa<0)or(aa>360) then exit;
+    ch:=c.horizonlist^[aa];
+    while h<ch do begin
+     hhs:=hhs-(1/60);
+     st:=SidTim(c.jd0,hhs-c.TimeZone,c.ObsLongitude);
+     Eq2Hz(st-ra,de,a,h,c);
+     a:=rmod(a + pi, pi2);
+     aa:=round(a*rad2deg);
+     if aa=0 then aa:=360;
+     if (aa<180)or(aa<0)or(aa>360) then exit;
+     ch:=c.horizonlist^[aa];
+    end;
+    hs:=rmod(hhs+24,24);
+    result:=true;
+  end;
+end;
 
 procedure Time_Alt(jd, ar, de, h: double; var hp1, hp2: double;
   ObsLatitude, ObsLongitude: double);
