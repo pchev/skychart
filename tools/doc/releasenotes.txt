@@ -2,8 +2,9 @@ Version 4.1 beta, release Notes
 
 New functions:
 
+- Show rise and set time relative to the local horizon if a horizon file is loaded.
 - New icon for the buttons, use larger image for big buttons.
-- Set observatory coordinates from telescope GPS, use "Telescope" observatory name .
+- Set observatory coordinates from telescope GPS, use "Telescope" observatory name.
 - Improve download progress display.
 - Many bug fix.
 
