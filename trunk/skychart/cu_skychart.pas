@@ -3768,7 +3768,8 @@ procedure Tskychart.FindRiseSet(mode: integer);
 var
   txt, thr, tht, ths, tazr, tazs: string;
   cjd0, ra, Dec, h, hr, ht, hs, azr, azs, j1, j2, j3, rar, der, rat, det, ras, des: double;
-  i, y, m, d: integer;
+  hrl,hsl,al: double;
+  i, ii, y, m, d: integer;
 begin
   if (cfgsc.Equinoxtype = 2) then
   begin
@@ -3792,6 +3793,10 @@ begin
     begin // fixed object
       ra := cfgsc.FindRA;
       Dec := cfgsc.FindDec;
+      rar:=ra;
+      der:=dec;
+      ras:=ra;
+      des:=dec;
       RiseSet(cjd0, ra, Dec, hr, ht, hs, azr, azs, i, cfgsc);
       thr := artostr3(rmod(hr + 24, 24));
       tht := artostr3(rmod(ht + 24, 24));
@@ -3803,6 +3808,19 @@ begin
       tazr := LONmToStr(rad2deg * Azr);
       tazs := LONmToStr(rad2deg * Azs);
     end;
+    if cfgsc.HorizonMax > musec then begin
+      if ObjRise(rar,der,cfgsc,hrl,al,ii) then begin
+         thr := artostr3(rmod(hrl + 24, 24));
+         tazr:=LONmToStr(rad2deg * al);
+         i:=ii;
+      end;
+      if ObjSet(ras,des,cfgsc,hsl,al,ii) then begin
+         ths := artostr3(rmod(hsl + 24, 24));
+         tazs:=LONmToStr(rad2deg * al);
+         i:=ii;
+      end;
+    end;
+
     txt := '';
     if trim(thr) = '' then
       thr := 'N/A';
