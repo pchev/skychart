@@ -5311,6 +5311,7 @@ var
   buf: string;
 begin
   cfgsc.HorizonMax := musec;  // require in cfgsc for horizon clipping in u_projection
+  cfgsc.HorizonMin := pid2;
   for i := 1 to 360 do
     cfgshr.horizonlist[i] := 0;
   if fileexists(fname) then
@@ -5366,6 +5367,7 @@ begin
           de := deg2rad * (d1 + (i - i1) * (d2 - d1) / (i2 - i1));
           cfgshr.horizonlist[i + 1] := de;
           cfgsc.HorizonMax := max(cfgsc.HorizonMax, de);
+          cfgsc.HorizonMin := min(cfgsc.HorizonMin, de);
         end;
         i1 := i2;
         d1 := d2;
@@ -5381,8 +5383,10 @@ begin
           de := deg2rad * (d1 + (i - i1) * (d0 - d1) / (359 - i1));
           cfgshr.horizonlist[i + 1] := de;
           cfgsc.HorizonMax := max(cfgsc.HorizonMax, de);
+          cfgsc.HorizonMin := min(cfgsc.HorizonMin, de);
         end;
       end;
+      cfgshr.horizonlist[0] := cfgshr.horizonlist[1];
       cfgshr.horizonlist[361] := cfgshr.horizonlist[1];
     end;
   end;

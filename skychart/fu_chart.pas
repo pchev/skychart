@@ -3635,10 +3635,10 @@ var
   searchdir, fn, ImgCat: string;
   bmp: TBGRAbitmap;
   ipla, isat: integer;
-  i, p, l, y, m, d, precision, pa: integer;
+  i,ii, p, l, y, m, d, precision, pa: integer;
   isStar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
   ApparentValid, supconj: boolean;
-  ra, Dec, q, a, h, ag, airm, hg, hr, ht, hs, azr, azs, j1, j2, j3, rar, der, rat,
+  ra, Dec, q, a, h, ag, airm, hg, hr, ht, hs, hrl,hsl, azr, azs, al, j1, j2, j3, rar, der, rat,
   det, ras, des, culmalt: double;
   ra2000, de2000, radate, dedate, raapp, deapp, cjd, cjd0, cst, nst, njd, err, gw: double;
   r: TStringList;
@@ -4221,6 +4221,10 @@ begin
       begin // fixed object
         ra := sc.cfgsc.FindRA;
         Dec := sc.cfgsc.FindDec;
+        rar:=ra;
+        der:=dec;
+        ras:=ra;
+        des:=dec;
         precession(sc.cfgsc.JDChart, cjd, ra, Dec);
         RiseSet(cjd0, ra, Dec, hr, ht, hs, azr, azs, i, sc.cfgsc);
         if sc.catalog.cfgshr.AzNorth then
@@ -4233,6 +4237,18 @@ begin
         ths := artostr3(rmod(hs + 24, 24));
         tazr := LONmToStr(rad2deg * Azr);
         tazs := LONmToStr(rad2deg * Azs);
+      end;
+      if sc.cfgsc.HorizonMax > musec then begin
+        if ObjRise(rar,der,sc.cfgsc,hrl,al,ii) then begin
+           thr := rsLocalHorizon + blank + artostr3(rmod(hrl + 24, 24));
+           tazr:=LONmToStr(rad2deg * al);
+           i:=ii;
+        end;
+        if ObjSet(ras,des,sc.cfgsc,hsl,al,ii) then begin
+           ths := rsLocalHorizon + blank + artostr3(rmod(hsl + 24, 24));
+           tazs:=LONmToStr(rad2deg * al);
+           i:=ii;
+        end;
       end;
       culmalt := 90 - sc.cfgsc.ObsLatitude + rad2deg * sc.cfgsc.FindDec;
       if culmalt > 90 then

@@ -995,7 +995,7 @@ type
     // working variable
     ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid,
     SmallSatActive, ShowEarthShadowValid, ShowEclipticValid, PlotImageFirst: boolean;
-    HorizonMax, rap2000, dep2000, RefractionOffset, ObsRAU, ObsZAU, Diurab: double;
+    HorizonMax, HorizonMin, rap2000, dep2000, RefractionOffset, ObsRAU, ObsZAU, Diurab: double;
     haicx, haicy, ObsRefractionCor, ObsRefA, ObsRefB, ObsHorizonDepression,
     ObsELONG, ObsPHI, ObsDAZ: double;
     WindowRatio, BxGlb, ByGlb, AxGlb, AyGlb, sintheta, costheta, x2: double;
@@ -2298,6 +2298,7 @@ begin
   RotLabel := Source.RotLabel;
   BackgroundImage := Source.BackgroundImage;
   HorizonMax := Source.HorizonMax;
+  HorizonMin := Source.HorizonMin;
   rap2000 := Source.rap2000;
   dep2000 := Source.dep2000;
   RefractionOffset := Source.RefractionOffset;
