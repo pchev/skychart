@@ -992,6 +992,7 @@ type
     MaxArchiveImg: integer;
     ArchiveDir: array[1..MaxArchiveDir] of string;
     ArchiveDirActive: array[1..MaxArchiveDir] of boolean;
+    HorizonRise: boolean;
     // working variable
     ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid,
     SmallSatActive, ShowEarthShadowValid, ShowEclipticValid, PlotImageFirst: boolean;
@@ -2299,6 +2300,7 @@ begin
   BackgroundImage := Source.BackgroundImage;
   HorizonMax := Source.HorizonMax;
   HorizonMin := Source.HorizonMin;
+  HorizonRise :=Source.HorizonRise;
   rap2000 := Source.rap2000;
   dep2000 := Source.dep2000;
   RefractionOffset := Source.RefractionOffset;

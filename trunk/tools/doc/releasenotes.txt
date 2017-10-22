@@ -2,7 +2,7 @@ Version 4.1 beta, release Notes
 
 New functions:
 
-- Show rise and set time relative to the local horizon if a horizon file is loaded.
+- Show the object rise and set time relative to the local horizon if a horizon file is loaded. This can be disabled in Setup/Observatory. Calendar rise/set are always given to the astronomical horizon.
 - New icon for the buttons, use larger image for big buttons.
 - Set observatory coordinates from telescope GPS, use "Telescope" observatory name.
 - Improve download progress display.

@@ -4238,7 +4238,7 @@ begin
         tazr := LONmToStr(rad2deg * Azr);
         tazs := LONmToStr(rad2deg * Azs);
       end;
-      if sc.cfgsc.HorizonMax > musec then begin
+      if sc.cfgsc.HorizonRise and (sc.cfgsc.HorizonMax > musec) then begin
         if ObjRise(rar,der,sc.cfgsc,hrl,al,ii) then begin
            thr := rsLocalHorizon + blank + artostr3(rmod(hrl + 24, 24));
            tazr:=LONmToStr(rad2deg * al);

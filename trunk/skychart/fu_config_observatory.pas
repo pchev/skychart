@@ -38,6 +38,7 @@ type
 
   Tf_config_observatory = class(TFrame)
     altmeter: TFloatEdit;
+    HorizonRise: TCheckBox;
     ShowHorizon0: TCheckBox;
     HorizonQuality: TCheckBox;
     displayhorizonpicture: TCheckBox;
@@ -110,6 +111,7 @@ type
     procedure Button6Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
+    procedure HorizonRiseClick(Sender: TObject);
     procedure latKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure longKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: boolean);
@@ -233,6 +235,7 @@ begin
   label9.Caption := rsPictureAngle;
   fillhorizon.Caption := rsFillWithHori;
   ShowHorizon0.Caption := rsShow0Horizon;
+  HorizonRise.Caption := rsComputeRiseS;
   GroupBox3.Caption := rsDepressionOf;
   Label1.Caption := rsYouLiveOnABi;
   horizondepression.Caption := rsDrawTheAppar;
@@ -1041,6 +1044,7 @@ begin
   picturerotation.Value := csc.HorizonPictureRotate;
   fillhorizon.Checked := csc.FillHorizon;
   ShowHorizon0.Checked := csc.ShowHorizon0;
+  HorizonRise.Checked := csc.HorizonRise;
   horizondepression.Checked := csc.ShowHorizonDepression;
 end;
 
@@ -1059,6 +1063,11 @@ end;
 procedure Tf_config_observatory.ShowHorizon0Click(Sender: TObject);
 begin
   csc.ShowHorizon0 := ShowHorizon0.Checked;
+end;
+
+procedure Tf_config_observatory.HorizonRiseClick(Sender: TObject);
+begin
+  csc.HorizonRise := HorizonRise.Checked;
 end;
 
 procedure Tf_config_observatory.horizondepressionClick(Sender: TObject);

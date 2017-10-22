@@ -1640,6 +1640,7 @@ resourcestring
     + 'or not for you. But the preference is to use the INDI or ASCOM driver '
     + 'for your telescope.';
   rsShowObsolete = 'Show obsolete drivers';
+  rsComputeRiseS = 'Compute rise/set time relative to this line';
 
 // also update upsi_translation
 
