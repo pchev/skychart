@@ -2,7 +2,7 @@ Version 4.1 beta, Notes de la version
 
 Nouvelles fonctions:
 
-- Affiche l'heure de lever et coucher par rapport à l'horizon local si un fichier d'horizon est chargé.
+- Affiche l'heure de lever et coucher par rapport à l'horizon local si un fichier d'horizon est chargé. Cela peu être désactivé dans Condifuration/Observatoire. Le calendrier indique toujours le lever et coucher sur l'horizon astronomique.
 - Nouveaux icône pour les boutons, utilise une image plus grande pour les gros boutons.
 - Coordonnées de l'observatoire à partir du GPS du télescope, utilise le nom de l'observatoire "Telescope".
 - Amélioration de l'affichage de la progression du téléchargement.
