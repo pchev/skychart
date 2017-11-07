@@ -2593,9 +2593,14 @@ begin
         end;
       end;
     end;
-    if cfgsc.ShowEarthShadowValid and (j = (cfgsc.SimNb - 1)) then
-      DrawEarthShadow(cfgsc.Planetlst[j, 32, 1], cfgsc.Planetlst[j, 32, 2],
+
+    if cfgsc.ShowEarthShadowValid and   // draw earth shadow
+      ((j = 0) or                       //  at first simulation point
+      ((j = (cfgsc.SimNb - 1)) and cfgsc.SimObject[11])) // and at the last point if simulating the Moon
+      then
+        DrawEarthShadow(cfgsc.Planetlst[j, 32, 1], cfgsc.Planetlst[j, 32, 2],
         cfgsc.Planetlst[j, 32, 3], cfgsc.Planetlst[j, 32, 4], cfgsc.Planetlst[j, 32, 5]);
+
   end;
   Result := True;
 end;
