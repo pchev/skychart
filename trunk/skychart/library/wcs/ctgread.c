@@ -1,8 +1,8 @@
 /*** File libwcs/ctgread.c
- *** February 15, 2013
+ *** January 24, 2017
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1998-2013
+ *** Copyright (C) 1998-2017
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -520,7 +520,7 @@ int	nlog;
 
 int
 ctgrnum (catfile,refcat, nnum,sysout,eqout,epout,match,starcat,
-	 tnum,tra,tdec,tpra,tpdec,tmag,tc,tobj,nlog)
+	 tnum,tra,tdec,tpra,tpdec,tmag,tc,tobj,tpath,nlog)
 
 char	*catfile;	/* Name of reference star catalog file */
 int	refcat;		/* Catalog code from wcscat.h */
@@ -538,6 +538,7 @@ double	*tpdec;		/* Array of declination proper motions (returned) */
 double	**tmag;		/* 2-D Array of magnitudes (returned) */
 int	*tc;		/* Array of fluxes (returned) */
 char	**tobj;		/* Array of object names (returned) */
+char	**tpath;	/* Array of object pathnames (returned) */
 int	nlog;
 {
     int jnum;
@@ -552,10 +553,12 @@ int	nlog;
     struct StarCat *sc;
     struct Star *star;
     char *objname;
+    char *datapath;
     int imag;
     int lname;
     int starfound;
     int nameobj;
+    int pathobj;
 
     nstar = 0;
 
@@ -645,6 +648,10 @@ int	nlog;
 	nameobj = 0;
     else
 	nameobj = 1;
+    if (tpath == NULL || sc->ignore)
+	pathobj = 0;
+    else
+	pathobj = 1;
 
     /* Loop through star list */
     for (jnum = 0; jnum < nnum; jnum++) {
@@ -711,6 +718,7 @@ int	nlog;
 	    if (sc->sptype)
 		tc[nstar] = (1000 * (int) star->isp[0]) + (int)star->isp[1];
 
+	    /* Object name */
 	    if (nameobj) {
 		lname = strlen (star->objname) + 1;
 		if (lname > 1) {
@@ -721,6 +729,20 @@ int	nlog;
 		else
 		    tobj[nstar] = NULL;
 		}
+
+	    /* Object data pathname */
+	    if (pathobj) {
+		lname = strlen (star->datapath) + 1;
+		if (lname > 1) {
+		    datapath = (char *)calloc (lname, 1);
+		    strcpy (datapath, star->datapath);
+		    tpath[nstar] = datapath;
+		    }
+		else
+		    tpath[nstar] = NULL;
+		}
+
+
 	    nstar++;
 	    if (nlog == 1)
 		fprintf (stderr,"CTGRNUM: %11.6f: %9.5f %9.5f %s %5.2f    \n",
@@ -1313,6 +1335,7 @@ int	refcat;		/* Catalog code from wcscat.h (TXTCAT,BINCAT,TABCAT) */
     sc->stnum = 1;
     sc->entepoch = 0;
     sc->entrv = 0;
+    sc->entpath = 0;
 
     catdesc = strchr (sc->catbuff, newline) + 1;
     lhead = catdesc - sc->catbuff;
@@ -1634,6 +1657,7 @@ struct Star *st; /* Star data structure, updated on return */
     ctemp = *linend;
     *linend = (char) 0;
     st->objname[0] = (char) 0;
+    st->datapath[0] = (char) 0;
 
     /* Extract information from line of catalog */
     ntok = setoken (&tokens, line, NULL);
@@ -1860,15 +1884,27 @@ struct Star *st; /* Star data structure, updated on return */
 
     /* Object name */
     itok = tokens.itok;
-    if (sc->stnum > 0 && itok < ntok && !sc->ignore) {
-	itok = -(itok+1);
-	ltok = getoken (&tokens, itok, token, MAX_LTOK);
-	if (ltok > 79) {
-	    strncpy (st->objname, token, 79);
-	    st->objname[79] = 0;
+    if (itok < ntok && !sc->ignore) {
+	if (sc->stnum > 0) {
+	    itok = -(itok+1);
+	    ltok = getoken (&tokens, itok, token, MAX_LTOK);
+	    if (ltok > 79) {
+		strncpy (st->objname, token, 79);
+		st->objname[79] = 0;
+		}
+	    else if (ltok > 0)
+		strcpy (st->objname, token);
 	    }
-	else if (ltok > 0)
-	    strcpy (st->objname, token);
+	else {
+	    itok = -(itok+1);
+	    ltok = getoken (&tokens, itok, token, MAX_LTOK);
+	    if (ltok > 79) {
+		strncpy (st->datapath, token, 79);
+		st->datapath[79] = 0;
+		}
+	    else if (ltok > 0)
+		strcpy (st->datapath, token);
+	    }
 	}
 
     *linend = ctemp;
@@ -2131,4 +2167,6 @@ char	*in;	/* Character string */
  * May 22 2012	Accept up to 9 magnitudes per entry instead of 4
  *
  * Feb 15 2013	Add UCAC4
+ *
+ * Jan 24 2017	Add datapath return from catalog in tpath
  */

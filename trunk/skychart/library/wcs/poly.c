@@ -912,3 +912,6 @@ int	*poly_powers(polystruct *poly)
   return powers;
   }
 
+/*
+ * Jun 24 2016	qerror() abort rather than exit (from Ole Streicher)
+ */

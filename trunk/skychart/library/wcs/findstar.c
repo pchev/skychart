@@ -1,7 +1,7 @@
 /*** File libwcs/findstar.c
- *** October 19, 2007
+ *** June 24, 2016
  *** By Jessica Mink, after Elwood Downey
- *** Copyright (C) 1996-2007
+ *** Copyright (C) 1996-2016
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -212,7 +212,7 @@ int	zap;		/* If 1, set star to background after reading */
 	tx1 = trimsec + 1;
 	tx2 = strchr (trimsec, ':');
 	*tx2 = (char) 0;
-	xborder1 = atoi (tx1+1);
+	xborder1 = atoi (tx1);
 	tx2 = tx2 + 1;
 	tx3 = strchr (tx2, ',');
 	*tx3 = (char) 0;
@@ -1092,4 +1092,6 @@ int	h;	/* Original height of image */
  * Jan  8 2007	Drop unused variables
  * Jan 10 2007	Include wcs.h
  * Oct 19 2007	Fix pointers in trim section processing
+ *
+ * Jun 24 2016	Fixed bug in TRIMSEC parsing found by Ole Streicher
  */

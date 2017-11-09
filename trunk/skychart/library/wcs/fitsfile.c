@@ -1,8 +1,8 @@
 /*** File libwcs/fitsfile.c
- *** July 25, 2014
+ *** June 24, 2016
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1996-2014
+ *** Copyright (C) 1996-2016
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -174,7 +174,7 @@ int	*nbhead;	/* Number of bytes before start of data (returned) */
 #endif
 
     if (ext != NULL) {
-	if (isnum (ext+1))
+	if (isnum (ext+1) == 1)
 	    extnum = atoi (ext+1);
 	else {
 	    extnum = -2;
@@ -328,7 +328,7 @@ int	*nbhead;	/* Number of bytes before start of data (returned) */
 		nbprim = nrec * FITSBLOCK;
 		headend = ksearch (header,"END");
 		lprim = headend + 80 - header;
-		pheader = (char *) calloc ((unsigned int) nbprim, 1);
+		pheader = (char *) calloc ((unsigned int) (nbprim + 1), 1);
 		for (i = 0; i < lprim; i++)
 		    pheader[i] = header[i];
 		for (i = lprim; i < nbprim; i++)
@@ -1583,7 +1583,7 @@ char	*image;		/* FITS image pixels */
 	if (!access (filename, 0)) {
 	    fd = open (filename, O_WRONLY);
 	    if (fd < 3) {
-		snprintf (fitserrmsg,79, "FITSWIMAGE:  file %s not writable\n", filename);
+		snprintf (fitserrmsg,79, "FITSWIMAGE:  file %s not writeable\n", filename);
 		return (0);
 		}
 	    }
@@ -1622,7 +1622,7 @@ char	*image;		/* FITS image pixels */
 	if (!access (filename, 0)) {
 	    fd = open (filename, O_WRONLY);
 	    if (fd < 3) {
-		snprintf (fitserrmsg,79, "FITSWEXT:  file %s not writable\n",
+		snprintf (fitserrmsg,79, "FITSWEXT:  file %s not writeable\n",
 			 filename);
 		return (0);
 		}
@@ -1884,7 +1884,7 @@ char	*filename0;	/* Name of input FITS image file */
     if (!access (filename, 0)) {
 	fdout = open (filename, O_WRONLY);
 	if (fdout < 3) {
-	    snprintf (fitserrmsg,79, "FITSCIMAGE:  file %s not writable\n", filename);
+	    snprintf (fitserrmsg,79, "FITSCIMAGE:  file %s not writeable\n", filename);
 	    return (0);
 	    }
 	}
@@ -1970,7 +1970,7 @@ char	*header;	/* FITS image header */
     if (!access (filename, 0)) {
 	fd = open (filename, O_WRONLY);
 	if (fd < 3) {
-	    snprintf (fitserrmsg, 79, "FITSWHEAD:  file %s not writable\n", filename);
+	    snprintf (fitserrmsg, 79, "FITSWHEAD:  file %s not writeable\n", filename);
 	    return (0);
 	    }
 	}
@@ -2072,7 +2072,7 @@ char	*header;	/* FITS image header */
     if (ext != NULL)
 	*ext = cext;
     if (fd < 3) {
-	snprintf (fitserrmsg, 79, "FITSWEXHEAD:  file %s not writable\n", filename);
+	snprintf (fitserrmsg, 79, "FITSWEXHEAD:  file %s not writeable\n", filename);
 	return (-1);
 	}
 
@@ -2322,4 +2322,7 @@ char *from, *last, *to;
  * Sep 15 2011	Declare global variable ibhead off_t
  *
  * Jul 25 2014	Fix bug when reallocating buffer for long headers
+ *
+ * Jun  9 2016	Fix isnum() tests for added coloned times and dashed dates
+ * Jun 24 2016	Add 1 to allocation of pheader for trailing null, fix by Ole Streicher
  */

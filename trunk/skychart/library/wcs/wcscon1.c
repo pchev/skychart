@@ -1,8 +1,8 @@
 /*** File wcscon.c
- *** June 9, 2016
+ *** November 29, 2006
  *** Doug Mink, Harvard-Smithsonian Center for Astrophysics
  *** Some subroutines are based on Starlink subroutines by Patrick Wallace
- *** Copyright (C) 1995-2016
+ *** Copyright (C) 1995-2006
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -55,13 +55,9 @@
  * Subroutine:	ecl2fk5 (dtheta,dphi,epoch) Convert ecliptic coordinates to J2000<FK5)
  * Subroutine:  fk5prec (ep0, ep1, ra, dec) Precession ep0 to ep1, FK5 system
  * Subroutine:  fk4prec (ep0, ep1, ra, dec) Precession ep0 to ep1, FK4 system
- * Subroutine:  d2v3 (rra, rdec, r, pos) RA and Dec in degrees, Distance to Cartesian
- * Subroutine:  v2d3 (pos, rra, rdec, r) Cartesian to RA and Dec in degrees, Distance
  * Subroutine:  s2v3 (rra, rdec, r, pos) RA, Dec, Distance to Cartesian
- * Subroutine:  v2s3 (pos, rra, rdec, r) Cartesian to RA, Dec, Distance
+ * Subroutine:  v2s3 (pos, rra, rdec, r) Cartesion to RA, Dec, Distance
  * Subroutine:  rotmat (axes, rot1, rot2, rot3, matrix) Rotation angles to matrix
- *
- * Note: Proper motions are always in RA/Dec degrees/year; no cos(Dec) correction
  */
 
 #include <math.h>
@@ -94,9 +90,9 @@ double	*dtheta; /* Longitude or right ascension in degrees
 		   Input in sys1, returned in sys2 */
 double	*dphi;	/* Latitude or declination in degrees
 		   Input in sys1, returned in sys2 */
-double	*ptheta; /* Longitude or right ascension proper motion in RA degrees/year
+double	*ptheta; /* Longitude or right ascension proper motion in degrees/year
 		   Input in sys1, returned in sys2 */
-double	*pphi;	/* Latitude or declination proper motion in Dec degrees/year
+double	*pphi;	/* Latitude or declination proper motion in degrees/year
 		   Input in sys1, returned in sys2 */
 
 {
@@ -176,6 +172,8 @@ double	*pphi;	/* Latitude or declination proper motion in Dec degrees/year
 	if (sys1 == WCS_J2000) {
 	    if (*ptheta != 0.0 || *pphi != 0.0) {
 		fk524m (dtheta, dphi, ptheta, pphi);
+		if (ep1 == 2000.0)
+		    ep1 = 1950.0;
 		if (ep2 != 1950.0) {
 		    *dtheta = *dtheta + ((ep2 - 1950.0) * *ptheta);
 		    *dphi = *dphi + ((ep2 - 1950.0) * *pphi);
@@ -694,7 +692,7 @@ char *wcstring;		/* Name of coordinate system */
     else if (wcstring[0] == 'P' || wcstring[0] == 'p' )
 	return WCS_PLANET;
 
-    else if (isnum (wcstring) == 1 || isnum (wcstring) == 2) {
+    else if (isnum (wcstring)) {
 	equinox = atof (wcstring);
 	if (equinox > 1980.0)
 	    return WCS_J2000;
@@ -1055,6 +1053,7 @@ double *rv;		/* Rradial velocity (km/s, +ve = moving away) */
     x = v2[0];
     y = v2[1];
     z = v2[2];
+    rxyz = sqrt (x*x + y*y + z*z);
 
     /* Magnitude of position vector */
     rxyz = sqrt (x*x + y*y + z*z);
@@ -1062,7 +1061,7 @@ double *rv;		/* Rradial velocity (km/s, +ve = moving away) */
     /* Apply e-terms to position */
     w = (x * a[0]) + (y * a[1]) + (z * a[2]);
     x = x + (a[0] * rxyz) - (w * x);
-    y = y + (a[1] * rxyz) - (w * y);
+    y = y + (a[1] * rxyz) - (w * z);
     z = z + (a[2] * rxyz) - (w * z);
  
     /* Recompute magnitude of position vector */
@@ -1940,42 +1939,17 @@ double *ra;	/* RA in degrees mean equator & equinox of epoch ep0
 double *dec;	/* Dec in degrees mean equator & equinox of epoch ep0
 		       mean equator & equinox of epoch ep1 (returned) */
 /*
-**  Precession -  FK5 (Fricke, post-IAU1976)
+**  Precession -  FK5 (Fricke, post-IAU2000)
 **
 **  This routine will not correctly convert between FK5 and FK4.
 **  For output in FK4, precess to 2000.0 and use fk524() on result.
-**
-**  Based on slaPreces(), P.T.Wallace   Starlink   22 December 1993
 */
 {
-    int i, j;
-    double pm[9], *pmi, v1[3], v2[3], rra, rdec, r;
-    void v2s3(),s2v3(), mprecfk5();
+    void fk5ep2j(), fk5j2ep();
 
-    rra = degrad (*ra);
-    rdec = degrad (*dec);
-    r = 1.0;
- 
-    /* Generate appropriate precession matrix */
-    mprecfk5 (ep0, ep1, pm);
- 
-    /* Convert RA,Dec to x,y,z */
-    s2v3 (rra, rdec, r, v1);
- 
-    /* Multiply position vector by precession matrix */
-    pmi = pm;
-    for (i = 0; i < 3; i++) {
-	v2[i] = 0;
-	for (j = 0; j < 3; j++)
-	    v2[i] = v2[i] + ( v1[j] * *pmi++ );
-	}
- 
-    /* Back to RA,Dec */
-    v2s3 (v2, &rra, &rdec, &r);
+    fk5ep2j (ep0, ra, dec);
+    fk5j2ep (ep1, ra, dec);
 
-    /* Convert from radians to degrees */
-    *ra = raddeg (rra);
-    *dec = raddeg (rdec);
     return;
 }
 
@@ -2048,8 +2022,8 @@ double rmatp[9];	/* 3x3 Precession matrix (returned) */
 {
     double t0, t, tas2r, w, zeta, z, theta;
     void rotmat();
- 
-    /* Interval between basic epoch J2000.0 and beginning epoch (JC) */
+
+    /* Interval in Julian centuries  between J2000.0 and beginning epoch */
     t0 = ( ep0 - 2000.0 ) / 100.0;
  
     /* Interval over which precession required (JC) */
@@ -2069,6 +2043,155 @@ double rmatp[9];	/* 3x3 Precession matrix (returned) */
 }
 
 
+/* Precess coordinates to J2000 in FK5 */
+
+void
+fk5ep2j (ep, ra, dec)
+
+double ep;	/* Starting Julian epoch */
+double *ra;	/* RA in degrees mean equator & equinox of epoch ep0
+		      mean equator & equinox of epoch ep1 (returned) */
+double *dec;	/* Dec in degrees mean equator & equinox of epoch ep0
+		       mean equator & equinox of epoch ep1 (returned) */
+/*
+**  Precession -  FK5 (Fricke, post-IAU2000)
+**
+**  This routine will not correctly convert between FK5 and FK4.
+**  For output in FK4, precess to 2000.0 and use fk524() on result.
+**
+**  Based on slaPreces(), P.T.Wallace   Starlink   22 December 1993
+*/
+{
+    int i, j;
+    double pm[9], pmt[9], *pmi, v1[3], v2[3], rra, rdec, r;
+    void v2s3(),s2v3(), mfk5j2ep();
+
+    rra = degrad (*ra);
+    rdec = degrad (*dec);
+    r = 1.0;
+ 
+    /* Convert RA,Dec to x,y,z */
+    s2v3 (rra, rdec, r, v1);
+ 
+    /* Generate and transpose precession matrix */
+    mfk5j2ep ( ep, pm );
+    for (i = 0; i < 3; i++) {
+	for (j = 0; j < 3; j++) {
+	    pmt[i+(j*3)] = pm[j+(i*3)];
+	    }
+	}
+ 
+    /* Multiply position vector by precession matrix */
+    pmi = pmt;
+    for (i = 0; i < 3; i++) {
+	v2[i] = 0;
+	for (j = 0; j < 3; j++)
+	    v2[i] = v2[i] + (*pmi++ * v1[j]);
+	}
+ 
+    /* Back to RA,Dec */
+    v2s3 (v2, &rra, &rdec, &r);
+
+    /* Convert from radians to degrees */
+    *ra = raddeg (rra);
+    *dec = raddeg (rdec);
+}
+
+
+/* Precess coordinates from J2000 in FK5 */
+
+void
+fk5j2ep (ep, ra, dec)
+
+double ep;	/* Starting Julian epoch */
+double *ra;	/* RA in degrees mean equator & equinox of epoch ep0
+		      mean equator & equinox of epoch ep1 (returned) */
+double *dec;	/* Dec in degrees mean equator & equinox of epoch ep0
+		       mean equator & equinox of epoch ep1 (returned) */
+/*
+**  Precession -  FK5 (Fricke, post-IAU2000)
+**
+**  This routine will not correctly convert between FK5 and FK4.
+**  For output in FK4, precess to 2000.0 and use fk524() on result.
+**
+**  Based on slaPreces(), P.T.Wallace   Starlink   22 December 1993
+*/
+{
+    int i, j;
+    double pm[9], *pmi, v1[3], v2[3], rra, rdec, r;
+    void v2s3(), s2v3(), mfk5j2ep();
+
+    rra = degrad (*ra);
+    rdec = degrad (*dec);
+    r = 1.0;
+ 
+    /* Convert RA,Dec to x,y,z */
+    s2v3 (rra, rdec, r, v1);
+ 
+    /* Generate precession matrix */
+    mfk5j2ep ( ep, pm );
+ 
+    /* Multiply position vector by precession matrix */
+    pmi = pm;
+    for (i = 0; i < 3; i++) {
+	v2[i] = 0;
+	for (j = 0; j < 3; j++)
+	    v2[i] = v2[i] + (*pmi++ * v1[j]);
+	}
+ 
+    /* Back to RA,Dec */
+    v2s3 (v2, &rra, &rdec, &r);
+
+    /* Convert from radians to degrees */
+    *ra = raddeg (rra);
+    *dec = raddeg (rdec);
+}
+
+
+void
+mfk5j2ep (ep, rmatp)
+
+double ep;		/* Beginning epoch */
+double rmatp[9];	/* 3x3 Precession matrix (returned) */
+
+/*
+**  Form the matrix of precession between two epochs (IAU 2000, FK5).
+**  Notes:
+**  1)  The epochs are TDB (loosely ET) Julian epochs.
+**  2)  The matrix is in the sense   v(ep)  =  rmatp * v(J2000) .
+**
+**  References:
+**     Lieske,J.H., 1979. Astron. Astrophys.,73,282.
+**          equations (6) & (7), p283.
+**     Kaplan,G.H., 2005. USNO circular no. 179, p. 44.
+**
+**  Based on slaPrec(), P.T.Wallace   Starlink   31 October 1993
+*/
+{
+    double t, t2, t3, t4, tas2r, zeta, z, theta;
+    void rotmat();
+ 
+    /* Interval in Julian centuries  between J2000.0 and beginning epoch */
+    t = ( ep - 2000.0 ) / 100.0;
+    t2 = t * t;
+    t3 = t2 * t;
+    t4 = t3 * t;
+ 
+    /* Euler angles */
+    tas2r = secrad (t);
+    zeta = 2.65045 + (2306.083227 + (0.2988499 * t) + (0.01801828 * t2)
+	  - (0.000005971 * t3) - (0.0000003173 * t4)) * tas2r;
+    z = -2.650545 + (2306.077181 + (1.0927348 * t) + (0.01801828 * t2)
+	   - (0.000005971 * t3) - (0.0000003173 * t4)) * tas2r;
+    theta = (2004.191903 - (0.4294934 * t) - (0.04182264 * t2)
+	    - (0.000007089 * t3) - (0.0000001274 * t4)) * tas2r;
+ 
+    /* Rotation matrix */
+    rotmat (323, -z, theta, -zeta, rmatp);
+    return;
+}
+
+
 /* Make 3-D rotation matrix from up to three rotations */
 
 void
@@ -2082,7 +2205,7 @@ double *matrix;	/* 3x3 rotation matrix (returned) */
 
 {
     int i, j, k, naxis, iaxes, iaxis;
-    double rot[3], srot, crot, *mati, w, wm[9], *wmi, matn[9];
+    double rot, srot, crot, *mati, w, wm[9], *wmi, matn[9];
     int axis[3];
 
     /* Initial final rotation matrix */
@@ -2113,11 +2236,6 @@ double *matrix;	/* 3x3 rotation matrix (returned) */
     if (axis[naxis] > 0)
 	naxis++;
 
-    /* Set up rotation angles */
-    rot[0] = rot1;
-    rot[1] = rot2;
-    rot[2] = rot3;
-
     /* For each digit of axis string, set up matrix */
     for (iaxis = 0; iaxis < naxis; iaxis++) {
 
@@ -2132,8 +2250,15 @@ double *matrix;	/* 3x3 rotation matrix (returned) */
 		}
 	    }
 
-	srot = sin (rot[iaxis]);
-	crot = cos (rot[iaxis]);
+	/* Select rotation angle from argument list */
+	if (axis[iaxis] == 1)
+	    rot = rot1;
+	else if (axis[iaxis] == 2)
+	    rot = rot2;
+	else
+	    rot = rot3;
+	srot = sin (rot);
+	crot = cos (rot);
 	
 	/* Matrix for rotation in X */
 	if (axis[iaxis] == 1) {
@@ -2182,23 +2307,6 @@ double *matrix;	/* 3x3 rotation matrix (returned) */
 
 /* The following routines are from Doug Mink's Fortran ephemeris library */
 
-/* Convert right ascensiona and declination in degrees and distance to
-   geocentric equatorial rectangular coordinates */
-
-void
-d2v3 (rra,rdec,r,pos)
-
-double rra;	/* Right ascension in degrees */
-double rdec;	/* Declination in degrees */
-double r;	/* Distance to object in same units as pos */
-double pos[3];	/* x,y,z geocentric equatorial position of object (returned) */
-{
-    s2v3 (degrad (rra), degrad (rdec), r, pos);
-
-    return;
-}
-
-
 /* Convert right ascension, declination, and distance to
    geocentric equatorial rectangular coordinates */
 
@@ -2217,24 +2325,6 @@ double pos[3];	/* x,y,z geocentric equatorial position of object (returned) */
     return;
 }
 
-
-/* Convert geocentric equatorial rectangular coordinates to
-   right ascension and declination in degrees and distance */
-
-void
-v2d3 (pos,rra,rdec,r)
-
-double pos[3];	/* x,y,z geocentric equatorial position of object */
-double *rra;	/* Right ascension in degrees (returned) */
-double *rdec;	/* Declination in degrees (returned) */
-double *r;	/* Distance to object in same units as pos (returned) */
-{
-    v2s3 (pos, rra, rdec, r);
-    *rra = raddeg (*rra);
-    *rdec = raddeg (*rdec);
-    return;
-}
-
 /* Convert geocentric equatorial rectangular coordinates to
    right ascension, declination, and distance */
 
@@ -2245,6 +2335,7 @@ double pos[3];	/* x,y,z geocentric equatorial position of object */
 double *rra;	/* Right ascension in radians (returned) */
 double *rdec;	/* Declination in radians (returned) */
 double *r;	/* Distance to object in same units as pos (returned) */
+
 {
     double x,y,z,rxy,rxy2,z2;
 
@@ -2319,12 +2410,5 @@ double *r;	/* Distance to object in same units as pos (returned) */
  * May  3 2006	Drop declarations of unused variables suggested by Robert Lupton
  * Oct  6 2006	If pixel coordinates, set system to WCS_XY in wcscsys()
  * Oct 30 2006	Add LINEAR and ICRS to wcscstr() returns
- *
- * Aug 15 2007	Clean up code in rotmat()
- * Nov  8 2007	In wcsconp, make it clear that proper motion is in spherical coordinates
- *
- * Mar 29 2010	Fix bug in computing the magnitude of the e-terms in fk524()
- * Mar 30 2010	Drop ep1 assignment after line 178 in wcsconp()
- *
- * Jun  9 2016	Fix isnum() tests for added coloned times and dashed dates
+ * Nov 29 2006	Rewrite FK5 precession subroutines to IAU 2000 standard
  */

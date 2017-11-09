@@ -1,7 +1,7 @@
 /*** File libwcs/wcscat.h
- *** February 15, 2013
+ *** January 10, 2007
  *** By Jessica Mink, jmink@cfa.harvard.edu
- *** Copyright (C) 1998-2013
+ *** Copyright (C) 1998-2007
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -28,7 +28,6 @@
 
 #ifndef _wcscat_h_
 #define _wcscat_h_
-#define MAXNMAG	20
 
 /* Data structure for SAO TDC ASCII and binary star catalog entries */
 struct Star {
@@ -36,15 +35,11 @@ struct Star {
     float xno;		/* Catalog number */
     double ra;		/* Right Ascension (degrees) */
     double dec;		/* Declination (degrees) */
-    double errra;	/* Right Ascension (degrees) */
-    double errdec;	/* Declination (degrees) */
     char isp[24];	/* Spectral type or other 2-char identifier */
-    short mag[MAXNMAG+1]; /* Up to MAXNMAG Magnitudes * 100 */
+    short mag[11];	/* Up to 10 Magnitudes * 100 */
     double rapm;	/* RA proper motion (degrees per year) */
     double decpm;	/* Dec proper motion (degrees per year) */
-    double errpmr;	/* RA proper motion error (degrees per year) */
-    double errpmd;	/* Dec proper motion error (degrees per year) */
-    double xmag[MAXNMAG+1]; /* Up to MAXNMAG Magnitudes */
+    double xmag[11];	/* Up to 10 Magnitudes */
     double num;		/* Actual star number */
     int coorsys;	/* Coordinate system (WCS_J2000, WCS_B1950,...) */
     double equinox;	/* Equinox of coordinate system as fractional year */
@@ -54,11 +49,8 @@ struct Star {
     double radvel;	/* Radial velocity in km/sec, positive away */
     double dist;	/* Distance from search center in arcseconds */
     double size;	/* Semi-major axis in arcseconds */
-    int nimage;		/* Number of images for catalog position */
-    int ncat;		/* Number of catalogs for catalog proper motion */
     char *entry;	/* Line copied from input catalog */
     char objname[80];	/* Object name */
-    char datapath[80];	/* File pathname to data */
     int peak;		/* Peak flux per pixel in star image */
 };
 
@@ -71,7 +63,6 @@ struct Star {
 #define PM_ARCSECCEN		6	/* arcseconds per year */
 #define PM_TSECCEN		7	/* seconds of time (RA) per century */
 #define PM_MTSYR		8	/* milliseconds of time (RA) per year */
-#define PM_ARCSECHR		9	/* arcseconds per hour (solar system) */
 
 /* Data structure for SAO TDC ASCII and binary star catalogs */
 struct StarCat {
@@ -121,7 +112,7 @@ struct StarCat {
     int entid;		/* Entry number for ID */
     int entra;		/* Entry number for right ascension */
     int entdec;		/* Entry number for declination */
-    int entmag[MAXNMAG+1]; /* Entry numbers for up to MAXNMAG magnitudes */
+    int entmag[10];	/* Entry numbers for up to 10 magnitudes */
     int entpeak;	/* Entry number for peak counts */
     int entepoch;	/* Entry number for epoch of observation */
     int entdate;	/* Entry number for FITS-format date of observation */
@@ -134,14 +125,13 @@ struct StarCat {
     int entrv;		/* Entry number for radial velocity */
     int enttype;	/* Entry number for spectral type */
     int entsize;	/* Entry number for size of object */
-    int entpath;	/* Entry number for object data pathname */
     int rpmunit;	/* Units for RA proper motion (PM_x) */
     int dpmunit;	/* Units for DEC proper motion (PM_x) */
     char *caturl;	/* set if web search, else NULL */
     char keyid[16];	/* Entry name for ID */
     char keyra[16];	/* Entry name for right ascension */
     char keydec[16];	/* Entry name for declination */
-    char keymag[MAXNMAG+1][16]; /* Entry name for up to MAXNMAG magnitudes */
+    char keymag[10][16]; /* Entry name for up to 10 magnitudes */
     char keyrpm[16];	/* Entry name for right ascension proper motion */
     char keydpm[16];	/* Entry name for declination proper motion */
     char keypeak[16];	/* Entry name for integer code */
@@ -206,15 +196,25 @@ struct TabTable {
 #define TMPSCE		28	/* 2MASS Point Source Catalog with mag errors */
 #define TYCHO2E		29	/* Tycho-2 Star Catalog with magnitude errors */
 #define SKY2K		30	/* SKY2000 Master Catalog */
-#define SKYBOT		31	/* SKYBOT Solar System Objects */
-#define UCAC3		32	/* USNO CCD Astrograph Catalog 3.0 (2009) */
-#define UCAC4		33	/* USNO CCD Astrograph Catalog 4.0 (2013) */
 #define TABCAT		-1	/* StarBase tab table catalog */
 #define BINCAT		-2	/* TDC binary catalog */
 #define TXTCAT		-3	/* TDC ASCII catalog */
 #define WEBCAT		-4	/* Tab catalog via the web */
-#define NUMCAT		33	/* Number of predefined catalogs */
+#define NUMCAT		30	/* Number of predefined catalogs */
 
+/* Structure for access to tokens within a string */
+#define MAXTOKENS 1000    /* Maximum number of tokens to parse */
+#define MAXWHITE 20     /* Maximum number of different whitespace characters */
+struct Tokens {
+    char *line;		/* Line which has been parsed */
+    int lline;		/* Number of characters in line */
+    int ntok;		/* Number of tokens on line */
+    int nwhite;		/* Number of whitespace characters */
+    char white[MAXWHITE]; /* Whitespace (separator) characters */
+    char *tok1[MAXTOKENS]; /* Pointers to start of tokens */
+    int ltok[MAXTOKENS]; /* Lengths of tokens */
+    int itok;		/* Current token number */
+};
 #define EP_EP   1	/* Output epoch as fractional year */
 #define EP_JD   2	/* Output epoch as Julian Date */
 #define EP_MJD  3	/* Ouput epoch as Modified Julian Date */
@@ -228,8 +228,6 @@ struct Range {
     double last;	/* Current maximum value */
     double step;	/* Current step in value */
     double value;	/* Current value */
-    double valmin;	/* Minimum value in all ranges */
-    double valmax;	/* Maximum value in all ranges */
     double ranges[MAXRANGE*3];	/* nranges sets of first, last, step */
     int nvalues;	/* Total number of values in all ranges */
     int nranges;	/* Number of ranges */
@@ -306,8 +304,8 @@ extern "C" {
 	int sysout,	/* Search coordinate system */
 	double eqout,	/* Search coordinate equinox */
 	double epout,	/* Proper motion epoch (0.0 for no proper motion) */
-	int match,	/* 1 to match star number exactly, else sequence num */
 	struct StarCat **starcat, /* Star catalog data structure */
+	int match,	/* 1 to match star number exactly, else sequence num */
 	double *tnum,	/* Array of source numbers to look for */
 	double *tra,	/* Array of right ascensions (returned) */
 	double *tdec,	/* Array of declinations (returned) */
@@ -316,7 +314,6 @@ extern "C" {
 	double **tmag,	/* 2-D Array of magnitudes (returned) */
 	int *tpeak,	/* Array of peak counts (returned) */
 	char **tkey,	/* Array of values of additional keyword */
-	char **tpath,	/* Array of values of data pathnames */
 	int nlog);	/* Verbose mode if > 1, number of sources per log line */
     int ctgrdate(	/* Read sources by date from SAO TDC ASCII format catalog */
 	char *catfile,	/* Name of reference star catalog file */
@@ -390,12 +387,13 @@ extern "C" {
 	int sysout,	/* Search coordinate system */
 	double eqout,	/* Search coordinate equinox */
 	double epout,	/* Proper motion epoch (0.0 for no proper motion) */
+	int match,	/* 1 to match star number exactly, else sequence num */
 	double *gnum,	/* Array of source numbers to look for */
 	double *gra,	/* Array of right ascensions (returned) */
 	double *gdec,	/* Array of declinations (returned) */
 	double **gmag,	/* 2-D array of magnitudes (returned) */
 	int *gtype,	/* Array of object types (returned) */
-	int nlog);	/* Verbose mode if >1, number of sources per log line */
+	int nlog);	/* Verbose mode if > 1, number of sources per log line */
     int gscbin(		/* Bin sources from HST Guide Star Catalog */
 	int refcat,	/* Catalog code from wcscat.h (GSC or GSCACT) */
 	struct WorldCoor *wcs, /* World coordinate system for image */
@@ -405,7 +403,7 @@ extern "C" {
 	double mag2,	/* Maximum (faintest) magnitude (no limits if equal) */
 	double magscale, /* Scaling factor for magnitude to pixel flux
 			 * (image of number of catalog objects per bin if 0) */
-	int nlog);	/* Verbose mode if >1, number of sources per log line */
+	int nlog);	/* Verbose mode if > 1, number of sources per log line */
     void setgsclass(	/* Set GSC object class to return (<0=all) */
 	int class);	/* Class of objects to return */
 
@@ -427,18 +425,13 @@ extern "C" {
 	int sortmag,	/* Number of magnitude by which to limit and sort */
 	int nstarmax,	/* Maximum number of stars to be returned */
 	double *gnum,	/* Array of ID numbers (returned) */
-	char **gobj,	/* Array of object IDs (mixed letters and numbers) */
 	double *gra,	/* Array of right ascensions (returned) */
 	double *gdec,	/* Array of declinations (returned) */
 	double *gpra,	/* Array of right ascension proper motions (returned) */
 	double *gpdec,	/* Array of declination proper motions (returned) */
 	double **gmag,	/* 2-D array of magnitudes (returned) */
 	int *gtype,	/* Array of object types (returned) */
-	int nlog);	/* Verbose mode if >1, number of sources per log line */
-    char *gsc2c2t(	/* Convert GSC2 buffer from comma- to tab-separated */
-	char *csvbuff);	/* Input comma-separated table */
-    char *gsc2t2t(	/* Clean up GSC2 tab-separated buffer */
-	char *tsvbuff);	/* Input tab-separated table */
+	int nlog);	/* Verbose mode if > 1, number of sources per log line */
 
 /* Subroutine to read SDSS catalog over the web */
     int sdssread(	/* Read sources by sky region from SDSS Catalog */
@@ -456,13 +449,12 @@ extern "C" {
 	double mag2,	/* Limiting magnitudes (none if equal) */
 	int sortmag,	/* Number of magnitude by which to limit and sort */
 	int nstarmax,	/* Maximum number of stars to be returned */
-	double *gnum,	/* Array of ID numbers (returned from tabread) */
 	char **gobj,	/* Array of object IDs (too long for integer*4) */
 	double *gra,	/* Array of right ascensions (returned) */
 	double *gdec,	/* Array of declinations (returned) */
 	double **gmag,	/* 2-D array of magnitudes (returned) */
 	int *gtype,	/* Array of object types (returned) */
-	int nlog);	/* Verbose mode if >1, number of sources per log line */
+	int nlog);	/* Verbose mode if > 1, number of sources per log line */
     char *sdssc2t(	/* Convert SDSS buffer from comma- to tab-separated */
 	char *csvbuff);	/* Input comma-separated table */
 
@@ -703,6 +695,7 @@ extern "C" {
 	char *image,	/* Output FITS image */
 	double mag1,	/* Minimum (brightest) magnitude (no limits if equal) */
 	double mag2,	/* Maximum (faintest) magnitude (no limits if equal) */
+	int sortmag,	/* Magnitude to use (1 to nmag) */
 	double magscale, /* Scaling factor for magnitude to pixel flux
 			 * (image of number of catalog objects per bin if 0) */
 	int nlog);	/* Verbose mode if > 1, number of sources per log line */
@@ -747,6 +740,7 @@ extern "C" {
 	int *gtype,	/* Array of object types (returned) */
 	int nlog);	/* Verbose mode if > 1, number of sources per log line */
     int ty2bin(		/* Bin sources from Tycho 2 Catalog */
+	int refcat,	/* Catalog code from wcscat.h (TYCHO2 or TYCHO2E */
 	struct WorldCoor *wcs, /* World coordinate system for image */
 	char *header,	/* FITS header for output image */
 	char *image,	/* Output FITS image */
@@ -804,33 +798,6 @@ extern "C" {
 	double magscale, /* Scaling factor for magnitude to pixel flux
 			 * (image of number of catalog objects per bin if 0) */
 	int nlog);	/* Verbose mode if > 1, number of sources per log line */
-
-    int skybotread (	/* Find solar system objects from SkyBot */
-	double cra,	/* Search center J2000 right ascension in degrees */
-	double cdec,	/* Search center J2000 declination in degrees */
-	double dra,	/* Search half width in right ascension in degrees */
-	double ddec,	/* Search half-width in declination in degrees */
-	double drad,	/* Limiting separation in degrees (ignore if 0) */
-	int distsort,	/* 1 to sort asteroids by distance from center */
-	int sysout,	/* Search coordinate system */
-	double eqout,	/* Search coordinate equinox */
-	double epout,	/* Julian date for positions (current time if zero) */
-	double mag1,	/* Lower limiting magnitude (none if equal to mag2) */
-	double mag2,	/* Upper limiting magnitude (none if equal to mag1) */
-	int sortmag,	/* Magnitude by which to sort (1 to nmag) */
-	int nstarmax,	/* Maximum number of stars to be returned */
-	double *gnum,	/* Array of asteroid numbers (returned) */
-	char **gobj,	/* Array of object IDs (too long for integer*4) */
-	double *gra,	/* Array of right ascensions (returned) */
-	double *gdec,	/* Array of declinations (returned) */
-	double *gpra,	/* Array of right ascension motions (returned) */
-	double *gpdec,	/* Array of declination motions (returned) */
-	double **gmag,	/* 2-D array of magnitudes and other info (returned) */
-	int *gtype,	/* Array of object classes (returned) */
-	int nlog);	/* 1 for diagnostics */
-
-    char *skybot2tab(	/* Convert SkyBot buffer from space- to tab-separated */
-	char *csvbuff);	/* Input comma-separated table */
 
 /* Subroutines to read SAO-TDC binary format catalogs */
     int binread(	/* Read from sky region from SAO TDC binary format catalog */
@@ -1013,10 +980,7 @@ extern "C" {
 	int maxchar);	/* Maximum number of characters in returned string */
     int tabparse(		/* Aeturn column names and positions in tabtable */
 	struct TabTable *tabtable); /* Tab table data structure */
-    int tabcol(		/* Find column for name (case-sensitive) */
-	struct TabTable *tabtable, /* Tab table data structure */
-	char *keyword);	/* column header of desired value */
-    int tabccol(	/* Find column for name  (case-insensitive) */
+    int tabcol(		/* Find column for name */
 	struct TabTable *tabtable, /* Tab table data structure */
 	char *keyword);	/* column header of desired value */
     int istab(		/* Return 1 if tab table file, else 0 */
@@ -1057,7 +1021,6 @@ extern "C" {
 	int sysout,	/* Search coordinate system */
 	double eqout,	/* Search coordinate equinox */
 	double epout,	/* Proper motion epoch (0.0 for no proper motion) */
-	int match,	/* 1 to match star number exactly, else sequence num */
 	double *unum,	/* Array of source numbers to look for */
 	double *ura,	/* Array of right ascensions (returned) */
 	double *udec,	/* Array of declinations (returned) */
@@ -1287,22 +1250,13 @@ extern "C" {
 	int sysc,	/* System of search coordinates */
 	int sysr,	/* System of reference catalog coordinates */
 	double eqc,	/* Equinox of search coordinates in years */
-	double eqr,	/* Equinox of reference catalog in years */
-	double epc,	/* Epoch of search coordinates in years */
 	double epr,	/* Epoch of reference catalog coordinates in years */
 	double secmarg,	/* Margin in arcsec/century to catch moving stars */
 	double *ramin,	/* Lower right ascension limit in degrees (returned) */
 	double *ramax,	/* Upper right ascension limit in degrees (returned) */
 	double *decmin,	/* Lower declination limit in degrees (returned) */
 	double *decmax,	/* Upper declination limit in degrees (returned) */
-	int *wrap,	/* 1 if search passes through 0:00:00 RA */
 	int verbose);	/* 1 to print limits, else 0 */
-    void movebuff (	/* Copy nbytes bytes from source+offs to dest+offd */
-	char *source,	/* Pointer to source */
-	char *dest,	/* Pointer to destination */
-	int nbytes,	/* Number of bytes to move */
-	int offs,	/* Offset in bytes in source from which to start copying */
-	int offd);	/* Offset in bytes in destination to which to start copying */
 
 /* Subroutines for dealing with ranges */
     struct Range *RangeInit(	/* Initialize range structure from string */
@@ -1319,7 +1273,24 @@ extern "C" {
     double rgetr8(	/* Return next number in range as double */
 	struct Range *range); /* Range structure */
 
-/* Subroutines for read values from keyword=value in blocks of text */
+/* Subroutines for access to tokens within a string */
+    int setoken(	/* Tokenize a string for easy decoding */
+	struct Tokens *tokens, /* Token structure returned */
+	char    *string, /* character string to tokenize */
+	char *cwhite);	/* additional whitespace characters
+			 * if = tab, disallow spaces and commas */
+    int nextoken(	/* Get next token from tokenized string */
+	struct Tokens *tokens, /* Token structure returned */
+	char *token,	/* token (returned) */
+	int maxchars);	/* Maximum length of token */
+    int getoken(	/* Get specified token from tokenized string */
+	struct Tokens *tokens, /* Token structure returned */
+	int itok,	/* token sequence number of token
+			 * if <0, get whole string after token -itok
+			 * if =0, get whole string */
+	char *token,	/* token (returned) */
+	int maxchars);	/* Maximum length of token */
+
     int ageti4(		/* Extract int value from keyword= value in string */
 	char *string,	/* character string containing <keyword>= <value> */
 	char *keyword,	/* character string containing the name of the keyword
@@ -1336,8 +1307,6 @@ extern "C" {
 	char *keyword,	/* character string containing the name of the keyword */
 	int lval,	/* Size of value in characters
 			 * If negative, value ends at end of line */
-	int fillblank,	/* If 0, leave blanks, strip trailing blanks
-			   if non-zero, replace blanks with underscores */
 	char *value);	/* String (returned) */
 
     int tmcid(		/* Return 1 if string is 2MASS ID, else 0 */
@@ -1359,23 +1328,11 @@ extern "C" {
 
 /* Subroutines for version/date string */
     void setrevmsg(	/* Set version/date string */
-	char *revmsg);	/* Version/date string */
-    char *getrevmsg(void); /* Return version/date string */
+    char *getrevmsg(	/* Return version/date string */
 
 /* Subroutines for fitting and evaluating polynomials */
     void polfit(	/* Fit polynomial coefficients */
-	double *x,	/* Array of independent variable points */
-	double *y,	/* Array of dependent variable points */
-	double x0,	/* Offset to independent variable */
-	int npts,	/* Number of data points to fit */
-	int nterms,	/* Number of parameters to fit */
-	double *a,	/* Vector containing current fit values */
-	double *stdev);	/* Standard deviation of fit (returned) */
     double polcomp(	/* Evaluate polynomial from polfit coefficients */
-	double xi,	/* Independent variable */
-	double x0,	/* Offset to independent variable */
-	int norder,	/* Number of coefficients */
-	double *a);	/* Vector containing coeffiecients */
 
 #else /* K&R prototypes */
 
@@ -1397,8 +1354,6 @@ void setgsclass();	/* Set GSC object class */
 
 /* Subroutine to read GSC II catalog over the web (gsc2read.c) */
 int gsc2read();		/* Read sources by sky region from GSC II Catalog */
-char *gsc2c2t();	/* Convert GSC2 buffer from comma- to tab-separated */
-char *gsc2t2t();	/* Clean up GSC2 tab-separated buffer */
 
 /* Subroutine to read SDSS catalog over the web (sdssread.c) */
 int sdssread();		/* Read sources by sky region from SDSS Catalog */
@@ -1441,12 +1396,6 @@ int actread();		/* Read sources by sky region from USNO ACT Catalog */
 int actrnum();		/* Read sources by ID number from USNO ACT Catalog */
 int actbin();		/* Bin sources from USNO ACT Catalog */
 
-/* Subroutines to retrieve solar system objects over the web from SkyBot */
-int skybotread();	/* Find solar system objects from SkyBot */
-char *skybot2tab();	/* Convert SkyBot returned data to Starbase table */
-void setobs();		/* Set observatory using IAU code */
-void setobsname();	/* Set IAU code from observatory name */
-
 /* Subroutines to read SAO-TDC binary format catalogs (binread.c) */
 int binread();		/* Read sources by sky region from SAO TDC binary format catalog */
 int binrnum();		/* Read sources by ID number from SAO TDC binary format catalog */
@@ -1467,8 +1416,7 @@ int tabxyread();	/* Read x, y, and magnitude from tab table star list */
 void settabkey();	/* Set tab table keyword to read for object */
 char *gettabline();	/* Find a specified line in a tab table */
 int tabrkey();		/* Keyword values from tab table catalogs */
-int tabcol();		/* Find column for name (case-sensitive) */
-int tabccol();		/* Find column for name (case-insensitive) */
+int tabcol();		/* Find column for name */
 int tabgetk();		/* Get tab table entries for named column */
 int tabgetc();		/* Get tab table entry for named column */
 int tabgeti4();		/* Return 4-byte integer from tab table line */
@@ -1532,7 +1480,6 @@ int ageti4();		/* Extract int value from keyword= value in string */
 int agetr8();		/* Extract double value from keyword= value in string */
 int agets();		/* Extract value from keyword= value in string */
 void bv2sp();		/* Approximate main sequence spectral type from B - V */
-void moveb();		/* Copy nbytes bytes from source+offs to dest+offd */
 
 /* Subroutines for dealing with ranges */
 struct Range *RangeInit();	/* Initialize range structure from string */
@@ -1541,6 +1488,11 @@ int rgetn();		/* Return number of values in all ranges */
 int rgeti4();		/* Return next number in range as integer */
 double rgetr8();	/* Return next number in range as double */
 void rstart();		/* Restart range */
+
+/* Subroutines for access to tokens within a string */
+int setoken();		/* Tokenize a string for easy decoding */
+int nextoken();		/* Get next token from tokenized string */
+int getoken();		/* Get specified token from tokenized string */
 
 /* Subroutines for VOTable output */
 int vothead();		/* Print heading for VOTable SCAT output */
@@ -1558,7 +1510,7 @@ double polcomp();	/* Evaluate polynomial from polfit coefficients */
 
 #ifdef __cplusplus
 }
-#endif /* __cplusplus */
+#endif __cplusplus
 
 #endif  /* _wcscat_h_ */
 
@@ -1682,25 +1634,4 @@ double polcomp();	/* Evaluate polynomial from polfit coefficients */
  * Jun 20 2006	Add IDSortStars()
  *
  * Jan 10 2006	Add ANSI C function prototypes
- * Jan 11 2007	Move token access subroutines to fileutil.c/fitsfile.h
- * Mar 13 2007	Add gsc2c2t() to convert CSV GSC2 buffer to TSV table
- * Mar 13 2007	Add gobj object name to gsc2read()
- * Jul  5 2007	Add SKYBOT=31 to catalog list
- * Jul 13 2007	Add skybotread() and skybot2tab()
- * Jul 18 2007	Add tabccol() and PM_ARCSECHR for SkyBot
- * Nov 28 2007	Add moveb() which used to be local to binread()
- *
- * Oct 24 2008	Add gsct2t() to clean up tab-separated table from STScI CASB
- *
- * Sep 25 2009	Rename moveb() to movebuff()
- * Sep 25 2009	Add UCAC3 as catalog code 32
- * Oct 30 2009	Add position and proper motion error to star structure
- * Nov  2 2009	Add numbers of images and catalogs to star structure
- * Nov  3 2009	Parameterize as MAXNMAG the maximum number of magnitudes
- *
- * Apr 06 2010	Add fillblank argument to agets()
- *
- * May 16 2012	Add valmin and valmax to Range data structure
- *
- * Feb 15 2013	Add UCAC4 to list of catalog codes
  */

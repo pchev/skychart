@@ -1,8 +1,8 @@
 /*** File libwcs/catutil.c
- *** September 23, 2013
+ *** November 25, 2015
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1998-2013
+ *** Copyright (C) 1998-2015
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -1274,9 +1274,16 @@ char	*numstr;	/* Formatted number (returned) */
 	}
 
 
-    /* Tycho or ACT catalogs */
-    else if (refcat==TYCHO || refcat==TYCHO2 ||
-	     refcat == TYCHO2E || refcat==ACT) {
+    /* Tycho2 */
+    else if (refcat==TYCHO2) {
+	if (nnfld < 0)
+	    sprintf (numstr, "%010.6f", dnum);
+	else
+	    sprintf (numstr, "%10.6f", dnum);
+	}
+
+    /* Other Tycho or ACT catalogs */
+    else if (refcat==TYCHO || refcat == TYCHO2E || refcat==ACT) {
 	if (nnfld < 0)
 	    sprintf (numstr, "%010.5f", dnum);
 	else
@@ -1396,9 +1403,12 @@ int	nndec;		/* Number of decimal places ( >= 0) */
     else if (refcat==SKY2K)
 	return (7);
 
+    /* Tycho2 catalog */
+    else if (refcat == TYCHO2)
+	return (11);
+
     /* Tycho, Tycho2, or ACT catalogs */
-    else if (refcat == TYCHO || refcat == TYCHO2 ||
-	     refcat == TYCHO2E || refcat == ACT)
+    else if (refcat == TYCHO || refcat == TYCHO2E || refcat == ACT)
 	return (10);
 
     /* Starbase tab-separated, TDC binary, or TDC ASCII catalogs */
@@ -2663,7 +2673,7 @@ char *value;	/* String (returned) */
 	    while (*pv == ' ' || *pv == ']' || *pv == 'o') {
 		pv++;
 		}
-	    if (*pv != '=' && *pv != ':' && *pv != 'f') {
+	    if (*pv != '=' && *pv != ':' && *pv != 10 && *pv != 'f') {
 		str = pkey;
 		pval = NULL;
 		}
@@ -3559,4 +3569,6 @@ char *from, *last, *to;
  *
  * Feb 15 2013	Add UCAC4 catalog
  * Sep 23 2013	Finish adding UCAC4 catalog
+ *
+ * Nov 25 2015	Add tab as an assignment character in agets()
  */
