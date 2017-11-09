@@ -1,8 +1,8 @@
 /*** File libwcs/wcsinit.c
- *** July 24, 2013
+ *** July 24, 2016
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1998-2013
+ *** Copyright (C) 1998-2016
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -242,7 +242,10 @@ char *wchar;		/* Suffix character for one of multiple WCS */
     double ut;
     int nax;
     int twod;
+    extern int tnxinit();
     extern int zpxinit();
+    extern int platepos();
+    extern int dsspos();
     void invert_wcs();
 
     wcs = (struct WorldCoor *) calloc (1, sizeof(struct WorldCoor));
@@ -396,30 +399,32 @@ char *wchar;		/* Suffix character for one of multiple WCS */
 	}
 
     /* World coordinate system reference coordinate information */
-    if (hgetsc (hstring, "CTYPE1", &mchar, 9, ctype1)) {
+    if (hgetsc (hstring, "CTYPE1", &mchar, 16, ctype1)) {
 
 	/* Read second coordinate type */
 	strcpy (ctype2, ctype1);
-	if (!hgetsc (hstring, "CTYPE2", &mchar, 9, ctype2))
+	if (!hgetsc (hstring, "CTYPE2", &mchar, 16, ctype2))
 	    twod = 0;
 	else
 	    twod = 1;
+	strcpy (wcs->ctype[0], ctype1);
+	strcpy (wcs->ctype[1], ctype2);
 	if (strsrch (ctype2, "LAT") || strsrch (ctype2, "DEC"))
 	    ilat = 2;
 	else
 	    ilat = 1;
+
+	/* Read third and fourth coordinate types, if present */
+	strcpy (wcs->ctype[2], "");
+	hgetsc (hstring, "CTYPE3", &mchar, 9, wcs->ctype[2]);
+	strcpy (wcs->ctype[3], "");
+	hgetsc (hstring, "CTYPE4", &mchar, 9, wcs->ctype[3]);
 
 	/* Set projection type in WCS data structure */
 	if (wcstype (wcs, ctype1, ctype2)) {
 	    wcsfree (wcs);
 	    return (NULL);
 	    }
-	    
-	/* Read third and fourth coordinate types, if present */
-	strcpy (wcs->ctype[2], "");
-	hgetsc (hstring, "CTYPE3", &mchar, 9, wcs->ctype[2]);
-	strcpy (wcs->ctype[3], "");
-	hgetsc (hstring, "CTYPE4", &mchar, 9, wcs->ctype[3]);
 
 	/* Get units, if present, for linear coordinates */
 	if (wcs->prjcode == WCS_LIN) {
@@ -579,7 +584,7 @@ char *wchar;		/* Suffix character for one of multiple WCS */
 	if (wcs->wcsproj != WCS_OLD &&
 	    (hcoeff = ksearch (hstring,"CO1_1")) != NULL) {
 	    wcs->prjcode = WCS_PLT;
-	    (void)strcpy (wcs->ptype, "PLATE");
+	    (void)strcpy (wcs->ptype, "PLA");
 	    for (i = 0; i < 20; i++) {
 		sprintf (keyword,"CO1_%d", i+1);
 		wcs->x_coeff[i] = 0.0;
@@ -798,8 +803,8 @@ char *wchar;		/* Suffix character for one of multiple WCS */
 	    }
 
 	/* If linear or pixel WCS, print "degrees" */
-	if (!strncmp (wcs->ptype,"LINEAR",6) ||
-	    !strncmp (wcs->ptype,"PIXEL",5)) {
+	if (!strncmp (wcs->ptype,"LIN",3) ||
+	    !strncmp (wcs->ptype,"PIX",3)) {
 	    wcs->degout = -1;
 	    wcs->ndec = 5;
 	    }
@@ -1607,4 +1612,6 @@ char	*mchar;		/* Suffix character for one of multiple WCS */
  * Feb  1 2013	Externalize uppercase()
  * Feb 07 2013	Avoid SWARP distortion if SIRTF distortion is present
  * Jul 25 2013	Initialize n=0 when checking for SCAMP distortion terms (fix from Martin Kuemmel)
+ *
+ * Jun 24 2016	wcs->ptype contains only 3-letter projection code
  */

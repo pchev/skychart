@@ -896,7 +896,7 @@ char	*fitsheader;	/* FITS image header */
     if (!access (hdrname, 0)) {
 	fd = open (hdrname, O_WRONLY);
 	if (fd < 3) {
-	    fprintf (stderr, "IRAFWIMAGE:  file %s not writable\n", hdrname);
+	    fprintf (stderr, "IRAFWIMAGE:  file %s not writeable\n", hdrname);
 	    return (0);
 	    }
 	}
@@ -993,7 +993,7 @@ char	*image;		/* IRAF image */
     if (!access (pixname, 0)) {
 	fd = open (pixname, O_WRONLY);
 	if (fd < 3) {
-	    fprintf (stderr, "IRAFWIMAGE:  file %s not writable\n", pixname);
+	    fprintf (stderr, "IRAFWIMAGE:  file %s not writeable\n", pixname);
 	    return (0);
 	    }
 	}

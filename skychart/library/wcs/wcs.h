@@ -1,8 +1,8 @@
 /*** File libwcs/wcs.h
- *** February 1, 2013
+ *** June 23, 2016
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1994-2013
+ *** Copyright (C) 1994-2016
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -32,6 +32,8 @@
 
 #include "wcslib.h"
 #include "fitshead.h"
+
+#define MAXNKWD	500
 
 /* SIRTF distortion matrix coefficients */
 #define DISTMAX 10
@@ -119,12 +121,12 @@ struct WorldCoor {
   int		linmode;	/* 0=system only, 1=units, 2=system+units */
   int		detector;	/* Instrument detector number */
   char		instrument[32];	/* Instrument name */
-  char		ctype[9][9];	/* Values of CTYPEn keywords */
-  char		c1type[9];	/*  1st coordinate type code:
+  char		ctype[9][16];	/* Values of CTYPEn keywords */
+  char		c1type[8];	/*  1st coordinate type code:
 					RA--, GLON, ELON */
-  char		c2type[9];	/*  2nd coordinate type code:
+  char		c2type[8];	/*  2nd coordinate type code:
 					DEC-, GLAT, ELAT */
-  char		ptype[9];	/*  projection type code:
+  char		ptype[8];	/*  projection type code:
 				    SIN, TAN, ARC, NCP, GLS, MER, AIT, etc */
   char		units[9][32];	/* Units if LINEAR */
   char		radecsys[32];	/* Reference frame: FK4, FK4-NO-E, FK5, GAPPT*/
@@ -966,4 +968,7 @@ extern int zpxpix();	/* Inverse transform (world to physical) gnomonic projectio
  *
  * Feb  1 2013	Add uppercase() from wcsinit()
  * Feb 25 2013	Pass const string to uppercase()
+ *
+ * Jun  8 2016	Increase projection code from 9 to 16 characters for SIP distortion
+ * Jun 23 2016	Set MAXNKWD here; used for copying keywords in cpwcs()
  */

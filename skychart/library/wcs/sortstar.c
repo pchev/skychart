@@ -1,8 +1,8 @@
 /*** File libwcs/sortstar.c
- *** January 11, 2007
+ *** June 24, 2016
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1996-2009
+ *** Copyright (C) 1996-2016
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -1135,4 +1135,6 @@ double	rad;		/* Maximum separation in arcseconds to merge */
  * Jan 11 2007	Include fitsfile.h
  *
  * Nov  6 2009	Set number of magnitudes from MAXNMAG parameter in wcscat.h
+ *
+ * Jun 24 2016	Always initialize haspm in RASortStars() (from Ole Streicher)
  */

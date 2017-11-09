@@ -1,8 +1,8 @@
 /*** File libwcs/ty2read.c
- *** July 9, 2007
+ *** March 23, 2017
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 2000-2007
+ *** Copyright (C) 2000-2017
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -508,7 +508,7 @@ int	nlog;		/* 1 for diagnostics */
     for (jstar = 0; jstar < nstars; jstar++) {
 	rnum = (int) (gnum[jstar] + 0.0000001);
 	
-	/* Find numbered stars (rrrr.nnnnn) */
+	/* Find numbered stars (rrrr.nnnnnn) */
 	if (gnum[jstar]-(double)rnum > 0.0000001) {
 	    ty2regn (rnum, &istar1, &istar2, verbose);
 	    nstar = istar2 - istar1 + 1;
@@ -1347,10 +1347,18 @@ int istar;	/* Star sequence number in Tycho 2 catalog region file */
     regnum = atof (line);
     starnum = atof (line+5);
     multnum = atof (line+11);
-    st->num = regnum + (0.0001 * starnum) + (0.00001 * multnum);
+    st->num = regnum + (0.00001 * starnum) + (0.000001 * multnum);
+    /* For Ed:
+    if (starnum > 9999.0) {
+	st->num = regnum + (0.00001 * starnum) + (0.000001 * multnum)
+	}
+    else {
+	st->num = regnum + (0.0001 * starnum) + (0.00001 * multnum);
+	} 
+    */
 
     if (line[13] == 'X') {
-	fprintf (stderr, "TY2STAR:  No position for star %010.5f\n", st->num);
+	fprintf (stderr, "TY2STAR:  No position for star %010.6f\n", st->num);
 	return (6);
 	}
 
@@ -1389,17 +1397,19 @@ char	*filename;	/* Name of file for which to find size */
     long filesize;
 
     /* Open file */
-    if ((diskfile = fopen (filename, "r")) == NULL)
+    if ((diskfile = fopen (filename, "r")) == NULL) {
 	return (-1);
+	}
 
     /* Move to end of the file */
-    if (fseek (diskfile, 0, 2) == 0)
+    if (fseek (diskfile, 0, 2) == 0) {
 
 	/* Position is the size of the file */
 	filesize = ftell (diskfile);
-
-    else
+	}
+    else {
 	filesize = -1;
+	}
 
     fclose (diskfile);
 
@@ -1461,4 +1471,6 @@ char	*filename;	/* Name of file for which to find size */
  * Jul  6 2007	Skip stars with entry read errors; stop if catalog problem
  * Jul  6 2007	Print read errors in ty2star() only
  * Jun  9 2007	Fix bug so that sequential catalog entry reading works
+ *
+ * Mar 23 2017	Add fifth digit to star numbers
  */

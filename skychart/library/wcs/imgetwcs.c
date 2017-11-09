@@ -1,8 +1,8 @@
 /*** File libwcs/imgetwcs.c
- *** September 1, 2011
+ *** June 24, 2016
  *** By Jessica Mink, jmink@cfa.harvard.edu (remotely based on UIowa code)
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1996-2011
+ *** Copyright (C) 1996-2016
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -685,6 +685,7 @@ char*	ptype;
     strcpy (ctypes[33], "TPV");
 
     ptype0 = -1;
+    ptype[3] = (char) 0;
     for (i = 0; i < nctype; i++) {
 	if (!strcasecmp (ptype, ctypes[i]))
 	    ptype0 = i;
@@ -809,4 +810,6 @@ char *dateobs;
  * Apr  7 2010	In ChangeFITSWCS() set number of WCS projections from NWCSTYPE
  *
  * Sep  1 2011	Add ZPX and TPV projections to setproj()
+ *
+ * Jun 24 2016	ptype contains only first 3 letters of projection codes
  */
