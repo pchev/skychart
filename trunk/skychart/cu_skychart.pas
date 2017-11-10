@@ -2612,10 +2612,10 @@ var
 begin
   projection(ar, de, x, y, True, cfgsc);
   windowxy(x, y, xx, yy, cfgsc);
-  cone := SunDist * 12.78 / (1392 - 12.78);
-  // earth diam = 12.78 (12776 incl atmophere) ; sun diam = 1392 (*1000 km)
-  umbra := 12776 * (cone - MoonDist) / cone;
-  umbra := arctan2(umbra, MoonDistTopo);
+  // earth diam = 12.906 incl atmophere ; sun diam = 1392 (*1000 km)
+  cone := SunDist * 12.906 / (1392 - 12.906);
+  umbra := 12906 * (cone - MoonDist) / cone;
+  umbra := 1.01 * arctan2(umbra, MoonDistTopo);
   penumbra := umbra + 1.07 * deg2rad;  // + 2x sun diameter
   pixscale := abs(cfgsc.BxGlb);
   Fplot.PlotEarthShadow(xx, yy, umbra, penumbra, pixscale);
