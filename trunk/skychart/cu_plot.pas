@@ -182,7 +182,7 @@ type
     procedure PlotPlanet(x, y: single; flipx, flipy, ipla: integer;
       jdt, pixscale, diam, flatten, magn, phase, pa, rot, poleincl, sunincl, w, r1, r2, be: double;
       WhiteBg: boolean; size: integer = 0; margin: integer = 0);
-    procedure PlotEarthShadow(x, y: single; r1, r2, pixscale: double);
+    procedure PlotEarthShadow(x, y: single; r1, r2, pixscale, flatten: double);
     procedure PlotSatel(x, y: single; ipla: integer; JD, pixscale, ma, diam, rot: double;
       hidesat, showhide, whitebg: boolean; flipx, flipy: integer);
     procedure PlotAsteroid(x, y: single; symbol: integer; ma: double);
@@ -2537,7 +2537,7 @@ begin
 
 end;
 
-procedure TSplot.PlotEarthShadow(x, y: single; r1, r2, pixscale: double);
+procedure TSplot.PlotEarthShadow(x, y: single; r1, r2, pixscale, flatten: double);
 var
   ds1, ds2, xx, yy, xm, ym: integer;
   mc: TBGRABitmap;
@@ -2564,9 +2564,9 @@ begin
           0:
 
           begin
-            cbmp.EllipseAntialias(x, y, ds1, ds1, ColorToBGRA(
+            cbmp.EllipseAntialias(x, y, ds1, ds1*flatten, ColorToBGRA(
               cfgplot.Color[11]), cfgchart.drawpen);
-            cbmp.EllipseAntialias(x, y, ds2, ds2, ColorToBGRA(
+            cbmp.EllipseAntialias(x, y, ds2, ds2*flatten, ColorToBGRA(
               cfgplot.Color[11]), cfgchart.drawpen);
           end;
 
@@ -2582,8 +2582,8 @@ begin
               xm := ds2;
               ym := ds2;
               mc.Fill(BGRAPixelTransparent);
-              mc.FillEllipseAntialias(xm, ym, ds2, ds2, ColorToBGRA(clRed, 10));
-              mc.FillEllipseAntialias(xm, ym, ds1, ds1, ColorToBGRA(clRed, 10));
+              mc.FillEllipseAntialias(xm, ym, ds2, ds2*flatten, ColorToBGRA(clRed, 10));
+              mc.FillEllipseAntialias(xm, ym, ds1, ds1*flatten, ColorToBGRA(clRed, 10));
               // Apply the shadow
               cbmp.PutImage(xx - xm, yy - xm, mc, dmDrawWithTransparency);
 
@@ -2605,9 +2605,9 @@ begin
           Pen.Width := cfgchart.drawpen;
           Pen.Color := clGray;
           Brush.style := bsClear;
-          Ellipse(xx - ds1, yy - ds1, xx + ds1, yy + ds1);
+          Ellipse(xx - ds1, yy - round(ds1*flatten), xx + ds1, yy + round(ds1*flatten));
           Brush.style := bsClear;
-          Ellipse(xx - ds2, yy - ds2, xx + ds2, yy + ds2);
+          Ellipse(xx - ds2, yy - round(ds2*flatten), xx + ds2, yy + round(ds2*flatten));
         end;
 
     end;  // if xx
