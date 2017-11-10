@@ -1645,7 +1645,6 @@ begin
         dist := dist * q;
         dkm := dkm * q;
         cfgsc.PlanetLst[j, 32, 5] := dkm;
-        cfgsc.PlanetLst[j, 32, 4] := dist;
         Paralaxe(st0, dist, cfgsc.PlanetLst[j, 32, 1], cfgsc.PlanetLst[j, 32, 2],
           cfgsc.PlanetLst[j, 32, 1], cfgsc.PlanetLst[j, 32, 2], q, cfgsc);
       end;
