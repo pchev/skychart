@@ -125,7 +125,7 @@ type
     function DrawDSL: boolean;
     function DrawMilkyWay: boolean;
     function DrawPlanet: boolean;
-    procedure DrawEarthShadow(AR, DE, SunDist, MoonDist, MoonDistTopo: double);
+    procedure DrawEarthShadow(AR, DE, SunDist, MoonDist, MoonDistTopo, flatten: double);
     function DrawAsteroidMark: boolean;
     function DrawAsteroid: boolean;
     function DrawCometMark: boolean;
@@ -2264,7 +2264,7 @@ function Tskychart.DrawPlanet: boolean;
 var
   x1, y1, xx1, yy1, xx2, yy2, pixscale, ra, Dec, jdt, diam, magn, phase, fov, pa,
   rot, r1, r2, be, dist, distc: double;
-  ppa, poleincl, sunincl, w1, w2, w3, a, h, dh, h1, h2, flatten, saverefraction: double;
+  ppa, poleincl, sunincl, w1, w2, w3, a, h, dh, h1, h2, flatten, moonflatten, saverefraction: double;
   xx, yy, lori: single;
   lopt: boolean;
   lalign: TLabelAlign;
@@ -2579,6 +2579,7 @@ begin
           end;
           11:
           begin
+            moonflatten:=flatten;
             magn := -10;  // better to alway show a bright dot for the Moon
             dist := cfgsc.Planetlst[j, ipla, 6];
             fplanet.MoonOrientation(jdt, ra, Dec, dist, pa, poleincl, sunincl, w1);
@@ -2599,13 +2600,13 @@ begin
       ((j = (cfgsc.SimNb - 1)) and cfgsc.SimObject[11])) // and at the last point if simulating the Moon
       then
         DrawEarthShadow(cfgsc.Planetlst[j, 32, 1], cfgsc.Planetlst[j, 32, 2],
-        cfgsc.Planetlst[j, 32, 3], cfgsc.Planetlst[j, 32, 4], cfgsc.Planetlst[j, 32, 5]);
+        cfgsc.Planetlst[j, 32, 3], cfgsc.Planetlst[j, 32, 4], cfgsc.Planetlst[j, 32, 5], moonflatten);
 
   end;
   Result := True;
 end;
 
-procedure Tskychart.DrawEarthShadow(AR, DE, SunDist, MoonDist, MoonDistTopo: double);
+procedure Tskychart.DrawEarthShadow(AR, DE, SunDist, MoonDist, MoonDistTopo, flatten: double);
 var
   x, y, cone, umbra, penumbra, pixscale: double;
   xx, yy: single;
@@ -2618,7 +2619,7 @@ begin
   umbra := 1.01 * arctan2(umbra, MoonDistTopo);
   penumbra := umbra + 1.07 * deg2rad;  // + 2x sun diameter
   pixscale := abs(cfgsc.BxGlb);
-  Fplot.PlotEarthShadow(xx, yy, umbra, penumbra, pixscale);
+  Fplot.PlotEarthShadow(xx, yy, umbra, penumbra, pixscale, flatten);
 end;
 
 procedure Tskychart.DrawSatel(j, ipla: integer; ra, Dec, ma, diam, pixscale, rot: double;
