@@ -1518,6 +1518,8 @@ begin
 
   PaintBox1.Repaint;
 
+  if (Panel4.ClientWidth=0) or (Panel4.ClientHeight=0) then Exit;
+
   plbmp.SetSize(Panel4.ClientWidth, Panel4.ClientHeight);
   plbmp.Fill(ColorToBGRA(clBlack));
 
@@ -2307,6 +2309,8 @@ var
   c:TBGRAPixel;
   JD: Double;
 begin
+
+  if ymin=0 then Exit;
 
   JD := config.CurTime;
 
