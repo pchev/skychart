@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2017-10-01 14:00+0000\n"
-"PO-Revision-Date: 2017-06-15 12:13+0000\n"
+"PO-Revision-Date: 2017-10-25 08:37+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-01 14:08+0000\n"
-"X-Generator: Launchpad (build 18471)\n"
+"X-Launchpad-Export-Date: 2017-11-12 19:24+0000\n"
+"X-Generator: Launchpad (build 18505)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1036,6 +1036,10 @@ msgstr "Beräkna asteroiddata för denna månad"
 msgid "Compute field"
 msgstr "Beräkna fält"
 
+#: u_translation.rscomputerises
+msgid "Compute rise/set time relative to this line"
+msgstr ""
+
 #: u_translation.rsconfiguratio
 msgid "Configuration"
 msgstr "Inställningar"
@@ -1922,7 +1926,7 @@ msgstr "Enkodrar"
 
 #: u_translation.rsend
 msgid "End"
-msgstr "Stopp"
+msgstr "Slut"
 
 #: u_translation.rsendofobject
 msgid "End of object"
@@ -2486,7 +2490,7 @@ msgstr "Half-mass radie"
 
 #: u_translation.rshaltafter100
 msgid "Halt after 1000 errors"
-msgstr "Stopp efter 1000 fel"
+msgstr "Stoppa efter 1000 fel"
 
 #: u_translation.rshammeraitoff
 msgid "Hammer-Aitoff"
@@ -2618,7 +2622,7 @@ msgstr "Om det inte är installerat prova följande beroende på ditt system:"
 
 #: u_translation.rsillum
 msgid "Illum."
-msgstr "Ljus"
+msgstr "Belyst"
 
 #: u_translation.rsilluminatedf
 msgid "Illuminated fraction"
@@ -2666,7 +2670,7 @@ msgstr "Stega framåt i tiden"
 
 #: u_translation.rsindicatehere
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
-msgstr "Ange här hur de erforderliga värdena som är sparade i katalogens textfil skall beräknas."
+msgstr "Ange här hur de erforderliga värdena som är sparade i katalogens textfil ska beräknas."
 
 #: u_translation.rsindicatehowt
 msgid "Indicate how to recognize the object size unit:"
@@ -4110,7 +4114,7 @@ msgstr "Ange ett långt namn för katalogen"
 
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
-msgstr "Ange mappen som katalogen skall sparas i"
+msgstr "Ange mappen som katalogen ska sparas i"
 
 #: u_translation.rspleaseinitth
 msgid "Please init the 90 degree elevation first"
@@ -4442,7 +4446,7 @@ msgstr "Riktiga bilder"
 
 #: u_translation.rsreallyparkan
 msgid "REALLY park and disconnect the telescope?"
-msgstr "SÄKERT att teleskopet skall parkeras och kopplas från?"
+msgstr "SÄKERT att teleskopet ska parkeras och kopplas från?"
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -4602,7 +4606,7 @@ msgstr "Nollställ"
 
 #: u_translation.rsresetalllabe
 msgid "Reset all labels"
-msgstr "Återställ all etiketter"
+msgstr "Återställ alla etiketter"
 
 #: u_translation.rsresetchart
 msgid "Reset chart"
@@ -4914,7 +4918,7 @@ msgstr "Välj färg (svart är standardfärg)"
 
 #: u_translation.rsselectlabels
 msgid "Select labels to recover"
-msgstr "Välj etiketter som skall återskapas"
+msgstr "Välj etiketter som ska återskapas"
 
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
@@ -5502,7 +5506,7 @@ msgstr "Alternativ för stjärnors korrekta rörelse (om tillgängligt i katalog
 
 #: u_translation.rsstart
 msgid "Start"
-msgstr "Starta"
+msgstr "Början"
 
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
@@ -5594,7 +5598,7 @@ msgstr "Yta"
 
 #: u_translation.rssurfacebrigh
 msgid "Surface brightness"
-msgstr "Ljusstyrka på ytan"
+msgstr "Ytljusstyrka"
 
 #: u_translation.rsswapbutton
 msgid "Swap button"

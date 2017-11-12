@@ -6314,3 +6314,7 @@ msgstr ""
 msgid "Show obsolete drivers"
 msgstr ""
 
+#: u_translation:rscomputerises
+msgid "Compute rise/set time relative to this line"
+msgstr ""
+
