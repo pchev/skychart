@@ -10,7 +10,6 @@ object f_indigui: Tf_indigui
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '1.6.2.0'
   Visible = False
   object dev: TPageControl
     Left = 0
@@ -33,7 +32,7 @@ object f_indigui: Tf_indigui
     Height = 154
     Top = 112
     Width = 374
-    Caption = 'No connection to INDI server '
+    Caption = 'Connecting to INDI server ...'
     Font.Height = -20
     Font.Style = [fsBold]
     ParentFont = False
