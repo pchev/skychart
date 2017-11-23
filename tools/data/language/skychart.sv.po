@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-10-01 14:00+0000\n"
+"POT-Creation-Date: 2017-11-23 11:33+0000\n"
 "PO-Revision-Date: 2017-10-25 08:37+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-11-16 21:56+0000\n"
-"X-Generator: Launchpad (build 18505)\n"
+"X-Launchpad-Export-Date: 2017-11-23 12:12+0000\n"
+"X-Generator: Launchpad (build 18509)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -4153,8 +4153,8 @@ msgid "Please try to reinstall the program."
 msgstr "Försök att installera om programmet."
 
 #: u_translation.rsplottheposit
-msgid "Plot the position of the moving object."
-msgstr "Plotta positionen för det rörliga objektet."
+msgid "Plot orbital motion of solar system objects."
+msgstr ""
 
 #: u_translation.rspluto
 msgid "Pluto"
