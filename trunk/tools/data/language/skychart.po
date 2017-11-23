@@ -3235,7 +3235,7 @@ msgid "Number of steps"
 msgstr ""
 
 #: u_translation:rsplottheposit
-msgid "Plot the position of the moving object."
+msgid "Plot orbital motion of solar system objects."
 msgstr ""
 
 #: u_translation:rsstepunit

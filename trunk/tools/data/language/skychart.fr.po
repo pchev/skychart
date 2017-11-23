@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-01 14:00+0000\n"
-"PO-Revision-Date: 2017-11-16 21:54+0000\n"
+"POT-Creation-Date: 2017-11-23 11:33+0000\n"
+"PO-Revision-Date: 2017-11-23 12:06+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-11-16 21:56+0000\n"
-"X-Generator: Launchpad (build 18505)\n"
+"X-Launchpad-Export-Date: 2017-11-23 12:13+0000\n"
+"X-Generator: Launchpad (build 18509)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -1038,7 +1038,7 @@ msgstr "Calcul des champs"
 
 #: u_translation.rscomputerises
 msgid "Compute rise/set time relative to this line"
-msgstr ""
+msgstr "Calcul l'heure de lever et coucher par rapport à cette ligne"
 
 #: u_translation.rsconfiguratio
 msgid "Configuration"
@@ -4154,8 +4154,8 @@ msgid "Please try to reinstall the program."
 msgstr "Essayez de réinstaller le programme."
 
 #: u_translation.rsplottheposit
-msgid "Plot the position of the moving object."
-msgstr "Dessine la position des objets en mouvement."
+msgid "Plot orbital motion of solar system objects."
+msgstr "Trace le mouvement orbital des objets du système solaire."
 
 #: u_translation.rspluto
 msgid "Pluto"

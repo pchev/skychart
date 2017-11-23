@@ -837,7 +837,7 @@ resourcestring
   rsSimulation = 'Simulation';
   rsEvery = 'every ';
   rsNumberOfStep = 'Number of steps';
-  rsPlotThePosit = 'Plot the position of the moving object.';
+  rsPlotThePosit = 'Plot orbital motion of solar system objects.';
   rsStepUnit = 'Step unit';
   rsConnectionLi = 'Connection lines between each position';
   rsAll = 'All';
