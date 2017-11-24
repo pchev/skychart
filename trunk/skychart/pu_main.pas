@@ -6395,20 +6395,20 @@ begin
       try
         if resizemain then
         begin
-          t := ReadInteger(section, 'WinTop', 0);
-          l := ReadInteger(section, 'WinLeft', 0);
+          t := ReadInteger(section, 'WinTop', 40);
+          l := ReadInteger(section, 'WinLeft', 40);
           w := ReadInteger(section, 'WinWidth', -1);
           h := ReadInteger(section, 'WinHeight', -1);
           if (w < 0) or (h < 0) then
           begin
             if screen.Width > screen.Height then
             begin
-              h := round(screen.Height - 80);
+              h := round(screen.Height - 100);
               w := round(h * 4 / 3);
             end
             else
             begin
-              w := round(screen.Width - 80);
+              w := round(screen.Width - 100);
               h := w;
             end;
           end;
