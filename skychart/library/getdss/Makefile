@@ -11,7 +11,7 @@ SO_Name = libgetdss.dylib
 LDFLAGS=  $(arch_flags) -Wl,-single_module -dynamiclib  -lc -lm -lstdc++ -mmacosx-version-min=10.10
 else
 SO_Name = libgetdss.so
-LDFLAGS= -shared -Wl,-soname,$(SO_Name) $(arch_flags)
+LDFLAGS= -shared -lc -lm -lstdc++ -Wl,-soname,$(SO_Name) $(arch_flags)
 endif
 
 OBJS = getdss_lib.o dss.o extr_fit.o getpiece.o \
