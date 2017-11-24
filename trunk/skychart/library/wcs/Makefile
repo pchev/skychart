@@ -7,7 +7,7 @@ CC            = gcc
 endif
 ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name       = libcdcwcs.dylib
-LIBFLAGS      = -Wl,-single_module -dynamiclib  -lc -lm -mmacosx-version-min=10.6
+LIBFLAGS      = $(arch_flags) -Wl,-single_module -dynamiclib  -lc -lm -mmacosx-version-min=10.10
 else
 SO_Name       = libcdcwcs.so
 LIBFLAGS      = -shared -Wl,-soname,$(SO_Name) -lc -lm

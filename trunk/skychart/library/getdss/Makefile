@@ -8,7 +8,7 @@ CC            = gcc
 endif
 ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name = libgetdss.dylib
-LDFLAGS=  -Wl,-single_module -dynamiclib  -lc -lm -lstdc++ -mmacosx-version-min=10.6
+LDFLAGS=  $(arch_flags) -Wl,-single_module -dynamiclib  -lc -lm -lstdc++ -mmacosx-version-min=10.10
 else
 SO_Name = libgetdss.so
 LDFLAGS= -shared -Wl,-soname,$(SO_Name) $(arch_flags)
