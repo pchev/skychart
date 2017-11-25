@@ -33,7 +33,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   ./configure $configopt prefix=$builddir target=i386-darwin
   if [[ $? -ne 0 ]]; then exit 1;fi
   make CPU_TARGET=i386 clean
-  fpcopts="-CX -XX -Xs" make CPU_TARGET=i386
+  fpcopts="-CX -XX -Xs -Cs800000" make CPU_TARGET=i386
   if [[ $? -ne 0 ]]; then exit 1;fi
   make install
   if [[ $? -ne 0 ]]; then exit 1;fi
