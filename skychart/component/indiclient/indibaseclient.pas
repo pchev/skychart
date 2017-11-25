@@ -747,6 +747,8 @@ begin
       if terminated then
         break;
       dp := findDev(Node, True, errmsg);
+      if dp=nil then
+        break;
       if FProtocolTrace and (errmsg <> '') then
         WriteProtocolError('FindDev error: ' + errmsg);
       if Node.NodeName = 'message' then
