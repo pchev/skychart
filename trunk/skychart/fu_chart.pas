@@ -2558,6 +2558,7 @@ var
   zf: double;
   x, y: integer;
 begin
+  try
   if LockMouseWheel then
     exit;
   LockMouseWheel := True;
@@ -2583,6 +2584,9 @@ begin
     Application.ProcessMessages;
   finally
     LockMouseWheel := False;
+  end;
+  except
+    on E: Exception do WriteTrace('Mousewheel error: ' + E.Message);
   end;
 end;
 
@@ -2954,6 +2958,7 @@ end;
 procedure Tf_chart.Image1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: integer);
 begin
+  try
   if VerboseMsg then
     WriteTrace(Caption + ' MouseUp');
   if MovingCircle then
@@ -3011,12 +3016,16 @@ begin
       Refresh(True, False);
     end;
   end;
+  except
+    on E: Exception do WriteTrace('Mouseup error: ' + E.Message);
+  end;
 end;
 
 
 procedure Tf_chart.Image1MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: integer);
 begin
+  try
   if VerboseMsg then
     WriteTrace(Caption + ' MouseDown');
   lastx := x;
@@ -3037,12 +3046,16 @@ begin
     FSetFocus(Self);
   if assigned(FImageSetFocus) then
     FImageSetFocus(Sender);
+  except
+    on E: Exception do WriteTrace('Mousedown error: ' + E.Message);
+  end;
 end;
 
 procedure Tf_chart.Image1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
 var
   c: double;
 begin
+  try
   if locked then
     exit;
   if lockmove then
@@ -3105,6 +3118,9 @@ begin
       Refresh(True, True); //the mouse as leave during a quick refresh
     if not sc.cfgsc.ShowScale then
       ShowCoord(x, y);
+  end;
+  except
+    on E: Exception do WriteTrace('Mousemove error: ' + E.Message);
   end;
 end;
 
