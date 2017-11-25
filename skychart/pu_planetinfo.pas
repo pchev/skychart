@@ -66,6 +66,7 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
+    Panel5: TPanel;
     PanelMain: TPanel;
     PanelLeft: TPanel;
     PanelrgTarget: TPanel;
@@ -638,8 +639,10 @@ end;
 procedure Tf_planetinfo.FormCreate(Sender: TObject);
 begin
   {$ifdef lclgtk2}
-  PanelLeft.Color:=clBlack;
-  PanelLeft.Font.Color:=clWhite;
+  if not DarkTheme then begin
+    Color:=clBlack;
+    Font.Color:=clWhite;
+  end;
   {$endif}
 
   firstuse := true;
