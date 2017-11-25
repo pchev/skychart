@@ -695,9 +695,10 @@ begin
       begin
         IndiMessageEvent('Bad INDI message');
       end;
-    end;
-  finally
-    TMemoryStream(Data).Free;
+    end
+    else
+      TMemoryStream(Data).Free;
+  except
   end;
 end;
 
@@ -737,6 +738,7 @@ begin
           lf, '', [rfReplaceAll])) + '...');
       end;
       Result := False;
+      s.Free;
       exit;
     end;
   end;
@@ -802,6 +804,7 @@ begin
     end;
   finally
     Doc.Free;
+    s.Free;
   end;
 end;
 
