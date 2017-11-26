@@ -21,8 +21,8 @@ object pop_indi: Tpop_indi
     Top = 208
     Width = 300
     Align = alTop
-    ClientHeight = 107
-    ClientWidth = 296
+    ClientHeight = 109
+    ClientWidth = 298
     TabOrder = 2
     object Connect: TButton
       Left = 5
@@ -93,9 +93,9 @@ object pop_indi: Tpop_indi
     end
     object ProtocolTrace: TCheckBox
       Left = 16
-      Height = 23
+      Height = 21
       Top = 8
-      Width = 112
+      Width = 111
       Caption = 'Protocol trace '
       OnChange = ProtocolTraceChange
       TabOrder = 7
@@ -128,7 +128,7 @@ object pop_indi: Tpop_indi
     end
     object pos_x: TEdit
       Left = 30
-      Height = 26
+      Height = 24
       Top = 8
       Width = 86
       ReadOnly = True
@@ -137,7 +137,7 @@ object pop_indi: Tpop_indi
     end
     object pos_y: TEdit
       Left = 158
-      Height = 26
+      Height = 24
       Top = 8
       Width = 86
       ReadOnly = True
@@ -152,8 +152,8 @@ object pop_indi: Tpop_indi
     Width = 300
     Align = alTop
     Caption = 'Observatory '
-    ClientHeight = 88
-    ClientWidth = 296
+    ClientHeight = 89
+    ClientWidth = 298
     TabOrder = 4
     object Label15: TLabel
       Left = 8
@@ -181,7 +181,7 @@ object pop_indi: Tpop_indi
     end
     object lat: TEdit
       Left = 8
-      Height = 26
+      Height = 24
       Top = 32
       Width = 86
       Color = clBtnFace
@@ -192,7 +192,7 @@ object pop_indi: Tpop_indi
     end
     object long: TEdit
       Left = 112
-      Height = 26
+      Height = 24
       Top = 32
       Width = 82
       Color = clBtnFace
@@ -219,7 +219,7 @@ object pop_indi: Tpop_indi
     end
     object Elev: TEdit
       Left = 209
-      Height = 26
+      Height = 24
       Top = 32
       Width = 80
       ReadOnly = True
@@ -234,14 +234,14 @@ object pop_indi: Tpop_indi
     Width = 300
     Align = alTop
     Caption = 'Current driver'
-    ClientHeight = 40
-    ClientWidth = 296
+    ClientHeight = 41
+    ClientWidth = 298
     TabOrder = 0
     object Edit1: TEdit
       Left = 8
-      Height = 26
+      Height = 24
       Top = 8
-      Width = 153
+      Width = 281
       Color = clBtnFace
       ReadOnly = True
       TabStop = False
