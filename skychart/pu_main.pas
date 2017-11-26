@@ -2052,14 +2052,21 @@ var
 {$endif}
 begin
 {$ifdef darwin}
+  //  try current path
   appdir := getcurrentdir;
   if not DirectoryExists(slash(appdir) + slash('data') + slash('planet')) then
   begin
+    // try under app bundle
     appdir := ExtractFilePath(ParamStr(0));
     i := pos('.app/', appdir);
     if i > 0 then
     begin
       appdir := ExtractFilePath(copy(appdir, 1, i));
+    end;
+    if not DirectoryExists(slash(appdir) + slash('data') + slash('planet')) then
+    begin
+       // try default location
+      appdir := '/Applications/Cartes du Ciel';
     end;
   end;
 {$else}
