@@ -3661,34 +3661,8 @@ begin
 end;
 
 function ShowModalForm(f: TForm; SetFocus: boolean = False): TModalResult;
-{$ifdef darwin}
-var
-  fstyle: TFormStyle;
-{$endif}
 begin
-  // TODO : Mac OSX: Test if bug with colordialog in a modal form still present and remove that
-{$ifdef darwin}
-  f.ModalResult := mrNone;
-  fstyle := f.FormStyle;
-  try
-    f.FormStyle := fsStayOnTop;
-    f.Show;
-    while (f.Visible) and (f.ModalResult = mrNone) do
-    begin
-      sleep(100);
-      if SetFocus then
-        f.SetFocus;
-      Application.ProcessMessages;
-    end;
-    Result := f.ModalResult;
-    if Result = mrNone then
-      Result := mrCancel;
-  finally
-    f.FormStyle := fstyle;
-  end;
-{$else}
   Result := f.ShowModal;
-{$endif}
 end;
 
 end.
