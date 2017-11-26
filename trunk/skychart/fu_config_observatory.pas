@@ -356,7 +356,6 @@ begin
   CountryTZ.Checked := csc.countrytz;
   if countrylist.Items.Count = 0 then
     cdb.GetCountryList(countrycode, countrylist.Items);
-  countrylist.ItemIndex := 0;
   for i := 0 to countrylist.items.Count - 1 do
     if uppercase(trim(countrylist.Items[i])) = uppercase(trim(csc.obscountry)) then
     begin
@@ -432,6 +431,7 @@ procedure Tf_config_observatory.CountryChange(Sender: TObject);
 begin
   csc.ObsCountry := f_observatory_db.csc.ObsCountry;
   UpdTZList(Sender);
+  ShowCountryList;
 end;
 
 procedure Tf_config_observatory.UpdTZList(Sender: TObject);
@@ -1014,6 +1014,7 @@ begin
     ScrollLock := True;
     scrollw := round(ZoomImage1.Width / ZoomImage1.zoom / 2);
     posmax := max(scrollw, ZoomImage1.SizeX - scrollw);
+    try
     Hscrollbar.SetParams(Hscrollbar.Position, scrollw, posmax, 1);
     Hscrollbar.LargeChange := scrollw;
     Hscrollbar.SmallChange := scrollw div 10;
@@ -1022,6 +1023,8 @@ begin
     Vscrollbar.SetParams(Vscrollbar.Position, scrollh, posmax, 1);
     Vscrollbar.LargeChange := scrollh;
     Vscrollbar.SmallChange := scrollh div 10;
+    except
+    end;
   finally
     ScrollLock := False;
   end;
