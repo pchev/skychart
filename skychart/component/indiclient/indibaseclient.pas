@@ -256,6 +256,7 @@ procedure TProcessData.Add(Data: TMemoryStream);
 var
   buf: TDataBuffer;
 begin
+try
   buf := TDataBuffer.Create;
   buf.dataptr := PtrInt(Data);
   {$ifndef darwin}
@@ -268,6 +269,8 @@ begin
     LeaveCriticalsection(BufferCriticalSection);
   {$endif}
   end;
+except
+end;
 end;
 
 function TProcessData.getCount: integer;
@@ -284,6 +287,7 @@ begin
     sleep(100);
     while dataqueue.Count > 0 do
     begin
+      try
       s := TMemoryStream(TDataBuffer(dataqueue.Items[0]).dataptr);
       FProcessData(s);
          {$ifndef darwin}
@@ -295,6 +299,8 @@ begin
          {$ifndef darwin}
         LeaveCriticalsection(BufferCriticalSection);
          {$endif}
+      end;
+      except
       end;
     end;
   end;
@@ -547,6 +553,7 @@ begin
               init := False;
             end;
           end;
+          try
      {$ifndef darwin}
           EnterCriticalsection(SendCriticalSection);
      {$endif}
@@ -557,6 +564,8 @@ begin
      {$ifndef darwin}
             LeaveCriticalsection(SendCriticalSection);
      {$endif}
+          end;
+          except
           end;
           if buf <> '' then
           begin
@@ -593,6 +602,7 @@ procedure TIndiBaseClient.Send(const Value: string);
 begin
   if Value > '' then
   begin
+    try
    {$ifndef darwin}
     EnterCriticalsection(SendCriticalSection);
    {$endif}
@@ -602,6 +612,8 @@ begin
    {$ifndef darwin}
       LeaveCriticalsection(SendCriticalSection);
    {$endif}
+    end;
+    except
     end;
   end;
 end;
@@ -1102,6 +1114,7 @@ end;
 
 procedure TIndiBaseClient.IndiMessageEvent(msg: string);
 begin
+  try
   {$ifndef darwin}
   EnterCriticalSection(MessageCriticalSection);
   {$endif}
@@ -1116,6 +1129,8 @@ begin
   {$endif}
   end;
   Application.QueueAsyncCall(@ASyncMessageEvent, 0);
+  except
+  end;
 end;
 
 procedure TIndiBaseClient.IndiPropertyEvent(indiProp: IndiProperty);
@@ -1199,6 +1214,7 @@ var
   msg: string;
 begin
   msg := '';
+  try
   {$ifndef darwin}
   if not terminated then
     EnterCriticalSection(MessageCriticalSection);
@@ -1217,6 +1233,8 @@ begin
   end;
   if (msg <> '') and assigned(FIndiMessageEvent) then
     FIndiMessageEvent(Msg);
+  except
+  end;
 end;
 
 procedure TIndiBaseClient.SyncPropertyEvent;
