@@ -88,9 +88,10 @@ type
     FonDestroy: TNotifyEvent;
     FButtonGroup: integer;
     indiclosing: boolean;
+    procedure dmsg(txt: string);
     procedure NewDevice(dp: Basedevice);
     procedure DeleteDevice(dp: Basedevice);
-    procedure NewMessage(txt: string);
+    procedure NewMessage(mp: IMessage);
     procedure NewProperty(indiProp: IndiProperty);
     procedure DeleteProperty(indiProp: IndiProperty);
     procedure NewNumber(nvp: INumberVectorProperty);
@@ -276,7 +277,7 @@ procedure Tf_indigui.ServerConnected(Sender: TObject);
 begin
   NoConnection.Visible := False;
   indiclient.setBLOBMode(B_NEVER, '');
-  NewMessage('Server connected');
+  dmsg('Server connected');
 end;
 
 procedure Tf_indigui.ServerDisconnected(Sender: TObject);
@@ -325,9 +326,15 @@ begin
   end;
 end;
 
-procedure Tf_indigui.NewMessage(txt: string);
+procedure Tf_indigui.dmsg(txt: string);
 begin
   msg.Lines.Add(txt);
+end;
+
+procedure Tf_indigui.NewMessage(mp: IMessage);
+begin
+  dmsg(mp.msg);
+  mp.Free;
 end;
 
 procedure Tf_indigui.NewProperty(indiProp: IndiProperty);
@@ -1002,7 +1009,7 @@ begin
       indiclient.sendNewNumber(nvp);
     end;
   end;
-  NewMessage(buf);
+  dmsg(buf);
 end;
 
 procedure Tf_indigui.SetSwitchButtonClick(Sender: TObject);
@@ -1030,7 +1037,7 @@ begin
     if svp.r = ISR_1OFMANY then
       IUResetSwitch(svp);
     sp.s := ISS_ON;
-    NewMessage(iprop.Name + ' ' + sp.Name + '=ON');
+    dmsg(iprop.Name + ' ' + sp.Name + '=ON');
     indiclient.sendNewSwitch(svp);
   end;
 end;
@@ -1054,7 +1061,7 @@ begin
       buf := buf + svp.sp[i].Name + '=ON';
     end;
   end;
-  NewMessage(buf);
+  dmsg(buf);
   indiclient.sendNewSwitch(svp);
 end;
 
@@ -1072,7 +1079,7 @@ begin
   i := TComboBox(Sender).ItemIndex;
   svp.sp[i].s := ISS_ON;
   buf := buf + svp.sp[i].Name + '=ON';
-  NewMessage(buf);
+  dmsg(buf);
   indiclient.sendNewSwitch(svp);
 end;
 
