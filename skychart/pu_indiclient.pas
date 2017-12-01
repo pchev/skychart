@@ -118,7 +118,7 @@ type
     procedure ClearStatus;
     procedure CheckStatus;
     procedure NewDevice(dp: Basedevice);
-    procedure NewMessage(msg: string);
+    procedure NewMessage(mp: IMessage);
     procedure NewProperty(indiProp: IndiProperty);
     procedure NewNumber(nvp: INumberVectorProperty);
     procedure NewText(tvp: ITextVectorProperty);
@@ -259,11 +259,12 @@ begin
   { TODO :  check if a vital property is removed ? }
 end;
 
-procedure Tpop_indi.NewMessage(msg: string);
+procedure Tpop_indi.NewMessage(mp: IMessage);
 begin
-  if Memomsg.Lines.Count > 4 then
+  if Memomsg.Lines.Count > 40 then
     Memomsg.Lines.Delete(0);
-  Memomsg.Lines.Add(msg);
+  Memomsg.Lines.Add(mp.msg);
+  mp.Free;
 end;
 
 procedure Tpop_indi.NewProperty(indiProp: IndiProperty);

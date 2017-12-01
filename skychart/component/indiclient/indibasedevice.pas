@@ -39,7 +39,7 @@ type
   IndiProperty = class;
 
   TIndiDeviceEvent = procedure(dp: Basedevice) of object;
-  TIndiMessageEvent = procedure(msg: string) of object;
+  TIndiMessageEvent = procedure(mp: IMessage) of object;
   TIndiPropertyEvent = procedure(indiProp: IndiProperty) of object;
   TIndiNumberEvent = procedure(nvp: INumberVectorProperty) of object;
   TIndiTextEvent = procedure(tvp: ITextVectorProperty) of object;
@@ -822,14 +822,15 @@ end;
 procedure BaseDevice.checkMessage(root: TDOMNode);
 var
   node: TDOMNode;
-  buf: string;
+  mp: IMessage;
 begin
   node := GetAttrib(root, 'message');
   if node <> nil then
   begin
-    buf := GetNodeValue(node);
+    mp:=IMessage.Create;
+    mp.msg:=GetNodeValue(node);
     if assigned(FIndiMessageEvent) then
-      FIndiMessageEvent(buf);
+      FIndiMessageEvent(mp);
   end;
 end;
 

@@ -60,7 +60,6 @@ type
   private
     dataqueue: TObjectList;
     FProcessData: TProcessDataProc;
-    BufferCriticalSection: TRTLCriticalSection;
     function getCount: integer;
   public
     constructor Create;
@@ -97,19 +96,14 @@ type
     FIndiLightEvent: TIndiLightEvent;
     FIndiBlobEvent: TIndiBlobEvent;
     SyncindiDev: Basedevice;
-    SyncindiMessage: string;
     SyncindiProp: IndiProperty;
-    SyncindiNumber: INumberVectorProperty;
-    SyncindiText: ITextVectorProperty;
-    SyncindiSwitch: ISwitchVectorProperty;
-    SyncindiLight: ILightVectorProperty;
-    SyncindiBlob: IBLOB;
-    MessageCriticalSection: TRTLCriticalSection;
+    {$ifdef withCriticalsection}
     SendCriticalSection: TRTLCriticalSection;
+    {$endif}
     FProcessData: TProcessData;
     procedure IndiDeviceEvent(dp: Basedevice);
     procedure IndiDeleteDeviceEvent(dp: Basedevice);
-    procedure IndiMessageEvent(msg: string);
+    procedure IndiMessageEvent(mp: IMessage);
     procedure IndiPropertyEvent(indiProp: IndiProperty);
     procedure IndiDeletePropertyEvent(indiProp: IndiProperty);
     procedure IndiNumberEvent(nvp: INumberVectorProperty);
@@ -121,14 +115,14 @@ type
     procedure SyncServerDisonnected;
     procedure SyncDeviceEvent;
     procedure SyncDeleteDeviceEvent;
-    procedure ASyncMessageEvent(Data: PtrInt);
     procedure SyncPropertyEvent;
     procedure SyncDeletePropertyEvent;
-    procedure SyncNumberEvent;
-    procedure SyncTextEvent;
-    procedure SyncSwitchEvent;
-    procedure SyncLightEvent;
+    procedure ASyncNumberEvent(Data: PtrInt);
+    procedure ASyncTextEvent(Data: PtrInt);
+    procedure ASyncSwitchEvent(Data: PtrInt);
+    procedure ASyncLightEvent(Data: PtrInt);
     procedure ASyncBlobEvent(Data: PtrInt);
+    procedure ASyncMessageEvent(Data: PtrInt);
     function findDev(root: TDOMNode; createifnotexist: boolean;
       out errmsg: string): BaseDevice;
     function findDev(root: TDOMNode; out errmsg: string): BaseDevice;
@@ -240,16 +234,14 @@ begin
   inherited Create(False);
   FreeOnTerminate := True;
   dataqueue := TObjectList.Create;
-  InitCriticalSection(BufferCriticalSection);
 end;
 
 destructor TProcessData.Destroy;
 begin
   dataqueue.Free;
-  DoneCriticalsection(BufferCriticalSection);
-{$ifndef mswindows}
+  {$ifndef mswindows}
   inherited Destroy;
-{$endif}
+  {$endif}
 end;
 
 procedure TProcessData.Add(Data: TMemoryStream);
@@ -259,15 +251,9 @@ begin
 try
   buf := TDataBuffer.Create;
   buf.dataptr := PtrInt(Data);
-  {$ifndef darwin}
-  EnterCriticalsection(BufferCriticalSection);
-  {$endif}
   try
     dataqueue.Add(buf);
   finally
-  {$ifndef darwin}
-    LeaveCriticalsection(BufferCriticalSection);
-  {$endif}
   end;
 except
 end;
@@ -288,18 +274,13 @@ begin
     while dataqueue.Count > 0 do
     begin
       try
-      s := TMemoryStream(TDataBuffer(dataqueue.Items[0]).dataptr);
-      FProcessData(s);
-         {$ifndef darwin}
-      EnterCriticalsection(BufferCriticalSection);
-         {$endif}
-      try
+        s:=TMemoryStream.Create;
+        s.Position:=0;
+        TMemoryStream(TDataBuffer(dataqueue.Items[0]).dataptr).Position:=0;
+        s.CopyFrom(TMemoryStream(TDataBuffer(dataqueue.Items[0]).dataptr),TMemoryStream(TDataBuffer(dataqueue.Items[0]).dataptr).Size);
+        TMemoryStream(TDataBuffer(dataqueue.Items[0]).dataptr).Free;
         dataqueue.Delete(0);
-      finally
-         {$ifndef darwin}
-        LeaveCriticalsection(BufferCriticalSection);
-         {$endif}
-      end;
+        FProcessData(s);
       except
       end;
     end;
@@ -324,7 +305,6 @@ begin
   FProtocolTraceFile := '';
   FProtocolErrorFile := '';
   FreeOnTerminate := True;
-  SyncindiMessage := '';
   FlockBlobEvent := False;
   FMissedFrameCount := 0;
   Ftrace := False;  // for debuging only
@@ -487,8 +467,9 @@ begin
     tcpclient := TTCPClient.Create;
     try
       OpenProtocolTrace(FProtocolTraceFile, FProtocolErrorFile);
-      InitCriticalSection(MessageCriticalSection);
+      {$ifdef withCriticalsection}
       InitCriticalSection(SendCriticalSection);
+      {$endif}
       init := True;
       FinitProps := False;
       if FProtocolTrace then
@@ -554,16 +535,16 @@ begin
             end;
           end;
           try
-     {$ifndef darwin}
+          {$ifdef withCriticalsection}
           EnterCriticalsection(SendCriticalSection);
-     {$endif}
+          {$endif}
           try
             buf := Fsendbuffer;
             Fsendbuffer := '';
           finally
-     {$ifndef darwin}
+            {$ifdef withCriticalsection}
             LeaveCriticalsection(SendCriticalSection);
-     {$endif}
+           {$endif}
           end;
           except
           end;
@@ -585,8 +566,9 @@ begin
       s.Free;
       tcpclient.Disconnect;
       tcpclient.Free;
-      DoneCriticalsection(MessageCriticalSection);
+      {$ifdef withCriticalsection}
       DoneCriticalsection(SendCriticalSection);
+      {$endif}
       if assigned(FServerDisconnected) then
         Synchronize(@SyncServerDisonnected);
       if FProtocolTrace then
@@ -603,15 +585,15 @@ begin
   if Value > '' then
   begin
     try
-   {$ifndef darwin}
+   {$ifdef withCriticalsection}
     EnterCriticalsection(SendCriticalSection);
    {$endif}
     try
       Fsendbuffer := Fsendbuffer + Value + crlf;
     finally
-   {$ifndef darwin}
+      {$ifdef withCriticalsection}
       LeaveCriticalsection(SendCriticalSection);
-   {$endif}
+      {$endif}
     end;
     except
     end;
@@ -699,13 +681,16 @@ begin
 end;
 
 procedure TIndiBaseClient.ProcessDataAsync(Data: PtrInt);
+var mp:IMessage;
 begin
   try
     if not terminated then
     begin
       if not ProcessData(TMemoryStream(Data)) then
       begin
-        IndiMessageEvent('Bad INDI message');
+        mp:=IMessage.Create;
+        mp.msg:='Bad INDI message';
+        IndiMessageEvent(mp);
       end;
     end
     else
@@ -1100,37 +1085,54 @@ begin
       Send('<getProperties version="' + INDIV + '" device="' + FwatchDevices[i] + '"/>');
 end;
 
+procedure TIndiBaseClient.SyncServerConnected;
+begin
+  if assigned(FServerConnected) then
+    FServerConnected(self);
+end;
+
+procedure TIndiBaseClient.SyncServerDisonnected;
+begin
+  if assigned(FServerDisconnected) then
+    FServerDisconnected(self);
+end;
+
+procedure TIndiBaseClient.SyncPropertyEvent;
+begin
+  if assigned(FIndiPropertyEvent) then
+    FIndiPropertyEvent(SyncindiProp);
+end;
+
+procedure TIndiBaseClient.SyncDeletePropertyEvent;
+begin
+  if assigned(FIndiDeletePropertyEvent) then
+    FIndiDeletePropertyEvent(SyncindiProp);
+end;
+
 procedure TIndiBaseClient.IndiDeviceEvent(dp: Basedevice);
 begin
   SyncindiDev := dp;
+  // Device event must be processed synchronously
   Synchronize(@SyncDeviceEvent);
+end;
+
+procedure TIndiBaseClient.SyncDeviceEvent;
+begin
+  if assigned(FIndiDeviceEvent) then
+    FIndiDeviceEvent(SyncindiDev);
 end;
 
 procedure TIndiBaseClient.IndiDeleteDeviceEvent(dp: Basedevice);
 begin
   SyncindiDev := dp;
+  // Device event must be processed synchronously
   Synchronize(@SyncDeleteDeviceEvent);
 end;
 
-procedure TIndiBaseClient.IndiMessageEvent(msg: string);
+procedure TIndiBaseClient.SyncDeleteDeviceEvent;
 begin
-  try
-  {$ifndef darwin}
-  EnterCriticalSection(MessageCriticalSection);
-  {$endif}
-  try
-    if SyncindiMessage = '' then
-      SyncindiMessage := msg
-    else
-      SyncindiMessage := SyncindiMessage + crlf + msg;
-  finally
-  {$ifndef darwin}
-    LeaveCriticalsection(MessageCriticalSection);
-  {$endif}
-  end;
-  Application.QueueAsyncCall(@ASyncMessageEvent, 0);
-  except
-  end;
+  if assigned(FIndiDeleteDeviceEvent) then
+    FIndiDeleteDeviceEvent(SyncindiDev);
 end;
 
 procedure TIndiBaseClient.IndiPropertyEvent(indiProp: IndiProperty);
@@ -1147,26 +1149,46 @@ end;
 
 procedure TIndiBaseClient.IndiNumberEvent(nvp: INumberVectorProperty);
 begin
-  SyncindiNumber := nvp;
-  Synchronize(@SyncNumberEvent);
+  Application.QueueAsyncCall(@ASyncNumberEvent, PtrInt(nvp));
+end;
+
+procedure TIndiBaseClient.ASyncNumberEvent(Data: PtrInt);
+begin
+  if assigned(FIndiNumberEvent) then
+    FIndiNumberEvent(INumberVectorProperty(Data));
 end;
 
 procedure TIndiBaseClient.IndiTextEvent(tvp: ITextVectorProperty);
 begin
-  SyncindiText := tvp;
-  Synchronize(@SyncTextEvent);
+  Application.QueueAsyncCall(@ASyncTextEvent, PtrInt(tvp));
+end;
+
+procedure TIndiBaseClient.ASyncTextEvent(Data: PtrInt);
+begin
+  if assigned(FIndiTextEvent) then
+    FIndiTextEvent(ITextVectorProperty(Data));
 end;
 
 procedure TIndiBaseClient.IndiSwitchEvent(svp: ISwitchVectorProperty);
 begin
-  SyncindiSwitch := svp;
-  Synchronize(@SyncSwitchEvent);
+  Application.QueueAsyncCall(@ASyncSwitchEvent, PtrInt(svp));
+end;
+
+procedure TIndiBaseClient.ASyncSwitchEvent(Data: PtrInt);
+begin
+  if assigned(FIndiSwitchEvent) then
+    FIndiSwitchEvent(ISwitchVectorProperty(Data));
 end;
 
 procedure TIndiBaseClient.IndiLightEvent(lvp: ILightVectorProperty);
 begin
-  SyncindiLight := lvp;
-  Synchronize(@SyncLightEvent);
+  Application.QueueAsyncCall(@ASyncLightEvent, PtrInt(lvp));
+end;
+
+procedure TIndiBaseClient.ASyncLightEvent(Data: PtrInt);
+begin
+  if assigned(FIndiLightEvent) then
+    FIndiLightEvent(ILightVectorProperty(Data));
 end;
 
 procedure TIndiBaseClient.IndiBlobEvent(bp: IBLOB);
@@ -1180,97 +1202,8 @@ begin
   else
   begin
     FlockBlobEvent := True; // drop extra frames until we are ready
-    SyncindiBlob := bp;
-    Application.QueueAsyncCall(@AsyncBlobEvent, 0);
+    Application.QueueAsyncCall(@AsyncBlobEvent, PtrInt(bp));
   end;
-end;
-
-procedure TIndiBaseClient.SyncServerConnected;
-begin
-  if assigned(FServerConnected) then
-    FServerConnected(self);
-end;
-
-procedure TIndiBaseClient.SyncServerDisonnected;
-begin
-  if assigned(FServerDisconnected) then
-    FServerDisconnected(self);
-end;
-
-procedure TIndiBaseClient.SyncDeviceEvent;
-begin
-  if assigned(FIndiDeviceEvent) then
-    FIndiDeviceEvent(SyncindiDev);
-end;
-
-procedure TIndiBaseClient.SyncDeleteDeviceEvent;
-begin
-  if assigned(FIndiDeleteDeviceEvent) then
-    FIndiDeleteDeviceEvent(SyncindiDev);
-end;
-
-procedure TIndiBaseClient.ASyncMessageEvent(Data: PtrInt);
-var
-  msg: string;
-begin
-  msg := '';
-  try
-  {$ifndef darwin}
-  if not terminated then
-    EnterCriticalSection(MessageCriticalSection);
-  {$endif}
-  try
-    if SyncindiMessage <> '' then
-    begin
-      msg := SyncindiMessage;
-      SyncindiMessage := '';
-    end;
-  finally
-  {$ifndef darwin}
-    if not terminated then
-      LeaveCriticalsection(MessageCriticalSection);
-  {$endif}
-  end;
-  if (msg <> '') and assigned(FIndiMessageEvent) then
-    FIndiMessageEvent(Msg);
-  except
-  end;
-end;
-
-procedure TIndiBaseClient.SyncPropertyEvent;
-begin
-  if assigned(FIndiPropertyEvent) then
-    FIndiPropertyEvent(SyncindiProp);
-end;
-
-procedure TIndiBaseClient.SyncDeletePropertyEvent;
-begin
-  if assigned(FIndiDeletePropertyEvent) then
-    FIndiDeletePropertyEvent(SyncindiProp);
-end;
-
-procedure TIndiBaseClient.SyncNumberEvent;
-begin
-  if assigned(FIndiNumberEvent) then
-    FIndiNumberEvent(SyncindiNumber);
-end;
-
-procedure TIndiBaseClient.SyncTextEvent;
-begin
-  if assigned(FIndiTextEvent) then
-    FIndiTextEvent(SyncindiText);
-end;
-
-procedure TIndiBaseClient.SyncSwitchEvent;
-begin
-  if assigned(FIndiSwitchEvent) then
-    FIndiSwitchEvent(SyncindiSwitch);
-end;
-
-procedure TIndiBaseClient.SyncLightEvent;
-begin
-  if assigned(FIndiLightEvent) then
-    FIndiLightEvent(SyncindiLight);
 end;
 
 procedure TIndiBaseClient.ASyncBlobEvent(Data: PtrInt);
@@ -1279,11 +1212,31 @@ begin
     if not terminated then
     begin
       if assigned(FIndiBlobEvent) then
-        FIndiBlobEvent(SyncindiBlob);
+        FIndiBlobEvent(IBLOB(Data));
     end;
   finally
     // blob processing terminated, we can process next
     FlockBlobEvent := False;
+  end;
+end;
+
+procedure TIndiBaseClient.IndiMessageEvent(mp: IMessage);
+begin
+  try
+  Application.QueueAsyncCall(@ASyncMessageEvent, PtrInt(mp));
+  except
+  end;
+end;
+
+
+procedure TIndiBaseClient.ASyncMessageEvent(Data: PtrInt);
+begin
+  try
+  if assigned(FIndiMessageEvent) then
+    FIndiMessageEvent(IMessage(data))
+  else
+    IMessage(data).Free;
+  except
   end;
 end;
 

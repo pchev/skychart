@@ -276,6 +276,14 @@ type
     aux: longint;
   end;
 
+  IMessage = class(TObject)
+  public
+    constructor Create;
+    destructor Destroy; override;
+  public
+    msg: string;
+  end;
+
 implementation
 
 //////////////////////// ITextVectorProperty ////////////////////////
@@ -406,5 +414,20 @@ begin
   bp.Free;
   inherited Destroy;
 end;
+
+
+//////////////////////// IMessage ////////////////////////
+
+constructor IMessage.Create;
+begin
+  inherited Create;
+  msg:='';
+end;
+
+destructor IMessage.Destroy;
+begin
+  inherited Destroy;
+end;
+
 
 end.
