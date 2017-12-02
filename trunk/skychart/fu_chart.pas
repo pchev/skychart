@@ -310,7 +310,7 @@ type
     procedure Image1MouseWheel(Sender: TObject; Shift: TShiftState;
       WheelDelta: integer; MousePos: TPoint; var Handled: boolean);
     procedure Image1Paint(Sender: TObject);
-    procedure SetScrollBar;
+    procedure SetScrollBar(ShowPosition: boolean=true);
     procedure ShowCoord(x, y: integer);
     procedure UpdObsListTime(Sender: TObject);
     procedure RefreshImage(Sender: TObject);
@@ -957,7 +957,7 @@ begin
   {$endif}
   end;
   Panel1.Color := clDefault;
-  SetScrollBar;
+  SetScrollBar(not newtime);
   if VerboseMsg then
     WriteTrace('Chart ' + sc.cfgsc.chartname + ': Refresh end');
 end;
@@ -1050,7 +1050,7 @@ begin
   Refresh(True, False);
 end;
 
-procedure Tf_chart.SetScrollBar;
+procedure Tf_chart.SetScrollBar(ShowPosition: boolean=true);
 var
   i: integer;
 begin
@@ -1090,7 +1090,7 @@ begin
         HorScrollBar.SmallChange := i;
         HorScrollBar.LargeChange := 8 * HorScrollBar.SmallChange;
         HorScrollBar.PageSize := HorScrollBar.LargeChange;
-        ShowCoord(Image1.Width div 2, Image1.Height div 2);
+        if ShowPosition then ShowCoord(Image1.Width div 2, Image1.Height div 2);
       end;
   finally
     lockscrollbar := False;
