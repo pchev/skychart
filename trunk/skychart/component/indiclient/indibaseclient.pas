@@ -598,9 +598,9 @@ end;
 procedure TIndiBaseClient.ProcessDataThread(s: TMemoryStream);
 begin
   if not terminated then
-  begin
-    Application.QueueAsyncCall(@ProcessDataAsync, PtrInt(s));
-  end;
+    Application.QueueAsyncCall(@ProcessDataAsync, PtrInt(s))
+  else
+    s.Free;
 end;
 
 procedure TIndiBaseClient.ProcessDataAsync(Data: PtrInt);
@@ -1068,8 +1068,11 @@ end;
 
 procedure TIndiBaseClient.ASyncNumberEvent(Data: PtrInt);
 begin
+try
   if assigned(FIndiNumberEvent) then
     FIndiNumberEvent(INumberVectorProperty(Data));
+except
+end;
 end;
 
 procedure TIndiBaseClient.IndiTextEvent(tvp: ITextVectorProperty);
@@ -1079,8 +1082,11 @@ end;
 
 procedure TIndiBaseClient.ASyncTextEvent(Data: PtrInt);
 begin
+try
   if assigned(FIndiTextEvent) then
     FIndiTextEvent(ITextVectorProperty(Data));
+except
+end;
 end;
 
 procedure TIndiBaseClient.IndiSwitchEvent(svp: ISwitchVectorProperty);
@@ -1090,8 +1096,11 @@ end;
 
 procedure TIndiBaseClient.ASyncSwitchEvent(Data: PtrInt);
 begin
+try
   if assigned(FIndiSwitchEvent) then
     FIndiSwitchEvent(ISwitchVectorProperty(Data));
+except
+end;
 end;
 
 procedure TIndiBaseClient.IndiLightEvent(lvp: ILightVectorProperty);
@@ -1101,8 +1110,11 @@ end;
 
 procedure TIndiBaseClient.ASyncLightEvent(Data: PtrInt);
 begin
+try
   if assigned(FIndiLightEvent) then
     FIndiLightEvent(ILightVectorProperty(Data));
+except
+end;
 end;
 
 procedure TIndiBaseClient.IndiBlobEvent(bp: IBLOB);
