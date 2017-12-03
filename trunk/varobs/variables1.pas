@@ -884,8 +884,7 @@ begin
   end;
   defqlurl := 'http://www.aavso.org/cgi-bin/newql.pl?name=$star&output=votable';
   defafoevurl := 'ftp://cdsarc.u-strasbg.fr/pub/afoev/';
-  defaavsocharturl :=
-    'http://www.aavso.org/vsp/chart?name=$star&charttitle=&chartcomment=&fov=$fov&maglimit=$mag&north=$north&east=$east&othervars=all';
+  defaavsocharturl :='https://www.aavso.org/apps/vsp/chart/?fov=$fov&star=$star&orientation=visual&maglimit=$mag&resolution=150&north=$north&east=$east&type=chart';
   defwebobsurl := 'http://www.aavso.org/webobs';
   aavsourl := 'http://www.aavso.org';
   varobsurl := 'http://www.ap-i.net/skychart';
@@ -921,7 +920,7 @@ begin
     OptForm.qlurl.Text := ReadString(section, 'quicklookurl', defqlurl);
     OptForm.afoevurl.Text := ReadString(section, 'afoevurl', defafoevurl);
     buf := ReadString(section, 'charturl', defaavsocharturl);
-    if pos('mira', buf) > 0 then
+    if pos('charttitle', buf) > 0 then
       buf := defaavsocharturl;
     OptForm.charturl.Text := buf;
     buf := ReadString(section, 'webobsurl', defwebobsurl);
