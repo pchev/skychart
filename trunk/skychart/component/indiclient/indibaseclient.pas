@@ -49,27 +49,6 @@ type
     property Sock: TTCPBlockSocket read FSock;
   end;
 
-  TDataBuffer = class(TObject)
-  public
-    dataptr: PtrInt;
-  end;
-
-  TProcessDataProc = procedure(s: TMemoryStream) of object;
-
-  TProcessData = class(TThread)
-  private
-    dataqueue: TObjectList;
-    FProcessData: TProcessDataProc;
-    function getCount: integer;
-  public
-    constructor Create;
-    destructor Destroy; override;
-    procedure Add(Data: TMemoryStream);
-    procedure Execute; override;
-    property Count: integer read getCount;
-    property onProcessData: TProcessDataProc read FProcessData write FProcessData;
-  end;
-
   TIndiBaseClient = class(TThread)
   private
     FinitProps: boolean;
@@ -100,7 +79,6 @@ type
     {$ifdef withCriticalsection}
     SendCriticalSection: TRTLCriticalSection;
     {$endif}
-    FProcessData: TProcessData;
     procedure IndiDeviceEvent(dp: Basedevice);
     procedure IndiDeleteDeviceEvent(dp: Basedevice);
     procedure IndiMessageEvent(mp: IMessage);
@@ -227,66 +205,6 @@ begin
   Result := FSock.GetErrorDesc(FSock.LastError);
 end;
 
-///////////////////////  TProcessData //////////////////////////
-
-constructor TProcessData.Create;
-begin
-  inherited Create(False);
-  FreeOnTerminate := True;
-  dataqueue := TObjectList.Create;
-end;
-
-destructor TProcessData.Destroy;
-begin
-  dataqueue.Free;
-  {$ifndef mswindows}
-  inherited Destroy;
-  {$endif}
-end;
-
-procedure TProcessData.Add(Data: TMemoryStream);
-var
-  buf: TDataBuffer;
-begin
-try
-  buf := TDataBuffer.Create;
-  buf.dataptr := PtrInt(Data);
-  try
-    dataqueue.Add(buf);
-  finally
-  end;
-except
-end;
-end;
-
-function TProcessData.getCount: integer;
-begin
-  Result := dataqueue.Count;
-end;
-
-procedure TProcessData.Execute;
-var
-  s: TMemoryStream;
-begin
-  while not Terminated do
-  begin
-    sleep(100);
-    while dataqueue.Count > 0 do
-    begin
-      try
-        s:=TMemoryStream.Create;
-        s.Position:=0;
-        TMemoryStream(TDataBuffer(dataqueue.Items[0]).dataptr).Position:=0;
-        s.CopyFrom(TMemoryStream(TDataBuffer(dataqueue.Items[0]).dataptr),TMemoryStream(TDataBuffer(dataqueue.Items[0]).dataptr).Size);
-        TMemoryStream(TDataBuffer(dataqueue.Items[0]).dataptr).Free;
-        dataqueue.Delete(0);
-        FProcessData(s);
-      except
-      end;
-    end;
-  end;
-end;
-
 ///////////////////////  TIndiBaseClient //////////////////////////
 
 constructor TIndiBaseClient.Create;
@@ -310,15 +228,12 @@ begin
   Ftrace := False;  // for debuging only
   Fdevices := TObjectList.Create;
   FwatchDevices := TStringList.Create;
-  FProcessData := TProcessData.Create;
-  FProcessData.onProcessData := @ProcessDataThread;
 end;
 
 destructor TIndiBaseClient.Destroy;
 begin
   if Ftrace then
     writeln('TIndiBaseClient.Destroy');
-  FProcessData.Terminate;
   Fdevices.Free;
   FwatchDevices.Free;
 {$ifndef mswindows}
@@ -514,7 +429,7 @@ begin
                     StringReplace(copy(tbuf, 1, tl), cr, '', [rfReplaceAll]),
                     lf, '', [rfReplaceAll]) + '...');
                 end;
-                FProcessData.Add(s);
+                ProcessDataThread(s);
                 s := TMemoryStream.Create;
                 s.WriteBuffer('<INDIMSG>', 9);
               end;
@@ -680,6 +595,14 @@ begin
     end;
 end;
 
+procedure TIndiBaseClient.ProcessDataThread(s: TMemoryStream);
+begin
+  if not terminated then
+  begin
+    Application.QueueAsyncCall(@ProcessDataAsync, PtrInt(s));
+  end;
+end;
+
 procedure TIndiBaseClient.ProcessDataAsync(Data: PtrInt);
 var mp:IMessage;
 begin
@@ -696,15 +619,6 @@ begin
     else
       TMemoryStream(Data).Free;
   except
-  end;
-end;
-
-
-procedure TIndiBaseClient.ProcessDataThread(s: TMemoryStream);
-begin
-  if not terminated then
-  begin
-    Application.QueueAsyncCall(@ProcessDataAsync, PtrInt(s));
   end;
 end;
 
