@@ -132,7 +132,6 @@ type
     FGetObjectCoord: TGetObjectCoord;
     FObjLabelChange: TNotifyEvent;
     FObjLabels, FEmptyObjLabels: TStringList;
-    tour: Tf_tour;
     function GetObjcount: integer;
     function GetRowcount: integer;
     procedure SetMeridianSide(Value: integer);
@@ -147,6 +146,7 @@ type
     { public declarations }
     cfgsc: Tconf_skychart;
     planet: Tplanet;
+    tour: Tf_tour;
     procedure SetLang;
     procedure Newlist;
     procedure Add(obj: string; ra, de: double);

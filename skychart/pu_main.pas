@@ -10528,7 +10528,7 @@ end;
 
 procedure Tf_main.ImageSetFocus(Sender: TObject);
 begin
-  if ActiveControl <> quicksearch then
+  if (ActiveControl<>quicksearch) and ((f_obslist.tour=nil)or(not f_obslist.tour.Visible)) then
   begin // do not steal focus when typing in the quicksearch
     if VerboseMsg then
       WriteTrace('ImageSetFocus');
@@ -10890,6 +10890,7 @@ procedure Tf_main.SetChildFocus(Sender: TObject);
 var
   i: integer;
 begin
+if ((f_obslist.tour=nil)or(not f_obslist.tour.Visible)) then begin
   for i := 0 to MultiFrame1.ChildCount - 1 do
     if MultiFrame1.Childs[i].DockedObject = Sender then
     begin
@@ -10901,7 +10902,7 @@ begin
       ImageSetFocus(Sender);
     end;
 end;
-
+end;
 
 procedure Tf_main.MaximizeExecute(Sender: TObject);
 begin
