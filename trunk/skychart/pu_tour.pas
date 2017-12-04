@@ -49,10 +49,13 @@ type
     procedure BtnNextClick(Sender: TObject);
     procedure BtnPrevClick(Sender: TObject);
     procedure BtnSlewClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
+    procedure FormDeactivate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
   private
     { private declarations }
+    FClosing: boolean;
     FFirst, FLast, Fprev, Fnext, Fslew: TNotifyEvent;
     procedure SetLang;
   public
@@ -88,6 +91,7 @@ procedure Tf_tour.FormCreate(Sender: TObject);
 begin
   ScaleDPI(Self);
   SetLang;
+  FClosing:=false;
 end;
 
 procedure Tf_tour.BtnFirstClick(Sender: TObject);
@@ -135,6 +139,12 @@ begin
     speak(rsSlew);
 end;
 
+procedure Tf_tour.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+begin
+  CanClose:=true;
+  FClosing:=true;
+end;
+
 procedure Tf_tour.FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
 begin
   case Key of
@@ -160,6 +170,15 @@ begin
         BtnSlewClick(nil);
     end;
     VK_TAB: BtnSlewClick(nil);
+  end;
+end;
+
+procedure Tf_tour.FormDeactivate(Sender: TObject);
+begin
+  if not FClosing then begin
+   // try to keep form focused to react to keyboard command
+   SetFocus;
+   BringToFront;
   end;
 end;
 

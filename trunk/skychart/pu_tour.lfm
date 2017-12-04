@@ -1,31 +1,33 @@
 object f_tour: Tf_tour
   Left = 40
-  Height = 167
+  Height = 171
   Top = 106
   Width = 319
   ActiveControl = BtnPrev
   Caption = 'f_tour'
-  ClientHeight = 167
+  ClientHeight = 171
   ClientWidth = 319
   FormStyle = fsSystemStayOnTop
   KeyPreview = True
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
+  OnDeactivate = FormDeactivate
   OnKeyDown = FormKeyDown
-  LCLVersion = '1.6.2.0'
+  ShowInTaskBar = stNever
   Visible = False
   object TourName: TLabel
     Left = 16
-    Height = 15
+    Height = 19
     Top = 8
-    Width = 65
+    Width = 64
     Caption = 'TourName'
     ParentColor = False
   end
   object ObjectName: TLabel
     Left = 16
-    Height = 15
+    Height = 19
     Top = 32
-    Width = 80
+    Width = 75
     Caption = 'ObjectName'
     ParentColor = False
   end
@@ -104,9 +106,9 @@ object f_tour: Tf_tour
   end
   object Sound: TCheckBox
     Left = 16
-    Height = 23
+    Height = 21
     Top = 56
-    Width = 66
+    Width = 63
     Caption = 'Sound'
     Checked = True
     State = cbChecked
