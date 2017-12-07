@@ -30,7 +30,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   rm -rf $basedir
 
 # make i386 Mac version
-  ./configure $configopt prefix=$builddir target=i386-darwin,i386
+  ./configure $configopt prefix=$builddir target=i386-darwin,x86_64-darwin
   if [[ $? -ne 0 ]]; then exit 1;fi
   make CPU_TARGET=i386 clean
   fpcopts="-CX -XX -Xs -Cs800000" make CPU_TARGET=i386
