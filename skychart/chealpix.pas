@@ -6,7 +6,8 @@ interface
     External_library='libchealpix.dll';
     {$else}
       {$IFDEF darwin}
-      External_library='libchealpix.dylib';
+      External_library='libchealpix';
+      {$linklib libchealpix}
       {$else}
       External_library='libchealpix.so.0';
       {$ENDIF}
