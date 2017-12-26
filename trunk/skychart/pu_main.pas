@@ -2551,6 +2551,20 @@ begin
         mtError, [mbAbort], 0);
       Halt;
     end;
+    step := 'Load libchealpix';
+    if VerboseMsg then
+      WriteTrace(step);
+    chealpix := LoadLibrary(libchealpix);
+    if chealpix <> 0 then
+    begin
+      nside2npix := Tnside2npix(GetProcedureAddress(chealpix, 'nside2npix'));
+      ang2pix_nest64 := Tang2pix_nest64(GetProcedureAddress(chealpix, 'ang2pix_nest64'));
+      chealpixok := True;
+    end
+    else begin
+      chealpixok := False;
+      WriteTrace('Failed to load libchealpix, GAIA catalog is disabled.');
+    end;
     step := 'Multiframe border';
     if VerboseMsg then
       WriteTrace(step);

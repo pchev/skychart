@@ -33,7 +33,7 @@ uses
   gscfits, gscunit, lbnunit, microcatunit, oclunit, pgcunit, vocat,
   sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit,
   usnobunit, wdsunit, rc3unit,
-  chealpix, libsql, passql, passqlite,
+  libsql, passql, passqlite,
   BGRABitmap, BGRABitmapTypes, Graphics,
   u_translation, u_constant, u_util, u_projection,
   SysUtils, Classes, Math, Dialogs, Forms;
@@ -5885,6 +5885,10 @@ var theta,phi,minra,maxra,minra2,maxra2,minde,maxde: double;
     i,level,dblevel,nside:integer;
     ipix,filter: Int64;
 begin
+  if not chealpixok then begin
+    result:=false;
+    exit;
+  end;
   if not GaiaInitialized then InitGaia;
   racrosszero:=false;
   minra:=ra[5]-fov;
@@ -5907,7 +5911,7 @@ begin
   if maxde>90 then maxde:=90;
                             //17/20   14/5   7/120  16/120     22/0.5
   GetGaiaMag(maxmag,dblevel);//   3      1       0       2           6
-  GetgaiaFov(fov,level);   //   1      3      -1      -1           6
+  GetgaiaFov(1.4*fov,level);   //   1      3      -1      -1           6
   if (level<dblevel) then
      dblevel:=level;         //   1      1      -1      -1           6
   if dblevel<0 then
