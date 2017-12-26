@@ -5,7 +5,11 @@ interface
     {$IFDEF mswindows}
     External_library='libchealpix.dll';
     {$else}
-    External_library='libchealpix.so.0';
+      {$IFDEF darwin}
+      External_library='libchealpix.dylib';
+      {$else}
+      External_library='libchealpix.so.0';
+      {$ENDIF}
     {$ENDIF}
 
  Type
