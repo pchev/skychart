@@ -1,0 +1,59 @@
+level	cdcmag	dbmag	fov	source_id filter
+0	9.0	8.99	58.632	576460752303423488
+1	10.0	14.99	29.316	144115188075855872
+2	11.5	16.99	14.658	36028797018963968
+3	12.7	17.99	7.329	9007199254740992
+4	14.3	18.99	3.665	2251799813685248
+5	15.7	19.99	1.832	562949953421312
+6	17.1	99999	0.916	140737488355328
+7	20.0		0.458	35184372088832
+8			0.229	8796093022208
+9			0.115	2199023255552
+10			0.057	549755813888
+11			0.029	137438953472
+12			0.014	34359738368
+
+gaiadr1_0:
+create index level0 on gaia(source_id / 576460752303423488);
+create index level1 on gaia(source_id / 144115188075855872);
+create index level2 on gaia(source_id / 36028797018963968);
+create index level3 on gaia(source_id / 9007199254740992);
+create index level4 on gaia(source_id / 2251799813685248);
+create index level5 on gaia(source_id / 562949953421312);
+create index level6 on gaia(source_id / 140737488355328);
+create index ira on gaia(ra);
+create index ide on gaia(de);
+
+gaiadr1_1:
+create index level1 on gaia(source_id / 144115188075855872);
+create index level2 on gaia(source_id / 36028797018963968);
+create index level3 on gaia(source_id / 9007199254740992);
+create index level4 on gaia(source_id / 2251799813685248);
+create index level5 on gaia(source_id / 562949953421312);
+create index level6 on gaia(source_id / 140737488355328);
+
+gaiadr1_2:
+create index level2 on gaia(source_id / 36028797018963968);
+create index level3 on gaia(source_id / 9007199254740992);
+create index level4 on gaia(source_id / 2251799813685248);
+create index level5 on gaia(source_id / 562949953421312);
+create index level6 on gaia(source_id / 140737488355328);
+
+gaiadr1_3:
+create index level3 on gaia(source_id / 9007199254740992);
+create index level4 on gaia(source_id / 2251799813685248);
+create index level5 on gaia(source_id / 562949953421312);
+create index level6 on gaia(source_id / 140737488355328);
+
+gaiadr1_4:
+create index level4 on gaia(source_id / 2251799813685248);
+create index level5 on gaia(source_id / 562949953421312);
+create index level6 on gaia(source_id / 140737488355328);
+
+gaiadr1_5:
+create index level5 on gaia(source_id / 562949953421312);
+create index level6 on gaia(source_id / 140737488355328);
+
+gaiadr1_6:
+create index level6 on gaia(source_id / 140737488355328);
+

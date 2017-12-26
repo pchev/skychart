@@ -389,7 +389,7 @@ const
   ftCom = 101;
   ftAst = 102;
   BaseStar = 1000;
-  MaxStarCatalog = 17;
+  MaxStarCatalog = 18;
   DefStar = 1001;
   sky2000 = 1002;
   tyc = 1003;
@@ -407,6 +407,7 @@ const
   vostar = 1015;
   bsc = 1016;
   usnob = 1017;
+  gaia = 1018;
   BaseVar = 2000;
   MaxVarStarCatalog = 2;
   gcvs = 2001;
