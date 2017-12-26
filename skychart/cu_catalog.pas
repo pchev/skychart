@@ -32,10 +32,15 @@ uses
   bscunit, dscat, findunit, gcatunit, gcmunit, gcvunit, gpnunit, gsccompact,
   gscfits, gscunit, lbnunit, microcatunit, oclunit, pgcunit, vocat,
   sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit,
-  usnobunit, wdsunit,
-  rc3unit, BGRABitmap, BGRABitmapTypes, Graphics,
+  usnobunit, wdsunit, rc3unit,
+  chealpix, libsql, passql, passqlite,
+  BGRABitmap, BGRABitmapTypes, Graphics,
   u_translation, u_constant, u_util, u_projection,
   SysUtils, Classes, Math, Dialogs, Forms;
+
+const
+  GaiaNdb=7;
+  GaiaMagl: array[0..GaiaNdb-1] of integer =(8,14,16,17,18,19,99);
 
 type
 
@@ -49,6 +54,13 @@ type
     FFindId: string;
     FFindRecOK: boolean;
     FFindRec: GCatrec;
+    CatFov,CatMag: double;
+    GaiaDb: array [0..GaiaNdb-1] of TSqlDB;
+    GaiaCurrentLevel,GaiaMaxLevel,GaiaCurrentRow: integer;
+    GaiaSql: string;
+    GaiaFov: array[0..6] of double;
+    GaiaInitialized: boolean;
+
   protected
     { Protected declarations }
     function InitRec(cat: integer): boolean;
@@ -141,6 +153,16 @@ type
     function CloseLinCat: boolean;
     procedure FormatGCatS(var rec: GcatRec);
     procedure FormatGCatN(var rec: GcatRec);
+    procedure InitGaia;
+    procedure ComputeGaiaFov;
+    procedure GetGaiaFov(fov:double; out level:integer);
+    procedure GetGaiaMag(mag:double; out level: integer);
+    function  InitGaiaRec: boolean;
+    function  OpenGaia(ra,de:double6; fov,maxmag: double):boolean;
+    procedure OpenGaiaWin(var ok : boolean);
+    function  GetGaia(var rec: GcatRec): boolean;
+    function  NextGaiaLevel:boolean;
+    procedure CloseGaia;
   public
     { Public declarations }
     cfgcat: Tconf_catalog;
@@ -149,7 +171,7 @@ type
     destructor Destroy; override;
     function OpenCat(c: Tconf_skychart): boolean;
     function CloseCat: boolean;
-    function OpenStar: boolean;
+    function OpenStar(fov,mag: double): boolean;
     function CloseStar: boolean;
     function ReadStar(var rec: GcatRec): boolean;
     function OpenVarStar: boolean;
@@ -249,6 +271,7 @@ begin
   cfgcat := Tconf_catalog.Create;
   cfgshr := Tconf_shared.Create;
   lockcat := False;
+  GaiaInitialized := False;
 end;
 
 destructor Tcatalog.Destroy;
@@ -330,10 +353,12 @@ end;
 
 { Stars }
 
-function Tcatalog.OpenStar: boolean;
+function Tcatalog.OpenStar(fov,mag: double): boolean;
 begin
   numcat := MaxStarCatalog;
   curcat := BaseStar + 1;
+  CatFov:=fov;
+  CatMag:=mag;
 
   while ((curcat - BaseStar) <= numcat) and (not cfgcat.starcaton[curcat - BaseStar]) do
     Inc(curcat);
@@ -390,6 +415,7 @@ begin
       end;
 
     bsc: Result := GetBSC(rec);
+    gaia: Result := GetGaia(rec);
 
   end;
 
@@ -531,6 +557,10 @@ begin
         SetBscPath(cfgcat.starcatpath[bsc - BaseStar]);
         OpenBSCwin(Result);
       end;
+    gaia:
+      begin
+        OpenGaiaWin(Result);
+      end
       else
         Result := False;
   end;
@@ -558,6 +588,7 @@ begin
     gcstar: CloseGcat;
     vostar: CloseVOCat;
     bsc: CloseBSC;
+    gaia: CloseGaia;
   else
     Result := False;
   end;
@@ -5753,6 +5784,210 @@ begin
     end;
   end;
   Result := txt;
+end;
+
+//////////////////////// GAIA SQL catalog /////////////////////////////////
+
+procedure Tcatalog.ComputeGaiaFov;
+var i: integer;
+    nside: LongInt;
+    pixarea,pixwidth: double;
+begin
+  for i:=0 to 6 do begin
+    nside:=round(2**i);
+    pixarea:=4*pi/nside2npix(nside);
+    pixwidth:=sqrt(pixarea);
+    pixwidth:=rad2deg*pixwidth;
+    GaiaFov[i]:=pixwidth;
+  end;
+end;
+
+procedure Tcatalog.GetGaiaFov(fov:double; out level:integer);
+var i: integer;
+begin
+  level:=-1;
+  for i:=0 to 6 do begin
+    if fov<GaiaFov[i] then level:=i;
+  end;
+end;
+
+procedure Tcatalog.GetGaiaMag(mag:double; out level: integer);
+var i: integer;
+begin
+  level:=6;
+  for i:=GaiaNdb-1 downto 0 do begin
+    if trunc(mag)<=GaiaMagl[i] then level:=i;
+  end;
+end;
+
+procedure Tcatalog.InitGaia;
+var i: integer;
+begin
+  ComputeGaiaFov;
+  for i:=0 to GaiaNdb-1 do begin
+    GaiaDb[i] := TLiteDB.Create(nil);
+    GaiaDb[i].Use('/data/work/cat/gaia-dr1/gaiadr1_'+inttostr(i));
+  end;
+  GaiaInitialized:=True;
+end;
+
+function Tcatalog.InitGaiaRec: boolean;
+begin
+  fillchar(EmptyRec, sizeof(GcatRec), 0);
+  Result := True;
+  EmptyRec.options.flabel := StarLabel;
+  EmptyRec.options.ShortName := 'GAIA';
+  EmptyRec.options.LongName := 'GAIA DR1 Catalog';
+  EmptyRec.options.rectype := rtStar;
+  EmptyRec.options.Equinox := 2000;
+  EmptyRec.options.EquinoxJD := jd2000;
+  EmptyRec.options.Epoch := 2000;
+  EmptyRec.options.MagMax := 21;
+  EmptyRec.options.UsePrefix := 1;
+  Emptyrec.star.valid[vsId] := True;
+  Emptyrec.star.valid[vsMagv] := True;
+  Emptyrec.star.valid[vsPmra] := True;
+  Emptyrec.star.valid[vsPmdec] := True;
+  Emptyrec.star.valid[vsPx] := True;
+end;
+
+procedure Tcatalog.OpenGaiaWin(var ok : boolean);
+var
+   i,xx,yy : integer;
+   ar,de : double6;
+begin
+  xx:=0; yy:=0;
+  skylibcat.GetADxy(xx,yy,ar[1],de[1]);
+  ar[1]:=ar[1]*15;
+  skylibcat.precession(JDChart,JDCatalog,ar[1],de[1]);
+  xx:=xmax; yy:=0;
+  skylibcat.GetADxy(xx,yy,ar[2],de[2]);
+  ar[2]:=ar[2]*15;
+  skylibcat.precession(JDChart,JDCatalog,ar[2],de[2]);
+  xx:=xmax; yy:=ymax;
+  skylibcat.GetADxy(xx,yy,ar[3],de[3]);
+  ar[3]:=ar[3]*15;
+  skylibcat.precession(JDChart,JDCatalog,ar[3],de[3]);
+  xx:=0; yy:=ymax;
+  skylibcat.GetADxy(xx,yy,ar[4],de[4]);
+  ar[4]:=ar[4]*15;
+  skylibcat.precession(JDChart,JDCatalog,ar[4],de[4]);
+  xx:=xmax div 2; yy:=ymax div 2;
+  skylibcat.GetADxy(xx,yy,ar[5],de[5]);
+  ar[5]:=ar[5]*15;
+  skylibcat.precession(JDChart,JDCatalog,ar[5],de[5]);
+  ok:=OpenGaia(ar,de,rad2deg*CatFov,CatMag);
+end;
+
+function Tcatalog.OpenGaia(ra,de:double6; fov,maxmag: double):boolean;
+var theta,phi,minra,maxra,minra2,maxra2,minde,maxde: double;
+    racrosszero:boolean;
+    i,level,dblevel,nside:integer;
+    ipix,filter: Int64;
+begin
+  if not GaiaInitialized then InitGaia;
+  racrosszero:=false;
+  minra:=ra[5]-fov;
+  if minra<0 then begin
+    racrosszero:=true;
+    minra2:=360+minra;
+    maxra2:=360;
+    minra:=0;
+  end;
+  maxra:=ra[5]+fov;
+  if maxra>360 then begin
+    racrosszero:=true;
+    minra2:=0;
+    maxra2:=maxra-360;
+    maxra:=360;
+  end;
+  minde:=de[5]-fov;
+  if minde<-90 then minde:=-90;
+  maxde:=de[5]+fov;
+  if maxde>90 then maxde:=90;
+                            //17/20   14/5   7/120  16/120     22/0.5
+  GetGaiaMag(maxmag,dblevel);//   3      1       0       2           6
+  GetgaiaFov(fov,level);   //   1      3      -1      -1           6
+  if (level<dblevel) then
+     dblevel:=level;         //   1      1      -1      -1           6
+  if dblevel<0 then
+     dblevel:=0;             //   1      1       0       0           6
+  nside:=round(2**level);
+  GaiaSql:='select source_id,ra,de,phot_g_mean_mag,parallax,pmra,pmdec from gaia';
+  if level>=0 then begin
+    ipix:=0;
+    filter:=round((2**35)*(4**(12 - level)));
+    GaiaSql:=GaiaSql+' where (source_id / '+inttostr(filter)+') in (';
+    for i:=1 to 5 do begin
+      theta:=deg2rad*(90-de[i]);
+      phi:=deg2rad*ra[i];
+      ang2pix_nest64(nside,theta,phi,ipix);
+      GaiaSql:=GaiaSql+inttostr(ipix);
+      if i<5 then GaiaSql:=GaiaSql+',';
+    end;
+    GaiaSql:=GaiaSql+') and phot_g_mean_mag<'+formatfloat('0.00',maxmag);
+  end
+  else begin
+    GaiaSql:=GaiaSql+' '+
+         'where phot_g_mean_mag<'+formatfloat('0.00',maxmag);
+  end;
+  if racrosszero then begin
+    GaiaSql:=GaiaSql+' '+
+         'and ('+
+         '(ra>'+formatfloat('0.00',minra)+' and ra<'+formatfloat('0.00',maxra)+') or '+
+         '(ra>'+formatfloat('0.00',minra2)+' and ra<'+formatfloat('0.00',maxra2)+')'+
+         ') '+
+         'and de>'+formatfloat('0.00',minde)+' and de<'+formatfloat('0.00',maxde);
+  end
+  else begin
+    GaiaSql:=GaiaSql+' '+
+         'and ra>'+formatfloat('0.00',minra)+' and ra<'+formatfloat('0.00',maxra)+' '+
+         'and de>'+formatfloat('0.00',minde)+' and de<'+formatfloat('0.00',maxde);
+  end;
+  GaiaSql:=GaiaSql+' order by phot_g_mean_mag asc';
+  GaiaCurrentLevel:=-1;
+  GaiaMaxLevel:=dblevel;
+  InitGaiaRec;
+  result:=NextGaiaLevel;
+end;
+
+function  Tcatalog.GetGaia(var rec: GcatRec): boolean;
+begin
+  // source_id,ra,de,phot_g_mean_mag,parallax,pmra,pmdec
+  rec:=EmptyRec;
+  inc(GaiaCurrentRow);
+  if GaiaCurrentRow<GaiaDb[GaiaCurrentLevel].RowCount then begin
+    rec.star.id:=GaiaDb[GaiaCurrentLevel].Results[GaiaCurrentRow][0];
+    rec.ra:=deg2rad*StrToFloat(GaiaDb[GaiaCurrentLevel].Results[GaiaCurrentRow][1]);
+    rec.dec:=deg2rad*StrToFloat(GaiaDb[GaiaCurrentLevel].Results[GaiaCurrentRow][2]);
+    rec.star.magv:=StrToFloatDef(GaiaDb[GaiaCurrentLevel].Results[GaiaCurrentRow][3],99);
+    rec.star.px:=StrToFloatDef(GaiaDb[GaiaCurrentLevel].Results[GaiaCurrentRow][4],0)/1000;
+    rec.star.pmra:=StrToFloatDef(GaiaDb[GaiaCurrentLevel].Results[GaiaCurrentRow][5],0)/1000;
+    rec.star.pmdec:=StrToFloatDef(GaiaDb[GaiaCurrentLevel].Results[GaiaCurrentRow][6],0)/1000;
+    result:=true;
+  end
+  else begin
+    result:=NextGaiaLevel;
+    if result then
+       result:=GetGaia(rec);
+  end;
+end;
+
+function  Tcatalog.NextGaiaLevel:boolean;
+begin
+  result:=False;
+  Inc(GaiaCurrentLevel);
+  if GaiaCurrentLevel>GaiaMaxLevel then exit;
+  GaiaDb[GaiaCurrentLevel].Query(GaiaSql);
+  GaiaCurrentRow:=-1;
+  result:=(GaiaDb[GaiaCurrentLevel].RowCount>0);
+end;
+
+procedure Tcatalog.CloseGaia;
+begin
+ GaiaCurrentLevel:=-1;
+ GaiaMaxLevel:=-1;
+ GaiaCurrentRow:=-1;
 end;
 
 end.

@@ -6177,6 +6177,10 @@ begin
     catalog.cfgcat.starcatpath[DefStar - BaseStar] + PathDelim + 'xhip';
   catalog.cfgcat.starcatdef[DefStar - BaseStar] := True;
   catalog.cfgcat.starcatfield[DefStar - BaseStar, 2] := 10;
+  catalog.cfgcat.starcatpath[gaia - BaseStar] :=
+    catalog.cfgcat.starcatpath[gaia - BaseStar] + PathDelim + 'gaia';
+  catalog.cfgcat.starcatdef[gaia - BaseStar] := False;
+  catalog.cfgcat.starcatfield[gaia - BaseStar, 2] := 10;
   catalog.cfgcat.starcatdef[vostar - BaseStar] := False;
   catalog.cfgcat.starcatfield[vostar - BaseStar, 2] := 10;
   catalog.cfgcat.starcatpath[bsc - BaseStar] :=

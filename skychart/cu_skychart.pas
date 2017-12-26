@@ -570,6 +570,7 @@ begin
   InitStarC(microcat, 16);
   InitStarC(usnoa, 18);
   InitStarC(usnob, 21);
+  InitStarC(gaia, 21);
   InitStarC(vostar, vostar_magmax);
   { activate the other catalog }
   InitVarC(gcvs);
@@ -1376,7 +1377,7 @@ begin
       First := False;
     end;
     timelimit := now + 10 / secday;
-    if Fcatalog.OpenStar then
+    if Fcatalog.OpenStar(cfgsc.fov,catalog.cfgcat.StarMagMax) then
       while Fcatalog.readstar(rec) do
       begin
         if now > timelimit then
