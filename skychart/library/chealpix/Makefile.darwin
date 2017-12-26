@@ -1,0 +1,17 @@
+##############################################################################
+
+CFLAGS= -w -fPIC -m32 
+SO_Name       = libchealpix.dylib
+LIBFLAGS      = -shared -static-libgcc -Wl,-soname,$(SO_Name)  -lm -mmacosx-version-min=10.10
+
+OBJS =	chealpix.o
+
+all: $(SO_Name)
+
+$(SO_Name): $(OBJS)
+	$(CC) $(CFLAGS) $(LIBFLAGS) -o $@ $(OBJS)
+
+chealpix.o:	chealpix.h chealpix.c
+
+clean:
+	rm -f *.a *.o $(SO_Name)
