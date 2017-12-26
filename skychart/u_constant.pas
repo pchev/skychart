@@ -1209,21 +1209,25 @@ const
   lib404 = 'libpasplan404.so.1';
   libcdcwcs = 'libpaswcs.so.1';
   libz = 'libz.so.1';
+  libchealpix = 'libchealpix.so.0';
 {$endif}
 {$ifdef freebsd}
   lib404 = 'libplan404.so';
   libcdcwcs = 'libcdcwcs.so';
   libz = 'libz.so.1';
+  libchealpix = 'libchealpix.so.0';
 {$endif}
 {$ifdef darwin}
   lib404 = 'libplan404.dylib';
   libcdcwcs = 'libcdcwcs.dylib';
   libz = 'libz.dylib';
+  libchealpix = 'libchealpix.dylib';
 {$endif}
 {$ifdef mswindows}
   lib404 = 'libplan404.dll';
   libcdcwcs = 'libcdcwcs.dll';
   libz = 'zlib1.dll';
+  libchealpix = 'libchealpix.dll';
 {$endif}
 
 // libplan404
@@ -1287,6 +1291,16 @@ var
   gzclose: Tgzclose;
   zlibok: boolean;
   zlib: TLibHandle;
+
+// libchealpix
+ type
+   Tnside2npix = function(nside:longint):longint;cdecl;
+   Tang2pix_nest64 = procedure(nside:int64; theta:double; phi:double; var ipix:int64);cdecl;
+var
+   nside2npix: Tnside2npix;
+   ang2pix_nest64: Tang2pix_nest64;
+   chealpixok: boolean;
+   chealpix: TLibHandle;
 
 // Encoders
 type
