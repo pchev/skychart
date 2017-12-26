@@ -1,8 +1,8 @@
 ##############################################################################
 
-CFLAGS= -w -fPIC -m32 
+CFLAGS= -O3 -fPIC -m32 
 SO_Name       = libchealpix.dylib
-LIBFLAGS      = -shared -static-libgcc -Wl,-soname,$(SO_Name)  -lm -mmacosx-version-min=10.10
+LIBFLAGS      = -m32 -Wl,-single_module -dynamiclib  -lc -lm -mmacosx-version-min=10.10
 
 OBJS =	chealpix.o
 
