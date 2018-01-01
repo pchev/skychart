@@ -335,13 +335,21 @@ begin
   numcat := MaxStarCatalog;
   curcat := BaseStar + 1;
 
-  while ((curcat - BaseStar) <= numcat) and (not cfgcat.starcaton[curcat - BaseStar]) do
-    Inc(curcat);
+  while true do begin
+    while ((curcat - BaseStar) <= numcat) and (not cfgcat.starcaton[curcat - BaseStar]) do
+      Inc(curcat);
 
-  if ((curcat - BaseStar) > numcat) then
-    Result := False
-  else
-    Result := OpenStarCat;
+    if ((curcat - BaseStar) > numcat) then
+      Result := False
+    else begin
+      Result := OpenStarCat;
+      if not Result then begin
+         Inc(curcat);  // try next catalog
+         continue;
+      end;
+    end;
+    break;
+  end;
 end;
 
 function Tcatalog.CloseStar: boolean;
