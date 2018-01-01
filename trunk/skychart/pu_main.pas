@@ -2551,20 +2551,6 @@ begin
         mtError, [mbAbort], 0);
       Halt;
     end;
-    step := 'Load libchealpix';
-    if VerboseMsg then
-      WriteTrace(step);
-    chealpix := LoadLibrary(libchealpix);
-    if chealpix <> 0 then
-    begin
-      nside2npix := Tnside2npix(GetProcedureAddress(chealpix, 'nside2npix'));
-      ang2pix_nest64 := Tang2pix_nest64(GetProcedureAddress(chealpix, 'ang2pix_nest64'));
-      chealpixok := True;
-    end
-    else begin
-      chealpixok := False;
-      WriteTrace('Failed to load libchealpix, GAIA catalog is disabled.');
-    end;
     step := 'Multiframe border';
     if VerboseMsg then
       WriteTrace(step);
@@ -6191,10 +6177,6 @@ begin
     catalog.cfgcat.starcatpath[DefStar - BaseStar] + PathDelim + 'xhip';
   catalog.cfgcat.starcatdef[DefStar - BaseStar] := True;
   catalog.cfgcat.starcatfield[DefStar - BaseStar, 2] := 10;
-  catalog.cfgcat.starcatpath[gaia - BaseStar] :=
-    catalog.cfgcat.starcatpath[gaia - BaseStar] + PathDelim + 'gaia';
-  catalog.cfgcat.starcatdef[gaia - BaseStar] := False;
-  catalog.cfgcat.starcatfield[gaia - BaseStar, 2] := 10;
   catalog.cfgcat.starcatdef[vostar - BaseStar] := False;
   catalog.cfgcat.starcatfield[vostar - BaseStar, 2] := 10;
   catalog.cfgcat.starcatpath[bsc - BaseStar] :=
