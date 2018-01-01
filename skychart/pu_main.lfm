@@ -7,6 +7,7 @@ object f_main: Tf_main
   Caption = 'Cartes du Ciel'
   ClientHeight = 550
   ClientWidth = 876
+  DesignTimePPI = 95
   KeyPreview = True
   Menu = MainMenu1
   OnActivate = FormActivate
@@ -17,6 +18,7 @@ object f_main: Tf_main
   OnResize = FormResize
   OnShow = FormShow
   ParentFont = True
+  LCLVersion = '1.8.0.6'
   Visible = False
   object PanelTop: TPanel
     Left = 0
@@ -88,7 +90,6 @@ object f_main: Tf_main
         object Divider_ToolBarMain_end: TToolButton
           Left = 1
           Height = 24
-          Width = 5
           Top = 2
           Caption = 'Divider_ToolBarMain_end'
           Style = tbsDivider
@@ -161,12 +162,12 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 436
+    Height = 407
     Top = 80
     Width = 28
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 436
+    ClientHeight = 407
     ClientWidth = 28
     Font.Height = 10
     FullRepaint = False
@@ -174,7 +175,7 @@ object f_main: Tf_main
     TabOrder = 1
     object ToolBarLeft: TToolBar
       Left = 0
-      Height = 436
+      Height = 407
       Top = 0
       Width = 28
       Align = alClient
@@ -193,18 +194,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 850
-    Height = 436
+    Height = 407
     Top = 80
     Width = 26
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 436
+    ClientHeight = 407
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 3
     object ToolBarRight: TToolBar
       Left = 0
-      Height = 436
+      Height = 407
       Top = 0
       Width = 26
       Align = alClient
@@ -230,7 +231,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 516
+    Top = 487
     Width = 876
     Align = alBottom
     BevelOuter = bvNone
@@ -3306,7 +3307,7 @@ object f_main: Tf_main
   end
   object ScriptPanel: TPanel
     Left = 28
-    Height = 436
+    Height = 407
     Top = 80
     Width = 276
     Align = alLeft
@@ -3316,7 +3317,7 @@ object f_main: Tf_main
   end
   object Splitter1: TSplitter
     Left = 304
-    Height = 436
+    Height = 407
     Top = 80
     Width = 5
     ResizeStyle = rsLine

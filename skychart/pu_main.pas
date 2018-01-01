@@ -2559,6 +2559,7 @@ begin
     begin
       nside2npix := Tnside2npix(GetProcedureAddress(chealpix, 'nside2npix'));
       ang2pix_nest64 := Tang2pix_nest64(GetProcedureAddress(chealpix, 'ang2pix_nest64'));
+      pix2ang_nest64 := Tpix2ang_nest64(GetProcedureAddress(chealpix, 'pix2ang_nest64'));
       chealpixok := True;
     end
     else begin
