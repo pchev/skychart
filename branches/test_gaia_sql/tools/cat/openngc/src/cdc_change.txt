@@ -1,0 +1,49 @@
+NGC:
+
+col S (messier)
+- label  M   
+- format #
+
+col T (ngc)
+-format #
+- replace ^0 ""
+- replace ,0 ,
+
+col U (ic)
+- format #
+- replace ^0 ""
+
+col A (name)
+-replace "IC" "IC "
+-replace "IC 0" "IC " x3
+-replace "NGC" "NGC "
+-replace "NGC 0" "NGC " x3
+
+enregistrer sous NGC.csv
+- largeur colonne fixe
+
+Catgen
+- shortname ONGC
+- Other -> unknown
+- max mag = 20
+- label7 D -> Dim
+- label8 D -> Dim
+- label15 Messier -> M
+- outputdir = ../
+
+
+Addendum:
+
+col S (messier)
+- label  M   
+- format #
+
+enregistrer sous addendum.csv
+- largeur colonne fixe
+
+Catgen
+- copy from openNGV.prj
+- Input catalog files: addendum.csv
+- add type DrkN
+- Check: Append to existing catalog
+

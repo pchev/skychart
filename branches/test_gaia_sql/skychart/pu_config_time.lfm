@@ -1,0 +1,132 @@
+object f_configtime: Tf_configtime
+  Left = 504
+  Height = 583
+  Top = 124
+  Width = 496
+  ActiveControl = Button7
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Date / Time'
+  ClientHeight = 583
+  ClientWidth = 496
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  ParentFont = True
+  LCLVersion = '1.6.0.2'
+  Visible = False
+  object Panel1: TPanel
+    Left = 0
+    Height = 54
+    Top = 529
+    Width = 496
+    Align = alBottom
+    ClientHeight = 54
+    ClientWidth = 496
+    TabOrder = 0
+    object Button1: TButton
+      Left = 206
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 1
+    end
+    object Button2: TButton
+      Left = 302
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Apply'
+      OnClick = Button2Click
+      TabOrder = 2
+    end
+    object Button3: TButton
+      Left = 398
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 3
+    end
+    object Button7: TButton
+      Left = 110
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = 'Help'
+      OnClick = Button7Click
+      TabOrder = 0
+    end
+  end
+  inline f_config_time1: Tf_config_time
+    Height = 529
+    Width = 496
+    Align = alClient
+    ClientHeight = 529
+    ClientWidth = 496
+    TabOrder = 1
+    DesignLeft = 174
+    DesignTop = 131
+    inherited MainPanel: TPanel
+      Height = 529
+      Width = 496
+      ClientHeight = 529
+      ClientWidth = 496
+      inherited PageControl1: TPageControl
+        Height = 529
+        Width = 496
+        ActivePage = nil
+        TabIndex = -1
+        inherited Page1: TTabSheet
+          ClientHeight = 523
+          ClientWidth = 490
+          inherited Panel9: TPanel
+            inherited ADBC: TRadioGroup
+              ClientHeight = 35
+            end
+          end
+        end
+        inherited Page2: TTabSheet
+          ClientHeight = 523
+          ClientWidth = 490
+          inherited SimObj: TCheckListBox
+            Data = {
+              0C000000000000000000000000000000
+            }
+          end
+          inherited RadioGroup1: TRadioGroup
+            inherited LongEdit1: TLongEdit
+              TabOrder = 3
+            end
+          end
+          inherited CheckGroup1: TCheckGroup
+            Data = {
+              03000000020202
+            }
+          end
+          inherited CheckGroup2: TCheckGroup
+            Data = {
+              06000000020202020202
+            }
+          end
+        end
+        inherited Page3: TTabSheet
+          ClientHeight = 523
+          ClientWidth = 490
+        end
+      end
+    end
+  end
+end

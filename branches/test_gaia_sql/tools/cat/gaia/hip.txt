@@ -1,0 +1,5 @@
+- extract hip -> source_id from tgas
+- complete missing hip from xhip , 
+    source-id ???, maybe healpix l12 + 00000000  
+- add data from xhip
+

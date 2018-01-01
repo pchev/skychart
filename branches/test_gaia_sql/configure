@@ -1,0 +1,164 @@
+#!/bin/bash 
+#
+# create freepascal Makefile to build skychart
+#
+# syntaxe :
+#    ./configure [fpcbin=path_to_fpc_binaries] [fpc=path_to_fpc_units]  [lazarus=path_to_lazarus] [prefix=install_path] [target=fpcmake_target]
+#
+
+# set parameters
+if [ $# -gt 0 ]; then
+   export "$@"
+fi
+
+dirs="skychart/component/synapse/source/lib \
+     skychart/component/libsql \
+     skychart/component/mrecsort \
+     skychart/component/uniqueinstance \
+     skychart/component/xmlparser \
+     skychart/component/bgrabitmap \
+     skychart/component/enhedits \
+     skychart/component/radec \
+     skychart/component/zoomimage \
+     skychart/component/indiclient \
+     skychart/component/downloaddialog \
+     skychart/component/jdcalendar \
+     skychart/component/multiframe \
+     skychart/component/vo \
+     skychart/component/vosamp \
+     skychart/component \
+     skychart/library/catalog \
+     skychart/library \
+     skychart \
+     varobs \
+     . "
+
+if [ -n "$target" ]; then
+   fpcmake_opt="-q -T$target" 
+else 
+   fpcmake_opt="-q"
+fi
+
+#  Try to locate fpcbin in PATH
+if [ -z "$fpcbin" ]; then
+   export fpcbin=$(which fpcmake | sed 's#/fpcmake##')
+fi
+#  Try fpcbin in standard location
+if [ -z "$fpcbin" ]; then
+  if [ -x /usr/bin/fpcmake ]; then 
+   export  fpcbin=/usr/bin
+  fi
+fi
+if [ -z "$fpcbin" ]; then
+  if [ -x /usr/local/bin/fpcmake ]; then 
+   export  fpcbin=/usr/local/bin
+  fi
+fi
+#  Try to locate fpcbin
+if [ -z "$fpcbin" ]; then
+   echo Warning! try to use locate to find FPC path, the option may not work depending your version of locate and the result my be completly wrong. It is better if you specify fpcbin= on the command line.
+   export fpcbin=$(locate -n1 '\fpcmake'  | sed 's#/fpcmake##')
+   echo fpcbin=$fpcbin
+   read -p "[Press Enter to continue]"
+fi
+# fpcbin not found
+if [ -z "$fpcbin" ]; then
+   echo fpc compiler not found! 
+   echo Please specify the location of the fpc compiler with :
+   echo ./configure fpcbin=path_to_fpc
+   exit 1
+fi
+echo using fpcbin in $fpcbin
+
+#  Try fpc unit in standard location
+if [ -z "$fpc" ]; then
+  if [ -d /usr/share/fpcsrc ]; then 
+   export  fpc=/usr/share/fpcsrc
+  fi
+fi
+#  Try to locate fpc unit 
+if [ -z "$fpc" ]; then
+   echo Warning! try to use locate to find fpc source/units path, the option may not work depending your version of locate and the result my be completly wrong. It is better if you specify fpc= on the command line.
+   export fpc=$(locate -n1 rtl/Package.fpc | sed 's#/rtl/Package.fpc##')
+   echo fpc=$fpc
+   read -p "[Press Enter to continue]"
+fi
+# fpc not found
+if [ -z "$fpc" ]; then
+   echo fpc units not found! 
+   echo Please specify the location of fpc units installation with :
+   echo ./configure fpc=path_to_fpc_unit
+   exit 1
+fi
+echo using fpc units in $fpc
+
+#  Try Lazarus in standard location
+if [ -z "$lazarus" ]; then
+  if [ -d /usr/share/lazarus ]; then 
+   export  lazarus=/usr/share/lazarus
+  fi
+fi
+#  Try to locate Lazarus lcl
+if [ -z "$lazarus" ]; then
+   echo Warning! try to use locate to find LAZARUS path, the option may not work depending your version of locate and the result my be completly wrong. It is better if you specify lazarus= on the command line.
+   export lazarus=$(locate -n1 lcl/lclclasses.pp | sed 's#/lcl/lclclasses.pp##')
+   echo lazarus=$lazarus
+   read -p "[Press Enter to continue]"
+fi
+# Lazarus not found
+if [ -z "$lazarus" ]; then
+   echo Lazarus library not found! 
+   echo Please specify the location of Lazarus installation with :
+   echo ./configure lazarus=path_to_lazarus
+   exit 1
+fi
+echo using Lazarus in $lazarus
+
+#  Install directory
+if [ -z "$prefix" ]; then
+   export prefix=/tmp/skychart
+fi
+echo installing in $prefix
+
+echo fpcmake options: $fpcmake_opt
+
+export FPCDIR=$fpc
+basedir=$(pwd)
+for dir in $dirs 
+do
+   echo create $dir/Makefile 
+   cd $dir
+   sed "s#%LAZDIR%#$lazarus#" Makefile.in > Makefile.fpc
+   sed -ixxx "s#%PREFIX%#$prefix#" Makefile.fpc 
+   $fpcbin/fpcmake $fpcmake_opt Makefile.fpc
+   rc=$?
+   cd $basedir
+   if [[ $rc -ne 0 ]]; then 
+      exit $rc
+   fi
+done
+
+cd tools
+sed "s#%PREFIX%#$prefix#" Makefile.in > Makefile
+cd $basedir
+
+echo
+echo You can now build with:
+echo make clean  all
+echo make install 
+echo make install_data
+echo make install_doc
+echo make install_nonfree
+echo make install_cat1
+echo make install_cat2
+echo
+echo To crosscompile from Linux to Windows: 
+echo make clean all OS_TARGET=win32 CPU_TARGET=i386
+echo make install_win
+echo make install_win_data
+echo make install_win_doc
+echo make install_win_nonfree
+echo make install_win_cat1
+echo make install_win_cat2
+echo
+

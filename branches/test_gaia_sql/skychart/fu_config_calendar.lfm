@@ -1,0 +1,69 @@
+object f_config_calendar: Tf_config_calendar
+  Left = 0
+  Height = 529
+  Top = 0
+  Width = 500
+  ClientHeight = 529
+  ClientWidth = 500
+  TabOrder = 0
+  DesignLeft = 53
+  object Mainpanel: TPanel
+    Left = 0
+    Height = 529
+    Top = 0
+    Width = 500
+    Align = alClient
+    ClientHeight = 529
+    ClientWidth = 500
+    TabOrder = 0
+    object PageControl1: TPageControl
+      Left = 1
+      Height = 527
+      Top = 1
+      Width = 498
+      ActivePage = TabSheet1
+      Align = alClient
+      ShowTabs = False
+      TabIndex = 0
+      TabOrder = 0
+      OnChanging = PageControl1Changing
+      object TabSheet1: TTabSheet
+        Caption = 'TabSheet1'
+        ClientHeight = 523
+        ClientWidth = 494
+        object GroupBox1: TGroupBox
+          Left = 21
+          Height = 209
+          Top = 29
+          Width = 377
+          Caption = 'Calendar graph setting'
+          ClientHeight = 193
+          ClientWidth = 375
+          TabOrder = 0
+          object LongEdit1: TLongEdit
+            Left = 176
+            Height = 21
+            Hint = '100..500'
+            Top = 57
+            Width = 80
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+            OnChange = LongEdit1Change
+            Value = 100
+            MinValue = 100
+            MaxValue = 500
+          end
+          object Label2: TLabel
+            Left = 14
+            Height = 15
+            Top = 61
+            Width = 82
+            Caption = 'Graph height'
+            ParentColor = False
+          end
+        end
+      end
+    end
+  end
+end

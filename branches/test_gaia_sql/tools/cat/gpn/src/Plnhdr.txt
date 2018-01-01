@@ -1,0 +1,124 @@
+Strasbourg Catalogue of Galactic Planetary Nebulae
+
+The original machine-readable version of the Strasbourg Catalog of
+Galactic Planetary Nebulae (Acker et al., 1981) was supplied by the
+Centre de Donnees Stellaires, and has been reformatted as described in
+the ADC document.
+
+The aim of this catalogue is to provide a list of data concerning all
+known planetary nebulae (PN).  The total number is 1455 including 1036
+listed in Perek and Kohoutek (PK) catalogue (1967), and including
+including doubtful cases.  The additions come from Sanduleak (1975,
+1976), Acker and Marcout (1977), Weinberger (1977), Peterson (1977),
+Kohoutek (1978), Stephenson (1978), Allen (1979), Murdin et al.  (1979),
+Van den Bergh (1979), Purgathofer and Weinberger (1980).
+
+Source Catalog Reference:  Acker, A., Marcout, J., Ochsenbein, F.:
+1980, Centre de Donnees Stellaires Bull.  No. 18, 84.
+
+Documentation Reference:  Hill, R. S. 1983, SSD-T-1-0338-0097-83
+
+A copy of the documentation should accompany any computer-readable
+version of the catalog.  The FITS Table header(s) in this file only give
+the basic format of the catalog.  Please refer to the documentation or
+source reference for a more detailed discussion of the data.
+
+
+XTENSION= 'TABLE   '           / Table extension
+BITPIX  =                    8 / Character data
+NAXIS   =                    2 / Simple 2-D matrix
+NAXIS1  =                   52 / Number of characters per record
+NAXIS2  =                 1455 / Number of records in the table
+PCOUNT  =                    0 / No "random" parameters
+GCOUNT  =                    1 / Only one group
+TFIELDS =                   16 / Number of data fields per record
+EXTNAME = 'PLN     '           / Strasbourg Galactic Planetary Nebulae
+AUTHOR  = 'Acker et al.'      
+REFERENC= '1980 CDS Bull.'    
+DATE    = '01/08/91'           / Date FITS table verified (dd/mm/yy)
+ 
+TTYPE1  = 'PK      '           / Perek-Kohoutek (PK) number
+TBCOL1  =                    1 / Start column
+TFORM1  = 'A9      '           / Fortran format
+ 
+TTYPE2  = 'RAH     '           / Hours RA, 1950.0
+TBCOL2  =                   10 / Start column
+TFORM2  = 'I2      '           / Fortran format
+TUNIT2  = 'h       '           / Units are hours
+ 
+TTYPE3  = 'RAM     '           / Minutes RA, 1950.0
+TBCOL3  =                   13 / Start column
+TFORM3  = 'F5.2    '           / Fortran format
+TUNIT3  = 'min     '           / Units are minutes of time
+ 
+TTYPE4  = 'DecSign '           / Sign Dec, 1950
+TBCOL4  =                   19 / Start column
+TFORM4  = 'A1      '           / Fortran format
+ 
+TTYPE5  = 'DecD    '           / Degrees Dec, 1950.0
+TBCOL5  =                   20 / Start column
+TFORM5  = 'I2      '           / Fortran format
+TUNIT5  = 'deg     '           / Units are degrees
+ 
+TTYPE6  = 'DecM    '           / Minutes Dec, 1950.0
+TBCOL6  =                   23 / Start column
+TFORM6  = 'F4.1    '           / Fortran format
+TUNIT6  = 'arcmin  '           / Units are minutes of arc
+ 
+TTYPE7  = 'V_Limit '           / '>' if V is a lower limit
+TBCOL7  =                   28 / Start column
+TFORM7  = 'A1      '           / Fortran format
+ 
+TTYPE8  = 'V       '           / Visual magnitude
+TBCOL8  =                   29 / Start column
+TFORM8  = 'F4.1    '           / Fortran format
+TUNIT8  = 'mag     '           / Units are magnitudes
+TNULL8  = '        '           / Null value
+ 
+TTYPE9  = 'Morph_Flag'         / Morphology flag
+TBCOL9  =                   34 / Start column
+TFORM9  = 'A1      '           / Fortran format
+TNULL9  = '        '           / Null value
+COMMENT Morph_Flag: '<' for star-like appearance, '>' for fainter spherical
+COMMENT Morph_Flag: envelope, or else blank.
+ 
+TTYPE10 = 'Diam    '           / Angular diameter of brightest part
+TBCOL10 =                   35 / Start column
+TFORM10 = 'I3      '           / Fortran format
+TUNIT10 = 'arcsec  '           / Units are seconds of arc
+TNULL10 = '        '           / Null value
+ 
+TTYPE11 = 'RadVel  '           / Mean radial velocity
+TBCOL11 =                   39 / Start column
+TFORM11 = 'I4      '           / Fortran format
+TUNIT11 = 'km/s    '           / Units are kilometers per second
+TNULL11 = '        '           / Null value
+ 
+TTYPE12 = 'StarMag_Limit'      / '>' if StarMag is a lower limit
+TBCOL12 =                   44 / Start column
+TFORM12 = 'A1      '           / Fortran format
+TNULL12 = '        '           / Null value
+ 
+TTYPE13 = 'StarMag '           / Central star magnitude
+TBCOL13 =                   45 / Start column
+TFORM13 = 'F4.1    '           / Fortran format
+TUNIT13 = 'mag     '           / Units are magnitudes
+TNULL13 = '        '           / Null value
+ 
+TTYPE14 = 'Var_Flag'           / 'V' if central star is variable
+TBCOL14 =                   49 / Start column
+TFORM14 = 'A1      '           / Fortran format
+TNULL14 = '        '           / Null value
+ 
+TTYPE15 = 'ExpVel_Limit'       / ExpVel limit flag, '<', '>', or blank
+TBCOL15 =                   50 / Start column
+TFORM15 = 'A1      '           / Fortran format
+TNULL15 = '        '           / Null value
+ 
+TTYPE16 = 'ExpVel  '           / Nebula expansion velocity
+TBCOL16 =                   51 / Start column
+TFORM16 = 'I2      '           / Fortran format
+TUNIT16 = 'km/s    '           / Units are kilometers per second
+TNULL16 = '        '           / Null value
+ 
+END

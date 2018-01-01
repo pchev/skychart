@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Package Version="4">
+    <Name Value="MultiFramePackage"/>
+    <AddToProjectUsesSection Value="True"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
+      </SearchPaths>
+      <Parsing>
+        <SyntaxOptions>
+          <CStyleOperator Value="False"/>
+          <UseAnsiStrings Value="False"/>
+        </SyntaxOptions>
+      </Parsing>
+      <Other>
+        <Verbosity>
+          <ShowHints Value="False"/>
+        </Verbosity>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <Version Major="1"/>
+    <Files Count="3">
+      <Item1>
+        <Filename Value="MultiFrame.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="MultiFrame"/>
+      </Item1>
+      <Item2>
+        <Filename Value="multiframe.lrs"/>
+        <Type Value="LRS"/>
+      </Item2>
+      <Item3>
+        <Filename Value="ChildFrame.pas"/>
+        <UnitName Value="ChildFrame"/>
+      </Item3>
+    </Files>
+    <Type Value="RunAndDesignTime"/>
+    <RequiredPkgs Count="2">
+      <Item1>
+        <PackageName Value="LCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item2>
+    </RequiredPkgs>
+    <UsageOptions>
+      <CustomOptions Value="-dUseCThreads
+"/>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

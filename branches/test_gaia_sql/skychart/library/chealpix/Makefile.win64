@@ -1,0 +1,18 @@
+##############################################################################
+
+CC=x86_64-w64-mingw32-gcc
+CFLAGS= -w -fPIC -m64
+SO_Name       = libchealpix.dll
+LIBFLAGS      = -shared -static-libgcc -Wl,-soname,$(SO_Name)  -lm
+
+OBJS =	chealpix.o
+
+all: $(SO_Name)
+
+$(SO_Name): $(OBJS)
+	$(CC) $(CFLAGS) $(LIBFLAGS) -o $@ $(OBJS)
+
+chealpix.o:	chealpix.h chealpix.c
+
+clean:
+	rm -f *.a *.o $(SO_Name)

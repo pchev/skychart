@@ -1,0 +1,57 @@
+#
+#   Makefile.fpc for CDClibrary 0.0
+#
+
+[package]
+name=cdclibrary
+version=0.0
+
+[target]
+dirs= catalog
+
+[rules]
+.PHONY: all
+
+all: catalog_all
+ifeq ($(OS_TARGET),win32)
+        $(MAKE) -C getdss -f Makefile.win32 all 
+        $(MAKE) -C plan404 -f Makefile.win32 all 
+        $(MAKE) -C wcs -f Makefile.win32 all
+        $(MAKE) -C chealpix -f Makefile.win32 all
+ else
+ ifeq ($(OS_TARGET),win64)
+        $(MAKE) -C getdss -f Makefile.win64 all 
+        $(MAKE) -C plan404 -f Makefile.win64 all 
+        $(MAKE) -C wcs -f Makefile.win64 all
+        $(MAKE) -C chealpix -f Makefile.win64 all
+ else
+ ifeq ($(OS_TARGET),darwin)
+        $(MAKE) -C getdss all arch_flags=-m32
+        $(MAKE) -C plan404 all arch_flags=-m32
+        $(MAKE) -C wcs all arch_flags=-m32
+        $(MAKE) -C chealpix -f Makefile.darwin all
+ endif
+ endif
+endif
+
+clean: catalog_clean
+ifeq ($(OS_TARGET),win32)
+        $(MAKE) -C getdss -f Makefile.win32 clean
+        $(MAKE) -C plan404 -f Makefile.win32 clean
+        $(MAKE) -C wcs -f Makefile.win32 clean
+        $(MAKE) -C chealpix -f Makefile.win32 clean
+else
+ifeq ($(OS_TARGET),win64)
+        $(MAKE) -C getdss -f Makefile.win64 clean 
+        $(MAKE) -C plan404 -f Makefile.win64 clean
+        $(MAKE) -C wcs -f Makefile.win64 clean
+        $(MAKE) -C chealpix -f Makefile.win64 clean
+else
+ifeq ($(OS_TARGET),darwin)
+	$(MAKE) -C getdss clean
+	$(MAKE) -C plan404 clean
+	$(MAKE) -C wcs clean
+	$(MAKE) -C chealpix -f Makefile.darwin clean
+endif
+endif
+endif

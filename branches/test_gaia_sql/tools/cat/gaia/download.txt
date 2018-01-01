@@ -1,0 +1,8 @@
+wget -r -l1 http://cdn.gea.esac.esa.int/Gaia/gaia_source/csv/
+
+5231 files
+
+$ du -hs csv
+196G    csv
+
+wget -r -l1 http://cdn.gea.esac.esa.int/Gaia/tgas_source/csv/

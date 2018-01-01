@@ -1,0 +1,89 @@
+object f_getdss: Tf_getdss
+  Left = 276
+  Height = 308
+  Top = 222
+  Width = 420
+  ActiveControl = ListBox1
+  Caption = 'List of available plates'
+  ClientHeight = 308
+  ClientWidth = 420
+  FormStyle = fsStayOnTop
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  ParentFont = True
+  LCLVersion = '1.6.0.2'
+  Visible = False
+  object Memo1: TMemo
+    Left = 8
+    Height = 232
+    Top = 32
+    Width = 406
+    Lines.Strings = (
+      'Memo1'
+    )
+    ScrollBars = ssAutoBoth
+    TabOrder = 0
+    Visible = False
+  end
+  object ListBox1: TListBox
+    Left = 8
+    Height = 230
+    Top = 32
+    Width = 401
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -11
+    Font.Name = 'courier'
+    Font.Pitch = fpFixed
+    IntegralHeight = True
+    ItemHeight = 0
+    ParentFont = False
+    ScrollWidth = 399
+    TabOrder = 1
+    TopIndex = -1
+  end
+  object Label1: TLabel
+    Left = 12
+    Height = 14
+    Top = 8
+    Width = 42
+    Caption = 'Label1'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -11
+    Font.Name = 'courier'
+    Font.Pitch = fpFixed
+    ParentColor = False
+    ParentFont = False
+  end
+  object BitBtn1: TBitBtn
+    Left = 96
+    Height = 25
+    Top = 272
+    Width = 75
+    BorderSpacing.InnerBorder = 2
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 2
+  end
+  object BitBtn2: TBitBtn
+    Left = 206
+    Height = 25
+    Top = 272
+    Width = 75
+    BorderSpacing.InnerBorder = 2
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    OnClick = BitBtn2Click
+    TabOrder = 3
+  end
+  object DownloadDialog1: TDownloadDialog
+    Timeout = 90000
+    FtpFwMode = 0
+    FtpFwPassive = True
+    ConfirmDownload = True
+    QuickCancel = False
+    left = 264
+    top = 16
+  end
+end

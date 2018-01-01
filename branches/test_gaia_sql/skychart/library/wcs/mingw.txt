@@ -1,0 +1,11 @@
+# change function name because of conflict with mingw msvcrt
+
+sed -i 's/wcsrev/wcsrev1/g' wcs.c
+sed -i 's/wcsrev/wcsrev1/g' wcslib.c
+sed -i 's/wcsrev/wcsrev1/g' wcslib.h
+
+sed -i 's/wcsset/wcsset1/g' imgetwcs.c
+sed -i 's/wcsset/wcsset1/g' wcs.c
+sed -i 's/wcsset/wcsset1/g' wcs.h
+sed -i 's/wcsset/wcsset1/g' wcslib.c
+sed -i 's/wcsset/wcsset1/g' wcslib.h

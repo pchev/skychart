@@ -1,0 +1,169 @@
+object f_configinternet: Tf_configinternet
+  Left = 551
+  Height = 576
+  Top = 124
+  Width = 499
+  ActiveControl = Button6
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Internet'
+  ClientHeight = 576
+  ClientWidth = 499
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  ParentFont = True
+  LCLVersion = '1.6.0.2'
+  Visible = False
+  object Panel1: TPanel
+    Left = 0
+    Height = 50
+    Top = 526
+    Width = 499
+    Align = alBottom
+    ClientHeight = 50
+    ClientWidth = 499
+    TabOrder = 0
+    object Button1: TButton
+      Left = 204
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 1
+    end
+    object Button2: TButton
+      Left = 302
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Apply'
+      OnClick = Button2Click
+      TabOrder = 2
+    end
+    object Button3: TButton
+      Left = 400
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 3
+    end
+    object Button6: TButton
+      Left = 106
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = 'Help'
+      OnClick = Button6Click
+      TabOrder = 0
+    end
+  end
+  inline f_config_internet1: Tf_config_internet
+    Height = 526
+    Width = 499
+    Align = alClient
+    ClientHeight = 526
+    ClientWidth = 499
+    TabOrder = 1
+    inherited MainPanel: TPanel
+      Height = 526
+      Width = 499
+      ClientHeight = 526
+      ClientWidth = 499
+      inherited PageControl1: TPageControl
+        Height = 526
+        Width = 499
+        ActivePage = nil
+        TabIndex = -1
+        inherited Page1: TTabSheet
+          ClientHeight = 520
+          ClientWidth = 493
+          inherited GroupBox1: TGroupBox
+            inherited httpproxy: TCheckBox
+              Height = 23
+              Width = 111
+            end
+            inherited Panel2: TPanel
+              inherited proxypass: TEdit
+                Height = 23
+              end
+              inherited proxyuser: TEdit
+                Height = 23
+              end
+              inherited proxyport: TEdit
+                Height = 23
+              end
+              inherited proxyhost: TEdit
+                Height = 23
+              end
+              inherited Label5: TLabel
+                Height = 16
+                Width = 54
+              end
+              inherited Label4: TLabel
+                Height = 16
+                Width = 63
+              end
+              inherited Label3: TLabel
+                Height = 16
+                Width = 59
+              end
+              inherited Label2: TLabel
+                Height = 16
+                Width = 60
+              end
+              inherited SocksType: TComboBox
+                Height = 25
+              end
+            end
+            inherited SocksProxy: TCheckBox
+              Height = 23
+              Width = 90
+            end
+          end
+          inherited GroupBox2: TGroupBox
+            inherited Label1: TLabel
+              Height = 16
+              Width = 121
+            end
+            inherited ftppassive: TCheckBox
+              Height = 23
+              Width = 123
+            end
+            inherited anonpass: TEdit
+              Height = 23
+            end
+          end
+          inherited CheckBox1: TCheckBox
+            Height = 23
+            Width = 302
+          end
+        end
+        inherited Page2: TTabSheet
+          ClientHeight = 520
+          ClientWidth = 493
+        end
+        inherited Page3: TTabSheet
+          ClientHeight = 520
+          ClientWidth = 493
+        end
+        inherited Page4: TTabSheet
+          ClientHeight = 520
+          ClientWidth = 493
+        end
+      end
+    end
+  end
+end

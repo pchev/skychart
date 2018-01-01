@@ -1,0 +1,125 @@
+object f_configchart: Tf_configchart
+  Left = 124
+  Height = 578
+  Top = 331
+  Width = 503
+  ActiveControl = Button6
+  BorderStyle = bsSingle
+  Caption = 'Charts'
+  ClientHeight = 578
+  ClientWidth = 503
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  ParentFont = True
+  LCLVersion = '1.6.0.2'
+  Visible = False
+  object Panel1: TPanel
+    Left = 0
+    Height = 50
+    Top = 528
+    Width = 503
+    Align = alBottom
+    ClientHeight = 50
+    ClientWidth = 503
+    TabOrder = 0
+    object Button3: TButton
+      Left = 205
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 1
+    end
+    object Button4: TButton
+      Left = 301
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Apply'
+      OnClick = Button4Click
+      TabOrder = 2
+    end
+    object Button5: TButton
+      Left = 405
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 3
+    end
+    object Button6: TButton
+      Left = 113
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = 'Help'
+      OnClick = Button6Click
+      TabOrder = 0
+    end
+  end
+  inline f_config_chart1: Tf_config_chart
+    Width = 503
+    Align = alClient
+    ClientWidth = 503
+    TabOrder = 1
+    DesignLeft = 0
+    DesignTop = 0
+    inherited MainPanel: TPanel
+      Width = 503
+      ClientWidth = 503
+      inherited PageControl1: TPageControl
+        Width = 501
+        ActivePage = nil
+        TabIndex = -1
+        inherited Page1: TTabSheet
+          ClientHeight = 466
+          ClientWidth = 495
+        end
+        inherited Page2: TTabSheet
+          ClientHeight = 466
+          ClientWidth = 495
+        end
+        inherited Page3: TTabSheet
+          ClientHeight = 466
+          ClientWidth = 495
+        end
+        inherited Page4: TTabSheet
+          ClientHeight = 466
+          ClientWidth = 495
+        end
+        inherited Page5: TTabSheet
+          ClientHeight = 466
+          ClientWidth = 495
+          inherited CheckBox13: TCheckBox
+            Height = 23
+            Width = 135
+          end
+          inherited CheckBox2: TCheckBox
+            Height = 23
+            Width = 131
+          end
+        end
+        inherited Page6: TTabSheet
+          ClientHeight = 466
+          ClientWidth = 495
+        end
+      end
+      inherited FOVPanel: TPanel
+        Width = 501
+        ClientWidth = 501
+      end
+    end
+  end
+end

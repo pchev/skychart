@@ -1,0 +1,374 @@
+object pop_scope: Tpop_scope
+  Left = 276
+  Height = 481
+  Top = 124
+  Width = 305
+  HorzScrollBar.Visible = False
+  VertScrollBar.Visible = False
+  ActiveControl = Edit1
+  Caption = 'ASCOM Telescope Interface'
+  ClientHeight = 481
+  ClientWidth = 305
+  OnCloseQuery = kill
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  ParentFont = True
+  Position = poDefaultPosOnly
+  Visible = False
+  object GroupBox3: TGroupBox
+    Left = 0
+    Height = 88
+    Top = 384
+    Width = 305
+    Align = alTop
+    ClientHeight = 84
+    ClientWidth = 301
+    TabOrder = 3
+    object ButtonConnect: TSpeedButton
+      Left = 5
+      Height = 25
+      Top = 6
+      Width = 73
+      Caption = 'Connect'
+      OnClick = ButtonConnectClick
+    end
+    object ButtonHide: TSpeedButton
+      Left = 211
+      Height = 25
+      Top = 6
+      Width = 65
+      Caption = 'Hide'
+      OnClick = ButtonHideClick
+    end
+    object ButtonDisconnect: TSpeedButton
+      Left = 115
+      Height = 25
+      Top = 6
+      Width = 84
+      Caption = 'Disconnect'
+      OnClick = ButtonDisconnectClick
+    end
+    object led: TEdit
+      Left = 83
+      Height = 25
+      Top = 7
+      Width = 25
+      AutoSize = False
+      Color = clRed
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+    object WarningLabel: TLabel
+      Left = 6
+      Height = 18
+      Top = 41
+      Width = 83
+      Caption = 'WarningLabel'
+      ParentColor = False
+    end
+    object ButtonHelp: TSpeedButton
+      Left = 211
+      Height = 25
+      Top = 41
+      Width = 65
+      Caption = 'Help'
+      OnClick = ButtonHelpClick
+    end
+  end
+  object GroupBox5: TGroupBox
+    Left = 0
+    Height = 141
+    Top = 131
+    Width = 305
+    Align = alTop
+    Caption = 'Observatory '
+    ClientHeight = 121
+    ClientWidth = 301
+    TabOrder = 1
+    object Label15: TLabel
+      Left = 16
+      Height = 18
+      Top = 12
+      Width = 59
+      Caption = 'Latitude : '
+      ParentColor = False
+    end
+    object Label16: TLabel
+      Left = 115
+      Height = 18
+      Top = 12
+      Width = 68
+      Caption = 'Longitude :'
+      ParentColor = False
+    end
+    object ButtonSetTime: TSpeedButton
+      Left = 16
+      Height = 22
+      Top = 92
+      Width = 128
+      Caption = 'Set Time'
+      Enabled = False
+      OnClick = ButtonSetTimeClick
+    end
+    object ButtonSetLocation: TSpeedButton
+      Left = 16
+      Height = 22
+      Top = 64
+      Width = 126
+      Caption = 'Set Location'
+      Enabled = False
+      OnClick = ButtonSetLocationClick
+    end
+    object lat: TEdit
+      Left = 16
+      Height = 26
+      Top = 32
+      Width = 80
+      Color = clBtnFace
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+      Text = '0'
+    end
+    object long: TEdit
+      Left = 115
+      Height = 26
+      Top = 32
+      Width = 70
+      Color = clBtnFace
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 1
+      Text = '0'
+    end
+    object ButtonGetLocation: TSpeedButton
+      Left = 157
+      Height = 22
+      Top = 64
+      Width = 131
+      Caption = 'Get Location'
+      Enabled = False
+      OnClick = ButtonGetLocationClick
+    end
+    object Label2: TLabel
+      Left = 209
+      Height = 18
+      Top = 12
+      Width = 47
+      Caption = 'Altitude'
+      ParentColor = False
+    end
+    object elev: TEdit
+      Left = 209
+      Height = 26
+      Top = 32
+      Width = 80
+      ReadOnly = True
+      TabOrder = 2
+      Text = '0'
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 112
+    Top = 272
+    Width = 305
+    Align = alTop
+    ClientHeight = 112
+    ClientWidth = 305
+    TabOrder = 2
+    object LabelAlpha: TLabel
+      Left = 26
+      Height = 18
+      Top = 10
+      Width = 19
+      Caption = 'RA '
+      ParentColor = False
+    end
+    object LabelDelta: TLabel
+      Left = 157
+      Height = 18
+      Top = 10
+      Width = 24
+      Caption = 'DEC'
+      ParentColor = False
+    end
+    object Label11: TLabel
+      Left = 26
+      Height = 18
+      Top = 34
+      Width = 15
+      Caption = 'AZ'
+      ParentColor = False
+    end
+    object Label12: TLabel
+      Left = 157
+      Height = 18
+      Top = 34
+      Width = 22
+      Caption = 'ALT'
+      ParentColor = False
+    end
+    object ButtonAbort: TSpeedButton
+      Left = 96
+      Height = 25
+      Top = 63
+      Width = 174
+      Caption = 'Abort Slew'
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      OnClick = ButtonAbortClick
+      ParentFont = False
+    end
+    object pos_x: TEdit
+      Left = 64
+      Height = 26
+      Top = 6
+      Width = 80
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+    object pos_y: TEdit
+      Left = 200
+      Height = 26
+      Top = 6
+      Width = 80
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 1
+    end
+    object az_x: TEdit
+      Left = 64
+      Height = 26
+      Top = 30
+      Width = 80
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 3
+    end
+    object alt_y: TEdit
+      Left = 200
+      Height = 26
+      Top = 30
+      Width = 80
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 4
+    end
+    object ShowAltAz: TCheckBox
+      Left = 8
+      Height = 23
+      Top = 32
+      Width = 23
+      TabOrder = 2
+    end
+    object ButtonTracking: TSpeedButton
+      Left = 8
+      Height = 25
+      Top = 63
+      Width = 84
+      Caption = 'Tracking'
+      OnClick = ButtonTrackingClick
+    end
+    object trackingled: TEdit
+      Left = 10
+      Height = 16
+      Top = 88
+      Width = 80
+      AutoSize = False
+      Color = clRed
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 5
+    end
+  end
+  object GroupBox1: TGroupBox
+    Left = 0
+    Height = 131
+    Top = 0
+    Width = 305
+    Align = alTop
+    Caption = 'Driver Selection'
+    ClientHeight = 111
+    ClientWidth = 301
+    TabOrder = 0
+    object ButtonSelect: TSpeedButton
+      Left = 182
+      Height = 22
+      Top = 7
+      Width = 97
+      Caption = 'Select'
+      OnClick = ButtonSelectClick
+    end
+    object Label1: TLabel
+      Left = 2
+      Height = 18
+      Top = 56
+      Width = 78
+      Caption = 'Refresh rate :'
+      ParentColor = False
+    end
+    object ButtonConfigure: TSpeedButton
+      Left = 182
+      Height = 22
+      Top = 32
+      Width = 97
+      Caption = 'Configure'
+      OnClick = ButtonConfigureClick
+    end
+    object ButtonAbout: TSpeedButton
+      Left = 182
+      Height = 22
+      Top = 56
+      Width = 97
+      Caption = 'About'
+      OnClick = ButtonAboutClick
+    end
+    object Edit1: TEdit
+      Left = 2
+      Height = 26
+      Top = 15
+      Width = 172
+      Color = clBtnFace
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+    object ReadIntBox: TComboBox
+      Left = 110
+      Height = 26
+      Top = 52
+      Width = 64
+      ItemHeight = 0
+      ItemIndex = 2
+      Items.Strings = (
+        '250'
+        '500'
+        '1000'
+        '2000'
+        '5000'
+      )
+      OnChange = ReadIntBoxChange
+      TabOrder = 1
+      Text = '1000'
+    end
+    object ButtonAdvSetting: TSpeedButton
+      Left = 110
+      Height = 22
+      Top = 88
+      Width = 169
+      Caption = 'Advanced setting'
+      OnClick = ButtonAdvSettingClick
+    end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    OnTimer = Timer1Timer
+    left = 240
+    top = 8
+  end
+end

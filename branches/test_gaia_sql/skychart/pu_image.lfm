@@ -1,0 +1,119 @@
+object f_image: Tf_image
+  Left = 247
+  Height = 407
+  Top = 194
+  Width = 615
+  HorzScrollBar.Increment = 61
+  HorzScrollBar.Page = 614
+  HorzScrollBar.Smooth = True
+  VertScrollBar.Increment = 40
+  VertScrollBar.Page = 406
+  VertScrollBar.Smooth = True
+  ActiveControl = Panel1
+  Caption = 'f_image'
+  ClientHeight = 407
+  ClientWidth = 615
+  OnCreate = FormCreate
+  OnKeyPress = FormKeyPress
+  OnResize = FormResize
+  ParentFont = True
+  LCLVersion = '1.6.0.2'
+  Visible = False
+  object Image1: TZoomImage
+    Left = 0
+    Height = 265
+    Top = 32
+    Width = 465
+    Canvas.AutoRedraw = False
+    Canvas.Brush.Color = clBlack
+    Canvas.Font.Height = -11
+    Zoom = 1
+    ZoomMin = 1
+    ZoomMax = 4
+    Xcentre = 0
+    Ycentre = 0
+    BGcolor = clBlack
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 27
+    Top = 0
+    Width = 615
+    Align = alTop
+    Alignment = taLeftJustify
+    AutoSize = True
+    ClientHeight = 27
+    ClientWidth = 615
+    FullRepaint = False
+    TabOrder = 0
+    TabStop = True
+    object Label1: TLabel
+      Left = 320
+      Height = 16
+      Top = 7
+      Width = 41
+      Caption = 'Label1'
+      ParentColor = False
+    end
+    object Button1: TButton
+      Left = 1
+      Height = 25
+      Top = 1
+      Width = 75
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Close'
+      OnClick = Button1Click
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 160
+      Height = 25
+      Top = 1
+      Width = 75
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Zoom +'
+      OnClick = Button2Click
+      TabOrder = 2
+    end
+    object Button3: TButton
+      Left = 240
+      Height = 25
+      Top = 1
+      Width = 75
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Zoom -'
+      OnClick = Button3Click
+      TabOrder = 3
+    end
+    object ButtonPrint: TButton
+      Left = 80
+      Height = 25
+      Top = 1
+      Width = 75
+      Caption = 'Print'
+      ModalResult = 6
+      TabOrder = 1
+    end
+  end
+  object VScrollBar: TScrollBar
+    Left = 600
+    Height = 365
+    Top = 27
+    Width = 15
+    Align = alRight
+    Kind = sbVertical
+    PageSize = 0
+    TabOrder = 2
+    OnChange = VScrollBarChange
+  end
+  object HScrollBar: TScrollBar
+    Left = 0
+    Height = 15
+    Top = 392
+    Width = 615
+    Align = alBottom
+    PageSize = 0
+    TabOrder = 3
+    OnChange = HScrollBarChange
+  end
+end

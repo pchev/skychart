@@ -1,0 +1,273 @@
+object pop_indi: Tpop_indi
+  Left = 456
+  Height = 450
+  Top = 130
+  Width = 300
+  HorzScrollBar.Visible = False
+  VertScrollBar.Visible = False
+  ActiveControl = Edit1
+  Caption = 'INDI Telescope Interface'
+  ClientHeight = 450
+  ClientWidth = 300
+  OnCloseQuery = kill
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  ParentFont = True
+  Position = poDefaultPosOnly
+  Visible = False
+  object GroupBox3: TGroupBox
+    Left = 0
+    Height = 111
+    Top = 208
+    Width = 300
+    Align = alTop
+    ClientHeight = 109
+    ClientWidth = 298
+    TabOrder = 2
+    object Connect: TButton
+      Left = 5
+      Height = 25
+      Top = 40
+      Width = 73
+      Caption = 'Connect'
+      OnClick = ConnectClick
+      TabOrder = 0
+    end
+    object SpeedButton2: TButton
+      Left = 224
+      Height = 25
+      Top = 40
+      Width = 65
+      Caption = 'Hide'
+      OnClick = SpeedButton2Click
+      TabOrder = 4
+    end
+    object Disconnect: TButton
+      Left = 128
+      Height = 25
+      Top = 40
+      Width = 84
+      Caption = 'Disconnect'
+      OnClick = DisconnectClick
+      TabOrder = 2
+    end
+    object led: TEdit
+      Left = 88
+      Height = 25
+      Top = 40
+      Width = 25
+      AutoSize = False
+      Color = clRed
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 1
+    end
+    object SpeedButton6: TButton
+      Left = 173
+      Height = 25
+      Top = 6
+      Width = 116
+      Caption = 'Abort Slew'
+      Font.Color = clRed
+      OnClick = SpeedButton6Click
+      ParentFont = False
+      TabOrder = 3
+    end
+    object SpeedButton4: TButton
+      Left = 224
+      Height = 25
+      Top = 72
+      Width = 65
+      Caption = 'Help'
+      OnClick = SpeedButton4Click
+      TabOrder = 5
+    end
+    object BtnIndiGui: TButton
+      Left = 5
+      Height = 25
+      Top = 72
+      Width = 81
+      Caption = 'INDI gui'
+      OnClick = BtnIndiGuiClick
+      TabOrder = 6
+    end
+    object ProtocolTrace: TCheckBox
+      Left = 16
+      Height = 21
+      Top = 8
+      Width = 111
+      Caption = 'Protocol trace '
+      OnChange = ProtocolTraceChange
+      TabOrder = 7
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 40
+    Top = 168
+    Width = 300
+    Align = alTop
+    ClientHeight = 40
+    ClientWidth = 300
+    TabOrder = 1
+    object LabelAlpha: TLabel
+      Left = 8
+      Height = 18
+      Top = 12
+      Width = 19
+      Caption = 'RA '
+      ParentColor = False
+    end
+    object LabelDelta: TLabel
+      Left = 126
+      Height = 18
+      Top = 12
+      Width = 24
+      Caption = 'DEC'
+      ParentColor = False
+    end
+    object pos_x: TEdit
+      Left = 30
+      Height = 24
+      Top = 8
+      Width = 86
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+    object pos_y: TEdit
+      Left = 158
+      Height = 24
+      Top = 8
+      Width = 86
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 1
+    end
+  end
+  object GroupBox5: TGroupBox
+    Left = 0
+    Height = 108
+    Top = 60
+    Width = 300
+    Align = alTop
+    Caption = 'Observatory '
+    ClientHeight = 89
+    ClientWidth = 298
+    TabOrder = 4
+    object Label15: TLabel
+      Left = 8
+      Height = 18
+      Top = 8
+      Width = 59
+      Caption = 'Latitude : '
+      ParentColor = False
+    end
+    object Label16: TLabel
+      Left = 112
+      Height = 18
+      Top = 8
+      Width = 68
+      Caption = 'Longitude :'
+      ParentColor = False
+    end
+    object ButtonSetLocation: TSpeedButton
+      Left = 32
+      Height = 22
+      Top = 64
+      Width = 99
+      Caption = 'Set Location'
+      OnClick = ButtonSetLocationClick
+    end
+    object lat: TEdit
+      Left = 8
+      Height = 24
+      Top = 32
+      Width = 86
+      Color = clBtnFace
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+      Text = '0'
+    end
+    object long: TEdit
+      Left = 112
+      Height = 24
+      Top = 32
+      Width = 82
+      Color = clBtnFace
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 1
+      Text = '0'
+    end
+    object ButtonGetLocation: TSpeedButton
+      Left = 176
+      Height = 22
+      Top = 64
+      Width = 99
+      Caption = 'Get Location'
+      OnClick = ButtonGetLocationClick
+    end
+    object Label1: TLabel
+      Left = 209
+      Height = 18
+      Top = 8
+      Width = 47
+      Caption = 'Altitude'
+      ParentColor = False
+    end
+    object Elev: TEdit
+      Left = 209
+      Height = 24
+      Top = 32
+      Width = 80
+      ReadOnly = True
+      TabOrder = 2
+      Text = '0'
+    end
+  end
+  object GroupBox1: TGroupBox
+    Left = 0
+    Height = 60
+    Top = 0
+    Width = 300
+    Align = alTop
+    Caption = 'Current driver'
+    ClientHeight = 41
+    ClientWidth = 298
+    TabOrder = 0
+    object Edit1: TEdit
+      Left = 8
+      Height = 24
+      Top = 8
+      Width = 281
+      Color = clBtnFace
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+  end
+  object Memomsg: TMemo
+    Left = 0
+    Height = 131
+    Top = 319
+    Width = 300
+    Align = alClient
+    ReadOnly = True
+    ScrollBars = ssAutoBoth
+    TabOrder = 3
+  end
+  object InitTimer: TTimer
+    Enabled = False
+    Interval = 30000
+    OnTimer = InitTimerTimer
+    left = 232
+  end
+  object ConnectTimer: TTimer
+    Enabled = False
+    Interval = 3000
+    OnTimer = ConnectTimerTimer
+    left = 176
+  end
+end

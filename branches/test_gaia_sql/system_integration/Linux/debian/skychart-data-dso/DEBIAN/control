@@ -1,0 +1,11 @@
+Package: skychart-data-dso
+Version: 3
+Section: education
+Priority: optional
+Maintainer: Patrick Chevalley <pch@ap-i.net>
+Architecture: all
+Installed-Size: %size%
+Depends: skychart
+Description: DSO catalog data for Skychart / Cartes du Ciel planetarium software
+ Contain the catalogs: Leda, GCM, GPN, LBN, OCL
+ .

@@ -1,0 +1,73 @@
+object f_manualtelescope: Tf_manualtelescope
+  Left = 352
+  Height = 107
+  Top = 183
+  Width = 390
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsToolWindow
+  Caption = 'Manual Telescope'
+  ClientHeight = 107
+  ClientWidth = 390
+  Color = clBlack
+  FormStyle = fsStayOnTop
+  OnCreate = FormCreate
+  OnDblClick = FormDblClick
+  OnMouseDown = FormMouseDown
+  OnMouseMove = FormMouseMove
+  OnMouseUp = FormMouseUp
+  ParentFont = True
+  LCLVersion = '1.6.4.0'
+  Visible = False
+  object Label1: TLabel
+    Left = 16
+    Height = 14
+    Top = 8
+    Width = 111
+    Caption = 'Manual Telescope'
+    Font.Color = clRed
+    Font.Height = -12
+    ParentColor = False
+    ParentFont = False
+    OnMouseDown = FormMouseDown
+    OnMouseUp = FormMouseUp
+  end
+  object Label2: TLabel
+    Left = 16
+    Height = 14
+    Top = 24
+    Width = 99
+    Caption = 'sep                   '
+    Font.Color = clRed
+    Font.Height = -12
+    ParentColor = False
+    ParentFont = False
+    OnMouseDown = FormMouseDown
+    OnMouseUp = FormMouseUp
+  end
+  object Label4: TLabel
+    Left = 16
+    Height = 24
+    Top = 44
+    Width = 98
+    Caption = 'RA turns: '
+    Font.Color = clRed
+    Font.Height = -20
+    ParentColor = False
+    ParentFont = False
+    OnMouseDown = FormMouseDown
+    OnMouseUp = FormMouseUp
+  end
+  object Label5: TLabel
+    Left = 16
+    Height = 24
+    Top = 72
+    Width = 113
+    Caption = 'DEC turns: '
+    Font.Color = clRed
+    Font.Height = -20
+    ParentColor = False
+    ParentFont = False
+    OnMouseDown = FormMouseDown
+    OnMouseUp = FormMouseUp
+  end
+end

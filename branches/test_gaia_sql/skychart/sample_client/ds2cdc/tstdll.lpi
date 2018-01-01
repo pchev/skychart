@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="9"/>
+    <PathDelim Value="\"/>
+    <General>
+      <Flags>
+        <MainUnitHasUsesSectionForAllUnits Value="False"/>
+        <MainUnitHasCreateFormStatements Value="False"/>
+        <MainUnitHasTitleStatement Value="False"/>
+      </Flags>
+      <MainUnit Value="0"/>
+      <Title Value="tstdll"/>
+      <ResourceType Value="res"/>
+      <Icon Value="0"/>
+      <ActiveWindowIndexAtStart Value="0"/>
+    </General>
+    <i18n>
+      <EnableI18N LFM="False"/>
+    </i18n>
+    <VersionInfo>
+      <StringTable ProductVersion=""/>
+    </VersionInfo>
+    <BuildModes Count="1" Active="Default">
+      <Item1 Name="Default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="1">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+    </RequiredPackages>
+    <Units Count="2">
+      <Unit0>
+        <Filename Value="tstdll.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="8" Y="7"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="tstdll1.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="tstdll1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="156"/>
+        <CursorPos X="55" Y="176"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit1>
+    </Units>
+    <JumpHistory Count="10" HistoryIndex="9">
+      <Position1>
+        <Filename Value="tstdll.lpr"/>
+        <Caret Line="7" Column="8" TopLine="1"/>
+      </Position1>
+      <Position2>
+        <Filename Value="tstdll1.pas"/>
+        <Caret Line="8" Column="86" TopLine="1"/>
+      </Position2>
+      <Position3>
+        <Filename Value="tstdll1.pas"/>
+        <Caret Line="150" Column="28" TopLine="138"/>
+      </Position3>
+      <Position4>
+        <Filename Value="tstdll1.pas"/>
+        <Caret Line="154" Column="28" TopLine="142"/>
+      </Position4>
+      <Position5>
+        <Filename Value="tstdll1.pas"/>
+        <Caret Line="155" Column="28" TopLine="143"/>
+      </Position5>
+      <Position6>
+        <Filename Value="tstdll1.pas"/>
+        <Caret Line="181" Column="1" TopLine="179"/>
+      </Position6>
+      <Position7>
+        <Filename Value="tstdll1.pas"/>
+        <Caret Line="176" Column="14" TopLine="174"/>
+      </Position7>
+      <Position8>
+        <Filename Value="tstdll1.pas"/>
+        <Caret Line="154" Column="24" TopLine="139"/>
+      </Position8>
+      <Position9>
+        <Filename Value="tstdll1.pas"/>
+        <Caret Line="186" Column="155" TopLine="160"/>
+      </Position9>
+      <Position10>
+        <Filename Value="tstdll1.pas"/>
+        <Caret Line="176" Column="55" TopLine="159"/>
+      </Position10>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="9"/>
+    <PathDelim Value="\"/>
+    <Target>
+      <Filename Value="tstdll"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <SyntaxMode Value="Delphi"/>
+      </SyntaxOptions>
+    </Parsing>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <CompilerMessages>
+        <UseMsgFile Value="True"/>
+      </CompilerMessages>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="3">
+      <Item1>
+        <Name Value="EAbort"/>
+      </Item1>
+      <Item2>
+        <Name Value="ECodetoolError"/>
+      </Item2>
+      <Item3>
+        <Name Value="EFOpenError"/>
+      </Item3>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

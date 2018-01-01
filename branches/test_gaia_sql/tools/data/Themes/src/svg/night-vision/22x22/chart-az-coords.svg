@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 22 22"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="chart-az-coords.svg"
+   inkscape:export-filename="/mnt/partizione/icone/originali/22x22/chart-az-coords.svg.png"
+   inkscape:export-xdpi="279.27274"
+   inkscape:export-ydpi="279.27274"
+   inkscape:version="0.92+devel unknown">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     inkscape:document-rotation="0"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     id="namedview8"
+     showgrid="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:zoom="27.255752"
+     inkscape:cx="13.944809"
+     inkscape:cy="11.792901"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4269" />
+  </sodipodi:namedview>
+  <defs
+     id="defs3051">
+    <style
+       type="text/css"
+       id="current-color-scheme">
+      .ColorScheme-Text {
+        color:#f2f2f2;
+      }
+      </style>
+  </defs>
+  <path
+     style="fill:#f2f2f2;fill-opacity:1;stroke:none;stroke-width:1"
+     d="M 5.9819191,2 9.2580328,3.4282945 C 8.7135438,4.4654793 8.0231577,5.4106855 7.2249209,6.2577519 L 2.9234288,2.0213179 H 2.013724 V 3.0813954 L 6.2171876,7.2170543 C 5.403161,7.9134662 4.5076809,8.5151022 3.5351269,8.996124 L 2.6411066,7.003876 V 6.999996 L 2.0333297,5.5968992 2.0176451,8.9728683 2.2705587,9.5368217 C 2.1785644,9.5707665 2.0929727,9.6153537 2,9.6472868 v 1.4612412 c 0.2862005,-0.08801 0.5569376,-0.207114 0.8352031,-0.312017 l 2.1860363,4.874032 C 4.0482501,16.048966 3.0415604,16.360519 2,16.583334 V 18 c 1.2412881,-0.247585 2.4357977,-0.615015 3.5878444,-1.06783 l 0.4274044,0.953489 V 14.531007 L 4.0997712,10.253876 C 5.2287582,9.6999594 6.2678323,9.0043831 7.2053152,8.1899224 l 2.785971,2.7403106 H 11.967542 L 8.211088,7.2306202 c 0.9180617,-0.967856 1.7034782,-2.056551 2.321316,-3.248062 l 4.960243,2.1569767 c -0.879273,1.7666164 -2.02851,3.3762725 -3.383945,4.7906981 h 1.862542 c 1.094913,-1.2902647 2.039772,-2.7079722 2.795775,-4.2364345 l 3.229059,1.4069767 0.0039,-1.501938 -2.672259,-1.1453488 C 17.785398,4.3505669 18.161476,3.207171 18.423701,2.0193798 H 16.988563 C 16.752955,3.0146659 16.435078,3.9770901 16.05141,4.9069767 l -4.973967,-2.127907 c 0.10247,-0.2533524 0.221868,-0.4994341 0.309769,-0.7596899 H 9.9011 C 9.8734168,2.0926604 9.834023,2.1599224 9.8050319,2.2325581 L 9.2639144,2 Z"
+     id="path4"
+     inkscape:connector-curvature="0" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="6.052083"
+     y="20"
+     id="text4273"><tspan
+       sodipodi:role="line"
+       id="tspan4271"
+       x="6.052083"
+       y="20"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.66666698px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#f2f2f2;fill-opacity:1">Az</tspan></text>
+</svg>
