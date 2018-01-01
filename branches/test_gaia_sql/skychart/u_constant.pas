@@ -1296,9 +1296,11 @@ var
  type
    Tnside2npix = function(nside:longint):longint;cdecl;
    Tang2pix_nest64 = procedure(nside:int64; theta:double; phi:double; var ipix:int64);cdecl;
+   Tpix2ang_nest64 = procedure(nside:int64; ipix:int64; var theta:double; var phi:double);cdecl;
 var
    nside2npix: Tnside2npix;
    ang2pix_nest64: Tang2pix_nest64;
+   pix2ang_nest64: Tpix2ang_nest64;
    chealpixok: boolean;
    chealpix: TLibHandle;
 

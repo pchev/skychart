@@ -1376,7 +1376,7 @@ begin
       firstcat := 'BSC';
       First := False;
     end;
-    timelimit := now + 10 / secday;
+    timelimit := now + 10000 / secday;
     if Fcatalog.OpenStar(cfgsc.fov,catalog.cfgcat.StarMagMax) then
       while Fcatalog.readstar(rec) do
       begin

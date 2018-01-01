@@ -39,8 +39,8 @@ uses
   SysUtils, Classes, Math, Dialogs, Forms;
 
 const
-  GaiaNdb=7;
-  GaiaMagl: array[0..GaiaNdb-1] of integer =(8,14,16,17,18,19,99);
+  GaiaNdb=3;
+  GaiaMagl: array[0..GaiaNdb-1] of integer =(8,15,99);
 
 type
 
@@ -56,10 +56,11 @@ type
     FFindRec: GCatrec;
     CatFov,CatMag: double;
     GaiaDb: array [0..GaiaNdb-1] of TSqlDB;
-    GaiaCurrentLevel,GaiaMaxLevel,GaiaCurrentRow: integer;
+    GaiaCurrentLevel,GaiaFovLevel,GaiaMaxLevel,GaiaCurrentRow: integer;
     GaiaSql: string;
     GaiaFov: array[0..6] of double;
     GaiaInitialized: boolean;
+    GaiaRa, GaiaDe: double6;
 
   protected
     { Protected declarations }
@@ -157,6 +158,7 @@ type
     procedure ComputeGaiaFov;
     procedure GetGaiaFov(fov:double; out level:integer);
     procedure GetGaiaMag(mag:double; out level: integer);
+    procedure GetGaiaPixels(level:integer; out ipixlst: string);
     function  InitGaiaRec: boolean;
     function  OpenGaia(ra,de:double6; fov,maxmag: double):boolean;
     procedure OpenGaiaWin(var ok : boolean);
@@ -360,13 +362,21 @@ begin
   CatFov:=fov;
   CatMag:=mag;
 
+  repeat
   while ((curcat - BaseStar) <= numcat) and (not cfgcat.starcaton[curcat - BaseStar]) do
     Inc(curcat);
 
   if ((curcat - BaseStar) > numcat) then
     Result := False
-  else
+  else begin
     Result := OpenStarCat;
+    if not Result then begin
+       Inc(curcat);
+       continue;
+    end;
+  end;
+  break;
+  until false;
 end;
 
 function Tcatalog.CloseStar: boolean;
@@ -5814,7 +5824,7 @@ end;
 procedure Tcatalog.GetGaiaMag(mag:double; out level: integer);
 var i: integer;
 begin
-  level:=6;
+  level:=2;
   for i:=GaiaNdb-1 downto 0 do begin
     if trunc(mag)<=GaiaMagl[i] then level:=i;
   end;
@@ -5826,7 +5836,7 @@ begin
   ComputeGaiaFov;
   for i:=0 to GaiaNdb-1 do begin
     GaiaDb[i] := TLiteDB.Create(nil);
-    GaiaDb[i].Use('/data/work/cat/gaia-dr1/gaiadr1_'+inttostr(i));
+    GaiaDb[i].Use('/work/gaia/gaiadr1_'+inttostr(i));
   end;
   GaiaInitialized:=True;
 end;
@@ -5880,10 +5890,9 @@ begin
 end;
 
 function Tcatalog.OpenGaia(ra,de:double6; fov,maxmag: double):boolean;
-var theta,phi,minra,maxra,minra2,maxra2,minde,maxde: double;
+var minra,maxra,minra2,maxra2,minde,maxde: double;
     racrosszero:boolean;
-    i,level,dblevel,nside:integer;
-    ipix,filter: Int64;
+    dblevel:integer;
 begin
   if not chealpixok then begin
     result:=false;
@@ -5909,32 +5918,15 @@ begin
   if minde<-90 then minde:=-90;
   maxde:=de[5]+fov;
   if maxde>90 then maxde:=90;
-                            //17/20   14/5   7/120  16/120     22/0.5
-  GetGaiaMag(maxmag,dblevel);//   3      1       0       2           6
-  GetgaiaFov(1.4*fov,level);   //   1      3      -1      -1           6
-  if (level<dblevel) then
-     dblevel:=level;         //   1      1      -1      -1           6
-  if dblevel<0 then
-     dblevel:=0;             //   1      1       0       0           6
-  nside:=round(2**level);
+  GetGaiaMag(maxmag,dblevel);
+  GetGaiaFov(2*fov,GaiaFovLevel);
+  GaiaRa:=ra;
+  GaiaDe:=de;
   GaiaSql:='select source_id,ra,de,phot_g_mean_mag,parallax,pmra,pmdec from gaia';
-  if level>=0 then begin
-    ipix:=0;
-    filter:=round((2**35)*(4**(12 - level)));
-    GaiaSql:=GaiaSql+' where (source_id / '+inttostr(filter)+') in (';
-    for i:=1 to 5 do begin
-      theta:=deg2rad*(90-de[i]);
-      phi:=deg2rad*ra[i];
-      ang2pix_nest64(nside,theta,phi,ipix);
-      GaiaSql:=GaiaSql+inttostr(ipix);
-      if i<5 then GaiaSql:=GaiaSql+',';
-    end;
-    GaiaSql:=GaiaSql+') and phot_g_mean_mag<'+formatfloat('0.00',maxmag);
-  end
-  else begin
-    GaiaSql:=GaiaSql+' '+
-         'where phot_g_mean_mag<'+formatfloat('0.00',maxmag);
-  end;
+  if GaiaFovLevel>=0 then
+     GaiaSql:=GaiaSql+' where (source_id / $FILTER) in ($IPIX) and phot_g_mean_mag<'+formatfloat('0.00',maxmag)
+  else
+     GaiaSql:=GaiaSql+' where phot_g_mean_mag<'+formatfloat('0.00',maxmag);
   if racrosszero then begin
     GaiaSql:=GaiaSql+' '+
          'and ('+
@@ -5977,14 +5969,86 @@ begin
   end;
 end;
 
+procedure Tcatalog.GetGaiaPixels(level:integer; out ipixlst: string);
+var theta,phi,pthe,pphi,pfov: double;
+    i,nside1,nside2,sidefactor: integer;
+    ipix,ipixmin,ipixmax: Int64;
+begin
+  nside1:=round(2**level);
+  nside2:=round(2**GaiaFovLevel);
+  if nside1<=nside2 then begin
+    ipixmin:=High(Int64);
+    ipixmax:=0;
+    for i:=1 to 5 do begin
+      theta:=deg2rad*(90-GaiaDe[i]);
+      phi:=deg2rad*GaiaRa[i];
+      ang2pix_nest64(nside1,theta,phi,ipix);
+      if ipix<ipixmin then ipixmin:=ipix;
+      if ipix>ipixmax then ipixmax:=ipix;
+    end;
+  end
+  else
+  begin
+    sidefactor:=nside1 div nside2;
+    sidefactor:=sidefactor*sidefactor;
+    ipixmin:=High(Int64);
+    ipixmax:=0;
+    for i:=1 to 5 do begin
+      theta:=deg2rad*(90-GaiaDe[i]);
+      phi:=deg2rad*GaiaRa[i];
+      ang2pix_nest64(nside2,theta,phi,ipix);
+      if ipix<ipixmin then ipixmin:=ipix;
+      if ipix>ipixmax then ipixmax:=ipix;
+    end;
+    ipixmin:=sidefactor*ipixmin;
+    ipixmax:=sidefactor*ipixmax+sidefactor-1;
+  end;
+  ipixlst:='';
+  theta:=deg2rad*(90-GaiaDe[5]);
+  phi:=deg2rad*GaiaRa[5];
+  pfov:=CatFov;
+  if (ipixmax-ipixmin)>10 then begin
+    for ipix:=ipixmin to ipixmax do begin
+      pix2ang_nest64(nside1,ipix,pthe,pphi);
+      if (pthe>(theta-pfov))and(pthe<(theta+pfov))and(pphi>(phi-pfov))and(pphi<(phi+pfov)) then begin
+        ipixlst:=ipixlst+inttostr(ipix)+',';
+      end;
+    end;
+  end
+  else begin
+    for ipix:=ipixmin to ipixmax do begin
+        ipixlst:=ipixlst+inttostr(ipix)+',';
+    end;
+  end;
+  if Length(ipixlst)>0 then delete(ipixlst,Length(ipixlst),1);
+end;
+
 function  Tcatalog.NextGaiaLevel:boolean;
+var LevelSql,ipixlst: string;
+    level: integer;
+    filter: Int64;
 begin
   result:=False;
   Inc(GaiaCurrentLevel);
   if GaiaCurrentLevel>GaiaMaxLevel then exit;
-  GaiaDb[GaiaCurrentLevel].Query(GaiaSql);
+  if GaiaFovLevel>=0 then begin
+    case GaiaCurrentLevel of
+      0: level:=1;
+      1: level:=3;
+      2: level:=6;
+    end;
+    filter:=round((2**35)*(4**(12 - level)));
+    GetGaiaPixels(level,ipixlst);
+    LevelSql:=StringReplace(GaiaSql,'$FILTER',inttostr(filter),[]);
+    LevelSql:=StringReplace(LevelSql,'$IPIX',ipixlst,[]);
+  end
+  else
+    LevelSql:=GaiaSql;
+  GaiaDb[GaiaCurrentLevel].Query(LevelSql);
   GaiaCurrentRow:=-1;
   result:=(GaiaDb[GaiaCurrentLevel].RowCount>0);
+  if (not result) then
+     result:=NextGaiaLevel;
 end;
 
 procedure Tcatalog.CloseGaia;
