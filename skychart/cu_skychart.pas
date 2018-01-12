@@ -3404,6 +3404,7 @@ var
 const
   b = ' ';
   b5 = '     ';
+  b6 = '      ';
   dp = ':';
 begin
   cfgsc.FindRA := rec.ra;
@@ -3436,9 +3437,9 @@ begin
         cfgsc.FindName := txt;
       Desc := Desc + '  *' + tab + txt + tab;
       if rec.star.magv < 90 then
-        str(rec.star.magv: 5: 2, txt)
+        str(rec.star.magv: 6: 3, txt)
       else
-        txt := b5;
+        txt := b6;
       Desc := Desc + trim(rec.options.flabel[lOffset + vsMagv]) + dp + txt + tab;
       for i := 1 to 10 do
       begin
@@ -3448,25 +3449,25 @@ begin
       if rec.star.valid[vsB_v] then
       begin
         if (rec.star.b_v < 90) then
-          str(rec.star.b_v: 5: 2, txt)
+          str(rec.star.b_v: 6: 3, txt)
         else
-          txt := b5;
+          txt := b6;
         Desc := Desc + trim(rec.options.flabel[lOffset + vsB_v]) + dp + txt + tab;
       end;
       if rec.star.valid[vsMagb] then
       begin
         if (rec.star.magb < 90) then
-          str(rec.star.magb: 5: 2, txt)
+          str(rec.star.magb: 6: 3, txt)
         else
-          txt := b5;
+          txt := b6;
         Desc := Desc + trim(rec.options.flabel[lOffset + vsMagb]) + dp + txt + tab;
       end;
       if rec.star.valid[vsMagr] then
       begin
         if (rec.star.magr < 90) then
-          str(rec.star.magr: 5: 2, txt)
+          str(rec.star.magr: 6: 3, txt)
         else
-          txt := b5;
+          txt := b6;
         Desc := Desc + trim(rec.options.flabel[lOffset + vsMagr]) + dp + txt + tab;
       end;
       if rec.star.valid[vsSp] then
@@ -3516,17 +3517,17 @@ begin
       if rec.variable.valid[vvMagmax] then
       begin
         if (rec.variable.magmax < 90) then
-          str(rec.variable.magmax: 5: 2, txt)
+          str(rec.variable.magmax: 6: 3, txt)
         else
-          txt := b5;
+          txt := b6;
         Desc := Desc + trim(rec.options.flabel[lOffset + vvMagmax]) + dp + txt + tab;
       end;
       if rec.variable.valid[vvMagmin] then
       begin
         if (rec.variable.magmin < 90) then
-          str(rec.variable.magmin: 5: 2, txt)
+          str(rec.variable.magmin: 6: 3, txt)
         else
-          txt := b5;
+          txt := b6;
         Desc := Desc + trim(rec.options.flabel[lOffset + vvMagmin]) + dp + txt + tab;
       end;
       if rec.variable.valid[vvVartype] then
@@ -3573,17 +3574,17 @@ begin
       if rec.double.valid[vdMag1] then
       begin
         if (rec.double.mag1 < 90) then
-          str(rec.double.mag1: 5: 2, txt)
+          str(rec.double.mag1: 6: 3, txt)
         else
-          txt := b5;
+          txt := b6;
         Desc := Desc + trim(rec.options.flabel[lOffset + vdMag1]) + dp + txt + tab;
       end;
       if rec.double.valid[vdMag2] then
       begin
         if (rec.double.mag2 < 90) then
-          str(rec.double.mag2: 5: 2, txt)
+          str(rec.double.mag2: 6: 3, txt)
         else
-          txt := b5;
+          txt := b6;
         Desc := Desc + trim(rec.options.flabel[lOffset + vdMag2]) + dp + txt + tab;
       end;
       if rec.double.valid[vdCompname] then
