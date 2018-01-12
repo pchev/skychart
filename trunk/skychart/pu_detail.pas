@@ -163,6 +163,8 @@ begin
           Delete(n, 1, 3);
         if pos('Sky', n) = 1 then
           Delete(n, 1, 3);
+        if copy(n,1,6)='UCAC4-' then
+          n[6]:=' ';
         n := StringReplace(n, ' ', '%20', [rfReplaceAll]);
         n := StringReplace(n, '+', '%2b', [rfReplaceAll]);
         n := StringReplace(n, '.', '%20', [rfReplaceAll]);

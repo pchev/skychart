@@ -664,9 +664,10 @@ const
     ('http://vizier.hia.nrc.ca/viz-bin/nph-sesame', 'CADC - Canada'),
     ('http://vizier.u-strasbg.fr/cgi-bin/nph-sesame',
     'VizieR - Strasbourg, France'));
-  infoname_maxurl = 3;
+  infoname_maxurl = 4;
   infoname_url: array [1..infoname_maxurl, 1..2] of string = (
     ('http://simbad.u-strasbg.fr/simbad/sim-id?Ident=$ID', 'Simbad'),
+    ('http://vizier.u-strasbg.fr/viz-bin/VizieR-S?$ID', 'Vizier'),
     ('http://ned.ipac.caltech.edu/cgi-bin/nph-objsearch?extend=no&out_csys=Equatorial&out_equinox=J2000.0&obj_sort=RA+or+Longitude&of=pre_text&zv_breaker=30000.0&list_limit=5&img_stamp=YES&objname=$ID', 'NED'),
     ('http://leda.univ-lyon1.fr/ledacat.cgi?o=$ID', 'HyperLeda'));
   infocoord_maxurl = 3;

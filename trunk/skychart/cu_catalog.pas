@@ -2028,9 +2028,6 @@ begin
       rec.star.id := rec.star.id + blank + trim(rec.str[5]) + blank + trim(rec.str[6]);
       rec.star.valid[vsId] := True;
     end;
-  end
-  else if copy(rec.star.id,1,6)='UCAC4-' then begin  // remove - to make the id compatible with vizier
-    rec.star.id[6]:=' ';
   end;
 end;
 
