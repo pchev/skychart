@@ -5,14 +5,14 @@ msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-23 11:33+0000\n"
-"PO-Revision-Date: 2017-07-28 15:49+0000\n"
+"PO-Revision-Date: 2017-11-26 02:03+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-11-23 12:13+0000\n"
-"X-Generator: Launchpad (build 18509)\n"
+"X-Launchpad-Export-Date: 2018-01-14 13:32+0000\n"
+"X-Generator: Launchpad (build 18532)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -1037,7 +1037,7 @@ msgstr "Calcular campo"
 
 #: u_translation.rscomputerises
 msgid "Compute rise/set time relative to this line"
-msgstr ""
+msgstr "Calcular la hora de salida/puesta relativa a esta línea"
 
 #: u_translation.rsconfiguratio
 msgid "Configuration"
@@ -4153,7 +4153,7 @@ msgstr "Por favor, intente reinstalar el programa."
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
-msgstr ""
+msgstr "Trazar el movimiento orbital de los objetos del Sistema Solar."
 
 #: u_translation.rspluto
 msgid "Pluto"

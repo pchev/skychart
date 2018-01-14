@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-23 11:33+0000\n"
-"PO-Revision-Date: 2017-07-30 16:56+0000\n"
+"PO-Revision-Date: 2017-12-13 16:19+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-11-23 12:13+0000\n"
-"X-Generator: Launchpad (build 18509)\n"
+"X-Launchpad-Export-Date: 2018-01-14 13:32+0000\n"
+"X-Generator: Launchpad (build 18532)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -1036,7 +1036,7 @@ msgstr "Calcula els camps"
 
 #: u_translation.rscomputerises
 msgid "Compute rise/set time relative to this line"
-msgstr ""
+msgstr "Calcula la sortida/posta d'aquesta línia"
 
 #: u_translation.rsconfiguratio
 msgid "Configuration"
@@ -4153,7 +4153,7 @@ msgstr "Si us plau, proveu de reinstal·lar el programa"
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
-msgstr ""
+msgstr "Mostra el moviment orbital dels objectes del sistema solar"
 
 #: u_translation.rspluto
 msgid "Pluto"
