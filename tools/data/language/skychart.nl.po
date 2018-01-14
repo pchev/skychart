@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-23 11:33+0000\n"
-"PO-Revision-Date: 2017-01-14 17:46+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"PO-Revision-Date: 2017-11-27 10:47+0000\n"
+"Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-11-23 12:12+0000\n"
-"X-Generator: Launchpad (build 18509)\n"
+"X-Launchpad-Export-Date: 2018-01-14 13:32+0000\n"
+"X-Generator: Launchpad (build 18532)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -63,7 +63,7 @@ msgstr "Over %s"
 
 #: u_translation.rsabove
 msgid "Above %s"
-msgstr ""
+msgstr "Boven %s"
 
 #: u_translation.rsabrevasteroid
 msgid "Ast"
@@ -127,7 +127,7 @@ msgstr "Activeer de timer gebeurtenis wanneer deze verborgen is"
 
 #: u_translation.rsactivatevoic
 msgid "Activate voice"
-msgstr ""
+msgstr "Activeer stem"
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
@@ -147,7 +147,7 @@ msgstr "Voeg een enkel element toe aan de database. Alle velden zijn verplicht."
 
 #: u_translation.rsaddcursorpos
 msgid "Add cursor position"
-msgstr ""
+msgstr "Voeg aanwijzer positie toe"
 
 #: u_translation.rsaddequatoria
 msgid "Show equatorial grid"
@@ -167,7 +167,7 @@ msgstr "Voeg labels toe voor elk object in de lijst"
 
 #: u_translation.rsaddtelescope
 msgid "Add telescope position"
-msgstr ""
+msgstr "Voeg telescoop-positie toe"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
@@ -335,7 +335,7 @@ msgstr "Pas wijziging toe op alle kaarten"
 
 #: u_translation.rsapril
 msgid "April"
-msgstr ""
+msgstr "april"
 
 #: u_translation.rsarchivethisi
 msgid "Archive this image?"
@@ -451,7 +451,7 @@ msgstr "Atmosferische refractie"
 
 #: u_translation.rsaugust
 msgid "August"
-msgstr ""
+msgstr "augustus"
 
 #: u_translation.rsauthors
 msgid "Authors"
@@ -675,7 +675,7 @@ msgstr "Kan niet verbinden met server. %s"
 
 #: u_translation.rscannotdownlo
 msgid "Cannot download PDF help now"
-msgstr ""
+msgstr "Kan nu geen PDF-hulp downloaden"
 
 #: u_translation.rscannotdraw
 msgid "Cannot draw"
@@ -839,7 +839,7 @@ msgstr "Kaart instellingen"
 
 #: u_translation.rschartsync
 msgid "Time sync"
-msgstr ""
+msgstr "Tijdsynchronisatie"
 
 #: u_translation.rschart_
 msgid "Chart_"
@@ -1035,7 +1035,7 @@ msgstr "Bereken veld"
 
 #: u_translation.rscomputerises
 msgid "Compute rise/set time relative to this line"
-msgstr ""
+msgstr "Bereken de opkomst/ondergang tijden ten opzichte van deze lijn."
 
 #: u_translation.rsconfiguratio
 msgid "Configuration"
@@ -1227,7 +1227,7 @@ msgstr "Creëert Postscript kaart. Alstublieft geduld..."
 
 #: u_translation.rscreaterasterwh
 msgid "Create raster chart %d x %d. Please wait..."
-msgstr ""
+msgstr "Bezig raster kaart %d x %d te maken. Even geduld.."
 
 #: u_translation.rscrossmeridia
 msgid "Cross meridian"
@@ -1247,7 +1247,7 @@ msgstr "Huidig stuurprogramma"
 
 #: u_translation.rscursor
 msgid "Cursor"
-msgstr ""
+msgstr "Aanwijzer"
 
 #: u_translation.rscustom
 msgid "Custom"
@@ -1387,7 +1387,7 @@ msgstr "DEC/El zwenksnelheid"
 
 #: u_translation.rsdecember
 msgid "December"
-msgstr ""
+msgstr "december"
 
 #: u_translation.rsdecimaldegre
 msgid "Decimal degrees"
@@ -2124,7 +2124,7 @@ msgstr "Snel"
 
 #: u_translation.rsfaster
 msgid "Faster"
-msgstr ""
+msgstr "Sneller"
 
 #: u_translation.rsfavorite
 msgid "Favorite"
@@ -2132,7 +2132,7 @@ msgstr "Favoriet"
 
 #: u_translation.rsfebruary
 msgid "February"
-msgstr ""
+msgstr "februari"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -2604,7 +2604,7 @@ msgstr "Icoon klik-actie"
 
 #: u_translation.rsicons
 msgid "Icons"
-msgstr ""
+msgstr "Iconen"
 
 #: u_translation.rsiconsize
 msgid "Icon size"
@@ -2808,7 +2808,7 @@ msgstr "Het duurt te lang om de %s uit catalogus %s af te beelden, overweeg alsj
 
 #: u_translation.rsjanuary
 msgid "January"
-msgstr ""
+msgstr "januari"
 
 #: u_translation.rsjd
 msgid "JD:"
@@ -2836,11 +2836,11 @@ msgstr "Juliaans jaar"
 
 #: u_translation.rsjuly
 msgid "July"
-msgstr ""
+msgstr "juli"
 
 #: u_translation.rsjune
 msgid "June"
-msgstr ""
+msgstr "juni"
 
 #: u_translation.rsjupiter
 msgid "Jupiter"
@@ -3113,7 +3113,7 @@ msgstr "Lengte klimmende knoop"
 
 #: u_translation.rslookat
 msgid "Look at:"
-msgstr ""
+msgstr "Zie:"
 
 #: u_translation.rslosange
 msgid "Lozenge"
@@ -3141,7 +3141,7 @@ msgstr "Maansverduisteringen"
 
 #: u_translation.rsly
 msgid "ly"
-msgstr ""
+msgstr "lj"
 
 #: u_translation.rsmag
 msgid "Mag:"
@@ -3225,7 +3225,7 @@ msgstr "Kaart"
 
 #: u_translation.rsmarch
 msgid "March"
-msgstr ""
+msgstr "maart"
 
 #: u_translation.rsmark
 msgid "Mark"
@@ -3265,7 +3265,7 @@ msgstr "Maximum rijen"
 
 #: u_translation.rsmay
 msgid "May"
-msgstr ""
+msgstr "mei"
 
 #: u_translation.rsmbytes
 msgid "MBytes"
@@ -3681,7 +3681,7 @@ msgstr "Niet geïnitialiseerd"
 
 #: u_translation.rsnovember
 msgid "November"
-msgstr ""
+msgstr "november"
 
 #: u_translation.rsnow
 msgid "Now"
@@ -3785,7 +3785,7 @@ msgstr "Verouderd"
 
 #: u_translation.rsoctober
 msgid "October"
-msgstr ""
+msgstr "oktober"
 
 #: u_translation.rsoff
 msgid "Off"
@@ -3901,7 +3901,7 @@ msgstr "Oriëntatie"
 
 #: u_translation.rsorienttothep
 msgid "Orient to the pole"
-msgstr ""
+msgstr "Oriënteer op de pool"
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file:"
@@ -4153,7 +4153,7 @@ msgstr "Probeer alstublieft het programma opnieuw te installeren."
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
-msgstr ""
+msgstr "Beeld baanbeweging af van zonnestelsel objecten."
 
 #: u_translation.rspluto
 msgid "Pluto"
@@ -4505,7 +4505,7 @@ msgstr "Herstel verborgen labels"
 
 #: u_translation.rsrectangular
 msgid "Rectangular"
-msgstr ""
+msgstr "Rechthoekig"
 
 #: u_translation.rsred
 msgid "Red"
@@ -4625,7 +4625,7 @@ msgstr "Rotatie ongedaan maken"
 
 #: u_translation.rsresettime
 msgid "Reset time"
-msgstr ""
+msgstr "Reset de tijd"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
@@ -4989,7 +4989,7 @@ msgstr "Scheiding"
 
 #: u_translation.rsseptember
 msgid "September"
-msgstr ""
+msgstr "september"
 
 #: u_translation.rsserialport
 msgid "Serial Port"
@@ -5209,7 +5209,7 @@ msgstr "Toon objecten"
 
 #: u_translation.rsshowobsolete
 msgid "Show obsolete drivers"
-msgstr ""
+msgstr "Toon verouderde drivers"
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian"
@@ -5309,7 +5309,7 @@ msgstr " Zwenksnelheid"
 
 #: u_translation.rsslewtochartc
 msgid "Slew to chart center"
-msgstr ""
+msgstr "Zwenk naar kaart-centrum"
 
 #: u_translation.rsslewtocursor
 msgid "Slew to cursor position"
@@ -5321,7 +5321,7 @@ msgstr "Langzaam"
 
 #: u_translation.rsslower
 msgid "Slower"
-msgstr ""
+msgstr "Langzamer"
 
 #: u_translation.rsslowest
 msgid "Slowest"
@@ -5741,7 +5741,7 @@ msgstr "Deze catalogus bevat %s records. Vanwege de programma-performance is het
 
 #: u_translation.rsthisdirectdr
 msgid "This direct driver is kept for compatibility, it may work or not for you. But the preference is to use the INDI or ASCOM driver for your telescope."
-msgstr ""
+msgstr "Deze directe driver is behouden voor compatibiliteit. Het kan in jouw geval functioneren, maar misschien ook niet. Gebruik bij voorkeur de INDI of ASCOM driver voor je telescoop."
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -5845,7 +5845,7 @@ msgstr "Totale straal"
 
 #: u_translation.rstour
 msgid "Tour"
-msgstr ""
+msgstr "Rondgang"
 
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
