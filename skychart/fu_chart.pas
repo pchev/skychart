@@ -81,6 +81,7 @@ type
     MenuCircle9: TMenuItem;
     MenuCircle10: TMenuItem;
     EyepieceMask: TMenuItem;
+    nsearch4: TMenuItem;
     SlewCenter: TMenuItem;
     MenuTelescopeToObsList: TMenuItem;
     MenuCursorToObsList: TMenuItem;
@@ -529,6 +530,7 @@ begin
   nsearch1.Caption := infoname_url[1, 2];
   nsearch2.Caption := infoname_url[2, 2];
   nsearch3.Caption := infoname_url[3, 2];
+  nsearch4.Caption := infoname_url[4, 2];
   SearchMenu1.Caption := rsSearchByPosi;
   search1.Caption := infocoord_url[1, 2];
   search2.Caption := infocoord_url[2, 2];
@@ -1335,6 +1337,8 @@ begin
       Delete(n, 1, 3);
     if pos('Sky', n) = 1 then
       Delete(n, 1, 3);
+    if copy(n,1,6)='UCAC4-' then
+      n[6]:=' ';
     n := StringReplace(n, ' ', '%20', [rfReplaceAll]);
     n := StringReplace(n, '+', '%2b', [rfReplaceAll]);
     n := StringReplace(n, '.', '%20', [rfReplaceAll]);
