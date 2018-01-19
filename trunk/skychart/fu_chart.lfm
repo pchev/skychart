@@ -226,6 +226,11 @@ object f_chart: Tf_chart
         Caption = 'New Item38'
         OnClick = nsearch1Click
       end
+      object nsearch4: TMenuItem
+        Tag = 4
+        Caption = 'MenuItem1'
+        OnClick = nsearch1Click
+      end
     end
     object SearchMenu1: TMenuItem
       Caption = 'SearchMenu1'
