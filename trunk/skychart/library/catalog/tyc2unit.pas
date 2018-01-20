@@ -141,7 +141,7 @@ var
 
 Function IsTY2path(path : string) : Boolean;
 begin
-result:= FileExists(slash(path)+'tyc2idx.dat');
+result:= FileExists(slash(path)+'tyc2idx.dat') or FileExists(slash(path)+'catalog.dat');
 end;
 
 procedure SetTY2path(path : string);
