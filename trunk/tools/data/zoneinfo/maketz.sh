@@ -22,7 +22,7 @@ tar xzf ../tzdata*.tar.gz
 make TOPDIR=$wd/tzdata/ install
 if [[ $? != 0 ]]; then echo make error;  exit 1; fi
 
-cd etc/zoneinfo
+cd usr/share/zoneinfo
 if [[ $? != 0 ]]; then  exit 1; fi
 cp zone.tab $wd/zoneinfo
 if [[ $? != 0 ]]; then  exit 1; fi
