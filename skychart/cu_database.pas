@@ -1590,34 +1590,27 @@ end;
 function TCDCdb.AddFitsArchiveFile(ArchivePath, fn: string): boolean;
 var
   ra, de, w, h, r: double;
-  p: integer;
+  p, n: integer;
+  info: TcdcWCSinfo;
   cmd, objn, fname: string;
 begin
   Result := False;
-  FFits.FileName := slash(ArchivePath) + fn;
-  ra := FFits.Center_RA;
-  de := FFits.Center_DE;
-  w := FFits.Img_Width;
-  h := FFits.img_Height;
-  r := FFits.Rotation;
-  fname := FFits.FileName;
-  if FFits.header.valid then
+  fname := slash(ArchivePath) + fn;
+  n := cdcwcs_initfitsfile(PChar(fname),0);
+  if n=0 then
+     n := cdcwcs_getinfo(addr(info),0);
+  cdcwcs_release(0);
+  if n=0 then
   begin
-    objn := FFits.header.objects;
-    if objn > '' then
-    begin
-      objn := StringReplace(objn, '''', '', [rfReplaceAll]);
-      p := pos(',', objn);
-      if p > 0 then
-        objn := copy(objn, 1, p - 1);
-    end
-    else
-    begin
-      objn := extractfilename(fn);
-      p := pos(extractfileext(objn), objn);
-      objn := copy(objn, 1, p - 1);
-      objn := uppercase(stringreplace(objn, blank, '', [rfReplaceAll]));
-    end;
+    ra := deg2rad * info.cra;
+    de := deg2rad * info.cdec;
+    w := deg2rad * info.wp * info.secpix / 3600;
+    h := deg2rad * info.hp * info.secpix / 3600;
+    r := deg2rad * info.rot;
+    objn := extractfilename(fn);
+    p := pos(extractfileext(objn), objn);
+    objn := copy(objn, 1, p - 1);
+    objn := uppercase(stringreplace(objn, blank, '', [rfReplaceAll]));
     cmd := 'INSERT INTO cdc_fits (filename,catalogname,objectname,ra,de,width,height,rotation) VALUES ('
       + '"' + stringreplace(fname, '\', '\\', [rfReplaceAll]) + '"' +
       ',"' + uppercase(ArchivePath) + '"' + ',"' + uppercase(objn) + '"' +
