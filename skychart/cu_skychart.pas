@@ -540,9 +540,13 @@ begin
   vostar_magmax := Fcatalog.GetVOstarmag;
   if Fcatalog.cfgshr.AutoStarFilter then
   begin
-    if (cfgsc.fov > (0.5 * deg2rad)) or cfgsc.Quick then
+    if (cfgsc.fov > (0.0166667 * deg2rad)) or cfgsc.Quick then
       Fcatalog.cfgcat.StarMagMax :=
-        round(10 * (Fcatalog.cfgshr.AutoStarFilterMag + 2.4 * log10(intpower(pid2 / cfgsc.fov, 2)))) / 10
+        max(5,
+        round(10 * (
+        Fcatalog.cfgshr.AutoStarFilterMag + 2.4 * log10((pid2*pid2) / (cfgsc.fov*cfgsc.fov*(1+2*cos(min(3*cfgsc.fov,pid2)) ))))
+        ) / 10
+        )
     else
       Fcatalog.cfgcat.StarMagMax := 99;
   end
