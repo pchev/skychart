@@ -1261,7 +1261,7 @@ procedure Tf_config_display.ShowColor;
 var
   fs: TSearchRec;
   buf: string;
-  i, n: integer;
+  i: integer;
 begin
   bg1.color := cplot.bgColor;
   bg3.color := cplot.bgColor;
@@ -1292,7 +1292,6 @@ begin
   shape27.brush.color := cplot.color[21];
   shape28.brush.color := cplot.color[22];
   ThemeList.Clear;
-  n := 0;
   i := findfirst(slash(appdir) + slash('data') + slash('Themes') + '*', faDirectory, fs);
   while i = 0 do
   begin
@@ -1302,14 +1301,15 @@ begin
       if DirectoryExists(slash(appdir) + slash('data') + slash('Themes') + slash(buf) + 'daylight' ) then
       begin
         ThemeList.items.Add(buf);
-        if cmain.ThemeName = buf then
-          ThemeList.ItemIndex := n;
       end;
-      Inc(n);
     end;
     i := findnext(fs);
   end;
   findclose(fs);
+  for i:=0 to ThemeList.Items.Count-1 do begin
+    if cmain.ThemeName = ThemeList.Items[i] then
+      ThemeList.ItemIndex := i;
+  end;
 end;
 
 procedure Tf_config_display.ShowSkyColor;
