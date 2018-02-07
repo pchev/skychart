@@ -2873,7 +2873,7 @@ var
 begin
   rec.ra := deg2rad * lin.ar / 100000;
   rec.Dec := deg2rad * lin.de / 100000;
-  if (lin.pa2 <> -999) and (lin.sep2 > 0) then
+  if (lin.pa2 <> -999) and (lin.sep2 > 0) and (lin.sep2 < 9999) then
   begin
     rec.double.epoch := lin.date2;
     rec.double.pa := lin.pa2;
@@ -2885,6 +2885,7 @@ begin
     rec.double.pa := lin.pa1;
     rec.double.sep := lin.sep1 / 10;
   end;
+  if rec.double.sep>999 then rec.double.sep:=0;
   rec.double.mag1 := lin.ma / 100;
   rec.double.mag2 := lin.mb / 100;
   rec.double.id := lin.id;
