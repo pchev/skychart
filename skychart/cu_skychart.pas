@@ -1544,9 +1544,10 @@ end;
 function Tskychart.DrawDblStars: boolean;
 var
   rec: GcatRec;
-  x1, y1, x2, y2, rot, timelimit: double;
+  x1, y1, x2, y2, rot, timelimit,bv: double;
   xx, yy: single;
   lid, lnum, lp, rs: integer;
+  sp: char;
   lis, buf: string;
 begin
   if VerboseMsg then
@@ -1585,8 +1586,22 @@ begin
           if cfgsc.FlipY < 0 then
             rec.double.pa := 180 - rec.double.pa;
           rec.double.pa := Deg2Rad * rec.double.pa + rot;
+          if rec.double.sp1>'' then begin
+            sp:=rec.double.sp1[1];
+            // not a real b-v, just a value to match the star color range
+            case sp of
+              'O','B' : bv:=-0.5;
+                  'A' : bv:=-0.2;
+                  'F' : bv:=0;
+                  'G' : bv:=0.3;
+                  'K' : bv:=0.6;
+              'M','R','N','S' : bv:=1.5;
+               else bv:=0;
+            end;
+          end
+          else bv:=0;
           rs := Fplot.PlotDblStar(xx, yy, abs(rec.double.sep * secarc * cfgsc.BxGlb),
-            rec.double.mag1, rec.double.sep, rec.double.pa, 0);
+            rec.double.mag1, rec.double.sep, rec.double.pa, bv);
           if (rec.double.mag1 < cfgsc.StarmagMax - cfgsc.LabelMagDiff[3]) then
           begin
             if cfgsc.MagLabel then
