@@ -934,7 +934,7 @@ begin
   Result := 0;
   if not cfgplot.Usebmp then
   begin
-    PlotStar1(x, y, ma, b_v);
+    Result := PlotStar1(x, y, ma, b_v);
     exit;
   end;
 
@@ -1176,42 +1176,47 @@ end;
 
 function TSplot.PlotDblStar(x, y, r: single; ma, sep, pa, b_v: double): integer;
 var
-  rd: double;
-  ds, ds2, xx, yy: integer;
+  ds, xx, yy: integer;
 begin
   Result := 0;
 
   xx := round(x);
   yy := round(y);
 
-  if not cfgplot.Invisible then
-    ds := round(max(3, (cfgplot.starsize *
-      (cfgchart.min_ma - ma * cfgplot.stardyn / 80) / cfgchart.min_ma)) * cfgchart.drawsize)
-  else
-    ds := 0;
-
-  ds2 := trunc(ds / 2);
-  rd := max(r, ds2 + cfgchart.drawsize * (2 + 2 * (0.7 + ln(min(50, max(0.5, sep))))));
-
   if cfgplot.UseBMP then
   begin
-    Result := PlotStar(x, y, ma, b_v);
-    BGRADrawLine(x, y, x - round(rd * sin(pa)), y - round(rd * cos(pa)), ColorToBGRA(
-      cfgplot.Color[15]), 1, cbmp);
+    ds := PlotStar(x, y, ma, b_v);
+    result:=ds;
+    if r>max(5*cfgchart.drawsize,2*ds) then begin
+       BGRADrawLine(x, y, x - round(r * sin(pa)), y - round(r * cos(pa)), ColorToBGRA(cfgplot.Color[15]), 1, cbmp)
+    end
+    else begin
+       BGRADrawLine(x - ds-2*cfgchart.drawsize, y, x - ds, y , ColorToBGRA(cfgplot.Color[15]), 1, cbmp);
+       BGRADrawLine(x + ds, y, x + ds+2*cfgchart.drawsize, y , ColorToBGRA(cfgplot.Color[15]), 1, cbmp);
+    end;
   end
   else
   if cnv <> nil then
     with cnv do
     begin
-      Result := PlotStar(x, y, ma, b_v);
+      ds := PlotStar(x, y, ma, b_v);
+      result:=ds;
       Pen.Width := 1;
       Pen.Color := cfgplot.Color[15];
       Brush.style := bsSolid;
       Pen.Mode := pmCopy;
-      MoveTo(xx - round(rd * sin(pa)), yy - round(rd * cos(pa)));
-      LineTo(xx, yy);
+      if r>max(5*cfgchart.drawsize,2*ds) then begin
+        MoveTo(xx - round(r * sin(pa)), yy - round(r * cos(pa)));
+        LineTo(xx, yy);
+      end
+      else begin
+        Pen.Width := cfgchart.drawsize;
+        MoveTo(xx - ds-2*cfgchart.drawsize, yy);
+        LineTo(xx - ds, yy);
+        MoveTo(xx + ds, yy);
+        LineTo(xx + ds+2*cfgchart.drawsize, yy);
+      end;
     end;
-
 end;
 
 procedure TSplot.PlotDeepSkyObject(Axx, Ayy: single; Adim, Ama, Asbr, Apixscale: double;
