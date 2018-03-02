@@ -53,3 +53,6 @@ skychart*.exe
 skychart*.zip
 skychart*.tar.xz
 skychart*.dmg
+bin-*.tar.xz
+bin-*.zip
+update-bin-*.zip
