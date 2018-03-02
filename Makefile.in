@@ -110,7 +110,7 @@ install_pict:
 uninstall_data:
 	\$(MAKE) -C tools uninstall
 revision:
-	\$(MAKE) -C skychart revision
+	./git-version.sh
 endif
 endif
 endif

@@ -2,30 +2,28 @@
 
 # Script to make the full source tar for release
 
-version=4.1
-pkg=trunk
-#pkg=tags/V310
-repo=http://svn.code.sf.net/p/skychart/code
+version=4.1.1
+repo=https://github.com/pchev/skychart.git
 
 builddir=/tmp/skychart-src  # Be sure this is set to a non existent directory, it is removed after the run!
 
 wd=`pwd`
 
 # Get revision number
-svnrev=$(LC_ALL=C svn --non-interactive info $wd |grep "Last Changed Rev:" | sed 's/Last Changed Rev: //')
-#svnrev=$(LC_ALL=C svn --non-interactive info $repo/$pkg |grep "Last Changed Rev:" | sed 's/Last Changed Rev: //')
-verdir=skychart-$version-$svnrev-src
+rev=$(git rev-list --count --first-parent HEAD)
+verdir=skychart-$version-$rev-src
 
 mkdir -p $builddir
 cd $builddir
+if [[ $? -ne 0 ]]; then exit 1;fi
 
 # export sources
-svn export $repo/$pkg $verdir
+svn export $repo/trunk $verdir
 
 # revision include
 cat <<EOF > $verdir/skychart/revision.inc
 // Created by source export for version $version
-const RevisionStr = '$svnrev';
+const RevisionStr = '$rev';
 EOF
 
 # download doc
@@ -41,7 +39,7 @@ cd $builddir
 # download jpleph
 cd $verdir/BaseData
 wget http://sourceforge.net/projects/skychart/files/4-source_data/data_jpleph.tgz
-cd -
+cd $builddir
 
 # tar files
 tar cvJf $verdir.tar.xz $verdir
@@ -50,4 +48,5 @@ mv $verdir.tar.xz $wd/
 
 cd $wd
 rm -rf $builddir
+
 

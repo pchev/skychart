@@ -15,7 +15,7 @@ fi
 
 wd=`pwd`
 
-currentrev=`LC_ALL=C svn info . | grep Revision: | sed 's/Revision: //'`
+currentrev=$(git rev-list --count --first-parent HEAD)
 
 # delete old files
   rm skychart-data-stars*.dmg

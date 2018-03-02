@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-version=4.1
+version=4.1.1
 
 builddir=/tmp/skychart  # Be sure this is set to a non existent directory, it is removed after the run!
 innosetup="C:\Program Files (x86)\Inno Setup 5\ISCC.exe"  # Install under Wine from http://www.jrsoftware.org/isinfo.php
@@ -44,7 +44,7 @@ wd=`pwd`
 
 # check if new revision since last run
 read lastrev <last.build
-currentrev=$(LANG=C svn info . | grep Revision: | sed 's/Revision: //')
+currentrev=$(git rev-list --count --first-parent HEAD)
 if [[ -z $currentrev ]]; then 
  currentrev=$(grep RevisionStr skychart/revision.inc| sed "s/const RevisionStr = '//"| sed "s/';//")
 fi
@@ -90,6 +90,7 @@ if [[ $make_linux32 ]]; then
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/debian $builddir
   cd $builddir
+  mkdir debian/skychart/usr/
   mv bin debian/skychart/usr/
   mv share debian/skychart/usr/
   cd debian
@@ -104,6 +105,11 @@ if [[ $make_linux32 ]]; then
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/rpm $builddir
   cd $builddir
+  mkdir -p rpm/RPMS/x86_64
+  mkdir -p rpm/RPMS/i386
+  mkdir rpm/SRPMS
+  mkdir rpm/tmp
+  mkdir -p rpm/skychart/usr/
   mv debian/skychart/usr/* rpm/skychart/usr/
   cd rpm
   sed -i "/Version:/ s/3/$version/"  SPECS/skychart.spec
@@ -160,6 +166,7 @@ if [[ $make_linux64 ]]; then
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/debian $builddir
   cd $builddir
+  mkdir debian/skychart64/usr/
   mv bin debian/skychart64/usr/
   mv share debian/skychart64/usr/
   cd debian
@@ -174,6 +181,11 @@ if [[ $make_linux64 ]]; then
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/rpm $builddir
   cd $builddir
+  mkdir -p rpm/RPMS/x86_64
+  mkdir -p rpm/RPMS/i386
+  mkdir rpm/SRPMS
+  mkdir rpm/tmp
+  mkdir -p rpm/skychart/usr/
   mv debian/skychart64/usr/* rpm/skychart/usr/
   cd rpm
   sed -i "/Version:/ s/3/$version/"  SPECS/skychart64.spec
@@ -208,6 +220,7 @@ fi
 # make Windows i386 version
 if [[ $make_win32 ]]; then
   rsync -a --exclude=.svn system_integration/Windows/installer/skychart/* $builddir
+  mkdir $builddir/Data
   export PATH=$mingw32:$save_PATH
   ./configure $configopt prefix=$builddir/Data target=i386-win32$extratarget
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -262,6 +275,7 @@ fi
 # make Windows x86_64 version
 if [[ $make_win64 ]]; then
   rsync -a --exclude=.svn system_integration/Windows/installer/skychart/* $builddir
+  mkdir $builddir/Data
   export PATH=$mingw64:$save_PATH
   ./configure $configopt prefix=$builddir/Data target=x86_64-win64$extratarget
   if [[ $? -ne 0 ]]; then exit 1;fi

@@ -1,0 +1,49 @@
+# ignore backup dir
+skychart/backup/
+varobs/backup/
+#ignore external data
+BaseData/*.tgz
+BaseData/*.xz
+# ignore fpc makefiles
+Makefile
+Makefile.fpc
+Makefile.fpcxxx
+# ignore build dir
+skychart/units/
+varobs/units/
+skychart/component/lib/
+skychart/component/bgrabitmap/lib/
+skychart/component/downloaddialog/lib/
+skychart/component/enhedits/lib/
+skychart/component/indiclient/lib/
+skychart/component/jdcalendar/lib/
+skychart/component/libsql/lib/
+skychart/component/mrecsort/lib/
+skychart/component/multiframe/lib/
+skychart/component/radec/lib/
+skychart/component/synapse/source/lib/lib/
+skychart/component/uniqueinstance/lib/
+skychart/component/vo/lib/
+skychart/component/vosamp/lib/
+skychart/component/xmlparser/lib/
+skychart/component/zoomimage/lib/
+skychart/library/catalog/lib
+tools/doc/
+tools/wiki_doc/
+tools/data/language/launchpad/download/
+tools/data/language/launchpad/translation/
+# ignore binary
+*.o
+skychart/library/getdss/libgetdss.*
+skychart/library/plan404/libplan404.*
+skychart/library/wcs/libcdcwcs.*
+skychart/cdc
+skychart/cdcicon
+skychart/cdc.exe
+skychart/cdcicon.exe
+skychart*.rpm
+skychart*.deb
+skychart*.exe
+skychart*.zip
+skychart*.tar.xz
+skychart*.dmg

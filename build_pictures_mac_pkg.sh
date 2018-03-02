@@ -17,7 +17,7 @@ wd=`pwd`
 
 lang=LANG
 LANG=C
-currentrev=`svn info . | grep Revision: | sed 's/Revision: //'`
+currentrev=$(git rev-list --count --first-parent HEAD)
 LANG=$lang
 
 # delete old files

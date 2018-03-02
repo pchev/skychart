@@ -22,7 +22,7 @@ fi
 
 wd=`pwd`
 
-currentrev=`LC_ALL=C svn info . | grep Revision: | sed 's/Revision: //'`
+currentrev=$(git rev-list --count --first-parent HEAD)
 
 # delete old files
   rm skychart-data-stars*.bz2
@@ -48,6 +48,7 @@ if [[ $make_linux ]]; then
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/debian $builddir
   cd $builddir
+  mkdir debian/skychart-data-stars/usr/
   mv share debian/skychart-data-stars/usr/
   cd debian
   sz=$(du -s skychart-data-stars/usr | cut -f1)
@@ -61,6 +62,10 @@ if [[ $make_linux ]]; then
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/rpm $builddir
   cd $builddir
+  mkdir -p rpm/RPMS/noarch
+  mkdir rpm/SRPMS
+  mkdir rpm/tmp
+  mkdir -p rpm/skychart-data-stars/usr/
   mv debian/skychart-data-stars/usr/* rpm/skychart-data-stars/usr/
   cd rpm
   sed -i "/Version:/ s/3/$version/"  SPECS/skychart-data-stars.spec
@@ -76,6 +81,7 @@ fi
 # make Windows version
 if [[ $make_win ]]; then
   rsync -a --exclude=.svn system_integration/Windows/installer/skychart-data-stars/* $builddir
+  mkdir $builddir/Data
   ./configure $configopt prefix=$builddir/Data target=i386-win32,x86_64-linux
   if [[ $? -ne 0 ]]; then exit 1;fi
   make install_win_cat1

@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-version=4.1
+version=4.1.1
 
 builddir=/tmp/skychart  # Be sure this is set to a non existent directory, it is removed after the run!
 
@@ -26,7 +26,7 @@ wd=`pwd`
 
 # check if new revision since last run
 read lastrev <last.build
-currentrev=$(LANG=C svn info . | grep Revision: | sed 's/Revision: //')
+currentrev=$(git rev-list --count --first-parent HEAD)
 if [[ -z $currentrev ]]; then 
  currentrev=$(grep RevisionStr skychart/revision.inc| sed "s/const RevisionStr = '//"| sed "s/';//")
 fi
@@ -64,6 +64,7 @@ if [[ $make_linuxarm ]]; then
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/debian $builddir
   cd $builddir
+  mkdir debian/skychartarm/usr/
   mv bin debian/skychartarm/usr/
   mv lib debian/skychartarm/usr/
   mv share debian/skychartarm/usr/
