@@ -32,6 +32,8 @@ tools/doc/
 tools/wiki_doc/
 tools/data/language/launchpad/download/
 tools/data/language/launchpad/translation/
+last.build
+beta.txt
 # ignore binary
 *.o
 skychart/library/getdss/libgetdss.*
@@ -41,6 +43,10 @@ skychart/cdc
 skychart/cdcicon
 skychart/cdc.exe
 skychart/cdcicon.exe
+varobs/varobs
+varobs/varobs.exe
+varobs/varobs_lpv_bulletin
+varobs/varobs_lpv_bulletin.exe
 skychart*.rpm
 skychart*.deb
 skychart*.exe
