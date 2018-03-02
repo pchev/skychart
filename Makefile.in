@@ -66,6 +66,8 @@ install_pict:
 	./install_darwin_pict.sh $(PREFIX) 
 uninstall_data:
 	\$(MAKE) -C tools uninstall
+revision:
+	./git-version.sh
 else
 install: 
 	./install.sh $(PREFIX) $(CPU_TARGET)
