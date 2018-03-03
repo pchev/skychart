@@ -1584,9 +1584,9 @@ begin
   if fileexists(buf) then
   begin
     f_info.setpage(3);
-    f_info.TitlePanel.Caption :=
-      f_info.TitlePanel.Caption + ', ' + rsVersion + blank + cdcversion +
-      '-' + RevisionStr;
+    f_info.TitlePanel.Caption :=f_info.TitlePanel.Caption + ', ' + rsVersion + blank + cdcversion + blank;
+    if cdcbeta then f_info.TitlePanel.Caption := f_info.TitlePanel.Caption + 'beta-';
+    f_info.TitlePanel.Caption := f_info.TitlePanel.Caption + RevisionStr;
     if shownext then
       f_info.Button1.Caption := rsNext
     else
@@ -11250,12 +11250,10 @@ end;
 procedure Tf_main.MenuUpdSoftClick(Sender: TObject);
 var
   ver, newver, newbeta, fn, url: string;
-  beta: boolean;
   f: textfile;
 begin
   ver := cdcversion + '-' + RevisionStr;
-  beta := Pos('-svn-', ver) > 0;
-  if beta then
+  if cdcbeta then
   begin
     url := 'http://www.ap-i.net/pub/skychart/beta.txt';
     fn := slash(TempDir) + 'beta.txt';

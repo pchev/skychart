@@ -102,7 +102,9 @@ begin
   SetLang;
   panel1.Caption := URL_WebHome;
   button2.Caption := URL_BugTracker;
-  label2.Caption := rsVersion + blank + cdcversion + '-' + RevisionStr + blank + compile_time;
+  label2.Caption := rsVersion + blank + cdcversion + blank;
+  if cdcbeta then label2.Caption :=label2.Caption+'beta-';
+  label2.Caption :=label2.Caption+ RevisionStr + blank + compile_time;
   label4.Caption := rsCompiledWith + blank + compile_version;
 end;
 

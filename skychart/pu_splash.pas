@@ -81,9 +81,9 @@ procedure Tf_splash.FormCreate(Sender: TObject);
 begin
   ScaleDPI(Self);
   label2.Caption := rsVersion + blank + cdcversion;
-  if pos('svn', cdcversion) > 0 then
+  if cdcbeta then
   begin
-    label2.Caption := label2.Caption + RevisionStr;
+    label2.Caption := label2.Caption +blank+'beta-'+ RevisionStr;
     LabelDate.Caption := compile_time;
     LabelDate.Visible := True;
   end
