@@ -1,2 +1,2 @@
 // git revision
-const RevisionStr = '3672-2fdd0a9f';
+const RevisionStr = '3673-39d4f943';
