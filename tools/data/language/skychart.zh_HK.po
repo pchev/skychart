@@ -1,15 +1,15 @@
-# Marathi translation for skychart
-# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
+# Chinese (Hong Kong) translation for skychart
+# Copyright (c) 2018 Rosetta Contributors and Canonical Ltd 2018
 # This file is distributed under the same license as the skychart package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2017-11-23 11:33+0000\n"
-"PO-Revision-Date: 2016-03-04 21:39+0000\n"
-"Last-Translator: astromahesh <astromahesh@gmail.com>\n"
-"Language-Team: Marathi <mr@li.org>\n"
+"PO-Revision-Date: 2018-02-15 14:53+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -910,7 +910,7 @@ msgstr ""
 
 #: u_translation.rsclosechart
 msgid "Close chart"
-msgstr "तक्ता बंद करा"
+msgstr ""
 
 #: u_translation.rscloseconnect
 msgid "Close connection"
@@ -1354,7 +1354,7 @@ msgstr ""
 
 #: u_translation.rsday
 msgid "Day"
-msgstr "दिवस"
+msgstr ""
 
 #: u_translation.rsdays
 msgid "days"
@@ -1838,7 +1838,7 @@ msgstr ""
 
 #: u_translation.rseast
 msgid "East"
-msgstr "पूर्व"
+msgstr ""
 
 #: u_translation.rseastside
 msgid "East side"
@@ -1858,7 +1858,7 @@ msgstr ""
 
 #: u_translation.rseclipticcoor
 msgid "Ecliptic coordinates"
-msgstr "आयनिक निर्देशांक"
+msgstr ""
 
 #: u_translation.rseclipticcoor3
 msgid "Ecliptic coord."
@@ -1970,7 +1970,7 @@ msgstr ""
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
-msgstr "वैषुविक निर्देशांक"
+msgstr ""
 
 #: u_translation.rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
@@ -2170,7 +2170,7 @@ msgstr ""
 
 #: u_translation.rsfile
 msgid "File"
-msgstr "फाइल"
+msgstr ""
 
 #: u_translation.rsfilenamewith
 msgid "Filename without path or extension"
@@ -2834,7 +2834,7 @@ msgstr ""
 
 #: u_translation.rsjulianyear
 msgid "Julian Year"
-msgstr "ज्युलियन वर्ष"
+msgstr ""
 
 #: u_translation.rsjuly
 msgid "July"
@@ -3022,7 +3022,7 @@ msgstr ""
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
-msgstr "सर्व तक्ते जोडा"
+msgstr ""
 
 #: u_translation.rslist
 msgid "List"
@@ -3398,7 +3398,7 @@ msgstr ""
 
 #: u_translation.rsmonth
 msgid "Month"
-msgstr "महिना"
+msgstr ""
 
 #: u_translation.rsmoon
 msgid "Moon"
@@ -3542,7 +3542,7 @@ msgstr ""
 
 #: u_translation.rsnewchart
 msgid "New chart"
-msgstr "नविन तक्ता"
+msgstr ""
 
 #: u_translation.rsnewfindercir
 msgid "New finder circle"
@@ -3634,7 +3634,7 @@ msgstr ""
 
 #: u_translation.rsnorth
 msgid "North"
-msgstr "उत्तर"
+msgstr ""
 
 #: u_translation.rsnosamphubpro
 msgid "No SAMP hub profile found, no hub is running."
@@ -3686,7 +3686,7 @@ msgstr ""
 
 #: u_translation.rsnow
 msgid "Now"
-msgstr "आत्ता"
+msgstr ""
 
 #: u_translation.rsnumberofcopi
 msgid "Number of copies"
@@ -3866,7 +3866,7 @@ msgstr ""
 
 #: u_translation.rsopen
 msgid "Open"
-msgstr "उघडा"
+msgstr ""
 
 #: u_translation.rsopenachart
 msgid "Open a chart"
@@ -4190,7 +4190,7 @@ msgstr ""
 
 #: u_translation.rsposition
 msgid "Position"
-msgstr "स्थान"
+msgstr ""
 
 #: u_translation.rspositionangl
 msgid "Position angle"
@@ -4882,7 +4882,7 @@ msgstr ""
 
 #: u_translation.rssecond
 msgid "Second"
-msgstr "सेकंद"
+msgstr ""
 
 #: u_translation.rsseconds
 msgid "Seconds"
@@ -5082,7 +5082,7 @@ msgstr ""
 
 #: u_translation.rsshowallsky
 msgid "Show all sky"
-msgstr "सर्व आकाश दाखवा"
+msgstr ""
 
 #: u_translation.rsshowasinglep
 msgid "Show a single picture on the map."
@@ -5102,7 +5102,7 @@ msgstr ""
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
-msgstr "धूमकेतू दर्शवा"
+msgstr ""
 
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
@@ -5170,7 +5170,7 @@ msgstr ""
 
 #: u_translation.rsshowlabels
 msgid "Show labels"
-msgstr "नावे दाखवा"
+msgstr ""
 
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
@@ -5186,7 +5186,7 @@ msgstr ""
 
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
-msgstr "आकाशगंगा दर्शवा"
+msgstr ""
 
 #: u_translation.rsshowneareart
 msgid "Show near Earth asteroids independently of the magnitude"
@@ -5230,7 +5230,7 @@ msgstr ""
 
 #: u_translation.rsshowplanets
 msgid "Show planets"
-msgstr "ग्रह दर्शवा"
+msgstr ""
 
 #: u_translation.rsshowposition
 msgid "Show position in title bar"
@@ -5402,7 +5402,7 @@ msgstr ""
 
 #: u_translation.rssouth
 msgid "South"
-msgstr "दक्षिण"
+msgstr ""
 
 #: u_translation.rsspacer
 msgid "Spacer"
@@ -6250,7 +6250,7 @@ msgstr ""
 
 #: u_translation.rswest
 msgid "West"
-msgstr "पश्चिम"
+msgstr ""
 
 #: u_translation.rswestside
 msgid "West side"
@@ -6274,7 +6274,7 @@ msgstr ""
 
 #: u_translation.rsyear
 msgid "Year"
-msgstr "वर्ष"
+msgstr ""
 
 #: u_translation.rsyears
 msgid "years"
@@ -6326,7 +6326,7 @@ msgstr ""
 
 #: u_translation.rszoomin
 msgid "Zoom in"
-msgstr "मोठे करा"
+msgstr ""
 
 #: u_translation.rszoommoretovi
 msgid "Zoom more to view the object"
@@ -6334,5 +6334,5 @@ msgstr ""
 
 #: u_translation.rszoomout
 msgid "Zoom out"
-msgstr "लहान करा"
+msgstr ""
 
