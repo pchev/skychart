@@ -7,7 +7,7 @@
 #    - install wkhtmltopdf from http://code.google.com/p/wkhtmltopdf/
 #
 
-langs='ca  en  es  fr  it  nl  uk'
+langs='ca  en  es  fr  nl'
 suffix=$1
 
 rm doc_*.pdf pdflist.txt
