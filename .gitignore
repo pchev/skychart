@@ -34,6 +34,7 @@ tools/data/language/launchpad/download/
 tools/data/language/launchpad/translation/
 last.build
 beta.txt
+lastPDF.build
 # ignore binary
 *.o
 skychart/library/getdss/libgetdss.*
