@@ -76,6 +76,7 @@ type
     msg: TMemo;
     dev: TPageControl;
     NoConnection: TPanel;
+    Splitter1: TSplitter;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -295,6 +296,7 @@ begin
   devname := dp.getDeviceName;
   tb := dev.AddTabSheet;
   tb.Caption := devname;
+  tb.BorderWidth:=0;
   idev := TIndiDev.Create;
   idev.page := TPageControl.Create(self);
   idev.page.Parent := tb;
@@ -328,7 +330,7 @@ end;
 
 procedure Tf_indigui.dmsg(txt: string);
 begin
-  msg.Lines.Add(txt);
+  msg.Lines.Add(FormatDateTime('hh:nn:ss.zzz',now)+': '+txt);
 end;
 
 procedure Tf_indigui.NewMessage(mp: IMessage);
@@ -371,6 +373,7 @@ begin
     tb.Caption := groupname;
     sb := TScrollBox.Create(self);
     sb.Parent := tb;
+    sb.BorderStyle:=bsNone;
     sb.Align := alClient;
     sb.AutoSize := True;
     sb.ChildSizing.ControlsPerLine := 6;

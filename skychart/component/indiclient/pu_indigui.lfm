@@ -6,6 +6,7 @@ object f_indigui: Tf_indigui
   Caption = 'INDI'
   ClientHeight = 520
   ClientWidth = 670
+  DesignTimePPI = 95
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -13,19 +14,11 @@ object f_indigui: Tf_indigui
   Visible = False
   object dev: TPageControl
     Left = 0
-    Height = 430
+    Height = 425
     Top = 0
     Width = 670
     Align = alClient
     TabOrder = 0
-  end
-  object msg: TMemo
-    Left = 0
-    Height = 90
-    Top = 430
-    Width = 670
-    Align = alBottom
-    TabOrder = 1
   end
   object NoConnection: TPanel
     Left = 128
@@ -37,5 +30,26 @@ object f_indigui: Tf_indigui
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 2
+  end
+  object Splitter1: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 425
+    Width = 670
+    Align = alBottom
+    Beveled = True
+    ParentColor = False
+    ResizeAnchor = akBottom
+  end
+  object msg: TMemo
+    Left = 0
+    Height = 90
+    Top = 430
+    Width = 670
+    Align = alBottom
+    ReadOnly = True
+    ScrollBars = ssAutoVertical
+    TabOrder = 1
   end
 end
