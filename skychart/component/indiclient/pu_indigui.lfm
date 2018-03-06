@@ -11,6 +11,7 @@ object f_indigui: Tf_indigui
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
+  LCLVersion = '1.8.2.0'
   Visible = False
   object dev: TPageControl
     Left = 0

@@ -88,7 +88,7 @@ type
     FIndiServer, FIndiPort, FIndiDevice: string;
     FonDestroy: TNotifyEvent;
     FButtonGroup: integer;
-    indiclosing: boolean;
+    indiclosing,FDisconnectedServer: boolean;
     procedure dmsg(txt: string);
     procedure NewDevice(dp: Basedevice);
     procedure DeleteDevice(dp: Basedevice);
@@ -121,6 +121,7 @@ type
     property IndiServer: string read FIndiServer write FIndiServer;
     property IndiPort: string read FIndiPort write FIndiPort;
     property IndiDevice: string read FIndiDevice write FIndiDevice;
+    property DisconnectedServer: Boolean read FDisconnectedServer;
     property onDestroy: TNotifyEvent read FonDestroy write FonDestroy;
   end;
 
@@ -236,6 +237,7 @@ end;
 procedure Tf_indigui.FormCreate(Sender: TObject);
 begin
   indiclosing := False;
+  FDisconnectedServer := False;
   FButtonGroup := 1;
   FIndiServer := 'localhost';
   FIndiPort := '7624';
@@ -283,8 +285,10 @@ end;
 
 procedure Tf_indigui.ServerDisconnected(Sender: TObject);
 begin
-  if not indiclosing then
+  if not indiclosing then begin
+    FDisconnectedServer:=true;
     Close;
+  end;
 end;
 
 procedure Tf_indigui.NewDevice(dp: Basedevice);
