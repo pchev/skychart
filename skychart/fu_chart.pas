@@ -7304,6 +7304,7 @@ begin
     end;
     ra := rmod(ra + pi2, pi2);
     Fpop_indi.ScopeGoto(ra * rad2deg / 15, Dec * rad2deg, ok);
+    Fshowinfo(Format(rsSlewingTo, [ARtoStr(ra * rad2deg / 15), DEToStr(dec * rad2deg)]));
   end
   else
     Fshowinfo(rsNoTargetObje);
@@ -7312,6 +7313,7 @@ end;
 procedure Tf_chart.AbortSlewINDI(Sender: TObject);
 begin
   Fpop_indi.ScopeAbortSlew;
+  Fshowinfo(rsAbortSlew);
 end;
 
 procedure Tf_chart.SyncINDI(Sender: TObject);
@@ -7334,6 +7336,7 @@ begin
     end;
     ra := rmod(ra + pi2, pi2);
     Fpop_indi.ScopeAlign(sc.cfgsc.FindName, ra * rad2deg / 15, Dec * rad2deg);
+    Fshowinfo(Format(rsSyncedTo, [ARtoStr(ra * rad2deg / 15), DEToStr(dec * rad2deg)]));
   end
   else
     Fshowinfo(rsNoTargetObje);
@@ -7396,6 +7399,7 @@ begin
     end;
     ra := rmod(ra + pi2, pi2);
     Fpop_lx200.ScopeGoto(ra * rad2deg / 15, Dec * rad2deg, ok);
+    Fshowinfo(Format(rsSlewingTo, [ARtoStr(ra * rad2deg / 15), DEToStr(dec * rad2deg)]));
   end
   else
     Fshowinfo(rsNoTargetObje);
@@ -7404,6 +7408,7 @@ end;
 procedure Tf_chart.AbortSlewLX200(Sender: TObject);
 begin
   Fpop_lx200.ScopeAbortSlew;
+  Fshowinfo(rsAbortSlew);
 end;
 
 procedure Tf_chart.SyncLX200(Sender: TObject);
@@ -7426,6 +7431,7 @@ begin
     end;
     ra := rmod(ra + pi2, pi2);
     Fpop_lx200.ScopeAlign(sc.cfgsc.FindName, ra * rad2deg / 15, Dec * rad2deg);
+    Fshowinfo(Format(rsSyncedTo, [ARtoStr(ra * rad2deg / 15), DEToStr(dec * rad2deg)]));
   end
   else
     Fshowinfo(rsNoTargetObje);
@@ -7487,6 +7493,7 @@ begin
     end;
     ra := rmod(ra + pi2, pi2);
     Fpop_encoder.ScopeAlign(sc.cfgsc.FindName, ra * rad2deg / 15, Dec * rad2deg);
+    Fshowinfo(Format(rsSyncedTo, [ARtoStr(ra * rad2deg / 15), DEToStr(dec * rad2deg)]));
   end
   else
     Fshowinfo(rsNoTargetObje);
@@ -7551,6 +7558,7 @@ begin
     end;
     ra := rmod(ra + pi2, pi2);
     Fpop_scope.ScopeGoto(ra * rad2deg / 15, Dec * rad2deg, ok);
+    Fshowinfo(Format(rsSlewingTo, [ARtoStr(ra * rad2deg / 15), DEToStr(dec * rad2deg)]));
   end
   else
     Fshowinfo(rsNoTargetObje);
@@ -7559,6 +7567,7 @@ end;
 procedure Tf_chart.AbortSlewASCOM(Sender: TObject);
 begin
   Fpop_scope.ScopeAbortSlew;
+  Fshowinfo(rsAbortSlew);
 end;
 
 procedure Tf_chart.SyncASCOM(Sender: TObject);
@@ -7581,6 +7590,7 @@ begin
     end;
     ra := rmod(ra + pi2, pi2);
     Fpop_scope.ScopeAlign(sc.cfgsc.FindName, ra * rad2deg / 15, Dec * rad2deg);
+    Fshowinfo(Format(rsSyncedTo, [ARtoStr(ra * rad2deg / 15), DEToStr(dec * rad2deg)]));
   end
   else
     Fshowinfo(rsNoTargetObje);

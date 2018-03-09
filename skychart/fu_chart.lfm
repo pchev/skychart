@@ -5,6 +5,8 @@ object f_chart: Tf_chart
   Width = 508
   ClientHeight = 338
   ClientWidth = 508
+  DesignTimePPI = 95
+  ParentFont = False
   TabOrder = 0
   object Panel1: TPanel
     Left = 0

@@ -9,6 +9,7 @@ object pop_indi: Tpop_indi
   Caption = 'INDI Telescope Interface'
   ClientHeight = 450
   ClientWidth = 300
+  DesignTimePPI = 95
   OnCloseQuery = kill
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -38,6 +39,7 @@ object pop_indi: Tpop_indi
       Height = 25
       Top = 40
       Width = 65
+      Cancel = True
       Caption = 'Hide'
       OnClick = SpeedButton2Click
       TabOrder = 4
@@ -128,7 +130,7 @@ object pop_indi: Tpop_indi
     end
     object pos_x: TEdit
       Left = 30
-      Height = 24
+      Height = 30
       Top = 8
       Width = 86
       ReadOnly = True
@@ -137,7 +139,7 @@ object pop_indi: Tpop_indi
     end
     object pos_y: TEdit
       Left = 158
-      Height = 24
+      Height = 30
       Top = 8
       Width = 86
       ReadOnly = True
@@ -181,7 +183,7 @@ object pop_indi: Tpop_indi
     end
     object lat: TEdit
       Left = 8
-      Height = 24
+      Height = 30
       Top = 32
       Width = 86
       Color = clBtnFace
@@ -192,7 +194,7 @@ object pop_indi: Tpop_indi
     end
     object long: TEdit
       Left = 112
-      Height = 24
+      Height = 30
       Top = 32
       Width = 82
       Color = clBtnFace
@@ -219,7 +221,7 @@ object pop_indi: Tpop_indi
     end
     object Elev: TEdit
       Left = 209
-      Height = 24
+      Height = 30
       Top = 32
       Width = 80
       ReadOnly = True
@@ -239,7 +241,7 @@ object pop_indi: Tpop_indi
     TabOrder = 0
     object Edit1: TEdit
       Left = 8
-      Height = 24
+      Height = 30
       Top = 8
       Width = 281
       Color = clBtnFace

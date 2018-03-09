@@ -1641,6 +1641,8 @@ resourcestring
     + 'for your telescope.';
   rsShowObsolete = 'Show obsolete drivers';
   rsComputeRiseS = 'Compute rise/set time relative to this line';
+  rsSlewingTo = 'Slewing to %s / %s';
+  rsSyncedTo = 'Synced to %s / %s';
 
 // also update upsi_translation
 
