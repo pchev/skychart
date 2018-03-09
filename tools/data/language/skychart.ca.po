@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-09 11:19+0000\n"
+"POT-Creation-Date: 2018-03-09 16:30+0000\n"
 "PO-Revision-Date: 2017-12-13 16:19+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-03-09 12:08+0000\n"
-"X-Generator: Launchpad (build 18566)\n"
+"X-Launchpad-Export-Date: 2018-03-09 16:36+0000\n"
+"X-Generator: Launchpad (build 18571)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -2401,6 +2401,10 @@ msgstr "Llista dels asteroides."
 #: u_translation.rsgetdssimage
 msgid "Get the DSS image"
 msgstr "Obté una imatge DSS"
+
+#: u_translation.rsgetfromteles
+msgid "Get from telescope"
+msgstr ""
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
@@ -5035,10 +5039,6 @@ msgstr "Camp de visió a"
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
 msgstr "Indiqueu el moviment de la muntura per cada volta del cargol. Així, el botó Telescopi del menú us indicarà el nombre de voltes a fer per anar d'un objecte a un altre."
 
-#: u_translation.rssetlocation
-msgid "Set Location"
-msgstr "Fixa la situació"
-
 #: u_translation.rssetobservato
 msgid "Set observatory location"
 msgstr "Fixeu el lloc d'observació"
@@ -5062,6 +5062,10 @@ msgstr "Posa situació i hora"
 #: u_translation.rssettime
 msgid "Set Time"
 msgstr "Posa l'hora"
+
+#: u_translation.rssettotelesco
+msgid "Set to telescope"
+msgstr ""
 
 #: u_translation.rssetup
 msgid "Setup"

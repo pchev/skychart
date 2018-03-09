@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-09 11:19+0000\n"
+"POT-Creation-Date: 2018-03-09 16:30+0000\n"
 "PO-Revision-Date: 2017-12-03 14:24+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-03-09 12:08+0000\n"
-"X-Generator: Launchpad (build 18566)\n"
+"X-Launchpad-Export-Date: 2018-03-09 16:36+0000\n"
+"X-Generator: Launchpad (build 18571)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -2405,6 +2405,10 @@ msgstr "Adquirir lista de Asteróide."
 #: u_translation.rsgetdssimage
 msgid "Get the DSS image"
 msgstr "Adquirir Imagem DSS"
+
+#: u_translation.rsgetfromteles
+msgid "Get from telescope"
+msgstr ""
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
@@ -5038,10 +5042,6 @@ msgstr "Definir FOV como"
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
 msgstr "Defina como a montagem se desloca em cada eixo quando gira o manípulo respectivo (taxa de deslocação por volta). Uma vez feita esta definição, um clique no botão telescópio (\"Painel de Controlo\") mostrar-lhe-á quantas voltas deve efetuar para ir de um objecto ao outro."
 
-#: u_translation.rssetlocation
-msgid "Set Location"
-msgstr "Colocar localização"
-
 #: u_translation.rssetobservato
 msgid "Set observatory location"
 msgstr "Definir a localização do observatório"
@@ -5065,6 +5065,10 @@ msgstr "Definir local e tempo"
 #: u_translation.rssettime
 msgid "Set Time"
 msgstr "Definir tempo"
+
+#: u_translation.rssettotelesco
+msgid "Set to telescope"
+msgstr ""
 
 #: u_translation.rssetup
 msgid "Setup"

@@ -614,7 +614,9 @@ begin
   GroupBox5.Caption := rsObservatory;
   Label15.Caption := rsLatitude;
   Label16.Caption := rsLongitude;
-  ButtonSetLocation.Caption := rsSetLocation;
+  label2.Caption:=rsAltitude;
+  ButtonSetLocation.Caption := rsSetToTelesco;
+  ButtonGetLocation.Caption := rsGetFromTeles;
   ButtonSetTime.Caption := rsSetTime;
   ButtonTracking.Caption := rsTracking;
   ButtonAbort.Caption := rsAbortSlew;

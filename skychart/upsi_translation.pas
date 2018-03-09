@@ -1133,7 +1133,6 @@ begin
   CL.AddConstantN('rsRefreshRate', 'String').SetString(rsRefreshRate);
   CL.AddConstantN('rsSelect', 'String').SetString(rsSelect);
   CL.AddConstantN('rsConfigure', 'String').SetString(rsConfigure);
-  CL.AddConstantN('rsSetLocation', 'String').SetString(rsSetLocation);
   CL.AddConstantN('rsSetTime', 'String').SetString(rsSetTime);
   CL.AddConstantN('rsTracking', 'String').SetString(rsTracking);
   CL.AddConstantN('rsConnect', 'String').SetString(rsConnect);

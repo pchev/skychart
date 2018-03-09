@@ -174,11 +174,11 @@ object pop_indi: Tpop_indi
       ParentColor = False
     end
     object ButtonSetLocation: TSpeedButton
-      Left = 32
+      Left = 8
       Height = 22
       Top = 64
-      Width = 99
-      Caption = 'Set Location'
+      Width = 139
+      Caption = 'Set to telescope'
       OnClick = ButtonSetLocationClick
     end
     object lat: TEdit
@@ -204,11 +204,11 @@ object pop_indi: Tpop_indi
       Text = '0'
     end
     object ButtonGetLocation: TSpeedButton
-      Left = 176
+      Left = 157
       Height = 22
       Top = 64
-      Width = 99
-      Caption = 'Get Location'
+      Width = 139
+      Caption = 'Get from telescope'
       OnClick = ButtonGetLocationClick
     end
     object Label1: TLabel

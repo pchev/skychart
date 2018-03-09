@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-09 11:19+0000\n"
+"POT-Creation-Date: 2018-03-09 16:30+0000\n"
 "PO-Revision-Date: 2016-12-11 08:54+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-03-09 12:08+0000\n"
-"X-Generator: Launchpad (build 18566)\n"
+"X-Launchpad-Export-Date: 2018-03-09 16:36+0000\n"
+"X-Generator: Launchpad (build 18571)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2400,6 +2400,10 @@ msgstr "Ná í lista yfir smástirni."
 #: u_translation.rsgetdssimage
 msgid "Get the DSS image"
 msgstr "Ná í DSS mynd"
+
+#: u_translation.rsgetfromteles
+msgid "Get from telescope"
+msgstr ""
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
@@ -5033,10 +5037,6 @@ msgstr "Stilla sjónsviðið á"
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
 msgstr "Stilltu hvernig stæðið hreyfist eftir ásunum þegar þú snýrð drifhúninum. Síðan birtir sjónaukahnappurinn hve marga snúninga þarf til þess að fara frá einu fyrirbæri til annars."
 
-#: u_translation.rssetlocation
-msgid "Set Location"
-msgstr ""
-
 #: u_translation.rssetobservato
 msgid "Set observatory location"
 msgstr "Ákveða staðsetningu athuganda"
@@ -5059,6 +5059,10 @@ msgstr ""
 
 #: u_translation.rssettime
 msgid "Set Time"
+msgstr ""
+
+#: u_translation.rssettotelesco
+msgid "Set to telescope"
 msgstr ""
 
 #: u_translation.rssetup

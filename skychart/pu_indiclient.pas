@@ -706,6 +706,14 @@ begin
   SpeedButton6.Caption := rsAbortSlew;
   SpeedButton2.Caption := rsHide;
   SpeedButton4.Caption := rsHelp;
+  ButtonSetLocation.Caption := rsSetToTelesco;
+  ButtonGetLocation.Caption := rsGetFromTeles;
+  GroupBox5.Caption:=rsObservatory;
+  label15.Caption:=rsLatitude;
+  label16.Caption:=rsLongitude;
+  label1.Caption:=rsAltitude;
+  LabelAlpha.Caption:=rsRA;
+  LabelDelta.Caption:=rsDEC;
   SetHelp(self, hlpINDI);
 end;
 

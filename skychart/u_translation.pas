@@ -1160,7 +1160,6 @@ resourcestring
   rsRefreshRate = 'Refresh rate';
   rsSelect = 'Select';
   rsConfigure = 'Configure';
-  rsSetLocation = 'Set Location';
   rsSetTime = 'Set Time';
   rsTracking = 'Tracking';
   rsConnect = 'Connect';
@@ -1643,6 +1642,8 @@ resourcestring
   rsComputeRiseS = 'Compute rise/set time relative to this line';
   rsSlewingTo = 'Slewing to %s / %s';
   rsSyncedTo = 'Synced to %s / %s';
+  rsSetToTelesco = 'Set to telescope';
+  rsGetFromTeles = 'Get from telescope';
 
 // also update upsi_translation
 

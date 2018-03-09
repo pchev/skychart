@@ -9,6 +9,7 @@ object pop_scope: Tpop_scope
   Caption = 'ASCOM Telescope Interface'
   ClientHeight = 481
   ClientWidth = 305
+  DesignTimePPI = 95
   OnCloseQuery = kill
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -21,8 +22,8 @@ object pop_scope: Tpop_scope
     Top = 384
     Width = 305
     Align = alTop
-    ClientHeight = 84
-    ClientWidth = 301
+    ClientHeight = 86
+    ClientWidth = 303
     TabOrder = 3
     object ButtonConnect: TSpeedButton
       Left = 5
@@ -83,8 +84,8 @@ object pop_scope: Tpop_scope
     Width = 305
     Align = alTop
     Caption = 'Observatory '
-    ClientHeight = 121
-    ClientWidth = 301
+    ClientHeight = 122
+    ClientWidth = 303
     TabOrder = 1
     object Label15: TLabel
       Left = 16
@@ -103,26 +104,26 @@ object pop_scope: Tpop_scope
       ParentColor = False
     end
     object ButtonSetTime: TSpeedButton
-      Left = 16
+      Left = 9
       Height = 22
       Top = 92
-      Width = 128
+      Width = 136
       Caption = 'Set Time'
       Enabled = False
       OnClick = ButtonSetTimeClick
     end
     object ButtonSetLocation: TSpeedButton
-      Left = 16
+      Left = 9
       Height = 22
       Top = 64
-      Width = 126
-      Caption = 'Set Location'
+      Width = 139
+      Caption = 'Set to telescope'
       Enabled = False
       OnClick = ButtonSetLocationClick
     end
     object lat: TEdit
       Left = 16
-      Height = 26
+      Height = 30
       Top = 32
       Width = 80
       Color = clBtnFace
@@ -133,7 +134,7 @@ object pop_scope: Tpop_scope
     end
     object long: TEdit
       Left = 115
-      Height = 26
+      Height = 30
       Top = 32
       Width = 70
       Color = clBtnFace
@@ -143,11 +144,11 @@ object pop_scope: Tpop_scope
       Text = '0'
     end
     object ButtonGetLocation: TSpeedButton
-      Left = 157
+      Left = 156
       Height = 22
       Top = 64
-      Width = 131
-      Caption = 'Get Location'
+      Width = 139
+      Caption = 'Get from telescope'
       Enabled = False
       OnClick = ButtonGetLocationClick
     end
@@ -161,7 +162,7 @@ object pop_scope: Tpop_scope
     end
     object elev: TEdit
       Left = 209
-      Height = 26
+      Height = 30
       Top = 32
       Width = 80
       ReadOnly = True
@@ -225,7 +226,7 @@ object pop_scope: Tpop_scope
     end
     object pos_x: TEdit
       Left = 64
-      Height = 26
+      Height = 30
       Top = 6
       Width = 80
       ReadOnly = True
@@ -234,7 +235,7 @@ object pop_scope: Tpop_scope
     end
     object pos_y: TEdit
       Left = 200
-      Height = 26
+      Height = 30
       Top = 6
       Width = 80
       ReadOnly = True
@@ -243,7 +244,7 @@ object pop_scope: Tpop_scope
     end
     object az_x: TEdit
       Left = 64
-      Height = 26
+      Height = 30
       Top = 30
       Width = 80
       ReadOnly = True
@@ -252,7 +253,7 @@ object pop_scope: Tpop_scope
     end
     object alt_y: TEdit
       Left = 200
-      Height = 26
+      Height = 30
       Top = 30
       Width = 80
       ReadOnly = True
@@ -261,9 +262,9 @@ object pop_scope: Tpop_scope
     end
     object ShowAltAz: TCheckBox
       Left = 8
-      Height = 23
+      Height = 21
       Top = 32
-      Width = 23
+      Width = 21
       TabOrder = 2
     end
     object ButtonTracking: TSpeedButton
@@ -293,8 +294,8 @@ object pop_scope: Tpop_scope
     Width = 305
     Align = alTop
     Caption = 'Driver Selection'
-    ClientHeight = 111
-    ClientWidth = 301
+    ClientHeight = 112
+    ClientWidth = 303
     TabOrder = 0
     object ButtonSelect: TSpeedButton
       Left = 182
@@ -330,7 +331,7 @@ object pop_scope: Tpop_scope
     end
     object Edit1: TEdit
       Left = 2
-      Height = 26
+      Height = 30
       Top = 15
       Width = 172
       Color = clBtnFace
@@ -340,7 +341,7 @@ object pop_scope: Tpop_scope
     end
     object ReadIntBox: TComboBox
       Left = 110
-      Height = 26
+      Height = 30
       Top = 52
       Width = 64
       ItemHeight = 0

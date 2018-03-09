@@ -4458,10 +4458,6 @@ msgstr ""
 msgid "Configure"
 msgstr ""
 
-#: u_translation:rssetlocation
-msgid "Set Location"
-msgstr ""
-
 #: u_translation:rssettime
 msgid "Set Time"
 msgstr ""
@@ -6324,5 +6320,13 @@ msgstr ""
 
 #: u_translation:rssyncedto
 msgid "Synced to %s / %s"
+msgstr ""
+
+#: u_translation:rssettotelesco
+msgid "Set to telescope"
+msgstr ""
+
+#: u_translation:rsgetfromteles
+msgid "Get from telescope"
 msgstr ""
 

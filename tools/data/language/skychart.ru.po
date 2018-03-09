@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-09 11:19+0000\n"
+"POT-Creation-Date: 2018-03-09 16:30+0000\n"
 "PO-Revision-Date: 2018-03-07 20:34+0000\n"
 "Last-Translator: sernik <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-03-09 12:08+0000\n"
-"X-Generator: Launchpad (build 18566)\n"
+"X-Launchpad-Export-Date: 2018-03-09 16:36+0000\n"
+"X-Generator: Launchpad (build 18571)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -2400,6 +2400,10 @@ msgstr "Получение списка астероидов"
 #: u_translation.rsgetdssimage
 msgid "Get the DSS image"
 msgstr "Получить DSS для текущего поля"
+
+#: u_translation.rsgetfromteles
+msgid "Get from telescope"
+msgstr ""
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
@@ -5034,10 +5038,6 @@ msgstr "Поле зрения"
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
 msgstr "Установите, как монтировка движется по каждой оси при вращении ручек. После этого нажатие кнопки \"Контрольная панель телескопа\" покажет вам сколько оборотов ручек нужно сделать, чтобы перейти от одного объекта к другому."
 
-#: u_translation.rssetlocation
-msgid "Set Location"
-msgstr "Задать место"
-
 #: u_translation.rssetobservato
 msgid "Set observatory location"
 msgstr "Установка местонахождения обсерватории"
@@ -5061,6 +5061,10 @@ msgstr "Настройте местонахождение и время"
 #: u_translation.rssettime
 msgid "Set Time"
 msgstr "Задать время"
+
+#: u_translation.rssettotelesco
+msgid "Set to telescope"
+msgstr ""
 
 #: u_translation.rssetup
 msgid "Setup"
