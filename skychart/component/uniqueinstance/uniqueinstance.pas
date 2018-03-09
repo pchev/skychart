@@ -40,13 +40,8 @@ interface
 uses
 {$ifdef unix}
   process, math,
-{ TODO : can be removed if using fpc 2.5.1 or heigher  }
-// http://bugs.freepascal.org/view.php?id=15219
-// solved by fpc 2.5.1
-  cdcsimpleipc,
-{$else}
-  simpleipc,
 {$endif}
+  simpleipc,
   Forms, Classes, SysUtils,  ExtCtrls;
 
 type

@@ -1,6 +1,7 @@
 # ignore backup dir
 skychart/backup/
 varobs/backup/
+skychart/component/uniqueinstance/backup/
 #ignore external data
 BaseData/*.tgz
 BaseData/*.xz
