@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-23 11:33+0000\n"
-"PO-Revision-Date: 2017-11-04 17:03+0000\n"
+"POT-Creation-Date: 2018-03-09 11:19+0000\n"
+"PO-Revision-Date: 2018-03-07 20:34+0000\n"
 "Last-Translator: sernik <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-03-06 16:04+0000\n"
+"X-Launchpad-Export-Date: 2018-03-09 12:08+0000\n"
 "X-Generator: Launchpad (build 18566)\n"
 "Language: ru_UA\n"
 
@@ -63,7 +63,7 @@ msgstr "%s"
 
 #: u_translation.rsabove
 msgid "Above %s"
-msgstr ""
+msgstr "Над %s"
 
 #: u_translation.rsabrevasteroid
 msgid "Ast"
@@ -839,7 +839,7 @@ msgstr "Параметры карты"
 
 #: u_translation.rschartsync
 msgid "Time sync"
-msgstr ""
+msgstr "Системное время"
 
 #: u_translation.rschart_
 msgid "Chart_"
@@ -1035,7 +1035,7 @@ msgstr "Вычислить поле"
 
 #: u_translation.rscomputerises
 msgid "Compute rise/set time relative to this line"
-msgstr ""
+msgstr "Вычислить время восхода/захода относительно контура"
 
 #: u_translation.rsconfiguratio
 msgid "Configuration"
@@ -1795,7 +1795,7 @@ msgstr "Метод отображения планет"
 
 #: u_translation.rsdrawtheappar
 msgid "Draw the apparent depressed horizon line"
-msgstr "Нарисовать линию опущенного горизонта"
+msgstr "Показать линию опущенного горизонта"
 
 #: u_translation.rsdrift
 msgid "Yearly drift"
@@ -2191,7 +2191,7 @@ msgstr "Залить Млечный путь"
 
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
-msgstr "Залить цветом горизонта"
+msgstr "Залить цветом"
 
 #: u_translation.rsfilter
 msgid "Filter ->"
@@ -2603,7 +2603,7 @@ msgstr "Действие после нажатия значка"
 
 #: u_translation.rsicons
 msgid "Icons"
-msgstr ""
+msgstr "Значки"
 
 #: u_translation.rsiconsize
 msgid "Icon size"
@@ -2735,7 +2735,7 @@ msgstr "Инициализация базы данных"
 
 #: u_translation.rsinnersolarsy
 msgid "Inner Solar System"
-msgstr "Внутренняя Солнечная система"
+msgstr "Внутренние планеты"
 
 #: u_translation.rsinputcatalog
 msgid "Input catalog files"
@@ -3112,7 +3112,7 @@ msgstr "Долгота восходящего узла"
 
 #: u_translation.rslookat
 msgid "Look at:"
-msgstr ""
+msgstr "Смотреть с"
 
 #: u_translation.rslosange
 msgid "Lozenge"
@@ -3920,7 +3920,7 @@ msgstr "Данные других программ"
 
 #: u_translation.rsoutersolarsy
 msgid "Outer Solar System"
-msgstr "Внешняя Солнечная система"
+msgstr "Внешние планеты"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
@@ -4152,7 +4152,7 @@ msgstr "Пожалуйста, переустановите программу."
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
-msgstr ""
+msgstr "Построение траекторий движения объектов Солнечной системы"
 
 #: u_translation.rspluto
 msgid "Pluto"
@@ -4504,7 +4504,7 @@ msgstr "Восстановление скрытых меток"
 
 #: u_translation.rsrectangular
 msgid "Rectangular"
-msgstr ""
+msgstr "Проекция"
 
 #: u_translation.rsred
 msgid "Red"
@@ -5268,7 +5268,7 @@ msgstr "Сидерич. день"
 
 #: u_translation.rssimulation
 msgid "Simulation"
-msgstr "Треки объектов"
+msgstr "Траектории"
 
 #: u_translation.rssize
 msgid "Size"
@@ -5301,6 +5301,10 @@ msgstr "Наклонная ортографическая"
 #: u_translation.rsslew
 msgid "Slew"
 msgstr "Повернуть"
+
+#: u_translation.rsslewingto
+msgid "Slewing to %s / %s"
+msgstr ""
 
 #: u_translation.rsslewspeed
 msgid " Slew Speed"
@@ -5516,7 +5520,7 @@ msgstr "Анимация вперед"
 
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
-msgstr "Начало грфика в местный полдень"
+msgstr "Начало графика в местный полдень"
 
 #: u_translation.rsstartmonth
 msgid "Start month"
@@ -5617,6 +5621,10 @@ msgstr "Символ"
 #: u_translation.rssync
 msgid "Sync"
 msgstr "Синхронизировать"
+
+#: u_translation.rssyncedto
+msgid "Synced to %s / %s"
+msgstr ""
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
@@ -5772,7 +5780,7 @@ msgstr "Тайм-аут [мс]"
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
-msgstr "Моделирование"
+msgstr "Траектории"
 
 #: u_translation.rstimeunits
 msgid "Time units"

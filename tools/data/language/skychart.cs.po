@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-23 11:33+0000\n"
+"POT-Creation-Date: 2018-03-09 11:19+0000\n"
 "PO-Revision-Date: 2017-01-14 17:39+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-03-06 16:04+0000\n"
+"X-Launchpad-Export-Date: 2018-03-09 12:08+0000\n"
 "X-Generator: Launchpad (build 18566)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
@@ -5305,6 +5305,10 @@ msgstr "Skloněná ortografická"
 msgid "Slew"
 msgstr "Přejezd"
 
+#: u_translation.rsslewingto
+msgid "Slewing to %s / %s"
+msgstr ""
+
 #: u_translation.rsslewspeed
 msgid " Slew Speed"
 msgstr " Rychlost přejíždění"
@@ -5620,6 +5624,10 @@ msgstr "Symbol"
 #: u_translation.rssync
 msgid "Sync"
 msgstr "Synchronizovat"
+
+#: u_translation.rssyncedto
+msgid "Synced to %s / %s"
+msgstr ""
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"

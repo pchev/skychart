@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-23 11:33+0000\n"
+"POT-Creation-Date: 2018-03-09 11:19+0000\n"
 "PO-Revision-Date: 2013-11-17 14:47+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-03-06 16:04+0000\n"
+"X-Launchpad-Export-Date: 2018-03-09 12:08+0000\n"
 "X-Generator: Launchpad (build 18566)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
@@ -5303,6 +5303,10 @@ msgstr ""
 msgid "Slew"
 msgstr "迴轉"
 
+#: u_translation.rsslewingto
+msgid "Slewing to %s / %s"
+msgstr ""
+
 #: u_translation.rsslewspeed
 msgid " Slew Speed"
 msgstr ""
@@ -5618,6 +5622,10 @@ msgstr "符号"
 #: u_translation.rssync
 msgid "Sync"
 msgstr "同步"
+
+#: u_translation.rssyncedto
+msgid "Synced to %s / %s"
+msgstr ""
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"

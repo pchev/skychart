@@ -6318,3 +6318,11 @@ msgstr ""
 msgid "Compute rise/set time relative to this line"
 msgstr ""
 
+#: u_translation:rsslewingto
+msgid "Slewing to %s / %s"
+msgstr ""
+
+#: u_translation:rssyncedto
+msgid "Synced to %s / %s"
+msgstr ""
+
