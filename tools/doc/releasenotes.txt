@@ -1,10 +1,15 @@
-Version 4.1 beta, release Notes
+Version 4.1.1 beta, release Notes
 
 New functions:
 
+- Improve double star display.
+- Improve magnitude filter for small FOV.
 - Show the object rise and set time relative to the local horizon if a horizon file is loaded. This can be disabled in Setup/Observatory. Calendar rise/set are always given to the astronomical horizon.
-- New icon for the buttons, use larger image for big buttons.
+- New icon for the buttons better suited for night vision filters, use larger image for big buttons.
 - Set observatory coordinates from telescope GPS, use "Telescope" observatory name.
 - Improve download progress display.
 - Many bug fix.
 
+Change the version number to 4.1.1 because of the way git count the number of revision.
+Last revision in subversion was 3731, this is equivalent to git commit b414c933 revision 3667.
+This revision number is now only used to make a sequential version number, use the commit hash show in the About box to get the corresponding source code version.

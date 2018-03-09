@@ -1,9 +1,15 @@
-Version 4.1 beta, Notes de la version
+Version 4.1.1 beta, Notes de la version
 
 Nouvelles fonctions:
 
-- Affiche l'heure de lever et coucher par rapport à l'horizon local si un fichier d'horizon est chargé. Cela peu être désactivé dans Condifuration/Observatoire. Le calendrier indique toujours le lever et coucher sur l'horizon astronomique.
-- Nouveaux icône pour les boutons, utilise une image plus grande pour les gros boutons.
+- Améliore l'affichage des étoiles doubles.
+- Améliore le filtre par magnitude pour les petits champs.
+- Affiche l'heure de lever et coucher par rapport à l'horizon local si un fichier d'horizon est chargé. Cela peut être désactivé dans Configuration/Observatoire. Le calendrier indique toujours le lever et coucher sur l'horizon astronomique.
+- Nouveaux icônes pour les boutons mieux adapté au filtres de vision nocturne, utilise une image plus grande pour les gros boutons.
 - Coordonnées de l'observatoire à partir du GPS du télescope, utilise le nom de l'observatoire "Telescope".
 - Amélioration de l'affichage de la progression du téléchargement.
 - Correction de nombreux bugs.
+
+Change le numéro de version à 4.1.1 à cause de la façon dont git compte le nombre de révisions.
+La dernière révision dans subversion était 3731, c'est équivalent au commit git b414c933 révision 3667.
+Ce numéro de révision n'est maintenant utilisé que pour avoir un numéro de version séquentiel, utilisez le hash du commit affiché dans la boîte "A propos" pour obtenir le code source correspondant.
