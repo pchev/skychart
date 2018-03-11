@@ -3585,12 +3585,13 @@ function CompareVersion(v1, v2: string): integer;
   //  0 if v2=v1
   // -1 if v2<v1
 var
-  major1, minor1, rev1: integer;
+  i: integer;
+  major1, minor1, rev1: double;
   beta1: boolean;
-  major2, minor2, rev2: integer;
+  major2, minor2, rev2: double;
   beta2: boolean;
 
-  function NextNum(var str: string; sep: char): integer;
+  function NextNum(var str: string; sep: char): double;
   var
     p: integer;
     txt: string;
@@ -3600,10 +3601,10 @@ var
     begin
       txt := Copy(str, 1, p - 1);
       Delete(str, 1, p);
-      Result := StrToIntDef(txt, 0);
+      Result := StrToFloatDef(txt, 0.0);
     end
     else
-      Result := 0;
+      Result := 0.0;
   end;
 
 begin
@@ -3617,10 +3618,14 @@ begin
 
   major1 := NextNum(v1, '.');
   minor1 := NextNum(v1, '-');
-  rev1 := StrToIntDef(v1, 0);
+  i:=pos('-',v1);
+  if i>0 then v1:=copy(v1,1,i-1);
+  rev1 := StrToFloatDef(v1, 0.0);
   major2 := NextNum(v2, '.');
   minor2 := NextNum(v2, '-');
-  rev2 := StrToIntDef(v2, 0);
+  i:=pos('-',v2);
+  if i>0 then v2:=copy(v2,1,i-1);
+  rev2 := StrToFloatDef(v2, 0.0);
 
   if (major2 > major1) then
     Result := 1
