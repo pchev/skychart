@@ -51,7 +51,7 @@ fi
 echo $lastrev ' - ' $currentrev
 if [[ $lastrev -ne $currentrev ]]; then
 
-echo $version-svn-$currentrev > beta.txt
+echo $version-$currentrev > beta.txt
 
 # delete old files
   rm skychart*.xz
