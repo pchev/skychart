@@ -7707,7 +7707,7 @@ end;
 procedure Tskychart.DrawFinderMark(ra, de: double; moving: boolean;
   num: integer; mark: integer = 0);
 var
-  x1, y1, x2, y2, r: double;
+  x1, y1, x2, y2, r, xc1,xc2,yc1,yc2: double;
   i, lid, sz: integer;
   xa, ya, xb, yb, xla, yla: single;
   pa, xx1, xx2, yy1, yy2, rot, o: single;
@@ -7752,10 +7752,18 @@ begin
     // crosshair
     if cfgsc.ShowCrosshair and (num < 0) and (not moving) then
     begin
-      Fplot.PlotLine(Fplot.cfgchart.Width / 2, 0, Fplot.cfgchart.Width / 2,
-        Fplot.cfgchart.Height, Fplot.cfgplot.Color[18], 1);
-      Fplot.PlotLine(0, Fplot.cfgchart.Height / 2, Fplot.cfgchart.Width,
-        Fplot.cfgchart.Height / 2, Fplot.cfgplot.Color[18], 1);
+      // vertical line
+      xc1 := cfgsc.xmin + (cfgsc.xmax-cfgsc.xmin) / 2;
+      xc2 := xc1;
+      yc1 := cfgsc.ymin;
+      yc2 := cfgsc.ymax;
+      Fplot.PlotLine(xc1, yc1, xc2, yc2, Fplot.cfgplot.Color[18], 1);
+      // horizontal line
+      xc1 := cfgsc.xmin;
+      xc2 := cfgsc.xmax;
+      yc1 := cfgsc.ymin + (cfgsc.ymax-cfgsc.ymin) / 2;
+      yc2 := yc1;
+      Fplot.PlotLine(xc1, yc1, xc2, yc2, Fplot.cfgplot.Color[18], 1);
     end;
     // circle
     for i := 1 to cfgsc.ncircle do
