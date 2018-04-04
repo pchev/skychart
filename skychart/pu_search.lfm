@@ -1,33 +1,33 @@
 object f_search: Tf_search
   Left = 504
-  Height = 371
+  Height = 399
   Top = 106
-  Width = 433
+  Width = 456
   ActiveControl = RadioGroup1.RadioButton0
-  AutoSize = True
   Caption = 'Search'
-  ClientHeight = 371
-  ClientWidth = 433
+  ClientHeight = 399
+  ClientWidth = 456
+  DesignTimePPI = 95
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.6.4.0'
   Visible = False
   object Panel1: TPanel
     Left = 0
     Height = 219
     Top = 0
-    Width = 433
+    Width = 456
     Align = alTop
     ClientHeight = 219
-    ClientWidth = 433
+    ClientWidth = 456
     TabOrder = 0
     object RadioGroup1: TRadioGroup
       Left = 1
       Height = 217
       Top = 1
-      Width = 416
+      Width = 454
+      Align = alClient
       AutoFill = True
       Caption = 'Search for '
       ChildSizing.LeftRightSpacing = 6
@@ -38,8 +38,8 @@ object f_search: Tf_search
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 2
-      ClientHeight = 197
-      ClientWidth = 412
+      ClientHeight = 198
+      ClientWidth = 452
       Columns = 2
       ItemIndex = 0
       Items.Strings = (
@@ -61,58 +61,58 @@ object f_search: Tf_search
   end
   object Panel2: TPanel
     Left = 0
-    Height = 152
+    Height = 180
     Top = 219
-    Width = 433
+    Width = 456
     Align = alClient
-    AutoSize = True
-    ClientHeight = 152
-    ClientWidth = 433
+    ClientHeight = 180
+    ClientWidth = 456
     TabOrder = 1
     object Panel3: TPanel
       Left = 1
-      Height = 117
+      Height = 151
       Top = 1
-      Width = 431
-      Align = alTop
-      AutoSize = True
-      ClientHeight = 117
-      ClientWidth = 431
+      Width = 454
+      Align = alClient
+      ClientHeight = 151
+      ClientWidth = 454
       TabOrder = 0
       object PageControl1: TPageControl
         Left = 1
-        Height = 115
+        Height = 149
         Top = 1
-        Width = 429
+        Width = 452
         TabStop = False
         ActivePage = tsOnline
+        Align = alClient
         TabIndex = 0
         TabOrder = 0
         OnChange = PageControl1Change
         object tsOnline: TTabSheet
           Caption = 'tsOnline'
-          ClientHeight = 83
-          ClientWidth = 425
+          ClientHeight = 119
+          ClientWidth = 442
           object OnlinePanel: TPanel
             Left = 0
-            Height = 80
+            Height = 119
             Top = 0
-            Width = 413
-            ClientHeight = 80
-            ClientWidth = 413
+            Width = 442
+            Align = alClient
+            ClientHeight = 119
+            ClientWidth = 442
             TabOrder = 0
             object OnlineEdit: TEdit
-              Left = 256
-              Height = 26
-              Top = 1
+              Left = 257
+              Height = 30
+              Top = 8
               Width = 151
               TabOrder = 1
               Text = 'ngc4556'
             end
             object ServerList: TComboBox
               Left = 16
-              Height = 28
-              Top = 1
+              Height = 34
+              Top = 8
               Width = 200
               ItemHeight = 0
               OnChange = ServerListChange
@@ -122,7 +122,7 @@ object f_search: Tf_search
             object StatusLabel: TLabel
               Left = 19
               Height = 18
-              Top = 58
+              Top = 88
               Width = 70
               Caption = 'StatusLabel'
               ParentColor = False
@@ -130,7 +130,7 @@ object f_search: Tf_search
             object RadioGroup2: TRadioGroup
               Left = 16
               Height = 32
-              Top = 25
+              Top = 48
               Width = 392
               AutoFill = True
               ChildSizing.LeftRightSpacing = 6
@@ -141,8 +141,8 @@ object f_search: Tf_search
               ChildSizing.ShrinkVertical = crsScaleChilds
               ChildSizing.Layout = cclLeftToRightThenTopToBottom
               ChildSizing.ControlsPerLine = 4
-              ClientHeight = 28
-              ClientWidth = 388
+              ClientHeight = 30
+              ClientWidth = 390
               Columns = 4
               Items.Strings = (
                 'NED'
@@ -157,28 +157,29 @@ object f_search: Tf_search
         end
         object tsPlanet: TTabSheet
           Caption = 'tsPlanet'
-          ClientHeight = 83
-          ClientWidth = 425
+          ClientHeight = 119
+          ClientWidth = 442
           object PlanetPanel: TPanel
             Left = 0
-            Height = 80
+            Height = 119
             Top = 0
-            Width = 413
-            ClientHeight = 80
-            ClientWidth = 413
+            Width = 442
+            Align = alClient
+            ClientHeight = 119
+            ClientWidth = 442
             TabOrder = 0
             object Label2: TLabel
               Left = 13
-              Height = 17
-              Top = 14
-              Width = 47
+              Height = 18
+              Top = 24
+              Width = 41
               Caption = 'Planet '
               ParentColor = False
             end
             object PlanetBox: TComboBox
               Left = 184
-              Height = 31
-              Top = 8
+              Height = 34
+              Top = 16
               Width = 146
               DropDownCount = 10
               ItemHeight = 0
@@ -189,27 +190,28 @@ object f_search: Tf_search
         end
         object tsComet: TTabSheet
           Caption = 'tsComet'
-          ClientHeight = 83
-          ClientWidth = 425
+          ClientHeight = 119
+          ClientWidth = 442
           object CometPanel: TPanel
             Left = 0
-            Height = 80
+            Height = 119
             Top = 0
-            Width = 413
-            ClientHeight = 80
-            ClientWidth = 413
+            Width = 442
+            Align = alClient
+            ClientHeight = 119
+            ClientWidth = 442
             TabOrder = 0
             object CometFilter: TEdit
               Left = 8
-              Height = 27
-              Top = 10
+              Height = 30
+              Top = 20
               Width = 99
               TabOrder = 0
             end
             object btnCometFilter: TButton
               Left = 112
-              Height = 25
-              Top = 10
+              Height = 24
+              Top = 20
               Width = 75
               BorderSpacing.InnerBorder = 4
               Caption = 'Filter ->'
@@ -218,8 +220,8 @@ object f_search: Tf_search
             end
             object CometList: TComboBox
               Left = 192
-              Height = 31
-              Top = 6
+              Height = 34
+              Top = 16
               Width = 216
               ItemHeight = 0
               Style = csDropDownList
@@ -229,27 +231,28 @@ object f_search: Tf_search
         end
         object tsAsteroid: TTabSheet
           Caption = 'tsAsteroid'
-          ClientHeight = 83
-          ClientWidth = 425
+          ClientHeight = 119
+          ClientWidth = 442
           object AsteroidPanel: TPanel
             Left = 0
-            Height = 80
+            Height = 119
             Top = 0
-            Width = 413
-            ClientHeight = 80
-            ClientWidth = 413
+            Width = 442
+            Align = alClient
+            ClientHeight = 119
+            ClientWidth = 442
             TabOrder = 0
             object AsteroidFilter: TEdit
               Left = 8
-              Height = 26
-              Top = 10
+              Height = 30
+              Top = 20
               Width = 99
               TabOrder = 0
             end
             object btnAstFilter: TButton
               Left = 112
-              Height = 25
-              Top = 10
+              Height = 24
+              Top = 20
               Width = 75
               BorderSpacing.InnerBorder = 4
               Caption = 'Filter ->'
@@ -258,8 +261,8 @@ object f_search: Tf_search
             end
             object AsteroidList: TComboBox
               Left = 192
-              Height = 28
-              Top = 6
+              Height = 34
+              Top = 16
               Width = 216
               ItemHeight = 0
               Style = csDropDownList
@@ -269,28 +272,29 @@ object f_search: Tf_search
         end
         object tsNebName: TTabSheet
           Caption = 'tsNebName'
-          ClientHeight = 83
-          ClientWidth = 425
+          ClientHeight = 119
+          ClientWidth = 442
           object NebNamePanel: TPanel
             Left = 0
-            Height = 80
+            Height = 119
             Top = 0
-            Width = 413
-            ClientHeight = 80
-            ClientWidth = 413
+            Width = 442
+            Align = alClient
+            ClientHeight = 119
+            ClientWidth = 442
             TabOrder = 0
             object Label3: TLabel
               Left = 13
-              Height = 17
-              Top = 14
-              Width = 49
+              Height = 18
+              Top = 22
+              Width = 43
               Caption = 'Nebula'
               ParentColor = False
             end
             object NebNameBox: TComboBox
               Left = 128
-              Height = 31
-              Top = 8
+              Height = 34
+              Top = 16
               Width = 256
               ItemHeight = 0
               Style = csDropDownList
@@ -300,36 +304,38 @@ object f_search: Tf_search
         end
         object tsStars: TTabSheet
           Caption = 'tsStars'
-          ClientHeight = 83
-          ClientWidth = 425
+          ClientHeight = 119
+          ClientWidth = 442
           object IDPanel: TPanel
             Left = 0
-            Height = 80
+            Height = 119
             Top = 0
-            Width = 413
-            ClientHeight = 80
-            ClientWidth = 413
+            Width = 442
+            Align = alClient
+            ClientHeight = 119
+            ClientWidth = 442
             TabOrder = 0
             object Label1: TLabel
               Left = 6
-              Height = 17
+              Height = 18
               Top = 14
-              Width = 89
+              Width = 78
               Caption = 'Object Name'
               ParentColor = False
             end
             object DblPanel: TPanel
-              Left = 210
-              Height = 39
-              Top = 1
-              Width = 73
-              ClientHeight = 39
-              ClientWidth = 73
+              Left = 105
+              Height = 50
+              Top = 56
+              Width = 80
+              BevelOuter = bvNone
+              ClientHeight = 50
+              ClientWidth = 80
               TabOrder = 2
               Visible = False
               object SpeedButton30: TSpeedButton
                 Left = 0
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 36
                 Caption = 'ADS'
@@ -337,7 +343,7 @@ object f_search: Tf_search
               end
               object SpeedButton31: TSpeedButton
                 Left = 36
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 36
                 Caption = 'STF'
@@ -345,16 +351,17 @@ object f_search: Tf_search
               end
             end
             object VarPanel: TPanel
-              Left = 210
-              Height = 39
-              Top = 1
-              Width = 73
-              ClientHeight = 39
-              ClientWidth = 73
+              Left = 105
+              Height = 50
+              Top = 56
+              Width = 80
+              BevelOuter = bvNone
+              ClientHeight = 50
+              ClientWidth = 80
               TabOrder = 1
               object SpeedButton21: TSpeedButton
                 Left = 0
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 18
                 Caption = 'R'
@@ -362,7 +369,7 @@ object f_search: Tf_search
               end
               object SpeedButton24: TSpeedButton
                 Left = 18
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 18
                 Caption = 'S'
@@ -370,23 +377,23 @@ object f_search: Tf_search
               end
               object SpeedButton25: TSpeedButton
                 Left = 0
-                Height = 18
-                Top = 20
+                Height = 22
+                Top = 24
                 Width = 18
                 Caption = 'V'
                 OnClick = NumButtonClick
               end
               object SpeedButton26: TSpeedButton
                 Left = 36
-                Height = 18
-                Top = 20
+                Height = 22
+                Top = 24
                 Width = 36
                 Caption = 'NSV'
                 OnClick = CatButtonClick
               end
               object SpeedButton27: TSpeedButton
                 Left = 36
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 18
                 Caption = 'T'
@@ -394,7 +401,7 @@ object f_search: Tf_search
               end
               object SpeedButton28: TSpeedButton
                 Left = 54
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 18
                 Caption = 'U'
@@ -402,24 +409,25 @@ object f_search: Tf_search
               end
               object SpeedButton29: TSpeedButton
                 Left = 18
-                Height = 18
-                Top = 20
+                Height = 22
+                Top = 24
                 Width = 18
                 Caption = 'W'
                 OnClick = NumButtonClick
               end
             end
             object StarPanel: TPanel
-              Left = 210
-              Height = 39
-              Top = 1
-              Width = 73
-              ClientHeight = 39
-              ClientWidth = 73
+              Left = 105
+              Height = 50
+              Top = 56
+              Width = 80
+              BevelOuter = bvNone
+              ClientHeight = 50
+              ClientWidth = 80
               TabOrder = 3
               object SpeedButton19: TSpeedButton
                 Left = 0
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 36
                 Caption = 'TYC'
@@ -427,7 +435,7 @@ object f_search: Tf_search
               end
               object SpeedButton20: TSpeedButton
                 Left = 36
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 36
                 Caption = 'GSC'
@@ -435,16 +443,16 @@ object f_search: Tf_search
               end
               object SpeedButton22: TSpeedButton
                 Left = 0
-                Height = 18
-                Top = 20
+                Height = 22
+                Top = 24
                 Width = 36
                 Caption = 'HD'
                 OnClick = CatButtonClick
               end
               object SpeedButton23: TSpeedButton
                 Left = 36
-                Height = 18
-                Top = 20
+                Height = 22
+                Top = 24
                 Width = 36
                 Caption = 'BD'
                 OnClick = CatButtonClick
@@ -452,24 +460,24 @@ object f_search: Tf_search
             end
             object Id: TEdit
               Left = 105
-              Height = 27
+              Height = 30
               Top = 10
-              Width = 96
+              Width = 215
               OnKeyDown = IdKeyDown
               TabOrder = 0
             end
             object NumPanel: TPanel
-              Left = 288
-              Height = 39
-              Top = 1
-              Width = 128
+              Left = 200
+              Height = 50
+              Top = 56
+              Width = 144
               BevelOuter = bvNone
-              ClientHeight = 39
-              ClientWidth = 128
+              ClientHeight = 50
+              ClientWidth = 144
               TabOrder = 5
               object SpeedButton1: TSpeedButton
                 Left = 0
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 18
                 Caption = '1'
@@ -477,7 +485,7 @@ object f_search: Tf_search
               end
               object SpeedButton2: TSpeedButton
                 Left = 18
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 18
                 Caption = '2'
@@ -485,7 +493,7 @@ object f_search: Tf_search
               end
               object SpeedButton3: TSpeedButton
                 Left = 36
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 18
                 Caption = '3'
@@ -493,7 +501,7 @@ object f_search: Tf_search
               end
               object SpeedButton4: TSpeedButton
                 Left = 54
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 18
                 Caption = '4'
@@ -501,7 +509,7 @@ object f_search: Tf_search
               end
               object SpeedButton5: TSpeedButton
                 Left = 72
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 18
                 Caption = '5'
@@ -509,47 +517,47 @@ object f_search: Tf_search
               end
               object SpeedButton6: TSpeedButton
                 Left = 0
-                Height = 18
-                Top = 20
+                Height = 22
+                Top = 24
                 Width = 18
                 Caption = '6'
                 OnClick = NumButtonClick
               end
               object SpeedButton7: TSpeedButton
                 Left = 18
-                Height = 18
-                Top = 20
+                Height = 22
+                Top = 24
                 Width = 18
                 Caption = '7'
                 OnClick = NumButtonClick
               end
               object SpeedButton8: TSpeedButton
                 Left = 36
-                Height = 18
-                Top = 20
+                Height = 22
+                Top = 24
                 Width = 18
                 Caption = '8'
                 OnClick = NumButtonClick
               end
               object SpeedButton9: TSpeedButton
                 Left = 54
-                Height = 18
-                Top = 20
+                Height = 22
+                Top = 24
                 Width = 18
                 Caption = '9'
                 OnClick = NumButtonClick
               end
               object SpeedButton10: TSpeedButton
                 Left = 72
-                Height = 18
-                Top = 20
+                Height = 22
+                Top = 24
                 Width = 18
                 Caption = '0'
                 OnClick = NumButtonClick
               end
               object SpeedButton11: TSpeedButton
                 Left = 90
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 18
                 Caption = '<-'
@@ -557,15 +565,15 @@ object f_search: Tf_search
               end
               object SpeedButton12: TSpeedButton
                 Left = 90
-                Height = 18
-                Top = 20
+                Height = 22
+                Top = 24
                 Width = 36
                 Caption = ' '
                 OnClick = NumButtonClick
               end
               object SpeedButton13: TSpeedButton
                 Left = 108
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 18
                 Caption = 'C'
@@ -573,16 +581,17 @@ object f_search: Tf_search
               end
             end
             object NebPanel: TPanel
-              Left = 210
-              Height = 39
-              Top = 1
-              Width = 73
-              ClientHeight = 39
-              ClientWidth = 73
+              Left = 105
+              Height = 50
+              Top = 56
+              Width = 80
+              BevelOuter = bvNone
+              ClientHeight = 50
+              ClientWidth = 80
               TabOrder = 4
               object SpeedButton14: TSpeedButton
                 Left = 0
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 18
                 Caption = 'M'
@@ -590,7 +599,7 @@ object f_search: Tf_search
               end
               object SpeedButton15: TSpeedButton
                 Left = 18
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 36
                 Caption = 'NGC'
@@ -598,7 +607,7 @@ object f_search: Tf_search
               end
               object SpeedButton16: TSpeedButton
                 Left = 54
-                Height = 18
+                Height = 22
                 Top = 2
                 Width = 18
                 Caption = 'IC'
@@ -606,16 +615,16 @@ object f_search: Tf_search
               end
               object SpeedButton17: TSpeedButton
                 Left = 0
-                Height = 18
-                Top = 20
+                Height = 22
+                Top = 24
                 Width = 36
                 Caption = 'PGC'
                 OnClick = CatButtonClick
               end
               object SpeedButton18: TSpeedButton
                 Left = 36
-                Height = 18
-                Top = 20
+                Height = 22
+                Top = 24
                 Width = 36
                 Caption = 'PK'
                 OnClick = CatButtonClick
@@ -625,28 +634,29 @@ object f_search: Tf_search
         end
         object tsStarName: TTabSheet
           Caption = 'tsStarName'
-          ClientHeight = 83
-          ClientWidth = 425
+          ClientHeight = 119
+          ClientWidth = 442
           object StarNamePanel: TPanel
             Left = 0
-            Height = 80
+            Height = 119
             Top = 0
-            Width = 413
-            ClientHeight = 80
-            ClientWidth = 413
+            Width = 442
+            Align = alClient
+            ClientHeight = 119
+            ClientWidth = 442
             TabOrder = 0
             object Label4: TLabel
               Left = 16
-              Height = 17
-              Top = 16
-              Width = 28
+              Height = 18
+              Top = 24
+              Width = 24
               Caption = 'Star'
               ParentColor = False
             end
             object StarNameBox: TComboBox
               Left = 128
-              Height = 31
-              Top = 8
+              Height = 34
+              Top = 16
               Width = 257
               ItemHeight = 0
               Style = csDropDownList
@@ -656,28 +666,29 @@ object f_search: Tf_search
         end
         object tsConst: TTabSheet
           Caption = 'tsConst'
-          ClientHeight = 83
-          ClientWidth = 425
+          ClientHeight = 119
+          ClientWidth = 442
           object ConstPanel: TPanel
             Left = 0
-            Height = 80
+            Height = 119
             Top = 0
-            Width = 413
-            ClientHeight = 80
-            ClientWidth = 413
+            Width = 442
+            Align = alClient
+            ClientHeight = 119
+            ClientWidth = 442
             TabOrder = 0
             object Label5: TLabel
               Left = 13
-              Height = 17
-              Top = 14
-              Width = 92
+              Height = 18
+              Top = 22
+              Width = 79
               Caption = 'Constellation'
               ParentColor = False
             end
             object ConstBox: TComboBox
               Left = 128
-              Height = 31
-              Top = 8
+              Height = 34
+              Top = 16
               Width = 257
               ItemHeight = 0
               Sorted = True
@@ -690,12 +701,12 @@ object f_search: Tf_search
     end
     object Panel4: TPanel
       Left = 1
-      Height = 33
-      Top = 118
-      Width = 431
-      Align = alClient
-      ClientHeight = 33
-      ClientWidth = 431
+      Height = 27
+      Top = 152
+      Width = 454
+      Align = alBottom
+      ClientHeight = 27
+      ClientWidth = 454
       TabOrder = 1
       object btnFind: TButton
         Left = 236
