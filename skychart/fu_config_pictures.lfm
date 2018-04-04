@@ -5,6 +5,8 @@ object f_config_pictures: Tf_config_pictures
   Width = 503
   ClientHeight = 524
   ClientWidth = 503
+  DesignTimePPI = 95
+  ParentFont = False
   TabOrder = 0
   object MainPanel: TPanel
     Left = 0
@@ -30,8 +32,8 @@ object f_config_pictures: Tf_config_pictures
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
         Caption = 'Objects'
-        ClientHeight = 1508
-        ClientWidth = 1493
+        ClientHeight = 518
+        ClientWidth = 491
         object Label3: TLabel
           Left = 17
           Height = 96
@@ -53,7 +55,7 @@ object f_config_pictures: Tf_config_pictures
           Visible = False
           object ProgressCat: TLabel
             Left = 187
-            Height = 15
+            Height = 19
             Top = 8
             Width = 35
             Caption = 'Other'
@@ -69,17 +71,17 @@ object f_config_pictures: Tf_config_pictures
         end
         object Label50: TLabel
           Left = 17
-          Height = 15
+          Height = 19
           Top = 2
-          Width = 219
+          Width = 206
           Caption = 'Display image of cataloged objects'
           ParentColor = False
         end
         object Label264: TLabel
           Left = 16
-          Height = 15
+          Height = 19
           Top = 36
-          Width = 98
+          Width = 96
           Caption = 'Image Directory'
           ParentColor = False
         end
@@ -93,23 +95,23 @@ object f_config_pictures: Tf_config_pictures
           TabOrder = 3
           object Label266: TLabel
             Left = 24
-            Height = 15
+            Height = 19
             Top = 35
-            Width = 65
+            Width = 67
             Caption = 'Luminosity'
             ParentColor = False
           end
           object Label268: TLabel
             Left = 24
-            Height = 15
+            Height = 19
             Top = 91
-            Width = 54
+            Width = 52
             Caption = 'Contrast'
             ParentColor = False
           end
           object ImgLumBar: TTrackBar
             Left = 120
-            Height = 36
+            Height = 43
             Top = 15
             Width = 222
             Frequency = 5
@@ -122,7 +124,7 @@ object f_config_pictures: Tf_config_pictures
           end
           object ImgContrastBar: TTrackBar
             Left = 120
-            Height = 36
+            Height = 43
             Top = 71
             Width = 222
             Frequency = 5
@@ -134,9 +136,9 @@ object f_config_pictures: Tf_config_pictures
             TabOrder = 1
           end
           object ResetLum: TButton
-            Left = 191
+            Left = 192
             Height = 25
-            Top = 111
+            Top = 116
             Width = 75
             BorderSpacing.InnerBorder = 4
             Caption = 'Reset'
@@ -146,16 +148,16 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowImagesBox: TCheckBox
           Left = 31
-          Height = 24
+          Height = 21
           Top = 405
-          Width = 239
+          Width = 224
           Caption = 'Show object pictures on the chart'
           OnClick = ShowImagesBoxClick
           TabOrder = 4
         end
         object imgpath: TDirectoryEdit
           Left = 151
-          Height = 21
+          Height = 31
           Top = 29
           Width = 264
           ShowHidden = False
@@ -197,29 +199,29 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page2: TTabSheet
         Caption = 'Background'
-        ClientHeight = 1508
-        ClientWidth = 1493
+        ClientHeight = 518
+        ClientWidth = 491
         object Label270: TLabel
           Left = 7
-          Height = 16
+          Height = 19
           Top = 0
-          Width = 113
+          Width = 118
           Caption = 'Background Picture'
           ParentColor = False
         end
         object Label271: TLabel
           Left = 7
-          Height = 16
+          Height = 19
           Top = 44
-          Width = 45
+          Width = 48
           Caption = 'FITS File'
           ParentColor = False
         end
         object backimginfo: TLabel
           Left = 13
-          Height = 16
+          Height = 19
           Top = 189
-          Width = 21
+          Width = 24
           Caption = '????'
           ParentColor = False
         end
@@ -232,9 +234,9 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowBackImg: TCheckBox
           Left = 95
-          Height = 23
+          Height = 21
           Top = 64
-          Width = 124
+          Width = 127
           Caption = 'Show this picture'
           OnClick = ShowBackImgClick
           TabOrder = 1
@@ -249,7 +251,7 @@ object f_config_pictures: Tf_config_pictures
           TabOrder = 3
           object ImgTrBar2: TTrackBar
             Left = 304
-            Height = 27
+            Height = 43
             Top = 20
             Width = 140
             Frequency = 5
@@ -263,15 +265,15 @@ object f_config_pictures: Tf_config_pictures
           end
           object Label1: TLabel
             Left = 54
-            Height = 16
+            Height = 19
             Top = 6
-            Width = 62
+            Width = 67
             Caption = 'Luminosity'
             ParentColor = False
           end
           object Label2: TLabel
             Left = 203
-            Height = 16
+            Height = 19
             Top = 6
             Width = 52
             Caption = 'Contrast'
@@ -279,7 +281,7 @@ object f_config_pictures: Tf_config_pictures
           end
           object ImgLumBar2: TTrackBar
             Left = 8
-            Height = 27
+            Height = 43
             Top = 20
             Width = 140
             Frequency = 5
@@ -293,7 +295,7 @@ object f_config_pictures: Tf_config_pictures
           end
           object ImgContrastBar2: TTrackBar
             Left = 152
-            Height = 27
+            Height = 43
             Top = 20
             Width = 140
             Frequency = 5
@@ -307,9 +309,9 @@ object f_config_pictures: Tf_config_pictures
           end
           object Label4: TLabel
             Left = 336
-            Height = 16
+            Height = 19
             Top = 4
-            Width = 76
+            Width = 81
             Caption = 'Transparency'
             ParentColor = False
           end
@@ -324,7 +326,7 @@ object f_config_pictures: Tf_config_pictures
           end
           object ImgITT2: TComboBox
             Left = 155
-            Height = 23
+            Height = 31
             Top = 56
             Width = 137
             ItemHeight = 0
@@ -341,16 +343,16 @@ object f_config_pictures: Tf_config_pictures
           end
           object Label9: TLabel
             Left = 14
-            Height = 16
+            Height = 19
             Top = 60
-            Width = 103
+            Width = 107
             Caption = 'Visualisation scale'
             ParentColor = False
           end
         end
         object backimg: TFileNameEdit
           Left = 95
-          Height = 23
+          Height = 31
           Top = 37
           Width = 366
           OnAcceptFileName = backimgAcceptFileName
@@ -385,29 +387,29 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page3: TTabSheet
         Caption = 'DSS - Realsky'
-        ClientHeight = 1508
-        ClientWidth = 1493
+        ClientHeight = 518
+        ClientWidth = 491
         object GroupBox1: TGroupBox
           Left = 4
           Height = 69
           Top = 8
           Width = 484
           Caption = 'Online DSS'
-          ClientHeight = 53
+          ClientHeight = 49
           ClientWidth = 482
           TabOrder = 0
           object OnlineDSS: TCheckBox
             Left = 8
-            Height = 23
+            Height = 21
             Top = 20
-            Width = 211
+            Width = 224
             Caption = 'Use online DSS instead of RealSky'
             OnChange = OnlineDSSChange
             TabOrder = 0
           end
           object OnlineDSSList: TComboBox
             Left = 292
-            Height = 23
+            Height = 31
             Top = 20
             Width = 176
             ItemHeight = 0
@@ -422,7 +424,7 @@ object f_config_pictures: Tf_config_pictures
           Top = 181
           Width = 484
           Caption = 'RealSky®'
-          ClientHeight = 264
+          ClientHeight = 260
           ClientWidth = 482
           TabOrder = 2
           object Panel2: TPanel
@@ -435,16 +437,16 @@ object f_config_pictures: Tf_config_pictures
             TabOrder = 0
             object RealSkyNorth: TCheckBox
               Left = 6
-              Height = 23
+              Height = 21
               Top = 8
-              Width = 103
+              Width = 109
               Caption = 'RealSky North'
               OnClick = RealSkyNorthClick
               TabOrder = 0
             end
             object realskymb: TLongEdit
               Left = 331
-              Height = 23
+              Height = 31
               Top = 221
               Width = 65
               Color = clBtnFace
@@ -454,7 +456,7 @@ object f_config_pictures: Tf_config_pictures
             end
             object realskymax: TLongEdit
               Left = 331
-              Height = 23
+              Height = 31
               Top = 189
               Width = 65
               TabOrder = 8
@@ -463,9 +465,9 @@ object f_config_pictures: Tf_config_pictures
             end
             object reallist: TCheckBox
               Left = 6
-              Height = 23
+              Height = 21
               Top = 157
-              Width = 145
+              Width = 144
               Caption = 'Select plate from list'
               Checked = True
               OnClick = reallistClick
@@ -474,9 +476,9 @@ object f_config_pictures: Tf_config_pictures
             end
             object usesubsample: TCheckBox
               Left = 6
-              Height = 23
+              Height = 21
               Top = 189
-              Width = 241
+              Width = 253
               Caption = 'Use subsampling to limit image size to'
               Checked = True
               OnClick = usesubsampleClick
@@ -485,25 +487,25 @@ object f_config_pictures: Tf_config_pictures
             end
             object DSS102CD: TCheckBox
               Left = 196
-              Height = 23
+              Height = 21
               Top = 8
-              Width = 90
+              Width = 91
               Caption = '102 CD DSS'
               OnClick = DSS102CDClick
               TabOrder = 1
             end
             object RealSkySouth: TCheckBox
               Left = 6
-              Height = 23
+              Height = 21
               Top = 34
-              Width = 102
+              Width = 109
               Caption = 'RealSky South'
               OnClick = RealSkySouthClick
               TabOrder = 2
             end
             object realskyfile: TEdit
               Left = 196
-              Height = 23
+              Height = 31
               Top = 126
               Width = 169
               OnChange = realskyfileChange
@@ -512,7 +514,7 @@ object f_config_pictures: Tf_config_pictures
             end
             object realskydrive: TEdit
               Left = 196
-              Height = 23
+              Height = 31
               Top = 94
               Width = 169
               OnChange = realskydriveChange
@@ -521,7 +523,7 @@ object f_config_pictures: Tf_config_pictures
             end
             object realskydir: TEdit
               Left = 196
-              Height = 23
+              Height = 31
               Top = 61
               Width = 169
               OnChange = realskydirChange
@@ -530,50 +532,50 @@ object f_config_pictures: Tf_config_pictures
             end
             object Label77: TLabel
               Left = 411
-              Height = 16
+              Height = 19
               Top = 225
-              Width = 44
+              Width = 45
               Caption = 'MBytes'
               ParentColor = False
             end
             object Label75: TLabel
               Left = 411
-              Height = 16
+              Height = 19
               Top = 196
-              Width = 33
+              Width = 34
               Caption = 'pixels'
               ParentColor = False
             end
             object Label74: TLabel
               Left = 11
-              Height = 16
+              Height = 19
               Top = 129
-              Width = 82
+              Width = 85
               Caption = 'temporary file'
               ParentColor = False
             end
             object Label73: TLabel
               Left = 11
-              Height = 16
+              Height = 19
               Top = 97
-              Width = 102
+              Width = 105
               Caption = 'Data Files, CDrom'
               ParentColor = False
             end
             object Label72: TLabel
               Left = 11
-              Height = 16
+              Height = 19
               Top = 64
-              Width = 74
+              Width = 78
               Caption = 'Auxiliary files'
               ParentColor = False
             end
           end
           object Label6: TLabel
             Left = 12
-            Height = 16
+            Height = 19
             Top = 20
-            Width = 37
+            Width = 39
             Caption = 'Label6'
             ParentColor = False
           end
@@ -584,21 +586,21 @@ object f_config_pictures: Tf_config_pictures
           Top = 85
           Width = 484
           Caption = 'Download archive'
-          ClientHeight = 72
+          ClientHeight = 68
           ClientWidth = 482
           TabOrder = 1
           object ArchiveBox: TCheckBox
             Left = 8
-            Height = 23
+            Height = 21
             Top = 9
-            Width = 146
+            Width = 150
             Caption = 'Archive to directory : '
             OnChange = ArchiveBoxChange
             TabOrder = 0
           end
           object ArchiveDirectory1: TDirectoryEdit
             Left = 191
-            Height = 23
+            Height = 31
             Top = 10
             Width = 256
             ShowHidden = False
@@ -610,9 +612,9 @@ object f_config_pictures: Tf_config_pictures
           end
           object ConfirmArchive: TCheckBox
             Left = 8
-            Height = 23
+            Height = 21
             Top = 41
-            Width = 262
+            Width = 275
             Caption = 'Confirmation prompt before to save a file.'
             OnChange = ConfirmArchiveChange
             TabOrder = 2
@@ -621,8 +623,8 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page4: TTabSheet
         Caption = 'Image archive'
-        ClientHeight = 1508
-        ClientWidth = 1493
+        ClientHeight = 518
+        ClientWidth = 491
         object StringGrid1: TStringGrid
           Left = 21
           Height = 296
@@ -661,9 +663,9 @@ object f_config_pictures: Tf_config_pictures
         end
         object Label7: TLabel
           Left = 26
-          Height = 16
+          Height = 19
           Top = 17
-          Width = 78
+          Width = 84
           Caption = 'Image archive'
           ParentColor = False
         end
@@ -678,7 +680,7 @@ object f_config_pictures: Tf_config_pictures
         end
         object MaxImg: TComboBox
           Left = 405
-          Height = 23
+          Height = 31
           Top = 357
           Width = 64
           ItemHeight = 0
@@ -701,17 +703,17 @@ object f_config_pictures: Tf_config_pictures
         end
         object Label8: TLabel
           Left = 26
-          Height = 16
+          Height = 19
           Top = 361
-          Width = 290
+          Width = 312
           Caption = 'Maximum number of image to show simultaneously'
           ParentColor = False
         end
         object ShowImageList: TCheckBox
           Left = 26
-          Height = 23
+          Height = 21
           Top = 381
-          Width = 109
+          Width = 116
           Caption = 'ShowImageList'
           OnChange = ShowImageListChange
           TabOrder = 3
@@ -727,9 +729,9 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowImageLabel: TCheckBox
           Left = 26
-          Height = 23
+          Height = 21
           Top = 405
-          Width = 132
+          Width = 140
           Caption = 'Show images labels'
           OnChange = ShowImageLabelChange
           TabOrder = 4

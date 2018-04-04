@@ -49,6 +49,7 @@ type
     Button7: TButton;
     Button8: TButton;
     Button9: TButton;
+    Panel1: TPanel;
     sh2box: TCheckBox;
     drkbox: TCheckBox;
     defnBox: TCheckBox;

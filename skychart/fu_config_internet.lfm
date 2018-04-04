@@ -5,6 +5,8 @@ object f_config_internet: Tf_config_internet
   Width = 498
   ClientHeight = 511
   ClientWidth = 498
+  DesignTimePPI = 95
+  ParentFont = False
   TabOrder = 0
   object MainPanel: TPanel
     Left = 0
@@ -22,31 +24,31 @@ object f_config_internet: Tf_config_internet
       Height = 511
       Top = 0
       Width = 498
-      ActivePage = Page2
+      ActivePage = Page1
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
       ShowTabs = False
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 0
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
         Caption = 'Proxy'
         ClientHeight = 507
-        ClientWidth = 494
+        ClientWidth = 488
         object GroupBox1: TGroupBox
           Left = 20
           Height = 201
           Top = 12
           Width = 401
           Caption = 'HTTP Proxy'
-          ClientHeight = 184
-          ClientWidth = 397
+          ClientHeight = 181
+          ClientWidth = 399
           TabOrder = 0
           object httpproxy: TCheckBox
             Left = 30
-            Height = 24
+            Height = 21
             Top = 11
-            Width = 122
+            Width = 120
             Caption = 'Use HTTP Proxy'
             OnClick = httpproxyClick
             TabOrder = 0
@@ -61,7 +63,7 @@ object f_config_internet: Tf_config_internet
             TabOrder = 1
             object proxypass: TEdit
               Left = 123
-              Height = 21
+              Height = 31
               Top = 98
               Width = 90
               OnChange = proxypassChange
@@ -69,7 +71,7 @@ object f_config_internet: Tf_config_internet
             end
             object proxyuser: TEdit
               Left = 123
-              Height = 21
+              Height = 31
               Top = 57
               Width = 90
               OnChange = proxyuserChange
@@ -77,7 +79,7 @@ object f_config_internet: Tf_config_internet
             end
             object proxyport: TEdit
               Left = 307
-              Height = 21
+              Height = 31
               Top = 13
               Width = 40
               OnChange = proxyportChange
@@ -85,7 +87,7 @@ object f_config_internet: Tf_config_internet
             end
             object proxyhost: TEdit
               Left = 123
-              Height = 21
+              Height = 31
               Top = 13
               Width = 90
               OnChange = proxyhostChange
@@ -93,31 +95,31 @@ object f_config_internet: Tf_config_internet
             end
             object Label5: TLabel
               Left = 22
-              Height = 15
+              Height = 19
               Top = 105
-              Width = 59
+              Width = 58
               Caption = 'Password'
               ParentColor = False
             end
             object Label4: TLabel
               Left = 22
-              Height = 15
+              Height = 19
               Top = 61
-              Width = 69
+              Width = 67
               Caption = 'User Name'
               ParentColor = False
             end
             object Label3: TLabel
               Left = 227
-              Height = 15
+              Height = 19
               Top = 17
-              Width = 63
+              Width = 64
               Caption = 'Proxy port'
               ParentColor = False
             end
             object Label2: TLabel
               Left = 22
-              Height = 15
+              Height = 19
               Top = 17
               Width = 65
               Caption = 'Proxy host'
@@ -125,7 +127,7 @@ object f_config_internet: Tf_config_internet
             end
             object SocksType: TComboBox
               Left = 247
-              Height = 23
+              Height = 31
               Top = 52
               Width = 100
               ItemHeight = 0
@@ -142,9 +144,9 @@ object f_config_internet: Tf_config_internet
           end
           object SocksProxy: TCheckBox
             Left = 202
-            Height = 24
+            Height = 21
             Top = 11
-            Width = 100
+            Width = 96
             Caption = 'Socks proxy'
             OnClick = SocksProxyClick
             TabOrder = 2
@@ -156,29 +158,29 @@ object f_config_internet: Tf_config_internet
           Top = 222
           Width = 401
           Caption = 'FTP '
-          ClientHeight = 103
-          ClientWidth = 397
+          ClientHeight = 100
+          ClientWidth = 399
           TabOrder = 1
           object Label1: TLabel
             Left = 39
-            Height = 15
+            Height = 19
             Top = 60
-            Width = 136
+            Width = 134
             Caption = 'Anonymous password'
             ParentColor = False
           end
           object ftppassive: TCheckBox
             Left = 39
-            Height = 24
+            Height = 21
             Top = 18
-            Width = 136
+            Width = 131
             Caption = 'FTP Passive Mode'
             OnClick = ftppassiveClick
             TabOrder = 0
           end
           object anonpass: TEdit
             Left = 210
-            Height = 21
+            Height = 31
             Top = 52
             Width = 144
             OnChange = anonpassChange
@@ -187,9 +189,9 @@ object f_config_internet: Tf_config_internet
         end
         object CheckBox1: TCheckBox
           Left = 20
-          Height = 24
+          Height = 21
           Top = 350
-          Width = 329
+          Width = 315
           Caption = 'Ask confirmation before any Internet connection'
           OnClick = CheckBox1Click
           TabOrder = 2
@@ -198,7 +200,7 @@ object f_config_internet: Tf_config_internet
       object Page2: TTabSheet
         Caption = 'Orbital Elements'
         ClientHeight = 507
-        ClientWidth = 494
+        ClientWidth = 488
         object comdefault: TButton
           Left = 371
           Height = 25
@@ -264,14 +266,14 @@ object f_config_internet: Tf_config_internet
           Top = 8
           Width = 432
           Caption = 'Comet elements in MPC format (one URL by line) '
-          ClientHeight = 111
-          ClientWidth = 428
+          ClientHeight = 108
+          ClientWidth = 430
           TabOrder = 6
           object CometUrlList: TMemo
             Left = 0
-            Height = 111
+            Height = 108
             Top = 0
-            Width = 428
+            Width = 430
             Align = alClient
             Anchors = [akTop, akLeft, akRight]
             OnExit = CometUrlListExit
@@ -286,14 +288,14 @@ object f_config_internet: Tf_config_internet
           Top = 184
           Width = 432
           Caption = 'Asteroid elements in MPC format (one URL by line)'
-          ClientHeight = 119
-          ClientWidth = 428
+          ClientHeight = 116
+          ClientWidth = 430
           TabOrder = 7
           object AsteroidUrlList: TMemo
             Left = 0
-            Height = 119
+            Height = 116
             Top = 0
-            Width = 428
+            Width = 430
             Align = alClient
             Anchors = [akTop, akLeft, akRight]
             OnExit = AsteroidUrlListExit
@@ -306,7 +308,7 @@ object f_config_internet: Tf_config_internet
       object Page3: TTabSheet
         Caption = 'Online DSS'
         ClientHeight = 507
-        ClientWidth = 494
+        ClientWidth = 488
         object DefaultDSS: TButton
           Left = 394
           Height = 25
@@ -323,12 +325,12 @@ object f_config_internet: Tf_config_internet
           Top = 8
           Width = 457
           Caption = 'Online pictures servers'
-          ClientHeight = 336
-          ClientWidth = 453
+          ClientHeight = 333
+          ClientWidth = 455
           TabOrder = 1
           object DSSpictures: TStringGrid
             Left = 0
-            Height = 337
+            Height = 333
             Top = 0
             Width = 455
             Align = alClient
@@ -346,7 +348,7 @@ object f_config_internet: Tf_config_internet
       object Page4: TTabSheet
         Caption = 'Page4'
         ClientHeight = 507
-        ClientWidth = 494
+        ClientWidth = 488
         object tlecelestrack: TButton
           Left = 16
           Height = 25
@@ -382,14 +384,14 @@ object f_config_internet: Tf_config_internet
           Top = 8
           Width = 448
           Caption = 'Artificial satellites TLE (one URL by line)'
-          ClientHeight = 216
-          ClientWidth = 444
+          ClientHeight = 213
+          ClientWidth = 446
           TabOrder = 3
           object TLEUrlList: TMemo
             Left = 0
-            Height = 216
+            Height = 213
             Top = 0
-            Width = 444
+            Width = 446
             Align = alClient
             Anchors = [akTop, akLeft, akRight]
             OnExit = TLEUrlListExit
