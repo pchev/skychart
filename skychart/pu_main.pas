@@ -1618,9 +1618,11 @@ procedure Tf_main.SaveImageExecute(Sender: TObject);
 var
   ext, format, fn: string;
 begin
-  Savedialog.DefaultExt := '';
+  Savedialog.DefaultExt := 'png';
   if Savedialog.InitialDir = '' then
     Savedialog.InitialDir := HomeDir;
+  if (MultiFrame1.ActiveObject is Tf_chart) then
+    savedialog.FileName := trim(Tf_chart(MultiFrame1.ActiveObject).Caption) + '.png';
   savedialog.Filter := 'PNG|*.png|JPEG|*.jpg|BMP|*.bmp';
   savedialog.Title := rsSaveImage;
   if MultiFrame1.ActiveObject is Tf_chart then
