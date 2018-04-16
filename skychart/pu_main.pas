@@ -52,6 +52,9 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    ViewAllTollbar: TAction;
+    MenuItem1: TMenuItem;
+    ViewMainMenu: TAction;
     AnimBackward: TAction;
     Img16Night: TImageList;
     Img16Day: TImageList;
@@ -503,6 +506,7 @@ type
     procedure TrajectoriesExecute(Sender: TObject);
     procedure ViewChartInfoExecute(Sender: TObject);
     procedure ViewChartLegendExecute(Sender: TObject);
+    procedure ViewMainMenuExecute(Sender: TObject);
     procedure ViewNightVisionExecute(Sender: TObject);
     procedure ObslistExecute(Sender: TObject);
     procedure MenuPrintPreviewClick(Sender: TObject);
@@ -1830,6 +1834,18 @@ begin
       end;
       Refresh(True, False);
     end;
+end;
+
+procedure Tf_main.ViewMainMenuExecute(Sender: TObject);
+begin
+try
+  if Menu=nil then
+    menu:=MainMenu1
+  else
+    menu:=nil;
+except
+  // not sure this is supported on every system
+end;
 end;
 
 procedure Tf_main.SetupPicturesExecute(Sender: TObject);
@@ -8799,6 +8815,8 @@ begin
   ViewNightVision.Caption := '&' + rsNightVision;
   ViewNightVision.hint := rsNightVisionC;
   ViewNightVision.Category := CatView;
+  ViewAllTollbar.Caption := '&' + rsAllToolsBar;
+  ViewMainMenu.Caption := '&' + rsMainMenu;
   ViewServerInfo.Caption := '&' + rsServerInform + Ellipsis;
   ViewServerInfo.Hint := rsServerInform;
   ViewServerInfo.Category := CatInformation;
@@ -9062,7 +9080,6 @@ begin
   // Menu View
   SubView.Caption := '&' + rsView;
   SubToolBar.Caption := '&' + rsToolBar;
-  MenuViewToolsBar.Caption := '&' + rsAllToolsBar;
   MenuViewMainBar.Caption := '&' + rsMainBar;
   MenuViewObjectBar.Caption := '&' + rsObjectBar;
   MenuViewLeftBar.Caption := '&' + rsLeftBar;

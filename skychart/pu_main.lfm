@@ -3566,14 +3566,10 @@ object f_main: Tf_main
         Caption = 'Tool Bar'
         GroupIndex = 2
         object MenuViewToolsBar: TMenuItem
-          Caption = 'All Tools Bar'
-          Checked = True
+          Action = ViewAllTollbar
           GroupIndex = 2
           GlyphShowMode = gsmNever
-          Hint = 'View Tools Bar'
-          ShortCut = 16450
           ShowAlwaysCheckable = True
-          OnClick = MenuViewToolsBarClick
         end
         object N5: TMenuItem
           Caption = '-'
@@ -3616,6 +3612,9 @@ object f_main: Tf_main
           Hint = 'View the status bar'
           ShowAlwaysCheckable = True
           OnClick = ViewStatusBarClick
+        end
+        object MenuItem1: TMenuItem
+          Action = ViewMainMenu
         end
       end
       object SubToolbox: TMenuItem
@@ -4815,6 +4814,18 @@ object f_main: Tf_main
       Caption = 'Trajectories'
       ImageIndex = 27
       OnExecute = TrajectoriesExecute
+    end
+    object ViewMainMenu: TAction
+      Category = 'View'
+      Caption = 'Main menu'
+      OnExecute = ViewMainMenuExecute
+      ShortCut = 24653
+    end
+    object ViewAllTollbar: TAction
+      Category = 'View'
+      Caption = 'All tollbar'
+      OnExecute = MenuViewToolsBarClick
+      ShortCut = 16450
     end
   end
   object ActionListChart: TActionList

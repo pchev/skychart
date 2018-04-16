@@ -1644,6 +1644,7 @@ resourcestring
   rsSyncedTo = 'Synced to %s / %s';
   rsSetToTelesco = 'Set to telescope';
   rsGetFromTeles = 'Get from telescope';
+  rsMainMenu = 'Main menu';
 
 // also update upsi_translation
 
