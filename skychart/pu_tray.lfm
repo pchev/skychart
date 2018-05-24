@@ -7,10 +7,10 @@ object f_tray: Tf_tray
   Caption = 'Skychart Icon Setup'
   ClientHeight = 300
   ClientWidth = 400
+  DesignTimePPI = 95
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  LCLVersion = '1.6.2.0'
   Visible = False
   object Button1: TButton
     Left = 208
@@ -31,19 +31,19 @@ object f_tray: Tf_tray
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Appearance'
-      ClientHeight = 219
-      ClientWidth = 380
+      ClientHeight = 217
+      ClientWidth = 374
       object Label1: TLabel
         Left = 15
-        Height = 15
+        Height = 19
         Top = 96
-        Width = 76
+        Width = 74
         Caption = 'Background'
         ParentColor = False
       end
       object Label2: TLabel
         Left = 220
-        Height = 15
+        Height = 19
         Top = 96
         Width = 25
         Caption = 'Text'
@@ -51,9 +51,9 @@ object f_tray: Tf_tray
       end
       object Label3: TLabel
         Left = 15
-        Height = 15
+        Height = 19
         Top = 154
-        Width = 56
+        Width = 51
         Caption = 'Text Size'
         ParentColor = False
       end
@@ -65,7 +65,7 @@ object f_tray: Tf_tray
       end
       object ColorBox1: TColorBox
         Left = 15
-        Height = 25
+        Height = 35
         Top = 111
         Width = 150
         Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
@@ -75,7 +75,7 @@ object f_tray: Tf_tray
       end
       object ColorBox2: TColorBox
         Left = 220
-        Height = 25
+        Height = 35
         Top = 111
         Width = 150
         Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
@@ -85,7 +85,7 @@ object f_tray: Tf_tray
       end
       object SpinEdit1: TSpinEdit
         Left = 15
-        Height = 23
+        Height = 29
         Top = 169
         Width = 146
         MaxValue = 20
@@ -95,10 +95,10 @@ object f_tray: Tf_tray
         Value = 4
       end
       object RadioGroup2: TRadioGroup
-        Left = 17
+        Left = 0
         Height = 72
         Top = 8
-        Width = 353
+        Width = 370
         AutoFill = True
         Caption = 'Icon Size'
         ChildSizing.LeftRightSpacing = 6
@@ -108,15 +108,16 @@ object f_tray: Tf_tray
         ChildSizing.ShrinkHorizontal = crsScaleChilds
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
-        ChildSizing.ControlsPerLine = 4
-        ClientHeight = 55
-        ClientWidth = 349
-        Columns = 4
+        ChildSizing.ControlsPerLine = 5
+        ClientHeight = 52
+        ClientWidth = 368
+        Columns = 5
         Items.Strings = (
           '16x16'
           '22x22'
           '32x32'
           '32x64'
+          '48x48'
         )
         OnClick = IconSettingChange
         TabOrder = 3
@@ -124,8 +125,8 @@ object f_tray: Tf_tray
     end
     object TabSheet2: TTabSheet
       Caption = 'Clock'
-      ClientHeight = 219
-      ClientWidth = 380
+      ClientHeight = 217
+      ClientWidth = 374
       object RadioGroup1: TRadioGroup
         Left = 55
         Height = 184
@@ -141,8 +142,8 @@ object f_tray: Tf_tray
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 167
-        ClientWidth = 276
+        ClientHeight = 164
+        ClientWidth = 278
         ItemIndex = 0
         Items.Strings = (
           'Legal'
@@ -157,8 +158,8 @@ object f_tray: Tf_tray
     end
     object TabSheet3: TTabSheet
       Caption = 'Action'
-      ClientHeight = 219
-      ClientWidth = 380
+      ClientHeight = 217
+      ClientWidth = 374
       object RadioGroup3: TRadioGroup
         Left = 55
         Height = 105
@@ -174,8 +175,8 @@ object f_tray: Tf_tray
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 88
-        ClientWidth = 276
+        ClientHeight = 85
+        ClientWidth = 278
         Items.Strings = (
           'Clock'
           'Calendar'

@@ -292,6 +292,19 @@ begin
       p3 := (ubmp.Width - round(2.5 * w)) div 2;
       ubmp.Canvas.TextOut(p3, p1, txt1 + ':' + txt2);
     end;
+    3:
+    begin
+      p1 := (ubmp.Height - h) div 2;
+      p3 := (ubmp.Width - round(2.5 * w)) div 2;
+      ubmp.Canvas.TextOut(p3, p1, txt1 + ':' + txt2);
+    end;
+    4:
+    begin
+      p1 := (ubmp.Height - h) div 2;
+      p3 := (ubmp.Width - round(2.5 * w)) div 2;
+      ubmp.Canvas.TextOut(p3, p1, txt1 + ':' + txt2);
+    end;
+
   end;
 end;
 
@@ -317,6 +330,11 @@ begin
     begin
       imagetest.Width := 64;
       Imagetest.Height := 32;
+    end;
+    4:
+    begin
+      imagetest.Width := 48;
+      Imagetest.Height := 48;
     end;
   end;
   imagetest.Picture.Bitmap.Width := imagetest.Width;
@@ -380,6 +398,7 @@ begin
       1: SysTray.Icon.LoadFromLazarusResource('black22x22');
       2: SysTray.Icon.LoadFromLazarusResource('black32x32');
       3: SysTray.Icon.LoadFromLazarusResource('black32x64');
+      4: SysTray.Icon.LoadFromLazarusResource('black48x48');
     end;
   end;
   bmp.Width := SysTray.Icon.Width;
