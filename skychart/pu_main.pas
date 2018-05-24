@@ -11959,6 +11959,17 @@ begin
   arg.Add('TRACKTELESCOPE');
   arg.Add('OFF');
   ExecuteCmd(cname, arg);
+  arg.Clear;
+  arg.Add('SETRA');
+  arg.Add(formatfloat(f5, ra / 15));
+  ExecuteCmd(cname, arg);
+  arg.Clear;
+  arg.Add('SETDEC');
+  arg.Add(formatfloat(f5, Dec));
+  ExecuteCmd(cname, arg);
+  arg.Clear;
+  arg.Add('REDRAW');
+  ExecuteCmd(cname, arg);
   arg.Free;
 end;
 
