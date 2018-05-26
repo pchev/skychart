@@ -136,7 +136,7 @@ Const
 
 var
   arcentre,decentre,acentre,hcentre,CurrentJD,JDChart,JDcatalog,CurrentST,ObsLatitude: Double;
-  lcentre,bcentre,lecentre,becentre,ecl: Double;
+  lcentre,bcentre,lecentre,becentre,ecl,fov: Double;
   xmin,xmax,ymin,ymax,Xshift,Yshift,ProjPole : Integer;
   BxGlb,ByGlb,AxGlb,AyGlb,sintheta,costheta: Double;
   projtype : char;

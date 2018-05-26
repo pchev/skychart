@@ -49,6 +49,14 @@ type
     Button7: TButton;
     Button8: TButton;
     Button9: TButton;
+    hnName: TComboBox;
+    hn290Box: TCheckBox;
+    hnbase1: TLongEdit;
+    hnbase2: TLongEdit;
+    hnbase3: TDirectoryEdit;
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    Label7: TLabel;
     Panel1: TPanel;
     sh2box: TCheckBox;
     drkbox: TCheckBox;
@@ -177,7 +185,6 @@ type
     Label17: TLabel;
     Label27: TLabel;
     Label18: TLabel;
-    Label21: TLabel;
     Label19: TLabel;
     Label20: TLabel;
     TY2Box: TCheckBox;
@@ -242,7 +249,9 @@ type
     procedure CatgenClick(Sender: TObject);
     procedure defnBoxClick(Sender: TObject);
     procedure delobjClick(Sender: TObject);
+    procedure hnNameChange(Sender: TObject);
     procedure maxrowsChange(Sender: TObject);
+    procedure PageControl1Change(Sender: TObject);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: boolean);
     procedure StringGrid1DrawCell(Sender: TObject; aCol, aRow: integer;
       aRect: TRect; aState: TGridDrawState);
@@ -310,6 +319,7 @@ type
     procedure DeleteGCatRow(p: integer);
     procedure DeleteObjRow(p: integer);
     procedure ReloadFeedback(txt: string);
+    procedure Upd290List(path: string);
   public
     { Public declarations }
     catalog: Tcatalog;
@@ -469,6 +479,11 @@ end;
 procedure Tf_config_catalog.maxrowsChange(Sender: TObject);
 begin
   cmain.VOmaxrecord := maxrows.Value;
+end;
+
+procedure Tf_config_catalog.PageControl1Change(Sender: TObject);
+begin
+
 end;
 
 procedure Tf_config_catalog.PageControl1Changing(Sender: TObject;
@@ -736,6 +751,7 @@ begin
   dsbasebox.Checked := ccat.StarCatDef[dsbase - BaseStar];
   dstycbox.Checked := ccat.StarCatDef[dstyc - BaseStar];
   dsgscbox.Checked := ccat.StarCatDef[dsgsc - BaseStar];
+  hn290Box.Checked := ccat.StarCatDef[hn290 - BaseStar];
   fdef1.Value := ccat.StarCatField[DefStar - BaseStar, 1];
   fdef2.Value := ccat.StarCatField[DefStar - BaseStar, 2];
   fbsc1.Value := ccat.StarCatField[bsc - BaseStar, 1];
@@ -770,6 +786,8 @@ begin
   dstyc2.Value := ccat.StarCatField[dstyc - BaseStar, 2];
   dsgsc1.Value := ccat.StarCatField[dsgsc - BaseStar, 1];
   dsgsc2.Value := ccat.StarCatField[dsgsc - BaseStar, 2];
+  hnbase1.Value := ccat.StarCatField[hn290 - BaseStar, 1];
+  hnbase2.Value := ccat.StarCatField[hn290 - BaseStar, 2];
   def3.Text := changetext(systoutf8(ccat.StarCatPath[DefStar - BaseStar]), def3.Text);
   bsc3.Text := changetext(systoutf8(ccat.StarCatPath[bsc - BaseStar]), bsc3.Text);
   sky3.Text := changetext(systoutf8(ccat.StarCatPath[sky2000 - BaseStar]), sky3.Text);
@@ -787,6 +805,8 @@ begin
   dsbase3.Text := changetext(systoutf8(ccat.StarCatPath[dsbase - BaseStar]), dsbase3.Text);
   dstyc3.Text := changetext(systoutf8(ccat.StarCatPath[dstyc - BaseStar]), dstyc3.Text);
   dsgsc3.Text := changetext(systoutf8(ccat.StarCatPath[dsgsc - BaseStar]), dsgsc3.Text);
+  hnbase3.Text := changetext(systoutf8(ccat.StarCatPath[hn290 - BaseStar]), hnbase3.Text);
+  Upd290List(hnbase3.Text);
 end;
 
 procedure Tf_config_catalog.ShowFov;
@@ -1278,6 +1298,7 @@ begin
             color := clRed
         else
           color := textcolor;
+        if ((tag+BaseStar) = hn290) and (color=textcolor) then Upd290List(ccat.StarCatPath[tag]);
       end;
   finally
     LockCatPath := False;
@@ -1938,5 +1959,36 @@ begin
   end;
 end;
 
+procedure Tf_config_catalog.Upd290List(path: string);
+var
+  fs: TSearchRec;
+  i: integer;
+  txt: string;
+begin
+  hnName.Clear;
+  i := findfirst(slash(path) + '*.290', 0, fs);
+  while i=0 do begin
+    txt:=copy(fs.Name,1,3);
+    if hnName.Items.IndexOf(txt)<0 then begin
+       hnName.Items.Add(txt);
+    end;
+    i := findnext(fs);
+  end;
+  findclose(fs);
+  if hnName.Items.Count>0 then begin
+    i:=hnName.Items.IndexOf(ccat.Name290);
+    if i>=0 then
+      hnName.ItemIndex:=i
+    else begin
+      hnName.ItemIndex:=0;
+      ccat.Name290:=hnName.Items[0];
+    end;
+  end;
+end;
+
+procedure Tf_config_catalog.hnNameChange(Sender: TObject);
+begin
+  ccat.Name290:=hnName.text;
+end;
 
 end.

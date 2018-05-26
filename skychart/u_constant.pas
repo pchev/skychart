@@ -389,7 +389,7 @@ const
   ftCom = 101;
   ftAst = 102;
   BaseStar = 1000;
-  MaxStarCatalog = 17;
+  MaxStarCatalog = 18;
   DefStar = 1001;
   sky2000 = 1002;
   tyc = 1003;
@@ -407,6 +407,7 @@ const
   vostar = 1015;
   bsc = 1016;
   usnob = 1017;
+  hn290 = 1018;
   BaseVar = 2000;
   MaxVarStarCatalog = 2;
   gcvs = 2001;
@@ -698,6 +699,7 @@ const
   DefaultCdC = 'skychart';
   Defaultffmpeg = 'ffmpeg';
   DefaultSerialPort = '/dev/ttyUSB0';
+  DefaultHnskyPath = '/opt/hnsky';
 {$endif}
 {$ifdef freebsd}
   DefaultFontName = 'Helvetica';
@@ -718,6 +720,7 @@ const
   DefaultCdC = 'skychart';
   Defaultffmpeg = 'ffmpeg';
   DefaultSerialPort = '/dev/cuaU0';
+  DefaultHnskyPath = '/opt/hnsky';
 {$endif}
 {$ifdef darwin}
   DefaultFontName = 'Helvetica';
@@ -737,6 +740,7 @@ const
   DefaultCdC = 'skychart';
   Defaultffmpeg = 'ffmpeg';
   DefaultSerialPort = '/dev/tty.serial1';
+  DefaultHnskyPath = '/opt/hnsky';
 {$endif}
 {$ifdef mswindows}
   DefaultFontName = 'Arial';
@@ -756,6 +760,7 @@ const
   DefaultCdC = 'skychart.exe';
   Defaultffmpeg = 'ffmpeg.exe';
   DefaultSerialPort = 'COM1';
+  DefaultHnskyPath = 'C:\Program Files\hnsky';
 {$endif}
 
 type
@@ -893,6 +898,7 @@ type
     // is the catalog used for current chart
     UseUSNOBrightStars, UseGSVSIr: boolean;
     // filter specific catalog entry
+    Name290: string; // the hnsky catalog to use
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_catalog);
@@ -1948,6 +1954,7 @@ begin
     LinCatOn[i] := Source.LinCatOn[i];
   UseUSNOBrightStars := Source.UseUSNOBrightStars;
   UseGSVSIr := Source.UseGSVSIr;
+  Name290 := Source.Name290;
 end;
 
 { Tconf_shared }

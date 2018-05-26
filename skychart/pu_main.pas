@@ -6236,6 +6236,12 @@ begin
     'C:\Program Files\Deepsky Astronomy Software\HGC';
   catalog.cfgcat.starcatfield[dsgsc - BaseStar, 1] := 0;
   catalog.cfgcat.starcatfield[dsgsc - BaseStar, 2] := 3;
+  catalog.cfgcat.starcatpath[hn290 - BaseStar] := DefaultHnskyPath;
+  catalog.cfgcat.starcatdef[hn290 - BaseStar] := True;
+  catalog.cfgcat.starcatfield[hn290 - BaseStar, 1] := 0;
+  catalog.cfgcat.starcatfield[hn290 - BaseStar, 2] := 5;
+  catalog.cfgcat.Name290:='tyc';
+
   for i := 1 to maxvarstarcatalog do
   begin
     catalog.cfgcat.varstarcatpath[i] := 'cat';
@@ -6597,6 +6603,8 @@ begin
             ReadBool(section, 'UseUSNOBrightStars', catalog.cfgcat.UseUSNOBrightStars);
           catalog.cfgcat.UseGSVSIr :=
             ReadBool(section, 'UseGSVSIr', catalog.cfgcat.UseGSVSIr);
+          catalog.cfgcat.Name290 :=
+            ReadString(section, 'Name290', catalog.cfgcat.Name290);
           for i := 1 to maxstarcatalog do
           begin
             catalog.cfgcat.starcatdef[i] :=
@@ -7923,7 +7931,8 @@ begin
         WriteFloat(section, 'NebSizeMin', catalog.cfgcat.NebSizeMin);
         WriteBool(section, 'UseUSNOBrightStars', catalog.cfgcat.UseUSNOBrightStars);
         WriteBool(section, 'UseGSVSIr', catalog.cfgcat.UseGSVSIr);
-        for i := 1 to maxstarcatalog do
+        WriteString(section, 'Name290', catalog.cfgcat.Name290);
+       for i := 1 to maxstarcatalog do
         begin
           WriteBool(section, 'starcatdef' + IntToStr(i), catalog.cfgcat.starcatdef[i]);
           WriteBool(section, 'starcaton' + IntToStr(i), catalog.cfgcat.starcaton[i]);

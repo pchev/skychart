@@ -32,7 +32,7 @@ uses
   bscunit, dscat, findunit, gcatunit, gcmunit, gcvunit, gpnunit, gsccompact,
   gscfits, gscunit, lbnunit, microcatunit, oclunit, pgcunit, vocat,
   sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit,
-  usnobunit, wdsunit,
+  usnobunit, wdsunit, u_290,
   rc3unit, BGRABitmap, BGRABitmapTypes, Graphics,
   u_translation, u_constant, u_util, u_projection,
   SysUtils, Classes, Math, Dialogs, Forms;
@@ -141,6 +141,12 @@ type
     function CloseLinCat: boolean;
     procedure FormatGCatS(var rec: GcatRec);
     procedure FormatGCatN(var rec: GcatRec);
+    Procedure Open290(ar1,ar2,de1,de2: double ; var ok : boolean);
+    Procedure Open290win(var ok : boolean);
+    function  Is290Path(path : string) : Boolean;
+    Procedure Close290;
+    function  Get290(var rec: GcatRec): boolean;
+
   public
     { Public declarations }
     cfgcat: Tconf_catalog;
@@ -317,6 +323,8 @@ begin
     c.xmax, c.ymin, c.ymax, c.projtype, northpole2000inmap(c), southpole2000inmap(
     c), c.ProjEquatorCentered, c.haicx, c.haicy);
 
+  skylibcat.fov := c.fov*rad2deg;
+
   Result := True;
 end;
 
@@ -373,6 +381,7 @@ begin
     gsc: Result := GetGSC(rec);
     usnoa: Result := GetUSNOA(rec);
     usnob: Result := GetUSNOB(rec);
+    hn290: Result := Get290(rec);
     microcat: Result := GetMCT(rec);
     dsbase: Result := GetDSbase(rec);
     dstyc: Result := GetDSTyc(rec);
@@ -493,6 +502,10 @@ begin
         SetUSNOBPath(cfgcat.starcatpath[usnob - BaseStar]);
         OpenUSNOBwin(Result);
       end;
+    hn290:
+      begin
+        Open290win(Result);
+      end;
     microcat:
       begin
         SetMCTPath(cfgcat.starcatpath[microcat - BaseStar]);
@@ -559,6 +572,7 @@ begin
     gsc: CloseGSC;
     usnoa: CloseUSNOA;
     usnob: CloseUSNOB;
+    hn290: Close290;
     microcat: CloseMCT;
     dsbase: CloseDSbase;
     dstyc: CloseDStyc;
@@ -1426,7 +1440,20 @@ begin
       EmptyRec.options.flabel[26] := 'MagR2';
       EmptyRec.options.flabel[27] := 'MagB2';
     end;
-    microcat:
+    hn290:
+    begin
+      EmptyRec.options.flabel := StarLabel;
+      EmptyRec.options.ShortName := 'HNSKY';
+      EmptyRec.options.LongName := '';
+      EmptyRec.options.rectype := rtStar;
+      EmptyRec.options.Equinox := 2000;
+      EmptyRec.options.EquinoxJD := jd2000;
+      EmptyRec.options.Epoch := 2000;
+      EmptyRec.options.MagMax := 18;
+      EmptyRec.options.UsePrefix := 0;
+      Emptyrec.star.valid[vsId] := True;
+      Emptyrec.star.valid[vsMagv] := True;
+    end;    microcat:
     begin
       EmptyRec.options.flabel := StarLabel;
       EmptyRec.options.ShortName := 'MCT';
@@ -4444,6 +4471,7 @@ begin
       gsc: OpenGSC(xx1, xx2, yy1, yy2, ok);
       usnoa: OpenUSNOA(xx1, xx2, yy1, yy2, ok);
       usnob: OpenUSNOB(xx1, xx2, yy1, yy2, ok);
+      hn290: Open290(xx1, xx2, yy1, yy2, ok);
       microcat: OpenMCT(xx1, xx2, yy1, yy2, 3, ok);
       dsbase: OpenDSbase(xx1, xx2, yy1, yy2, ok);
       dstyc: OpenDSTyc(xx1, xx2, yy1, yy2, ok);
@@ -4549,6 +4577,7 @@ begin
       gsc: ok := GetGSC(rec);
       usnoa: ok := GetUSNOA(rec);
       usnob: ok := GetUSNOB(rec);
+      hn290: ok := Get290(rec);
       microcat: ok := GetMCT(rec);
       dsbase: ok := GetDSbase(rec);
       dstyc: ok := GetDSTyc(rec);
@@ -4926,6 +4955,11 @@ begin
       ok := FindAtPos(usnob, x1, y1, x2, y2, nextobj, True, searchcenter, cfgsc, rec);
       CloseUSNOB;
     end;
+    if (not ok) and cfgcat.starcaton[hn290 - BaseStar] then
+    begin
+      ok := FindAtPos(hn290, x1, y1, x2, y2, nextobj, True, searchcenter, cfgsc, rec);
+      Close290;
+    end;
     if (not ok) and cfgcat.starcaton[microcat - BaseStar] then
     begin
       ok := FindAtPos(microcat, x1, y1, x2, y2, nextobj, True, searchcenter, cfgsc, rec);
@@ -4983,6 +5017,7 @@ begin
     gsc: Result := IsGSCPath(catpath);
     usnoa: Result := IsUSNOAPath(catpath);
     usnob: Result := IsUSNOBPath(catpath);
+    hn290: Result := Is290Path(catpath);
     microcat: Result := IsMCTPath(catpath);
     dsbase: Result := IsDSbasePath(catpath);
     dstyc: Result := IsDSTycPath(catpath);
@@ -5762,6 +5797,78 @@ begin
     end;
   end;
   Result := txt;
+end;
+
+Procedure Tcatalog.Open290(ar1,ar2,de1,de2: double ; var ok : boolean);
+begin
+  ar1 := deg2rad * 15 * ar1;
+  ar2 := deg2rad * 15 * ar2;
+  de1 := deg2rad * de1;
+  de2 := deg2rad * de2;
+  u_290.RA_290 := (ar2+ar1)/2;
+  u_290.DE_290 := (de1+de2)/2;
+  u_290.FOV_290 := 1.1 *  max(deg2rad*1,AngularDistance(ar1,de1,ar2,de2));
+  if cfgshr.StarFilter then
+     u_290.maxmag := round(10 * cfgcat.StarMagMax)
+  else
+     u_290.maxmag := 999;
+  u_290.catalog_path := slash(cfgcat.StarCatPath[hn290 - BaseStar]);
+  u_290.name_star:=cfgcat.Name290;
+  u_290.area290:=291;
+  u_290.cos_telescope_dec := cos(u_290.DE_290);
+  EmptyRec.options.ShortName:=u_290.name_star;
+  ok:=true;
+end;
+
+Procedure Tcatalog.Open290win(var ok : boolean);
+begin
+  u_290.RA_290 := deg2rad * 15 * skylibcat.arcentre;
+  u_290.DE_290 := deg2rad * skylibcat.decentre;
+  u_290.FOV_290 := 1.5 * deg2rad * max(1,skylibcat.fov);
+  if cfgshr.StarFilter then
+     u_290.maxmag := round(10 * cfgcat.StarMagMax)
+  else
+     u_290.maxmag := 999;
+  u_290.catalog_path := slash(cfgcat.StarCatPath[hn290 - BaseStar]);
+  u_290.name_star:=cfgcat.Name290;
+  u_290.area290:=291;
+  u_290.cos_telescope_dec := cos(u_290.DE_290);
+  EmptyRec.options.ShortName:=u_290.name_star;
+  ok:=true;
+end;
+
+Procedure Tcatalog.Close290;
+begin
+  u_290.area290:=291;
+end;
+
+function Tcatalog.Is290Path(path : string) : Boolean;
+var
+  fs: TSearchRec;
+  i: integer;
+begin
+  i := findfirst(slash(path) + '*.290', 0, fs);
+  result := i=0;
+  findclose(fs);
+end;
+
+function Tcatalog.Get290(var rec: GcatRec): boolean;
+var
+  ra2,dec2 : double;
+begin
+  rec := EmptyRec;
+  Result := readdatabase290('S', RA_290, DE_290, FOV_290, ra2,dec2, MAG_290);
+  if Result then
+  begin
+    rec.ra:=ra2;
+    rec.dec:=dec2;
+    rec.star.magv:=MAG_290/10;
+    if u_290.naam2='' then
+      rec.star.id:=rec.options.ShortName
+    else
+      rec.star.id:=u_290.naam2;
+    rec.options.LongName:=trim(copy(u_290.database2,1,108));
+  end;
 end;
 
 end.

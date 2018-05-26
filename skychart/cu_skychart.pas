@@ -572,6 +572,7 @@ begin
   InitStarC(gscc, 14.5);
   InitStarC(dsgsc, 14.5);
   InitStarC(microcat, 16);
+  InitStarC(hn290, 18);
   InitStarC(usnoa, 18);
   InitStarC(usnob, 21);
   InitStarC(vostar, vostar_magmax);
@@ -4172,6 +4173,8 @@ begin
         FindAtPosCat(usnoa);
       if Fcatalog.cfgcat.starcaton[usnob - BaseStar] then
         FindAtPosCat(usnob);
+      if Fcatalog.cfgcat.starcaton[hn290 - BaseStar] then
+        FindAtPosCat(hn290);
       if Fcatalog.cfgcat.starcaton[microcat - BaseStar] then
         FindAtPosCat(microcat);
     end;
