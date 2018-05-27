@@ -1,5 +1,7 @@
 unit u_290;
 {HNSKY reads star databases type .290}
+{Minor adaptation, remove astap_main, add global variables, for use with Skychart}
+
 {Copyright (C) 2017,2018 by Han Kleijn, www.hnsky.org
  email: han.k.. at...hnsky.org
 
@@ -30,6 +32,8 @@ var
   cos_telescope_dec : double;{store here the cos(telescope_dec) value before and read series}
   database2         : array[0..(11*10)] of ansichar;{info star database, length 110 char equals 10x11 bytes}
   naam2             : string; {contains star designation after read for records size above 7}
+
+  // skychart variables
   catalog_path      : string; {path to the .290 files}
   RA_290,DE_290,FOV_290,MAG_290: double;
 
