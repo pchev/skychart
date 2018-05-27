@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-09 16:30+0000\n"
-"PO-Revision-Date: 2018-03-06 10:19+0000\n"
+"POT-Creation-Date: 2018-05-27 16:06+0000\n"
+"PO-Revision-Date: 2018-05-11 20:51+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-03-09 16:36+0000\n"
-"X-Generator: Launchpad (build 18571)\n"
+"X-Launchpad-Export-Date: 2018-05-27 16:12+0000\n"
+"X-Generator: Launchpad (build 18667)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -2406,7 +2406,7 @@ msgstr "Pobierz obraz DSS"
 
 #: u_translation.rsgetfromteles
 msgid "Get from telescope"
-msgstr ""
+msgstr "Pobrano z teleskopu"
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
@@ -3204,6 +3204,10 @@ msgstr "Forum użytkowników (grupa Yahoo)"
 #: u_translation.rsmainbar
 msgid "Main bar"
 msgstr "Pasek główny"
+
+#: u_translation.rsmainmenu
+msgid "Main menu"
+msgstr ""
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
@@ -5067,7 +5071,7 @@ msgstr "Ustaw czas"
 
 #: u_translation.rssettotelesco
 msgid "Set to telescope"
-msgstr ""
+msgstr "Ustawiono w teleskopie"
 
 #: u_translation.rssetup
 msgid "Setup"
@@ -5311,7 +5315,7 @@ msgstr "Obrót"
 
 #: u_translation.rsslewingto
 msgid "Slewing to %s / %s"
-msgstr ""
+msgstr "Obrót do %s / %s"
 
 #: u_translation.rsslewspeed
 msgid " Slew Speed"
@@ -5631,7 +5635,7 @@ msgstr "Synchronizacja"
 
 #: u_translation.rssyncedto
 msgid "Synced to %s / %s"
-msgstr ""
+msgstr "Synchronizacja do %s / %s"
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
@@ -6012,6 +6016,10 @@ msgstr "Nieznany obiekt"
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
 msgstr "Odblokuj mapę"
+
+#: u_translation.rsunsupportedf
+msgid "Unsupported file extension: %sPlease fix it."
+msgstr ""
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"

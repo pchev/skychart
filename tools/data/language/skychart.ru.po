@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-09 16:30+0000\n"
+"POT-Creation-Date: 2018-05-27 16:06+0000\n"
 "PO-Revision-Date: 2018-03-07 20:34+0000\n"
 "Last-Translator: sernik <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-03-09 16:36+0000\n"
-"X-Generator: Launchpad (build 18571)\n"
+"X-Launchpad-Export-Date: 2018-05-27 16:12+0000\n"
+"X-Generator: Launchpad (build 18667)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -3202,6 +3202,10 @@ msgstr "Почтовая рассылка (группа Yahoo)"
 msgid "Main bar"
 msgstr "Главная панель"
 
+#: u_translation.rsmainmenu
+msgid "Main menu"
+msgstr ""
+
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
 msgstr "Выберите строки в таблице для включения в загружаемый каталог"
@@ -6009,6 +6013,10 @@ msgstr "Неизвестный объект"
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
 msgstr "Разблокировать объект"
+
+#: u_translation.rsunsupportedf
+msgid "Unsupported file extension: %sPlease fix it."
+msgstr ""
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"

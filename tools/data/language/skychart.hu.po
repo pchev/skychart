@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-09 16:30+0000\n"
+"POT-Creation-Date: 2018-05-27 16:06+0000\n"
 "PO-Revision-Date: 2017-01-14 17:43+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-03-09 16:36+0000\n"
-"X-Generator: Launchpad (build 18571)\n"
+"X-Launchpad-Export-Date: 2018-05-27 16:12+0000\n"
+"X-Generator: Launchpad (build 18667)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -3203,6 +3203,10 @@ msgstr "LevList"
 msgid "Main bar"
 msgstr "Szokásos"
 
+#: u_translation.rsmainmenu
+msgid "Main menu"
+msgstr ""
+
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
 msgstr "Válaszd ki, hogy milyen oszlopok legyenek a katalógusban."
@@ -6011,6 +6015,10 @@ msgstr "Ismeretlen objektum"
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
 msgstr "Rögzítés kikapcsolása"
+
+#: u_translation.rsunsupportedf
+msgid "Unsupported file extension: %sPlease fix it."
+msgstr ""
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"

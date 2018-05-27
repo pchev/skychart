@@ -6330,3 +6330,11 @@ msgstr ""
 msgid "Get from telescope"
 msgstr ""
 
+#: u_translation:rsmainmenu
+msgid "Main menu"
+msgstr ""
+
+#: u_translation:rsunsupportedf
+msgid "Unsupported file extension: %sPlease fix it."
+msgstr ""
+

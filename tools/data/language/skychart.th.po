@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-03-09 16:30+0000\n"
+"POT-Creation-Date: 2018-05-27 16:06+0000\n"
 "PO-Revision-Date: 2016-12-11 09:03+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-03-09 16:36+0000\n"
-"X-Generator: Launchpad (build 18571)\n"
+"X-Launchpad-Export-Date: 2018-05-27 16:12+0000\n"
+"X-Generator: Launchpad (build 18667)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -3204,6 +3204,10 @@ msgstr "ข่าวทางอีเมล (Yahoo group)"
 msgid "Main bar"
 msgstr "แถบหลัก"
 
+#: u_translation.rsmainmenu
+msgid "Main menu"
+msgstr ""
+
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
 msgstr "เลือกตารางและคอลัมน์ที่ต้องการในบัญชีของคุณ"
@@ -6011,6 +6015,10 @@ msgstr "วัตถุไม่ทราบชนิด"
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
 msgstr "ปลดล็อกแผนที่"
+
+#: u_translation.rsunsupportedf
+msgid "Unsupported file extension: %sPlease fix it."
+msgstr ""
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"

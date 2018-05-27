@@ -1,19 +1,19 @@
-# Japanese translation for skychart
-# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# English (United Kingdom) translation for skychart
+# Copyright (c) 2018 Rosetta Contributors and Canonical Ltd 2018
 # This file is distributed under the same license as the skychart package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2018-05-27 16:06+0000\n"
-"PO-Revision-Date: 2017-06-18 03:42+0000\n"
-"Last-Translator: Osamu <Unknown>\n"
-"Language-Team: Japanese <ja@li.org>\n"
+"PO-Revision-Date: 2018-04-15 15:25+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-05-27 16:12+0000\n"
+"X-Launchpad-Export-Date: 2018-05-27 16:13+0000\n"
 "X-Generator: Launchpad (build 18667)\n"
 
 #: u_translation.rs102cddss
@@ -794,7 +794,7 @@ msgstr ""
 
 #: u_translation.rschangedrawin
 msgid "Change drawing mode"
-msgstr "表示モードの変更"
+msgstr ""
 
 #: u_translation.rschangemousem
 msgid "Change mouse mode"
@@ -910,7 +910,7 @@ msgstr ""
 
 #: u_translation.rsclosechart
 msgid "Close chart"
-msgstr "チャートを閉じる"
+msgstr ""
 
 #: u_translation.rscloseconnect
 msgid "Close connection"
@@ -1086,7 +1086,7 @@ msgstr ""
 
 #: u_translation.rsconnectteles
 msgid "Connect telescope"
-msgstr "望遠鏡を接続"
+msgstr ""
 
 #: u_translation.rsconnecttofai
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
@@ -1354,7 +1354,7 @@ msgstr ""
 
 #: u_translation.rsday
 msgid "Day"
-msgstr "日"
+msgstr ""
 
 #: u_translation.rsdays
 msgid "days"
@@ -1470,7 +1470,7 @@ msgstr ""
 
 #: u_translation.rsdeg
 msgid "d"
-msgstr "日"
+msgstr ""
 
 #: u_translation.rsdegree
 msgid "Degree"
@@ -1838,7 +1838,7 @@ msgstr ""
 
 #: u_translation.rseast
 msgid "East"
-msgstr "東"
+msgstr ""
 
 #: u_translation.rseastside
 msgid "East side"
@@ -2170,7 +2170,7 @@ msgstr ""
 
 #: u_translation.rsfile
 msgid "File"
-msgstr "ファイル"
+msgstr ""
 
 #: u_translation.rsfilenamewith
 msgid "Filename without path or extension"
@@ -2402,7 +2402,7 @@ msgstr ""
 
 #: u_translation.rsgetdssimage
 msgid "Get the DSS image"
-msgstr "DSSイメージの取得"
+msgstr ""
 
 #: u_translation.rsgetfromteles
 msgid "Get from telescope"
@@ -2522,7 +2522,7 @@ msgstr ""
 
 #: u_translation.rshelpbasedir
 msgid "en/documentation/"
-msgstr "en/documentation/"
+msgstr ""
 
 #: u_translation.rshelpcontents
 msgid "Help contents"
@@ -2574,7 +2574,7 @@ msgstr ""
 
 #: u_translation.rshour
 msgid "Hour"
-msgstr "時"
+msgstr ""
 
 #: u_translation.rshourangle
 msgid "Hour angle"
@@ -3026,7 +3026,7 @@ msgstr ""
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
-msgstr "すべてのチャートをリンク"
+msgstr ""
 
 #: u_translation.rslist
 msgid "List"
@@ -3350,7 +3350,7 @@ msgstr ""
 
 #: u_translation.rsmin
 msgid "m"
-msgstr "m"
+msgstr ""
 
 #: u_translation.rsmin2
 msgid "min"
@@ -3366,7 +3366,7 @@ msgstr ""
 
 #: u_translation.rsminute
 msgid "Minute"
-msgstr "分"
+msgstr ""
 
 #: u_translation.rsminutes
 msgid "minutes"
@@ -3378,7 +3378,7 @@ msgstr ""
 
 #: u_translation.rsmirrorvertic
 msgid "Mirror vertically"
-msgstr "上下反転"
+msgstr ""
 
 #: u_translation.rsmisclines
 msgid "Misc. lines"
@@ -3406,7 +3406,7 @@ msgstr ""
 
 #: u_translation.rsmonth
 msgid "Month"
-msgstr "月"
+msgstr ""
 
 #: u_translation.rsmoon
 msgid "Moon"
@@ -3550,7 +3550,7 @@ msgstr ""
 
 #: u_translation.rsnewchart
 msgid "New chart"
-msgstr "新しいチャート"
+msgstr ""
 
 #: u_translation.rsnewfindercir
 msgid "New finder circle"
@@ -3626,7 +3626,7 @@ msgstr ""
 
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
-msgstr "ロックするオブジェクトがありません"
+msgstr ""
 
 #: u_translation.rsnopicture
 msgid "No picture"
@@ -3642,7 +3642,7 @@ msgstr ""
 
 #: u_translation.rsnorth
 msgid "North"
-msgstr "北"
+msgstr ""
 
 #: u_translation.rsnosamphubpro
 msgid "No SAMP hub profile found, no hub is running."
@@ -3874,7 +3874,7 @@ msgstr ""
 
 #: u_translation.rsopen
 msgid "Open"
-msgstr "開く(O)..."
+msgstr ""
 
 #: u_translation.rsopenachart
 msgid "Open a chart"
@@ -4778,7 +4778,7 @@ msgstr ""
 
 #: u_translation.rssaveas
 msgid "Save as..."
-msgstr "名前を付けて保存..."
+msgstr ""
 
 #: u_translation.rssaveconfigur
 msgid "Save configuration now"
@@ -4790,7 +4790,7 @@ msgstr ""
 
 #: u_translation.rssaveimage
 msgid "Save image..."
-msgstr "イメージの保存"
+msgstr ""
 
 #: u_translation.rssaveproject
 msgid "Save project"
@@ -4882,7 +4882,7 @@ msgstr ""
 
 #: u_translation.rssec
 msgid "s"
-msgstr "秒"
+msgstr ""
 
 #: u_translation.rssec2
 msgid "Sec."
@@ -4890,7 +4890,7 @@ msgstr ""
 
 #: u_translation.rssecond
 msgid "Second"
-msgstr "秒"
+msgstr ""
 
 #: u_translation.rsseconds
 msgid "Seconds"
@@ -5098,7 +5098,7 @@ msgstr ""
 
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
-msgstr "小惑星の表示"
+msgstr ""
 
 #: u_translation.rsshowasteroid3
 msgid "Show asteroids on the chart"
@@ -5110,7 +5110,7 @@ msgstr ""
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
-msgstr "彗星の表示"
+msgstr ""
 
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
@@ -5230,7 +5230,7 @@ msgstr ""
 
 #: u_translation.rsshowpictures
 msgid "Show pictures"
-msgstr "写真の表示"
+msgstr ""
 
 #: u_translation.rsshowplaneton
 msgid "Show planets on the chart"
@@ -5238,7 +5238,7 @@ msgstr ""
 
 #: u_translation.rsshowplanets
 msgid "Show planets"
-msgstr "惑星を表示"
+msgstr ""
 
 #: u_translation.rsshowposition
 msgid "Show position in title bar"
@@ -5246,7 +5246,7 @@ msgstr ""
 
 #: u_translation.rsshowstars
 msgid "Show stars"
-msgstr "星の表示"
+msgstr ""
 
 #: u_translation.rsshowtheimage
 msgid "Show the images on the map"
@@ -5286,7 +5286,7 @@ msgstr ""
 
 #: u_translation.rsskybackgroun
 msgid "Sky background colour"
-msgstr "空の背景色"
+msgstr ""
 
 #: u_translation.rsskycharthome
 msgid "Skychart homepage"
@@ -5310,7 +5310,7 @@ msgstr ""
 
 #: u_translation.rsslew
 msgid "Slew"
-msgstr "導入"
+msgstr ""
 
 #: u_translation.rsslewingto
 msgid "Slewing to %s / %s"
@@ -5414,7 +5414,7 @@ msgstr ""
 
 #: u_translation.rssouth
 msgid "South"
-msgstr "南"
+msgstr ""
 
 #: u_translation.rsspacer
 msgid "Spacer"
@@ -5630,7 +5630,7 @@ msgstr ""
 
 #: u_translation.rssync
 msgid "Sync"
-msgstr "同期"
+msgstr ""
 
 #: u_translation.rssyncedto
 msgid "Synced to %s / %s"
@@ -6270,7 +6270,7 @@ msgstr ""
 
 #: u_translation.rswest
 msgid "West"
-msgstr "西"
+msgstr ""
 
 #: u_translation.rswestside
 msgid "West side"
@@ -6294,7 +6294,7 @@ msgstr ""
 
 #: u_translation.rsyear
 msgid "Year"
-msgstr "年"
+msgstr ""
 
 #: u_translation.rsyears
 msgid "years"
