@@ -9839,7 +9839,7 @@ begin
             if (w > 10) and (h > 10) then
             begin
               MultiFrame1.Maximized := False;
-              if InitOK then
+              if InitOK and f_main.visible then
               begin // only if form is show
                 if VertScrollBar.Visible then
                   w := w + VertScrollBar.Width;
