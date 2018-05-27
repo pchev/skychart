@@ -808,7 +808,27 @@ procedure Tf_config_chart.projectiontypeClick(Sender: TObject);
 begin
   if LockChange then
     exit;
+  // save current
+  csc.ProjOptions[csc.ProjPole].EquinoxType := csc.EquinoxType;
+  csc.ProjOptions[csc.ProjPole].ApparentPos := csc.ApparentPos ;
+  csc.ProjOptions[csc.ProjPole].PMon := csc.PMon ;
+  csc.ProjOptions[csc.ProjPole].YPmon := csc.YPmon ;
+  csc.ProjOptions[csc.ProjPole].EquinoxChart := csc.EquinoxChart ;
+  csc.ProjOptions[csc.ProjPole].DefaultJDChart := csc.DefaultJDChart ;
+  csc.ProjOptions[csc.ProjPole].CoordExpertMode := csc.CoordExpertMode ;
+  csc.ProjOptions[csc.ProjPole].CoordType := csc.CoordType ;
+  // change projection
   csc.ProjPole := projectiontype.ItemIndex;
+  // load setting
+  csc.EquinoxType    := csc.ProjOptions[csc.ProjPole].EquinoxType;
+  csc.ApparentPos    := csc.ProjOptions[csc.ProjPole].ApparentPos;
+  csc.PMon           := csc.ProjOptions[csc.ProjPole].PMon;
+  csc.YPmon          := csc.ProjOptions[csc.ProjPole].YPmon;
+  csc.EquinoxChart   := csc.ProjOptions[csc.ProjPole].EquinoxChart;
+  csc.DefaultJDChart := csc.ProjOptions[csc.ProjPole].DefaultJDChart;
+  csc.CoordExpertMode:= csc.ProjOptions[csc.ProjPole].CoordExpertMode;
+  csc.CoordType      := csc.ProjOptions[csc.ProjPole].CoordType;
+
   SetValidCoordtype;
   if csc.ProjPole = 1 then
   begin

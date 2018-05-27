@@ -947,6 +947,17 @@ type
     procedure Assign(Source: Tconf_shared);
   end;
 
+  TProjOptions = record
+      EquinoxType : integer;
+      ApparentPos : boolean;
+      PMon        : boolean;
+      YPmon       : double;
+      EquinoxChart   : string;
+      DefaultJDChart : double;
+      CoordExpertMode: boolean;
+      CoordType  : integer;
+  end;
+
   Tconf_skychart = class(TObject)    // chart setting
   public
     tz: TCdCTimeZone;
@@ -959,6 +970,7 @@ type
     EquinoxType: integer;
     DefaultJDchart: double;
     EquinoxChart: string;
+    ProjOptions: array[0..3] of TProjOptions;
     Force_DT_UT, horizonopaque, autorefresh, TrackOn, TargetOn, Quick,
     NP, SP, moved, abm, asl, ShowScale: boolean;
     projtype: char;
@@ -2180,6 +2192,16 @@ begin
   FlipX := Source.FlipX;
   FlipY := Source.FlipY;
   ProjPole := Source.ProjPole;
+  for i:=0 to 3 do begin
+    ProjOptions[i].EquinoxType := Source.ProjOptions[i].EquinoxType;
+    ProjOptions[i].ApparentPos := Source.ProjOptions[i].ApparentPos;
+    ProjOptions[i].PMon := Source.ProjOptions[i].PMon;
+    ProjOptions[i].YPmon := Source.ProjOptions[i].YPmon;
+    ProjOptions[i].EquinoxChart := Source.ProjOptions[i].EquinoxChart;
+    ProjOptions[i].DefaultJDChart := Source.ProjOptions[i].DefaultJDChart;
+    ProjOptions[i].CoordExpertMode := Source.ProjOptions[i].CoordExpertMode;
+    ProjOptions[i].CoordType := Source.ProjOptions[i].CoordType;
+  end;
   TrackType := Source.TrackType;
   TrackObj := Source.TrackObj;
   AstSymbol := Source.AstSymbol;

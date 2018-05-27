@@ -4613,6 +4613,14 @@ begin
     sc.cfgsc.projpole := ecl
   else
     Result := msgFailed + ' Bad projection name.';
+  sc.cfgsc.EquinoxType    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxType;
+  sc.cfgsc.ApparentPos    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].ApparentPos;
+  sc.cfgsc.PMon           := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].PMon;
+  sc.cfgsc.YPmon          := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].YPmon;
+  sc.cfgsc.EquinoxChart   := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxChart;
+  sc.cfgsc.DefaultJDChart := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].DefaultJDChart;
+  sc.cfgsc.CoordExpertMode:= sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordExpertMode;
+  sc.cfgsc.CoordType      := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordType;
   sc.cfgsc.FindOk := False;
   if (sc.cfgsc.projpole = altaz) and (sc.cfgsc.EquinoxType <> 2) then
   begin // ensure equinox of the date for alt/az
@@ -6473,6 +6481,14 @@ begin
         sc.cfgsc.projpole := equat
       else
         sc.cfgsc.projpole := altaz;
+      sc.cfgsc.EquinoxType    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxType;
+      sc.cfgsc.ApparentPos    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].ApparentPos;
+      sc.cfgsc.PMon           := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].PMon;
+      sc.cfgsc.YPmon          := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].YPmon;
+      sc.cfgsc.EquinoxChart   := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxChart;
+      sc.cfgsc.DefaultJDChart := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].DefaultJDChart;
+      sc.cfgsc.CoordExpertMode:= sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordExpertMode;
+      sc.cfgsc.CoordType      := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordType;
       refresh(True, False);
     end;
     77: Result := cmd_SetGridNum(arg[1]);
@@ -6559,6 +6575,14 @@ begin
       sc.cfgsc.fov := field;
   end;
   sc.cfgsc.ProjPole := Altaz;
+  sc.cfgsc.EquinoxType    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxType;
+  sc.cfgsc.ApparentPos    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].ApparentPos;
+  sc.cfgsc.PMon           := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].PMon;
+  sc.cfgsc.YPmon          := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].YPmon;
+  sc.cfgsc.EquinoxChart   := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxChart;
+  sc.cfgsc.DefaultJDChart := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].DefaultJDChart;
+  sc.cfgsc.CoordExpertMode:= sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordExpertMode;
+  sc.cfgsc.CoordType      := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordType;
   if (sc.cfgsc.EquinoxType <> 2) then
   begin // ensure equinox of the date for alt/az
     sc.cfgsc.EquinoxType := 2;
@@ -6599,6 +6623,14 @@ begin
   sc.cfgsc.racentre := sc.cfgsc.CurST - a;
   sc.cfgsc.decentre := d;
   sc.cfgsc.ProjPole := Altaz;
+  sc.cfgsc.EquinoxType    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxType;
+  sc.cfgsc.ApparentPos    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].ApparentPos;
+  sc.cfgsc.PMon           := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].PMon;
+  sc.cfgsc.YPmon          := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].YPmon;
+  sc.cfgsc.EquinoxChart   := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxChart;
+  sc.cfgsc.DefaultJDChart := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].DefaultJDChart;
+  sc.cfgsc.CoordExpertMode:= sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordExpertMode;
+  sc.cfgsc.CoordType      := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordType;
   sc.cfgsc.TrackOn := False;
   if (sc.cfgsc.EquinoxType <> 2) then
   begin // ensure equinox of the date for alt/az

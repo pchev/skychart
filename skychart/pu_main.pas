@@ -3976,11 +3976,20 @@ begin
 end;
 
 procedure Tf_main.EquatorialProjectionExecute(Sender: TObject);
+var ok: boolean;
 begin
   if MultiFrame1.ActiveObject is Tf_chart then
     with MultiFrame1.ActiveObject as Tf_chart do
     begin
       sc.cfgsc.projpole := Equat;
+      sc.cfgsc.EquinoxType    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxType;
+      sc.cfgsc.ApparentPos    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].ApparentPos;
+      sc.cfgsc.PMon           := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].PMon;
+      sc.cfgsc.YPmon          := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].YPmon;
+      sc.cfgsc.EquinoxChart   := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxChart;
+      sc.cfgsc.DefaultJDChart := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].DefaultJDChart;
+      sc.cfgsc.CoordExpertMode:= sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordExpertMode;
+      sc.cfgsc.CoordType      := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordType;
       sc.cfgsc.FindOk := False; // invalidate the search result
       sc.cfgsc.theta := 0; // rotation = 0
       if VerboseMsg then
@@ -3995,6 +4004,14 @@ begin
     with MultiFrame1.ActiveObject as Tf_chart do
     begin
       sc.cfgsc.projpole := AltAz;
+      sc.cfgsc.EquinoxType    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxType;
+      sc.cfgsc.ApparentPos    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].ApparentPos;
+      sc.cfgsc.PMon           := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].PMon;
+      sc.cfgsc.YPmon          := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].YPmon;
+      sc.cfgsc.EquinoxChart   := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxChart;
+      sc.cfgsc.DefaultJDChart := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].DefaultJDChart;
+      sc.cfgsc.CoordExpertMode:= sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordExpertMode;
+      sc.cfgsc.CoordType      := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordType;
       sc.cfgsc.FindOk := False; // invalidate the search result
       sc.cfgsc.theta := 0; // rotation = 0
       if sc.cfgsc.EquinoxType <> 2 then
@@ -4020,6 +4037,14 @@ begin
     with MultiFrame1.ActiveObject as Tf_chart do
     begin
       sc.cfgsc.projpole := Ecl;
+      sc.cfgsc.EquinoxType    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxType;
+      sc.cfgsc.ApparentPos    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].ApparentPos;
+      sc.cfgsc.PMon           := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].PMon;
+      sc.cfgsc.YPmon          := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].YPmon;
+      sc.cfgsc.EquinoxChart   := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxChart;
+      sc.cfgsc.DefaultJDChart := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].DefaultJDChart;
+      sc.cfgsc.CoordExpertMode:= sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordExpertMode;
+      sc.cfgsc.CoordType      := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordType;
       sc.cfgsc.FindOk := False; // invalidate the search result
       sc.cfgsc.theta := 0; // rotation = 0
       if VerboseMsg then
@@ -4034,6 +4059,14 @@ begin
     with MultiFrame1.ActiveObject as Tf_chart do
     begin
       sc.cfgsc.projpole := Gal;
+      sc.cfgsc.EquinoxType    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxType;
+      sc.cfgsc.ApparentPos    := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].ApparentPos;
+      sc.cfgsc.PMon           := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].PMon;
+      sc.cfgsc.YPmon          := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].YPmon;
+      sc.cfgsc.EquinoxChart   := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].EquinoxChart;
+      sc.cfgsc.DefaultJDChart := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].DefaultJDChart;
+      sc.cfgsc.CoordExpertMode:= sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordExpertMode;
+      sc.cfgsc.CoordType      := sc.cfgsc.ProjOptions[sc.cfgsc.ProjPole].CoordType;
       sc.cfgsc.FindOk := False; // invalidate the search result
       sc.cfgsc.theta := 0; // rotation = 0
       if VerboseMsg then
@@ -5248,6 +5281,14 @@ begin
     showast := csc.ShowAsteroid;
     if (not csc.SunOnline) or (csc.sunurlname <> def_cfgsc.sunurlname) then
       DeleteFile(slash(Tempdir) + 'sun.jpg');
+    csc.ProjOptions[csc.ProjPole].EquinoxType := csc.EquinoxType;
+    csc.ProjOptions[csc.ProjPole].ApparentPos := csc.ApparentPos ;
+    csc.ProjOptions[csc.ProjPole].PMon := csc.PMon ;
+    csc.ProjOptions[csc.ProjPole].YPmon := csc.YPmon ;
+    csc.ProjOptions[csc.ProjPole].EquinoxChart := csc.EquinoxChart ;
+    csc.ProjOptions[csc.ProjPole].DefaultJDChart := csc.DefaultJDChart ;
+    csc.ProjOptions[csc.ProjPole].CoordExpertMode := csc.CoordExpertMode ;
+    csc.ProjOptions[csc.ProjPole].CoordType := csc.CoordType ;
     def_cfgsc.Assign(csc);
   end;
   if cplot <> nil then
@@ -6840,6 +6881,17 @@ begin
         csc.EquinoxType := ReadInteger(section, 'EquinoxType', csc.EquinoxType);
         csc.EquinoxChart := ReadString(section, 'EquinoxChart', csc.EquinoxChart);
         csc.DefaultJDchart := ReadFloat(section, 'DefaultJDchart', csc.DefaultJDchart);
+        for i:=0 to 3 do
+        begin
+         csc.ProjOptions[i].EquinoxType := ReadInteger(section, 'ProjOptionsEquinoxType' + IntToStr(i), csc.ProjOptions[i].EquinoxType);
+         csc.ProjOptions[i].ApparentPos := ReadBool(section, 'ProjOptionsApparentPos' + IntToStr(i), csc.ProjOptions[i].ApparentPos);
+         csc.ProjOptions[i].PMon := ReadBool(section, 'ProjOptionsPMon' + IntToStr(i), csc.ProjOptions[i].PMon);
+         csc.ProjOptions[i].YPmon := ReadFloat(section, 'ProjOptionsYPmon' + IntToStr(i), csc.ProjOptions[i].YPmon);
+         csc.ProjOptions[i].EquinoxChart := ReadString(section, 'ProjOptionsEquinoxChart' + IntToStr(i), csc.ProjOptions[i].EquinoxChart);
+         csc.ProjOptions[i].DefaultJDChart := ReadFloat(section, 'ProjOptionsDefaultJDChart' + IntToStr(i), csc.ProjOptions[i].DefaultJDChart);
+         csc.ProjOptions[i].CoordExpertMode := ReadBool(section, 'ProjOptionsCoordExpertMode' + IntToStr(i), csc.ProjOptions[i].CoordExpertMode);
+         csc.ProjOptions[i].CoordType := ReadInteger(section, 'ProjOptionsCoordType' + IntToStr(i), csc.ProjOptions[i].CoordType);
+        end;
       except
         ShowError('Error reading ' + filename + ' chart');
       end;
@@ -7817,6 +7869,30 @@ begin
     DeleteFilesInDir(slash(TempDir) + '512');
     DeleteFilesInDir(slash(TempDir) + '1024');
   end;
+  if Config_Version < '4.1d' then
+  begin
+    for i:=0 to 3 do
+    if i=1 then begin
+      def_cfgsc.ProjOptions[i].EquinoxType := 2;
+      def_cfgsc.ProjOptions[i].ApparentPos := True;
+      def_cfgsc.ProjOptions[i].PMon := True;
+      def_cfgsc.ProjOptions[i].YPmon := 0;
+      def_cfgsc.ProjOptions[i].EquinoxChart := rsDate;
+      def_cfgsc.ProjOptions[i].DefaultJDChart := jd2000;
+      def_cfgsc.ProjOptions[i].CoordExpertMode := False;
+      def_cfgsc.ProjOptions[i].CoordType := 0;
+    end
+    else begin
+      def_cfgsc.ProjOptions[i].EquinoxType := def_cfgsc.EquinoxType;
+      def_cfgsc.ProjOptions[i].ApparentPos := def_cfgsc.ApparentPos ;
+      def_cfgsc.ProjOptions[i].PMon := def_cfgsc.PMon ;
+      def_cfgsc.ProjOptions[i].YPmon := def_cfgsc.YPmon ;
+      def_cfgsc.ProjOptions[i].EquinoxChart := def_cfgsc.EquinoxChart ;
+      def_cfgsc.ProjOptions[i].DefaultJDChart := def_cfgsc.DefaultJDChart ;
+      def_cfgsc.ProjOptions[i].CoordExpertMode := def_cfgsc.CoordExpertMode ;
+      def_cfgsc.ProjOptions[i].CoordType := def_cfgsc.CoordType ;
+    end;
+  end;
 end;
 
 procedure Tf_main.SaveVersion;
@@ -8097,6 +8173,17 @@ begin
         WriteInteger(section, 'EquinoxType', csc.EquinoxType);
         WriteString(section, 'EquinoxChart', csc.EquinoxChart);
         WriteFloat(section, 'DefaultJDchart', csc.DefaultJDchart);
+        for i:=0 to 3 do
+        begin
+          WriteInteger(section, 'ProjOptionsEquinoxType' + IntToStr(i), csc.ProjOptions[i].EquinoxType);
+          WriteBool(section, 'ProjOptionsApparentPos' + IntToStr(i), csc.ProjOptions[i].ApparentPos);
+          WriteBool(section, 'ProjOptionsPMon' + IntToStr(i), csc.ProjOptions[i].PMon);
+          WriteFloat(section, 'ProjOptionsYPmon' + IntToStr(i), csc.ProjOptions[i].YPmon);
+          WriteString(section, 'ProjOptionsEquinoxChart' + IntToStr(i), csc.ProjOptions[i].EquinoxChart);
+          WriteFloat(section, 'ProjOptionsDefaultJDChart' + IntToStr(i), csc.ProjOptions[i].DefaultJDChart);
+          WriteBool(section, 'ProjOptionsCoordExpertMode' + IntToStr(i), csc.ProjOptions[i].CoordExpertMode);
+          WriteInteger(section, 'ProjOptionsCoordType' + IntToStr(i), csc.ProjOptions[i].CoordType);
+        end;
         section := 'default_chart';
         if (child <> nil) then
         begin
