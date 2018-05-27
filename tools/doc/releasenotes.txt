@@ -2,6 +2,7 @@ Version 4.1.1 beta, release Notes
 
 New functions:
 
+- Allow to use HNSKY star catalog using the "290" format.
 - Improve double star display.
 - Improve magnitude filter for small FOV.
 - Show the object rise and set time relative to the local horizon if a horizon file is loaded. This can be disabled in Setup/Observatory. Calendar rise/set are always given to the astronomical horizon.

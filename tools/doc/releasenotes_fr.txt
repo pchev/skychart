@@ -2,6 +2,7 @@ Version 4.1.1 beta, Notes de la version
 
 Nouvelles fonctions:
 
+- Permet d'utiliser des catalogues d'étoiles de HNSKY au format "290".
 - Améliore l'affichage des étoiles doubles.
 - Améliore le filtre par magnitude pour les petits champs.
 - Affiche l'heure de lever et coucher par rapport à l'horizon local si un fichier d'horizon est chargé. Cela peut être désactivé dans Configuration/Observatoire. Le calendrier indique toujours le lever et coucher sur l'horizon astronomique.
