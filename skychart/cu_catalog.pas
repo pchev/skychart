@@ -5863,11 +5863,11 @@ begin
     rec.ra:=ra2;
     rec.dec:=dec2;
     rec.star.magv:=MAG_290/10;
+    rec.options.LongName:=trim(copy(u_290.database2,1,108));
     if u_290.naam2='' then
       rec.star.id:=rec.options.ShortName
     else
       rec.star.id:=u_290.naam2;
-    rec.options.LongName:=trim(copy(u_290.database2,1,108));
   end;
 end;
 

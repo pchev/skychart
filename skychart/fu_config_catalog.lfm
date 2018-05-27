@@ -1536,8 +1536,8 @@ object f_config_catalog: Tf_config_catalog
             Left = 25
             Height = 21
             Top = 62
-            Width = 149
-            Caption = 'HNSKY 290 catalog'
+            Width = 182
+            Caption = 'HNSKY type 290 catalog'
             OnClick = CDCStarSelClick
             TabOrder = 0
           end
