@@ -32,26 +32,25 @@ uses
   {$ifdef mswindows}
   Windows, ShlObj, Registry,
   {$endif}
-  lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet,
-  cu_fits, cu_database, fu_chart,
-  cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display,
-  pu_config_pictures, pu_indigui,
-  pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system,
-  pu_config_internet, cu_radec,
-  pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata,
-  pu_obslist, fu_script, pu_scriptengine,
-  u_constant, u_util, UScaleDPI, u_ccdconfig, blcksock, synsock,
-  dynlibs, FileUtil, LCLVersion, LCLType,
-  InterfaceBase, LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
-  StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types, Printers,
-  ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame, BGRABitmap, BGRABitmapTypes,
-  LResources, uniqueinstance, enhedits, downloaddialog, LazHelpHTML, ButtonPanel;
+  lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet, cu_fits,
+  cu_database, fu_chart, cu_tcpserver, pu_config_time, pu_config_observatory,
+  pu_config_display, pu_config_pictures, pu_indigui, pu_config_catalog,
+  pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
+  cu_radec, pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata,
+  pu_obslist, fu_script, pu_scriptengine, u_constant, u_util, UScaleDPI,
+  u_ccdconfig, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
+  InterfaceBase, LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus,
+  Math, StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
+  Printers, ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame,
+  BGRABitmap, BGRABitmapTypes, LResources, uniqueinstance, enhedits,
+  downloaddialog, LazHelpHTML, ButtonPanel, ExtDlgs;
 
 type
 
   { Tf_main }
 
   Tf_main = class(TForm)
+    SavePictureDialog1: TSavePictureDialog;
     ViewAllTollbar: TAction;
     MenuItem1: TMenuItem;
     ViewMainMenu: TAction;
@@ -492,6 +491,9 @@ type
     procedure PopupToolbar2Click(Sender: TObject);
     procedure ResetRotationExecute(Sender: TObject);
     procedure rotate180Execute(Sender: TObject);
+    procedure SavePictureDialog1CanClose(Sender: TObject; var CanClose: boolean
+      );
+    procedure SavePictureDialog1TypeChange(Sender: TObject);
     procedure ScaleModeExecute(Sender: TObject);
     procedure SetupPicturesExecute(Sender: TObject);
     procedure ShowCompassExecute(Sender: TObject);
@@ -1622,33 +1624,58 @@ procedure Tf_main.SaveImageExecute(Sender: TObject);
 var
   ext, format, fn: string;
 begin
-  Savedialog.DefaultExt := 'png';
-  if Savedialog.InitialDir = '' then
-    Savedialog.InitialDir := HomeDir;
+  SavePictureDialog1.Filter := 'PNG|*.png|JPEG|*.jpg|BMP|*.bmp';
+  SavePictureDialog1.DefaultExt := 'png';
+  if SavePictureDialog1.InitialDir = '' then
+    SavePictureDialog1.InitialDir := HomeDir;
   if (MultiFrame1.ActiveObject is Tf_chart) then
-    savedialog.FileName := trim(Tf_chart(MultiFrame1.ActiveObject).Caption) + '.png';
-  savedialog.Filter := 'PNG|*.png|JPEG|*.jpg|BMP|*.bmp';
-  savedialog.Title := rsSaveImage;
+    SavePictureDialog1.FileName := trim(Tf_chart(MultiFrame1.ActiveObject).Caption);
+  SavePictureDialog1.Title := rsSaveImage;
   if MultiFrame1.ActiveObject is Tf_chart then
     with MultiFrame1.ActiveObject as Tf_chart do
-      if SaveDialog.Execute then
+      if SavePictureDialog1.Execute then
       begin
-        fn := SaveDialog.Filename;
-        ext := uppercase(extractfileext(fn));
-        if ext = '' then
-          case Savedialog.FilterIndex of
-            0, 1: ext := '.PNG';
-            2: ext := '.JPG';
-            3: ext := '.BMP';
-          end;
-        if (ext = '.JPG') or (ext = '.JPEG') then
+        fn := SavePictureDialog1.Filename;
+        ext := LowerCase(Trim(ExtractFileExt(SavePictureDialog1.FileName)));
+        if (ext = '.jpg') then
           format := 'JPEG'
-        else if (ext = '.BMP') then
+        else if (ext = '.bmp') then
           format := 'BMP'
         else
           format := 'PNG';
         SaveChartImage(format, fn, 95);
       end;
+end;
+
+procedure Tf_main.SavePictureDialog1CanClose(Sender: TObject;
+  var CanClose: boolean);
+var
+  ext : string;
+begin
+
+  CanClose := false;
+
+  ext := LowerCase(Trim(ExtractFileExt(SavePictureDialog1.FileName)));
+
+  if (ext = '') or
+     (ext = '.png') or
+     (ext = '.jpg') or
+     (ext = '.bmp')
+  then
+    CanClose := true;
+
+  if not CanClose then
+    ShowMessage(Format(rsUnsupportedF, [ext+crlf]));
+
+end;
+
+procedure Tf_main.SavePictureDialog1TypeChange(Sender: TObject);
+begin
+  case SavePictureDialog1.FilterIndex of
+      0 : SavePictureDialog1.DefaultExt := 'png';
+      1 : SavePictureDialog1.DefaultExt := 'jpg';
+      2 : SavePictureDialog1.DefaultExt := 'bmp';
+  end;
 end;
 
 procedure Tf_main.HelpAbout1Execute(Sender: TObject);
@@ -3057,6 +3084,7 @@ begin
     with MultiFrame1.ActiveObject as Tf_chart do
       rotation(rot);
 end;
+
 
 procedure Tf_main.TelescopeConnectExecute(Sender: TObject);
 var

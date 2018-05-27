@@ -1645,6 +1645,7 @@ resourcestring
   rsSetToTelesco = 'Set to telescope';
   rsGetFromTeles = 'Get from telescope';
   rsMainMenu = 'Main menu';
+  rsUnsupportedF = 'Unsupported file extension: %sPlease fix it.';
 
 // also update upsi_translation
 
