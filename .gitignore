@@ -39,6 +39,15 @@ tools/data/language/launchpad/skychartpot.tar
 last.build
 beta.txt
 lastPDF.build
+tools/cat/xhip/src/bsc_catalog.dat
+tools/cat/xhip/src/cdc_xhip
+tools/cat/xhip/src/cdc_xhip.dat
+tools/cat/xhip/src/crossid_bymag.dat
+tools/cat/xhip/src/crossid_catalog.dat
+tools/cat/xhip/src/hip_main.dat
+tools/cat/xhip/src/xhip_biblio.dat
+tools/cat/xhip/src/xhip_main.dat
+tools/cat/xhip/src/xhip_photo.dat
 # ignore binary
 *.o
 skychart/library/getdss/libgetdss.*

@@ -1,5 +1,6 @@
  897     Acamar            
  472     Achernar          
+ 219     Achird            
  5984    Acrab             
  4730    Acrux             
  3572    Acubens           
@@ -7,6 +8,9 @@
  2618    Adhara            
  390     Adhil             
  1409    Ain               
+ 7116    Ainalrami         
+ 7298    Aladfar           
+ 7264    Albaldah          
  7950    Albali            
  7417    Albireo           
  4623    Alchiba           
@@ -14,6 +18,9 @@
  1165    Alcyone           
  1457    Aldebaran         
  8162    Alderamin         
+ 8353    Aldhanab          
+ 6396    Aldhibah          
+ 7852    Aldulfin          
  8238    Alfirk            
  7754    Algedi            
  39      Algenib           
@@ -22,27 +29,41 @@
  4757    Algorab           
  2421    Alhena            
  4905    Alioth            
+ 7949    Aljanah           
  5191    Alkaid            
  5733    Alkalurops        
+ 3594    Alkaphrah         
+ 8905    Alkarab           
  4287    Alkes             
+ 1605    Almaaz            
  603     Almach            
  8425    Alnair            
  6746    Alnasl            
  1903    Alnilam           
  1948    Alnitak           
+ 6084    Alniyat           
  3748    Alphard           
  5793    Alphecca          
  15      Alpheratz         
+ 6370    Alrakis           
  596     Alrescha          
+ 7462    Alsafi            
+ 3275    Alsciaukat        
+ 3485    Alsephina         
  7602    Alshain           
+ 7773    Alshat            
  7557    Altair            
  7310    Altais            
+ 3773    Alterf            
  2827    Aludra            
  4375    Alula Australis   
  4377    Alula Borealis    
  7141    Alya              
+ 2484    Alzirr            
  8499    Ancha             
+ 850     Angetenar         
  99      Ankaa             
+ 7405    Anser             
  6134    Antares           
  5340    Arcturus          
  7343    Arkab Posterior   
@@ -53,6 +74,7 @@
  3449    Asellus Borealis  
  3699    Aspidiske         
  1151    Asterope          
+ 6132    Athebyne          
  1131    Atik              
  1178    Atlas             
  6217    Atria             
@@ -60,30 +82,40 @@
  8301    Azelfafage        
  874     Azha              
  539     Baten Kaitos      
+ 1393    Beemim            
  1298    Beid              
  1790    Bellatrix         
  2061    Betelgeuse        
+ 838     Bharani           
  8450    Biham             
  951     Botein            
+ 5603    Brachium          
  2326    Canopus           
  1708    Capella           
  21      Caph              
  2891    Castor            
+ 265     Castula           
  6603    Cebalrai          
  1140    Celaeno           
  6585    Cervantes         
  4277    Chalawan          
+ 1412    Chamukuy          
  4785    Chara             
  4359    Chertan           
  3522    Copernicus        
  4915    Cor Caroli        
+ 6117    Cujam             
  1666    Cursa             
  7776    Dabih             
+ 963     Dalim             
  7924    Deneb             
+ 8322    Deneb Algedi      
  4534    Denebola          
+ 4968    Diadem            
  188     Diphda            
  5953    Dschubba          
  4301    Dubhe             
+ 6636    Dziban            
  5744    Edasich           
  1142    Electra           
  1791    Elnath            
@@ -91,52 +123,77 @@
  8308    Enif              
  8974    Errai             
  6945    Fafnir            
+ 5944    Fang              
  8728    Fomalhaut         
+ 153     Fulu              
  2282    Furud             
+ 6630    Fuyue             
  4763    Gacrux            
+ 4434    Giausar           
  4662    Gienah            
+ 4700    Ginan             
  2845    Gomeisa           
  6688    Grumium           
  5267    Hadar             
+ 1641    Haedus            
  617     Hamal             
+ 1577    Hassaleh          
+ 1899    Hatysa            
  8729    Helvetios         
  8634    Homam             
+ 5928    Iklil             
  3743    Intercrus         
  5506    Izar              
+ 6027    Jabbah            
+ 2930    Jishui            
+ 804     Kaffaljidhma      
+ 5315    Kang              
  6879    Kaus Australis    
  6913    Kaus Borealis     
  6859    Kaus Media        
  1325    Keid              
+ 5359    Khambalia         
  8131    Kitalpha          
  5563    Kochab            
  6148    Kornephoros       
  8417    Kurhah            
+ 6241    Larawag           
  6508    Lesath            
  7595    Libertas          
+ 824     Lilii Borea       
  6526    Maasym            
+ 2095    Mahasim           
  1149    Maia              
  6149    Marfik            
  8781    Markab            
+ 3734    Markeb            
+ 6008    Marsic            
  8650    Matar             
  2473    Mebsuta           
  4660    Megrez            
  1879    Meissa            
  2650    Mekbuda           
+ 3429    Meleph            
  2088    Menkalinan        
  911     Menkar            
  5288    Menkent           
  1228    Menkib            
  4295    Merak             
  5533    Merga             
+ 7254    Meridiana         
  1156    Merope            
  546     Mesarthim         
  3685    Miaplacidus       
  4853    Mimosa            
+ 3418    Minchir           
+ 4910    Minelauva         
  1852    Mintaka           
  681     Mira              
  337     Mirach            
+ 834     Miram             
  1017    Mirfak            
  2294    Mirzam            
+ 941     Misam             
  5054    Mizar             
  544     Mothallah         
  2657    Muliphein         
@@ -146,6 +203,7 @@
  3165    Naos              
  8278    Nashira           
  5602    Nekkar            
+ 464     Nembus            
  1829    Nihal             
  7121    Nunki             
  5747    Nusakan           
@@ -153,10 +211,15 @@
  1956    Phact             
  4554    Phecda            
  5735    Pherkad           
+ 6252    Pipirima          
  1180    Pleione           
  424     Polaris           
+ 7228    Polaris Australis 
+ 6812    Polis             
  2990    Pollux            
  4825    Porrima           
+ 4247    Praecipua         
+ 1346    Prima Hyadum      
  2943    Procyon           
  2216    Propus            
  1084    Ran               
@@ -165,22 +228,28 @@
  6556    Rasalhague        
  6536    Rastaban          
  3982    Regulus           
+ 361     Revati            
  1713    Rigel             
  5459    Rigil Kentaurus   
  7882    Rotanev           
  403     Ruchbah           
  7348    Rukbat            
  6378    Sabik             
+ 1612    Saclateni         
  8518    Sadachbia         
  8684    Sadalbari         
  8414    Sadalmelik        
  8232    Sadalsuud         
  7796    Sadr              
  2004    Saiph             
+ 8880    Salm              
  6553    Sargas            
  6410    Sarin             
+ 1481    Sceptrum          
  8775    Scheat            
  168     Schedar           
+ 1373    Secunda Hyadum    
+ 0542    Segin             
  5435    Seginus           
  7479    Sham              
  6527    Shaula            
@@ -195,30 +264,46 @@
  3634    Suhail            
  7178    Sulafat           
  5338    Syrma             
+ 1543    Tabit             
+ 4518    Taiyangshou       
+ 4916    Taiyi             
  3569    Talitha           
  4069    Tania Australis   
  4033    Tania Borealis    
  7525    Tarazed           
  1145    Taygeta           
  3208    Tegmine           
+ 2286    Tejat             
+ 7597    Terebellum        
+ 1464    Theemin           
  5291    Thuban            
+ 8636    Tiaki             
+ 1910    Tianguan          
+ 4863    Tianyi            
  458     Titawin           
  4609    Tonatiuh          
+ 510     Torcular          
  3185    Tureis            
  5854    Unukalhai         
+ 2646    Unurgunite        
  7001    Vega              
  8930    Veritate          
  4932    Vindemiatrix      
  2777    Wasat             
  2040    Wazn              
  2693    Wezen             
+ 338     Wurren            
+ 6247    Xamidimura        
+ 5351    Xuange            
  6075    Yed Posterior     
  6056    Yed Prior         
  6789    Yildun            
  4689    Zaniah            
  1231    Zaurak            
  4540    Zavijava          
+ 3903    Zhang             
  984     Zibal             
  4357    Zosma             
  5531    Zubenelgenubi     
+ 5787    Zubenelhakrabi    
  5685    Zubeneschamali    
