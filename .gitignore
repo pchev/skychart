@@ -29,7 +29,9 @@ skychart/component/vosamp/lib/
 skychart/component/xmlparser/lib/
 skychart/component/zoomimage/lib/
 skychart/library/catalog/lib
-tools/doc/
+tools/doc/*.pdf
+tools/doc/pdflist.txt
+tools/doc/wiki_doc/
 tools/wiki_doc/
 tools/data/language/launchpad/download/
 tools/data/language/launchpad/translation/
