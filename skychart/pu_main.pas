@@ -5748,7 +5748,7 @@ begin
     cfgm.PrintMethod := 2;
   cfgm.PrintCmd1 := DefaultPrintCmd1;
   cfgm.PrintCmd2 := DefaultPrintCmd2;
-  cfgm.PrintTmpPath := expandfilename(TempDir);
+  cfgm.PrintTmpPath := expandfilename(HomeDir);
   cfgm.PrintDesc := '';
   cfgm.PrintCopies := 1;
   cfgm.PrtLeftMargin := 15;
