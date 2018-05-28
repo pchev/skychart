@@ -341,18 +341,18 @@ end;
 function Tcatalog.OpenStar: boolean;
 begin
   numcat := MaxStarCatalog;
-  curcat := BaseStar + 1;
+  curcat := BaseStar + MaxStarCatalog;
 
   while true do begin
-    while ((curcat - BaseStar) <= numcat) and (not cfgcat.starcaton[curcat - BaseStar]) do
-      Inc(curcat);
+    while (curcat > (BaseStar+1)) and (not cfgcat.starcaton[curcat - BaseStar]) do
+      Dec(curcat);
 
-    if ((curcat - BaseStar) > numcat) then
+    if (curcat <= BaseStar) then
       Result := False
     else begin
       Result := OpenStarCat;
       if not Result then begin
-         Inc(curcat);  // try next catalog
+         Dec(curcat);  // try next catalog
          continue;
       end;
     end;
@@ -363,7 +363,7 @@ end;
 function Tcatalog.CloseStar: boolean;
 begin
   Result := CloseStarCat;
-  curcat := numcat + BaseStar;
+  curcat := BaseStar;
 end;
 
 function Tcatalog.ReadStar(var rec: GcatRec): boolean;
@@ -410,19 +410,19 @@ begin
 
   end;
 
-  if (not Result) and ((curcat - BaseStar) < numcat) then
+  if (not Result) and (curcat > (BaseStar+1)) then
   begin
 
     repeat
       CloseStarCat;
-      Inc(curcat);
+      Dec(curcat);
 
-      while ((curcat - BaseStar) <= numcat) and (not cfgcat.starcaton[curcat - BaseStar]) do
-        Inc(curcat);
+      while (curcat > (BaseStar+1)) and (not cfgcat.starcaton[curcat - BaseStar]) do
+        Dec(curcat);
 
       Result := False;
 
-      if ((curcat - BaseStar) > numcat) then
+      if (curcat <= BaseStar) then
         break
       else
       begin

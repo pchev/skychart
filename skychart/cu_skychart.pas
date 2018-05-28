@@ -1376,6 +1376,11 @@ begin
   if (not Fplot.cfgplot.UseBMP) and cfgsc.DrawPMon and (Fplot.cfgplot.starplot = 2) then
     Fplot.cfgplot.starplot := 1;
   try
+    if First and Fcatalog.cfgcat.starcaton[DefStar - BaseStar] then
+    begin
+      firstcat := 'Star';
+      First := False;
+    end;
     for j := 0 to Fcatalog.cfgcat.GCatNum - 1 do
     begin
       if Fcatalog.cfgcat.GCatLst[j].CatOn and
