@@ -2,6 +2,7 @@
 skychart/backup/
 varobs/backup/
 skychart/component/uniqueinstance/backup/
+skychart/library/catalog/backup/
 #ignore external data
 BaseData/*.tgz
 BaseData/*.xz

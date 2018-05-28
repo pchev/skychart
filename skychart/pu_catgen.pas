@@ -42,148 +42,150 @@ type
 
   Tf_catgen = class(TForm)
     Button13: TButton;
-    CheckBox8: TCheckBox;
-    CheckBox9: TCheckBox;
-    Edit6: TEdit;
+    CBPrefixName: TCheckBox;
+    FieldPrefixLabel: TCheckBox;
+    UpdateURL: TEdit;
+    StarParameters: TGroupBox;
     Label22: TLabel;
     Label23: TLabel;
-    ListBox1: TListBox;
-    Memo1: TMemo;
+    InputFiles: TListBox;
+    SampleRow: TMemo;
     PageControl1: TPageControl;
-    binarycat: TRadioGroup;
+    OutputType: TRadioGroup;
+    IdentifierFormat: TRadioGroup;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
     TabSheet4: TTabSheet;
-    RadioGroup1: TRadioGroup;
-    CheckListBox1: TCheckListBox;
-    Edit1: TEdit;
-    Edit2: TEdit;
+    CatalogType: TRadioGroup;
+    FieldList: TCheckListBox;
+    FieldStart: TEdit;
+    FieldLength: TEdit;
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
     Label2: TLabel;
-    RadioGroup2: TRadioGroup;
-    RadioGroup3: TRadioGroup;
-    GroupBox1: TGroupBox;
+    RaOptions: TRadioGroup;
+    DecOptions: TRadioGroup;
+    CoordEquinox: TGroupBox;
     FloatEdit1: TFloatEdit;
     Label1: TLabel;
-    RadioGroup4: TRadioGroup;
-    GroupBox3: TGroupBox;
-    DirectoryEdit1: TDirectoryEdit;
-    GroupBox4: TGroupBox;
+    OutputFileNumber: TRadioGroup;
+    OutputOptions: TGroupBox;
+    OutputDirectory: TDirectoryEdit;
+    MaximumMag: TGroupBox;
     FloatEdit2: TFloatEdit;
     GroupBox5: TGroupBox;
-    ComboBox1: TComboBox;
-    LongEdit1: TLongEdit;
+    NebDefaultUnit: TComboBox;
+    NebDefaultSize: TLongEdit;
     Label11: TLabel;
     Label12: TLabel;
-    CheckBox1: TCheckBox;
-    Edit3: TEdit;
+    NebLogScale: TCheckBox;
+    FieldLabel: TEdit;
     Label3: TLabel;
     Label10: TLabel;
-    Edit4: TEdit;
+    CatShortName: TEdit;
     Label13: TLabel;
-    Edit5: TEdit;
+    CatLongName: TEdit;
     Panel1: TPanel;
     prevbt: TButton;
     nextbt: TButton;
     Endbt: TButton;
     Exitbt: TButton;
     Image1: TImage;
-    GroupBox2: TGroupBox;
+    PosEpoch: TGroupBox;
     FloatEdit3: TFloatEdit;
     SpeedButton1: TSpeedButton;
     OpenDialog1: TOpenDialog;
     SaveDialog1: TSaveDialog;
-    Button2: TButton;
-    Button1: TButton;
-    ComboBox3: TComboBox;
+    BtnLoad: TButton;
+    BtnSave: TButton;
+    NebDefaultType: TComboBox;
     TabSheet5: TTabSheet;
-    StringGrid1: TStringGrid;
+    ObjectTypeStr: TStringGrid;
     Label9: TLabel;
     Button3: TButton;
-    Button4: TButton;
+    BtnReturn1: TButton;
     TabSheet6: TTabSheet;
     Label14: TLabel;
-    StringGrid2: TStringGrid;
-    Button5: TButton;
+    ObjectSizeStr: TStringGrid;
+    BtnReturn2: TButton;
     Button6: TButton;
     Label15: TLabel;
     Label16: TLabel;
-    CheckBox2: TCheckBox;
-    GroupBox6: TGroupBox;
-    CheckBox3: TCheckBox;
-    CheckBox4: TCheckBox;
-    CheckBox6: TCheckBox;
-    Button7: TButton;
+    FieldAltName: TCheckBox;
+    OutputSearchIndex: TGroupBox;
+    CBCreateIndex: TCheckBox;
+    CBAltNameIndex: TCheckBox;
+    OutputAppend: TCheckBox;
+    BtnAdvanced: TButton;
     TabSheet7: TTabSheet;
     Label17: TLabel;
-    StringGrid3: TStringGrid;
-    Button8: TButton;
+    OutlineDrawStr: TStringGrid;
+    BtnReturn3: TButton;
     GroupBox7: TGroupBox;
     Button9: TButton;
-    LongEdit2: TLongEdit;
+    OutlineLineWidth: TLongEdit;
     Label18: TLabel;
     ColorDialog1: TColorDialog;
     Label19: TLabel;
-    Shape1: TShape;
+    OutlineColor: TShape;
     TabSheet8: TTabSheet;
     Label20: TLabel;
-    StringGrid4: TStringGrid;
-    Button10: TButton;
-    Shape2: TShape;
-    Shape3: TShape;
-    Shape4: TShape;
-    Shape5: TShape;
-    Shape6: TShape;
-    Shape7: TShape;
-    Shape8: TShape;
-    Shape9: TShape;
-    Shape10: TShape;
-    Shape11: TShape;
+    ColorStr: TStringGrid;
+    BtnReturn4: TButton;
+    Color1: TShape;
+    Color2: TShape;
+    Color3: TShape;
+    Color4: TShape;
+    Color5: TShape;
+    Color6: TShape;
+    Color7: TShape;
+    Color8: TShape;
+    Color9: TShape;
+    Color10: TShape;
     Label21: TLabel;
     Button11: TButton;
-    RadioGroup6: TRadioGroup;
-    CheckBox7: TCheckBox;
-    Button12: TButton;
-    procedure CheckBox9Click(Sender: TObject);
+    OutlineType: TRadioGroup;
+    OutlineCloseContour: TCheckBox;
+    BtnHelp: TButton;
+    procedure FieldPrefixLabelClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure binarycatChange(Sender: TObject);
-    procedure DirectoryEdit1AcceptDirectory(Sender: TObject; var Value: string);
+    procedure OutputDirectoryAcceptDirectory(Sender: TObject; var Value: string);
     procedure FormCreate(Sender: TObject);
     procedure nextbtClick(Sender: TObject);
     procedure prevbtClick(Sender: TObject);
-    procedure CheckListBox1MouseUp(Sender: TObject; Button: TMouseButton;
+    procedure FieldListMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
-    procedure RadioGroup1Click(Sender: TObject);
-    procedure Edit1Change(Sender: TObject);
-    procedure Edit2Change(Sender: TObject);
-    procedure CheckListBox1KeyUp(Sender: TObject; var Key: word;
+    procedure CatalogTypeClick(Sender: TObject);
+    procedure FieldStartChange(Sender: TObject);
+    procedure FieldLengthChange(Sender: TObject);
+    procedure FieldListKeyUp(Sender: TObject; var Key: word;
       Shift: TShiftState);
     procedure EndbtClick(Sender: TObject);
-    procedure ComboBox1Change(Sender: TObject);
+    procedure NebDefaultUnitChange(Sender: TObject);
     procedure ExitbtClick(Sender: TObject);
-    procedure Memo1MouseUp(Sender: TObject; Button: TMouseButton;
+    procedure SampleRowMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
-    procedure Edit3Change(Sender: TObject);
+    procedure FieldLabelChange(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    procedure BtnSaveClick(Sender: TObject);
+    procedure BtnLoadClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure Button4Click(Sender: TObject);
+    procedure BtnReturn1Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
-    procedure CheckBox2Click(Sender: TObject);
-    procedure Button7Click(Sender: TObject);
+    procedure FieldAltNameClick(Sender: TObject);
+    procedure BtnAdvancedClick(Sender: TObject);
     procedure Button9Click(Sender: TObject);
-    procedure Shape1MouseUp(Sender: TObject; Button: TMouseButton;
+    procedure OutlineColorMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
     procedure Button11Click(Sender: TObject);
-    procedure Button12Click(Sender: TObject);
+    procedure BtnHelpClick(Sender: TObject);
   private
     Fcatgenadv: Tf_catgenadv;
     Fprogress: Tf_progress;
@@ -235,6 +237,7 @@ type
     procedure BuildTxtHeader;
     function GetFloat(p: integer; default: double): double;
     function GetInt(p: integer): integer;
+    function GetQword(p: integer): QWord;
     function GetString(p: integer): string;
     function GetNebType(p: integer): byte;
     function GetNebUnit(p: integer): smallint;
@@ -244,6 +247,7 @@ type
     procedure PutRecSingle(x: single; p: integer);
     procedure PutRecInt(x: integer; p: integer);
     procedure PutRecCard(x: cardinal; p: integer);
+    procedure PutRecQword(x: QWord; p: integer);
     procedure PutRecSmallInt(x: integer; p: integer);
     procedure PutRecByte(x: byte; p: integer);
     procedure PutRecString(x: string; p: integer);
@@ -376,7 +380,7 @@ var
 begin
   for i := 0 to n - 1 do
   begin
-    CheckListBox1.Items.Add(field[i]);
+    FieldList.Items.Add(field[i]);
   end;
 end;
 
@@ -386,20 +390,20 @@ var
 begin
   for i := 1 to l_base do
     flabel[i] := lab_base[i];
-  CheckListBox1.Clear;
-  case RadioGroup2.ItemIndex of
+  FieldList.Clear;
+  case RaOptions.ItemIndex of
     0: setfieldlist(rahms, l_rahms);
     1: setfieldlist(rah, l_rah);
     2: setfieldlist(radms, l_radms);
     3: setfieldlist(rad, l_rad);
   end;
-  case RadioGroup3.ItemIndex of
+  case DecOptions.ItemIndex of
     0: setfieldlist(dedms, l_dedms);
     1: setfieldlist(ded, l_ded);
     2: setfieldlist(despd, l_despd);
   end;
   nextpos := l_base;
-  case RadioGroup1.ItemIndex of
+  case CatalogType.ItemIndex of
     0:
     begin
       setfieldlist(etoiles, l_etoiles);
@@ -436,7 +440,7 @@ begin
       nextpos := l_outlines + nextpos;
     end;
   end;
-  l_fixe := CheckListBox1.Items.Count;
+  l_fixe := FieldList.Items.Count;
   setfieldlist(sup_string, l_sup);
   for i := 1 to l_sup do
     flabel[i + nextpos] := lab_string[i];
@@ -454,43 +458,43 @@ begin
   Label10.Caption := rsCatalogShort;
   Label13.Caption := rsCatalogLongN;
   Label22.Caption := rsForALargeCat;
-  RadioGroup1.Caption := rsCatalogType;
-  RadioGroup1.Items[0] := rsStars;
-  RadioGroup1.Items[1] := rsVariableStar;
-  RadioGroup1.Items[2] := rsDoubleStar;
-  RadioGroup1.Items[3] := rsNebulaeOrOth;
-  RadioGroup1.Items[4] := rsNebulaeOutli;
-  binarycat.Caption := rsOutputCatalo;
-  binarycat.Items[0] := rsBinaryIndexe;
-  binarycat.Items[1] := rsTextFileCata;
+  CatalogType.Caption := rsCatalogType;
+  CatalogType.Items[0] := rsStars;
+  CatalogType.Items[1] := rsVariableStar;
+  CatalogType.Items[2] := rsDoubleStar;
+  CatalogType.Items[3] := rsNebulaeOrOth;
+  CatalogType.Items[4] := rsNebulaeOutli;
+  OutputType.Caption := rsOutputCatalo;
+  OutputType.Items[0] := rsBinaryIndexe;
+  OutputType.Items[1] := rsTextFileCata;
   Label2.Caption := rsGeneralCatal;
   GroupBox5.Caption := rsDefaultNebul;
   Label11.Caption := rsDimensionAnd;
   Label12.Caption := rsObjectType;
   Label15.Caption := rsRecognizeUni;
   Label16.Caption := rsUsefulToRepr;
-  ComboBox1.items[0] := rsDegree;
-  ComboBox1.items[1] := rsMinute;
-  ComboBox1.items[2] := rsSecond;
-  CheckBox1.Caption := rsLogarithmicS;
-  ComboBox3.items[0] := rsGalaxy;
-  ComboBox3.items[1] := rsGalaxyCluste;
-  ComboBox3.items[2] := rsOpenCluster;
-  ComboBox3.items[3] := rsGlobularClus;
-  ComboBox3.items[4] := rsPlanetaryNeb;
-  ComboBox3.items[5] := rsBrightNebula;
-  ComboBox3.items[6] := rsDarkNebula;
-  ComboBox3.items[7] := rsClusterAndNe;
-  ComboBox3.items[8] := rsKnot;
-  ComboBox3.items[9] := rsStar;
-  ComboBox3.items[10] := rsDoubleStar;
-  ComboBox3.items[11] := rsTripleStar;
-  ComboBox3.items[12] := rsAsterism;
-  ComboBox3.items[13] := rsNonExistant;
-  ComboBox3.items[14] := rsUnknow;
-  ComboBox3.items[15] := rsCircle;
-  ComboBox3.items[16] := rsSquare;
-  ComboBox3.items[17] := rsLosange;
+  NebDefaultUnit.items[0] := rsDegree;
+  NebDefaultUnit.items[1] := rsMinute;
+  NebDefaultUnit.items[2] := rsSecond;
+  NebLogScale.Caption := rsLogarithmicS;
+  NebDefaultType.items[0] := rsGalaxy;
+  NebDefaultType.items[1] := rsGalaxyCluste;
+  NebDefaultType.items[2] := rsOpenCluster;
+  NebDefaultType.items[3] := rsGlobularClus;
+  NebDefaultType.items[4] := rsPlanetaryNeb;
+  NebDefaultType.items[5] := rsBrightNebula;
+  NebDefaultType.items[6] := rsDarkNebula;
+  NebDefaultType.items[7] := rsClusterAndNe;
+  NebDefaultType.items[8] := rsKnot;
+  NebDefaultType.items[9] := rsStar;
+  NebDefaultType.items[10] := rsDoubleStar;
+  NebDefaultType.items[11] := rsTripleStar;
+  NebDefaultType.items[12] := rsAsterism;
+  NebDefaultType.items[13] := rsNonExistant;
+  NebDefaultType.items[14] := rsUnknow;
+  NebDefaultType.items[15] := rsCircle;
+  NebDefaultType.items[16] := rsSquare;
+  NebDefaultType.items[17] := rsLosange;
   Button3.Caption := rsEditObjectTy;
   Button6.Caption := rsEditUnits;
   GroupBox7.Caption := rsDefaultOutli;
@@ -498,58 +502,58 @@ begin
   Label19.Caption := rsColor;
   Button9.Caption := rsEditLineOper;
   Button11.Caption := rsEditColor;
-  RadioGroup6.Caption := rsDrawingType;
-  CheckBox7.Caption := rsClosedContou;
-  RadioGroup2.Caption := rsRAOptions;
-  RadioGroup2.Items[0] := rsHoursMinutes;
-  RadioGroup2.Items[1] := rsDecimalHours;
-  RadioGroup2.Items[2] := rsDegreesMinut;
-  RadioGroup2.Items[3] := rsDecimalDegre;
-  RadioGroup3.Caption := rsDECOptions;
-  RadioGroup3.Items[0] := rsDegreesMinut;
-  RadioGroup3.Items[1] := rsDecimalDegre;
-  RadioGroup3.Items[2] := rsDecimalSouth;
-  RadioGroup6.Items[0] := rsLine1;
-  RadioGroup6.Items[1] := rsSpline;
-  RadioGroup6.Items[2] := rsSurface;
-  GroupBox1.Caption := rsCoordinatesE;
-  GroupBox4.Caption := rsMaximumMagni;
-  GroupBox2.Caption := rsPositionEpoc;
+  OutlineType.Caption := rsDrawingType;
+  OutlineCloseContour.Caption := rsClosedContou;
+  RaOptions.Caption := rsRAOptions;
+  RaOptions.Items[0] := rsHoursMinutes;
+  RaOptions.Items[1] := rsDecimalHours;
+  RaOptions.Items[2] := rsDegreesMinut;
+  RaOptions.Items[3] := rsDecimalDegre;
+  DecOptions.Caption := rsDECOptions;
+  DecOptions.Items[0] := rsDegreesMinut;
+  DecOptions.Items[1] := rsDecimalDegre;
+  DecOptions.Items[2] := rsDecimalSouth;
+  OutlineType.Items[0] := rsLine1;
+  OutlineType.Items[1] := rsSpline;
+  OutlineType.Items[2] := rsSurface;
+  CoordEquinox.Caption := rsCoordinatesE;
+  MaximumMag.Caption := rsMaximumMagni;
+  PosEpoch.Caption := rsPositionEpoc;
   Label4.Caption := rsFirstChar;
   Label5.Caption := rsLength;
   Label7.Caption := rsSelectTheFie;
   Label3.Caption := rsLabel2;
-  CheckBox2.Caption := rsUseThisField;
-  Button7.Caption := rsAdvanced;
+  FieldAltName.Caption := rsUseThisField;
+  BtnAdvanced.Caption := rsAdvanced;
   Label1.Caption := rsOutputCatalo2;
-  RadioGroup4.Caption := rsNumberOfFile;
-  RadioGroup4.Items[0] := rs50Recommende;
-  RadioGroup4.Items[1] := rs184Recommend;
-  RadioGroup4.Items[2] := rs732Recommend;
-  RadioGroup4.Items[3] := rs9537LargerDa;
-  GroupBox3.Caption := rsOutputDirect;
-  CheckBox6.Caption := rsAppendToAnEx;
-  GroupBox6.Caption := rsSearchIndex;
-  CheckBox3.Caption := rsCreateASearc;
-  CheckBox4.Caption := rsAddTheAltern;
-  CheckBox8.Caption := rsPrefixNameWi;
+  OutputFileNumber.Caption := rsNumberOfFile;
+  OutputFileNumber.Items[0] := rs50Recommende;
+  OutputFileNumber.Items[1] := rs184Recommend;
+  OutputFileNumber.Items[2] := rs732Recommend;
+  OutputFileNumber.Items[3] := rs9537LargerDa;
+  OutputOptions.Caption := rsOutputDirect;
+  OutputAppend.Caption := rsAppendToAnEx;
+  OutputSearchIndex.Caption := rsSearchIndex;
+  CBCreateIndex.Caption := rsCreateASearc;
+  CBAltNameIndex.Caption := rsAddTheAltern;
+  CBPrefixName.Caption := rsPrefixNameWi;
   Label9.Caption := rsIndicateTheS;
-  Button4.Caption := rsReturn;
+  BtnReturn1.Caption := rsReturn;
   Label14.Caption := rsIndicateHowT;
-  Button5.Caption := rsReturn;
+  BtnReturn2.Caption := rsReturn;
   Label17.Caption := rsIndicateTheS2;
-  Button8.Caption := rsReturn;
+  BtnReturn3.Caption := rsReturn;
   Label20.Caption := rsIndicateTheS3;
   Label21.Caption := rsClickToChang;
-  Button10.Caption := rsReturn;
+  BtnReturn4.Caption := rsReturn;
   Exitbt.Caption := rsClose;
   prevbt.Caption := rsPrev;
   nextbt.Caption := rsNext;
   Endbt.Caption := rsBuildCatalog;
-  Button2.Caption := rsLoadProject;
-  Button1.Caption := rsSaveProject;
-  Button12.Caption := rsHelp;
-  with stringgrid1 do
+  BtnLoad.Caption := rsLoadProject;
+  BtnSave.Caption := rsSaveProject;
+  BtnHelp.Caption := rsHelp;
+  with ObjectTypeStr do
   begin
     cells[0, 0] := rsObjectType;
     cells[1, 0] := rsCatalogStrin;
@@ -573,7 +577,7 @@ begin
     cells[0, 18] := rsLosange;
     cells[0, 19] := rsDuplicate;
   end;
-  with stringgrid2 do
+  with ObjectSizeStr do
   begin
     cells[0, 0] := rsObjectSizeUn;
     cells[1, 0] := rsCatalogStrin;
@@ -581,7 +585,7 @@ begin
     cells[0, 2] := rsMinute;
     cells[0, 3] := rsSecond;
   end;
-  with stringgrid3 do
+  with OutlineDrawStr do
   begin
     cells[0, 0] := rsLineOperatio;
     cells[1, 0] := rsCatalogStrin;
@@ -589,7 +593,7 @@ begin
     cells[0, 2] := rsEndOfObject;
     cells[0, 3] := rsDrawLine;
   end;
-  with stringgrid4 do
+  with ColorStr do
   begin
     cells[0, 0] := rsCatalogStrin;
   end;
@@ -613,9 +617,9 @@ begin
   nextbt.Enabled := True;
   prevbt.Enabled := False;
   BuildFieldList;
-  combobox1.ItemIndex := 1;
+  NebDefaultUnit.ItemIndex := 1;
   nebulaesizescale := 60;
-  combobox3.ItemIndex := 14;
+  NebDefaultType.ItemIndex := 14;
   for i := 0 to 40 do
   begin
     textpos[i, 1] := 0;
@@ -623,7 +627,7 @@ begin
     calc[i, 1] := 1;
     calc[i, 2] := 0;
   end;
-  with stringgrid1 do
+  with ObjectTypeStr do
   begin
     rowcount := 20;
     cells[1, 1] := 'Gx,GALXY,QUASR';
@@ -646,19 +650,19 @@ begin
     cells[1, 18] := 'Lozenge';
     cells[1, 19] := 'Dup';
   end;
-  with stringgrid2 do
+  with ObjectSizeStr do
   begin
     cells[1, 1] := 'd,°';
     cells[1, 2] := 'm,''';
     cells[1, 3] := 's,"';
   end;
-  with stringgrid3 do
+  with OutlineDrawStr do
   begin
     cells[1, 1] := 'start,0';
     cells[1, 2] := 'end,1';
     cells[1, 3] := 'vertex, ,2';
   end;
-  with stringgrid4 do
+  with ColorStr do
   begin
     rowcount := 11;
     cells[0, 1] := 'White,W,1';
@@ -731,19 +735,19 @@ begin
   OpenCatalog(filename);
   try
     ReadCatalog(buf);
-    memo1.Lines.Clear;
-    memo1.Lines.add(buf);
+    SampleRow.Lines.Clear;
+    SampleRow.Lines.add(buf);
     n := 1 + (length(buf) div 10);
     scal := '';
     for i := 1 to n do
       scal := scal + '1234567890';
-    memo1.Lines.add(scal);
+    SampleRow.Lines.add(scal);
     scal := '';
     for i := 1 to n do
       scal := scal + copy('         ', 1, 9 - trunc(log10(i))) + IntToStr(i);
-    memo1.Lines.add(scal);
-    memo1.SelStart := 0;
-    memo1.SelLength := 0;
+    SampleRow.Lines.add(scal);
+    SampleRow.SelStart := 0;
+    SampleRow.SelLength := 0;
   finally
     CloseCatalog;
   end;
@@ -756,24 +760,24 @@ begin
   case i of
     pageFiles:
     begin
-      if (ListBox1.Items.Count > 0) and (fileexists(ListBox1.Items[0])) then
+      if (InputFiles.Items.Count > 0) and (fileexists(InputFiles.Items[0])) then
         Result := True
       else
       begin
         Result := False;
         ShowMessage(rsFileNotFound);
       end;
-      if Result and (trim(edit4.Text) = '') then
+      if Result and (trim(CatShortName.Text) = '') then
       begin
         Result := False;
         ShowMessage(rsPleaseIndica);
-        edit4.SetFocus;
+        CatShortName.SetFocus;
       end;
-      if Result and (trim(edit5.Text) = '') then
+      if Result and (trim(CatLongName.Text) = '') then
       begin
         Result := False;
         ShowMessage(rsPleaseIndica2);
-        edit5.SetFocus;
+        CatLongName.SetFocus;
       end;
     end;
     pageDefault:
@@ -792,9 +796,9 @@ begin
     pageDetails:
     begin
       Result := True;
-      for n := 0 to CheckListBox1.Items.Count - 1 do
+      for n := 0 to FieldList.Items.Count - 1 do
       begin
-        if (not CheckListBox1.Checked[n]) and (copy(CheckListBox1.items[n], 1, 1) = '[') then
+        if (not FieldList.Checked[n]) and (copy(FieldList.items[n], 1, 1) = '[') then
           Result := False;
       end;
       if Result = False then
@@ -811,56 +815,56 @@ var
   buf: string;
 begin
   lockchange := True;
-  case RadioGroup2.ItemIndex of
+  case RaOptions.ItemIndex of
     0: lra := l_rahms;
     1: lra := l_rah;
     2: lra := l_radms;
     3: lra := l_rad;
   end;
-  case RadioGroup3.ItemIndex of
+  case DecOptions.ItemIndex of
     0: lde := l_dedms;
     1: lde := l_ded;
     2: lde := l_despd;
   end;
   i := listindex + 1;
   if (i <= lra) then
-    edit3.Text := flabel[1]
+    FieldLabel.Text := flabel[1]
   else if (i <= (lra + lde)) then
-    edit3.Text := flabel[2]
+    FieldLabel.Text := flabel[2]
   else
-    edit3.Text := flabel[i - lra - lde + 2];
+    FieldLabel.Text := flabel[i - lra - lde + 2];
   buf := IntToStr(textpos[ListIndex, 1]);
-  edit1.Text := buf;
+  FieldStart.Text := buf;
   buf := IntToStr(textpos[ListIndex, 2]);
-  edit2.Text := buf;
+  FieldLength.Text := buf;
   if (textpos[ListIndex, 1] > 0) and (textpos[ListIndex, 2] > 0) then
   begin
-    memo1.SelStart := textpos[ListIndex, 1] - 1;
-    memo1.SelLength := minintvalue(
-      [textpos[ListIndex, 2], length(memo1.Lines.Strings[0]) - memo1.SelStart]);
+    SampleRow.SelStart := textpos[ListIndex, 1] - 1;
+    SampleRow.SelLength := minintvalue(
+      [textpos[ListIndex, 2], length(SampleRow.Lines.Strings[0]) - SampleRow.SelStart]);
   end
   else
   begin
-    memo1.SelStart := 0;
-    memo1.SelLength := 0;
+    SampleRow.SelStart := 0;
+    SampleRow.SelLength := 0;
   end;
   ;
   if (i > l_fixe) and (i <= l_fixe + l_sup) then
   begin
-    checkbox2.Visible := True;
-    checkbox2.Checked := AltName[i - l_fixe] = 1;
-    checkbox9.Visible := True;
-    checkbox9.Checked := altprefix[i - l_fixe] = 1;
+    FieldAltName.Visible := True;
+    FieldAltName.Checked := AltName[i - l_fixe] = 1;
+    FieldPrefixLabel.Visible := True;
+    FieldPrefixLabel.Checked := altprefix[i - l_fixe] = 1;
   end
   else
   begin
-    checkbox2.Visible := False;
-    checkbox9.Visible := False;
+    FieldAltName.Visible := False;
+    FieldPrefixLabel.Visible := False;
   end;
   lockchange := False;
 end;
 
-procedure Tf_catgen.Edit3Change(Sender: TObject);
+procedure Tf_catgen.FieldLabelChange(Sender: TObject);
 var
   i, j: integer;
 begin
@@ -873,7 +877,7 @@ begin
     j := 2
   else
     j := i - lra - lde + 2;
-  flabel[j] := edit3.Text;
+  flabel[j] := FieldLabel.Text;
 end;
 
 procedure Tf_catgen.InitPage(i: integer);
@@ -881,12 +885,13 @@ begin
   case i of
     pageDefault:
     begin
-      GroupBox5.Visible := (RadioGroup1.ItemIndex = 3);
-      GroupBox7.Visible := (RadioGroup1.ItemIndex = 4);
+      StarParameters.Visible := (CatalogType.ItemIndex = 0);
+      GroupBox5.Visible := (CatalogType.ItemIndex = 3);
+      GroupBox7.Visible := (CatalogType.ItemIndex = 4);
     end;
     pageDetails:
     begin
-      getsampledata(ListBox1.Items[0]);
+      getsampledata(InputFiles.Items[0]);
       SetListIndex;
     end;
     pageBuild:
@@ -894,10 +899,10 @@ begin
       exitbt.Visible := False;
       endbt.Visible := True;
       endbt.Enabled := True;
-      if radiogroup1.ItemIndex = 4 then
+      if CatalogType.ItemIndex = 4 then
       begin
-        radiogroup4.Visible := False;
-        groupbox6.Visible := False;
+        OutputFileNumber.Visible := False;
+        OutputSearchIndex.Visible := False;
       end;
     end;
   end;
@@ -941,7 +946,7 @@ begin
   InitPage(i);
 end;
 
-procedure Tf_catgen.CheckListBox1MouseUp(Sender: TObject; Button: TMouseButton;
+procedure Tf_catgen.FieldListMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: integer);
 var
   APoint: TPoint;
@@ -950,25 +955,25 @@ begin
   begin
     APoint.X := X;
     APoint.Y := Y;
-    ListIndex := CheckListBox1.ItemAtPos(APoint, True);
+    ListIndex := FieldList.ItemAtPos(APoint, True);
     if ListIndex < 0 then
       exit;
     SetListIndex;
   end;
 end;
 
-procedure Tf_catgen.RadioGroup1Click(Sender: TObject);
+procedure Tf_catgen.CatalogTypeClick(Sender: TObject);
 begin
   BuildFieldList;
 end;
 
-procedure Tf_catgen.Edit1Change(Sender: TObject);
+procedure Tf_catgen.FieldStartChange(Sender: TObject);
 var
   i, n: integer;
 begin
   if lockchange then
     exit;
-  val(edit1.Text, i, n);
+  val(FieldStart.Text, i, n);
   if n = 0 then
   begin
     textpos[ListIndex, 1] := i;
@@ -976,13 +981,13 @@ begin
   end;
 end;
 
-procedure Tf_catgen.Edit2Change(Sender: TObject);
+procedure Tf_catgen.FieldLengthChange(Sender: TObject);
 var
   i, n: integer;
 begin
   if lockchange then
     exit;
-  val(edit2.Text, i, n);
+  val(FieldLength.Text, i, n);
   if n = 0 then
   begin
     textpos[ListIndex, 2] := i;
@@ -990,10 +995,10 @@ begin
   end;
 end;
 
-procedure Tf_catgen.CheckListBox1KeyUp(Sender: TObject; var Key: word;
+procedure Tf_catgen.FieldListKeyUp(Sender: TObject; var Key: word;
   Shift: TShiftState);
 begin
-  listindex := checklistbox1.ItemIndex;
+  listindex := FieldList.ItemIndex;
   if ListIndex < 0 then
     exit;
   SetListIndex;
@@ -1007,7 +1012,7 @@ var
   buf: shortstring;
   CatPrefix: boolean;
 begin
-  for i := 1 to 10 do
+  for i := 1 to 9 do
     catheader.Spare1[i] := 0;
   for i := 1 to 15 do
     catheader.Spare2[i] := 0;
@@ -1018,7 +1023,7 @@ begin
   for i := 1 to 40 do
     catheader.flen[i] := 0;
   n := l_base;
-  case radiogroup1.ItemIndex of
+  case CatalogType.ItemIndex of
     0:
     begin
       catheader.version := 'CDCSTAR1';
@@ -1063,10 +1068,10 @@ begin
     for j := 0 to 10 do
       catheader.flabel[i, j] := buf[j + 1];
   end;
-  if GroupBox6.Visible then
+  if OutputSearchIndex.Visible then
   begin
-    createindex := checkbox3.Checked;
-    indexaltname := checkbox4.Checked;
+    createindex := CBCreateIndex.Checked;
+    indexaltname := CBAltNameIndex.Checked;
     catheader.useprefix := 0;
     for i := 1 to l_sup do
       if altprefix[i] = 1 then
@@ -1082,15 +1087,15 @@ begin
     catheader.AltName[i] := altname[i];
   for i := 1 to l_sup do
     catheader.AltPrefix[i] := altprefix[i];
-  buf := PChar(edit4.Text + '    ');
+  buf := PChar(CatShortName.Text + '    ');
   for i := 1 to 4 do
     catheader.ShortName[i - 1] := buf[i];
-  buf := PChar(edit5.Text + StringOfChar(' ', 50));
+  buf := PChar(CatLongName.Text + StringOfChar(' ', 50));
   for i := 1 to 50 do
     catheader.LongName[i - 1] := buf[i];
   catheader.hdrl := sizeof(catheader);
-  if radiogroup4.Visible then
-    case radiogroup4.ItemIndex of
+  if OutputFileNumber.Visible then
+    case OutputFileNumber.ItemIndex of
       0: catheader.filenum := 50;
       1: catheader.filenum := 184;
       2: catheader.filenum := 732;
@@ -1100,13 +1105,14 @@ begin
     catheader.filenum := 1;
   catheader.Equinox := floatedit1.Value;
   catheader.Epoch := floatedit3.Value;
+  catheader.IdFormat:=IdentifierFormat.ItemIndex;
   if catheader.version = 'CDCNEB 1' then
   begin
     catheader.MagMax := floatedit2.Value;
-    catheader.Size := longedit1.Value;
+    catheader.Size := NebDefaultSize.Value;
     catheader.Units := nebulaesizescale;
-    catheader.ObjType := nebtype[Combobox3.ItemIndex + 1];
-    if CheckBox1.Checked then
+    catheader.ObjType := nebtype[NebDefaultType.ItemIndex + 1];
+    if NebLogScale.Checked then
       catheader.LogSize := 1
     else
       catheader.LogSize := 0;
@@ -1114,13 +1120,13 @@ begin
   else if catheader.version = 'CDCLINE1' then
   begin
     catheader.MagMax := floatedit2.Value;
-    catheader.Size := longedit2.Value;
-    catheader.Units := Shape1.Brush.Color;
-    if checkbox7.Checked then
+    catheader.Size := OutlineLineWidth.Value;
+    catheader.Units := OutlineColor.Brush.Color;
+    if OutlineCloseContour.Checked then
       catheader.ObjType := 1
     else
       catheader.ObjType := 0;
-    catheader.LogSize := RadioGroup6.ItemIndex;
+    catheader.LogSize := OutlineType.ItemIndex;
   end
   else
   begin
@@ -1143,40 +1149,47 @@ begin
   catheader.flen[n] := sizeof(cardinal);
   curpos := curpos + catheader.flen[n];
   Inc(n);
-  case radiogroup2.ItemIndex of  // RA
+  case RaOptions.ItemIndex of  // RA
     0: nextpos := 3;
     1: nextpos := 1;
     2: nextpos := 3;
     3: nextpos := 1;
   end;
-  case radiogroup3.ItemIndex of  // DEC
+  case DecOptions.ItemIndex of  // DEC
     0: nextpos := nextpos + 4;
     1, 2: nextpos := nextpos + 1;
   end;
   usealt[0].i := 0;
-  CatPrefix := CheckBox8.Checked;
-  case radiogroup1.ItemIndex of
+  CatPrefix := CBPrefixName.Checked;
+  case CatalogType.ItemIndex of
     //9 ('Catalog ID','[Magnitude V]','B-V','Magnitude B','Magnitude R','Spectral class','Proper motion RA','Proper motion DEC','epoch','Parallax','Comments');
     0:
     begin     // Stars
-      if CheckListBox1.Checked[nextpos + 0] then
+      if FieldList.Checked[nextpos + 0] then
       begin
-        catheader.fpos[n] := curpos;
-        catheader.flen[n] := textpos[nextpos + 0, 2];
+        if IdentifierFormat.ItemIndex=0 then
+        begin
+          catheader.fpos[n] := curpos;
+          catheader.flen[n] := textpos[nextpos + 0, 2];
+        end
+        else begin
+          catheader.fpos[n] := curpos;
+          catheader.flen[n] := sizeof(QWord);
+        end;
       end;// ID
       ixlen := catheader.flen[n];
       if ixlen > 0 then
       begin
         usealt[0].i := nextpos;
         if CatPrefix then
-          usealt[0].l := trim(edit4.Text)
+          usealt[0].l := trim(CatShortName.Text)
         else
           usealt[0].l := '';
         ixlen := ixlen + length(usealt[0].l);
       end;
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 1] then
+      if FieldList.Checked[nextpos + 1] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
@@ -1184,63 +1197,63 @@ begin
       keypos := curpos;
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 2] then
+      if FieldList.Checked[nextpos + 2] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
       end;// B-V
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 3] then
+      if FieldList.Checked[nextpos + 3] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
       end;// B
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 4] then
+      if FieldList.Checked[nextpos + 4] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
       end;// R
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 5] then
+      if FieldList.Checked[nextpos + 5] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 5, 2];
       end;// Sp
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 6] then
+      if FieldList.Checked[nextpos + 6] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
       end;// pmAR
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 7] then
+      if FieldList.Checked[nextpos + 7] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
       end;// pmDE
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 8] then
+      if FieldList.Checked[nextpos + 8] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(single);
       end;// pos epoch
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 9] then
+      if FieldList.Checked[nextpos + 9] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
       end;// Px
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 10] then
+      if FieldList.Checked[nextpos + 10] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 10, 2];
@@ -1254,7 +1267,7 @@ begin
     //9 ('Catalog ID','[Magnitude max]','[Magnitude min]','Period','Type','Maxima Epoch','Rise Time','Spectral class','Magnitude code','Comments');
     1:
     begin     // variables
-      if CheckListBox1.Checked[nextpos + 0] then
+      if FieldList.Checked[nextpos + 0] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 0, 2];
@@ -1264,14 +1277,14 @@ begin
       begin
         usealt[0].i := nextpos;
         if CatPrefix then
-          usealt[0].l := trim(edit4.Text)
+          usealt[0].l := trim(CatShortName.Text)
         else
           usealt[0].l := '';
         ixlen := ixlen + length(usealt[0].l);
       end;
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 1] then
+      if FieldList.Checked[nextpos + 1] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
@@ -1279,56 +1292,56 @@ begin
       keypos := curpos;
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 2] then
+      if FieldList.Checked[nextpos + 2] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
       end;// mag2
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 3] then
+      if FieldList.Checked[nextpos + 3] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(single);
       end;// period
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 4] then
+      if FieldList.Checked[nextpos + 4] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 4, 2];
       end;// Type
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 5] then
+      if FieldList.Checked[nextpos + 5] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(single);
       end;// epoch
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 6] then
+      if FieldList.Checked[nextpos + 6] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
       end;// rise
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 7] then
+      if FieldList.Checked[nextpos + 7] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 7, 2];
       end;// Sp
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 8] then
+      if FieldList.Checked[nextpos + 8] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 8, 2];
       end;// mag. code
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 9] then
+      if FieldList.Checked[nextpos + 9] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 9, 2];
@@ -1343,7 +1356,7 @@ begin
     //9 ('Catalog ID','[Magnitude component 1]','Magnitude component 2','[Separation]','Position angle','Epoch','Component name','Spectral class 1','Spectral class 2','Comments');
     2:
     begin     // Doubles Stars
-      if CheckListBox1.Checked[nextpos + 0] then
+      if FieldList.Checked[nextpos + 0] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 0, 2];
@@ -1353,14 +1366,14 @@ begin
       begin
         usealt[0].i := nextpos;
         if CatPrefix then
-          usealt[0].l := trim(edit4.Text)
+          usealt[0].l := trim(CatShortName.Text)
         else
           usealt[0].l := '';
         ixlen := ixlen + length(usealt[0].l);
       end;
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 1] then
+      if FieldList.Checked[nextpos + 1] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
@@ -1368,56 +1381,56 @@ begin
       keypos := curpos;
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 2] then
+      if FieldList.Checked[nextpos + 2] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
       end;// mag2
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 3] then
+      if FieldList.Checked[nextpos + 3] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
       end;// sep
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 4] then
+      if FieldList.Checked[nextpos + 4] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
       end;// PA
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 5] then
+      if FieldList.Checked[nextpos + 5] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(single);
       end;// epoch
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 6] then
+      if FieldList.Checked[nextpos + 6] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 6, 2];
       end;// Comp name
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 7] then
+      if FieldList.Checked[nextpos + 7] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 7, 2];
       end;// SP 1
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 8] then
+      if FieldList.Checked[nextpos + 8] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 8, 2];
       end;// SP 2
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 9] then
+      if FieldList.Checked[nextpos + 9] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 9, 2];
@@ -1432,7 +1445,7 @@ begin
     //9 ('ID number','Nebula type','Magnitude','Surface brigtness','Largest dimension','Smallest diemnsion','Position angle','Radial velocity','Morphological class','Comments','Color');
     3:
     begin     // Nebulae
-      if CheckListBox1.Checked[nextpos + 0] then
+      if FieldList.Checked[nextpos + 0] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 0, 2];
@@ -1442,21 +1455,21 @@ begin
       begin
         usealt[0].i := nextpos;
         if CatPrefix then
-          usealt[0].l := trim(edit4.Text)
+          usealt[0].l := trim(CatShortName.Text)
         else
           usealt[0].l := '';
         ixlen := ixlen + length(usealt[0].l);
       end;
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 1] then
+      if FieldList.Checked[nextpos + 1] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(byte);
       end;// type
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 2] then
+      if FieldList.Checked[nextpos + 2] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
@@ -1464,63 +1477,63 @@ begin
       keypos := curpos;
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 3] then
+      if FieldList.Checked[nextpos + 3] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
       end;// sbr
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 4] then
+      if FieldList.Checked[nextpos + 4] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(single);
       end;// size
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 5] then
+      if FieldList.Checked[nextpos + 5] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(single);
       end;// size2
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 6] then
+      if FieldList.Checked[nextpos + 6] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
       end;// Unit
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 7] then
+      if FieldList.Checked[nextpos + 7] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(smallint);
       end;// PA
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 8] then
+      if FieldList.Checked[nextpos + 8] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(single);
       end;// RV
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 9] then
+      if FieldList.Checked[nextpos + 9] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 9, 2];
       end;// morph class
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 10] then
+      if FieldList.Checked[nextpos + 10] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 10, 2];
       end;// Comment
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 11] then
+      if FieldList.Checked[nextpos + 11] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(cardinal);
@@ -1533,7 +1546,7 @@ begin
     //5 ('Catalog ID','[Line op]','Line width','Line color','use spline','Comments');
     4:
     begin     // Outlines
-      if CheckListBox1.Checked[nextpos + 0] then
+      if FieldList.Checked[nextpos + 0] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 0, 2];
@@ -1543,7 +1556,7 @@ begin
       begin
         usealt[0].i := nextpos;
         if CatPrefix then
-          usealt[0].l := trim(edit4.Text)
+          usealt[0].l := trim(CatShortName.Text)
         else
           usealt[0].l := '';
         ixlen := ixlen + length(usealt[0].l);
@@ -1551,35 +1564,35 @@ begin
       keypos := curpos;
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 1] then
+      if FieldList.Checked[nextpos + 1] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(byte);
       end;// line type
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 2] then
+      if FieldList.Checked[nextpos + 2] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(byte);
       end;// line width
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 3] then
+      if FieldList.Checked[nextpos + 3] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(cardinal);
       end;// line color
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 4] then
+      if FieldList.Checked[nextpos + 4] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(byte);
       end;// drawing
       curpos := curpos + catheader.flen[n];
       Inc(n);
-      if CheckListBox1.Checked[nextpos + 5] then
+      if FieldList.Checked[nextpos + 5] then
       begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := textpos[nextpos + 5, 2];
@@ -1600,7 +1613,7 @@ begin
   basealt := nextpos;
   for i := 0 to 9 do
   begin
-    if CheckListBox1.Checked[nextpos + i] then
+    if FieldList.Checked[nextpos + i] then
     begin
       catheader.fpos[n] := curpos;
       catheader.flen[n] := textpos[nextpos + i, 2];
@@ -1624,7 +1637,7 @@ begin
   end;
   for i := 10 to 19 do
   begin
-    if CheckListBox1.Checked[nextpos + i] then
+    if FieldList.Checked[nextpos + i] then
     begin
       catheader.fpos[n] := curpos;
       catheader.flen[n] := sizeof(single);
@@ -1645,7 +1658,7 @@ var
   curpos: integer;
   buf: shortstring;
 begin
-  for i := 1 to 10 do
+  for i := 1 to 9 do
     catheader.Spare1[i] := 0;
   for i := 1 to 15 do
     catheader.Spare2[i] := 0;
@@ -1656,7 +1669,7 @@ begin
   for i := 1 to 40 do
     catheader.flen[i] := 0;
   n := l_base;
-  case radiogroup1.ItemIndex of
+  case CatalogType.ItemIndex of
     0:
     begin
       catheader.version := 'CDCSTAR2';
@@ -1708,24 +1721,24 @@ begin
     catheader.AltName[i] := altname[i];
   for i := 1 to l_sup do
     catheader.AltPrefix[i] := altprefix[i];
-  buf := PChar(edit4.Text + '    ');
+  buf := PChar(CatShortName.Text + '    ');
   for i := 1 to 4 do
     catheader.ShortName[i - 1] := buf[i];
-  buf := PChar(edit5.Text + StringOfChar(' ', 50));
+  buf := PChar(CatLongName.Text + StringOfChar(' ', 50));
   for i := 1 to 50 do
     catheader.LongName[i - 1] := buf[i];
   catheader.hdrl := sizeof(catheader);
   catheader.filenum := 1;
-  catheader.TxtFileName := extractfilename(listbox1.Items[0]);
+  catheader.TxtFileName := extractfilename(InputFiles.Items[0]);
   catheader.Equinox := floatedit1.Value;
   catheader.Epoch := floatedit3.Value;
   if catheader.version = 'CDCNEB 2' then
   begin
     catheader.MagMax := floatedit2.Value;
-    catheader.Size := longedit1.Value;
+    catheader.Size := NebDefaultSize.Value;
     catheader.Units := nebulaesizescale;
-    catheader.ObjType := nebtype[Combobox3.ItemIndex + 1];
-    if CheckBox1.Checked then
+    catheader.ObjType := nebtype[NebDefaultType.ItemIndex + 1];
+    if NebLogScale.Checked then
       catheader.LogSize := 1
     else
       catheader.LogSize := 0;
@@ -1733,13 +1746,13 @@ begin
   else if catheader.version = 'CDCLINE2' then
   begin
     catheader.MagMax := floatedit2.Value;
-    catheader.Size := longedit2.Value;
-    catheader.Units := Shape1.Brush.Color;
-    if checkbox7.Checked then
+    catheader.Size := OutlineLineWidth.Value;
+    catheader.Units := OutlineColor.Brush.Color;
+    if OutlineCloseContour.Checked then
       catheader.ObjType := 1
     else
       catheader.ObjType := 0;
-    catheader.LogSize := RadioGroup6.ItemIndex;
+    catheader.LogSize := OutlineType.ItemIndex;
   end
   else
   begin
@@ -1752,12 +1765,12 @@ begin
   curpos := 0;
   n := 1;
   //RA
-  catheader.RAmode := radiogroup2.ItemIndex;
+  catheader.RAmode := RaOptions.ItemIndex;
   catheader.fpos[n] := textpos[curpos, 1]; // H
   catheader.flen[n] := textpos[curpos, 2];
   Inc(curpos);
   Inc(n);
-  if (radiogroup2.ItemIndex = 0) or (radiogroup2.ItemIndex = 2) then
+  if (RaOptions.ItemIndex = 0) or (RaOptions.ItemIndex = 2) then
   begin
     catheader.fpos[36] := textpos[curpos, 1]; // M
     catheader.flen[36] := textpos[curpos, 2];
@@ -1767,8 +1780,8 @@ begin
     Inc(curpos);
   end;
   //DEC
-  catheader.DECmode := radiogroup3.ItemIndex;
-  if radiogroup3.ItemIndex = 0 then
+  catheader.DECmode := DecOptions.ItemIndex;
+  if DecOptions.ItemIndex = 0 then
   begin
     catheader.fpos[40] := textpos[curpos, 1]; // sign
     catheader.flen[40] := textpos[curpos, 2];
@@ -1778,7 +1791,7 @@ begin
   catheader.flen[n] := textpos[curpos, 2];
   Inc(curpos);
   Inc(n);
-  if radiogroup3.ItemIndex = 0 then
+  if DecOptions.ItemIndex = 0 then
   begin
     catheader.fpos[38] := textpos[curpos, 1]; // M
     catheader.flen[38] := textpos[curpos, 2];
@@ -1787,13 +1800,13 @@ begin
     catheader.flen[39] := textpos[curpos, 2];
     Inc(curpos);
   end;
-  case radiogroup1.ItemIndex of
+  case CatalogType.ItemIndex of
     //9 ('Catalog ID','[Magnitude V]','B-V','Magnitude B','Magnitude R','Spectral class','Proper motion RA','Proper motion DEC','epoch','Parallax','Comments');
     0:
     begin     // Stars
       for i := 1 to 11 do
       begin
-        if CheckListBox1.Checked[curpos] then
+        if FieldList.Checked[curpos] then
         begin
           catheader.fpos[n] := textpos[curpos, 1];
           catheader.flen[n] := textpos[curpos, 2];
@@ -1808,7 +1821,7 @@ begin
     begin     // variables
       for i := 1 to 10 do
       begin
-        if CheckListBox1.Checked[curpos] then
+        if FieldList.Checked[curpos] then
         begin
           catheader.fpos[n] := textpos[curpos, 1];
           catheader.flen[n] := textpos[curpos, 2];
@@ -1823,7 +1836,7 @@ begin
     begin     // Doubles Stars
       for i := 1 to 10 do
       begin
-        if CheckListBox1.Checked[curpos] then
+        if FieldList.Checked[curpos] then
         begin
           catheader.fpos[n] := textpos[curpos, 1];
           catheader.flen[n] := textpos[curpos, 2];
@@ -1840,7 +1853,7 @@ begin
     begin     // Nebulae
       for i := 1 to 12 do
       begin
-        if CheckListBox1.Checked[curpos] then
+        if FieldList.Checked[curpos] then
         begin
           catheader.fpos[n] := textpos[curpos, 1];
           catheader.flen[n] := textpos[curpos, 2];
@@ -1855,7 +1868,7 @@ begin
     begin     // Outlines
       for i := 1 to 6 do
       begin
-        if CheckListBox1.Checked[curpos] then
+        if FieldList.Checked[curpos] then
         begin
           catheader.fpos[n] := textpos[curpos, 1];
           catheader.flen[n] := textpos[curpos, 2];
@@ -1868,14 +1881,14 @@ begin
   end;
   for i := 0 to 19 do
   begin
-    if CheckListBox1.Checked[curpos] then
+    if FieldList.Checked[curpos] then
     begin
       catheader.fpos[n] := textpos[curpos, 1];
       catheader.flen[n] := textpos[curpos, 2];
     end;
     Inc(curpos);
     Inc(n);
-    if curpos >= CheckListBox1.Count then
+    if curpos >= FieldList.Count then
       break;
   end;
   catheader.reclen := 0;
@@ -1900,6 +1913,11 @@ begin
   val(trim(copy(inl, textpos[p, 1], textpos[p, 2])), Result, code);
   if code <> 0 then
     Result := MaxInt;
+end;
+
+function Tf_catgen.GetQword(p: integer): QWord;
+begin
+  Result := StrToQWordDef(trim(copy(inl, textpos[p, 1], textpos[p, 2])),0);
 end;
 
 function Tf_catgen.GetString(p: integer): string;
@@ -1988,16 +2006,16 @@ begin
     if pos(buf, colorlst[i]) > 0 then
     begin
       case i of
-        1: Result := shape2.brush.color;
-        2: Result := shape3.brush.color;
-        3: Result := shape4.brush.color;
-        4: Result := shape5.brush.color;
-        5: Result := shape6.brush.color;
-        6: Result := shape7.brush.color;
-        7: Result := shape8.brush.color;
-        8: Result := shape9.brush.color;
-        9: Result := shape10.brush.color;
-        10: Result := shape11.brush.color;
+        1: Result := Color1.brush.color;
+        2: Result := Color2.brush.color;
+        3: Result := Color3.brush.color;
+        4: Result := Color4.brush.color;
+        5: Result := Color5.brush.color;
+        6: Result := Color6.brush.color;
+        7: Result := Color7.brush.color;
+        8: Result := Color8.brush.color;
+        9: Result := Color9.brush.color;
+        10: Result := Color10.brush.color;
       end;
       break;
     end;
@@ -2020,6 +2038,11 @@ begin
 end;
 
 procedure Tf_catgen.PutRecCard(x: cardinal; p: integer);
+begin
+  move(x, datarec[catheader.fpos[p] - 1], catheader.flen[p]);
+end;
+
+procedure Tf_catgen.PutRecQword(x: QWord; p: integer);
 begin
   move(x, datarec[catheader.fpos[p] - 1], catheader.flen[p]);
 end;
@@ -2156,7 +2179,7 @@ begin
   begin
     ixfn := lowercase(trim(catheader.ShortName)) + '.idx';
     assignfile(ixf, destdir + ixfn);
-    if checkbox6.Checked then
+    if OutputAppend.Checked then
     begin
       reset(ixf, 1);
       Seek(ixf, FileSize(ixf));
@@ -2205,7 +2228,7 @@ begin
         raise ERangeError.CreateFmt('Invalid number of files : %d', [catheader.filenum]);
     end;
     assignfile(ff[i], destdir + ffn[i]);
-    if checkbox6.Checked then
+    if OutputAppend.Checked then
     begin
       reset(ff[i], 1);
       Seek(ff[i], FileSize(ff[i]));
@@ -2242,16 +2265,16 @@ begin
   for i := 1 to 10 do
   begin
     case i of
-      1: catinfo.Color[i] := shape2.brush.color;
-      2: catinfo.Color[i] := shape3.brush.color;
-      3: catinfo.Color[i] := shape4.brush.color;
-      4: catinfo.Color[i] := shape5.brush.color;
-      5: catinfo.Color[i] := shape6.brush.color;
-      6: catinfo.Color[i] := shape7.brush.color;
-      7: catinfo.Color[i] := shape8.brush.color;
-      8: catinfo.Color[i] := shape9.brush.color;
-      9: catinfo.Color[i] := shape10.brush.color;
-      10: catinfo.Color[i] := shape11.brush.color;
+      1: catinfo.Color[i] := Color1.brush.color;
+      2: catinfo.Color[i] := Color2.brush.color;
+      3: catinfo.Color[i] := Color3.brush.color;
+      4: catinfo.Color[i] := Color4.brush.color;
+      5: catinfo.Color[i] := Color5.brush.color;
+      6: catinfo.Color[i] := Color6.brush.color;
+      7: catinfo.Color[i] := Color7.brush.color;
+      8: catinfo.Color[i] := Color8.brush.color;
+      9: catinfo.Color[i] := Color9.brush.color;
+      10: catinfo.Color[i] := Color10.brush.color;
     end;
   end;
   for i := 0 to 40 do
@@ -2259,7 +2282,7 @@ begin
     catinfo.calc[i, 1] := calc[i, 1];
     catinfo.calc[i, 2] := calc[i, 2];
   end;
-  catinfo.caturl := trim(edit6.Text);
+  catinfo.caturl := trim(UpdateURL.Text);
   assignfile(f, destdir + lowercase(trim(catheader.ShortName)) + '.info2');
   rewrite(f, 1);
   blockwrite(f, catinfo, sizeof(catinfo), n);
@@ -2310,14 +2333,14 @@ var
   ixra, ixde: single;
     {$endif}
 begin
-  Fprogress.progressbar1.max := ListBox1.Items.Count;
+  Fprogress.progressbar1.max := InputFiles.Items.Count;
   fillstring := StringOfChar(' ', 255);
-  for n := 0 to ListBox1.Items.Count - 1 do
+  for n := 0 to InputFiles.Items.Count - 1 do
   begin
-    Fprogress.label1.Caption := Format(rsConvertCatal, [ListBox1.Items[n]]);
+    Fprogress.label1.Caption := Format(rsConvertCatal, [InputFiles.Items[n]]);
     Fprogress.progressbar1.position := n + 1;
     Fprogress.invalidate;
-    OpenCatalog(ListBox1.Items[n]);
+    OpenCatalog(InputFiles.Items[n]);
     Fprogress.progressbar2.max := GetCatalogSize;
     ra := 0;
     de := 0;
@@ -2334,7 +2357,7 @@ begin
       end;
       ReadCatalog(inl);
       nextpos := 0;
-      case RadioGroup2.ItemIndex of
+      case RaOptions.ItemIndex of
         0:
         begin
           ra := 15 * (Getfloat(nextpos + 0, 0) + Getfloat(nextpos + 1, 0) / 60 + Getfloat(
@@ -2357,7 +2380,7 @@ begin
           nextpos := nextpos + 1;
         end;
       end;
-      case RadioGroup3.ItemIndex of
+      case DecOptions.ItemIndex of
         0:
         begin
           if GetString(nextpos) = '-' then
@@ -2395,12 +2418,16 @@ begin
         PutIxSingle(ixde, 1);
       end;
   {$endif}
-      case radiogroup1.ItemIndex of
+      case CatalogType.ItemIndex of
         //9 ('Catalog ID','[Magnitude V]','B-V','Magnitude B','Magnitude R','Spectral class','Proper motion RA','Proper motion DEC','Parallax','Comments');
         0:
         begin     // Stars
-          if catheader.flen[3] > 0 then
-            PutRecString(GetString(nextpos), 3);  // id
+          if catheader.flen[3] > 0 then begin
+            if IdentifierFormat.ItemIndex=0 then
+               PutRecString(GetString(nextpos), 3)      // string id
+            else
+               PutRecQword(round(GetQword(nextpos)), 3); // qword id
+          end;
           Inc(nextpos);
           if catheader.flen[4] > 0 then
             PutRecSmallint(round(Getfloat(nextpos, 99) * 1000), 4);   // ma
@@ -2587,7 +2614,7 @@ begin
             begin
               if (j > 0) and (catheader.useprefix >= 1) then
                 buf := usealt[j].l + buf;
-              if (j = 0) and CheckBox8.Checked then
+              if (j = 0) and CBPrefixName.Checked then
                 buf := usealt[j].l + buf;
               PutIxKey(buf);
               WriteIx;
@@ -2721,7 +2748,7 @@ begin
   Fprogress.invalidate;
   application.ProcessMessages;
   CloseFiles;
-  if radiogroup1.ItemIndex < 4 then
+  if CatalogType.ItemIndex < 4 then
   begin
     Fprogress.label1.Caption := rsSortingFiles;
     Fprogress.progressbar1.position := 4;
@@ -2759,35 +2786,35 @@ begin
   try
     abort := False;
     chdir(appdir);
-    if not DirectoryExists(directoryedit1.Text) then
+    if not DirectoryExists(OutputDirectory.Text) then
     begin
       ShowMessage(rsPleaseIndica3);
-      directoryedit1.SetFocus;
+      OutputDirectory.SetFocus;
       exit;
     end;
-    if FileIsReadOnly(directoryedit1.Text) then
+    if FileIsReadOnly(OutputDirectory.Text) then
     begin
-      ShowMessage(rsCannotWriteT + ' ' + directoryedit1.Text);
-      directoryedit1.SetFocus;
+      ShowMessage(rsCannotWriteT + ' ' + OutputDirectory.Text);
+      OutputDirectory.SetFocus;
       exit;
     end;
-    if checkbox6.Checked and (messagedlg(Format(rsWARNINGYouHa, [crlf, crlf, crlf, crlf]),
+    if OutputAppend.Checked and (messagedlg(Format(rsWARNINGYouHa, [crlf, crlf, crlf, crlf]),
       mtConfirmation, [mbYes, mbNo], 0) <> mrYes) then
       exit;
     try
-      destdir := slash(directoryedit1.Text);
+      destdir := slash(OutputDirectory.Text);
       panel1.Enabled := False;
       if not directoryexists(destdir) then
         Forcedirectories(destdir);
       for i := 1 to 19 do
-        neblst[i] := trim(stringgrid1.cells[1, i]) + ',';
+        neblst[i] := trim(ObjectTypeStr.cells[1, i]) + ',';
       for i := 1 to 3 do
-        nebunit[i] := trim(stringgrid2.cells[1, i]) + ',';
+        nebunit[i] := trim(ObjectSizeStr.cells[1, i]) + ',';
       for i := 1 to 3 do
-        linelst[i] := trim(stringgrid3.cells[1, i]) + ',';
+        linelst[i] := trim(OutlineDrawStr.cells[1, i]) + ',';
       for i := 1 to 10 do
-        colorlst[i] := trim(stringgrid4.cells[0, i]) + ',';
-      if binarycat.ItemIndex = 0 then
+        colorlst[i] := trim(ColorStr.cells[0, i]) + ',';
+      if OutputType.ItemIndex = 0 then
         BuildBinCat
       else
         BuildTxtCat;
@@ -2806,9 +2833,9 @@ begin
   end;
 end;
 
-procedure Tf_catgen.ComboBox1Change(Sender: TObject);
+procedure Tf_catgen.NebDefaultUnitChange(Sender: TObject);
 begin
-  case Combobox1.ItemIndex of
+  case NebDefaultUnit.ItemIndex of
     0: nebulaesizescale := 1;
     1: nebulaesizescale := 60;
     2: nebulaesizescale := 3600;
@@ -2820,25 +2847,25 @@ begin
   Close;
 end;
 
-procedure Tf_catgen.Memo1MouseUp(Sender: TObject; Button: TMouseButton;
+procedure Tf_catgen.SampleRowMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: integer);
 var
   i, j, k, l: integer;
 begin
-  i := memo1.selstart;
-  j := memo1.SelLength;
+  i := SampleRow.selstart;
+  j := SampleRow.SelLength;
   if (i >= 0) and (j > 0) then
   begin
-    k := length(memo1.Lines.Strings[0]);
-    l := length(memo1.Lines.Strings[1]);
+    k := length(SampleRow.Lines.Strings[0]);
+    l := length(SampleRow.Lines.Strings[1]);
     if i > k then
       if i > (k + l) then
         i := i - k - l - 4
       else
         i := i - k - 2;
     i := i + 1;
-    edit1.Text := IntToStr(i);
-    edit2.Text := IntToStr(j);
+    FieldStart.Text := IntToStr(i);
+    FieldLength.Text := IntToStr(j);
   end;
 end;
 
@@ -2852,15 +2879,15 @@ begin
   opendialog1.filename := '';
   if opendialog1.Execute then
   begin
-    ListBox1.Items.Clear;
+    InputFiles.Items.Clear;
     for i := 0 to opendialog1.files.Count - 1 do
     begin
-      ListBox1.Items.Add(opendialog1.files[i]);
+      InputFiles.Items.Add(opendialog1.files[i]);
     end;
   end;
 end;
 
-procedure Tf_catgen.Button1Click(Sender: TObject);
+procedure Tf_catgen.BtnSaveClick(Sender: TObject);
 var
   ini: Tinifile;
   i: integer;
@@ -2879,31 +2906,31 @@ begin
     end;
     prjdir := ExtractFilePath(fn);
     ini := Tinifile.Create(fn);
-    ini.writeInteger('Page1', 'binarycat', binarycat.ItemIndex);
-    ini.writeInteger('Page1', 'type', RadioGroup1.ItemIndex);
-    ini.writeString('Page1', 'shortname', edit4.Text);
-    ini.writeString('Page1', 'longname', edit5.Text);
-    ini.writeInteger('Page1', 'numfiles', ListBox1.Items.Count);
-    for i := 0 to ListBox1.Items.Count - 1 do
+    ini.writeInteger('Page1', 'binarycat', OutputType.ItemIndex);
+    ini.writeInteger('Page1', 'type', CatalogType.ItemIndex);
+    ini.writeString('Page1', 'shortname', CatShortName.Text);
+    ini.writeString('Page1', 'longname', CatLongName.Text);
+    ini.writeInteger('Page1', 'numfiles', InputFiles.Items.Count);
+    for i := 0 to InputFiles.Items.Count - 1 do
       ini.writeString('Page1', 'inputfiles' + IntToStr(i), ExtractRelativepath(
-        prjdir, ListBox1.Items[i]));
-    ini.writeString('Page1', 'caturl', edit6.Text);
-    ini.writeInteger('Page2', 'ratype', RadioGroup2.ItemIndex);
-    ini.writeInteger('Page2', 'dectype', RadioGroup3.ItemIndex);
+        prjdir, InputFiles.Items[i]));
+    ini.writeString('Page1', 'caturl', UpdateURL.Text);
+    ini.writeInteger('Page2', 'ratype', RaOptions.ItemIndex);
+    ini.writeInteger('Page2', 'dectype', DecOptions.ItemIndex);
     ini.writeFloat('Page2', 'equinox', FloatEdit1.Value);
     ini.writeFloat('Page2', 'epoch', FloatEdit3.Value);
     ini.writeFloat('Page2', 'magmax', FloatEdit2.Value);
-    ini.writeInteger('Page2', 'nebsize', LongEdit1.Value);
-    ini.writeInteger('Page2', 'nebunit', Combobox1.ItemIndex);
-    ini.writeInteger('Page2', 'nebtype', Combobox3.ItemIndex);
-    ini.writeBool('Page2', 'neblog', checkbox1.Checked);
-    ini.writeInteger('Page2', 'linewidth', LongEdit2.Value);
-    ini.writeInteger('Page2', 'linecolor', shape1.Brush.color);
-    ini.writeInteger('Page2', 'drawingtype', RadioGroup6.ItemIndex);
-    ini.writeBool('Page2', 'closedline', checkbox7.Checked);
-    ini.writeInteger('Page3', 'numitem', checklistbox1.Items.Count);
-    for i := 0 to checklistbox1.Items.Count - 1 do
-      ini.writeBool('Page3', 'field' + IntToStr(i), checklistbox1.Checked[i]);
+    ini.writeInteger('Page2', 'nebsize', NebDefaultSize.Value);
+    ini.writeInteger('Page2', 'nebunit', NebDefaultUnit.ItemIndex);
+    ini.writeInteger('Page2', 'nebtype', NebDefaultType.ItemIndex);
+    ini.writeBool('Page2', 'neblog', NebLogScale.Checked);
+    ini.writeInteger('Page2', 'linewidth', OutlineLineWidth.Value);
+    ini.writeInteger('Page2', 'linecolor', OutlineColor.Brush.color);
+    ini.writeInteger('Page2', 'drawingtype', OutlineType.ItemIndex);
+    ini.writeBool('Page2', 'closedline', OutlineCloseContour.Checked);
+    ini.writeInteger('Page3', 'numitem', FieldList.Items.Count);
+    for i := 0 to FieldList.Items.Count - 1 do
+      ini.writeBool('Page3', 'field' + IntToStr(i), FieldList.Checked[i]);
     for i := 1 to 35 do
       ini.writeString('Page3', 'label' + IntToStr(i), flabel[i]);
     for i := 0 to 40 do
@@ -2917,41 +2944,41 @@ begin
       ini.writeInteger('Page3', 'altname' + IntToStr(i), altname[i]);
     for i := 1 to l_sup do
       ini.WriteInteger('Page3', 'altprefix' + IntToStr(i), altprefix[i]);
-    ini.writeInteger('Page4', 'numfile', RadioGroup4.ItemIndex);
+    ini.writeInteger('Page4', 'numfile', OutputFileNumber.ItemIndex);
     ini.writeString('Page4', 'ouputdir', ExtractRelativepath(
-      prjdir, slash(DirectoryEdit1.Text)));
-    ini.writeBool('Page4', 'index', checkbox3.Checked);
-    ini.writeBool('Page4', 'altindex', checkbox4.Checked);
-    ini.writeBool('Page4', 'prefname', checkbox8.Checked);
-    ini.writeBool('Page4', 'append', checkbox6.Checked);
-    with stringgrid1 do
+      prjdir, slash(OutputDirectory.Text)));
+    ini.writeBool('Page4', 'index', CBCreateIndex.Checked);
+    ini.writeBool('Page4', 'altindex', CBAltNameIndex.Checked);
+    ini.writeBool('Page4', 'prefname', CBPrefixName.Checked);
+    ini.writeBool('Page4', 'append', OutputAppend.Checked);
+    with ObjectTypeStr do
       for i := 1 to 16 do
         ini.writeString('Page5', 'nebtype' + IntToStr(i), cells[1, i]);
-    with stringgrid2 do
+    with ObjectSizeStr do
       for i := 1 to 3 do
         ini.writeString('Page5', 'unit' + IntToStr(i), cells[1, i]);
-    with stringgrid3 do
+    with OutlineDrawStr do
       for i := 1 to 4 do
         ini.writeString('Page6', 'linetype' + IntToStr(i), cells[1, i]);
-    with stringgrid4 do
+    with ColorStr do
       for i := 1 to 10 do
         ini.writeString('Page7', 'colorstr' + IntToStr(i), cells[0, i]);
-    ini.writeInteger('Page7', 'color1', shape2.Brush.Color);
-    ini.writeInteger('Page7', 'color2', shape3.Brush.Color);
-    ini.writeInteger('Page7', 'color3', shape4.Brush.Color);
-    ini.writeInteger('Page7', 'color4', shape5.Brush.Color);
-    ini.writeInteger('Page7', 'color5', shape6.Brush.Color);
-    ini.writeInteger('Page7', 'color6', shape7.Brush.Color);
-    ini.writeInteger('Page7', 'color7', shape8.Brush.Color);
-    ini.writeInteger('Page7', 'color8', shape9.Brush.Color);
-    ini.writeInteger('Page7', 'color9', shape10.Brush.Color);
-    ini.writeInteger('Page7', 'color10', shape11.Brush.Color);
+    ini.writeInteger('Page7', 'color1', Color1.Brush.Color);
+    ini.writeInteger('Page7', 'color2', Color2.Brush.Color);
+    ini.writeInteger('Page7', 'color3', Color3.Brush.Color);
+    ini.writeInteger('Page7', 'color4', Color4.Brush.Color);
+    ini.writeInteger('Page7', 'color5', Color5.Brush.Color);
+    ini.writeInteger('Page7', 'color6', Color6.Brush.Color);
+    ini.writeInteger('Page7', 'color7', Color7.Brush.Color);
+    ini.writeInteger('Page7', 'color8', Color8.Brush.Color);
+    ini.writeInteger('Page7', 'color9', Color9.Brush.Color);
+    ini.writeInteger('Page7', 'color10', Color10.Brush.Color);
     ini.Free;
   end;
   chdir(appdir);
 end;
 
-procedure Tf_catgen.Button2Click(Sender: TObject);
+procedure Tf_catgen.BtnLoadClick(Sender: TObject);
 var
   ini: Tinifile;
   i, n: integer;
@@ -2968,13 +2995,13 @@ begin
     fn := SafeUTF8ToSys(OpenDialog1.filename);
     prjdir := ExtractFilePath(fn);
     ini := Tinifile.Create(fn);
-    binarycat.ItemIndex := ini.ReadInteger('Page1', 'binarycat', 0);
-    RadioGroup1.ItemIndex := ini.ReadInteger('Page1', 'type', RadioGroup1.ItemIndex);
-    edit4.Text := ini.readString('Page1', 'shortname', edit4.Text);
-    edit5.Text := ini.readString('Page1', 'longname', edit5.Text);
-    edit6.Text := ini.readString('Page1', 'caturl', '');
+    OutputType.ItemIndex := ini.ReadInteger('Page1', 'binarycat', 0);
+    CatalogType.ItemIndex := ini.ReadInteger('Page1', 'type', CatalogType.ItemIndex);
+    CatShortName.Text := ini.readString('Page1', 'shortname', CatShortName.Text);
+    CatLongName.Text := ini.readString('Page1', 'longname', CatLongName.Text);
+    UpdateURL.Text := ini.readString('Page1', 'caturl', '');
     n := ini.readInteger('Page1', 'numfiles', 0);
-    ListBox1.Items.Clear;
+    InputFiles.Items.Clear;
     chdir(prjdir);
     for i := 0 to n - 1 do
     begin
@@ -2982,28 +3009,28 @@ begin
       if trim(buf) > '' then
       begin
         buf := ExpandFileName(buf);
-        ListBox1.Items.Add(buf);
+        InputFiles.Items.Add(buf);
       end;
     end;
     chdir(appdir);
-    RadioGroup2.ItemIndex := ini.readInteger('Page2', 'ratype', RadioGroup2.ItemIndex);
-    RadioGroup3.ItemIndex := ini.readInteger('Page2', 'dectype', RadioGroup3.ItemIndex);
+    RaOptions.ItemIndex := ini.readInteger('Page2', 'ratype', RaOptions.ItemIndex);
+    DecOptions.ItemIndex := ini.readInteger('Page2', 'dectype', DecOptions.ItemIndex);
     FloatEdit1.Value := ini.readFloat('Page2', 'equinox', FloatEdit1.Value);
     FloatEdit3.Value := ini.readFloat('Page2', 'epoch', FloatEdit3.Value);
     FloatEdit2.Value := ini.readFloat('Page2', 'magmax', FloatEdit2.Value);
-    LongEdit1.Value := ini.readInteger('Page2', 'nebsize', LongEdit1.Value);
-    Combobox1.ItemIndex := ini.readInteger('Page2', 'nebunit', Combobox1.ItemIndex);
-    ComboBox1Change(self);
-    Combobox3.ItemIndex := ini.readInteger('Page2', 'nebtype', Combobox3.ItemIndex);
-    checkbox1.Checked := ini.readBool('Page2', 'neblog', checkbox1.Checked);
-    LongEdit2.Value := ini.readInteger('Page2', 'linewidth', LongEdit2.Value);
-    shape1.Brush.color := ini.readInteger('Page2', 'linecolor', shape1.Brush.color);
-    RadioGroup6.ItemIndex := ini.readInteger('Page2', 'drawingtype', RadioGroup6.ItemIndex);
-    checkbox7.Checked := ini.ReadBool('Page2', 'closedline', checkbox7.Checked);
+    NebDefaultSize.Value := ini.readInteger('Page2', 'nebsize', NebDefaultSize.Value);
+    NebDefaultUnit.ItemIndex := ini.readInteger('Page2', 'nebunit', NebDefaultUnit.ItemIndex);
+    NebDefaultUnitChange(self);
+    NebDefaultType.ItemIndex := ini.readInteger('Page2', 'nebtype', NebDefaultType.ItemIndex);
+    NebLogScale.Checked := ini.readBool('Page2', 'neblog', NebLogScale.Checked);
+    OutlineLineWidth.Value := ini.readInteger('Page2', 'linewidth', OutlineLineWidth.Value);
+    OutlineColor.Brush.color := ini.readInteger('Page2', 'linecolor', OutlineColor.Brush.color);
+    OutlineType.ItemIndex := ini.readInteger('Page2', 'drawingtype', OutlineType.ItemIndex);
+    OutlineCloseContour.Checked := ini.ReadBool('Page2', 'closedline', OutlineCloseContour.Checked);
     n := ini.readInteger('Page3', 'numitem', 0);
     for i := 0 to n - 1 do
-      checklistbox1.Checked[i] :=
-        ini.readBool('Page3', 'field' + IntToStr(i), checklistbox1.Checked[i]);
+      FieldList.Checked[i] :=
+        ini.readBool('Page3', 'field' + IntToStr(i), FieldList.Checked[i]);
     for i := 1 to 35 do
       flabel[i] := ini.readString('Page3', 'label' + IntToStr(i), flabel[i]);
     for i := 0 to 40 do
@@ -3025,55 +3052,55 @@ begin
 
     for i := 1 to l_sup do
       altprefix[i] := ini.ReadInteger('Page3', 'altprefix' + IntToStr(i), altprefix[i]);
-    RadioGroup4.ItemIndex := ini.readInteger('Page4', 'numfile', RadioGroup4.ItemIndex);
+    OutputFileNumber.ItemIndex := ini.readInteger('Page4', 'numfile', OutputFileNumber.ItemIndex);
     buf := ini.readString('Page4', 'ouputdir', '');
     chdir(prjdir);
     buf := ExpandFileName(buf);
     chdir(appdir);
-    DirectoryEdit1.Text := buf;
-    checkbox3.Checked := ini.readBool('Page4', 'index', checkbox3.Checked);
-    checkbox4.Checked := ini.readBool('Page4', 'altindex', checkbox4.Checked);
-    checkbox8.Checked := ini.readBool('Page4', 'prefname', checkbox8.Checked);
-    checkbox6.Checked := ini.readBool('Page4', 'append', checkbox6.Checked);
-    with stringgrid1 do
+    OutputDirectory.Text := buf;
+    CBCreateIndex.Checked := ini.readBool('Page4', 'index', CBCreateIndex.Checked);
+    CBAltNameIndex.Checked := ini.readBool('Page4', 'altindex', CBAltNameIndex.Checked);
+    CBPrefixName.Checked := ini.readBool('Page4', 'prefname', CBPrefixName.Checked);
+    OutputAppend.Checked := ini.readBool('Page4', 'append', OutputAppend.Checked);
+    with ObjectTypeStr do
       for i := 1 to 16 do
         cells[1, i] := ini.readString('Page5', 'nebtype' + IntToStr(i), cells[1, i]);
-    with stringgrid2 do
+    with ObjectSizeStr do
       for i := 1 to 3 do
         cells[1, i] := ini.readString('Page5', 'unit' + IntToStr(i), cells[1, i]);
-    with stringgrid3 do
+    with OutlineDrawStr do
       for i := 1 to 4 do
         cells[1, i] := ini.readString('Page6', 'linetype' + IntToStr(i), cells[1, i]);
-    with stringgrid4 do
+    with ColorStr do
       for i := 1 to 10 do
         cells[0, i] := ini.readString('Page7', 'colorstr' + IntToStr(i), cells[0, i]);
-    shape2.Brush.Color := ini.readInteger('Page7', 'color1', shape2.Brush.Color);
-    shape3.Brush.Color := ini.readInteger('Page7', 'color2', shape3.Brush.Color);
-    shape4.Brush.Color := ini.readInteger('Page7', 'color3', shape4.Brush.Color);
-    shape5.Brush.Color := ini.readInteger('Page7', 'color4', shape5.Brush.Color);
-    shape6.Brush.Color := ini.readInteger('Page7', 'color5', shape6.Brush.Color);
-    shape7.Brush.Color := ini.readInteger('Page7', 'color6', shape7.Brush.Color);
-    shape8.Brush.Color := ini.readInteger('Page7', 'color7', shape8.Brush.Color);
-    shape9.Brush.Color := ini.readInteger('Page7', 'color8', shape9.Brush.Color);
-    shape10.Brush.Color := ini.readInteger('Page7', 'color9', shape10.Brush.Color);
-    shape11.Brush.Color := ini.readInteger('Page7', 'color10', shape11.Brush.Color);
+    Color1.Brush.Color := ini.readInteger('Page7', 'color1', Color1.Brush.Color);
+    Color2.Brush.Color := ini.readInteger('Page7', 'color2', Color2.Brush.Color);
+    Color3.Brush.Color := ini.readInteger('Page7', 'color3', Color3.Brush.Color);
+    Color4.Brush.Color := ini.readInteger('Page7', 'color4', Color4.Brush.Color);
+    Color5.Brush.Color := ini.readInteger('Page7', 'color5', Color5.Brush.Color);
+    Color6.Brush.Color := ini.readInteger('Page7', 'color6', Color6.Brush.Color);
+    Color7.Brush.Color := ini.readInteger('Page7', 'color7', Color7.Brush.Color);
+    Color8.Brush.Color := ini.readInteger('Page7', 'color8', Color8.Brush.Color);
+    Color9.Brush.Color := ini.readInteger('Page7', 'color9', Color9.Brush.Color);
+    Color10.Brush.Color := ini.readInteger('Page7', 'color10', Color10.Brush.Color);
     ini.Free;
   end;
   chdir(appdir);
 end;
 
-procedure Tf_catgen.DirectoryEdit1AcceptDirectory(Sender: TObject; var Value: string);
+procedure Tf_catgen.OutputDirectoryAcceptDirectory(Sender: TObject; var Value: string);
 begin
   chdir(appdir);
 end;
 
 procedure Tf_catgen.binarycatChange(Sender: TObject);
 begin
-  RadioGroup4.Visible := binarycat.ItemIndex = 0;
-  GroupBox6.Visible := binarycat.ItemIndex = 0;
-  CheckBox6.Visible := binarycat.ItemIndex = 0;
-  edit6.Visible := binarycat.ItemIndex = 1;
-  label23.Visible := binarycat.ItemIndex = 1;
+  OutputFileNumber.Visible := OutputType.ItemIndex = 0;
+  OutputSearchIndex.Visible := OutputType.ItemIndex = 0;
+  OutputAppend.Visible := OutputType.ItemIndex = 0;
+  UpdateURL.Visible := OutputType.ItemIndex = 1;
+  label23.Visible := OutputType.ItemIndex = 1;
 end;
 
 procedure Tf_catgen.FormShow(Sender: TObject);
@@ -3103,7 +3130,7 @@ begin
   pagecontrol1.PageIndex := pageTypeObject;
 end;
 
-procedure Tf_catgen.Button4Click(Sender: TObject);
+procedure Tf_catgen.BtnReturn1Click(Sender: TObject);
 begin
   panel1.Enabled := True;
   pagecontrol1.PageIndex := pageDefault;
@@ -3115,31 +3142,31 @@ begin
   pagecontrol1.PageIndex := pageUnits;
 end;
 
-procedure Tf_catgen.CheckBox2Click(Sender: TObject);
+procedure Tf_catgen.FieldAltNameClick(Sender: TObject);
 begin
-  if checkbox2.Checked then
+  if FieldAltName.Checked then
     altname[listindex + 1 - l_fixe] := 1
   else
     altname[listindex + 1 - l_fixe] := 0;
 end;
 
-procedure Tf_catgen.CheckBox9Click(Sender: TObject);
+procedure Tf_catgen.FieldPrefixLabelClick(Sender: TObject);
 begin
-  if checkbox9.Checked then
+  if FieldPrefixLabel.Checked then
     altprefix[listindex + 1 - l_fixe] := 1
   else
     altprefix[listindex + 1 - l_fixe] := 0;
 end;
 
-procedure Tf_catgen.Button7Click(Sender: TObject);
+procedure Tf_catgen.BtnAdvancedClick(Sender: TObject);
 var
   i: integer;
   x: double;
 begin
-  if (pos('(', CheckListBox1.items[listindex]) = 0) and
-    (pos('Numeric', CheckListBox1.items[listindex]) = 0) then
+  if (pos('(', FieldList.items[listindex]) = 0) and
+    (pos('Numeric', FieldList.items[listindex]) = 0) then
     exit;
-  val(memo1.SelText, x, i);
+  val(SampleRow.SelText, x, i);
   if i <> 0 then
     exit;
   Fcatgenadv.A := calc[listindex, 1];
@@ -3159,7 +3186,7 @@ begin
   pagecontrol1.PageIndex := pageLine;
 end;
 
-procedure Tf_catgen.Shape1MouseUp(Sender: TObject; Button: TMouseButton;
+procedure Tf_catgen.OutlineColorMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: integer);
 begin
   with Sender as Tshape do
@@ -3176,7 +3203,7 @@ begin
   pagecontrol1.PageIndex := pageColor;
 end;
 
-procedure Tf_catgen.Button12Click(Sender: TObject);
+procedure Tf_catgen.BtnHelpClick(Sender: TObject);
 begin
   ShowHelp;
 end;
@@ -3238,7 +3265,7 @@ begin
         // main index
         if usealt[0].i > 0 then
         begin
-          case radiogroup1.ItemIndex of
+          case CatalogType.ItemIndex of
             0: key := rec.star.id;
             1: key := rec.variable.id;
             2: key := rec.double.id;
@@ -3250,7 +3277,7 @@ begin
           key := uppercase(StringReplace(key, ' ', '', [rfReplaceAll]));
           if key <> '' then
           begin
-            if CheckBox8.Checked then
+            if CBPrefixName.Checked then
               key := usealt[0].l + key;
             addindex;
           end;
@@ -3300,12 +3327,12 @@ var i:integer;
 begin
 abort:=false;
 chdir(appdir);
-for i:=1 to 19 do neblst[i]:=trim(stringgrid1.cells[1,i])+',';
-for i:=1 to 3  do nebunit[i]:=trim(stringgrid2.cells[1,i])+',';
-for i:=1 to 3  do linelst[i]:=trim(stringgrid3.cells[1,i])+',';
-for i:=1 to 10  do colorlst[i]:=trim(stringgrid4.cells[0,i])+',';
-destdir:=slash(directoryedit1.Text);
-ixfn:=lowercase(trim(edit4.text))+'.idx';
+for i:=1 to 19 do neblst[i]:=trim(ObjectTypeStr.cells[1,i])+',';
+for i:=1 to 3  do nebunit[i]:=trim(ObjectSizeStr.cells[1,i])+',';
+for i:=1 to 3  do linelst[i]:=trim(OutlineDrawStr.cells[1,i])+',';
+for i:=1 to 10  do colorlst[i]:=trim(ColorStr.cells[0,i])+',';
+destdir:=slash(OutputDirectory.Text);
+ixfn:=lowercase(trim(CatShortName.text))+'.idx';
 BuildHeader;
 SortIXfile;
 end;  }

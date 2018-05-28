@@ -131,7 +131,8 @@ TCatHeader = packed record
          IxKeylen : byte;
          AltName  : array[1..10] of byte;
          AltPrefix: array[1..10] of integer;
-         Spare1   : array[1..10] of integer;
+         IdFormat : integer;
+         Spare1   : array[1..9] of integer;
          fpos     : array[1..40] of integer;
          Spare2   : array[1..15] of integer;
          flen     : array[1..40] of integer;
@@ -161,7 +162,8 @@ TFileHeader = packed record
          IxKeylen : byte;
          AltName  : array[1..10] of byte;
          AltPrefix: array[1..10] of integer;
-         Spare1   : array[1..10] of integer;
+         IdFormat : integer;
+         Spare1   : array[1..9] of integer;
          fpos     : array[1..40] of integer;
          Spare2   : array[1..15] of integer;
          flen     : array[1..40] of integer;
@@ -468,6 +470,7 @@ if fileexists(Gcatpath+slashchar+catname+'.hdr') then begin
   catheader.IxKeylen:=hdr.IxKeylen;
   catheader.AltName:=hdr.AltName;
   catheader.AltPrefix:=hdr.AltPrefix;
+  catheader.IdFormat:=hdr.IdFormat;
   catheader.Spare1:=hdr.Spare1;
   catheader.fpos:=hdr.fpos;
   catheader.Spare2:=hdr.Spare2;
@@ -551,6 +554,11 @@ filter:=(cattype=ctBin);
 end;
 
 Function GetRecCard(p: integer):cardinal ;
+begin
+  move(datarec[catheader.fpos[p]-1],result,catheader.flen[p]);
+end;
+
+Function GetRecQWord(p: integer):QWord ;
 begin
   move(datarec[catheader.fpos[p]-1],result,catheader.flen[p]);
 end;
@@ -861,7 +869,12 @@ ctBin : begin  // binary catalog
     lin.dec:=GetRecCard(2)/3600000-90;
     case catversion of
     rtstar : begin  // Star 1
-        if catheader.flen[3]>0 then lin.star.id:=GetRecString(3);
+        if catheader.flen[3]>0 then begin
+         if catheader.IdFormat=0 then
+           lin.star.id:=GetRecString(3)
+         else
+           lin.star.id:=IntToStr(GetRecQWord(3));
+        end;
         if catheader.flen[4]>0 then begin lin.star.magv:=GetRecSmallint(4)/1000; if lin.star.magv>32 then lin.star.magv:=99;end else lin.star.magv:=99;
         if catheader.flen[5]>0 then begin lin.star.b_v:=GetRecSmallint(5)/1000;  if lin.star.b_v>32  then lin.star.b_v:=99.9;end else lin.star.b_v:=99.9;
         if catheader.flen[6]>0 then begin lin.star.magb:=GetRecSmallint(6)/1000; if lin.star.magb>32 then lin.star.magb:=99;end else lin.star.magb:=99;
@@ -1177,7 +1190,12 @@ if ok then begin
     lin.dec:=GetRecCard(2)/3600000-90;
     case catversion of
     rtstar : begin  // Star 1
-        if catheader.flen[3]>0 then lin.star.id:=GetRecString(3);
+        if catheader.flen[3]>0 then begin
+         if catheader.IdFormat=0 then
+           lin.star.id:=GetRecString(3)
+         else
+           lin.star.id:=IntToStr(GetRecQWord(3));
+        end;
         if catheader.flen[4]>0 then begin lin.star.magv:=GetRecSmallint(4)/1000; if lin.star.magv>32 then lin.star.magv:=99;end else lin.star.magv:=99;;
         if catheader.flen[5]>0 then begin lin.star.b_v:=GetRecSmallint(5)/1000;  if lin.star.b_v>32  then lin.star.b_v:=99.9;end else lin.star.b_v:=99.9;
         if catheader.flen[6]>0 then begin lin.star.magb:=GetRecSmallint(6)/1000; if lin.star.magb>32 then lin.star.magb:=99;end else lin.star.magb:=99;
