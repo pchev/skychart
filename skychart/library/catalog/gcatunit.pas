@@ -114,29 +114,30 @@ GCatrec = packed record
           options  : TCatoption;
           end;
 TCatHeader = packed record
-         hdrl     : Integer;
+         hdrl     : Longint;
          version  : array[0..7] of char;
          ShortName: TSname;
          LongName : array[0..49] of char;
-         reclen   : Integer;
-         FileNum  : Integer;
+         reclen   : Longint;
+         FileNum  : Longint;
          Equinox  : double;
          Epoch    : double;
          MagMax   : double;
-         Size     : Integer;
-         Units    : Integer;
-         ObjType  : Integer;
-         LogSize  : Integer;
+         Size     : Longint;
+         Units    : Longint;
+         ObjType  : Longint;
+         LogSize  : Longint;
          UsePrefix: byte;
          IxKeylen : byte;
          AltName  : array[1..10] of byte;
-         AltPrefix: array[1..10] of integer;
-         IdFormat : integer;
-         Spare1   : array[1..9] of integer;
-         fpos     : array[1..40] of integer;
-         Spare2   : array[1..15] of integer;
-         flen     : array[1..40] of integer;
-         Spare3   : array[1..15] of integer;
+         AltPrefix: array[1..10] of Longint;
+         IdFormat : Longint;
+         HighPrecPM:LongBool;
+         Spare1   : array[1..8] of Longint;
+         fpos     : array[1..40] of Longint;
+         Spare2   : array[1..15] of Longint;
+         flen     : array[1..40] of Longint;
+         Spare3   : array[1..15] of Longint;
          flabel   : Tlabellst;
          TxtFileName: array[0..39] of char;
          RAmode   : byte;
@@ -145,29 +146,30 @@ TCatHeader = packed record
          Spare4   : array[1..19,0..8] of char;
          end;
 TFileHeader = packed record
-         hdrl     : Integer;
+         hdrl     : Longint;
          version  : array[0..7] of char;
          ShortName: TSname;
          LongName : array[0..49] of char;
-         reclen   : Integer;
-         FileNum  : Integer;
+         reclen   : Longint;
+         FileNum  : Longint;
          Equinox  : double;
          Epoch    : double;
          MagMax   : double;
-         Size     : Integer;
-         Units    : Integer;
-         ObjType  : Integer;
-         LogSize  : Integer;
+         Size     : Longint;
+         Units    : Longint;
+         ObjType  : Longint;
+         LogSize  : Longint;
          UsePrefix: byte;
          IxKeylen : byte;
          AltName  : array[1..10] of byte;
-         AltPrefix: array[1..10] of integer;
-         IdFormat : integer;
-         Spare1   : array[1..9] of integer;
-         fpos     : array[1..40] of integer;
-         Spare2   : array[1..15] of integer;
-         flen     : array[1..40] of integer;
-         Spare3   : array[1..15] of integer;
+         AltPrefix: array[1..10] of Longint;
+         IdFormat : Longint;
+         HighPrecPM:LongBool;
+         Spare1   : array[1..8] of Longint;
+         fpos     : array[1..40] of Longint;
+         Spare2   : array[1..15] of Longint;
+         flen     : array[1..40] of Longint;
+         Spare3   : array[1..15] of Longint;
          flabel   : array[1..35,0..10] of char;
          TxtFileName: array[0..39] of char;
          RAmode   : byte;
@@ -177,11 +179,11 @@ TFileHeader = packed record
          end;
 TCatHdrInfo = record
          neblst: array[1..15] of shortstring;   // !! keep shortstring here !!
-         nebtype: array[1..15] of integer;
+         nebtype: array[1..15] of Longint;
          nebunit: array[1..3] of shortstring;
-         nebunits: array[1..3] of integer;
+         nebunits: array[1..3] of Longint;
          Linelst: array[1..4] of shortstring;
-         LineType: array[1..4] of integer;
+         LineType: array[1..4] of Longint;
          Colorlst: array[1..10] of shortstring;
          Color: array[1..10] of Cardinal;
          calc : array[0..40,1..2] of double;
@@ -471,6 +473,7 @@ if fileexists(Gcatpath+slashchar+catname+'.hdr') then begin
   catheader.AltName:=hdr.AltName;
   catheader.AltPrefix:=hdr.AltPrefix;
   catheader.IdFormat:=hdr.IdFormat;
+  catheader.HighPrecPM:=hdr.HighPrecPM;
   catheader.Spare1:=hdr.Spare1;
   catheader.fpos:=hdr.fpos;
   catheader.Spare2:=hdr.Spare2;
@@ -880,10 +883,17 @@ ctBin : begin  // binary catalog
         if catheader.flen[6]>0 then begin lin.star.magb:=GetRecSmallint(6)/1000; if lin.star.magb>32 then lin.star.magb:=99;end else lin.star.magb:=99;
         if catheader.flen[7]>0 then begin lin.star.magr:=GetRecSmallint(7)/1000; if lin.star.magr>32 then lin.star.magr:=99;end else lin.star.magr:=99;
         if catheader.flen[8]>0 then lin.star.sp:=GetRecString(8);
-        if catheader.flen[9]>0 then lin.star.pmra:=GetRecSmallint(9)/1000;
-        if catheader.flen[10]>0 then lin.star.pmdec:=GetRecSmallint(10)/1000;
+        if catheader.HighPrecPM then begin
+          if catheader.flen[9]>0 then lin.star.pmra:=GetRecSingle(9);
+          if catheader.flen[10]>0 then lin.star.pmdec:=GetRecSingle(10);
+          if catheader.flen[12]>0 then lin.star.px:=GetRecSingle(12);
+        end
+        else begin
+          if catheader.flen[9]>0 then lin.star.pmra:=GetRecSmallint(9)/1000;
+          if catheader.flen[10]>0 then lin.star.pmdec:=GetRecSmallint(10)/1000;
+          if catheader.flen[12]>0 then lin.star.px:=GetRecSmallint(12)/10000;
+        end;
         if catheader.flen[11]>0 then lin.star.epoch:=GetRecSingle(11);
-        if catheader.flen[12]>0 then lin.star.px:=GetRecSmallint(12)/10000;
         if catheader.flen[13]>0 then lin.star.comment:=GetRecString(13);
         if lin.star.magv>90 then begin lin.star.magv:=lin.star.magb; lin.options.flabel[lOffset+vsMagv]:=lin.options.flabel[lOffset+vsMagb]; end;
         if lin.star.magv>90 then begin lin.star.magv:=lin.star.magr; lin.options.flabel[lOffset+vsMagv]:=lin.options.flabel[lOffset+vsMagr]; end;
@@ -1201,10 +1211,17 @@ if ok then begin
         if catheader.flen[6]>0 then begin lin.star.magb:=GetRecSmallint(6)/1000; if lin.star.magb>32 then lin.star.magb:=99;end else lin.star.magb:=99;
         if catheader.flen[7]>0 then begin lin.star.magr:=GetRecSmallint(7)/1000; if lin.star.magr>32 then lin.star.magr:=99;end else lin.star.magr:=99;
         if catheader.flen[8]>0 then lin.star.sp:=GetRecString(8);
-        if catheader.flen[9]>0 then lin.star.pmra:=GetRecSmallint(9)/1000;
-        if catheader.flen[10]>0 then lin.star.pmdec:=GetRecSmallint(10)/1000;
+        if catheader.HighPrecPM then begin
+          if catheader.flen[9]>0 then lin.star.pmra:=GetRecSingle(9);
+          if catheader.flen[10]>0 then lin.star.pmdec:=GetRecSingle(10);
+          if catheader.flen[12]>0 then lin.star.px:=GetRecSingle(12);
+        end
+        else begin
+          if catheader.flen[9]>0 then lin.star.pmra:=GetRecSmallint(9)/1000;
+          if catheader.flen[10]>0 then lin.star.pmdec:=GetRecSmallint(10)/1000;
+          if catheader.flen[12]>0 then lin.star.px:=GetRecSmallint(12)/10000;
+        end;
         if catheader.flen[11]>0 then lin.star.epoch:=GetRecSingle(11);
-        if catheader.flen[12]>0 then lin.star.px:=GetRecSmallint(12)/10000;
         if catheader.flen[13]>0 then lin.star.comment:=GetRecString(13);
         if lin.star.magv>90 then begin lin.star.magv:=lin.star.magb; lin.options.flabel[lOffset+vsMagv]:=lin.options.flabel[lOffset+vsMagb]; end;
         if lin.star.magv>90 then begin lin.star.magv:=lin.star.magr; lin.options.flabel[lOffset+vsMagv]:=lin.options.flabel[lOffset+vsMagr]; end;

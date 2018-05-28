@@ -3365,7 +3365,7 @@ object f_catgen: Tf_catgen
         object IdentifierFormat: TRadioGroup
           Left = 4
           Height = 64
-          Top = 16
+          Top = 8
           Width = 335
           AutoFill = True
           Caption = 'Store star identifier'
@@ -3385,6 +3385,14 @@ object f_catgen: Tf_catgen
             'as 64bit integer'
           )
           TabOrder = 0
+        end
+        object HighPrecPM: TCheckBox
+          Left = 10
+          Height = 21
+          Top = 81
+          Width = 217
+          Caption = 'High precision proper motion '
+          TabOrder = 1
         end
       end
       object Label2: TLabel
@@ -3555,10 +3563,11 @@ object f_catgen: Tf_catgen
           'RA'
           'DEC'
         )
-        ItemHeight = 21
+        ItemHeight = 0
         OnKeyUp = FieldListKeyUp
         OnMouseUp = FieldListMouseUp
         TabOrder = 0
+        TopIndex = -1
         Data = {
           020000000000
         }

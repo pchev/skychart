@@ -3509,12 +3509,12 @@ begin
         Desc := Desc + trim(rec.options.flabel[lOffset + vsSp]) + dp + rec.star.sp + tab;
       if rec.star.valid[vsPmra] then
       begin
-        str(rad2deg * 3600 * 1000 * rec.star.pmra: 6: 0, txt);
+        str(rad2deg * 3600 * 1000 * rec.star.pmra: 6: 3, txt);
         Desc := Desc + trim(rec.options.flabel[lOffset + vsPmra]) + dp + txt + b + '[mas/y]' + tab;
       end;
       if rec.star.valid[vsPmdec] then
       begin
-        str(rad2deg * 3600 * 1000 * rec.star.pmdec: 6: 0, txt);
+        str(rad2deg * 3600 * 1000 * rec.star.pmdec: 6: 3, txt);
         Desc := Desc + trim(rec.options.flabel[lOffset + vsPmdec]) + dp + txt + b + '[mas/y]' + tab;
       end;
       if rec.star.valid[vsEpoch] then
@@ -3525,7 +3525,7 @@ begin
       if rec.star.valid[vsPx] then
       begin
         cfgsc.FindPX := rec.star.px;
-        str(rec.star.px * 1000: 6: 1, txt);
+        str(rec.star.px * 1000: 6: 3, txt);
         Desc := Desc + trim(rec.options.flabel[lOffset + vsPx]) + dp + txt + b + '[mas]' + tab;
         if rec.star.px > 0 then
         begin

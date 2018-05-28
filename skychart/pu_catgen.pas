@@ -43,6 +43,7 @@ type
   Tf_catgen = class(TForm)
     Button13: TButton;
     CBPrefixName: TCheckBox;
+    HighPrecPM: TCheckBox;
     FieldPrefixLabel: TCheckBox;
     UpdateURL: TEdit;
     StarParameters: TGroupBox;
@@ -1012,7 +1013,7 @@ var
   buf: shortstring;
   CatPrefix: boolean;
 begin
-  for i := 1 to 9 do
+  for i := 1 to 8 do
     catheader.Spare1[i] := 0;
   for i := 1 to 15 do
     catheader.Spare2[i] := 0;
@@ -1106,6 +1107,7 @@ begin
   catheader.Equinox := floatedit1.Value;
   catheader.Epoch := floatedit3.Value;
   catheader.IdFormat:=IdentifierFormat.ItemIndex;
+  catheader.HighPrecPM:=HighPrecPM.Checked;
   if catheader.version = 'CDCNEB 1' then
   begin
     catheader.MagMax := floatedit2.Value;
@@ -1167,15 +1169,11 @@ begin
     begin     // Stars
       if FieldList.Checked[nextpos + 0] then
       begin
+        catheader.fpos[n] := curpos;
         if IdentifierFormat.ItemIndex=0 then
-        begin
-          catheader.fpos[n] := curpos;
-          catheader.flen[n] := textpos[nextpos + 0, 2];
-        end
-        else begin
-          catheader.fpos[n] := curpos;
+          catheader.flen[n] := textpos[nextpos + 0, 2]
+        else
           catheader.flen[n] := sizeof(QWord);
-        end;
       end;// ID
       ixlen := catheader.flen[n];
       if ixlen > 0 then
@@ -1228,14 +1226,20 @@ begin
       if FieldList.Checked[nextpos + 6] then
       begin
         catheader.fpos[n] := curpos;
-        catheader.flen[n] := sizeof(smallint);
+        if HighPrecPM.Checked then
+           catheader.flen[n] := sizeof(single)
+        else
+           catheader.flen[n] := sizeof(smallint);
       end;// pmAR
       curpos := curpos + catheader.flen[n];
       Inc(n);
       if FieldList.Checked[nextpos + 7] then
       begin
         catheader.fpos[n] := curpos;
-        catheader.flen[n] := sizeof(smallint);
+        if HighPrecPM.Checked then
+           catheader.flen[n] := sizeof(single)
+        else
+           catheader.flen[n] := sizeof(smallint);
       end;// pmDE
       curpos := curpos + catheader.flen[n];
       Inc(n);
@@ -1244,12 +1248,16 @@ begin
         catheader.fpos[n] := curpos;
         catheader.flen[n] := sizeof(single);
       end;// pos epoch
+
       curpos := curpos + catheader.flen[n];
       Inc(n);
       if FieldList.Checked[nextpos + 9] then
       begin
         catheader.fpos[n] := curpos;
-        catheader.flen[n] := sizeof(smallint);
+        if HighPrecPM.Checked then
+           catheader.flen[n] := sizeof(single)
+        else
+           catheader.flen[n] := sizeof(smallint);
       end;// Px
       curpos := curpos + catheader.flen[n];
       Inc(n);
@@ -1658,7 +1666,7 @@ var
   curpos: integer;
   buf: shortstring;
 begin
-  for i := 1 to 9 do
+  for i := 1 to 8 do
     catheader.Spare1[i] := 0;
   for i := 1 to 15 do
     catheader.Spare2[i] := 0;
@@ -2445,16 +2453,25 @@ begin
             PutRecString(GetString(nextpos), 8);  // sp
           Inc(nextpos);
           if catheader.flen[9] > 0 then
-            PutRecSmallint(round(Getfloat(nextpos, 0) * 1000), 9);   // pmar
+            if HighPrecPM.Checked then
+               PutRecSingle(Getfloat(nextpos, 0), 9)   // pmar
+            else
+               PutRecSmallint(round(Getfloat(nextpos, 0) * 1000), 9);   // pmar
           Inc(nextpos);
           if catheader.flen[10] > 0 then
-            PutRecSmallint(round(Getfloat(nextpos, 0) * 1000), 10);   // pmde
+            if HighPrecPM.Checked then
+               PutRecSingle(Getfloat(nextpos, 0), 10)   // pmde
+            else
+               PutRecSmallint(round(Getfloat(nextpos, 0) * 1000), 10);   // pmde
           Inc(nextpos);
           if catheader.flen[11] > 0 then
             PutRecSingle(Getfloat(nextpos, 0), 11);   // pos epoch
           Inc(nextpos);
           if catheader.flen[12] > 0 then
-            PutRecSmallint(round(Getfloat(nextpos, 0) * 10000), 12);  // px
+            if HighPrecPM.Checked then
+               PutRecSingle(Getfloat(nextpos, 0), 12)  // px
+            else
+               PutRecSmallint(round(Getfloat(nextpos, 0) * 10000), 12);  // px
           Inc(nextpos);
           if catheader.flen[13] > 0 then
             PutRecString(GetString(nextpos), 13); // com
