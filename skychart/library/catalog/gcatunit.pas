@@ -133,7 +133,8 @@ TCatHeader = packed record
          AltPrefix: array[1..10] of Longint;
          IdFormat : Longint;
          HighPrecPM:LongBool;
-         Spare1   : array[1..8] of Longint;
+         IdPrefix : LongBool;
+         Spare1   : array[1..7] of Longint;
          fpos     : array[1..40] of Longint;
          Spare2   : array[1..15] of Longint;
          flen     : array[1..40] of Longint;
@@ -165,7 +166,8 @@ TFileHeader = packed record
          AltPrefix: array[1..10] of Longint;
          IdFormat : Longint;
          HighPrecPM:LongBool;
-         Spare1   : array[1..8] of Longint;
+         IdPrefix : LongBool;
+         Spare1   : array[1..7] of Longint;
          fpos     : array[1..40] of Longint;
          Spare2   : array[1..15] of Longint;
          flen     : array[1..40] of Longint;
@@ -474,6 +476,7 @@ if fileexists(Gcatpath+slashchar+catname+'.hdr') then begin
   catheader.AltPrefix:=hdr.AltPrefix;
   catheader.IdFormat:=hdr.IdFormat;
   catheader.HighPrecPM:=hdr.HighPrecPM;
+  catheader.IdPrefix:=hdr.IdPrefix;
   catheader.Spare1:=hdr.Spare1;
   catheader.fpos:=hdr.fpos;
   catheader.Spare2:=hdr.Spare2;
@@ -877,6 +880,7 @@ ctBin : begin  // binary catalog
            lin.star.id:=GetRecString(3)
          else
            lin.star.id:=IntToStr(GetRecQWord(3));
+         if catheader.IdPrefix then lin.star.id:=lin.options.flabel[lOffset+vsId]+' '+lin.star.id;
         end;
         if catheader.flen[4]>0 then begin lin.star.magv:=GetRecSmallint(4)/1000; if lin.star.magv>32 then lin.star.magv:=99;end else lin.star.magv:=99;
         if catheader.flen[5]>0 then begin lin.star.b_v:=GetRecSmallint(5)/1000;  if lin.star.b_v>32  then lin.star.b_v:=99.9;end else lin.star.b_v:=99.9;

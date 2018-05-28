@@ -2900,10 +2900,10 @@ object f_catgen: Tf_catgen
     Height = 438
     Top = 0
     Width = 389
-    ActivePage = TabSheet2
+    ActivePage = TabSheet3
     Align = alClient
     ShowTabs = False
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 0
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
@@ -3563,11 +3563,10 @@ object f_catgen: Tf_catgen
           'RA'
           'DEC'
         )
-        ItemHeight = 0
+        ItemHeight = 21
         OnKeyUp = FieldListKeyUp
         OnMouseUp = FieldListMouseUp
         TabOrder = 0
-        TopIndex = -1
         Data = {
           020000000000
         }
@@ -3643,6 +3642,14 @@ object f_catgen: Tf_catgen
         Caption = 'Prefix the name with the label '
         OnClick = FieldPrefixLabelClick
         TabOrder = 7
+      end
+      object IdPrefixLabel: TCheckBox
+        Left = 18
+        Height = 21
+        Top = 300
+        Width = 224
+        Caption = 'Prefix the name with the label '
+        TabOrder = 8
       end
     end
     object TabSheet4: TTabSheet

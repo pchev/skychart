@@ -43,6 +43,7 @@ type
   Tf_catgen = class(TForm)
     Button13: TButton;
     CBPrefixName: TCheckBox;
+    IdPrefixLabel: TCheckBox;
     HighPrecPM: TCheckBox;
     FieldPrefixLabel: TCheckBox;
     UpdateURL: TEdit;
@@ -849,7 +850,7 @@ begin
     SampleRow.SelStart := 0;
     SampleRow.SelLength := 0;
   end;
-  ;
+  IdPrefixLabel.Visible := ((i - lra - lde) = 1);
   if (i > l_fixe) and (i <= l_fixe + l_sup) then
   begin
     FieldAltName.Visible := True;
@@ -1013,7 +1014,7 @@ var
   buf: shortstring;
   CatPrefix: boolean;
 begin
-  for i := 1 to 8 do
+  for i := 1 to 7 do
     catheader.Spare1[i] := 0;
   for i := 1 to 15 do
     catheader.Spare2[i] := 0;
@@ -1108,6 +1109,7 @@ begin
   catheader.Epoch := floatedit3.Value;
   catheader.IdFormat:=IdentifierFormat.ItemIndex;
   catheader.HighPrecPM:=HighPrecPM.Checked;
+  catheader.IdPrefix:=IdPrefixLabel.Checked;
   if catheader.version = 'CDCNEB 1' then
   begin
     catheader.MagMax := floatedit2.Value;
@@ -1666,7 +1668,7 @@ var
   curpos: integer;
   buf: shortstring;
 begin
-  for i := 1 to 8 do
+  for i := 1 to 7 do
     catheader.Spare1[i] := 0;
   for i := 1 to 15 do
     catheader.Spare2[i] := 0;
@@ -2963,6 +2965,7 @@ begin
       ini.writeInteger('Page3', 'altname' + IntToStr(i), altname[i]);
     for i := 1 to l_sup do
       ini.WriteInteger('Page3', 'altprefix' + IntToStr(i), altprefix[i]);
+    ini.writeBool('Page3', 'idprefix', IdPrefixLabel.Checked);
     ini.writeInteger('Page4', 'numfile', OutputFileNumber.ItemIndex);
     ini.writeString('Page4', 'ouputdir', ExtractRelativepath(
       prjdir, slash(OutputDirectory.Text)));
@@ -3073,6 +3076,7 @@ begin
 
     for i := 1 to l_sup do
       altprefix[i] := ini.ReadInteger('Page3', 'altprefix' + IntToStr(i), altprefix[i]);
+    IdPrefixLabel.Checked := ini.readBool('Page3', 'idprefix', false);
     OutputFileNumber.ItemIndex := ini.readInteger('Page4', 'numfile', OutputFileNumber.ItemIndex);
     buf := ini.readString('Page4', 'ouputdir', '');
     chdir(prjdir);
