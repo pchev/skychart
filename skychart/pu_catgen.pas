@@ -2937,6 +2937,8 @@ begin
     ini.writeFloat('Page2', 'equinox', FloatEdit1.Value);
     ini.writeFloat('Page2', 'epoch', FloatEdit3.Value);
     ini.writeFloat('Page2', 'magmax', FloatEdit2.Value);
+    ini.writeInteger('Page2', 'identifierformat', IdentifierFormat.ItemIndex);
+    ini.writeBool('Page2', 'highprecpm', HighPrecPM.Checked);
     ini.writeInteger('Page2', 'nebsize', NebDefaultSize.Value);
     ini.writeInteger('Page2', 'nebunit', NebDefaultUnit.ItemIndex);
     ini.writeInteger('Page2', 'nebtype', NebDefaultType.ItemIndex);
@@ -3035,6 +3037,8 @@ begin
     FloatEdit1.Value := ini.readFloat('Page2', 'equinox', FloatEdit1.Value);
     FloatEdit3.Value := ini.readFloat('Page2', 'epoch', FloatEdit3.Value);
     FloatEdit2.Value := ini.readFloat('Page2', 'magmax', FloatEdit2.Value);
+    IdentifierFormat.ItemIndex := ini.readInteger('Page2', 'identifierformat', 0);
+    HighPrecPM.Checked := ini.readBool('Page2', 'highprecpm', false);
     NebDefaultSize.Value := ini.readInteger('Page2', 'nebsize', NebDefaultSize.Value);
     NebDefaultUnit.ItemIndex := ini.readInteger('Page2', 'nebunit', NebDefaultUnit.ItemIndex);
     NebDefaultUnitChange(self);
