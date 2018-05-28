@@ -5865,7 +5865,7 @@ begin
     rec.star.magv:=MAG_290/10;
     rec.options.LongName:=trim(copy(u_290.database2,1,108));
     if u_290.naam2='' then
-      rec.star.id:=rec.options.ShortName
+      rec.star.id:=prepare_IAU_designation(ra2,dec2)
     else
       rec.star.id:=u_290.naam2;
   end;

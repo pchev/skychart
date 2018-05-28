@@ -147,6 +147,7 @@ function CompareVersion(v1, v2: string): integer;
 function strim(const S: string): string;
 procedure DeleteFilesInDir(dir: string);
 function ShowModalForm(f: TForm; SetFocus: boolean = False): TModalResult;
+function prepare_IAU_designation(rax,decx :double):string;
 
 {$ifdef unix}
 function ExecFork(cmd: string; p1: string = ''; p2: string = ''; p3: string = '';
@@ -3669,5 +3670,41 @@ function ShowModalForm(f: TForm; SetFocus: boolean = False): TModalResult;
 begin
   Result := f.ShowModal;
 end;
+
+Function LeadingZero(w : integer) : String;
+  var
+    s : String;
+  begin
+    Str(w:0,s);
+    if Length(s) = 1 then
+      s := '0' + s;
+    LeadingZero := s;
+  end;
+
+function prepare_IAU_designation(rax,decx :double):string;{radialen to text hhmmss.s+ddmmss  format}
+  var
+    hh,mm,ss,ds  :integer;
+    g,m,s  :integer;
+    sign   : char;
+begin
+   {RA}
+   rax:=rax+pi*2*0.05/(24*60*60); {add 1/10 of half second to get correct rounding and not 7:60 results as with round}
+   rax:=rax*12/pi; {make hours}
+   hh:=trunc(rax);
+   mm:=trunc((rax-hh)*60);
+   ss:=trunc((rax-hh-mm/60)*3600);
+   ds:=trunc((rax-hh-mm/60-ss/3600)*36000);
+
+   {DEC}
+   if decx<0 then sign:='-' else sign:='+';
+   decx:=abs(decx)+pi*2*0.5/(360*60*60); {add half second to get correct rounding and not 7:60 results as with round}
+   decx:=decx*180/pi; {make degrees}
+   g:=trunc(decx);
+   m:=trunc((decx-g)*60);
+   s:=trunc((decx-g-m/60)*3600);
+
+   result:=leadingzero(hh)+leadingzero(mm)+leadingzero(ss)+'.'+char(ds+48)+sign+leadingzero(g)+leadingzero(m)+leadingzero(s);
+end;
+
 
 end.
