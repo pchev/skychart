@@ -5,6 +5,7 @@ shortname=Star
 longname=Extended Hipparcos Compilation
 numfiles=1
 inputfiles0=cdc_xhip.dat
+caturl=
 
 [Page2]
 ratype=3
@@ -12,6 +13,8 @@ dectype=1
 equinox=2000
 epoch=1991.25
 magmax=10
+identifierformat=0
+highprecpm=1
 nebsize=0
 nebunit=1
 nebtype=14
@@ -300,6 +303,7 @@ nebtype12=***,3STAR
 nebtype13=Ast,ASTER,4STAR,5STAR,6STAR,7STAR,8STAR
 nebtype14=-,PD,NONEX
 nebtype15=,?
+nebtype16=Circle
 unit1=d,°
 unit2=m,'
 unit3=s,"
