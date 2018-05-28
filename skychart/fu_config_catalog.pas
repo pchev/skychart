@@ -56,6 +56,10 @@ type
     hnbase3: TDirectoryEdit;
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
+    Label119: TLabel;
+    Label120: TLabel;
+    Label122: TLabel;
+    Label21: TLabel;
     Label7: TLabel;
     Panel1: TPanel;
     sh2box: TCheckBox;
