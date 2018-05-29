@@ -2436,7 +2436,7 @@ begin
             if IdentifierFormat.ItemIndex=0 then
                PutRecString(GetString(nextpos), 3)      // string id
             else
-               PutRecQword(round(GetQword(nextpos)), 3); // qword id
+               PutRecQword(GetQword(nextpos), 3); // qword id
           end;
           Inc(nextpos);
           if catheader.flen[4] > 0 then
