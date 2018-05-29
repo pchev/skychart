@@ -2082,6 +2082,7 @@ begin
     // B-V = 0.850 * (BT-VT)
 
     // test in range for the standard Gaia relation
+    if (rec.star.magb<90)and(rec.star.magr<90) then begin
     if ((rec.star.magb-rec.star.magr)>0) and ((rec.star.magb-rec.star.magr) < 2.5) then begin
       // transform Gb-Gr to Bt-Vt
       rec.star.b_v := 0.00599 + 0.42361 * (rec.star.magb-rec.star.magr) + 0.7394 * (rec.star.magb-rec.star.magr)**2 - 0.22803 * (rec.star.magb-rec.star.magr)**3;
@@ -2097,9 +2098,10 @@ begin
     end
     else
       // Out of range for the standard Gaia relation, use a safe value.
-      rec.star.b_v:=rec.star.magv-rec.star.magr;
+      rec.star.b_v:=0.850 * (rec.star.magv-rec.star.magr);
     // mark b-v as valid
     rec.star.valid[vsB_v]:=true;
+    end;
   end;
 end;
 
