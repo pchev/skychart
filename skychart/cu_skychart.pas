@@ -1458,10 +1458,6 @@ begin
               al := laBottomLeft
             else
               al := laBottomRight;
-            if (rec.star.b_v > 0.28) and (rec.star.b_v < 0.30) then
-            begin
-              y1 := 0;
-            end;
             if cfgsc.DistLabel and rec.star.valid[vsPx] and (rec.star.px > 0) then
             begin
               str(parsec2ly / rec.star.px: 5: 0, dlbl);
