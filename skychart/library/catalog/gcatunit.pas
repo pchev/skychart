@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  skylibcat, sysutils;
+  skylibcat, sysutils, Classes;
 
 const
  rtStar = 1;  rtVar  = 2; rtDbl  = 3; rtNeb  = 4; rtlin   = 5;
@@ -234,7 +234,7 @@ var
    emptyrec : gcatrec;
    datarec : array [0..4096] of byte;
    dataline : string;
-   f : file ;
+   mem: TMemoryStream;
    ft: textfile;
    hemis : char;
    zone,Sm,nSM,catversion,cattype : integer;
@@ -687,7 +687,7 @@ begin
 try
 if FileBIsOpen then begin
   FileBIsOpen:=false;
-  closefile(f);
+  mem.free;
 end;
 if FileTIsOpen then begin
   FileTIsOpen:=false;
@@ -705,11 +705,12 @@ if not FileExists(nomfich) then begin ; ok:=false ; exit; end;
 FileMode:=0;
 if cattype=ctBin then begin
    try
-   AssignFile(f,nomfich);
+   mem:=TMemoryStream.Create;
+   mem.LoadFromFile(nomfich);
+   mem.Position:=0;
    FileBIsOpen:=true;
-   reset(f,1);
    ok:=true;
-   if filesize(f)=0 then NextGCat(ok);
+   if mem.Size=0 then NextGCat(ok);
    except
      ok:=false;            // catgen running?
      FileBIsOpen:=false;
@@ -764,7 +765,7 @@ if onCache and (CacheZone[CurCache,sm]=0) then begin
    rtlin:  SetLength(CacheLine[CurCache,SM],n+1);
  end;
  CacheZone[CurCache,sm]:=n;
- reset(f,1);
+ mem.Position:=0;
 end;
 end;
 
@@ -864,12 +865,12 @@ ctBin : begin  // binary catalog
     ok:=false;
     exit;
   end;
-  if eof(f) then begin
+  if mem.Position>=mem.Size then begin
      if MultiRegion then NextGCat(ok)
         else ok:=false;
   end;
   if ok then begin
-   blockread(f,datarec,catheader.reclen,n);
+   n:=mem.Read(datarec,catheader.reclen);
    if n=catheader.reclen then begin
     lin.ra:=GetRecCard(1)/3600000;
     lin.dec:=GetRecCard(2)/3600000-90;
@@ -1195,10 +1196,10 @@ if not FileBIsOpen then begin
   ok:=false;
   exit;
 end;
-Seek(f,recnum*catheader.reclen);
-ok:=not eof(f);
+mem.Position:=recnum*catheader.reclen;
+ok:=not (mem.Position>=mem.Size);
 if ok then begin
-   blockread(f,datarec,catheader.reclen,n);
+   n:=mem.Read(datarec,catheader.reclen);
    if n=catheader.reclen then begin
     lin.ra:=GetRecCard(1)/3600000;
     lin.dec:=GetRecCard(2)/3600000-90;
