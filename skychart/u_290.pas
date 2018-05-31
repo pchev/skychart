@@ -55,7 +55,7 @@ const
 //   cos_telescope_dec, double variable should contains the cos(telescope_dec) to detect if star read is within the FOV diameter}
 //   maxmag [magnitude*10], double variable which specifies the maximum magnitude to be read. This is typical used in HNSKY if a star designation needs to be reported after a mouse click on it
 
-function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diameter:double; var ra2,dec2, mag2 : double): boolean;{star 290 file database search}
+function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diameter:double; var ra2,dec2, mag2, Bp_Rp : double): boolean;{star 290 file database search}
 
 
 
@@ -79,7 +79,7 @@ function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diam
 //The declinations are calculated by arcsin (1-1/289), arcsin(1-(1+8)/289), arcsin (1-(1+8+16)/289), arcsin(1-(1+8+16+24)/289)...
 
 type
-  hnskyhdr290_11 = packed record {This format is normally not used}
+  hnskyhdr290_11 = packed record {This format is normally not used. Sometimes used for unsorted databases}
              nr32: integer; {Star number containing the Tycho/GSC or UCAC4 designation}
              ra7 : byte;    {The RA is stored as a 3 bytes word. The DEC position is stored as a two's complement (=standard), three bytes integer. The resolution of this three byte storage will be for RA: 360*60*60/((256*256*256)-1) = 0.077 arc seconds. For the DEC value it will be: 90*60*60/((128*256*256)-1) = 0.039 arc seconds.}
              ra8 : byte;
@@ -109,22 +109,13 @@ type
              dec8: byte;
    end;
 
-  hnskyhdr290_7 = packed record  {This format is normally not used}
-             ra7 : byte;
-             ra8 : byte;
-             ra9 : byte;
-             dec7: byte;
-             dec8: byte;
-             dec9: shortint;
-             mag0: shortint;
-  end;
-  hnskyhdr290_6 = packed record  {Interim format normally not used}
+  hnskyhdr290_6 = packed record  {G16 for storing Bp-Rp}
              ra7 : byte; {The RA is stored as a 3 bytes word. The DEC position is stored as a two's complement (=standard), three bytes integer. The resolution of this three byte storage will be for RA: 360*60*60/((256*256*256)-1) = 0.077 arc seconds. For the DEC value it will be: 90*60*60/((128*256*256)-1) = 0.039 arc seconds.}
              ra8 : byte;
              ra9 : byte;
              dec7: byte;
              dec8: byte;
-             dec9: shortint;
+             b_r : shortint;{Gaia Bp-Rp}
    end;
   hnskyhdr290_5 = packed record  {Most compact format, used for Gaia}
               ra7 : byte;
@@ -790,7 +781,6 @@ var
   p11       : ^hnskyhdr290_11;	    { pointer to hns0kyrecord }
   p10       : ^hnskyhdr290_10;	    { pointer to hns0kyrecord }
   p9        : ^hnskyhdr290_9;	    { pointer to hns0kyrecord }
-  p7        : ^hnskyhdr290_7;	    { pointer to hns0kyrecord }
   p6        : ^hnskyhdr290_6;       { pointer to hns0kyrecord }
   p5        : ^hnskyhdr290_5;       { pointer to hns0kyrecord }
   dec9_storage: shortint;
@@ -825,6 +815,7 @@ end;
 // field_diameter [radians], FOV diameter of field of interest. This is ignored in searchmode=T}
 // ra, dec [radians],   reported star position
 // mag2 [magnitude*10]  reported star magnitude
+// Bp_Rp, Gaia (Bp-Rp)*10, only for G16 database. If no info available in Gaia, the value is set at -128 (-12.8*10)}
 // result [true/false]  if reported true then more stars are available. If false no more stars available.
 // extra outputs:
 //          naam2,  string containing the star Tycho/UCAC4 designation for record size above 7
@@ -833,7 +824,7 @@ end;
 //   area290 should be set at 290+1 before any read series
 //   cos_telescope_dec, double variable should contains the cos(telescope_dec) to detect if star read is within the FOV diameter}
 //   maxmag [magnitude*10], double variable which specifies the maximum magnitude to be read. This is typical used in HNSKY if a star designation needs to be reported after a mouse click on it
-function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diameter:double; var ra2,dec2, mag2 : double): boolean;{star 290 file database search}
+function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diameter:double; var ra2,dec2, mag2, Bp_Rp : double): boolean;{star 290 file database search}
             {searchmode=S screen update }
             {searchmode=M mouse click  search}
             {searchmode=T text search}
@@ -858,6 +849,7 @@ begin
          if file_open<>0 then closedatabase;
          nearbyarea:=false;
          naam2:=''; {clear for 5, 6 and 7 bytes records to prevent ghost names}
+         Bp_Rp:=-128;{assume no colour information is available or set to -128 for G17, G18 databases}
          cos_telescope_dec:=cos(telescope_dec);{here to save CPU time}
          required_range:=field_diameter/2+(17.04/2)*pi/180;{maximum distance to next 290 field center is 17.04 degrees}
 
@@ -918,32 +910,25 @@ begin
            end;
          end;
        end;{record size 5}
-    6: begin {record size 6}
-         with p6^ do
-         begin
-           ra_raw:=(ra7 + ra8 shl 8 +ra9 shl 16);{always required, fasted method}
-           if ra_raw=$FFFFFF  then  {special magnitude record is found}
-           begin
-             if dec9>-20 then mag2:=dec9 else  mag2:=256+dec9;{new magn 12.8 is -12.8, 12.9 = -12.7}
-            {magnitude is stored in mag2 till new magnitude record is found}
-            header_record:=true;
-           end
-           else
-           begin {normal record without magnitude}
-             ra2:= ra_raw*(pi*2  /((256*256*256)-1));
-             dec2:=((dec9 shl 16)+(dec8 shl 8)+dec7)*(pi*0.5/((128*256*256)-1));// dec2:=(dec7+(dec8 shl 8)+(dec9 shl 16))*(pi*0.5/((128*256*256)-1)); {FPC compiler makes mistake, put dec7 behind}
-             {The RA is stored as a 3 bytes word. The DEC position is stored as a two's complement (=standard), three bytes integer. The resolution of this three byte storage will be for RA: 360*60*60/((256*256*256)-1) = 0.077 arc seconds. For the DEC value it will be: 90*60*60/((128*256*256)-1) = 0.039 arc seconds.}
-           end;
-         end;
-       end;{record size 6}
-    7: begin {record size 7}
-         with p7^ do
-         begin
-           ra2:= (ra7 + ra8 shl 8 +ra9 shl 16)*(pi*2  /((256*256*256)-1));
-           dec2:=((dec9 shl 16)+(dec8 shl 8)+dec7)*(pi*0.5/((128*256*256)-1));// dec2:=(dec7+(dec8 shl 8)+(dec9 shl 16))*(pi*0.5/((128*256*256)-1)); {FPC compiler makes mistake, put dec7 behind}
-           if mag0>-20 then mag2:=mag0 else  mag2:=256+mag0;{new magn 12.8 is -12.8, 12.9 = -12.7}
-         end;
-       end;{record size 7}
+    6: begin {record size 6, new format 2018-5-31}
+          with p6^ do
+          begin
+            ra_raw:=(ra7 + ra8 shl 8 +ra9 shl 16);{always required, fasted method}
+            if ra_raw=$FFFFFF  then  {special magnitude record is found}
+            begin
+              mag2:=dec8-16;{new magn shifted 16 to make sirius and other positive}
+              {magnitude is stored in mag2 till new magnitude record is found}
+              dec9_storage:=dec7-128;{recover dec9 shortint and put it in storage}
+             header_record:=true;
+            end
+            else
+            begin {normal record without magnitude}
+              ra2:= ra_raw*(pi*2  /((256*256*256)-1));
+              dec2:=((dec9_storage shl 16)+(dec8 shl 8)+dec7)*(pi*0.5/((128*256*256)-1));// dec2:=(dec7+(dec8 shl 8)+(dec9 shl 16))*(pi*0.5/((128*256*256)-1)); {FPC compiler makes mistake, but dec7 behind}
+            end;
+            Bp_Rp:=b_r;{gaia (Bp-Rp)*10, if no info in Gaia, the value is set-128}
+          end;
+        end;{record size 6}
     9: begin {record size 9}
           with p9^ do
           begin
@@ -1046,7 +1031,6 @@ begin
   p11:= @buf2[1];	{ set pointer }
   p10:= @buf2[1];	{ set pointer }
   p9:= @buf2[1];	{ set pointer }
-  p7:= @buf2[1];	{ set pointer }
   p6:= @buf2[1];	{ set pointer }
   p5:= @buf2[1];	{ set pointer }
 end.

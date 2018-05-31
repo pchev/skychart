@@ -150,6 +150,7 @@ type
     procedure OpenGaiaPos(ar1, ar2, de1, de2: double; var ok: boolean);
     function NextGaiaLevel: boolean;
     function  GetGaia(var rec: GcatRec): boolean;
+    function GaiaBRtoBV(br:double):double;
     procedure FormatGaia(var rec: GcatRec);
     function  FindGaia(id: string; var ar, de: double): boolean;
 
@@ -5881,15 +5882,21 @@ end;
 
 function Tcatalog.Get290(var rec: GcatRec): boolean;
 var
-  ra2,dec2 : double;
+  ra2,dec2,Bp_Rp : double;
 begin
   rec := EmptyRec;
-  Result := readdatabase290('S', RA_290, DE_290, FOV_290, ra2,dec2, MAG_290);
+  Result := readdatabase290('S', RA_290, DE_290, FOV_290, ra2,dec2, MAG_290, Bp_Rp);
   if Result then
   begin
     rec.ra:=ra2;
     rec.dec:=dec2;
     rec.star.magv:=MAG_290/10;
+    if Bp_Rp>-128 then begin
+       rec.star.b_v:=GaiaBRtoBV(Bp_Rp/10);
+       rec.star.valid[vsB_v]:=true;
+    end
+    else
+       rec.star.valid[vsB_v]:=false;
     rec.options.LongName:=trim(copy(u_290.database2,1,108));
     if u_290.naam2='' then
       rec.star.id:=prepare_IAU_designation(ra2,dec2)
@@ -5912,6 +5919,50 @@ begin
   OpenGaiap(ar1, ar2, de1, de2, ok);
 end;
 
+function Tcatalog.GaiaBRtoBV(br:double):double;
+begin
+  // Compute approximate B-V from the Gaia magnitudes
+  // First try if we can use the color transformation relation given
+  // in the paper: Gaia Data Release 2 Photometric content and validation
+  // We use the relation for G-Vt and G-Bt to get a Tycho2 Bt-VT :
+  // validity : VT: −0.3 < (GBP−GRP) < 4.0 ; BT: 0 < (GBP−GRP) < 2.5
+  // G − VT = -0.01842 - 0.06629 * (GBP−GRP) - 0.2346 * (GBP−GRP)**2 + 0.02157 * (GBP−GRP)**3
+  // G − BT = -0.02441 - 0.4899  * (GBP−GRP) - 0.9740 * (GBP−GRP)**2 + 0.2496  * (GBP−GRP)**3
+  // thus:
+  // VT = G + 0.01842 + 0.06629 * (GBP−GRP) + 0.2346 * (GBP−GRP)**2 - 0.02157 * (GBP−GRP)**3
+  // BT = G + 0.02441 + 0.4899  * (GBP−GRP) + 0.9740 * (GBP−GRP)**2 - 0.2496  * (GBP−GRP)**3
+  // So for the color index:
+  // validity : 0 < (GBP−GRP) < 2.5
+  // BT-VT = 0.00599 + 0.42361 * (GBP−GRP) + 0.7394 * (GBP−GRP)**2 - 0.22803 * (GBP−GRP)**3
+  //
+  // Then convert Tycho2 BT-VT to B-V using the following relation:
+  // http://adsabs.harvard.edu/cgi-bin/nph-bib_query?bibcode=2006AJ....131.2360M&db_key=AST&data_type=HTML&format=&high=4447a24b6f18601
+  // for  -0.25 < (BT-VT) < 0.5  :
+  // B-V = (BT-VT) - 0.006 - 0.1069 * (BT-VT) + 0.1459 * (BT-VT)**2
+  // for 0.5 < (BT-VT) < 2.0  :
+  // B-V = (BT-VT) - 0.007813 * (BT-VT) - 0.1489 * (BT-VT)**2 + 0.03384 * (BT-VT)**3
+  // out of this range :
+  // B-V = 0.850 * (BT-VT)
+
+  // test in range for the standard Gaia relation
+  if ((br)>0) and ((br) < 2.5) then begin
+    // transform Gb-Gr to Bt-Vt
+    result := 0.00599 + 0.42361 * (br) + 0.7394 * (br*br) - 0.22803 * (br*br*br);
+    if (result>-0.25)and(result<0.5) then
+       // use Tycho2 relation for first range
+       result := result - 0.006 - 0.1069 * result  + 0.1459 * result*result
+    else if (result>0.5)and(result<2.0) then
+       // use Tycho2 relation for second range
+       result := result - 0.007813 * result - 0.1489 * result*result + 0.03384 * result*result*result
+    else
+       // Out of range for the Tycho2 relation, use a safe value
+       result := 0.850 * result;
+  end
+  else
+    // Out of range for the standard Gaia relation, use a safe value.
+    result:=0.5 * br;
+end;
+
 procedure Tcatalog.FormatGaia(var rec: GcatRec);
 var br: double;
 begin
@@ -5920,51 +5971,12 @@ begin
   rec.star.pmra := deg2rad * rec.star.pmra / 3600;
   rec.star.pmdec := deg2rad * rec.star.pmdec / 3600;
   rec.star.id:=rec.options.flabel[lOffset+vsId]+' '+rec.star.id;
-    // Compute approximate B-V from the Gaia magnitudes
-    // First try if we can use the color transformation relation given
-    // in the paper: Gaia Data Release 2 Photometric content and validation
-    // We use the relation for G-Vt and G-Bt to get a Tycho2 Bt-VT :
-    // validity : VT: −0.3 < (GBP−GRP) < 4.0 ; BT: 0 < (GBP−GRP) < 2.5
-    // G − VT = -0.01842 - 0.06629 * (GBP−GRP) - 0.2346 * (GBP−GRP)**2 + 0.02157 * (GBP−GRP)**3
-    // G − BT = -0.02441 - 0.4899  * (GBP−GRP) - 0.9740 * (GBP−GRP)**2 + 0.2496  * (GBP−GRP)**3
-    // thus:
-    // VT = G + 0.01842 + 0.06629 * (GBP−GRP) + 0.2346 * (GBP−GRP)**2 - 0.02157 * (GBP−GRP)**3
-    // BT = G + 0.02441 + 0.4899  * (GBP−GRP) + 0.9740 * (GBP−GRP)**2 - 0.2496  * (GBP−GRP)**3
-    // So for the color index:
-    // validity : 0 < (GBP−GRP) < 2.5
-    // BT-VT = 0.00599 + 0.42361 * (GBP−GRP) + 0.7394 * (GBP−GRP)**2 - 0.22803 * (GBP−GRP)**3
-    //
-    // Then convert Tycho2 BT-VT to B-V using the following relation:
-    // http://adsabs.harvard.edu/cgi-bin/nph-bib_query?bibcode=2006AJ....131.2360M&db_key=AST&data_type=HTML&format=&high=4447a24b6f18601
-    // for  -0.25 < (BT-VT) < 0.5  :
-    // B-V = (BT-VT) - 0.006 - 0.1069 * (BT-VT) + 0.1459 * (BT-VT)**2
-    // for 0.5 < (BT-VT) < 2.0  :
-    // B-V = (BT-VT) - 0.007813 * (BT-VT) - 0.1489 * (BT-VT)**2 + 0.03384 * (BT-VT)**3
-    // out of this range :
-    // B-V = 0.850 * (BT-VT)
-
-    // test in range for the standard Gaia relation
-    if (rec.star.magb<90)and(rec.star.magr<90) then begin
+  if (rec.star.magb<90)and(rec.star.magr<90) then begin
     br:=(rec.star.magb-rec.star.magr);
-    if ((br)>0) and ((br) < 2.5) then begin
-      // transform Gb-Gr to Bt-Vt
-      rec.star.b_v := 0.00599 + 0.42361 * (br) + 0.7394 * (br*br) - 0.22803 * (br*br*br);
-      if (rec.star.b_v>-0.25)and(rec.star.b_v<0.5) then
-         // use Tycho2 relation for first range
-         rec.star.b_v := rec.star.b_v - 0.006 - 0.1069 * rec.star.b_v  + 0.1459 * rec.star.b_v*rec.star.b_v
-      else if (rec.star.b_v>0.5)and(rec.star.b_v<2.0) then
-         // use Tycho2 relation for second range
-         rec.star.b_v := rec.star.b_v - 0.007813 * rec.star.b_v - 0.1489 * rec.star.b_v*rec.star.b_v + 0.03384 * rec.star.b_v*rec.star.b_v*rec.star.b_v
-      else
-         // Out of range for the Tycho2 relation, use a safe value
-         rec.star.b_v := 0.850 * rec.star.b_v;
-    end
-    else
-      // Out of range for the standard Gaia relation, use a safe value.
-      rec.star.b_v:=0.850 * (rec.star.magv-rec.star.magr);
+    rec.star.b_v:=GaiaBRtoBV(br);
     // mark b-v as valid
     rec.star.valid[vsB_v]:=true;
-    end;
+  end;
 end;
 
 function Tcatalog.NextGaiaLevel: boolean;
