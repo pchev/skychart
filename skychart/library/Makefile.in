@@ -23,7 +23,7 @@ ifeq ($(OS_TARGET),win32)
         $(MAKE) -C getdss -f Makefile.win64 all 
         $(MAKE) -C plan404 -f Makefile.win64 all 
         $(MAKE) -C wcs -f Makefile.win64 all
-        $(MAKE) -C chealpix -f Makefile.win32 all
+        $(MAKE) -C chealpix -f Makefile.win64 all
  else
  ifeq ($(OS_TARGET),darwin)
         $(MAKE) -C getdss all arch_flags=-m32
