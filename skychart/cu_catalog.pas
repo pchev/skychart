@@ -32,7 +32,7 @@ uses
   bscunit, dscat, findunit, gcatunit, gcmunit, gcvunit, gpnunit, gsccompact,
   gscfits, gscunit, lbnunit, microcatunit, oclunit, pgcunit, vocat,
   sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit,
-  usnobunit, wdsunit, u_290, gaiaunit,
+  usnobunit, wdsunit, u_290, gaiaunit, chealpix,
   rc3unit, BGRABitmap, BGRABitmapTypes, Graphics,
   u_translation, u_constant, u_util, u_projection,
   SysUtils, Classes, Math, Dialogs, Forms;
@@ -151,6 +151,7 @@ type
     function NextGaiaLevel: boolean;
     function  GetGaia(var rec: GcatRec): boolean;
     procedure FormatGaia(var rec: GcatRec);
+    function  FindGaia(id: string; var ar, de: double): boolean;
 
   public
     { Public declarations }
@@ -4246,6 +4247,13 @@ begin
       exit;
   end;
   // then the id not in the default catalog
+  if uppercase(copy(Num, 1, 8)) = 'GAIA DR2' then
+  begin
+    buf := StringReplace(Num, 'gaia dr2', '', [rfReplaceAll, rfIgnoreCase]);
+    Result := FindGaia(buf, ar1, de1);
+    if Result then
+      exit;
+  end;
   if uppercase(copy(Num, 1, 2)) = 'GC' then
   begin
     buf := StringReplace(Num, 'gc', '', [rfReplaceAll, rfIgnoreCase]);
@@ -5911,6 +5919,7 @@ begin
   rec.Dec := deg2rad * rec.Dec;
   rec.star.pmra := deg2rad * rec.star.pmra / 3600;
   rec.star.pmdec := deg2rad * rec.star.pmdec / 3600;
+  rec.star.id:=rec.options.flabel[lOffset+vsId]+' '+rec.star.id;
     // Compute approximate B-V from the Gaia magnitudes
     // First try if we can use the color transformation relation given
     // in the paper: Gaia Data Release 2 Photometric content and validation
@@ -5994,5 +6003,64 @@ begin
     break;
   until not Result;
 end;
+
+function Tcatalog.FindGaia(id: string; var ar, de: double):boolean;
+var
+  rec: GCatrec;
+  sid: QWord;
+  ipix,nside: int64;
+  theta,phi,ar1,ar2,de1,de2: double;
+begin
+  Result := False;
+  id:=trim(id);
+  sid:=StrToQWordDef(id,0);
+  if sid=0 then exit;
+  // Get pixel number for level 12
+  ipix:=sid div 34359738368;
+  // sides level 12
+  nside:=round(2**12);
+  // find coordinates from pixel
+  pix2ang_nest64(nside,ipix,theta,phi);
+  // theta is from north pole
+  theta:=rad2deg*(pid2-theta);
+  phi:=rad2deg*phi/15;
+  // small search area
+  ar1:=phi-0.001;
+  ar2:=phi+0.001;
+  de1:=theta-0.01;
+  de2:=theta+0.01;
+  // open catalog
+  OpenGaiaPos(ar1, ar2, de1, de2,Result);
+  if not Result then exit;
+  Result:=false;
+  repeat
+    ReadGaia(rec, Result);
+    if not Result then
+    begin
+      Result:=NextGaiaLevel;
+      if Result then
+        continue;
+    end;
+    if not Result then
+      break;
+    // test id
+    if trim(rec.star.id)=id then
+    begin
+      Result:=true;
+      break;
+    end;
+  until false;
+  CloseGaia;
+  if Result then
+  begin
+      ar := rad2deg*rec.ra / 15;
+      de := rad2deg*rec.Dec;
+      FormatGaia(rec);
+      FFindId := id;
+      FFindRecOK := True;
+      FFindRec := rec;
+  end;
+end;
+
 
 end.
