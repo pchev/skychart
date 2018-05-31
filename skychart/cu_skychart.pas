@@ -553,8 +553,12 @@ begin
   end
   else
     Fcatalog.cfgcat.StarMagMax := Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
-  if cfgsc.quick and FPlot.cfgplot.red_move then
-    Fcatalog.cfgcat.StarMagMax := Fcatalog.cfgcat.StarMagMax - 2;
+  if cfgsc.quick and FPlot.cfgplot.red_move then begin
+    Fcatalog.cfgcat.Quick := true;
+    Fcatalog.cfgcat.StarMagMax := min(16,Fcatalog.cfgcat.StarMagMax - 2);
+  end
+  else
+    Fcatalog.cfgcat.Quick := false;
   Fcatalog.cfgcat.NebMagMax := Fcatalog.cfgshr.NebMagFilter[cfgsc.FieldNum];
   Fcatalog.cfgcat.NebSizeMin := Fcatalog.cfgshr.NebSizeFilter[cfgsc.FieldNum];
   Fplot.cfgchart.min_ma := 1;
@@ -583,6 +587,7 @@ begin
   InitStarC(dsgsc, 14.5);
   InitStarC(microcat, 16);
   InitStarC(hn290, mag290);
+  InitStarC(gaia, 21);
   InitStarC(usnoa, 18);
   InitStarC(usnob, 21);
   InitStarC(vostar, vostar_magmax);
@@ -1354,7 +1359,7 @@ end;
 function Tskychart.DrawStars: boolean;
 var
   rec: GcatRec;
-  x1, y1, cyear, dyear, pra, pdec, timelimit: double;
+  x1, y1, cyear, dyear, pra, pdec, lra,ldec, timelimit: double;
   xx, yy, xxp, yyp: single;
   j, lid, saveplot, lnum, lp, rs: integer;
   First: boolean;
@@ -1425,10 +1430,10 @@ begin
         if cfgsc.PMon and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then
         begin
           propermotion(rec.ra, rec.Dec, dyear, rec.star.pmra, rec.star.pmdec,
-            (rec.star.valid[vsPx] and (trim(rec.options.flabel[26]) = 'RV')), rec.star.px, rec.num[1]);
+            ((abs(dyear)>50)and rec.star.valid[vsPx] and (trim(rec.options.flabel[26]) = 'RV')), rec.star.px, rec.num[1]);
         end;
-        lis := rec.star.id + FormatFloat(f6, rec.ra) + FormatFloat(f6, rec.Dec);
-        lid := rshash(lis, $7FFFFFFF);
+        lra:=rec.ra;
+        ldec:=rec.Dec;
         sofa_S2C(rec.ra, rec.Dec, p);
         PrecessionV(rec.options.EquinoxJD, cfgsc.JDChart, p);
         if cfgsc.ApparentPos then
@@ -1450,10 +1455,13 @@ begin
             WindowXY(x1, y1, xxp, yyp, cfgsc);
             Fplot.PlotLine(xx, yy, xxp, yyp, Fplot.cfgplot.Color[15], 1);
           end;
+
           rs := Fplot.PlotStar(xx, yy, rec.star.magv, rec.star.b_v);
           if ((cfgsc.DrawAllStarLabel or (rec.options.ShortName = firstcat)) and
             (rec.star.magv < cfgsc.StarmagMax - cfgsc.LabelMagDiff[1])) then
           begin
+            lis := rec.star.id + FormatFloat(f6, lra) + FormatFloat(f6, ldec);
+            lid := rshash(lis, $7FFFFFFF);
             if (rec.options.ShortName = firstcat) then
               al := laBottomLeft
             else
@@ -4186,6 +4194,8 @@ begin
         FindAtPosCat(usnob);
       if Fcatalog.cfgcat.starcaton[hn290 - BaseStar] then
         FindAtPosCat(hn290);
+      if Fcatalog.cfgcat.starcaton[gaia - BaseStar] then
+        FindAtPosCat(gaia);
       if Fcatalog.cfgcat.starcaton[microcat - BaseStar] then
         FindAtPosCat(microcat);
     end;

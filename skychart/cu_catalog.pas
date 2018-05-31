@@ -32,7 +32,7 @@ uses
   bscunit, dscat, findunit, gcatunit, gcmunit, gcvunit, gpnunit, gsccompact,
   gscfits, gscunit, lbnunit, microcatunit, oclunit, pgcunit, vocat,
   sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit,
-  usnobunit, wdsunit, u_290,
+  usnobunit, wdsunit, u_290, gaiaunit,
   rc3unit, BGRABitmap, BGRABitmapTypes, Graphics,
   u_translation, u_constant, u_util, u_projection,
   SysUtils, Classes, Math, Dialogs, Forms;
@@ -146,6 +146,11 @@ type
     function  Is290Path(path : string) : Boolean;
     Procedure Close290;
     function  Get290(var rec: GcatRec): boolean;
+    function  OpenGaia: boolean;
+    procedure OpenGaiaPos(ar1, ar2, de1, de2: double; var ok: boolean);
+    function NextGaiaLevel: boolean;
+    function  GetGaia(var rec: GcatRec): boolean;
+    procedure FormatGaia(var rec: GcatRec);
 
   public
     { Public declarations }
@@ -382,6 +387,7 @@ begin
     usnoa: Result := GetUSNOA(rec);
     usnob: Result := GetUSNOB(rec);
     hn290: Result := Get290(rec);
+    gaia: Result := GetGaia(rec);
     microcat: Result := GetMCT(rec);
     dsbase: Result := GetDSbase(rec);
     dstyc: Result := GetDSTyc(rec);
@@ -506,6 +512,10 @@ begin
       begin
         Open290win(Result);
       end;
+    gaia:
+      begin
+        Result:=OpenGaia;
+      end;
     microcat:
       begin
         SetMCTPath(cfgcat.starcatpath[microcat - BaseStar]);
@@ -573,6 +583,7 @@ begin
     usnoa: CloseUSNOA;
     usnob: CloseUSNOB;
     hn290: Close290;
+    gaia: CloseGaia;
     microcat: CloseMCT;
     dsbase: CloseDSbase;
     dstyc: CloseDStyc;
@@ -2008,7 +2019,7 @@ end;
 
 procedure Tcatalog.FormatGCatS(var rec: GcatRec);
 var
-  bsccat, flam, bayer, gaia: boolean;
+  bsccat, flam, bayer: boolean;
 begin
   rec.ra := deg2rad * rec.ra;
   rec.Dec := deg2rad * rec.Dec;
@@ -2054,53 +2065,6 @@ begin
     begin
       rec.star.id := rec.star.id + blank + trim(rec.str[5]) + blank + trim(rec.str[6]);
       rec.star.valid[vsId] := True;
-    end;
-  end;
-  gaia:=(rec.options.ShortName='Gaia');
-  if gaia then begin
-    // Compute approximate B-V from the Gaia magnitudes
-    // First try if we can use the color transformation relation given
-    // in the paper: Gaia Data Release 2 Photometric content and validation
-    // We use the relation for G-Vt and G-Bt to get a Tycho2 Bt-VT :
-    // validity : VT: −0.3 < (GBP−GRP) < 4.0 ; BT: 0 < (GBP−GRP) < 2.5
-    // G − VT = -0.01842 - 0.06629 * (GBP−GRP) - 0.2346 * (GBP−GRP)**2 + 0.02157 * (GBP−GRP)**3
-    // G − BT = -0.02441 - 0.4899  * (GBP−GRP) - 0.9740 * (GBP−GRP)**2 + 0.2496  * (GBP−GRP)**3
-    // thus:
-    // VT = G + 0.01842 + 0.06629 * (GBP−GRP) + 0.2346 * (GBP−GRP)**2 - 0.02157 * (GBP−GRP)**3
-    // BT = G + 0.02441 + 0.4899  * (GBP−GRP) + 0.9740 * (GBP−GRP)**2 - 0.2496  * (GBP−GRP)**3
-    // So for the color index:
-    // validity : 0 < (GBP−GRP) < 2.5
-    // BT-VT = 0.00599 + 0.42361 * (GBP−GRP) + 0.7394 * (GBP−GRP)**2 - 0.22803 * (GBP−GRP)**3
-    //
-    // Then convert Tycho2 BT-VT to B-V using the following relation:
-    // http://adsabs.harvard.edu/cgi-bin/nph-bib_query?bibcode=2006AJ....131.2360M&db_key=AST&data_type=HTML&format=&high=4447a24b6f18601
-    // for  -0.25 < (BT-VT) < 0.5  :
-    // B-V = (BT-VT) - 0.006 - 0.1069 * (BT-VT) + 0.1459 * (BT-VT)**2
-    // for 0.5 < (BT-VT) < 2.0  :
-    // B-V = (BT-VT) - 0.007813 * (BT-VT) - 0.1489 * (BT-VT)**2 + 0.03384 * (BT-VT)**3
-    // out of this range :
-    // B-V = 0.850 * (BT-VT)
-
-    // test in range for the standard Gaia relation
-    if (rec.star.magb<90)and(rec.star.magr<90) then begin
-    if ((rec.star.magb-rec.star.magr)>0) and ((rec.star.magb-rec.star.magr) < 2.5) then begin
-      // transform Gb-Gr to Bt-Vt
-      rec.star.b_v := 0.00599 + 0.42361 * (rec.star.magb-rec.star.magr) + 0.7394 * (rec.star.magb-rec.star.magr)**2 - 0.22803 * (rec.star.magb-rec.star.magr)**3;
-      if (rec.star.b_v>-0.25)and(rec.star.b_v<0.5) then
-         // use Tycho2 relation for first range
-         rec.star.b_v := rec.star.b_v - 0.006 - 0.1069 * rec.star.b_v  + 0.1459 * rec.star.b_v**2
-      else if (rec.star.b_v>0.5)and(rec.star.b_v<2.0) then
-         // use Tycho2 relation for second range
-         rec.star.b_v := rec.star.b_v - 0.007813 * rec.star.b_v - 0.1489 * rec.star.b_v**2 + 0.03384 * rec.star.b_v**3
-      else
-         // Out of range for the Tycho2 relation, use a safe value
-         rec.star.b_v := 0.850 * rec.star.b_v;
-    end
-    else
-      // Out of range for the standard Gaia relation, use a safe value.
-      rec.star.b_v:=0.850 * (rec.star.magv-rec.star.magr);
-    // mark b-v as valid
-    rec.star.valid[vsB_v]:=true;
     end;
   end;
 end;
@@ -4519,6 +4483,7 @@ begin
       usnoa: OpenUSNOA(xx1, xx2, yy1, yy2, ok);
       usnob: OpenUSNOB(xx1, xx2, yy1, yy2, ok);
       hn290: Open290(xx1, xx2, yy1, yy2, ok);
+      gaia: OpenGaiaPos(xx1, xx2, yy1, yy2, ok);
       microcat: OpenMCT(xx1, xx2, yy1, yy2, 3, ok);
       dsbase: OpenDSbase(xx1, xx2, yy1, yy2, ok);
       dstyc: OpenDSTyc(xx1, xx2, yy1, yy2, ok);
@@ -4625,6 +4590,7 @@ begin
       usnoa: ok := GetUSNOA(rec);
       usnob: ok := GetUSNOB(rec);
       hn290: ok := Get290(rec);
+      gaia: ok := GetGaia(rec);
       microcat: ok := GetMCT(rec);
       dsbase: ok := GetDSbase(rec);
       dstyc: ok := GetDSTyc(rec);
@@ -5007,6 +4973,11 @@ begin
       ok := FindAtPos(hn290, x1, y1, x2, y2, nextobj, True, searchcenter, cfgsc, rec);
       Close290;
     end;
+    if (not ok) and cfgcat.starcaton[gaia - BaseStar] then
+    begin
+      ok := FindAtPos(gaia, x1, y1, x2, y2, nextobj, True, searchcenter, cfgsc, rec);
+      CloseGaia;
+    end;
     if (not ok) and cfgcat.starcaton[microcat - BaseStar] then
     begin
       ok := FindAtPos(microcat, x1, y1, x2, y2, nextobj, True, searchcenter, cfgsc, rec);
@@ -5065,6 +5036,7 @@ begin
     usnoa: Result := IsUSNOAPath(catpath);
     usnob: Result := IsUSNOBPath(catpath);
     hn290: Result := Is290Path(catpath);
+    gaia: Result := IsGaiaPath(catpath);
     microcat: Result := IsMCTPath(catpath);
     dsbase: Result := IsDSbasePath(catpath);
     dstyc: Result := IsDSTycPath(catpath);
@@ -5916,6 +5888,111 @@ begin
     else
       rec.star.id:=u_290.naam2;
   end;
+end;
+
+function Tcatalog.OpenGaia: boolean;
+begin
+  cfgcat.GaiaLevel:=1;
+  SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia'+inttostr(cfgcat.GaiaLevel)), 'gaia');
+  OpenGaiawin(Result);
+end;
+
+procedure Tcatalog.OpenGaiaPos(ar1, ar2, de1, de2: double; var ok: boolean);
+begin
+  cfgcat.GaiaLevel:=1;
+  SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia'+inttostr(cfgcat.GaiaLevel)), 'gaia');
+  OpenGaiap(ar1, ar2, de1, de2, ok);
+end;
+
+procedure Tcatalog.FormatGaia(var rec: GcatRec);
+var br: double;
+begin
+  rec.ra := deg2rad * rec.ra;
+  rec.Dec := deg2rad * rec.Dec;
+  rec.star.pmra := deg2rad * rec.star.pmra / 3600;
+  rec.star.pmdec := deg2rad * rec.star.pmdec / 3600;
+    // Compute approximate B-V from the Gaia magnitudes
+    // First try if we can use the color transformation relation given
+    // in the paper: Gaia Data Release 2 Photometric content and validation
+    // We use the relation for G-Vt and G-Bt to get a Tycho2 Bt-VT :
+    // validity : VT: −0.3 < (GBP−GRP) < 4.0 ; BT: 0 < (GBP−GRP) < 2.5
+    // G − VT = -0.01842 - 0.06629 * (GBP−GRP) - 0.2346 * (GBP−GRP)**2 + 0.02157 * (GBP−GRP)**3
+    // G − BT = -0.02441 - 0.4899  * (GBP−GRP) - 0.9740 * (GBP−GRP)**2 + 0.2496  * (GBP−GRP)**3
+    // thus:
+    // VT = G + 0.01842 + 0.06629 * (GBP−GRP) + 0.2346 * (GBP−GRP)**2 - 0.02157 * (GBP−GRP)**3
+    // BT = G + 0.02441 + 0.4899  * (GBP−GRP) + 0.9740 * (GBP−GRP)**2 - 0.2496  * (GBP−GRP)**3
+    // So for the color index:
+    // validity : 0 < (GBP−GRP) < 2.5
+    // BT-VT = 0.00599 + 0.42361 * (GBP−GRP) + 0.7394 * (GBP−GRP)**2 - 0.22803 * (GBP−GRP)**3
+    //
+    // Then convert Tycho2 BT-VT to B-V using the following relation:
+    // http://adsabs.harvard.edu/cgi-bin/nph-bib_query?bibcode=2006AJ....131.2360M&db_key=AST&data_type=HTML&format=&high=4447a24b6f18601
+    // for  -0.25 < (BT-VT) < 0.5  :
+    // B-V = (BT-VT) - 0.006 - 0.1069 * (BT-VT) + 0.1459 * (BT-VT)**2
+    // for 0.5 < (BT-VT) < 2.0  :
+    // B-V = (BT-VT) - 0.007813 * (BT-VT) - 0.1489 * (BT-VT)**2 + 0.03384 * (BT-VT)**3
+    // out of this range :
+    // B-V = 0.850 * (BT-VT)
+
+    // test in range for the standard Gaia relation
+    if (rec.star.magb<90)and(rec.star.magr<90) then begin
+    br:=(rec.star.magb-rec.star.magr);
+    if ((br)>0) and ((br) < 2.5) then begin
+      // transform Gb-Gr to Bt-Vt
+      rec.star.b_v := 0.00599 + 0.42361 * (br) + 0.7394 * (br*br) - 0.22803 * (br*br*br);
+      if (rec.star.b_v>-0.25)and(rec.star.b_v<0.5) then
+         // use Tycho2 relation for first range
+         rec.star.b_v := rec.star.b_v - 0.006 - 0.1069 * rec.star.b_v  + 0.1459 * rec.star.b_v*rec.star.b_v
+      else if (rec.star.b_v>0.5)and(rec.star.b_v<2.0) then
+         // use Tycho2 relation for second range
+         rec.star.b_v := rec.star.b_v - 0.007813 * rec.star.b_v - 0.1489 * rec.star.b_v*rec.star.b_v + 0.03384 * rec.star.b_v*rec.star.b_v*rec.star.b_v
+      else
+         // Out of range for the Tycho2 relation, use a safe value
+         rec.star.b_v := 0.850 * rec.star.b_v;
+    end
+    else
+      // Out of range for the standard Gaia relation, use a safe value.
+      rec.star.b_v:=0.850 * (rec.star.magv-rec.star.magr);
+    // mark b-v as valid
+    rec.star.valid[vsB_v]:=true;
+    end;
+end;
+
+function Tcatalog.NextGaiaLevel: boolean;
+begin
+  inc(cfgcat.GaiaLevel);
+  if (cfgcat.GaiaLevel=2)or((not cfgcat.Quick)and(cfgcat.GaiaLevel=3)) then  begin
+     SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia'+inttostr(cfgcat.GaiaLevel)), 'gaia');
+     OpenGaiawin(Result);
+     if cfgcat.GaiaLevel=3 then
+       MaxGaiaRec:=1000000  // truncate only level 3
+     else
+       MaxGaiaRec:=10000000;
+  end
+  else
+     result:=false;
+end;
+
+function Tcatalog.GetGaia(var rec: GcatRec): boolean;
+begin
+  Result := True;
+  repeat
+    ReadGaia(rec, Result);
+    if not Result then
+    begin
+      Result:=NextGaiaLevel;
+      if Result then
+        continue;
+    end;
+    if cfgshr.StarFilter and (rec.star.magv > cfgcat.StarMagMax) then
+    begin
+      NextGaia(Result);
+      if Result then
+        continue;
+    end;
+    FormatGaia(rec);
+    break;
+  until not Result;
 end;
 
 end.

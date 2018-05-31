@@ -389,7 +389,7 @@ const
   ftCom = 101;
   ftAst = 102;
   BaseStar = 1000;
-  MaxStarCatalog = 18;
+  MaxStarCatalog = 19;
   DefStar = 1001;
   sky2000 = 1002;
   tyc = 1003;
@@ -408,6 +408,7 @@ const
   bsc = 1016;
   usnob = 1017;
   hn290 = 1018;
+  gaia  = 1019;
   BaseVar = 2000;
   MaxVarStarCatalog = 2;
   gcvs = 2001;
@@ -896,9 +897,10 @@ type
     // Field min and max the catalog is active
     LinCatOn: array [1..MaxLinCatalog] of boolean;
     // is the catalog used for current chart
-    UseUSNOBrightStars, UseGSVSIr: boolean;
+    UseUSNOBrightStars, UseGSVSIr, Quick: boolean;
     // filter specific catalog entry
     Name290: string; // the hnsky catalog to use
+    GaiaLevel: integer; // the current Gaia level 1..3
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_catalog);
@@ -1967,6 +1969,8 @@ begin
   UseUSNOBrightStars := Source.UseUSNOBrightStars;
   UseGSVSIr := Source.UseGSVSIr;
   Name290 := Source.Name290;
+  GaiaLevel := Source.GaiaLevel;
+  Quick := Source.Quick;
 end;
 
 { Tconf_shared }

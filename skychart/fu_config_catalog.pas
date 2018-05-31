@@ -49,6 +49,8 @@ type
     Button7: TButton;
     Button8: TButton;
     Button9: TButton;
+    Fgaia1: TLongEdit;
+    Fgaia2: TLongEdit;
     hnName: TComboBox;
     hn290Box: TCheckBox;
     hnbase1: TLongEdit;
@@ -61,6 +63,7 @@ type
     Label122: TLabel;
     Label21: TLabel;
     Label7: TLabel;
+    Label90: TLabel;
     Panel1: TPanel;
     sh2box: TCheckBox;
     drkbox: TCheckBox;
@@ -160,6 +163,8 @@ type
     Page1b: TTabSheet;
     def3: TDirectoryEdit;
     DefBox: TCheckBox;
+    gaia3: TDirectoryEdit;
+    GAIABox: TCheckBox;
     tyc3: TDirectoryEdit;
     tic3: TDirectoryEdit;
     gsc3: TDirectoryEdit;
@@ -737,6 +742,7 @@ end;
 procedure Tf_config_catalog.ShowCDCStar;
 begin
   defbox.Checked := ccat.StarCatDef[DefStar - BaseStar];
+  GAIAbox.Checked := ccat.StarCatDef[gaia - BaseStar];
   bscbox.Checked := ccat.StarCatDef[bsc - BaseStar];
   skybox.Checked := ccat.StarCatDef[sky2000 - BaseStar];
   tycbox.Checked := ccat.StarCatDef[tyc - BaseStar];
@@ -758,6 +764,8 @@ begin
   hn290Box.Checked := ccat.StarCatDef[hn290 - BaseStar];
   fdef1.Value := ccat.StarCatField[DefStar - BaseStar, 1];
   fdef2.Value := ccat.StarCatField[DefStar - BaseStar, 2];
+  fgaia1.Value := ccat.StarCatField[gaia - BaseStar, 1];
+  fgaia2.Value := ccat.StarCatField[gaia - BaseStar, 2];
   fbsc1.Value := ccat.StarCatField[bsc - BaseStar, 1];
   fbsc2.Value := ccat.StarCatField[bsc - BaseStar, 2];
   fsky1.Value := ccat.StarCatField[sky2000 - BaseStar, 1];
@@ -793,6 +801,7 @@ begin
   hnbase1.Value := ccat.StarCatField[hn290 - BaseStar, 1];
   hnbase2.Value := ccat.StarCatField[hn290 - BaseStar, 2];
   def3.Text := changetext(systoutf8(ccat.StarCatPath[DefStar - BaseStar]), def3.Text);
+  gaia3.Text := changetext(systoutf8(ccat.StarCatPath[gaia - BaseStar]), gaia3.Text);
   bsc3.Text := changetext(systoutf8(ccat.StarCatPath[bsc - BaseStar]), bsc3.Text);
   sky3.Text := changetext(systoutf8(ccat.StarCatPath[sky2000 - BaseStar]), sky3.Text);
   tyc3.Text := changetext(systoutf8(ccat.StarCatPath[tyc - BaseStar]), tyc3.Text);

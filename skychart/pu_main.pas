@@ -6310,6 +6310,12 @@ begin
   catalog.cfgcat.starcatfield[hn290 - BaseStar, 1] := 0;
   catalog.cfgcat.starcatfield[hn290 - BaseStar, 2] := 5;
   catalog.cfgcat.Name290:='tyc';
+  catalog.cfgcat.starcatpath[gaia - BaseStar] :=
+    catalog.cfgcat.starcatpath[gaia - BaseStar] + PathDelim + 'gaia';
+  catalog.cfgcat.starcatdef[gaia - BaseStar] := false;
+  catalog.cfgcat.starcatfield[gaia - BaseStar, 1] := 0;
+  catalog.cfgcat.starcatfield[gaia - BaseStar, 2] := 7;
+  catalog.cfgcat.GaiaLevel:=1;
 
   for i := 1 to maxvarstarcatalog do
   begin

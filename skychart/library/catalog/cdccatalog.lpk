@@ -20,7 +20,7 @@
         <CustomOptions Value="-CF64"/>
       </Other>
     </CompilerOptions>
-    <Files Count="26">
+    <Files Count="27">
       <Item1>
         <Filename Value="bscunit.pas"/>
         <UnitName Value="bscunit"/>
@@ -125,6 +125,10 @@
         <Filename Value="usnobunit.pas"/>
         <UnitName Value="usnobunit"/>
       </Item26>
+      <Item27>
+        <Filename Value="gaiaunit.pas"/>
+        <UnitName Value="gaiaunit"/>
+      </Item27>
     </Files>
     <RequiredPkgs Count="2">
       <Item1>

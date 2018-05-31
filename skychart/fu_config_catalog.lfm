@@ -24,10 +24,10 @@ object f_config_catalog: Tf_config_catalog
       Height = 476
       Top = 1
       Width = 497
-      ActivePage = Page3
+      ActivePage = Page2
       Align = alClient
       ShowTabs = False
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 1
       OnChange = PageControl1Change
       OnChanging = PageControl1Changing
@@ -46,7 +46,7 @@ object f_config_catalog: Tf_config_catalog
         object Label87: TLabel
           Left = 68
           Height = 17
-          Top = 146
+          Top = 170
           Width = 21
           Caption = 'pm'
           ParentColor = False
@@ -113,7 +113,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 92
           Height = 21
           Hint = 'The Tycho-2 Catalogue (Hog+ 2000)'
-          Top = 144
+          Top = 168
           Width = 127
           HelpContext = 102
           Caption = 'Tycho 2 Catalog'
@@ -127,7 +127,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 266
           Height = 29
           Hint = '0..10'
-          Top = 144
+          Top = 168
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -141,7 +141,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 306
           Height = 29
           Hint = '0..10'
-          Top = 144
+          Top = 168
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -248,7 +248,7 @@ object f_config_catalog: Tf_config_catalog
           Tag = 4
           Left = 343
           Height = 29
-          Top = 144
+          Top = 168
           Width = 111
           OnAcceptDirectory = CDCAcceptDirectory
           ShowHidden = False
@@ -346,6 +346,69 @@ object f_config_catalog: Tf_config_catalog
           NumGlyphs = 1
           MaxLength = 0
           TabOrder = 3
+        end
+        object Label90: TLabel
+          Left = 68
+          Height = 17
+          Top = 130
+          Width = 21
+          Caption = 'pm'
+          ParentColor = False
+        end
+        object GAIABox: TCheckBox
+          Tag = 19
+          Left = 92
+          Height = 21
+          Top = 128
+          Width = 108
+          HelpContext = 102
+          Caption = 'Gaia Catalog'
+          OnClick = CDCStarSelClick
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 17
+        end
+        object Fgaia1: TLongEdit
+          Tag = 19
+          Left = 266
+          Height = 29
+          Hint = '0..10'
+          Top = 128
+          Width = 30
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 18
+          OnChange = CDCStarField1Change
+          Value = 0
+          MaxValue = 10
+        end
+        object Fgaia2: TLongEdit
+          Tag = 19
+          Left = 306
+          Height = 29
+          Hint = '0..10'
+          Top = 128
+          Width = 30
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 19
+          OnChange = CDCStarField2Change
+          Value = 0
+          MaxValue = 10
+        end
+        object gaia3: TDirectoryEdit
+          Tag = 19
+          Left = 343
+          Height = 29
+          Top = 128
+          Width = 111
+          OnAcceptDirectory = CDCAcceptDirectory
+          ShowHidden = False
+          ButtonWidth = 23
+          NumGlyphs = 1
+          MaxLength = 0
+          TabOrder = 20
+          OnChange = CDCStarPathChange
         end
       end
       object Page3: TTabSheet
