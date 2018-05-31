@@ -32,10 +32,10 @@ uses
   bscunit, dscat, findunit, gcatunit, gcmunit, gcvunit, gpnunit, gsccompact,
   gscfits, gscunit, lbnunit, microcatunit, oclunit, pgcunit, vocat,
   sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit,
-  usnobunit, wdsunit, u_290, gaiaunit, chealpix,
+  usnobunit, wdsunit, u_290, gaiaunit, cu_healpix,
   rc3unit, BGRABitmap, BGRABitmapTypes, Graphics,
   u_translation, u_constant, u_util, u_projection,
-  SysUtils, Classes, Math, Dialogs, Forms;
+  Controls, SysUtils, Classes, Math, Dialogs, Forms;
 
 type
 
@@ -5976,7 +5976,7 @@ begin
      if cfgcat.GaiaLevel=3 then
        MaxGaiaRec:=1000000  // truncate only level 3
      else
-       MaxGaiaRec:=10000000;
+       MaxGaiaRec:=MaxInt;
   end
   else
      result:=false;
@@ -6005,6 +6005,7 @@ begin
 end;
 
 function Tcatalog.FindGaia(id: string; var ar, de: double):boolean;
+// search Gaia sourceid using the healpix part to find the file to search for.
 var
   rec: GCatrec;
   sid: QWord;
@@ -6012,11 +6013,12 @@ var
   theta,phi,ar1,ar2,de1,de2: double;
 begin
   Result := False;
+  if @pix2ang_nest64=nil then exit;
   id:=trim(id);
   sid:=StrToQWordDef(id,0);
   if sid=0 then exit;
   // Get pixel number for level 12
-  ipix:=sid div 34359738368;
+  ipix:=sid div HealpixFilter12;
   // sides level 12
   nside:=round(2**12);
   // find coordinates from pixel

@@ -9456,6 +9456,8 @@ var
 label
   findit;
 begin
+  try
+  screen.Cursor:=crHourGlass;
   if VerboseMsg then
     WriteTrace('GenericSearch');
   Result := False;
@@ -9552,6 +9554,9 @@ begin
         IdentSearchResult(num, stype, itype, ar1, de1);
       end;
     end;
+  finally
+    screen.Cursor:=crDefault;
+  end;
 end;
 
 procedure Tf_main.UpdateBtn(fx, fy: integer; tc: boolean; Sender: TObject);

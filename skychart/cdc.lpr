@@ -47,7 +47,7 @@ uses
   pu_config_calendar, pu_planetinfo, pu_imglist, cu_plansat, cu_smallsat,
   pu_fov, pu_edittoolbar, fu_script, pu_scriptengine, pu_pascaleditor,
   uPSI_CheckLst, upsi_translation, u_scriptsocket, pu_scriptconfig, pu_tour,
-  UScaleDPI, u_ccdconfig, u_orbits, u_speech;
+  UScaleDPI, u_ccdconfig, u_orbits, u_speech, cu_healpix;
   
 var i : integer;
     buf, p, step : string;

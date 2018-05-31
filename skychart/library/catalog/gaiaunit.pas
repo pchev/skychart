@@ -47,6 +47,24 @@ procedure CloseGaia ;
 var
    MaxGaiaRec: integer = 1100000;
 
+const
+// Constant to find the healpix from the source_id
+// healpix = source_id div filterXX
+//                                        level  fov      source_id filter
+HealpixFilter0 = 576460752303423488;  //  0      58.632   576460752303423488
+HealpixFilter1 = 144115188075855872;  //  1      29.316   144115188075855872
+HealpixFilter2 = 36028797018963968;   //  2      14.658   36028797018963968
+HealpixFilter3 = 9007199254740992;    //  3       7.329   9007199254740992
+HealpixFilter4 = 2251799813685248;    //  4       3.665   2251799813685248
+HealpixFilter5 = 562949953421312;     //  5       1.832   562949953421312
+HealpixFilter6 = 140737488355328;     //  6       0.916   140737488355328
+HealpixFilter7 = 35184372088832;      //  7       0.458   35184372088832
+HealpixFilter8 = 8796093022208;       //  8       0.229   8796093022208
+HealpixFilter9 = 2199023255552;       //  9       0.115   2199023255552
+HealpixFilter10= 549755813888;        //  10      0.057   549755813888
+HealpixFilter11= 137438953472;        //  11      0.029   137438953472
+HealpixFilter12= 34359738368;         //  12      0.014   34359738368
+
 implementation
 
 var

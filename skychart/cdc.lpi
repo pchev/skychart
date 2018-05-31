@@ -433,7 +433,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item24>
     </RequiredPackages>
-    <Units Count="88">
+    <Units Count="89">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -961,6 +961,10 @@
         <Filename Value="u_speech.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit87>
+      <Unit88>
+        <Filename Value="cu_healpix.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit88>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
