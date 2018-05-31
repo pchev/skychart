@@ -2,11 +2,18 @@ unit chealpix;
 interface
 
   const
-    {$IFDEF mswindows}
+    {$ifdef mswindows}
     External_library='libchealpix.dll';
-    {$else}
+    {$endif}
+    {$ifdef linux}
     External_library='libchealpix.so.0';
-    {$ENDIF}
+    {$endif}
+    {$ifdef freebsd}
+    External_library='libchealpix.so.0';
+    {$endif}
+    {$ifdef darwin}
+    External_library='libchealpix.dylib';
+    {$endif}
 
  Type
 
