@@ -224,6 +224,8 @@ type
     function LongLabelConst(txt: string): string;
     function LongLabel(txt: string): string;
     function LongLabelObj(txt: string): string;
+    function Get290MagMax: double;
+    function GetGaiaMagMax: double;
     procedure ClearSearch;
     property FindId: string read FFindId;
     property FindRecOK: boolean read FFindRecOK;
@@ -5865,6 +5867,20 @@ begin
   ok:=true;
 end;
 
+function  Tcatalog.Get290MagMax: double;
+var buf: string;
+begin
+  {HNSKY catalog max magnitude}
+  buf := UpperCase(Trim(cfgcat.Name290));
+  if buf='TYC' then result:=12.5
+  else if buf='TUC' then result:=15
+  else if buf='G15' then result:=15
+  else if buf='G16' then result:=16
+  else if buf='G17' then result:=17
+  else if buf='G18' then result:=18
+  else result:=15;
+end;
+
 Procedure Tcatalog.Close290;
 begin
   u_290.area290:=291;
@@ -5917,6 +5933,16 @@ begin
   cfgcat.GaiaLevel:=1;
   SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia'+inttostr(cfgcat.GaiaLevel)), 'gaia');
   OpenGaiap(ar1, ar2, de1, de2, ok);
+end;
+
+function  Tcatalog.GetGaiaMagMax: double;
+begin
+  result:=15;
+  if DirectoryExists(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia2')) then begin
+    result:=18;
+    if DirectoryExists(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia3')) then
+       result:=21;
+  end;
 end;
 
 function Tcatalog.GaiaBRtoBV(br:double):double;

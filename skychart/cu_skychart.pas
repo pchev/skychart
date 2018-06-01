@@ -479,9 +479,8 @@ end;
 function Tskychart.InitCatalog: boolean;
 var
   i: integer;
-  mag, magmax, mag290: double;
+  mag, magmax: double;
   vostar_magmax: double;
-  buf: string;
 
   procedure InitStarC(cat: integer; defaultmag: double);
   { determine if the star catalog is active at this scale }
@@ -563,15 +562,6 @@ begin
   Fcatalog.cfgcat.NebSizeMin := Fcatalog.cfgshr.NebSizeFilter[cfgsc.FieldNum];
   Fplot.cfgchart.min_ma := 1;
   magmax := 1;
-  {HNSKY catalog max magnitude}
-  buf := UpperCase(Trim(Fcatalog.cfgcat.Name290));
-  if buf='TYC' then mag290:=12.5
-  else if buf='TUC' then mag290:=15
-  else if buf='G15' then mag290:=15
-  else if buf='G16' then mag290:=16
-  else if buf='G17' then mag290:=17
-  else if buf='G18' then mag290:=18
-  else mag290:=15;
   { activate the star catalog}
   InitStarC(dsbase, 5.5);
   InitStarC(bsc, 6.5);
@@ -586,8 +576,8 @@ begin
   InitStarC(gscc, 14.5);
   InitStarC(dsgsc, 14.5);
   InitStarC(microcat, 16);
-  InitStarC(hn290, mag290);
-  InitStarC(gaia, 21);
+  InitStarC(hn290, Fcatalog.Get290MagMax);
+  InitStarC(gaia, Fcatalog.GetGaiaMagMax);
   InitStarC(usnoa, 18);
   InitStarC(usnob, 21);
   InitStarC(vostar, vostar_magmax);
