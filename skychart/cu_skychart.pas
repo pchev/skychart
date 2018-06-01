@@ -479,7 +479,7 @@ end;
 function Tskychart.InitCatalog: boolean;
 var
   i: integer;
-  mag, magmax: double;
+  mag, magmax,f: double;
   vostar_magmax: double;
 
   procedure InitStarC(cat: integer; defaultmag: double);
@@ -540,11 +540,12 @@ begin
   vostar_magmax := Fcatalog.GetVOstarmag;
   if Fcatalog.cfgshr.AutoStarFilter then
   begin
-    if (cfgsc.fov > (0.0166667 * deg2rad)) or cfgsc.Quick then
+    f := cfgsc.fov - 15 * minarc;
+    if (f > minarc) or cfgsc.Quick then
       Fcatalog.cfgcat.StarMagMax :=
         max(5,
         round(10 * (
-        Fcatalog.cfgshr.AutoStarFilterMag + 2.4 * log10((pid2*pid2) / (cfgsc.fov*cfgsc.fov*(1+2*cos(min(3*cfgsc.fov,pid2)) ))))
+        Fcatalog.cfgshr.AutoStarFilterMag + 2.4 * log10((pid2*pid2) / (f*f*(1+2*cos(min(3*f,pid2)) ))))
         ) / 10
         )
     else
