@@ -1664,7 +1664,7 @@ end;
 function Tskychart.DrawDeepSkyObject: boolean;
 var
   rec: GcatRec;
-  x1, y1, x2, y2, rot, ra, de, radius, timelimit: double;
+  x1, y1, x2, y2, rot, ra, de, lra,lde, radius, timelimit: double;
   x, y, xx, yy, sz, lsize: single;
   lid, save_nebplot, lp, lnum: integer;
   imgfile, CurrentCat, ImgCat, lis: string;
@@ -1761,8 +1761,8 @@ begin
             catalog.cfgcat.NebSizeMin) then
             continue;
         end;
-        lis := rec.neb.id + FormatFloat(f6, rec.ra) + FormatFloat(f6, rec.Dec);
-        lid := rshash(lis, $7FFFFFFF);
+        lra:=rec.ra;
+        lde:=rec.Dec;
         precession(rec.options.EquinoxJD, cfgsc.JDChart, rec.ra, rec.Dec);
         if cfgsc.ApparentPos then
           apparent_equatorial(rec.ra, rec.Dec, cfgsc, True, True);
@@ -1866,6 +1866,8 @@ begin
               lp := 4;
             nebmagmax := max(nebmagmax, rec.neb.mag);
             nebmagmin := min(nebmagmin, rec.neb.mag);
+            lis := rec.neb.id + FormatFloat(f6, lra) + FormatFloat(f6, lde);
+            lid := rshash(lis, $7FFFFFFF);
             SetLabel(lid, xx, yy, round(sz), 2, lnum, rec.neb.id, al,
               labrotation(rec.ra, rec.Dec, lnum, cfgsc), lp, True, lsize);
           end;
