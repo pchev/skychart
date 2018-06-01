@@ -218,15 +218,16 @@ begin
  result:=ReadGaiaHeaderFile;
  if result then begin
    InitGaiaRec;
- end;
+ end
+ else exit;
  buf:=copy(catheader.version,1,7);
  if buf='CDCSTAR' then catversion:=rtStar
-    else result:=false;
+    else begin result:=false; exit; end;
  buf:=copy(catheader.version,8,1);
  cattype:=strtointdef(buf,0);
  fillchar(catinfo,sizeof(catinfo),0);
  if cattype=ctText then
-    result:=false;
+    begin result:=false; exit; end;
  // If crash here you are using the wrong catalog or the record need to be adapted to new Catgen definition
  if catheader.reclen<>sizeof(TGaiaRec) then
     raise Exception.Create('Gaia catalog '+GaiaPath+' as wrong record length');
@@ -287,7 +288,6 @@ end;
 
 
 Procedure OpenGaiap(ar1,ar2,de1,de2: double ; var ok : boolean);
-var i:integer;
 begin
  curSM:=1;
  ar1:=ar1*15; ar2:=ar2*15;
@@ -321,7 +321,6 @@ CloseGaiaRegion;
 end;
 
 Procedure OpenGaiawin(var ok : boolean);
-var i: integer;
 begin
 curSM:=1;
 ok:=ReadGaiaHeader;
