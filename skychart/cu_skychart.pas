@@ -1421,7 +1421,8 @@ begin
         if cfgsc.PMon and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then
         begin
           propermotion(rec.ra, rec.Dec, dyear, rec.star.pmra, rec.star.pmdec,
-            ((abs(dyear)>50)and rec.star.valid[vsPx] and (trim(rec.options.flabel[26]) = 'RV')), rec.star.px, rec.num[1]);
+            ((abs(dyear)>50)and rec.star.valid[vsPx] and(rec.star.px>0)and(rec.star.px<0.8) and (trim(rec.options.flabel[26]) = 'RV')),
+            rec.star.px, rec.num[1]);
         end;
         lra:=rec.ra;
         ldec:=rec.Dec;
@@ -1438,7 +1439,7 @@ begin
           if cfgsc.DrawPMon and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then
           begin
             propermotion(pra, pdec, cfgsc.DrawPMyear, rec.star.pmra, rec.star.pmdec,
-              (rec.star.valid[vsPx] and (trim(rec.options.flabel[26]) = 'RV')), rec.star.px, rec.num[1]);
+              (rec.star.valid[vsPx] and(rec.star.px>0)and(rec.star.px<0.8)and (trim(rec.options.flabel[26]) = 'RV')), rec.star.px, rec.num[1]);
             precession(rec.options.EquinoxJD, cfgsc.JDChart, pra, pdec);
             if cfgsc.ApparentPos then
               apparent_equatorial(pra, pdec, cfgsc, True, True);
@@ -1457,7 +1458,7 @@ begin
               al := laBottomLeft
             else
               al := laBottomRight;
-            if cfgsc.DistLabel and rec.star.valid[vsPx] and (rec.star.px > 0) then
+            if cfgsc.DistLabel and rec.star.valid[vsPx] and (rec.star.px > 0)and(rec.star.px<0.8) then
             begin
               str(parsec2ly / rec.star.px: 5: 0, dlbl);
               dlbl := ' ' + rsLy + ':' + trim(dlbl);
@@ -3521,10 +3522,10 @@ begin
       end;
       if rec.star.valid[vsPx] then
       begin
-        cfgsc.FindPX := rec.star.px;
+        if (rec.star.px>0)and(rec.star.px<0.8) then cfgsc.FindPX := rec.star.px;
         str(rec.star.px * 1000: 6: 3, txt);
         Desc := Desc + trim(rec.options.flabel[lOffset + vsPx]) + dp + txt + b + '[mas]' + tab;
-        if rec.star.px > 0 then
+        if (rec.star.px>0)and(rec.star.px<0.8) then
         begin
           str(parsec2ly / rec.star.px: 5: 1, txt);
           Desc := Desc + 'Dist:' + txt + b + '[ly]' + tab;

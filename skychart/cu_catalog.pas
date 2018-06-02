@@ -4737,7 +4737,7 @@ begin
       else
         epoch := rec.options.Epoch;
       dyear := cyear - epoch;
-      fullmotion := (rec.star.valid[vsPx] and (trim(rec.options.flabel[26]) = 'RV'));
+      fullmotion := (rec.star.valid[vsPx] and(rec.star.px>0)and(rec.star.px<0.8) and (trim(rec.options.flabel[26]) = 'RV'));
       propermotion(rec.ra, rec.Dec, dyear, rec.star.pmra, rec.star.pmdec,
         fullmotion, rec.star.px, rec.num[1]);
       cfgsc.FindStarPM := True;
@@ -4789,7 +4789,7 @@ begin
       cfgsc.FindPMra := rec.star.pmra;
       cfgsc.FindPMde := rec.star.pmdec;
       cfgsc.FindPMEpoch := epoch;
-      cfgsc.FindPMpx := rec.star.px;
+      if (rec.star.px>0)and(rec.star.px<0.8) then cfgsc.FindPMpx := rec.star.px;
       cfgsc.FindPMrv := rec.num[1];
       cfgsc.FindPMfullmotion := fullmotion;
     end
@@ -5217,7 +5217,7 @@ begin
           cfgshr.ConstL[i].pmra1 := deg2rad * rec.star.pmra / 3600;
           cfgshr.ConstL[i].pmde1 := deg2rad * rec.star.pmdec / 3600;
           cfgshr.ConstL[i].pxrv1 :=
-            (rec.star.valid[vsPx] and (trim(rec.options.flabel[26]) = 'RV'));
+            (rec.star.valid[vsPx] and (rec.star.px>0)and(rec.star.px<0.8) and (trim(rec.options.flabel[26]) = 'RV'));
           cfgshr.ConstL[i].px1 := rec.star.px;
           cfgshr.ConstL[i].rv1 := rec.num[1];
           FindNumGcatRec(cfgcat.StarCatPath[DefStar - BaseStar],
@@ -5229,7 +5229,7 @@ begin
           cfgshr.ConstL[i].pmra2 := deg2rad * rec.star.pmra / 3600;
           cfgshr.ConstL[i].pmde2 := deg2rad * rec.star.pmdec / 3600;
           cfgshr.ConstL[i].pxrv2 :=
-            (rec.star.valid[vsPx] and (trim(rec.options.flabel[26]) = 'RV'));
+            (rec.star.valid[vsPx] and (rec.star.px>0)and(rec.star.px<0.8) and (trim(rec.options.flabel[26]) = 'RV'));
           cfgshr.ConstL[i].px2 := rec.star.px;
           cfgshr.ConstL[i].rv2 := rec.num[1];
           Inc(i);

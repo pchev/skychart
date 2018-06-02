@@ -2845,7 +2845,7 @@ begin
         epoch := rec.options.Epoch;
       dyear := (sc.cfgsc.CurYear + DayofYear(sc.cfgsc.CurYear, sc.cfgsc.CurMonth,
         sc.cfgsc.CurDay) / 365.25) - epoch;
-      fullmotion := (rec.star.valid[vsPx] and (trim(rec.options.flabel[26]) = 'RV'));
+      fullmotion := (rec.star.valid[vsPx] and (rec.star.px>0)and(rec.star.px<0.8) and (trim(rec.options.flabel[26]) = 'RV'));
       propermotion(rec.ra, rec.Dec, dyear, rec.star.pmra, rec.star.pmdec,
         fullmotion, rec.star.px, rec.num[1]);
       sc.cfgsc.FindStarPM := True;
