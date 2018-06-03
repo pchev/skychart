@@ -353,7 +353,7 @@ begin
   curcat := BaseStar + MaxStarCatalog;
 
   while true do begin
-    while (curcat > (BaseStar+1)) and (not cfgcat.starcaton[curcat - BaseStar]) do
+    while (curcat > (BaseStar)) and (not cfgcat.starcaton[curcat - BaseStar]) do
       Dec(curcat);
 
     if (curcat <= BaseStar) then

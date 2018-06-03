@@ -30,6 +30,8 @@ skychart/component/vosamp/lib/
 skychart/component/xmlparser/lib/
 skychart/component/zoomimage/lib/
 skychart/library/catalog/lib
+# ignore various files
+skychart/cdc.lps
 tools/doc/*.pdf
 tools/doc/pdflist.txt
 tools/doc/wiki_doc/
