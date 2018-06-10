@@ -2,6 +2,7 @@ Version 4.1.1 beta, Notes de la version
 
 Nouvelles fonctions:
 
+- Supporte le nouveau catalogue d'étoile GAIA DR2.
 - Permet d'utiliser des catalogues d'étoiles de HNSKY au format "290".
 - Améliore l'affichage des étoiles doubles.
 - Améliore le filtre par magnitude pour les petits champs.
