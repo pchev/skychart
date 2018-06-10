@@ -6011,7 +6011,7 @@ begin
   if (cfgcat.GaiaLevel=2)or((not cfgcat.Quick)and(cfgcat.GaiaLevel=3)) then  begin
      SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia'+inttostr(cfgcat.GaiaLevel)), 'gaia');
      OpenGaiawin(Result);
-     if cfgcat.GaiaLevel=3 then
+     if (cfgcat.LimitGaiaCount)and(cfgcat.GaiaLevel=3) then
        MaxGaiaRec:=1000000  // truncate only level 3
      else
        MaxGaiaRec:=MaxInt;

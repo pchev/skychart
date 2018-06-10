@@ -45,7 +45,7 @@ Procedure NextGaia( var ok : boolean);
 procedure CloseGaia ;
 
 var
-   MaxGaiaRec: integer = 1100000;
+   MaxGaiaRec: integer = MaxInt;
 
 const
 // Constant to find the healpix from the source_id

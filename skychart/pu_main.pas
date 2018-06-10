@@ -6316,6 +6316,7 @@ begin
   catalog.cfgcat.starcatfield[gaia - BaseStar, 1] := 0;
   catalog.cfgcat.starcatfield[gaia - BaseStar, 2] := 7;
   catalog.cfgcat.GaiaLevel:=1;
+  catalog.cfgcat.LimitGaiaCount:=true;
 
   for i := 1 to maxvarstarcatalog do
   begin
@@ -6680,6 +6681,8 @@ begin
             ReadBool(section, 'UseGSVSIr', catalog.cfgcat.UseGSVSIr);
           catalog.cfgcat.Name290 :=
             ReadString(section, 'Name290', catalog.cfgcat.Name290);
+          catalog.cfgcat.LimitGaiaCount :=
+            ReadBool(section, 'LimitGaiaCount', catalog.cfgcat.LimitGaiaCount);
           for i := 1 to maxstarcatalog do
           begin
             catalog.cfgcat.starcatdef[i] :=
@@ -8042,6 +8045,8 @@ begin
         WriteBool(section, 'UseUSNOBrightStars', catalog.cfgcat.UseUSNOBrightStars);
         WriteBool(section, 'UseGSVSIr', catalog.cfgcat.UseGSVSIr);
         WriteString(section, 'Name290', catalog.cfgcat.Name290);
+        WriteBool(section, 'LimitGaiaCount', catalog.cfgcat.LimitGaiaCount);
+
        for i := 1 to maxstarcatalog do
         begin
           WriteBool(section, 'starcatdef' + IntToStr(i), catalog.cfgcat.starcatdef[i]);

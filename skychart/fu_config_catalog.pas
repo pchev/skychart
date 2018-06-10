@@ -49,6 +49,7 @@ type
     Button7: TButton;
     Button8: TButton;
     Button9: TButton;
+    GaiaLimit: TCheckBox;
     Fgaia1: TLongEdit;
     Fgaia2: TLongEdit;
     hnName: TComboBox;
@@ -188,7 +189,6 @@ type
     Label37: TLabel;
     StringGrid3: TStringGrid;
     Label2: TLabel;
-    Label87: TLabel;
     Label16: TLabel;
     Label28: TLabel;
     Label17: TLabel;
@@ -258,6 +258,7 @@ type
     procedure CatgenClick(Sender: TObject);
     procedure defnBoxClick(Sender: TObject);
     procedure delobjClick(Sender: TObject);
+    procedure GaiaLimitChange(Sender: TObject);
     procedure hnNameChange(Sender: TObject);
     procedure maxrowsChange(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
@@ -372,7 +373,7 @@ begin
   Button6.Caption := rsDelete;
   Page2.Caption := rsCdCStars;
   Label2.Caption := rsCDCStarsCata;
-  Label87.Caption := rsPm;
+  GaiaLimit.Caption := rsLimitTheNumb;
   Label16.Caption := rsMin2;
   Label28.Caption := rsFieldNumber;
   Label17.Caption := rsMax2;
@@ -820,6 +821,7 @@ begin
   dsgsc3.Text := changetext(systoutf8(ccat.StarCatPath[dsgsc - BaseStar]), dsgsc3.Text);
   hnbase3.Text := changetext(systoutf8(ccat.StarCatPath[hn290 - BaseStar]), hnbase3.Text);
   Upd290List(hnbase3.Text);
+  GaiaLimit.Checked := ccat.LimitGaiaCount;
 end;
 
 procedure Tf_config_catalog.ShowFov;
@@ -1817,6 +1819,11 @@ begin
   stringgrid1.cells[7, p] := '';
   stringgrid1.cells[8, p] := '';
   DeleteObjRow(p);
+end;
+
+procedure Tf_config_catalog.GaiaLimitChange(Sender: TObject);
+begin
+  ccat.LimitGaiaCount:=GaiaLimit.Checked;
 end;
 
 procedure Tf_config_catalog.DeleteObjRow(p: integer);
