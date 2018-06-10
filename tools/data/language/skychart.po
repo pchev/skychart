@@ -6338,3 +6338,7 @@ msgstr ""
 msgid "Unsupported file extension: %sPlease fix it."
 msgstr ""
 
+#: u_translation:rslimitthenumb
+msgid "Limit the number of level 3 faint stars"
+msgstr ""
+

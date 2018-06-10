@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-27 16:06+0000\n"
-"PO-Revision-Date: 2018-05-27 16:09+0000\n"
+"POT-Creation-Date: 2018-06-10 11:45+0000\n"
+"PO-Revision-Date: 2018-06-10 11:49+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-05-27 16:12+0000\n"
-"X-Generator: Launchpad (build 18667)\n"
+"X-Launchpad-Export-Date: 2018-06-10 11:52+0000\n"
+"X-Generator: Launchpad (build 18684)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -2992,6 +2992,10 @@ msgstr "Magnitude limite :"
 #: u_translation.rslimitingsize
 msgid "Limiting size (arcminutes):"
 msgstr "Taille limite (minutes) :"
+
+#: u_translation.rslimitthenumb
+msgid "Limit the number of level 3 faint stars"
+msgstr "Limite le nombre d'étoiles faibles du niveau 3"
 
 #: u_translation.rsline1
 msgid "Line"

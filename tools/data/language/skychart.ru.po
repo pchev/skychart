@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-27 16:06+0000\n"
+"POT-Creation-Date: 2018-06-10 11:45+0000\n"
 "PO-Revision-Date: 2018-03-07 20:34+0000\n"
 "Last-Translator: sernik <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-05-27 16:12+0000\n"
-"X-Generator: Launchpad (build 18667)\n"
+"X-Launchpad-Export-Date: 2018-06-10 11:52+0000\n"
+"X-Generator: Launchpad (build 18684)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -2989,6 +2989,10 @@ msgstr "Предельная звёздная величина:"
 #: u_translation.rslimitingsize
 msgid "Limiting size (arcminutes):"
 msgstr "Предельный угловой размер (минут, '):"
+
+#: u_translation.rslimitthenumb
+msgid "Limit the number of level 3 faint stars"
+msgstr ""
 
 #: u_translation.rsline1
 msgid "Line"

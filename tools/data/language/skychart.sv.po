@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-05-27 16:06+0000\n"
-"PO-Revision-Date: 2017-10-25 08:37+0000\n"
+"POT-Creation-Date: 2018-06-10 11:45+0000\n"
+"PO-Revision-Date: 2018-06-01 21:56+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-05-27 16:12+0000\n"
-"X-Generator: Launchpad (build 18667)\n"
+"X-Launchpad-Export-Date: 2018-06-10 11:52+0000\n"
+"X-Generator: Launchpad (build 18684)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1038,7 +1038,7 @@ msgstr "Beräkna fält"
 
 #: u_translation.rscomputerises
 msgid "Compute rise/set time relative to this line"
-msgstr ""
+msgstr "Beräkna uppgång/nedgång i förhållande till denna linje"
 
 #: u_translation.rsconfiguratio
 msgid "Configuration"
@@ -1102,7 +1102,7 @@ msgstr "Anslutning till %s, %s lyckades.%s"
 
 #: u_translation.rsconstellatio
 msgid "Constellation"
-msgstr "Konstallation"
+msgstr "Stjärnbild"
 
 #: u_translation.rsconstellatio2
 msgid "Constellation figures"
@@ -2406,7 +2406,7 @@ msgstr "Hämta DSS bild"
 
 #: u_translation.rsgetfromteles
 msgid "Get from telescope"
-msgstr ""
+msgstr "Ta från teleskop"
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
@@ -2992,6 +2992,10 @@ msgstr "Gränsmagnitud"
 msgid "Limiting size (arcminutes):"
 msgstr "Storleksgräns (bågminuter)"
 
+#: u_translation.rslimitthenumb
+msgid "Limit the number of level 3 faint stars"
+msgstr ""
+
 #: u_translation.rsline1
 msgid "Line"
 msgstr "Linje"
@@ -3206,7 +3210,7 @@ msgstr "Huvudfält"
 
 #: u_translation.rsmainmenu
 msgid "Main menu"
-msgstr ""
+msgstr "Huvudmeny"
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
@@ -4162,7 +4166,7 @@ msgstr "Försök att installera om programmet."
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
-msgstr ""
+msgstr "Kartlägg banrörelser för solsystemsobjekt"
 
 #: u_translation.rspluto
 msgid "Pluto"
@@ -5070,7 +5074,7 @@ msgstr "Ställ in tid"
 
 #: u_translation.rssettotelesco
 msgid "Set to telescope"
-msgstr ""
+msgstr "Ställ in till teleskop"
 
 #: u_translation.rssetup
 msgid "Setup"
@@ -5218,7 +5222,7 @@ msgstr "Visa objekt"
 
 #: u_translation.rsshowobsolete
 msgid "Show obsolete drivers"
-msgstr ""
+msgstr "Visa föråldrade drivrutiner"
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian"
@@ -5314,7 +5318,7 @@ msgstr "Gå till objekt (slew)"
 
 #: u_translation.rsslewingto
 msgid "Slewing to %s / %s"
-msgstr ""
+msgstr "Sväng till %s / %s"
 
 #: u_translation.rsslewspeed
 msgid " Slew Speed"
@@ -5634,7 +5638,7 @@ msgstr "Synkronisera"
 
 #: u_translation.rssyncedto
 msgid "Synced to %s / %s"
-msgstr ""
+msgstr "Synkad till %s / %s"
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
@@ -5758,7 +5762,7 @@ msgstr "Katalogen innehåller %s poster. Den kan inte hämtas i sin helhet av pr
 
 #: u_translation.rsthisdirectdr
 msgid "This direct driver is kept for compatibility, it may work or not for you. But the preference is to use the INDI or ASCOM driver for your telescope."
-msgstr ""
+msgstr "Denna drivrutin behålls för kompatibilitet, och kanske inte fungerar för dig. Det är att föredra att använda INDI- eller ASCOM-drivrutinerna för ditt teleskop."
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -6018,7 +6022,7 @@ msgstr "Lås upp karta"
 
 #: u_translation.rsunsupportedf
 msgid "Unsupported file extension: %sPlease fix it."
-msgstr ""
+msgstr "Filändelsen stöds inte: %sVar god åtgärda."
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
