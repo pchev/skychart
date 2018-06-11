@@ -5651,7 +5651,7 @@ begin
     else if key = 'VT' then
       Result := rsMagnitudeTyc2 + d + Value
     else if key = 'B-V' then
-      Result := rsColorIndex + d + Value
+      Result := rsColorIndex + ' ' + 'B-V' + d + Value
     else if key = 'SP' then
       Result := rsSpectralClas + d + Value
     else if key = 'PM' then
