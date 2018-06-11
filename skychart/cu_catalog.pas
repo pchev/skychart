@@ -5924,11 +5924,17 @@ begin
     rec.dec:=dec2;
     rec.star.magv:=MAG_290/10;
     if Bp_Rp_290>-128 then begin
-       rec.star.b_v:=GaiaBRtoBV(Bp_Rp_290/10);
+       rec.vnum[1]:=true;
+       rec.num[1]:=Bp_Rp_290/10;
+       rec.options.flabel[lOffsetNum+1]:='Bp-Rp';
+       rec.star.b_v:=GaiaBRtoBV(rec.num[1]);
        rec.star.valid[vsB_v]:=true;
     end
-    else
+    else begin
+       rec.star.b_v:=0;
        rec.star.valid[vsB_v]:=false;
+       rec.vnum[1]:=false;
+    end;
     rec.options.LongName:=trim(copy(u_290.database2,1,108));
     if u_290.naam2='' then
       rec.star.id:=prepare_IAU_designation(ra2,dec2)
