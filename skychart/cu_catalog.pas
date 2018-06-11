@@ -1468,7 +1468,16 @@ begin
       EmptyRec.options.UsePrefix := 0;
       Emptyrec.star.valid[vsId] := True;
       Emptyrec.star.valid[vsMagv] := True;
-    end;    microcat:
+      if cfgcat.Name290='g16' then
+        EmptyRec.options.flabel[lOffset + vsMagv]:='mV'
+      else if cfgcat.Name290='g17' then
+        EmptyRec.options.flabel[lOffset + vsMagv]:='mBP'
+      else if cfgcat.Name290='g18' then
+        EmptyRec.options.flabel[lOffset + vsMagv]:='mBP'
+      else
+        EmptyRec.options.flabel[lOffset + vsMagv]:='m';
+    end;
+    microcat:
     begin
       EmptyRec.options.flabel := StarLabel;
       EmptyRec.options.ShortName := 'MCT';
@@ -5630,6 +5639,12 @@ begin
       Result := rsMagnitude + ' ' + 'H' + d + Value
     else if key = 'MK' then
       Result := rsMagnitude + ' ' + 'K' + d + Value
+    else if key = 'MBP' then
+      Result := rsMagnitude + ' ' + 'BP' + d + Value
+    else if key = 'MRP' then
+      Result := rsMagnitude + ' ' + 'RP' + d + Value
+    else if key = 'MG' then
+      Result := rsMagnitude + ' ' + 'G' + d + Value
     else if key = 'BT' then
       Result := rsMagnitudeTyc + d + Value
     else if key = 'VT' then

@@ -149,6 +149,9 @@ begin
   if catheader.flen[33]>0 then emptyrec.vnum[8]:=true;
   if catheader.flen[34]>0 then emptyrec.vnum[9]:=true;
   if catheader.flen[35]>0 then emptyrec.vnum[10]:=true;
+  emptyrec.options.flabel[lOffset + vsMagv]:='mG';
+  emptyrec.options.flabel[lOffset + vsMagb]:='mBP';
+  emptyrec.options.flabel[lOffset + vsMagr]:='mRP';
 end;
 
 procedure SetGaiapath(path,catshortname : string);
