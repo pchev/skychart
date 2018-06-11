@@ -151,6 +151,7 @@ type
     function NextGaiaLevel: boolean;
     function  GetGaia(var rec: GcatRec): boolean;
     function GaiaBRtoBV(br:double):double;
+    function GaiaGtoV(g,br:double):double;
     procedure FormatGaia(var rec: GcatRec);
     function  FindGaia(id: string; var ar, de: double): boolean;
 
@@ -6002,6 +6003,21 @@ begin
   else
     // Out of range for the standard Gaia relation, use a safe value.
     result:=0.5 * br;
+  // round result
+  result := Round(result*100)/100;
+end;
+
+function Tcatalog.GaiaGtoV(g,br:double):double;
+begin
+  // G−V =  -0.01760  -0.006860 * (GBP−GRP) -0.1732 * (GBP−GRP)**2
+  // Validity: −0.5 < (GBP−GRP) < 2.75
+  if (br>-0.5)and(br<2.75) then
+    result := g + 0.01760 + 0.006860 * br + 0.1732 * br*br
+  else
+    // Out of range, use safe value
+    result := g + 0.0176 + 0.1 * br;
+  // round result
+  result := Round(result*100)/100;
 end;
 
 procedure Tcatalog.FormatGaia(var rec: GcatRec);
@@ -6015,8 +6031,17 @@ begin
   if (rec.star.magb<90)and(rec.star.magr<90) then begin
     br:=(rec.star.magb-rec.star.magr);
     rec.star.b_v:=GaiaBRtoBV(br);
-    // mark b-v as valid
+    rec.num[2]:=GaiaGtoV(rec.star.magv,br);
+    // mark V and b-v as valid
     rec.star.valid[vsB_v]:=true;
+    rec.vnum[2]:=true;
+    rec.options.flabel[lOffsetNum+2]:='mV';
+  end
+  else begin
+    rec.star.b_v:=0;
+    rec.num[2]:=0;
+    rec.star.valid[vsB_v]:=false;
+    rec.vnum[2]:=false;
   end;
 end;
 
