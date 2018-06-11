@@ -5913,17 +5913,17 @@ end;
 
 function Tcatalog.Get290(var rec: GcatRec): boolean;
 var
-  ra2,dec2,Bp_Rp : double;
+  ra2,dec2 : double;
 begin
   rec := EmptyRec;
-  Result := readdatabase290('S', RA_290, DE_290, FOV_290, ra2,dec2, MAG_290, Bp_Rp);
+  Result := readdatabase290('S', RA_290, DE_290, FOV_290, ra2,dec2, MAG_290, Bp_Rp_290);
   if Result then
   begin
     rec.ra:=ra2;
     rec.dec:=dec2;
     rec.star.magv:=MAG_290/10;
-    if Bp_Rp>-128 then begin
-       rec.star.b_v:=GaiaBRtoBV(Bp_Rp/10);
+    if Bp_Rp_290>-128 then begin
+       rec.star.b_v:=GaiaBRtoBV(Bp_Rp_290/10);
        rec.star.valid[vsB_v]:=true;
     end
     else

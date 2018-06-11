@@ -35,7 +35,7 @@ var
 
   // skychart variables
   catalog_path      : string; {path to the .290 files}
-  RA_290,DE_290,FOV_290,MAG_290: double;
+  RA_290,DE_290,FOV_290,MAG_290,Bp_Rp_290: double;
 
 const
    maxmag   : integer=999; {magnitude*10, limiting magnitude can be set lower for mouse click search}
