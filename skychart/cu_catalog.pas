@@ -427,7 +427,7 @@ begin
       CloseStarCat;
       Dec(curcat);
 
-      while (curcat > (BaseStar+1)) and (not cfgcat.starcaton[curcat - BaseStar]) do
+      while (curcat > (BaseStar)) and (not cfgcat.starcaton[curcat - BaseStar]) do
         Dec(curcat);
 
       Result := False;
