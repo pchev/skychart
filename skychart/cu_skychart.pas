@@ -3449,10 +3449,13 @@ begin
   cfgsc.FindType := rec.options.rectype;
   cfgsc.FindCat := rec.options.ShortName;
   cfgsc.FindCatname := rec.options.LongName;
+  // description must start with coordinates, type, name and magnitude to ensure this values can be found by external scripts
+  // coordinates
   desc := ARpToStr(rmod(rad2deg * rec.ra / 15 + 24, 24)) + tab + DEpToStr(rad2deg * rec.Dec) + tab;
   case rec.options.rectype of
     rtStar:
     begin   // stars
+      // type and name
       if rec.star.valid[vsId] then
         txt := rec.star.id
       else
@@ -3469,24 +3472,22 @@ begin
       else
         cfgsc.FindName := txt;
       Desc := Desc + '  *' + tab + txt + tab;
+      // magnitude
       if rec.star.magv < 90 then
         str(rec.star.magv: 6: 3, txt)
       else
         txt := b6;
       Desc := Desc + trim(rec.options.flabel[lOffset + vsMagv]) + dp + txt + tab;
-      for i := 1 to 10 do
-      begin
-        if rec.vstr[i] and rec.options.altname[i] and (trim(rec.str[i]) > '') then
-          Desc := Desc + trim(rec.options.flabel[15 + i]) + dp + rec.str[i] + tab;
-      end;
+      // b-v
       if rec.star.valid[vsB_v] then
       begin
         if (rec.star.b_v < 90) then
-          str(rec.star.b_v: 6: 3, txt)
+          txt := formatfloat('0.0##', rec.star.b_v)
         else
           txt := b6;
         Desc := Desc + trim(rec.options.flabel[lOffset + vsB_v]) + dp + txt + tab;
       end;
+      // magnitude B
       if rec.star.valid[vsMagb] then
       begin
         if (rec.star.magb < 90) then
@@ -3495,6 +3496,7 @@ begin
           txt := b6;
         Desc := Desc + trim(rec.options.flabel[lOffset + vsMagb]) + dp + txt + tab;
       end;
+      // magnitude R
       if rec.star.valid[vsMagr] then
       begin
         if (rec.star.magr < 90) then
@@ -3503,8 +3505,16 @@ begin
           txt := b6;
         Desc := Desc + trim(rec.options.flabel[lOffset + vsMagr]) + dp + txt + tab;
       end;
+      // other magnitudes
+      for i := 1 to 10 do
+        if rec.vnum[i] and (uppercase(trim(copy(rec.options.flabel[lOffsetNum + i],1,1)))='M') then
+        begin
+          Desc := Desc + trim(rec.options.flabel[lOffsetNum + i]) + dp + formatfloat('0.0####', rec.num[i]) + tab;
+        end;
+      // spectral class
       if rec.star.valid[vsSp] then
         Desc := Desc + trim(rec.options.flabel[lOffset + vsSp]) + dp + rec.star.sp + tab;
+      // proper motion
       if rec.star.valid[vsPmra] then
       begin
         str(rad2deg * 3600 * 1000 * rec.star.pmra: 6: 3, txt);
@@ -3520,6 +3530,7 @@ begin
         str(rec.star.epoch: 8: 2, txt);
         Desc := Desc + trim(rec.options.flabel[lOffset + vsEpoch]) + dp + txt + tab;
       end;
+      // parallax
       if rec.star.valid[vsPx] then
       begin
         if (rec.star.px>0)and(rec.star.px<0.8) then cfgsc.FindPX := rec.star.px;
@@ -3531,6 +3542,13 @@ begin
           Desc := Desc + 'Dist:' + txt + b + '[ly]' + tab;
         end;
       end;
+      // alternate names
+      for i := 1 to 10 do
+      begin
+        if rec.vstr[i] and rec.options.altname[i] and (trim(rec.str[i]) > '') then
+          Desc := Desc + trim(rec.options.flabel[lOffsetStr + i]) + dp + rec.str[i] + tab;
+      end;
+      // comments
       if rec.star.valid[vsComment] then
         Desc := Desc + trim(rec.options.flabel[lOffset + vsComment]) +
           dp + b + rec.star.comment + tab;
@@ -3585,7 +3603,7 @@ begin
       for i := 1 to 10 do
       begin
         if rec.vstr[i] and rec.options.altname[i] then
-          Desc := Desc + trim(rec.options.flabel[15 + i]) + dp + rec.str[i] + tab;
+          Desc := Desc + trim(rec.options.flabel[lOffsetStr + i]) + dp + rec.str[i] + tab;
       end;
       if rec.variable.valid[vvSp] then
         Desc := Desc + trim(rec.options.flabel[lOffset + vvSp]) + dp + rec.variable.sp + tab;
@@ -3649,7 +3667,7 @@ begin
       for i := 1 to 10 do
       begin
         if rec.vstr[i] and rec.options.altname[i] then
-          Desc := Desc + trim(rec.options.flabel[15 + i]) + dp + rec.str[i] + tab;
+          Desc := Desc + trim(rec.options.flabel[lOffsetStr + i]) + dp + rec.str[i] + tab;
       end;
       if rec.double.valid[vdSp1] then
         Desc := Desc + trim(rec.options.flabel[lOffset + vdSp1]) + dp + ' 1 ' + rec.double.sp1 + tab;
@@ -3699,7 +3717,7 @@ begin
       for i := 1 to 10 do
       begin
         if rec.vstr[i] and rec.options.altname[i] and (trim(rec.str[i]) > '') then
-          Desc := Desc + trim(rec.options.flabel[15 + i]) + dp + rec.str[i] + tab;
+          Desc := Desc + trim(rec.options.flabel[lOffsetStr + i]) + dp + rec.str[i] + tab;
       end;
       if rec.neb.valid[vnSbr] then
       begin
@@ -3771,9 +3789,10 @@ begin
       if rec.neb.valid[vnComment] and (trim(rec.neb.comment) > '') then
         Desc := Desc + trim(rec.options.flabel[lOffset + vnComment]) + dp + rec.neb.comment + tab;
     end;
-  end;
+  end;   // case  rec.options.rectype
   if trim(rec.options.ShortName) = 'd2k' then
   begin
+    // ds2000 specific fileds
     Desc := Desc + 'desc:' + tab;
     for i := 1 to 10 do
     begin
@@ -3784,18 +3803,20 @@ begin
   end
   else
   begin
+    // other string values without alternate names
     for i := 1 to 10 do
     begin
       if rec.vstr[i] and (not rec.options.altname[i]) and (trim(rec.str[i]) > '') then
-        Desc := Desc + trim(rec.options.flabel[15 + i]) + dp + rec.str[i] + tab;
+        Desc := Desc + trim(rec.options.flabel[lOffsetStr + i]) + dp + rec.str[i] + tab;
     end;
   end;
+  // other numeric values without star magnitudes
   for i := 1 to 10 do
-    if rec.vnum[i] then
+    if rec.vnum[i] and ((rec.options.rectype<>rtStar)or(uppercase(trim(copy(rec.options.flabel[lOffsetNum + i],1,1)))<>'M')) then
     begin
-      buf := trim(rec.options.flabel[25 + i]);
+      buf := trim(rec.options.flabel[lOffsetNum + i]);
       txt := formatfloat('0.0####', rec.num[i]);
-      if (cfgsc.FindCat = 'Star') and (buf = 'RV') then
+      if ((cfgsc.FindCat = 'Star')or(cfgsc.FindCat = 'Gaia')) and (uppercase(buf) = 'RV') then
         txt := txt + b + '[km/s]';
       Desc := Desc + buf + dp + txt + tab;
     end;
