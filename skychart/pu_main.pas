@@ -6314,7 +6314,7 @@ begin
     catalog.cfgcat.starcatpath[gaia - BaseStar] + PathDelim + 'gaia';
   catalog.cfgcat.starcatdef[gaia - BaseStar] := false;
   catalog.cfgcat.starcatfield[gaia - BaseStar, 1] := 0;
-  catalog.cfgcat.starcatfield[gaia - BaseStar, 2] := 7;
+  catalog.cfgcat.starcatfield[gaia - BaseStar, 2] := 6;
   catalog.cfgcat.GaiaLevel:=1;
   catalog.cfgcat.LimitGaiaCount:=true;
 
