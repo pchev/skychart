@@ -51,7 +51,7 @@ if [ -f "$lang/documentation/virtual_observatory_interface.html" ]; then
 fi
 
 if [ -f "$lang/documentation/telescope_ascom.html" ]; then 
- sed -i '/\/system.html/ a '$lang'\/documentation\/telescope_ascom.html \n'$lang'\/documentation\/telescope_indi.html \n'$lang'\/documentation\/telescope_lx200.html \n'$lang'\/documentation\/telescope_encoder.html ' fl.txt
+ sed -i '/\/system.html/ a '$lang'\/documentation\/telescope_ascom.html \n'$lang'\/documentation\/telescope_indi.html ' fl.txt
 fi
 
 # all in one line
