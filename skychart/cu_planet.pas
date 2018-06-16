@@ -2804,8 +2804,7 @@ var
   qry, id, ref, nam, elem_id: string;
   ira, idec, imag: integer;
 
-  i: integer;
-  s1, s2: string;
+  s1: string;
 begin
   Result := False;
   searchid := '';
@@ -2885,8 +2884,8 @@ function TPlanet.FindCometName(comname: string; var ra, de, mag: double;
 var
   dist, r, elong, phase, rad, ded: double;
   epoch, h, g, ap, an, ic, ec, eq, tp, q, diam, lc, car, cde, rc, xc, yc, zc: double;
-  qry, id, nam, elem_id, s1, s2: string;
-  i, ira, idec, imag: integer;
+  qry, id, nam, elem_id, s1: string;
+  ira, idec, imag: integer;
 begin
   Result := False;
   searchid := '';
