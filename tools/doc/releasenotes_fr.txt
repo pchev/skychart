@@ -3,6 +3,8 @@ Version 4.1.1 beta, Notes de la version
 Nouvelles fonctions:
 
 - Suppression des pilotes lx200 et encodeur devenus obsolète/non maintenable. Veuillez utiliser les pilotes ASCOM ou INDI correspondants.
+  - pour les lx200 génériques: https://pixelstelescopes.wordpress.com/advanced-lx200/
+  - pour les cercles digitaux: http://eksfiles.net/digital-setting-circles/ascom-driver-for-digital-setting-circles/
 - Supporte le nouveau catalogue d'étoile GAIA DR2.
 - Permet d'utiliser des catalogues d'étoiles de HNSKY au format "290".
 - Améliore l'affichage des étoiles doubles.

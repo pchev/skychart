@@ -3,6 +3,8 @@ Version 4.1.1 beta, release Notes
 New functions:
 
 - Remove obsolete/unmaintainable lx200 and encoder drivers. Pease use the corresponding ASCOM or INDI drivers.
+  - for generic lx200: https://pixelstelescopes.wordpress.com/advanced-lx200/
+  - for digital circle: http://eksfiles.net/digital-setting-circles/ascom-driver-for-digital-setting-circles/
 - Support for the new GAIA DR2 star catalog.
 - Allow to use HNSKY star catalog using the "290" format.
 - Improve double star display.
