@@ -1006,7 +1006,7 @@ type
     ManualTelescopeType, CoordType, DSLcolor: integer;
     IndiServerHost, IndiServerPort, IndiDevice: string;
     IndiAutostart, ShowCircle, ShowCrosshair, IndiTelescope, ASCOMTelescope,
-    LX200Telescope, EncoderTelescope, ManualTelescope, ShowImages,
+    ManualTelescope, ShowImages,
     EyepieceMask, ShowImageList, ShowImageLabel, ShowBackgroundImage,
     showstars, shownebulae, showline, showlabelall, Editlabels,
     OptimizeLabels, RotLabel: boolean;
@@ -2319,8 +2319,6 @@ begin
   EyepieceMask := Source.EyepieceMask;
   IndiTelescope := Source.IndiTelescope;
   ASCOMTelescope := Source.ASCOMTelescope;
-  LX200Telescope := Source.LX200Telescope;
-  EncoderTelescope := Source.EncoderTelescope;
   ManualTelescope := Source.ManualTelescope;
   ShowImages := Source.ShowImages;
   ShowBackgroundImage := Source.ShowBackgroundImage;

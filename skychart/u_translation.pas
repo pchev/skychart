@@ -1638,7 +1638,6 @@ resourcestring
   rsThisDirectDr = 'This direct driver is kept for compatibility, it may work '
     + 'or not for you. But the preference is to use the INDI or ASCOM driver '
     + 'for your telescope.';
-  rsShowObsolete = 'Show obsolete drivers';
   rsComputeRiseS = 'Compute rise/set time relative to this line';
   rsSlewingTo = 'Slewing to %s / %s';
   rsSyncedTo = 'Synced to %s / %s';

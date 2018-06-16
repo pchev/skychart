@@ -31,7 +31,7 @@ interface
 
 uses
   BGRABitmap, BGRABitmapTypes, u_orbits,
-  pu_ascomclient, pu_lx200client, pu_encoderclient, pu_indiclient,
+  pu_ascomclient, pu_indiclient,
   pu_getdss, pu_imglist,
   u_translation, pu_detail, cu_skychart, u_constant, u_util, pu_image,
   gcatunit, pu_obslist,
@@ -280,8 +280,6 @@ type
     SaveLabelColor: array[1..numlabtype] of Tcolor;
     PrintPreview: Tf_image;
     Fpop_indi: Tpop_indi;
-    Fpop_encoder: Tpop_encoder;
-    Fpop_lx200: Tpop_lx200;
     Fpop_scope: Tpop_scope;
     FSendImageFits: TSendImageFits;
     FSendSelectRow: TSendSelectRow;
@@ -294,12 +292,6 @@ type
     procedure SlewASCOM(Sender: TObject);
     procedure SyncASCOM(Sender: TObject);
     procedure AbortSlewASCOM(Sender: TObject);
-    procedure ConnectLX200(Sender: TObject; autoconnect: boolean = False);
-    procedure SlewLX200(Sender: TObject);
-    procedure SyncLX200(Sender: TObject);
-    procedure AbortSlewLX200(Sender: TObject);
-    procedure ConnectEncoder(Sender: TObject; autoconnect: boolean = False);
-    procedure SyncEncoder(Sender: TObject);
     procedure SetNightVision(Value: boolean);
     procedure Image1Click(Sender: TObject);
     procedure Image1DblClick(Sender: TObject);
@@ -555,10 +547,6 @@ begin
   DownloadDialog1.msgCancelBtn := rsCancel;
   if sc <> nil then
     sc.SetLang;
-  if Fpop_lx200 <> nil then
-    Fpop_lx200.SetLang;
-  if Fpop_encoder <> nil then
-    Fpop_encoder.SetLang;
   if Fpop_indi <> nil then
     Fpop_indi.SetLang;
   if Fpop_scope <> nil then
@@ -691,18 +679,6 @@ begin
         ISleep(500);
       end;
       Fpop_indi.Free;
-    end;
-    if Fpop_lx200 <> nil then
-    begin
-      if Connect1.Checked then
-        Fpop_lx200.ScopeDisconnect(ok);
-      Fpop_lx200.Free;
-    end;
-    if Fpop_encoder <> nil then
-    begin
-      if Connect1.Checked then
-        Fpop_encoder.ScopeDisconnect(ok);
-      Fpop_encoder.Free;
     end;
     if f_imglist <> nil then
       f_imglist.Free;
@@ -5011,28 +4987,6 @@ begin
         sc.cfgsc.TelescopeJD := jd(trunc(sc.cfgsc.TelescopeJD), 0, 0, 0);
       Fpop_indi.ScopeGetRaDec(ra, Dec, ok);
     end;
-  end
-  else if sc.cfgsc.LX200Telescope then
-  begin
-    Connect1.Checked := Fpop_lx200.ScopeConnected;
-    if Connect1.Checked then
-    begin
-      Fpop_lx200.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
-      if sc.cfgsc.TelescopeJD <> 0 then
-        sc.cfgsc.TelescopeJD := jd(trunc(sc.cfgsc.TelescopeJD), 0, 0, 0);
-      Fpop_lx200.ScopeGetRaDec(ra, Dec, ok);
-    end;
-  end
-  else if sc.cfgsc.EncoderTelescope then
-  begin
-    Connect1.Checked := Fpop_encoder.ScopeConnected;
-    if Connect1.Checked then
-    begin
-      Fpop_encoder.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
-      if sc.cfgsc.TelescopeJD <> 0 then
-        sc.cfgsc.TelescopeJD := jd(trunc(sc.cfgsc.TelescopeJD), 0, 0, 0);
-      Fpop_encoder.ScopeGetRaDec(ra, Dec, ok);
-    end;
   end;
   if ok then
     Result := msgOK + blank + artostr3(ra) + blank + detostr3(Dec)
@@ -5091,10 +5045,6 @@ begin
     begin
       Fpop_indi.GetScopeRates(n0, rates);
     end;
-    if sc.cfgsc.LX200Telescope then
-    begin
-      Fpop_lx200.GetScopeRates(n0, rates);
-    end;
   end;
 end;
 
@@ -5139,21 +5089,6 @@ begin
       else
         Result := msgFailed;
     end;
-    if sc.cfgsc.LX200Telescope then
-    begin
-      n0 := 0;
-      srate := TStringList.Create;
-      Fpop_lx200.GetScopeRates(n0, srate);
-      if n0 > 0 then
-      begin
-        Result := msgOK + tab + IntToStr(n0) + tab;
-        Result := Result + '0' + tab;
-        for i := 0 to n0 - 1 do
-          Result := Result + srate[i] + tab;
-      end
-      else
-        Result := msgFailed;
-    end;
   end;
 end;
 
@@ -5184,14 +5119,6 @@ begin
       Fpop_indi.ScopeMoveAxis(ax, rate);
       Result := msgOK;
     end;
-    if sc.cfgsc.LX200Telescope then
-    begin
-      val(axis, ax, n);
-      if n <> 0 then
-        exit;
-      Fpop_lx200.ScopeMoveAxis(ax, rate);
-      Result := msgOK;
-    end;
   end;
 end;
 
@@ -5213,16 +5140,6 @@ begin
     if sc.cfgsc.IndiTelescope then
     begin
       Fpop_indi.SetRefreshRate(rt);
-      Result := msgOK;
-    end;
-    if sc.cfgsc.LX200Telescope then
-    begin
-      Fpop_lx200.SetRefreshRate(rt);
-      Result := msgOK;
-    end;
-    if sc.cfgsc.EncoderTelescope then
-    begin
-      Fpop_encoder.SetRefreshRate(rt);
       Result := msgOK;
     end;
   end;
@@ -5270,17 +5187,6 @@ begin
     ConnectASCOM(self, True);
     Result := msgOK;
   end
-  else
-  if sc.cfgsc.LX200Telescope then
-  begin
-    ConnectLX200(self, True);
-    Result := msgOK;
-  end
-  else if sc.cfgsc.EncoderTelescope then
-  begin
-    ConnectEncoder(self, True);
-    Result := msgOK;
-  end
   else if sc.cfgsc.IndiTelescope then
   begin
     ConnectINDI(self, True);
@@ -5298,25 +5204,6 @@ begin
     if (not Connect1.Checked) or (Fpop_scope = nil) then
       exit;
     Fpop_scope.ScopeDisconnect(ok);
-    Connect1.Checked := False;
-    if ok then
-      Result := msgOK;
-  end
-  else
-  if sc.cfgsc.LX200Telescope then
-  begin
-    if (not Connect1.Checked) or (Fpop_lx200 = nil) then
-      exit;
-    Fpop_lx200.ScopeDisconnect(ok);
-    Connect1.Checked := False;
-    if ok then
-      Result := msgOK;
-  end
-  else if sc.cfgsc.EncoderTelescope then
-  begin
-    if (not Connect1.Checked) or (Fpop_encoder = nil) then
-      exit;
-    Fpop_encoder.ScopeDisconnect(ok);
     Connect1.Checked := False;
     if ok then
       Result := msgOK;
@@ -5361,17 +5248,6 @@ begin
         Fpop_scope.ScopeAlign('sync', ra * rad2deg / 15, Dec * rad2deg);
         Result := msgOK;
       end
-      else
-      if sc.cfgsc.LX200Telescope then
-      begin
-        Fpop_lx200.ScopeAlign('sync', ra * rad2deg / 15, Dec * rad2deg);
-        Result := msgOK;
-      end
-      else if sc.cfgsc.EncoderTelescope then
-      begin
-        Fpop_encoder.ScopeAlign('sync', ra * rad2deg / 15, Dec * rad2deg);
-        Result := msgOK;
-      end
       else if sc.cfgsc.IndiTelescope then
       begin
         Fpop_indi.ScopeAlign('sync', ra * rad2deg / 15, Dec * rad2deg);
@@ -5396,16 +5272,6 @@ begin
       begin
         SlewASCOM(self);
         Result := msgOK;
-      end
-      else
-      if sc.cfgsc.LX200Telescope then
-      begin
-        SlewLX200(self);
-        Result := msgOK;
-      end
-      else if sc.cfgsc.EncoderTelescope then
-      begin
-        // no slew
       end
       else if sc.cfgsc.IndiTelescope then
       begin
@@ -5438,11 +5304,6 @@ begin
           Fpop_scope.ScopeGoto(ra * rad2deg / 15, Dec * rad2deg, ok);
           Result := msgOK;
         end
-        else if sc.cfgsc.LX200Telescope then
-        begin
-          Fpop_lx200.ScopeGoto(ra * rad2deg / 15, Dec * rad2deg, ok);
-          Result := msgOK;
-        end
         else if sc.cfgsc.IndiTelescope then
         begin
           Fpop_indi.ScopeGoto(ra * rad2deg / 15, Dec * rad2deg, ok);
@@ -5464,16 +5325,6 @@ begin
     begin
       AbortSlewASCOM(self);
       Result := msgOK;
-    end
-    else
-    if sc.cfgsc.LX200Telescope then
-    begin
-      AbortSlewLX200(self);
-      Result := msgOK;
-    end
-    else if sc.cfgsc.EncoderTelescope then
-    begin
-      // no slew
     end
     else if sc.cfgsc.IndiTelescope then
     begin
@@ -6710,15 +6561,6 @@ begin
   begin
     ConnectASCOM(Sender);
   end
-  else
-  if sc.cfgsc.LX200Telescope then
-  begin
-    ConnectLX200(Sender);
-  end
-  else if sc.cfgsc.EncoderTelescope then
-  begin
-    ConnectEncoder(Sender);
-  end
   else if sc.cfgsc.ManualTelescope then
   begin
     sc.cfgsc.TelescopeJD := 0;
@@ -6739,15 +6581,6 @@ begin
     begin
       SlewASCOM(Sender);
     end
-    else
-    if sc.cfgsc.LX200Telescope then
-    begin
-      SlewLX200(Sender);
-    end
-    else if sc.cfgsc.EncoderTelescope then
-    begin
-      // no slew
-    end
     else if sc.cfgsc.IndiTelescope then
     begin
       SlewINDI(Sender);
@@ -6764,15 +6597,6 @@ begin
     if sc.cfgsc.ASCOMTelescope then
     begin
       AbortSlewASCOM(Sender);
-    end
-    else
-    if sc.cfgsc.LX200Telescope then
-    begin
-      AbortSlewLX200(Sender);
-    end
-    else if sc.cfgsc.EncoderTelescope then
-    begin
-      // no slew
     end
     else if sc.cfgsc.IndiTelescope then
     begin
@@ -6791,15 +6615,6 @@ begin
       if sc.cfgsc.ASCOMTelescope then
       begin
         SyncASCOM(Sender);
-      end
-      else
-      if sc.cfgsc.LX200Telescope then
-      begin
-        SyncLX200(Sender);
-      end
-      else if sc.cfgsc.EncoderTelescope then
-      begin
-        SyncEncoder(Sender);
       end
       else if sc.cfgsc.IndiTelescope then
       begin
@@ -7374,164 +7189,6 @@ begin
     Fshowinfo(rsNoTargetObje);
 end;
 
-// LX200 interface
-
-procedure Tf_chart.ConnectLX200(Sender: TObject; autoconnect: boolean = False);
-var
-  ok: boolean;
-begin
-  if Fpop_lx200 = nil then
-  begin
-    Fpop_lx200 := Tpop_lx200.Create(self);
-    Fpop_lx200.csc := sc.cfgsc;
-    Fpop_lx200.SetLang;
-  end;
-  if Connect1.Checked then
-  begin
-    Fpop_lx200.ScopeShow;
-  end
-  else
-  begin
-    Fpop_lx200.ScopeReadConfig(ExtractFilePath(Configfile));
-    Fpop_lx200.ScopeSetObs(sc.cfgsc.ObsLatitude, sc.cfgsc.ObsLongitude, sc.cfgsc.TimeZone);
-    if autoconnect then
-    begin
-      Fpop_lx200.ScopeConnect(ok);
-      Connect1.Checked := True;
-    end
-    else
-    begin
-      Fpop_lx200.ScopeShow;
-    end;
-    TelescopeTimer.Interval := 2000;
-    TelescopeTimer.Enabled := True;
-  end;
-  if assigned(FUpdateBtn) then
-    FUpdateBtn(sc.cfgsc.flipx, sc.cfgsc.flipy, Connect1.Checked, self);
-end;
-
-procedure Tf_chart.SlewLX200(Sender: TObject);
-var
-  ra, Dec: double;
-  ok: boolean;
-begin
-  if sc.cfgsc.FindName <> '' then
-  begin
-    ra := sc.cfgsc.FindRA;
-    Dec := sc.cfgsc.FindDec;
-    if sc.cfgsc.TelescopeJD = 0 then
-    begin
-      precession(sc.cfgsc.JDChart, sc.cfgsc.CurJDUT, ra, Dec);
-    end
-    else
-    begin
-      if sc.cfgsc.ApparentPos then
-        mean_equatorial(ra, Dec, sc.cfgsc, True, sc.cfgsc.FindType < ftPla);
-      precession(sc.cfgsc.JDChart, sc.cfgsc.TelescopeJD, ra, Dec);
-    end;
-    ra := rmod(ra + pi2, pi2);
-    Fpop_lx200.ScopeGoto(ra * rad2deg / 15, Dec * rad2deg, ok);
-    Fshowinfo(Format(rsSlewingTo, [ARtoStr(ra * rad2deg / 15), DEToStr(dec * rad2deg)]));
-  end
-  else
-    Fshowinfo(rsNoTargetObje);
-end;
-
-procedure Tf_chart.AbortSlewLX200(Sender: TObject);
-begin
-  Fpop_lx200.ScopeAbortSlew;
-  Fshowinfo(rsAbortSlew);
-end;
-
-procedure Tf_chart.SyncLX200(Sender: TObject);
-var
-  ra, Dec: double;
-begin
-  if sc.cfgsc.FindName <> '' then
-  begin
-    ra := sc.cfgsc.FindRA;
-    Dec := sc.cfgsc.FindDec;
-    if sc.cfgsc.TelescopeJD = 0 then
-    begin
-      precession(sc.cfgsc.JDChart, sc.cfgsc.CurJDUT, ra, Dec);
-    end
-    else
-    begin
-      if sc.cfgsc.ApparentPos then
-        mean_equatorial(ra, Dec, sc.cfgsc, True, sc.cfgsc.FindType < ftPla);
-      precession(sc.cfgsc.JDChart, sc.cfgsc.TelescopeJD, ra, Dec);
-    end;
-    ra := rmod(ra + pi2, pi2);
-    Fpop_lx200.ScopeAlign(sc.cfgsc.FindName, ra * rad2deg / 15, Dec * rad2deg);
-    Fshowinfo(Format(rsSyncedTo, [ARtoStr(ra * rad2deg / 15), DEToStr(dec * rad2deg)]));
-  end
-  else
-    Fshowinfo(rsNoTargetObje);
-end;
-
-// Encoder interface
-
-procedure Tf_chart.ConnectEncoder(Sender: TObject; autoconnect: boolean = False);
-var
-  ok: boolean;
-begin
-  if Fpop_encoder = nil then
-  begin
-    Fpop_encoder := Tpop_encoder.Create(self);
-    Fpop_encoder.csc := sc.cfgsc;
-    Fpop_encoder.SetLang;
-  end;
-  if Connect1.Checked then
-  begin
-    Fpop_encoder.ScopeShow;
-  end
-  else
-  begin
-    Fpop_encoder.ScopeReadConfig(ExtractFilePath(Configfile));
-    Fpop_encoder.ScopeSetObs(sc.cfgsc.ObsLatitude, sc.cfgsc.ObsLongitude);
-    if autoconnect then
-    begin
-      Fpop_encoder.ScopeConnect(ok);
-      Connect1.Checked := True;
-    end
-    else
-    begin
-      Fpop_encoder.ScopeShow;
-    end;
-    TelescopeTimer.Interval := 2000;
-    TelescopeTimer.Enabled := True;
-  end;
-  if assigned(FUpdateBtn) then
-    FUpdateBtn(sc.cfgsc.flipx, sc.cfgsc.flipy, Connect1.Checked, self);
-end;
-
-procedure Tf_chart.SyncEncoder(Sender: TObject);
-var
-  ra, Dec: double;
-begin
-  if sc.cfgsc.FindName <> '' then
-  begin
-    ra := sc.cfgsc.FindRA;
-    Dec := sc.cfgsc.FindDec;
-    if sc.cfgsc.TelescopeJD = 0 then
-    begin
-      precession(sc.cfgsc.JDChart, sc.cfgsc.CurJDUT, ra, Dec);
-    end
-    else
-    begin
-      if sc.cfgsc.ApparentPos then
-        mean_equatorial(ra, Dec, sc.cfgsc, True, sc.cfgsc.FindType < ftPla);
-      precession(sc.cfgsc.JDChart, sc.cfgsc.TelescopeJD, ra, Dec);
-    end;
-    ra := rmod(ra + pi2, pi2);
-    Fpop_encoder.ScopeAlign(sc.cfgsc.FindName, ra * rad2deg / 15, Dec * rad2deg);
-    Fshowinfo(Format(rsSyncedTo, [ARtoStr(ra * rad2deg / 15), DEToStr(dec * rad2deg)]));
-  end
-  else
-    Fshowinfo(rsNoTargetObje);
-end;
-
-
 // Windows only ASCOM interface
 
 procedure Tf_chart.ConnectASCOM(Sender: TObject; autoconnect: boolean = False);
@@ -7662,28 +7319,6 @@ begin
           if sc.cfgsc.TelescopeJD <> 0 then
             sc.cfgsc.TelescopeJD := jd(trunc(sc.cfgsc.TelescopeJD), 0, 0, 0);
           Fpop_indi.ScopeGetRaDec(ra, Dec, ok);
-        end;
-      end
-      else if sc.cfgsc.LX200Telescope and (Fpop_lx200 <> nil) then
-      begin
-        Connect1.Checked := Fpop_lx200.ScopeConnected;
-        if Connect1.Checked then
-        begin
-          Fpop_lx200.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
-          if sc.cfgsc.TelescopeJD <> 0 then
-            sc.cfgsc.TelescopeJD := jd(trunc(sc.cfgsc.TelescopeJD), 0, 0, 0);
-          Fpop_lx200.ScopeGetRaDec(ra, Dec, ok);
-        end;
-      end
-      else if sc.cfgsc.EncoderTelescope and (Fpop_encoder <> nil) then
-      begin
-        Connect1.Checked := Fpop_encoder.ScopeConnected;
-        if Connect1.Checked then
-        begin
-          Fpop_encoder.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
-          if sc.cfgsc.TelescopeJD <> 0 then
-            sc.cfgsc.TelescopeJD := jd(trunc(sc.cfgsc.TelescopeJD), 0, 0, 0);
-          Fpop_encoder.ScopeGetRaDec(ra, Dec, ok);
         end;
       end;
       newconnection := (not newconnection) and Connect1.Checked;

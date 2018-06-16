@@ -6198,11 +6198,9 @@ begin
   def_cfgsc.IndiDevice := 'Telescope Simulator';
   def_cfgsc.IndiTelescope := False;
   def_cfgsc.ASCOMTelescope := False;
-  def_cfgsc.LX200Telescope := False;
-  def_cfgsc.EncoderTelescope := False;
   def_cfgsc.ManualTelescope := False;
 {$ifdef unix}
-  def_cfgsc.ManualTelescope := True;
+  def_cfgsc.IndiTelescope := True;
 {$endif}
 {$ifdef mswindows}
   def_cfgsc.ASCOMTelescope := True;
@@ -7468,10 +7466,6 @@ begin
           ReadBool(section, 'IndiTelescope', def_cfgsc.IndiTelescope);
         def_cfgsc.ASCOMTelescope :=
           ReadBool(section, 'ASCOMTelescope', def_cfgsc.ASCOMTelescope);
-        def_cfgsc.LX200Telescope :=
-          ReadBool(section, 'LX200Telescope', def_cfgsc.LX200Telescope);
-        def_cfgsc.EncoderTelescope :=
-          ReadBool(section, 'EncoderTelescope', def_cfgsc.EncoderTelescope);
         def_cfgsc.ManualTelescope :=
           ReadBool(section, 'ManualTelescope', def_cfgsc.ManualTelescope);
         def_cfgsc.ManualTelescopeType :=
@@ -7481,11 +7475,10 @@ begin
         def_cfgsc.TelescopeTurnsY :=
           ReadFloat(section, 'TelescopeTurnsY', def_cfgsc.TelescopeTurnsY);
         if not (def_cfgsc.IndiTelescope or def_cfgsc.ASCOMTelescope or
-          def_cfgsc.LX200Telescope or def_cfgsc.EncoderTelescope or
-          def_cfgsc.ManualTelescope) then
+                def_cfgsc.ManualTelescope) then
         begin
   {$ifdef unix}
-          def_cfgsc.ManualTelescope := True;
+          def_cfgsc.IndiTelescope := True;
   {$endif}
   {$ifdef mswindows}
           def_cfgsc.ASCOMTelescope := True;
@@ -8590,8 +8583,6 @@ begin
         WriteString(section, 'IndiDevice', def_cfgsc.IndiDevice);
         WriteBool(section, 'IndiTelescope', def_cfgsc.IndiTelescope);
         WriteBool(section, 'ASCOMTelescope', def_cfgsc.ASCOMTelescope);
-        WriteBool(section, 'LX200Telescope', def_cfgsc.LX200Telescope);
-        WriteBool(section, 'EncoderTelescope', def_cfgsc.EncoderTelescope);
         WriteBool(section, 'ManualTelescope', def_cfgsc.ManualTelescope);
         WriteInteger(section, 'ManualTelescopeType', def_cfgsc.ManualTelescopeType);
         WriteFloat(section, 'TelescopeTurnsX', def_cfgsc.TelescopeTurnsX);

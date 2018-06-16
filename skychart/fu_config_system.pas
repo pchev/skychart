@@ -36,7 +36,6 @@ type
   { Tf_config_system }
 
   Tf_config_system = class(TFrame)
-    ShowObsoleteDrivers: TCheckBox;
     LanguageList: TCheckListBox;
     UseScaling: TCheckBox;
     GetIndiDevices: TButton;
@@ -153,7 +152,6 @@ type
     PageControl1: TPageControl;
     procedure LanguageListItemClick(Sender: TObject; Index: integer);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: boolean);
-    procedure ShowObsoleteDriversChange(Sender: TObject);
     procedure UseScalingChange(Sender: TObject);
     procedure GetIndiDevicesClick(Sender: TObject);
     procedure CheckBox1Change(Sender: TObject);
@@ -311,12 +309,6 @@ begin
   TelescopeSelect.Items[0] := rsINDIDriver;
   TelescopeSelect.Items[1] := rsManualMount;
   TelescopeSelect.Items[2] := 'ASCOM';
-  if TelescopeSelect.Items.Count > 4 then
-  begin
-    TelescopeSelect.Items[3] := 'LX200';
-    TelescopeSelect.Items[4] := rsEncoders;
-  end;
-  ShowObsoleteDrivers.Caption := rsShowObsolete;
   label15.Caption := rsVOSAMPSettin;
   label16.Caption := Format(rsSAMPIsAMessa, [crlf]);
   label17.Caption := rsForMoreInfor;
@@ -513,14 +505,8 @@ begin
   RevertTurnsAlt.Checked := csc.TelescopeTurnsY < 0;
   ManualMountType.ItemIndex := csc.ManualTelescopeType;
   ManualMountTypeClick(nil);
-  ShowObsoleteDrivers.Checked := (csc.LX200Telescope or csc.EncoderTelescope);
-  ShowObsoleteDriversChange(nil);
   if csc.IndiTelescope then
     Telescopeselect.ItemIndex := 0
-  else if csc.EncoderTelescope then
-    Telescopeselect.ItemIndex := 4
-  else if csc.LX200Telescope then
-    Telescopeselect.ItemIndex := 3
   else if csc.ASCOMTelescope then
     Telescopeselect.ItemIndex := 2
   else
@@ -722,28 +708,6 @@ begin
     TForm(Parent).ActiveControl := PageControl1;
 end;
 
-procedure Tf_config_system.ShowObsoleteDriversChange(Sender: TObject);
-begin
-  if ShowObsoleteDrivers.Checked then
-  begin
-    if TelescopeSelect.Items.Count < 4 then
-    begin
-      TelescopeSelect.Items.Add('LX200');
-      TelescopeSelect.Items.Add(rsEncoders);
-    end;
-  end
-  else
-  begin
-    if TelescopeSelect.ItemIndex > 2 then
-      TelescopeSelect.ItemIndex := 1;
-    if TelescopeSelect.Items.Count > 4 then
-    begin
-      TelescopeSelect.Items.Delete(4);
-      TelescopeSelect.Items.Delete(3);
-    end;
-  end;
-end;
-
 procedure Tf_config_system.LinuxDesktopBoxChange(Sender: TObject);
 begin
   if LockChange then
@@ -885,18 +849,12 @@ begin
   csc.IndiTelescope := Telescopeselect.ItemIndex = 0;
   csc.ManualTelescope := Telescopeselect.ItemIndex = 1;
   csc.ASCOMTelescope := Telescopeselect.ItemIndex = 2;
-  csc.LX200Telescope := Telescopeselect.ItemIndex = 3;
-  csc.EncoderTelescope := Telescopeselect.ItemIndex = 4;
   if csc.IndiTelescope then
     PageControl2.ActivePage := TabSheet1;
   if csc.ManualTelescope then
     PageControl2.ActivePage := TabSheet2;
   if csc.ASCOMTelescope then
     PageControl2.ActivePage := TabSheet4;
-  if csc.LX200Telescope then
-    PageControl2.ActivePage := TabSheet3;
-  if csc.EncoderTelescope then
-    PageControl2.ActivePage := TabSheet3;
 end;
 
 procedure Tf_config_system.IndiServerHostChange(Sender: TObject);
