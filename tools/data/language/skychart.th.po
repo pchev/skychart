@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-06-10 11:45+0000\n"
+"POT-Creation-Date: 2018-06-16 14:24+0000\n"
 "PO-Revision-Date: 2016-12-11 09:03+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-06-10 11:52+0000\n"
-"X-Generator: Launchpad (build 18684)\n"
+"X-Launchpad-Export-Date: 2018-06-16 14:28+0000\n"
+"X-Generator: Launchpad (build 18688)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -200,10 +200,6 @@ msgstr "ขั้นสูง"
 msgid "Advanced search"
 msgstr "ค้นหาขั้นสูง"
 
-#: u_translation.rsadvancedsett
-msgid "Advanced Settings for Scope.exe"
-msgstr "ตั้งค่า Scope.exe ขั้นสูง"
-
 #: u_translation.rsadvancedsett2
 msgid "Advanced setting"
 msgstr "การตั้งค่าขั้นสูง"
@@ -252,10 +248,6 @@ msgstr ""
 msgid "Alt"
 msgstr "มุมเงย"
 
-#: u_translation.rsaltaz
-msgid "Alt-Az"
-msgstr "มุมเงย-มุมทิศ"
-
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
 msgstr "พิกัดขอบฟ้า "
@@ -291,10 +283,6 @@ msgstr "แสดงเส้นเมริเดียนเสมอ"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "บันทึกเสมอโดยไม่ต้องถาม"
-
-#: u_translation.rsalwaysshowth
-msgid "Always show the objects from the list"
-msgstr "แสดงวัตถุจากรายการเสมอ"
 
 #: u_translation.rsanewversiono
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
@@ -520,10 +508,6 @@ msgstr "พื้นหลัง"
 msgid "Background picture"
 msgstr "ภาพพื้นหลัง"
 
-#: u_translation.rsbattery
-msgid "Battery"
-msgstr "แบตเตอรี่"
-
 #: u_translation.rsbayerletter
 msgid "Bayer letter"
 msgstr "อักษรเบเยอร์"
@@ -536,17 +520,9 @@ msgstr "ก่อน ค.ศ."
 msgid "Begin processing for jd=%s / %s"
 msgstr "กำลังเริ่มประมวลผลสำหรับ jd=%s / %s"
 
-#: u_translation.rsbelowthehori
-msgid "Below the horizon"
-msgstr "ใต้ขอบฟ้า"
-
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
 msgstr ""
-
-#: u_translation.rsbewarethisop
-msgid "Beware this option can severly degrade the performance"
-msgstr "ระวังว่าตัวเลือกนี้อาจทำให้โปรแกรมทำงานช้าลง"
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -768,10 +744,6 @@ msgstr "Patrick Chevalley, Marc Fokker"
 msgid "Center"
 msgstr "กึ่งกลาง"
 
-#: u_translation.rscentering
-msgid "Centering"
-msgstr ""
-
 #: u_translation.rscenterobject
 msgid "Centre on this object"
 msgstr "ให้วัตถุนี้อยู่กลางภาพ"
@@ -831,10 +803,6 @@ msgstr "รายละเอียดของแผนที่"
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr "สัญลักษณ์แผนที่"
-
-#: u_translation.rscharts
-msgid "Charts"
-msgstr "แผนที่"
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
@@ -924,10 +892,6 @@ msgstr "เส้นชั้นแบบปิด"
 msgid "Close files"
 msgstr "ปิดแฟ้ม"
 
-#: u_translation.rsclosingconne
-msgid "Closing connection"
-msgstr "กำลังปิดการเชื่อมต่อ"
-
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
 msgstr "กระจุกดาวและเนบิวลา"
@@ -995,10 +959,6 @@ msgstr "คำสั่งที่จะใช้ในการประมว
 #: u_translation.rscommonname
 msgid "Common name"
 msgstr "ชื่อสามัญ"
-
-#: u_translation.rscommunicatio
-msgid "Communication protocol"
-msgstr ""
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
@@ -1160,10 +1120,6 @@ msgstr "กริดพิกัด"
 msgid "Coordinates:"
 msgstr "พิกัด"
 
-#: u_translation.rscoordinates2
-msgid "Coordinates"
-msgstr "พิกัด"
-
 #: u_translation.rscoordinatese
 msgid "Coordinates equinox"
 msgstr "วิษุวัตของพิกัด"
@@ -1252,10 +1208,6 @@ msgstr "ตัวขับปัจจุบัน"
 msgid "Cursor"
 msgstr ""
 
-#: u_translation.rscustom
-msgid "Custom"
-msgstr "กำหนดเอง"
-
 #: u_translation.rscw
 msgid "%sCW"
 msgstr "%sตามเข็มนาฬิกา"
@@ -1296,10 +1248,6 @@ msgstr "การตั้งค่าฐานข้อมูล..."
 msgid "Database type"
 msgstr "ชนิดฐานข้อมูล"
 
-#: u_translation.rsdatabits
-msgid "Data bits"
-msgstr "บิตข้อมูล"
-
 #: u_translation.rsdatafiles
 msgid "Data files:"
 msgstr "แฟ้มข้อมูล:"
@@ -1327,10 +1275,6 @@ msgstr "ชนิดข้อมูล"
 #: u_translation.rsdate
 msgid "Date"
 msgstr "วันที่"
-
-#: u_translation.rsdateandortim
-msgid "Date and/or time cannot be changed"
-msgstr "ไม่สามารถเปลี่ยนวันที่ และ/หรือเวลาได้"
 
 #: u_translation.rsdateformat
 msgid "Date format"
@@ -1380,14 +1324,6 @@ msgstr "DE"
 msgid "DEC"
 msgstr "DEC"
 
-#: u_translation.rsdecelpeccomp
-msgid "DEC/EL PEC Compensation"
-msgstr ""
-
-#: u_translation.rsdecelslewrat
-msgid "DEC/El Slew Rate"
-msgstr ""
-
 #: u_translation.rsdecember
 msgid "December"
 msgstr ""
@@ -1411,10 +1347,6 @@ msgstr "เดคลิเนชัน"
 #: u_translation.rsdecoptions
 msgid "DEC options"
 msgstr "ตัวเลือกเดคลิเนชัน"
-
-#: u_translation.rsdecrease
-msgid "Decrease"
-msgstr "ลดลง"
 
 #: u_translation.rsdecrementtim
 msgid "Decrement time"
@@ -1479,10 +1411,6 @@ msgstr "องศา"
 #: u_translation.rsdegreegridsp
 msgid "Grid spacing in degree"
 msgstr ""
-
-#: u_translation.rsdegrees
-msgid "degrees"
-msgstr "องศา"
 
 #: u_translation.rsdegreesminut
 msgid "Degrees, minutes, seconds"
@@ -1580,10 +1508,6 @@ msgstr "สภาพแวดล้อมเดสก์ท็อป"
 msgid "Details"
 msgstr "รายละเอียด"
 
-#: u_translation.rsdevicestatus
-msgid "Device status"
-msgstr "สถานะของอุปกรณ์"
-
 #: u_translation.rsdiam
 msgid "Diam."
 msgstr "เส้นผ่านศูนย์กลาง"
@@ -1624,10 +1548,6 @@ msgstr "ทิศทาง"
 msgid "Directory"
 msgstr "ไดเรกทอรี"
 
-#: u_translation.rsdirectorynot
-msgid "Directory not found %s"
-msgstr "ไม่พบไดเรกทอรี %s"
-
 #: u_translation.rsdirectorynot2
 msgid "Directory not found! Please install the Skychart Pictures package."
 msgstr "ไม่พบไดเร็กทอรี! กรุณาติดตั้งแพ็กเกจ Skychart Pictures"
@@ -1659,10 +1579,6 @@ msgstr "แสดงภาพของวัตถุในบัญชี"
 #: u_translation.rsdisplaylabel
 msgid "Display labels for all star catalogs"
 msgstr "แสดงชื่อสำหรับทุกบัญชีดาว"
-
-#: u_translation.rsdisplaypreci
-msgid "Display Precision"
-msgstr "แสดงความแม่นยำ"
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar"
@@ -1912,18 +1828,6 @@ msgstr "เนบิวลาเปล่งแสง"
 msgid "Empty"
 msgstr "ว่างเปล่า"
 
-#: u_translation.rsencoderconfi
-msgid "Encoder Configuration"
-msgstr "การปรับแต่งตัวเข้ารหัส"
-
-#: u_translation.rsencoderiniti
-msgid "Encoder initialization angle"
-msgstr ""
-
-#: u_translation.rsencoders
-msgid "Encoders"
-msgstr "ตัวเข้ารหัส"
-
 #: u_translation.rsend
 msgid "End"
 msgstr "สิ้นสุด"
@@ -1964,10 +1868,6 @@ msgstr "จุดเริ่มยุคเมื่อสว่างที่
 msgid "Eq. grid"
 msgstr "กริดศูนย์สูตร"
 
-#: u_translation.rsequatorial
-msgid "Equatorial"
-msgstr "ศูนย์สูตร"
-
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
 msgstr "พิกัดศูนย์สูตร"
@@ -1983,10 +1883,6 @@ msgstr "พิกัดศูนย์สูตร"
 #: u_translation.rsequatorialmo
 msgid "Equatorial mount"
 msgstr "ฐานยึดพิกัดศูนย์สูตร"
-
-#: u_translation.rsequatorialsy
-msgid "Equatorial System"
-msgstr "ระบบศูนย์สูตร"
 
 #: u_translation.rsequinox
 msgid "Equinox:"
@@ -2007,18 +1903,6 @@ msgstr "%sเกิดข้อผิดพลาดในการสร้า�
 #: u_translation.rserrorfilenot
 msgid "Error, file not downloaded:"
 msgstr "เกิดข้อผิดพลาด, ดาวน์โหลดแฟ้มข้อมูลไม่สำเร็จ:"
-
-#: u_translation.rserroropening
-msgid "Error opening %s"
-msgstr "เกิดข้อผิดพลาดในการเปิด %s"
-
-#: u_translation.rserroropening2
-msgid "Error opening %s on port %s"
-msgstr "เกิดข้อผิดพลาดในการเปิด %s บนพอร์ต %s"
-
-#: u_translation.rserroropening3
-msgid "Error opening %s on port %sCheck if device is connected and power on"
-msgstr "เกิดข้อผิดพลาดในการเปิด %s บนพอร์ต %s ให้ตรวจสอบว่าอุปกรณ์ได้เชื่อมต่อและเปิดใช้งาน"
 
 #: u_translation.rserrorpleasec
 msgid "Error! Please check the database parameters."
@@ -2112,17 +1996,9 @@ msgstr "จางกว่า"
 msgid "Faint Stars Size "
 msgstr "ขนาดดาวฤกษ์ที่จาง "
 
-#: u_translation.rsfan
-msgid "Fan"
-msgstr "พัดลม"
-
 #: u_translation.rsfaq
 msgid "FAQ"
 msgstr "คำถามพบบ่อย"
-
-#: u_translation.rsfast
-msgid "Fast"
-msgstr "เร็ว"
 
 #: u_translation.rsfaster
 msgid "Faster"
@@ -2159,10 +2035,6 @@ msgstr "ตั้งค่าขอบเขตการมองเห็น"
 #: u_translation.rsfieldofvisio5
 msgid "Field of vision number :"
 msgstr "หมายเลขขอบเขตการมองเห็น :"
-
-#: u_translation.rsfieldrotatio
-msgid "Field Rotation"
-msgstr ""
 
 #: u_translation.rsfieldtoowidt
 msgid "Field too wide! Maximum is %s"
@@ -2260,14 +2132,6 @@ msgstr "เลขแฟลมสตีด"
 msgid "Iridium flare prediction:"
 msgstr "พยากรณ์แสงวาบของอิริเดียม:"
 
-#: u_translation.rsfocus
-msgid "Focus"
-msgstr "โฟกัส"
-
-#: u_translation.rsfocusspeed
-msgid "Focus Speed"
-msgstr "อัตราเร็วโฟกัส"
-
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "แบบอักษร"
@@ -2282,10 +2146,6 @@ msgstr ""
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
-msgstr ""
-
-#: u_translation.rsformalwaysvi
-msgid "Form always visible"
 msgstr ""
 
 #: u_translation.rsformoreinfor
@@ -2315,10 +2175,6 @@ msgstr "เฟรมต่อวินาที"
 #: u_translation.rsframessize
 msgid "Frames size"
 msgstr "ขนาดเฟรม"
-
-#: u_translation.rsfrangle
-msgid "FR Angle"
-msgstr ""
 
 #: u_translation.rsfreesize
 msgid "Free size"
@@ -2392,10 +2248,6 @@ msgstr "ศูนย์โลก"
 msgid "Geometric altitude"
 msgstr "มุมเงยเรขาคณิต"
 
-#: u_translation.rsget
-msgid "Get"
-msgstr "รับ"
-
 #: u_translation.rsgetasteroidl
 msgid "Get the asteroids list."
 msgstr "รับรายชื่อดาวเคราะห์น้อย"
@@ -2419,10 +2271,6 @@ msgstr "กระจุกดาวทรงกลม"
 #: u_translation.rsgnomonic
 msgid "Gnomonic"
 msgstr "โนโมนิก"
-
-#: u_translation.rsgps16advsett
-msgid "Gps-16\" Adv. Settings"
-msgstr ""
 
 #: u_translation.rsgraphheight
 msgid "Graph height"
@@ -2472,18 +2320,6 @@ msgstr "เวลาที่จุดแดงใหญ่ผ่านเมร
 msgid "G slope parameter"
 msgstr "พารามิเตอร์ G"
 
-#: u_translation.rsguide
-msgid "Guide"
-msgstr ""
-
-#: u_translation.rsguidearcsec
-msgid "guide arcsec"
-msgstr ""
-
-#: u_translation.rsguiderate
-msgid "Guide Rate"
-msgstr ""
-
 #: u_translation.rshabsolutemag
 msgid "H absolute magnitude"
 msgstr "โชติมาตรสัมบูรณ์ H"
@@ -2499,14 +2335,6 @@ msgstr "หยุดเมื่อเกิดข้อผิดพลาดม
 #: u_translation.rshammeraitoff
 msgid "Hammer-Aitoff"
 msgstr "แฮมเมอร์-ไอทอฟฟ์"
-
-#: u_translation.rshandpad
-msgid "HandPad"
-msgstr ""
-
-#: u_translation.rshandpadmodes
-msgid "HandPad Mode Selection"
-msgstr ""
 
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
@@ -2540,21 +2368,9 @@ msgstr "ซ่อนชื่อ"
 msgid "Hide objects wider than"
 msgstr "ซ่อนวัตถุที่ใหญ่กว่า"
 
-#: u_translation.rshigh
-msgid "High"
-msgstr "สูง"
-
 #: u_translation.rshighcolor
 msgid "High colour"
 msgstr "สีสด"
-
-#: u_translation.rshighest
-msgid "Highest"
-msgstr "เร็วสุด"
-
-#: u_translation.rshighprecisio
-msgid "High Precision Pointing"
-msgstr "ชี้เป้าด้วยความแม่นยำสูง"
 
 #: u_translation.rshighquality
 msgid "High quality"
@@ -2660,10 +2476,6 @@ msgstr "รวมถึงการผ่านในเวลากลางว
 msgid "Include Iridium flare"
 msgstr "รวมถึงการวาบของอิริเดียม"
 
-#: u_translation.rsincrease
-msgid "Increase"
-msgstr "เพิ่มขึ้น"
-
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
 msgstr "การเพิ่มขึ้นของดาวสว่าง"
@@ -2724,18 +2536,6 @@ msgstr "รายละเอียดข้อมูล"
 msgid "Information from catalog"
 msgstr "ข้อมูลจากบัญชี"
 
-#: u_translation.rsinit
-msgid "Init"
-msgstr ""
-
-#: u_translation.rsinitialiseda
-msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
-msgstr ""
-
-#: u_translation.rsinitialize
-msgid "Initialize"
-msgstr ""
-
 #: u_translation.rsinitializeda
 msgid "Initialize database"
 msgstr "เริ่มต้นฐานข้อมูล"
@@ -2764,10 +2564,6 @@ msgstr "อินเทอร์เน็ต"
 msgid "Internet localization"
 msgstr "กำหนดสถานที่ผ่านอินเทอร์เน็ต"
 
-#: u_translation.rsintervaltime
-msgid "Interval Timeout"
-msgstr ""
-
 #: u_translation.rsinttelesco
 msgid "Integrated telescope driver."
 msgstr "ตัวขับกล้องโทรทรรศน์แบบเบ็ดเสร็จ"
@@ -2784,21 +2580,9 @@ msgstr "แฟ้ม FITS ไม่ถูกต้อง: %s"
 msgid "Invalid path: "
 msgstr "ที่อยู่ไม่ถูกต้อง: "
 
-#: u_translation.rsinversionalp
-msgid "Inversion Alpha ,"
-msgstr ""
-
-#: u_translation.rsinversiondel
-msgid "%s Inversion Delta"
-msgstr ""
-
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "มองไม่เห็นในละติจูดนี้"
-
-#: u_translation.rsipaddress
-msgid "IP address"
-msgstr "ที่อยู่ไอพี"
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
@@ -2931,10 +2715,6 @@ msgstr "ซ้าย"
 #: u_translation.rsleftbar
 msgid "Left bar"
 msgstr "แถบซ้ายมือ"
-
-#: u_translation.rsleftmode
-msgid "Left Mode"
-msgstr "โหมดซ้าย"
 
 #: u_translation.rslegal
 msgid "Legal"
@@ -3092,10 +2872,6 @@ msgstr "เวลาดาราคติท้องถิ่น"
 msgid "Location code"
 msgstr "รหัสสถานที่"
 
-#: u_translation.rslocationtime
-msgid "Location / Time"
-msgstr "สถานที่ / เวลา"
-
 #: u_translation.rslock
 msgid "Lock"
 msgstr ""
@@ -3128,10 +2904,6 @@ msgstr ""
 msgid "Lozenge"
 msgstr "สี่เหลี่ยมขนมเปียกปูน"
 
-#: u_translation.rslow
-msgid "Low"
-msgstr "ต่ำ"
-
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
 msgstr "ความสว่างพื้นผิวต่ำ"
@@ -3139,10 +2911,6 @@ msgstr "ความสว่างพื้นผิวต่ำ"
 #: u_translation.rsluminosity
 msgid "Luminosity"
 msgstr "กำลังส่องสว่าง"
-
-#: u_translation.rslunar
-msgid "Lunar"
-msgstr "ดวงจันทร์"
 
 #: u_translation.rslunareclipse
 msgid "Lunar eclipses"
@@ -3238,10 +3006,6 @@ msgstr "แผนที่"
 
 #: u_translation.rsmarch
 msgid "March"
-msgstr ""
-
-#: u_translation.rsmark
-msgid "Mark"
 msgstr ""
 
 #: u_translation.rsmarkthechart
@@ -3340,10 +3104,6 @@ msgstr "ข้อความ:"
 msgid "Meters"
 msgstr "เมตร"
 
-#: u_translation.rsmiddle
-msgid "Middle"
-msgstr "ปานกลาง"
-
 #: u_translation.rsmilkyway
 msgid "Milky Way"
 msgstr "ทางช้างเผือก"
@@ -3392,14 +3152,6 @@ msgstr ""
 msgid "Missing script title!"
 msgstr ""
 
-#: u_translation.rsmodebuttonsi
-msgid "Mode Button Simulator"
-msgstr "Mode Button Simulator"
-
-#: u_translation.rsmodel
-msgid "Model"
-msgstr "รุ่น"
-
 #: u_translation.rsmodify
 msgid "Modify"
 msgstr "ปรับแก้"
@@ -3447,26 +3199,6 @@ msgstr "เช้า"
 #: u_translation.rsmorningtwili
 msgid "Morning twilight"
 msgstr "สนธยาเวลาเช้ามืด"
-
-#: u_translation.rsmotor
-msgid "Motor"
-msgstr "มอเตอร์"
-
-#: u_translation.rsmotorspeeds
-msgid "Motor Speeds"
-msgstr "อัตราเร็วมอเตอร์"
-
-#: u_translation.rsmountfabrica
-msgid "Mount fabrication error"
-msgstr ""
-
-#: u_translation.rsmounttype
-msgid "Mount type"
-msgstr "ชนิดของฐานยึด"
-
-#: u_translation.rsmove
-msgid "Move"
-msgstr "เลื่อน"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3532,10 +3264,6 @@ msgstr "วัตถุท้องฟ้าห้วงลึกหรืออ
 msgid "Nebulae outlines"
 msgstr "เค้าโครงเนบิวลา"
 
-#: u_translation.rsnegativeeast
-msgid "(negative east of Greenwich)"
-msgstr "(เป็นลบ สำหรับตะวันออกของกรีนิช)"
-
 #: u_translation.rsneighbor
 msgid "Neighbour"
 msgstr "วัตถุข้างเคียง"
@@ -3587,10 +3315,6 @@ msgstr "โหมดกลางคืน"
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
 msgstr "สีสำหรับโหมดกลางคืน"
-
-#: u_translation.rsno
-msgid "No."
-msgstr "ลำดับที่"
 
 #: u_translation.rsnoasteroidda
 msgid "No asteroids data found!%sPlease load a MPC file first."
@@ -3688,10 +3412,6 @@ msgstr "ไม่พบ %s ในดัชนีวัตถุของบั�
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
 msgstr "%s ไม่พบ!%sอาจไม่ได้ติดตั้งบัญชี หรือตั้งค่าที่อยู่ของบัญชีไม่ถูกต้อง"
 
-#: u_translation.rsnotinitialis
-msgid "Not initialised"
-msgstr ""
-
 #: u_translation.rsnovember
 msgid "November"
 msgstr ""
@@ -3760,10 +3480,6 @@ msgstr "ชื่อวัตถุ"
 msgid "Object size unit"
 msgstr "หน่วยของขนาดวัตถุ"
 
-#: u_translation.rsobjectsusedf
-msgid "Objects used for Initialisation"
-msgstr ""
-
 #: u_translation.rsobjecttype
 msgid "Object type"
 msgstr "ชนิดของวัตถุ"
@@ -3779,10 +3495,6 @@ msgstr "สถานที่สังเกตการณ์"
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
 msgstr "ฐานข้อมูลสถานที่"
-
-#: u_translation.rsobservertool
-msgid "Observer tools"
-msgstr ""
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -3800,10 +3512,6 @@ msgstr "ล้าสมัย"
 msgid "October"
 msgstr ""
 
-#: u_translation.rsoff
-msgid "Off"
-msgstr "ปิด"
-
 #: u_translation.rsofficialname
 msgid "Official name"
 msgstr ""
@@ -3819,10 +3527,6 @@ msgstr "ระยะชดเชยของป้าย"
 #: u_translation.rsok
 msgid "OK"
 msgstr "ตกลง"
-
-#: u_translation.rson
-msgid "On"
-msgstr "เปิด"
 
 #: u_translation.rsoneevery
 msgid "One every"
@@ -3960,18 +3664,6 @@ msgstr "แพรัลแลกซ์"
 msgid "Parametric"
 msgstr ""
 
-#: u_translation.rsparity
-msgid "Parity"
-msgstr "ภาวะบิต"
-
-#: u_translation.rsparkinganddi
-msgid "Parking and Disconnecting telescope."
-msgstr "พักและตัดการเชื่อมต่อกับกล้องโทรทรรศน์"
-
-#: u_translation.rsparktelescop
-msgid "Park Telescope"
-msgstr "พักกล้องโทรทรรศน์"
-
 #: u_translation.rspartial
 msgid "Partial"
 msgstr "บางส่วน"
@@ -3999,14 +3691,6 @@ msgstr "ความกว้างของเงา"
 #: u_translation.rspause
 msgid "Pause"
 msgstr "หยุดชั่วคราว"
-
-#: u_translation.rspec
-msgid "PEC"
-msgstr ""
-
-#: u_translation.rspectoggle
-msgid "Pec Toggle"
-msgstr ""
 
 #: u_translation.rspenumbra
 msgid "Penumbra"
@@ -4128,10 +3812,6 @@ msgstr "กรุณาระบุชื่อเต็มของบัญช
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "กรุณาระบุไดเร็กทอรีที่จะสร้างบัญชี"
 
-#: u_translation.rspleaseinitth
-msgid "Please init the 90 degree elevation first"
-msgstr ""
-
 #: u_translation.rspleaseinstal
 msgid "Please install indistarter package!"
 msgstr ""
@@ -4147,10 +3827,6 @@ msgstr "กรุณาติดตั้ง wine http://www.winehq.org/ ใน�
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
 msgstr "กรุณาใส่ RealSky CD หมายเลข"
-
-#: u_translation.rspleasemoveth
-msgid "Please move the telescope along the two axis"
-msgstr "กรุณาหันกล้องตามแนวแกนทั้งสอง"
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
@@ -4176,10 +3852,6 @@ msgstr "ดาวพลูโต"
 msgid "Pluto is a planet."
 msgstr "กำหนดให้พลูโตเป็นดาวเคราะห์"
 
-#: u_translation.rspm
-msgid "pm"
-msgstr "pm"
-
 #: u_translation.rspolarmotiona
 msgid "Polar motion (arc sec)"
 msgstr "การเคลื่อนที่ของขั้ว (พิลิปดา)"
@@ -4191,10 +3863,6 @@ msgstr "มุมเอียงของขั้ว"
 #: u_translation.rsport
 msgid "Port:"
 msgstr "พอร์ต:"
-
-#: u_translation.rsportconfigur
-msgid "Port Configuration"
-msgstr "การปรับแต่งพอร์ต"
 
 #: u_translation.rsportrait
 msgid "Portrait"
@@ -4316,10 +3984,6 @@ msgstr "การประมวลผลเสร็จสิ้น จำน�
 msgid "Processing line %s"
 msgstr "กำลังประมวลผลบรรทัดที่ %s"
 
-#: u_translation.rsproductinfo
-msgid "Product Info"
-msgstr "ข้อมูลผลิตภัณฑ์"
-
 #: u_translation.rsprograminfor
 msgid "Program information"
 msgstr "ข้อมูลโปรแกรม"
@@ -4376,14 +4040,6 @@ msgstr "โฮสต์ของพร็อกซี"
 msgid "Proxy port"
 msgstr "พอร์ตของพร็อกซี"
 
-#: u_translation.rspulseduratio
-msgid "Pulse duration"
-msgstr "ระยะเวลาพัลส์"
-
-#: u_translation.rspulsemode
-msgid "Pulse Mode"
-msgstr "โหมดพัลส์"
-
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
 msgstr "วางแฟ้มที่มีส่วนขยาย .tle ในโฟลเดอร์ %s"
@@ -4391,10 +4047,6 @@ msgstr "วางแฟ้มที่มีส่วนขยาย .tle ใน
 #: u_translation.rsquasar
 msgid "Quasar"
 msgstr "เควซาร์"
-
-#: u_translation.rsquery
-msgid "Query"
-msgstr "สืบค้น"
 
 #: u_translation.rsquickdelete
 msgid "Quick delete"
@@ -4415,14 +4067,6 @@ msgstr "คำแนะนำในการเริ่มต้น"
 #: u_translation.rsra
 msgid "RA"
 msgstr "RA"
-
-#: u_translation.rsraazpeccompe
-msgid "RA/AZ PEC Compensation"
-msgstr ""
-
-#: u_translation.rsraazslewrate
-msgid "RA/Az Slew Rate"
-msgstr ""
 
 #: u_translation.rsradialveloci
 msgid "Radial velocity"
@@ -4448,17 +4092,9 @@ msgstr ""
 msgid "%sRA turns:"
 msgstr ""
 
-#: u_translation.rsreadinterval
-msgid "Read Interval [ms]"
-msgstr ""
-
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
 msgstr "ภาพเหมือนจริง"
-
-#: u_translation.rsreallyparkan
-msgid "REALLY park and disconnect the telescope?"
-msgstr "แน่ใจว่าต้องการพักและตัดการเชื่อมต่อกับกล้องโทรทรรศน์?"
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -4507,10 +4143,6 @@ msgstr "ตัวเลือกการบันทึก"
 #: u_translation.rsrecordingpre
 msgid "Recording prefix"
 msgstr "ชื่อขึ้นต้นของแฟ้มที่จะบันทึก"
-
-#: u_translation.rsrecordprotoc
-msgid "Record protocol to a trace file"
-msgstr ""
 
 #: u_translation.rsrecoverhidde
 msgid "Recover hidden label"
@@ -4648,14 +4280,6 @@ msgstr "กลับไปใช้ค่าที่แผนที่ถูก
 msgid "Resolution:"
 msgstr "ความละเอียด:"
 
-#: u_translation.rsresolutionxy
-msgid "Resolution X: %s Y :%s steps"
-msgstr ""
-
-#: u_translation.rsresumegoto
-msgid "Resume GoTo"
-msgstr "คืนสภาพ GoTo"
-
 #: u_translation.rsreturn
 msgid "Return"
 msgstr "การคืนค่า"
@@ -4687,10 +4311,6 @@ msgstr "ไรต์แอสเซนชัน"
 #: u_translation.rsrightbar
 msgid "Right Bar"
 msgstr "แถบขวามือ"
-
-#: u_translation.rsrightmode
-msgid "Right Mode"
-msgstr "โหมดขวา"
 
 #: u_translation.rsrise
 msgid "Rise"
@@ -4800,10 +4420,6 @@ msgstr "บันทึกภาพ..."
 msgid "Save project"
 msgstr "บันทึกโครงการ"
 
-#: u_translation.rssavesetting
-msgid "Save setting"
-msgstr "บันทึกการตั้งค่า"
-
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
 msgstr "บันทึกแผนที่ที่ใช้งานอยู่"
@@ -4823,10 +4439,6 @@ msgstr ""
 #: u_translation.rsscandirector
 msgid "Scan directory"
 msgstr "สแกนไดเร็กทอรี"
-
-#: u_translation.rsscopeadv
-msgid "Scope Adv"
-msgstr ""
 
 #: u_translation.rsscreenresolu
 msgid "Screen resolution"
@@ -4904,10 +4516,6 @@ msgstr "วินาที"
 msgid "See %s for more information."
 msgstr "ดู %s สำหรับข้อมูลเพิ่มเติม"
 
-#: u_translation.rssel
-msgid "Sel."
-msgstr ""
-
 #: u_translation.rsselect
 msgid "Select"
 msgstr "เลือก"
@@ -4935,10 +4543,6 @@ msgstr ""
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
 msgstr "เลือก mirror site"
-
-#: u_translation.rsselectnone
-msgid "Select none"
-msgstr "ไม่เลือกเลย"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -5004,10 +4608,6 @@ msgstr "ตัวคั่น"
 msgid "September"
 msgstr ""
 
-#: u_translation.rsserialport
-msgid "Serial Port"
-msgstr "พอร์ตอนุกรม"
-
 #: u_translation.rsserver
 msgid "Server"
 msgstr "เซิร์ฟเวอร์"
@@ -5056,17 +4656,9 @@ msgstr "ตั้งค่าสถานที่สังเกตการณ
 msgid "Set options for best performance"
 msgstr ""
 
-#: u_translation.rssetslewing
-msgid "Set Slewing"
-msgstr "ตั้งการสลูว์"
-
 #: u_translation.rssettargetto
 msgid "Set target to %s"
 msgstr "วางเป้าหมายไปยัง %s"
-
-#: u_translation.rssettelescope
-msgid "Set location and time"
-msgstr ""
 
 #: u_translation.rssettime
 msgid "Set Time"
@@ -5160,10 +4752,6 @@ msgstr "แสดงสุริยวิถี"
 msgid "Show galactic equator"
 msgstr "แสดงศูนย์สูตรดาราจักร"
 
-#: u_translation.rsshowgrid
-msgid "Show grid"
-msgstr "แสดงกริด"
-
 #: u_translation.rsshowgridlabe
 msgid "Show grid label"
 msgstr "แสดงป้ายบนกริด"
@@ -5219,10 +4807,6 @@ msgstr "แสดงภาพวัตถุในแผนที่"
 #: u_translation.rsshowobjects
 msgid "Show objects"
 msgstr "แสดงวัตถุ"
-
-#: u_translation.rsshowobsolete
-msgid "Show obsolete drivers"
-msgstr ""
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian"
@@ -5320,10 +4904,6 @@ msgstr "สลูว์"
 msgid "Slewing to %s / %s"
 msgstr ""
 
-#: u_translation.rsslewspeed
-msgid " Slew Speed"
-msgstr " อัตราเร็วของการสลูว์"
-
 #: u_translation.rsslewtochartc
 msgid "Slew to chart center"
 msgstr ""
@@ -5332,17 +4912,9 @@ msgstr ""
 msgid "Slew to cursor position"
 msgstr "สลุว์ไปที่ตำแหน่งของเคอร์เซอร์"
 
-#: u_translation.rsslow
-msgid "Slow"
-msgstr "ช้า"
-
 #: u_translation.rsslower
 msgid "Slower"
 msgstr ""
-
-#: u_translation.rsslowest
-msgid "Slowest"
-msgstr "ช้าสุด"
 
 #: u_translation.rssmallstars
 msgid "Small stars"
@@ -5355,10 +4927,6 @@ msgstr "นาที"
 #: u_translation.rssmonth
 msgid "M."
 msgstr "เดือน"
-
-#: u_translation.rssocketconfig
-msgid "Socket configuration"
-msgstr ""
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
@@ -5427,18 +4995,6 @@ msgstr "ช่องว่าง"
 #: u_translation.rsspectralclas
 msgid "Spectral class"
 msgstr "ชนิดสเปกตรัม"
-
-#: u_translation.rsspeed
-msgid "Speed"
-msgstr "อัตราเร็ว"
-
-#: u_translation.rsspeedselecti
-msgid "Speed Selection"
-msgstr "การเลือกอัตราเร็ว"
-
-#: u_translation.rsspeedsetting
-msgid "Speed settings"
-msgstr "ตั้งค่าอัตราเร็ว"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -5544,10 +5100,6 @@ msgstr "เริ่มเดือน"
 msgid "Start of object"
 msgstr "จุดเริ่มต้นของวัตถุ"
 
-#: u_translation.rsstatus
-msgid "Status"
-msgstr "สถานะ"
-
 #: u_translation.rsstatusbar
 msgid "Status bar"
 msgstr "แถบสถานะ"
@@ -5560,14 +5112,6 @@ msgstr ""
 msgid "Step Over"
 msgstr ""
 
-#: u_translation.rsstepsalpha
-msgid "Steps (Alpha)"
-msgstr ""
-
-#: u_translation.rsstepsdelta
-msgid "Steps (Delta)"
-msgstr ""
-
 #: u_translation.rsstepunit
 msgid "Step unit"
 msgstr "หน่วยเวลา"
@@ -5575,10 +5119,6 @@ msgstr "หน่วยเวลา"
 #: u_translation.rsstop
 msgid "Stop"
 msgstr "หยุด"
-
-#: u_translation.rsstopbits
-msgid "Stop bits"
-msgstr "บิตหยุด"
 
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
@@ -5616,14 +5156,6 @@ msgstr "พื้นผิว"
 msgid "Surface brightness"
 msgstr "ความสว่างพื้นผิว"
 
-#: u_translation.rsswapbutton
-msgid "Swap button"
-msgstr "สลับปุ่ม"
-
-#: u_translation.rsswitchhpp
-msgid "Switch HPP"
-msgstr "สลับ HPP"
-
 #: u_translation.rssyear
 msgid "Y"
 msgstr "ปี"
@@ -5648,10 +5180,6 @@ msgstr "เดือนดิถี"
 msgid "System printer"
 msgstr "เครื่องพิมพ์ของระบบ"
 
-#: u_translation.rssytemstatus
-msgid "Sytem status:"
-msgstr "สถานะของระบบ:"
-
 #: u_translation.rstable
 msgid "Table"
 msgstr "ตาราง"
@@ -5664,10 +5192,6 @@ msgstr "%sไม่มีตาราง %s ! %sกรุณาแก้ไข�
 msgid "%sThis table exists: %s"
 msgstr "%sมีตารางนี้: %s"
 
-#: u_translation.rstarget
-msgid "Target"
-msgstr "เป้าหมาย"
-
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
 msgstr "การเชื่อมต่อ TCP/IP"
@@ -5679,10 +5203,6 @@ msgstr "เซิร์ฟเวอร์ TCP/IP"
 #: u_translation.rstcpipservice
 msgid "TCP/IP service not available."
 msgstr "ไม่มีบริการ TCP/IP"
-
-#: u_translation.rstcpport
-msgid "TCP port"
-msgstr "พอร์ต TCP"
 
 #: u_translation.rstelescope
 msgid "Telescope"
@@ -5727,10 +5247,6 @@ msgstr "ขนาดข้อความ"
 #: u_translation.rstheimagedire
 msgid "The image directory contains sub-directories with the same names as the DSO catalogs. Each sub-directory contains FITS files with the names of the catalog objects. These images are used to replace the DSO symbols on the map."
 msgstr "ไดเร็กทอรีที่เก็บรูปภาพมีไดเร็กทอรีย่อยที่ใช้ชื่อเดียวกันกับบัญชีวัตถุท้องฟ้าห้วงลึก แต่ละไดเร็กทอรีย่อยมีแฟ้ม FITS ที่ใช้ชื่อตามวัตถุในบัญชี ภาพเหล่านี้จะนำไปแทนที่สัญลักษณ์วัตถุท้องฟ้าบนแผนที่"
-
-#: u_translation.rstheinterface
-msgid "The interface is either not connected or not initialized"
-msgstr "โปรแกรมต่อประสานยังไม่ได้ถูกเชื่อมต่อหรือยังไม่เริ่มทำงาน"
 
 #: u_translation.rstheme
 msgid "Theme"
@@ -5787,10 +5303,6 @@ msgstr "เรียงในแนวตั้ง"
 #: u_translation.rstime
 msgid "Time"
 msgstr "เวลา"
-
-#: u_translation.rstimeoutms
-msgid "Timeout [ms]"
-msgstr "เวลารอ [มิลลิวินาที]"
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
@@ -5956,10 +5468,6 @@ msgstr "ครั้ง/ชั่วโมง"
 msgid "Twilight"
 msgstr "สนธยา"
 
-#: u_translation.rstwostarsmust
-msgid "TWO stars must be used for initialisation."
-msgstr "ต้องใช้ดาว 2 ดวง ในการเริ่มต้น"
-
 #: u_translation.rstype
 msgid "Type"
 msgstr "ชนิด"
@@ -6076,10 +5584,6 @@ msgstr "ใช้ตัวชี้อย่างง่าย"
 msgid "(useful to represent a flux)"
 msgstr "(มีประโยชน์ในการแสดงถึงฟลักซ์)"
 
-#: u_translation.rsusehpp
-msgid "Use HPP"
-msgstr "ใช้ HPP"
-
 #: u_translation.rsusehttpproxy
 msgid "Use HTTP proxy"
 msgstr "ใช้พร็อกซี HTTP"
@@ -6164,14 +5668,6 @@ msgstr "ดาวศุกร์"
 msgid "Version"
 msgstr ""
 
-#: u_translation.rsverticalaxis
-msgid "Vertical axis encoder origin : %s"
-msgstr ""
-
-#: u_translation.rsverticalaxis2
-msgid "Vertical axis 90 degree initialisation not done"
-msgstr ""
-
 #: u_translation.rsvicinity
 msgid "Vicinity"
 msgstr "ที่ใกล้เคียง"
@@ -6195,10 +5691,6 @@ msgstr "ดูรายการสังเกตการณ์"
 #: u_translation.rsviewonchart
 msgid "View on chart"
 msgstr "ดูบนแผนที่"
-
-#: u_translation.rsvirtualhandp
-msgid "Virtual HandPad for Scope.exe "
-msgstr "Virtual HandPad สำหรับ Scope.exe "
 
 #: u_translation.rsvirtualobser
 msgid "Virtual Observatory Catalog"
@@ -6292,10 +5784,6 @@ msgstr "ความกว้าง"
 msgid "Window"
 msgstr "หน้าต่าง"
 
-#: u_translation.rsxerrors
-msgid "X Errors"
-msgstr "ข้อผิดพลาดทางแกน X"
-
 #: u_translation.rsyear
 msgid "Year"
 msgstr "ปี"
@@ -6303,10 +5791,6 @@ msgstr "ปี"
 #: u_translation.rsyears
 msgid "years"
 msgstr "ปี"
-
-#: u_translation.rsyerrors
-msgid "Y Errors"
-msgstr "ข้อผิดพลาดทางแกน Y"
 
 #: u_translation.rsyoualreadyha
 msgid "You already have the latest available version!"

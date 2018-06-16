@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-06-10 11:45+0000\n"
+"POT-Creation-Date: 2018-06-16 14:24+0000\n"
 "PO-Revision-Date: 2018-06-01 21:56+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-06-10 11:52+0000\n"
-"X-Generator: Launchpad (build 18684)\n"
+"X-Launchpad-Export-Date: 2018-06-16 14:28+0000\n"
+"X-Generator: Launchpad (build 18688)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -200,10 +200,6 @@ msgstr "Avancerat"
 msgid "Advanced search"
 msgstr "Avancerad sökning"
 
-#: u_translation.rsadvancedsett
-msgid "Advanced Settings for Scope.exe"
-msgstr "Avancerade inställningar för Scope.exe"
-
 #: u_translation.rsadvancedsett2
 msgid "Advanced setting"
 msgstr "Avancerade inställningar"
@@ -252,10 +248,6 @@ msgstr "%sFörsäkra dig om att erforderligt databasprogram är installerat.%sL�
 msgid "Alt"
 msgstr "Elev"
 
-#: u_translation.rsaltaz
-msgid "Alt-Az"
-msgstr "Alt-Az"
-
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
 msgstr "Alt/Az koord. "
@@ -291,10 +283,6 @@ msgstr "Lägg alltid till meridian"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Spara alltid utan att fråga."
-
-#: u_translation.rsalwaysshowth
-msgid "Always show the objects from the list"
-msgstr "Visa alltid objekten från listan"
 
 #: u_translation.rsanewversiono
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
@@ -520,10 +508,6 @@ msgstr "Bakgrund"
 msgid "Background picture"
 msgstr "Bakgrundsbild"
 
-#: u_translation.rsbattery
-msgid "Battery"
-msgstr "Batteri"
-
 #: u_translation.rsbayerletter
 msgid "Bayer letter"
 msgstr "Bayer bokstav"
@@ -536,17 +520,9 @@ msgstr "f. kr."
 msgid "Begin processing for jd=%s / %s"
 msgstr "Påbörja bearbetning för jd=%s / %s"
 
-#: u_translation.rsbelowthehori
-msgid "Below the horizon"
-msgstr "Under horisonten"
-
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
 msgstr "Säkerställ att de använder radsluttecken för DOS"
-
-#: u_translation.rsbewarethisop
-msgid "Beware this option can severly degrade the performance"
-msgstr "Varning! Detta kan reducera prestanda väsentligt"
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -768,10 +744,6 @@ msgstr "Kåre Lekebjer"
 msgid "Center"
 msgstr "Centrera"
 
-#: u_translation.rscentering
-msgid "Centering"
-msgstr "Centrerar"
-
 #: u_translation.rscenterobject
 msgid "Centre on this object"
 msgstr "Centrera på objekt"
@@ -831,10 +803,6 @@ msgstr "Kartinformation"
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr "Kartbeskrivning"
-
-#: u_translation.rscharts
-msgid "Charts"
-msgstr "Kartor"
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
@@ -924,10 +892,6 @@ msgstr "Stängd kontur"
 msgid "Close files"
 msgstr "Stäng filer"
 
-#: u_translation.rsclosingconne
-msgid "Closing connection"
-msgstr "Stänger anslutning"
-
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
 msgstr "Kluster och nebulosa"
@@ -995,10 +959,6 @@ msgstr "Kommando för att processa filen."
 #: u_translation.rscommonname
 msgid "Common name"
 msgstr "Vanligt namn"
-
-#: u_translation.rscommunicatio
-msgid "Communication protocol"
-msgstr "Kommunikationprotokoll"
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
@@ -1160,10 +1120,6 @@ msgstr "Koordinatnät"
 msgid "Coordinates:"
 msgstr "Koordinater"
 
-#: u_translation.rscoordinates2
-msgid "Coordinates"
-msgstr "Koordinater"
-
 #: u_translation.rscoordinatese
 msgid "Coordinates equinox"
 msgstr "Koordinaters dagjämning"
@@ -1252,10 +1208,6 @@ msgstr "Aktuell drivrutin"
 msgid "Cursor"
 msgstr "Pekare"
 
-#: u_translation.rscustom
-msgid "Custom"
-msgstr "Egendefinierad"
-
 #: u_translation.rscw
 msgid "%sCW"
 msgstr "%sCW"
@@ -1296,10 +1248,6 @@ msgstr "Databasinställning..."
 msgid "Database type"
 msgstr "Databastyp"
 
-#: u_translation.rsdatabits
-msgid "Data bits"
-msgstr "Databitar"
-
 #: u_translation.rsdatafiles
 msgid "Data files:"
 msgstr "Datafiler:"
@@ -1327,10 +1275,6 @@ msgstr "Datatyp"
 #: u_translation.rsdate
 msgid "Date"
 msgstr "Datum"
-
-#: u_translation.rsdateandortim
-msgid "Date and/or time cannot be changed"
-msgstr "Datum och/eller tid kan inte ändras"
 
 #: u_translation.rsdateformat
 msgid "Date format"
@@ -1380,14 +1324,6 @@ msgstr "DE"
 msgid "DEC"
 msgstr "DEC"
 
-#: u_translation.rsdecelpeccomp
-msgid "DEC/EL PEC Compensation"
-msgstr "DEC/EL PEC-kompensering"
-
-#: u_translation.rsdecelslewrat
-msgid "DEC/El Slew Rate"
-msgstr "DEC/El sökhastighet"
-
 #: u_translation.rsdecember
 msgid "December"
 msgstr "December"
@@ -1411,10 +1347,6 @@ msgstr "Deklination (DEC)"
 #: u_translation.rsdecoptions
 msgid "DEC options"
 msgstr "DEC alternativ"
-
-#: u_translation.rsdecrease
-msgid "Decrease"
-msgstr "Minska"
 
 #: u_translation.rsdecrementtim
 msgid "Decrement time"
@@ -1479,10 +1411,6 @@ msgstr "Grad"
 #: u_translation.rsdegreegridsp
 msgid "Grid spacing in degree"
 msgstr "Mellanrum i grader för rutnät"
-
-#: u_translation.rsdegrees
-msgid "degrees"
-msgstr "grader"
 
 #: u_translation.rsdegreesminut
 msgid "Degrees, minutes, seconds"
@@ -1580,10 +1508,6 @@ msgstr "Skrivbordsmiljö"
 msgid "Details"
 msgstr "Detaljer"
 
-#: u_translation.rsdevicestatus
-msgid "Device status"
-msgstr "Enhetsstatus"
-
 #: u_translation.rsdiam
 msgid "Diam."
 msgstr "Diam."
@@ -1624,10 +1548,6 @@ msgstr "Riktning"
 msgid "Directory"
 msgstr "Mapp"
 
-#: u_translation.rsdirectorynot
-msgid "Directory not found %s"
-msgstr "Hittade inte mappen %s"
-
 #: u_translation.rsdirectorynot2
 msgid "Directory not found! Please install the Skychart Pictures package."
 msgstr "Mappen hittades inte! Installera Skychart Pictures paketet."
@@ -1659,10 +1579,6 @@ msgstr "Visa bilder av objekten i katalogen"
 #: u_translation.rsdisplaylabel
 msgid "Display labels for all star catalogs"
 msgstr "Visa etiketter för alla stjärnkataloger"
-
-#: u_translation.rsdisplaypreci
-msgid "Display Precision"
-msgstr "Visningsnoggrannhet"
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar"
@@ -1912,18 +1828,6 @@ msgstr "Emissionsnebulosa"
 msgid "Empty"
 msgstr "Tom"
 
-#: u_translation.rsencoderconfi
-msgid "Encoder Configuration"
-msgstr "Inställning enkodrar"
-
-#: u_translation.rsencoderiniti
-msgid "Encoder initialization angle"
-msgstr "Enkoder startvinkel"
-
-#: u_translation.rsencoders
-msgid "Encoders"
-msgstr "Enkodrar"
-
 #: u_translation.rsend
 msgid "End"
 msgstr "Slut"
@@ -1964,10 +1868,6 @@ msgstr "Epok av maxima"
 msgid "Eq. grid"
 msgstr "Ekv. rutnät"
 
-#: u_translation.rsequatorial
-msgid "Equatorial"
-msgstr "Ekvatoriell"
-
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
 msgstr "Ekvatoriella koordinater"
@@ -1983,10 +1883,6 @@ msgstr "Ekvatoriella koord."
 #: u_translation.rsequatorialmo
 msgid "Equatorial mount"
 msgstr "Ekvatoriell montering"
-
-#: u_translation.rsequatorialsy
-msgid "Equatorial System"
-msgstr "Ekvatoriellt system"
 
 #: u_translation.rsequinox
 msgid "Equinox:"
@@ -2007,18 +1903,6 @@ msgstr "%sFel vid skapande av tabell %s"
 #: u_translation.rserrorfilenot
 msgid "Error, file not downloaded:"
 msgstr "Fel, fil laddades inte ner:"
-
-#: u_translation.rserroropening
-msgid "Error opening %s"
-msgstr "Kunde inte öppna %s"
-
-#: u_translation.rserroropening2
-msgid "Error opening %s on port %s"
-msgstr "Fel när %s på port %s skulle öppnas"
-
-#: u_translation.rserroropening3
-msgid "Error opening %s on port %sCheck if device is connected and power on"
-msgstr "Fel vid anslutning av %s på port %s Kontrollera att enheten är ansluten och påslagen"
 
 #: u_translation.rserrorpleasec
 msgid "Error! Please check the database parameters."
@@ -2112,17 +1996,9 @@ msgstr "Svagare"
 msgid "Faint Stars Size "
 msgstr "Storlek på svaga stjärnor "
 
-#: u_translation.rsfan
-msgid "Fan"
-msgstr "Fläkt"
-
 #: u_translation.rsfaq
 msgid "FAQ"
 msgstr "Vanliga frågor"
-
-#: u_translation.rsfast
-msgid "Fast"
-msgstr "Snabb"
 
 #: u_translation.rsfaster
 msgid "Faster"
@@ -2159,10 +2035,6 @@ msgstr "Synfält inställningar"
 #: u_translation.rsfieldofvisio5
 msgid "Field of vision number :"
 msgstr "Synfält nummer:"
-
-#: u_translation.rsfieldrotatio
-msgid "Field Rotation"
-msgstr "Fältrotation"
 
 #: u_translation.rsfieldtoowidt
 msgid "Field too wide! Maximum is %s"
@@ -2260,14 +2132,6 @@ msgstr "Flamsteed nummer"
 msgid "Iridium flare prediction:"
 msgstr "Iridium eruption förutsägelse:"
 
-#: u_translation.rsfocus
-msgid "Focus"
-msgstr "Fokus"
-
-#: u_translation.rsfocusspeed
-msgid "Focus Speed"
-msgstr "Fokushastighet"
-
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Teckensnitt"
@@ -2283,10 +2147,6 @@ msgstr "Tvinga färg"
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
 msgstr "Tvinga EqSys"
-
-#: u_translation.rsformalwaysvi
-msgid "Form always visible"
-msgstr "Formuläret alltid synligt"
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
@@ -2315,10 +2175,6 @@ msgstr "Bildrutor per sekund"
 #: u_translation.rsframessize
 msgid "Frames size"
 msgstr "Storlek på bildrutor"
-
-#: u_translation.rsfrangle
-msgid "FR Angle"
-msgstr "FR vinkel"
 
 #: u_translation.rsfreesize
 msgid "Free size"
@@ -2392,10 +2248,6 @@ msgstr "Geocentrisk"
 msgid "Geometric altitude"
 msgstr "Geometrisk höjd"
 
-#: u_translation.rsget
-msgid "Get"
-msgstr "Hämta"
-
 #: u_translation.rsgetasteroidl
 msgid "Get the asteroids list."
 msgstr "Hämta asteroidlistan."
@@ -2419,10 +2271,6 @@ msgstr "Klotformad stjärnhop"
 #: u_translation.rsgnomonic
 msgid "Gnomonic"
 msgstr "Gnomonisk"
-
-#: u_translation.rsgps16advsett
-msgid "Gps-16\" Adv. Settings"
-msgstr "Gps-16\" avancerade inställningar"
 
 #: u_translation.rsgraphheight
 msgid "Graph height"
@@ -2472,18 +2320,6 @@ msgstr "GRS transit"
 msgid "G slope parameter"
 msgstr "G slope parameter"
 
-#: u_translation.rsguide
-msgid "Guide"
-msgstr "Guide"
-
-#: u_translation.rsguidearcsec
-msgid "guide arcsec"
-msgstr "guide bågsekunder"
-
-#: u_translation.rsguiderate
-msgid "Guide Rate"
-msgstr "Följhastighet"
-
 #: u_translation.rshabsolutemag
 msgid "H absolute magnitude"
 msgstr "H absolut magnitud"
@@ -2499,14 +2335,6 @@ msgstr "Stoppa efter 1000 fel"
 #: u_translation.rshammeraitoff
 msgid "Hammer-Aitoff"
 msgstr "Hammer-Aitoff-projektion"
-
-#: u_translation.rshandpad
-msgid "HandPad"
-msgstr "Handkontroll"
-
-#: u_translation.rshandpadmodes
-msgid "HandPad Mode Selection"
-msgstr "Välj mode för handkontroll"
 
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
@@ -2540,21 +2368,9 @@ msgstr "Dölj etikett"
 msgid "Hide objects wider than"
 msgstr "Göm objekt större än"
 
-#: u_translation.rshigh
-msgid "High"
-msgstr "Hög"
-
 #: u_translation.rshighcolor
 msgid "High colour"
 msgstr "Hög färgkvalitet"
-
-#: u_translation.rshighest
-msgid "Highest"
-msgstr "Snabbast"
-
-#: u_translation.rshighprecisio
-msgid "High Precision Pointing"
-msgstr "Pekning med hög precision"
 
 #: u_translation.rshighquality
 msgid "High quality"
@@ -2660,10 +2476,6 @@ msgstr "Inkludera dag tid passage"
 msgid "Include Iridium flare"
 msgstr "Inkludera Iridium eruption"
 
-#: u_translation.rsincrease
-msgid "Increase"
-msgstr "Öka"
-
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
 msgstr "Steg för ljusa stjärnor"
@@ -2724,18 +2536,6 @@ msgstr "Informationstext"
 msgid "Information from catalog"
 msgstr "Information från katalog"
 
-#: u_translation.rsinit
-msgid "Init"
-msgstr "Init"
-
-#: u_translation.rsinitialiseda
-msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
-msgstr "Initierad vid %s%s med: %s%s (RA: %s DEC: %s)"
-
-#: u_translation.rsinitialize
-msgid "Initialize"
-msgstr "Initiera"
-
 #: u_translation.rsinitializeda
 msgid "Initialize database"
 msgstr "Initiera databasen"
@@ -2764,10 +2564,6 @@ msgstr "Internet"
 msgid "Internet localization"
 msgstr "Internet localization"
 
-#: u_translation.rsintervaltime
-msgid "Interval Timeout"
-msgstr "Intervall timeout"
-
 #: u_translation.rsinttelesco
 msgid "Integrated telescope driver."
 msgstr "Integrerad teleskopdrivrutin."
@@ -2784,21 +2580,9 @@ msgstr "Ogiltig FITS-fil: %s"
 msgid "Invalid path: "
 msgstr "Ogiltig sökväg: "
 
-#: u_translation.rsinversionalp
-msgid "Inversion Alpha ,"
-msgstr "Inverterad Alfa,"
-
-#: u_translation.rsinversiondel
-msgid "%s Inversion Delta"
-msgstr "%s Inverterad Delta"
-
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "Osynlig vid denna latitud"
-
-#: u_translation.rsipaddress
-msgid "IP address"
-msgstr "IP-adress"
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
@@ -2931,10 +2715,6 @@ msgstr "Vänster"
 #: u_translation.rsleftbar
 msgid "Left bar"
 msgstr "Fält till vänster"
-
-#: u_translation.rsleftmode
-msgid "Left Mode"
-msgstr "Vänster"
 
 #: u_translation.rslegal
 msgid "Legal"
@@ -3092,10 +2872,6 @@ msgstr "Lokal siderisk tid"
 msgid "Location code"
 msgstr "Platskod"
 
-#: u_translation.rslocationtime
-msgid "Location / Time"
-msgstr "Plats / Tid"
-
 #: u_translation.rslock
 msgid "Lock"
 msgstr "Lås"
@@ -3128,10 +2904,6 @@ msgstr "Titta på:"
 msgid "Lozenge"
 msgstr "Romb"
 
-#: u_translation.rslow
-msgid "Low"
-msgstr "Låg"
-
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
 msgstr "Ljusstyrka på lågt liggande yta"
@@ -3139,10 +2911,6 @@ msgstr "Ljusstyrka på lågt liggande yta"
 #: u_translation.rsluminosity
 msgid "Luminosity"
 msgstr "Ljusstyrka"
-
-#: u_translation.rslunar
-msgid "Lunar"
-msgstr "Månen"
 
 #: u_translation.rslunareclipse
 msgid "Lunar eclipses"
@@ -3240,10 +3008,6 @@ msgstr "Karta"
 msgid "March"
 msgstr "Mars"
 
-#: u_translation.rsmark
-msgid "Mark"
-msgstr "Markera"
-
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
 msgstr "Markera centrum av kartan"
@@ -3340,10 +3104,6 @@ msgstr "Meddelanden:"
 msgid "Meters"
 msgstr "Meter"
 
-#: u_translation.rsmiddle
-msgid "Middle"
-msgstr "Mellan"
-
 #: u_translation.rsmilkyway
 msgid "Milky Way"
 msgstr "Vintergatan"
@@ -3392,14 +3152,6 @@ msgstr "Div. linjer"
 msgid "Missing script title!"
 msgstr "Scriptrubrik saknas!"
 
-#: u_translation.rsmodebuttonsi
-msgid "Mode Button Simulator"
-msgstr "Modeknapp simulator"
-
-#: u_translation.rsmodel
-msgid "Model"
-msgstr "Modell"
-
 #: u_translation.rsmodify
 msgid "Modify"
 msgstr "Ändra"
@@ -3447,26 +3199,6 @@ msgstr "Morgon"
 #: u_translation.rsmorningtwili
 msgid "Morning twilight"
 msgstr "Gryning"
-
-#: u_translation.rsmotor
-msgid "Motor"
-msgstr "Motor"
-
-#: u_translation.rsmotorspeeds
-msgid "Motor Speeds"
-msgstr "Motorhastigheter"
-
-#: u_translation.rsmountfabrica
-msgid "Mount fabrication error"
-msgstr "Mekanisk felkorrigering"
-
-#: u_translation.rsmounttype
-msgid "Mount type"
-msgstr "Typ av montering"
-
-#: u_translation.rsmove
-msgid "Move"
-msgstr "Flytta"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3532,10 +3264,6 @@ msgstr "Deep sky eller andra objekt"
 msgid "Nebulae outlines"
 msgstr "Nebulosabeskrivningar"
 
-#: u_translation.rsnegativeeast
-msgid "(negative east of Greenwich)"
-msgstr "(negativ öster om Greenwich)"
-
 #: u_translation.rsneighbor
 msgid "Neighbour"
 msgstr "Grannobjekt"
@@ -3587,10 +3315,6 @@ msgstr "Nattvisning"
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
 msgstr "Nattvisning"
-
-#: u_translation.rsno
-msgid "No."
-msgstr "Nr."
 
 #: u_translation.rsnoasteroidda
 msgid "No asteroids data found!%sPlease load a MPC file first."
@@ -3688,10 +3412,6 @@ msgstr "%s Kunde inte hittas i någon av katalogerna."
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
 msgstr "%s Hittades ej!%sKatalogen kanske inte är installerad, eller så kan sökvägen vara felaktig."
 
-#: u_translation.rsnotinitialis
-msgid "Not initialised"
-msgstr "Ej initierad"
-
 #: u_translation.rsnovember
 msgid "November"
 msgstr "November"
@@ -3760,10 +3480,6 @@ msgstr "Objektets namn"
 msgid "Object size unit"
 msgstr "Enhet för objektets storlek"
 
-#: u_translation.rsobjectsusedf
-msgid "Objects used for Initialisation"
-msgstr "Objekt som används vis initiering"
-
 #: u_translation.rsobjecttype
 msgid "Object type"
 msgstr "Objekttyp"
@@ -3779,10 +3495,6 @@ msgstr "Observatorium"
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
 msgstr "Observatoriedatabas"
-
-#: u_translation.rsobservertool
-msgid "Observer tools"
-msgstr "Observationsverktyg"
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -3800,10 +3512,6 @@ msgstr "Föråldrade"
 msgid "October"
 msgstr "Oktober"
 
-#: u_translation.rsoff
-msgid "Off"
-msgstr "Av"
-
 #: u_translation.rsofficialname
 msgid "Official name"
 msgstr "Officiellt namn"
@@ -3819,10 +3527,6 @@ msgstr "Offset etikett"
 #: u_translation.rsok
 msgid "OK"
 msgstr "OK"
-
-#: u_translation.rson
-msgid "On"
-msgstr "På"
 
 #: u_translation.rsoneevery
 msgid "One every"
@@ -3960,18 +3664,6 @@ msgstr "Parallax"
 msgid "Parametric"
 msgstr "Parametrisk"
 
-#: u_translation.rsparity
-msgid "Parity"
-msgstr "Paritet"
-
-#: u_translation.rsparkinganddi
-msgid "Parking and Disconnecting telescope."
-msgstr "Parkerar och kopplar från teleskopet."
-
-#: u_translation.rsparktelescop
-msgid "Park Telescope"
-msgstr "Parkera teleskopet"
-
 #: u_translation.rspartial
 msgid "Partial"
 msgstr "Partiell"
@@ -3999,14 +3691,6 @@ msgstr "Bredd"
 #: u_translation.rspause
 msgid "Pause"
 msgstr "Paus"
-
-#: u_translation.rspec
-msgid "PEC"
-msgstr "PEC"
-
-#: u_translation.rspectoggle
-msgid "Pec Toggle"
-msgstr "Växla PEC"
 
 #: u_translation.rspenumbra
 msgid "Penumbra"
@@ -4128,10 +3812,6 @@ msgstr "Ange ett långt namn för katalogen"
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Ange mappen som katalogen ska sparas i"
 
-#: u_translation.rspleaseinitth
-msgid "Please init the 90 degree elevation first"
-msgstr "Initiera 90 graders elevation först"
-
 #: u_translation.rspleaseinstal
 msgid "Please install indistarter package!"
 msgstr "Var god installera indistarter-paketet!"
@@ -4147,10 +3827,6 @@ msgstr "Installera wine http://www.winehq.org/ för att beräkna artificiella sa
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
 msgstr "Sätt i RealSky CD nummer"
-
-#: u_translation.rspleasemoveth
-msgid "Please move the telescope along the two axis"
-msgstr "Flytta teleskopet efter de två axlarna"
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
@@ -4176,10 +3852,6 @@ msgstr "Pluto"
 msgid "Pluto is a planet."
 msgstr "Pluto är en planet."
 
-#: u_translation.rspm
-msgid "pm"
-msgstr "em"
-
 #: u_translation.rspolarmotiona
 msgid "Polar motion (arc sec)"
 msgstr "Polrörelse (bågsek)"
@@ -4191,10 +3863,6 @@ msgstr "Polinklination"
 #: u_translation.rsport
 msgid "Port:"
 msgstr "Port:"
-
-#: u_translation.rsportconfigur
-msgid "Port Configuration"
-msgstr "Portinställningar"
 
 #: u_translation.rsportrait
 msgid "Portrait"
@@ -4316,10 +3984,6 @@ msgstr "Bearbetning avslutad. Totalt antal platser: %s"
 msgid "Processing line %s"
 msgstr "Bearbetar rad %s"
 
-#: u_translation.rsproductinfo
-msgid "Product Info"
-msgstr "Produktinfo"
-
 #: u_translation.rsprograminfor
 msgid "Program information"
 msgstr "Programinformation"
@@ -4376,14 +4040,6 @@ msgstr "Proxyvärd"
 msgid "Proxy port"
 msgstr "Proxyport"
 
-#: u_translation.rspulseduratio
-msgid "Pulse duration"
-msgstr "Pulsbredd"
-
-#: u_translation.rspulsemode
-msgid "Pulse Mode"
-msgstr "Pulsmode"
-
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
 msgstr "Skicka filer med .tle filtillägg till %s mappen"
@@ -4391,10 +4047,6 @@ msgstr "Skicka filer med .tle filtillägg till %s mappen"
 #: u_translation.rsquasar
 msgid "Quasar"
 msgstr "Kvasar"
-
-#: u_translation.rsquery
-msgid "Query"
-msgstr "Fråga"
 
 #: u_translation.rsquickdelete
 msgid "Quick delete"
@@ -4415,14 +4067,6 @@ msgstr "Snabbguide"
 #: u_translation.rsra
 msgid "RA"
 msgstr "RA"
-
-#: u_translation.rsraazpeccompe
-msgid "RA/AZ PEC Compensation"
-msgstr "RA/AZ PEC-kompensering"
-
-#: u_translation.rsraazslewrate
-msgid "RA/Az Slew Rate"
-msgstr "RA/Az sökhastighet"
 
 #: u_translation.rsradialveloci
 msgid "Radial velocity"
@@ -4448,17 +4092,9 @@ msgstr "RA varv: "
 msgid "%sRA turns:"
 msgstr "%s RA varv:"
 
-#: u_translation.rsreadinterval
-msgid "Read Interval [ms]"
-msgstr "Läsintervall (ms)"
-
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
 msgstr "Riktiga bilder"
-
-#: u_translation.rsreallyparkan
-msgid "REALLY park and disconnect the telescope?"
-msgstr "SÄKERT att teleskopet ska parkeras och kopplas från?"
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -4507,10 +4143,6 @@ msgstr "Inspelningsalternativ"
 #: u_translation.rsrecordingpre
 msgid "Recording prefix"
 msgstr "Prefix för inspelning"
-
-#: u_translation.rsrecordprotoc
-msgid "Record protocol to a trace file"
-msgstr "Spela in protokollet till en spårningsfil"
 
 #: u_translation.rsrecoverhidde
 msgid "Recover hidden label"
@@ -4648,14 +4280,6 @@ msgstr "Återställ till senaste gången kartan sparades"
 msgid "Resolution:"
 msgstr "Upplösning:"
 
-#: u_translation.rsresolutionxy
-msgid "Resolution X: %s Y :%s steps"
-msgstr "Upplösning X: %s Y: %s steg"
-
-#: u_translation.rsresumegoto
-msgid "Resume GoTo"
-msgstr "Återställ GoTo"
-
 #: u_translation.rsreturn
 msgid "Return"
 msgstr "Gå tillbaka"
@@ -4687,10 +4311,6 @@ msgstr "Rektascension (RA)"
 #: u_translation.rsrightbar
 msgid "Right Bar"
 msgstr "Fält till höger"
-
-#: u_translation.rsrightmode
-msgid "Right Mode"
-msgstr "Höger"
 
 #: u_translation.rsrise
 msgid "Rise"
@@ -4800,10 +4420,6 @@ msgstr "Spara bild..."
 msgid "Save project"
 msgstr "Spara projekt"
 
-#: u_translation.rssavesetting
-msgid "Save setting"
-msgstr "Spara inställningarna"
-
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
 msgstr "Spara aktiv karta"
@@ -4823,10 +4439,6 @@ msgstr "Skanna arkiv"
 #: u_translation.rsscandirector
 msgid "Scan directory"
 msgstr "Skanna katalogen"
-
-#: u_translation.rsscopeadv
-msgid "Scope Adv"
-msgstr "Scope Adv"
 
 #: u_translation.rsscreenresolu
 msgid "Screen resolution"
@@ -4904,10 +4516,6 @@ msgstr "Sekunder"
 msgid "See %s for more information."
 msgstr "Se %s för mer information"
 
-#: u_translation.rssel
-msgid "Sel."
-msgstr "Välj"
-
 #: u_translation.rsselect
 msgid "Select"
 msgstr "Välj"
@@ -4935,10 +4543,6 @@ msgstr "Välj etiketter som ska återskapas"
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
 msgstr "Välj mirror site"
-
-#: u_translation.rsselectnone
-msgid "Select none"
-msgstr "Välj ingen"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -5004,10 +4608,6 @@ msgstr "Avskiljare"
 msgid "September"
 msgstr "September"
 
-#: u_translation.rsserialport
-msgid "Serial Port"
-msgstr "Serieport"
-
 #: u_translation.rsserver
 msgid "Server"
 msgstr "Server"
@@ -5056,17 +4656,9 @@ msgstr "Ange observationsplats"
 msgid "Set options for best performance"
 msgstr "Ställ in inställningar för bästa prestanda"
 
-#: u_translation.rssetslewing
-msgid "Set Slewing"
-msgstr "Ange sökhastighet"
-
 #: u_translation.rssettargetto
 msgid "Set target to %s"
 msgstr "Sätt mål till %s"
-
-#: u_translation.rssettelescope
-msgid "Set location and time"
-msgstr "Ställ in plats och tid"
 
 #: u_translation.rssettime
 msgid "Set Time"
@@ -5160,10 +4752,6 @@ msgstr "Visa ekliptikan"
 msgid "Show galactic equator"
 msgstr "Visa galaktiska ekvatorn"
 
-#: u_translation.rsshowgrid
-msgid "Show grid"
-msgstr "Visa rutnät"
-
 #: u_translation.rsshowgridlabe
 msgid "Show grid label"
 msgstr "Visa rutnätsetikett"
@@ -5219,10 +4807,6 @@ msgstr "Visa bilder av objekt på kartan"
 #: u_translation.rsshowobjects
 msgid "Show objects"
 msgstr "Visa objekt"
-
-#: u_translation.rsshowobsolete
-msgid "Show obsolete drivers"
-msgstr "Visa föråldrade drivrutiner"
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian"
@@ -5320,10 +4904,6 @@ msgstr "Gå till objekt (slew)"
 msgid "Slewing to %s / %s"
 msgstr "Sväng till %s / %s"
 
-#: u_translation.rsslewspeed
-msgid " Slew Speed"
-msgstr " Sökhastighet"
-
 #: u_translation.rsslewtochartc
 msgid "Slew to chart center"
 msgstr "Sväng till kartcentrum"
@@ -5332,17 +4912,9 @@ msgstr "Sväng till kartcentrum"
 msgid "Slew to cursor position"
 msgstr "Gå till pekarens position"
 
-#: u_translation.rsslow
-msgid "Slow"
-msgstr "Långsam"
-
 #: u_translation.rsslower
 msgid "Slower"
 msgstr "Långsammare"
-
-#: u_translation.rsslowest
-msgid "Slowest"
-msgstr "Långsammast"
 
 #: u_translation.rssmallstars
 msgid "Small stars"
@@ -5355,10 +4927,6 @@ msgstr "M"
 #: u_translation.rssmonth
 msgid "M."
 msgstr "M"
-
-#: u_translation.rssocketconfig
-msgid "Socket configuration"
-msgstr "Konfiguration av socket"
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
@@ -5427,18 +4995,6 @@ msgstr "Utfyllnad"
 #: u_translation.rsspectralclas
 msgid "Spectral class"
 msgstr "Spektralklass"
-
-#: u_translation.rsspeed
-msgid "Speed"
-msgstr "Hastighet"
-
-#: u_translation.rsspeedselecti
-msgid "Speed Selection"
-msgstr "Val av hastighet"
-
-#: u_translation.rsspeedsetting
-msgid "Speed settings"
-msgstr "Hastighetsinställningar"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -5544,10 +5100,6 @@ msgstr "Startmånad"
 msgid "Start of object"
 msgstr "Början på objekt"
 
-#: u_translation.rsstatus
-msgid "Status"
-msgstr "Status"
-
 #: u_translation.rsstatusbar
 msgid "Status bar"
 msgstr "Statusfält"
@@ -5560,14 +5112,6 @@ msgstr "Stega in i"
 msgid "Step Over"
 msgstr "Stega förbi"
 
-#: u_translation.rsstepsalpha
-msgid "Steps (Alpha)"
-msgstr "Steg (Alfa)"
-
-#: u_translation.rsstepsdelta
-msgid "Steps (Delta)"
-msgstr "Steg (Delta)"
-
 #: u_translation.rsstepunit
 msgid "Step unit"
 msgstr "Stegenhet"
@@ -5575,10 +5119,6 @@ msgstr "Stegenhet"
 #: u_translation.rsstop
 msgid "Stop"
 msgstr "Stopp"
-
-#: u_translation.rsstopbits
-msgid "Stop bits"
-msgstr "Stoppbitar"
 
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
@@ -5616,14 +5156,6 @@ msgstr "Yta"
 msgid "Surface brightness"
 msgstr "Ytljusstyrka"
 
-#: u_translation.rsswapbutton
-msgid "Swap button"
-msgstr "Växlingsknapp"
-
-#: u_translation.rsswitchhpp
-msgid "Switch HPP"
-msgstr "Växla HPP"
-
 #: u_translation.rssyear
 msgid "Y"
 msgstr "Å"
@@ -5648,10 +5180,6 @@ msgstr "Synodisk månad"
 msgid "System printer"
 msgstr "Systemskrivare"
 
-#: u_translation.rssytemstatus
-msgid "Sytem status:"
-msgstr "Systemstatus:"
-
 #: u_translation.rstable
 msgid "Table"
 msgstr "Tabell"
@@ -5664,10 +5192,6 @@ msgstr "%sTabell %s finns inte! %sRätta till felet och försök igen."
 msgid "%sThis table exists: %s"
 msgstr "%sTabellen finns: %s"
 
-#: u_translation.rstarget
-msgid "Target"
-msgstr "Mål"
-
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
 msgstr "TCP/IP anslutning"
@@ -5679,10 +5203,6 @@ msgstr "TCP/IP server"
 #: u_translation.rstcpipservice
 msgid "TCP/IP service not available."
 msgstr "TCP/IP tjänsten är inte tillgänglig."
-
-#: u_translation.rstcpport
-msgid "TCP port"
-msgstr "TCP-port"
 
 #: u_translation.rstelescope
 msgid "Telescope"
@@ -5727,10 +5247,6 @@ msgstr "Textstorlek"
 #: u_translation.rstheimagedire
 msgid "The image directory contains sub-directories with the same names as the DSO catalogs. Each sub-directory contains FITS files with the names of the catalog objects. These images are used to replace the DSO symbols on the map."
 msgstr "Bildkatalogen innehåller underkataloger med samma namn som DSO kataloger. Varje underkatalog innehåller FITS-filer med katalogobjektens namn. Bilderna används för att ersätta DSO symboler på kartan."
-
-#: u_translation.rstheinterface
-msgid "The interface is either not connected or not initialized"
-msgstr "Interfacet är inte anslutet eller inte initierat"
 
 #: u_translation.rstheme
 msgid "Theme"
@@ -5787,10 +5303,6 @@ msgstr "Ordna fönster vertikalt"
 #: u_translation.rstime
 msgid "Time"
 msgstr "Tid"
-
-#: u_translation.rstimeoutms
-msgid "Timeout [ms]"
-msgstr "Timeout (ms)"
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
@@ -5956,10 +5468,6 @@ msgstr "varv/timme"
 msgid "Twilight"
 msgstr "Skymning/gryning"
 
-#: u_translation.rstwostarsmust
-msgid "TWO stars must be used for initialisation."
-msgstr "TVÅ stjärnor måste användas för initiering"
-
 #: u_translation.rstype
 msgid "Type"
 msgstr "Typ"
@@ -6076,10 +5584,6 @@ msgstr "Använd en enkel pekare"
 msgid "(useful to represent a flux)"
 msgstr "(användbart för att representera ett flöde)"
 
-#: u_translation.rsusehpp
-msgid "Use HPP"
-msgstr "Använd HPP"
-
 #: u_translation.rsusehttpproxy
 msgid "Use HTTP proxy"
 msgstr "Använd HTTP proxy"
@@ -6164,14 +5668,6 @@ msgstr "Venus"
 msgid "Version"
 msgstr "Version"
 
-#: u_translation.rsverticalaxis
-msgid "Vertical axis encoder origin : %s"
-msgstr "Vertikala axelns utgångsläge: %s"
-
-#: u_translation.rsverticalaxis2
-msgid "Vertical axis 90 degree initialisation not done"
-msgstr "Initiering av 90-gradersaxeln inte genomförd"
-
 #: u_translation.rsvicinity
 msgid "Vicinity"
 msgstr "Omgivning"
@@ -6195,10 +5691,6 @@ msgstr "Visa observationslistan"
 #: u_translation.rsviewonchart
 msgid "View on chart"
 msgstr "Visa på kartan"
-
-#: u_translation.rsvirtualhandp
-msgid "Virtual HandPad for Scope.exe "
-msgstr "Virtuell handkontroll för Scope.exe "
 
 #: u_translation.rsvirtualobser
 msgid "Virtual Observatory Catalog"
@@ -6292,10 +5784,6 @@ msgstr "Bredd"
 msgid "Window"
 msgstr "Fönster"
 
-#: u_translation.rsxerrors
-msgid "X Errors"
-msgstr "X-fel"
-
 #: u_translation.rsyear
 msgid "Year"
 msgstr "År"
@@ -6303,10 +5791,6 @@ msgstr "År"
 #: u_translation.rsyears
 msgid "years"
 msgstr "År"
-
-#: u_translation.rsyerrors
-msgid "Y Errors"
-msgstr "Y-fel"
 
 #: u_translation.rsyoualreadyha
 msgid "You already have the latest available version!"

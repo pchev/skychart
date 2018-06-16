@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-06-10 11:45+0000\n"
+"POT-Creation-Date: 2018-06-16 14:24+0000\n"
 "PO-Revision-Date: 2016-12-11 09:07+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-06-10 11:52+0000\n"
-"X-Generator: Launchpad (build 18684)\n"
+"X-Launchpad-Export-Date: 2018-06-16 14:28+0000\n"
+"X-Generator: Launchpad (build 18688)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -200,10 +200,6 @@ msgstr "高级"
 msgid "Advanced search"
 msgstr "高级搜索"
 
-#: u_translation.rsadvancedsett
-msgid "Advanced Settings for Scope.exe"
-msgstr "Scope.exe高级设置"
-
 #: u_translation.rsadvancedsett2
 msgid "Advanced setting"
 msgstr "高级设置"
@@ -253,10 +249,6 @@ msgstr "另外，请务必安装所需的数据库软件。如果您不能确定
 msgid "Alt"
 msgstr "高度角"
 
-#: u_translation.rsaltaz
-msgid "Alt-Az"
-msgstr "地平"
-
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
 msgstr "地平坐标 "
@@ -292,10 +284,6 @@ msgstr ""
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "总是不询问而保存。"
-
-#: u_translation.rsalwaysshowth
-msgid "Always show the objects from the list"
-msgstr ""
 
 #: u_translation.rsanewversiono
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
@@ -521,10 +509,6 @@ msgstr "背景"
 msgid "Background picture"
 msgstr "背景图片"
 
-#: u_translation.rsbattery
-msgid "Battery"
-msgstr "电池"
-
 #: u_translation.rsbayerletter
 msgid "Bayer letter"
 msgstr "拜耳编号"
@@ -537,17 +521,9 @@ msgstr "公元前"
 msgid "Begin processing for jd=%s / %s"
 msgstr "开始处理儒略日=%s/%s的数据"
 
-#: u_translation.rsbelowthehori
-msgid "Below the horizon"
-msgstr "地平线以下"
-
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
 msgstr "请务必使用DOS换行符格式。"
-
-#: u_translation.rsbewarethisop
-msgid "Beware this option can severly degrade the performance"
-msgstr ""
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -769,10 +745,6 @@ msgstr "Patrick Chevalley, Marc Fokker"
 msgid "Center"
 msgstr "置中"
 
-#: u_translation.rscentering
-msgid "Centering"
-msgstr "正在置中"
-
 #: u_translation.rscenterobject
 msgid "Centre on this object"
 msgstr "置中此目标"
@@ -832,10 +804,6 @@ msgstr "星图信息"
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr "星图图例"
-
-#: u_translation.rscharts
-msgid "Charts"
-msgstr "星图"
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
@@ -925,10 +893,6 @@ msgstr "闭合轮廓线"
 msgid "Close files"
 msgstr "关闭文件"
 
-#: u_translation.rsclosingconne
-msgid "Closing connection"
-msgstr "正在关闭连接"
-
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
 msgstr "星团和星云"
@@ -996,10 +960,6 @@ msgstr "用来处理文件的命令。"
 #: u_translation.rscommonname
 msgid "Common name"
 msgstr "通用名"
-
-#: u_translation.rscommunicatio
-msgid "Communication protocol"
-msgstr "通信协议"
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
@@ -1161,10 +1121,6 @@ msgstr "坐标网格"
 msgid "Coordinates:"
 msgstr "坐标："
 
-#: u_translation.rscoordinates2
-msgid "Coordinates"
-msgstr "坐标"
-
 #: u_translation.rscoordinatese
 msgid "Coordinates equinox"
 msgstr "坐标系春分点"
@@ -1253,10 +1209,6 @@ msgstr "当前驱动"
 msgid "Cursor"
 msgstr ""
 
-#: u_translation.rscustom
-msgid "Custom"
-msgstr "自定义"
-
 #: u_translation.rscw
 msgid "%sCW"
 msgstr ""
@@ -1297,10 +1249,6 @@ msgstr "数据库设置..."
 msgid "Database type"
 msgstr "数据库类型"
 
-#: u_translation.rsdatabits
-msgid "Data bits"
-msgstr "数据位"
-
 #: u_translation.rsdatafiles
 msgid "Data files:"
 msgstr "数据文件："
@@ -1328,10 +1276,6 @@ msgstr "数据格式"
 #: u_translation.rsdate
 msgid "Date"
 msgstr "日期"
-
-#: u_translation.rsdateandortim
-msgid "Date and/or time cannot be changed"
-msgstr "日期和/或时间无法更改"
 
 #: u_translation.rsdateformat
 msgid "Date format"
@@ -1381,14 +1325,6 @@ msgstr "赤纬"
 msgid "DEC"
 msgstr "赤纬"
 
-#: u_translation.rsdecelpeccomp
-msgid "DEC/EL PEC Compensation"
-msgstr "DEC/EL PEC 补偿"
-
-#: u_translation.rsdecelslewrat
-msgid "DEC/El Slew Rate"
-msgstr ""
-
 #: u_translation.rsdecember
 msgid "December"
 msgstr ""
@@ -1412,10 +1348,6 @@ msgstr "赤纬"
 #: u_translation.rsdecoptions
 msgid "DEC options"
 msgstr "赤纬选项"
-
-#: u_translation.rsdecrease
-msgid "Decrease"
-msgstr "降低"
 
 #: u_translation.rsdecrementtim
 msgid "Decrement time"
@@ -1480,10 +1412,6 @@ msgstr "度"
 #: u_translation.rsdegreegridsp
 msgid "Grid spacing in degree"
 msgstr ""
-
-#: u_translation.rsdegrees
-msgid "degrees"
-msgstr "度"
 
 #: u_translation.rsdegreesminut
 msgid "Degrees, minutes, seconds"
@@ -1581,10 +1509,6 @@ msgstr "桌面环境"
 msgid "Details"
 msgstr "详细信息"
 
-#: u_translation.rsdevicestatus
-msgid "Device status"
-msgstr "设备状态"
-
 #: u_translation.rsdiam
 msgid "Diam."
 msgstr "视直径"
@@ -1625,11 +1549,6 @@ msgstr "方向"
 msgid "Directory"
 msgstr "目录"
 
-#: u_translation.rsdirectorynot
-#, fuzzy,badformat
-msgid "Directory not found %s"
-msgstr "目录未找到％s"
-
 #: u_translation.rsdirectorynot2
 msgid "Directory not found! Please install the Skychart Pictures package."
 msgstr "目录未找到！请安装星图图片包。"
@@ -1661,10 +1580,6 @@ msgstr "显示已编制星表的天体图像"
 #: u_translation.rsdisplaylabel
 msgid "Display labels for all star catalogs"
 msgstr "为所有星表显示标签"
-
-#: u_translation.rsdisplaypreci
-msgid "Display Precision"
-msgstr "显示精度"
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar"
@@ -1914,18 +1829,6 @@ msgstr "发射星云"
 msgid "Empty"
 msgstr "空"
 
-#: u_translation.rsencoderconfi
-msgid "Encoder Configuration"
-msgstr "编码器配置"
-
-#: u_translation.rsencoderiniti
-msgid "Encoder initialization angle"
-msgstr "编码器初始化角度"
-
-#: u_translation.rsencoders
-msgid "Encoders"
-msgstr "编码器"
-
 #: u_translation.rsend
 msgid "End"
 msgstr "结束"
@@ -1966,10 +1869,6 @@ msgstr ""
 msgid "Eq. grid"
 msgstr "赤道坐标网格"
 
-#: u_translation.rsequatorial
-msgid "Equatorial"
-msgstr "赤道"
-
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
 msgstr "赤道坐标系"
@@ -1985,10 +1884,6 @@ msgstr "赤道坐标"
 #: u_translation.rsequatorialmo
 msgid "Equatorial mount"
 msgstr "赤道挂载"
-
-#: u_translation.rsequatorialsy
-msgid "Equatorial System"
-msgstr "赤道坐标系"
 
 #: u_translation.rsequinox
 msgid "Equinox:"
@@ -2008,19 +1903,6 @@ msgstr "%s创建表格错误 %s"
 
 #: u_translation.rserrorfilenot
 msgid "Error, file not downloaded:"
-msgstr ""
-
-#: u_translation.rserroropening
-msgid "Error opening %s"
-msgstr "打开%s错误"
-
-#: u_translation.rserroropening2
-#, fuzzy,badformat
-msgid "Error opening %s on port %s"
-msgstr "打开％s在端口％s错误"
-
-#: u_translation.rserroropening3
-msgid "Error opening %s on port %sCheck if device is connected and power on"
 msgstr ""
 
 #: u_translation.rserrorpleasec
@@ -2115,17 +1997,9 @@ msgstr "更暗"
 msgid "Faint Stars Size "
 msgstr "暗星大小 "
 
-#: u_translation.rsfan
-msgid "Fan"
-msgstr "风扇"
-
 #: u_translation.rsfaq
 msgid "FAQ"
 msgstr "常见问题"
-
-#: u_translation.rsfast
-msgid "Fast"
-msgstr "快"
 
 #: u_translation.rsfaster
 msgid "Faster"
@@ -2162,10 +2036,6 @@ msgstr "视场设置"
 #: u_translation.rsfieldofvisio5
 msgid "Field of vision number :"
 msgstr "视场编号："
-
-#: u_translation.rsfieldrotatio
-msgid "Field Rotation"
-msgstr "场旋"
 
 #: u_translation.rsfieldtoowidt
 msgid "Field too wide! Maximum is %s"
@@ -2263,14 +2133,6 @@ msgstr "弗兰斯蒂德编号"
 msgid "Iridium flare prediction:"
 msgstr "铱闪预测："
 
-#: u_translation.rsfocus
-msgid "Focus"
-msgstr "对焦"
-
-#: u_translation.rsfocusspeed
-msgid "Focus Speed"
-msgstr "对焦速度"
-
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "字体"
@@ -2286,10 +2148,6 @@ msgstr ""
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
 msgstr ""
-
-#: u_translation.rsformalwaysvi
-msgid "Form always visible"
-msgstr "窗体始终可见"
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
@@ -2318,10 +2176,6 @@ msgstr "帧每秒"
 #: u_translation.rsframessize
 msgid "Frames size"
 msgstr "帧尺寸"
-
-#: u_translation.rsfrangle
-msgid "FR Angle"
-msgstr "场旋角"
 
 #: u_translation.rsfreesize
 msgid "Free size"
@@ -2395,10 +2249,6 @@ msgstr "地心"
 msgid "Geometric altitude"
 msgstr ""
 
-#: u_translation.rsget
-msgid "Get"
-msgstr "获取"
-
 #: u_translation.rsgetasteroidl
 msgid "Get the asteroids list."
 msgstr "获取小行星列表。"
@@ -2422,10 +2272,6 @@ msgstr "球状星团"
 #: u_translation.rsgnomonic
 msgid "Gnomonic"
 msgstr "心射切面"
-
-#: u_translation.rsgps16advsett
-msgid "Gps-16\" Adv. Settings"
-msgstr ""
 
 #: u_translation.rsgraphheight
 msgid "Graph height"
@@ -2475,18 +2321,6 @@ msgstr "大红斑中天"
 msgid "G slope parameter"
 msgstr ""
 
-#: u_translation.rsguide
-msgid "Guide"
-msgstr "导星"
-
-#: u_translation.rsguidearcsec
-msgid "guide arcsec"
-msgstr ""
-
-#: u_translation.rsguiderate
-msgid "Guide Rate"
-msgstr "导星速率"
-
 #: u_translation.rshabsolutemag
 msgid "H absolute magnitude"
 msgstr "行星绝对星等H"
@@ -2502,14 +2336,6 @@ msgstr "出现1000个错误时停止"
 #: u_translation.rshammeraitoff
 msgid "Hammer-Aitoff"
 msgstr ""
-
-#: u_translation.rshandpad
-msgid "HandPad"
-msgstr ""
-
-#: u_translation.rshandpadmodes
-msgid "HandPad Mode Selection"
-msgstr "手控器模式选择"
 
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
@@ -2543,21 +2369,9 @@ msgstr "隐藏标签"
 msgid "Hide objects wider than"
 msgstr "隐藏天体宽于"
 
-#: u_translation.rshigh
-msgid "High"
-msgstr "高"
-
 #: u_translation.rshighcolor
 msgid "High colour"
 msgstr ""
-
-#: u_translation.rshighest
-msgid "Highest"
-msgstr "最快"
-
-#: u_translation.rshighprecisio
-msgid "High Precision Pointing"
-msgstr "高精确指向"
 
 #: u_translation.rshighquality
 msgid "High quality"
@@ -2663,10 +2477,6 @@ msgstr "包括日间过境"
 msgid "Include Iridium flare"
 msgstr "包括铱闪"
 
-#: u_translation.rsincrease
-msgid "Increase"
-msgstr "增加"
-
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
 msgstr "亮星增益"
@@ -2727,18 +2537,6 @@ msgstr "详细信息"
 msgid "Information from catalog"
 msgstr "来自星表的信息"
 
-#: u_translation.rsinit
-msgid "Init"
-msgstr "初始化"
-
-#: u_translation.rsinitialiseda
-msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
-msgstr "已初始化在%s%s，使用：%s%s(赤经:%s赤纬:%s)"
-
-#: u_translation.rsinitialize
-msgid "Initialize"
-msgstr "初始化"
-
 #: u_translation.rsinitializeda
 msgid "Initialize database"
 msgstr "初始化数据库"
@@ -2767,10 +2565,6 @@ msgstr "互联网"
 msgid "Internet localization"
 msgstr "互联网定位"
 
-#: u_translation.rsintervaltime
-msgid "Interval Timeout"
-msgstr "间隔超时"
-
 #: u_translation.rsinttelesco
 msgid "Integrated telescope driver."
 msgstr "已整合望远镜驱动程序。"
@@ -2788,21 +2582,9 @@ msgstr "无效FITS文件"
 msgid "Invalid path: "
 msgstr "无效路径： "
 
-#: u_translation.rsinversionalp
-msgid "Inversion Alpha ,"
-msgstr ""
-
-#: u_translation.rsinversiondel
-msgid "%s Inversion Delta"
-msgstr ""
-
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "在此纬度不可见"
-
-#: u_translation.rsipaddress
-msgid "IP address"
-msgstr "IP 地址"
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
@@ -2935,10 +2717,6 @@ msgstr "左"
 #: u_translation.rsleftbar
 msgid "Left bar"
 msgstr "左边栏"
-
-#: u_translation.rsleftmode
-msgid "Left Mode"
-msgstr "左手模式"
 
 #: u_translation.rslegal
 msgid "Legal"
@@ -3096,10 +2874,6 @@ msgstr "地方恒星时"
 msgid "Location code"
 msgstr "位置代码"
 
-#: u_translation.rslocationtime
-msgid "Location / Time"
-msgstr "地点/时间"
-
 #: u_translation.rslock
 msgid "Lock"
 msgstr "锁定"
@@ -3132,10 +2906,6 @@ msgstr ""
 msgid "Lozenge"
 msgstr "菱形"
 
-#: u_translation.rslow
-msgid "Low"
-msgstr "低"
-
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
 msgstr "低表面亮度"
@@ -3143,10 +2913,6 @@ msgstr "低表面亮度"
 #: u_translation.rsluminosity
 msgid "Luminosity"
 msgstr "亮度"
-
-#: u_translation.rslunar
-msgid "Lunar"
-msgstr ""
 
 #: u_translation.rslunareclipse
 msgid "Lunar eclipses"
@@ -3244,10 +3010,6 @@ msgstr "地图"
 msgid "March"
 msgstr ""
 
-#: u_translation.rsmark
-msgid "Mark"
-msgstr "标记"
-
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
 msgstr "标记星图中心"
@@ -3344,10 +3106,6 @@ msgstr "消息："
 msgid "Meters"
 msgstr "米"
 
-#: u_translation.rsmiddle
-msgid "Middle"
-msgstr "中"
-
 #: u_translation.rsmilkyway
 msgid "Milky Way"
 msgstr "银河"
@@ -3395,14 +3153,6 @@ msgstr "杂项线"
 #: u_translation.rsmissingscrip
 msgid "Missing script title!"
 msgstr ""
-
-#: u_translation.rsmodebuttonsi
-msgid "Mode Button Simulator"
-msgstr "模式按钮模拟器"
-
-#: u_translation.rsmodel
-msgid "Model"
-msgstr "型号"
 
 #: u_translation.rsmodify
 msgid "Modify"
@@ -3452,26 +3202,6 @@ msgstr "晨"
 #: u_translation.rsmorningtwili
 msgid "Morning twilight"
 msgstr "曙光"
-
-#: u_translation.rsmotor
-msgid "Motor"
-msgstr "马达"
-
-#: u_translation.rsmotorspeeds
-msgid "Motor Speeds"
-msgstr "马达速度"
-
-#: u_translation.rsmountfabrica
-msgid "Mount fabrication error"
-msgstr ""
-
-#: u_translation.rsmounttype
-msgid "Mount type"
-msgstr "挂载方式"
-
-#: u_translation.rsmove
-msgid "Move"
-msgstr "移动"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3537,10 +3267,6 @@ msgstr "深空或其他天体"
 msgid "Nebulae outlines"
 msgstr "星云轮廓"
 
-#: u_translation.rsnegativeeast
-msgid "(negative east of Greenwich)"
-msgstr "(东经为负值)"
-
 #: u_translation.rsneighbor
 msgid "Neighbour"
 msgstr "附近"
@@ -3592,10 +3318,6 @@ msgstr "夜间模式"
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
 msgstr "夜间模式"
-
-#: u_translation.rsno
-msgid "No."
-msgstr "No."
 
 #: u_translation.rsnoasteroidda
 msgid "No asteroids data found!%sPlease load a MPC file first."
@@ -3693,10 +3415,6 @@ msgstr "在所有已安装的星表中都无法找到 %s."
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
 msgstr "%s 未找到！%s星表未安装或路径错误。"
 
-#: u_translation.rsnotinitialis
-msgid "Not initialised"
-msgstr "未初始化"
-
 #: u_translation.rsnovember
 msgid "November"
 msgstr ""
@@ -3765,10 +3483,6 @@ msgstr "对象名称"
 msgid "Object size unit"
 msgstr "天体大小单位"
 
-#: u_translation.rsobjectsusedf
-msgid "Objects used for Initialisation"
-msgstr "用于初始化的对象"
-
 #: u_translation.rsobjecttype
 msgid "Object type"
 msgstr "天体类型"
@@ -3784,10 +3498,6 @@ msgstr "观测地点"
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
 msgstr "观测地点资料库"
-
-#: u_translation.rsobservertool
-msgid "Observer tools"
-msgstr ""
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -3805,10 +3515,6 @@ msgstr "过时"
 msgid "October"
 msgstr ""
 
-#: u_translation.rsoff
-msgid "Off"
-msgstr "关"
-
 #: u_translation.rsofficialname
 msgid "Official name"
 msgstr ""
@@ -3824,10 +3530,6 @@ msgstr "偏置标签"
 #: u_translation.rsok
 msgid "OK"
 msgstr "确定"
-
-#: u_translation.rson
-msgid "On"
-msgstr "开"
 
 #: u_translation.rsoneevery
 msgid "One every"
@@ -3965,18 +3667,6 @@ msgstr "视差"
 msgid "Parametric"
 msgstr ""
 
-#: u_translation.rsparity
-msgid "Parity"
-msgstr "奇偶校验"
-
-#: u_translation.rsparkinganddi
-msgid "Parking and Disconnecting telescope."
-msgstr "正在停止并断连望远镜"
-
-#: u_translation.rsparktelescop
-msgid "Park Telescope"
-msgstr "停止望远镜"
-
 #: u_translation.rspartial
 msgid "Partial"
 msgstr "偏食"
@@ -4004,14 +3694,6 @@ msgstr "影子直径"
 #: u_translation.rspause
 msgid "Pause"
 msgstr "暂停"
-
-#: u_translation.rspec
-msgid "PEC"
-msgstr ""
-
-#: u_translation.rspectoggle
-msgid "Pec Toggle"
-msgstr ""
 
 #: u_translation.rspenumbra
 msgid "Penumbra"
@@ -4133,10 +3815,6 @@ msgstr "请设置星表长名"
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "请设置星表必须建立在的目录"
 
-#: u_translation.rspleaseinitth
-msgid "Please init the 90 degree elevation first"
-msgstr "请先初始化90度仰角"
-
 #: u_translation.rspleaseinstal
 msgid "Please install indistarter package!"
 msgstr ""
@@ -4152,10 +3830,6 @@ msgstr "请安装wine http://www.winehq.org/ 从而在您的电脑上计算人�
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
 msgstr "请选择RealSky CD盘符"
-
-#: u_translation.rspleasemoveth
-msgid "Please move the telescope along the two axis"
-msgstr "请沿两轴方向移动望远镜"
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
@@ -4181,10 +3855,6 @@ msgstr "冥王星"
 msgid "Pluto is a planet."
 msgstr "冥王星是行星"
 
-#: u_translation.rspm
-msgid "pm"
-msgstr "自行"
-
 #: u_translation.rspolarmotiona
 msgid "Polar motion (arc sec)"
 msgstr ""
@@ -4196,10 +3866,6 @@ msgstr ""
 #: u_translation.rsport
 msgid "Port:"
 msgstr "端口："
-
-#: u_translation.rsportconfigur
-msgid "Port Configuration"
-msgstr "端口配置"
 
 #: u_translation.rsportrait
 msgid "Portrait"
@@ -4321,10 +3987,6 @@ msgstr "处理结束。地点总数：%s"
 msgid "Processing line %s"
 msgstr "处理行%s"
 
-#: u_translation.rsproductinfo
-msgid "Product Info"
-msgstr "产品信息"
-
 #: u_translation.rsprograminfor
 msgid "Program information"
 msgstr "程序信息"
@@ -4381,14 +4043,6 @@ msgstr "代理服务器地址"
 msgid "Proxy port"
 msgstr "代理服务器端口"
 
-#: u_translation.rspulseduratio
-msgid "Pulse duration"
-msgstr "脉冲持续时间"
-
-#: u_translation.rspulsemode
-msgid "Pulse Mode"
-msgstr "脉冲模式"
-
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
 msgstr "将扩展名为.tle的文件放置在%s文件夹"
@@ -4396,10 +4050,6 @@ msgstr "将扩展名为.tle的文件放置在%s文件夹"
 #: u_translation.rsquasar
 msgid "Quasar"
 msgstr "类星体"
-
-#: u_translation.rsquery
-msgid "Query"
-msgstr "查询"
 
 #: u_translation.rsquickdelete
 msgid "Quick delete"
@@ -4420,14 +4070,6 @@ msgstr "快速入门指南"
 #: u_translation.rsra
 msgid "RA"
 msgstr "赤经"
-
-#: u_translation.rsraazpeccompe
-msgid "RA/AZ PEC Compensation"
-msgstr "RA/AZ PEC 补偿"
-
-#: u_translation.rsraazslewrate
-msgid "RA/Az Slew Rate"
-msgstr "地平移动速度"
 
 #: u_translation.rsradialveloci
 msgid "Radial velocity"
@@ -4453,17 +4095,9 @@ msgstr "赤经转数: "
 msgid "%sRA turns:"
 msgstr "%s赤经转数:"
 
-#: u_translation.rsreadinterval
-msgid "Read Interval [ms]"
-msgstr "读取间隔[ms]"
-
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
 msgstr "逼真的图像"
-
-#: u_translation.rsreallyparkan
-msgid "REALLY park and disconnect the telescope?"
-msgstr "确定要停止并断连望远镜?"
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -4512,10 +4146,6 @@ msgstr "录制选项"
 #: u_translation.rsrecordingpre
 msgid "Recording prefix"
 msgstr "录制前缀"
-
-#: u_translation.rsrecordprotoc
-msgid "Record protocol to a trace file"
-msgstr "记录协议至跟踪文件"
 
 #: u_translation.rsrecoverhidde
 msgid "Recover hidden label"
@@ -4653,14 +4283,6 @@ msgstr "复位至上次保存的星图"
 msgid "Resolution:"
 msgstr "分辨率："
 
-#: u_translation.rsresolutionxy
-msgid "Resolution X: %s Y :%s steps"
-msgstr ""
-
-#: u_translation.rsresumegoto
-msgid "Resume GoTo"
-msgstr "返回GOTO"
-
 #: u_translation.rsreturn
 msgid "Return"
 msgstr "返回"
@@ -4692,10 +4314,6 @@ msgstr "赤经"
 #: u_translation.rsrightbar
 msgid "Right Bar"
 msgstr "右边栏"
-
-#: u_translation.rsrightmode
-msgid "Right Mode"
-msgstr "右手模式"
 
 #: u_translation.rsrise
 msgid "Rise"
@@ -4805,10 +4423,6 @@ msgstr "保存图像..."
 msgid "Save project"
 msgstr "保存工程"
 
-#: u_translation.rssavesetting
-msgid "Save setting"
-msgstr "保存设置"
-
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
 msgstr "保存当前星图"
@@ -4828,10 +4442,6 @@ msgstr ""
 #: u_translation.rsscandirector
 msgid "Scan directory"
 msgstr "扫描目录"
-
-#: u_translation.rsscopeadv
-msgid "Scope Adv"
-msgstr ""
 
 #: u_translation.rsscreenresolu
 msgid "Screen resolution"
@@ -4909,10 +4519,6 @@ msgstr "秒"
 msgid "See %s for more information."
 msgstr "参看%s以获取更多信息"
 
-#: u_translation.rssel
-msgid "Sel."
-msgstr ""
-
 #: u_translation.rsselect
 msgid "Select"
 msgstr "选择"
@@ -4940,10 +4546,6 @@ msgstr ""
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
 msgstr "选择镜像站点"
-
-#: u_translation.rsselectnone
-msgid "Select none"
-msgstr "全部不选"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -5009,10 +4611,6 @@ msgstr ""
 msgid "September"
 msgstr ""
 
-#: u_translation.rsserialport
-msgid "Serial Port"
-msgstr "串行端口"
-
 #: u_translation.rsserver
 msgid "Server"
 msgstr "服务器"
@@ -5061,17 +4659,9 @@ msgstr "设定观测地点"
 msgid "Set options for best performance"
 msgstr ""
 
-#: u_translation.rssetslewing
-msgid "Set Slewing"
-msgstr "设置移动"
-
 #: u_translation.rssettargetto
 msgid "Set target to %s"
 msgstr "将目标设置为%s"
-
-#: u_translation.rssettelescope
-msgid "Set location and time"
-msgstr "设置位置和时间"
 
 #: u_translation.rssettime
 msgid "Set Time"
@@ -5165,10 +4755,6 @@ msgstr "显示黄道"
 msgid "Show galactic equator"
 msgstr "显示银道"
 
-#: u_translation.rsshowgrid
-msgid "Show grid"
-msgstr "显示网格"
-
 #: u_translation.rsshowgridlabe
 msgid "Show grid label"
 msgstr "显示网格标签"
@@ -5224,10 +4810,6 @@ msgstr "在星图中显示天体图片"
 #: u_translation.rsshowobjects
 msgid "Show objects"
 msgstr "显示天体"
-
-#: u_translation.rsshowobsolete
-msgid "Show obsolete drivers"
-msgstr ""
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian"
@@ -5325,10 +4907,6 @@ msgstr "移动"
 msgid "Slewing to %s / %s"
 msgstr ""
 
-#: u_translation.rsslewspeed
-msgid " Slew Speed"
-msgstr " 移动速度"
-
 #: u_translation.rsslewtochartc
 msgid "Slew to chart center"
 msgstr ""
@@ -5337,17 +4915,9 @@ msgstr ""
 msgid "Slew to cursor position"
 msgstr "移动至光标位置"
 
-#: u_translation.rsslow
-msgid "Slow"
-msgstr "慢"
-
 #: u_translation.rsslower
 msgid "Slower"
 msgstr ""
-
-#: u_translation.rsslowest
-msgid "Slowest"
-msgstr "最慢"
 
 #: u_translation.rssmallstars
 msgid "Small stars"
@@ -5360,10 +4930,6 @@ msgstr "分"
 #: u_translation.rssmonth
 msgid "M."
 msgstr "月"
-
-#: u_translation.rssocketconfig
-msgid "Socket configuration"
-msgstr "Socket 配置"
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
@@ -5432,18 +4998,6 @@ msgstr ""
 #: u_translation.rsspectralclas
 msgid "Spectral class"
 msgstr "光谱型"
-
-#: u_translation.rsspeed
-msgid "Speed"
-msgstr "速度"
-
-#: u_translation.rsspeedselecti
-msgid "Speed Selection"
-msgstr "速度选择"
-
-#: u_translation.rsspeedsetting
-msgid "Speed settings"
-msgstr "速度设置"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -5549,10 +5103,6 @@ msgstr "开始月份"
 msgid "Start of object"
 msgstr ""
 
-#: u_translation.rsstatus
-msgid "Status"
-msgstr "状态"
-
 #: u_translation.rsstatusbar
 msgid "Status bar"
 msgstr "状态栏"
@@ -5565,14 +5115,6 @@ msgstr ""
 msgid "Step Over"
 msgstr ""
 
-#: u_translation.rsstepsalpha
-msgid "Steps (Alpha)"
-msgstr ""
-
-#: u_translation.rsstepsdelta
-msgid "Steps (Delta)"
-msgstr ""
-
 #: u_translation.rsstepunit
 msgid "Step unit"
 msgstr ""
@@ -5580,10 +5122,6 @@ msgstr ""
 #: u_translation.rsstop
 msgid "Stop"
 msgstr "停止"
-
-#: u_translation.rsstopbits
-msgid "Stop bits"
-msgstr "停止位"
 
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
@@ -5621,14 +5159,6 @@ msgstr "表面"
 msgid "Surface brightness"
 msgstr "表面亮度"
 
-#: u_translation.rsswapbutton
-msgid "Swap button"
-msgstr "交换按钮"
-
-#: u_translation.rsswitchhpp
-msgid "Switch HPP"
-msgstr ""
-
 #: u_translation.rssyear
 msgid "Y"
 msgstr "年"
@@ -5653,10 +5183,6 @@ msgstr "朔望月"
 msgid "System printer"
 msgstr "系统打印机"
 
-#: u_translation.rssytemstatus
-msgid "Sytem status:"
-msgstr "系统状态："
-
 #: u_translation.rstable
 msgid "Table"
 msgstr "表格"
@@ -5669,10 +5195,6 @@ msgstr "%s表格%s不存在！%s请更正错误并重试"
 msgid "%sThis table exists: %s"
 msgstr "%s此表格包含：%s"
 
-#: u_translation.rstarget
-msgid "Target"
-msgstr "目标"
-
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
 msgstr "TCP/IP连接"
@@ -5684,10 +5206,6 @@ msgstr "TCP/IP服务器"
 #: u_translation.rstcpipservice
 msgid "TCP/IP service not available."
 msgstr "TCP/IP 服务不可用。"
-
-#: u_translation.rstcpport
-msgid "TCP port"
-msgstr "TCP 端口"
 
 #: u_translation.rstelescope
 msgid "Telescope"
@@ -5732,10 +5250,6 @@ msgstr "文本大小"
 #: u_translation.rstheimagedire
 msgid "The image directory contains sub-directories with the same names as the DSO catalogs. Each sub-directory contains FITS files with the names of the catalog objects. These images are used to replace the DSO symbols on the map."
 msgstr ""
-
-#: u_translation.rstheinterface
-msgid "The interface is either not connected or not initialized"
-msgstr "接口未连接或者未初始化"
 
 #: u_translation.rstheme
 msgid "Theme"
@@ -5793,10 +5307,6 @@ msgstr "垂直平铺"
 #: u_translation.rstime
 msgid "Time"
 msgstr "时间"
-
-#: u_translation.rstimeoutms
-msgid "Timeout [ms]"
-msgstr "超时[ms]"
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
@@ -5962,10 +5472,6 @@ msgstr "转/时"
 msgid "Twilight"
 msgstr "曙暮光"
 
-#: u_translation.rstwostarsmust
-msgid "TWO stars must be used for initialisation."
-msgstr "必须使用两颗恒星初始化。"
-
 #: u_translation.rstype
 msgid "Type"
 msgstr "种类"
@@ -6082,10 +5588,6 @@ msgstr ""
 msgid "(useful to represent a flux)"
 msgstr ""
 
-#: u_translation.rsusehpp
-msgid "Use HPP"
-msgstr ""
-
 #: u_translation.rsusehttpproxy
 msgid "Use HTTP proxy"
 msgstr "使用HTTP代理"
@@ -6170,14 +5672,6 @@ msgstr "金星"
 msgid "Version"
 msgstr ""
 
-#: u_translation.rsverticalaxis
-msgid "Vertical axis encoder origin : %s"
-msgstr "垂直轴编码器的原点: %s"
-
-#: u_translation.rsverticalaxis2
-msgid "Vertical axis 90 degree initialisation not done"
-msgstr "垂直轴90度初始化未完成"
-
 #: u_translation.rsvicinity
 msgid "Vicinity"
 msgstr "附近"
@@ -6200,10 +5694,6 @@ msgstr "查看观测列表"
 
 #: u_translation.rsviewonchart
 msgid "View on chart"
-msgstr ""
-
-#: u_translation.rsvirtualhandp
-msgid "Virtual HandPad for Scope.exe "
 msgstr ""
 
 #: u_translation.rsvirtualobser
@@ -6298,10 +5788,6 @@ msgstr "宽度"
 msgid "Window"
 msgstr "窗口"
 
-#: u_translation.rsxerrors
-msgid "X Errors"
-msgstr ""
-
 #: u_translation.rsyear
 msgid "Year"
 msgstr "年"
@@ -6309,10 +5795,6 @@ msgstr "年"
 #: u_translation.rsyears
 msgid "years"
 msgstr "年"
-
-#: u_translation.rsyerrors
-msgid "Y Errors"
-msgstr ""
 
 #: u_translation.rsyoualreadyha
 msgid "You already have the latest available version!"
