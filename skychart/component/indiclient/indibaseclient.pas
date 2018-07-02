@@ -523,6 +523,7 @@ begin
   Result := nil;
   buf := GetNodeValue(GetAttrib(root, 'device'));
   errmsg := 'Device not found ' + buf;
+  try
   for i := 0 to Fdevices.Count - 1 do
   begin
     if BaseDevice(Fdevices[i]).getDeviceName = buf then
@@ -532,6 +533,9 @@ begin
       break;
     end;
   end;
+  except
+    result:=nil;
+  end;
 end;
 
 function TIndiBaseClient.findDev(root: TDOMNode; createifnotexist: boolean;
@@ -539,6 +543,7 @@ function TIndiBaseClient.findDev(root: TDOMNode; createifnotexist: boolean;
 var
   buf: string;
 begin
+  try
   Result := findDev(root, errmsg);
   if (Result = nil) and createifnotexist then
   begin
@@ -565,16 +570,23 @@ begin
       errmsg := 'No device name';
     end;
   end;
+  except
+    result:=nil;
+  end;
 end;
 
 function TIndiBaseClient.getDevice(deviceName: string): Basedevice;
 var
   i: integer;
 begin
+  try
   for i := 0 to Fdevices.Count - 1 do
     if (deviceName = BaseDevice(Fdevices[i]).getDeviceName) then
       exit(BaseDevice(Fdevices[i]));
   exit(nil);
+  except
+    result:=nil;
+  end;
 end;
 
 procedure TIndiBaseClient.deleteDevice(deviceName: string; out errmsg: string);
