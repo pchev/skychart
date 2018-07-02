@@ -805,7 +805,7 @@ begin
     while (Count < mincount) do
     begin
       sleep(100);
-      Application.ProcessMessages;
+      if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
       Inc(Count);
     end;
   maxcount := timeout div 100;
@@ -813,7 +813,7 @@ begin
   while (nvp.s = IPS_BUSY) and (Count < maxcount) do
   begin
     sleep(100);
-    Application.ProcessMessages;
+    if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
     Inc(Count);
   end;
   Result := (Count < maxcount);
@@ -830,7 +830,7 @@ begin
     while (Count < mincount) do
     begin
       sleep(100);
-      Application.ProcessMessages;
+      if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
       Inc(Count);
     end;
   maxcount := timeout div 100;
@@ -838,7 +838,7 @@ begin
   while (tvp.s = IPS_BUSY) and (Count < maxcount) do
   begin
     sleep(100);
-    Application.ProcessMessages;
+    if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
     Inc(Count);
   end;
   Result := (Count < maxcount);
@@ -855,7 +855,7 @@ begin
     while (Count < mincount) do
     begin
       sleep(100);
-      Application.ProcessMessages;
+      if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
       Inc(Count);
     end;
   maxcount := timeout div 100;
@@ -863,7 +863,7 @@ begin
   while (svp.s = IPS_BUSY) and (Count < maxcount) do
   begin
     sleep(100);
-    Application.ProcessMessages;
+    if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
     Inc(Count);
   end;
   Result := (Count < maxcount);
