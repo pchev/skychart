@@ -1513,6 +1513,7 @@ resourcestring
   rsMainMenu = 'Main menu';
   rsUnsupportedF = 'Unsupported file extension: %sPlease fix it.';
   rsLimitTheNumb = 'Limit the number of level 3 faint stars';
+  rsSwapButton = 'Swap button';
 
 // also update upsi_translation
 

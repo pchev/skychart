@@ -318,14 +318,13 @@ begin
     geo_lon := IUFindNumber(GeographicCoord_prop, 'LONG');
     geo_elev := IUFindNumber(GeographicCoord_prop, 'ELEV');
   end
-  else if (proptype = INDI_SWITCH) and ((propname = 'TELESCOPE_SLEW_RATE') or
-    (propname = 'SLEWMODE')) then
+  else if (proptype = INDI_SWITCH) and ((propname = 'TELESCOPE_SLEW_RATE') or (propname = 'SLEWMODE')) then
   begin
     SlewRateList.Clear;
     SlewRate_prop := indiProp.getSwitch;
     for i := 0 to SlewRate_prop.nsp - 1 do
     begin
-      SlewRateList.Add(SlewRate_prop.sp[i].Name);
+      SlewRateList.Add(SlewRate_prop.sp[i].lbl);
     end;
   end
   else if (proptype = INDI_SWITCH) and (propname = 'TELESCOPE_MOTION_NS') then
@@ -594,6 +593,7 @@ procedure Tpop_indi.ScopeMoveAxis(axis: integer; rate: string);
 var
   positive: boolean;
   sw: ISwitch;
+  i: integer;
 begin
   if (moveNS_prop <> nil) and (moveEW_prop <> nil) then
   begin
@@ -621,7 +621,14 @@ begin
       begin
         if pos('N/A', rate) = 0 then
         begin
-          sw := IUFindSwitch(SlewRate_prop, rate);
+          sw:=nil;
+          for i := 0 to SlewRate_prop.nsp - 1 do
+          begin
+            if rate=SlewRate_prop.sp[i].lbl then begin
+              sw:=SlewRate_prop.sp[i];
+              break;
+            end;
+          end;
           if sw <> nil then
           begin
             IUResetSwitch(SlewRate_prop);

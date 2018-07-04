@@ -1462,6 +1462,7 @@ begin
   CL.AddConstantN('rsNovember', 'String').SetString(rsNovember);
   CL.AddConstantN('rsDecember', 'String').SetString(rsDecember);
   CL.AddConstantN('rsSlewToChartC', 'String').SetString(rsSlewToChartC);
+  CL.AddConstantN('rsSwapButton', 'String').SetString(rsSwapButton);
 
 end;
 
