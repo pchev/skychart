@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-16 14:24+0000\n"
+"POT-Creation-Date: 2018-07-04 14:42+0000\n"
 "PO-Revision-Date: 2018-03-19 10:10+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-06-16 14:28+0000\n"
-"X-Generator: Launchpad (build 18688)\n"
+"X-Launchpad-Export-Date: 2018-07-04 14:48+0000\n"
+"X-Generator: Launchpad (build 18704)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -2334,6 +2334,10 @@ msgstr "Para a més de 1000 errors"
 msgid "Hammer-Aitoff"
 msgstr "Hammer-Aitoff"
 
+#: u_translation.rshandpad
+msgid "HandPad"
+msgstr ""
+
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
 msgstr "Magnitud H-beta"
@@ -2870,6 +2874,10 @@ msgstr "Hora sideral local"
 msgid "Location code"
 msgstr "Codi del lloc"
 
+#: u_translation.rslocationtime
+msgid "Location / Time"
+msgstr ""
+
 #: u_translation.rslock
 msgid "Lock"
 msgstr "Bloca-ho"
@@ -3005,6 +3013,10 @@ msgstr "Carta"
 #: u_translation.rsmarch
 msgid "March"
 msgstr "Març"
+
+#: u_translation.rsmark
+msgid "Mark"
+msgstr ""
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3493,6 +3505,10 @@ msgstr "Observatori"
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
 msgstr "Base de dades"
+
+#: u_translation.rsobservertool
+msgid "Observer tools"
+msgstr ""
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -4542,6 +4558,10 @@ msgstr "Trieu els elements a recuperar"
 msgid "Select mirror site"
 msgstr "Trieu el lloc de xarxa mirall"
 
+#: u_translation.rsselectnone
+msgid "Select none"
+msgstr ""
+
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
 msgstr "Trieu una placa de la llista"
@@ -5154,6 +5174,10 @@ msgstr "Surperfície"
 msgid "Surface brightness"
 msgstr "Lluminositat superficial"
 
+#: u_translation.rsswapbutton
+msgid "Swap button"
+msgstr ""
+
 #: u_translation.rssyear
 msgid "Y"
 msgstr "A"
@@ -5189,6 +5213,10 @@ msgstr "%s la taula %s no existeix! %sCorregiu l'error i torneu a provar."
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
 msgstr "%s la taula %s existeix"
+
+#: u_translation.rstarget
+msgid "Target"
+msgstr ""
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"

@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-16 14:24+0000\n"
-"PO-Revision-Date: 2018-05-29 10:49+0000\n"
+"POT-Creation-Date: 2018-07-04 14:42+0000\n"
+"PO-Revision-Date: 2018-06-25 08:38+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-06-16 14:28+0000\n"
-"X-Generator: Launchpad (build 18688)\n"
+"X-Launchpad-Export-Date: 2018-07-04 14:48+0000\n"
+"X-Generator: Launchpad (build 18704)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -65,7 +65,7 @@ msgstr "Acerca de %s"
 
 #: u_translation.rsabove
 msgid "Above %s"
-msgstr "Por encima de %s"
+msgstr "Sobre %s"
 
 #: u_translation.rsabrevasteroid
 msgid "Ast"
@@ -157,7 +157,7 @@ msgstr "Mostrar cuadrícula ecuatorial"
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"
-msgstr "Opciones adicionales de ffmpeg"
+msgstr "Opciones adicionales para ffmpeg"
 
 #: u_translation.rsaddlabel
 msgid "Add label"
@@ -1593,7 +1593,7 @@ msgstr "Mostrar etiquetas"
 
 #: u_translation.rsdisplaythelo
 msgid "Display the local horizon line"
-msgstr "Mostrar línea de horizonte local"
+msgstr "Mostrar línea del horizonte local"
 
 #: u_translation.rsdistance
 msgid "Distance"
@@ -1713,7 +1713,7 @@ msgstr "Representar planeta como"
 
 #: u_translation.rsdrawtheappar
 msgid "Draw the apparent depressed horizon line"
-msgstr "Trazar la linea aparente de horizonte deprimido"
+msgstr "Trazar la linea del horizonte deprimido aparente"
 
 #: u_translation.rsdrift
 msgid "Yearly drift"
@@ -2065,7 +2065,7 @@ msgstr "Rellenar Vía Láctea"
 
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
-msgstr "Rellenar con color de horizonte"
+msgstr "Rellenar con color del horizonte"
 
 #: u_translation.rsfilter
 msgid "Filter ->"
@@ -2185,7 +2185,7 @@ msgstr "vie."
 
 #: u_translation.rsfrom
 msgid "From"
-msgstr "De"
+msgstr "Desde"
 
 #: u_translation.rsftp
 msgid "FTP "
@@ -2334,6 +2334,10 @@ msgstr "Detener después de 1000 errores"
 #: u_translation.rshammeraitoff
 msgid "Hammer-Aitoff"
 msgstr "Hammer-Aitoff"
+
+#: u_translation.rshandpad
+msgid "HandPad"
+msgstr ""
 
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
@@ -2649,7 +2653,7 @@ msgstr "Conservar las tablas al salir para su uso posterior"
 
 #: u_translation.rskey
 msgid "Key"
-msgstr "Clave"
+msgstr "Tecla"
 
 #: u_translation.rskm
 msgid "Km."
@@ -2773,7 +2777,7 @@ msgstr "Tamaño límite (min. de arco):"
 
 #: u_translation.rslimitthenumb
 msgid "Limit the number of level 3 faint stars"
-msgstr ""
+msgstr "Limitar el número de estrellas débiles de nivel 3"
 
 #: u_translation.rsline1
 msgid "Line"
@@ -2870,6 +2874,10 @@ msgstr "Hora sideral local"
 #: u_translation.rslocationcode
 msgid "Location code"
 msgstr "Código de la ubicación"
+
+#: u_translation.rslocationtime
+msgid "Location / Time"
+msgstr ""
 
 #: u_translation.rslock
 msgid "Lock"
@@ -3006,6 +3014,10 @@ msgstr "Mapa"
 #: u_translation.rsmarch
 msgid "March"
 msgstr "marzo"
+
+#: u_translation.rsmark
+msgid "Mark"
+msgstr ""
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3494,6 +3506,10 @@ msgstr "Observatorio"
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
 msgstr "Base de datos de observatorios"
+
+#: u_translation.rsobservertool
+msgid "Observer tools"
+msgstr ""
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -4133,7 +4149,7 @@ msgstr "Directorio de grabación"
 
 #: u_translation.rsrecordingext
 msgid "Recording extension"
-msgstr "Duración de la grabación"
+msgstr "Extensión de la grabación"
 
 #: u_translation.rsrecordingopt
 msgid "Recording options"
@@ -4543,6 +4559,10 @@ msgstr "Seleccionar etiquetas a recuperar"
 msgid "Select mirror site"
 msgstr "Seleccionar servidor espejo"
 
+#: u_translation.rsselectnone
+msgid "Select none"
+msgstr ""
+
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
 msgstr "Seleccionar una placa de la lista"
@@ -4581,7 +4601,7 @@ msgstr "Semi"
 
 #: u_translation.rssemimajoraxi
 msgid "Semimajor axis"
-msgstr "Eje semimayor"
+msgstr "Semieje mayor"
 
 #: u_translation.rssendcharttop
 msgid "Send the chart to the printer."
@@ -4681,7 +4701,7 @@ msgstr "H"
 
 #: u_translation.rsshow0horizon
 msgid "Show 0d horizon line"
-msgstr "Mostrar línea horizonte 0º"
+msgstr "Mostrar línea del horizonte a 0º"
 
 #: u_translation.rsshowallsky
 msgid "Show all sky"
@@ -5029,7 +5049,7 @@ msgstr "Estándar"
 
 #: u_translation.rsstandardcolo
 msgid "Standard  colour"
-msgstr "Color estándar"
+msgstr "Estándar de color"
 
 #: u_translation.rsstar
 msgid "Star"
@@ -5155,6 +5175,10 @@ msgstr "Superficie"
 msgid "Surface brightness"
 msgstr "Brillo superficial"
 
+#: u_translation.rsswapbutton
+msgid "Swap button"
+msgstr ""
+
 #: u_translation.rssyear
 msgid "Y"
 msgstr "A"
@@ -5190,6 +5214,10 @@ msgstr "%s¡La tabla %s no existe! %sPor favor, corrija el error y reinténtelo.
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
 msgstr "%sEsta tabla existe: %s"
+
+#: u_translation.rstarget
+msgid "Target"
+msgstr ""
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
@@ -5681,7 +5709,7 @@ msgstr "Encabezado de la vista"
 
 #: u_translation.rsviewhorizon
 msgid "View horizon"
-msgstr "Ver horizonte"
+msgstr "Ver el horizonte"
 
 #: u_translation.rsviewobservin
 msgid "View observing list"

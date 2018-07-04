@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-16 14:24+0000\n"
+"POT-Creation-Date: 2018-07-04 14:42+0000\n"
 "PO-Revision-Date: 2017-01-14 17:39+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-06-16 14:28+0000\n"
-"X-Generator: Launchpad (build 18688)\n"
+"X-Launchpad-Export-Date: 2018-07-04 14:48+0000\n"
+"X-Generator: Launchpad (build 18704)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -2337,6 +2337,10 @@ msgstr "Zastavit po 1 000 chybách"
 msgid "Hammer-Aitoff"
 msgstr "Hammer-Aitoffova"
 
+#: u_translation.rshandpad
+msgid "HandPad"
+msgstr ""
+
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
 msgstr "Hbeta magnituda"
@@ -2873,6 +2877,10 @@ msgstr "Místní hvězdný čas"
 msgid "Location code"
 msgstr "Polohový kód"
 
+#: u_translation.rslocationtime
+msgid "Location / Time"
+msgstr ""
+
 #: u_translation.rslock
 msgid "Lock"
 msgstr ""
@@ -3007,6 +3015,10 @@ msgstr "Mapa"
 
 #: u_translation.rsmarch
 msgid "March"
+msgstr ""
+
+#: u_translation.rsmark
+msgid "Mark"
 msgstr ""
 
 #: u_translation.rsmarkthechart
@@ -3496,6 +3508,10 @@ msgstr "Pozice pozorovatele"
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
 msgstr "Pozice"
+
+#: u_translation.rsobservertool
+msgid "Observer tools"
+msgstr ""
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -4545,6 +4561,10 @@ msgstr ""
 msgid "Select mirror site"
 msgstr "Vybrat mirror"
 
+#: u_translation.rsselectnone
+msgid "Select none"
+msgstr ""
+
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
 msgstr "Vybrat desku ze seznamu"
@@ -5157,6 +5177,10 @@ msgstr "Povrch"
 msgid "Surface brightness"
 msgstr "Povrchový jas"
 
+#: u_translation.rsswapbutton
+msgid "Swap button"
+msgstr ""
+
 #: u_translation.rssyear
 msgid "Y"
 msgstr "R"
@@ -5192,6 +5216,10 @@ msgstr "%sTabulka %s neexistuje! %sOpravte prosím chybu a opakujte akci znovu."
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
 msgstr "%sTabulka existuje %s"
+
+#: u_translation.rstarget
+msgid "Target"
+msgstr ""
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"

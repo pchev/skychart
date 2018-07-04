@@ -1463,6 +1463,12 @@ begin
   CL.AddConstantN('rsDecember', 'String').SetString(rsDecember);
   CL.AddConstantN('rsSlewToChartC', 'String').SetString(rsSlewToChartC);
   CL.AddConstantN('rsSwapButton', 'String').SetString(rsSwapButton);
+  CL.AddConstantN('rsTarget', 'String').SetString(rsTarget);
+  CL.AddConstantN('rsHandPad', 'String').SetString(rsHandPad);
+  CL.AddConstantN('rsSelectNone', 'String').SetString(rsSelectNone);
+  CL.AddConstantN('rsObserverTool', 'String').SetString(rsObserverTool);
+  CL.AddConstantN('rsLocationTime', 'String').SetString(rsLocationTime);
+  CL.AddConstantN('rsMark', 'String').SetString(rsMark);
 
 end;
 

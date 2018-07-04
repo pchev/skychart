@@ -5826,3 +5826,31 @@ msgstr ""
 msgid "Limit the number of level 3 faint stars"
 msgstr ""
 
+#: u_translation:rsswapbutton
+msgid "Swap button"
+msgstr ""
+
+#: u_translation:rstarget
+msgid "Target"
+msgstr ""
+
+#: u_translation:rshandpad
+msgid "HandPad"
+msgstr ""
+
+#: u_translation:rsselectnone
+msgid "Select none"
+msgstr ""
+
+#: u_translation:rsobservertool
+msgid "Observer tools"
+msgstr ""
+
+#: u_translation:rslocationtime
+msgid "Location / Time"
+msgstr ""
+
+#: u_translation:rsmark
+msgid "Mark"
+msgstr ""
+

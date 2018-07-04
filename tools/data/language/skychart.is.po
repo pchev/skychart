@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-16 14:24+0000\n"
+"POT-Creation-Date: 2018-07-04 14:42+0000\n"
 "PO-Revision-Date: 2016-12-11 08:54+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-06-16 14:28+0000\n"
-"X-Generator: Launchpad (build 18688)\n"
+"X-Launchpad-Export-Date: 2018-07-04 14:48+0000\n"
+"X-Generator: Launchpad (build 18704)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2333,6 +2333,10 @@ msgstr "Stöðva eftir 1000 villur"
 msgid "Hammer-Aitoff"
 msgstr ""
 
+#: u_translation.rshandpad
+msgid "HandPad"
+msgstr ""
+
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
 msgstr "Hbeta birtustig"
@@ -2869,6 +2873,10 @@ msgstr "Stjörnutími staðar"
 msgid "Location code"
 msgstr "Staðarlykill"
 
+#: u_translation.rslocationtime
+msgid "Location / Time"
+msgstr ""
+
 #: u_translation.rslock
 msgid "Lock"
 msgstr ""
@@ -3003,6 +3011,10 @@ msgstr "Kort"
 
 #: u_translation.rsmarch
 msgid "March"
+msgstr ""
+
+#: u_translation.rsmark
+msgid "Mark"
 msgstr ""
 
 #: u_translation.rsmarkthechart
@@ -3492,6 +3504,10 @@ msgstr "Athugunarstaður"
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
 msgstr "Gagnagrunnur athugunarstaðar"
+
+#: u_translation.rsobservertool
+msgid "Observer tools"
+msgstr ""
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -4541,6 +4557,10 @@ msgstr ""
 msgid "Select mirror site"
 msgstr ""
 
+#: u_translation.rsselectnone
+msgid "Select none"
+msgstr ""
+
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
 msgstr "Veldu plötu úr listanum"
@@ -5153,6 +5173,10 @@ msgstr "Yfirb."
 msgid "Surface brightness"
 msgstr "Yfirborðsljósstyrkur"
 
+#: u_translation.rsswapbutton
+msgid "Swap button"
+msgstr ""
+
 #: u_translation.rssyear
 msgid "Y"
 msgstr "Á"
@@ -5188,6 +5212,10 @@ msgstr "%sTafla %s er ekki til staðar! %sVinsamlegast leiðréttu villuna og re
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
 msgstr "%sTafla er til staðar %s"
+
+#: u_translation.rstarget
+msgid "Target"
+msgstr ""
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"

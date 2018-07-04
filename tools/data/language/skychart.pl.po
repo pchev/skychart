@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-16 14:24+0000\n"
+"POT-Creation-Date: 2018-07-04 14:42+0000\n"
 "PO-Revision-Date: 2018-05-11 20:51+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-06-16 14:28+0000\n"
-"X-Generator: Launchpad (build 18688)\n"
+"X-Launchpad-Export-Date: 2018-07-04 14:48+0000\n"
+"X-Generator: Launchpad (build 18704)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -2336,6 +2336,10 @@ msgstr "Stop po osiągnięciu 1000 błędów"
 msgid "Hammer-Aitoff"
 msgstr "Hammera-Aitoffa"
 
+#: u_translation.rshandpad
+msgid "HandPad"
+msgstr ""
+
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
 msgstr "Wielkość gwiazdowa H-Beta"
@@ -2873,6 +2877,10 @@ msgstr "Lokalny czas gwiazdowy"
 msgid "Location code"
 msgstr "Kod pozycji"
 
+#: u_translation.rslocationtime
+msgid "Location / Time"
+msgstr ""
+
 #: u_translation.rslock
 msgid "Lock"
 msgstr "Blokada"
@@ -3008,6 +3016,10 @@ msgstr "Mapa"
 #: u_translation.rsmarch
 msgid "March"
 msgstr "Marzec"
+
+#: u_translation.rsmark
+msgid "Mark"
+msgstr ""
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3496,6 +3508,10 @@ msgstr "Obserwatorium"
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
 msgstr "Miejsce obserwacji"
+
+#: u_translation.rsobservertool
+msgid "Observer tools"
+msgstr ""
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -4545,6 +4561,10 @@ msgstr "Wybierz etykiety do wyświetlenia"
 msgid "Select mirror site"
 msgstr "Wybierz serwer lustrzany"
 
+#: u_translation.rsselectnone
+msgid "Select none"
+msgstr ""
+
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
 msgstr "Wybierz płytkę z listy"
@@ -5157,6 +5177,10 @@ msgstr "Powierzchnia"
 msgid "Surface brightness"
 msgstr "Jasność powierzchniowa"
 
+#: u_translation.rsswapbutton
+msgid "Swap button"
+msgstr ""
+
 #: u_translation.rssyear
 msgid "Y"
 msgstr "Y"
@@ -5192,6 +5216,10 @@ msgstr "%sTablica %s nie istnieje! %sProszę poprawić błąd i spróbować pono
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
 msgstr "%sTablica już istnieje: %s"
+
+#: u_translation.rstarget
+msgid "Target"
+msgstr ""
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"

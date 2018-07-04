@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-06-16 14:24+0000\n"
+"POT-Creation-Date: 2018-07-04 14:42+0000\n"
 "PO-Revision-Date: 2018-06-01 21:56+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-06-16 14:28+0000\n"
-"X-Generator: Launchpad (build 18688)\n"
+"X-Launchpad-Export-Date: 2018-07-04 14:48+0000\n"
+"X-Generator: Launchpad (build 18704)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2336,6 +2336,10 @@ msgstr "Stoppa efter 1000 fel"
 msgid "Hammer-Aitoff"
 msgstr "Hammer-Aitoff-projektion"
 
+#: u_translation.rshandpad
+msgid "HandPad"
+msgstr ""
+
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
 msgstr "H-Beta magnitud"
@@ -2872,6 +2876,10 @@ msgstr "Lokal siderisk tid"
 msgid "Location code"
 msgstr "Platskod"
 
+#: u_translation.rslocationtime
+msgid "Location / Time"
+msgstr ""
+
 #: u_translation.rslock
 msgid "Lock"
 msgstr "Lås"
@@ -3007,6 +3015,10 @@ msgstr "Karta"
 #: u_translation.rsmarch
 msgid "March"
 msgstr "Mars"
+
+#: u_translation.rsmark
+msgid "Mark"
+msgstr ""
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3495,6 +3507,10 @@ msgstr "Observatorium"
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
 msgstr "Observatoriedatabas"
+
+#: u_translation.rsobservertool
+msgid "Observer tools"
+msgstr ""
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -4544,6 +4560,10 @@ msgstr "Välj etiketter som ska återskapas"
 msgid "Select mirror site"
 msgstr "Välj mirror site"
 
+#: u_translation.rsselectnone
+msgid "Select none"
+msgstr ""
+
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
 msgstr "Välj en bild från listan"
@@ -5156,6 +5176,10 @@ msgstr "Yta"
 msgid "Surface brightness"
 msgstr "Ytljusstyrka"
 
+#: u_translation.rsswapbutton
+msgid "Swap button"
+msgstr ""
+
 #: u_translation.rssyear
 msgid "Y"
 msgstr "Å"
@@ -5191,6 +5215,10 @@ msgstr "%sTabell %s finns inte! %sRätta till felet och försök igen."
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
 msgstr "%sTabellen finns: %s"
+
+#: u_translation.rstarget
+msgid "Target"
+msgstr ""
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"

@@ -1514,6 +1514,12 @@ resourcestring
   rsUnsupportedF = 'Unsupported file extension: %sPlease fix it.';
   rsLimitTheNumb = 'Limit the number of level 3 faint stars';
   rsSwapButton = 'Swap button';
+  rsTarget = 'Target';
+  rsHandPad = 'HandPad';
+  rsSelectNone = 'Select none';
+  rsObserverTool = 'Observer tools';
+  rsLocationTime = 'Location / Time';
+  rsMark = 'Mark';
 
 // also update upsi_translation
 
