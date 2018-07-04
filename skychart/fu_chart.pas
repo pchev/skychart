@@ -5007,6 +5007,7 @@ begin
     begin
       n0 := 0;
       n1 := 0;
+      if Fpop_scope.ScopeInterfaceVersion>1 then begin
       Fpop_scope.GetScopeRates(n0, n1, @ax0r, @ax1r);
       if n0 > 1 then
       begin
@@ -5039,6 +5040,13 @@ begin
             end;
           end;
         end;
+        end
+        else begin
+          rates.add('Error getting supported rates!');
+        end;
+      end
+      else begin
+        rates.add('Unsupported by V1 driver!');
       end;
     end;
     if sc.cfgsc.INDITelescope then

@@ -148,6 +148,7 @@ type
     function ScopeInitialized: boolean;
     function ScopeConnected: boolean;
     procedure ScopeClose;
+    function ScopeInterfaceVersion: integer;
     procedure ScopeReadConfig(ConfigPath: shortstring);
     procedure GetScopeRates(var nrates0, nrates1: integer;
       axis0rates, axis1rates: Pdoublearray);
@@ -310,6 +311,18 @@ end;
 function Tpop_scope.ScopeConnected: boolean;
 begin
   Result := FConnected;
+end;
+
+function Tpop_scope.ScopeInterfaceVersion: integer;
+begin
+  result:=1;
+  {$ifdef mswindows}
+  try
+    Result := T.InterfaceVersion;
+  except
+    Result := 1;
+  end;
+ {$endif}
 end;
 
 function Tpop_scope.ScopeConnectedReal: boolean;
@@ -551,6 +564,7 @@ begin
   nrates1 := 0;
   if ScopeConnected then
   begin
+    try
     //  First axis
     k := 0;
     if T.CanMoveAxis(k) then
@@ -580,6 +594,9 @@ begin
         axis1rates^[nrates1 - 2] := irate.Minimum;
         axis1rates^[nrates1 - 1] := irate.Maximum;
       end;
+    end;
+    except
+      // unsupported by interface V1
     end;
   end;
 {$endif}
