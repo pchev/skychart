@@ -5024,7 +5024,7 @@ begin
             for j := 0 to 3 do
             begin
               rate := min + j * step;
-              if (rate = 0) and (max > 0.15) then
+              if (i=0) and (rate = 0) and (max > 0.15) then
               begin  // add slow speed 2x ->32x sidereal
                 rates.add('0.0083');
                 rates.add('0.0167');
