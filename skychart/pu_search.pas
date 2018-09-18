@@ -169,7 +169,8 @@ type
     showpluto: boolean;
     SesameUrlNum, SesameCatNum: integer;
     procedure SetLang;
-    function SearchNebName(Num:string; var ar1,de1: double): boolean;
+    function SearchNebNameExact(Num:string; var ar1,de1: double): boolean;
+    function SearchNebNameGeneric(Num:string; var ar1,de1: double): boolean;
     procedure SetServerList;
     function SearchOnline: boolean;
     function LoadSesame(fn:string): boolean;
@@ -362,7 +363,32 @@ begin
   Id.text:='';
 end;
 
-function Tf_search.SearchNebName(Num:string; var ar1,de1: double): boolean;
+function Tf_search.SearchNebNameExact(Num:string; var ar1,de1: double): boolean;
+var
+  i: integer;
+  buf: string;
+begin
+
+  buf := uppercase(Num);
+
+  result:=false;
+
+  for i:=0 to NebNameBox.Items.Count-1 do
+  begin
+
+    if buf=uppercase(NebNameBox.Items[i]) then
+    begin
+      ar1:=NebNameAR[i];
+      de1:=NebNameDE[i];
+      result:=true;
+      break;
+    end;
+
+  end;
+
+end;
+
+function Tf_search.SearchNebNameGeneric(Num:string; var ar1,de1: double): boolean;
 var
   i,p: integer;
   buf: string;
@@ -388,6 +414,7 @@ begin
   end;
 
 end;
+
 
 function Tf_search.LoadSesame(fn:string): boolean;
 var

@@ -9510,10 +9510,10 @@ begin
       ok := catalog.SearchStar(Num, ar1, de1);
       if ok then
         goto findit;
-      // star common name
+      // star common name exact
       stype := '*';
       itype := ftStar;
-      ok := catalog.SearchStarName(Num, ar1, de1);
+      ok := catalog.SearchStarNameExact(Num, ar1, de1);
       if ok then
         goto findit;
       // planet
@@ -9525,10 +9525,10 @@ begin
         if ok then
           goto findit;
       end;
-      // nebula common name
+      // nebula common name exact
       stype := 'N';
       itype := ftNeb;
-      ok := f_search.SearchNebName(Num, ar1, de1);
+      ok := f_search.SearchNebNameExact(Num, ar1, de1);
       if ok then
         goto findit;
       // comet
@@ -9549,6 +9549,18 @@ begin
         if ok then
           goto findit;
       end;
+      // star common name generic
+      stype := '*';
+      itype := ftStar;
+      ok := catalog.SearchStarNameGeneric(Num, ar1, de1);
+      if ok then
+        goto findit;
+      // nebula common name generic
+      stype := 'N';
+      itype := ftNeb;
+      ok := f_search.SearchNebNameGeneric(Num, ar1, de1);
+      if ok then
+        goto findit;
 
       Findit:
         Result := ok;

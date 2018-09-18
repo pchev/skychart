@@ -193,7 +193,8 @@ type
     function FindNum(cat: integer; id: string; var ra, Dec: double): boolean;
     function SearchNebulae(Num: string; var ar1, de1: double): boolean;
     function SearchStar(Num: string; var ar1, de1: double): boolean;
-    function SearchStarName(Num: string; var ar1, de1: double): boolean;
+    function SearchStarNameExact(Num: string; var ar1, de1: double): boolean;
+    function SearchStarNameGeneric(Num: string; var ar1, de1: double): boolean;
     function SearchDblStar(Num: string; var ar1, de1: double): boolean;
     function SearchVarStar(Num: string; var ar1, de1: double): boolean;
     function SearchLines(Num: string; var ar1, de1: double): boolean;
@@ -4196,7 +4197,38 @@ begin
   Result := FindNum(S_SAC, Num, ar1, de1);
 end;
 
-function Tcatalog.SearchStarName(Num: string; var ar1, de1: double): boolean;
+function Tcatalog.SearchStarNameExact(Num: string; var ar1, de1: double): boolean;
+var
+  i, j, l, p: integer;
+  buf, sn: string;
+  snl: TStringList;
+begin
+  snl := TStringList.Create;
+  buf := uppercase(Num);
+  Result := False;
+  l := MaxInt;
+  for i := 0 to cfgshr.StarNameNum - 1 do
+  begin
+    Splitarg(uppercase(cfgshr.StarName[i]), ';', snl);
+    for j := 0 to snl.Count - 1 do
+    begin
+      sn := trim(snl[j]);
+      if buf=sn then
+      begin
+        if j < l then
+        begin
+          Num := 'HR' + IntToStr(cfgshr.StarNameHR[i]);
+          Result := SearchStar(Num, ar1, de1);
+          if buf = sn then
+            l := j;
+        end;
+      end;
+    end;
+  end;
+  snl.Free;
+end;
+
+function Tcatalog.SearchStarNameGeneric(Num: string; var ar1, de1: double): boolean;
 var
   i, j, l, p: integer;
   buf, sn: string;

@@ -2896,6 +2896,9 @@ begin
   if s1 = '' then
     exit;
 
+  if IsNumber(trim(comname)) then
+    exit;
+
   id := '';
 
   qry := 'SELECT id FROM cdc_com_name' + ' where UPPER(name) = "' + s1 + '"';
