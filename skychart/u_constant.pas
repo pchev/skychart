@@ -494,41 +494,41 @@ const
   CdcMinLocid = '99999999';
   MaxCityList = 100;
   // Location database source url
-  baseurl_us = 'http://www.ap-i.net/pub/skychart/gn/stategaz/';
-  baseurl_world = 'http://www.ap-i.net/pub/skychart/gn/cntyfile/';
-  location_url = 'http://ap-i.net/geoip/iploc.php';
+  baseurl_us = 'https://www.ap-i.net/pub/skychart/gn/stategaz/';
+  baseurl_world = 'https://www.ap-i.net/pub/skychart/gn/cntyfile/';
+  location_url = 'https://ap-i.net/geoip/iploc.php';
 
   //Default URL
-  URL_WebHome = 'http://www.ap-i.net/skychart';
-  URL_Maillist = 'http://groups.yahoo.com/group/skychart-discussion/';
-  URL_BugTracker = 'http://www.ap-i.net/mantis/';
-  URL_DocPDF = 'http://www.ap-i.net/pub/skychart/doc/';
+  URL_WebHome = 'https://www.ap-i.net/skychart';
+  URL_Maillist = 'https://groups.yahoo.com/group/skychart-discussion/';
+  URL_BugTracker = 'https://www.ap-i.net/mantis/';
+  URL_DocPDF = 'https://www.ap-i.net/pub/skychart/doc/';
 
   URL_TLE = 'https://www.space-track.org';
-  URL_QUICKSAT = 'http://www.prismnet.com/~mmccants/';
+  URL_QUICKSAT = 'https://www.prismnet.com/~mmccants/';
   URL_QSMAG = 'https://www.prismnet.com/~mmccants/programs/qsmag.zip';
 
   URL_TLEINFO1 = 'http://www.tle.info/data/iridium.txt';
   URL_TLEINFO2 = 'http://www.tle.info/data/visual.txt';
   URL_TLEINFO3 = 'http://www.tle.info/data/TLE.ZIP';
 
-  URL_CELESTRAK1 = 'http://celestrak.com/NORAD/elements/iridium.txt';
-  URL_CELESTRAK2 = 'http://celestrak.com/NORAD/elements/visual.txt';
+  URL_CELESTRAK1 = 'https://celestrak.com/NORAD/elements/iridium.txt';
+  URL_CELESTRAK2 = 'https://celestrak.com/NORAD/elements/visual.txt';
 
 
-  URL_GRS = 'http://www.ap-i.net/pub/virtualplanet/grs.txt';
+  URL_GRS = 'https://www.ap-i.net/pub/virtualplanet/grs.txt';
   URL_JUPOS = 'http://jupos.org';
 
-  URL_IERSBulletins = 'http://www.iers.org/IERS/EN/Publications/Bulletins/bulletins.html';
+  URL_IERSBulletins = 'https://www.iers.org/IERS/EN/Publications/Bulletins/bulletins.html';
 
-  URL_HTTPCometElements = 'http://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt';
+  URL_HTTPCometElements = 'https://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt';
 
   URL_MPCORBAsteroidElements =
-    'http://www.minorplanetcenter.net/iau/MPCORB/MPCORB.DAT.gz';
-  URL_HTTPAsteroidElements1 = 'http://www.minorplanetcenter.net/iau/MPCORB/Unusual.txt';
-  URL_HTTPAsteroidElements2 = 'http://www.minorplanetcenter.net/iau/MPCORB/NEA.txt';
-  URL_HTTPAsteroidElements3 = 'http://www.minorplanetcenter.net/iau/MPCORB/Distant.txt';
-  URL_CDCAsteroidElements = 'http://www.ap-i.net/pub/skychart/mpc/mpc5000.dat';
+    'https://www.minorplanetcenter.net/iau/MPCORB/MPCORB.DAT.gz';
+  URL_HTTPAsteroidElements1 = 'https://www.minorplanetcenter.net/iau/MPCORB/Unusual.txt';
+  URL_HTTPAsteroidElements2 = 'https://www.minorplanetcenter.net/iau/MPCORB/NEA.txt';
+  URL_HTTPAsteroidElements3 = 'https://www.minorplanetcenter.net/iau/MPCORB/Distant.txt';
+  URL_CDCAsteroidElements = 'https://www.ap-i.net/pub/skychart/mpc/mpc5000.dat';
 
   URL_IVOASAMP = 'http://www.ivoa.net/documents/SAMP/';
 
@@ -546,49 +546,49 @@ const
     'http://archive.eso.org/dss/dss/image?ra=$RAH+$RAM+$RAS&dec=+$DED+$DEM+$DES&equinox=J2000&x=$XSZ&y=$YSZ&Sky-Survey=DSS2-infrared&mime-type=display/gz-fits';
   URL_DSS_NAME5 = 'SkyView DSS';
   URL_DSS5 =
-    'http://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=DSS&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
+    'https://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=DSS&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
   URL_DSS_NAME6 = 'H-alpha Full Sky Map';
   URL_DSS6 =
-    'http://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=H-alpha&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
+    'https://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=H-alpha&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
   URL_DSS_NAME7 = '2MASS J';
   URL_DSS7 =
-    'http://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=2MASS-J&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
+    'https://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=2MASS-J&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
   URL_DSS_NAME8 = '2MASS H';
   URL_DSS8 =
-    'http://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=2MASS-H&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
+    'https://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=2MASS-H&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
   URL_DSS_NAME9 = 'IRAS 12 micron';
   URL_DSS9 =
-    'http://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=IRAS12&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
+    'https://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=IRAS12&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
   URL_DSS_NAME10 = 'All (combined plates)';
   URL_DSS10 =
-    'http://archive.stsci.edu/cgi-bin/dss_search?v=all&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+    'https://archive.stsci.edu/cgi-bin/dss_search?v=all&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
   URL_DSS_NAME11 = 'Quick-V Survey';
   URL_DSS11 =
-    'http://archive.stsci.edu/cgi-bin/dss_search?v=quickv&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+    'https://archive.stsci.edu/cgi-bin/dss_search?v=quickv&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
   URL_DSS_NAME12 = 'DSS1 (POSS1 RED in North, POSS2/UKSTU Blue in south)';
   URL_DSS12 =
-    'http://archive.stsci.edu/cgi-bin/dss_search?v=dss1&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+    'https://archive.stsci.edu/cgi-bin/dss_search?v=dss1&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
   URL_DSS_NAME13 = 'POSS2/UKSTU Infrared';
   URL_DSS13 =
-    'http://archive.stsci.edu/cgi-bin/dss_search?v=poss2ukstu_ir&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+    'https://archive.stsci.edu/cgi-bin/dss_search?v=poss2ukstu_ir&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
   URL_DSS_NAME14 = 'POSS2/UKSTU Red';
   URL_DSS14 =
-    'http://archive.stsci.edu/cgi-bin/dss_search?v=poss2ukstu_red&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+    'https://archive.stsci.edu/cgi-bin/dss_search?v=poss2ukstu_red&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
   URL_DSS_NAME15 = 'POSS2/UKSTU Blue';
   URL_DSS15 =
-    'http://archive.stsci.edu/cgi-bin/dss_search?v=poss2ukstu_blue&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+    'https://archive.stsci.edu/cgi-bin/dss_search?v=poss2ukstu_blue&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
   URL_DSS_NAME16 = 'POSS1 Red (First Generation)';
   URL_DSS16 =
-    'http://archive.stsci.edu/cgi-bin/dss_search?v=poss1_red&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+    'https://archive.stsci.edu/cgi-bin/dss_search?v=poss1_red&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
   URL_DSS_NAME17 = 'POSS1 Blue (First Generation)';
   URL_DSS17 =
-    'http://archive.stsci.edu/cgi-bin/dss_search?v=poss1_blue&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+    'https://archive.stsci.edu/cgi-bin/dss_search?v=poss1_blue&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
   URL_DSS_NAME18 = 'HST Phase2 (GSC1)';
   URL_DSS18 =
-    'http://archive.stsci.edu/cgi-bin/dss_search?v=phase2_gsc1&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+    'https://archive.stsci.edu/cgi-bin/dss_search?v=phase2_gsc1&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
   URL_DSS_NAME19 = 'HST Phase2 (GSC2)';
   URL_DSS19 =
-    'http://archive.stsci.edu/cgi-bin/dss_search?v=phase2_gsc2&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+    'https://archive.stsci.edu/cgi-bin/dss_search?v=phase2_gsc2&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
   URL_SUN_NUMBER = 17;
   URL_SUN_NAME: array[1..URL_SUN_NUMBER] of string = ('SDO AIA 4500',
     'SDO AIA 304',
@@ -642,23 +642,23 @@ const
     12,
     70);
   URL_SUN: array[1..URL_SUN_NUMBER] of
-    string = ('http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_4500.jpg',
-    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0304.jpg',
-    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0193.jpg',
-    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0171.jpg',
-    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0211.jpg',
-    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0131.jpg',
-    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0335.jpg',
-    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0094.jpg',
-    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_1600.jpg',
-    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_1700.jpg',
-    'http://sohowww.nascom.nasa.gov/data/realtime/eit_171/1024/latest.jpg',
-    'http://sohowww.nascom.nasa.gov/data/realtime/eit_195/1024/latest.jpg',
-    'http://sohowww.nascom.nasa.gov/data/realtime/eit_284/1024/latest.jpg',
-    'http://sohowww.nascom.nasa.gov/data/realtime/eit_304/1024/latest.jpg',
-    'http://sohowww.nascom.nasa.gov/data/realtime/hmi_igr/1024/latest.jpg',
-    'http://sohowww.nascom.nasa.gov/data/realtime/hmi_mag/1024/latest.jpg',
-    'http://sohowww.nascom.nasa.gov/data/synoptic/sunspots/mdi_sunspots_1024.jpg');
+    string = ('https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_4500.jpg',
+    'https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0304.jpg',
+    'https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0193.jpg',
+    'https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0171.jpg',
+    'https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0211.jpg',
+    'https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0131.jpg',
+    'https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0335.jpg',
+    'https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0094.jpg',
+    'https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_1600.jpg',
+    'https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_1700.jpg',
+    'https://sohowww.nascom.nasa.gov/data/realtime/eit_171/1024/latest.jpg',
+    'https://sohowww.nascom.nasa.gov/data/realtime/eit_195/1024/latest.jpg',
+    'https://sohowww.nascom.nasa.gov/data/realtime/eit_284/1024/latest.jpg',
+    'https://sohowww.nascom.nasa.gov/data/realtime/eit_304/1024/latest.jpg',
+    'https://sohowww.nascom.nasa.gov/data/realtime/hmi_igr/1024/latest.jpg',
+    'https://sohowww.nascom.nasa.gov/data/realtime/hmi_mag/1024/latest.jpg',
+    'https://sohowww.nascom.nasa.gov/data/synoptic/sunspots/mdi_sunspots_1024.jpg');
   sesame_maxurl = 4;
   sesame_url: array [1..sesame_maxurl, 1..2] of string = (
     ('http://cds.u-strasbg.fr/cgi-bin/nph-sesame', 'CDS - Strasbourg, France'),
