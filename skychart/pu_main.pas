@@ -7389,7 +7389,12 @@ begin
         begin
           cfgm.CometUrlList.Clear;
           for i := 1 to j do
-            cfgm.CometUrlList.Add(ReadString(section, 'CometUrl' + IntToStr(i), ''));
+          begin
+            buf:=ReadString(section, 'CometUrl' + IntToStr(i), '');
+            if pos('minorplanetcenter',buf)>0 then
+               buf:=StringReplace(buf,'http:','https:',[]);
+            cfgm.CometUrlList.Add(buf);
+          end;
         end;
         j := ReadInteger(section, 'AsteroidUrlCount', 0);
         if j > 0 then
@@ -7398,6 +7403,8 @@ begin
           for i := 1 to j do
           begin
             buf := ReadString(section, 'AsteroidUrl' + IntToStr(i), '');
+            if pos('minorplanetcenter',buf)>0 then
+               buf:=StringReplace(buf,'http:','https:',[]);
             cfgm.AsteroidUrlList.Add(buf);
           end;
         end;
