@@ -277,11 +277,11 @@ begin
   propname := indiProp.getName;
   proptype := indiProp.getType;
 
-  if (proptype = INDI_TEXT) and (propname = 'DEVICE_PORT') then
+  if (proptype = INDI_TEXT) and (scope_port = nil) and (propname = 'DEVICE_PORT') then
   begin
     scope_port := indiProp.getText;
   end
-  else if (proptype = INDI_NUMBER) and (propname = 'EQUATORIAL_EOD_COORD') then
+  else if (proptype = INDI_NUMBER) and (coord_prop = nil) and (propname = 'EQUATORIAL_EOD_COORD') then
   begin
     coord_prop := indiProp.getNumber;
     coord_ra := IUFindNumber(coord_prop, 'RA');
@@ -297,28 +297,28 @@ begin
     eod_coord := False;
     NewNumber(coord_prop);
   end
-  else if (proptype = INDI_SWITCH) and (propname = 'ON_COORD_SET') then
+  else if (proptype = INDI_SWITCH) and (oncoordset_prop = nil) and (propname = 'ON_COORD_SET') then
   begin
     oncoordset_prop := indiProp.getSwitch;
     setslew_prop := IUFindSwitch(oncoordset_prop, 'SLEW');
     settrack_prop := IUFindSwitch(oncoordset_prop, 'TRACK');
     setsync_prop := IUFindSwitch(oncoordset_prop, 'SYNC');
   end
-  else if (proptype = INDI_SWITCH) and (propname = 'TELESCOPE_ABORT_MOTION') then
+  else if (proptype = INDI_SWITCH) and (abortmotion_prop = nil) and (propname = 'TELESCOPE_ABORT_MOTION') then
   begin
     abortmotion_prop := indiProp.getSwitch;
     abort_prop := IUFindSwitch(abortmotion_prop, 'ABORT');
     if abort_prop = nil then
       abort_prop := IUFindSwitch(abortmotion_prop, 'ABORT_MOTION');
   end
-  else if (proptype = INDI_NUMBER) and (propname = 'GEOGRAPHIC_COORD') then
+  else if (proptype = INDI_NUMBER) and (GeographicCoord_prop = nil) and (propname = 'GEOGRAPHIC_COORD') then
   begin
     GeographicCoord_prop := indiProp.getNumber();
     geo_lat := IUFindNumber(GeographicCoord_prop, 'LAT');
     geo_lon := IUFindNumber(GeographicCoord_prop, 'LONG');
     geo_elev := IUFindNumber(GeographicCoord_prop, 'ELEV');
   end
-  else if (proptype = INDI_SWITCH) and ((propname = 'TELESCOPE_SLEW_RATE') or (propname = 'SLEWMODE')) then
+  else if (proptype = INDI_SWITCH) and (SlewRate_prop = nil) and ((propname = 'TELESCOPE_SLEW_RATE') or (propname = 'SLEWMODE')) then
   begin
     SlewRateList.Clear;
     SlewRate_prop := indiProp.getSwitch;
@@ -327,13 +327,13 @@ begin
       SlewRateList.Add(SlewRate_prop.sp[i].lbl);
     end;
   end
-  else if (proptype = INDI_SWITCH) and (propname = 'TELESCOPE_MOTION_NS') then
+  else if (proptype = INDI_SWITCH) and (moveNS_prop = nil) and (propname = 'TELESCOPE_MOTION_NS') then
   begin
     moveNS_prop := indiProp.getSwitch;
     moveN_prop := IUFindSwitch(moveNS_prop, 'MOTION_NORTH');
     moveS_prop := IUFindSwitch(moveNS_prop, 'MOTION_SOUTH');
   end
-  else if (proptype = INDI_SWITCH) and (propname = 'TELESCOPE_MOTION_WE') then
+  else if (proptype = INDI_SWITCH) and (moveEW_prop = nil) and (propname = 'TELESCOPE_MOTION_WE') then
   begin
     moveEW_prop := indiProp.getSwitch;
     moveE_prop := IUFindSwitch(moveEW_prop, 'MOTION_EAST');
