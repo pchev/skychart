@@ -36,6 +36,7 @@ skychart/cdc.lps
 tools/doc/*.pdf
 tools/doc/pdflist.txt
 tools/doc/wiki_doc/
+tools/doc/beta_pdflist.txt
 tools/wiki_doc/
 tools/data/language/launchpad/download/
 tools/data/language/launchpad/translation/
@@ -57,6 +58,7 @@ tools/cat/xhip/src/xhip_photo.dat
 skychart/library/getdss/libgetdss.*
 skychart/library/plan404/libplan404.*
 skychart/library/wcs/libcdcwcs.*
+skychart/library/chealpix/libchealpix.*
 skychart/cdc
 skychart/cdcicon
 skychart/cdc.exe
