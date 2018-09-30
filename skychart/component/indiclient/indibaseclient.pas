@@ -56,8 +56,8 @@ type
     FTimeout: integer;
     FConnected: boolean;
     FProtocolTrace: boolean;
-    FProtocolTraceFile, FProtocolErrorFile: string;
-    FPTlog, FPTerr: textfile;
+    FProtocolRawFile, FProtocolTraceFile, FProtocolErrorFile: string;
+    FPTlog, FPTraw, FPTerr: textfile;
     Fdevices: TObjectList;
     FwatchDevices: TStringList;
     FMissedFrameCount: cardinal;
@@ -108,9 +108,10 @@ type
     procedure ProcessDataThread(s: TMemoryStream);
     procedure ProcessDataAsync(Data: PtrInt);
     procedure setDriverConnection(status: boolean; deviceName: string);
-    procedure OpenProtocolTrace(fnlog, fnerr: string);
+    procedure OpenProtocolTrace(fnraw, fnlog, fnerr: string);
     procedure CloseProtocolTrace;
     procedure WriteProtocolTrace(buf: string);
+    procedure WriteProtocolRaw(buf: string);
     procedure WriteProtocolError(buf: string);
   public
     TcpClient: TTcpclient;
@@ -140,6 +141,7 @@ type
       minwait: integer = 0): boolean;
     property Timeout: integer read FTimeout write FTimeout;
     property ProtocolTrace: boolean read FProtocolTrace write FProtocolTrace;
+    property ProtocolRawFile: string read FProtocolRawFile write FProtocolRawFile;
     property ProtocolTraceFile: string read FProtocolTraceFile write FProtocolTraceFile;
     property ProtocolErrorFile: string read FProtocolErrorFile write FProtocolErrorFile;
     property Terminated;
@@ -202,7 +204,7 @@ end;
 
 function TTCPclient.GetErrorDesc: string;
 begin
-  Result := FSock.GetErrorDesc(FSock.LastError);
+  Result := IntToStr(FSock.LastError) + ' ' + FSock.GetErrorDesc(FSock.LastError);
 end;
 
 ///////////////////////  TIndiBaseClient //////////////////////////
@@ -220,6 +222,7 @@ begin
 {$endif}
   FConnected := False;
   FProtocolTrace := False;
+  FProtocolRawFile := '';
   FProtocolTraceFile := '';
   FProtocolErrorFile := '';
   FreeOnTerminate := True;
@@ -241,16 +244,22 @@ begin
 {$endif}
 end;
 
-procedure TIndiBaseClient.OpenProtocolTrace(fnlog, fnerr: string);
+procedure TIndiBaseClient.OpenProtocolTrace(fnraw, fnlog, fnerr: string);
 begin
   try
     if not FProtocolTrace then
       exit;
+    if fnraw <> '' then
+      fnraw := expandfilename(fnraw);
     if fnlog <> '' then
       fnlog := expandfilename(fnlog);
     if fnerr <> '' then
       fnerr := expandfilename(fnerr);
     Filemode := 2;
+    assignfile(FPTraw, fnraw);
+    rewrite(FPTraw);
+    writeln(FPTraw, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) +
+      '  Start trace');
     assignfile(FPTlog, fnlog);
     rewrite(FPTlog);
     writeln(FPTlog, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) +
@@ -263,6 +272,7 @@ begin
 {$I-}
     FProtocolTrace := False;
     CloseFile(FPTlog);
+    CloseFile(FPTraw);
     CloseFile(FPTerr);
     IOResult;
 {$I+}
@@ -276,6 +286,7 @@ begin
   try
     FProtocolTrace := False;
     CloseFile(FPTlog);
+    CloseFile(FPTraw);
     CloseFile(FPTerr);
   except
  {$I-}
@@ -287,14 +298,31 @@ end;
 procedure TIndiBaseClient.WriteProtocolTrace(buf: string);
 begin
   try
-    if not FProtocolTrace then
-      exit;
-    WriteLn(FPTlog, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) +
-      '  ' + buf);
+    if FProtocolTrace then begin
+       WriteLn(FPTlog, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) + '  ' + buf);
+    end;
   except
 {$I-}
     FProtocolTrace := False;
     CloseFile(FPTlog);
+    CloseFile(FPTraw);
+    CloseFile(FPTerr);
+    IOResult;
+{$I+}
+  end;
+end;
+
+procedure TIndiBaseClient.WriteProtocolRaw(buf: string);
+begin
+  try
+    if FProtocolTrace then begin
+       WriteLn(FPTraw, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) + '  ' + buf);
+    end;
+  except
+{$I-}
+    FProtocolTrace := False;
+    CloseFile(FPTlog);
+    CloseFile(FPTraw);
     CloseFile(FPTerr);
     IOResult;
 {$I+}
@@ -304,14 +332,14 @@ end;
 procedure TIndiBaseClient.WriteProtocolError(buf: string);
 begin
   try
-    if not FProtocolTrace then
-      exit;
-    WriteLn(FPTerr, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) +
-      '  ' + buf);
+    if FProtocolTrace then begin
+      WriteLn(FPTerr, FormatDateTime('yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz', Now) + '  ' + buf);
+    end;
   except
 {$I-}
     FProtocolTrace := False;
     CloseFile(FPTlog);
+    CloseFile(FPTraw);
     CloseFile(FPTerr);
     IOResult;
 {$I+}
@@ -324,8 +352,8 @@ const
 var
   buf: string;
   init: boolean;
-  buffer: array[0..buffersize] of char;
-  tbuf: array[0..120] of char;
+  buffer: array[0..buffersize-1] of char;
+  tbuf: array[0..1024] of char;
   s: TMemoryStream;
   i, n, level, c, tl: integer;
   closing: boolean;
@@ -381,7 +409,7 @@ begin
   try
     tcpclient := TTCPClient.Create;
     try
-      OpenProtocolTrace(FProtocolTraceFile, FProtocolErrorFile);
+      OpenProtocolTrace(FProtocolRawFile, FProtocolTraceFile, FProtocolErrorFile);
       {$ifdef withCriticalsection}
       InitCriticalSection(SendCriticalSection);
       {$endif}
@@ -415,8 +443,8 @@ begin
           if n > 0 then
           begin
             if FProtocolTrace then
-              WriteProtocolTrace('Receive buffer size=' + IntToStr(n) +
-                ' data=' + buffer);
+              WriteProtocolRaw('Receive buffer size=' + IntToStr(n) +
+                crlf + Copy(buffer,1,n));
             for i := 0 to n - 1 do
             begin
               if ReadElement(buffer[i]) then
@@ -424,10 +452,15 @@ begin
                 if FProtocolTrace then
                 begin
                   s.Position := 0;
-                  tl := s.Read(tbuf, 120);
-                  WriteProtocolTrace('Process data=' + StringReplace(
-                    StringReplace(copy(tbuf, 1, tl), cr, '', [rfReplaceAll]),
-                    lf, '', [rfReplaceAll]) + '...');
+                  tl := s.Read(tbuf, 1024);
+                  if tl<=1024 then
+                    WriteProtocolTrace('Process data=' + StringReplace(
+                      StringReplace(copy(tbuf, 1, tl), cr, '', [rfReplaceAll]),
+                      lf, '', [rfReplaceAll]))
+                  else
+                    WriteProtocolTrace('Process data=' + StringReplace(
+                      StringReplace(copy(tbuf, 1, tl), cr, '', [rfReplaceAll]),
+                      lf, '', [rfReplaceAll]) + '...');
                 end;
                 ProcessDataThread(s);
                 s := TMemoryStream.Create;

@@ -425,6 +425,7 @@ begin
       exit;
     end;
 
+    client.ProtocolRawFile   := slash(HomeDir) + 'cdc_indiraw.log';
     client.ProtocolTraceFile := slash(HomeDir) + 'cdc_inditrace.log';
     client.ProtocolErrorFile := slash(HomeDir) + 'cdc_indierror.log';
     client.ProtocolTrace := ProtocolTrace.Checked;
