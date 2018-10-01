@@ -42,6 +42,7 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    LockPosition: TCheckBox;
     Panel1: TPanel;
     coord1: TLabel;
     coord2: TLabel;
@@ -56,6 +57,8 @@ type
     Label3: TLabel;
     Label4: TLabel;
     Fov: TRaDec;
+    Panel4: TPanel;
+    Panel5: TPanel;
     ra: TRaDec;
     de: TRaDec;
     rot: TFloatEdit;
@@ -97,6 +100,7 @@ begin
   eq2.Caption := rsDE;
   Label3.Caption := rsFOV;
   Label4.Caption := rsRotation;
+  LockPosition.Caption := rsLockTheChart;
   SetHelp(self, hlpPosition);
 end;
 

@@ -2323,7 +2323,7 @@ begin
     FImageSetFocus(self);
   xc := Image1.ScreenToClient(mouse.cursorpos).x;
   yc := Image1.ScreenToClient(mouse.cursorpos).y;
-  if (not Identlabel.Visible) or (abs(xcursor - xc) > 6) or (abs(ycursor - yc) > 6) then
+  if (not sc.cfgsc.TrackOn)and((not Identlabel.Visible) or (abs(xcursor - xc) > 6) or (abs(ycursor - yc) > 6)) then
   begin
     xcursor := xc;
     ycursor := yc;
@@ -2393,6 +2393,7 @@ begin
     Slew1.Visible := False;
     Sync1.Visible := False;
   end;
+  SlewCursor.Visible := not sc.cfgsc.TrackOn;
   if sc.cfgsc.ManualTelescope then
     Telescope1.Visible := False
   else

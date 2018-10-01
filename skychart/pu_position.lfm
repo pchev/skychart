@@ -1,69 +1,48 @@
 object f_position: Tf_position
   Left = 481
-  Height = 282
+  Height = 264
   Top = 108
   Width = 510
   ActiveControl = Panel2
   Caption = 'Position'
-  ClientHeight = 282
+  ClientHeight = 264
   ClientWidth = 510
+  DesignTimePPI = 75
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.6.2.0'
   Visible = False
-  object Button1: TButton
-    Left = 216
-    Height = 25
-    Top = 240
-    Width = 75
-    BorderSpacing.InnerBorder = 4
-    Caption = 'OK'
-    Default = True
-    ModalResult = 1
-    TabOrder = 4
-  end
-  object Button2: TButton
-    Left = 397
-    Height = 25
-    Top = 240
-    Width = 75
-    BorderSpacing.InnerBorder = 4
-    Cancel = True
-    Caption = 'Cancel'
-    ModalResult = 2
-    TabOrder = 5
-  end
   object Panel1: TPanel
-    Left = 8
-    Height = 77
-    Top = 88
-    Width = 496
-    ClientHeight = 77
-    ClientWidth = 496
+    Left = 0
+    Height = 70
+    Top = 70
+    Width = 510
+    Align = alTop
+    ClientHeight = 70
+    ClientWidth = 510
     FullRepaint = False
     TabOrder = 1
     object coord1: TLabel
       Left = 8
-      Height = 15
+      Height = 11
       Top = 36
-      Width = 16
+      Width = 12
       Caption = 'Az'
       ParentColor = False
     end
     object coord2: TLabel
       Left = 256
-      Height = 15
+      Height = 11
       Top = 36
-      Width = 17
+      Width = 14
       Caption = 'Alt'
       ParentColor = False
     end
     object coord: TLabel
       Left = 8
-      Height = 15
+      Height = 11
       Top = 8
-      Width = 36
+      Width = 28
       Caption = 'coord'
       ParentColor = False
     end
@@ -73,7 +52,7 @@ object f_position: Tf_position
       Top = 32
       Width = 210
       kind = Az
-      value = 0
+      Value = 0
       Enabled = True
       OnChange = CoordChange
       TabOrder = 0
@@ -84,42 +63,43 @@ object f_position: Tf_position
       Top = 32
       Width = 210
       kind = Alt
-      value = 0
+      Value = 0
       Enabled = True
       OnChange = CoordChange
       TabOrder = 1
     end
   end
   object Panel2: TPanel
-    Left = 8
-    Height = 77
-    Top = 3
-    Width = 495
-    ClientHeight = 77
-    ClientWidth = 495
+    Left = 0
+    Height = 70
+    Top = 0
+    Width = 510
+    Align = alTop
+    ClientHeight = 70
+    ClientWidth = 510
     FullRepaint = False
     TabOrder = 0
     object eq1: TLabel
       Left = 8
-      Height = 15
+      Height = 11
       Top = 36
-      Width = 16
+      Width = 14
       Caption = 'RA'
       ParentColor = False
     end
     object eq2: TLabel
       Left = 256
-      Height = 15
+      Height = 11
       Top = 36
-      Width = 18
+      Width = 14
       Caption = 'DE'
       ParentColor = False
     end
     object Equinox: TLabel
       Left = 8
-      Height = 15
+      Height = 11
       Top = 8
-      Width = 50
+      Width = 39
       Caption = 'Equinox'
       ParentColor = False
     end
@@ -129,7 +109,7 @@ object f_position: Tf_position
       Top = 32
       Width = 210
       kind = RA
-      value = 0
+      Value = 0
       Enabled = True
       OnChange = EqChange
       TabOrder = 0
@@ -140,34 +120,35 @@ object f_position: Tf_position
       Top = 32
       Width = 210
       kind = DE
-      value = 0
+      Value = 0
       Enabled = True
       OnChange = EqChange
       TabOrder = 1
     end
   end
   object Panel3: TPanel
-    Left = 8
-    Height = 49
-    Top = 176
-    Width = 496
-    ClientHeight = 49
-    ClientWidth = 496
+    Left = 0
+    Height = 41
+    Top = 140
+    Width = 510
+    Align = alTop
+    ClientHeight = 41
+    ClientWidth = 510
     FullRepaint = False
     TabOrder = 2
     object Label3: TLabel
       Left = 8
-      Height = 15
+      Height = 11
       Top = 14
-      Width = 26
+      Width = 21
       Caption = 'FOV'
       ParentColor = False
     end
     object Label4: TLabel
       Left = 289
-      Height = 15
+      Height = 11
       Top = 14
-      Width = 52
+      Width = 42
       Caption = 'Rotation'
       ParentColor = False
     end
@@ -177,7 +158,7 @@ object f_position: Tf_position
       Top = 9
       Width = 210
       kind = Az
-      value = 0
+      Value = 0
       Enabled = True
       TabOrder = 0
     end
@@ -196,22 +177,72 @@ object f_position: Tf_position
       Digits = 5
     end
   end
-  object Button3: TButton
-    Left = 120
-    Height = 25
-    Top = 240
-    Width = 75
-    Caption = 'Help'
-    OnClick = Button3Click
+  object Panel4: TPanel
+    Left = 0
+    Height = 39
+    Top = 181
+    Width = 510
+    Align = alTop
+    ClientHeight = 39
+    ClientWidth = 510
     TabOrder = 3
+    object LockPosition: TCheckBox
+      Left = 39
+      Height = 21
+      Top = 8
+      Width = 172
+      Caption = 'Lock the chart at this position'
+      TabOrder = 0
+    end
   end
-  object Button4: TButton
-    Left = 304
-    Height = 25
-    Top = 240
-    Width = 75
-    Caption = 'Apply'
-    OnClick = Button4Click
-    TabOrder = 6
+  object Panel5: TPanel
+    Left = 0
+    Height = 39
+    Top = 225
+    Width = 510
+    Align = alBottom
+    ClientHeight = 39
+    ClientWidth = 510
+    TabOrder = 4
+    object Button3: TButton
+      Left = 120
+      Height = 25
+      Top = 8
+      Width = 75
+      Caption = 'Help'
+      OnClick = Button3Click
+      TabOrder = 0
+    end
+    object Button1: TButton
+      Left = 216
+      Height = 25
+      Top = 8
+      Width = 75
+      BorderSpacing.InnerBorder = 4
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 1
+    end
+    object Button4: TButton
+      Left = 304
+      Height = 25
+      Top = 8
+      Width = 75
+      Caption = 'Apply'
+      OnClick = Button4Click
+      TabOrder = 2
+    end
+    object Button2: TButton
+      Left = 397
+      Height = 25
+      Top = 8
+      Width = 75
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 3
+    end
   end
 end

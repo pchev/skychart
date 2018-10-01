@@ -4155,21 +4155,49 @@ begin
   if MultiFrame1.ActiveObject is Tf_chart then
     with MultiFrame1.ActiveObject as Tf_chart do
     begin
-      if sc.cfgsc.Projpole = Altaz then
+      if f_position.LockPosition.Checked then
       begin
+        sc.cfgsc.TrackName:=f_position.ra.Text+' '+f_position.de.Text;
+        sc.cfgsc.TrackRA := 15 * deg2rad * f_position.ra.Value;
+        sc.cfgsc.TrackDec := deg2rad * f_position.de.Value;
+        sc.cfgsc.TrackEpoch := sc.cfgsc.JDChart;
+        sc.cfgsc.FindOK := True;
+        sc.cfgsc.FindSize := 0;
+        sc.cfgsc.FindPM := False;
+        sc.cfgsc.FindType := ftInv;
+        sc.cfgsc.FindName:=sc.cfgsc.TrackName;
+        sc.cfgsc.FindId := sc.cfgsc.FindName;
+        sc.cfgsc.FindDesc := '';
+        sc.cfgsc.FindNote := '';
+        sc.cfgsc.FindRA:=sc.cfgsc.TrackRA;
+        sc.cfgsc.FindDec:=sc.cfgsc.TrackDec;
+        sc.cfgsc.FindRA2000 := sc.cfgsc.TrackRA;
+        sc.cfgsc.FindDec2000 := sc.cfgsc.TrackDec;
+        Precession(sc.cfgsc.JDChart, jd2000, sc.cfgsc.FindRA2000, sc.cfgsc.FindDec2000);
+        sc.cfgsc.fov := deg2rad * f_position.fov.Value;
+        sc.cfgsc.theta := deg2rad * f_position.rot.Value;
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
-        sc.cfgsc.acentre := deg2rad * f_position.long.Value;
-        if sc.catalog.cfgshr.AzNorth then
-          sc.cfgsc.acentre := rmod(sc.cfgsc.acentre + pi, pi2);
-        sc.cfgsc.hcentre := deg2rad * f_position.lat.Value;
+        sc.cfgsc.TrackType := 6;
+        cmd_SetCursorPosition(Image1.Width div 2, Image1.Height div 2);
       end
       else
-        sc.cfgsc.TrackOn := False;
-      sc.cfgsc.racentre := 15 * deg2rad * f_position.ra.Value;
-      sc.cfgsc.decentre := deg2rad * f_position.de.Value;
-      sc.cfgsc.fov := deg2rad * f_position.fov.Value;
-      sc.cfgsc.theta := deg2rad * f_position.rot.Value;
+      begin
+        if sc.cfgsc.Projpole = Altaz then
+        begin
+          sc.cfgsc.TrackOn := True;
+          sc.cfgsc.TrackType := 4;
+          sc.cfgsc.acentre := deg2rad * f_position.long.Value;
+          if sc.catalog.cfgshr.AzNorth then
+            sc.cfgsc.acentre := rmod(sc.cfgsc.acentre + pi, pi2);
+          sc.cfgsc.hcentre := deg2rad * f_position.lat.Value;
+        end
+        else
+          sc.cfgsc.TrackOn := False;
+        sc.cfgsc.racentre := 15 * deg2rad * f_position.ra.Value;
+        sc.cfgsc.decentre := deg2rad * f_position.de.Value;
+        sc.cfgsc.fov := deg2rad * f_position.fov.Value;
+        sc.cfgsc.theta := deg2rad * f_position.rot.Value;
+      end;
       if VerboseMsg then
         WriteTrace('PositionExecute');
       refresh(True, False);

@@ -1520,6 +1520,7 @@ resourcestring
   rsObserverTool = 'Observer tools';
   rsLocationTime = 'Location / Time';
   rsMark = 'Mark';
+  rsLockTheChart = 'Lock the chart at this position';
 
 // also update upsi_translation
 
