@@ -3163,6 +3163,18 @@ begin
         MeasureDistance(4, 0, 0);
       // begin measure
       GetADxy(X, Y, MeasureRa, MeasureDe, sc.cfgsc);
+      // start on tracked object?
+      if sc.cfgsc.TrackOn and (sc.cfgsc.TrackType=6) then
+      begin
+        MeasureRa := sc.cfgsc.TrackRA;
+        MeasureDe := sc.cfgsc.TrackDec;
+        Projection(MeasureRa, MeasureDe, x1, y1, False, sc.cfgsc, False);
+        WindowXY(x1, y1, xx, yy, sc.cfgsc);
+        X := round(xx);
+        Y := round(yy);
+        MeasureStartName := sc.cfgsc.TrackName;
+      end
+      else
       // start on object?
       if IdentXY(X, Y, True, True) then
       begin
