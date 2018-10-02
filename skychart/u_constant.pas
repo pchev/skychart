@@ -500,7 +500,7 @@ const
 
   //Default URL
   URL_WebHome = 'https://www.ap-i.net/skychart';
-  URL_Maillist = 'https://groups.yahoo.com/group/skychart-discussion/';
+  URL_Maillist = 'https://groups.io/g/skychart';
   URL_BugTracker = 'https://www.ap-i.net/mantis/';
   URL_DocPDF = 'https://www.ap-i.net/pub/skychart/doc/';
 

@@ -138,7 +138,7 @@ resourcestring
   rsHelp = 'Help';
   rsHelpContents = 'Help contents';
   rsSkychartHome = 'Skychart homepage';
-  rsMailList = 'Mail list (Yahoo group)';
+  rsMailList = 'Mail list, discussion group';
   rsReportAProbl = 'Report a problem';
   rsAbout = 'About';
   rsResetAllLabe = 'Reset all labels';
