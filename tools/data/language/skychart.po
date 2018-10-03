@@ -503,7 +503,7 @@ msgid "Skychart homepage"
 msgstr ""
 
 #: u_translation:rsmaillist
-msgid "Mail list (Yahoo group)"
+msgid "Mail list, discussion group"
 msgstr ""
 
 #: u_translation:rsreportaprobl
@@ -5852,5 +5852,9 @@ msgstr ""
 
 #: u_translation:rsmark
 msgid "Mark"
+msgstr ""
+
+#: u_translation:rslockthechart
+msgid "Lock the chart at this position"
 msgstr ""
 

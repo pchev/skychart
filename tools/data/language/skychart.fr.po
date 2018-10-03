@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-04 14:42+0000\n"
-"PO-Revision-Date: 2018-07-04 14:47+0000\n"
+"POT-Creation-Date: 2018-10-03 16:45+0000\n"
+"PO-Revision-Date: 2018-10-03 16:51+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-07-04 14:48+0000\n"
-"X-Generator: Launchpad (build 18704)\n"
+"X-Launchpad-Export-Date: 2018-10-03 16:52+0000\n"
+"X-Generator: Launchpad (build 18785)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -2889,6 +2889,10 @@ msgstr "Verrouiller"
 msgid "Lock on %s"
 msgstr "Verrouiller sur %s"
 
+#: u_translation.rslockthechart
+msgid "Lock the chart at this position"
+msgstr "Verrouille la carte à cette position"
+
 #: u_translation.rslog
 msgid "Log"
 msgstr "Log"
@@ -2978,7 +2982,7 @@ msgid "Magnitude Tycho VT"
 msgstr "Magnitude Tycho VT"
 
 #: u_translation.rsmaillist
-msgid "Mail list (Yahoo group)"
+msgid "Mail list, discussion group"
 msgstr "Liste de discussions"
 
 #: u_translation.rsmainbar

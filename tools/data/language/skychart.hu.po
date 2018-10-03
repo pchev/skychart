@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-04 14:42+0000\n"
+"POT-Creation-Date: 2018-10-03 16:45+0000\n"
 "PO-Revision-Date: 2017-01-14 17:43+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-07-04 14:48+0000\n"
-"X-Generator: Launchpad (build 18704)\n"
+"X-Launchpad-Export-Date: 2018-10-03 16:52+0000\n"
+"X-Generator: Launchpad (build 18785)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2885,6 +2885,10 @@ msgstr ""
 msgid "Lock on %s"
 msgstr "Rögzít: %s"
 
+#: u_translation.rslockthechart
+msgid "Lock the chart at this position"
+msgstr ""
+
 #: u_translation.rslog
 msgid "Log"
 msgstr "Napló"
@@ -2974,8 +2978,8 @@ msgid "Magnitude Tycho VT"
 msgstr "Tycho VT magnitúdó"
 
 #: u_translation.rsmaillist
-msgid "Mail list (Yahoo group)"
-msgstr "LevList"
+msgid "Mail list, discussion group"
+msgstr ""
 
 #: u_translation.rsmainbar
 msgid "Main bar"

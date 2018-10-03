@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-07-04 14:42+0000\n"
-"PO-Revision-Date: 2013-11-14 18:05+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2018-10-03 16:45+0000\n"
+"PO-Revision-Date: 2018-08-10 21:35+0000\n"
+"Last-Translator: sara sarshogh <Unknown>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-07-04 14:48+0000\n"
-"X-Generator: Launchpad (build 18704)\n"
+"X-Launchpad-Export-Date: 2018-10-03 16:53+0000\n"
+"X-Generator: Launchpad (build 18785)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -258,7 +258,7 @@ msgstr ""
 
 #: u_translation.rsaltazcoordin
 msgid "Alt-Az coordinates"
-msgstr ""
+msgstr "مختصات سمتی ارتفاعی"
 
 #: u_translation.rsaltazmount
 msgid "Alt/Az mount"
@@ -1010,7 +1010,7 @@ msgstr ""
 
 #: u_translation.rsconfigurethe
 msgid "Configure the program"
-msgstr ""
+msgstr "تنظیمات برنامه"
 
 #: u_translation.rsconfirmation
 msgid "Confirmation prompt before saving a file."
@@ -1046,7 +1046,7 @@ msgstr ""
 
 #: u_translation.rsconnectteles
 msgid "Connect telescope"
-msgstr ""
+msgstr "اتصال تلسکوپ"
 
 #: u_translation.rsconnecttofai
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
@@ -1402,7 +1402,7 @@ msgstr ""
 
 #: u_translation.rsdeg
 msgid "d"
-msgstr ""
+msgstr "روز"
 
 #: u_translation.rsdegree
 msgid "Degree"
@@ -1774,7 +1774,7 @@ msgstr ""
 
 #: u_translation.rseclipticcoor
 msgid "Ecliptic coordinates"
-msgstr ""
+msgstr "مختصات دایرةالبروجی"
 
 #: u_translation.rseclipticcoor3
 msgid "Ecliptic coord."
@@ -1846,7 +1846,7 @@ msgstr ""
 
 #: u_translation.rsephemeriscal
 msgid "Ephemeris calendar"
-msgstr ""
+msgstr "جدول نجومی"
 
 #: u_translation.rsephemerispro
 msgid "Ephemeris probably out of range, disabling any solar system object"
@@ -1870,7 +1870,7 @@ msgstr ""
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
-msgstr ""
+msgstr "مختصات استوایی"
 
 #: u_translation.rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
@@ -2206,7 +2206,7 @@ msgstr ""
 
 #: u_translation.rsgalacticcoor
 msgid "Galactic coordinates"
-msgstr ""
+msgstr "مختصات کهکشانی"
 
 #: u_translation.rsgalacticcoor2
 msgid "Galactic coord."
@@ -2626,7 +2626,7 @@ msgstr ""
 
 #: u_translation.rsjulianyear
 msgid "Julian Year"
-msgstr ""
+msgstr "سال ژولیانی"
 
 #: u_translation.rsjuly
 msgid "July"
@@ -2888,6 +2888,10 @@ msgstr ""
 msgid "Lock on %s"
 msgstr ""
 
+#: u_translation.rslockthechart
+msgid "Lock the chart at this position"
+msgstr ""
+
 #: u_translation.rslog
 msgid "Log"
 msgstr ""
@@ -2977,7 +2981,7 @@ msgid "Magnitude Tycho VT"
 msgstr ""
 
 #: u_translation.rsmaillist
-msgid "Mail list (Yahoo group)"
+msgid "Mail list, discussion group"
 msgstr ""
 
 #: u_translation.rsmainbar
@@ -3126,7 +3130,7 @@ msgstr ""
 
 #: u_translation.rsmin
 msgid "m"
-msgstr ""
+msgstr "دقیقه"
 
 #: u_translation.rsmin2
 msgid "min"
@@ -3430,7 +3434,7 @@ msgstr ""
 
 #: u_translation.rsnow
 msgid "Now"
-msgstr ""
+msgstr "حالا"
 
 #: u_translation.rsnumberofcopi
 msgid "Number of copies"
@@ -3478,7 +3482,7 @@ msgstr ""
 
 #: u_translation.rsobjectlist
 msgid "Object list"
-msgstr ""
+msgstr "لیست احرام"
 
 #: u_translation.rsobjectlistse
 msgid "Object list settings"
@@ -3886,7 +3890,7 @@ msgstr ""
 
 #: u_translation.rsposition
 msgid "Position"
-msgstr ""
+msgstr "موقعیت"
 
 #: u_translation.rspositionangl
 msgid "Position angle"
@@ -3978,7 +3982,7 @@ msgstr ""
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
-msgstr ""
+msgstr "چاپ چارت"
 
 #: u_translation.rsprocessing
 msgid "Processing... %s"
@@ -4182,7 +4186,7 @@ msgstr ""
 
 #: u_translation.rsredolastchan
 msgid "Redo last change"
-msgstr ""
+msgstr "برگرداندن آخرین تغییرات"
 
 #: u_translation.rsreducedetail
 msgid "Reduce details when moving the chart"
@@ -4346,11 +4350,11 @@ msgstr ""
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
-msgstr ""
+msgstr "چرخش به چپ"
 
 #: u_translation.rsrotateright
 msgid "Rotate right"
-msgstr ""
+msgstr "چرخش به راست"
 
 #: u_translation.rsrotation
 msgid "Rotation"
@@ -4438,7 +4442,7 @@ msgstr ""
 
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
-msgstr ""
+msgstr "ذخیره چارت فعال"
 
 #: u_translation.rssavetofile
 msgid "Save to file"
@@ -4514,7 +4518,7 @@ msgstr ""
 
 #: u_translation.rssec
 msgid "s"
-msgstr ""
+msgstr "ثانیه"
 
 #: u_translation.rssec2
 msgid "Sec."
@@ -4522,7 +4526,7 @@ msgstr ""
 
 #: u_translation.rssecond
 msgid "Second"
-msgstr ""
+msgstr "ثانیه"
 
 #: u_translation.rsseconds
 msgid "Seconds"
@@ -4658,7 +4662,7 @@ msgstr "تنظیم تاریخ و زمان"
 
 #: u_translation.rssetfov
 msgid "Set FOV"
-msgstr ""
+msgstr "تنظیم میدان دید"
 
 #: u_translation.rssetfovto
 msgid "Set FOV to"
@@ -4706,7 +4710,7 @@ msgstr ""
 
 #: u_translation.rsshowallsky
 msgid "Show all sky"
-msgstr ""
+msgstr "نمایش کُل آسمان"
 
 #: u_translation.rsshowasinglep
 msgid "Show a single picture on the map."
@@ -4814,7 +4818,7 @@ msgstr ""
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
-msgstr ""
+msgstr "نمایش اجرام عمیق آسمان"
 
 #: u_translation.rsshowobjectbe
 msgid "Show objects below the horizon"
@@ -4838,7 +4842,7 @@ msgstr ""
 
 #: u_translation.rsshowpictures
 msgid "Show pictures"
-msgstr ""
+msgstr "نمایش تصاویر"
 
 #: u_translation.rsshowplaneton
 msgid "Show planets on the chart"
@@ -4854,7 +4858,7 @@ msgstr ""
 
 #: u_translation.rsshowstars
 msgid "Show stars"
-msgstr ""
+msgstr "نمایش ستارگان"
 
 #: u_translation.rsshowtheimage
 msgid "Show the images on the map"
@@ -4882,7 +4886,7 @@ msgstr ""
 
 #: u_translation.rssiderealday
 msgid "Sidereal day"
-msgstr ""
+msgstr "روز نجومى"
 
 #: u_translation.rssimulation
 msgid "Simulation"
@@ -5190,7 +5194,7 @@ msgstr ""
 
 #: u_translation.rssync
 msgid "Sync"
-msgstr ""
+msgstr "هماهنگ‌سازی"
 
 #: u_translation.rssyncedto
 msgid "Synced to %s / %s"
@@ -5198,7 +5202,7 @@ msgstr ""
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
-msgstr ""
+msgstr "ماه هلالی"
 
 #: u_translation.rssystemprinte
 msgid "System printer"
@@ -5450,7 +5454,7 @@ msgstr ""
 
 #: u_translation.rstropicalyear
 msgid "Tropical year"
-msgstr ""
+msgstr "سال اعتدالی"
 
 #: u_translation.rstropospheret
 msgid "Troposphere temperature lapse rate (K/km)"
@@ -5534,7 +5538,7 @@ msgstr ""
 
 #: u_translation.rsundolastchan
 msgid "Undo last change"
-msgstr ""
+msgstr "بازگرداندن آخرین تغییرات"
 
 #: u_translation.rsunits
 msgid "Units"
