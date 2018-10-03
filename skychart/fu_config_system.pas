@@ -529,6 +529,14 @@ begin
     skipDBtypeGroupClick := False;
     exit;
   end;
+
+  if DBtypeGroup.ItemIndex>0 then begin
+     ShowMessage('Mysql support is deprecated and will be removed in a future version');
+     skipDBtypeGroupClick:=True;
+     DBtypeGroup.ItemIndex:=0;
+     exit;
+  end;
+
   if messageDlg(Format(rsAlsoBeSureTh, [DBtypeGroup.hint + crlf + crlf, crlf, crlf]),
     mtConfirmation, [mbYes, mbNo], 0) = mrYes then
   begin

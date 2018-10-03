@@ -10554,6 +10554,9 @@ var
 begin
   try
     NeedToInitializeDB := False;
+    if DBtype=mysql then begin
+      ShowError('Mysql support is deprecated and will be removed in a future version.'+crlf+'Please change to SQLite now: menu Setup/General');
+    end;
     if ((DBtype = sqlite) and not Fileexists(cfgm.db)) then
     begin
       dbpath := extractfilepath(cfgm.db);
