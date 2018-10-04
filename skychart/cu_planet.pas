@@ -3047,7 +3047,7 @@ begin
       'date:' + date + tab + 'ref:' + ref;
     djd(cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 5], yy, mm, dd, hh);
     Desc := Desc + '/' + Date2Str(yy, mm, dd) + tab; // ephemeris date
-    if abs(cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 5] - cfgsc.CurJDUT) > 180 then
+    if abs(cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 5] - cfgsc.CurJDUT) > 365 then
       desc := desc + rsWarningSomeA + tab;
     cfgsc.TrackType := 3;
     cfgsc.TrackId := cfgsc.AsteroidName[CurrentAstStep, CurrentAsteroid, 1];

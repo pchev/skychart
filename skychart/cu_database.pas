@@ -1367,7 +1367,7 @@ begin
         end;
         Inc(i);
       end;
-      if dt > 180 then
+      if dt > 365 then
       begin
         FAstmsg := rsWarningSomeA;
       end;
