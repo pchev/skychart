@@ -2,7 +2,7 @@ Version 4.1.1 beta, release Notes
 
 New functions:
 
-- Remove obsolete/unmaintainable lx200 and encoder drivers. Pease use the corresponding ASCOM or INDI drivers.
+- Remove obsolete/unmaintainable lx200 and encoder drivers. Please use the corresponding ASCOM or INDI drivers.
   - for generic lx200: https://pixelstelescopes.wordpress.com/advanced-lx200/
   - for digital circle: http://eksfiles.net/digital-setting-circles/ascom-driver-for-digital-setting-circles/
 - Depreciate the use of Mysql database and suggest to move to Sqlite if currently in use.
