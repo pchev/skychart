@@ -2309,6 +2309,7 @@ begin
   if VerboseMsg then
     WriteTrace('SkyChart ' + cfgsc.chartname + ': draw planets');
   fov := rad2deg * cfgsc.fov;
+  moonflatten:=1;
   pixscale := abs(cfgsc.BxGlb) * deg2rad / 3600;
   for j := 0 to cfgsc.SimNb - 1 do
   begin
