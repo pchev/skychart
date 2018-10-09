@@ -6,7 +6,7 @@ unit BGRAUTF8;
 interface
 
 uses
-  Classes, SysUtils{$IFDEF BGRABITMAP_USE_LCL}, lazutf8classes{$ENDIF};
+  Classes, SysUtils, BGRAUnicode{$IFDEF BGRABITMAP_USE_LCL}, lazutf8classes{$ENDIF};
 
 {$IFDEF BGRABITMAP_USE_LCL}
 type
@@ -62,8 +62,34 @@ function UTF8CharacterLength(p: PChar): integer;
 function UTF8Length(const s: string): PtrInt;
 function UTF8Length(p: PChar; ByteCount: PtrInt): PtrInt;
 function UnicodeCharToUTF8(u: cardinal): string4;
+function UTF8ReverseString(const s: string): string;
+function UTF8CodepointToUnicode(p: PChar; ACodePointLen: integer): cardinal;
+
+type
+  TBidiUTF8Info = packed record
+    Offset: Integer;
+    BidiInfo: TUnicodeBidiInfo;
+  end;
+  TBidiUTF8Array = packed array of TBidiUTF8Info;
+  TUnicodeDisplayOrder = BGRAUnicode.TUnicodeDisplayOrder;
+
+function GetBidiClassUTF8(P: PChar): TUnicodeBidiClass;
+function GetFirstStrongBidiClassUTF8(const sUTF8: string): TUnicodeBidiClass;
+function GetLastStrongBidiClassUTF8(const sUTF8: string): TUnicodeBidiClass;
+function IsRightToLeftUTF8(const sUTF8: string): boolean;
+function IsZeroWidthUTF8(const sUTF8: string): boolean;
+function AddParagraphBidiUTF8(s: string; ARightToLeft: boolean): string;
+function AnalyzeBidiUTF8(const sUTF8: string; ARightToLeft: boolean): TBidiUTF8Array; overload;
+function AnalyzeBidiUTF8(const sUTF8: string): TBidiUTF8Array; overload;
+function GetUTF8DisplayOrder(const ABidi: TBidiUTF8Array): TUnicodeDisplayOrder;
+function ContainsBidiIsolateOrFormattingUTF8(const sUTF8: string): boolean;
+
+function UTF8OverrideDirection(const sUTF8: string; ARightToLeft: boolean): string;
+function UTF8EmbedDirection(const sUTF8: string; ARightToLeft: boolean): string;
 
 //little endian stream functions
+function LEReadInt64(Stream: TStream): int64;
+procedure LEWriteInt64(Stream: TStream; AValue: int64);
 function LEReadLongint(Stream: TStream): longint;
 procedure LEWriteLongint(Stream: TStream; AValue: LongInt);
 function LEReadByte(Stream: TStream): byte;
@@ -171,6 +197,7 @@ function UnicodeCharToUTF8(u: cardinal): string4;
 begin
   result := LazUtf8.UnicodeToUTF8(u);
 end;
+
 {$ELSE}
 
 procedure LoadStringsFromFileUTF8(List: TStrings; const FileName: string);
@@ -456,6 +483,354 @@ end;
 
 {$ENDIF}
 
+function UTF8ReverseString(const s: string): string;
+var
+  pSrc,pDest,pEnd: PChar;
+  charLen: Integer;
+begin
+  if s = '' then
+  begin
+    result := '';
+    exit;
+  end;
+  setlength(result, length(s));
+  pDest := @result[1] + length(result);
+  pSrc := @s[1];
+  pEnd := pSrc+length(s);
+  while pSrc < pEnd do
+  begin
+    charLen := UTF8CharacterLength(pSrc);
+    if (charLen = 0) or (pSrc+charLen > pEnd) then break;
+    dec(pDest, charLen);
+    move(pSrc^, pDest^, charLen);
+    inc(pSrc, charLen);
+  end;
+end;
+
+function UTF8CodepointToUnicode(p: PChar; ACodePointLen: integer): cardinal;
+begin
+  case ACodePointLen of
+    0: result := 0;
+    1: result := ord(p^);
+    2: result := ((ord(p^) and %00011111) shl 6) or (ord(p[1]) and %00111111);
+    3: result := ((ord(p^) and %00011111) shl 12) or ((ord(p[1]) and %00111111) shl 6)
+                or (ord(p[2]) and %00111111);
+    4: result := ((ord(p^) and %00001111) shl 18) or ((ord(p[1]) and %00111111) shl 12)
+                or ((ord(p[2]) and %00111111) shl 6) or (ord(p[3]) and %00111111);
+    else
+      raise exception.Create('Invalid code point length');
+  end;
+end;
+
+function UTF8CharStart(UTF8Str: PChar; Len, CharIndex: PtrInt): PChar;
+var
+  CharLen: LongInt;
+begin
+  Result:=UTF8Str;
+  if Result<>nil then begin
+    while (CharIndex>0) and (Len>0) do begin
+      CharLen:=UTF8CharacterLength(Result);
+      dec(Len,CharLen);
+      dec(CharIndex);
+      inc(Result,CharLen);
+    end;
+    if (CharIndex<>0) or (Len<0) then
+      Result:=nil;
+  end;
+end;
+
+function GetBidiClassUTF8(P: PChar): TUnicodeBidiClass;
+begin
+  result := GetUnicodeBidiClass(UTF8CodepointToUnicode(P, UTF8CharacterLength(p)));
+end;
+
+function GetFirstStrongBidiClassUTF8(const sUTF8: string): TUnicodeBidiClass;
+var
+  p,pEnd: PChar;
+  charLen: Integer;
+  u: Cardinal;
+  curBidi: TUnicodeBidiClass;
+  isolateNesting: integer;
+begin
+  if sUTF8 = '' then exit(ubcUnknown);
+  p := @sUTF8[1];
+  pEnd := p + length(sUTF8);
+  isolateNesting:= 0;
+  while p < pEnd do
+  begin
+    charLen := UTF8CharacterLength(p);
+    if (charLen = 0) or (p+charLen > pEnd) then break;
+    u := UTF8CodepointToUnicode(p, charLen);
+    case u of
+      UNICODE_POP_DIRECTIONAL_ISOLATE: if isolateNesting > 0 then dec(isolateNesting);
+    end;
+    curBidi := GetUnicodeBidiClass(u);
+    if isolateNesting = 0 then
+    begin
+      if curBidi in[ubcLeftToRight,ubcRightToLeft,ubcArabicLetter] then
+        exit(curBidi);
+    end;
+    case u of
+      UNICODE_FIRST_STRONG_ISOLATE, UNICODE_LEFT_TO_RIGHT_ISOLATE, UNICODE_RIGHT_TO_LEFT_ISOLATE: inc(isolateNesting);
+    end;
+    if curBidi = ubcParagraphSeparator then isolateNesting:= 0;
+    inc(p,charLen);
+  end;
+  exit(ubcUnknown);
+end;
+
+function GetLastStrongBidiClassUTF8(const sUTF8: string): TUnicodeBidiClass;
+var
+  p,pEnd: PChar;
+  charLen: Integer;
+  u: Cardinal;
+  curBidi: TUnicodeBidiClass;
+  isolateNesting: integer;
+begin
+  if sUTF8 = '' then exit(ubcUnknown);
+  p := @sUTF8[1];
+  pEnd := p + length(sUTF8);
+  isolateNesting:= 0;
+  result := ubcUnknown;
+  while p < pEnd do
+  begin
+    charLen := UTF8CharacterLength(p);
+    if (charLen = 0) or (p+charLen > pEnd) then break;
+    u := UTF8CodepointToUnicode(p, charLen);
+    case u of
+      UNICODE_POP_DIRECTIONAL_ISOLATE: if isolateNesting > 0 then dec(isolateNesting);
+    end;
+    curBidi := GetUnicodeBidiClass(u);
+    if isolateNesting = 0 then
+    begin
+      if curBidi in[ubcLeftToRight,ubcRightToLeft,ubcArabicLetter] then
+        result := curBidi;
+    end;
+    case u of
+      UNICODE_FIRST_STRONG_ISOLATE, UNICODE_LEFT_TO_RIGHT_ISOLATE, UNICODE_RIGHT_TO_LEFT_ISOLATE: inc(isolateNesting);
+    end;
+    if curBidi = ubcParagraphSeparator then isolateNesting:= 0;
+    inc(p,charLen);
+  end;
+end;
+
+function IsRightToLeftUTF8(const sUTF8: string): boolean;
+begin
+  result := GetFirstStrongBidiClassUTF8(sUTF8) in[ubcRightToLeft,ubcArabicLetter];
+end;
+
+function IsZeroWidthUTF8(const sUTF8: string): boolean;
+var
+  p,pEnd: PChar;
+  charLen: Integer;
+  u: Cardinal;
+begin
+  if sUTF8 = '' then exit(true);
+  p := @sUTF8[1];
+  pEnd := p + length(sUTF8);
+  while p < pEnd do
+  begin
+    charLen := UTF8CharacterLength(p);
+    if (charLen = 0) or (p+charLen > pEnd) then break;
+    u := UTF8CodepointToUnicode(p, charLen);
+    if not IsZeroWidthUnicode(u) then exit(false);
+    inc(p,charLen);
+  end;
+  exit(true);
+end;
+
+function AddParagraphBidiUTF8(s: string; ARightToLeft: boolean): string;
+var
+  i,curParaStart: Integer;
+
+  procedure CheckParagraph;
+  var
+    para,newPara: string;
+    paraRTL: boolean;
+  begin
+    if i > curParaStart then
+    begin
+      para := copy(s,curParaStart,i-curParaStart);
+      paraRTL := GetFirstStrongBidiClassUTF8(para) in[ubcRightToLeft,ubcArabicLetter];
+      //detected paragraph does not match overall RTL option
+      if paraRTL <> ARightToLeft then
+      begin
+        if not paraRTL then
+          newPara := UnicodeCharToUTF8(UNICODE_LEFT_TO_RIGHT_MARK)+para+UnicodeCharToUTF8(UNICODE_LEFT_TO_RIGHT_MARK)
+        else
+          newPara := UnicodeCharToUTF8(UNICODE_RIGHT_TO_LEFT_MARK)+para+UnicodeCharToUTF8(UNICODE_RIGHT_TO_LEFT_MARK);
+        inc(i, length(newPara)-length(para));
+        delete(s, curParaStart, length(para));
+        insert(newPara, s, curParaStart);
+      end;
+    end;
+  end;
+
+var
+  charLen: integer;
+  u: Cardinal;
+
+begin
+  i := 1;
+  curParaStart := 1;
+  while i <= length(s) do
+  begin
+    charLen := UTF8CharacterLength(@s[i]);
+    u := UTF8CodepointToUnicode(@s[i], charLen);
+    if IsUnicodeParagraphSeparator(u) then
+    begin
+      CheckParagraph;
+      //skip end of line
+      inc(i);
+      //skip second CRLF
+      if ((u = 10) or (u = 13)) and (i <= length(s)) and (s[i] in[#13,#10]) and (s[i]<>s[i-1]) then inc(i);
+      curParaStart := i;
+    end else
+      inc(i);
+  end;
+  CheckParagraph;
+  result := s;
+end;
+
+type
+  TUnicodeArray = packed array of cardinal;
+  TIntegerArray = array of integer;
+
+procedure UTF8ToUnicode(const sUTF8: string; out u: TUnicodeArray; out ofs: TIntegerArray);
+var
+  index,len,charLen: integer;
+  p,pStart,pEnd: PChar;
+begin
+  if sUTF8 = '' then
+  begin
+    u := nil;
+    ofs := nil;
+  end
+  else
+  begin
+    pStart := @sUTF8[1];
+    pEnd := pStart + length(sUTF8);
+    p := pStart;
+    len := 0;
+    while p < pEnd do
+    begin
+      charLen := UTF8CharacterLength(p);
+      inc(len);
+      inc(p,charLen);
+    end;
+
+    setlength(u, len);
+    setlength(ofs, len);
+    p := pStart;
+    index := 0;
+    while p < pEnd do
+    begin
+      charLen := UTF8CharacterLength(p);
+      u[index] := UTF8CodepointToUnicode(p, charLen);
+      ofs[index] := p - pStart;
+      inc(index);
+      inc(p,charLen);
+    end;
+  end;
+end;
+
+function AnalyzeBidiUTF8(const sUTF8: string; ABaseDirection: cardinal): TBidiUTF8Array;
+var
+  u: TUnicodeArray;
+  ofs: TIntegerArray;
+  a: TUnicodeBidiArray;
+  i: Integer;
+begin
+  if sUTF8 = '' then
+    result := nil
+  else
+  begin
+    UTF8ToUnicode(sUTF8, u, ofs);
+    a := AnalyzeBidiUnicode(@u[0], length(u), ABaseDirection);
+    setlength(result, length(u));
+    for i := 0 to high(result) do
+    begin
+      result[i].Offset:= ofs[i];
+      result[i].BidiInfo := a[i];
+    end;
+  end;
+end;
+
+function AnalyzeBidiUTF8(const sUTF8: string; ARightToLeft: boolean): TBidiUTF8Array;
+begin
+  if ARightToLeft then
+    result := AnalyzeBidiUTF8(sUTF8, UNICODE_RIGHT_TO_LEFT_ISOLATE)
+  else
+    result := AnalyzeBidiUTF8(sUTF8, UNICODE_LEFT_TO_RIGHT_ISOLATE);
+end;
+
+function AnalyzeBidiUTF8(const sUTF8: string): TBidiUTF8Array;
+begin
+  result := AnalyzeBidiUTF8(sUTF8, UNICODE_FIRST_STRONG_ISOLATE)
+end;
+
+function GetUTF8DisplayOrder(const ABidi: TBidiUTF8Array): TUnicodeDisplayOrder;
+begin
+  if length(ABidi) = 0 then
+    result := nil
+  else
+    result := GetUnicodeDisplayOrder(@ABidi[0].BidiInfo, sizeof(TBidiUTF8Info), length(ABidi));
+end;
+
+function ContainsBidiIsolateOrFormattingUTF8(const sUTF8: string): boolean;
+var
+  p,pEnd: PChar;
+  charLen: Integer;
+  u: Cardinal;
+begin
+  if sUTF8 = '' then exit(false);
+  p := @sUTF8[1];
+  pEnd := p + length(sUTF8);
+  while p < pEnd do
+  begin
+    charLen := UTF8CharacterLength(p);
+    if (charLen = 0) or (p+charLen > pEnd) then break;
+    u := UTF8CodepointToUnicode(p, charLen);
+    case u of
+      UNICODE_LEFT_TO_RIGHT_ISOLATE, UNICODE_RIGHT_TO_LEFT_ISOLATE, UNICODE_FIRST_STRONG_ISOLATE,
+      UNICODE_LEFT_TO_RIGHT_EMBEDDING, UNICODE_RIGHT_TO_LEFT_EMBEDDING,
+      UNICODE_LEFT_TO_RIGHT_OVERRIDE, UNICODE_RIGHT_TO_LEFT_OVERRIDE: exit(true);
+    end;
+    inc(p,charLen);
+  end;
+  exit(false);
+end;
+
+function UTF8OverrideDirection(const sUTF8: string; ARightToLeft: boolean): string;
+begin
+  if ARightToLeft then
+    result := UnicodeCharToUTF8(UNICODE_RIGHT_TO_LEFT_OVERRIDE) + sUTF8 + UnicodeCharToUTF8(UNICODE_POP_DIRECTIONAL_FORMATTING)
+  else
+    result := UnicodeCharToUTF8(UNICODE_LEFT_TO_RIGHT_OVERRIDE) + sUTF8 + UnicodeCharToUTF8(UNICODE_POP_DIRECTIONAL_FORMATTING);
+end;
+
+function UTF8EmbedDirection(const sUTF8: string; ARightToLeft: boolean): string;
+begin
+  if ARightToLeft then
+    result := UnicodeCharToUTF8(UNICODE_RIGHT_TO_LEFT_EMBEDDING) + sUTF8 + UnicodeCharToUTF8(UNICODE_POP_DIRECTIONAL_FORMATTING)
+  else
+    result := UnicodeCharToUTF8(UNICODE_LEFT_TO_RIGHT_EMBEDDING) + sUTF8 + UnicodeCharToUTF8(UNICODE_POP_DIRECTIONAL_FORMATTING);
+end;
+
+//little endian stream functions
+function LEReadInt64(Stream: TStream): int64;
+begin
+  Result := 0;
+  stream.Read(Result, sizeof(Result));
+  Result := LEtoN(Result);
+end;
+
+procedure LEWriteInt64(Stream: TStream; AValue: int64);
+begin
+  AValue := NtoLE(AValue);
+  stream.Write(AValue, sizeof(AValue));
+end;
+
 function LEReadLongint(Stream: TStream): longint;
 begin
   Result := 0;
@@ -495,23 +870,6 @@ var
 begin
   ValueAsDWord := NtoLE(ValueAsDWord);
   stream.Write(ValueAsDWord, sizeof(AValue));
-end;
-
-function UTF8CharStart(UTF8Str: PChar; Len, CharIndex: PtrInt): PChar;
-var
-  CharLen: LongInt;
-begin
-  Result:=UTF8Str;
-  if Result<>nil then begin
-    while (CharIndex>0) and (Len>0) do begin
-      CharLen:=UTF8CharacterLength(Result);
-      dec(Len,CharLen);
-      dec(CharIndex);
-      inc(Result,CharLen);
-    end;
-    if (CharIndex<>0) or (Len<0) then
-      Result:=nil;
-  end;
 end;
 
 end.

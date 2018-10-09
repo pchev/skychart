@@ -115,7 +115,9 @@ type
      function GetDataPtr: PBGRAPixel; virtual; abstract;
      function GetNbPixels: integer; virtual; abstract;
      function CheckEmpty: boolean; virtual; abstract;
+     function CheckIsZero: boolean; virtual; abstract;
      function GetHasTransparentPixels: boolean; virtual; abstract;
+     function GetHasSemiTransparentPixels: boolean; virtual; abstract;
      function GetAverageColor: TColor; virtual; abstract;
      function GetAveragePixel: TBGRAPixel; virtual; abstract;
      procedure SetCanvasOpacity(AValue: byte); virtual; abstract;
@@ -154,6 +156,7 @@ type
      procedure InternalFillArcInRect(r: TRect; StartAngleRad,EndAngleRad: Single; AFillColor: TBGRAPixel; AOptions: TArcOptions; ATexture: IBGRAScanner = nil);
 
      function GetTextureGL: IUnknown; virtual;
+     function GetFontRightToLeftFor(AText: string): boolean;
 
   public
      {** User defined caption. It does not appear on the image }
@@ -221,10 +224,12 @@ type
 
      {** Returns True if the bitmap only contains transparent pixels or has a size of zero }
      property Empty: boolean Read CheckEmpty;
+     property IsZero: boolean Read CheckIsZero;
 
      {** Returns True if there are transparent or semitransparent pixels,
          and so if the image would be stored with an alpha channel }
      property HasTransparentPixels: boolean Read GetHasTransparentPixels;
+     property HasSemiTransparentPixels: boolean Read GetHasSemiTransparentPixels;
 
      {** Average color of the image }
      property AverageColor: TColor Read GetAverageColor;
@@ -301,6 +306,12 @@ type
      {** Specifies how the font is vertically aligned relative to the start coordinate.
          See [[BGRABitmap Miscellaneous types|miscellaneous types]]}
      FontVerticalAnchor: TFontVerticalAnchor;
+
+     {** Specifies the base direction of the text (cf Unicode). By default, it is
+         automatically determined by the first strongly oriented character.
+         You can specify another base direction here however it is not taken
+         into account by the LCL on Linux. }
+     FontBidiMode: TFontBidiMode;
 
      {** Specifies the height of the font in pixels without taking into account
          additional line spacing. A negative value means that it is the
@@ -527,12 +538,12 @@ type
      procedure FillPolyPerspectiveMapping(const points: array of TPointF; const pointsZ: array of single; texture: IBGRAScanner; texCoords: array of TPointF; TextureInterpolation: Boolean; zbuffer: psingle = nil); virtual; abstract; overload;
      procedure FillPolyPerspectiveMappingLightness(const points: array of TPointF; const pointsZ: array of single; texture: IBGRAScanner; texCoords: array of TPointF; lightnesses: array of word; TextureInterpolation: Boolean; zbuffer: psingle = nil); virtual; abstract; overload;
 
-     procedure FillPoly(const points: array of TPointF; c: TBGRAPixel; drawmode: TDrawMode); virtual; abstract;
-     procedure FillPoly(const points: array of TPointF; texture: IBGRAScanner; drawmode: TDrawMode); virtual; abstract;
-     procedure FillPolyAntialias(const points: array of TPointF; c: TBGRAPixel); virtual; abstract;
-     procedure FillPolyAntialias(const points: array of TPointF; texture: IBGRAScanner); virtual; abstract;
-     procedure ErasePoly(const points: array of TPointF; alpha: byte); virtual; abstract;
-     procedure ErasePolyAntialias(const points: array of TPointF; alpha: byte); virtual; abstract;
+     procedure FillPoly(const points: array of TPointF; c: TBGRAPixel; drawmode: TDrawMode; APixelCenteredCoordinates: boolean = true); virtual; abstract;
+     procedure FillPoly(const points: array of TPointF; texture: IBGRAScanner; drawmode: TDrawMode; APixelCenteredCoordinates: boolean = true); virtual; abstract;
+     procedure FillPolyAntialias(const points: array of TPointF; c: TBGRAPixel; APixelCenteredCoordinates: boolean = true); virtual; abstract;
+     procedure FillPolyAntialias(const points: array of TPointF; texture: IBGRAScanner; APixelCenteredCoordinates: boolean = true); virtual; abstract;
+     procedure ErasePoly(const points: array of TPointF; alpha: byte; APixelCenteredCoordinates: boolean = true); virtual; abstract;
+     procedure ErasePolyAntialias(const points: array of TPointF; alpha: byte; APixelCenteredCoordinates: boolean = true); virtual; abstract;
 
      procedure FillShape(shape: TBGRACustomFillInfo; c: TBGRAPixel; drawmode: TDrawMode); virtual; abstract;
      procedure FillShape(shape: TBGRACustomFillInfo; texture: IBGRAScanner; drawmode: TDrawMode); virtual; abstract;
@@ -611,8 +622,8 @@ type
      procedure EraseRectAntialias(x, y, x2, y2: single; alpha: byte; pixelCenteredCoordinates: boolean = true); virtual; abstract;
      procedure AlphaFillRect(x, y, x2, y2: integer; alpha: byte); virtual; abstract;
 
-     procedure TextOut(x, y: single; sUTF8: string; c: TBGRAPixel; align: TAlignment); virtual; abstract; overload;
-     procedure TextOut(x, y: single; sUTF8: string; texture: IBGRAScanner; align: TAlignment); virtual; abstract; overload;
+     procedure TextOut(x, y: single; sUTF8: string; c: TBGRAPixel; align: TAlignment; ARightToLeft: boolean); virtual; abstract; overload;
+     procedure TextOut(x, y: single; sUTF8: string; texture: IBGRAScanner; align: TAlignment; ARightToLeft: boolean); virtual; abstract; overload;
      procedure TextOutCurved(ACursor: TBGRACustomPathCursor; sUTF8: string; AColor: TBGRAPixel; AAlign: TAlignment; ALetterSpacing: single); virtual; abstract; overload;
      procedure TextOutCurved(ACursor: TBGRACustomPathCursor; sUTF8: string; ATexture: IBGRAScanner; AAlign: TAlignment; ALetterSpacing: single); virtual; abstract; overload;
      procedure TextOutCurved(APath: IBGRAPath; sUTF8: string; AColor: TBGRAPixel; AAlign: TAlignment; ALetterSpacing: single); virtual; overload;
@@ -621,13 +632,26 @@ type
      procedure TextOutAngle(x, y: single; orientationTenthDegCCW: integer; sUTF8: string; texture: IBGRAScanner; align: TAlignment); virtual; abstract;
      procedure TextRect(ARect: TRect; x, y: integer; sUTF8: string; style: TTextStyle; c: TBGRAPixel); virtual; abstract; overload;
      procedure TextRect(ARect: TRect; x, y: integer; sUTF8: string; style: TTextStyle; texture: IBGRAScanner); virtual; abstract; overload;
-     function TextSize(sUTF8: string): TSize; virtual; abstract;
+     procedure TextMultiline(x,y: single; sUTF8: string; c: TBGRAPixel; AAlign: TBidiTextAlignment = btaLeftJustify; AVertAlign: TTextLayout = tlTop; AParagraphSpacing: single = 0); overload;
+     procedure TextMultiline(x,y: single; sUTF8: string; ATexture: IBGRAScanner; AAlign: TBidiTextAlignment = btaLeftJustify; AVertAlign: TTextLayout = tlTop; AParagraphSpacing: single = 0); overload;
+     procedure TextMultiline(ALeft,ATop,AWidth: single; sUTF8: string; c: TBGRAPixel; AAlign: TBidiTextAlignment = btaNatural; AVertAlign: TTextLayout = tlTop; AParagraphSpacing: single = 0); virtual; abstract; overload;
+     procedure TextMultiline(ALeft,ATop,AWidth: single; sUTF8: string; ATexture: IBGRAScanner; AAlign: TBidiTextAlignment = btaNatural; AVertAlign: TTextLayout = tlTop; AParagraphSpacing: single = 0); virtual; abstract; overload;
+     function TextSize(sUTF8: string): TSize; virtual; abstract; overload;
+     function TextAffineBox(sUTF8: string): TAffineBox; virtual; abstract;
+     function TextSize(sUTF8: string; AMaxWidth: integer): TSize; virtual; abstract; overload;
+     function TextSize(sUTF8: string; AMaxWidth: integer; ARightToLeft: boolean): TSize; virtual; abstract; overload;
+     function TextFitInfo(sUTF8: string; AMaxWidth: integer): integer; virtual; abstract;
 
      { Draw the UTF8 encoded string, (x,y) being the top-left corner. The color c or texture is used to fill the text.
        The value of FontOrientation is taken into account, so that the text may be rotated. }
+     procedure TextOut(x, y: single; sUTF8: string; c: TBGRAPixel; align: TAlignment); virtual; overload;
+     procedure TextOut(x, y: single; sUTF8: string; texture: IBGRAScanner; align: TAlignment); virtual; overload;
      procedure TextOut(x, y: single; sUTF8: string; c: TBGRAPixel); virtual; overload;
+     procedure TextOut(x, y: single; sUTF8: string; c: TBGRAPixel; ARightToLeft: boolean); virtual; overload;
      procedure TextOut(x, y: single; sUTF8: string; c: TColor); virtual; overload;
+     procedure TextOut(x, y: single; sUTF8: string; c: TColor; ARightToLeft: boolean); virtual; overload;
      procedure TextOut(x, y: single; sUTF8: string; texture: IBGRAScanner); virtual; overload;
+     procedure TextOut(x, y: single; sUTF8: string; texture: IBGRAScanner; ARightToLeft: boolean); virtual; overload;
 
      { Draw the UTF8 encoded string in the rectangle ARect. Text is wrapped if necessary.
        The position depends on the specified horizontal alignment halign and vertical alignement valign.
@@ -701,7 +725,7 @@ type
      {Canvas drawing functions}
      procedure DataDrawTransparent(ACanvas: TCanvas; Rect: TRect;
        AData: Pointer; ALineOrder: TRawImageLineOrder; AWidth, AHeight: integer); virtual; abstract;
-     procedure DataDrawOpaque(ACanvas: TCanvas; Rect: TRect; AData: Pointer;
+     procedure DataDrawOpaque(ACanvas: TCanvas; ARect: TRect; AData: Pointer;
        ALineOrder: TRawImageLineOrder; AWidth, AHeight: integer); virtual; abstract;
      procedure GetImageFromCanvas(CanvasSource: TCanvas; x, y: integer); virtual; abstract;
      procedure Draw(ACanvas: TCanvas; x, y: integer; Opaque: boolean = True); virtual; abstract;
@@ -715,7 +739,8 @@ type
      {BGRA bitmap functions}
      procedure CrossFade(ARect: TRect; Source1, Source2: IBGRAScanner; AFadePosition: byte; mode: TDrawMode = dmDrawWithTransparency); virtual; abstract;
      procedure CrossFade(ARect: TRect; Source1, Source2: IBGRAScanner; AFadeMask: IBGRAScanner; mode: TDrawMode = dmDrawWithTransparency); virtual; abstract;
-     procedure PutImage(x, y: integer; Source: TBGRACustomBitmap; mode: TDrawMode; AOpacity: byte = 255); virtual; abstract;
+     procedure PutImage(x, y: integer; Source: TBGRACustomBitmap; mode: TDrawMode; AOpacity: byte = 255); virtual; abstract; overload;
+     procedure PutImage(x, y: integer; Source: TBitmap; mode: TDrawMode; AOpacity: byte = 255); overload;
      procedure StretchPutImage(ARect: TRect; Source: TBGRACustomBitmap; mode: TDrawMode; AOpacity: byte = 255); virtual; abstract;
      procedure PutImageSubpixel(x, y: single; Source: TBGRACustomBitmap; AOpacity: byte = 255);
      procedure PutImagePart(x,y: integer; Source: TBGRACustomBitmap; SourceRect: TRect; mode: TDrawMode; AOpacity: byte = 255);
@@ -725,6 +750,7 @@ type
      procedure PutImageAffine(Origin,HAxis,VAxis: TPointF; Source: TBGRACustomBitmap; AOutputBounds: TRect; AOpacity: Byte=255; ACorrectBlur: Boolean = false); overload;
      procedure PutImageAffine(AMatrix: TAffineMatrix; Source: TBGRACustomBitmap; AOpacity: Byte=255; ACorrectBlur: Boolean = false); overload;
      procedure PutImageAffine(AMatrix: TAffineMatrix; Source: TBGRACustomBitmap; AResampleFilter: TResampleFilter; AOpacity: Byte=255); overload;
+     procedure PutImageAffine(AMatrix: TAffineMatrix; Source: TBGRACustomBitmap; AResampleFilter: TResampleFilter; AMode: TDrawMode; AOpacity: Byte=255); overload;
      procedure PutImageAffine(AMatrix: TAffineMatrix; Source: TBGRACustomBitmap; AOutputBounds: TRect; AResampleFilter: TResampleFilter; AMode: TDrawMode; AOpacity: Byte=255); virtual; abstract; overload;
      procedure PutImageAffine(AMatrix: TAffineMatrix; Source: TBGRACustomBitmap; AOutputBounds: TRect; AOpacity: Byte=255; ACorrectBlur: Boolean = false); overload;
      function GetImageAffineBounds(Origin,HAxis,VAxis: TPointF; Source: TBGRACustomBitmap): TRect; overload;
@@ -770,6 +796,7 @@ type
      procedure ApplyMask(mask: TBGRACustomBitmap); overload;
      procedure ApplyMask(mask: TBGRACustomBitmap; ARect: TRect); overload;
      procedure ApplyMask(mask: TBGRACustomBitmap; ARect: TRect; AMaskRectTopLeft: TPoint); virtual; abstract; overload;
+     function GetMaskFromAlpha: TBGRACustomBitmap; virtual; abstract;
      function GetImageBounds(Channel: TChannel = cAlpha; ANothingValue: Byte = 0): TRect; virtual;
      function GetImageBounds(Channels: TChannels; ANothingValue: Byte = 0): TRect; virtual;
      function GetImageBoundsWithin(const ARect: TRect; Channel: TChannel = cAlpha; ANothingValue: Byte = 0): TRect; virtual;
@@ -1066,6 +1093,17 @@ end;
 function TBGRACustomBitmap.GetTextureGL: IUnknown;
 begin
   result := nil;
+end;
+
+function TBGRACustomBitmap.GetFontRightToLeftFor(AText: string): boolean;
+begin
+  case FontBidiMode of
+    fbmAuto: result := IsRightToLeftUTF8(AText);
+    fbmRightToLeft: result := true;
+  else
+    {fbmLeftToRight}
+    result := false;
+  end;
 end;
 
 procedure TBGRACustomBitmap.InternalArc(cx, cy, rx, ry: single;
@@ -1732,11 +1770,41 @@ begin
   cursor.free;
 end;
 
+procedure TBGRACustomBitmap.TextMultiline(x, y: single; sUTF8: string;
+  c: TBGRAPixel; AAlign: TBidiTextAlignment; AVertAlign: TTextLayout; AParagraphSpacing: single);
+begin
+  TextMultiline(x, y, EmptySingle, sUTF8, c, AAlign, AVertAlign, AParagraphSpacing);
+end;
+
+procedure TBGRACustomBitmap.TextMultiline(x, y: single; sUTF8: string;
+  ATexture: IBGRAScanner; AAlign: TBidiTextAlignment; AVertAlign: TTextLayout; AParagraphSpacing: single);
+begin
+  TextMultiline(x, y, EmptySingle, sUTF8, ATexture, AAlign, AVertAlign, AParagraphSpacing);
+end;
+
+procedure TBGRACustomBitmap.TextOut(x, y: single; sUTF8: string; c: TBGRAPixel;
+  align: TAlignment);
+begin
+  TextOut(x,y,sUTF8,c,align, GetFontRightToLeftFor(sUTF8));
+end;
+
+procedure TBGRACustomBitmap.TextOut(x, y: single; sUTF8: string;
+  texture: IBGRAScanner; align: TAlignment);
+begin
+  TextOut(x,y,sUTF8,texture,align, GetFontRightToLeftFor(sUTF8));
+end;
+
 { Draw the UTF8 encoded string, (x,y) being the top-left corner. The color c is used to fill the text.
   The value of FontOrientation is taken into account, so that the text may be rotated. }
 procedure TBGRACustomBitmap.TextOut(x, y: single; sUTF8: string; c: TBGRAPixel);
 begin
   TextOut(x, y, sUTF8, c, taLeftJustify);
+end;
+
+procedure TBGRACustomBitmap.TextOut(x, y: single; sUTF8: string; c: TBGRAPixel;
+  ARightToLeft: boolean);
+begin
+  TextOut(x, y, sUTF8, c, taLeftJustify, ARightToLeft);
 end;
 
 { Draw the UTF8 encoded string, (x,y) being the top-left corner. The color c is used to fill the text.
@@ -1746,12 +1814,24 @@ begin
   TextOut(x, y, sUTF8, ColorToBGRA(c));
 end;
 
+procedure TBGRACustomBitmap.TextOut(x, y: single; sUTF8: string; c: TColor;
+  ARightToLeft: boolean);
+begin
+  TextOut(x, y, sUTF8, ColorToBGRA(c), ARightToLeft);
+end;
+
 { Draw the UTF8 encoded string, (x,y) being the top-left corner. The texture is used to fill the text.
   The value of FontOrientation is taken into account, so that the text may be rotated. }
 procedure TBGRACustomBitmap.TextOut(x, y: single; sUTF8: string;
   texture: IBGRAScanner);
 begin
   TextOut(x, y, sUTF8, texture, taLeftJustify);
+end;
+
+procedure TBGRACustomBitmap.TextOut(x, y: single; sUTF8: string;
+  texture: IBGRAScanner; ARightToLeft: boolean);
+begin
+  TextOut(x, y, sUTF8, texture, taLeftJustify, ARightToLeft);
 end;
 
 { Draw the UTF8 encoded string in the rectangle ARect. Text is wrapped if necessary.
@@ -1770,6 +1850,8 @@ begin
   style.Wordbreak := true;
   style.ShowPrefix := false;
   style.Clipping := false;
+  style.RightToLeft := GetFontRightToLeftFor(sUTF8);
+  if FontBidiMode = fbmAuto then sUTF8 := AddParagraphBidiUTF8(sUTF8, style.RightToLeft);
   TextRect(ARect,ARect.Left,ARect.Top,sUTF8,style,c);
 end;
 
@@ -1789,6 +1871,8 @@ begin
   style.Wordbreak := true;
   style.ShowPrefix := false;
   style.Clipping := false;
+  style.RightToLeft := GetFontRightToLeftFor(sUTF8);
+  if FontBidiMode = fbmAuto then sUTF8 := AddParagraphBidiUTF8(sUTF8, style.RightToLeft);
   TextRect(ARect,ARect.Left,ARect.Top,sUTF8,style,texture);
 end;
 
@@ -1848,12 +1932,26 @@ procedure TBGRACustomBitmap.DrawPart(ARect: TRect; ACanvas: TCanvas; x,
 var
   partial: TBGRACustomBitmap;
 begin
-  partial := GetPart(ARect);
-  if partial <> nil then
+  if (ARect.Left = 0) and (ARect.Top = 0) and (ARect.Right = Width) and (ARect.Bottom = Height) then
+    Draw(ACanvas, x,y, Opaque)
+  else
   begin
-    partial.Draw(ACanvas, x, y, Opaque);
-    partial.Free;
+    partial := GetPart(ARect);
+    if partial <> nil then
+    begin
+      partial.Draw(ACanvas, x, y, Opaque);
+      partial.Free;
+    end;
   end;
+end;
+
+procedure TBGRACustomBitmap.PutImage(x, y: integer; Source: TBitmap;
+  mode: TDrawMode; AOpacity: byte);
+var bgra: TBGRACustomBitmap;
+begin
+  bgra := BGRABitmapFactory.create(Source);
+  PutImage(x,y, bgra, mode, AOpacity);
+  bgra.free;
 end;
 
 procedure TBGRACustomBitmap.PutImageSubpixel(x, y: single; Source: TBGRACustomBitmap; AOpacity: byte);
@@ -1915,11 +2013,13 @@ end;
 procedure TBGRACustomBitmap.PutImageAffine(Origin, HAxis, VAxis: TPointF;
   Source: TBGRACustomBitmap; AOutputBounds: TRect;
   AResampleFilter: TResampleFilter; AMode: TDrawMode; AOpacity: Byte);
-var m: TAffineMatrix;
+var m: TAffineMatrix; w,h: integer;
 begin
   if (Source = nil) or (Source.Width = 0) or (Source.Height = 0) or (AOpacity = 0) then exit;
-  m[1,1] := (HAxis.x-Origin.x)/(Source.Width-1); m[1,2] := (VAxis.x-Origin.x)/(Source.Height-1); m[1,3] := Origin.x;
-  m[2,1] := (HAxis.y-Origin.y)/(Source.Width-1); m[2,2] := (VAxis.y-Origin.y)/(Source.Height-1); m[2,3] := Origin.y;
+  if Source.Width < 2 then w := 2 else w := Source.Width; //avoid actual size of zero
+  if Source.Height < 2 then h := 2 else h := Source.Height;
+  m[1,1] := (HAxis.x-Origin.x)/(w-1); m[1,2] := (VAxis.x-Origin.x)/(h-1); m[1,3] := Origin.x;
+  m[2,1] := (HAxis.y-Origin.y)/(w-1); m[2,2] := (VAxis.y-Origin.y)/(h-1); m[2,3] := Origin.y;
   PutImageAffine(m,Source,AOutputBounds,AResampleFilter,AMode,AOpacity);
 end;
 
@@ -1945,8 +2045,16 @@ end;
 procedure TBGRACustomBitmap.PutImageAffine(AMatrix: TAffineMatrix;
   Source: TBGRACustomBitmap; AResampleFilter: TResampleFilter; AOpacity: Byte);
 begin
+  PutImageAffine(AMatrix, Source, AResampleFilter, dmDrawWithTransparency, AOpacity);
+end;
+
+procedure TBGRACustomBitmap.PutImageAffine(AMatrix: TAffineMatrix;
+  Source: TBGRACustomBitmap; AResampleFilter: TResampleFilter;
+  AMode: TDrawMode; AOpacity: Byte);
+begin
   if (Source = nil) or (Source.Width = 0) or (Source.Height = 0) or (AOpacity = 0) then exit;
-  PutImageAffine(AMatrix, Source, GetImageAffineBounds(AMatrix,Source),AResampleFilter,dmDrawWithTransparency,AOpacity);
+  PutImageAffine(AMatrix, Source, GetImageAffineBounds(AMatrix,Source),
+                 AResampleFilter,AMode,AOpacity);
 end;
 
 procedure TBGRACustomBitmap.PutImageAffine(AMatrix: TAffineMatrix;
@@ -1977,6 +2085,8 @@ begin
     result := EmptyRect
   else
   begin
+    if ASourceWidth < 2 then ASourceWidth := 2;   //avoid division by zero by supposing a pixel size of 2
+    if ASourceHeight < 2 then ASourceHeight := 2; //i.e. an actual size of 1 (cf pixel centered coordinates)
     m[1,1] := (HAxis.x-Origin.x)/(ASourceWidth-1); m[1,2] := (VAxis.x-Origin.x)/(ASourceHeight-1); m[1,3] := Origin.x;
     m[2,1] := (HAxis.y-Origin.y)/(ASourceWidth-1); m[2,2] := (VAxis.y-Origin.y)/(ASourceHeight-1); m[2,3] := Origin.y;
     result := GetImageAffineBounds(m, ASourceBounds, AClipOutput);
@@ -2060,8 +2170,10 @@ begin
   cosa := cos(-angle*Pi/180);
   sina := -sin(-angle*Pi/180);
   Origin := Coord(0,0);
-  HAxis := Coord(w,0);
-  VAxis := Coord(0,h);
+  if w < 2 then w := 2; //when pixel size is 1, actual size is zero, so avoid that
+  if h < 2 then h := 2;
+  HAxis := Coord(w-1,0);
+  VAxis := Coord(0,h-1);
 end;
 
 function TBGRACustomBitmap.GetImageAngleBounds(x, y: single;

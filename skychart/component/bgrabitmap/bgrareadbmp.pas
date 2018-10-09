@@ -835,7 +835,7 @@ begin
         PSrc := LineBuf;
         for Column:=0 to img.Width-1 do
         begin
-          PDest^:= BGRA((PSrc)^,(PSrc+1)^,(PSrc+2)^,(PSrc+3)^);
+          PDest^:= BGRA((PSrc+2)^,(PSrc+1)^,(PSrc)^,(PSrc+3)^);
           if PDest^.alpha <> 0 then FHasAlphaValues:= true;
           inc(PDest);
           Inc(PSrc,4);
@@ -857,9 +857,9 @@ begin
 end;
 
 procedure TBGRAReaderBMP.ReadMaskLine(Row: Integer; Stream: TStream);
-var i: integer;
 begin
-  Stream.ReadBuffer(FMaskData^, FMaskDataSize);
+  FillChar(FMaskData^, FMaskDataSize, 0);
+  Stream.Read(FMaskData^, FMaskDataSize);
 end;
 
 procedure TBGRAReaderBMP.SkipMaskLine(Row: Integer; Stream: TStream);

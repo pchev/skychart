@@ -95,7 +95,7 @@ begin
   begin
     str.Position:= oldPos;
     InternalReadCompressableBitmap(str,Img);
-    if Str.Position < Str.Size then InternalReadLayers(Str,Img);
+    if (Str.Position < Str.Size) and (FCaption = 'Preview') then InternalReadLayers(Str,Img);
   end;
 end;
 
@@ -168,7 +168,9 @@ begin
   h := LEtoN(str.ReadDWord);
   nameLen := LEtoN(str.ReadDWord);
   setlength(ACaption, nameLen);
+  {$PUSH}{$RANGECHECKS OFF}
   str.ReadBuffer(ACaption[1], nameLen);
+  {$POP}
   channelFlags := str.ReadByte;
   NbPixels := w*h;
 

@@ -9,6 +9,21 @@ uses
   BGRACanvas2D, BGRASVGType;
 
 type
+  TCSSUnit = BGRAUnits.TCSSUnit;
+
+const
+  cuCustom = BGRAUnits.cuCustom;
+  cuPixel = BGRAUnits.cuPixel;
+  cuCentimeter = BGRAUnits.cuCentimeter;
+  cuMillimeter = BGRAUnits.cuMillimeter;
+  cuInch = BGRAUnits.cuInch;
+  cuPica = BGRAUnits.cuPica;
+  cuPoint = BGRAUnits.cuPoint;
+  cuFontEmHeight = BGRAUnits.cuFontEmHeight;
+  cuFontXHeight = BGRAUnits.cuFontXHeight;
+  cuPercent = BGRAUnits.cuPercent;
+
+type
   TSVGViewBox = record
     min, size: TPointF;
   end;
@@ -83,6 +98,8 @@ type
     function GetViewBox: TSVGViewBox;
     function GetViewBox(AUnit: TCSSUnit): TSVGViewBox;
     procedure GetViewBoxIndirect(AUnit: TCSSUnit; out AViewBox: TSVGViewBox);
+    function GetViewMin(AUnit: TCSSUnit): TPointF;
+    function GetViewSize(AUnit: TCSSUnit): TPointF;
     function GetWidth: TFloatWithCSSUnit;
     function GetWidthAsCm: single;
     function GetWidthAsInch: single;
@@ -143,6 +160,8 @@ type
     property Zoomable: boolean read GetZoomable write SetZoomable;
     property ViewBox: TSVGViewBox read GetViewBox write SetViewBox;
     property ViewBoxInUnit[AUnit: TCSSUnit]: TSVGViewBox read GetViewBox;
+    property ViewMinInUnit[AUnit: TCSSUnit]: TPointF read GetViewMin;
+    property ViewSizeInUnit[AUnit: TCSSUnit]: TPointF read GetViewSize;
     property Attribute[AName: string]: string read GetAttribute write SetAttribute;
     property AttributeDef[AName: string; ADefault: string]: string read GetAttribute;
     property DefaultDpi: single read FDefaultDpi write SetDefaultDpi; //this is not saved in the SVG file
@@ -427,7 +446,7 @@ end;
 
 function TBGRASVG.GetHeight: TFloatWithCSSUnit;
 begin
-  result := TCSSUnitConverter.parseValue(Attribute['height'],FloatWithCSSUnit(ViewBox.size.y,cuCustom));
+  result := TCSSUnitConverter.parseValue(Attribute['height'],FloatWithCSSUnit(FUnits.ViewBox.size.y,cuCustom));
 end;
 
 function TBGRASVG.GetHeightAsCm: single;
@@ -475,9 +494,25 @@ begin
   end;
 end;
 
+function TBGRASVG.GetViewMin(AUnit: TCSSUnit): TPointF;
+var
+  vb: TSVGViewBox;
+begin
+  GetViewBoxIndirect(AUnit,vb);
+  result:= vb.min;
+end;
+
+function TBGRASVG.GetViewSize(AUnit: TCSSUnit): TPointF;
+var
+  vb: TSVGViewBox;
+begin
+  GetViewBoxIndirect(AUnit,vb);
+  result:= vb.size;
+end;
+
 function TBGRASVG.GetWidth: TFloatWithCSSUnit;
 begin
-  result := TCSSUnitConverter.parseValue(Attribute['width'],FloatWithCSSUnit(ViewBox.size.x,cuCustom));
+  result := TCSSUnitConverter.parseValue(Attribute['width'],FloatWithCSSUnit(FUnits.ViewBox.size.x,cuCustom));
 end;
 
 function TBGRASVG.GetWidthAsCm: single;
@@ -760,8 +795,6 @@ begin
   ACanvas2d.save;
   ACanvas2d.translate(x,y);
   ACanvas2d.scale(destDpi.x/Units.DpiX,destDpi.y/Units.DpiY);
-  ACanvas2d.strokeResetTransform;
-  ACanvas2d.strokeScale(destDpi.x/Units.DpiX,destDpi.y/Units.DpiY);
   with GetViewBoxAlignment(AHorizAlign,AVertAlign) do ACanvas2d.translate(x,y);
   Draw(ACanvas2d, 0,0, cuPixel);
   ACanvas2d.restore;
@@ -774,6 +807,7 @@ begin
   acanvas2d.linearBlend := true;
   ACanvas2d.save;
   ACanvas2d.translate(x,y);
+  ACanvas2d.strokeMatrix := ACanvas2d.matrix;
   Content.Draw(ACanvas2d,AUnit);
   ACanvas2d.restore;
   ACanvas2d.linearBlend := prevLinearBlend;
@@ -789,8 +823,6 @@ begin
   ACanvas2d.save;
   ACanvas2d.translate(x,y);
   ACanvas2d.scale(destDpi.x/Units.DpiX,destDpi.y/Units.DpiY);
-  ACanvas2d.strokeResetTransform;
-  ACanvas2d.strokeScale(destDpi.x/Units.DpiX,destDpi.y/Units.DpiY);
   Draw(ACanvas2d, 0,0, cuPixel);
   ACanvas2d.restore;
 end;
@@ -812,15 +844,9 @@ begin
   begin
     ACanvas2d.translate(-min.x,-min.y);
     if size.x <> 0 then
-    begin
       ACanvas2d.scale(w/size.x,1);
-      ACanvas2d.strokeScale(w/size.x,1);
-    end;
     if size.y <> 0 then
-    begin
       ACanvas2d.scale(1,h/size.y);
-      ACanvas2d.strokeScale(1,h/size.y);
-    end;
   end;
   Draw(ACanvas2d, 0,0);
   ACanvas2d.restore;

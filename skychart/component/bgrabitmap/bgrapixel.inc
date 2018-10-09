@@ -252,6 +252,9 @@ type
 {$DEFINE INCLUDE_INTERFACE}
 {$i basiccolorspace.inc}
 
+{$DEFINE INCLUDE_INTERFACE}
+{$i extendedcolorspace.inc}
+
 {$ENDIF}
 
 {$IFDEF INCLUDE_IMPLEMENTATION}
@@ -259,6 +262,9 @@ type
 
 {$DEFINE INCLUDE_IMPLEMENTATION}
 {$i basiccolorspace.inc}
+
+{$DEFINE INCLUDE_IMPLEMENTATION}
+{$i extendedcolorspace.inc}
 
 function StrToBlendOperation(str: string): TBlendOperation;
 var op: TBlendOperation;
@@ -418,7 +424,10 @@ function CombineLightness(lightness1,lightness2: Int32or64): Int32or64;
   end;
 {$ELSE}
 begin
-  result := int64(lightness1)*lightness2 shr 15;
+  if (lightness1 < 0) xor (lightness2 < 0) then
+    result := -(int64(-lightness1)*lightness2 shr 15)
+  else
+    result := int64(lightness1)*lightness2 shr 15;
 end;
 {$ENDIF}
 
@@ -573,18 +582,18 @@ begin
   end;
 end;
 
-{ Convert a TColor value to a TBGRAPixel value. Note that
-  you need to call ColorToRGB first if you use a system
-  color identifier like clWindow. }
+{ Convert a TColor value to a TBGRAPixel value }
 {$PUSH}{$R-}
 function ColorToBGRA(color: TColor): TBGRAPixel; overload;
 begin
+  if (color < 0) or (color > $ffffff) then color := ColorToRGB(color);
   RedGreenBlue(color, Result.red,Result.green,Result.blue);
   Result.alpha := 255;
 end;
 
 function ColorToBGRA(color: TColor; opacity: byte): TBGRAPixel; overload;
 begin
+  if (color < 0) or (color > $ffffff) then color := ColorToRGB(color);
   RedGreenBlue(color, Result.red,Result.green,Result.blue);
   Result.alpha := opacity;
 end;
@@ -710,4 +719,7 @@ end;
 {$IFDEF INCLUDE_INIT}
 {$UNDEF INCLUDE_INIT}
   BGRASetGamma();
+
+  {$DEFINE INCLUDE_INITIALIZATION}
+  {$i extendedcolorspace.inc}
 {$ENDIF}

@@ -67,12 +67,14 @@ type
     function GetFontPixelMetric: TFontPixelMetric; override;
     procedure TextOutAngle(ADest: TBGRACustomBitmap; x, y: single; orientation: integer; s: string; c: TBGRAPixel; align: TAlignment); override;
     procedure TextOutAngle(ADest: TBGRACustomBitmap; x, y: single; orientation: integer; s: string; texture: IBGRAScanner; align: TAlignment); override;
-    procedure TextOut(ADest: TBGRACustomBitmap; x, y: single; s: string; texture: IBGRAScanner; align: TAlignment); override;
-    procedure TextOut(ADest: TBGRACustomBitmap; x, y: single; s: string; c: TBGRAPixel; align: TAlignment); override;
+    procedure TextOut(ADest: TBGRACustomBitmap; x, y: single; s: string; texture: IBGRAScanner; align: TAlignment); override; overload;
+    procedure TextOut(ADest: TBGRACustomBitmap; x, y: single; s: string; c: TBGRAPixel; align: TAlignment); override; overload;
     procedure TextRect(ADest: TBGRACustomBitmap; ARect: TRect; x, y: integer; s: string; style: TTextStyle; c: TBGRAPixel); override;
     procedure TextRect(ADest: TBGRACustomBitmap; ARect: TRect; x, y: integer; s: string; style: TTextStyle; texture: IBGRAScanner); override;
     procedure CopyTextPathTo(ADest: IBGRAPath; x, y: single; s: string; align: TAlignment); override;
     function TextSize(s: string): TSize; override;
+    function TextSize(sUTF8: string; AMaxWidth: integer; {%H-}ARightToLeft: boolean): TSize; override;
+    function TextFitInfo(sUTF8: string; AMaxWidth: integer): integer; override;
     destructor Destroy; override;
   end;
 
@@ -189,7 +191,7 @@ type
 
 implementation
 
-uses BGRAUTF8;
+uses BGRAUTF8, math;
 
 function VectorizeMonochrome(ASource: TBGRACustomBitmap; zoom: single; PixelCenteredCoordinates: boolean): ArrayOfTPointF;
 const unitShift = 6;
@@ -1233,6 +1235,37 @@ begin
   result.cy := round(sizeF.y);
 end;
 
+function TBGRAVectorizedFontRenderer.TextSize(sUTF8: string;
+  AMaxWidth: integer; ARightToLeft: boolean): TSize;
+var
+  remains: string;
+  w,h,totalH: single;
+begin
+  UpdateFont;
+
+  result.cx := 0;
+  totalH := 0;
+  h := FVectorizedFont.FullHeight;
+  repeat
+    FVectorizedFont.SplitText(sUTF8, AMaxWidth, remains);
+    w := FVectorizedFont.GetTextSize(sUTF8).x;
+    if round(w)>result.cx then result.cx := round(w);
+    totalH += h;
+    sUTF8 := remains;
+  until remains = '';
+  result.cy := ceil(totalH);
+end;
+
+function TBGRAVectorizedFontRenderer.TextFitInfo(sUTF8: string;
+  AMaxWidth: integer): integer;
+var
+  remains: string;
+begin
+  UpdateFont;
+  FVectorizedFont.SplitText(sUTF8, AMaxWidth, remains);
+  result := length(sUTF8);
+end;
+
 destructor TBGRAVectorizedFontRenderer.Destroy;
 var i: integer;
 begin
@@ -1350,7 +1383,7 @@ begin
       OldHeight := FFont.Height;
       FFont.Height := FontEmHeightSign * 100;
       lEmHeight := BGRATextSize(FFont, fqSystem, 'Hg', 1).cy;
-      FFont.Height := FontFullHeightSign * 100;
+      FFont.Height := FixLCLFontFullHeight(FFont.Name, FontFullHeightSign * 100);
       lFullHeight := BGRATextSize(FFont, fqSystem, 'Hg', 1).cy;
       if lEmHeight = 0 then
         FFontEmHeightRatio := 1
@@ -1391,7 +1424,8 @@ begin
     ClearGlyphs;
     FFont.Name := FName;
     FFont.Style := FStyle;
-    FFont.Height := FontFullHeightSign * FResolution;
+    FFont.Height := FixLCLFontFullHeight(FFont.Name, FontFullHeightSign * FResolution);
+    FFont.Quality := fqNonAntialiased;
     FFontEmHeightRatio := 1;
     FFontEmHeightRatioComputed := false;
     fillchar(FFontPixelMetric,sizeof(FFontPixelMetric),0);
@@ -1950,6 +1984,7 @@ end;
 function TBGRAVectorizedFont.GetGlyph(AIdentifier: string): TBGRAGlyph;
 var size: TSize;
   g: TBGRAPolygonalGlyph;
+  i: Integer;
 begin
   Result:=inherited GetGlyph(AIdentifier);
   if (result = nil) and (FResolution > 0) and (FFont <> nil) then
@@ -1959,7 +1994,6 @@ begin
     FBuffer.SetSize(size.cx+size.cy,size.cy);
     FBuffer.Fill(BGRAWhite);
     FBuffer.Canvas.Font := FFont;
-    FBuffer.Canvas.Font.Quality := fqNonAntialiased;
     FBuffer.Canvas.Font.Color := clBlack;
     FBuffer.Canvas.TextOut(size.cy div 2,0,AIdentifier);
     g.SetPoints(VectorizeMonochrome(FBuffer,1/FResolution,False));

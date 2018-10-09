@@ -551,6 +551,7 @@ var x, rx : integer;
 begin
   UsingBitGroup := 0;
   DataIndex := 0;
+  {$PUSH}{$RANGECHECKS OFF} //because PByteArray is limited to 32767
   if (UsingBitGroup = 0) and (Header.BitDepth <> 16) then
     case ByteWidth of
       1: if BitsUsed[0] = $ff then
@@ -614,6 +615,7 @@ begin
            exit;
          end;
     end;
+  {$POP}
 
   X := StartX;
   for rx := 0 to ScanlineLength[CurrentPass]-1 do
@@ -1096,7 +1098,7 @@ procedure TBGRAReaderPNG.DoDecompress;
     dec(Count, Count4 shl 2);
     while Count4 > 0 do
     begin
-      {$push}{$r-}
+      {$push}{$r-}{$q-}
       PDWord(p)^ := (((PDWord(pPrev)^ and $00FF00FF) + (PDWord(p)^ and $00FF00FF)) and $00FF00FF)
         or (((PDWord(pPrev)^ and $FF00FF00) + (PDWord(p)^ and $FF00FF00)) and $FF00FF00);
       {$pop}

@@ -485,6 +485,7 @@ end;
 
 function TBGLCustomFrameBuffer.MakeTextureAndFree: IBGLTexture;
 begin
+  result := nil;
   raise exception.create('Not implemented');
 end;
 
@@ -649,11 +650,13 @@ end;
 function TBGLCustomTexture.FilterBlurMotion(ARadius: single; ABlurType: TRadialBlurType;
   ADirection: TPointF): IBGLTexture;
 begin
+  result := nil;
   raise exception.Create('Not implemented');
 end;
 
 function TBGLCustomTexture.FilterBlurRadial(ARadius: single; ABlurType: TRadialBlurType): IBGLTexture;
 begin
+  result := nil;
   raise exception.Create('Not implemented');
 end;
 
@@ -1068,13 +1071,17 @@ end;
 procedure TBGLCustomTexture.DrawAffine(const Origin, HAxis, VAxis: TPointF;
   AAlpha: byte);
 begin
+  {$PUSH}{$OPTIMIZATION OFF}
   DoDrawAffine(Origin,HAxis,VAxis, BGRA(255,255,255,AAlpha));
+  {$POP}
 end;
 
 procedure TBGLCustomTexture.DrawAffine(const Origin, HAxis, VAxis: TPointF;
   AColor: TBGRAPixel);
 begin
+  {$PUSH}{$OPTIMIZATION OFF}
   DoDrawAffine(Origin,HAxis,VAxis, AColor);
+  {$POP}
 end;
 
 procedure TBGLCustomTexture.DrawAffine(x, y: single;
