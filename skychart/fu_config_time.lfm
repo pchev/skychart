@@ -534,14 +534,15 @@ object f_config_time: Tf_config_time
           object d_yearEdit: TLongEdit
             Left = 56
             Height = 29
-            Hint = '0..200000'
+            Hint = '1..200000'
             Top = 22
             Width = 68
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
             OnChange = DateEditChange
-            Value = 0
+            Value = 1
+            MinValue = 1
             MaxValue = 200000
           end
           object UTLabel: TLabel
