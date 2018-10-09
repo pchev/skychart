@@ -29,7 +29,7 @@ uses
   u_help, u_translation, u_constant, u_util, u_projection, cu_tz, cu_radec,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math,
   StdCtrls, CheckLst, Buttons, ExtCtrls, enhedits, ComCtrls, LResources,
-  ButtonPanel, jdcalendar, LazHelpHTML, EditBtn;
+  ButtonPanel, jdcalendar, LazHelpHTML, EditBtn, Spin;
 
 type
 
@@ -46,6 +46,7 @@ type
     Button9: TButton;
     CheckBox3: TCheckBox;
     dt_ut: TFloatEdit;
+    JDEdit: TFloatSpinEdit;
     Label12: TLabel;
     GregY: TLongEdit;
     GregM: TLongEdit;
@@ -91,7 +92,6 @@ type
     d_dayEdit: TEdit;
     t_min: TMouseUpDown;
     t_hourEdit: TEdit;
-    JDEdit: TFloatEdit;
     Label1: TLabel;
     tzLabel: TLabel;
     MainPanel: TPanel;
@@ -406,7 +406,7 @@ var
   h, err: double;
   s: string;
 begin
-  djd(JDEdit.Value, y, m, d, h);
+  djd(TruncDecimal(JDEdit.Value,5), y, m, d, h);
   UTlabel.Caption := date2str(y, m, d) + blank + timtostr(h) + blank + rsUT;
   h := csc.tz.SecondsOffset / 3600;
   if h = 0 then
@@ -607,7 +607,7 @@ end;
 
 procedure Tf_config_time.BitBtn1Click(Sender: TObject);
 begin
-  JDCalendarDialog1.JD := JDEdit.Value;
+  JDCalendarDialog1.JD := TruncDecimal(JDEdit.Value,5);
   if JDCalendarDialog1.Execute then
   begin
     JDEdit.Value := JDCalendarDialog1.JD + csc.CurTime / 24 - csc.timezone / 24;
@@ -618,15 +618,17 @@ begin
 end;
 
 procedure Tf_config_time.JDEditChange(Sender: TObject);
+var newjd: double;
 begin
   if LockChange or LockJD then
     exit;
   try
     LockChange := True;
     LockJD := True;
-    csc.tz.JD := JDEdit.Value;
+    newjd := TruncDecimal(JDEdit.Value,5);
+    csc.tz.JD := newjd;
     csc.TimeZone := csc.tz.SecondsOffset / 3600;
-    Djd(JDEdit.Value + csc.timezone / 24, csc.curyear, csc.curmonth, csc.curday, csc.CurTime);
+    Djd(newjd + csc.timezone / 24, csc.curyear, csc.curmonth, csc.curday, csc.CurTime);
     ShowTime;
     ShowUTTime;
     Application.ProcessMessages;
