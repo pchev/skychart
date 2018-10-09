@@ -11455,7 +11455,7 @@ begin
   ver := cdcversion + '-' + RevisionStr;
   if cdcbeta then
   begin
-    url := 'http://www.ap-i.net/pub/skychart/beta.txt';
+    url := 'https://www.ap-i.net/pub/skychart/beta.txt';
     fn := slash(TempDir) + 'beta.txt';
     if QuickDownload(url, fn, False) then
     begin
@@ -11468,7 +11468,7 @@ begin
         if MessageDlg(rsNewBetaVersi, Format(rsANewVersionO, [newbeta, crlf]),
           mtInformation, mbYesNo, 0) = mrYes then
         begin
-          ExecuteFile('http://sourceforge.net/projects/skychart/files/0-beta/');
+          ExecuteFile('https://sourceforge.net/projects/skychart/files/0-beta/');
         end;
       end
       else
@@ -11479,7 +11479,7 @@ begin
   end
   else
   begin
-    url := 'http://www.ap-i.net/pub/skychart/version.txt';
+    url := 'https://www.ap-i.net/pub/skychart/version.txt';
     fn := slash(TempDir) + 'version.txt';
     if QuickDownload(url, fn, False) then
     begin
@@ -11492,7 +11492,7 @@ begin
         if MessageDlg(rsNewVersionAv, Format(rsANewVersionO, [newver, crlf]),
           mtInformation, mbYesNo, 0) = mrYes then
         begin
-          ExecuteFile('http://www.ap-i.net/skychart/en/download');
+          ExecuteFile('https://www.ap-i.net/skychart/en/download');
         end;
       end
       else
