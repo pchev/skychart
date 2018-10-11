@@ -66,7 +66,6 @@ if [[ $make_linuxarm ]]; then
   cd $builddir
   mkdir debian/skychartarm/usr/
   mv bin debian/skychartarm/usr/
-  mv lib debian/skychartarm/usr/
   mv share debian/skychartarm/usr/
   cd debian
   sed -i "/Version:/ s/3/$version-$currentrev/" skychartarm/DEBIAN/control
