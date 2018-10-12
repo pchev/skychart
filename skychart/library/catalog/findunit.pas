@@ -684,8 +684,8 @@ Tixrec = packed record n: smallint;
          end;
 var
     reclen,n : integer;
-    imin,imax,i: Int64;
-    num,pnum,idx,buf : string;
+    imin,imax,i,ii: Int64;
+    num,idx,buf : string;
     fx : file;
     lin : Tixrec;
 begin
@@ -702,16 +702,18 @@ Reset(fx,1);
 imin:=0;
 imax := filesize(fx) div reclen;
 num:='';
+ii:=-1;
 repeat
-  pnum:=num;
   i:=(imin + ((imax-imin) div 2))*reclen;
+  if i=ii then break;
+  ii:=i;
   seek(fx,i);
   blockread(fx,lin,reclen,n);
   num:=trim(copy(lin.key,1,keylen));
   if num>buf then imax:=i div reclen
             else imin:=i div reclen;
   if num=buf then ok:=true;
-until ok or (pnum=num);
+until ok;
 CloseFile(fx);
 if ok then begin
    OpenGCatFileNum(lin.n,ok);
