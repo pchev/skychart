@@ -781,6 +781,7 @@ var
   saveantialias: boolean;
   i: integer;
   sra, sde, mag: double;
+  step: string;
 {$ifdef showtime}
   starttime: TDateTime;
 {$endif}
@@ -797,6 +798,8 @@ begin
   if lock_refresh then
     exit;
   try
+  try
+    step:='init';
     if VerboseMsg then
       WriteTrace('Chart ' + sc.cfgsc.chartname + ': Get refresh lock');
     lock_refresh := True;
@@ -805,6 +808,7 @@ begin
     if lastquick then
       sc.plot.cfgplot.AntiAlias := False;
     zoomstep := 0;
+    step:='movecam';
     if (not frommovecam) and (movecam or moveguide) then
     begin
       movecam := False;
@@ -815,6 +819,7 @@ begin
         sc.cfgsc.rectangle[i, 5] := 0;
     end;
     frommovecam := False;
+    step:='init plot';
     identlabel.Visible := False;
     Image1.Width := clientwidth;
     Image1.Height := clientheight;
@@ -828,10 +833,12 @@ begin
       sc.plot.cfgplot.bgcolor := sc.plot.cfgplot.skycolor[0];
     if VerboseMsg then
       WriteTrace('Chart ' + sc.cfgsc.chartname + ': Draw map');
+    step:='Sun image';
     if sc.plot.cfgplot.plaplot = 2 then
       GetSunImage;
     if sc.cfgsc.ShowBackgroundImage then
       sc.cfgsc.ShowImageList := True;
+    step:='Object list';
     if sc.cfgsc.quick then
     begin
       sc.ObjectListLabels := f_obslist.EmptyObjLabels;
@@ -842,7 +849,9 @@ begin
       sc.ObjectListLabels := f_obslist.ObjLabels;
       sc.UpdObsList := True;
     end;
+    step:='chart';
     sc.Refresh(newtime);
+    step:='finalize';
     if VerboseMsg then
       WriteTrace('Chart ' + sc.cfgsc.chartname + ': Draw map end');
     sc.plot.cfgplot.color[0] := savebg;
@@ -858,6 +867,7 @@ begin
       if sc.cfgsc.FindOk and (not cmain.SimpleDetail) and
         (sc.cfgsc.FindName = sc.cfgsc.TrackName) then
       begin
+        step:='Ident label';
         case sc.cfgsc.FindType of
           ftPla:
           begin
@@ -938,6 +948,9 @@ begin
   SetScrollBar(not newtime);
   if VerboseMsg then
     WriteTrace('Chart ' + sc.cfgsc.chartname + ': Refresh end');
+  except
+    on E: Exception do WriteTrace('Refresh, '+step+' error: ' + E.Message);
+  end;
 end;
 
 procedure Tf_chart.chart_UndoExecute(Sender: TObject);

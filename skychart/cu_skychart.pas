@@ -288,7 +288,10 @@ var
   savebg: Tcolor;
   savfilter, saveautofilter, savfillmw, scopemark, savApparentPos: boolean;
   saveplaplot: integer;
+  step: string;
 begin
+  try
+  step:='Init';
   if VerboseMsg then
   begin
     if cfgsc.quick and FPlot.cfgplot.red_move then
@@ -311,9 +314,13 @@ begin
     if VerboseMsg then
       WriteTrace('SkyChart ' + cfgsc.chartname + ': Init');
     cfgsc.msg := '';
+    step:='Init observatory';
     InitObservatory;
+    step:='Init time';
     InitTime(newtime);
+    step:='Init chart';
     InitChart;
+    step:='Init coordinates';
     InitCoordinates; // now include ComputePlanet
     if cfgsc.quick and FPlot.cfgplot.red_move then
     begin
@@ -322,21 +329,25 @@ begin
     end
     else
     begin
+      step:='Init labels';
       InitLabels;
     end;
+    step:='Init color';
     InitColor; // after ComputePlanet
     // draw objects
     HorizonDone := False;
     if VerboseMsg then
       WriteTrace('SkyChart ' + cfgsc.chartname + ': Open catalogs');
+    step:='Open catalog';
     Fcatalog.OpenCat(cfgsc);
+    step:='Init catalog';
     InitCatalog;
     if VerboseMsg then
       WriteTrace('SkyChart ' + cfgsc.chartname + ': begin drawing');
     // first the extended object
     if not (cfgsc.quick and FPlot.cfgplot.red_move) then
     begin
-
+      step:='draw images 1';
       // the images first on canvas that not support the transparency
       if cfgsc.PlotImageFirst then
       begin
@@ -353,7 +364,9 @@ begin
         DrawHorizon;
     end;
     // the DSO
+    step:='draw dso';
     DrawDeepSkyObject;
+    step:='draw lines 1';
     if not (cfgsc.quick and FPlot.cfgplot.red_move) then
     begin
       if cfgsc.showline then
@@ -378,6 +391,7 @@ begin
       end;
     end;
     // the stars
+    step:='draw stars';
     if cfgsc.showstars then
       DrawStars;
     if not (cfgsc.quick and FPlot.cfgplot.red_move) then
@@ -388,6 +402,7 @@ begin
         DrawVarStars;
     end;
     // the planets
+    step:='draw planets';
     if not (cfgsc.quick and FPlot.cfgplot.red_move) then
     begin
       DrawAsteroidMark;
@@ -397,6 +412,7 @@ begin
     end;
     if cfgsc.ShowPlanetValid then
       DrawPlanet;
+    step:='draw lines 2';
     if (cfgsc.ShowPlanet and FPlot.cfgplot.TransparentPlanet and
       (FPlot.cfgplot.plaplot = 1)) then
     begin
@@ -413,40 +429,50 @@ begin
     // Finder mark
     DrawCircle;
     // Artificials satellites
+    step:='draw satellites';
     if cfgsc.ShowArtSat then
       DrawArtSat;
     // BG image
+    step:='draw image list';
     if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and (not cfgsc.PlotImageFirst) and
       cfgsc.ShowImageList then
       DrawImagesList;
 
     // the labels
+    step:='draw label';
     if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.showlabelall then
       DrawLabels;
 
     // the horizon line if not transparent
+    step:='draw horizon';
     if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and (not HorizonDone) then
       DrawHorizon;
 
     // the coordinates grid labels
+    step:='draw grid';
     if cfgsc.ShowGridNum then
       DrawGrid(True);
 
     // Mask the chart outside of eyepiece
+    step:='draw mask';
     DrawEyepieceMask;
 
     // the compass and scale
+    step:='draw compass';
     DrawCompass;
     DrawTarget;
 
     // Planisphere
+    step:='draw planisphere';
     DrawPlanisphereTime;
     DrawPlanisphereDate;
 
     // Draw the chart border
+    step:='draw border';
     DrawBorder;
 
     // the chart legend
+    step:='draw legend';
     DrawLegend;
 
     // refresh telescope mark
@@ -456,6 +482,7 @@ begin
     Result := True;
     if VerboseMsg then
       WriteTrace('SkyChart ' + cfgsc.chartname + ': end drawing');
+    step:='finalize';
   finally
     Fcatalog.CloseCat;
     cfgsc.ApparentPos := savApparentPos;
@@ -470,10 +497,14 @@ begin
     cfgsc.FillMilkyWay := savfillmw;
     cfgsc.quick := False;
   end;
+  step:='refresh image';
   if assigned(FRefreshImage) then
     FRefreshImage(self);
   if VerboseMsg then
     WriteTrace('SkyChart ' + cfgsc.chartname + ': end Refresh');
+  except
+    on E: Exception do WriteTrace('Draw chart, '+step+' error: ' + E.Message);
+  end;
 end;
 
 function Tskychart.InitCatalog: boolean;
