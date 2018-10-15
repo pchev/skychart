@@ -166,6 +166,7 @@ var n : integer;
     fh : file;
     hdr: TFileHeader;
 begin
+try
 fillchar(EmptyRec,sizeof(GcatRec),0);
 if fileexists(GaiaPath+slashchar+catname+'.hdr') then begin
   filemode:=0;
@@ -213,6 +214,9 @@ if fileexists(GaiaPath+slashchar+catname+'.hdr') then begin
   cattype:=strtointdef(buf,0);
 end
 else result:=false;
+except
+  result:=false;
+end;
 end;
 
 Function ReadGaiaHeader : boolean;
@@ -222,7 +226,10 @@ begin
  if result then begin
    InitGaiaRec;
  end
- else exit;
+ else begin
+   raise exception.Create('Wrong Gaia header file, or cannot read the file.');
+   exit;
+ end;
  buf:=copy(catheader.version,1,7);
  if buf='CDCSTAR' then catversion:=rtStar
     else begin result:=false; exit; end;

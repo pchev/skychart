@@ -449,6 +449,7 @@ var n : integer;
     fh : file;
     hdr: TFileHeader;
 begin
+try
 fillchar(EmptyRec,sizeof(GcatRec),0);
 if fileexists(Gcatpath+slashchar+catname+'.hdr') then begin
   filemode:=0;
@@ -499,6 +500,9 @@ if fileexists(Gcatpath+slashchar+catname+'.hdr') then begin
   cattype:=strtointdef(buf,0);
 end
 else result:=false;
+except
+  result:=false;
+end;
 end;
 
 Function ReadCatHeader : boolean;
@@ -521,6 +525,10 @@ begin
          CacheOption[CurCache].header:=catheader;
          CacheOption[CurCache].baserec:=emptyrec;
       end;
+    end
+    else begin
+      raise exception.Create('Wrong '+catname+' header file, or cannot read the file.');
+      exit;
     end;
   end;
  buf:=copy(catheader.version,1,7);

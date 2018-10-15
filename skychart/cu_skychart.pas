@@ -503,7 +503,10 @@ begin
   if VerboseMsg then
     WriteTrace('SkyChart ' + cfgsc.chartname + ': end Refresh');
   except
-    on E: Exception do WriteTrace('Draw chart, '+step+' error: ' + E.Message);
+    on E: Exception do begin
+      cfgsc.msg := 'Draw chart, '+step+' error: ' + E.Message;
+      WriteTrace(cfgsc.msg); // better to write the error two time than risk the message is overwriten
+    end;
   end;
 end;
 
