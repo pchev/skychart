@@ -7320,6 +7320,7 @@ begin
           ReadInteger(section, 'autorefreshdelay', cfgm.autorefreshdelay);
         buf := ReadString(section, 'ConstLfile', cfgm.ConstLfile);
         buf := ExtractSubPath(ConfigAppdir, buf);
+        buf := StringReplace(buf,'Tirion-Constellations.cln','TirionConstL.cln',[]);
         if FileExists(buf) then
           cfgm.ConstLfile := buf;
         buf := ReadString(section, 'ConstBfile', cfgm.ConstBfile);
