@@ -35,7 +35,8 @@ data/constellation/DefaultConstLCoord.cln
 data/constellation/IAU_ConstL.cln
 data/constellation/ReyConstL.cln
 data/constellation/ReyConstLCoord.cln
-data/constellation/Tirion-Constellations.cln
+data/constellation/TirionConstL.cln
+data/constellation/TirionConstLCoord.cln
 data/earthmap
 data/earthmap/earthmap1k.jpg
 data/earthmap/earthmap4k.jpg
