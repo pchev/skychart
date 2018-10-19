@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-03 16:45+0000\n"
-"PO-Revision-Date: 2018-05-11 20:51+0000\n"
+"POT-Creation-Date: 2018-10-19 16:39+0000\n"
+"PO-Revision-Date: 2018-10-05 09:04+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-03 16:52+0000\n"
-"X-Generator: Launchpad (build 18785)\n"
+"X-Launchpad-Export-Date: 2018-10-19 17:01+0000\n"
+"X-Generator: Launchpad (build 18801)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -1668,6 +1668,10 @@ msgstr "Pobierz najnowsze elementy orbit"
 msgid "Download TLE"
 msgstr "Pobierz TLE"
 
+#: u_translation.rsdoyoureallyw
+msgid "Do you really want to park the mount now?"
+msgstr ""
+
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
 msgstr "Czy chcesz załadować?"
@@ -2879,7 +2883,7 @@ msgstr "Kod pozycji"
 
 #: u_translation.rslocationtime
 msgid "Location / Time"
-msgstr ""
+msgstr "MIejsce/ Czas"
 
 #: u_translation.rslock
 msgid "Lock"
@@ -2891,7 +2895,7 @@ msgstr "Śledzenie %s"
 
 #: u_translation.rslockthechart
 msgid "Lock the chart at this position"
-msgstr ""
+msgstr "Zablokuj mapę na tym położeniu"
 
 #: u_translation.rslog
 msgid "Log"
@@ -3515,7 +3519,7 @@ msgstr "Miejsce obserwacji"
 
 #: u_translation.rsobservertool
 msgid "Observer tools"
-msgstr ""
+msgstr "Narzędzia obserwatora"
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -3684,6 +3688,10 @@ msgstr "Paralaksa"
 #: u_translation.rsparametric
 msgid "Parametric"
 msgstr "Parametryczny"
+
+#: u_translation.rspark
+msgid "Park"
+msgstr ""
 
 #: u_translation.rspartial
 msgid "Partial"
@@ -4567,7 +4575,7 @@ msgstr "Wybierz serwer lustrzany"
 
 #: u_translation.rsselectnone
 msgid "Select none"
-msgstr ""
+msgstr "Wyczyść zaznaczenie"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -5223,7 +5231,7 @@ msgstr "%sTablica już istnieje: %s"
 
 #: u_translation.rstarget
 msgid "Target"
-msgstr ""
+msgstr "Cel"
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
@@ -5561,9 +5569,13 @@ msgstr "Nieznany obiekt"
 msgid "Unlock chart"
 msgstr "Odblokuj mapę"
 
+#: u_translation.rsunpark
+msgid "Unpark"
+msgstr ""
+
 #: u_translation.rsunsupportedf
 msgid "Unsupported file extension: %sPlease fix it."
-msgstr ""
+msgstr "Niewspierane rozszerzenie pliku: %s Napraw to."
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"

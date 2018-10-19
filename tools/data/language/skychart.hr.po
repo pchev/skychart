@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-03 16:45+0000\n"
+"POT-Creation-Date: 2018-10-19 16:39+0000\n"
 "PO-Revision-Date: 2016-12-11 08:48+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-03 16:52+0000\n"
-"X-Generator: Launchpad (build 18785)\n"
+"X-Launchpad-Export-Date: 2018-10-19 17:00+0000\n"
+"X-Generator: Launchpad (build 18801)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -1666,6 +1666,10 @@ msgstr "Preuzmi najnovije elemente orbita"
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
 msgstr "Preuzmi TLE"
+
+#: u_translation.rsdoyoureallyw
+msgid "Do you really want to park the mount now?"
+msgstr ""
 
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
@@ -3683,6 +3687,10 @@ msgstr "Paralaksa"
 msgid "Parametric"
 msgstr ""
 
+#: u_translation.rspark
+msgid "Park"
+msgstr ""
+
 #: u_translation.rspartial
 msgid "Partial"
 msgstr "Djelomičan"
@@ -5558,6 +5566,10 @@ msgstr "Nepoznati objekt"
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
 msgstr "Otključak kartu"
+
+#: u_translation.rsunpark
+msgid "Unpark"
+msgstr ""
 
 #: u_translation.rsunsupportedf
 msgid "Unsupported file extension: %sPlease fix it."

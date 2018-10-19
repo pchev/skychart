@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-03 16:45+0000\n"
-"PO-Revision-Date: 2018-07-20 10:35+0000\n"
+"POT-Creation-Date: 2018-10-19 16:39+0000\n"
+"PO-Revision-Date: 2018-10-13 11:17+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-03 16:52+0000\n"
-"X-Generator: Launchpad (build 18785)\n"
+"X-Launchpad-Export-Date: 2018-10-19 17:00+0000\n"
+"X-Generator: Launchpad (build 18801)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -1667,6 +1667,10 @@ msgstr "Descargar los elementos orbitales más recientes"
 msgid "Download TLE"
 msgstr "Descargar TLE"
 
+#: u_translation.rsdoyoureallyw
+msgid "Do you really want to park the mount now?"
+msgstr ""
+
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
 msgstr "¿Quiere cargarlo?"
@@ -2889,7 +2893,7 @@ msgstr "Seguir a %s"
 
 #: u_translation.rslockthechart
 msgid "Lock the chart at this position"
-msgstr ""
+msgstr "Bloquear la carta en esta posición"
 
 #: u_translation.rslog
 msgid "Log"
@@ -2981,7 +2985,7 @@ msgstr "Magnitud Tycho VT"
 
 #: u_translation.rsmaillist
 msgid "Mail list, discussion group"
-msgstr ""
+msgstr "Lista de correo, grupo de debate"
 
 #: u_translation.rsmainbar
 msgid "Main bar"
@@ -3682,6 +3686,10 @@ msgstr "Paralaje"
 #: u_translation.rsparametric
 msgid "Parametric"
 msgstr "Paramétrico"
+
+#: u_translation.rspark
+msgid "Park"
+msgstr ""
 
 #: u_translation.rspartial
 msgid "Partial"
@@ -5558,6 +5566,10 @@ msgstr "Objeto desconocido"
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
 msgstr "Detener seguimiento"
+
+#: u_translation.rsunpark
+msgid "Unpark"
+msgstr ""
 
 #: u_translation.rsunsupportedf
 msgid "Unsupported file extension: %sPlease fix it."

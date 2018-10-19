@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-03 16:45+0000\n"
+"POT-Creation-Date: 2018-10-19 16:39+0000\n"
 "PO-Revision-Date: 2018-09-28 14:52+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-03 16:52+0000\n"
-"X-Generator: Launchpad (build 18785)\n"
+"X-Launchpad-Export-Date: 2018-10-19 17:00+0000\n"
+"X-Generator: Launchpad (build 18801)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -1665,6 +1665,10 @@ msgstr "Descarrega els elements orbitals"
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
 msgstr "Descarrega TLE"
+
+#: u_translation.rsdoyoureallyw
+msgid "Do you really want to park the mount now?"
+msgstr ""
 
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
@@ -3682,6 +3686,10 @@ msgstr "Paral·laxi"
 msgid "Parametric"
 msgstr "Paramètric"
 
+#: u_translation.rspark
+msgid "Park"
+msgstr ""
+
 #: u_translation.rspartial
 msgid "Partial"
 msgstr "Parcial"
@@ -5558,6 +5566,10 @@ msgstr "Objecte desconegut"
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
 msgstr "Desbloca la carta"
+
+#: u_translation.rsunpark
+msgid "Unpark"
+msgstr ""
 
 #: u_translation.rsunsupportedf
 msgid "Unsupported file extension: %sPlease fix it."

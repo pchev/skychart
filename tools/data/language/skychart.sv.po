@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-10-03 16:45+0000\n"
+"POT-Creation-Date: 2018-10-19 16:39+0000\n"
 "PO-Revision-Date: 2018-06-01 21:56+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-03 16:52+0000\n"
-"X-Generator: Launchpad (build 18785)\n"
+"X-Launchpad-Export-Date: 2018-10-19 17:01+0000\n"
+"X-Generator: Launchpad (build 18801)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1667,6 +1667,10 @@ msgstr "Hämta de senaste kretsande elementen"
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
 msgstr "Hämta TLE"
+
+#: u_translation.rsdoyoureallyw
+msgid "Do you really want to park the mount now?"
+msgstr ""
 
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
@@ -3684,6 +3688,10 @@ msgstr "Parallax"
 msgid "Parametric"
 msgstr "Parametrisk"
 
+#: u_translation.rspark
+msgid "Park"
+msgstr ""
+
 #: u_translation.rspartial
 msgid "Partial"
 msgstr "Partiell"
@@ -5559,6 +5567,10 @@ msgstr "Okänt objekt"
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
 msgstr "Lås upp karta"
+
+#: u_translation.rsunpark
+msgid "Unpark"
+msgstr ""
 
 #: u_translation.rsunsupportedf
 msgid "Unsupported file extension: %sPlease fix it."

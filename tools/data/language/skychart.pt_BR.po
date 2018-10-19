@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-03 16:45+0000\n"
-"PO-Revision-Date: 2018-07-08 02:31+0000\n"
+"POT-Creation-Date: 2018-10-19 16:39+0000\n"
+"PO-Revision-Date: 2018-10-04 20:15+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-03 16:52+0000\n"
-"X-Generator: Launchpad (build 18785)\n"
+"X-Launchpad-Export-Date: 2018-10-19 17:01+0000\n"
+"X-Generator: Launchpad (build 18801)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -1669,6 +1669,10 @@ msgstr "Baixar os últimos elementos orbitais"
 msgid "Download TLE"
 msgstr "Baixar TLE"
 
+#: u_translation.rsdoyoureallyw
+msgid "Do you really want to park the mount now?"
+msgstr ""
+
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
 msgstr "Você quer carregá-la?"
@@ -2891,7 +2895,7 @@ msgstr "Fixar em %s"
 
 #: u_translation.rslockthechart
 msgid "Lock the chart at this position"
-msgstr ""
+msgstr "Bloqueie a carta nesta posição"
 
 #: u_translation.rslog
 msgid "Log"
@@ -2983,7 +2987,7 @@ msgstr "Magnitude Tycho VT"
 
 #: u_translation.rsmaillist
 msgid "Mail list, discussion group"
-msgstr ""
+msgstr "Lista de correio, grupo de discussão"
 
 #: u_translation.rsmainbar
 msgid "Main bar"
@@ -3684,6 +3688,10 @@ msgstr "Paralaxe"
 #: u_translation.rsparametric
 msgid "Parametric"
 msgstr "Paramétrico"
+
+#: u_translation.rspark
+msgid "Park"
+msgstr ""
 
 #: u_translation.rspartial
 msgid "Partial"
@@ -5560,6 +5568,10 @@ msgstr "Objeto desconhecido"
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
 msgstr "Desbloquear carta"
+
+#: u_translation.rsunpark
+msgid "Unpark"
+msgstr ""
 
 #: u_translation.rsunsupportedf
 #, fuzzy,badformat

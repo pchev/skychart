@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-03 16:45+0000\n"
-"PO-Revision-Date: 2018-03-07 20:34+0000\n"
-"Last-Translator: sernik <tsn-ast@yandex.ru>\n"
+"POT-Creation-Date: 2018-10-19 16:39+0000\n"
+"PO-Revision-Date: 2018-10-15 11:24+0000\n"
+"Last-Translator: Aleksey Kabanov <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-03 16:52+0000\n"
-"X-Generator: Launchpad (build 18785)\n"
+"X-Launchpad-Export-Date: 2018-10-19 17:01+0000\n"
+"X-Generator: Launchpad (build 18801)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -147,7 +147,7 @@ msgstr "Добавить объект в базу данных. Все поля 
 
 #: u_translation.rsaddcursorpos
 msgid "Add cursor position"
-msgstr ""
+msgstr "Добавить координаты курсора"
 
 #: u_translation.rsaddequatoria
 msgid "Show equatorial grid"
@@ -167,7 +167,7 @@ msgstr "Добавить метку для каждого объекта"
 
 #: u_translation.rsaddtelescope
 msgid "Add telescope position"
-msgstr ""
+msgstr "Добавить координаты телескопа"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
@@ -1203,7 +1203,7 @@ msgstr "Текущий драйвер"
 
 #: u_translation.rscursor
 msgid "Cursor"
-msgstr ""
+msgstr "Курсор"
 
 #: u_translation.rscw
 msgid "%sCW"
@@ -1664,6 +1664,10 @@ msgstr "Загрузить самые последние элементы орб
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
 msgstr "Загрузить TLE"
+
+#: u_translation.rsdoyoureallyw
+msgid "Do you really want to park the mount now?"
+msgstr ""
 
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
@@ -2988,7 +2992,7 @@ msgstr "Главная панель"
 
 #: u_translation.rsmainmenu
 msgid "Main menu"
-msgstr ""
+msgstr "Главное меню"
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
@@ -3682,6 +3686,10 @@ msgstr "Параллакс"
 msgid "Parametric"
 msgstr "Параметрическое"
 
+#: u_translation.rspark
+msgid "Park"
+msgstr ""
+
 #: u_translation.rspartial
 msgid "Partial"
 msgstr "Частное"
@@ -3832,7 +3840,7 @@ msgstr "Пожалуйста, укажите директорию сохране
 
 #: u_translation.rspleaseinstal
 msgid "Please install indistarter package!"
-msgstr ""
+msgstr "Установите пакет indistarter!"
 
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
@@ -5557,6 +5565,10 @@ msgstr "Неизвестный объект"
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
 msgstr "Разблокировать объект"
+
+#: u_translation.rsunpark
+msgid "Unpark"
+msgstr ""
 
 #: u_translation.rsunsupportedf
 msgid "Unsupported file extension: %sPlease fix it."

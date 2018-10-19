@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-03 16:45+0000\n"
-"PO-Revision-Date: 2018-09-01 20:15+0000\n"
-"Last-Translator: Manuela Silva <Unknown>\n"
+"POT-Creation-Date: 2018-10-19 16:39+0000\n"
+"PO-Revision-Date: 2018-10-09 15:46+0000\n"
+"Last-Translator: Alfredo Silva <alfredo.silva@sky.com>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-03 16:52+0000\n"
-"X-Generator: Launchpad (build 18785)\n"
+"X-Launchpad-Export-Date: 2018-10-19 17:01+0000\n"
+"X-Generator: Launchpad (build 18801)\n"
 "Language: pt_BR\n"
 
 #: u_translation.rs102cddss
@@ -413,7 +413,7 @@ msgstr "Configurar Asteróides"
 
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
-msgstr "asteróides do arquivo"
+msgstr "asteróides do ficheiro"
 
 #: u_translation.rsasteroidupda
 msgid "Asteroid update successful"
@@ -641,7 +641,7 @@ msgstr "Cancelar %s"
 
 #: u_translation.rscancelwrongz
 msgid "Cancel, wrong zip file ?? %s"
-msgstr "Cancelar, arquivo compactado inválido ?? %s"
+msgstr "Cancelar, ficheiro compactado inválido ?? %s"
 
 #: u_translation.rscannotcomput
 msgid "Cannot compute satellites."
@@ -890,7 +890,7 @@ msgstr "Contorno fechado"
 
 #: u_translation.rsclosefiles
 msgid "Close files"
-msgstr "Fechar arquivos"
+msgstr "Fechar ficheiros"
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
@@ -954,7 +954,7 @@ msgstr "Comando não encontrado!"
 
 #: u_translation.rscommandtouse
 msgid "Command to use to process the file."
-msgstr "Comando a executar no processamento"
+msgstr "Comando a utilizar para processar o ficheiro."
 
 #: u_translation.rscommonname
 msgid "Common name"
@@ -1014,11 +1014,11 @@ msgstr "Configurar o programa"
 
 #: u_translation.rsconfirmation
 msgid "Confirmation prompt before saving a file."
-msgstr "Pedir confirmação antes de guardar um ficheiro."
+msgstr "Solicitar confirmação antes de guardar um ficheiro."
 
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
-msgstr "Confirmar exclusão de arquivo: "
+msgstr "Confirmar eliminação do ficheiro: "
 
 #: u_translation.rsconnect
 msgid "Connect"
@@ -1078,7 +1078,7 @@ msgstr "Limites da Constelação"
 
 #: u_translation.rsconstellatio5
 msgid "Constellation boundaries file name: "
-msgstr "Nome do arquivo dos limites das Constelações: "
+msgstr "Nome do ficheiro dos limites da constelação: "
 
 #: u_translation.rsconstellatio6
 msgid "Constellation label"
@@ -1102,11 +1102,11 @@ msgstr "Comando do Painel de Controle "
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
-msgstr "Converter o ficheiro %s"
+msgstr "Converter o ficheiro de catálogo %s"
 
 #: u_translation.rsconvertcatal2
 msgid "Convert catalog files"
-msgstr "Converter os arquivos do catálogo"
+msgstr "Converter ficheiros de catálogo"
 
 #: u_translation.rscoord
 msgid "Coord."
@@ -1166,7 +1166,7 @@ msgstr "Criar uma nova carta"
 
 #: u_translation.rscreateasearc
 msgid "Create a search index file"
-msgstr "Criar um índice de pesquisa"
+msgstr "Criar um ficheiro do índice de pesquisa"
 
 #: u_translation.rscreatedataba
 msgid "Create database"
@@ -1174,7 +1174,7 @@ msgstr "Criar base de dados"
 
 #: u_translation.rscreatefiles
 msgid "Create files"
-msgstr "Criar arquivos"
+msgstr "Criar ficheiros"
 
 #: u_translation.rscreateheader
 msgid "Create header"
@@ -1234,7 +1234,7 @@ msgstr "Traço Ponto Ponto"
 
 #: u_translation.rsdatabasefile
 msgid "Database file: "
-msgstr "Banco de dados: "
+msgstr "Ficheiro da base de dados: "
 
 #: u_translation.rsdatabaseopen
 msgid "%sDatabase %s opened.%s"
@@ -1668,6 +1668,10 @@ msgstr "Transferir os últimos elementos orbitais"
 msgid "Download TLE"
 msgstr "Transferir TLE"
 
+#: u_translation.rsdoyoureallyw
+msgid "Do you really want to park the mount now?"
+msgstr ""
+
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
 msgstr "Você quer carregá-la?"
@@ -1902,7 +1906,7 @@ msgstr "%sErro criando tabela %s"
 
 #: u_translation.rserrorfilenot
 msgid "Error, file not downloaded:"
-msgstr "Erro, ficheiros não transferido:"
+msgstr "Erro, ficheiro não transferido:"
 
 #: u_translation.rserrorpleasec
 msgid "Error! Please check the database parameters."
@@ -1918,7 +1922,7 @@ msgstr "Erro! Por favor verifique os parâmetros do banco de dados e carregue o 
 
 #: u_translation.rsestimatedfil
 msgid "Estimated file size: %sMB %sDo you want to continue?"
-msgstr "Tamanho estimado do arquivo: %sMB %sVocê quer continuar ?"
+msgstr "Tamanho estimado do ficheiro: %sMB %sDeseja continuar ?"
 
 #: u_translation.rsestimatedtai
 msgid "Estimated tail length"
@@ -2046,15 +2050,15 @@ msgstr "Ficheiro"
 
 #: u_translation.rsfilenamewith
 msgid "Filename without path or extension"
-msgstr "Nome de arquivo sem caminho ou extensão"
+msgstr "Nome de ficheiro sem caminho ou extensão"
 
 #: u_translation.rsfilenotfound
 msgid "File not found!"
-msgstr "Campo não encontrado!"
+msgstr "Ficheiro não encontrado!"
 
 #: u_translation.rsfilespath
 msgid "Files path"
-msgstr "Caminho de Arquivos"
+msgstr "Caminho de ficheiros"
 
 #: u_translation.rsfill
 msgid "Fill?"
@@ -2138,7 +2142,7 @@ msgstr "Tipos de letra"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr "Para um catálogo grande sempre selecione Binário. Para um conjunto de dados pequeno que muda frequentemente selecione Texto, isto permite editar o arquivo e ver imediatamente o resultado na carta sem a necessidade de executar outra vez este procedimento."
+msgstr "Para um catálogo grande, selecione sempre 'Binário'. Para um conjunto de dados pequeno que muda frequentemente, selecione 'Texto'. Isto permite-lhe editar o ficheiro e ver imediatamente o resultado na carta sem a necessidade de executar outra vez este utilitário."
 
 #: u_translation.rsforcecolor
 msgid "Force color"
@@ -2838,7 +2842,7 @@ msgstr "Carregar ficheiro"
 
 #: u_translation.rsloadfromfile
 msgid "Load from file"
-msgstr "Carregar do arquivo"
+msgstr "Carregar de um ficheiro"
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."
@@ -2890,7 +2894,7 @@ msgstr "Bloquear em %s"
 
 #: u_translation.rslockthechart
 msgid "Lock the chart at this position"
-msgstr ""
+msgstr "Bloqueie a carta nesta posição"
 
 #: u_translation.rslog
 msgid "Log"
@@ -2982,7 +2986,7 @@ msgstr "Magnitude Tycho VT"
 
 #: u_translation.rsmaillist
 msgid "Mail list, discussion group"
-msgstr ""
+msgstr "Lista de correio, grupo de discussão"
 
 #: u_translation.rsmainbar
 msgid "Main bar"
@@ -3334,7 +3338,7 @@ msgstr "Cor da Visão Noturna"
 
 #: u_translation.rsnoasteroidda
 msgid "No asteroids data found!%sPlease load a MPC file first."
-msgstr "Nenhum dado encontrado de Asteróide!%sPor favor carregue o primeiro arquivo MPC."
+msgstr "Não foram encontrados dados de asteróides!%sPor favor, carregue o primeiro um ficheiro MPC."
 
 #: u_translation.rsnoastronomic
 msgid "No astronomical twilight today!"
@@ -3390,11 +3394,11 @@ msgstr "Norte"
 
 #: u_translation.rsnosamphubpro
 msgid "No SAMP hub profile found, no hub is running."
-msgstr "Nenhum perfil SAMP hub encontrado, nenhum hub está em execução."
+msgstr "Não foi encontrado nenhum perfil de \"hub\" SAMP, nenhum \"hub\" em execução."
 
 #: u_translation.rsnotafitsfile
 msgid "Not a FITS file, SIMPLE = T keyword missing"
-msgstr "Não é um arquivo FITS, SIMPLE = T palavra chave faltando"
+msgstr "Não é um ficheiro FITS, SIMPLE = T palavra chave em falta"
 
 #: u_translation.rsnotargetobje
 msgid "No target object"
@@ -3442,7 +3446,7 @@ msgstr "Número de cópias"
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
-msgstr "Número de arquivos"
+msgstr "Número de ficheiros"
 
 #: u_translation.rsnumberofigno
 msgid "Number of ignored invalid rows: %s"
@@ -3683,6 +3687,10 @@ msgstr "Paralaxe"
 #: u_translation.rsparametric
 msgid "Parametric"
 msgstr "Paramétrico"
+
+#: u_translation.rspark
+msgid "Park"
+msgstr ""
 
 #: u_translation.rspartial
 msgid "Partial"
@@ -4062,7 +4070,7 @@ msgstr "Porta proxy"
 
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
-msgstr "Colocar os arquivos com extensão .tle na pasta %s"
+msgstr "Colocar os ficheiros com a extensão .tle na pasta %s"
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -4142,11 +4150,11 @@ msgstr "Receber dados da tabela VO de outras aplicações"
 
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
-msgstr "Identificar as unidades ou o tipo de objeto a partir do arquivo:"
+msgstr "Identificar as unidades ou o tipo de objeto a partir do ficheiro:"
 
 #: u_translation.rsrecordanimat
 msgid "Record animation to file"
-msgstr "Gravar animação no arquivo"
+msgstr "Gravar animação para ficheiro"
 
 #: u_translation.rsrecordingdir
 msgid "Recording directory"
@@ -4374,7 +4382,7 @@ msgstr "SAMP confirmação"
 
 #: u_translation.rssamphubprofi
 msgid "SAMP hub profile %s found, but it is missing a required value."
-msgstr "Perfil SAMP hub %s encontrado, mas está faltando um valor necessário."
+msgstr "Encontrado perfil de \"hub\" SAMP %s, mas está em falta um valor necessário."
 
 #: u_translation.rssampisamessa
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
@@ -4438,7 +4446,7 @@ msgstr "Guardar imagem..."
 
 #: u_translation.rssaveproject
 msgid "Save project"
-msgstr "Guardar Projeto"
+msgstr "Guardar projeto"
 
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
@@ -4446,7 +4454,7 @@ msgstr "Guardar a carta ativa"
 
 #: u_translation.rssavetofile
 msgid "Save to file"
-msgstr "Guardar Ficheiro"
+msgstr "Guardar em ficheiro"
 
 #: u_translation.rsscaled
 msgid "Scaled"
@@ -4986,7 +4994,7 @@ msgstr "Definições do Sistema Solar"
 
 #: u_translation.rssomerecordsw
 msgid "Some records where rejected, see the file %sreject.txt for details."
-msgstr "Alguns registros foram rejeitados, veja o arquivo %sreject.txt para detalhes."
+msgstr "Alguns registos foram rejeitados, consulte o ficheiro %sreject.txt para detalhes."
 
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
@@ -5002,11 +5010,11 @@ msgstr "Ordenar por"
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
-msgstr "Ordenando arquivos pela magnitude"
+msgstr "A ordenar os ficheiros por magnitude"
 
 #: u_translation.rssortingthein
 msgid "Sorting the index file "
-msgstr "Ordenado o ficheiro de índice "
+msgstr "A ordenar o ficheiro de índice "
 
 #: u_translation.rssouth
 msgid "South"
@@ -5090,7 +5098,7 @@ msgstr "Catálogos de estrelas e objectos do céu profunfo preparados com "
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
-msgstr "Estrelas de arquivos bitmap"
+msgstr "Ficheiro bitmap de estrelas"
 
 #: u_translation.rsstarsfilter
 msgid "Star filter"
@@ -5270,7 +5278,7 @@ msgstr "Texto"
 
 #: u_translation.rstextfilecata
 msgid "Text file catalog"
-msgstr "Catálogo do arquivo texto"
+msgstr "Catálogo do ficheiro de texto"
 
 #: u_translation.rstextsize
 msgid "Text size"
@@ -5314,7 +5322,7 @@ msgstr "Este controlador direto é mantido para compatibilidade, este pode funci
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
-msgstr "Este arquivo não é reconhecido como um arquivo MPCORB."
+msgstr "Este ficheiro não foi reconhecido como um ficheiro MPCORB."
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
@@ -5366,7 +5374,7 @@ msgstr "Hoje"
 
 #: u_translation.rstofile
 msgid "to file:"
-msgstr "para o arquivo:"
+msgstr "para o ficheiro:"
 
 #: u_translation.rstonight
 msgid "Tonight"
@@ -5560,14 +5568,18 @@ msgstr "Objeto desconhecido"
 msgid "Unlock chart"
 msgstr "Desbloquear a carta"
 
+#: u_translation.rsunpark
+msgid "Unpark"
+msgstr ""
+
 #: u_translation.rsunsupportedf
 #, fuzzy,badformat
 msgid "Unsupported file extension: %sPlease fix it."
-msgstr "Extensão de arquivo não suportada: % sPor favor corrija-o."
+msgstr "Extensão de ficheiro não suportada: % sPor favor corrija-a."
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
-msgstr "Perfil  SAMP hub não suportado. Deve ser uma URL do arquivo"
+msgstr "Perfil de \"hub\" SAMP não suportado. Deve ser um URL de Ficheiro"
 
 #: u_translation.rsup
 msgid "Up"
@@ -5671,7 +5683,7 @@ msgstr "Usar este campo como um nome alternativo"
 
 #: u_translation.rsusingexistin
 msgid "Using the existing file %s"
-msgstr "Usando arquivo existente %s"
+msgstr "A utilizar o ficheiro existente %s"
 
 #: u_translation.rsut
 msgid "UT"
@@ -5767,7 +5779,7 @@ msgstr "Aviso! Cálculo de"
 
 #: u_translation.rswarninglowre
 msgid "Warning! Low resolution mode. Use PostScript instead and print the result file."
-msgstr "Atenção! Modo de baixa resolução. Use PostScript em vez disso e imprima o arquivo final."
+msgstr "Atenção! Modo de baixa resolução. Em vez de disso, utilize \"PostScript\" e imprima o ficheiro final."
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated. Load element valid for the current map date."
@@ -5791,7 +5803,7 @@ msgstr "Cuidado! você está usando catálogo múltiplo para o mesmo objeto. Ten
 
 #: u_translation.rswarningyouha
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
-msgstr "ATENÇÃO!%sEscolheu adicionar os dados a um catálogo existente.%sO catálogo existente e o seu índice devem ter exactamente o mesmo formato, senão ele será corrompido%sÉ uma boa ideia fazer uma cópia de segurança antes de executar esta operação.%sDeseja continuar?"
+msgstr "ATENÇÃO!%sOptou por adicionar os dados a um catálogo existente.%sO catálogo existente e o índice devem ter exatamente o mesmo formato, se não, o catálogo ficará corrompido%sÉ uma boa ideia efetuar uma cópia de segurança dos ficheiros atuais antes de processar esta operação.%sDeseja continuar?"
 
 #: u_translation.rswednesday
 msgid "Wed."

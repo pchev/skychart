@@ -5858,3 +5858,15 @@ msgstr ""
 msgid "Lock the chart at this position"
 msgstr ""
 
+#: u_translation:rsunpark
+msgid "Unpark"
+msgstr ""
+
+#: u_translation:rspark
+msgid "Park"
+msgstr ""
+
+#: u_translation:rsdoyoureallyw
+msgid "Do you really want to park the mount now?"
+msgstr ""
+

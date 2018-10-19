@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-03 16:45+0000\n"
-"PO-Revision-Date: 2017-11-27 10:47+0000\n"
-"Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
+"POT-Creation-Date: 2018-10-19 16:39+0000\n"
+"PO-Revision-Date: 2018-10-04 00:02+0000\n"
+"Last-Translator: Michel Smits <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-03 16:52+0000\n"
-"X-Generator: Launchpad (build 18785)\n"
+"X-Launchpad-Export-Date: 2018-10-19 17:01+0000\n"
+"X-Generator: Launchpad (build 18801)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1665,6 +1665,10 @@ msgstr "Download de laatste baanelementen"
 msgid "Download TLE"
 msgstr "Download TLE"
 
+#: u_translation.rsdoyoureallyw
+msgid "Do you really want to park the mount now?"
+msgstr ""
+
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
 msgstr "Wil je dit laden?"
@@ -2256,7 +2260,7 @@ msgstr "Haal DSS afbeelding"
 
 #: u_translation.rsgetfromteles
 msgid "Get from telescope"
-msgstr ""
+msgstr "Van de telescoop halen"
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
@@ -2336,7 +2340,7 @@ msgstr "Hammer-Aitoff"
 
 #: u_translation.rshandpad
 msgid "HandPad"
-msgstr ""
+msgstr "HandPad"
 
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
@@ -2776,7 +2780,7 @@ msgstr "Grens afmetingen (boogminuten):"
 
 #: u_translation.rslimitthenumb
 msgid "Limit the number of level 3 faint stars"
-msgstr ""
+msgstr "Beperk het aantal zwakke sterren van niveau 3"
 
 #: u_translation.rsline1
 msgid "Line"
@@ -2877,7 +2881,7 @@ msgstr "Locatie code"
 
 #: u_translation.rslocationtime
 msgid "Location / Time"
-msgstr ""
+msgstr "Locatie / tijd"
 
 #: u_translation.rslock
 msgid "Lock"
@@ -2889,7 +2893,7 @@ msgstr "Centreer en houd %s vast"
 
 #: u_translation.rslockthechart
 msgid "Lock the chart at this position"
-msgstr ""
+msgstr "De kaart op deze positie vergrendelen"
 
 #: u_translation.rslog
 msgid "Log"
@@ -2981,7 +2985,7 @@ msgstr "Magnitude Tycho VT"
 
 #: u_translation.rsmaillist
 msgid "Mail list, discussion group"
-msgstr ""
+msgstr "E-maillijst, discussiegroep"
 
 #: u_translation.rsmainbar
 msgid "Main bar"
@@ -2989,7 +2993,7 @@ msgstr "Hoofdbalk"
 
 #: u_translation.rsmainmenu
 msgid "Main menu"
-msgstr ""
+msgstr "Hoofdmenu"
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
@@ -3021,7 +3025,7 @@ msgstr "maart"
 
 #: u_translation.rsmark
 msgid "Mark"
-msgstr ""
+msgstr "Markeren"
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3513,7 +3517,7 @@ msgstr "Observatoria database"
 
 #: u_translation.rsobservertool
 msgid "Observer tools"
-msgstr ""
+msgstr "Observatiemiddelen"
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -3682,6 +3686,10 @@ msgstr "Parallax"
 #: u_translation.rsparametric
 msgid "Parametric"
 msgstr "Parametrisch"
+
+#: u_translation.rspark
+msgid "Park"
+msgstr ""
 
 #: u_translation.rspartial
 msgid "Partial"
@@ -4565,7 +4573,7 @@ msgstr "selecteer mirror site"
 
 #: u_translation.rsselectnone
 msgid "Select none"
-msgstr ""
+msgstr "Geen selecteren"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -4689,7 +4697,7 @@ msgstr "Stel tijd in"
 
 #: u_translation.rssettotelesco
 msgid "Set to telescope"
-msgstr ""
+msgstr "Instellen op telescoop"
 
 #: u_translation.rssetup
 msgid "Setup"
@@ -4925,7 +4933,7 @@ msgstr "Beweeg telescoop naar object"
 
 #: u_translation.rsslewingto
 msgid "Slewing to %s / %s"
-msgstr ""
+msgstr "Zwenken naar %s / %s"
 
 #: u_translation.rsslewtochartc
 msgid "Slew to chart center"
@@ -5181,7 +5189,7 @@ msgstr "Oppervlaktehelderheid"
 
 #: u_translation.rsswapbutton
 msgid "Swap button"
-msgstr ""
+msgstr "Knop omwisselen"
 
 #: u_translation.rssyear
 msgid "Y"
@@ -5197,7 +5205,7 @@ msgstr "Synchroniseer telescoop"
 
 #: u_translation.rssyncedto
 msgid "Synced to %s / %s"
-msgstr ""
+msgstr "Gesynchroniseerd met %s / %s"
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
@@ -5221,7 +5229,7 @@ msgstr "%sTabel bestaat %s"
 
 #: u_translation.rstarget
 msgid "Target"
-msgstr ""
+msgstr "Doel"
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
@@ -5559,9 +5567,13 @@ msgstr "Onbekend object"
 msgid "Unlock chart"
 msgstr "Deblokkeer kaart"
 
+#: u_translation.rsunpark
+msgid "Unpark"
+msgstr ""
+
 #: u_translation.rsunsupportedf
 msgid "Unsupported file extension: %sPlease fix it."
-msgstr ""
+msgstr "Niet-ondersteunde bestandsextensie: %sGelieve dit op te lossen."
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"

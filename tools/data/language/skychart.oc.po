@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-10-03 16:45+0000\n"
+"POT-Creation-Date: 2018-10-19 16:39+0000\n"
 "PO-Revision-Date: 2016-12-11 08:58+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-03 16:53+0000\n"
-"X-Generator: Launchpad (build 18785)\n"
+"X-Launchpad-Export-Date: 2018-10-19 17:01+0000\n"
+"X-Generator: Launchpad (build 18801)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1666,6 +1666,10 @@ msgstr ""
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
+msgstr ""
+
+#: u_translation.rsdoyoureallyw
+msgid "Do you really want to park the mount now?"
 msgstr ""
 
 #: u_translation.rsdoyouwanttol
@@ -3685,6 +3689,10 @@ msgstr ""
 msgid "Parametric"
 msgstr ""
 
+#: u_translation.rspark
+msgid "Park"
+msgstr ""
+
 #: u_translation.rspartial
 msgid "Partial"
 msgstr "Parciala"
@@ -5559,6 +5567,10 @@ msgstr ""
 
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
+msgstr ""
+
+#: u_translation.rsunpark
+msgid "Unpark"
 msgstr ""
 
 #: u_translation.rsunsupportedf

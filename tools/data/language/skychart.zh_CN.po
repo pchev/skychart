@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-10-03 16:45+0000\n"
+"POT-Creation-Date: 2018-10-19 16:39+0000\n"
 "PO-Revision-Date: 2016-12-11 09:07+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-03 16:52+0000\n"
-"X-Generator: Launchpad (build 18785)\n"
+"X-Launchpad-Export-Date: 2018-10-19 17:01+0000\n"
+"X-Generator: Launchpad (build 18801)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1668,6 +1668,10 @@ msgstr "下载最新轨道根数"
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
 msgstr "下载两行式轨道数据(TLE)"
+
+#: u_translation.rsdoyoureallyw
+msgid "Do you really want to park the mount now?"
+msgstr ""
 
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
@@ -3687,6 +3691,10 @@ msgstr "视差"
 msgid "Parametric"
 msgstr ""
 
+#: u_translation.rspark
+msgid "Park"
+msgstr ""
+
 #: u_translation.rspartial
 msgid "Partial"
 msgstr "偏食"
@@ -5563,6 +5571,10 @@ msgstr "未知天体"
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
 msgstr "解锁星图"
+
+#: u_translation.rsunpark
+msgid "Unpark"
+msgstr ""
 
 #: u_translation.rsunsupportedf
 msgid "Unsupported file extension: %sPlease fix it."
