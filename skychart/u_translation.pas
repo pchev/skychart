@@ -1521,6 +1521,9 @@ resourcestring
   rsLocationTime = 'Location / Time';
   rsMark = 'Mark';
   rsLockTheChart = 'Lock the chart at this position';
+  rsUnpark = 'Unpark';
+  rsPark = 'Park';
+  rsDoYouReallyW = 'Do you really want to park the mount now?';
 
 // also update upsi_translation
 

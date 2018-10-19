@@ -42,10 +42,12 @@ type
 
   Tpop_scope = class(TForm)
     ButtonGetLocation: TSpeedButton;
+    ButtonPark: TSpeedButton;
     elev: TEdit;
     GroupBox3: TGroupBox;
     ButtonAdvSetting: TSpeedButton;
     Label2: TLabel;
+    parkled: TEdit;
     WarningLabel: TLabel;
     trackingled: TEdit;
     ButtonConnect: TSpeedButton;
@@ -82,6 +84,7 @@ type
     ButtonAbout: TSpeedButton;
     {Utility and form functions}
     procedure ButtonGetLocationClick(Sender: TObject);
+    procedure ButtonParkClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure kill(Sender: TObject; var CanClose: boolean);
     procedure ButtonAdvSettingClick(Sender: TObject);
@@ -100,6 +103,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure ButtonTrackingClick(Sender: TObject);
     procedure UpdTrackingButton;
+    procedure UpdParkButton;
     procedure ButtonAboutClick(Sender: TObject);
   private
     { Private declarations }
@@ -111,6 +115,7 @@ type
     ForceEqSys: boolean;
     FConnected: boolean;
     FCanSetTracking: boolean;
+    FCanParkUnpark: boolean;
     FScopeEqSys: double;
     EqSysVal: integer;
     T: variant;
@@ -251,6 +256,7 @@ begin
     ButtonSetLocation.Enabled := False;
     ButtonGetLocation.Enabled := False;
     UpdTrackingButton;
+    UpdParkButton;
   except
     on E: EOleException do
       MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
@@ -280,7 +286,13 @@ begin
     begin
       FConnected := True;
       Initialized := True;
+      try
       FCanSetTracking := T.CanSetTracking;
+      FCanParkUnpark := T.CanPark and T.CanUnpark;
+      except
+        FCanSetTracking := false;
+        FCanParkUnpark := false;
+      end;
       ScopeGetEqSysReal(FScopeEqSys);
       ShowCoordinates;
       led.color := clLime;
@@ -604,13 +616,19 @@ end;
 
 procedure Tpop_scope.ScopeMoveAxis(axis: integer; rate: double);
 begin
+{$ifdef mswindows}
   if ScopeConnected then
   begin
+    try
     if T.CanMoveAxis(axis) then
     begin
       T.MoveAxis(axis, rate);
     end;
+    except
+      // unsupported by interface V1
+    end;
   end;
+{$endif}
 end;
 
 
@@ -775,6 +793,7 @@ begin
   Initialized := False;
   FConnected := False;
   FCanSetTracking := False;
+  FCanParkUnpark := False;
   FScopeEqSys := 0;
 end;
 
@@ -790,6 +809,7 @@ begin
       timer1.Enabled := False;
       ShowCoordinates;
       UpdTrackingButton;
+      UpdParkButton;
       CoordLock := False;
       timer1.Enabled := True;
     end;
@@ -926,6 +946,7 @@ begin
 {$endif}
 end;
 
+
 procedure Tpop_scope.ButtonSetLocationClick(Sender: TObject);
 begin
 {$ifdef mswindows}
@@ -969,6 +990,37 @@ begin
   SaveConfig;
 end;
 
+procedure Tpop_scope.UpdParkButton;
+begin
+{$ifdef mswindows}
+  try
+    if (not ScopeConnected) or (not FCanParkUnpark) then
+    begin
+      ButtonPark.Enabled := False;
+      parkled.color := clRed;
+    end
+    else
+    begin
+      ButtonPark.Enabled := True;
+    end;
+    if ScopeConnected and FCanParkUnpark then
+    begin
+      if T.AtPark then begin
+        parkled.color := clRed;
+        ButtonPark.Caption := rsUnpark;
+      end
+      else begin
+        parkled.color := clLime;
+        ButtonPark.Caption := rsPark;
+      end;
+    end;
+  except
+    on E: EOleException do
+      MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+  end;
+{$endif}
+end;
+
 procedure Tpop_scope.UpdTrackingButton;
 begin
 {$ifdef mswindows}
@@ -987,10 +1039,37 @@ begin
         Trackingled.color := clLime
       else
         Trackingled.color := clRed;
-    end;
+    end
+    else
+      Trackingled.color := clRed;
   except
     on E: EOleException do
       MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+  end;
+{$endif}
+end;
+
+procedure Tpop_scope.ButtonParkClick(Sender: TObject);
+begin
+{$ifdef mswindows}
+  if ScopeConnected and FCanParkUnpark then
+  begin
+    try
+      if ButtonPark.Caption = rsUnpark then begin
+        if T.CanUnpark then
+           T.Unpark;
+      end;
+      if ButtonPark.Caption = rsPark then begin
+        if T.CanPark and
+        (MessageDlg(rsDoYouReallyW, mtConfirmation, mbYesNo, 0)=mrYes)
+        then
+           T.Park;
+      end;
+      UpdParkButton;
+    except
+      on E: EOleException do
+        MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+    end;
   end;
 {$endif}
 end;
