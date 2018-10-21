@@ -1022,6 +1022,10 @@ msgstr "Bekreft filsletting: "
 msgid "Connect"
 msgstr "Koble til"
 
+#: u_translation.rsconnectandge
+msgid "Connect and get device list"
+msgstr ""
+
 #: u_translation.rsconnected
 msgid "Connected"
 msgstr "Tilkoblet"
@@ -5665,6 +5669,10 @@ msgstr "Bruk systemtid"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "Bruk TCP/IP-server"
+
+#: u_translation.rsusetheintern
+msgid "Use the internal INDI gui panel"
+msgstr ""
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."

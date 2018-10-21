@@ -1023,6 +1023,10 @@ msgstr ""
 msgid "Connect"
 msgstr "Spoji"
 
+#: u_translation.rsconnectandge
+msgid "Connect and get device list"
+msgstr ""
+
 #: u_translation.rsconnected
 msgid "Connected"
 msgstr "Spojeno"
@@ -5666,6 +5670,10 @@ msgstr "Koristi sistemsko vrijeme"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "Koristi TCP/IP server"
+
+#: u_translation.rsusetheintern
+msgid "Use the internal INDI gui panel"
+msgstr ""
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."

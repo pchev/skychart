@@ -1021,6 +1021,10 @@ msgstr ""
 msgid "Connect"
 msgstr "Tengjast"
 
+#: u_translation.rsconnectandge
+msgid "Connect and get device list"
+msgstr ""
+
 #: u_translation.rsconnected
 msgid "Connected"
 msgstr "Tengt"
@@ -5664,6 +5668,10 @@ msgstr "Nota kerfistíma"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "Nota TCP/IP þjón"
+
+#: u_translation.rsusetheintern
+msgid "Use the internal INDI gui panel"
+msgstr ""
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."

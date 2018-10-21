@@ -1024,6 +1024,10 @@ msgstr "Confirmez la suppression de: "
 msgid "Connect"
 msgstr "Connecter"
 
+#: u_translation.rsconnectandge
+msgid "Connect and get device list"
+msgstr ""
+
 #: u_translation.rsconnected
 msgid "Connected"
 msgstr "Connecté"
@@ -5668,6 +5672,10 @@ msgstr "Utilise l'heure du système"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "Utiliser le serveur"
+
+#: u_translation.rsusetheintern
+msgid "Use the internal INDI gui panel"
+msgstr ""
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."

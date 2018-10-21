@@ -1025,6 +1025,10 @@ msgstr "确认文件删除: "
 msgid "Connect"
 msgstr "连接"
 
+#: u_translation.rsconnectandge
+msgid "Connect and get device list"
+msgstr ""
+
 #: u_translation.rsconnected
 msgid "Connected"
 msgstr "已连接"
@@ -5671,6 +5675,10 @@ msgstr "使用系统时间"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "使用TCP/IP服务器"
+
+#: u_translation.rsusetheintern
+msgid "Use the internal INDI gui panel"
+msgstr ""
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."

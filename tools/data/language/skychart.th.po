@@ -1024,6 +1024,10 @@ msgstr "ยืนยันที่จะลบแฟ้ม: "
 msgid "Connect"
 msgstr "เชื่อมต่อ"
 
+#: u_translation.rsconnectandge
+msgid "Connect and get device list"
+msgstr ""
+
 #: u_translation.rsconnected
 msgid "Connected"
 msgstr "เชื่อมต่อแล้ว"
@@ -5667,6 +5671,10 @@ msgstr "ใช้เวลาของระบบ"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "ใช้เซิร์ฟเวอร์ TCP/IP"
+
+#: u_translation.rsusetheintern
+msgid "Use the internal INDI gui panel"
+msgstr ""
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."

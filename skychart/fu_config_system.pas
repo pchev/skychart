@@ -302,6 +302,8 @@ begin
   Label260.Caption := rsTelescopeNam;
   Label2.Caption := rsControlPanel2;
   IndiAutostart.Caption := rsLaunchINDIst;
+  GetIndiDevices.Caption:=rsConnectAndGe;
+  InternalIndiGui.Caption:=rsUseTheIntern;
   Label14.Caption := rsLanguageSele;
   ManualMountType.Items[0] := rsEquatorialMo;
   ManualMountType.Items[1] := rsAltAzMount;

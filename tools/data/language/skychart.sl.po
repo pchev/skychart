@@ -1023,6 +1023,10 @@ msgstr "Potrdi brisanje datoteke: "
 msgid "Connect"
 msgstr "Poveži"
 
+#: u_translation.rsconnectandge
+msgid "Connect and get device list"
+msgstr ""
+
 #: u_translation.rsconnected
 msgid "Connected"
 msgstr "Povezan"
@@ -5668,6 +5672,10 @@ msgstr "Uporabi sistemski čas"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "Uporabni TCP/IP strežnik"
+
+#: u_translation.rsusetheintern
+msgid "Use the internal INDI gui panel"
+msgstr ""
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."

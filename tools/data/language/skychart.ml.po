@@ -1024,6 +1024,10 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
+#: u_translation.rsconnectandge
+msgid "Connect and get device list"
+msgstr ""
+
 #: u_translation.rsconnected
 msgid "Connected"
 msgstr ""
@@ -5666,6 +5670,10 @@ msgstr ""
 
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
+msgstr ""
+
+#: u_translation.rsusetheintern
+msgid "Use the internal INDI gui panel"
 msgstr ""
 
 #: u_translation.rsusethemenuor

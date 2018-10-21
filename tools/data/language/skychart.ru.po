@@ -1021,6 +1021,10 @@ msgstr "Подтвердить удаление файла: "
 msgid "Connect"
 msgstr "Подключить"
 
+#: u_translation.rsconnectandge
+msgid "Connect and get device list"
+msgstr ""
+
 #: u_translation.rsconnected
 msgid "Connected"
 msgstr "Подключён"
@@ -5665,6 +5669,10 @@ msgstr "Использовать системное время"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "Использовать TCP/IP сервер"
+
+#: u_translation.rsusetheintern
+msgid "Use the internal INDI gui panel"
+msgstr ""
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."

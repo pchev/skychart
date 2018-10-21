@@ -1021,6 +1021,10 @@ msgstr "Fájl törlésének megerősítése: "
 msgid "Connect"
 msgstr "Csatlakozás"
 
+#: u_translation.rsconnectandge
+msgid "Connect and get device list"
+msgstr ""
+
 #: u_translation.rsconnected
 msgid "Connected"
 msgstr "Kapcsolódva"
@@ -5664,6 +5668,10 @@ msgstr "A rendszeridő használata"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "TCP/IP szerver használata"
+
+#: u_translation.rsusetheintern
+msgid "Use the internal INDI gui panel"
+msgstr ""
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."

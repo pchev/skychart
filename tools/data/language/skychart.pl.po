@@ -1024,6 +1024,10 @@ msgstr "Potwierdź usunięcie pliku "
 msgid "Connect"
 msgstr "Połącz"
 
+#: u_translation.rsconnectandge
+msgid "Connect and get device list"
+msgstr ""
+
 #: u_translation.rsconnected
 msgid "Connected"
 msgstr "Połączony"
@@ -5668,6 +5672,10 @@ msgstr "Użyj czasu systemowego"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "Użyj serwera TCP/IP"
+
+#: u_translation.rsusetheintern
+msgid "Use the internal INDI gui panel"
+msgstr ""
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."

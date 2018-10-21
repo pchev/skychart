@@ -5870,3 +5870,11 @@ msgstr ""
 msgid "Do you really want to park the mount now?"
 msgstr ""
 
+#: u_translation:rsconnectandge
+msgid "Connect and get device list"
+msgstr ""
+
+#: u_translation:rsusetheintern
+msgid "Use the internal INDI gui panel"
+msgstr ""
+
