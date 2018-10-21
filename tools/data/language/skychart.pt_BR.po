@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-19 16:39+0000\n"
-"PO-Revision-Date: 2018-10-04 20:15+0000\n"
+"POT-Creation-Date: 2018-10-21 14:30+0000\n"
+"PO-Revision-Date: 2018-10-21 12:45+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-19 17:01+0000\n"
+"X-Launchpad-Export-Date: 2018-10-21 14:53+0000\n"
 "X-Generator: Launchpad (build 18801)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
@@ -1675,7 +1675,7 @@ msgstr "Baixar TLE"
 
 #: u_translation.rsdoyoureallyw
 msgid "Do you really want to park the mount now?"
-msgstr ""
+msgstr "Você realmente quer estacionar o telescópio agora?"
 
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
@@ -3695,7 +3695,7 @@ msgstr "Paramétrico"
 
 #: u_translation.rspark
 msgid "Park"
-msgstr ""
+msgstr "Estacionar"
 
 #: u_translation.rspartial
 msgid "Partial"
@@ -5575,7 +5575,7 @@ msgstr "Desbloquear carta"
 
 #: u_translation.rsunpark
 msgid "Unpark"
-msgstr ""
+msgstr "Deslocar"
 
 #: u_translation.rsunsupportedf
 #, fuzzy,badformat

@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-19 16:39+0000\n"
-"PO-Revision-Date: 2018-10-19 16:59+0000\n"
+"POT-Creation-Date: 2018-10-21 14:30+0000\n"
+"PO-Revision-Date: 2018-10-21 14:33+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-19 17:00+0000\n"
+"X-Launchpad-Export-Date: 2018-10-21 14:53+0000\n"
 "X-Generator: Launchpad (build 18801)\n"
 "Language: fr\n"
 
@@ -1026,7 +1026,7 @@ msgstr "Connecter"
 
 #: u_translation.rsconnectandge
 msgid "Connect and get device list"
-msgstr ""
+msgstr "Connection et liste des périphériques"
 
 #: u_translation.rsconnected
 msgid "Connected"
@@ -5675,7 +5675,7 @@ msgstr "Utiliser le serveur"
 
 #: u_translation.rsusetheintern
 msgid "Use the internal INDI gui panel"
-msgstr ""
+msgstr "Utilise le panneau INDI interne"
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."
