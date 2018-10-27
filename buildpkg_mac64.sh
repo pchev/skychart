@@ -54,6 +54,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   mv Cartes "Cartes du Ciel"
   packagesbuild -v skychart64.pkgproj
   if [[ $? -ne 0 ]]; then exit 1;fi
+  cp readme.txt build/
   hdiutil create -anyowners -volname skychart-$version-$currentrev-x86_64-macosx -imagekey zlib-level=9 -format UDZO -srcfolder ./build skychart-$version-$currentrev-x86_64-macosx.dmg
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.dmg $wd
