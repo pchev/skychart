@@ -1,0 +1,18 @@
+##############################################################################
+
+CC=gcc
+CFLAGS= -w -fPIC -m64
+SO_Name       = libchealpix.dylib
+LIBFLAGS      = -Wl,-single_module -dynamiclib  -lc -lm -mmacosx-version-min=10.10
+
+OBJS =	chealpix.o
+
+all: $(SO_Name)
+
+$(SO_Name): $(OBJS)
+	$(CC) $(CFLAGS) $(LIBFLAGS) -o $@ $(OBJS)
+
+chealpix.o:	chealpix.h chealpix.c
+
+clean:
+	rm -f *.a *.o $(SO_Name)

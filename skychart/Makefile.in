@@ -45,7 +45,11 @@ LCL_PLATFORM=win32
 opt_target= -WG
 else
 ifeq ($(OS_TARGET),darwin)
+ifeq ($(CPU_TARGET),i386)
 LCL_PLATFORM=carbon
+else
+LCL_PLATFORM=cocoa
+endif
 opt_target= -k-macosx_version_min -k10.10
 else
 LCL_PLATFORM=gtk2

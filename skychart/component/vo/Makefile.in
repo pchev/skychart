@@ -38,7 +38,11 @@ ifeq ($(OS_TARGET),win64)
 LCL_PLATFORM=win32
 else
 ifeq ($(OS_TARGET),darwin)
+ifeq ($(CPU_TARGET),i386)
 LCL_PLATFORM=carbon
+else
+LCL_PLATFORM=cocoa
+endif
 else
 LCL_PLATFORM=gtk2
 endif

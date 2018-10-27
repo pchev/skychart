@@ -74,6 +74,7 @@ skychart*.zip
 skychart*.tar.xz
 skychart*.tar.bz2
 skychart*.dmg
+bin-*.tar.bz2
 bin-*.tar.xz
 bin-*.zip
 update-bin-*.zip
