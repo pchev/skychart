@@ -1277,6 +1277,7 @@ begin
       begin
         RefreshTimer.Enabled := False;
         RefreshTimer.Enabled := True;
+        f_main.ActiveControl := Image1;
       end;
   if ScriptPanel.Visible then
     Fscript[ActiveScript].ActivateEvent;
@@ -2720,7 +2721,7 @@ begin
     configrightbar.Free;
     if NeedRestart then
       ExecNoWait(ParamStr(0));
-{$ifndef lclqt}{$ifndef lclqt5}
+{$ifndef lclqt}{$ifndef lclqt5}{$ifndef lclcocoa}
     if VerboseMsg then
       WriteTrace('Destroy Cursor');
     if CursorImage1 <> nil then
@@ -2729,7 +2730,7 @@ begin
         CursorImage1.FreeImage;
       CursorImage1.Free;
     end;
-{$endif}{$endif}
+{$endif}{$endif}{$endif}
     ///////////////////////////////////////////////
     // removed as this crash on Windows and memleak is very small
     // if TCPDaemon<>nil then TCPDaemon.Free;
