@@ -18,20 +18,20 @@
     <Description Value="Requires packages for Cartes du Ciel"/>
     <RequiredPkgs Count="16">
       <Item1>
-        <PackageName Value="indiclient"/>
-        <DefaultFilename Value="indiclient/indiclient.lpk"/>
+        <PackageName Value="BGRABitmapPack_nogl"/>
+        <DefaultFilename Value="bgrabitmap/bgrabitmappack_nogl.lpk"/>
       </Item1>
       <Item2>
-        <PackageName Value="vosamp"/>
-        <DefaultFilename Value="vosamp/vosamp.lpk"/>
+        <PackageName Value="indiclient"/>
+        <DefaultFilename Value="indiclient/indiclient.lpk"/>
       </Item2>
       <Item3>
-        <PackageName Value="MultiFramePackage"/>
-        <DefaultFilename Value="multiframe/multiframepackage.lpk"/>
+        <PackageName Value="vosamp"/>
+        <DefaultFilename Value="vosamp/vosamp.lpk"/>
       </Item3>
       <Item4>
-        <PackageName Value="bgrabitmappack"/>
-        <DefaultFilename Value="bgrabitmap/bgrabitmappack.lpk"/>
+        <PackageName Value="MultiFramePackage"/>
+        <DefaultFilename Value="multiframe/multiframepackage.lpk"/>
       </Item4>
       <Item5>
         <PackageName Value="lazvo"/>
@@ -87,7 +87,6 @@
     </UsageOptions>
     <PublishOptions>
       <Version Value="2"/>
-      <IgnoreBinaries Value="False"/>
     </PublishOptions>
     <CustomOptions Items="ExternHelp" Version="2">
       <_ExternHelp Items="Count"/>

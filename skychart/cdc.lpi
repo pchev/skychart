@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="10"/>
+    <Version Value="11"/>
     <General>
       <Flags>
         <SaveClosedFiles Value="False"/>
@@ -337,47 +337,42 @@
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
-      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
-      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
     </PublishOptions>
     <RunParams>
-      <local>
-        <FormatVersion Value="1"/>
-        <CommandLineParams Value="--nosplash --verbose"/>
-        <WorkingDirectory Value="/usr/local/bin"/>
-      </local>
+      <FormatVersion Value="2"/>
+      <Modes Count="0"/>
     </RunParams>
     <RequiredPackages Count="24">
       <Item1>
-        <PackageName Value="indiclient"/>
+        <PackageName Value="BGRABitmapPack_nogl"/>
       </Item1>
       <Item2>
-        <PackageName Value="SynEdit"/>
+        <PackageName Value="indiclient"/>
       </Item2>
       <Item3>
-        <PackageName Value="pascalscript"/>
+        <PackageName Value="SynEdit"/>
       </Item3>
       <Item4>
-        <PackageName Value="MemDSLaz"/>
+        <PackageName Value="pascalscript"/>
       </Item4>
       <Item5>
-        <PackageName Value="SDFLaz"/>
+        <PackageName Value="MemDSLaz"/>
       </Item5>
       <Item6>
-        <PackageName Value="vosamp"/>
+        <PackageName Value="SDFLaz"/>
       </Item6>
       <Item7>
-        <PackageName Value="TurboPowerIPro"/>
+        <PackageName Value="vosamp"/>
       </Item7>
       <Item8>
-        <PackageName Value="MultiFramePackage"/>
+        <PackageName Value="TurboPowerIPro"/>
       </Item8>
       <Item9>
-        <PackageName Value="lazvo"/>
-        <MinVersion Minor="1" Valid="True"/>
+        <PackageName Value="MultiFramePackage"/>
       </Item9>
       <Item10>
-        <PackageName Value="bgrabitmappack"/>
+        <PackageName Value="lazvo"/>
+        <MinVersion Minor="1" Valid="True"/>
       </Item10>
       <Item11>
         <PackageName Value="uniqueinstance_package"/>

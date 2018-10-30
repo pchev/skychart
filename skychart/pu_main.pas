@@ -11456,7 +11456,7 @@ var
 begin
   ver := cdcversion + '-' + RevisionStr;
   if cdcbeta then
-  begin
+  {%H-}begin
     url := 'https://www.ap-i.net/pub/skychart/beta.txt';
     fn := slash(TempDir) + 'beta.txt';
     if QuickDownload(url, fn, False) then
@@ -11480,7 +11480,7 @@ begin
       ShowMessage('Cannot check version now, please check your Internet connection');
   end
   else
-  begin
+  {%H-}begin
     url := 'https://www.ap-i.net/pub/skychart/version.txt';
     fn := slash(TempDir) + 'version.txt';
     if QuickDownload(url, fn, False) then
