@@ -2688,6 +2688,7 @@ begin
   lastY := sc.cfgsc.FindY;
   lastZ := sc.cfgsc.FindZ;
   sc.cfgsc.TrackName := '';
+  sc.cfgsc.TrackType := 4;
   lastsolsys := ((sc.cfgsc.Findtype = ftAst) or (sc.cfgsc.Findtype = ftCom) or
     (sc.cfgsc.Findtype = ftPla)) and ((sc.cfgsc.FindX + sc.cfgsc.FindY + sc.cfgsc.FindZ) <> 0);
   sc.GetCoord(x, y, ra, Dec, a, h, l, b, le, be);
@@ -2706,7 +2707,7 @@ begin
     Result := sc.FindatRaDec(ra, Dec, dx, searchcenter, False, ftype);
     if (not Result) then
       Result := sc.FindatRaDec(ra, Dec, 3 * dx, searchcenter, False, ftype);  //else 6 pixel
-    if showlabel then
+    if Result and showlabel then
       ShowIdentLabel
     else
       Identlabel.Visible := False;
