@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-21 14:30+0000\n"
-"PO-Revision-Date: 2018-10-21 12:46+0000\n"
+"PO-Revision-Date: 2018-10-29 12:42+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-21 14:53+0000\n"
-"X-Generator: Launchpad (build 18801)\n"
+"X-Launchpad-Export-Date: 2018-11-04 22:21+0000\n"
+"X-Generator: Launchpad (build 18810)\n"
 "Language: pt_BR\n"
 
 #: u_translation.rs102cddss
@@ -1026,7 +1026,7 @@ msgstr "Conectar"
 
 #: u_translation.rsconnectandge
 msgid "Connect and get device list"
-msgstr ""
+msgstr "Conecte-se e obtenha lista de dispositivos"
 
 #: u_translation.rsconnected
 msgid "Connected"
@@ -2530,7 +2530,7 @@ msgstr "Servidor Host INDI "
 
 #: u_translation.rsindiserverpo
 msgid "INDI server port"
-msgstr "Porta do servidor INDI"
+msgstr "Porta do servidor"
 
 #: u_translation.rsindrive
 msgid "in drive"
@@ -5675,7 +5675,7 @@ msgstr "Usar Servidor TCP/IP"
 
 #: u_translation.rsusetheintern
 msgid "Use the internal INDI gui panel"
-msgstr ""
+msgstr "Use o painel interno INDI gui"
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."

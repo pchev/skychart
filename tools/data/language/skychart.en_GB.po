@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2018-10-21 14:30+0000\n"
-"PO-Revision-Date: 2018-04-15 15:25+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2018-10-23 16:34+0000\n"
+"Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-21 14:53+0000\n"
-"X-Generator: Launchpad (build 18801)\n"
+"X-Launchpad-Export-Date: 2018-11-04 22:20+0000\n"
+"X-Generator: Launchpad (build 18810)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -258,7 +258,7 @@ msgstr ""
 
 #: u_translation.rsaltazcoordin
 msgid "Alt-Az coordinates"
-msgstr ""
+msgstr "Alt-Az coordinates"
 
 #: u_translation.rsaltazmount
 msgid "Alt/Az mount"
@@ -682,7 +682,7 @@ msgstr ""
 
 #: u_translation.rscascade
 msgid "Cascade"
-msgstr ""
+msgstr "Cascade"
 
 #: u_translation.rscat
 msgid "Cat."
@@ -1010,7 +1010,7 @@ msgstr ""
 
 #: u_translation.rsconfigurethe
 msgid "Configure the program"
-msgstr ""
+msgstr "Configure the program"
 
 #: u_translation.rsconfirmation
 msgid "Confirmation prompt before saving a file."
@@ -1166,7 +1166,7 @@ msgstr ""
 
 #: u_translation.rscreateanewch
 msgid "Create a new chart"
-msgstr ""
+msgstr "Create a new chart"
 
 #: u_translation.rscreateasearc
 msgid "Create a search index file"
@@ -1302,7 +1302,7 @@ msgstr ""
 
 #: u_translation.rsday
 msgid "Day"
-msgstr ""
+msgstr "Day"
 
 #: u_translation.rsdays
 msgid "days"
@@ -1406,7 +1406,7 @@ msgstr ""
 
 #: u_translation.rsdeg
 msgid "d"
-msgstr ""
+msgstr "d"
 
 #: u_translation.rsdegree
 msgid "Degree"
@@ -1762,7 +1762,7 @@ msgstr ""
 
 #: u_translation.rseast
 msgid "East"
-msgstr ""
+msgstr "East"
 
 #: u_translation.rseastside
 msgid "East side"
@@ -1782,7 +1782,7 @@ msgstr ""
 
 #: u_translation.rseclipticcoor
 msgid "Ecliptic coordinates"
-msgstr ""
+msgstr "Ecliptic coordinates"
 
 #: u_translation.rseclipticcoor3
 msgid "Ecliptic coord."
@@ -1878,7 +1878,7 @@ msgstr ""
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
-msgstr ""
+msgstr "Equatorial coordinates"
 
 #: u_translation.rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
@@ -2214,7 +2214,7 @@ msgstr ""
 
 #: u_translation.rsgalacticcoor
 msgid "Galactic coordinates"
-msgstr ""
+msgstr "Galactic coordinates"
 
 #: u_translation.rsgalacticcoor2
 msgid "Galactic coord."
@@ -2402,7 +2402,7 @@ msgstr ""
 
 #: u_translation.rshour
 msgid "Hour"
-msgstr ""
+msgstr "Hour"
 
 #: u_translation.rshourangle
 msgid "Hour angle"
@@ -2634,7 +2634,7 @@ msgstr ""
 
 #: u_translation.rsjulianyear
 msgid "Julian Year"
-msgstr ""
+msgstr "Julian Year"
 
 #: u_translation.rsjuly
 msgid "July"
@@ -3138,7 +3138,7 @@ msgstr ""
 
 #: u_translation.rsmin
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: u_translation.rsmin2
 msgid "min"
@@ -3154,7 +3154,7 @@ msgstr ""
 
 #: u_translation.rsminute
 msgid "Minute"
-msgstr ""
+msgstr "Minute"
 
 #: u_translation.rsminutes
 msgid "minutes"
@@ -3162,11 +3162,11 @@ msgstr ""
 
 #: u_translation.rsmirrorhorizo
 msgid "Mirror horizontally"
-msgstr ""
+msgstr "Mirror horizontally"
 
 #: u_translation.rsmirrorvertic
 msgid "Mirror vertically"
-msgstr ""
+msgstr "Mirror vertically"
 
 #: u_translation.rsmisclines
 msgid "Misc. lines"
@@ -3186,7 +3186,7 @@ msgstr ""
 
 #: u_translation.rsmonth
 msgid "Month"
-msgstr ""
+msgstr "Month"
 
 #: u_translation.rsmoon
 msgid "Moon"
@@ -3338,7 +3338,7 @@ msgstr ""
 
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
-msgstr ""
+msgstr "Night vision colour"
 
 #: u_translation.rsnoasteroidda
 msgid "No asteroids data found!%sPlease load a MPC file first."
@@ -3394,7 +3394,7 @@ msgstr ""
 
 #: u_translation.rsnorth
 msgid "North"
-msgstr ""
+msgstr "North"
 
 #: u_translation.rsnosamphubpro
 msgid "No SAMP hub profile found, no hub is running."
@@ -3614,7 +3614,7 @@ msgstr ""
 
 #: u_translation.rsopenachart
 msgid "Open a chart"
-msgstr ""
+msgstr "Open a chart"
 
 #: u_translation.rsopencluster
 msgid "Open cluster"
@@ -3994,7 +3994,7 @@ msgstr ""
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
-msgstr ""
+msgstr "Print the chart"
 
 #: u_translation.rsprocessing
 msgid "Processing... %s"
@@ -4198,7 +4198,7 @@ msgstr ""
 
 #: u_translation.rsredolastchan
 msgid "Redo last change"
-msgstr ""
+msgstr "Redo last change"
 
 #: u_translation.rsreducedetail
 msgid "Reduce details when moving the chart"
@@ -4362,11 +4362,11 @@ msgstr ""
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
-msgstr ""
+msgstr "Rotate left"
 
 #: u_translation.rsrotateright
 msgid "Rotate right"
-msgstr ""
+msgstr "Rotate right"
 
 #: u_translation.rsrotation
 msgid "Rotation"
@@ -4406,7 +4406,7 @@ msgstr ""
 
 #: u_translation.rssaros
 msgid "Saros"
-msgstr ""
+msgstr "Saros"
 
 #: u_translation.rssatellite
 msgid "Satellite"
@@ -4454,7 +4454,7 @@ msgstr ""
 
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
-msgstr ""
+msgstr "Save the active chart"
 
 #: u_translation.rssavetofile
 msgid "Save to file"
@@ -4530,7 +4530,7 @@ msgstr ""
 
 #: u_translation.rssec
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: u_translation.rssec2
 msgid "Sec."
@@ -4670,7 +4670,7 @@ msgstr ""
 
 #: u_translation.rssetdateandti
 msgid "Set date and time"
-msgstr ""
+msgstr "Set date and time"
 
 #: u_translation.rssetfov
 msgid "Set FOV"
@@ -4686,7 +4686,7 @@ msgstr ""
 
 #: u_translation.rssetobservato
 msgid "Set observatory location"
-msgstr ""
+msgstr "Set observatory location"
 
 #: u_translation.rssetoptionsfo
 msgid "Set options for best performance"
@@ -4722,7 +4722,7 @@ msgstr ""
 
 #: u_translation.rsshowallsky
 msgid "Show all sky"
-msgstr ""
+msgstr "Show all sky"
 
 #: u_translation.rsshowasinglep
 msgid "Show a single picture on the map."
@@ -4898,7 +4898,7 @@ msgstr ""
 
 #: u_translation.rssiderealday
 msgid "Sidereal day"
-msgstr ""
+msgstr "Sidereal day"
 
 #: u_translation.rssimulation
 msgid "Simulation"
@@ -5022,7 +5022,7 @@ msgstr ""
 
 #: u_translation.rssouth
 msgid "South"
-msgstr ""
+msgstr "South"
 
 #: u_translation.rsspacer
 msgid "Spacer"
@@ -5214,7 +5214,7 @@ msgstr ""
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
-msgstr ""
+msgstr "Synodic month"
 
 #: u_translation.rssystemprinte
 msgid "System printer"
@@ -5342,7 +5342,7 @@ msgstr ""
 
 #: u_translation.rstilevertical
 msgid "Tile vertically"
-msgstr ""
+msgstr "Tile vertically"
 
 #: u_translation.rstime
 msgid "Time"
@@ -5466,7 +5466,7 @@ msgstr ""
 
 #: u_translation.rstropicalyear
 msgid "Tropical year"
-msgstr ""
+msgstr "Tropical year"
 
 #: u_translation.rstropospheret
 msgid "Troposphere temperature lapse rate (K/km)"
@@ -5550,7 +5550,7 @@ msgstr ""
 
 #: u_translation.rsundolastchan
 msgid "Undo last change"
-msgstr ""
+msgstr "Undo last change"
 
 #: u_translation.rsunits
 msgid "Units"
@@ -5818,7 +5818,7 @@ msgstr ""
 
 #: u_translation.rswest
 msgid "West"
-msgstr ""
+msgstr "West"
 
 #: u_translation.rswestside
 msgid "West side"
@@ -5838,7 +5838,7 @@ msgstr ""
 
 #: u_translation.rsyear
 msgid "Year"
-msgstr ""
+msgstr "Year"
 
 #: u_translation.rsyears
 msgid "years"
@@ -5862,7 +5862,7 @@ msgstr ""
 
 #: u_translation.rszenith
 msgid "Zenith"
-msgstr ""
+msgstr "Zenith"
 
 #: u_translation.rszoom
 msgid "Zoom +"
