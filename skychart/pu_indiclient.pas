@@ -121,11 +121,11 @@ type
     procedure NewMessage(mp: IMessage);
     procedure NewProperty(indiProp: IndiProperty);
     procedure NewNumber(nvp: INumberVectorProperty);
-    procedure NewText(tvp: ITextVectorProperty);
+//    procedure NewText(tvp: ITextVectorProperty);
     procedure NewSwitch(svp: ISwitchVectorProperty);
-    procedure NewLight(lvp: ILightVectorProperty);
+//    procedure NewLight(lvp: ILightVectorProperty);
     procedure DeleteDevice(dp: Basedevice);
-    procedure DeleteProperty(indiProp: IndiProperty);
+//    procedure DeleteProperty(indiProp: IndiProperty);
     procedure ServerConnected(Sender: TObject);
     procedure ServerDisconnected(Sender: TObject);
     procedure IndiGUIdestroy(Sender: TObject);
@@ -254,10 +254,10 @@ begin
   end;
 end;
 
-procedure Tpop_indi.DeleteProperty(indiProp: IndiProperty);
+{procedure Tpop_indi.DeleteProperty(indiProp: IndiProperty);
 begin
   { TODO :  check if a vital property is removed ? }
-end;
+end;}
 
 procedure Tpop_indi.NewMessage(mp: IMessage);
 begin
@@ -356,10 +356,10 @@ begin
   end;
 end;
 
-procedure Tpop_indi.NewText(tvp: ITextVectorProperty);
+{procedure Tpop_indi.NewText(tvp: ITextVectorProperty);
 begin
   //  Memomsg.Lines.Add('NewText: '+tvp.name+' '+tvp.tp[0].text);
-end;
+end; }
 
 procedure Tpop_indi.NewSwitch(svp: ISwitchVectorProperty);
 var
@@ -379,10 +379,10 @@ begin
   end;
 end;
 
-procedure Tpop_indi.NewLight(lvp: ILightVectorProperty);
+{procedure Tpop_indi.NewLight(lvp: ILightVectorProperty);
 begin
   //  Memomsg.Lines.Add('NewLight: '+lvp.name);
-end;
+end;  }
 
 procedure Tpop_indi.ScopeDisconnect(var ok: boolean; updstatus: boolean = True);
 begin
@@ -411,11 +411,11 @@ begin
       client.onNewMessage := @NewMessage;
       client.onNewProperty := @NewProperty;
       client.onNewNumber := @NewNumber;
-      client.onNewText := @NewText;
+//      client.onNewText := @NewText;
       client.onNewSwitch := @NewSwitch;
-      client.onNewLight := @NewLight;
+//      client.onNewLight := @NewLight;
       client.onDeleteDevice := @DeleteDevice;
-      client.onDeleteProperty := @DeleteProperty;
+//      client.onDeleteProperty := @DeleteProperty;
       client.onServerConnected := @ServerConnected;
       client.onServerDisconnected := @ServerDisconnected;
     end
