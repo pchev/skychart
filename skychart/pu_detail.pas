@@ -190,8 +190,13 @@ end;
 
 procedure Tf_detail.FormShow(Sender: TObject);
 begin
-  {$ifdef darwin}{ TODO : Check Mac OS X Bringtofront when called from popupmenu }
-  timer1.Enabled := True;
+  {$ifdef darwin}
+  {$ifdef lclcarbon}
+  timer1.Enabled := True;  { TODO : Check Mac OS X Bringtofront when called from popupmenu }
+  {$endif}
+  {$ifdef lclcocoa}
+  FTextOnly:=True; { TODO : Check Mac OS X iphtml scrolling }
+  {$endif}
   {$endif}
   FSameposition := False;
   memo1.Visible := FTextOnly;
