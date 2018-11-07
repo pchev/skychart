@@ -192,10 +192,7 @@ procedure Tf_detail.FormShow(Sender: TObject);
 begin
   {$ifdef darwin}
   {$ifdef lclcarbon}
-  timer1.Enabled := True;  { TODO : Check Mac OS X Bringtofront when called from popupmenu }
-  {$endif}
-  {$ifdef lclcocoa}
-  FTextOnly:=True; { TODO : Check Mac OS X iphtml scrolling }
+  timer1.Enabled := True;  { fixed in cocoa }
   {$endif}
   {$endif}
   FSameposition := False;
