@@ -1935,7 +1935,7 @@ var y,m,d: integer;
 
 begin
 
-  if IsProcessingPlanets then exit;
+  if IsProcessingPlanets or(Fplanet=nil) then exit;
 
   IsProcessingPlanets := true;
 
