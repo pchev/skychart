@@ -2459,9 +2459,11 @@ begin
               jj := j + 1
             else
               jj := j - 1;
-            projection(cfgsc.Planetlst[jj, ipla, 1], cfgsc.Planetlst[jj, ipla, 2], xx2,
-              yy2, True, cfgsc);
-            lori := rmod(rad2deg * RotationAngle(xx2, yy2, x1, y1, cfgsc) + 360, 360);
+            projection(cfgsc.Planetlst[jj, ipla, 1], cfgsc.Planetlst[jj, ipla, 2], xx2, yy2, True, cfgsc);
+            if (cfgsc.SimNb>1)and(cfgsc.Planetlst[1, ipla, 1]>cfgsc.Planetlst[0, ipla, 1]) then
+              lori := rmod(rad2deg * RotationAngle(x1, y1, xx2, yy2, cfgsc) + 360, 360)
+            else
+              lori := rmod(rad2deg * RotationAngle(xx2, yy2, x1, y1, cfgsc) + 360, 360);
             if (lori < 90) or (lori > 270) then
             begin
               lalign := laLeft;
