@@ -10299,6 +10299,10 @@ begin
       begin
         SaveConfigOnExit.Checked := False;
       end;
+      if cmd = '--obslist' then
+      begin
+        cfgm.InitObsList := parm;
+      end;
     end;
     if chartchanged then
     begin
