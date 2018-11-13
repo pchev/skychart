@@ -2330,10 +2330,10 @@ end;
 function Tskychart.DrawPlanet: boolean;
 var
   x1, y1, xx1, yy1, xx2, yy2, pixscale, ra, Dec, jdt, diam, magn, phase, fov, pa,
-  rot, r1, r2, be, dist, distc: double;
+  rot, r1, r2, be, dist, distc,lecl1,becl1,lecl2,becl2: double;
   ppa, poleincl, sunincl, w1, w2, w3, a, h, dh, h1, h2, flatten, moonflatten, saverefraction: double;
   xx, yy, lori: single;
-  lopt: boolean;
+  lopt,lblup: boolean;
   lalign: TLabelAlign;
   i, j, jj, n, ipla, sunsize, lid: integer;
   draworder: array[1..11] of integer;
@@ -2456,14 +2456,21 @@ begin
               else
                 ltxt := ltxt + formatfloat(f1, magn);
             if j < cfgsc.SimNb - 1 then
-              jj := j + 1
-            else
-              jj := j - 1;
-            projection(cfgsc.Planetlst[jj, ipla, 1], cfgsc.Planetlst[jj, ipla, 2], xx2, yy2, True, cfgsc);
-            if (cfgsc.SimNb>1)and(cfgsc.Planetlst[1, ipla, 1]>cfgsc.Planetlst[0, ipla, 1]) then
-              lori := rmod(rad2deg * RotationAngle(x1, y1, xx2, yy2, cfgsc) + 360, 360)
-            else
-              lori := rmod(rad2deg * RotationAngle(xx2, yy2, x1, y1, cfgsc) + 360, 360);
+            begin  // for the last label we keep the orientation of the previous one
+              if j=0 then begin
+                // try to detect the side of retrograde loop, work only for the first side of the loop
+                Eq2Ecl(cfgsc.Planetlst[0, ipla, 1],cfgsc.Planetlst[0, ipla, 2],cfgsc.ecl,lecl1,becl1);
+                Eq2Ecl(cfgsc.Planetlst[cfgsc.SimNb-1, ipla, 1],cfgsc.Planetlst[cfgsc.SimNb-1, ipla, 2],cfgsc.ecl,lecl2,becl2);
+                lblup:=((becl1>=becl2) and (cfgsc.Planetlst[1, ipla, 1]>cfgsc.Planetlst[0, ipla, 1])) or ((becl1<becl2) and (cfgsc.Planetlst[1, ipla, 1]<cfgsc.Planetlst[0, ipla, 1]))
+              end;
+              jj := j + 1;
+              projection(cfgsc.Planetlst[jj, ipla, 1], cfgsc.Planetlst[jj, ipla, 2], xx2, yy2, True, cfgsc);
+              if lblup
+              then
+                lori := rmod(rad2deg * RotationAngle(x1, y1, xx2, yy2, cfgsc) + 360, 360)
+              else
+                lori := rmod(rad2deg * RotationAngle(xx2, yy2, x1, y1, cfgsc) + 360, 360);
+            end;
             if (lori < 90) or (lori > 270) then
             begin
               lalign := laLeft;
