@@ -916,6 +916,7 @@ procedure Tf_config_system.IndiTimerTimer(Sender: TObject);
 var
   i: integer;
   drint: word;
+  var ok: boolean;
 begin
   if not receiveindidevice then
   begin
@@ -923,6 +924,8 @@ begin
     exit;
   end;
   IndiTimer.Enabled := False;
+  ok:= not indiclient.Terminated;
+  if ok then begin
   for i := 0 to indiclient.devices.Count - 1 do
   begin
     drint := BaseDevice(indiclient.devices[i]).getDriverInterface();
@@ -938,10 +941,12 @@ begin
       if MountIndiDevice.Items[i] = mountsavedev then
         MountIndiDevice.ItemIndex := i; // reset last entry
     csc.IndiDevice := MountIndiDevice.Text;
-  end
-  else
+  end;
+  ok:=MountIndiDevice.Items.Count > 0;
+  end;
+  if not ok then
   begin
-    if csc.IndiAutostart then
+    if csc.IndiAutostart and (IndiServerHost.Text='localhost') then
     begin
       ExecNoWait('nohup indistarter');
     end
