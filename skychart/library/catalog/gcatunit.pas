@@ -554,6 +554,7 @@ end;
 
 procedure GetGCatInfo(var h : TCatHeader; var info:TCatHdrInfo; var version : integer; var filter,ok : boolean);
 begin
+try
 ok:=ReadCatheader;
 h:=catheader;
 version:=catversion;
@@ -565,6 +566,9 @@ info:=catinfo;
 // rollback for now :
 //filter:=(cattype=1)and(catversion<>rtstar);
 filter:=(cattype=ctBin);
+except
+  ok:=false;
+end;
 end;
 
 Function GetRecCard(p: integer):cardinal ;
@@ -806,6 +810,7 @@ end;
 Procedure OpenGCat(ar1,ar2,de1,de2: double ; var ok : boolean);
 var i:integer;
 begin
+try
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 ok:=ReadCatHeader;
@@ -827,6 +832,9 @@ hemis:= hemislst[curSM];
 zone := zonelst[curSM];
 Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
+end;
+except
+  ok:=false;
 end;
 end;
 
@@ -1134,6 +1142,7 @@ end;
 Procedure OpenGCatwin(var ok : boolean);
 var i: integer;
 begin
+try
 curSM:=1;
 ok:=ReadCatHeader;
 if ok then begin
@@ -1154,6 +1163,9 @@ hemis:= hemislst[curSM];
 zone := zonelst[curSM];
 Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
+end;
+except
+  ok:=false;
 end;
 end;
 
