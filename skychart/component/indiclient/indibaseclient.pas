@@ -30,7 +30,7 @@ interface
 
 uses
   {$ifdef UNIX}
-  netdb,
+  netdb, dnssend,
   {$endif}
   indiapi, indibasedevice, indicom, blcksock, synsock, XMLRead, DOM, contnrs,
   Forms, Classes, SysUtils;
@@ -920,6 +920,9 @@ var
   H: THostEntry;
   ok: boolean;
   buf: string;
+  dns:TDNSSend;
+  resp:TStringList;
+  i:integer;
 
   function FirstWord(var Line: string): string;
   var
@@ -939,6 +942,7 @@ var
 {$endif}
 begin
   {$ifdef UNIX}
+  try
   if (pos('.', host) = 0) and (not ResolveHostByName(host, H)) then
   begin
     // try to add the default domain
@@ -947,6 +951,24 @@ begin
     ok := ResolveHostByName(buf, H);
     if ok then
       host := buf;
+  end;
+  if (pos('.local', host) > 0) and (not ResolveHostByName(host, H)) then
+  begin
+    // try Avahi/Bonjour mDNS
+    dns:=TDNSSend.Create;
+    resp:=TStringList.Create;
+    try
+    dns.TargetHost:='224.0.0.251'; // multicast
+    dns.TargetPort:='5353';        // Avahi/Bonjour port
+    ok:=dns.DNSQuery(host,QTYPE_A,resp);
+    if ok and (resp.Count>0) then
+       host := resp[0];
+    finally
+      resp.Free;
+      dns.Free;
+    end;
+  end;
+  except
   end;
   {$endif}
   FTargetHost := host;

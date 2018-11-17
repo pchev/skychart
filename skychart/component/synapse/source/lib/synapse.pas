@@ -4,10 +4,11 @@
 
 unit synapse;
 
+{$warn 5023 off : no warning about unused units}
 interface
 
 uses
-  blcksock, ftpsend, httpsend, synaser, ssl_openssl, LazarusPackageIntf;
+  blcksock, ftpsend, httpsend, synaser, ssl_openssl, dnssend, LazarusPackageIntf;
 
 implementation
 
