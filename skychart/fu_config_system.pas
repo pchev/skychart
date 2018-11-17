@@ -924,7 +924,7 @@ begin
     exit;
   end;
   IndiTimer.Enabled := False;
-  ok:= not indiclient.Terminated;
+  ok:= not ((indiclient=nil)or indiclient.Finished or indiclient.Terminated or (not indiclient.Connected));
   if ok then begin
   for i := 0 to indiclient.devices.Count - 1 do
   begin
@@ -952,10 +952,7 @@ begin
     end
     else
     begin
-      if pos('.local',IndiServerHost.Text)>0 then
-        ShowMessage(rsConnectionTo+crlf+'Beware that mDNS .local server name is not supported.')
-      else
-        ShowMessage(rsConnectionTo);
+      ShowMessage(rsConnectionTo);
     end;
     MountIndiDevice.Items.Add(mountsavedev);
     MountIndiDevice.ItemIndex := 0;
