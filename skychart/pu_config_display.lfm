@@ -1,131 +1,210 @@
 object f_configdisplay: Tf_configdisplay
   Left = 258
-  Height = 602
+  Height = 596
   Top = 337
-  Width = 502
+  Width = 497
   ActiveControl = Button6
   BorderStyle = bsSingle
   Caption = 'Display'
-  ClientHeight = 602
-  ClientWidth = 502
+  ClientHeight = 596
+  ClientWidth = 497
+  DesignTimePPI = 95
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  ParentFont = True
-  LCLVersion = '1.6.0.2'
-  Visible = False
   object Panel1: TPanel
     Left = 0
-    Height = 50
-    Top = 552
-    Width = 502
+    Height = 49
+    Top = 547
+    Width = 497
     Align = alBottom
-    ClientHeight = 50
-    ClientWidth = 502
+    ClientHeight = 49
+    ClientWidth = 497
+    ParentFont = False
     TabOrder = 0
     object Button2: TButton
-      Left = 182
+      Left = 181
       Height = 25
       Top = 10
-      Width = 77
+      Width = 76
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'OK'
       Default = True
       ModalResult = 1
+      ParentFont = False
       TabOrder = 1
     end
     object Button4: TButton
-      Left = 286
+      Left = 283
       Height = 25
       Top = 10
-      Width = 77
+      Width = 76
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
       OnClick = Button4Click
+      ParentFont = False
       TabOrder = 2
     end
     object Button5: TButton
-      Left = 395
+      Left = 391
       Height = 25
       Top = 10
-      Width = 77
+      Width = 76
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
+      ParentFont = False
       TabOrder = 3
     end
     object Button6: TButton
       Left = 80
       Height = 25
       Top = 10
-      Width = 75
+      Width = 74
       Anchors = [akTop, akRight]
       Caption = 'Help'
       OnClick = Button6Click
+      ParentFont = False
       TabOrder = 0
     end
   end
   inline f_config_display1: Tf_config_display
-    Height = 552
-    Width = 502
+    Height = 547
+    Width = 497
     Align = alClient
-    ClientHeight = 552
-    ClientWidth = 502
+    ClientHeight = 547
+    ClientWidth = 497
     TabOrder = 1
-    DesignLeft = 204
-    DesignTop = 132
     inherited MainPanel: TPanel
-      Height = 552
-      Width = 502
-      ClientHeight = 552
-      ClientWidth = 502
+      Height = 547
+      Width = 497
+      ClientHeight = 547
+      ClientWidth = 497
       inherited PageControl1: TPageControl
-        Height = 550
-        Width = 500
-        ActivePage = nil
-        TabIndex = -1
+        Height = 545
+        Width = 495
+        ActivePage = f_config_display1.Page1
+        TabIndex = 0
         inherited Page1: TTabSheet
-          ClientHeight = 544
-          ClientWidth = 494
+          ClientHeight = 541
+          ClientWidth = 485
+          inherited Panel7: TPanel
+            inherited Label257: TLabel
+              Height = 17
+              Width = 168
+            end
+            inherited Label263: TLabel
+              Height = 17
+              Width = 104
+            end
+            inherited Label262: TLabel
+              Height = 17
+              Width = 55
+            end
+            inherited Label256: TLabel
+              Height = 17
+              Width = 103
+            end
+          end
+          inherited Panel5: TPanel
+            inherited Label9: TLabel
+              Height = 17
+              Width = 107
+            end
+            inherited FileNameEdit1: TFileNameEdit
+              Height = 29
+            end
+          end
+          inherited red_moveBox: TCheckBox
+            Width = 266
+          end
+          inherited antialias: TCheckBox
+            Width = 94
+          end
+          inherited CheckBox6: TCheckBox
+            Width = 232
+          end
+          inherited Panel4: TPanel
+            inherited Label259: TLabel
+              Height = 17
+              Width = 55
+            end
+            inherited Label258: TLabel
+              Height = 17
+              Width = 111
+            end
+          end
         end
         inherited Page2: TTabSheet
-          ClientHeight = 544
-          ClientWidth = 494
+          ClientHeight = 541
+          ClientWidth = 485
         end
         inherited Page3: TTabSheet
-          ClientHeight = 544
-          ClientWidth = 494
+          ClientHeight = 541
+          ClientWidth = 485
+          inherited gbDSOCOverrides: TGroupBox
+            inherited FillPanel2: TPanel
+              ClientHeight = 158
+              ClientWidth = 62
+            end
+            inherited FillPanel1: TPanel
+              ClientHeight = 175
+              ClientWidth = 60
+            end
+          end
+          inherited GroupBox2: TGroupBox
+            inherited NebColorPanel: TPanel
+              ClientHeight = 37
+              ClientWidth = 229
+            end
+          end
         end
         inherited Page4: TTabSheet
-          ClientHeight = 544
-          ClientWidth = 494
+          ClientHeight = 541
+          ClientWidth = 485
         end
         inherited Page5: TTabSheet
-          ClientHeight = 544
-          ClientWidth = 494
+          ClientHeight = 541
+          ClientWidth = 485
         end
         inherited Page6: TTabSheet
-          ClientHeight = 544
-          ClientWidth = 494
+          ClientHeight = 541
+          ClientWidth = 485
           inherited GroupBox5: TGroupBox
-            ClientHeight = 278
+            inherited PanelRot: TPanel
+              ClientHeight = 246
+              ClientWidth = 66
+            end
           end
         end
         inherited Page7: TTabSheet
-          ClientHeight = 544
-          ClientWidth = 494
+          ClientHeight = 541
+          ClientWidth = 485
         end
         inherited Page8: TTabSheet
-          ClientHeight = 544
-          ClientWidth = 494
+          ClientHeight = 541
+          ClientWidth = 485
         end
         inherited Page9: TTabSheet
-          ClientHeight = 544
-          ClientWidth = 494
+          ClientHeight = 541
+          ClientWidth = 485
+          inherited Label308: TLabel
+            Height = 17
+            Width = 209
+          end
+          inherited CenterMark2: TCheckBox
+            Width = 167
+          end
+          inherited CheckBox2: TCheckBox
+            Width = 95
+          end
+          inherited CheckBox4: TCheckBox
+            Width = 137
+          end
         end
       end
     end

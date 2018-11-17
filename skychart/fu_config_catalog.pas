@@ -398,7 +398,7 @@ begin
   Page5.Caption := rsOtherSoftwar;
   Page4.Caption := rsObsolete;
   Label88.Caption := rsCDCObsoleteC;
-  Label91.Caption := rsReplacedBy + ' Tycho-2';
+  Label91.Caption := rsReplacedBy + ' GAIA';
   Label96.Caption := rsReplacedBy + ' XHIP';
   Label93.Caption := rsReplacedBy + ' UCAC4';
   Label95.Caption := rsReplacedBy + ' PGC/LEDA';

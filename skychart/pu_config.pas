@@ -44,6 +44,11 @@ type
 
   Tf_config = class(TForm)
     f_config_calendar1: Tf_config_calendar;
+    f_config_catalog1: Tf_config_catalog;
+    f_config_chart1: Tf_config_chart;
+    f_config_observatory1: Tf_config_observatory;
+    f_config_system1: Tf_config_system;
+    f_config_time1: Tf_config_time;
     PageControl1: TPageControl;
     Panel1: TPanel;
     Panel3: TPanel;
@@ -57,7 +62,7 @@ type
     TabSheet5: TTabSheet;
     TabSheet6: TTabSheet;
     TabSheet7: TTabSheet;
-    TabSheet8: TTabSheet;
+    TabSheet0: TTabSheet;
     TabSheet9: TTabSheet;
     TreeView1: TTreeView;
     previous: TButton;
@@ -68,14 +73,9 @@ type
     Apply: TButton;
     CancelBtn: TButton;
     HelpBtn: TButton;
-    f_config_observatory1: Tf_config_observatory;
-    f_config_chart1: Tf_config_chart;
-    f_config_catalog1: Tf_config_catalog;
     f_config_solsys1: Tf_config_solsys;
     f_config_display1: Tf_config_display;
     f_config_pictures1: Tf_config_pictures;
-    f_config_system1: Tf_config_system;
-    f_config_time1: Tf_config_time;
     f_config_internet1: Tf_config_internet;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);
@@ -155,61 +155,61 @@ implementation
 procedure Tf_config.SetLang;
 begin
   Caption := rsConfiguratio;
-  TreeView1.items[0].Text := '1- ' + rsDateTime2;
-  TreeView1.items[1].Text := '1- ' + rsDateTime2;
-  TreeView1.items[2].Text := '2- ' + rsTimeSimulati;
-  TreeView1.items[3].Text := '3- ' + rsAnimation;
-  TreeView1.items[4].Text := '2- ' + rsObservatory;
-  TreeView1.items[5].Text := '1- ' + rsObservatory;
-  TreeView1.items[6].Text := '2- ' + rsHorizon;
-  TreeView1.items[7].Text := '3- ' + rsChartCoordin;
-  TreeView1.items[8].Text := '1- ' + rsChartCoordin;
-  TreeView1.items[9].Text := '2- ' + rsFieldOfVisio;
-  TreeView1.items[10].Text := '3- ' + rsProjection;
-  TreeView1.items[11].Text := '4- ' + rsObjectFilter;
-  TreeView1.items[12].Text := '5- ' + rsGridSpacing;
-  TreeView1.items[13].Text := '6- ' + rsObjectList;
-  TreeView1.items[14].Text := '4- ' + rsCatalog;
-  TreeView1.items[15].Text := '1- ' + rsCdCStars;
-  TreeView1.items[16].Text := '2- ' + rsCdCNebulae;
-  TreeView1.items[17].Text := '3- ' + rsCatalog;
-  TreeView1.items[18].Text := '4- ' + 'VO ' + rsCatalog;
-  TreeView1.items[19].Text := '5- ' + rsUserDefinedO;
-  TreeView1.items[20].Text := '6- ' + rsOtherSoftwar;
-  TreeView1.items[21].Text := '7- ' + rsObsolete;
-  TreeView1.items[22].Text := '5- ' + rsSolarSystem;
-  TreeView1.items[23].Text := '1- ' + rsSolarSystem;
-  TreeView1.items[24].Text := '2- ' + rsPlanet;
-  TreeView1.items[25].Text := '3- ' + rsComet;
-  TreeView1.items[26].Text := '4- ' + rsAsteroid;
-  TreeView1.items[27].Text := '6- ' + rsDisplay;
-  TreeView1.items[28].Text := '1- ' + rsDisplay;
-  TreeView1.items[29].Text := '2- ' + rsDisplayColou;
-  TreeView1.items[30].Text := '3- ' + rsDeepSkyObjec;
-  TreeView1.items[31].Text := '4- ' + rsSkyBackgroun;
-  TreeView1.items[32].Text := '5- ' + rsLines;
-  TreeView1.items[33].Text := '6- ' + rsLabels;
-  TreeView1.items[34].Text := '7- ' + rsFonts;
-  TreeView1.items[35].Text := '8- ' + rsFinderCircle;
-  TreeView1.items[36].Text := '9- ' + rsFinderRectan;
-  TreeView1.items[37].Text := '7- ' + rsPictures;
-  TreeView1.items[38].Text := '1- ' + rsObject;
-  TreeView1.items[39].Text := '2- ' + rsBackground;
-  TreeView1.items[40].Text := '3- ' + rsDSSRealSky;
-  TreeView1.items[41].Text := '4- ' + rsImageArchive;
-  TreeView1.items[42].Text := '8- ' + rsGeneral;
-  TreeView1.items[43].Text := '1- ' + rsGeneral;
-  TreeView1.items[44].Text := '2- ' + rsServer;
-  TreeView1.items[45].Text := '3- ' + rsTelescope;
-  TreeView1.items[46].Text := '4- ' + rsLanguage2;
-  TreeView1.items[47].Text := '5- ' + 'SAMP';
-  TreeView1.items[48].Text := '9- ' + rsInternet;
-  TreeView1.items[49].Text := '1- ' + rsProxy;
-  TreeView1.items[50].Text := '2- ' + rsOrbitalEleme;
-  TreeView1.items[51].Text := '3- ' + rsOnlineDSSPic;
-  TreeView1.items[52].Text := '4- ' + rsArtificialSa2;
-  TreeView1.items[53].Text := '10- ' + rsCalendar;
-  TreeView1.items[54].Text := '1- ' + rsGraphs;
+  TreeView1.items[0].Text := '1- ' + rsGeneral;
+  TreeView1.items[1].Text :=   '1- ' + rsLanguage2;
+  TreeView1.items[2].Text :=   '2- ' + rsTelescope;
+  TreeView1.items[3].Text :=   '3- ' + rsGeneral;
+  TreeView1.items[4].Text :=   '4- ' + rsServer;
+  TreeView1.items[5].Text :=   '5- ' + 'SAMP';
+  TreeView1.items[6].Text := '2- ' + rsDateTime2;
+  TreeView1.items[7].Text :=   '1- ' + rsDateTime2;
+  TreeView1.items[8].Text :=   '2- ' + rsTimeSimulati;
+  TreeView1.items[9].Text :=   '3- ' + rsAnimation;
+  TreeView1.items[10].Text :='3- ' + rsObservatory;
+  TreeView1.items[11].Text :=  '1- ' + rsObservatory;
+  TreeView1.items[12].Text :=  '2- ' + rsHorizon;
+  TreeView1.items[13].Text :='4- ' + rsChartCoordin;
+  TreeView1.items[14].Text :=  '1- ' + rsChartCoordin;
+  TreeView1.items[15].Text :=  '2- ' + rsFieldOfVisio;
+  TreeView1.items[16].Text :=  '3- ' + rsProjection;
+  TreeView1.items[17].Text :=  '4- ' + rsObjectFilter;
+  TreeView1.items[18].Text :=  '5- ' + rsGridSpacing;
+  TreeView1.items[19].Text :=  '6- ' + rsObjectList;
+  TreeView1.items[20].Text :='5- ' + rsCatalog;
+  TreeView1.items[21].Text :=  '1- ' + rsCdCStars;
+  TreeView1.items[22].Text :=  '2- ' + rsCdCNebulae;
+  TreeView1.items[23].Text :=  '3- ' + rsCatalog;
+  TreeView1.items[24].Text :=  '4- ' + 'VO ' + rsCatalog;
+  TreeView1.items[25].Text :=  '5- ' + rsUserDefinedO;
+  TreeView1.items[26].Text :=  '6- ' + rsOtherSoftwar;
+  TreeView1.items[27].Text :=  '7- ' + rsObsolete;
+  TreeView1.items[28].Text :='6- ' + rsSolarSystem;
+  TreeView1.items[29].Text :=  '1- ' + rsSolarSystem;
+  TreeView1.items[30].Text :=  '2- ' + rsPlanet;
+  TreeView1.items[31].Text :=  '3- ' + rsComet;
+  TreeView1.items[32].Text :=  '4- ' + rsAsteroid;
+  TreeView1.items[33].Text :='7- ' + rsDisplay;
+  TreeView1.items[34].Text :=  '1- ' + rsDisplay;
+  TreeView1.items[35].Text :=  '2- ' + rsDisplayColou;
+  TreeView1.items[36].Text :=  '3- ' + rsDeepSkyObjec;
+  TreeView1.items[37].Text :=  '4- ' + rsSkyBackgroun;
+  TreeView1.items[38].Text :=  '5- ' + rsLines;
+  TreeView1.items[39].Text :=  '6- ' + rsLabels;
+  TreeView1.items[40].Text :=  '7- ' + rsFonts;
+  TreeView1.items[41].Text :=  '8- ' + rsFinderCircle;
+  TreeView1.items[42].Text :=  '9- ' + rsFinderRectan;
+  TreeView1.items[43].Text :='8- ' + rsPictures;
+  TreeView1.items[44].Text :=  '1- ' + rsObject;
+  TreeView1.items[45].Text :=  '2- ' + rsBackground;
+  TreeView1.items[46].Text :=  '3- ' + rsDSSRealSky;
+  TreeView1.items[47].Text :=  '4- ' + rsImageArchive;
+  TreeView1.items[48].Text :='9- ' + rsInternet;
+  TreeView1.items[49].Text :=  '1- ' + rsProxy;
+  TreeView1.items[50].Text :=  '2- ' + rsOrbitalEleme;
+  TreeView1.items[51].Text :=  '3- ' + rsOnlineDSSPic;
+  TreeView1.items[52].Text :=  '4- ' + rsArtificialSa2;
+  TreeView1.items[53].Text :='10- ' + rsCalendar;
+  TreeView1.items[54].Text :=  '1- ' + rsGraphs;
 
   Applyall.Caption := rsApplyChangeT;
   Apply.Caption := rsApply;
@@ -249,9 +249,9 @@ begin
   Fcmain := Tconf_main.Create;
   Fcdss := Tconf_dss.Create;
   SetLang;
-  compage := 25;
-  astpage := 26;
-  dbpage := 43;
+  compage := 31;
+  astpage := 32;
+  dbpage := 1;
   f_config_solsys1.onShowDB := ShowDBSetting;
   f_config_solsys1.onPrepareAsteroid := SolSysPrepareAsteroid;
   f_config_system1.onShowAsteroid := ShowAsteroidSetting;
@@ -320,16 +320,16 @@ end;
 procedure Tf_config.ShowPage(i, j: integer);
 begin
   // before the page change:
-  if PageControl1.PageIndex = 3 then
+  if PageControl1.PageIndex = 4 then
   begin // config catalog
     if f_config_catalog1.PageControl1.ActivePage = f_config_catalog1.Page1 then
       f_config_catalog1.ActivateGCat;
     if f_config_catalog1.PageControl1.ActivePage = f_config_catalog1.Page1b then
       f_config_catalog1.ActivateUserObjects;
   end;
-  if PageControl1.PageIndex = 7 then
+  if PageControl1.PageIndex = 0 then
   begin // config system
-    if f_config_system1.PageControl1.ActivePage = f_config_system1.Page1 then
+    if f_config_system1.PageControl1.ActivePage = f_config_system1.Page3 then
       f_config_system1.ActivateDBchange;
   end;
   // page change
@@ -337,43 +337,43 @@ begin
   case i of
     0:
     begin
+      f_config_system1.PageControl1.PageIndex := j;
+      f_config_system1.Init;
+    end;
+    1:
+    begin
       f_config_time1.PageControl1.PageIndex := j;
       f_config_time1.Init;
     end;
-    1:
+    2:
     begin
       f_config_observatory1.PageControl1.PageIndex := j;
       f_config_observatory1.Init;
     end;
-    2:
+    3:
     begin
       f_config_chart1.PageControl1.PageIndex := j;
       f_config_chart1.Init;
     end;
-    3:
+    4:
     begin
       f_config_catalog1.PageControl1.PageIndex := j;
       f_config_catalog1.Init;
     end;
-    4:
+    5:
     begin
       f_config_solsys1.PageControl1.PageIndex := j;
       f_config_solsys1.Init;
     end;
-    5:
+    6:
     begin
       f_config_display1.PageControl1.PageIndex := j;
       f_config_display1.Init;
     end;
-    6:
+    7:
     begin
       f_config_pictures1.PageControl1.PageIndex := j;
       f_config_pictures1.Init;
-    end;
-    7:
-    begin
-      f_config_system1.PageControl1.PageIndex := j;
-      f_config_system1.Init;
     end;
     8:
     begin
@@ -394,16 +394,16 @@ procedure Tf_config.ActivateChanges;
 begin
   if Treeview1.selected <> nil then
     cmain.configpage := Treeview1.selected.absoluteindex;
-  if PageControl1.PageIndex = 3 then
+  if PageControl1.PageIndex = 4 then
   begin // config catalog
     if f_config_catalog1.PageControl1.ActivePage = f_config_catalog1.Page1 then
       f_config_catalog1.ActivateGCat;
     if f_config_catalog1.PageControl1.ActivePage = f_config_catalog1.Page1b then
       f_config_catalog1.ActivateUserObjects;
   end;
-  if PageControl1.PageIndex = 7 then
+  if PageControl1.PageIndex = 0 then
   begin // config system
-    if f_config_system1.PageControl1.ActivePage = f_config_system1.Page1 then
+    if f_config_system1.PageControl1.ActivePage = f_config_system1.Page3 then
       f_config_system1.ActivateDBchange;
   end;
   Fcdss := f_config_internet1.cdss;
@@ -427,14 +427,14 @@ end;
 procedure Tf_config.HelpBtnClick(Sender: TObject);
 begin
   case PageControl1.PageIndex of
-    0: f_config_time1.ShowHelp;
-    1: f_config_observatory1.ShowHelp;
-    2: f_config_chart1.ShowHelp;
-    3: f_config_catalog1.ShowHelp;
-    4: f_config_solsys1.ShowHelp;
-    5: f_config_display1.ShowHelp;
-    6: f_config_pictures1.ShowHelp;
-    7: f_config_system1.ShowHelp;
+    0: f_config_system1.ShowHelp;
+    1: f_config_time1.ShowHelp;
+    2: f_config_observatory1.ShowHelp;
+    3: f_config_chart1.ShowHelp;
+    4: f_config_catalog1.ShowHelp;
+    5: f_config_solsys1.ShowHelp;
+    6: f_config_display1.ShowHelp;
+    7: f_config_pictures1.ShowHelp;
     8: f_config_internet1.ShowHelp;
     9: f_config_calendar1.ShowHelp;
   end;

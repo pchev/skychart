@@ -29,7 +29,7 @@ uses
   indibaseclient, indibasedevice, indiapi,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms, LazUTF8, LazFileUtils, Math,
-  ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML, CheckLst;
+  ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML, CheckLst, Types;
 
 type
 
@@ -76,7 +76,7 @@ type
     TelescopeManualLabel: TLabel;
     Label14: TLabel;
     Language: TTabSheet;
-    Page4: TTabSheet;
+    Page1: TTabSheet;
     TelescopeManual: TPanel;
     INDI: TPanel;
     persdir: TDirectoryEdit;
@@ -85,9 +85,9 @@ type
     LinuxDesktopBox: TComboBox;
     GroupBoxLinux: TGroupBox;
     MainPanel: TPanel;
-    Page1: TTabSheet;
-    Page2: TTabSheet;
     Page3: TTabSheet;
+    Page4: TTabSheet;
+    Page2: TTabSheet;
     Label153: TLabel;
     Label77: TLabel;
     Label84: TLabel;
@@ -247,10 +247,10 @@ implementation
 procedure Tf_config_system.SetLang;
 begin
   Caption := rsGeneral;
-  Page1.Caption := rsGeneral;
-  Page2.Caption := rsServer;
-  Page3.Caption := rsTelescope;
-  Page4.Caption := rsLanguage2;
+  Page1.Caption := rsLanguage2;
+  Page2.Caption := rsTelescope;
+  Page3.Caption := rsGeneral;
+  Page4.Caption := rsServer;
   Page5.Caption := 'SAMP';
   Label153.Caption := rsGeneralSetti;
   MysqlBoxLabel.Caption := rsMySQLDatabas;

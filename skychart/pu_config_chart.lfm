@@ -1,124 +1,211 @@
 object f_configchart: Tf_configchart
   Left = 124
-  Height = 578
+  Height = 572
   Top = 331
-  Width = 503
+  Width = 498
   ActiveControl = Button6
   BorderStyle = bsSingle
   Caption = 'Charts'
-  ClientHeight = 578
-  ClientWidth = 503
+  ClientHeight = 572
+  ClientWidth = 498
+  DesignTimePPI = 95
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  ParentFont = True
-  LCLVersion = '1.6.0.2'
-  Visible = False
   object Panel1: TPanel
     Left = 0
-    Height = 50
-    Top = 528
-    Width = 503
+    Height = 49
+    Top = 523
+    Width = 498
     Align = alBottom
-    ClientHeight = 50
-    ClientWidth = 503
+    ClientHeight = 49
+    ClientWidth = 498
+    ParentFont = False
     TabOrder = 0
     object Button3: TButton
-      Left = 205
+      Left = 203
       Height = 25
       Top = 12
-      Width = 75
+      Width = 74
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'OK'
       Default = True
       ModalResult = 1
+      ParentFont = False
       TabOrder = 1
     end
     object Button4: TButton
-      Left = 301
+      Left = 298
       Height = 25
       Top = 12
-      Width = 75
+      Width = 74
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
       OnClick = Button4Click
+      ParentFont = False
       TabOrder = 2
     end
     object Button5: TButton
-      Left = 405
+      Left = 401
       Height = 25
       Top = 12
-      Width = 75
+      Width = 74
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
+      ParentFont = False
       TabOrder = 3
     end
     object Button6: TButton
-      Left = 113
+      Left = 112
       Height = 25
       Top = 12
-      Width = 75
+      Width = 74
       Anchors = [akTop, akRight]
       Caption = 'Help'
       OnClick = Button6Click
+      ParentFont = False
       TabOrder = 0
     end
   end
   inline f_config_chart1: Tf_config_chart
-    Width = 503
+    Height = 523
+    Width = 498
     Align = alClient
-    ClientWidth = 503
+    ClientHeight = 523
+    ClientWidth = 498
     TabOrder = 1
-    DesignLeft = 0
-    DesignTop = 0
     inherited MainPanel: TPanel
-      Width = 503
-      ClientWidth = 503
+      Height = 523
+      Width = 498
+      ClientHeight = 523
+      ClientWidth = 498
       inherited PageControl1: TPageControl
-        Width = 501
-        ActivePage = nil
-        TabIndex = -1
+        Height = 478
+        Width = 496
         inherited Page1: TTabSheet
-          ClientHeight = 466
-          ClientWidth = 495
+          ClientHeight = 474
+          ClientWidth = 486
+          inherited PanelExpert: TPanel
+            inherited EquinoxLabel: TLabel
+              Height = 17
+              Width = 56
+            end
+            inherited Label1: TLabel
+              Height = 17
+              Width = 43
+            end
+            inherited equinox2: TFloatEdit
+              Height = 29
+            end
+            inherited GroupBox3: TGroupBox
+              inherited PMBox: TCheckBox
+                Width = 447
+              end
+            end
+            inherited epoch2: TFloatEdit
+              Height = 29
+            end
+          end
+          inherited Label31: TLabel
+            Height = 17
+            Width = 85
+          end
+          inherited ExpertMode: TCheckBox
+            Width = 107
+          end
         end
         inherited Page2: TTabSheet
-          ClientHeight = 466
-          ClientWidth = 495
+          ClientHeight = 474
+          ClientWidth = 486
         end
         inherited Page3: TTabSheet
-          ClientHeight = 466
-          ClientWidth = 495
+          ClientHeight = 474
+          ClientWidth = 486
         end
         inherited Page4: TTabSheet
-          ClientHeight = 466
-          ClientWidth = 495
+          ClientHeight = 474
+          ClientWidth = 486
+          inherited GroupBox2: TGroupBox
+            inherited Panel4: TPanel
+              inherited Panel2: TPanel
+                ClientHeight = 101
+                ClientWidth = 430
+              end
+              inherited Panel3: TPanel
+                ClientHeight = 46
+                ClientWidth = 430
+              end
+            end
+          end
         end
         inherited Page5: TTabSheet
-          ClientHeight = 466
-          ClientWidth = 495
-          inherited CheckBox13: TCheckBox
-            Height = 23
-            Width = 135
-          end
-          inherited CheckBox2: TCheckBox
-            Height = 23
-            Width = 131
-          end
+          ClientHeight = 474
+          ClientWidth = 486
         end
         inherited Page6: TTabSheet
-          ClientHeight = 466
-          ClientWidth = 495
+          ClientHeight = 474
+          ClientWidth = 486
         end
       end
       inherited FOVPanel: TPanel
-        Width = 501
-        ClientWidth = 501
+        Height = 43
+        Top = 479
+        Width = 496
+        ClientHeight = 43
+        ClientWidth = 496
+        inherited fv10: TLabel
+          Height = 17
+          Width = 29
+        end
+        inherited Label2: TLabel
+          Height = 17
+          Width = 79
+        end
+        inherited fv9: TLabel
+          Height = 17
+          Width = 24
+        end
+        inherited fv8: TLabel
+          Height = 17
+          Width = 24
+        end
+        inherited fv7: TLabel
+          Height = 17
+          Width = 24
+        end
+        inherited fv6: TLabel
+          Height = 17
+          Width = 24
+        end
+        inherited fv5: TLabel
+          Height = 17
+          Width = 24
+        end
+        inherited fv4: TLabel
+          Height = 17
+          Width = 24
+        end
+        inherited fv3: TLabel
+          Height = 17
+          Width = 24
+        end
+        inherited fv2: TLabel
+          Height = 17
+          Width = 24
+        end
+        inherited fv1: TLabel
+          Height = 17
+          Width = 24
+        end
+        inherited fv0: TLabel
+          Height = 17
+          Width = 24
+        end
       end
     end
   end

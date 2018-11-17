@@ -24,10 +24,10 @@ object f_config_catalog: Tf_config_catalog
       Height = 476
       Top = 1
       Width = 497
-      ActivePage = Page2
+      ActivePage = Page4
       Align = alClient
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 6
       TabOrder = 1
       OnChange = PageControl1Change
       OnChanging = PageControl1Changing

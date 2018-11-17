@@ -40,8 +40,8 @@ type
     Button4: TButton;
     Button5: TButton;
     Button6: TButton;
-    Panel1: TPanel;
     f_config_display1: Tf_config_display;
+    Panel1: TPanel;
     procedure Button4Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);

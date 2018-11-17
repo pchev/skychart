@@ -4705,7 +4705,7 @@ end;
 
 procedure Tf_main.TelescopeSetupExecute(Sender: TObject);
 begin
-  SetupSystemPage(2);
+  SetupSystemPage(1);
 end;
 
 procedure Tf_main.SetupSystemExecute(Sender: TObject);
@@ -11854,10 +11854,10 @@ begin
     27: SetupChartPage(1);
     28: SetupChartPage(5);
     29: SetupTimePage(2);
-    30: SetupSystemPage(2);
-    31: SetupSystemPage(2);
-    32: SetupSystemPage(2);
-    33: SetupSystemPage(2);
+    30: SetupSystemPage(1);
+    31: SetupSystemPage(1);
+    32: SetupSystemPage(1);
+    33: SetupSystemPage(1);
     34: SetupChartPage(0);
     35: SetupChartPage(0);
     36: SetupChartPage(0);

@@ -18,7 +18,6 @@ object f_main: Tf_main
   OnResize = FormResize
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '2.0.0.2'
   object PanelTop: TPanel
     Left = 0
     Height = 80
@@ -88,7 +87,7 @@ object f_main: Tf_main
         OnMouseDown = MDEditToolBar
         object Divider_ToolBarMain_end: TToolButton
           Left = 1
-          Height = 5
+          Height = 24
           Top = 2
           Caption = 'Divider_ToolBarMain_end'
           Style = tbsDivider
@@ -161,12 +160,12 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 409
+    Height = 436
     Top = 80
     Width = 28
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 409
+    ClientHeight = 436
     ClientWidth = 28
     Font.Height = 10
     FullRepaint = False
@@ -174,7 +173,7 @@ object f_main: Tf_main
     TabOrder = 1
     object ToolBarLeft: TToolBar
       Left = 0
-      Height = 409
+      Height = 436
       Top = 0
       Width = 28
       Align = alClient
@@ -193,18 +192,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 850
-    Height = 409
+    Height = 436
     Top = 80
     Width = 26
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 409
+    ClientHeight = 436
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 3
     object ToolBarRight: TToolBar
       Left = 0
-      Height = 409
+      Height = 436
       Top = 0
       Width = 26
       Align = alClient
@@ -230,7 +229,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 489
+    Top = 516
     Width = 876
     Align = alBottom
     BevelOuter = bvNone
@@ -3305,7 +3304,7 @@ object f_main: Tf_main
   end
   object ScriptPanel: TPanel
     Left = 28
-    Height = 409
+    Height = 436
     Top = 80
     Width = 276
     Align = alLeft
@@ -3315,7 +3314,7 @@ object f_main: Tf_main
   end
   object Splitter1: TSplitter
     Left = 304
-    Height = 409
+    Height = 436
     Top = 80
     Width = 5
     ResizeStyle = rsLine
@@ -3402,6 +3401,10 @@ object f_main: Tf_main
       object N34: TMenuItem
         Caption = '-'
       end
+      object MenuGeneralConfig: TMenuItem
+        Action = SetupSystem
+        GlyphShowMode = gsmNever
+      end
       object MenuDateConfig: TMenuItem
         Action = SetupTime
       end
@@ -3427,10 +3430,6 @@ object f_main: Tf_main
       end
       object MenuPictureConfig: TMenuItem
         Action = SetupPictures
-        GlyphShowMode = gsmNever
-      end
-      object MenuGeneralConfig: TMenuItem
-        Action = SetupSystem
         GlyphShowMode = gsmNever
       end
       object MenuInternetConfig: TMenuItem

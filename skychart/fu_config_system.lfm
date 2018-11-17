@@ -23,14 +23,502 @@ object f_config_system: Tf_config_system
       Height = 522
       Top = 1
       Width = 498
-      ActivePage = Page3
+      ActivePage = Page1
       Align = alClient
       ShowTabs = False
-      TabIndex = 2
+      TabIndex = 0
       TabOrder = 0
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
         Caption = 'Page1'
+        ClientHeight = 518
+        ClientWidth = 488
+        object Label14: TLabel
+          Left = 19
+          Height = 17
+          Top = 24
+          Width = 126
+          Caption = 'Language selection'
+          ParentColor = False
+        end
+        object LanguageList: TCheckListBox
+          Left = 19
+          Height = 408
+          Top = 56
+          Width = 366
+          ExtendedSelect = False
+          ItemHeight = 0
+          OnItemClick = LanguageListItemClick
+          TabOrder = 0
+          TopIndex = -1
+        end
+      end
+      object Page2: TTabSheet
+        Caption = 'Page2'
+        ClientHeight = 518
+        ClientWidth = 488
+        object Label13: TLabel
+          Left = 0
+          Height = 17
+          Top = 0
+          Width = 114
+          Caption = 'Telescope Setting'
+          ParentColor = False
+        end
+        object TelescopeSelect: TRadioGroup
+          Left = 8
+          Height = 77
+          Top = 36
+          Width = 450
+          AutoFill = True
+          Caption = 'TelescopeSelect'
+          ChildSizing.LeftRightSpacing = 6
+          ChildSizing.TopBottomSpacing = 6
+          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.EnlargeVertical = crsHomogenousChildResize
+          ChildSizing.ShrinkHorizontal = crsScaleChilds
+          ChildSizing.ShrinkVertical = crsScaleChilds
+          ChildSizing.Layout = cclLeftToRightThenTopToBottom
+          ChildSizing.ControlsPerLine = 3
+          ClientHeight = 59
+          ClientWidth = 448
+          Columns = 3
+          Items.Strings = (
+            'INDI'
+            'Manual'
+            'ASCOM'
+          )
+          OnClick = TelescopeSelectClick
+          TabOrder = 0
+        end
+        object PageControl2: TPageControl
+          Left = 1
+          Height = 352
+          Top = 120
+          Width = 474
+          ActivePage = TabSheet3
+          ShowTabs = False
+          TabIndex = 3
+          TabOrder = 1
+          object TabSheet1: TTabSheet
+            Caption = 'TabSheet1'
+            ClientHeight = 348
+            ClientWidth = 464
+            object INDI: TPanel
+              Left = 8
+              Height = 328
+              Top = 8
+              Width = 450
+              ClientHeight = 328
+              ClientWidth = 450
+              TabOrder = 0
+              object IndiAutostart: TCheckBox
+                Left = 8
+                Height = 21
+                Top = 64
+                Width = 321
+                Caption = 'Launch INDIstarter if the server is not running'
+                OnClick = IndiAutostartClick
+                TabOrder = 3
+              end
+              object IndiServerPort: TEdit
+                Left = 336
+                Height = 29
+                Top = 32
+                Width = 97
+                OnChange = IndiServerPortChange
+                TabOrder = 1
+              end
+              object IndiServerHost: TEdit
+                Left = 120
+                Height = 29
+                Top = 32
+                Width = 100
+                OnChange = IndiServerHostChange
+                TabOrder = 0
+              end
+              object Label260: TLabel
+                Left = 11
+                Height = 17
+                Top = 152
+                Width = 97
+                Caption = 'Telescope type'
+                ParentColor = False
+              end
+              object Label130: TLabel
+                Left = 231
+                Height = 17
+                Top = 36
+                Width = 103
+                Caption = 'INDI server Port'
+                ParentColor = False
+              end
+              object Label75: TLabel
+                Left = 8
+                Height = 17
+                Top = 36
+                Width = 112
+                Caption = 'INDI Server Host '
+                ParentColor = False
+              end
+              object INDILabel: TLabel
+                Left = 8
+                Height = 17
+                Top = 7
+                Width = 63
+                Caption = 'INDILabel'
+                ParentColor = False
+              end
+              object MountIndiDevice: TComboBox
+                Left = 160
+                Height = 33
+                Top = 148
+                Width = 168
+                AutoCompleteText = [cbactSearchAscending]
+                ItemHeight = 0
+                OnSelect = IndiDevChange
+                Style = csDropDownList
+                TabOrder = 2
+              end
+              object ExternalControlPanel: TPanel
+                Left = 4
+                Height = 45
+                Top = 256
+                Width = 444
+                ClientHeight = 45
+                ClientWidth = 444
+                TabOrder = 4
+                object PanelCmd: TEdit
+                  Left = 172
+                  Height = 29
+                  Top = 7
+                  Width = 257
+                  OnChange = PanelCmdChange
+                  TabOrder = 0
+                end
+                object Label2: TLabel
+                  Left = 4
+                  Height = 17
+                  Top = 11
+                  Width = 159
+                  Caption = 'Control Panel command '
+                  ParentColor = False
+                end
+              end
+              object InternalIndiGui: TCheckBox
+                Left = 11
+                Height = 21
+                Top = 208
+                Width = 224
+                Caption = 'Use the internal INDI gui panel'
+                OnClick = InternalIndiGuiClick
+                TabOrder = 5
+              end
+              object GetIndiDevices: TButton
+                Left = 11
+                Height = 25
+                Top = 104
+                Width = 213
+                Caption = 'Connect and get device list'
+                OnClick = GetIndiDevicesClick
+                TabOrder = 6
+              end
+            end
+          end
+          object TabSheet2: TTabSheet
+            Caption = 'TabSheet2'
+            ClientHeight = 348
+            ClientWidth = 464
+            object TelescopeManual: TPanel
+              Left = 8
+              Height = 330
+              Top = 8
+              Width = 450
+              ClientHeight = 330
+              ClientWidth = 450
+              TabOrder = 0
+              object ManualMountType: TRadioGroup
+                Left = 24
+                Height = 41
+                Top = 105
+                Width = 361
+                AutoFill = True
+                ChildSizing.LeftRightSpacing = 6
+                ChildSizing.TopBottomSpacing = 6
+                ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+                ChildSizing.EnlargeVertical = crsHomogenousChildResize
+                ChildSizing.ShrinkHorizontal = crsScaleChilds
+                ChildSizing.ShrinkVertical = crsScaleChilds
+                ChildSizing.Layout = cclLeftToRightThenTopToBottom
+                ChildSizing.ControlsPerLine = 2
+                ClientHeight = 23
+                ClientWidth = 359
+                Columns = 2
+                Items.Strings = (
+                  'Equatorial'
+                  'Alt / Az'
+                )
+                OnClick = ManualMountTypeClick
+                TabOrder = 0
+              end
+              object Label7: TLabel
+                Left = 24
+                Height = 73
+                Top = 32
+                Width = 361
+                AutoSize = False
+                Caption = 'Set how the mount move on each axis when you turn the driving knob.'#13#10'Then the Telescope button show you the turns you must do to go from one object to another.'
+                ParentColor = False
+                WordWrap = True
+              end
+              object TelescopeManualLabel: TLabel
+                Left = 24
+                Height = 17
+                Top = 6
+                Width = 146
+                Caption = 'TelescopeManualLabel'
+                ParentColor = False
+              end
+              object PageControl3: TPageControl
+                Left = 14
+                Height = 177
+                Top = 150
+                Width = 386
+                ActivePage = TabSheet6
+                ShowTabs = False
+                TabIndex = 1
+                TabOrder = 1
+                object TabSheet5: TTabSheet
+                  Caption = 'TabSheet5'
+                  ClientHeight = 173
+                  ClientWidth = 382
+                  object EquatorialMount: TPanel
+                    Left = 8
+                    Height = 161
+                    Top = 8
+                    Width = 361
+                    ClientHeight = 157
+                    ClientWidth = 357
+                    TabOrder = 0
+                    object Label3: TLabel
+                      Left = 16
+                      Height = 17
+                      Top = 16
+                      Width = 104
+                      Caption = 'Right Ascension'
+                      ParentColor = False
+                    end
+                    object Label4: TLabel
+                      Left = 16
+                      Height = 17
+                      Top = 93
+                      Width = 74
+                      Caption = 'Declination'
+                      ParentColor = False
+                    end
+                    object Label5: TLabel
+                      Left = 240
+                      Height = 17
+                      Top = 16
+                      Width = 74
+                      Caption = 'turns / hour'
+                      ParentColor = False
+                    end
+                    object Label6: TLabel
+                      Left = 240
+                      Height = 17
+                      Top = 93
+                      Width = 90
+                      Caption = 'turns / degree'
+                      ParentColor = False
+                    end
+                    object TurnsRa: TFloatEdit
+                      Left = 128
+                      Height = 29
+                      Top = 11
+                      Width = 81
+                      ParentShowHint = False
+                      TabOrder = 0
+                      OnChange = TurnsRaChange
+                      Value = 0
+                      MinValue = 0
+                      MaxValue = 0
+                    end
+                    object TurnsDec: TFloatEdit
+                      Left = 128
+                      Height = 29
+                      Top = 88
+                      Width = 81
+                      ParentShowHint = False
+                      TabOrder = 2
+                      OnChange = TurnsDecChange
+                      Value = 0
+                      MinValue = 0
+                      MaxValue = 0
+                    end
+                    object RevertTurnsRa: TCheckBox
+                      Left = 128
+                      Height = 21
+                      Top = 40
+                      Width = 123
+                      Caption = 'Revert RA knob'
+                      OnClick = TurnsRaChange
+                      TabOrder = 1
+                    end
+                    object RevertTurnDec: TCheckBox
+                      Left = 128
+                      Height = 21
+                      Top = 120
+                      Width = 133
+                      Caption = 'Revert DEC knob'
+                      OnClick = TurnsDecChange
+                      TabOrder = 3
+                    end
+                  end
+                end
+                object TabSheet6: TTabSheet
+                  Caption = 'TabSheet6'
+                  ClientHeight = 173
+                  ClientWidth = 382
+                  object AltAzMount: TPanel
+                    Left = 8
+                    Height = 161
+                    Top = 8
+                    Width = 361
+                    ClientHeight = 157
+                    ClientWidth = 357
+                    TabOrder = 0
+                    object Label8: TLabel
+                      Left = 16
+                      Height = 17
+                      Top = 16
+                      Width = 54
+                      Caption = 'Azimuth'
+                      ParentColor = False
+                    end
+                    object Label9: TLabel
+                      Left = 16
+                      Height = 17
+                      Top = 93
+                      Width = 51
+                      Caption = 'Altitude'
+                      ParentColor = False
+                    end
+                    object Label10: TLabel
+                      Left = 240
+                      Height = 17
+                      Top = 16
+                      Width = 90
+                      Caption = 'turns / degree'
+                      ParentColor = False
+                    end
+                    object Label11: TLabel
+                      Left = 240
+                      Height = 17
+                      Top = 93
+                      Width = 90
+                      Caption = 'turns / degree'
+                      ParentColor = False
+                    end
+                    object TurnsAz: TFloatEdit
+                      Left = 128
+                      Height = 29
+                      Top = 11
+                      Width = 81
+                      ParentShowHint = False
+                      TabOrder = 0
+                      OnChange = TurnsAzChange
+                      Value = 0
+                      MinValue = 0
+                      MaxValue = 0
+                    end
+                    object TurnsAlt: TFloatEdit
+                      Left = 128
+                      Height = 29
+                      Top = 88
+                      Width = 81
+                      ParentShowHint = False
+                      TabOrder = 2
+                      OnChange = TurnsAltChange
+                      Value = 0
+                      MinValue = 0
+                      MaxValue = 0
+                    end
+                    object RevertTurnsAz: TCheckBox
+                      Left = 128
+                      Height = 21
+                      Top = 40
+                      Width = 122
+                      Caption = 'Revert Az knob'
+                      OnClick = TurnsAzChange
+                      TabOrder = 1
+                    end
+                    object RevertTurnsAlt: TCheckBox
+                      Left = 128
+                      Height = 21
+                      Top = 120
+                      Width = 124
+                      Caption = 'Revert Alt knob'
+                      OnClick = TurnsAltChange
+                      TabOrder = 3
+                    end
+                  end
+                end
+              end
+            end
+          end
+          object TabSheet4: TTabSheet
+            Caption = 'TabSheet4'
+            ClientHeight = 348
+            ClientWidth = 464
+            object ASCOMPanel: TPanel
+              Left = 8
+              Height = 328
+              Top = 8
+              Width = 452
+              ClientHeight = 328
+              ClientWidth = 452
+              TabOrder = 0
+              object ASCOMLabel: TLabel
+                Left = 21
+                Height = 232
+                Top = 24
+                Width = 401
+                AutoSize = False
+                Caption = 'ASCOMLabel'
+                ParentColor = False
+                WordWrap = True
+              end
+            end
+          end
+          object TabSheet3: TTabSheet
+            Caption = 'TabSheet3'
+            ClientHeight = 348
+            ClientWidth = 464
+            object InterfacePanel: TPanel
+              Left = 8
+              Height = 328
+              Top = 8
+              Width = 452
+              ClientHeight = 328
+              ClientWidth = 452
+              TabOrder = 0
+              object InterfaceLabel: TLabel
+                Left = 21
+                Height = 232
+                Top = 24
+                Width = 401
+                AutoSize = False
+                Caption = 'InterfaceLabel'
+                ParentColor = False
+                WordWrap = True
+              end
+            end
+          end
+        end
+      end
+      object Page3: TTabSheet
+        Caption = 'Page3'
         ClientHeight = 518
         ClientWidth = 488
         object MysqlBox: TPanel
@@ -367,8 +855,8 @@ object f_config_system: Tf_config_system
           end
         end
       end
-      object Page2: TTabSheet
-        Caption = 'Page2'
+      object Page4: TTabSheet
+        Caption = 'Page4'
         ClientHeight = 518
         ClientWidth = 488
         object GroupBox3: TGroupBox
@@ -382,17 +870,17 @@ object f_config_system: Tf_config_system
           TabOrder = 0
           object Label54: TLabel
             Left = 16
-            Height = 19
+            Height = 17
             Top = 124
-            Width = 115
+            Width = 128
             Caption = 'Server IP Interface :'
             ParentColor = False
           end
           object Label55: TLabel
             Left = 16
-            Height = 19
+            Height = 17
             Top = 168
-            Width = 88
+            Width = 96
             Caption = 'Server IP Port :'
             ParentColor = False
           end
@@ -400,14 +888,14 @@ object f_config_system: Tf_config_system
             Left = 16
             Height = 21
             Top = 32
-            Width = 131
+            Width = 139
             Caption = 'Use TCP/IP Server'
             OnClick = UseIPserverClick
             TabOrder = 0
           end
           object ipaddr: TEdit
             Left = 144
-            Height = 31
+            Height = 29
             Top = 120
             Width = 100
             OnChange = ipaddrChange
@@ -416,7 +904,7 @@ object f_config_system: Tf_config_system
           end
           object ipport: TEdit
             Left = 144
-            Height = 31
+            Height = 29
             Top = 164
             Width = 100
             OnChange = ipportChange
@@ -427,499 +915,11 @@ object f_config_system: Tf_config_system
             Left = 16
             Height = 21
             Top = 72
-            Width = 194
+            Width = 212
             Caption = 'Client Connection Keep Alive'
             OnClick = keepaliveClick
             TabOrder = 1
           end
-        end
-      end
-      object Page3: TTabSheet
-        Caption = 'Page3'
-        ClientHeight = 518
-        ClientWidth = 488
-        object Label13: TLabel
-          Left = 0
-          Height = 17
-          Top = 0
-          Width = 114
-          Caption = 'Telescope Setting'
-          ParentColor = False
-        end
-        object TelescopeSelect: TRadioGroup
-          Left = 8
-          Height = 77
-          Top = 36
-          Width = 450
-          AutoFill = True
-          Caption = 'TelescopeSelect'
-          ChildSizing.LeftRightSpacing = 6
-          ChildSizing.TopBottomSpacing = 6
-          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-          ChildSizing.EnlargeVertical = crsHomogenousChildResize
-          ChildSizing.ShrinkHorizontal = crsScaleChilds
-          ChildSizing.ShrinkVertical = crsScaleChilds
-          ChildSizing.Layout = cclLeftToRightThenTopToBottom
-          ChildSizing.ControlsPerLine = 3
-          ClientHeight = 59
-          ClientWidth = 448
-          Columns = 3
-          Items.Strings = (
-            'INDI'
-            'Manual'
-            'ASCOM'
-          )
-          OnClick = TelescopeSelectClick
-          TabOrder = 0
-        end
-        object PageControl2: TPageControl
-          Left = 1
-          Height = 352
-          Top = 120
-          Width = 474
-          ActivePage = TabSheet3
-          ShowTabs = False
-          TabIndex = 3
-          TabOrder = 1
-          object TabSheet1: TTabSheet
-            Caption = 'TabSheet1'
-            ClientHeight = 348
-            ClientWidth = 464
-            object INDI: TPanel
-              Left = 8
-              Height = 328
-              Top = 8
-              Width = 450
-              ClientHeight = 328
-              ClientWidth = 450
-              TabOrder = 0
-              object IndiAutostart: TCheckBox
-                Left = 8
-                Height = 21
-                Top = 64
-                Width = 321
-                Caption = 'Launch INDIstarter if the server is not running'
-                OnClick = IndiAutostartClick
-                TabOrder = 3
-              end
-              object IndiServerPort: TEdit
-                Left = 336
-                Height = 29
-                Top = 32
-                Width = 97
-                OnChange = IndiServerPortChange
-                TabOrder = 1
-              end
-              object IndiServerHost: TEdit
-                Left = 120
-                Height = 29
-                Top = 32
-                Width = 100
-                OnChange = IndiServerHostChange
-                TabOrder = 0
-              end
-              object Label260: TLabel
-                Left = 11
-                Height = 17
-                Top = 152
-                Width = 97
-                Caption = 'Telescope type'
-                ParentColor = False
-              end
-              object Label130: TLabel
-                Left = 231
-                Height = 17
-                Top = 36
-                Width = 103
-                Caption = 'INDI server Port'
-                ParentColor = False
-              end
-              object Label75: TLabel
-                Left = 8
-                Height = 17
-                Top = 36
-                Width = 112
-                Caption = 'INDI Server Host '
-                ParentColor = False
-              end
-              object INDILabel: TLabel
-                Left = 8
-                Height = 17
-                Top = 7
-                Width = 63
-                Caption = 'INDILabel'
-                ParentColor = False
-              end
-              object MountIndiDevice: TComboBox
-                Left = 160
-                Height = 33
-                Top = 148
-                Width = 168
-                AutoCompleteText = [cbactSearchAscending]
-                ItemHeight = 0
-                OnSelect = IndiDevChange
-                Style = csDropDownList
-                TabOrder = 2
-              end
-              object ExternalControlPanel: TPanel
-                Left = 4
-                Height = 45
-                Top = 256
-                Width = 444
-                ClientHeight = 45
-                ClientWidth = 444
-                TabOrder = 4
-                object PanelCmd: TEdit
-                  Left = 172
-                  Height = 29
-                  Top = 7
-                  Width = 257
-                  OnChange = PanelCmdChange
-                  TabOrder = 0
-                end
-                object Label2: TLabel
-                  Left = 4
-                  Height = 17
-                  Top = 11
-                  Width = 159
-                  Caption = 'Control Panel command '
-                  ParentColor = False
-                end
-              end
-              object InternalIndiGui: TCheckBox
-                Left = 11
-                Height = 21
-                Top = 208
-                Width = 224
-                Caption = 'Use the internal INDI gui panel'
-                OnClick = InternalIndiGuiClick
-                TabOrder = 5
-              end
-              object GetIndiDevices: TButton
-                Left = 11
-                Height = 25
-                Top = 104
-                Width = 213
-                Caption = 'Connect and get device list'
-                OnClick = GetIndiDevicesClick
-                TabOrder = 6
-              end
-            end
-          end
-          object TabSheet2: TTabSheet
-            Caption = 'TabSheet2'
-            ClientHeight = 348
-            ClientWidth = 464
-            object TelescopeManual: TPanel
-              Left = 8
-              Height = 330
-              Top = 8
-              Width = 450
-              ClientHeight = 330
-              ClientWidth = 450
-              TabOrder = 0
-              object ManualMountType: TRadioGroup
-                Left = 24
-                Height = 41
-                Top = 105
-                Width = 361
-                AutoFill = True
-                ChildSizing.LeftRightSpacing = 6
-                ChildSizing.TopBottomSpacing = 6
-                ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-                ChildSizing.EnlargeVertical = crsHomogenousChildResize
-                ChildSizing.ShrinkHorizontal = crsScaleChilds
-                ChildSizing.ShrinkVertical = crsScaleChilds
-                ChildSizing.Layout = cclLeftToRightThenTopToBottom
-                ChildSizing.ControlsPerLine = 2
-                ClientHeight = 39
-                ClientWidth = 359
-                Columns = 2
-                Items.Strings = (
-                  'Equatorial'
-                  'Alt / Az'
-                )
-                OnClick = ManualMountTypeClick
-                TabOrder = 0
-              end
-              object Label7: TLabel
-                Left = 24
-                Height = 73
-                Top = 32
-                Width = 361
-                AutoSize = False
-                Caption = 'Set how the mount move on each axis when you turn the driving knob.'#13#10'Then the Telescope button show you the turns you must do to go from one object to another.'
-                ParentColor = False
-                WordWrap = True
-              end
-              object TelescopeManualLabel: TLabel
-                Left = 24
-                Height = 17
-                Top = 6
-                Width = 146
-                Caption = 'TelescopeManualLabel'
-                ParentColor = False
-              end
-              object PageControl3: TPageControl
-                Left = 14
-                Height = 177
-                Top = 150
-                Width = 386
-                ActivePage = TabSheet6
-                ShowTabs = False
-                TabIndex = 1
-                TabOrder = 1
-                object TabSheet5: TTabSheet
-                  Caption = 'TabSheet5'
-                  ClientHeight = 173
-                  ClientWidth = 376
-                  object EquatorialMount: TPanel
-                    Left = 8
-                    Height = 161
-                    Top = 8
-                    Width = 361
-                    ClientHeight = 161
-                    ClientWidth = 361
-                    TabOrder = 0
-                    object Label3: TLabel
-                      Left = 16
-                      Height = 17
-                      Top = 16
-                      Width = 104
-                      Caption = 'Right Ascension'
-                      ParentColor = False
-                    end
-                    object Label4: TLabel
-                      Left = 16
-                      Height = 17
-                      Top = 93
-                      Width = 74
-                      Caption = 'Declination'
-                      ParentColor = False
-                    end
-                    object Label5: TLabel
-                      Left = 240
-                      Height = 17
-                      Top = 16
-                      Width = 74
-                      Caption = 'turns / hour'
-                      ParentColor = False
-                    end
-                    object Label6: TLabel
-                      Left = 240
-                      Height = 17
-                      Top = 93
-                      Width = 90
-                      Caption = 'turns / degree'
-                      ParentColor = False
-                    end
-                    object TurnsRa: TFloatEdit
-                      Left = 128
-                      Height = 29
-                      Top = 11
-                      Width = 81
-                      ParentShowHint = False
-                      TabOrder = 0
-                      OnChange = TurnsRaChange
-                      Value = 0
-                      MinValue = 0
-                      MaxValue = 0
-                    end
-                    object TurnsDec: TFloatEdit
-                      Left = 128
-                      Height = 29
-                      Top = 88
-                      Width = 81
-                      ParentShowHint = False
-                      TabOrder = 2
-                      OnChange = TurnsDecChange
-                      Value = 0
-                      MinValue = 0
-                      MaxValue = 0
-                    end
-                    object RevertTurnsRa: TCheckBox
-                      Left = 128
-                      Height = 21
-                      Top = 40
-                      Width = 123
-                      Caption = 'Revert RA knob'
-                      OnClick = TurnsRaChange
-                      TabOrder = 1
-                    end
-                    object RevertTurnDec: TCheckBox
-                      Left = 128
-                      Height = 21
-                      Top = 120
-                      Width = 133
-                      Caption = 'Revert DEC knob'
-                      OnClick = TurnsDecChange
-                      TabOrder = 3
-                    end
-                  end
-                end
-                object TabSheet6: TTabSheet
-                  Caption = 'TabSheet6'
-                  ClientHeight = 173
-                  ClientWidth = 376
-                  object AltAzMount: TPanel
-                    Left = 8
-                    Height = 161
-                    Top = 8
-                    Width = 361
-                    ClientHeight = 161
-                    ClientWidth = 361
-                    TabOrder = 0
-                    object Label8: TLabel
-                      Left = 16
-                      Height = 17
-                      Top = 16
-                      Width = 54
-                      Caption = 'Azimuth'
-                      ParentColor = False
-                    end
-                    object Label9: TLabel
-                      Left = 16
-                      Height = 17
-                      Top = 93
-                      Width = 51
-                      Caption = 'Altitude'
-                      ParentColor = False
-                    end
-                    object Label10: TLabel
-                      Left = 240
-                      Height = 17
-                      Top = 16
-                      Width = 90
-                      Caption = 'turns / degree'
-                      ParentColor = False
-                    end
-                    object Label11: TLabel
-                      Left = 240
-                      Height = 17
-                      Top = 93
-                      Width = 90
-                      Caption = 'turns / degree'
-                      ParentColor = False
-                    end
-                    object TurnsAz: TFloatEdit
-                      Left = 128
-                      Height = 29
-                      Top = 11
-                      Width = 81
-                      ParentShowHint = False
-                      TabOrder = 0
-                      OnChange = TurnsAzChange
-                      Value = 0
-                      MinValue = 0
-                      MaxValue = 0
-                    end
-                    object TurnsAlt: TFloatEdit
-                      Left = 128
-                      Height = 29
-                      Top = 88
-                      Width = 81
-                      ParentShowHint = False
-                      TabOrder = 2
-                      OnChange = TurnsAltChange
-                      Value = 0
-                      MinValue = 0
-                      MaxValue = 0
-                    end
-                    object RevertTurnsAz: TCheckBox
-                      Left = 128
-                      Height = 21
-                      Top = 40
-                      Width = 122
-                      Caption = 'Revert Az knob'
-                      OnClick = TurnsAzChange
-                      TabOrder = 1
-                    end
-                    object RevertTurnsAlt: TCheckBox
-                      Left = 128
-                      Height = 21
-                      Top = 120
-                      Width = 124
-                      Caption = 'Revert Alt knob'
-                      OnClick = TurnsAltChange
-                      TabOrder = 3
-                    end
-                  end
-                end
-              end
-            end
-          end
-          object TabSheet4: TTabSheet
-            Caption = 'TabSheet4'
-            ClientHeight = 348
-            ClientWidth = 464
-            object ASCOMPanel: TPanel
-              Left = 8
-              Height = 328
-              Top = 8
-              Width = 452
-              ClientHeight = 328
-              ClientWidth = 452
-              TabOrder = 0
-              object ASCOMLabel: TLabel
-                Left = 21
-                Height = 232
-                Top = 24
-                Width = 401
-                AutoSize = False
-                Caption = 'ASCOMLabel'
-                ParentColor = False
-                WordWrap = True
-              end
-            end
-          end
-          object TabSheet3: TTabSheet
-            Caption = 'TabSheet3'
-            ClientHeight = 348
-            ClientWidth = 464
-            object InterfacePanel: TPanel
-              Left = 8
-              Height = 328
-              Top = 8
-              Width = 452
-              ClientHeight = 328
-              ClientWidth = 452
-              TabOrder = 0
-              object InterfaceLabel: TLabel
-                Left = 21
-                Height = 232
-                Top = 24
-                Width = 401
-                AutoSize = False
-                Caption = 'InterfaceLabel'
-                ParentColor = False
-                WordWrap = True
-              end
-            end
-          end
-        end
-      end
-      object Page4: TTabSheet
-        Caption = 'Page4'
-        ClientHeight = 518
-        ClientWidth = 488
-        object Label14: TLabel
-          Left = 19
-          Height = 17
-          Top = 24
-          Width = 126
-          Caption = 'Language selection'
-          ParentColor = False
-        end
-        object LanguageList: TCheckListBox
-          Left = 19
-          Height = 408
-          Top = 56
-          Width = 366
-          ExtendedSelect = False
-          ItemHeight = 0
-          OnItemClick = LanguageListItemClick
-          TabOrder = 0
-          TopIndex = -1
         end
       end
       object Page5: TTabSheet

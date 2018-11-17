@@ -1,115 +1,109 @@
 object f_configtime: Tf_configtime
   Left = 504
-  Height = 583
+  Height = 577
   Top = 124
-  Width = 496
+  Width = 491
   ActiveControl = Button7
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Date / Time'
-  ClientHeight = 583
-  ClientWidth = 496
+  ClientHeight = 577
+  ClientWidth = 491
+  DesignTimePPI = 95
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
-  ParentFont = True
-  LCLVersion = '1.6.0.2'
-  Visible = False
   object Panel1: TPanel
     Left = 0
-    Height = 54
-    Top = 529
-    Width = 496
+    Height = 53
+    Top = 524
+    Width = 491
     Align = alBottom
-    ClientHeight = 54
-    ClientWidth = 496
+    ClientHeight = 53
+    ClientWidth = 491
+    ParentFont = False
     TabOrder = 0
     object Button1: TButton
-      Left = 206
+      Left = 204
       Height = 25
       Top = 12
-      Width = 75
+      Width = 74
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'OK'
       Default = True
       ModalResult = 1
+      ParentFont = False
       TabOrder = 1
     end
     object Button2: TButton
-      Left = 302
+      Left = 299
       Height = 25
       Top = 12
-      Width = 75
+      Width = 74
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
       OnClick = Button2Click
+      ParentFont = False
       TabOrder = 2
     end
     object Button3: TButton
-      Left = 398
+      Left = 394
       Height = 25
       Top = 12
-      Width = 75
+      Width = 74
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
+      ParentFont = False
       TabOrder = 3
     end
     object Button7: TButton
-      Left = 110
+      Left = 109
       Height = 25
       Top = 12
-      Width = 75
+      Width = 74
       Anchors = [akTop, akRight]
       Caption = 'Help'
       OnClick = Button7Click
+      ParentFont = False
       TabOrder = 0
     end
   end
   inline f_config_time1: Tf_config_time
-    Height = 529
-    Width = 496
+    Height = 524
+    Width = 491
     Align = alClient
-    ClientHeight = 529
-    ClientWidth = 496
+    ClientHeight = 524
+    ClientWidth = 491
     TabOrder = 1
-    DesignLeft = 174
-    DesignTop = 131
     inherited MainPanel: TPanel
-      Height = 529
-      Width = 496
-      ClientHeight = 529
-      ClientWidth = 496
+      Height = 524
+      Width = 491
+      ClientHeight = 524
+      ClientWidth = 491
       inherited PageControl1: TPageControl
-        Height = 529
-        Width = 496
-        ActivePage = nil
-        TabIndex = -1
+        Height = 524
+        Width = 491
         inherited Page1: TTabSheet
-          ClientHeight = 523
-          ClientWidth = 490
+          ClientHeight = 520
+          ClientWidth = 481
           inherited Panel9: TPanel
             inherited ADBC: TRadioGroup
-              ClientHeight = 35
+              ClientHeight = 37
             end
           end
         end
         inherited Page2: TTabSheet
-          ClientHeight = 523
-          ClientWidth = 490
+          ClientHeight = 520
+          ClientWidth = 481
           inherited SimObj: TCheckListBox
             Data = {
               0C000000000000000000000000000000
             }
-          end
-          inherited RadioGroup1: TRadioGroup
-            inherited LongEdit1: TLongEdit
-              TabOrder = 3
-            end
           end
           inherited CheckGroup1: TCheckGroup
             Data = {
@@ -123,8 +117,8 @@ object f_configtime: Tf_configtime
           end
         end
         inherited Page3: TTabSheet
-          ClientHeight = 523
-          ClientWidth = 490
+          ClientHeight = 520
+          ClientWidth = 481
         end
       end
     end
