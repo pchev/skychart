@@ -952,7 +952,10 @@ begin
     end
     else
     begin
-      ShowMessage(rsConnectionTo);
+      if pos('.local',IndiServerHost.Text)>0 then
+        ShowMessage(rsConnectionTo+crlf+'Beware that mDNS .local server name is not supported.')
+      else
+        ShowMessage(rsConnectionTo);
     end;
     MountIndiDevice.Items.Add(mountsavedev);
     MountIndiDevice.ItemIndex := 0;
