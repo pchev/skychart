@@ -218,7 +218,7 @@ object f_config_system: Tf_config_system
                 Left = 11
                 Height = 25
                 Top = 104
-                Width = 213
+                Width = 317
                 Caption = 'Connect and get device list'
                 OnClick = GetIndiDevicesClick
                 TabOrder = 6
@@ -707,7 +707,7 @@ object f_config_system: Tf_config_system
           Height = 85
           Top = 155
           Width = 453
-          ClientHeight = 83
+          ClientHeight = 67
           ClientWidth = 451
           TabOrder = 3
           object chkdb: TButton
