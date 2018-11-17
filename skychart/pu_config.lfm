@@ -151,7 +151,6 @@ object f_config: Tf_config
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  Visible = False
   object Panel2: TPanel
     Left = 0
     Height = 41
@@ -239,7 +238,6 @@ object f_config: Tf_config
       RightClickSelect = True
       RowSelect = True
       ScrollBars = ssNone
-      SortType = stBoth
       TabOrder = 0
       OnChange = TreeView1Change
       Options = [tvoAutoExpand, tvoAutoItemHeight, tvoHotTrack, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoRowSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips]
@@ -266,15 +264,15 @@ object f_config: Tf_config
         0E000000362D204F626A656374204C6973740000000000000000A0A975410000
         00000700000000000000010D000000342D20436174616C6F6775657300000000
         00000000FFFFFFFFFFFFFFFF0000000000000000000D000000312D2043617461
-        6C6F677565730000000000000000FFFFFFFFFFFFFFFF0000000000000000000C
-        000000332D204364432053746172730000000000000000FFFFFFFFFFFFFFFF00
-        00000000000000000E000000342D20436443204E6562756C6165000000000000
-        0000FFFFFFFFFFFFFFFF00000000000000000011000000352D204F7468657220
-        736F667477617265FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000
-        000B000000362D204F62736F6C657465FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        00000000000000000010000000322D20564F20436174616C6F67756573FFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000000F000000332D20557365
-        7220646566696E65640000000000000000A0A975410000000004000000000000
+        6C6F67756573FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000010
+        000000322D20564F20436174616C6F677565730000000000000000FFFFFFFFFF
+        FFFFFF0000000000000000000C000000332D20436443205374617273FFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFF0000000000000000000F000000332D2055736572
+        20646566696E65640000000000000000FFFFFFFFFFFFFFFF0000000000000000
+        000E000000342D20436443204E6562756C61650000000000000000FFFFFFFFFF
+        FFFFFF00000000000000000011000000352D204F7468657220736F6674776172
+        65FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000000B000000362D
+        204F62736F6C6574650000000000000000A0A975410000000004000000000000
         00010F000000352D20536F6C61722053797374656D0000000000000000FFFFFF
         FFFFFFFFFF0000000000000000000F000000312D20536F6C6172205379737465
         6D0000000000000000A0A97541000000000000000000000000000A000000322D
@@ -409,8 +407,6 @@ object f_config: Tf_config
                 ClientHeight = 520
                 ClientWidth = 493
                 inherited SimObj: TCheckListBox
-                  ItemHeight = 0
-                  TopIndex = -1
                   Data = {
                     0C000000000000000000000000000000
                   }
@@ -1310,10 +1306,18 @@ object f_config: Tf_config
                         inherited TabSheet5: TTabSheet
                           ClientHeight = 173
                           ClientWidth = 382
+                          inherited EquatorialMount: TPanel
+                            ClientHeight = 157
+                            ClientWidth = 357
+                          end
                         end
                         inherited TabSheet6: TTabSheet
                           ClientHeight = 173
                           ClientWidth = 382
+                          inherited AltAzMount: TPanel
+                            ClientHeight = 157
+                            ClientWidth = 357
+                          end
                         end
                       end
                     end
