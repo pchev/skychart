@@ -27,5 +27,8 @@ Stars catalog data for use with Skychart planetarium software.
 
 %files
 %defattr(-,root,root)
-/usr/share/skychart
+/usr/share/skychart/cat/gcvs
+/usr/share/skychart/cat/tycho2
+/usr/share/skychart/cat/wds
+/usr/share/skychart/cat/bsc5
 /usr/share/metainfo/skychart-data-stars.metainfo.xml

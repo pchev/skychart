@@ -34,5 +34,5 @@ Pictures of Deepsky objects to use with Skychart planetarium software.
 
 %files
 %defattr(-,root,root)
-/usr/share/skychart
+/usr/share/skychart/data/pictures
 
