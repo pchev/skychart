@@ -133,8 +133,8 @@ begin
   step:='';
   except
   on E: Exception do begin
-   WriteTrace(step+': '+E.Message);
-   f_splash.Close;
+   DebugLn(step+': '+E.Message);
+   if f_splash<>nil then f_splash.Close;
    MessageDlg(step+': '+E.Message+crlf+rsSomethingGoW+crlf
              +rsPleaseTryToR,
              mtError, [mbAbort], 0);
