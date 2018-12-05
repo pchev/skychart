@@ -730,6 +730,7 @@ type
     procedure PositionApply(Sender: TObject);
     procedure ZoomBarApply(Sender: TObject);
     function QuickDownload(url, fn: string; quickcancel: boolean = True): boolean;
+    function LoadMPCORB(fn:string): string;
   public
     { Public declarations }
     cfgm: Tconf_main;
@@ -3664,25 +3665,31 @@ end;
 
 procedure Tf_main.RecomputeAsteroid;
 var
-  jd1, jd2, h: double;
+  cjd,jd1, jd2, h: double;
   y, m, d: integer;
+  dy, dm, dd: word;
 begin
+  cjd:=0;
   if MultiFrame1.ActiveObject is Tf_chart then
-    with MultiFrame1.ActiveObject as Tf_chart do
-    begin
-      f_info.setpage(2);
-      f_info.Show;
-      f_info.ProgressMemo.Lines.add(rsComputeAster);
-      djd(sc.cfgsc.CurJDUT, y, m, d, h);
-      jd1 := jd(y, m, 1, 0);
-      jd2 := jd(y, m + 1, 1, 0);
-      if Planet.PrepareAsteroid(jd1, jd2, 1, f_info.ProgressMemo.Lines) then
-      begin
-        sc.cfgsc.ShowAsteroid := True;
-        Refresh(True, True);
-      end;
-      f_info.hide;
+    cjd:=Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.CurJDUT;
+  if cjd<1 then begin
+    DecodeDate(now, dy, dm, dd);
+    cjd:=jd(dy,dm,dd,0);
+  end;
+  f_info.setpage(2);
+  f_info.Show;
+  f_info.ProgressMemo.Lines.add(rsComputeAster);
+  djd(cjd, y, m, d, h);
+  jd1 := jd(y, m, 1, 0);
+  jd2 := jd(y, m + 1, 1, 0);
+  if Planet.PrepareAsteroid(jd1, jd2, 1, f_info.ProgressMemo.Lines) then
+  begin
+    if MultiFrame1.ActiveObject is Tf_chart then begin
+      Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.ShowAsteroid := True;
+      Tf_chart(MultiFrame1.ActiveObject).Refresh(True, True);
     end;
+  end;
+  f_info.hide;
 end;
 
 procedure Tf_main.ShowAsteroidsExecute(Sender: TObject);
@@ -4701,6 +4708,21 @@ begin
   activateconfig(ConfigSolsys.f_config_solsys1.cmain, ConfigSolsys.f_config_solsys1.csc,
     ConfigSolsys.f_config_solsys1.ccat, ConfigSolsys.f_config_solsys1.cshr,
     ConfigSolsys.f_config_solsys1.cplot, nil, False);
+end;
+
+function Tf_main.LoadMPCORB(fn:string): string;
+var memo:Tmemo;
+begin
+  Result := msgFailed;
+  memo:=Tmemo.Create(nil);
+  try
+    if cdcdb.LoadAsteroidFile(fn,false,false,false,0,memo) then begin
+      RecomputeAsteroid;
+      Result := msgOK;
+    end;
+  finally
+    memo.Free;
+  end;
 end;
 
 procedure Tf_main.TelescopeSetupExecute(Sender: TObject);
@@ -9977,6 +9999,7 @@ begin
     16: Result := SetGCat(arg[1], arg[2], arg[3], arg[4], arg[5]);
     17: Result := ShowPlanetInfo(arg[1]);
     18: Result := GetSelectedObject;
+    19: Result := LoadMPCORB(arg[1]);
     else
     begin
       Result := 'Bad chart name ' + cname;
@@ -10369,6 +10392,16 @@ begin
         if (resp <> msgOK) and (resp <> '') then
           WriteTrace(resp);
         chartchanged := True;
+      end
+      else if cmd = '--loadmpcorb' then
+      begin
+        parm := 'LOADMPCORB ' + parm;
+        splitarg(parm, blank, pp);
+        for p := pp.Count to MaxCmdArg do
+          pp.add('');
+        resp := ExecuteCmd('', pp);
+        if (resp <> msgOK) and (resp <> '') then
+          WriteTrace(resp);
       end;
     end;
     // parameters that need to be processed afterward
