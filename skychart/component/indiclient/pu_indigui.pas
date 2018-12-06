@@ -780,10 +780,6 @@ begin
     end;
     lbl := TLabel.Create(self);
     lbl.AutoSize := True;
-    lbl.Caption := lvp.lp[i].Name;
-    lbl.Parent := iprop.page;
-    lbl := TLabel.Create(self);
-    lbl.AutoSize := True;
     lbl.Caption := lvp.lp[i].lbl;
     lbl.Parent := iprop.page;
     lbl := TLabel.Create(self);
@@ -791,11 +787,12 @@ begin
     case lvp.lp[i].s of
       IPS_IDLE: lbl.Caption := 'idle';
       IPS_OK: lbl.Caption := 'ok';
-      IPS_BUSY: lbl.Caption := 'busy';
+      IPS_BUSY: lbl.Caption := 'warning';
       IPS_ALERT: lbl.Caption := 'alert';
     end;
     lbl.Parent := iprop.page;
     iprop.ctrl.AddObject(lvp.lp[i].Name, lbl);
+    AddSpacer(iprop);
     AddSpacer(iprop);
   end;
 end;
@@ -959,7 +956,37 @@ begin
 end;
 
 procedure Tf_indigui.NewLight(lvp: ILightVectorProperty);
+var
+  devname, propname: string;
+  idev: TIndiDev;
+  iprop: TIndiProp;
+  lbl: TLabel;
+  i, j: integer;
 begin
+  devname := lvp.device;
+  propname := lvp.Name;
+  i := devlist.IndexOf(devname);
+  if i < 0 then
+    exit;
+  idev := TIndiDev(devlist.Objects[i]);
+  i := idev.props.IndexOf(propname);
+  if i < 0 then
+    exit;
+  iprop := TIndiProp(idev.props.Objects[i]);
+  for i := 0 to lvp.nlp - 1 do
+  begin
+    j := iprop.ctrl.IndexOf(lvp.lp[i].Name);
+    if j < 0 then
+        continue;
+    lbl := TLabel(iprop.ctrl.Objects[j]);
+    case lvp.lp[i].s of
+      IPS_IDLE: lbl.Caption := 'idle';
+      IPS_OK: lbl.Caption := 'ok';
+      IPS_BUSY: lbl.Caption := 'warning';
+      IPS_ALERT: lbl.Caption := 'alert';
+    end;
+  end;
+  iprop.state.State := lvp.s;
 end;
 
 procedure Tf_indigui.SetButtonClick(Sender: TObject);
