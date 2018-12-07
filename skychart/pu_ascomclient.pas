@@ -1058,8 +1058,8 @@ begin
       if ButtonPark.Caption = rsUnpark then begin
         if T.CanUnpark then
            T.Unpark;
-      end;
-      if ButtonPark.Caption = rsPark then begin
+      end
+      else if ButtonPark.Caption = rsPark then begin
         if T.CanPark and
         (MessageDlg(rsDoYouReallyW, mtConfirmation, mbYesNo, 0)=mrYes)
         then
