@@ -29,7 +29,7 @@ interface
 
 uses
   {$ifdef mswindows}
-  Variants, comobj, Windows, ShlObj, ShellAPI,
+  Variants, comobj, Windows, ShlObj, ShellAPI, math,
   {$endif}
   LCLIntf, u_util, u_constant, u_help, u_translation,
   Messages, SysUtils, Classes, Graphics, Controls,
@@ -1126,5 +1126,12 @@ begin
 {$endif}
 end;
 
+initialization
+{$ifdef mswindows}
+{$if defined(cpui386) or defined(cpux86_64)}
+// some Ascom driver raise this exceptions
+SetExceptionMask([exInvalidOp, exDenormalized, exZeroDivide,exOverflow, exUnderflow, exPrecision]);
+{$endif}
+{$endif}
 
 end.
