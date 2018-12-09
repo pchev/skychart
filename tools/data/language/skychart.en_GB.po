@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2018-10-21 14:30+0000\n"
-"PO-Revision-Date: 2018-10-23 16:34+0000\n"
+"PO-Revision-Date: 2018-12-09 12:58+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-11-18 15:44+0000\n"
-"X-Generator: Launchpad (build 18824)\n"
+"X-Launchpad-Export-Date: 2018-12-09 18:01+0000\n"
+"X-Generator: Launchpad (build 18831)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -198,7 +198,7 @@ msgstr ""
 
 #: u_translation.rsadvancedsear
 msgid "Advanced search"
-msgstr ""
+msgstr "Advanced search"
 
 #: u_translation.rsadvancedsett2
 msgid "Advanced setting"
@@ -1354,7 +1354,7 @@ msgstr ""
 
 #: u_translation.rsdecrementtim
 msgid "Decrement time"
-msgstr ""
+msgstr "Decrement time"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
@@ -1854,7 +1854,7 @@ msgstr ""
 
 #: u_translation.rsephemeriscal
 msgid "Ephemeris calendar"
-msgstr ""
+msgstr "Ephemeris calendar"
 
 #: u_translation.rsephemerispro
 msgid "Ephemeris probably out of range, disabling any solar system object"
@@ -3442,7 +3442,7 @@ msgstr ""
 
 #: u_translation.rsnow
 msgid "Now"
-msgstr ""
+msgstr "Now"
 
 #: u_translation.rsnumberofcopi
 msgid "Number of copies"
@@ -3490,7 +3490,7 @@ msgstr ""
 
 #: u_translation.rsobjectlist
 msgid "Object list"
-msgstr ""
+msgstr "Object list"
 
 #: u_translation.rsobjectlistse
 msgid "Object list settings"
@@ -3902,7 +3902,7 @@ msgstr ""
 
 #: u_translation.rsposition
 msgid "Position"
-msgstr ""
+msgstr "Position"
 
 #: u_translation.rspositionangl
 msgid "Position angle"
@@ -4538,7 +4538,7 @@ msgstr ""
 
 #: u_translation.rssecond
 msgid "Second"
-msgstr ""
+msgstr "Second"
 
 #: u_translation.rsseconds
 msgid "Seconds"
@@ -4674,7 +4674,7 @@ msgstr "Set date and time"
 
 #: u_translation.rssetfov
 msgid "Set FOV"
-msgstr ""
+msgstr "Set FOV"
 
 #: u_translation.rssetfovto
 msgid "Set FOV to"
@@ -5886,7 +5886,7 @@ msgstr ""
 
 #: u_translation.rszoomin
 msgid "Zoom in"
-msgstr ""
+msgstr "Zoom in"
 
 #: u_translation.rszoommoretovi
 msgid "Zoom more to view the object"
@@ -5894,5 +5894,5 @@ msgstr ""
 
 #: u_translation.rszoomout
 msgid "Zoom out"
-msgstr ""
+msgstr "Zoom out"
 

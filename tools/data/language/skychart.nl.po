@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-21 14:30+0000\n"
-"PO-Revision-Date: 2018-10-04 00:02+0000\n"
+"PO-Revision-Date: 2018-11-19 12:35+0000\n"
 "Last-Translator: Michel Smits <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-11-18 15:44+0000\n"
-"X-Generator: Launchpad (build 18824)\n"
+"X-Launchpad-Export-Date: 2018-12-09 18:01+0000\n"
+"X-Generator: Launchpad (build 18831)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1023,7 +1023,7 @@ msgstr "Verbind"
 
 #: u_translation.rsconnectandge
 msgid "Connect and get device list"
-msgstr ""
+msgstr "Verbinding maken en apparatenlijst ophalen"
 
 #: u_translation.rsconnected
 msgid "Connected"
@@ -1671,7 +1671,7 @@ msgstr "Download TLE"
 
 #: u_translation.rsdoyoureallyw
 msgid "Do you really want to park the mount now?"
-msgstr ""
+msgstr "Wilt u de montering werkelijk parkeren?"
 
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
@@ -3693,7 +3693,7 @@ msgstr "Parametrisch"
 
 #: u_translation.rspark
 msgid "Park"
-msgstr ""
+msgstr "Parkeren"
 
 #: u_translation.rspartial
 msgid "Partial"
@@ -5573,7 +5573,7 @@ msgstr "Deblokkeer kaart"
 
 #: u_translation.rsunpark
 msgid "Unpark"
-msgstr ""
+msgstr "Onparkeren"
 
 #: u_translation.rsunsupportedf
 msgid "Unsupported file extension: %sPlease fix it."
@@ -5673,7 +5673,7 @@ msgstr "Gebruik TCP/IP server"
 
 #: u_translation.rsusetheintern
 msgid "Use the internal INDI gui panel"
-msgstr ""
+msgstr "Gebruik de interne gui van het INDI-paneel"
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."

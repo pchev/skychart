@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-21 14:30+0000\n"
-"PO-Revision-Date: 2018-09-28 14:52+0000\n"
+"PO-Revision-Date: 2018-11-27 21:40+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-11-18 15:44+0000\n"
-"X-Generator: Launchpad (build 18824)\n"
+"X-Launchpad-Export-Date: 2018-12-09 18:01+0000\n"
+"X-Generator: Launchpad (build 18831)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -1024,7 +1024,7 @@ msgstr "Connecta"
 
 #: u_translation.rsconnectandge
 msgid "Connect and get device list"
-msgstr ""
+msgstr "Connectat i obté llista d'aparells"
 
 #: u_translation.rsconnected
 msgid "Connected"
@@ -1672,7 +1672,7 @@ msgstr "Descarrega TLE"
 
 #: u_translation.rsdoyoureallyw
 msgid "Do you really want to park the mount now?"
-msgstr ""
+msgstr "Realment voleu aparca ara la muntura?"
 
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
@@ -2896,7 +2896,7 @@ msgstr "Bloqueja sobre %s"
 
 #: u_translation.rslockthechart
 msgid "Lock the chart at this position"
-msgstr ""
+msgstr "Bloqueja el mapa en aquesta posició"
 
 #: u_translation.rslog
 msgid "Log"
@@ -2988,7 +2988,7 @@ msgstr "Magnitud Tycho VT"
 
 #: u_translation.rsmaillist
 msgid "Mail list, discussion group"
-msgstr ""
+msgstr "Llista de correu, grup de discussió"
 
 #: u_translation.rsmainbar
 msgid "Main bar"
@@ -3692,7 +3692,7 @@ msgstr "Paramètric"
 
 #: u_translation.rspark
 msgid "Park"
-msgstr ""
+msgstr "Aparca"
 
 #: u_translation.rspartial
 msgid "Partial"
@@ -5573,7 +5573,7 @@ msgstr "Desbloca la carta"
 
 #: u_translation.rsunpark
 msgid "Unpark"
-msgstr ""
+msgstr "Desaparca"
 
 #: u_translation.rsunsupportedf
 msgid "Unsupported file extension: %sPlease fix it."
@@ -5673,7 +5673,7 @@ msgstr "Utilitza el servidor TCP/IP"
 
 #: u_translation.rsusetheintern
 msgid "Use the internal INDI gui panel"
-msgstr ""
+msgstr "Usa el panell gràfic  INDI intern"
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."
