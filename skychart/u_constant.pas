@@ -1405,12 +1405,12 @@ var
 // Text formating constant
 const
   html_h =
-    '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body>';
+    '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body><div>';
   html_h_nv =
-    '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body bgcolor="#000000" text="#C03030">';
+    '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body bgcolor="#000000" text="#C03030"><div>';
   html_h_b =
-    '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body bgcolor="#000000" text="#FFFFFF">';
-  htms_h = '</body></HTML>';
+    '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body bgcolor="#000000" text="#FFFFFF"><div>';
+  htms_h = '</div></body></HTML>';
   html_ffx = '<font face="fixed">';
   htms_f = '</font>';
   html_b = '<b>';
