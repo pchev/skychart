@@ -1005,7 +1005,7 @@ type
     PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline, DSLforcecolor: boolean;
     ManualTelescopeType, CoordType, DSLcolor: integer;
     IndiServerHost, IndiServerPort, IndiDevice: string;
-    IndiAutostart, ShowCircle, ShowCrosshair, IndiTelescope, ASCOMTelescope,
+    IndiAutostart, IndiLoadConfig, ShowCircle, ShowCrosshair, IndiTelescope, ASCOMTelescope,
     ManualTelescope, ShowImages,
     EyepieceMask, ShowImageList, ShowImageLabel, ShowBackgroundImage,
     showstars, shownebulae, showline, showlabelall, Editlabels,
@@ -2316,6 +2316,7 @@ begin
   IndiServerPort := Source.IndiServerPort;
   IndiDevice := Source.IndiDevice;
   IndiAutostart := Source.IndiAutostart;
+  IndiLoadConfig := Source.IndiLoadConfig;
   ShowCircle := Source.ShowCircle;
   ShowCrosshair := Source.ShowCrosshair;
   EyepieceMask := Source.EyepieceMask;

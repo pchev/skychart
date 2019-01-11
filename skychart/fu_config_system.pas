@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  u_help, u_translation, u_constant, u_util, cu_database,
+  u_help, u_translation, u_constant, cu_database,
   indibaseclient, indibasedevice, indiapi,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms, LazUTF8, LazFileUtils, Math,
@@ -36,6 +36,7 @@ type
   { Tf_config_system }
 
   Tf_config_system = class(TFrame)
+    AutoloadConfig: TCheckBox;
     LanguageList: TCheckListBox;
     UseScaling: TCheckBox;
     GetIndiDevices: TButton;
@@ -150,6 +151,7 @@ type
     RevertTurnsAz: TCheckBox;
     RevertTurnsAlt: TCheckBox;
     PageControl1: TPageControl;
+    procedure AutoloadConfigClick(Sender: TObject);
     procedure LanguageListItemClick(Sender: TObject; Index: integer);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: boolean);
     procedure UseScalingChange(Sender: TObject);
@@ -241,6 +243,8 @@ type
   end;
 
 implementation
+
+uses u_util;
 
 {$R *.lfm}
 
@@ -494,6 +498,7 @@ begin
   IndiServerHost.Text := csc.IndiServerHost;
   IndiServerPort.Text := csc.IndiServerPort;
   IndiAutostart.Checked := csc.IndiAutostart;
+  AutoloadConfig.Checked := csc.IndiLoadConfig;
   InternalIndiGui.Checked := cmain.InternalIndiPanel;
   PanelCmd.Text := cmain.IndiPanelCmd;
   ExternalControlPanel.Visible := (not cmain.InternalIndiPanel);
@@ -897,6 +902,14 @@ begin
     LockMsg := False;
   end;
   csc.IndiAutostart := IndiAutostart.Checked;
+end;
+
+
+procedure Tf_config_system.AutoloadConfigClick(Sender: TObject);
+begin
+  if LockChange then
+    exit;
+  csc.IndiLoadConfig := AutoloadConfig.Checked;
 end;
 
 procedure Tf_config_system.GetIndiDevicesClick(Sender: TObject);

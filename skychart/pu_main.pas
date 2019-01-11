@@ -6244,6 +6244,7 @@ begin
   def_cfgsc.ShowCrosshair := False;
   def_cfgsc.EyepieceMask := False;
   def_cfgsc.IndiAutostart := False;
+  def_cfgsc.IndiLoadConfig := False;
   def_cfgsc.IndiServerHost := 'localhost';
   def_cfgsc.IndiServerPort := '7624';
   def_cfgsc.IndiDevice := 'Telescope Simulator';
@@ -7516,6 +7517,8 @@ begin
           ReadString(section, 'ffovc_cy', catalog.cfgshr.ffovc_cy);
         def_cfgsc.IndiAutostart :=
           ReadBool(section, 'IndiAutostart', def_cfgsc.IndiAutostart);
+        def_cfgsc.IndiLoadConfig :=
+          ReadBool(section, 'IndiLoadConfig', def_cfgsc.IndiLoadConfig);
         def_cfgsc.IndiServerHost :=
           ReadString(section, 'IndiServerHost', def_cfgsc.IndiServerHost);
         def_cfgsc.IndiServerPort :=
@@ -8637,6 +8640,7 @@ begin
             end;
           end;
         WriteBool(section, 'IndiAutostart', def_cfgsc.IndiAutostart);
+        WriteBool(section, 'IndiLoadConfig', def_cfgsc.IndiLoadConfig);
         WriteString(section, 'IndiServerHost', def_cfgsc.IndiServerHost);
         WriteString(section, 'IndiServerPort', def_cfgsc.IndiServerPort);
         WriteString(section, 'IndiDevice', def_cfgsc.IndiDevice);

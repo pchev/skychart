@@ -30,8 +30,7 @@ interface
 uses
   u_help, u_translation, indibaseclient, indibasedevice, indiapi, indicom, pu_indigui,
   LCLIntf, u_util, u_constant, Messages, SysUtils, Classes, Graphics,
-  Controls, UScaleDPI,
-  Forms, Dialogs, StdCtrls, Buttons, inifiles, process, ComCtrls, Menus,
+  Controls, Forms, Dialogs, StdCtrls, Buttons, inifiles, process, ComCtrls, Menus,
   ExtCtrls;
 
 type
@@ -42,20 +41,21 @@ type
     BtnIndiGui: TButton;
     ButtonGetLocation: TSpeedButton;
     ButtonSetLocation: TSpeedButton;
+    Connect: TButton;
+    Disconnect: TButton;
     Elev: TEdit;
     GroupBox5: TGroupBox;
     Label1: TLabel;
     Label15: TLabel;
     Label16: TLabel;
     lat: TEdit;
+    led: TEdit;
     long: TEdit;
+    Panel2: TPanel;
     ProtocolTrace: TCheckBox;
     GroupBox3: TGroupBox;
-    Connect: TButton;
     Memomsg: TMemo;
     SpeedButton2: TButton;
-    Disconnect: TButton;
-    led: TEdit;
     Panel1: TPanel;
     LabelAlpha: TLabel;
     LabelDelta: TLabel;
@@ -63,8 +63,8 @@ type
     pos_y: TEdit;
     GroupBox1: TGroupBox;
     Edit1: TEdit;
-    SpeedButton6: TButton;
     SpeedButton4: TButton;
+    SpeedButton6: TButton;
     InitTimer: TTimer;
     ConnectTimer: TTimer;
     {Utility and form functions}
@@ -108,6 +108,8 @@ type
     moveEW_prop: ISwitchVectorProperty;
     moveE_prop: ISwitch;
     moveW_prop: ISwitch;
+    configprop: ISwitchVectorProperty;
+    configload,configsave: ISwitch;
     eod_coord: boolean;
     ready, connected: boolean;
     SlewRateList: TStringList;
@@ -117,6 +119,7 @@ type
     FObservatoryCoord: TNotifyEvent;
     procedure ClearStatus;
     procedure CheckStatus;
+    procedure LoadConfig;
     procedure NewDevice(dp: Basedevice);
     procedure NewMessage(mp: IMessage);
     procedure NewProperty(indiProp: IndiProperty);
@@ -163,6 +166,8 @@ type
 
 implementation
 
+uses UScaleDPI;
+
 {$R *.lfm}
 
 procedure Tpop_indi.SetRefreshRate(rate: integer);
@@ -178,6 +183,7 @@ begin
   moveNS_prop := nil;
   moveEW_prop := nil;
   oncoordset_prop := nil;
+  configprop := nil;
   GeographicCoord_prop := nil;
   TelescopeDevice := nil;
   scope_port := nil;
@@ -190,13 +196,26 @@ end;
 
 procedure Tpop_indi.CheckStatus;
 begin
-  if connected and (coord_prop <> nil) and (oncoordset_prop <> nil) then
+  if connected and (coord_prop <> nil) and (configprop<>nil) and (oncoordset_prop <> nil) then
   begin
-    ready := True;
-    led.color := clLime;
+    if (not ready) then begin
+      ready:=true;
+      led.color := clLime;
+      if csc.IndiLoadConfig then begin
+         LoadConfig;
+      end;
+    end;
   end;
 end;
 
+procedure Tpop_indi.LoadConfig;
+begin
+  if configprop<>nil then begin
+    IUResetSwitch(configprop);
+    configload.s:=ISS_ON;
+    client.sendNewSwitch(configprop);
+  end;
+end;
 
 procedure Tpop_indi.ServerConnected(Sender: TObject);
 begin
@@ -209,7 +228,6 @@ begin
   ConnectTimer.Enabled := False;
   client.connectDevice(csc.IndiDevice);
 end;
-
 
 procedure Tpop_indi.ServerDisconnected(Sender: TObject);
 begin
@@ -338,6 +356,12 @@ begin
     moveEW_prop := indiProp.getSwitch;
     moveE_prop := IUFindSwitch(moveEW_prop, 'MOTION_EAST');
     moveW_prop := IUFindSwitch(moveEW_prop, 'MOTION_WEST');
+  end
+  else if (proptype=INDI_SWITCH)and(configprop=nil)and(propname='CONFIG_PROCESS') then begin
+     configprop:=indiProp.getSwitch;
+     configload:=IUFindSwitch(configprop,'CONFIG_LOAD');
+     configsave:=IUFindSwitch(configprop,'CONFIG_SAVE');
+     if (configload=nil)or(configsave=nil) then configprop:=nil;
   end
   else if (proptype = INDI_SWITCH) and (propname = 'CONNECTION') then
   begin

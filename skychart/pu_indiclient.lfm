@@ -1,147 +1,108 @@
 object pop_indi: Tpop_indi
   Left = 456
-  Height = 450
+  Height = 497
   Top = 130
-  Width = 300
+  Width = 318
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   ActiveControl = Edit1
   Caption = 'INDI Telescope Interface'
-  ClientHeight = 450
-  ClientWidth = 300
+  ClientHeight = 497
+  ClientWidth = 318
   DesignTimePPI = 95
   OnCloseQuery = kill
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   ParentFont = True
   Position = poDefaultPosOnly
-  Visible = False
   object GroupBox3: TGroupBox
     Left = 0
-    Height = 111
-    Top = 208
-    Width = 300
+    Height = 64
+    Top = 168
+    Width = 318
     Align = alTop
-    ClientHeight = 109
-    ClientWidth = 298
+    ClientHeight = 62
+    ClientWidth = 316
     TabOrder = 2
-    object Connect: TButton
-      Left = 5
-      Height = 25
-      Top = 40
-      Width = 73
-      Caption = 'Connect'
-      OnClick = ConnectClick
-      TabOrder = 0
-    end
     object SpeedButton2: TButton
-      Left = 224
+      Left = 242
       Height = 25
-      Top = 40
+      Top = 32
       Width = 65
       Cancel = True
       Caption = 'Hide'
       OnClick = SpeedButton2Click
-      TabOrder = 4
-    end
-    object Disconnect: TButton
-      Left = 128
-      Height = 25
-      Top = 40
-      Width = 84
-      Caption = 'Disconnect'
-      OnClick = DisconnectClick
-      TabOrder = 2
-    end
-    object led: TEdit
-      Left = 88
-      Height = 25
-      Top = 40
-      Width = 25
-      AutoSize = False
-      Color = clRed
-      ReadOnly = True
-      TabStop = False
       TabOrder = 1
     end
     object SpeedButton6: TButton
-      Left = 173
+      Left = 112
       Height = 25
-      Top = 6
+      Top = 32
       Width = 116
       Caption = 'Abort Slew'
       Font.Color = clRed
       OnClick = SpeedButton6Click
       ParentFont = False
-      TabOrder = 3
-    end
-    object SpeedButton4: TButton
-      Left = 224
-      Height = 25
-      Top = 72
-      Width = 65
-      Caption = 'Help'
-      OnClick = SpeedButton4Click
-      TabOrder = 5
+      TabOrder = 0
     end
     object BtnIndiGui: TButton
-      Left = 5
+      Left = 7
       Height = 25
-      Top = 72
+      Top = 32
       Width = 81
       Caption = 'INDI gui'
       OnClick = BtnIndiGuiClick
-      TabOrder = 6
+      TabOrder = 2
     end
     object ProtocolTrace: TCheckBox
-      Left = 16
+      Left = 11
       Height = 21
       Top = 8
       Width = 111
       Caption = 'Protocol trace '
       OnChange = ProtocolTraceChange
-      TabOrder = 7
+      TabOrder = 3
     end
   end
   object Panel1: TPanel
     Left = 0
-    Height = 40
-    Top = 168
-    Width = 300
+    Height = 36
+    Top = 232
+    Width = 318
     Align = alTop
-    ClientHeight = 40
-    ClientWidth = 300
+    ClientHeight = 36
+    ClientWidth = 318
     TabOrder = 1
     object LabelAlpha: TLabel
       Left = 8
       Height = 18
-      Top = 12
+      Top = 8
       Width = 19
       Caption = 'RA '
       ParentColor = False
     end
     object LabelDelta: TLabel
-      Left = 126
+      Left = 176
       Height = 18
-      Top = 12
+      Top = 8
       Width = 24
       Caption = 'DEC'
       ParentColor = False
     end
     object pos_x: TEdit
-      Left = 30
+      Left = 40
       Height = 30
-      Top = 8
-      Width = 86
+      Top = 4
+      Width = 95
       ReadOnly = True
       TabStop = False
       TabOrder = 0
     end
     object pos_y: TEdit
-      Left = 158
+      Left = 213
       Height = 30
-      Top = 8
-      Width = 86
+      Top = 4
+      Width = 95
       ReadOnly = True
       TabStop = False
       TabOrder = 1
@@ -151,11 +112,11 @@ object pop_indi: Tpop_indi
     Left = 0
     Height = 108
     Top = 60
-    Width = 300
+    Width = 318
     Align = alTop
     Caption = 'Observatory '
     ClientHeight = 89
-    ClientWidth = 298
+    ClientWidth = 316
     TabOrder = 4
     object Label15: TLabel
       Left = 8
@@ -233,11 +194,11 @@ object pop_indi: Tpop_indi
     Left = 0
     Height = 60
     Top = 0
-    Width = 300
+    Width = 318
     Align = alTop
     Caption = 'Current driver'
     ClientHeight = 41
-    ClientWidth = 298
+    ClientWidth = 316
     TabOrder = 0
     object Edit1: TEdit
       Left = 8
@@ -252,13 +213,61 @@ object pop_indi: Tpop_indi
   end
   object Memomsg: TMemo
     Left = 0
-    Height = 131
-    Top = 319
-    Width = 300
+    Height = 188
+    Top = 268
+    Width = 318
     Align = alClient
     ReadOnly = True
     ScrollBars = ssAutoBoth
     TabOrder = 3
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 41
+    Top = 456
+    Width = 318
+    Align = alBottom
+    ClientHeight = 41
+    ClientWidth = 318
+    TabOrder = 5
+    object Disconnect: TButton
+      Left = 88
+      Height = 25
+      Top = 8
+      Width = 84
+      Caption = 'Disconnect'
+      OnClick = DisconnectClick
+      TabOrder = 0
+    end
+    object led: TEdit
+      Left = 192
+      Height = 25
+      Top = 8
+      Width = 25
+      AutoSize = False
+      Color = clRed
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 1
+    end
+    object Connect: TButton
+      Left = 235
+      Height = 25
+      Top = 8
+      Width = 73
+      Caption = 'Connect'
+      OnClick = ConnectClick
+      TabOrder = 2
+    end
+    object SpeedButton4: TButton
+      Left = 3
+      Height = 25
+      Top = 8
+      Width = 65
+      Caption = 'Help'
+      OnClick = SpeedButton4Click
+      TabOrder = 3
+    end
   end
   object InitTimer: TTimer
     Enabled = False
