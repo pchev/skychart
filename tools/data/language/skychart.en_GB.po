@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2018-10-21 14:30+0000\n"
-"PO-Revision-Date: 2018-12-09 12:58+0000\n"
+"PO-Revision-Date: 2018-12-27 13:10+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-12-09 18:01+0000\n"
-"X-Generator: Launchpad (build 18831)\n"
+"X-Launchpad-Export-Date: 2019-01-13 17:13+0000\n"
+"X-Generator: Launchpad (build 18855)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -154,7 +154,7 @@ msgstr ""
 
 #: u_translation.rsaddequatoria
 msgid "Show equatorial grid"
-msgstr ""
+msgstr "Show equatorial grid"
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"
@@ -626,7 +626,7 @@ msgstr ""
 
 #: u_translation.rscalendar
 msgid "Calendar"
-msgstr ""
+msgstr "Calendar"
 
 #: u_translation.rscalendargrap
 msgid "Calendar graph setting"
@@ -690,7 +690,7 @@ msgstr ""
 
 #: u_translation.rscatalog
 msgid "Catalog"
-msgstr ""
+msgstr "Catalogue"
 
 #: u_translation.rscataloglongn
 msgid "Catalog long name"
@@ -766,7 +766,7 @@ msgstr ""
 
 #: u_translation.rschangedrawin
 msgid "Change drawing mode"
-msgstr ""
+msgstr "Change drawing mode"
 
 #: u_translation.rschangemousem
 msgid "Change mouse mode"
@@ -878,7 +878,7 @@ msgstr ""
 
 #: u_translation.rsclosechart
 msgid "Close chart"
-msgstr ""
+msgstr "Close chart"
 
 #: u_translation.rscloseconnect
 msgid "Close connection"
@@ -1002,7 +1002,7 @@ msgstr ""
 
 #: u_translation.rsconfiguratio
 msgid "Configuration"
-msgstr ""
+msgstr "Configuration"
 
 #: u_translation.rsconfigure
 msgid "Configure"
@@ -1050,7 +1050,7 @@ msgstr ""
 
 #: u_translation.rsconnectteles
 msgid "Connect telescope"
-msgstr ""
+msgstr "Connect telescope"
 
 #: u_translation.rsconnecttofai
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
@@ -1134,7 +1134,7 @@ msgstr ""
 
 #: u_translation.rscopy
 msgid "Copy"
-msgstr ""
+msgstr "Copy"
 
 #: u_translation.rscopycoordina
 msgid "Copy coordinates"
@@ -1294,7 +1294,7 @@ msgstr ""
 
 #: u_translation.rsdatetime
 msgid "Date / time"
-msgstr ""
+msgstr "Date / time"
 
 #: u_translation.rsdatetime2
 msgid "Date/time"
@@ -1790,7 +1790,7 @@ msgstr ""
 
 #: u_translation.rsedit
 msgid "Edit"
-msgstr ""
+msgstr "Edit"
 
 #: u_translation.rseditcolor
 msgid "Edit colour"
@@ -1958,7 +1958,7 @@ msgstr ""
 
 #: u_translation.rsexit
 msgid "Exit"
-msgstr ""
+msgstr "Exit"
 
 #: u_translation.rsexiting
 msgid "Exiting ..."
@@ -2050,7 +2050,7 @@ msgstr ""
 
 #: u_translation.rsfile
 msgid "File"
-msgstr ""
+msgstr "File"
 
 #: u_translation.rsfilenamewith
 msgid "Filename without path or extension"
@@ -2142,7 +2142,7 @@ msgstr ""
 
 #: u_translation.rsfonts
 msgid "Fonts"
-msgstr ""
+msgstr "Fonts"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
@@ -2262,7 +2262,7 @@ msgstr ""
 
 #: u_translation.rsgetdssimage
 msgid "Get the DSS image"
-msgstr ""
+msgstr "Get the DSS image"
 
 #: u_translation.rsgetfromteles
 msgid "Get from telescope"
@@ -2494,7 +2494,7 @@ msgstr ""
 
 #: u_translation.rsincrementtim
 msgid "Increment time"
-msgstr ""
+msgstr "Increment time"
 
 #: u_translation.rsindicatehere
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
@@ -2690,7 +2690,7 @@ msgstr ""
 
 #: u_translation.rslabels
 msgid "Labels"
-msgstr ""
+msgstr "Labels"
 
 #: u_translation.rslabeltext
 msgid "Label text"
@@ -2810,7 +2810,7 @@ msgstr ""
 
 #: u_translation.rslines
 msgid "Lines"
-msgstr ""
+msgstr "Lines"
 
 #: u_translation.rslinesgrid
 msgid "Lines / grid"
@@ -2822,7 +2822,7 @@ msgstr ""
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
-msgstr ""
+msgstr "Link all charts"
 
 #: u_translation.rslist
 msgid "List"
@@ -3306,7 +3306,7 @@ msgstr ""
 
 #: u_translation.rsnewchart
 msgid "New chart"
-msgstr ""
+msgstr "New chart"
 
 #: u_translation.rsnewfindercir
 msgid "New finder circle"
@@ -3378,7 +3378,7 @@ msgstr ""
 
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
-msgstr ""
+msgstr "No object to lock on"
 
 #: u_translation.rsnopicture
 msgid "No picture"
@@ -3514,7 +3514,7 @@ msgstr ""
 
 #: u_translation.rsobservatory
 msgid "Observatory"
-msgstr ""
+msgstr "Observatory"
 
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
@@ -3610,7 +3610,7 @@ msgstr ""
 
 #: u_translation.rsopen
 msgid "Open"
-msgstr ""
+msgstr "Open"
 
 #: u_translation.rsopenachart
 msgid "Open a chart"
@@ -3762,7 +3762,7 @@ msgstr ""
 
 #: u_translation.rspictures
 msgid "Pictures"
-msgstr ""
+msgstr "Pictures"
 
 #: u_translation.rspixelcount
 msgid "Pixel count"
@@ -3954,7 +3954,7 @@ msgstr ""
 
 #: u_translation.rsprint
 msgid "Print"
-msgstr ""
+msgstr "Print"
 
 #: u_translation.rsprintchart
 msgid "Print chart"
@@ -4194,7 +4194,7 @@ msgstr ""
 
 #: u_translation.rsredo
 msgid "Redo"
-msgstr ""
+msgstr "Redo"
 
 #: u_translation.rsredolastchan
 msgid "Redo last change"
@@ -4434,19 +4434,19 @@ msgstr ""
 
 #: u_translation.rssaveas
 msgid "Save as..."
-msgstr ""
+msgstr "Save as..."
 
 #: u_translation.rssaveconfigur
 msgid "Save configuration now"
-msgstr ""
+msgstr "Save configuration now"
 
 #: u_translation.rssaveconfigur2
 msgid "Save configuration on exit"
-msgstr ""
+msgstr "Save configuration on exit"
 
 #: u_translation.rssaveimage
 msgid "Save image..."
-msgstr ""
+msgstr "Save image..."
 
 #: u_translation.rssaveproject
 msgid "Save project"
@@ -4706,7 +4706,7 @@ msgstr ""
 
 #: u_translation.rssetup
 msgid "Setup"
-msgstr ""
+msgstr "Setup"
 
 #: u_translation.rssetupoption
 msgid "Setup Options"
@@ -4730,7 +4730,7 @@ msgstr ""
 
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
-msgstr ""
+msgstr "Show asteroids"
 
 #: u_translation.rsshowasteroid3
 msgid "Show asteroids on the chart"
@@ -4742,7 +4742,7 @@ msgstr ""
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
-msgstr ""
+msgstr "Show comets"
 
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
@@ -4754,11 +4754,11 @@ msgstr ""
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"
-msgstr ""
+msgstr "Show constellation lines"
 
 #: u_translation.rsshowconstell2
 msgid "Show constellation limits"
-msgstr ""
+msgstr "Show constellation limits"
 
 #: u_translation.rsshowconstell3
 msgid "Show constellation figures"
@@ -4770,7 +4770,7 @@ msgstr ""
 
 #: u_translation.rsshowcoordina
 msgid "Show coordinates grid"
-msgstr ""
+msgstr "Show coordinates grid"
 
 #: u_translation.rsshowdsolines
 msgid "Show nebulae outlines"
@@ -4782,11 +4782,11 @@ msgstr ""
 
 #: u_translation.rsshowecliptic
 msgid "Show ecliptic"
-msgstr ""
+msgstr "Show ecliptic"
 
 #: u_translation.rsshowgalactic
 msgid "Show galactic equator"
-msgstr ""
+msgstr "Show galactic equator"
 
 #: u_translation.rsshowgridlabe
 msgid "Show grid label"
@@ -4794,7 +4794,7 @@ msgstr ""
 
 #: u_translation.rsshowhidedssi
 msgid "Show/hide DSS image"
-msgstr ""
+msgstr "Show/hide DSS image"
 
 #: u_translation.rsshowimagenam
 msgid "Show image name label"
@@ -4806,7 +4806,7 @@ msgstr ""
 
 #: u_translation.rsshowlabels
 msgid "Show labels"
-msgstr ""
+msgstr "Show labels"
 
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
@@ -4814,7 +4814,7 @@ msgstr ""
 
 #: u_translation.rsshowmark
 msgid "Show mark"
-msgstr ""
+msgstr "Show mark"
 
 #: u_translation.rsshowmarkinde
 msgid "Show mark index"
@@ -4822,7 +4822,7 @@ msgstr ""
 
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
-msgstr ""
+msgstr "Show Milky Way"
 
 #: u_translation.rsshowneareart
 msgid "Show near Earth asteroids independently of the magnitude"
@@ -4830,11 +4830,11 @@ msgstr ""
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
-msgstr ""
+msgstr "Show deep sky objects"
 
 #: u_translation.rsshowobjectbe
 msgid "Show objects below the horizon"
-msgstr ""
+msgstr "Show objects below the horizon"
 
 #: u_translation.rsshowobjectpi
 msgid "Show object pictures on the chart"
@@ -4854,7 +4854,7 @@ msgstr ""
 
 #: u_translation.rsshowpictures
 msgid "Show pictures"
-msgstr ""
+msgstr "Show pictures"
 
 #: u_translation.rsshowplaneton
 msgid "Show planets on the chart"
@@ -4862,7 +4862,7 @@ msgstr ""
 
 #: u_translation.rsshowplanets
 msgid "Show planets"
-msgstr ""
+msgstr "Show planets"
 
 #: u_translation.rsshowposition
 msgid "Show position in title bar"
@@ -4870,7 +4870,7 @@ msgstr ""
 
 #: u_translation.rsshowstars
 msgid "Show stars"
-msgstr ""
+msgstr "Show stars"
 
 #: u_translation.rsshowtheimage
 msgid "Show the images on the map"
@@ -4910,7 +4910,7 @@ msgstr ""
 
 #: u_translation.rsskybackgroun
 msgid "Sky background colour"
-msgstr ""
+msgstr "Sky background colour"
 
 #: u_translation.rsskycharthome
 msgid "Skychart homepage"
@@ -4934,7 +4934,7 @@ msgstr ""
 
 #: u_translation.rsslew
 msgid "Slew"
-msgstr ""
+msgstr "Slew"
 
 #: u_translation.rsslewingto
 msgid "Slewing to %s / %s"
@@ -5206,7 +5206,7 @@ msgstr ""
 
 #: u_translation.rssync
 msgid "Sync"
-msgstr ""
+msgstr "Sync"
 
 #: u_translation.rssyncedto
 msgid "Synced to %s / %s"
@@ -5546,7 +5546,7 @@ msgstr ""
 
 #: u_translation.rsundo
 msgid "Undo"
-msgstr ""
+msgstr "Undo"
 
 #: u_translation.rsundolastchan
 msgid "Undo last change"
