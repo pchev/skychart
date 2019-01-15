@@ -5996,8 +5996,7 @@ begin
   def_cfgplot.magsize := 4;
   def_cfgplot.saturation := 255;
   cfgm.Constellationpath := 'data' + Pathdelim + 'constellation';
-  cfgm.ConstLfile := 'data' + Pathdelim + 'constellation' + Pathdelim +
-    'DefaultConstL.cln';
+  cfgm.ConstLfile := 'data' + Pathdelim + 'constellation' + Pathdelim + 'IAU_ConstL.cln';
   cfgm.ConstBfile := 'data' + Pathdelim + 'constellation' + Pathdelim + 'constb.cby';
   cfgm.EarthMapFile := 'data' + Pathdelim + 'earthmap' + Pathdelim + 'earthmap1k.jpg';
   cfgm.PlanetDir := 'data' + Pathdelim + 'planet';
