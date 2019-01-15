@@ -408,6 +408,7 @@ var
 begin
   try
     tcpclient := TTCPClient.Create;
+    s := TMemoryStream.Create;
     try
       OpenProtocolTrace(FProtocolRawFile, FProtocolTraceFile, FProtocolErrorFile);
       {$ifdef withCriticalsection}
@@ -430,7 +431,6 @@ begin
         // main loop
         buf := '';
         level := 0;
-        s := TMemoryStream.Create;
         s.WriteBuffer('<INDIMSG>', 9);
         c := 0;
         repeat
