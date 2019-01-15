@@ -1,9 +1,8 @@
 object f_calendar: Tf_calendar
-  Left = 490
+  Left = 445
   Height = 455
   Top = 95
   Width = 835
-  ActiveControl = BtnRefresh
   Caption = 'f_calendar'
   ClientHeight = 455
   ClientWidth = 835
@@ -13,8 +12,7 @@ object f_calendar: Tf_calendar
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.6.4.0'
-  Visible = False
+  LCLVersion = '2.0.0.3'
   object Panel1: TPanel
     Left = 0
     Height = 70
@@ -27,53 +25,43 @@ object f_calendar: Tf_calendar
     TabOrder = 0
     object Label1: TLabel
       Left = 8
-      Height = 18
+      Height = 16
       Top = 14
-      Width = 32
+      Width = 31
       Caption = 'From'
-      Color = clBtnFace
       ParentColor = False
-      Transparent = False
     end
     object Label2: TLabel
       Left = 184
-      Height = 18
+      Height = 16
       Top = 14
-      Width = 13
+      Width = 12
       Caption = 'to'
-      Color = clBtnFace
       ParentColor = False
-      Transparent = False
     end
     object Label5: TLabel
       Left = 30
-      Height = 18
+      Height = 16
       Top = 46
       Width = 12
       Caption = 'at'
-      Color = clBtnFace
       ParentColor = False
-      Transparent = False
     end
     object Label3: TLabel
       Left = 185
-      Height = 18
+      Height = 16
       Top = 46
-      Width = 21
+      Width = 22
       Caption = 'pas'
-      Color = clBtnFace
       ParentColor = False
-      Transparent = False
     end
     object Label4: TLabel
       Left = 256
-      Height = 18
+      Height = 16
       Top = 46
       Width = 30
       Caption = 'jours'
-      Color = clBtnFace
       ParentColor = False
-      Transparent = False
     end
     object SatPanel: TPanel
       Cursor = crHandPoint
@@ -124,7 +112,7 @@ object f_calendar: Tf_calendar
     end
     object step: TLongEdit
       Left = 216
-      Height = 24
+      Height = 21
       Hint = '1..9999'
       Top = 41
       Width = 33
@@ -137,7 +125,7 @@ object f_calendar: Tf_calendar
     end
     object Date1: TJDDatePicker
       Left = 72
-      Height = 25
+      Height = 21
       Top = 8
       Width = 101
       Caption = 'JD calendar'
@@ -145,7 +133,7 @@ object f_calendar: Tf_calendar
     end
     object Date2: TJDDatePicker
       Left = 205
-      Height = 25
+      Height = 21
       Top = 8
       Width = 101
       Caption = 'JD calendar'
@@ -246,13 +234,13 @@ object f_calendar: Tf_calendar
     OnChange = PageControl1Change
     object twilight: TTabSheet
       Caption = 'Twilight'
-      ClientHeight = 359
-      ClientWidth = 833
+      ClientHeight = 355
+      ClientWidth = 829
       object TwilightGrid: TStringGrid
         Left = 0
-        Height = 359
+        Height = 355
         Top = 0
-        Width = 833
+        Width = 829
         Align = alClient
         ColCount = 8
         DefaultColWidth = 100
@@ -280,8 +268,8 @@ object f_calendar: Tf_calendar
         TabOrder = 0
         object Psoleil: TTabSheet
           Caption = 'Sun'
-          ClientHeight = 352
-          ClientWidth = 827
+          ClientHeight = 326
+          ClientWidth = 825
           ImageIndex = 9
           object SoleilGrid: TStringGrid
             Left = 0
@@ -562,10 +550,11 @@ object f_calendar: Tf_calendar
           Height = 25
           Top = 9
           Width = 169
-          ItemHeight = 0
+          ItemHeight = 26
           OnSelect = ComboBox1Change
           Style = csDropDownList
           TabOrder = 2
+          Text = '0'
         end
         object Button4: TButton
           Left = 414
@@ -613,10 +602,11 @@ object f_calendar: Tf_calendar
           Height = 27
           Top = 13
           Width = 169
-          ItemHeight = 0
+          ItemHeight = 26
           OnSelect = ComboBox2Change
           Style = csDropDownList
           TabOrder = 2
+          Text = '0'
         end
         object Button2: TButton
           Left = 136
@@ -777,7 +767,6 @@ object f_calendar: Tf_calendar
           ShowHint = True
           TabOrder = 3
           Value = 6.5
-          MinValue = 0
           MaxValue = 99
         end
         object maglimit: TFloatEdit
@@ -791,7 +780,6 @@ object f_calendar: Tf_calendar
           ShowHint = True
           TabOrder = 0
           Value = 4
-          MinValue = 0
           MaxValue = 99
         end
         object BtnTleDownload: TButton
@@ -839,7 +827,6 @@ object f_calendar: Tf_calendar
           ItemHeight = 0
           OnClickCheck = TleCheckListClickCheck
           TabOrder = 7
-          TopIndex = -1
         end
       end
       object DownloadPanel: TPanel
@@ -858,6 +845,7 @@ object f_calendar: Tf_calendar
           Top = 1
           Width = 831
           Align = alClient
+          Lines.Strings = (          )
           TabOrder = 0
         end
       end
@@ -866,8 +854,8 @@ object f_calendar: Tf_calendar
   object SaveDialog1: TSaveDialog
     FilterIndex = 0
     Options = [ofOverwritePrompt, ofHideReadOnly, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
-    left = 248
-    top = 232
+    Left = 248
+    Top = 232
   end
   object DownloadDialog1: TDownloadDialog
     Timeout = 90000
@@ -875,7 +863,7 @@ object f_calendar: Tf_calendar
     FtpFwPassive = True
     ConfirmDownload = True
     QuickCancel = False
-    left = 408
-    top = 232
+    Left = 408
+    Top = 232
   end
 end

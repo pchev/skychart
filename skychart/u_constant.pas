@@ -1408,6 +1408,8 @@ const
     '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body><div>';
   html_h_nv =
     '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body bgcolor="#000000" text="#C03030"><div>';
+  html_h_drk =
+    '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body bgcolor="#000000" text="#C0C0C0"><div>';
   html_h_b =
     '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body bgcolor="#000000" text="#FFFFFF"><div>';
   htms_h = '</div></body></HTML>';

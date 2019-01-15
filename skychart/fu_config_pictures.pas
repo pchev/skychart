@@ -277,6 +277,12 @@ begin
   Image1.canvas.rectangle(0, 0, Image1.Width, Image1.Height);
   label6.Visible := False;
   StringGrid1.RowCount := MaxArchiveDir + 1;
+  {$ifdef lclcocoa}
+    { TODO : check cocoa dark theme color}
+    if DarkTheme then begin
+      StringGrid1.FixedColor := clBackground;
+    end;
+  {$endif}
 end;
 
 destructor Tf_config_pictures.Destroy;

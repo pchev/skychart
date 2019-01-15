@@ -170,6 +170,12 @@ begin
   inherited Create(AOwner);
   LockChange := True;
   SetLang;
+  {$ifdef lclcocoa}
+    { TODO : check cocoa dark theme color}
+    if DarkTheme then begin
+      DSSpictures.FixedColor := clBackground;
+    end;
+  {$endif}
 end;
 
 destructor Tf_config_internet.Destroy;

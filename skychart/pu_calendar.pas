@@ -1,4 +1,4 @@
-unit pu_calendar;
+         unit pu_calendar;
 
 {$MODE Delphi} {$H+}
 
@@ -274,6 +274,27 @@ begin
 {$ifdef mswindows}
   SaveDialog1.Options := SaveDialog1.Options - [ofNoReadOnlyReturn];
   { TODO : check readonly test on Windows }
+{$endif}
+{$ifdef lclcocoa}
+  { TODO : check cocoa dark theme color}
+  if DarkTheme then begin
+    TwilightGrid.FixedColor := clBackground;
+    SoleilGrid.FixedColor := clBackground;
+    MercureGrid.FixedColor := clBackground;
+    VenusGrid.FixedColor := clBackground;
+    LuneGrid.FixedColor := clBackground;
+    MarsGrid.FixedColor := clBackground;
+    JupiterGrid.FixedColor := clBackground;
+    SaturneGrid.FixedColor := clBackground;
+    UranusGrid.FixedColor := clBackground;
+    NeptuneGrid.FixedColor := clBackground;
+    PlutonGrid.FixedColor := clBackground;
+    CometGrid.FixedColor := clBackground;
+    AsteroidGrid.FixedColor := clBackground;
+    SolarGrid.FixedColor := clBackground;
+    LunarGrid.FixedColor := clBackground;
+    SatGrid.FixedColor := clBackground;
+  end;
 {$endif}
 end;
 

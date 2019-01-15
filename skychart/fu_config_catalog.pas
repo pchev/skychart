@@ -455,6 +455,14 @@ begin
   LockChange := True;
   LockCatPath := True;
   SetLang;
+  {$ifdef lclcocoa}
+    { TODO : check cocoa dark theme color}
+    if DarkTheme then begin
+      StringGrid1.FixedColor := clBackground;
+      StringGrid3.FixedColor := clBackground;
+      StringGrid4.FixedColor := clBackground;
+    end;
+  {$endif}
 end;
 
 destructor Tf_config_catalog.Destroy;

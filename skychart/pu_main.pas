@@ -2541,7 +2541,11 @@ begin
 {$endif}
       );
     // detect if theme color is dark
+    {$ifdef lclcocoa}
+    c:=ColorToBGRA(ColorToRGB(clBackground));
+    {$else}
     c:=ColorToBGRA(ColorToRGB(clBtnFace));
+    {$endif}
     i:=round((c.red+c.green+c.blue)/3);
     DarkTheme:=(i<128);
     step := 'Load zlib';
@@ -10987,7 +10991,29 @@ begin
          MenuIlist:=Img22Night
       else
          MenuIlist:=Img32Night;
-      ToolBarFOV.Font.Color:=clSilver;
+         ToolBarFOV.Font.Color:=clSilver;
+         {$ifdef lclcocoa}
+         tbFOV1.Font.Color:=clSilver;
+         tbFOV2.Font.Color:=clSilver;
+         tbFOV3.Font.Color:=clSilver;
+         tbFOV4.Font.Color:=clSilver;
+         tbFOV5.Font.Color:=clSilver;
+         tbFOV6.Font.Color:=clSilver;
+         tbFOV7.Font.Color:=clSilver;
+         tbFOV8.Font.Color:=clSilver;
+         tbFOV9.Font.Color:=clSilver;
+         tbFOV10.Font.Color:=clSilver;
+         tbFOV1.Color:=clBackground;
+         tbFOV2.Color:=clBackground;
+         tbFOV3.Color:=clBackground;
+         tbFOV4.Color:=clBackground;
+         tbFOV5.Color:=clBackground;
+         tbFOV6.Color:=clBackground;
+         tbFOV7.Color:=clBackground;
+         tbFOV8.Color:=clBackground;
+         tbFOV9.Color:=clBackground;
+         tbFOV10.Color:=clBackground;
+         {$endif}
     end
     else begin
       // light theme, use daylight

@@ -776,6 +776,12 @@ begin
     StringGrid1.ColWidths[1] - StringGrid1.ColWidths[2] - StringGrid1.ColWidths[3] - 8;
   Newlist;
   gridchanged := False;
+  {$ifdef lclcocoa}
+    { TODO : check cocoa dark theme color}
+    if DarkTheme then begin
+      StringGrid1.FixedColor := clBackground;
+    end;
+  {$endif}
 end;
 
 procedure Tf_obslist.FormDestroy(Sender: TObject);

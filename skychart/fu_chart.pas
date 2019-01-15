@@ -3725,6 +3725,8 @@ begin
   // header
   if NightVision then
     txt := html_h_nv
+  else if DarkTheme then
+      txt := html_h_drk
   else if cmain.SimpleDetail then
     txt := html_h_b + html_h2
   else

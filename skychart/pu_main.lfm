@@ -1,13 +1,12 @@
 object f_main: Tf_main
   Left = 141
-  Height = 550
+  Height = 556
   Top = 151
-  Width = 876
+  Width = 885
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 550
-  ClientWidth = 876
-  DesignTimePPI = 95
+  ClientHeight = 556
+  ClientWidth = 885
   KeyPreview = True
   Menu = MainMenu1
   OnActivate = FormActivate
@@ -17,42 +16,44 @@ object f_main: Tf_main
   OnKeyDown = FormKeyDown
   OnResize = FormResize
   OnShow = FormShow
-  ParentFont = True
   LCLVersion = '2.0.0.3'
   object PanelTop: TPanel
     Left = 0
-    Height = 80
+    Height = 81
     Top = 0
-    Width = 876
+    Width = 885
     Align = alTop
     BevelOuter = bvNone
-    ClientHeight = 80
-    ClientWidth = 876
+    ClientHeight = 81
+    ClientWidth = 885
     FullRepaint = False
+    ParentFont = False
     TabOrder = 0
     TabStop = True
     object TabControl1: TTabControl
       Left = 0
       Height = 30
       Top = 0
-      Width = 876
+      Width = 885
       TabStop = False
       OnChange = TabControl1Change
       Align = alTop
+      ParentFont = False
       TabOrder = 1
       Visible = False
     end
     object ToolBarObj: TToolBar
       Left = 0
       Height = 27
-      Top = 53
-      Width = 876
+      Top = 54
+      Width = 885
       Align = alBottom
       ButtonHeight = 24
       ButtonWidth = 24
       Caption = 'Object bar'
       EdgeBorders = [ebTop, ebBottom]
       Images = Img16Day
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
@@ -62,24 +63,26 @@ object f_main: Tf_main
     object PanelToolBarMain: TPanel
       Left = 0
       Height = 25
-      Top = 28
-      Width = 876
+      Top = 29
+      Width = 885
       Align = alBottom
       BevelOuter = bvNone
       Caption = 'PanelToolBarMain'
       ClientHeight = 25
-      ClientWidth = 876
+      ClientWidth = 885
+      ParentFont = False
       TabOrder = 2
       object ToolBarMain: TToolBar
         Left = 0
         Height = 25
         Top = 0
-        Width = 844
+        Width = 853
         Align = alClient
         ButtonHeight = 24
         ButtonWidth = 24
         Caption = 'Main bar'
         Images = Img16Day
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
@@ -88,14 +91,14 @@ object f_main: Tf_main
         OnMouseDown = MDEditToolBar
         object Divider_ToolBarMain_end: TToolButton
           Left = 1
-          Height = 5
+          Height = 24
           Top = 2
           Caption = 'Divider_ToolBarMain_end'
           Style = tbsDivider
         end
       end
       object ChildControl: TPanel
-        Left = 844
+        Left = 853
         Height = 25
         Top = 0
         Width = 32
@@ -103,6 +106,7 @@ object f_main: Tf_main
         AutoSize = True
         ClientHeight = 25
         ClientWidth = 32
+        ParentFont = False
         TabOrder = 1
         object BtnRestoreChild: TSpeedButton
           Left = 1
@@ -129,6 +133,7 @@ object f_main: Tf_main
           }
           Transparent = False
           OnClick = BtnRestoreChildClick
+          ParentFont = False
         end
         object BtnCloseChild: TSpeedButton
           Left = 16
@@ -155,18 +160,19 @@ object f_main: Tf_main
           }
           Transparent = False
           OnClick = BtnCloseChildClick
+          ParentFont = False
         end
       end
     end
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 436
-    Top = 80
+    Height = 441
+    Top = 81
     Width = 28
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 436
+    ClientHeight = 441
     ClientWidth = 28
     Font.Height = 10
     FullRepaint = False
@@ -174,7 +180,7 @@ object f_main: Tf_main
     TabOrder = 1
     object ToolBarLeft: TToolBar
       Left = 0
-      Height = 436
+      Height = 441
       Top = 0
       Width = 28
       Align = alClient
@@ -184,7 +190,9 @@ object f_main: Tf_main
       EdgeBorders = []
       EdgeInner = esNone
       EdgeOuter = esNone
+      Font.Height = 10
       Images = Img16Day
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
@@ -192,19 +200,20 @@ object f_main: Tf_main
     end
   end
   object PanelRight: TPanel
-    Left = 850
-    Height = 436
-    Top = 80
+    Left = 859
+    Height = 441
+    Top = 81
     Width = 26
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 436
+    ClientHeight = 441
     ClientWidth = 26
     FullRepaint = False
+    ParentFont = False
     TabOrder = 3
     object ToolBarRight: TToolBar
       Left = 0
-      Height = 436
+      Height = 441
       Top = 0
       Width = 26
       Align = alClient
@@ -230,16 +239,17 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 516
-    Width = 876
+    Top = 522
+    Width = 885
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 34
-    ClientWidth = 876
+    ClientWidth = 885
     FullRepaint = False
+    ParentFont = False
     TabOrder = 4
     object Shape1: TShape
-      Left = 220
+      Left = 222
       Height = 34
       Top = 0
       Width = 2
@@ -251,30 +261,32 @@ object f_main: Tf_main
       Left = 0
       Height = 34
       Top = 0
-      Width = 220
+      Width = 222
       Align = alLeft
       Alignment = taLeftJustify
       BevelOuter = bvNone
       ClientHeight = 34
-      ClientWidth = 220
+      ClientWidth = 222
       FullRepaint = False
+      ParentFont = False
       TabOrder = 0
       object LPanels0: TPanel
         Left = 0
         Height = 34
         Top = 0
-        Width = 220
+        Width = 222
         Align = alClient
         Alignment = taLeftJustify
         BevelOuter = bvNone
         ClientHeight = 34
-        ClientWidth = 220
+        ClientWidth = 222
+        ParentFont = False
         TabOrder = 0
         object P0L1: TLabel
           Left = 0
           Height = 34
           Top = 0
-          Width = 220
+          Width = 222
           Align = alClient
           ParentColor = False
           ParentFont = False
@@ -282,45 +294,48 @@ object f_main: Tf_main
       end
     end
     object PPanels1: TPanel
-      Left = 222
+      Left = 224
       Height = 34
       Top = 0
-      Width = 654
+      Width = 661
       Align = alClient
       Alignment = taLeftJustify
       BevelOuter = bvNone
       ClientHeight = 34
-      ClientWidth = 654
+      ClientWidth = 661
       FullRepaint = False
+      ParentFont = False
       TabOrder = 1
       object LPanels1: TPanel
         Left = 0
         Height = 34
         Top = 0
-        Width = 654
+        Width = 661
         Align = alClient
         Alignment = taLeftJustify
         BevelOuter = bvNone
         ClientHeight = 34
-        ClientWidth = 654
+        ClientWidth = 661
+        ParentFont = False
         TabOrder = 0
         object P1L1: TLabel
           Left = 0
           Height = 34
           Top = 0
-          Width = 654
+          Width = 661
           Align = alClient
           AutoSize = False
           ParentColor = False
+          ParentFont = False
         end
       end
     end
   end
   object MultiFrame1: TMultiFrame
-    Left = 392
-    Height = 237
-    Top = 176
-    Width = 331
+    Left = 396
+    Height = 239
+    Top = 178
+    Width = 334
     Maximized = False
     BorderWidth = 3
     TitleHeight = 12
@@ -331,11 +346,12 @@ object f_main: Tf_main
     OnCreateChild = MultiFrame1CreateChild
     OnDeleteChild = MultiFrame1DeleteChild
     BevelOuter = bvNone
-    ClientHeight = 237
-    ClientWidth = 331
+    ClientHeight = 239
+    ClientWidth = 334
     Color = clBlack
     FullRepaint = False
     ParentColor = False
+    ParentFont = False
     TabOrder = 2
     TabStop = True
     object starshape: TImage
@@ -2963,12 +2979,13 @@ object f_main: Tf_main
     end
   end
   object ContainerPanel: TPanel
-    Left = 476
-    Height = 120
-    Top = 416
-    Width = 328
-    ClientHeight = 120
-    ClientWidth = 328
+    Left = 481
+    Height = 121
+    Top = 420
+    Width = 331
+    ClientHeight = 121
+    ClientWidth = 331
+    ParentFont = False
     TabOrder = 5
     Visible = False
     object MagPanel: TPanel
@@ -2986,6 +3003,7 @@ object f_main: Tf_main
       ClientHeight = 22
       ClientWidth = 24
       FullRepaint = False
+      ParentFont = False
       TabOrder = 0
       OnMouseUp = MagPanelMouseUp
       object ButtonMoreStar: TImage
@@ -3089,47 +3107,50 @@ object f_main: Tf_main
       end
     end
     object quicksearch: TComboBox
-      Left = 55
-      Height = 22
+      Left = 56
+      Height = 20
       Hint = 'Search'
       Top = 19
-      Width = 90
+      Width = 91
       ArrowKeysTraverseList = False
       AutoComplete = True
       AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
       AutoSize = False
       DropDownCount = 15
-      ItemHeight = 0
+      ItemHeight = 19
       OnCloseUp = quicksearchClick
       OnDblClick = quicksearchClick
       OnKeyDown = quicksearchKeyDown
+      ParentFont = False
       TabOrder = 1
       Visible = False
     end
     object TimeU: TComboBox
-      Left = 217
-      Height = 27
+      Left = 219
+      Height = 20
       Hint = 'Time Units'
       Top = 16
-      Width = 80
+      Width = 81
       AutoCompleteText = [cbactSearchAscending]
       AutoSize = False
       DropDownCount = 11
       Font.CharSet = ANSI_CHARSET
-      ItemHeight = 0
+      ItemHeight = 26
       OnChange = TimeUChange
       ParentFont = False
       Style = csDropDownList
       TabOrder = 2
+      Text = '0'
     end
     object TimeValPanel: TPanel
-      Left = 152
+      Left = 154
       Height = 21
       Top = 19
-      Width = 58
+      Width = 59
       BevelOuter = bvNone
       ClientHeight = 21
-      ClientWidth = 58
+      ClientWidth = 59
+      ParentFont = False
       TabOrder = 3
       object TimeVal: TMouseUpDown
         Left = 36
@@ -3151,17 +3172,18 @@ object f_main: Tf_main
         Width = 36
         Align = alLeft
         OnChange = EditTimeValChange
+        ParentFont = False
         TabOrder = 1
       end
     end
     object ToolBarFOV: TPanel
       Left = 8
       Height = 19
-      Top = 88
-      Width = 160
+      Top = 89
+      Width = 162
       BevelOuter = bvNone
       ClientHeight = 19
-      ClientWidth = 160
+      ClientWidth = 162
       Color = clNone
       Font.Color = clNavy
       Font.Height = -11
@@ -3178,10 +3200,14 @@ object f_main: Tf_main
         AllowAllUp = True
         Caption = '10'''
         Flat = True
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Style = [fsBold]
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
         OnMouseUp = tbFOVMouseUp
+        ParentFont = False
       end
       object tbFOV2: TSpeedButton
         Tag = 1
@@ -3191,10 +3217,14 @@ object f_main: Tf_main
         Width = 4
         AllowAllUp = True
         Flat = True
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Style = [fsBold]
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
         OnMouseUp = tbFOVMouseUp
+        ParentFont = False
       end
       object tbFOV3: TSpeedButton
         Tag = 2
@@ -3204,10 +3234,14 @@ object f_main: Tf_main
         Width = 4
         AllowAllUp = True
         Flat = True
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Style = [fsBold]
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
         OnMouseUp = tbFOVMouseUp
+        ParentFont = False
       end
       object tbFOV4: TSpeedButton
         Tag = 3
@@ -3217,10 +3251,14 @@ object f_main: Tf_main
         Width = 4
         AllowAllUp = True
         Flat = True
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Style = [fsBold]
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
         OnMouseUp = tbFOVMouseUp
+        ParentFont = False
       end
       object tbFOV5: TSpeedButton
         Tag = 4
@@ -3230,10 +3268,14 @@ object f_main: Tf_main
         Width = 4
         AllowAllUp = True
         Flat = True
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Style = [fsBold]
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
         OnMouseUp = tbFOVMouseUp
+        ParentFont = False
       end
       object tbFOV6: TSpeedButton
         Tag = 5
@@ -3243,10 +3285,14 @@ object f_main: Tf_main
         Width = 4
         AllowAllUp = True
         Flat = True
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Style = [fsBold]
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
         OnMouseUp = tbFOVMouseUp
+        ParentFont = False
       end
       object tbFOV7: TSpeedButton
         Tag = 6
@@ -3256,75 +3302,92 @@ object f_main: Tf_main
         Width = 4
         AllowAllUp = True
         Flat = True
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Style = [fsBold]
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
         OnMouseUp = tbFOVMouseUp
+        ParentFont = False
       end
       object tbFOV8: TSpeedButton
         Tag = 7
-        Left = 48
+        Left = 49
         Height = 19
         Top = 0
         Width = 4
         AllowAllUp = True
         Flat = True
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Style = [fsBold]
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
         OnMouseUp = tbFOVMouseUp
+        ParentFont = False
       end
       object tbFOV9: TSpeedButton
         Tag = 8
-        Left = 52
+        Left = 53
         Height = 19
         Top = 0
         Width = 4
         AllowAllUp = True
         Flat = True
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Style = [fsBold]
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
         OnMouseUp = tbFOVMouseUp
+        ParentFont = False
       end
       object tbFOV10: TSpeedButton
         Tag = 9
-        Left = 56
+        Left = 57
         Height = 19
         Top = 0
         Width = 28
         AllowAllUp = True
         Caption = '310'
         Flat = True
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Style = [fsBold]
         Spacing = 0
         Transparent = False
         OnClick = SetFOVClick
         OnMouseUp = tbFOVMouseUp
+        ParentFont = False
       end
     end
   end
   object ScriptPanel: TPanel
     Left = 28
-    Height = 436
-    Top = 80
-    Width = 276
+    Height = 441
+    Top = 81
+    Width = 279
     Align = alLeft
     BevelOuter = bvNone
+    ParentFont = False
     TabOrder = 6
     Visible = False
   end
   object Splitter1: TSplitter
-    Left = 304
-    Height = 436
-    Top = 80
+    Left = 307
+    Height = 441
+    Top = 81
     Width = 5
     ResizeStyle = rsLine
     Visible = False
   end
   object MainMenu1: TMainMenu
     Images = Img16Day
-    left = 56
-    top = 104
+    Left = 57
+    Top = 105
     object SubFile: TMenuItem
       Caption = '&File'
       Hint = 'File related commands'
@@ -4063,25 +4126,25 @@ object f_main: Tf_main
   object OpenDialog: TOpenDialog
     FilterIndex = 0
     Options = [ofEnableSizing]
-    left = 136
-    top = 224
+    Left = 137
+    Top = 226
   end
   object SaveDialog: TSaveDialog
     FilterIndex = 0
     Options = [ofOverwritePrompt, ofHideReadOnly, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
-    left = 56
-    top = 224
+    Left = 57
+    Top = 226
   end
   object Autorefresh: TTimer
     Enabled = False
     Interval = 60000
     OnTimer = AutorefreshTimer
-    left = 288
-    top = 304
+    Left = 291
+    Top = 307
   end
   object PopupConfig: TPopupMenu
-    left = 56
-    top = 168
+    Left = 57
+    Top = 170
     object MenuItem12: TMenuItem
       Action = SetupTime
       OnClick = SetupTimeExecute
@@ -4138,35 +4201,35 @@ object f_main: Tf_main
   end
   object HTMLHelpDatabase1: THTMLHelpDatabase
     AutoRegister = True
-    left = 80
-    top = 296
+    Left = 81
+    Top = 299
   end
   object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
     BrowserParams = '%s'
     AutoRegister = True
-    left = 80
-    top = 360
+    Left = 81
+    Top = 364
   end
   object AnimationTimer: TTimer
     Enabled = False
     Interval = 100
     OnTimer = AnimationTimerTimer
-    left = 288
-    top = 424
+    Left = 291
+    Top = 428
   end
   object CloseTimer: TTimer
     Enabled = False
     Interval = 500
     OnTimer = CloseTimerTimer
-    left = 169
-    top = 428
+    Left = 171
+    Top = 433
   end
   object InitTimer: TTimer
     Enabled = False
     Interval = 100
     OnTimer = InitTimerTimer
-    left = 96
-    top = 428
+    Left = 97
+    Top = 433
   end
   object SampDownload: TDownloadDialog
     Timeout = 5000
@@ -4174,13 +4237,13 @@ object f_main: Tf_main
     FtpFwPassive = True
     ConfirmDownload = False
     QuickCancel = False
-    left = 384
-    top = 424
+    Left = 388
+    Top = 428
   end
   object ActionListFile: TActionList
     Images = Img16Day
-    left = 136
-    top = 104
+    Left = 137
+    Top = 105
     object FileNew1: TAction
       Category = 'File'
       Caption = 'FileNew1'
@@ -4249,8 +4312,8 @@ object f_main: Tf_main
   end
   object ActionListEdit: TActionList
     Images = Img16Day
-    left = 224
-    top = 104
+    Left = 226
+    Top = 105
     object Search1: TAction
       Category = 'Search'
       Hint = 'Search'
@@ -4287,8 +4350,8 @@ object f_main: Tf_main
   end
   object ActionListSetup: TActionList
     Images = Img16Day
-    left = 320
-    top = 104
+    Left = 323
+    Top = 105
     object SaveConfiguration: TAction
       Category = 'Setup'
       Caption = 'Save Configuration'
@@ -4381,8 +4444,8 @@ object f_main: Tf_main
   end
   object ActionListView: TActionList
     Images = Img16Day
-    left = 432
-    top = 104
+    Left = 437
+    Top = 105
     object zoomplus: TAction
       Category = 'Zoom'
       Hint = 'Zoom In'
@@ -4504,8 +4567,8 @@ object f_main: Tf_main
   end
   object ActionListChart: TActionList
     Images = Img16Day
-    left = 544
-    top = 104
+    Left = 550
+    Top = 105
     object EquatorialProjection: TAction
       Category = 'Projection'
       Hint = 'Equatorial Coordinate'
@@ -4877,8 +4940,8 @@ object f_main: Tf_main
   end
   object ActionListTelescope: TActionList
     Images = Img16Day
-    left = 664
-    top = 104
+    Left = 671
+    Top = 105
     object TelescopeSetup: TAction
       Category = 'Setup'
       Caption = 'TelescopeSetup'
@@ -4930,8 +4993,8 @@ object f_main: Tf_main
   end
   object ActionListWindow: TActionList
     Images = Img16Day
-    left = 792
-    top = 104
+    Left = 800
+    Top = 105
     object Cascade1: TAction
       Category = 'Window'
       Caption = 'Cascade'
@@ -4970,8 +5033,8 @@ object f_main: Tf_main
     end
   end
   object PopupToolbar: TPopupMenu
-    left = 168
-    top = 172
+    Left = 170
+    Top = 174
     object PopupToolbar2: TMenuItem
       Caption = 'specific menu'
       OnClick = PopupToolbar2Click
@@ -4984,8 +5047,8 @@ object f_main: Tf_main
   object Img22Day: TImageList
     Height = 22
     Width = 22
-    left = 744
-    top = 217
+    Left = 752
+    Top = 219
     Bitmap = {
       4C697B0000001600000016000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -12434,8 +12497,8 @@ object f_main: Tf_main
   object Img22Night: TImageList
     Height = 22
     Width = 22
-    left = 822
-    top = 217
+    Left = 831
+    Top = 219
     Bitmap = {
       4C697B0000001600000016000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -19884,8 +19947,8 @@ object f_main: Tf_main
   object Img32Day: TImageList
     Height = 32
     Width = 32
-    left = 744
-    top = 272
+    Left = 752
+    Top = 275
     Bitmap = {
       4C697B0000002000000020000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -35637,8 +35700,8 @@ object f_main: Tf_main
   object Img32Night: TImageList
     Height = 32
     Width = 32
-    left = 822
-    top = 272
+    Left = 831
+    Top = 275
     Bitmap = {
       4C697B0000002000000020000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -51388,8 +51451,8 @@ object f_main: Tf_main
     }
   end
   object Img16Day: TImageList
-    left = 744
-    top = 176
+    Left = 752
+    Top = 178
     Bitmap = {
       4C697B0000001000000010000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -55331,8 +55394,8 @@ object f_main: Tf_main
     }
   end
   object Img16Night: TImageList
-    left = 822
-    top = 176
+    Left = 831
+    Top = 178
     Bitmap = {
       4C697B0000001000000010000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -59276,7 +59339,7 @@ object f_main: Tf_main
   object SavePictureDialog1: TSavePictureDialog
     OnCanClose = SavePictureDialog1CanClose
     OnTypeChange = SavePictureDialog1TypeChange
-    left = 248
-    top = 224
+    Left = 251
+    Top = 226
   end
 end

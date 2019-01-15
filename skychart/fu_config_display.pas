@@ -783,6 +783,13 @@ begin
   symbfont.Visible := False;
   speedbutton7.Visible := False;
 {$endif}
+{$ifdef lclcocoa}
+  { TODO : check cocoa dark theme color}
+  if DarkTheme then begin
+    Circlegrid.FixedColor := clBackground;
+    RectangleGrid.FixedColor := clBackground;
+  end;
+{$endif}
 end;
 
 destructor Tf_config_display.Destroy;
