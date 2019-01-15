@@ -10992,7 +10992,6 @@ begin
       else
          MenuIlist:=Img32Night;
          ToolBarFOV.Font.Color:=clSilver;
-         {$ifdef lclcocoa}
          tbFOV1.Font.Color:=clSilver;
          tbFOV2.Font.Color:=clSilver;
          tbFOV3.Font.Color:=clSilver;
@@ -11003,6 +11002,7 @@ begin
          tbFOV8.Font.Color:=clSilver;
          tbFOV9.Font.Color:=clSilver;
          tbFOV10.Font.Color:=clSilver;
+         {$ifdef lclcocoa}
          tbFOV1.Color:=clBackground;
          tbFOV2.Color:=clBackground;
          tbFOV3.Color:=clBackground;
