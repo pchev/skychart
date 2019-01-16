@@ -1441,6 +1441,7 @@ resourcestring
   rsVersion = 'Version';
   rsLaunchINDIst = 'Launch INDIstarter if the server is not running';
   rsConnectionTo = 'Connection to INDI server failed!';
+  rsINDIready    = 'INDI server is ready';
   rsPleaseInstal = 'Please install indistarter package!';
   rsActivateAllT = 'Activate all the functions when hidden';
   rsButtonSize = 'Button size';

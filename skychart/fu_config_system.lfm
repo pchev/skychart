@@ -14,8 +14,8 @@ object f_config_system: Tf_config_system
     Top = 0
     Width = 500
     Align = alClient
-    ClientHeight = 524
-    ClientWidth = 500
+    ClientHeight = 520
+    ClientWidth = 496
     ParentColor = False
     TabOrder = 0
     object PageControl1: TPageControl
@@ -32,7 +32,7 @@ object f_config_system: Tf_config_system
       object Page1: TTabSheet
         Caption = 'Page1'
         ClientHeight = 518
-        ClientWidth = 488
+        ClientWidth = 494
         object Label14: TLabel
           Left = 19
           Height = 19
@@ -56,7 +56,7 @@ object f_config_system: Tf_config_system
       object Page2: TTabSheet
         Caption = 'Page2'
         ClientHeight = 518
-        ClientWidth = 488
+        ClientWidth = 494
         object Label13: TLabel
           Left = 0
           Height = 19
@@ -103,14 +103,14 @@ object f_config_system: Tf_config_system
           object TabSheet1: TTabSheet
             Caption = 'TabSheet1'
             ClientHeight = 348
-            ClientWidth = 464
+            ClientWidth = 470
             object INDI: TPanel
               Left = 8
               Height = 328
               Top = 8
               Width = 450
-              ClientHeight = 328
-              ClientWidth = 450
+              ClientHeight = 324
+              ClientWidth = 446
               TabOrder = 0
               object IndiAutostart: TCheckBox
                 Left = 8
@@ -185,8 +185,8 @@ object f_config_system: Tf_config_system
                 Height = 45
                 Top = 256
                 Width = 444
-                ClientHeight = 45
-                ClientWidth = 444
+                ClientHeight = 41
+                ClientWidth = 440
                 TabOrder = 4
                 object PanelCmd: TEdit
                   Left = 172
@@ -217,7 +217,7 @@ object f_config_system: Tf_config_system
               object GetIndiDevices: TButton
                 Left = 11
                 Height = 25
-                Top = 104
+                Top = 96
                 Width = 317
                 Caption = 'Connect and get device list'
                 OnClick = GetIndiDevicesClick
@@ -232,19 +232,27 @@ object f_config_system: Tf_config_system
                 OnClick = AutoloadConfigClick
                 TabOrder = 7
               end
+              object IndiMsg: TLabel
+                Left = 14
+                Height = 19
+                Top = 128
+                Width = 3
+                Caption = ' '
+                ParentColor = False
+              end
             end
           end
           object TabSheet2: TTabSheet
             Caption = 'TabSheet2'
             ClientHeight = 348
-            ClientWidth = 464
+            ClientWidth = 470
             object TelescopeManual: TPanel
               Left = 8
               Height = 330
               Top = 8
               Width = 450
-              ClientHeight = 330
-              ClientWidth = 450
+              ClientHeight = 326
+              ClientWidth = 446
               TabOrder = 0
               object ManualMountType: TRadioGroup
                 Left = 24
@@ -479,14 +487,14 @@ object f_config_system: Tf_config_system
           object TabSheet4: TTabSheet
             Caption = 'TabSheet4'
             ClientHeight = 348
-            ClientWidth = 464
+            ClientWidth = 470
             object ASCOMPanel: TPanel
               Left = 8
               Height = 328
               Top = 8
               Width = 452
-              ClientHeight = 328
-              ClientWidth = 452
+              ClientHeight = 324
+              ClientWidth = 448
               TabOrder = 0
               object ASCOMLabel: TLabel
                 Left = 21
@@ -503,14 +511,14 @@ object f_config_system: Tf_config_system
           object TabSheet3: TTabSheet
             Caption = 'TabSheet3'
             ClientHeight = 348
-            ClientWidth = 464
+            ClientWidth = 470
             object InterfacePanel: TPanel
               Left = 8
               Height = 328
               Top = 8
               Width = 452
-              ClientHeight = 328
-              ClientWidth = 452
+              ClientHeight = 324
+              ClientWidth = 448
               TabOrder = 0
               object InterfaceLabel: TLabel
                 Left = 21
@@ -529,14 +537,14 @@ object f_config_system: Tf_config_system
       object Page3: TTabSheet
         Caption = 'Page3'
         ClientHeight = 518
-        ClientWidth = 488
+        ClientWidth = 494
         object MysqlBox: TPanel
           Left = 17
           Height = 97
           Top = 53
           Width = 452
-          ClientHeight = 97
-          ClientWidth = 452
+          ClientHeight = 93
+          ClientWidth = 448
           TabOrder = 1
           object dbpass: TEdit
             Left = 348
@@ -640,8 +648,8 @@ object f_config_system: Tf_config_system
           Height = 97
           Top = 53
           Width = 453
-          ClientHeight = 97
-          ClientWidth = 453
+          ClientHeight = 93
+          ClientWidth = 449
           TabOrder = 2
           object dbnamesqlite: TEdit
             Left = 125
@@ -867,7 +875,7 @@ object f_config_system: Tf_config_system
       object Page4: TTabSheet
         Caption = 'Page4'
         ClientHeight = 518
-        ClientWidth = 488
+        ClientWidth = 494
         object GroupBox3: TGroupBox
           Left = 16
           Height = 249
@@ -934,7 +942,7 @@ object f_config_system: Tf_config_system
       object Page5: TTabSheet
         Caption = 'Page5'
         ClientHeight = 518
-        ClientWidth = 488
+        ClientWidth = 494
         object Label15: TLabel
           Left = 19
           Height = 17
@@ -1063,6 +1071,13 @@ object f_config_system: Tf_config_system
     Interval = 5000
     OnTimer = IndiTimerTimer
     left = 298
+    top = 468
+  end
+  object InitIndiTimer: TTimer
+    Enabled = False
+    Interval = 50
+    OnTimer = InitIndiTimerTimer
+    left = 384
     top = 468
   end
 end

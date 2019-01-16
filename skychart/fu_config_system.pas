@@ -37,7 +37,9 @@ type
 
   Tf_config_system = class(TFrame)
     AutoloadConfig: TCheckBox;
+    IndiMsg: TLabel;
     LanguageList: TCheckListBox;
+    InitIndiTimer: TTimer;
     UseScaling: TCheckBox;
     GetIndiDevices: TButton;
     CheckBox1: TCheckBox;
@@ -152,6 +154,7 @@ type
     RevertTurnsAlt: TCheckBox;
     PageControl1: TPageControl;
     procedure AutoloadConfigClick(Sender: TObject);
+    procedure InitIndiTimerTimer(Sender: TObject);
     procedure LanguageListItemClick(Sender: TObject; Index: integer);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: boolean);
     procedure UseScalingChange(Sender: TObject);
@@ -216,6 +219,7 @@ type
     procedure ShowTelescope;
     procedure ShowLanguage;
     procedure IndiNewDevice(dp: Basedevice);
+    procedure IndiDisconnected(Sender: TObject);
   public
     { Public declarations }
     cdb: Tcdcdb;
@@ -376,6 +380,7 @@ procedure Tf_config_system.Init;
 begin
   LockChange := True;
   dbchanged := False;
+  IndiMsg.Caption:='';
 {$if defined(mswindows) or defined(darwin)}
   GroupBoxLinux.Visible := False;
   IndiAutostart.Visible := False;
@@ -525,6 +530,7 @@ begin
     MountIndiDevice.items.add(csc.IndiDevice);
     MountIndiDevice.ItemIndex := 0;
   end;
+  if csc.IndiTelescope then InitIndiTimer.Enabled:=true;
 end;
 
 procedure Tf_config_system.DBtypeGroupClick(Sender: TObject);
@@ -912,17 +918,41 @@ begin
   csc.IndiLoadConfig := AutoloadConfig.Checked;
 end;
 
+procedure Tf_config_system.InitIndiTimerTimer(Sender: TObject);
+begin
+  InitIndiTimer.Enabled:=false;
+  if csc.IndiTelescope then GetIndiDevicesClick(Self);
+end;
+
 procedure Tf_config_system.GetIndiDevicesClick(Sender: TObject);
 begin
+  IndiMsg.Caption:='';
   mountsavedev := MountIndiDevice.Text;
   MountIndiDevice.Clear;
   receiveindidevice := False;
   indiclient := TIndiBaseClient.Create;
   indiclient.onNewDevice := IndiNewDevice;
+  indiclient.onServerDisconnected:=IndiDisconnected;
   indiclient.SetServer(IndiServerHost.Text, IndiServerPort.Text);
   indiclient.ConnectServer;
+  IndiTimer.Interval:=5000; // wait 5 sec for initial connection
   IndiTimer.Enabled := True;
   Screen.Cursor := crHourGlass;
+end;
+
+procedure Tf_config_system.IndiNewDevice(dp: Basedevice);
+begin
+  IndiTimer.Interval:=1000; // wait for next device
+  IndiTimer.Enabled:=false;
+  IndiTimer.Enabled:=true;
+  receiveindidevice := True;
+end;
+
+procedure Tf_config_system.IndiDisconnected(Sender: TObject);
+begin
+  IndiTimer.Interval:=100; // not connect, stop immediatelly
+  IndiTimer.Enabled:=false;
+  IndiTimer.Enabled:=true;
 end;
 
 procedure Tf_config_system.IndiTimerTimer(Sender: TObject);
@@ -936,7 +966,9 @@ begin
     receiveindidevice := True;  // only one retry if no response
     exit;
   end;
+  try
   IndiTimer.Enabled := False;
+  try
   ok:= not ((indiclient=nil)or indiclient.Finished or indiclient.Terminated or (not indiclient.Connected));
   if ok then begin
   for i := 0 to indiclient.devices.Count - 1 do
@@ -947,6 +979,8 @@ begin
   end;
   if indiclient.Connected then
   begin
+    IndiMsg.Caption:=rsINDIready;
+    indiclient.onServerDisconnected:=nil;
     indiclient.DisconnectServer;
     if MountIndiDevice.Items.Count > 0 then
       MountIndiDevice.ItemIndex := 0; // set first entry
@@ -965,17 +999,16 @@ begin
     end
     else
     begin
-      ShowMessage(rsConnectionTo);
+      IndiMsg.Caption:=rsConnectionTo;
     end;
     MountIndiDevice.Items.Add(mountsavedev);
     MountIndiDevice.ItemIndex := 0;
   end;
-  Screen.Cursor := crDefault;
-end;
-
-procedure Tf_config_system.IndiNewDevice(dp: Basedevice);
-begin
-  receiveindidevice := True;
+  except
+  end;
+  finally
+    Screen.Cursor := crDefault;
+  end;
 end;
 
 procedure Tf_config_system.IndiDevChange(Sender: TObject);
