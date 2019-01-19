@@ -50,7 +50,7 @@ type
 {$i cdc_version.inc}
 
 const
-  cdccpy = 'Copyright (C) 2002-2017 Patrick Chevalley';
+  cdccpy = 'Copyright (C) 2002-2019 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf + 'Peter Dean,' +
     crlf + 'John Sunderland' + crlf + 'Anat Ruangrassamee' + crlf + 'Sasa Zeman'+ crlf + 'Mattia Verga';
   MaxPlSim = 500;
