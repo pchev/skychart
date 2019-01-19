@@ -5747,7 +5747,9 @@ begin
           Delete(buf, 1, p); // delete Dec
         end;
       end;
-      buf:=txt2000+tab+buf;  // add J2000 RA Dec
+      if copy(buf, length(buf), 1) <> tab then // ensure last tab
+         buf := buf + tab;
+      buf:=txt2000+tab+buf+'Equinox:J2000';  // add J2000 RA Dec
     end;
     SendInfo(Sender, origin, buf);
   end;
