@@ -1867,7 +1867,15 @@ begin
   date := Date2Str(yy, mm, dd) + blank + shh;
   jd0 := jd(yy, mm, dd, 0);
   st0 := SidTim(jd0, hh - cfgsc.TimeZone, cfgsc.ObsLongitude);
-
+  if ServerCoordSystem=csJ2000 then begin
+      ar := cfgsc.FindRA2000;
+      de := cfgsc.FindDec2000;
+      if cfgsc.PlanetParalaxe then
+         Paralaxe(st0, cfgsc.FindDist, ar, de, ar, de, q, cfgsc);
+      cfgsc.FindDesc2000 := ARpToStr(rmod(24+rad2deg * ar / 15,24)) + tab + DEpToStr(rad2deg * de);
+  end
+  else
+      cfgsc.FindDesc2000 := '';
   cfgsc.TrackType := 1;
   cfgsc.TrackObj := CurrentPlanet;
   cfgsc.TrackName := trim(pla[CurrentPlanet]);
@@ -2962,7 +2970,7 @@ var
   tar, tde: double;
   h, g, ma, ap, an, ic, ec, sa, eq, ra, Dec, dist, r, elong, phase, magn, xc, yc, zc: double;
   ref, nam, elem_id: string;
-  jdt, hh: double;
+  jdt, hh, jd0, st0, ar, de, q: double;
   sar, sde, shh, sdp, sdist, sphase: string;
 const
   d1 = '0.0';
@@ -3035,6 +3043,17 @@ begin
     cfgsc.FindRA2000 := cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 6];
     cfgsc.FindDec2000 := cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 7];
     cfgsc.FindDist := dist;
+    if ServerCoordSystem=csJ2000 then begin
+       jd0 := jd(yy, mm, dd, 0);
+       st0 := SidTim(jd0, hh - cfgsc.TimeZone, cfgsc.ObsLongitude);
+       ar := cfgsc.FindRA2000;
+       de := cfgsc.FindDec2000;
+       if cfgsc.PlanetParalaxe then
+          Paralaxe(st0, cfgsc.FindDist, ar, de, ar, de, q, cfgsc);
+       cfgsc.FindDesc2000 := ARpToStr(rmod(24+rad2deg * ar / 15,24)) + tab + DEpToStr(rad2deg * de);
+    end
+    else
+       cfgsc.FindDesc2000 := '';
     nom := nam;
     str(cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 3]: 5: 1, mag);
     str(r: 7: 4, sdp);
@@ -3071,7 +3090,7 @@ var
   h, g, ap, an, ic, ec, eq, ra, Dec, dist, r, elong, phase, magn, q, tp, diam, lc,
   car, cde, rc, xc, yc, zc: double;
   nam, elem_id: string;
-  jdt, hh: double;
+  jdt, hh, jd0, st0, ar, de, q1: double;
   sar, sde, shh, sdp, sdist, sphase, svel: string;
 const
   d1 = '0.0';
@@ -3141,6 +3160,17 @@ begin
     cfgsc.FindRA2000 := ra;
     cfgsc.FindDec2000 := Dec;
     cfgsc.FindDist := dist;
+    if ServerCoordSystem=csJ2000 then begin
+       jd0 := jd(yy, mm, dd, 0);
+       st0 := SidTim(jd0, hh - cfgsc.TimeZone, cfgsc.ObsLongitude);
+       ar := cfgsc.FindRA2000;
+       de := cfgsc.FindDec2000;
+       if cfgsc.PlanetParalaxe then
+          Paralaxe(st0, cfgsc.FindDist, ar, de, ar, de, q1, cfgsc);
+       cfgsc.FindDesc2000 := ARpToStr(rmod(24+rad2deg * ar / 15,24)) + tab + DEpToStr(rad2deg * de);
+    end
+    else
+       cfgsc.FindDesc2000 := '';
     nom := nam;
     str(cfgsc.CometLst[CurrentComStep, CurrentComet, 3]: 5: 1, mag);
     str(r: 7: 4, sdp);

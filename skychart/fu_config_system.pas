@@ -40,6 +40,7 @@ type
     IndiMsg: TLabel;
     LanguageList: TCheckListBox;
     InitIndiTimer: TTimer;
+    ServerCoordSys: TRadioGroup;
     UseScaling: TCheckBox;
     GetIndiDevices: TButton;
     CheckBox1: TCheckBox;
@@ -157,6 +158,7 @@ type
     procedure InitIndiTimerTimer(Sender: TObject);
     procedure LanguageListItemClick(Sender: TObject; Index: integer);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: boolean);
+    procedure ServerCoordSysClick(Sender: TObject);
     procedure UseScalingChange(Sender: TObject);
     procedure GetIndiDevicesClick(Sender: TObject);
     procedure CheckBox1Change(Sender: TObject);
@@ -289,6 +291,7 @@ begin
   Label55.Caption := rsServerIPPort;
   UseIPserver.Caption := rsUseTCPIPServ;
   keepalive.Caption := rsClientConnec;
+  ServerCoordSys.Caption:=rsCooordinateS;
   Label13.Caption := rsTelescopeSet;
   TelescopeManualLabel.Caption := rsManualMount;
   Label7.Caption := rsSetHowTheMou;
@@ -481,6 +484,7 @@ begin
   ipaddr.Text := cmain.ServerIPaddr;
   ipport.Text := cmain.ServerIPport;
   useipserver.Checked := cmain.autostartserver;
+  ServerCoordSys.ItemIndex:=cmain.ServerCoordSys;
   keepalive.Checked := cmain.keepalive;
   CheckBox1.Checked := cmain.SampConfirmCoord;
   CheckBox2.Checked := cmain.SampConfirmImage;
@@ -863,6 +867,13 @@ begin
   if LockChange then
     exit;
   cmain.ServerIPport := ipport.Text;
+end;
+
+procedure Tf_config_system.ServerCoordSysClick(Sender: TObject);
+begin
+  if LockChange then
+    exit;
+  cmain.ServerCoordSys := ServerCoordSys.ItemIndex;
 end;
 
 procedure Tf_config_system.TelescopeSelectClick(Sender: TObject);

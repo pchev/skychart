@@ -1527,6 +1527,7 @@ resourcestring
   rsDoYouReallyW = 'Do you really want to park the mount now?';
   rsConnectAndGe = 'Connect and get device list';
   rsUseTheIntern = 'Use the internal INDI gui panel';
+  rsCooordinateS = 'Coordinate system to use with the clients';
 
 // also update upsi_translation
 

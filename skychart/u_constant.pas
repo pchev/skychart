@@ -43,6 +43,8 @@ type
   TExecuteCmd = function(cname: string; arg: TStringList): string of object;
   TSendInfo = procedure(Sender: TObject; origin, str: string) of object;
 
+  TServerCoordSys = (csJ2000, csChart);
+
 {$i revision.inc}
 
 {$i cdc_version.inc}
@@ -1019,6 +1021,7 @@ type
     ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid,
     SmallSatActive, ShowEarthShadowValid, ShowEclipticValid, PlotImageFirst: boolean;
     HorizonMax, HorizonMin, rap2000, dep2000, RefractionOffset, ObsRAU, ObsZAU, Diurab: double;
+    racentre2000,decentre2000: double;
     haicx, haicy, ObsRefractionCor, ObsRefA, ObsRefB, ObsHorizonDepression,
     ObsELONG, ObsPHI, ObsDAZ: double;
     WindowRatio, BxGlb, ByGlb, AxGlb, AyGlb, sintheta, costheta, x2: double;
@@ -1041,7 +1044,7 @@ type
     ConstLatinLabel, ScopeMark, Scope2Mark, ScopeLock, FindPM,
     FindStarPM, FindPMfullmotion, AstNEO: boolean;
     EquinoxName, TargetName, TrackName, TrackId, FindName, FindDesc,
-    FindDesc2, FindNote, FindCat, FindCatname, FindId: string;
+    FindDesc2, FindDesc2000, FindNote, FindCat, FindCatname, FindId: string;
     BGalpha: integer;
     BGitt: Titt;
     BGmin_sigma, BGmax_sigma, NEBmin_sigma, NEBmax_sigma: double;
@@ -1166,6 +1169,7 @@ type
     VOforceactive: boolean;
     PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec: boolean;
     maximized, updall, AutostartServer, keepalive, NewBackgroundImage: boolean;
+    ServerCoordSys: integer;
     TextOnlyDetail, SimpleMove, SimpleDetail, KioskMode, KioskDebug,
     CenterAtNoon: boolean;
     PrintDesc, PrintCmd1, PrintCmd2: string;
@@ -1371,6 +1375,7 @@ var
   nJPL_DE: integer;
   JPL_DE: array of integer;
   GregorianStart, GregorianStartJD: integer;
+  ServerCoordSystem: TServerCoordSys;
 
 {$ifdef darwin}
   OpenFileCMD: string = 'open';
@@ -2342,6 +2347,8 @@ begin
   HorizonRise :=Source.HorizonRise;
   rap2000 := Source.rap2000;
   dep2000 := Source.dep2000;
+  racentre2000 := Source.racentre2000;
+  decentre2000 := Source.decentre2000;
   RefractionOffset := Source.RefractionOffset;
   ObsRAU := Source.ObsRAU;
   ObsZAU := Source.ObsZAU;
@@ -2453,6 +2460,7 @@ begin
   FindId := Source.FindId;
   FindDesc := Source.FindDesc;
   FindDesc2 := Source.FindDesc2;
+  FindDesc2000 := Source.FindDesc2000;
   FindNote := Source.FindNote;
   FindCat := Source.FindCat;
   FindCatname := Source.FindCatname;
@@ -2840,6 +2848,7 @@ begin
   maximized := Source.maximized;
   updall := Source.updall;
   AutostartServer := Source.AutostartServer;
+  ServerCoordSys := source.ServerCoordSys;
   keepalive := Source.keepalive;
   NewBackgroundImage := Source.NewBackgroundImage;
   TextOnlyDetail := Source.TextOnlyDetail;

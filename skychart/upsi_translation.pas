@@ -1469,6 +1469,13 @@ begin
   CL.AddConstantN('rsObserverTool', 'String').SetString(rsObserverTool);
   CL.AddConstantN('rsLocationTime', 'String').SetString(rsLocationTime);
   CL.AddConstantN('rsMark', 'String').SetString(rsMark);
+  CL.AddConstantN('rsLockTheChart', 'String').SetString(rsLockTheChart);
+  CL.AddConstantN('rsUnpark', 'String').SetString(rsUnpark);
+  CL.AddConstantN('rsPark', 'String').SetString(rsPark);
+  CL.AddConstantN('rsDoYouReallyW', 'String').SetString(rsDoYouReallyW);
+  CL.AddConstantN('rsConnectAndGe', 'String').SetString(rsConnectAndGe);
+  CL.AddConstantN('rsUseTheIntern', 'String').SetString(rsUseTheIntern);
+  CL.AddConstantN('rsCooordinateS', 'String').SetString(rsCooordinateS);
 
 end;
 

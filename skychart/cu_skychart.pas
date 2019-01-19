@@ -1206,6 +1206,10 @@ begin
   if cfgsc.lastJDchart <> cfgsc.JDchart then
     precession(cfgsc.lastJDchart, cfgsc.JDchart, cfgsc.racentre, cfgsc.decentre);
   cfgsc.lastJDchart := cfgsc.JDchart;
+  // store J2000 center coordinates
+  cfgsc.racentre2000 := cfgsc.racentre;
+  cfgsc.decentre2000 := cfgsc.decentre;
+  Precession(cfgsc.JDchart, jd2000, cfgsc.racentre2000, cfgsc.decentre2000);
   // get alt/az center
   saveaz := cfgsc.acentre;
   if not TrackAltAz then
@@ -3225,6 +3229,14 @@ begin
     cfgsc.TrackRA := cfgsc.FindRA;
     cfgsc.TrackDec := cfgsc.FindDec;
     cfgsc.TrackEpoch := cfgsc.JDChart;
+    if ServerCoordSystem=csJ2000 then begin
+        ra := tar;
+        de := tde;
+        Precession(cfgsc.JDChart,jd2000,ra,de);
+        cfgsc.FindDesc2000 := ARpToStr(rmod(24+rad2deg * ra / 15,24)) + tab + DEpToStr(rad2deg * de);
+    end
+    else
+        cfgsc.FindDesc2000 := '';
   end;
 end;
 
@@ -3496,6 +3508,11 @@ begin
   // description must start with coordinates, type, name and magnitude to ensure this values can be found by external scripts
   // coordinates
   desc := ARpToStr(rmod(rad2deg * rec.ra / 15 + 24, 24)) + tab + DEpToStr(rad2deg * rec.Dec) + tab;
+  if ServerCoordSystem=csJ2000 then begin
+     cfgsc.FindDesc2000 := ARpToStr(rmod(rad2deg * cfgsc.FindRA2000 / 15 + 24, 24)) + tab + DEpToStr(rad2deg * cfgsc.FindDec2000);
+  end
+  else
+      cfgsc.FindDesc2000 := '';
   case rec.options.rectype of
     rtStar:
     begin   // stars
@@ -3975,6 +3992,7 @@ begin
   desc := '';
   cfgsc.FindSimjd := 0;
   cfgsc.FindDesc2 := '';
+  cfgsc.FindDesc2000 := '';
   cfgsc.FindDesc := '';
   Fcatalog.OpenCat(cfgsc);
   InitCatalog;

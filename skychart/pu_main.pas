@@ -765,7 +765,7 @@ type
       ccat: Tconf_catalog; cshr: Tconf_shared; cplot: Tconf_plot; cdss: Tconf_dss;
       applyall: boolean);
     procedure SetLPanel1(txt1: string; origin: string = ''; sendmsg: boolean = False;
-      Sender: TObject = nil; txt2: string = '');
+      Sender: TObject = nil; txt2: string = ''; txt2000: string = '');
     procedure SetLPanel0(txt: string);
     procedure SetTopMessage(txt: string; Sender: TObject);
     procedure SetTitleMessage(txt: string; Sender: TObject);
@@ -5297,6 +5297,7 @@ begin
       dbchange := True;
     cfgm.Assign(cmain);
     AnimationTimer.Interval := max(100, cfgm.AnimDelay);
+    ServerCoordSystem:=TServerCoordSys(cfgm.ServerCoordSys);
   end;
   if themechange then
     SetTheme;
@@ -5685,7 +5686,7 @@ begin
 end;
 
 procedure Tf_main.SetLPanel1(txt1: string; origin: string = '';
-  sendmsg: boolean = False; Sender: TObject = nil; txt2: string = '');
+  sendmsg: boolean = False; Sender: TObject = nil; txt2: string = ''; txt2000: string = '');
 var
   txt, buf, buf1, buf2, k: string;
   p: integer;
@@ -5735,8 +5736,21 @@ begin
     txt := txt + catalog.LongLabel(buf2);                        // Alt name
   end;
   P1L1.Caption := txt + crlf + txt2;
-  if sendmsg then
-    SendInfo(Sender, origin, txt1);
+  if sendmsg then begin
+    buf := txt1;
+    if (ServerCoordSystem=csJ2000) and (txt2000<>'') then begin
+      p := pos(tab, buf);
+      if p>0 then begin
+        Delete(buf, 1, p);   // delete RA
+        p := pos(tab, buf);
+        if p>0 then begin
+          Delete(buf, 1, p); // delete Dec
+        end;
+      end;
+      buf:=txt2000+tab+buf;  // add J2000 RA Dec
+    end;
+    SendInfo(Sender, origin, buf);
+  end;
   // refresh tracking object
   if MultiFrame1.ActiveObject is Tf_chart then
     with (MultiFrame1.ActiveObject as Tf_chart) do
@@ -5868,6 +5882,8 @@ begin
   cfgm.keepalive := True;
   cfgm.TextOnlyDetail := False;
   cfgm.AutostartServer := True;
+  cfgm.ServerCoordSys:=0;
+  ServerCoordSystem:=TServerCoordSys(cfgm.ServerCoordSys);
   cfgm.dbhost := 'localhost';
   cfgm.dbport := 3306;
   cfgm.db := slash(dbdir) + (defaultSqliteDB);
@@ -7374,6 +7390,9 @@ begin
         cfgm.TextOnlyDetail := ReadBool(section, 'TextOnlyDetail', cfgm.TextOnlyDetail);
         cfgm.AutostartServer :=
           ReadBool(section, 'AutostartServer', cfgm.AutostartServer);
+        cfgm.ServerCoordSys :=
+          ReadInteger(section, 'ServerCoordSys', cfgm.ServerCoordSys);
+        ServerCoordSystem:=TServerCoordSys(cfgm.ServerCoordSys);
         DBtype := TDBtype(ReadInteger(section, 'dbtype', 1));
         cfgm.dbhost := ReadString(section, 'dbhost', cfgm.dbhost);
         cfgm.dbport := ReadInteger(section, 'dbport', cfgm.dbport);
@@ -8544,6 +8563,7 @@ begin
         WriteBool(section, 'keepalive', cfgm.keepalive);
         WriteBool(section, 'TextOnlyDetail', cfgm.TextOnlyDetail);
         WriteBool(section, 'AutostartServer', cfgm.AutostartServer);
+        WriteInteger(section, 'ServerCoordSys', cfgm.ServerCoordSys);
         WriteInteger(section, 'dbtype', Ord(DBtype));
         WriteString(section, 'dbhost', cfgm.dbhost);
         WriteInteger(section, 'dbport', cfgm.dbport);

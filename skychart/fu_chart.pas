@@ -51,7 +51,7 @@ type
   Tint2func = procedure(i1, i2: integer) of object;
   Tbtnfunc = procedure(i1, i2: integer; b1: boolean; Sender: TObject) of object;
   Tshowinfo = procedure(txt: string; origin: string = ''; sendmsg: boolean = False;
-    Sender: TObject = nil; txt2: string = '') of object;
+    Sender: TObject = nil; txt2: string = ''; txt2000: string = '') of object;
   TSendCoordpointAtsky = procedure(client: string; ra, de: double) of object;
   TSendSelectRow = procedure(tableid, url, row: string) of object;
 
@@ -875,7 +875,7 @@ begin
             sc.cfgsc.FindRA2000 := sra;
             sc.cfgsc.FindDec2000 := sde;
             ShowIdentLabel(False);
-            Fshowinfo(sc.cfgsc.FindDesc, Caption, False, nil, sc.cfgsc.FindDesc2);
+            Fshowinfo(sc.cfgsc.FindDesc, Caption, False, nil, sc.cfgsc.FindDesc2, sc.cfgsc.FindDesc2000);
           end;
           ftCom:
           begin
@@ -884,7 +884,7 @@ begin
             sc.cfgsc.FindRA2000 := sra;
             sc.cfgsc.FindDec2000 := sde;
             ShowIdentLabel(False);
-            Fshowinfo(sc.cfgsc.FindDesc, Caption, False, nil, sc.cfgsc.FindDesc2);
+            Fshowinfo(sc.cfgsc.FindDesc, Caption, False, nil, sc.cfgsc.FindDesc2, sc.cfgsc.FindDesc2000);
           end;
           ftAst:
           begin
@@ -893,7 +893,7 @@ begin
             sc.cfgsc.FindRA2000 := sra;
             sc.cfgsc.FindDec2000 := sde;
             ShowIdentLabel(False);
-            Fshowinfo(sc.cfgsc.FindDesc, Caption, False, nil, sc.cfgsc.FindDesc2);
+            Fshowinfo(sc.cfgsc.FindDesc, Caption, False, nil, sc.cfgsc.FindDesc2, sc.cfgsc.FindDesc2000);
           end;
           else
             ShowIdentLabel(False);
@@ -940,7 +940,7 @@ begin
     begin
       Fshowinfo(sc.cfgsc.msg);
       if sc.cfgsc.FindOk and (not cmain.SimpleDetail) and (sc.cfgsc.msg = '') then
-        Fshowinfo(sc.cfgsc.FindDesc, Caption, True, self, sc.cfgsc.FindDesc2);
+        Fshowinfo(sc.cfgsc.FindDesc, Caption, True, self, sc.cfgsc.FindDesc2, sc.cfgsc.FindDesc2000);
     end;
   {$endif}
   end;
@@ -1799,7 +1799,7 @@ begin
   if assigned(fshowtopmessage) then
     fshowtopmessage(sc.GetChartInfo, self);
   if sc.cfgsc.FindOk and assigned(Fshowinfo) then
-    Fshowinfo(sc.cfgsc.FindDesc, Caption, False, nil, sc.cfgsc.FindDesc2);
+    Fshowinfo(sc.cfgsc.FindDesc, Caption, False, nil, sc.cfgsc.FindDesc2, sc.cfgsc.FindDesc2000);
 end;
 
 procedure Tf_chart.chart_FlipXExecute(Sender: TObject);
@@ -2799,7 +2799,7 @@ begin
   if assigned(Fshowinfo) then
   begin
     if Result then
-      Fshowinfo(sc.cfgsc.FindDesc, Caption, True, self, sc.cfgsc.FindDesc2)
+      Fshowinfo(sc.cfgsc.FindDesc, Caption, True, self, sc.cfgsc.FindDesc2, sc.cfgsc.FindDesc2000)
     else
       Fshowinfo('');
   end;
@@ -2893,18 +2893,26 @@ begin
       begin
         sc.cfgsc.FindCat := sr;
         sc.cfgsc.FindName := sn;
-        sc.cfgsc.FindDesc := ARpToStr(rmod(rad2deg * ar1 / 15 + 24, 24)) + tab +
-          DEpToStr(rad2deg * de1) + tab + 'OSR' + tab + sn + tab +
-          sd;
-        // set a minimal label
+        if ServerCoordSystem=csJ2000 then begin
+           sc.cfgsc.FindDesc2000 := ARpToStr(rmod(rad2deg * ra2000 / 15 + 24, 24)) + tab + DEpToStr(rad2deg * dec2000);
+        end
+        else
+           sc.cfgsc.FindDesc2000 := '';
+        sc.cfgsc.FindDesc := ARpToStr(rmod(rad2deg * ar1 / 15 + 24, 24)) + tab + DEpToStr(rad2deg * de1) + tab;
+        sc.cfgsc.FindDesc := sc.cfgsc.FindDesc + 'OSR' + tab + sn + tab + sd;
       end
       else
+      // set a minimal label
       begin
         sc.cfgsc.FindCat := '';
         sc.cfgsc.FindName := Num;
-        sc.cfgsc.FindDesc := ARpToStr(rmod(rad2deg * ar1 / 15 + 24, 24)) + tab +
-          DEpToStr(rad2deg * de1) + tab + stype + tab + Num + tab +
-          rsDesc + rsZoomMoreToVi;
+        if ServerCoordSystem=csJ2000 then begin
+           sc.cfgsc.FindDesc2000 := ARpToStr(rmod(rad2deg * ra2000 / 15 + 24, 24)) + tab + DEpToStr(rad2deg * dec2000);
+        end
+        else
+           sc.cfgsc.FindDesc2000 := '';
+        sc.cfgsc.FindDesc := ARpToStr(rmod(rad2deg * ar1 / 15 + 24, 24)) + tab + DEpToStr(rad2deg * de1) + tab;
+        sc.cfgsc.FindDesc := sc.cfgsc.FindDesc + stype + tab + Num + tab + rsDesc + rsZoomMoreToVi;
       end;
       sc.cfgsc.FindCatname := '';
       sc.cfgsc.FindRA := ar1;
@@ -2930,7 +2938,7 @@ begin
   xcursor := Image1.Width div 2;
   ycursor := Image1.Height div 2;
   if assigned(Fshowinfo) then
-    Fshowinfo(sc.cfgsc.FindDesc, Caption, True, self, sc.cfgsc.FindDesc2);
+    Fshowinfo(sc.cfgsc.FindDesc, Caption, True, self, sc.cfgsc.FindDesc2, sc.cfgsc.FindDesc2000);
 end;
 
 function Tf_chart.ListXY(X, Y: integer; r: integer = 12): boolean;
@@ -4719,7 +4727,9 @@ end;
 
 function Tf_chart.cmd_GetChartEqsys: string;
 begin
-  if sc.cfgsc.EquinoxChart=rsDate then
+  if ServerCoordSystem=csJ2000 then
+     result:='2000'
+  else if sc.cfgsc.EquinoxChart=rsDate then
      result:='Date'
   else
      result:=stringreplace(stringreplace(sc.cfgsc.EquinoxChart, 'J', '', []), 'B', '', []);
@@ -4729,7 +4739,7 @@ function Tf_chart.cmd_SetRa(param1: string): string;
 var
   buf: string;
   p: integer;
-  ar: double;
+  ar,de: double;
 begin
   Result := msgFailed + ' Bad coordinates format!';
   try
@@ -4751,8 +4761,16 @@ begin
       ar := strtofloat(param1);
     end;
     Result := msgOK;
-    if (ar >= 0) and (ar < 24) then
+    if (ar >= 0) and (ar < 24) then begin
+      if ServerCoordSystem=csJ2000 then begin
+        de:=sc.cfgsc.decentre2000;
+        ar:=deg2rad*ar*15;
+        sc.cfgsc.racentre2000:=ar;
+        Precession(jd2000,sc.cfgsc.JDChart,ar,de);
+        ar:=rad2deg*ar/15;
+      end;
       sc.cfgsc.racentre := rmod(deg2rad * ar * 15 + pi2, pi2)
+    end
     else
       Result := msgFailed + ' RA out of range';
   except
@@ -4764,7 +4782,7 @@ function Tf_chart.cmd_SetDec(param1: string): string;
 var
   buf: string;
   p: integer;
-  s, de: double;
+  s, ar, de: double;
 begin
   Result := msgFailed + ' Bad coordinates format!';
   try
@@ -4795,8 +4813,16 @@ begin
       de := strtofloat(param1);
     end;
     Result := msgOK;
-    if (de >= -90) and (de <= 90) then
+    if (de >= -90) and (de <= 90) then begin
+      if ServerCoordSystem=csJ2000 then begin
+        ar:=sc.cfgsc.racentre2000;
+        de:=deg2rad*de;
+        sc.cfgsc.decentre2000:=de;
+        Precession(jd2000,sc.cfgsc.JDChart,ar,de);
+        de:=rad2deg*de;
+      end;
       sc.cfgsc.decentre := deg2rad * de
+    end
     else
       Result := msgFailed + ' DEC out of range';
   except
@@ -4805,26 +4831,36 @@ begin
 end;
 
 function Tf_chart.cmd_GetRA(format: string): string;
+var ra: double;
 begin
+  if ServerCoordSystem=csJ2000 then
+     ra:=sc.cfgsc.racentre2000
+  else
+     ra:=sc.cfgsc.racentre;
   if format = 'F' then
   begin
-    Result := msgOK + blank + formatfloat(f5, rad2deg * sc.cfgsc.racentre / 15);
+    Result := msgOK + blank + formatfloat(f5, rad2deg * ra / 15);
   end
   else
   begin
-    Result := msgOK + blank + artostr3(rad2deg * sc.cfgsc.racentre / 15);
+    Result := msgOK + blank + artostr3(rad2deg * ra / 15);
   end;
 end;
 
 function Tf_chart.cmd_GetDEC(format: string): string;
+var de: double;
 begin
+  if ServerCoordSystem=csJ2000 then
+     de:=sc.cfgsc.decentre2000
+  else
+     de:=sc.cfgsc.decentre;
   if format = 'F' then
   begin
-    Result := msgOK + blank + formatfloat(f5, rad2deg * sc.cfgsc.decentre);
+    Result := msgOK + blank + formatfloat(f5, rad2deg * de);
   end
   else
   begin
-    Result := msgOK + blank + detostr3(rad2deg * sc.cfgsc.decentre);
+    Result := msgOK + blank + detostr3(rad2deg * de);
   end;
 end;
 
@@ -6583,7 +6619,7 @@ begin
   if sc.cfgsc.FindDesc > '' then
   begin
     if assigned(Fshowinfo) then
-      Fshowinfo(sc.cfgsc.FindDesc, Caption, True, self, sc.cfgsc.FindDesc2);
+      Fshowinfo(sc.cfgsc.FindDesc, Caption, True, self, sc.cfgsc.FindDesc2, sc.cfgsc.FindDesc2000);
     identlabelClick(Self);
   end;
 end;
