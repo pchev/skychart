@@ -2,7 +2,7 @@ Version 4.1.1 beta, Notes de la version
 
 Nouvelles fonctions:
 
-- La communication client/serveur utilise désormais les coordonnées J2000 par défaut. Si vous utilisez une application qui requiert les coordonnées de la date, veuillez modifier l’option dans Configuration/Général/Serveur.
+- La communication client/serveur peut désormais utiliser les coordonnées J2000 plutôt que celles de la carte en cours. Vous pouvez modifier cette option dans Configuration/Général/Serveur.
 - Suppression des pilotes lx200 et encodeur devenus obsolète/non maintenable. Veuillez utiliser les pilotes ASCOM ou INDI correspondants.
   - pour les lx200 génériques: https://pixelstelescopes.wordpress.com/advanced-lx200/
   - pour les cercles digitaux: http://eksfiles.net/digital-setting-circles/ascom-driver-for-digital-setting-circles/

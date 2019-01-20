@@ -5884,7 +5884,7 @@ begin
   cfgm.keepalive := True;
   cfgm.TextOnlyDetail := False;
   cfgm.AutostartServer := True;
-  cfgm.ServerCoordSys:=0;
+  cfgm.ServerCoordSys:=1;
   ServerCoordSystem:=TServerCoordSys(cfgm.ServerCoordSys);
   cfgm.dbhost := 'localhost';
   cfgm.dbport := 3306;
