@@ -4113,6 +4113,14 @@ begin
           FFindRecOK := True;
           FFindRec := rec;
           Result := True;
+          if SampConnected then
+          begin
+            cfgcat.SampFindTable := vocat.SAMPid;
+            cfgcat.SampFindURL := vocat.SAMPurl;
+            cfgcat.SampFindRec := vocat.VOcatrec;
+          end
+          else
+            cfgcat.SampFindTable := '';
         end;
       until Result or (not ok);
     CloseVOCat;

@@ -2866,6 +2866,12 @@ begin
     // show label
     sc.cfgsc.FindOK := True;
     ShowIdentLabel;
+    if SampConnected and (sc.Catalog.cfgcat.SampFindTable > '') then
+    begin
+      if assigned(FSendSelectRow) then
+        FSendSelectRow(sc.Catalog.cfgcat.SampFindTable, sc.Catalog.cfgcat.SampFindUrl,
+          IntToStr(sc.Catalog.cfgcat.SampFindRec));
+    end;
   end
   // only coordinates are available
   else
