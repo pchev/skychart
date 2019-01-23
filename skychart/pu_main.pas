@@ -12222,7 +12222,7 @@ begin
     sc.cfgsc.racentre := ra;
     sc.cfgsc.decentre := Dec;
     Refresh(True, True);
-    cmd_IdentCenter;
+    identxy(sc.cfgsc.Xcentre, sc.cfgsc.Ycentre, True, True);
     if not Identlabel.Visible then begin
       sc.cfgsc.TrackName:='SAMP_point';
       sc.cfgsc.TrackRA := ra;
