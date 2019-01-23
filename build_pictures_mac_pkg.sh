@@ -2,7 +2,7 @@
 
 version=4.0
 
-basedir=/tmp/skychart   # Be sure this is set to a non existent directory, it is removed after the run!
+basedir=/Volumes/TmpInst/skychart   # Be sure this is set to a non existent directory, it is removed after the run!
 
 builddir=$basedir/Cartes
 
