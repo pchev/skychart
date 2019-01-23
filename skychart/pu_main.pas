@@ -12203,9 +12203,6 @@ begin
 end;
 
 procedure Tf_main.SAMPcoordpointAtsky(ra, Dec: double);
-var
-  cname: string;
-  arg: TStringList;
 begin
   if cfgm.SampConfirmCoord then
   begin
@@ -12214,34 +12211,40 @@ begin
       crlf + rsDoYouWantToM, mtConfirmation, [mbYes, mbNo], 0) = mrNo then
       exit;
   end;
-  cname := MultiFrame1.ActiveChild.Caption;
-  ra := deg2rad * ra;
-  Dec := deg2rad * Dec;
-  Tf_chart(MultiFrame1.ActiveObject).CoordJ2000toChart(ra, Dec);
-  ra := rad2deg * ra;
-  Dec := rad2deg * Dec;
-  arg := TStringList.Create;
-  arg.Clear;
-  arg.Add('MOVESCOPE');
-  arg.Add(formatfloat(f5, ra / 15));
-  arg.Add(formatfloat(f5, Dec));
-  ExecuteCmd(cname, arg);
-  arg.Clear;
-  arg.Add('TRACKTELESCOPE');
-  arg.Add('OFF');
-  ExecuteCmd(cname, arg);
-  arg.Clear;
-  arg.Add('SETRA');
-  arg.Add(formatfloat(f5, ra / 15));
-  ExecuteCmd(cname, arg);
-  arg.Clear;
-  arg.Add('SETDEC');
-  arg.Add(formatfloat(f5, Dec));
-  ExecuteCmd(cname, arg);
-  arg.Clear;
-  arg.Add('REDRAW');
-  ExecuteCmd(cname, arg);
-  arg.Free;
+  if not (MultiFrame1.ActiveObject is Tf_chart) then exit;
+  with MultiFrame1.ActiveObject as Tf_chart do begin
+    Identlabel.Visible:=false;
+    ra := deg2rad * ra;
+    Dec := deg2rad * Dec;
+    CoordJ2000toChart(ra, Dec);
+    cmd_MoveScope(formatfloat(f5, rad2deg * ra / 15),formatfloat(f5, rad2deg * Dec));
+    cmd_TrackTelescope('OFF');
+    sc.cfgsc.racentre := ra;
+    sc.cfgsc.decentre := Dec;
+    Refresh(True, True);
+    cmd_IdentCenter;
+    if not Identlabel.Visible then begin
+      sc.cfgsc.TrackName:='SAMP_point';
+      sc.cfgsc.TrackRA := ra;
+      sc.cfgsc.TrackDec := dec;
+      sc.cfgsc.TrackEpoch := sc.cfgsc.JDChart;
+      sc.cfgsc.FindOK := True;
+      sc.cfgsc.FindSize := 0;
+      sc.cfgsc.FindPM := False;
+      sc.cfgsc.FindType := ftInv;
+      sc.cfgsc.FindName:=sc.cfgsc.TrackName;
+      sc.cfgsc.FindId := sc.cfgsc.FindName;
+      sc.cfgsc.FindDesc := '';
+      sc.cfgsc.FindNote := '';
+      sc.cfgsc.FindRA:=sc.cfgsc.TrackRA;
+      sc.cfgsc.FindDec:=sc.cfgsc.TrackDec;
+      sc.cfgsc.FindRA2000 := sc.cfgsc.TrackRA;
+      sc.cfgsc.FindDec2000 := sc.cfgsc.TrackDec;
+      Precession(sc.cfgsc.JDChart, jd2000, sc.cfgsc.FindRA2000, sc.cfgsc.FindDec2000);
+      cmd_SetCursorPosition(Image1.Width div 2, Image1.Height div 2);
+      ShowIdentLabel;
+    end;
+  end;
 end;
 
 procedure Tf_main.SAMPImageLoadFits(image_name, image_id, url: string);
