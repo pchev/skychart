@@ -17,8 +17,8 @@ type
   private
     FSelectedLayerIndex: integer;
   public
-    constructor Create; override; overload;
-    constructor Create(AWidth, AHeight: integer); override; overload;
+    constructor Create; overload; override;
+    constructor Create(AWidth, AHeight: integer); overload; override;
     procedure LoadFromStream(AStream: TStream); override;
     procedure LoadFromFile(const filenameUTF8: string); override;
     procedure SaveToFile(const filenameUTF8: string); override;
@@ -149,7 +149,8 @@ begin
   writer := nil;
   flat := nil;
   try
-    if (NbLayers > 1) or (LayerOpacity[0] <> 255) or not LayerVisible[0] or (BlendOperation[0]<>boTransparent) then
+    if (NbLayers > 1) or (LayerOpacity[0] <> 255) or not LayerVisible[0] or (BlendOperation[0]<>boTransparent)
+       or (OriginalCount <> 0) then
     begin
       writer := TBGRAWriterLazPaintWithLayers.Create(self);
       writer.Caption := 'Preview';

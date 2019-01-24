@@ -104,8 +104,8 @@ type
     procedure SetIntersectionValues(AInter: TIntersectionInfo; AInterX: Single; AWinding,
       ANumSegment: integer; dy: single; AData: pointer); override;
   public
-    constructor Create(const points: array of TPointF; const texCoords: array of TPointF);
-    constructor Create(const points: array of TPointF; const texCoords: array of TPointF; const lightnesses: array of word);
+    constructor Create(const points: array of TPointF; const texCoords: array of TPointF); overload;
+    constructor Create(const points: array of TPointF; const texCoords: array of TPointF; const lightnesses: array of word); overload;
     function CreateSegmentData(numPt,nextPt: integer; x,y: single): pointer; override;
     function CreateIntersectionInfo: TIntersectionInfo; override;
   end;
@@ -149,8 +149,8 @@ type
     procedure SetIntersectionValues(AInter: TIntersectionInfo; AInterX: Single; AWinding,
       ANumSegment: integer; dy: single; AData: pointer); override;
   public
-    constructor Create(const points: array of TPointF; const pointsZ: array of single; const texCoords: array of TPointF);
-    constructor Create(const points: array of TPointF; const pointsZ: array of single; const texCoords: array of TPointF; const lightnesses: array of word);
+    constructor Create(const points: array of TPointF; const pointsZ: array of single; const texCoords: array of TPointF); overload;
+    constructor Create(const points: array of TPointF; const pointsZ: array of single; const texCoords: array of TPointF; const lightnesses: array of word); overload;
     function CreateSegmentData(numPt,nextPt: integer; x,y: single): pointer; override;
     function CreateIntersectionInfo: TIntersectionInfo; override;
   end;
@@ -164,8 +164,8 @@ type
     procedure SetIntersectionValues(AInter: TIntersectionInfo; AInterX: Single; AWinding,
       ANumSegment: integer; dy: single; AData: pointer); override;
   public
-    constructor Create(const points: array of TPointF; const points3D: array of TPoint3D; const normals: array of TPoint3D; const texCoords: array of TPointF);
-    constructor Create(const points: array of TPointF; const points3D: array of TPoint3D_128; const normals: array of TPoint3D_128; const texCoords: array of TPointF);
+    constructor Create(const points: array of TPointF; const points3D: array of TPoint3D; const normals: array of TPoint3D; const texCoords: array of TPointF); overload;
+    constructor Create(const points: array of TPointF; const points3D: array of TPoint3D_128; const normals: array of TPoint3D_128; const texCoords: array of TPointF); overload;
     function CreateSegmentData(numPt,nextPt: integer; x,y: single): pointer; override;
     function CreateIntersectionInfo: TIntersectionInfo; override;
   end;
@@ -195,10 +195,12 @@ procedure PolygonPerspectiveMappingShaderAliased(bmp: TBGRACustomBitmap; const p
 procedure BGRARoundRectAliased(dest: TBGRACustomBitmap; X1, Y1, X2, Y2: integer;
   DX, DY: integer; BorderColor, FillColor: TBGRAPixel; FillTexture: IBGRAScanner = nil; ADrawMode: TDrawMode = dmDrawWithTransparency;
   skipFill: boolean = false);
+procedure BGRAFillRoundRectAliased(dest: TBGRACustomBitmap; X1, Y1, X2, Y2: integer;
+  DX, DY: integer; FillColor: TBGRAPixel; FillTexture: IBGRAScanner = nil; ADrawMode: TDrawMode = dmDrawWithTransparency);
 
 implementation
 
-uses Math, BGRABlend;
+uses Math, BGRABlend, BGRAPolygon;
 
 { TPolygonPerspectiveColorGradientInfo }
 
@@ -1015,6 +1017,17 @@ begin
     end;
     Inc(J);
   end;
+end;
+
+procedure BGRAFillRoundRectAliased(dest: TBGRACustomBitmap; X1, Y1, X2,
+  Y2: integer; DX, DY: integer; FillColor: TBGRAPixel;
+  FillTexture: IBGRAScanner; ADrawMode: TDrawMode);
+var
+  fi: TFillRoundRectangleInfo;
+begin
+  fi := TFillRoundRectangleInfo.Create(x1,y1,x2,y2,dx/2,dy/2,[rrDefault],false);
+  FillShapeAliased(dest, fi, FillColor, false, FillTexture, true, ADrawMode);
+  fi.Free;
 end;
 
 end.

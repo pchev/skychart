@@ -58,7 +58,7 @@ type
         fillMode: TFillMode;
         fillModeOverride: boolean;
       end;
-    function AddShape(AInfo: TBGRACustomFillInfo; AInternalInfo: boolean; ATexture: IBGRAScanner; AInternalTexture: TObject; AColor: TBGRAPixel): integer;
+    function AddShape(AInfo: TBGRACustomFillInfo; AInternalInfo: boolean; ATexture: IBGRAScanner; AInternalTexture: TObject; AColor: TBGRAPixel): integer; overload;
     function CheckRectangleBorderBounds(var x1, y1, x2, y2: single; w: single): boolean;
     procedure InternalAddStroke(const APoints: array of TPointF; AClosed: boolean; AData: Pointer);
   public
@@ -68,40 +68,40 @@ type
     AliasingIncludeBottomRight: Boolean;
     constructor Create;
     destructor Destroy; override;
-    function AddShape(AShape: TBGRACustomFillInfo; AColor: TBGRAPixel): integer;
-    function AddShape(AShape: TBGRACustomFillInfo; ATexture: IBGRAScanner): integer;
-    function AddPolygon(const points: array of TPointF; AColor: TBGRAPixel): integer;
-    function AddPolygon(const points: array of TPointF; ATexture: IBGRAScanner): integer;
-    procedure AddPathStroke(APath: TBGRAPath; AColor: TBGRAPixel; AWidth: single; AStroker: TBGRACustomPenStroker);
-    procedure AddPathStroke(APath: TBGRAPath; ATexture: IBGRAScanner; AWidth: single; AStroker: TBGRACustomPenStroker);
-    procedure AddPathStroke(APath: TBGRAPath; AMatrix: TAffineMatrix; AColor: TBGRAPixel; AWidth: single; AStroker: TBGRACustomPenStroker);
-    procedure AddPathStroke(APath: TBGRAPath; AMatrix: TAffineMatrix; ATexture: IBGRAScanner; AWidth: single; AStroker: TBGRACustomPenStroker);
-    function AddPathFill(APath: TBGRAPath; AColor: TBGRAPixel): integer;
-    function AddPathFill(APath: TBGRAPath; ATexture: IBGRAScanner): integer;
-    function AddPathFill(APath: TBGRAPath; AMatrix: TAffineMatrix; AColor: TBGRAPixel): integer;
-    function AddPathFill(APath: TBGRAPath; AMatrix: TAffineMatrix; ATexture: IBGRAScanner): integer;
-    function AddPolylineStroke(const points: array of TPointF; AColor: TBGRAPixel; AWidth: single; AStroker: TBGRACustomPenStroker): integer;
-    function AddPolylineStroke(const points: array of TPointF; ATexture: IBGRAScanner; AWidth: single; AStroker: TBGRACustomPenStroker): integer;
-    function AddPolygonStroke(const points: array of TPointF; AColor: TBGRAPixel; AWidth: single; AStroker: TBGRACustomPenStroker): integer;
-    function AddPolygonStroke(const points: array of TPointF; ATexture: IBGRAScanner; AWidth: single; AStroker: TBGRACustomPenStroker): integer;
+    function AddShape(AShape: TBGRACustomFillInfo; AColor: TBGRAPixel): integer; overload;
+    function AddShape(AShape: TBGRACustomFillInfo; ATexture: IBGRAScanner): integer; overload;
+    function AddPolygon(const points: array of TPointF; AColor: TBGRAPixel): integer; overload;
+    function AddPolygon(const points: array of TPointF; ATexture: IBGRAScanner): integer; overload;
+    procedure AddPathStroke(APath: TBGRAPath; AColor: TBGRAPixel; AWidth: single; AStroker: TBGRACustomPenStroker); overload;
+    procedure AddPathStroke(APath: TBGRAPath; ATexture: IBGRAScanner; AWidth: single; AStroker: TBGRACustomPenStroker); overload;
+    procedure AddPathStroke(APath: TBGRAPath; AMatrix: TAffineMatrix; AColor: TBGRAPixel; AWidth: single; AStroker: TBGRACustomPenStroker); overload;
+    procedure AddPathStroke(APath: TBGRAPath; AMatrix: TAffineMatrix; ATexture: IBGRAScanner; AWidth: single; AStroker: TBGRACustomPenStroker); overload;
+    function AddPathFill(APath: TBGRAPath; AColor: TBGRAPixel): integer; overload;
+    function AddPathFill(APath: TBGRAPath; ATexture: IBGRAScanner): integer; overload;
+    function AddPathFill(APath: TBGRAPath; AMatrix: TAffineMatrix; AColor: TBGRAPixel): integer; overload;
+    function AddPathFill(APath: TBGRAPath; AMatrix: TAffineMatrix; ATexture: IBGRAScanner): integer; overload;
+    function AddPolylineStroke(const points: array of TPointF; AColor: TBGRAPixel; AWidth: single; AStroker: TBGRACustomPenStroker): integer; overload;
+    function AddPolylineStroke(const points: array of TPointF; ATexture: IBGRAScanner; AWidth: single; AStroker: TBGRACustomPenStroker): integer; overload;
+    function AddPolygonStroke(const points: array of TPointF; AColor: TBGRAPixel; AWidth: single; AStroker: TBGRACustomPenStroker): integer; overload;
+    function AddPolygonStroke(const points: array of TPointF; ATexture: IBGRAScanner; AWidth: single; AStroker: TBGRACustomPenStroker): integer; overload;
     function AddTriangleLinearColor(pt1, pt2, pt3: TPointF; c1, c2, c3: TBGRAPixel): integer;
     function AddTriangleLinearMapping(pt1, pt2, pt3: TPointF; texture: IBGRAScanner; tex1, tex2, tex3: TPointF): integer;
     procedure AddQuadLinearColor(pt1, pt2, pt3, pt4: TPointF; c1, c2, c3, c4: TBGRAPixel);
     procedure AddQuadLinearMapping(pt1, pt2, pt3, pt4: TPointF; texture: IBGRAScanner; tex1, tex2, {%H-}tex3, tex4: TPointF;
        ACulling: TFaceCulling = fcNone);
     procedure AddQuadPerspectiveMapping(pt1, pt2, pt3, pt4: TPointF; texture: IBGRAScanner; tex1, tex2, tex3, tex4: TPointF);
-    function AddEllipse(x, y, rx, ry: single; AColor: TBGRAPixel): integer;
-    function AddEllipse(x, y, rx, ry: single; ATexture: IBGRAScanner): integer;
-    function AddEllipseBorder(x, y, rx, ry, w: single; AColor: TBGRAPixel): integer;
-    function AddEllipseBorder(x, y, rx, ry, w: single; ATexture: IBGRAScanner): integer;
-    function AddRoundRectangle(x1, y1, x2, y2, rx, ry: single; AColor: TBGRAPixel; options: TRoundRectangleOptions= []): integer;
-    function AddRoundRectangle(x1, y1, x2, y2, rx, ry: single; ATexture: IBGRAScanner; options: TRoundRectangleOptions= []): integer;
-    function AddRoundRectangleBorder(x1, y1, x2, y2, rx, ry, w: single; AColor: TBGRAPixel; options: TRoundRectangleOptions= []): integer;
-    function AddRoundRectangleBorder(x1, y1, x2, y2, rx, ry, w: single; ATexture: IBGRAScanner; options: TRoundRectangleOptions= []): integer;
-    function AddRectangle(x1, y1, x2, y2: single; AColor: TBGRAPixel): integer;
-    function AddRectangle(x1, y1, x2, y2: single; ATexture: IBGRAScanner): integer;
-    function AddRectangleBorder(x1, y1, x2, y2, w: single; AColor: TBGRAPixel): integer;
-    function AddRectangleBorder(x1, y1, x2, y2, w: single; ATexture: IBGRAScanner): integer;
+    function AddEllipse(x, y, rx, ry: single; AColor: TBGRAPixel): integer; overload;
+    function AddEllipse(x, y, rx, ry: single; ATexture: IBGRAScanner): integer; overload;
+    function AddEllipseBorder(x, y, rx, ry, w: single; AColor: TBGRAPixel): integer; overload;
+    function AddEllipseBorder(x, y, rx, ry, w: single; ATexture: IBGRAScanner): integer; overload;
+    function AddRoundRectangle(x1, y1, x2, y2, rx, ry: single; AColor: TBGRAPixel; options: TRoundRectangleOptions= []): integer; overload;
+    function AddRoundRectangle(x1, y1, x2, y2, rx, ry: single; ATexture: IBGRAScanner; options: TRoundRectangleOptions= []): integer; overload;
+    function AddRoundRectangleBorder(x1, y1, x2, y2, rx, ry, w: single; AColor: TBGRAPixel; options: TRoundRectangleOptions= []): integer; overload;
+    function AddRoundRectangleBorder(x1, y1, x2, y2, rx, ry, w: single; ATexture: IBGRAScanner; options: TRoundRectangleOptions= []): integer; overload;
+    function AddRectangle(x1, y1, x2, y2: single; AColor: TBGRAPixel): integer; overload;
+    function AddRectangle(x1, y1, x2, y2: single; ATexture: IBGRAScanner): integer; overload;
+    function AddRectangleBorder(x1, y1, x2, y2, w: single; AColor: TBGRAPixel): integer; overload;
+    function AddRectangleBorder(x1, y1, x2, y2, w: single; ATexture: IBGRAScanner): integer; overload;
     procedure OverrideFillMode(AShapeIndex: integer; AFillMode: TFillMode);
     procedure Draw(dest: TBGRACustomBitmap; ADrawMode: TDrawMode = dmDrawWithTransparency);
     property ShapeCount: integer read nbShapes;
@@ -125,6 +125,11 @@ procedure BorderEllipseAntialias(bmp: TBGRACustomBitmap; x, y, rx, ry, w: single
   c: TBGRAPixel; EraseMode: boolean; LinearBlend: boolean = false);
 procedure BorderEllipseAntialiasWithTexture(bmp: TBGRACustomBitmap; x, y, rx, ry, w: single;
   scan: IBGRAScanner; LinearBlend: boolean = false);
+
+procedure BorderEllipse(bmp: TBGRACustomBitmap; x, y, rx, ry, w: single;
+  c: TBGRAPixel; EraseMode: boolean; drawmode: TDrawMode);
+procedure BorderEllipseWithTexture(bmp: TBGRACustomBitmap; x, y, rx, ry, w: single;
+  scan: IBGRAScanner; drawmode: TDrawMode);
 
 procedure FillRoundRectangleAntialias(bmp: TBGRACustomBitmap; x1, y1, x2, y2, rx, ry: single;
   options: TRoundRectangleOptions; c: TBGRAPixel; EraseMode: boolean; LinearBlend: boolean = false; APixelCenteredCoordinates: boolean = true);
@@ -166,6 +171,7 @@ var
 
   miny, maxy, minx, maxx,
   densMinX, densMaxX: integer;
+  joinDensity, nextJoinDensity: boolean;
 
   density: PDensity;
 
@@ -315,16 +321,19 @@ begin
 
       if optimised then
       begin
+        nextJoinDensity := false;
         for i := 0 to firstScan.nbinter div 2 - 1 do
         begin
+          joinDensity := nextJoinDensity;
           x1 := firstScan.inter[i+i].interX;
           x1b := lastScan.inter[i+i].interX;
           x2 := firstScan.inter[i+i+1].interX;
           x2b := lastScan.inter[i+i+1].interX;
-          if (abs(x1-x1b)<oneOver512) and (abs(x2-x2b)<oneOver512) and
-             ((i+i+2 >= firstScan.nbInter) or
+          nextJoinDensity := not ((i+i+2 >= firstScan.nbInter) or
               ((firstScan.inter[i+i+2].interX >= x2+1) and
-               (lastScan.inter[i+i+2].interX >= x2b+1))) then
+               (lastScan.inter[i+i+2].interX >= x2b+1)));
+          if (abs(x1-x1b)<oneOver512) and (abs(x2-x2b)<oneOver512) and
+              not joinDensity and not nextJoinDensity then
           begin
             x1 := (x1+x1b)*0.5;
             x2 := (x2+x2b)*0.5;
@@ -1175,10 +1184,11 @@ var
             if ix1 < densMinx then densMinx := ix1;
             if ix2 > densMaxx then densMaxx := ix2;
 
-            FillWord(density[ix1-minx],ix2-ix1+1,256);
+            if ix2 >= ix1 then
+              FillWord(density[ix1-minx],ix2-ix1+1,256);
           end;
         end else
-		  {$DEFINE INCLUDE_FILLDENSITY}
+          {$DEFINE INCLUDE_FILLDENSITY}
           {$i density256.inc}
       end;
 
@@ -1204,6 +1214,7 @@ var
 
   curSum,nextSum: ^TCardinalSum;
   sums: array of TCardinalSum;
+  curAlpha: byte;
 
   pdens: PDensity;
   w: UInt32or64;
@@ -1324,8 +1335,8 @@ begin
                 ec.red := (sumR+sumA shr 1) div sumA;
                 ec.green := (sumG+sumA shr 1) div sumA;
                 ec.blue := (sumB+sumA shr 1) div sumA;
-                if sumA > 255 then sumA := 255;
-                ec.alpha := sumA shl 8 + sumA;
+                if sumA > 255 then curAlpha := 255 else curAlpha := sumA;
+                ec.alpha := curAlpha shl 8 + curAlpha;
                 count := 1;
                 while (xb < rowmaxx) and (nextSum^.sumA = sumA) and (nextSum^.sumB = sumB)
                   and (nextSum^.sumG = sumG) and (nextSum^.sumR = sumR) do
@@ -1335,7 +1346,7 @@ begin
                   inc(count);
                 end;
                 if count = 1 then
-                  DrawExpandedPixelInlineNoAlphaCheck(pdest,ec,sumA) else
+                  DrawExpandedPixelInlineNoAlphaCheck(pdest,ec,curAlpha) else
                    DrawExpandedPixelsInline(pdest, ec, count );
                 inc(pdest,count-1);
               end;
@@ -1356,8 +1367,8 @@ begin
                 ec.red := (sumR+sumA shr 1) div sumA;
                 ec.green := (sumG+sumA shr 1) div sumA;
                 ec.blue := (sumB+sumA shr 1) div sumA;
-                if sumA > 255 then sumA := 255;
-                ec.alpha := sumA shl 8 + sumA;
+                if sumA > 255 then curAlpha := 255 else curAlpha := sumA;
+                ec.alpha := curAlpha shl 8 + curAlpha;
                 count := 1;
                 while (xb < rowmaxx) and (nextSum^.sumA = sumA) and (nextSum^.sumB = sumB)
                   and (nextSum^.sumG = sumG) and (nextSum^.sumR = sumR) do
@@ -1368,8 +1379,10 @@ begin
                 end;
                 if count = 1 then
                   DrawPixelInlineNoAlphaCheck(pdest,GammaCompression(ec)) else
+                begin
                    DrawPixelsInline(pdest, GammaCompression(ec), count );
-                inc(pdest,count-1);
+                   inc(pdest,count-1);
+                end;
               end;
             end;
             inc(xb);
@@ -1388,8 +1401,8 @@ begin
                 ec.red := (sumR+sumA shr 1) div sumA;
                 ec.green := (sumG+sumA shr 1) div sumA;
                 ec.blue := (sumB+sumA shr 1) div sumA;
-                if sumA > 255 then sumA := 255;
-                ec.alpha := sumA shl 8 + sumA;
+                if sumA > 255 then curAlpha := 255 else curAlpha := sumA;
+                ec.alpha := curAlpha shl 8 + curAlpha;
                 count := 1;
                 while (xb < rowmaxx) and (nextSum^.sumA = sumA) and (nextSum^.sumB = sumB)
                   and (nextSum^.sumG = sumG) and (nextSum^.sumR = sumR) do
@@ -1418,8 +1431,8 @@ begin
                 ec.red := (sumR+sumA shr 1) div sumA;
                 ec.green := (sumG+sumA shr 1) div sumA;
                 ec.blue := (sumB+sumA shr 1) div sumA;
-                if sumA > 255 then sumA := 255;
-                ec.alpha := sumA shl 8 + sumA;
+                if sumA > 255 then curAlpha := 255 else curAlpha := sumA;
+                ec.alpha := curAlpha shl 8 + curAlpha;
                 count := 1;
                 while (xb < rowmaxx) and (nextSum^.sumA = sumA) and (nextSum^.sumB = sumB)
                   and (nextSum^.sumG = sumG) and (nextSum^.sumR = sumR) do
@@ -1448,8 +1461,8 @@ begin
                 ec.red := (sumR+sumA shr 1) div sumA;
                 ec.green := (sumG+sumA shr 1) div sumA;
                 ec.blue := (sumB+sumA shr 1) div sumA;
-                if sumA > 255 then sumA := 255;
-                ec.alpha := sumA shl 8 + sumA;
+                if sumA > 255 then curAlpha := 255 else curAlpha := sumA;
+                ec.alpha := curAlpha shl 8 + curAlpha;
                 count := 1;
                 while (xb < rowmaxx) and (nextSum^.sumA = sumA) and (nextSum^.sumB = sumB)
                   and (nextSum^.sumG = sumG) and (nextSum^.sumR = sumR) do
@@ -1478,6 +1491,30 @@ begin
   end;
 
   dest.InvalidateBitmap;
+end;
+
+procedure BorderEllipse(bmp: TBGRACustomBitmap; x, y, rx, ry, w: single;
+  c: TBGRAPixel; EraseMode: boolean; drawmode: TDrawMode);
+var
+  info: TFillBorderEllipseInfo;
+begin
+  if ((rx = 0) and (ry = 0)) or (w=0) or (x = EmptySingle) or (y = EmptySingle) then
+    exit;
+  info := TFillBorderEllipseInfo.Create(x, y, rx, ry, w);
+  FillShapeAliased(bmp, info, c, EraseMode, nil, False, drawmode);
+  info.Free;
+end;
+
+procedure BorderEllipseWithTexture(bmp: TBGRACustomBitmap; x, y, rx, ry,
+  w: single; scan: IBGRAScanner; drawmode: TDrawMode);
+var
+  info: TFillBorderEllipseInfo;
+begin
+  if ((rx = 0) and (ry = 0)) or (w=0) or (x = EmptySingle) or (y = EmptySingle) then
+    exit;
+  info := TFillBorderEllipseInfo.Create(x, y, rx, ry, w);
+  FillShapeAliased(bmp, info, BGRAPixelTransparent, False, scan, false, drawmode);
+  info.Free;
 end;
 
 procedure FillRoundRectangleAntialias(bmp: TBGRACustomBitmap; x1, y1, x2, y2,

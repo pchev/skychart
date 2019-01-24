@@ -50,7 +50,7 @@ type
     procedure Draw(ACanvas: TCanvas; x, y: integer; Opaque: boolean = True); override;
     procedure Draw(ACanvas: TCanvas; Rect: TRect; Opaque: boolean = True); override;
     procedure DataDrawOpaque(ACanvas: TCanvas; ARect: TRect; AData: Pointer;
-      ALineOrder: TRawImageLineOrder; AWidth, AHeight: integer); override; overload;
+      ALineOrder: TRawImageLineOrder; AWidth, AHeight: integer); overload; override;
     procedure DataDrawOpaque(ACanvas: TCanvas; ARect: TRect; ADataFirstRow: Pointer;
       ARowStride: integer; AWidth, AHeight: integer); overload;
     procedure GetImageFromCanvas(CanvasSource: TCanvas; x, y: integer); override;
@@ -269,7 +269,7 @@ procedure TBGRAGtkBitmap.DataDrawOpaque(ACanvas: TCanvas; ARect: TRect;
       ptr.LineOrder := riloTopToBottom;
     stretched := ptr.Resample(ARect.Right-ARect.Left,ARect.Bottom-ARect.Top);
     ptr.free;
-    DataDrawOpaque(ACanvas,ARect,dataStart,stretched.LineOrder,stretched.Width,stretched.Height);
+    DataDrawOpaque(ACanvas,ARect,stretched.Data,stretched.LineOrder,stretched.Width,stretched.Height);
     stretched.Free;
   end;
 
@@ -309,6 +309,7 @@ begin
       AWidth,AHeight, GDK_RGB_DITHER_NORMAL,
       ADataFirstRow, ARowStride);
     if not TBGRAPixel_RGBAOrder then DataSwapRedBlue;
+    ACanvas.Changed;
   end;
 end;
 

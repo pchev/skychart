@@ -52,8 +52,8 @@ type
   TSplineKernel = class(TWideKernelFilter)
   public
     Coeff: single;
-    constructor Create;
-    constructor Create(ACoeff: single);
+    constructor Create; overload;
+    constructor Create(ACoeff: single); overload;
     function Interpolation(t: single): single; override;
     function ShouldCheckRange: boolean; override;
     function KernelWidth: single; override;
@@ -1202,6 +1202,7 @@ begin
     ssOutside: result := TSplineKernel.Create(0.5);
     ssRoundOutside: result := TSplineKernel.Create(0.75);
     ssVertexToSide: result := TSplineKernel.Create(1);
+    ssEasyBezier: raise Exception.Create('EasyBezier does not have an interpolator');
   else
     raise Exception.Create('Unknown spline style');
   end;

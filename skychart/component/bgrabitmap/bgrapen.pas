@@ -17,6 +17,8 @@ var   //predefined pen styles
   SolidPenStyle, DashPenStyle, DotPenStyle, DashDotPenStyle, DashDotDotPenStyle, ClearPenStyle: TBGRAPenStyle;
 
 type
+  TPenJoinStyle = BGRAGraphics.TPenJoinStyle;
+  TPenEndCap = BGRAGraphics.TPenEndCap;
 
   { TBGRAPenStroker }
 
@@ -55,8 +57,8 @@ type
     public
       constructor Create;
       destructor Destroy; override;
-      function ComputePolyline(const APoints: array of TPointF; AWidth: single; AClosedCap: boolean = true): ArrayOfTPointF; override;
-      function ComputePolyline(const APoints: array of TPointF; AWidth: single; APenColor: TBGRAPixel; AClosedCap: boolean = true): ArrayOfTPointF; override;
+      function ComputePolyline(const APoints: array of TPointF; AWidth: single; AClosedCap: boolean = true): ArrayOfTPointF; overload; override;
+      function ComputePolyline(const APoints: array of TPointF; AWidth: single; APenColor: TBGRAPixel; AClosedCap: boolean = true): ArrayOfTPointF; overload; override;
       function ComputePolylineAutocycle(const APoints: array of TPointF; AWidth: single): ArrayOfTPointF; override;
       function ComputePolygon(const APoints: array of TPointF; AWidth: single): ArrayOfTPointF; override;
 
@@ -90,13 +92,13 @@ procedure BGRAEraseLineAliased(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
 
 //antialiased version
 procedure BGRADrawLineAntialias({%H-}dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
-  c: TBGRAPixel; DrawLastPixel: boolean; LinearBlend : boolean = false);
+  c: TBGRAPixel; DrawLastPixel: boolean; LinearBlend : boolean = false); overload;
 procedure BGRAEraseLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
-  calpha: byte; DrawLastPixel: boolean);
+  calpha: byte; DrawLastPixel: boolean); overload;
 
 //antialiased version with bicolor dashes (to draw a frame)
 procedure BGRADrawLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
-  c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean; var DashPos: integer; LinearBlend : boolean = false);
+  c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean; var DashPos: integer; LinearBlend : boolean = false); overload;
 
 //length added to ensure accepable alpha join (using TBGRAMultishapeFiller is still better)
 function GetAlphaJoinFactor(alpha: byte): single;
@@ -109,6 +111,8 @@ function CreateBrushTexture(prototype: TBGRACustomBitmap; brushstyle: TBrushStyl
 function IsSolidPenStyle(ACustomPenStyle: TBGRAPenStyle): boolean;
 function IsClearPenStyle(ACustomPenStyle: TBGRAPenStyle): boolean;
 function DuplicatePenStyle(ACustomPenStyle: array of single): TBGRAPenStyle;
+function PenStyleEqual(AStyle1, AStyle2: TBGRAPenStyle): boolean;
+function BGRAToPenStyle(ACustomPenStyle: TBGRAPenStyle): TPenStyle;
 
 implementation
 
@@ -635,6 +639,27 @@ begin
     result[i]:= ACustomPenStyle[i];
 end;
 
+function BGRAToPenStyle(ACustomPenStyle: TBGRAPenStyle): TPenStyle;
+begin
+  if IsSolidPenStyle(ACustomPenStyle) then exit(psSolid);
+  if IsClearPenStyle(ACustomPenStyle) then exit(psClear);
+  if PenStyleEqual(ACustomPenStyle, DashPenStyle) then exit(psDash);
+  if PenStyleEqual(ACustomPenStyle, DotPenStyle) then exit(psDot);
+  if PenStyleEqual(ACustomPenStyle, DashDotPenStyle) then exit(psDashDot);
+  if PenStyleEqual(ACustomPenStyle, DashDotDotPenStyle) then exit(psDashDotDot);
+  exit(psPattern);
+end;
+
+function PenStyleEqual(AStyle1, AStyle2: TBGRAPenStyle): boolean;
+var
+  i: Integer;
+begin
+  if length(AStyle1)<>length(AStyle2) then exit(false);
+  for i := 0 to high(AStyle1) do
+    if AStyle1[i] <> AStyle2[i] then exit(false);
+  exit(true);
+end;
+
 procedure ApplyPenStyle(const leftPts, rightPts: array of TPointF; const penstyle: TBGRAPenStyle;
     width: single; var posstyle: single; out styledPts: ArrayOfTPointF);
 var
@@ -657,8 +682,15 @@ var
   procedure StartDash(index: integer; t: single);
   begin
     dashStartIndex := index;
-    dashLeftStartPos := leftPts[index] + (leftPts[index+1]-leftPts[index])*t;
-    dashRightStartPos := rightPts[index] + (rightPts[index+1]-rightPts[index])*t;
+    if t = 0 then
+    begin
+      dashLeftStartPos := leftPts[index];
+      dashRightStartPos := rightPts[index];
+    end else
+    begin
+      dashLeftStartPos := leftPts[index] + (leftPts[index+1]-leftPts[index])*t;
+      dashRightStartPos := rightPts[index] + (rightPts[index+1]-rightPts[index])*t;
+    end;
     betweenDash := false;
   end;
 
