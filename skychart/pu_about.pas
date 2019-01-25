@@ -31,7 +31,7 @@ interface
 uses
   u_help, u_translation, u_constant, u_util, UScaleDPI,
   LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
-  ExtCtrls, LResources, Buttons, LazHelpHTML, ComCtrls;
+  sysutils, ExtCtrls, LResources, Buttons, LazHelpHTML, ComCtrls;
 
 type
 
@@ -86,7 +86,7 @@ begin
     Label5.Caption := rsSkyCharts;
   Label7.Caption := rsThisProgramI;
   Button1.Caption := rsClose;
-  Label8.Caption := cdccpy;
+  Label8.Caption := format(cdccpy,[cpydate]);
   Label3.Caption := rsPleaseReport;
   page1.Caption := rsAbout;
   page2.Caption := rsAuthors;

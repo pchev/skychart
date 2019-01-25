@@ -31,7 +31,7 @@ interface
 uses
   u_translation, u_constant, u_util, UScaleDPI,
   LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
-  ExtCtrls, LResources, Buttons;
+  sysutils, ExtCtrls, LResources, Buttons;
 
 type
 
@@ -73,7 +73,7 @@ begin
     Label1.Caption := ''
   else
     Label1.Caption := rsSkyCharts;
-  Label3.Caption := cdccpy;
+  Label3.Caption := format(cdccpy,[cpydate]);
   Label4.Caption := rsThisProgramI;
 end;
 

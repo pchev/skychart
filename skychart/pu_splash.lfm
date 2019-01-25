@@ -16,8 +16,7 @@ object f_splash: Tf_splash
   OnShow = FormShow
   ParentFont = True
   Position = poScreenCenter
-  LCLVersion = '1.8.2.0'
-  Visible = False
+  LCLVersion = '2.0.0.3'
   object Panel1: TPanel
     Left = 0
     Height = 263

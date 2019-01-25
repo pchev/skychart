@@ -50,7 +50,7 @@ type
 {$i cdc_version.inc}
 
 const
-  cdccpy = 'Copyright (C) 2002-2019 Patrick Chevalley';
+  cdccpy = 'Copyright (C) %s Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf + 'Peter Dean,' +
     crlf + 'John Sunderland' + crlf + 'Anat Ruangrassamee' + crlf + 'Sasa Zeman'+ crlf + 'Mattia Verga';
   MaxPlSim = 500;
@@ -1339,7 +1339,7 @@ var
   ScriptDir, PrivateScriptDir: string;
   VarObs, CdC, MPCDir, DBDir, PictureDir: string;
   ForceConfig, ForceUserDir, Configfile, Lang: string;
-  compile_time, compile_version, compile_system, lclver: string;
+  compile_time, compile_version, compile_system, lclver, cpydate: string;
   ldeg, lmin, lsec: string;
   MaxThreadCount: integer;
   ImageListCount: integer;
