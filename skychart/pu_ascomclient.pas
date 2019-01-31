@@ -29,12 +29,13 @@ interface
 
 uses
   {$ifdef mswindows}
-  Variants, comobj, Windows, ShlObj, ShellAPI, math,
+  Variants, comobj, Windows, ShlObj, ShellAPI,
   {$endif}
+  cu_ascomrest, math, LazSysUtils,
   LCLIntf, u_util, u_constant, u_help, u_translation,
   Messages, SysUtils, Classes, Graphics, Controls,
   Forms, Dialogs, UScaleDPI,
-  StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls;
+  StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls, Spin;
 
 type
 
@@ -47,8 +48,16 @@ type
     GroupBox3: TGroupBox;
     ButtonAdvSetting: TSpeedButton;
     Label2: TLabel;
+    Label3: TLabel;
+    Label34: TLabel;
+    Label35: TLabel;
+    Label36: TLabel;
+    Label37: TLabel;
+    PageControl1: TPageControl;
+    Panel3: TPanel;
     parkled: TEdit;
-    WarningLabel: TLabel;
+    ASCOMLocal: TTabSheet;
+    ASCOMRemote: TTabSheet;
     trackingled: TEdit;
     ButtonConnect: TSpeedButton;
     ButtonTracking: TSpeedButton;
@@ -82,12 +91,17 @@ type
     ButtonSetLocation: TSpeedButton;
     ButtonHelp: TSpeedButton;
     ButtonAbout: TSpeedButton;
+    ARestDevice: TSpinEdit;
+    ARestHost: TEdit;
+    ARestPort: TSpinEdit;
+    ARestProtocol: TComboBox;
     {Utility and form functions}
     procedure ButtonGetLocationClick(Sender: TObject);
     procedure ButtonParkClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure kill(Sender: TObject; var CanClose: boolean);
     procedure ButtonAdvSettingClick(Sender: TObject);
+    procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
     procedure Timer1Timer(Sender: TObject);
     procedure ButtonConnectClick(Sender: TObject);
     procedure SaveConfig;
@@ -116,16 +130,19 @@ type
     FConnected: boolean;
     FCanSetTracking: boolean;
     FCanParkUnpark: boolean;
+    hasSync: Boolean;
     FScopeEqSys: double;
     EqSysVal: integer;
+    {$ifdef mswindows}
     T: variant;
+    {$endif}
+    TR: TAscomRest;
+    Remote: boolean;
     FLongitude: double;                // Observatory longitude (Positive East of Greenwich}
     FLatitude: double;                 // Observatory latitude
     FElevation: double;                // Observatory elevation
-    {$ifdef mswindows}
     curdeg_x, curdeg_y: double;        // current equatorial position in degrees
     cur_az, cur_alt: double;           // current alt-az position in degrees
-    {$endif}
     FObservatoryCoord: TNotifyEvent;
     procedure SetDef(Sender: TObject);
     function ScopeConnectedReal: boolean;
@@ -183,21 +200,38 @@ end;
 
 procedure Tpop_scope.ShowCoordinates;
 begin
-{$ifdef mswindows}
   if ScopeInitialized then
   begin
     try
-      Curdeg_x := T.RightAscension * 15;
-      Curdeg_y := T.Declination;
+      {$ifdef mswindows}
+      if not Remote then begin
+        Curdeg_x := T.RightAscension * 15;
+        Curdeg_y := T.Declination;
+      end
+      else
+      {$endif}
+      begin
+        Curdeg_x:=TR.Get('RightAscension').AsFloat * 15;
+        Curdeg_y:=TR.Get('Declination').AsFloat;
+      end;
     except
-      on E: EOleException do
+      on E: Exception do
         MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
     if ShowAltAz.Checked then
     begin
       try
-        Cur_az := T.Azimuth;
-        Cur_alt := T.Altitude;
+        {$ifdef mswindows}
+        if not Remote then begin
+          Cur_az := T.Azimuth;
+          Cur_alt := T.Altitude;
+        end
+        else
+        {$endif}
+        begin
+          Cur_az:=TR.Get('Azimuth').AsFloat;
+          Cur_alt:=TR.Get('Altitude').AsFloat;
+        end;
       except
         ShowAltAz.Checked := False;
       end;
@@ -226,12 +260,11 @@ begin
     az_x.Text := '';
     alt_y.Text := '';
   end;
-{$endif}
 end;
 
 procedure Tpop_scope.ScopeDisconnect(var ok: boolean);
 begin
-{$ifdef mswindows}
+
   timer1.Enabled := False;
   Initialized := False;
   FConnected := False;
@@ -242,10 +275,18 @@ begin
   if trim(edit1.Text) = '' then
     exit;
   try
+    {$ifdef mswindows}
+    if not Remote then begin
     if not VarIsEmpty(T) then
     begin
       T.connected := False;
       T := Unassigned;
+    end;
+    end
+    else
+    {$endif}
+    begin
+      TR.Put('Connected',false);
     end;
     ok := True;
     led.color := clRed;
@@ -258,40 +299,67 @@ begin
     UpdTrackingButton;
     UpdParkButton;
   except
-    on E: EOleException do
+    on E: Exception do
       MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
   end;
-{$endif}
+
 end;
 
 procedure Tpop_scope.ScopeConnect(var ok: boolean);
-{$ifdef mswindows}
 var
-  dis_ok: boolean;
-{$endif}
+  dis_ok,c_ok: boolean;
 begin
-{$ifdef mswindows}
   led.color := clRed;
   led.refresh;
   timer1.Enabled := False;
   ButtonSelect.Enabled := True;
   ok := False;
-  if trim(edit1.Text) = '' then
-    exit;
+  Remote := (PageControl1.ActivePageIndex=1);
   try
-    T := Unassigned;
-    T := CreateOleObject(WideString(edit1.Text));
-    T.connected := True;
-    if T.connected then
+    {$ifdef mswindows}
+    if not Remote then begin
+      if trim(edit1.Text) = '' then
+         exit;
+      T := Unassigned;
+      T := CreateOleObject(WideString(edit1.Text));
+      T.connected := True;
+      c_ok := T.connected;
+    end
+    else
+    {$endif}
+    begin
+      TR.Host:=ARestHost.Text;
+      TR.Port:=ARestPort.Text;
+      case ARestProtocol.ItemIndex of
+        0: TR.Protocol:='http:';
+        1: TR.Protocol:='https:';
+      end;
+      TR.Device:='Telescope/'+ARestDevice.Text;
+      TR.Put('Connected',true);
+      c_ok := TR.Get('Connected').AsBool;
+    end;
+    if c_ok then
     begin
       FConnected := True;
       Initialized := True;
       try
-      FCanSetTracking := T.CanSetTracking;
-      FCanParkUnpark := T.CanPark and T.CanUnpark;
+      {$ifdef mswindows}
+      if not Remote then begin
+        FCanSetTracking := T.CanSetTracking;
+        FCanParkUnpark := T.CanPark and T.CanUnpark;
+        hasSync := T.CanSync;
+      end
+      else
+      {$endif}
+      begin
+        FCanSetTracking := TR.Get('CanSetTracking').AsBool;
+        FCanParkUnpark := TR.Get('CanPark').AsBool and TR.Get('CanUnpark').AsBool;
+        hasSync := TR.Get('CanSync').AsBool;
+      end;
       except
         FCanSetTracking := false;
         FCanParkUnpark := false;
+        hasSync := false;
       end;
       ScopeGetEqSysReal(FScopeEqSys);
       ShowCoordinates;
@@ -309,10 +377,9 @@ begin
       scopedisconnect(dis_ok);
     UpdTrackingButton;
   except
-    on E: EOleException do
+    on E: Exception do
       MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
   end;
-{$endif}
 end;
 
 procedure Tpop_scope.ScopeClose;
@@ -328,30 +395,46 @@ end;
 function Tpop_scope.ScopeInterfaceVersion: integer;
 begin
   result:=1;
-  {$ifdef mswindows}
   try
-    Result := T.InterfaceVersion;
+    {$ifdef mswindows}
+    if not Remote then begin
+      Result := T.InterfaceVersion;
+    end
+    else
+    {$endif}
+    begin
+      Result := TR.Get('InterfaceVersion').AsInt;
+    end;
   except
     Result := 1;
   end;
- {$endif}
 end;
 
 function Tpop_scope.ScopeConnectedReal: boolean;
 begin
   Result := False;
-{$ifdef mswindows}
   if not initialized then
     exit;
   Result := False;
-  if VarIsEmpty(T) then
-    exit;
+  {$ifdef mswindows}
+  if not Remote then begin
+    if VarIsEmpty(T) then
+       exit;
+  end;
+  {$endif}
   try
-    Result := T.connected;
+    {$ifdef mswindows}
+    if not Remote then begin
+       Result := T.connected;
+    end
+    else
+    {$endif}
+    begin
+       Result := TR.Get('Connected').AsBool;
+    end;
   except
     Result := False;
   end;
-{$endif}
 end;
 
 function Tpop_scope.ScopeInitialized: boolean;
@@ -361,25 +444,37 @@ end;
 
 procedure Tpop_scope.ScopeAlign(Source: string; ra, Dec: single);
 begin
-{$ifdef mswindows}
   if not ScopeConnected then
     exit;
-  if T.CanSync then
+  if hasSync then
   begin
     try
-      if not T.tracking then
+      {$ifdef mswindows}
+      if not Remote then begin
+        if not T.tracking then
+        begin
+          if FCanSetTracking then
+            T.tracking := True;
+          UpdTrackingButton;
+        end;
+        T.SyncToCoordinates(Ra, Dec);
+      end
+      else
+      {$endif}
       begin
-        if FCanSetTracking then
-          T.tracking := True;
-        UpdTrackingButton;
+        if not TR.Get('Tracking').AsBool then
+        begin
+          if FCanSetTracking then
+            TR.Put('Tracking',True);
+          UpdTrackingButton;
+        end;
+        TR.Put('SyncToCoordinates',['RightAscension',FormatFloat(f6,Ra),'Declination',FormatFloat(f6,Dec)]);
       end;
-      T.SyncToCoordinates(Ra, Dec);
     except
-      on E: EOleException do
+      on E: Exception do
         MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
-{$endif}
 end;
 
 procedure Tpop_scope.ScopeShowModal(var ok: boolean);
@@ -395,61 +490,51 @@ end;
 
 procedure Tpop_scope.ScopeGetRaDec(var ar, de: double; var ok: boolean);
 begin
-{$ifdef mswindows}
   if ScopeConnected then
   begin
-    try
       ar := Curdeg_x / 15;
       de := Curdeg_y;
       ok := True;
-    except
-      on E: EOleException do
-      begin
-        MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
-        ok := False;
-      end;
-    end;
   end
   else
     ok := False;
-{$endif}
 end;
 
 procedure Tpop_scope.ScopeGetAltAz(var alt, az: double; var ok: boolean);
 begin
-{$ifdef mswindows}
   if ScopeConnected then
   begin
-    try
       az := cur_az;
       alt := cur_alt;
       ok := True;
-    except
-      on E: EOleException do
-      begin
-        MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
-        ok := False;
-      end;
-    end;
   end
   else
     ok := False;
-{$endif}
 end;
 
 procedure Tpop_scope.ScopeGetInfo(var scName: shortstring;
   var QueryOK, SyncOK, GotoOK: boolean; var refreshrate: integer);
 begin
-{$ifdef mswindows}
   if ScopeConnected then
   begin
     try
-      scname := T.Name;
-      QueryOK := True;
-      SyncOK := T.CanSync;
-      GotoOK := T.CanSlew;
+      {$ifdef mswindows}
+      if not Remote then begin
+        scname := T.Name;
+        QueryOK := True;
+        SyncOK := T.CanSync;
+        GotoOK := T.CanSlew;
+      end
+      else
+      {$endif}
+      begin
+        scname := TR.Get('Name').AsString;
+        QueryOK := True;
+        SyncOK := TR.Get('CanSync').AsBool;
+        GotoOK := TR.Get('CanSlew').AsBool;
+      end;
     except
-      on E: EOleException do
+      on E: Exception do
         MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end
@@ -460,8 +545,7 @@ begin
     SyncOK := False;
     GotoOK := False;
   end;
-  refreshrate := timer1.interval;
-{$endif}
+  refreshrate := timer1.interval
 end;
 
 procedure Tpop_scope.ScopeGetEqSysReal(var EqSys: double);
@@ -482,7 +566,15 @@ begin
     if ScopeConnected then
     begin
       try
-        i := T.EquatorialSystem;
+        {$ifdef mswindows}
+        if not Remote then begin
+           i := T.EquatorialSystem;
+        end
+        else
+        {$endif}
+        begin
+          i := TR.Get('EquatorialSystem').AsInt;
+        end;
       except
         i := 0;
       end;
@@ -520,24 +612,38 @@ end;
 
 procedure Tpop_scope.ScopeGoto(ar, de: single; var ok: boolean);
 begin
-{$ifdef mswindows}
   if not ScopeConnected then
     exit;
   try
-    if not T.tracking then
-    begin
-      T.tracking := True;
-      UpdTrackingButton;
-    end;
-    if T.CanSlewAsync then
-      T.SlewToCoordinatesAsync(ar, de)
+    {$ifdef mswindows}
+    if not Remote then begin
+      if not T.tracking then
+      begin
+        T.tracking := True;
+        UpdTrackingButton;
+      end;
+      if T.CanSlewAsync then
+        T.SlewToCoordinatesAsync(ar, de)
+      else
+        T.SlewToCoordinates(ar, de);
+    end
     else
-      T.SlewToCoordinates(ar, de);
+    {$endif}
+    begin
+      if not TR.Get('Tracking').AsBool then
+      begin
+        TR.Put('Tracking',True);
+        UpdTrackingButton;
+      end;
+      if TR.Get('CanSlewAsync').AsBool then
+        TR.Put('SlewToCoordinatesAsync',['RightAscension',FormatFloat(f6,ar),'Declination',FormatFloat(f6,de)])
+      else
+        TR.Put('SlewToCoordinates',['RightAscension',FormatFloat(f6,ar),'Declination',FormatFloat(f6,de)]);
+    end;
   except
-    on E: EOleException do
+    on E: Exception do
       MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
   end;
-{$endif}
 end;
 
 procedure Tpop_scope.ScopeReadConfig(ConfigPath: shortstring);
@@ -547,29 +653,35 @@ end;
 
 procedure Tpop_scope.ScopeAbortSlew;
 begin
-{$ifdef mswindows}
   if ScopeConnected then
   begin
     try
-      T.AbortSlew;
+      {$ifdef mswindows}
+      if not Remote then begin
+         T.AbortSlew;
+      end
+      else
+      {$endif}
+      begin
+        TR.Put('AbortSlew');
+      end;
     except
-      on E: EOleException do
+      on E: Exception do
         MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
-{$endif}
 end;
 
 procedure Tpop_scope.GetScopeRates(var nrates0, nrates1: integer;
   axis0rates, axis1rates: Pdoublearray);
-{$ifdef mswindows}
 var
+  {$ifdef mswindows}
   rate, irate: variant;
-  i, j, k: integer;
-  min, max: double;
-{$endif}
+  j, k: integer;
+  {$endif}
+  i : integer;
+  x: IAxisRates;
 begin
-{$ifdef mswindows}
   SetLength(axis0rates^, 0);
   SetLength(axis1rates^, 0);
   nrates0 := 0;
@@ -577,6 +689,8 @@ begin
   if ScopeConnected then
   begin
     try
+    {$ifdef mswindows}
+    if not Remote then begin
     //  First axis
     k := 0;
     if T.CanMoveAxis(k) then
@@ -607,28 +721,57 @@ begin
         axis1rates^[nrates1 - 1] := irate.Maximum;
       end;
     end;
+    end else
+    {$endif}
+    begin
+      x:=TR.GetAxisRates('0');
+      nrates0:=Length(x);
+      SetLength(axis0rates^, 2*nrates0);
+      for i:=0 to nrates0-1 do begin
+        axis0rates^[i]   := x[i].Minimum;
+        axis0rates^[i+1] := x[i].Maximum;
+        x[i].Free;
+      end;
+      x:=TR.GetAxisRates('1');
+      nrates1:=Length(x);
+      SetLength(axis1rates^, 2*nrates1);
+      for i:=0 to nrates1-1 do begin
+        axis1rates^[i]   := x[i].Minimum;
+        axis1rates^[i+1] := x[i].Maximum;
+        x[i].Free;
+      end;
+    end;
     except
       // unsupported by interface V1
     end;
   end;
-{$endif}
+
 end;
 
 procedure Tpop_scope.ScopeMoveAxis(axis: integer; rate: double);
 begin
-{$ifdef mswindows}
   if ScopeConnected then
   begin
     try
-    if T.CanMoveAxis(axis) then
+    {$ifdef mswindows}
+    if not Remote then begin
+      if T.CanMoveAxis(axis) then
+      begin
+        T.MoveAxis(axis, rate);
+      end;
+    end
+    else
+    {$endif}
     begin
-      T.MoveAxis(axis, rate);
+      if TR.Get('CanMoveAxis','Axis='+IntToStr(axis)).AsBool then
+      begin
+        TR.Put('MoveAxis?Axis='+IntToStr(axis),['Rate',FormatFloat(f6,rate)]);
+      end;
     end;
     except
       // unsupported by interface V1
     end;
   end;
-{$endif}
 end;
 
 
@@ -661,11 +804,6 @@ begin
   ButtonHide.Caption := rsHide;
   ButtonAdvSetting.Caption := rsAdvancedSett2;
 
-{$ifdef mswindows}
-  WarningLabel.Caption := '';
-{$else}
-  WarningLabel.Caption := Format(rsNotAvailon, [compile_system]);
-{$endif}
   SetHelp(self, hlpASCOM);
 end;
 
@@ -673,6 +811,12 @@ function Tpop_scope.ReadConfig(ConfigPath: shortstring): boolean;
 var
   ini: tinifile;
   nom: string;
+const
+  {$ifdef mswindows}
+  default_remote=0;
+  {$else}
+  default_remote=1;
+  {$endif}
 begin
   Result := DirectoryExists(ConfigPath);
   if Result then
@@ -688,6 +832,15 @@ begin
   ForceEqSys := ini.ReadBool('Ascom', 'ForceEqSys', False);
   ShowAltAz.Checked := ini.ReadBool('Ascom', 'AltAz', False);
   ReadIntBox.Text := ini.readstring('Ascom', 'read_interval', '1000');
+  {$ifdef mswindows}
+  PageControl1.ActivePageIndex := ini.ReadInteger('AscomRemote', 'remote', default_remote);
+  {$else}
+  PageControl1.ActivePageIndex := default_remote;
+  {$endif}
+  ARestProtocol.ItemIndex := ini.ReadInteger('AscomRemote', 'protocol', 0);
+  ARestHost.Text := ini.readstring('AscomRemote', 'host', '127.0.0.1');
+  ARestPort.Text := ini.readstring('AscomRemote', 'port', '11111');
+  ARestDevice.Value := ini.ReadInteger('AscomRemote', 'device', 0);
   lat.Text := ini.readstring('observatory', 'latitude', '0');
   long.Text := ini.readstring('observatory', 'longitude', '0');
   ini.Free;
@@ -777,6 +930,11 @@ begin
   feqsys := nil;
 end;
 
+procedure Tpop_scope.PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
+begin
+  AllowChange:=not FConnected;
+end;
+
 procedure Tpop_scope.SetDef(Sender: TObject);
 begin
   if (feqsys <> nil) and (leqsys <> nil) then
@@ -795,6 +953,11 @@ begin
   FCanSetTracking := False;
   FCanParkUnpark := False;
   FScopeEqSys := 0;
+  TR:=TAscomRest.Create(self);
+  TR.ClientId:=3292;
+  {$ifndef mswindows}
+  ASCOMLocal.TabVisible:=false;
+  {$endif}
 end;
 
 procedure Tpop_scope.Timer1Timer(Sender: TObject);
@@ -836,6 +999,11 @@ begin
   ini.writeInteger('Ascom', 'EqSys', EqSysVal);
   ini.writeBool('Ascom', 'ForceEqSys', ForceEqSys);
   ini.writeBool('Ascom', 'AltAz', ShowAltAz.Checked);
+  ini.writeinteger('AscomRemote', 'remote', PageControl1.ActivePageIndex);
+  ini.writeinteger('AscomRemote', 'protocol', ARestProtocol.ItemIndex);
+  ini.writestring('AscomRemote', 'host', ARestHost.Text);
+  ini.writestring('AscomRemote', 'port', ARestPort.Text);
+  ini.writeinteger('AscomRemote', 'device', ARestDevice.Value);
   ini.writestring('observatory', 'latitude', lat.Text);
   ini.writestring('observatory', 'longitude', long.Text);
   ini.Free;
@@ -926,63 +1094,82 @@ end;
 
 procedure Tpop_scope.ButtonGetLocationClick(Sender: TObject);
 begin
-{$ifdef mswindows}
   if ScopeConnected then
   begin
     try
-      Flongitude := T.SiteLongitude;
-      Flatitude := T.SiteLatitude;
-      FElevation := T.SiteElevation;
+      {$ifdef mswindows}
+      if not Remote then begin
+        Flongitude := T.SiteLongitude;
+        Flatitude := T.SiteLatitude;
+        FElevation := T.SiteElevation;
+      end
+      else
+      {$endif}
+      begin
+        Flongitude := TR.Get('SiteLongitude').AsFloat;
+        Flatitude := TR.Get('SiteLatitude').AsFloat;
+        FElevation := TR.Get('SiteElevation').AsFloat;
+      end;
       lat.Text := detostr(Flatitude);
       long.Text := detostr(Flongitude);
       elev.Text := FormatFloat(f1,FElevation);
       if assigned(FObservatoryCoord) then
         FObservatoryCoord(self);
     except
-      on E: EOleException do
+      on E: Exception do
         MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
-{$endif}
 end;
 
 
 procedure Tpop_scope.ButtonSetLocationClick(Sender: TObject);
 begin
-{$ifdef mswindows}
   if ScopeConnected then
   begin
     try
-      T.SiteLongitude := Flongitude;
-      T.SiteLatitude := Flatitude;
-      T.SiteElevation := FElevation;
+      {$ifdef mswindows}
+      if not Remote then begin
+        T.SiteLongitude := Flongitude;
+        T.SiteLatitude := Flatitude;
+        T.SiteElevation := FElevation;
+      end
+      else
+      {$endif}
+      begin
+        TR.Put('SiteLongitude',Flongitude);
+        TR.Put('SiteLatitude',Flatitude);
+        TR.Put('SiteElevation',FElevation);
+      end;
     except
-      on E: EOleException do
+      on E: Exception do
         MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
-{$endif}
 end;
 
 procedure Tpop_scope.ButtonSetTimeClick(Sender: TObject);
-{$ifdef mswindows}
 var
-  utc: Tsystemtime;
-{$endif}
+  buf: string;
 begin
-{$ifdef mswindows}
   if ScopeConnected then
   begin
     try
-      getsystemtime(utc);
-      // does not raise and error but may not be UTC
-      T.UTCDate := systemtimetodatetime(utc);
+      buf:=FormatDateTime(dateiso,NowUTC);
+      {$ifdef mswindows}
+      if not Remote then begin
+        T.UTCDate :=buf;
+      end
+      else
+      {$endif}
+      begin
+        TR.Put('UTCDate',buf);
+      end;
     except
-      on E: EOleException do
+      on E: Exception do
         MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
-{$endif}
 end;
 
 procedure Tpop_scope.FormDestroy(Sender: TObject);
@@ -991,8 +1178,8 @@ begin
 end;
 
 procedure Tpop_scope.UpdParkButton;
+var ispark: boolean;
 begin
-{$ifdef mswindows}
   try
     if (not ScopeConnected) or (not FCanParkUnpark) then
     begin
@@ -1005,7 +1192,16 @@ begin
     end;
     if ScopeConnected and FCanParkUnpark then
     begin
-      if T.AtPark then begin
+      {$ifdef mswindows}
+      if not Remote then begin
+        ispark:=T.AtPark;
+      end
+      else
+      {$endif}
+      begin
+        ispark:=TR.Get('AtPark').AsBool;
+      end;
+      if ispark then begin
         parkled.color := clRed;
         ButtonPark.Caption := rsUnpark;
       end
@@ -1015,15 +1211,14 @@ begin
       end;
     end;
   except
-    on E: EOleException do
+    on E: Exception do
       MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
   end;
-{$endif}
 end;
 
 procedure Tpop_scope.UpdTrackingButton;
+var tracking: boolean;
 begin
-{$ifdef mswindows}
   try
     if (not ScopeConnected) or (not FCanSetTracking) then
     begin
@@ -1035,7 +1230,16 @@ begin
     end;
     if ScopeConnected then
     begin
-      if T.Tracking then
+      {$ifdef mswindows}
+      if not Remote then begin
+        tracking := T.Tracking;
+      end
+      else
+      {$endif}
+      begin
+        tracking := TR.Get('Tracking').AsBool;
+      end;
+      if tracking then
         Trackingled.color := clLime
       else
         Trackingled.color := clRed;
@@ -1043,51 +1247,72 @@ begin
     else
       Trackingled.color := clRed;
   except
-    on E: EOleException do
+    on E: Exception do
       MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
   end;
-{$endif}
 end;
 
 procedure Tpop_scope.ButtonParkClick(Sender: TObject);
 begin
-{$ifdef mswindows}
   if ScopeConnected and FCanParkUnpark then
   begin
     try
-      if ButtonPark.Caption = rsUnpark then begin
-        if T.CanUnpark then
-           T.Unpark;
+      {$ifdef mswindows}
+      if not Remote then begin
+        if ButtonPark.Caption = rsUnpark then begin
+          if T.CanUnpark then
+             T.Unpark;
+        end
+        else if ButtonPark.Caption = rsPark then begin
+          if T.CanPark and (MessageDlg(rsDoYouReallyW, mtConfirmation, mbYesNo, 0)=mrYes)
+          then
+             T.Park;
+        end;
       end
-      else if ButtonPark.Caption = rsPark then begin
-        if T.CanPark and
-        (MessageDlg(rsDoYouReallyW, mtConfirmation, mbYesNo, 0)=mrYes)
-        then
-           T.Park;
+      else
+      {$endif}
+      begin
+        if ButtonPark.Caption = rsUnpark then begin
+          if TR.Get('CanUnpark').AsBool then
+             TR.Put('Unpark');
+        end
+        else if ButtonPark.Caption = rsPark then begin
+          if TR.Get('CanPark').AsBool and (MessageDlg(rsDoYouReallyW, mtConfirmation, mbYesNo, 0)=mrYes)
+          then
+             TR.Put('Park');
+        end;
       end;
       UpdParkButton;
     except
-      on E: EOleException do
+      on E: Exception do
         MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
-{$endif}
 end;
 
 procedure Tpop_scope.ButtonTrackingClick(Sender: TObject);
+var tracking: boolean;
 begin
-{$ifdef mswindows}
   if ScopeConnected then
   begin
     try
-      T.Tracking := not T.Tracking;
+      {$ifdef mswindows}
+      if not Remote then begin
+        tracking := T.Tracking;
+        T.Tracking := not tracking;
+      end
+      else
+      {$endif}
+      begin
+        tracking := TR.Get('Tracking').AsBool;
+        TR.Put('Tracking',not tracking);
+      end;
       UpdTrackingButton;
     except
-      on E: EOleException do
+      on E: Exception do
         MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
-{$endif}
 end;
 
 procedure Tpop_scope.ButtonAboutClick(Sender: TObject);

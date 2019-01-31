@@ -1141,7 +1141,7 @@ resourcestring
   rsSlewToCursor = 'Slew to cursor position';
   rsFinderCircle2 = 'Finder Circle';
   rsLoadFromFile = 'Load from file';
-  rsNotAvailon = 'Not available on %s';
+  rsASCOMRemote = 'ASCOM Remote is available on %s';
   rsDriverSelect = 'Driver Selection';
   rsRefreshRate = 'Refresh rate';
   rsSelect = 'Select';

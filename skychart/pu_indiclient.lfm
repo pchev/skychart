@@ -1,13 +1,13 @@
 object pop_indi: Tpop_indi
   Left = 456
-  Height = 497
+  Height = 479
   Top = 130
   Width = 318
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   ActiveControl = Edit1
   Caption = 'INDI Telescope Interface'
-  ClientHeight = 497
+  ClientHeight = 479
   ClientWidth = 318
   DesignTimePPI = 95
   OnCloseQuery = kill
@@ -24,21 +24,11 @@ object pop_indi: Tpop_indi
     ClientHeight = 62
     ClientWidth = 316
     TabOrder = 2
-    object SpeedButton2: TButton
-      Left = 242
-      Height = 25
-      Top = 32
-      Width = 65
-      Cancel = True
-      Caption = 'Hide'
-      OnClick = SpeedButton2Click
-      TabOrder = 1
-    end
     object SpeedButton6: TButton
       Left = 112
       Height = 25
       Top = 32
-      Width = 116
+      Width = 192
       Caption = 'Abort Slew'
       Font.Color = clRed
       OnClick = SpeedButton6Click
@@ -52,7 +42,7 @@ object pop_indi: Tpop_indi
       Width = 81
       Caption = 'INDI gui'
       OnClick = BtnIndiGuiClick
-      TabOrder = 2
+      TabOrder = 1
     end
     object ProtocolTrace: TCheckBox
       Left = 11
@@ -61,7 +51,7 @@ object pop_indi: Tpop_indi
       Width = 111
       Caption = 'Protocol trace '
       OnChange = ProtocolTraceChange
-      TabOrder = 3
+      TabOrder = 2
     end
   end
   object Panel1: TPanel
@@ -93,7 +83,7 @@ object pop_indi: Tpop_indi
       Left = 40
       Height = 30
       Top = 4
-      Width = 95
+      Width = 112
       ReadOnly = True
       TabStop = False
       TabOrder = 0
@@ -213,7 +203,7 @@ object pop_indi: Tpop_indi
   end
   object Memomsg: TMemo
     Left = 0
-    Height = 188
+    Height = 123
     Top = 268
     Width = 318
     Align = alClient
@@ -223,15 +213,15 @@ object pop_indi: Tpop_indi
   end
   object Panel2: TPanel
     Left = 0
-    Height = 41
-    Top = 456
+    Height = 88
+    Top = 391
     Width = 318
     Align = alBottom
-    ClientHeight = 41
+    ClientHeight = 88
     ClientWidth = 318
     TabOrder = 5
     object Disconnect: TButton
-      Left = 88
+      Left = 136
       Height = 25
       Top = 8
       Width = 84
@@ -240,7 +230,7 @@ object pop_indi: Tpop_indi
       TabOrder = 0
     end
     object led: TEdit
-      Left = 192
+      Left = 98
       Height = 25
       Top = 8
       Width = 25
@@ -251,22 +241,33 @@ object pop_indi: Tpop_indi
       TabOrder = 1
     end
     object Connect: TButton
-      Left = 235
+      Left = 9
       Height = 25
       Top = 8
       Width = 73
       Caption = 'Connect'
+      Default = True
       OnClick = ConnectClick
       TabOrder = 2
     end
     object SpeedButton4: TButton
-      Left = 3
+      Left = 243
       Height = 25
-      Top = 8
+      Top = 40
       Width = 65
       Caption = 'Help'
       OnClick = SpeedButton4Click
       TabOrder = 3
+    end
+    object SpeedButton2: TButton
+      Left = 243
+      Height = 25
+      Top = 8
+      Width = 65
+      Cancel = True
+      Caption = 'Hide'
+      OnClick = SpeedButton2Click
+      TabOrder = 4
     end
   end
   object InitTimer: TTimer

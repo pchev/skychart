@@ -1,13 +1,12 @@
 object pop_scope: Tpop_scope
   Left = 276
-  Height = 506
+  Height = 524
   Top = 124
   Width = 305
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
-  ActiveControl = Edit1
   Caption = 'ASCOM Telescope Interface'
-  ClientHeight = 506
+  ClientHeight = 524
   ClientWidth = 305
   DesignTimePPI = 95
   OnCloseQuery = kill
@@ -15,17 +14,15 @@ object pop_scope: Tpop_scope
   OnDestroy = FormDestroy
   ParentFont = True
   Position = poDefaultPosOnly
-  LCLVersion = '1.8.4.0'
-  Visible = False
   object GroupBox3: TGroupBox
     Left = 0
     Height = 88
-    Top = 416
+    Top = 447
     Width = 305
     Align = alTop
     ClientHeight = 86
     ClientWidth = 303
-    TabOrder = 3
+    TabOrder = 2
     object ButtonConnect: TSpeedButton
       Left = 5
       Height = 25
@@ -61,14 +58,6 @@ object pop_scope: Tpop_scope
       TabStop = False
       TabOrder = 0
     end
-    object WarningLabel: TLabel
-      Left = 6
-      Height = 17
-      Top = 41
-      Width = 88
-      Caption = 'WarningLabel'
-      ParentColor = False
-    end
     object ButtonHelp: TSpeedButton
       Left = 211
       Height = 25
@@ -81,32 +70,32 @@ object pop_scope: Tpop_scope
   object GroupBox5: TGroupBox
     Left = 0
     Height = 141
-    Top = 131
+    Top = 162
     Width = 305
     Align = alTop
     Caption = 'Observatory '
-    ClientHeight = 123
+    ClientHeight = 122
     ClientWidth = 303
-    TabOrder = 1
+    TabOrder = 0
     object Label15: TLabel
       Left = 16
-      Height = 17
+      Height = 18
       Top = 12
-      Width = 65
+      Width = 59
       Caption = 'Latitude : '
       ParentColor = False
     end
     object Label16: TLabel
       Left = 115
-      Height = 17
+      Height = 18
       Top = 12
-      Width = 72
+      Width = 68
       Caption = 'Longitude :'
       ParentColor = False
     end
     object ButtonSetTime: TSpeedButton
       Left = 9
-      Height = 22
+      Height = 25
       Top = 92
       Width = 136
       Caption = 'Set Time'
@@ -115,7 +104,7 @@ object pop_scope: Tpop_scope
     end
     object ButtonSetLocation: TSpeedButton
       Left = 9
-      Height = 22
+      Height = 25
       Top = 64
       Width = 139
       Caption = 'Set to telescope'
@@ -124,9 +113,9 @@ object pop_scope: Tpop_scope
     end
     object lat: TEdit
       Left = 16
-      Height = 29
+      Height = 30
       Top = 32
-      Width = 80
+      Width = 88
       Color = clBtnFace
       ReadOnly = True
       TabStop = False
@@ -135,9 +124,9 @@ object pop_scope: Tpop_scope
     end
     object long: TEdit
       Left = 115
-      Height = 29
+      Height = 30
       Top = 32
-      Width = 70
+      Width = 84
       Color = clBtnFace
       ReadOnly = True
       TabStop = False
@@ -146,7 +135,7 @@ object pop_scope: Tpop_scope
     end
     object ButtonGetLocation: TSpeedButton
       Left = 156
-      Height = 22
+      Height = 25
       Top = 64
       Width = 139
       Caption = 'Get from telescope'
@@ -155,15 +144,15 @@ object pop_scope: Tpop_scope
     end
     object Label2: TLabel
       Left = 209
-      Height = 17
+      Height = 18
       Top = 12
-      Width = 51
+      Width = 47
       Caption = 'Altitude'
       ParentColor = False
     end
     object elev: TEdit
       Left = 209
-      Height = 29
+      Height = 30
       Top = 32
       Width = 80
       ReadOnly = True
@@ -174,49 +163,49 @@ object pop_scope: Tpop_scope
   object Panel1: TPanel
     Left = 0
     Height = 144
-    Top = 272
+    Top = 303
     Width = 305
     Align = alTop
     ClientHeight = 144
     ClientWidth = 305
-    TabOrder = 2
+    TabOrder = 1
     object LabelAlpha: TLabel
       Left = 32
-      Height = 17
+      Height = 18
       Top = 10
-      Width = 21
+      Width = 19
       Caption = 'RA '
       ParentColor = False
     end
     object LabelDelta: TLabel
-      Left = 157
-      Height = 17
+      Left = 165
+      Height = 18
       Top = 10
-      Width = 27
+      Width = 24
       Caption = 'DEC'
       ParentColor = False
     end
     object Label11: TLabel
       Left = 32
-      Height = 17
+      Height = 18
       Top = 34
-      Width = 18
+      Width = 15
       Caption = 'AZ'
       ParentColor = False
     end
     object Label12: TLabel
-      Left = 157
-      Height = 17
+      Left = 165
+      Height = 18
       Top = 34
       Width = 22
       Caption = 'ALT'
       ParentColor = False
     end
     object ButtonAbort: TSpeedButton
-      Left = 10
+      Left = 55
       Height = 25
       Top = 64
-      Width = 267
+      Width = 235
       Caption = 'Abort Slew'
       Font.Color = clRed
       Font.Height = -11
@@ -226,37 +215,41 @@ object pop_scope: Tpop_scope
       ParentFont = False
     end
     object pos_x: TEdit
-      Left = 64
-      Height = 29
+      Left = 56
+      Height = 25
       Top = 6
-      Width = 80
+      Width = 104
+      Constraints.MaxHeight = 25
       ReadOnly = True
       TabStop = False
       TabOrder = 0
     end
     object pos_y: TEdit
       Left = 200
-      Height = 29
+      Height = 25
       Top = 6
-      Width = 80
+      Width = 90
+      Constraints.MaxHeight = 25
       ReadOnly = True
       TabStop = False
       TabOrder = 1
     end
     object az_x: TEdit
-      Left = 64
-      Height = 29
+      Left = 56
+      Height = 25
       Top = 30
-      Width = 80
+      Width = 104
+      Constraints.MaxHeight = 25
       ReadOnly = True
       TabStop = False
       TabOrder = 3
     end
     object alt_y: TEdit
       Left = 200
-      Height = 29
+      Height = 25
       Top = 30
-      Width = 80
+      Width = 90
+      Constraints.MaxHeight = 25
       ReadOnly = True
       TabStop = False
       TabOrder = 4
@@ -269,7 +262,7 @@ object pop_scope: Tpop_scope
       TabOrder = 2
     end
     object ButtonTracking: TSpeedButton
-      Left = 102
+      Left = 147
       Height = 25
       Top = 96
       Width = 84
@@ -278,7 +271,7 @@ object pop_scope: Tpop_scope
       OnClick = ButtonTrackingClick
     end
     object trackingled: TEdit
-      Left = 104
+      Left = 149
       Height = 16
       Top = 121
       Width = 80
@@ -289,7 +282,7 @@ object pop_scope: Tpop_scope
       TabOrder = 5
     end
     object ButtonPark: TSpeedButton
-      Left = 10
+      Left = 55
       Height = 25
       Top = 96
       Width = 84
@@ -298,7 +291,7 @@ object pop_scope: Tpop_scope
       OnClick = ButtonParkClick
     end
     object parkled: TEdit
-      Left = 12
+      Left = 57
       Height = 16
       Top = 121
       Width = 80
@@ -309,89 +302,199 @@ object pop_scope: Tpop_scope
       TabOrder = 6
     end
   end
-  object GroupBox1: TGroupBox
+  object PageControl1: TPageControl
     Left = 0
-    Height = 131
+    Height = 162
     Top = 0
     Width = 305
+    ActivePage = ASCOMRemote
     Align = alTop
-    Caption = 'Driver Selection'
-    ClientHeight = 113
-    ClientWidth = 303
-    TabOrder = 0
-    object ButtonSelect: TSpeedButton
-      Left = 182
-      Height = 22
-      Top = 7
-      Width = 97
-      Caption = 'Select'
-      OnClick = ButtonSelectClick
+    TabIndex = 1
+    TabOrder = 3
+    OnChanging = PageControl1Changing
+    object ASCOMLocal: TTabSheet
+      Caption = 'ASCOM Local'
+      ClientHeight = 132
+      ClientWidth = 295
+      object GroupBox1: TGroupBox
+        Left = 0
+        Height = 132
+        Top = 0
+        Width = 295
+        Align = alClient
+        Caption = 'Driver Selection'
+        ClientHeight = 112
+        ClientWidth = 293
+        TabOrder = 0
+        object ButtonSelect: TSpeedButton
+          Left = 182
+          Height = 22
+          Top = 7
+          Width = 97
+          Caption = 'Select'
+          OnClick = ButtonSelectClick
+        end
+        object Label1: TLabel
+          Left = 2
+          Height = 18
+          Top = 56
+          Width = 78
+          Caption = 'Refresh rate :'
+          ParentColor = False
+        end
+        object ButtonConfigure: TSpeedButton
+          Left = 182
+          Height = 22
+          Top = 32
+          Width = 97
+          Caption = 'Configure'
+          OnClick = ButtonConfigureClick
+        end
+        object ButtonAbout: TSpeedButton
+          Left = 182
+          Height = 22
+          Top = 56
+          Width = 97
+          Caption = 'About'
+          OnClick = ButtonAboutClick
+        end
+        object Edit1: TEdit
+          Left = 2
+          Height = 30
+          Top = 15
+          Width = 172
+          Color = clBtnFace
+          ReadOnly = True
+          TabStop = False
+          TabOrder = 0
+        end
+        object ReadIntBox: TComboBox
+          Left = 101
+          Height = 30
+          Top = 52
+          Width = 73
+          ItemHeight = 0
+          ItemIndex = 2
+          Items.Strings = (
+            '250'
+            '500'
+            '1000'
+            '2000'
+            '5000'
+          )
+          OnChange = ReadIntBoxChange
+          TabOrder = 1
+          Text = '1000'
+        end
+        object ButtonAdvSetting: TSpeedButton
+          Left = 101
+          Height = 22
+          Top = 88
+          Width = 178
+          Caption = 'Advanced setting'
+          OnClick = ButtonAdvSettingClick
+        end
+      end
     end
-    object Label1: TLabel
-      Left = 2
-      Height = 17
-      Top = 56
-      Width = 87
-      Caption = 'Refresh rate :'
-      ParentColor = False
-    end
-    object ButtonConfigure: TSpeedButton
-      Left = 182
-      Height = 22
-      Top = 32
-      Width = 97
-      Caption = 'Configure'
-      OnClick = ButtonConfigureClick
-    end
-    object ButtonAbout: TSpeedButton
-      Left = 182
-      Height = 22
-      Top = 56
-      Width = 97
-      Caption = 'About'
-      OnClick = ButtonAboutClick
-    end
-    object Edit1: TEdit
-      Left = 2
-      Height = 29
-      Top = 15
-      Width = 172
-      Color = clBtnFace
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 0
-    end
-    object ReadIntBox: TComboBox
-      Left = 101
-      Height = 29
-      Top = 52
-      Width = 73
-      ItemHeight = 0
-      ItemIndex = 2
-      Items.Strings = (
-        '250'
-        '500'
-        '1000'
-        '2000'
-        '5000'
-      )
-      OnChange = ReadIntBoxChange
-      TabOrder = 1
-      Text = '1000'
-    end
-    object ButtonAdvSetting: TSpeedButton
-      Left = 101
-      Height = 22
-      Top = 88
-      Width = 178
-      Caption = 'Advanced setting'
-      OnClick = ButtonAdvSettingClick
+    object ASCOMRemote: TTabSheet
+      Caption = 'ASCOM Remote'
+      ClientHeight = 132
+      ClientWidth = 295
+      object Panel3: TPanel
+        Left = 0
+        Height = 193
+        Top = 0
+        Width = 392
+        ClientHeight = 193
+        ClientWidth = 392
+        TabOrder = 0
+        object ARestProtocol: TComboBox
+          Left = 13
+          Height = 30
+          Top = 32
+          Width = 74
+          ItemHeight = 0
+          ItemIndex = 0
+          Items.Strings = (
+            'http:'
+            'https:'
+          )
+          Style = csDropDownList
+          TabOrder = 0
+          Text = 'http:'
+        end
+        object Label34: TLabel
+          Left = 13
+          Height = 18
+          Top = 8
+          Width = 51
+          Caption = 'Protocol'
+          ParentColor = False
+        end
+        object ARestHost: TEdit
+          Left = 92
+          Height = 30
+          Top = 32
+          Width = 192
+          TabOrder = 1
+          Text = '127.0.0.1'
+        end
+        object Label35: TLabel
+          Left = 92
+          Height = 18
+          Top = 8
+          Width = 158
+          Caption = 'Remote host or IP address'
+          ParentColor = False
+        end
+        object ARestPort: TSpinEdit
+          Left = 13
+          Height = 28
+          Top = 96
+          Width = 81
+          MaxValue = 65535
+          MinValue = 1
+          TabOrder = 2
+          Value = 11111
+        end
+        object Label36: TLabel
+          Left = 13
+          Height = 18
+          Top = 72
+          Width = 41
+          Caption = 'IP Port'
+          ParentColor = False
+        end
+        object ARestDevice: TSpinEdit
+          Left = 216
+          Height = 28
+          Top = 96
+          Width = 68
+          MaxValue = 65535
+          TabOrder = 3
+        end
+        object Label37: TLabel
+          Left = 144
+          Height = 18
+          Top = 72
+          Width = 139
+          Caption = 'Remote device number'
+          ParentColor = False
+        end
+        object Label3: TLabel
+          Left = 144
+          Height = 18
+          Top = 100
+          Width = 63
+          Caption = 'Telescope/'
+          ParentColor = False
+        end
+      end
     end
   end
   object Timer1: TTimer
     Enabled = False
     OnTimer = Timer1Timer
-    left = 240
-    top = 8
+    left = 248
   end
 end

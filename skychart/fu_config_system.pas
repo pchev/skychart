@@ -335,11 +335,10 @@ begin
   CheckBox7.Caption := rsTryToAutoCon;
   CheckBox8.Caption := rsKeepTablesOn;
   CheckBox9.Caption := rsKeepImagesOn;
-{$ifdef mswindows}
   ASCOMLabel.Caption := rsASCOMTelesc + crlf + Format(rsUseTheMenuOr, [rsConnectTeles]);
-{$else}
-  ASCOMLabel.Caption := rsASCOMTelesc + crlf + Format(rsNotAvailon, [compile_system]);
-{$endif}
+  {$ifndef mswindows}
+  ASCOMLabel.Caption := ASCOMLabel.Caption + crlf + crlf + Format(rsASCOMRemote, [compile_system]);
+  {$endif}
   InterfaceLabel.Caption := rsObsolete + crlf + crlf + rsIntTelesco + crlf + crlf +
     rsThisDirectDr + crlf + crlf + Format(rsUseTheMenuOr, [rsConnectTeles]);
   SetHelp(self, hlpCfgSys);

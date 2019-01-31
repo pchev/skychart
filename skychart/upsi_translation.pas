@@ -1118,7 +1118,7 @@ begin
   CL.AddConstantN('rsSlewToCursor', 'String').SetString(rsSlewToCursor);
   CL.AddConstantN('rsFinderCircle2', 'String').SetString(rsFinderCircle2);
   CL.AddConstantN('rsLoadFromFile', 'String').SetString(rsLoadFromFile);
-  CL.AddConstantN('rsNotAvailon', 'String').SetString(rsNotAvailon);
+  CL.AddConstantN('rsASCOMRemote', 'String').SetString(rsASCOMRemote);
   CL.AddConstantN('rsDriverSelect', 'String').SetString(rsDriverSelect);
   CL.AddConstantN('rsRefreshRate', 'String').SetString(rsRefreshRate);
   CL.AddConstantN('rsSelect', 'String').SetString(rsSelect);
