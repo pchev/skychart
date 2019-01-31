@@ -56,6 +56,7 @@ type
   TPimar64 = ^Timar64;
 
   TDrawProjThread = class(TThread)
+  // not used for now
   public
     IntfImg, ProjImg: TLazIntfImage;
     ra_offset, de_offset, imgjd: double;
@@ -75,7 +76,7 @@ type
     IntfImg: TDrawListImg;
     ProjImg: TLazIntfImage;
     ra_offset, de_offset: TDrawListDouble;
-    imgjd: double;
+    imgjd, scaling: double;
     lstjd: TDrawListDouble;
     cfgsc: Tconf_skychart;
     working: boolean;
@@ -1391,6 +1392,7 @@ begin
 end;
 
 procedure TDrawProjThread.Execute;
+// not used for now
 var
   ra, Dec: double;
   i, j, startline, endline, x, y: integer;
@@ -1430,6 +1432,7 @@ begin
 end;
 
 procedure TFits.GetProjBitmap(var imabmp: Tbitmap; c: Tconf_skychart);
+// not used for now
 var
   IntfImg, ProjImg: TLazIntfImage;
   ImgHandle, ImgMaskHandle: HBitmap;
@@ -1512,23 +1515,25 @@ end;
 procedure TDrawListThread.Execute;
 var
   ra, Dec, ra0, dec0: double;
-  i, j, k, startline, endline, x, y: integer;
+  i, j, k, startline, endline, x, y,xs,ys: integer;
 begin
+  xs:= ProjImg.Width;
+  ys:= ProjImg.Height;
   ra := 0;
   Dec := 0;
-  i := cfgsc.ymax div num;
+  i := ys div num;
   startline := id * i;
   if id = (num - 1) then
-    endline := cfgsc.ymax - 1
+    endline := ys - 1
   else
     endline := (id + 1) * i - 1;
   for i := startline to endline do
   begin
-    for j := 0 to cfgsc.xmax - 1 do
+    for j := 0 to xs - 1 do
     begin
       if Terminated then
         exit;
-      getadxy(j, i, ra0, dec0, cfgsc);
+      getadxy(round(j*scaling) , round(i*scaling) , ra0, dec0, cfgsc);
       if samejd and (not smallfov) then
       begin
         ra := ra0;
@@ -1570,24 +1575,20 @@ var
   iwidth, iheight: TDrawListInteger;
   iwcs: TcdcWCSinfo;
   smallfov, samejd: boolean;
-  ijd: double;
+  ijd, scaling,nsc: double;
   ProjImg: TLazIntfImage;
   ImgHandle, ImgMaskHandle: HBitmap;
-  i, n, r, imgloaded, timeout: integer;
+  i, n, r, tc, imgloaded, timeout: integer;
   y, m, d: word;
   working, timingout: boolean;
   timelimit: TDateTime;
-  thread: array[0..7] of TDrawListThread;
+  thread: array[0..15] of TDrawListThread;
   fn: string;
 begin
   try
     imabmp.freeimage;
     imabmp.Height := 1;
     imabmp.Width := 1;
-    ProjImg := TLazIntfImage.Create(0, 0);
-    ProjImg.LoadFromBitmap(imabmp.Handle, 0);
-    ProjImg.SetSize(c.xmax, c.ymax);
-    ProjImg.FillPixels(colTransparent);
     smallfov := True;
     samejd := True;
 
@@ -1636,11 +1637,24 @@ begin
       end;
     end;
     imgloaded := n;
-    r := min(8, MaxThreadCount);
-    timeout := round(max(10, c.xmax * c.ymax / r / 50000));
+
+    // number of thread
+    tc := max(1,min(16, MaxThreadCount)); // based on number of core
+    tc := max(1,min(tc,c.ymax div 100));  // do not split the image too much
+    // limit size of computed image
+    nsc:=max(1,1+(imgloaded-3)/15);       // factor for number of simultaneous images
+    scaling:=min(6,nsc*(c.xmax*c.ymax)/1E6/tc/0.5);  // compute max 0.5 million pixel per core
+    if scaling<1.1 then scaling:=1;       // for 10% it is not worth rescaling
+    // initialize image
+    ProjImg := TLazIntfImage.Create(0, 0);
+    ProjImg.LoadFromBitmap(imabmp.Handle, 0);
+    ProjImg.SetSize(round(c.xmax/scaling), round(c.ymax/scaling));
+    ProjImg.FillPixels(colTransparent);
+
+    timeout := round(max(10, c.xmax * c.ymax / tc / 50000));
     if VerboseMsg then
       WriteTrace('SkyChart ' + c.chartname + ': start FITS thread, timeout:' + IntToStr(timeout));
-    for i := 0 to r - 1 do
+    for i := 0 to tc - 1 do
     begin
       thread[i] := TDrawListThread.Create(True);
       thread[i].IntfImg := IntfImg;
@@ -1653,17 +1667,18 @@ begin
       thread[i].Fw := iwidth;
       thread[i].Fh := iheight;
       thread[i].smallfov := smallfov;
-      thread[i].filecount := fitslist.Count;
+      thread[i].filecount := imgloaded;
       thread[i].cfgsc := c;
-      thread[i].num := r;
+      thread[i].num := tc;
       thread[i].id := i;
+      thread[i].scaling := scaling;
       thread[i].Start;
     end;
     timelimit := now + timeout / secday;
     repeat
       sleep(100);
       working := False;
-      for i := 0 to r - 1 do
+      for i := 0 to tc - 1 do
         working := working or thread[i].working;
       timingout := (now > timelimit);
     until (not working) or timingout;
@@ -1671,7 +1686,7 @@ begin
       WriteTrace('SkyChart ' + c.chartname + ': end thread');
     if timingout then
     begin
-      for i := 0 to r - 1 do
+      for i := 0 to tc - 1 do
         thread[i].Terminate;
       sleep(10);
       WriteTrace('FITS Image timeout');

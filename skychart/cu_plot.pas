@@ -2097,6 +2097,11 @@ begin
 
     outbmp := TBGRABitmap.Create(ibmp, False);
 
+    if (outbmp.Width<>cbmp.Width)or(outbmp.Height<>cbmp.Height) then begin
+      outbmp.ResampleFilter := rfBestQuality;
+      BGRAReplace(outbmp,outbmp.Resample(cbmp.Width,cbmp.Height,rmFineResample));
+    end;
+
     try
       blacklevel := MaxIntValue([cfgplot.backgroundcolor and $FF,
         (cfgplot.backgroundcolor div $100) and $FF, (cfgplot.backgroundcolor div
