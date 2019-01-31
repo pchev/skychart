@@ -554,6 +554,7 @@ var
   buf: string;
 begin
   Result := nil;
+  if not FConnected then exit;
   buf := GetNodeValue(GetAttrib(root, 'device'));
   errmsg := 'Device not found ' + buf;
   try
@@ -577,6 +578,8 @@ var
   buf: string;
 begin
   try
+  Result:=nil;
+  if not FConnected then exit;
   Result := findDev(root, errmsg);
   if (Result = nil) and createifnotexist then
   begin
