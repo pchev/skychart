@@ -46,9 +46,9 @@ object pop_indi: Tpop_indi
     end
     object ProtocolTrace: TCheckBox
       Left = 11
-      Height = 21
+      Height = 23
       Top = 8
-      Width = 111
+      Width = 113
       Caption = 'Protocol trace '
       OnChange = ProtocolTraceChange
       TabOrder = 2
@@ -81,18 +81,20 @@ object pop_indi: Tpop_indi
     end
     object pos_x: TEdit
       Left = 40
-      Height = 30
+      Height = 28
       Top = 4
       Width = 112
+      Constraints.MaxHeight = 28
       ReadOnly = True
       TabStop = False
       TabOrder = 0
     end
     object pos_y: TEdit
       Left = 213
-      Height = 30
+      Height = 28
       Top = 4
       Width = 95
+      Constraints.MaxHeight = 28
       ReadOnly = True
       TabStop = False
       TabOrder = 1
@@ -134,10 +136,11 @@ object pop_indi: Tpop_indi
     end
     object lat: TEdit
       Left = 8
-      Height = 30
+      Height = 28
       Top = 32
       Width = 86
       Color = clBtnFace
+      Constraints.MaxHeight = 28
       ReadOnly = True
       TabStop = False
       TabOrder = 0
@@ -145,10 +148,11 @@ object pop_indi: Tpop_indi
     end
     object long: TEdit
       Left = 112
-      Height = 30
+      Height = 28
       Top = 32
       Width = 82
       Color = clBtnFace
+      Constraints.MaxHeight = 28
       ReadOnly = True
       TabStop = False
       TabOrder = 1
@@ -172,9 +176,10 @@ object pop_indi: Tpop_indi
     end
     object Elev: TEdit
       Left = 209
-      Height = 30
+      Height = 28
       Top = 32
       Width = 80
+      Constraints.MaxHeight = 28
       ReadOnly = True
       TabOrder = 2
       Text = '0'
@@ -192,10 +197,11 @@ object pop_indi: Tpop_indi
     TabOrder = 0
     object Edit1: TEdit
       Left = 8
-      Height = 30
+      Height = 28
       Top = 8
       Width = 281
       Color = clBtnFace
+      Constraints.MaxHeight = 28
       ReadOnly = True
       TabStop = False
       TabOrder = 0

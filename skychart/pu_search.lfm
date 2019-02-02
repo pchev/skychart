@@ -12,7 +12,6 @@ object f_search: Tf_search
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  Visible = False
   object Panel1: TPanel
     Left = 0
     Height = 219
@@ -103,17 +102,19 @@ object f_search: Tf_search
             TabOrder = 0
             object OnlineEdit: TEdit
               Left = 257
-              Height = 30
+              Height = 28
               Top = 8
               Width = 151
+              Constraints.MaxHeight = 28
               TabOrder = 1
               Text = 'ngc4556'
             end
             object ServerList: TComboBox
               Left = 16
-              Height = 34
+              Height = 28
               Top = 8
               Width = 200
+              Constraints.MaxHeight = 28
               ItemHeight = 0
               OnChange = ServerListChange
               Style = csDropDownList
@@ -178,9 +179,10 @@ object f_search: Tf_search
             end
             object PlanetBox: TComboBox
               Left = 184
-              Height = 34
+              Height = 28
               Top = 16
               Width = 146
+              Constraints.MaxHeight = 28
               DropDownCount = 10
               ItemHeight = 0
               Style = csDropDownList
@@ -203,9 +205,10 @@ object f_search: Tf_search
             TabOrder = 0
             object CometFilter: TEdit
               Left = 8
-              Height = 30
+              Height = 28
               Top = 20
               Width = 99
+              Constraints.MaxHeight = 28
               TabOrder = 0
             end
             object btnCometFilter: TButton
@@ -220,9 +223,10 @@ object f_search: Tf_search
             end
             object CometList: TComboBox
               Left = 192
-              Height = 34
-              Top = 16
+              Height = 28
+              Top = 20
               Width = 216
+              Constraints.MaxHeight = 28
               ItemHeight = 0
               Style = csDropDownList
               TabOrder = 2
@@ -244,9 +248,10 @@ object f_search: Tf_search
             TabOrder = 0
             object AsteroidFilter: TEdit
               Left = 8
-              Height = 30
+              Height = 28
               Top = 20
               Width = 99
+              Constraints.MaxHeight = 28
               TabOrder = 0
             end
             object btnAstFilter: TButton
@@ -261,9 +266,10 @@ object f_search: Tf_search
             end
             object AsteroidList: TComboBox
               Left = 192
-              Height = 34
-              Top = 16
+              Height = 28
+              Top = 20
               Width = 216
+              Constraints.MaxHeight = 28
               ItemHeight = 0
               Style = csDropDownList
               TabOrder = 2
@@ -293,9 +299,10 @@ object f_search: Tf_search
             end
             object NebNameBox: TComboBox
               Left = 128
-              Height = 34
+              Height = 28
               Top = 16
               Width = 256
+              Constraints.MaxHeight = 28
               ItemHeight = 0
               Style = csDropDownList
               TabOrder = 0
@@ -460,9 +467,10 @@ object f_search: Tf_search
             end
             object Id: TEdit
               Left = 105
-              Height = 30
+              Height = 28
               Top = 10
               Width = 215
+              Constraints.MaxHeight = 28
               OnKeyDown = IdKeyDown
               TabOrder = 0
             end
@@ -655,9 +663,10 @@ object f_search: Tf_search
             end
             object StarNameBox: TComboBox
               Left = 128
-              Height = 34
+              Height = 28
               Top = 16
               Width = 257
+              Constraints.MaxHeight = 28
               ItemHeight = 0
               Style = csDropDownList
               TabOrder = 0
@@ -687,9 +696,10 @@ object f_search: Tf_search
             end
             object ConstBox: TComboBox
               Left = 128
-              Height = 34
+              Height = 28
               Top = 16
               Width = 257
+              Constraints.MaxHeight = 28
               ItemHeight = 0
               Sorted = True
               Style = csDropDownList

@@ -1,42 +1,47 @@
 object f_script: Tf_script
   Left = 0
-  Height = 274
+  Height = 271
   Top = 0
-  Width = 180
+  Width = 178
   HorzScrollBar.Page = 1
   HorzScrollBar.Tracking = True
   VertScrollBar.Page = 1
   VertScrollBar.Tracking = True
   AutoScroll = True
-  ClientHeight = 274
-  ClientWidth = 180
+  ClientHeight = 271
+  ClientWidth = 178
+  DesignTimePPI = 95
   OnResize = FrameResize
+  ParentFont = False
   TabOrder = 0
   object BottomPanel: TPanel
     Left = 0
-    Height = 50
-    Top = 224
-    Width = 180
+    Height = 49
+    Top = 222
+    Width = 178
     Align = alBottom
-    ClientHeight = 50
-    ClientWidth = 180
+    ClientHeight = 49
+    ClientWidth = 178
+    ParentFont = False
     TabOrder = 0
     object ButtonEditSrc: TBitBtn
       Left = 0
-      Height = 22
+      Height = 25
       Top = 24
-      Width = 176
+      Width = 174
       Caption = 'Script'
       OnClick = ButtonEditSrcClick
+      ParentFont = False
       TabOrder = 0
     end
     object ButtonConfig: TBitBtn
       Left = 0
-      Height = 22
+      Height = 25
       Top = 0
-      Width = 176
+      Width = 174
       Caption = 'ButtonConfig'
       OnClick = ButtonConfigClick
+      ParentFont = False
       TabOrder = 1
     end
   end
@@ -44,9 +49,10 @@ object f_script: Tf_script
     Left = 0
     Height = 26
     Top = 28
-    Width = 180
+    Width = 178
     AutoSize = True
     Caption = 'Toolbar 1'
+    ParentFont = False
     ParentShowHint = False
     ShowHint = True
     TabOrder = 1
@@ -55,42 +61,44 @@ object f_script: Tf_script
     Left = 0
     Height = 26
     Top = 54
-    Width = 180
+    Width = 178
     AutoSize = True
     Caption = 'Toolbar 2'
+    ParentFont = False
     ParentShowHint = False
     ShowHint = True
     TabOrder = 2
   end
   object MainPanel: TPanel
     Left = 0
-    Height = 144
+    Height = 142
     Top = 80
-    Width = 180
+    Width = 178
     Align = alClient
     ChildSizing.ShrinkHorizontal = crsHomogenousChildResize
     ChildSizing.ShrinkVertical = crsHomogenousSpaceResize
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
+    ParentFont = False
     TabOrder = 3
   end
   object PanelTitle: TPanel
     Left = 0
     Height = 28
     Top = 0
-    Width = 180
+    Width = 178
     Align = alTop
     Caption = 'PanelTitle'
     ClientHeight = 28
-    ClientWidth = 180
+    ClientWidth = 178
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 4
     OnMouseEnter = PanelTitleMouseEnter
     OnMouseLeave = PanelTitleMouseLeave
     object LabelShortcut: TLabel
-      Left = 156
-      Height = 16
+      Left = 154
+      Height = 19
       Top = 6
       Width = 22
       Anchors = [akTop, akRight]
@@ -104,6 +112,7 @@ object f_script: Tf_script
       Hint = 'Help'
       Top = 4
       Width = 23
+      Font.Style = [fsBold]
       Glyph.Data = {
         36040000424D3604000000000000360000002800000010000000100000000100
         2000000000000004000064000000640000000000000000000000EBEBEBFFEBEB
@@ -144,6 +153,7 @@ object f_script: Tf_script
       OnClick = SpeedButton1Click
       OnMouseEnter = PanelTitleMouseEnter
       OnMouseLeave = PanelTitleMouseLeave
+      ParentFont = False
     end
   end
 end

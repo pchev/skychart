@@ -4,6 +4,9 @@ varobs/backup/
 skychart/component/uniqueinstance/backup/
 skychart/library/catalog/backup/
 skychart/component/indiclient/backup/
+skychart/component/enhedits/backup/
+skychart/component/jdcalendar/backup/
+skychart/component/radec/backup/
 #ignore external data
 BaseData/*.tgz
 BaseData/*.xz

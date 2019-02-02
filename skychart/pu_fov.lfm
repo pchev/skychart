@@ -1,337 +1,393 @@
 object f_fov: Tf_fov
   Left = 128
-  Height = 246
+  Height = 243
   Top = 441
-  Width = 325
+  Width = 322
   ActiveControl = PageControl1
   Caption = 'f_fov'
-  ClientHeight = 246
-  ClientWidth = 325
+  ClientHeight = 243
+  ClientWidth = 322
+  DesignTimePPI = 95
   OnCreate = FormCreate
-  LCLVersion = '1.6.0.2'
-  Visible = False
   object PageControl1: TPageControl
     Left = 0
-    Height = 246
+    Height = 243
     Top = 0
-    Width = 325
-    ActivePage = Camera
+    Width = 322
+    ActivePage = Eyepiece
     Align = alClient
+    ParentFont = False
     ShowTabs = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     object Eyepiece: TTabSheet
       Caption = 'Eyepiece'
-      ClientHeight = 240
-      ClientWidth = 319
+      ClientHeight = 239
+      ClientWidth = 312
+      ParentFont = False
       object Label24: TLabel
         Left = 8
-        Height = 16
+        Height = 19
         Top = 8
-        Width = 130
+        Width = 132
         Caption = 'Telescope focal length'
         ParentColor = False
+        ParentFont = False
       end
       object Label25: TLabel
         Left = 8
-        Height = 16
+        Height = 19
         Top = 34
-        Width = 122
+        Width = 126
         Caption = 'Eyepiece focal length'
         ParentColor = False
+        ParentFont = False
       end
       object Label26: TLabel
         Left = 8
-        Height = 16
-        Top = 61
-        Width = 182
+        Height = 19
+        Top = 60
+        Width = 193
         Caption = 'Eyepiece apparent field of vision'
         ParentColor = False
+        ParentFont = False
       end
       object Label27: TLabel
-        Left = 188
-        Height = 16
-        Top = 135
-        Width = 15
+        Left = 186
+        Height = 19
+        Top = 134
+        Width = 16
         Caption = '=>'
         ParentColor = False
+        ParentFont = False
       end
       object Label28: TLabel
         Left = 8
-        Height = 16
-        Top = 135
-        Width = 36
+        Height = 19
+        Top = 134
+        Width = 38
         Caption = 'Power'
         ParentColor = False
+        ParentFont = False
       end
       object Edit6: TEdit
-        Left = 214
-        Height = 23
+        Left = 212
+        Height = 28
         Top = 4
         Width = 41
+        Constraints.MaxHeight = 28
+        ParentFont = False
         TabOrder = 0
         Text = '2000'
       end
       object Edit7: TEdit
-        Left = 214
-        Height = 23
+        Left = 212
+        Height = 28
         Top = 30
         Width = 41
+        Constraints.MaxHeight = 28
+        ParentFont = False
         TabOrder = 1
         Text = '30'
       end
       object Edit8: TEdit
-        Left = 214
-        Height = 23
-        Top = 58
+        Left = 212
+        Height = 28
+        Top = 57
         Width = 41
+        Constraints.MaxHeight = 28
+        ParentFont = False
         TabOrder = 2
         Text = '60'
       end
       object Edit9: TEdit
-        Left = 206
-        Height = 23
-        Top = 133
-        Width = 49
+        Left = 204
+        Height = 28
+        Top = 132
+        Width = 48
         Color = clBtnFace
+        Constraints.MaxHeight = 28
+        ParentFont = False
         ReadOnly = True
         TabOrder = 5
       end
       object Button6: TButton
-        Left = 182
+        Left = 180
         Height = 25
-        Top = 93
-        Width = 75
+        Top = 92
+        Width = 74
         Caption = 'Compute'
+        Constraints.MaxHeight = 28
         OnClick = Button6Click
+        ParentFont = False
         TabOrder = 3
       end
       object Edit10: TEdit
-        Left = 118
-        Height = 23
-        Top = 133
+        Left = 117
+        Height = 28
+        Top = 132
         Width = 41
         Color = clBtnFace
+        Constraints.MaxHeight = 28
+        ParentFont = False
         ReadOnly = True
         TabOrder = 4
       end
       object Label51: TLabel
-        Left = 267
-        Height = 16
+        Left = 264
+        Height = 19
         Top = 8
-        Width = 31
+        Width = 32
         Caption = '[mm]'
         ParentColor = False
+        ParentFont = False
       end
       object Label54: TLabel
-        Left = 267
-        Height = 16
+        Left = 264
+        Height = 19
         Top = 34
-        Width = 31
+        Width = 32
         Caption = '[mm]'
         ParentColor = False
+        ParentFont = False
       end
       object Label56: TLabel
-        Left = 267
-        Height = 16
-        Top = 61
-        Width = 13
+        Left = 264
+        Height = 19
+        Top = 60
+        Width = 14
         Caption = '[°]'
         ParentColor = False
+        ParentFont = False
       end
       object Label57: TLabel
-        Left = 165
-        Height = 16
-        Top = 135
+        Left = 163
+        Height = 19
+        Top = 134
         Width = 7
         Caption = 'x'
         ParentColor = False
+        ParentFont = False
       end
       object Label58: TLabel
-        Left = 265
-        Height = 16
-        Top = 135
-        Width = 12
+        Left = 262
+        Height = 19
+        Top = 134
+        Width = 11
         Caption = '['']'
         ParentColor = False
+        ParentFont = False
       end
       object Button1: TButton
-        Left = 182
+        Left = 180
         Height = 25
-        Top = 173
-        Width = 75
+        Top = 171
+        Width = 74
         Caption = 'OK'
         ModalResult = 1
+        ParentFont = False
         TabOrder = 6
       end
     end
     object Camera: TTabSheet
       Caption = 'Camera'
-      ClientHeight = 240
-      ClientWidth = 319
+      ClientHeight = 239
+      ClientWidth = 312
+      ParentFont = False
       object Label49: TLabel
         Left = 8
-        Height = 16
+        Height = 19
         Top = 8
-        Width = 141
+        Width = 132
         Caption = 'Telescope focal length'
         ParentColor = False
+        ParentFont = False
       end
       object Label50: TLabel
         Left = 8
-        Height = 16
+        Height = 19
         Top = 34
-        Width = 56
+        Width = 53
         Caption = 'Pixel size'
         ParentColor = False
+        ParentFont = False
       end
       object Label52: TLabel
-        Left = 126
-        Height = 16
-        Top = 141
-        Width = 14
+        Left = 125
+        Height = 19
+        Top = 140
+        Width = 16
         Caption = '=>'
         ParentColor = False
+        ParentFont = False
       end
       object Label53: TLabel
         Left = 8
-        Height = 16
-        Top = 62
-        Width = 68
+        Height = 19
+        Top = 61
+        Width = 66
         Caption = 'Pixel count'
         ParentColor = False
+        ParentFont = False
       end
       object Edit11: TEdit
-        Left = 214
-        Height = 26
+        Left = 212
+        Height = 28
         Top = 4
         Width = 41
+        Constraints.MaxHeight = 28
+        ParentFont = False
         TabOrder = 0
         Text = '2000'
       end
       object Edit12: TEdit
-        Left = 152
-        Height = 26
+        Left = 150
+        Height = 28
         Top = 30
         Width = 41
+        Constraints.MaxHeight = 28
+        ParentFont = False
         TabOrder = 1
         Text = '5.6'
       end
       object Edit14: TEdit
-        Left = 152
-        Height = 26
-        Top = 137
+        Left = 150
+        Height = 28
+        Top = 136
         Width = 41
         Color = clBtnFace
+        Constraints.MaxHeight = 28
+        ParentFont = False
         ReadOnly = True
         TabOrder = 2
       end
       object Button9: TButton
-        Left = 182
+        Left = 180
         Height = 25
-        Top = 93
-        Width = 75
+        Top = 92
+        Width = 74
         Caption = 'Compute'
+        Constraints.MaxHeight = 28
         OnClick = Button9Click
+        ParentFont = False
         TabOrder = 3
       end
       object Edit15: TEdit
-        Left = 152
-        Height = 26
-        Top = 58
+        Left = 150
+        Height = 28
+        Top = 57
         Width = 41
+        Constraints.MaxHeight = 28
+        ParentFont = False
         TabOrder = 4
         Text = '640'
       end
       object Label8: TLabel
-        Left = 198
-        Height = 16
+        Left = 196
+        Height = 19
         Top = 34
-        Width = 7
+        Width = 8
         Caption = 'X'
+        Constraints.MaxHeight = 28
         ParentColor = False
+        ParentFont = False
       end
       object Label20: TLabel
-        Left = 198
-        Height = 16
-        Top = 62
-        Width = 7
+        Left = 196
+        Height = 19
+        Top = 61
+        Width = 8
         Caption = 'X'
+        Constraints.MaxHeight = 28
         ParentColor = False
+        ParentFont = False
       end
       object Label21: TLabel
-        Left = 198
-        Height = 16
-        Top = 141
-        Width = 7
+        Left = 196
+        Height = 19
+        Top = 140
+        Width = 8
         Caption = 'X'
+        Constraints.MaxHeight = 28
         ParentColor = False
+        ParentFont = False
       end
       object Edit13: TEdit
-        Left = 214
-        Height = 26
+        Left = 212
+        Height = 28
         Top = 30
         Width = 41
+        Constraints.MaxHeight = 28
+        ParentFont = False
         TabOrder = 5
         Text = '5.6'
       end
       object Edit16: TEdit
-        Left = 214
-        Height = 26
-        Top = 58
+        Left = 212
+        Height = 28
+        Top = 57
         Width = 41
+        Constraints.MaxHeight = 28
+        ParentFont = False
         TabOrder = 6
         Text = '480'
       end
       object Edit17: TEdit
-        Left = 214
-        Height = 26
-        Top = 137
+        Left = 212
+        Height = 28
+        Top = 136
         Width = 41
         Color = clBtnFace
+        Constraints.MaxHeight = 28
+        ParentFont = False
         ReadOnly = True
         TabOrder = 7
       end
       object Label55: TLabel
-        Left = 267
-        Height = 16
+        Left = 264
+        Height = 19
         Top = 8
-        Width = 30
+        Width = 32
         Caption = '[mm]'
         ParentColor = False
+        ParentFont = False
       end
       object Label59: TLabel
-        Left = 267
-        Height = 16
+        Left = 264
+        Height = 19
         Top = 34
-        Width = 26
+        Width = 28
         Caption = '[mu]'
         ParentColor = False
+        ParentFont = False
       end
       object Label60: TLabel
-        Left = 262
-        Height = 16
-        Top = 141
+        Left = 259
+        Height = 19
+        Top = 140
         Width = 11
         Caption = '['']'
         ParentColor = False
+        ParentFont = False
       end
       object Button2: TButton
-        Left = 182
+        Left = 180
         Height = 25
-        Top = 173
-        Width = 75
+        Top = 171
+        Width = 74
         Caption = 'OK'
         ModalResult = 1
+        ParentFont = False
         TabOrder = 8
       end
       object Label1: TLabel
         Left = 8
-        Height = 16
-        Top = 141
-        Width = 26
+        Height = 19
+        Top = 140
+        Width = 25
         Caption = 'FOV'
         ParentColor = False
+        ParentFont = False
       end
     end
   end

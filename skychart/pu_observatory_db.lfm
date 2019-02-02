@@ -1,193 +1,217 @@
 object f_observatory_db: Tf_observatory_db
   Left = 609
-  Height = 291
+  Height = 288
   Top = 71
-  Width = 488
+  Width = 483
   ActiveControl = countrylist
   Caption = 'f_observatory_db'
-  ClientHeight = 291
-  ClientWidth = 488
+  ClientHeight = 288
+  ClientWidth = 483
+  DesignTimePPI = 95
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '1.6.2.0'
-  Visible = False
   object obsname: TGroupBox
     Left = 8
-    Height = 248
+    Height = 245
     Top = 0
-    Width = 464
-    ClientHeight = 244
-    ClientWidth = 460
+    Width = 459
+    ClientHeight = 243
+    ClientWidth = 457
+    ParentFont = False
     TabOrder = 0
     object Label2: TLabel
-      Left = 328
-      Height = 15
-      Top = 85
-      Width = 20
+      Left = 325
+      Height = 19
+      Top = 84
+      Width = 17
       Caption = '+/-'
       ParentColor = False
+      ParentFont = False
     end
     object Label3: TLabel
-      Left = 428
-      Height = 15
-      Top = 85
-      Width = 25
+      Left = 424
+      Height = 19
+      Top = 84
+      Width = 24
       Caption = 'Km.'
       ParentColor = False
+      ParentFont = False
     end
     object citylist: TComboBox
       Left = 8
-      Height = 23
+      Height = 28
       Top = 41
-      Width = 233
+      Width = 231
       AutoComplete = True
       AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
+      Constraints.MaxHeight = 28
       ItemHeight = 0
       OnChange = citylistChange
+      ParentFont = False
       TabOrder = 1
       Text = '...'
     end
     object citysearch: TButton
-      Left = 374
+      Left = 370
       Height = 25
       Top = 41
-      Width = 76
+      Width = 75
       BorderSpacing.InnerBorder = 4
       Caption = 'Search'
       OnClick = citysearchClick
+      ParentFont = False
       TabOrder = 3
     end
     object countrylist: TComboBox
       Left = 8
-      Height = 25
+      Height = 28
       Top = 1
-      Width = 234
+      Width = 232
+      Constraints.MaxHeight = 28
       DropDownCount = 10
       ItemHeight = 0
       OnSelect = countrylistChange
+      ParentFont = False
       Style = csDropDownList
       TabOrder = 0
     end
     object cityfilter: TEdit
-      Left = 254
-      Height = 23
+      Left = 251
+      Height = 28
       Top = 41
-      Width = 104
+      Width = 103
+      Constraints.MaxHeight = 28
       OnKeyDown = cityfilterKeyDown
+      ParentFont = False
       TabOrder = 2
     end
     object downloadcity: TButton
-      Left = 164
+      Left = 162
       Height = 25
-      Top = 194
-      Width = 192
+      Top = 192
+      Width = 190
       BorderSpacing.InnerBorder = 4
       Caption = 'Download country details'
+      Constraints.MaxHeight = 28
       OnClick = downloadcityClick
+      ParentFont = False
       TabOrder = 13
     end
     object updcity: TButton
       Left = 8
       Height = 25
-      Top = 194
-      Width = 72
+      Top = 192
+      Width = 71
       BorderSpacing.InnerBorder = 4
       Caption = 'Update'
+      Constraints.MaxHeight = 28
       OnClick = updcityClick
+      ParentFont = False
       TabOrder = 11
     end
     object delcity: TButton
-      Left = 84
+      Left = 83
       Height = 25
-      Top = 194
-      Width = 72
+      Top = 192
+      Width = 71
       BorderSpacing.InnerBorder = 4
       Caption = 'Delete'
+      Constraints.MaxHeight = 28
       OnClick = delcityClick
+      ParentFont = False
       TabOrder = 12
     end
     object LocCode: TEdit
       Cursor = crHandPoint
-      Left = 133
-      Height = 23
-      Top = 83
-      Width = 108
+      Left = 132
+      Height = 28
+      Top = 82
+      Width = 107
       Color = clBtnFace
+      Constraints.MaxHeight = 28
       OnClick = LocCodeClick
+      ParentFont = False
       ParentShowHint = False
       ReadOnly = True
       ShowHint = True
       TabOrder = 4
     end
     object vicinity: TButton
-      Left = 254
+      Left = 251
       Height = 25
-      Top = 81
-      Width = 70
+      Top = 80
+      Width = 69
       BorderSpacing.InnerBorder = 4
       Caption = 'Vicinity'
+      Constraints.MaxHeight = 28
       OnClick = vicinityClick
+      ParentFont = False
       TabOrder = 5
     end
     object vicinityrangeEdit: TEdit
-      Left = 353
-      Height = 23
-      Top = 83
-      Width = 56
+      Left = 349
+      Height = 28
+      Top = 82
+      Width = 55
+      Constraints.MaxHeight = 28
+      ParentFont = False
       TabOrder = 6
     end
     object vicinityrange: TUpDown
-      Left = 409
-      Height = 23
-      Top = 83
+      Left = 404
+      Height = 28
+      Top = 82
       Width = 17
       Associate = vicinityrangeEdit
       Max = 500
       Min = 0
       Position = 10
       TabOrder = 7
-      Wrap = False
     end
     object Memo1: TMemo
       Left = 8
-      Height = 64
-      Top = 114
-      Width = 425
+      Height = 63
+      Top = 113
+      Width = 421
+      ParentFont = False
       TabOrder = 8
       TabStop = False
       Visible = False
     end
     object Label1: TLabel
       Left = 8
-      Height = 15
-      Top = 85
-      Width = 113
+      Height = 19
+      Top = 84
+      Width = 107
       Caption = 'Designation Code'
       ParentColor = False
+      ParentFont = False
     end
     object Latitude: TGroupBox
       Left = 8
-      Height = 68
-      Top = 114
-      Width = 185
+      Height = 67
+      Top = 113
+      Width = 183
       Caption = 'Latitude'
-      ClientHeight = 51
+      ClientHeight = 47
       ClientWidth = 181
+      ParentFont = False
       TabOrder = 9
       object Label58: TLabel
         Left = 4
-        Height = 15
+        Height = 19
         Top = 4
-        Width = 47
+        Width = 44
         Caption = 'Degree'
         ParentColor = False
+        ParentFont = False
       end
       object hemis: TComboBox
-        Left = 108
+        Left = 104
         Height = 22
         Top = 19
-        Width = 70
+        Width = 72
         AutoCompleteText = [cbactSearchAscending]
         AutoSize = False
         ItemHeight = 0
@@ -197,16 +221,19 @@ object f_observatory_db: Tf_observatory_db
           'South'
         )
         OnChange = latdegChange
+        ParentFont = False
         TabOrder = 3
         Text = 'North'
       end
       object latdeg: TLongEdit
         Left = 4
-        Height = 23
+        Height = 26
         Hint = '0..90'
         Top = 20
         Width = 33
+        Constraints.MaxHeight = 26
         MaxLength = 2
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
@@ -216,11 +243,13 @@ object f_observatory_db: Tf_observatory_db
       end
       object latmin: TLongEdit
         Left = 44
-        Height = 23
+        Height = 26
         Hint = '0..59'
         Top = 20
         Width = 25
+        Constraints.MaxHeight = 26
         MaxLength = 2
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
@@ -229,12 +258,14 @@ object f_observatory_db: Tf_observatory_db
         OnExit = latdegChange
       end
       object latsec: TLongEdit
-        Left = 76
-        Height = 23
+        Left = 75
+        Height = 26
         Hint = '0..59'
         Top = 20
         Width = 25
+        Constraints.MaxHeight = 26
         MaxLength = 2
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 2
@@ -244,27 +275,29 @@ object f_observatory_db: Tf_observatory_db
       end
     end
     object Longitude: TGroupBox
-      Left = 206
-      Height = 68
-      Top = 114
-      Width = 185
+      Left = 204
+      Height = 67
+      Top = 113
+      Width = 183
       Caption = 'Longitude'
-      ClientHeight = 51
+      ClientHeight = 47
       ClientWidth = 181
+      ParentFont = False
       TabOrder = 10
       object Label61: TLabel
         Left = 4
-        Height = 15
+        Height = 19
         Top = 4
-        Width = 47
+        Width = 44
         Caption = 'Degree'
         ParentColor = False
+        ParentFont = False
       end
       object long: TComboBox
-        Left = 108
+        Left = 104
         Height = 22
         Top = 19
-        Width = 70
+        Width = 72
         AutoCompleteText = [cbactSearchAscending]
         AutoSize = False
         ItemHeight = 0
@@ -274,16 +307,19 @@ object f_observatory_db: Tf_observatory_db
           'East'
         )
         OnChange = longdegChange
+        ParentFont = False
         TabOrder = 3
         Text = 'East'
       end
       object longdeg: TLongEdit
         Left = 4
-        Height = 23
+        Height = 26
         Hint = '0..180'
         Top = 20
         Width = 33
+        Constraints.MaxHeight = 26
         MaxLength = 4
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
@@ -293,11 +329,13 @@ object f_observatory_db: Tf_observatory_db
       end
       object longmin: TLongEdit
         Left = 44
-        Height = 23
+        Height = 26
         Hint = '0..59'
         Top = 20
         Width = 25
+        Constraints.MaxHeight = 26
         MaxLength = 2
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
@@ -306,12 +344,14 @@ object f_observatory_db: Tf_observatory_db
         OnExit = longdegChange
       end
       object longsec: TLongEdit
-        Left = 76
-        Height = 23
+        Left = 75
+        Height = 26
         Hint = '0..59'
         Top = 20
         Width = 25
+        Constraints.MaxHeight = 26
         MaxLength = 2
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 2
@@ -322,22 +362,24 @@ object f_observatory_db: Tf_observatory_db
     end
   end
   object Button1: TButton
-    Left = 248
+    Left = 245
     Height = 25
-    Top = 256
-    Width = 75
+    Top = 253
+    Width = 74
     Caption = 'OK'
     ModalResult = 1
+    ParentFont = False
     TabOrder = 1
   end
   object Button2: TButton
-    Left = 368
+    Left = 364
     Height = 25
-    Top = 256
-    Width = 75
+    Top = 253
+    Width = 74
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
+    ParentFont = False
     TabOrder = 2
   end
   object DownloadDialog1: TDownloadDialog
@@ -347,6 +389,6 @@ object f_observatory_db: Tf_observatory_db
     ConfirmDownload = True
     QuickCancel = False
     left = 24
-    top = 248
+    top = 245
   end
 end

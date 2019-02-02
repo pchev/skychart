@@ -73,6 +73,7 @@ type
     property Text: string read ReadText;
     property Enabled: boolean read GetEnabled write SetEnabled;
     property OnChange: TNotifyEvent read FOnChange write FOnChange;
+    property Constraints;
     property Font;
     property Hint;
     property ParentColor;
@@ -368,13 +369,14 @@ var
   dsize, msize, lsize: integer;
 begin
   inherited Create(Aowner);
+  Constraints.MaxHeight:=28;
   lockchange := True;
   Caption := '';
   BevelOuter := bvNone;
   Fkind := RA;
   dsize := 40; //Canvas.TextWidth('+000')+2;
   msize := 30; //Canvas.TextWidth('00')+2;
-  lsize := 20; //Canvas.TextWidth('M')+2;
+  lsize := 15; //Canvas.TextWidth('M')+2;
   EditDeg := TEdit.Create(self);
   EditMin := TEdit.Create(self);
   EditSec := TEdit.Create(self);
@@ -382,9 +384,12 @@ begin
   LabelMin := TLabel.Create(self);
   LabelSec := TLabel.Create(self);
   ArrowDeg := TMouseUpDown.Create(self);
+  ArrowDeg.Constraints.MaxHeight := Constraints.MaxHeight-2;
   ArrowDeg.Max := 360;
   ArrowMin := TMouseUpDown.Create(self);
+  ArrowMin.Constraints.MaxHeight := Constraints.MaxHeight-2;
   ArrowSec := TMouseUpDown.Create(self);
+  ArrowSec.Constraints.MaxHeight := Constraints.MaxHeight-2;
   EditDeg.Parent := self;
   EditMin.Parent := self;
   EditSec.Parent := self;
@@ -407,6 +412,7 @@ begin
   EditDeg.Top := 0;
   EditDeg.Left := 0;
   EditDeg.Width := dsize;
+  EditDeg.Constraints.MaxHeight := Constraints.MaxHeight-2;
   ArrowDeg.Left := EditDeg.Left + EditDeg.Width;
   LabelDeg.Caption := 'h';
   LabelDeg.Top := (EditDeg.Height - LabelDeg.Height) div 2;
@@ -415,6 +421,7 @@ begin
   EditMin.Top := 0;
   EditMin.Left := LabelDeg.Left + lsize;
   EditMin.Width := msize;
+  EditMin.Constraints.MaxHeight := Constraints.MaxHeight-2;
   ArrowMin.Left := EditMin.Left + EditMin.Width;
   LabelMin.Caption := 'm';
   LabelMin.Top := LabelDeg.Top;
@@ -423,6 +430,7 @@ begin
   EditSec.Top := 0;
   EditSec.Left := LabelMin.Left + lsize;
   EditSec.Width := msize;
+  EditSec.Constraints.MaxHeight := Constraints.MaxHeight-2;
   ArrowSec.Left := EditSec.Left + EditSec.Width;
   LabelSec.Caption := 's';
   LabelSec.Top := LabelDeg.Top;

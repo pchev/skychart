@@ -156,6 +156,7 @@ type
     property labels: TDatesLabelsArray read Flabels write Flabels;
   published
     property ReadOnly default True;
+    property Constraints;
     property Caption: string read Fcaption write Fcaption;
     property JD: double read savejd write SetJD;
     property OnChange;
@@ -878,14 +879,15 @@ end;
 
 constructor TTimePicker.Create(Aowner: TComponent);
 var
-  dsize, lsize: integer;
+  dsize, hsize, lsize: integer;
 begin
   inherited Create(Aowner);
   lockchange := True;
   Caption := '';
   BevelOuter := bvNone;
-  dsize := 25;
-  lsize := 10;
+  dsize := 30;
+  hsize:=26;
+  lsize := 8;
   EditH := TLongEdit.Create(self);
   EditM := TLongEdit.Create(self);
   EditS := TLongEdit.Create(self);
@@ -907,6 +909,9 @@ begin
   EditH.Top := 0;
   EditH.Left := 0;
   EditH.Width := dsize;
+  EditH.Height := hsize;
+  EditH.Constraints.MaxHeight:=hsize;
+  EditH.Constraints.MaxWidth:=dsize;
   LabelH.Caption := ':';
   LabelH.Top := (EditH.Height - LabelH.Height) div 2;
   LabelH.Left := EditH.Left + EditH.Width + 2;
@@ -916,6 +921,9 @@ begin
   EditM.Top := 0;
   EditM.Left := LabelH.Left + lsize;
   EditM.Width := dsize;
+  EditM.Height := hsize;
+  EditM.Constraints.MaxHeight:=hsize;
+  EditM.Constraints.MaxWidth:=dsize;
   LabelM.Caption := ':';
   LabelM.Top := LabelH.Top;
   LabelM.Left := EditM.Left + EditM.Width + 2;
@@ -925,6 +933,9 @@ begin
   EditS.Top := 0;
   EditS.Left := LabelM.Left + lsize;
   EditS.Width := dsize;
+  EditS.Height := hsize;
+  EditS.Constraints.MaxHeight:=hsize;
+  EditS.Constraints.MaxWidth:=dsize;
   Height := EditH.Height;
   Width := EditS.Left + EditS.Width + 2;
   EditH.OnChange := @EditChange;

@@ -84,6 +84,7 @@ type
     { Published declarations }
     property BorderStyle;
     property Color;
+    property Constraints;
     property Cursor;
     property DragMode;
     property Enabled;
@@ -156,6 +157,7 @@ type
     property AsByte: byte read GetAsByte write SetAsByte;
   published
     { Published declarations }
+    property Constraints;
     property Value: longint read GetValue write SetValue;
     property MinValue: longint read FMinValue write SetMinValue default 0;
     property MaxValue: longint read FMaxValue write SetMaxValue default 0;
@@ -204,6 +206,7 @@ type
     property AsReal: real read GetAsReal write SetAsReal;
   published
     { Published declarations }
+    property Constraints;
     property Value: extended read GetValue write SetValue;
     property Decimals: word read FDecimals write SetDecimals default 1;
     property MinValue: extended read FMinValue write SetMinValue;

@@ -113,10 +113,11 @@ object pop_scope: Tpop_scope
     end
     object lat: TEdit
       Left = 16
-      Height = 30
+      Height = 28
       Top = 32
       Width = 88
       Color = clBtnFace
+      Constraints.MaxHeight = 28
       ReadOnly = True
       TabStop = False
       TabOrder = 0
@@ -124,10 +125,11 @@ object pop_scope: Tpop_scope
     end
     object long: TEdit
       Left = 115
-      Height = 30
+      Height = 28
       Top = 32
       Width = 84
       Color = clBtnFace
+      Constraints.MaxHeight = 28
       ReadOnly = True
       TabStop = False
       TabOrder = 1
@@ -152,9 +154,10 @@ object pop_scope: Tpop_scope
     end
     object elev: TEdit
       Left = 209
-      Height = 30
+      Height = 28
       Top = 32
       Width = 80
+      Constraints.MaxHeight = 28
       ReadOnly = True
       TabOrder = 2
       Text = '0'
@@ -256,9 +259,9 @@ object pop_scope: Tpop_scope
     end
     object ShowAltAz: TCheckBox
       Left = 8
-      Height = 21
+      Height = 23
       Top = 32
-      Width = 21
+      Width = 23
       TabOrder = 2
     end
     object ButtonTracking: TSpeedButton
@@ -307,23 +310,23 @@ object pop_scope: Tpop_scope
     Height = 162
     Top = 0
     Width = 305
-    ActivePage = ASCOMRemote
+    ActivePage = ASCOMLocal
     Align = alTop
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 3
     OnChanging = PageControl1Changing
     object ASCOMLocal: TTabSheet
       Caption = 'ASCOM Local'
-      ClientHeight = 132
+      ClientHeight = 130
       ClientWidth = 295
       object GroupBox1: TGroupBox
         Left = 0
-        Height = 132
+        Height = 130
         Top = 0
         Width = 295
         Align = alClient
         Caption = 'Driver Selection'
-        ClientHeight = 112
+        ClientHeight = 111
         ClientWidth = 293
         TabOrder = 0
         object ButtonSelect: TSpeedButton
@@ -360,19 +363,21 @@ object pop_scope: Tpop_scope
         end
         object Edit1: TEdit
           Left = 2
-          Height = 30
+          Height = 28
           Top = 15
           Width = 172
           Color = clBtnFace
+          Constraints.MaxHeight = 28
           ReadOnly = True
           TabStop = False
           TabOrder = 0
         end
         object ReadIntBox: TComboBox
           Left = 101
-          Height = 30
+          Height = 28
           Top = 52
           Width = 73
+          Constraints.MaxHeight = 28
           ItemHeight = 0
           ItemIndex = 2
           Items.Strings = (
@@ -398,7 +403,7 @@ object pop_scope: Tpop_scope
     end
     object ASCOMRemote: TTabSheet
       Caption = 'ASCOM Remote'
-      ClientHeight = 132
+      ClientHeight = 130
       ClientWidth = 295
       object Panel3: TPanel
         Left = 0
@@ -433,9 +438,10 @@ object pop_scope: Tpop_scope
         end
         object ARestHost: TEdit
           Left = 92
-          Height = 30
+          Height = 28
           Top = 32
           Width = 192
+          Constraints.MaxHeight = 28
           TabOrder = 1
           Text = '127.0.0.1'
         end
@@ -452,6 +458,7 @@ object pop_scope: Tpop_scope
           Height = 28
           Top = 96
           Width = 81
+          Constraints.MaxHeight = 28
           MaxValue = 65535
           MinValue = 1
           TabOrder = 2
@@ -470,6 +477,7 @@ object pop_scope: Tpop_scope
           Height = 28
           Top = 96
           Width = 68
+          Constraints.MaxHeight = 28
           MaxValue = 65535
           TabOrder = 3
         end

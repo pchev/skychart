@@ -146,6 +146,10 @@ begin
     Top := DoScaleY(Top);
     Width := DoScaleX(Width);
     Height := DoScaleY(Height);
+    Constraints.MaxHeight := DoScaleX(Constraints.MaxHeight);
+    Constraints.MaxWidth := DoScaleX(Constraints.MaxWidth);
+    Constraints.MinHeight := DoScaleX(Constraints.MinHeight);
+    Constraints.MinWidth := DoScaleX(Constraints.MinWidth);
   end;
 
   if Control is TToolBar then

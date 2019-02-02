@@ -1,96 +1,103 @@
 object f_edittoolbar: Tf_edittoolbar
   Left = 540
-  Height = 407
+  Height = 403
   Top = 124
-  Width = 550
+  Width = 544
   ActiveControl = ButtonOK
   Caption = 'f_edittoolbar'
-  ClientHeight = 407
-  ClientWidth = 550
+  ClientHeight = 403
+  ClientWidth = 544
+  DesignTimePPI = 95
   OnCreate = FormCreate
   OnResize = FormResize
-  LCLVersion = '1.6.2.0'
-  Visible = False
   object PanelBottom: TPanel
     Left = 0
     Height = 35
-    Top = 372
-    Width = 550
+    Top = 368
+    Width = 544
     Align = alBottom
     ClientHeight = 35
-    ClientWidth = 550
+    ClientWidth = 544
+    ParentFont = False
     TabOrder = 0
     object ButtonOK: TButton
-      Left = 368
+      Left = 364
       Height = 25
       Top = 4
-      Width = 75
+      Width = 74
       Caption = 'OK'
       OnClick = ButtonOKClick
+      ParentFont = False
       TabOrder = 0
     end
     object ButtonCancel: TButton
-      Left = 464
+      Left = 459
       Height = 25
       Top = 4
-      Width = 75
+      Width = 74
       Caption = 'Cancel'
       ModalResult = 2
+      ParentFont = False
       TabOrder = 1
     end
     object ButtonMini: TButton
       Left = 8
       Height = 25
       Top = 4
-      Width = 75
+      Width = 74
       Caption = 'Minimal'
       OnClick = ButtonMiniClick
+      ParentFont = False
       TabOrder = 2
     end
     object ButtonStd: TButton
-      Left = 96
+      Left = 95
       Height = 25
       Top = 4
-      Width = 75
+      Width = 74
       Caption = 'Standard'
       OnClick = ButtonStdClick
+      ParentFont = False
       TabOrder = 3
     end
     object ButtonEmpty: TButton
-      Left = 184
+      Left = 182
       Height = 25
       Top = 4
-      Width = 80
+      Width = 79
       Caption = 'Empty'
       OnClick = ButtonEmptyClick
+      ParentFont = False
       TabOrder = 4
     end
     object ButtonHelp: TButton
-      Left = 280
+      Left = 277
       Height = 25
       Top = 4
-      Width = 75
+      Width = 74
       Caption = 'Help'
       OnClick = ButtonHelpClick
+      ParentFont = False
       TabOrder = 5
     end
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 322
+    Height = 319
     Top = 0
-    Width = 248
+    Width = 246
     Align = alClient
-    ClientHeight = 322
-    ClientWidth = 248
+    ClientHeight = 319
+    ClientWidth = 246
+    ParentFont = False
     TabOrder = 1
     object ActionTreeView: TTreeView
       Left = 1
-      Height = 252
+      Height = 249
       Top = 35
-      Width = 246
+      Width = 244
       Align = alClient
-      DefaultItemHeight = 18
+      ParentFont = False
       ReadOnly = True
       ScrollBars = ssAutoBoth
       TabOrder = 0
@@ -99,17 +106,18 @@ object f_edittoolbar: Tf_edittoolbar
     object PanelLbot: TPanel
       Left = 1
       Height = 34
-      Top = 287
-      Width = 246
+      Top = 284
+      Width = 244
       Align = alBottom
       ClientHeight = 34
-      ClientWidth = 246
+      ClientWidth = 244
+      ParentFont = False
       TabOrder = 1
       object ButtonExpand: TBitBtn
         Left = 47
         Height = 30
         Top = 1
-        Width = 55
+        Width = 54
         Glyph.Data = {
           7A030000424D7A030000000000007A0000006C00000010000000100000000100
           18000000000000030000120B0000120B00000000000000000000424752730000
@@ -142,15 +150,16 @@ object f_edittoolbar: Tf_edittoolbar
         }
         GlyphShowMode = gsmAlways
         OnClick = ButtonExpandClick
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
       end
       object ButtonCollapse: TBitBtn
-        Left = 143
+        Left = 142
         Height = 30
         Top = 1
-        Width = 55
+        Width = 54
         Glyph.Data = {
           7A030000424D7A030000000000007A0000006C00000010000000100000000100
           18000000000000030000120B0000120B00000000000000000000424752730000
@@ -183,6 +192,7 @@ object f_edittoolbar: Tf_edittoolbar
         }
         GlyphShowMode = gsmAlways
         OnClick = ButtonCollapseClick
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
@@ -192,29 +202,32 @@ object f_edittoolbar: Tf_edittoolbar
       Left = 1
       Height = 34
       Top = 1
-      Width = 246
+      Width = 244
       Align = alTop
       ClientHeight = 34
-      ClientWidth = 246
+      ClientWidth = 244
+      ParentFont = False
       TabOrder = 2
       object Label1: TLabel
         Left = 16
-        Height = 15
+        Height = 19
         Top = 7
-        Width = 106
+        Width = 99
         Caption = 'Available actions'
         ParentColor = False
+        ParentFont = False
       end
     end
   end
   object PanelCentre: TPanel
-    Left = 248
-    Height = 322
+    Left = 246
+    Height = 319
     Top = 0
-    Width = 55
+    Width = 54
     Align = alRight
-    ClientHeight = 322
-    ClientWidth = 55
+    ClientHeight = 319
+    ClientWidth = 54
+    ParentFont = False
     TabOrder = 2
     object ButtonAdd: TBitBtn
       Left = 6
@@ -253,6 +266,7 @@ object f_edittoolbar: Tf_edittoolbar
       }
       GlyphShowMode = gsmAlways
       OnClick = ButtonAddClick
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
@@ -260,7 +274,7 @@ object f_edittoolbar: Tf_edittoolbar
     object ButtonDel: TBitBtn
       Left = 6
       Height = 30
-      Top = 75
+      Top = 74
       Width = 42
       Glyph.Data = {
         7A030000424D7A030000000000007A0000006C00000010000000100000000100
@@ -294,6 +308,7 @@ object f_edittoolbar: Tf_edittoolbar
       }
       GlyphShowMode = gsmAlways
       OnClick = ButtonDelClick
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
@@ -301,7 +316,7 @@ object f_edittoolbar: Tf_edittoolbar
     object ButtonUp: TBitBtn
       Left = 6
       Height = 30
-      Top = 144
+      Top = 142
       Width = 42
       Glyph.Data = {
         7A030000424D7A030000000000007A0000006C00000010000000100000000100
@@ -335,6 +350,7 @@ object f_edittoolbar: Tf_edittoolbar
       }
       GlyphShowMode = gsmAlways
       OnClick = ButtonUpClick
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
@@ -342,7 +358,7 @@ object f_edittoolbar: Tf_edittoolbar
     object ButtonDown: TBitBtn
       Left = 6
       Height = 30
-      Top = 184
+      Top = 182
       Width = 42
       Glyph.Data = {
         7A030000424D7A030000000000007A0000006C00000010000000100000000100
@@ -376,6 +392,7 @@ object f_edittoolbar: Tf_edittoolbar
       }
       GlyphShowMode = gsmAlways
       OnClick = ButtonDownClick
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 3
@@ -383,7 +400,7 @@ object f_edittoolbar: Tf_edittoolbar
     object ButtonClear: TBitBtn
       Left = 6
       Height = 30
-      Top = 288
+      Top = 285
       Width = 42
       Glyph.Data = {
         7A030000424D7A030000000000007A0000006C00000010000000100000000100
@@ -417,45 +434,51 @@ object f_edittoolbar: Tf_edittoolbar
       }
       GlyphShowMode = gsmAlways
       OnClick = ButtonClearClick
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 4
     end
   end
   object PanelRight: TPanel
-    Left = 303
-    Height = 322
+    Left = 300
+    Height = 319
     Top = 0
-    Width = 247
+    Width = 244
     Align = alRight
-    ClientHeight = 322
-    ClientWidth = 247
+    ClientHeight = 319
+    ClientWidth = 244
+    ParentFont = False
     TabOrder = 3
     object editbarPanel: TPanel
       Left = 1
-      Height = 252
+      Height = 249
       Top = 35
-      Width = 245
+      Width = 242
       Align = alClient
       BevelOuter = bvNone
+      ParentFont = False
       TabOrder = 0
     end
     object PanelRtop: TPanel
       Left = 1
       Height = 34
       Top = 1
-      Width = 245
+      Width = 242
       Align = alTop
       ClientHeight = 34
-      ClientWidth = 245
+      ClientWidth = 242
+      ParentFont = False
       TabOrder = 1
       object ComboBox1: TComboBox
         Left = 8
-        Height = 25
+        Height = 28
         Top = 4
-        Width = 230
+        Width = 228
+        Constraints.MaxHeight = 28
         ItemHeight = 0
         OnChange = ComboBox1Change
+        ParentFont = False
         Style = csDropDownList
         TabOrder = 0
       end
@@ -463,14 +486,15 @@ object f_edittoolbar: Tf_edittoolbar
     object PanelRbot: TPanel
       Left = 1
       Height = 34
-      Top = 287
-      Width = 245
+      Top = 284
+      Width = 242
       Align = alBottom
       ClientHeight = 34
-      ClientWidth = 245
+      ClientWidth = 242
+      ParentFont = False
       TabOrder = 2
       object ButtonLoad: TBitBtn
-        Left = 136
+        Left = 135
         Height = 30
         Top = 1
         Width = 42
@@ -512,6 +536,7 @@ object f_edittoolbar: Tf_edittoolbar
         }
         GlyphShowMode = gsmAlways
         OnClick = ButtonLoadClick
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
@@ -559,6 +584,7 @@ object f_edittoolbar: Tf_edittoolbar
         }
         GlyphShowMode = gsmAlways
         OnClick = ButtonSaveClick
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
@@ -567,19 +593,22 @@ object f_edittoolbar: Tf_edittoolbar
   end
   object Panel1: TPanel
     Left = 0
-    Height = 50
-    Top = 322
-    Width = 550
+    Height = 49
+    Top = 319
+    Width = 544
     Align = alBottom
-    ClientHeight = 50
-    ClientWidth = 550
+    ClientHeight = 49
+    ClientWidth = 544
+    ParentFont = False
     TabOrder = 4
     object BtnSize: TComboBox
-      Left = 130
-      Height = 23
+      Left = 129
+      Height = 28
       Top = 10
-      Width = 64
+      Width = 79
+      Constraints.MaxHeight = 28
       ItemHeight = 0
+      ItemIndex = 0
       Items.Strings = (
         '24'
         '28'
@@ -588,37 +617,40 @@ object f_edittoolbar: Tf_edittoolbar
         '48'
       )
       OnChange = BtnSizeChange
+      ParentFont = False
       TabOrder = 0
       Text = '24'
     end
     object Label2: TLabel
       Left = 8
-      Height = 15
+      Height = 19
       Top = 16
-      Width = 72
+      Width = 68
       Caption = 'Button size'
       ParentColor = False
+      ParentFont = False
     end
     object BtnText: TCheckBox
-      Left = 250
+      Left = 247
       Height = 23
       Top = 12
-      Width = 138
+      Width = 134
       Caption = 'Show button text '
       OnChange = BtnTextChange
+      ParentFont = False
       TabOrder = 1
     end
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = '.cdctb'
     Filter = 'CdC toolbar|*.cdctb|All Files|*.*'
-    left = 448
-    top = 232
+    left = 443
+    top = 230
   end
   object SaveDialog1: TSaveDialog
     DefaultExt = '.cdctb'
     Filter = 'CdC toolbar|*.cdctb|All Files|*.*'
-    left = 352
-    top = 232
+    left = 348
+    top = 230
   end
 end

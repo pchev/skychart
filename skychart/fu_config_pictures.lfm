@@ -1,29 +1,30 @@
 object f_config_pictures: Tf_config_pictures
   Left = 0
-  Height = 530
+  Height = 524
   Top = 0
-  Width = 508
-  ClientHeight = 530
-  ClientWidth = 508
+  Width = 503
+  ClientHeight = 524
+  ClientWidth = 503
+  DesignTimePPI = 95
   ParentFont = False
   TabOrder = 0
   DesignTop = 23
   object MainPanel: TPanel
     Left = 0
-    Height = 530
+    Height = 524
     Top = 0
-    Width = 508
+    Width = 503
     Align = alClient
-    ClientHeight = 530
-    ClientWidth = 508
+    ClientHeight = 524
+    ClientWidth = 503
     ParentColor = False
     ParentFont = False
     TabOrder = 0
     object PageControl1: TPageControl
       Left = 1
-      Height = 528
+      Height = 522
       Top = 1
-      Width = 506
+      Width = 501
       ActivePage = Page4
       Align = alClient
       ParentFont = False
@@ -34,14 +35,14 @@ object f_config_pictures: Tf_config_pictures
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
         Caption = 'Objects'
-        ClientHeight = 544
-        ClientWidth = 520
+        ClientHeight = 518
+        ClientWidth = 491
         ParentFont = False
         object Label3: TLabel
           Left = 17
-          Height = 97
-          Top = 62
-          Width = 403
+          Height = 96
+          Top = 61
+          Width = 399
           AutoSize = False
           Caption = 'The image directory contain sub-directories with the same name as the DSO catalog. Each sub-directory contain FITS files with the name of the catalog objects.  This images are used to replace the DSO symbole on the map'
           ParentColor = False
@@ -50,19 +51,19 @@ object f_config_pictures: Tf_config_pictures
         end
         object ProgressPanel: TPanel
           Left = 17
-          Height = 95
-          Top = 159
-          Width = 405
-          ClientHeight = 95
-          ClientWidth = 405
+          Height = 94
+          Top = 157
+          Width = 401
+          ClientHeight = 94
+          ClientWidth = 401
           ParentFont = False
           TabOrder = 2
           Visible = False
           object ProgressCat: TLabel
-            Left = 189
-            Height = 16
+            Left = 187
+            Height = 19
             Top = 8
-            Width = 34
+            Width = 35
             Caption = 'Other'
             ParentColor = False
             ParentFont = False
@@ -71,61 +72,61 @@ object f_config_pictures: Tf_config_pictures
             Left = 24
             Height = 17
             Top = 40
-            Width = 365
+            Width = 361
             ParentFont = False
             TabOrder = 0
           end
         end
         object Label50: TLabel
           Left = 17
-          Height = 16
+          Height = 19
           Top = 2
-          Width = 212
+          Width = 208
           Caption = 'Display image of cataloged objects'
           ParentColor = False
           ParentFont = False
         end
         object Label264: TLabel
           Left = 16
-          Height = 16
+          Height = 19
           Top = 36
-          Width = 96
+          Width = 97
           Caption = 'Image Directory'
           ParentColor = False
           ParentFont = False
         end
         object Panel11: TPanel
           Left = 17
-          Height = 145
-          Top = 257
-          Width = 405
-          ClientHeight = 145
-          ClientWidth = 405
+          Height = 143
+          Top = 254
+          Width = 401
+          ClientHeight = 143
+          ClientWidth = 401
           ParentFont = False
           TabOrder = 3
           object Label266: TLabel
             Left = 24
-            Height = 16
+            Height = 19
             Top = 35
-            Width = 66
+            Width = 67
             Caption = 'Luminosity'
             ParentColor = False
             ParentFont = False
           end
           object Label268: TLabel
             Left = 24
-            Height = 16
-            Top = 92
+            Height = 19
+            Top = 91
             Width = 52
             Caption = 'Contrast'
             ParentColor = False
             ParentFont = False
           end
           object ImgLumBar: TTrackBar
-            Left = 121
-            Height = 43
+            Left = 120
+            Height = 51
             Top = 15
-            Width = 224
+            Width = 222
             Frequency = 5
             Max = 100
             Min = -100
@@ -136,10 +137,10 @@ object f_config_pictures: Tf_config_pictures
             TabOrder = 0
           end
           object ImgContrastBar: TTrackBar
-            Left = 121
-            Height = 43
-            Top = 72
-            Width = 224
+            Left = 120
+            Height = 51
+            Top = 71
+            Width = 222
             Frequency = 5
             Max = 100
             Min = -100
@@ -150,10 +151,10 @@ object f_config_pictures: Tf_config_pictures
             TabOrder = 1
           end
           object ResetLum: TButton
-            Left = 194
+            Left = 192
             Height = 25
-            Top = 117
-            Width = 76
+            Top = 116
+            Width = 75
             BorderSpacing.InnerBorder = 4
             Caption = 'Reset'
             OnClick = ResetLumClick
@@ -163,21 +164,22 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowImagesBox: TCheckBox
           Left = 31
-          Height = 18
-          Top = 409
-          Width = 227
+          Height = 23
+          Top = 405
+          Width = 226
           Caption = 'Show object pictures on the chart'
           OnClick = ShowImagesBoxClick
           ParentFont = False
           TabOrder = 4
         end
         object imgpath: TDirectoryEdit
-          Left = 153
-          Height = 22
+          Left = 151
+          Height = 28
           Top = 29
-          Width = 267
+          Width = 264
           ShowHidden = False
           ButtonWidth = 23
+          Constraints.MaxHeight = 28
           NumGlyphs = 1
           MaxLength = 0
           ParentFont = False
@@ -186,18 +188,18 @@ object f_config_pictures: Tf_config_pictures
         end
         object Panel3: TPanel
           Left = 17
-          Height = 95
-          Top = 159
-          Width = 405
-          ClientHeight = 95
-          ClientWidth = 405
+          Height = 94
+          Top = 157
+          Width = 401
+          ClientHeight = 94
+          ClientWidth = 401
           ParentFont = False
           TabOrder = 1
           object nimages: TLabel
             Left = 24
-            Height = 54
+            Height = 53
             Top = 8
-            Width = 357
+            Width = 353
             AutoSize = False
             Caption = 'nimages'
             ParentColor = False
@@ -205,10 +207,10 @@ object f_config_pictures: Tf_config_pictures
             WordWrap = True
           end
           object ScanImages: TButton
-            Left = 128
+            Left = 127
             Height = 25
-            Top = 65
-            Width = 158
+            Top = 64
+            Width = 156
             BorderSpacing.InnerBorder = 4
             Caption = 'Scan directory'
             OnClick = ScanImagesClick
@@ -226,7 +228,7 @@ object f_config_pictures: Tf_config_pictures
           Left = 7
           Height = 19
           Top = 0
-          Width = 118
+          Width = 119
           Caption = 'Background Picture'
           ParentColor = False
           ParentFont = False
@@ -243,7 +245,7 @@ object f_config_pictures: Tf_config_pictures
         object backimginfo: TLabel
           Left = 13
           Height = 19
-          Top = 191
+          Top = 189
           Width = 24
           Caption = '????'
           ParentColor = False
@@ -251,16 +253,16 @@ object f_config_pictures: Tf_config_pictures
         end
         object Image1: TImage
           Left = 13
-          Height = 279
-          Top = 207
-          Width = 470
+          Height = 276
+          Top = 205
+          Width = 465
           Stretch = True
         end
         object ShowBackImg: TCheckBox
-          Left = 96
-          Height = 21
-          Top = 65
-          Width = 127
+          Left = 95
+          Height = 23
+          Top = 64
+          Width = 129
           Caption = 'Show this picture'
           OnClick = ShowBackImgClick
           ParentFont = False
@@ -268,18 +270,18 @@ object f_config_pictures: Tf_config_pictures
         end
         object Panel1: TPanel
           Left = 7
-          Height = 89
-          Top = 94
-          Width = 486
-          ClientHeight = 89
-          ClientWidth = 486
+          Height = 88
+          Top = 93
+          Width = 481
+          ClientHeight = 88
+          ClientWidth = 481
           ParentFont = False
           TabOrder = 3
           object ImgTrBar2: TTrackBar
-            Left = 307
-            Height = 43
+            Left = 304
+            Height = 51
             Top = 20
-            Width = 141
+            Width = 140
             Frequency = 5
             Max = 250
             Min = 10
@@ -291,7 +293,7 @@ object f_config_pictures: Tf_config_pictures
             TabOrder = 2
           end
           object Label1: TLabel
-            Left = 55
+            Left = 54
             Height = 19
             Top = 6
             Width = 67
@@ -300,7 +302,7 @@ object f_config_pictures: Tf_config_pictures
             ParentFont = False
           end
           object Label2: TLabel
-            Left = 205
+            Left = 203
             Height = 19
             Top = 6
             Width = 52
@@ -310,9 +312,9 @@ object f_config_pictures: Tf_config_pictures
           end
           object ImgLumBar2: TTrackBar
             Left = 8
-            Height = 43
+            Height = 51
             Top = 20
-            Width = 141
+            Width = 140
             Frequency = 5
             Max = 100
             Min = -100
@@ -324,10 +326,10 @@ object f_config_pictures: Tf_config_pictures
             TabOrder = 0
           end
           object ImgContrastBar2: TTrackBar
-            Left = 154
-            Height = 43
+            Left = 152
+            Height = 51
             Top = 20
-            Width = 141
+            Width = 140
             Frequency = 5
             Max = 100
             Min = -100
@@ -339,30 +341,31 @@ object f_config_pictures: Tf_config_pictures
             TabOrder = 1
           end
           object Label4: TLabel
-            Left = 340
+            Left = 336
             Height = 19
             Top = 4
-            Width = 81
+            Width = 80
             Caption = 'Transparency'
             ParentColor = False
             ParentFont = False
           end
           object Button5: TButton
-            Left = 329
+            Left = 326
             Height = 25
-            Top = 57
-            Width = 97
+            Top = 56
+            Width = 96
             Caption = 'Reset'
             OnClick = Button5Click
             ParentFont = False
             TabOrder = 4
           end
           object ImgITT2: TComboBox
-            Left = 157
-            Height = 31
-            Top = 57
-            Width = 138
-            ItemHeight = 19
+            Left = 155
+            Height = 28
+            Top = 56
+            Width = 137
+            Constraints.MaxHeight = 28
+            ItemHeight = 0
             ItemIndex = 1
             Items.Strings = (
               'Linear'
@@ -378,7 +381,7 @@ object f_config_pictures: Tf_config_pictures
           object Label9: TLabel
             Left = 14
             Height = 19
-            Top = 61
+            Top = 60
             Width = 107
             Caption = 'Visualisation scale'
             ParentColor = False
@@ -386,16 +389,17 @@ object f_config_pictures: Tf_config_pictures
           end
         end
         object backimg: TFileNameEdit
-          Left = 96
-          Height = 31
+          Left = 95
+          Height = 28
           Top = 37
-          Width = 370
+          Width = 366
           OnAcceptFileName = backimgAcceptFileName
           DialogOptions = []
           Filter = 'FITS Files|*.fit; *.fits; *.fts|All|*.*'
           FilterIndex = 0
           HideDirectories = False
           ButtonWidth = 23
+          Constraints.MaxHeight = 28
           NumGlyphs = 1
           MaxLength = 0
           ParentFont = False
@@ -406,17 +410,17 @@ object f_config_pictures: Tf_config_pictures
           Left = 7
           Height = 16
           Top = 17
-          Width = 490
+          Width = 485
           AutoSize = False
           Caption = 'Show a single picture on the map.'
           ParentColor = False
           ParentFont = False
         end
         object Header1: TButton
-          Left = 361
+          Left = 357
           Height = 25
-          Top = 65
-          Width = 131
+          Top = 64
+          Width = 130
           Caption = 'View header'
           OnClick = Header1Click
           ParentFont = False
@@ -430,30 +434,31 @@ object f_config_pictures: Tf_config_pictures
         ParentFont = False
         object GroupBox1: TGroupBox
           Left = 4
-          Height = 70
+          Height = 69
           Top = 8
-          Width = 489
+          Width = 484
           Caption = 'Online DSS'
-          ClientHeight = 51
-          ClientWidth = 479
+          ClientHeight = 49
+          ClientWidth = 482
           ParentFont = False
           TabOrder = 0
           object OnlineDSS: TCheckBox
             Left = 8
-            Height = 21
+            Height = 23
             Top = 20
-            Width = 224
+            Width = 228
             Caption = 'Use online DSS instead of RealSky'
             OnChange = OnlineDSSChange
             ParentFont = False
             TabOrder = 0
           end
           object OnlineDSSList: TComboBox
-            Left = 295
-            Height = 31
+            Left = 292
+            Height = 28
             Top = 20
-            Width = 178
-            ItemHeight = 19
+            Width = 176
+            Constraints.MaxHeight = 28
+            ItemHeight = 0
             OnSelect = OnlineDSSListChange
             ParentFont = False
             TabOrder = 1
@@ -462,49 +467,51 @@ object f_config_pictures: Tf_config_pictures
         end
         object GroupBox3: TGroupBox
           Left = 4
-          Height = 283
-          Top = 183
-          Width = 489
+          Height = 280
+          Top = 181
+          Width = 484
           Caption = 'RealSky®'
-          ClientHeight = 264
-          ClientWidth = 479
+          ClientHeight = 260
+          ClientWidth = 482
           ParentFont = False
           TabOrder = 2
           object Panel2: TPanel
             Left = 4
-            Height = 256
+            Height = 253
             Top = 4
-            Width = 475
-            ClientHeight = 256
-            ClientWidth = 475
+            Width = 470
+            ClientHeight = 253
+            ClientWidth = 470
             ParentFont = False
             TabOrder = 0
             object RealSkyNorth: TCheckBox
               Left = 6
-              Height = 21
+              Height = 23
               Top = 8
-              Width = 109
+              Width = 111
               Caption = 'RealSky North'
               OnClick = RealSkyNorthClick
               ParentFont = False
               TabOrder = 0
             end
             object realskymb: TLongEdit
-              Left = 334
-              Height = 31
-              Top = 223
-              Width = 66
+              Left = 331
+              Height = 28
+              Top = 221
+              Width = 65
               Color = clBtnFace
+              Constraints.MaxHeight = 28
               ParentFont = False
               ReadOnly = True
               TabOrder = 9
               Value = 0
             end
             object realskymax: TLongEdit
-              Left = 334
-              Height = 31
-              Top = 191
-              Width = 66
+              Left = 331
+              Height = 28
+              Top = 189
+              Width = 65
+              Constraints.MaxHeight = 28
               ParentFont = False
               TabOrder = 8
               OnChange = realskymaxChange
@@ -512,9 +519,9 @@ object f_config_pictures: Tf_config_pictures
             end
             object reallist: TCheckBox
               Left = 6
-              Height = 21
-              Top = 159
-              Width = 144
+              Height = 23
+              Top = 157
+              Width = 147
               Caption = 'Select plate from list'
               Checked = True
               OnClick = reallistClick
@@ -524,9 +531,9 @@ object f_config_pictures: Tf_config_pictures
             end
             object usesubsample: TCheckBox
               Left = 6
-              Height = 21
-              Top = 191
-              Width = 253
+              Height = 23
+              Top = 189
+              Width = 255
               Caption = 'Use subsampling to limit image size to'
               Checked = True
               OnClick = usesubsampleClick
@@ -535,10 +542,10 @@ object f_config_pictures: Tf_config_pictures
               TabOrder = 7
             end
             object DSS102CD: TCheckBox
-              Left = 198
-              Height = 21
+              Left = 196
+              Height = 23
               Top = 8
-              Width = 91
+              Width = 98
               Caption = '102 CD DSS'
               OnClick = DSS102CDClick
               ParentFont = False
@@ -546,57 +553,60 @@ object f_config_pictures: Tf_config_pictures
             end
             object RealSkySouth: TCheckBox
               Left = 6
-              Height = 21
+              Height = 23
               Top = 34
-              Width = 109
+              Width = 111
               Caption = 'RealSky South'
               OnClick = RealSkySouthClick
               ParentFont = False
               TabOrder = 2
             end
             object realskyfile: TEdit
-              Left = 198
-              Height = 31
-              Top = 127
-              Width = 171
+              Left = 196
+              Height = 28
+              Top = 126
+              Width = 169
+              Constraints.MaxHeight = 28
               OnChange = realskyfileChange
               ParentFont = False
               TabOrder = 5
               Text = 'images\$TEMP.FIT'
             end
             object realskydrive: TEdit
-              Left = 198
-              Height = 31
-              Top = 95
-              Width = 171
+              Left = 196
+              Height = 28
+              Top = 94
+              Width = 169
+              Constraints.MaxHeight = 28
               OnChange = realskydriveChange
               ParentFont = False
               TabOrder = 4
               Text = 'X:\'
             end
             object realskydir: TEdit
-              Left = 198
-              Height = 31
-              Top = 62
-              Width = 171
+              Left = 196
+              Height = 28
+              Top = 61
+              Width = 169
+              Constraints.MaxHeight = 28
               OnChange = realskydirChange
               ParentFont = False
               TabOrder = 3
               Text = 'cat\RealSky\'
             end
             object Label77: TLabel
-              Left = 415
+              Left = 411
               Height = 19
-              Top = 227
-              Width = 45
+              Top = 225
+              Width = 46
               Caption = 'MBytes'
               ParentColor = False
               ParentFont = False
             end
             object Label75: TLabel
-              Left = 415
+              Left = 411
               Height = 19
-              Top = 198
+              Top = 196
               Width = 34
               Caption = 'pixels'
               ParentColor = False
@@ -605,7 +615,7 @@ object f_config_pictures: Tf_config_pictures
             object Label74: TLabel
               Left = 11
               Height = 19
-              Top = 130
+              Top = 129
               Width = 85
               Caption = 'temporary file'
               ParentColor = False
@@ -614,8 +624,8 @@ object f_config_pictures: Tf_config_pictures
             object Label73: TLabel
               Left = 11
               Height = 19
-              Top = 98
-              Width = 105
+              Top = 97
+              Width = 108
               Caption = 'Data Files, CDrom'
               ParentColor = False
               ParentFont = False
@@ -623,7 +633,7 @@ object f_config_pictures: Tf_config_pictures
             object Label72: TLabel
               Left = 11
               Height = 19
-              Top = 65
+              Top = 64
               Width = 78
               Caption = 'Auxiliary files'
               ParentColor = False
@@ -634,7 +644,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 12
             Height = 19
             Top = 20
-            Width = 39
+            Width = 40
             Caption = 'Label6'
             ParentColor = False
             ParentFont = False
@@ -642,31 +652,32 @@ object f_config_pictures: Tf_config_pictures
         end
         object GroupBox2: TGroupBox
           Left = 4
-          Height = 89
-          Top = 86
-          Width = 489
+          Height = 88
+          Top = 85
+          Width = 484
           Caption = 'Download archive'
-          ClientHeight = 70
-          ClientWidth = 479
+          ClientHeight = 68
+          ClientWidth = 482
           ParentFont = False
           TabOrder = 1
           object ArchiveBox: TCheckBox
             Left = 8
-            Height = 21
+            Height = 23
             Top = 9
-            Width = 150
+            Width = 153
             Caption = 'Archive to directory : '
             OnChange = ArchiveBoxChange
             ParentFont = False
             TabOrder = 0
           end
           object ArchiveDirectory1: TDirectoryEdit
-            Left = 193
-            Height = 31
+            Left = 191
+            Height = 28
             Top = 10
-            Width = 259
+            Width = 256
             ShowHidden = False
             ButtonWidth = 23
+            Constraints.MaxHeight = 28
             NumGlyphs = 1
             MaxLength = 0
             ParentFont = False
@@ -675,9 +686,9 @@ object f_config_pictures: Tf_config_pictures
           end
           object ConfirmArchive: TCheckBox
             Left = 8
-            Height = 21
+            Height = 23
             Top = 41
-            Width = 275
+            Width = 279
             Caption = 'Confirmation prompt before to save a file.'
             OnChange = ConfirmArchiveChange
             ParentFont = False
@@ -687,35 +698,35 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page4: TTabSheet
         Caption = 'Image archive'
-        ClientHeight = 544
-        ClientWidth = 520
+        ClientHeight = 518
+        ClientWidth = 491
         ParentFont = False
         object StringGrid1: TStringGrid
           Left = 21
-          Height = 299
-          Top = 54
-          Width = 461
+          Height = 296
+          Top = 53
+          Width = 456
           ColCount = 4
           Columns = <          
             item
-              MaxSize = 202
+              MaxSize = 200
               Title.Caption = 'Active'
-              Width = 61
+              Width = 60
             end          
             item
-              MaxSize = 202
+              MaxSize = 200
               Title.Caption = 'Directory'
-              Width = 308
+              Width = 305
             end          
             item
-              MaxSize = 202
+              MaxSize = 200
               Title.Caption = ' '
               Width = 30
             end          
             item
-              MaxSize = 202
+              MaxSize = 200
               Title.Caption = 'Count'
-              Width = 56
+              Width = 55
             end>
           DefaultColWidth = 24
           DefaultRowHeight = 24
@@ -733,7 +744,7 @@ object f_config_pictures: Tf_config_pictures
         end
         object Label7: TLabel
           Left = 26
-          Height = 16
+          Height = 19
           Top = 17
           Width = 84
           Caption = 'Image archive'
@@ -741,21 +752,22 @@ object f_config_pictures: Tf_config_pictures
           ParentFont = False
         end
         object ScanArchive: TButton
-          Left = 345
+          Left = 341
           Height = 25
           Top = 13
-          Width = 129
+          Width = 128
           Caption = 'ScanArchive'
           OnClick = ScanArchiveClick
           ParentFont = False
           TabOrder = 0
         end
         object MaxImg: TComboBox
-          Left = 409
-          Height = 20
-          Top = 361
-          Width = 65
-          ItemHeight = 19
+          Left = 384
+          Height = 28
+          Top = 357
+          Width = 85
+          Constraints.MaxHeight = 28
+          ItemHeight = 0
           ItemIndex = 9
           Items.Strings = (
             '1'
@@ -776,28 +788,28 @@ object f_config_pictures: Tf_config_pictures
         end
         object Label8: TLabel
           Left = 26
-          Height = 16
-          Top = 365
-          Width = 309
+          Height = 19
+          Top = 361
+          Width = 313
           Caption = 'Maximum number of image to show simultaneously'
           ParentColor = False
           ParentFont = False
         end
         object ShowImageList: TCheckBox
           Left = 26
-          Height = 18
-          Top = 385
-          Width = 114
+          Height = 23
+          Top = 381
+          Width = 118
           Caption = 'ShowImageList'
           OnChange = ShowImageListChange
           ParentFont = False
           TabOrder = 3
         end
         object Button1: TButton
-          Left = 272
+          Left = 269
           Height = 25
-          Top = 401
-          Width = 210
+          Top = 397
+          Width = 208
           Caption = 'Adjust the visualisation scale'
           OnClick = Button1Click
           ParentFont = False
@@ -805,8 +817,8 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowImageLabel: TCheckBox
           Left = 26
-          Height = 18
-          Top = 409
+          Height = 23
+          Top = 405
           Width = 142
           Caption = 'Show images labels'
           OnChange = ShowImageLabelChange
@@ -820,11 +832,11 @@ object f_config_pictures: Tf_config_pictures
     Enabled = False
     Interval = 500
     OnTimer = ImageTimer1Timer
-    Left = 469
+    left = 464
   end
   object ImageList1: TImageList
-    Left = 24
-    Top = 485
+    left = 24
+    top = 480
     Bitmap = {
       4C69040000001000000010000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -958,7 +970,7 @@ object f_config_pictures: Tf_config_pictures
     }
   end
   object SelectDirectoryDialog1: TSelectDirectoryDialog
-    Left = 105
-    Top = 485
+    left = 104
+    top = 480
   end
 end

@@ -1,173 +1,194 @@
 object f_position: Tf_position
   Left = 481
-  Height = 264
+  Height = 334
   Top = 108
-  Width = 510
+  Width = 646
   ActiveControl = Panel2
   Caption = 'Position'
-  ClientHeight = 264
-  ClientWidth = 510
-  DesignTimePPI = 75
+  ClientHeight = 334
+  ClientWidth = 646
+  DesignTimePPI = 95
   OnCreate = FormCreate
   OnShow = FormShow
-  ParentFont = True
-  Visible = False
   object Panel1: TPanel
     Left = 0
-    Height = 70
-    Top = 70
-    Width = 510
+    Height = 89
+    Top = 89
+    Width = 646
     Align = alTop
-    ClientHeight = 70
-    ClientWidth = 510
+    ClientHeight = 89
+    ClientWidth = 646
     FullRepaint = False
+    ParentFont = False
     TabOrder = 1
     object coord1: TLabel
-      Left = 8
-      Height = 11
-      Top = 36
-      Width = 12
+      Left = 10
+      Height = 19
+      Top = 46
+      Width = 14
       Caption = 'Az'
       ParentColor = False
+      ParentFont = False
     end
     object coord2: TLabel
-      Left = 256
-      Height = 11
-      Top = 36
-      Width = 14
+      Left = 324
+      Height = 19
+      Top = 46
+      Width = 16
       Caption = 'Alt'
       ParentColor = False
+      ParentFont = False
     end
     object coord: TLabel
-      Left = 8
-      Height = 11
-      Top = 8
-      Width = 28
+      Left = 10
+      Height = 19
+      Top = 10
+      Width = 35
       Caption = 'coord'
       ParentColor = False
+      ParentFont = False
     end
     object long: TRaDec
-      Left = 39
-      Height = 23
-      Top = 32
-      Width = 210
+      Left = 49
+      Height = 28
+      Top = 41
+      Width = 266
       kind = Az
       Value = 0
       Enabled = True
       OnChange = CoordChange
+      Constraints.MaxHeight = 28
+      ParentFont = False
       TabOrder = 0
     end
     object lat: TRaDec
-      Left = 280
-      Height = 23
-      Top = 32
-      Width = 210
+      Left = 355
+      Height = 28
+      Top = 41
+      Width = 266
       kind = Alt
       Value = 0
       Enabled = True
       OnChange = CoordChange
+      Constraints.MaxHeight = 28
+      ParentFont = False
       TabOrder = 1
     end
   end
   object Panel2: TPanel
     Left = 0
-    Height = 70
+    Height = 89
     Top = 0
-    Width = 510
+    Width = 646
     Align = alTop
-    ClientHeight = 70
-    ClientWidth = 510
+    ClientHeight = 89
+    ClientWidth = 646
     FullRepaint = False
+    ParentFont = False
     TabOrder = 0
     object eq1: TLabel
-      Left = 8
-      Height = 11
-      Top = 36
-      Width = 14
+      Left = 10
+      Height = 19
+      Top = 46
+      Width = 16
       Caption = 'RA'
       ParentColor = False
+      ParentFont = False
     end
     object eq2: TLabel
-      Left = 256
-      Height = 11
-      Top = 36
-      Width = 14
+      Left = 324
+      Height = 19
+      Top = 46
+      Width = 17
       Caption = 'DE'
       ParentColor = False
+      ParentFont = False
     end
     object Equinox: TLabel
-      Left = 8
-      Height = 11
-      Top = 8
-      Width = 39
+      Left = 10
+      Height = 19
+      Top = 10
+      Width = 49
       Caption = 'Equinox'
       ParentColor = False
+      ParentFont = False
     end
     object ra: TRaDec
-      Left = 39
-      Height = 23
-      Top = 32
-      Width = 210
+      Left = 49
+      Height = 28
+      Top = 41
+      Width = 266
       kind = RA
       Value = 0
       Enabled = True
       OnChange = EqChange
+      Constraints.MaxHeight = 28
+      ParentFont = False
       TabOrder = 0
     end
     object de: TRaDec
-      Left = 280
-      Height = 23
-      Top = 32
-      Width = 210
+      Left = 355
+      Height = 28
+      Top = 41
+      Width = 266
       kind = DE
       Value = 0
       Enabled = True
       OnChange = EqChange
+      Constraints.MaxHeight = 28
+      ParentFont = False
       TabOrder = 1
     end
   end
   object Panel3: TPanel
     Left = 0
-    Height = 41
-    Top = 140
-    Width = 510
+    Height = 52
+    Top = 178
+    Width = 646
     Align = alTop
-    ClientHeight = 41
-    ClientWidth = 510
+    ClientHeight = 52
+    ClientWidth = 646
     FullRepaint = False
+    ParentFont = False
     TabOrder = 2
     object Label3: TLabel
-      Left = 8
-      Height = 11
-      Top = 14
-      Width = 21
+      Left = 10
+      Height = 19
+      Top = 18
+      Width = 25
       Caption = 'FOV'
       ParentColor = False
+      ParentFont = False
     end
     object Label4: TLabel
-      Left = 289
-      Height = 11
-      Top = 14
-      Width = 42
+      Left = 366
+      Height = 19
+      Top = 18
+      Width = 52
       Caption = 'Rotation'
       ParentColor = False
+      ParentFont = False
     end
     object Fov: TRaDec
-      Left = 72
-      Height = 23
-      Top = 9
-      Width = 210
+      Left = 91
+      Height = 28
+      Top = 11
+      Width = 266
       kind = Az
       Value = 0
       Enabled = True
+      Constraints.MaxHeight = 28
+      ParentFont = False
       TabOrder = 0
     end
     object rot: TFloatEdit
-      Left = 353
-      Height = 21
+      Left = 447
+      Height = 28
       Hint = '-180..180'
-      Top = 10
-      Width = 73
+      Top = 13
+      Width = 92
+      Constraints.MaxHeight = 28
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
@@ -179,69 +200,76 @@ object f_position: Tf_position
   end
   object Panel4: TPanel
     Left = 0
-    Height = 39
-    Top = 181
-    Width = 510
+    Height = 49
+    Top = 230
+    Width = 646
     Align = alTop
-    ClientHeight = 39
-    ClientWidth = 510
+    ClientHeight = 49
+    ClientWidth = 646
+    ParentFont = False
     TabOrder = 3
     object LockPosition: TCheckBox
-      Left = 39
-      Height = 21
-      Top = 8
-      Width = 172
+      Left = 49
+      Height = 23
+      Top = 10
+      Width = 203
       Caption = 'Lock the chart at this position'
+      ParentFont = False
       TabOrder = 0
     end
   end
   object Panel5: TPanel
     Left = 0
-    Height = 39
-    Top = 225
-    Width = 510
+    Height = 49
+    Top = 285
+    Width = 646
     Align = alBottom
-    ClientHeight = 39
-    ClientWidth = 510
+    ClientHeight = 49
+    ClientWidth = 646
+    ParentFont = False
     TabOrder = 4
     object Button3: TButton
-      Left = 120
-      Height = 25
-      Top = 8
-      Width = 75
+      Left = 152
+      Height = 32
+      Top = 10
+      Width = 95
       Caption = 'Help'
       OnClick = Button3Click
+      ParentFont = False
       TabOrder = 0
     end
     object Button1: TButton
-      Left = 216
-      Height = 25
-      Top = 8
-      Width = 75
-      BorderSpacing.InnerBorder = 4
+      Left = 274
+      Height = 32
+      Top = 10
+      Width = 95
+      BorderSpacing.InnerBorder = 5
       Caption = 'OK'
       Default = True
       ModalResult = 1
+      ParentFont = False
       TabOrder = 1
     end
     object Button4: TButton
-      Left = 304
-      Height = 25
-      Top = 8
-      Width = 75
+      Left = 385
+      Height = 32
+      Top = 10
+      Width = 95
       Caption = 'Apply'
       OnClick = Button4Click
+      ParentFont = False
       TabOrder = 2
     end
     object Button2: TButton
-      Left = 397
-      Height = 25
-      Top = 8
-      Width = 75
-      BorderSpacing.InnerBorder = 4
+      Left = 503
+      Height = 32
+      Top = 10
+      Width = 95
+      BorderSpacing.InnerBorder = 5
       Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
+      ParentFont = False
       TabOrder = 3
     end
   end

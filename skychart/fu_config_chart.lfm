@@ -1,76 +1,77 @@
 object f_config_chart: Tf_config_chart
   Left = 0
-  Height = 534
+  Height = 528
   Top = 0
-  Width = 510
-  ClientHeight = 534
-  ClientWidth = 510
+  Width = 505
+  ClientHeight = 528
+  ClientWidth = 505
+  DesignTimePPI = 95
   ParentFont = False
   TabOrder = 0
   DesignTop = 23
   object MainPanel: TPanel
     Left = 0
-    Height = 534
+    Height = 528
     Top = 0
-    Width = 510
+    Width = 505
     Align = alClient
     AutoSize = True
-    ClientHeight = 534
-    ClientWidth = 510
+    ClientHeight = 528
+    ClientWidth = 505
     ParentColor = False
     ParentFont = False
     TabOrder = 0
     object PageControl1: TPageControl
       Left = 1
-      Height = 490
+      Height = 481
       Top = 1
-      Width = 508
-      ActivePage = Page2
+      Width = 503
+      ActivePage = Page5
       Align = alClient
       ParentFont = False
       ShowTabs = False
-      TabIndex = 1
+      TabIndex = 4
       TabOrder = 0
       OnChange = PageControl1PageChanged
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
         Caption = 'Page1'
-        ClientHeight = 506
-        ClientWidth = 522
+        ClientHeight = 477
+        ClientWidth = 493
         ParentFont = False
         object PanelExpert: TPanel
           Left = 13
-          Height = 194
-          Top = 197
-          Width = 458
-          ClientHeight = 194
-          ClientWidth = 458
+          Height = 192
+          Top = 195
+          Width = 453
+          ClientHeight = 192
+          ClientWidth = 453
           ParentFont = False
           TabOrder = 1
           Visible = False
           object EquinoxLabel: TLabel
             Left = 16
-            Height = 16
+            Height = 19
             Top = 20
-            Width = 51
+            Width = 53
             Caption = 'Equinox:'
             ParentColor = False
             ParentFont = False
           end
           object Label1: TLabel
-            Left = 251
-            Height = 16
+            Left = 248
+            Height = 19
             Top = 20
-            Width = 42
+            Width = 41
             Caption = 'Epoch:'
             ParentColor = False
             ParentFont = False
           end
           object ApparentType: TRadioGroup
             Left = 8
-            Height = 58
-            Top = 121
-            Width = 421
+            Height = 57
+            Top = 120
+            Width = 417
             AutoFill = True
             Caption = 'Nutation ,  Aberration'
             ChildSizing.LeftRightSpacing = 6
@@ -81,8 +82,8 @@ object f_config_chart: Tf_config_chart
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 39
-            ClientWidth = 411
+            ClientHeight = 37
+            ClientWidth = 415
             Columns = 2
             ItemIndex = 0
             Items.Strings = (
@@ -94,16 +95,18 @@ object f_config_chart: Tf_config_chart
             TabOrder = 0
           end
           object equinox2: TFloatEdit
-            Left = 105
-            Height = 22
+            Left = 104
+            Height = 28
             Hint = '-20000..20000'
             Top = 12
-            Width = 90
+            Width = 89
+            Constraints.MaxHeight = 28
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 1
             OnChange = equinox2Change
+            Value = 0
             MinValue = -20000
             MaxValue = 20000
             Digits = 8
@@ -111,19 +114,19 @@ object f_config_chart: Tf_config_chart
           end
           object GroupBox3: TGroupBox
             Left = 8
-            Height = 58
-            Top = 57
-            Width = 421
+            Height = 57
+            Top = 56
+            Width = 417
             Caption = 'Stars proper motion options (if available in the catalog)'
-            ClientHeight = 39
-            ClientWidth = 411
+            ClientHeight = 37
+            ClientWidth = 415
             ParentFont = False
             TabOrder = 2
             object PMBox: TCheckBox
               Left = 6
-              Height = 18
+              Height = 23
               Top = 7
-              Width = 418
+              Width = 419
               Caption = 'Use the proper motion to correct the position for the given epoch'
               OnClick = PMBoxClick
               ParentFont = False
@@ -131,16 +134,18 @@ object f_config_chart: Tf_config_chart
             end
           end
           object epoch2: TFloatEdit
-            Left = 340
-            Height = 22
+            Left = 336
+            Height = 28
             Hint = '-20000..20000'
             Top = 12
-            Width = 90
+            Width = 89
+            Constraints.MaxHeight = 28
             ParentFont = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 3
             OnChange = epoch2Change
+            Value = 0
             MinValue = -20000
             MaxValue = 20000
             Digits = 8
@@ -149,18 +154,18 @@ object f_config_chart: Tf_config_chart
         end
         object PanelCoord: TPanel
           Left = 13
-          Height = 194
-          Top = 197
-          Width = 458
-          ClientHeight = 194
-          ClientWidth = 458
+          Height = 192
+          Top = 195
+          Width = 453
+          ClientHeight = 192
+          ClientWidth = 453
           ParentFont = False
           TabOrder = 0
           object CoordType: TRadioGroup
             Left = 8
-            Height = 178
+            Height = 176
             Top = 6
-            Width = 445
+            Width = 440
             AutoFill = True
             Caption = 'Type of coordinates'
             ChildSizing.LeftRightSpacing = 6
@@ -171,8 +176,8 @@ object f_config_chart: Tf_config_chart
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
-            ClientHeight = 159
-            ClientWidth = 435
+            ClientHeight = 156
+            ClientWidth = 438
             ItemIndex = 0
             Items.Strings = (
               'Apparent'
@@ -187,18 +192,18 @@ object f_config_chart: Tf_config_chart
         end
         object Label31: TLabel
           Left = 0
-          Height = 16
+          Height = 19
           Top = 0
-          Width = 81
+          Width = 79
           Caption = 'Chart Setting'
           ParentColor = False
           ParentFont = False
         end
         object projectiontype: TRadioGroup
           Left = 13
-          Height = 97
+          Height = 96
           Top = 37
-          Width = 455
+          Width = 450
           AutoFill = True
           Caption = 'Chart Coordinate System'
           ChildSizing.LeftRightSpacing = 6
@@ -209,8 +214,8 @@ object f_config_chart: Tf_config_chart
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 78
-          ClientWidth = 445
+          ClientHeight = 76
+          ClientWidth = 448
           Columns = 2
           ItemIndex = 0
           Items.Strings = (
@@ -225,9 +230,9 @@ object f_config_chart: Tf_config_chart
         end
         object ExpertMode: TCheckBox
           Left = 22
-          Height = 18
-          Top = 391
-          Width = 100
+          Height = 23
+          Top = 387
+          Width = 103
           Caption = 'Expert mode'
           OnClick = ExpertModeClick
           ParentFont = False
@@ -235,9 +240,9 @@ object f_config_chart: Tf_config_chart
         end
         object AzimutOrigin: TRadioGroup
           Left = 13
-          Height = 51
-          Top = 138
-          Width = 455
+          Height = 50
+          Top = 137
+          Width = 450
           AutoFill = True
           Caption = 'AzimutOrigin'
           ChildSizing.LeftRightSpacing = 6
@@ -248,8 +253,8 @@ object f_config_chart: Tf_config_chart
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 32
-          ClientWidth = 445
+          ClientHeight = 30
+          ClientWidth = 448
           Columns = 2
           Items.Strings = (
             'North'
@@ -262,103 +267,103 @@ object f_config_chart: Tf_config_chart
       end
       object Page2: TTabSheet
         Caption = 'Page2'
-        ClientHeight = 506
-        ClientWidth = 522
+        ClientHeight = 477
+        ClientWidth = 493
         ParentFont = False
         object Label30: TLabel
           Left = 0
-          Height = 16
+          Height = 19
           Top = 0
-          Width = 132
+          Width = 129
           Caption = 'Field of Vision Setting'
           ParentColor = False
           ParentFont = False
         end
         object Label96: TLabel
-          Left = 88
-          Height = 16
-          Top = 132
-          Width = 6
+          Left = 87
+          Height = 19
+          Top = 131
+          Width = 8
           Caption = '1'
           ParentColor = False
           ParentFont = False
         end
         object Label97: TLabel
-          Left = 88
-          Height = 16
-          Top = 161
+          Left = 87
+          Height = 19
+          Top = 159
           Width = 8
           Caption = '2'
           ParentColor = False
           ParentFont = False
         end
         object Label98: TLabel
-          Left = 88
-          Height = 16
-          Top = 189
+          Left = 87
+          Height = 19
+          Top = 187
           Width = 8
           Caption = '3'
           ParentColor = False
           ParentFont = False
         end
         object Label99: TLabel
-          Left = 88
-          Height = 16
-          Top = 217
+          Left = 87
+          Height = 19
+          Top = 215
           Width = 8
           Caption = '4'
           ParentColor = False
           ParentFont = False
         end
         object Label101: TLabel
-          Left = 88
-          Height = 16
-          Top = 274
+          Left = 87
+          Height = 19
+          Top = 271
           Width = 8
           Caption = '6'
           ParentColor = False
           ParentFont = False
         end
         object Label102: TLabel
-          Left = 88
-          Height = 16
-          Top = 302
-          Width = 7
+          Left = 87
+          Height = 19
+          Top = 299
+          Width = 8
           Caption = '7'
           ParentColor = False
           ParentFont = False
         end
         object Label103: TLabel
-          Left = 88
-          Height = 16
-          Top = 330
+          Left = 87
+          Height = 19
+          Top = 327
           Width = 8
           Caption = '8'
           ParentColor = False
           ParentFont = False
         end
         object Label104: TLabel
-          Left = 88
-          Height = 16
-          Top = 359
+          Left = 87
+          Height = 19
+          Top = 355
           Width = 8
           Caption = '9'
           ParentColor = False
           ParentFont = False
         end
         object Label105: TLabel
-          Left = 81
-          Height = 16
-          Top = 387
-          Width = 14
+          Left = 80
+          Height = 19
+          Top = 383
+          Width = 16
           Caption = '10'
           ParentColor = False
           ParentFont = False
         end
         object Label106: TLabel
           Left = 47
-          Height = 16
-          Top = 65
+          Height = 19
+          Top = 64
           Width = 81
           Alignment = taRightJustify
           Caption = 'Field Number'
@@ -366,46 +371,46 @@ object f_config_chart: Tf_config_chart
           ParentFont = False
         end
         object Label107: TLabel
-          Left = 209
-          Height = 16
+          Left = 207
+          Height = 19
           Top = 39
-          Width = 87
+          Width = 85
           Caption = 'Field Of Vision'
           ParentColor = False
           ParentFont = False
         end
         object Label114: TLabel
-          Left = 88
-          Height = 16
-          Top = 104
+          Left = 87
+          Height = 19
+          Top = 103
           Width = 8
           Caption = '0'
           ParentColor = False
           ParentFont = False
         end
         object Label57: TLabel
-          Left = 185
-          Height = 16
-          Top = 65
-          Width = 31
+          Left = 183
+          Height = 19
+          Top = 64
+          Width = 32
           Alignment = taRightJustify
           Caption = 'From'
           ParentColor = False
           ParentFont = False
         end
         object Label74: TLabel
-          Left = 88
-          Height = 16
-          Top = 246
+          Left = 87
+          Height = 19
+          Top = 243
           Width = 8
           Caption = '5'
           ParentColor = False
           ParentFont = False
         end
         object Label5: TLabel
-          Left = 290
-          Height = 16
-          Top = 65
+          Left = 287
+          Height = 19
+          Top = 64
           Width = 14
           Caption = 'To'
           ParentColor = False
@@ -413,275 +418,352 @@ object f_config_chart: Tf_config_chart
         end
         object fw1: TFloatEdit
           Tag = 1
-          Left = 174
-          Height = 22
+          Left = 172
+          Height = 28
           Hint = '0..360'
-          Top = 153
-          Width = 61
+          Top = 151
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 4
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
         object fw2: TFloatEdit
           Tag = 2
-          Left = 174
-          Height = 22
+          Left = 172
+          Height = 28
           Hint = '0..360'
-          Top = 181
-          Width = 61
+          Top = 179
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 6
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
         object fw3: TFloatEdit
           Tag = 3
-          Left = 174
-          Height = 22
+          Left = 172
+          Height = 28
           Hint = '0..360'
-          Top = 209
-          Width = 61
+          Top = 207
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 8
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
         object fw4: TFloatEdit
           Tag = 4
-          Left = 174
-          Height = 22
+          Left = 172
+          Height = 28
           Hint = '0..360'
-          Top = 237
-          Width = 61
+          Top = 235
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 10
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
         object fw5: TFloatEdit
           Tag = 5
-          Left = 174
-          Height = 22
+          Left = 172
+          Height = 28
           Hint = '0..360'
-          Top = 266
-          Width = 61
+          Top = 263
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 12
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
         object fw6: TFloatEdit
           Tag = 6
-          Left = 176
-          Height = 22
+          Left = 174
+          Height = 28
           Hint = '0..360'
-          Top = 294
-          Width = 61
+          Top = 291
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 14
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
         object fw7: TFloatEdit
           Tag = 7
-          Left = 174
-          Height = 22
+          Left = 172
+          Height = 28
           Hint = '0..360'
-          Top = 322
-          Width = 61
+          Top = 319
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 16
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
         object fw8: TFloatEdit
           Tag = 8
-          Left = 174
-          Height = 22
+          Left = 172
+          Height = 28
           Hint = '0..360'
-          Top = 351
-          Width = 61
+          Top = 347
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 18
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
         object fw9: TFloatEdit
           Tag = 9
-          Left = 174
-          Height = 22
+          Left = 172
+          Height = 28
           Hint = '0..360'
-          Top = 379
-          Width = 61
+          Top = 375
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 20
+          Value = 0
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
         object fw0: TFloatEdit
-          Left = 174
-          Height = 22
+          Left = 172
+          Height = 28
           Hint = '0..360'
-          Top = 124
-          Width = 61
+          Top = 123
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
+          Value = 0
           Decimals = 2
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
         object fw00: TFloatEdit
-          Left = 174
-          Height = 22
+          Left = 172
+          Height = 28
           Hint = '0..360'
-          Top = 96
-          Width = 61
+          Top = 95
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ParentShowHint = False
           ReadOnly = True
           ShowHint = True
           TabOrder = 0
+          Value = 0
           Decimals = 2
+          MinValue = 0
           MaxValue = 360
           NumericType = ntFixed
         end
         object ft0: TFloatEdit
-          Left = 274
-          Height = 22
-          Top = 96
-          Width = 61
+          Left = 271
+          Height = 28
+          Top = 95
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ReadOnly = True
           TabOrder = 1
+          Value = 0
           Decimals = 2
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft1: TFloatEdit
-          Left = 274
-          Height = 22
-          Top = 124
-          Width = 61
+          Left = 271
+          Height = 28
+          Top = 123
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ReadOnly = True
           TabOrder = 3
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft2: TFloatEdit
-          Left = 274
-          Height = 22
-          Top = 153
-          Width = 61
+          Left = 271
+          Height = 28
+          Top = 151
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ReadOnly = True
           TabOrder = 5
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft3: TFloatEdit
-          Left = 274
-          Height = 22
-          Top = 181
-          Width = 61
+          Left = 271
+          Height = 28
+          Top = 179
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ReadOnly = True
           TabOrder = 7
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft4: TFloatEdit
-          Left = 274
-          Height = 22
-          Top = 209
-          Width = 61
+          Left = 271
+          Height = 28
+          Top = 207
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ReadOnly = True
           TabOrder = 9
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft5: TFloatEdit
-          Left = 274
-          Height = 22
-          Top = 237
-          Width = 61
+          Left = 271
+          Height = 28
+          Top = 235
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ReadOnly = True
           TabOrder = 11
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft6: TFloatEdit
-          Left = 274
-          Height = 22
-          Top = 266
-          Width = 61
+          Left = 271
+          Height = 28
+          Top = 263
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ReadOnly = True
           TabOrder = 13
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft7: TFloatEdit
-          Left = 274
-          Height = 22
-          Top = 294
-          Width = 61
+          Left = 271
+          Height = 28
+          Top = 291
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ReadOnly = True
           TabOrder = 15
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft8: TFloatEdit
-          Left = 274
-          Height = 22
-          Top = 322
-          Width = 61
+          Left = 271
+          Height = 28
+          Top = 319
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ReadOnly = True
           TabOrder = 17
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft9: TFloatEdit
-          Left = 274
-          Height = 22
-          Top = 351
-          Width = 61
+          Left = 271
+          Height = 28
+          Top = 347
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ReadOnly = True
           TabOrder = 19
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object ft10: TFloatEdit
-          Left = 274
-          Height = 22
-          Top = 379
-          Width = 61
+          Left = 271
+          Height = 28
+          Top = 375
+          Width = 60
+          Constraints.MaxHeight = 28
           ParentFont = False
           ReadOnly = True
           TabOrder = 21
+          Value = 0
+          MinValue = 0
+          MaxValue = 0
           NumericType = ntFixed
         end
         object Button1: TButton
-          Left = 209
+          Left = 207
           Height = 25
-          Top = 419
-          Width = 84
+          Top = 415
+          Width = 83
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
           OnClick = Button1Click
@@ -696,9 +778,9 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
         object Bevel7: TBevel
           Left = 13
-          Height = 388
+          Height = 384
           Top = 21
-          Width = 454
+          Width = 449
           Shape = bsFrame
         end
         object Label158: TLabel
@@ -711,37 +793,37 @@ object f_config_chart: Tf_config_chart
           ParentFont = False
         end
         object Labelp1: TLabel
-          Left = 63
+          Left = 62
           Height = 19
-          Top = 89
-          Width = 10
+          Top = 88
+          Width = 11
           Caption = '1 '
           ParentColor = False
           ParentFont = False
         end
         object Labelp2: TLabel
-          Left = 63
+          Left = 62
           Height = 19
-          Top = 117
-          Width = 7
+          Top = 116
+          Width = 8
           Caption = '2'
           ParentColor = False
           ParentFont = False
         end
         object Labelp3: TLabel
-          Left = 63
+          Left = 62
           Height = 19
-          Top = 146
-          Width = 7
+          Top = 144
+          Width = 8
           Caption = '3'
           ParentColor = False
           ParentFont = False
         end
         object Labelp4: TLabel
-          Left = 63
+          Left = 62
           Height = 19
-          Top = 174
-          Width = 7
+          Top = 172
+          Width = 8
           Caption = '4'
           ParentColor = False
           ParentFont = False
@@ -757,70 +839,70 @@ object f_config_chart: Tf_config_chart
           ParentFont = False
         end
         object Labelp0: TLabel
-          Left = 63
+          Left = 62
           Height = 19
-          Top = 61
-          Width = 7
+          Top = 60
+          Width = 8
           Caption = '0'
           ParentColor = False
           ParentFont = False
         end
         object Labelp5: TLabel
-          Left = 63
+          Left = 62
           Height = 19
-          Top = 202
-          Width = 7
+          Top = 200
+          Width = 8
           Caption = '5'
           ParentColor = False
           ParentFont = False
         end
         object Labelp6: TLabel
-          Left = 63
+          Left = 62
           Height = 19
-          Top = 230
-          Width = 7
+          Top = 228
+          Width = 8
           Caption = '6'
           ParentColor = False
           ParentFont = False
         end
         object Labelp7: TLabel
-          Left = 63
+          Left = 62
           Height = 19
-          Top = 259
-          Width = 7
+          Top = 256
+          Width = 8
           Caption = '7'
           ParentColor = False
           ParentFont = False
         end
         object Labelp8: TLabel
-          Left = 63
+          Left = 62
           Height = 19
-          Top = 287
-          Width = 7
+          Top = 284
+          Width = 8
           Caption = '8'
           ParentColor = False
           ParentFont = False
         end
         object Labelp9: TLabel
-          Left = 63
+          Left = 62
           Height = 19
-          Top = 315
-          Width = 7
+          Top = 312
+          Width = 8
           Caption = '9'
           ParentColor = False
           ParentFont = False
         end
         object Labelp10: TLabel
-          Left = 63
+          Left = 62
           Height = 19
-          Top = 344
-          Width = 14
+          Top = 340
+          Width = 16
           Caption = '10'
           ParentColor = False
           ParentFont = False
         end
         object Label172: TLabel
-          Left = 197
+          Left = 195
           Height = 19
           Top = 27
           Width = 61
@@ -830,12 +912,13 @@ object f_config_chart: Tf_config_chart
         end
         object ComboBox2: TComboBox
           Tag = 1
-          Left = 197
-          Height = 31
-          Top = 84
-          Width = 182
+          Left = 195
+          Height = 26
+          Top = 83
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
-          ItemHeight = 19
+          Constraints.MaxHeight = 26
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
@@ -848,12 +931,13 @@ object f_config_chart: Tf_config_chart
           Text = 'ARC'
         end
         object ComboBox1: TComboBox
-          Left = 197
-          Height = 31
-          Top = 56
-          Width = 182
+          Left = 195
+          Height = 26
+          Top = 55
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
-          ItemHeight = 19
+          Constraints.MaxHeight = 26
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
@@ -867,12 +951,13 @@ object f_config_chart: Tf_config_chart
         end
         object ComboBox3: TComboBox
           Tag = 2
-          Left = 197
-          Height = 31
-          Top = 112
-          Width = 182
+          Left = 195
+          Height = 26
+          Top = 111
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
-          ItemHeight = 19
+          Constraints.MaxHeight = 26
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
@@ -886,12 +971,13 @@ object f_config_chart: Tf_config_chart
         end
         object ComboBox4: TComboBox
           Tag = 3
-          Left = 197
-          Height = 31
-          Top = 140
-          Width = 182
+          Left = 195
+          Height = 26
+          Top = 139
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
-          ItemHeight = 19
+          Constraints.MaxHeight = 26
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
@@ -904,12 +990,13 @@ object f_config_chart: Tf_config_chart
         end
         object ComboBox5: TComboBox
           Tag = 4
-          Left = 197
-          Height = 31
-          Top = 169
-          Width = 182
+          Left = 195
+          Height = 26
+          Top = 167
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
-          ItemHeight = 19
+          Constraints.MaxHeight = 26
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
@@ -922,12 +1009,13 @@ object f_config_chart: Tf_config_chart
         end
         object ComboBox6: TComboBox
           Tag = 5
-          Left = 197
-          Height = 31
-          Top = 197
-          Width = 182
+          Left = 195
+          Height = 26
+          Top = 195
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
-          ItemHeight = 19
+          Constraints.MaxHeight = 26
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
@@ -941,12 +1029,13 @@ object f_config_chart: Tf_config_chart
         end
         object ComboBox7: TComboBox
           Tag = 6
-          Left = 197
-          Height = 31
-          Top = 225
-          Width = 182
+          Left = 195
+          Height = 26
+          Top = 223
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
-          ItemHeight = 19
+          Constraints.MaxHeight = 26
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
@@ -960,12 +1049,13 @@ object f_config_chart: Tf_config_chart
         end
         object ComboBox8: TComboBox
           Tag = 7
-          Left = 197
-          Height = 31
-          Top = 254
-          Width = 182
+          Left = 195
+          Height = 26
+          Top = 251
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
-          ItemHeight = 19
+          Constraints.MaxHeight = 26
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
@@ -979,12 +1069,13 @@ object f_config_chart: Tf_config_chart
         end
         object ComboBox9: TComboBox
           Tag = 8
-          Left = 197
-          Height = 31
-          Top = 282
-          Width = 182
+          Left = 195
+          Height = 26
+          Top = 279
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
-          ItemHeight = 19
+          Constraints.MaxHeight = 26
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
@@ -998,12 +1089,13 @@ object f_config_chart: Tf_config_chart
         end
         object ComboBox10: TComboBox
           Tag = 9
-          Left = 197
-          Height = 31
-          Top = 310
-          Width = 182
+          Left = 195
+          Height = 26
+          Top = 307
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
-          ItemHeight = 19
+          Constraints.MaxHeight = 26
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
@@ -1017,12 +1109,13 @@ object f_config_chart: Tf_config_chart
         end
         object ComboBox11: TComboBox
           Tag = 10
-          Left = 197
-          Height = 31
-          Top = 340
-          Width = 182
+          Left = 195
+          Height = 26
+          Top = 336
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
-          ItemHeight = 19
+          Constraints.MaxHeight = 26
+          ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
             'ARC'
@@ -1035,21 +1128,21 @@ object f_config_chart: Tf_config_chart
           Text = 'ARC'
         end
         object Button7: TButton
-          Left = 197
+          Left = 195
           Height = 25
-          Top = 409
-          Width = 74
+          Top = 405
+          Width = 73
           Caption = 'Default'
           OnClick = Button7Click
           ParentFont = False
           TabOrder = 12
         end
         object CheckBox1: TCheckBox
-          Left = 62
-          Height = 40
-          Top = 369
-          Width = 227
-          Caption = 'Use oblique cylindrical projections'#10'(CAR, MER)'
+          Left = 61
+          Height = 23
+          Top = 368
+          Width = 301
+          Caption = 'Use oblique cylindrical projections  (CAR, MER)'
           OnChange = CheckBox1Change
           ParentFont = False
           TabOrder = 11
@@ -1071,20 +1164,20 @@ object f_config_chart: Tf_config_chart
         end
         object GroupBox2: TGroupBox
           Left = 9
-          Height = 186
+          Height = 184
           Top = 16
-          Width = 454
+          Width = 449
           Caption = 'Stars Filter'
-          ClientHeight = 167
-          ClientWidth = 444
+          ClientHeight = 164
+          ClientWidth = 447
           ParentFont = False
           TabOrder = 0
           object StarBox: TCheckBox
             Left = 8
-            Height = 21
+            Height = 23
             Hint = 'Copy|Copies the selection and puts it on the Clipboard'
             Top = 8
-            Width = 89
+            Width = 91
             Caption = 'Filter stars '
             OnClick = StarBoxClick
             ParentFont = False
@@ -1092,109 +1185,109 @@ object f_config_chart: Tf_config_chart
           end
           object Panel4: TPanel
             Left = 4
-            Height = 138
+            Height = 137
             Top = 32
-            Width = 447
-            ClientHeight = 138
-            ClientWidth = 447
+            Width = 442
+            ClientHeight = 133
+            ClientWidth = 438
             ParentFont = False
             TabOrder = 1
             object Panel2: TPanel
               Left = 4
-              Height = 106
+              Height = 105
               Top = 30
-              Width = 439
+              Width = 434
               BevelOuter = bvNone
-              ClientHeight = 106
-              ClientWidth = 439
+              ClientHeight = 101
+              ClientWidth = 430
               ParentFont = False
               TabOrder = 2
               object Label32: TLabel
                 Left = 25
                 Height = 19
                 Top = 32
-                Width = 7
+                Width = 8
                 Caption = '1'
                 ParentColor = False
                 ParentFont = False
               end
               object Label33: TLabel
-                Left = 67
+                Left = 66
                 Height = 19
                 Top = 32
-                Width = 7
+                Width = 8
                 Caption = '2'
                 ParentColor = False
                 ParentFont = False
               end
               object Label34: TLabel
-                Left = 108
+                Left = 107
                 Height = 19
                 Top = 32
-                Width = 7
+                Width = 8
                 Caption = '3'
                 ParentColor = False
                 ParentFont = False
               end
               object Label35: TLabel
-                Left = 150
+                Left = 148
                 Height = 19
                 Top = 32
-                Width = 7
+                Width = 8
                 Caption = '4'
                 ParentColor = False
                 ParentFont = False
               end
               object Label36: TLabel
-                Left = 191
+                Left = 189
                 Height = 19
                 Top = 32
-                Width = 7
+                Width = 8
                 Caption = '5'
                 ParentColor = False
                 ParentFont = False
               end
               object Label38: TLabel
-                Left = 232
+                Left = 230
                 Height = 19
                 Top = 32
-                Width = 7
+                Width = 8
                 Caption = '6'
                 ParentColor = False
                 ParentFont = False
               end
               object Label39: TLabel
-                Left = 274
+                Left = 271
                 Height = 19
                 Top = 32
-                Width = 7
+                Width = 8
                 Caption = '7'
                 ParentColor = False
                 ParentFont = False
               end
               object Label40: TLabel
-                Left = 315
+                Left = 312
                 Height = 19
                 Top = 32
-                Width = 7
+                Width = 8
                 Caption = '8'
                 ParentColor = False
                 ParentFont = False
               end
               object Label76: TLabel
-                Left = 357
+                Left = 353
                 Height = 19
                 Top = 32
-                Width = 7
+                Width = 8
                 Caption = '9'
                 ParentColor = False
                 ParentFont = False
               end
               object Label78: TLabel
-                Left = 398
+                Left = 394
                 Height = 19
                 Top = 32
-                Width = 14
+                Width = 16
                 Caption = '10'
                 ParentColor = False
                 ParentFont = False
@@ -1203,7 +1296,7 @@ object f_config_chart: Tf_config_chart
                 Left = 8
                 Height = 19
                 Top = 8
-                Width = 138
+                Width = 140
                 Caption = 'Field of vision number :'
                 ParentColor = False
                 ParentFont = False
@@ -1211,8 +1304,8 @@ object f_config_chart: Tf_config_chart
               object Label109: TLabel
                 Left = 8
                 Height = 19
-                Top = 49
-                Width = 124
+                Top = 48
+                Width = 125
                 Caption = 'Limiting magnitude :'
                 ParentColor = False
                 ParentFont = False
@@ -1220,182 +1313,215 @@ object f_config_chart: Tf_config_chart
               object fsmag0: TFloatEdit
                 Tag = 1
                 Left = 10
-                Height = 31
+                Height = 28
                 Hint = '0..99'
-                Top = 67
+                Top = 66
                 Width = 40
+                Constraints.MaxHeight = 28
                 ParentFont = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 0
                 OnChange = fsmagChange
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag1: TFloatEdit
                 Tag = 2
-                Left = 50
-                Height = 31
+                Left = 49
+                Height = 28
                 Hint = '0..99'
-                Top = 67
+                Top = 66
                 Width = 40
+                Constraints.MaxHeight = 28
                 ParentFont = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 1
                 OnChange = fsmagChange
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag2: TFloatEdit
                 Tag = 3
-                Left = 92
-                Height = 31
+                Left = 91
+                Height = 28
                 Hint = '0..99'
-                Top = 67
+                Top = 66
                 Width = 40
+                Constraints.MaxHeight = 28
                 ParentFont = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 2
                 OnChange = fsmagChange
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag3: TFloatEdit
                 Tag = 4
-                Left = 134
-                Height = 31
+                Left = 133
+                Height = 28
                 Hint = '0..99'
-                Top = 67
+                Top = 66
                 Width = 40
+                Constraints.MaxHeight = 28
                 ParentFont = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 3
                 OnChange = fsmagChange
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag4: TFloatEdit
                 Tag = 5
-                Left = 177
-                Height = 31
+                Left = 175
+                Height = 28
                 Hint = '0..99'
-                Top = 67
+                Top = 66
                 Width = 40
+                Constraints.MaxHeight = 28
                 ParentFont = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 4
                 OnChange = fsmagChange
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag5: TFloatEdit
                 Tag = 6
-                Left = 218
-                Height = 31
+                Left = 216
+                Height = 28
                 Hint = '0..99'
-                Top = 67
+                Top = 66
                 Width = 40
+                Constraints.MaxHeight = 28
                 ParentFont = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 5
                 OnChange = fsmagChange
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag6: TFloatEdit
                 Tag = 7
-                Left = 261
-                Height = 31
+                Left = 258
+                Height = 28
                 Hint = '0..99'
-                Top = 67
+                Top = 66
                 Width = 40
+                Constraints.MaxHeight = 28
                 ParentFont = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 6
                 OnChange = fsmagChange
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag7: TFloatEdit
                 Tag = 8
-                Left = 303
-                Height = 31
+                Left = 300
+                Height = 28
                 Hint = '0..99'
-                Top = 67
+                Top = 66
                 Width = 40
+                Constraints.MaxHeight = 28
                 ParentFont = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 7
                 OnChange = fsmagChange
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag8: TFloatEdit
                 Tag = 9
-                Left = 346
-                Height = 31
+                Left = 342
+                Height = 28
                 Hint = '0..99'
-                Top = 67
+                Top = 66
                 Width = 40
+                Constraints.MaxHeight = 28
                 ParentFont = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 8
                 OnChange = fsmagChange
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
               object fsmag9: TFloatEdit
                 Tag = 10
-                Left = 388
-                Height = 31
+                Left = 384
+                Height = 28
                 Hint = '0..99'
-                Top = 67
+                Top = 66
                 Width = 40
+                Constraints.MaxHeight = 28
                 ParentFont = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 9
                 OnChange = fsmagChange
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
             end
             object Panel3: TPanel
               Left = 4
-              Height = 51
+              Height = 50
               Top = 30
-              Width = 439
+              Width = 434
               BevelOuter = bvNone
-              ClientHeight = 51
-              ClientWidth = 439
+              ClientHeight = 46
+              ClientWidth = 430
               ParentFont = False
               TabOrder = 1
               object Label110: TLabel
                 Left = 8
                 Height = 19
                 Top = 12
-                Width = 122
+                Width = 123
                 Caption = 'Naked eye reference'
                 ParentColor = False
                 ParentFont = False
               end
               object fsmagvis: TFloatEdit
-                Left = 190
-                Height = 31
+                Left = 188
+                Height = 28
                 Hint = '0..99'
                 Top = 7
                 Width = 40
+                Constraints.MaxHeight = 28
                 ParentFont = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 0
                 OnChange = fsmagvisChange
+                Value = 0
+                MinValue = 0
                 MaxValue = 99
               end
             end
             object StarAutoBox: TCheckBox
               Left = 4
-              Height = 21
+              Height = 23
               Top = 6
-              Width = 86
+              Width = 88
               Caption = 'Automatic'
               OnClick = StarAutoBoxClick
               ParentFont = False
@@ -1403,10 +1529,10 @@ object f_config_chart: Tf_config_chart
             end
           end
           object Button8: TButton
-            Left = 366
+            Left = 362
             Height = 25
             Top = 0
-            Width = 76
+            Width = 75
             Caption = 'Default'
             OnClick = Button8Click
             ParentFont = False
@@ -1415,19 +1541,19 @@ object f_config_chart: Tf_config_chart
         end
         object GroupBox1: TGroupBox
           Left = 9
-          Height = 251
-          Top = 207
-          Width = 454
+          Height = 248
+          Top = 205
+          Width = 449
           Caption = 'Nebulae Filter'
-          ClientHeight = 232
-          ClientWidth = 444
+          ClientHeight = 228
+          ClientWidth = 447
           ParentFont = False
           TabOrder = 1
           object NebBox: TCheckBox
             Left = 8
-            Height = 21
+            Height = 23
             Top = 4
-            Width = 105
+            Width = 107
             Caption = 'Filter nebulae'
             OnClick = NebBoxClick
             ParentFont = False
@@ -1435,18 +1561,18 @@ object f_config_chart: Tf_config_chart
           end
           object Panel5: TPanel
             Left = 4
-            Height = 195
+            Height = 193
             Top = 30
-            Width = 447
-            ClientHeight = 195
-            ClientWidth = 447
+            Width = 442
+            ClientHeight = 189
+            ClientWidth = 438
             ParentFont = False
             TabOrder = 1
             object Label48: TLabel
               Left = 8
               Height = 19
               Top = 43
-              Width = 124
+              Width = 125
               Caption = 'Limiting Magnitude :'
               ParentColor = False
               ParentFont = False
@@ -1454,8 +1580,8 @@ object f_config_chart: Tf_config_chart
             object Label49: TLabel
               Left = 8
               Height = 19
-              Top = 92
-              Width = 159
+              Top = 91
+              Width = 160
               Caption = 'Limiting Size (arcminutes) :'
               ParentColor = False
               ParentFont = False
@@ -1464,88 +1590,88 @@ object f_config_chart: Tf_config_chart
               Left = 25
               Height = 19
               Top = 27
-              Width = 7
+              Width = 8
               Caption = '1'
               ParentColor = False
               ParentFont = False
             end
             object Label42: TLabel
-              Left = 67
+              Left = 66
               Height = 19
               Top = 27
-              Width = 7
+              Width = 8
               Caption = '2'
               ParentColor = False
               ParentFont = False
             end
             object Label43: TLabel
-              Left = 108
+              Left = 107
               Height = 19
               Top = 27
-              Width = 7
+              Width = 8
               Caption = '3'
               ParentColor = False
               ParentFont = False
             end
             object Label44: TLabel
-              Left = 150
+              Left = 148
               Height = 19
               Top = 27
-              Width = 7
+              Width = 8
               Caption = '4'
               ParentColor = False
               ParentFont = False
             end
             object Label45: TLabel
-              Left = 191
+              Left = 189
               Height = 19
               Top = 27
-              Width = 7
+              Width = 8
               Caption = '5'
               ParentColor = False
               ParentFont = False
             end
             object Label46: TLabel
-              Left = 232
+              Left = 230
               Height = 19
               Top = 27
-              Width = 7
+              Width = 8
               Caption = '6'
               ParentColor = False
               ParentFont = False
             end
             object Label47: TLabel
-              Left = 274
+              Left = 271
               Height = 19
               Top = 27
-              Width = 7
+              Width = 8
               Caption = '7'
               ParentColor = False
               ParentFont = False
             end
             object Label79: TLabel
-              Left = 315
+              Left = 312
               Height = 19
               Top = 27
-              Width = 7
+              Width = 8
               Caption = '8'
               ParentColor = False
               ParentFont = False
             end
             object Label80: TLabel
-              Left = 357
+              Left = 353
               Height = 19
               Top = 27
-              Width = 7
+              Width = 8
               Caption = '9'
               ParentColor = False
               ParentFont = False
             end
             object Label111: TLabel
-              Left = 398
+              Left = 394
               Height = 19
               Top = 27
-              Width = 14
+              Width = 16
               Caption = '10'
               ParentColor = False
               ParentFont = False
@@ -1554,7 +1680,7 @@ object f_config_chart: Tf_config_chart
               Left = 8
               Height = 19
               Top = 4
-              Width = 138
+              Width = 140
               Caption = 'Field of vision number :'
               ParentColor = False
               ParentFont = False
@@ -1562,299 +1688,360 @@ object f_config_chart: Tf_config_chart
             object fmag0: TFloatEdit
               Tag = 1
               Left = 8
-              Height = 31
+              Height = 28
               Hint = '0..99'
-              Top = 62
+              Top = 61
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 0
               OnChange = fmagChange
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag1: TFloatEdit
               Tag = 2
-              Left = 50
-              Height = 31
+              Left = 49
+              Height = 28
               Hint = '0..99'
-              Top = 62
+              Top = 61
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 1
               OnChange = fmagChange
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag2: TFloatEdit
               Tag = 3
-              Left = 92
-              Height = 31
+              Left = 91
+              Height = 28
               Hint = '0..99'
-              Top = 62
+              Top = 61
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 2
               OnChange = fmagChange
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag3: TFloatEdit
               Tag = 4
-              Left = 134
-              Height = 31
+              Left = 133
+              Height = 28
               Hint = '0..99'
-              Top = 62
+              Top = 61
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 3
               OnChange = fmagChange
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag4: TFloatEdit
               Tag = 5
-              Left = 177
-              Height = 31
+              Left = 175
+              Height = 28
               Hint = '0..99'
-              Top = 62
+              Top = 61
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 4
               OnChange = fmagChange
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag5: TFloatEdit
               Tag = 6
-              Left = 218
-              Height = 31
+              Left = 216
+              Height = 28
               Hint = '0..99'
-              Top = 62
+              Top = 61
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 5
               OnChange = fmagChange
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag6: TFloatEdit
               Tag = 7
-              Left = 261
-              Height = 31
+              Left = 258
+              Height = 28
               Hint = '0..99'
-              Top = 62
+              Top = 61
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 6
               OnChange = fmagChange
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fdim0: TFloatEdit
               Tag = 1
               Left = 8
-              Height = 31
+              Height = 28
               Hint = '0..1000'
-              Top = 107
+              Top = 106
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 10
               OnChange = fdimChange
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim1: TFloatEdit
               Tag = 2
-              Left = 50
-              Height = 31
+              Left = 49
+              Height = 28
               Hint = '0..1000'
-              Top = 107
+              Top = 106
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 11
               OnChange = fdimChange
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim2: TFloatEdit
               Tag = 3
-              Left = 92
-              Height = 31
+              Left = 91
+              Height = 28
               Hint = '0..1000'
-              Top = 107
+              Top = 106
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 12
               OnChange = fdimChange
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim3: TFloatEdit
               Tag = 4
-              Left = 134
-              Height = 31
+              Left = 133
+              Height = 28
               Hint = '0..1000'
-              Top = 107
+              Top = 106
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 13
               OnChange = fdimChange
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim4: TFloatEdit
               Tag = 5
-              Left = 177
-              Height = 31
+              Left = 175
+              Height = 28
               Hint = '0..1000'
-              Top = 107
+              Top = 106
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 14
               OnChange = fdimChange
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim5: TFloatEdit
               Tag = 6
-              Left = 218
-              Height = 31
+              Left = 216
+              Height = 28
               Hint = '0..1000'
-              Top = 107
+              Top = 106
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 15
               OnChange = fdimChange
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim6: TFloatEdit
               Tag = 7
-              Left = 261
-              Height = 31
+              Left = 258
+              Height = 28
               Hint = '0..1000'
-              Top = 107
+              Top = 106
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 16
               OnChange = fdimChange
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fmag7: TFloatEdit
               Tag = 8
-              Left = 303
-              Height = 31
+              Left = 300
+              Height = 28
               Hint = '0..99'
-              Top = 62
+              Top = 61
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 7
               OnChange = fmagChange
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag8: TFloatEdit
               Tag = 9
-              Left = 346
-              Height = 31
+              Left = 342
+              Height = 28
               Hint = '0..99'
-              Top = 62
+              Top = 61
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 8
               OnChange = fmagChange
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fmag9: TFloatEdit
               Tag = 10
-              Left = 388
-              Height = 31
+              Left = 384
+              Height = 28
               Hint = '0..99'
-              Top = 62
+              Top = 61
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 9
               OnChange = fmagChange
+              Value = 0
+              MinValue = 0
               MaxValue = 99
             end
             object fdim7: TFloatEdit
               Tag = 8
-              Left = 303
-              Height = 31
+              Left = 300
+              Height = 28
               Hint = '0..1000'
-              Top = 107
+              Top = 106
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 17
               OnChange = fdimChange
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim8: TFloatEdit
               Tag = 9
-              Left = 346
-              Height = 31
+              Left = 342
+              Height = 28
               Hint = '0..1000'
-              Top = 107
+              Top = 106
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 18
               OnChange = fdimChange
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object fdim9: TFloatEdit
               Tag = 10
-              Left = 388
-              Height = 31
+              Left = 384
+              Height = 28
               Hint = '0..1000'
-              Top = 107
+              Top = 106
               Width = 40
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 19
               OnChange = fdimChange
+              Value = 0
+              MinValue = 0
               MaxValue = 1000
             end
             object BigNebBox: TCheckBox
               Left = 6
-              Height = 21
-              Top = 158
-              Width = 159
+              Height = 23
+              Top = 156
+              Width = 161
               Caption = 'Hide object wider than'
               OnClick = BigNebBoxClick
               ParentFont = False
               TabOrder = 21
             end
             object fBigNebLimit: TLongEdit
-              Left = 218
-              Height = 31
+              Left = 216
+              Height = 28
               Hint = '0..20000'
-              Top = 158
+              Top = 156
               Width = 33
+              Constraints.MaxHeight = 28
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
@@ -1864,9 +2051,9 @@ object f_config_chart: Tf_config_chart
               MaxValue = 20000
             end
             object BigNebUnit: TLabel
-              Left = 263
+              Left = 260
               Height = 19
-              Top = 161
+              Top = 159
               Width = 49
               Caption = 'minutes'
               ParentColor = False
@@ -1874,9 +2061,9 @@ object f_config_chart: Tf_config_chart
             end
             object MessierBox: TCheckBox
               Left = 4
-              Height = 21
-              Top = 131
-              Width = 191
+              Height = 23
+              Top = 130
+              Width = 194
               Caption = 'Do not filter Messier objects'
               OnClick = MessierBoxClick
               ParentFont = False
@@ -1891,28 +2078,28 @@ object f_config_chart: Tf_config_chart
         ClientWidth = 493
         ParentFont = False
         object Bevel1: TBevel
-          Left = 275
-          Height = 342
+          Left = 271
+          Height = 338
           Top = 16
-          Width = 218
+          Width = 217
         end
         object Bevel2: TBevel
-          Left = 58
-          Height = 342
+          Left = 57
+          Height = 338
           Top = 16
-          Width = 191
+          Width = 199
         end
         object Bevel3: TBevel
           Left = 0
-          Height = 344
+          Height = 340
           Top = 16
-          Width = 50
+          Width = 49
         end
         object Label160: TLabel
           Left = 2
           Height = 38
           Top = 21
-          Width = 62
+          Width = 61
           AutoSize = False
           Caption = 'Field Number'
           ParentColor = False
@@ -1920,10 +2107,10 @@ object f_config_chart: Tf_config_chart
           WordWrap = True
         end
         object Label176: TLabel
-          Left = 68
+          Left = 67
           Height = 40
           Top = 21
-          Width = 170
+          Width = 168
           AutoSize = False
           Caption = 'Degree Grid Spacing'
           ParentColor = False
@@ -1931,10 +2118,10 @@ object f_config_chart: Tf_config_chart
           WordWrap = True
         end
         object Label175: TLabel
-          Left = 283
+          Left = 281
           Height = 40
           Top = 21
-          Width = 170
+          Width = 168
           AutoSize = False
           Caption = 'Hour Grid Spacing'
           ParentColor = False
@@ -1944,8 +2131,8 @@ object f_config_chart: Tf_config_chart
         object Label161: TLabel
           Left = 29
           Height = 19
-          Top = 108
-          Width = 7
+          Top = 107
+          Width = 8
           Caption = '1'
           ParentColor = False
           ParentFont = False
@@ -1953,8 +2140,8 @@ object f_config_chart: Tf_config_chart
         object Label162: TLabel
           Left = 29
           Height = 19
-          Top = 133
-          Width = 7
+          Top = 132
+          Width = 8
           Caption = '2'
           ParentColor = False
           ParentFont = False
@@ -1962,8 +2149,8 @@ object f_config_chart: Tf_config_chart
         object Label163: TLabel
           Left = 29
           Height = 19
-          Top = 159
-          Width = 7
+          Top = 157
+          Width = 8
           Caption = '3'
           ParentColor = False
           ParentFont = False
@@ -1971,8 +2158,8 @@ object f_config_chart: Tf_config_chart
         object Label164: TLabel
           Left = 29
           Height = 19
-          Top = 184
-          Width = 7
+          Top = 182
+          Width = 8
           Caption = '4'
           ParentColor = False
           ParentFont = False
@@ -1980,8 +2167,8 @@ object f_config_chart: Tf_config_chart
         object Label166: TLabel
           Left = 29
           Height = 19
-          Top = 83
-          Width = 7
+          Top = 82
+          Width = 8
           Caption = '0'
           ParentColor = False
           ParentFont = False
@@ -1989,8 +2176,8 @@ object f_config_chart: Tf_config_chart
         object Label167: TLabel
           Left = 29
           Height = 19
-          Top = 209
-          Width = 7
+          Top = 207
+          Width = 8
           Caption = '5'
           ParentColor = False
           ParentFont = False
@@ -1998,8 +2185,8 @@ object f_config_chart: Tf_config_chart
         object Label168: TLabel
           Left = 29
           Height = 19
-          Top = 234
-          Width = 7
+          Top = 232
+          Width = 8
           Caption = '6'
           ParentColor = False
           ParentFont = False
@@ -2007,8 +2194,8 @@ object f_config_chart: Tf_config_chart
         object Label169: TLabel
           Left = 29
           Height = 19
-          Top = 260
-          Width = 7
+          Top = 257
+          Width = 8
           Caption = '7'
           ParentColor = False
           ParentFont = False
@@ -2016,8 +2203,8 @@ object f_config_chart: Tf_config_chart
         object Label170: TLabel
           Left = 29
           Height = 19
-          Top = 285
-          Width = 7
+          Top = 282
+          Width = 8
           Caption = '8'
           ParentColor = False
           ParentFont = False
@@ -2025,8 +2212,8 @@ object f_config_chart: Tf_config_chart
         object Label174: TLabel
           Left = 29
           Height = 19
-          Top = 310
-          Width = 7
+          Top = 307
+          Width = 8
           Caption = '9'
           ParentColor = False
           ParentFont = False
@@ -2034,36 +2221,36 @@ object f_config_chart: Tf_config_chart
         object Label177: TLabel
           Left = 29
           Height = 19
-          Top = 335
-          Width = 14
+          Top = 332
+          Width = 16
           Caption = '10'
           ParentColor = False
           ParentFont = False
         end
         object Label4: TLabel
-          Left = 68
+          Left = 67
           Height = 19
-          Top = 365
+          Top = 361
           Width = 109
           Caption = 'Compass rose size'
           ParentColor = False
           ParentFont = False
         end
         object CheckBox13: TCheckBox
-          Left = 256
-          Height = 21
-          Top = 391
-          Width = 142
+          Left = 253
+          Height = 23
+          Top = 387
+          Width = 144
           Caption = 'Show compass rose'
           OnClick = CheckBox13Click
           ParentFont = False
           TabOrder = 23
         end
         object Button2: TButton
-          Left = 256
+          Left = 253
           Height = 25
-          Top = 361
-          Width = 76
+          Top = 357
+          Width = 75
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
           OnClick = Button2Click
@@ -2072,9 +2259,9 @@ object f_config_chart: Tf_config_chart
         end
         object TrackBar1: TTrackBar
           Left = 21
-          Height = 43
-          Top = 391
-          Width = 222
+          Height = 51
+          Top = 387
+          Width = 220
           Frequency = 5
           LineSize = 5
           Max = 130
@@ -2087,272 +2274,316 @@ object f_config_chart: Tf_config_chart
           TabOrder = 22
         end
         object RaDec1: TRaDec
-          Left = 59
+          Left = 58
           Height = 23
-          Top = 77
-          Width = 212
+          Top = 76
+          Width = 198
           kind = DE
+          Value = 0
           Enabled = True
           OnChange = DegSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 0
         end
         object RaDec2: TRaDec
           Tag = 1
-          Left = 59
+          Left = 58
           Height = 23
-          Top = 102
-          Width = 212
+          Top = 101
+          Width = 198
           kind = DE
+          Value = 0
           Enabled = True
           OnChange = DegSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 2
         end
         object RaDec3: TRaDec
           Tag = 2
-          Left = 59
+          Left = 58
           Height = 23
-          Top = 127
-          Width = 212
+          Top = 126
+          Width = 198
           kind = DE
+          Value = 0
           Enabled = True
           OnChange = DegSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 4
         end
         object RaDec4: TRaDec
           Tag = 3
-          Left = 59
+          Left = 58
           Height = 23
-          Top = 153
-          Width = 212
+          Top = 151
+          Width = 198
           kind = DE
+          Value = 0
           Enabled = True
           OnChange = DegSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 6
         end
         object RaDec5: TRaDec
           Tag = 4
-          Left = 59
+          Left = 58
           Height = 23
-          Top = 178
-          Width = 212
+          Top = 176
+          Width = 198
           kind = DE
+          Value = 0
           Enabled = True
           OnChange = DegSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 8
         end
         object RaDec6: TRaDec
           Tag = 5
-          Left = 59
+          Left = 58
           Height = 23
-          Top = 203
-          Width = 212
+          Top = 201
+          Width = 198
           kind = DE
+          Value = 0
           Enabled = True
           OnChange = DegSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 10
         end
         object RaDec7: TRaDec
           Tag = 6
-          Left = 59
+          Left = 58
           Height = 23
-          Top = 228
-          Width = 212
+          Top = 226
+          Width = 198
           kind = DE
+          Value = 0
           Enabled = True
           OnChange = DegSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 12
         end
         object RaDec8: TRaDec
           Tag = 7
-          Left = 59
+          Left = 58
           Height = 23
-          Top = 254
-          Width = 212
+          Top = 251
+          Width = 198
           kind = DE
+          Value = 0
           Enabled = True
           OnChange = DegSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 14
         end
         object RaDec9: TRaDec
           Tag = 8
-          Left = 59
+          Left = 58
           Height = 23
-          Top = 279
-          Width = 212
+          Top = 276
+          Width = 198
           kind = DE
+          Value = 0
           Enabled = True
           OnChange = DegSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 16
         end
         object RaDec10: TRaDec
           Tag = 9
-          Left = 59
+          Left = 58
           Height = 23
-          Top = 304
-          Width = 212
+          Top = 301
+          Width = 198
           kind = DE
+          Value = 0
           Enabled = True
           OnChange = DegSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 18
         end
         object RaDec11: TRaDec
           Tag = 10
-          Left = 59
+          Left = 58
           Height = 23
-          Top = 329
-          Width = 212
+          Top = 326
+          Width = 198
           kind = DE
+          Value = 0
           Enabled = True
           OnChange = DegSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 20
         end
         object RaDec12: TRaDec
-          Left = 276
+          Left = 281
           Height = 23
-          Top = 76
-          Width = 212
+          Top = 75
+          Width = 198
           kind = RA
+          Value = 0
           Enabled = True
           OnChange = HourSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 1
         end
         object RaDec13: TRaDec
           Tag = 1
-          Left = 276
+          Left = 281
           Height = 23
-          Top = 101
-          Width = 212
+          Top = 100
+          Width = 198
           kind = RA
+          Value = 0
           Enabled = True
           OnChange = HourSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 3
         end
         object RaDec14: TRaDec
           Tag = 2
-          Left = 276
+          Left = 281
           Height = 23
-          Top = 126
-          Width = 212
+          Top = 125
+          Width = 198
           kind = RA
+          Value = 0
           Enabled = True
           OnChange = HourSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 5
         end
         object RaDec15: TRaDec
           Tag = 3
-          Left = 276
+          Left = 281
           Height = 23
-          Top = 152
-          Width = 212
+          Top = 150
+          Width = 198
           kind = RA
+          Value = 0
           Enabled = True
           OnChange = HourSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 7
         end
         object RaDec16: TRaDec
           Tag = 4
-          Left = 276
+          Left = 281
           Height = 23
-          Top = 177
-          Width = 212
+          Top = 175
+          Width = 198
           kind = RA
+          Value = 0
           Enabled = True
           OnChange = HourSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 9
         end
         object RaDec17: TRaDec
           Tag = 5
-          Left = 276
+          Left = 281
           Height = 23
-          Top = 202
-          Width = 212
+          Top = 200
+          Width = 198
           kind = RA
+          Value = 0
           Enabled = True
           OnChange = HourSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 11
         end
         object RaDec18: TRaDec
           Tag = 6
-          Left = 276
+          Left = 281
           Height = 23
-          Top = 227
-          Width = 212
+          Top = 225
+          Width = 198
           kind = RA
+          Value = 0
           Enabled = True
           OnChange = HourSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 13
         end
         object RaDec19: TRaDec
           Tag = 7
-          Left = 276
+          Left = 281
           Height = 23
-          Top = 253
-          Width = 212
+          Top = 250
+          Width = 198
           kind = RA
+          Value = 0
           Enabled = True
           OnChange = HourSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 15
         end
         object RaDec20: TRaDec
           Tag = 8
-          Left = 276
+          Left = 281
           Height = 23
-          Top = 278
-          Width = 212
+          Top = 275
+          Width = 198
           kind = RA
+          Value = 0
           Enabled = True
           OnChange = HourSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 17
         end
         object RaDec21: TRaDec
           Tag = 9
-          Left = 276
+          Left = 281
           Height = 23
-          Top = 303
-          Width = 212
+          Top = 300
+          Width = 198
           kind = RA
+          Value = 0
           Enabled = True
           OnChange = HourSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 19
         end
         object RaDec22: TRaDec
           Tag = 10
-          Left = 276
+          Left = 281
           Height = 23
-          Top = 328
-          Width = 212
+          Top = 325
+          Width = 198
           kind = RA
+          Value = 0
           Enabled = True
           OnChange = HourSpacingChange
+          Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 21
         end
         object CheckBox2: TCheckBox
-          Left = 256
-          Height = 21
-          Top = 417
-          Width = 136
+          Left = 253
+          Height = 23
+          Top = 413
+          Width = 138
           Caption = 'Use simple pointer'
           OnClick = CheckBox2Click
           ParentFont = False
@@ -2375,12 +2606,12 @@ object f_config_chart: Tf_config_chart
         end
         object GroupBox5: TGroupBox
           Left = 24
-          Height = 225
+          Height = 223
           Top = 40
-          Width = 373
+          Width = 369
           Caption = 'Type of object to add to the list'
-          ClientHeight = 206
-          ClientWidth = 363
+          ClientHeight = 203
+          ClientWidth = 367
           ParentFont = False
           TabOrder = 0
           object liststar: TCheckBox
@@ -2396,7 +2627,7 @@ object f_config_chart: Tf_config_chart
           object listneb: TCheckBox
             Left = 32
             Height = 21
-            Top = 59
+            Top = 58
             Width = 74
             Caption = 'Nebulae'
             OnClick = listnebClick
@@ -2406,7 +2637,7 @@ object f_config_chart: Tf_config_chart
           object listpla: TCheckBox
             Left = 32
             Height = 21
-            Top = 93
+            Top = 92
             Width = 141
             Caption = 'Solar System object'
             OnClick = listplaClick
@@ -2416,7 +2647,7 @@ object f_config_chart: Tf_config_chart
           object listvar: TCheckBox
             Left = 32
             Height = 21
-            Top = 127
+            Top = 126
             Width = 105
             Caption = 'Variable Stars'
             OnClick = listvarClick
@@ -2426,7 +2657,7 @@ object f_config_chart: Tf_config_chart
           object listdbl: TCheckBox
             Left = 32
             Height = 21
-            Top = 162
+            Top = 160
             Width = 100
             Caption = 'Double Stars'
             OnClick = listdblClick
@@ -2438,37 +2669,37 @@ object f_config_chart: Tf_config_chart
     end
     object FOVPanel: TPanel
       Left = 1
-      Height = 42
-      Top = 491
-      Width = 508
+      Height = 45
+      Top = 482
+      Width = 503
       Align = alBottom
       AutoSize = True
-      ClientHeight = 42
-      ClientWidth = 508
+      ClientHeight = 45
+      ClientWidth = 503
       ParentFont = False
       TabOrder = 1
       Visible = False
       object fv10: TLabel
-        Left = 405
-        Height = 16
+        Left = 401
+        Height = 19
         Top = 25
-        Width = 26
+        Width = 28
         Caption = 'fv10'
         ParentColor = False
         ParentFont = False
       end
       object Label2: TLabel
         Left = 1
-        Height = 16
+        Height = 19
         Top = 1
-        Width = 72
+        Width = 75
         Caption = 'fov number:'
         ParentColor = False
         ParentFont = False
       end
       object fv9: TLabel
-        Left = 324
-        Height = 16
+        Left = 321
+        Height = 19
         Top = 25
         Width = 23
         Caption = 'fw9'
@@ -2476,8 +2707,8 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object fv8: TLabel
-        Left = 244
-        Height = 16
+        Left = 241
+        Height = 19
         Top = 25
         Width = 23
         Caption = 'fw8'
@@ -2485,17 +2716,17 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object fv7: TLabel
-        Left = 163
-        Height = 16
+        Left = 161
+        Height = 19
         Top = 25
-        Width = 22
+        Width = 23
         Caption = 'fw7'
         ParentColor = False
         ParentFont = False
       end
       object fv6: TLabel
-        Left = 82
-        Height = 16
+        Left = 81
+        Height = 19
         Top = 25
         Width = 23
         Caption = 'fw6'
@@ -2504,7 +2735,7 @@ object f_config_chart: Tf_config_chart
       end
       object fv5: TLabel
         Left = 1
-        Height = 16
+        Height = 19
         Top = 25
         Width = 23
         Caption = 'fw5'
@@ -2512,8 +2743,8 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object fv4: TLabel
-        Left = 405
-        Height = 16
+        Left = 401
+        Height = 19
         Top = 1
         Width = 23
         Caption = 'fw4'
@@ -2521,8 +2752,8 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object fv3: TLabel
-        Left = 324
-        Height = 16
+        Left = 321
+        Height = 19
         Top = 1
         Width = 23
         Caption = 'fw3'
@@ -2530,26 +2761,26 @@ object f_config_chart: Tf_config_chart
         ParentFont = False
       end
       object fv2: TLabel
-        Left = 244
-        Height = 16
+        Left = 241
+        Height = 19
         Top = 1
-        Width = 22
+        Width = 23
         Caption = 'fw2'
         ParentColor = False
         ParentFont = False
       end
       object fv1: TLabel
-        Left = 163
-        Height = 16
+        Left = 161
+        Height = 19
         Top = 1
-        Width = 21
+        Width = 23
         Caption = 'fw1'
         ParentColor = False
         ParentFont = False
       end
       object fv0: TLabel
-        Left = 82
-        Height = 16
+        Left = 81
+        Height = 19
         Top = 1
         Width = 23
         Caption = 'fw0'
