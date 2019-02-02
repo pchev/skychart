@@ -39,7 +39,7 @@ begin
   rs := cnv.TextExtent(teststr);
   sc := rs.cx / designlen;
   sc := max(sc, rs.cy / designhig);
-  if abs(1 - sc) < 0.1 then
+  if abs(1 - sc) < 0.02 then
     sc := 1;
   RunDPI := round(DesignDPI * sc);
   {$endif}
