@@ -910,8 +910,6 @@ begin
   EditH.Left := 0;
   EditH.Width := dsize;
   EditH.Height := hsize;
-  EditH.Constraints.MaxHeight:=hsize;
-  EditH.Constraints.MaxWidth:=dsize;
   LabelH.Caption := ':';
   LabelH.Top := (EditH.Height - LabelH.Height) div 2;
   LabelH.Left := EditH.Left + EditH.Width + 2;
@@ -922,8 +920,6 @@ begin
   EditM.Left := LabelH.Left + lsize;
   EditM.Width := dsize;
   EditM.Height := hsize;
-  EditM.Constraints.MaxHeight:=hsize;
-  EditM.Constraints.MaxWidth:=dsize;
   LabelM.Caption := ':';
   LabelM.Top := LabelH.Top;
   LabelM.Left := EditM.Left + EditM.Width + 2;
@@ -934,8 +930,6 @@ begin
   EditS.Left := LabelM.Left + lsize;
   EditS.Width := dsize;
   EditS.Height := hsize;
-  EditS.Constraints.MaxHeight:=hsize;
-  EditS.Constraints.MaxWidth:=dsize;
   Height := EditH.Height;
   Width := EditS.Left + EditS.Width + 2;
   EditH.OnChange := @EditChange;
