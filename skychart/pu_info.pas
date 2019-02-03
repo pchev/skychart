@@ -45,12 +45,17 @@ type
     Button4: TButton;
     ComboBox1: TComboBox;
     InfoMemo: TMemo;
+    PageControl1: TPageControl;
     SortLabel: TLabel;
     Page1: TPanel;
     Page2: TPanel;
     Page3: TPanel;
     Page4: TPanel;
     StringGrid2: TStringGrid;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
     TitlePanel: TPanel;
     serverinfo: TLabel;
     Panel1: TPanel;
@@ -276,10 +281,8 @@ end;
 procedure Tf_info.FormCreate(Sender: TObject);
 begin
   ScaleDPI(Self);
-  page1.Align := alClient;
-  page2.Align := alClient;
-  page3.Align := alClient;
-  page4.Align := alClient;
+  PageControl1.ShowTabs:= false;
+
   SetLang;
  {$ifdef mswindows}
   SaveDialog1.Options := SaveDialog1.Options - [ofNoReadOnlyReturn];
@@ -370,13 +373,13 @@ end;
 
 procedure Tf_info.setpage(n: integer);
 begin
+
   if n <> 3 then
     Button1.Caption := rsClose;
+
   ActivePage := n;
-  Page1.Visible := (n = 0);
-  Page2.Visible := (n = 1);
-  Page3.Visible := (n = 2);
-  Page4.Visible := (n = 3);
+  PageControl1.ActivePageIndex := ActivePage;
+
   case ActivePage of
     0: TitlePanel.Caption := rsTCPIPConnect;
     1: TitlePanel.Caption := rsObjectList;
@@ -454,21 +457,25 @@ var
 begin
   //PrtGrid(StringGrid2, 'CdC', rsObjectList, '', poLandscape);
   list := TStringList.Create;
-  for r := 0 to StringGrid2.RowCount - 1 do
-  begin
-    desc := '';
-    for i := 0 to StringGrid2.ColCount - 1 do
+  try
+
+    for r := 0 to StringGrid2.RowCount - 1 do
     begin
-      buf := trim(StringGrid2.Cells[i, r]);
-      if desc > '' then
-        desc := desc + tab;
-      desc := desc + buf;
+      desc := '';
+      for i := 0 to StringGrid2.ColCount - 1 do
+      begin
+        buf := trim(StringGrid2.Cells[i, r]);
+        if desc > '' then
+          desc := desc + tab;
+        desc := desc + buf;
+      end;
+      desc := ExpandTab(desc, 6);
+      list.add(desc);
     end;
-    desc := ExpandTab(desc, 6);
-    list.add(desc);
+    PrintStrings(list, 'CdC', rsObjectList, '', poLandscape);
+  finally
+    list.Free;
   end;
-  PrintStrings(list, 'CdC', rsObjectList, '', poLandscape);
-  list.Free;
 end;
 
 procedure Tf_info.Button7Click(Sender: TObject);
