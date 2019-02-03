@@ -23,10 +23,10 @@ object f_config_observatory: Tf_config_observatory
       Height = 546
       Top = 1
       Width = 500
-      ActivePage = Page2
+      ActivePage = Page1
       Align = alClient
       ShowTabs = False
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 0
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
@@ -83,7 +83,7 @@ object f_config_observatory: Tf_config_observatory
         end
         object HScrollBar: TScrollBar
           Left = 47
-          Height = 13
+          Height = 20
           Top = 448
           Width = 400
           PageSize = 1
@@ -95,7 +95,7 @@ object f_config_observatory: Tf_config_observatory
           Left = 450
           Height = 96
           Top = 248
-          Width = 13
+          Width = 20
           Kind = sbVertical
           PageSize = 1
           TabOrder = 13
@@ -106,10 +106,10 @@ object f_config_observatory: Tf_config_observatory
           Left = 10
           Height = 73
           Top = 72
-          Width = 190
+          Width = 186
           Caption = 'Latitude'
           ClientHeight = 53
-          ClientWidth = 188
+          ClientWidth = 184
           TabOrder = 5
           object Label58: TLabel
             Left = 4
@@ -120,24 +120,22 @@ object f_config_observatory: Tf_config_observatory
             ParentColor = False
           end
           object hemis: TComboBox
-            Left = 112
+            Left = 126
             Height = 28
             Top = 20
-            Width = 72
+            Width = 56
             AutoCompleteText = [cbactSearchAscending]
             Constraints.MaxHeight = 28
             ItemHeight = 0
-            ItemIndex = 0
             Items.Strings = (
-              'North'
-              'South'
+              'N'
+              'S'
             )
             OnChange = latdegChange
             TabOrder = 3
-            Text = 'North'
           end
           object latdeg: TFloatEdit
-            Left = 4
+            Left = 2
             Height = 28
             Hint = '0..90'
             Top = 20
@@ -156,11 +154,11 @@ object f_config_observatory: Tf_config_observatory
             OnExit = latdegChange
           end
           object latmin: TLongEdit
-            Left = 48
+            Left = 46
             Height = 28
             Hint = '0..59'
             Top = 20
-            Width = 25
+            Width = 36
             Constraints.MaxHeight = 28
             MaxLength = 2
             ParentShowHint = False
@@ -172,11 +170,11 @@ object f_config_observatory: Tf_config_observatory
             OnExit = latdegChange
           end
           object latsec: TFloatEdit
-            Left = 72
+            Left = 82
             Height = 28
             Hint = '0..59.99'
             Top = 20
-            Width = 42
+            Width = 44
             Constraints.MaxHeight = 28
             ParentShowHint = False
             ShowHint = True
@@ -190,13 +188,13 @@ object f_config_observatory: Tf_config_observatory
           end
         end
         object Longitude: TGroupBox
-          Left = 200
+          Left = 196
           Height = 73
           Top = 72
-          Width = 183
+          Width = 187
           Caption = 'Longitude'
           ClientHeight = 53
-          ClientWidth = 181
+          ClientWidth = 185
           TabOrder = 6
           object Label61: TLabel
             Left = 4
@@ -207,28 +205,26 @@ object f_config_observatory: Tf_config_observatory
             ParentColor = False
           end
           object long: TComboBox
-            Left = 112
+            Left = 126
             Height = 28
             Top = 20
-            Width = 73
+            Width = 56
             AutoCompleteText = [cbactSearchAscending]
             Constraints.MaxHeight = 28
             ItemHeight = 0
-            ItemIndex = 1
             Items.Strings = (
-              'West'
-              'East'
+              'W'
+              'E'
             )
             OnChange = longdegChange
             TabOrder = 3
-            Text = 'East'
           end
           object longdeg: TFloatEdit
-            Left = 4
+            Left = 2
             Height = 28
             Hint = '0..180'
             Top = 20
-            Width = 46
+            Width = 44
             Constraints.MaxHeight = 28
             MaxLength = 12
             ParentShowHint = False
@@ -243,11 +239,11 @@ object f_config_observatory: Tf_config_observatory
             OnExit = longdegChange
           end
           object longmin: TLongEdit
-            Left = 48
+            Left = 46
             Height = 28
             Hint = '0..59'
             Top = 20
-            Width = 25
+            Width = 36
             Constraints.MaxHeight = 28
             MaxLength = 2
             ParentShowHint = False
@@ -259,11 +255,11 @@ object f_config_observatory: Tf_config_observatory
             OnExit = longdegChange
           end
           object longsec: TFloatEdit
-            Left = 72
+            Left = 82
             Height = 28
             Hint = '0..59.99'
             Top = 20
-            Width = 42
+            Width = 44
             Constraints.MaxHeight = 28
             ParentShowHint = False
             ShowHint = True
@@ -332,9 +328,9 @@ object f_config_observatory: Tf_config_observatory
           end
           object CountryTZ: TCheckBox
             Left = 8
-            Height = 23
+            Height = 21
             Top = 1
-            Width = 136
+            Width = 134
             Caption = 'Country Timezone'
             Checked = True
             OnChange = CountryTZChange
@@ -443,9 +439,9 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 1
           object horizonopaque: TCheckBox
             Left = 13
-            Height = 23
+            Height = 21
             Top = 13
-            Width = 212
+            Width = 210
             Caption = 'Show Object below the horizon'
             OnClick = horizonopaqueClick
             TabOrder = 0
@@ -462,9 +458,9 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 0
           object displayhorizon: TCheckBox
             Left = 4
-            Height = 23
+            Height = 21
             Top = 34
-            Width = 196
+            Width = 194
             Caption = 'Display the local horizon line'
             OnClick = displayhorizonClick
             TabOrder = 1
@@ -487,9 +483,9 @@ object f_config_observatory: Tf_config_observatory
           end
           object fillhorizon: TCheckBox
             Left = 4
-            Height = 23
+            Height = 21
             Top = 8
-            Width = 153
+            Width = 151
             Caption = 'Fill with horizon color'
             OnClick = fillhorizonClick
             TabOrder = 0
@@ -513,9 +509,9 @@ object f_config_observatory: Tf_config_observatory
           end
           object displayhorizonpicture: TCheckBox
             Left = 4
-            Height = 23
+            Height = 21
             Top = 88
-            Width = 187
+            Width = 185
             Caption = 'Display the horizon picture'
             OnClick = displayhorizonpictureClick
             TabOrder = 3
@@ -537,9 +533,9 @@ object f_config_observatory: Tf_config_observatory
           end
           object HorizonQuality: TCheckBox
             Left = 309
-            Height = 23
+            Height = 21
             Top = 119
-            Width = 99
+            Width = 97
             Caption = 'High quality'
             OnClick = HorizonQualityClick
             TabOrder = 6
@@ -554,18 +550,18 @@ object f_config_observatory: Tf_config_observatory
           end
           object ShowHorizon0: TCheckBox
             Left = 264
-            Height = 23
+            Height = 21
             Top = 8
-            Width = 152
+            Width = 150
             Caption = 'Show 0° horizon line '
             OnClick = ShowHorizon0Click
             TabOrder = 7
           end
           object HorizonRise: TCheckBox
             Left = 4
-            Height = 23
+            Height = 21
             Top = 62
-            Width = 271
+            Width = 269
             Caption = 'Compute rise/set time relative to this line'
             OnClick = HorizonRiseClick
             TabOrder = 8
@@ -592,9 +588,9 @@ object f_config_observatory: Tf_config_observatory
           end
           object horizondepression: TCheckBox
             Left = 13
-            Height = 23
+            Height = 21
             Top = 56
-            Width = 277
+            Width = 275
             Caption = 'Draw the apparent depressed horizon line'
             OnClick = horizondepressionClick
             TabOrder = 0

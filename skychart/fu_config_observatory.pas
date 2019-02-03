@@ -209,11 +209,7 @@ begin
   Longitude.Caption := rsLongitude;
   Altitude.Caption := Format(rsObsAltitude, ['']);
   Label58.Caption := rsDegreesMinut;
-  hemis.items[0] := rsNorth;
-  hemis.items[1] := rsSouth;
   Label61.Caption := rsDegreesMinut;
-  long.items[0] := rsWest;
-  long.items[1] := rsEast;
   Label70.Caption := rsMeters;
   timezone.Caption := rsTimeZone;
   CountryTZ.Caption := rsCountryTimez;
