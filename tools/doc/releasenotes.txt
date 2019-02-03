@@ -2,6 +2,8 @@ Version 4.1.1 beta, release Notes
 
 New functions:
 
+- It is now possible to use a telescope connected to a remote ASCOM Windows computer from Skychart running on Linux or macOS. See: https://github.com/ASCOMInitiative/ASCOMRemote/blob/master/Documentation/ASCOM%20Remote%20Concept.pdf
+- The resolution of the background image can now be limited to improve the performance if the screen is too big or if there is not enough cpu core.
 - Client/server communication can now use J2000 coordinates instead of the current chart setting. You can change this option in Setup/General/Server.
 - Remove obsolete/unmaintainable lx200 and encoder drivers. Please use the corresponding ASCOM or INDI drivers.
   - for generic lx200: https://pixelstelescopes.wordpress.com/advanced-lx200/
