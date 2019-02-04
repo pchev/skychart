@@ -31,10 +31,9 @@ uses
   {$ifdef mswindows}
   Variants, comobj, Windows, ShlObj, ShellAPI,
   {$endif}
-  cu_ascomrest, math, LazSysUtils,
-  LCLIntf, u_util, u_constant, u_help, u_translation,
+  cu_ascomrest, math, LCLIntf, u_util, u_constant, u_help, u_translation,
   Messages, SysUtils, Classes, Graphics, Controls,
-  Forms, Dialogs, UScaleDPI,
+  Forms, Dialogs, UScaleDPI, LCLVersion,
   StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls, Spin;
 
 type
@@ -183,6 +182,13 @@ type
 
 
 implementation
+
+uses
+{$if lcl_major > 1}
+LazSysUtils;
+{$else}
+LazUTF8SysUtils;
+{$endif}
 
 {$R *.lfm}
 
