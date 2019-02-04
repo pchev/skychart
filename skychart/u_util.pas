@@ -2769,7 +2769,7 @@ begin
   y := 0;
   StrDate := PrtTextDate + DateToStr(Date);
 
-  with Printer do
+  if Printer<>nil then with Printer do
   begin
     Title := PrtTitle;
     Orientation := orient;
@@ -2905,7 +2905,7 @@ begin
   GetMem(Cols, Grid.ColCount * SizeOf(integer));
   StrDate := PrtTextDate + DateToStr(Date);
 
-  with Printer do
+  if Printer<>nil then with Printer do
   begin
     Title := PrtTitle;
     Orientation := orient;
