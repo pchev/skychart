@@ -6565,7 +6565,7 @@ procedure Tf_main.ReadChartConfig(filename: string; usecatalog, resizemain: bool
 var
   i, j, t, l, w, h, n: integer;
   inif: TMemIniFile;
-  section, buf: string;
+  section, buf,buf0,buf1,buf2,buf3: string;
 begin
   inif := TMeminifile.Create(filename);
   try
@@ -6960,19 +6960,50 @@ begin
       end;
       try
         section := 'chart';
-        csc.EquinoxType := ReadInteger(section, 'EquinoxType', csc.EquinoxType);
-        csc.EquinoxChart := ReadString(section, 'EquinoxChart', csc.EquinoxChart);
-        csc.DefaultJDchart := ReadFloat(section, 'DefaultJDchart', csc.DefaultJDchart);
-        for i:=0 to 3 do
-        begin
-         csc.ProjOptions[i].EquinoxType := ReadInteger(section, 'ProjOptionsEquinoxType' + IntToStr(i), csc.ProjOptions[i].EquinoxType);
-         csc.ProjOptions[i].ApparentPos := ReadBool(section, 'ProjOptionsApparentPos' + IntToStr(i), csc.ProjOptions[i].ApparentPos);
-         csc.ProjOptions[i].PMon := ReadBool(section, 'ProjOptionsPMon' + IntToStr(i), csc.ProjOptions[i].PMon);
-         csc.ProjOptions[i].YPmon := ReadFloat(section, 'ProjOptionsYPmon' + IntToStr(i), csc.ProjOptions[i].YPmon);
-         csc.ProjOptions[i].EquinoxChart := ReadString(section, 'ProjOptionsEquinoxChart' + IntToStr(i), csc.ProjOptions[i].EquinoxChart);
-         csc.ProjOptions[i].DefaultJDChart := ReadFloat(section, 'ProjOptionsDefaultJDChart' + IntToStr(i), csc.ProjOptions[i].DefaultJDChart);
-         csc.ProjOptions[i].CoordExpertMode := ReadBool(section, 'ProjOptionsCoordExpertMode' + IntToStr(i), csc.ProjOptions[i].CoordExpertMode);
-         csc.ProjOptions[i].CoordType := ReadInteger(section, 'ProjOptionsCoordType' + IntToStr(i), csc.ProjOptions[i].CoordType);
+        buf := ReadString(section, 'EquinoxChart', csc.EquinoxChart);
+        buf0 := ReadString(section, 'ProjOptionsEquinoxChart0',csc.ProjOptions[0].EquinoxChart);
+        buf1 := ReadString(section, 'ProjOptionsEquinoxChart1',csc.ProjOptions[1].EquinoxChart);
+        buf2 := ReadString(section, 'ProjOptionsEquinoxChart2',csc.ProjOptions[2].EquinoxChart);
+        buf3 := ReadString(section, 'ProjOptionsEquinoxChart3',csc.ProjOptions[3].EquinoxChart);
+        if (buf<>'')and(buf0<>'')and(buf1<>'')and(buf2<>'')and(buf3<>'') then begin
+          csc.EquinoxChart := ReadString(section, 'EquinoxChart', csc.EquinoxChart);
+          csc.EquinoxType := ReadInteger(section, 'EquinoxType', csc.EquinoxType);
+          csc.DefaultJDchart := ReadFloat(section, 'DefaultJDchart', csc.DefaultJDchart);
+          for i:=0 to 3 do
+          begin
+           csc.ProjOptions[i].EquinoxType := ReadInteger(section, 'ProjOptionsEquinoxType' + IntToStr(i), csc.ProjOptions[i].EquinoxType);
+           csc.ProjOptions[i].ApparentPos := ReadBool(section, 'ProjOptionsApparentPos' + IntToStr(i), csc.ProjOptions[i].ApparentPos);
+           csc.ProjOptions[i].PMon := ReadBool(section, 'ProjOptionsPMon' + IntToStr(i), csc.ProjOptions[i].PMon);
+           csc.ProjOptions[i].YPmon := ReadFloat(section, 'ProjOptionsYPmon' + IntToStr(i), csc.ProjOptions[i].YPmon);
+           csc.ProjOptions[i].EquinoxChart := ReadString(section, 'ProjOptionsEquinoxChart' + IntToStr(i), csc.ProjOptions[i].EquinoxChart);
+           csc.ProjOptions[i].DefaultJDChart := ReadFloat(section, 'ProjOptionsDefaultJDChart' + IntToStr(i), csc.ProjOptions[i].DefaultJDChart);
+           csc.ProjOptions[i].CoordExpertMode := ReadBool(section, 'ProjOptionsCoordExpertMode' + IntToStr(i), csc.ProjOptions[i].CoordExpertMode);
+           csc.ProjOptions[i].CoordType := ReadInteger(section, 'ProjOptionsCoordType' + IntToStr(i), csc.ProjOptions[i].CoordType);
+          end;
+        end
+        else begin
+          // in case of wrong expert mode setting
+          for i:=0 to 3 do
+          if i=1 then begin
+            csc.ProjOptions[i].EquinoxType := 2;
+            csc.ProjOptions[i].ApparentPos := True;
+            csc.ProjOptions[i].PMon := True;
+            csc.ProjOptions[i].YPmon := 0;
+            csc.ProjOptions[i].EquinoxChart := rsDate;
+            csc.ProjOptions[i].DefaultJDChart := jd2000;
+            csc.ProjOptions[i].CoordExpertMode := False;
+            csc.ProjOptions[i].CoordType := 0;
+          end
+          else begin
+            csc.ProjOptions[i].EquinoxType := def_cfgsc.EquinoxType;
+            csc.ProjOptions[i].ApparentPos := def_cfgsc.ApparentPos ;
+            csc.ProjOptions[i].PMon := def_cfgsc.PMon ;
+            csc.ProjOptions[i].YPmon := def_cfgsc.YPmon ;
+            csc.ProjOptions[i].EquinoxChart := def_cfgsc.EquinoxChart ;
+            csc.ProjOptions[i].DefaultJDChart := def_cfgsc.DefaultJDChart ;
+            csc.ProjOptions[i].CoordExpertMode := def_cfgsc.CoordExpertMode ;
+            csc.ProjOptions[i].CoordType := def_cfgsc.CoordType ;
+          end;
         end;
       except
         ShowError('Error reading ' + filename + ' chart');
