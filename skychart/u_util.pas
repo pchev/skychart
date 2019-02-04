@@ -692,7 +692,7 @@ begin
 
   for j := 1 to length(str) do
   begin
-    c := str[j - 1];
+    c := str[j];
 
     if c = tab then
     begin
