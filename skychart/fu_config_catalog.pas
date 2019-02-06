@@ -1090,13 +1090,18 @@ begin
 end;
 
 procedure Tf_config_catalog.AddCatClick(Sender: TObject);
+var r: integer;
 begin
   catalogempty := False;
   stringgrid3.rowcount := stringgrid3.rowcount + 1;
-  stringgrid3.cells[2, stringgrid3.rowcount - 1] := '0';
-  stringgrid3.cells[3, stringgrid3.rowcount - 1] := '10';
-  EditGCatPath(stringgrid3.rowcount - 1);
+  r := stringgrid3.rowcount - 1;
+  stringgrid3.cells[2, r] := '0';
+  stringgrid3.cells[3, r] := '10';
+  EditGCatPath(r);
+  if trim(stringgrid3.Cells[4, r])='' then
+     stringgrid3.rowcount := r;
 end;
+
 
 procedure Tf_config_catalog.DelCatClick(Sender: TObject);
 var
