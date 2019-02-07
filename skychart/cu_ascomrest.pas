@@ -78,10 +78,9 @@ type
   protected
     Fhost, Fport, Fprotocol, FDevice, FbaseUrl, FApiVersion: string;
     Fuser, Fpassword: string;
-    FClientId: integer;
+    FClientId: LongWord;
     FLastError: string;
     FLastErrorCode: integer;
-    FDriverException: TJSONData;
     Fhttp: THTTPSend;
     function GetHeaders: TStringList;
     function GetDocument: TMemoryStream;
@@ -92,7 +91,7 @@ type
     procedure SetApiVersion(v: string);
     procedure SetUser(u: string);
     procedure SetPassword(p: string);
-    procedure SetClientId(i: integer);
+    procedure SetClientId(i: LongWord);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -113,10 +112,9 @@ type
     property ApiVersion: string read FApiVersion write SetApiVersion;
     property User: string read Fuser write SetUser;
     property Password: string read Fpassword write SetPassword;
-    property ClientId: integer read FClientId write SetClientId;
+    property ClientId: LongWord read FClientId write SetClientId;
     property LastError: string read FLastError;
     property LastErrorCode: integer read FLastErrorCode;
-    property DriverException: TJSONData read FDriverException;
     property Headers: TStringList read GetHeaders;
     property Document: TMemoryStream read GetDocument;
 
@@ -266,7 +264,7 @@ begin
    SetBaseUrl;
 end;
 
-procedure TAscomRest.SetClientId(i: integer);
+procedure TAscomRest.SetClientId(i: LongWord);
 begin
   FClientId:=i;
 end;
@@ -294,7 +292,6 @@ function TAscomRest.Get(method:string; param: string=''):TAscomResult;
        Result.data:=GetJSON(Fhttp.Document);
        FLastErrorCode:=Result.data.GetPath('ErrorNumber').AsInteger;
        FLastError:=Result.data.GetPath('ErrorMessage').AsString;
-       FDriverException:=Result.data.GetPath('DriverException');
        if FLastErrorCode<>0 then begin
           Result.Free;
           raise EAscomException.Create(FLastError);
@@ -355,7 +352,7 @@ end;
 
 function TAscomRest.GetImageArray: TImageArray;
 var J: TAscomResult;
-    i,k,n: integer;
+    x,y,k: integer;
 begin
    J:=Get('ImageArray');
    try
@@ -366,10 +363,10 @@ begin
        Result.width:=Count;
        Result.height:=Arrays[0].Count;
        SetLength(Result.img,1,Result.height,Result.width);
-       for i:=0 to Count-1 do begin
-         with Arrays[i] do begin
-           for k:=0 to Count-1 do begin
-              Result.img[0,k,i]:=Integers[k];
+       for x:=0 to Count-1 do begin
+         with Arrays[x] do begin
+           for y:=0 to Count-1 do begin
+              Result.img[0,y,x]:=Integers[y];
            end;
          end;
        end;
@@ -381,17 +378,17 @@ begin
        Result.width:=Count;
        Result.height:=Arrays[0].Count;
        SetLength(Result.img,3,Result.height,Result.width);
-       for i:=0 to Count-1 do begin
-         with Arrays[i] do begin
-           for k:=0 to Count-1 do begin
-             with Arrays[k] do begin
-               for n:=0 to 2 do begin
-                 Result.img[n,k,i]:=Integers[n];
-               end; //n
+       for x:=0 to Count-1 do begin
+         with Arrays[x] do begin
+           for y:=0 to Count-1 do begin
+             with Arrays[y] do begin
+               for k:=0 to 2 do begin
+                 Result.img[k,y,x]:=Integers[k];
+               end; //k
              end;
-           end; // k
+           end; // y
          end;
-       end; //i
+       end; //x
      end;
    end;
    finally
@@ -400,8 +397,7 @@ begin
 end;
 
 function TAscomRest.PutR(method: string; params:array of string):TAscomResult;
-var J: TJSONData;
-    url,data: string;
+var url,data: string;
     ok: boolean;
     i,n: integer;
 begin
@@ -442,7 +438,6 @@ begin
       Result.data:=GetJSON(Fhttp.Document);
       FLastErrorCode:=Result.data.GetPath('ErrorNumber').AsInteger;
       FLastError:=Result.data.GetPath('ErrorMessage').AsString;
-      FDriverException:=Result.data.GetPath('DriverException');
       if FLastErrorCode<>0 then begin
          Result.Free;
          raise EAscomException.Create(FLastError);
@@ -506,7 +501,6 @@ begin
       J:=GetJSON(Fhttp.Document);
       FLastErrorCode:=J.GetPath('ErrorNumber').AsInteger;
       FLastError:=J.GetPath('ErrorMessage').AsString;
-      FDriverException:=J.GetPath('DriverException');
       J.Free;
       if FLastErrorCode<>0 then begin
          raise EAscomException.Create(FLastError);
