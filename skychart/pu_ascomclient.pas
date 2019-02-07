@@ -41,6 +41,8 @@ type
   { Tpop_scope }
 
   Tpop_scope = class(TForm)
+    ARestPass: TEdit;
+    ARestUser: TEdit;
     ButtonGetLocation: TSpeedButton;
     ButtonPark: TSpeedButton;
     elev: TEdit;
@@ -52,6 +54,8 @@ type
     Label35: TLabel;
     Label36: TLabel;
     Label37: TLabel;
+    Label38: TLabel;
+    Label39: TLabel;
     PageControl1: TPageControl;
     Panel3: TPanel;
     parkled: TEdit;
@@ -95,6 +99,7 @@ type
     ARestPort: TSpinEdit;
     ARestProtocol: TComboBox;
     {Utility and form functions}
+    procedure ARestProtocolChange(Sender: TObject);
     procedure ButtonGetLocationClick(Sender: TObject);
     procedure ButtonParkClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -339,6 +344,10 @@ begin
       case ARestProtocol.ItemIndex of
         0: TR.Protocol:='http:';
         1: TR.Protocol:='https:';
+      end;
+      if (ARestUser.Text<>'')and(ARestPass.Text<>'') then begin
+         TR.User:=ARestUser.Text;
+         TR.Password:=ARestPass.Text;
       end;
       TR.Device:='Telescope/'+ARestDevice.Text;
       TR.Put('Connected',true);
@@ -846,6 +855,8 @@ begin
   ARestProtocol.ItemIndex := ini.ReadInteger('AscomRemote', 'protocol', 0);
   ARestHost.Text := ini.readstring('AscomRemote', 'host', '127.0.0.1');
   ARestPort.Text := ini.readstring('AscomRemote', 'port', '11111');
+  ARestUser.Text := DecryptStr(hextostr(ini.readstring('AscomRemote', 'u', '')), encryptpwd);
+  ARestPass.Text := DecryptStr(hextostr(ini.readstring('AscomRemote', 'p', '')), encryptpwd);
   ARestDevice.Value := ini.ReadInteger('AscomRemote', 'device', 0);
   lat.Text := ini.readstring('observatory', 'latitude', '0');
   long.Text := ini.readstring('observatory', 'longitude', '0');
@@ -1010,6 +1021,8 @@ begin
   ini.writestring('AscomRemote', 'host', ARestHost.Text);
   ini.writestring('AscomRemote', 'port', ARestPort.Text);
   ini.writeinteger('AscomRemote', 'device', ARestDevice.Value);
+  ini.writestring('AscomRemote', 'u', strtohex(encryptStr(ARestUser.Text, encryptpwd)));
+  ini.writestring('AscomRemote', 'p', strtohex(encryptStr(ARestPass.Text, encryptpwd)));
   ini.writestring('observatory', 'latitude', lat.Text);
   ini.writestring('observatory', 'longitude', long.Text);
   ini.Free;
@@ -1128,6 +1141,13 @@ begin
   end;
 end;
 
+procedure Tpop_scope.ARestProtocolChange(Sender: TObject);
+begin
+  case ARestProtocol.ItemIndex of
+    0: ARestPort.Value:=11111;
+    1: ARestPort.Value:=443;
+  end;
+end;
 
 procedure Tpop_scope.ButtonSetLocationClick(Sender: TObject);
 begin
