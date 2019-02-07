@@ -1509,8 +1509,8 @@ begin
               end;
               ProgressBar.min := 0;
               ProgressBar.max := n;
-              if (ProgressBar.Max > 25) then
-                ProgressBar.Step := ProgressBar.Max div 25
+              if (ProgressBar.Max > 250) then
+                ProgressBar.Step := ProgressBar.Max div 250
               else
                 ProgressBar.Step := 1;
               i := findfirst(slash(catdir) + '*.*', 0, f);
