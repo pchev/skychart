@@ -1474,7 +1474,7 @@ procedure TCDCdb.ScanImagesDirectory(ImagePath: string; ProgressCat: Tlabel;
 var
   c, f: tsearchrec;
   i, j, n, p: integer;
-  catdir, objn, fname, cmd: string;
+  catdir, objn, fname, cmd,cmdl: string;
   dummyfile: boolean;
   ra, de, w, h, r: double;
 begin
@@ -1515,7 +1515,7 @@ begin
                 ProgressBar.Step := 1;
               i := findfirst(slash(catdir) + '*.*', 0, f);
               n := 0;
-              DB.starttransaction;
+              cmdl:='BEGIN;';
               while i = 0 do
               begin
                 if f.Name = 'README.TXT' then
@@ -1541,6 +1541,7 @@ begin
                 end
                 else
                 begin
+                  // this is much faster than cdcwcs_getinfo
                   FFits.FileName := slash(catdir) + f.Name;
                   ra := FFits.Center_RA;
                   de := FFits.Center_DE;
@@ -1561,14 +1562,15 @@ begin
                     ',"' + formatfloat(f5, ra) + '"' + ',"' + formatfloat(f5, de) + '"' +
                     ',"' + formatfloat(f5, w) + '"' + ',"' + formatfloat(f5, h) + '"' +
                     ',"' + formatfloat(f5, r) + '"' + ')';
-                  if not DB.query(cmd) then
-                    writetrace(Format(rsDBInsertFail, [f.Name, DB.ErrorMessage]));
+                  cmdl:=cmdl+cmd+';';
                 end
                 else
                   writetrace(Format(rsInvalidFITSF, [f.Name]));
                 i := findnext(f);
               end;
-              DB.commit;
+              cmdl:=cmdl+'COMMIT;';
+              if not DB.query(cmdl) then
+                 writetrace(Format(rsDBInsertFail, [f.Name, DB.ErrorMessage]));
               findclose(f);
             end;
             j := findnext(c);
