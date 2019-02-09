@@ -6379,7 +6379,7 @@ begin
   catalog.cfgcat.starcatfield[dsgsc - BaseStar, 1] := 0;
   catalog.cfgcat.starcatfield[dsgsc - BaseStar, 2] := 3;
   catalog.cfgcat.starcatpath[hn290 - BaseStar] := DefaultHnskyPath;
-  catalog.cfgcat.starcatdef[hn290 - BaseStar] := True;
+  catalog.cfgcat.starcatdef[hn290 - BaseStar] := false;
   catalog.cfgcat.starcatfield[hn290 - BaseStar, 1] := 0;
   catalog.cfgcat.starcatfield[hn290 - BaseStar, 2] := 5;
   catalog.cfgcat.Name290:='tyc';
