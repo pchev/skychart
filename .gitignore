@@ -8,7 +8,7 @@ skychart/component/enhedits/backup/
 skychart/component/jdcalendar/backup/
 skychart/component/radec/backup/
 #ignore external data
-BaseData/*.tgz
+BaseData/catalog*.tgz
 BaseData/*.xz
 # ignore fpc makefiles
 Makefile
