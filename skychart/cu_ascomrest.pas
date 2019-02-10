@@ -92,6 +92,8 @@ type
     procedure SetUser(u: string);
     procedure SetPassword(p: string);
     procedure SetClientId(i: LongWord);
+    function GetTimeout: integer;
+    procedure SetTimeout(value:integer);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -113,6 +115,7 @@ type
     property User: string read Fuser write SetUser;
     property Password: string read Fpassword write SetPassword;
     property ClientId: LongWord read FClientId write SetClientId;
+    property Timeout: integer read GetTimeout write SetTimeout;
     property LastError: string read FLastError;
     property LastErrorCode: integer read FLastErrorCode;
     property Headers: TStringList read GetHeaders;
@@ -207,6 +210,16 @@ destructor  TAscomRest.Destroy;
 begin
   Fhttp.Free;
   inherited Destroy;
+end;
+
+function TAscomRest.GetTimeout: integer;
+begin
+  result:=Fhttp.Timeout;
+end;
+
+procedure TAscomRest.SetTimeout(value:integer);
+begin
+  Fhttp.Timeout:=value;
 end;
 
 function TAscomRest.GetHeaders: TStringList;

@@ -350,8 +350,10 @@ begin
          TR.Password:=ARestPass.Text;
       end;
       TR.Device:='Telescope/'+ARestDevice.Text;
+      TR.Timeout:=2000;
       TR.Put('Connected',true);
       c_ok := TR.Get('Connected').AsBool;
+      TR.Timeout:=60000;
     end;
     if c_ok then
     begin
