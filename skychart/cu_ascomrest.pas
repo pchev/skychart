@@ -236,9 +236,9 @@ end;
 procedure TAscomRest.SetBaseUrl;
 begin
   if (Fuser='')or(Fpassword='') then
-     FbaseUrl:=Fprotocol+'//'+Fhost+':'+Fport+'/API/V'+FApiVersion+'/'
+     FbaseUrl:=Fprotocol+'//'+Fhost+':'+Fport+'/api/v'+FApiVersion+'/'
   else
-     FbaseUrl:=Fprotocol+'//'+Fuser+':'+Fpassword+'@'+Fhost+':'+Fport+'/API/V'+FApiVersion+'/'
+     FbaseUrl:=Fprotocol+'//'+Fuser+':'+Fpassword+'@'+Fhost+':'+Fport+'/api/v'+FApiVersion+'/'
 end;
 
 procedure TAscomRest.SetProtocol(protocol: string);
@@ -329,9 +329,9 @@ function TAscomRest.GetTrackingRates: ITrackingRates;
 var J: TAscomResult;
     i: integer;
 begin
-  J:=Get('TrackingRates');
+  J:=Get('trackingrates');
   try
-  with TJSONArray(J.data.GetPath('Rates')) do begin
+  with TJSONArray(J.data.GetPath('Rates')) do begin    { TODO : replace by Value for next API version }
     SetLength(Result,Count);
     for i:=0 to Count-1 do
       Result[i]:=Integers[i];
@@ -346,7 +346,7 @@ var J: TAscomResult;
     i,n: integer;
     r: IRate;
 begin
-  J:=Get('AxisRates','Axis='+axis);
+  J:=Get('axisrates','axis='+axis);
   try
   with TJSONArray(J.data.GetPath('Value')) do begin
     n:=count;
@@ -367,7 +367,7 @@ function TAscomRest.GetImageArray: TImageArray;
 var J: TAscomResult;
     x,y,k: integer;
 begin
-   J:=Get('ImageArray');
+   J:=Get('imagearray');
    try
    Result:=TImageArray.Create;
    Result.nplane:=J.data.GetPath('Rank').AsInteger;

@@ -222,8 +222,8 @@ begin
       else
       {$endif}
       begin
-        Curdeg_x:=TR.Get('RightAscension').AsFloat * 15;
-        Curdeg_y:=TR.Get('Declination').AsFloat;
+        Curdeg_x:=TR.Get('rightascension').AsFloat * 15;
+        Curdeg_y:=TR.Get('declination').AsFloat;
       end;
     except
       on E: Exception do
@@ -240,8 +240,8 @@ begin
         else
         {$endif}
         begin
-          Cur_az:=TR.Get('Azimuth').AsFloat;
-          Cur_alt:=TR.Get('Altitude').AsFloat;
+          Cur_az:=TR.Get('azimuth').AsFloat;
+          Cur_alt:=TR.Get('altitude').AsFloat;
         end;
       except
         ShowAltAz.Checked := False;
@@ -297,7 +297,7 @@ begin
     else
     {$endif}
     begin
-      TR.Put('Connected',false);
+      TR.Put('connected',false);
     end;
     ok := True;
     led.color := clRed;
@@ -349,10 +349,10 @@ begin
          TR.User:=ARestUser.Text;
          TR.Password:=ARestPass.Text;
       end;
-      TR.Device:='Telescope/'+ARestDevice.Text;
+      TR.Device:='telescope/'+ARestDevice.Text;
       TR.Timeout:=2000;
-      TR.Put('Connected',true);
-      c_ok := TR.Get('Connected').AsBool;
+      TR.Put('connected',true);
+      c_ok := TR.Get('connected').AsBool;
       TR.Timeout:=60000;
     end;
     if c_ok then
@@ -369,9 +369,9 @@ begin
       else
       {$endif}
       begin
-        FCanSetTracking := TR.Get('CanSetTracking').AsBool;
-        FCanParkUnpark := TR.Get('CanPark').AsBool and TR.Get('CanUnpark').AsBool;
-        hasSync := TR.Get('CanSync').AsBool;
+        FCanSetTracking := TR.Get('cansettracking').AsBool;
+        FCanParkUnpark := TR.Get('canpark').AsBool and TR.Get('canunpark').AsBool;
+        hasSync := TR.Get('cansync').AsBool;
       end;
       except
         FCanSetTracking := false;
@@ -420,7 +420,7 @@ begin
     else
     {$endif}
     begin
-      Result := TR.Get('InterfaceVersion').AsInt;
+      Result := TR.Get('interfaceversion').AsInt;
     end;
   except
     Result := 1;
@@ -447,7 +447,7 @@ begin
     else
     {$endif}
     begin
-       Result := TR.Get('Connected').AsBool;
+       Result := TR.Get('connected').AsBool;
     end;
   except
     Result := False;
@@ -479,13 +479,13 @@ begin
       else
       {$endif}
       begin
-        if not TR.Get('Tracking').AsBool then
+        if not TR.Get('tracking').AsBool then
         begin
           if FCanSetTracking then
-            TR.Put('Tracking',True);
+            TR.Put('tracking',True);
           UpdTrackingButton;
         end;
-        TR.Put('SyncToCoordinates',['RightAscension',FormatFloat(f6,Ra),'Declination',FormatFloat(f6,Dec)]);
+        TR.Put('synctocoordinates',['RightAscension',FormatFloat(f6,Ra),'Declination',FormatFloat(f6,Dec)]);
       end;
     except
       on E: Exception do
@@ -545,10 +545,10 @@ begin
       else
       {$endif}
       begin
-        scname := TR.Get('Name').AsString;
+        scname := TR.Get('name').AsString;
         QueryOK := True;
-        SyncOK := TR.Get('CanSync').AsBool;
-        GotoOK := TR.Get('CanSlew').AsBool;
+        SyncOK := TR.Get('cansync').AsBool;
+        GotoOK := TR.Get('canslew').AsBool;
       end;
     except
       on E: Exception do
@@ -590,7 +590,7 @@ begin
         else
         {$endif}
         begin
-          i := TR.Get('EquatorialSystem').AsInt;
+          i := TR.Get('equatorialsystem').AsInt;
         end;
       except
         i := 0;
@@ -647,15 +647,15 @@ begin
     else
     {$endif}
     begin
-      if not TR.Get('Tracking').AsBool then
+      if not TR.Get('tracking').AsBool then
       begin
-        TR.Put('Tracking',True);
+        TR.Put('tracking',True);
         UpdTrackingButton;
       end;
-      if TR.Get('CanSlewAsync').AsBool then
-        TR.Put('SlewToCoordinatesAsync',['RightAscension',FormatFloat(f6,ar),'Declination',FormatFloat(f6,de)])
+      if TR.Get('canslewasync').AsBool then
+        TR.Put('slewtocoordinatesasync',['RightAscension',FormatFloat(f6,ar),'Declination',FormatFloat(f6,de)])
       else
-        TR.Put('SlewToCoordinates',['RightAscension',FormatFloat(f6,ar),'Declination',FormatFloat(f6,de)]);
+        TR.Put('slewtocoordinates',['RightAscension',FormatFloat(f6,ar),'Declination',FormatFloat(f6,de)]);
     end;
   except
     on E: Exception do
@@ -680,7 +680,7 @@ begin
       else
       {$endif}
       begin
-        TR.Put('AbortSlew');
+        TR.Put('abortslew');
       end;
     except
       on E: Exception do
@@ -780,9 +780,9 @@ begin
     else
     {$endif}
     begin
-      if TR.Get('CanMoveAxis','Axis='+IntToStr(axis)).AsBool then
+      if TR.Get('canmoveaxis','Axis='+IntToStr(axis)).AsBool then
       begin
-        TR.Put('MoveAxis?Axis='+IntToStr(axis),['Rate',FormatFloat(f6,rate)]);
+        TR.Put('moveaxis?Axis='+IntToStr(axis),['Rate',FormatFloat(f6,rate)]);
       end;
     end;
     except
@@ -1127,9 +1127,9 @@ begin
       else
       {$endif}
       begin
-        Flongitude := TR.Get('SiteLongitude').AsFloat;
-        Flatitude := TR.Get('SiteLatitude').AsFloat;
-        FElevation := TR.Get('SiteElevation').AsFloat;
+        Flongitude := TR.Get('sitelongitude').AsFloat;
+        Flatitude := TR.Get('sitelatitude').AsFloat;
+        FElevation := TR.Get('siteelevation').AsFloat;
       end;
       lat.Text := detostr(Flatitude);
       long.Text := detostr(Flongitude);
@@ -1165,9 +1165,9 @@ begin
       else
       {$endif}
       begin
-        TR.Put('SiteLongitude',Flongitude);
-        TR.Put('SiteLatitude',Flatitude);
-        TR.Put('SiteElevation',FElevation);
+        TR.Put('sitelongitude',Flongitude);
+        TR.Put('sitelatitude',Flatitude);
+        TR.Put('siteelevation',FElevation);
       end;
     except
       on E: Exception do
@@ -1191,7 +1191,7 @@ begin
       else
       {$endif}
       begin
-        TR.Put('UTCDate',buf);
+        TR.Put('utcdate',buf);
       end;
     except
       on E: Exception do
@@ -1227,7 +1227,7 @@ begin
       else
       {$endif}
       begin
-        ispark:=TR.Get('AtPark').AsBool;
+        ispark:=TR.Get('atpark').AsBool;
       end;
       if ispark then begin
         parkled.color := clRed;
@@ -1265,7 +1265,7 @@ begin
       else
       {$endif}
       begin
-        tracking := TR.Get('Tracking').AsBool;
+        tracking := TR.Get('tracking').AsBool;
       end;
       if tracking then
         Trackingled.color := clLime
@@ -1301,13 +1301,13 @@ begin
       {$endif}
       begin
         if ButtonPark.Caption = rsUnpark then begin
-          if TR.Get('CanUnpark').AsBool then
-             TR.Put('Unpark');
+          if TR.Get('canunpark').AsBool then
+             TR.Put('unpark');
         end
         else if ButtonPark.Caption = rsPark then begin
-          if TR.Get('CanPark').AsBool and (MessageDlg(rsDoYouReallyW, mtConfirmation, mbYesNo, 0)=mrYes)
+          if TR.Get('canpark').AsBool and (MessageDlg(rsDoYouReallyW, mtConfirmation, mbYesNo, 0)=mrYes)
           then
-             TR.Put('Park');
+             TR.Put('park');
         end;
       end;
       UpdParkButton;
@@ -1332,8 +1332,8 @@ begin
       else
       {$endif}
       begin
-        tracking := TR.Get('Tracking').AsBool;
-        TR.Put('Tracking',not tracking);
+        tracking := TR.Get('tracking').AsBool;
+        TR.Put('tracking',not tracking);
       end;
       UpdTrackingButton;
     except
