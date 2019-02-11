@@ -331,7 +331,7 @@ var J: TAscomResult;
 begin
   J:=Get('trackingrates');
   try
-  with TJSONArray(J.data.GetPath('Rates')) do begin
+  with TJSONArray(J.data.GetPath('Value')) do begin
     SetLength(Result,Count);
     for i:=0 to Count-1 do
       Result[i]:=Integers[i];
