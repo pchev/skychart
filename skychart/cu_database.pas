@@ -1474,7 +1474,7 @@ procedure TCDCdb.ScanImagesDirectory(ImagePath: string; ProgressCat: Tlabel;
 var
   c, f: tsearchrec;
   i, j, n, p: integer;
-  catdir, objn, fname, cmd,cmdl: string;
+  catdir, objn, fname, cmd: string;
   dummyfile: boolean;
   ra, de, w, h, r: double;
 begin
@@ -1515,7 +1515,7 @@ begin
                 ProgressBar.Step := 1;
               i := findfirst(slash(catdir) + '*.*', 0, f);
               n := 0;
-              cmdl:='BEGIN;';
+              db.StartTransaction;
               while i = 0 do
               begin
                 if f.Name = 'README.TXT' then
@@ -1562,15 +1562,14 @@ begin
                     ',"' + formatfloat(f5, ra) + '"' + ',"' + formatfloat(f5, de) + '"' +
                     ',"' + formatfloat(f5, w) + '"' + ',"' + formatfloat(f5, h) + '"' +
                     ',"' + formatfloat(f5, r) + '"' + ')';
-                  cmdl:=cmdl+cmd+';';
+                  if not DB.query(cmd) then
+                    writetrace(Format(rsDBInsertFail, [f.Name, DB.ErrorMessage]));
                 end
                 else
                   writetrace(Format(rsInvalidFITSF, [f.Name]));
                 i := findnext(f);
               end;
-              cmdl:=cmdl+'COMMIT;';
-              if not DB.query(cmdl) then
-                 writetrace(Format(rsDBInsertFail, [f.Name, DB.ErrorMessage]));
+              db.Commit;
               findclose(f);
             end;
             j := findnext(c);
