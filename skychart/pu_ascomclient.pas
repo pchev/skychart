@@ -297,7 +297,7 @@ begin
     else
     {$endif}
     begin
-      TR.Put('connected',false);
+      // the server is responsible for device disconnection
     end;
     ok := True;
     led.color := clRed;
