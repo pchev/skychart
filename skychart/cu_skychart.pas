@@ -8152,7 +8152,7 @@ var
 begin
   Result := False;
   cfgsc.moved := False;
-  if (ra <> cfgsc.ScopeRa) or (Dec <> cfgsc.ScopeDec) then
+  if (abs(ra-cfgsc.ScopeRa)>secarc) or (abs(Dec-cfgsc.ScopeDec)>secarc) then
   begin
     if assigned(FonTelescopeMove) then
       FonTelescopeMove(cfgsc.chartname, ra, Dec);

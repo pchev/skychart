@@ -7401,8 +7401,10 @@ begin
         end;
       end;
       newconnection := (not newconnection) and Connect1.Checked;
-      if newconnection and (not sc.cfgsc.TrackOn) then
-        sc.cfgsc.TrackName := rsTelescope;
+      if newconnection then begin
+        if (not sc.cfgsc.TrackOn) then sc.cfgsc.TrackName := rsTelescope;
+        Image1.Invalidate;
+      end;
       if Connect1.Checked then
       begin
         if ok then
@@ -7429,7 +7431,6 @@ begin
             sc.cfgsc.TrackEpoch := sc.cfgsc.JDChart;
           end;
           sc.cfgsc.scopemark := True;
-          Image1.Invalidate;
         end;
         TelescopeTimer.Interval := 500;
         TelescopeTimer.Enabled := True;
