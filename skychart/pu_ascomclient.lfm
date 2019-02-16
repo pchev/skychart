@@ -403,7 +403,7 @@ object pop_scope: Tpop_scope
       end
     end
     object ASCOMRemote: TTabSheet
-      Caption = 'ASCOM Remote'
+      Caption = 'ASCOM Alpaca'
       ClientHeight = 142
       ClientWidth = 295
       object Panel3: TPanel
