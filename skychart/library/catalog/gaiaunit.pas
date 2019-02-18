@@ -227,7 +227,6 @@ begin
    InitGaiaRec;
  end
  else begin
-   raise exception.Create('Wrong Gaia header file, or cannot read the file.');
    exit;
  end;
  buf:=copy(catheader.version,1,7);
