@@ -82,6 +82,11 @@ type
     Label15: TLabel;
     labelcolorobslist: TShape;
     labelsizeobslist: TMouseUpDown;
+    LineWidthEqGrid: TSpinEdit;
+    LineWidthConstL: TSpinEdit;
+    LineWidthConstB: TSpinEdit;
+    LineWidthEcliptic: TSpinEdit;
+    LineWidthGalEq: TSpinEdit;
     OptLabels: TCheckBox;
     Label10: TLabel;
     Label14: TLabel;
@@ -147,6 +152,7 @@ type
     Panel7: TPanel;
     red_moveBox: TCheckBox;
     Shape8: TShape;
+    LineWidthGrid: TSpinEdit;
     StarButton5: TButton;
     StarButton6: TButton;
     StarButton7: TButton;
@@ -400,6 +406,7 @@ type
     procedure LabelsizeChange(Sender: TObject);
     procedure LabelRotChange(Sender: TObject);
     procedure linemodemilkywayClick(Sender: TObject);
+    procedure LineWidthClick(Sender: TObject);
     procedure MarkNumberClick(Sender: TObject);
     procedure ConstbFileAcceptFileName(Sender: TObject; var Value: string);
     procedure ConstlFileAcceptFileName(Sender: TObject; var Value: string);
@@ -823,6 +830,20 @@ begin
   LockChange := False;
 end;
 
+procedure Tf_config_display.LineWidthClick(Sender: TObject);
+begin
+  if sender is TSpinEdit then with Sender as TSpinEdit do begin
+    case Tag of
+      1: csc.LineWidthGrid:=Value;
+      2: csc.LineWidthEqGrid:=Value;
+      3: csc.LineWidthConstL:=Value;
+      4: csc.LineWidthConstB:=Value;
+      5: csc.LineWidthEcliptic:=Value;
+      6: csc.LineWidthGalEq:=Value;
+    end;
+  end;
+end;
+
 procedure Tf_config_display.GridStyleChange(Sender: TObject);
 var
   i: integer;
@@ -1154,9 +1175,9 @@ begin
       Pen.Color := clWindowText;
       Font.Color := clWindowText;
     end;
-    tw := TextWidth(TComboBox(Control).Items[index]) + 5;
+    tw := TextWidth(TComboBox(Control).Items[index]+blank) + 4;
     FillRect(ARect);
-    Textout(ARect.Left, ARect.Top, TComboBox(Control).Items[index]);
+    Textout(ARect.Left, ARect.Top, TComboBox(Control).Items[index]+blank);
     moveto(ARect.Left + tw, (ARect.Top + ARect.Bottom) div 2);
     lineto(ARect.Right, (ARect.Top + ARect.Bottom) div 2);
   end;
@@ -1482,6 +1503,12 @@ begin
   GalEqStyle.ItemIndex := Ord(csc.StyleGalEq);
   CBStyle.ItemIndex := Ord(csc.StyleConstB);
   CFStyle.ItemIndex := Ord(csc.StyleConstL);
+  LineWidthGrid.Value:=csc.LineWidthGrid;
+  LineWidthEqGrid.Value:=csc.LineWidthEqGrid;
+  LineWidthConstL.Value:=csc.LineWidthConstL;
+  LineWidthConstB.Value:=csc.LineWidthConstB;
+  LineWidthEcliptic.Value:=csc.LineWidthEcliptic;
+  LineWidthGalEq.Value:=csc.LineWidthGalEq;
   DrawPMBox.Checked := csc.DrawPMon;
   DrawPMy.Value := csc.DrawPMyear;
 end;

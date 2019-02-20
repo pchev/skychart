@@ -1695,9 +1695,9 @@ object f_config_display: Tf_config_display
         ParentFont = False
         object EqGrid: TCheckBox
           Left = 16
-          Height = 23
+          Height = 21
           Top = 104
-          Width = 143
+          Width = 141
           Caption = 'Add Equatorial Grid'
           OnClick = EqGridClick
           ParentFont = False
@@ -1705,9 +1705,9 @@ object f_config_display: Tf_config_display
         end
         object CGrid: TCheckBox
           Left = 16
-          Height = 23
+          Height = 21
           Top = 55
-          Width = 158
+          Width = 156
           Caption = 'Show Coordinate Grid'
           OnClick = CGridClick
           ParentFont = False
@@ -1715,9 +1715,9 @@ object f_config_display: Tf_config_display
         end
         object ecliptic: TCheckBox
           Left = 277
-          Height = 23
+          Height = 21
           Top = 55
-          Width = 103
+          Width = 101
           Caption = 'Show Ecliptic'
           OnClick = eclipticClick
           ParentFont = False
@@ -1725,9 +1725,9 @@ object f_config_display: Tf_config_display
         end
         object galactic: TCheckBox
           Left = 277
-          Height = 23
+          Height = 21
           Top = 104
-          Width = 160
+          Width = 158
           Caption = 'Show Galactic Equator'
           OnClick = galacticClick
           ParentFont = False
@@ -1735,9 +1735,9 @@ object f_config_display: Tf_config_display
         end
         object GridNum: TCheckBox
           Left = 16
-          Height = 23
+          Height = 21
           Top = 5
-          Width = 123
+          Width = 121
           Caption = 'Show Grid Label'
           OnClick = GridNumClick
           ParentFont = False
@@ -1764,9 +1764,9 @@ object f_config_display: Tf_config_display
           end
           object Constl: TCheckBox
             Left = 8
-            Height = 23
+            Height = 21
             Top = 11
-            Width = 182
+            Width = 180
             Caption = 'Show Constellation Figure'
             OnClick = ConstlClick
             ParentFont = False
@@ -1794,7 +1794,7 @@ object f_config_display: Tf_config_display
             Left = 29
             Height = 26
             Top = 32
-            Width = 180
+            Width = 120
             AutoSize = False
             Constraints.MaxHeight = 28
             ItemHeight = 16
@@ -1813,6 +1813,19 @@ object f_config_display: Tf_config_display
             Style = csOwnerDrawVariable
             TabOrder = 1
             Text = 'Line'
+          end
+          object LineWidthConstL: TSpinEdit
+            Tag = 3
+            Left = 165
+            Height = 28
+            Top = 32
+            Width = 50
+            Constraints.MaxHeight = 28
+            MaxValue = 8
+            MinValue = 1
+            OnClick = LineWidthClick
+            TabOrder = 3
+            Value = 1
           end
         end
         object GroupBox3: TGroupBox
@@ -1836,9 +1849,9 @@ object f_config_display: Tf_config_display
           end
           object Constb: TCheckBox
             Left = 8
-            Height = 23
+            Height = 21
             Top = 11
-            Width = 204
+            Width = 202
             Caption = 'Show Constellation Boundary'
             OnClick = ConstbClick
             ParentFont = False
@@ -1866,7 +1879,7 @@ object f_config_display: Tf_config_display
             Left = 29
             Height = 28
             Top = 32
-            Width = 180
+            Width = 120
             AutoSize = False
             ItemHeight = 16
             ItemIndex = 0
@@ -1885,6 +1898,19 @@ object f_config_display: Tf_config_display
             TabOrder = 1
             Text = 'Line'
           end
+          object LineWidthConstB: TSpinEdit
+            Tag = 4
+            Left = 165
+            Height = 28
+            Top = 32
+            Width = 50
+            Constraints.MaxHeight = 28
+            MaxValue = 8
+            MinValue = 1
+            OnClick = LineWidthClick
+            TabOrder = 3
+            Value = 1
+          end
         end
         object GroupBox4: TGroupBox
           Left = 293
@@ -1898,9 +1924,9 @@ object f_config_display: Tf_config_display
           TabOrder = 12
           object milkyway: TCheckBox
             Left = 8
-            Height = 23
+            Height = 21
             Top = 8
-            Width = 123
+            Width = 121
             Caption = 'Show Milky Way'
             OnClick = milkywayClick
             ParentFont = False
@@ -1908,9 +1934,9 @@ object f_config_display: Tf_config_display
           end
           object fillmilkyway: TCheckBox
             Left = 8
-            Height = 23
+            Height = 21
             Top = 72
-            Width = 106
+            Width = 104
             Caption = 'Fill Milky Way'
             OnClick = fillmilkywayClick
             ParentFont = False
@@ -1918,9 +1944,9 @@ object f_config_display: Tf_config_display
           end
           object linemodemilkyway: TCheckBox
             Left = 8
-            Height = 23
+            Height = 21
             Top = 40
-            Width = 138
+            Width = 136
             Caption = 'linemodemilkyway'
             OnClick = linemodemilkywayClick
             ParentFont = False
@@ -1931,7 +1957,7 @@ object f_config_display: Tf_config_display
           Left = 40
           Height = 26
           Top = 76
-          Width = 180
+          Width = 120
           AutoSize = False
           Constraints.MaxHeight = 28
           ItemHeight = 16
@@ -1955,7 +1981,7 @@ object f_config_display: Tf_config_display
           Left = 297
           Height = 26
           Top = 76
-          Width = 180
+          Width = 120
           AutoSize = False
           Constraints.MaxHeight = 28
           ItemHeight = 16
@@ -1979,7 +2005,7 @@ object f_config_display: Tf_config_display
           Left = 39
           Height = 26
           Top = 128
-          Width = 180
+          Width = 120
           AutoSize = False
           Constraints.MaxHeight = 28
           ItemHeight = 16
@@ -2003,7 +2029,7 @@ object f_config_display: Tf_config_display
           Left = 297
           Height = 26
           Top = 128
-          Width = 180
+          Width = 120
           AutoSize = False
           Constraints.MaxHeight = 28
           ItemHeight = 16
@@ -2055,9 +2081,9 @@ object f_config_display: Tf_config_display
           end
           object DrawPmBox: TCheckBox
             Left = 8
-            Height = 23
+            Height = 21
             Top = 11
-            Width = 23
+            Width = 21
             OnClick = DrawPmBoxClick
             ParentFont = False
             TabOrder = 0
@@ -2081,9 +2107,9 @@ object f_config_display: Tf_config_display
         end
         object OnlyMeridian: TCheckBox
           Left = 277
-          Height = 23
+          Height = 21
           Top = 160
-          Width = 196
+          Width = 194
           Caption = 'Show only meridian in Alt/Az'
           OnClick = OnlyMeridianClick
           ParentFont = False
@@ -2091,9 +2117,9 @@ object f_config_display: Tf_config_display
         end
         object ShowLines: TCheckBox
           Left = 277
-          Height = 23
+          Height = 21
           Top = 5
-          Width = 90
+          Width = 88
           Caption = 'ShowLines'
           OnClick = ShowLinesClick
           ParentFont = False
@@ -2117,13 +2143,65 @@ object f_config_display: Tf_config_display
         end
         object CheckBox8: TCheckBox
           Left = 16
-          Height = 23
+          Height = 21
           Top = 160
-          Width = 149
+          Width = 147
           Caption = 'Always add meridian'
           OnClick = CheckBox8Click
           ParentFont = False
           TabOrder = 15
+        end
+        object LineWidthGrid: TSpinEdit
+          Tag = 1
+          Left = 173
+          Height = 28
+          Top = 76
+          Width = 50
+          Constraints.MaxHeight = 28
+          MaxValue = 8
+          MinValue = 1
+          OnClick = LineWidthClick
+          TabOrder = 16
+          Value = 1
+        end
+        object LineWidthEqGrid: TSpinEdit
+          Tag = 2
+          Left = 173
+          Height = 28
+          Top = 128
+          Width = 50
+          Constraints.MaxHeight = 28
+          MaxValue = 8
+          MinValue = 1
+          OnClick = LineWidthClick
+          TabOrder = 17
+          Value = 1
+        end
+        object LineWidthEcliptic: TSpinEdit
+          Tag = 5
+          Left = 428
+          Height = 28
+          Top = 76
+          Width = 50
+          Constraints.MaxHeight = 28
+          MaxValue = 8
+          MinValue = 1
+          OnClick = LineWidthClick
+          TabOrder = 18
+          Value = 1
+        end
+        object LineWidthGalEq: TSpinEdit
+          Tag = 6
+          Left = 428
+          Height = 28
+          Top = 128
+          Width = 50
+          Constraints.MaxHeight = 28
+          MaxValue = 8
+          MinValue = 1
+          OnClick = LineWidthClick
+          TabOrder = 19
+          Value = 1
         end
       end
       object Page6: TTabSheet

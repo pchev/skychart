@@ -997,8 +997,8 @@ type
     sunrefreshtime: integer;
     ShowPluto, ShowConstl, ShowConstB, ShowEqGrid, ShowGrid, ShowGridNum,
     ShowOnlyMeridian, ShowAlwaysMeridian, UseSystemTime, countrytz: boolean;
-    StyleGrid, StyleEqGrid, StyleConstL, StyleConstB, StyleEcliptic,
-    StyleGalEq: TFPPenStyle;
+    StyleGrid, StyleEqGrid, StyleConstL, StyleConstB, StyleEcliptic, StyleGalEq: TFPPenStyle;
+    LineWidthGrid, LineWidthEqGrid, LineWidthConstL, LineWidthConstB, LineWidthEcliptic, LineWidthGalEq: integer;
     ShowEcliptic, ShowGalactic, ShowMilkyWay, FillMilkyWay, LinemodeMilkyway,
     ShowHorizon, ShowHorizonPicture, HorizonPictureLowQuality, FillHorizon,
     ShowHorizon0, ShowHorizonDepression: boolean;
@@ -2293,6 +2293,12 @@ begin
   StyleConstB := Source.StyleConstB;
   StyleEcliptic := Source.StyleEcliptic;
   StyleGalEq := Source.StyleGalEq;
+  LineWidthGrid := Source.LineWidthGrid;
+  LineWidthEqGrid := Source.LineWidthEqGrid;
+  LineWidthConstL := Source.LineWidthConstL;
+  LineWidthConstB := Source.LineWidthConstB;
+  LineWidthEcliptic := Source.LineWidthEcliptic;
+  LineWidthGalEq := Source.LineWidthGalEq;
   ShowEcliptic := Source.ShowEcliptic;
   ShowGalactic := Source.ShowGalactic;
   ShowMilkyWay := Source.ShowMilkyWay;

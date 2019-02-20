@@ -4364,9 +4364,9 @@ begin
   if (abs(xx) < 10000) and (abs(yy) < 10000) then
   begin
     Fplot.Plotline(xx - 5 * Fplot.cfgchart.drawsize, yy, xx + 5 * Fplot.cfgchart.drawsize,
-      yy, Fplot.cfgplot.Color[13], 0, cfgsc.StyleGrid);
+      yy, Fplot.cfgplot.Color[13], cfgsc.LineWidthGrid, cfgsc.StyleGrid);
     Fplot.Plotline(xx, yy - 5 * Fplot.cfgchart.drawsize, xx, yy + 5 * Fplot.cfgchart.drawsize,
-      Fplot.cfgplot.Color[13], 0, cfgsc.StyleGrid);
+      Fplot.cfgplot.Color[13], cfgsc.LineWidthGrid, cfgsc.StyleGrid);
   end;
   {mark south pole}
   a := 0;
@@ -4381,9 +4381,9 @@ begin
   if (abs(xx) < 10000) and (abs(yy) < 10000) then
   begin
     Fplot.Plotline(xx - 5 * Fplot.cfgchart.drawsize, yy, xx + 5 * Fplot.cfgchart.drawsize,
-      yy, Fplot.cfgplot.Color[13], 0, cfgsc.StyleGrid);
+      yy, Fplot.cfgplot.Color[13], cfgsc.LineWidthGrid, cfgsc.StyleGrid);
     Fplot.Plotline(xx, yy - 5 * Fplot.cfgchart.drawsize, xx, yy + 5 * Fplot.cfgchart.drawsize,
-      Fplot.cfgplot.Color[13], 0, cfgsc.StyleGrid);
+      Fplot.cfgplot.Color[13], cfgsc.LineWidthGrid, cfgsc.StyleGrid);
   end;
 end;
 
@@ -4556,6 +4556,7 @@ var
   col, n, lh, lt, dir: integer;
   ok, labelok: boolean;
   linestyle: TFPPenStyle;
+  linewidth: integer;
 
   function DrawRAline(ra, de, dd: double): boolean;
   var
@@ -4577,7 +4578,7 @@ var
         if (xx > -cfgsc.Xmax) and (xx < 2 * cfgsc.Xmax) and (yy > -cfgsc.Ymax) and (yy < 2 * cfgsc.Ymax) then
         begin
           if (not drawlabel) then
-            Fplot.Plotline(xxp, yyp, xx, yy, col, 0, linestyle);
+            Fplot.Plotline(xxp, yyp, xx, yy, col, linewidth, linestyle);
           if (xx > 0) and (xx < cfgsc.Xmax) and (yy > 0) and (yy < cfgsc.Ymax) then
             plotok := True;
         end;
@@ -4626,9 +4627,9 @@ var
     plotok: boolean;
   begin
     if de = 0 then
-      w := 2
+      w := 2+linewidth
     else
-      w := 0;
+      w := linewidth;
     projection(ra, de, x1, y1, False, cfgsc);
     WindowXY(x1, y1, xxp, yyp, cfgsc);
     n := 0;
@@ -4689,11 +4690,13 @@ begin
   begin
     col := Fplot.cfgplot.Color[13];
     linestyle := cfgsc.StyleEqGrid;
+    linewidth := cfgsc.LineWidthEqGrid;
   end
   else
   begin
     col := Fplot.cfgplot.Color[12];
     linestyle := cfgsc.StyleGrid;
+    linewidth := cfgsc.LineWidthGrid;
   end;
   DrawPole(Equat);
   if not cfgsc.ShowOnlyMeridian then
@@ -4813,7 +4816,7 @@ var
   begin
     if (abs(a) < musec) or (abs(a - pi2) < musec) or (abs(a - pi) < musec) then
     begin
-      w := WideLine;
+      w := cfgsc.LineWidthGrid+WideLine;
       col := Fplot.cfgplot.Color[15];
     end
     else
@@ -4825,7 +4828,7 @@ var
       end
       else
       begin
-        w := 0;
+        w := cfgsc.LineWidthGrid;
         col := Fplot.cfgplot.Color[12];
       end;
     end;
@@ -4919,9 +4922,9 @@ var
     plotok: boolean;
   begin
     if h = 0 then
-      w := WideLine
+      w := cfgsc.LineWidthGrid+WideLine
     else
-      w := 0;
+      w := cfgsc.LineWidthGrid;
     proj2(-a, h, -cfgsc.acentre, cfgsc.hcentre, x1, y1, cfgsc);
     WindowXY(x1, y1, xxp, yyp, cfgsc);
     n := 0;
@@ -5076,7 +5079,7 @@ var
   xx, yy, xxp, yyp: single;
 begin
   col := Fplot.cfgplot.Color[15];
-  w := WideLine;
+  w := cfgsc.LineWidthGrid+WideLine;
   // meridian
   for i := 0 to 1 do
   begin
@@ -5760,7 +5763,7 @@ var
         if (xx > -cfgsc.Xmax) and (xx < 2 * cfgsc.Xmax) and (yy > -cfgsc.Ymax) and (yy < 2 * cfgsc.Ymax) then
         begin
           if (not drawlabel) then
-            Fplot.Plotline(xxp, yyp, xx, yy, col, 0, cfgsc.StyleGrid);
+            Fplot.Plotline(xxp, yyp, xx, yy, col, cfgsc.LineWidthGrid, cfgsc.StyleGrid);
           if (xx > 0) and (xx < cfgsc.Xmax) and (yy > 0) and (yy < cfgsc.Ymax) then
             plotok := True;
         end;
@@ -5808,7 +5811,7 @@ var
     xx, yy, xxp, yyp: single;
     plotok: boolean;
   begin
-    w := 0;
+    w := cfgsc.LineWidthGrid;
     proj2(a, h, cfgsc.lcentre, cfgsc.bcentre, x1, y1, cfgsc);
     WindowXY(x1, y1, xxp, yyp, cfgsc);
     n := 0;
@@ -5990,7 +5993,7 @@ var
         if (xx > -cfgsc.Xmax) and (xx < 2 * cfgsc.Xmax) and (yy > -cfgsc.Ymax) and (yy < 2 * cfgsc.Ymax) then
         begin
           if (not drawlabel) then
-            Fplot.Plotline(xxp, yyp, xx, yy, col, 0, cfgsc.StyleGrid);
+            Fplot.Plotline(xxp, yyp, xx, yy, col, cfgsc.LineWidthGrid, cfgsc.StyleGrid);
           if (xx > 0) and (xx < cfgsc.Xmax) and (yy > 0) and (yy < cfgsc.Ymax) then
             plotok := True;
         end;
@@ -6038,7 +6041,7 @@ var
     xx, yy, xxp, yyp: single;
     plotok: boolean;
   begin
-    w := 0;
+    w := cfgsc.LineWidthGrid;
     proj2(a, h, cfgsc.lecentre, cfgsc.becentre, x1, y1, cfgsc);
     WindowXY(x1, y1, xxp, yyp, cfgsc);
     n := 0;
@@ -6287,7 +6290,7 @@ begin
       WindowXY(xx1, yy1, x1, y1, cfgsc);
       WindowXY(xx2, yy2, x2, y2, cfgsc);
       if (intpower(x2 - x1, 2) + intpower(y2 - y1, 2)) < cfgsc.x2 then
-        FPlot.PlotLine(x1, y1, x2, y2, color, 1, cfgsc.StyleConstL);
+        FPlot.PlotLine(x1, y1, x2, y2, color, cfgsc.LineWidthConstL, cfgsc.StyleConstL);
     end;
   end;
   Result := True;
@@ -6323,7 +6326,7 @@ begin
       WindowXY(xx, yy, x2, y2, cfgsc);
       if (x1 < maxint) and (abs(xx) < dm) and (abs(yy) < dm) and
         ((intpower(x2 - x1, 2) + intpower(y2 - y1, 2)) < cfgsc.x2) then
-        FPlot.PlotLine(x1, y1, x2, y2, color, 1, cfgsc.StyleConstB);
+        FPlot.PlotLine(x1, y1, x2, y2, color, cfgsc.LineWidthConstB, cfgsc.StyleConstB);
       x1 := x2;
       y1 := y2;
     end
@@ -6376,7 +6379,7 @@ begin
     else
     begin
       if ((intpower(x2 - x1, 2) + intpower(y2 - y1, 2)) < cfgsc.x2) then
-        FPlot.PlotLine(x1, y1, x2, y2, color, 1, cfgsc.StyleEcliptic);
+        FPlot.PlotLine(x1, y1, x2, y2, color, cfgsc.LineWidthEcliptic, cfgsc.StyleEcliptic);
     end;
     x1 := x2;
     y1 := y2;
@@ -6428,7 +6431,7 @@ begin
     else
     begin
       if ((intpower(x2 - x1, 2) + intpower(y2 - y1, 2)) < cfgsc.x2) then
-        FPlot.PlotLine(x1, y1, x2, y2, color, 1, cfgsc.StyleGalEq);
+        FPlot.PlotLine(x1, y1, x2, y2, color, cfgsc.LineWidthGalEq, cfgsc.StyleGalEq);
     end;
     x1 := x2;
     y1 := y2;
