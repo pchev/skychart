@@ -5359,7 +5359,7 @@ begin
                 (yh < 5 * cfgsc.Ymax) and ((cfgsc.fov < 0.1) or (abs(xh - xph) < (cfgsc.xmax / 2)) and
                 (abs(yh - yph) < (cfgsc.ymax / 2))) then
               begin
-                Fplot.BGRADrawLine(xph, yph, xh, yh, col2, 2, hbmp);
+                Fplot.BGRADrawLine(xph, yph, xh, yh, col2, cfgsc.LineWidthGrid, hbmp);
                 hlplot := True;
               end;
             end;
@@ -5370,7 +5370,7 @@ begin
           yph := y0h;
           if (xh > -cfgsc.Xmax) and (xh < 2 * cfgsc.Xmax) and (yh > -cfgsc.Ymax) and
             (yh < 2 * cfgsc.Ymax) and (abs(xh - xph) < (cfgsc.xmax / 2)) and (abs(yh - yph) < (cfgsc.ymax / 2)) then
-            Fplot.BGRADrawLine(xh, yh, xph, yph, col2, 2, hbmp);
+            Fplot.BGRADrawLine(xh, yh, xph, yph, col2, cfgsc.LineWidthGrid, hbmp);
         end;
         hbmp.InvalidateBitmap;
         // Render bitmap
@@ -5495,7 +5495,7 @@ begin
                 (yh > -poslimit * cfgsc.Ymax) and (yh < poslimit * cfgsc.Ymax) and
                 ((cfgsc.fov < 0.1) or (abs(xh - xph) < (cfgsc.xmax / 2)) and (abs(yh - yph) < (cfgsc.ymax / 2))) then
               begin
-                Fplot.BGRADrawLine(xph, yph, xh, yh, col2, 2, hbmp);
+                Fplot.BGRADrawLine(xph, yph, xh, yh, col2, cfgsc.LineWidthGrid, hbmp);
                 hlplot := True;
               end;
             end;
@@ -5506,7 +5506,7 @@ begin
           yph := y0h;
           if (xh > -cfgsc.Xmax) and (xh < 2 * cfgsc.Xmax) and (yh > -cfgsc.Ymax) and
             (yh < 2 * cfgsc.Ymax) and (abs(xh - xph) < (cfgsc.xmax / 2)) and (abs(yh - yph) < (cfgsc.ymax / 2)) then
-            Fplot.BGRADrawLine(xh, yh, xph, yph, col2, 2, hbmp);
+            Fplot.BGRADrawLine(xh, yh, xph, yph, col2, cfgsc.LineWidthGrid, hbmp);
         end;
         // Fill below horizon
         if hlplot and fill and (not Fplot.cfgchart.onprinter) and (cfgsc.fov < fillfov) then
