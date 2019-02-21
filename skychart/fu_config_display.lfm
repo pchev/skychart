@@ -1821,7 +1821,7 @@ object f_config_display: Tf_config_display
             Top = 32
             Width = 50
             Constraints.MaxHeight = 28
-            MaxValue = 8
+            MaxValue = 10
             MinValue = 1
             OnChange = LineWidthChange
             TabOrder = 3
@@ -1905,7 +1905,7 @@ object f_config_display: Tf_config_display
             Top = 32
             Width = 50
             Constraints.MaxHeight = 28
-            MaxValue = 8
+            MaxValue = 10
             MinValue = 1
             OnChange = LineWidthChange
             TabOrder = 3
@@ -2158,7 +2158,7 @@ object f_config_display: Tf_config_display
           Top = 76
           Width = 50
           Constraints.MaxHeight = 28
-          MaxValue = 8
+          MaxValue = 10
           MinValue = 1
           OnChange = LineWidthChange
           TabOrder = 16
@@ -2171,7 +2171,7 @@ object f_config_display: Tf_config_display
           Top = 128
           Width = 50
           Constraints.MaxHeight = 28
-          MaxValue = 8
+          MaxValue = 10
           MinValue = 1
           OnChange = LineWidthChange
           TabOrder = 17
@@ -2184,7 +2184,7 @@ object f_config_display: Tf_config_display
           Top = 76
           Width = 50
           Constraints.MaxHeight = 28
-          MaxValue = 8
+          MaxValue = 10
           MinValue = 1
           OnChange = LineWidthChange
           TabOrder = 18
@@ -2197,7 +2197,7 @@ object f_config_display: Tf_config_display
           Top = 128
           Width = 50
           Constraints.MaxHeight = 28
-          MaxValue = 8
+          MaxValue = 10
           MinValue = 1
           OnChange = LineWidthChange
           TabOrder = 19
