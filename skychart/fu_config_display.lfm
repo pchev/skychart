@@ -2159,7 +2159,6 @@ object f_config_display: Tf_config_display
           Width = 50
           Constraints.MaxHeight = 28
           MaxValue = 10
-          MinValue = 1
           OnChange = LineWidthChange
           TabOrder = 16
           Value = 1
@@ -2172,7 +2171,6 @@ object f_config_display: Tf_config_display
           Width = 50
           Constraints.MaxHeight = 28
           MaxValue = 10
-          MinValue = 1
           OnChange = LineWidthChange
           TabOrder = 17
           Value = 1

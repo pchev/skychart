@@ -6149,8 +6149,8 @@ begin
   def_cfgsc.StyleConstB := psSolid;
   def_cfgsc.StyleEcliptic := psSolid;
   def_cfgsc.StyleGalEq := psSolid;
-  def_cfgsc.LineWidthGrid := 1;
-  def_cfgsc.LineWidthEqGrid := 1;
+  def_cfgsc.LineWidthGrid := 0;
+  def_cfgsc.LineWidthEqGrid := 0;
   def_cfgsc.LineWidthConstL := 1;
   def_cfgsc.LineWidthConstB := 1;
   def_cfgsc.LineWidthEcliptic := 1;
@@ -7137,8 +7137,8 @@ begin
         csc.StyleConstB := TPenStyle(ReadInteger(section, 'StyleConstB', Ord(csc.StyleConstB)));
         csc.StyleEcliptic := TPenStyle(ReadInteger(section, 'StyleEcliptic', Ord(csc.StyleEcliptic)));
         csc.StyleGalEq := TPenStyle(ReadInteger(section, 'StyleGalEq', Ord(csc.StyleGalEq)));
-        csc.LineWidthGrid := ReadInteger(section, 'LineWidthGrid', 1);
-        csc.LineWidthEqGrid := ReadInteger(section, 'LineWidthEqGrid', 1);
+        csc.LineWidthGrid := ReadInteger(section, 'LineWidthGrid', 0);
+        csc.LineWidthEqGrid := ReadInteger(section, 'LineWidthEqGrid', 0);
         csc.LineWidthConstL := ReadInteger(section, 'LineWidthConstL', 1);
         csc.LineWidthConstB := ReadInteger(section, 'LineWidthConstB', 1);
         csc.LineWidthEcliptic := ReadInteger(section, 'LineWidthEcliptic', 1);
