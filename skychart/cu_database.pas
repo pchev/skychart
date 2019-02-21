@@ -1474,7 +1474,7 @@ procedure TCDCdb.ScanImagesDirectory(ImagePath: string; ProgressCat: Tlabel;
 var
   c, f: tsearchrec;
   i, j, n, p: integer;
-  catdir, objn, fname, cmd: string;
+  catdir, objn, fname, cmd, cmdl: string;
   dummyfile: boolean;
   ra, de, w, h, r: double;
 begin
@@ -1515,7 +1515,10 @@ begin
                 ProgressBar.Step := 1;
               i := findfirst(slash(catdir) + '*.*', 0, f);
               n := 0;
-              db.StartTransaction;
+              if DBtype = sqlite then
+                 cmdl:='BEGIN;'
+              else
+                 db.StartTransaction;
               while i = 0 do
               begin
                 if f.Name = 'README.TXT' then
@@ -1562,14 +1565,24 @@ begin
                     ',"' + formatfloat(f5, ra) + '"' + ',"' + formatfloat(f5, de) + '"' +
                     ',"' + formatfloat(f5, w) + '"' + ',"' + formatfloat(f5, h) + '"' +
                     ',"' + formatfloat(f5, r) + '"' + ')';
-                  if not DB.query(cmd) then
-                    writetrace(Format(rsDBInsertFail, [f.Name, DB.ErrorMessage]));
+                  if DBtype = sqlite then
+                    cmdl:=cmdl+cmd+';'
+                  else begin
+                    if not DB.query(cmd) then
+                      writetrace(Format(rsDBInsertFail, [f.Name, DB.ErrorMessage]));
+                    end;
                 end
                 else
                   writetrace(Format(rsInvalidFITSF, [f.Name]));
                 i := findnext(f);
               end;
-              db.Commit;
+              if DBtype = sqlite then begin
+                cmdl:=cmdl+'COMMIT;';
+                if not DB.query(cmdl) then
+                   writetrace(Format(rsDBInsertFail, [f.Name, DB.ErrorMessage]));
+              end
+              else
+                db.Commit;
               findclose(f);
             end;
             j := findnext(c);
