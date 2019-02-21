@@ -2,6 +2,8 @@ Version 4.1.1 beta, Notes de la version
 
 Nouvelles fonctions:
 
+- Ajout d'une option pour ne pas filtrer les nébuleuses brillante par magnitude.
+- Ajout d'une option pour définir la largeur de la ligne. Attention, cela ne fonctionne pas avec les lignes pointillées lors de l’impression sous Windows à cause des limitations de l’API.
 - Il est maintenant possible d'utiliser un télescope connecté à un ordinateur Windows ASCOM distant à partir de CdC fonctionnant sous Linux ou macOS. Voir: https://github.com/ASCOMInitiative/ASCOMRemote/blob/master/Documentation/ASCOM%20Remote%20Concept.pdf
 - La résolution de l'image d'arrière-plan peut maintenant être limitée pour améliorer les performances si l'écran est trop grand ou s'il n'y a pas assez de ressources processeur.
 - La communication client/serveur peut désormais utiliser les coordonnées J2000 plutôt que celles de la carte en cours. Vous pouvez modifier cette option dans Configuration/Général/Serveur.
