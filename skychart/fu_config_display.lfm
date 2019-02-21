@@ -25,11 +25,11 @@ object f_config_display: Tf_config_display
       Height = 526
       Top = 1
       Width = 503
-      ActivePage = Page5
+      ActivePage = Page1
       Align = alClient
       ParentFont = False
       ShowTabs = False
-      TabIndex = 4
+      TabIndex = 0
       TabOrder = 0
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
@@ -37,6 +37,142 @@ object f_config_display: Tf_config_display
         ClientHeight = 522
         ClientWidth = 493
         ParentFont = False
+        object Panel5: TPanel
+          Left = 8
+          Height = 242
+          Top = 173
+          Width = 441
+          ClientHeight = 242
+          ClientWidth = 441
+          ParentFont = False
+          TabOrder = 3
+          Visible = False
+          object Label9: TLabel
+            Left = 38
+            Height = 19
+            Top = 48
+            Width = 97
+            Caption = 'Stars bitmap file'
+            ParentColor = False
+            ParentFont = False
+          end
+          object FileNameEdit1: TFileNameEdit
+            Left = 37
+            Height = 31
+            Top = 84
+            Width = 332
+            OnAcceptFileName = FileNameEdit1AcceptFileName
+            DialogOptions = []
+            FilterIndex = 0
+            HideDirectories = False
+            ButtonWidth = 23
+            NumGlyphs = 1
+            MaxLength = 0
+            ParentFont = False
+            TabOrder = 0
+            OnChange = FileNameEdit1Change
+          end
+          object Button7: TButton
+            Left = 38
+            Height = 25
+            Top = 145
+            Width = 99
+            Caption = 'Default'
+            OnClick = Button7Click
+            ParentFont = False
+            TabOrder = 1
+          end
+        end
+        object Panel4: TPanel
+          Left = 8
+          Height = 242
+          Top = 172
+          Width = 441
+          ClientHeight = 242
+          ClientWidth = 441
+          ParentFont = False
+          TabOrder = 2
+          Visible = False
+          object StarButton7: TButton
+            Left = 224
+            Height = 25
+            Top = 192
+            Width = 95
+            BorderSpacing.InnerBorder = 4
+            Caption = 'Big stars'
+            OnClick = StarButton7Click
+            ParentFont = False
+            TabOrder = 4
+          end
+          object StarButton6: TButton
+            Left = 120
+            Height = 25
+            Top = 192
+            Width = 95
+            BorderSpacing.InnerBorder = 4
+            Caption = 'Small stars'
+            OnClick = StarButton6Click
+            ParentFont = False
+            TabOrder = 3
+          end
+          object StarButton5: TButton
+            Left = 16
+            Height = 25
+            Top = 192
+            Width = 95
+            BorderSpacing.InnerBorder = 4
+            Caption = 'Default'
+            OnClick = StarButton5Click
+            ParentFont = False
+            TabOrder = 2
+          end
+          object StarDynBar1: TTrackBar
+            Left = 192
+            Height = 43
+            Top = 85
+            Width = 225
+            Frequency = 10
+            Max = 150
+            Min = 50
+            OnChange = StarDynBar1Change
+            PageSize = 10
+            Position = 50
+            ParentFont = False
+            TabOrder = 1
+          end
+          object StarSizeBar1: TTrackBar
+            Left = 192
+            Height = 43
+            Top = 30
+            Width = 225
+            Frequency = 5
+            Max = 50
+            Min = 1
+            OnChange = StarSizeBar1Change
+            PageSize = 5
+            Position = 1
+            ParentFont = False
+            TabOrder = 0
+          end
+          object Label259: TLabel
+            Left = 24
+            Height = 19
+            Top = 85
+            Width = 52
+            Caption = 'Contrast'
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label258: TLabel
+            Left = 24
+            Height = 19
+            Top = 30
+            Width = 100
+            Caption = 'Bright Stars Size '
+            ParentColor = False
+            ParentFont = False
+          end
+        end
         object Panel7: TPanel
           Left = 8
           Height = 242
@@ -91,50 +227,45 @@ object f_config_display: Tf_config_display
             ParentFont = False
             TabOrder = 4
           end
-          object SizeContrastBar: TTrackBar
-            Left = 193
-            Height = 51
+          object Label257: TLabel
+            Left = 24
+            Height = 19
             Top = 60
-            Width = 225
-            Frequency = 10
-            Max = 100
-            Min = 10
-            OnChange = SizeContrastBarChange
-            PageSize = 10
-            Position = 10
+            Width = 157
+            Caption = 'Increment for Bright Stars'
+            ParentColor = False
             ParentFont = False
-            TabOrder = 1
           end
-          object SaturationBar: TTrackBar
-            Left = 193
-            Height = 51
+          object Label263: TLabel
+            Left = 24
+            Height = 19
             Top = 142
-            Width = 225
-            Frequency = 28
-            Max = 255
-            OnChange = SaturationBarChange
-            PageSize = 28
-            Position = 0
+            Width = 97
+            Caption = 'Color saturation'
+            ParentColor = False
             ParentFont = False
-            TabOrder = 3
           end
-          object StarContrastBar: TTrackBar
-            Left = 193
-            Height = 51
+          object Label262: TLabel
+            Left = 24
+            Height = 19
             Top = 101
-            Width = 225
-            Frequency = 100
-            Max = 1000
-            Min = 100
-            OnChange = StarContrastBarChange
-            PageSize = 100
-            Position = 100
+            Width = 52
+            Caption = 'Contrast'
+            ParentColor = False
             ParentFont = False
-            TabOrder = 2
+          end
+          object Label256: TLabel
+            Left = 24
+            Height = 19
+            Top = 16
+            Width = 92
+            Caption = 'Faint Stars Size '
+            ParentColor = False
+            ParentFont = False
           end
           object StarSizeBar: TTrackBar
             Left = 193
-            Height = 51
+            Height = 43
             Top = 16
             Width = 225
             Frequency = 5
@@ -146,87 +277,46 @@ object f_config_display: Tf_config_display
             ParentFont = False
             TabOrder = 0
           end
-          object Label257: TLabel
-            Left = 24
-            Height = 19
-            Top = 79
-            Width = 157
-            Caption = 'Increment for Bright Stars'
-            ParentColor = False
-            ParentFont = False
-          end
-          object Label263: TLabel
-            Left = 24
-            Height = 19
-            Top = 161
-            Width = 97
-            Caption = 'Color saturation'
-            ParentColor = False
-            ParentFont = False
-          end
-          object Label262: TLabel
-            Left = 24
-            Height = 19
-            Top = 120
-            Width = 52
-            Caption = 'Contrast'
-            ParentColor = False
-            ParentFont = False
-          end
-          object Label256: TLabel
-            Left = 24
-            Height = 19
-            Top = 38
-            Width = 92
-            Caption = 'Faint Stars Size '
-            ParentColor = False
-            ParentFont = False
-          end
-        end
-        object Panel5: TPanel
-          Left = 8
-          Height = 242
-          Top = 173
-          Width = 441
-          ClientHeight = 242
-          ClientWidth = 441
-          ParentFont = False
-          TabOrder = 3
-          Visible = False
-          object Label9: TLabel
-            Left = 38
-            Height = 19
-            Top = 48
-            Width = 97
-            Caption = 'Stars bitmap file'
-            ParentColor = False
-            ParentFont = False
-          end
-          object FileNameEdit1: TFileNameEdit
-            Left = 37
-            Height = 36
-            Top = 84
-            Width = 332
-            OnAcceptFileName = FileNameEdit1AcceptFileName
-            DialogOptions = []
-            FilterIndex = 0
-            HideDirectories = False
-            ButtonWidth = 23
-            NumGlyphs = 1
-            MaxLength = 0
-            ParentFont = False
-            TabOrder = 0
-            OnChange = FileNameEdit1Change
-          end
-          object Button7: TButton
-            Left = 38
-            Height = 25
-            Top = 145
-            Width = 99
-            Caption = 'Default'
-            OnClick = Button7Click
+          object SizeContrastBar: TTrackBar
+            Left = 193
+            Height = 43
+            Top = 60
+            Width = 225
+            Frequency = 10
+            Max = 100
+            Min = 10
+            OnChange = SizeContrastBarChange
+            PageSize = 10
+            Position = 10
             ParentFont = False
             TabOrder = 1
+          end
+          object StarContrastBar: TTrackBar
+            Left = 193
+            Height = 43
+            Top = 101
+            Width = 225
+            Frequency = 100
+            Max = 1000
+            Min = 100
+            OnChange = StarContrastBarChange
+            PageSize = 100
+            Position = 100
+            ParentFont = False
+            TabOrder = 2
+          end
+          object SaturationBar: TTrackBar
+            Left = 193
+            Height = 43
+            Top = 142
+            Width = 225
+            Frequency = 28
+            Max = 255
+            OnChange = SaturationBarChange
+            PageSize = 28
+            Position = 0
+            ParentFont = False
+            TabOrder = 3
           end
         end
         object stardisplay: TRadioGroup
@@ -284,9 +374,9 @@ object f_config_display: Tf_config_display
         end
         object red_moveBox: TCheckBox
           Left = 28
-          Height = 23
+          Height = 21
           Top = 421
-          Width = 248
+          Width = 246
           Caption = 'Reduce detail when moving the chart'
           OnClick = red_moveBoxClick
           ParentFont = False
@@ -294,9 +384,9 @@ object f_config_display: Tf_config_display
         end
         object antialias: TCheckBox
           Left = 28
-          Height = 23
+          Height = 21
           Top = 441
-          Width = 86
+          Width = 84
           Caption = 'Anti Alias  '
           OnClick = antialiasClick
           ParentFont = False
@@ -304,103 +394,13 @@ object f_config_display: Tf_config_display
         end
         object CheckBox6: TCheckBox
           Left = 28
-          Height = 23
+          Height = 21
           Top = 461
-          Width = 215
+          Width = 213
           Caption = 'Show only text in detail window'
           OnClick = CheckBox6Click
           ParentFont = False
           TabOrder = 7
-        end
-        object Panel4: TPanel
-          Left = 8
-          Height = 242
-          Top = 172
-          Width = 441
-          ClientHeight = 242
-          ClientWidth = 441
-          ParentFont = False
-          TabOrder = 2
-          Visible = False
-          object StarButton7: TButton
-            Left = 224
-            Height = 25
-            Top = 192
-            Width = 95
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Big stars'
-            OnClick = StarButton7Click
-            ParentFont = False
-            TabOrder = 4
-          end
-          object StarButton6: TButton
-            Left = 120
-            Height = 25
-            Top = 192
-            Width = 95
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Small stars'
-            OnClick = StarButton6Click
-            ParentFont = False
-            TabOrder = 3
-          end
-          object StarButton5: TButton
-            Left = 16
-            Height = 25
-            Top = 192
-            Width = 95
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Default'
-            OnClick = StarButton5Click
-            ParentFont = False
-            TabOrder = 2
-          end
-          object StarDynBar1: TTrackBar
-            Left = 192
-            Height = 51
-            Top = 67
-            Width = 225
-            Frequency = 10
-            Max = 150
-            Min = 50
-            OnChange = StarDynBar1Change
-            PageSize = 10
-            Position = 50
-            ParentFont = False
-            TabOrder = 1
-          end
-          object StarSizeBar1: TTrackBar
-            Left = 192
-            Height = 51
-            Top = 30
-            Width = 225
-            Frequency = 5
-            Max = 50
-            Min = 1
-            OnChange = StarSizeBar1Change
-            PageSize = 5
-            Position = 1
-            ParentFont = False
-            TabOrder = 0
-          end
-          object Label259: TLabel
-            Left = 24
-            Height = 19
-            Top = 75
-            Width = 52
-            Caption = 'Contrast'
-            ParentColor = False
-            ParentFont = False
-          end
-          object Label258: TLabel
-            Left = 24
-            Height = 19
-            Top = 38
-            Width = 100
-            Caption = 'Bright Stars Size '
-            ParentColor = False
-            ParentFont = False
-          end
         end
       end
       object Page2: TTabSheet

@@ -25,11 +25,11 @@ object f_config_pictures: Tf_config_pictures
       Height = 522
       Top = 1
       Width = 501
-      ActivePage = Page4
+      ActivePage = Page1
       Align = alClient
       ParentFont = False
       ShowTabs = False
-      TabIndex = 3
+      TabIndex = 0
       TabOrder = 0
       OnChange = PageControl1PageChanged
       OnChanging = PageControl1Changing
@@ -107,7 +107,7 @@ object f_config_pictures: Tf_config_pictures
           object Label266: TLabel
             Left = 24
             Height = 19
-            Top = 35
+            Top = 15
             Width = 67
             Caption = 'Luminosity'
             ParentColor = False
@@ -116,7 +116,7 @@ object f_config_pictures: Tf_config_pictures
           object Label268: TLabel
             Left = 24
             Height = 19
-            Top = 91
+            Top = 71
             Width = 52
             Caption = 'Contrast'
             ParentColor = False
@@ -124,7 +124,7 @@ object f_config_pictures: Tf_config_pictures
           end
           object ImgLumBar: TTrackBar
             Left = 120
-            Height = 51
+            Height = 43
             Top = 15
             Width = 222
             Frequency = 5
@@ -138,7 +138,7 @@ object f_config_pictures: Tf_config_pictures
           end
           object ImgContrastBar: TTrackBar
             Left = 120
-            Height = 51
+            Height = 43
             Top = 71
             Width = 222
             Frequency = 5
@@ -164,9 +164,9 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowImagesBox: TCheckBox
           Left = 31
-          Height = 23
+          Height = 21
           Top = 405
-          Width = 226
+          Width = 224
           Caption = 'Show object pictures on the chart'
           OnClick = ShowImagesBoxClick
           ParentFont = False
@@ -260,9 +260,9 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowBackImg: TCheckBox
           Left = 95
-          Height = 23
+          Height = 21
           Top = 64
-          Width = 129
+          Width = 127
           Caption = 'Show this picture'
           OnClick = ShowBackImgClick
           ParentFont = False
@@ -279,7 +279,7 @@ object f_config_pictures: Tf_config_pictures
           TabOrder = 3
           object ImgTrBar2: TTrackBar
             Left = 304
-            Height = 51
+            Height = 43
             Top = 20
             Width = 140
             Frequency = 5
@@ -292,42 +292,9 @@ object f_config_pictures: Tf_config_pictures
             ParentFont = False
             TabOrder = 2
           end
-          object Label1: TLabel
-            Left = 54
-            Height = 19
-            Top = 6
-            Width = 67
-            Caption = 'Luminosity'
-            ParentColor = False
-            ParentFont = False
-          end
-          object Label2: TLabel
-            Left = 203
-            Height = 19
-            Top = 6
-            Width = 52
-            Caption = 'Contrast'
-            ParentColor = False
-            ParentFont = False
-          end
-          object ImgLumBar2: TTrackBar
-            Left = 8
-            Height = 51
-            Top = 20
-            Width = 140
-            Frequency = 5
-            Max = 100
-            Min = -100
-            OnChange = ImgLumBar2Change
-            PageSize = 5
-            Position = 0
-            TickStyle = tsNone
-            ParentFont = False
-            TabOrder = 0
-          end
           object ImgContrastBar2: TTrackBar
             Left = 152
-            Height = 51
+            Height = 43
             Top = 20
             Width = 140
             Frequency = 5
@@ -340,14 +307,20 @@ object f_config_pictures: Tf_config_pictures
             ParentFont = False
             TabOrder = 1
           end
-          object Label4: TLabel
-            Left = 336
-            Height = 19
-            Top = 4
-            Width = 80
-            Caption = 'Transparency'
-            ParentColor = False
+          object ImgLumBar2: TTrackBar
+            Left = 8
+            Height = 43
+            Top = 20
+            Width = 140
+            Frequency = 5
+            Max = 100
+            Min = -100
+            OnChange = ImgLumBar2Change
+            PageSize = 5
+            Position = 0
+            TickStyle = tsNone
             ParentFont = False
+            TabOrder = 0
           end
           object Button5: TButton
             Left = 326
@@ -384,6 +357,33 @@ object f_config_pictures: Tf_config_pictures
             Top = 60
             Width = 107
             Caption = 'Visualisation scale'
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label4: TLabel
+            Left = 336
+            Height = 19
+            Top = 4
+            Width = 80
+            Caption = 'Transparency'
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label2: TLabel
+            Left = 203
+            Height = 19
+            Top = 6
+            Width = 52
+            Caption = 'Contrast'
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label1: TLabel
+            Left = 54
+            Height = 19
+            Top = 6
+            Width = 67
+            Caption = 'Luminosity'
             ParentColor = False
             ParentFont = False
           end
@@ -480,8 +480,8 @@ object f_config_pictures: Tf_config_pictures
             Height = 253
             Top = 4
             Width = 470
-            ClientHeight = 253
-            ClientWidth = 470
+            ClientHeight = 249
+            ClientWidth = 466
             ParentFont = False
             TabOrder = 0
             object RealSkyNorth: TCheckBox
@@ -709,22 +709,18 @@ object f_config_pictures: Tf_config_pictures
           ColCount = 4
           Columns = <          
             item
-              MaxSize = 200
               Title.Caption = 'Active'
               Width = 60
             end          
             item
-              MaxSize = 200
               Title.Caption = 'Directory'
               Width = 305
             end          
             item
-              MaxSize = 200
               Title.Caption = ' '
               Width = 30
             end          
             item
-              MaxSize = 200
               Title.Caption = 'Count'
               Width = 55
             end>
@@ -797,9 +793,9 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowImageList: TCheckBox
           Left = 26
-          Height = 23
+          Height = 21
           Top = 381
-          Width = 118
+          Width = 116
           Caption = 'ShowImageList'
           OnChange = ShowImageListChange
           ParentFont = False
@@ -817,9 +813,9 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowImageLabel: TCheckBox
           Left = 26
-          Height = 23
+          Height = 21
           Top = 405
-          Width = 142
+          Width = 140
           Caption = 'Show images labels'
           OnChange = ShowImageLabelChange
           ParentFont = False
