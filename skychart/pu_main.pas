@@ -6307,6 +6307,7 @@ begin
   catalog.cfgshr.BigNebFilter := True;
   catalog.cfgshr.BigNebLimit := 211;
   catalog.cfgshr.NoFilterMessier := True;
+  catalog.cfgshr.NoFilterMagBright := True;
   catalog.cfgshr.ffove_tfl := '2000';
   catalog.cfgshr.ffove_efl := '30';
   catalog.cfgshr.ffove_efv := '60';
@@ -6655,6 +6656,8 @@ begin
           ReadFloat(section, 'BigNebLimit', catalog.cfgshr.BigNebLimit);
         catalog.cfgshr.NoFilterMessier :=
           ReadBool(section, 'NoFilterMessier', catalog.cfgshr.NoFilterMessier);
+        catalog.cfgshr.NoFilterMagBright :=
+          ReadBool(section, 'NoFilterMagBright', catalog.cfgshr.NoFilterMagBright);
         for i := 1 to maxfield do
         begin
           catalog.cfgshr.StarMagFilter[i] :=
@@ -8110,6 +8113,7 @@ begin
         WriteBool(section, 'BigNebFilter', catalog.cfgshr.BigNebFilter);
         WriteFloat(section, 'BigNebLimit', catalog.cfgshr.BigNebLimit);
         WriteBool(section, 'NoFilterMessier', catalog.cfgshr.NoFilterMessier);
+        WriteBool(section, 'NoFilterMagBright', catalog.cfgshr.NoFilterMagBright);
         for i := 1 to maxfield do
         begin
           WriteFloat(section, 'StarMagFilter' + IntToStr(i),

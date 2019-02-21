@@ -1528,6 +1528,7 @@ resourcestring
   rsConnectAndGe = 'Connect and get device list';
   rsUseTheIntern = 'Use the internal INDI gui panel';
   rsCooordinateS = 'Coordinate system to use with the clients';
+  rsDoNotFilterB = 'Do not filter bright nebula by magnitude';
 
 // also update upsi_translation
 

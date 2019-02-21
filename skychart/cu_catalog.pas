@@ -2189,7 +2189,10 @@ begin
     if not Result then
       break;
     FormatGCatN(rec);
+    if not rec.neb.valid[vnNebtype] then
+      rec.neb.nebtype := rec.options.ObjType;
     if (not (cfgshr.NoFilterMessier and (MessierStrPos > 0))) and
+      (not (cfgshr.NoFilterMagBright and ((rec.neb.nebtype=5)or(rec.neb.nebtype=6)))) and
       cfgshr.NebFilter and rec.neb.valid[vnMag] and (rec.neb.mag > cfgcat.NebMagMax) then
     begin
       if GCatFilter then
@@ -2198,6 +2201,7 @@ begin
         continue;
     end
     else if (not (cfgshr.NoFilterMessier and rec.neb.messierobject)) and
+      (not (cfgshr.NoFilterMagBright and ((rec.neb.nebtype=5)or(rec.neb.nebtype=6)))) and
       cfgshr.NebFilter and (rec.neb.mag > cfgcat.NebMagMax) then
       continue;
     if not rec.neb.valid[vnNebunit] then
@@ -2208,8 +2212,6 @@ begin
       cfgshr.NebFilter and rec.neb.valid[vnDim1] and
       (rec.neb.dim1 * 60 / rec.neb.nebunit < cfgcat.NebSizeMin) then
       continue;
-    if not rec.neb.valid[vnNebtype] then
-      rec.neb.nebtype := rec.options.ObjType;
     if rec.neb.valid[vnColor] then
     begin
       rec.options.UseColor := 1;
@@ -3092,6 +3094,7 @@ begin
     if trim(lin.typ) = 'Drk' then
       rec.neb.mag := 11;  // also filter dark nebulae
     if cfgshr.NebFilter and (not (cfgshr.NoFilterMessier and rec.neb.messierobject)) and
+      (not (cfgshr.NoFilterMagBright and ((rec.neb.nebtype=5)or(rec.neb.nebtype=6)))) and
       (rec.neb.mag > cfgcat.NebMagMax) then
       continue;
     if cfgshr.BigNebFilter and (rec.neb.dim1 >= cfgshr.BigNebLimit) and

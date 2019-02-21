@@ -912,10 +912,11 @@ type
   Tconf_shared = class(TObject)    // common setting
   public
     FieldNum: array [0..MaxField] of double;  // Field of vision limit
-    StarFilter, NebFilter: boolean;   // filter by magnitude
+    StarFilter, NebFilter: boolean;  // filter by magnitude
     BigNebFilter: boolean;           // filter big nebulae
-    NoFilterMessier: boolean;
-    BigNebLimit: double;
+    NoFilterMessier: boolean;        // no filter for Messier
+    NoFilterMagBright: boolean;      // no magnitude filter for bright nebula
+    BigNebLimit: double;             // some catalog include very big objects that cover a quarter of the sky
     AutoStarFilter: boolean;         // automatic limit
     AutoStarFilterMag: double;       // automatic limit reference magnitude
     StarMagFilter: array [0..MaxField] of double;
@@ -2016,6 +2017,7 @@ begin
   BigNebFilter := Source.BigNebFilter;
   BigNebLimit := Source.BigNebLimit;
   NoFilterMessier := Source.NoFilterMessier;
+  NoFilterMagBright := Source.NoFilterMagBright;
   AutoStarFilter := Source.AutoStarFilter;
   AutoStarFilterMag := Source.AutoStarFilterMag;
   for i := 0 to MaxField do

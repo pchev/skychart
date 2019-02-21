@@ -49,6 +49,7 @@ type
     Button8: TButton;
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
+    BrightMagBox: TCheckBox;
     MessierBox: TCheckBox;
     epoch2: TFloatEdit;
     ExpertMode: TCheckBox;
@@ -263,6 +264,7 @@ type
     PageControl1: TPageControl;
     TrackBar1: TTrackBar;
     procedure AzimutOriginClick(Sender: TObject);
+    procedure BrightMagBoxClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
@@ -381,6 +383,7 @@ begin
   NebBox.Caption := rsFilterNebula;
   BigNebBox.Caption := rsHideObjectWi;
   MessierBox.Caption := rsDoNotFilterM;
+  BrightMagBox.Caption := rsDoNotFilterB;
   Label48.Caption := rsLimitingMagn2;
   Label49.Caption := rsLimitingSize;
   Label112.Caption := rsFieldOfVisio5;
@@ -581,6 +584,7 @@ begin
   bignebbox.Checked := cshr.BigNebFilter;
   fBigNebLimit.Value := round(cshr.BigNebLimit);
   MessierBox.Checked := cshr.NoFilterMessier;
+  BrightMagBox.Checked := cshr.NoFilterMagBright;
   fmag0.Value := cshr.NebMagFilter[1];
   fmag1.Value := cshr.NebMagFilter[2];
   fmag2.Value := cshr.NebMagFilter[3];
@@ -709,6 +713,11 @@ end;
 procedure Tf_config_chart.MessierBoxClick(Sender: TObject);
 begin
   cshr.NoFilterMessier := MessierBox.Checked;
+end;
+
+procedure Tf_config_chart.BrightMagBoxClick(Sender: TObject);
+begin
+  cshr.NoFilterMagBright := BrightMagBox.Checked;
 end;
 
 procedure Tf_config_chart.PageControl1Changing(Sender: TObject;
@@ -1099,6 +1108,7 @@ begin
   NebBox.Checked := True;
   BigNebBox.Checked := True;
   MessierBox.Checked := True;
+  BrightMagBox.Checked := True;
 end;
 
 procedure Tf_config_chart.CheckBox1Change(Sender: TObject);

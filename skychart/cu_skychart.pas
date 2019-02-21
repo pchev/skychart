@@ -1781,9 +1781,12 @@ begin
         lnum := 4;
         if not rec.neb.valid[vnNebunit] then
           rec.neb.nebunit := rec.options.Units;
+        if not rec.neb.valid[vnNebtype] then
+          rec.neb.nebtype := rec.options.ObjType;
         if catalog.cfgshr.NebFilter then
         begin
           if (not (catalog.cfgshr.NoFilterMessier and rec.neb.messierobject)) and
+            (not (catalog.cfgshr.NoFilterMagBright and ((rec.neb.nebtype=5)or(rec.neb.nebtype=6)))) and
             rec.neb.valid[vnMag] and (rec.neb.mag > catalog.cfgcat.NebMagMax) then
             continue;
           if (not (catalog.cfgshr.NoFilterMessier and rec.neb.messierobject)) and
@@ -1799,8 +1802,6 @@ begin
         radius := (deg2rad / rec.neb.nebunit) * (rec.neb.dim1 / 2);
         projection(rec.ra, rec.Dec, x1, y1, True, cfgsc, False, radius);
         WindowXY(x1, y1, xx, yy, cfgsc);
-        if not rec.neb.valid[vnNebtype] then
-          rec.neb.nebtype := rec.options.ObjType;
         sz := abs(cfgsc.BxGlb) * radius;
         if Fcatalog.cfgcat.SampSelectIdent then
         begin
