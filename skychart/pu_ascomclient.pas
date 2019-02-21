@@ -980,10 +980,14 @@ begin
 end;
 
 procedure Tpop_scope.Timer1Timer(Sender: TObject);
+var ok: boolean;
 begin
   FConnected := ScopeConnectedReal;
-  if not FConnected then
+  if not FConnected then begin
+    ScopeDisconnect(ok);
+    ShowMessage('Telescope disconnected!');
     exit;
+  end;
   try
     if (not CoordLock) then
     begin
