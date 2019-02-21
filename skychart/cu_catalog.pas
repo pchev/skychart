@@ -3094,7 +3094,7 @@ begin
     if trim(lin.typ) = 'Drk' then
       rec.neb.mag := 11;  // also filter dark nebulae
     if cfgshr.NebFilter and (not (cfgshr.NoFilterMessier and rec.neb.messierobject)) and
-      (not (cfgshr.NoFilterMagBright and ((rec.neb.nebtype=5)or(rec.neb.nebtype=6)))) and
+      (not (cfgshr.NoFilterMagBright and ((trim(lin.typ)='Nb')or(trim(lin.typ)='C+N')))) and
       (rec.neb.mag > cfgcat.NebMagMax) then
       continue;
     if cfgshr.BigNebFilter and (rec.neb.dim1 >= cfgshr.BigNebLimit) and
