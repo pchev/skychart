@@ -406,7 +406,7 @@ type
     procedure LabelsizeChange(Sender: TObject);
     procedure LabelRotChange(Sender: TObject);
     procedure linemodemilkywayClick(Sender: TObject);
-    procedure LineWidthClick(Sender: TObject);
+    procedure LineWidthChange(Sender: TObject);
     procedure MarkNumberClick(Sender: TObject);
     procedure ConstbFileAcceptFileName(Sender: TObject; var Value: string);
     procedure ConstlFileAcceptFileName(Sender: TObject; var Value: string);
@@ -830,7 +830,7 @@ begin
   LockChange := False;
 end;
 
-procedure Tf_config_display.LineWidthClick(Sender: TObject);
+procedure Tf_config_display.LineWidthChange(Sender: TObject);
 begin
   if sender is TSpinEdit then with Sender as TSpinEdit do begin
     case Tag of
