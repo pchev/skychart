@@ -5917,24 +5917,16 @@ procedure TSplot.BGRADrawLine(x1, y1, x2, y2: single; c: TBGRAPixel;
 begin
 
   if cfgplot.AntiAlias then
-  begin
-    abmp.PenStyle := ps;
-    abmp.DrawLineAntialias(x1, y1, x2, y2, c, w, False);
-    abmp.PenStyle := psSolid;
-  end
+    abmp.CanvasBGRA.AntialiasingMode:=amOn;
   else
-  begin
-    {$ifdef mswindows}
-    if ps <> psSolid then
-      w := 1;
-{$endif}
-    abmp.CanvasFP.Pen.Style := ps;
-    abmp.CanvasFP.Pen.Width := ceil(w);
-    abmp.CanvasFP.Pen.FPColor := BGRAToFPColor(c);
-    abmp.CanvasFP.MoveTo(round(x1), round(y1));
-    abmp.CanvasFP.LineTo(round(x2), round(y2));
-    abmp.CanvasFP.Pen.Style := psSolid;
-  end;
+    abmp.CanvasBGRA.AntialiasingMode:=amOff;
+
+  abmp.CanvasBGRA.Pen.Style := ps;
+  abmp.CanvasBGRA.Pen.Width := ceil(w);
+  abmp.CanvasBGRA.Pen.Color := BGRAToColor(c);
+  abmp.CanvasBGRA.MoveTo(round(x1), round(y1));
+  abmp.CanvasBGRA.LineTo(round(x2), round(y2));
+  abmp.CanvasBGRA.Pen.Style := psSolid;
 
 end;
 
