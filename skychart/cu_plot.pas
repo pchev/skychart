@@ -5917,7 +5917,7 @@ procedure TSplot.BGRADrawLine(x1, y1, x2, y2: single; c: TBGRAPixel;
 begin
 
   if cfgplot.AntiAlias then
-    abmp.CanvasBGRA.AntialiasingMode:=amOn;
+    abmp.CanvasBGRA.AntialiasingMode:=amOn
   else
     abmp.CanvasBGRA.AntialiasingMode:=amOff;
 
