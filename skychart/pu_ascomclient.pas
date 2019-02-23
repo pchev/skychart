@@ -43,6 +43,7 @@ type
   Tpop_scope = class(TForm)
     ARestPass: TEdit;
     ARestUser: TEdit;
+    ButtonConnect: TButton;
     ButtonGetLocation: TSpeedButton;
     ButtonPark: TSpeedButton;
     elev: TEdit;
@@ -62,10 +63,9 @@ type
     ASCOMLocal: TTabSheet;
     ASCOMRemote: TTabSheet;
     trackingled: TEdit;
-    ButtonConnect: TSpeedButton;
     ButtonTracking: TSpeedButton;
-    ButtonHide: TSpeedButton;
-    ButtonDisconnect: TSpeedButton;
+    ButtonHide: TButton;
+    ButtonDisconnect: TButton;
     led: TEdit;
     GroupBox5: TGroupBox;
     Label15: TLabel;
@@ -92,7 +92,7 @@ type
     ButtonAbort: TSpeedButton;
     ButtonSetTime: TSpeedButton;
     ButtonSetLocation: TSpeedButton;
-    ButtonHelp: TSpeedButton;
+    ButtonHelp: TButton;
     ButtonAbout: TSpeedButton;
     ARestDevice: TSpinEdit;
     ARestHost: TEdit;
@@ -103,6 +103,7 @@ type
     procedure ButtonGetLocationClick(Sender: TObject);
     procedure ButtonParkClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure kill(Sender: TObject; var CanClose: boolean);
     procedure ButtonAdvSettingClick(Sender: TObject);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
@@ -977,6 +978,11 @@ begin
   {$ifndef mswindows}
   ASCOMLocal.TabVisible:=false;
   {$endif}
+end;
+
+procedure Tpop_scope.FormShow(Sender: TObject);
+begin
+  ActiveControl:=ButtonConnect;
 end;
 
 procedure Tpop_scope.Timer1Timer(Sender: TObject);

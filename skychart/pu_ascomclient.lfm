@@ -1,52 +1,47 @@
 object pop_scope: Tpop_scope
   Left = 276
-  Height = 524
+  Height = 533
   Top = 124
   Width = 305
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   Caption = 'ASCOM Telescope Interface'
-  ClientHeight = 524
+  ClientHeight = 533
   ClientWidth = 305
   DesignTimePPI = 95
   OnCloseQuery = kill
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnShow = FormShow
   ParentFont = True
   Position = poDefaultPosOnly
-  LCLVersion = '2.0.0.4'
   object GroupBox3: TGroupBox
     Left = 0
     Height = 88
     Top = 461
     Width = 305
     Align = alTop
-    ClientHeight = 68
+    ClientHeight = 86
     ClientWidth = 303
     TabOrder = 2
-    object ButtonConnect: TSpeedButton
-      Left = 5
-      Height = 25
-      Top = 6
-      Width = 73
-      Caption = 'Connect'
-      OnClick = ButtonConnectClick
-    end
-    object ButtonHide: TSpeedButton
+    object ButtonHide: TButton
       Left = 211
       Height = 25
       Top = 6
       Width = 65
+      Cancel = True
       Caption = 'Hide'
       OnClick = ButtonHideClick
+      TabOrder = 2
     end
-    object ButtonDisconnect: TSpeedButton
+    object ButtonDisconnect: TButton
       Left = 115
       Height = 25
       Top = 6
       Width = 84
       Caption = 'Disconnect'
       OnClick = ButtonDisconnectClick
+      TabOrder = 3
     end
     object led: TEdit
       Left = 83
@@ -59,13 +54,24 @@ object pop_scope: Tpop_scope
       TabStop = False
       TabOrder = 0
     end
-    object ButtonHelp: TSpeedButton
+    object ButtonHelp: TButton
       Left = 211
       Height = 25
       Top = 41
       Width = 65
       Caption = 'Help'
       OnClick = ButtonHelpClick
+      TabOrder = 4
+    end
+    object ButtonConnect: TButton
+      Left = 4
+      Height = 25
+      Top = 6
+      Width = 74
+      Caption = 'Connect'
+      Default = True
+      OnClick = ButtonConnectClick
+      TabOrder = 1
     end
   end
   object GroupBox5: TGroupBox
@@ -75,7 +81,7 @@ object pop_scope: Tpop_scope
     Width = 305
     Align = alTop
     Caption = 'Observatory '
-    ClientHeight = 121
+    ClientHeight = 122
     ClientWidth = 303
     TabOrder = 0
     object Label15: TLabel
@@ -318,16 +324,16 @@ object pop_scope: Tpop_scope
     OnChanging = PageControl1Changing
     object ASCOMLocal: TTabSheet
       Caption = 'ASCOM Local'
-      ClientHeight = 142
+      ClientHeight = 146
       ClientWidth = 295
       object GroupBox1: TGroupBox
         Left = 0
-        Height = 132
+        Height = 146
         Top = 0
         Width = 295
         Align = alClient
         Caption = 'Driver Selection'
-        ClientHeight = 112
+        ClientHeight = 126
         ClientWidth = 293
         TabOrder = 0
         object ButtonSelect: TSpeedButton
@@ -404,7 +410,7 @@ object pop_scope: Tpop_scope
     end
     object ASCOMRemote: TTabSheet
       Caption = 'ASCOM Alpaca'
-      ClientHeight = 142
+      ClientHeight = 146
       ClientWidth = 295
       object Panel3: TPanel
         Left = 0
