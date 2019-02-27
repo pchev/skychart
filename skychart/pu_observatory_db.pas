@@ -107,11 +107,7 @@ begin
   Latitude.Caption := rsLatitude;
   Longitude.Caption := rsLongitude;
   Label58.Caption := rsDegreesMinut;
-  hemis.items[0] := rsNorth;
-  hemis.items[1] := rsSouth;
   Label61.Caption := rsDegreesMinut;
-  long.items[0] := rsWest;
-  long.items[1] := rsEast;
   Button1.Caption := rsOK;
   Button2.Caption := rsCancel;
 end;

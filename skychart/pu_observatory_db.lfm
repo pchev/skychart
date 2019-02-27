@@ -140,7 +140,7 @@ object f_observatory_db: Tf_observatory_db
     object vicinity: TButton
       Left = 251
       Height = 25
-      Top = 80
+      Top = 84
       Width = 69
       BorderSpacing.InnerBorder = 4
       Caption = 'Vicinity'
@@ -190,12 +190,12 @@ object f_observatory_db: Tf_observatory_db
     end
     object Latitude: TGroupBox
       Left = 8
-      Height = 67
+      Height = 73
       Top = 113
-      Width = 183
+      Width = 186
       Caption = 'Latitude'
-      ClientHeight = 47
-      ClientWidth = 181
+      ClientHeight = 53
+      ClientWidth = 184
       ParentFont = False
       TabOrder = 9
       object Label58: TLabel
@@ -208,30 +208,29 @@ object f_observatory_db: Tf_observatory_db
         ParentFont = False
       end
       object hemis: TComboBox
-        Left = 104
-        Height = 22
-        Top = 19
-        Width = 72
+        Left = 126
+        Height = 28
+        Top = 20
+        Width = 56
         AutoCompleteText = [cbactSearchAscending]
         AutoSize = False
+        Constraints.MaxHeight = 28
         ItemHeight = 0
-        ItemIndex = 0
         Items.Strings = (
-          'North'
-          'South'
+          'N'
+          'S'
         )
         OnChange = latdegChange
         ParentFont = False
         TabOrder = 3
-        Text = 'North'
       end
       object latdeg: TLongEdit
-        Left = 4
-        Height = 26
+        Left = 2
+        Height = 28
         Hint = '0..90'
         Top = 20
-        Width = 33
-        Constraints.MaxHeight = 26
+        Width = 44
+        Constraints.MaxHeight = 28
         MaxLength = 2
         ParentFont = False
         ParentShowHint = False
@@ -242,12 +241,12 @@ object f_observatory_db: Tf_observatory_db
         OnExit = latdegChange
       end
       object latmin: TLongEdit
-        Left = 44
-        Height = 26
+        Left = 46
+        Height = 28
         Hint = '0..59'
         Top = 20
-        Width = 25
-        Constraints.MaxHeight = 26
+        Width = 36
+        Constraints.MaxHeight = 28
         MaxLength = 2
         ParentFont = False
         ParentShowHint = False
@@ -258,12 +257,12 @@ object f_observatory_db: Tf_observatory_db
         OnExit = latdegChange
       end
       object latsec: TLongEdit
-        Left = 75
-        Height = 26
+        Left = 82
+        Height = 28
         Hint = '0..59'
         Top = 20
-        Width = 25
-        Constraints.MaxHeight = 26
+        Width = 44
+        Constraints.MaxHeight = 28
         MaxLength = 2
         ParentFont = False
         ParentShowHint = False
@@ -276,12 +275,12 @@ object f_observatory_db: Tf_observatory_db
     end
     object Longitude: TGroupBox
       Left = 204
-      Height = 67
+      Height = 73
       Top = 113
-      Width = 183
+      Width = 186
       Caption = 'Longitude'
-      ClientHeight = 47
-      ClientWidth = 181
+      ClientHeight = 53
+      ClientWidth = 184
       ParentFont = False
       TabOrder = 10
       object Label61: TLabel
@@ -294,30 +293,29 @@ object f_observatory_db: Tf_observatory_db
         ParentFont = False
       end
       object long: TComboBox
-        Left = 104
-        Height = 22
-        Top = 19
-        Width = 72
+        Left = 126
+        Height = 28
+        Top = 20
+        Width = 56
         AutoCompleteText = [cbactSearchAscending]
         AutoSize = False
+        Constraints.MaxHeight = 28
         ItemHeight = 0
-        ItemIndex = 1
         Items.Strings = (
-          'West'
-          'East'
+          'W'
+          'E'
         )
         OnChange = longdegChange
         ParentFont = False
         TabOrder = 3
-        Text = 'East'
       end
       object longdeg: TLongEdit
-        Left = 4
-        Height = 26
+        Left = 2
+        Height = 28
         Hint = '0..180'
         Top = 20
-        Width = 33
-        Constraints.MaxHeight = 26
+        Width = 44
+        Constraints.MaxHeight = 28
         MaxLength = 4
         ParentFont = False
         ParentShowHint = False
@@ -328,12 +326,12 @@ object f_observatory_db: Tf_observatory_db
         OnExit = longdegChange
       end
       object longmin: TLongEdit
-        Left = 44
-        Height = 26
+        Left = 46
+        Height = 28
         Hint = '0..59'
         Top = 20
-        Width = 25
-        Constraints.MaxHeight = 26
+        Width = 36
+        Constraints.MaxHeight = 28
         MaxLength = 2
         ParentFont = False
         ParentShowHint = False
@@ -344,12 +342,12 @@ object f_observatory_db: Tf_observatory_db
         OnExit = longdegChange
       end
       object longsec: TLongEdit
-        Left = 75
-        Height = 26
+        Left = 82
+        Height = 28
         Hint = '0..59'
         Top = 20
-        Width = 25
-        Constraints.MaxHeight = 26
+        Width = 44
+        Constraints.MaxHeight = 28
         MaxLength = 2
         ParentFont = False
         ParentShowHint = False
