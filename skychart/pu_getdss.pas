@@ -140,6 +140,7 @@ end;
 procedure Tf_getdss.FormCreate(Sender: TObject);
 begin
   ScaleDPI(Self);
+  DownloadDialog1.ScaleDpi:=UScaleDPI.scale;
   SetLang;
   cfgdss := Tconf_dss.Create;
   if VerboseMsg then

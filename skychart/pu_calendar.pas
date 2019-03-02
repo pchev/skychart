@@ -253,6 +253,7 @@ begin
   SatGrid.ColWidths[0] := 130;
   SatGrid.ColWidths[1] := 120;
   ScaleDPI(Self);
+  DownloadDialog1.ScaleDpi:=UScaleDPI.scale;
   SetLang;
   config := Tconf_skychart.Create;
   AzNorth := True;

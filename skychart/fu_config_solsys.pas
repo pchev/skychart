@@ -28,7 +28,7 @@ interface
 uses
   u_help, u_translation, u_constant, u_util, u_projection, cu_database, cu_radec,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math, IniFiles,
-  Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources,
+  Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources, UScaleDPI,
   downloaddialog, jdcalendar, EditBtn, Process, LazHelpHTML, LazUTF8, LazFileUtils;
 
 type
@@ -609,6 +609,7 @@ begin
     exit;
   end;
   fn := slash(MPCDir) + 'MPCORB-' + FormatDateTime('yyyy-mm-dd', now) + '.DAT';
+  DownloadDialog1.ScaleDpi:=UScaleDPI.scale;
   if cmain.HttpProxy then
   begin
     DownloadDialog1.SocksProxy := '';
@@ -856,6 +857,7 @@ begin
   end;
   fn := slash(MPCDir) + 'COMET-' + FormatDateTime('yyyy-mm-dd', now) + '.DAT';
   tmpfn := slash(TempDir) + 'mpc.tmp';
+  DownloadDialog1.ScaleDpi:=UScaleDPI.scale;
   if cmain.HttpProxy then
   begin
     DownloadDialog1.SocksProxy := '';
@@ -1020,6 +1022,7 @@ var
   h: double;
 begin
   dl := TDownloadDialog.Create(self);
+  dl.ScaleDpi:=UScaleDPI.scale;
   dl.SocksProxy := '';
   dl.SocksType := '';
   dl.HttpProxy := '';

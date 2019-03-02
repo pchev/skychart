@@ -279,6 +279,7 @@ end;
 procedure Tf_observatory_db.FormCreate(Sender: TObject);
 begin
   ScaleDPI(Self);
+  DownloadDialog1.ScaleDpi:=UScaleDPI.scale;
   SetLang;
   countrycode := TStringList.Create;
   citycode := TStringList.Create;

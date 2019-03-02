@@ -27,7 +27,7 @@ interface
 
 uses
   u_unzip, pu_observatory_db, IniFiles, LCLType, BGRABitmap, BGRABitmapTypes,
-  u_help, u_translation, u_constant, u_util, cu_database, Math, dynlibs,
+  u_help, u_translation, u_constant, u_util, cu_database, Math, dynlibs, UScaleDPI,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FileUtil,
   Buttons, StdCtrls, ExtCtrls, cu_zoomimage, enhedits, ComCtrls, LResources,
   Spin, downloaddialog, EditBtn, LazHelpHTML;
@@ -644,6 +644,7 @@ var
   loc: TStringList;
   f: textfile;
 begin
+  DownloadDialog1.ScaleDpi:=UScaleDPI.scale;
   if cmain.HttpProxy then
   begin
     DownloadDialog1.SocksProxy := '';

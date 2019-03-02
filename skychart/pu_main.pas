@@ -2395,6 +2395,7 @@ begin
   WriteTrace('Screen scale : ' + FormatFloat(f0, 100 * UScaleDPI.RunDPI /
     UScaleDPI.DesignDPI) + '%');
   ScaleDPI(Self);
+  SampDownload.ScaleDpi:=UScaleDPI.scale;
 end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
@@ -11548,6 +11549,7 @@ var
 begin
   Result := False;
   dl := TDownloadDialog.Create(self);
+  dl.ScaleDpi:=UScaleDPI.scale;
   try
     if cfgm.HttpProxy then
     begin

@@ -564,6 +564,7 @@ begin
   if VerboseMsg then
     WriteTrace('Create new chart');
   inherited Create(TheOwner);
+  DownloadDialog1.ScaleDpi:=UScaleDPI.scale;
   Width := max(Width, 2 * Application.MainForm.Width div 3);
   Height := max(Height, 2 * Application.MainForm.Height div 3);
   locked := True;

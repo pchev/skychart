@@ -28,7 +28,7 @@ interface
 uses
   u_ccdconfig, u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
   pu_catgenadv, pu_progressbar, LazUTF8, LazFileUtils, pu_voconfig,
-  Math, LCLIntf, SysUtils,
+  Math, LCLIntf, SysUtils, UScaleDPI,
   Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, enhedits,
   downloaddialog, Grids, Buttons, ComCtrls, LResources, EditBtn, LazHelpHTML;
 
@@ -966,6 +966,7 @@ begin
   fn := catalog.GetCatTxtFile(path, cat);
   fntmp := fn + '.tmp';
   url := catalog.GetCatURL(path, cat);
+  DownloadDialog1.ScaleDpi:=UScaleDPI.scale;
   DownloadDialog1.msgDownloadFile := rsDownloadFile;
   DownloadDialog1.msgCopyfrom := rsCopyFrom;
   DownloadDialog1.msgtofile := rsToFile;
