@@ -1507,6 +1507,7 @@ begin
                 Inc(n);
                 i := findnext(f);
               end;
+              findclose(f);
               ProgressBar.min := 0;
               ProgressBar.max := n;
               if (ProgressBar.Max > 250) then
