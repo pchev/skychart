@@ -1,19 +1,19 @@
 NGC:
 
-col S (messier)
+col 19 S (messier)
 - label  M   
 - format #
 
-col T (ngc)
+col 20 T (ngc)
 -format #
 - replace ^0 ""
 - replace ,0 ,
 
-col U (ic)
+col 21 U (ic)
 - format #
 - replace ^0 ""
 
-col A (name)
+col 1 A (name)
 -replace "IC" "IC "
 -replace "IC 0" "IC " x3
 -replace "NGC" "NGC "
@@ -34,7 +34,7 @@ Catgen
 
 Addendum:
 
-col S (messier)
+col 19 S (messier)
 - label  M   
 - format #
 
@@ -42,7 +42,7 @@ enregistrer sous addendum.csv
 - largeur colonne fixe
 
 Catgen
-- copy from openNGV.prj
+- copy from openNGC.prj
 - Input catalog files: addendum.csv
 - add type DrkN
 - Check: Append to existing catalog
