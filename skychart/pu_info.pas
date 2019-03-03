@@ -73,7 +73,7 @@ type
     PopupMenu2: TPopupMenu;
     outslectionner1: TMenuItem;
     Copier1: TMenuItem;
-    Button6: TButton;
+    ButtonPrint: TButton;
     Button7: TButton;
     SaveDialog1: TSaveDialog;
     ProgressMemo: TMemo;
@@ -100,7 +100,7 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure Edit1KeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure Button3Click(Sender: TObject);
-    procedure Button6Click(Sender: TObject);
+    procedure ButtonPrintClick(Sender: TObject);
     procedure Button7Click(Sender: TObject);
   private
     { Private declarations }
@@ -139,7 +139,7 @@ begin
   CheckBox1.Caption := rsAutoRefresh;
   Button3.Caption := rsSearch;
   Button4.Caption := rsHelp;
-  Button6.Caption := rsPrint;
+  ButtonPrint.Caption := rsPrint;
   Button7.Caption := rsSave;
   Button1.Caption := rsClose;
   closeconnection.Caption := rsCloseConnect;
@@ -340,7 +340,7 @@ end;
 
 procedure Tf_info.FormShow(Sender: TObject);
 begin
-  Button6.Visible := (Printer.PrinterIndex >= 0);
+  ButtonPrint.Enabled := (Printer.PrinterIndex >= 0);
   case ActivePage of
     0:
     begin
@@ -449,7 +449,7 @@ begin
     Button3Click(Sender);
 end;
 
-procedure Tf_info.Button6Click(Sender: TObject);
+procedure Tf_info.ButtonPrintClick(Sender: TObject);
 var
   i, r: integer;
   list: TStringList;
