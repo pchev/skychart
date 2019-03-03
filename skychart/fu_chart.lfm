@@ -570,8 +570,6 @@ object f_chart: Tf_chart
     top = 55
   end
   object SaveDialog1: TSaveDialog
-    Width = 881
-    Height = 550
     DefaultExt = '.cdcc'
     FileName = 'circle'
     Filter = 'Circle file|*.cdcc|All|*'

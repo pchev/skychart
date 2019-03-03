@@ -3951,6 +3951,8 @@ begin
       if FilterDetail(buf2) then
         continue;
     end;
+    if (otype <> 'Pl') and (uppercase(copy(buf2,1,6)) = 'CSTAR ') then
+      continue;
     if isd2k and (copy(buf2, 1, 4) = 'Dim:') then
       continue;
     if isd2k and (copy(buf2, 1, 5) = 'desc:') then
