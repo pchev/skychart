@@ -803,7 +803,7 @@ var
   ok: boolean;
 begin
   InitTimer.Enabled := False;
-  if TelescopeDevice = nil then
+  if (TelescopeDevice = nil) or (coord_prop = nil) then
   begin
     ScopeDisconnect(ok);
     if csc.IndiAutostart then
