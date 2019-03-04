@@ -371,12 +371,19 @@ begin
 end;
 
 procedure Tpop_indi.NewNumber(nvp: INumberVectorProperty);
+var ok: boolean;
 begin
   //  Memomsg.Lines.Add('NewNumber: '+nvp.name+' '+FloatToStr(nvp.np[0].value));
   if nvp = coord_prop then
   begin
-    pos_x.Text := artostr(coord_ra.Value);
-    pos_y.Text := detostr(coord_dec.Value);
+    if nvp.s=IPS_ALERT then begin
+      Memomsg.Lines.Add('Error from telescope: coordinates alert.');
+      ScopeDisconnect(ok);
+    end
+    else begin
+      pos_x.Text := artostr(coord_ra.Value);
+      pos_y.Text := detostr(coord_dec.Value);
+    end;
   end;
 end;
 
