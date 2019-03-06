@@ -78,7 +78,7 @@ type
   protected
     Fhost, Fport, Fprotocol, FDevice, FbaseUrl, FApiVersion: string;
     Fuser, Fpassword: string;
-    FClientId: LongWord;
+    FClientId,FClientTransactionID: LongWord;
     FLastError: string;
     FLastErrorCode: integer;
     Fhttp: THTTPSend;
@@ -115,6 +115,7 @@ type
     property User: string read Fuser write SetUser;
     property Password: string read Fpassword write SetPassword;
     property ClientId: LongWord read FClientId write SetClientId;
+    property ClientTransactionID: LongWord read FClientTransactionID;
     property Timeout: integer read GetTimeout write SetTimeout;
     property LastError: string read FLastError;
     property LastErrorCode: integer read FLastErrorCode;
@@ -201,7 +202,8 @@ begin
   FDevice:='';
   Fuser:='';
   Fpassword:='';
-  FClientId:=0;
+  FClientId:=Random(High(LongWord));
+  FClientTransactionID:=0;
   FApiVersion:='1';
   SetBaseUrl;
 end;
@@ -279,6 +281,7 @@ end;
 
 procedure TAscomRest.SetClientId(i: LongWord);
 begin
+  if i<10000 then i:=1000*i+Random(99); // program id + random id
   FClientId:=i;
 end;
 
@@ -291,12 +294,13 @@ function TAscomRest.Get(method:string; param: string=''):TAscomResult;
    Fhttp.Headers.Clear;
    url:=FbaseUrl+Fdevice+'/'+method;
    if param>'' then begin
-      url:=url+'?'+param;
-      if ClientId>0 then url:=url+'&ClientID='+IntToStr(FClientId);
+      url:=url+'?'+param+'&ClientID='+IntToStr(FClientId);
    end
    else begin
-      if ClientId>0 then url:=url+'?ClientID='+IntToStr(FClientId);
+      url:=url+'?ClientID='+IntToStr(FClientId);
    end;
+   inc(FClientTransactionID);
+   url:=url+'&ClientTransactionID='+IntToStr(FClientTransactionID);
    ok := Fhttp.HTTPMethod('GET', url);
    if ok then begin
      if (Fhttp.ResultCode=200) then begin
@@ -418,15 +422,11 @@ begin
   Fhttp.Headers.Clear;
   n:=Length(params);
   if n=0 then begin
-    if ClientId>0 then
-       data:='ClientID='+IntToStr(FClientId)
-    else
-       data:='ClientID=0';
+    data:='ClientID='+IntToStr(FClientId)
   end
   else if n=1 then begin
     data:=params[0];
-    if ClientId>0 then
-       data:=data+'&ClientID='+IntToStr(FClientId);
+    data:=data+'&ClientID='+IntToStr(FClientId);
   end
   else begin
      i:=0;
@@ -437,9 +437,10 @@ begin
      until (i+1)>(n-1);
      if odd(n) then data:=data+params[n-1];
      if copy(data,length(data),1)='&' then data:=copy(data,1,length(data)-1);
-     if ClientId>0 then
-        data:=data+'&ClientID='+IntToStr(FClientId);
+     data:=data+'&ClientID='+IntToStr(FClientId);
   end;
+  inc(FClientTransactionID);
+  data:=data+'&ClientTransactionID='+IntToStr(FClientTransactionID);
   WriteStrToStream(Fhttp.Document, data);
   Fhttp.MimeType := 'application/x-www-form-urlencoded';
   url := FbaseUrl+Fdevice+'/'+method;
@@ -482,15 +483,11 @@ begin
   Fhttp.Headers.Clear;
   n:=Length(params);
   if n=0 then begin
-    if ClientId>0 then
-       data:='ClientID='+IntToStr(FClientId)
-    else
-       data:='ClientID=0';
+    data:='ClientID='+IntToStr(FClientId)
   end
   else if n=1 then begin
     data:=params[0];
-    if ClientId>0 then
-       data:=data+'&ClientID='+IntToStr(FClientId);
+    data:=data+'&ClientID='+IntToStr(FClientId);
   end
   else begin
      i:=0;
@@ -501,9 +498,10 @@ begin
      until (i+1)>(n-1);
      if odd(n) then data:=data+params[n-1];
      if copy(data,length(data),1)='&' then data:=copy(data,1,length(data)-1);
-     if ClientId>0 then
-        data:=data+'&ClientID='+IntToStr(FClientId);
+     data:=data+'&ClientID='+IntToStr(FClientId);
   end;
+  inc(FClientTransactionID);
+  data:=data+'&ClientTransactionID='+IntToStr(FClientTransactionID);
   WriteStrToStream(Fhttp.Document, data);
   Fhttp.MimeType := 'application/x-www-form-urlencoded';
   url := FbaseUrl+Fdevice+'/'+method;
