@@ -23,16 +23,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 }
 {
-  Implement a client for the ASCOM REST API
+  Implement a client for the ASCOM Alpaca REST API
   https://ascom-standards.org
 }
 
 interface
 
 uses httpsend, synautil, fpjson, jsonparser,
-  Classes, SysUtils;
+  Forms, Classes, SysUtils;
 
 type
+
+  { THTTPthread }
+
+  THTTPthread = class(TThread)
+    private
+      Fhttp: THTTPSend;
+      Furl,Fmethod: String;
+      Fok: boolean;
+    public
+      constructor Create;
+      destructor Destroy; override;
+      procedure Execute; override;
+      property http: THTTPSend read Fhttp write Fhttp;
+      property url: String read Furl write Furl;
+      property method: String read Fmethod write Fmethod;
+      property ok: boolean read Fok;
+  end;
 
   { TAscomRest }
 
@@ -79,11 +96,9 @@ type
     Fhost, Fport, Fprotocol, FDevice, FbaseUrl, FApiVersion: string;
     Fuser, Fpassword: string;
     FClientId,FClientTransactionID: LongWord;
+    FTimeout: integer;
     FLastError: string;
     FLastErrorCode: integer;
-    Fhttp: THTTPSend;
-    function GetHeaders: TStringList;
-    function GetDocument: TMemoryStream;
     procedure SetBaseUrl;
     procedure SetHost(host: string);
     procedure SetPort(port: string);
@@ -119,13 +134,38 @@ type
     property Timeout: integer read GetTimeout write SetTimeout;
     property LastError: string read FLastError;
     property LastErrorCode: integer read FLastErrorCode;
-    property Headers: TStringList read GetHeaders;
-    property Document: TMemoryStream read GetDocument;
 
   end;
 
 
 implementation
+
+{ THTTPthread }
+
+constructor THTTPthread.Create;
+begin
+  inherited Create(True);
+  FreeOnTerminate:=False;
+  Furl:='';
+  Fmethod:='';
+  Fok:=False;
+  Fhttp:=THTTPSend.Create;
+  Fhttp.Sock.ConnectionTimeout:=1000;  // not too long if service is not available
+  Fhttp.Timeout:=120000;               // 2 minutes for long sync request
+  Fhttp.UserAgent:='';
+end;
+
+destructor THTTPthread.Destroy;
+begin
+   Fhttp.Free;
+   inherited Destroy;
+end;
+
+procedure THTTPthread.Execute;
+begin
+  Fok:=Fhttp.HTTPMethod(method, fURL);
+end;
+
 
 { TAscomResult }
 
@@ -192,13 +232,10 @@ end;
 constructor TAscomRest.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  Fhttp:=THTTPSend.Create;
-  Fhttp.Sock.ConnectionTimeout:=1000;  // not too long if service is not available
-  Fhttp.Timeout:=120000;               // 2 minutes for long sync request
-  Fhttp.UserAgent:='';
   Fprotocol:='http:';
   Fhost:='localhost';
   Fport:='11111';
+  FTimeout:=120000;
   FDevice:='';
   Fuser:='';
   Fpassword:='';
@@ -210,29 +247,17 @@ end;
 
 destructor  TAscomRest.Destroy;
 begin
-  Fhttp.Free;
   inherited Destroy;
 end;
 
 function TAscomRest.GetTimeout: integer;
 begin
-  result:=Fhttp.Timeout;
+  result:=FTimeout;
 end;
 
 procedure TAscomRest.SetTimeout(value:integer);
 begin
-  Fhttp.Timeout:=value;
-end;
-
-function TAscomRest.GetHeaders: TStringList;
-begin
-  result:=Fhttp.Headers;
-end;
-
-function TAscomRest.GetDocument: TMemoryStream;
-begin
-  Fhttp.Document.Position:=0;
-  result:=Fhttp.Document;
+  FTimeout:=value;
 end;
 
 procedure TAscomRest.SetBaseUrl;
@@ -289,9 +314,13 @@ function TAscomRest.Get(method:string; param: string=''):TAscomResult;
  var ok: boolean;
      url: string;
      i: integer;
+     RESTRequest: THTTPthread;
  begin
-   Fhttp.Document.Clear;
-   Fhttp.Headers.Clear;
+   RESTRequest:=THTTPthread.Create;
+   try
+   RESTRequest.http.Document.Clear;
+   RESTRequest.http.Headers.Clear;
+   RESTRequest.http.Timeout:=FTimeout;
    url:=FbaseUrl+Fdevice+'/'+method;
    if param>'' then begin
       url:=url+'?'+param+'&ClientID='+IntToStr(FClientId);
@@ -301,12 +330,19 @@ function TAscomRest.Get(method:string; param: string=''):TAscomResult;
    end;
    inc(FClientTransactionID);
    url:=url+'&ClientTransactionID='+IntToStr(FClientTransactionID);
-   ok := Fhttp.HTTPMethod('GET', url);
+   RESTRequest.url:=url;
+   RESTRequest.method:='GET';
+   RESTRequest.Start;
+   while not RESTRequest.Finished do begin
+     sleep(100);
+     if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
+   end;
+   ok := RESTRequest.ok;
    if ok then begin
-     if (Fhttp.ResultCode=200) then begin
-       Fhttp.Document.Position:=0;
+     if (RESTRequest.http.ResultCode=200) then begin
+       RESTRequest.http.Document.Position:=0;
        Result:=TAscomResult.Create;
-       Result.data:=GetJSON(Fhttp.Document);
+       Result.data:=GetJSON(RESTRequest.http.Document);
        FLastErrorCode:=Result.data.GetPath('ErrorNumber').AsInteger;
        FLastError:=Result.data.GetPath('ErrorMessage').AsString;
        if FLastErrorCode<>0 then begin
@@ -315,17 +351,20 @@ function TAscomRest.Get(method:string; param: string=''):TAscomResult;
        end;
      end
      else begin
-       FLastErrorCode:=Fhttp.ResultCode;
-       FLastError:=Fhttp.ResultString;
+       FLastErrorCode:=RESTRequest.http.ResultCode;
+       FLastError:=RESTRequest.http.ResultString;
        i:=pos('<br>',FLastError);
        if i>0 then FLastError:=copy(FLastError,1,i-1);
        raise EApiException.Create(FLastError);
      end;
    end
    else begin
-     FLastErrorCode:=Fhttp.Sock.LastError;
-     FLastError:=Fhttp.Sock.LastErrorDesc;
+     FLastErrorCode:=RESTRequest.http.Sock.LastError;
+     FLastError:=RESTRequest.http.Sock.LastErrorDesc;
      raise ESocketException.Create(Fhost+':'+Fport+' '+FLastError);
+   end;
+   finally
+     RESTRequest.Free;
    end;
  end;
 
@@ -417,9 +456,13 @@ function TAscomRest.PutR(method: string; params:array of string):TAscomResult;
 var url,data: string;
     ok: boolean;
     i,n: integer;
+    RESTRequest: THTTPthread;
 begin
-  Fhttp.Document.Clear;
-  Fhttp.Headers.Clear;
+  RESTRequest:=THTTPthread.Create;
+  try
+  RESTRequest.http.Document.Clear;
+  RESTRequest.http.Headers.Clear;
+  RESTRequest.http.Timeout:=FTimeout;
   n:=Length(params);
   if n=0 then begin
     data:='ClientID='+IntToStr(FClientId)
@@ -441,15 +484,22 @@ begin
   end;
   inc(FClientTransactionID);
   data:=data+'&ClientTransactionID='+IntToStr(FClientTransactionID);
-  WriteStrToStream(Fhttp.Document, data);
-  Fhttp.MimeType := 'application/x-www-form-urlencoded';
+  WriteStrToStream(RESTRequest.http.Document, data);
+  RESTRequest.http.MimeType := 'application/x-www-form-urlencoded';
   url := FbaseUrl+Fdevice+'/'+method;
-  ok := Fhttp.HTTPMethod('PUT', url);
+  RESTRequest.url:=url;
+  RESTRequest.method:='PUT';
+  RESTRequest.Start;
+  while not RESTRequest.Finished do begin
+    sleep(100);
+    if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
+  end;
+  ok := RESTRequest.ok;
    if ok then begin
-    if (Fhttp.ResultCode=200) then begin
-      Fhttp.Document.Position:=0;
+    if (RESTRequest.http.ResultCode=200) then begin
+      RESTRequest.http.Document.Position:=0;
       Result:=TAscomResult.Create;
-      Result.data:=GetJSON(Fhttp.Document);
+      Result.data:=GetJSON(RESTRequest.http.Document);
       FLastErrorCode:=Result.data.GetPath('ErrorNumber').AsInteger;
       FLastError:=Result.data.GetPath('ErrorMessage').AsString;
       if FLastErrorCode<>0 then begin
@@ -458,17 +508,20 @@ begin
       end;
     end
     else begin
-      FLastErrorCode:=Fhttp.ResultCode;
-      FLastError:=Fhttp.ResultString;
+      FLastErrorCode:=RESTRequest.http.ResultCode;
+      FLastError:=RESTRequest.http.ResultString;
       i:=pos('<br>',FLastError);
       if i>0 then FLastError:=copy(FLastError,1,i-1);
       raise EApiException.Create(FLastError);
     end;
   end
   else begin
-    FLastErrorCode:=Fhttp.Sock.LastError;
-    FLastError:=Fhttp.Sock.LastErrorDesc;
+    FLastErrorCode:=RESTRequest.http.Sock.LastError;
+    FLastError:=RESTRequest.http.Sock.LastErrorDesc;
     raise ESocketException.Create(Fhost+':'+Fport+' '+FLastError);
+  end;
+  finally
+    RESTRequest.Free;
   end;
 end;
 
@@ -478,9 +531,13 @@ var J: TJSONData;
     url,data: string;
     ok: boolean;
     i,n: integer;
+    RESTRequest: THTTPthread;
 begin
-  Fhttp.Document.Clear;
-  Fhttp.Headers.Clear;
+  RESTRequest:=THTTPthread.Create;
+  try
+  RESTRequest.http.Document.Clear;
+  RESTRequest.http.Headers.Clear;
+  RESTRequest.http.Timeout:=FTimeout;
   n:=Length(params);
   if n=0 then begin
     data:='ClientID='+IntToStr(FClientId)
@@ -502,14 +559,21 @@ begin
   end;
   inc(FClientTransactionID);
   data:=data+'&ClientTransactionID='+IntToStr(FClientTransactionID);
-  WriteStrToStream(Fhttp.Document, data);
-  Fhttp.MimeType := 'application/x-www-form-urlencoded';
+  WriteStrToStream(RESTRequest.http.Document, data);
+  RESTRequest.http.MimeType := 'application/x-www-form-urlencoded';
   url := FbaseUrl+Fdevice+'/'+method;
-  ok := Fhttp.HTTPMethod('PUT', url);
-   if ok then begin
-    if (Fhttp.ResultCode=200) then begin
-      Fhttp.Document.Position:=0;
-      J:=GetJSON(Fhttp.Document);
+  RESTRequest.url:=url;
+  RESTRequest.method:='PUT';
+  RESTRequest.Start;
+  while not RESTRequest.Finished do begin
+    sleep(100);
+    if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
+  end;
+  ok := RESTRequest.ok;
+  if ok then begin
+    if (RESTRequest.http.ResultCode=200) then begin
+      RESTRequest.http.Document.Position:=0;
+      J:=GetJSON(RESTRequest.http.Document);
       FLastErrorCode:=J.GetPath('ErrorNumber').AsInteger;
       FLastError:=J.GetPath('ErrorMessage').AsString;
       J.Free;
@@ -518,17 +582,20 @@ begin
       end;
     end
     else begin
-      FLastErrorCode:=Fhttp.ResultCode;
-      FLastError:=Fhttp.ResultString;
+      FLastErrorCode:=RESTRequest.http.ResultCode;
+      FLastError:=RESTRequest.http.ResultString;
       i:=pos('<br>',FLastError);
       if i>0 then FLastError:=copy(FLastError,1,i-1);
       raise EApiException.Create(FLastError);
     end;
   end
   else begin
-    FLastErrorCode:=Fhttp.Sock.LastError;
-    FLastError:=Fhttp.Sock.LastErrorDesc;
+    FLastErrorCode:=RESTRequest.http.Sock.LastError;
+    FLastError:=RESTRequest.http.Sock.LastErrorDesc;
     raise ESocketException.Create(Fhost+':'+Fport+' '+FLastError);
+  end;
+  finally
+    RESTRequest.Free;
   end;
 end;
 
