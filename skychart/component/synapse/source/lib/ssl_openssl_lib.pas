@@ -1872,6 +1872,7 @@ begin
   {/pf}  
   SSLCS.Enter;
   try
+  try
     if not IsSSLloaded then
     begin
 {$IFDEF CIL}
@@ -2073,6 +2074,10 @@ begin
       Result := true;
   finally
     SSLCS.Leave;
+  end;
+  except
+    SSLLibHandle := 0;
+    Result := False;
   end;
 end;
 
