@@ -2516,6 +2516,7 @@ begin
     if VerboseMsg then
       debugln(step);
     InitTrace;
+    if isAdmin then WriteTrace(basecaption);
     WriteTrace('Program version : ' + cdcversion + '-' + RevisionStr);
     WriteTrace('Program compiled: ' + compile_time);
     WriteTrace('Compiler version: ' + compile_version);
