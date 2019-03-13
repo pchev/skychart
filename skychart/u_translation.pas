@@ -1529,6 +1529,8 @@ resourcestring
   rsUseTheIntern = 'Use the internal INDI gui panel';
   rsCooordinateS = 'Coordinate system to use with the clients';
   rsDoNotFilterB = 'Do not filter bright nebula by magnitude';
+  rsDoNotRunAsAd = 'Do not run %s as %s!';
+  rsAdministrato = 'administrator';
 
 // also update upsi_translation
 

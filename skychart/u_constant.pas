@@ -1347,6 +1347,7 @@ var
   nightvision, DarkTheme: boolean;
   CurrentTheme: string;
   isWOW64: boolean;
+  isAdmin: boolean;
   isANSItmpdir: boolean;
   DisplayIs32bpp: boolean;
   ThemePath: string = 'data/Themes';

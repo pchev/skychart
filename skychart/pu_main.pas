@@ -32,6 +32,9 @@ uses
   {$ifdef mswindows}
   Windows, ShlObj, Registry,
   {$endif}
+  {$ifdef unix}
+  BaseUnix,
+  {$endif}
   lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet, cu_fits,
   cu_database, fu_chart, cu_tcpserver, pu_config_time, pu_config_observatory,
   pu_config_display, pu_config_pictures, pu_indigui, pu_config_catalog,
@@ -2454,9 +2457,11 @@ begin
     MaxThreadCount := GetThreadCount;
     DisplayIs32bpp := True;
     isWOW64 := False;
+    isAdmin := False;
     {$ifdef mswindows}
     step := 'Windows spefic';
     isWOW64 := FindWOW64;
+    isAdmin := IsUserAnAdmin;
     DisplayIs32bpp := (ScreenBPP = 32);
     configfile := Defaultconfigfile;
     SaveDialog.Options := SaveDialog.Options - [ofNoReadOnlyReturn];
@@ -2465,6 +2470,7 @@ begin
     CanShowScrollbar := True;
     {$ifdef unix}
     step := 'Unix specific';
+    isAdmin := (FpGetuid=0);
     configfile := expandfilename(Defaultconfigfile);
     if DirectoryExists('/usr/share/doc/overlay-scrollbar') then
     begin
@@ -2496,7 +2502,14 @@ begin
     step := 'Application directory';
     if VerboseMsg then
       debugln(step);
-    basecaption := Caption;
+    if isAdmin then
+       {$ifdef mswindows}
+       basecaption := Format(rsDoNotRunAsAd, [Caption, rsAdministrato])
+       {$else}
+       basecaption := Format(rsDoNotRunAsAd, [Caption, 'root'])
+       {$endif}
+    else
+       basecaption := Caption;
     GetAppDir;
     chdir(appdir);
     step := 'Trace';
