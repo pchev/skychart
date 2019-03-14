@@ -45,7 +45,7 @@ uses
   InterfaceBase, LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus,
   Math, StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
   Printers, ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame,
-  BGRABitmap, BGRABitmapTypes, LResources, uniqueinstance, enhedits,
+  BGRABitmap, BGRABitmapTypes, LResources, uniqueinstance, enhedits, cu_healpix,
   downloaddialog, LazHelpHTML, ButtonPanel, ExtDlgs;
 
 type
@@ -2691,7 +2691,14 @@ begin
     ScriptPanel.Constraints.MinWidth :=
       Fscript[0].ButtonConfig.Width + 4 + GetSystemMetrics(SM_SWSCROLLBARSPACING) +
       GetSystemMetrics(SM_CXVSCROLL);
-    ;
+
+    step := 'Load Healpix library';
+    if VerboseMsg then
+      WriteTrace(step);
+    LoadHealpixLibrary;
+    if @pix2ang_nest64=nil then
+       WriteTrace(step+' failed');
+
     step := 'SetLang';
     if VerboseMsg then
       WriteTrace(step);

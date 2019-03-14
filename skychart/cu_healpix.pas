@@ -47,11 +47,14 @@ var
    ang2pix_nest64: Tang2pix_nest64;
    pix2ang_nest64: Tpix2ang_nest64;
 
+procedure LoadHealpixLibrary;
+
 implementation
 
 var lib: TLibHandle;
 
-initialization
+procedure LoadHealpixLibrary;
+begin
 
   try
   lib := LoadLibrary(libname);
@@ -69,5 +72,7 @@ initialization
     ang2pix_nest64 := nil;
     pix2ang_nest64 := nil;
   end;
+
+end;
 
 end.
