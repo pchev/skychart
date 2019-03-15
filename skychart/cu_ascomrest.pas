@@ -72,7 +72,7 @@ type
 
   TAscomResult= class(TObject)
      protected
-       Fdata: TJSONData;
+       Fdata: TJSONObject;
        function GetAsFloat: double;
        function GetAsInt: integer;
        function GetAsBool: boolean;
@@ -82,7 +82,8 @@ type
      public
        constructor Create;
        destructor Destroy; override;
-       property data: TJSONData read Fdata write Fdata;
+       function GetName(name: string): TJSONData;
+       property data: TJSONObject read Fdata write Fdata;
        property AsFloat: double read GetAsFloat;
        property AsInt: Integer read GetAsInt;
        property AsBool: boolean read GetAsBool;
@@ -181,34 +182,45 @@ begin
   inherited Destroy;
 end;
 
+function TAscomResult.GetName(name: string): TJSONData;
+var i: integer;
+begin
+  result:=nil;
+  if Fdata<>nil then begin
+    i:=Fdata.IndexOfName(name,true);
+    if i>=0 then
+      Result:=Fdata.Items[i].GetPath('');
+  end;
+end;
+
 function TAscomResult.GetAsFloat: Double;
 begin
- Result:=data.GetPath('Value').AsFloat;
+ Result:=GetName('Value').AsFloat;
  Free;
 end;
 
 function TAscomResult.GetAsInt: Integer;
 begin
- Result:=data.GetPath('Value').AsInteger;
+ Result:=GetName('Value').AsInteger;
  Free;
 end;
 
 function TAscomResult.GetAsBool: Boolean;
 begin
-  Result:=data.GetPath('Value').AsBoolean;
+  Result:=GetName('Value').AsBoolean;
   Free;
 end;
 
 function TAscomResult.GetAsString: string;
 begin
-   Result:=data.GetPath('Value').AsString;
+   Result:=GetName('Value').AsString;
    Free;
 end;
 
 function TAscomResult.GetAsStringArray: IStringArray;
 var i: integer;
 begin
-  with TJSONArray(data.GetPath('Value')) do begin
+  with TJSONArray(GetName('Value')) do begin
     SetLength(Result,Count);
     for i:=0 to Count-1 do
       Result[i]:=Strings[i];
@@ -219,7 +231,7 @@ end;
 function TAscomResult.GetIntArray: IIntArray;
 var i: integer;
 begin
-  with TJSONArray(data.GetPath('Value')) do begin
+  with TJSONArray(GetName('Value')) do begin
     SetLength(Result,Count);
     for i:=0 to Count-1 do
       Result[i]:=Integers[i];
@@ -342,9 +354,9 @@ function TAscomRest.Get(method:string; param: string=''):TAscomResult;
      if (RESTRequest.http.ResultCode=200) then begin
        RESTRequest.http.Document.Position:=0;
        Result:=TAscomResult.Create;
-       Result.data:=GetJSON(RESTRequest.http.Document);
-       FLastErrorCode:=Result.data.GetPath('ErrorNumber').AsInteger;
-       FLastError:=Result.data.GetPath('ErrorMessage').AsString;
+       Result.data:=TJSONObject(GetJSON(RESTRequest.http.Document));
+       FLastErrorCode:=Result.GetName('ErrorNumber').AsInteger;
+       FLastError:=Result.GetName('ErrorMessage').AsString;
        if FLastErrorCode<>0 then begin
           Result.Free;
           raise EAscomException.Create(FLastError);
@@ -374,7 +386,7 @@ var J: TAscomResult;
 begin
   J:=Get('trackingrates');
   try
-  with TJSONArray(J.data.GetPath('Value')) do begin
+  with TJSONArray(J.GetName('Value')) do begin
     SetLength(Result,Count);
     for i:=0 to Count-1 do
       Result[i]:=Integers[i];
@@ -386,18 +398,24 @@ end;
 
 function TAscomRest.GetAxisRates(axis:string): IAxisRates;
 var J: TAscomResult;
-    i,n: integer;
+    i,k,n: integer;
     r: IRate;
 begin
   J:=Get('axisrates','axis='+axis);
   try
-  with TJSONArray(J.data.GetPath('Value')) do begin
-    n:=count;
+  with TJSONArray(J.GetName('Value')) do begin
+    n:=Count;
     SetLength(Result,n);
     for i:=0 to n-1 do begin
       r:=IRate.Create;
-      r.Maximum:=Objects[i].GetPath('Maximum').AsFloat;
-      r.Minimum:=Objects[i].GetPath('Minimum').AsFloat;
+      r.Minimum:=0;
+      r.Maximum:=0;
+      k:=Objects[i].IndexOfName('Maximum',true);
+      if k>=0 then
+        r.Maximum:=Objects[i].Items[k].GetPath('').AsFloat;
+      k:=Objects[i].IndexOfName('Minimum',true);
+      if k>=0 then
+        r.Minimum:=Objects[i].Items[k].GetPath('').AsFloat;
       Result[i]:=r;
     end;
   end;
@@ -413,9 +431,9 @@ begin
    J:=Get('imagearray');
    try
    Result:=TImageArray.Create;
-   Result.nplane:=J.data.GetPath('Rank').AsInteger;
+   Result.nplane:=J.GetName('Rank').AsInteger;
    if result.nplane=2 then begin
-     with TJSONArray(J.data.GetPath('Value')) do begin
+     with TJSONArray(J.GetName('Value')) do begin
        Result.width:=Count;
        Result.height:=Arrays[0].Count;
        SetLength(Result.img,1,Result.height,Result.width);
@@ -430,7 +448,7 @@ begin
    end
    else
    if result.nplane=3 then begin
-     with TJSONArray(J.data.GetPath('Value')) do begin
+     with TJSONArray(J.GetName('Value')) do begin
        Result.width:=Count;
        Result.height:=Arrays[0].Count;
        SetLength(Result.img,3,Result.height,Result.width);
@@ -499,9 +517,9 @@ begin
     if (RESTRequest.http.ResultCode=200) then begin
       RESTRequest.http.Document.Position:=0;
       Result:=TAscomResult.Create;
-      Result.data:=GetJSON(RESTRequest.http.Document);
-      FLastErrorCode:=Result.data.GetPath('ErrorNumber').AsInteger;
-      FLastError:=Result.data.GetPath('ErrorMessage').AsString;
+      Result.data:=TJSONObject(GetJSON(RESTRequest.http.Document));
+      FLastErrorCode:=Result.GetName('ErrorNumber').AsInteger;
+      FLastError:=Result.GetName('ErrorMessage').AsString;
       if FLastErrorCode<>0 then begin
          Result.Free;
          raise EAscomException.Create(FLastError);
@@ -527,7 +545,7 @@ end;
 
 
 procedure TAscomRest.Put(method: string; params:array of string); overload;
-var J: TJSONData;
+var J: TAscomResult;
     url,data: string;
     ok: boolean;
     i,n: integer;
@@ -573,9 +591,10 @@ begin
   if ok then begin
     if (RESTRequest.http.ResultCode=200) then begin
       RESTRequest.http.Document.Position:=0;
-      J:=GetJSON(RESTRequest.http.Document);
-      FLastErrorCode:=J.GetPath('ErrorNumber').AsInteger;
-      FLastError:=J.GetPath('ErrorMessage').AsString;
+      J:=TAscomResult.Create;
+      J.data:=TJSONObject(GetJSON(RESTRequest.http.Document));
+      FLastErrorCode:=J.GetName('ErrorNumber').AsInteger;
+      FLastError:=J.GetName('ErrorMessage').AsString;
       J.Free;
       if FLastErrorCode<>0 then begin
          raise EAscomException.Create(FLastError);
