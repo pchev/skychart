@@ -333,7 +333,7 @@ function TAscomRest.Get(method:string; param: string=''):TAscomResult;
    RESTRequest.http.Document.Clear;
    RESTRequest.http.Headers.Clear;
    RESTRequest.http.Timeout:=FTimeout;
-   url:=FbaseUrl+Fdevice+'/'+method;
+   url:=FbaseUrl+LowerCase(Fdevice)+'/'+LowerCase(method);
    if param>'' then begin
       url:=url+'?'+param+'&ClientID='+IntToStr(FClientId);
    end
@@ -509,7 +509,7 @@ begin
   data:=data+'&ClientTransactionID='+IntToStr(FClientTransactionID);
   WriteStrToStream(RESTRequest.http.Document, data);
   RESTRequest.http.MimeType := 'application/x-www-form-urlencoded';
-  url := FbaseUrl+Fdevice+'/'+method;
+  url := FbaseUrl+LowerCase(Fdevice)+'/'+LowerCase(method);
   RESTRequest.url:=url;
   RESTRequest.method:='PUT';
   RESTRequest.Start;
@@ -589,7 +589,7 @@ begin
   data:=data+'&ClientTransactionID='+IntToStr(FClientTransactionID);
   WriteStrToStream(RESTRequest.http.Document, data);
   RESTRequest.http.MimeType := 'application/x-www-form-urlencoded';
-  url := FbaseUrl+Fdevice+'/'+method;
+  url := FbaseUrl+LowerCase(Fdevice)+'/'+LowerCase(method);
   RESTRequest.url:=url;
   RESTRequest.method:='PUT';
   RESTRequest.Start;
