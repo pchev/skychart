@@ -355,8 +355,13 @@ function TAscomRest.Get(method:string; param: string=''):TAscomResult;
        RESTRequest.http.Document.Position:=0;
        Result:=TAscomResult.Create;
        Result.data:=TJSONObject(GetJSON(RESTRequest.http.Document));
+       try
        FLastErrorCode:=Result.GetName('ErrorNumber').AsInteger;
        FLastError:=Result.GetName('ErrorMessage').AsString;
+       except
+        FLastErrorCode:=0;
+        FLastError:='Missing error message from server';
+       end;
        if FLastErrorCode<>0 then begin
           Result.Free;
           raise EAscomException.Create(FLastError);
@@ -518,8 +523,13 @@ begin
       RESTRequest.http.Document.Position:=0;
       Result:=TAscomResult.Create;
       Result.data:=TJSONObject(GetJSON(RESTRequest.http.Document));
+      try
       FLastErrorCode:=Result.GetName('ErrorNumber').AsInteger;
       FLastError:=Result.GetName('ErrorMessage').AsString;
+      except
+       FLastErrorCode:=0;
+       FLastError:='Missing error message from server';
+      end;
       if FLastErrorCode<>0 then begin
          Result.Free;
          raise EAscomException.Create(FLastError);
@@ -593,8 +603,13 @@ begin
       RESTRequest.http.Document.Position:=0;
       J:=TAscomResult.Create;
       J.data:=TJSONObject(GetJSON(RESTRequest.http.Document));
+      try
       FLastErrorCode:=J.GetName('ErrorNumber').AsInteger;
       FLastError:=J.GetName('ErrorMessage').AsString;
+      except
+       FLastErrorCode:=0;
+       FLastError:='Missing error message from server';
+      end;
       J.Free;
       if FLastErrorCode<>0 then begin
          raise EAscomException.Create(FLastError);
