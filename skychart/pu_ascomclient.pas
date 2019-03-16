@@ -352,7 +352,7 @@ begin
       end;
       TR.Device:='telescope/'+ARestDevice.Text;
       TR.Timeout:=2000;
-      TR.Put('connected',true);
+      TR.Put('Connected',true);
       c_ok := TR.Get('connected').AsBool;
       TR.Timeout:=60000;
     end;
@@ -483,7 +483,7 @@ begin
         if not TR.Get('tracking').AsBool then
         begin
           if FCanSetTracking then
-            TR.Put('tracking',True);
+            TR.Put('Tracking',True);
           UpdTrackingButton;
         end;
         TR.Put('synctocoordinates',['RightAscension',FormatFloat(f6,Ra),'Declination',FormatFloat(f6,Dec)]);
@@ -650,7 +650,7 @@ begin
     begin
       if not TR.Get('tracking').AsBool then
       begin
-        TR.Put('tracking',True);
+        TR.Put('Tracking',True);
         UpdTrackingButton;
       end;
       if TR.Get('canslewasync').AsBool then
@@ -1175,9 +1175,9 @@ begin
       else
       {$endif}
       begin
-        TR.Put('sitelongitude',Flongitude);
-        TR.Put('sitelatitude',Flatitude);
-        TR.Put('siteelevation',FElevation);
+        TR.Put('SiteLongitude',Flongitude);
+        TR.Put('SiteLatitude',Flatitude);
+        TR.Put('SiteElevation',FElevation);
       end;
     except
       on E: Exception do
@@ -1201,7 +1201,7 @@ begin
       else
       {$endif}
       begin
-        TR.Put('utcdate',buf);
+        TR.Put('UTCDate',buf);
       end;
     except
       on E: Exception do
@@ -1343,7 +1343,7 @@ begin
       {$endif}
       begin
         tracking := TR.Get('tracking').AsBool;
-        TR.Put('tracking',not tracking);
+        TR.Put('Tracking',not tracking);
       end;
       UpdTrackingButton;
     except
