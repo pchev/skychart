@@ -2,6 +2,8 @@ Version 4.1.1 beta, Notes de la version
 
 Nouvelles fonctions:
 
+- La sélection du serveur et du pilote INDI est maintenant dans la boîte de connexion. L'option pour lancer indistarter est supprimée.
+- Affiche un avertissement dans le titre de la fenêtre si le programme est exécuté en tant qu’administrateur
 - Ajout d'une option pour ne pas filtrer les nébuleuses brillante par magnitude.
 - Ajout d'une option pour définir la largeur de la ligne. Attention, cela ne fonctionne pas avec les lignes pointillées lors de l’impression sous Windows à cause des limitations de l’API.
 - Il est maintenant possible d'utiliser un télescope connecté à un ordinateur Windows ASCOM distant à partir de CdC fonctionnant sous Linux ou macOS. Voir: https://github.com/ASCOMInitiative/ASCOMRemote/blob/master/Documentation/ASCOM%20Remote%20Concept.pdf
