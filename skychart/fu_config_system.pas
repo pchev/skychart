@@ -37,6 +37,7 @@ type
 
   Tf_config_system = class(TFrame)
     IndiMsg: TLabel;
+    INDILabel2: TLabel;
     LanguageList: TCheckListBox;
     ServerCoordSys: TRadioGroup;
     UseScaling: TCheckBox;
@@ -110,7 +111,6 @@ type
     ipport: TEdit;
     keepalive: TCheckBox;
     Label13: TLabel;
-    IndiAutostart: TCheckBox;
     TelescopeSelect: TRadioGroup;
     GroupBox1: TGroupBox;
     chkdb: TButton;
@@ -173,7 +173,6 @@ type
     procedure keepaliveClick(Sender: TObject);
     procedure ipaddrChange(Sender: TObject);
     procedure ipportChange(Sender: TObject);
-    procedure IndiAutostartClick(Sender: TObject);
     procedure TelescopeSelectClick(Sender: TObject);
     procedure persdirChange(Sender: TObject);
     procedure AstDBClick(Sender: TObject);
@@ -286,8 +285,8 @@ begin
   RevertTurnsAz.Caption := rsRevertAzKnob;
   RevertTurnsAlt.Caption := rsRevertAltKno;
   INDILabel.Caption := rsINDIDriverSe;
+  INDILabel2.Caption := Format(rsUseTheMenuOr, [rsConnectTeles]);
   Label2.Caption := rsControlPanel2;
-  IndiAutostart.Caption := rsLaunchINDIst;
   InternalIndiGui.Caption:=rsUseTheIntern;
   Label14.Caption := rsLanguageSele;
   ManualMountType.Items[0] := rsEquatorialMo;
@@ -477,7 +476,6 @@ end;
 
 procedure Tf_config_system.ShowTelescope;
 begin
-  IndiAutostart.Checked := csc.IndiAutostart;
   InternalIndiGui.Checked := cmain.InternalIndiPanel;
   PanelCmd.Text := cmain.IndiPanelCmd;
   ExternalControlPanel.Visible := (not cmain.InternalIndiPanel);
@@ -850,24 +848,6 @@ begin
     PageControl2.ActivePage := TabSheet2;
   if csc.ASCOMTelescope then
     PageControl2.ActivePage := TabSheet4;
-end;
-
-procedure Tf_config_system.IndiAutostartClick(Sender: TObject);
-var
-  i: integer;
-begin
-  if LockChange then
-    exit;
-  i := Exec('which indistarter');
-  if i <> 0 then
-  begin
-    if not LockMsg then
-      ShowMessage(rsPleaseInstal);
-    LockMsg := True;
-    IndiAutostart.Checked := False;
-    LockMsg := False;
-  end;
-  csc.IndiAutostart := IndiAutostart.Checked;
 end;
 
 procedure Tf_config_system.PanelCmdChange(Sender: TObject);

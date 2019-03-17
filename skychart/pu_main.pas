@@ -6294,7 +6294,6 @@ begin
   def_cfgsc.ShowCircle := False;
   def_cfgsc.ShowCrosshair := False;
   def_cfgsc.EyepieceMask := False;
-  def_cfgsc.IndiAutostart := False;
   def_cfgsc.IndiLoadConfig := False;
   def_cfgsc.IndiServerHost := 'localhost';
   def_cfgsc.IndiServerPort := '7624';
@@ -7603,8 +7602,6 @@ begin
           ReadString(section, 'ffovc_cx', catalog.cfgshr.ffovc_cx);
         catalog.cfgshr.ffovc_cy :=
           ReadString(section, 'ffovc_cy', catalog.cfgshr.ffovc_cy);
-        def_cfgsc.IndiAutostart :=
-          ReadBool(section, 'IndiAutostart', def_cfgsc.IndiAutostart);
         def_cfgsc.IndiLoadConfig :=
           ReadBool(section, 'IndiLoadConfig', def_cfgsc.IndiLoadConfig);
         def_cfgsc.IndiServerHost :=
@@ -8743,14 +8740,12 @@ begin
         WriteFloat(section, 'TelescopeTurnsY', def_cfgsc.TelescopeTurnsY);
         if MultiFrame1.ActiveObject is Tf_chart then
         with (MultiFrame1.ActiveObject as Tf_chart).sc do begin
-          WriteBool(section, 'IndiAutostart', cfgsc.IndiAutostart);
           WriteBool(section, 'IndiLoadConfig', cfgsc.IndiLoadConfig);
           WriteString(section, 'IndiServerHost', cfgsc.IndiServerHost);
           WriteString(section, 'IndiServerPort', cfgsc.IndiServerPort);
           WriteString(section, 'IndiDevice', cfgsc.IndiDevice);
         end
         else begin
-          WriteBool(section, 'IndiAutostart', def_cfgsc.IndiAutostart);
           WriteBool(section, 'IndiLoadConfig', def_cfgsc.IndiLoadConfig);
           WriteString(section, 'IndiServerHost', def_cfgsc.IndiServerHost);
           WriteString(section, 'IndiServerPort', def_cfgsc.IndiServerPort);

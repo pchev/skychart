@@ -251,22 +251,8 @@ end;
 procedure Tpop_indi.ServerDisconnected(Sender: TObject);
 begin
   ConnectTimer.Enabled := False;
-  if InitTimer.Enabled then
-  begin
-    if csc.IndiAutostart then
-    begin
-      InitTimer.Enabled := False;
-      ExecNoWait('nohup indistarter');
-    end
-    else
-    begin
-      Memomsg.Lines.Add('Server disconnected');
-    end;
-  end
-  else
-  begin
-    Memomsg.Lines.Add('Server disconnected');
-  end;
+  InitTimer.Enabled := False;
+  Memomsg.Lines.Add('Server disconnected');
   ClearStatus;
   led.color := clRed;
 end;
@@ -918,14 +904,7 @@ begin
   end;
   if not ok then
   begin
-    if csc.IndiAutostart and (IndiServerHost.Text='localhost') then
-    begin
-      ExecNoWait('nohup indistarter');
-    end
-    else
-    begin
-      Memomsg.Lines.Add(rsConnectionTo);
-    end;
+    Memomsg.Lines.Add(rsConnectionTo);
     MountIndiDevice.Items.Add(mountsavedev);
     MountIndiDevice.ItemIndex := 0;
   end;
@@ -949,15 +928,8 @@ begin
   if (TelescopeDevice = nil) or (coord_prop = nil) then
   begin
     ScopeDisconnect(ok);
-    if csc.IndiAutostart then
-    begin
-      ExecNoWait('nohup indistarter');
-    end
-    else
-    begin
-      Memomsg.Lines.Add('No response from server');
-      Memomsg.Lines.Add('Is driver"' + csc.IndiDevice + '" running?');
-    end;
+    Memomsg.Lines.Add('No response from server');
+    Memomsg.Lines.Add('Is driver"' + csc.IndiDevice + '" running?');
   end;
 end;
 

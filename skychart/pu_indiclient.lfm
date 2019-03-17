@@ -12,13 +12,14 @@ object pop_indi: Tpop_indi
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   Position = poDefaultPosOnly
+  LCLVersion = '2.0.0.4'
   object GroupBox3: TGroupBox
     Left = 0
     Height = 65
     Top = 253
     Width = 321
     Align = alTop
-    ClientHeight = 63
+    ClientHeight = 47
     ClientWidth = 319
     ParentFont = False
     TabOrder = 2

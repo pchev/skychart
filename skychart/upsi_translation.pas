@@ -802,7 +802,6 @@ begin
   CL.AddConstantN('rsINDIServerPo', 'String').SetString(rsINDIServerPo);
   CL.AddConstantN('rsTelescopeNam', 'String').SetString(rsTelescopeNam);
   CL.AddConstantN('rsControlPanel2', 'String').SetString(rsControlPanel2);
-  CL.AddConstantN('rsLaunchINDIst', 'String').SetString(rsLaunchINDIst);
   CL.AddConstantN('rsAlsoBeSureTh', 'String').SetString(rsAlsoBeSureTh);
   CL.AddConstantN('rsWarningYouAr', 'String').SetString(rsWarningYouAr);
   CL.AddConstantN('rsTime', 'String').SetString(rsTime);
@@ -1403,7 +1402,6 @@ begin
   CL.AddConstantN('rsSetOptionsFo', 'String').SetString(rsSetOptionsFo);
   CL.AddConstantN('rsVersion', 'String').SetString(rsVersion);
   CL.AddConstantN('rsConnectionTo', 'String').SetString(rsConnectionTo);
-  CL.AddConstantN('rsPleaseInstal', 'String').SetString(rsPleaseInstal);
   CL.AddConstantN('rsActivateAllT', 'String').SetString(rsActivateAllT);
   CL.AddConstantN('rsButtonSize', 'String').SetString(rsButtonSize);
   CL.AddConstantN('rsShowButtonTe', 'String').SetString(rsShowButtonTe);
