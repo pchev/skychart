@@ -38,19 +38,28 @@ type
   { Tpop_indi }
 
   Tpop_indi = class(TForm)
+    AutoloadConfig: TCheckBox;
     BtnIndiGui: TButton;
+    BtnGet: TButton;
     ButtonGetLocation: TSpeedButton;
     ButtonSetLocation: TSpeedButton;
     Connect: TButton;
     Disconnect: TButton;
     Elev: TEdit;
     GroupBox5: TGroupBox;
+    IndiServerHost: TEdit;
+    IndiServerPort: TEdit;
+    IndiTimer: TTimer;
     Label1: TLabel;
+    Label130: TLabel;
     Label15: TLabel;
     Label16: TLabel;
+    Label260: TLabel;
+    Label75: TLabel;
     lat: TEdit;
     led: TEdit;
     long: TEdit;
+    MountIndiDevice: TComboBox;
     Panel2: TPanel;
     ProtocolTrace: TCheckBox;
     GroupBox3: TGroupBox;
@@ -62,20 +71,25 @@ type
     pos_x: TEdit;
     pos_y: TEdit;
     GroupBox1: TGroupBox;
-    Edit1: TEdit;
     SpeedButton4: TButton;
     SpeedButton6: TButton;
     InitTimer: TTimer;
     ConnectTimer: TTimer;
     {Utility and form functions}
+    procedure AutoloadConfigClick(Sender: TObject);
+    procedure BtnGetClick(Sender: TObject);
     procedure BtnIndiGuiClick(Sender: TObject);
     procedure ButtonGetLocationClick(Sender: TObject);
     procedure ButtonSetLocationClick(Sender: TObject);
     procedure ConnectTimerTimer(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure IndiServerHostChange(Sender: TObject);
+    procedure IndiServerPortChange(Sender: TObject);
+    procedure IndiTimerTimer(Sender: TObject);
     procedure InitTimerTimer(Sender: TObject);
     procedure kill(Sender: TObject; var CanClose: boolean);
     procedure ConnectClick(Sender: TObject);
+    procedure MountIndiDeviceSelect(Sender: TObject);
     procedure ProtocolTraceChange(Sender: TObject);
     procedure SaveConfig;
     procedure DisconnectClick(Sender: TObject);
@@ -117,6 +131,11 @@ type
     FLatitude: double;                  // Observatory latitude
     FElevation: double;                 // Observatory elevation
     FObservatoryCoord: TNotifyEvent;
+    mountsavedev: string;
+    receiveindidevice: boolean;
+    indiclient: TIndiBaseClient;
+    procedure IndiNewDevice(dp: Basedevice);
+    procedure IndiDisconnected(Sender: TObject);
     procedure ClearStatus;
     procedure CheckStatus;
     procedure LoadConfig;
@@ -739,7 +758,11 @@ end;
 procedure Tpop_indi.SetLang;
 begin
   Caption := rsINDIDriver;
-  GroupBox1.Caption := rsCurrentDrive;
+  GroupBox1.Caption := rsINDIDriverSe;
+  Label75.Caption := rsINDIServerHo;
+  Label130.Caption := rsINDIServerPo;
+  Label260.Caption := rsTelescopeNam;
+  BtnGet.Caption := rsGet;
   Connect.Caption := rsConnect;
   Disconnect.Caption := rsDisconnect;
   SpeedButton6.Caption := rsAbortSlew;
@@ -764,7 +787,14 @@ end;
 
 procedure Tpop_indi.ScopeShow;
 begin
-  Edit1.Caption := csc.IndiDevice;
+  IndiServerHost.Caption := csc.IndiServerHost;
+  IndiServerPort.Caption := csc.IndiServerPort;
+  MountIndiDevice.items.Clear;
+  if csc.IndiDevice <> '' then
+  begin
+    MountIndiDevice.items.add(csc.IndiDevice);
+    MountIndiDevice.ItemIndex := 0;
+  end;
   ActiveControl := Connect;
   Show;
 end;
@@ -786,6 +816,16 @@ begin
   ClearStatus;
 end;
 
+procedure Tpop_indi.IndiServerHostChange(Sender: TObject);
+begin
+  csc.IndiServerHost := IndiServerHost.Text;
+end;
+
+procedure Tpop_indi.IndiServerPortChange(Sender: TObject);
+begin
+  csc.IndiServerPort := IndiServerPort.Text;
+end;
+
 procedure Tpop_indi.BtnIndiGuiClick(Sender: TObject);
 begin
   if not IndiGUIready then
@@ -798,6 +838,102 @@ begin
     IndiGUIready := True;
   end;
   f_indigui.Show;
+end;
+
+procedure Tpop_indi.MountIndiDeviceSelect(Sender: TObject);
+begin
+ csc.IndiDevice := MountIndiDevice.Text;
+end;
+
+procedure Tpop_indi.BtnGetClick(Sender: TObject);
+begin
+  mountsavedev := MountIndiDevice.Text;
+  MountIndiDevice.Clear;
+  receiveindidevice := False;
+  indiclient := TIndiBaseClient.Create;
+  indiclient.onNewDevice := @IndiNewDevice;
+  indiclient.onServerDisconnected:=@IndiDisconnected;
+  indiclient.SetServer(IndiServerHost.Text, IndiServerPort.Text);
+  indiclient.ConnectServer;
+  IndiTimer.Interval:=5000; // wait 5 sec for initial connection
+  IndiTimer.Enabled := True;
+  Screen.Cursor := crHourGlass;
+end;
+
+procedure Tpop_indi.AutoloadConfigClick(Sender: TObject);
+begin
+  csc.IndiLoadConfig := AutoloadConfig.Checked;
+end;
+
+procedure Tpop_indi.IndiNewDevice(dp: Basedevice);
+begin
+  IndiTimer.Interval:=1000; // wait for next device
+  IndiTimer.Enabled:=false;
+  IndiTimer.Enabled:=true;
+  receiveindidevice := True;
+end;
+
+procedure Tpop_indi.IndiDisconnected(Sender: TObject);
+begin
+  IndiTimer.Interval:=100; // not connect, stop immediatelly
+  IndiTimer.Enabled:=false;
+  IndiTimer.Enabled:=true;
+end;
+
+procedure Tpop_indi.IndiTimerTimer(Sender: TObject);
+var
+  i: integer;
+  drint: word;
+  var ok: boolean;
+begin
+  if not receiveindidevice then
+  begin
+    receiveindidevice := True;  // only one retry if no response
+    exit;
+  end;
+  try
+  IndiTimer.Enabled := False;
+  try
+  ok:= not ((indiclient=nil)or indiclient.Finished or indiclient.Terminated or (not indiclient.Connected));
+  if ok then begin
+  for i := 0 to indiclient.devices.Count - 1 do
+  begin
+    drint := BaseDevice(indiclient.devices[i]).getDriverInterface();
+    if (drint and TELESCOPE_INTERFACE) <> 0 then
+      MountIndiDevice.Items.Add(BaseDevice(indiclient.devices[i]).getDeviceName);
+  end;
+  if indiclient.Connected then
+  begin
+    Memomsg.Lines.Add(rsINDIready);
+    indiclient.onServerDisconnected:=nil;
+    indiclient.DisconnectServer;
+    if MountIndiDevice.Items.Count > 0 then
+      MountIndiDevice.ItemIndex := 0; // set first entry
+    for i := 0 to MountIndiDevice.Items.Count - 1 do
+      if MountIndiDevice.Items[i] = mountsavedev then
+        MountIndiDevice.ItemIndex := i; // reset last entry
+    csc.IndiDevice := MountIndiDevice.Text;
+  end;
+  ok:=MountIndiDevice.Items.Count > 0;
+  end;
+  if not ok then
+  begin
+    if csc.IndiAutostart and (IndiServerHost.Text='localhost') then
+    begin
+      ExecNoWait('nohup indistarter');
+    end
+    else
+    begin
+      Memomsg.Lines.Add(rsConnectionTo);
+    end;
+    MountIndiDevice.Items.Add(mountsavedev);
+    MountIndiDevice.ItemIndex := 0;
+  end;
+  except
+  end;
+  finally
+    Screen.Cursor := crDefault;
+  end;
 end;
 
 procedure Tpop_indi.IndiGUIdestroy(Sender: TObject);

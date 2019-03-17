@@ -1154,7 +1154,6 @@ resourcestring
   rsPleaseEnsure = 'Please ensure that ASCOM telescope drivers are installed '
     + 'properly.';
   rsSeeHttpAscom = 'See %s for more information.';
-  rsCurrentDrive = 'Current driver';
   rsClear = 'Clear';
   rsConnected = 'Connected';
   rsDiconnected = 'Diconnected';
@@ -1525,12 +1524,12 @@ resourcestring
   rsUnpark = 'Unpark';
   rsPark = 'Park';
   rsDoYouReallyW = 'Do you really want to park the mount now?';
-  rsConnectAndGe = 'Connect and get device list';
   rsUseTheIntern = 'Use the internal INDI gui panel';
   rsCooordinateS = 'Coordinate system to use with the clients';
   rsDoNotFilterB = 'Do not filter bright nebula by magnitude';
   rsDoNotRunAsAd = 'Do not run %s as %s!';
   rsAdministrato = 'administrator';
+  rsGet = 'Get';
 
 // also update upsi_translation
 

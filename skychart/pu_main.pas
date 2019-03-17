@@ -8735,17 +8735,27 @@ begin
               WriteString(section, 'ObsName' + IntToStr(i), cfgm.ObsNameList[i]);
             end;
           end;
-        WriteBool(section, 'IndiAutostart', def_cfgsc.IndiAutostart);
-        WriteBool(section, 'IndiLoadConfig', def_cfgsc.IndiLoadConfig);
-        WriteString(section, 'IndiServerHost', def_cfgsc.IndiServerHost);
-        WriteString(section, 'IndiServerPort', def_cfgsc.IndiServerPort);
-        WriteString(section, 'IndiDevice', def_cfgsc.IndiDevice);
         WriteBool(section, 'IndiTelescope', def_cfgsc.IndiTelescope);
         WriteBool(section, 'ASCOMTelescope', def_cfgsc.ASCOMTelescope);
         WriteBool(section, 'ManualTelescope', def_cfgsc.ManualTelescope);
         WriteInteger(section, 'ManualTelescopeType', def_cfgsc.ManualTelescopeType);
         WriteFloat(section, 'TelescopeTurnsX', def_cfgsc.TelescopeTurnsX);
         WriteFloat(section, 'TelescopeTurnsY', def_cfgsc.TelescopeTurnsY);
+        if MultiFrame1.ActiveObject is Tf_chart then
+        with (MultiFrame1.ActiveObject as Tf_chart).sc do begin
+          WriteBool(section, 'IndiAutostart', cfgsc.IndiAutostart);
+          WriteBool(section, 'IndiLoadConfig', cfgsc.IndiLoadConfig);
+          WriteString(section, 'IndiServerHost', cfgsc.IndiServerHost);
+          WriteString(section, 'IndiServerPort', cfgsc.IndiServerPort);
+          WriteString(section, 'IndiDevice', cfgsc.IndiDevice);
+        end
+        else begin
+          WriteBool(section, 'IndiAutostart', def_cfgsc.IndiAutostart);
+          WriteBool(section, 'IndiLoadConfig', def_cfgsc.IndiLoadConfig);
+          WriteString(section, 'IndiServerHost', def_cfgsc.IndiServerHost);
+          WriteString(section, 'IndiServerPort', def_cfgsc.IndiServerPort);
+          WriteString(section, 'IndiDevice', def_cfgsc.IndiDevice);
+        end;
         WriteBool(section, 'ViewMainBar', PanelToolBarMain.Visible);
         WriteBool(section, 'ViewLeftBar', PanelLeft.Visible);
         WriteBool(section, 'ViewRightBar', PanelRight.Visible);

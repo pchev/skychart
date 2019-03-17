@@ -1,34 +1,32 @@
 object pop_indi: Tpop_indi
   Left = 456
-  Height = 479
+  Height = 500
   Top = 130
-  Width = 318
+  Width = 321
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
-  ActiveControl = Edit1
   Caption = 'INDI Telescope Interface'
-  ClientHeight = 479
-  ClientWidth = 318
-  DesignTimePPI = 95
+  ClientHeight = 500
+  ClientWidth = 321
   OnCloseQuery = kill
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  ParentFont = True
   Position = poDefaultPosOnly
   object GroupBox3: TGroupBox
     Left = 0
-    Height = 64
-    Top = 168
-    Width = 318
+    Height = 65
+    Top = 253
+    Width = 321
     Align = alTop
-    ClientHeight = 62
-    ClientWidth = 316
+    ClientHeight = 63
+    ClientWidth = 319
+    ParentFont = False
     TabOrder = 2
     object SpeedButton6: TButton
-      Left = 112
+      Left = 113
       Height = 25
       Top = 32
-      Width = 192
+      Width = 194
       Caption = 'Abort Slew'
       Font.Color = clRed
       OnClick = SpeedButton6Click
@@ -39,62 +37,69 @@ object pop_indi: Tpop_indi
       Left = 7
       Height = 25
       Top = 32
-      Width = 81
+      Width = 82
       Caption = 'INDI gui'
       OnClick = BtnIndiGuiClick
+      ParentFont = False
       TabOrder = 1
     end
     object ProtocolTrace: TCheckBox
       Left = 11
-      Height = 23
+      Height = 21
       Top = 8
-      Width = 113
+      Width = 124
       Caption = 'Protocol trace '
       OnChange = ProtocolTraceChange
+      ParentFont = False
       TabOrder = 2
     end
   end
   object Panel1: TPanel
     Left = 0
     Height = 36
-    Top = 232
-    Width = 318
+    Top = 318
+    Width = 321
     Align = alTop
     ClientHeight = 36
-    ClientWidth = 318
+    ClientWidth = 321
+    ParentFont = False
     TabOrder = 1
     object LabelAlpha: TLabel
       Left = 8
-      Height = 18
+      Height = 17
       Top = 8
-      Width = 19
+      Width = 22
       Caption = 'RA '
       ParentColor = False
+      ParentFont = False
     end
     object LabelDelta: TLabel
-      Left = 176
-      Height = 18
+      Left = 178
+      Height = 17
       Top = 8
-      Width = 24
+      Width = 27
       Caption = 'DEC'
       ParentColor = False
+      ParentFont = False
     end
     object pos_x: TEdit
       Left = 40
       Height = 28
       Top = 4
-      Width = 112
+      Width = 113
       Constraints.MaxHeight = 28
+      ParentFont = False
       ReadOnly = True
       TabStop = False
       TabOrder = 0
     end
     object pos_y: TEdit
-      Left = 213
+      Left = 215
       Height = 28
       Top = 4
-      Width = 95
+      Width = 96
       Constraints.MaxHeight = 28
+      ParentFont = False
       ReadOnly = True
       TabStop = False
       TabOrder = 1
@@ -102,84 +107,93 @@ object pop_indi: Tpop_indi
   end
   object GroupBox5: TGroupBox
     Left = 0
-    Height = 108
-    Top = 60
-    Width = 318
+    Height = 109
+    Top = 144
+    Width = 321
     Align = alTop
     Caption = 'Observatory '
-    ClientHeight = 89
-    ClientWidth = 316
+    ClientHeight = 91
+    ClientWidth = 319
+    ParentFont = False
     TabOrder = 4
     object Label15: TLabel
       Left = 8
-      Height = 18
+      Height = 17
       Top = 8
-      Width = 59
+      Width = 67
       Caption = 'Latitude : '
       ParentColor = False
+      ParentFont = False
     end
     object Label16: TLabel
-      Left = 112
-      Height = 18
+      Left = 113
+      Height = 17
       Top = 8
-      Width = 68
+      Width = 75
       Caption = 'Longitude :'
       ParentColor = False
+      ParentFont = False
     end
     object ButtonSetLocation: TSpeedButton
       Left = 8
       Height = 22
-      Top = 64
-      Width = 139
+      Top = 65
+      Width = 140
       Caption = 'Set to telescope'
       OnClick = ButtonSetLocationClick
+      ParentFont = False
     end
     object lat: TEdit
       Left = 8
       Height = 28
       Top = 32
-      Width = 86
+      Width = 87
       Color = clBtnFace
       Constraints.MaxHeight = 28
+      ParentFont = False
       ReadOnly = True
       TabStop = False
       TabOrder = 0
       Text = '0'
     end
     object long: TEdit
-      Left = 112
+      Left = 113
       Height = 28
       Top = 32
-      Width = 82
+      Width = 83
       Color = clBtnFace
       Constraints.MaxHeight = 28
+      ParentFont = False
       ReadOnly = True
       TabStop = False
       TabOrder = 1
       Text = '0'
     end
     object ButtonGetLocation: TSpeedButton
-      Left = 157
+      Left = 159
       Height = 22
-      Top = 64
-      Width = 139
+      Top = 65
+      Width = 140
       Caption = 'Get from telescope'
       OnClick = ButtonGetLocationClick
+      ParentFont = False
     end
     object Label1: TLabel
-      Left = 209
-      Height = 18
+      Left = 211
+      Height = 17
       Top = 8
-      Width = 47
+      Width = 55
       Caption = 'Altitude'
       ParentColor = False
+      ParentFont = False
     end
     object Elev: TEdit
-      Left = 209
+      Left = 211
       Height = 28
       Top = 32
-      Width = 80
+      Width = 81
       Constraints.MaxHeight = 28
+      ParentFont = False
       ReadOnly = True
       TabOrder = 2
       Text = '0'
@@ -187,61 +201,134 @@ object pop_indi: Tpop_indi
   end
   object GroupBox1: TGroupBox
     Left = 0
-    Height = 60
+    Height = 144
     Top = 0
-    Width = 318
+    Width = 321
     Align = alTop
-    Caption = 'Current driver'
-    ClientHeight = 41
-    ClientWidth = 316
+    Caption = 'INDI driver settings'
+    ClientHeight = 126
+    ClientWidth = 319
+    ParentFont = False
     TabOrder = 0
-    object Edit1: TEdit
+    object IndiServerPort: TEdit
+      Left = 192
+      Height = 28
+      Top = 20
+      Width = 75
+      Constraints.MaxHeight = 28
+      OnChange = IndiServerPortChange
+      ParentFont = False
+      TabOrder = 0
+    end
+    object IndiServerHost: TEdit
       Left = 8
       Height = 28
-      Top = 8
-      Width = 281
-      Color = clBtnFace
+      Top = 20
+      Width = 173
       Constraints.MaxHeight = 28
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 0
+      OnChange = IndiServerHostChange
+      ParentFont = False
+      TabOrder = 1
+    end
+    object BtnGet: TButton
+      Left = 192
+      Height = 25
+      Top = 64
+      Width = 75
+      Caption = 'Get'
+      OnClick = BtnGetClick
+      TabOrder = 2
+    end
+    object MountIndiDevice: TComboBox
+      Left = 8
+      Height = 28
+      Top = 64
+      Width = 170
+      AutoCompleteText = [cbactSearchAscending]
+      Constraints.MaxHeight = 28
+      ItemHeight = 0
+      OnSelect = MountIndiDeviceSelect
+      ParentFont = False
+      Style = csDropDownList
+      TabOrder = 3
+    end
+    object Label75: TLabel
+      Left = 8
+      Height = 17
+      Top = 4
+      Width = 113
+      Caption = 'INDI Server Host '
+      ParentColor = False
+      ParentFont = False
+    end
+    object Label130: TLabel
+      Left = 192
+      Height = 17
+      Top = 4
+      Width = 107
+      Caption = 'INDI server Port'
+      ParentColor = False
+      ParentFont = False
+    end
+    object Label260: TLabel
+      Left = 8
+      Height = 17
+      Top = 48
+      Width = 100
+      Caption = 'Telescope type'
+      ParentColor = False
+      ParentFont = False
+    end
+    object AutoloadConfig: TCheckBox
+      Left = 8
+      Height = 21
+      Top = 97
+      Width = 151
+      Caption = 'Load configuration'
+      OnClick = AutoloadConfigClick
+      ParentFont = False
+      TabOrder = 4
     end
   end
   object Memomsg: TMemo
     Left = 0
-    Height = 123
-    Top = 268
-    Width = 318
+    Height = 73
+    Top = 354
+    Width = 321
     Align = alClient
+    ParentFont = False
     ReadOnly = True
     ScrollBars = ssAutoBoth
     TabOrder = 3
   end
   object Panel2: TPanel
     Left = 0
-    Height = 88
-    Top = 391
-    Width = 318
+    Height = 73
+    Top = 427
+    Width = 321
     Align = alBottom
-    ClientHeight = 88
-    ClientWidth = 318
+    ClientHeight = 73
+    ClientWidth = 321
+    ParentFont = False
     TabOrder = 5
     object Disconnect: TButton
-      Left = 136
+      Left = 137
       Height = 25
       Top = 8
-      Width = 84
+      Width = 85
       Caption = 'Disconnect'
       OnClick = DisconnectClick
+      ParentFont = False
       TabOrder = 0
     end
     object led: TEdit
-      Left = 98
+      Left = 99
       Height = 25
       Top = 8
       Width = 25
       AutoSize = False
       Color = clRed
+      ParentFont = False
       ReadOnly = True
       TabStop = False
       TabOrder = 1
@@ -250,29 +337,32 @@ object pop_indi: Tpop_indi
       Left = 9
       Height = 25
       Top = 8
-      Width = 73
+      Width = 74
       Caption = 'Connect'
       Default = True
       OnClick = ConnectClick
+      ParentFont = False
       TabOrder = 2
     end
     object SpeedButton4: TButton
-      Left = 243
+      Left = 246
       Height = 25
       Top = 40
-      Width = 65
+      Width = 66
       Caption = 'Help'
       OnClick = SpeedButton4Click
+      ParentFont = False
       TabOrder = 3
     end
     object SpeedButton2: TButton
-      Left = 243
+      Left = 246
       Height = 25
       Top = 8
-      Width = 65
+      Width = 66
       Cancel = True
       Caption = 'Hide'
       OnClick = SpeedButton2Click
+      ParentFont = False
       TabOrder = 4
     end
   end
@@ -280,12 +370,21 @@ object pop_indi: Tpop_indi
     Enabled = False
     Interval = 20000
     OnTimer = InitTimerTimer
-    left = 232
+    left = 128
+    top = 360
   end
   object ConnectTimer: TTimer
     Enabled = False
     Interval = 3000
     OnTimer = ConnectTimerTimer
-    left = 176
+    left = 32
+    top = 360
+  end
+  object IndiTimer: TTimer
+    Enabled = False
+    Interval = 5000
+    OnTimer = IndiTimerTimer
+    left = 224
+    top = 360
   end
 end

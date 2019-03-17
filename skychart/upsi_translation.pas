@@ -1130,7 +1130,6 @@ begin
   CL.AddConstantN('rsHide', 'String').SetString(rsHide);
   CL.AddConstantN('rsPleaseEnsure', 'String').SetString(rsPleaseEnsure);
   CL.AddConstantN('rsSeeHttpAscom', 'String').SetString(rsSeeHttpAscom);
-  CL.AddConstantN('rsCurrentDrive', 'String').SetString(rsCurrentDrive);
   CL.AddConstantN('rsClear', 'String').SetString(rsClear);
   CL.AddConstantN('rsConnected', 'String').SetString(rsConnected);
   CL.AddConstantN('rsDiconnected', 'String').SetString(rsDiconnected);
@@ -1473,7 +1472,6 @@ begin
   CL.AddConstantN('rsUnpark', 'String').SetString(rsUnpark);
   CL.AddConstantN('rsPark', 'String').SetString(rsPark);
   CL.AddConstantN('rsDoYouReallyW', 'String').SetString(rsDoYouReallyW);
-  CL.AddConstantN('rsConnectAndGe', 'String').SetString(rsConnectAndGe);
   CL.AddConstantN('rsUseTheIntern', 'String').SetString(rsUseTheIntern);
   CL.AddConstantN('rsCooordinateS', 'String').SetString(rsCooordinateS);
 
