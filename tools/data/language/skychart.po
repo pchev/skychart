@@ -4398,8 +4398,8 @@ msgstr ""
 msgid "Load from file"
 msgstr ""
 
-#: u_translation:rsnotavailon
-msgid "Not available on %s"
+#: u_translation:rsascomremote
+msgid "ASCOM Alpaca is available on %s"
 msgstr ""
 
 #: u_translation:rsdriverselect
@@ -4444,10 +4444,6 @@ msgstr ""
 
 #: u_translation:rsseehttpascom
 msgid "See %s for more information."
-msgstr ""
-
-#: u_translation:rscurrentdrive
-msgid "Current driver"
 msgstr ""
 
 #: u_translation:rsclear
@@ -5542,16 +5538,12 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: u_translation:rslaunchindist
-msgid "Launch INDIstarter if the server is not running"
-msgstr ""
-
 #: u_translation:rsconnectionto
 msgid "Connection to INDI server failed!"
 msgstr ""
 
-#: u_translation:rspleaseinstal
-msgid "Please install indistarter package!"
+#: u_translation:rsindiready
+msgid "INDI server is ready"
 msgstr ""
 
 #: u_translation:rsactivateallt
@@ -5870,11 +5862,27 @@ msgstr ""
 msgid "Do you really want to park the mount now?"
 msgstr ""
 
-#: u_translation:rsconnectandge
-msgid "Connect and get device list"
-msgstr ""
-
 #: u_translation:rsusetheintern
 msgid "Use the internal INDI gui panel"
+msgstr ""
+
+#: u_translation:rscooordinates
+msgid "Coordinate system to use with the clients"
+msgstr ""
+
+#: u_translation:rsdonotfilterb
+msgid "Do not filter bright nebula by magnitude"
+msgstr ""
+
+#: u_translation:rsdonotrunasad
+msgid "Do not run %s as %s!"
+msgstr ""
+
+#: u_translation:rsadministrato
+msgid "administrator"
+msgstr ""
+
+#: u_translation:rsget
+msgid "Get"
 msgstr ""
 

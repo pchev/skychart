@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-10-21 14:30+0000\n"
-"PO-Revision-Date: 2018-12-27 13:10+0000\n"
-"Last-Translator: Andi Chandler <Unknown>\n"
+"POT-Creation-Date: 2019-03-17 15:18+0000\n"
+"PO-Revision-Date: 2019-02-16 23:32+0000\n"
+"Last-Translator: Stephan Woidowski <swoidowski@t-online.de>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-01-13 17:13+0000\n"
-"X-Generator: Launchpad (build 18855)\n"
+"X-Launchpad-Export-Date: 2019-03-17 15:25+0000\n"
+"X-Generator: Launchpad (build 18905)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -58,7 +58,7 @@ msgstr ""
 
 #: u_translation.rsabout
 msgid "About"
-msgstr ""
+msgstr "About"
 
 #: u_translation.rsabout2
 msgid "About %s"
@@ -192,6 +192,10 @@ msgstr ""
 msgid "Adjust the window size to the screen DPI"
 msgstr ""
 
+#: u_translation.rsadministrato
+msgid "administrator"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr ""
@@ -206,7 +210,7 @@ msgstr ""
 
 #: u_translation.rsage
 msgid "Age"
-msgstr ""
+msgstr "Age"
 
 #: u_translation.rsairmass
 msgid "Airmass"
@@ -238,7 +242,7 @@ msgstr ""
 
 #: u_translation.rsalltoolsbar
 msgid "All toolbars"
-msgstr ""
+msgstr "All toolbars"
 
 #: u_translation.rsalsobesureth
 msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
@@ -246,11 +250,11 @@ msgstr ""
 
 #: u_translation.rsalt
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
-msgstr ""
+msgstr "Alt/Az coord. "
 
 #: u_translation.rsaltazcoord2
 msgid "Alt/Az coord."
@@ -266,7 +270,7 @@ msgstr ""
 
 #: u_translation.rsaltitude
 msgid "Altitude"
-msgstr ""
+msgstr "Altitude"
 
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
@@ -294,7 +298,7 @@ msgstr ""
 
 #: u_translation.rsannualproper
 msgid "Annual proper motion"
-msgstr ""
+msgstr "Annual proper motion"
 
 #: u_translation.rsanonymouspas
 msgid "Anonymous password"
@@ -368,6 +372,10 @@ msgstr ""
 msgid "A SAMP application send coordinates location"
 msgstr ""
 
+#: u_translation.rsascomremote
+msgid "ASCOM Alpaca is available on %s"
+msgstr ""
+
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
 msgstr ""
@@ -394,11 +402,11 @@ msgstr ""
 
 #: u_translation.rsasterism
 msgid "Asterism"
-msgstr ""
+msgstr "Asterism"
 
 #: u_translation.rsasteroid
 msgid "Asteroid"
-msgstr ""
+msgstr "Asteroid"
 
 #: u_translation.rsasteroidelem
 msgid "Sources for asteroid elements in MPC format (one URL per line)"
@@ -474,11 +482,11 @@ msgstr ""
 
 #: u_translation.rsaz
 msgid "Az"
-msgstr ""
+msgstr "Az"
 
 #: u_translation.rsazimuth
 msgid "Azimuth"
-msgstr ""
+msgstr "Azimuth"
 
 #: u_translation.rsazimuthalcoo
 msgid "Azimuthal coordinates"
@@ -494,7 +502,7 @@ msgstr ""
 
 #: u_translation.rsb
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: u_translation.rsback
 msgid "Back"
@@ -510,7 +518,7 @@ msgstr ""
 
 #: u_translation.rsbayerletter
 msgid "Bayer letter"
-msgstr ""
+msgstr "Bayer letter"
 
 #: u_translation.rsbc
 msgid "BC"
@@ -530,7 +538,7 @@ msgstr ""
 
 #: u_translation.rsbii
 msgid "BII"
-msgstr ""
+msgstr "BII"
 
 #: u_translation.rsbinaryindexe
 msgid "Binary indexed catalog"
@@ -562,7 +570,7 @@ msgstr ""
 
 #: u_translation.rsbluemagnitud
 msgid "Blue magnitude"
-msgstr ""
+msgstr "Blue magnitude"
 
 #: u_translation.rsbottom
 msgid "Bottom"
@@ -582,15 +590,15 @@ msgstr ""
 
 #: u_translation.rsbrighteststa
 msgid "Brightest star magnitude"
-msgstr ""
+msgstr "Brightest star magnitude"
 
 #: u_translation.rsbrightnebula
 msgid "Bright nebula"
-msgstr ""
+msgstr "Bright nebula"
 
 #: u_translation.rsbrightness
 msgid "Brightness"
-msgstr ""
+msgstr "Brightness"
 
 #: u_translation.rsbrightstars
 msgid "Bright stars"
@@ -634,7 +642,7 @@ msgstr ""
 
 #: u_translation.rscancel
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 #: u_translation.rscancel2
 msgid "Cancel %s"
@@ -750,15 +758,15 @@ msgstr ""
 
 #: u_translation.rscentralmerid
 msgid "Central meridian"
-msgstr ""
+msgstr "Central meridian"
 
 #: u_translation.rscentralstarb
 msgid "Central star B magnitude"
-msgstr ""
+msgstr "Central star B magnitude"
 
 #: u_translation.rscentralstarv
 msgid "Central star V magnitude"
-msgstr ""
+msgstr "Central star V magnitude"
 
 #: u_translation.rscentre
 msgid "Centre on"
@@ -778,7 +786,7 @@ msgstr ""
 
 #: u_translation.rschart
 msgid "Chart"
-msgstr ""
+msgstr "Chart"
 
 #: u_translation.rschart2
 msgid "chart:"
@@ -834,11 +842,11 @@ msgstr ""
 
 #: u_translation.rscircumpolar
 msgid "Circumpolar"
-msgstr ""
+msgstr "Circumpolar"
 
 #: u_translation.rsclass
 msgid "Class"
-msgstr ""
+msgstr "Class"
 
 #: u_translation.rscleanupmap
 msgid "Cleanup map"
@@ -894,7 +902,7 @@ msgstr ""
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
-msgstr ""
+msgstr "Cluster and nebula"
 
 #: u_translation.rscollapse
 msgid "Collapse"
@@ -906,7 +914,7 @@ msgstr ""
 
 #: u_translation.rscolorindex
 msgid "Colour index"
-msgstr ""
+msgstr "Colour index"
 
 #: u_translation.rscolorlinemod
 msgid "Colour, line mode"
@@ -926,7 +934,7 @@ msgstr ""
 
 #: u_translation.rscomet
 msgid "Comet"
-msgstr ""
+msgstr "Comet"
 
 #: u_translation.rscometelement
 msgid "Sources for comet elements in MPC format (one URL per line)"
@@ -978,11 +986,11 @@ msgstr ""
 
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
-msgstr ""
+msgstr "Component 1 magnitude"
 
 #: u_translation.rscomponent2ma
 msgid "Component 2 magnitude"
-msgstr ""
+msgstr "Component 2 magnitude"
 
 #: u_translation.rscompute
 msgid "Compute"
@@ -990,7 +998,7 @@ msgstr ""
 
 #: u_translation.rscomputeaster
 msgid "Compute asteroid data for this month"
-msgstr ""
+msgstr "Compute asteroid data for this month"
 
 #: u_translation.rscomputefield
 msgid "Compute field"
@@ -1024,21 +1032,17 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: u_translation.rsconnectandge
-msgid "Connect and get device list"
-msgstr ""
-
 #: u_translation.rsconnected
 msgid "Connected"
 msgstr ""
 
 #: u_translation.rsconnectedfro
 msgid "%s connected with %s, using chart %s, connected time:%s"
-msgstr ""
+msgstr "%s connected with %s, using chart %s, connected time:%s"
 
 #: u_translation.rsconnectedtos
 msgid "Connected to the SQL database %s"
-msgstr ""
+msgstr "Connected to the SQL database %s"
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
@@ -1066,7 +1070,7 @@ msgstr ""
 
 #: u_translation.rsconstellatio
 msgid "Constellation"
-msgstr ""
+msgstr "Constellation"
 
 #: u_translation.rsconstellatio2
 msgid "Constellation figures"
@@ -1098,7 +1102,7 @@ msgstr ""
 
 #: u_translation.rscontrolpanel
 msgid "Control panel"
-msgstr ""
+msgstr "Control panel"
 
 #: u_translation.rscontrolpanel2
 msgid "Control panel command "
@@ -1110,6 +1114,10 @@ msgstr ""
 
 #: u_translation.rsconvertcatal2
 msgid "Convert catalog files"
+msgstr ""
+
+#: u_translation.rscooordinates
+msgid "Coordinate system to use with the clients"
 msgstr ""
 
 #: u_translation.rscoord
@@ -1146,11 +1154,11 @@ msgstr ""
 
 #: u_translation.rscoreradius
 msgid "Core radius"
-msgstr ""
+msgstr "Core radius"
 
 #: u_translation.rscorrelated
 msgid "Correlated"
-msgstr ""
+msgstr "Correlated"
 
 #: u_translation.rscouldnotload
 msgid "Could not load library "
@@ -1198,14 +1206,10 @@ msgstr ""
 
 #: u_translation.rsculmination
 msgid "Culmination"
-msgstr ""
+msgstr "Culmination"
 
 #: u_translation.rscurrentdate
 msgid "Date of validity"
-msgstr ""
-
-#: u_translation.rscurrentdrive
-msgid "Current driver"
 msgstr ""
 
 #: u_translation.rscursor
@@ -1278,7 +1282,7 @@ msgstr ""
 
 #: u_translation.rsdate
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #: u_translation.rsdateformat
 msgid "Date format"
@@ -1322,7 +1326,7 @@ msgstr ""
 
 #: u_translation.rsde
 msgid "DE"
-msgstr ""
+msgstr "DE"
 
 #: u_translation.rsdec
 msgid "DEC"
@@ -1498,7 +1502,7 @@ msgstr ""
 
 #: u_translation.rsdescription
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: u_translation.rsdesignation
 msgid "Designation"
@@ -1518,7 +1522,7 @@ msgstr ""
 
 #: u_translation.rsdiameter
 msgid "Diameter"
-msgstr ""
+msgstr "Diameter"
 
 #: u_translation.rsdiconnected
 msgid "Diconnected"
@@ -1530,11 +1534,11 @@ msgstr ""
 
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
-msgstr ""
+msgstr "%s (different than the configured port, maybe busy or other error.)"
 
 #: u_translation.rsdimension
 msgid "Dimension"
-msgstr ""
+msgstr "Dimension"
 
 #: u_translation.rsdimensionand
 msgid "Dimension and units"
@@ -1602,7 +1606,7 @@ msgstr ""
 
 #: u_translation.rsdistance
 msgid "Distance"
-msgstr ""
+msgstr "Distance"
 
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
@@ -1616,8 +1620,16 @@ msgstr ""
 msgid "Do not change anything here if you are not sure what you do!"
 msgstr ""
 
+#: u_translation.rsdonotfilterb
+msgid "Do not filter bright nebula by magnitude"
+msgstr ""
+
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
+msgstr ""
+
+#: u_translation.rsdonotrunasad
+msgid "Do not run %s as %s!"
 msgstr ""
 
 #: u_translation.rsdot1
@@ -1630,7 +1642,7 @@ msgstr ""
 
 #: u_translation.rsdoublestar
 msgid "Double star"
-msgstr ""
+msgstr "Double star"
 
 #: u_translation.rsdown
 msgid "Down"
@@ -1686,7 +1698,7 @@ msgstr ""
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
-msgstr ""
+msgstr "Do you want to save the program settings now?"
 
 #: u_translation.rsdoyouwanttos2
 msgid "Do you want to save it?"
@@ -1870,7 +1882,7 @@ msgstr ""
 
 #: u_translation.rsepochofmaxim
 msgid "Epoch of maxima"
-msgstr ""
+msgstr "Epoch of maxima"
 
 #: u_translation.rseqgrid
 msgid "Eq. grid"
@@ -1882,7 +1894,7 @@ msgstr "Equatorial coordinates"
 
 #: u_translation.rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
-msgstr ""
+msgstr "Equatorial coordinates, equinox: %s"
 
 #: u_translation.rsequatorialco3
 msgid "Equatorial coord."
@@ -1914,11 +1926,11 @@ msgstr ""
 
 #: u_translation.rserrorpleasec
 msgid "Error! Please check the database parameters."
-msgstr ""
+msgstr "Error! Please check the database parameters."
 
 #: u_translation.rserrorpleasec2
 msgid "Error! Please check the database parameters and load the comete data file."
-msgstr ""
+msgstr "Error! Please check the database parameters and load the comete data file."
 
 #: u_translation.rserrorpleasec3
 msgid "Error! Please check the database parameters and load the picture package."
@@ -1930,7 +1942,7 @@ msgstr ""
 
 #: u_translation.rsestimatedtai
 msgid "Estimated tail length"
-msgstr ""
+msgstr "Estimated tail length"
 
 #: u_translation.rsevening
 msgid "Evening"
@@ -1974,7 +1986,7 @@ msgstr ""
 
 #: u_translation.rsexternalcata
 msgid "External catalog object"
-msgstr ""
+msgstr "External catalog object"
 
 #: u_translation.rseyepiece
 msgid "Eyepiece"
@@ -2030,11 +2042,11 @@ msgstr ""
 
 #: u_translation.rsfieldnumber
 msgid "Field Number"
-msgstr ""
+msgstr "Field Number"
 
 #: u_translation.rsfieldofvisio
 msgid "Field of vision"
-msgstr ""
+msgstr "Field of vision"
 
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
@@ -2078,7 +2090,7 @@ msgstr ""
 
 #: u_translation.rsfilter
 msgid "Filter ->"
-msgstr ""
+msgstr "Filter ->"
 
 #: u_translation.rsfilter2
 msgid "Filter"
@@ -2134,7 +2146,7 @@ msgstr ""
 
 #: u_translation.rsflamsteednum
 msgid "Flamsteed number"
-msgstr ""
+msgstr "Flamsteed number"
 
 #: u_translation.rsflarepredict
 msgid "Iridium flare prediction:"
@@ -2162,7 +2174,7 @@ msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
-msgstr ""
+msgstr "FOV"
 
 #: u_translation.rsfov2
 msgid "FOV:"
@@ -2194,7 +2206,7 @@ msgstr ""
 
 #: u_translation.rsfrom
 msgid "From"
-msgstr ""
+msgstr "From"
 
 #: u_translation.rsftp
 msgid "FTP "
@@ -2206,7 +2218,7 @@ msgstr ""
 
 #: u_translation.rsfullscreen
 msgid "Full screen"
-msgstr ""
+msgstr "Full screen"
 
 #: u_translation.rsgalactic
 msgid "Galactic"
@@ -2218,7 +2230,7 @@ msgstr "Galactic coordinates"
 
 #: u_translation.rsgalacticcoor2
 msgid "Galactic coord."
-msgstr ""
+msgstr "Galactic coord."
 
 #: u_translation.rsgalaxies
 msgid "Galaxies"
@@ -2226,7 +2238,7 @@ msgstr ""
 
 #: u_translation.rsgalaxy
 msgid "Galaxy"
-msgstr ""
+msgstr "Galaxy"
 
 #: u_translation.rsgalaxycluste
 msgid "Galaxy cluster"
@@ -2256,6 +2268,10 @@ msgstr ""
 msgid "Geometric altitude"
 msgstr ""
 
+#: u_translation.rsget
+msgid "Get"
+msgstr ""
+
 #: u_translation.rsgetasteroidl
 msgid "Get the asteroids list."
 msgstr ""
@@ -2274,7 +2290,7 @@ msgstr ""
 
 #: u_translation.rsglobularclus
 msgid "Globular cluster"
-msgstr ""
+msgstr "Globular cluster"
 
 #: u_translation.rsgnomonic
 msgid "Gnomonic"
@@ -2322,7 +2338,7 @@ msgstr ""
 
 #: u_translation.rsgrstransit
 msgid "GRS transit"
-msgstr ""
+msgstr "GRS transit"
 
 #: u_translation.rsgslopeparame
 msgid "G slope parameter"
@@ -2334,7 +2350,7 @@ msgstr ""
 
 #: u_translation.rshalfmassradi
 msgid "Half-mass radius"
-msgstr ""
+msgstr "Half-mass radius"
 
 #: u_translation.rshaltafter100
 msgid "Halt after 1000 errors"
@@ -2350,7 +2366,7 @@ msgstr ""
 
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
-msgstr ""
+msgstr "H-Beta magnitude"
 
 #: u_translation.rsheight
 msgid "Height"
@@ -2358,7 +2374,7 @@ msgstr ""
 
 #: u_translation.rshelp
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 #: u_translation.rshelpbasedir
 msgid "en/documentation/"
@@ -2366,7 +2382,7 @@ msgstr ""
 
 #: u_translation.rshelpcontents
 msgid "Help contents"
-msgstr ""
+msgstr "Help contents"
 
 #: u_translation.rshide
 msgid "Hide"
@@ -2406,7 +2422,7 @@ msgstr "Hour"
 
 #: u_translation.rshourangle
 msgid "Hour angle"
-msgstr ""
+msgstr "Hour angle"
 
 #: u_translation.rshourgridspac
 msgid "Grid spacing in hour for equatorial grid"
@@ -2458,7 +2474,7 @@ msgstr ""
 
 #: u_translation.rsilluminatedf
 msgid "Illuminated fraction"
-msgstr ""
+msgstr "Illuminated fraction"
 
 #: u_translation.rsimagearchive
 msgid "Image archive"
@@ -2524,6 +2540,10 @@ msgstr ""
 msgid "INDI driver settings"
 msgstr ""
 
+#: u_translation.rsindiready
+msgid "INDI server is ready"
+msgstr ""
+
 #: u_translation.rsindiserverho
 msgid "INDI server host "
 msgstr ""
@@ -2550,7 +2570,7 @@ msgstr ""
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
-msgstr ""
+msgstr "Initialise database"
 
 #: u_translation.rsinnersolarsy
 msgid "Inner Solar System"
@@ -2594,7 +2614,7 @@ msgstr ""
 
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
-msgstr ""
+msgstr "Invisible at this latitude"
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
@@ -2646,7 +2666,7 @@ msgstr ""
 
 #: u_translation.rsjupiter
 msgid "Jupiter"
-msgstr ""
+msgstr "Jupiter"
 
 #: u_translation.rsjupitergrslo
 msgid "Jupiter GRS longitude:"
@@ -2670,11 +2690,11 @@ msgstr ""
 
 #: u_translation.rsknot
 msgid "Knot"
-msgstr ""
+msgstr "Knot"
 
 #: u_translation.rsl
 msgid "L"
-msgstr ""
+msgstr "L"
 
 #: u_translation.rslabel
 msgid "Label:"
@@ -2716,17 +2736,13 @@ msgstr ""
 msgid "Latitude"
 msgstr ""
 
-#: u_translation.rslaunchindist
-msgid "Launch INDIstarter if the server is not running"
-msgstr ""
-
 #: u_translation.rsleft
 msgid "Left"
 msgstr ""
 
 #: u_translation.rsleftbar
 msgid "Left bar"
-msgstr ""
+msgstr "Left bar"
 
 #: u_translation.rslegal
 msgid "Legal"
@@ -2750,11 +2766,11 @@ msgstr ""
 
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
-msgstr ""
+msgstr "Libration in latitude"
 
 #: u_translation.rslibrationinl2
 msgid "Libration in longitude"
-msgstr ""
+msgstr "Libration in longitude"
 
 #: u_translation.rslicenseagree
 msgid "License agreement"
@@ -2762,11 +2778,11 @@ msgstr ""
 
 #: u_translation.rslightyears
 msgid "light years"
-msgstr ""
+msgstr "light years"
 
 #: u_translation.rslii
 msgid "LII"
-msgstr ""
+msgstr "LII"
 
 #: u_translation.rslimit
 msgid "Limit"
@@ -2814,7 +2830,7 @@ msgstr "Lines"
 
 #: u_translation.rslinesgrid
 msgid "Lines / grid"
-msgstr ""
+msgstr "Lines / grid"
 
 #: u_translation.rslinewidth
 msgid "Line width "
@@ -2830,7 +2846,7 @@ msgstr ""
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
-msgstr ""
+msgstr "Listen on port: %s"
 
 #: u_translation.rslistofavaila
 msgid "List of available plates"
@@ -2878,7 +2894,7 @@ msgstr ""
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
-msgstr ""
+msgstr "Local sidereal time"
 
 #: u_translation.rslocationcode
 msgid "Location code"
@@ -2894,7 +2910,7 @@ msgstr ""
 
 #: u_translation.rslockon
 msgid "Lock on %s"
-msgstr ""
+msgstr "Lock on %s"
 
 #: u_translation.rslockthechart
 msgid "Lock the chart at this position"
@@ -2950,19 +2966,19 @@ msgstr ""
 
 #: u_translation.rsmagnitude
 msgid "Magnitude"
-msgstr ""
+msgstr "Magnitude"
 
 #: u_translation.rsmagnitudeatm
 msgid "Magnitude at maxima"
-msgstr ""
+msgstr "Magnitude at maxima"
 
 #: u_translation.rsmagnitudeatm2
 msgid "Magnitude at minima"
-msgstr ""
+msgstr "Magnitude at minima"
 
 #: u_translation.rsmagnitudeban
 msgid "Magnitude band"
-msgstr ""
+msgstr "Magnitude band"
 
 #: u_translation.rsmagnitudedif
 msgid "Magnitude difference"
@@ -2974,7 +2990,7 @@ msgstr ""
 
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
-msgstr ""
+msgstr "Magnitude error"
 
 #: u_translation.rsmagnitudefai
 msgid "magnitudes fainter than the stars."
@@ -2982,19 +2998,19 @@ msgstr ""
 
 #: u_translation.rsmagnitudetyc
 msgid "Magnitude Tycho BT"
-msgstr ""
+msgstr "Magnitude Tycho BT"
 
 #: u_translation.rsmagnitudetyc2
 msgid "Magnitude Tycho VT"
-msgstr ""
+msgstr "Magnitude Tycho VT"
 
 #: u_translation.rsmaillist
 msgid "Mail list, discussion group"
-msgstr ""
+msgstr "Mail list, discussion group"
 
 #: u_translation.rsmainbar
 msgid "Main bar"
-msgstr ""
+msgstr "Main bar"
 
 #: u_translation.rsmainmenu
 msgid "Main menu"
@@ -3038,7 +3054,7 @@ msgstr ""
 
 #: u_translation.rsmars
 msgid "Mars"
-msgstr ""
+msgstr "Mars"
 
 #: u_translation.rsmax
 msgid "Max."
@@ -3050,7 +3066,7 @@ msgstr ""
 
 #: u_translation.rsmaximize
 msgid "Maximize"
-msgstr ""
+msgstr "Maximise"
 
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
@@ -3118,7 +3134,7 @@ msgstr ""
 
 #: u_translation.rsmercury
 msgid "Mercury"
-msgstr ""
+msgstr "Mercury"
 
 #: u_translation.rsmessages
 msgid "Messages:"
@@ -3158,7 +3174,7 @@ msgstr "Minute"
 
 #: u_translation.rsminutes
 msgid "minutes"
-msgstr ""
+msgstr "minutes"
 
 #: u_translation.rsmirrorhorizo
 msgid "Mirror horizontally"
@@ -3234,7 +3250,7 @@ msgstr ""
 
 #: u_translation.rsmultipleflag
 msgid "Multiple flag"
-msgstr ""
+msgstr "Multiple flag"
 
 #: u_translation.rsmultiplestar
 msgid "Multiple star"
@@ -3262,7 +3278,7 @@ msgstr ""
 
 #: u_translation.rsnebula
 msgid "Deep sky object"
-msgstr ""
+msgstr "Deep sky object"
 
 #: u_translation.rsnebulacommon
 msgid "Deep sky common name"
@@ -3334,7 +3350,7 @@ msgstr ""
 
 #: u_translation.rsnightvision
 msgid "Night vision"
-msgstr ""
+msgstr "Night vision"
 
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
@@ -3412,17 +3428,13 @@ msgstr ""
 msgid "Not available"
 msgstr ""
 
-#: u_translation.rsnotavailon
-msgid "Not available on %s"
-msgstr ""
-
 #: u_translation.rsnotconnected
 msgid "%s not connected."
-msgstr ""
+msgstr "%s not connected."
 
 #: u_translation.rsnote
 msgid "Note"
-msgstr ""
+msgstr "Note"
 
 #: u_translation.rsnotfound
 msgid "%s not found"
@@ -3430,11 +3442,11 @@ msgstr ""
 
 #: u_translation.rsnotfoundinan
 msgid "%s  Not found in any of the installed catalog indices."
-msgstr ""
+msgstr "%s  Not found in any of the installed catalogue indices."
 
 #: u_translation.rsnotfoundmayb
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
-msgstr ""
+msgstr "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalogue setting."
 
 #: u_translation.rsnovember
 msgid "November"
@@ -3462,7 +3474,7 @@ msgstr ""
 
 #: u_translation.rsnumberofstar
 msgid "Number of stars"
-msgstr ""
+msgstr "Number of stars"
 
 #: u_translation.rsnumberofstep
 msgid "Number of steps"
@@ -3478,7 +3490,7 @@ msgstr ""
 
 #: u_translation.rsobjectbar
 msgid "Object bar"
-msgstr ""
+msgstr "Object bar"
 
 #: u_translation.rsobjectfilter
 msgid "Object filter"
@@ -3510,7 +3522,7 @@ msgstr ""
 
 #: u_translation.rsobsaltitude
 msgid "%sAltitude"
-msgstr ""
+msgstr "%sAltitude"
 
 #: u_translation.rsobservatory
 msgid "Observatory"
@@ -3546,7 +3558,7 @@ msgstr ""
 
 #: u_translation.rsoffset
 msgid "Offset"
-msgstr ""
+msgstr "Offset"
 
 #: u_translation.rsoffsetlabel
 msgid "Offset label"
@@ -3554,7 +3566,7 @@ msgstr ""
 
 #: u_translation.rsok
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: u_translation.rsoneevery
 msgid "One every"
@@ -3618,7 +3630,7 @@ msgstr "Open a chart"
 
 #: u_translation.rsopencluster
 msgid "Open cluster"
-msgstr ""
+msgstr "Open cluster"
 
 #: u_translation.rsopenscript
 msgid "Open script"
@@ -3686,7 +3698,7 @@ msgstr ""
 
 #: u_translation.rsparallax
 msgid "Parallax"
-msgstr ""
+msgstr "Parallax"
 
 #: u_translation.rsparametric
 msgid "Parametric"
@@ -3738,7 +3750,7 @@ msgstr ""
 
 #: u_translation.rsperiod
 msgid "Period"
-msgstr ""
+msgstr "Period"
 
 #: u_translation.rspersonaldata
 msgid "Personal data"
@@ -3746,11 +3758,11 @@ msgstr ""
 
 #: u_translation.rsphase
 msgid "Phase"
-msgstr ""
+msgstr "Phase"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
-msgstr ""
+msgstr "Photographic plate"
 
 #: u_translation.rsphotographic2
 msgid "Photographic"
@@ -3778,15 +3790,15 @@ msgstr ""
 
 #: u_translation.rsplanet
 msgid "Planet"
-msgstr ""
+msgstr "Planet"
 
 #: u_translation.rsplanetaryneb
 msgid "Planetary nebula"
-msgstr ""
+msgstr "Planetary nebula"
 
 #: u_translation.rsplanetarysat
 msgid "Planetary satellite"
-msgstr ""
+msgstr "Planetary satellite"
 
 #: u_translation.rsplanetssetti
 msgid "Planet settings"
@@ -3798,7 +3810,7 @@ msgstr ""
 
 #: u_translation.rsplatedefect
 msgid "Plate defect"
-msgstr ""
+msgstr "Plate defect"
 
 #: u_translation.rsplateiddatee
 msgid "Plate id.    Date  exp.   Margin  CD  Observatory"
@@ -3844,10 +3856,6 @@ msgstr ""
 msgid "Please indicate the directory where the catalog must be built"
 msgstr ""
 
-#: u_translation.rspleaseinstal
-msgid "Please install indistarter package!"
-msgstr ""
-
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
 msgstr ""
@@ -3890,7 +3898,7 @@ msgstr ""
 
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
-msgstr ""
+msgstr "Pole inclination"
 
 #: u_translation.rsport
 msgid "Port:"
@@ -3906,7 +3914,7 @@ msgstr "Position"
 
 #: u_translation.rspositionangl
 msgid "Position angle"
-msgstr ""
+msgstr "Position angle"
 
 #: u_translation.rspositionepoc
 msgid "Position epoch"
@@ -4034,7 +4042,7 @@ msgstr ""
 
 #: u_translation.rsprojection
 msgid "Projection"
-msgstr ""
+msgstr "Projection"
 
 #: u_translation.rsprojectionse
 msgid "Projection settings"
@@ -4042,11 +4050,11 @@ msgstr ""
 
 #: u_translation.rspropermotion
 msgid "Proper motion in right ascension"
-msgstr ""
+msgstr "Proper motion in right ascension"
 
 #: u_translation.rspropermotion2
 msgid "Proper motion in declination"
-msgstr ""
+msgstr "Proper motion in declination"
 
 #: u_translation.rspropermotion3
 msgid "Proper motion"
@@ -4098,11 +4106,11 @@ msgstr ""
 
 #: u_translation.rsra
 msgid "RA"
-msgstr ""
+msgstr "RA"
 
 #: u_translation.rsradialveloci
 msgid "Radial velocity"
-msgstr ""
+msgstr "Radial velocity"
 
 #: u_translation.rsrange
 msgid "Range"
@@ -4190,7 +4198,7 @@ msgstr ""
 
 #: u_translation.rsredmagnitude
 msgid "Red magnitude"
-msgstr ""
+msgstr "Red magnitude"
 
 #: u_translation.rsredo
 msgid "Redo"
@@ -4262,7 +4270,7 @@ msgstr ""
 
 #: u_translation.rsreportaprobl
 msgid "Report a problem"
-msgstr ""
+msgstr "Report a problem"
 
 #: u_translation.rsrequesttimeo
 msgid "Request timeout. You probably asked a too wide area which demanded too much processing time on the remote server."
@@ -4282,7 +4290,7 @@ msgstr ""
 
 #: u_translation.rsresetalllabe
 msgid "Reset all labels"
-msgstr ""
+msgstr "Reset all labels"
 
 #: u_translation.rsresetchart
 msgid "Reset chart"
@@ -4342,15 +4350,15 @@ msgstr ""
 
 #: u_translation.rsrightbar
 msgid "Right Bar"
-msgstr ""
+msgstr "Right Bar"
 
 #: u_translation.rsrise
 msgid "Rise"
-msgstr ""
+msgstr "Rise"
 
 #: u_translation.rsrisetime
 msgid "Rise time"
-msgstr ""
+msgstr "Rise time"
 
 #: u_translation.rsrotateby180d
 msgid "Rotate by 180 degrees"
@@ -4370,7 +4378,7 @@ msgstr "Rotate right"
 
 #: u_translation.rsrotation
 msgid "Rotation"
-msgstr ""
+msgstr "Rotation"
 
 #: u_translation.rsrows
 msgid "Rows"
@@ -4490,7 +4498,7 @@ msgstr ""
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
-msgstr ""
+msgstr "Scroll bar"
 
 #: u_translation.rssday
 msgid "D"
@@ -4634,7 +4642,7 @@ msgstr ""
 
 #: u_translation.rsseparation
 msgid "Separation"
-msgstr ""
+msgstr "Separation"
 
 #: u_translation.rsseparator
 msgid "Separator"
@@ -4650,7 +4658,7 @@ msgstr ""
 
 #: u_translation.rsserverinform
 msgid "Server information"
-msgstr ""
+msgstr "Server information"
 
 #: u_translation.rsserveripinte
 msgid "Server IP interface:"
@@ -4666,7 +4674,7 @@ msgstr ""
 
 #: u_translation.rsset
 msgid "Set"
-msgstr ""
+msgstr "Set"
 
 #: u_translation.rssetdateandti
 msgid "Set date and time"
@@ -4842,7 +4850,7 @@ msgstr ""
 
 #: u_translation.rsshowobjects
 msgid "Show objects"
-msgstr ""
+msgstr "Show objects"
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian"
@@ -4914,7 +4922,7 @@ msgstr "Sky background colour"
 
 #: u_translation.rsskycharthome
 msgid "Skychart homepage"
-msgstr ""
+msgstr "Skychart homepage"
 
 #: u_translation.rsskycharticon
 msgid "Skychart icon setup"
@@ -4966,11 +4974,11 @@ msgstr ""
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
-msgstr ""
+msgstr "Socket error %s.  %s"
 
 #: u_translation.rssolardistanc
 msgid "Solar distance"
-msgstr ""
+msgstr "Solar distance"
 
 #: u_translation.rssolareclipse
 msgid "Solar eclipses"
@@ -4978,7 +4986,7 @@ msgstr ""
 
 #: u_translation.rssolarelongat
 msgid "Solar elongation"
-msgstr ""
+msgstr "Solar elongation"
 
 #: u_translation.rssolarsystem
 msgid "Solar System"
@@ -5030,7 +5038,7 @@ msgstr ""
 
 #: u_translation.rsspectralclas
 msgid "Spectral class"
-msgstr ""
+msgstr "Spectral class"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -5038,7 +5046,7 @@ msgstr ""
 
 #: u_translation.rssqldatabasen
 msgid "SQL database not available."
-msgstr ""
+msgstr "SQL database not available."
 
 #: u_translation.rssqldatabases
 msgid "SQL database software is probably not installed!"
@@ -5070,7 +5078,7 @@ msgstr ""
 
 #: u_translation.rsstar
 msgid "Star"
-msgstr ""
+msgstr "Star"
 
 #: u_translation.rsstarandnebul
 msgid "Star and nebula limit"
@@ -5138,7 +5146,7 @@ msgstr ""
 
 #: u_translation.rsstatusbar
 msgid "Status bar"
-msgstr ""
+msgstr "Status bar"
 
 #: u_translation.rsstepinto
 msgid "Step Into"
@@ -5178,7 +5186,7 @@ msgstr ""
 
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
-msgstr ""
+msgstr "Sun inclination"
 
 #: u_translation.rssupernovarem
 msgid "Supernova remnant"
@@ -5186,11 +5194,11 @@ msgstr ""
 
 #: u_translation.rssurface
 msgid "Surface"
-msgstr ""
+msgstr "Surface"
 
 #: u_translation.rssurfacebrigh
 msgid "Surface brightness"
-msgstr ""
+msgstr "Surface brightness"
 
 #: u_translation.rsswapbutton
 msgid "Swap button"
@@ -5246,11 +5254,11 @@ msgstr ""
 
 #: u_translation.rstcpipservice
 msgid "TCP/IP service not available."
-msgstr ""
+msgstr "TCP/IP service not available."
 
 #: u_translation.rstelescope
 msgid "Telescope"
-msgstr ""
+msgstr "Telescope"
 
 #: u_translation.rstelescopefoc
 msgid "Telescope focal length"
@@ -5338,7 +5346,7 @@ msgstr ""
 
 #: u_translation.rstilehorizont
 msgid "Tile horizontally"
-msgstr ""
+msgstr "Tile horizontally"
 
 #: u_translation.rstilevertical
 msgid "Tile vertically"
@@ -5370,7 +5378,7 @@ msgstr ""
 
 #: u_translation.rsto
 msgid "to"
-msgstr ""
+msgstr "to"
 
 #: u_translation.rstoday
 msgid "Today"
@@ -5386,7 +5394,7 @@ msgstr ""
 
 #: u_translation.rstoolbar
 msgid "Toolbar"
-msgstr ""
+msgstr "Toolbar"
 
 #: u_translation.rstoolbaredito
 msgid "Toolbar editor"
@@ -5402,7 +5410,7 @@ msgstr ""
 
 #: u_translation.rstoomanyopenw
 msgid "Too many open windows, please close some charts."
-msgstr ""
+msgstr "Too many open windows, please close some charts."
 
 #: u_translation.rstop
 msgid "Top"
@@ -5418,7 +5426,7 @@ msgstr ""
 
 #: u_translation.rstotalradius
 msgid "Total radius"
-msgstr ""
+msgstr "Total radius"
 
 #: u_translation.rstour
 msgid "Tour"
@@ -5442,7 +5450,7 @@ msgstr ""
 
 #: u_translation.rstransformati
 msgid "Transformation"
-msgstr ""
+msgstr "Transformation"
 
 #: u_translation.rstransit
 msgid "Transit"
@@ -5462,7 +5470,7 @@ msgstr ""
 
 #: u_translation.rstriplestar
 msgid "Triple star"
-msgstr ""
+msgstr "Triple star"
 
 #: u_translation.rstropicalyear
 msgid "Tropical year"
@@ -5486,7 +5494,7 @@ msgstr ""
 
 #: u_translation.rstrumplerclas
 msgid "Trumpler class"
-msgstr ""
+msgstr "Trumpler class"
 
 #: u_translation.rstrytoautocon
 msgid "Try to auto-connect to a SAMP hub when the program start"
@@ -5530,7 +5538,7 @@ msgstr ""
 
 #: u_translation.rstypeofvariab
 msgid "Type of variability"
-msgstr ""
+msgstr "Type of variability"
 
 #: u_translation.rsumbra
 msgid "Umbra"
@@ -5558,7 +5566,7 @@ msgstr ""
 
 #: u_translation.rsuniversaltim
 msgid "Universal Time"
-msgstr ""
+msgstr "Universal Time"
 
 #: u_translation.rsunknow
 msgid "unknown"
@@ -5566,11 +5574,11 @@ msgstr ""
 
 #: u_translation.rsunknowobject
 msgid "Unknown object"
-msgstr ""
+msgstr "Unknown object"
 
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
-msgstr ""
+msgstr "Unlock chart"
 
 #: u_translation.rsunpark
 msgid "Unpark"
@@ -5702,7 +5710,7 @@ msgstr ""
 
 #: u_translation.rsvariablestar
 msgid "Variable star"
-msgstr ""
+msgstr "Variable star"
 
 #: u_translation.rsvariablestar2
 msgid "Variable stars"
@@ -5710,11 +5718,11 @@ msgstr ""
 
 #: u_translation.rsvelocity
 msgid "Velocity"
-msgstr ""
+msgstr "Velocity"
 
 #: u_translation.rsvenus
 msgid "Venus"
-msgstr ""
+msgstr "Venus"
 
 #: u_translation.rsversion
 msgid "Version"
@@ -5726,7 +5734,7 @@ msgstr ""
 
 #: u_translation.rsview
 msgid "View"
-msgstr ""
+msgstr "View"
 
 #: u_translation.rsviewheader
 msgid "View header"
@@ -5734,7 +5742,7 @@ msgstr ""
 
 #: u_translation.rsviewhorizon
 msgid "View horizon"
-msgstr ""
+msgstr "View horizon"
 
 #: u_translation.rsviewobservin
 msgid "View observing list"
@@ -5750,7 +5758,7 @@ msgstr ""
 
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
-msgstr ""
+msgstr "Visibility for your observatory"
 
 #: u_translation.rsvisualisatio
 msgid "Visualisation scale"
@@ -5758,7 +5766,7 @@ msgstr ""
 
 #: u_translation.rsvisualmagnit
 msgid "Visual magnitude"
-msgstr ""
+msgstr "Visual magnitude"
 
 #: u_translation.rsvocatalog
 msgid "VO Catalog"
@@ -5834,7 +5842,7 @@ msgstr ""
 
 #: u_translation.rswindow
 msgid "Window"
-msgstr ""
+msgstr "Window"
 
 #: u_translation.rsyear
 msgid "Year"

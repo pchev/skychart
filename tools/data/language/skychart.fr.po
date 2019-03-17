@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-21 14:30+0000\n"
-"PO-Revision-Date: 2018-10-21 14:33+0000\n"
+"POT-Creation-Date: 2019-03-17 15:18+0000\n"
+"PO-Revision-Date: 2019-03-17 15:21+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-01-13 17:12+0000\n"
-"X-Generator: Launchpad (build 18855)\n"
+"X-Launchpad-Export-Date: 2019-03-17 15:24+0000\n"
+"X-Generator: Launchpad (build 18905)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -192,6 +192,10 @@ msgstr "Ajuster l'échelle de visualisation"
 msgid "Adjust the window size to the screen DPI"
 msgstr "Ajuster la taille des fenêtres à la résolution de l'écran"
 
+#: u_translation.rsadministrato
+msgid "administrator"
+msgstr "administrateur"
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr "Avancé"
@@ -367,6 +371,10 @@ msgstr "Une application SAMP a envoyé une image"
 #: u_translation.rsasampapplica3
 msgid "A SAMP application send coordinates location"
 msgstr "Une application SAMP a envoyé des coordonnées"
+
+#: u_translation.rsascomremote
+msgid "ASCOM Alpaca is available on %s"
+msgstr "ASCOM Alpaca est disponible pour %s"
 
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
@@ -1024,10 +1032,6 @@ msgstr "Confirmez la suppression de: "
 msgid "Connect"
 msgstr "Connecter"
 
-#: u_translation.rsconnectandge
-msgid "Connect and get device list"
-msgstr "Connection et liste des périphériques"
-
 #: u_translation.rsconnected
 msgid "Connected"
 msgstr "Connecté"
@@ -1111,6 +1115,10 @@ msgstr "Converti le fichier %s"
 #: u_translation.rsconvertcatal2
 msgid "Convert catalog files"
 msgstr "Converti le catalogue"
+
+#: u_translation.rscooordinates
+msgid "Coordinate system to use with the clients"
+msgstr "Système de coordonnées utilisé avec les clients"
 
 #: u_translation.rscoord
 msgid "Coord."
@@ -1203,10 +1211,6 @@ msgstr "Culmination"
 #: u_translation.rscurrentdate
 msgid "Date of validity"
 msgstr "Date courante"
-
-#: u_translation.rscurrentdrive
-msgid "Current driver"
-msgstr "Pilote selectionné"
 
 #: u_translation.rscursor
 msgid "Cursor"
@@ -1616,9 +1620,17 @@ msgstr "Diviseur"
 msgid "Do not change anything here if you are not sure what you do!"
 msgstr "Ne changez rien si vous n'êtes pas sûr de ce que vous faites!"
 
+#: u_translation.rsdonotfilterb
+msgid "Do not filter bright nebula by magnitude"
+msgstr "Ne pas filtrer les nébuleuses brillantes par magnitude"
+
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "Ne pas filtrer les objets Messier"
+
+#: u_translation.rsdonotrunasad
+msgid "Do not run %s as %s!"
+msgstr "Ne pas executer %s comme %s"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2256,6 +2268,10 @@ msgstr "Géocentrique"
 msgid "Geometric altitude"
 msgstr "Hauteur géométrique"
 
+#: u_translation.rsget
+msgid "Get"
+msgstr "Obtenir"
+
 #: u_translation.rsgetasteroidl
 msgid "Get the asteroids list."
 msgstr "Liste des astéroïdes."
@@ -2524,6 +2540,10 @@ msgstr "Pilote INDI"
 msgid "INDI driver settings"
 msgstr "Paramètre du driver INDI"
 
+#: u_translation.rsindiready
+msgid "INDI server is ready"
+msgstr "Le serveur INDI est prêt"
+
 #: u_translation.rsindiserverho
 msgid "INDI server host "
 msgstr "Serveur INDI "
@@ -2716,10 +2736,6 @@ msgstr "Dernier"
 #: u_translation.rslatitude
 msgid "Latitude"
 msgstr "Latitude"
-
-#: u_translation.rslaunchindist
-msgid "Launch INDIstarter if the server is not running"
-msgstr "Lancez INDIstarter si le serveur n'est pas démarré"
 
 #: u_translation.rsleft
 msgid "Left"
@@ -3413,10 +3429,6 @@ msgstr "Pas d'objet selectionné"
 msgid "Not available"
 msgstr "Non disponible"
 
-#: u_translation.rsnotavailon
-msgid "Not available on %s"
-msgstr "Non disponible pour %s"
-
 #: u_translation.rsnotconnected
 msgid "%s not connected."
 msgstr "%s non connecté."
@@ -3844,10 +3856,6 @@ msgstr "Veuillez indiquer un nom long du catalogue"
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Veuillez indiquer le répertoire où construire le catalogue"
-
-#: u_translation.rspleaseinstal
-msgid "Please install indistarter package!"
-msgstr "Merci d'installer le paquet indistarter!"
 
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."

@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-21 14:30+0000\n"
+"POT-Creation-Date: 2019-03-17 15:18+0000\n"
 "PO-Revision-Date: 2016-12-11 09:04+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclubzp@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-01-13 17:12+0000\n"
-"X-Generator: Launchpad (build 18855)\n"
+"X-Launchpad-Export-Date: 2019-03-17 15:24+0000\n"
+"X-Generator: Launchpad (build 18905)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -192,6 +192,10 @@ msgstr ""
 msgid "Adjust the window size to the screen DPI"
 msgstr ""
 
+#: u_translation.rsadministrato
+msgid "administrator"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr "Підвищено"
@@ -367,6 +371,10 @@ msgstr ""
 
 #: u_translation.rsasampapplica3
 msgid "A SAMP application send coordinates location"
+msgstr ""
+
+#: u_translation.rsascomremote
+msgid "ASCOM Alpaca is available on %s"
 msgstr ""
 
 #: u_translation.rsascomtelesc
@@ -1025,10 +1033,6 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: u_translation.rsconnectandge
-msgid "Connect and get device list"
-msgstr ""
-
 #: u_translation.rsconnected
 msgid "Connected"
 msgstr ""
@@ -1112,6 +1116,10 @@ msgstr "Конвертація файлу каталогу %s"
 #: u_translation.rsconvertcatal2
 msgid "Convert catalog files"
 msgstr "Конвертувати файли каталогу"
+
+#: u_translation.rscooordinates
+msgid "Coordinate system to use with the clients"
+msgstr ""
 
 #: u_translation.rscoord
 msgid "Coord."
@@ -1204,10 +1212,6 @@ msgstr "Кульмінація"
 #: u_translation.rscurrentdate
 msgid "Date of validity"
 msgstr "Поточна дата"
-
-#: u_translation.rscurrentdrive
-msgid "Current driver"
-msgstr ""
 
 #: u_translation.rscursor
 msgid "Cursor"
@@ -1618,8 +1622,16 @@ msgstr ""
 msgid "Do not change anything here if you are not sure what you do!"
 msgstr ""
 
+#: u_translation.rsdonotfilterb
+msgid "Do not filter bright nebula by magnitude"
+msgstr ""
+
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
+msgstr ""
+
+#: u_translation.rsdonotrunasad
+msgid "Do not run %s as %s!"
 msgstr ""
 
 #: u_translation.rsdot1
@@ -2258,6 +2270,10 @@ msgstr "Геоцентрична"
 msgid "Geometric altitude"
 msgstr ""
 
+#: u_translation.rsget
+msgid "Get"
+msgstr ""
+
 #: u_translation.rsgetasteroidl
 msgid "Get the asteroids list."
 msgstr "Одержання списку астероїдів"
@@ -2526,6 +2542,10 @@ msgstr "INDI драйвер"
 msgid "INDI driver settings"
 msgstr "Настанови INDI драйверу"
 
+#: u_translation.rsindiready
+msgid "INDI server is ready"
+msgstr ""
+
 #: u_translation.rsindiserverho
 msgid "INDI server host "
 msgstr "Хост INDI серверу "
@@ -2717,10 +2737,6 @@ msgstr ""
 #: u_translation.rslatitude
 msgid "Latitude"
 msgstr "Широта"
-
-#: u_translation.rslaunchindist
-msgid "Launch INDIstarter if the server is not running"
-msgstr ""
 
 #: u_translation.rsleft
 msgid "Left"
@@ -3414,10 +3430,6 @@ msgstr ""
 msgid "Not available"
 msgstr "Не досяжний"
 
-#: u_translation.rsnotavailon
-msgid "Not available on %s"
-msgstr ""
-
 #: u_translation.rsnotconnected
 msgid "%s not connected."
 msgstr "%s не зв'язано."
@@ -3845,10 +3857,6 @@ msgstr "Будь ласка вкажіть повну назву каталог�
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Будь ласка вкажіть директорію, в котрій каталог повинен створюватися"
-
-#: u_translation.rspleaseinstal
-msgid "Please install indistarter package!"
-msgstr ""
 
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
