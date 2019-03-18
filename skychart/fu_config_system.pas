@@ -358,8 +358,6 @@ begin
   IndiMsg.Caption:='';
 {$if defined(mswindows) or defined(darwin)}
   GroupBoxLinux.Visible := False;
-  IndiAutostart.Visible := False;
-  csc.IndiAutostart := False;
 {$endif}
   ShowLanguage;
   ShowSYS;
