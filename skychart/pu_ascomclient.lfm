@@ -43,16 +43,12 @@ object pop_scope: Tpop_scope
       OnClick = ButtonDisconnectClick
       TabOrder = 3
     end
-    object led: TEdit
+    object led: TShape
       Left = 83
       Height = 25
       Top = 7
       Width = 25
-      AutoSize = False
-      Color = clRed
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 0
+      Brush.Color = clRed
     end
     object ButtonHelp: TButton
       Left = 211
@@ -280,16 +276,12 @@ object pop_scope: Tpop_scope
       Enabled = False
       OnClick = ButtonTrackingClick
     end
-    object trackingled: TEdit
+    object trackingled: TShape
       Left = 149
       Height = 16
       Top = 121
       Width = 80
-      AutoSize = False
-      Color = clRed
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 5
+      Brush.Color = clRed
     end
     object ButtonPark: TSpeedButton
       Left = 55
@@ -300,16 +292,12 @@ object pop_scope: Tpop_scope
       Enabled = False
       OnClick = ButtonParkClick
     end
-    object parkled: TEdit
+    object parkled: TShape
       Left = 57
       Height = 16
       Top = 121
       Width = 80
-      AutoSize = False
-      Color = clRed
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 6
+      Brush.Color = clRed
     end
   end
   object PageControl1: TPageControl

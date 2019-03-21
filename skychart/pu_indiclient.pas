@@ -57,7 +57,7 @@ type
     Label260: TLabel;
     Label75: TLabel;
     lat: TEdit;
-    led: TEdit;
+    led: TShape;
     long: TEdit;
     MountIndiDevice: TComboBox;
     Panel2: TPanel;
@@ -209,7 +209,7 @@ begin
   ready := False;
   connected := False;
   eod_coord := True;
-  led.color := clRed;
+  led.brush.color := clRed;
   SlewRateList.Clear;
 end;
 
@@ -219,7 +219,7 @@ begin
   begin
     if (not ready) then begin
       ready:=true;
-      led.color := clLime;
+      led.brush.color := clLime;
       if csc.IndiLoadConfig then begin
          LoadConfig;
       end;
@@ -254,7 +254,7 @@ begin
   InitTimer.Enabled := False;
   Memomsg.Lines.Add('Server disconnected');
   ClearStatus;
-  led.color := clRed;
+  led.brush.color := clRed;
 end;
 
 procedure Tpop_indi.NewDevice(dp: Basedevice);
@@ -279,7 +279,7 @@ end;
 
 {procedure Tpop_indi.DeleteProperty(indiProp: IndiProperty);
 begin
-  { TODO :  check if a vital property is removed ? }
+   TODO :  check if a vital property is removed ?
 end;}
 
 procedure Tpop_indi.NewMessage(mp: IMessage);
@@ -437,7 +437,7 @@ procedure Tpop_indi.ScopeConnect(var ok: boolean);
 begin
   if not connected then
   begin
-    led.color := clRed;
+    led.brush.color := clRed;
     Memomsg.Clear;
     led.refresh;
     if (client = nil) or (client.Terminated) or (not client.Connected) then
@@ -471,7 +471,7 @@ begin
     client.SetServer(csc.IndiServerHost, csc.IndiServerPort);
     client.watchDevice(csc.IndiDevice);
     client.ConnectServer;
-    led.color := clYellow;
+    led.brush.color := clYellow;
     InitTimer.Enabled := True;
     ok := True;
   end

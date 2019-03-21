@@ -12,7 +12,6 @@ object pop_indi: Tpop_indi
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   Position = poDefaultPosOnly
-  LCLVersion = '2.0.0.4'
   object GroupBox3: TGroupBox
     Left = 0
     Height = 65
@@ -46,9 +45,9 @@ object pop_indi: Tpop_indi
     end
     object ProtocolTrace: TCheckBox
       Left = 11
-      Height = 21
+      Height = 23
       Top = 8
-      Width = 124
+      Width = 126
       Caption = 'Protocol trace '
       OnChange = ProtocolTraceChange
       ParentFont = False
@@ -61,8 +60,8 @@ object pop_indi: Tpop_indi
     Top = 318
     Width = 321
     Align = alTop
-    ClientHeight = 36
-    ClientWidth = 321
+    ClientHeight = 32
+    ClientWidth = 317
     ParentFont = False
     TabOrder = 1
     object LabelAlpha: TLabel
@@ -282,9 +281,9 @@ object pop_indi: Tpop_indi
     end
     object AutoloadConfig: TCheckBox
       Left = 8
-      Height = 21
+      Height = 23
       Top = 97
-      Width = 151
+      Width = 153
       Caption = 'Load configuration'
       OnClick = AutoloadConfigClick
       ParentFont = False
@@ -308,8 +307,8 @@ object pop_indi: Tpop_indi
     Top = 427
     Width = 321
     Align = alBottom
-    ClientHeight = 73
-    ClientWidth = 321
+    ClientHeight = 69
+    ClientWidth = 317
     ParentFont = False
     TabOrder = 5
     object Disconnect: TButton
@@ -322,17 +321,12 @@ object pop_indi: Tpop_indi
       ParentFont = False
       TabOrder = 0
     end
-    object led: TEdit
+    object led: TShape
       Left = 99
       Height = 25
       Top = 8
       Width = 25
-      AutoSize = False
-      Color = clRed
-      ParentFont = False
-      ReadOnly = True
-      TabStop = False
-      TabOrder = 1
+      Brush.Color = clRed
     end
     object Connect: TButton
       Left = 9
@@ -343,7 +337,7 @@ object pop_indi: Tpop_indi
       Default = True
       OnClick = ConnectClick
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
     end
     object SpeedButton4: TButton
       Left = 246
@@ -364,7 +358,7 @@ object pop_indi: Tpop_indi
       Caption = 'Hide'
       OnClick = SpeedButton2Click
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 2
     end
   end
   object InitTimer: TTimer

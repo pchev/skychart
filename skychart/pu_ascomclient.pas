@@ -59,14 +59,14 @@ type
     Label39: TLabel;
     PageControl1: TPageControl;
     Panel3: TPanel;
-    parkled: TEdit;
+    parkled: TShape;
     ASCOMLocal: TTabSheet;
     ASCOMRemote: TTabSheet;
-    trackingled: TEdit;
+    trackingled: TShape;
     ButtonTracking: TSpeedButton;
     ButtonHide: TButton;
     ButtonDisconnect: TButton;
-    led: TEdit;
+    led: TShape;
     GroupBox5: TGroupBox;
     Label15: TLabel;
     Label16: TLabel;
@@ -301,7 +301,7 @@ begin
       // the server is responsible for device disconnection
     end;
     ok := True;
-    led.color := clRed;
+    led.brush.color := clRed;
     ButtonConnect.Enabled := True;
     ButtonSelect.Enabled := True;
     ButtonConfigure.Enabled := True;
@@ -321,7 +321,7 @@ procedure Tpop_scope.ScopeConnect(var ok: boolean);
 var
   dis_ok,c_ok: boolean;
 begin
-  led.color := clRed;
+  led.brush.color := clRed;
   led.refresh;
   timer1.Enabled := False;
   ButtonSelect.Enabled := True;
@@ -381,7 +381,7 @@ begin
       end;
       ScopeGetEqSysReal(FScopeEqSys);
       ShowCoordinates;
-      led.color := clLime;
+      led.brush.color := clLime;
       ok := True;
       timer1.Enabled := True;
       ButtonConnect.Enabled := False;
@@ -1222,7 +1222,7 @@ begin
     if (not ScopeConnected) or (not FCanParkUnpark) then
     begin
       ButtonPark.Enabled := False;
-      parkled.color := clRed;
+      parkled.brush.color := clRed;
     end
     else
     begin
@@ -1240,11 +1240,11 @@ begin
         ispark:=TR.Get('atpark').AsBool;
       end;
       if ispark then begin
-        parkled.color := clRed;
+        parkled.brush.color := clRed;
         ButtonPark.Caption := rsUnpark;
       end
       else begin
-        parkled.color := clLime;
+        parkled.brush.color := clLime;
         ButtonPark.Caption := rsPark;
       end;
     end;
@@ -1278,12 +1278,12 @@ begin
         tracking := TR.Get('tracking').AsBool;
       end;
       if tracking then
-        Trackingled.color := clLime
+        Trackingled.brush.color := clLime
       else
-        Trackingled.color := clRed;
+        Trackingled.brush.color := clRed;
     end
     else
-      Trackingled.color := clRed;
+      Trackingled.brush.color := clRed;
   except
     on E: Exception do
       MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
