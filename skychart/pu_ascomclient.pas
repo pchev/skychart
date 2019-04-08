@@ -211,6 +211,7 @@ begin
 end;
 
 procedure Tpop_scope.ShowCoordinates;
+var ok: boolean;
 begin
   if ScopeInitialized then
   begin
@@ -227,8 +228,11 @@ begin
         Curdeg_y:=TR.Get('declination').AsFloat;
       end;
     except
-      on E: Exception do
+      on E: Exception do begin
         MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+        ScopeDisconnect(ok);
+        exit;
+        end;
     end;
     if ShowAltAz.Checked then
     begin
@@ -326,6 +330,7 @@ begin
   timer1.Enabled := False;
   ButtonSelect.Enabled := True;
   ok := False;
+  CoordLock := False;
   Remote := (PageControl1.ActivePageIndex=1);
   try
     {$ifdef mswindows}
