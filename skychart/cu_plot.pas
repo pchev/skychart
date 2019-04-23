@@ -1352,10 +1352,11 @@ begin
       {$ifdef mswindows}
         if style <> psSolid then
           Pen.Width := 1;
-{$endif}
+      {$endif}
         MoveTo(round(x1), round(y1));
         LineTo(round(x2), round(y2));
         Pen.Style := psSolid;
+        Pen.Width := 1;
       end;
 
   end;
@@ -5927,6 +5928,8 @@ begin
   abmp.CanvasBGRA.MoveTo(round(x1), round(y1));
   abmp.CanvasBGRA.LineTo(round(x2), round(y2));
   abmp.CanvasBGRA.Pen.Style := psSolid;
+  abmp.CanvasBGRA.Pen.Width := 1;
+  abmp.Pen.Style := psSolid;
 
 end;
 
