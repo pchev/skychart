@@ -1528,6 +1528,7 @@ resourcestring
   rsDoNotRunAsAd = 'Do not run %s as %s!';
   rsAdministrato = 'administrator';
   rsGet = 'Get';
+  rsASCOMDriverE = 'The ASCOM driver report an error';
 
 // also update upsi_translation
 

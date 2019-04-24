@@ -229,7 +229,7 @@ begin
       end;
     except
       on E: Exception do begin
-        MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
         ScopeDisconnect(ok);
         exit;
         end;
@@ -316,7 +316,7 @@ begin
     UpdParkButton;
   except
     on E: Exception do
-      MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+      MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
   end;
 
 end;
@@ -401,7 +401,7 @@ begin
     UpdTrackingButton;
   except
     on E: Exception do
-      MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+      MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
   end;
 end;
 
@@ -495,7 +495,7 @@ begin
       end;
     except
       on E: Exception do
-        MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
 end;
@@ -558,7 +558,7 @@ begin
       end;
     except
       on E: Exception do
-        MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end
   else
@@ -665,7 +665,7 @@ begin
     end;
   except
     on E: Exception do
-      MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+      MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
   end;
 end;
 
@@ -690,7 +690,7 @@ begin
       end;
     except
       on E: Exception do
-        MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
 end;
@@ -1123,7 +1123,7 @@ begin
     end;
   except
     on E: EOleException do
-      MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+      MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
   end;
 {$endif}
 end;
@@ -1153,7 +1153,7 @@ begin
         FObservatoryCoord(self);
     except
       on E: Exception do
-        MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
 end;
@@ -1186,7 +1186,7 @@ begin
       end;
     except
       on E: Exception do
-        MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
 end;
@@ -1210,7 +1210,7 @@ begin
       end;
     except
       on E: Exception do
-        MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
 end;
@@ -1255,7 +1255,7 @@ begin
     end;
   except
     on E: Exception do
-      MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+      MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
   end;
 end;
 
@@ -1291,7 +1291,7 @@ begin
       Trackingled.brush.color := clRed;
   except
     on E: Exception do
-      MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+      MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
   end;
 end;
 
@@ -1328,7 +1328,7 @@ begin
       UpdParkButton;
     except
       on E: Exception do
-        MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
 end;
@@ -1353,7 +1353,7 @@ begin
       UpdTrackingButton;
     except
       on E: Exception do
-        MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+        MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
 end;
@@ -1389,7 +1389,7 @@ begin
     end;
   except
     on E: EOleException do
-      MessageDlg(rsError + ': ' + E.Message, mtWarning, [mbOK], 0);
+      MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
   end;
 {$endif}
 end;
