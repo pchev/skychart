@@ -4947,7 +4947,7 @@ object f_main: Tf_main
     object TelescopeSetup: TAction
       Category = 'Setup'
       Caption = 'TelescopeSetup'
-      ImageIndex = 48
+      ImageIndex = 111
       OnExecute = TelescopeSetupExecute
     end
     object TrackTelescope: TAction
