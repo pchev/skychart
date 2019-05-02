@@ -412,6 +412,9 @@ data/Themes/default/daylight/16x16/i11.png
 data/Themes/default/daylight/16x16/i120.png
 data/Themes/default/daylight/16x16/i121.png
 data/Themes/default/daylight/16x16/i122.png
+data/Themes/default/daylight/16x16/i123.png
+data/Themes/default/daylight/16x16/i124.png
+data/Themes/default/daylight/16x16/i125.png
 data/Themes/default/daylight/16x16/i12.png
 data/Themes/default/daylight/16x16/i13.png
 data/Themes/default/daylight/16x16/i14.png
@@ -536,6 +539,9 @@ data/Themes/default/daylight/22x22/i11.png
 data/Themes/default/daylight/22x22/i120.png
 data/Themes/default/daylight/22x22/i121.png
 data/Themes/default/daylight/22x22/i122.png
+data/Themes/default/daylight/22x22/i123.png
+data/Themes/default/daylight/22x22/i124.png
+data/Themes/default/daylight/22x22/i125.png
 data/Themes/default/daylight/22x22/i12.png
 data/Themes/default/daylight/22x22/i13.png
 data/Themes/default/daylight/22x22/i14.png
@@ -660,6 +666,9 @@ data/Themes/default/daylight/32x32/i11.png
 data/Themes/default/daylight/32x32/i120.png
 data/Themes/default/daylight/32x32/i121.png
 data/Themes/default/daylight/32x32/i122.png
+data/Themes/default/daylight/32x32/i123.png
+data/Themes/default/daylight/32x32/i124.png
+data/Themes/default/daylight/32x32/i125.png
 data/Themes/default/daylight/32x32/i12.png
 data/Themes/default/daylight/32x32/i13.png
 data/Themes/default/daylight/32x32/i14.png
@@ -785,6 +794,9 @@ data/Themes/default/night-vision/16x16/i11.png
 data/Themes/default/night-vision/16x16/i120.png
 data/Themes/default/night-vision/16x16/i121.png
 data/Themes/default/night-vision/16x16/i122.png
+data/Themes/default/night-vision/16x16/i123.png
+data/Themes/default/night-vision/16x16/i124.png
+data/Themes/default/night-vision/16x16/i125.png
 data/Themes/default/night-vision/16x16/i12.png
 data/Themes/default/night-vision/16x16/i13.png
 data/Themes/default/night-vision/16x16/i14.png
@@ -909,6 +921,9 @@ data/Themes/default/night-vision/22x22/i11.png
 data/Themes/default/night-vision/22x22/i120.png
 data/Themes/default/night-vision/22x22/i121.png
 data/Themes/default/night-vision/22x22/i122.png
+data/Themes/default/night-vision/22x22/i123.png
+data/Themes/default/night-vision/22x22/i124.png
+data/Themes/default/night-vision/22x22/i125.png
 data/Themes/default/night-vision/22x22/i12.png
 data/Themes/default/night-vision/22x22/i13.png
 data/Themes/default/night-vision/22x22/i14.png
@@ -1033,6 +1048,9 @@ data/Themes/default/night-vision/32x32/i11.png
 data/Themes/default/night-vision/32x32/i120.png
 data/Themes/default/night-vision/32x32/i121.png
 data/Themes/default/night-vision/32x32/i122.png
+data/Themes/default/night-vision/32x32/i123.png
+data/Themes/default/night-vision/32x32/i124.png
+data/Themes/default/night-vision/32x32/i125.png
 data/Themes/default/night-vision/32x32/i12.png
 data/Themes/default/night-vision/32x32/i13.png
 data/Themes/default/night-vision/32x32/i14.png

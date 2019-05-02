@@ -121,3 +121,6 @@ i119	chart-style-parametric
 i120	animation-back
 i121	window-close
 i122	window-list-reverse
+i123	update-comets
+i124	update-asteroids
+i125	update-artificial-satellites

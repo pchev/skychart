@@ -11006,7 +11006,7 @@ begin
   Load1Theme(slash(tdir)+slash('night-vision')+slash('16x16'),Img16Night);
   Load1Theme(slash(tdir)+slash('night-vision')+slash('22x22'),Img22Night);
   Load1Theme(slash(tdir)+slash('night-vision')+slash('32x32'),Img32Night);
-  if not ok then ShowMessage('Error loading theme '+crlf+tdir+crlf+'Button can be mixed up');
+  if not ok then SetLPanel1('Error loading theme '+tdir+'Button can be mixed up');
 end;
 
 procedure Tf_main.SetTheme;
