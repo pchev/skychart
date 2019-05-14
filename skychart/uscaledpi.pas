@@ -125,7 +125,7 @@ begin
       WinControl := TUpDown(Control).Associate;
       TUpDown(Control).Associate := nil;
       TUpDown(Control).Associate := WinControl;
-      TRaDec(TUpDown(Control).Parent).lockchange := True;
+      TRaDec(TUpDown(Control).Parent).lockchange := False;
       exit;
     end
     else
