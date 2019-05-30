@@ -2491,7 +2491,7 @@ begin
           lid := rshash(lis, $7FFFFFFF);
           SetLabel(lid, xx, yy, round(pixscale * diam / 2), 2, 5, ltxt, lalign, lori, 1, lopt);
         end;
-        case ipla of
+        if (cfgsc.SimNb=1)or (not (cfgsc.SimLine and cfgsc.SimMark)) then case ipla of
           4:
           begin
             if (fov <= 5) and (cfgsc.Planetlst[j, 29, 6] < 90) then

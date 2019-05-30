@@ -499,6 +499,7 @@ begin
   end;
   stepline.Checked := csc.SimLine;
   stepmark.Checked := csc.SimMark;
+  stepmark.Enabled := csc.SimLine;
   for i := 0 to SimObj.Items.Count - 1 do
   begin
     case i of
@@ -1154,6 +1155,7 @@ end;
 procedure Tf_config_time.steplineClick(Sender: TObject);
 begin
   csc.SimLine := stepline.Checked;
+  stepmark.Enabled := csc.SimLine;
 end;
 
 procedure Tf_config_time.stepmarkClick(Sender: TObject);
