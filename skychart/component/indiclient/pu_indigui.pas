@@ -952,6 +952,7 @@ begin
       end;
     end;
   end;
+  iprop.state.State := svp.s;
 
 end;
 
