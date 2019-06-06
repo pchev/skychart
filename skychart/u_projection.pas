@@ -67,8 +67,7 @@ procedure Djd(jd: double; var annee, mois, jour: integer; var Heure: double);
 function SidTim(jd0, ut, long: double; eqeq: double = 0): double;
 procedure ProperMotion(var r0, d0: double; t, pr, pd: double;
   fullmotion: boolean; px, rv: double);
-procedure Paralaxe(SideralTime, dist, ar1, de1: double; var ar, de, q: double;
-  c: Tconf_skychart);
+procedure Paralaxe(SideralTime, dist, ar1, de1: double; var ar, de, q: double; c: Tconf_skychart; coordepoch: double = 0);
 procedure PrecessionFK4(ti, tf: double; var ari, dei: double);
 procedure PrecessionFK5(ti, tf: double; var ari, dei: double);
 procedure Precession(j0, j1: double; var ra, de: double);
@@ -1051,8 +1050,7 @@ begin
   r0 := rmod(r0 + pi2, pi2);
 end;
 
-procedure Paralaxe(SideralTime, dist, ar1, de1: double; var ar, de, q: double;
-  c: Tconf_skychart);
+procedure Paralaxe(SideralTime, dist, ar1, de1: double; var ar, de, q: double; c: Tconf_skychart; coordepoch: double = 0);
 var
   sinpi, H, a, b, d: double;
 const
@@ -1061,7 +1059,8 @@ begin
   if dist > 1e-5 then
   begin
     // AR, DE may be standard epoch but paralaxe is to be computed with coordinates of the date.
-    precession(c.JDchart, c.CurJDUT, ar1, de1);
+    if coordepoch=0 then coordepoch:=c.JDchart;
+    precession(coordepoch, c.CurJDUT, ar1, de1);
     H := (SideralTime - ar1);
     //rde:=de1;
     sinpi := desinpi / dist;
@@ -1071,7 +1070,7 @@ begin
     q := sqrt(a * a + b * b + d * d);
     ar := SideralTime - arctan2(a, b);
     de := double(arcsin(d / q));
-    precession(c.CurJDUT, c.JDchart, ar, de);
+    precession(c.CurJDUT, coordepoch, ar, de);
   end
   else
   begin

@@ -4128,8 +4128,6 @@ begin
       ra2000 := sc.cfgsc.FindRA2000;
       de2000 := sc.cfgsc.FindDec2000;
       ra2000 := NormRA(ra2000);
-      //if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc,ipla<>11,not isSolarSystem);
-      //precession(sc.cfgsc.JDChart,jd2000,ra2000,de2000);
       // mean of date, apply only precession
       radate := ra2000;
       dedate := de2000;
@@ -4148,14 +4146,14 @@ begin
         // apply precession
         precession(jd2000, sc.cfgsc.JDChart, raapp, deapp);
         // apply nutation, aberration, light deflection
-        apparent_equatorial(raapp, deapp, sc.cfgsc, ipla <> 11, not isSolarSystem);
+        apparent_equatorial(raapp, deapp, sc.cfgsc, true, not isSolarSystem);
         if isSolarSystem and sc.cfgsc.PlanetParalaxe then
           Paralaxe(cst, sc.cfgsc.Finddist, raapp, deapp, raapp, deapp, q, sc.cfgsc);
         raapp := NormRA(raapp);
       end;
       if isSolarSystem and sc.cfgsc.PlanetParalaxe then
       begin
-        Paralaxe(cst, sc.cfgsc.Finddist, ra2000, de2000, ra2000, de2000, q, sc.cfgsc);
+        Paralaxe(cst, sc.cfgsc.Finddist, ra2000, de2000, ra2000, de2000, q, sc.cfgsc, jd2000);
         ra2000 := NormRA(ra2000);
       end;
       // print coord.
@@ -4184,7 +4182,7 @@ begin
     ra := sc.cfgsc.FindRA;
     Dec := sc.cfgsc.FindDec;
     if sc.cfgsc.ApparentPos then
-      mean_equatorial(ra, Dec, sc.cfgsc, ipla <> 11, not isSolarSystem);
+      mean_equatorial(ra, Dec, sc.cfgsc, true, not isSolarSystem);
     Eq2Gal(ra, Dec, a, h, sc.cfgsc);
     a := rmod(a + pi2, pi2);
     txt := txt + html_b + rsGalactic + blank + htms_b + blank + rsL + ': ' + detostr(

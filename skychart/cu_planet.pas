@@ -1636,8 +1636,7 @@ begin
       precession(jd2000, cfgsc.JDChart, ar, de);     // equinox require for the chart
       cfgsc.PlanetLst[j, 32, 4] := dist;
       cfgsc.PlanetLst[j, 32, 5] := dkm;
-      // for the Moon always apply nutation but not aberration
-      apparent_equatorial(ar, de, cfgsc, False, False);
+      apparent_equatorial(ar, de, cfgsc, True, False);
       if cfgsc.PlanetParalaxe then
       begin
         Paralaxe(st0, dist, ar, de, ar, de, q, cfgsc);
