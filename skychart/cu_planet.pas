@@ -106,7 +106,7 @@ type
       var supconj: array of boolean): integer;
     procedure SatRing(jde: double; var P, a, b, be: double);
     function JupGRS(lon, drift, jdref, jdnow: double): double;
-    procedure Moon(t0: double; var alpha, delta, dist, dkm, diam, phase, illum: double);
+    procedure Moon(t0: double; var alpha, delta, dist, dkm, diam, phase, illum: double;c:Tconf_skychart);
     procedure MoonIncl(Lar, Lde, Sar, Sde: double; var incl: double);
     function MoonMag(phase: double): double;
     procedure PlanetOrientation(jde: double; ipla: integer;
@@ -1103,7 +1103,7 @@ begin
   Result := mma[i] + ((mma[j] - mma[i]) * k / 10);
 end;
 
-procedure TPlanet.Moon(t0: double; var alpha, delta, dist, dkm, diam, phase, illum: double);
+procedure TPlanet.Moon(t0: double; var alpha, delta, dist, dkm, diam, phase, illum: double;c:Tconf_skychart);
 {
   t0      :  julian date DT
   alpha   :  Moon RA J2000
@@ -1152,6 +1152,8 @@ begin
       alpha := alpha + pi2;
     q := sqrt(p.x * p.x + p.y * p.y);
     delta := arctan(p.z / q);
+    // revert aberration to move position to solar system barycenter as with jpl eph
+    mean_equatorial(alpha,delta,c,true,false,false);
     // plan404 give equinox of the date for the moon.
     precession(t0, jd2000, alpha, delta);
     dkm := dist * km_au;
@@ -1628,7 +1630,7 @@ begin
         end;
       end;
       ipla := 11;
-      Moon(jdt, ar, de, dist, dkm, diam, phase, illum);
+      Moon(jdt, ar, de, dist, dkm, diam, phase, illum,cfgsc);
       cfgsc.PlanetLst[j, ipla, 8] := NormRA(ar); //J2000
       cfgsc.PlanetLst[j, ipla, 9] := de;
       cfgsc.PlanetLst[j, ipla, 10] := dist;
@@ -1953,7 +1955,7 @@ begin
   end;
   if (currentplanet = 11) then
   begin
-    Moon(jdt, ar, de, dist, dkm, diam, phase, illum);
+    Moon(jdt, ar, de, dist, dkm, diam, phase, illum,cfgsc);
     precession(jd2000, cfgsc.JDChart, ar, de);
     if cfgsc.PlanetParalaxe then
     begin   // correct distance for paralaxe
@@ -3312,7 +3314,7 @@ begin
   case pla of
     1..9: Planet(pla, jdt, ra, de, dm4, dm5, dm6, dm7, dm8, dm9, dm10, dm11, dm12, dm13);
     10: Sun(jdt, ra, de, dm4, dm5);
-    11: Moon(jdt, ra, de, dm4, dm5, dm6, dm7, dm8);
+    11: Moon(jdt, ra, de, dm4, dm5, dm6, dm7, dm8,cfgsc);
   end;
   precession(jd2000, jd0, ra, de);
   har := rmod(sidtim(jd0, hh - cfgsc.TimeZone, cfgsc.Obslongitude) - ra + pi2, pi2);
@@ -3371,7 +3373,7 @@ begin
     end;
     11:
     begin
-      Moon(jd0 + (cfgsc.DT_UT / 24), ra, de, dist, dm5, diam, dm7, dm8);
+      Moon(jd0 + (cfgsc.DT_UT / 24), ra, de, dist, dm5, diam, dm7, dm8,cfgsc);
       ho := (8.794 / dist / 3600) + dh - diam / 2 / 3600;  // horizontal parallax
       if dh > -1 then
         ho := ho - 0.016;
@@ -3526,7 +3528,7 @@ begin
         1..9: Planet(pla, jdr + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7,
             dm8, dm9, dm10, dm11, dm12, dm13);
         10: Sun(jdr + cfgsc.DT_UT / 24, ra, de, dist, dm5);
-        11: Moon(jdr + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7, dm8);
+        11: Moon(jdr + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7, dm8,cfgsc);
       end;
       precession(jd2000, jd0, ra, de);
       if cfgsc.PlanetParalaxe then
@@ -3557,7 +3559,7 @@ begin
         1..9: Planet(pla, jds + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7,
             dm8, dm9, dm10, dm11, dm12, dm13);
         10: Sun(jds + cfgsc.DT_UT / 24, ra, de, dist, dm5);
-        11: Moon(jds + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7, dm8);
+        11: Moon(jds + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7, dm8,cfgsc);
       end;
       precession(jd2000, jd0, ra, de);
       if cfgsc.PlanetParalaxe then
@@ -3588,7 +3590,7 @@ begin
         1..9: Planet(pla, jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7,
             dm8, dm9, dm10, dm11, dm12, dm13);
         10: Sun(jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5);
-        11: Moon(jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7, dm8);
+        11: Moon(jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7, dm8,cfgsc);
       end;
       precession(jd2000, jd0, ra, de);
       if cfgsc.PlanetParalaxe then
@@ -3622,7 +3624,7 @@ begin
         1..9: Planet(pla, jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7,
             dm8, dm9, dm10, dm11, dm12, dm13);
         10: Sun(jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5);
-        11: Moon(jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7, dm8);
+        11: Moon(jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7, dm8,cfgsc);
       end;
       precession(jd2000, jd0, ra, de);
       if cfgsc.PlanetParalaxe then

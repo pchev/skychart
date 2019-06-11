@@ -2226,7 +2226,7 @@ begin
   // moon second
   ipla:=C_Moon;
   yc:=yc+ys;
-  Fplanet.Moon(config.CurJDTT,ar,de,dist,dkm,diam,phase,illum);
+  Fplanet.Moon(config.CurJDTT,ar,de,dist,dkm,diam,phase,illum,config);
   precession(jd2000,config.CurJDUT,ar,de);
   if (ar<0) then ar:=ar+pi2;
   RiseSet(config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);

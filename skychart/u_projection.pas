@@ -87,7 +87,7 @@ procedure apparent_equatorial(var ra, de: double; c: Tconf_skychart;
 procedure apparent_equatorialV(var p1: coordvector; c: Tconf_skychart;
   aberration, lightdeflection: boolean);
 procedure mean_equatorial(var ra, de: double; c: Tconf_skychart;
-  aberration: boolean = True; lightdeflection: boolean = True);
+  aberration: boolean = True; lightdeflection: boolean = True; nutation: boolean = True);
 procedure StarParallax(var ra, de: double; px: double; eb: coordvector);
 procedure Ecl2Eq(l, b, e: double; var ar, de: double);
 procedure Eq2Ecl(ar, de, e: double; var l, b: double);
@@ -1519,7 +1519,7 @@ begin
 end;
 
 procedure mean_equatorial(var ra, de: double; c: Tconf_skychart;
-  aberration: boolean = True; lightdeflection: boolean = True);
+  aberration: boolean = True; lightdeflection: boolean = True; nutation: boolean = True);
 var
   da, dd, p1dv, pde, pdep1, w: double;
   cra, sra, cde, sde, ce, se, te, cp, sp, cls, sls: extended;
@@ -1573,7 +1573,7 @@ begin
     end;
   end;
   // nutation
-  if (c.nutl <> 0) or (c.nuto <> 0) then
+  if nutation and ((c.nutl <> 0) or (c.nuto <> 0)) then
   begin
     // rotate using transposed nutation matrix
     sofa_TR(c.NutMAT, NutMATR);

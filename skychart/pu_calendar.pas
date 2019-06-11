@@ -1516,7 +1516,7 @@ begin
           end;
         end;
         // Moon illumination
-        Planet.Moon(jdm, rat, det, dist, dkm, diam, phase, illum);
+        Planet.Moon(jdm, rat, det, dist, dkm, diam, phase, illum,config);
         cells[7, i] := FormatFloat(f2, illum);
       end;
       jda := jda + s;
@@ -1574,7 +1574,7 @@ var
         end;
         11:
         begin
-          planet.Moon(jda + jdt_ut, ar, de, dist, dkm, diam, phase, illum);
+          planet.Moon(jda + jdt_ut, ar, de, dist, dkm, diam, phase, illum,config);
           precession(jd2000, config.jdchart, ar, de);
           if config.PlanetParalaxe then
           begin

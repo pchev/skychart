@@ -4048,7 +4048,7 @@ begin
   end;
   if (otype = 'Ps') and (ipla = 11) then
   begin
-    sc.planet.Moon(njd, cra, cdec, dst, dkm, diam, phase, illum);
+    sc.planet.Moon(njd, cra, cdec, dst, dkm, diam, phase, illum,sc.cfgsc);
     precession(jd2000, sc.cfgsc.JDChart, cra, cdec);
     apparent_equatorial(cra, cdec, sc.cfgsc, False, False);
     if sc.cfgsc.PlanetParalaxe then
