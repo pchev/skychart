@@ -1127,18 +1127,17 @@ begin
   begin
     SunRect(t0, sun_arr[0], sun_arr[1], sun_arr[2]);
     Calc_Planet_de(t0, 10, planet_arr, True, 3, False);
-    t0 := t0 - tlight * (sqrt(planet_arr[0] * planet_arr[0] + planet_arr[1] *
-      planet_arr[1] + planet_arr[2] * planet_arr[2]));
+    dist := sqrt(planet_arr[0] * planet_arr[0] + planet_arr[1] * planet_arr[1] + planet_arr[2] * planet_arr[2]);
+    t0 := t0 - tlight * dist;
     Calc_Planet_de(t0, 10, planet_arr, True, 11, False);
     for i := 0 to 2 do
       w[i + 1] := planet_arr[i] + sun_arr[i];
-    dkm := km_au * sqrt(w[1] * w[1] + w[2] * w[2] + w[3] * w[3]);
     alpha := arctan2(w[2], w[1]);
     if (alpha < 0) then
       alpha := alpha + 2 * pi;
     pp := sqrt(w[1] * w[1] + w[2] * w[2]);
     delta := arctan(w[3] / pp);
-    dist := dkm / km_au;
+    dkm := dist * km_au;
     Feph_method := 'DE' + IntToStr(de_type);
   end
   else if (t0 > jdmin404) and (t0 < jdmax404) then
