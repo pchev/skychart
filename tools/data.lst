@@ -38,6 +38,8 @@ data/constellation/ReyConstL.cln
 data/constellation/ReyConstLCoord.cln
 data/constellation/TirionConstL.cln
 data/constellation/TirionConstLCoord.cln
+data/deltat
+data/deltat/deltat.txt
 data/earthmap
 data/earthmap/earthmap1k.jpg
 data/earthmap/earthmap4k.jpg

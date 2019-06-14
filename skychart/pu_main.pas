@@ -831,7 +831,7 @@ type
     procedure SendVoTable(client, tname, tid, url: string);
     procedure SendImageFits(client, imgname, imgid, url: string);
     procedure SendSelectRow(tableid, url, row: string);
-    procedure LoadDeltaT(fname: string);
+    procedure LoadDeltaT;
   end;
 
 var
@@ -1376,7 +1376,7 @@ begin
     InitDS2000;
     if VerboseMsg then
       WriteTrace('Load deltat');
-    LoadDeltaT(slash(privatedir)+'deltat.txt');
+    LoadDeltaT;
     // must read db configuration before to create this one!
     if VerboseMsg then
       WriteTrace('Create DB');
@@ -12696,13 +12696,20 @@ begin
   end;
 end;
 
-procedure Tf_main.LoadDeltaT(fname: string);
+procedure Tf_main.LoadDeltaT;
 var
   f: textfile;
   i, n: integer;
-  buf: string;
+  fname,dfn,buf: string;
   dat, del, err: single;
 begin
+  fname:=slash(privatedir)+'deltat.txt';
+  if not FileExists(fname) then begin
+    // try to copy distribution file
+    dfn :=slash(appdir)+ slash('data')+ slash('deltat')+'deltat.txt';
+    if FileExistsUTF8(dfn) then
+        CopyFile( dfn , fname);
+  end;
   if not FileExists(fname) then
   begin
     numdeltat := 0;
