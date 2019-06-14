@@ -4206,9 +4206,9 @@ begin
       txt := txt + blank + 'JD=' + formatfloat(f5, cjd - sc.cfgsc.DT_UT / 24) + html_br;
 
       err := DTminusUTError(y, m, d, sc.cfgsc);
-      if abs(err) > 60 then
+      if abs(err) > 0 then
       begin
-        txt := txt + html_b + rsDeltaTError + ': ' + htms_b + blank + plusminus + ARmtoStr(err / 3600) + html_br;
+        txt := txt + html_b + rsDeltaTError + ': ' + htms_b + blank + plusminus + ARtoStr(err / 3600) + html_br;
       end
       else if abs(err) > 10 then
       begin

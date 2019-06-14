@@ -104,7 +104,9 @@ function LONmToStr(l: double): string;
 function LONToStr(l: double): string;
 function SetCurrentTime(cfgsc: Tconf_skychart): boolean;
 function DTminusUT(year, month, day: integer; c: Tconf_skychart): double;
+function DTminusUTComp(year, month, day: integer; c: Tconf_skychart): double;
 function DTminusUTError(year, month, day: integer; c: Tconf_skychart): double;
+function DTminusUTErrorComp(year, month, day: integer; c: Tconf_skychart): double;
 procedure FormPos(form: TForm; x, y: integer);
 function ExecProcess(cmd: string; output: TStringList;
   ShowConsole: boolean = False): integer;
@@ -1979,12 +1981,51 @@ end;
 
 function DTminusUT(year, month, day: integer; c: Tconf_skychart): double;
 var
-  y, u, t: double;
+  i: integer;
+  y, u, v, t: double;
 begin
   if c.Force_DT_UT then
     Result := c.DT_UT_val
   else
   begin
+    y := year + (month - 1) / 12 + (day - 1) / 365.25;
+    if (numdeltat=0)or(y<deltat[0,0])or(y>=deltat[numdeltat-1,0]) then
+       result:=DTminusUTComp(year, month, day, c)
+    else begin
+       for i:=0 to numdeltat-1 do begin
+         if y<deltat[i,0] then begin
+            u:=(y-deltat[i-1,0])/(deltat[i,0]-deltat[i-1,0]);
+            v:=deltat[i,1]-deltat[i-1,1];
+            result:=(deltat[i-1,1]+v*u)/3600;
+            break;
+         end;
+       end;
+    end;
+  end;
+end;
+
+function DTminusUTError(year, month, day: integer; c: Tconf_skychart): double;
+var
+  i: integer;
+  y, u, v, t: double;
+begin
+  y := year + (month - 1) / 12 + (day - 1) / 365.25;
+  if (numdeltat=0)or(y<deltat[0,0])or(y>=deltat[numdeltat-1,0]) then
+     result:=DTminusUTErrorComp(year, month, day, c)
+  else begin
+     for i:=0 to numdeltat-1 do begin
+       if y<deltat[i,0] then begin
+          result:=deltat[i-1,2];
+          break;
+       end;
+     end;
+  end;
+end;
+
+function DTminusUTComp(year, month, day: integer; c: Tconf_skychart): double;
+var
+  y, u, t: double;
+begin
     { Reference  :
     NASA TP-2006-214141
     Five Millennium Canon of Solar Eclipses: -1999 to +3000 (2000 BCE to 3000 CE)
@@ -2115,13 +2156,13 @@ begin
         Result := (71 + t * 0.5) / 3600;  // (73-71)/4 = 0.5
       end;
 
-      2025..2049:
+      2027..2049:
       begin
-        t := y - 2000;                // 2025.0 -> 73.0
+        t := y - 2000;                // 2027.0 -> 73.32
         //2005-2050: result:=(62.92+t*(0.32217+t*(0.005589)))/3600;
-        // > 2025 : 62.92+(0.32217*25)+(0.005589*25^2)=74.46
-        // 62.92-74.46+73 = 61.46
-        Result := (61.46 + t * (0.32217 + t * (0.005589))) / 3600;
+        // > 2027 : 62.92+(0.32217*25)+(0.005589*25^2)=75.69
+        // 62.92-75.69+73 = 60.23
+        Result := (60.23 + t * (0.32217 + t * (0.005589))) / 3600;
       end;
 
       2050..2149:
@@ -2148,11 +2189,9 @@ begin
         // we don't need deltat for very distant epoch as there is no available ephemeris
     end;
 
-  end;
-
 end;
 
-function DTminusUTError(year, month, day: integer; c: Tconf_skychart): double;
+function DTminusUTErrorComp(year, month, day: integer; c: Tconf_skychart): double;
 const
   M = 2500;
   Q = 0.058;
@@ -2176,12 +2215,12 @@ begin
       Result := 0.8 * n * n;
     end;
 
-    1801..2050:
+    1801..2026:
     begin
       Result := 0;
     end;
 
-    2051..maxyeardt:
+    2027..maxyeardt:
     begin
       n := abs(y - 2000);
       Result := 365.25 * n * sqrt((n * Q / 3) * (1 + n / M)) / 1000;

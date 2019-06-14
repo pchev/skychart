@@ -417,14 +417,9 @@ begin
     s := '-';
   tzlabel.Caption := TzGMT2UTC(csc.tz.ZoneName) + blank + '(' + rsUT + s + timtostr(abs(h)) + ')';
   err := DTminusUTError(y, m, d, csc);
-  if abs(err) > 60 then
+  if abs(err) > 0 then
   begin
-    dterr.Caption := rsDeltaTError + ': ' + plusminus + trim(ARmtoStr(err / 3600));
-    dterr.Visible := True;
-  end
-  else if abs(err) > 10 then
-  begin
-    dterr.Caption := rsDeltaTError + ': ' + plusminus + IntToStr(round(err)) + blank + rsSec2;
+    dterr.Caption := rsDeltaTError + ': ' + plusminus + trim(ARtoStr(err / 3600));
     dterr.Visible := True;
   end
   else

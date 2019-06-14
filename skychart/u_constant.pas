@@ -1378,6 +1378,8 @@ var
   JPL_DE: array of integer;
   GregorianStart, GregorianStartJD: integer;
   ServerCoordSystem: TServerCoordSys;
+  deltat: array of array of single;   // date, deltat, error
+  numdeltat: integer;
 
 {$ifdef darwin}
   OpenFileCMD: string = 'open';

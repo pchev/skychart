@@ -831,6 +831,7 @@ type
     procedure SendVoTable(client, tname, tid, url: string);
     procedure SendImageFits(client, imgname, imgid, url: string);
     procedure SendSelectRow(tableid, url, row: string);
+    procedure LoadDeltaT(fname: string);
   end;
 
 var
@@ -1373,6 +1374,9 @@ begin
     if VerboseMsg then
       WriteTrace('InitDS2000');
     InitDS2000;
+    if VerboseMsg then
+      WriteTrace('Load deltat');
+    LoadDeltaT(slash(privatedir)+'deltat.txt');
     // must read db configuration before to create this one!
     if VerboseMsg then
       WriteTrace('Create DB');
@@ -12689,6 +12693,45 @@ begin
       if arg.Count > 0 then
         Result := msgOK;
     end;
+  end;
+end;
+
+procedure Tf_main.LoadDeltaT(fname: string);
+var
+  f: textfile;
+  i, n: integer;
+  buf: string;
+  dat, del, err: single;
+begin
+  if not FileExists(fname) then
+  begin
+    numdeltat := 0;
+    setlength(deltat, 0, 0);
+    exit;
+  end;
+  Filemode := 0;
+  assignfile(f, fname);
+  try
+    reset(f);
+    n := 0;
+    // first loop to get the size
+    repeat
+      readln(f, buf);
+      Inc(n);
+    until EOF(f);
+    setlength(deltat, n, 3);
+    // read the file now
+    reset(f);
+    for i := 0 to n - 1 do
+    begin
+      readln(f, dat, del, err);
+      deltat[i,0]:=dat;
+      deltat[i,1]:=del;
+      deltat[i,2]:=err;
+    end;
+    numdeltat:=n;
+  finally
+    closefile(f);
   end;
 end;
 
