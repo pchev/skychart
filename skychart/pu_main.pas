@@ -12704,7 +12704,7 @@ var
   dat, del, err: single;
 begin
   fname:=slash(privatedir)+'deltat.txt';
-  if not FileExists(fname) then begin
+  if not FileExistsUTF8(fname) then begin
     // try to copy distribution file
     dfn :=slash(appdir)+ slash('data')+ slash('deltat')+'deltat.txt';
     if FileExistsUTF8(dfn) then
