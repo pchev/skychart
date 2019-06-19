@@ -2151,9 +2151,12 @@ begin
     cplot.LabelSize[i] := DoScaleX(DefaultFontSize);
     csc.LabelMagDiff[i] := 4;
     csc.ShowLabel[i] := True;
+    csc.LabelOrient[i] := 0;
   end;
   csc.LabelMagDiff[1] := 3;
-  csc.LabelMagDiff[5] := 2;
+  csc.LabelMagDiff[5] := 0;
+  csc.LabelMagDiff[10] := 2;
+  csc.LabelMagDiff[11] := 0;
   cplot.LabelColor[6] := clYellow;
   cplot.LabelColor[7] := clSilver;
   cplot.LabelSize[6] := cplot.LabelSize[6] + 2;

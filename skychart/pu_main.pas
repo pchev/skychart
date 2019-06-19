@@ -6028,7 +6028,9 @@ begin
   end;
   def_cfgsc.ObslistAlLabels := True;
   def_cfgsc.LabelMagDiff[1] := 3;
-  def_cfgsc.LabelMagDiff[5] := 2;
+  def_cfgsc.LabelMagDiff[5] := 0;
+  def_cfgsc.LabelMagDiff[10] := 2;
+  def_cfgsc.LabelMagDiff[11] := 0;
   def_cfgplot.LabelColor[6] := clYellow;
   def_cfgplot.LabelColor[7] := clSilver;
   def_cfgplot.LabelSize[6] := def_cfgplot.LabelSize[6] + 2;
