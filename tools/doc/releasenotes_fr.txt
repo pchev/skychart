@@ -2,6 +2,7 @@ Version 4.1.1 beta, Notes de la version
 
 Nouvelles fonctions:
 
+- Réglages spéparés pour les labels des astéroïdes et comètes.
 - La sélection du serveur et du pilote INDI est maintenant dans la boîte de connexion. L'option pour lancer indistarter est supprimée.
 - Affiche un avertissement dans le titre de la fenêtre si le programme est exécuté en tant qu’administrateur
 - Ajout d'une option pour ne pas filtrer les nébuleuses brillante par magnitude.

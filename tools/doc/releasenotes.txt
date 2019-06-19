@@ -2,6 +2,7 @@ Version 4.1.1 beta, release Notes
 
 New functions:
 
+- Separate label setting for Asteroid and Comet.
 - INDI server and driver selection is now in the connection box. Option to launch indistarter is removed.
 - Show a warning in window title if running as administrator
 - Add option to not filter the bright nebula by magnitude
