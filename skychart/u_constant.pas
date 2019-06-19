@@ -368,7 +368,7 @@ const
   s6 = '+0.000000;-0.000000;+0.000000';
   dateiso = 'yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz';
   labspacing = 6;
-  numlabtype = 9;
+  numlabtype = 11;
   numfont = 7;
   NumSimObject = 13;
   MaxField = 10;
@@ -1093,13 +1093,13 @@ type
     stardyn, starsize, prtres, starplot, nebplot, plaplot: integer;
     Nebgray, NebBright, starshapesize, starshapew: integer;
     Invisible, AutoSkycolor, TransparentPlanet, UseBMP, AntiAlias: boolean;
-    FontName: array [1..numfont] of string;
     // 1=grid 2=label 3=legend 4=status 5=list 6=prt 7=symbol
+    FontName: array [1..numfont] of string;
     FontSize: array [1..numfont] of integer;
     FontBold: array [1..numfont] of boolean;
     FontItalic: array [1..numfont] of boolean;
+    // 1=star 2=var 3=mult 4=neb 5=planet 6=const 7=misc 8=chart info 9=obslist 10=asteroid 11=comet
     LabelColor: array[1..numlabtype] of Tcolor;
-    // 1=star 2=var 3=mult 4=neb 5=solsys 6=const 7=misc 8=chart info
     LabelSize: array[1..numlabtype] of integer;
     outradius, contrast, saturation: integer;
     xmin, xmax, ymin, ymax: integer;

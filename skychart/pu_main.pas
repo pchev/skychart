@@ -8046,6 +8046,16 @@ begin
       def_cfgsc.ProjOptions[i].CoordType := def_cfgsc.CoordType ;
     end;
   end;
+  if Config_Version < '4.1m' then
+  begin
+    for i:=10 to 11 do begin
+       def_cfgsc.LabelMagDiff[i]:=def_cfgsc.LabelMagDiff[5];
+       def_cfgsc.LabelOrient[i]:=def_cfgsc.LabelOrient[5];
+       def_cfgsc.ShowLabel[i]:=def_cfgsc.ShowLabel[5];
+       def_cfgplot.LabelColor[i]:=def_cfgplot.LabelColor[5];
+       def_cfgplot.LabelSize[i]:=def_cfgplot.LabelSize[5];
+    end;
+  end;
 end;
 
 procedure Tf_main.SaveVersion;

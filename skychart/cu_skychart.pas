@@ -2754,15 +2754,15 @@ begin
           (yy < cfgsc.Ymax) then
         begin
           Fplot.PlotCircle(xx - r, yy - r, xx + r, yy + r, Fplot.cfgplot.Color[20], False);
-          if mag >= (cfgsc.StarMagMax + cfgsc.AstMagDiff - cfgsc.LabelMagDiff[5]) then
+          if mag >= (cfgsc.StarMagMax + cfgsc.AstMagDiff - cfgsc.LabelMagDiff[10]) then
           begin
             lis := cfgsc.AsteroidMark[i] + FormatFloat(f3, ra) + FormatFloat(f3, de);
             lid := rshash(lis, $7FFFFFFF);
             ltxt := cfgsc.AsteroidMark[i];
-            lori := labrotation(ra, de, 5, cfgsc);
+            lori := labrotation(ra, de, 10, cfgsc);
             lopt := True;
             lalign := laLeft;
-            SetLabel(lid, xx, yy, round(r), 2, 5, ltxt, lalign, lori, 4, lopt);
+            SetLabel(lid, xx, yy, round(r), 2, 10, ltxt, lalign, lori, 4, lopt);
           end;
           Result := True;
         end;
@@ -2803,14 +2803,14 @@ begin
               continue;
             Fplot.PlotAsteroid(xx, yy, cfgsc.AstSymbol, magn);
             if ((doSimLabel(cfgsc.SimNb, j, cfgsc.SimLabel)) and
-              (magn < cfgsc.StarMagMax + cfgsc.AstMagDiff - cfgsc.LabelMagDiff[5])) then
+              (magn < cfgsc.StarMagMax + cfgsc.AstMagDiff - cfgsc.LabelMagDiff[10])) then
             begin
               lis := cfgsc.AsteroidName[j, i, 1] + FormatFloat(f3, cfgsc.AsteroidLst[j, i, 6]) + FormatFloat(f3, cfgsc.AsteroidLst[j, i, 7]);
               lid := rshash(lis, $7FFFFFFF);
               if (cfgsc.SimNb = 1) or (not cfgsc.SimObject[12]) then
               begin
                 ltxt := cfgsc.AsteroidName[j, i, 2];
-                lori := labrotation(ra, Dec, 5, cfgsc);
+                lori := labrotation(ra, Dec, 10, cfgsc);
                 lopt := True;
                 lalign := laLeft;
               end
@@ -2844,7 +2844,7 @@ begin
                 end;
                 lopt := False;
               end;
-              SetLabel(lid, xx, yy, 0, 2, 5, ltxt, lalign, lori, 4, lopt);
+              SetLabel(lid, xx, yy, 0, 2, 10, ltxt, lalign, lori, 4, lopt);
             end;
           end;
         end;
@@ -2889,15 +2889,15 @@ begin
           (yy < cfgsc.Ymax) then
         begin
           Fplot.PlotCircle(xx - r, yy - r, xx + r, yy + r, Fplot.cfgplot.Color[21], False);
-          if mag >= (cfgsc.StarMagMax + cfgsc.ComMagDiff - cfgsc.LabelMagDiff[5]) then
+          if mag >= (cfgsc.StarMagMax + cfgsc.ComMagDiff - cfgsc.LabelMagDiff[11]) then
           begin
             lis := cfgsc.CometMark[i] + FormatFloat(f3, ra) + FormatFloat(f3, de);
             lid := rshash(lis, $7FFFFFFF);
             ltxt := cfgsc.CometMark[i];
-            lori := labrotation(ra, de, 5, cfgsc);
+            lori := labrotation(ra, de, 11, cfgsc);
             lopt := True;
             lalign := laLeft;
-            SetLabel(lid, xx, yy, round(r), 2, 5, ltxt, lalign, lori, 4, lopt);
+            SetLabel(lid, xx, yy, round(r), 2, 11, ltxt, lalign, lori, 4, lopt);
           end;
           Result := True;
         end;
@@ -2935,7 +2935,7 @@ begin
               continue;
             if ((doSimLabel(cfgsc.SimNb, j, cfgsc.SimLabel)) and
               ((cfgsc.SimNb > 1) or (cfgsc.CometLst[j, i, 3] < cfgsc.StarMagMax + cfgsc.ComMagDiff -
-              cfgsc.LabelMagDiff[5]))) then
+              cfgsc.LabelMagDiff[11]))) then
             begin
               lis := cfgsc.CometName[j, i, 1] + FormatFloat(f3, cfgsc.CometLst[j, i, 9]) + FormatFloat(f3, cfgsc.CometLst[j, i, 10]);
               lid := rshash(lis, $7FFFFFFF);
@@ -2944,7 +2944,7 @@ begin
               if (cfgsc.SimNb = 1) or (not cfgsc.SimObject[13]) then
               begin
                 ltxt := cfgsc.CometName[j, i, 2];
-                lori := labrotation(cfgsc.CometLst[j, i, 1], cfgsc.CometLst[j, i, 2], 5, cfgsc);
+                lori := labrotation(cfgsc.CometLst[j, i, 1], cfgsc.CometLst[j, i, 2], 11, cfgsc);
                 lopt := True;
                 lalign := laLeft;
               end
@@ -2977,7 +2977,7 @@ begin
                 end;
                 lopt := False;
               end;
-              SetLabel(lid, xx, yy, sz, 2, 5, ltxt, lalign, lori, 4, lopt);
+              SetLabel(lid, xx, yy, sz, 2, 11, ltxt, lalign, lori, 4, lopt);
             end;
             if projection(cfgsc.CometLst[j, i, 5], cfgsc.CometLst[j, i, 6], x1, y1, True, cfgsc) then
               WindowXY(x1, y1, cxx, cyy, cfgsc)
