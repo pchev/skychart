@@ -608,8 +608,8 @@ begin
   obsdetail.lat := csc.ObsLatitude;
   obsdetail.lon := csc.ObsLongitude;
   obsdetail.alt := csc.ObsAltitude;
-  obsdetail.horizonfn := cmain.HorizonFile;
-  obsdetail.horizonpictfn := cmain.HorizonPictureFile;
+  obsdetail.horizonfn := csc.HorizonFile;
+  obsdetail.horizonpictfn := csc.HorizonPictureFile;
   obsdetail.pictureangleoffset := csc.HorizonPictureRotate;
   obsdetail.showhorizonline := csc.ShowHorizon;
   obsdetail.showhorizonpicture := csc.ShowHorizonPicture;
@@ -716,8 +716,8 @@ begin
   csc.ObsLatitude := TObsDetail(cmain.ObsNameList.Objects[i]).lat;
   csc.ObsLongitude := TObsDetail(cmain.ObsNameList.Objects[i]).lon;
   csc.ObsAltitude := TObsDetail(cmain.ObsNameList.Objects[i]).alt;
-  cmain.HorizonFile := TObsDetail(cmain.ObsNameList.Objects[i]).horizonfn;
-  cmain.HorizonPictureFile := TObsDetail(cmain.ObsNameList.Objects[i]).horizonpictfn;
+  csc.HorizonFile := TObsDetail(cmain.ObsNameList.Objects[i]).horizonfn;
+  csc.HorizonPictureFile := TObsDetail(cmain.ObsNameList.Objects[i]).horizonpictfn;
   csc.HorizonPictureRotate := TObsDetail(cmain.ObsNameList.Objects[i]).pictureangleoffset;
   csc.ShowHorizon := TObsDetail(cmain.ObsNameList.Objects[i]).showhorizonline;
   csc.ShowHorizonPicture := TObsDetail(cmain.ObsNameList.Objects[i]).showhorizonpicture;
@@ -1030,12 +1030,12 @@ end;
 procedure Tf_config_observatory.ShowHorizon;
 begin
   horizonopaque.Checked := not csc.horizonopaque;
-  horizonfile.Text := cmain.horizonfile;
+  horizonfile.Text := csc.horizonfile;
   horizonfile.InitialDir := slash(appdir) + 'data' + pathdelim + 'horizon';
   displayhorizon.Checked := csc.ShowHorizon;
-  horizonpicturefile.Text := cmain.HorizonPictureFile;
+  horizonpicturefile.Text := csc.HorizonPictureFile;
   horizonpicturefile.InitialDir := slash(HomeDir);
-  if uppercase(ExtractFileExt(cmain.HorizonPictureFile)) = '.BMP' then
+  if uppercase(ExtractFileExt(csc.HorizonPictureFile)) = '.BMP' then
     horizonpicturefile.FilterIndex := 1
   else
     horizonpicturefile.FilterIndex := 0;
@@ -1085,14 +1085,14 @@ procedure Tf_config_observatory.horizonfileAcceptFileName(Sender: TObject;
 begin
   if LockChange then
     exit;
-  cmain.horizonfile := Value;
+  csc.horizonfile := Value;
 end;
 
 procedure Tf_config_observatory.horizonfileChange(Sender: TObject);
 begin
   if LockChange then
     exit;
-  cmain.horizonfile := horizonfile.Text;
+  csc.horizonfile := horizonfile.Text;
 end;
 
 procedure Tf_config_observatory.horizonpicturefileAcceptFileName(Sender: TObject;
@@ -1100,7 +1100,7 @@ procedure Tf_config_observatory.horizonpicturefileAcceptFileName(Sender: TObject
 begin
   if LockChange then
     exit;
-  cmain.HorizonPictureFile := Value;
+  csc.HorizonPictureFile := Value;
   GetPictureRotation;
 end;
 
@@ -1108,7 +1108,7 @@ procedure Tf_config_observatory.horizonpicturefileChange(Sender: TObject);
 begin
   if LockChange then
     exit;
-  cmain.HorizonPictureFile := horizonpicturefile.Text;
+  csc.HorizonPictureFile := horizonpicturefile.Text;
   GetPictureRotation;
 end;
 
@@ -1128,7 +1128,7 @@ var
   rot: single;
   fconfig: TIniFile;
 begin
-  fn := slash(ExtractFilePath(cmain.HorizonPictureFile)) + 'landscape.ini';
+  fn := slash(ExtractFilePath(csc.HorizonPictureFile)) + 'landscape.ini';
   if FileExists(fn) then
   begin
     fconfig := TIniFile.Create(fn);

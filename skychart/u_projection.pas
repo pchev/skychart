@@ -456,7 +456,7 @@ begin
     end
     else
     begin
-      if (not c.ShowHorizon) or (c.horizonlist = nil) then
+      if (not c.ShowHorizon) then
         if c.ShowHorizonDepression then
           h := c.ObsHorizonDepression
         else
@@ -474,8 +474,8 @@ begin
           i2 := 1
         else
           i2 := a2;
-        d1 := c.horizonlist^[i1];
-        d2 := c.horizonlist^[i2];
+        d1 := c.horizonlist[i1];
+        d2 := c.horizonlist[i2];
         h := d1 + (a - a1) * (d2 - d1) / (a2 - a1);
       end;
       if de < h - musec then
@@ -2016,7 +2016,7 @@ begin
   if i=0 then begin
     aa:=round(rmod(azr + pi, pi2)*rad2deg);
     if (aa<0)or(aa>360) then exit;
-    ch:=c.horizonlist^[aa];
+    ch:=c.horizonlist[aa];
     while h<ch do begin
      hhr:=hhr+(1/60);
      st:=SidTim(c.jd0,hhr-c.TimeZone,c.ObsLongitude);
@@ -2025,7 +2025,7 @@ begin
      aa:=round(a*rad2deg);
      if aa=360 then aa:=0;
      if (aa>180)or(aa<0)or(aa>360) then exit;
-     ch:=c.horizonlist^[aa];
+     ch:=c.horizonlist[aa];
     end;
     hr:=rmod(hhr+24,24);
     result:=true;
@@ -2051,7 +2051,7 @@ begin
   if i=0 then begin
     aa:=round(rmod(azs + pi, pi2)*rad2deg);
     if (aa<0)or(aa>360) then exit;
-    ch:=c.horizonlist^[aa];
+    ch:=c.horizonlist[aa];
     while h<ch do begin
      hhs:=hhs-(1/60);
      st:=SidTim(c.jd0,hhs-c.TimeZone,c.ObsLongitude);
@@ -2060,7 +2060,7 @@ begin
      aa:=round(a*rad2deg);
      if aa=0 then aa:=360;
      if (aa<180)or(aa<0)or(aa>360) then exit;
-     ch:=c.horizonlist^[aa];
+     ch:=c.horizonlist[aa];
     end;
     hs:=rmod(hhs+24,24);
     result:=true;

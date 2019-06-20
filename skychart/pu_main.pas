@@ -1401,14 +1401,7 @@ begin
       catalog.LoadConstellation(cfgm.Constellationpath, Lang);
     catalog.LoadConstL(cfgm.ConstLfile);
     catalog.LoadConstB(cfgm.ConstBfile);
-    catalog.LoadHorizon(cfgm.horizonfile, def_cfgsc);
-    catalog.LoadMilkywaydot(slash(appdir) + slash('data') + slash('milkyway') +
-      'milkyway.dat');
-    if def_cfgsc.ShowHorizonPicture then begin
-      if VerboseMsg then
-         WriteTrace('Load horizon picture');
-      catalog.LoadHorizonPicture(cfgm.HorizonPictureFile);
-    end;
+    catalog.LoadMilkywaydot(slash(appdir) + slash('data') + slash('milkyway') + 'milkyway.dat');
     catalog.LoadStarName(slash(appdir) + slash('data') + slash('common_names'), Lang);
     f_search.cfgshr := catalog.cfgshr;
     f_search.showpluto := def_cfgsc.ShowPluto;
@@ -5389,9 +5382,6 @@ begin
   catalog.LoadStarName(slash(appdir) + slash('data') + slash('common_names'), Lang);
   catalog.LoadConstL(cfgm.ConstLfile);
   catalog.LoadConstB(cfgm.ConstBfile);
-  catalog.LoadHorizon(cfgm.horizonfile, def_cfgsc);
-  if (csc <> nil) and (cfgm <> nil) and csc.ShowHorizonPicture then
-    catalog.LoadHorizonPicture(cfgm.HorizonPictureFile);
   f_search.init;
   if dbchange then
     ConnectDB;
@@ -6031,6 +6021,8 @@ begin
   def_cfgsc.LabelMagDiff[5] := 0;
   def_cfgsc.LabelMagDiff[10] := 2;
   def_cfgsc.LabelMagDiff[11] := 0;
+  def_cfgsc.horizonfile := '';
+  def_cfgsc.HorizonPictureFile := '';
   def_cfgplot.LabelColor[6] := clYellow;
   def_cfgplot.LabelColor[7] := clSilver;
   def_cfgplot.LabelSize[6] := def_cfgplot.LabelSize[6] + 2;
@@ -6048,8 +6040,6 @@ begin
   cfgm.ConstBfile := 'data' + Pathdelim + 'constellation' + Pathdelim + 'constb.cby';
   cfgm.EarthMapFile := 'data' + Pathdelim + 'earthmap' + Pathdelim + 'earthmap1k.jpg';
   cfgm.PlanetDir := 'data' + Pathdelim + 'planet';
-  cfgm.horizonfile := '';
-  cfgm.HorizonPictureFile := '';
   def_cfgplot.UseBMP := True;
   def_cfgplot.AntiAlias := True;
   def_cfgplot.invisible := False;
@@ -7088,6 +7078,8 @@ begin
         csc.ShowHorizonDepression :=
           ReadBool(section, 'ShowHorizonDepression', csc.ShowHorizonDepression);
         csc.ShowHorizon0 := ReadBool(section, 'ShowHorizon0', csc.ShowHorizon0);
+        csc.horizonfile := ReadString(section, 'horizonfile', csc.horizonfile);
+        csc.HorizonPictureFile := ReadString(section, 'HorizonPictureFile', csc.HorizonPictureFile);
         csc.ShowEqGrid := ReadBool(section, 'ShowEqGrid', csc.ShowEqGrid);
         csc.ShowLabelAll := ReadBool(section, 'ShowLabelAll', csc.ShowLabelAll);
         csc.EditLabels := ReadBool(section, 'EditLabels', csc.EditLabels);
@@ -7449,9 +7441,6 @@ begin
         buf := ExtractSubPath(ConfigAppdir, buf);
         if DirectoryExists(buf) then
           cfgm.PlanetDir := buf;
-        cfgm.horizonfile := ReadString(section, 'horizonfile', cfgm.horizonfile);
-        cfgm.HorizonPictureFile :=
-          ReadString(section, 'HorizonPictureFile', cfgm.HorizonPictureFile);
         cfgm.ServerIPaddr := ReadString(section, 'ServerIPaddr', cfgm.ServerIPaddr);
         cfgm.ServerIPport := ReadString(section, 'ServerIPport', cfgm.ServerIPport);
         cfgm.IndiPanelCmd := ReadString(section, 'IndiPanelCmd', cfgm.IndiPanelCmd);
@@ -7825,6 +7814,8 @@ procedure Tf_main.UpdateConfig;
 var
   i: integer;
   b1, b2: boolean;
+  inif: TMemIniFile;
+  section, buf: string;
 begin
   if Config_Version < '3.0.1.3d' then
   begin
@@ -8057,6 +8048,18 @@ begin
        def_cfgplot.LabelColor[i]:=def_cfgplot.LabelColor[5];
        def_cfgplot.LabelSize[i]:=def_cfgplot.LabelSize[5];
     end;
+  end;
+  if Config_Version < '4.1n' then
+  begin
+    inif := TMeminifile.Create(Configfile);
+    def_cfgsc.horizonfile := inif.ReadString('main', 'horizonfile', '');
+    def_cfgsc.HorizonPictureFile := inif.ReadString('main', 'HorizonPictureFile', '');
+    inif.DeleteKey('main', 'horizonfile');
+    inif.DeleteKey('main', 'HorizonPictureFile');
+    inif.WriteString('default_chart', 'horizonfile', def_cfgsc.horizonfile);
+    inif.WriteString('default_chart', 'HorizonPictureFile', def_cfgsc.HorizonPictureFile);
+    inif.UpdateFile;
+    inif.Free;
   end;
 end;
 
@@ -8387,6 +8390,8 @@ begin
         WriteBool(section, 'FillHorizon', csc.FillHorizon);
         WriteBool(section, 'ShowHorizonDepression', csc.ShowHorizonDepression);
         WriteBool(section, 'ShowHorizon0', csc.ShowHorizon0);
+        WriteString(section, 'horizonfile', csc.horizonfile);
+        WriteString(section, 'HorizonPictureFile', csc.HorizonPictureFile);
         WriteBool(section, 'ShowEqGrid', csc.ShowEqGrid);
         WriteBool(section, 'ShowLabelAll', csc.ShowLabelAll);
         WriteBool(section, 'EditLabels', csc.EditLabels);
@@ -8640,8 +8645,6 @@ begin
         WriteString(section, 'ConstBfile', cfgm.ConstBfile);
         WriteString(section, 'EarthMapFile', cfgm.EarthMapFile);
         WriteString(section, 'PlanetDir', cfgm.PlanetDir);
-        WriteString(section, 'horizonfile', cfgm.horizonfile);
-        WriteString(section, 'HorizonPictureFile', cfgm.HorizonPictureFile);
         WriteString(section, 'ServerIPaddr', cfgm.ServerIPaddr);
         WriteString(section, 'ServerIPport', cfgm.ServerIPport);
         WriteString(section, 'IndiPanelCmd', cfgm.IndiPanelCmd);

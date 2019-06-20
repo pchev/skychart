@@ -218,8 +218,6 @@ type
     procedure LoadConstL(fname: string);
     procedure LoadConstB(fname: string);
     procedure LoadMilkywaydot(fname: string);
-    procedure LoadHorizon(fname: string; cfgsc: Tconf_skychart);
-    procedure LoadHorizonPicture(fname: string);
     procedure LoadStarName(fpath, lang: string);
     function LongLabelGreek(txt: string): string;
     function GenitiveConst(txt: string): string;
@@ -5399,128 +5397,6 @@ begin
   end;
 end;
 
-procedure Tcatalog.LoadHorizonPicture(fname: string);
-begin
-  try
-    if cfgshr.horizonpicturevalid and (fname = cfgshr.horizonpicturename) then
-      exit;
-    cfgshr.horizonpicturevalid := False;
-    cfgshr.horizonpicturename := '';
-    if fname = '' then
-      exit;
-    if ExtractFilePath(fname) = '' then
-      fname := slash(Appdir) + fname;
-    if FileExists(fname) then
-    begin
-      cfgshr.horizonpicture.LoadFromFile(fname);
-      if uppercase(ExtractFileExt(fname)) = '.BMP' then
-        cfgshr.horizonpicture.ReplaceColor(ColorToBGRA(clFuchsia), BGRAPixelTransparent);
-      cfgshr.horizonpicturevalid := True;
-      cfgshr.horizonpicturename := fname;
-    end
-    else
-    begin
-      cfgshr.horizonpicture.SetSize(1, 1);
-      cfgshr.horizonpicturevalid := False;
-      cfgshr.horizonpicturename := '';
-    end;
-  except
-    cfgshr.horizonpicturevalid := False;
-    cfgshr.horizonpicturename := '';
-  end;
-end;
-
-procedure Tcatalog.LoadHorizon(fname: string; cfgsc: Tconf_skychart);
-var
-  de, d0, d1, d2: single;
-  i, i1, i2: integer;
-  f: textfile;
-  buf: string;
-begin
-  cfgsc.HorizonMax := musec;  // require in cfgsc for horizon clipping in u_projection
-  cfgsc.HorizonMin := pid2;
-  for i := 1 to 360 do
-    cfgshr.horizonlist[i] := 0;
-  if fileexists(fname) then
-  begin
-    i1 := 0;
-    i2 := 0;
-    d1 := 0;
-    d0 := 0;
-    try
-      Filemode := 0;
-      assignfile(f, fname);
-      reset(f);
-      // get first point
-      repeat
-        readln(f, buf)
-      until EOF(f) or ((trim(buf) <> '') and (buf[1] <> '#'));
-      if (trim(buf) = '') or (buf[1] = '#') then
-        exit;
-      i1 := StrToInt(trim(words(buf, blank, 1, 1)));
-      d1 := strtofloat(trim(words(buf, blank, 2, 1)));
-      if d1 > 90 then
-        d1 := 90;
-      if d1 < 0 then
-        d1 := 0;
-      if i1 <> 0 then
-      begin
-        reset(f);
-        i1 := 0;
-        d1 := 0;
-      end;
-      i2 := 0;
-      d0 := d1;
-      // process each point
-      while (not EOF(f)) and (i2 < 359) do
-      begin
-        repeat
-          readln(f, buf)
-        until EOF(f) or ((trim(buf) <> '') and (buf[1] <> '#'));
-        if (trim(buf) = '') or (buf[1] = '#') then
-          break;
-        i2 := StrToInt(trim(words(buf, blank, 1, 1)));
-        d2 := strtofloat(trim(words(buf, blank, 2, 1)));
-        if i2 > 359 then
-          i2 := 359;
-        if i1 >= i2 then
-          continue;
-        if d2 > 90 then
-          d2 := 90;
-        if d2 < 0 then
-          d2 := 0;
-        for i := i1 to i2 do
-        begin
-          de := deg2rad * (d1 + (i - i1) * (d2 - d1) / (i2 - i1));
-          cfgshr.horizonlist[i + 1] := de;
-          cfgsc.HorizonMax := max(cfgsc.HorizonMax, de);
-          cfgsc.HorizonMin := min(cfgsc.HorizonMin, de);
-        end;
-        i1 := i2;
-        d1 := d2;
-      end;
-
-    finally
-      closefile(f);
-      // fill last point
-      if i2 < 359 then
-      begin
-        for i := i1 to 359 do
-        begin
-          de := deg2rad * (d1 + (i - i1) * (d0 - d1) / (359 - i1));
-          cfgshr.horizonlist[i + 1] := de;
-          cfgsc.HorizonMax := max(cfgsc.HorizonMax, de);
-          cfgsc.HorizonMin := min(cfgsc.HorizonMin, de);
-        end;
-      end;
-      cfgshr.horizonlist[0] := cfgshr.horizonlist[1];
-      cfgshr.horizonlist[361] := cfgshr.horizonlist[1];
-    end;
-  end;
-  cfgsc.horizonlist := @(cfgshr.horizonlist);
-  // require in cfgsc for horizon clipping in u_projection, this also let the door open for a specific horizon for each chart but this is not implemented at this time.
-
-end;
 
 procedure Tcatalog.LoadStarName(fpath, lang: string);
 

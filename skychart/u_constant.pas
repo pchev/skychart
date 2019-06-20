@@ -940,10 +940,6 @@ type
     Milkywaydotradius: single;
     MilkywaydotNum: integer;
     Milkywaydot: array of TMilkywaydot;
-    horizonlist: Thorizonlist;
-    horizonpicture: TBGRABitmap;
-    horizonpicturename: string;
-    horizonpicturevalid: boolean;
     StarName: array of string;
     StarNameHR: array of integer;
     ffove_tfl, ffove_efl, ffove_efv, ffovc_tfl, ffovc_px, ffovc_py,
@@ -1057,7 +1053,11 @@ type
     CometLst: Tcometlst;
     AsteroidName: TasteroidName;
     CometName: Tcometname;
-    horizonlist: Phorizonlist;
+    horizonlist: Thorizonlist;
+    horizonpicture: TBGRABitmap;
+    HorizonFile, HorizonPictureFile: string;
+    horizonlistname, horizonpicturename: string;
+    horizonpicturevalid: boolean;
     nummodlabels, posmodlabels, numcustomlabels, poscustomlabels: integer;
     modlabels: array[1..maxmodlabels] of Tmodlabel;
     customlabels: array[1..maxmodlabels] of Tcustomlabel;
@@ -1155,7 +1155,7 @@ type
   Tconf_main = class(TObject)    // main form setting
   public
     prtname, language, Constellationpath, ConstLfile, ConstBfile,
-    EarthMapFile, HorizonFile, HorizonPictureFile, Planetdir: string;
+    EarthMapFile, Planetdir: string;
     db, dbhost, dbuser, dbpass, ImagePath, persdir: string;
     starshape_file, KioskPass: string;
     Paper, PrinterResolution, PrintMethod, PrintColor, PrintBmpWidth,
@@ -1992,8 +1992,6 @@ end;
 constructor Tconf_shared.Create;
 begin
   inherited Create;
-  horizonpicture := TBGRABitmap.Create;
-  horizonpicturevalid := False;
 end;
 
 destructor Tconf_shared.Destroy;
@@ -2005,7 +2003,6 @@ begin
   Setlength(Milkywaydot, 0);
   Setlength(StarName, 0);
   Setlength(StarNameHR, 0);
-  horizonpicture.Free;
   inherited Destroy;
 end;
 
@@ -2087,11 +2084,6 @@ begin
     StarName[i] := Source.StarName[i];
     StarNameHR[i] := Source.StarNameHR[i];
   end;
-  for i := 0 to 360 do
-    horizonlist[i] := Source.horizonlist[i];
-  horizonpicture.Assign(Source.horizonpicture);
-  horizonpicturevalid := Source.horizonpicturevalid;
-  horizonpicturename := Source.horizonpicturename;
   ffove_tfl := Source.ffove_tfl;
   ffove_efl := Source.ffove_efl;
   ffove_efv := Source.ffove_efv;
@@ -2107,6 +2099,9 @@ end;
 constructor Tconf_skychart.Create;
 begin
   inherited Create;
+  horizonpicture := TBGRABitmap.Create;
+  horizonpicturevalid := False;
+  horizonlistname := '';
   tz := TCdCTimeZone.Create;
   ncircle := 10;
   CurJDUT := 0;
@@ -2139,6 +2134,7 @@ begin
   SetLength(AsteroidName, 0);
   SetLength(CometName, 0);
   tz.Free;
+  horizonpicture.Free;
   inherited Destroy;
 end;
 
@@ -2628,6 +2624,14 @@ begin
     ArchiveDir[i] := Source.ArchiveDir[i];
   for i := 1 to MaxArchiveDir do
     ArchiveDirActive[i] := Source.ArchiveDirActive[i];
+  HorizonFile := Source.HorizonFile;
+  HorizonPictureFile := Source.HorizonPictureFile;
+  for i := 0 to 360 do
+    horizonlist[i] := Source.horizonlist[i];
+  horizonpicture.Assign(Source.horizonpicture);
+  horizonpicturevalid := Source.horizonpicturevalid;
+  horizonpicturename := Source.horizonpicturename;
+  horizonlistname := Source.horizonlistname;
 end;
 
 { Tconf_plot }
@@ -2805,8 +2809,6 @@ begin
   ConstLfile := Source.ConstLfile;
   ConstBfile := Source.ConstBfile;
   EarthMapFile := Source.EarthMapFile;
-  HorizonFile := Source.HorizonFile;
-  HorizonPictureFile := Source.HorizonPictureFile;
   Planetdir := Source.Planetdir;
   db := Source.db;
   dbhost := Source.dbhost;

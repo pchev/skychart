@@ -182,6 +182,8 @@ type
     property OnShowDetailXY: Tint2func read FShowDetailXY write FShowDetailXY;
     function GetChartInfo(sep: string = blank): string;
     function GetChartPos: string;
+    procedure LoadHorizon;
+    procedure LoadHorizonPicture(fname: string);
     property Image: TCanvas write SetImage;
     property onRefreshImage: TNotifyEvent read FRefreshImage write FRefreshImage;
     property onUpdObsListTime: TNotifyEvent read FUpdObsListTime write FUpdObsListTime;
@@ -798,8 +800,10 @@ begin
   // diurnal abberation
   sla_GEOC(p, cfgsc.ObsAltitude, cfgsc.ObsRAU, cfgsc.ObsZAU);
   cfgsc.Diurab := PI2 * cfgsc.ObsRAU * SOLSID / C;
-  cfgsc.ShowHorizonPicture := cfgsc.ShowHorizonPicture and
-    Fcatalog.cfgshr.horizonpicturevalid;
+  // horizon drawing
+  if cfgsc.HorizonFile<>'' then LoadHorizon;
+  if cfgsc.ShowHorizonPicture then LoadHorizonPicture(cfgsc.HorizonPictureFile);
+  cfgsc.ShowHorizonPicture := cfgsc.ShowHorizonPicture and cfgsc.horizonpicturevalid;
   Result := True;
 end;
 
@@ -5245,12 +5249,12 @@ begin
   for i := 0 to n - 1 do
   begin
     thread[i] := TDrawHorizonThread.Create(True);
-    thread[i].horizonpicture := Fcatalog.cfgshr.horizonpicture;
+    thread[i].horizonpicture := cfgsc.horizonpicture;
     thread[i].hbmp := hbmp;
     thread[i].col2 := ColorToBGRA(FPlot.cfgplot.Color[19]);
     thread[i].cfgsc := cfgsc;
     thread[i].lowquality := cfgsc.HorizonPictureLowQuality or
-      ((pi2 / Fcatalog.cfgshr.horizonpicture.Width) > (2 * cfgsc.fov / hbmp.Width));
+      ((pi2 / cfgsc.horizonpicture.Width) > (2 * cfgsc.fov / hbmp.Width));
     thread[i].num := n;
     thread[i].id := i;
     thread[i].Start;
@@ -5398,14 +5402,14 @@ begin
           col1.alpha := 176;
         col2 := ColorToBGRA(Fplot.cfgplot.Color[12]);
         daz := abs(0.5 / cfgsc.BxGlb); // 0.5 pixel polygon overlap to avoid banding
-        if cfgsc.ShowHorizon and (cfgsc.HorizonMax > 0) and (cfgsc.horizonlist <> nil) then
+        if cfgsc.ShowHorizon and (cfgsc.HorizonMax > 0) then
         begin
           // Use horizon file data
           azp := 0;
           hpstep := 0;
           for i := 1 to 361 do
           begin
-            h := cfgsc.horizonlist^[i];
+            h := cfgsc.horizonlist[i];
             az := deg2rad * rmod(360 + i - 1 - 180, 360);
             hstep := h / hdiv;
             if i = 1 then
@@ -5535,14 +5539,14 @@ begin
     end
     else
     begin
-      if cfgsc.ShowHorizon and (cfgsc.HorizonMax > 0) and (cfgsc.horizonlist <> nil) then
+      if cfgsc.ShowHorizon and (cfgsc.HorizonMax > 0) then
       begin
         // Use horizon file data
         azp := 0;
         hpstep := 0;
         for i := 1 to 361 do
         begin
-          h := cfgsc.horizonlist^[i];
+          h := cfgsc.horizonlist[i];
           az := deg2rad * rmod(360 + i - 1 - 180, 360);
           hstep := h / hdiv;
           if i = 1 then
@@ -8276,6 +8280,130 @@ function Tskychart.GetChartPos: string;
 begin
   Result := 'C:' + armtostr(cfgsc.racentre * rad2deg / 15) + blank + demtostr(cfgsc.decentre * rad2deg);
   Result := Result + ' L:' + demtostr(cfgsc.fov * rad2deg);
+end;
+
+procedure Tskychart.LoadHorizonPicture(fname: string);
+begin
+  try
+    if cfgsc.horizonpicturevalid and (fname = cfgsc.horizonpicturename) then
+      exit;
+    cfgsc.horizonpicturevalid := False;
+    cfgsc.horizonpicturename := '';
+    if fname = '' then
+      exit;
+    if ExtractFilePath(fname) = '' then
+      fname := slash(Appdir) + fname;
+    if FileExists(fname) then
+    begin
+      cfgsc.horizonpicture.LoadFromFile(fname);
+      if uppercase(ExtractFileExt(fname)) = '.BMP' then
+        cfgsc.horizonpicture.ReplaceColor(ColorToBGRA(clFuchsia), BGRAPixelTransparent);
+      cfgsc.horizonpicturevalid := True;
+      cfgsc.horizonpicturename := fname;
+    end
+    else
+    begin
+      cfgsc.horizonpicture.SetSize(1, 1);
+      cfgsc.horizonpicturevalid := False;
+      cfgsc.horizonpicturename := '';
+    end;
+  except
+    cfgsc.horizonpicturevalid := False;
+    cfgsc.horizonpicturename := '';
+  end;
+end;
+
+procedure Tskychart.LoadHorizon;
+var
+  de, d0, d1, d2: single;
+  i, i1, i2: integer;
+  f: textfile;
+  fname,buf: string;
+begin
+  fname:=cfgsc.HorizonFile;
+  if (fname = cfgsc.horizonlistname) then
+    exit;
+  cfgsc.HorizonMax := musec;  // require in cfgsc for horizon clipping in u_projection
+  cfgsc.HorizonMin := pid2;
+  for i := 1 to 360 do
+    cfgsc.horizonlist[i] := 0;
+  if fileexists(fname) then
+  begin
+    i1 := 0;
+    i2 := 0;
+    d1 := 0;
+    d0 := 0;
+    try
+      Filemode := 0;
+      assignfile(f, fname);
+      reset(f);
+      // get first point
+      repeat
+        readln(f, buf)
+      until EOF(f) or ((trim(buf) <> '') and (buf[1] <> '#'));
+      if (trim(buf) = '') or (buf[1] = '#') then
+        exit;
+      i1 := StrToInt(trim(words(buf, blank, 1, 1)));
+      d1 := strtofloat(trim(words(buf, blank, 2, 1)));
+      if d1 > 90 then
+        d1 := 90;
+      if d1 < 0 then
+        d1 := 0;
+      if i1 <> 0 then
+      begin
+        reset(f);
+        i1 := 0;
+        d1 := 0;
+      end;
+      i2 := 0;
+      d0 := d1;
+      // process each point
+      while (not EOF(f)) and (i2 < 359) do
+      begin
+        repeat
+          readln(f, buf)
+        until EOF(f) or ((trim(buf) <> '') and (buf[1] <> '#'));
+        if (trim(buf) = '') or (buf[1] = '#') then
+          break;
+        i2 := StrToInt(trim(words(buf, blank, 1, 1)));
+        d2 := strtofloat(trim(words(buf, blank, 2, 1)));
+        if i2 > 359 then
+          i2 := 359;
+        if i1 >= i2 then
+          continue;
+        if d2 > 90 then
+          d2 := 90;
+        if d2 < 0 then
+          d2 := 0;
+        for i := i1 to i2 do
+        begin
+          de := deg2rad * (d1 + (i - i1) * (d2 - d1) / (i2 - i1));
+          cfgsc.horizonlist[i + 1] := de;
+          cfgsc.HorizonMax := max(cfgsc.HorizonMax, de);
+          cfgsc.HorizonMin := min(cfgsc.HorizonMin, de);
+        end;
+        i1 := i2;
+        d1 := d2;
+      end;
+
+    finally
+      cfgsc.horizonlistname := fname;
+      closefile(f);
+      // fill last point
+      if i2 < 359 then
+      begin
+        for i := i1 to 359 do
+        begin
+          de := deg2rad * (d1 + (i - i1) * (d0 - d1) / (359 - i1));
+          cfgsc.horizonlist[i + 1] := de;
+          cfgsc.HorizonMax := max(cfgsc.HorizonMax, de);
+          cfgsc.HorizonMin := min(cfgsc.HorizonMin, de);
+        end;
+      end;
+      cfgsc.horizonlist[0] := cfgsc.horizonlist[1];
+      cfgsc.horizonlist[361] := cfgsc.horizonlist[1];
+    end;
+  end;
 end;
 
 end.
