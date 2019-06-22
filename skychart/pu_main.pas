@@ -5292,10 +5292,11 @@ procedure Tf_main.activateconfig(cmain: Tconf_main; csc: Tconf_skychart;
   cdss: Tconf_dss; applyall: boolean);
 var
   i: integer;
-  dbchange, themechange, langchange, starchange, showast: boolean;
+  dbchange, themechange, nightchange, langchange, starchange, showast: boolean;
 begin
   dbchange := False;
   themechange := False;
+  nightchange := False;
   langchange := False;
   starchange := False;
   showast := False;
@@ -5316,6 +5317,7 @@ begin
       (cfgm.dbuser <> cmain.dbuser) or (cfgm.dbpass <> cmain.dbpass) or
       (cfgm.dbport <> cmain.dbport) then
       dbchange := True;
+    nightchange := nightvision and (cfgm.NightColor<>cmain.NightColor);
     cfgm.Assign(cmain);
     AnimationTimer.Interval := max(100, cfgm.AnimDelay);
     ServerCoordSystem:=TServerCoordSys(cfgm.ServerCoordSys);
@@ -5430,6 +5432,10 @@ begin
         f_calendar.BtnRefreshClick(nil);
       end;
     end;
+  if nightchange then begin
+     ViewNightVision.Execute;
+     ViewNightVision.Execute;
+  end;
   Autorefresh.Enabled := False;
   Autorefresh.Interval := max(10, cfgm.autorefreshdelay) * 1000;
   AutoRefreshLock := False;
@@ -5914,6 +5920,7 @@ begin
   cfgm.ShowTitlePos := False;
   cfgm.SyncChart := False;
   cfgm.ThemeName := 'default';
+  cfgm.NightColor := 0;
   cfgm.VOurl := 0;
   cfgm.VOmaxrecord := 10000;
   cfgm.AnimDelay := 500;
@@ -7412,6 +7419,7 @@ begin
         cfgm.PrintHeader := ReadBool(section, 'PrintHeader', cfgm.PrintHeader);
         cfgm.PrintFooter := ReadBool(section, 'PrintFooter', cfgm.PrintFooter);
         cfgm.ThemeName := ReadString(section, 'Theme', cfgm.ThemeName);
+        cfgm.NightColor := ReadInteger(section, 'NightColor', cfgm.NightColor);
         cfgm.KioskPass := ReadString(section, 'KioskPass', '');
         cfgm.KioskDebug := ReadBool(section, 'KioskDebug', False);
         cfgm.KioskMode := (cfgm.KioskPass > '');
@@ -8624,6 +8632,7 @@ begin
         WriteBool(section, 'PrintHeader', cfgm.PrintHeader);
         WriteBool(section, 'PrintFooter', cfgm.PrintFooter);
         WriteString(section, 'Theme', cfgm.ThemeName);
+        WriteInteger(section, 'NightColor', cfgm.NightColor);
         WriteBool(section, 'SimpleMove', cfgm.SimpleMove);
         WriteBool(section, 'WinMaximize', (f_main.WindowState = wsMaximized));
         WriteBool(section, 'AzNorth', catalog.cfgshr.AzNorth);

@@ -105,6 +105,7 @@ type
     Label10: TLabel;
     Label14: TLabel;
     PanelRot: TPanel;
+    GroupNightColor: TRadioGroup;
     showlabelAst: TCheckBox;
     showlabelCom: TCheckBox;
     ShowLineShape: TShape;
@@ -440,6 +441,7 @@ type
     procedure OptLabelsClick(Sender: TObject);
     procedure Page3Show(Sender: TObject);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: boolean);
+    procedure GroupNightColorClick(Sender: TObject);
     procedure RectangleGridColRowInserted(Sender: TObject; IsColumn: boolean;
       sIndex, tIndex: integer);
     procedure RectangleGridColRowMoved(Sender: TObject; IsColumn: boolean;
@@ -1225,6 +1227,13 @@ begin
   cmain.ThemeName := ThemeList.Text;
 end;
 
+procedure Tf_config_display.GroupNightColorClick(Sender: TObject);
+begin
+  if LockChange then
+    exit;
+  cmain.NightColor := GroupNightColor.ItemIndex;
+end;
+
 procedure Tf_config_display.Button7Click(Sender: TObject);
 begin
   FileNameEdit1.FileName := '';
@@ -1335,6 +1344,7 @@ begin
   shape26.brush.color := cplot.color[20];
   shape27.brush.color := cplot.color[21];
   shape28.brush.color := cplot.color[22];
+  GroupNightColor.ItemIndex :=  cmain.NightColor;
   ThemeList.Clear;
   i := findfirst(slash(appdir) + slash('data') + slash('Themes') + '*', faDirectory, fs);
   while i = 0 do

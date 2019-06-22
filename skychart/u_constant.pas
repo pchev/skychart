@@ -157,6 +157,12 @@ const
     $000000A0, $00000020, $000000A0, $000000A0, $000000A0, $000000A0, $000000A0,
     $000000A0, $000000A0, $000000A0, $000000A0, $000000A0, $000000A0,
     $000000A0, $000000A0);
+  DfOrangeColor: Starcolarray =
+    (clBlack, $00A0C0FF, $0080C0FF, $0000C0FF, $0000B0FF, $0000A0FF, $000080FF,
+    $000060FF, $000000FF, $0000FF00, $00FFFFFF, $000000FF, $00404080, $00404080,
+    $000060B0, $00004080, $00002080, $00005080, $000040FF, $00004080, $000080FF,
+    $000080FF, $00001728, $00002040, $0000B0FF, $000080FF, $0000A0FF, $00404040,
+    $004060FF, $0000B0FF, $000040FF, $000040FF, $000040FF, $008080FF, $00FF0080,$00FFFFFF);
   DfWBColor: Starcolarray =
     (clWhite, clBlack, clBlack, clBlack, clBlack, clBlack, clBlack,
     clBlack, clBlack, clBlack, clBlack, clBlack, clBlack, clBlack,
@@ -1175,6 +1181,7 @@ type
     CenterAtNoon: boolean;
     PrintDesc, PrintCmd1, PrintCmd2: string;
     PrintTmpPath, ThemeName, IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt: string;
+    NightColor: integer;
     PrintHeader, PrintFooter, InternalIndiPanel: boolean;
     AnimOpt, Animffmpeg: string;
     ServerIPaddr, ServerIPport: shortstring;
@@ -2874,6 +2881,7 @@ begin
   PrintDesc := Source.PrintDesc;
   PrintCopies := Source.PrintCopies;
   ThemeName := Source.ThemeName;
+  NightColor := Source.NightColor;
   IndiPanelCmd := Source.IndiPanelCmd;
   InternalIndiPanel := Source.InternalIndiPanel;
   ProxyHost := Source.ProxyHost;

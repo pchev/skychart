@@ -25,11 +25,11 @@ object f_config_display: Tf_config_display
       Height = 526
       Top = 1
       Width = 503
-      ActivePage = Page6
+      ActivePage = Page2
       Align = alClient
       ParentFont = False
       ShowTabs = False
-      TabIndex = 5
+      TabIndex = 1
       TabOrder = 0
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
@@ -599,7 +599,7 @@ object f_config_display: Tf_config_display
           ParentFont = False
         end
         object bg1: TPanel
-          Left = 32
+          Left = 33
           Height = 38
           Top = 56
           Width = 401
@@ -815,12 +815,12 @@ object f_config_display: Tf_config_display
           end
         end
         object GroupBox6: TGroupBox
-          Left = 32
-          Height = 67
-          Top = 360
+          Left = 33
+          Height = 66
+          Top = 344
           Width = 401
           Caption = 'Theme'
-          ClientHeight = 47
+          ClientHeight = 46
           ClientWidth = 399
           ParentFont = False
           TabOrder = 4
@@ -841,11 +841,11 @@ object f_config_display: Tf_config_display
         object GroupBox7: TGroupBox
           Left = 33
           Height = 99
-          Top = 248
-          Width = 402
+          Top = 240
+          Width = 401
           Caption = 'Standard Color'
           ClientHeight = 79
-          ClientWidth = 400
+          ClientWidth = 399
           ParentFont = False
           TabOrder = 3
           object BtnDefaultColor: TButton
@@ -902,6 +902,30 @@ object f_config_display: Tf_config_display
             ParentFont = False
             TabOrder = 1
           end
+        end
+        object GroupNightColor: TRadioGroup
+          Left = 33
+          Height = 66
+          Top = 416
+          Width = 401
+          AutoFill = True
+          Caption = 'GroupNightColor'
+          ChildSizing.LeftRightSpacing = 6
+          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.EnlargeVertical = crsHomogenousChildResize
+          ChildSizing.ShrinkHorizontal = crsScaleChilds
+          ChildSizing.ShrinkVertical = crsScaleChilds
+          ChildSizing.Layout = cclLeftToRightThenTopToBottom
+          ChildSizing.ControlsPerLine = 2
+          ClientHeight = 46
+          ClientWidth = 399
+          Columns = 2
+          Items.Strings = (
+            'Red'
+            'Orange'
+          )
+          OnClick = GroupNightColorClick
+          TabOrder = 5
         end
       end
       object Page3: TTabSheet

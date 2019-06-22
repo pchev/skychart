@@ -7051,23 +7051,35 @@ end;
 procedure Tf_chart.SetNightVision(Value: boolean);
 var
   i: integer;
+  NVColor: Starcolarray;
+  NightLabelColor: TColor;
 begin
   if Value = FNightVision then
     exit;
   FNightVision := Value;
+  case cmain.NightColor of
+    0: begin
+          NVColor := DfRedColor;
+          NightLabelColor := $000000A0;
+       end;
+    1: begin
+          NVColor := DfOrangeColor;
+          NightLabelColor := $000080FF;
+       end;
+  end;
   if FNightVision then
   begin
     SaveColor := sc.plot.cfgplot.color;
     SavebgColor := sc.plot.cfgplot.bgColor;
     for i := 1 to numlabtype do
       SaveLabelColor[i] := sc.plot.cfgplot.labelcolor[i];
-    sc.plot.cfgplot.color := DfRedColor;
+    sc.plot.cfgplot.color := NVColor;
     for i := 1 to numlabtype do
-      sc.plot.cfgplot.labelcolor[i] := $000000A0;
+      sc.plot.cfgplot.labelcolor[i] := NightLabelColor;
   end
   else
   begin
-    if (Savecolor[2] = DfRedColor[2]) and (Savecolor[11] = DfRedColor[11]) then
+    if (Savecolor[2] = NVColor[2]) and (Savecolor[11] = NVColor[11]) then
     begin // started with night vision, return to default color as save is also red.
       sc.plot.cfgplot.color := DfColor;
       sc.plot.cfgplot.bgColor := DfColor[0];
