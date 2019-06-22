@@ -5,7 +5,7 @@ object f_config_display: Tf_config_display
   Width = 505
   ClientHeight = 528
   ClientWidth = 505
-  DesignTimePPI = 75
+  DesignTimePPI = 95
   ParentFont = False
   TabOrder = 0
   DesignTop = 23
@@ -49,16 +49,16 @@ object f_config_display: Tf_config_display
           Visible = False
           object Label9: TLabel
             Left = 38
-            Height = 13
+            Height = 19
             Top = 48
-            Width = 85
+            Width = 97
             Caption = 'Stars bitmap file'
             ParentColor = False
             ParentFont = False
           end
           object FileNameEdit1: TFileNameEdit
             Left = 37
-            Height = 25
+            Height = 31
             Top = 84
             Width = 332
             OnAcceptFileName = FileNameEdit1AcceptFileName
@@ -156,18 +156,18 @@ object f_config_display: Tf_config_display
           end
           object Label259: TLabel
             Left = 24
-            Height = 13
+            Height = 19
             Top = 85
-            Width = 43
+            Width = 52
             Caption = 'Contrast'
             ParentColor = False
             ParentFont = False
           end
           object Label258: TLabel
             Left = 24
-            Height = 13
+            Height = 19
             Top = 30
-            Width = 88
+            Width = 100
             Caption = 'Bright Stars Size '
             ParentColor = False
             ParentFont = False
@@ -229,36 +229,36 @@ object f_config_display: Tf_config_display
           end
           object Label257: TLabel
             Left = 24
-            Height = 13
+            Height = 19
             Top = 60
-            Width = 134
+            Width = 157
             Caption = 'Increment for Bright Stars'
             ParentColor = False
             ParentFont = False
           end
           object Label263: TLabel
             Left = 24
-            Height = 13
+            Height = 19
             Top = 142
-            Width = 81
+            Width = 97
             Caption = 'Color saturation'
             ParentColor = False
             ParentFont = False
           end
           object Label262: TLabel
             Left = 24
-            Height = 13
+            Height = 19
             Top = 101
-            Width = 43
+            Width = 52
             Caption = 'Contrast'
             ParentColor = False
             ParentFont = False
           end
           object Label256: TLabel
             Left = 24
-            Height = 13
+            Height = 19
             Top = 16
-            Width = 81
+            Width = 92
             Caption = 'Faint Stars Size '
             ParentColor = False
             ParentFont = False
@@ -334,7 +334,7 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 51
+          ClientHeight = 45
           ClientWidth = 439
           Columns = 3
           Items.Strings = (
@@ -361,7 +361,7 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 51
+          ClientHeight = 45
           ClientWidth = 439
           Columns = 2
           Items.Strings = (
@@ -376,7 +376,7 @@ object f_config_display: Tf_config_display
           Left = 28
           Height = 21
           Top = 421
-          Width = 219
+          Width = 246
           Caption = 'Reduce detail when moving the chart'
           OnClick = red_moveBoxClick
           ParentFont = False
@@ -386,7 +386,7 @@ object f_config_display: Tf_config_display
           Left = 28
           Height = 21
           Top = 441
-          Width = 78
+          Width = 84
           Caption = 'Anti Alias  '
           OnClick = antialiasClick
           ParentFont = False
@@ -396,7 +396,7 @@ object f_config_display: Tf_config_display
           Left = 28
           Height = 21
           Top = 461
-          Width = 190
+          Width = 213
           Caption = 'Show only text in detail window'
           OnClick = CheckBox6Click
           ParentFont = False
@@ -820,7 +820,7 @@ object f_config_display: Tf_config_display
           Top = 360
           Width = 401
           Caption = 'Theme'
-          ClientHeight = 53
+          ClientHeight = 47
           ClientWidth = 399
           ParentFont = False
           TabOrder = 4
@@ -844,7 +844,7 @@ object f_config_display: Tf_config_display
           Top = 248
           Width = 402
           Caption = 'Standard Color'
-          ClientHeight = 85
+          ClientHeight = 79
           ClientWidth = 400
           ParentFont = False
           TabOrder = 3
@@ -925,7 +925,7 @@ object f_config_display: Tf_config_display
           Top = 75
           Width = 509
           Caption = ' Choose colours for object type  '
-          ClientHeight = 195
+          ClientHeight = 189
           ClientWidth = 507
           ParentFont = False
           TabOrder = 0
@@ -1375,7 +1375,7 @@ object f_config_display: Tf_config_display
           Top = 298
           Width = 510
           Caption = ' Adjust colour brightness '
-          ClientHeight = 149
+          ClientHeight = 143
           ClientWidth = 508
           ParentFont = False
           TabOrder = 1
@@ -1665,7 +1665,7 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 75
+          ClientHeight = 69
           ClientWidth = 362
           Columns = 2
           Items.Strings = (
@@ -1749,7 +1749,7 @@ object f_config_display: Tf_config_display
           Top = 192
           Width = 273
           Caption = 'Constellation Figures'
-          ClientHeight = 126
+          ClientHeight = 120
           ClientWidth = 271
           ParentFont = False
           TabOrder = 11
@@ -1834,7 +1834,7 @@ object f_config_display: Tf_config_display
           Top = 336
           Width = 273
           Caption = 'Constellation Boundaries'
-          ClientHeight = 134
+          ClientHeight = 128
           ClientWidth = 271
           ParentFont = False
           TabOrder = 13
@@ -1918,7 +1918,7 @@ object f_config_display: Tf_config_display
           Top = 192
           Width = 185
           Caption = 'Milky Way'
-          ClientHeight = 126
+          ClientHeight = 120
           ClientWidth = 183
           ParentFont = False
           TabOrder = 12
@@ -2055,7 +2055,7 @@ object f_config_display: Tf_config_display
           Top = 336
           Width = 185
           Caption = 'Proper Motion'
-          ClientHeight = 134
+          ClientHeight = 128
           ClientWidth = 183
           ParentFont = False
           TabOrder = 14
@@ -2209,30 +2209,28 @@ object f_config_display: Tf_config_display
         ParentFont = False
         object GroupBox5: TGroupBox
           Left = 16
-          Height = 312
-          Top = 64
+          Height = 302
+          Top = 66
           Width = 477
-          ClientHeight = 310
+          ClientHeight = 300
           ClientWidth = 475
           ParentFont = False
           TabOrder = 4
           object Label237: TLabel
-            Left = 149
-            Height = 13
-            Top = 4
-            Width = 114
-            Alignment = taRightJustify
-            Anchors = [akTop, akRight]
-            Caption = 'Magnitude  difference'
+            Left = 134
+            Height = 19
+            Top = 2
+            Width = 129
+            Caption = 'Magnitude difference'
             ParentColor = False
             ParentFont = False
             WordWrap = True
           end
           object Label252: TLabel
             Left = 295
-            Height = 13
-            Top = 4
-            Width = 26
+            Height = 19
+            Top = 2
+            Width = 32
             Caption = 'Color'
             ParentColor = False
             ParentFont = False
@@ -2241,7 +2239,7 @@ object f_config_display: Tf_config_display
             Tag = 1
             Left = 291
             Height = 17
-            Top = 27
+            Top = 24
             Width = 33
             OnMouseUp = labelcolorMouseUp
           end
@@ -2249,7 +2247,7 @@ object f_config_display: Tf_config_display
             Tag = 2
             Left = 291
             Height = 17
-            Top = 52
+            Top = 49
             Width = 33
             OnMouseUp = labelcolorMouseUp
           end
@@ -2257,7 +2255,7 @@ object f_config_display: Tf_config_display
             Tag = 3
             Left = 291
             Height = 17
-            Top = 77
+            Top = 74
             Width = 33
             OnMouseUp = labelcolorMouseUp
           end
@@ -2265,7 +2263,7 @@ object f_config_display: Tf_config_display
             Tag = 4
             Left = 291
             Height = 17
-            Top = 102
+            Top = 99
             Width = 33
             OnMouseUp = labelcolorMouseUp
           end
@@ -2273,7 +2271,7 @@ object f_config_display: Tf_config_display
             Tag = 5
             Left = 291
             Height = 17
-            Top = 127
+            Top = 124
             Width = 33
             OnMouseUp = labelcolorMouseUp
           end
@@ -2281,7 +2279,7 @@ object f_config_display: Tf_config_display
             Tag = 6
             Left = 291
             Height = 17
-            Top = 202
+            Top = 199
             Width = 33
             OnMouseUp = labelcolorMouseUp
           end
@@ -2289,7 +2287,7 @@ object f_config_display: Tf_config_display
             Tag = 7
             Left = 291
             Height = 17
-            Top = 227
+            Top = 224
             Width = 33
             OnMouseUp = labelcolorMouseUp
           end
@@ -2297,15 +2295,15 @@ object f_config_display: Tf_config_display
             Tag = 8
             Left = 291
             Height = 17
-            Top = 252
+            Top = 249
             Width = 33
             OnMouseUp = labelcolorMouseUp
           end
           object Label255: TLabel
             Left = 347
-            Height = 13
-            Top = 4
-            Width = 21
+            Height = 19
+            Top = 2
+            Width = 23
             Caption = 'Size'
             ParentColor = False
             ParentFont = False
@@ -2314,8 +2312,8 @@ object f_config_display: Tf_config_display
             Tag = 1
             Left = 19
             Height = 21
-            Top = 24
-            Width = 50
+            Top = 20
+            Width = 54
             Caption = 'Stars'
             OnClick = showlabelClick
             ParentFont = False
@@ -2325,8 +2323,8 @@ object f_config_display: Tf_config_display
             Tag = 2
             Left = 19
             Height = 21
-            Top = 49
-            Width = 94
+            Top = 45
+            Width = 105
             Caption = 'Variable Stars'
             OnClick = showlabelClick
             ParentFont = False
@@ -2336,8 +2334,8 @@ object f_config_display: Tf_config_display
             Tag = 3
             Left = 19
             Height = 21
-            Top = 74
-            Width = 95
+            Top = 70
+            Width = 106
             Caption = 'Multiple Stars'
             OnClick = showlabelClick
             ParentFont = False
@@ -2347,8 +2345,8 @@ object f_config_display: Tf_config_display
             Tag = 4
             Left = 19
             Height = 21
-            Top = 99
-            Width = 67
+            Top = 95
+            Width = 74
             Caption = 'Nebulae'
             OnClick = showlabelClick
             ParentFont = False
@@ -2358,8 +2356,8 @@ object f_config_display: Tf_config_display
             Tag = 5
             Left = 19
             Height = 21
-            Top = 124
-            Width = 91
+            Top = 120
+            Width = 101
             Caption = 'Solar System'
             OnClick = showlabelClick
             ParentFont = False
@@ -2369,8 +2367,8 @@ object f_config_display: Tf_config_display
             Tag = 6
             Left = 19
             Height = 21
-            Top = 199
-            Width = 123
+            Top = 195
+            Width = 140
             Caption = 'Constellation name'
             OnClick = showlabelClick
             ParentFont = False
@@ -2380,8 +2378,8 @@ object f_config_display: Tf_config_display
             Tag = 7
             Left = 19
             Height = 21
-            Top = 224
-            Width = 86
+            Top = 220
+            Width = 96
             Caption = 'Other labels'
             OnClick = showlabelClick
             ParentFont = False
@@ -2391,8 +2389,8 @@ object f_config_display: Tf_config_display
             Tag = 8
             Left = 19
             Height = 21
-            Top = 249
-            Width = 115
+            Top = 245
+            Width = 133
             Caption = 'Chart Information'
             OnClick = showlabelClick
             ParentFont = False
@@ -2402,9 +2400,9 @@ object f_config_display: Tf_config_display
             Tag = 1
             Left = 208
             Height = 25
-            Top = 24
+            Top = 20
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = labelmagChange
             ParentFont = False
             TabOrder = 1
@@ -2413,10 +2411,10 @@ object f_config_display: Tf_config_display
             Tag = 1
             Left = 246
             Height = 25
-            Top = 24
+            Top = 20
             Width = 17
             Associate = Edit1
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 10
             Min = 0
             Position = 1
@@ -2426,9 +2424,9 @@ object f_config_display: Tf_config_display
             Tag = 2
             Left = 208
             Height = 25
-            Top = 49
+            Top = 45
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = labelmagChange
             ParentFont = False
             TabOrder = 6
@@ -2437,10 +2435,10 @@ object f_config_display: Tf_config_display
             Tag = 2
             Left = 246
             Height = 25
-            Top = 49
+            Top = 45
             Width = 17
             Associate = Edit2
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 10
             Min = 0
             Position = 1
@@ -2450,10 +2448,10 @@ object f_config_display: Tf_config_display
             Tag = 3
             Left = 246
             Height = 25
-            Top = 74
+            Top = 70
             Width = 17
             Associate = Edit3
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 10
             Min = 0
             Position = 1
@@ -2463,9 +2461,9 @@ object f_config_display: Tf_config_display
             Tag = 3
             Left = 208
             Height = 25
-            Top = 74
+            Top = 70
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = labelmagChange
             ParentFont = False
             TabOrder = 11
@@ -2474,10 +2472,10 @@ object f_config_display: Tf_config_display
             Tag = 4
             Left = 246
             Height = 25
-            Top = 99
+            Top = 95
             Width = 17
             Associate = Edit4
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 10
             Min = 0
             Position = 1
@@ -2487,9 +2485,9 @@ object f_config_display: Tf_config_display
             Tag = 4
             Left = 208
             Height = 25
-            Top = 99
+            Top = 95
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = labelmagChange
             ParentFont = False
             TabOrder = 16
@@ -2498,10 +2496,10 @@ object f_config_display: Tf_config_display
             Tag = 5
             Left = 246
             Height = 25
-            Top = 124
+            Top = 120
             Width = 17
             Associate = Edit5
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 10
             Min = 0
             Position = 1
@@ -2511,9 +2509,9 @@ object f_config_display: Tf_config_display
             Tag = 5
             Left = 208
             Height = 25
-            Top = 124
+            Top = 120
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = labelmagChange
             ParentFont = False
             TabOrder = 21
@@ -2522,9 +2520,9 @@ object f_config_display: Tf_config_display
             Tag = 1
             Left = 344
             Height = 25
-            Top = 24
+            Top = 20
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = LabelsizeChange
             ParentFont = False
             TabOrder = 3
@@ -2533,10 +2531,10 @@ object f_config_display: Tf_config_display
             Tag = 1
             Left = 382
             Height = 25
-            Top = 24
+            Top = 20
             Width = 17
             Associate = Edit6
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 48
             Min = 4
             Position = 6
@@ -2546,9 +2544,9 @@ object f_config_display: Tf_config_display
             Tag = 2
             Left = 344
             Height = 25
-            Top = 49
+            Top = 45
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = LabelsizeChange
             ParentFont = False
             TabOrder = 8
@@ -2557,10 +2555,10 @@ object f_config_display: Tf_config_display
             Tag = 2
             Left = 382
             Height = 25
-            Top = 49
+            Top = 45
             Width = 17
             Associate = Edit7
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 48
             Min = 4
             Position = 6
@@ -2570,9 +2568,9 @@ object f_config_display: Tf_config_display
             Tag = 3
             Left = 344
             Height = 25
-            Top = 74
+            Top = 70
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = LabelsizeChange
             ParentFont = False
             TabOrder = 13
@@ -2581,10 +2579,10 @@ object f_config_display: Tf_config_display
             Tag = 3
             Left = 382
             Height = 25
-            Top = 74
+            Top = 70
             Width = 17
             Associate = Edit8
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 48
             Min = 4
             Position = 6
@@ -2594,9 +2592,9 @@ object f_config_display: Tf_config_display
             Tag = 4
             Left = 344
             Height = 25
-            Top = 99
+            Top = 95
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = LabelsizeChange
             ParentFont = False
             TabOrder = 18
@@ -2605,10 +2603,10 @@ object f_config_display: Tf_config_display
             Tag = 4
             Left = 382
             Height = 25
-            Top = 99
+            Top = 95
             Width = 17
             Associate = Edit9
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 48
             Min = 4
             Position = 6
@@ -2618,9 +2616,9 @@ object f_config_display: Tf_config_display
             Tag = 5
             Left = 344
             Height = 25
-            Top = 124
+            Top = 120
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = LabelsizeChange
             ParentFont = False
             TabOrder = 23
@@ -2629,10 +2627,10 @@ object f_config_display: Tf_config_display
             Tag = 5
             Left = 382
             Height = 25
-            Top = 124
+            Top = 120
             Width = 17
             Associate = Edit10
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 48
             Min = 4
             Position = 6
@@ -2642,9 +2640,9 @@ object f_config_display: Tf_config_display
             Tag = 6
             Left = 344
             Height = 25
-            Top = 199
+            Top = 195
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = LabelsizeChange
             ParentFont = False
             TabOrder = 26
@@ -2653,10 +2651,10 @@ object f_config_display: Tf_config_display
             Tag = 6
             Left = 382
             Height = 25
-            Top = 199
+            Top = 195
             Width = 17
             Associate = Edit11
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 48
             Min = 4
             Position = 6
@@ -2666,9 +2664,9 @@ object f_config_display: Tf_config_display
             Tag = 7
             Left = 344
             Height = 25
-            Top = 224
+            Top = 220
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = LabelsizeChange
             ParentFont = False
             TabOrder = 29
@@ -2677,10 +2675,10 @@ object f_config_display: Tf_config_display
             Tag = 7
             Left = 382
             Height = 25
-            Top = 224
+            Top = 220
             Width = 17
             Associate = Edit12
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 48
             Min = 4
             Position = 6
@@ -2690,9 +2688,9 @@ object f_config_display: Tf_config_display
             Tag = 8
             Left = 344
             Height = 25
-            Top = 249
+            Top = 245
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = LabelsizeChange
             ParentFont = False
             TabOrder = 32
@@ -2701,10 +2699,10 @@ object f_config_display: Tf_config_display
             Tag = 8
             Left = 382
             Height = 25
-            Top = 249
+            Top = 245
             Width = 17
             Associate = Edit13
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 48
             Min = 4
             Position = 6
@@ -2712,19 +2710,19 @@ object f_config_display: Tf_config_display
           end
           object Label14: TLabel
             Left = 19
-            Height = 13
-            Top = 4
-            Width = 65
+            Height = 19
+            Top = 2
+            Width = 74
             Caption = 'Label Object'
             Constraints.MaxHeight = 26
             ParentColor = False
             ParentFont = False
           end
           object Label15: TLabel
-            Left = 43
-            Height = 13
-            Top = 278
-            Width = 121
+            Left = 42
+            Height = 19
+            Top = 272
+            Width = 140
             Caption = 'Observing list elements'
             Constraints.MaxHeight = 26
             ParentColor = False
@@ -2734,7 +2732,7 @@ object f_config_display: Tf_config_display
             Tag = 9
             Left = 291
             Height = 17
-            Top = 277
+            Top = 274
             Width = 33
             Constraints.MaxHeight = 26
             OnMouseUp = labelcolorMouseUp
@@ -2743,9 +2741,9 @@ object f_config_display: Tf_config_display
             Tag = 9
             Left = 344
             Height = 25
-            Top = 274
+            Top = 270
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = LabelsizeChange
             ParentFont = False
             TabOrder = 34
@@ -2754,9 +2752,10 @@ object f_config_display: Tf_config_display
             Tag = 9
             Left = 382
             Height = 25
-            Top = 274
+            Top = 270
             Width = 17
             Associate = Edit14
+            Constraints.MaxHeight = 25
             Max = 48
             Min = 4
             Position = 6
@@ -2764,19 +2763,19 @@ object f_config_display: Tf_config_display
           end
           object PanelRot: TPanel
             Left = 400
-            Height = 297
+            Height = 296
             Top = 0
             Width = 70
             BevelOuter = bvNone
-            ClientHeight = 297
+            ClientHeight = 296
             ClientWidth = 70
             ParentFont = False
             TabOrder = 36
             object Label260: TLabel
               Left = 11
-              Height = 13
-              Top = 4
-              Width = 43
+              Height = 19
+              Top = 2
+              Width = 52
               Caption = 'Rotation'
               ParentColor = False
               ParentFont = False
@@ -2785,9 +2784,9 @@ object f_config_display: Tf_config_display
               Tag = 1
               Left = 8
               Height = 25
-              Top = 24
+              Top = 20
               Width = 38
-              Constraints.MaxHeight = 26
+              Constraints.MaxHeight = 25
               OnChange = LabelRotChange
               ParentFont = False
               TabOrder = 0
@@ -2796,9 +2795,9 @@ object f_config_display: Tf_config_display
               Tag = 2
               Left = 8
               Height = 25
-              Top = 49
+              Top = 45
               Width = 38
-              Constraints.MaxHeight = 26
+              Constraints.MaxHeight = 25
               OnChange = LabelRotChange
               ParentFont = False
               TabOrder = 1
@@ -2807,9 +2806,9 @@ object f_config_display: Tf_config_display
               Tag = 3
               Left = 8
               Height = 25
-              Top = 74
+              Top = 70
               Width = 38
-              Constraints.MaxHeight = 26
+              Constraints.MaxHeight = 25
               OnChange = LabelRotChange
               ParentFont = False
               TabOrder = 2
@@ -2818,9 +2817,9 @@ object f_config_display: Tf_config_display
               Tag = 4
               Left = 8
               Height = 25
-              Top = 99
+              Top = 95
               Width = 38
-              Constraints.MaxHeight = 26
+              Constraints.MaxHeight = 25
               OnChange = LabelRotChange
               ParentFont = False
               TabOrder = 3
@@ -2829,9 +2828,9 @@ object f_config_display: Tf_config_display
               Tag = 5
               Left = 8
               Height = 25
-              Top = 124
+              Top = 120
               Width = 38
-              Constraints.MaxHeight = 26
+              Constraints.MaxHeight = 25
               OnChange = LabelRotChange
               ParentFont = False
               TabOrder = 4
@@ -2840,9 +2839,9 @@ object f_config_display: Tf_config_display
               Tag = 6
               Left = 8
               Height = 25
-              Top = 199
+              Top = 195
               Width = 38
-              Constraints.MaxHeight = 26
+              Constraints.MaxHeight = 25
               OnChange = LabelRotChange
               ParentFont = False
               TabOrder = 5
@@ -2851,9 +2850,9 @@ object f_config_display: Tf_config_display
               Tag = 7
               Left = 8
               Height = 25
-              Top = 224
+              Top = 220
               Width = 38
-              Constraints.MaxHeight = 26
+              Constraints.MaxHeight = 25
               OnChange = LabelRotChange
               ParentFont = False
               TabOrder = 6
@@ -2862,9 +2861,9 @@ object f_config_display: Tf_config_display
               Tag = 8
               Left = 8
               Height = 25
-              Top = 249
+              Top = 245
               Width = 38
-              Constraints.MaxHeight = 26
+              Constraints.MaxHeight = 25
               OnChange = LabelRotChange
               ParentFont = False
               TabOrder = 7
@@ -2874,9 +2873,9 @@ object f_config_display: Tf_config_display
               Tag = 9
               Left = 8
               Height = 25
-              Top = 274
+              Top = 270
               Width = 38
-              Constraints.MaxHeight = 26
+              Constraints.MaxHeight = 25
               OnChange = LabelRotChange
               ParentFont = False
               TabOrder = 8
@@ -2886,9 +2885,10 @@ object f_config_display: Tf_config_display
               Tag = 1
               Left = 46
               Height = 25
-              Top = 24
+              Top = 20
               Width = 17
               Associate = Edit15
+              Constraints.MaxHeight = 25
               Increment = 15
               Max = 360
               Min = 0
@@ -2899,9 +2899,10 @@ object f_config_display: Tf_config_display
               Tag = 2
               Left = 46
               Height = 25
-              Top = 49
+              Top = 45
               Width = 17
               Associate = Edit16
+              Constraints.MaxHeight = 25
               Increment = 15
               Max = 360
               Min = 0
@@ -2912,9 +2913,10 @@ object f_config_display: Tf_config_display
               Tag = 3
               Left = 46
               Height = 25
-              Top = 74
+              Top = 70
               Width = 17
               Associate = Edit17
+              Constraints.MaxHeight = 25
               Increment = 15
               Max = 360
               Min = 0
@@ -2925,9 +2927,10 @@ object f_config_display: Tf_config_display
               Tag = 4
               Left = 46
               Height = 25
-              Top = 99
+              Top = 95
               Width = 17
               Associate = Edit18
+              Constraints.MaxHeight = 25
               Increment = 15
               Max = 360
               Min = 0
@@ -2938,9 +2941,10 @@ object f_config_display: Tf_config_display
               Tag = 5
               Left = 46
               Height = 25
-              Top = 124
+              Top = 120
               Width = 17
               Associate = Edit19
+              Constraints.MaxHeight = 25
               Increment = 15
               Max = 360
               Min = 0
@@ -2951,9 +2955,10 @@ object f_config_display: Tf_config_display
               Tag = 6
               Left = 46
               Height = 25
-              Top = 199
+              Top = 195
               Width = 17
               Associate = Edit20
+              Constraints.MaxHeight = 25
               Increment = 15
               Max = 360
               Min = 0
@@ -2964,9 +2969,10 @@ object f_config_display: Tf_config_display
               Tag = 7
               Left = 46
               Height = 25
-              Top = 224
+              Top = 220
               Width = 17
               Associate = Edit21
+              Constraints.MaxHeight = 25
               Increment = 15
               Max = 360
               Min = 0
@@ -2977,9 +2983,10 @@ object f_config_display: Tf_config_display
               Tag = 8
               Left = 46
               Height = 25
-              Top = 249
+              Top = 245
               Width = 17
               Associate = Edit22
+              Constraints.MaxHeight = 25
               Increment = 15
               Max = 360
               Min = 0
@@ -2991,9 +2998,10 @@ object f_config_display: Tf_config_display
               Tag = 9
               Left = 46
               Height = 25
-              Top = 274
+              Top = 270
               Width = 17
               Associate = Edit23
+              Constraints.MaxHeight = 25
               Increment = 15
               Max = 360
               Min = 0
@@ -3005,9 +3013,9 @@ object f_config_display: Tf_config_display
               Tag = 10
               Left = 8
               Height = 25
-              Top = 149
+              Top = 144
               Width = 38
-              Constraints.MaxHeight = 26
+              Constraints.MaxHeight = 25
               OnChange = LabelRotChange
               ParentFont = False
               TabOrder = 18
@@ -3016,9 +3024,10 @@ object f_config_display: Tf_config_display
               Tag = 10
               Left = 46
               Height = 25
-              Top = 149
+              Top = 144
               Width = 17
               Associate = Edit28
+              Constraints.MaxHeight = 25
               Increment = 15
               Max = 360
               Min = 0
@@ -3029,9 +3038,9 @@ object f_config_display: Tf_config_display
               Tag = 11
               Left = 8
               Height = 25
-              Top = 174
+              Top = 168
               Width = 38
-              Constraints.MaxHeight = 26
+              Constraints.MaxHeight = 25
               OnChange = LabelRotChange
               ParentFont = False
               TabOrder = 20
@@ -3040,9 +3049,10 @@ object f_config_display: Tf_config_display
               Tag = 11
               Left = 46
               Height = 25
-              Top = 174
+              Top = 168
               Width = 17
               Associate = Edit29
+              Constraints.MaxHeight = 25
               Increment = 15
               Max = 360
               Min = 0
@@ -3054,7 +3064,7 @@ object f_config_display: Tf_config_display
             Tag = 10
             Left = 291
             Height = 17
-            Top = 152
+            Top = 149
             Width = 33
             OnMouseUp = labelcolorMouseUp
           end
@@ -3062,8 +3072,8 @@ object f_config_display: Tf_config_display
             Tag = 10
             Left = 19
             Height = 21
-            Top = 149
-            Width = 66
+            Top = 145
+            Width = 74
             Caption = 'Asteroid'
             OnClick = showlabelClick
             ParentFont = False
@@ -3073,10 +3083,10 @@ object f_config_display: Tf_config_display
             Tag = 10
             Left = 246
             Height = 25
-            Top = 149
+            Top = 145
             Width = 17
             Associate = Edit24
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 10
             Min = 0
             Position = 1
@@ -3086,9 +3096,9 @@ object f_config_display: Tf_config_display
             Tag = 10
             Left = 208
             Height = 25
-            Top = 149
+            Top = 145
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = labelmagChange
             ParentFont = False
             TabOrder = 39
@@ -3097,9 +3107,9 @@ object f_config_display: Tf_config_display
             Tag = 10
             Left = 344
             Height = 25
-            Top = 149
+            Top = 145
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = LabelsizeChange
             ParentFont = False
             TabOrder = 40
@@ -3108,10 +3118,10 @@ object f_config_display: Tf_config_display
             Tag = 10
             Left = 382
             Height = 25
-            Top = 149
+            Top = 145
             Width = 17
             Associate = Edit25
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 48
             Min = 4
             Position = 6
@@ -3121,7 +3131,7 @@ object f_config_display: Tf_config_display
             Tag = 11
             Left = 291
             Height = 17
-            Top = 177
+            Top = 174
             Width = 33
             OnMouseUp = labelcolorMouseUp
           end
@@ -3129,8 +3139,8 @@ object f_config_display: Tf_config_display
             Tag = 11
             Left = 19
             Height = 21
-            Top = 174
-            Width = 57
+            Top = 170
+            Width = 64
             Caption = 'Comet'
             OnClick = showlabelClick
             ParentFont = False
@@ -3140,10 +3150,10 @@ object f_config_display: Tf_config_display
             Tag = 11
             Left = 246
             Height = 25
-            Top = 174
+            Top = 170
             Width = 17
             Associate = Edit26
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 10
             Min = 0
             Position = 1
@@ -3153,9 +3163,9 @@ object f_config_display: Tf_config_display
             Tag = 11
             Left = 208
             Height = 25
-            Top = 174
+            Top = 170
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = labelmagChange
             ParentFont = False
             TabOrder = 44
@@ -3164,9 +3174,9 @@ object f_config_display: Tf_config_display
             Tag = 11
             Left = 344
             Height = 25
-            Top = 174
+            Top = 170
             Width = 38
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             OnChange = LabelsizeChange
             ParentFont = False
             TabOrder = 45
@@ -3175,10 +3185,10 @@ object f_config_display: Tf_config_display
             Tag = 11
             Left = 382
             Height = 25
-            Top = 174
+            Top = 170
             Width = 17
             Associate = Edit27
-            Constraints.MaxHeight = 26
+            Constraints.MaxHeight = 25
             Max = 48
             Min = 4
             Position = 6
@@ -3200,7 +3210,7 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 67
+          ClientHeight = 61
           ClientWidth = 219
           Columns = 2
           ItemIndex = 0
@@ -3213,10 +3223,10 @@ object f_config_display: Tf_config_display
           ParentFont = False
           TabOrder = 5
           object DistLabel: TCheckBox
-            Left = 98
-            Height = 27
-            Top = 34
-            Width = 115
+            Left = 95
+            Height = 24
+            Top = 31
+            Width = 118
             Caption = 'Distance'
             OnClick = DistLabelClick
             ParentFont = False
@@ -3238,7 +3248,7 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 67
+          ClientHeight = 61
           ClientWidth = 242
           Columns = 2
           ItemIndex = 0
@@ -3254,8 +3264,8 @@ object f_config_display: Tf_config_display
         object Showlabelall: TCheckBox
           Left = 16
           Height = 21
-          Top = 42
-          Width = 115
+          Top = 43
+          Width = 128
           Caption = 'Display the labels'
           OnClick = ShowlabelallClick
           ParentFont = False
@@ -3265,26 +3275,26 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 21
           Top = 2
-          Width = 263
+          Width = 301
           Caption = 'Display the chart information in the menu bar.'
           OnClick = ShowChartInfoClick
           ParentFont = False
           TabOrder = 0
         end
         object DrawAllStarLabel: TCheckBox
-          Left = 26
+          Left = 16
           Height = 21
           Top = 448
-          Width = 190
+          Width = 215
           Caption = 'Display labels for all star catalog'
           OnClick = DrawAllStarLabelClick
           ParentFont = False
           TabOrder = 7
         end
         object Button9: TButton
-          Left = 359
+          Left = 349
           Height = 25
-          Top = 448
+          Top = 452
           Width = 99
           Caption = 'Default'
           OnClick = Button9Click
@@ -3295,27 +3305,27 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 21
           Top = 22
-          Width = 153
+          Width = 172
           Caption = 'Show position in title bar'
           OnClick = ShowTitleClick
           ParentFont = False
           TabOrder = 1
         end
         object LabelLine: TCheckBox
-          Left = 26
+          Left = 16
           Height = 21
           Top = 470
-          Width = 74
+          Width = 81
           Caption = 'LabelLine'
           OnClick = LabelLineClick
           ParentFont = False
           TabOrder = 8
         end
         object OptLabels: TCheckBox
-          Left = 26
+          Left = 16
           Height = 21
           Top = 492
-          Width = 76
+          Width = 85
           Caption = 'OptLabels'
           OnClick = OptLabelsClick
           ParentFont = False
@@ -3325,7 +3335,7 @@ object f_config_display: Tf_config_display
           Left = 336
           Height = 21
           Top = 2
-          Width = 91
+          Width = 101
           Caption = 'Chart legend'
           OnClick = CheckBox5Click
           ParentFont = False
@@ -3334,8 +3344,8 @@ object f_config_display: Tf_config_display
         object CheckBox9: TCheckBox
           Left = 336
           Height = 21
-          Top = 42
-          Width = 114
+          Top = 43
+          Width = 130
           Caption = 'Orient to the pole'
           OnClick = CheckBox9Click
           ParentFont = False
@@ -4062,7 +4072,7 @@ object f_config_display: Tf_config_display
     MinFontSize = 0
     MaxFontSize = 0
     Options = [fdTrueTypeOnly, fdEffects, fdForceFontExist, fdScalableOnly]
-    left = 352
+    left = 342
     top = 481
   end
   object ColorDialog1: TColorDialog
@@ -4090,10 +4100,10 @@ object f_config_display: Tf_config_display
       'ColorT=A4A0A0'
     )
     left = 432
-    top = 481
+    top = 470
   end
   object ImageList1: TImageList
-    left = 195
+    left = 185
     top = 476
     Bitmap = {
       4C69040000001000000010000000000000000000000000000000000000000000
