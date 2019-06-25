@@ -104,8 +104,8 @@ type
     function findDev(root: TDOMNode; createifnotexist: boolean;
       out errmsg: string): BaseDevice;
     function findDev(root: TDOMNode; out errmsg: string): BaseDevice;
-    function ProcessData(s: TMemoryStream): boolean;
-    procedure ProcessDataThread(s: TMemoryStream);
+    function ProcessData(s: TStringStream): boolean;
+    procedure ProcessDataThread(s: TStringStream);
     procedure ProcessDataAsync(Data: PtrInt);
     procedure setDriverConnection(status: boolean; deviceName: string);
     procedure OpenProtocolTrace(fnraw, fnlog, fnerr: string);
@@ -347,68 +347,17 @@ begin
 end;
 
 procedure TIndiBaseClient.Execute;
-const
-  buffersize = 8192;
 var
-  buf: string;
+  buf, rbuf, tbuf: string;
   init: boolean;
-  buffer: array[0..buffersize-1] of char;
-  tbuf: array[0..1024] of char;
-  s: TMemoryStream;
-  i, n, level, c, tl: integer;
-  closing: boolean;
-  lastc: char;
-
-  function ReadElement(newc: char): boolean; inline;
-  begin
-    Result := False;
-    case newc of
-      chr(0):
-      begin
-        s.Clear;
-        s.WriteBuffer('<INDIMSG>', 9);
-        level := 0;
-      end;
-      '/':
-      begin
-        s.Write(newc, 1);
-        if (lastc = '<') then
-        begin
-          Dec(level);
-          closing := True;
-        end;
-      end;
-      '<':
-      begin
-        Inc(level);
-        closing := False;
-        s.Write(newc, 1);
-      end;
-      '>':
-      begin
-        s.Write(newc, 1);
-        if (lastc = '/') or closing then
-        begin
-          Dec(level);
-          if level = 0 then
-          begin
-            s.WriteBuffer('</INDIMSG>', 10);
-            Result := True;
-          end;
-        end;
-      end;
-      else
-      begin
-        s.Write(newc, 1);
-      end;
-    end;
-    lastc := newc;
-  end;
+  s: TStringStream;
+  n, c, tl: integer;
+  cmdok: boolean;
 
 begin
   try
     tcpclient := TTCPClient.Create;
-    s := TMemoryStream.Create;
+    s := TStringStream.Create('');
     try
       OpenProtocolTrace(FProtocolRawFile, FProtocolTraceFile, FProtocolErrorFile);
       {$ifdef withCriticalsection}
@@ -427,53 +376,59 @@ begin
         WriteProtocolTrace('Connection result=' + tcpclient.GetErrorDesc);
       if FConnected then
       begin
+        // first send a getProperties
         RefreshProps;
         // main loop
         buf := '';
-        level := 0;
-        s.WriteBuffer('<INDIMSG>', 9);
+        s.WriteString('<INDIMSG>');
         c := 0;
         repeat
           if terminated then
             break;
-          n := tcpclient.Sock.RecvBufferEx(@buffer, buffersize, FTimeout);
+          rbuf := tcpclient.Sock.RecvTerminated(FTimeout, LF);
+          n:=Length(rbuf);
           if (tcpclient.Sock.lastError <> 0) and
             (tcpclient.Sock.lastError <> WSAETIMEDOUT) then
             break;
           if n > 0 then
           begin
             if FProtocolTrace then
-              WriteProtocolRaw('Receive buffer size=' + IntToStr(n) +
-                crlf + Copy(buffer,1,n));
-            for i := 0 to n - 1 do
-            begin
-              if ReadElement(buffer[i]) then
+              WriteProtocolRaw('Receive buffer size=' + IntToStr(n) +': '+ rbuf);
+            s.WriteString(rbuf);
+            // detect closing of first level
+            cmdok:=(copy(rbuf,1,2)='</');
+            if cmdok then
               begin
+                s.WriteString('</INDIMSG>');
                 if FProtocolTrace then
                 begin
                   s.Position := 0;
-                  tl := s.Read(tbuf, 1024);
+                  tbuf := s.DataString;
+                  tl:=length(tbuf);
                   if tl<=1024 then
                     WriteProtocolTrace('Process data=' + StringReplace(
-                      StringReplace(copy(tbuf, 1, tl), cr, '', [rfReplaceAll]),
+                      StringReplace(tbuf, cr, '', [rfReplaceAll]),
                       lf, '', [rfReplaceAll]))
                   else
                     WriteProtocolTrace('Process data=' + StringReplace(
-                      StringReplace(copy(tbuf, 1, tl), cr, '', [rfReplaceAll]),
+                      StringReplace(copy(tbuf, 1, 1024), cr, '', [rfReplaceAll]),
                       lf, '', [rfReplaceAll]) + '...');
                 end;
+                // process this buffer
                 ProcessDataThread(s);
-                s := TMemoryStream.Create;
-                s.WriteBuffer('<INDIMSG>', 9);
+                // initialize a new buffer
+                s := TStringStream.Create('');
+                s.WriteString('<INDIMSG>');
               end;
-            end;
           end;
           if init then
           begin
+            // try to detect the last defProp
             Inc(c);
-            if c > 50 then
-              FinitProps := True;  // no response? continue
-            if FinitProps then
+            if c > 50 then // wait a max of 50*timeout = 5 seconds
+              FinitProps := True;  // no setProp? continue
+            // no more data received
+            if FinitProps and (rbuf='') then
             begin
               if FProtocolTrace then
                 WriteProtocolTrace('Initialized');
@@ -643,7 +598,7 @@ begin
     end;
 end;
 
-procedure TIndiBaseClient.ProcessDataThread(s: TMemoryStream);
+procedure TIndiBaseClient.ProcessDataThread(s: TStringStream);
 begin
   if not terminated then
     Application.QueueAsyncCall(@ProcessDataAsync, PtrInt(s))
@@ -657,7 +612,7 @@ begin
   try
     if not terminated then
     begin
-      if not ProcessData(TMemoryStream(Data)) then
+      if not ProcessData(TStringStream(Data)) then
       begin
         mp:=IMessage.Create;
         mp.msg:='Bad INDI message';
@@ -665,18 +620,18 @@ begin
       end;
     end
     else
-      TMemoryStream(Data).Free;
+      TStringStream(Data).Free;
   except
   end;
 end;
 
-function TIndiBaseClient.ProcessData(s: TMemoryStream): boolean;
+function TIndiBaseClient.ProcessData(s: TStringStream): boolean;
 var
   Doc: TXMLDocument;
   Node: TDOMNode;
   dp: BaseDevice;
   isBlob: boolean;
-  ebuf: array[0..1024] of char;
+  ebuf: string;
   n: integer;
   buf, errmsg, dname, pname: string;
 begin
@@ -691,9 +646,9 @@ begin
       begin
         WriteProtocolError('Read XML error:' + e.Message);
         s.Position := 0;
-        n := s.Read(ebuf, 1024);
+        ebuf := copy(s.DataString,1,256);
         WriteProtocolError('Error data=' + trim(
-          StringReplace(StringReplace(copy(ebuf, 1, n), cr, '', [rfReplaceAll]),
+          StringReplace(StringReplace(ebuf, cr, '', [rfReplaceAll]),
           lf, '', [rfReplaceAll])) + '...');
       end;
       Result := False;
@@ -701,6 +656,7 @@ begin
       exit;
     end;
   end;
+
   try
     Node := Doc.DocumentElement.FirstChild;
     while Node <> nil do
@@ -708,8 +664,10 @@ begin
       if terminated then
         break;
       dp := findDev(Node, True, errmsg);
-      if dp=nil then
-        break;
+      if dp=nil then begin
+        Node := Node.NextSibling;
+        continue;
+      end;
       if FProtocolTrace and (errmsg <> '') then
         WriteProtocolError('FindDev error: ' + errmsg);
       if Node.NodeName = 'message' then
