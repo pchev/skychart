@@ -621,6 +621,7 @@ begin
   BtnBWColor.Caption := rsWhiteOnBlack;
   BtnWBColor.Caption := rsBlackOnWhite;
   GroupBox6.Caption := rsTheme;
+  GroupNightColor.Caption := rsNightVisionC;
 
   Page3.Caption := rsDeepSkyColou;
   lblDSOCScheme.Caption := rsUseAPresetCo;
