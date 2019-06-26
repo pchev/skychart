@@ -1529,6 +1529,7 @@ resourcestring
   rsAdministrato = 'administrator';
   rsGet = 'Get';
   rsASCOMDriverE = 'The ASCOM driver report an error';
+  rsLoadINDIConf = 'Load INDI configuration';
 
 // also update upsi_translation
 

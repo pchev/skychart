@@ -748,6 +748,7 @@ begin
   Label75.Caption := rsINDIServerHo;
   Label130.Caption := rsINDIServerPo;
   Label260.Caption := rsTelescopeNam;
+  AutoloadConfig.Caption:=rsLoadINDIConf;
   BtnGet.Caption := rsGet;
   Connect.Caption := rsConnect;
   Disconnect.Caption := rsDisconnect;
@@ -775,6 +776,7 @@ procedure Tpop_indi.ScopeShow;
 begin
   IndiServerHost.Caption := csc.IndiServerHost;
   IndiServerPort.Caption := csc.IndiServerPort;
+  AutoloadConfig.Checked := csc.IndiLoadConfig;
   MountIndiDevice.items.Clear;
   if csc.IndiDevice <> '' then
   begin
