@@ -4,10 +4,11 @@
 
 unit indiclient;
 
+{$warn 5023 off : no warning about unused units}
 interface
 
 uses
-  indibaseclient, indiapi, indicom, pu_indigui, LazarusPackageIntf;
+  indibaseclient, indiapi, indicom, pu_indigui, indiblobclient, LazarusPackageIntf;
 
 implementation
 
