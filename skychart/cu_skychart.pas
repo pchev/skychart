@@ -8343,7 +8343,7 @@ begin
       until EOF(f) or ((trim(buf) <> '') and (buf[1] <> '#'));
       if (trim(buf) = '') or (buf[1] = '#') then
         exit;
-      i1 := StrToInt(trim(words(buf, blank, 1, 1)));
+      i1 := round(StrToFloat(trim(words(buf, blank, 1, 1))));
       d1 := strtofloat(trim(words(buf, blank, 2, 1)));
       if d1 > 90 then
         d1 := 90;
@@ -8365,7 +8365,7 @@ begin
         until EOF(f) or ((trim(buf) <> '') and (buf[1] <> '#'));
         if (trim(buf) = '') or (buf[1] = '#') then
           break;
-        i2 := StrToInt(trim(words(buf, blank, 1, 1)));
+        i2 := round(StrToFloat(trim(words(buf, blank, 1, 1))));
         d2 := strtofloat(trim(words(buf, blank, 2, 1)));
         if i2 > 359 then
           i2 := 359;
