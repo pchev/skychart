@@ -11585,6 +11585,7 @@ begin
     fn :=slash(privatedir)+'deltat.txt';
     if QuickDownload(url, fn, False) then begin
       LoadDeltaT;
+      ShowMessage(rsUpdatedSucce);
     end
     else begin
       ShowMessage('Cannot update the Delta T file now, please check your Internet connection');
