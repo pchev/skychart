@@ -53,6 +53,7 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    MenuUpdDeltaT: TMenuItem;
     SavePictureDialog1: TSavePictureDialog;
     ViewAllTollbar: TAction;
     MenuItem1: TMenuItem;
@@ -485,6 +486,7 @@ type
     procedure MenuToolboxClick(Sender: TObject);
     procedure MenuUpdAsteroidClick(Sender: TObject);
     procedure MenuUpdCometClick(Sender: TObject);
+    procedure MenuUpdDeltaTClick(Sender: TObject);
     procedure MenuUpdSatelliteClick(Sender: TObject);
     procedure MenuUpdSoftClick(Sender: TObject);
     procedure MouseModeExecute(Sender: TObject);
@@ -11573,6 +11575,20 @@ end;
 procedure Tf_main.MenuUpdCometClick(Sender: TObject);
 begin
   SetupSolsysPage(2, True);
+end;
+
+procedure Tf_main.MenuUpdDeltaTClick(Sender: TObject);
+var
+  fn, url: string;
+begin
+    url := 'https://www.ap-i.net/pub/skychart/deltat/deltat.txt';
+    fn :=slash(privatedir)+'deltat.txt';
+    if QuickDownload(url, fn, False) then begin
+      LoadDeltaT;
+    end
+    else begin
+      ShowMessage('Cannot update the Delta T file now, please check your Internet connection');
+    end;
 end;
 
 procedure Tf_main.MenuUpdSatelliteClick(Sender: TObject);
