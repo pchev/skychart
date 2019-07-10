@@ -75,7 +75,6 @@ type
   Tf_indigui = class(TForm)
     msg: TMemo;
     dev: TPageControl;
-    NoConnection: TPanel;
     Splitter1: TSplitter;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -232,6 +231,7 @@ begin
   if FIndiDevice <> '' then
     indiclient.watchDevice(FIndiDevice);
   indiclient.ConnectServer;
+  dmsg('Connecting to INDI server');
 end;
 
 procedure Tf_indigui.FormCreate(Sender: TObject);
@@ -278,7 +278,6 @@ end;
 
 procedure Tf_indigui.ServerConnected(Sender: TObject);
 begin
-  NoConnection.Visible := False;
   indiclient.setBLOBMode(B_NEVER, '');
   dmsg('Server connected');
 end;

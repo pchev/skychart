@@ -19,17 +19,6 @@ object f_indigui: Tf_indigui
     Align = alClient
     TabOrder = 0
   end
-  object NoConnection: TPanel
-    Left = 128
-    Height = 154
-    Top = 112
-    Width = 374
-    Caption = 'Connecting to INDI server ...'
-    Font.Height = -20
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 2
-  end
   object Splitter1: TSplitter
     Cursor = crVSplit
     Left = 0
