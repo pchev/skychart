@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2019-03-17 15:18+0000\n"
-"PO-Revision-Date: 2019-02-16 23:32+0000\n"
-"Last-Translator: Stephan Woidowski <swoidowski@t-online.de>\n"
+"POT-Creation-Date: 2019-07-11 16:18+0000\n"
+"PO-Revision-Date: 2019-05-16 21:43+0000\n"
+"Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-03-17 15:25+0000\n"
-"X-Generator: Launchpad (build 18905)\n"
+"X-Launchpad-Export-Date: 2019-07-11 16:24+0000\n"
+"X-Generator: Launchpad (build 19007)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -370,6 +370,10 @@ msgstr ""
 
 #: u_translation.rsasampapplica3
 msgid "A SAMP application send coordinates location"
+msgstr ""
+
+#: u_translation.rsascomdrivere
+msgid "The ASCOM driver report an error"
 msgstr ""
 
 #: u_translation.rsascomremote
@@ -1492,6 +1496,10 @@ msgstr ""
 msgid "DeltaT uncertainty"
 msgstr ""
 
+#: u_translation.rsdeltatrecent
+msgid "DeltaT recent value"
+msgstr ""
+
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
 msgstr ""
@@ -1914,7 +1922,7 @@ msgstr ""
 
 #: u_translation.rserror
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: u_translation.rserrorcreatin
 msgid "%sError creating table %s"
@@ -1938,7 +1946,7 @@ msgstr ""
 
 #: u_translation.rsestimatedfil
 msgid "Estimated file size: %sMB %sDo you want to continue?"
-msgstr ""
+msgstr "Estimated file size: %sMB %sDo you want to continue?"
 
 #: u_translation.rsestimatedtai
 msgid "Estimated tail length"
@@ -2058,7 +2066,7 @@ msgstr ""
 
 #: u_translation.rsfieldtoowidt
 msgid "Field too wide! Maximum is %s"
-msgstr ""
+msgstr "Field too wide! Maximum is %s"
 
 #: u_translation.rsfile
 msgid "File"
@@ -2106,7 +2114,7 @@ msgstr ""
 
 #: u_translation.rsfind
 msgid "Find"
-msgstr ""
+msgstr "Find"
 
 #: u_translation.rsfindercircle
 msgid "Finder circle (eyepiece)"
@@ -2554,7 +2562,7 @@ msgstr ""
 
 #: u_translation.rsindrive
 msgid "in drive"
-msgstr ""
+msgstr "in drive"
 
 #: u_translation.rsinfo
 msgid "Information"
@@ -2850,7 +2858,7 @@ msgstr "Listen on port: %s"
 
 #: u_translation.rslistofavaila
 msgid "List of available plates"
-msgstr ""
+msgstr "List of available plates"
 
 #: u_translation.rsload
 msgid "Load"
@@ -2862,6 +2870,10 @@ msgstr ""
 
 #: u_translation.rsloadfromfile
 msgid "Load from file"
+msgstr ""
+
+#: u_translation.rsloadindiconf
+msgid "Load INDI configuration"
 msgstr ""
 
 #: u_translation.rsloadingcatal
@@ -3206,7 +3218,7 @@ msgstr "Month"
 
 #: u_translation.rsmoon
 msgid "Moon"
-msgstr ""
+msgstr "Moon"
 
 #: u_translation.rsmoreinformat
 msgid "More informations"
@@ -3310,7 +3322,7 @@ msgstr ""
 
 #: u_translation.rsneptune
 msgid "Neptune"
-msgstr ""
+msgstr "Neptune"
 
 #: u_translation.rsnever
 msgid "never"
@@ -3438,7 +3450,7 @@ msgstr "Note"
 
 #: u_translation.rsnotfound
 msgid "%s not found"
-msgstr ""
+msgstr "%s not found"
 
 #: u_translation.rsnotfoundinan
 msgid "%s  Not found in any of the installed catalog indices."
@@ -3510,7 +3522,7 @@ msgstr ""
 
 #: u_translation.rsobjectname
 msgid "Object name"
-msgstr ""
+msgstr "Object name"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
@@ -3818,11 +3830,11 @@ msgstr ""
 
 #: u_translation.rspleasechecky
 msgid "Please check your Internet connection and the URL definition"
-msgstr ""
+msgstr "Please check your Internet connection and the URL definition"
 
 #: u_translation.rspleaseconfig
 msgid "Please configure your DSS file path first."
-msgstr ""
+msgstr "Please configure your DSS file path first."
 
 #: u_translation.rspleaseconfig2
 msgid "Please configure the orbital elements URL!"
@@ -3842,7 +3854,7 @@ msgstr ""
 
 #: u_translation.rspleaseentera
 msgid "Please enter an object identifier."
-msgstr ""
+msgstr "Please enter an object identifier."
 
 #: u_translation.rspleaseindica
 msgid "Please indicate a catalog short name"
@@ -3866,7 +3878,7 @@ msgstr ""
 
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
-msgstr ""
+msgstr "Please mount RealSky CD number"
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
@@ -3886,7 +3898,7 @@ msgstr ""
 
 #: u_translation.rspluto
 msgid "Pluto"
-msgstr ""
+msgstr "Pluto"
 
 #: u_translation.rsplutoisaplan
 msgid "Pluto is a planet."
@@ -4426,7 +4438,7 @@ msgstr ""
 
 #: u_translation.rssatring
 msgid "Sat. ring"
-msgstr ""
+msgstr "Sat. ring"
 
 #: u_translation.rssaturday
 msgid "Sat."
@@ -4434,7 +4446,7 @@ msgstr ""
 
 #: u_translation.rssaturn
 msgid "Saturn"
-msgstr ""
+msgstr "Saturn"
 
 #: u_translation.rssave
 msgid "Save"
@@ -4526,7 +4538,7 @@ msgstr ""
 
 #: u_translation.rssearchfor
 msgid "Search for"
-msgstr ""
+msgstr "Search for"
 
 #: u_translation.rssearchindex
 msgid "Search index"
@@ -5170,7 +5182,7 @@ msgstr ""
 
 #: u_translation.rssun
 msgid "Sun"
-msgstr ""
+msgstr "Sun"
 
 #: u_translation.rssunalt
 msgid "Sun alt."
@@ -5614,7 +5626,7 @@ msgstr ""
 
 #: u_translation.rsuranus
 msgid "Uranus"
-msgstr ""
+msgstr "Uranus"
 
 #: u_translation.rsurl
 msgid "URL"

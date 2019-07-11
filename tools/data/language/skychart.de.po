@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-17 15:18+0000\n"
-"PO-Revision-Date: 2018-11-10 10:49+0000\n"
+"POT-Creation-Date: 2019-07-11 16:18+0000\n"
+"PO-Revision-Date: 2019-03-29 16:12+0000\n"
 "Last-Translator: Stefan Beck <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-03-17 15:24+0000\n"
-"X-Generator: Launchpad (build 18905)\n"
+"X-Launchpad-Export-Date: 2019-07-11 16:24+0000\n"
+"X-Generator: Launchpad (build 19007)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -191,7 +191,7 @@ msgstr "Passen Sie die Größe des Fensters auf dem Bildschirm DPI"
 
 #: u_translation.rsadministrato
 msgid "administrator"
-msgstr ""
+msgstr "Administrator"
 
 #: u_translation.rsadvanced
 msgid "Advanced"
@@ -370,9 +370,13 @@ msgstr "Eine SAMP-Anwendung hat ein Bild zum Laden gesendet"
 msgid "A SAMP application send coordinates location"
 msgstr "Eine SAMP-Anwendung hat Koordinaten gesendet"
 
+#: u_translation.rsascomdrivere
+msgid "The ASCOM driver report an error"
+msgstr ""
+
 #: u_translation.rsascomremote
 msgid "ASCOM Alpaca is available on %s"
-msgstr ""
+msgstr "ASCOM Alpaca ist verfügbar am %s"
 
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
@@ -1116,7 +1120,7 @@ msgstr "Konvertiere Katalogdateien"
 
 #: u_translation.rscooordinates
 msgid "Coordinate system to use with the clients"
-msgstr ""
+msgstr "zu nutzendes Koordinatensystem"
 
 #: u_translation.rscoord
 msgid "Coord."
@@ -1490,6 +1494,10 @@ msgstr "Aktuellen Ort aus der Datenbank löschen?"
 msgid "DeltaT uncertainty"
 msgstr "Delta-T-Ungenauigkeit"
 
+#: u_translation.rsdeltatrecent
+msgid "DeltaT recent value"
+msgstr ""
+
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
 msgstr "Sichtbaren Horizont absenken"
@@ -1620,7 +1628,7 @@ msgstr "Hier nichts verändern wenn Sie nicht ganz sicher sind, was Sie tun!"
 
 #: u_translation.rsdonotfilterb
 msgid "Do not filter bright nebula by magnitude"
-msgstr ""
+msgstr "Helle Nebel nicht mittles Magnitude filtern"
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
@@ -1628,7 +1636,7 @@ msgstr "Messier-Objekte nicht filtern"
 
 #: u_translation.rsdonotrunasad
 msgid "Do not run %s as %s!"
-msgstr ""
+msgstr "%s nicht als %s ausführen"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2268,7 +2276,7 @@ msgstr "Geometrische Höhe"
 
 #: u_translation.rsget
 msgid "Get"
-msgstr ""
+msgstr "Abrufen"
 
 #: u_translation.rsgetasteroidl
 msgid "Get the asteroids list."
@@ -2540,7 +2548,7 @@ msgstr "INDI Treiber-Einstellungen"
 
 #: u_translation.rsindiready
 msgid "INDI server is ready"
-msgstr ""
+msgstr "INDI-Server ist bereit"
 
 #: u_translation.rsindiserverho
 msgid "INDI server host "
@@ -2861,6 +2869,10 @@ msgstr "Datei laden"
 #: u_translation.rsloadfromfile
 msgid "Load from file"
 msgstr "Aus Datei laden"
+
+#: u_translation.rsloadindiconf
+msgid "Load INDI configuration"
+msgstr ""
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."

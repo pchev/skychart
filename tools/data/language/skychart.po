@@ -5886,3 +5886,15 @@ msgstr ""
 msgid "Get"
 msgstr ""
 
+#: u_translation:rsascomdrivere
+msgid "The ASCOM driver report an error"
+msgstr ""
+
+#: u_translation:rsloadindiconf
+msgid "Load INDI configuration"
+msgstr ""
+
+#: u_translation:rsdeltatrecent
+msgid "DeltaT recent value"
+msgstr ""
+

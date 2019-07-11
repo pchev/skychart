@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-17 15:18+0000\n"
+"POT-Creation-Date: 2019-07-11 16:18+0000\n"
 "PO-Revision-Date: 2018-11-19 12:35+0000\n"
 "Last-Translator: Michel Smits <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-03-17 15:24+0000\n"
-"X-Generator: Launchpad (build 18905)\n"
+"X-Launchpad-Export-Date: 2019-07-11 16:24+0000\n"
+"X-Generator: Launchpad (build 19007)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -368,6 +368,10 @@ msgstr "Een SAMP applicatie stuurt een afbeelding om te laden"
 #: u_translation.rsasampapplica3
 msgid "A SAMP application send coordinates location"
 msgstr "Een SAMP applicatie stuurt de locatie coördinaten"
+
+#: u_translation.rsascomdrivere
+msgid "The ASCOM driver report an error"
+msgstr ""
 
 #: u_translation.rsascomremote
 msgid "ASCOM Alpaca is available on %s"
@@ -1488,6 +1492,10 @@ msgstr "Verwijder de huidige locatie uit de database?"
 #: u_translation.rsdeltaterror
 msgid "DeltaT uncertainty"
 msgstr "DeltaT onzekerheid"
+
+#: u_translation.rsdeltatrecent
+msgid "DeltaT recent value"
+msgstr ""
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -2862,6 +2870,10 @@ msgstr "Laad bestand"
 #: u_translation.rsloadfromfile
 msgid "Load from file"
 msgstr "Laad uit bestand"
+
+#: u_translation.rsloadindiconf
+msgid "Load INDI configuration"
+msgstr ""
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."
