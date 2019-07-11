@@ -1530,6 +1530,7 @@ resourcestring
   rsGet = 'Get';
   rsASCOMDriverE = 'The ASCOM driver report an error';
   rsLoadINDIConf = 'Load INDI configuration';
+  rsDeltatRecent = 'DeltaT recent value';
 
 // also update upsi_translation
 
