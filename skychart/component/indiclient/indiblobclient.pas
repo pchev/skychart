@@ -75,11 +75,13 @@ type
     FIndiBlobEvent: TIndiBlobEvent;
     SyncindiDev: Basedevice;
     SyncindiProp: IndiProperty;
+    FIndiMessageEvent: TIndiMessageEvent;
     {$ifdef withCriticalsection}
     SendCriticalSection: TRTLCriticalSection;
     {$endif}
     procedure IndiDeviceEvent(dp: Basedevice);
     procedure IndiDeleteDeviceEvent(dp: Basedevice);
+    procedure IndiMessageEvent(mp: IMessage);
     procedure IndiPropertyEvent(indiProp: IndiProperty);
     procedure IndiDeletePropertyEvent(indiProp: IndiProperty);
     procedure IndiBlobEvent(bp: IBLOB);
@@ -89,6 +91,7 @@ type
     procedure SyncDeleteDeviceEvent;
     procedure SyncPropertyEvent;
     procedure SyncDeletePropertyEvent;
+    procedure ASyncMessageEvent(Data: PtrInt);
     procedure ASyncBlobEvent(Data: PtrInt);
     function findDev(root: TDOMNode; createifnotexist: boolean;
       out errmsg: string): BaseDevice;
@@ -138,6 +141,7 @@ type
     property onDeleteProperty: TIndiPropertyEvent
       read FIndiDeletePropertyEvent write FIndiDeletePropertyEvent;
     property onNewBlob: TIndiBlobEvent read FIndiBlobEvent write FIndiBlobEvent;
+    property onNewMessage: TIndiMessageEvent read FIndiMessageEvent write FIndiMessageEvent;
   end;
 
 implementation
@@ -560,6 +564,7 @@ begin
       errmsg := '';
       Result := BaseDevice.Create;
       Result.setDeviceName(buf);
+      Result.onNewMessage := @IndiMessageEvent;
       Result.onNewProperty := @IndiPropertyEvent;
       Result.onDeleteProperty := @IndiDeletePropertyEvent;
       Result.onNewBlob := @IndiBlobEvent;
@@ -928,4 +933,23 @@ begin
   end;
 end;
 
+procedure TIndiBlobClient.IndiMessageEvent(mp: IMessage);
+begin
+  try
+  Application.QueueAsyncCall(@ASyncMessageEvent, PtrInt(mp));
+  except
+  end;
+end;
+
+
+procedure TIndiBlobClient.ASyncMessageEvent(Data: PtrInt);
+begin
+  try
+  if assigned(FIndiMessageEvent) then
+    FIndiMessageEvent(IMessage(data))
+  else
+    IMessage(data).Free;
+  except
+  end;
+end;
 end.
