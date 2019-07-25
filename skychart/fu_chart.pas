@@ -5982,10 +5982,7 @@ function Tf_chart.cmd_GetObjectList: string;
 var
   buf, msg: string;
 begin
-  if sc.cfgsc.windowratio = 0 then
-    sc.cfgsc.windowratio := 1;
-  sc.Findlist(sc.cfgsc.racentre, sc.cfgsc.decentre, sc.cfgsc.fov / 2,
-    sc.cfgsc.fov / 2 / sc.cfgsc.windowratio, buf, msg, False, False, False);
+  sc.FindListWin(buf, msg, False, False);
   Result := buf;
 end;
 

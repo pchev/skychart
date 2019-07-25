@@ -179,6 +179,7 @@ type
     procedure GetLabPos(ra, Dec, r: double; w, h: integer; var x, y: integer);
     procedure FindList(ra, Dec, dx, dy: double;
       var Text, msg: string; showall, allobject, trunc: boolean);
+    procedure FindListWin(var Text, msg: string; showall, allobject: boolean);
     property OnShowDetailXY: Tint2func read FShowDetailXY write FShowDetailXY;
     function GetChartInfo(sep: string = blank): string;
     function GetChartPos: string;
@@ -4165,6 +4166,226 @@ const
   end;
   /////////////
 begin
+  if ((abs(Dec) + abs(dx)) > pid2) or ((abs(Dec) + abs(dy)) > pid2) then
+  begin
+    x1 := 0;
+    x2 := pi2;
+  end
+  else
+  begin
+    x1 := NormRA(ra - dx / cos(Dec));
+    x2 := NormRA(ra + dx / cos(Dec));
+    if x2 < x1 then
+      x2 := x2 + pi2;
+  end;
+  y1 := max(-pid2, Dec - dy);
+  y2 := min(pid2, Dec + dy);
+  Text := '';
+  Fcatalog.OpenCat(cfgsc);
+  InitCatalog;
+  saveNebFilter := Fcatalog.cfgshr.NebFilter;
+  saveStarFilter := Fcatalog.cfgshr.StarFilter;
+  if showall then
+  begin
+    Fcatalog.cfgshr.NebFilter := False;
+    Fcatalog.cfgshr.StarFilter := False;
+  end;
+  // search catalog object
+  try
+    i := 0;
+    if allobject or Fcatalog.cfgshr.ListPla then
+      FindatPosPlanet;
+    if allobject or Fcatalog.cfgshr.ListPla then
+      FindatPosComet;
+    if allobject or Fcatalog.cfgshr.ListPla then
+      FindatPosAsteroid;
+    if allobject or Fcatalog.cfgshr.ListNeb then
+    begin
+      FindAtPosCat(gcneb);
+      if Fcatalog.cfgcat.nebcaton[uneb - BaseNeb] then
+        FindAtPosCat(uneb);
+      if Fcatalog.cfgcat.nebcaton[voneb - BaseNeb] then
+        FindAtPosCat(voneb);
+      if Fcatalog.cfgcat.nebcaton[sac - BaseNeb] then
+        FindAtPosCat(sac);
+      if Fcatalog.cfgcat.nebcaton[ngc - BaseNeb] then
+        FindAtPosCat(ngc);
+      if Fcatalog.cfgcat.nebcaton[lbn - BaseNeb] then
+        FindAtPosCat(lbn);
+      if Fcatalog.cfgcat.nebcaton[sh2 - BaseNeb] then
+        FindAtPosCat(sh2);
+      if Fcatalog.cfgcat.nebcaton[drk - BaseNeb] then
+        FindAtPosCat(drk);
+      if Fcatalog.cfgcat.nebcaton[rc3 - BaseNeb] then
+        FindAtPosCat(rc3);
+      if Fcatalog.cfgcat.nebcaton[pgc - BaseNeb] then
+        FindAtPosCat(pgc);
+      if Fcatalog.cfgcat.nebcaton[ocl - BaseNeb] then
+        FindAtPosCat(ocl);
+      if Fcatalog.cfgcat.nebcaton[gcm - BaseNeb] then
+        FindAtPosCat(gcm);
+      if Fcatalog.cfgcat.nebcaton[gpn - BaseNeb] then
+        FindAtPosCat(gpn);
+    end;
+    if allobject or Fcatalog.cfgshr.ListVar then
+    begin
+      FindAtPosCat(gcvar);
+      if Fcatalog.cfgcat.varstarcaton[gcvs - BaseVar] then
+        FindAtPosCat(gcvs);
+    end;
+    if allobject or Fcatalog.cfgshr.ListDbl then
+    begin
+      FindAtPosCat(gcdbl);
+      if Fcatalog.cfgcat.dblstarcaton[wds - BaseDbl] then
+        FindAtPosCat(wds);
+    end;
+    if allobject or Fcatalog.cfgshr.ListStar then
+    begin
+      FindAtPosCat(gcstar);
+      if Fcatalog.cfgcat.starcaton[vostar - BaseStar] then
+        FindAtPosCat(vostar);
+      if Fcatalog.cfgcat.starcaton[DefStar - BaseStar] then
+        FindAtPosCat(DefStar);
+      if Fcatalog.cfgcat.starcaton[bsc - BaseStar] then
+        FindAtPosCat(bsc);
+      if Fcatalog.cfgcat.starcaton[dsbase - BaseStar] then
+        FindAtPosCat(dsbase);
+      if Fcatalog.cfgcat.starcaton[sky2000 - BaseStar] then
+        FindAtPosCat(sky2000);
+      if Fcatalog.cfgcat.starcaton[tyc - BaseStar] then
+        FindAtPosCat(tyc);
+      if Fcatalog.cfgcat.starcaton[tyc2 - BaseStar] then
+        FindAtPosCat(tyc2);
+      if Fcatalog.cfgcat.starcaton[tic - BaseStar] then
+        FindAtPosCat(tic);
+      if Fcatalog.cfgcat.starcaton[dstyc - BaseStar] then
+        FindAtPosCat(dstyc);
+      if Fcatalog.cfgcat.starcaton[gsc - BaseStar] then
+        FindAtPosCat(gsc);
+      if Fcatalog.cfgcat.starcaton[gscf - BaseStar] then
+        FindAtPosCat(gscf);
+      if Fcatalog.cfgcat.starcaton[gscc - BaseStar] then
+        FindAtPosCat(gscc);
+      if Fcatalog.cfgcat.starcaton[dsgsc - BaseStar] then
+        FindAtPosCat(dsgsc);
+      if Fcatalog.cfgcat.starcaton[usnoa - BaseStar] then
+        FindAtPosCat(usnoa);
+      if Fcatalog.cfgcat.starcaton[usnob - BaseStar] then
+        FindAtPosCat(usnob);
+      if Fcatalog.cfgcat.starcaton[hn290 - BaseStar] then
+        FindAtPosCat(hn290);
+      if Fcatalog.cfgcat.starcaton[gaia - BaseStar] then
+        FindAtPosCat(gaia);
+      if Fcatalog.cfgcat.starcaton[microcat - BaseStar] then
+        FindAtPosCat(microcat);
+    end;
+    if i > maxln then
+      msg := Format(rsMoreThanObje, [IntToStr(maxln)])
+    else
+      msg := Format(rsThereAreObjec, [IntToStr(i)]);
+  finally
+    Fcatalog.CloseCat;
+    if showall then
+    begin
+      Fcatalog.cfgshr.NebFilter := saveNebFilter;
+      Fcatalog.cfgshr.StarFilter := saveStarFilter;
+    end;
+  end;
+end;
+
+procedure Tskychart.FindListWin(var Text, msg: string; showall, allobject: boolean);
+var
+  x1, x2, y1, y2, xx1, yy1: double;
+  ra, Dec, dx, dy: double;
+  rec: Gcatrec;
+  desc, n, m, d: string;
+  saveStarFilter, saveNebFilter, ok: boolean;
+  i: integer;
+  xx, yy: single;
+const
+  maxln: integer = 100000;
+
+  procedure FindatPosCat(cat: integer);
+  begin
+    ok := fcatalog.FindInWin(cat, False, cfgsc, rec);
+    while ok do
+    begin
+      if i > maxln then
+        break;
+      projection(rec.ra, rec.Dec, xx1, yy1, True, cfgsc);
+      windowxy(xx1, yy1, xx, yy, cfgsc);
+      if (xx > cfgsc.Xmin) and (xx < cfgsc.Xmax) and (yy > cfgsc.Ymin) and (yy < cfgsc.Ymax) then
+      begin
+        FormatCatRec(rec, desc);
+        Text := Text + cfgsc.FindCat + tab + desc + crlf;
+        Inc(i);
+      end;
+      ok := fcatalog.FindInWin(cat, True, cfgsc, rec);
+    end;
+    fcatalog.CloseCat;
+  end;
+
+  procedure FindatPosPlanet;
+  begin
+    ok := fplanet.findplanet(x1, y1, x2, y2, False, cfgsc, n, m, d, desc, false);
+    while ok do
+    begin
+      if i > maxln then
+        break;
+      projection(cfgsc.findra, cfgsc.finddec, xx1, yy1, True, cfgsc);
+      windowxy(xx1, yy1, xx, yy, cfgsc);
+      if (xx > cfgsc.Xmin) and (xx < cfgsc.Xmax) and (yy > cfgsc.Ymin) and (yy < cfgsc.Ymax) then
+      begin
+        Text := Text + fplanet.eph_method + tab + desc + crlf;
+        Inc(i);
+      end;
+      ok := fplanet.findplanet(x1, y1, x2, y2, True, cfgsc, n, m, d, desc, false);
+    end;
+  end;
+
+  procedure FindatPosAsteroid;
+  begin
+    ok := fplanet.findasteroid(x1, y1, x2, y2, False, cfgsc, n, m, d, desc, false);
+    while ok do
+    begin
+      if i > maxln then
+        break;
+      projection(cfgsc.findra, cfgsc.finddec, xx1, yy1, True, cfgsc);
+      windowxy(xx1, yy1, xx, yy, cfgsc);
+      if (xx > cfgsc.Xmin) and (xx < cfgsc.Xmax) and (yy > cfgsc.Ymin) and (yy < cfgsc.Ymax) then
+      begin
+        Text := Text + 'MPC' + tab + desc + crlf;
+        Inc(i);
+      end;
+      ok := fplanet.findasteroid(x1, y1, x2, y2, True, cfgsc, n, m, d, desc, false);
+    end;
+  end;
+
+  procedure FindatPosComet;
+  begin
+    ok := fplanet.findcomet(x1, y1, x2, y2, False, cfgsc, n, m, d, desc, false);
+    while ok do
+    begin
+      if i > maxln then
+        break;
+      projection(cfgsc.findra, cfgsc.finddec, xx1, yy1, True, cfgsc);
+      windowxy(xx1, yy1, xx, yy, cfgsc);
+      if (xx > cfgsc.Xmin) and (xx < cfgsc.Xmax) and (yy > cfgsc.Ymin) and (yy < cfgsc.Ymax) then
+      begin
+        Text := Text + 'MPC' + tab + desc + crlf;
+        Inc(i);
+      end;
+      ok := fplanet.findcomet(x1, y1, x2, y2, True, cfgsc, n, m, d, desc, false);
+    end;
+  end;
+  /////////////
+begin
+  if cfgsc.windowratio = 0 then
+     cfgsc.windowratio := 1;
+  ra :=  cfgsc.racentre;
+  Dec:=  cfgsc.decentre;
+  dx :=  cfgsc.fov / 2;
+  dy :=  cfgsc.fov / 2 / cfgsc.windowratio;
   if ((abs(Dec) + abs(dx)) > pid2) or ((abs(Dec) + abs(dy)) > pid2) then
   begin
     x1 := 0;

@@ -202,6 +202,7 @@ type
     function SearchConstAbrev(Num: string; var ar1, de1: double): boolean;
     function FindAtPos(cat: integer; x1, y1, x2, y2: double;
       nextobj, truncate, searchcenter: boolean; cfgsc: Tconf_skychart; var rec: Gcatrec): boolean;
+    function FindInWin(cat: integer; nextobj: boolean; cfgsc: Tconf_skychart; var rec: Gcatrec): boolean;
     function FindObj(x1, y1, x2, y2: double; searchcenter: boolean; cfgsc: Tconf_skychart;
       var rec: Gcatrec; ftype: integer = ftAll): boolean;
     procedure GetAltName(rec: GCatrec; var txt: string);
@@ -4819,6 +4820,333 @@ begin
       if not found then
         continue;
     end;
+    if SampConnected and (cat = voneb) then
+    begin
+      cfgcat.SampFindTable := vocat.SAMPid;
+      cfgcat.SampFindURL := vocat.SAMPurl;
+      cfgcat.SampFindRec := vocat.VOcatrec;
+    end
+    else
+      cfgcat.SampFindTable := '';
+    if (rec.options.rectype = rtStar) and rec.star.valid[vsB_v] then
+      cfgsc.FindBV := rec.star.b_v
+    else
+      cfgsc.FindBV := 0;
+    if (rec.options.rectype = rtStar) and rec.star.valid[vsMagv] then
+      cfgsc.FindMag := rec.star.magv
+    else
+      cfgsc.FindBV := 0;
+    if cfgsc.FindStarPM then
+    begin
+      cfgsc.FindPMra := rec.star.pmra;
+      cfgsc.FindPMde := rec.star.pmdec;
+      cfgsc.FindPMEpoch := epoch;
+      if (rec.star.px>0)and(rec.star.px<0.8) then cfgsc.FindPMpx := rec.star.px;
+      cfgsc.FindPMrv := rec.num[1];
+      cfgsc.FindPMfullmotion := fullmotion;
+    end
+    else
+    begin
+      cfgsc.FindPMra := 0;
+      cfgsc.FindPMde := 0;
+      cfgsc.FindPMEpoch := 0;
+      cfgsc.FindPMpx := 0;
+      cfgsc.FindPMrv := 0;
+      cfgsc.FindPMfullmotion := False;
+    end;
+    break;
+  until False;
+  Result := ok;
+end;
+
+function Tcatalog.FindInWin(cat: integer; nextobj: boolean; cfgsc: Tconf_skychart; var rec: Gcatrec): boolean;
+var
+  xx1, yy1, cyear, dyear, radius, epoch: double;
+  xx, yy: single;
+  p: coordvector;
+  ok, found, fullmotion: boolean;
+begin
+  if cfgsc.YPmon = 0 then
+    cyear := cfgsc.CurYear + DayofYear(cfgsc.CurYear, cfgsc.CurMonth, cfgsc.CurDay) / 365.25
+  else
+    cyear := cfgsc.YPmon;
+  if not nextobj then
+  begin
+    InitRec(cat);
+    case cat of
+      DefStar: ok:=OpenDefaultStars;
+      sky2000: OpenSKYwin(ok);
+      tyc: OpenTYCwin(ok);
+      tyc2: OpenTY2win(2, ok);
+      tic: OpenTICwin(ok);
+      gscf: OpenGSCFwin(ok);
+      gscc: OpenGSCCwin(ok);
+      gsc: OpenGSCwin(ok);
+      usnoa: OpenUSNOAwin(ok);
+      usnob: OpenUSNOBwin(ok);
+      hn290: Open290win(ok);
+      gaia: OpenGaiawin(ok);
+      microcat: OpenMCTwin(3, ok);
+      dsbase: OpenDSbasewin(ok);
+      dstyc: OpenDSTYCwin(ok);
+      dsgsc: OpenDSGSCwin(ok);
+      bsc: OpenBSCwin(ok);
+      gcvs: OpenGCVwin(ok);
+      wds: OpenWDSwin(ok);
+      sac: OpenSACwin(ok);
+      ngc: ok:=OpenNGC;
+      lbn: OpenLBNwin(ok);
+      sh2: ok:=OpenSH2;
+      drk: ok:=OpenDRK;
+      rc3: OpenRC3win(ok);
+      pgc: OpenPGCwin(ok);
+      ocl: OpenOCLwin(ok);
+      gcm: OpenGCMwin(ok);
+      gpn: OpenGPNwin(ok);
+      vostar:
+      begin
+        VOobject := 'star';
+        SetVOCatpath(slash(VODir));
+        OpenVOCatwin(ok);
+      end;
+      voneb:
+      begin
+        VOobject := 'dso';
+        SetVOCatpath(slash(VODir));
+        OpenVOCatwin(ok);
+      end;
+      uneb:
+      begin
+        CurrentUserObj := -1;
+        ok := True;
+      end;
+      gcstar:
+      begin
+        VerGCat := rtStar;
+        CurGCat := 0;
+        ok := False;
+        while NewGCat do
+        begin
+          OpenGCatwin(ok);
+          if ok then
+            break;
+        end;
+      end;
+      gcvar:
+      begin
+        VerGCat := rtVar;
+        CurGCat := 0;
+        ok := False;
+        while NewGCat do
+        begin
+          OpenGCatwin(ok);
+          if ok then
+            break;
+        end;
+      end;
+      gcdbl:
+      begin
+        VerGCat := rtDbl;
+        CurGCat := 0;
+        ok := False;
+        while NewGCat do
+        begin
+          OpenGCatwin(ok);
+          if ok then
+            break;
+        end;
+      end;
+      gcneb:
+      begin
+        VerGCat := rtNeb;
+        CurGCat := 0;
+        ok := False;
+        while NewGCat do
+        begin
+          OpenGCatwin(ok);
+          CheckMessierColumn;
+          if ok then
+            break;
+        end;
+      end;
+      else
+        ok := False;
+    end;
+    if not ok then
+    begin
+      Result := False;
+      exit;
+    end;
+  end;
+  repeat
+    radius := 0;
+    case cat of
+      DefStar: ok := GetDefaultStars(rec);
+      sky2000: ok := GetSky2000(rec);
+      tyc: ok := GetTYC(rec);
+      tyc2: ok := GetTYC2(rec);
+      tic: ok := GetTIC(rec);
+      gscf: ok := GetGSCF(rec);
+      gscc: ok := GetGSCC(rec);
+      gsc: ok := GetGSC(rec);
+      usnoa: ok := GetUSNOA(rec);
+      usnob: ok := GetUSNOB(rec);
+      hn290: ok := Get290(rec);
+      gaia: ok := GetGaia(rec);
+      microcat: ok := GetMCT(rec);
+      dsbase: ok := GetDSbase(rec);
+      dstyc: ok := GetDSTyc(rec);
+      dsgsc: ok := GetDSGsc(rec);
+      bsc: ok := GetBSC(rec);
+      gcvs: ok := GetGCVS(rec);
+      wds: ok := GetWDS(rec);
+      sac:
+      begin
+        ok := GetSAC(rec);
+        radius := GetRadius(rec);
+      end;
+      ngc:
+      begin
+        ok := GetNGC(rec);
+        radius := GetRadius(rec);
+      end;
+      lbn:
+      begin
+        ok := GetLBN(rec);
+        radius := GetRadius(rec);
+      end;
+      sh2:
+      begin
+        ok := GetSH2(rec);
+        radius := GetRadius(rec);
+      end;
+      drk:
+      begin
+        ok := GetDRK(rec);
+        radius := GetRadius(rec);
+      end;
+      rc3:
+      begin
+        ok := GetRC3(rec);
+        radius := GetRadius(rec);
+      end;
+      pgc:
+      begin
+        ok := GetPGC(rec);
+        radius := GetRadius(rec);
+      end;
+      ocl:
+      begin
+        ok := GetOCL(rec);
+        radius := GetRadius(rec);
+      end;
+      gcm:
+      begin
+        ok := GetGCM(rec);
+        radius := GetRadius(rec);
+      end;
+      gpn:
+      begin
+        ok := GetGPN(rec);
+        radius := GetRadius(rec);
+      end;
+      vostar:
+      begin
+        ok := GetVOcatS(rec);
+      end;
+      voneb:
+      begin
+        ok := GetVOcatN(rec);
+      end;
+      uneb:
+      begin
+        ok := GetUObjN(rec);
+      end;
+      gcstar:
+      begin
+        ok := GetGcatS(rec);
+        while not ok do
+        begin
+          ok := NewGcat;
+          if not ok then
+            break;
+          OpenGCatwin(ok);
+          ok := GetGcatS(rec);
+        end;
+      end;
+      gcvar:
+      begin
+        ok := GetGcatV(rec);
+        while not ok do
+        begin
+          ok := NewGcat;
+          if not ok then
+            break;
+          OpenGCatwin(ok);
+          ok := GetGcatV(rec);
+        end;
+      end;
+      gcdbl:
+      begin
+        ok := GetGcatD(rec);
+        while not ok do
+        begin
+          ok := NewGcat;
+          if not ok then
+            break;
+          OpenGCatwin(ok);
+          ok := GetGcatD(rec);
+        end;
+      end;
+      gcneb:
+      begin
+        ok := GetGcatN(rec);
+        while not ok do
+        begin
+          ok := NewGcat;
+          if not ok then
+            break;
+          OpenGCatwin(ok);
+          CheckMessierColumn;
+          ok := GetGcatN(rec);
+        end;
+        radius := GetRadius(rec);
+      end;
+      else
+        ok := False;
+    end;
+    if not ok then
+      break;
+    cfgsc.FindStarPM := False;
+    epoch := 0;
+    fullmotion := False;
+    if cfgsc.PMon and (rec.options.rectype = rtStar) and rec.star.valid[vsPmra] and
+      rec.star.valid[vsPmdec] then
+    begin
+      if rec.star.valid[vsEpoch] then
+        epoch := rec.star.epoch
+      else
+        epoch := rec.options.Epoch;
+      dyear := cyear - epoch;
+      fullmotion := (rec.star.valid[vsPx] and(rec.star.px>0)and(rec.star.px<0.8) and (trim(rec.options.flabel[26]) = 'RV'));
+      propermotion(rec.ra, rec.Dec, dyear, rec.star.pmra, rec.star.pmdec,
+        fullmotion, rec.star.px, rec.num[1]);
+      cfgsc.FindStarPM := True;
+    end;
+    cfgsc.FindRA2000 := rec.ra;
+    cfgsc.FindDec2000 := rec.Dec;
+    Precession(rec.options.EquinoxJD, jd2000, cfgsc.FindRA2000, cfgsc.FindDec2000);
+    sofa_S2C(rec.ra, rec.Dec, p);
+    PrecessionV(rec.options.EquinoxJD, cfgsc.JDChart, p);
+    if cfgsc.ApparentPos then
+      apparent_equatorialV(p, cfgsc, True, True);
+    sofa_c2s(p, rec.ra, rec.Dec);
+    rec.ra := rmod(rec.ra + pi2, pi2);
+    projection(rec.ra, rec.Dec, xx1, yy1, True, cfgsc);
+    WindowXY(xx1, yy1, xx, yy, cfgsc);
+    found:=((xx > cfgsc.Xmin) and (xx < cfgsc.Xmax) and (yy > cfgsc.Ymin) and (yy < cfgsc.Ymax));
+    if not found then
+       continue;
     if SampConnected and (cat = voneb) then
     begin
       cfgcat.SampFindTable := vocat.SAMPid;
