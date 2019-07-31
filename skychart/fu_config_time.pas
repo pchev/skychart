@@ -806,11 +806,31 @@ begin
 end;
 
 procedure Tf_config_time.DateEditChange(Sender: TObject);
+var jd1,h: double;
+    y,m,d,d1,d2: integer;
 begin
   if LockChange then
     exit;
   try
     LockChange := True;
+    if d_yearEdit.Value=GregY.Value then begin
+      // check for invalid date in Gregorian calendar
+      d1:=d_yearEdit.Value * 10000 + d_month.Position * 100 + d_day.Position;
+      jd1:=jd(d_yearEdit.Value,d_month.Position,d_day.Position,12);
+      djd(jd1,y,m,d,h);
+      d2:=y * 10000 + m * 100 + d;
+      if d1<>d2 then begin
+        LockChange:=true;
+        if d2<=GregorianStart then
+          djd(GregorianStartJD,y,m,d,h)
+        else
+          djd(GregorianStartJD-1,y,m,d,h);
+        d_yearEdit.Value:=y;
+        d_month.Position:=m;
+        d_day.Position:=d;
+        LockChange:=false;
+      end;
+    end;
     if adbc.ItemIndex = 0 then
       csc.curyear := d_yearEdit.Value
     else
