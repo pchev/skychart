@@ -138,7 +138,6 @@ type
 
   { TJDDatePicker }
 
-  //  TJDDatePicker = class(TEditButton)
   TJDDatePicker = class(TCustomEditButton)
   private
     savejd: double;
@@ -146,9 +145,7 @@ type
     Fcaption: string;
     procedure UpdDate;
   protected
-    //    procedure DoButtonClick(Sender: TObject); override;  // commented for new lcl  version
-    procedure ButtonClick(Sender: TObject);
-    // weird compilation failed if adding override here?
+    procedure ButtonClick(Sender: TObject);  // weird compilation failed if adding override here?
     procedure SetJD(Value: double);
   public
     constructor Create(AOwner: TComponent); override;
@@ -261,7 +258,7 @@ begin
   FYear.Top := 3;
   FYear.Width := 40;
   FYear.Height := 21;
-  //FYear.Height:=abs(FYear.Font.Height)+3;
+  FYear.Hint:=FYear.Hint+' AD/BC';
   FYear.BorderStyle := bsNone;
   DownYear := TButton.Create(self);
   DownYear.Parent := TopPanel;
@@ -375,13 +372,17 @@ begin
 end;
 
 procedure TJDMonthlyCalendar.SetYear(Value: integer);
+// display year using AD/BC convention
 begin
+  if Value<=0 then Value:=Value-1;
   FYear.Value := Value;
 end;
 
 function TJDMonthlyCalendar.ReadYear: integer;
 begin
+  // return year with astronimical convention
   Result := FYear.Value;
+  if Result<0 then Result:=Result+1;
 end;
 
 procedure TJDMonthlyCalendar.SetMonth(Value: integer);
@@ -397,7 +398,7 @@ end;
 procedure TJDMonthlyCalendar.SetDay(Value: integer);
 begin
   Fday := Value;
-  CalendarGrid.JD := jdd(FYear.Value, FMonth.Value, Fday, 0);
+  CalendarGrid.JD := jdd(ReadYear, FMonth.Value, Fday, 0);
   UpdVal;
 end;
 
@@ -414,7 +415,7 @@ procedure TJDMonthlyCalendar.UpdVal;
 begin
   lockdate := True;
   try
-    FYear.Value := CalendarGrid.cy;
+    SetYear(CalendarGrid.cy);
     FMonth.Value := CalendarGrid.cm;
     Fday := CalendarGrid.cd;
     Julian.Value := CalendarGrid.JD;
@@ -453,7 +454,7 @@ procedure TJDMonthlyCalendar.DateChange(Sender: TObject);
 begin
   if (not lockdate) and (FMonth.Value > 0) and (FMonth.Value < 13) then
   begin
-    CalendarGrid.JD := jdd(FYear.Value, FMonth.Value, Fday, 0);
+    CalendarGrid.JD := jdd(ReadYear, FMonth.Value, Fday, 0);
     UpdVal;
   end;
 end;
@@ -477,16 +478,28 @@ begin
 end;
 
 procedure TJDMonthlyCalendar.UpYearClick(Sender: TObject);
+var y: integer;
 begin
-  FYear.Value := FYear.Value + 1;
+  y := FYear.Value;
+  if y = -1 then
+    y := 1
+  else
+    y := y+1;
+  FYear.Value := y;
 {$ifdef darwin}
   DateChange(Sender);
 {$endif}
 end;
 
 procedure TJDMonthlyCalendar.DownYearClick(Sender: TObject);
+var y: integer;
 begin
-  FYear.Value := FYear.Value - 1;
+  y := FYear.Value;
+  if y = 1 then
+    y := -1
+  else
+    y := y-1;
+  FYear.Value := y;
   {$ifdef darwin}
   DateChange(Sender);
   {$endif}
@@ -497,7 +510,7 @@ begin
   if FMonth.Value = 12 then
   begin
     FMonth.Value := 1;
-    FYear.Value := FYear.Value + 1;
+    SetYear(FYear.Value + 1);
   end
   else
     FMonth.Value := FMonth.Value + 1;
@@ -511,7 +524,7 @@ begin
   if FMonth.Value = 1 then
   begin
     FMonth.Value := 12;
-    FYear.Value := FYear.Value - 1;
+    SetYear(FYear.Value - 1);
   end
   else
     FMonth.Value := FMonth.Value - 1;
@@ -815,7 +828,6 @@ begin
   Color := clBtnFace;
   ReadOnly := True;
   Button.Glyph.LoadFromLazarusResource('BtnDatePicker');
-  //  Button.OnClick := @DoButtonClick;
   Button.OnClick := @ButtonClick;
   Button.Enabled := True;
   UpdDate;
@@ -826,12 +838,10 @@ begin
   inherited Destroy;
 end;
 
-//procedure TJDDatePicker.DoButtonClick(Sender: TObject);//or onClick
 procedure TJDDatePicker.ButtonClick(Sender: TObject);//or onClick
 var
   CD: TJDCalendarDialog;
 begin
-  //  inherited DoButtonClick(Sender);
   inherited ButtonClick;
 
   CD := TJDCalendarDialog.Create(Self);
@@ -858,6 +868,7 @@ var
   txt: string;
 begin
   djd(savejd, y, m, d, hh);
+  if y<=0 then y:=y-1; // AD/BC
   Text := IntToStr(y);
   txt := IntToStr(m);
   if length(txt) = 1 then
