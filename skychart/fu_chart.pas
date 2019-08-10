@@ -6746,6 +6746,7 @@ begin
       WriteTrace(Caption + ' Save Circles to ' + UTF8ToSys(SaveDialog1.FileName));
     AssignFile(f, UTF8ToSys(SaveDialog1.FileName));
     Rewrite(f);
+    WriteLn(f,'EQUINOX='+FormatFloat(f1,sc.cfgsc.JDChart));
     for i := 1 to sc.cfgsc.NumCircle do
     begin
       WriteLn(f, 'Circle_' + FormatFloat('00', i) + blank + ARToStr3(
@@ -6997,7 +6998,7 @@ function Tf_chart.cmd_LoadCircle(fn: string): string;
 var
   f: textfile;
   buf1, buf2: string;
-  x: double;
+  x,y,eq: double;
 begin
   if VerboseMsg then
     WriteTrace(Caption + ' Load Circles from ' + fn);
@@ -7005,8 +7006,14 @@ begin
     AssignFile(f, fn);
     reset(f);
     sc.cfgsc.NumCircle := 0;
+    eq:=sc.cfgsc.CurJDUT;
     repeat
       ReadLn(f, buf1);
+      if copy(buf1,1,8)='EQUINOX='  then begin
+         buf2:=copy(buf1,9,99);
+         eq:=StrToFloatDef(buf2,eq);
+         continue;
+      end;
       Inc(sc.cfgsc.NumCircle);
       if sc.cfgsc.NumCircle >= MaxCircle then
         break;
@@ -7017,15 +7024,16 @@ begin
         Dec(sc.cfgsc.NumCircle);
         continue;
       end;
-      sc.cfgsc.CircleLst[sc.cfgsc.NumCircle, 1] := x;
       buf2 := words(buf1, blank, 3, 1);
-      x := deg2rad * Str3ToDE(trim(buf2));
-      if x = 0 then
+      y := deg2rad * Str3ToDE(trim(buf2));
+      if y = 0 then
       begin
         Dec(sc.cfgsc.NumCircle);
         continue;
       end;
-      sc.cfgsc.CircleLst[sc.cfgsc.NumCircle, 2] := x;
+      Precession(eq,sc.cfgsc.JDChart,x,y);
+      sc.cfgsc.CircleLst[sc.cfgsc.NumCircle, 1] := x;
+      sc.cfgsc.CircleLst[sc.cfgsc.NumCircle, 2] := y;
     until EOF(f);
     CloseFile(f);
     Result := msgOK;
