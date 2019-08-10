@@ -2264,6 +2264,12 @@ begin
               sc.cfgsc.ShowLabel[8] := not sc.cfgsc.ShowLabel[8];
               Refresh(True, False);
             end;
+            VK_Y:
+            begin   // ctrl+y
+              xcursor := Image1.ScreenToClient(mouse.cursorpos).x;
+              ycursor := Image1.ScreenToClient(mouse.cursorpos).y;
+              NewFinderCircle1Click(nil);
+            end;
           end;
         end
         else if (Shift = [ssCtrl, ssShift]) and (key <> VK_CONTROL) then
