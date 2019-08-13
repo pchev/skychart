@@ -61,7 +61,7 @@ const
   MaxPla = 69;
   MaxQuickSearch = 15;
   MaxWindow = 10;  // maximum number of chart window
-  maxlabels = 1000; //maximum number of label to a chart
+  maxlabels = 3500; //maximum number of label to a chart
   maxmodlabels = 1000;
   //maximum number of modified labels before older one are replaced
   MaxUserObjects = 100;
