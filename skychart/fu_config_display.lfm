@@ -25,11 +25,11 @@ object f_config_display: Tf_config_display
       Height = 526
       Top = 1
       Width = 503
-      ActivePage = Page2
+      ActivePage = Page5
       Align = alClient
       ParentFont = False
       ShowTabs = False
-      TabIndex = 1
+      TabIndex = 4
       TabOrder = 0
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
@@ -1769,18 +1769,18 @@ object f_config_display: Tf_config_display
         end
         object GroupBox1: TGroupBox
           Left = 8
-          Height = 140
-          Top = 192
+          Height = 125
+          Top = 208
           Width = 273
           Caption = 'Constellation Figures'
-          ClientHeight = 120
+          ClientHeight = 105
           ClientWidth = 271
           ParentFont = False
           TabOrder = 11
           object Label132: TLabel
             Left = 29
             Height = 19
-            Top = 75
+            Top = 60
             Width = 192
             Caption = 'Constellation Figure File Name : '
             ParentColor = False
@@ -1789,7 +1789,7 @@ object f_config_display: Tf_config_display
           object Constl: TCheckBox
             Left = 8
             Height = 21
-            Top = 11
+            Top = 6
             Width = 180
             Caption = 'Show Constellation Figure'
             OnClick = ConstlClick
@@ -1799,7 +1799,7 @@ object f_config_display: Tf_config_display
           object ConstlFile: TFileNameEdit
             Left = 29
             Height = 26
-            Top = 90
+            Top = 78
             Width = 208
             OnAcceptFileName = ConstlFileAcceptFileName
             DialogOptions = []
@@ -1817,7 +1817,7 @@ object f_config_display: Tf_config_display
           object CFStyle: TComboBox
             Left = 29
             Height = 26
-            Top = 32
+            Top = 30
             Width = 120
             AutoSize = False
             Constraints.MaxHeight = 28
@@ -1842,7 +1842,7 @@ object f_config_display: Tf_config_display
             Tag = 3
             Left = 165
             Height = 28
-            Top = 32
+            Top = 30
             Width = 50
             Constraints.MaxHeight = 28
             MaxValue = 10
@@ -1854,18 +1854,18 @@ object f_config_display: Tf_config_display
         end
         object GroupBox3: TGroupBox
           Left = 8
-          Height = 148
-          Top = 336
+          Height = 130
+          Top = 345
           Width = 273
           Caption = 'Constellation Boundaries'
-          ClientHeight = 128
+          ClientHeight = 110
           ClientWidth = 271
           ParentFont = False
           TabOrder = 13
           object Label72: TLabel
             Left = 29
             Height = 19
-            Top = 75
+            Top = 60
             Width = 214
             Caption = 'Constellation Boundary File Name : '
             ParentColor = False
@@ -1874,7 +1874,7 @@ object f_config_display: Tf_config_display
           object Constb: TCheckBox
             Left = 8
             Height = 21
-            Top = 11
+            Top = 6
             Width = 202
             Caption = 'Show Constellation Boundary'
             OnClick = ConstbClick
@@ -1884,7 +1884,7 @@ object f_config_display: Tf_config_display
           object ConstbFile: TFileNameEdit
             Left = 29
             Height = 26
-            Top = 90
+            Top = 78
             Width = 208
             OnAcceptFileName = ConstbFileAcceptFileName
             DialogOptions = []
@@ -1902,7 +1902,7 @@ object f_config_display: Tf_config_display
           object CBStyle: TComboBox
             Left = 29
             Height = 28
-            Top = 32
+            Top = 30
             Width = 120
             AutoSize = False
             ItemHeight = 16
@@ -1926,7 +1926,7 @@ object f_config_display: Tf_config_display
             Tag = 4
             Left = 165
             Height = 28
-            Top = 32
+            Top = 30
             Width = 50
             Constraints.MaxHeight = 28
             MaxValue = 10
@@ -1938,18 +1938,18 @@ object f_config_display: Tf_config_display
         end
         object GroupBox4: TGroupBox
           Left = 293
-          Height = 140
-          Top = 192
+          Height = 125
+          Top = 208
           Width = 185
           Caption = 'Milky Way'
-          ClientHeight = 120
+          ClientHeight = 105
           ClientWidth = 183
           ParentFont = False
           TabOrder = 12
           object milkyway: TCheckBox
             Left = 8
             Height = 21
-            Top = 8
+            Top = 6
             Width = 121
             Caption = 'Show Milky Way'
             OnClick = milkywayClick
@@ -1969,7 +1969,7 @@ object f_config_display: Tf_config_display
           object linemodemilkyway: TCheckBox
             Left = 8
             Height = 21
-            Top = 40
+            Top = 38
             Width = 136
             Caption = 'linemodemilkyway'
             OnClick = linemodemilkywayClick
@@ -2075,18 +2075,18 @@ object f_config_display: Tf_config_display
         end
         object GroupBox8: TGroupBox
           Left = 293
-          Height = 148
-          Top = 336
+          Height = 130
+          Top = 345
           Width = 185
           Caption = 'Proper Motion'
-          ClientHeight = 128
+          ClientHeight = 110
           ClientWidth = 183
           ParentFont = False
           TabOrder = 14
           object Label68: TLabel
-            Left = 91
+            Left = 99
             Height = 19
-            Top = 95
+            Top = 82
             Width = 32
             Caption = 'years'
             ParentColor = False
@@ -2095,7 +2095,7 @@ object f_config_display: Tf_config_display
           object Label8: TLabel
             Left = 36
             Height = 63
-            Top = 15
+            Top = 8
             Width = 142
             AutoSize = False
             Caption = 'Draw a line that represent the proper motion for the next '
@@ -2106,17 +2106,17 @@ object f_config_display: Tf_config_display
           object DrawPmBox: TCheckBox
             Left = 8
             Height = 21
-            Top = 11
+            Top = 6
             Width = 21
             OnClick = DrawPmBoxClick
             ParentFont = False
             TabOrder = 0
           end
           object DrawPMy: TLongEdit
-            Left = 22
+            Left = 30
             Height = 26
             Hint = '-99999..99999'
-            Top = 90
+            Top = 78
             Width = 56
             Constraints.MaxHeight = 26
             ParentFont = False
@@ -2130,9 +2130,9 @@ object f_config_display: Tf_config_display
           end
         end
         object OnlyMeridian: TCheckBox
-          Left = 277
+          Left = 16
           Height = 21
-          Top = 160
+          Top = 184
           Width = 194
           Caption = 'Show only meridian in Alt/Az'
           OnClick = OnlyMeridianClick
@@ -2225,6 +2225,15 @@ object f_config_display: Tf_config_display
           TabOrder = 19
           Value = 1
         end
+        object ShowEquator: TCheckBox
+          Left = 277
+          Height = 21
+          Top = 155
+          Width = 160
+          Caption = 'Show Celestial Equator'
+          OnClick = ShowEquatorClick
+          TabOrder = 20
+        end
       end
       object Page6: TTabSheet
         Caption = 'Labels'
@@ -2236,7 +2245,7 @@ object f_config_display: Tf_config_display
           Height = 302
           Top = 66
           Width = 477
-          ClientHeight = 300
+          ClientHeight = 282
           ClientWidth = 475
           ParentFont = False
           TabOrder = 4
@@ -2791,8 +2800,8 @@ object f_config_display: Tf_config_display
             Top = 0
             Width = 70
             BevelOuter = bvNone
-            ClientHeight = 296
-            ClientWidth = 70
+            ClientHeight = 292
+            ClientWidth = 66
             ParentFont = False
             TabOrder = 36
             object Label260: TLabel

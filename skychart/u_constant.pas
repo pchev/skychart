@@ -1002,7 +1002,7 @@ type
     ShowOnlyMeridian, ShowAlwaysMeridian, UseSystemTime, countrytz: boolean;
     StyleGrid, StyleEqGrid, StyleConstL, StyleConstB, StyleEcliptic, StyleGalEq: TFPPenStyle;
     LineWidthGrid, LineWidthEqGrid, LineWidthConstL, LineWidthConstB, LineWidthEcliptic, LineWidthGalEq: integer;
-    ShowEcliptic, ShowGalactic, ShowMilkyWay, FillMilkyWay, LinemodeMilkyway,
+    ShowEcliptic, ShowGalactic, ShowEquator, ShowMilkyWay, FillMilkyWay, LinemodeMilkyway,
     ShowHorizon, ShowHorizonPicture, HorizonPictureLowQuality, FillHorizon,
     ShowHorizon0, ShowHorizonDepression: boolean;
     CurTime, DT_UT_val, GRSlongitude, GRSjd, GRSdrift, TelescopeTurnsX,
@@ -2309,6 +2309,7 @@ begin
   LineWidthGalEq := Source.LineWidthGalEq;
   ShowEcliptic := Source.ShowEcliptic;
   ShowGalactic := Source.ShowGalactic;
+  ShowEquator := Source.ShowEquator;
   ShowMilkyWay := Source.ShowMilkyWay;
   FillMilkyWay := Source.FillMilkyWay;
   LinemodeMilkyway := Source.LinemodeMilkyway;

@@ -6158,6 +6158,7 @@ begin
   def_cfgsc.ShowConstB := False;
   def_cfgsc.ShowEcliptic := False;
   def_cfgsc.ShowGalactic := False;
+  def_cfgsc.ShowEquator := False;
   def_cfgsc.ShowMilkyWay := True;
   def_cfgsc.FillMilkyWay := True;
   def_cfgsc.LinemodeMilkyway := True;
@@ -7104,6 +7105,7 @@ begin
         csc.ShowConstB := ReadBool(section, 'ShowConstB', csc.ShowConstB);
         csc.ShowEcliptic := ReadBool(section, 'ShowEcliptic', csc.ShowEcliptic);
         csc.ShowGalactic := ReadBool(section, 'ShowGalactic', csc.ShowGalactic);
+        csc.ShowEquator  := ReadBool(section, 'ShowEquator', csc.ShowEquator);
         csc.ShowMilkyWay := ReadBool(section, 'ShowMilkyWay', csc.ShowMilkyWay);
         csc.FillMilkyWay := ReadBool(section, 'FillMilkyWay', csc.FillMilkyWay);
         csc.LinemodeMilkyway :=
@@ -8415,6 +8417,7 @@ begin
         WriteBool(section, 'ShowConstB', csc.ShowConstB);
         WriteBool(section, 'ShowEcliptic', csc.ShowEcliptic);
         WriteBool(section, 'ShowGalactic', csc.ShowGalactic);
+        WriteBool(section, 'ShowEquator', csc.ShowEquator);
         WriteBool(section, 'ShowMilkyWay', csc.ShowMilkyWay);
         WriteBool(section, 'FillMilkyWay', csc.FillMilkyWay);
         WriteBool(section, 'LinemodeMilkyway', csc.LinemodeMilkyway);

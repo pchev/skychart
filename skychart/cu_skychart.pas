@@ -150,6 +150,7 @@ type
     function DrawHorizon: boolean;
     function DrawEcliptic: boolean;
     function DrawGalactic: boolean;
+    function DrawEquator: boolean;
     function DrawPlanisphereDate: boolean;
     function DrawPlanisphereTime: boolean;
     procedure OptimizeLabels;
@@ -391,6 +392,7 @@ begin
         DrawConstB;
         DrawEcliptic;
         DrawGalactic;
+        DrawEquator;
       end;
     end;
     // the stars
@@ -427,6 +429,7 @@ begin
         DrawConstB;
         DrawEcliptic;
         DrawGalactic;
+        DrawEquator;
       end;
     end;
     // Finder mark
@@ -6655,6 +6658,58 @@ begin
     begin
       if ((intpower(x2 - x1, 2) + intpower(y2 - y1, 2)) < cfgsc.x2) then
         FPlot.PlotLine(x1, y1, x2, y2, color, cfgsc.LineWidthGalEq, cfgsc.StyleGalEq);
+    end;
+    x1 := x2;
+    y1 := y2;
+  end;
+  Result := True;
+end;
+
+function Tskychart.DrawEquator: boolean;
+var
+  l, b, ar, de, xx, yy: double;
+  i, color, mult: integer;
+  x1, y1, x2, y2: single;
+  First: boolean;
+begin
+  Result := False;
+  if not cfgsc.ShowEquator then
+    exit;
+  if VerboseMsg then
+    WriteTrace('SkyChart ' + cfgsc.chartname + ': draw equator line');
+  b := 0;
+  First := True;
+  color := Fplot.cfgplot.Color[15];
+  x1 := 0;
+  y1 := 0;
+  if (cfgsc.fov * rad2deg) > 180 then
+    mult := 5
+  else if (cfgsc.fov * rad2deg) > 90 then
+    mult := 5
+  else if (cfgsc.fov * rad2deg) > 30 then
+    mult := 5
+  else if (cfgsc.fov * rad2deg) > 10 then
+    mult := 3
+  else if (cfgsc.fov * rad2deg) > 5 then
+    mult := 2
+  else
+    mult := 1;
+  for i := 0 to (360 div mult) do
+  begin
+    ar := deg2rad * i * mult;
+    de := 0;
+    if cfgsc.ApparentPos then
+      apparent_equatorial(ar, de, cfgsc, False, False);
+    projection(ar, de, xx, yy, True, cfgsc);
+    WindowXY(xx, yy, x2, y2, cfgsc);
+    if First then
+    begin
+      First := False;
+    end
+    else
+    begin
+      if ((intpower(x2 - x1, 2) + intpower(y2 - y1, 2)) < cfgsc.x2) then
+        FPlot.PlotLine(x1, y1, x2, y2, color, cfgsc.LineWidthEqGrid, cfgsc.StyleEqGrid);
     end;
     x1 := x2;
     y1 := y2;

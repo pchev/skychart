@@ -47,6 +47,7 @@ type
     Button8: TButton;
     Button9: TButton;
     CheckBox1: TCheckBox;
+    ShowEquator: TCheckBox;
     DistLabel: TCheckBox;
     CheckBox2: TCheckBox;
     antialias: TCheckBox;
@@ -453,6 +454,7 @@ type
       Shift: TShiftState; X, Y: integer);
     procedure RectangleGridSelectCell(Sender: TObject; aCol, aRow: integer;
       var CanSelect: boolean);
+    procedure ShowEquatorClick(Sender: TObject);
     procedure ShowLinesClick(Sender: TObject);
     procedure ShowLineShapeMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
@@ -675,6 +677,7 @@ begin
   Label10.Caption := rsEditDSOLines;
   ecliptic.Caption := rsShowEcliptic;
   galactic.Caption := rsShowGalactic;
+  ShowEquator.Caption := rsShowCelestia;
   GridNum.Caption := rsShowGridLabe;
   GroupBox1.Caption := rsConstellatio2;
   Label132.Caption := rsConstellatio3;
@@ -1515,6 +1518,7 @@ begin
     ShowLineShape.Brush.Color := clWhite;
   Ecliptic.Checked := csc.ShowEcliptic;
   Galactic.Checked := csc.ShowGalactic;
+  ShowEquator.Checked := csc.ShowEquator;
   ConstlFile.Text := cmain.ConstLfile;
   ConstlFile.InitialDir := ExtractFilePath(cmain.ConstLfile);
   ConstbFile.Text := cmain.ConstBfile;
@@ -2075,6 +2079,11 @@ end;
 procedure Tf_config_display.galacticClick(Sender: TObject);
 begin
   csc.Showgalactic := galactic.Checked;
+end;
+
+procedure Tf_config_display.ShowEquatorClick(Sender: TObject);
+begin
+ csc.ShowEquator := ShowEquator.Checked;
 end;
 
 procedure Tf_config_display.ConstlClick(Sender: TObject);

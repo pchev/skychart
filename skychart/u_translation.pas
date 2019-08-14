@@ -1531,6 +1531,7 @@ resourcestring
   rsASCOMDriverE = 'The ASCOM driver report an error';
   rsLoadINDIConf = 'Load INDI configuration';
   rsDeltatRecent = 'DeltaT recent value';
+  rsShowCelestia = 'Show celestial equator';
 
 // also update upsi_translation
 
