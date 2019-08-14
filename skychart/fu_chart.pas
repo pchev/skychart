@@ -6601,6 +6601,12 @@ begin
   sc.cfgsc.tz.JD := njd;
   sc.cfgsc.TimeZone := sc.cfgsc.tz.SecondsOffset / 3600;
   djd(njd + sc.cfgsc.TimeZone / 24, y, m, d, h);  // local time
+  if ((24-h)*3600)<0.001 then begin  //next day if rounding error < 1 millisecond
+    njd:=njd+0.001/3600/24;
+    sc.cfgsc.tz.JD := njd;
+    sc.cfgsc.TimeZone := sc.cfgsc.tz.SecondsOffset / 3600;
+    djd(njd + sc.cfgsc.TimeZone / 24, y, m, d, h);  // local time
+  end;
   sc.cfgsc.UseSystemTime := False;
   sc.cfgsc.CurYear := y;
   sc.cfgsc.CurMonth := m;
