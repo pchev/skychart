@@ -314,6 +314,7 @@ begin
     ilabels[i].parent := TWinControl(AOwner);
     ilabels[i].tag := i;
     ilabels[i].Transparent := True;
+    ilabels[i].Visible := false;
     ilabels[i].Font.CharSet := FCS_ISO_10646_1;
     ilabels[i].PopupMenu := editlabelmenu;
     ilabels[i].OnMouseDown := labelmousedown;
