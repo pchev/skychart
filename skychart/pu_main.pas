@@ -7314,7 +7314,7 @@ begin
     try
       csc.tz.GregorianStart := GregorianStart;
       csc.tz.GregorianStartJD := GregorianStartJD;
-      csc.tz.TimeZoneFile := ZoneDir + StringReplace(def_cfgsc.ObsTZ,
+      csc.tz.TimeZoneFile := ZoneDir + StringReplace(csc.ObsTZ,
         '/', PathDelim, [rfReplaceAll]);
       csc.tz.JD := jd(csc.CurYear, csc.CurMonth, csc.CurDay, csc.CurTime);
       csc.TimeZone := csc.tz.SecondsOffset / 3600;
