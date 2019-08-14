@@ -58,25 +58,49 @@ const
 function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diameter:double; var ra2,dec2, mag2, Bp_Rp : double): boolean;{star 290 file database search}
 
 
-
-//The format of the 290 star databases is described in the HNSKY help file
+// The format of the 290 star databases is described in the HNSKY help file
 //
-//The sky is divided in 290 areas of equal surface except for the poles which are half of that size.
-//The stars are stored in these 290 separate files and sorted from bright to faint. Each file starts with a header of 110 bytes of which the first part contains a textual description and the last byte contains the record size, 6, 7, 10 or 11 bytes.
-//The source of the utility program to make star databases is provided.
+// The sky is divided in 290 areas of equal surface except for the poles which are half of that size.
+// The stars are stored in these 290 separate files and sorted from bright to faint. Each file starts with a header of 110 bytes of which the first part contains
+// a textual description and the last byte contains the record size 5, 6, 7, 10 or 11 bytes.  The source of the utility program to make star databases is provided.
 //
-//The 290 area's:
-//The areas are based on an mathematical method described in a paper of the PHILLIPS LABORATORY called "THE DIVISION OF A CIRCLE OR SPHERICAL SURFACE INTO EQUAL-AREA CELLS OR PIXELS" by Irving I. Gringorten Penelope J. Yepez on 30 June 1992
-//First circles of constant declination are assumed. The first sphere segment defined by circle with number 1 has a height h1 from the pole and a surface of 2*pi*h1.
-//If the second circle of constant declination has a sphere segment with a height of 9*h1 then the surface area of the second sphere segment is nine times higher equal 2*pi*9*h1.
-//If the area between circle 1 en 2 is divided in 8 segments then these eight have the same area as the area of the first segment.
-//The same is possible for the third circle by diving it in 16 segments, then in 24, 32, 40, 48, 56, 64 segments.
-//The area of the third segment is 2*pi*25*h1, where 25 equals 1+8+16. So the sphere segments have a height of h1, 9*h1, 25*h1, 49*h1.
-//The height of h1=1-sin(declination). All areas are equal area but rectangle.
-//In HNSKY all area's are a combination of two except for the polar areas to have a more square shape especially around the equator.
-//The south pole is stored in file 0101.290 Area A2 and A3 are stored in file 02_01.290, area A4 and A5 are stored in file 0202.290.
-//The distances between the circles is pretty constant and around 10 to 12 degrees. The distance between the area centres is around 15 degrees maximum.
-//The declinations are calculated by arcsin (1-1/289), arcsin(1-(1+8)/289), arcsin (1-(1+8+16)/289), arcsin(1-(1+8+16+24)/289)...
+// The 290 area's:
+// The areas are based on an mathematical method described in a paper of the PHILLIPS LABORATORY called "THE DIVISION OF A CIRCLE OR SPHERICAL SURFACE INTO EQUAL-AREA CELLS OR PIXELS"
+// by Irving I. Gringorten Penelope J. Yepez on 30 June 1992
+// First circles of constant declination are assumed. The first sphere segment defined by circle with number 1 has a height h1 from the pole and a surface of 2*pi*h1.
+// If the second circle of constant declination has a sphere segment with a height of 9*h1 then the surface area of the second sphere segment is nine times higher equal 2*pi*9*h1.
+// If the area between circle 1 en 2 is divided in 8 segments then these eight have the same area as the area of the first segment.
+// The same is possible for the third circle by diving it in 16 segments, then in 24, 32, 40, 48, 56, 64 segments.
+// The area of the third segment is 2*pi*25*h1, where 25 equals 1+8+16. So the sphere segments have a height of h1, 9*h1, 25*h1, 49*h1.
+// The height of h1=1-sin(declination). All areas are equal area but rectangle.
+// In HNSKY all area's are a combination of two except for the polar areas to have a more square shape especially around the equator.
+// The south pole is stored in file 0101.290 Area A2 and A3 are stored in file 02_01.290, area A4 and A5 are stored in file 0202.290.
+// The distances between the circles is pretty constant and around 10 to 12 degrees. The distance between the area centres is around 15 degrees maximum.
+// The declinations are calculated by arcsin (1-1/289), arcsin(1-(1+8)/289), arcsin (1-(1+8+16)/289), arcsin(1-(1+8+16+24)/289)...
+//
+//     	Ring 	declination 	declination     Areas 	HNSKY
+//              minimum         maximum         equal   area's
+//                                              size
+//   	0-1 	-90 	        -85.23224404 	1 	1          {arcsin(1-1/289)}
+//     	1-2 	-85.23224404 	-75.66348756 	8 	4          {arcsin(1-(1+8)/289)}
+//	2-3 	-75.66348756 	-65.99286637 	16 	8          {arcsin (1-(1+8+16)/289)}
+//	4-5 	-65.99286637 	-56.14497387 	24 	12
+//	6-7 	-56.14497387 	-46.03163067 	32 	16
+//	7-8 	-46.03163067 	-35.54307745 	40 	20
+//	8-9 	-35.54307745 	-24.53348115 	48 	24
+//	7-8 	-24.53348115 	-12.79440589 	56 	28
+//	8-9 	-12.79440589 	0 	        64 	32
+//	9-10 	0 	        12.79440589 	64 	32
+//	10-11 	12.79440589 	24.53348115 	56 	28
+//	11-12 	24.53348115 	35.54307745 	48 	24
+//	12-13 	35.54307745 	46.03163067 	40 	20
+//	13-14 	46.03163067 	56.14497387 	32 	16
+//	14-15 	56.14497387 	65.99286637 	24 	12
+//	15-16 	65.99286637 	75.66348756 	16 	8
+//	16-17 	75.66348756 	85.23224404 	8 	4
+//	17-18 	85.23224404 	90 	        1 	1
+//    ----------------------------------------------------
+//                              Total   	578 	290
 
 type
   hnskyhdr290_11 = packed record {This format is normally not used. Sometimes used for unsorted databases}
@@ -90,6 +114,8 @@ type
              mag0: shortint;
 
    end;
+
+{Magnitude: The stars are sorted with an accuracy of 0.1 magnitude. Prior to each group a special record is written where RA is $FFFFFF and DEC contains the magnitude}
 type
   hnskyhdr290_10 = packed record {This format is used for the Tycho2++ database up to magnitude 12.5}
              nr32: integer; {Star number containing the Tycho/GSC or UCAC4 designation}
@@ -141,7 +167,7 @@ implementation
 
 Const
 
-AA=  -90.0 * pi/180;
+AA= -90.0 * pi/180;
 BB=-(85.23224404+75.66348756)/2 * pi/180;
 CC=-(75.66348756+65.99286637)/2 * pi/180;
 DD=-(65.99286637+56.14497387)/2 * pi/180;
@@ -149,7 +175,7 @@ EE=-(56.14497387+46.03163067)/2 * pi/180;
 FF=-(46.03163067+35.54307745)/2 * pi/180;
 GG=-(35.54307745+24.53348115)/2 * pi/180;
 HH=-(24.53348115+12.79440589)/2 * pi/180;
-II=-(12.79440589+0	)/2 * pi/180;
+II=-(12.79440589+0          )/2 * pi/180;
 
 
 centers290 : array[1..290,1..2] of real= {divide sky in 32 area's, 12 pentagon, 20 hexagon figures}
@@ -460,7 +486,6 @@ centers290 : array[1..290,1..2] of real= {divide sky in 32 area's, 12 pentagon, 
  (360*1.5/4*pi/180, -BB),
  (360*2.5/4*pi/180, -BB),
  (360*3.5/4*pi/180, -BB),
-
 
  ( 0        , -AA   )); {1 segment}   {north pole }
 
@@ -836,15 +861,12 @@ function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diam
     label      einde;
 begin
    {$I-}
-
   readdatabase290:=true;
   repeat
-    if  ( (file_open=0) or
+    if  ( (file_open=0) or {file_open otherwise sometimes the file routine get stucked}
           (nr_records<=0) or {here otherwise star at 0:0}
-
-       ((searchmode<>'T') and (mag2>maxmag))
-         )  then    {file_open ohterwise sometimes the file routine gets stucked}
-      einde:
+          ((searchmode<>'T') and (mag2>maxmag))
+         ) then
       begin
          if file_open<>0 then closedatabase;
          nearbyarea:=false;
@@ -886,8 +908,8 @@ begin
 
          nr_records:= trunc((thefile_stars.size-110)/record_size);{110 header size, correct for above read}
       end;{einde}
+
     reader_stars.read(buf2,record_size);
-    if file_open=0 then goto einde;
     header_record:=false;
 
     case record_size of
