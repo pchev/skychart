@@ -215,7 +215,7 @@ end;
 
 procedure Tpop_indi.CheckStatus;
 begin
-  if connected and (coord_prop <> nil) and (configprop<>nil) and (oncoordset_prop <> nil) then
+  if connected and (coord_prop <> nil) and ((not csc.IndiLoadConfig)or(configprop<>nil)) and (oncoordset_prop <> nil) then
   begin
     if (not ready) then begin
       ready:=true;
