@@ -51,7 +51,7 @@ object f_edittoolbar: Tf_edittoolbar
       TabOrder = 2
     end
     object ButtonStd: TButton
-      Left = 95
+      Left = 184
       Height = 25
       Top = 4
       Width = 74
@@ -59,16 +59,6 @@ object f_edittoolbar: Tf_edittoolbar
       OnClick = ButtonStdClick
       ParentFont = False
       TabOrder = 3
-    end
-    object ButtonEmpty: TButton
-      Left = 182
-      Height = 25
-      Top = 4
-      Width = 79
-      Caption = 'Empty'
-      OnClick = ButtonEmptyClick
-      ParentFont = False
-      TabOrder = 4
     end
     object ButtonHelp: TButton
       Left = 277
@@ -78,6 +68,15 @@ object f_edittoolbar: Tf_edittoolbar
       Caption = 'Help'
       OnClick = ButtonHelpClick
       ParentFont = False
+      TabOrder = 4
+    end
+    object ButtonDefault: TButton
+      Left = 96
+      Height = 25
+      Top = 4
+      Width = 74
+      Caption = 'Default'
+      OnClick = ButtonDefaultClick
       TabOrder = 5
     end
   end
@@ -632,13 +631,23 @@ object f_edittoolbar: Tf_edittoolbar
     end
     object BtnText: TCheckBox
       Left = 247
-      Height = 23
+      Height = 21
       Top = 12
-      Width = 134
+      Width = 132
       Caption = 'Show button text '
       OnChange = BtnTextChange
       ParentFont = False
       TabOrder = 1
+    end
+    object ButtonEmpty: TButton
+      Left = 459
+      Height = 25
+      Top = 10
+      Width = 79
+      Caption = 'Clear'
+      OnClick = ButtonEmptyClick
+      ParentFont = False
+      TabOrder = 2
     end
   end
   object OpenDialog1: TOpenDialog

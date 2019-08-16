@@ -38,6 +38,7 @@ type
   { Tf_edittoolbar }
 
   Tf_edittoolbar = class(TForm)
+    ButtonDefault: TButton;
     ButtonSave: TBitBtn;
     ButtonLoad: TBitBtn;
     ButtonHelp: TButton;
@@ -73,6 +74,7 @@ type
     SaveDialog1: TSaveDialog;
     procedure BtnSizeChange(Sender: TObject);
     procedure BtnTextChange(Sender: TObject);
+    procedure ButtonDefaultClick(Sender: TObject);
     procedure ButtonEmptyClick(Sender: TObject);
     procedure ButtonCollapseClick(Sender: TObject);
     procedure ButtonExpandClick(Sender: TObject);
@@ -192,8 +194,9 @@ begin
   label2.Caption := rsButtonSize;
   BtnText.Caption := rsShowButtonTe;
   ButtonMini.Caption := rsMinimal;
+  ButtonDefault.Caption := rsDefault;
   ButtonStd.Caption := rsStandard;
-  ButtonEmpty.Caption := rsEmpty;
+  ButtonEmpty.Caption := rsClear;
   DividerTxt := rsDivider;
   SeparatorTxt := rsSeparator;
   SetHelp(self, hlpToolbarEditor);
@@ -944,6 +947,28 @@ begin
   str.Clear;
   LoadToolbar(2, str);
   str.Clear;
+  LoadToolbar(3, str);
+  str.Free;
+end;
+
+procedure Tf_edittoolbar.ButtonDefaultClick(Sender: TObject);
+var
+  str: TStringList;
+  i: integer;
+begin
+  // default bar for v4.2
+  str := TStringList.Create;
+  str.Clear;
+  for i := 1 to numdefaultmainbar do
+    str.Add(defaultmainbar[i]);
+  LoadToolbar(0, str);
+  str.Clear;
+  LoadToolbar(1, str);
+  str.Clear;
+  LoadToolbar(2, str);
+  str.Clear;
+  for i := 1 to numdefaultrightbar do
+    str.Add(defaultrightbar[i]);
   LoadToolbar(3, str);
   str.Free;
 end;

@@ -6564,22 +6564,22 @@ begin
   catalog.cfgshr.NebSizeFilter[8] := 20;
   catalog.cfgshr.NebSizeFilter[9] := 30;
   catalog.cfgshr.NebSizeFilter[10] := 60;
-  nummainbar := numstandardmainbar;
-  numobjectbar := numstandardobjectbar;
-  numleftbar := numstandardleftbar;
-  numrightbar := numstandardrightbar;
+  nummainbar := numdefaultmainbar;
+  numobjectbar := numdefaultobjectbar;
+  numleftbar := numdefaultleftbar;
+  numrightbar := numdefaultrightbar;
   configmainbar.Clear;
   configobjectbar.Clear;
   configleftbar.Clear;
   configrightbar.Clear;
   for i := 1 to nummainbar do
-    configmainbar.Add(standardmainbar[i]);
+    configmainbar.Add(defaultmainbar[i]);
   for i := 1 to numobjectbar do
-    configobjectbar.Add(standardobjectbar[i]);
-  for i := 1 to numstandardleftbar do
-    configleftbar.Add(standardleftbar[i]);
-  for i := 1 to numstandardrightbar do
-    configrightbar.Add(standardrightbar[i]);
+    configobjectbar.Add(defaultobjectbar[i]);
+  for i := 1 to numleftbar do
+    configleftbar.Add(defaultleftbar[i]);
+  for i := 1 to numrightbar do
+    configrightbar.Add(defaultrightbar[i]);
   Fscript[0].ScriptFilename := slash(ScriptDir) + 'ObserverTool.cdcps';
   GregorianStart := DefaultGregorianStart;
   GregorianStartJD := DefaultGregorianStartJD;
@@ -6640,6 +6640,16 @@ begin
         for i := 0 to MaxField do
           catalog.cfgshr.FieldNum[i] :=
             ReadFloat(section, 'FieldNum' + IntToStr(i), catalog.cfgshr.FieldNum[i]);
+        tbFOV1.Caption := DEToStrmin(catalog.cfgshr.FieldNum[0]) + blank;
+        tbFOV2.Caption := DEToStrmin(catalog.cfgshr.FieldNum[1]) + blank;
+        tbFOV3.Caption := DEToStrmin(catalog.cfgshr.FieldNum[2]) + blank;
+        tbFOV4.Caption := DEToStrmin(catalog.cfgshr.FieldNum[3]) + blank;
+        tbFOV5.Caption := DEToStrmin(catalog.cfgshr.FieldNum[4]) + blank;
+        tbFOV6.Caption := DEToStrmin(catalog.cfgshr.FieldNum[5]) + blank;
+        tbFOV7.Caption := DEToStrmin(catalog.cfgshr.FieldNum[6]) + blank;
+        tbFOV8.Caption := DEToStrmin(catalog.cfgshr.FieldNum[7]) + blank;
+        tbFOV9.Caption := DEToStrmin(catalog.cfgshr.FieldNum[8]) + blank;
+        tbFOV10.Caption := DEToStrmin(catalog.cfgshr.FieldNum[9]) + blank;
       except
         ShowError('Error reading ' + filename + ' chart main');
       end;
