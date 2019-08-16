@@ -1809,7 +1809,7 @@ const
     ('104;TimeU'));
 
   // Default main toolbar
-  numdefaultmainbar=19;
+  numdefaultmainbar=18;
   defaultmainbar: array[1..numdefaultmainbar] of string = (
   ('76;Search1'),
   ('102;quicksearch'),
@@ -1823,9 +1823,8 @@ const
   ('6;zoomplus'),
   ('7;zoomminus'),
   ('92;rotate180'),
-  ('100;Divider'),
-  ('71;EquatorialProjection'),
-  ('72;AltAzProjection'),
+  ('69;ShowMark'),
+  ('81;DSSImage'),
   ('100;Divider'),
   ('48;TelescopeConnect'),
   ('50;TelescopeSlew'),
@@ -1836,9 +1835,12 @@ const
   numdefaultleftbar = 0;
   defaultleftbar: array[1..1] of string = ('');
   // Default right toolbar
-  numdefaultrightbar=7;
+  numdefaultrightbar=10;
   defaultrightbar: array[1..numdefaultrightbar] of string = (
   ('32;ToolBarFOV'),
+  ('100;Divider'),
+  ('71;EquatorialProjection'),
+  ('72;AltAzProjection'),
   ('100;Divider'),
   ('38;toN'),
   ('37;toE'),
