@@ -11966,7 +11966,7 @@ begin
       else if act = 'ShowCompass' then
         SetMenu2(rsSetup + ' / ' + rsChartCoordin + ' / ' + rsGridSpacing + Ellipsis, 20)
       else if act = 'ShowMark' then
-        SetMenu2(rsSetup + ' / ' + rsDisplay + ' / ' + rsFinderCircle + Ellipsis, 21)
+        SetMenu2(rsSetup + ' / ' + rsDisplay + ' / ' + rsFinderRectan + Ellipsis, 21)
       else if act = 'ShowLabels' then
         SetMenu2(rsSetup + ' / ' + rsDisplay + ' / ' + rsLabel2 + Ellipsis, 22)
       else if act = 'EditLabels' then
@@ -12064,7 +12064,7 @@ begin
     18: SetupDisplayPage(4);
     19: SetupDisplayPage(4);
     20: SetupChartPage(4);
-    21: SetupDisplayPage(7);
+    21: SetupDisplayPage(8);
     22: SetupDisplayPage(5);
     23: ResetAllLabels1Click(Sender);
     24: SetupObservatoryPage(1);
