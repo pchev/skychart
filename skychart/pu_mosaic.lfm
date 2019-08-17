@@ -1,10 +1,10 @@
 object f_mosaic: Tf_mosaic
   Left = 1564
-  Height = 340
+  Height = 394
   Top = 30
   Width = 360
   Caption = 'f_mosaic'
-  ClientHeight = 340
+  ClientHeight = 394
   ClientWidth = 360
   Constraints.MinHeight = 340
   Constraints.MinWidth = 360
@@ -101,18 +101,18 @@ object f_mosaic: Tf_mosaic
   end
   object GroupBox2: TGroupBox
     Left = 0
-    Height = 195
+    Height = 249
     Top = 105
     Width = 360
     Align = alClient
     Caption = 'Mosaic'
-    ClientHeight = 175
+    ClientHeight = 229
     ClientWidth = 358
     TabOrder = 1
     object SizeX: TSpinEdit
       Left = 184
       Height = 29
-      Top = 64
+      Top = 101
       Width = 50
       MaxValue = 10
       MinValue = 1
@@ -123,7 +123,7 @@ object f_mosaic: Tf_mosaic
     object SizeY: TSpinEdit
       Left = 260
       Height = 29
-      Top = 64
+      Top = 101
       Width = 50
       MaxValue = 10
       MinValue = 1
@@ -134,7 +134,7 @@ object f_mosaic: Tf_mosaic
     object Label3: TLabel
       Left = 8
       Height = 19
-      Top = 69
+      Top = 106
       Width = 67
       Caption = 'Mosaic size'
       ParentColor = False
@@ -142,7 +142,7 @@ object f_mosaic: Tf_mosaic
     object Label4: TLabel
       Left = 243
       Height = 19
-      Top = 69
+      Top = 106
       Width = 8
       Caption = 'X'
       ParentColor = False
@@ -150,7 +150,7 @@ object f_mosaic: Tf_mosaic
     object FrameList: TComboBox
       Left = 8
       Height = 31
-      Top = 24
+      Top = 61
       Width = 337
       ItemHeight = 0
       OnChange = FrameListChange
@@ -160,7 +160,7 @@ object f_mosaic: Tf_mosaic
     object Label5: TLabel
       Left = 8
       Height = 19
-      Top = 3
+      Top = 40
       Width = 134
       Caption = 'Finder rectangle (CCD)'
       ParentColor = False
@@ -168,7 +168,7 @@ object f_mosaic: Tf_mosaic
     object Hoverlap: TSpinEdit
       Left = 184
       Height = 29
-      Top = 104
+      Top = 141
       Width = 50
       MaxValue = 50
       OnChange = MosaicChange
@@ -178,7 +178,7 @@ object f_mosaic: Tf_mosaic
     object Voverlap: TSpinEdit
       Left = 184
       Height = 29
-      Top = 142
+      Top = 179
       Width = 50
       MaxValue = 50
       OnChange = MosaicChange
@@ -188,7 +188,7 @@ object f_mosaic: Tf_mosaic
     object Label6: TLabel
       Left = 8
       Height = 19
-      Top = 109
+      Top = 146
       Width = 125
       Caption = 'Horizontal overlap %'
       ParentColor = False
@@ -196,16 +196,32 @@ object f_mosaic: Tf_mosaic
     object Label7: TLabel
       Left = 8
       Height = 19
-      Top = 147
+      Top = 184
       Width = 106
       Caption = 'Vertical overlap %'
       ParentColor = False
+    end
+    object Label8: TLabel
+      Left = 8
+      Height = 19
+      Top = 6
+      Width = 36
+      Caption = 'Name'
+      ParentColor = False
+    end
+    object MosaicName: TEdit
+      Left = 59
+      Height = 31
+      Top = 0
+      Width = 251
+      TabOrder = 5
+      Text = 'mosaic'
     end
   end
   object Panel1: TPanel
     Left = 0
     Height = 40
-    Top = 300
+    Top = 354
     Width = 360
     Align = alBottom
     ClientHeight = 40
@@ -244,6 +260,6 @@ object f_mosaic: Tf_mosaic
     Interval = 250
     OnTimer = ApplyTimerTimer
     left = 280
-    top = 240
+    top = 277
   end
 end

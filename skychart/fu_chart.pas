@@ -6849,9 +6849,14 @@ begin
   if SaveDialog1.InitialDir = '' then
     SaveDialog1.InitialDir := HomeDir;
   if Sender is Tf_mosaic then begin
-    SaveDialog1.FileName := 'mosaic';
+    txt := nospace(Tf_mosaic(Sender).MosaicName.Text);
+    txt := StringReplace(txt,'/','',[rfReplaceAll]);
+    txt := StringReplace(txt,'\','',[rfReplaceAll]);
+    txt := StringReplace(txt,':','',[rfReplaceAll]);
+    if txt='' then txt := 'mosaic';
+    SaveDialog1.FileName := txt;
     SaveDialog1.Filter := 'Mosaic file|*.cdcc|All|*';
-    txt := 'Mosaic_';
+    txt := txt+'_';
   end
   else begin
     SaveDialog1.FileName := 'circle';

@@ -36,6 +36,8 @@ type
     ButtonSave: TButton;
     DEdown: TButton;
     DEup: TButton;
+    MosaicName: TEdit;
+    Label8: TLabel;
     Panel1: TPanel;
     RAright: TButton;
     ButtonClose: TButton;
