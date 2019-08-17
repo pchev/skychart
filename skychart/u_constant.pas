@@ -1809,7 +1809,7 @@ const
     ('104;TimeU'));
 
   // Default main toolbar
-  numdefaultmainbar=18;
+  numdefaultmainbar=16;
   defaultmainbar: array[1..numdefaultmainbar] of string = (
   ('76;Search1'),
   ('102;quicksearch'),
@@ -1823,8 +1823,6 @@ const
   ('6;zoomplus'),
   ('7;zoomminus'),
   ('92;rotate180'),
-  ('69;ShowMark'),
-  ('81;DSSImage'),
   ('100;Divider'),
   ('48;TelescopeConnect'),
   ('50;TelescopeSlew'),
