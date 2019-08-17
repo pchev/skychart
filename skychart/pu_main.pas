@@ -53,6 +53,8 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    MenuMosaic: TMenuItem;
+    Mosaic: TAction;
     MenuUpdDeltaT: TMenuItem;
     SavePictureDialog1: TSavePictureDialog;
     ViewAllTollbar: TAction;
@@ -489,6 +491,7 @@ type
     procedure MenuUpdDeltaTClick(Sender: TObject);
     procedure MenuUpdSatelliteClick(Sender: TObject);
     procedure MenuUpdSoftClick(Sender: TObject);
+    procedure MosaicExecute(Sender: TObject);
     procedure MouseModeExecute(Sender: TObject);
     procedure MultiFrame1CreateChild(Sender: TObject);
     procedure MultiFrame1DeleteChild(Sender: TObject);
@@ -1894,6 +1897,12 @@ procedure Tf_main.ObslistExecute(Sender: TObject);
 begin
   with MultiFrame1.ActiveObject as Tf_chart do
     MenuViewObsListClick(self);
+end;
+
+procedure Tf_main.MosaicExecute(Sender: TObject);
+begin
+  with MultiFrame1.ActiveObject as Tf_chart do
+    NewMosaic(sc.cfgsc.racentre,sc.cfgsc.decentre);
 end;
 
 procedure Tf_main.MultiFrame1CreateChild(Sender: TObject);
@@ -9071,6 +9080,9 @@ begin
   Obslist.Caption := '&' + rsObservingLis + Ellipsis;
   ObsList.Hint := rsObservingLis;
   ObsList.Category := CatTools;
+  Mosaic.Caption := '&' + rsMosaic;
+  Mosaic.Hint := rsMosaic;
+  Mosaic.Category := CatTools;
   SaveImage.Caption := '&' + rsSaveImage;
   SaveImage.Hint := rsSaveImage;
   SaveImage.Category := CatFile;

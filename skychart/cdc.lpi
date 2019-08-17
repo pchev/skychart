@@ -937,6 +937,7 @@
         <Filename Value="pu_mosaic.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="f_mosaic"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit84>
     </Units>
