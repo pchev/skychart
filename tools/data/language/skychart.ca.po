@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-11 16:18+0000\n"
+"POT-Creation-Date: 2019-08-17 19:42+0000\n"
 "PO-Revision-Date: 2019-03-25 16:20+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-07-11 16:25+0000\n"
-"X-Generator: Launchpad (build 19007)\n"
+"X-Launchpad-Export-Date: 2019-08-17 19:56+0000\n"
+"X-Generator: Launchpad (build 19022)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -2418,6 +2418,10 @@ msgstr "Molta lluminositat"
 msgid "Horizon"
 msgstr "Horitzó"
 
+#: u_translation.rshorizontalov
+msgid "Horizontal overlap %"
+msgstr ""
+
 #: u_translation.rshostname
 msgid "Hostname:"
 msgstr "Servidor:"
@@ -3249,6 +3253,18 @@ msgstr "Matí"
 #: u_translation.rsmorningtwili
 msgid "Morning twilight"
 msgstr "Crepuscle matinal"
+
+#: u_translation.rsmosaic
+msgid "Mosaic"
+msgstr ""
+
+#: u_translation.rsmosaiccenter
+msgid "Mosaic center"
+msgstr ""
+
+#: u_translation.rsmosaicsize
+msgid "Mosaic size"
+msgstr ""
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -4758,6 +4774,10 @@ msgstr "Mostra els asteroides en el mapa"
 msgid "Show button text"
 msgstr "Mostra el text del botó"
 
+#: u_translation.rsshowcelestia
+msgid "Show celestial equator"
+msgstr ""
+
 #: u_translation.rsshowcomets
 msgid "Show comets"
 msgstr "Mostra els cometes"
@@ -5738,6 +5758,10 @@ msgstr "Venus"
 #: u_translation.rsversion
 msgid "Version"
 msgstr "Versió"
+
+#: u_translation.rsverticalover
+msgid "Vertical overlap %"
+msgstr ""
 
 #: u_translation.rsvicinity
 msgid "Vicinity"

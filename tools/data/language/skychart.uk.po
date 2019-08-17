@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-11 16:18+0000\n"
+"POT-Creation-Date: 2019-08-17 19:42+0000\n"
 "PO-Revision-Date: 2016-12-11 09:04+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclubzp@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-07-11 16:24+0000\n"
-"X-Generator: Launchpad (build 19007)\n"
+"X-Launchpad-Export-Date: 2019-08-17 19:56+0000\n"
+"X-Generator: Launchpad (build 19022)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -2422,6 +2422,10 @@ msgstr "Висока поверхнева яскравість"
 msgid "Horizon"
 msgstr "Обрій"
 
+#: u_translation.rshorizontalov
+msgid "Horizontal overlap %"
+msgstr ""
+
 #: u_translation.rshostname
 msgid "Hostname:"
 msgstr "Назва хосту:"
@@ -3253,6 +3257,18 @@ msgstr "Ранок"
 #: u_translation.rsmorningtwili
 msgid "Morning twilight"
 msgstr "Ранкові сутінки"
+
+#: u_translation.rsmosaic
+msgid "Mosaic"
+msgstr ""
+
+#: u_translation.rsmosaiccenter
+msgid "Mosaic center"
+msgstr ""
+
+#: u_translation.rsmosaicsize
+msgid "Mosaic size"
+msgstr ""
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -4762,6 +4778,10 @@ msgstr "Показати астероїди на мапі"
 msgid "Show button text"
 msgstr ""
 
+#: u_translation.rsshowcelestia
+msgid "Show celestial equator"
+msgstr ""
+
 #: u_translation.rsshowcomets
 msgid "Show comets"
 msgstr "Показати комети на"
@@ -5741,6 +5761,10 @@ msgstr "Венера"
 
 #: u_translation.rsversion
 msgid "Version"
+msgstr ""
+
+#: u_translation.rsverticalover
+msgid "Vertical overlap %"
 msgstr ""
 
 #: u_translation.rsvicinity

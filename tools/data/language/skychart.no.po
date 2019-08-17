@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.no\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-11 16:18+0000\n"
+"POT-Creation-Date: 2019-08-17 19:42+0000\n"
 "PO-Revision-Date: 2017-01-29 16:49+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-07-11 16:24+0000\n"
-"X-Generator: Launchpad (build 19007)\n"
+"X-Launchpad-Export-Date: 2019-08-17 19:56+0000\n"
+"X-Generator: Launchpad (build 19022)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2418,6 +2418,10 @@ msgstr "Høy overflatelysstyrke"
 msgid "Horizon"
 msgstr "Horisont"
 
+#: u_translation.rshorizontalov
+msgid "Horizontal overlap %"
+msgstr ""
+
 #: u_translation.rshostname
 msgid "Hostname:"
 msgstr "Vertsnavn:"
@@ -3249,6 +3253,18 @@ msgstr "Morgen"
 #: u_translation.rsmorningtwili
 msgid "Morning twilight"
 msgstr "Morgenlysning"
+
+#: u_translation.rsmosaic
+msgid "Mosaic"
+msgstr ""
+
+#: u_translation.rsmosaiccenter
+msgid "Mosaic center"
+msgstr ""
+
+#: u_translation.rsmosaicsize
+msgid "Mosaic size"
+msgstr ""
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -4758,6 +4774,10 @@ msgstr "Vis asteroider på kartet"
 msgid "Show button text"
 msgstr "Vis knappetekst"
 
+#: u_translation.rsshowcelestia
+msgid "Show celestial equator"
+msgstr ""
+
 #: u_translation.rsshowcomets
 msgid "Show comets"
 msgstr "Vis kometer"
@@ -5737,6 +5757,10 @@ msgstr "Venus"
 #: u_translation.rsversion
 msgid "Version"
 msgstr "Versjon"
+
+#: u_translation.rsverticalover
+msgid "Vertical overlap %"
+msgstr ""
 
 #: u_translation.rsvicinity
 msgid "Vicinity"

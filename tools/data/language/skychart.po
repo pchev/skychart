@@ -5898,3 +5898,27 @@ msgstr ""
 msgid "DeltaT recent value"
 msgstr ""
 
+#: u_translation:rsshowcelestia
+msgid "Show celestial equator"
+msgstr ""
+
+#: u_translation:rsmosaic
+msgid "Mosaic"
+msgstr ""
+
+#: u_translation:rsmosaiccenter
+msgid "Mosaic center"
+msgstr ""
+
+#: u_translation:rsmosaicsize
+msgid "Mosaic size"
+msgstr ""
+
+#: u_translation:rshorizontalov
+msgid "Horizontal overlap %"
+msgstr ""
+
+#: u_translation:rsverticalover
+msgid "Vertical overlap %"
+msgstr ""
+

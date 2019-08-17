@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-11 16:18+0000\n"
+"POT-Creation-Date: 2019-08-17 19:42+0000\n"
 "PO-Revision-Date: 2018-10-05 09:04+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-07-11 16:24+0000\n"
-"X-Generator: Launchpad (build 19007)\n"
+"X-Launchpad-Export-Date: 2019-08-17 19:56+0000\n"
+"X-Generator: Launchpad (build 19022)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -2420,6 +2420,10 @@ msgstr "Duża jasność powierzchniowa"
 msgid "Horizon"
 msgstr "Horyzont"
 
+#: u_translation.rshorizontalov
+msgid "Horizontal overlap %"
+msgstr ""
+
 #: u_translation.rshostname
 msgid "Hostname:"
 msgstr "Nazwa hosta:"
@@ -3252,6 +3256,18 @@ msgstr "Rano"
 #: u_translation.rsmorningtwili
 msgid "Morning twilight"
 msgstr "Świt"
+
+#: u_translation.rsmosaic
+msgid "Mosaic"
+msgstr ""
+
+#: u_translation.rsmosaiccenter
+msgid "Mosaic center"
+msgstr ""
+
+#: u_translation.rsmosaicsize
+msgid "Mosaic size"
+msgstr ""
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -4761,6 +4777,10 @@ msgstr "Pokaż planetoidy na mapie"
 msgid "Show button text"
 msgstr "Pokaż tekst przycisku"
 
+#: u_translation.rsshowcelestia
+msgid "Show celestial equator"
+msgstr ""
+
 #: u_translation.rsshowcomets
 msgid "Show comets"
 msgstr "Pokaż komety"
@@ -5740,6 +5760,10 @@ msgstr "Wenus"
 #: u_translation.rsversion
 msgid "Version"
 msgstr "Wersja"
+
+#: u_translation.rsverticalover
+msgid "Vertical overlap %"
+msgstr ""
 
 #: u_translation.rsvicinity
 msgid "Vicinity"

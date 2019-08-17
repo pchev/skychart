@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-11 16:18+0000\n"
+"POT-Creation-Date: 2019-08-17 19:42+0000\n"
 "PO-Revision-Date: 2017-01-14 17:39+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-07-11 16:25+0000\n"
-"X-Generator: Launchpad (build 19007)\n"
+"X-Launchpad-Export-Date: 2019-08-17 19:56+0000\n"
+"X-Generator: Launchpad (build 19022)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -2421,6 +2421,10 @@ msgstr "Vysoký povrchový jas"
 msgid "Horizon"
 msgstr "Horizont"
 
+#: u_translation.rshorizontalov
+msgid "Horizontal overlap %"
+msgstr ""
+
 #: u_translation.rshostname
 msgid "Hostname:"
 msgstr "Název hosta:"
@@ -3252,6 +3256,18 @@ msgstr "Ráno"
 #: u_translation.rsmorningtwili
 msgid "Morning twilight"
 msgstr "Ranní soumrak"
+
+#: u_translation.rsmosaic
+msgid "Mosaic"
+msgstr ""
+
+#: u_translation.rsmosaiccenter
+msgid "Mosaic center"
+msgstr ""
+
+#: u_translation.rsmosaicsize
+msgid "Mosaic size"
+msgstr ""
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -4761,6 +4777,10 @@ msgstr "Zobrazit asteroidy"
 msgid "Show button text"
 msgstr ""
 
+#: u_translation.rsshowcelestia
+msgid "Show celestial equator"
+msgstr ""
+
 #: u_translation.rsshowcomets
 msgid "Show comets"
 msgstr "Zobrazit komety"
@@ -5739,6 +5759,10 @@ msgstr "Venuše"
 
 #: u_translation.rsversion
 msgid "Version"
+msgstr ""
+
+#: u_translation.rsverticalover
+msgid "Vertical overlap %"
 msgstr ""
 
 #: u_translation.rsvicinity

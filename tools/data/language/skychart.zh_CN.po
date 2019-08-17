@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2019-07-11 16:18+0000\n"
+"POT-Creation-Date: 2019-08-17 19:42+0000\n"
 "PO-Revision-Date: 2019-06-04 15:15+0000\n"
 "Last-Translator: Zachary Wu <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-07-11 16:24+0000\n"
-"X-Generator: Launchpad (build 19007)\n"
+"X-Launchpad-Export-Date: 2019-08-17 19:56+0000\n"
+"X-Generator: Launchpad (build 19022)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2421,6 +2421,10 @@ msgstr "高表面亮度"
 msgid "Horizon"
 msgstr "地平线"
 
+#: u_translation.rshorizontalov
+msgid "Horizontal overlap %"
+msgstr ""
+
 #: u_translation.rshostname
 msgid "Hostname:"
 msgstr "主机名称："
@@ -3254,6 +3258,18 @@ msgstr "晨"
 #: u_translation.rsmorningtwili
 msgid "Morning twilight"
 msgstr "曙光"
+
+#: u_translation.rsmosaic
+msgid "Mosaic"
+msgstr ""
+
+#: u_translation.rsmosaiccenter
+msgid "Mosaic center"
+msgstr ""
+
+#: u_translation.rsmosaicsize
+msgid "Mosaic size"
+msgstr ""
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -4763,6 +4779,10 @@ msgstr "在星图中显示小行星"
 msgid "Show button text"
 msgstr ""
 
+#: u_translation.rsshowcelestia
+msgid "Show celestial equator"
+msgstr ""
+
 #: u_translation.rsshowcomets
 msgid "Show comets"
 msgstr "显示彗星"
@@ -5742,6 +5762,10 @@ msgstr "金星"
 
 #: u_translation.rsversion
 msgid "Version"
+msgstr ""
+
+#: u_translation.rsverticalover
+msgid "Vertical overlap %"
 msgstr ""
 
 #: u_translation.rsvicinity
