@@ -61,8 +61,8 @@ type
     long: TEdit;
     MountIndiDevice: TComboBox;
     Panel2: TPanel;
+    Panel3: TPanel;
     ProtocolTrace: TCheckBox;
-    GroupBox3: TGroupBox;
     Memomsg: TMemo;
     SpeedButton2: TButton;
     Panel1: TPanel;
