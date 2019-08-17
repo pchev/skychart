@@ -1902,7 +1902,7 @@ end;
 procedure Tf_main.MosaicExecute(Sender: TObject);
 begin
   with MultiFrame1.ActiveObject as Tf_chart do
-    NewMosaic(sc.cfgsc.racentre,sc.cfgsc.decentre);
+    NewMosaic(sc.cfgsc.racentre,sc.cfgsc.decentre,true);
 end;
 
 procedure Tf_main.MultiFrame1CreateChild(Sender: TObject);

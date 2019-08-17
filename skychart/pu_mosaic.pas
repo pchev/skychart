@@ -32,12 +32,13 @@ type
   { Tf_mosaic }
 
   Tf_mosaic = class(TForm)
+    ButtonClear: TButton;
     ButtonSave: TButton;
     DEdown: TButton;
     DEup: TButton;
     Panel1: TPanel;
     RAright: TButton;
-    ButtonOK: TButton;
+    ButtonClose: TButton;
     FrameList: TComboBox;
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
@@ -56,7 +57,8 @@ type
     Hoverlap: TSpinEdit;
     ApplyTimer: TTimer;
     Voverlap: TSpinEdit;
-    procedure ButtonOKClick(Sender: TObject);
+    procedure ButtonClearClick(Sender: TObject);
+    procedure ButtonCloseClick(Sender: TObject);
     procedure ButtonSaveClick(Sender: TObject);
     procedure DeChange(Sender: TObject);
     procedure DEdownClick(Sender: TObject);
@@ -70,11 +72,12 @@ type
     procedure RArightClick(Sender: TObject);
     procedure ApplyTimerTimer(Sender: TObject);
   private
-    FApplyMosaic,FSaveMosaic: TNotifyEvent;
+    FClearMosaic,FApplyMosaic,FSaveMosaic: TNotifyEvent;
     dra,dde: double;
     procedure Apply;
   public
     procedure SetLang;
+    property onClearMosaic: TNotifyEvent read FClearMosaic write FClearMosaic;
     property onApplyMosaic: TNotifyEvent read FApplyMosaic write FApplyMosaic;
     property onSaveMosaic: TNotifyEvent read FSaveMosaic write FSaveMosaic;
   end;
@@ -99,7 +102,9 @@ begin
   Label3.Caption := rsMosaicSize;
   Label6.Caption := rsHorizontalOv;
   Label7.Caption := rsVerticalOver;
-  ButtonOK.Caption := rsOK;
+  ButtonClear.Caption := rsClear;
+  ButtonSave.Caption := rsSave;
+  ButtonClose.Caption := rsClose;
 end;
 
 procedure Tf_mosaic.FormCreate(Sender: TObject);
@@ -115,12 +120,16 @@ begin
   FrameListChange(Sender);
   Apply;
 end;
-procedure Tf_mosaic.ButtonOKClick(Sender: TObject);
+procedure Tf_mosaic.ButtonCloseClick(Sender: TObject);
 
 begin
   ApplyTimer.Enabled := false;
-  if Assigned(FApplyMosaic) then FApplyMosaic(Self);
   Close;
+end;
+
+procedure Tf_mosaic.ButtonClearClick(Sender: TObject);
+begin
+  if Assigned(FClearMosaic) then FClearMosaic(Self);
 end;
 
 procedure Tf_mosaic.ButtonSaveClick(Sender: TObject);

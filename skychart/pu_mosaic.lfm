@@ -211,13 +211,13 @@ object f_mosaic: Tf_mosaic
     ClientHeight = 40
     ClientWidth = 360
     TabOrder = 2
-    object ButtonOK: TButton
+    object ButtonClose: TButton
       Left = 272
       Height = 25
       Top = 6
       Width = 74
-      Caption = 'OK'
-      OnClick = ButtonOKClick
+      Caption = 'Close'
+      OnClick = ButtonCloseClick
       TabOrder = 0
     end
     object ButtonSave: TButton
@@ -228,6 +228,15 @@ object f_mosaic: Tf_mosaic
       Caption = 'Save'
       OnClick = ButtonSaveClick
       TabOrder = 1
+    end
+    object ButtonClear: TButton
+      Left = 9
+      Height = 25
+      Top = 6
+      Width = 74
+      Caption = 'Clear'
+      OnClick = ButtonClearClick
+      TabOrder = 2
     end
   end
   object ApplyTimer: TTimer

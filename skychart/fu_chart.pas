@@ -348,7 +348,7 @@ type
     procedure rotation(rot: double);
     procedure GetSunImage;
     procedure CKeyDown(Key: word; Shift: TShiftState);
-    procedure NewMosaic(ra,de: double);
+    procedure NewMosaic(ra,de: double; resizechart: boolean);
     function cmd_SetCursorPosition(x, y: integer): string;
     function cmd_SetGridEQ(onoff: string): string;
     function cmd_SetGrid(onoff: string): string;
@@ -6728,25 +6728,34 @@ begin
   if MovingCircle or (sc.cfgsc.NumCircle >= MaxCircle) then
     exit;
   GetAdXy(Xcursor, Ycursor, ra, de, sc.cfgsc);
-  NewMosaic(ra,de);
+  NewMosaic(ra,de,false);
 end;
 
-procedure Tf_chart.NewMosaic(ra,de: double);
+procedure Tf_chart.NewMosaic(ra,de: double; resizechart: boolean);
 var i,n:integer;
+    w: double;
 begin
+  f_mosaic.onClearMosaic:=RemoveAllCircles1Click;
   f_mosaic.onApplyMosaic:=ApplyMosaic;
   f_mosaic.onSaveMosaic:=MenuSaveCircleClick;
   f_mosaic.Ra.Value:=rad2deg*ra/15;
   f_mosaic.De.Value:=rad2deg*de;
   f_mosaic.FrameList.Clear;
   n:=0;
+  w:=0;
   for i:=1 to sc.cfgsc.nrectangle do begin
-    if sc.cfgsc.rectangleok[i] and (sc.cfgsc.rectangle[i,4]=0) then n:=i;
+    if sc.cfgsc.rectangleok[i] and (sc.cfgsc.rectangle[i,4]=0) then begin
+       n:=i;
+       w := sc.cfgsc.rectangle[i, 1];
+    end;
     f_mosaic.FrameList.Items.Add(formatfloat(f2, sc.cfgsc.rectangle[i, 1]) + lmin + 'x' + formatfloat(f2, sc.cfgsc.rectangle[i, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[i]);
   end;
   f_mosaic.FrameList.ItemIndex := n-1;
   FormPos(f_mosaic,mouse.CursorPos.X, mouse.CursorPos.Y);
   f_mosaic.Show;
+  if resizechart and (w>0) then begin
+     sc.setfov(deg2rad * 2*f_mosaic.SizeX.Value*w/60)
+  end;
 end;
 
 procedure Tf_chart.ApplyMosaic(Sender: TObject);
