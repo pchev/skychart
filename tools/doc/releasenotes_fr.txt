@@ -2,6 +2,11 @@ Version 4.1.1 beta, Notes de la version
 
 Nouvelles fonctions:
 
+- Nouvel outil de mosaïque.
+- Option pour afficher seulement la ligne de l'équateur céleste.
+- Nouvel interface par défaut avec moins de boutons.
+- Les fichiers de cercle de champ (.cdcc) contiennent maintenant l'équinoxe des coordonnées sur la première ligne.
+- Ajout d'un menu de mise à jour de Delta T.
 - Ajout d'un mode de vision nocturne orange.
 - Permet un profil d'horizon d'observatoire par carte.
 - Réglages spéparés pour les labels des astéroïdes et comètes.

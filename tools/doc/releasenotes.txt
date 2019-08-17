@@ -2,6 +2,11 @@ Version 4.1.1 beta, release Notes
 
 New functions:
 
+- New mosaic tool
+- Option to show only the celestial equator line.
+- New default interface with minimal button bar.
+- Saved circle file (.cdcc) include the coordinate equinox on the first row.
+- Add Delta T update menu.
 - Add orange night vision mode.
 - Allow per chart observatory horizon profile.
 - Separate label setting for Asteroid and Comet.
