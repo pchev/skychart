@@ -1532,6 +1532,11 @@ resourcestring
   rsLoadINDIConf = 'Load INDI configuration';
   rsDeltatRecent = 'DeltaT recent value';
   rsShowCelestia = 'Show celestial equator';
+  rsMosaic = 'Mosaic';
+  rsMosaicCenter = 'Mosaic center';
+  rsMosaicSize = 'Mosaic size';
+  rsHorizontalOv = 'Horizontal overlap %';
+  rsVerticalOver = 'Vertical overlap %';
 
 // also update upsi_translation
 

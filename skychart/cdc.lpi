@@ -427,7 +427,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item24>
     </RequiredPackages>
-    <Units Count="84">
+    <Units Count="85">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -933,6 +933,12 @@
         <Filename Value="cu_ascomrest.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit83>
+      <Unit84>
+        <Filename Value="pu_mosaic.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_mosaic"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit84>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

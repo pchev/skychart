@@ -853,7 +853,7 @@ uses
     {$endif}
   LCLProc, pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
   pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom, pu_edittoolbar,
-  pu_scriptconfig, pu_splash, pu_manualtelescope, pu_print, pu_clock;
+  pu_scriptconfig, pu_splash, pu_manualtelescope, pu_print, pu_clock, pu_mosaic;
 
 procedure Tf_main.ShowError(msg: string);
 begin
@@ -8974,6 +8974,7 @@ begin
     f_printsetup.SetLang;
     f_print.SetLang;
     f_edittoolbar.SetLang;
+    f_mosaic.SetLang;
     for i := 0 to MultiFrame1.ChildCount - 1 do
       if MultiFrame1.Childs[i].DockedObject is Tf_chart then
         Tf_chart(MultiFrame1.Childs[i].DockedObject).SetLang;

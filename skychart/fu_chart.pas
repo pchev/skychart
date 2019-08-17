@@ -34,7 +34,7 @@ uses
   pu_ascomclient, pu_indiclient,
   pu_getdss, pu_imglist,
   u_translation, pu_detail, cu_skychart, u_constant, u_util, pu_image,
-  gcatunit, pu_obslist,
+  gcatunit, pu_obslist, pu_mosaic,
   u_projection, Printers, Math, downloaddialog, IntfGraphics,
   contnrs, LCLType, UScaleDPI,
   PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs, Types,
@@ -81,6 +81,7 @@ type
     MenuCircle9: TMenuItem;
     MenuCircle10: TMenuItem;
     EyepieceMask: TMenuItem;
+    MenuNewMosaic: TMenuItem;
     nsearch4: TMenuItem;
     SlewCenter: TMenuItem;
     MenuTelescopeToObsList: TMenuItem;
@@ -195,6 +196,7 @@ type
     procedure MenuAddToObsListClick(Sender: TObject);
     procedure MenuCursorToObsListClick(Sender: TObject);
     procedure MenuTelescopeToObsListClick(Sender: TObject);
+    procedure MenuNewMosaicClick(Sender: TObject);
     procedure ResetalllabelClick(Sender: TObject);
     procedure MenuObslistFirstClick(Sender: TObject);
     procedure MenuObslistLastClick(Sender: TObject);
@@ -310,6 +312,7 @@ type
     function GetTelescopeMove: Tfloat2func;
     procedure SetTelescopeMove(Value: Tfloat2func);
     procedure ObservatoryFromTelescope(Sender: TObject);
+    procedure ApplyMosaic(Sender: TObject);
   public
     { Public declarations }
     Image1: TChartDrawingControl;
@@ -345,6 +348,7 @@ type
     procedure rotation(rot: double);
     procedure GetSunImage;
     procedure CKeyDown(Key: word; Shift: TShiftState);
+    procedure NewMosaic(ra,de: double);
     function cmd_SetCursorPosition(x, y: integer): string;
     function cmd_SetGridEQ(onoff: string): string;
     function cmd_SetGrid(onoff: string): string;
@@ -499,6 +503,7 @@ begin
   SelectRectangle.Caption := rsSelectRectan;
   EyepieceMask.Caption := rsEyepieceVisi;
   NewFinderCircle1.Caption := rsNewFinderCir;
+  MenuNewMosaic.Caption := rsMosaic;
   RemoveLastCircle1.Caption := rsRemoveLastCi;
   RemoveAllCircles1.Caption := rsRemoveAllCir;
   MenuSaveCircle.Caption := rsSaveToFile;
@@ -6717,6 +6722,87 @@ begin
     Fshowinfo(rsNoTargetObje);
 end;
 
+procedure Tf_chart.MenuNewMosaicClick(Sender: TObject);
+var ra,de: double;
+begin
+  if MovingCircle or (sc.cfgsc.NumCircle >= MaxCircle) then
+    exit;
+  GetAdXy(Xcursor, Ycursor, ra, de, sc.cfgsc);
+  NewMosaic(ra,de);
+end;
+
+procedure Tf_chart.NewMosaic(ra,de: double);
+var i,n:integer;
+begin
+  f_mosaic.onApplyMosaic:=ApplyMosaic;
+  f_mosaic.onSaveMosaic:=MenuSaveCircleClick;
+  f_mosaic.Ra.Value:=rad2deg*ra/15;
+  f_mosaic.De.Value:=rad2deg*de;
+  f_mosaic.FrameList.Clear;
+  n:=0;
+  for i:=1 to sc.cfgsc.nrectangle do begin
+    if sc.cfgsc.rectangleok[i] and (sc.cfgsc.rectangle[i,4]=0) then n:=i;
+    f_mosaic.FrameList.Items.Add(formatfloat(f2, sc.cfgsc.rectangle[i, 1]) + lmin + 'x' + formatfloat(f2, sc.cfgsc.rectangle[i, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[i]);
+  end;
+  f_mosaic.FrameList.ItemIndex := n-1;
+  FormPos(f_mosaic,mouse.CursorPos.X, mouse.CursorPos.Y);
+  f_mosaic.Show;
+end;
+
+procedure Tf_chart.ApplyMosaic(Sender: TObject);
+var cra,cde,sra,sde,ra,de,dx,dy,crot,srot,cosde: double;
+    ddex,ddey,drax,dray: double;
+    i,j,n,nx,ny: integer;
+begin
+  n:=f_mosaic.FrameList.ItemIndex+1;
+  if sc.cfgsc.rectangle[n, 4] <> 0 then begin
+    ShowMessage('Cannot create a mosaic for a frame with offset.');
+    exit;
+  end;
+  // select only one frame and no circle
+  for i:=1 to sc.cfgsc.nrectangle do
+     sc.cfgsc.rectangleok[i] := (n=i);
+  for i:=1 to sc.cfgsc.ncircle do
+     sc.cfgsc.circleok[i] := false;
+  sc.cfgsc.ShowCircle := false;
+  // Center position
+  cra := deg2rad * f_mosaic.Ra.Value * 15;
+  cde := deg2rad * f_mosaic.De.Value;
+  // number of steps
+  nx := f_mosaic.SizeX.Value;
+  ny := f_mosaic.SizeY.Value;
+  // compute steps
+  dx := (100-(f_mosaic.Hoverlap.Value)) / 100 * deg2rad * sc.cfgsc.rectangle[n,1] / 60;
+  dy := (100-(f_mosaic.Voverlap.Value)) / 100 * deg2rad * sc.cfgsc.rectangle[n,2] / 60;
+  if (dx=0) or (dy=0) then exit;
+  sincos(deg2rad * sc.cfgsc.rectangle[n, 3],srot,crot);
+  cosde := cos(cde);
+  if cosde=0 then exit;
+  drax := dx * crot / cosde;
+  dray := dx * srot ;
+  ddex := dy * srot / cosde;
+  ddey := dy * crot;
+  // start position
+  sra := cra + drax*(nx-1)/2 + ddex*(ny-1)/2;
+  sde := cde - dray*(nx-1)/2 + ddey*(ny-1)/2;
+  // assign rectangles
+  n:=0;
+  for i := 0 to nx-1 do begin
+    ra := sra - drax * i;
+    de := sde + dray * i;
+    for j := 0 to ny-1 do begin
+        inc(n);
+        sc.cfgsc.CircleLst[n, 1] := ra;
+        sc.cfgsc.CircleLst[n, 2] := de;
+        de := de - ddey;
+        ra := ra - ddex;
+    end;
+  end;
+  sc.cfgsc.NumCircle := n;
+  // draw
+  Refresh(True, False);
+end;
+
 procedure Tf_chart.NewFinderCircle1Click(Sender: TObject);
 begin
   if MovingCircle or (sc.cfgsc.NumCircle >= MaxCircle) then
@@ -6747,11 +6833,22 @@ end;
 
 procedure Tf_chart.MenuSaveCircleClick(Sender: TObject);
 var
+  txt: string;
   f: textfile;
   i: integer;
 begin
   if SaveDialog1.InitialDir = '' then
     SaveDialog1.InitialDir := HomeDir;
+  if Sender is Tf_mosaic then begin
+    SaveDialog1.FileName := 'mosaic';
+    SaveDialog1.Filter := 'Mosaic file|*.cdcc|All|*';
+    txt := 'Mosaic_';
+  end
+  else begin
+    SaveDialog1.FileName := 'circle';
+    SaveDialog1.Filter := 'Circle file|*.cdcc|All|*';
+    txt := 'Circle_';
+  end;
   if (sc.cfgsc.NumCircle > 0) and SaveDialog1.Execute then
   begin
     if VerboseMsg then
@@ -6761,7 +6858,7 @@ begin
     WriteLn(f,'EQUINOX='+FormatFloat(f1,sc.cfgsc.JDChart));
     for i := 1 to sc.cfgsc.NumCircle do
     begin
-      WriteLn(f, 'Circle_' + FormatFloat('00', i) + blank + ARToStr3(
+      WriteLn(f, txt + FormatFloat('00', i) + blank + ARToStr3(
         rad2deg * sc.cfgsc.CircleLst[i, 1] / 15) + blank + DEToStr3(rad2deg * sc.cfgsc.CircleLst[i, 2]));
     end;
     CloseFile(f);

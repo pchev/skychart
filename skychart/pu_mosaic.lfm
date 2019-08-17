@@ -1,0 +1,240 @@
+object f_mosaic: Tf_mosaic
+  Left = 1564
+  Height = 340
+  Top = 30
+  Width = 360
+  Caption = 'f_mosaic'
+  ClientHeight = 340
+  ClientWidth = 360
+  Constraints.MinHeight = 340
+  Constraints.MinWidth = 360
+  DesignTimePPI = 95
+  FormStyle = fsStayOnTop
+  OnCreate = FormCreate
+  OnShow = FormShow
+  object GroupBox1: TGroupBox
+    Left = 0
+    Height = 105
+    Top = 0
+    Width = 360
+    Align = alTop
+    Caption = 'Mosaic center'
+    ClientHeight = 85
+    ClientWidth = 358
+    TabOrder = 0
+    object Ra: TRaDec
+      Left = 64
+      Height = 23
+      Top = 8
+      Width = 200
+      kind = RA
+      Value = 0
+      Enabled = True
+      OnChange = RaChange
+      Constraints.MaxHeight = 28
+      TabOrder = 0
+    end
+    object De: TRaDec
+      Left = 64
+      Height = 23
+      Top = 44
+      Width = 200
+      kind = DE
+      Value = 0
+      Enabled = True
+      OnChange = DeChange
+      Constraints.MaxHeight = 28
+      TabOrder = 1
+    end
+    object Label1: TLabel
+      Left = 8
+      Height = 19
+      Top = 10
+      Width = 16
+      Caption = 'RA'
+      ParentColor = False
+    end
+    object Label2: TLabel
+      Left = 8
+      Height = 19
+      Top = 46
+      Width = 25
+      Caption = 'DEC'
+      ParentColor = False
+    end
+    object RAright: TButton
+      Left = 320
+      Height = 25
+      Top = 24
+      Width = 25
+      Caption = '>'
+      OnClick = RArightClick
+      TabOrder = 2
+    end
+    object RAleft: TButton
+      Left = 272
+      Height = 25
+      Top = 24
+      Width = 25
+      Caption = '<'
+      OnClick = RAleftClick
+      TabOrder = 3
+    end
+    object DEdown: TButton
+      Left = 296
+      Height = 25
+      Top = 48
+      Width = 25
+      Caption = 'v'
+      OnClick = DEdownClick
+      TabOrder = 4
+    end
+    object DEup: TButton
+      Left = 296
+      Height = 25
+      Top = 0
+      Width = 25
+      Caption = '^'
+      OnClick = DEupClick
+      TabOrder = 5
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 0
+    Height = 195
+    Top = 105
+    Width = 360
+    Align = alClient
+    Caption = 'Mosaic'
+    ClientHeight = 175
+    ClientWidth = 358
+    TabOrder = 1
+    object SizeX: TSpinEdit
+      Left = 184
+      Height = 29
+      Top = 64
+      Width = 50
+      MaxValue = 10
+      MinValue = 1
+      OnChange = MosaicChange
+      TabOrder = 0
+      Value = 3
+    end
+    object SizeY: TSpinEdit
+      Left = 260
+      Height = 29
+      Top = 64
+      Width = 50
+      MaxValue = 10
+      MinValue = 1
+      OnChange = MosaicChange
+      TabOrder = 1
+      Value = 3
+    end
+    object Label3: TLabel
+      Left = 8
+      Height = 19
+      Top = 69
+      Width = 67
+      Caption = 'Mosaic size'
+      ParentColor = False
+    end
+    object Label4: TLabel
+      Left = 243
+      Height = 19
+      Top = 69
+      Width = 8
+      Caption = 'X'
+      ParentColor = False
+    end
+    object FrameList: TComboBox
+      Left = 8
+      Height = 31
+      Top = 24
+      Width = 337
+      ItemHeight = 0
+      OnChange = FrameListChange
+      TabOrder = 2
+      Text = 'FrameList'
+    end
+    object Label5: TLabel
+      Left = 8
+      Height = 19
+      Top = 3
+      Width = 134
+      Caption = 'Finder rectangle (CCD)'
+      ParentColor = False
+    end
+    object Hoverlap: TSpinEdit
+      Left = 184
+      Height = 29
+      Top = 104
+      Width = 50
+      MaxValue = 50
+      OnChange = MosaicChange
+      TabOrder = 3
+      Value = 10
+    end
+    object Voverlap: TSpinEdit
+      Left = 184
+      Height = 29
+      Top = 142
+      Width = 50
+      MaxValue = 50
+      OnChange = MosaicChange
+      TabOrder = 4
+      Value = 10
+    end
+    object Label6: TLabel
+      Left = 8
+      Height = 19
+      Top = 109
+      Width = 125
+      Caption = 'Horizontal overlap %'
+      ParentColor = False
+    end
+    object Label7: TLabel
+      Left = 8
+      Height = 19
+      Top = 147
+      Width = 106
+      Caption = 'Vertical overlap %'
+      ParentColor = False
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 40
+    Top = 300
+    Width = 360
+    Align = alBottom
+    ClientHeight = 40
+    ClientWidth = 360
+    TabOrder = 2
+    object ButtonOK: TButton
+      Left = 272
+      Height = 25
+      Top = 6
+      Width = 74
+      Caption = 'OK'
+      OnClick = ButtonOKClick
+      TabOrder = 0
+    end
+    object ButtonSave: TButton
+      Left = 178
+      Height = 25
+      Top = 6
+      Width = 74
+      Caption = 'Save'
+      OnClick = ButtonSaveClick
+      TabOrder = 1
+    end
+  end
+  object ApplyTimer: TTimer
+    Enabled = False
+    Interval = 250
+    OnTimer = ApplyTimerTimer
+    left = 280
+    top = 240
+  end
+end
