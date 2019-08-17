@@ -100,6 +100,7 @@ begin
   Label1.Caption := rsRA;
   Label2.Caption := rsDEC;
   GroupBox2.Caption := rsMosaic;
+  Label8.Caption := rsName;
   Label5.Caption := rsFinderRectan;
   Label3.Caption := rsMosaicSize;
   Label6.Caption := rsHorizontalOv;
