@@ -71,7 +71,6 @@ type
     chart_imglist: TAction;
     AddLabel1: TMenuItem;
     DownloadDialog1: TDownloadDialog;
-    CopyCoord1: TMenuItem;
     Cleanupmap1: TMenuItem;
     Identlabel: TImage;
     MenuFinderCircle: TMenuItem;
@@ -81,6 +80,8 @@ type
     MenuCircle9: TMenuItem;
     MenuCircle10: TMenuItem;
     EyepieceMask: TMenuItem;
+    CopyCoord: TMenuItem;
+    CopyCoord1: TMenuItem;
     CopyCoord2: TMenuItem;
     MenuNewMosaic: TMenuItem;
     nsearch4: TMenuItem;
@@ -540,8 +541,9 @@ begin
   SlewCenter.Caption := rsSlewToChartC;
   Slew1.Caption := rsSlew;
   Sync1.Caption := rsSync;
-  CopyCoord1.Caption := rsCopyCoordina;
-  CopyCoord2.Caption := rsCopyCoordina+': ';
+  CopyCoord.Caption := rsCopyCoordina;
+  CopyCoord1.Caption := rsEquatorialCo+', [hms]';
+  CopyCoord2.Caption := '';
   Cleanupmap1.Caption := rsCleanupMap;
   Connect1.Caption := rsConnectTeles;
   AbortSlew1.Caption := rsAbortSlew;
@@ -2422,10 +2424,10 @@ begin
     Sync1.Visible := False;
   end;
   case sc.cfgsc.ProjPole of
-    Equat : CopyCoord2.Caption := rsCopyCoordina+': '+rsEquatorialCo;
-    Altaz : CopyCoord2.Caption := rsCopyCoordina+': '+rsAltAzCoordin;
-    Gal   : CopyCoord2.Caption := rsCopyCoordina+': '+rsGalacticCoor;
-    Ecl   : CopyCoord2.Caption := rsCopyCoordina+': '+rsEclipticCoor;
+    Equat : CopyCoord2.Caption := rsEquatorialCo+', '+rsDecimalHours;
+    Altaz : CopyCoord2.Caption := rsAltAzCoordin+', '+rsDecimalDegre;
+    Gal   : CopyCoord2.Caption := rsGalacticCoor+', '+rsDecimalDegre;
+    Ecl   : CopyCoord2.Caption := rsEclipticCoor+', '+rsDecimalDegre;
   end;
   SlewCursor.Visible := not sc.cfgsc.TrackOn;
   if sc.cfgsc.ManualTelescope then

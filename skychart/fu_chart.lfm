@@ -275,13 +275,16 @@ object f_chart: Tf_chart
       Action = chart_zoomminusmove
       OnClick = chart_zoomminusmoveExecute
     end
-    object CopyCoord1: TMenuItem
-      Caption = 'CopyCoord1'
-      OnClick = CopyCoord1Click
-    end
-    object CopyCoord2: TMenuItem
-      Caption = 'CopyCoord2'
-      OnClick = CopyCoord2Click
+    object CopyCoord: TMenuItem
+      Caption = 'CopyCoord'
+      object CopyCoord1: TMenuItem
+        Caption = 'CopyCoord1'
+        OnClick = CopyCoord1Click
+      end
+      object CopyCoord2: TMenuItem
+        Caption = 'CopyCoord2'
+        OnClick = CopyCoord2Click
+      end
     end
     object Cleanupmap1: TMenuItem
       Caption = 'Cleanupmap1'
