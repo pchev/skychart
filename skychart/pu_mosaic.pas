@@ -24,8 +24,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 interface
 
-uses  u_constant, u_translation, UScaleDPI,
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin, ExtCtrls, cu_radec;
+uses  u_constant, u_translation, UScaleDPI, u_util,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin, ExtCtrls, Arrow, cu_radec;
 
 type
 
@@ -36,9 +36,13 @@ type
     ButtonSave: TButton;
     DEdown: TButton;
     DEup: TButton;
+    Rotation: TFloatSpinEdit;
+    GroupBox3: TGroupBox;
+    Label9: TLabel;
     MosaicName: TEdit;
     Label8: TLabel;
     Panel1: TPanel;
+    Rotdown: TButton;
     RAright: TButton;
     ButtonClose: TButton;
     FrameList: TComboBox;
@@ -54,6 +58,7 @@ type
     Label7: TLabel;
     Ra: TRaDec;
     De: TRaDec;
+    Rotup: TButton;
     SizeX: TSpinEdit;
     SizeY: TSpinEdit;
     Hoverlap: TSpinEdit;
@@ -73,6 +78,9 @@ type
     procedure DEupClick(Sender: TObject);
     procedure RArightClick(Sender: TObject);
     procedure ApplyTimerTimer(Sender: TObject);
+    procedure RotationChange(Sender: TObject);
+    procedure RotdownClick(Sender: TObject);
+    procedure RotupClick(Sender: TObject);
   private
     FClearMosaic,FApplyMosaic,FSaveMosaic: TNotifyEvent;
     dra,dde: double;
@@ -162,6 +170,11 @@ begin
   Apply;
 end;
 
+procedure Tf_mosaic.RotationChange(Sender: TObject);
+begin
+  Apply;
+end;
+
 procedure Tf_mosaic.MosaicChange(Sender: TObject);
 begin
   Apply
@@ -185,6 +198,16 @@ end;
 procedure Tf_mosaic.RAleftClick(Sender: TObject);
 begin
   Ra.Value := Ra.Value + dra;
+end;
+
+procedure Tf_mosaic.RotdownClick(Sender: TObject);
+begin
+  Rotation.Value := rmod(Rotation.Value + 10 + 360, 360);
+end;
+
+procedure Tf_mosaic.RotupClick(Sender: TObject);
+begin
+  Rotation.Value := rmod(Rotation.Value - 10 + 360, 360);
 end;
 
 procedure Tf_mosaic.FrameListChange(Sender: TObject);

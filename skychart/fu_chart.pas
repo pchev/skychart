@@ -6751,6 +6751,7 @@ begin
     f_mosaic.FrameList.Items.Add(formatfloat(f2, sc.cfgsc.rectangle[i, 1]) + lmin + 'x' + formatfloat(f2, sc.cfgsc.rectangle[i, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[i]);
   end;
   f_mosaic.FrameList.ItemIndex := n-1;
+  f_mosaic.Rotation.Value := sc.cfgsc.rectangle[i, 3];
   FormPos(f_mosaic,mouse.CursorPos.X, mouse.CursorPos.Y);
   f_mosaic.Show;
   if resizechart and (w>0) then begin
@@ -6768,6 +6769,8 @@ begin
     ShowMessage('Cannot create a mosaic for a frame with offset.');
     exit;
   end;
+  // set rotation
+  sc.cfgsc.rectangle[n, 3] := f_mosaic.Rotation.Value;
   // select only one frame and no circle
   for i:=1 to sc.cfgsc.nrectangle do
      sc.cfgsc.rectangleok[i] := (n=i);
@@ -6845,10 +6848,12 @@ var
   txt: string;
   f: textfile;
   i: integer;
+  rot: double;
 begin
   if SaveDialog1.InitialDir = '' then
     SaveDialog1.InitialDir := HomeDir;
   if Sender is Tf_mosaic then begin
+    rot := Tf_mosaic(Sender).Rotation.Value;
     txt := nospace(Tf_mosaic(Sender).MosaicName.Text);
     txt := StringReplace(txt,'/','',[rfReplaceAll]);
     txt := StringReplace(txt,'\','',[rfReplaceAll]);
@@ -6862,6 +6867,7 @@ begin
     SaveDialog1.FileName := 'circle';
     SaveDialog1.Filter := 'Circle file|*.cdcc|All|*';
     txt := 'Circle_';
+    rot := 0;
   end;
   if (sc.cfgsc.NumCircle > 0) and SaveDialog1.Execute then
   begin
@@ -6872,8 +6878,8 @@ begin
     WriteLn(f,'EQUINOX='+FormatFloat(f1,sc.cfgsc.JDChart));
     for i := 1 to sc.cfgsc.NumCircle do
     begin
-      WriteLn(f, txt + FormatFloat('00', i) + blank + ARToStr3(
-        rad2deg * sc.cfgsc.CircleLst[i, 1] / 15) + blank + DEToStr3(rad2deg * sc.cfgsc.CircleLst[i, 2]));
+      WriteLn(f, txt + FormatFloat('00', i) + blank + ARToStr3(rad2deg * sc.cfgsc.CircleLst[i, 1] / 15)
+                 + blank + DEToStr3(rad2deg * sc.cfgsc.CircleLst[i, 2]) + blank + FormatFloat(f2, rot));
     end;
     CloseFile(f);
   end;

@@ -1,10 +1,10 @@
 object f_mosaic: Tf_mosaic
   Left = 1564
-  Height = 394
+  Height = 440
   Top = 30
   Width = 360
   Caption = 'f_mosaic'
-  ClientHeight = 394
+  ClientHeight = 440
   ClientWidth = 360
   Constraints.MinHeight = 340
   Constraints.MinWidth = 360
@@ -101,12 +101,12 @@ object f_mosaic: Tf_mosaic
   end
   object GroupBox2: TGroupBox
     Left = 0
-    Height = 249
-    Top = 105
+    Height = 239
+    Top = 161
     Width = 360
     Align = alClient
     Caption = 'Mosaic'
-    ClientHeight = 229
+    ClientHeight = 219
     ClientWidth = 358
     TabOrder = 1
     object SizeX: TSpinEdit
@@ -221,7 +221,7 @@ object f_mosaic: Tf_mosaic
   object Panel1: TPanel
     Left = 0
     Height = 40
-    Top = 354
+    Top = 400
     Width = 360
     Align = alBottom
     ClientHeight = 40
@@ -255,11 +255,59 @@ object f_mosaic: Tf_mosaic
       TabOrder = 2
     end
   end
+  object GroupBox3: TGroupBox
+    Left = 0
+    Height = 56
+    Top = 105
+    Width = 360
+    Align = alTop
+    Caption = 'Rotation'
+    ClientHeight = 36
+    ClientWidth = 358
+    TabOrder = 3
+    object Label9: TLabel
+      Left = 8
+      Height = 19
+      Top = 7
+      Width = 101
+      Caption = 'Camera rotation '
+      ParentColor = False
+    end
+    object Rotation: TFloatSpinEdit
+      Left = 170
+      Height = 29
+      Top = 2
+      Width = 64
+      MaxValue = 360
+      MinValue = 0
+      OnChange = RotationChange
+      TabOrder = 0
+      Value = 0
+    end
+    object Rotdown: TButton
+      Left = 272
+      Height = 25
+      Top = 2
+      Width = 25
+      Caption = '<'
+      OnClick = RotdownClick
+      TabOrder = 1
+    end
+    object Rotup: TButton
+      Left = 320
+      Height = 25
+      Top = 2
+      Width = 25
+      Caption = '>'
+      OnClick = RotupClick
+      TabOrder = 2
+    end
+  end
   object ApplyTimer: TTimer
     Enabled = False
     Interval = 250
     OnTimer = ApplyTimerTimer
-    left = 280
-    top = 277
+    left = 272
+    top = 336
   end
 end
