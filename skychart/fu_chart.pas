@@ -81,6 +81,7 @@ type
     MenuCircle9: TMenuItem;
     MenuCircle10: TMenuItem;
     EyepieceMask: TMenuItem;
+    CopyCoord2: TMenuItem;
     MenuNewMosaic: TMenuItem;
     nsearch4: TMenuItem;
     SlewCenter: TMenuItem;
@@ -188,6 +189,7 @@ type
     procedure Cleanupmap1Click(Sender: TObject);
     procedure CopyCoord1Click(Sender: TObject);
     procedure ChartResize(Sender: TObject);
+    procedure CopyCoord2Click(Sender: TObject);
     procedure EyepieceMaskClick(Sender: TObject);
     procedure HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: integer);
@@ -539,6 +541,7 @@ begin
   Slew1.Caption := rsSlew;
   Sync1.Caption := rsSync;
   CopyCoord1.Caption := rsCopyCoordina;
+  CopyCoord2.Caption := rsCopyCoordina+': ';
   Cleanupmap1.Caption := rsCleanupMap;
   Connect1.Caption := rsConnectTeles;
   AbortSlew1.Caption := rsAbortSlew;
@@ -2418,6 +2421,12 @@ begin
     Slew1.Visible := False;
     Sync1.Visible := False;
   end;
+  case sc.cfgsc.ProjPole of
+    Equat : CopyCoord2.Caption := rsCopyCoordina+': '+rsEquatorialCo;
+    Altaz : CopyCoord2.Caption := rsCopyCoordina+': '+rsAltAzCoordin;
+    Gal   : CopyCoord2.Caption := rsCopyCoordina+': '+rsGalacticCoor;
+    Ecl   : CopyCoord2.Caption := rsCopyCoordina+': '+rsEclipticCoor;
+  end;
   SlewCursor.Visible := not sc.cfgsc.TrackOn;
   if sc.cfgsc.ManualTelescope then
     Telescope1.Visible := False
@@ -2555,6 +2564,52 @@ begin
     sc.GetCoord(xcursor, ycursor, ra, Dec, a, h, l, b, le, be);
   end;
   txt := ARtoStr(ra * rad2deg / 15) + blank + DEToStr(Dec * rad2deg);
+  Clipboard.AsText := txt;
+end;
+
+procedure Tf_chart.CopyCoord2Click(Sender: TObject);
+// same as CopyCoord1 but copy using current chart coordinate system in decimal format
+var
+  txt: string;
+  x,y,ra, Dec, a, h, l, b, le, be: double;
+begin
+  if sc.cfgsc.FindName > '' then
+  begin
+    ra := sc.cfgsc.FindRA;
+    Dec := sc.cfgsc.FindDec;
+    Eq2Hz(sc.cfgsc.CurST - ra, Dec, a, h, sc.cfgsc);
+    if sc.catalog.cfgshr.AzNorth then
+      a := rmod(a + pi, pi2);
+    Eq2Gal(ra, Dec, l, b, sc.cfgsc);
+    Eq2Ecl(ra, Dec, sc.cfgsc.ecl, le, be);
+    ra := rmod(ra + pi2, pi2);
+    a := rmod(a + pi2, pi2);
+    l := rmod(l + pi2, pi2);
+    le := rmod(le + pi2, pi2);
+  end
+  else
+  begin
+    sc.GetCoord(xcursor, ycursor, ra, Dec, a, h, l, b, le, be);
+  end;
+  case sc.cfgsc.ProjPole of
+    Equat :begin
+             x := ra * rad2deg / 15;
+             y := dec * rad2deg;
+           end;
+    Altaz :begin
+             x := a * rad2deg;
+             y := h * rad2deg;
+           end;
+    Gal   :begin
+             x := l * rad2deg;
+             y := b * rad2deg;
+           end;
+    Ecl   :begin
+             x := le * rad2deg;
+             y := be * rad2deg;
+           end;
+  end;
+  txt := FormatFloat(f6,x) + ';' + FormatFloat(f6,y);
   Clipboard.AsText := txt;
 end;
 

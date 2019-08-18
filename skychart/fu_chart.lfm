@@ -279,6 +279,10 @@ object f_chart: Tf_chart
       Caption = 'CopyCoord1'
       OnClick = CopyCoord1Click
     end
+    object CopyCoord2: TMenuItem
+      Caption = 'CopyCoord2'
+      OnClick = CopyCoord2Click
+    end
     object Cleanupmap1: TMenuItem
       Caption = 'Cleanupmap1'
       ShortCut = 46
