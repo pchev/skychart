@@ -6845,15 +6845,14 @@ end;
 
 procedure Tf_chart.MenuSaveCircleClick(Sender: TObject);
 var
-  txt: string;
+  txt,rot,w,h: string;
   f: textfile;
-  i: integer;
-  rot: double;
+  i,n: integer;
 begin
   if SaveDialog1.InitialDir = '' then
     SaveDialog1.InitialDir := HomeDir;
   if Sender is Tf_mosaic then begin
-    rot := Tf_mosaic(Sender).Rotation.Value;
+    rot := FormatFloat(f2, Tf_mosaic(Sender).Rotation.Value);
     txt := nospace(Tf_mosaic(Sender).MosaicName.Text);
     txt := StringReplace(txt,'/','',[rfReplaceAll]);
     txt := StringReplace(txt,'\','',[rfReplaceAll]);
@@ -6862,12 +6861,17 @@ begin
     SaveDialog1.FileName := txt;
     SaveDialog1.Filter := 'Mosaic file|*.cdcc|All|*';
     txt := txt+'_';
+    n:=f_mosaic.FrameList.ItemIndex+1;
+    w := formatfloat(f2, sc.cfgsc.rectangle[n, 1]);
+    h := formatfloat(f2, sc.cfgsc.rectangle[n, 2]);
   end
   else begin
     SaveDialog1.FileName := 'circle';
     SaveDialog1.Filter := 'Circle file|*.cdcc|All|*';
     txt := 'Circle_';
-    rot := 0;
+    rot := '-';
+    w := '-';
+    h := '-';
   end;
   if (sc.cfgsc.NumCircle > 0) and SaveDialog1.Execute then
   begin
@@ -6879,7 +6883,7 @@ begin
     for i := 1 to sc.cfgsc.NumCircle do
     begin
       WriteLn(f, txt + FormatFloat('00', i) + blank + ARToStr3(rad2deg * sc.cfgsc.CircleLst[i, 1] / 15)
-                 + blank + DEToStr3(rad2deg * sc.cfgsc.CircleLst[i, 2]) + blank + FormatFloat(f2, rot));
+                 + blank + DEToStr3(rad2deg * sc.cfgsc.CircleLst[i, 2]) + blank + rot + blank + w + blank +h);
     end;
     CloseFile(f);
   end;
