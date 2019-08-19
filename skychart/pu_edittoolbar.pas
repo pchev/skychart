@@ -372,14 +372,17 @@ begin
         cat := editAction[k].Actions[i].Category;
         if cat = '' then
           cat := 'none';
-        act := TAction(editAction[k].Actions[i]).hint;
+        if TAction(editAction[k].Actions[i]).Name='Track' then
+           act:='Track'
+        else
+           act := TAction(editAction[k].Actions[i]).hint;
         if act = '' then
           continue; // skip action without Hint, they are for internal use (SetFOV*).
         with ActionTreeView.Items.AddChild(actnode.FindNode(cat), act) do
         begin
           ImageIndex := TAction(editAction[k].Actions[i]).ImageIndex;
         end;
-      end;
+       end;
       // add other control (non action button)
       for i := 0 to numcontrol - 1 do
       begin
@@ -408,7 +411,7 @@ end;
 procedure Tf_edittoolbar.LoadFromToolbar;
 var
   i, j, k: integer;
-  cn: string;
+  cn,hi: string;
   node: TTreeNode;
 begin
   // add current visible buttons
@@ -421,10 +424,14 @@ begin
       if (editbar[k].Controls[i] is TToolButton) then
       begin
         // toolbutton
-        node := ActionTreeView.Items.FindNodeWithText(editbar[k].Controls[i].hint);
+        if editbar[k].Controls[i].Name='Track' then
+           hi:='Track'
+        else
+           hi:=editbar[k].Controls[i].hint;
+        node := ActionTreeView.Items.FindNodeWithText(hi);
         if node <> nil then
           node.Visible := False;
-        with  ToolbarTreeview[k].Items.Add(nil, editbar[k].Controls[i].hint) do
+        with  ToolbarTreeview[k].Items.Add(nil, hi) do
         begin
           ImageIndex := TToolButton(editbar[k].Controls[i]).ImageIndex;
         end;
@@ -516,6 +523,7 @@ end;
 function Tf_edittoolbar.GetControlName(capt: string): string;
 var
   j, k: integer;
+  hi: string;
 begin
   Result := '';
   // search action by caption
@@ -523,7 +531,11 @@ begin
   begin
     for j := 0 to editAction[k].ActionCount - 1 do
     begin
-      if TAction(editAction[k].Actions[j]).hint = capt then
+      if TAction(editAction[k].Actions[j]).Name='Track' then
+         hi:='Track'
+      else
+         hi:=TAction(editAction[k].Actions[j]).hint;
+      if hi = capt then
       begin
         Result := TAction(editAction[k].Actions[j]).Name;
         break;
@@ -552,6 +564,7 @@ end;
 function Tf_edittoolbar.GetControlCaption(nam: string): string;
 var
   j, k: integer;
+  hi: string;
 begin
   Result := '';
   // search action by name
@@ -561,7 +574,11 @@ begin
     begin
       if TAction(editAction[k].Actions[j]).Name = nam then
       begin
-        Result := TAction(editAction[k].Actions[j]).hint;
+        if TAction(editAction[k].Actions[j]).Name='Track' then
+           hi:='Track'
+        else
+           hi:=TAction(editAction[k].Actions[j]).hint;
+        Result := hi;
         break;
       end;
     end;
@@ -589,7 +606,7 @@ procedure Tf_edittoolbar.ActivateToolbar;
 var
   i, j, k, n, m, p, t, lpos, w, h: integer;
   b: TToolButton;
-  act: string;
+  act,hi: string;
   visiblebar: boolean;
 begin
   if (numeditbar > 0) and (numaction > 0) then
@@ -630,7 +647,11 @@ begin
         begin
           for j := 0 to editAction[k].ActionCount - 1 do
           begin
-            if TAction(editAction[k].Actions[j]).hint = act then
+            if TAction(editAction[k].Actions[j]).Name='Track' then
+               hi:='Track'
+            else
+               hi:=TAction(editAction[k].Actions[j]).hint;
+            if hi = act then
             begin
               m := k;
               n := j;
