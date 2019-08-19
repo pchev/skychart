@@ -1,8 +1,8 @@
-unit u_290;
+unit u_290; {version 2019-08-18}
 {HNSKY reads star databases type .290}
 {Minor adaptation, remove astap_main, add global variables, for use with Skychart}
 
-{Copyright (C) 2017,2018 by Han Kleijn, www.hnsky.org
+{Copyright (C) 2017,2018, 2019 by Han Kleijn, www.hnsky.org
  email: han.k.. at...hnsky.org
 
 This program is free software: you can redistribute it and/or modify
@@ -29,7 +29,6 @@ uses
 
 var
   area290:integer;           {290 files, should be set at 290+1 for before any read series}
-  cos_telescope_dec : double;{store here the cos(telescope_dec) value before and read series}
   database2         : array[0..(11*10)] of ansichar;{info star database, length 110 char equals 10x11 bytes}
   naam2             : string; {contains star designation after read for records size above 7}
 
@@ -52,7 +51,6 @@ const
 //          database2  : array[0..(11*10)] of ansichar;{text info star database used}
 // preconditions:
 //   area290 should be set at 290+1 before any read series
-//   cos_telescope_dec, double variable should contains the cos(telescope_dec) to detect if star read is within the FOV diameter}
 //   maxmag [magnitude*10], double variable which specifies the maximum magnitude to be read. This is typical used in HNSKY if a star designation needs to be reported after a mouse click on it
 
 function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diameter:double; var ra2,dec2, mag2, Bp_Rp : double): boolean;{star 290 file database search}
@@ -166,328 +164,339 @@ implementation
 
 
 Const
-
-AA= -90.0 * pi/180;
-BB=-(85.23224404+75.66348756)/2 * pi/180;
-CC=-(75.66348756+65.99286637)/2 * pi/180;
-DD=-(65.99286637+56.14497387)/2 * pi/180;
-EE=-(56.14497387+46.03163067)/2 * pi/180;
-FF=-(46.03163067+35.54307745)/2 * pi/180;
-GG=-(35.54307745+24.53348115)/2 * pi/180;
-HH=-(24.53348115+12.79440589)/2 * pi/180;
-II=-(12.79440589+0          )/2 * pi/180;
-
-
-centers290 : array[1..290,1..2] of real= {divide sky in 32 area's, 12 pentagon, 20 hexagon figures}
-
- (( 0 *pi/180, +AA),  {1  south pole }
-
- (360*0.5/4*pi/180, +BB),  {4 circle segments}
- (360*1.5/4*pi/180, +BB),
- (360*2.5/4*pi/180, +BB),
- (360*3.5/4*pi/180, +BB),
-
- (360*0.5/8*pi/180, +CC),  {8 circel segments}
- (360*1.5/8*pi/180, +CC),
- (360*2.5/8*pi/180, +CC),
- (360*3.5/8*pi/180, +CC),
- (360*4.5/8*pi/180, +CC),
- (360*5.5/8*pi/180, +CC),
- (360*6.5/8*pi/180, +CC),
- (360*7.5/8*pi/180, +CC),
-
- (360*0.5/12*pi/180, +DD),  {12 circle segments}
- (360*1.5/12*pi/180, +DD),
- (360*2.5/12*pi/180, +DD),
- (360*3.5/12*pi/180, +DD),
- (360*4.5/12*pi/180, +DD),
- (360*5.5/12*pi/180, +DD),
- (360*6.5/12*pi/180, +DD),
- (360*7.5/12*pi/180, +DD),
- (360*8.5/12*pi/180, +DD),
- (360*9.5/12*pi/180, +DD),
- (360*10.5/12*pi/180, +DD),
- (360*11.5/12*pi/180, +DD),
-
- (360*0.5/16*pi/180, +EE),  {16 circel segments}
- (360*1.5/16*pi/180, +EE),
- (360*2.5/16*pi/180, +EE),
- (360*3.5/16*pi/180, +EE),
- (360*4.5/16*pi/180, +EE),
- (360*5.5/16*pi/180, +EE),
- (360*6.5/16*pi/180, +EE),
- (360*7.5/16*pi/180, +EE),
- (360*8.5/16*pi/180, +EE),
- (360*9.5/16*pi/180, +EE),
- (360*10.5/16*pi/180, +EE),
- (360*11.5/16*pi/180, +EE),
- (360*12.5/16*pi/180, +EE),
- (360*13.5/16*pi/180, +EE),
- (360*14.5/16*pi/180, +EE),
- (360*15.5/16*pi/180, +EE),
-
- (360*0.5/20*pi/180, +FF),  {20 circle segments}
- (360*1.5/20*pi/180, +FF),
- (360*2.5/20*pi/180, +FF),
- (360*3.5/20*pi/180, +FF),
- (360*4.5/20*pi/180, +FF),
- (360*5.5/20*pi/180, +FF),
- (360*6.5/20*pi/180, +FF),
- (360*7.5/20*pi/180, +FF),
- (360*8.5/20*pi/180, +FF),
- (360*9.5/20*pi/180, +FF),
- (360*10.5/20*pi/180, +FF),
- (360*11.5/20*pi/180, +FF),
- (360*12.5/20*pi/180, +FF),
- (360*13.5/20*pi/180, +FF),
- (360*14.5/20*pi/180, +FF),
- (360*15.5/20*pi/180, +FF),
- (360*16.5/20*pi/180, +FF),
- (360*17.5/20*pi/180, +FF),
- (360*18.5/20*pi/180, +FF),
- (360*19.5/20*pi/180, +FF),
-
- (360*0.5/24*pi/180, +GG),  {24circle segments}
- (360*1.5/24*pi/180, +GG),
- (360*2.5/24*pi/180, +GG),
- (360*3.5/24*pi/180, +GG),
- (360*4.5/24*pi/180, +GG),
- (360*5.5/24*pi/180, +GG),
- (360*6.5/24*pi/180, +GG),
- (360*7.5/24*pi/180, +GG),
- (360*8.5/24*pi/180, +GG),
- (360*9.5/24*pi/180, +GG),
- (360*10.5/24*pi/180, +GG),
- (360*11.5/24*pi/180, +GG),
- (360*12.5/24*pi/180, +GG),
- (360*13.5/24*pi/180, +GG),
- (360*14.5/24*pi/180, +GG),
- (360*15.5/24*pi/180, +GG),
- (360*16.5/24*pi/180, +GG),
- (360*17.5/24*pi/180, +GG),
- (360*18.5/24*pi/180, +GG),
- (360*19.5/24*pi/180, +GG),
- (360*20.5/24*pi/180, +GG),
- (360*21.5/24*pi/180, +GG),
- (360*22.5/24*pi/180, +GG),
- (360*23.5/24*pi/180, +GG),
+AA=-90.0 * pi/180;
+BB=-85.23224404 * pi/180;
+CC=-75.66348756 * pi/180;
+DD=-65.99286637 * pi/180;
+EE=-56.14497387 * pi/180;
+FF=-46.03163067 * pi/180;
+GG=-35.54307745 * pi/180;
+HH=-24.53348115 * pi/180;
+II=-12.79440589 * pi/180;
+JJ=  0;
+KK=+12.79440589 * pi/180;
+LL=+24.53348115 * pi/180;
+MM=+35.54307745 * pi/180;
+NN=+46.03163067 * pi/180;
+OO=+56.14497387 * pi/180;
+PP=+65.99286637 * pi/180;
+QQ=+75.66348756 * pi/180;
+RR=+85.23224404 * pi/180;
+SS=+90.0 * pi/180;
 
 
- (360*0.5/28*pi/180, +HH),  {28 circle segments}
- (360*1.5/28*pi/180, +HH),
- (360*2.5/28*pi/180, +HH),
- (360*3.5/28*pi/180, +HH),
- (360*4.5/28*pi/180, +HH),
- (360*5.5/28*pi/180, +HH),
- (360*6.5/28*pi/180, +HH),
- (360*7.5/28*pi/180, +HH),
- (360*8.5/28*pi/180, +HH),
- (360*9.5/28*pi/180, +HH),
- (360*10.5/28*pi/180, +HH),
- (360*11.5/28*pi/180, +HH),
- (360*12.5/28*pi/180, +HH),
- (360*13.5/28*pi/180, +HH),
- (360*14.5/28*pi/180, +HH),
- (360*15.5/28*pi/180, +HH),
- (360*16.5/28*pi/180, +HH),
- (360*17.5/28*pi/180, +HH),
- (360*18.5/28*pi/180, +HH),
- (360*19.5/28*pi/180, +HH),
- (360*20.5/28*pi/180, +HH),
- (360*21.5/28*pi/180, +HH),
- (360*22.5/28*pi/180, +HH),
- (360*23.5/28*pi/180, +HH),
- (360*24.5/28*pi/180, +HH),
- (360*25.5/28*pi/180, +HH),
- (360*26.5/28*pi/180, +HH),
- (360*27.5/28*pi/180, +HH),
+centers290 : array[1..290,1..6] of real= {divide sky in 290 area's in bands of constant DEC}
 
- (360*0.5/32*pi/180, +II),  {32 circle segments}
- (360*1.5/32*pi/180, +II),
- (360*2.5/32*pi/180, +II),
- (360*3.5/32*pi/180, +II),
- (360*4.5/32*pi/180, +II),
- (360*5.5/32*pi/180, +II),
- (360*6.5/32*pi/180, +II),
- (360*7.5/32*pi/180, +II),
- (360*8.5/32*pi/180, +II),
- (360*9.5/32*pi/180, +II),
- (360*10.5/32*pi/180, +II),
- (360*11.5/32*pi/180, +II),
- (360*12.5/32*pi/180, +II),
- (360*13.5/32*pi/180, +II),
- (360*14.5/32*pi/180, +II),
- (360*15.5/32*pi/180, +II),
- (360*16.5/32*pi/180, +II),
- (360*17.5/32*pi/180, +II),
- (360*18.5/32*pi/180, +II),
- (360*19.5/32*pi/180, +II),
- (360*20.5/32*pi/180, +II),
- (360*21.5/32*pi/180, +II),
- (360*22.5/32*pi/180, +II),
- (360*23.5/32*pi/180, +II),
- (360*24.5/32*pi/180, +II),
- (360*25.5/32*pi/180, +II),
- (360*26.5/32*pi/180, +II),
- (360*27.5/32*pi/180, +II),
- (360*28.5/32*pi/180, +II),
- (360*29.5/32*pi/180, +II),
- (360*30.5/32*pi/180, +II),
- (360*31.5/32*pi/180, +II),
+ {ra_center, dec_center, ra_min    ,ra_max, dec_max, dec_min}
 
- (360*0.5/32*pi/180, -II),  {32 circle segments}
- (360*1.5/32*pi/180, -II),
- (360*2.5/32*pi/180, -II),
- (360*3.5/32*pi/180, -II),
- (360*4.5/32*pi/180, -II),
- (360*5.5/32*pi/180, -II),
- (360*6.5/32*pi/180, -II),
- (360*7.5/32*pi/180, -II),
- (360*8.5/32*pi/180, -II),
- (360*9.5/32*pi/180, -II),
- (360*10.5/32*pi/180, -II),
- (360*11.5/32*pi/180, -II),
- (360*12.5/32*pi/180, -II),
- (360*13.5/32*pi/180, -II),
- (360*14.5/32*pi/180, -II),
- (360*15.5/32*pi/180, -II),
- (360*16.5/32*pi/180, -II),
- (360*17.5/32*pi/180, -II),
- (360*18.5/32*pi/180, -II),
- (360*19.5/32*pi/180, -II),
- (360*20.5/32*pi/180, -II),
- (360*21.5/32*pi/180, -II),
- (360*22.5/32*pi/180, -II),
- (360*23.5/32*pi/180, -II),
- (360*24.5/32*pi/180, -II),
- (360*25.5/32*pi/180, -II),
- (360*26.5/32*pi/180, -II),
- (360*27.5/32*pi/180, -II),
- (360*28.5/32*pi/180, -II),
- (360*29.5/32*pi/180, -II),
- (360*30.5/32*pi/180, -II),
- (360*31.5/32*pi/180, -II),
+ (( 0       , +AA       ,  0        ,pi         ,AA,BB ),  {1  south pole }
 
- (360*0.5/28*pi/180, -HH),  {28 circle segments}
- (360*1.5/28*pi/180, -HH),
- (360*2.5/28*pi/180, -HH),
- (360*3.5/28*pi/180, -HH),
- (360*4.5/28*pi/180, -HH),
- (360*5.5/28*pi/180, -HH),
- (360*6.5/28*pi/180, -HH),
- (360*7.5/28*pi/180, -HH),
- (360*8.5/28*pi/180, -HH),
- (360*9.5/28*pi/180, -HH),
- (360*10.5/28*pi/180, -HH),
- (360*11.5/28*pi/180, -HH),
- (360*12.5/28*pi/180, -HH),
- (360*13.5/28*pi/180, -HH),
- (360*14.5/28*pi/180, -HH),
- (360*15.5/28*pi/180, -HH),
- (360*16.5/28*pi/180, -HH),
- (360*17.5/28*pi/180, -HH),
- (360*18.5/28*pi/180, -HH),
- (360*19.5/28*pi/180, -HH),
- (360*20.5/28*pi/180, -HH),
- (360*21.5/28*pi/180, -HH),
- (360*22.5/28*pi/180, -HH),
- (360*23.5/28*pi/180, -HH),
- (360*24.5/28*pi/180, -HH),
- (360*25.5/28*pi/180, -HH),
- (360*26.5/28*pi/180, -HH),
- (360*27.5/28*pi/180, -HH),
+ (0.5/4*2*pi, (BB+CC)/2, 0.0/4*2*pi, 1.0/4*2*pi,BB,CC),  {4 circle segments}
+ (1.5/4*2*pi, (BB+CC)/2, 1.0/4*2*pi, 2.0/4*2*pi,BB,CC),
+ (2.5/4*2*pi, (BB+CC)/2, 2.0/4*2*pi, 3.0/4*2*pi,BB,CC),
+ (3.5/4*2*pi, (BB+CC)/2, 3.0/4*2*pi, 4.0/4*2*pi,BB,CC),
 
- (360*0.5/24*pi/180, -GG),  {24 circle segments}
- (360*1.5/24*pi/180, -GG),
- (360*2.5/24*pi/180, -GG),
- (360*3.5/24*pi/180, -GG),
- (360*4.5/24*pi/180, -GG),
- (360*5.5/24*pi/180, -GG),
- (360*6.5/24*pi/180, -GG),
- (360*7.5/24*pi/180, -GG),
- (360*8.5/24*pi/180, -GG),
- (360*9.5/24*pi/180, -GG),
- (360*10.5/24*pi/180, -GG),
- (360*11.5/24*pi/180, -GG),
- (360*12.5/24*pi/180, -GG),
- (360*13.5/24*pi/180, -GG),
- (360*14.5/24*pi/180, -GG),
- (360*15.5/24*pi/180, -GG),
- (360*16.5/24*pi/180, -GG),
- (360*17.5/24*pi/180, -GG),
- (360*18.5/24*pi/180, -GG),
- (360*19.5/24*pi/180, -GG),
- (360*20.5/24*pi/180, -GG),
- (360*21.5/24*pi/180, -GG),
- (360*22.5/24*pi/180, -GG),
- (360*23.5/24*pi/180, -GG),
+ (0.5/8*2*pi, (CC+DD)/2, 0.0/8*2*pi, 1.0/8*2*pi,CC,DD),  {8 circel segments}
+ (1.5/8*2*pi, (CC+DD)/2, 1.0/8*2*pi, 2.0/8*2*pi,CC,DD),
+ (2.5/8*2*pi, (CC+DD)/2, 2.0/8*2*pi, 3.0/8*2*pi,CC,DD),
+ (3.5/8*2*pi, (CC+DD)/2, 3.0/8*2*pi, 4.0/8*2*pi,CC,DD),
+ (4.5/8*2*pi, (CC+DD)/2, 4.0/8*2*pi, 5.0/8*2*pi,CC,DD),
+ (5.5/8*2*pi, (CC+DD)/2, 5.0/8*2*pi, 6.0/8*2*pi,CC,DD),
+ (6.5/8*2*pi, (CC+DD)/2, 6.0/8*2*pi, 7.0/8*2*pi,CC,DD),
+ (7.5/8*2*pi, (CC+DD)/2, 7.0/8*2*pi, 8.0/8*2*pi,CC,DD),
 
- (360*0.5/20*pi/180, -FF),  {20 circle segments}
- (360*1.5/20*pi/180, -FF),
- (360*2.5/20*pi/180, -FF),
- (360*3.5/20*pi/180, -FF),
- (360*4.5/20*pi/180, -FF),
- (360*5.5/20*pi/180, -FF),
- (360*6.5/20*pi/180, -FF),
- (360*7.5/20*pi/180, -FF),
- (360*8.5/20*pi/180, -FF),
- (360*9.5/20*pi/180, -FF),
- (360*10.5/20*pi/180, -FF),
- (360*11.5/20*pi/180, -FF),
- (360*12.5/20*pi/180, -FF),
- (360*13.5/20*pi/180, -FF),
- (360*14.5/20*pi/180, -FF),
- (360*15.5/20*pi/180, -FF),
- (360*16.5/20*pi/180, -FF),
- (360*17.5/20*pi/180, -FF),
- (360*18.5/20*pi/180, -FF),
- (360*19.5/20*pi/180, -FF),
+ (0.5/12*2*pi, (DD+EE)/2, 0.0/12*2*pi, 1.0/12*2*pi,DD,EE),  {12 circle segments}
+ (1.5/12*2*pi, (DD+EE)/2, 1.0/12*2*pi, 2.0/12*2*pi,DD,EE),
+ (2.5/12*2*pi, (DD+EE)/2, 2.0/12*2*pi, 3.0/12*2*pi,DD,EE),
+ (3.5/12*2*pi, (DD+EE)/2, 3.0/12*2*pi, 4.0/12*2*pi,DD,EE),
+ (4.5/12*2*pi, (DD+EE)/2, 4.0/12*2*pi, 5.0/12*2*pi,DD,EE),
+ (5.5/12*2*pi, (DD+EE)/2, 5.0/12*2*pi, 6.0/12*2*pi,DD,EE),
+ (6.5/12*2*pi, (DD+EE)/2, 6.0/12*2*pi, 7.0/12*2*pi,DD,EE),
+ (7.5/12*2*pi, (DD+EE)/2, 7.0/12*2*pi, 8.0/12*2*pi,DD,EE),
+ (8.5/12*2*pi, (DD+EE)/2, 8.0/12*2*pi, 9.0/12*2*pi,DD,EE),
+ (9.5/12*2*pi, (DD+EE)/2, 9.0/12*2*pi, 10.0/12*2*pi,DD,EE),
+ (10.5/12*2*pi, (DD+EE)/2, 10.0/12*2*pi, 11.0/12*2*pi,DD,EE),
+ (11.5/12*2*pi, (DD+EE)/2, 11.0/12*2*pi, 12.0/12*2*pi,DD,EE),
 
- (360*0.5/16*pi/180, -EE),  {16 circle segments}
- (360*1.5/16*pi/180, -EE),
- (360*2.5/16*pi/180, -EE),
- (360*3.5/16*pi/180, -EE),
- (360*4.5/16*pi/180, -EE),
- (360*5.5/16*pi/180, -EE),
- (360*6.5/16*pi/180, -EE),
- (360*7.5/16*pi/180, -EE),
- (360*8.5/16*pi/180, -EE),
- (360*9.5/16*pi/180, -EE),
- (360*10.5/16*pi/180, -EE),
- (360*11.5/16*pi/180, -EE),
- (360*12.5/16*pi/180, -EE),
- (360*13.5/16*pi/180, -EE),
- (360*14.5/16*pi/180, -EE),
- (360*15.5/16*pi/180, -EE),
+ (0.5/16*2*pi, (EE+FF)/2, 0.0/16*2*pi, 1.0/16*2*pi,EE,FF),  {16 circel segments}
+ (1.5/16*2*pi, (EE+FF)/2, 1.0/16*2*pi, 2.0/16*2*pi,EE,FF),
+ (2.5/16*2*pi, (EE+FF)/2, 2.0/16*2*pi, 3.0/16*2*pi,EE,FF),
+ (3.5/16*2*pi, (EE+FF)/2, 3.0/16*2*pi, 4.0/16*2*pi,EE,FF),
+ (4.5/16*2*pi, (EE+FF)/2, 4.0/16*2*pi, 5.0/16*2*pi,EE,FF),
+ (5.5/16*2*pi, (EE+FF)/2, 5.0/16*2*pi, 6.0/16*2*pi,EE,FF),
+ (6.5/16*2*pi, (EE+FF)/2, 6.0/16*2*pi, 7.0/16*2*pi,EE,FF),
+ (7.5/16*2*pi, (EE+FF)/2, 7.0/16*2*pi, 8.0/16*2*pi,EE,FF),
+ (8.5/16*2*pi, (EE+FF)/2, 8.0/16*2*pi, 9.0/16*2*pi,EE,FF),
+ (9.5/16*2*pi, (EE+FF)/2, 9.0/16*2*pi, 10.0/16*2*pi,EE,FF),
+ (10.5/16*2*pi, (EE+FF)/2, 10.0/16*2*pi, 11.0/16*2*pi,EE,FF),
+ (11.5/16*2*pi, (EE+FF)/2, 11.0/16*2*pi, 12.0/16*2*pi,EE,FF),
+ (12.5/16*2*pi, (EE+FF)/2, 12.0/16*2*pi, 13.0/16*2*pi,EE,FF),
+ (13.5/16*2*pi, (EE+FF)/2, 13.0/16*2*pi, 14.0/16*2*pi,EE,FF),
+ (14.5/16*2*pi, (EE+FF)/2, 14.0/16*2*pi, 15.0/16*2*pi,EE,FF),
+ (15.5/16*2*pi, (EE+FF)/2, 15.0/16*2*pi, 16.0/16*2*pi,EE,FF),
 
- (360*0.5/12*pi/180, -DD),  {12 circle segments}
- (360*1.5/12*pi/180, -DD),
- (360*2.5/12*pi/180, -DD),
- (360*3.5/12*pi/180, -DD),
- (360*4.5/12*pi/180, -DD),
- (360*5.5/12*pi/180, -DD),
- (360*6.5/12*pi/180, -DD),
- (360*7.5/12*pi/180, -DD),
- (360*8.5/12*pi/180, -DD),
- (360*9.5/12*pi/180, -DD),
- (360*10.5/12*pi/180, -DD),
- (360*11.5/12*pi/180, -DD),
+ (0.5/20*2*pi, (FF+GG)/2, 0.0/20*2*pi, 1.0/20*2*pi,FF,GG),  {20 circle segments}
+ (1.5/20*2*pi, (FF+GG)/2, 1.0/20*2*pi, 2.0/20*2*pi,FF,GG),
+ (2.5/20*2*pi, (FF+GG)/2, 2.0/20*2*pi, 3.0/20*2*pi,FF,GG),
+ (3.5/20*2*pi, (FF+GG)/2, 3.0/20*2*pi, 4.0/20*2*pi,FF,GG),
+ (4.5/20*2*pi, (FF+GG)/2, 4.0/20*2*pi, 5.0/20*2*pi,FF,GG),
+ (5.5/20*2*pi, (FF+GG)/2, 5.0/20*2*pi, 6.0/20*2*pi,FF,GG),
+ (6.5/20*2*pi, (FF+GG)/2, 6.0/20*2*pi, 7.0/20*2*pi,FF,GG),
+ (7.5/20*2*pi, (FF+GG)/2, 7.0/20*2*pi, 8.0/20*2*pi,FF,GG),
+ (8.5/20*2*pi, (FF+GG)/2, 8.0/20*2*pi, 9.0/20*2*pi,FF,GG),
+ (9.5/20*2*pi, (FF+GG)/2, 9.0/20*2*pi, 10.0/20*2*pi,FF,GG),
+ (10.5/20*2*pi, (FF+GG)/2, 10.0/20*2*pi, 11.0/20*2*pi,FF,GG),
+ (11.5/20*2*pi, (FF+GG)/2, 11.0/20*2*pi, 12.0/20*2*pi,FF,GG),
+ (12.5/20*2*pi, (FF+GG)/2, 12.0/20*2*pi, 13.0/20*2*pi,FF,GG),
+ (13.5/20*2*pi, (FF+GG)/2, 13.0/20*2*pi, 14.0/20*2*pi,FF,GG),
+ (14.5/20*2*pi, (FF+GG)/2, 14.0/20*2*pi, 15.0/20*2*pi,FF,GG),
+ (15.5/20*2*pi, (FF+GG)/2, 15.0/20*2*pi, 16.0/20*2*pi,FF,GG),
+ (16.5/20*2*pi, (FF+GG)/2, 16.0/20*2*pi, 17.0/20*2*pi,FF,GG),
+ (17.5/20*2*pi, (FF+GG)/2, 17.0/20*2*pi, 18.0/20*2*pi,FF,GG),
+ (18.5/20*2*pi, (FF+GG)/2, 18.0/20*2*pi, 19.0/20*2*pi,FF,GG),
+ (19.5/20*2*pi, (FF+GG)/2, 19.0/20*2*pi, 20.0/20*2*pi,FF,GG),
 
- (360*0.5/8*pi/180, -CC),  {8 circle segments}
- (360*1.5/8*pi/180, -CC),
- (360*2.5/8*pi/180, -CC),
- (360*3.5/8*pi/180, -CC),
- (360*4.5/8*pi/180, -CC),
- (360*5.5/8*pi/180, -CC),
- (360*6.5/8*pi/180, -CC),
- (360*7.5/8*pi/180, -CC),
+ (0.5/24*2*pi, (GG+HH)/2, 0.0/24*2*pi, 1.0/24*2*pi,GG,HH),  {24circle segments}
+ (1.5/24*2*pi, (GG+HH)/2, 1.0/24*2*pi, 2.0/24*2*pi,GG,HH),
+ (2.5/24*2*pi, (GG+HH)/2, 2.0/24*2*pi, 3.0/24*2*pi,GG,HH),
+ (3.5/24*2*pi, (GG+HH)/2, 3.0/24*2*pi, 4.0/24*2*pi,GG,HH),
+ (4.5/24*2*pi, (GG+HH)/2, 4.0/24*2*pi, 5.0/24*2*pi,GG,HH),
+ (5.5/24*2*pi, (GG+HH)/2, 5.0/24*2*pi, 6.0/24*2*pi,GG,HH),
+ (6.5/24*2*pi, (GG+HH)/2, 6.0/24*2*pi, 7.0/24*2*pi,GG,HH),
+ (7.5/24*2*pi, (GG+HH)/2, 7.0/24*2*pi, 8.0/24*2*pi,GG,HH),
+ (8.5/24*2*pi, (GG+HH)/2, 8.0/24*2*pi, 9.0/24*2*pi,GG,HH),
+ (9.5/24*2*pi, (GG+HH)/2, 9.0/24*2*pi, 10.0/24*2*pi,GG,HH),
+ (10.5/24*2*pi, (GG+HH)/2, 10.0/24*2*pi, 11.0/24*2*pi,GG,HH),
+ (11.5/24*2*pi, (GG+HH)/2, 11.0/24*2*pi, 12.0/24*2*pi,GG,HH),
+ (12.5/24*2*pi, (GG+HH)/2, 12.0/24*2*pi, 13.0/24*2*pi,GG,HH),
+ (13.5/24*2*pi, (GG+HH)/2, 13.0/24*2*pi, 14.0/24*2*pi,GG,HH),
+ (14.5/24*2*pi, (GG+HH)/2, 14.0/24*2*pi, 15.0/24*2*pi,GG,HH),
+ (15.5/24*2*pi, (GG+HH)/2, 15.0/24*2*pi, 16.0/24*2*pi,GG,HH),
+ (16.5/24*2*pi, (GG+HH)/2, 16.0/24*2*pi, 17.0/24*2*pi,GG,HH),
+ (17.5/24*2*pi, (GG+HH)/2, 17.0/24*2*pi, 18.0/24*2*pi,GG,HH),
+ (18.5/24*2*pi, (GG+HH)/2, 18.0/24*2*pi, 19.0/24*2*pi,GG,HH),
+ (19.5/24*2*pi, (GG+HH)/2, 19.0/24*2*pi, 20.0/24*2*pi,GG,HH),
+ (20.5/24*2*pi, (GG+HH)/2, 20.0/24*2*pi, 21.0/24*2*pi,GG,HH),
+ (21.5/24*2*pi, (GG+HH)/2, 21.0/24*2*pi, 22.0/24*2*pi,GG,HH),
+ (22.5/24*2*pi, (GG+HH)/2, 22.0/24*2*pi, 23.0/24*2*pi,GG,HH),
+ (23.5/24*2*pi, (GG+HH)/2, 23.0/24*2*pi, 24.0/24*2*pi,GG,HH),
 
-  (360*0.5/4*pi/180, -BB),  {4 circle segments}
- (360*1.5/4*pi/180, -BB),
- (360*2.5/4*pi/180, -BB),
- (360*3.5/4*pi/180, -BB),
 
- ( 0        , -AA   )); {1 segment}   {north pole }
+ (0.5/28*2*pi, (HH+II)/2, 0.0/28*2*pi, 1.0/28*2*pi,HH,II),  {28 circle segments}
+ (1.5/28*2*pi, (HH+II)/2, 1.0/28*2*pi, 2.0/28*2*pi,HH,II),
+ (2.5/28*2*pi, (HH+II)/2, 2.0/28*2*pi, 3.0/28*2*pi,HH,II),
+ (3.5/28*2*pi, (HH+II)/2, 3.0/28*2*pi, 4.0/28*2*pi,HH,II),
+ (4.5/28*2*pi, (HH+II)/2, 4.0/28*2*pi, 5.0/28*2*pi,HH,II),
+ (5.5/28*2*pi, (HH+II)/2, 5.0/28*2*pi, 6.0/28*2*pi,HH,II),
+ (6.5/28*2*pi, (HH+II)/2, 6.0/28*2*pi, 7.0/28*2*pi,HH,II),
+ (7.5/28*2*pi, (HH+II)/2, 7.0/28*2*pi, 8.0/28*2*pi,HH,II),
+ (8.5/28*2*pi, (HH+II)/2, 8.0/28*2*pi, 9.0/28*2*pi,HH,II),
+ (9.5/28*2*pi, (HH+II)/2, 9.0/28*2*pi, 10.0/28*2*pi,HH,II),
+ (10.5/28*2*pi, (HH+II)/2, 10.0/28*2*pi, 11.0/28*2*pi,HH,II),
+ (11.5/28*2*pi, (HH+II)/2, 11.0/28*2*pi, 12.0/28*2*pi,HH,II),
+ (12.5/28*2*pi, (HH+II)/2, 12.0/28*2*pi, 13.0/28*2*pi,HH,II),
+ (13.5/28*2*pi, (HH+II)/2, 13.0/28*2*pi, 14.0/28*2*pi,HH,II),
+ (14.5/28*2*pi, (HH+II)/2, 14.0/28*2*pi, 15.0/28*2*pi,HH,II),
+ (15.5/28*2*pi, (HH+II)/2, 15.0/28*2*pi, 16.0/28*2*pi,HH,II),
+ (16.5/28*2*pi, (HH+II)/2, 16.0/28*2*pi, 17.0/28*2*pi,HH,II),
+ (17.5/28*2*pi, (HH+II)/2, 17.0/28*2*pi, 18.0/28*2*pi,HH,II),
+ (18.5/28*2*pi, (HH+II)/2, 18.0/28*2*pi, 19.0/28*2*pi,HH,II),
+ (19.5/28*2*pi, (HH+II)/2, 19.0/28*2*pi, 20.0/28*2*pi,HH,II),
+ (20.5/28*2*pi, (HH+II)/2, 20.0/28*2*pi, 21.0/28*2*pi,HH,II),
+ (21.5/28*2*pi, (HH+II)/2, 21.0/28*2*pi, 22.0/28*2*pi,HH,II),
+ (22.5/28*2*pi, (HH+II)/2, 22.0/28*2*pi, 23.0/28*2*pi,HH,II),
+ (23.5/28*2*pi, (HH+II)/2, 23.0/28*2*pi, 24.0/28*2*pi,HH,II),
+ (24.5/28*2*pi, (HH+II)/2, 24.0/28*2*pi, 25.0/28*2*pi,HH,II),
+ (25.5/28*2*pi, (HH+II)/2, 25.0/28*2*pi, 26.0/28*2*pi,HH,II),
+ (26.5/28*2*pi, (HH+II)/2, 26.0/28*2*pi, 27.0/28*2*pi,HH,II),
+ (27.5/28*2*pi, (HH+II)/2, 27.0/28*2*pi, 28.0/28*2*pi,HH,II),
+
+ (0.5/32*2*pi, (II+JJ)/2, 0.0/32*2*pi, 1.0/32*2*pi,II,JJ),  {32 circle segments}
+ (1.5/32*2*pi, (II+JJ)/2, 1.0/32*2*pi, 2.0/32*2*pi,II,JJ),
+ (2.5/32*2*pi, (II+JJ)/2, 2.0/32*2*pi, 3.0/32*2*pi,II,JJ),
+ (3.5/32*2*pi, (II+JJ)/2, 3.0/32*2*pi, 4.0/32*2*pi,II,JJ),
+ (4.5/32*2*pi, (II+JJ)/2, 4.0/32*2*pi, 5.0/32*2*pi,II,JJ),
+ (5.5/32*2*pi, (II+JJ)/2, 5.0/32*2*pi, 6.0/32*2*pi,II,JJ),
+ (6.5/32*2*pi, (II+JJ)/2, 6.0/32*2*pi, 7.0/32*2*pi,II,JJ),
+ (7.5/32*2*pi, (II+JJ)/2, 7.0/32*2*pi, 8.0/32*2*pi,II,JJ),
+ (8.5/32*2*pi, (II+JJ)/2, 8.0/32*2*pi, 9.0/32*2*pi,II,JJ),
+ (9.5/32*2*pi, (II+JJ)/2, 9.0/32*2*pi, 10.0/32*2*pi,II,JJ),
+ (10.5/32*2*pi, (II+JJ)/2, 10.0/32*2*pi, 11.0/32*2*pi,II,JJ),
+ (11.5/32*2*pi, (II+JJ)/2, 11.0/32*2*pi, 12.0/32*2*pi,II,JJ),
+ (12.5/32*2*pi, (II+JJ)/2, 12.0/32*2*pi, 13.0/32*2*pi,II,JJ),
+ (13.5/32*2*pi, (II+JJ)/2, 13.0/32*2*pi, 14.0/32*2*pi,II,JJ),
+ (14.5/32*2*pi, (II+JJ)/2, 14.0/32*2*pi, 15.0/32*2*pi,II,JJ),
+ (15.5/32*2*pi, (II+JJ)/2, 15.0/32*2*pi, 16.0/32*2*pi,II,JJ),
+ (16.5/32*2*pi, (II+JJ)/2, 16.0/32*2*pi, 17.0/32*2*pi,II,JJ),
+ (17.5/32*2*pi, (II+JJ)/2, 17.0/32*2*pi, 18.0/32*2*pi,II,JJ),
+ (18.5/32*2*pi, (II+JJ)/2, 18.0/32*2*pi, 19.0/32*2*pi,II,JJ),
+ (19.5/32*2*pi, (II+JJ)/2, 19.0/32*2*pi, 20.0/32*2*pi,II,JJ),
+ (20.5/32*2*pi, (II+JJ)/2, 20.0/32*2*pi, 21.0/32*2*pi,II,JJ),
+ (21.5/32*2*pi, (II+JJ)/2, 21.0/32*2*pi, 22.0/32*2*pi,II,JJ),
+ (22.5/32*2*pi, (II+JJ)/2, 22.0/32*2*pi, 23.0/32*2*pi,II,JJ),
+ (23.5/32*2*pi, (II+JJ)/2, 23.0/32*2*pi, 24.0/32*2*pi,II,JJ),
+ (24.5/32*2*pi, (II+JJ)/2, 24.0/32*2*pi, 25.0/32*2*pi,II,JJ),
+ (25.5/32*2*pi, (II+JJ)/2, 25.0/32*2*pi, 26.0/32*2*pi,II,JJ),
+ (26.5/32*2*pi, (II+JJ)/2, 26.0/32*2*pi, 27.0/32*2*pi,II,JJ),
+ (27.5/32*2*pi, (II+JJ)/2, 27.0/32*2*pi, 28.0/32*2*pi,II,JJ),
+ (28.5/32*2*pi, (II+JJ)/2, 28.0/32*2*pi, 29.0/32*2*pi,II,JJ),
+ (29.5/32*2*pi, (II+JJ)/2, 29.0/32*2*pi, 30.0/32*2*pi,II,JJ),
+ (30.5/32*2*pi, (II+JJ)/2, 30.0/32*2*pi, 31.0/32*2*pi,II,JJ),
+ (31.5/32*2*pi, (II+JJ)/2, 31.0/32*2*pi, 32.0/32*2*pi,II,JJ),
+
+ (0.5/32*2*pi, -(II+JJ)/2, 0.0/32*2*pi, 1.0/32*2*pi,-II,JJ),  {32 circle segments}
+ (1.5/32*2*pi, -(II+JJ)/2, 1.0/32*2*pi, 2.0/32*2*pi,-II,JJ),
+ (2.5/32*2*pi, -(II+JJ)/2, 2.0/32*2*pi, 3.0/32*2*pi,-II,JJ),
+ (3.5/32*2*pi, -(II+JJ)/2, 3.0/32*2*pi, 4.0/32*2*pi,-II,JJ),
+ (4.5/32*2*pi, -(II+JJ)/2, 4.0/32*2*pi, 5.0/32*2*pi,-II,JJ),
+ (5.5/32*2*pi, -(II+JJ)/2, 5.0/32*2*pi, 6.0/32*2*pi,-II,JJ),
+ (6.5/32*2*pi, -(II+JJ)/2, 6.0/32*2*pi, 7.0/32*2*pi,-II,JJ),
+ (7.5/32*2*pi, -(II+JJ)/2, 7.0/32*2*pi, 8.0/32*2*pi,-II,JJ),
+ (8.5/32*2*pi, -(II+JJ)/2, 8.0/32*2*pi, 9.0/32*2*pi,-II,JJ),
+ (9.5/32*2*pi, -(II+JJ)/2, 9.0/32*2*pi, 10.0/32*2*pi,-II,JJ),
+ (10.5/32*2*pi, -(II+JJ)/2, 10.0/32*2*pi, 11.0/32*2*pi,-II,JJ),
+ (11.5/32*2*pi, -(II+JJ)/2, 11.0/32*2*pi, 12.0/32*2*pi,-II,JJ),
+ (12.5/32*2*pi, -(II+JJ)/2, 12.0/32*2*pi, 13.0/32*2*pi,-II,JJ),
+ (13.5/32*2*pi, -(II+JJ)/2, 13.0/32*2*pi, 14.0/32*2*pi,-II,JJ),
+ (14.5/32*2*pi, -(II+JJ)/2, 14.0/32*2*pi, 15.0/32*2*pi,-II,JJ),
+ (15.5/32*2*pi, -(II+JJ)/2, 15.0/32*2*pi, 16.0/32*2*pi,-II,JJ),
+ (16.5/32*2*pi, -(II+JJ)/2, 16.0/32*2*pi, 17.0/32*2*pi,-II,JJ),
+ (17.5/32*2*pi, -(II+JJ)/2, 17.0/32*2*pi, 18.0/32*2*pi,-II,JJ),
+ (18.5/32*2*pi, -(II+JJ)/2, 18.0/32*2*pi, 19.0/32*2*pi,-II,JJ),
+ (19.5/32*2*pi, -(II+JJ)/2, 19.0/32*2*pi, 20.0/32*2*pi,-II,JJ),
+ (20.5/32*2*pi, -(II+JJ)/2, 20.0/32*2*pi, 21.0/32*2*pi,-II,JJ),
+ (21.5/32*2*pi, -(II+JJ)/2, 21.0/32*2*pi, 22.0/32*2*pi,-II,JJ),
+ (22.5/32*2*pi, -(II+JJ)/2, 22.0/32*2*pi, 23.0/32*2*pi,-II,JJ),
+ (23.5/32*2*pi, -(II+JJ)/2, 23.0/32*2*pi, 24.0/32*2*pi,-II,JJ),
+ (24.5/32*2*pi, -(II+JJ)/2, 24.0/32*2*pi, 25.0/32*2*pi,-II,JJ),
+ (25.5/32*2*pi, -(II+JJ)/2, 25.0/32*2*pi, 26.0/32*2*pi,-II,JJ),
+ (26.5/32*2*pi, -(II+JJ)/2, 26.0/32*2*pi, 27.0/32*2*pi,-II,JJ),
+ (27.5/32*2*pi, -(II+JJ)/2, 27.0/32*2*pi, 28.0/32*2*pi,-II,JJ),
+ (28.5/32*2*pi, -(II+JJ)/2, 28.0/32*2*pi, 29.0/32*2*pi,-II,JJ),
+ (29.5/32*2*pi, -(II+JJ)/2, 29.0/32*2*pi, 30.0/32*2*pi,-II,JJ),
+ (30.5/32*2*pi, -(II+JJ)/2, 30.0/32*2*pi, 31.0/32*2*pi,-II,JJ),
+ (31.5/32*2*pi, -(II+JJ)/2, 31.0/32*2*pi, 32.0/32*2*pi,-II,JJ),
+
+ (0.5/28*2*pi, -(HH+II)/2, 0.0/28*2*pi, 1.0/28*2*pi,-HH,-II),  {28 circle segments}
+ (1.5/28*2*pi, -(HH+II)/2, 1.0/28*2*pi, 2.0/28*2*pi,-HH,-II),
+ (2.5/28*2*pi, -(HH+II)/2, 2.0/28*2*pi, 3.0/28*2*pi,-HH,-II),
+ (3.5/28*2*pi, -(HH+II)/2, 3.0/28*2*pi, 4.0/28*2*pi,-HH,-II),
+ (4.5/28*2*pi, -(HH+II)/2, 4.0/28*2*pi, 5.0/28*2*pi,-HH,-II),
+ (5.5/28*2*pi, -(HH+II)/2, 5.0/28*2*pi, 6.0/28*2*pi,-HH,-II),
+ (6.5/28*2*pi, -(HH+II)/2, 6.0/28*2*pi, 7.0/28*2*pi,-HH,-II),
+ (7.5/28*2*pi, -(HH+II)/2, 7.0/28*2*pi, 8.0/28*2*pi,-HH,-II),
+ (8.5/28*2*pi, -(HH+II)/2, 8.0/28*2*pi, 9.0/28*2*pi,-HH,-II),
+ (9.5/28*2*pi, -(HH+II)/2, 9.0/28*2*pi, 10.0/28*2*pi,-HH,-II),
+ (10.5/28*2*pi, -(HH+II)/2, 10.0/28*2*pi, 11.0/28*2*pi,-HH,-II),
+ (11.5/28*2*pi, -(HH+II)/2, 11.0/28*2*pi, 12.0/28*2*pi,-HH,-II),
+ (12.5/28*2*pi, -(HH+II)/2, 12.0/28*2*pi, 13.0/28*2*pi,-HH,-II),
+ (13.5/28*2*pi, -(HH+II)/2, 13.0/28*2*pi, 14.0/28*2*pi,-HH,-II),
+ (14.5/28*2*pi, -(HH+II)/2, 14.0/28*2*pi, 15.0/28*2*pi,-HH,-II),
+ (15.5/28*2*pi, -(HH+II)/2, 15.0/28*2*pi, 16.0/28*2*pi,-HH,-II),
+ (16.5/28*2*pi, -(HH+II)/2, 16.0/28*2*pi, 17.0/28*2*pi,-HH,-II),
+ (17.5/28*2*pi, -(HH+II)/2, 17.0/28*2*pi, 18.0/28*2*pi,-HH,-II),
+ (18.5/28*2*pi, -(HH+II)/2, 18.0/28*2*pi, 19.0/28*2*pi,-HH,-II),
+ (19.5/28*2*pi, -(HH+II)/2, 19.0/28*2*pi, 20.0/28*2*pi,-HH,-II),
+ (20.5/28*2*pi, -(HH+II)/2, 20.0/28*2*pi, 21.0/28*2*pi,-HH,-II),
+ (21.5/28*2*pi, -(HH+II)/2, 21.0/28*2*pi, 22.0/28*2*pi,-HH,-II),
+ (22.5/28*2*pi, -(HH+II)/2, 22.0/28*2*pi, 23.0/28*2*pi,-HH,-II),
+ (23.5/28*2*pi, -(HH+II)/2, 23.0/28*2*pi, 24.0/28*2*pi,-HH,-II),
+ (24.5/28*2*pi, -(HH+II)/2, 24.0/28*2*pi, 25.0/28*2*pi,-HH,-II),
+ (25.5/28*2*pi, -(HH+II)/2, 25.0/28*2*pi, 26.0/28*2*pi,-HH,-II),
+ (26.5/28*2*pi, -(HH+II)/2, 26.0/28*2*pi, 27.0/28*2*pi,-HH,-II),
+ (27.5/28*2*pi, -(HH+II)/2, 27.0/28*2*pi, 28.0/28*2*pi,-HH,-II),
+
+ (0.5/24*2*pi, -(GG+HH)/2, 0.0/24*2*pi, 1.0/24*2*pi,-GG,-HH),  {24 circle segments}
+ (1.5/24*2*pi, -(GG+HH)/2, 1.0/24*2*pi, 2.0/24*2*pi,-GG,-HH),
+ (2.5/24*2*pi, -(GG+HH)/2, 2.0/24*2*pi, 3.0/24*2*pi,-GG,-HH),
+ (3.5/24*2*pi, -(GG+HH)/2, 3.0/24*2*pi, 4.0/24*2*pi,-GG,-HH),
+ (4.5/24*2*pi, -(GG+HH)/2, 4.0/24*2*pi, 5.0/24*2*pi,-GG,-HH),
+ (5.5/24*2*pi, -(GG+HH)/2, 5.0/24*2*pi, 6.0/24*2*pi,-GG,-HH),
+ (6.5/24*2*pi, -(GG+HH)/2, 6.0/24*2*pi, 7.0/24*2*pi,-GG,-HH),
+ (7.5/24*2*pi, -(GG+HH)/2, 7.0/24*2*pi, 8.0/24*2*pi,-GG,-HH),
+ (8.5/24*2*pi, -(GG+HH)/2, 8.0/24*2*pi, 9.0/24*2*pi,-GG,-HH),
+ (9.5/24*2*pi, -(GG+HH)/2, 9.0/24*2*pi, 10.0/24*2*pi,-GG,-HH),
+ (10.5/24*2*pi, -(GG+HH)/2, 10.0/24*2*pi, 11.0/24*2*pi,-GG,-HH),
+ (11.5/24*2*pi, -(GG+HH)/2, 11.0/24*2*pi, 12.0/24*2*pi,-GG,-HH),
+ (12.5/24*2*pi, -(GG+HH)/2, 12.0/24*2*pi, 13.0/24*2*pi,-GG,-HH),
+ (13.5/24*2*pi, -(GG+HH)/2, 13.0/24*2*pi, 14.0/24*2*pi,-GG,-HH),
+ (14.5/24*2*pi, -(GG+HH)/2, 14.0/24*2*pi, 15.0/24*2*pi,-GG,-HH),
+ (15.5/24*2*pi, -(GG+HH)/2, 15.0/24*2*pi, 16.0/24*2*pi,-GG,-HH),
+ (16.5/24*2*pi, -(GG+HH)/2, 16.0/24*2*pi, 17.0/24*2*pi,-GG,-HH),
+ (17.5/24*2*pi, -(GG+HH)/2, 17.0/24*2*pi, 18.0/24*2*pi,-GG,-HH),
+ (18.5/24*2*pi, -(GG+HH)/2, 18.0/24*2*pi, 19.0/24*2*pi,-GG,-HH),
+ (19.5/24*2*pi, -(GG+HH)/2, 19.0/24*2*pi, 20.0/24*2*pi,-GG,-HH),
+ (20.5/24*2*pi, -(GG+HH)/2, 20.0/24*2*pi, 21.0/24*2*pi,-GG,-HH),
+ (21.5/24*2*pi, -(GG+HH)/2, 21.0/24*2*pi, 22.0/24*2*pi,-GG,-HH),
+ (22.5/24*2*pi, -(GG+HH)/2, 22.0/24*2*pi, 23.0/24*2*pi,-GG,-HH),
+ (23.5/24*2*pi, -(GG+HH)/2, 23.0/24*2*pi, 24.0/24*2*pi,-GG,-HH),
+
+ (0.5/20*2*pi, -(FF+GG)/2, 0.0/20*2*pi, 1.0/20*2*pi,-FF,-GG),  {20 circle segments}
+ (1.5/20*2*pi, -(FF+GG)/2, 1.0/20*2*pi, 2.0/20*2*pi,-FF,-GG),
+ (2.5/20*2*pi, -(FF+GG)/2, 2.0/20*2*pi, 3.0/20*2*pi,-FF,-GG),
+ (3.5/20*2*pi, -(FF+GG)/2, 3.0/20*2*pi, 4.0/20*2*pi,-FF,-GG),
+ (4.5/20*2*pi, -(FF+GG)/2, 4.0/20*2*pi, 5.0/20*2*pi,-FF,-GG),
+ (5.5/20*2*pi, -(FF+GG)/2, 5.0/20*2*pi, 6.0/20*2*pi,-FF,-GG),
+ (6.5/20*2*pi, -(FF+GG)/2, 6.0/20*2*pi, 7.0/20*2*pi,-FF,-GG),
+ (7.5/20*2*pi, -(FF+GG)/2, 7.0/20*2*pi, 8.0/20*2*pi,-FF,-GG),
+ (8.5/20*2*pi, -(FF+GG)/2, 8.0/20*2*pi, 9.0/20*2*pi,-FF,-GG),
+ (9.5/20*2*pi, -(FF+GG)/2, 9.0/20*2*pi, 10.0/20*2*pi,-FF,-GG),
+ (10.5/20*2*pi, -(FF+GG)/2, 10.0/20*2*pi, 11.0/20*2*pi,-FF,-GG),
+ (11.5/20*2*pi, -(FF+GG)/2, 11.0/20*2*pi, 12.0/20*2*pi,-FF,-GG),
+ (12.5/20*2*pi, -(FF+GG)/2, 12.0/20*2*pi, 13.0/20*2*pi,-FF,-GG),
+ (13.5/20*2*pi, -(FF+GG)/2, 13.0/20*2*pi, 14.0/20*2*pi,-FF,-GG),
+ (14.5/20*2*pi, -(FF+GG)/2, 14.0/20*2*pi, 15.0/20*2*pi,-FF,-GG),
+ (15.5/20*2*pi, -(FF+GG)/2, 15.0/20*2*pi, 16.0/20*2*pi,-FF,-GG),
+ (16.5/20*2*pi, -(FF+GG)/2, 16.0/20*2*pi, 17.0/20*2*pi,-FF,-GG),
+ (17.5/20*2*pi, -(FF+GG)/2, 17.0/20*2*pi, 18.0/20*2*pi,-FF,-GG),
+ (18.5/20*2*pi, -(FF+GG)/2, 18.0/20*2*pi, 19.0/20*2*pi,-FF,-GG),
+ (19.5/20*2*pi, -(FF+GG)/2, 19.0/20*2*pi, 20.0/20*2*pi,-FF,-GG),
+
+ (0.5/16*2*pi, -(EE+FF)/2, 0.0/16*2*pi, 1.0/16*2*pi,-EE,-FF),  {16 circle segments}
+ (1.5/16*2*pi, -(EE+FF)/2, 1.0/16*2*pi, 2.0/16*2*pi,-EE,-FF),
+ (2.5/16*2*pi, -(EE+FF)/2, 2.0/16*2*pi, 3.0/16*2*pi,-EE,-FF),
+ (3.5/16*2*pi, -(EE+FF)/2, 3.0/16*2*pi, 4.0/16*2*pi,-EE,-FF),
+ (4.5/16*2*pi, -(EE+FF)/2, 4.0/16*2*pi, 5.0/16*2*pi,-EE,-FF),
+ (5.5/16*2*pi, -(EE+FF)/2, 5.0/16*2*pi, 6.0/16*2*pi,-EE,-FF),
+ (6.5/16*2*pi, -(EE+FF)/2, 6.0/16*2*pi, 7.0/16*2*pi,-EE,-FF),
+ (7.5/16*2*pi, -(EE+FF)/2, 7.0/16*2*pi, 8.0/16*2*pi,-EE,-FF),
+ (8.5/16*2*pi, -(EE+FF)/2, 8.0/16*2*pi, 9.0/16*2*pi,-EE,-FF),
+ (9.5/16*2*pi, -(EE+FF)/2, 9.0/16*2*pi, 10.0/16*2*pi,-EE,-FF),
+ (10.5/16*2*pi, -(EE+FF)/2, 10.0/16*2*pi, 11.0/16*2*pi,-EE,-FF),
+ (11.5/16*2*pi, -(EE+FF)/2, 11.0/16*2*pi, 12.0/16*2*pi,-EE,-FF),
+ (12.5/16*2*pi, -(EE+FF)/2, 12.0/16*2*pi, 13.0/16*2*pi,-EE,-FF),
+ (13.5/16*2*pi, -(EE+FF)/2, 13.0/16*2*pi, 14.0/16*2*pi,-EE,-FF),
+ (14.5/16*2*pi, -(EE+FF)/2, 14.0/16*2*pi, 15.0/16*2*pi,-EE,-FF),
+ (15.5/16*2*pi, -(EE+FF)/2, 15.0/16*2*pi, 16.0/16*2*pi,-EE,-FF),
+
+ (0.5/12*2*pi, -(DD+EE)/2, 0.0/12*2*pi, 1.0/12*2*pi,-DD,-EE),  {12 circle segments}
+ (1.5/12*2*pi, -(DD+EE)/2, 1.0/12*2*pi, 2.0/12*2*pi,-DD,-EE),
+ (2.5/12*2*pi, -(DD+EE)/2, 2.0/12*2*pi, 3.0/12*2*pi,-DD,-EE),
+ (3.5/12*2*pi, -(DD+EE)/2, 3.0/12*2*pi, 4.0/12*2*pi,-DD,-EE),
+ (4.5/12*2*pi, -(DD+EE)/2, 4.0/12*2*pi, 5.0/12*2*pi,-DD,-EE),
+ (5.5/12*2*pi, -(DD+EE)/2, 5.0/12*2*pi, 6.0/12*2*pi,-DD,-EE),
+ (6.5/12*2*pi, -(DD+EE)/2, 6.0/12*2*pi, 7.0/12*2*pi,-DD,-EE),
+ (7.5/12*2*pi, -(DD+EE)/2, 7.0/12*2*pi, 8.0/12*2*pi,-DD,-EE),
+ (8.5/12*2*pi, -(DD+EE)/2, 8.0/12*2*pi, 9.0/12*2*pi,-DD,-EE),
+ (9.5/12*2*pi, -(DD+EE)/2, 9.0/12*2*pi, 10.0/12*2*pi,-DD,-EE),
+ (10.5/12*2*pi,-(DD+EE)/2, 10.0/12*2*pi, 11.0/12*2*pi,-DD,-EE),
+ (11.5/12*2*pi,-(DD+EE)/2, 11.0/12*2*pi, 12.0/12*2*pi,-DD,-EE),
+
+ (0.5/8*2*pi, -(CC+DD)/2, 0.0/8*2*pi, 1.0/8*2*pi,-CC,-DD),  {8 circle segments}
+ (1.5/8*2*pi, -(CC+DD)/2, 1.0/8*2*pi, 2.0/8*2*pi,-CC,-DD),
+ (2.5/8*2*pi, -(CC+DD)/2, 2.0/8*2*pi, 3.0/8*2*pi,-CC,-DD),
+ (3.5/8*2*pi, -(CC+DD)/2, 3.0/8*2*pi, 4.0/8*2*pi,-CC,-DD),
+ (4.5/8*2*pi, -(CC+DD)/2, 4.0/8*2*pi, 5.0/8*2*pi,-CC,-DD),
+ (5.5/8*2*pi, -(CC+DD)/2, 5.0/8*2*pi, 6.0/8*2*pi,-CC,-DD),
+ (6.5/8*2*pi, -(CC+DD)/2, 6.0/8*2*pi, 7.0/8*2*pi,-CC,-DD),
+ (7.5/8*2*pi, -(CC+DD)/2, 7.0/8*2*pi, 8.0/8*2*pi,-CC,-DD),
+
+ (0.5/4*2*pi, -(BB+CC)/2, 0.0/4*2*pi,  1.0/4*2*pi,-BB,-CC),  {4 circle segments}
+ (1.5/4*2*pi, -(BB+CC)/2, 1.0/4*2*pi, 2.0/4*2*pi,-BB,-CC),
+ (2.5/4*2*pi, -(BB+CC)/2, 2.0/4*2*pi, 3.0/4*2*pi,-BB,-CC),
+ (3.5/4*2*pi, -(BB+CC)/2, 3.0/4*2*pi, 4.0/4*2*pi,-BB,-CC),
+
+ ( 0        , -AA        ,  0        ,pi         ,-AA,-BB )); {1 segment}   {north pole }
 
 
 filenames290 : array[1..290] of string= {}
@@ -813,6 +822,7 @@ var
   buf2: array[1..11] of byte;  {read buffer stars}
   thefile_stars      : tfilestream;
   Reader_stars       : TReader;
+  cos_telescope_dec : double;{store here the cos(telescope_dec) value before and read series}
 
 procedure ang_sep(ra1,dec1,ra2,dec2 : double;var sep: double);{version 2018-5-23, calculates angular separation. according formula 9.1 old Meeus or 16.1 new Meeus, version 2018-5-23}
 var
@@ -847,7 +857,6 @@ end;
 //          database2  : array[0..(11*10)] of ansichar;{text info star database used}
 // preconditions:
 //   area290 should be set at 290+1 before any read series
-//   cos_telescope_dec, double variable should contains the cos(telescope_dec) to detect if star read is within the FOV diameter}
 //   maxmag [magnitude*10], double variable which specifies the maximum magnitude to be read. This is typical used in HNSKY if a star designation needs to be reported after a mouse click on it
 function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diameter:double; var ra2,dec2, mag2, Bp_Rp : double): boolean;{star 290 file database search}
             {searchmode=S screen update }
@@ -858,7 +867,6 @@ function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diam
     name_regio, naamst       : string; //array [0..7] of ansichar;
     delta_ra, sep, required_range  : double;
     nearbyarea,header_record: boolean;
-    label      einde;
 begin
    {$I-}
   readdatabase290:=true;
@@ -867,22 +875,43 @@ begin
           (nr_records<=0) or {here otherwise star at 0:0}
           ((searchmode<>'T') and (mag2>maxmag))
          ) then
-      begin
+      begin {einde}
          if file_open<>0 then closedatabase;
          nearbyarea:=false;
          naam2:=''; {clear for 5, 6 and 7 bytes records to prevent ghost names}
          Bp_Rp:=-128;{assume no colour information is available or set to -128 for G17, G18 databases}
-         cos_telescope_dec:=cos(telescope_dec);{here to save CPU time}
-         required_range:=field_diameter/2+(17.04/2)*pi/180;{maximum distance to next 290 field center is 17.04 degrees}
+         if area290=291 then cos_telescope_dec:=cos(telescope_dec);{calculate cos_telescope_dec once for a plot}
+
+         required_range:=max(field_diameter/2, 5.95 *pi/180);{Longest distance to a corner or center of a tile. Worst place is ra=0, dec 18.8 degrees}
 
          while ((area290>1) and (nearbyarea=false)) do
          begin
            dec(area290);
            if searchmode='T' then nearbyarea:=true
            else
-           begin {find nearby area's}
-             ang_sep(telescope_ra,telescope_dec,centers290[area290,1],centers290[area290,2], sep );
-             if sep<required_range then nearbyarea:=true;
+           begin {check if area is visible using center position tile}
+            ang_sep(telescope_ra,telescope_dec,centers290[area290,1],centers290[area290,2], sep );
+            if sep<required_range then  nearbyarea:=true
+            else
+            begin {check if area is visible using corner position tile}
+              ang_sep(telescope_ra,telescope_dec,centers290[area290,3],centers290[area290,5], sep );
+              if sep<required_range then  nearbyarea:=true
+              else
+              begin {check if area is visible using corner position tile}
+                ang_sep(telescope_ra,telescope_dec,centers290[area290,4],centers290[area290,5], sep );
+                if sep<required_range then  nearbyarea:=true
+                else
+                begin  {check if area is visible using corner position tile}
+                  ang_sep(telescope_ra,telescope_dec,centers290[area290,3],centers290[area290,6], sep );
+                  if sep<required_range then  nearbyarea:=true
+                  else
+                  begin  {check if area is visible using corner position tile}
+                    ang_sep(telescope_ra,telescope_dec,centers290[area290,4],centers290[area290,6], sep );
+                    if sep<required_range then  nearbyarea:=true
+                  end;
+                end;
+              end;
+             end;
            end;
          end; {while}
 
@@ -907,6 +936,8 @@ begin
          record_size:=ord(database2[109]);{5,6,7,9,10 or 11 bytes record}
 
          nr_records:= trunc((thefile_stars.size-110)/record_size);{110 header size, correct for above read}
+
+         mag2:=0;{temporary fix 2019-8-18. Remove in 2021 after release DR3 based database files}
       end;{einde}
 
     reader_stars.read(buf2,record_size);
@@ -917,7 +948,9 @@ begin
          with p5^ do
          begin
            ra_raw:=(ra7 + ra8 shl 8 +ra9 shl 16);{always required, fasted method}
-           if ra_raw=$FFFFFF  then  {special magnitude record is found}
+           if ((ra_raw=$FFFFFF) and {special magnitude record is found}
+               ((mag2<150) or ((dec8-16)-mag2>=0)) ) {temporary fix 2019-8-18. Remove in 2021 after release DR3 based database files. Fix for area 205 with some faint star positions wrongly with ra=2*pi=$FFFFFF rather then $000000. Around location ra=0, dec=20 degrees}
+           then
            begin
              mag2:=dec8-16;{new magn shifted 16 to make sirius and other positive}
              {magnitude is stored in mag2 till new magnitude record is found}
@@ -936,7 +969,9 @@ begin
           with p6^ do
           begin
             ra_raw:=(ra7 + ra8 shl 8 +ra9 shl 16);{always required, fasted method}
-            if ra_raw=$FFFFFF  then  {special magnitude record is found}
+            if ((ra_raw=$FFFFFF) and {special magnitude record is found}
+                ((mag2<150) or ((dec8-16)-mag2>=0)) ) {temporary fix 2019-8-18. Remove in 2021 after release DR3 based database files. Fix for area 205 with some faint star positions wrongly with ra=2*pi=$FFFFFF rather then $000000. Around location ra=0, dec=20 degrees}
+            then
             begin
               mag2:=dec8-16;{new magn shifted 16 to make sirius and other positive}
               {magnitude is stored in mag2 till new magnitude record is found}

@@ -1469,14 +1469,7 @@ begin
       EmptyRec.options.UsePrefix := 0;
       Emptyrec.star.valid[vsId] := True;
       Emptyrec.star.valid[vsMagv] := True;
-      if cfgcat.Name290='g16' then
-        EmptyRec.options.flabel[lOffset + vsMagv]:='mV'
-      else if cfgcat.Name290='g17' then
-        EmptyRec.options.flabel[lOffset + vsMagv]:='mBP'
-      else if cfgcat.Name290='g18' then
-        EmptyRec.options.flabel[lOffset + vsMagv]:='mBP'
-      else
-        EmptyRec.options.flabel[lOffset + vsMagv]:='m';
+      EmptyRec.options.flabel[lOffset + vsMagv]:='mBP'
     end;
     microcat:
     begin
@@ -6094,6 +6087,7 @@ end;
 
 Procedure Tcatalog.Open290(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
+if Is290Path(slash(cfgcat.StarCatPath[hn290 - BaseStar])) then begin
   ar1 := deg2rad * 15 * ar1;
   ar2 := deg2rad * 15 * ar2;
   de1 := deg2rad * de1;
@@ -6108,13 +6102,15 @@ begin
   u_290.catalog_path := slash(cfgcat.StarCatPath[hn290 - BaseStar]);
   u_290.name_star:=cfgcat.Name290;
   u_290.area290:=291;
-  u_290.cos_telescope_dec := cos(u_290.DE_290);
   EmptyRec.options.ShortName:=u_290.name_star;
   ok:=true;
+end
+else ok:=false;
 end;
 
 Procedure Tcatalog.Open290win(var ok : boolean);
 begin
+if Is290Path(slash(cfgcat.StarCatPath[hn290 - BaseStar])) then begin
   u_290.RA_290 := deg2rad * 15 * skylibcat.arcentre;
   u_290.DE_290 := deg2rad * skylibcat.decentre;
   u_290.FOV_290 := 1.5 * deg2rad * max(1,skylibcat.fov);
@@ -6125,9 +6121,10 @@ begin
   u_290.catalog_path := slash(cfgcat.StarCatPath[hn290 - BaseStar]);
   u_290.name_star:=cfgcat.Name290;
   u_290.area290:=291;
-  u_290.cos_telescope_dec := cos(u_290.DE_290);
   EmptyRec.options.ShortName:=u_290.name_star;
   ok:=true;
+end
+else ok:=false;
 end;
 
 function  Tcatalog.Get290MagMax: double;
@@ -6164,20 +6161,29 @@ var
   ra2,dec2 : double;
 begin
   rec := EmptyRec;
+  Bp_Rp_290 := -999;
   Result := readdatabase290('S', RA_290, DE_290, FOV_290, ra2,dec2, MAG_290, Bp_Rp_290);
   if Result then
   begin
     rec.ra:=ra2;
     rec.dec:=dec2;
     rec.star.magv:=MAG_290/10;
-    if Bp_Rp_290>-128 then begin
+    if Bp_Rp_290<>-999 then begin  // color database
+      if Bp_Rp_290>-128 then begin
+       rec.options.flabel[lOffset + vsMagv]:='mV';
        rec.vnum[1]:=true;
        rec.num[1]:=Bp_Rp_290/10;
        rec.options.flabel[lOffsetNum+1]:='Bp-Rp';
        rec.star.b_v:=GaiaBRtoBV(rec.num[1]);
        rec.star.valid[vsB_v]:=true;
+       end
+       else begin  // unknow Bp-Rp
+         rec.star.b_v:=0;
+         rec.star.valid[vsB_v]:=false;
+         rec.vnum[1]:=false;
+       end;
     end
-    else begin
+    else begin  // Bp only database
        rec.star.b_v:=0;
        rec.star.valid[vsB_v]:=false;
        rec.vnum[1]:=false;
