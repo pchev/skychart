@@ -6843,17 +6843,17 @@ begin
   f_mosaic.Ra.Value:=rad2deg*ra/15;
   f_mosaic.De.Value:=rad2deg*de;
   f_mosaic.FrameList.Clear;
-  n:=0;
+  n:=1; // use first rectangle if none are selected
   w:=0;
   for i:=1 to sc.cfgsc.nrectangle do begin
     if sc.cfgsc.rectangleok[i] and (sc.cfgsc.rectangle[i,4]=0) then begin
        n:=i;
-       w := sc.cfgsc.rectangle[i, 1];
     end;
     f_mosaic.FrameList.Items.Add(formatfloat(f2, sc.cfgsc.rectangle[i, 1]) + lmin + 'x' + formatfloat(f2, sc.cfgsc.rectangle[i, 2]) + lmin + blank + sc.cfgsc.rectanglelbl[i]);
   end;
   f_mosaic.FrameList.ItemIndex := n-1;
-  f_mosaic.Rotation.Value := sc.cfgsc.rectangle[i, 3];
+  w := sc.cfgsc.rectangle[n, 1];
+  f_mosaic.Rotation.Value := sc.cfgsc.rectangle[n, 3];
   FormPos(f_mosaic,mouse.CursorPos.X, mouse.CursorPos.Y);
   f_mosaic.Show;
   if resizechart and (w>0) then begin
