@@ -10,6 +10,7 @@ object f_mosaic: Tf_mosaic
   Constraints.MinWidth = 360
   DesignTimePPI = 95
   FormStyle = fsStayOnTop
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object GroupBox1: TGroupBox

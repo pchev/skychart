@@ -69,6 +69,7 @@ type
     procedure ButtonSaveClick(Sender: TObject);
     procedure DeChange(Sender: TObject);
     procedure DEdownClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure MosaicChange(Sender: TObject);
     procedure RaChange(Sender: TObject);
     procedure RAleftClick(Sender: TObject);
@@ -82,7 +83,7 @@ type
     procedure RotdownClick(Sender: TObject);
     procedure RotupClick(Sender: TObject);
   private
-    FClearMosaic,FApplyMosaic,FSaveMosaic: TNotifyEvent;
+    FClearMosaic,FApplyMosaic,FSaveMosaic,FonEndMosaic: TNotifyEvent;
     dra,dde: double;
     procedure Apply;
   public
@@ -90,6 +91,7 @@ type
     property onClearMosaic: TNotifyEvent read FClearMosaic write FClearMosaic;
     property onApplyMosaic: TNotifyEvent read FApplyMosaic write FApplyMosaic;
     property onSaveMosaic: TNotifyEvent read FSaveMosaic write FSaveMosaic;
+    property onEndMosaic: TNotifyEvent read FonEndMosaic write FonEndMosaic;
   end;
 
 var
@@ -131,6 +133,12 @@ begin
   FrameListChange(Sender);
   Apply;
 end;
+
+procedure Tf_mosaic.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  if Assigned(FonEndMosaic) then FonEndMosaic(Self);
+end;
+
 procedure Tf_mosaic.ButtonCloseClick(Sender: TObject);
 
 begin

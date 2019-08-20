@@ -289,6 +289,16 @@ type
     FSendImageFits: TSendImageFits;
     FSendSelectRow: TSendSelectRow;
     AccelList: array[0..MaxMenulevel] of string;
+    // save circle value for mosaic
+    ShowCircle: boolean;
+    ncircle, nrectangle,NumCircle: integer;
+    circle: array of array [1..4] of single; // radius, rotation, offset, mode
+    circleok: array of boolean;
+    circlelbl: array of string;
+    rectangle: array of array [1..5] of single; // width, height, rotation, offset, mode
+    rectangleok: array of boolean;
+    rectanglelbl: array of string;
+    CircleLst: array[0..MaxCircle, 1..2] of double;
     procedure ConnectINDI(Sender: TObject; autoconnect: boolean = False);
     procedure SlewINDI(Sender: TObject);
     procedure SyncINDI(Sender: TObject);
@@ -352,6 +362,7 @@ type
     procedure GetSunImage;
     procedure CKeyDown(Key: word; Shift: TShiftState);
     procedure NewMosaic(ra,de: double; resizechart: boolean);
+    procedure EndMosaic(Sender: TObject);
     function cmd_SetCursorPosition(x, y: integer): string;
     function cmd_SetGridEQ(onoff: string): string;
     function cmd_SetGrid(onoff: string): string;
@@ -6792,9 +6803,43 @@ procedure Tf_chart.NewMosaic(ra,de: double; resizechart: boolean);
 var i,n:integer;
     w: double;
 begin
+  // save current values
+  ShowCircle := sc.cfgsc.ShowCircle;
+  ncircle := sc.cfgsc.ncircle;
+  SetLength(circle, ncircle + 1);
+  SetLength(circleok, ncircle + 1);
+  SetLength(circlelbl, ncircle + 1);
+  for i:=1 to ncircle do begin
+    circle[i,1] := sc.cfgsc.circle[i,1];
+    circle[i,2] := sc.cfgsc.circle[i,2];
+    circle[i,3] := sc.cfgsc.circle[i,3];
+    circle[i,4] := sc.cfgsc.circle[i,4];
+    circleok[i] := sc.cfgsc.circleok[i];
+    circlelbl[i]:= sc.cfgsc.circlelbl[i];
+  end;
+  nrectangle := sc.cfgsc.nrectangle;
+  SetLength(rectangle, nrectangle + 1);
+  SetLength(rectangleok, nrectangle + 1);
+  SetLength(rectanglelbl, nrectangle + 1);
+  for i:=1 to nrectangle do begin
+    rectangle[i,1] := sc.cfgsc.rectangle[i,1];
+    rectangle[i,2] := sc.cfgsc.rectangle[i,2];
+    rectangle[i,3] := sc.cfgsc.rectangle[i,3];
+    rectangle[i,4] := sc.cfgsc.rectangle[i,4];
+    rectangle[i,5] := sc.cfgsc.rectangle[i,5];
+    rectangleok[i] := sc.cfgsc.rectangleok[i];
+    rectanglelbl[i]:= sc.cfgsc.rectanglelbl[i];
+  end;
+  NumCircle := sc.cfgsc.NumCircle;
+  for i := 1 to NumCircle do begin
+    CircleLst[i, 1] := sc.cfgsc.CircleLst[i, 1];
+    CircleLst[i, 2] := sc.cfgsc.CircleLst[i, 2];
+  end;
+  // initialize mosaic form
   f_mosaic.onClearMosaic:=RemoveAllCircles1Click;
   f_mosaic.onApplyMosaic:=ApplyMosaic;
   f_mosaic.onSaveMosaic:=MenuSaveCircleClick;
+  f_mosaic.onEndMosaic:=EndMosaic;
   f_mosaic.Ra.Value:=rad2deg*ra/15;
   f_mosaic.De.Value:=rad2deg*de;
   f_mosaic.FrameList.Clear;
@@ -6814,6 +6859,44 @@ begin
   if resizechart and (w>0) then begin
      sc.setfov(deg2rad * 2*f_mosaic.SizeX.Value*w/60)
   end;
+end;
+
+procedure Tf_chart.EndMosaic(Sender: TObject);
+var i: integer;
+begin
+  // restore values
+  sc.cfgsc.ShowCircle := ShowCircle;
+  sc.cfgsc.ncircle := ncircle;
+  SetLength(sc.cfgsc.circle, sc.cfgsc.ncircle + 1);
+  SetLength(sc.cfgsc.circleok, sc.cfgsc.ncircle + 1);
+  SetLength(sc.cfgsc.circlelbl, sc.cfgsc.ncircle + 1);
+  for i:=1 to sc.cfgsc.ncircle do begin
+    sc.cfgsc.circle[i,1]  := circle[i,1];
+    sc.cfgsc.circle[i,2]  := circle[i,2];
+    sc.cfgsc.circle[i,3]  := circle[i,3];
+    sc.cfgsc.circle[i,4]  := circle[i,4];
+    sc.cfgsc.circleok[i]  := circleok[i];
+    sc.cfgsc.circlelbl[i] := circlelbl[i];
+  end;
+  sc.cfgsc.nrectangle := nrectangle;
+  SetLength(sc.cfgsc.rectangle, sc.cfgsc.nrectangle + 1);
+  SetLength(sc.cfgsc.rectangleok, sc.cfgsc.nrectangle + 1);
+  SetLength(sc.cfgsc.rectanglelbl, sc.cfgsc.nrectangle + 1);
+  for i:=1 to sc.cfgsc.nrectangle do begin
+    sc.cfgsc.rectangle[i,1]  := rectangle[i,1];
+    sc.cfgsc.rectangle[i,2]  := rectangle[i,2];
+    sc.cfgsc.rectangle[i,3]  := rectangle[i,3];
+    sc.cfgsc.rectangle[i,4]  := rectangle[i,4];
+    sc.cfgsc.rectangle[i,5]  := rectangle[i,5];
+    sc.cfgsc.rectangleok[i]  := rectangleok[i];
+    sc.cfgsc.rectanglelbl[i] := rectanglelbl[i];
+  end;
+  sc.cfgsc.NumCircle := NumCircle;
+  for i := 1 to sc.cfgsc.NumCircle do begin
+    sc.cfgsc.CircleLst[i, 1] := CircleLst[i, 1];
+    sc.cfgsc.CircleLst[i, 2] := CircleLst[i, 2];
+  end;
+  Refresh(True, False);
 end;
 
 procedure Tf_chart.ApplyMosaic(Sender: TObject);
