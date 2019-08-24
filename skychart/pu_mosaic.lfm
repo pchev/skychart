@@ -1,10 +1,10 @@
 object f_mosaic: Tf_mosaic
   Left = 1564
-  Height = 440
+  Height = 456
   Top = 30
   Width = 360
   Caption = 'f_mosaic'
-  ClientHeight = 440
+  ClientHeight = 456
   ClientWidth = 360
   Constraints.MinHeight = 340
   Constraints.MinWidth = 360
@@ -102,12 +102,12 @@ object f_mosaic: Tf_mosaic
   end
   object GroupBox2: TGroupBox
     Left = 0
-    Height = 239
+    Height = 238
     Top = 161
     Width = 360
     Align = alClient
     Caption = 'Mosaic'
-    ClientHeight = 219
+    ClientHeight = 218
     ClientWidth = 358
     TabOrder = 1
     object SizeX: TSpinEdit
@@ -221,39 +221,51 @@ object f_mosaic: Tf_mosaic
   end
   object Panel1: TPanel
     Left = 0
-    Height = 40
-    Top = 400
+    Height = 57
+    Top = 399
     Width = 360
     Align = alBottom
-    ClientHeight = 40
+    AutoSize = True
+    ClientHeight = 57
     ClientWidth = 360
     TabOrder = 2
     object ButtonClose: TButton
-      Left = 272
+      Left = 264
       Height = 25
-      Top = 6
+      Top = 29
       Width = 74
       Caption = 'Close'
       OnClick = ButtonCloseClick
       TabOrder = 0
     end
     object ButtonSave: TButton
-      Left = 178
+      Left = 170
       Height = 25
-      Top = 6
+      Top = 29
       Width = 74
+      BorderSpacing.Bottom = 2
       Caption = 'Save'
       OnClick = ButtonSaveClick
       TabOrder = 1
     end
     object ButtonClear: TButton
-      Left = 9
+      Left = 1
       Height = 25
-      Top = 6
+      Top = 29
       Width = 74
       Caption = 'Clear'
       OnClick = ButtonClearClick
       TabOrder = 2
+    end
+    object ButtonSend: TButton
+      Left = 170
+      Height = 25
+      Top = 3
+      Width = 168
+      BorderSpacing.Top = 2
+      Caption = 'Send via server'
+      OnClick = ButtonSendClick
+      TabOrder = 3
     end
   end
   object GroupBox3: TGroupBox

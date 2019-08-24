@@ -936,6 +936,7 @@ begin
   Child.OnChartMove := ChartMove;
   Child.OnImageSetup := ImageSetup;
   Child.onShowInfo := SetLpanel1;
+  Child.OnSendInfo := SendInfo;
   Child.onShowCoord := SetLpanel0;
   Child.onListInfo := ListInfo;
   Child.onSendCoordpointAtsky := SendCoordpointAtsky;
@@ -10245,7 +10246,7 @@ begin
       (not TCPDaemon.TCPThrd[i].terminated) then
       TCPDaemon.TCPThrd[i].SendData('>' + tab + origin + ' :' + tab + str);
   end;
-  if not (Sender is Tf_scriptengine) then
+  if (Sender <> nil)and(not (Sender is Tf_scriptengine)) then
   begin
     i := length(rsFrom);
     if copy(str, 1, i) = rsFrom then

@@ -268,6 +268,7 @@ type
     FShowTitleMessage: Tstr2func;
     FUpdateBtn: Tbtnfunc;
     FShowInfo: Tshowinfo;
+    FSendInfo: TSendInfo;
     FShowCoord: Tstr1func;
     FListInfo: Tstr12func;
     FChartMove: TNotifyEvent;
@@ -363,6 +364,7 @@ type
     procedure CKeyDown(Key: word; Shift: TShiftState);
     procedure NewMosaic(ra,de: double; resizechart: boolean);
     procedure EndMosaic(Sender: TObject);
+    procedure SendMosaic(Sender: TObject);
     function cmd_SetCursorPosition(x, y: integer): string;
     function cmd_SetGridEQ(onoff: string): string;
     function cmd_SetGrid(onoff: string): string;
@@ -485,6 +487,7 @@ type
       write FShowTitleMessage;
     property OnUpdateBtn: Tbtnfunc read FUpdateBtn write FUpdateBtn;
     property OnShowInfo: TShowinfo read FShowInfo write FShowInfo;
+    property OnSendInfo: TSendInfo read FSendInfo write FSendInfo;
     property OnShowCoord: Tstr1func read FShowCoord write FShowCoord;
     property OnListInfo: Tstr12func read FListInfo write FListInfo;
     property OnChartMove: TNotifyEvent read FChartMove write FChartMove;
@@ -6840,6 +6843,7 @@ begin
   f_mosaic.onApplyMosaic:=ApplyMosaic;
   f_mosaic.onSaveMosaic:=MenuSaveCircleClick;
   f_mosaic.onEndMosaic:=EndMosaic;
+  f_mosaic.onSendMosaic:=SendMosaic;
   f_mosaic.Ra.Value:=rad2deg*ra/15;
   f_mosaic.De.Value:=rad2deg*de;
   f_mosaic.FrameList.Clear;
@@ -6858,6 +6862,33 @@ begin
   f_mosaic.Show;
   if resizechart and (w>0) then begin
      sc.setfov(deg2rad * 2*f_mosaic.SizeX.Value*w/60)
+  end;
+end;
+
+procedure Tf_chart.SendMosaic(Sender: TObject);
+var txt,id,rot,w,h: string;
+  i,n: integer;
+begin
+  if (sc.cfgsc.NumCircle > 0) and assigned(FSendInfo) then
+  begin
+    rot := FormatFloat(f2, Tf_mosaic(Sender).Rotation.Value);
+    id := nospace(Tf_mosaic(Sender).MosaicName.Text);
+    if id='' then id := 'mosaic';
+    id := validfilename(id);
+    id := id+'_';
+    n:=f_mosaic.FrameList.ItemIndex+1;
+    w := formatfloat(f2, sc.cfgsc.rectangle[n, 1]);
+    h := formatfloat(f2, sc.cfgsc.rectangle[n, 2]);
+    for i := 1 to sc.cfgsc.NumCircle do
+    begin
+      txt := ARToStr3(rad2deg * sc.cfgsc.CircleLst[i, 1] / 15) + tab +
+             DEToStr3(rad2deg * sc.cfgsc.CircleLst[i, 2]) + tab +
+             'Frm' + tab +
+             id + FormatFloat('00', i) + tab +
+             'Dim: ' + w + ' x ' +h +' '''+ tab +
+             'pa: '+ rot +tab;
+      FSendInfo(nil, Caption, txt);
+    end;
   end;
 end;
 
@@ -6994,10 +7025,8 @@ begin
   if Sender is Tf_mosaic then begin
     rot := FormatFloat(f2, Tf_mosaic(Sender).Rotation.Value);
     txt := nospace(Tf_mosaic(Sender).MosaicName.Text);
-    txt := StringReplace(txt,'/','',[rfReplaceAll]);
-    txt := StringReplace(txt,'\','',[rfReplaceAll]);
-    txt := StringReplace(txt,':','',[rfReplaceAll]);
     if txt='' then txt := 'mosaic';
+    txt := validfilename(txt);
     SaveDialog1.FileName := txt;
     SaveDialog1.Filter := 'Mosaic file|*.cdcc|All|*';
     txt := txt+'_';

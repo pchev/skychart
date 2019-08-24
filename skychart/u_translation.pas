@@ -1537,6 +1537,7 @@ resourcestring
   rsMosaicSize = 'Mosaic size';
   rsHorizontalOv = 'Horizontal overlap %';
   rsVerticalOver = 'Vertical overlap %';
+  rsSendViaServe = 'Send via server';
 
 // also update upsi_translation
 

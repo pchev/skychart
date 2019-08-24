@@ -32,6 +32,7 @@ type
   { Tf_mosaic }
 
   Tf_mosaic = class(TForm)
+    ButtonSend: TButton;
     ButtonClear: TButton;
     ButtonSave: TButton;
     DEdown: TButton;
@@ -67,6 +68,7 @@ type
     procedure ButtonClearClick(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
     procedure ButtonSaveClick(Sender: TObject);
+    procedure ButtonSendClick(Sender: TObject);
     procedure DeChange(Sender: TObject);
     procedure DEdownClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -83,7 +85,7 @@ type
     procedure RotdownClick(Sender: TObject);
     procedure RotupClick(Sender: TObject);
   private
-    FClearMosaic,FApplyMosaic,FSaveMosaic,FonEndMosaic: TNotifyEvent;
+    FClearMosaic,FApplyMosaic,FSaveMosaic,FonEndMosaic,FSendMosaic: TNotifyEvent;
     dra,dde: double;
     procedure Apply;
   public
@@ -91,6 +93,7 @@ type
     property onClearMosaic: TNotifyEvent read FClearMosaic write FClearMosaic;
     property onApplyMosaic: TNotifyEvent read FApplyMosaic write FApplyMosaic;
     property onSaveMosaic: TNotifyEvent read FSaveMosaic write FSaveMosaic;
+    property onSendMosaic: TNotifyEvent read FSendMosaic write FSendMosaic;
     property onEndMosaic: TNotifyEvent read FonEndMosaic write FonEndMosaic;
   end;
 
@@ -115,6 +118,7 @@ begin
   Label3.Caption := rsMosaicSize;
   Label6.Caption := rsHorizontalOv;
   Label7.Caption := rsVerticalOver;
+  ButtonSend.Caption := rsSendViaServe;
   ButtonClear.Caption := rsClear;
   ButtonSave.Caption := rsSave;
   ButtonClose.Caption := rsClose;
@@ -130,6 +134,7 @@ end;
 
 procedure Tf_mosaic.FormShow(Sender: TObject);
 begin
+  ButtonSend.Visible := Assigned(FSendMosaic);
   FrameListChange(Sender);
   Apply;
 end;
@@ -154,6 +159,11 @@ end;
 procedure Tf_mosaic.ButtonSaveClick(Sender: TObject);
 begin
   if Assigned(FSaveMosaic) then FSaveMosaic(Self);
+end;
+
+procedure Tf_mosaic.ButtonSendClick(Sender: TObject);
+begin
+  if Assigned(FSendMosaic) then FSendMosaic(Self);
 end;
 
 procedure Tf_mosaic.Apply;
