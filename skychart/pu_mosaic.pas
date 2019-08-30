@@ -200,32 +200,62 @@ end;
 
 procedure Tf_mosaic.DEupClick(Sender: TObject);
 begin
-  De.Value := De.Value + dde;
+  if ssCtrl in GetKeyShiftState then
+     De.Value := De.Value + dde*5
+  else if ssShift in GetKeyShiftState then
+     De.Value := De.Value + dde/5
+  else
+     De.Value := De.Value + dde;
 end;
 
 procedure Tf_mosaic.DEdownClick(Sender: TObject);
 begin
-   De.Value := De.Value - dde;
+  if ssCtrl in GetKeyShiftState then
+     De.Value := De.Value - dde*5
+  else if ssShift in GetKeyShiftState then
+     De.Value := De.Value - dde/5
+  else
+     De.Value := De.Value - dde;
 end;
 
 procedure Tf_mosaic.RArightClick(Sender: TObject);
 begin
-  Ra.Value := Ra.Value - dra;
+  if ssCtrl in GetKeyShiftState then
+     Ra.Value := Ra.Value - dra*5
+  else if ssShift in GetKeyShiftState then
+     Ra.Value := Ra.Value - dra/5
+  else
+     Ra.Value := Ra.Value - dra;
 end;
 
 procedure Tf_mosaic.RAleftClick(Sender: TObject);
 begin
-  Ra.Value := Ra.Value + dra;
+  if ssCtrl in GetKeyShiftState then
+     Ra.Value := Ra.Value + dra*5
+  else if ssShift in GetKeyShiftState then
+     Ra.Value := Ra.Value + dra/5
+  else
+     Ra.Value := Ra.Value + dra;
 end;
 
 procedure Tf_mosaic.RotdownClick(Sender: TObject);
 begin
-  Rotation.Value := rmod(Rotation.Value + 10 + 360, 360);
+  if ssCtrl in GetKeyShiftState then
+     Rotation.Value := rmod(Rotation.Value + 45 + 360, 360)
+  else if ssShift in GetKeyShiftState then
+     Rotation.Value := rmod(Rotation.Value + 1 + 360, 360)
+  else
+     Rotation.Value := rmod(Rotation.Value + 10 + 360, 360);
 end;
 
 procedure Tf_mosaic.RotupClick(Sender: TObject);
 begin
-  Rotation.Value := rmod(Rotation.Value - 10 + 360, 360);
+  if ssCtrl in GetKeyShiftState then
+     Rotation.Value := rmod(Rotation.Value - 45 + 360, 360)
+  else if ssShift in GetKeyShiftState then
+     Rotation.Value := rmod(Rotation.Value - 1 + 360, 360)
+  else
+     Rotation.Value := rmod(Rotation.Value - 10 + 360, 360);
 end;
 
 procedure Tf_mosaic.FrameListChange(Sender: TObject);
