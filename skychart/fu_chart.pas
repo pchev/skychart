@@ -6932,7 +6932,7 @@ end;
 
 procedure Tf_chart.ApplyMosaic(Sender: TObject);
 var cra,cde,sra,sde,ra,de,dx,dy,crot,srot,cosde: double;
-    ddex,ddey,drax,dray: double;
+    dyra,dyde,dxra,dxde: double;
     i,j,n,nx,ny: integer;
 begin
   n:=f_mosaic.FrameList.ItemIndex+1;
@@ -6959,26 +6959,32 @@ begin
   dy := (100-(f_mosaic.Voverlap.Value)) / 100 * deg2rad * sc.cfgsc.rectangle[n,2] / 60;
   if (dx=0) or (dy=0) then exit;
   sincos(deg2rad * sc.cfgsc.rectangle[n, 3],srot,crot);
-  cosde := cos(cde);
-  if cosde=0 then exit;
-  drax := dx * crot / cosde;
-  dray := dx * srot ;
-  ddex := dy * srot / cosde;
-  ddey := dy * crot;
-  // start position
-  sra := cra + drax*(nx-1)/2 + ddex*(ny-1)/2;
-  sde := cde - dray*(nx-1)/2 + ddey*(ny-1)/2;
+  // declination step
+  dxde := dx * srot ;
+  dyde := dy * crot;
+  // start declination
+  sde := cde - dxde*(nx-1)/2 + dyde*(ny-1)/2;
   // assign rectangles
   n:=0;
   for i := 0 to nx-1 do begin
-    ra := sra - drax * i;
-    de := sde + dray * i;
+    // new dec
+    de := sde + dxde * i;
     for j := 0 to ny-1 do begin
+        // new ra step
+        cosde := cos(de);
+        if cosde=0 then exit;
+        dxra := dx * crot / cosde;
+        dyra := dy * srot / cosde;
+        // new ra start for declination
+        sra := cra + dxra*(nx-1)/2 + dyra*(ny-1)/2;
+        // new ra
+        ra := sra - dxra*i - dyra*j;
+        // add point
         inc(n);
         sc.cfgsc.CircleLst[n, 1] := ra;
         sc.cfgsc.CircleLst[n, 2] := de;
-        de := de - ddey;
-        ra := ra - ddex;
+        // new dec
+        de := de - dyde;
     end;
   end;
   sc.cfgsc.NumCircle := n;
