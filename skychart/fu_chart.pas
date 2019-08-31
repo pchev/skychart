@@ -6970,8 +6970,11 @@ begin
     // new dec
     de := sde + dxde * i;
     for j := 0 to ny-1 do begin
-        // new ra step
-        cosde := cos(de);
+        // new ra step, compute overlap on the smaller end
+        if de>0 then
+          cosde := cos(de + dxde/2 - dyde/2)
+        else
+          cosde := cos(de - dxde/2 + dyde/2);
         if cosde=0 then exit;
         dxra := dx * crot / cosde;
         dyra := dy * srot / cosde;
