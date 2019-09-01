@@ -346,7 +346,7 @@ type
     XM1, YM1, XMD1, YMD1: integer;
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
-    procedure Refresh(SetFocus, newtime: boolean);
+    procedure Refresh(SetFocus, newtime: boolean; showmsg: boolean = true);
     procedure AutoRefresh;
     procedure PrintChart(printlandscape: boolean;
       printcolor, printmethod, printresol: integer; printcmd1, printcmd2, printpath: string;
@@ -800,7 +800,7 @@ begin
   Refresh(False, True);  // do not steal focus with autorefresh
 end;
 
-procedure Tf_chart.Refresh(SetFocus, newtime: boolean);
+procedure Tf_chart.Refresh(SetFocus, newtime: boolean; showmsg: boolean = true);
 var
   savebg: Tcolor;
   saveantialias: boolean;
@@ -964,7 +964,7 @@ begin
     else
     begin
       Fshowinfo(sc.cfgsc.msg);
-      if sc.cfgsc.FindOk and (not cmain.SimpleDetail) and (sc.cfgsc.msg = '') then
+      if showmsg and sc.cfgsc.FindOk and (not cmain.SimpleDetail) and (sc.cfgsc.msg = '') then
         Fshowinfo(sc.cfgsc.FindDesc, Caption, True, self, sc.cfgsc.FindDesc2, sc.cfgsc.FindDesc2000);
     end;
   {$endif}
@@ -2945,7 +2945,7 @@ begin
     sc.cfgsc.TrackName := sc.cfgsc.FindName;
     // center chart
     sc.movetoradec(sc.cfgsc.FindRA, sc.cfgsc.FindDec);
-    Refresh(True, False);
+    Refresh(True, False, False);
     // show label
     sc.cfgsc.FindOK := True;
     ShowIdentLabel;
