@@ -287,6 +287,7 @@ type
     PrintPreview: Tf_image;
     Fpop_indi: Tpop_indi;
     Fpop_scope: Tpop_scope;
+    ScopeSlewing: boolean;
     FSendImageFits: TSendImageFits;
     FSendSelectRow: TSendSelectRow;
     AccelList: array[0..MaxMenulevel] of string;
@@ -412,6 +413,7 @@ type
     function cmd_SlewINDI(RA1, DE1: string): string;
     function cmd_AbortSlewINDI: string;
     function cmd_SyncINDI(RA2, DE2: string): string;
+    function cmd_GetScopeSlewing: string;
     function cmd_LoadCircle(fn: string): string;
     function cmd_DefCircle(num, diameter, rotation, offset: string): string;
     function cmd_DefRectangle(num, w, h, rotation, offset: string): string;
@@ -599,6 +601,7 @@ begin
   frommovecam := False;
   printing := False;
   MeasureOn := False;
+  ScopeSlewing := false;
   KeyPressTime := 0;
   SetLang;
   for i := 1 to maxundo do
@@ -5496,6 +5499,22 @@ begin
   end;
 end;
 
+function Tf_chart.cmd_GetScopeSlewing: string;
+begin
+  Result := msgFailed;
+  if Connect1.Checked then
+  begin
+    if sc.cfgsc.ASCOMTelescope then
+    begin
+      result:=BoolToStr(Fpop_scope.Slewing,msgTrue,msgFalse);
+    end
+    else if sc.cfgsc.IndiTelescope then
+    begin
+      result:=BoolToStr(Fpop_indi.Slewing,msgTrue,msgFalse);
+    end;
+  end;
+end;
+
 function Tf_chart.cmd_SlewINDI(RA1, DE1: string): string;
 var
   ra, Dec: double;
@@ -6552,6 +6571,7 @@ begin
     125: Result := cmd_ShowAlwaysMeridian(arg[1]);
     126: Result := cmd_Cleanup;
     127: Result := cmd_GetChartEqsys;
+    128: Result := cmd_GetScopeSlewing;
     else
       Result := msgFailed + ' Bad command name';
   end;
@@ -7696,7 +7716,7 @@ end;
 procedure Tf_chart.TelescopeTimerTimer(Sender: TObject);
 var
   ra, Dec: double;
-  ok, newconnection: boolean;
+  ok, newconnection, slewing: boolean;
 begin
   if locked then
     exit;
@@ -7716,6 +7736,7 @@ begin
           if sc.cfgsc.TelescopeJD <> 0 then
             sc.cfgsc.TelescopeJD := jd(trunc(sc.cfgsc.TelescopeJD), 0, 0, 0);
           Fpop_scope.ScopeGetRaDec(ra, Dec, ok);
+          slewing:=Fpop_scope.Slewing;
         end;
       end
       else if sc.cfgsc.IndiTelescope and (Fpop_indi <> nil) then
@@ -7727,6 +7748,7 @@ begin
           if sc.cfgsc.TelescopeJD <> 0 then
             sc.cfgsc.TelescopeJD := jd(trunc(sc.cfgsc.TelescopeJD), 0, 0, 0);
           Fpop_indi.ScopeGetRaDec(ra, Dec, ok);
+          slewing:=Fpop_indi.Slewing;
         end;
       end;
       newconnection := (not newconnection) and Connect1.Checked;
@@ -7738,6 +7760,9 @@ begin
       begin
         if ok then
         begin
+          if ScopeSlewing and (not slewing) then
+             Fshowinfo(rsSlewComplete);
+          ScopeSlewing := slewing;
           ra := ra * 15 * deg2rad;
           Dec := Dec * deg2rad;
           if sc.cfgsc.TelescopeJD = 0 then

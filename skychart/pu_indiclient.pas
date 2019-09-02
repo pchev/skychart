@@ -151,6 +151,7 @@ type
     procedure ServerConnected(Sender: TObject);
     procedure ServerDisconnected(Sender: TObject);
     procedure IndiGUIdestroy(Sender: TObject);
+    function GetSlewing:boolean;
   public
     { Public declarations }
     csc: Tconf_skychart;
@@ -180,6 +181,7 @@ type
     property Longitude: double read FLongitude;
     property Latitude: double read FLatitude;
     property Elevation: double read FElevation;
+    property Slewing: boolean read GetSlewing;
     property onObservatoryCoord: TNotifyEvent read FObservatoryCoord write FObservatoryCoord;
   end;
 
@@ -597,6 +599,14 @@ begin
     else
       Memomsg.Lines.Add('GOTO ' + rsNotAvailable);
   end;
+end;
+
+function Tpop_indi.GetSlewing:boolean;
+begin
+  if coord_prop=nil then
+    result:=false
+  else
+    result:=coord_prop.s=IPS_BUSY;
 end;
 
 procedure Tpop_indi.ScopeReadConfig(ConfigPath: shortstring);

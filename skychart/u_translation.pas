@@ -1538,6 +1538,7 @@ resourcestring
   rsHorizontalOv = 'Horizontal overlap %';
   rsVerticalOver = 'Vertical overlap %';
   rsSendViaServe = 'Send via server';
+  rsSlewComplete = 'Slew complete';
 
 // also update upsi_translation
 

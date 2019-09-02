@@ -148,10 +148,12 @@ type
     FElevation: double;                // Observatory elevation
     curdeg_x, curdeg_y: double;        // current equatorial position in degrees
     cur_az, cur_alt: double;           // current alt-az position in degrees
+    FSlewing: boolean;
     FObservatoryCoord: TNotifyEvent;
     procedure SetDef(Sender: TObject);
     function ScopeConnectedReal: boolean;
     procedure ScopeGetEqSysReal(var EqSys: double);
+    function GetSlewing:boolean;
   public
     { Public declarations }
     procedure SetLang;
@@ -183,6 +185,7 @@ type
     property Longitude: double read FLongitude;
     property Latitude: double read FLatitude;
     property Elevation: double read FElevation;
+    property Slewing: boolean read FSlewing;
     property onObservatoryCoord: TNotifyEvent read FObservatoryCoord write FObservatoryCoord;
   end;
 
@@ -386,6 +389,7 @@ begin
       end;
       ScopeGetEqSysReal(FScopeEqSys);
       ShowCoordinates;
+      FSlewing:=GetSlewing;
       led.brush.color := clLime;
       ok := True;
       timer1.Enabled := True;
@@ -645,8 +649,10 @@ begin
         T.tracking := True;
         UpdTrackingButton;
       end;
-      if T.CanSlewAsync then
+      if T.CanSlewAsync then begin
+        FSlewing:=true;
         T.SlewToCoordinatesAsync(ar, de)
+      end
       else
         T.SlewToCoordinates(ar, de);
     end
@@ -658,11 +664,38 @@ begin
         TR.Put('Tracking',True);
         UpdTrackingButton;
       end;
-      if TR.Get('canslewasync').AsBool then
+      if TR.Get('canslewasync').AsBool then begin
+        FSlewing:=true;
         TR.Put('slewtocoordinatesasync',['RightAscension',FormatFloat(f6,ar),'Declination',FormatFloat(f6,de)])
+      end
       else
         TR.Put('slewtocoordinates',['RightAscension',FormatFloat(f6,ar),'Declination',FormatFloat(f6,de)]);
     end;
+  except
+    on E: Exception do
+      MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
+  end;
+end;
+
+function Tpop_scope.GetSlewing:boolean;
+begin
+ result:=false;
+ try
+ {$ifdef mswindows}
+  if not Remote then begin
+    if T.CanSlewAsync then
+      result:=T.Slewing
+    else
+      result:=false;
+  end
+  else
+  {$endif}
+  begin
+    if TR.Get('canslewasync').AsBool then
+      result:=TR.Get('slewing').AsBool
+    else
+      result:=false;
+  end;
   except
     on E: Exception do
       MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
@@ -978,6 +1011,7 @@ begin
   FCanSetTracking := False;
   FCanParkUnpark := False;
   FScopeEqSys := 0;
+  FSlewing := false;
   TR:=TAscomRest.Create(self);
   TR.ClientId:=3292;
   {$ifndef mswindows}
@@ -1005,6 +1039,7 @@ begin
       CoordLock := True;
       timer1.Enabled := False;
       ShowCoordinates;
+      FSlewing:=GetSlewing;
       UpdTrackingButton;
       UpdParkButton;
       CoordLock := False;

@@ -1447,7 +1447,8 @@ const
   msgOK = 'OK!';
   msgFailed = 'Failed!';
   msgNotFound = 'Not found!';
-
+  msgTrue = 'True!';
+  msgFalse = 'False!';
   msgBye = 'Bye!';
 
 const
@@ -1478,7 +1479,7 @@ const
     );
 
   // Chart Commands
-  numcmd = 127;
+  numcmd = 128;
   cmdlist: array[1..numcmd, 1..3] of string = (
     ('ZOOM+', '1', ''),
     ('ZOOM-', '2', ''),
@@ -1608,7 +1609,8 @@ const
     ('SHOWONLYMERIDIAN', '124', 'ON/OFF'),
     ('SHOWALWAYSMERIDIAN', '125', 'ON/OFF'),
     ('CLEANUPMAP', '126', ''),
-    ('GETCHARTEQSYS', '127', 'DATE/2000.0')
+    ('GETCHARTEQSYS', '127', 'DATE/2000.0'),
+    ('GETSCOPESLEWING', '128', 'True/False')
     );
 
 // INDI Telescope driver
