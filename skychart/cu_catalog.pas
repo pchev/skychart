@@ -228,6 +228,7 @@ type
     function Get290MagMax: double;
     function GetGaiaMagMax: double;
     procedure ClearSearch;
+    procedure CleanCache;
     property FindId: string read FFindId;
     property FindRecOK: boolean read FFindRecOK;
     property FindRec: GCatrec read FFindRec write FFindRec;
@@ -285,6 +286,11 @@ procedure Tcatalog.ClearSearch;
 begin
   FFindRecOK := False;
   FFindId := '';
+end;
+
+procedure  Tcatalog.CleanCache;
+begin
+   gcatunit.CleanCache;
 end;
 
 function Tcatalog.OpenCat(c: Tconf_skychart): boolean;

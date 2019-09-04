@@ -1114,6 +1114,7 @@ begin
   stringgrid3.cells[3, p] := '';
   stringgrid3.cells[4, p] := '';
   DeleteGCatRow(p);
+  catalog.CleanCache;
 end;
 
 procedure Tf_config_catalog.DeleteGCatRow(p: integer);
