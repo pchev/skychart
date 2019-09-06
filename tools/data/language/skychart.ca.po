@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-17 19:42+0000\n"
-"PO-Revision-Date: 2019-03-25 16:20+0000\n"
+"PO-Revision-Date: 2019-08-29 15:44+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-08-17 19:56+0000\n"
-"X-Generator: Launchpad (build 19022)\n"
+"X-Launchpad-Export-Date: 2019-09-06 18:44+0000\n"
+"X-Generator: Launchpad (build 19044)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -372,7 +372,7 @@ msgstr "Una aplicació SAMP envia coordenades del lloc"
 
 #: u_translation.rsascomdrivere
 msgid "The ASCOM driver report an error"
-msgstr ""
+msgstr "El driver ASCOM indica un error"
 
 #: u_translation.rsascomremote
 msgid "ASCOM Alpaca is available on %s"
@@ -1496,7 +1496,7 @@ msgstr "Incertesa de Delta T"
 
 #: u_translation.rsdeltatrecent
 msgid "DeltaT recent value"
-msgstr ""
+msgstr "Valor recent del Delta T"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -2420,7 +2420,7 @@ msgstr "Horitzó"
 
 #: u_translation.rshorizontalov
 msgid "Horizontal overlap %"
-msgstr ""
+msgstr "Superposició horitzontal %"
 
 #: u_translation.rshostname
 msgid "Hostname:"
@@ -2876,7 +2876,7 @@ msgstr "Carrega des del fitxer"
 
 #: u_translation.rsloadindiconf
 msgid "Load INDI configuration"
-msgstr ""
+msgstr "Carrega la configuració INDI"
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."
@@ -3256,15 +3256,15 @@ msgstr "Crepuscle matinal"
 
 #: u_translation.rsmosaic
 msgid "Mosaic"
-msgstr ""
+msgstr "Mosaic"
 
 #: u_translation.rsmosaiccenter
 msgid "Mosaic center"
-msgstr ""
+msgstr "Centre mosaic"
 
 #: u_translation.rsmosaicsize
 msgid "Mosaic size"
-msgstr ""
+msgstr "Mida mosaic"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -4666,6 +4666,10 @@ msgstr "Envia la imatge a"
 msgid "Send table to"
 msgstr "Envia la taula a"
 
+#: u_translation.rssendviaserve
+msgid "Send via server"
+msgstr ""
+
 #: u_translation.rsseparation
 msgid "Separation"
 msgstr "Separació"
@@ -4776,7 +4780,7 @@ msgstr "Mostra el text del botó"
 
 #: u_translation.rsshowcelestia
 msgid "Show celestial equator"
-msgstr ""
+msgstr "Mostra l'equador celest"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
@@ -4973,6 +4977,10 @@ msgstr "Ortogràfica inclinada"
 #: u_translation.rsslew
 msgid "Slew"
 msgstr "Ves a (Goto)"
+
+#: u_translation.rsslewcomplete
+msgid "Slew complete"
+msgstr ""
 
 #: u_translation.rsslewingto
 msgid "Slewing to %s / %s"
@@ -5761,7 +5769,7 @@ msgstr "Versió"
 
 #: u_translation.rsverticalover
 msgid "Vertical overlap %"
-msgstr ""
+msgstr "Superposició vertical %"
 
 #: u_translation.rsvicinity
 msgid "Vicinity"
