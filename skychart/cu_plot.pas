@@ -1563,10 +1563,6 @@ begin
           end
           else
           begin
-               {$ifdef darwin}
-            if (outlinetype = 1) then
-              outlinetype := 0; // TODO: spline wrongly implemented on Carbon
-               {$endif}
             cnv.Pen.Mode := pmCopy;
             cnv.Pen.Width := outlinelw * cfgchart.drawpen;
             cnv.Pen.Color := outlinecol;
