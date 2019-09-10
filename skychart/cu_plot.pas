@@ -1368,7 +1368,7 @@ procedure TSplot.PlotOutline(x, y: single; op, lw, fs, closed: integer;
   r2: double; col: Tcolor);
 var
   xx, yy, l: integer;
-  outlineptsf: array of TPointf;
+  outlineptsf,Spline: array of TPointf;
 
   function SingularPolygon: boolean;
   var
@@ -1529,37 +1529,32 @@ begin
           if cfgplot.UseBMP then
           begin
 
+            setlength(outlinepts, outlinenum + 1);
+            setlength(outlineptsf, outlinenum + 1);
+
+            for l := 0 to outlinenum do
+            begin
+              outlineptsf[l].x := outlinepts[l].x;
+              outlineptsf[l].y := outlinepts[l].y;
+            end;
+
             case outlinetype of
 
               0:
               begin
-                setlength(outlinepts, outlinenum + 1);
-                setlength(outlineptsf, outlinenum + 1);
-
-                for l := 0 to outlinenum do
-                begin
-                  outlineptsf[l].x := outlinepts[l].x;
-                  outlineptsf[l].y := outlinepts[l].y;
-                end;
-
                 cbmp.DrawPolyLineAntialias(
                   outlineptsf, ColorToBGRA(outlinecol), outlinelw * cfgchart.drawpen, True);
 
               end;
-
-              1: Bezierspline(outlinepts, outlinenum + 1);
+              1:
+              begin
+                Spline := cbmp.ComputeClosedSpline(outlineptsf,ssEasyBezier);
+                cbmp.DrawPolygonAntialias(
+                  Spline, ColorToBGRA(outlinecol), outlinelw * cfgchart.drawpen);
+              end;
 
               2:
               begin
-                setlength(outlinepts, outlinenum + 1);
-                setlength(outlineptsf, outlinenum + 1);
-
-                for l := 0 to outlinenum do
-                begin
-                  outlineptsf[l].x := outlinepts[l].x;
-                  outlineptsf[l].y := outlinepts[l].y;
-                end;
-
                 cbmp.FillPoly(outlineptsf, ColorToBGRA(outlinecol), dmset);
               end;
 
@@ -1643,20 +1638,10 @@ begin
   p[m - 1] := LC(pts[n - 1], pts[0], 1, 1 / 3);
   p[m] := pts[n - 1];
 
-  if cfgplot.UseBMP then
-  begin
-    setlength(pf, 1 + m);
-    for i := 0 to m do
-    begin
-      pf[i].x := p[i].x;
-      pf[i].y := p[i].y;
-    end;
-
-    cbmp.DrawPolyLineAntialias(cbmp.ComputeClosedSpline(pf, ssInside),
-      ColorToBGRA(outlinecol), outlinelw * cfgchart.drawpen, True);
-  end
+  if not cfgplot.UseBMP then
+    cnv.PolyBezier(p)
   else
-    cnv.PolyBezier(p);
+    raise(Exception.Create('Do not use TSplot.BezierSpline on BGRAbitmap'));
 
 end;
 
