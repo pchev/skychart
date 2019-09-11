@@ -1479,7 +1479,7 @@ const
     );
 
   // Chart Commands
-  numcmd = 128;
+  numcmd = 129;
   cmdlist: array[1..numcmd, 1..3] of string = (
     ('ZOOM+', '1', ''),
     ('ZOOM-', '2', ''),
@@ -1610,7 +1610,8 @@ const
     ('SHOWALWAYSMERIDIAN', '125', 'ON/OFF'),
     ('CLEANUPMAP', '126', ''),
     ('GETCHARTEQSYS', '127', 'DATE/2000.0'),
-    ('GETSCOPESLEWING', '128', 'True/False')
+    ('GETSCOPESLEWING', '128', 'True/False'),
+    ('GETFRAMES', '129', '')
     );
 
 // INDI Telescope driver

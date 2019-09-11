@@ -414,6 +414,7 @@ type
     function cmd_AbortSlewINDI: string;
     function cmd_SyncINDI(RA2, DE2: string): string;
     function cmd_GetScopeSlewing: string;
+    function cmd_GetFrames: string;
     function cmd_LoadCircle(fn: string): string;
     function cmd_DefCircle(num, diameter, rotation, offset: string): string;
     function cmd_DefRectangle(num, w, h, rotation, offset: string): string;
@@ -6572,6 +6573,7 @@ begin
     126: Result := cmd_Cleanup;
     127: Result := cmd_GetChartEqsys;
     128: Result := cmd_GetScopeSlewing;
+    129: Result := cmd_GetFrames;
     else
       Result := msgFailed + ' Bad command name';
   end;
@@ -6909,6 +6911,16 @@ begin
              'pa: '+ rot +tab;
       FSendInfo(nil, Caption, txt);
     end;
+  end;
+end;
+
+function Tf_chart.cmd_GetFrames: string;
+begin
+  if (f_mosaic<>nil)and(f_mosaic.Visible) then begin
+    SendMosaic(f_mosaic);
+    result:=msgOK;
+  end else begin
+    result:=msgFailed;
   end;
 end;
 
