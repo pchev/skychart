@@ -1395,19 +1395,19 @@ var
 {$endif}
 {$ifdef linux}
   tracefile: string = ''; // to stdout
-  dcd_cmd: string = 'cd /usr/local/dcd ; python ./dcd.py';
+  dcd_cmd: string = 'cd /usr/local/dcd ; python3 ./dcd.py';
   use_xplanet: boolean = True;
   xplanet_dir: string = '';
 {$endif}
 {$ifdef freebsd}
   tracefile: string = ''; // to stdout
-  dcd_cmd: string = 'cd /usr/local/dcd ; python ./dcd.py';
+  dcd_cmd: string = 'cd /usr/local/dcd ; python3 ./dcd.py';
   use_xplanet: boolean = True;
   xplanet_dir: string = '';
 {$endif}
 {$ifdef darwin}
   tracefile: string = 'cdc_trace.txt';
-  dcd_cmd: string = 'cd /usr/local/dcd ; python ./dcd.py';
+  dcd_cmd: string = 'cd /usr/local/dcd ; python3 ./dcd.py';
   use_xplanet: boolean = True;
   xplanet_dir: string = 'data/planet';
 {$endif}
