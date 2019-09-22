@@ -155,6 +155,7 @@ object f_mosaic: Tf_mosaic
       Width = 337
       ItemHeight = 0
       OnChange = FrameListChange
+      Style = csDropDownList
       TabOrder = 2
       Text = 'FrameList'
     end
