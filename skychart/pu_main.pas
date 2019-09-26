@@ -4693,11 +4693,14 @@ begin
           ConfigSolsys.f_config_solsys1.DownloadComet.Visible := False;
           ConfigSolsys.f_config_solsys1.ConfirmDownload := False;
           ConfigSolsys.Show;
+          ConfigSolsys.f_config_solsys1.ComPageControl.ActivePageIndex := 2;
+          ConfigSolsys.f_config_solsys1.DelComAll.Click;
           ConfigSolsys.f_config_solsys1.ComPageControl.ActivePageIndex := 1;
-          Application.ProcessMessages;
           ConfigSolsys.f_config_solsys1.DownloadComet.Click;
           if ConfigSolsys.f_config_solsys1.autoOK then
           begin
+            if (MultiFrame1.ActiveObject is Tf_chart) then
+              Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.ShowComet:=true;
             RefreshAllChild(False);
             ShowMessage(rsCometUpdateS);
           end;
@@ -4712,10 +4715,14 @@ begin
           ConfigSolsys.f_config_solsys1.ConfirmDownload := False;
           ConfigSolsys.f_config_solsys1.autoprocess := True;
           ConfigSolsys.Show;
+          ConfigSolsys.f_config_solsys1.AstPageControl.ActivePageIndex := 3;
+          ConfigSolsys.f_config_solsys1.delallast.Click;
           ConfigSolsys.f_config_solsys1.AstPageControl.ActivePageIndex := 1;
           ConfigSolsys.f_config_solsys1.DownloadAsteroid.Click;
           if ConfigSolsys.f_config_solsys1.autoOK then
           begin
+            if (MultiFrame1.ActiveObject is Tf_chart) then
+              Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.ShowAsteroid:=true;
             RefreshAllChild(False);
             ShowMessage(rsAsteroidUpda);
           end;

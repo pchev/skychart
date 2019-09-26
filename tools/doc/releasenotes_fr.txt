@@ -1,5 +1,8 @@
 Version 4.1.1 beta, Notes de la version
 
+Attention, la mise à jour des astéroïdes et comètes à partir du menu principal supprime maintenant toutes les anciens éléments de la base de données!
+Si vous devez conserver ces anciens éléments ou cumuler les données de plusieurs sources, utilisez les fonctions du menu Configuration / Système solaire.
+
 Nouvelles fonctions:
 
 - Nouvel outil de mosaïque.

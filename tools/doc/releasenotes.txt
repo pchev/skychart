@@ -1,5 +1,8 @@
 Version 4.1.1 beta, release Notes
 
+Beware the update of asteroid and comet from the main menu now delete all the old elements data from the database!
+If you need to keep this old elements or cumulate data from many source you use the function from the menu Setup/Solar syste.
+
 New functions:
 
 - New mosaic tool
