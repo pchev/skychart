@@ -263,18 +263,29 @@ object f_config_internet: Tf_config_internet
           ParentFont = False
           TabOrder = 4
         end
-        object comhttp: TButton
+        object commpc: TButton
           Left = 248
           Height = 25
           Top = 142
           Width = 102
           BorderSpacing.InnerBorder = 4
           Caption = 'MPC Http'
-          OnClick = comhttpClick
+          OnClick = commpcClick
           ParentFont = False
           TabOrder = 0
         end
-        object astcdc: TButton
+        object comvanbuitenen: TButton
+          Left = 72
+          Height = 25
+          Top = 144
+          Width = 159
+          BorderSpacing.InnerBorder = 4
+          Caption = 'astro.vanbuitenen.nl'
+          OnClick = comvanbuitenenClick
+          ParentFont = False
+          TabOrder = 8
+       end
+       object astcdc: TButton
           Left = 24
           Height = 25
           Top = 326

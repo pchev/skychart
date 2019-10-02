@@ -5963,7 +5963,7 @@ begin
   cfgm.ProxyPass := '';
   cfgm.AnonPass := 'skychart@';
   cfgm.ObsNameList.Sorted := True;
-  cfgm.CometUrlList.Add(URL_HTTPCometElements);
+  cfgm.CometUrlList.Add(URL_HTTPCometElements1);
   cfgm.AsteroidUrlList.Add(URL_CDCAsteroidElements);
   cfgm.TleUrlList.add(URL_CELESTRAK1);
   cfgm.TleUrlList.add(URL_CELESTRAK2);
@@ -7996,7 +7996,7 @@ begin
     for i := 0 to cfgm.CometUrlList.Count - 1 do
     begin
       if pos('Soft00Cmt', cfgm.CometUrlList[i]) > 0 then
-        cfgm.CometUrlList[i] := URL_HTTPCometElements;
+        cfgm.CometUrlList[i] := URL_HTTPCometElements1;
     end;
     b1 := False;
     b2 := False;

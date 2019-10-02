@@ -529,7 +529,8 @@ const
 
   URL_IERSBulletins = 'https://www.iers.org/IERS/EN/Publications/Bulletins/bulletins.html';
 
-  URL_HTTPCometElements = 'https://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt';
+  URL_HTTPCometElements1 = 'http://astro.vanbuitenen.nl/cometelements?format=mpc&mag=obs';
+  URL_HTTPCometElements2 = 'https://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt';
 
   URL_MPCORBAsteroidElements =
     'https://www.minorplanetcenter.net/iau/MPCORB/MPCORB.DAT.gz';

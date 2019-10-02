@@ -38,6 +38,7 @@ type
   Tf_config_internet = class(TFrame)
     astcdc: TButton;
     astcdcneo: TButton;
+    comvanbuitenen: TButton;
     GroupBox3: TGroupBox;
     GroupBox4: TGroupBox;
     GroupBox5: TGroupBox;
@@ -50,7 +51,7 @@ type
     SocksProxy: TCheckBox;
     SocksType: TComboBox;
     DefaultDSS: TButton;
-    comhttp: TButton;
+    commpc: TButton;
     comdefault: TButton;
     astdefault: TButton;
     mpcorb: TButton;
@@ -85,7 +86,8 @@ type
     procedure AsteroidUrlListExit(Sender: TObject);
     procedure comdefaultClick(Sender: TObject);
     procedure astdefaultClick(Sender: TObject);
-    procedure comhttpClick(Sender: TObject);
+    procedure commpcClick(Sender: TObject);
+    procedure comvanbuitenenClick(Sender: TObject);
     procedure DefaultDSSClick(Sender: TObject);
     procedure DSSpicturesEditingDone(Sender: TObject);
     procedure mpcorbClick(Sender: TObject);
@@ -149,7 +151,7 @@ begin
   GroupBox4.Caption := rsAsteroidElem;
   comdefault.Caption := rsDefault;
   astdefault.Caption := rsDefault;
-  comhttp.Caption := rsMPCHttp;
+  commpc.Caption := rsMPCHttp;
   astcdc.Caption := rsFirst5000;
   astcdcneo.Caption := rsFirst5000 + ' NEO + TNO';
   Page3.Caption := rsOnlineDSS;
@@ -350,7 +352,7 @@ end;
 
 procedure Tf_config_internet.comdefaultClick(Sender: TObject);
 begin
-  comhttpClick(Sender);
+  comvanbuitenenClick(Sender);
 end;
 
 procedure Tf_config_internet.astdefaultClick(Sender: TObject);
@@ -358,10 +360,17 @@ begin
   astcdcClick(Sender);
 end;
 
-procedure Tf_config_internet.comhttpClick(Sender: TObject);
+procedure Tf_config_internet.commpcClick(Sender: TObject);
 begin
   CometUrlList.Clear;
-  CometUrlList.Lines.Add(URL_HTTPCometElements);
+  CometUrlList.Lines.Add(URL_HTTPCometElements2);
+  CometUrlListExit(Sender);
+end;
+
+procedure Tf_config_internet.comvanbuitenenClick(Sender: TObject);
+begin
+  CometUrlList.Clear;
+  CometUrlList.Lines.Add(URL_HTTPCometElements1);
   CometUrlListExit(Sender);
 end;
 
