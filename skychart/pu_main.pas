@@ -8099,6 +8099,13 @@ begin
     inif.UpdateFile;
     inif.Free;
   end;
+  if Config_Version < '4.1q' then
+  begin
+    if pos('minorplanetcenter',cfgm.CometUrlList[0])>0 then begin
+       cfgm.CometUrlList.Clear;
+       cfgm.CometUrlList.Add(URL_HTTPCometElements1);
+    end;
+  end;
 end;
 
 procedure Tf_main.SaveVersion;

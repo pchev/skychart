@@ -5,6 +5,7 @@ If you need to keep this old elements or cumulate data from many source you use 
 
 New functions:
 
+- Default comet element download is now from http://astro.vanbuitenen.nl
 - New mosaic tool
 - Option to show only the celestial equator line.
 - New default interface with minimal button bar.

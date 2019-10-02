@@ -5,6 +5,7 @@ Si vous devez conserver ces anciens éléments ou cumuler les données de plusie
 
 Nouvelles fonctions:
 
+- Le téléchargement par défaut des éléments des comètes est maintenant http://astro.vanbuitenen.nl
 - Nouvel outil de mosaïque.
 - Option pour afficher seulement la ligne de l'équateur céleste.
 - Nouvel interface par défaut avec moins de boutons.
