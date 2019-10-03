@@ -1615,23 +1615,6 @@ const
     ('GETFRAMES', '129', '')
     );
 
-// INDI Telescope driver
-const
-  DefaultNumIndiDriver = 12;
-  DefaultIndiDriverLst: array[0..DefaultNumIndiDriver, 0..1] of string = (('Other', ''),
-    ('Astro-Physics', 'indi_lx200ap'),
-    ('Celestron GPS', 'indi_celestron_gps'),
-    ('Intelliscope', 'indi_intelliscope'),
-    ('LX200 Basic', 'indi_lx200basic'),
-    ('LX200 Generic', 'indi_lx200generic'),
-    ('LX200 Classic', 'indi_lx200classic'),
-    ('LX200 GPS', 'indi_lx200gps'),
-    ('LX200 Autostar', 'indi_lx200autostar'),
-    ('LX200 16', 'indi_lx200_16'),
-    ('Orion Atlas', 'indi_orion_atlas'),
-    ('Sky Commander', 'indi_skycommander'),
-    ('Takahashi Temma', 'indi_temma'));
-
 // Database
 type
   TDBtype = (mysql, sqlite);
