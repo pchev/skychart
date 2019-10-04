@@ -1951,7 +1951,7 @@ begin
     PlanetOrientation(jdt, CurrentPlanet, p, pde, pds, w1, w2, w3);
     Desc := Desc + 'pa:' + formatfloat(d1, p) + tab + 'PoleIncl:' + formatfloat(
       d1, pde) + tab + 'CM:' + formatfloat(d1, w1) + tab +
-      'ephemeris:' + eph_method + tab + 'date:' + date + tab + 'TT:' + datett;
+      'ephemeris:' + eph_method + tab + 'date:' + date + '  ( ' + TzGMT2UTC(cfgsc.tz.ZoneName) + ' )' + tab + 'TT:' + datett;
   end;
   if (currentplanet = 11) then
   begin
@@ -1981,7 +1981,7 @@ begin
     Desc := Desc + 'pa:' + formatfloat(d1, p) + tab + 'llat:' + formatfloat(
       d2, pde) + tab + 'llon:' + formatfloat(d2, w1) + tab +
       'SunIncl:' + formatfloat(d2, pds) + tab + 'ephemeris:' + eph_method +
-      tab + 'date:' + date + tab + 'TT:' + datett;
+      tab + 'date:' + date + '  ( ' + TzGMT2UTC(cfgsc.tz.ZoneName) + ' )' + tab + 'TT:' + datett;
   end;
   if (currentplanet = 32) then
   begin   // Earth umbra
@@ -1995,7 +1995,7 @@ begin
     cfgsc.TrackName := rsEarthShadow;
     nom := cfgsc.Trackname;
     ma := '';
-    Desc := sar + tab + sde + tab + '  P' + tab + nom + tab + date + tab;
+    Desc := sar + tab + sde + tab + '  P' + tab + nom + tab + date + '  ( ' + TzGMT2UTC(cfgsc.tz.ZoneName) + ' )' + tab;
   end;
   if ((currentplanet > 11) and (currentplanet <= 30)) or
     ((currentplanet > 32) and (currentplanet <= MaxPla)) then
@@ -2006,7 +2006,7 @@ begin
     ma := smagn;
     Desc := sar + tab + sde + tab + ' Ps' + tab + nom + tab +
       'm:' + smagn + tab + 'diam:' + sdiam + blank + lsec + tab +
-      'date:' + date + tab + 'TT:' + datett;
+      'date:' + date + '  ( ' + TzGMT2UTC(cfgsc.tz.ZoneName) + ' )' + tab + 'TT:' + datett;
   end;
   cfgsc.FindIpla := CurrentPlanet;
   cfgsc.FindId := nom;
