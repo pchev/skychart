@@ -1920,7 +1920,7 @@ begin
         if (w1 > 0) and (w1 < 24) then
           shh := shh + blank + ARmtoStr(w1);
       until w1 > 24;
-      Desc := Desc + 'GRStr:' + shh + tab;
+      Desc := Desc + 'GRStr:' + shh + '  ( ' + TzGMT2UTC(cfgsc.tz.ZoneName) + ' )' + tab;
       Desc := Desc + 'GRSLon:' + FormatFloat(
         f1, JupGRS(cfgsc.GRSlongitude, cfgsc.GRSdrift, cfgsc.GRSjd, jdt)) + tab;
     end
@@ -1934,7 +1934,7 @@ begin
       Desc := Desc + 'CM:' + formatfloat(d1, w1) + tab;
     end;
     Desc := Desc + 'ephemeris:' + eph_method + tab;
-    Desc := Desc + 'date:' + date + tab;
+    Desc := Desc + 'date:' + date + '  ( ' + TzGMT2UTC(cfgsc.tz.ZoneName) + ' )' + tab;
     Desc := Desc + 'TT:' + datett;
   end;
   if (currentplanet = 10) then
