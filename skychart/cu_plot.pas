@@ -4722,7 +4722,7 @@ begin
     if (cfgplot.nebplot = 0) or not cfgplot.DSOColorFillGxy then // line mode
       cbmp.DrawPolygonAntialias(elpf, ColorToBGRA(nebcolor), lw)
     else
-      cbmp.FillPolyAntialias(elpf, ColorToBGRA(nebcolor));
+      cbmp.DrawPolygonAntialias(elpf, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), cfgchart.drawpen, ColorToBGRA(nebcolor));
   end
   else
   begin
@@ -4798,7 +4798,7 @@ begin
       cbmp.PenStyle := psSolid;
     end
     else
-      cbmp.FillEllipseAntialias(Ax, Ay, ds, ds, ColorToBGRA(nebcolor));
+      cbmp.EllipseAntialias(Ax, Ay, ds, ds, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), cfgchart.drawpen, ColorToBGRA(nebcolor));
   end
   else
   begin
@@ -4880,7 +4880,7 @@ begin
     if (cfgplot.nebplot = 0) or not cfgplot.DSOColorFillPNe then // line mode
       cbmp.EllipseAntialias(Ax, Ay, ds, ds, ColorToBGRA(nebcolor), cfgchart.drawpen)
     else
-      cbmp.FillEllipseAntialias(Ax, Ay, ds, ds, ColorToBGRA(nebcolor));
+      cbmp.EllipseAntialias(Ax, Ay, ds, ds, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), cfgchart.drawpen, ColorToBGRA(nebcolor));
     cbmp.DrawLineAntialias(xx - ds * 1.5, yy, xx + ds * 1.5, yy, ColorToBGRA(nebcolor), 1.5);
   end
   else
@@ -4956,7 +4956,7 @@ begin
     end
     else
     begin
-      cbmp.FillEllipseAntialias(Ax, Ay, ds, ds, ColorToBGRA(nebcolor));
+      cbmp.EllipseAntialias(Ax, Ay, ds, ds, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), cfgchart.drawpen, ColorToBGRA(nebcolor));
       ds2 := ds div 3;
       nebcolor := Addcolor(nebcolor, $00202020);
       cbmp.FillEllipseAntialias(Ax, Ay, ds2, ds2, ColorToBGRA(nebcolor));
@@ -5062,8 +5062,7 @@ begin
     end
     else
     begin
-      cbmp.RoundRect(xx - ds, yy - ds, xx + ds, yy + ds, dsr, dsr, ColorToBGRA(nebcolor),
-        ColorToBGRA(nebcolor));
+      cbmp.RoundRect(xx - ds, yy - ds, xx + ds, yy + ds, dsr, dsr, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), ColorToBGRA(nebcolor));
     end;
   end
   else
@@ -5151,8 +5150,7 @@ begin
       cbmp.DrawVertLine(xx, yy - ds, yy + ds, ColorToBGRA(nebcolor));
     end
     else
-      cbmp.RoundRect(xx - ds, yy - ds, xx + ds, yy + ds, dsr, dsr, ColorToBGRA(
-        nebcolor), ColorToBGRA(nebcolor));
+      cbmp.RoundRect(xx - ds, yy - ds, xx + ds, yy + ds, dsr, dsr, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), ColorToBGRA(nebcolor));
 
   end
   else
@@ -5398,7 +5396,7 @@ begin
       cbmp.PenStyle := psSolid;
     end
     else
-      cbmp.FillEllipseAntialias(Ax, Ay, ds, ds, ColorToBGRA(nebcolor));
+      cbmp.EllipseAntialias(Ax, Ay, ds, ds, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), cfgchart.drawpen, ColorToBGRA(nebcolor));
 
   end
   else
@@ -5484,8 +5482,7 @@ begin
       cbmp.RoundRect(xx - ds, yy - ds, xx + ds, yy + ds, dsr, dsr, ColorToBGRA(
         nebcolor), BGRAPixelTransparent)
     else
-      cbmp.RoundRect(xx - ds, yy - ds, xx + ds, yy + ds, dsr, dsr, ColorToBGRA(
-        nebcolor), ColorToBGRA(nebcolor));
+      cbmp.RoundRect(xx - ds, yy - ds, xx + ds, yy + ds, dsr, dsr, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), ColorToBGRA(nebcolor));
 
   end
   else
