@@ -101,7 +101,7 @@ type
     PlanetMode: TRadioGroup;
     PlanetBox3: TCheckBox;
     GRS: TFloatEdit;
-    BitBtn37: TBitBtn;
+    BtnDownloadGRS: TBitBtn;
     ComPageControl: TPageControl;
     comsetting: TTabSheet;
     GroupBox13: TGroupBox;
@@ -242,7 +242,7 @@ type
     procedure PlanetModeClick(Sender: TObject);
     procedure GRSChange(Sender: TObject);
     procedure PlanetBox3Click(Sender: TObject);
-    procedure BitBtn37Click(Sender: TObject);
+    procedure BtnDownloadGRSClick(Sender: TObject);
     procedure showcomClick(Sender: TObject);
     procedure comsymbolClick(Sender: TObject);
     procedure comlimitmagChange(Sender: TObject);
@@ -338,8 +338,8 @@ begin
   Label89.Caption := rsJupiterGRSLo;
   Label9.Caption := rsDrift;
   Label10.Caption := rsDate;
-  BitBtn37.Caption := rsGetRecentMea;
-  BitBtn37.Hint := rsGetRecentMea;
+  BtnDownloadGRS.Caption := rsGetRecentMea;
+  BtnDownloadGRS.Hint := rsGetRecentMea;
   PlanetBox.Caption := rsShowPlanetOn;
   PlanetMode.Caption := rsDrawPlanetAs;
   PlanetMode.Items[0] := rsStar;
@@ -1013,7 +1013,7 @@ begin
   csc.ShowEarthShadow := PlanetBox3.Checked;
 end;
 
-procedure Tf_config_solsys.BitBtn37Click(Sender: TObject);
+procedure Tf_config_solsys.BtnDownloadGRSClick(Sender: TObject);
 var
   dl: TDownloadDialog;
   inif: TMeminifile;

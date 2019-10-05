@@ -53,6 +53,7 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    MenuUpdGrs: TMenuItem;
     MenuMosaic: TMenuItem;
     Mosaic: TAction;
     MenuUpdDeltaT: TMenuItem;
@@ -489,6 +490,7 @@ type
     procedure MenuUpdAsteroidClick(Sender: TObject);
     procedure MenuUpdCometClick(Sender: TObject);
     procedure MenuUpdDeltaTClick(Sender: TObject);
+    procedure MenuUpdGrsClick(Sender: TObject);
     procedure MenuUpdSatelliteClick(Sender: TObject);
     procedure MenuUpdSoftClick(Sender: TObject);
     procedure MosaicExecute(Sender: TObject);
@@ -4657,6 +4659,8 @@ begin
 end;
 
 procedure Tf_main.SetupSolsysPage(page: integer; directdownload: boolean = False);
+var inif: TMemIniFile;
+    section: string;
 begin
   if ConfigSolsys <> nil then
     exit;
@@ -4684,6 +4688,24 @@ begin
     if directdownload then
     begin
       case page of
+        1:
+        begin
+          ConfigSolsys.Panel1.Visible := False;
+          ConfigSolsys.f_config_solsys1.PageControl1.ShowTabs := False;
+          ConfigSolsys.Show;
+          ConfigSolsys.f_config_solsys1.BtnDownloadGRS.Click;
+          activateconfig(ConfigSolsys.f_config_solsys1.cmain,
+            ConfigSolsys.f_config_solsys1.csc, ConfigSolsys.f_config_solsys1.ccat,
+            ConfigSolsys.f_config_solsys1.cshr, ConfigSolsys.f_config_solsys1.cplot,
+            nil, False);
+          inif := TMeminifile.Create(Configfile);
+          section := 'default_chart';
+          inif.WriteFloat(section, 'GRSlongitude', ConfigSolsys.f_config_solsys1.csc.GRSlongitude);
+          inif.WriteFloat(section, 'GRSjd', ConfigSolsys.f_config_solsys1.csc.GRSjd);
+          inif.WriteFloat(section, 'GRSdrift', ConfigSolsys.f_config_solsys1.csc.GRSdrift);
+          inif.Updatefile;
+          inif.Free;
+        end;
         2:
         begin
           ConfigSolsys.Panel1.Visible := False;
@@ -6255,9 +6277,9 @@ begin
   def_cfgsc.ConstLatinLabel := False;
   def_cfgsc.PlanetParalaxe := True;
   def_cfgsc.ShowEarthShadow := False;
-  def_cfgsc.GRSlongitude := 262.5;
-  def_cfgsc.GRSjd := jd(2017, 2, 1, 0);
-  def_cfgsc.GRSdrift := 18.2 / 365.25;
+  def_cfgsc.GRSlongitude := 314.5;
+  def_cfgsc.GRSjd := jd(2019, 8, 12, 0);
+  def_cfgsc.GRSdrift := 18.3 / 365.25;
   def_cfgsc.FindOk := False;
   def_cfgsc.nummodlabels := 0;
   def_cfgsc.posmodlabels := 0;
@@ -8105,6 +8127,10 @@ begin
        cfgm.CometUrlList.Clear;
        cfgm.CometUrlList.Add(URL_HTTPCometElements1);
     end;
+    // update Jupiter GRS default values
+    def_cfgsc.GRSlongitude := 314.5;
+    def_cfgsc.GRSjd := jd(2019, 8, 12, 0);
+    def_cfgsc.GRSdrift := 18.3 / 365.25;
   end;
 end;
 
@@ -11631,6 +11657,11 @@ begin
     else begin
       ShowMessage('Cannot update the Delta T file now, please check your Internet connection');
     end;
+end;
+
+procedure Tf_main.MenuUpdGrsClick(Sender: TObject);
+begin
+  SetupSolsysPage(1, True);
 end;
 
 procedure Tf_main.MenuUpdSatelliteClick(Sender: TObject);

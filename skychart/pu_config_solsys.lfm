@@ -91,12 +91,6 @@ object f_configsolsys: Tf_configsolsys
         inherited Page1: TTabSheet
           ClientHeight = 515
           ClientWidth = 483
-          inherited Label131: TLabel
-            Width = 65
-          end
-          inherited Label3: TLabel
-            Width = 359
-          end
           inherited planetdir: TDirectoryEdit
             Height = 28
             Constraints.MaxHeight = 28
@@ -110,10 +104,6 @@ object f_configsolsys: Tf_configsolsys
             Width = 293
           end
           inherited GroupBox2: TGroupBox
-            inherited ListBoxEph: TListBox
-              ScrollWidth = 106
-              TopIndex = -1
-            end
             inherited EditEph: TEdit
               Height = 28
               Constraints.MaxHeight = 28
@@ -123,43 +113,22 @@ object f_configsolsys: Tf_configsolsys
         inherited Page2: TTabSheet
           ClientHeight = 515
           ClientWidth = 483
-          inherited PlanetBox: TCheckBox
-            Height = 23
-            Width = 178
-          end
-          inherited PlanetBox3: TCheckBox
-            Height = 23
-            Width = 240
-          end
-          inherited TransparentPlanet: TCheckBox
-            Height = 23
-            Width = 238
-          end
           inherited SunPanel: TPanel
             inherited ComboBox1: TComboBox
               Height = 28
               Constraints.MaxHeight = 28
-              ItemHeight = 0
-              Text = ''
-            end
-            inherited Label6: TLabel
-              Width = 122
             end
             inherited ComboBox2: TComboBox
               Height = 28
               Constraints.MaxHeight = 28
-              ItemHeight = 0
             end
           end
           inherited GRSPanel: TPanel
-            inherited Label89: TLabel
-              Width = 136
-            end
             inherited GRS: TFloatEdit
               Height = 28
               Constraints.MaxHeight = 28
             end
-            inherited BitBtn37: TBitBtn
+            inherited BtnDownloadGRS: TBitBtn
               Height = 28
               Constraints.MaxHeight = 28
             end
@@ -170,9 +139,6 @@ object f_configsolsys: Tf_configsolsys
             inherited GRSJDDate: TJDDatePicker
               Height = 28
               Constraints.MaxHeight = 28
-            end
-            inherited Label10: TLabel
-              Width = 29
             end
           end
         end
@@ -185,8 +151,8 @@ object f_configsolsys: Tf_configsolsys
             ActivePage = f_config_solsys1.comsetting
             TabIndex = 0
             inherited comsetting: TTabSheet
-              ClientHeight = 482
-              ClientWidth = 473
+              ClientHeight = 511
+              ClientWidth = 479
               inherited GroupBox13: TGroupBox
                 inherited Label216: TLabel
                   Height = 19
@@ -200,9 +166,6 @@ object f_configsolsys: Tf_configsolsys
                   Height = 23
                   Width = 182
                 end
-                inherited comsymbol: TRadioGroup
-                  ClientHeight = 87
-                end
                 inherited commagdiff: TFloatEdit
                   Height = 28
                   Constraints.MaxHeight = 28
@@ -210,23 +173,23 @@ object f_configsolsys: Tf_configsolsys
               end
             end
             inherited comload: TTabSheet
-              ClientHeight = 482
-              ClientWidth = 473
+              ClientHeight = 511
+              ClientWidth = 479
               inherited Label232: TLabel
                 Height = 19
                 Width = 63
               end
               inherited ComPageControl1: TPageControl
                 inherited TabSheet1: TTabSheet
-                  ClientHeight = 63
-                  ClientWidth = 435
+                  ClientHeight = 92
+                  ClientWidth = 441
                   inherited Label2: TLabel
                     Height = 19
                   end
                 end
                 inherited TabSheet2: TTabSheet
-                  ClientHeight = 63
-                  ClientWidth = 435
+                  ClientHeight = 92
+                  ClientWidth = 441
                   inherited comfile: TFileNameEdit
                     Height = 28
                     Constraints.MaxHeight = 28
@@ -235,8 +198,8 @@ object f_configsolsys: Tf_configsolsys
               end
             end
             inherited comdelete: TTabSheet
-              ClientHeight = 482
-              ClientWidth = 473
+              ClientHeight = 511
+              ClientWidth = 479
               inherited Label238: TLabel
                 Height = 19
                 Width = 63
@@ -245,8 +208,6 @@ object f_configsolsys: Tf_configsolsys
                 inherited comelemlist: TComboBox
                   Height = 28
                   Constraints.MaxHeight = 28
-                  ItemHeight = 0
-                  Text = ''
                 end
               end
               inherited GroupBox17: TGroupBox
@@ -257,8 +218,8 @@ object f_configsolsys: Tf_configsolsys
               end
             end
             inherited Addsinglecom: TTabSheet
-              ClientHeight = 482
-              ClientWidth = 473
+              ClientHeight = 511
+              ClientWidth = 479
               inherited Label241: TLabel
                 Width = 366
               end
@@ -345,8 +306,8 @@ object f_configsolsys: Tf_configsolsys
             ActivePage = f_config_solsys1.astsetting
             TabIndex = 0
             inherited astsetting: TTabSheet
-              ClientHeight = 482
-              ClientWidth = 473
+              ClientHeight = 511
+              ClientWidth = 479
               inherited GroupBox9: TGroupBox
                 inherited Label212: TLabel
                   Height = 19
@@ -360,9 +321,6 @@ object f_configsolsys: Tf_configsolsys
                   Height = 23
                   Width = 193
                 end
-                inherited astsymbol: TRadioGroup
-                  ClientHeight = 87
-                end
                 inherited astmagdiff: TFloatEdit
                   Height = 28
                   Constraints.MaxHeight = 28
@@ -374,8 +332,8 @@ object f_configsolsys: Tf_configsolsys
               end
             end
             inherited astload: TTabSheet
-              ClientHeight = 482
-              ClientWidth = 473
+              ClientHeight = 511
+              ClientWidth = 479
               inherited Label206: TLabel
                 Height = 19
                 Width = 63
@@ -404,15 +362,15 @@ object f_configsolsys: Tf_configsolsys
               end
               inherited AstPageControl2: TPageControl
                 inherited TabSheet3: TTabSheet
-                  ClientHeight = 63
-                  ClientWidth = 435
+                  ClientHeight = 92
+                  ClientWidth = 441
                   inherited Label1: TLabel
                     Height = 19
                   end
                 end
                 inherited TabSheet4: TTabSheet
-                  ClientHeight = 63
-                  ClientWidth = 435
+                  ClientHeight = 92
+                  ClientWidth = 441
                   inherited mpcfile: TFileNameEdit
                     Height = 28
                     Constraints.MaxHeight = 28
@@ -421,8 +379,8 @@ object f_configsolsys: Tf_configsolsys
               end
             end
             inherited astprepare: TTabSheet
-              ClientHeight = 482
-              ClientWidth = 473
+              ClientHeight = 511
+              ClientWidth = 479
               inherited Label210: TLabel
                 Height = 19
                 Width = 63
@@ -454,30 +412,15 @@ object f_configsolsys: Tf_configsolsys
               end
             end
             inherited astdelete: TTabSheet
-              ClientHeight = 482
-              ClientWidth = 473
-              inherited Label211: TLabel
-                Height = 19
-                Width = 63
-              end
+              ClientHeight = 511
+              ClientWidth = 479
               inherited GroupBox10: TGroupBox
                 inherited astelemlist: TComboBox
                   Height = 28
                   Constraints.MaxHeight = 28
-                  ItemHeight = 0
-                  Text = ''
-                end
-              end
-              inherited GroupBox11: TGroupBox
-                inherited Label209: TLabel
-                  Height = 19
-                  Width = 227
                 end
               end
               inherited GroupBox12: TGroupBox
-                inherited Label214: TLabel
-                  Height = 19
-                end
                 inherited astdeldate_y: TEdit
                   Left = 248
                   Height = 28
@@ -492,8 +435,8 @@ object f_configsolsys: Tf_configsolsys
               end
             end
             inherited AddsingleAst: TTabSheet
-              ClientHeight = 482
-              ClientWidth = 473
+              ClientHeight = 511
+              ClientWidth = 479
               inherited Label217: TLabel
                 Height = 19
                 Width = 366
