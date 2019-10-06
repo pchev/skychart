@@ -1299,7 +1299,7 @@ type
 var
   jda, jd0, jd1, jd2, h, hh, tat1, tat2, tmr, tms, tds, tde: double;
   hp1, hp2, ars, des, dist, diam, jdt_ut: double;
-  jdr, jdt, jds, jdm, rar, der, rat, det, ras: double;
+  jdr, jdt, jds, rar, der, rat, det, ras: double;
   dkm, phase, illum: double;
   a, m, d, s, i, nj, irc, j: integer;
   mr, mt, ms, azr, azs: string;
@@ -1400,7 +1400,6 @@ begin
         case irc of
           0:
           begin  // moon rise and set
-            jdm := jdt;
             if (tat1 > -99) and (tat2 > -99) then
             begin
               tmr := rmod((jdr - jd0) * 24 + config.TimeZone + 24, 24);
@@ -1504,19 +1503,17 @@ begin
           end;
           1:
           begin // moon circumpolar
-            jdm := jdt;
             cells[5, i] := '-';
             cells[6, i] := '-';
           end;
           2:
           begin // no moon rise
-            jdm := jd0;
             cells[5, i] := cells[4, i];
             cells[6, i] := cells[1, i];
           end;
         end;
-        // Moon illumination
-        Planet.Moon(jdm, rat, det, dist, dkm, diam, phase, illum,config);
+        // Moon illumination at midnight
+        Planet.Moon(jda+0.5, rat, det, dist, dkm, diam, phase, illum,config);
         cells[7, i] := FormatFloat(f2, illum);
       end;
       jda := jda + s;

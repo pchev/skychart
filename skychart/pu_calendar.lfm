@@ -135,7 +135,7 @@ object f_calendar: Tf_calendar
     end
     object Date1: TJDDatePicker
       Left = 71
-      Height = 32
+      Height = 31
       Top = 8
       Width = 117
       Constraints.MaxHeight = 32
@@ -144,7 +144,7 @@ object f_calendar: Tf_calendar
     end
     object Date2: TJDDatePicker
       Left = 214
-      Height = 32
+      Height = 31
       Top = 8
       Width = 117
       Constraints.MaxHeight = 32
@@ -255,12 +255,12 @@ object f_calendar: Tf_calendar
     OnChange = PageControl1Change
     object twilight: TTabSheet
       Caption = 'Twilight'
-      ClientHeight = 348
+      ClientHeight = 350
       ClientWidth = 816
       ParentFont = False
       object TwilightGrid: TStringGrid
         Left = 0
-        Height = 348
+        Height = 350
         Top = 0
         Width = 816
         Align = alClient
@@ -277,7 +277,7 @@ object f_calendar: Tf_calendar
     end
     object planets: TTabSheet
       Caption = 'Planets'
-      ClientHeight = 348
+      ClientHeight = 350
       ClientWidth = 816
       ImageIndex = 1
       ParentFont = False
@@ -547,7 +547,7 @@ object f_calendar: Tf_calendar
     end
     object comet: TTabSheet
       Caption = 'Comets'
-      ClientHeight = 348
+      ClientHeight = 350
       ClientWidth = 816
       ImageIndex = 2
       ParentFont = False
@@ -622,7 +622,7 @@ object f_calendar: Tf_calendar
     end
     object Asteroids: TTabSheet
       Caption = 'Asteroids'
-      ClientHeight = 348
+      ClientHeight = 350
       ClientWidth = 816
       ImageIndex = 6
       ParentFont = False
@@ -687,7 +687,7 @@ object f_calendar: Tf_calendar
     end
     object Solar: TTabSheet
       Caption = 'Solar Eclipses'
-      ClientHeight = 348
+      ClientHeight = 350
       ClientWidth = 816
       ImageIndex = 3
       ParentFont = False
@@ -710,7 +710,7 @@ object f_calendar: Tf_calendar
     end
     object Lunar: TTabSheet
       Caption = 'Lunar Eclipses'
-      ClientHeight = 348
+      ClientHeight = 350
       ClientWidth = 816
       ImageIndex = 4
       ParentFont = False
@@ -733,7 +733,7 @@ object f_calendar: Tf_calendar
     end
     object Satellites: TTabSheet
       Caption = 'Artificial Satellites'
-      ClientHeight = 348
+      ClientHeight = 350
       ClientWidth = 816
       ImageIndex = 5
       ParentFont = False
