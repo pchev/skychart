@@ -1072,6 +1072,7 @@ end;
 procedure Tf_config_chart.Button8Click(Sender: TObject);
 begin
   fsmagvis.Value := 7.5;
+  cshr.StarMagFilter[0] := 99;
   fsmag0.Value := 99;
   fsmag1.Value := 99;
   fsmag2.Value := 12;
@@ -1083,6 +1084,7 @@ begin
   fsmag8.Value := 5;
   fsmag9.Value := 4;
   fBigNebLimit.Value := 211;
+  cshr.NebMagFilter[0] := 99;
   fmag0.Value := 99;
   fmag1.Value := 99;
   fmag2.Value := 99;
@@ -1093,6 +1095,7 @@ begin
   fmag7.Value := 9;
   fmag8.Value := 6;
   fmag9.Value := 6;
+  cshr.NebSizeFilter[0] := 0;
   fdim0.Value := 0;
   fdim1.Value := 0;
   fdim2.Value := 1;
