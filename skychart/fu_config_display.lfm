@@ -2245,7 +2245,7 @@ object f_config_display: Tf_config_display
           Height = 302
           Top = 66
           Width = 477
-          ClientHeight = 282
+          ClientHeight = 300
           ClientWidth = 475
           ParentFont = False
           TabOrder = 4
@@ -2800,8 +2800,8 @@ object f_config_display: Tf_config_display
             Top = 0
             Width = 70
             BevelOuter = bvNone
-            ClientHeight = 292
-            ClientWidth = 66
+            ClientHeight = 296
+            ClientWidth = 70
             ParentFont = False
             TabOrder = 36
             object Label260: TLabel
@@ -3375,7 +3375,7 @@ object f_config_display: Tf_config_display
           TabOrder = 3
         end
         object CheckBox9: TCheckBox
-          Left = 336
+          Left = 224
           Height = 21
           Top = 43
           Width = 130
