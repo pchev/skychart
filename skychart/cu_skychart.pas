@@ -7018,10 +7018,10 @@ begin
     lid := rshash(lis, $7FFFFFFF);
     if cfgsc.ConstFullLabel then
       SetLabel(lid, xx, yy, 0, 2, 6, Fcatalog.cfgshr.ConstelName[i, 2], laCenter,
-        labrotation(ra, de, 6, cfgsc), 0, True)
+        labrotation(ra, de, 6, cfgsc), 0, False)
     else
       SetLabel(lid, xx, yy, 0, 2, 6, Fcatalog.cfgshr.ConstelName[i, 1], laCenter,
-        labrotation(ra, de, 6, cfgsc), 0, True);
+        labrotation(ra, de, 6, cfgsc), 0, False);
   end;
   constlabelindex := numlabels;
 end;
