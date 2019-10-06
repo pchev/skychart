@@ -53,6 +53,8 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    MenuEditToolbar2: TMenuItem;
+    MenuItem2: TMenuItem;
     MenuUpdGrs: TMenuItem;
     MenuMosaic: TMenuItem;
     Mosaic: TAction;
@@ -741,6 +743,7 @@ type
     procedure ZoomBarApply(Sender: TObject);
     function QuickDownload(url, fn: string; quickcancel: boolean = True): boolean;
     function LoadMPCORB(fn:string): string;
+    procedure EditToolBar(barnum: integer);
   public
     { Public declarations }
     cfgm: Tconf_main;
@@ -5618,9 +5621,7 @@ var
   c: integer;
 begin
   c := VisibleControlCount(ToolBarMain);
-  if c = 0 then
-    SetLPanel1(format(rsIsEmpty, [rsMainBar]));
-  MenuViewMainBar.Checked := not MenuViewMainBar.Checked and (c > 0);
+  MenuViewMainBar.Checked := (not MenuViewMainBar.Checked) and (c > 0);
   PanelToolBarMain.Visible := MenuViewMainBar.Checked;
   if not MenuViewMainBar.Checked then
     MenuViewToolsBar.Checked := False;
@@ -5630,6 +5631,10 @@ begin
     MenuViewToolsBar.Checked := True;
   ViewTopPanel;
   FormResize(Sender);
+  if c = 0 then begin
+    SetLPanel1(format(rsIsEmpty, [rsMainBar]));
+    EditToolBar(0);
+  end;
 end;
 
 procedure Tf_main.ViewObjectBarClick(Sender: TObject);
@@ -5637,9 +5642,7 @@ var
   c: integer;
 begin
   c := VisibleControlCount(ToolBarObj);
-  if c = 0 then
-    SetLPanel1(format(rsIsEmpty, [rsObjectBar]));
-  MenuViewObjectBar.Checked := not MenuViewObjectBar.Checked and (c > 0);
+  MenuViewObjectBar.Checked := (not MenuViewObjectBar.Checked) and (c > 0);
   ToolBarObj.Visible := MenuViewObjectBar.Checked;
   if not MenuViewObjectBar.Checked then
     MenuViewToolsBar.Checked := False;
@@ -5649,6 +5652,10 @@ begin
     MenuViewToolsBar.Checked := True;
   ViewTopPanel;
   FormResize(Sender);
+  if c = 0 then begin
+    SetLPanel1(format(rsIsEmpty, [rsObjectBar]));
+    EditToolBar(1);
+  end;
 end;
 
 procedure Tf_main.ViewLeftBarClick(Sender: TObject);
@@ -5656,9 +5663,7 @@ var
   c: integer;
 begin
   c := VisibleControlCount(ToolBarLeft);
-  if c = 0 then
-    SetLPanel1(format(rsIsEmpty, [rsLeftBar]));
-  MenuViewLeftBar.Checked := not MenuViewLeftBar.Checked and (c > 0);
+  MenuViewLeftBar.Checked := (not MenuViewLeftBar.Checked) and (c > 0);
   PanelLeft.Visible := MenuViewLeftBar.Checked;
   if not MenuViewLeftBar.Checked then
     MenuViewToolsBar.Checked := False;
@@ -5667,6 +5672,10 @@ begin
     MenuViewStatusBar.Checked then
     MenuViewToolsBar.Checked := True;
   FormResize(Sender);
+  if c = 0 then begin
+    SetLPanel1(format(rsIsEmpty, [rsLeftBar]));
+    EditToolBar(2);
+  end;
 end;
 
 procedure Tf_main.ViewRightBarClick(Sender: TObject);
@@ -5674,9 +5683,7 @@ var
   c: integer;
 begin
   c := VisibleControlCount(ToolBarRight);
-  if c = 0 then
-    SetLPanel1(format(rsIsEmpty, [rsRightBar]));
-  MenuViewRightBar.Checked := not MenuViewRightBar.Checked and (c > 0);
+  MenuViewRightBar.Checked := (not MenuViewRightBar.Checked) and (c > 0);
   PanelRight.Visible := MenuViewRightBar.Checked;
   if not MenuViewRightBar.Checked then
     MenuViewToolsBar.Checked := False;
@@ -5685,6 +5692,10 @@ begin
     MenuViewStatusBar.Checked then
     MenuViewToolsBar.Checked := True;
   FormResize(Sender);
+  if c = 0 then begin
+    SetLPanel1(format(rsIsEmpty, [rsRightBar]));
+    EditToolBar(3);
+  end;
 end;
 
 procedure Tf_main.ViewStatusBarClick(Sender: TObject);
@@ -11570,7 +11581,7 @@ begin
   ViewToolsBar(False);
 end;
 
-procedure Tf_main.MenuEditToolbarClick(Sender: TObject);
+procedure Tf_main.EditToolBar(barnum: integer);
 var
   i: integer;
   buf: string;
@@ -11587,6 +11598,10 @@ begin
   f_edittoolbar.BtnText.Checked :=
     cfgm.btncaption and (f_edittoolbar.BtnSize.ItemIndex >= 3);
   f_edittoolbar.BtnText.Enabled := (f_edittoolbar.BtnSize.ItemIndex >= 3);
+  if (barnum>=0)and(barnum<=3) then begin
+    f_edittoolbar.ComboBox1.ItemIndex:=barnum;
+    f_edittoolbar.ComboBox1Change(nil);
+  end;
   FormPos(f_edittoolbar, mouse.cursorpos.x, mouse.cursorpos.y);
   f_edittoolbar.ShowModal;
   if f_edittoolbar.ModalResult = mrOk then
@@ -11611,6 +11626,11 @@ begin
     // show all the configured bar
     ViewToolsBar(True);
   end;
+end;
+
+procedure Tf_main.MenuEditToolbarClick(Sender: TObject);
+begin
+  EditToolBar(-1);
 end;
 
 procedure Tf_main.MenuToolboxConfigClick(Sender: TObject);
