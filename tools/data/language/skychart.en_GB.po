@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2019-08-17 19:42+0000\n"
-"PO-Revision-Date: 2019-08-12 04:53+0000\n"
-"Last-Translator: Stephan Woidowski <swoidowski@t-online.de>\n"
+"POT-Creation-Date: 2019-10-06 13:21+0000\n"
+"PO-Revision-Date: 2019-09-25 11:52+0000\n"
+"Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-09-06 18:44+0000\n"
-"X-Generator: Launchpad (build 19044)\n"
+"X-Launchpad-Export-Date: 2019-10-06 14:01+0000\n"
+"X-Generator: Launchpad (build af2eefe214bd95389a09b7c956720881bab16807)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -198,7 +198,7 @@ msgstr ""
 
 #: u_translation.rsadvanced
 msgid "Advanced"
-msgstr ""
+msgstr "Advanced"
 
 #: u_translation.rsadvancedsear
 msgid "Advanced search"
@@ -2138,7 +2138,7 @@ msgstr ""
 
 #: u_translation.rsfirstchar
 msgid "First char"
-msgstr ""
+msgstr "First char"
 
 #: u_translation.rsfitsfile
 msgid "FITS file"
@@ -2714,7 +2714,7 @@ msgstr "Label:"
 
 #: u_translation.rslabel2
 msgid "Label"
-msgstr ""
+msgstr "Label"
 
 #: u_translation.rslabelobject
 msgid "Label object"
@@ -2766,7 +2766,7 @@ msgstr ""
 
 #: u_translation.rslength
 msgid "Length"
-msgstr ""
+msgstr "Length"
 
 #: u_translation.rslessnebulae
 msgid "Less deep sky"
@@ -3086,7 +3086,7 @@ msgstr "Maximise"
 
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
-msgstr ""
+msgstr "Maximum magnitude"
 
 #: u_translation.rsmaximumnumbe
 msgid "Maximum number of image to show simultaneously"
@@ -3490,7 +3490,7 @@ msgstr ""
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
-msgstr ""
+msgstr "Number of files"
 
 #: u_translation.rsnumberofigno
 msgid "Number of ignored invalid rows: %s"
@@ -3685,7 +3685,7 @@ msgid "Orientation"
 msgstr "Orientation"
 
 #: u_translation.rsorienttothep
-msgid "Orient to the pole"
+msgid "Orient to the pole or zenith"
 msgstr ""
 
 #: u_translation.rsorusealocalf
@@ -3714,7 +3714,7 @@ msgstr "Output catalogue type"
 
 #: u_translation.rsoutputcatalo2
 msgid "Output catalog options"
-msgstr ""
+msgstr "Output catalogue options"
 
 #: u_translation.rsoutputdirect
 msgid "Output directory"
@@ -3946,7 +3946,7 @@ msgstr "Position angle"
 
 #: u_translation.rspositionepoc
 msgid "Position epoch"
-msgstr ""
+msgstr "Position epoch"
 
 #: u_translation.rspostscript
 msgid "PostScript"
@@ -4630,7 +4630,7 @@ msgstr ""
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
-msgstr ""
+msgstr "Select the fields to use and their position in the text file"
 
 #: u_translation.rsselectthesys
 msgid "Select the system printer and options you want to use"
@@ -5734,7 +5734,7 @@ msgstr ""
 
 #: u_translation.rsusethisfield
 msgid "Use this field as an alternative name"
-msgstr ""
+msgstr "Use this field as an alternative name"
 
 #: u_translation.rsusingexistin
 msgid "Using the existing file %s"

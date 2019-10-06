@@ -5667,7 +5667,7 @@ msgid "You already have the latest available version!"
 msgstr ""
 
 #: u_translation:rsorienttothep
-msgid "Orient to the pole"
+msgid "Orient to the pole or zenith"
 msgstr ""
 
 #: u_translation:rsicons

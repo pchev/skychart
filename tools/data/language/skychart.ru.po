@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-17 19:42+0000\n"
-"PO-Revision-Date: 2019-05-24 15:12+0000\n"
-"Last-Translator: sernik <tsn-ast@yandex.ru>\n"
+"POT-Creation-Date: 2019-10-06 13:21+0000\n"
+"PO-Revision-Date: 2019-10-06 13:45+0000\n"
+"Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-09-06 18:44+0000\n"
-"X-Generator: Launchpad (build 19044)\n"
+"X-Launchpad-Export-Date: 2019-10-06 14:01+0000\n"
+"X-Generator: Launchpad (build af2eefe214bd95389a09b7c956720881bab16807)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -1495,7 +1495,7 @@ msgstr "DeltaT не определено"
 
 #: u_translation.rsdeltatrecent
 msgid "DeltaT recent value"
-msgstr ""
+msgstr "DeltaT"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -2367,7 +2367,7 @@ msgstr "Хаммер-Айтофф"
 
 #: u_translation.rshandpad
 msgid "HandPad"
-msgstr ""
+msgstr "Управление"
 
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
@@ -2419,7 +2419,7 @@ msgstr "Горизонт"
 
 #: u_translation.rshorizontalov
 msgid "Horizontal overlap %"
-msgstr ""
+msgstr "Перекрыти по горизонтали %"
 
 #: u_translation.rshostname
 msgid "Hostname:"
@@ -2543,7 +2543,7 @@ msgstr "Укажите линию для каждого цвета"
 
 #: u_translation.rsindidriver
 msgid "INDI driver"
-msgstr "INDI драйвер"
+msgstr "INDI"
 
 #: u_translation.rsindidriverse
 msgid "INDI driver settings"
@@ -2812,7 +2812,7 @@ msgstr "Предельный угловой размер (минут, '):"
 
 #: u_translation.rslimitthenumb
 msgid "Limit the number of level 3 faint stars"
-msgstr ""
+msgstr "Ограничить количество слабых звёзд"
 
 #: u_translation.rsline1
 msgid "Line"
@@ -2916,7 +2916,7 @@ msgstr "Код места"
 
 #: u_translation.rslocationtime
 msgid "Location / Time"
-msgstr ""
+msgstr "Дата / Время"
 
 #: u_translation.rslock
 msgid "Lock"
@@ -3060,7 +3060,7 @@ msgstr "Март"
 
 #: u_translation.rsmark
 msgid "Mark"
-msgstr ""
+msgstr "Отметить"
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3256,15 +3256,15 @@ msgstr "Утренние сумерки"
 
 #: u_translation.rsmosaic
 msgid "Mosaic"
-msgstr ""
+msgstr "Мозаика"
 
 #: u_translation.rsmosaiccenter
 msgid "Mosaic center"
-msgstr ""
+msgstr "Центр мозаики"
 
 #: u_translation.rsmosaicsize
 msgid "Mosaic size"
-msgstr ""
+msgstr "Размер мозаики"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3560,7 +3560,7 @@ msgstr "Населенные пункты"
 
 #: u_translation.rsobservertool
 msgid "Observer tools"
-msgstr ""
+msgstr "Инструменты наблюдателя"
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
@@ -3683,7 +3683,7 @@ msgid "Orientation"
 msgstr "Ориентация"
 
 #: u_translation.rsorienttothep
-msgid "Orient to the pole"
+msgid "Orient to the pole or zenith"
 msgstr "Выровнять по карте"
 
 #: u_translation.rsorusealocalf
@@ -4612,7 +4612,7 @@ msgstr "Выбрать зеркало сайта"
 
 #: u_translation.rsselectnone
 msgid "Select none"
-msgstr ""
+msgstr "Отменить выбор"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -4780,7 +4780,7 @@ msgstr "Показать текст кнопки"
 
 #: u_translation.rsshowcelestia
 msgid "Show celestial equator"
-msgstr ""
+msgstr "Небесный экватор"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
@@ -5240,7 +5240,7 @@ msgstr "Поверхностная яркость"
 
 #: u_translation.rsswapbutton
 msgid "Swap button"
-msgstr ""
+msgstr "Поменять кнопки"
 
 #: u_translation.rssyear
 msgid "Y"
@@ -5280,7 +5280,7 @@ msgstr "%sТаблица существует %s"
 
 #: u_translation.rstarget
 msgid "Target"
-msgstr ""
+msgstr "Объект"
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
@@ -5768,7 +5768,7 @@ msgstr "Версия"
 
 #: u_translation.rsverticalover
 msgid "Vertical overlap %"
-msgstr ""
+msgstr "Перекрыти по вертикали %"
 
 #: u_translation.rsvicinity
 msgid "Vicinity"
