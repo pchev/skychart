@@ -662,7 +662,10 @@ begin
       DB.commit;
 
       memocom.Lines.add(rsDeleteDailyD);
+      application.ProcessMessages;
       TruncateDailyComet;
+      memocom.Lines.add(rsPleaseWait);
+      application.ProcessMessages;
       DB.Vacuum;
       memocom.Lines.add(rsDeleteComple);
     end;
@@ -1022,7 +1025,10 @@ begin
       DB.TruncateTable('cdc_ast_mag');
       DB.commit;
       memoast.Lines.add(rsDeleteDailyD);
+      application.ProcessMessages;
       TruncateDailyAsteroid;
+      memoast.Lines.add(rsPleaseWait);
+      application.ProcessMessages;
       DB.Vacuum;
       memoast.Lines.add(rsDeleteComple);
     end;

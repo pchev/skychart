@@ -1539,6 +1539,7 @@ resourcestring
   rsVerticalOver = 'Vertical overlap %';
   rsSendViaServe = 'Send via server';
   rsSlewComplete = 'Slew complete';
+  rsPleaseWait = 'Please wait...';
 
 // also update upsi_translation
 
