@@ -750,7 +750,7 @@ begin
   if LockChange then
     exit;
   // remove focus from filenamedit to avoid focus bug
-  MemoCom.SetFocus;
+ {$ifndef darwin} MemoCom.SetFocus; {$endif}
 end;
 
 procedure Tf_config_solsys.AstNeoClick(Sender: TObject);
@@ -764,7 +764,7 @@ begin
   if LockChange then
     exit;
   // remove focus from filenamedit to avoid focus bug
-  MemoMPC.SetFocus;
+  {$ifndef darwin}MemoMPC.SetFocus;  {$endif}
 end;
 
 procedure Tf_config_solsys.ButtonEphAddClick(Sender: TObject);
