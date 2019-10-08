@@ -317,7 +317,7 @@ type
     FApplyConfig: TNotifyEvent;
     FSendVoTable: TSendVoTable;
     FCatGen: Tf_catgen;
-    textcolor: TColor; // clWindow replacement hack
+    textcolor: TColor;
     procedure ShowGCat;
     procedure ShowCDCStar;
     procedure ShowCDCNeb;
@@ -479,8 +479,7 @@ end;
 
 procedure Tf_config_catalog.Init;
 begin
-  //textcolor:=clWindow;
-  textcolor := clWhite;
+  textcolor:=clWindow;
   LockCatPath := False;
   LockActivePath := False;
   cmain.VOforceactive := False;
