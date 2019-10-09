@@ -34,14 +34,16 @@ uses
   cu_ascomrest, math, LCLIntf, u_util, u_constant, u_help, u_translation,
   Messages, SysUtils, Classes, Graphics, Controls,
   Forms, Dialogs, UScaleDPI, LCLVersion,
-  StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls, Spin;
+  StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls, SpinEx;
 
 type
 
   { Tpop_scope }
 
   Tpop_scope = class(TForm)
+    ARestDevice: TSpinEditEx;
     ARestPass: TEdit;
+    ARestPort: TSpinEditEx;
     ARestUser: TEdit;
     ButtonConnect: TButton;
     ButtonGetLocation: TSpeedButton;
@@ -94,9 +96,7 @@ type
     ButtonSetLocation: TSpeedButton;
     ButtonHelp: TButton;
     ButtonAbout: TSpeedButton;
-    ARestDevice: TSpinEdit;
     ARestHost: TEdit;
-    ARestPort: TSpinEdit;
     ARestProtocol: TComboBox;
     {Utility and form functions}
     procedure ARestProtocolChange(Sender: TObject);

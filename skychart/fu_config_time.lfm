@@ -33,7 +33,7 @@ object f_config_time: Tf_config_time
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
         Caption = 'Time'
-        ClientHeight = 526
+        ClientHeight = 496
         ClientWidth = 490
         object Label142: TLabel
           Left = 288
@@ -45,9 +45,9 @@ object f_config_time: Tf_config_time
         end
         object CheckBox2: TCheckBox
           Left = 40
-          Height = 23
+          Height = 21
           Top = 56
-          Width = 141
+          Width = 139
           Caption = 'Auto-refresh every '
           OnClick = CheckBox2Click
           TabOrder = 1
@@ -89,15 +89,15 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 19
             Top = 48
-            Width = 329
+            Width = 328
             Caption = 'Difference between Terrestrial Time and Universal Time'
             ParentColor = False
           end
           object CheckBox4: TCheckBox
             Left = 6
-            Height = 23
+            Height = 21
             Top = 88
-            Width = 172
+            Width = 170
             Caption = 'Use another TT-UT value'
             OnClick = CheckBox4Click
             TabOrder = 1
@@ -312,7 +312,7 @@ object f_config_time: Tf_config_time
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 37
+            ClientHeight = 19
             ClientWidth = 135
             Columns = 2
             Items.Strings = (
@@ -567,25 +567,27 @@ object f_config_time: Tf_config_time
             Caption = 'dterr'
             ParentColor = False
           end
-          object JDEdit: TFloatSpinEdit
+          object JDEdit: TFloatSpinEditEx
             Left = 56
             Height = 28
             Top = 107
             Width = 131
             Constraints.MaxHeight = 28
+            MaxLength = 0
+            TabOrder = 18
+            OnChange = JDEditChange
             DecimalPlaces = 5
             MaxValue = 0
             MinValue = 0
-            OnChange = JDEditChange
-            TabOrder = 18
+            NullValue = 0
             Value = 0
           end
         end
         object CheckBox1: TCheckBox
           Left = 40
-          Height = 23
+          Height = 21
           Top = 24
-          Width = 125
+          Width = 123
           Caption = 'Use system time'
           OnClick = CheckBox1Click
           TabOrder = 0
@@ -603,7 +605,7 @@ object f_config_time: Tf_config_time
       end
       object Page2: TTabSheet
         Caption = 'Simulation'
-        ClientHeight = 526
+        ClientHeight = 496
         ClientWidth = 490
         object stepreset: TSpeedButton
           Left = 220
@@ -890,7 +892,7 @@ object f_config_time: Tf_config_time
       end
       object Page3: TTabSheet
         Caption = 'Animation'
-        ClientHeight = 526
+        ClientHeight = 496
         ClientWidth = 490
         object GroupBox1: TGroupBox
           Left = 6

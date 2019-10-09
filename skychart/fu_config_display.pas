@@ -28,8 +28,8 @@ interface
 uses
   u_help, u_translation, u_constant, u_util, pu_fov, UScaleDPI, cu_radec,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Grids, Spin, Buttons, StdCtrls, ExtCtrls, ComCtrls, LResources,
-  EditBtn, LCLType, enhedits, LazHelpHTML;
+  Grids, Buttons, StdCtrls, ExtCtrls, ComCtrls, LResources,
+  EditBtn, LCLType, enhedits, LazHelpHTML, SpinEx;
 
 type
 
@@ -47,6 +47,12 @@ type
     Button8: TButton;
     Button9: TButton;
     CheckBox1: TCheckBox;
+    LineWidthConstB: TSpinEditEx;
+    LineWidthConstL: TSpinEditEx;
+    LineWidthEcliptic: TSpinEditEx;
+    LineWidthEqGrid: TSpinEditEx;
+    LineWidthGalEq: TSpinEditEx;
+    LineWidthGrid: TSpinEditEx;
     ShowEquator: TCheckBox;
     DistLabel: TCheckBox;
     CheckBox2: TCheckBox;
@@ -97,11 +103,6 @@ type
     Label15: TLabel;
     labelcolorobslist: TShape;
     labelsizeobslist: TMouseUpDown;
-    LineWidthEqGrid: TSpinEdit;
-    LineWidthConstL: TSpinEdit;
-    LineWidthConstB: TSpinEdit;
-    LineWidthEcliptic: TSpinEdit;
-    LineWidthGalEq: TSpinEdit;
     OptLabels: TCheckBox;
     Label10: TLabel;
     Label14: TLabel;
@@ -170,7 +171,6 @@ type
     Panel7: TPanel;
     red_moveBox: TCheckBox;
     Shape8: TShape;
-    LineWidthGrid: TSpinEdit;
     StarButton5: TButton;
     StarButton6: TButton;
     StarButton7: TButton;
@@ -854,7 +854,7 @@ end;
 
 procedure Tf_config_display.LineWidthChange(Sender: TObject);
 begin
-  if sender is TSpinEdit then with Sender as TSpinEdit do begin
+  if sender is TSpinEditEx then with Sender as TSpinEditEx do begin
     case Tag of
       1: csc.LineWidthGrid:=Value;
       2: csc.LineWidthEqGrid:=Value;

@@ -29,7 +29,7 @@ uses
   u_help, u_translation, u_constant, u_util, u_projection, cu_tz, cu_radec,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math,
   StdCtrls, CheckLst, Buttons, ExtCtrls, enhedits, ComCtrls, LResources,
-  ButtonPanel, jdcalendar, LazHelpHTML, EditBtn, Spin;
+  ButtonPanel, jdcalendar, LazHelpHTML, EditBtn, SpinEx;
 
 type
 
@@ -46,7 +46,7 @@ type
     Button9: TButton;
     CheckBox3: TCheckBox;
     dt_ut: TFloatEdit;
-    JDEdit: TFloatSpinEdit;
+    JDEdit: TFloatSpinEditEx;
     Label12: TLabel;
     GregY: TLongEdit;
     GregM: TLongEdit;

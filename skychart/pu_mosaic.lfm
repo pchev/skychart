@@ -110,28 +110,6 @@ object f_mosaic: Tf_mosaic
     ClientHeight = 218
     ClientWidth = 358
     TabOrder = 1
-    object SizeX: TSpinEdit
-      Left = 184
-      Height = 29
-      Top = 101
-      Width = 50
-      MaxValue = 10
-      MinValue = 1
-      OnChange = MosaicChange
-      TabOrder = 0
-      Value = 3
-    end
-    object SizeY: TSpinEdit
-      Left = 260
-      Height = 29
-      Top = 101
-      Width = 50
-      MaxValue = 10
-      MinValue = 1
-      OnChange = MosaicChange
-      TabOrder = 1
-      Value = 3
-    end
     object Label3: TLabel
       Left = 8
       Height = 19
@@ -150,14 +128,13 @@ object f_mosaic: Tf_mosaic
     end
     object FrameList: TComboBox
       Left = 8
-      Height = 31
+      Height = 35
       Top = 61
       Width = 337
       ItemHeight = 0
       OnChange = FrameListChange
       Style = csDropDownList
-      TabOrder = 2
-      Text = 'FrameList'
+      TabOrder = 0
     end
     object Label5: TLabel
       Left = 8
@@ -166,26 +143,6 @@ object f_mosaic: Tf_mosaic
       Width = 134
       Caption = 'Finder rectangle (CCD)'
       ParentColor = False
-    end
-    object Hoverlap: TSpinEdit
-      Left = 184
-      Height = 29
-      Top = 141
-      Width = 50
-      MaxValue = 50
-      OnChange = MosaicChange
-      TabOrder = 3
-      Value = 10
-    end
-    object Voverlap: TSpinEdit
-      Left = 184
-      Height = 29
-      Top = 179
-      Width = 50
-      MaxValue = 50
-      OnChange = MosaicChange
-      TabOrder = 4
-      Value = 10
     end
     object Label6: TLabel
       Left = 8
@@ -216,8 +173,54 @@ object f_mosaic: Tf_mosaic
       Height = 31
       Top = 0
       Width = 251
-      TabOrder = 5
+      TabOrder = 1
       Text = 'mosaic'
+    end
+    object SizeX: TSpinEditEx
+      Left = 184
+      Height = 31
+      Top = 101
+      Width = 50
+      MaxLength = 0
+      TabOrder = 2
+      OnChange = MosaicChange
+      MaxValue = 10
+      MinValue = 1
+      Value = 3
+    end
+    object SizeY: TSpinEditEx
+      Left = 260
+      Height = 31
+      Top = 101
+      Width = 50
+      MaxLength = 0
+      TabOrder = 3
+      OnChange = MosaicChange
+      MaxValue = 10
+      MinValue = 1
+      Value = 3
+    end
+    object Hoverlap: TSpinEditEx
+      Left = 184
+      Height = 31
+      Top = 141
+      Width = 50
+      MaxLength = 0
+      TabOrder = 4
+      OnChange = MosaicChange
+      MaxValue = 50
+      Value = 10
+    end
+    object Voverlap: TSpinEditEx
+      Left = 184
+      Height = 31
+      Top = 179
+      Width = 50
+      MaxLength = 0
+      TabOrder = 5
+      OnChange = MosaicChange
+      MaxValue = 50
+      Value = 10
     end
   end
   object Panel1: TPanel
@@ -287,17 +290,6 @@ object f_mosaic: Tf_mosaic
       Caption = 'Camera rotation '
       ParentColor = False
     end
-    object Rotation: TFloatSpinEdit
-      Left = 170
-      Height = 29
-      Top = 2
-      Width = 64
-      MaxValue = 360
-      MinValue = 0
-      OnChange = RotationChange
-      TabOrder = 0
-      Value = 0
-    end
     object Rotdown: TButton
       Left = 272
       Height = 25
@@ -305,7 +297,7 @@ object f_mosaic: Tf_mosaic
       Width = 25
       Caption = '<'
       OnClick = RotdownClick
-      TabOrder = 1
+      TabOrder = 0
     end
     object Rotup: TButton
       Left = 320
@@ -314,7 +306,20 @@ object f_mosaic: Tf_mosaic
       Width = 25
       Caption = '>'
       OnClick = RotupClick
+      TabOrder = 1
+    end
+    object Rotation: TFloatSpinEditEx
+      Left = 170
+      Height = 31
+      Top = 2
+      Width = 64
+      MaxLength = 0
       TabOrder = 2
+      OnChange = RotationChange
+      MaxValue = 360
+      MinValue = 0
+      NullValue = 0
+      Value = 0
     end
   end
   object ApplyTimer: TTimer

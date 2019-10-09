@@ -1838,17 +1838,18 @@ object f_config_display: Tf_config_display
             TabOrder = 1
             Text = 'Line'
           end
-          object LineWidthConstL: TSpinEdit
+          object LineWidthConstL: TSpinEditEx
             Tag = 3
             Left = 165
             Height = 28
             Top = 30
             Width = 50
             Constraints.MaxHeight = 28
+            MaxLength = 0
+            TabOrder = 3
+            OnChange = LineWidthChange
             MaxValue = 10
             MinValue = 1
-            OnChange = LineWidthChange
-            TabOrder = 3
             Value = 1
           end
         end
@@ -1922,17 +1923,18 @@ object f_config_display: Tf_config_display
             TabOrder = 1
             Text = 'Line'
           end
-          object LineWidthConstB: TSpinEdit
+          object LineWidthConstB: TSpinEditEx
             Tag = 4
             Left = 165
             Height = 28
             Top = 30
             Width = 50
             Constraints.MaxHeight = 28
+            MaxLength = 0
+            TabOrder = 3
+            OnChange = LineWidthChange
             MaxValue = 10
             MinValue = 1
-            OnChange = LineWidthChange
-            TabOrder = 3
             Value = 1
           end
         end
@@ -2175,56 +2177,6 @@ object f_config_display: Tf_config_display
           ParentFont = False
           TabOrder = 15
         end
-        object LineWidthGrid: TSpinEdit
-          Tag = 1
-          Left = 173
-          Height = 28
-          Top = 76
-          Width = 50
-          Constraints.MaxHeight = 28
-          MaxValue = 10
-          OnChange = LineWidthChange
-          TabOrder = 16
-          Value = 1
-        end
-        object LineWidthEqGrid: TSpinEdit
-          Tag = 2
-          Left = 173
-          Height = 28
-          Top = 128
-          Width = 50
-          Constraints.MaxHeight = 28
-          MaxValue = 10
-          OnChange = LineWidthChange
-          TabOrder = 17
-          Value = 1
-        end
-        object LineWidthEcliptic: TSpinEdit
-          Tag = 5
-          Left = 428
-          Height = 28
-          Top = 76
-          Width = 50
-          Constraints.MaxHeight = 28
-          MaxValue = 10
-          MinValue = 1
-          OnChange = LineWidthChange
-          TabOrder = 18
-          Value = 1
-        end
-        object LineWidthGalEq: TSpinEdit
-          Tag = 6
-          Left = 428
-          Height = 28
-          Top = 128
-          Width = 50
-          Constraints.MaxHeight = 28
-          MaxValue = 10
-          MinValue = 1
-          OnChange = LineWidthChange
-          TabOrder = 19
-          Value = 1
-        end
         object ShowEquator: TCheckBox
           Left = 277
           Height = 21
@@ -2232,7 +2184,61 @@ object f_config_display: Tf_config_display
           Width = 160
           Caption = 'Show Celestial Equator'
           OnClick = ShowEquatorClick
+          TabOrder = 16
+        end
+        object LineWidthGrid: TSpinEditEx
+          Tag = 1
+          Left = 173
+          Height = 28
+          Top = 76
+          Width = 50
+          Constraints.MaxHeight = 28
+          MaxLength = 0
+          TabOrder = 17
+          OnChange = LineWidthChange
+          MaxValue = 10
+          Value = 1
+        end
+        object LineWidthEqGrid: TSpinEditEx
+          Tag = 2
+          Left = 173
+          Height = 28
+          Top = 128
+          Width = 50
+          Constraints.MaxHeight = 28
+          MaxLength = 0
+          TabOrder = 18
+          OnChange = LineWidthChange
+          MaxValue = 10
+          Value = 1
+        end
+        object LineWidthEcliptic: TSpinEditEx
+          Tag = 5
+          Left = 428
+          Height = 28
+          Top = 76
+          Width = 50
+          Constraints.MaxHeight = 28
+          MaxLength = 0
+          TabOrder = 19
+          OnChange = LineWidthChange
+          MaxValue = 10
+          MinValue = 1
+          Value = 1
+        end
+        object LineWidthGalEq: TSpinEditEx
+          Tag = 6
+          Left = 428
+          Height = 28
+          Top = 128
+          Width = 50
+          Constraints.MaxHeight = 28
+          MaxLength = 0
           TabOrder = 20
+          OnChange = LineWidthChange
+          MaxValue = 10
+          MinValue = 1
+          Value = 1
         end
       end
       object Page6: TTabSheet
@@ -2245,7 +2251,7 @@ object f_config_display: Tf_config_display
           Height = 302
           Top = 66
           Width = 477
-          ClientHeight = 300
+          ClientHeight = 282
           ClientWidth = 475
           ParentFont = False
           TabOrder = 4
@@ -2800,8 +2806,8 @@ object f_config_display: Tf_config_display
             Top = 0
             Width = 70
             BevelOuter = bvNone
-            ClientHeight = 296
-            ClientWidth = 70
+            ClientHeight = 292
+            ClientWidth = 66
             ParentFont = False
             TabOrder = 36
             object Label260: TLabel

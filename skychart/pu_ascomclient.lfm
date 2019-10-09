@@ -15,13 +15,14 @@ object pop_scope: Tpop_scope
   OnShow = FormShow
   ParentFont = True
   Position = poDefaultPosOnly
+  LCLVersion = '2.0.4.0'
   object GroupBox3: TGroupBox
     Left = 0
     Height = 88
     Top = 461
     Width = 305
     Align = alTop
-    ClientHeight = 86
+    ClientHeight = 68
     ClientWidth = 303
     TabOrder = 2
     object ButtonHide: TButton
@@ -32,7 +33,7 @@ object pop_scope: Tpop_scope
       Cancel = True
       Caption = 'Hide'
       OnClick = ButtonHideClick
-      TabOrder = 2
+      TabOrder = 1
     end
     object ButtonDisconnect: TButton
       Left = 115
@@ -57,7 +58,7 @@ object pop_scope: Tpop_scope
       Width = 65
       Caption = 'Help'
       OnClick = ButtonHelpClick
-      TabOrder = 4
+      TabOrder = 2
     end
     object ButtonConnect: TButton
       Left = 4
@@ -67,7 +68,7 @@ object pop_scope: Tpop_scope
       Caption = 'Connect'
       Default = True
       OnClick = ButtonConnectClick
-      TabOrder = 1
+      TabOrder = 0
     end
   end
   object GroupBox5: TGroupBox
@@ -77,7 +78,7 @@ object pop_scope: Tpop_scope
     Width = 305
     Align = alTop
     Caption = 'Observatory '
-    ClientHeight = 122
+    ClientHeight = 121
     ClientWidth = 303
     TabOrder = 0
     object Label15: TLabel
@@ -312,7 +313,7 @@ object pop_scope: Tpop_scope
     OnChanging = PageControl1Changing
     object ASCOMLocal: TTabSheet
       Caption = 'ASCOM Local'
-      ClientHeight = 146
+      ClientHeight = 142
       ClientWidth = 295
       object GroupBox1: TGroupBox
         Left = 0
@@ -398,7 +399,7 @@ object pop_scope: Tpop_scope
     end
     object ASCOMRemote: TTabSheet
       Caption = 'ASCOM Alpaca'
-      ClientHeight = 146
+      ClientHeight = 142
       ClientWidth = 295
       object Panel3: TPanel
         Left = 0
@@ -452,17 +453,6 @@ object pop_scope: Tpop_scope
           Caption = 'Remote host or IP address'
           ParentColor = False
         end
-        object ARestPort: TSpinEdit
-          Left = 13
-          Height = 28
-          Top = 66
-          Width = 81
-          Constraints.MaxHeight = 28
-          MaxValue = 65535
-          MinValue = 1
-          TabOrder = 2
-          Value = 11111
-        end
         object Label36: TLabel
           Left = 13
           Height = 18
@@ -470,15 +460,6 @@ object pop_scope: Tpop_scope
           Width = 41
           Caption = 'IP Port'
           ParentColor = False
-        end
-        object ARestDevice: TSpinEdit
-          Left = 216
-          Height = 28
-          Top = 66
-          Width = 68
-          Constraints.MaxHeight = 28
-          MaxValue = 65535
-          TabOrder = 3
         end
         object Label37: TLabel
           Left = 144
@@ -521,7 +502,7 @@ object pop_scope: Tpop_scope
           Constraints.MaxHeight = 28
           EchoMode = emPassword
           PasswordChar = '*'
-          TabOrder = 4
+          TabOrder = 2
         end
         object ARestUser: TEdit
           Left = 13
@@ -530,7 +511,29 @@ object pop_scope: Tpop_scope
           Width = 130
           AutoSelect = False
           Constraints.MaxHeight = 28
+          TabOrder = 3
+        end
+        object ARestDevice: TSpinEditEx
+          Left = 216
+          Height = 28
+          Top = 66
+          Width = 68
+          Constraints.MaxHeight = 28
+          MaxLength = 0
+          TabOrder = 4
+          MaxValue = 65535
+        end
+        object ARestPort: TSpinEditEx
+          Left = 13
+          Height = 28
+          Top = 66
+          Width = 81
+          Constraints.MaxHeight = 28
+          MaxLength = 0
           TabOrder = 5
+          MaxValue = 65535
+          MinValue = 1
+          Value = 11111
         end
       end
     end

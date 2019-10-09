@@ -126,7 +126,7 @@ function EncryptStr(Str, Pwd: string; Encode: boolean = True): string;
 function DecryptStr(Str, Pwd: string): string;
 function strtohex(str: string): string;
 function hextostr(str: string): string;
-procedure GetTranslationString(form: TForm; var f: textfile);
+//procedure GetTranslationString(form: TForm; var f: textfile);
 function CondUTF8Decode(v: string): string;
 function CondUTF8Encode(v: string): string;
 function GreekSymbolUtf8(v: string): string;
@@ -3060,7 +3060,7 @@ end;
 
 // one time use function to extract all text to translate from component object
 //uses pu_addlabel, pu_catgen, pu_catgenadv, pu_config_chart, pu_config_internet, pu_config_solsys, pu_config_system,pu_image, pu_progressbar,
-procedure GetTranslationString(form: TForm; var f: textfile);
+(*procedure GetTranslationString(form: TForm; var f: textfile);
 var
   i, j: integer;
   cname, cprop, ctext: string;
@@ -3284,7 +3284,7 @@ begin
 
   end;
 
-end;
+end; *)
 
 function TzGMT2UTC(gmttz: string): string;
 var
