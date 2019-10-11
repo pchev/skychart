@@ -1796,11 +1796,15 @@ const
     ('104;TimeU'));
 
   // Default main toolbar
-  numdefaultmainbar=16;
+  numdefaultmainbar=22;
   defaultmainbar: array[1..numdefaultmainbar] of string = (
+  ('75;Calendar'),
+  ('94;PlanetInfo'),
+  ('98;Obslist'),
   ('76;Search1'),
   ('102;quicksearch'),
   ('100;Divider'),
+  ('45;SetupTime'),
   ('43;TimeDec'),
   ('84;TimeReset'),
   ('44;TimeInc'),
@@ -1810,8 +1814,10 @@ const
   ('6;zoomplus'),
   ('7;zoomminus'),
   ('92;rotate180'),
+  ('69;ShowMark'),
   ('100;Divider'),
   ('48;TelescopeConnect'),
+  ('110;TrackTelescope'),
   ('50;TelescopeSlew'),
   ('95;TelescopeAbortSlew'));
   // no object and left bar
@@ -1828,8 +1834,8 @@ const
   ('72;AltAzProjection'),
   ('100;Divider'),
   ('38;toN'),
-  ('37;toE'),
   ('39;toS'),
+  ('37;toE'),
   ('40;toW'),
   ('41;toZenith'));
 
