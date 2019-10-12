@@ -14,7 +14,7 @@ wget -E -r -p -np -nH --timeout=15 --cut-dirs=1 -X */*detail,*/*export,*/playgro
 
 wget -E -r -p -np -nH --timeout=15 --cut-dirs=1 -X */*detail,*/*export,*/playground -R *do=index* -P doc_nl --cache=off --restrict-file-names=windows -k https://ap-i.net/skychart/nl/documentation/start https://ap-i.net/skychart/nl/news/start --header="X-DokuWiki-Do: export_xhtml"
 
-wget -E -r -p -np -nH --timeout=15 --cut-dirs=1 -X */*detail,*/*export,*/playground -R *do=index* -P doc_ru --cache=off --restrict-file-names=windows -k https://ap-i.net/skychart/ru/documentation/start https://ap-i.net/skychart/ru/news/start --header="X-DokuWiki-Do: export_xhtml"
+#wget -E -r -p -np -nH --timeout=15 --cut-dirs=1 -X */*detail,*/*export,*/playground -R *do=index* -P doc_ru --cache=off --restrict-file-names=windows -k https://ap-i.net/skychart/ru/documentation/start https://ap-i.net/skychart/ru/news/start --header="X-DokuWiki-Do: export_xhtml"
 
 wget -E -r -p -np -nH --timeout=15 --cut-dirs=1 -X */*detail,*/*export,*/playground -R *do=index* -P doc_tr --cache=off --restrict-file-names=windows -k https://ap-i.net/skychart/tr/documentation/start https://ap-i.net/skychart/tr/news/start --header="X-DokuWiki-Do: export_xhtml"
 
