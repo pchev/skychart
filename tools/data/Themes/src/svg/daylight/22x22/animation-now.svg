@@ -11,7 +11,7 @@
    version="1.1"
    id="svg6"
    sodipodi:docname="animation-now.svg"
-   inkscape:version="0.92+devel unknown">
+   inkscape:version="0.92.4 (unknown)">
   <metadata
      id="metadata10">
     <rdf:RDF>
@@ -34,16 +34,18 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1920"
-     inkscape:window-height="1016"
+     inkscape:window-height="1015"
      id="namedview8"
      showgrid="true"
-     inkscape:zoom="27.255752"
-     inkscape:cx="11"
+     inkscape:zoom="38.545454"
+     inkscape:cx="13.075472"
      inkscape:cy="11"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg6">
+     inkscape:current-layer="svg6"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true">
     <inkscape:grid
        type="xygrid"
        id="grid4269" />
@@ -58,11 +60,24 @@
       }
       </style>
   </defs>
-  <path
-     style="fill:currentColor;fill-opacity:1;stroke:none"
-     d="m 11,3 c -4.4319982,0 -8,3.568 -8,8 0,4.092537 3.0443284,7.441581 7,7.931641 V 17.921875 C 6.6006429,17.438059 4,14.537216 4,11 4,10.757625 4.0113433,10.519094 4.0351562,10.283203 4.3923512,6.7448366 7.3643762,4 11,4 c 3.877999,0 7,3.122 7,7 0,0.340784 -0.03151,0.672498 -0.07813,1 h 1.009766 C 18.97229,11.67189 19,11.339463 19,11 19,6.568 15.431998,3 11,3 Z m 0,2 v 6 H 6 v 1 h 6 V 5 Z m 5,8 v 4.292969 L 13.707031,15 13,15.707031 16.292969,19 16.5,19.207031 16.707031,19 20,15.707031 19.292969,15 17,17.292969 V 13 Z"
-     class="ColorScheme-Text"
-     id="path4"
-     inkscape:connector-curvature="0"
-     sodipodi:nodetypes="ssccssssccssccccccccccccccccccc" />
+  <g
+     id="g842">
+    <circle
+       r="7.5"
+       cy="11"
+       cx="11"
+       id="path814"
+       style="fill:none;fill-opacity:1;stroke:#4d4d4d;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path818"
+       d="m 11.499787,4.999811 v 6.5 H 6.0000101"
+       style="fill:none;stroke:#4d4d4d;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <circle
+       r="1"
+       cy="15"
+       cx="11"
+       id="path820"
+       style="fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-opacity:1" />
+  </g>
 </svg>
