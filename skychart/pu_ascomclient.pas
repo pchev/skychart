@@ -881,8 +881,6 @@ begin
     FConfig := slash(extractfilepath(ParamStr(0))) + 'scope.ini';
   ini := tinifile.Create(FConfig);
   nom := ini.readstring('Ascom', 'name', '');
-  if trim(nom) = '' then
-    nom := 'POTH.Telescope';
   edit1.Text := nom;
   EqSysVal := ini.ReadInteger('Ascom', 'EqSys', 0);
   ForceEqSys := ini.ReadBool('Ascom', 'ForceEqSys', False);
