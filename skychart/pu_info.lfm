@@ -279,17 +279,17 @@ object f_info: Tf_info
       ParentFont = False
       object Page3: TPanel
         Left = 0
-        Height = 409
+        Height = 401
         Top = 0
         Width = 701
         Align = alClient
-        ClientHeight = 409
+        ClientHeight = 401
         ClientWidth = 701
         ParentFont = False
         TabOrder = 0
         object ProgressMemo: TMemo
           Left = 1
-          Height = 407
+          Height = 399
           Top = 1
           Width = 699
           Align = alClient
@@ -305,20 +305,22 @@ object f_info: Tf_info
       ParentFont = False
       object Page4: TPanel
         Left = 0
-        Height = 409
+        Height = 401
         Top = 0
         Width = 701
         Align = alClient
-        ClientHeight = 409
+        ClientHeight = 401
         ClientWidth = 701
         ParentFont = False
         TabOrder = 0
         object InfoMemo: TMemo
           Left = 1
-          Height = 407
+          Height = 399
           Top = 1
           Width = 699
           Align = alClient
+          Color = clWindow
+          Font.Color = clWindowText
           Lines.Strings = (
             ''
           )
