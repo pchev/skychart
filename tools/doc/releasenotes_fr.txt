@@ -1,6 +1,5 @@
 Version 4.2, Notes de la version
 
-
 Nouvelles fonctions:
 
  - Nouvelle interface par défaut avec seulement deux barres de boutons.
@@ -21,7 +20,6 @@ Nouvelles fonctions:
  - Option pour définir la largeur de la ligne des dessin. Attention, cela ne fonctionne pas avec la ligne pointillée lors de l’impression sous Windows à cause des limitations de l’API.
  - Permet de verrouiller à la position définie dans le menu Voir / Position.
 
-
 Correction et améliorations:
 
  - Le téléchargement des éléments des comète est désormais depuis http://astro.vanbuitenen.nl
@@ -32,7 +30,6 @@ Correction et améliorations:
  - Amélioration de l'affichage de progression du téléchargement.
  - Affiche un avertissement dans le titre de la fenêtre si le programme est exécuté en tant qu’administrateur. CdC n’a jamais besoin de s’exécuter en tant qu’administrateur, mais cela peut casser la configuration.
  - Beaucoup de corrections de bugs.
-  
 
 Incompatibilité avec les versions précédentes:
 
@@ -43,4 +40,4 @@ Incompatibilité avec les versions précédentes:
    - https://www.indilib.org/devices/mounts.html
  - Déprécie l'utilisation de la base de données Mysql et suggère de passer à Sqlite si elle est actuellement utilisée. Le support de Mysql sera supprimé dans la prochaine version.
  - La communication client / serveur peut désormais utiliser les coordonnées J2000 au lieu du paramètre actuel de la carte. Vous pouvez modifier cette option dans Configuration / Général / Serveur.
- - Le fichier de cercle enregistré (.cdcc) inclut l'équinoxe des coordonnées sur la première ligne et davantage d'informations pour l'utilisation avec l'outil Mosaïque. 
+ - Le fichier de cercle enregistré (.cdcc) inclut l'équinoxe des coordonnées sur la première ligne et davantage d'informations pour l'utilisation avec l'outil Mosaïque.
