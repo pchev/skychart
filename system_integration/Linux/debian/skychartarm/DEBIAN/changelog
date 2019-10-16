@@ -1,3 +1,11 @@
+skychart (4.2) experimental; urgency=low
+
+  * stable version
+    For the full change log, see :
+    https://github.com/pchev/skychart/compare/V40...V42
+
+ -- Patrick Chevalley <pch@ap-i.net>  Wed Oct 16 21:37:08 CEST 2019
+
 skychart (4.1) experimental; urgency=low
 
   * unstable version

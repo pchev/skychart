@@ -1,41 +1,46 @@
-Version 4.1.1 beta, Notes de la version
+Version 4.2, Notes de la version
 
-Attention, la mise à jour des astéroïdes et comètes à partir du menu principal supprime maintenant toutes les anciens éléments de la base de données!
-Si vous devez conserver ces anciens éléments ou cumuler les données de plusieurs sources, utilisez les fonctions du menu Configuration / Système solaire.
 
 Nouvelles fonctions:
 
-- Le téléchargement par défaut des éléments des comètes est maintenant http://astro.vanbuitenen.nl
-- Nouvel outil de mosaïque.
-- Option pour afficher seulement la ligne de l'équateur céleste.
-- Nouvel interface par défaut avec moins de boutons.
-- Les fichiers de cercle de champ (.cdcc) contiennent maintenant l'équinoxe des coordonnées sur la première ligne.
-- Ajout d'un menu de mise à jour de Delta T.
-- Ajout d'un mode de vision nocturne orange.
-- Permet un profil d'horizon d'observatoire par carte.
-- Réglages spéparés pour les labels des astéroïdes et comètes.
-- La sélection du serveur et du pilote INDI est maintenant dans la boîte de connexion. L'option pour lancer indistarter est supprimée.
-- Affiche un avertissement dans le titre de la fenêtre si le programme est exécuté en tant qu’administrateur
-- Ajout d'une option pour ne pas filtrer les nébuleuses brillante par magnitude.
-- Ajout d'une option pour définir la largeur de la ligne. Attention, cela ne fonctionne pas avec les lignes pointillées lors de l’impression sous Windows à cause des limitations de l’API.
-- Il est maintenant possible d'utiliser un télescope connecté à un ordinateur Windows ASCOM distant à partir de CdC fonctionnant sous Linux ou macOS. Voir: https://github.com/ASCOMInitiative/ASCOMRemote/blob/master/Documentation/ASCOM%20Remote%20Concept.pdf
-- La résolution de l'image d'arrière-plan peut maintenant être limitée pour améliorer les performances si l'écran est trop grand ou s'il n'y a pas assez de ressources processeur.
-- La communication client/serveur peut désormais utiliser les coordonnées J2000 plutôt que celles de la carte en cours. Vous pouvez modifier cette option dans Configuration/Général/Serveur.
-- Suppression des pilotes lx200 et encodeur devenus obsolète/non maintenable. Veuillez utiliser les pilotes ASCOM ou INDI correspondants.
-  - pour les lx200 génériques: https://pixelstelescopes.wordpress.com/advanced-lx200/
-  - pour les cercles digitaux: http://eksfiles.net/digital-setting-circles/ascom-driver-for-digital-setting-circles/
-- Déconseiller l'utilisation de la base de données Mysql et suggère de passer à Sqlite si elle est actuellement utilisée.
-- Permet de verrouiller à la position définie dans le menu Voir/Position.
-- Supporte le nouveau catalogue d'étoile GAIA DR2.
-- Permet d'utiliser des catalogues d'étoiles de HNSKY au format "290".
-- Améliore l'affichage des étoiles doubles.
-- Améliore le filtre par magnitude pour les petits champs.
-- Affiche l'heure de lever et coucher par rapport à l'horizon local si un fichier d'horizon est chargé. Cela peut être désactivé dans Configuration/Observatoire. Le calendrier indique toujours le lever et coucher sur l'horizon astronomique.
-- Nouveaux icônes pour les boutons mieux adapté au filtres de vision nocturne, utilise une image plus grande pour les gros boutons.
-- Coordonnées de l'observatoire à partir du GPS du télescope, utilise le nom de l'observatoire "Telescope".
-- Amélioration de l'affichage de la progression du téléchargement.
-- Correction de nombreux bugs.
+ - Nouvelle interface par défaut avec seulement deux barres de boutons.
+ - Nouvelles icônes pour les boutons, mieux adaptée à la vision nocturne. Utilise une image plus grande pour les gros boutons et les écrans haute résolution.
+ - Ajout d'une connexion directe au télescope Alpaca. Il est maintenant possible d'utiliser un télescope connecté à un ordinateur Windows ASCOM distant à partir de CdC fonctionnant sous Linux ou macOS.
+ - Support du nouveau catalogue d'étoiles GAIA DR2.
+ - Permet d'utiliser les catalogues d'étoiles HNSKY au format "290".
+ - Nouvel outil de mosaïque pour préparer des mosaïques pour les applications de capture d’images.
+ - Affiche le lever et le coucher des objets par rapport à l'horizon local si un fichier d'horizon est chargé. Ceci peut être désactivé dans Configuration / Observatoire. Le lever et coucher dans le calendrier sont toujours par rapport à l'horizon astronomique.
+ - Définir les coordonnées de l'observatoire à partir du GPS du télescope, le nom de l'observatoire est "Télescope" et ne modifie pas les autres paramètres.
+ - Nouveau bouton pour Park / Unpark du télescope ASCOM.
+ - Permet un profil d'horizon d'observatoire par carte.
+ - Ajout d'un menu de mise à jour pour Delta T et Jupiter GRS.
+ - Ajout d'un mode de vision nocturne orange.
+ - Réglage séparé des labels pour les astéroïdes et comètes.
+ - Option permettant d'afficher uniquement la ligne de l'équateur céleste.
+ - Option pour ne pas filtrer les nébuleuses brillantes par la magnitude, seulement par la taille.
+ - Option pour définir la largeur de la ligne des dessin. Attention, cela ne fonctionne pas avec la ligne pointillée lors de l’impression sous Windows à cause des limitations de l’API.
+ - Permet de verrouiller à la position définie dans le menu Voir / Position.
 
-Change le numéro de version à 4.1.1 à cause de la façon dont git compte le nombre de révisions.
-La dernière révision dans subversion était 3731, c'est équivalent au commit git b414c933 révision 3667.
-Ce numéro de révision n'est maintenant utilisé que pour avoir un numéro de version séquentiel, utilisez le hash du commit affiché dans la boîte "A propos" pour obtenir le code source correspondant.
+
+Correction et améliorations:
+
+ - Le téléchargement des éléments des comète est désormais depuis http://astro.vanbuitenen.nl
+ - La sélection du serveur et du pilote INDI est maintenant dans la boîte de connexion du télescope. L'option de lancement pour indistarter est supprimée.
+ - Amélioration de l'affichage des étoiles doubles.
+ - Amélioration du filtre de magnitude pour les petits champs.
+ - La résolution de l'image d'arrière-plan est maintenant limitée pour améliorer les performances si l'écran est grand ou s'il n'y a pas assez de coeur cpu pour le traitement.
+ - Amélioration de l'affichage de progression du téléchargement.
+ - Affiche un avertissement dans le titre de la fenêtre si le programme est exécuté en tant qu’administrateur. CdC n’a jamais besoin de s’exécuter en tant qu’administrateur, mais cela peut casser la configuration.
+ - Beaucoup de corrections de bugs.
+  
+
+Incompatibilité avec les versions précédentes:
+
+ - Attention, la mise à jour des astéroïdes et des comètes depuis le menu principal supprime maintenant toutes les anciennes données de la base de données!
+   Si vous devez conserver ces anciens éléments ou cumuler les données de plusieurs sources, vous devez utiliser la fonction du menu Configuration / Système solaire.
+ - Supprime les pilotes directs LX200 et Encodeur qui sont obsolètes/non maintenables. Veuillez utiliser les pilotes ASCOM ou INDI correspondants.
+   - https://ascom-standards.org/Downloads/ScopeDrivers.htm
+   - https://www.indilib.org/devices/mounts.html
+ - Déprécie l'utilisation de la base de données Mysql et suggère de passer à Sqlite si elle est actuellement utilisée. Le support de Mysql sera supprimé dans la prochaine version.
+ - La communication client / serveur peut désormais utiliser les coordonnées J2000 au lieu du paramètre actuel de la carte. Vous pouvez modifier cette option dans Configuration / Général / Serveur.
+ - Le fichier de cercle enregistré (.cdcc) inclut l'équinoxe des coordonnées sur la première ligne et davantage d'informations pour l'utilisation avec l'outil Mosaïque. 

@@ -1,41 +1,43 @@
-Version 4.1.1 beta, release Notes
-
-Beware the update of asteroid and comet from the main menu now delete all the old elements data from the database!
-If you need to keep this old elements or cumulate data from many source you use the function from the menu Setup/Solar syste.
+Version 4.2, release Notes
 
 New functions:
 
-- Default comet element download is now from http://astro.vanbuitenen.nl
-- New mosaic tool
-- Option to show only the celestial equator line.
-- New default interface with minimal button bar.
-- Saved circle file (.cdcc) include the coordinate equinox on the first row.
-- Add Delta T update menu.
-- Add orange night vision mode.
-- Allow per chart observatory horizon profile.
-- Separate label setting for Asteroid and Comet.
-- INDI server and driver selection is now in the connection box. Option to launch indistarter is removed.
-- Show a warning in window title if running as administrator
-- Add option to not filter the bright nebula by magnitude
-- Add option to set the line width. Beware this not work with dash line when printing on Windows because of API limitation. 
-- It is now possible to use a telescope connected to a remote ASCOM Windows computer from Skychart running on Linux or macOS. See: https://github.com/ASCOMInitiative/ASCOMRemote/blob/master/Documentation/ASCOM%20Remote%20Concept.pdf
-- The resolution of the background image can now be limited to improve the performance if the screen is too big or if there is not enough cpu core.
-- Client/server communication can now use J2000 coordinates instead of the current chart setting. You can change this option in Setup/General/Server.
-- Remove obsolete/unmaintainable lx200 and encoder drivers. Please use the corresponding ASCOM or INDI drivers.
-  - for generic lx200: https://pixelstelescopes.wordpress.com/advanced-lx200/
-  - for digital circle: http://eksfiles.net/digital-setting-circles/ascom-driver-for-digital-setting-circles/
-- Depreciate the use of Mysql database and suggest to move to Sqlite if currently in use.
-- Allow to lock at the position set from the menu View/Position.
-- Support for the new GAIA DR2 star catalog.
-- Allow to use HNSKY star catalog using the "290" format.
-- Improve double star display.
-- Improve magnitude filter for small FOV.
-- Show the object rise and set time relative to the local horizon if a horizon file is loaded. This can be disabled in Setup/Observatory. Calendar rise/set are always given to the astronomical horizon.
-- New icon for the buttons better suited for night vision filters, use larger image for big buttons.
-- Set observatory coordinates from telescope GPS, use "Telescope" observatory name.
-- Improve download progress display.
-- Many bug fix.
+ - New default interface with only two button bar.
+ - New icon for the buttons, better suited for night vision filters. Use larger image for big buttons and high resolution screen.
+ - Add direct connection to Alpaca telescope. It is now possible to use a telescope connected to a remote ASCOM Windows computer from Skychart running on Linux or macOS.
+ - Support for the new GAIA DR2 star catalog.
+ - Allow to use HNSKY star catalog using the "290" format.
+ - New mosaic tool to prepare mosaic for image capture application.
+ - Show the object rise and set time relative to the local horizon if a horizon file is loaded. This can be disabled in Setup/Observatory. Calendar rise/set are always given to the astronomical horizon.
+ - Set observatory coordinates from the telescope GPS, this set a "Telescope" observatory name and not override other settings.
+ - New button to Park/Unpark the ASCOM telescope.
+ - Allow per chart observatory horizon profile.
+ - Add update menu for Delta T and Jupiter GRS.
+ - Add orange night vision mode.
+ - Separate label setting for Asteroid and Comet.
+ - Option to show only the celestial equator line.
+ - Option to not filter the bright nebula by magnitude, only by size.
+ - Option to set the drawing line width. Beware this not work with dash line when printing on Windows because of API limitation. 
+ - Allow to lock at the position set from the menu View/Position.
+  
+Fix and improvement:
 
-Change the version number to 4.1.1 because of the way git count the number of revision.
-Last revision in subversion was 3731, this is equivalent to git commit b414c933 revision 3667.
-This revision number is now only used to make a sequential version number, use the commit hash show in the About box to get the corresponding source code version.
+ - Default comet element download is now from http://astro.vanbuitenen.nl
+ - INDI server and driver selection is now in the telescope connection box. Option to launch indistarter is removed.
+ - Improve double star display.
+ - Improve magnitude filter for small FOV.
+ - The resolution of the background image is now be limited to improve the performance if the screen is big or if there is not enough cpu core for processing.
+ - Improve download progress display.
+ - Show a warning in window title if running as administrator. Skychart never need to run as administrator but this can break the configuration.
+ - Many bug fix.
+  
+Incompatibility with previous version:
+
+ - Beware the update of asteroid and comet from the main menu now delete all the old elements data from the database!
+    If you need to keep this old elements or cumulate data from many source you must use the function from the menu Setup/Solar system.
+ - Remove obsolete/unmaintainable LX200 and Encoder direct drivers. Please use the corresponding ASCOM or INDI drivers.
+   - https://ascom-standards.org/Downloads/ScopeDrivers.htm
+   - https://www.indilib.org/devices/mounts.html
+ - Depreciate the use of Mysql database and suggest to move to Sqlite if currently in use. Mysql support will be removed in the next version.
+ - Client/server communication can now use J2000 coordinates instead of the current chart setting. You can change this option in Setup/General/Server.
+ - Saved circle file (.cdcc) include the coordinate equinox on the first row and more information for use with the mosaic tool.

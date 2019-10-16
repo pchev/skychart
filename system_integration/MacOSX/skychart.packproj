@@ -481,7 +481,7 @@
 						<key>IFPkgDescriptionTitle</key>
 						<string>Skychart</string>
 						<key>IFPkgDescriptionVersion</key>
-						<string>4.1</string>
+						<string>4.2</string>
 					</dict>
 				</dict>
 				<key>Display Information</key>
@@ -497,7 +497,7 @@
 					<key>CFBundleName</key>
 					<string>Cartes du Ciel</string>
 					<key>CFBundleShortVersionString</key>
-					<string>4.1</string>
+					<string>4.2</string>
 				</dict>
 				<key>Options</key>
 				<dict>
@@ -525,7 +525,7 @@
 					<key>IFMajorVersion</key>
 					<integer>4</integer>
 					<key>IFMinorVersion</key>
-					<integer>1</integer>
+					<integer>2</integer>
 				</dict>
 			</dict>
 		</dict>
