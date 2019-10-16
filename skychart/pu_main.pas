@@ -6514,10 +6514,7 @@ begin
   catalog.cfgcat.nebcatfield[sac - BaseNeb, 2] := 10;
   catalog.cfgcat.nebcatpath[ngc - BaseNeb] := 'cat' + PathDelim + 'openngc';
   catalog.cfgcat.nebcatfield[ngc - BaseNeb, 2] := 10;
-  if catalog.CheckPath(sac, catalog.cfgcat.nebcatpath[sac - BaseNeb]) then
-    catalog.cfgcat.nebcatdef[sac - BaseNeb] := True
-  else
-    catalog.cfgcat.nebcatdef[ngc - BaseNeb] := True;
+  catalog.cfgcat.nebcatdef[ngc - BaseNeb] := True;
   catalog.cfgcat.nebcatpath[lbn - BaseNeb] := 'cat' + PathDelim + 'lbn';
   catalog.cfgcat.nebcatfield[lbn - BaseNeb, 2] := 10;
   catalog.cfgcat.nebcatpath[sh2 - BaseNeb] := 'cat' + PathDelim + 'sh2';
