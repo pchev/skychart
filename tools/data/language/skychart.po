@@ -5930,3 +5930,7 @@ msgstr ""
 msgid "Slew complete"
 msgstr ""
 
+#: u_translation:rspleasewait
+msgid "Please wait..."
+msgstr ""
+

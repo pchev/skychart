@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-10-06 14:00+0000\n"
-"X-Generator: Launchpad (build af2eefe214bd95389a09b7c956720881bab16807)\n"
+"X-Launchpad-Export-Date: 2019-10-17 09:57+0000\n"
+"X-Generator: Launchpad (build 186023fa645d8be19d403a76064f0643f510db2f)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -3908,6 +3908,10 @@ msgstr "Prosím, zkuste vytvořit adresář ručně a restartujte program."
 #: u_translation.rspleasetrytor
 msgid "Please try to reinstall the program."
 msgstr "Prosím, přeinstalujte program."
+
+#: u_translation.rspleasewait
+msgid "Please wait..."
+msgstr ""
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."

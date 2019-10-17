@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2019-10-06 13:21+0000\n"
-"PO-Revision-Date: 2019-09-25 11:52+0000\n"
+"PO-Revision-Date: 2019-10-15 14:30+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-10-06 14:01+0000\n"
-"X-Generator: Launchpad (build af2eefe214bd95389a09b7c956720881bab16807)\n"
+"X-Launchpad-Export-Date: 2019-10-17 09:56+0000\n"
+"X-Generator: Launchpad (build 186023fa645d8be19d403a76064f0643f510db2f)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -50,7 +50,7 @@ msgstr ""
 
 #: u_translation.rsabortedbyuse
 msgid "Aborted by user"
-msgstr ""
+msgstr "Aborted by user"
 
 #: u_translation.rsabortslew
 msgid "Abort Slew"
@@ -174,7 +174,7 @@ msgstr ""
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
-msgstr ""
+msgstr "Add the alternative names to the index"
 
 #: u_translation.rsaddtoobservi
 msgid "Add %s to observing list"
@@ -318,7 +318,7 @@ msgstr ""
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
-msgstr ""
+msgstr "Append to an existing catalogue "
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -614,7 +614,7 @@ msgstr ""
 
 #: u_translation.rsbuildcatalog
 msgid "Build catalog"
-msgstr ""
+msgstr "Build catalogue"
 
 #: u_translation.rsbutneverfain
 msgid "But never fainter than magnitude"
@@ -718,7 +718,7 @@ msgstr "Catalogue short name"
 
 #: u_translation.rscatalogstrin
 msgid "Catalog string"
-msgstr ""
+msgstr "Catalogue string"
 
 #: u_translation.rscatalogtype
 msgid "Catalog type"
@@ -870,7 +870,7 @@ msgstr ""
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
-msgstr ""
+msgstr "Click to change the colour "
 
 #: u_translation.rsclientconnec
 msgid "Client connection keep alive"
@@ -902,7 +902,7 @@ msgstr "Closed contour"
 
 #: u_translation.rsclosefiles
 msgid "Close files"
-msgstr ""
+msgstr "Close files"
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
@@ -1114,11 +1114,11 @@ msgstr ""
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
-msgstr ""
+msgstr "Convert catalogue file %s"
 
 #: u_translation.rsconvertcatal2
 msgid "Convert catalog files"
-msgstr ""
+msgstr "Convert catalogue files"
 
 #: u_translation.rscooordinates
 msgid "Coordinate system to use with the clients"
@@ -1182,7 +1182,7 @@ msgstr "Create a new chart"
 
 #: u_translation.rscreateasearc
 msgid "Create a search index file"
-msgstr ""
+msgstr "Create a search index file"
 
 #: u_translation.rscreatedataba
 msgid "Create database"
@@ -1190,11 +1190,11 @@ msgstr ""
 
 #: u_translation.rscreatefiles
 msgid "Create files"
-msgstr ""
+msgstr "Create files"
 
 #: u_translation.rscreateheader
 msgid "Create header"
-msgstr ""
+msgstr "Create header"
 
 #: u_translation.rscreatepostsc
 msgid "Create postscript chart. Please wait..."
@@ -1306,7 +1306,7 @@ msgstr "Date / time"
 
 #: u_translation.rsdatetime2
 msgid "Date/time"
-msgstr ""
+msgstr "Date/time"
 
 #: u_translation.rsday
 msgid "Day"
@@ -1734,7 +1734,7 @@ msgstr "Drawing type"
 
 #: u_translation.rsdrawline
 msgid "Draw line"
-msgstr ""
+msgstr "Draw line"
 
 #: u_translation.rsdrawplanetas
 msgid "Draw planet as"
@@ -1862,7 +1862,7 @@ msgstr ""
 
 #: u_translation.rsendofobject
 msgid "End of object"
-msgstr ""
+msgstr "End of object"
 
 #: u_translation.rsendprocessin
 msgid "End of processing: %s asteroids"
@@ -2418,7 +2418,7 @@ msgstr ""
 
 #: u_translation.rshorizon
 msgid "Horizon"
-msgstr ""
+msgstr "Horizon"
 
 #: u_translation.rshorizontalov
 msgid "Horizontal overlap %"
@@ -2530,19 +2530,19 @@ msgstr "Indicate here how to compute the required values from the data stored in
 
 #: u_translation.rsindicatehowt
 msgid "Indicate how to recognize the object size unit:"
-msgstr ""
+msgstr "Indicate how to recognise the object size unit:"
 
 #: u_translation.rsindicatethes
 msgid "Indicate the string identifier for each type of object:"
-msgstr ""
+msgstr "Indicate the string identifier for each type of object:"
 
 #: u_translation.rsindicatethes2
 msgid "Indicate the string for each draw operation"
-msgstr ""
+msgstr "Indicate the string for each draw operation"
 
 #: u_translation.rsindicatethes3
 msgid "Indicate the string for each colour"
-msgstr ""
+msgstr "Indicate the string for each colour"
 
 #: u_translation.rsindidriver
 msgid "INDI driver"
@@ -2630,7 +2630,7 @@ msgstr "Invisible at this latitude"
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
-msgstr ""
+msgstr "Is the coordinates epoch really %s?"
 
 #: u_translation.rsisempty
 msgid "%s is empty!"
@@ -2834,7 +2834,7 @@ msgstr ""
 
 #: u_translation.rslineoperatio
 msgid "Line operation"
-msgstr ""
+msgstr "Line operation"
 
 #: u_translation.rslines
 msgid "Lines"
@@ -2898,7 +2898,7 @@ msgstr ""
 
 #: u_translation.rsloadproject
 msgid "Load project"
-msgstr ""
+msgstr "Load project"
 
 #: u_translation.rslocalhorizon
 msgid "Local horizon"
@@ -3366,7 +3366,7 @@ msgstr ""
 
 #: u_translation.rsnext
 msgid "Next   >>"
-msgstr ""
+msgstr "Next   >>"
 
 #: u_translation.rsnext2
 msgid "Next"
@@ -3542,7 +3542,7 @@ msgstr "Object name"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
-msgstr ""
+msgstr "Object size unit"
 
 #: u_translation.rsobjecttype
 msgid "Object type"
@@ -3718,7 +3718,7 @@ msgstr "Output catalogue options"
 
 #: u_translation.rsoutputdirect
 msgid "Output directory"
-msgstr ""
+msgstr "Output directory"
 
 #: u_translation.rspagemarginin
 msgid "Page margin in millimeters"
@@ -3874,15 +3874,15 @@ msgstr "Please enter an object identifier."
 
 #: u_translation.rspleaseindica
 msgid "Please indicate a catalog short name"
-msgstr ""
+msgstr "Please indicate a catalogue short name"
 
 #: u_translation.rspleaseindica2
 msgid "Please indicate a catalog long name"
-msgstr ""
+msgstr "Please indicate a catalogue long name"
 
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
-msgstr ""
+msgstr "Please indicate the directory where the catalogue must be built"
 
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
@@ -3906,6 +3906,10 @@ msgstr ""
 
 #: u_translation.rspleasetrytor
 msgid "Please try to reinstall the program."
+msgstr ""
+
+#: u_translation.rspleasewait
+msgid "Please wait..."
 msgstr ""
 
 #: u_translation.rsplottheposit
@@ -3978,7 +3982,7 @@ msgstr ""
 
 #: u_translation.rsprev
 msgid "<<   Prev"
-msgstr ""
+msgstr "<<   Prev"
 
 #: u_translation.rspreview
 msgid "Preview"
@@ -4306,7 +4310,7 @@ msgstr ""
 
 #: u_translation.rsrequiredfiel
 msgid "Required field missing!"
-msgstr ""
+msgstr "Required field missing!"
 
 #: u_translation.rsrequirexplan
 msgid "(requires Xplanet 1.2.0)"
@@ -4350,7 +4354,7 @@ msgstr "Resolution:"
 
 #: u_translation.rsreturn
 msgid "Return"
-msgstr ""
+msgstr "Return"
 
 #: u_translation.rsrevertaltkno
 msgid "Reverse Alt knob"
@@ -4486,7 +4490,7 @@ msgstr "Save image..."
 
 #: u_translation.rssaveproject
 msgid "Save project"
-msgstr ""
+msgstr "Save project"
 
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
@@ -4558,7 +4562,7 @@ msgstr "Search for"
 
 #: u_translation.rssearchindex
 msgid "Search index"
-msgstr ""
+msgstr "Search index"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
@@ -5046,7 +5050,7 @@ msgstr ""
 
 #: u_translation.rssomerecordsw
 msgid "Some records where rejected, see the file %sreject.txt for details."
-msgstr ""
+msgstr "Some records where rejected, see the file %sreject.txt for details."
 
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
@@ -5062,11 +5066,11 @@ msgstr "Sort by"
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
-msgstr ""
+msgstr "Sorting files by magnitude"
 
 #: u_translation.rssortingthein
 msgid "Sorting the index file "
-msgstr ""
+msgstr "Sorting the index file "
 
 #: u_translation.rssouth
 msgid "South"
@@ -5182,7 +5186,7 @@ msgstr ""
 
 #: u_translation.rsstartofobjec
 msgid "Start of object"
-msgstr ""
+msgstr "Start of object"
 
 #: u_translation.rsstatusbar
 msgid "Status bar"
@@ -5398,7 +5402,7 @@ msgstr ""
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
-msgstr ""
+msgstr "Time simulation"
 
 #: u_translation.rstimeunits
 msgid "Time units"
@@ -5862,7 +5866,7 @@ msgstr ""
 
 #: u_translation.rswarningyouha
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
-msgstr ""
+msgstr "WARNING !%sYou have chosen to append the data to an existing catalogue.%sThis existing catalogue and index must be exactly of the same format, otherwise the catalogue will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
 
 #: u_translation.rswednesday
 msgid "Wed."
