@@ -18,11 +18,12 @@ Type
                      s2a  : char;
                      arh : array[1..2] of char;
                      arm : array[1..2] of char;
-                     ars : array[1..4] of char;
+                     ars : array[1..5] of char;
+                     s2b  : char;
                      sde : char;
                      ded : array[1..2] of char;
                      dem : array[1..2] of char;
-                     des : array[1..2] of char;
+                     des : array[1..4] of char;
                      s3  : char;
                      s3a  : char;
                      vartype : array[1..10] of char;
