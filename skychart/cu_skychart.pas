@@ -2399,7 +2399,7 @@ begin
     for n := 1 to 11 do
     begin
       ipla := draworder[n];
-      if (j > 0) and (not cfgsc.SimObject[ipla]) then
+      if ((j>0) or ((cfgsc.SimNb>1) and cfgsc.SimMark)) and (not cfgsc.SimObject[ipla]) then
         continue;
       if ipla = 3 then
         continue;
@@ -2796,7 +2796,7 @@ begin
       Fplanet.ComputeAsteroid(cfgsc);
       for j := 0 to cfgsc.SimNb - 1 do
       begin
-        if (j > 0) and (not cfgsc.SimObject[12]) then
+        if ((j>0)or ((cfgsc.SimNb>1) and cfgsc.SimMark)) and (not cfgsc.SimObject[12]) then
           break;
         for i := 1 to cfgsc.AsteroidNb do
         begin
@@ -2809,7 +2809,9 @@ begin
           begin
             if magn > (cfgsc.StarMagMax + cfgsc.AstMagDiff) then
               continue;
-            Fplot.PlotAsteroid(xx, yy, cfgsc.AstSymbol, magn);
+            if (cfgsc.SimNb=1)or (not (cfgsc.SimLine and cfgsc.SimMark)) then begin
+              Fplot.PlotAsteroid(xx, yy, cfgsc.AstSymbol, magn);
+            end;
             if ((doSimLabel(cfgsc.SimNb, j, cfgsc.SimLabel)) and
               (magn < cfgsc.StarMagMax + cfgsc.AstMagDiff - cfgsc.LabelMagDiff[10])) then
             begin
@@ -2931,7 +2933,7 @@ begin
       Fplanet.ComputeComet(cfgsc);
       for j := 0 to cfgsc.SimNb - 1 do
       begin
-        if (j > 0) and (not cfgsc.SimObject[13]) then
+        if ((j>0) or ((cfgsc.SimNb>1) and cfgsc.SimMark)) and (not cfgsc.SimObject[13]) then
           break;
         for i := 1 to cfgsc.CometNb do
         begin
@@ -2994,8 +2996,10 @@ begin
               cxx := xx;
               cyy := yy;
             end;
-            Fplot.PlotComet(xx, yy, cxx, cyy, cfgsc.Comsymbol,
-              cfgsc.CometLst[j, i, 3], cfgsc.CometLst[j, i, 4], abs(cfgsc.BxGlb) * deg2rad / 60);
+            if (cfgsc.SimNb=1)or (not (cfgsc.SimLine and cfgsc.SimMark)) then begin
+              Fplot.PlotComet(xx, yy, cxx, cyy, cfgsc.Comsymbol,
+                 cfgsc.CometLst[j, i, 3], cfgsc.CometLst[j, i, 4], abs(cfgsc.BxGlb) * deg2rad / 60);
+            end;
           end;
         end;
       end;
