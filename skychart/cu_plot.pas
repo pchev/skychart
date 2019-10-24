@@ -1845,7 +1845,7 @@ begin
       col := ColorToBGRA(cfgplot.Color[11]);
 
     if cfgplot.TransparentPlanet then
-      col.alpha := 128
+      col := BGRAPixelTransparent
     else
       col.alpha := 255;
 
@@ -1858,7 +1858,7 @@ begin
       col := ColorToBGRA(clGray);
       cbmp.DrawPolyLineAntialias(p, col, 2);
 
-      if fillphase then
+      if fillphase and (not cfgplot.TransparentPlanet) then
         cbmp.FloodFill(fx, fy, col, fmSet);
     end;
 
