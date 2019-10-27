@@ -156,6 +156,8 @@ object pop_indi: Tpop_indi
         '^'
         'v'
       )
+      ParentShowHint = False
+      ShowHint = True
       TabOrder = 3
     end
     object AxisRates: TComboBox

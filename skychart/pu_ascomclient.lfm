@@ -1,12 +1,12 @@
 object pop_scope: Tpop_scope
   Left = 276
-  Height = 546
+  Height = 562
   Top = 124
   Width = 311
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   Caption = 'ASCOM Telescope Interface'
-  ClientHeight = 546
+  ClientHeight = 562
   ClientWidth = 311
   DesignTimePPI = 95
   OnCloseQuery = kill
@@ -390,6 +390,8 @@ object pop_scope: Tpop_scope
         '^'
         'v'
       )
+      ParentShowHint = False
+      ShowHint = True
       TabOrder = 6
     end
     object AxisRates: TSpinEdit
