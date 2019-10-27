@@ -1,3 +1,8 @@
 Version 4.3 beta, Notes de la version
 
-Identique à la version 4.2 pour le moment...
+Nouvelles fonctions:
+- Ajout d'une raquette virtuelle pour les télescopes ASCOM et INDI
+
+Correction d'un bug:
+- Les planètes en mode ligne doivent être vraiment transparentes
+- Corrige "Voir les marques" pour la simulation des comètes et astéroïdes

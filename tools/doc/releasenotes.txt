@@ -1,3 +1,10 @@
 Version 4.3 beta, release Notes
 
-Identical to version 4.2 for now ...
+New functions:
+- Add telescope handpad for ASCOM and INDI
+
+Bug fix:
+- Planet in line mode must be really transparent 
+- Fix "Show Mark" option for comet and asteroid simulation
+
+
