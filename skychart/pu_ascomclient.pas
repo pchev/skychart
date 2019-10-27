@@ -34,7 +34,7 @@ uses
   cu_ascomrest, math, LCLIntf, u_util, u_constant, u_help, u_translation,
   Messages, SysUtils, Classes, Graphics, Controls,
   Forms, Dialogs, UScaleDPI, LCLVersion,
-  StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls, SpinEx;
+  StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls, Arrow, Spin, SpinEx;
 
 type
 
@@ -45,6 +45,12 @@ type
     ARestPass: TEdit;
     ARestPort: TSpinEditEx;
     ARestUser: TEdit;
+    ArrowLeft: TArrow;
+    ArrowRight: TArrow;
+    ArrowDown: TArrow;
+    ArrowStop: TButton;
+    ArrowUp: TArrow;
+    AxisRates: TSpinEdit;
     ButtonConnect: TButton;
     ButtonGetLocation: TSpeedButton;
     ButtonPark: TSpeedButton;
@@ -59,11 +65,15 @@ type
     Label37: TLabel;
     Label38: TLabel;
     Label39: TLabel;
+    Label4: TLabel;
     PageControl1: TPageControl;
+    Handpad: TPanel;
     Panel3: TPanel;
     parkled: TShape;
     ASCOMLocal: TTabSheet;
     ASCOMRemote: TTabSheet;
+    FlipNS: TRadioGroup;
+    StopMoveTimer: TTimer;
     trackingled: TShape;
     ButtonTracking: TSpeedButton;
     ButtonHide: TButton;
@@ -100,6 +110,9 @@ type
     ARestProtocol: TComboBox;
     {Utility and form functions}
     procedure ARestProtocolChange(Sender: TObject);
+    procedure ArrowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ArrowMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ArrowStopClick(Sender: TObject);
     procedure ButtonGetLocationClick(Sender: TObject);
     procedure ButtonParkClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -107,6 +120,7 @@ type
     procedure kill(Sender: TObject; var CanClose: boolean);
     procedure ButtonAdvSettingClick(Sender: TObject);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
+    procedure StopMoveTimerTimer(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure ButtonConnectClick(Sender: TObject);
     procedure SaveConfig;
@@ -121,6 +135,7 @@ type
     procedure ButtonSetTimeClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ButtonTrackingClick(Sender: TObject);
+    procedure trackingledChangeBounds(Sender: TObject);
     procedure UpdTrackingButton;
     procedure UpdParkButton;
     procedure ButtonAboutClick(Sender: TObject);
@@ -149,6 +164,7 @@ type
     curdeg_x, curdeg_y: double;        // current equatorial position in degrees
     cur_az, cur_alt: double;           // current alt-az position in degrees
     FSlewing: boolean;
+    FLastArrow: integer;
     FObservatoryCoord: TNotifyEvent;
     procedure SetDef(Sender: TObject);
     function ScopeConnectedReal: boolean;
@@ -327,6 +343,8 @@ end;
 procedure Tpop_scope.ScopeConnect(var ok: boolean);
 var
   dis_ok,c_ok: boolean;
+  nrates0, nrates1: integer;
+  axis0rates, axis1rates: array of double;
 begin
   led.brush.color := clRed;
   led.refresh;
@@ -374,6 +392,7 @@ begin
         FCanSetTracking := T.CanSetTracking;
         FCanParkUnpark := T.CanPark and T.CanUnpark;
         hasSync := T.CanSync;
+        Handpad.Visible:=T.CanMoveAxis(0) and T.CanMoveAxis(1);
       end
       else
       {$endif}
@@ -381,12 +400,26 @@ begin
         FCanSetTracking := TR.Get('cansettracking').AsBool;
         FCanParkUnpark := TR.Get('canpark').AsBool and TR.Get('canunpark').AsBool;
         hasSync := TR.Get('cansync').AsBool;
+        Handpad.Visible:=TR.Get('canmoveaxis','Axis=0').AsBool and TR.Get('canmoveaxis','Axis=1').AsBool;
+      end;
+      if handpad.Visible then begin
+        GetScopeRates(nrates0, nrates1, @axis0rates, @axis1rates);
+        if (nrates0>0)and(nrates1>0) then begin
+           AxisRates.MinValue:=round(max(1,3600*max(axis0rates[0],axis1rates[0])/siderealrate));
+           AxisRates.MaxValue:=round(min(3600,3600*min(axis0rates[1],axis1rates[1]))/siderealrate);
+        end;
+        AxisRates.Value:=4;
+        FlipNS.ItemIndex:=0;
       end;
       except
         FCanSetTracking := false;
         FCanParkUnpark := false;
         hasSync := false;
+        Handpad.Visible:=false;
       end;
+      FlipNS.Visible:=Handpad.Visible;
+      Label4.Visible:=Handpad.Visible;
+      AxisRates.Visible:=Handpad.Visible;
       ScopeGetEqSysReal(FScopeEqSys);
       ShowCoordinates;
       FSlewing:=GetSlewing;
@@ -784,16 +817,16 @@ begin
       nrates0:=Length(x);
       SetLength(axis0rates^, 2*nrates0);
       for i:=0 to nrates0-1 do begin
-        axis0rates^[i]   := x[i].Minimum;
-        axis0rates^[i+1] := x[i].Maximum;
+        axis0rates^[2*i]   := x[i].Minimum;
+        axis0rates^[2*i+1] := x[i].Maximum;
         x[i].Free;
       end;
       x:=TR.GetAxisRates('1');
       nrates1:=Length(x);
       SetLength(axis1rates^, 2*nrates1);
       for i:=0 to nrates1-1 do begin
-        axis1rates^[i]   := x[i].Minimum;
-        axis1rates^[i+1] := x[i].Maximum;
+        axis1rates^[2*i]   := x[i].Minimum;
+        axis1rates^[2*i+1] := x[i].Maximum;
         x[i].Free;
       end;
     end;
@@ -821,7 +854,7 @@ begin
     begin
       if TR.Get('canmoveaxis','Axis='+IntToStr(axis)).AsBool then
       begin
-        TR.Put('moveaxis?Axis='+IntToStr(axis),['Rate',FormatFloat(f6,rate)]);
+        TR.Put('moveaxis',['Axis',IntToStr(axis),'Rate',FormatFloat(f6,rate)]);
       end;
     end;
     except
@@ -859,6 +892,8 @@ begin
   ButtonDisconnect.Caption := rsDisconnect;
   ButtonHide.Caption := rsHide;
   ButtonAdvSetting.Caption := rsAdvancedSett2;
+  Label4.Caption:=rsSideral+' x';
+  flipns.Hint:=rsFlipNSMoveme;
 
   SetHelp(self, hlpASCOM);
 end;
@@ -893,7 +928,7 @@ begin
   {$endif}
   ARestProtocol.ItemIndex := ini.ReadInteger('AscomRemote', 'protocol', 0);
   ARestHost.Text := ini.readstring('AscomRemote', 'host', '127.0.0.1');
-  ARestPort.Text := ini.readstring('AscomRemote', 'port', '11111');
+  ARestPort.Value := ini.ReadInteger('AscomRemote', 'port', 11111);
   ARestUser.Text := DecryptStr(hextostr(ini.readstring('AscomRemote', 'u', '')), encryptpwd);
   ARestPass.Text := DecryptStr(hextostr(ini.readstring('AscomRemote', 'p', '')), encryptpwd);
   ARestDevice.Value := ini.ReadInteger('AscomRemote', 'device', 0);
@@ -1012,6 +1047,7 @@ begin
   FSlewing := false;
   TR:=TAscomRest.Create(self);
   TR.ClientId:=3292;
+  FLastArrow:=0;
   {$ifndef mswindows}
   ASCOMLocal.TabVisible:=false;
   {$endif}
@@ -1069,12 +1105,13 @@ begin
   ini.writeinteger('AscomRemote', 'remote', PageControl1.ActivePageIndex);
   ini.writeinteger('AscomRemote', 'protocol', ARestProtocol.ItemIndex);
   ini.writestring('AscomRemote', 'host', ARestHost.Text);
-  ini.writestring('AscomRemote', 'port', ARestPort.Text);
+  ini.WriteInteger('AscomRemote', 'port', ARestPort.Value);
   ini.writeinteger('AscomRemote', 'device', ARestDevice.Value);
   ini.writestring('AscomRemote', 'u', strtohex(encryptStr(ARestUser.Text, encryptpwd)));
   ini.writestring('AscomRemote', 'p', strtohex(encryptStr(ARestPass.Text, encryptpwd)));
   ini.writestring('observatory', 'latitude', lat.Text);
   ini.writestring('observatory', 'longitude', long.Text);
+  ini.UpdateFile;
   ini.Free;
 end;
 
@@ -1199,6 +1236,55 @@ begin
   end;
 end;
 
+procedure Tpop_scope.ArrowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var rate,flip: double;
+begin
+  rate:=siderealrate*AxisRates.Value/3600;  // deg/sec
+  if FlipNS.ItemIndex=0 then
+    flip:=1
+  else
+    flip:=-1;
+  if sender is TArrow then begin
+    with Sender as TArrow do begin
+      ArrowColor:=clRed;
+      FSlewing:=true;
+      FLastArrow:=tag;
+      case Tag of
+         1: ScopeMoveAxis(0,-flip*rate);//Left
+         2: ScopeMoveAxis(0,flip*rate); //Right
+         3: ScopeMoveAxis(1,flip*rate); //Up
+         4: ScopeMoveAxis(1,-flip*rate);//Down
+      end;
+    end;
+  end;
+end;
+
+procedure Tpop_scope.ArrowMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  // let enough time if moveaxis is still not started
+  if Remote then StopMoveTimer.Interval:=1000
+            else StopMoveTimer.Interval:=100;
+  StopMoveTimer.Enabled:=true;
+end;
+
+procedure Tpop_scope.StopMoveTimerTimer(Sender: TObject);
+begin
+  StopMoveTimer.Enabled:=false;
+  ScopeAbortSlew;
+  case FLastArrow of
+    1: ArrowLeft.ArrowColor:=clBtnText;
+    2: ArrowRight.ArrowColor:=clBtnText;
+    3: ArrowUp.ArrowColor:=clBtnText;
+    4: ArrowDown.ArrowColor:=clBtnText;
+  end;
+  FLastArrow:=0;
+end;
+
+procedure Tpop_scope.ArrowStopClick(Sender: TObject);
+begin
+ ScopeAbortSlew;
+end;
+
 procedure Tpop_scope.ButtonSetLocationClick(Sender: TObject);
 begin
   if ScopeConnected then
@@ -1319,6 +1405,12 @@ begin
         Trackingled.brush.color := clLime
       else
         Trackingled.brush.color := clRed;
+      if not FSlewing then begin
+        ArrowLeft.ArrowColor:=clBtnText;
+        ArrowRight.ArrowColor:=clBtnText;
+        ArrowUp.ArrowColor:=clBtnText;
+        ArrowDown.ArrowColor:=clBtnText;
+      end;
     end
     else
       Trackingled.brush.color := clRed;
@@ -1389,6 +1481,11 @@ begin
         MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
+end;
+
+procedure Tpop_scope.trackingledChangeBounds(Sender: TObject);
+begin
+
 end;
 
 procedure Tpop_scope.ButtonAboutClick(Sender: TObject);

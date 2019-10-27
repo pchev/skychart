@@ -31,22 +31,30 @@ uses
   u_help, u_translation, indibaseclient, indibasedevice, indiapi, indicom, pu_indigui,
   LCLIntf, u_util, u_constant, Messages, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, StdCtrls, Buttons, inifiles, process, ComCtrls, Menus,
-  ExtCtrls;
+  ExtCtrls, Spin, Arrow;
 
 type
 
   { Tpop_indi }
 
   Tpop_indi = class(TForm)
+    ArrowDown: TArrow;
+    ArrowLeft: TArrow;
+    ArrowRight: TArrow;
+    ArrowStop: TButton;
+    ArrowUp: TArrow;
     AutoloadConfig: TCheckBox;
     BtnIndiGui: TButton;
     BtnGet: TButton;
     ButtonGetLocation: TSpeedButton;
     ButtonSetLocation: TSpeedButton;
+    AxisRates: TComboBox;
     Connect: TButton;
     Disconnect: TButton;
     Elev: TEdit;
+    FlipNS: TRadioGroup;
     GroupBox5: TGroupBox;
+    Handpad: TPanel;
     IndiServerHost: TEdit;
     IndiServerPort: TEdit;
     IndiTimer: TTimer;
@@ -75,7 +83,11 @@ type
     SpeedButton6: TButton;
     InitTimer: TTimer;
     ConnectTimer: TTimer;
+    StopMoveTimer: TTimer;
     {Utility and form functions}
+    procedure ArrowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ArrowMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ArrowStopClick(Sender: TObject);
     procedure AutoloadConfigClick(Sender: TObject);
     procedure BtnGetClick(Sender: TObject);
     procedure BtnIndiGuiClick(Sender: TObject);
@@ -97,6 +109,7 @@ type
     procedure SpeedButton4Click(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure StopMoveTimerTimer(Sender: TObject);
   private
     { Private declarations }
     client: TIndiBaseClient;
@@ -124,6 +137,9 @@ type
     moveW_prop: ISwitch;
     configprop: ISwitchVectorProperty;
     configload,configsave: ISwitch;
+    TrackState: ISwitchVectorProperty;
+    TrackOn: ISwitch;
+    TrackOff: ISwitch;
     eod_coord: boolean;
     ready, connected: boolean;
     SlewRateList: TStringList;
@@ -134,6 +150,7 @@ type
     mountsavedev: string;
     receiveindidevice: boolean;
     indiclient: TIndiBaseClient;
+    FLastArrow: integer;
     procedure IndiNewDevice(dp: Basedevice);
     procedure IndiDisconnected(Sender: TObject);
     procedure ClearStatus;
@@ -152,6 +169,7 @@ type
     procedure ServerDisconnected(Sender: TObject);
     procedure IndiGUIdestroy(Sender: TObject);
     function GetSlewing:boolean;
+    procedure InitHandpad;
   public
     { Public declarations }
     csc: Tconf_skychart;
@@ -203,6 +221,7 @@ begin
   SlewRate_prop := nil;
   moveNS_prop := nil;
   moveEW_prop := nil;
+  TrackState := nil;
   oncoordset_prop := nil;
   configprop := nil;
   GeographicCoord_prop := nil;
@@ -213,6 +232,8 @@ begin
   eod_coord := True;
   led.brush.color := clRed;
   SlewRateList.Clear;
+  FLastArrow:=0;
+  InitHandpad;
 end;
 
 procedure Tpop_indi.CheckStatus;
@@ -351,18 +372,27 @@ begin
     begin
       SlewRateList.Add(SlewRate_prop.sp[i].lbl);
     end;
+    if (moveNS_prop<>nil) and (moveEW_prop<>nil) and (SlewRate_prop<>nil) then InitHandpad;
   end
   else if (proptype = INDI_SWITCH) and (moveNS_prop = nil) and (propname = 'TELESCOPE_MOTION_NS') then
   begin
     moveNS_prop := indiProp.getSwitch;
     moveN_prop := IUFindSwitch(moveNS_prop, 'MOTION_NORTH');
     moveS_prop := IUFindSwitch(moveNS_prop, 'MOTION_SOUTH');
+    if (moveNS_prop<>nil) and (moveEW_prop<>nil) and (SlewRate_prop<>nil) then InitHandpad;
   end
   else if (proptype = INDI_SWITCH) and (moveEW_prop = nil) and (propname = 'TELESCOPE_MOTION_WE') then
   begin
     moveEW_prop := indiProp.getSwitch;
     moveE_prop := IUFindSwitch(moveEW_prop, 'MOTION_EAST');
     moveW_prop := IUFindSwitch(moveEW_prop, 'MOTION_WEST');
+    if (moveNS_prop<>nil) and (moveEW_prop<>nil) and (SlewRate_prop<>nil) then InitHandpad;
+  end
+  else if (proptype=INDI_SWITCH)and(TrackState=nil)and(propname='TELESCOPE_TRACK_STATE') then begin
+     TrackState:=indiProp.getSwitch;
+     TrackOn:=IUFindSwitch(TrackState,'TRACK_ON');
+     TrackOff:=IUFindSwitch(TrackState,'TRACK_OFF');
+     if (TrackOn=nil)or(TrackOff=nil) then TrackState:=nil;
   end
   else if (proptype=INDI_SWITCH)and(configprop=nil)and(propname='CONFIG_PROCESS') then begin
      configprop:=indiProp.getSwitch;
@@ -622,6 +652,12 @@ begin
     abort_prop.s := ISS_ON;
     client.sendNewSwitch(abortmotion_prop);
   end;
+  // do not stop tracking, only slewing
+  if (TrackState<>nil)then begin
+    IUResetSwitch(TrackState);
+    TrackOn.s:=ISS_ON;
+    client.sendNewSwitch(TrackState);
+  end;
 end;
 
 procedure Tpop_indi.GetScopeRates(var nrates: integer; var srate: TStringList);
@@ -773,6 +809,7 @@ begin
   label1.Caption:=rsAltitude;
   LabelAlpha.Caption:=rsRA;
   LabelDelta.Caption:=rsDEC;
+  flipns.Hint:=rsFlipNSMoveme;
   SetHelp(self, hlpINDI);
 end;
 
@@ -863,6 +900,51 @@ begin
   csc.IndiLoadConfig := AutoloadConfig.Checked;
 end;
 
+procedure Tpop_indi.ArrowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var rate: string;
+    flip: boolean;
+begin
+  rate:=AxisRates.Text;
+  if sender is TArrow then begin
+    with Sender as TArrow do begin
+      ArrowColor:=clRed;
+      FLastArrow:=tag;
+      flip:=(FlipNS.ItemIndex>0);
+      case Tag of
+         1: ScopeMoveAxis(0,BoolToStr(not flip,'-','')+rate); //Left
+         2: ScopeMoveAxis(0,BoolToStr(flip,'-','')+rate); //Right
+         3: ScopeMoveAxis(1,BoolToStr(flip,'-','')+rate); //Up
+         4: ScopeMoveAxis(1,BoolToStr(not flip,'-','')+rate); //Down
+      end;
+    end;
+  end;
+end;
+
+procedure Tpop_indi.ArrowMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  // let enough time if moveaxis is still not started
+  StopMoveTimer.Interval:=100;
+  StopMoveTimer.Enabled:=true;
+end;
+
+procedure Tpop_indi.StopMoveTimerTimer(Sender: TObject);
+begin
+  StopMoveTimer.Enabled:=false;
+  ScopeAbortSlew;
+  case FLastArrow of
+    1: ArrowLeft.ArrowColor:=clBtnText;
+    2: ArrowRight.ArrowColor:=clBtnText;
+    3: ArrowUp.ArrowColor:=clBtnText;
+    4: ArrowDown.ArrowColor:=clBtnText;
+  end;
+  FLastArrow:=0;
+end;
+
+procedure Tpop_indi.ArrowStopClick(Sender: TObject);
+begin
+  ScopeAbortSlew;
+end;
+
 procedure Tpop_indi.IndiNewDevice(dp: Basedevice);
 begin
   IndiTimer.Interval:=1000; // wait for next device
@@ -930,6 +1012,22 @@ end;
 procedure Tpop_indi.IndiGUIdestroy(Sender: TObject);
 begin
   IndiGUIready := False;
+end;
+
+procedure Tpop_indi.InitHandpad;
+begin
+  if (moveNS_prop=nil)or(moveEW_prop=nil) then begin
+    Handpad.Visible:=false;
+    FlipNS.Visible:=false;
+    AxisRates.Visible:=false;
+  end
+  else begin
+    Handpad.Visible:=true;
+    FlipNS.Visible:=true;
+    AxisRates.Visible:=true;
+    AxisRates.Items.Assign(SlewRateList);
+    if  AxisRates.Items.Count>0 then AxisRates.ItemIndex:=0;
+  end;
 end;
 
 procedure Tpop_indi.InitTimerTimer(Sender: TObject);

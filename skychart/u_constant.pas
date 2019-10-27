@@ -103,6 +103,7 @@ const
   coseps2k = 0.917482131494378454;
   deg2rad = pi / 180;
   rad2deg = 180 / pi;
+  siderealrate = 15.041067178669; // arcsec/second
   au2parsec = deg2rad / 3600;
   parsec2ly = 3.2615638;
   pi2 = 2 * pi;

@@ -1540,6 +1540,7 @@ resourcestring
   rsSendViaServe = 'Send via server';
   rsSlewComplete = 'Slew complete';
   rsPleaseWait = 'Please wait...';
+  rsFlipNSMoveme = 'Flip N/S movement';
 
 // also update upsi_translation
 

@@ -1,25 +1,26 @@
 object pop_indi: Tpop_indi
   Left = 456
-  Height = 490
+  Height = 535
   Top = 130
   Width = 318
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   Caption = 'INDI Telescope Interface'
-  ClientHeight = 490
+  ClientHeight = 535
   ClientWidth = 318
   DesignTimePPI = 95
   OnCloseQuery = kill
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   Position = poDefaultPosOnly
+  LCLVersion = '2.0.4.0'
   object Panel1: TPanel
     Left = 0
-    Height = 36
+    Height = 88
     Top = 290
     Width = 318
     Align = alTop
-    ClientHeight = 36
+    ClientHeight = 88
     ClientWidth = 318
     ParentFont = False
     TabOrder = 1
@@ -33,16 +34,16 @@ object pop_indi: Tpop_indi
       ParentFont = False
     end
     object LabelDelta: TLabel
-      Left = 176
+      Left = 8
       Height = 19
-      Top = 8
+      Top = 44
       Width = 25
       Caption = 'DEC'
       ParentColor = False
       ParentFont = False
     end
     object pos_x: TEdit
-      Left = 40
+      Left = 45
       Height = 28
       Top = 4
       Width = 112
@@ -53,15 +54,119 @@ object pop_indi: Tpop_indi
       TabOrder = 0
     end
     object pos_y: TEdit
-      Left = 213
+      Left = 45
       Height = 28
-      Top = 4
-      Width = 95
+      Top = 40
+      Width = 112
       Constraints.MaxHeight = 28
       ParentFont = False
       ReadOnly = True
       TabStop = False
       TabOrder = 1
+    end
+    object Handpad: TPanel
+      Left = 240
+      Height = 60
+      Top = 28
+      Width = 60
+      BevelOuter = bvNone
+      ClientHeight = 60
+      ClientWidth = 60
+      TabOrder = 2
+      object ArrowLeft: TArrow
+        Tag = 1
+        Left = 0
+        Height = 20
+        Top = 20
+        Width = 20
+        ArrowColor = clBtnText
+        Constraints.MinHeight = 8
+        Constraints.MinWidth = 8
+        OnMouseDown = ArrowMouseDown
+        OnMouseUp = ArrowMouseUp
+        ShadowType = stNone
+      end
+      object ArrowRight: TArrow
+        Tag = 2
+        Left = 40
+        Height = 20
+        Top = 20
+        Width = 20
+        ArrowColor = clBtnText
+        ArrowType = atRight
+        Constraints.MinHeight = 8
+        Constraints.MinWidth = 8
+        OnMouseDown = ArrowMouseDown
+        OnMouseUp = ArrowMouseUp
+        ShadowType = stNone
+      end
+      object ArrowUp: TArrow
+        Tag = 3
+        Left = 20
+        Height = 20
+        Top = 0
+        Width = 20
+        ArrowType = atUp
+        Constraints.MinHeight = 8
+        Constraints.MinWidth = 8
+        OnMouseDown = ArrowMouseDown
+        OnMouseUp = ArrowMouseUp
+        ShadowType = stNone
+      end
+      object ArrowDown: TArrow
+        Tag = 4
+        Left = 20
+        Height = 20
+        Top = 40
+        Width = 20
+        ArrowColor = clBtnText
+        ArrowType = atDown
+        Constraints.MinHeight = 8
+        Constraints.MinWidth = 8
+        OnMouseDown = ArrowMouseDown
+        OnMouseUp = ArrowMouseUp
+        ShadowType = stNone
+      end
+      object ArrowStop: TButton
+        Left = 22
+        Height = 16
+        Top = 22
+        Width = 16
+        OnClick = ArrowStopClick
+        TabOrder = 0
+      end
+    end
+    object FlipNS: TRadioGroup
+      Left = 184
+      Height = 60
+      Top = 28
+      Width = 50
+      AutoFill = True
+      ChildSizing.LeftRightSpacing = 6
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 40
+      ClientWidth = 48
+      ItemIndex = 0
+      Items.Strings = (
+        '^'
+        'v'
+      )
+      TabOrder = 3
+    end
+    object AxisRates: TComboBox
+      Left = 181
+      Height = 28
+      Top = 0
+      Width = 131
+      Constraints.MaxHeight = 28
+      ItemHeight = 0
+      Style = csDropDownList
+      TabOrder = 4
     end
   end
   object GroupBox5: TGroupBox
@@ -262,8 +367,8 @@ object pop_indi: Tpop_indi
   end
   object Memomsg: TMemo
     Left = 0
-    Height = 92
-    Top = 326
+    Height = 85
+    Top = 378
     Width = 318
     Align = alClient
     ParentFont = False
@@ -274,7 +379,7 @@ object pop_indi: Tpop_indi
   object Panel2: TPanel
     Left = 0
     Height = 72
-    Top = 418
+    Top = 463
     Width = 318
     Align = alBottom
     ClientHeight = 72
@@ -382,5 +487,12 @@ object pop_indi: Tpop_indi
     OnTimer = IndiTimerTimer
     left = 222
     top = 356
+  end
+  object StopMoveTimer: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = StopMoveTimerTimer
+    left = 40
+    top = 416
   end
 end

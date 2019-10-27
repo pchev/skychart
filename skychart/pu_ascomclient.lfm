@@ -1,13 +1,13 @@
 object pop_scope: Tpop_scope
   Left = 276
-  Height = 533
+  Height = 546
   Top = 124
-  Width = 305
+  Width = 311
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   Caption = 'ASCOM Telescope Interface'
-  ClientHeight = 533
-  ClientWidth = 305
+  ClientHeight = 546
+  ClientWidth = 311
   DesignTimePPI = 95
   OnCloseQuery = kill
   OnCreate = FormCreate
@@ -15,22 +15,20 @@ object pop_scope: Tpop_scope
   OnShow = FormShow
   ParentFont = True
   Position = poDefaultPosOnly
-  LCLVersion = '2.0.4.0'
   object GroupBox3: TGroupBox
     Left = 0
     Height = 88
-    Top = 461
-    Width = 305
+    Top = 472
+    Width = 311
     Align = alTop
-    ClientHeight = 68
-    ClientWidth = 303
+    ClientHeight = 86
+    ClientWidth = 309
     TabOrder = 2
     object ButtonHide: TButton
       Left = 211
       Height = 25
       Top = 6
       Width = 65
-      Cancel = True
       Caption = 'Hide'
       OnClick = ButtonHideClick
       TabOrder = 1
@@ -66,7 +64,6 @@ object pop_scope: Tpop_scope
       Top = 6
       Width = 74
       Caption = 'Connect'
-      Default = True
       OnClick = ButtonConnectClick
       TabOrder = 0
     end
@@ -75,11 +72,11 @@ object pop_scope: Tpop_scope
     Left = 0
     Height = 141
     Top = 176
-    Width = 305
+    Width = 311
     Align = alTop
     Caption = 'Observatory '
-    ClientHeight = 121
-    ClientWidth = 303
+    ClientHeight = 122
+    ClientWidth = 309
     TabOrder = 0
     object Label15: TLabel
       Left = 16
@@ -169,12 +166,12 @@ object pop_scope: Tpop_scope
   end
   object Panel1: TPanel
     Left = 0
-    Height = 144
+    Height = 155
     Top = 317
-    Width = 305
+    Width = 311
     Align = alTop
-    ClientHeight = 144
-    ClientWidth = 305
+    ClientHeight = 155
+    ClientWidth = 311
     TabOrder = 1
     object LabelAlpha: TLabel
       Left = 32
@@ -209,10 +206,10 @@ object pop_scope: Tpop_scope
       ParentColor = False
     end
     object ButtonAbort: TSpeedButton
-      Left = 55
+      Left = 8
       Height = 25
       Top = 64
-      Width = 235
+      Width = 152
       Caption = 'Abort Slew'
       Font.Color = clRed
       Font.Height = -11
@@ -269,7 +266,7 @@ object pop_scope: Tpop_scope
       TabOrder = 2
     end
     object ButtonTracking: TSpeedButton
-      Left = 147
+      Left = 100
       Height = 25
       Top = 96
       Width = 84
@@ -278,14 +275,15 @@ object pop_scope: Tpop_scope
       OnClick = ButtonTrackingClick
     end
     object trackingled: TShape
-      Left = 149
+      Left = 102
       Height = 16
-      Top = 121
+      Top = 125
       Width = 80
       Brush.Color = clRed
+      OnChangeBounds = trackingledChangeBounds
     end
     object ButtonPark: TSpeedButton
-      Left = 55
+      Left = 8
       Height = 25
       Top = 96
       Width = 84
@@ -294,18 +292,129 @@ object pop_scope: Tpop_scope
       OnClick = ButtonParkClick
     end
     object parkled: TShape
-      Left = 57
+      Left = 10
       Height = 16
-      Top = 121
+      Top = 125
       Width = 80
       Brush.Color = clRed
+    end
+    object Handpad: TPanel
+      Left = 240
+      Height = 60
+      Top = 92
+      Width = 60
+      BevelOuter = bvNone
+      ClientHeight = 60
+      ClientWidth = 60
+      TabOrder = 5
+      object ArrowLeft: TArrow
+        Tag = 1
+        Left = 0
+        Height = 20
+        Top = 20
+        Width = 20
+        ArrowColor = clBtnText
+        Constraints.MinHeight = 8
+        Constraints.MinWidth = 8
+        OnMouseDown = ArrowMouseDown
+        OnMouseUp = ArrowMouseUp
+        ShadowType = stNone
+      end
+      object ArrowRight: TArrow
+        Tag = 2
+        Left = 40
+        Height = 20
+        Top = 20
+        Width = 20
+        ArrowColor = clBtnText
+        ArrowType = atRight
+        Constraints.MinHeight = 8
+        Constraints.MinWidth = 8
+        OnMouseDown = ArrowMouseDown
+        OnMouseUp = ArrowMouseUp
+        ShadowType = stNone
+      end
+      object ArrowUp: TArrow
+        Tag = 3
+        Left = 20
+        Height = 20
+        Top = 0
+        Width = 20
+        ArrowType = atUp
+        Constraints.MinHeight = 8
+        Constraints.MinWidth = 8
+        OnMouseDown = ArrowMouseDown
+        OnMouseUp = ArrowMouseUp
+        ShadowType = stNone
+      end
+      object ArrowDown: TArrow
+        Tag = 4
+        Left = 20
+        Height = 20
+        Top = 40
+        Width = 20
+        ArrowColor = clBtnText
+        ArrowType = atDown
+        Constraints.MinHeight = 8
+        Constraints.MinWidth = 8
+        OnMouseDown = ArrowMouseDown
+        OnMouseUp = ArrowMouseUp
+        ShadowType = stNone
+      end
+      object ArrowStop: TButton
+        Left = 22
+        Height = 16
+        Top = 22
+        Width = 16
+        OnClick = ArrowStopClick
+        TabOrder = 0
+      end
+    end
+    object FlipNS: TRadioGroup
+      Left = 184
+      Height = 60
+      Top = 92
+      Width = 50
+      AutoFill = True
+      ChildSizing.LeftRightSpacing = 6
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 58
+      ClientWidth = 48
+      ItemIndex = 0
+      Items.Strings = (
+        '^'
+        'v'
+      )
+      TabOrder = 6
+    end
+    object AxisRates: TSpinEdit
+      Left = 240
+      Height = 28
+      Top = 61
+      Width = 62
+      MinValue = 1
+      TabOrder = 7
+      Value = 1
+    end
+    object Label4: TLabel
+      Left = 165
+      Height = 18
+      Top = 66
+      Width = 57
+      Caption = 'Sidereal x'
+      ParentColor = False
     end
   end
   object PageControl1: TPageControl
     Left = 0
     Height = 176
     Top = 0
-    Width = 305
+    Width = 311
     ActivePage = ASCOMRemote
     Align = alTop
     TabIndex = 1
@@ -313,17 +422,17 @@ object pop_scope: Tpop_scope
     OnChanging = PageControl1Changing
     object ASCOMLocal: TTabSheet
       Caption = 'ASCOM Local'
-      ClientHeight = 142
-      ClientWidth = 295
+      ClientHeight = 146
+      ClientWidth = 301
       object GroupBox1: TGroupBox
         Left = 0
         Height = 146
         Top = 0
-        Width = 295
+        Width = 301
         Align = alClient
         Caption = 'Driver Selection'
         ClientHeight = 126
-        ClientWidth = 293
+        ClientWidth = 299
         TabOrder = 0
         object ButtonSelect: TSpeedButton
           Left = 182
@@ -399,17 +508,17 @@ object pop_scope: Tpop_scope
     end
     object ASCOMRemote: TTabSheet
       Caption = 'ASCOM Alpaca'
-      ClientHeight = 142
-      ClientWidth = 295
+      ClientHeight = 146
+      ClientWidth = 301
       object Panel3: TPanel
         Left = 0
         Height = 146
         Top = 0
-        Width = 295
+        Width = 301
         Align = alClient
         BevelOuter = bvNone
         ClientHeight = 146
-        ClientWidth = 295
+        ClientWidth = 301
         TabOrder = 0
         object ARestProtocol: TComboBox
           Left = 13
@@ -542,6 +651,13 @@ object pop_scope: Tpop_scope
     Enabled = False
     OnTimer = Timer1Timer
     left = 16
-    top = 488
+    top = 496
+  end
+  object StopMoveTimer: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = StopMoveTimerTimer
+    left = 144
+    top = 496
   end
 end
