@@ -1250,8 +1250,8 @@ begin
       FSlewing:=true;
       FLastArrow:=tag;
       case Tag of
-         1: ScopeMoveAxis(0,-flip*rate);//Left
-         2: ScopeMoveAxis(0,flip*rate); //Right
+         1: ScopeMoveAxis(0,-rate);//Left
+         2: ScopeMoveAxis(0,rate); //Right
          3: ScopeMoveAxis(1,flip*rate); //Up
          4: ScopeMoveAxis(1,-flip*rate);//Down
       end;

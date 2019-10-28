@@ -911,8 +911,8 @@ begin
       FLastArrow:=tag;
       flip:=(FlipNS.ItemIndex>0);
       case Tag of
-         1: ScopeMoveAxis(0,BoolToStr(not flip,'-','')+rate); //Left
-         2: ScopeMoveAxis(0,BoolToStr(flip,'-','')+rate); //Right
+         1: ScopeMoveAxis(0,'-'+rate); //Left
+         2: ScopeMoveAxis(0,rate); //Right
          3: ScopeMoveAxis(1,BoolToStr(flip,'-','')+rate); //Up
          4: ScopeMoveAxis(1,BoolToStr(not flip,'-','')+rate); //Down
       end;
