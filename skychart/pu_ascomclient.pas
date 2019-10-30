@@ -321,7 +321,8 @@ begin
     else
     {$endif}
     begin
-      // the server is responsible for device disconnection
+      // Send a disconnect, the server manage if it really disconnect the device or not
+      TR.Put('Connected',false);
     end;
     ok := True;
     led.brush.color := clRed;
