@@ -155,7 +155,7 @@ begin
         Synchronize(ShowError);
       MaxLineLength := 1024;
       //writetrace('setlinger');
-      setLinger(True, 1000);
+      setLinger(True, 0);
       if lasterror <> 0 then
         Synchronize(ShowError);
       //writetrace('bind to '+fipaddr+' '+fipport);
@@ -237,7 +237,7 @@ begin
     end;
   finally
     //  Suspended:=true;
-    Sock.CloseSocket;
+    Sock.AbortSocket;
     Sock.Free;
     //  terminate;
   end;
