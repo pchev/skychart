@@ -359,7 +359,7 @@ type
     procedure IdentSearchResult(num, stype: string; itype: integer;
       ar1, de1: double; sr: string = ''; sn: string = ''; sd: string = '');
     procedure Identdetail(X, Y: integer);
-    function ListXY(X, Y: integer; r: integer = 12): boolean;
+    function ListXY(X, Y: integer; r: integer = 12; allobj:boolean=true): boolean;
     procedure rotation(rot: double);
     procedure GetSunImage;
     procedure CKeyDown(Key: word; Shift: TShiftState);
@@ -3034,7 +3034,7 @@ begin
     Fshowinfo(sc.cfgsc.FindDesc, Caption, True, self, sc.cfgsc.FindDesc2, sc.cfgsc.FindDesc2000);
 end;
 
-function Tf_chart.ListXY(X, Y: integer; r: integer = 12): boolean;
+function Tf_chart.ListXY(X, Y: integer; r: integer = 12; allobj:boolean=true): boolean;
 var
   ra, Dec, a, h, l, b, le, be, dx: double;
   buf, msg: string;
@@ -3045,8 +3045,8 @@ begin
   sc.GetCoord(x, y, ra, Dec, a, h, l, b, le, be);
   ra := rmod(ra + pi2, pi2);
   dx := abs(r / sc.cfgsc.BxGlb); // search a 12 pixel radius by default
-  sc.Findlist(ra, Dec, dx, dx, buf, msg, False, True, True);
-  msg := msg + blank + rsSearch + ':' + IntToStr(r) + blank + rsPixels;
+  sc.Findlist(ra, Dec, dx, dx, buf, msg, False, allobj, True);
+  msg := msg + blank + rsSearchRadius + ': ' + DEToStrShort(rad2deg*dx, 0);
   if assigned(FListInfo) then
     FListInfo(buf, msg);
 end;

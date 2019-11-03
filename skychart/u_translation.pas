@@ -1541,6 +1541,7 @@ resourcestring
   rsSlewComplete = 'Slew complete';
   rsPleaseWait = 'Please wait...';
   rsFlipNSMoveme = 'Flip N/S movement';
+  rsSearchRadius = 'Search radius';
 
 // also update upsi_translation
 

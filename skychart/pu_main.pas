@@ -10926,7 +10926,7 @@ begin
         begin
           projection(sc.cfgsc.FindRa, sc.cfgsc.FindDec, x1, y1, True, sc.cfgsc);
           WindowXY(x1, y1, x, y, sc.cfgsc);
-          ListXY(round(x), round(y), 50);
+          ListXY(round(x), round(y), 50, false);
           break;
         end;
 end;
