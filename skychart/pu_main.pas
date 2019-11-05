@@ -2643,6 +2643,13 @@ begin
     if VerboseMsg then
       WriteTrace(step);
     compass := TBGRABitmap.Create;
+    i:=compass.Bitmap.RawImage.Description.Depth;
+    if i<24 then begin
+      buf:='Screen color depth of '+inttostr(i)+' is not supported.'+crlf+'Please change the screen color depth to 24 or 32';
+      WriteTrace(buf);
+      MessageDlg(buf,mtError, [mbAbort], 0);
+      Halt;
+    end;
     arrow := TBGRABitmap.Create;
     step := 'Load timezone';
     // check computer clock
