@@ -149,7 +149,7 @@ type
     tour: Tf_tour;
     procedure SetLang;
     procedure Newlist;
-    procedure Add(obj: string; ra, de: double);
+    procedure Add(obj: string; ra, de: double; upd:boolean=true);
     procedure LoadObsList;
     procedure SaveObsList;
     procedure SelectRow(r: integer);
@@ -160,7 +160,7 @@ type
     procedure ComputeLimits;
     procedure ComputeAirmassTime;
     procedure ComputeTransitTime;
-    procedure UpdateLabels(Sender: TObject);
+    procedure UpdateLabels(Sender: TObject;upd:boolean=true);
     function UpdateCoord(arow: integer): boolean;
     procedure SetVisibleRows;
     procedure Refresh;
@@ -245,7 +245,7 @@ begin
   UpdateLabels(nil);
 end;
 
-procedure Tf_obslist.Add(obj: string; ra, de: double);
+procedure Tf_obslist.Add(obj: string; ra, de: double; upd:boolean=true);
 var
   buf: string;
 begin
@@ -260,8 +260,10 @@ begin
     buf := FormatFloat(f5, de);
     StringGrid1.Cells[3, StringGrid1.RowCount - 1] := buf;
     StringGrid1.Cells[6, StringGrid1.RowCount - 1] := '';
-    UpdateLabels(nil);
-    Refresh;
+    UpdateLabels(nil,upd);
+    if upd then begin
+      Refresh;
+    end;
   end;
 end;
 
@@ -570,7 +572,7 @@ begin
   UpdateLabels(nil);
 end;
 
-procedure Tf_obslist.UpdateLabels(Sender: TObject);
+procedure Tf_obslist.UpdateLabels(Sender: TObject;upd:boolean=true);
 var
   i: integer;
   lbl: string;
@@ -595,7 +597,7 @@ begin
     end;
   end;
   FObjLabels.Sorted := True;
-  if Assigned(FObjLabelChange) then
+  if upd and Assigned(FObjLabelChange) then
     FObjLabelChange(self);
 end;
 

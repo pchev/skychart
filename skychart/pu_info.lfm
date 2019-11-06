@@ -18,8 +18,8 @@ object f_info: Tf_info
     Top = 458
     Width = 711
     Align = alBottom
-    ClientHeight = 35
-    ClientWidth = 711
+    ClientHeight = 31
+    ClientWidth = 707
     FullRepaint = False
     ParentFont = False
     TabOrder = 1
@@ -71,8 +71,8 @@ object f_info: Tf_info
     TabOrder = 2
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
-      ClientHeight = 401
-      ClientWidth = 701
+      ClientHeight = 428
+      ClientWidth = 707
       ParentFont = False
       object Page1: TPanel
         Left = 0
@@ -80,8 +80,8 @@ object f_info: Tf_info
         Top = 0
         Width = 701
         Align = alClient
-        ClientHeight = 401
-        ClientWidth = 701
+        ClientHeight = 397
+        ClientWidth = 697
         ParentFont = False
         TabOrder = 0
         object Panel2: TPanel
@@ -90,8 +90,8 @@ object f_info: Tf_info
           Top = 372
           Width = 699
           Align = alBottom
-          ClientHeight = 28
-          ClientWidth = 699
+          ClientHeight = 24
+          ClientWidth = 695
           FullRepaint = False
           ParentFont = False
           TabOrder = 1
@@ -153,8 +153,8 @@ object f_info: Tf_info
     end
     object TabSheet2: TTabSheet
       Caption = 'TabSheet2'
-      ClientHeight = 401
-      ClientWidth = 701
+      ClientHeight = 428
+      ClientWidth = 707
       ParentFont = False
       object Page2: TPanel
         Left = 0
@@ -162,8 +162,8 @@ object f_info: Tf_info
         Top = 0
         Width = 701
         Align = alClient
-        ClientHeight = 401
-        ClientWidth = 701
+        ClientHeight = 397
+        ClientWidth = 697
         ParentFont = False
         TabOrder = 0
         object StringGrid2: TStringGrid
@@ -193,8 +193,8 @@ object f_info: Tf_info
           Top = 373
           Width = 699
           Align = alBottom
-          ClientHeight = 27
-          ClientWidth = 699
+          ClientHeight = 23
+          ClientWidth = 695
           FullRepaint = False
           ParentFont = False
           TabOrder = 0
@@ -269,13 +269,22 @@ object f_info: Tf_info
             ParentColor = False
             ParentFont = False
           end
+          object Button5: TButton
+            Left = 8
+            Height = 25
+            Top = 0
+            Width = 160
+            Caption = 'Add to observing list'
+            OnClick = Button5Click
+            TabOrder = 5
+          end
         end
       end
     end
     object TabSheet3: TTabSheet
       Caption = 'TabSheet3'
-      ClientHeight = 401
-      ClientWidth = 701
+      ClientHeight = 428
+      ClientWidth = 707
       ParentFont = False
       object Page3: TPanel
         Left = 0
@@ -283,8 +292,8 @@ object f_info: Tf_info
         Top = 0
         Width = 701
         Align = alClient
-        ClientHeight = 401
-        ClientWidth = 701
+        ClientHeight = 397
+        ClientWidth = 697
         ParentFont = False
         TabOrder = 0
         object ProgressMemo: TMemo
@@ -300,8 +309,8 @@ object f_info: Tf_info
     end
     object TabSheet4: TTabSheet
       Caption = 'TabSheet4'
-      ClientHeight = 401
-      ClientWidth = 701
+      ClientHeight = 428
+      ClientWidth = 707
       ParentFont = False
       object Page4: TPanel
         Left = 0
@@ -309,8 +318,8 @@ object f_info: Tf_info
         Top = 0
         Width = 701
         Align = alClient
-        ClientHeight = 401
-        ClientWidth = 701
+        ClientHeight = 397
+        ClientWidth = 697
         ParentFont = False
         TabOrder = 0
         object InfoMemo: TMemo

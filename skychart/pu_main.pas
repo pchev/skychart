@@ -804,6 +804,7 @@ type
     procedure StopServer;
     function GetUniqueName(cname: string; forcenumeric: boolean): string;
     procedure showdetailinfo(chart: string; ra, Dec: double; cat, nm, desc: string);
+    procedure DetailToObslist(chart: string; ra, Dec: double; cat, nm, desc: string);
     procedure CenterFindObj(chart: string);
     procedure NeighborObj(chart: string);
     procedure ConnectDB(updversion: string = '');
@@ -1377,6 +1378,7 @@ begin
     f_info.onKillTCP := KillTCPClient;
     f_info.onPrintSetup := PrintSetup;
     f_info.OnShowDetail := showdetailinfo;
+    f_info.OnAddToObsList:=DetailToObslist;
     f_detail.OnCenterObj := CenterFindObj;
     f_detail.OnNeighborObj := NeighborObj;
     f_detail.OnKeydown := FormKeyDown;
@@ -10901,6 +10903,21 @@ begin
         end;
 end;
 
+procedure Tf_main.DetailToObslist(chart: string; ra, Dec: double; cat, nm, desc: string);
+var
+  i: integer;
+begin
+  for i := 0 to MultiFrame1.ChildCount - 1 do
+    if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+      if MultiFrame1.Childs[i].Caption = chart then
+        with MultiFrame1.Childs[i].DockedObject as Tf_chart do
+        begin
+          CoordCharttoJ2000(ra, dec);
+          f_obslist.Add(nm, rad2deg * ra, rad2deg * dec,false);
+          break;
+        end;
+end;
+
 procedure Tf_main.CenterFindObj(chart: string);
 var
   i: integer;
@@ -10933,7 +10950,7 @@ begin
         begin
           projection(sc.cfgsc.FindRa, sc.cfgsc.FindDec, x1, y1, True, sc.cfgsc);
           WindowXY(x1, y1, x, y, sc.cfgsc);
-          ListXY(round(x), round(y), 50, false);
+          ListXY(round(x), round(y), 50, false,10);
           break;
         end;
 end;

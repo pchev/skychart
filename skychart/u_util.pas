@@ -1783,6 +1783,9 @@ begin
   try
 
     dms := StringReplace(dms, blank, '0', [rfReplaceAll]);
+    dms:=StringReplace(dms,ldeg,'d',[]);
+    dms:=StringReplace(dms,lmin,'m',[]);
+    dms:=StringReplace(dms,lsec,'s',[]);
 
     if copy(dms, 1, 1) = '-' then
       s := -1

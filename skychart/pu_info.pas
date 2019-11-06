@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  u_help, u_translation, u_constant, u_util, UScaleDPI,
+  u_help, u_translation, u_constant, u_util, UScaleDPI, pu_obslist,
   SysUtils, Types, Classes, Controls, Forms, Printers, Graphics, LCLType,
   Dialogs, StdCtrls, Grids, ComCtrls, ExtCtrls, Menus, StdActns, ActnList,
   LResources, Buttons, LazHelpHTML;
@@ -43,6 +43,7 @@ type
 
   Tf_info = class(TForm)
     Button4: TButton;
+    Button5: TButton;
     ComboBox1: TComboBox;
     InfoMemo: TMemo;
     PageControl1: TPageControl;
@@ -80,6 +81,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
     procedure closeconnectionClick(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure EditCopy1Execute(Sender: TObject);
@@ -107,7 +109,7 @@ type
     FGetTCPinfo: Tistrfunc;
     FKillTCP: Tint1func;
     FPrintSetup: TNotifyEvent;
-    Fdetailinfo: Tdetinfo;
+    Fdetailinfo,FAddToObsList: Tdetinfo;
     RowClick, ColClick: integer;
     ActivePage: integer;
     MouseX, MouseY: integer;
@@ -123,6 +125,7 @@ type
     property OnKillTCP: Tint1func read FKillTCP write FKillTCP;
     property OnPrintSetup: TNotifyEvent read FPrintSetup write FPrintSetup;
     property OnShowDetail: Tdetinfo read Fdetailinfo write Fdetailinfo;
+    property OnAddToObsList: Tdetinfo read FAddToObsList write FAddToObsList;
   end;
 
 var
@@ -181,6 +184,23 @@ end;
 procedure Tf_info.Button4Click(Sender: TObject);
 begin
   ShowHelp;
+end;
+
+procedure Tf_info.Button5Click(Sender: TObject);
+var objn: string;
+    ra,de: double;
+    i: integer;
+begin
+  if MessageDlg('Clear previous entries ',mtConfirmation,mbYesNo,0)=mrYes then
+    f_obslist.ButtonClearClick(Sender);
+  for i:=1 to StringGrid2.RowCount-1 do begin
+    ra:=deg2rad*15*Str3ToAR(StringGrid2.Cells[1,i]);
+    de:=deg2rad*Str3ToDE(StringGrid2.Cells[2,i]);
+    objn:=StringGrid2.Cells[4,i];
+    if assigned(FAddToObsList) then FAddToObsList(source_chart,ra,de,'',objn,'');
+  end;
+  f_obslist.Show;
+  f_obslist.Refresh;
 end;
 
 procedure Tf_info.StringGrid1MouseDown(Sender: TObject; Button: TMouseButton;
