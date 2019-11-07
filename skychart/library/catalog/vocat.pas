@@ -581,6 +581,7 @@ end;
 CurCat:=-1;
 VOopen:=true;
 NextVOCat(ok);
+if not ok then CloseVOCat;
 end;
 
 Function StrToDeg(dms : string) : double;
