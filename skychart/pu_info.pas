@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  u_help, u_translation, u_constant, u_util, UScaleDPI, pu_obslist,
+  u_help, u_translation, u_constant, u_util, UScaleDPI, pu_obslist, u_projection,
   SysUtils, Types, Classes, Controls, Forms, Printers, Graphics, LCLType,
   Dialogs, StdCtrls, Grids, ComCtrls, ExtCtrls, Menus, StdActns, ActnList,
   LResources, Buttons, LazHelpHTML;
@@ -120,6 +120,7 @@ type
     source_chart: string;
     procedure setpage(n: integer);
     procedure setgrid(txt: string);
+    procedure SortRadius(tra,tde: double);
     procedure SetLang;
     property OnGetTCPinfo: Tistrfunc read FGetTCPinfo write FGetTCPinfo;
     property OnKillTCP: Tint1func read FKillTCP write FKillTCP;
@@ -201,6 +202,42 @@ begin
   end;
   f_obslist.Show;
   f_obslist.Refresh;
+end;
+
+procedure Tf_info.SortRadius(tra,tde: double);
+type
+  trdist = record
+    r: double;
+    n: integer;
+  end;
+var ra,de: double;
+    rdist: array of trdist;
+    crdist: trdist;
+    rdsorted: boolean;
+    i: integer;
+begin
+  SetLength(rdist,StringGrid2.RowCount+1);
+  for i:=1 to StringGrid2.RowCount-1 do begin
+    ra:=deg2rad*15*Str3ToAR(StringGrid2.Cells[1,i]);
+    de:=deg2rad*Str3ToDE(StringGrid2.Cells[2,i]);
+    rdist[i].r:=AngularDistance(tra,tde,ra,de);
+    rdist[i].n:=i;
+  end;
+  repeat
+    rdsorted := True;
+    for i := 1 to StringGrid2.RowCount-1 do
+    begin
+      if rdist[i - 1].r > rdist[i].r then
+      begin
+        crdist := rdist[i - 1];
+        rdist[i - 1] := rdist[i];
+        rdist[i] := crdist;
+        StringGrid2.ExchangeColRow(false,i-1,i);
+        rdsorted := False;
+      end;
+    end;
+  until rdsorted;
+  SetLength(rdist,0);
 end;
 
 procedure Tf_info.StringGrid1MouseDown(Sender: TObject; Button: TMouseButton;

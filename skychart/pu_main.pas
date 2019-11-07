@@ -10941,16 +10941,19 @@ procedure Tf_main.NeighborObj(chart: string);
 var
   i: integer;
   x, y: single;
-  x1, y1: double;
+  x1, y1, ra, de: double;
 begin
   for i := 0 to MultiFrame1.ChildCount - 1 do
     if MultiFrame1.Childs[i].DockedObject is Tf_chart then
       if MultiFrame1.Childs[i].Caption = chart then
         with MultiFrame1.Childs[i].DockedObject as Tf_chart do
         begin
-          projection(sc.cfgsc.FindRa, sc.cfgsc.FindDec, x1, y1, True, sc.cfgsc);
+          ra:=sc.cfgsc.FindRa;
+          de:=sc.cfgsc.FindDec;
+          projection(ra, de, x1, y1, True, sc.cfgsc);
           WindowXY(x1, y1, x, y, sc.cfgsc);
           ListXY(round(x), round(y), 50, false,10);
+          f_info.SortRadius(ra,de);
           break;
         end;
 end;
