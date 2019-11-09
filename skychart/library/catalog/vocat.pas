@@ -900,6 +900,7 @@ while CurCat<Ncat do begin
    end;
    inc(CurCat);
 end;
+VOopen:=true;
 CloseVOCat;
 result:=max(result,6);
 result:=min(result,20);
