@@ -837,13 +837,15 @@ end;
 procedure CloseVOCat ;
 var i: integer;
 begin
-VOcatlist.Free;
-if VODocOK then VODoc.Free;
-for i:=0 to VOFields.Count-1 do VOFields.Objects[i].Free;
-VOFields.Free;
-VOopen:=false;
-Ncat:=0;
-CurCat:=0;
+if VOopen then begin
+  VOcatlist.Free;
+  if VODocOK then VODoc.Free;
+  for i:=0 to VOFields.Count-1 do VOFields.Objects[i].Free;
+  VOFields.Free;
+  VOopen:=false;
+  Ncat:=0;
+  CurCat:=0;
+end;
 end;
 
 function GetVOMagmax: double;
