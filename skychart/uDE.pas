@@ -217,13 +217,13 @@ begin
     if init_de_file(de_filename) then
     begin
       // check the jd range for this file
-      if (jd > (de_eph.ephem_start + de_eph.ephem_step)) and
-        (jd < (de_eph.ephem_end - de_eph.ephem_step)) then
+      if (jd >= (de_eph.ephem_start)) and
+        (jd <= (de_eph.ephem_end)) then
       begin
         // OK use this one
         de_eph.de_file := de_filename;
-        jdstart := de_eph.ephem_start + de_eph.ephem_step;
-        jdend := de_eph.ephem_end - de_eph.ephem_step;
+        jdstart := de_eph.ephem_start;
+        jdend := de_eph.ephem_end;
         Result := True;
         break;
       end;
