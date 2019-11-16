@@ -32,7 +32,7 @@ uses
   u_help, u_translation, u_constant, u_util, LazUTF8, LazFileUtils, UScaleDPI,
   SysUtils, Types, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Printers, ExtCtrls, enhedits, Buttons,
-  LResources, PrintersDlgs, EditBtn, LazHelpHTML;
+  LResources, PrintersDlgs, EditBtn, LazHelpHTML_fix;
 
 type
 

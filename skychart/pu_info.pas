@@ -32,7 +32,7 @@ uses
   u_help, u_translation, u_constant, u_util, UScaleDPI, pu_obslist, u_projection,
   SysUtils, Types, Classes, Controls, Forms, Printers, Graphics, LCLType,
   Dialogs, StdCtrls, Grids, ComCtrls, ExtCtrls, Menus, StdActns, ActnList,
-  LResources, Buttons, LazHelpHTML;
+  LResources, Buttons, LazHelpHTML_fix;
 
 type
   Tistrfunc = procedure(i: integer; var txt: string) of object;

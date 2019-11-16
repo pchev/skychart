@@ -6,7 +6,7 @@ interface
 
 uses
   u_translation, u_constant, u_util,
-  Classes, SysUtils, Controls, FileUtil, LazHelpHTML;
+  Classes, SysUtils, Controls, FileUtil, LazHelpHTML_fix;
 
 procedure SetLang;
 procedure SetHelpDB(aHelpDB: THTMLHelpDatabase);

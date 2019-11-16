@@ -28,7 +28,7 @@ interface
 uses
   u_help, u_translation, u_constant, u_util, UScaleDPI,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  Buttons, StdCtrls, enhedits, Printers, LazHelpHTML;
+  Buttons, StdCtrls, enhedits, Printers, LazHelpHTML_fix;
 
 type
 

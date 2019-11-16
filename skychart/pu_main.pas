@@ -46,7 +46,7 @@ uses
   Math, StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
   Printers, ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame,
   BGRABitmap, BGRABitmapTypes, LResources, uniqueinstance, enhedits, cu_healpix,
-  downloaddialog, LazHelpHTML, ButtonPanel, ExtDlgs;
+  downloaddialog, LazHelpHTML_fix, ButtonPanel, ExtDlgs;
 
 type
 

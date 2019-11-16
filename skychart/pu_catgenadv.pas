@@ -28,7 +28,7 @@ interface
 uses
   u_help, u_translation, UScaleDPI,
   Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, LResources, LazHelpHTML;
+  StdCtrls, Buttons, LResources, LazHelpHTML_fix;
 
 type
 

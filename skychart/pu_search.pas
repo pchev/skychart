@@ -32,7 +32,7 @@ uses
   u_help, u_translation, u_constant, u_util, cu_database,
   httpsend, blcksock, XMLRead, DOM, LCLType, UScaleDPI,
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, Buttons, LResources, LazHelpHTML, ComCtrls, Types;
+  Dialogs, StdCtrls, ExtCtrls, Buttons, LResources, LazHelpHTML_fix, ComCtrls, Types;
 
 const
   maxcombo = 500;

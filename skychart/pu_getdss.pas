@@ -32,7 +32,7 @@ uses
   u_help, u_translation, UScaleDPI,
   dynlibs, u_constant, u_util, Math, LazUTF8,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, LResources, downloaddialog, LazHelpHTML;
+  StdCtrls, Buttons, LResources, downloaddialog, LazHelpHTML_fix;
 
 // GetDss.dll interface
 type

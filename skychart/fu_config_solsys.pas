@@ -29,7 +29,7 @@ uses
   u_help, u_translation, u_constant, u_util, u_projection, cu_database, cu_radec,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math, IniFiles,
   Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources, UScaleDPI,
-  downloaddialog, jdcalendar, EditBtn, Process, LazHelpHTML, LazUTF8, LazFileUtils;
+  downloaddialog, jdcalendar, EditBtn, Process, LazHelpHTML_fix, LazUTF8, LazFileUtils;
 
 type
 

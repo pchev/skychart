@@ -31,7 +31,7 @@ uses
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs, UScaleDPI,
   StdCtrls, ExtCtrls, ComCtrls, CheckLst, EnhEdits,
   Buttons, Math, Inifiles, Grids, mwFixedRecSort, mwCompFrom,
-  LResources, EditBtn, LazHelpHTML;
+  LResources, EditBtn, LazHelpHTML_fix;
 
 const
   l_sup = 10;

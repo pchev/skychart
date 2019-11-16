@@ -29,7 +29,7 @@ uses
   u_help, u_translation, u_constant, u_util, u_projection, cu_tz, cu_radec,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math,
   StdCtrls, CheckLst, Buttons, ExtCtrls, enhedits, ComCtrls, LResources,
-  ButtonPanel, jdcalendar, LazHelpHTML, EditBtn, SpinEx;
+  ButtonPanel, jdcalendar, LazHelpHTML_fix, EditBtn, SpinEx;
 
 type
 

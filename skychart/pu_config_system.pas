@@ -28,7 +28,7 @@ uses
   u_help, u_translation, u_constant, u_util, cu_database, fu_config_system,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms, FileUtil, UScaleDPI,
-  ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML;
+  ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML_fix;
 
 type
 

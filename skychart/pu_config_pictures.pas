@@ -29,7 +29,7 @@ uses
   u_help, u_translation, u_constant, u_util, cu_fits, cu_database, UScaleDPI,
   fu_config_pictures, LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, FileUtil, StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits,
-  LResources, EditBtn, LazHelpHTML;
+  LResources, EditBtn, LazHelpHTML_fix;
 
 type
 

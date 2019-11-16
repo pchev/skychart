@@ -30,7 +30,7 @@ uses
   pu_catgenadv, pu_progressbar, LazUTF8, LazFileUtils, pu_voconfig,
   Math, LCLIntf, SysUtils, UScaleDPI,
   Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, enhedits,
-  downloaddialog, Grids, Buttons, ComCtrls, LResources, EditBtn, LazHelpHTML;
+  downloaddialog, Grids, Buttons, ComCtrls, LResources, EditBtn, LazHelpHTML_fix;
 
 type
 

@@ -31,7 +31,7 @@ interface
 uses
   u_help, u_translation, u_constant, u_util, UScaleDPI,
   LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
-  sysutils, ExtCtrls, LResources, Buttons, LazHelpHTML, ComCtrls;
+  sysutils, ExtCtrls, LResources, Buttons, LazHelpHTML_fix, ComCtrls;
 
 type
 

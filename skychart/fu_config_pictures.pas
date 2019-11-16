@@ -30,7 +30,7 @@ uses
   BGRABitmap, BGRABitmapTypes,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, LazUTF8, LazFileUtils,
   StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits, LResources,
-  EditBtn, LazHelpHTML, Grids;
+  EditBtn, LazHelpHTML_fix, Grids;
 
 type
 

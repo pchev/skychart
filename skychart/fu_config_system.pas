@@ -29,7 +29,7 @@ uses
   indibaseclient, indibasedevice, indiapi,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms, LazUTF8, LazFileUtils, Math,
-  ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML, CheckLst, Types;
+  ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML_fix, CheckLst, Types;
 
 type
 

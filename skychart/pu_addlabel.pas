@@ -7,7 +7,7 @@ interface
 uses
   u_help, u_translation, u_constant, UScaleDPI,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  Buttons, ExtCtrls, LazHelpHTML;
+  Buttons, ExtCtrls, LazHelpHTML_fix;
 
 type
 

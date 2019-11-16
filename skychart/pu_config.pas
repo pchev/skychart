@@ -36,7 +36,7 @@ uses
   fu_config_chart, fu_config_observatory, fu_config_time, fu_config_catalog,
   fu_config_system, fu_config_pictures, fu_config_display, fu_config_solsys,
   fu_config_internet, fu_config_calendar,
-  LResources, PairSplitter, LazHelpHTML;
+  LResources, PairSplitter, LazHelpHTML_fix;
 
 type
 

@@ -30,7 +30,7 @@ uses
   SysUtils, Classes, Graphics, Controls, Forms, FileUtil, Dialogs, StdCtrls,
   FileCtrl, enhedits, Grids, ComCtrls, IniFiles, jdcalendar, cu_planet, u_unzip,
   u_constant, pu_image, downloaddialog, Buttons, ExtCtrls, ActnList, StdActns,
-  UScaleDPI, LResources, LazHelpHTML, CheckLst, types;
+  UScaleDPI, LResources, LazHelpHTML_fix, CheckLst, types;
 
 type
   TScFunc = procedure(csc: Tconf_skychart) of object;

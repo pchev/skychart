@@ -32,7 +32,7 @@ uses
   u_help, u_translation, u_util, u_constant, Clipbrd, UScaleDPI,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, LazUTF8, LazFileUtils, IpHtml,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
-  Buttons, LazHelpHTML, types;
+  Buttons, LazHelpHTML_fix, types;
 
 type
   Tstr1func = procedure(txt: string) of object;
