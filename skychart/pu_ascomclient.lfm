@@ -260,9 +260,9 @@ object pop_scope: Tpop_scope
     end
     object ShowAltAz: TCheckBox
       Left = 8
-      Height = 21
+      Height = 23
       Top = 32
-      Width = 21
+      Width = 23
       TabOrder = 2
     end
     object ButtonTracking: TSpeedButton
@@ -340,6 +340,7 @@ object pop_scope: Tpop_scope
         Height = 20
         Top = 0
         Width = 20
+        ArrowColor = clBtnText
         ArrowType = atUp
         Constraints.MinHeight = 8
         Constraints.MinWidth = 8
@@ -396,7 +397,7 @@ object pop_scope: Tpop_scope
     end
     object AxisRates: TSpinEdit
       Left = 240
-      Height = 28
+      Height = 35
       Top = 61
       Width = 62
       MinValue = 1
@@ -424,7 +425,7 @@ object pop_scope: Tpop_scope
     OnChanging = PageControl1Changing
     object ASCOMLocal: TTabSheet
       Caption = 'ASCOM Local'
-      ClientHeight = 146
+      ClientHeight = 144
       ClientWidth = 301
       object GroupBox1: TGroupBox
         Left = 0
@@ -510,16 +511,16 @@ object pop_scope: Tpop_scope
     end
     object ASCOMRemote: TTabSheet
       Caption = 'ASCOM Alpaca'
-      ClientHeight = 146
+      ClientHeight = 144
       ClientWidth = 301
       object Panel3: TPanel
         Left = 0
-        Height = 146
+        Height = 144
         Top = 0
         Width = 301
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 146
+        ClientHeight = 144
         ClientWidth = 301
         TabOrder = 0
         object ARestProtocol: TComboBox
