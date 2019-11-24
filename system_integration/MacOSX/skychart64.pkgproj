@@ -480,7 +480,7 @@
 			<key>USE_HFS+_COMPRESSION</key>
 			<false/>
 			<key>VERSION</key>
-			<string>4.3</string>
+			<string>4.2.1</string>
 		</dict>
 		<key>PROJECT_COMMENTS</key>
 		<dict>

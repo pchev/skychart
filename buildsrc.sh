@@ -2,7 +2,7 @@
 
 # Script to make the full source tar for release
 
-version=4.3
+version=4.2.1
 repo=https://github.com/pchev/skychart.git
 
 builddir=/tmp/skychart-src  # Be sure this is set to a non existent directory, it is removed after the run!
