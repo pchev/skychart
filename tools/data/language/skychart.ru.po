@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-06 13:21+0000\n"
-"PO-Revision-Date: 2019-10-15 18:54+0000\n"
+"PO-Revision-Date: 2019-10-31 18:12+0000\n"
 "Last-Translator: sernik <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-10-17 09:56+0000\n"
-"X-Generator: Launchpad (build 186023fa645d8be19d403a76064f0643f510db2f)\n"
+"X-Launchpad-Export-Date: 2019-11-24 12:41+0000\n"
+"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -1055,7 +1055,7 @@ msgstr "Не удалось подключиться к серверу INDI!"
 
 #: u_translation.rsconnectteles
 msgid "Connect telescope"
-msgstr "Контрольная панель"
+msgstr "Подключить телескоп"
 
 #: u_translation.rsconnecttofai
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
@@ -2157,6 +2157,10 @@ msgstr "Обозначение Флемстида"
 msgid "Iridium flare prediction:"
 msgstr "Расчёт вспышек Иридиум"
 
+#: u_translation.rsflipnsmoveme
+msgid "Flip N/S movement"
+msgstr ""
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Шрифты"
@@ -2291,7 +2295,7 @@ msgstr "Получить от телескопа"
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
-msgstr "Получить последний замер от проекта  JUPOS"
+msgstr "Получить последние измерения от проекта JUPOS"
 
 #: u_translation.rsglobularclus
 msgid "Globular cluster"
@@ -2828,7 +2832,7 @@ msgstr "Линейный режим"
 
 #: u_translation.rslinemodedraw
 msgid "Line mode drawing"
-msgstr "Круг"
+msgstr "Диск"
 
 #: u_translation.rslineoperatio
 msgid "Line operation"
@@ -3672,7 +3676,7 @@ msgstr "Опции"
 
 #: u_translation.rsorbit
 msgid "Orbit"
-msgstr "Орбиты"
+msgstr "Треки"
 
 #: u_translation.rsorbitaleleme
 msgid "Orbital elements"
@@ -4562,6 +4566,10 @@ msgstr "Объекты поиска"
 msgid "Search index"
 msgstr "Поисковый индекс"
 
+#: u_translation.rssearchradius
+msgid "Search radius"
+msgstr ""
+
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
 msgstr "Обновление программы"
@@ -4744,7 +4752,7 @@ msgstr "Задать время"
 
 #: u_translation.rssettotelesco
 msgid "Set to telescope"
-msgstr "Установить в телескоп"
+msgstr "Передать в телескоп"
 
 #: u_translation.rssetup
 msgid "Setup"
@@ -4940,7 +4948,7 @@ msgstr "Каталоги Virtual Observatory"
 
 #: u_translation.rssideral
 msgid "Sidereal"
-msgstr "Звёздное сред."
+msgstr "Звёздное"
 
 #: u_translation.rssiderealday
 msgid "Sidereal day"
@@ -5508,7 +5516,7 @@ msgstr "Прозрачность"
 
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
-msgstr "Прозрачный тип линий (затмения)"
+msgstr "Прозрачный диск (видны фоновые объекты)"
 
 #: u_translation.rstriplestar
 msgid "Triple star"

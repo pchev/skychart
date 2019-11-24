@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-06 13:21+0000\n"
-"PO-Revision-Date: 2019-10-06 13:44+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"PO-Revision-Date: 2019-10-25 18:30+0000\n"
+"Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-10-17 09:57+0000\n"
-"X-Generator: Launchpad (build 186023fa645d8be19d403a76064f0643f510db2f)\n"
+"X-Launchpad-Export-Date: 2019-11-24 12:41+0000\n"
+"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -2158,6 +2158,10 @@ msgstr "Numero di Flamsteed"
 msgid "Iridium flare prediction:"
 msgstr "Previsione Iridium flare:"
 
+#: u_translation.rsflipnsmoveme
+msgid "Flip N/S movement"
+msgstr ""
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Caratteri"
@@ -2420,7 +2424,7 @@ msgstr "Orizzonte"
 
 #: u_translation.rshorizontalov
 msgid "Horizontal overlap %"
-msgstr ""
+msgstr "Sovrapposizione orizzontale %"
 
 #: u_translation.rshostname
 msgid "Hostname:"
@@ -3256,15 +3260,15 @@ msgstr "Crepuscolo mattutino"
 
 #: u_translation.rsmosaic
 msgid "Mosaic"
-msgstr ""
+msgstr "Mosaico"
 
 #: u_translation.rsmosaiccenter
 msgid "Mosaic center"
-msgstr ""
+msgstr "Centro mosaico"
 
 #: u_translation.rsmosaicsize
 msgid "Mosaic size"
-msgstr ""
+msgstr "Dimensioni mosaico"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -4562,6 +4566,10 @@ msgstr "Cerca"
 msgid "Search index"
 msgstr "Indice di ricerca"
 
+#: u_translation.rssearchradius
+msgid "Search radius"
+msgstr ""
+
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
 msgstr "Ricerca aggiornamento software"
@@ -4672,7 +4680,7 @@ msgstr "Invia tabella a"
 
 #: u_translation.rssendviaserve
 msgid "Send via server"
-msgstr ""
+msgstr "Invia tramite server"
 
 #: u_translation.rsseparation
 msgid "Separation"
@@ -4784,7 +4792,7 @@ msgstr "Mostra pulsante di testo"
 
 #: u_translation.rsshowcelestia
 msgid "Show celestial equator"
-msgstr ""
+msgstr "Mostra equatore celeste"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
@@ -4984,7 +4992,7 @@ msgstr "Muovi"
 
 #: u_translation.rsslewcomplete
 msgid "Slew complete"
-msgstr ""
+msgstr "Movimento completato"
 
 #: u_translation.rsslewingto
 msgid "Slewing to %s / %s"
@@ -5772,7 +5780,7 @@ msgstr "Versione"
 
 #: u_translation.rsverticalover
 msgid "Vertical overlap %"
-msgstr ""
+msgstr "Sovrapposizione verticale %"
 
 #: u_translation.rsvicinity
 msgid "Vicinity"

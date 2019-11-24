@@ -13,8 +13,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-10-17 09:56+0000\n"
-"X-Generator: Launchpad (build 186023fa645d8be19d403a76064f0643f510db2f)\n"
+"X-Launchpad-Export-Date: 2019-11-24 12:41+0000\n"
+"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2159,6 +2159,10 @@ msgstr "เลขแฟลมสตีด"
 #: u_translation.rsflarepredict
 msgid "Iridium flare prediction:"
 msgstr "พยากรณ์แสงวาบของอิริเดียม:"
+
+#: u_translation.rsflipnsmoveme
+msgid "Flip N/S movement"
+msgstr ""
 
 #: u_translation.rsfonts
 msgid "Fonts"
@@ -4563,6 +4567,10 @@ msgstr "สืบค้น"
 #: u_translation.rssearchindex
 msgid "Search index"
 msgstr "ดัชนีสืบค้น"
+
+#: u_translation.rssearchradius
+msgid "Search radius"
+msgstr ""
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"

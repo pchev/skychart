@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2019-10-06 13:21+0000\n"
-"PO-Revision-Date: 2019-10-01 21:01+0000\n"
+"PO-Revision-Date: 2019-10-19 08:22+0000\n"
 "Last-Translator: Costantino <Unknown>\n"
 "Language-Team: Sardinian <sc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-10-17 09:56+0000\n"
-"X-Generator: Launchpad (build 186023fa645d8be19d403a76064f0643f510db2f)\n"
+"X-Launchpad-Export-Date: 2019-11-24 12:40+0000\n"
+"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -250,7 +250,7 @@ msgstr ""
 
 #: u_translation.rsalt
 msgid "Alt"
-msgstr ""
+msgstr "Alt"
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
@@ -350,7 +350,7 @@ msgstr ""
 
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
-msgstr ""
+msgstr "Satellites fatos dae s'òmine"
 
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
@@ -438,7 +438,7 @@ msgstr ""
 
 #: u_translation.rsastronomical
 msgid "Astronomical"
-msgstr ""
+msgstr "Astronomicu"
 
 #: u_translation.rsastronomical2
 msgid "Astronomical twilight"
@@ -446,7 +446,7 @@ msgstr ""
 
 #: u_translation.rsat
 msgid "at"
-msgstr ""
+msgstr "ae"
 
 #: u_translation.rsatmosphericr
 msgid "Atmospheric refraction"
@@ -486,7 +486,7 @@ msgstr ""
 
 #: u_translation.rsaz
 msgid "Az"
-msgstr ""
+msgstr "Az"
 
 #: u_translation.rsazimuth
 msgid "Azimuth"
@@ -630,7 +630,7 @@ msgstr ""
 
 #: u_translation.rsby
 msgid "by"
-msgstr ""
+msgstr "dae"
 
 #: u_translation.rsbyname
 msgid "By name"
@@ -646,7 +646,7 @@ msgstr ""
 
 #: u_translation.rscancel
 msgid "Cancel"
-msgstr ""
+msgstr "Burra"
 
 #: u_translation.rscancel2
 msgid "Cancel %s"
@@ -758,7 +758,7 @@ msgstr ""
 
 #: u_translation.rscenterobject
 msgid "Centre on this object"
-msgstr ""
+msgstr "Tzentra cust'ogetu"
 
 #: u_translation.rscentralmerid
 msgid "Central meridian"
@@ -794,7 +794,7 @@ msgstr "Mapa"
 
 #: u_translation.rschart2
 msgid "chart:"
-msgstr ""
+msgstr "mapa:"
 
 #: u_translation.rschartcenterc
 msgid "Add a crosshair to the chart center"
@@ -886,7 +886,7 @@ msgstr ""
 
 #: u_translation.rsclose
 msgid "Close"
-msgstr ""
+msgstr "Serra"
 
 #: u_translation.rsclosechart
 msgid "Close chart"
@@ -1041,8 +1041,9 @@ msgid "Connected"
 msgstr ""
 
 #: u_translation.rsconnectedfro
+#, fuzzy,badformat
 msgid "%s connected with %s, using chart %s, connected time:%s"
-msgstr ""
+msgstr "% est atacadu cun %, impreande sa mapa %s. Tempus de atacadura: %s."
 
 #: u_translation.rsconnectedtos
 msgid "Connected to the SQL database %s"
@@ -1126,7 +1127,7 @@ msgstr ""
 
 #: u_translation.rscoord
 msgid "Coord."
-msgstr ""
+msgstr "Coord."
 
 #: u_translation.rscoordgrid
 msgid "Coord. grid"
@@ -1294,11 +1295,11 @@ msgstr ""
 
 #: u_translation.rsdatefrom
 msgid "Date from"
-msgstr ""
+msgstr "Dae sa data"
 
 #: u_translation.rsdatesmaytake
 msgid "dates may take a long time. Do you want to continue?"
-msgstr ""
+msgstr "sas datas podet leare tempus meda! Cheres sighere etotu?"
 
 #: u_translation.rsdatetime
 msgid "Date / time"
@@ -1314,7 +1315,7 @@ msgstr "Die"
 
 #: u_translation.rsdays
 msgid "days"
-msgstr ""
+msgstr "dies"
 
 #: u_translation.rsdaytime
 msgid "Day Time"
@@ -1330,7 +1331,7 @@ msgstr ""
 
 #: u_translation.rsde
 msgid "DE"
-msgstr ""
+msgstr "DE"
 
 #: u_translation.rsdec
 msgid "DEC"
@@ -1366,7 +1367,7 @@ msgstr "Abbacca su tempus"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr ""
+msgstr "DEC turns: "
 
 #: u_translation.rsdecturns2
 msgid "%sDEC turns:"
@@ -1526,7 +1527,7 @@ msgstr ""
 
 #: u_translation.rsdiam
 msgid "Diam."
-msgstr ""
+msgstr "Diam."
 
 #: u_translation.rsdiameter
 msgid "Diameter"
@@ -1554,7 +1555,7 @@ msgstr ""
 
 #: u_translation.rsdir
 msgid "Dir"
-msgstr ""
+msgstr "Dir"
 
 #: u_translation.rsdirection2
 msgid "Direction"
@@ -1770,7 +1771,7 @@ msgstr ""
 
 #: u_translation.rsduration
 msgid "Duration"
-msgstr ""
+msgstr "Cantu durat"
 
 #: u_translation.rsearth
 msgid "Earth"
@@ -1794,7 +1795,7 @@ msgstr ""
 
 #: u_translation.rseclipse
 msgid "Eclipse"
-msgstr ""
+msgstr "Eclissamentu"
 
 #: u_translation.rsecliptic
 msgid "Ecliptic"
@@ -1846,7 +1847,7 @@ msgstr ""
 
 #: u_translation.rselong
 msgid "Elong."
-msgstr ""
+msgstr "Elong."
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
@@ -1954,11 +1955,11 @@ msgstr "Mannaria de sa coa previdida"
 
 #: u_translation.rsevening
 msgid "Evening"
-msgstr ""
+msgstr "Sero"
 
 #: u_translation.rseveningtwili
 msgid "Evening twilight"
-msgstr ""
+msgstr "Chentàle de su sero"
 
 #: u_translation.rsevent
 msgid "Event"
@@ -2160,6 +2161,10 @@ msgstr "Nùmeru de Flamsteed"
 msgid "Iridium flare prediction:"
 msgstr ""
 
+#: u_translation.rsflipnsmoveme
+msgid "Flip N/S movement"
+msgstr ""
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Fonts"
@@ -2182,7 +2187,7 @@ msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
-msgstr ""
+msgstr "FOV"
 
 #: u_translation.rsfov2
 msgid "FOV:"
@@ -2254,7 +2259,7 @@ msgstr ""
 
 #: u_translation.rsgamma
 msgid "Gamma"
-msgstr ""
+msgstr "Gamma"
 
 #: u_translation.rsgeneral
 msgid "General"
@@ -2322,7 +2327,7 @@ msgstr ""
 
 #: u_translation.rsgreatest
 msgid "Greatest"
-msgstr ""
+msgstr "Su prus mannu"
 
 #: u_translation.rsgreeksymbol
 msgid "Greek symbols"
@@ -2482,7 +2487,7 @@ msgstr ""
 
 #: u_translation.rsillum
 msgid "Illum."
-msgstr ""
+msgstr "Lughe"
 
 #: u_translation.rsilluminatedf
 msgid "Illuminated fraction"
@@ -2566,7 +2571,7 @@ msgstr ""
 
 #: u_translation.rsindrive
 msgid "in drive"
-msgstr ""
+msgstr "in su drive"
 
 #: u_translation.rsinfo
 msgid "Information"
@@ -2678,7 +2683,7 @@ msgstr ""
 
 #: u_translation.rsjupiter
 msgid "Jupiter"
-msgstr ""
+msgstr "Giove"
 
 #: u_translation.rsjupitergrslo
 msgid "Jupiter GRS longitude:"
@@ -2746,7 +2751,7 @@ msgstr ""
 
 #: u_translation.rslatitude
 msgid "Latitude"
-msgstr ""
+msgstr "Latitudine"
 
 #: u_translation.rsleft
 msgid "Left"
@@ -2802,7 +2807,7 @@ msgstr ""
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
-msgstr ""
+msgstr "Limitande sa mannitudine, lista:"
 
 #: u_translation.rslimitingmagn2
 msgid "Limiting magnitude:"
@@ -2862,7 +2867,7 @@ msgstr "Aiscurta in sa janna: %s"
 
 #: u_translation.rslistofavaila
 msgid "List of available plates"
-msgstr ""
+msgstr "Lista de sas piastras disponibiles"
 
 #: u_translation.rsload
 msgid "Load"
@@ -2942,7 +2947,7 @@ msgstr ""
 
 #: u_translation.rslongitude
 msgid "Longitude"
-msgstr ""
+msgstr "Longitudine"
 
 #: u_translation.rslongitudeasc
 msgid "Longitude ascending node"
@@ -2966,7 +2971,7 @@ msgstr ""
 
 #: u_translation.rslunareclipse
 msgid "Lunar eclipses"
-msgstr ""
+msgstr "Eclissamentos de sa luna"
 
 #: u_translation.rsly
 msgid "ly"
@@ -2978,7 +2983,7 @@ msgstr ""
 
 #: u_translation.rsmagn
 msgid "Magn."
-msgstr ""
+msgstr "Mann."
 
 #: u_translation.rsmagnitude
 msgid "Magnitude"
@@ -3050,11 +3055,11 @@ msgstr ""
 
 #: u_translation.rsmanualtelesc
 msgid "Manual telescope"
-msgstr ""
+msgstr "Telescopiu manuale"
 
 #: u_translation.rsmap
 msgid "Map"
-msgstr ""
+msgstr "Mapa"
 
 #: u_translation.rsmarch
 msgid "March"
@@ -3070,11 +3075,11 @@ msgstr ""
 
 #: u_translation.rsmars
 msgid "Mars"
-msgstr ""
+msgstr "Marte"
 
 #: u_translation.rsmax
 msgid "Max."
-msgstr ""
+msgstr "Max."
 
 #: u_translation.rsmax2
 msgid "max"
@@ -3222,7 +3227,7 @@ msgstr "Mese"
 
 #: u_translation.rsmoon
 msgid "Moon"
-msgstr ""
+msgstr "Luna"
 
 #: u_translation.rsmoreinformat
 msgid "More informations"
@@ -3250,11 +3255,11 @@ msgstr ""
 
 #: u_translation.rsmorning
 msgid "Morning"
-msgstr ""
+msgstr "Manzanu"
 
 #: u_translation.rsmorningtwili
 msgid "Morning twilight"
-msgstr ""
+msgstr "Chentàle de su manzanu"
 
 #: u_translation.rsmosaic
 msgid "Mosaic"
@@ -3302,7 +3307,7 @@ msgstr ""
 
 #: u_translation.rsnautical
 msgid "Nautical"
-msgstr ""
+msgstr "Nauticu"
 
 #: u_translation.rsnebula
 msgid "Deep sky object"
@@ -3334,11 +3339,11 @@ msgstr ""
 
 #: u_translation.rsneighbor
 msgid "Neighbour"
-msgstr ""
+msgstr "Su serente"
 
 #: u_translation.rsneptune
 msgid "Neptune"
-msgstr ""
+msgstr "Netunu"
 
 #: u_translation.rsnever
 msgid "never"
@@ -3457,8 +3462,9 @@ msgid "Not available"
 msgstr ""
 
 #: u_translation.rsnotconnected
+#, fuzzy,badformat
 msgid "%s not connected."
-msgstr ""
+msgstr "$ no est atacadu."
 
 #: u_translation.rsnote
 msgid "Note"
@@ -3473,8 +3479,9 @@ msgid "%s  Not found in any of the installed catalog indices."
 msgstr "No apo agatadu %s in catalogo perunu de sos assettados"
 
 #: u_translation.rsnotfoundmayb
+#, fuzzy,badformat
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
-msgstr ""
+msgstr "% no s'est agatadu! % Podet èssere chi su catalugu no est assetadu o chi su tretu de assetadura in sos assetios de su catalugu est isballiadu."
 
 #: u_translation.rsnovember
 msgid "November"
@@ -3594,7 +3601,7 @@ msgstr ""
 
 #: u_translation.rsok
 msgid "OK"
-msgstr ""
+msgstr "AB"
 
 #: u_translation.rsoneevery
 msgid "One every"
@@ -3738,7 +3745,7 @@ msgstr ""
 
 #: u_translation.rspartial
 msgid "Partial"
-msgstr ""
+msgstr "A unu costazu"
 
 #: u_translation.rspassword
 msgid "Password"
@@ -3758,7 +3765,7 @@ msgstr ""
 
 #: u_translation.rspathwidth
 msgid "Path width"
-msgstr ""
+msgstr "Largaria de su tretu"
 
 #: u_translation.rspause
 msgid "Pause"
@@ -3766,7 +3773,7 @@ msgstr ""
 
 #: u_translation.rspenumbra
 msgid "Penumbra"
-msgstr ""
+msgstr "Luchibarja"
 
 #: u_translation.rsperihelionda
 msgid "Perihelion date"
@@ -3918,7 +3925,7 @@ msgstr ""
 
 #: u_translation.rspluto
 msgid "Pluto"
-msgstr ""
+msgstr "Plutone"
 
 #: u_translation.rsplutoisaplan
 msgid "Pluto is a planet."
@@ -4006,7 +4013,7 @@ msgstr ""
 
 #: u_translation.rsprinter
 msgid "Printer:"
-msgstr ""
+msgstr "Imprentadora:"
 
 #: u_translation.rsprinterlegen
 msgid "Printer legend"
@@ -4014,7 +4021,7 @@ msgstr ""
 
 #: u_translation.rsprintersetup
 msgid "Printer setup"
-msgstr ""
+msgstr "Assetios de s'imprentadora"
 
 #: u_translation.rsprintfooter
 msgid "Print footer"
@@ -4138,7 +4145,7 @@ msgstr ""
 
 #: u_translation.rsra
 msgid "RA"
-msgstr ""
+msgstr "RA"
 
 #: u_translation.rsradialveloci
 msgid "Radial velocity"
@@ -4146,7 +4153,7 @@ msgstr "Lestresa radiale"
 
 #: u_translation.rsrange
 msgid "Range"
-msgstr ""
+msgstr "Intervallu"
 
 #: u_translation.rsraoptions
 msgid "RA options"
@@ -4154,11 +4161,11 @@ msgstr ""
 
 #: u_translation.rsrasterresolu
 msgid "Raster resolution"
-msgstr ""
+msgstr "Risolutzione de su raster"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr ""
+msgstr "RA turns: "
 
 #: u_translation.rsraturns2
 msgid "%sRA turns:"
@@ -4326,7 +4333,7 @@ msgstr "Torra a assetiare sas etichetas"
 
 #: u_translation.rsresetchart
 msgid "Reset chart"
-msgstr ""
+msgstr "Torra a assettare sa mapa"
 
 #: u_translation.rsresetchartan
 msgid "Reset chart and options"
@@ -4350,7 +4357,7 @@ msgstr ""
 
 #: u_translation.rsresolution
 msgid "Resolution:"
-msgstr ""
+msgstr "Risolutzione"
 
 #: u_translation.rsreturn
 msgid "Return"
@@ -4410,7 +4417,7 @@ msgstr "Gire-la a dereta"
 
 #: u_translation.rsrotation
 msgid "Rotation"
-msgstr ""
+msgstr "Rotatzione"
 
 #: u_translation.rsrows
 msgid "Rows"
@@ -4450,7 +4457,7 @@ msgstr "Saros"
 
 #: u_translation.rssatellite
 msgid "Satellite"
-msgstr ""
+msgstr "Satellite"
 
 #: u_translation.rssatellitesca
 msgid "Satellites calculation:"
@@ -4458,7 +4465,7 @@ msgstr ""
 
 #: u_translation.rssatring
 msgid "Sat. ring"
-msgstr ""
+msgstr "Sat.ring"
 
 #: u_translation.rssaturday
 msgid "Sat."
@@ -4466,7 +4473,7 @@ msgstr ""
 
 #: u_translation.rssaturn
 msgid "Saturn"
-msgstr ""
+msgstr "Sadurru"
 
 #: u_translation.rssave
 msgid "Save"
@@ -4498,7 +4505,7 @@ msgstr "Ammenta sa mapa ativa"
 
 #: u_translation.rssavetofile
 msgid "Save to file"
-msgstr ""
+msgstr "Ammenta in su file"
 
 #: u_translation.rsscaled
 msgid "Scaled"
@@ -4562,6 +4569,10 @@ msgstr ""
 
 #: u_translation.rssearchindex
 msgid "Search index"
+msgstr ""
+
+#: u_translation.rssearchradius
+msgid "Search radius"
 msgstr ""
 
 #: u_translation.rssearchsoftwa
@@ -4638,7 +4649,7 @@ msgstr ""
 
 #: u_translation.rsselectthesys
 msgid "Select the system printer and options you want to use"
-msgstr ""
+msgstr "Sèbera su sistema de imprenta e sos assetios chi cheres impreare"
 
 #: u_translation.rsselectthetel
 msgid "Select the telescope interface"
@@ -4654,7 +4665,7 @@ msgstr ""
 
 #: u_translation.rssemi
 msgid "Semi"
-msgstr ""
+msgstr "A metade"
 
 #: u_translation.rssemimajoraxi
 msgid "Semimajor axis"
@@ -5026,7 +5037,7 @@ msgstr "Distantzia dae su Sole"
 
 #: u_translation.rssolareclipse
 msgid "Solar eclipses"
-msgstr ""
+msgstr "Eclissamentos de su sole"
 
 #: u_translation.rssolarelongat
 msgid "Solar elongation"
@@ -5214,11 +5225,11 @@ msgstr ""
 
 #: u_translation.rssun
 msgid "Sun"
-msgstr ""
+msgstr "Sole"
 
 #: u_translation.rssunalt
 msgid "Sun alt."
-msgstr ""
+msgstr "Sole alt."
 
 #: u_translation.rssunday
 msgid "Sun."
@@ -5466,7 +5477,7 @@ msgstr ""
 
 #: u_translation.rstotal
 msgid "Totality"
-msgstr ""
+msgstr "Prena"
 
 #: u_translation.rstotalradius
 msgid "Total radius"
@@ -5562,11 +5573,11 @@ msgstr ""
 
 #: u_translation.rstwilight
 msgid "Twilight"
-msgstr ""
+msgstr "Chentàle"
 
 #: u_translation.rstype
 msgid "Type"
-msgstr ""
+msgstr "Genia"
 
 #: u_translation.rstype2
 msgid "Type:"
@@ -5586,7 +5597,7 @@ msgstr "Calidade de sa variabilidade"
 
 #: u_translation.rsumbra
 msgid "Umbra"
-msgstr ""
+msgstr "Umbra"
 
 #: u_translation.rsunabletocrea
 msgid "Unable to create directory "
@@ -5658,7 +5669,7 @@ msgstr ""
 
 #: u_translation.rsuranus
 msgid "Uranus"
-msgstr ""
+msgstr "Uranu"
 
 #: u_translation.rsurl
 msgid "URL"
@@ -5746,7 +5757,7 @@ msgstr ""
 
 #: u_translation.rsut
 msgid "UT"
-msgstr ""
+msgstr "UT"
 
 #: u_translation.rsvariables
 msgid "Variables"
@@ -5838,7 +5849,7 @@ msgstr ""
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
-msgstr ""
+msgstr "Atentu! Su calculu de"
 
 #: u_translation.rswarninglowre
 msgid "Warning! Low resolution mode. Use PostScript instead and print the result file."

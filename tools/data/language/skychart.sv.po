@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2019-10-06 13:21+0000\n"
-"PO-Revision-Date: 2019-10-06 13:45+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"PO-Revision-Date: 2019-10-21 08:42+0000\n"
+"Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-10-17 09:56+0000\n"
-"X-Generator: Launchpad (build 186023fa645d8be19d403a76064f0643f510db2f)\n"
+"X-Launchpad-Export-Date: 2019-11-24 12:41+0000\n"
+"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -374,7 +374,7 @@ msgstr "En SAMP applikation skickar platskoordinater"
 
 #: u_translation.rsascomdrivere
 msgid "The ASCOM driver report an error"
-msgstr ""
+msgstr "ASCOM-drivrutinen rapporterar ett fel"
 
 #: u_translation.rsascomremote
 msgid "ASCOM Alpaca is available on %s"
@@ -1498,7 +1498,7 @@ msgstr "Delta onogrannhet"
 
 #: u_translation.rsdeltatrecent
 msgid "DeltaT recent value"
-msgstr ""
+msgstr "Senaste DeltaT-värde"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -2160,6 +2160,10 @@ msgstr "Flamsteed nummer"
 msgid "Iridium flare prediction:"
 msgstr "Iridium eruption förutsägelse:"
 
+#: u_translation.rsflipnsmoveme
+msgid "Flip N/S movement"
+msgstr ""
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Teckensnitt"
@@ -2422,7 +2426,7 @@ msgstr "Horisont"
 
 #: u_translation.rshorizontalov
 msgid "Horizontal overlap %"
-msgstr ""
+msgstr "Horisontöverlappning %"
 
 #: u_translation.rshostname
 msgid "Hostname:"
@@ -2878,7 +2882,7 @@ msgstr "Ladda från fil"
 
 #: u_translation.rsloadindiconf
 msgid "Load INDI configuration"
-msgstr ""
+msgstr "Ladda INDI-konfiguration"
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."
@@ -3258,15 +3262,15 @@ msgstr "Gryning"
 
 #: u_translation.rsmosaic
 msgid "Mosaic"
-msgstr ""
+msgstr "Mosaik"
 
 #: u_translation.rsmosaiccenter
 msgid "Mosaic center"
-msgstr ""
+msgstr "Mosaikcentrum"
 
 #: u_translation.rsmosaicsize
 msgid "Mosaic size"
-msgstr ""
+msgstr "Mosaikstorlek"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -4564,6 +4568,10 @@ msgstr "Sök efter"
 msgid "Search index"
 msgstr "Sökindex"
 
+#: u_translation.rssearchradius
+msgid "Search radius"
+msgstr ""
+
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
 msgstr "Leta efter mjukvaruuppdatering"
@@ -4674,7 +4682,7 @@ msgstr "Skicka tabell till"
 
 #: u_translation.rssendviaserve
 msgid "Send via server"
-msgstr ""
+msgstr "Skicka via server"
 
 #: u_translation.rsseparation
 msgid "Separation"
@@ -4786,7 +4794,7 @@ msgstr "Visa knapptext"
 
 #: u_translation.rsshowcelestia
 msgid "Show celestial equator"
-msgstr ""
+msgstr "Visa himmelsekvator"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
@@ -4986,7 +4994,7 @@ msgstr "Gå till objekt (slew)"
 
 #: u_translation.rsslewcomplete
 msgid "Slew complete"
-msgstr ""
+msgstr "Svepning klar"
 
 #: u_translation.rsslewingto
 msgid "Slewing to %s / %s"
@@ -5774,7 +5782,7 @@ msgstr "Version"
 
 #: u_translation.rsverticalover
 msgid "Vertical overlap %"
-msgstr ""
+msgstr "Vertikal överlappning %"
 
 #: u_translation.rsvicinity
 msgid "Vicinity"

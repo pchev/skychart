@@ -5934,3 +5934,11 @@ msgstr ""
 msgid "Please wait..."
 msgstr ""
 
+#: u_translation:rsflipnsmoveme
+msgid "Flip N/S movement"
+msgstr ""
+
+#: u_translation:rssearchradius
+msgid "Search radius"
+msgstr ""
+
