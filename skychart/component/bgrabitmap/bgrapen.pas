@@ -87,18 +87,18 @@ function ComputeWidePolyPolylinePoints(const linepts: array of TPointF; width: s
   They are faster and can be useful for drawing a simple frame }
 
 //aliased version
-procedure BGRADrawLineAliased(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer; c: TBGRAPixel; DrawLastPixel: boolean; ADrawMode: TDrawMode = dmDrawWithTransparency);
-procedure BGRAEraseLineAliased(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer; alpha: byte; DrawLastPixel: boolean);
+procedure BGRADrawLineAliased(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer; c: TBGRAPixel; DrawLastPixel: boolean; ADrawMode: TDrawMode = dmDrawWithTransparency); deprecated;
+procedure BGRAEraseLineAliased(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer; alpha: byte; DrawLastPixel: boolean); deprecated;
 
 //antialiased version
 procedure BGRADrawLineAntialias({%H-}dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
-  c: TBGRAPixel; DrawLastPixel: boolean; LinearBlend : boolean = false); overload;
+  c: TBGRAPixel; DrawLastPixel: boolean; LinearBlend : boolean = false); overload; deprecated;
 procedure BGRAEraseLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
-  calpha: byte; DrawLastPixel: boolean); overload;
+  calpha: byte; DrawLastPixel: boolean); overload; deprecated;
 
 //antialiased version with bicolor dashes (to draw a frame)
 procedure BGRADrawLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
-  c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean; var DashPos: integer; LinearBlend : boolean = false); overload;
+  c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean; var DashPos: integer; LinearBlend : boolean = false); overload; deprecated;
 
 //length added to ensure accepable alpha join (using TBGRAMultishapeFiller is still better)
 function GetAlphaJoinFactor(alpha: byte): single;
@@ -113,6 +113,7 @@ function IsClearPenStyle(ACustomPenStyle: TBGRAPenStyle): boolean;
 function DuplicatePenStyle(ACustomPenStyle: array of single): TBGRAPenStyle;
 function PenStyleEqual(AStyle1, AStyle2: TBGRAPenStyle): boolean;
 function BGRAToPenStyle(ACustomPenStyle: TBGRAPenStyle): TPenStyle;
+function PenStyleToBGRA(APenStyle: TPenStyle): TBGRAPenStyle;
 
 implementation
 
@@ -120,464 +121,52 @@ uses math, BGRAPath;
 
 procedure BGRADrawLineAliased(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
   c: TBGRAPixel; DrawLastPixel: boolean; ADrawMode: TDrawMode);
-var
-  Y, X: integer;
-  DX, DY, SX, SY, E: integer;
-  PixelProc: procedure (x, y: int32or64; c: TBGRAPixel) of object;
 begin
-  if (Y1 = Y2) then
-  begin
-    if (X1 = X2) then
-    begin
-      if DrawLastPixel then
-        dest.DrawPixel(X1, Y1, c, ADrawMode);
-    end else
-    begin
-      if not DrawLastPixel then
-      begin
-        if X2 > X1 then dec(X2) else inc(X2);
-      end;
-      dest.HorizLine(X1,Y1,X2,c, ADrawMode);
-    end;
-    Exit;
-  end else
-  if (X1 = X2) then
-  begin
-    if not DrawLastPixel then
-    begin
-      if Y2 > Y1 then dec(Y2) else inc(Y2);
-    end;
-    dest.VertLine(X1,Y1,Y2,c, ADrawMode);
-	Exit;
-  end;
-
-  DX := X2 - X1;
-  DY := Y2 - Y1;
-
-  if (ADrawMode = dmSetExceptTransparent) and (c.alpha <> 255) then exit else
-  if c.alpha = 0 then
-  begin
-    if ADrawMode in[dmDrawWithTransparency,dmLinearBlend] then exit;
-    if (ADrawMode = dmXor) and (DWord(c)=0) then exit;
-  end;
-  case ADrawMode of
-  dmDrawWithTransparency: PixelProc := @dest.DrawPixel;
-  dmXor: PixelProc := @dest.XorPixel;
-  dmLinearBlend: PixelProc := @dest.FastBlendPixel;
-  else
-    PixelProc := @dest.SetPixel;
-  end;
-
-  if DX < 0 then
-  begin
-    SX := -1;
-    DX := -DX;
-  end
-  else
-    SX := 1;
-
-  if DY < 0 then
-  begin
-    SY := -1;
-    DY := -DY;
-  end
-  else
-    SY := 1;
-
-  DX := DX shl 1;
-  DY := DY shl 1;
-
-  X := X1;
-  Y := Y1;
-  if DX > DY then
-  begin
-    E := DY - DX shr 1;
-
-    while X <> X2 do
-    begin
-      PixelProc(X, Y, c);
-      if E >= 0 then
-      begin
-        Inc(Y, SY);
-        Dec(E, DX);
-      end;
-      Inc(X, SX);
-      Inc(E, DY);
-    end;
-  end
-  else
-  begin
-    E := DX - DY shr 1;
-
-    while Y <> Y2 do
-    begin
-      PixelProc(X, Y, c);
-      if E >= 0 then
-      begin
-        Inc(X, SX);
-        Dec(E, DY);
-      end;
-      Inc(Y, SY);
-      Inc(E, DX);
-    end;
-  end;
-
-  if DrawLastPixel then
-    PixelProc(X2, Y2, c);
+  dest.DrawLine(x1,y1,x2,y2, c,DrawLastPixel, ADrawMode);
 end;
 
 procedure BGRAEraseLineAliased(dest: TBGRACustomBitmap; x1, y1, x2,
   y2: integer; alpha: byte; DrawLastPixel: boolean);
-var
-  Y, X: integer;
-  DX, DY, SX, SY, E: integer;
 begin
-
-  if (Y1 = Y2) and (X1 = X2) then
-  begin
-    if DrawLastPixel then
-      dest.ErasePixel(X1, Y1, alpha);
-    Exit;
-  end;
-
-  DX := X2 - X1;
-  DY := Y2 - Y1;
-
-  if DX < 0 then
-  begin
-    SX := -1;
-    DX := -DX;
-  end
-  else
-    SX := 1;
-
-  if DY < 0 then
-  begin
-    SY := -1;
-    DY := -DY;
-  end
-  else
-    SY := 1;
-
-  DX := DX shl 1;
-  DY := DY shl 1;
-
-  X := X1;
-  Y := Y1;
-  if DX > DY then
-  begin
-    E := DY - DX shr 1;
-
-    while X <> X2 do
-    begin
-      dest.ErasePixel(X, Y, alpha);
-      if E >= 0 then
-      begin
-        Inc(Y, SY);
-        Dec(E, DX);
-      end;
-      Inc(X, SX);
-      Inc(E, DY);
-    end;
-  end
-  else
-  begin
-    E := DX - DY shr 1;
-
-    while Y <> Y2 do
-    begin
-      dest.ErasePixel(X, Y, alpha);
-      if E >= 0 then
-      begin
-        Inc(X, SX);
-        Dec(E, DY);
-      end;
-      Inc(Y, SY);
-      Inc(E, DX);
-    end;
-  end;
-
-  if DrawLastPixel then
-    dest.ErasePixel(X2, Y2, alpha);
+  dest.EraseLine(x1,y1,x2,y2,alpha,DrawLastPixel);
 end;
 
 procedure BGRADrawLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
   c: TBGRAPixel; DrawLastPixel: boolean; LinearBlend : boolean);
 var
-  Y, X:  integer;
-  DX, DY, SX, SY, E: integer;
-  alpha: NativeUInt;
-  pixelproc: procedure(x,y: int32or64; c: TBGRAPixel) of object;
+  b: TUniversalBrush;
 begin
+  if c.alpha = 0 then exit;
   if LinearBlend then
-    pixelproc := @dest.FastBlendPixel
+    dest.SolidBrush(b, c,dmLinearBlend)
   else
-    pixelproc := @dest.DrawPixel;
-
-  if (Y1 = Y2) and (X1 = X2) then
-  begin
-    if DrawLastPixel then
-      pixelproc(X1, Y1, c);
-    Exit;
-  end;
-
-  DX := X2 - X1;
-  DY := Y2 - Y1;
-
-  if DX < 0 then
-  begin
-    SX := -1;
-    DX := -DX;
-  end
-  else
-    SX := 1;
-
-  if DY < 0 then
-  begin
-    SY := -1;
-    DY := -DY;
-  end
-  else
-    SY := 1;
-
-  DX := DX shl 1;
-  DY := DY shl 1;
-
-  X := X1;
-  Y := Y1;
-
-  if DX > DY then
-  begin
-    E := 0;
-
-    while X <> X2 do
-    begin
-      alpha := c.alpha * E div DX;
-      pixelproc(X, Y, BGRA(c.red, c.green, c.blue, c.alpha - alpha));
-      pixelproc(X, Y + SY, BGRA(c.red, c.green, c.blue, alpha));
-      Inc(E, DY);
-      if E >= DX then
-      begin
-        Inc(Y, SY);
-        Dec(E, DX);
-      end;
-      Inc(X, SX);
-    end;
-  end
-  else
-  begin
-    E := 0;
-
-    while Y <> Y2 do
-    begin
-      alpha := c.alpha * E div DY;
-      pixelproc(X, Y, BGRA(c.red, c.green, c.blue, c.alpha - alpha));
-      pixelproc(X + SX, Y, BGRA(c.red, c.green, c.blue, alpha));
-      Inc(E, DX);
-      if E >= DY then
-      begin
-        Inc(X, SX);
-        Dec(E, DY);
-      end;
-      Inc(Y, SY);
-    end;
-  end;
-  if DrawLastPixel then
-    pixelproc(X2, Y2, c);
+    dest.SolidBrush(b, c,dmDrawWithTransparency);
+  dest.DrawLineAntialias(x1,y1,x2,y2, b,DrawLastPixel);
 end;
 
 procedure BGRAEraseLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2,
   y2: integer; calpha: byte; DrawLastPixel: boolean);
-var
-  Y, X:  integer;
-  DX, DY, SX, SY, E: integer;
-  alpha: NativeUInt;
 begin
-
-  if (Y1 = Y2) and (X1 = X2) then
-  begin
-    if DrawLastPixel then
-      dest.ErasePixel(X1, Y1, calpha);
-    Exit;
-  end;
-
-  DX := X2 - X1;
-  DY := Y2 - Y1;
-
-  if DX < 0 then
-  begin
-    SX := -1;
-    DX := -DX;
-  end
-  else
-    SX := 1;
-
-  if DY < 0 then
-  begin
-    SY := -1;
-    DY := -DY;
-  end
-  else
-    SY := 1;
-
-  DX := DX shl 1;
-  DY := DY shl 1;
-
-  X := X1;
-  Y := Y1;
-
-  if DX > DY then
-  begin
-    E := 0;
-
-    while X <> X2 do
-    begin
-      alpha := calpha * E div DX;
-      dest.ErasePixel(X, Y, calpha - alpha);
-      dest.ErasePixel(X, Y + SY, alpha);
-      Inc(E, DY);
-      if E >= DX then
-      begin
-        Inc(Y, SY);
-        Dec(E, DX);
-      end;
-      Inc(X, SX);
-    end;
-  end
-  else
-  begin
-    E := 0;
-
-    while Y <> Y2 do
-    begin
-      alpha := calpha * E div DY;
-      dest.ErasePixel(X, Y, calpha - alpha);
-      dest.ErasePixel(X + SX, Y, alpha);
-      Inc(E, DX);
-      if E >= DY then
-      begin
-        Inc(X, SX);
-        Dec(E, DY);
-      end;
-      Inc(Y, SY);
-    end;
-  end;
-  if DrawLastPixel then
-    dest.ErasePixel(X2, Y2, calpha);
+  dest.EraseLineAntialias(x1,y1,x2,y2,calpha,DrawLastPixel);
 end;
 
 procedure BGRADrawLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
   c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean; var DashPos: integer; LinearBlend : boolean);
 var
-  Y, X:  integer;
-  DX, DY, SX, SY, E: integer;
-  alpha: NativeUInt;
-  c:     TBGRAPixel;
+  b1, b2: TUniversalBrush;
 begin
   if (c1.alpha=0) and (c2.alpha=0) then exit;
-  if DashLen <= 0 then
+  if LinearBlend then
   begin
-    BGRADrawLineAntialias(dest,x1,y1,x2,y2,MergeBGRA(c1,c2),DrawLastPixel,LinearBlend);
-    exit;
-  end;
-
-  DashPos := PositiveMod(DashPos,DashLen+DashLen);
-  if DashPos < DashLen then c := c1 else c := c2;
-
-  if (Y1 = Y2) and (X1 = X2) then
-  begin
-    if DrawLastPixel then
-      dest.DrawPixel(X1, Y1, c);
-    Exit;
-  end;
-
-  DX := X2 - X1;
-  DY := Y2 - Y1;
-
-  if DX < 0 then
-  begin
-    SX := -1;
-    DX := -DX;
-  end
-  else
-    SX := 1;
-
-  if DY < 0 then
-  begin
-    SY := -1;
-    DY := -DY;
-  end
-  else
-    SY := 1;
-
-  DX := DX shl 1;
-  DY := DY shl 1;
-
-  X := X1;
-  Y := Y1;
-
-  if DX > DY then
-  begin
-    E := 0;
-
-    while X <> X2 do
-    begin
-      alpha := c.alpha * E div DX;
-      dest.DrawPixel(X, Y, BGRA(c.red, c.green, c.blue, c.alpha - alpha));
-      dest.DrawPixel(X, Y + SY, BGRA(c.red, c.green, c.blue, alpha));
-      Inc(E, DY);
-      if E >= DX then
-      begin
-        Inc(Y, SY);
-        Dec(E, DX);
-      end;
-      Inc(X, SX);
-
-      Inc(DashPos);
-      if DashPos = DashLen then
-        c := c2
-      else
-      if DashPos = DashLen + DashLen then
-      begin
-        c := c1;
-        DashPos := 0;
-      end;
-    end;
+    dest.SolidBrush(b1, c1,dmLinearBlend);
+    dest.SolidBrush(b2, c2,dmLinearBlend);
   end
   else
   begin
-    E := 0;
-
-    while Y <> Y2 do
-    begin
-      alpha := c.alpha * E div DY;
-      dest.DrawPixel(X, Y, BGRA(c.red, c.green, c.blue, c.alpha - alpha));
-      dest.DrawPixel(X + SX, Y, BGRA(c.red, c.green, c.blue, alpha));
-      Inc(E, DX);
-      if E >= DY then
-      begin
-        Inc(X, SX);
-        Dec(E, DY);
-      end;
-      Inc(Y, SY);
-
-      Inc(DashPos);
-      if DashPos = DashLen then
-        c := c2
-      else
-      if DashPos = DashLen + DashLen then
-      begin
-        c := c1;
-        DashPos := 0;
-      end;
-    end;
+    dest.SolidBrush(b1, c1,dmDrawWithTransparency);
+    dest.SolidBrush(b2, c2,dmDrawWithTransparency);
   end;
-  if DrawLastPixel then
-  begin
-    dest.DrawPixel(X2, Y2, c);
-    inc(DashPos);
-    if DashPos = DashLen + DashLen then DashPos := 0;
-  end;
+  dest.DrawLineAntialias(x1,y1,x2,y2, b1,b2, dashLen,dashPos,DrawLastPixel);
 end;
 
 function GetAlphaJoinFactor(alpha: byte): single;
@@ -594,27 +183,7 @@ end;
 function CreateBrushTexture(prototype: TBGRACustomBitmap; brushstyle: TBrushStyle;
   PatternColor, BackgroundColor: TBGRAPixel; width: integer = 8; height: integer = 8; penwidth: single = 1): TBGRACustomBitmap;
 begin
-  result := prototype.NewBitmap(width,height);
-  if brushstyle <> bsClear then
-  begin
-    result.Fill(BackgroundColor);
-    if brushstyle in[bsDiagCross,bsBDiagonal] then
-    begin
-      result.DrawLineAntialias(-1,height,width,-1,PatternColor,penwidth);
-      result.DrawLineAntialias(-1-penwidth,0+penwidth,0+penwidth,-1-penwidth,PatternColor,penwidth);
-      result.DrawLineAntialias(width-1-penwidth,height+penwidth,width+penwidth,height-1-penwidth,PatternColor,penwidth);
-    end;
-    if brushstyle in[bsDiagCross,bsFDiagonal] then
-    begin
-      result.DrawLineAntialias(-1,-1,width,height,PatternColor,penwidth);
-      result.DrawLineAntialias(width-1-penwidth,-1-penwidth,width+penwidth,0+penwidth,PatternColor,penwidth);
-      result.DrawLineAntialias(-1-penwidth,height-1-penwidth,0+penwidth,height+penwidth,PatternColor,penwidth);
-    end;
-    if brushstyle in[bsHorizontal,bsCross] then
-      result.DrawLineAntialias(-1,height div 2,width,height div 2,PatternColor,penwidth);
-    if brushstyle in[bsVertical,bsCross] then
-      result.DrawLineAntialias(width div 2,-1,width div 2,height,PatternColor,penwidth);
-  end;
+  result := prototype.CreateBrushTexture(brushstyle, PatternColor, BackgroundColor, width,height, penwidth);
 end;
 
 function IsSolidPenStyle(ACustomPenStyle: TBGRAPenStyle): boolean;
@@ -648,6 +217,18 @@ begin
   if PenStyleEqual(ACustomPenStyle, DashDotPenStyle) then exit(psDashDot);
   if PenStyleEqual(ACustomPenStyle, DashDotDotPenStyle) then exit(psDashDotDot);
   exit(psPattern);
+end;
+
+function PenStyleToBGRA(APenStyle: TPenStyle): TBGRAPenStyle;
+begin
+  Case APenStyle of
+  psSolid: result := SolidPenStyle;
+  psDash: result := DashPenStyle;
+  psDot: result := DotPenStyle;
+  psDashDot: result := DashDotPenStyle;
+  psDashDotDot: result := DashDotDotPenStyle;
+  else result := ClearPenStyle;
+  end;
 end;
 
 function PenStyleEqual(AStyle1, AStyle2: TBGRAPenStyle): boolean;
@@ -1061,9 +642,9 @@ var
     if hasStart then
     begin
       delta := length(arrowStartData)+1;
-      finalNb += delta;
+      inc(finalNb, delta);
     end else delta := 0;
-    if hasEnd then finalNb += length(arrowEndData)+1;
+    if hasEnd then inc(finalNb, length(arrowEndData)+1);
     SetLength(Result, finalNb);
     if hasStart then
     begin
@@ -1075,7 +656,7 @@ var
     end;
     if hasEnd then
     begin
-      delta += NbPolyAcc+1;
+      inc(delta, NbPolyAcc+1);
       result[delta-1] := EmptyPointF;
       for i := 0 to high(arrowEndData) do
         result[i+delta] := arrowEndData[i];
@@ -1144,7 +725,7 @@ begin
     pts[nbPts] := pts[1];
     inc(nbPts);
   end else
-    options -= [plCycle];
+    exclude(options, plCycle);
 
   setlength(pts,nbPts);
 
@@ -1188,8 +769,8 @@ begin
     for i := high(pts) downto 1 do
     begin
       dir := pts[i-1]-pts[i];
-      len := sqrt(dir*dir);
-      dir *= 1/len;
+      len := VectLen(dir);
+      dir.Scale(1/len);
       if not endArrowDone and (linePos+len >= wantedEndArrowPos) then
       begin
         endArrowPos := pts[i];
@@ -1209,8 +790,8 @@ begin
   for i := 0 to high(pts)-1 do
   begin
     dir := pts[i+1]-pts[i];
-    len := sqrt(dir*dir);
-    dir *= 1/len;
+    len := VectLen(dir);
+    dir.Scale(1/len);
     if not startArrowDone and (linePos+len >= wantedStartArrowPos) then
     begin
       startArrowPos := pts[i];
@@ -1222,15 +803,15 @@ begin
       (not (plNoEndCap in options) and (i=high(pts)-1))) then //for square cap, just start and end further
     begin
       if i=0 then
-        pts[0] -= dir*hw;
+        pts[0].Offset(dir*(-hw));
 
       if (i=high(pts)-1) then
-        pts[high(pts)] += dir*hw;
+        pts[high(pts)].Offset(dir*hw);
 
       //length changed
       dir := pts[i+1]-pts[i];
-      len := sqrt(dir*dir);
-      dir *= 1/len;
+      len := VectLen(dir);
+      dir.Scale(1/len);
     end else
     if not (plNoStartCap in options) and (linecap = pecRound) and (i=0) and not (plCycle in options) then
       AddRoundCap(pts[0], -dir ,true);
@@ -1265,12 +846,23 @@ begin
         littleBorder.origin := pts[i+1] + borders[i].leftSide.dir*maxMiter;
         littleBorder.dir := borders[i].leftDir;
         HasLittleBorder := true;
+        nbJoinLeft := 0;
+        nbJoinRight:= 0;
+        ShouldFlushLine := True;
+      end else
+      begin
+        pt1 := pts[i+1] + borders[i].leftDir;
+        pt2 := pts[i+1] + borders[i].leftSide.dir*hw;
+        SetJoinLeft(ComputeRoundJoin(pts[i+1],pt1,pt2));
+        pt1 := pts[i+1] - borders[i].leftDir;
+        SetJoinRight(ComputeRoundJoin(pts[i+1],pt1,pt2));
+        AddJoin(-1);
+        FlushLine(-1);
+        nbJoinLeft := 0;
+        nbJoinRight:= 0;
+        AddPt(pts[i+1]+borders[i+1].leftDir,
+              pts[i+1]-borders[i+1].leftDir);
       end;
-
-      nbJoinLeft := 0;
-      nbJoinRight:= 0;
-
-      ShouldFlushLine := True;
     end else
     if turn > 0.99999 then //straight line
     begin
@@ -1339,10 +931,10 @@ begin
       //rightside join
       rightInter := IntersectLine( borders[i].rightSide, borders[i+1].rightSide );
       diff := rightInter-pts[i+1];
-      len := sqrt(diff*diff);
+      len := VectLen(diff);
       if (len > maxMiter) and (turn <= 0) then //if miter too far
       begin
-        diff *= 1/len;
+        diff.Scale(1/len);
 
         if joinstyle <> pjsRound then
         begin
@@ -1560,7 +1152,7 @@ end;
 
 function TBGRAPenStroker.GetCustomPenStyle: TBGRAPenStyle;
 begin
-  result := FCustomPenStyle;
+  result := DuplicatePenStyle(FCustomPenStyle);
 end;
 
 function TBGRAPenStroker.GetJoinStyle: TPenJoinStyle;
@@ -1600,19 +1192,9 @@ end;
 
 procedure TBGRAPenStroker.SetCustomPenStyle(AValue: TBGRAPenStyle);
 begin
-  if FCustomPenStyle=AValue then Exit;
-  FCustomPenStyle:=AValue;
-  if AValue = SolidPenStyle then FPenStyle := psSolid
-  else if AValue = ClearPenStyle then FPenStyle:= psClear
-  else if AValue = DashPenStyle then FPenStyle:= psDash
-  else if AValue = DotPenStyle then FPenStyle := psDot
-  else if AValue = DashDotPenStyle then FPenStyle:= psDashDot
-  else if AValue = DashDotDotPenStyle then FPenStyle:= psDashDotDot
-  else
-  begin
-    FPenStyle := psPattern;
-    FCustomPenStyle:= DuplicatePenStyle(AValue);
-  end;
+  if PenStyleEqual(FCustomPenStyle,AValue) then Exit;
+  FCustomPenStyle:= DuplicatePenStyle(AValue);
+  FPenStyle:= BGRAToPenStyle(AValue);
 end;
 
 procedure TBGRAPenStroker.SetJoinStyle(AValue: TPenJoinStyle);
@@ -1647,15 +1229,8 @@ end;
 
 procedure TBGRAPenStroker.SetPenStyle(AValue: TPenStyle);
 begin
-  if FPenStyle=AValue then Exit;
-  Case AValue of
-  psSolid: FCustomPenStyle := SolidPenStyle;
-  psDash: FCustomPenStyle := DashPenStyle;
-  psDot: FCustomPenStyle := DotPenStyle;
-  psDashDot: FCustomPenStyle := DashDotPenStyle;
-  psDashDotDot: FCustomPenStyle := DashDotDotPenStyle;
-  else FCustomPenStyle := ClearPenStyle;
-  end;
+  if (FPenStyle=AValue) or (AValue=psPattern) then Exit;
+  FCustomPenStyle := PenStyleToBGRA(AValue);
   FPenStyle := AValue;
 end;
 
@@ -1696,9 +1271,9 @@ function TBGRAPenStroker.ComputePolyline(const APoints: array of TPointF;
 var options: TBGRAPolyLineOptions;
 begin
   options := [];
-  if Assigned(Arrow) and Arrow.IsStartDefined then options += [plNoStartCap];
-  if Assigned(Arrow) and Arrow.IsEndDefined then options += [plNoEndCap];
-  if not AClosedCap then options += [plRoundCapOpen];
+  if Assigned(Arrow) and Arrow.IsStartDefined then include(options, plNoStartCap);
+  if Assigned(Arrow) and Arrow.IsEndDefined then include(options, plNoEndCap);
+  if not AClosedCap then include(options, plRoundCapOpen);
   if FStrokeMatrixIdentity then
     result := BGRAPen.ComputeWidePolylinePoints(APoints, AWidth*FStrokeZoom, APenColor, LineCap, JoinStyle, CustomPenStyle, options, MiterLimit, Arrow)
   else
@@ -1710,8 +1285,8 @@ function TBGRAPenStroker.ComputePolylineAutocycle(
 var options: TBGRAPolyLineOptions;
 begin
   options := [plAutoCycle];
-  if Assigned(Arrow) and Arrow.IsStartDefined then options += [plNoStartCap];
-  if Assigned(Arrow) and Arrow.IsEndDefined then options += [plNoEndCap];
+  if Assigned(Arrow) and Arrow.IsStartDefined then include(options, plNoStartCap);
+  if Assigned(Arrow) and Arrow.IsEndDefined then include(options, plNoEndCap);
   if FStrokeMatrixIdentity then
     result := BGRAPen.ComputeWidePolylinePoints(APoints, AWidth*FStrokeZoom, BGRAPixelTransparent, LineCap, JoinStyle, CustomPenStyle, options, MiterLimit, Arrow)
   else

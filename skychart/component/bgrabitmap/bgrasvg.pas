@@ -24,12 +24,6 @@ const
   cuPercent = BGRAUnits.cuPercent;
 
 type
-  TSVGViewBox = record
-    min, size: TPointF;
-  end;
-  TSVGSize = record
-    width, height: TFloatWithCSSUnit;
-  end;
 
   { TSVGUnits }
 
@@ -85,15 +79,22 @@ type
 
   { TBGRASVG }
 
-  TBGRASVG = class
+  TBGRASVG = class(TSVGCustomElement)
   private
-    function GetAttribute(AName: string): string; overload;
-    function GetAttribute(AName: string; ADefault: string): string; overload;
+    function GetComputedHeight: TFloatWithCSSUnit;
+    function GetComputedWidth: TFloatWithCSSUnit;
+    function GetContainerHeight: TFloatWithCSSUnit;
+    function GetContainerHeightAsPixel: single;
+    function GetContainerWidth: TFloatWithCSSUnit;
+    function GetContainerWidthAsPixel: single;
     function GetCustomDpi: TPointF;
+    function GetFontSize: TFloatWithCSSUnit;
     function GetHeight: TFloatWithCSSUnit;
     function GetHeightAsCm: single;
     function GetHeightAsInch: single;
+    function GetHeightAsPixel: single;
     function GetPreserveAspectRatio: TSVGPreserveAspectRatio;
+    function GetUnits: TSVGUnits;
     function GetUTF8String: utf8string;
     function GetViewBox: TSVGViewBox; overload;
     function GetViewBox(AUnit: TCSSUnit): TSVGViewBox; overload;
@@ -103,30 +104,36 @@ type
     function GetWidth: TFloatWithCSSUnit;
     function GetWidthAsCm: single;
     function GetWidthAsInch: single;
+    function GetWidthAsPixel: single;
     function GetZoomable: boolean;
-    procedure SetAttribute(AName: string; AValue: string);
+    procedure SetContainerHeight(AValue: TFloatWithCSSUnit);
+    procedure SetContainerHeightAsPixel(AValue: single);
+    procedure SetContainerWidth(AValue: TFloatWithCSSUnit);
+    procedure SetContainerWidthAsPixel(AValue: single);
     procedure SetCustomDpi(AValue: TPointF);
     procedure SetDefaultDpi(AValue: single);
+    procedure SetFontSize(AValue: TFloatWithCSSUnit);
     procedure SetHeight(AValue: TFloatWithCSSUnit);
     procedure SetHeightAsCm(AValue: single);
     procedure SetHeightAsInch(AValue: single);
+    procedure SetHeightAsPixel(AValue: single);
     procedure SetPreserveAspectRatio(AValue: TSVGPreserveAspectRatio);
     procedure SetUTF8String(AValue: utf8string);
     procedure SetViewBox(AValue: TSVGViewBox);
     procedure SetWidth(AValue: TFloatWithCSSUnit);
     procedure SetWidthAsCm(AValue: single);
     procedure SetWidthAsInch(AValue: single);
+    procedure SetWidthAsPixel(AValue: single);
     procedure SetZoomable(AValue: boolean);
   protected
     FXml: TXMLDocument;
-    FRoot: TDOMElement;
-    FUnits: TSVGUnits;
     FDefaultDpi: single;
     FContent: TSVGContent;
     FDataLink: TSVGDataLink;
     procedure Init(ACreateEmpty: boolean);
     function GetViewBoxAlignment(AHorizAlign: TAlignment; AVertAlign: TTextLayout): TPointF;
     procedure UnitsRecompute(Sender: TObject);
+    procedure SetAttribute(AName: string; AValue: string); override;
   public
     constructor Create; overload;
     constructor Create(AWidth,AHeight: single; AUnit: TCSSUnit); overload;
@@ -150,14 +157,25 @@ type
     procedure StretchDraw(ACanvas2d: TBGRACanvas2D; r: TRectF; useSvgAspectRatio: boolean = false); overload;
     procedure StretchDraw(ACanvas2d: TBGRACanvas2D; AHorizAlign: TAlignment; AVertAlign: TTextLayout; x,y,w,h: single); overload;
     function GetStretchRectF(AHorizAlign: TAlignment; AVertAlign: TTextLayout; x,y,w,h: single): TRectF;
+    function FindElementById(AID: string): TSVGElement; overload;
+    function FindElementById(AID: string; AClass: TSVGFactory): TSVGElement; overload;
     property AsUTF8String: utf8string read GetUTF8String write SetUTF8String;
-    property Units: TSVGUnits read FUnits;
+    property Units: TSVGUnits read GetUnits;
+    property FontSize: TFloatWithCSSUnit read GetFontSize write SetFontSize;
     property Width: TFloatWithCSSUnit read GetWidth write SetWidth;
     property Height: TFloatWithCSSUnit read GetHeight write SetHeight;
+    property ComputedWidth: TFloatWithCSSUnit read GetComputedWidth;
+    property ComputedHeight: TFloatWithCSSUnit read GetComputedHeight;
+    property WidthAsPixel: single read GetWidthAsPixel write SetWidthAsPixel;
+    property HeightAsPixel: single read GetHeightAsPixel write SetHeightAsPixel;
     property WidthAsCm: single read GetWidthAsCm write SetWidthAsCm;
     property HeightAsCm: single read GetHeightAsCm write SetHeightAsCm;
     property WidthAsInch: single read GetWidthAsInch write SetWidthAsInch;
     property HeightAsInch: single read GetHeightAsInch write SetHeightAsInch;
+    property ContainerWidth: TFloatWithCSSUnit read GetContainerWidth write SetContainerWidth;
+    property ContainerWidthAsPixel: single read GetContainerWidthAsPixel write SetContainerWidthAsPixel;
+    property ContainerHeight: TFloatWithCSSUnit read GetContainerHeight write SetContainerHeight;
+    property ContainerHeightAsPixel: single read GetContainerHeightAsPixel write SetContainerHeightAsPixel;
     property Zoomable: boolean read GetZoomable write SetZoomable;
     property ViewBox: TSVGViewBox read GetViewBox write SetViewBox;
     property ViewBoxInUnit[AUnit: TCSSUnit]: TSVGViewBox read GetViewBox;
@@ -211,7 +229,7 @@ begin
   prevPos := Stream.Position;
   count := Stream.Read({%H-}magic, sizeof(magic));
   Stream.Position:= prevPos;
-  result:= (count = sizeof(magic)) and (magic = '<?xml ');
+  result:= (count = sizeof(magic)) and ((magic = '<?xml ') or (copy(magic,1,5)='<svg '));
 end;
 
 procedure TFPReaderSVG.InternalRead(Stream: TStream; Img: TFPCustomImage);
@@ -365,27 +383,8 @@ begin
 end;
 
 procedure TSVGUnits.Recompute;
-var viewBoxStr: string;
-
-  function parseNextFloat: single;
-  var
-    idxSpace,{%H-}errPos: integer;
-  begin
-    idxSpace:= pos(' ',viewBoxStr);
-    if idxSpace <> 0 then
-      val(copy(viewBoxStr,1,idxSpace-1),result,errPos)
-    else
-      result := 0;
-    delete(viewBoxStr,1,idxSpace);
-    while (viewBoxStr <> '') and (viewBoxStr[1] = ' ') do delete(viewBoxStr,1,1);
-  end;
-
 begin
-  viewBoxStr := trim(FSvg.GetAttribute('viewBox'))+' ';
-  FViewBox.min.x := parseNextFloat;
-  FViewBox.min.y := parseNextFloat;
-  FViewBox.size.x := parseNextFloat;
-  FViewBox.size.y := parseNextFloat;
+  FViewBox:= TSVGViewBox.Parse( FSvg.GetAttribute('viewBox') );
 
   FOriginalViewSize.width := parseValue(FSvg.GetAttribute('width'), FloatWithCSSUnit(FViewBox.size.x, cuPixel));
   if FOriginalViewSize.width.CSSUnit = cuCustom then FOriginalViewSize.width.CSSUnit := cuPixel;
@@ -546,69 +545,125 @@ function TSVGUnits.GetStretchRectF(AViewSize: TRectF; par: TSVGPreserveAspectRat
 var w0,h0,w,h: single;
 begin
   result := AViewSize;
-  w0 := AViewSize.Right-AViewSize.Left;
-  h0 := AViewSize.Bottom-AViewSize.Top;
-  w := w0;
-  h := h0;
+  w0 := AViewSize.Width;
+  h0 := AViewSize.Height;
 
   if par.Preserve and
      (FViewBox.size.x > 0) and (FViewBox.size.y > 0) and
-     (w > 0) and (h > 0) then
+     (w0 > 0) and (h0 > 0) then
   begin
+    w := w0;
+    h := h0;
+
     //viewBox wider than viewSize
     if (FViewBox.size.x/FViewBox.size.y > w/h) xor par.Slice then
-      h := w * FViewBox.size.y / FViewBox.size.x
-    else
+    begin
+      h := w * FViewBox.size.y / FViewBox.size.x;
+      result.Bottom := result.Top+h;
+    end else
+    begin
       w := h * FViewBox.size.x / FViewBox.size.y;
+      result.Right := result.Left+w;
+    end;
     case par.HorizAlign of
-      taCenter: result.Left += (w0-w)/2;
-      taRightJustify: result.Left += w0-w;
+      taCenter: result.Offset((w0-w)/2, 0);
+      taRightJustify: result.Offset(w0-w, 0);
     end;
     case par.VertAlign of
-      tlCenter: result.Top += (h0-h)/2;
-      tlBottom: result.Top += h0-h;
+      tlCenter: result.Offset(0, (h0-h)/2);
+      tlBottom: result.Offset(0, h0-h);
     end;
   end;
-  result.Right := result.Left+w;
-  result.Bottom := result.Top+h;
 end;
 
 { TBGRASVG }
 
-function TBGRASVG.GetAttribute(AName: string): string;
+function TBGRASVG.GetComputedHeight: TFloatWithCSSUnit;
+var
+  h: TFloatWithCSSUnit;
 begin
-  result := Trim(FRoot.GetAttribute(AName));
+  h := Height;
+  if h.CSSUnit = cuPercent then
+  with ContainerHeight do
+  begin
+    h.value := value * h.value/100;
+    h.CSSUnit := CSSUnit;
+  end;
+  result := h;
 end;
 
-function TBGRASVG.GetAttribute(AName: string; ADefault: string): string;
+function TBGRASVG.GetComputedWidth: TFloatWithCSSUnit;
+var
+  w: TFloatWithCSSUnit;
 begin
-  result := GetAttribute(AName);
-  if result = '' then result := ADefault;
+  w := Width;
+  if w.CSSUnit = cuPercent then
+  with ContainerWidth do
+  begin
+    w.value := value * w.value/100;
+    w.CSSUnit := CSSUnit;
+  end;
+  result := w;
+end;
+
+function TBGRASVG.GetContainerHeight: TFloatWithCSSUnit;
+begin
+  result := Units.ContainerHeight;
+end;
+
+function TBGRASVG.GetContainerHeightAsPixel: single;
+begin
+  result := Units.ConvertHeight(Units.ContainerHeight, cuPixel).value;
+end;
+
+function TBGRASVG.GetContainerWidth: TFloatWithCSSUnit;
+begin
+  result := Units.ContainerWidth;
+end;
+
+function TBGRASVG.GetContainerWidthAsPixel: single;
+begin
+  result := Units.ConvertWidth(Units.ContainerWidth, cuPixel).value;
 end;
 
 function TBGRASVG.GetCustomDpi: TPointF;
 begin
-  result := FUnits.CustomDpi;
+  result := Units.CustomDpi;
+end;
+
+function TBGRASVG.GetFontSize: TFloatWithCSSUnit;
+begin
+  result:= GetVerticalAttributeOrStyleWithUnit('font-size',Units.CurrentFontEmHeight,false);
 end;
 
 function TBGRASVG.GetHeight: TFloatWithCSSUnit;
 begin
-  result := TCSSUnitConverter.parseValue(Attribute['height'],FloatWithCSSUnit(FUnits.ViewBox.size.y,cuCustom));
+  result := TCSSUnitConverter.parseValue(Attribute['height'],FloatWithCSSUnit(Units.ViewBox.size.y,cuCustom));
 end;
 
 function TBGRASVG.GetHeightAsCm: single;
 begin
-  result := FUnits.ConvertHeight(Height,cuCentimeter).value;
+  result := FUnits.ConvertHeight(ComputedHeight,cuCentimeter).value;
 end;
 
 function TBGRASVG.GetHeightAsInch: single;
 begin
-  result := FUnits.ConvertHeight(Height,cuInch).value;
+  result := FUnits.ConvertHeight(ComputedHeight,cuInch).value;
+end;
+
+function TBGRASVG.GetHeightAsPixel: single;
+begin
+  result := FUnits.ConvertHeight(ComputedHeight,cuPixel).value;
 end;
 
 function TBGRASVG.GetPreserveAspectRatio: TSVGPreserveAspectRatio;
 begin
   result := TSVGPreserveAspectRatio.Parse(Attribute['preserveAspectRatio','xMidYMid']);
+end;
+
+function TBGRASVG.GetUnits: TSVGUnits;
+begin
+  result := TSVGUnits(FUnits);
 end;
 
 function TBGRASVG.GetUTF8String: utf8string;
@@ -624,7 +679,7 @@ end;
 
 function TBGRASVG.GetViewBox: TSVGViewBox;
 begin
-  result := FUnits.ViewBox;
+  result := Units.ViewBox;
 end;
 
 function TBGRASVG.GetViewBox(AUnit: TCSSUnit): TSVGViewBox;
@@ -634,7 +689,7 @@ end;
 
 procedure TBGRASVG.GetViewBoxIndirect(AUnit: TCSSUnit; out AViewBox: TSVGViewBox);
 begin
-  with FUnits.ViewBox do
+  with Units.ViewBox do
   begin
     AViewBox.min := FUnits.ConvertCoord(min,cuCustom,AUnit);
     AViewBox.size := FUnits.ConvertCoord(size,cuCustom,AUnit);
@@ -659,22 +714,49 @@ end;
 
 function TBGRASVG.GetWidth: TFloatWithCSSUnit;
 begin
-  result := TCSSUnitConverter.parseValue(Attribute['width'],FloatWithCSSUnit(FUnits.ViewBox.size.x,cuCustom));
+  result := TCSSUnitConverter.parseValue(Attribute['width'],FloatWithCSSUnit(Units.ViewBox.size.x,cuCustom));
 end;
 
 function TBGRASVG.GetWidthAsCm: single;
 begin
-  result := FUnits.ConvertWidth(Width,cuCentimeter).value;
+  result := FUnits.ConvertWidth(ComputedWidth,cuCentimeter).value;
 end;
 
 function TBGRASVG.GetWidthAsInch: single;
 begin
-  result := FUnits.ConvertWidth(Width,cuInch).value;
+  result := FUnits.ConvertWidth(ComputedWidth,cuInch).value;
+end;
+
+function TBGRASVG.GetWidthAsPixel: single;
+begin
+  result := FUnits.ConvertWidth(ComputedWidth,cuPixel).value;
 end;
 
 function TBGRASVG.GetZoomable: boolean;
 begin
   result := AttributeDef['zoomAndPan','magnify']<>'disable';
+end;
+
+procedure TBGRASVG.SetContainerHeight(AValue: TFloatWithCSSUnit);
+begin
+  if AValue.CSSUnit = cuPercent then raise exception.Create('Container width cannot be expressed as percentage');
+  Units.ContainerHeight := AValue;
+end;
+
+procedure TBGRASVG.SetContainerHeightAsPixel(AValue: single);
+begin
+  ContainerHeight := FloatWithCSSUnit(AValue, cuPixel);
+end;
+
+procedure TBGRASVG.SetContainerWidth(AValue: TFloatWithCSSUnit);
+begin
+  if AValue.CSSUnit = cuPercent then raise exception.Create('Container width cannot be expressed as percentage');
+  Units.ContainerWidth := AValue;
+end;
+
+procedure TBGRASVG.SetContainerWidthAsPixel(AValue: single);
+begin
+  ContainerWidth := FloatWithCSSUnit(AValue, cuPixel);
 end;
 
 procedure TBGRASVG.SetAttribute(AName: string; AValue: string);
@@ -683,14 +765,14 @@ begin
   if compareText(AName,'viewBox')= 0 then AName := 'viewBox' else
   if compareText(AName,'width')=0 then AName := 'width' else
   if compareText(AName,'height')=0 then AName := 'height';
-  FRoot.SetAttribute(AName,AValue);
+  inherited SetAttribute(AName,AValue);
   if (AName = 'viewBox') or (AName = 'width') or (AName = 'height') then
-    FUnits.Recompute;
+    Units.Recompute;
 end;
 
 procedure TBGRASVG.SetCustomDpi(AValue: TPointF);
 begin
-  FUnits.CustomDpi := AValue;
+  Units.CustomDpi := AValue;
   if AValue.x <> AValue.y then
     preserveAspectRatio := TSVGPreserveAspectRatio.Parse('none');
 end;
@@ -700,6 +782,11 @@ begin
   if FDefaultDpi=AValue then Exit;
   FDefaultDpi:=AValue;
   Units.Recompute;
+end;
+
+procedure TBGRASVG.SetFontSize(AValue: TFloatWithCSSUnit);
+begin
+  SetVerticalAttributeWithUnit('font-size', AValue);
 end;
 
 procedure TBGRASVG.SetHeight(AValue: TFloatWithCSSUnit);
@@ -715,6 +802,11 @@ end;
 procedure TBGRASVG.SetHeightAsInch(AValue: single);
 begin
   Height := FloatWithCSSUnit(AValue,cuInch);
+end;
+
+procedure TBGRASVG.SetHeightAsPixel(AValue: single);
+begin
+  Height := FloatWithCSSUnit(AValue,cuCustom);
 end;
 
 procedure TBGRASVG.SetPreserveAspectRatio(AValue: TSVGPreserveAspectRatio);
@@ -736,7 +828,7 @@ end;
 {$PUSH}{$OPTIMIZATION OFF} //avoids Internal error 2012090607
 procedure TBGRASVG.SetViewBox(AValue: TSVGViewBox);
 begin
-  FUnits.ViewBox := AValue;
+  Units.ViewBox := AValue;
 end;
 {$POP}
 
@@ -755,6 +847,11 @@ begin
   Width := FloatWithCSSUnit(AValue,cuInch);
 end;
 
+procedure TBGRASVG.SetWidthAsPixel(AValue: single);
+begin
+  Width := FloatWithCSSUnit(AValue,cuCustom);
+end;
+
 procedure TBGRASVG.SetZoomable(AValue: boolean);
 begin
   if AValue then
@@ -769,12 +866,12 @@ begin
   if ACreateEmpty then
   begin
     FXml := TXMLDocument.Create;
-    FRoot := FXml.CreateElement('svg');
-    FUnits := TSVGUnits.Create(FRoot,@FDefaultDpi);
-    FUnits.OnRecompute:= @UnitsRecompute;
+    FDomElem := FXml.CreateElement('svg');
+    FUnits := TSVGUnits.Create(FDomElem,@FDefaultDpi);
+    Units.OnRecompute:= @UnitsRecompute;
     FDataLink := TSVGDataLink.Create;
-    FContent := TSVGContent.Create(FXml,FRoot,FUnits,FDataLink,nil);
-    FXml.AppendChild(FRoot);
+    FContent := TSVGContent.Create(FDomElem,FUnits,FDataLink);
+    FXml.AppendChild(FDomElem);
   end;
 end;
 
@@ -852,7 +949,7 @@ begin
   FreeAndNil(FDataLink);
   FreeAndNil(FContent);
   FreeAndNil(FUnits);
-  FRoot:= nil;
+  FDomElem:= nil;
   FreeAndNil(FXml);
   inherited Destroy;
 end;
@@ -879,10 +976,10 @@ begin
   if AStream.Read({%H-}byteOrderMark,sizeof(byteOrderMark)) = 3 then
   begin
     if (byteOrderMark[1] = $ef) and (byteOrderMark[2] = $bb) and (byteOrderMark[3] = $bf) then
-      startPos += 3;
+      inc(startPos, 3);
   end;
   AStream.Position:= startPos;
-  ReadXMLFile(xml,AStream);
+  ReadXMLFile(xml,AStream,[xrfPreserveWhiteSpace]);
   root := xml.FirstChild;
   while (root <> nil) and not (root is TDOMElement) do root := root.NextSibling;
   if root = nil then
@@ -895,11 +992,11 @@ begin
   FreeAndNil(FUnits);
   FreeAndNil(FXml);
   FXml := xml;
-  FRoot := root as TDOMElement;
-  FUnits := TSVGUnits.Create(FRoot,@FDefaultDpi);
-  FUnits.OnRecompute:= @UnitsRecompute;
+  FDomElem := root as TDOMElement;
+  FUnits := TSVGUnits.Create(FDomElem,@FDefaultDpi);
+  Units.OnRecompute:= @UnitsRecompute;
   FDataLink := TSVGDataLink.Create;
-  FContent := TSVGContent.Create(FXml,FRoot,FUnits,FDataLink,nil);
+  FContent := TSVGContent.Create(FDomElem,FUnits,FDataLink);
 end;
 
 procedure TBGRASVG.LoadFromResource(AFilename: string);
@@ -961,13 +1058,21 @@ end;
 
 procedure TBGRASVG.Draw(ACanvas2d: TBGRACanvas2D; x, y: single; AUnit: TCSSUnit);
 var prevLinearBlend: boolean;
+  fs, prevFontEmHeight: TFloatWithCSSUnit;
 begin
   prevLinearBlend:= ACanvas2d.linearBlend;
   acanvas2d.linearBlend := true;
   ACanvas2d.save;
   ACanvas2d.translate(x,y);
   ACanvas2d.strokeMatrix := ACanvas2d.matrix;
+  prevFontEmHeight := Units.CurrentFontEmHeight;
+  Units.CurrentFontEmHeight := Units.RootFontEmHeight;
+  fs := fontSize;
+  if fs.CSSUnit in [cuFontEmHeight,cuFontXHeight] then
+    fs := Units.ConvertHeight(fontSize,AUnit);
+  Units.CurrentFontEmHeight:= fs;
   Content.Draw(ACanvas2d,AUnit);
+  Units.CurrentFontEmHeight := prevFontEmHeight;
   ACanvas2d.restore;
   ACanvas2d.linearBlend := prevLinearBlend;
 end;
@@ -1061,6 +1166,16 @@ begin
   end;
 
   result := Units.GetStretchRectF(RectF(sx,sy,sx+sw,sy+sh), preserveAspectRatio);
+end;
+
+function TBGRASVG.FindElementById(AID: string): TSVGElement;
+begin
+  result := DataLink.FindElementById(AId, TSVGElement);
+end;
+
+function TBGRASVG.FindElementById(AID: string; AClass: TSVGFactory): TSVGElement;
+begin
+  result := DataLink.FindElementById(AId, AClass);
 end;
 
 initialization

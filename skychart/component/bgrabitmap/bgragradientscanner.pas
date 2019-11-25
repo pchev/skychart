@@ -20,13 +20,13 @@ type
     FColor1,FColor2: TBGRAPixel;
     ec1,ec2: TExpandedPixel;
     FRepetition: TBGRAGradientRepetition;
-    constructor Create(AColor1,AColor2: TBGRAPixel; ARepetition: TBGRAGradientRepetition); overload;
-    constructor Create(AColor1,AColor2: TExpandedPixel; ARepetition: TBGRAGradientRepetition); overload;
     function InterpolateToBGRA(position: word): TBGRAPixel; virtual; abstract;
     function InterpolateToExpanded(position: word): TExpandedPixel; virtual; abstract;
   public
-    class function CreateAny(AInterpolation: TBGRAColorInterpolation; AColor1,AColor2: TBGRAPixel; ARepetition: TBGRAGradientRepetition): TBGRASimpleGradient; overload;
-    class function CreateAny(AInterpolation: TBGRAColorInterpolation; AColor1,AColor2: TExpandedPixel; ARepetition: TBGRAGradientRepetition): TBGRASimpleGradient; overload;
+    class function CreateAny(AInterpolation: TBGRAColorInterpolation; AColor1,AColor2: TBGRAPixel; ARepetition: TBGRAGradientRepetition): TBGRASimpleGradient; overload; static;
+    class function CreateAny(AInterpolation: TBGRAColorInterpolation; AColor1,AColor2: TExpandedPixel; ARepetition: TBGRAGradientRepetition): TBGRASimpleGradient; overload; static;
+    constructor Create(AColor1,AColor2: TBGRAPixel; ARepetition: TBGRAGradientRepetition); overload; //do not call directly
+    constructor Create(AColor1,AColor2: TExpandedPixel; ARepetition: TBGRAGradientRepetition); overload; //do not call directly
     function GetColorAt(position: integer): TBGRAPixel; override;
     function GetColorAtF(position: single): TBGRAPixel; override;
     function GetExpandedColorAt(position: integer): TExpandedPixel; override;
@@ -199,6 +199,7 @@ type
     function ScanAt(X, Y: Single): TBGRAPixel; override;
     function ScanAtExpanded(X, Y: Single): TExpandedPixel; override;
     procedure ScanPutPixels(pdest: PBGRAPixel; count: integer; mode: TDrawMode); override;
+    procedure ScanSkipPixels(ACount: integer); override;
     function IsScanPutPixelsDefined: boolean; override;
     property Transform: TAffineMatrix read FTransform write SetTransform;
     property Gradient: TBGRACustomGradient read FGradient;
@@ -240,6 +241,7 @@ type
     function ScanAt(X,Y: Single): TBGRAPixel; override;
     function ScanNextPixel: TBGRAPixel; override;
     function ScanNextExpandedPixel: TExpandedPixel; override;
+    procedure ScanSkipPixels(ACount: integer); override;
   end;
 
   { TBGRASolidColorMaskScanner }
@@ -247,16 +249,14 @@ type
   TBGRASolidColorMaskScanner = class(TBGRACustomScanner)
   private
     FOffset: TPoint;
-    FMask: TBGRACustomBitmap;
+    FMask: IBGRAScanner;
     FSolidColor: TBGRAPixel;
-    FScanNext : TScanNextPixelFunction;
-    FScanAt : TScanAtFunction;
-    FMemMask: packed array of TBGRAPixel;
   public
-    constructor Create(AMask: TBGRACustomBitmap; AOffset: TPoint; ASolidColor: TBGRAPixel);
+    constructor Create(AMask: IBGRAScanner; AOffset: TPoint; ASolidColor: TBGRAPixel);
     destructor Destroy; override;
     function IsScanPutPixelsDefined: boolean; override;
     procedure ScanPutPixels(pdest: PBGRAPixel; count: integer; mode: TDrawMode); override;
+    procedure ScanSkipPixels(ACount: integer); override;
     procedure ScanMoveTo(X,Y: Integer); override;
     function ScanNextPixel: TBGRAPixel; override;
     function ScanAt(X,Y: Single): TBGRAPixel; override;
@@ -268,17 +268,18 @@ type
   TBGRATextureMaskScanner = class(TBGRACustomScanner)
   private
     FOffset: TPoint;
-    FMask: TBGRACustomBitmap;
+    FMask: IBGRAScanner;
     FTexture: IBGRAScanner;
-    FMaskScanNext,FTextureScanNext : TScanNextPixelFunction;
-    FMaskScanAt,FTextureScanAt : TScanAtFunction;
+    FTextureScanNext : TScanNextPixelFunction;
+    FTextureScanAt : TScanAtFunction;
     FGlobalOpacity: Byte;
-    FMemMask, FMemTex: packed array of TBGRAPixel;
+    FMemTex: packed array of TBGRAPixel;
   public
-    constructor Create(AMask: TBGRACustomBitmap; AOffset: TPoint; ATexture: IBGRAScanner; AGlobalOpacity: Byte = 255);
+    constructor Create(AMask: IBGRAScanner; AOffset: TPoint; ATexture: IBGRAScanner; AGlobalOpacity: Byte = 255);
     destructor Destroy; override;
     function IsScanPutPixelsDefined: boolean; override;
     procedure ScanPutPixels(pdest: PBGRAPixel; count: integer; mode: TDrawMode); override;
+    procedure ScanSkipPixels(ACount: integer); override;
     procedure ScanMoveTo(X,Y: Integer); override;
     function ScanNextPixel: TBGRAPixel; override;
     function ScanAt(X,Y: Single): TBGRAPixel; override;
@@ -300,6 +301,7 @@ type
     destructor Destroy; override;
     function IsScanPutPixelsDefined: boolean; override;
     procedure ScanPutPixels(pdest: PBGRAPixel; count: integer; mode: TDrawMode); override;
+    procedure ScanSkipPixels(ACount: integer); override;
     procedure ScanMoveTo(X,Y: Integer); override;
     function ScanNextPixel: TBGRAPixel; override;
     function ScanAt(X,Y: Single): TBGRAPixel; override;
@@ -504,7 +506,7 @@ begin
     end;
     result.red := FRandomBuffer and 255;
     FRandomBuffer:= FRandomBuffer shr 8;
-    FRandomBufferCount -= 1;
+    dec(FRandomBufferCount);
     result.green := result.red;
     result.blue := result.red;
     result.alpha:= FOpacity;
@@ -545,11 +547,11 @@ begin
   end;
   if (hgoPositiveDirection in AOptions) and not (hgoNegativeDirection in AOptions) then
   begin
-    if c2.hue <= c1.hue then hue2 += 65536;
+    if c2.hue <= c1.hue then inc(hue2, 65536);
   end else
   if not (hgoPositiveDirection in AOptions) and (hgoNegativeDirection in AOptions) then
   begin
-    if c2.hue >= c1.hue then hue1 += 65536;
+    if c2.hue >= c1.hue then inc(hue1, 65536);
   end;
 end;
 
@@ -804,10 +806,10 @@ begin
   sumA := 0;
   for i := 0 to high(FColors) do
   begin
-    sumR += FColors[i].red;
-    sumG += FColors[i].green;
-    sumB += FColors[i].blue;
-    sumA += FColors[i].alpha;
+    inc(sumR, FColors[i].red);
+    inc(sumG, FColors[i].green);
+    inc(sumB, FColors[i].blue);
+    inc(sumA, FColors[i].alpha);
   end;
   result := BGRA(sumR div length(FColors),sumG div length(FColors),
     sumB div length(FColors),sumA div length(FColors));
@@ -1012,6 +1014,11 @@ begin
   result.blue := b;
   result.alpha := a;
   FCurColor += FStep;
+end;
+
+procedure TBGRAGradientTriangleScanner.ScanSkipPixels(ACount: integer);
+begin
+  FCurColor += FStep*ACount;
 end;
 
 { TBGRAGradientScanner }
@@ -1421,7 +1428,7 @@ begin
   else
   begin
     result := GetGradientColor(FScanNextFunc());
-    FPosition += PointF(FMatrix[1,1],FMatrix[2,1]);
+    FPosition.Offset(FMatrix[1,1],FMatrix[2,1]);
   end;
 end;
 
@@ -1432,7 +1439,7 @@ begin
   else
   begin
     result := GetGradientExpandedColor(FScanNextFunc());
-    FPosition += PointF(FMatrix[1,1],FMatrix[2,1]);
+    FPosition.Offset(FMatrix[1,1],FMatrix[2,1]);
   end;
 end;
 
@@ -1460,6 +1467,7 @@ constructor TBGRAGradientScanner.Create(gradient: TBGRACustomGradient;
 begin
   FGradient := gradient;
   FGradientOwner := AGradientOwner;
+  InitGradient;
   Init(AGradientType,AOrigin,d1,AffineMatrixIdentity,Sinus);
 end;
 
@@ -1470,6 +1478,7 @@ begin
   if AGradientType in[gtLinear,gtReflected] then raise EInvalidArgument.Create('Two directions are not required for linear and reflected gradients');
   FGradient := gradient;
   FGradientOwner := AGradientOwner;
+  InitGradient;
   Init(AGradientType,AOrigin,d1,d2,AffineMatrixIdentity,Sinus);
 end;
 
@@ -1479,6 +1488,7 @@ constructor TBGRAGradientScanner.Create(gradient: TBGRACustomGradient;
 begin
   FGradient := gradient;
   FGradientOwner := AGradientOwner;
+  InitGradient;
   Init(AOrigin, ARadius, AFocal, AFocalRadius, AffineMatrixIdentity, AffineMatrixIdentity);
 end;
 
@@ -1588,6 +1598,12 @@ begin
   end;
 end;
 
+procedure TBGRAGradientScanner.ScanSkipPixels(ACount: integer);
+begin
+  if not FRepeatHoriz and not FIsAverage then
+    FPosition.Offset(FMatrix[1,1]*ACount,FMatrix[2,1]*ACount);
+end;
+
 function TBGRAGradientScanner.IsScanPutPixelsDefined: boolean;
 begin
   result := true;
@@ -1595,12 +1611,10 @@ end;
 
 { TBGRATextureMaskScanner }
 
-constructor TBGRATextureMaskScanner.Create(AMask: TBGRACustomBitmap;
+constructor TBGRATextureMaskScanner.Create(AMask: IBGRAScanner;
   AOffset: TPoint; ATexture: IBGRAScanner; AGlobalOpacity: Byte);
 begin
   FMask := AMask;
-  FMaskScanNext := @FMask.ScanNextPixel;
-  FMaskScanAt := @FMask.ScanAt;
   FOffset := AOffset;
   FTexture := ATexture;
   FTextureScanNext := @FTexture.ScanNextPixel;
@@ -1623,117 +1637,123 @@ end;
 procedure TBGRATextureMaskScanner.ScanPutPixels(pdest: PBGRAPixel;
   count: integer; mode: TDrawMode);
 var c: TBGRAPixel;
-    alpha: byte;
-    pmask, ptex: pbgrapixel;
+    ptex: pbgrapixel;
+    pmask: PByteMask;
+    stride, qty: integer;
 
   function GetNext: TBGRAPixel; inline;
   begin
-    alpha := pmask^.red;
-    inc(pmask);
     result := ptex^;
     inc(ptex);
-    result.alpha := ApplyOpacity(result.alpha,alpha);
+    result.alpha := ApplyOpacity(result.alpha, pmask^.gray);
+    inc(pmask, stride);
   end;
 
   function GetNextWithGlobal: TBGRAPixel; inline;
   begin
-    alpha := pmask^.red;
-    inc(pmask);
     result := ptex^;
     inc(ptex);
-    result.alpha := ApplyOpacity( ApplyOpacity(result.alpha,alpha), FGlobalOpacity );
+    result.alpha := ApplyOpacity( ApplyOpacity(result.alpha, pmask^.gray), FGlobalOpacity );
+    inc(pmask, stride);
   end;
 
 begin
-  if count > length(FMemMask) then setlength(FMemMask, max(length(FMemMask)*2,count));
   if count > length(FMemTex) then setlength(FMemTex, max(length(FMemTex)*2,count));
-  ScannerPutPixels(FMask,@FMemMask[0],count,dmSet);
   ScannerPutPixels(FTexture,@FMemTex[0],count,dmSet);
-
-  pmask := @FMemMask[0];
   ptex := @FMemTex[0];
-
-  if FGlobalOpacity <> 255 then
+  while count > 0 do
   begin
-    case mode of
-      dmDrawWithTransparency:
-        while count > 0 do
-        begin
-          DrawPixelInlineWithAlphaCheck(pdest,GetNextWithGlobal);
-          inc(pdest);
-          dec(count);
-        end;
-      dmLinearBlend:
-        while count > 0 do
-        begin
-          FastBlendPixelInline(pdest,GetNextWithGlobal);
-          inc(pdest);
-          dec(count);
-        end;
-      dmXor:
-        while count > 0 do
-        begin
-          PDword(pdest)^ := PDword(pdest)^ xor DWord(GetNextWithGlobal);
-          inc(pdest);
-          dec(count);
-        end;
-      dmSet:
-        while count > 0 do
-        begin
-          pdest^ := GetNextWithGlobal;
-          inc(pdest);
-          dec(count);
-        end;
-      dmSetExceptTransparent:
-        while count > 0 do
-        begin
-          c := GetNextWithGlobal;
-          if c.alpha = 255 then pdest^ := c;
-          inc(pdest);
-          dec(count);
-        end;
-    end;
-  end else
-  begin
-    case mode of
-      dmDrawWithTransparency:
-        while count > 0 do
-        begin
-          DrawPixelInlineWithAlphaCheck(pdest,GetNext);
-          inc(pdest);
-          dec(count);
-        end;
-      dmLinearBlend:
-        while count > 0 do
-        begin
-          FastBlendPixelInline(pdest,GetNext);
-          inc(pdest);
-          dec(count);
-        end;
-      dmXor:
-        while count > 0 do
-        begin
-          PDword(pdest)^ := PDword(pdest)^ xor DWord(GetNext);
-          inc(pdest);
-          dec(count);
-        end;
-      dmSet:
-        while count > 0 do
-        begin
-          pdest^ := GetNext;
-          inc(pdest);
-          dec(count);
-        end;
-      dmSetExceptTransparent:
-        while count > 0 do
-        begin
-          c := GetNext;
-          if c.alpha = 255 then pdest^ := c;
-          inc(pdest);
-          dec(count);
-        end;
+    qty := count;
+    FMask.ScanNextMaskChunk(qty, pMask, stride);
+    dec(count, qty);
+    if FGlobalOpacity <> 255 then
+    begin
+      case mode of
+        dmDrawWithTransparency:
+          while qty > 0 do
+          begin
+            DrawPixelInlineWithAlphaCheck(pdest,GetNextWithGlobal);
+            inc(pdest);
+            dec(qty);
+          end;
+        dmLinearBlend:
+          while qty > 0 do
+          begin
+            FastBlendPixelInline(pdest,GetNextWithGlobal);
+            inc(pdest);
+            dec(qty);
+          end;
+        dmXor:
+          while qty > 0 do
+          begin
+            PDword(pdest)^ := PDword(pdest)^ xor DWord(GetNextWithGlobal);
+            inc(pdest);
+            dec(qty);
+          end;
+        dmSet:
+          while qty > 0 do
+          begin
+            pdest^ := GetNextWithGlobal;
+            inc(pdest);
+            dec(qty);
+          end;
+        dmSetExceptTransparent:
+          while qty > 0 do
+          begin
+            c := GetNextWithGlobal;
+            if c.alpha = 255 then pdest^ := c;
+            inc(pdest);
+            dec(qty);
+          end;
+      end;
+    end else
+    begin
+      case mode of
+        dmDrawWithTransparency:
+          while qty > 0 do
+          begin
+            DrawPixelInlineWithAlphaCheck(pdest,GetNext);
+            inc(pdest);
+            dec(qty);
+          end;
+        dmLinearBlend:
+          while qty > 0 do
+          begin
+            FastBlendPixelInline(pdest,GetNext);
+            inc(pdest);
+            dec(qty);
+          end;
+        dmXor:
+          while qty > 0 do
+          begin
+            PDword(pdest)^ := PDword(pdest)^ xor DWord(GetNext);
+            inc(pdest);
+            dec(qty);
+          end;
+        dmSet:
+          while qty > 0 do
+          begin
+            pdest^ := GetNext;
+            inc(pdest);
+            dec(qty);
+          end;
+        dmSetExceptTransparent:
+          while qty > 0 do
+          begin
+            c := GetNext;
+            if c.alpha = 255 then pdest^ := c;
+            inc(pdest);
+            dec(qty);
+          end;
+      end;
     end;
   end;
+end;
+
+procedure TBGRATextureMaskScanner.ScanSkipPixels(ACount: integer);
+begin
+  FMask.ScanSkipPixels(ACount);
+  FTexture.ScanSkipPixels(ACount);
 end;
 
 procedure TBGRATextureMaskScanner.ScanMoveTo(X, Y: Integer);
@@ -1743,29 +1763,30 @@ begin
 end;
 
 function TBGRATextureMaskScanner.ScanNextPixel: TBGRAPixel;
-var alpha: byte;
+var
+  pMask: PByteMask;
+  stride, qty: integer;
 begin
-  alpha := FMaskScanNext.red;
+  qty := 1;
+  FMask.ScanNextMaskChunk(qty,pMask,stride);
   result := FTextureScanNext();
-  result.alpha := ApplyOpacity( ApplyOpacity(result.alpha,alpha), FGlobalOpacity );
+  result.alpha := ApplyOpacity( ApplyOpacity(result.alpha,pMask^.gray), FGlobalOpacity );
 end;
 
 function TBGRATextureMaskScanner.ScanAt(X, Y: Single): TBGRAPixel;
 var alpha: byte;
 begin
-  alpha := FMaskScanAt(X+FOffset.X,Y+FOffset.Y).red;
+  alpha := FMask.ScanAtMask(X+FOffset.X,Y+FOffset.Y).gray;
   result := FTextureScanAt(X,Y);
   result.alpha := ApplyOpacity( ApplyOpacity(result.alpha,alpha), FGlobalOpacity );
 end;
 
 { TBGRASolidColorMaskScanner }
 
-constructor TBGRASolidColorMaskScanner.Create(AMask: TBGRACustomBitmap;
+constructor TBGRASolidColorMaskScanner.Create(AMask: IBGRAScanner;
   AOffset: TPoint; ASolidColor: TBGRAPixel);
 begin
   FMask := AMask;
-  FScanNext := @FMask.ScanNextPixel;
-  FScanAt := @FMask.ScanAt;
   FOffset := AOffset;
   FSolidColor := ASolidColor;
 end;
@@ -1784,61 +1805,66 @@ end;
 procedure TBGRASolidColorMaskScanner.ScanPutPixels(pdest: PBGRAPixel;
   count: integer; mode: TDrawMode);
 var c: TBGRAPixel;
-    alpha: byte;
-    pmask: pbgrapixel;
+    pmask: PByteMask;
+    stride, qty: integer;
 
   function GetNext: TBGRAPixel; inline;
   begin
-    alpha := pmask^.red;
-    inc(pmask);
     result := FSolidColor;
-    result.alpha := ApplyOpacity(result.alpha,alpha);
+    result.alpha := ApplyOpacity(result.alpha,pmask^.gray);
+    inc(pmask, stride);
   end;
 
 begin
-  if count > length(FMemMask) then setlength(FMemMask, max(length(FMemMask)*2,count));
-  ScannerPutPixels(FMask,@FMemMask[0],count,dmSet);
-
-  pmask := @FMemMask[0];
-
-  case mode of
-    dmDrawWithTransparency:
-      while count > 0 do
-      begin
-        DrawPixelInlineWithAlphaCheck(pdest,GetNext);
-        inc(pdest);
-        dec(count);
-      end;
-    dmLinearBlend:
-      while count > 0 do
-      begin
-        FastBlendPixelInline(pdest,GetNext);
-        inc(pdest);
-        dec(count);
-      end;
-    dmXor:
-      while count > 0 do
-      begin
-        PDword(pdest)^ := PDword(pdest)^ xor DWord(GetNext);
-        inc(pdest);
-        dec(count);
-      end;
-    dmSet:
-      while count > 0 do
-      begin
-        pdest^ := GetNext;
-        inc(pdest);
-        dec(count);
-      end;
-    dmSetExceptTransparent:
-      while count > 0 do
-      begin
-        c := GetNext;
-        if c.alpha = 255 then pdest^ := c;
-        inc(pdest);
-        dec(count);
-      end;
+  while count > 0 do
+  begin
+    qty := count;
+    FMask.ScanNextMaskChunk(qty, pMask, stride);
+    dec(count, qty);
+    case mode of
+      dmDrawWithTransparency:
+        while qty > 0 do
+        begin
+          DrawPixelInlineWithAlphaCheck(pdest,GetNext);
+          inc(pdest);
+          dec(qty);
+        end;
+      dmLinearBlend:
+        while qty > 0 do
+        begin
+          FastBlendPixelInline(pdest,GetNext);
+          inc(pdest);
+          dec(qty);
+        end;
+      dmXor:
+        while qty > 0 do
+        begin
+          PDword(pdest)^ := PDword(pdest)^ xor DWord(GetNext);
+          inc(pdest);
+          dec(qty);
+        end;
+      dmSet:
+        while qty > 0 do
+        begin
+          pdest^ := GetNext;
+          inc(pdest);
+          dec(qty);
+        end;
+      dmSetExceptTransparent:
+        while qty > 0 do
+        begin
+          c := GetNext;
+          if c.alpha = 255 then pdest^ := c;
+          inc(pdest);
+          dec(qty);
+        end;
+    end;
   end;
+end;
+
+procedure TBGRASolidColorMaskScanner.ScanSkipPixels(ACount: integer);
+begin
+  FMask.ScanSkipPixels(ACount);
 end;
 
 procedure TBGRASolidColorMaskScanner.ScanMoveTo(X, Y: Integer);
@@ -1847,17 +1873,20 @@ begin
 end;
 
 function TBGRASolidColorMaskScanner.ScanNextPixel: TBGRAPixel;
-var alpha: byte;
+var
+  pMask: PByteMask;
+  stride, qty: integer;
 begin
-  alpha := FScanNext.red;
+  qty := 1;
+  FMask.ScanNextMaskChunk(qty,pMask,stride);
   result := FSolidColor;
-  result.alpha := ApplyOpacity(result.alpha,alpha);
+  result.alpha := ApplyOpacity(result.alpha,pMask^.gray);
 end;
 
 function TBGRASolidColorMaskScanner.ScanAt(X, Y: Single): TBGRAPixel;
 var alpha: byte;
 begin
-  alpha := FScanAt(X+FOffset.X,Y+FOffset.Y).red;
+  alpha := FMask.ScanAtMask(X,Y).gray;
   result := FSolidColor;
   result.alpha := ApplyOpacity(result.alpha,alpha);
 end;
@@ -1955,6 +1984,11 @@ begin
         dec(count);
       end;
   end;
+end;
+
+procedure TBGRAOpacityScanner.ScanSkipPixels(ACount: integer);
+begin
+  FTexture.ScanSkipPixels(ACount);
 end;
 
 procedure TBGRAOpacityScanner.ScanMoveTo(X, Y: Integer);

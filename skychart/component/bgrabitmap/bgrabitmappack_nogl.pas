@@ -8,24 +8,8 @@ unit BGRABitmapPack_nogl;
 interface
 
 uses
-  BGRAAnimatedGif, BGRABitmap, BGRABitmapTypes, BGRABlend, BGRACanvas, 
-  BGRACanvas2D, BGRAColorInt, BGRACompressableBitmap, BGRACoordPool3D, 
-  BGRADefaultBitmap, BGRADNetDeserial, BGRAFillInfo, BGRAFilters, 
-  BGRAFreeType, BGRAGradients, BGRAGradientScanner, BGRALayers, BGRAMatrix3D, 
-  BGRAOpenRaster, BGRAPaintNet, BGRAPath, BGRAPen, BGRAPhongTypes, 
-  BGRAPolygon, BGRAPolygonAliased, BGRAResample, BGRAScene3D, 
-  BGRASliceScaling, BGRASSE, BGRAStreamLayers, BGRAText, BGRATextFX, 
-  BGRATransform, BGRATypewriter, BGRAVectorize, BGRAGrayscaleMask, 
-  BGRAReadBMP, BGRAReadGif, BGRAReadPCX, BGRAReadPng, BGRAReadPSD, 
-  BGRAThumbnail, BGRAReadTGA, BGRAReadIco, BGRAReadJpeg, BGRAReadLzp, 
-  UnzipperExt, BGRALzpCommon, BGRAWriteLzp, BGRAReadXPM, BGRASVG, BGRAUnits, 
-  BGRASVGShapes, BGRASVGType, BGRAReadBmpMioMap, BGRAArrow, BGRAPalette, 
-  BGRAColorQuantization, BGRADithering, BGRAUTF8, BGRALCLBitmap, BGRAWritePNG, 
-  BGRAGifFormat, BGRAGraphics, BGRASceneTypes, BGRARenderer3D, 
-  BGRAWriteBmpMioMap, BGRAPhoxo, BGRAFilterScanner, BGRAFilterType, 
-  BGRAFilterBlur, BGRAMultiFileType, BGRAWinResource, BGRALazResource, 
-  BGRAIconCursor, BGRAReadTiff, BGRALazPaint, BGRAMemDirectory, BGRAUnicode, 
-  BGRATextBidi, BGRALayerOriginal, BGRASVGOriginal, BGRAGradientOriginal;
+  BGRAAnimatedGif, BGRABitmap, BGRABitmapTypes, BGRABlend, BGRACanvas, BGRACanvas2D, BGRAColorInt, BGRACompressableBitmap, BGRACoordPool3D, BGRADefaultBitmap, BGRADNetDeserial, BGRAFillInfo, BGRAFilters, BGRAFreeType, BGRAGradients, BGRAGradientScanner, BGRALayers, BGRAMatrix3D, BGRAOpenRaster, BGRAPaintNet, BGRAPath, BGRAPen, BGRAPhongTypes, BGRAPolygon, BGRAPolygonAliased, BGRAResample, BGRAScene3D, BGRASliceScaling, BGRASSE, BGRAStreamLayers, BGRAText, BGRATextFX, BGRATransform, BGRATypewriter, BGRAVectorize, BGRAGrayscaleMask, BGRAReadBMP, BGRAReadGif, BGRAReadPCX, BGRAReadPng, BGRAReadPSD, BGRAThumbnail, BGRAReadTGA, BGRAReadIco, BGRAReadJpeg, BGRAReadLzp, UnzipperExt, BGRALzpCommon, BGRAWriteLzp, BGRAReadXPM, BGRASVG, BGRAUnits, BGRASVGShapes, BGRASVGType, BGRAReadBmpMioMap, 
+  BGRAArrow, BGRAPalette, BGRAColorQuantization, BGRADithering, BGRAUTF8, BGRALCLBitmap, BGRAWritePNG, BGRAGifFormat, BGRAGraphics, BGRASceneTypes, BGRARenderer3D, BGRAWriteBmpMioMap, BGRAPhoxo, BGRAFilterScanner, BGRAFilterType, BGRAFilterBlur, BGRAMultiFileType, BGRAWinResource, BGRALazResource, BGRAIconCursor, BGRAReadTiff, BGRALazPaint, BGRAMemDirectory, BGRAUnicode, BGRATextBidi, BGRALayerOriginal, BGRASVGOriginal, BGRAGradientOriginal, BGRAUnicodeText, UniversalDrawer, LinearRGBABitmap, XYZABitmap, BGRAWriteTiff, WordXYZABitmap, ExpandedBitmap;
 
 implementation
 

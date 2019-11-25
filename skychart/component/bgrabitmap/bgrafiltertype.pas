@@ -62,6 +62,7 @@ type
     procedure ScanMoveTo(X,Y: Integer); override;
     function ScanNextPixel: TBGRAPixel; override;
     procedure ScanPutPixels(pdest: PBGRAPixel; count: integer; mode: TDrawMode); override;
+    procedure ScanSkipPixels(ACount: integer); override;
     function IsScanPutPixelsDefined: boolean; override;
     function ScanAt(X,Y: Single): TBGRAPixel; override;
     property Source: IBGRAScanner read FSource;
@@ -85,7 +86,7 @@ type
     class procedure ComputeFilterAt(ASource: PBGRAPixel; ADest: PBGRAPixel;
       ACount: integer; AGammaCorrection: boolean); virtual; abstract;
     class procedure ComputeFilterInplace(ABitmap: TBGRACustomBitmap; ABounds: TRect;
-      AGammaCorrection: boolean);
+      AGammaCorrection: boolean); virtual;
     property GammaCorrection: boolean read FGammaCorrection write FGammaCorrection;
   end;
 
@@ -165,7 +166,7 @@ begin
     end;
   end else
   begin
-    FSourceScanner.ScanMoveTo(X,Y);
+    FSourceScanner.ScanMoveTo(X+FScanOffset.X,Y+FScanOffset.Y);
     pexp := result;
     while Count > 0 do
     begin
@@ -287,6 +288,12 @@ begin
     inc(FCurX,count);
     PutPixels(pdest, @FVariablePixelBuffer[0], count, mode, 255);
   end;
+end;
+
+procedure TBGRAFilterScanner.ScanSkipPixels(ACount: integer);
+begin
+  inc(FOutputBufferPos, ACount);
+  inc(FCurX, ACount);
 end;
 
 function TBGRAFilterScanner.IsScanPutPixelsDefined: boolean;

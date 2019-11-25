@@ -88,7 +88,7 @@ function FilterRotate(bmp: TBGRACustomBitmap; origin: TPointF;
 
 { A radial blur applies a blur with a circular influence, i.e, each pixel
   is merged with pixels within the specified radius. There is an exception
-  with rbFast blur, the optimization entails an hyperbolic shape. }
+  with rbFast blur, the optimization entails a hyperbolic shape. }
 type TRadialBlurTask = BGRAFilterBlur.TRadialBlurTask;
 function FilterBlurRadial(bmp: TBGRACustomBitmap; radius: single; blurType: TRadialBlurType): TBGRACustomBitmap; overload;
 function FilterBlurRadial(bmp: TBGRACustomBitmap; radiusX: single; radiusY: single; blurType: TRadialBlurType): TBGRACustomBitmap; overload;
@@ -107,8 +107,8 @@ function CreateMotionBlurTask(ABmp: TBGRACustomBitmap; ABounds: TRect; ADistance
 
 { General purpose blur filter, with a blur mask as parameter to describe
   how pixels influence each other }
-function FilterBlur(bmp: TBGRACustomBitmap; AMask: TBGRACustomBitmap; AMaskIsThreadSafe: boolean = false): TBGRACustomBitmap;
-function CreateBlurTask(ABmp: TBGRACustomBitmap; ABounds: TRect; AMask: TBGRACustomBitmap; AMaskIsThreadSafe: boolean = false): TFilterTask;
+function FilterBlur(bmp: TBGRACustomBitmap; AMask: TCustomUniversalBitmap; AMaskIsThreadSafe: boolean = false): TBGRACustomBitmap;
+function CreateBlurTask(ABmp: TBGRACustomBitmap; ABounds: TRect; AMask: TCustomUniversalBitmap; AMaskIsThreadSafe: boolean = false): TFilterTask;
 
 ////////////////////////////// OTHER FILTERS /////////////////////////////////
 
@@ -287,11 +287,9 @@ begin
 
       if eoPreserveHue in AOptions then
       begin
-        {$push}{$hints off}
-        diff := ((refPixel.red * refPixel.alpha - cMiddle.red * cMiddle.alpha)+
-                 (refPixel.green * refPixel.alpha - cMiddle.green * cMiddle.alpha)+
-                 (refPixel.blue * refPixel.alpha - cMiddle.blue * cMiddle.alpha))* AStrength div 128;
-        {$pop}
+        diff := (integer(refPixel.red * refPixel.alpha) - integer(cMiddle.red * cMiddle.alpha)+
+                 integer(refPixel.green * refPixel.alpha) - integer(cMiddle.green * cMiddle.alpha)+
+                 integer(refPixel.blue * refPixel.alpha) - integer(cMiddle.blue * cMiddle.alpha))* AStrength div 128;
         if diff > 0 then
           hMiddle := BGRAToHSLA(refPixel)
         else
@@ -519,12 +517,12 @@ begin
           if (option = moMediumSmooth) and ((i = -k) or (i = j)) then
             tempAlpha := tempAlpha div 2;
 
-          sumR    += tempPixel.red * tempAlpha;
-          sumG    += tempPixel.green * tempAlpha;
-          sumB    += tempPixel.blue * tempAlpha;
-          BGRAdiv += tempAlpha;
+          inc(sumR, tempPixel.red * tempAlpha );
+          inc(sumG, tempPixel.green * tempAlpha );
+          inc(sumB, tempPixel.blue * tempAlpha );
+          inc(BGRAdiv, tempAlpha);
 
-          sumA += tempAlpha;
+          inc(sumA, tempAlpha);
           Inc(nbA);
         end;
          {$hints on}
@@ -677,7 +675,7 @@ end;
 function FilterBlurRadial(bmp: TBGRACustomBitmap; radius: single; blurType: TRadialBlurType): TBGRACustomBitmap;
 var task: TFilterTask;
 begin
-  task := CreateRadialBlurTask(bmp,rect(0,0,bmp.Width,bmp.Height),radius,blurTYpe);
+  task := CreateRadialBlurTask(bmp,rect(0,0,bmp.Width,bmp.Height),radius,blurType);
   result := task.Execute;
   task.Free;
 end;
@@ -685,7 +683,7 @@ end;
 function FilterBlurRadial(bmp: TBGRACustomBitmap; radiusX: single; radiusY: single; blurType: TRadialBlurType): TBGRACustomBitmap;
 var task: TFilterTask;
 begin
-  task := CreateRadialBlurTask(bmp,rect(0,0,bmp.Width,bmp.Height),radiusX,radiusY,blurTYpe);
+  task := CreateRadialBlurTask(bmp,rect(0,0,bmp.Width,bmp.Height),radiusX,radiusY,blurType);
   result := task.Execute;
   task.Free;
 end;
@@ -730,7 +728,7 @@ begin
   result := TMotionBlurTask.Create(ABmp,ABounds,ADistance,AAngle,AOriented);
 end;
 
-function FilterBlur(bmp: TBGRACustomBitmap; AMask: TBGRACustomBitmap; AMaskIsThreadSafe: boolean = false): TBGRACustomBitmap;
+function FilterBlur(bmp: TBGRACustomBitmap; AMask: TCustomUniversalBitmap; AMaskIsThreadSafe: boolean = false): TBGRACustomBitmap;
 var task: TFilterTask;
 begin
   task := TCustomBlurTask.Create(bmp,rect(0,0,bmp.Width,bmp.Height), AMask, AMaskIsThreadSafe);
@@ -739,7 +737,7 @@ begin
 end;
 
 function CreateBlurTask(ABmp: TBGRACustomBitmap; ABounds: TRect;
-  AMask: TBGRACustomBitmap; AMaskIsThreadSafe: boolean = false): TFilterTask;
+  AMask: TCustomUniversalBitmap; AMaskIsThreadSafe: boolean = false): TFilterTask;
 begin
   result := TCustomBlurTask.Create(ABmp, ABounds, AMask, AMaskIsThreadSafe);
 end;

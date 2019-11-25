@@ -32,8 +32,8 @@ type
     procedure NotAvailable;
   public
     destructor Destroy; override;
-    class procedure AddFreeTypeFontFolder(ADirectory: string; AUTF8: boolean = false);
-    class procedure AddFreeTypeFontFile(AFilename: string; AUTF8: boolean = false);
+    class procedure AddFreeTypeFontFolder(ADirectory: string; AUTF8: boolean = false); static;
+    class procedure AddFreeTypeFontFile(AFilename: string; AUTF8: boolean = false); static;
     procedure Draw(ACanvas: TCanvas; x, y: integer; {%H-}Opaque: boolean=True); override;
     procedure Draw(ACanvas: TCanvas; Rect: TRect; {%H-}Opaque: boolean=True); override;
     procedure Draw(ACanvas: TGUICanvas; x, y: integer; {%H-}Opaque: boolean=True); overload;
@@ -152,7 +152,7 @@ procedure TBGRAfpGUIBitmap.ReallocData;
 begin
   FBitmap.Width := Width;
   FBitmap.Height:= Height;
-  FData := FBitmap.RawImage.ImageData;
+  FDataByte := PByte(FBitmap.RawImage.ImageData);
   InvalidateBitmap;
   FScanPtr := nil;
 end;

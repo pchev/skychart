@@ -122,12 +122,7 @@ uses BGRABlend, math, SysUtils;
 procedure TBGRAEmbossHightlightScanner.SetSourceChannel(AValue: TChannel);
 begin
   FSourceChannel:=AValue;
-  case FSourceChannel of
-  cRed: FChannelOffset:= TBGRAPixel_RedByteOffset;
-  cGreen: FChannelOffset:= TBGRAPixel_GreenByteOffset;
-  cBlue: FChannelOffset:= TBGRAPixel_BlueByteOffset;
-  else {cAlpha:} FChannelOffset:= TBGRAPixel_AlphaByteOffset;
-  end;
+  FChannelOffset:= TBGRAPixel_ChannelByteOffset[FSourceChannel];
 end;
 
 function TBGRAEmbossHightlightScanner.DoFilter3X3(PTop, PMiddle,
@@ -366,14 +361,14 @@ begin
   nbA    := 0;
 
   {$hints off}
-  with PTop[0] do if alpha <> 0 then begin sumR += red * alpha; sumG += green * alpha; sumB += blue * alpha; sumA += alpha; inc(nbA); end;
-  with PTop[1] do if alpha <> 0 then begin sumR += red * alpha; sumG += green * alpha; sumB += blue * alpha; sumA += alpha; inc(nbA); end;
-  with PTop[2] do if alpha <> 0 then begin sumR += red * alpha; sumG += green * alpha; sumB += blue * alpha; sumA += alpha; inc(nbA); end;
-  with PMiddle[0] do if alpha <> 0 then begin sumR += red * alpha; sumG += green * alpha; sumB += blue * alpha; sumA += alpha; inc(nbA); end;
-  with PMiddle[2] do if alpha <> 0 then begin sumR += red * alpha; sumG += green * alpha; sumB += blue * alpha; sumA += alpha; inc(nbA); end;
-  with PBottom[0] do if alpha <> 0 then begin sumR += red * alpha; sumG += green * alpha; sumB += blue * alpha; sumA += alpha; inc(nbA); end;
-  with PBottom[1] do if alpha <> 0 then begin sumR += red * alpha; sumG += green * alpha; sumB += blue * alpha; sumA += alpha; inc(nbA); end;
-  with PBottom[2] do if alpha <> 0 then begin sumR += red * alpha; sumG += green * alpha; sumB += blue * alpha; sumA += alpha; inc(nbA); end;
+  with PTop[0] do if alpha <> 0 then begin inc(sumR, red * alpha); inc(sumG, green * alpha); inc(sumB, blue * alpha); inc(sumA, alpha); inc(nbA); end;
+  with PTop[1] do if alpha <> 0 then begin inc(sumR, red * alpha); inc(sumG, green * alpha); inc(sumB, blue * alpha); inc(sumA, alpha); inc(nbA); end;
+  with PTop[2] do if alpha <> 0 then begin inc(sumR, red * alpha); inc(sumG, green * alpha); inc(sumB, blue * alpha); inc(sumA, alpha); inc(nbA); end;
+  with PMiddle[0] do if alpha <> 0 then begin inc(sumR, red * alpha); inc(sumG, green * alpha); inc(sumB, blue * alpha); inc(sumA, alpha); inc(nbA); end;
+  with PMiddle[2] do if alpha <> 0 then begin inc(sumR, red * alpha); inc(sumG, green * alpha); inc(sumB, blue * alpha); inc(sumA, alpha); inc(nbA); end;
+  with PBottom[0] do if alpha <> 0 then begin inc(sumR, red * alpha); inc(sumG, green * alpha); inc(sumB, blue * alpha); inc(sumA, alpha); inc(nbA); end;
+  with PBottom[1] do if alpha <> 0 then begin inc(sumR, red * alpha); inc(sumG, green * alpha); inc(sumB, blue * alpha); inc(sumA, alpha); inc(nbA); end;
+  with PBottom[2] do if alpha <> 0 then begin inc(sumR, red * alpha); inc(sumG, green * alpha); inc(sumB, blue * alpha); inc(sumA, alpha); inc(nbA); end;
    {$hints on}
 
   //we finally have an average pixel

@@ -27,7 +27,8 @@ uses
   BGRAFilterBlur, BGRAMultiFileType, BGRAWinResource, BGRALazResource, 
   BGRAIconCursor, BGRABlurGL, BGRAReadTiff, BGRALazPaint, BGRAMemDirectory, 
   BGRAUnicode, BGRATextBidi, BGRALayerOriginal, BGRASVGOriginal, 
-  BGRAGradientOriginal;
+  BGRAGradientOriginal, BGRAUnicodeText, UniversalDrawer, LinearRGBABitmap, 
+  XYZABitmap, BGRAWriteTiff, WordXYZABitmap, ExpandedBitmap;
 
 implementation
 
