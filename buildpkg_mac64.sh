@@ -47,8 +47,10 @@ if [[ $lastrev -ne $currentrev ]]; then
   sed -i.bak "22s/1.0/$version/"  $builddir/skychart.app/Contents/Info.plist
   sed -i.bak "22s/1.0/$version/"  $builddir/cdcicon.app/Contents/Info.plist
   sed -i.bak "22s/1.0/$version/"  $builddir/varobs_lpv_bulletin.app/Contents/Info.plist
-  sed -i.bak "24s/1.0/$version/"  $builddir/varobs.app/Contents/Info.plist
+  sed -i.bak "22s/1.0/$version/"  $builddir/varobs.app/Contents/Info.plist
   rm $builddir/skychart.app/Contents/Info.plist.bak
+  rm $builddir/cdcicon.app/Contents/Info.plist.bak
+  rm $builddir/varobs_lpv_bulletin.app/Contents/Info.plist.bak
   rm $builddir/varobs.app/Contents/Info.plist.bak
   cp system_integration/MacOSX/skychart64.pkgproj $basedir
   cp system_integration/MacOSX/readme.txt $basedir
