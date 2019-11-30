@@ -2412,7 +2412,7 @@ begin
       magn := cfgsc.Planetlst[j, ipla, 5];
       phase := cfgsc.Planetlst[j, ipla, 7];
       Eq2Hz(cfgsc.CurST - ra, Dec, a, h, cfgsc, 0);
-      if cfgsc.ProjPole = Altaz then
+      if (cfgsc.ProjPole = Altaz) and (h < pid4) then
       begin
         dh := abs(deg2rad * diam / 3600);
         h1 := h + dh / 2;
