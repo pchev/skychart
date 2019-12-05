@@ -1314,7 +1314,9 @@ end;
 procedure Tpop_scope.ButtonSetTimeClick(Sender: TObject);
 var
   buf: string;
+  {$ifdef mswindows}
   utc: TSystemTime;
+  {$endif}
 begin
   if ScopeConnected then
   begin
@@ -1327,7 +1329,7 @@ begin
       else
       {$endif}
       begin
-        buf:=FormatDateTime(dateiso,NowUTC);
+        buf:=FormatDateTime(dateiso,NowUTC)+'Z';
         TR.Put('UTCDate',buf);
       end;
     except
