@@ -8,7 +8,7 @@ unit synapse;
 interface
 
 uses
-  blcksock, ftpsend, httpsend, synaser, ssl_openssl, dnssend, LazarusPackageIntf;
+  blcksock, ftpsend, httpsend, synaser, ssl_openssl, dnssend, smtpsend, LazarusPackageIntf;
 
 implementation
 
