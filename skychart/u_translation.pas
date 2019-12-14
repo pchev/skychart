@@ -1542,6 +1542,9 @@ resourcestring
   rsPleaseWait = 'Please wait...';
   rsFlipNSMoveme = 'Flip N/S movement';
   rsSearchRadius = 'Search radius';
+  rsForceJ2000 = 'Force J2000';
+  rsCurrentChart = 'Current chart coordinate system';
+  rsProtocolTrac = 'Protocol trace';
 
 // also update upsi_translation
 

@@ -795,6 +795,7 @@ begin
   Label130.Caption := rsINDIServerPo;
   Label260.Caption := rsTelescopeNam;
   AutoloadConfig.Caption:=rsLoadINDIConf;
+  ProtocolTrace.Caption:=rsProtocolTrac;
   BtnGet.Caption := rsGet;
   Connect.Caption := rsConnect;
   Disconnect.Caption := rsDisconnect;

@@ -9522,6 +9522,7 @@ begin
   SubUpdate.Caption := rsUpdate1;
   MenuUpdSoft.Caption := rsSearchSoftwa;
   MenuUpdDeltaT.Caption:= rsDeltatRecent;
+  MenuUpdGrs.Caption := rsJupiterGRSLo;
   MenuUpdComet.Caption := rsCometElement2;
   MenuUpdAsteroid.Caption := rsAsteroidElem2;
   MenuUpdSatellite.Caption := rsArtificialSa;

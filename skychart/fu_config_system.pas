@@ -269,6 +269,8 @@ begin
   UseIPserver.Caption := rsUseTCPIPServ;
   keepalive.Caption := rsClientConnec;
   ServerCoordSys.Caption:=rsCooordinateS;
+  ServerCoordSys.Items[0]:=rsForceJ2000;
+  ServerCoordSys.Items[1]:=rsCurrentChart;
   Label13.Caption := rsTelescopeSet;
   TelescopeManualLabel.Caption := rsManualMount;
   Label7.Caption := rsSetHowTheMou;
