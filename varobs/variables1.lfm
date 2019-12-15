@@ -117,8 +117,7 @@ object VarForm: TVarForm
   OnCreate = FormCreate
   OnShow = FormShow
   ShowHint = True
-  LCLVersion = '1.6.2.0'
-  Visible = False
+  LCLVersion = '2.0.6.0'
   object Grid1: TStringGrid
     Left = 0
     Height = 376
@@ -212,8 +211,8 @@ object VarForm: TVarForm
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 3
-      ClientHeight = 21
-      ClientWidth = 325
+      ClientHeight = 18
+      ClientWidth = 327
       Columns = 3
       ItemIndex = 0
       Items.Strings = (

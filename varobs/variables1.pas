@@ -35,8 +35,7 @@ uses
   Clipbrd, LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, UScaleDPI,
   StdCtrls, ComCtrls, Buttons, IniFiles, Printers, FileUtil, LazUTF8,
   cu_cdcclient, u_util2,
-  Menus, ExtCtrls, LResources, PrintersDlgs, Grids, EditBtn, jdcalendar, u_param,
-  UniqueInstance;
+  Menus, ExtCtrls, LResources, PrintersDlgs, Grids, EditBtn, jdcalendar, u_param;
 
 type
 
@@ -117,10 +116,6 @@ type
   private
     { Private declarations }
     tcpclient: TCDCclient;
-    UniqueInstance1: TCdCUniqueInstance;
-    procedure OtherInstance(Sender: TObject; ParamCount: integer;
-      Parameters: array of string);
-    procedure InstanceRunning(Sender: TObject);
     procedure ScaleMainForm;
     procedure GetAppDir;
     procedure DrawSkyChart;
@@ -693,14 +688,6 @@ end;
 
 procedure TVarForm.FormCreate(Sender: TObject);
 begin
-{$ifndef darwin}
-  UniqueInstance1 := TCdCUniqueInstance.Create(self);
-  UniqueInstance1.Identifier := 'VarObs';
-  UniqueInstance1.OnOtherInstance := OtherInstance;
-  UniqueInstance1.OnInstanceRunning := InstanceRunning;
-  UniqueInstance1.Enabled := True;
-  UniqueInstance1.Loaded;
-{$endif}
   lockdate := False;
   lockselect := False;
   started := False;
@@ -1492,30 +1479,6 @@ begin
   chartform.chartsource := OptForm.Radiogroup8.ItemIndex;
   FormPos(chartform, mouse.cursorpos.x, mouse.cursorpos.y);
   chartform.ShowModal;
-end;
-
-procedure TVarForm.OtherInstance(Sender: TObject; ParamCount: integer;
-  Parameters: array of string);
-var
-  i: integer;
-begin
-  application.Restore;
-  application.BringToFront;
-  if ParamCount > 0 then
-  begin
-    param.Clear;
-    for i := 0 to ParamCount - 1 do
-    begin
-      param.add(Parameters[i]);
-    end;
-    ReadParam;
-    CalculVar;
-  end;
-end;
-
-procedure TVarForm.InstanceRunning(Sender: TObject);
-begin
-  UniqueInstance1.RetryOrHalt;
 end;
 
 end.

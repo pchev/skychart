@@ -2422,8 +2422,13 @@ var
   i: integer;
   c: TBGRAPixel;
 begin
-
   try
+
+    // Set by uniqueinstance
+    if Application.Terminated then begin
+       OnDestroy:=nil;
+       exit;
+    end;
 
     lclver := lcl_version;
     buf := LCLPlatformDirNames[WidgetSet.LCLPlatform];
