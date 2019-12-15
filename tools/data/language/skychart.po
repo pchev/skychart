@@ -5942,3 +5942,15 @@ msgstr ""
 msgid "Search radius"
 msgstr ""
 
+#: u_translation:rsforcej2000
+msgid "Force J2000"
+msgstr ""
+
+#: u_translation:rscurrentchart
+msgid "Current chart coordinate system"
+msgstr ""
+
+#: u_translation:rsprotocoltrac
+msgid "Protocol trace"
+msgstr ""
+

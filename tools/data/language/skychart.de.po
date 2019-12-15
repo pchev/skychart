@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-06 13:21+0000\n"
-"PO-Revision-Date: 2019-11-12 16:42+0000\n"
+"POT-Creation-Date: 2019-12-14 14:00+0000\n"
+"PO-Revision-Date: 2019-12-14 16:36+0000\n"
 "Last-Translator: Stefan Beck <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-11-24 12:41+0000\n"
+"X-Launchpad-Export-Date: 2019-12-15 15:24+0000\n"
 "X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
 
 #: u_translation.rs102cddss
@@ -952,7 +952,7 @@ msgstr "Kometen-Einstellungen"
 
 #: u_translation.rscometupdates
 msgid "Comet update successful"
-msgstr "Comet-Update erfolgreich"
+msgstr "Kometenupdate erfolgreich"
 
 #: u_translation.rscommandfound
 msgid "Command found OK."
@@ -1209,6 +1209,10 @@ msgstr "Meridian überqueren"
 #: u_translation.rsculmination
 msgid "Culmination"
 msgstr "Durchgang"
+
+#: u_translation.rscurrentchart
+msgid "Current chart coordinate system"
+msgstr "Aktuelles Kartenkoordinatensystem"
 
 #: u_translation.rscurrentdate
 msgid "Date of validity"
@@ -2160,7 +2164,7 @@ msgstr "Iridium-Flare Vorhersage:"
 
 #: u_translation.rsflipnsmoveme
 msgid "Flip N/S movement"
-msgstr ""
+msgstr "N/S Bewegung umdrehen"
 
 #: u_translation.rsfonts
 msgid "Fonts"
@@ -2177,6 +2181,10 @@ msgstr "Farbe erzwingen"
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
 msgstr "EqSys erzwingen"
+
+#: u_translation.rsforcej2000
+msgid "Force J2000"
+msgstr "J2000 erzwingen"
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
@@ -3912,7 +3920,7 @@ msgstr "Bitte das Programm neu installieren"
 
 #: u_translation.rspleasewait
 msgid "Please wait..."
-msgstr ""
+msgstr "Bitte warten…"
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
@@ -4101,6 +4109,10 @@ msgstr "Proportional zur Schweiflänge"
 #: u_translation.rsproportional2
 msgid "Proportional to the magnitude"
 msgstr "Proportional zur Helligkeit"
+
+#: u_translation.rsprotocoltrac
+msgid "Protocol trace"
+msgstr "Protokoll aufzeichnen"
 
 #: u_translation.rsproxy
 msgid "Proxy"
@@ -4569,7 +4581,7 @@ msgstr "Suchindex"
 
 #: u_translation.rssearchradius
 msgid "Search radius"
-msgstr ""
+msgstr "Suchradius"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"

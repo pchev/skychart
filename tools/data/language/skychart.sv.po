@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2019-10-06 13:21+0000\n"
-"PO-Revision-Date: 2019-10-21 08:42+0000\n"
+"POT-Creation-Date: 2019-12-14 14:00+0000\n"
+"PO-Revision-Date: 2019-12-15 08:12+0000\n"
 "Last-Translator: Erik <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-11-24 12:41+0000\n"
+"X-Launchpad-Export-Date: 2019-12-15 15:24+0000\n"
 "X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
 
 #: u_translation.rs102cddss
@@ -1212,6 +1212,10 @@ msgstr "Meridianpassage"
 msgid "Culmination"
 msgstr "Kulminerar"
 
+#: u_translation.rscurrentchart
+msgid "Current chart coordinate system"
+msgstr "Nuvarande kartkoordinatsystem"
+
 #: u_translation.rscurrentdate
 msgid "Date of validity"
 msgstr "Giltighetsdatum"
@@ -1494,7 +1498,7 @@ msgstr "Ta bort nuvarande plats från databasen?"
 
 #: u_translation.rsdeltaterror
 msgid "DeltaT uncertainty"
-msgstr "Delta onogrannhet"
+msgstr "DeltaT-osäkerhet"
 
 #: u_translation.rsdeltatrecent
 msgid "DeltaT recent value"
@@ -2162,7 +2166,7 @@ msgstr "Iridium eruption förutsägelse:"
 
 #: u_translation.rsflipnsmoveme
 msgid "Flip N/S movement"
-msgstr ""
+msgstr "Vänd N/S-rörelse"
 
 #: u_translation.rsfonts
 msgid "Fonts"
@@ -2179,6 +2183,10 @@ msgstr "Tvinga färg"
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
 msgstr "Tvinga EqSys"
+
+#: u_translation.rsforcej2000
+msgid "Force J2000"
+msgstr "Framtvinga J2000"
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
@@ -3778,7 +3786,7 @@ msgstr "Perihelium datum"
 
 #: u_translation.rsperiheliondi
 msgid "Perihelion distance"
-msgstr "Perihelium avstånd"
+msgstr "Periheliumavstånd"
 
 #: u_translation.rsperiod
 msgid "Period"
@@ -3914,7 +3922,7 @@ msgstr "Försök att installera om programmet."
 
 #: u_translation.rspleasewait
 msgid "Please wait..."
-msgstr ""
+msgstr "Vänta..."
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
@@ -4103,6 +4111,10 @@ msgstr "Propotionell till svanslängd"
 #: u_translation.rsproportional2
 msgid "Proportional to the magnitude"
 msgstr "Propotionell till magnitud"
+
+#: u_translation.rsprotocoltrac
+msgid "Protocol trace"
+msgstr "Protokollspår"
 
 #: u_translation.rsproxy
 msgid "Proxy"
@@ -4570,7 +4582,7 @@ msgstr "Sökindex"
 
 #: u_translation.rssearchradius
 msgid "Search radius"
-msgstr ""
+msgstr "Sökradie"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"

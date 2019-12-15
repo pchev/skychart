@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-06 13:21+0000\n"
+"POT-Creation-Date: 2019-12-14 14:00+0000\n"
 "PO-Revision-Date: 2016-12-11 08:54+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-11-24 12:41+0000\n"
+"X-Launchpad-Export-Date: 2019-12-15 15:24+0000\n"
 "X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
 
 #: u_translation.rs102cddss
@@ -1209,6 +1209,10 @@ msgstr ""
 msgid "Culmination"
 msgstr "Háganga"
 
+#: u_translation.rscurrentchart
+msgid "Current chart coordinate system"
+msgstr ""
+
 #: u_translation.rscurrentdate
 msgid "Date of validity"
 msgstr "Núv. dags."
@@ -2175,6 +2179,10 @@ msgstr ""
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
+msgstr ""
+
+#: u_translation.rsforcej2000
+msgid "Force J2000"
 msgstr ""
 
 #: u_translation.rsformoreinfor
@@ -4100,6 +4108,10 @@ msgstr "Hlutfallslega miðað við lengd hala"
 #: u_translation.rsproportional2
 msgid "Proportional to the magnitude"
 msgstr "Hlutfallslega miðað við birtustig"
+
+#: u_translation.rsprotocoltrac
+msgid "Protocol trace"
+msgstr ""
 
 #: u_translation.rsproxy
 msgid "Proxy"
