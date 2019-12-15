@@ -415,7 +415,6 @@ begin
   begin
     if nvp.s=IPS_ALERT then begin
       Memomsg.Lines.Add('Error from telescope: coordinates alert.');
-      ScopeDisconnect(ok);
     end
     else begin
       pos_x.Text := artostr(coord_ra.Value);
