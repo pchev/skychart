@@ -29,308 +29,131 @@ unit UniqueInstance;
 
   You should have received a copy of the GNU Library General Public License
   along with this library; if not, write to the Free Software Foundation,
-  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+  Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 }
 
 
 {$mode objfpc}{$H+}
+{$if not defined(Windows) or (FPC_FULLVERSION >= 30001)}
+{$define PollIPCMessage}
+{$endif}
 
 interface
 
 uses
-{$ifdef unix}
-  process, math,
-{$endif}
-  simpleipc,
-  Forms, Classes, SysUtils,  ExtCtrls;
-
+  Forms, Classes, SysUtils, simpleipc, ExtCtrls;
+  
 type
 
-  TOnOtherInstance = procedure (Sender : TObject; ParamCount: Integer; Parameters: array of String) of object;
+  TOnOtherInstance = procedure (Sender : TObject; ParamCount: Integer; const Parameters: array of String) of object;
 
   { TUniqueInstance }
 
   TUniqueInstance = class(TComponent)
   private
-    FEnabled: Boolean;
     FIdentifier: String;
-    FIPCServer: TSimpleIPCServer;
-    FIPCClient: TSimpleIPCClient;
     FOnOtherInstance: TOnOtherInstance;
-    FOnInstanceRunning: TNotifyEvent;
-    {$ifdef unix}
-    FTimer: TTimer;
-    {$endif}
     FUpdateInterval: Cardinal;
-    function GetServerId: String;
+    FEnabled: Boolean;
+    FPriorInstanceRunning: Boolean;
     procedure ReceiveMessage(Sender: TObject);
-    procedure SetUpdateInterval(const AValue: Cardinal);
-
-    {$ifdef unix}
+    {$ifdef PollIPCMessage}
     procedure CheckMessage(Sender: TObject);
     {$endif}
   protected
     procedure Loaded; override;
   public
     constructor Create(AOwner: TComponent); override;
+    property PriorInstanceRunning: Boolean read FPriorInstanceRunning;
   published
-    property Enabled: Boolean read FEnabled write FEnabled;
+    property Enabled: Boolean read FEnabled write FEnabled default False;
     property Identifier: String read FIdentifier write FIdentifier;
-    property UpdateInterval: Cardinal read FUpdateInterval write SetUpdateInterval;
+    property UpdateInterval: Cardinal read FUpdateInterval write FUpdateInterval default 1000;
     property OnOtherInstance: TOnOtherInstance read FOnOtherInstance write FOnOtherInstance;
-    property OnInstanceRunning: TNotifyEvent read FOnInstanceRunning write FOnInstanceRunning;
-  end;
-
-  { TCdCUniqueInstance }
-
-  TCdCUniqueInstance = class(TUniqueInstance)
-  private
-    retrycount: integer;
-   {$ifdef unix}
-    Process1: TProcess;
-    function  GetPid:string;
-    function  OtherRunning:boolean;
-    procedure DeleteLock;
-   {$endif}
-  public
-    constructor Create(AOwner: TComponent); override;
-    procedure RetryOrHalt;
-    procedure Loaded; override;
   end;
 
 implementation
 
 uses
-  StrUtils;
-
-const
-  BaseServerId = 'tuniqueinstance_';
-  Separator = '|';
+  StrUtils, UniqueInstanceBase;
 
 { TUniqueInstance }
 
 procedure TUniqueInstance.ReceiveMessage(Sender: TObject);
 var
-  TempArray: array of String;
-  Count,i: Integer;
-
-  procedure GetParams(const AStr: String);
-  var
-    pos1,pos2:Integer;
-  begin
-    SetLength(TempArray, Count);
-    //fill params
-    i := 0;
-    pos1:=1;
-    pos2:=pos(Separator, AStr);
-    while pos1 < pos2 do
-    begin
-      TempArray[i] := Copy(AStr, pos1, pos2 - pos1);
-      pos1 := pos2+1;
-      pos2 := posex(Separator, AStr, pos1);
-      inc(i);
-    end;
-  end;
-
+  ParamsArray: array of String;
+  Params: String;
+  Count, i: Integer;
 begin
   if Assigned(FOnOtherInstance) then
   begin
     //MsgType stores ParamCount
     Count := FIPCServer.MsgType;
-    GetParams(FIPCServer.StringMessage);
-    FOnOtherInstance(Self, Count, TempArray);
-    SetLength(TempArray, 0);
+    SetLength(ParamsArray, Count);
+    Params := FIPCServer.StringMessage;
+    for i := 1 to Count do
+      ParamsArray[i - 1] := ExtractWord(i, Params, [ParamsSeparator]);
+    FOnOtherInstance(Self, Count, ParamsArray);
   end;
 end;
 
-{$ifdef unix}
+{$ifdef PollIPCMessage}
 procedure TUniqueInstance.CheckMessage(Sender: TObject);
 begin
   FIPCServer.PeekMessage(1, True);
 end;
 {$endif}
 
-procedure TUniqueInstance.SetUpdateInterval(const AValue: Cardinal);
-begin
-  if FUpdateInterval = AValue then
-    Exit;
-  FUpdateInterval := AValue;
-  {$ifdef unix}
-  FTimer.Interval := AValue;
-  {$endif}
-end;
-
-function TUniqueInstance.GetServerId: String;
-begin
-  if FIdentifier <> '' then
-    Result := BaseServerId + FIdentifier
-  else
-    Result := BaseServerId + ExtractFileName(ParamStr(0));
-end;
-
-
 procedure TUniqueInstance.Loaded;
 var
-  TempStr: String;
-  i: Integer;
+  IPCClient: TSimpleIPCClient;
+  {$ifdef PollIPCMessage}
+  Timer: TTimer;
+  {$endif}
 begin
-try
   if not (csDesigning in ComponentState) and FEnabled then
   begin
-    FIPCClient.ServerId := GetServerId;
-    if FIPCClient.ServerRunning then
+    IPCClient := TSimpleIPCClient.Create(Self);
+    IPCClient.ServerId := GetServerId(FIdentifier);
+    if not Assigned(FIPCServer) and IPCClient.ServerRunning then
     begin
+      //A older instance is running.
+      FPriorInstanceRunning := True;
       //A instance is already running
       //Send a message and then exit
       if Assigned(FOnOtherInstance) then
       begin
-        TempStr := '';
-        for i := 1 to ParamCount do
-          TempStr := TempStr + ParamStr(i) + Separator;
-        FIPCClient.Active := True;
-        FIPCClient.SendStringMessage(ParamCount, TempStr);
+        IPCClient.Active := True;
+        IPCClient.SendStringMessage(ParamCount, GetFormattedParams);
       end;
-      if Assigned(FOnInstanceRunning) then
-        FOnInstanceRunning(self)
-      else begin
-        Application.ShowMainForm := False;
-        Application.Terminate;
-      end;
+      Application.ShowMainForm := False;
+      Application.Terminate;
     end
     else
     begin
-      //It's the first instance. Init the server
-      if FIPCServer = nil then
-        FIPCServer := TSimpleIPCServer.Create(Self);
-      with FIPCServer do
-      begin
-        ServerID := FIPCClient.ServerId;
-        Global := True;
-        OnMessage := @ReceiveMessage;
-        StartServer;
-      end;
-      //there's no more need for FIPCClient
-      FIPCClient.Free;
-      {$ifdef unix}
+      if not Assigned(FIPCServer) then
+        InitializeUniqueServer(IPCClient.ServerID);
+      FIPCServer.OnMessage := @ReceiveMessage;
+      //there's no more need for IPCClient
+      IPCClient.Destroy;
+      {$ifdef PollIPCMessage}
       if Assigned(FOnOtherInstance) then
-        FTimer.Enabled := True;
+      begin
+        Timer := TTimer.Create(Self);
+        Timer.Interval := FUpdateInterval;
+        Timer.OnTimer := @CheckMessage;
+      end;
       {$endif}
     end;
   end;//if
   inherited;
-
-except
-halt(1);
-end;
 end;
 
 constructor TUniqueInstance.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FIPCClient := TSimpleIPCClient.Create(Self);
   FUpdateInterval := 1000;
-  {$ifdef unix}
-  FTimer := TTimer.Create(Self);
-  FTimer.Enabled := false;
-  FTimer.OnTimer := @CheckMessage;
-  {$endif}
 end;
-
-////////////// TCdCUniqueInstance ////////////////////
-
-constructor TCdCUniqueInstance.Create(AOwner: TComponent);
-begin
-  inherited Create(AOwner);
-  retrycount:=0;
-end;
-
-procedure  TCdCUniqueInstance.Loaded;
-begin
-{$ifdef unix}
-  if not OtherRunning then
-     DeleteLock;
-{$endif}
-  inherited;
-end;
-
-Procedure TCdCUniqueInstance.RetryOrHalt;
-begin
-{$ifdef unix}
-  inc(retrycount);
-  if retrycount<=1 then begin
-    if OtherRunning then
-       Halt(1)
-    else begin
-       DeleteLock;
-       Loaded;
-    end;
-  end;
-{$else}
-  Halt(1);
-{$endif}
-end;
-
-{$ifdef unix}
-procedure TCdCUniqueInstance.DeleteLock;
-var D : String;
-begin
-  D:='/tmp/'; // See fcl-process/src/unix/simpleipc.inc  TPipeServerComm.Create
-  DeleteFile(D+GetServerId);
-end;
-
-function TCdCUniqueInstance.GetPid:string;
-var i: integer;
-    s: array[0..1024] of char;
-begin
-result:='';
-try
-  Process1:=TProcess.Create(nil);
-  FillChar(s,sizeof(s),' ');
-
-{$ifdef darwin}
-  {$IF (FPC_VERSION = 2) and (FPC_RELEASE < 5)}
-    Process1.CommandLine:='killall -s '+ExtractFileName(Application.ExeName);
-  {$ELSE}
-    Process1.Executable:='killall';
-    Process1.Parameters.Add('-s');
-    Process1.Parameters.Add(ExtractFileName(Application.ExeName));
-  {$ENDIF}
-{$ELSE}
-  {$IF (FPC_VERSION = 2) and (FPC_RELEASE < 5)}
-    Process1.CommandLine:='pidof '+ExtractFileName(Application.ExeName);
-  {$ELSE}
-    Process1.Executable:='pidof';
-    Process1.Parameters.Add(ExtractFileName(Application.ExeName));
-  {$ENDIF}
-{$endif}
-  Process1.Options:=[poWaitOnExit,poUsePipes,poNoConsole];
-  Process1.Execute;
-  if Process1.ExitStatus=0 then begin
-     i:=Min(1024,process1.Output.NumBytesAvailable);
-     process1.Output.Read(s,i);
-     result:=Trim(s);
-  end;
-  Process1.Free;
-except
-end;
-end;
-
-function TCdCUniqueInstance.OtherRunning:boolean;
-var i : integer;
-    s:string;
-const
-{$ifdef darwin}
-  sep=#10;
-{$else}
-  sep=' ';
-{$endif}
-begin
-  s:=GetPid;
-  i:=pos(sep,s);
-  result:= i>0;
-end;
-
-{$endif}
 
 end.
 

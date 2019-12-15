@@ -29,7 +29,7 @@ unit UniqueInstanceRaw;
 
   You should have received a copy of the GNU Library General Public License
   along with this library; if not, write to the Free Software Foundation,
-  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+  Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 }
 
 {$mode objfpc}{$H+}
@@ -37,58 +37,39 @@ unit UniqueInstanceRaw;
 interface
 
 uses
-  Classes, SysUtils, simpleipc;
+  Classes, SysUtils;
   
-  function InstanceRunning(const Identifier: String; SendParameters: Boolean = False): Boolean;
+  function InstanceRunning(const Identifier: String; SendParameters: Boolean = False; DoInitServer: Boolean = True): Boolean;
 
   function InstanceRunning: Boolean;
 
 implementation
 
-const
-  BaseServerId = 'tuniqueinstance_';
-  Separator = '|';
-
-var
-  FIPCServer: TSimpleIPCServer;
+uses
+  SimpleIpc, UniqueInstanceBase;
   
-function InstanceRunning(const Identifier: String; SendParameters: Boolean = False): Boolean;
-
-  function GetServerId: String;
-  begin
-    if Identifier <> '' then
-      Result := BaseServerId + Identifier
-    else
-      Result := BaseServerId + ExtractFileName(ParamStr(0));
-  end;
+function InstanceRunning(const Identifier: String; SendParameters: Boolean; DoInitServer: Boolean): Boolean;
   
 var
-  TempStr: String;
-  i: Integer;
+  Client: TSimpleIPCClient;
   
 begin
-  with TSimpleIPCClient.Create(nil) do
+  Client := TSimpleIPCClient.Create(nil);
+  with Client do
   try
-    ServerId := GetServerId;
-    Result := ServerRunning;
+    ServerId := GetServerId(Identifier);
+    Result := Client.ServerRunning;
     if not Result then
     begin
-      //It's the first instance. Init the server
-      if FIPCServer = nil then
-        FIPCServer := TSimpleIPCServer.Create(nil);
-      FIPCServer.ServerID := ServerId;
-      FIPCServer.Global := True;
-      FIPCServer.StartServer;
+      if DoInitServer then
+        InitializeUniqueServer(ServerID);
     end
     else
       // an instance already exists
       if SendParameters then
       begin
-        TempStr := '';
-        for i := 1 to ParamCount do
-          TempStr := TempStr + ParamStr(i) + Separator;
         Active := True;
-        SendStringMessage(ParamCount, TempStr);
+        SendStringMessage(ParamCount, GetFormattedParams);
       end;
   finally
     Free;
@@ -100,7 +81,5 @@ begin
   Result := InstanceRunning('');
 end;
 
-finalization  
-  FIPCServer.Free;
 end.
 

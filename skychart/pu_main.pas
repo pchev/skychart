@@ -45,8 +45,8 @@ uses
   InterfaceBase, LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus,
   Math, StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
   Printers, ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame,
-  BGRABitmap, BGRABitmapTypes, LResources, uniqueinstance, enhedits, cu_healpix,
-  downloaddialog, LazHelpHTML_fix, ButtonPanel, ExtDlgs;
+  BGRABitmap, BGRABitmapTypes, LResources, enhedits, cu_healpix, downloaddialog,
+  LazHelpHTML_fix, UniqueInstance, ButtonPanel, ExtDlgs;
 
 type
 
@@ -60,6 +60,7 @@ type
     Mosaic: TAction;
     MenuUpdDeltaT: TMenuItem;
     SavePictureDialog1: TSavePictureDialog;
+    UniqueInstance1: TUniqueInstance;
     ViewAllTollbar: TAction;
     MenuItem1: TMenuItem;
     ViewMainMenu: TAction;
@@ -518,6 +519,8 @@ type
     procedure ToolBarFOVResize(Sender: TObject);
     procedure TrackTelescopeExecute(Sender: TObject);
     procedure TrajectoriesExecute(Sender: TObject);
+    procedure UniqueInstance1OtherInstance(Sender: TObject;
+      ParamCount: Integer; const Parameters: array of String);
     procedure ViewChartInfoExecute(Sender: TObject);
     procedure ViewChartLegendExecute(Sender: TObject);
     procedure ViewMainMenuExecute(Sender: TObject);
@@ -647,7 +650,6 @@ type
       Shift: TShiftState; X, Y: integer);
   private
     { Private declarations }
-    UniqueInstance1: TCdCUniqueInstance;
     ConfigTime: Tf_configtime;
     ConfigObservatory: Tf_configobservatory;
     ConfigChart: Tf_configchart;
@@ -675,9 +677,6 @@ type
     ActiveScript: integer;
     FTelescopeConnected: boolean;
     AccelList: array[0..MaxMenulevel] of string;
-    procedure OtherInstance(Sender: TObject; ParamCount: integer;
-      Parameters: array of string);
-    procedure InstanceRunning(Sender: TObject);
     procedure ProcessParams1;
     procedure ProcessParams2;
     procedure ProcessParamsQuit;
@@ -2455,14 +2454,6 @@ begin
     ConfigPrivateDir := '';
     CurrentTheme := 'default';
     ProcessParams1;
-    if VerboseMsg then
-      debugln('Check other instance');
-    UniqueInstance1 := TCdCUniqueInstance.Create(self);
-    UniqueInstance1.Identifier := 'skychart';
-    UniqueInstance1.OnOtherInstance := OtherInstance;
-    UniqueInstance1.OnInstanceRunning := InstanceRunning;
-    UniqueInstance1.Enabled := True;
-    UniqueInstance1.Loaded;
     step := 'Init';
     if VerboseMsg then
       debugln(step);
@@ -10378,8 +10369,9 @@ begin
   end;
 end;
 
-procedure Tf_main.OtherInstance(Sender: TObject; ParamCount: integer;
-  Parameters: array of string);
+
+procedure Tf_main.UniqueInstance1OtherInstance(Sender: TObject;
+  ParamCount: Integer; const Parameters: array of String);
 var
   i: integer;
   buf, p: string;
@@ -10409,23 +10401,6 @@ begin
   WriteTrace('Receive from new instance: ' + buf);
   ProcessParamsQuit;
   ProcessParams2;
-end;
-
-procedure Tf_main.InstanceRunning(Sender: TObject);
-var
-  i: integer;
-  parms: string;
-begin
-  for i := 0 to Params.Count - 1 do
-  begin
-    parms := Params[i];
-    if parms = '--unique' then
-    begin
-      debugln('Other instance running, exit now.');
-      UniqueInstance1.RetryOrHalt;
-      debugln('... maybe not, try to continue ...');
-    end;
-  end;
 end;
 
 // Parameters that need to be set before program initialisation

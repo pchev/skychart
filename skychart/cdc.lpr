@@ -65,11 +65,13 @@ begin
 
   Params:=TStringList.Create;
   buf:='';
+  WantUnique:=false;
   for i:=1 to Paramcount do begin
       p:=ParamStr(i);
       if copy(p,1,2)='--' then begin
          if buf<>'' then Params.Add(buf);
          if buf='--verbose' then VerboseMsg:=true;
+         if buf='--unique' then WantUnique:=true;
          buf:=p;
       end
       else
@@ -85,7 +87,7 @@ begin
   step:='Create splash';
   if VerboseMsg then WriteTrace(step);
   Application.CreateForm(Tf_splash, f_splash);
-  if f_main.showsplash then begin
+  if f_main.showsplash and (not WantUnique) then begin
     step:='Show splash';
     if VerboseMsg then WriteTrace(step);
     f_splash.Show; f_splash.Invalidate;
