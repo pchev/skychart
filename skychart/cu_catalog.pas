@@ -6398,9 +6398,9 @@ begin
   CloseGaia;
   if Result then
   begin
+      FormatGaia(rec);
       ar := rad2deg*rec.ra / 15;
       de := rad2deg*rec.Dec;
-      FormatGaia(rec);
       FFindId := id;
       FFindRecOK := True;
       FFindRec := rec;
