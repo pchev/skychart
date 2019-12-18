@@ -584,6 +584,7 @@ begin
   end;
 
   http.Timeout:=10000;
+  http.Sock.ConnectionTimeout:=10000;
   http.Sock.OnStatus:=httpstatus;
   Sockreadcount:=0;
 

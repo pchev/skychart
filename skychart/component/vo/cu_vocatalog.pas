@@ -221,6 +221,7 @@ begin
       http.ProxyPass := Fproxypass;
   end;
   http.Timeout := 10000;
+  http.Sock.ConnectionTimeout:=10000;
   http.Sock.OnStatus := httpstatus;
   Sockreadcount := 0;
   if http.HTTPMethod('GET', url) and ((http.ResultCode = 200) or
