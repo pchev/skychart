@@ -6399,9 +6399,9 @@ begin
   if Result then
   begin
       FormatGaia(rec);
-      ar := rad2deg*rec.ra / 15;
-      de := rad2deg*rec.Dec;
-      FFindId := id;
+      ar := rec.ra;
+      de := rec.Dec;
+      FFindId := rec.star.id;
       FFindRecOK := True;
       FFindRec := rec;
   end;
