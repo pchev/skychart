@@ -3,7 +3,8 @@
 version=4.3
 
 builddir=/tmp/skychart  # Be sure this is set to a non existent directory, it is removed after the run!
-innosetup="C:\Program Files (x86)\Inno Setup 5\ISCC.exe"  # Install under Wine from http://www.jrsoftware.org/isinfo.php
+export WINEPREFIX=~/.wineinno6
+innosetup="C:\Program Files (x86)\Inno Setup 6\ISCC.exe"  # Install under Wine from http://www.jrsoftware.org/isinfo.php
 wine_build="Z:\tmp\skychart" # Change to match builddir, Z: is defined in ~/.wine/dosdevices
 
 arch=$(arch)
