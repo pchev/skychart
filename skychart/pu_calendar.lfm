@@ -91,7 +91,7 @@ object f_calendar: Tf_calendar
         Top = 0
         Width = 327
         Align = alClient
-        Caption = 'Satellites calculation use QuickSat by Mike McCants, Iridium flare prediction use Iridflar by Robert Matson'
+        Caption = 'Satellites calculation use QuickSat by Mike McCants'
         ParentColor = False
         ParentFont = False
         ParentShowHint = False
@@ -817,16 +817,6 @@ object f_calendar: Tf_calendar
           Caption = 'Include day time pass'
           ParentFont = False
           TabOrder = 5
-        end
-        object IridiumBox: TCheckBox
-          Left = 456
-          Height = 21
-          Top = 4
-          Width = 150
-          Caption = 'Include Iridium flares'
-          OnChange = IridiumBoxChange
-          ParentFont = False
-          TabOrder = 1
         end
         object magchart: TFloatEdit
           Left = 150

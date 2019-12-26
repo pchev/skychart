@@ -1073,12 +1073,9 @@ begin
   CL.AddConstantN('rsCleanupMap', 'String').SetString(rsCleanupMap);
   CL.AddConstantN('rsGraphs', 'String').SetString(rsGraphs);
   CL.AddConstantN('rsSatellitesCa', 'String').SetString(rsSatellitesCa);
-  CL.AddConstantN('rsFlarePredict', 'String').SetString(rsFlarePredict);
   CL.AddConstantN('rsIncludeDayTi', 'String').SetString(rsIncludeDayTi);
-  CL.AddConstantN('rsIncludeIridi', 'String').SetString(rsIncludeIridi);
   CL.AddConstantN('rsCannotComput', 'String').SetString(rsCannotComput);
   CL.AddConstantN('rsPleaseInstWine', 'String').SetString(rsPleaseInstWine);
-  CL.AddConstantN('rsPleaseInstDosbox', 'String').SetString(rsPleaseInstDosbox);
   CL.AddConstantN('rsIfItIsNotIns', 'String').SetString(rsIfItIsNotIns);
   CL.AddConstantN('rsSorryCopyIsN', 'String').SetString(rsSorryCopyIsN);
   CL.AddConstantN('rsDownloadTLE', 'String').SetString(rsDownloadTLE);

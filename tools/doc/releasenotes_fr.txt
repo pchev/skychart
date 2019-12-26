@@ -6,3 +6,6 @@ Nouvelles fonctions:
 Correction d'un bug:
 - Les planètes en mode ligne doivent être vraiment transparentes
 - Corrige "Voir les marques" pour la simulation des comètes et astéroïdes
+
+Suppression:
+- Suprime le calcul des flash Iridium

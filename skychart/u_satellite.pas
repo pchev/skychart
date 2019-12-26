@@ -38,23 +38,13 @@ procedure DetailSat(jds, ObsLatitude, ObsLongitude, ObsAltitude,
   boxra1, boxra2, boxde1, boxde2: double;
   maglimit, tle, tmpdir, prgdir, timezone, ObsName, altcut: string;
   boxsearch: boolean = False);
-procedure Iridium(y, mm, d, dt, timezone, tmpdir, ObsName: string;
-  ObsLatitude, ObsLongitude, ObsAltitude, minalt: double);
 function CheckWine: boolean;
-function CheckDosbox: boolean;
 
 const
-  dosboxdef = 'dosbox -exit -conf dosbox.conf';
   {$ifdef mswindows}
   doscmd = 'cmd.exe /C';
-    {$ifdef win64}
-  dosbox = dosboxdef;
-    {$else}
-  dosbox = doscmd;
-    {$endif}
   {$else}
   doscmd = 'wine';
-  dosbox = dosboxdef;
   {$endif}
 
 implementation
@@ -139,35 +129,6 @@ begin
    {$endif}
     ShowMessage(msg + crlf + 'wine return: ' + buf);
   end;
-  r.Free;
-end;
-
-function CheckDosbox: boolean;
-var
-  cmd, buf: string;
-  i, j: integer;
-  r: TStringList;
-begin
-  r := TStringList.Create;
-  cmd := 'dosbox --version';
-  i := execprocess(cmd, r);
-  Result := (i = 0);
-
-  if not Result then
-  begin
-    if r.Count > 0 then
-    begin
-      buf := '';
-      for j := 0 to r.Count - 1 do
-        buf := buf + r[j];
-    end
-    else
-      buf := '';
-    ShowMessage(rsPleaseInstDosbox + crlf + rsIfItIsNotIns + crlf +
-      'apt-get install dosbox' + crlf + 'yum ' + 'install dosbox' +
-      crlf + 'dosbox return: ' + buf);
-  end;
-
   r.Free;
 end;
 
@@ -473,103 +434,6 @@ str(x1:4:1,s4);}
   except
 {$I-}
     Closefile(satctl);
-    i1 := ioresult;
-{$I+}
-    chdir(curdir);
-    raise;
-  end;
-end;
-
-procedure Iridium(y, mm, d, dt, timezone, tmpdir, ObsName: string;
-  ObsLatitude, ObsLongitude, ObsAltitude, minalt: double);
-var
-  irictl: textfile;
-  buf: string;
-  curdir, dcmd: string;
-  i1: integer;
-{$ifdef unix}
-const
-  doslf = chr(13);
-{$else}
-const
-  doslf = '';
-{$endif}
-begin
-
-  if isWOW64 then
-    dcmd := dosboxdef
-  else
-    dcmd := dosbox;
-
-  curdir := GetCurrentDir;
-  deletefile(slash(tmpdir) + 'IRIDFLAR.OUT');
-
-  try
-    assignfile(irictl, slash(tmpdir) + 'IRIDFLAR.CFG');
-    rewrite(irictl);
-    buf := '[IRIDFLAR]';
-    writeln(irictl, buf + doslf);
-
-    if FileExistsUTF8(slash(tmpdir) + 'iridium.txt') then
-      buf := 'EphemFile=iridium.txt'
-    else
-      buf := 'EphemFile=iridium.tle';
-
-    writeln(irictl, buf + doslf);
-    buf := 'CityFile=skymap.cty';
-    writeln(irictl, buf + doslf);
-    buf := 'SiteName=' + Obsname;
-    writeln(irictl, buf + doslf);
-    buf := 'ReportFile=iridflar.out';
-    writeln(irictl, buf + doslf);
-    buf := 'StartDate=' + y + '/' + mm + '/' + d;
-    writeln(irictl, buf + doslf);
-    buf := 'StartTime=12:00:00';
-    writeln(irictl, buf + doslf);
-    buf := 'Lat=' + floattostr(Obslatitude);
-    writeln(irictl, buf + doslf);
-    buf := 'Long=' + floattostr(-Obslongitude);
-    writeln(irictl, buf + doslf);
-    buf := 'Alt=' + floattostr(Obsaltitude);
-    writeln(irictl, buf + doslf);
-    buf := 'Zone=' + timezone;
-    writeln(irictl, buf + doslf);
-    buf := 'SearchDur=' + dt;
-    writeln(irictl, buf + doslf);
-    buf := 'SunAng= -6.00';
-    writeln(irictl, buf + doslf);
-    buf := 'MinElev=' + formatfloat('0.00', minalt);
-    writeln(irictl, buf + doslf);
-    buf := 'MaxMirror= 4.00';
-    writeln(irictl, buf + doslf);
-    buf := 'DayMagLim=-6.0';
-    writeln(irictl, buf + doslf);
-    buf := 'NightMagLim= 2.0';
-    writeln(irictl, buf + doslf);
-    buf := 'Units=Metric';
-    writeln(irictl, buf + doslf);
-    buf := 'Source=Sun';
-    writeln(irictl, buf + doslf);
-    buf := 'Batch=Yes';
-    writeln(irictl, buf + doslf);
-    buf := 'Brief=No';
-    writeln(irictl, buf + doslf);
-    buf := 'LocalStart=Yes';
-    writeln(irictl, buf + doslf);
-    buf := 'AutoDate=No';
-    writeln(irictl, buf + doslf);
-    buf := 'ThreeLines=No';
-    writeln(irictl, buf + doslf);
-    buf := 'Report=Yes';
-    writeln(irictl, buf + doslf);
-    Closefile(irictl);
-    chdir(slash(tmpdir));
-    exec(dcmd + ' IRIDFLAR.EXE', False);
-    chdir(curdir);
-  except
-{$NOTES OFF}
-{$I-}
-    Closefile(irictl);
     i1 := ioresult;
 {$I+}
     chdir(curdir);

@@ -6004,7 +6004,6 @@ begin
   cfgm.CometUrlList.Add(URL_HTTPCometElements1);
   cfgm.AsteroidUrlList.Add(URL_CDCAsteroidElements);
   cfgm.TleUrlList.add(URL_CELESTRAK1);
-  cfgm.TleUrlList.add(URL_CELESTRAK2);
   cfgm.TleUrlList.add(URL_QSMAG);
   cfgm.starshape_file := '';
   cfgm.tlelst := '';
@@ -8145,6 +8144,18 @@ begin
     def_cfgsc.GRSjd := jd(2019, 8, 12, 0);
     def_cfgsc.GRSdrift := 18.3 / 365.25;
   end;
+  if Config_Version < '4.3b' then
+    DeleteFileUTF8(slash(SatDir) + 'F77L.EER');
+    DeleteFileUTF8(slash(SatDir) + 'IRIDFLAR.EXE');
+    DeleteFileUTF8(slash(SatDir) + 'SORT.COM');
+    DeleteFileUTF8(slash(SatDir) + 'dosbox.conf');
+    DeleteFileUTF8(slash(SatDir) + 'IRIDFLAR.CFG');
+    DeleteFileUTF8(slash(SatDir) + 'IRIDFLAR.OUT');
+    {$ifdef mswindows}
+    DeleteFileUTF8(slash(SatDir) + 'DOSBox.exe');
+    DeleteFileUTF8(slash(SatDir) + 'SDL.dll');
+    DeleteFileUTF8(slash(SatDir) + 'SDL_net.dll');
+    {$endif}
 end;
 
 procedure Tf_main.SaveVersion;

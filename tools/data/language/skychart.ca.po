@@ -2158,10 +2158,6 @@ msgstr "Color del cel fix"
 msgid "Flamsteed number"
 msgstr "Número de Flamsteed"
 
-#: u_translation.rsflarepredict
-msgid "Iridium flare prediction:"
-msgstr "Predicció de fulguracions dels Irídium"
-
 #: u_translation.rsflipnsmoveme
 msgid "Flip N/S movement"
 msgstr ""
@@ -2521,10 +2517,6 @@ msgstr "Inclinació="
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
 msgstr "Inclou el pas diari del temps"
-
-#: u_translation.rsincludeiridi
-msgid "Include Iridium flare"
-msgstr "Inclou la fulguració dels Irídium"
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -3893,10 +3885,6 @@ msgstr "Si us plau, indiqueu un nom llarg del catàleg"
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Indiqueu el directori on s'ha de construir el catàleg"
-
-#: u_translation.rspleaseinstdosbox
-msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
-msgstr "Si us plau, instal·leu \"Dosbox\"http://www.dosbox.com/ per calcular les fulguracions dels Irídium en el vostre PC"
 
 #: u_translation.rspleaseinstwine
 msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."

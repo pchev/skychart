@@ -36,6 +36,7 @@ Name: startupicon; Description: {cm:CreateStartupIcon}; GroupDescription: {cm:Ad
 [InstallDelete]
 Name: {app}\data\Themes\default\*; Type: filesandordirs; Components: ; Tasks: 
 Name: {app}\data\zoneinfo\*; Type: filesandordirs; Components: ; Tasks: 
+Name: {app}\data\iridflar; Type: filesandordirs; Components: ; Tasks: 
 Name: {app}\doc\wiki_doc\*; Type: filesandordirs; Components: ; Tasks: 
 Name: {app}\data\script\script1.cdcps; Type: files; Components: ; Tasks:
 Name: {app}\data\script\script2.cdcps; Type: files; Components: ; Tasks:

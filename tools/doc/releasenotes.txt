@@ -7,4 +7,5 @@ Bug fix:
 - Planet in line mode must be really transparent 
 - Fix "Show Mark" option for comet and asteroid simulation
 
-
+Removed:
+- Remove Iridium flare computation

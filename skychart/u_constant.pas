@@ -517,12 +517,10 @@ const
   URL_QUICKSAT = 'https://www.prismnet.com/~mmccants/';
   URL_QSMAG = 'https://www.prismnet.com/~mmccants/programs/qsmag.zip';
 
-  URL_TLEINFO1 = 'http://www.tle.info/data/iridium.txt';
-  URL_TLEINFO2 = 'http://www.tle.info/data/visual.txt';
-  URL_TLEINFO3 = 'http://www.tle.info/data/TLE.ZIP';
+  URL_TLEINFO1 = 'http://www.tle.info/data/visual.txt';
+  URL_TLEINFO2 = 'http://www.tle.info/data/TLE.ZIP';
 
-  URL_CELESTRAK1 = 'https://celestrak.com/NORAD/elements/iridium.txt';
-  URL_CELESTRAK2 = 'https://celestrak.com/NORAD/elements/visual.txt';
+  URL_CELESTRAK1 = 'https://celestrak.com/NORAD/elements/visual.txt';
 
 
   URL_GRS = 'https://www.ap-i.net/pub/virtualplanet/grs.txt';
@@ -1053,8 +1051,6 @@ type
     BGalpha: integer;
     BGitt: Titt;
     BGmin_sigma, BGmax_sigma, NEBmin_sigma, NEBmax_sigma: double;
-    IridiumRA, IridiumDE, IridiumMA: double;
-    IridiumName, IridiumDist: string;
     PlanetLst: Tplanetlst;
     AsteroidNb, CometNb, AsteroidLstSize, CometLstSize, NumCircle: integer;
     AsteroidLst: Tasteroidlst;
@@ -2288,11 +2284,6 @@ begin
   ShowComet := Source.ShowComet;
   ShowArtSat := Source.ShowArtSat;
   NewArtSat := Source.NewArtSat;
-  IridiumRA := Source.IridiumRA;
-  IridiumDE := Source.IridiumDE;
-  IridiumMA := Source.IridiumMA;
-  IridiumName := Source.IridiumName;
-  IridiumDist := Source.IridiumDist;
   ObsLatitude := Source.ObsLatitude;
   ObsLongitude := Source.ObsLongitude;
   ObsAltitude := Source.ObsAltitude;

@@ -2157,10 +2157,6 @@ msgstr "Az ég beállított színe"
 msgid "Flamsteed number"
 msgstr "Flamsteed szám"
 
-#: u_translation.rsflarepredict
-msgid "Iridium flare prediction:"
-msgstr "Iridium felvillanás előrejelzése:"
-
 #: u_translation.rsflipnsmoveme
 msgid "Flip N/S movement"
 msgstr ""
@@ -2520,10 +2516,6 @@ msgstr "Pályahajlás="
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
 msgstr "nappali felvillanások is"
-
-#: u_translation.rsincludeiridi
-msgid "Include Iridium flare"
-msgstr "Iridium felvillanás beszúrása"
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -3892,10 +3884,6 @@ msgstr "Add meg a katalógus hosszú nevét"
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Jelöld ki a könyvtárat, ahol a katalógust fel kell építeni"
-
-#: u_translation.rspleaseinstdosbox
-msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
-msgstr "telepítsd a \"Dosbox\"-ot http://www.dosbox.com/ az Iridium felvillanások számításához."
 
 #: u_translation.rspleaseinstwine
 msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."

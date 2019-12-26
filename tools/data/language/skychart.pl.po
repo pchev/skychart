@@ -2160,10 +2160,6 @@ msgstr "Wybierz kolor nieba"
 msgid "Flamsteed number"
 msgstr "Numer Flamsteeda"
 
-#: u_translation.rsflarepredict
-msgid "Iridium flare prediction:"
-msgstr "Przewidywane flary Iridium"
-
 #: u_translation.rsflipnsmoveme
 msgid "Flip N/S movement"
 msgstr ""
@@ -2523,10 +2519,6 @@ msgstr "Nachylenie="
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
 msgstr "Dodaj datę i czas przejścia"
-
-#: u_translation.rsincludeiridi
-msgid "Include Iridium flare"
-msgstr "Dodaj flary Iridium"
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -3896,10 +3888,6 @@ msgstr "Proszę wskazać długą nazwę katalogu"
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Proszę wskazać folder gdzie katalog musi być utworzony"
-
-#: u_translation.rspleaseinstdosbox
-msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
-msgstr "Proszę zainstalować Dosbox http://www.dosbox.com/ aby wyliczać flary Iridium."
 
 #: u_translation.rspleaseinstwine
 msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."

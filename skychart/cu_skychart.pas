@@ -3099,19 +3099,6 @@ begin
       Closefile(f);
     end;
   end;
-  if cfgsc.IridiumMA < 90 then
-  begin
-    nom := cfgsc.IridiumName;
-    projection(cfgsc.IridiumRA, cfgsc.IridiumDE, x1, y1, True, cfgsc);
-    windowxy(x1, y1, xx, yy, cfgsc);
-    if (xx > -2 * cfgsc.xmax) and (yy > -2 * cfgsc.ymax) and (xx < 3 * cfgsc.xmax) and (yy < 3 * cfgsc.ymax) then
-    begin
-      Fplot.PlotStar(xx, yy, cfgsc.IridiumMA, 0);
-      lis := nom + FormatFloat(f6, cfgsc.IridiumRA) + FormatFloat(f6, cfgsc.IridiumDE);
-      lid := rshash(lis, $7FFFFFFF);
-      SetLabel(lid, xx, yy, 0, 2, 1, nom, laLeft, 0, 4);
-    end;
-  end;
 end;
 
 function Tskychart.CloseSat: integer;
@@ -3162,23 +3149,6 @@ begin
   tar := 1;
   tde := 1;
   repeat
-    if First and (cfgsc.IridiumMA < 90) then
-    begin
-      tar := cfgsc.IridiumRA;
-      tde := cfgsc.IridiumDE;
-      tar := NormRA(tar);
-      First := False;
-      if (tar < x1) or (tar > x2) then
-        continue;
-      if (tde < y1) or (tde > y2) then
-        continue;
-      str(cfgsc.IridiumMA: 3: 1, ma);
-      last := 'Flare ' + cfgsc.IridiumName;
-      dist := cfgsc.IridiumDist;
-      heure := artostr(cfgsc.CurTime);
-      Result := True;
-      break;
-    end;
     First := False;
     Readln(fsat, buf);
     if EOF(fsat) then

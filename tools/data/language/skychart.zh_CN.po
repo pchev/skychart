@@ -2161,10 +2161,6 @@ msgstr "固定天空颜色"
 msgid "Flamsteed number"
 msgstr "弗兰斯蒂德编号"
 
-#: u_translation.rsflarepredict
-msgid "Iridium flare prediction:"
-msgstr "铱闪预测："
-
 #: u_translation.rsflipnsmoveme
 msgid "Flip N/S movement"
 msgstr ""
@@ -2524,10 +2520,6 @@ msgstr ""
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
 msgstr "包括日间过境"
-
-#: u_translation.rsincludeiridi
-msgid "Include Iridium flare"
-msgstr "包括铱闪"
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -3898,10 +3890,6 @@ msgstr "请设置星表长名"
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "请设置星表必须建立在的目录"
-
-#: u_translation.rspleaseinstdosbox
-msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
-msgstr "请安装\"Dosbox\" http://www.dosbox.com/ 从而在您的电脑上计算铱闪数据。"
 
 #: u_translation.rspleaseinstwine
 msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."

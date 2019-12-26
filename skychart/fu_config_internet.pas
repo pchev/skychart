@@ -461,7 +461,6 @@ procedure Tf_config_internet.tlecelestrackClick(Sender: TObject);
 begin
   TLEUrlList.Clear;
   TLEUrlList.Lines.Add(URL_CELESTRAK1);
-  TLEUrlList.Lines.Add(URL_CELESTRAK2);
   TLEUrlList.Lines.Add(URL_QSMAG);
   TLEUrlListExit(Sender);
 end;
@@ -471,7 +470,6 @@ begin
   TLEUrlList.Clear;
   TLEUrlList.Lines.Add(URL_TLEINFO1);
   TLEUrlList.Lines.Add(URL_TLEINFO2);
-  TLEUrlList.Lines.Add(URL_TLEINFO3);
   TLEUrlList.Lines.Add(URL_QSMAG);
   TLEUrlListExit(Sender);
 end;

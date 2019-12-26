@@ -65,7 +65,6 @@ type
     TleCheckList: TCheckListBox;
     dgPlanet: TDrawGrid;
     DownloadDialog1: TDownloadDialog;
-    IridiumBox: TCheckBox;
     fullday: TCheckBox;
     Label10: TLabel;
     LabelTle: TLabel;
@@ -152,7 +151,6 @@ type
       Shift: TShiftState; X, Y: integer);
     procedure FormDestroy(Sender: TObject);
     procedure GridDblClick(Sender: TObject);
-    procedure IridiumBoxChange(Sender: TObject);
     procedure Label9Click(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure BtnSaveClick(Sender: TObject);
@@ -432,8 +430,7 @@ begin
   Label5.Caption := rsAt;
   Label3.Caption := rsBy;
   Label4.Caption := rsDays;
-  Label9.Caption := rsSatellitesCa + ' QuickSat by Mike McCants,' + crlf +
-    rsFlarePredict + ' Iridflar by Robert Matson';
+  Label9.Caption := rsSatellitesCa + ' QuickSat by Mike McCants';
   label9.Hint := URL_QUICKSAT;
   label10.Caption := rsMinimalAltit;
   BtnRefresh.Caption := rsRefresh;
@@ -458,7 +455,6 @@ begin
   Label7.Caption := rsLimitingMagn;
   Label6.Caption := 'TLE';
   fullday.Caption := rsIncludeDayTi;
-  IridiumBox.Caption := rsIncludeIridi;
   appmsg[1] := rsRA;
   appmsg[2] := rsDE;
   appmsg[3] := rsMagn;
@@ -1052,58 +1048,6 @@ var
 const
   mois: array[1..12] of string =
     ('Jan ', 'Feb ', 'Mar ', 'Apr ', 'May ', 'June', 'July', 'Aug ', 'Sept', 'Oct ', 'Nov ', 'Dec ');
-
-  procedure InsertIridium;
-  begin
-    with SatGrid do
-      while jdi < jda do
-      begin
-        RowCount := i + 1;
-        cells[0, i] := IntToStr(ai) + '-' + padzeros(IntToStr(mmi), 2) + '-' + padzeros(
-          IntToStr(ji), 2) + ' ' + copy(bufi, 18, 8);
-        cells[1, i] := 'Flare: Iridium ' + copy(bufi, 1, 5);
-        cells[2, i] := copy(bufi, 79, 4);
-        cells[3, i] := copy(bufi, 29, 3);
-        cells[4, i] := copy(bufi, 33, 2);
-        cells[5, i] := copy(bufi, 48, 4);
-        s1 := padzeros(copy(bufi, 36, 2), 2);
-        s2 := padzeros(copy(bufi, 39, 2), 2);
-        ari := (StrToInt(s1) + StrToInt(s2) / 60) * 15 * deg2rad;
-        cells[6, i] := s1 + 'h' + s2 + 'm';
-        cells[7, i] := copy(bufi, 42, 5);
-        dei := strtofloat(cells[7, i]) * deg2rad;
-        cells[8, i] := trim(copy(bufi, 113, 7));
-        cells[9, i] := '';
-        objects[0, i] := SetObjCoord(jdi, ari, dei);
-        i := i + 1;
-        if EOF(fi) then
-        begin
-          jdi := 99999999;
-          Closefile(fi);
-        end
-        else
-        begin
-          Readln(fi, bufi);
-          if trim(bufi) = '' then
-            Readln(fi, bufi);
-          if copy(bufi, 1, 5) = '-----' then
-          begin
-            jdi := 99999999;
-            Closefile(fi);
-          end
-          else
-          begin
-            ai := StrToInt(copy(bufi, 7, 4));
-            mmi := StrToInt(copy(bufi, 12, 2));
-            ji := StrToInt(copy(bufi, 15, 2));
-            hi := StrToInt(copy(bufi, 18, 2)) + StrToInt(copy(bufi, 21, 2)) / 60 +
-              StrToInt(copy(bufi, 24, 2)) / 3600;
-            jdi := jd(ai, mmi, ji, hi - (config.tz.SecondsOffset / 3600));
-          end;
-        end;
-      end;
-  end;
-
 begin
   prgdir := slash(appdir) + slash('data') + slash('quicksat');
   iridir := slash(appdir) + slash('data') + slash('iridflar');
@@ -1137,66 +1081,6 @@ begin
     Assignfile(f, slash(SatDir) + 'satlist.out');
     reset(f);
     jdi := 1;
-    if IridiumBox.Checked then
-    begin
-      srcdir := SysToUTF8(slash(iridir));
-      if not fileexists(slash(SatDir) + 'F77L.EER') then
-        CopyFile(srcdir + 'F77L.EER', wrkdir + 'F77L.EER');
-      if not fileexists(slash(SatDir) + 'IRIDFLAR.EXE') then
-        CopyFile(srcdir + 'IRIDFLAR.EXE', wrkdir + 'IRIDFLAR.EXE');
-      if not fileexists(slash(SatDir) + 'SORT.COM') then
-        CopyFile(srcdir + 'SORT.COM', wrkdir + 'SORT.COM');
-      if not fileexists(slash(SatDir) + 'dosbox.conf') then
-        CopyFile(srcdir + 'dosbox.conf', wrkdir + 'dosbox.conf');
-  {$ifdef win64}
-      if not fileexists(slash(SatDir) + 'DOSBox.exe') then
-        CopyFile(srcdir + 'DOSBox.exe', wrkdir + 'DOSBox.exe');
-      if not fileexists(slash(SatDir) + 'SDL.dll') then
-        CopyFile(srcdir + 'SDL.dll', wrkdir + 'SDL.dll');
-      if not fileexists(slash(SatDir) + 'SDL_net.dll') then
-        CopyFile(srcdir + 'SDL_net.dll', wrkdir + 'SDL_net.dll');
-  {$endif}
-  {$ifdef win32}
-      if isWOW64 then
-      begin
-        if not fileexists(slash(SatDir) + 'DOSBox.exe') then
-          CopyFile(srcdir + 'DOSBox.exe', wrkdir + 'DOSBox.exe');
-        if not fileexists(slash(SatDir) + 'SDL.dll') then
-          CopyFile(srcdir + 'SDL.dll', wrkdir + 'SDL.dll');
-        if not fileexists(slash(SatDir) + 'SDL_net.dll') then
-          CopyFile(srcdir + 'SDL_net.dll', wrkdir + 'SDL_net.dll');
-      end;
-  {$endif}
-      Iridium(IntToStr(j), IntToStr(m), IntToStr(a), dt, formatfloat(
-        f1, config.tz.SecondsOffset / 3600), SatDir, config.ObsName, config.ObsLatitude,
-        config.ObsLongitude, config.ObsAltitude, MinSatAlt.Value);
-      if FileExists(slash(SatDir) + 'IRIDFLAR.OUT') then
-      begin
-        Assignfile(fi, slash(SatDir) + 'IRIDFLAR.OUT');
-        reset(fi);
-        repeat
-          Readln(fi, bufi);
-          if EOF(fi) then
-          begin
-            jdi := 99999999;
-            Closefile(fi);
-            break;
-          end;
-        until copy(bufi, 1, 5) = '-----';
-        if jdi <> 99999999 then
-        begin
-          Readln(fi, bufi);
-          ai := StrToInt(copy(bufi, 7, 4));
-          mmi := StrToInt(copy(bufi, 12, 2));
-          ji := StrToInt(copy(bufi, 15, 2));
-          hi := StrToInt(copy(bufi, 18, 2)) + StrToInt(copy(bufi, 21, 2)) / 60 +
-            StrToInt(copy(bufi, 24, 2)) / 3600;
-          jdi := jd(ai, mmi, ji, hi - (config.tz.SecondsOffset / 3600));
-        end;
-      end
-      else
-        IridiumBox.Checked := False;
-    end;
     i := 2;
     Readln(f, buf);
     Readln(f, buf);
@@ -1230,8 +1114,6 @@ begin
       jda := jd(a, m, j, h - (config.tz.SecondsOffset / 3600));
       with satgrid do
       begin
-        if IridiumBox.Checked and (jdi < jda) then
-          InsertIridium;
         RowCount := i + 1;
         cells[0, i] := dat1 + ' ' + hh + ':' + mi + ':' + ss;
         cells[1, i] := copy(buf, 66, 99);
@@ -1260,14 +1142,10 @@ begin
       i := i + 1;
     until EOF(f);
     jda := 99999999;
-    if IridiumBox.Checked and (jdi <> 99999999) then
-      InsertIridium; // ne pas oublier les derniers
   finally
 {$I-}
     screen.Cursor := crDefault;
     Closefile(f);
-    if IridiumBox.Checked and (jdi <> 99999999) then
-      Closefile(fi);
     i := ioresult;
 {$I+}
   end;
@@ -2291,19 +2169,6 @@ begin
   lockclick := False;
 end;
 
-procedure Tf_calendar.IridiumBoxChange(Sender: TObject);
-begin
-{$ifndef mswindows}
-  if IridiumBox.Checked and (words(dosbox, '', 1, 1) = 'dosbox') then
-  begin
-    if not CheckDosbox then
-    begin
-      IridiumBox.Checked := False;
-    end;
-  end;
-{$endif}
-end;
-
 procedure Tf_calendar.SatPanelClick(Sender: TObject);
 begin
   ExecuteFile(URL_QUICKSAT);
@@ -2430,18 +2295,6 @@ begin
           begin    // Satellites
             satmag := magchart.Text;
             sattle := tle1.Text;
-            if IridiumBox.Checked then
-            begin
-              if StrToFloatDef(trim(satmag), 6) < 10 then
-                satmag := '10';
-              if pos('iridium.t', sattle) = 0 then
-              begin
-                if FileExistsUTF8(slash(SatDir) + 'iridium.txt') then
-                  sattle := sattle + ',iridium.txt'
-                else
-                  sattle := sattle + ',iridium.tle';
-              end;
-            end;
             DetailSat(p.jd, config.ObsLatitude, config.ObsLongitude,
               config.ObsAltitude, 0, 0, 0, 0, satmag, sattle, SatDir, slash(appdir) + slash(
               'data') + slash('quicksat'), formatfloat(f1, config.tz.SecondsOffset / 3600),
@@ -2450,16 +2303,6 @@ begin
             csconfig.decentre := p.Dec;
             csconfig.ShowArtSat := True;
             csconfig.NewArtSat := True;
-            if copy(cells[1, aRow], 1, 14) = 'Flare: Iridium' then
-            begin
-              csconfig.IridiumRA := p.ra;
-              csconfig.IridiumDE := p.Dec;
-              csconfig.IridiumMA := strtofloat(cells[2, aRow]);
-              csconfig.IridiumName := copy(cells[1, aRow], 8, 99);
-              csconfig.IridiumDist := cells[5, aRow];
-            end
-            else
-              csconfig.IridiumMA := 99;
             if assigned(Fupdchart) then
             begin
               BtnReset.Visible := True;

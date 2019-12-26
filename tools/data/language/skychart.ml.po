@@ -2160,10 +2160,6 @@ msgstr ""
 msgid "Flamsteed number"
 msgstr ""
 
-#: u_translation.rsflarepredict
-msgid "Iridium flare prediction:"
-msgstr ""
-
 #: u_translation.rsflipnsmoveme
 msgid "Flip N/S movement"
 msgstr ""
@@ -2522,10 +2518,6 @@ msgstr ""
 
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
-msgstr ""
-
-#: u_translation.rsincludeiridi
-msgid "Include Iridium flare"
 msgstr ""
 
 #: u_translation.rsincrementfor
@@ -3894,10 +3886,6 @@ msgstr ""
 
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
-msgstr ""
-
-#: u_translation.rspleaseinstdosbox
-msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
 msgstr ""
 
 #: u_translation.rspleaseinstwine

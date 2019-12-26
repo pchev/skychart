@@ -2161,10 +2161,6 @@ msgstr "Neměnná barva oblohy"
 msgid "Flamsteed number"
 msgstr "Flamsteed číslo"
 
-#: u_translation.rsflarepredict
-msgid "Iridium flare prediction:"
-msgstr "Předpověď záblesku Iridia:"
-
 #: u_translation.rsflipnsmoveme
 msgid "Flip N/S movement"
 msgstr ""
@@ -2524,10 +2520,6 @@ msgstr "Sklon="
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
 msgstr "Včetně denních přechodů"
-
-#: u_translation.rsincludeiridi
-msgid "Include Iridium flare"
-msgstr "Včetně záblesků Iridií"
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -3896,10 +3888,6 @@ msgstr "Zadejte prosím název katalogu"
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Zadejte prosím adresář, kde má být katalog vytvořen"
-
-#: u_translation.rspleaseinstdosbox
-msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
-msgstr "Pro výpočty záblesků Iridií je potřeba na vašem systému nainstalovat Dosbox http://www.dosbox.com/"
 
 #: u_translation.rspleaseinstwine
 msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
