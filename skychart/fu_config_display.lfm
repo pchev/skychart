@@ -348,9 +348,9 @@ object f_config_display: Tf_config_display
         end
         object nebuladisplay: TRadioGroup
           Left = 8
-          Height = 65
+          Height = 74
           Top = 20
-          Width = 441
+          Width = 230
           AutoFill = True
           Caption = 'Nebula Display'
           ChildSizing.LeftRightSpacing = 6
@@ -371,6 +371,44 @@ object f_config_display: Tf_config_display
           OnClick = nebuladisplayClick
           ParentFont = False
           TabOrder = 0
+        end
+        object GroupBox9: TGroupBox
+          Left = 240
+          Height = 74
+          Top = 20
+          Width = 201
+          Caption = 'Nebula Surface '
+          ClientHeight = 62
+          ClientWidth = 200
+          TabOrder = 8
+          object SurfaceAlpha: TTrackBar
+            Left = 88
+            Height = 37
+            Top = 16
+            Width = 110
+            Max = 255
+            Min = 10
+            OnChange = SurfaceAlphaChange
+            Position = 10
+            TabOrder = 0
+          end
+          object SurfaceBlure: TCheckBox
+            Left = 9
+            Height = 21
+            Top = 21
+            Width = 62
+            Caption = 'Blurred'
+            OnClick = SurfaceBlureClick
+            TabOrder = 1
+          end
+          object Transparency: TLabel
+            Left = 93
+            Height = 13
+            Top = 0
+            Width = 68
+            Caption = 'Transparency'
+            ParentColor = False
+          end
         end
         object red_moveBox: TCheckBox
           Left = 28

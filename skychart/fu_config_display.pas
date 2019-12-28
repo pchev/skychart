@@ -47,6 +47,9 @@ type
     Button8: TButton;
     Button9: TButton;
     CheckBox1: TCheckBox;
+    Transparency: TLabel;
+    SurfaceBlure: TCheckBox;
+    GroupBox9: TGroupBox;
     LineWidthConstB: TSpinEditEx;
     LineWidthConstL: TSpinEditEx;
     LineWidthEcliptic: TSpinEditEx;
@@ -386,6 +389,7 @@ type
     Shape11: TShape;
     PageControl1: TPageControl;
     labelmagStar: TMouseUpDown;
+    SurfaceAlpha: TTrackBar;
     procedure antialiasClick(Sender: TObject);
     procedure BtnBWColorClick(Sender: TObject);
     procedure BtnDefaultColorClick(Sender: TObject);
@@ -466,6 +470,8 @@ type
     procedure StarSizeBar1Change(Sender: TObject);
     procedure StyleDrawItem(Control: TWinControl; Index: integer;
       ARect: TRect; State: TOwnerDrawState);
+    procedure SurfaceAlphaChange(Sender: TObject);
+    procedure SurfaceBlureClick(Sender: TObject);
     procedure ThemeListChange(Sender: TObject);
     procedure nebuladisplayClick(Sender: TObject);
     procedure red_moveBoxClick(Sender: TObject);
@@ -1288,6 +1294,8 @@ procedure Tf_config_display.ShowDisplay;
 begin
   stardisplay.ItemIndex := cplot.starplot;
   nebuladisplay.ItemIndex := cplot.nebplot;
+  SurfaceBlure.Checked  := csc.SurfaceBlure;
+  SurfaceAlpha.Position := csc.SurfaceAlpha;
   StarSizeBar.position := round(cplot.partsize * 10);
   StarContrastBar.position := cplot.contrast;
   SaturationBar.position := cplot.saturation;
@@ -1713,6 +1721,20 @@ begin
   if LockChange then
     exit;
   cplot.nebplot := nebuladisplay.ItemIndex;
+end;
+
+procedure Tf_config_display.SurfaceAlphaChange(Sender: TObject);
+begin
+  if LockChange then
+    exit;
+  csc.SurfaceAlpha := SurfaceAlpha.Position;
+end;
+
+procedure Tf_config_display.SurfaceBlureClick(Sender: TObject);
+begin
+  if LockChange then
+    exit;
+  csc.SurfaceBlure := SurfaceBlure.Checked;
 end;
 
 procedure Tf_config_display.red_moveBoxClick(Sender: TObject);

@@ -6268,6 +6268,8 @@ begin
   def_cfgsc.ShowSmallsat := True;
   def_cfgsc.DSLforcecolor := False;
   def_cfgsc.DSLcolor := 0;
+  def_cfgsc.SurfaceAlpha := 100;
+  def_cfgsc.SurfaceBlure := false;
   def_cfgsc.ShowImages := False;
   def_cfgsc.ShowImageList := False;
   def_cfgsc.ShowImageLabel := False;
@@ -7184,6 +7186,8 @@ begin
         csc.ShowComet := ReadBool(section, 'ShowComet', csc.ShowComet);
         csc.DSLforcecolor := ReadBool(section, 'DSLforcecolor', csc.DSLforcecolor);
         csc.DSLcolor := ReadInteger(section, 'DSLcolor', csc.DSLcolor);
+        csc.SurfaceBlure := ReadBool(section, 'SurfaceBlure', csc.SurfaceBlure);
+        csc.SurfaceAlpha := ReadInteger(section, 'SurfaceAlpha', csc.SurfaceAlpha);
         csc.ShowImages := ReadBool(section, 'ShowImages', csc.ShowImages);
         csc.showstars := ReadBool(section, 'ShowStars', csc.showstars);
         csc.shownebulae := ReadBool(section, 'ShowNebulae', csc.shownebulae);
@@ -8518,6 +8522,8 @@ begin
         WriteBool(section, 'ShowComet', csc.ShowComet);
         WriteBool(section, 'DSLforcecolor', csc.DSLforcecolor);
         WriteInteger(section, 'DSLcolor', csc.DSLcolor);
+        WriteBool(section, 'SurfaceBlure', csc.SurfaceBlure);
+        WriteInteger(section, 'SurfaceAlpha', csc.SurfaceAlpha);
         WriteBool(section, 'ShowImages', csc.ShowImages);
         WriteBool(section, 'ShowStars', csc.showstars);
         WriteBool(section, 'ShowNebulae', csc.shownebulae);

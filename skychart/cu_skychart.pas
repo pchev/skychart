@@ -2163,11 +2163,18 @@ var
   x1, y1: double;
   xx, yy: single;
   op, lw, col, fs: integer;
+  sbmp:TBGRABitmap;
+  sbmpUsed: boolean;
+
 begin
   if VerboseMsg then
     WriteTrace('SkyChart ' + cfgsc.chartname + ': draw outlines');
   if Fcatalog.OpenLin then
   begin
+    sbmp := TBGRABitmap.Create;
+    sbmp.SetSize(fplot.cfgchart.Width, fplot.cfgchart.Height);
+    sbmp.FillTransparent;
+    sbmpUsed:=false;
     fillchar(rec, sizeof(rec), 0);
     try
       while Fcatalog.readlin(rec) do
@@ -2195,8 +2202,14 @@ begin
           else
             col := rec.options.Units;
         end;
-        FPlot.PlotOutline(xx, yy, op, lw, fs, rec.options.ObjType, cfgsc.x2, col);
+        sbmpUsed := FPlot.PlotOutline(xx, yy, op, lw, fs, rec.options.ObjType, cfgsc.x2, col, sbmp, cfgsc.SurfaceAlpha) or sbmpUsed;
       end;
+      if sbmpUsed then begin
+        if cfgsc.SurfaceBlure then
+           BGRAReplace(sbmp,sbmp.FilterBlurRadial(10,rbFast));
+        Fplot.cbmp.PutImage(0, 0, sbmp, dmLinearBlend);
+      end;
+      sbmp.Free;
       Result := True;
     finally
       Fcatalog.CloseLin;

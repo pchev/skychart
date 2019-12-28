@@ -197,7 +197,7 @@ type
       marge: integer = 5; orient: integer = 0);
     procedure PlotTextCR(xx, yy, fontnum, labelnum: integer; txt: string;
       WhiteBg: boolean; opaque: boolean = True; orient: integer = 0);
-    procedure PlotOutline(x, y: single; op, lw, fs, closed: integer; r2: double; col: Tcolor);
+    function  PlotOutline(x, y: single; op, lw, fs, closed: integer; r2: double; col: Tcolor; sbmp:TBGRABitmap=nil; salpha:integer=255):boolean;
     procedure PlotMWDot(x, y, r: single; col: TColor; WhiteBg: boolean);
     procedure PlotCircle(x1, y1, x2, y2: single; lcolor: integer; moving: boolean);
     procedure PlotCircleMask(x1, y1, r: single; whitebg: boolean);
@@ -1364,8 +1364,7 @@ begin
 
 end;
 
-procedure TSplot.PlotOutline(x, y: single; op, lw, fs, closed: integer;
-  r2: double; col: Tcolor);
+function TSplot.PlotOutline(x, y: single; op, lw, fs, closed: integer; r2: double; col: Tcolor; sbmp:TBGRABitmap=nil; salpha:integer=255): boolean;
 var
   xx, yy, l: integer;
   outlineptsf,Spline: array of TPointf;
@@ -1475,7 +1474,7 @@ var
   end;
 
 begin
-
+  result:=false;
   xx := RoundInt(x);
   yy := RoundInt(y);
 
@@ -1542,22 +1541,26 @@ begin
 
               0:
               begin
-                cbmp.DrawPolyLineAntialias(
-                  outlineptsf, ColorToBGRA(outlinecol), outlinelw * cfgchart.drawpen, True);
-
+                cbmp.DrawPolyLineAntialias(outlineptsf, ColorToBGRA(outlinecol), outlinelw * cfgchart.drawpen, True);
               end;
               1:
               begin
                 Spline := cbmp.ComputeClosedSpline(outlineptsf,ssEasyBezier);
-                cbmp.DrawPolygonAntialias(
-                  Spline, ColorToBGRA(outlinecol), outlinelw * cfgchart.drawpen);
+                cbmp.DrawPolygonAntialias(Spline, ColorToBGRA(outlinecol), outlinelw * cfgchart.drawpen);
               end;
 
               2:
               begin
-                cbmp.FillPoly(outlineptsf, ColorToBGRA(outlinecol), dmset);
+                if sbmp=nil then begin
+                  Spline := cbmp.ComputeClosedSpline(outlineptsf,ssEasyBezier);
+                  cbmp.DrawPolygonAntialias(Spline, ColorToBGRA(outlinecol,salpha), outlinelw * cfgchart.drawpen, ColorToBGRA(outlinecol,salpha));
+                end
+                else begin
+                  result:=true;
+                  Spline := sbmp.ComputeClosedSpline(outlineptsf,ssEasyBezier);
+                  sbmp.DrawPolygonAntialias(Spline, ColorToBGRA(outlinecol,salpha), outlinelw * cfgchart.drawpen, ColorToBGRA(outlinecol,salpha));
+               end;
               end;
-
             end;
 
           end
