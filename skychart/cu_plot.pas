@@ -99,15 +99,15 @@ type
     procedure SetBGRATransparencyFromLuminance(bmp: TBGRABitmap;
       method: integer; whitebg: boolean = False; forcealpha: integer = 0; blacklevel: integer = 0);
     procedure PlotDSOOcl(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
-      Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor);
+      Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor; alpha:byte);
     procedure PlotDSOPNe(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
-      Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor);
+      Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor; alpha:byte);
     procedure PlotDSOGCl(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
-      Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor);
+      Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor; alpha:byte);
     procedure PlotDSOBN(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
-      Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor);
+      Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor; alpha:byte);
     procedure PlotDSOClNb(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
-      Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor);
+      Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor; alpha:byte);
     procedure PlotDSOStar(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
       Atyp: integer; forcecolor: boolean; col: Tcolor);
     procedure PlotDSODStar(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
@@ -115,9 +115,9 @@ type
     procedure PlotDSOTStar(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
       Atyp: integer; forcecolor: boolean; col: Tcolor);
     procedure PlotDSOAst(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
-      Atyp: integer; forcecolor: boolean; col: Tcolor);
+      Atyp: integer; forcecolor: boolean; col: Tcolor; alpha:byte);
     procedure PlotDSOHIIRegion(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
-      Atyp: integer; forcecolor: boolean; col: Tcolor);
+      Atyp: integer; forcecolor: boolean; col: Tcolor; alpha:byte);
     procedure PlotDSOGxyCl(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
       Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor);
     procedure PlotDSODN(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
@@ -166,10 +166,10 @@ type
     function PlotVarStar(x, y: single; vmax, vmin: double): integer;
     function PlotDblStar(x, y, r: single; ma, sep, pa, b_v: double): integer;
     procedure PlotDeepSkyObject(Axx, Ayy: single; Adim, Ama, Asbr, Apixscale: double;
-      Atyp: integer; Amorph: string; whitebg: boolean; forcecolor: boolean; col: Tcolor = clWhite);
+      Atyp: integer; Amorph: string; whitebg: boolean; forcecolor: boolean; col: Tcolor = clWhite; alpha:byte=255);
     procedure PlotDSOGxy(Ax, Ay: single;
       Ar1, Ar2, Apa, Arnuc, Ab_vt, Ab_ve, Ama, Asbr, Apixscale, sizeunit: double; Amorph: string;
-      forcecolor: boolean; col: Tcolor);
+      forcecolor: boolean; col: Tcolor; alpha:byte=255);
     procedure PlotCRose(rosex, rosey, roserd, rot: single; flipx, flipy: integer;
       WhiteBg: boolean; RoseType: integer);
     procedure PlotLine(x1, y1, x2, y2: single; lcolor, lwidth: integer;
@@ -1222,7 +1222,7 @@ end;
 
 procedure TSplot.PlotDeepSkyObject(Axx, Ayy: single; Adim, Ama, Asbr, Apixscale: double;
   Atyp: integer; Amorph: string; whitebg: boolean; forcecolor: boolean;
-  col: Tcolor = clWhite);
+  col: Tcolor = clWhite; alpha:byte=255);
 begin
 {
   Here's where we break out the plot routines for each type of deep sky object
@@ -1239,15 +1239,15 @@ begin
         PlotDSOUnknown(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, forcecolor, col);
       //        1:  // galaxy - not called from here, they are plotted back in cu_skychart.DrawDeepSkyObject
       2:  // open cluster
-        PlotDSOOcl(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, Amorph, forcecolor, col);
+        PlotDSOOcl(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, Amorph, forcecolor, col, alpha);
       4:  // planetary
-        PlotDSOPNe(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, Amorph, forcecolor, col);
+        PlotDSOPNe(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, Amorph, forcecolor, col, alpha);
       3:  // globular cluster
-        PlotDSOGCl(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, Amorph, forcecolor, col);
+        PlotDSOGCl(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, Amorph, forcecolor, col, alpha);
       5:  // bright nebula (emission and reflection)
-        PlotDSOBN(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, Amorph, forcecolor, col);
+        PlotDSOBN(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, Amorph, forcecolor, col, alpha);
       6:  // cluster with nebula
-        PlotDSOClNb(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, Amorph, forcecolor, col);
+        PlotDSOClNb(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, Amorph, forcecolor, col, alpha);
       7:  // star
         PlotDSOStar(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, forcecolor, col);
       8:  // double star
@@ -1255,9 +1255,9 @@ begin
       9:  // triple star
         PlotDSOTStar(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, forcecolor, col);
       10: // asterism
-        PlotDSOAst(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, forcecolor, col);
+        PlotDSOAst(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, forcecolor, col, alpha);
       11: // Knot (more accurately as an HII region e.g. in M101, M33 and the LMC)
-        PlotDSOHIIRegion(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, forcecolor, col);
+        PlotDSOHIIRegion(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, forcecolor, col, alpha);
       12: // galaxy cluster
         PlotDSOGxyCl(Axx, Ayy, Adim, Ama, Asbr, Apixscale, Atyp, Amorph, forcecolor, col);
       13: // dark nebula
@@ -4652,7 +4652,7 @@ end;
 
 procedure TSplot.PlotDSOGxy(Ax, Ay: single;
   Ar1, Ar2, Apa, Arnuc, Ab_vt, Ab_ve, Ama, Asbr, Apixscale, sizeunit: double; Amorph: string;
-  forcecolor: boolean; col: Tcolor);
+  forcecolor: boolean; col: Tcolor; alpha:byte=255);
 {
 Plots galaxies - Arnuc comes thru as 0, Ab_vt and Ab_ve come thru as 100
 }
@@ -4725,7 +4725,7 @@ begin
     if (cfgplot.nebplot = 0) or not cfgplot.DSOColorFillGxy then // line mode
       cbmp.DrawPolygonAntialias(elpf, ColorToBGRA(nebcolor), lw)
     else
-      cbmp.DrawPolygonAntialias(elpf, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), cfgchart.drawpen, ColorToBGRA(nebcolor));
+      cbmp.DrawPolygonAntialias(elpf, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), cfgchart.drawpen, ColorToBGRA(nebcolor,alpha));
   end
   else
   begin
@@ -4756,7 +4756,7 @@ begin
 end;
 
 procedure TSplot.PlotDSOOcl(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
-  Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor);
+  Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor; alpha:byte);
 {
   Plot open clusters
 }
@@ -4801,7 +4801,7 @@ begin
       cbmp.PenStyle := psSolid;
     end
     else
-      cbmp.EllipseAntialias(Ax, Ay, ds, ds, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), cfgchart.drawpen, ColorToBGRA(nebcolor));
+      cbmp.EllipseAntialias(Ax, Ay, ds, ds, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), cfgchart.drawpen, ColorToBGRA(nebcolor,alpha));
   end
   else
   begin
@@ -4837,7 +4837,7 @@ end;
 
 
 procedure TSplot.PlotDSOPNe(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
-  Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor);
+  Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor; alpha:byte);
 {
   Plot planetary nebulae - currently these are shown as circular...
   todo: change so that we can plot non-circular ones
@@ -4883,7 +4883,7 @@ begin
     if (cfgplot.nebplot = 0) or not cfgplot.DSOColorFillPNe then // line mode
       cbmp.EllipseAntialias(Ax, Ay, ds, ds, ColorToBGRA(nebcolor), cfgchart.drawpen)
     else
-      cbmp.EllipseAntialias(Ax, Ay, ds, ds, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), cfgchart.drawpen, ColorToBGRA(nebcolor));
+      cbmp.EllipseAntialias(Ax, Ay, ds, ds, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), cfgchart.drawpen, ColorToBGRA(nebcolor,alpha));
     cbmp.DrawLineAntialias(xx - ds * 1.5, yy, xx + ds * 1.5, yy, ColorToBGRA(nebcolor), 1.5);
   end
   else
@@ -4913,7 +4913,7 @@ begin
 end;
 
 procedure TSplot.PlotDSOGCl(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
-  Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor);
+  Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor; alpha:byte);
 {
   Plot globular clusters - currently these are shown as circular...
 }
@@ -4959,10 +4959,10 @@ begin
     end
     else
     begin
-      cbmp.EllipseAntialias(Ax, Ay, ds, ds, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), cfgchart.drawpen, ColorToBGRA(nebcolor));
+      cbmp.EllipseAntialias(Ax, Ay, ds, ds, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), cfgchart.drawpen, ColorToBGRA(nebcolor,alpha));
       ds2 := ds div 3;
       nebcolor := Addcolor(nebcolor, $00202020);
-      cbmp.FillEllipseAntialias(Ax, Ay, ds2, ds2, ColorToBGRA(nebcolor));
+      cbmp.FillEllipseAntialias(Ax, Ay, ds2, ds2, ColorToBGRA(nebcolor,alpha));
     end;
   end
   else
@@ -5003,7 +5003,7 @@ begin
 end;
 
 procedure TSplot.PlotDSOBN(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
-  Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor);
+  Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor; alpha:byte);
 {
   Plot bright nebula - both emmission and reflection are plotted the same
   in the future, we'll separate these out, maybe even for Herbig-Haro and variable nebulae
@@ -5065,7 +5065,7 @@ begin
     end
     else
     begin
-      cbmp.RoundRect(xx - ds, yy - ds, xx + ds, yy + ds, dsr, dsr, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), ColorToBGRA(nebcolor));
+      cbmp.RoundRect(xx - ds, yy - ds, xx + ds, yy + ds, dsr, dsr, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), ColorToBGRA(nebcolor,alpha));
     end;
   end
   else
@@ -5092,7 +5092,7 @@ begin
 end;
 
 procedure TSplot.PlotDSOClNb(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
-  Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor);
+  Atyp: integer; Amorph: string; forcecolor: boolean; col: Tcolor; alpha:byte);
 {
   Plot nebula and cluster associations - e.g. M8, M42...
 }
@@ -5153,7 +5153,7 @@ begin
       cbmp.DrawVertLine(xx, yy - ds, yy + ds, ColorToBGRA(nebcolor));
     end
     else
-      cbmp.RoundRect(xx - ds, yy - ds, xx + ds, yy + ds, dsr, dsr, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), ColorToBGRA(nebcolor));
+      cbmp.RoundRect(xx - ds, yy - ds, xx + ds, yy + ds, dsr, dsr, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), ColorToBGRA(nebcolor,alpha));
 
   end
   else
@@ -5339,7 +5339,7 @@ begin
 end;
 
 procedure TSplot.PlotDSOAst(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
-  Atyp: integer; forcecolor: boolean; col: Tcolor);
+  Atyp: integer; forcecolor: boolean; col: Tcolor; alpha:byte);
 {
   Asterisms are chance? groupings of stars so plot as for open clusters apart from colour
 }
@@ -5399,7 +5399,7 @@ begin
       cbmp.PenStyle := psSolid;
     end
     else
-      cbmp.EllipseAntialias(Ax, Ay, ds, ds, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), cfgchart.drawpen, ColorToBGRA(nebcolor));
+      cbmp.EllipseAntialias(Ax, Ay, ds, ds, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), cfgchart.drawpen, ColorToBGRA(nebcolor,alpha));
 
   end
   else
@@ -5431,7 +5431,7 @@ begin
 end;
 
 procedure TSplot.PlotDSOHIIRegion(Ax, Ay: single; Adim, Ama, Asbr, Apixscale: double;
-  Atyp: integer; forcecolor: boolean; col: Tcolor);
+  Atyp: integer; forcecolor: boolean; col: Tcolor; alpha:byte);
 {
   Plot HII regions. NGC has these catalogued as 'knots'. We plot them as if they
   are emission nebulae (bright nebulae)
@@ -5485,7 +5485,7 @@ begin
       cbmp.RoundRect(xx - ds, yy - ds, xx + ds, yy + ds, dsr, dsr, ColorToBGRA(
         nebcolor), BGRAPixelTransparent)
     else
-      cbmp.RoundRect(xx - ds, yy - ds, xx + ds, yy + ds, dsr, dsr, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), ColorToBGRA(nebcolor));
+      cbmp.RoundRect(xx - ds, yy - ds, xx + ds, yy + ds, dsr, dsr, ApplyLightnessFast(ColorToBGRA(nebcolor),35000), ColorToBGRA(nebcolor,alpha));
 
   end
   else
