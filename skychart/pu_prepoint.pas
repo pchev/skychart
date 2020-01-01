@@ -35,10 +35,13 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    Button4: TButton;
     msg: TLabel;
     ObjLabel: TLabel;
     PageControl1: TPageControl;
     Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TimeObsS: TSpinEdit;
@@ -48,12 +51,14 @@ type
     Label1: TLabel;
     Label2: TLabel;
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
-    FRecenter: TNotifyEvent;
+    FRecenter,FRecenterNow: TNotifyEvent;
   public
     procedure SetLang;
     property onRecenter: TNotifyEvent read FRecenter write FRecenter;
+    property onRecenterNow: TNotifyEvent read FRecenterNow write FRecenterNow;
   end;
 
 var
@@ -71,6 +76,11 @@ end;
 procedure Tf_prepoint.Button3Click(Sender: TObject);
 begin
   if Assigned(FRecenter) then FRecenter(self);
+end;
+
+procedure Tf_prepoint.Button4Click(Sender: TObject);
+begin
+  if Assigned(FRecenterNow) then FRecenterNow(self);
 end;
 
 procedure Tf_prepoint.SetLang;

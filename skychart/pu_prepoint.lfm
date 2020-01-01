@@ -14,6 +14,7 @@ object f_prepoint: Tf_prepoint
     Top = 0
     Width = 326
     Align = alTop
+    BevelOuter = bvNone
     ClientHeight = 28
     ClientWidth = 326
     TabOrder = 1
@@ -31,10 +32,10 @@ object f_prepoint: Tf_prepoint
     Height = 195
     Top = 28
     Width = 326
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
     Align = alClient
     ShowTabs = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
@@ -56,16 +57,6 @@ object f_prepoint: Tf_prepoint
         Caption = 'Pre-point line duration in minutes'
         ParentColor = False
       end
-      object Button1: TButton
-        Left = 8
-        Height = 25
-        Top = 144
-        Width = 75
-        Caption = 'OK'
-        Default = True
-        ModalResult = 1
-        TabOrder = 0
-      end
       object TimeLength: TSpinEdit
         Left = 8
         Height = 29
@@ -74,7 +65,7 @@ object f_prepoint: Tf_prepoint
         Increment = 10
         MaxValue = 360
         MinValue = 1
-        TabOrder = 1
+        TabOrder = 0
         Value = 60
       end
       object TimeObsH: TSpinEdit
@@ -83,7 +74,7 @@ object f_prepoint: Tf_prepoint
         Top = 32
         Width = 60
         MaxValue = 23
-        TabOrder = 2
+        TabOrder = 1
       end
       object TimeObsM: TSpinEdit
         Left = 80
@@ -91,7 +82,7 @@ object f_prepoint: Tf_prepoint
         Top = 32
         Width = 60
         MaxValue = 59
-        TabOrder = 3
+        TabOrder = 2
       end
       object TimeObsS: TSpinEdit
         Left = 152
@@ -99,17 +90,39 @@ object f_prepoint: Tf_prepoint
         Top = 32
         Width = 60
         MaxValue = 59
-        TabOrder = 4
+        TabOrder = 3
       end
-      object Button2: TButton
-        Left = 137
-        Height = 25
-        Top = 144
-        Width = 75
-        Cancel = True
-        Caption = 'Cancel'
-        ModalResult = 2
-        TabOrder = 5
+      object Panel3: TPanel
+        Left = 0
+        Height = 30
+        Top = 161
+        Width = 316
+        Align = alBottom
+        BevelOuter = bvNone
+        Caption = 'Panel3'
+        ClientHeight = 30
+        ClientWidth = 316
+        TabOrder = 4
+        object Button1: TButton
+          Left = 8
+          Height = 25
+          Top = 2
+          Width = 75
+          Caption = 'OK'
+          Default = True
+          ModalResult = 1
+          TabOrder = 0
+        end
+        object Button2: TButton
+          Left = 137
+          Height = 25
+          Top = 2
+          Width = 75
+          Cancel = True
+          Caption = 'Cancel'
+          ModalResult = 2
+          TabOrder = 1
+        end
       end
     end
     object TabSheet2: TTabSheet
@@ -117,23 +130,44 @@ object f_prepoint: Tf_prepoint
       ClientHeight = 191
       ClientWidth = 316
       object msg: TLabel
-        Left = 8
-        Height = 128
-        Top = 8
-        Width = 239
+        Left = 0
+        Height = 161
+        Top = 0
+        Width = 316
+        Align = alClient
         AutoSize = False
         Caption = 'msg'
         ParentColor = False
         WordWrap = True
       end
-      object Button3: TButton
-        Left = 147
-        Height = 25
-        Top = 152
-        Width = 75
-        Caption = 'Center'
-        OnClick = Button3Click
+      object Panel2: TPanel
+        Left = 0
+        Height = 30
+        Top = 161
+        Width = 316
+        Align = alBottom
+        BevelOuter = bvNone
+        ClientHeight = 30
+        ClientWidth = 316
         TabOrder = 0
+        object Button3: TButton
+          Left = 8
+          Height = 25
+          Top = 2
+          Width = 75
+          Caption = 'Center'
+          OnClick = Button3Click
+          TabOrder = 0
+        end
+        object Button4: TButton
+          Left = 137
+          Height = 25
+          Top = 2
+          Width = 75
+          Caption = 'Now'
+          OnClick = Button4Click
+          TabOrder = 1
+        end
       end
     end
   end

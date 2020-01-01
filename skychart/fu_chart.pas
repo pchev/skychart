@@ -336,6 +336,7 @@ type
     procedure ObservatoryFromTelescope(Sender: TObject);
     procedure ApplyMosaic(Sender: TObject);
     procedure PrePointCenter(Sender: TObject);
+    procedure PrePointCenterNow(Sender: TObject);
   public
     { Public declarations }
     Image1: TChartDrawingControl;
@@ -6899,6 +6900,7 @@ begin
   msg:=msg+crlf+rsRA+blank+ARtoStr3(rad2deg*ra/15);
   msg:=msg+crlf+rsDEC+blank+DEToStr3(rad2deg*de);
   f_prepoint.onRecenter:=PrePointCenter;
+  f_prepoint.onRecenterNow:=PrePointCenterNow;
   f_prepoint.PageControl1.ActivePageIndex:=1;
   f_prepoint.msg.Caption:=msg;
   sc.cfgsc.PrePointMarkRA:=ra;
@@ -6916,6 +6918,32 @@ begin
     sc.cfgsc.TrackOn := False;
     Refresh(true,true);
   end;
+end;
+
+procedure Tf_chart.PrePointCenterNow(Sender: TObject);
+var t,ra,de: double;
+    n,msg: string;
+begin
+  n:=rsNow;
+  t:=frac(now)*24;
+  ra:=sc.cfgsc.PrePointRA-15*(sc.cfgsc.PrePointTime-t)*deg2rad;
+  de:=sc.cfgsc.PrePointDEC;
+  if t<0 then t:=t+24;
+  if t>=24 then t:=t-24;
+  msg:=rsReference+blank+n+crlf+rsAt+blank+ARtoStr3(t);
+  msg:=msg+crlf+crlf+rsCenter;
+  msg:=msg+crlf+rsRA+blank+ARtoStr3(rad2deg*ra/15);
+  msg:=msg+crlf+rsDEC+blank+DEToStr3(rad2deg*de);
+  f_prepoint.PageControl1.ActivePageIndex:=1;
+  f_prepoint.msg.Caption:=msg;
+  sc.cfgsc.PrePointMarkRA:=ra;
+  sc.cfgsc.PrePointMarkDEC:=de;
+  f_prepoint.Show;
+  sc.cfgsc.ShowCircle:=true;
+  sc.cfgsc.racentre := sc.cfgsc.PrePointMarkRA;
+  sc.cfgsc.decentre := sc.cfgsc.PrePointMarkDEC;
+  sc.cfgsc.TrackOn := False;
+  Refresh(true,true);
 end;
 
 procedure Tf_chart.PrePointRemoveClick(Sender: TObject);
