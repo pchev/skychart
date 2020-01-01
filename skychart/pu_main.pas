@@ -6268,7 +6268,7 @@ begin
   def_cfgsc.ShowSmallsat := True;
   def_cfgsc.DSLforcecolor := False;
   def_cfgsc.DSLcolor := 0;
-  def_cfgsc.SurfaceAlpha := 100;
+  def_cfgsc.SurfaceAlpha := 128;
   def_cfgsc.SurfaceBlure := false;
   def_cfgsc.ShowImages := False;
   def_cfgsc.ShowImageList := False;

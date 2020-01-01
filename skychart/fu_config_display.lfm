@@ -390,6 +390,7 @@ object f_config_display: Tf_config_display
             Min = 10
             OnChange = SurfaceAlphaChange
             Position = 10
+            Reversed = True
             ShowSelRange = False
             TickStyle = tsNone
             ParentFont = False
@@ -2499,7 +2500,7 @@ object f_config_display: Tf_config_display
           end
           object labelmagStar: TMouseUpDown
             Tag = 1
-            Left = 251
+            Left = 248
             Height = 25
             Top = 20
             Width = 17
@@ -2523,7 +2524,7 @@ object f_config_display: Tf_config_display
           end
           object labelmagVar: TMouseUpDown
             Tag = 2
-            Left = 251
+            Left = 248
             Height = 25
             Top = 45
             Width = 17
@@ -2619,7 +2620,7 @@ object f_config_display: Tf_config_display
           end
           object labelSizeStar: TMouseUpDown
             Tag = 1
-            Left = 390
+            Left = 386
             Height = 25
             Top = 20
             Width = 17
@@ -2643,7 +2644,7 @@ object f_config_display: Tf_config_display
           end
           object labelsizeVar: TMouseUpDown
             Tag = 2
-            Left = 390
+            Left = 386
             Height = 25
             Top = 45
             Width = 17
@@ -2667,9 +2668,9 @@ object f_config_display: Tf_config_display
           end
           object labelsizeMult: TMouseUpDown
             Tag = 3
-            Left = 390
+            Left = 386
             Height = 25
-            Top = 72
+            Top = 71
             Width = 17
             Associate = Edit8
             Constraints.MaxHeight = 25
@@ -2691,9 +2692,9 @@ object f_config_display: Tf_config_display
           end
           object labelsizeNeb: TMouseUpDown
             Tag = 4
-            Left = 390
+            Left = 386
             Height = 25
-            Top = 97
+            Top = 96
             Width = 17
             Associate = Edit9
             Constraints.MaxHeight = 25
@@ -2715,9 +2716,9 @@ object f_config_display: Tf_config_display
           end
           object labelsizeSol: TMouseUpDown
             Tag = 5
-            Left = 390
+            Left = 386
             Height = 25
-            Top = 122
+            Top = 121
             Width = 17
             Associate = Edit10
             Constraints.MaxHeight = 25
@@ -2739,9 +2740,9 @@ object f_config_display: Tf_config_display
           end
           object labelsizeConst: TMouseUpDown
             Tag = 6
-            Left = 390
+            Left = 386
             Height = 25
-            Top = 199
+            Top = 197
             Width = 17
             Associate = Edit11
             Constraints.MaxHeight = 25
@@ -2763,9 +2764,9 @@ object f_config_display: Tf_config_display
           end
           object labelsizeMisc: TMouseUpDown
             Tag = 7
-            Left = 390
+            Left = 386
             Height = 25
-            Top = 224
+            Top = 222
             Width = 17
             Associate = Edit12
             Constraints.MaxHeight = 25
@@ -2787,9 +2788,9 @@ object f_config_display: Tf_config_display
           end
           object labelsizeChartInfo: TMouseUpDown
             Tag = 8
-            Left = 390
+            Left = 386
             Height = 25
-            Top = 251
+            Top = 248
             Width = 17
             Associate = Edit13
             Constraints.MaxHeight = 25
@@ -2840,9 +2841,9 @@ object f_config_display: Tf_config_display
           end
           object labelsizeobslist: TMouseUpDown
             Tag = 9
-            Left = 390
+            Left = 386
             Height = 25
-            Top = 276
+            Top = 273
             Width = 17
             Associate = Edit14
             Constraints.MaxHeight = 25
@@ -3003,7 +3004,7 @@ object f_config_display: Tf_config_display
               Tag = 3
               Left = 46
               Height = 25
-              Top = 72
+              Top = 71
               Width = 17
               Associate = Edit17
               Constraints.MaxHeight = 25
@@ -3017,7 +3018,7 @@ object f_config_display: Tf_config_display
               Tag = 4
               Left = 46
               Height = 25
-              Top = 97
+              Top = 96
               Width = 17
               Associate = Edit18
               Constraints.MaxHeight = 25
@@ -3031,7 +3032,7 @@ object f_config_display: Tf_config_display
               Tag = 5
               Left = 46
               Height = 25
-              Top = 122
+              Top = 121
               Width = 17
               Associate = Edit19
               Constraints.MaxHeight = 25
@@ -3045,7 +3046,7 @@ object f_config_display: Tf_config_display
               Tag = 6
               Left = 46
               Height = 25
-              Top = 199
+              Top = 197
               Width = 17
               Associate = Edit20
               Constraints.MaxHeight = 25
@@ -3059,7 +3060,7 @@ object f_config_display: Tf_config_display
               Tag = 7
               Left = 46
               Height = 25
-              Top = 224
+              Top = 222
               Width = 17
               Associate = Edit21
               Constraints.MaxHeight = 25
@@ -3073,7 +3074,7 @@ object f_config_display: Tf_config_display
               Tag = 8
               Left = 46
               Height = 25
-              Top = 251
+              Top = 248
               Width = 17
               Associate = Edit22
               Constraints.MaxHeight = 25
@@ -3088,7 +3089,7 @@ object f_config_display: Tf_config_display
               Tag = 9
               Left = 46
               Height = 25
-              Top = 276
+              Top = 273
               Width = 17
               Associate = Edit23
               Constraints.MaxHeight = 25
@@ -3114,7 +3115,7 @@ object f_config_display: Tf_config_display
               Tag = 10
               Left = 46
               Height = 25
-              Top = 148
+              Top = 146
               Width = 17
               Associate = Edit28
               Constraints.MaxHeight = 25
@@ -3139,7 +3140,7 @@ object f_config_display: Tf_config_display
               Tag = 11
               Left = 46
               Height = 25
-              Top = 172
+              Top = 170
               Width = 17
               Associate = Edit29
               Constraints.MaxHeight = 25
@@ -3206,9 +3207,9 @@ object f_config_display: Tf_config_display
           end
           object labelsizeAst: TMouseUpDown
             Tag = 10
-            Left = 390
+            Left = 386
             Height = 25
-            Top = 149
+            Top = 147
             Width = 17
             Associate = Edit25
             Constraints.MaxHeight = 25
@@ -3273,9 +3274,9 @@ object f_config_display: Tf_config_display
           end
           object labelsizeCom: TMouseUpDown
             Tag = 11
-            Left = 390
+            Left = 386
             Height = 25
-            Top = 174
+            Top = 172
             Width = 17
             Associate = Edit27
             Constraints.MaxHeight = 25
