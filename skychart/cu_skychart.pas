@@ -135,6 +135,7 @@ type
     function FindArtSat(x1, y1, x2, y2: double; nextobj: boolean;
       var nom, ma, desc: string): boolean;
     function DrawOrbitPath: boolean;
+    procedure DrawPrePointLine;
     procedure DrawGrid(drawlabel: boolean);
     procedure DrawAltAzEqGrid;
     procedure DrawPole(pole: integer);
@@ -393,6 +394,7 @@ begin
         DrawEcliptic;
         DrawGalactic;
         DrawEquator;
+        DrawPrePointLine;
       end;
     end;
     // the stars
@@ -430,6 +432,7 @@ begin
         DrawEcliptic;
         DrawGalactic;
         DrawEquator;
+        DrawPrePointLine;
       end;
     end;
     // Finder mark
@@ -3343,6 +3346,49 @@ begin
   end
   else
     Result := False;
+end;
+
+procedure Tskychart.DrawPrePointLine;
+var
+  i, n, s, color,lid: integer;
+  lis:string;
+  ra, de, x1, y1, x2, y2, ltime, dx, dt, lrot: double;
+  xx, yy, xp, yp: single;
+begin
+  if cfgsc.DrawPrePoint then begin
+    color:=clAqua;
+    ltime:=cfgsc.PrePointTime;
+    n:=cfgsc.PrePointLength;
+    ra:=cfgsc.PrePointRA;
+    de:=cfgsc.PrePointDEC;
+    dt:=1/60;
+    dx:=deg2rad*15*dt;
+    s:=round(min(n,max(1,(30*Fplot.cfgchart.drawpen/(dx*cfgsc.BxGlb)))));
+    projection(ra, de, x1, y1, True, cfgsc);
+    windowxy(x1, y1, xp, yp, cfgsc);
+    projection(ra, de + 0.001, x2, y2, True, cfgsc);
+    lrot := rmod(360+ 90 + rad2deg * RotationAngle(x1, y1, x2, y2, cfgsc),360);
+    if (lrot>90)and(lrot<270) then lrot:=rmod(lrot+180,360);
+    lis := 'PrePointLine' + FormatFloat(f6, ra) + FormatFloat(f6, de);
+    lid := rshash(lis, $7FFFFFFF);
+    SetLabel(lid, xp, yp, 5, 2, 1, ARmtoStr(ltime), laTopLeft, lrot, 1, false);
+    for i:=1 to n do begin
+      ra:=ra-dx;
+      ltime:=ltime-dt;
+      if ltime<0 then ltime:=ltime+24;
+      projection(ra, de, x1, y1, True, cfgsc);
+      lis := 'PrePointLine' + FormatFloat(f6, ra) + FormatFloat(f6, de);
+      lid := rshash(lis, $7FFFFFFF);
+      windowxy(x1, y1, xx, yy, cfgsc);
+      Fplot.PlotLine(xp, yp, xx, yy, color, 1);
+      if (i mod s) = 0 then begin
+        Fplot.PlotSimMark(xx, yy, color);
+        SetLabel(lid, xx, yy, 5, 2, 1, ARmtoStr(ltime), laTopLeft, lrot, 1, false);
+      end;
+      xp:=xx;
+      yp:=yy;
+    end;
+  end;
 end;
 
 procedure Tskychart.GetCoord(x, y: integer; var ra, Dec, a, h, l, b, le, be: double);

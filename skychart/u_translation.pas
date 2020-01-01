@@ -1541,6 +1541,11 @@ resourcestring
   rsForceJ2000 = 'Force J2000';
   rsCurrentChart = 'Current chart coordinate system';
   rsProtocolTrac = 'Protocol trace';
+  rsMeasurement = 'Measurement';
+  rsPrePointing = 'Pre-Pointing';
+  rsObservationT = 'Observation time';
+  rsPrePointLine = 'Pre-point line duration in minutes';
+  rsDeclinationO = 'Declination offset';
 
 // also update upsi_translation
 

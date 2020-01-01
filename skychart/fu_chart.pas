@@ -32,7 +32,7 @@ interface
 uses
   BGRABitmap, BGRABitmapTypes, u_orbits,
   pu_ascomclient, pu_indiclient,
-  pu_getdss, pu_imglist,
+  pu_getdss, pu_imglist, pu_prepoint,
   u_translation, pu_detail, cu_skychart, u_constant, u_util, pu_image,
   gcatunit, pu_obslist, pu_mosaic,
   u_projection, Printers, Math, downloaddialog, IntfGraphics,
@@ -83,6 +83,10 @@ type
     CopyCoord: TMenuItem;
     CopyCoord1: TMenuItem;
     CopyCoord2: TMenuItem;
+    PrePointMeasure: TMenuItem;
+    PrePointCreate: TMenuItem;
+    PrePointRemove: TMenuItem;
+    PrePointing: TMenuItem;
     MenuNewMosaic: TMenuItem;
     nsearch4: TMenuItem;
     SlewCenter: TMenuItem;
@@ -200,6 +204,9 @@ type
     procedure MenuCursorToObsListClick(Sender: TObject);
     procedure MenuTelescopeToObsListClick(Sender: TObject);
     procedure MenuNewMosaicClick(Sender: TObject);
+    procedure PrePointCreateClick(Sender: TObject);
+    procedure PrePointMeasureClick(Sender: TObject);
+    procedure PrePointRemoveClick(Sender: TObject);
     procedure ResetalllabelClick(Sender: TObject);
     procedure MenuObslistFirstClick(Sender: TObject);
     procedure MenuObslistLastClick(Sender: TObject);
@@ -558,6 +565,7 @@ begin
   SlewCenter.Caption := rsSlewToChartC;
   Slew1.Caption := rsSlew;
   Sync1.Caption := rsSync;
+  PrePointing.Caption:=rsPrePointing;
   CopyCoord.Caption := rsCopyCoordina;
   CopyCoord1.Caption := rsEquatorialCo+', [hms]';
   CopyCoord2.Caption := '';
@@ -2431,6 +2439,8 @@ begin
     MenuAddToObsList.Visible := True;
     Slew1.Caption := rsSlew + ': ' + sc.cfgsc.FindName;
     Sync1.Caption := rsSync + ': ' + sc.cfgsc.FindName;
+    PrePointCreate.Caption:=rsTarget + ': ' + sc.cfgsc.FindName;
+    PrePointMeasure.Caption:=rsMeasurement+ ': '+ sc.cfgsc.FindName;
   end
   else
   begin
@@ -6831,6 +6841,61 @@ begin
     exit;
   GetAdXy(Xcursor, Ycursor, ra, de, sc.cfgsc);
   NewMosaic(ra,de,false);
+end;
+
+procedure Tf_chart.PrePointCreateClick(Sender: TObject);
+var ra,de: double;
+begin
+  if sc.cfgsc.FindName > '' then begin
+    ra:=sc.cfgsc.FindRA;
+    de:=sc.cfgsc.FindDec;
+    f_prepoint.ObjLabel.Caption:=sc.cfgsc.FindName;
+  end
+  else begin
+    Fshowinfo(rsNoTargetObje);
+    exit;
+  end;
+  FormPos(f_prepoint,mouse.CursorPos.X, mouse.CursorPos.Y);
+  f_prepoint.ShowModal;
+  if f_prepoint.ModalResult=mrOK then begin
+    sc.cfgsc.PrePointTime:=f_prepoint.TimeObsH.Value+f_prepoint.TimeObsM.Value/60+f_prepoint.TimeObsS.Value/3600;
+    sc.cfgsc.PrePointLength:=f_prepoint.TimeLength.Value;
+    sc.cfgsc.PrePointRA:=ra;
+    sc.cfgsc.PrePointDEC:=de;
+    sc.cfgsc.DrawPrePoint:=true;
+    Refresh(true,true);
+    PrePointMeasure.Visible:=true;
+    PrePointRemove.Visible:=true;
+    PrePointCreate.Visible:=false;
+  end;
+end;
+
+procedure Tf_chart.PrePointMeasureClick(Sender: TObject);
+var t,d: double;
+    s: string;
+begin
+  if sc.cfgsc.FindName > '' then begin
+    t:=sc.cfgsc.PrePointTime-rad2deg*(sc.cfgsc.PrePointRA-sc.cfgsc.FindRA)/15;
+    if t<0 then t:=t+24;
+    if t>=24 then t:=t-24;
+    d:=rad2deg*(sc.cfgsc.FindDec - sc.cfgsc.PrePointDEC);
+    if d>=0 then s:='+'
+            else s:='-';
+    d:=abs(d);
+    ShowMessage(rsCenter+blank+sc.cfgsc.FindName+crlf+blank+rsAt+blank+ARtoStr3(t)+crlf+rsDeclinationO+blank+s+DEToStrShort(d,0));
+  end
+  else begin
+    Fshowinfo(rsNoTargetObje);
+  end;
+end;
+
+procedure Tf_chart.PrePointRemoveClick(Sender: TObject);
+begin
+  PrePointCreate.Visible:=true;
+  PrePointMeasure.Visible:=false;
+  PrePointRemove.Visible:=false;
+  sc.cfgsc.DrawPrePoint:=false;
+  Refresh(true,true);
 end;
 
 procedure Tf_chart.NewMosaic(ra,de: double; resizechart: boolean);

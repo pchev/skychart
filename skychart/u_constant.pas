@@ -1005,6 +1005,9 @@ type
     ShowEcliptic, ShowGalactic, ShowEquator, ShowMilkyWay, FillMilkyWay, LinemodeMilkyway,
     ShowHorizon, ShowHorizonPicture, HorizonPictureLowQuality, FillHorizon,
     ShowHorizon0, ShowHorizonDepression: boolean;
+    PrePointRA, PrePointDEC, PrePointTime: double;
+    PrePointLength: integer;
+    DrawPrePoint: Boolean;
     CurTime, DT_UT_val, GRSlongitude, GRSjd, GRSdrift, TelescopeTurnsX,
     TelescopeTurnsY, TelescopeJD, HorizonPictureRotate: double;
     PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline, DSLforcecolor, SurfaceBlure: boolean;
@@ -2346,6 +2349,11 @@ begin
   FillHorizon := Source.FillHorizon;
   ShowHorizonDepression := Source.ShowHorizonDepression;
   ShowHorizon0 := Source.ShowHorizon0;
+  PrePointRA := Source.PrePointRA;
+  PrePointDEC := Source.PrePointDEC;
+  PrePointTime := Source.PrePointTime;
+  PrePointLength := Source.PrePointLength;
+  DrawPrePoint := Source.DrawPrePoint;
   CurTime := Source.CurTime;
   DT_UT_val := Source.DT_UT_val;
   GRSlongitude := Source.GRSlongitude;

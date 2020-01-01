@@ -37,7 +37,7 @@ uses
   {$endif}
   lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet, cu_fits,
   cu_database, fu_chart, cu_tcpserver, pu_config_time, pu_config_observatory,
-  pu_config_display, pu_config_pictures, pu_indigui, pu_config_catalog,
+  pu_config_display, pu_config_pictures, pu_indigui, pu_config_catalog, pu_prepoint,
   pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
   cu_radec, pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata,
   pu_obslist, fu_script, pu_scriptengine, u_constant, u_util, UScaleDPI,
@@ -9055,6 +9055,7 @@ begin
     f_print.SetLang;
     f_edittoolbar.SetLang;
     f_mosaic.SetLang;
+    f_prepoint.SetLang;
     for i := 0 to MultiFrame1.ChildCount - 1 do
       if MultiFrame1.Childs[i].DockedObject is Tf_chart then
         Tf_chart(MultiFrame1.Childs[i].DockedObject).SetLang;

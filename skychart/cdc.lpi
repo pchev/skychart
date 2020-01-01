@@ -430,7 +430,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item25>
     </RequiredPackages>
-    <Units Count="85">
+    <Units Count="86">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -943,6 +943,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit84>
+      <Unit85>
+        <Filename Value="pu_prepoint.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_prepoint"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit85>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

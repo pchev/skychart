@@ -1,31 +1,31 @@
 object f_chart: Tf_chart
   Left = 0
-  Height = 338
+  Height = 342
   Top = 0
-  Width = 508
-  ClientHeight = 338
-  ClientWidth = 508
-  DesignTimePPI = 95
+  Width = 513
+  ClientHeight = 342
+  ClientWidth = 513
   ParentFont = False
   TabOrder = 0
   object Panel1: TPanel
     Left = 0
-    Height = 338
+    Height = 342
     Top = 0
-    Width = 508
+    Width = 513
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 338
-    ClientWidth = 508
+    ClientHeight = 342
+    ClientWidth = 513
     Color = clBlack
     FullRepaint = False
     ParentColor = False
+    ParentFont = False
     TabOrder = 0
     OnResize = ChartResize
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 488
-      Height = 318
+      Left = 493
+      Height = 322
       Top = 0
       Width = 20
       Align = alRight
@@ -41,8 +41,8 @@ object f_chart: Tf_chart
       Cursor = crArrow
       Left = 0
       Height = 20
-      Top = 318
-      Width = 508
+      Top = 322
+      Width = 513
       Align = alBottom
       LargeChange = 10
       Max = 50
@@ -52,10 +52,10 @@ object f_chart: Tf_chart
       TabStop = False
     end
     object Identlabel: TImage
-      Left = 105
+      Left = 106
       Height = 21
-      Top = 155
-      Width = 90
+      Top = 157
+      Width = 91
       OnClick = identlabelClick
     end
   end
@@ -63,12 +63,12 @@ object f_chart: Tf_chart
     Enabled = False
     Interval = 300
     OnTimer = RefreshTimerTimer
-    left = 304
+    left = 307
     top = 24
   end
   object ActionList1: TActionList
-    left = 192
-    top = 64
+    left = 194
+    top = 65
     object chart_zoomplus: TAction
       Category = 'zoom'
       Caption = 'Zoom +'
@@ -200,8 +200,8 @@ object f_chart: Tf_chart
   end
   object PopupMenu1: TPopupMenu
     OnPopup = PopupMenu1Popup
-    left = 272
-    top = 128
+    left = 275
+    top = 129
     object About1: TMenuItem
       Caption = 'About'
       Visible = False
@@ -531,6 +531,23 @@ object f_chart: Tf_chart
         OnClick = TrackTelescope1Click
       end
     end
+    object PrePointing: TMenuItem
+      Caption = 'Pre-Pointing'
+      object PrePointCreate: TMenuItem
+        Caption = 'Create'
+        OnClick = PrePointCreateClick
+      end
+      object PrePointMeasure: TMenuItem
+        Caption = 'Measure time'
+        Visible = False
+        OnClick = PrePointMeasureClick
+      end
+      object PrePointRemove: TMenuItem
+        Caption = 'Remove'
+        Visible = False
+        OnClick = PrePointRemoveClick
+      end
+    end
     object ImgList1: TMenuItem
       Action = chart_imglist
     end
@@ -554,14 +571,14 @@ object f_chart: Tf_chart
     Enabled = False
     Interval = 500
     OnTimer = TelescopeTimerTimer
-    left = 344
-    top = 152
+    left = 348
+    top = 154
   end
   object BlinkTimer: TTimer
     Enabled = False
     OnTimer = BlinkTimerTimer
-    left = 304
-    top = 202
+    left = 307
+    top = 204
   end
   object DownloadDialog1: TDownloadDialog
     Timeout = 90000
@@ -569,30 +586,30 @@ object f_chart: Tf_chart
     FtpFwPassive = True
     ConfirmDownload = True
     QuickCancel = False
-    left = 211
-    top = 205
+    left = 213
+    top = 207
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = '.cdcc'
     FileName = 'circle'
     Filter = 'Circle file|*.cdcc|All|*'
     Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
-    left = 56
-    top = 55
+    left = 57
+    top = 56
   end
   object SaveDialog1: TSaveDialog
     DefaultExt = '.cdcc'
     FileName = 'circle'
     Filter = 'Circle file|*.cdcc|All|*'
     Options = [ofOverwritePrompt, ofPathMustExist, ofEnableSizing, ofViewDetail]
-    left = 58
-    top = 120
+    left = 59
+    top = 121
   end
   object PDSSTimer: TTimer
     Enabled = False
     Interval = 100
     OnTimer = PDSSTimerTimer
-    left = 384
-    top = 205
+    left = 388
+    top = 207
   end
 end
