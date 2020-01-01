@@ -335,6 +335,7 @@ type
     procedure SetTelescopeMove(Value: Tfloat2func);
     procedure ObservatoryFromTelescope(Sender: TObject);
     procedure ApplyMosaic(Sender: TObject);
+    procedure PrePointCenter(Sender: TObject);
   public
     { Public declarations }
     Image1: TChartDrawingControl;
@@ -2383,6 +2384,7 @@ begin
   begin
     xcursor := xc;
     ycursor := yc;
+    sc.cfgsc.FindName := '';
     IdentXY(xcursor, ycursor);
   end;
   if sc.cfgsc.TrackOn then
@@ -2450,6 +2452,7 @@ begin
     MenuAddToObsList.Visible := False;
     Slew1.Visible := False;
     Sync1.Visible := False;
+    PrePointMeasure.Caption:=rsMeasurement;
   end;
   case sc.cfgsc.ProjPole of
     Equat : CopyCoord2.Caption := rsEquatorialCo+', '+rsDecimalHours;
@@ -6856,12 +6859,16 @@ begin
     exit;
   end;
   FormPos(f_prepoint,mouse.CursorPos.X, mouse.CursorPos.Y);
+  f_prepoint.PageControl1.ActivePageIndex:=0;
   f_prepoint.ShowModal;
   if f_prepoint.ModalResult=mrOK then begin
     sc.cfgsc.PrePointTime:=f_prepoint.TimeObsH.Value+f_prepoint.TimeObsM.Value/60+f_prepoint.TimeObsS.Value/3600;
+    f_prepoint.ObjLabel.Caption:=f_prepoint.ObjLabel.Caption+blank+ARtoStr3(sc.cfgsc.PrePointTime);
     sc.cfgsc.PrePointLength:=f_prepoint.TimeLength.Value;
     sc.cfgsc.PrePointRA:=ra;
     sc.cfgsc.PrePointDEC:=de;
+    sc.cfgsc.PrePointMarkRA:=100;
+    sc.cfgsc.PrePointMarkDEC:=100;
     sc.cfgsc.DrawPrePoint:=true;
     Refresh(true,true);
     PrePointMeasure.Visible:=true;
@@ -6871,26 +6878,49 @@ begin
 end;
 
 procedure Tf_chart.PrePointMeasureClick(Sender: TObject);
-var t,d: double;
-    s: string;
+var t,ra,de: double;
+    n,msg: string;
 begin
   if sc.cfgsc.FindName > '' then begin
-    t:=sc.cfgsc.PrePointTime-rad2deg*(sc.cfgsc.PrePointRA-sc.cfgsc.FindRA)/15;
-    if t<0 then t:=t+24;
-    if t>=24 then t:=t-24;
-    d:=rad2deg*(sc.cfgsc.FindDec - sc.cfgsc.PrePointDEC);
-    if d>=0 then s:='+'
-            else s:='-';
-    d:=abs(d);
-    ShowMessage(rsCenter+blank+sc.cfgsc.FindName+crlf+blank+rsAt+blank+ARtoStr3(t)+crlf+rsDeclinationO+blank+s+DEToStrShort(d,0));
+    n:=sc.cfgsc.FindName;
+    ra:=sc.cfgsc.FindRA;
+    de:=sc.cfgsc.PrePointDEC;
   end
   else begin
-    Fshowinfo(rsNoTargetObje);
+    GetAdXy(Xcursor, Ycursor, ra, de, sc.cfgsc);
+    de:=sc.cfgsc.PrePointDEC;
+    n:=rsLine1;
+  end;
+  t:=sc.cfgsc.PrePointTime-rad2deg*(sc.cfgsc.PrePointRA-ra)/15;
+  if t<0 then t:=t+24;
+  if t>=24 then t:=t-24;
+  msg:=rsReference+blank+n+crlf+rsAt+blank+ARtoStr3(t);
+  msg:=msg+crlf+crlf+rsCenter;
+  msg:=msg+crlf+rsRA+blank+ARtoStr3(rad2deg*ra/15);
+  msg:=msg+crlf+rsDEC+blank+DEToStr3(rad2deg*de);
+  f_prepoint.onRecenter:=PrePointCenter;
+  f_prepoint.PageControl1.ActivePageIndex:=1;
+  f_prepoint.msg.Caption:=msg;
+  sc.cfgsc.PrePointMarkRA:=ra;
+  sc.cfgsc.PrePointMarkDEC:=de;
+  f_prepoint.Show;
+  Refresh(true,true);
+end;
+
+procedure Tf_chart.PrePointCenter(Sender: TObject);
+begin
+  if (sc.cfgsc.PrePointMarkRA<99)and(sc.cfgsc.PrePointMarkDEC<99) then begin
+    sc.cfgsc.ShowCircle:=true;
+    sc.cfgsc.racentre := sc.cfgsc.PrePointMarkRA;
+    sc.cfgsc.decentre := sc.cfgsc.PrePointMarkDEC;
+    sc.cfgsc.TrackOn := False;
+    Refresh(true,true);
   end;
 end;
 
 procedure Tf_chart.PrePointRemoveClick(Sender: TObject);
 begin
+  f_prepoint.Hide;
   PrePointCreate.Visible:=true;
   PrePointMeasure.Visible:=false;
   PrePointRemove.Visible:=false;

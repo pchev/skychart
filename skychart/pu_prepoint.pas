@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses u_translation,
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin, EditBtn;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Spin, EditBtn, ComCtrls, ExtCtrls;
 
 type
 
@@ -34,19 +34,26 @@ type
   Tf_prepoint = class(TForm)
     Button1: TButton;
     Button2: TButton;
+    Button3: TButton;
+    msg: TLabel;
     ObjLabel: TLabel;
+    PageControl1: TPageControl;
+    Panel1: TPanel;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
     TimeObsS: TSpinEdit;
     TimeObsM: TSpinEdit;
     TimeObsH: TSpinEdit;
     TimeLength: TSpinEdit;
     Label1: TLabel;
     Label2: TLabel;
+    procedure Button3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
-
+    FRecenter: TNotifyEvent;
   public
     procedure SetLang;
-
+    property onRecenter: TNotifyEvent read FRecenter write FRecenter;
   end;
 
 var
@@ -59,6 +66,11 @@ implementation
 procedure Tf_prepoint.FormCreate(Sender: TObject);
 begin
   SetLang;
+end;
+
+procedure Tf_prepoint.Button3Click(Sender: TObject);
+begin
+  if Assigned(FRecenter) then FRecenter(self);
 end;
 
 procedure Tf_prepoint.SetLang;

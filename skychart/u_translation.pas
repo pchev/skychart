@@ -1545,7 +1545,6 @@ resourcestring
   rsPrePointing = 'Pre-Pointing';
   rsObservationT = 'Observation time';
   rsPrePointLine = 'Pre-point line duration in minutes';
-  rsDeclinationO = 'Declination offset';
 
 // also update upsi_translation
 

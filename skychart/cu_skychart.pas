@@ -3388,6 +3388,11 @@ begin
       xp:=xx;
       yp:=yy;
     end;
+    if (cfgsc.PrePointMarkRA<99)and(cfgsc.PrePointMarkDEC<99) then begin
+      projection(cfgsc.PrePointMarkRA, cfgsc.PrePointMarkDEC, x1, y1, True, cfgsc);
+      windowxy(x1, y1, xx, yy, cfgsc);
+      Fplot.PlotSimMark(xx, yy, clRed);
+    end;
   end;
 end;
 

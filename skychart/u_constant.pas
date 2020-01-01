@@ -1005,7 +1005,7 @@ type
     ShowEcliptic, ShowGalactic, ShowEquator, ShowMilkyWay, FillMilkyWay, LinemodeMilkyway,
     ShowHorizon, ShowHorizonPicture, HorizonPictureLowQuality, FillHorizon,
     ShowHorizon0, ShowHorizonDepression: boolean;
-    PrePointRA, PrePointDEC, PrePointTime: double;
+    PrePointRA, PrePointDEC, PrePointTime, PrePointMarkRA, PrePointMarkDEC: double;
     PrePointLength: integer;
     DrawPrePoint: Boolean;
     CurTime, DT_UT_val, GRSlongitude, GRSjd, GRSdrift, TelescopeTurnsX,
