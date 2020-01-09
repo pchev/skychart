@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-14 14:00+0000\n"
-"PO-Revision-Date: 2019-10-10 14:13+0000\n"
+"POT-Creation-Date: 2020-01-09 14:24+0000\n"
+"PO-Revision-Date: 2019-12-15 18:48+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-12-15 15:24+0000\n"
-"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
+"X-Launchpad-Export-Date: 2020-01-09 14:32+0000\n"
+"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
 "Language: pt_BR\n"
 
 #: u_translation.rs102cddss
@@ -1214,7 +1214,7 @@ msgstr "Culminação"
 
 #: u_translation.rscurrentchart
 msgid "Current chart coordinate system"
-msgstr ""
+msgstr "Sistema de coordenadas da carta atual"
 
 #: u_translation.rscurrentdate
 msgid "Date of validity"
@@ -1643,6 +1643,10 @@ msgstr "Não filtrar objetos Messier"
 #: u_translation.rsdonotrunasad
 msgid "Do not run %s as %s!"
 msgstr "Não execute %s como %s!"
+
+#: u_translation.rsdonotuserow1
+msgid "Do not use row %s, reserved for external software interface."
+msgstr ""
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2162,7 +2166,7 @@ msgstr "Número de Flamsteed"
 
 #: u_translation.rsflipnsmoveme
 msgid "Flip N/S movement"
-msgstr ""
+msgstr "Girar N/S"
 
 #: u_translation.rsfonts
 msgid "Fonts"
@@ -2182,7 +2186,7 @@ msgstr "Forçar EqSys"
 
 #: u_translation.rsforcej2000
 msgid "Force J2000"
-msgstr ""
+msgstr "Forçar J2000"
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
@@ -3144,6 +3148,10 @@ msgstr "Média da data"
 msgid "Mean position"
 msgstr "Posição média"
 
+#: u_translation.rsmeasurement
+msgid "Measurement"
+msgstr ""
+
 #: u_translation.rsmemo
 msgid "Memo"
 msgstr "Nota"
@@ -3556,6 +3564,10 @@ msgstr "Tipo de objeto"
 msgid "%sAltitude"
 msgstr "%sAltura"
 
+#: u_translation.rsobservationt
+msgid "Observation time"
+msgstr ""
+
 #: u_translation.rsobservatory
 msgid "Observatory"
 msgstr "Observatório"
@@ -3910,7 +3922,7 @@ msgstr "Por favor tente reinstalar o programa."
 
 #: u_translation.rspleasewait
 msgid "Please wait..."
-msgstr ""
+msgstr "Por favor, aguarde..."
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
@@ -3975,6 +3987,14 @@ msgstr "Preparar dados "
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
 msgstr "Perparar dados mensais"
+
+#: u_translation.rsprepointing
+msgid "Pre-Pointing"
+msgstr ""
+
+#: u_translation.rsprepointline
+msgid "Pre-point line duration in minutes"
+msgstr ""
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"
@@ -4102,7 +4122,7 @@ msgstr "Proporcional à magnitude"
 
 #: u_translation.rsprotocoltrac
 msgid "Protocol trace"
-msgstr ""
+msgstr "Rastrear protocolo"
 
 #: u_translation.rsproxy
 msgid "Proxy"
@@ -4570,7 +4590,7 @@ msgstr "Índice de pesquisa"
 
 #: u_translation.rssearchradius
 msgid "Search radius"
-msgstr ""
+msgstr "Buscar raio"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"

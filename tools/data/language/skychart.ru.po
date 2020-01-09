@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-14 14:00+0000\n"
-"PO-Revision-Date: 2019-10-31 18:12+0000\n"
-"Last-Translator: sernik <tsn-ast@yandex.ru>\n"
+"POT-Creation-Date: 2020-01-09 14:24+0000\n"
+"PO-Revision-Date: 2020-01-07 16:58+0000\n"
+"Last-Translator: Sergey Tarantsov <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-12-15 15:24+0000\n"
-"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
+"X-Launchpad-Export-Date: 2020-01-09 14:32+0000\n"
+"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -747,7 +747,7 @@ msgstr "Параметры каталогов звёзд"
 
 #: u_translation.rscdctranslator
 msgid "Patrick Chevalley, Marc Fokker"
-msgstr "Команда русскоязычных пользователей"
+msgstr "Patrick Chevalley, Marc Fokker, Команда русскоязычных пользователей"
 
 #: u_translation.rscenter
 msgid "Center"
@@ -803,7 +803,7 @@ msgstr "Карта, координаты"
 
 #: u_translation.rschartcoordin2
 msgid "Chart coordinate systems"
-msgstr "Координатная система карты"
+msgstr "Система координат карты"
 
 #: u_translation.rschartinforma
 msgid "Chart information"
@@ -979,7 +979,7 @@ msgstr "Компиляция и сохранение успешны"
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
-msgstr "Компилирована:"
+msgstr "Compiled with:"
 
 #: u_translation.rscomponent
 msgid "Component"
@@ -1211,7 +1211,7 @@ msgstr "Кульминация"
 
 #: u_translation.rscurrentchart
 msgid "Current chart coordinate system"
-msgstr ""
+msgstr "Cистема координат текущей карты"
 
 #: u_translation.rscurrentdate
 msgid "Date of validity"
@@ -1640,6 +1640,10 @@ msgstr "Не фильтровать объекты каталога Мессье
 #: u_translation.rsdonotrunasad
 msgid "Do not run %s as %s!"
 msgstr "Не запускайте %s как %s!"
+
+#: u_translation.rsdonotuserow1
+msgid "Do not use row %s, reserved for external software interface."
+msgstr ""
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2159,7 +2163,7 @@ msgstr "Обозначение Флемстида"
 
 #: u_translation.rsflipnsmoveme
 msgid "Flip N/S movement"
-msgstr ""
+msgstr "Поменять направления N/S"
 
 #: u_translation.rsfonts
 msgid "Fonts"
@@ -2179,7 +2183,7 @@ msgstr ""
 
 #: u_translation.rsforcej2000
 msgid "Force J2000"
-msgstr ""
+msgstr "J2000 принудительно"
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
@@ -2459,7 +2463,7 @@ msgstr "Часы, минуты, секунды"
 
 #: u_translation.rshttpproxy
 msgid "HTTP proxy"
-msgstr "HTTP прокси"
+msgstr "Прокси-сервер"
 
 #: u_translation.rshumidity
 msgid "Humidity %"
@@ -3142,6 +3146,10 @@ msgstr "Средние на дату"
 msgid "Mean position"
 msgstr "Среднее положение"
 
+#: u_translation.rsmeasurement
+msgid "Measurement"
+msgstr ""
+
 #: u_translation.rsmemo
 msgid "Memo"
 msgstr "Памятка"
@@ -3276,7 +3284,7 @@ msgstr "Переместить метку"
 
 #: u_translation.rsmpchttp
 msgid "MPC HTTP"
-msgstr "MPC Http"
+msgstr "MPC HTTP"
 
 #: u_translation.rsmultipleflag
 msgid "Multiple flag"
@@ -3554,6 +3562,10 @@ msgstr "Тип объекта"
 msgid "%sAltitude"
 msgstr "%sВысота"
 
+#: u_translation.rsobservationt
+msgid "Observation time"
+msgstr ""
+
 #: u_translation.rsobservatory
 msgid "Observatory"
 msgstr "Обсерватория"
@@ -3592,7 +3604,7 @@ msgstr "Смещение"
 
 #: u_translation.rsoffsetlabel
 msgid "Offset label"
-msgstr ""
+msgstr "Смещение метки в пикселях"
 
 #: u_translation.rsok
 msgid "OK"
@@ -3896,7 +3908,7 @@ msgstr "Пожалуйста, укажите номер RealSky256 CD"
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
-msgstr "Сообщайте о проблемах на:"
+msgstr "Please report any problem to:"
 
 #: u_translation.rspleasetrytoc
 msgid "Please try to create this directory yourself and restart the program."
@@ -3908,7 +3920,7 @@ msgstr "Пожалуйста, переустановите программу."
 
 #: u_translation.rspleasewait
 msgid "Please wait..."
-msgstr ""
+msgstr "Подождите..."
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
@@ -3973,6 +3985,14 @@ msgstr "Период "
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
 msgstr "Расчёты"
+
+#: u_translation.rsprepointing
+msgid "Pre-Pointing"
+msgstr ""
+
+#: u_translation.rsprepointline
+msgid "Pre-point line duration in minutes"
+msgstr ""
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"
@@ -4060,7 +4080,7 @@ msgstr "Информация о программе"
 
 #: u_translation.rsprogrammer
 msgid "Programmer:"
-msgstr "Программист:"
+msgstr "Programmer:"
 
 #: u_translation.rsprogress
 msgid "Progress"
@@ -4108,11 +4128,11 @@ msgstr "Прокси-сервер"
 
 #: u_translation.rsproxyhost
 msgid "Proxy host"
-msgstr "Прокси хост"
+msgstr "Хост"
 
 #: u_translation.rsproxyport
 msgid "Proxy port"
-msgstr "Порт прокси"
+msgstr "Порт"
 
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
@@ -4568,7 +4588,7 @@ msgstr "Поисковый индекс"
 
 #: u_translation.rssearchradius
 msgid "Search radius"
-msgstr ""
+msgstr "Радиус поиска"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
@@ -5508,7 +5528,7 @@ msgstr "Транзит"
 
 #: u_translation.rstranslator
 msgid "Translator:"
-msgstr "Переводчик:"
+msgstr "Перевод:"
 
 #: u_translation.rstransparency
 msgid "Transparency"
@@ -5692,7 +5712,7 @@ msgstr "(пригодно изображать потоки)"
 
 #: u_translation.rsusehttpproxy
 msgid "Use HTTP proxy"
-msgstr "Использовать HTTP прокси"
+msgstr "HTTP прокси"
 
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
@@ -5716,7 +5736,7 @@ msgstr "Логин"
 
 #: u_translation.rsusesocksprox
 msgid "Use Socks proxy"
-msgstr "Использовать Socks прокси"
+msgstr "Socks"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"
@@ -5776,7 +5796,7 @@ msgstr "Венера"
 
 #: u_translation.rsversion
 msgid "Version"
-msgstr "Версия"
+msgstr "Version"
 
 #: u_translation.rsverticalover
 msgid "Vertical overlap %"

@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-14 14:00+0000\n"
+"POT-Creation-Date: 2020-01-09 14:24+0000\n"
 "PO-Revision-Date: 2019-10-06 13:45+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-12-15 15:24+0000\n"
-"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
+"X-Launchpad-Export-Date: 2020-01-09 14:32+0000\n"
+"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
 "Language: en_US\n"
 
 #: u_translation.rs102cddss
@@ -1643,6 +1643,10 @@ msgstr "Ne filtriraj Messier objektov"
 msgid "Do not run %s as %s!"
 msgstr ""
 
+#: u_translation.rsdonotuserow1
+msgid "Do not use row %s, reserved for external software interface."
+msgstr ""
+
 #: u_translation.rsdot1
 msgid "Dot"
 msgstr "Pika"
@@ -3143,6 +3147,10 @@ msgstr "Srednje dnevne"
 msgid "Mean position"
 msgstr "Srednji položaj"
 
+#: u_translation.rsmeasurement
+msgid "Measurement"
+msgstr ""
+
 #: u_translation.rsmemo
 msgid "Memo"
 msgstr "Opomnik"
@@ -3554,6 +3562,10 @@ msgstr "Vrsta objekta"
 #: u_translation.rsobsaltitude
 msgid "%sAltitude"
 msgstr "%sVišina"
+
+#: u_translation.rsobservationt
+msgid "Observation time"
+msgstr ""
 
 #: u_translation.rsobservatory
 msgid "Observatory"
@@ -3974,6 +3986,14 @@ msgstr "Pripravi podatke "
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
 msgstr "Pripravi mesečne podatke"
+
+#: u_translation.rsprepointing
+msgid "Pre-Pointing"
+msgstr ""
+
+#: u_translation.rsprepointline
+msgid "Pre-point line duration in minutes"
+msgstr ""
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"

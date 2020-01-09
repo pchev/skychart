@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-14 14:00+0000\n"
+"POT-Creation-Date: 2020-01-09 14:24+0000\n"
 "PO-Revision-Date: 2019-10-06 13:43+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-12-15 15:24+0000\n"
-"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
+"X-Launchpad-Export-Date: 2020-01-09 14:32+0000\n"
+"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -1642,6 +1642,10 @@ msgstr "No filtreu els objectes Messier"
 msgid "Do not run %s as %s!"
 msgstr "No activis %s com %s!"
 
+#: u_translation.rsdonotuserow1
+msgid "Do not use row %s, reserved for external software interface."
+msgstr ""
+
 #: u_translation.rsdot1
 msgid "Dot"
 msgstr "Punt"
@@ -3142,6 +3146,10 @@ msgstr "Mitjana de la data"
 msgid "Mean position"
 msgstr "Posició mitjana"
 
+#: u_translation.rsmeasurement
+msgid "Measurement"
+msgstr ""
+
 #: u_translation.rsmemo
 msgid "Memo"
 msgstr "Anotació"
@@ -3553,6 +3561,10 @@ msgstr "Tipus d'objecte"
 #: u_translation.rsobsaltitude
 msgid "%sAltitude"
 msgstr "%sAltura"
+
+#: u_translation.rsobservationt
+msgid "Observation time"
+msgstr ""
 
 #: u_translation.rsobservatory
 msgid "Observatory"
@@ -3973,6 +3985,14 @@ msgstr "Prepareu les dades "
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
 msgstr "Dades mensuals"
+
+#: u_translation.rsprepointing
+msgid "Pre-Pointing"
+msgstr ""
+
+#: u_translation.rsprepointline
+msgid "Pre-point line duration in minutes"
+msgstr ""
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"

@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-14 14:00+0000\n"
+"POT-Creation-Date: 2020-01-09 14:24+0000\n"
 "PO-Revision-Date: 2017-01-14 17:39+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-12-15 15:24+0000\n"
-"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
+"X-Launchpad-Export-Date: 2020-01-09 14:32+0000\n"
+"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -1643,6 +1643,10 @@ msgstr "Messierovy objekty nefiltrovat"
 msgid "Do not run %s as %s!"
 msgstr ""
 
+#: u_translation.rsdonotuserow1
+msgid "Do not use row %s, reserved for external software interface."
+msgstr ""
+
 #: u_translation.rsdot1
 msgid "Dot"
 msgstr "Tečka"
@@ -3145,6 +3149,10 @@ msgstr "Střední k datu"
 msgid "Mean position"
 msgstr "Střední pozice"
 
+#: u_translation.rsmeasurement
+msgid "Measurement"
+msgstr ""
+
 #: u_translation.rsmemo
 msgid "Memo"
 msgstr ""
@@ -3556,6 +3564,10 @@ msgstr "Typ objektu"
 #: u_translation.rsobsaltitude
 msgid "%sAltitude"
 msgstr "%sVýška"
+
+#: u_translation.rsobservationt
+msgid "Observation time"
+msgstr ""
 
 #: u_translation.rsobservatory
 msgid "Observatory"
@@ -3976,6 +3988,14 @@ msgstr "Vytvořit data "
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
 msgstr "Vytvořit měsíční data"
+
+#: u_translation.rsprepointing
+msgid "Pre-Pointing"
+msgstr ""
+
+#: u_translation.rsprepointline
+msgid "Pre-point line duration in minutes"
+msgstr ""
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"

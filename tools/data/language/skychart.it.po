@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-14 14:00+0000\n"
+"POT-Creation-Date: 2020-01-09 14:24+0000\n"
 "PO-Revision-Date: 2019-10-25 18:30+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-12-15 15:24+0000\n"
-"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
+"X-Launchpad-Export-Date: 2020-01-09 14:32+0000\n"
+"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -1642,6 +1642,10 @@ msgstr "Non filtrare oggetti Messier"
 msgid "Do not run %s as %s!"
 msgstr "Non eseguire %s come %s!"
 
+#: u_translation.rsdonotuserow1
+msgid "Do not use row %s, reserved for external software interface."
+msgstr ""
+
 #: u_translation.rsdot1
 msgid "Dot"
 msgstr "Punto"
@@ -3142,6 +3146,10 @@ msgstr "Medie per la data"
 msgid "Mean position"
 msgstr "Posizione media"
 
+#: u_translation.rsmeasurement
+msgid "Measurement"
+msgstr ""
+
 #: u_translation.rsmemo
 msgid "Memo"
 msgstr "Memo"
@@ -3553,6 +3561,10 @@ msgstr "Tipo oggetto"
 #: u_translation.rsobsaltitude
 msgid "%sAltitude"
 msgstr "%sAltitudine"
+
+#: u_translation.rsobservationt
+msgid "Observation time"
+msgstr ""
 
 #: u_translation.rsobservatory
 msgid "Observatory"
@@ -3973,6 +3985,14 @@ msgstr "Prepara i dati "
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
 msgstr "Prepara dati mensili"
+
+#: u_translation.rsprepointing
+msgid "Pre-Pointing"
+msgstr ""
+
+#: u_translation.rsprepointline
+msgid "Pre-point line duration in minutes"
+msgstr ""
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"

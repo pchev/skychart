@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-14 14:00+0000\n"
+"POT-Creation-Date: 2020-01-09 14:24+0000\n"
 "PO-Revision-Date: 2016-12-11 09:04+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclubzp@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-12-15 15:24+0000\n"
-"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
+"X-Launchpad-Export-Date: 2020-01-09 14:32+0000\n"
+"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1646,6 +1646,10 @@ msgstr ""
 msgid "Do not run %s as %s!"
 msgstr ""
 
+#: u_translation.rsdonotuserow1
+msgid "Do not use row %s, reserved for external software interface."
+msgstr ""
+
 #: u_translation.rsdot1
 msgid "Dot"
 msgstr "Пунктир"
@@ -3146,6 +3150,10 @@ msgstr "Середні на дату"
 msgid "Mean position"
 msgstr "Середнє положення"
 
+#: u_translation.rsmeasurement
+msgid "Measurement"
+msgstr ""
+
 #: u_translation.rsmemo
 msgid "Memo"
 msgstr ""
@@ -3557,6 +3565,10 @@ msgstr "Тип об'єкту"
 #: u_translation.rsobsaltitude
 msgid "%sAltitude"
 msgstr "%sВисота"
+
+#: u_translation.rsobservationt
+msgid "Observation time"
+msgstr ""
 
 #: u_translation.rsobservatory
 msgid "Observatory"
@@ -3977,6 +3989,14 @@ msgstr "Приготувати дані "
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
 msgstr "Приготувати Щомісячні Дані"
+
+#: u_translation.rsprepointing
+msgid "Pre-Pointing"
+msgstr ""
+
+#: u_translation.rsprepointline
+msgid "Pre-point line duration in minutes"
+msgstr ""
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"

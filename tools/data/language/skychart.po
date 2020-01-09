@@ -5942,3 +5942,23 @@ msgstr ""
 msgid "Protocol trace"
 msgstr ""
 
+#: u_translation:rsmeasurement
+msgid "Measurement"
+msgstr ""
+
+#: u_translation:rsprepointing
+msgid "Pre-Pointing"
+msgstr ""
+
+#: u_translation:rsobservationt
+msgid "Observation time"
+msgstr ""
+
+#: u_translation:rsprepointline
+msgid "Pre-point line duration in minutes"
+msgstr ""
+
+#: u_translation:rsdonotuserow1
+msgid "Do not use row %s, reserved for external software interface."
+msgstr ""
+

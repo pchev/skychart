@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-14 14:00+0000\n"
-"PO-Revision-Date: 2019-12-14 14:06+0000\n"
+"POT-Creation-Date: 2020-01-09 14:24+0000\n"
+"PO-Revision-Date: 2020-01-09 14:28+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-12-15 15:24+0000\n"
-"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
+"X-Launchpad-Export-Date: 2020-01-09 14:32+0000\n"
+"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -1644,6 +1644,10 @@ msgstr "Ne pas filtrer les objets Messier"
 msgid "Do not run %s as %s!"
 msgstr "Ne pas executer %s comme %s"
 
+#: u_translation.rsdonotuserow1
+msgid "Do not use row %s, reserved for external software interface."
+msgstr "N'utilisez pas la ligne %s, réservée pour les logiciels externes."
+
 #: u_translation.rsdot1
 msgid "Dot"
 msgstr "Point"
@@ -3145,6 +3149,10 @@ msgstr "Moyenne de la date"
 msgid "Mean position"
 msgstr "Position moyenne"
 
+#: u_translation.rsmeasurement
+msgid "Measurement"
+msgstr "Mesure"
+
 #: u_translation.rsmemo
 msgid "Memo"
 msgstr "Mémo"
@@ -3556,6 +3564,10 @@ msgstr "Type d'objet"
 #: u_translation.rsobsaltitude
 msgid "%sAltitude"
 msgstr "%sAltitude"
+
+#: u_translation.rsobservationt
+msgid "Observation time"
+msgstr "Heure de l'observation"
 
 #: u_translation.rsobservatory
 msgid "Observatory"
@@ -3976,6 +3988,14 @@ msgstr "Préparer les données "
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
 msgstr "Données mensuelles"
+
+#: u_translation.rsprepointing
+msgid "Pre-Pointing"
+msgstr "Pré-pointage"
+
+#: u_translation.rsprepointline
+msgid "Pre-point line duration in minutes"
+msgstr "Durée de la ligne de pré-pointage en minutes"
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"
