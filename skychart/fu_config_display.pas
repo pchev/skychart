@@ -789,7 +789,7 @@ begin
   CenterMark2.Caption := rsMarkTheChart;
   CheckBox2.Caption := rsShowLabels;
   CheckBox4.Caption := rsShowMarkInde;
-  label16.Caption := rsDoNotUseRow1;
+  label16.Caption := format(rsDoNotUseRow1,['10']);
   label8.Caption := rsDrawALineTha;
   Label68.Caption := rsYears;
   red_moveBox.Caption := rsReduceDetail;
