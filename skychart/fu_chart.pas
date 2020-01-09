@@ -407,7 +407,7 @@ type
     function cmd_ObslistAirmassLimit(airmass: string): string;
     function cmd_ObslistTransitLimit(transit: string): string;
     function cmd_ObslistTransitSide(side: string): string;
-    function cmd_GetScopeRaDec: string;
+    function cmd_GetScopeRaDec(format: string): string;
     function cmd_GetScopeRates: string;
     procedure GetScopeRates(rates: TStringList);
     function cmd_ScopeMoveAxis(axis, rate: string): string;
@@ -5140,7 +5140,7 @@ begin
   Result := msgOK;
 end;
 
-function Tf_chart.cmd_GetScopeRaDec: string;
+function Tf_chart.cmd_GetScopeRaDec(format: string): string;
 
 var
   ra, Dec: double;
@@ -5169,8 +5169,12 @@ begin
       Fpop_indi.ScopeGetRaDec(ra, Dec, ok);
     end;
   end;
-  if ok then
-    Result := msgOK + blank + artostr3(ra) + blank + detostr3(Dec)
+  if ok then begin
+    if format = 'F' then
+      Result := msgOK + blank + formatfloat(f5, ra) + blank + formatfloat(f5, Dec)
+    else
+      Result := msgOK + blank + artostr3(ra) + blank + detostr3(Dec);
+  end
   else
     Result := msgFailed;
 end;
@@ -6564,7 +6568,7 @@ begin
     94: Result := cmd_ShowCircle(arg[1]);
     95: Result := cmd_ShowRectangle(arg[1]);
     96: Result := cmd_MarkCenter(arg[1]);
-    97: Result := cmd_GetScopeRaDec;
+    97: Result := cmd_GetScopeRaDec(arg[1]);
     98: Result := cmd_ConnectINDI;
     99: Result := cmd_DisconnectINDI;
     100: Result := cmd_SlewINDI(arg[1], arg[2]);

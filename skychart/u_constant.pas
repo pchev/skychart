@@ -1581,7 +1581,7 @@ const
     ('SHOWCIRCLE', '94', 'num_list'),
     ('SHOWRECTANGLE', '95', 'num_list'),
     ('MARKCENTER', '96', 'ON/OFF'),
-    ('GETSCOPERADEC', '97', ''),
+    ('GETSCOPERADEC', '97', 'S/F'),
     ('CONNECTINDI', '98', ''),
     ('DISCONNECTINDI', '99', ''),
     ('SLEWINDI', '100', 'RAhr in decimal and Dec in decimal'),
