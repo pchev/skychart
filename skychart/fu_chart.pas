@@ -6880,22 +6880,22 @@ end;
 
 procedure Tf_chart.PrePointMeasureClick(Sender: TObject);
 var t,ra,de: double;
-    n,msg: string;
+    msg: string;
 begin
   if sc.cfgsc.FindName > '' then begin
-    n:=sc.cfgsc.FindName;
     ra:=sc.cfgsc.FindRA;
     de:=sc.cfgsc.PrePointDEC;
+    msg:=rsReference+blank+sc.cfgsc.FindName+crlf+rsAt;
   end
   else begin
     GetAdXy(Xcursor, Ycursor, ra, de, sc.cfgsc);
     de:=sc.cfgsc.PrePointDEC;
-    n:=rsLine1;
+    msg:=rsReference+blank+rsTime+':';
   end;
   t:=sc.cfgsc.PrePointTime-rad2deg*(sc.cfgsc.PrePointRA-ra)/15;
   if t<0 then t:=t+24;
   if t>=24 then t:=t-24;
-  msg:=rsReference+blank+n+crlf+rsAt+blank+ARtoStr3(t);
+  msg:=msg+blank+ARtoStr3(t);
   msg:=msg+crlf+crlf+rsCenter;
   msg:=msg+crlf+rsRA+blank+ARtoStr3(rad2deg*ra/15);
   msg:=msg+crlf+rsDEC+blank+DEToStr3(rad2deg*de);
@@ -6930,7 +6930,7 @@ begin
   de:=sc.cfgsc.PrePointDEC;
   if t<0 then t:=t+24;
   if t>=24 then t:=t-24;
-  msg:=rsReference+blank+n+crlf+rsAt+blank+ARtoStr3(t);
+  msg:=rsReference+blank+rsTime+':'+blank+ARtoStr3(t);
   msg:=msg+crlf+crlf+rsCenter;
   msg:=msg+crlf+rsRA+blank+ARtoStr3(rad2deg*ra/15);
   msg:=msg+crlf+rsDEC+blank+DEToStr3(rad2deg*de);
