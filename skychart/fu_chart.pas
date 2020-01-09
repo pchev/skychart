@@ -6922,14 +6922,13 @@ end;
 
 procedure Tf_chart.PrePointCenterNow(Sender: TObject);
 var t,ra,de: double;
-    n,msg: string;
+    msg: string;
 begin
-  n:=rsNow;
   t:=frac(now)*24;
   ra:=sc.cfgsc.PrePointRA-15*(sc.cfgsc.PrePointTime-t)*deg2rad;
   de:=sc.cfgsc.PrePointDEC;
-  if t<0 then t:=t+24;
-  if t>=24 then t:=t-24;
+  if ra<0 then ra:=ra+pi2;
+  if ra>=pi2 then ra:=ra-pi2;
   msg:=rsReference+blank+rsTime+':'+blank+ARtoStr3(t);
   msg:=msg+crlf+crlf+rsCenter;
   msg:=msg+crlf+rsRA+blank+ARtoStr3(rad2deg*ra/15);
