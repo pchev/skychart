@@ -6351,6 +6351,7 @@ begin
   def_cfgsc.rectangle[2, 4] := 11;
   def_cfgsc.rectangleok[2] := True;
   def_cfgsc.rectanglelbl[2] := 'ST7 autoguider';
+  def_cfgsc.rectanglelbl[10] := 'Reserved for CCDciel use';
   def_cfgsc.NumCircle := 0;
   def_cfgsc.ShowCircle := False;
   def_cfgsc.ShowCrosshair := False;

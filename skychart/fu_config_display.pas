@@ -47,6 +47,7 @@ type
     Button8: TButton;
     Button9: TButton;
     CheckBox1: TCheckBox;
+    Label16: TLabel;
     Transparency: TLabel;
     SurfaceBlure: TCheckBox;
     GroupBox9: TGroupBox;
@@ -788,6 +789,7 @@ begin
   CenterMark2.Caption := rsMarkTheChart;
   CheckBox2.Caption := rsShowLabels;
   CheckBox4.Caption := rsShowMarkInde;
+  label16.Caption := rsDoNotUseRow1;
   label8.Caption := rsDrawALineTha;
   Label68.Caption := rsYears;
   red_moveBox.Caption := rsReduceDetail;

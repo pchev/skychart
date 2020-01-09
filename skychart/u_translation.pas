@@ -1545,6 +1545,7 @@ resourcestring
   rsPrePointing = 'Pre-Pointing';
   rsObservationT = 'Observation time';
   rsPrePointLine = 'Pre-point line duration in minutes';
+  rsDoNotUseRow1 = 'Do not use row 10, it is reserved for external software interface.';
 
 // also update upsi_translation
 
