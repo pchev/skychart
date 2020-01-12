@@ -2,10 +2,12 @@ Version 4.3 beta, Notes de la version
 
 Nouvelles fonctions:
 - Ajout d'une raquette virtuelle pour les télescopes ASCOM et INDI
+- Ajout d'une option pour flouter et définir la transparence des catalogue de surfaces
+- Ajout d'une fonction de pré-pointage pour les occultations d'astéroïdes 
 
 Correction d'un bug:
 - Les planètes en mode ligne doivent être vraiment transparentes
 - Corrige "Voir les marques" pour la simulation des comètes et astéroïdes
 
 Suppression:
-- Suprime le calcul des flash Iridium
+- Supprime le calcul des flash Iridium
