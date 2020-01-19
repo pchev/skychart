@@ -98,7 +98,7 @@ type
     Fcdss: Tconf_dss;
     astpage, compage, dbpage: integer;
     lastSelectedNode: TTreeNode;
-    FApplyConfig: TNotifyEvent;
+    FApplyConfig,FDisableAsteroid,FEnableAsteroid: TNotifyEvent;
     FDBChange: TNotifyEvent;
     FSaveAndRestart: TNotifyEvent;
     FPrepareAsteroid: TPrepareAsteroid;
@@ -125,6 +125,8 @@ type
     procedure TimeGetTwilight(jd0: double; out ht: double);
     procedure ShowPage(i, j: integer);
     procedure ActivateChanges;
+    procedure EnableAsteroid(Sender: TObject);
+    procedure DisableAsteroid(Sender: TObject);
   public
     { Déclarations publiques }
     procedure SetLang;
@@ -143,6 +145,8 @@ type
     property onPrepareAsteroid: TPrepareAsteroid
       read FPrepareAsteroid write FPrepareAsteroid;
     property onGetTwilight: TGetTwilight read FGetTwilight write FGetTwilight;
+    property onDisableAsteroid: TNotifyEvent read FDisableAsteroid write FDisableAsteroid;
+    property onEnableAsteroid: TNotifyEvent read FEnableAsteroid write FEnableAsteroid;
   end;
 
 var
@@ -513,6 +517,16 @@ begin
     Result := FPrepareAsteroid(jd1, jd2, step, msg)
   else
     Result := False;
+end;
+
+procedure Tf_config.EnableAsteroid(Sender: TObject);
+begin
+   if assigned(FEnableAsteroid) then FEnableAsteroid(self);
+end;
+
+procedure Tf_config.DisableAsteroid(Sender: TObject);
+begin
+   if assigned(FDisableAsteroid) then FDisableAsteroid(self);
 end;
 
 procedure Tf_config.TimeGetTwilight(jd0: double; out ht: double);

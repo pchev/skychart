@@ -273,6 +273,8 @@ type
     FApplyConfig: TNotifyEvent;
     LockChange: boolean;
     FConfirmDownload: boolean;
+    FDisableAsteroid: TNotifyEvent;
+    FEnableAsteroid: TNotifyEvent;
     procedure ShowPlanet;
     procedure ShowComet;
     procedure UpdComList;
@@ -306,6 +308,9 @@ type
     property onPrepareAsteroid: TPrepareAsteroid
       read FPrepareAsteroid write FPrepareAsteroid;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
+    property onDisableAsteroid: TNotifyEvent read FDisableAsteroid write FDisableAsteroid;
+    property onEnableAsteroid: TNotifyEvent read FEnableAsteroid write FEnableAsteroid;
+
   end;
 
 implementation
@@ -714,6 +719,7 @@ begin
   end;
   if ok then
   begin
+    if assigned(FDisableAsteroid) then FDisableAsteroid(self);
     mpcfile.Text := systoutf8(fn);
     application.ProcessMessages;
     LoadMPCClick(Sender);
@@ -1179,6 +1185,7 @@ procedure Tf_config_solsys.LoadMPCClick(Sender: TObject);
 var
   ok: boolean;
 begin
+  if assigned(FDisableAsteroid) then FDisableAsteroid(self);
   MemoMpc.Clear;
   screen.cursor := crHourGlass;
   ok := cdb.LoadAsteroidFile(SafeUTF8ToSys(mpcfile.Text), astnumbered.Checked,
@@ -1200,6 +1207,7 @@ var
   y, m, i: integer;
 begin
   try
+    if assigned(FDisableAsteroid) then FDisableAsteroid(self);
     screen.cursor := crHourGlass;
     prepastmemo.Clear;
     if assigned(FPrepareAsteroid) then
@@ -1220,6 +1228,7 @@ begin
       prepastmemo.Lines.Add(rsYouAreNowRea);
       screen.cursor := crDefault;
       showast.Checked := True;
+      if assigned(FEnableAsteroid) then FEnableAsteroid(self);
     end
     else
       prepastmemo.Lines.Add('Error! PrepareAsteroid function not initialized.');
@@ -1230,21 +1239,26 @@ end;
 
 procedure Tf_config_solsys.delastClick(Sender: TObject);
 begin
+  if assigned(FDisableAsteroid) then FDisableAsteroid(self);
   screen.cursor := crHourGlass;
   Cdb.DelAsteroid(astelemlist.Text, delastMemo);
   screen.cursor := crDefault;
   UpdAstList;
+  if assigned(FEnableAsteroid) then FEnableAsteroid(self);
 end;
 
 procedure Tf_config_solsys.deldateastClick(Sender: TObject);
 begin
+  if assigned(FDisableAsteroid) then FDisableAsteroid(self);
   screen.cursor := crHourGlass;
   cdb.DelAstDate(trim(astdeldate_y.Text) + '.' + trim(astdeldate_m.Text), delastMemo);
   screen.cursor := crDefault;
+  if assigned(FEnableAsteroid) then FEnableAsteroid(self);
 end;
 
 procedure Tf_config_solsys.delallastClick(Sender: TObject);
 begin
+  if assigned(FDisableAsteroid) then FDisableAsteroid(self);
   screen.cursor := crHourGlass;
   cdb.DelAstAll(delastMemo);
   screen.cursor := crDefault;

@@ -743,6 +743,9 @@ type
     function QuickDownload(url, fn: string; quickcancel: boolean = True): boolean;
     function LoadMPCORB(fn:string): string;
     procedure EditToolBar(barnum: integer);
+    procedure EnableAsteroid(Sender: TObject);
+    procedure DisableAsteroid(Sender: TObject);
+
   public
     { Public declarations }
     cfgm: Tconf_main;
@@ -4574,6 +4577,8 @@ begin
     f_config.onDBChange := ConfigDBChange;
     f_config.onSaveAndRestart := SaveAndRestart;
     f_config.onPrepareAsteroid := PrepareAsteroid;
+    f_config.onEnableAsteroid:=EnableAsteroid;
+    f_config.onDisableAsteroid:=DisableAsteroid;
     f_config.onGetTwilight := GetTwilight;
     f_config.Fits := fits;
     f_config.catalog := catalog;
@@ -4678,6 +4683,8 @@ begin
     ConfigSolsys.f_config_solsys1.PageControl1.PageIndex := 0;
     ConfigSolsys.f_config_solsys1.onApplyConfig := ApplyConfigSolsys;
     ConfigSolsys.f_config_solsys1.onPrepareAsteroid := PrepareAsteroid;
+    ConfigSolsys.f_config_solsys1.onDisableAsteroid := DisableAsteroid;
+    ConfigSolsys.f_config_solsys1.onEnableAsteroid := EnableAsteroid;
     ConfigSolsys.f_config_solsys1.cdb := cdcdb;
     ConfigSolsys.f_config_solsys1.ccat.Assign(catalog.cfgcat);
     ConfigSolsys.f_config_solsys1.cshr.Assign(catalog.cfgshr);
@@ -4716,6 +4723,8 @@ begin
         end;
         2:
         begin
+          if (MultiFrame1.ActiveObject is Tf_chart) then
+            Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.ShowComet:=false;
           ConfigSolsys.Panel1.Visible := False;
           ConfigSolsys.f_config_solsys1.PageControl1.ShowTabs := False;
           ConfigSolsys.f_config_solsys1.ComPageControl.ShowTabs := False;
@@ -4737,6 +4746,7 @@ begin
         end;
         3:
         begin
+          DisableAsteroid(nil);
           ConfigSolsys.Panel1.Visible := False;
           ConfigSolsys.f_config_solsys1.PageControl1.ShowTabs := False;
           ConfigSolsys.f_config_solsys1.AstPageControl.ShowTabs := False;
@@ -4745,14 +4755,17 @@ begin
           ConfigSolsys.f_config_solsys1.ConfirmDownload := False;
           ConfigSolsys.f_config_solsys1.autoprocess := True;
           ConfigSolsys.Show;
+          ConfigSolsys.f_config_solsys1.GroupBox10.Visible:=false;
+          ConfigSolsys.f_config_solsys1.GroupBox11.Visible:=false;
+          ConfigSolsys.f_config_solsys1.GroupBox12.Visible:=false;
+          ConfigSolsys.f_config_solsys1.AstCompute.Visible:=false;
           ConfigSolsys.f_config_solsys1.AstPageControl.ActivePageIndex := 3;
           ConfigSolsys.f_config_solsys1.delallast.Click;
           ConfigSolsys.f_config_solsys1.AstPageControl.ActivePageIndex := 1;
           ConfigSolsys.f_config_solsys1.DownloadAsteroid.Click;
           if ConfigSolsys.f_config_solsys1.autoOK then
           begin
-            if (MultiFrame1.ActiveObject is Tf_chart) then
-              Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.ShowAsteroid:=true;
+            EnableAsteroid(nil);
             RefreshAllChild(False);
             ShowMessage(rsAsteroidUpda);
           end;
@@ -4774,6 +4787,28 @@ begin
     ConfigSolsys.Free;
     ConfigSolsys := nil;
   end;
+end;
+
+procedure Tf_main.EnableAsteroid(Sender: TObject);
+var i: integer;
+begin
+  for i := 0 to MultiFrame1.ChildCount - 1 do
+    if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+      with MultiFrame1.Childs[i].DockedObject as Tf_chart do
+      begin
+        sc.cfgsc.ShowAsteroid:=true;
+      end;
+end;
+
+procedure Tf_main.DisableAsteroid(Sender: TObject);
+var i: integer;
+begin
+  for i := 0 to MultiFrame1.ChildCount - 1 do
+    if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+      with MultiFrame1.Childs[i].DockedObject as Tf_chart do
+      begin
+        sc.cfgsc.ShowAsteroid:=false;
+      end;
 end;
 
 procedure Tf_main.ApplyConfigSolsys(Sender: TObject);
