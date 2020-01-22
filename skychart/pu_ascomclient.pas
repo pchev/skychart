@@ -1056,7 +1056,7 @@ end;
 
 procedure Tpop_scope.FormShow(Sender: TObject);
 begin
-  ActiveControl:=ButtonConnect;
+ if ButtonConnect.Enabled then ActiveControl:=ButtonConnect;
 end;
 
 procedure Tpop_scope.Timer1Timer(Sender: TObject);
