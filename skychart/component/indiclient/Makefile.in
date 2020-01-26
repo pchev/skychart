@@ -29,7 +29,11 @@ files=$(wildcard $(COMPILER_UNITTARGETDIR)/*$(OEXT)) \
 LAZDIR=%LAZDIR%
 # Compiler options
 ifndef fpcopts 
+ifeq ($(CPU_TARGET),aarch64)
+fpcopts=-O-  -CX -XX -Xs 
+else
 fpcopts=-O3  -CX -XX -Xs 
+endif
 endif
 # LCL Platform
 ifndef LCL_PLATFORM
