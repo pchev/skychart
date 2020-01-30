@@ -585,6 +585,43 @@ begin
   Result := d + ':' + m + ':' + s;
 end;
 
+function StrToSX(sx: string): double;
+const sep = ':';
+var
+  s, p: integer;
+  t: string;
+begin
+  try
+    sx := StringReplace(sx, ' ', '0', [rfReplaceAll]);
+    if copy(sx, 1, 1) = '-' then
+      s := -1
+    else
+      s := 1;
+    p := pos(sep, sx);
+    if p = 0 then
+      Result := StrToFloatDef(sx, -9999)
+    else
+    begin
+      t := copy(sx, 1, p - 1);
+      Delete(sx, 1, p);
+      Result := StrToIntDef(t, 0);
+      p := pos(sep, sx);
+      if p = 0 then
+        Result := Result + s * StrToIntDef(sx, 0) / 60
+      else
+      begin
+        t := copy(sx, 1, p - 1);
+        Delete(sx, 1, p);
+        Result := Result + s * StrToIntDef(t, 0) / 60;
+        Result := Result + s * StrToFloatDef(sx, 0) / 3600;
+      end;
+    end;
+  except
+    Result := -9999;
+  end;
+
+end;
+
 function IndiFormatFloat(x: double; fmt: string): string;
 begin
   if copy(fmt, Length(fmt), 1) = 'm' then
@@ -599,6 +636,20 @@ begin
     except
       Result := FloatToStr(x);
     end;
+  end;
+end;
+
+function IndiStr2Float(txt, fmt: string; out value: double): integer;
+begin
+  if copy(fmt, Length(fmt), 1) = 'm' then begin
+    value:=StrToSX(txt);
+    if value=-9999 then
+      result:=1
+    else
+      result:=0;
+  end
+  else begin
+    val(txt, value, result);
   end;
 end;
 
@@ -1036,11 +1087,15 @@ begin
         entry := TEdit(iprop.entry.Objects[j]);
         if entry.Text <> '' then
         begin
-          val(entry.Text, Value, er);
-          if er = 0 then
+          er:=IndiStr2Float(entry.Text,nvp.np[i].format,Value);
+          if er = 0 then begin
             nvp.np[i].Value := Value;
+            buf := buf + nvp.np[i].Name + '=' + FloatToStr(nvp.np[i].Value) + ' ';
+          end
+          else begin
+            buf := buf + nvp.np[i].Name + ' not numeric ' +entry.Text+ ' ';
+          end;
           entry.Clear;
-          buf := buf + nvp.np[i].Name + '=' + FloatToStr(nvp.np[i].Value) + ' ';
         end;
       end;
       indiclient.sendNewNumber(nvp);
