@@ -1481,7 +1481,7 @@ const
     );
 
   // Chart Commands
-  numcmd = 129;
+  numcmd = 131;
   cmdlist: array[1..numcmd, 1..3] of string = (
     ('ZOOM+', '1', ''),
     ('ZOOM-', '2', ''),
@@ -1535,7 +1535,7 @@ const
     ('GETDATE', '50', ''),
     ('GETOBS', '51', ''),
     ('SETDATE', '52', 'yyyy-mm-ddThh:mm:ss or "yyyy-mm-dd hh:mm:ss"'),
-    ('SETTZ', '53', 'Etc/GTM'),
+    ('SETTZ', '53', 'UTC+2'),
     ('GETTZ', '54', ''),
     // V2.7 compatibility DDE command
     ('MOVE', '55', 'obsolete, RA: 00h00m00.00s DEC:+00d00m00.0s FOV:+00d00m00s'),
@@ -1613,7 +1613,9 @@ const
     ('CLEANUPMAP', '126', ''),
     ('GETCHARTEQSYS', '127', 'DATE/2000.0'),
     ('GETSCOPESLEWING', '128', 'True/False'),
-    ('GETFRAMES', '129', '')
+    ('GETFRAMES', '129', ''),
+    ('SETCHARTEQUINOX', '130', 'DATE/J2000'),
+    ('SETFIELDNUMBER', '131', '1..10')
     );
 
 // Database

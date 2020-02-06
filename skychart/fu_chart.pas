@@ -385,6 +385,8 @@ type
     function cmd_SetFov(fov: string): string;
     function cmd_Resize(w, h: string): string;
     function cmd_GetChartEqsys: string;
+    function cmd_SetChartEquinox(equinox: string): string;
+    function cmd_SetFieldnumber(field: string): string;
     function cmd_SetRa(param1: string): string;
     function cmd_SetDec(param1: string): string;
     function cmd_SetDate(dt: string): string;
@@ -442,7 +444,7 @@ type
     procedure MeasureDistance(action, x, y: integer);
     procedure TrackCursor(X, Y: integer; step: integer);
     procedure ZoomCursor(yy: double);
-    procedure SetField(field: double; trackAltAz: boolean = True);
+    procedure SetField(field: double; trackAltAz: boolean = True; doRefresh: boolean=true);
     procedure SetZenit(field: double; redraw: boolean = True);
     procedure SetAz(Az: double; redraw: boolean = True);
     procedure SetDateUT(y, m, d, h, n, s: integer);
@@ -4851,6 +4853,43 @@ begin
      result:=stringreplace(stringreplace(sc.cfgsc.EquinoxChart, 'J', '', []), 'B', '', []);
 end;
 
+function Tf_chart.cmd_SetChartEquinox(equinox: string): string;
+begin
+  equinox:=UpperCase(trim(equinox));
+  if equinox='DATE' then
+    sc.cfgsc.EquinoxChart:=rsDate
+  else begin
+    if sc.cfgsc.ProjPole=Equat then begin //Equat
+      if equinox='J2000' then begin
+        sc.cfgsc.CoordType := 2;
+        sc.cfgsc.EquinoxType := 0;
+        sc.cfgsc.ApparentPos := False;
+        sc.cfgsc.PMon := True;
+        sc.cfgsc.YPmon := 2000;
+        sc.cfgsc.EquinoxChart := 'J2000';
+        sc.cfgsc.DefaultJDChart := jd2000;
+        result:=msgOK;
+      end
+      else
+        result:=msgFailed+' parameter must be DATE or 2000.0';
+    end
+    else
+      result:=msgFailed+' cannot change equinox for this projection';
+  end;
+end;
+
+function Tf_chart.cmd_SetFieldnumber(field: string): string;
+var f:integer;
+begin
+  f:=StrToIntDef(field,999)-1;
+  if (f>=0)and(f<=MaxField) then begin
+    SetField(deg2rad * sc.catalog.cfgshr.FieldNum[f], (f > 1), false);
+    result:=msgOK;
+  end
+  else
+    result:=msgFailed+' wrong parameter';
+end;
+
 function Tf_chart.cmd_SetRa(param1: string): string;
 var
   buf: string;
@@ -6601,12 +6640,14 @@ begin
     127: Result := cmd_GetChartEqsys;
     128: Result := cmd_GetScopeSlewing;
     129: Result := cmd_GetFrames;
+    130: Result := cmd_SetChartEquinox(arg[1]);
+    131: Result := cmd_SetFieldnumber(arg[1]);
     else
       Result := msgFailed + ' Bad command name';
   end;
 end;
 
-procedure Tf_chart.SetField(field: double; trackAltAz: boolean = True);
+procedure Tf_chart.SetField(field: double; trackAltAz: boolean = True; doRefresh: boolean=true);
 begin
   sc.setfov(field);
   if VerboseMsg then
@@ -6616,7 +6657,7 @@ begin
     sc.cfgsc.TrackOn := True;
     sc.cfgsc.TrackType := 4;
   end;
-  Refresh(True, False);
+  if doRefresh then Refresh(True, False);
 end;
 
 procedure Tf_chart.SetZenit(field: double; redraw: boolean = True);
