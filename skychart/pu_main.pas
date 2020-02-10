@@ -5789,8 +5789,8 @@ var
   ts, ts1, ts2: Tsize;
 begin
   P0L1.Caption := '';
-  ts1 := P0L1.Canvas.TextExtent(rsRA + ':222h22m22.22s ' + rsDE + '+22d22m22s22');
-  ts2 := P0L1.Canvas.TextExtent(rsAz + ':+222h22m22.22s ' + rsAlt + '+22d22m22s22');
+  ts1 := P0L1.Canvas.TextExtent(rsRA + ':222h22m22.2s ' + rsDE + '+22d22m22s' + rsLHA +  '+22d22m');
+  ts2 := P0L1.Canvas.TextExtent(rsAz + ':+222h22m22s ' + rsAlt + '+22d22m22s' + rsAirmass + '22.2');
   if ts1.cx > ts2.cx then
     ts := ts1
   else

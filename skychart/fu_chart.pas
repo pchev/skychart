@@ -3247,7 +3247,7 @@ end;
 
 procedure Tf_chart.ShowCoord(x, y: integer);
 var
-  ra, Dec, a, h, l, b, le, be: double;
+  ra, Dec, a, h, l, b, le, be, lha,am: double;
   txt: string;
 begin
   {show the coordinates}
@@ -3255,9 +3255,13 @@ begin
   case sc.cfgsc.projpole of
     AltAz:
     begin
-      txt := rsAz + ':' + deptostr(rad2deg * a) + blank + rsAlt + ':' + deptostr(
-        rad2deg * h) + crlf + rsRA + ':' + arptostr(rad2deg * ra / 15) + blank +
-        rsDE + ':' + deptostr(rad2deg * Dec);
+      lha:=rmod(sc.cfgsc.CurST-ra+pi2,pi2);
+      if lha>pi then lha:=lha-pi2;
+      if h>0 then am:=AirMass(h);
+      txt := rsAz + ':' + detostr(rad2deg * a) + blank + rsAlt + ':' + detostr(rad2deg * h) + blank;
+      if h>0 then txt := txt + rsAirmass + ':' + FormatFloat(f1,am);
+      txt := txt + crlf + rsRA + ':' + artostr(rad2deg * ra / 15) + blank +
+             rsDE + ':' + detostr(rad2deg * Dec) + blank + rsLHA + ':'+ armtostr(rad2deg * lha / 15);
     end;
     Equat:
     begin
@@ -3788,7 +3792,7 @@ var
   isStar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
   ApparentValid, supconj: boolean;
   ra, Dec, q, a, h, ag, airm, hg, hr, ht, hs, hrl,hsl, azr, azs, al, j1, j2, j3, rar, der, rat,
-  det, ras, des, culmalt: double;
+  det, ras, des, culmalt, lha: double;
   ra2000, de2000, radate, dedate, raapp, deapp, cjd, cjd0, cst, nst, njd, err, gw: double;
   r: TStringList;
   tp, ec, ap, an, ic, g, eq, cra, cdec, dist, dst, dkm, rr, elong, phase, magn,
@@ -4336,8 +4340,9 @@ begin
         a := Rmod(a + pi, pi2);
       txt := txt + html_b + rsLocalSideral + ': ' + htms_b + artostr3(
         rmod(rad2deg * cst / 15 + 24, 24)) + html_br;
-      txt := txt + html_b + rsHourAngle + ': ' + htms_b + ARToStr3(rmod(rad2deg *
-        (cst - ra) / 15 + 24, 24)) + html_br;
+      lha:=rmod(cst-ra+pi2,pi2);
+      if lha>pi then lha:=lha-pi2;
+      txt := txt + html_b + rsHourAngle + ': ' + htms_b + ARToStr(rad2deg * lha / 15) + html_br;
       txt := txt + html_b + rsAzimuth + ': ' + htms_b + LONToStr(rad2deg * a) + html_br;
       if h >= sc.cfgsc.ObsHorizonDepression then
         txt := txt + html_b + rsAltitude + ': ' + htms_b + deptostr(rad2deg * h, 1) + html_br;
@@ -4345,8 +4350,7 @@ begin
       txt := txt + html_b + rsGeometricAlt + ': ' + htms_b + deptostr(rad2deg * hg, 1) + html_br;
       if h > 0 then
       begin
-        airm := 1 / sin(h + deg2rad * (244 / (165 + 47 * (rad2deg * h) ** 1.1)));
-        // Pickering, "The Southern Limits of the Ancient Star Catalog" DIO 2002
+        airm := AirMass(h);
         txt := txt + html_b + rsAirmass + ': ' + htms_b + FormatFloat(f1, airm) + html_br;
       end;
     end;

@@ -1409,7 +1409,9 @@ begin
   str(sec: 4: precision, s);
 
   if abs(sec) < 9.95 then
-    s := '0' + trim(s);
+    s := '0' + trim(s)
+  else
+    s:=trim(s);
 
   Result := d + ldeg + m + lmin + s + lsec;
 end;
@@ -1474,7 +1476,9 @@ begin
   str(sec: 5: precision + 1, s);
 
   if abs(sec) < 9.995 then
-    s := '0' + trim(s);
+    s := '0' + trim(s)
+  else
+    s:=trim(s);
 
   Result := d + 'h' + m + 'm' + s + 's';
 end;

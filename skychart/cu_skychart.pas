@@ -3221,6 +3221,7 @@ begin
     cfgsc.FindName := nom;
     cfgsc.FindId := nom;
     cfgsc.FindDesc := Desc;
+    cfgsc.FindDesc2 := '';
     cfgsc.FindNote := '';
     cfgsc.TrackRA := cfgsc.FindRA;
     cfgsc.TrackDec := cfgsc.FindDec;
@@ -3927,6 +3928,7 @@ begin
     end;
   cfgsc.FindName := wordspace(cfgsc.FindName);
   cfgsc.FindDesc := Desc;
+  cfgsc.FindDesc2 := '';
   cfgsc.FindNote := '';
 end;
 
@@ -3934,9 +3936,10 @@ procedure Tskychart.FindRiseSet(mode: integer);
 var
   txt, thr, tht, ths, tazr, tazs: string;
   cjd0, ra, Dec, h, hr, ht, hs, azr, azs, j1, j2, j3, rar, der, rat, det, ras, des: double;
-  hrl,hsl,al: double;
+  hrl,hsl,al,lha: double;
   i, ii, y, m, d: integer;
 begin
+  lha:=-9999;
   if (cfgsc.Equinoxtype = 2) then
   begin
     // mode= 0 star, 1..11 planet
@@ -3973,6 +3976,8 @@ begin
         Azs := rmod(Azs + pi, pi2);
       tazr := LONmToStr(rad2deg * Azr);
       tazs := LONmToStr(rad2deg * Azs);
+      lha:=rmod(cfgsc.CurST-ra+pi2,pi2);
+      if lha>pi then lha:=lha-pi2;
     end;
     if cfgsc.HorizonRise and (cfgsc.HorizonMax > musec) then begin
       if ObjRise(rar,der,cfgsc,hrl,al,ii) then begin
@@ -4011,6 +4016,7 @@ begin
         txt := txt + rsInvisibleAtT + blank;
       end;
     end;
+    if lha>-99 then txt:=txt + blank + rsLHA + ':'+ armtostr(rad2deg * lha / 15);
     cfgsc.FindDesc2 := txt;
   end
   else

@@ -2012,6 +2012,7 @@ begin
   cfgsc.FindId := nom;
   cfgsc.FindName := nom;
   cfgsc.FindDesc := Desc;
+  cfgsc.FindDesc2 := '';
   cfgsc.FindNote := '';
 end;
 
@@ -3079,6 +3080,7 @@ begin
   end;
   cfgsc.FindName := nom;
   cfgsc.FindDesc := Desc;
+  cfgsc.FindDesc2 := '';
   cfgsc.FindNote := '';
 end;
 
@@ -3200,6 +3202,7 @@ begin
   end;
   cfgsc.FindName := nom;
   cfgsc.FindDesc := Desc;
+  cfgsc.FindDesc2 := '';
   cfgsc.FindNote := '';
 end;
 

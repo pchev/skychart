@@ -79,6 +79,7 @@ procedure Eq2Hz(HH, DE: double; var A, h: double; c: Tconf_skychart;
 procedure Hz2Eq(A, h: double; var hh, de: double; c: Tconf_skychart;
   method: smallint = refmethod);
 procedure Refraction(var h: double; flag: boolean; c: Tconf_skychart; method: smallint);
+function  AirMass(h: double): double;
 function ecliptic(j: double; nuto: double = 0): double;
 procedure nutationme(j: double; var nutl, nuto: double);
 procedure aberrationme(j: double; var abe, abp: double);
@@ -1328,6 +1329,12 @@ begin
       end;
     end;
   end;
+end;
+
+function  AirMass(h: double): double;
+begin
+  // Pickering, "The Southern Limits of the Ancient Star Catalog" DIO 2002
+  result := 1 / sin(h + deg2rad * (244 / (165 + 47 * (rad2deg * h) ** 1.1)));
 end;
 
 function ecliptic(j: double; nuto: double = 0): double;
