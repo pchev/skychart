@@ -7692,7 +7692,7 @@ begin
       end;
     if not skiplabel then
     begin
-      if (labels[i].lsize > 0) and ((nebmagmax - nebmagmin) >= 2) then
+      if cfgsc.OptimizeLabels and (labels[i].lsize > 0) and ((nebmagmax - nebmagmin) >= 2) then
       begin
         if labels[i].lsize > (nebmagmax - ((nebmagmax - nebmagmin) / 4)) then
           lsize := 0.8
