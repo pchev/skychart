@@ -1315,7 +1315,6 @@ procedure Tpop_scope.ButtonSetTimeClick(Sender: TObject);
 var
   buf: string;
   {$ifdef mswindows}
-  utc: TSystemTime;
   dt: TDateTime;
   {$endif}
 begin
@@ -1324,19 +1323,8 @@ begin
     try
       {$ifdef mswindows}
       if not Remote then begin
-        try
-          GetSystemTime(utc);
-        except
-          on E: Exception do
-            MessageDlg('GetSystemTime : ' + E.Message, mtWarning, [mbOK], 0);
-        end;
-        try
-          dt:=SystemTimeToDateTime(utc);
-        except
-          on E: Exception do
-            MessageDlg('SystemTimeToDateTime : ' + E.Message, mtWarning, [mbOK], 0);
-        end;
-        T.UTCDate :=dt;
+        dt:=NowUTC;
+        T.UTCDate :=VarFromDateTime(dt);
       end
       else
       {$endif}
