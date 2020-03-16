@@ -1316,6 +1316,7 @@ var
   buf: string;
   {$ifdef mswindows}
   utc: TSystemTime;
+  dt: TDateTime;
   {$endif}
 begin
   if ScopeConnected then
@@ -1323,8 +1324,19 @@ begin
     try
       {$ifdef mswindows}
       if not Remote then begin
-        GetSystemTime(utc);
-        T.UTCDate :=SystemTimeToDateTime(utc);
+        try
+          GetSystemTime(utc);
+        except
+          on E: Exception do
+            MessageDlg('GetSystemTime : ' + E.Message, mtWarning, [mbOK], 0);
+        end;
+        try
+          dt:=SystemTimeToDateTime(utc);
+        except
+          on E: Exception do
+            MessageDlg('SystemTimeToDateTime : ' + E.Message, mtWarning, [mbOK], 0);
+        end;
+        T.UTCDate :=dt;
       end
       else
       {$endif}
