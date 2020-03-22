@@ -2986,7 +2986,7 @@ begin
     if sc.cfgsc.ApparentPos then
       apparent_equatorial(ar1, de1, sc.cfgsc, True, itype < ftPla);
     // center chart
-    sc.movetoradec(ar1, de1);
+    if not sc.cfgsc.ChartLock then sc.movetoradec(ar1, de1);
     Refresh(True, False);
     // try to get more information and show the label
     if (itype = ftPla) then
