@@ -55,6 +55,7 @@ type
   Tf_main = class(TForm)
     MenuEditToolbar2: TMenuItem;
     MenuItem2: TMenuItem;
+    MenuLockChart: TMenuItem;
     MenuUpdGrs: TMenuItem;
     MenuMosaic: TMenuItem;
     Mosaic: TAction;
@@ -460,6 +461,7 @@ type
     procedure AnimationExecute(Sender: TObject);
     procedure AnimationTimerTimer(Sender: TObject);
     procedure BlinkImageExecute(Sender: TObject);
+    procedure MenuLockChartClick(Sender: TObject);
     procedure MDEditToolBar(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
     procedure MenuBugReportClick(Sender: TObject);
@@ -4147,6 +4149,15 @@ begin
   f_calendar.bringtofront;
 end;
 
+procedure Tf_main.MenuLockChartClick(Sender: TObject);
+begin
+  if MultiFrame1.ActiveObject is Tf_chart then
+    with (MultiFrame1.ActiveObject as Tf_chart) do
+    begin
+      sc.cfgsc.ChartLock := not sc.cfgsc.ChartLock;
+    end;
+end;
+
 procedure Tf_main.TrackExecute(Sender: TObject);
 begin
   if MultiFrame1.ActiveObject is Tf_chart then
@@ -6417,6 +6428,7 @@ begin
   def_cfgsc.EquinoxType := 2;
   def_cfgsc.EquinoxChart := rsDate;
   def_cfgsc.DefaultJDchart := jd2000;
+  def_cfgsc.ChartLock := false;
   catalog.cfgshr.StarFilter := True;
   catalog.cfgshr.AutoStarFilter := True;
   catalog.cfgshr.AutoStarFilterMag := 7.5;
@@ -9491,6 +9503,7 @@ begin
   Track.Caption := rsNoObjectToLo;
   Track.hint := rsNoObjectToLo;
   Track.Category := CatLock;
+  MenuLockChart.Caption := rsLockChartPos;
   Cascade1.Caption := '&' + rsCascade;
   Cascade1.hint := rsCascade;
   Cascade1.Category := CatWindow;
@@ -10050,6 +10063,7 @@ begin
         Track.Hint := rsNoObjectToLo;
         Track.Caption := rsNoObjectToLo;
       end;
+      MenuLockChart.Checked:=sc.cfgsc.ChartLock;
       switchstars.ImageIndex := 117 + sc.plot.cfgplot.starplot;
       EquatorialProjection.Checked := (sc.cfgsc.projpole = Equat);
       AltAzProjection.Checked := (sc.cfgsc.projpole = AltAz);

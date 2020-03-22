@@ -1048,7 +1048,7 @@ type
     DrawAllStarLabel, MovedLabelLine, StarFilter, NebFilter, FindOK,
     WhiteBg, ShowLegend, MagLabel, NameLabel, DistLabel, ConstFullLabel,
     ConstLatinLabel, ScopeMark, Scope2Mark, ScopeLock, FindPM,
-    FindStarPM, FindPMfullmotion, AstNEO: boolean;
+    FindStarPM, FindPMfullmotion, AstNEO, ChartLock : boolean;
     EquinoxName, TargetName, TrackName, TrackId, FindName, FindDesc,
     FindDesc2, FindDesc2000, FindNote, FindCat, FindCatname, FindId: string;
     BGalpha: integer;
@@ -2503,6 +2503,7 @@ begin
   ScopeMark := Source.ScopeMark;
   Scope2Mark := Source.Scope2Mark;
   ScopeLock := Source.ScopeLock;
+  ChartLock := Source.ChartLock;
   EquinoxName := Source.EquinoxName;
   TrackName := Source.TrackName;
   TrackId := Source.TrackId;

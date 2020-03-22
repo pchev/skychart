@@ -1547,6 +1547,7 @@ resourcestring
   rsPrePointLine = 'Pre-point line duration in minutes';
   rsDoNotUseRow1 = 'Do not use row %s, reserved for external software interface.';
   rsLHA = 'LHA';
+  rsLockChartPos = 'Lock chart position';
 
 // also update upsi_translation
 

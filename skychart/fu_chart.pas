@@ -2964,7 +2964,7 @@ begin
     sc.cfgsc.TrackType := 6;
     sc.cfgsc.TrackName := sc.cfgsc.FindName;
     // center chart
-    sc.movetoradec(sc.cfgsc.FindRA, sc.cfgsc.FindDec);
+    if not sc.cfgsc.ChartLock then sc.movetoradec(sc.cfgsc.FindRA, sc.cfgsc.FindDec);
     Refresh(True, False, False);
     // show label
     sc.cfgsc.FindOK := True;
