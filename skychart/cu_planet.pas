@@ -2821,13 +2821,13 @@ begin
   if (not db1.Active) or (not cfgsc.ephvalid) then
     exit;
 
-  s1 := UpperCase(trim(astname));
+  s1 := UpperCase(StringReplace(astname,' ','',[rfReplaceAll]));
   if s1 = '' then
     exit;
 
   id := '';
 
-  qry := 'SELECT id FROM cdc_ast_name' + ' where UPPER(name) = "' + s1 + '"';
+  qry := 'SELECT id FROM cdc_ast_name' + ' where UPPER(REPLACE(name,'' '','''')) = "' + s1 + '"';
 
   db1.Query(qry);
 
@@ -2837,7 +2837,7 @@ begin
   if id = '' then
   begin
 
-    qry := 'SELECT id FROM cdc_ast_name' + ' where UPPER(name) like "%' +
+    qry := 'SELECT id FROM cdc_ast_name' + ' where UPPER(REPLACE(name,'' '','''')) like "%' +
       s1 + '%"' + ' limit 1';
 
     db1.Query(qry);
@@ -2901,7 +2901,7 @@ begin
   if (not db1.Active) or (not cfgsc.ephvalid) then
     exit;
 
-  s1 := UpperCase(trim(comname));
+  s1 := UpperCase(StringReplace(comname,' ','',[rfReplaceAll]));
   if s1 = '' then
     exit;
 
@@ -2910,7 +2910,7 @@ begin
 
   id := '';
 
-  qry := 'SELECT id FROM cdc_com_name' + ' where UPPER(name) = "' + s1 + '"';
+  qry := 'SELECT id FROM cdc_com_name' + ' where UPPER(REPLACE(name,'' '','''')) = "' + s1 + '"';
 
   db1.Query(qry);
 
@@ -2920,7 +2920,7 @@ begin
   if id = '' then
   begin
 
-    qry := 'SELECT id FROM cdc_com_name' + ' where UPPER(name) like "%' +
+    qry := 'SELECT id FROM cdc_com_name' + ' where UPPER(REPLACE(name,'' '','''')) like "%' +
       s1 + '%"' + ' limit 1';
 
     db1.Query(qry);
