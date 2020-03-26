@@ -4347,12 +4347,14 @@ begin
       case kind of
         0:
         begin
+          sc.cfgsc.shownebulae:=true;
           ok := catalog.SearchNebulae(num, ar1, de1);
           itype := ftNeb;
           stype := 'N';
         end;
         1:
         begin
+          sc.cfgsc.shownebulae:=true;
           ar1 := def_ra;
           de1 := def_de;
           itype := ftNeb;
@@ -4361,42 +4363,49 @@ begin
         end;
         2:
         begin
+          sc.cfgsc.showstars:=true;
           ok := catalog.SearchStar(num, ar1, de1);
           itype := ftStar;
           stype := '*';
         end;
         3:
         begin
+          sc.cfgsc.showstars:=true;
           ok := catalog.SearchStar(num, ar1, de1);
           itype := ftStar;
           stype := '*';
         end;
         4:
         begin
+          sc.cfgsc.showstars:=true;
           ok := catalog.SearchVarStar(num, ar1, de1);
           itype := ftVar;
           stype := 'V*';
         end;
         5:
         begin
+          sc.cfgsc.showstars:=true;
           ok := catalog.SearchDblStar(num, ar1, de1);
           itype := ftDbl;
           stype := 'D*';
         end;
         6:
         begin
+          sc.cfgsc.ShowComet:=true;
           ok := planet.FindCometName(trim(num), ar1, de1, mag, sc.cfgsc, True);
           itype := ftCom;
           stype := 'Cm';
         end;
         7:
         begin
+          sc.cfgsc.ShowAsteroid:=true;
           ok := planet.FindAsteroidName(trim(num), ar1, de1, mag, sc.cfgsc, True);
           itype := ftAst;
           stype := 'As';
         end;
         8:
         begin
+          sc.cfgsc.ShowPlanet:=true;
           ok := planet.FindPlanetName(trim(num), ar1, de1, sc.cfgsc);
           itype := ftPla;
           stype := 'P';
