@@ -1051,6 +1051,7 @@ const
 begin
   prgdir := slash(appdir) + slash('data') + slash('quicksat');
   iridir := slash(appdir) + slash('data') + slash('iridflar');
+  config.tz.JD := date1.JD;
   dat61 := date1.jd;
   djd(dat61, j, m, a, h);
   FreeCoord(SatGrid);
