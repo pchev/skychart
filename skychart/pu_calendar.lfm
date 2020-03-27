@@ -809,9 +809,9 @@ object f_calendar: Tf_calendar
           TabOrder = 3
         end
         object fullday: TCheckBox
-          Left = 461
+          Left = 464
           Height = 21
-          Top = 39
+          Top = 6
           Width = 158
           Caption = 'Include day time pass'
           ParentFont = False
@@ -881,7 +881,7 @@ object f_calendar: Tf_calendar
         object LabelTle: TLabel
           Left = 206
           Height = 19
-          Top = 45
+          Top = 56
           Width = 52
           Caption = 'LabelTle'
           ParentColor = False

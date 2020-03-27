@@ -1038,20 +1038,19 @@ end;
 
 procedure Tf_calendar.RefreshSatellite;
 var
-  f, fi: textfile;
-  buf, mm, y, d, ed, dt, hh, mi, ss, dat1, s1, s2: string;
-  bufi, prgdir, iridir, srcdir, wrkdir: string;
-  h, jda, ar, de, ma: double;
-  hi, jdi, ari, dei: double;
+  f: textfile;
+  buf, mm, y, d, ed, hh, mi, ss, dat1, s1, s2: string;
+  prgdir,  srcdir, wrkdir: string;
+  h, jda, ar, de, ma, tzo: double;
+  th,tm,ts,tms: word;
   i, k, a, m, j: integer;
-  ai, mmi, ji: integer;
 const
   mois: array[1..12] of string =
     ('Jan ', 'Feb ', 'Mar ', 'Apr ', 'May ', 'June', 'July', 'Aug ', 'Sept', 'Oct ', 'Nov ', 'Dec ');
 begin
   prgdir := slash(appdir) + slash('data') + slash('quicksat');
-  iridir := slash(appdir) + slash('data') + slash('iridflar');
   config.tz.JD := date1.JD;
+  tzo := config.tz.SecondsOffset / 3600;
   dat61 := date1.jd;
   djd(dat61, j, m, a, h);
   FreeCoord(SatGrid);
@@ -1062,7 +1061,6 @@ begin
     screen.Cursor := crHourGlass;
     Application.ProcessMessages;
     ed := IntToStr(a + round(date2.jd - date1.jd));
-    dt := IntToStr(1 + Trunc(date2.jd - date1.jd));
     srcdir := SysToUTF8(slash(prgdir));
     wrkdir := SysToUTF8(slash(satdir));
     DeleteFile(slash(satdir) + 'satlist.out');
@@ -1081,7 +1079,6 @@ begin
     end;
     Assignfile(f, slash(SatDir) + 'satlist.out');
     reset(f);
-    jdi := 1;
     i := 2;
     Readln(f, buf);
     Readln(f, buf);
@@ -1101,7 +1098,6 @@ begin
             m := k;
         d := copy(buf, 16, 2);
         j := StrToInt(d);
-        dat1 := y + '-' + padzeros(IntToStr(m), 2) + '-' + padzeros(d, 2);
         Readln(f, buf);
         Readln(f, buf);
         continue;
@@ -1112,11 +1108,16 @@ begin
       mi := padzeros(copy(buf, 4, 2), 2);
       ss := padzeros(copy(buf, 7, 2), 2);
       h := StrToInt(hh) + StrToInt(mi) / 60 + StrToInt(ss) / 3600;
-      jda := jd(a, m, j, h - (config.tz.SecondsOffset / 3600));
+      jda := jd(a, m, j, h - tzo);
+      config.tz.JD := jda;
+      djd(jda+config.tz.SecondsOffset/SecsPerDay,a,m,j,h);
+      DecodeTime(h/24,th,tm,ts,tms);
+      dat1 := padzeros(IntToStr(a), 4) + '-' + padzeros(IntToStr(m), 2) + '-' + padzeros(IntToStr(j), 2) +
+              ' ' +  padzeros(IntToStr(th), 2) + ':' +  padzeros(IntToStr(tm), 2) + ':' +  padzeros(IntToStr(ts), 2);
       with satgrid do
       begin
         RowCount := i + 1;
-        cells[0, i] := dat1 + ' ' + hh + ':' + mi + ':' + ss;
+        cells[0, i] := dat1;
         cells[1, i] := copy(buf, 66, 99);
         ma := strtofloat(copy(buf, 26, 4));
         if ma > 17.9 then
@@ -2296,6 +2297,7 @@ begin
           begin    // Satellites
             satmag := magchart.Text;
             sattle := tle1.Text;
+            config.tz.JD:=p.jd;
             DetailSat(p.jd, config.ObsLatitude, config.ObsLongitude,
               config.ObsAltitude, 0, 0, 0, 0, satmag, sattle, SatDir, slash(appdir) + slash(
               'data') + slash('quicksat'), formatfloat(f1, config.tz.SecondsOffset / 3600),
