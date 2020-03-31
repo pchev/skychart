@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2020-01-09 14:24+0000\n"
+"POT-Creation-Date: 2020-03-31 09:15+0000\n"
 "PO-Revision-Date: 2013-11-14 18:06+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Sinhalese <si@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-01-09 14:32+0000\n"
-"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
+"X-Launchpad-Export-Date: 2020-03-31 09:25+0000\n"
+"X-Generator: Launchpad (build a296f04231dee355be5db73cc878b9e21689a253)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2784,6 +2784,10 @@ msgstr ""
 msgid "Less stars"
 msgstr ""
 
+#: u_translation.rslha
+msgid "LHA"
+msgstr ""
+
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
 msgstr ""
@@ -2930,6 +2934,10 @@ msgstr ""
 
 #: u_translation.rslock
 msgid "Lock"
+msgstr ""
+
+#: u_translation.rslockchartpos
+msgid "Lock chart position"
 msgstr ""
 
 #: u_translation.rslockon
@@ -4318,6 +4326,10 @@ msgstr ""
 
 #: u_translation.rsremovelastla
 msgid "Remove last label"
+msgstr ""
+
+#: u_translation.rsreplacebytic
+msgid "Replace by tick mark"
 msgstr ""
 
 #: u_translation.rsreplacedby

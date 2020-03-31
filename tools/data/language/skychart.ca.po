@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-09 14:24+0000\n"
-"PO-Revision-Date: 2019-10-06 13:43+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2020-03-31 09:15+0000\n"
+"PO-Revision-Date: 2020-01-19 07:45+0000\n"
+"Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-01-09 14:32+0000\n"
-"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
+"X-Launchpad-Export-Date: 2020-03-31 09:24+0000\n"
+"X-Generator: Launchpad (build a296f04231dee355be5db73cc878b9e21689a253)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -1212,7 +1212,7 @@ msgstr "Culminació"
 
 #: u_translation.rscurrentchart
 msgid "Current chart coordinate system"
-msgstr ""
+msgstr "Sistema de coordenades de la carta actual"
 
 #: u_translation.rscurrentdate
 msgid "Date of validity"
@@ -1644,7 +1644,7 @@ msgstr "No activis %s com %s!"
 
 #: u_translation.rsdonotuserow1
 msgid "Do not use row %s, reserved for external software interface."
-msgstr ""
+msgstr "No useu la línia %s, reservada per a la interfície de programari extern."
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2164,7 +2164,7 @@ msgstr "Número de Flamsteed"
 
 #: u_translation.rsflipnsmoveme
 msgid "Flip N/S movement"
-msgstr ""
+msgstr "Invertir el moviment N/S"
 
 #: u_translation.rsfonts
 msgid "Fonts"
@@ -2184,7 +2184,7 @@ msgstr "Obligueu equatorials"
 
 #: u_translation.rsforcej2000
 msgid "Force J2000"
-msgstr ""
+msgstr "Obligar J2000"
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
@@ -2782,6 +2782,10 @@ msgstr "Menys  cel profund"
 msgid "Less stars"
 msgstr "Menys estels"
 
+#: u_translation.rslha
+msgid "LHA"
+msgstr ""
+
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
 msgstr "Libració en latitud"
@@ -2929,6 +2933,10 @@ msgstr "Lloc / Hora"
 #: u_translation.rslock
 msgid "Lock"
 msgstr "Bloca-ho"
+
+#: u_translation.rslockchartpos
+msgid "Lock chart position"
+msgstr ""
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -3148,7 +3156,7 @@ msgstr "Posició mitjana"
 
 #: u_translation.rsmeasurement
 msgid "Measurement"
-msgstr ""
+msgstr "Mesura"
 
 #: u_translation.rsmemo
 msgid "Memo"
@@ -3564,7 +3572,7 @@ msgstr "%sAltura"
 
 #: u_translation.rsobservationt
 msgid "Observation time"
-msgstr ""
+msgstr "Hora d'observació"
 
 #: u_translation.rsobservatory
 msgid "Observatory"
@@ -3920,7 +3928,7 @@ msgstr "Si us plau, proveu de reinstal·lar el programa"
 
 #: u_translation.rspleasewait
 msgid "Please wait..."
-msgstr ""
+msgstr "Si us plau, espereu..."
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
@@ -3988,11 +3996,11 @@ msgstr "Dades mensuals"
 
 #: u_translation.rsprepointing
 msgid "Pre-Pointing"
-msgstr ""
+msgstr "Pre-apuntat"
 
 #: u_translation.rsprepointline
 msgid "Pre-point line duration in minutes"
-msgstr ""
+msgstr "Durada en minuts de la línia de pre-apuntat"
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"
@@ -4120,7 +4128,7 @@ msgstr "Proporcional a la magnitud"
 
 #: u_translation.rsprotocoltrac
 msgid "Protocol trace"
-msgstr ""
+msgstr "Traça del protocol"
 
 #: u_translation.rsproxy
 msgid "Proxy"
@@ -4317,6 +4325,10 @@ msgstr "Suprimeix el darrer cercle"
 #: u_translation.rsremovelastla
 msgid "Remove last label"
 msgstr "Suprimeix la darrera etiqueta"
+
+#: u_translation.rsreplacebytic
+msgid "Replace by tick mark"
+msgstr ""
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"
@@ -4588,7 +4600,7 @@ msgstr "Índex de recerca"
 
 #: u_translation.rssearchradius
 msgid "Search radius"
-msgstr ""
+msgstr "Cercar el radi"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
@@ -4700,7 +4712,7 @@ msgstr "Envia la taula a"
 
 #: u_translation.rssendviaserve
 msgid "Send via server"
-msgstr ""
+msgstr "Envia via servidor"
 
 #: u_translation.rsseparation
 msgid "Separation"
@@ -5012,7 +5024,7 @@ msgstr "Ves a (Goto)"
 
 #: u_translation.rsslewcomplete
 msgid "Slew complete"
-msgstr ""
+msgstr "Desplaçament complet"
 
 #: u_translation.rsslewingto
 msgid "Slewing to %s / %s"

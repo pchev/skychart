@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-09 14:24+0000\n"
+"POT-Creation-Date: 2020-03-31 09:15+0000\n"
 "PO-Revision-Date: 2017-01-14 17:39+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-01-09 14:32+0000\n"
-"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
+"X-Launchpad-Export-Date: 2020-03-31 09:24+0000\n"
+"X-Generator: Launchpad (build a296f04231dee355be5db73cc878b9e21689a253)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -2785,6 +2785,10 @@ msgstr "Méně deep sky"
 msgid "Less stars"
 msgstr "Méně hvězd"
 
+#: u_translation.rslha
+msgid "LHA"
+msgstr ""
+
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
 msgstr "Librace v šířce"
@@ -2931,6 +2935,10 @@ msgstr ""
 
 #: u_translation.rslock
 msgid "Lock"
+msgstr ""
+
+#: u_translation.rslockchartpos
+msgid "Lock chart position"
 msgstr ""
 
 #: u_translation.rslockon
@@ -4320,6 +4328,10 @@ msgstr "Odstranit poslední kružnici"
 #: u_translation.rsremovelastla
 msgid "Remove last label"
 msgstr "Odstranit poslední popisek"
+
+#: u_translation.rsreplacebytic
+msgid "Replace by tick mark"
+msgstr ""
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"

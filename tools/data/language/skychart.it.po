@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-09 14:24+0000\n"
+"POT-Creation-Date: 2020-03-31 09:15+0000\n"
 "PO-Revision-Date: 2019-10-25 18:30+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-01-09 14:32+0000\n"
-"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
+"X-Launchpad-Export-Date: 2020-03-31 09:24+0000\n"
+"X-Generator: Launchpad (build a296f04231dee355be5db73cc878b9e21689a253)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -2782,6 +2782,10 @@ msgstr "Meno profondo cielo"
 msgid "Less stars"
 msgstr "Meno stelle"
 
+#: u_translation.rslha
+msgid "LHA"
+msgstr ""
+
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
 msgstr "Librazione in latitudine"
@@ -2929,6 +2933,10 @@ msgstr "Luogo / Tempo"
 #: u_translation.rslock
 msgid "Lock"
 msgstr "Blocco"
+
+#: u_translation.rslockchartpos
+msgid "Lock chart position"
+msgstr ""
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -4317,6 +4325,10 @@ msgstr "Rimuovi l'ultimo campo"
 #: u_translation.rsremovelastla
 msgid "Remove last label"
 msgstr "Rimuovi l'ultima etichetta"
+
+#: u_translation.rsreplacebytic
+msgid "Replace by tick mark"
+msgstr ""
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"

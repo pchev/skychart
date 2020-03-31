@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-09 14:24+0000\n"
-"PO-Revision-Date: 2020-01-09 14:28+0000\n"
+"POT-Creation-Date: 2020-03-31 09:15+0000\n"
+"PO-Revision-Date: 2020-03-31 09:22+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-01-09 14:32+0000\n"
-"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
+"X-Launchpad-Export-Date: 2020-03-31 09:24+0000\n"
+"X-Generator: Launchpad (build a296f04231dee355be5db73cc878b9e21689a253)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -2785,6 +2785,10 @@ msgstr "Moins de nébuleuses"
 msgid "Less stars"
 msgstr "Moins d'étoiles"
 
+#: u_translation.rslha
+msgid "LHA"
+msgstr "AHL"
+
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
 msgstr "Libration en latitude"
@@ -2932,6 +2936,10 @@ msgstr "Définir le lieu et l'heure"
 #: u_translation.rslock
 msgid "Lock"
 msgstr "Verrouiller"
+
+#: u_translation.rslockchartpos
+msgid "Lock chart position"
+msgstr "Bloque la position de la carte"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -3211,7 +3219,7 @@ msgstr "Miroir horizontal"
 
 #: u_translation.rsmirrorvertic
 msgid "Mirror vertically"
-msgstr "Mirroir vertical"
+msgstr "Miroir vertical"
 
 #: u_translation.rsmisclines
 msgid "Misc. lines"
@@ -4320,6 +4328,10 @@ msgstr "Supprime le dernier cercle"
 #: u_translation.rsremovelastla
 msgid "Remove last label"
 msgstr "Supprime le dernier label"
+
+#: u_translation.rsreplacebytic
+msgid "Replace by tick mark"
+msgstr "Remplace par une croix"
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"

@@ -5962,3 +5962,15 @@ msgstr ""
 msgid "Do not use row %s, reserved for external software interface."
 msgstr ""
 
+#: u_translation:rslha
+msgid "LHA"
+msgstr ""
+
+#: u_translation:rslockchartpos
+msgid "Lock chart position"
+msgstr ""
+
+#: u_translation:rsreplacebytic
+msgid "Replace by tick mark"
+msgstr ""
+

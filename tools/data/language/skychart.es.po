@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-09 14:24+0000\n"
-"PO-Revision-Date: 2019-12-22 13:18+0000\n"
+"POT-Creation-Date: 2020-03-31 09:15+0000\n"
+"PO-Revision-Date: 2020-01-09 16:14+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-01-09 14:32+0000\n"
-"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
+"X-Launchpad-Export-Date: 2020-03-31 09:24+0000\n"
+"X-Generator: Launchpad (build a296f04231dee355be5db73cc878b9e21689a253)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -1645,7 +1645,7 @@ msgstr "¡No ejecutar %s como %s!"
 
 #: u_translation.rsdonotuserow1
 msgid "Do not use row %s, reserved for external software interface."
-msgstr ""
+msgstr "No use la fila %s, reservada para la interfaz con software externo."
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2783,6 +2783,10 @@ msgstr "Menos nebulosas"
 msgid "Less stars"
 msgstr "Menos estrellas"
 
+#: u_translation.rslha
+msgid "LHA"
+msgstr ""
+
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
 msgstr "Libración en latitud"
@@ -2930,6 +2934,10 @@ msgstr "Lugar / Hora"
 #: u_translation.rslock
 msgid "Lock"
 msgstr "Bloquear"
+
+#: u_translation.rslockchartpos
+msgid "Lock chart position"
+msgstr ""
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -3149,7 +3157,7 @@ msgstr "Posición promedio"
 
 #: u_translation.rsmeasurement
 msgid "Measurement"
-msgstr ""
+msgstr "Medición"
 
 #: u_translation.rsmemo
 msgid "Memo"
@@ -3565,7 +3573,7 @@ msgstr "%sElevación"
 
 #: u_translation.rsobservationt
 msgid "Observation time"
-msgstr ""
+msgstr "Hora de observación"
 
 #: u_translation.rsobservatory
 msgid "Observatory"
@@ -3989,11 +3997,11 @@ msgstr "Preparar datos mensuales"
 
 #: u_translation.rsprepointing
 msgid "Pre-Pointing"
-msgstr ""
+msgstr "Pre-apuntado"
 
 #: u_translation.rsprepointline
 msgid "Pre-point line duration in minutes"
-msgstr ""
+msgstr "Duración de la línea de pre-apuntado en minutos"
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"
@@ -4318,6 +4326,10 @@ msgstr "Eliminar el ultimo círculo"
 #: u_translation.rsremovelastla
 msgid "Remove last label"
 msgstr "Quitar la última etiqueta"
+
+#: u_translation.rsreplacebytic
+msgid "Replace by tick mark"
+msgstr ""
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"
