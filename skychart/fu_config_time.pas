@@ -257,7 +257,7 @@ begin
   stepunit.items[2] := rsMinute;
   stepunit.items[3] := rsSecond;
   stepline.Caption := rsConnectionLi;
-  stepmark.Caption := rsShowMark;
+  stepmark.Caption := rsReplaceByTic;
   SimObj.items[0] := rsSun;
   SimObj.items[1] := rsMercury;
   SimObj.items[2] := rsVenus;

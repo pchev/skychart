@@ -1548,6 +1548,7 @@ resourcestring
   rsDoNotUseRow1 = 'Do not use row %s, reserved for external software interface.';
   rsLHA = 'LHA';
   rsLockChartPos = 'Lock chart position';
+  rsReplaceByTic = 'Replace by tick mark';
 
 // also update upsi_translation
 
