@@ -684,6 +684,7 @@ begin
   try
     if DB.Active then
     begin
+      Result:='Wrong data!';
       id := trim(copy(comid, 1, 7));
       buf := comt;
       p := pos('.', buf);
@@ -693,9 +694,15 @@ begin
       m := StrToInt(trim(copy(buf, 1, p - 1)));
       Delete(buf, 1, p);
       p := pos('.', buf);
-      d := StrToInt(trim(copy(buf, 1, p - 1)));
-      Delete(buf, 1, p);
-      hh := strtofloat(trim('0.' + trim(buf))) * 24;
+      if p>0 then begin
+        d := StrToInt(trim(copy(buf, 1, p - 1)));
+        Delete(buf, 1, p);
+        hh := strtofloat(trim('0.' + trim(buf))) * 24;
+      end
+      else begin
+        d := StrToInt(trim(buf));
+        hh:=0;
+      end;
       t := formatfloat(f6, jd(y, m, d, hh));
       ep := trim(comep);
       if ep = '' then
