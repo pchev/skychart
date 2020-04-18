@@ -4308,139 +4308,136 @@ begin
     txt := txt + html_br;
 
   // local position
-  if (sc.cfgsc.Equinoxtype = 2) then
+  if not cmain.SimpleDetail then
   begin
-    if not cmain.SimpleDetail then
+    txt := txt + html_b + rsVisibilityFo + ':' + htms_b + html_br;
+    djd(cjd + (sc.cfgsc.TimeZone - sc.cfgsc.DT_UT) / 24, y, m, d, h);
+    txt := txt + sc.cfgsc.ObsName + blank + Date2Str(y, m, d) + blank + ArToStr3(h) +
+      '  ( ' + TzGMT2UTC(sc.cfgsc.tz.ZoneName) + ' )' + html_br;
+    djd(cjd - sc.cfgsc.DT_UT / 24, y, m, d, h);
+    txt := txt + html_b + rsUniversalTim + ':' + htms_b + blank + date2str(y, m, d) + 'T' + timtostr(h);
+    txt := txt + blank + 'JD=' + formatfloat(f5, cjd - sc.cfgsc.DT_UT / 24) + html_br;
+
+    err := DTminusUTError(y, m, d, sc.cfgsc);
+    if abs(err) > 0 then
     begin
-      txt := txt + html_b + rsVisibilityFo + ':' + htms_b + html_br;
-      djd(cjd + (sc.cfgsc.TimeZone - sc.cfgsc.DT_UT) / 24, y, m, d, h);
-      txt := txt + sc.cfgsc.ObsName + blank + Date2Str(y, m, d) + blank + ArToStr3(h) +
-        '  ( ' + TzGMT2UTC(sc.cfgsc.tz.ZoneName) + ' )' + html_br;
-      djd(cjd - sc.cfgsc.DT_UT / 24, y, m, d, h);
-      txt := txt + html_b + rsUniversalTim + ':' + htms_b + blank + date2str(y, m, d) + 'T' + timtostr(h);
-      txt := txt + blank + 'JD=' + formatfloat(f5, cjd - sc.cfgsc.DT_UT / 24) + html_br;
+      txt := txt + html_b + rsDeltaTError + ': ' + htms_b + blank + plusminus + ARtoStr(err / 3600) + html_br;
+    end
+    else if abs(err) > 10 then
+    begin
+      txt := txt + html_b + rsDeltaTError + ': ' + htms_b + blank + plusminus + IntToStr(
+        round(err)) + blank + rsSec2 + html_br;
+    end;
 
-      err := DTminusUTError(y, m, d, sc.cfgsc);
-      if abs(err) > 0 then
-      begin
-        txt := txt + html_b + rsDeltaTError + ': ' + htms_b + blank + plusminus + ARtoStr(err / 3600) + html_br;
-      end
-      else if abs(err) > 10 then
-      begin
-        txt := txt + html_b + rsDeltaTError + ': ' + htms_b + blank + plusminus + IntToStr(
-          round(err)) + blank + rsSec2 + html_br;
-      end;
-
+    ra := sc.cfgsc.FindRA;
+    Dec := sc.cfgsc.FindDec;
+    precession(sc.cfgsc.JDChart, cjd - sc.cfgsc.DT_UT / 24, ra, Dec);
+    Eq2Hz(cst - ra, Dec, a, h, sc.cfgsc, 2);
+    Eq2Hz(cst - ra, Dec, ag, hg, sc.cfgsc, 0);
+    if sc.catalog.cfgshr.AzNorth then
+      a := Rmod(a + pi, pi2);
+    txt := txt + html_b + rsLocalSideral + ': ' + htms_b + artostr3(
+      rmod(rad2deg * cst / 15 + 24, 24)) + html_br;
+    lha:=rmod(cst-ra+pi2,pi2);
+    if lha>pi then lha:=lha-pi2;
+    txt := txt + html_b + rsHourAngle + ': ' + htms_b + ARToStr(rad2deg * lha / 15) + html_br;
+    txt := txt + html_b + rsAzimuth + ': ' + htms_b + LONToStr(rad2deg * a) + html_br;
+    if h >= sc.cfgsc.ObsHorizonDepression then
+      txt := txt + html_b + rsAltitude + ': ' + htms_b + deptostr(rad2deg * h, 1) + html_br;
+    // show refracted altitude only if above the horizon
+    txt := txt + html_b + rsGeometricAlt + ': ' + htms_b + deptostr(rad2deg * hg, 1) + html_br;
+    if h > 0 then
+    begin
+      airm := AirMass(h);
+      txt := txt + html_b + rsAirmass + ': ' + htms_b + FormatFloat(f1, airm) + html_br;
+    end;
+  end;
+  if (not isArtSat) then
+  begin
+    // rise/set time
+    if (otype = 'P') then
+    begin // planet
+      sc.planet.PlanetRiseSet(ipla, cjd0, sc.catalog.cfgshr.AzNorth,
+        thr, tht, ths, tazr, tazs, j1, j2, j3, rar, der, rat, det, ras, des, i, sc.cfgsc);
+    end
+    else if (otype = 'S*') and (oname = pla[10]) then
+    begin // Sun
+      sc.planet.PlanetRiseSet(10, cjd0, sc.catalog.cfgshr.AzNorth, thr,
+        tht, ths, tazr, tazs, j1, j2, j3, rar, der, rat, det, ras, des, i, sc.cfgsc);
+    end
+    else if (otype = 'Ps') and (ipla = 11) then
+    begin // Moon
+      sc.planet.PlanetRiseSet(ipla, cjd0, sc.catalog.cfgshr.AzNorth,
+        thr, tht, ths, tazr, tazs, j1, j2, j3, rar, der, rat, det, ras, des, i, sc.cfgsc);
+    end
+    else
+    begin // fixed object
       ra := sc.cfgsc.FindRA;
       Dec := sc.cfgsc.FindDec;
-      precession(sc.cfgsc.JDChart, cjd - sc.cfgsc.DT_UT / 24, ra, Dec);
-      Eq2Hz(cst - ra, Dec, a, h, sc.cfgsc, 2);
-      Eq2Hz(cst - ra, Dec, ag, hg, sc.cfgsc, 0);
+      precession(sc.cfgsc.JDChart, cjd, ra, Dec);
+      rar:=ra;
+      der:=dec;
+      ras:=ra;
+      des:=dec;
+      RiseSet(cjd0, ra, Dec, hr, ht, hs, azr, azs, i, sc.cfgsc);
       if sc.catalog.cfgshr.AzNorth then
-        a := Rmod(a + pi, pi2);
-      txt := txt + html_b + rsLocalSideral + ': ' + htms_b + artostr3(
-        rmod(rad2deg * cst / 15 + 24, 24)) + html_br;
-      lha:=rmod(cst-ra+pi2,pi2);
-      if lha>pi then lha:=lha-pi2;
-      txt := txt + html_b + rsHourAngle + ': ' + htms_b + ARToStr(rad2deg * lha / 15) + html_br;
-      txt := txt + html_b + rsAzimuth + ': ' + htms_b + LONToStr(rad2deg * a) + html_br;
-      if h >= sc.cfgsc.ObsHorizonDepression then
-        txt := txt + html_b + rsAltitude + ': ' + htms_b + deptostr(rad2deg * h, 1) + html_br;
-      // show refracted altitude only if above the horizon
-      txt := txt + html_b + rsGeometricAlt + ': ' + htms_b + deptostr(rad2deg * hg, 1) + html_br;
-      if h > 0 then
       begin
-        airm := AirMass(h);
-        txt := txt + html_b + rsAirmass + ': ' + htms_b + FormatFloat(f1, airm) + html_br;
+        Azr := rmod(Azr + pi, pi2);
+        Azs := rmod(Azs + pi, pi2);
+      end;
+      thr := artostr3(rmod(hr + 24, 24));
+      tht := artostr3(rmod(ht + 24, 24));
+      ths := artostr3(rmod(hs + 24, 24));
+      tazr := LONmToStr(rad2deg * Azr);
+      tazs := LONmToStr(rad2deg * Azs);
+    end;
+    if sc.cfgsc.HorizonRise and (sc.cfgsc.HorizonMax > musec) then begin
+      if ObjRise(rar,der,sc.cfgsc,hrl,al,ii) then begin
+         thr := rsLocalHorizon + blank + artostr3(rmod(hrl + 24, 24));
+         tazr:=LONmToStr(rad2deg * al);
+         i:=ii;
+      end;
+      if ObjSet(ras,des,sc.cfgsc,hsl,al,ii) then begin
+         ths := rsLocalHorizon + blank + artostr3(rmod(hsl + 24, 24));
+         tazs:=LONmToStr(rad2deg * al);
+         i:=ii;
       end;
     end;
-    if (not isArtSat) then
-    begin
-      // rise/set time
-      if (otype = 'P') then
-      begin // planet
-        sc.planet.PlanetRiseSet(ipla, cjd0, sc.catalog.cfgshr.AzNorth,
-          thr, tht, ths, tazr, tazs, j1, j2, j3, rar, der, rat, det, ras, des, i, sc.cfgsc);
-      end
-      else if (otype = 'S*') and (oname = pla[10]) then
-      begin // Sun
-        sc.planet.PlanetRiseSet(10, cjd0, sc.catalog.cfgshr.AzNorth, thr,
-          tht, ths, tazr, tazs, j1, j2, j3, rar, der, rat, det, ras, des, i, sc.cfgsc);
-      end
-      else if (otype = 'Ps') and (ipla = 11) then
-      begin // Moon
-        sc.planet.PlanetRiseSet(ipla, cjd0, sc.catalog.cfgshr.AzNorth,
-          thr, tht, ths, tazr, tazs, j1, j2, j3, rar, der, rat, det, ras, des, i, sc.cfgsc);
-      end
-      else
-      begin // fixed object
-        ra := sc.cfgsc.FindRA;
-        Dec := sc.cfgsc.FindDec;
-        rar:=ra;
-        der:=dec;
-        ras:=ra;
-        des:=dec;
-        precession(sc.cfgsc.JDChart, cjd, ra, Dec);
-        RiseSet(cjd0, ra, Dec, hr, ht, hs, azr, azs, i, sc.cfgsc);
-        if sc.catalog.cfgshr.AzNorth then
-        begin
-          Azr := rmod(Azr + pi, pi2);
-          Azs := rmod(Azs + pi, pi2);
-        end;
-        thr := artostr3(rmod(hr + 24, 24));
-        tht := artostr3(rmod(ht + 24, 24));
-        ths := artostr3(rmod(hs + 24, 24));
-        tazr := LONmToStr(rad2deg * Azr);
-        tazs := LONmToStr(rad2deg * Azs);
-      end;
-      if sc.cfgsc.HorizonRise and (sc.cfgsc.HorizonMax > musec) then begin
-        if ObjRise(rar,der,sc.cfgsc,hrl,al,ii) then begin
-           thr := rsLocalHorizon + blank + artostr3(rmod(hrl + 24, 24));
-           tazr:=LONmToStr(rad2deg * al);
-           i:=ii;
-        end;
-        if ObjSet(ras,des,sc.cfgsc,hsl,al,ii) then begin
-           ths := rsLocalHorizon + blank + artostr3(rmod(hsl + 24, 24));
-           tazs:=LONmToStr(rad2deg * al);
-           i:=ii;
-        end;
-      end;
-      culmalt := 90 - sc.cfgsc.ObsLatitude + rad2deg * sc.cfgsc.FindDec;
-      if culmalt > 90 then
-        culmalt := 180 - culmalt;
-      if culmalt > -1 then
-        culmalt := min(90, culmalt + sc.cfgsc.ObsRefractionCor *
-          (1.02 / tan(deg2rad * (culmalt + 10.3 / (culmalt + 5.11)))) / 60)
-      else
-        culmalt := culmalt + 0.64658062088;
-      if (not cmain.SimpleDetail) then
-        tculmalt := demtostr(culmalt)
-      else
-        tculmalt := '';
-      case i of
-        0:
-        begin
-          txt := txt + html_b + rsRise + ':' + htms_b + thr + blank;
-          if (not cmain.SimpleDetail) and (trim(tazr) > '') then
-            txt := txt + rsAzimuth + ':' + tAzr + html_br
-          else
-            txt := txt + html_br;
-          txt := txt + html_b + rsTransit + ':' + htms_b + tht + blank + tculmalt + html_br;
-          txt := txt + html_b + rsSet + ':' + htms_b + ths + blank;
-          if (not cmain.SimpleDetail) and (trim(tazs) > '') then
-            txt := txt + rsAzimuth + ':' + tAzs + html_br
-          else
-            txt := txt + html_br;
-        end;
-        1:
-        begin
-          txt := txt + rsCircumpolar + html_br;
-          txt := txt + html_b + rsCulmination + ':' + htms_b + tht + blank + tculmalt + html_br;
-        end;
+    culmalt := 90 - sc.cfgsc.ObsLatitude + rad2deg * sc.cfgsc.FindDec;
+    if culmalt > 90 then
+      culmalt := 180 - culmalt;
+    if culmalt > -1 then
+      culmalt := min(90, culmalt + sc.cfgsc.ObsRefractionCor *
+        (1.02 / tan(deg2rad * (culmalt + 10.3 / (culmalt + 5.11)))) / 60)
+    else
+      culmalt := culmalt + 0.64658062088;
+    if (not cmain.SimpleDetail) then
+      tculmalt := demtostr(culmalt)
+    else
+      tculmalt := '';
+    case i of
+      0:
+      begin
+        txt := txt + html_b + rsRise + ':' + htms_b + thr + blank;
+        if (not cmain.SimpleDetail) and (trim(tazr) > '') then
+          txt := txt + rsAzimuth + ':' + tAzr + html_br
         else
-        begin
-          txt := txt + rsInvisibleAtT + html_br;
-        end;
+          txt := txt + html_br;
+        txt := txt + html_b + rsTransit + ':' + htms_b + tht + blank + tculmalt + html_br;
+        txt := txt + html_b + rsSet + ':' + htms_b + ths + blank;
+        if (not cmain.SimpleDetail) and (trim(tazs) > '') then
+          txt := txt + rsAzimuth + ':' + tAzs + html_br
+        else
+          txt := txt + html_br;
+      end;
+      1:
+      begin
+        txt := txt + rsCircumpolar + html_br;
+        txt := txt + html_b + rsCulmination + ':' + htms_b + tht + blank + tculmalt + html_br;
+      end;
+      else
+      begin
+        txt := txt + rsInvisibleAtT + html_br;
       end;
     end;
   end;
