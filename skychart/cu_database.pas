@@ -679,7 +679,7 @@ var
   buf, cmd, filedesc, filenum: string;
   t, q, ep, id, nam, ec, i, node, peri, eq, h, g: string;
   y, m, d, p: integer;
-  hh: double;
+  hh,x: double;
 begin
   try
     if DB.Active then
@@ -704,11 +704,11 @@ begin
         hh:=0;
       end;
       t := formatfloat(f6, jd(y, m, d, hh));
-      ep := trim(comep);
-      if ep = '' then
-      begin
+      x:=StrToFloatDef(trim(comep),0);
+      if x>0 then
+        ep:=formatfloat(f1, x)
+      else
         ep := formatfloat(f1, jd(y, m, d, hh));
-      end;
       q := trim(comq);
       ec := trim(comec);
       peri := trim(comperi);
