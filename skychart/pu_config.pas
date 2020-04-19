@@ -50,7 +50,7 @@ type
     f_config_system1: Tf_config_system;
     f_config_time1: Tf_config_time;
     PageControl1: TPageControl;
-    Panel1: TPanel;
+    PanelConfig: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
     Splitter1: TSplitter;
@@ -67,7 +67,7 @@ type
     TreeView1: TTreeView;
     previous: TButton;
     Next: TButton;
-    Panel2: TPanel;
+    PanelBottom: TPanel;
     Applyall: TCheckBox;
     OKBtn: TButton;
     Apply: TButton;

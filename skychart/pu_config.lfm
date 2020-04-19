@@ -3,7 +3,7 @@ object f_config: Tf_config
   Height = 606
   Top = 197
   Width = 748
-  ActiveControl = Panel1
+  ActiveControl = PanelConfig
   BorderStyle = bsSingle
   Caption = 'Configuration'
   ClientHeight = 606
@@ -149,7 +149,7 @@ object f_config: Tf_config
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  object Panel2: TPanel
+  object PanelBottom: TPanel
     Left = 0
     Height = 41
     Top = 565
@@ -161,9 +161,9 @@ object f_config: Tf_config
     TabOrder = 0
     object Applyall: TCheckBox
       Left = 16
-      Height = 21
+      Height = 23
       Top = 12
-      Width = 183
+      Width = 185
       Caption = 'Apply Change To All Chart'
       Checked = True
       ParentFont = False
@@ -218,7 +218,7 @@ object f_config: Tf_config
       TabOrder = 4
     end
   end
-  object Panel1: TPanel
+  object PanelConfig: TPanel
     Left = 0
     Height = 565
     Top = 0
@@ -401,9 +401,15 @@ object f_config: Tf_config
             inherited PageControl1: TPageControl
               Height = 557
               Width = 495
+              ActivePage = f_config_system1.Page1
+              TabIndex = 0
               inherited Page1: TTabSheet
                 ClientHeight = 553
                 ClientWidth = 485
+                inherited Label14: TLabel
+                  Height = 19
+                  Width = 121
+                end
                 inherited LanguageList: TCheckListBox
                   Height = 416
                   Top = 58
@@ -429,12 +435,12 @@ object f_config: Tf_config
                   Width = 484
                   inherited TabSheet1: TTabSheet
                     ClientHeight = 356
-                    ClientWidth = 474
+                    ClientWidth = 480
                     inherited INDI: TPanel
                       Height = 334
                       Width = 460
-                      ClientHeight = 334
-                      ClientWidth = 460
+                      ClientHeight = 330
+                      ClientWidth = 456
                       inherited INDILabel: TLabel
                         Height = 19
                         Width = 64
@@ -442,7 +448,8 @@ object f_config: Tf_config
                       inherited ExternalControlPanel: TPanel
                         Top = 113
                         Width = 454
-                        ClientWidth = 454
+                        ClientHeight = 41
+                        ClientWidth = 450
                         inherited PanelCmd: TEdit
                           Left = 176
                           Width = 263
@@ -453,8 +460,9 @@ object f_config: Tf_config
                         end
                       end
                       inherited InternalIndiGui: TCheckBox
+                        Height = 23
                         Top = 81
-                        Width = 217
+                        Width = 219
                       end
                       inherited IndiMsg: TLabel
                         Height = 19
@@ -468,12 +476,11 @@ object f_config: Tf_config
                   end
                   inherited TabSheet2: TTabSheet
                     ClientHeight = 356
-                    ClientWidth = 474
+                    ClientWidth = 480
                     inherited TelescopeManual: TPanel
                       Height = 337
                       Width = 460
-                      ClientHeight = 337
-                      ClientWidth = 460
+                      ClientWidth = 456
                       inherited ManualMountType: TRadioGroup
                         Top = 107
                         Width = 369
@@ -562,12 +569,12 @@ object f_config: Tf_config
                   end
                   inherited TabSheet4: TTabSheet
                     ClientHeight = 356
-                    ClientWidth = 474
+                    ClientWidth = 480
                     inherited ASCOMPanel: TPanel
                       Height = 334
                       Width = 462
-                      ClientHeight = 334
-                      ClientWidth = 462
+                      ClientHeight = 330
+                      ClientWidth = 458
                       inherited ASCOMLabel: TLabel
                         Height = 236
                         Width = 409
@@ -576,12 +583,12 @@ object f_config: Tf_config
                   end
                   inherited TabSheet3: TTabSheet
                     ClientHeight = 356
-                    ClientWidth = 474
+                    ClientWidth = 480
                     inherited InterfacePanel: TPanel
                       Height = 334
                       Width = 462
-                      ClientHeight = 334
-                      ClientWidth = 462
+                      ClientHeight = 330
+                      ClientWidth = 458
                       inherited InterfaceLabel: TLabel
                         Height = 236
                         Width = 409
@@ -601,24 +608,29 @@ object f_config: Tf_config
                   ClientWidth = 462
                   inherited dbpass: TEdit
                     Left = 356
+                    Height = 36
                     Top = 66
                     Width = 102
                   end
                   inherited dbuser: TEdit
                     Left = 127
+                    Height = 36
                     Top = 66
                     Width = 102
                   end
                   inherited dbhost: TEdit
                     Left = 256
+                    Height = 36
                     Width = 67
                   end
                   inherited dbport: TLongEdit
                     Left = 399
+                    Height = 36
                     Width = 59
                   end
                   inherited dbname: TEdit
                     Left = 82
+                    Height = 36
                     Width = 67
                   end
                   inherited Label133: TLabel
@@ -632,9 +644,21 @@ object f_config: Tf_config
                   end
                   inherited Label85: TLabel
                     Left = 370
+                    Height = 19
+                    Width = 31
                   end
                   inherited Label84: TLabel
                     Left = 182
+                    Height = 19
+                    Width = 74
+                  end
+                  inherited Label77: TLabel
+                    Height = 19
+                    Width = 64
+                  end
+                  inherited MysqlBoxLabel: TLabel
+                    Height = 19
+                    Width = 94
                   end
                 end
                 inherited SqliteBox: TPanel
@@ -650,6 +674,14 @@ object f_config: Tf_config
                   inherited Label1: TLabel
                     Width = 111
                   end
+                  inherited SqliteBoxLabel: TLabel
+                    Height = 19
+                    Width = 92
+                  end
+                end
+                inherited Label153: TLabel
+                  Height = 19
+                  Width = 92
                 end
                 inherited GroupBoxDir: TGroupBox
                   Height = 64
@@ -669,7 +701,7 @@ object f_config: Tf_config
                   Height = 87
                   Top = 159
                   Width = 463
-                  ClientHeight = 67
+                  ClientHeight = 85
                   ClientWidth = 461
                   inherited chkdb: TButton
                     Width = 112
@@ -707,6 +739,8 @@ object f_config: Tf_config
                   ClientWidth = 461
                   inherited Label12: TLabel
                     Left = 207
+                    Height = 19
+                    Width = 134
                   end
                   inherited LinuxDesktopBox: TComboBox
                     Width = 131
@@ -722,6 +756,10 @@ object f_config: Tf_config
                   Width = 463
                   ClientHeight = 44
                   ClientWidth = 461
+                  inherited UseScaling: TCheckBox
+                    Height = 23
+                    Width = 284
+                  end
                 end
               end
               inherited Page4: TTabSheet
@@ -813,526 +851,78 @@ object f_config: Tf_config
         ClientWidth = 497
         ParentFont = False
         inline f_config_time1: Tf_config_time
-          Height = 553
-          Width = 491
+          Height = 559
+          Width = 497
           Align = alClient
-          ClientHeight = 553
-          ClientWidth = 491
+          ClientHeight = 559
+          ClientWidth = 497
           inherited MainPanel: TPanel
-            Height = 553
-            Width = 491
-            ClientHeight = 549
-            ClientWidth = 487
+            Height = 559
+            Width = 497
+            ClientHeight = 559
+            ClientWidth = 497
             inherited PageControl1: TPageControl
-              Height = 553
-              Width = 491
-              ActivePage = f_config_time1.Page2
-              TabIndex = 1
+              Height = 559
+              Width = 497
               inherited Page1: TTabSheet
-                ClientHeight = 549
+                ClientHeight = 555
                 ClientWidth = 487
-                inherited Label142: TLabel
-                  Left = 294
-                  Top = 58
-                end
                 inherited CheckBox2: TCheckBox
-                  Top = 58
+                  Height = 23
+                  Width = 149
                 end
                 inherited Panel8: TPanel
-                  Height = 156
-                  Top = 332
-                  Width = 425
-                  ClientHeight = 152
-                  inherited Label135: TLabel
-                    Top = 68
-                  end
-                  inherited Tdt_Ut: TLabel
-                    Left = 87
-                    Top = 68
-                  end
-                  inherited Label136: TLabel
-                    Left = 145
-                    Top = 68
-                  end
-                  inherited Label150: TLabel
-                    Top = 50
-                  end
                   inherited CheckBox4: TCheckBox
-                    Top = 90
+                    Height = 23
+                    Width = 178
                   end
-                  inherited TZComboBox: TComboBox
-                    Left = 131
-                    Width = 289
-                  end
-                  inherited dt_ut: TFloatEdit
-                    Left = 219
-                    Top = 90
-                    Width = 107
-                  end
-                  inherited Label12: TLabel
-                    Top = 125
-                  end
-                  inherited GregY: TLongEdit
-                    Left = 199
-                    Top = 122
-                    Width = 58
-                  end
-                  inherited GregM: TLongEdit
-                    Left = 262
-                    Top = 122
-                  end
-                  inherited GregD: TLongEdit
-                    Left = 302
-                    Top = 122
-                  end
-                  inherited ButtonDefGreg: TButton
-                    Left = 349
-                    Top = 120
-                    Width = 68
-                  end
-                end
-                inherited LongEdit2: TLongEdit
-                  Left = 234
-                  Top = 52
                 end
                 inherited Panel9: TPanel
-                  Height = 204
-                  Top = 88
-                  Width = 425
-                  ClientHeight = 200
-                  inherited Label137: TLabel
-                    Top = 77
-                  end
-                  inherited Label139: TLabel
-                    Left = 129
-                    Top = 54
-                  end
-                  inherited Label141: TLabel
-                    Left = 199
-                    Top = 54
-                  end
-                  inherited Label138: TLabel
-                    Left = 58
-                    Top = 54
-                  end
-                  inherited Label143: TLabel
-                    Left = 58
-                  end
-                  inherited Label144: TLabel
-                    Left = 129
-                  end
-                  inherited Label145: TLabel
-                    Left = 200
-                  end
-                  inherited Label1: TLabel
-                    Top = 112
-                  end
-                  inherited tzLabel: TLabel
-                    Left = 273
-                    Top = 79
-                  end
                   inherited ADBC: TRadioGroup
-                    Left = 276
-                    Width = 139
-                    ClientHeight = 19
-                    ClientWidth = 137
-                  end
-                  inherited Button5: TButton
-                    Left = 266
-                    Top = 164
-                  end
-                  inherited Button6: TButton
-                    Left = 339
-                    Top = 164
-                    Width = 63
-                  end
-                  inherited BitBtn4: TButton
-                    Top = 164
-                    Width = 139
-                  end
-                  inherited BitBtn1: TBitBtn
-                    Left = 204
-                    Top = 109
-                  end
-                  inherited d_year: TMouseUpDown
-                    Left = 126
-                  end
-                  inherited d_monthEdit: TEdit
-                    Left = 138
-                  end
-                  inherited d_month: TMouseUpDown
-                    Left = 187
-                  end
-                  inherited d_dayEdit: TEdit
-                    Left = 199
-                  end
-                  inherited d_day: TMouseUpDown
-                    Left = 249
-                  end
-                  inherited t_hourEdit: TEdit
-                    Left = 58
-                    Top = 74
-                  end
-                  inherited t_hour: TMouseUpDown
-                    Left = 106
-                    Top = 75
-                  end
-                  inherited t_minEdit: TEdit
-                    Left = 129
-                    Top = 74
-                  end
-                  inherited t_min: TMouseUpDown
-                    Left = 178
-                    Top = 75
-                  end
-                  inherited t_sec: TMouseUpDown
-                    Left = 246
-                    Top = 74
-                  end
-                  inherited t_secEdit: TEdit
-                    Left = 199
-                    Top = 74
-                  end
-                  inherited Button8: TButton
-                    Left = 161
-                    Top = 164
-                    Width = 85
-                  end
-                  inherited d_yearEdit: TLongEdit
-                    Left = 58
-                    Width = 70
-                  end
-                  inherited UTLabel: TLabel
-                    Left = 241
-                    Top = 112
-                  end
-                  inherited dterr: TLabel
-                    Top = 138
-                  end
-                  inherited JDEdit: TFloatSpinEditEx
-                    Left = 58
-                    Top = 109
-                    Width = 133
+                    ClientHeight = 37
                   end
                 end
-                inherited Button4: TButton
-                  Top = 300
-                  Width = 121
+                inherited CheckBox1: TCheckBox
+                  Height = 23
+                  Width = 128
                 end
               end
               inherited Page2: TTabSheet
-                ClientHeight = 549
+                ClientHeight = 555
                 ClientWidth = 487
-                inherited stepreset: TSpeedButton
-                  Left = 224
-                  Top = 217
-                  Width = 83
-                end
-                inherited Label178: TLabel
-                  Left = 366
-                  Height = 17
-                  Width = 45
-                end
-                inherited Label179: TLabel
-                  Left = 224
-                  Height = 17
-                  Width = 108
-                end
-                inherited Label56: TLabel
-                  Height = 17
-                  Width = 277
-                end
-                inherited stepunit: TRadioGroup
-                  Left = 324
-                  Height = 138
-                  Top = 104
-                  Width = 139
-                  ClientHeight = 118
-                  ClientWidth = 137
-                end
                 inherited stepline: TCheckBox
-                  Top = 260
-                  Width = 287
+                  Height = 23
+                  Width = 274
                 end
                 inherited SimObj: TCheckListBox
-                  Height = 219
-                  Width = 194
-                  ItemHeight = 0
-                  TopIndex = -1
+                  ItemHeight = 25
                   Data = {
                     0C000000000000000000000000000000
                   }
                 end
-                inherited AllSim: TButton
-                  Left = 224
-                  Top = 120
-                  Width = 77
-                end
-                inherited NoSim: TButton
-                  Left = 224
-                  Top = 170
-                  Width = 77
-                end
                 inherited RadioGroup1: TRadioGroup
-                  Height = 86
-                  Top = 286
-                  Width = 448
-                  ClientHeight = 66
-                  ClientWidth = 446
                   inherited LongEdit1: TLongEdit
-                    Left = 299
-                    Width = 139
+                    Top = 30
                   end
                 end
                 inherited CheckGroup1: TCheckGroup
-                  Height = 52
-                  Top = 376
-                  Width = 448
-                  ClientHeight = 32
-                  ClientWidth = 446
                   Data = {
                     03000000020202
                   }
                 end
                 inherited CheckGroup2: TCheckGroup
-                  Height = 52
-                  Top = 433
-                  Width = 448
-                  ClientHeight = 32
-                  ClientWidth = 446
                   Data = {
                     06000000020202020202
                   }
                 end
-                inherited nbstep: TLongEdit
-                  Left = 224
-                  Top = 72
-                  Width = 77
-                end
-                inherited stepsize: TLongEdit
-                  Left = 366
-                  Top = 72
-                  Width = 77
-                end
-                inherited UpDown1: TMouseUpDown
-                  Left = 304
-                  Top = 73
-                end
-                inherited UpDown2: TMouseUpDown
-                  Left = 448
-                  Top = 73
-                end
                 inherited stepmark: TCheckBox
-                  Left = 324
-                  Top = 260
+                  Height = 23
                   Width = 86
-                end
-                object Panel1: TPanel[17]
-                  Left = 176
-                  Height = 34
-                  Top = 176
-                  Width = 304
-                  BevelOuter = bvNone
-                  ClientHeight = 30
-                  ClientWidth = 300
-                  TabOrder = 13
-                  object AsteroidFilter: TEdit
-                    Left = 0
-                    Height = 28
-                    Top = 4
-                    Width = 80
-                    Constraints.MaxHeight = 28
-                    ParentFont = False
-                    TabOrder = 0
-                  end
-                  object btnAstFilter: TButton
-                    Left = 80
-                    Height = 24
-                    Top = 4
-                    Width = 76
-                    BorderSpacing.InnerBorder = 4
-                    Caption = 'Filter ->'
-                    OnClick = btnAstFilterClick
-                    ParentFont = False
-                    TabOrder = 1
-                  end
-                  object AsteroidList: TComboBox
-                    Left = 160
-                    Height = 28
-                    Top = 4
-                    Width = 144
-                    Constraints.MaxHeight = 28
-                    ItemHeight = 0
-                    ParentFont = False
-                    Style = csDropDownList
-                    TabOrder = 2
-                  end
-                end
-                object Panel2: TPanel[18]
-                  Left = 176
-                  Height = 34
-                  Top = 214
-                  Width = 304
-                  BevelOuter = bvNone
-                  ClientHeight = 30
-                  ClientWidth = 300
-                  TabOrder = 14
-                  object CometFilter: TEdit
-                    Left = 0
-                    Height = 28
-                    Top = 4
-                    Width = 80
-                    Constraints.MaxHeight = 28
-                    ParentFont = False
-                    TabOrder = 0
-                  end
-                  object btnCometFilter: TButton
-                    Left = 80
-                    Height = 24
-                    Top = 4
-                    Width = 76
-                    BorderSpacing.InnerBorder = 4
-                    Caption = 'Filter ->'
-                    OnClick = btnCometFilterClick
-                    ParentFont = False
-                    TabOrder = 1
-                  end
-                  object CometList: TComboBox
-                    Left = 160
-                    Height = 28
-                    Top = 4
-                    Width = 144
-                    Constraints.MaxHeight = 28
-                    ItemHeight = 0
-                    ParentFont = False
-                    Style = csDropDownList
-                    TabOrder = 2
-                  end
                 end
               end
               inherited Page3: TTabSheet
-                ClientHeight = 549
+                ClientHeight = 555
                 ClientWidth = 487
-                inherited GroupBox1: TGroupBox
-                  Height = 82
-                  Width = 467
-                  ClientHeight = 62
-                  ClientWidth = 465
-                  inherited Label2: TLabel
-                    Height = 17
-                    Width = 141
-                  end
-                  inherited TrackBar1: TTrackBar
-                    Left = 178
-                    Height = 53
-                    Width = 204
-                  end
-                end
-                inherited GroupBox2: TGroupBox
-                  Height = 384
-                  Top = 104
-                  Width = 467
-                  ClientHeight = 364
-                  ClientWidth = 465
-                  inherited DirectoryEdit1: TDirectoryEdit
-                    Left = 194
-                    Top = 62
-                    Width = 239
-                  end
-                  inherited Label3: TLabel
-                    Height = 17
-                    Top = 67
-                    Width = 126
-                  end
-                  inherited Label4: TLabel
-                    Height = 17
-                    Top = 113
-                    Width = 105
-                  end
-                  inherited Edit1: TEdit
-                    Left = 194
-                    Top = 108
-                    Width = 115
-                  end
-                  inherited Label5: TLabel
-                    Height = 17
-                    Top = 189
-                    Width = 122
-                  end
-                  inherited Label6: TLabel
-                    Height = 17
-                    Top = 263
-                    Width = 168
-                  end
-                  inherited Edit2: TEdit
-                    Left = 194
-                    Top = 258
-                    Width = 239
-                  end
-                  inherited Label7: TLabel
-                    Height = 17
-                    Top = 225
-                    Width = 77
-                  end
-                  inherited Edit3: TEdit
-                    Left = 316
-                    Top = 220
-                    Width = 52
-                  end
-                  inherited Label8: TLabel
-                    Left = 372
-                    Height = 17
-                    Top = 225
-                    Width = 8
-                  end
-                  inherited Edit4: TEdit
-                    Left = 384
-                    Top = 220
-                    Width = 51
-                  end
-                  inherited ComboBox1: TComboBox
-                    Left = 194
-                    Top = 220
-                    Width = 115
-                  end
-                  inherited CheckBox3: TCheckBox
-                    Width = 403
-                  end
-                  inherited Label9: TLabel
-                    Height = 17
-                    Top = 147
-                    Width = 130
-                  end
-                  inherited Edit5: TEdit
-                    Left = 194
-                    Top = 142
-                    Width = 115
-                  end
-                  inherited Button9: TButton
-                    Left = 194
-                    Top = 328
-                    Width = 87
-                  end
-                  inherited Label10: TLabel
-                    Height = 17
-                    Top = 302
-                    Width = 138
-                  end
-                  inherited FileNameEdit1: TFileNameEdit
-                    Left = 194
-                    Top = 296
-                    Width = 239
-                  end
-                  inherited UpDown3: TMouseUpDown
-                    Left = 244
-                    Top = 182
-                  end
-                  inherited fpsedit: TLongEdit
-                    Left = 194
-                    Top = 182
-                    Width = 50
-                  end
-                end
               end
             end
           end
@@ -1376,6 +966,7 @@ object f_config: Tf_config
                   Width = 408
                 end
                 inherited HScrollBar: TScrollBar
+                  Height = 13
                   Top = 458
                   Width = 408
                 end
@@ -1383,6 +974,7 @@ object f_config: Tf_config
                   Left = 460
                   Height = 98
                   Top = 254
+                  Width = 13
                 end
                 inherited Latitude: TGroupBox
                   Height = 75
