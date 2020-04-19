@@ -3012,6 +3012,7 @@ begin
           continue;
         end;
       end;
+      if cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 5]<0 then continue;
       tar := NormRa(cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 1]);
       tde := cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 2];
       // search if this asteroid is at the position
@@ -3133,6 +3134,7 @@ begin
           continue;
         end;
       end;
+      if cfgsc.CometLst[CurrentComStep, CurrentComet, 8]<0 then continue;
       tar := NormRa(cfgsc.CometLst[CurrentComStep, CurrentComet, 1]);
       tde := cfgsc.CometLst[CurrentComStep, CurrentComet, 2];
       // search if this comet is at the position
