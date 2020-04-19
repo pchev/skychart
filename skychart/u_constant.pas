@@ -985,6 +985,7 @@ type
     projname: array [0..MaxField] of string[3];
     FlipX, FlipY, ProjPole, TrackType, TrackObj, AstSymbol, ComSymbol: integer;
     SimNb, SimD, SimH, SimM, SimS, SimLabel: integer;
+    SimComet, SimCometName, SimAsteroid, SimAsteroidName: string;
     SimObject: array[1..NumSimObject] of boolean;
     SimLine, SimMark, SimDateLabel, SimNameLabel, SimMagLabel,
     ShowPlanet, PlanetParalaxe, ShowEarthShadow, ShowAsteroid, ShowComet,
@@ -2270,6 +2271,10 @@ begin
   SimH := Source.SimH;
   SimM := Source.SimM;
   SimS := Source.SimS;
+  SimComet := Source.SimComet;
+  SimCometName := Source.SimCometName;
+  SimAsteroid := Source.SimAsteroid;
+  SimAsteroidName := Source.SimAsteroidName;
   SimLabel := Source.SimLabel;
   SimLine := Source.SimLine;
   SimMark := Source.SimMark;

@@ -4548,6 +4548,7 @@ begin
     ConfigTime.f_config_time1.cshr.Assign(catalog.cfgshr);
     ConfigTime.f_config_time1.cplot.Assign(def_cfgplot);
     ConfigTime.f_config_time1.csc.Assign(def_cfgsc);
+    ConfigTime.f_config_time1.cdb:=cdcdb;
     if MultiFrame1.ActiveObject is Tf_chart then
       with MultiFrame1.ActiveObject as Tf_chart do
       begin
@@ -5460,6 +5461,8 @@ begin
     catalog.cfgshr.Assign(cshr);
   if csc <> nil then
   begin
+    csc.ShowAsteroid := csc.ShowAsteroid or (csc.SimObject[12] and (csc.SimNb>1));
+    csc.ShowComet := csc.ShowComet or (csc.SimObject[13] and (csc.SimNb>1));
     showast := csc.ShowAsteroid;
     if (not csc.SunOnline) or (csc.sunurlname <> def_cfgsc.sunurlname) then
       DeleteFile(slash(Tempdir) + 'sun.jpg');
@@ -6307,6 +6310,10 @@ begin
   def_cfgsc.SimH := 0;
   def_cfgsc.SimM := 0;
   def_cfgsc.SimS := 0;
+  def_cfgsc.SimAsteroid := '';
+  def_cfgsc.SimAsteroidName := '';
+  def_cfgsc.SimComet := '';
+  def_cfgsc.SimCometName := '';
   def_cfgsc.SimLine := True;
   def_cfgsc.SimMark := True;
   for i := 1 to NumSimObject do
@@ -7338,6 +7345,10 @@ begin
         csc.SimS := ReadInteger(section, 'SimS', csc.SimS);
         csc.SimLine := ReadBool(section, 'SimLine', csc.SimLine);
         csc.SimMark := ReadBool(section, 'SimMark', csc.SimMark);
+        csc.SimAsteroid := ReadString(section, 'SimAsteroid', csc.SimAsteroid);
+        csc.SimComet := ReadString(section, 'SimComet', csc.SimComet);
+        csc.SimAsteroidName := ReadString(section, 'SimAsteroidName', csc.SimAsteroidName);
+        csc.SimCometName := ReadString(section, 'SimCometName', csc.SimCometName);
         for i := 1 to NumSimObject do
           csc.SimObject[i] := ReadBool(section, 'SimObject' +
             IntToStr(i), csc.SimObject[i]);
@@ -8659,6 +8670,10 @@ begin
         WriteInteger(section, 'SimS', csc.SimS);
         WriteBool(section, 'SimLine', csc.SimLine);
         WriteBool(section, 'SimMark', csc.SimMark);
+        WriteString(section, 'SimAsteroid', csc.SimAsteroid);
+        WriteString(section, 'SimComet', csc.SimComet);
+        WriteString(section, 'SimAsteroidName', csc.SimAsteroidName);
+        WriteString(section, 'SimCometName', csc.SimCometName);
         for i := 1 to NumSimObject do
           WriteBool(section, 'SimObject' + IntToStr(i), csc.SimObject[i]);
         for i := 1 to numlabtype do

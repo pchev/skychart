@@ -2816,6 +2816,7 @@ begin
           break;
         for i := 1 to cfgsc.AsteroidNb do
         begin
+         if (cfgsc.AsteroidLst[j, i, 5]>0) then begin
           ra := cfgsc.AsteroidLst[j, i, 1];
           Dec := cfgsc.AsteroidLst[j, i, 2];
           magn := cfgsc.AsteroidLst[j, i, 3];
@@ -2873,6 +2874,7 @@ begin
               SetLabel(lid, xx, yy, 0, 2, 10, ltxt, lalign, lori, 4, lopt);
             end;
           end;
+         end;
         end;
       end;
       Result := True;
@@ -2953,6 +2955,7 @@ begin
           break;
         for i := 1 to cfgsc.CometNb do
         begin
+         if (cfgsc.CometLst[j, i, 8]>0) then begin
           projection(cfgsc.CometLst[j, i, 1], cfgsc.CometLst[j, i, 2], x1, y1, True, cfgsc);
           WindowXY(x1, y1, xx, yy, cfgsc);
           if (xx > cfgsc.Xmin) and (xx < cfgsc.Xmax) and (yy > cfgsc.Ymin) and (yy < cfgsc.Ymax) then
@@ -3017,6 +3020,7 @@ begin
                  cfgsc.CometLst[j, i, 3], cfgsc.CometLst[j, i, 4], abs(cfgsc.BxGlb) * deg2rad / 60);
             end;
           end;
+         end;
         end;
       end;
       Result := True;
@@ -3308,7 +3312,7 @@ begin
     if cfgsc.SimObject[13] then
       for i := 1 to cfgsc.CometNb do
         for j := 0 to cfgsc.SimNb - 1 do
-        begin
+         if cfgsc.CometLst[j, i, 8]>0 then begin
           projection(cfgsc.CometLst[j, i, 1], cfgsc.CometLst[j, i, 2], x1, y1, True, cfgsc);
           windowxy(x1, y1, xx, yy, cfgsc);
           if (j <> 0) and ((xx > -dx) and (yy > -dy) and (xx < dx) and (yy < dy)) and
@@ -3328,7 +3332,7 @@ begin
     if cfgsc.SimObject[12] then
       for i := 1 to cfgsc.AsteroidNb do
         for j := 0 to cfgsc.SimNb - 1 do
-        begin
+         if cfgsc.AsteroidLst[j, i, 5]>0 then begin
           projection(cfgsc.AsteroidLst[j, i, 1], cfgsc.AsteroidLst[j, i, 2], x1, y1, True, cfgsc);
           windowxy(x1, y1, xx, yy, cfgsc);
           if (j <> 0) and ((xx > -dx) and (yy > -dy) and (xx < dx) and (yy < dy)) and

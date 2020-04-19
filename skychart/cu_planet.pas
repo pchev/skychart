@@ -2662,7 +2662,8 @@ begin
           (j * cfgsc.SimD * 24 + j * cfgsc.SimH + j * cfgsc.SimM / 60 + j * cfgsc.SimS / 3600) * 15 * deg2rad, pi2);
         for i := 0 to db2.Rowcount - 1 do
         begin
-          id := db2.Results[i][0];
+         id := db2.Results[i][0];
+         if (cfgsc.SimAsteroid='')or(cfgsc.SimAsteroid=id) then begin
           epoch := strtofloat(strim(db2.Results[i][1]));
           if cdb.GetAstElem(id, epoch, h, g, ma, ap, an, ic, ec, sa, eq, ref, nam, elem_id) then
           begin
@@ -2683,6 +2684,11 @@ begin
             cfgsc.AsteroidLst[j, i + 1, 4] := jdt;
             cfgsc.AsteroidLst[j, i + 1, 5] := epoch;
           end;
+         end
+         else begin
+           cfgsc.AsteroidName[j, i + 1, 1] := id;
+           cfgsc.AsteroidLst[j, i + 1, 5] := -1;
+         end;
         end;
       end;
     end;
@@ -2763,7 +2769,8 @@ begin
           (j * cfgsc.SimD * 24 + j * cfgsc.SimH + j * cfgsc.SimM / 60 + j * cfgsc.SimS / 3600) * 15 * deg2rad, pi2);
         for i := 0 to db2.Rowcount - 1 do
         begin
-          id := db2.Results[i][0];
+         id := db2.Results[i][0];
+         if (cfgsc.SimComet='')or(cfgsc.SimComet=id) then begin
           epoch := strtofloat(strim(db2.Results[i][1]));
           if cdb.GetComElem(id, epoch, tp, q, ec, ap, an, ic, h, g, eq, nam, elem_id) then
           begin
@@ -2794,6 +2801,11 @@ begin
             cfgsc.CometLst[j, i + 1, 7] := jdt;
             cfgsc.CometLst[j, i + 1, 8] := epoch;
           end;
+         end
+         else begin
+           cfgsc.CometName[j, i + 1, 1] := id;
+           cfgsc.CometLst[j, i + 1, 8] := -1;
+         end;
         end;
       end;
     end;

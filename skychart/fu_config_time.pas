@@ -27,16 +27,24 @@ interface
 
 uses
   u_help, u_translation, u_constant, u_util, u_projection, cu_tz, cu_radec,
+  cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math,
   StdCtrls, CheckLst, Buttons, ExtCtrls, enhedits, ComCtrls, LResources,
   ButtonPanel, jdcalendar, LazHelpHTML_fix, EditBtn, SpinEx;
+
+const
+  maxcombo = 500;
 
 type
 
   { Tf_config_time }
 
   Tf_config_time = class(TFrame)
+    AsteroidFilter: TEdit;
+    AsteroidList: TComboBox;
     BitBtn1: TBitBtn;
+    btnAstFilter: TButton;
+    btnCometFilter: TButton;
     ButtonDefGreg: TButton;
     Button4: TButton;
     Button5: TButton;
@@ -45,12 +53,16 @@ type
     Button8: TButton;
     Button9: TButton;
     CheckBox3: TCheckBox;
+    CometFilter: TEdit;
+    CometList: TComboBox;
     dt_ut: TFloatEdit;
     JDEdit: TFloatSpinEditEx;
     Label12: TLabel;
     GregY: TLongEdit;
     GregM: TLongEdit;
     GregD: TLongEdit;
+    PanelAst: TPanel;
+    PanelCom: TPanel;
     stepmark: TCheckBox;
     CheckGroup1: TCheckGroup;
     CheckGroup2: TCheckGroup;
@@ -134,7 +146,10 @@ type
     t_sec: TMouseUpDown;
     t_minEdit: TEdit;
     t_secEdit: TEdit;
+    procedure AsteroidListChange(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure btnAstFilterClick(Sender: TObject);
+    procedure btnCometFilterClick(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
@@ -147,6 +162,7 @@ type
     procedure CheckGroup1ItemClick(Sender: TObject; Index: integer);
     procedure CheckGroup2ItemClick(Sender: TObject; Index: integer);
     procedure ComboBox1Change(Sender: TObject);
+    procedure CometListChange(Sender: TObject);
     procedure DateEditChange(Sender: TObject);
     procedure DateClick(Sender: TObject; Button: TUDBtnType);
     procedure DirectoryEdit1Change(Sender: TObject);
@@ -186,6 +202,7 @@ type
     procedure UpDown3Click(Sender: TObject; Button: TUDBtnType);
   private
     { Private declarations }
+    cometid, astid : array[0..maxcombo] of string;
     LockChange, LockJD: boolean;
     FApplyConfig: TNotifyEvent;
     JDCalendarDialog1: TJDCalendarDialog;
@@ -194,6 +211,7 @@ type
     procedure ShowUTTime;
   public
     { Public declarations }
+    cdb: Tcdcdb;
     mycsc: Tconf_skychart;
     myccat: Tconf_catalog;
     mycshr: Tconf_shared;
@@ -365,6 +383,14 @@ begin
   if not csc.ShowPluto then
     csc.SimObject[9] := False;
   ShowTime;
+  if csc.SimAsteroidName<>'' then begin
+    AsteroidFilter.Text:=csc.SimAsteroidName;
+    btnAstFilterClick(nil);
+  end;
+  if csc.SimCometName<>'' then begin
+    CometFilter.Text:=csc.SimCometName;
+    btnCometFilterClick(nil);
+  end;
   // fill time zone
   TZComboBox.Clear;
   TZComboBox.ItemIndex := -1;
@@ -525,6 +551,8 @@ begin
     nbstep.MaxValue := 500;
     UpDown1.Max := 500;
   end;
+  panelast.Visible:=csc.SimObject[12];
+  panelcom.Visible:=csc.SimObject[13];
   if csc.SimLabel >= 0 then
   begin
     if csc.SimLabel > 3 then
@@ -1076,6 +1104,68 @@ begin
   Tdt_ut.Caption := dt_ut.Text;
 end;
 
+procedure Tf_config_time.btnAstFilterClick(Sender: TObject);
+var
+  list: TStringList;
+begin
+  list := TStringList.Create;
+  list.Add(rsAll);
+  try
+    Cdb.GetAsteroidList(AsteroidFilter.Text,maxcombo,list,astid);
+    AsteroidList.Items.Assign(list);
+    if list.Count>1 then
+      AsteroidList.ItemIndex:=1
+    else
+      AsteroidList.ItemIndex:=0;
+    AsteroidListChange(nil);
+  finally
+    List.Free
+  end;
+end;
+
+procedure Tf_config_time.btnCometFilterClick(Sender: TObject);
+var
+  list: TStringList;
+begin
+  list := TStringList.Create;
+  list.Add(rsAll);
+  try
+    Cdb.GetCometList(CometFilter.Text,maxcombo,list,cometid);
+    CometList.Items.Assign(list);
+    if list.Count>1 then
+      CometList.ItemIndex:=1
+    else
+      CometList.ItemIndex:=0;
+    CometListChange(nil);
+  finally
+    list.Free;
+  end;
+end;
+
+procedure Tf_config_time.AsteroidListChange(Sender: TObject);
+begin
+  if AsteroidList.ItemIndex<=0 then begin
+    csc.SimAsteroid:='';
+    csc.SimAsteroidName:='';
+  end
+  else begin
+    csc.SimAsteroid:=astid[AsteroidList.ItemIndex-1];
+    csc.SimAsteroidName:=AsteroidList.Text;
+  end;
+end;
+
+procedure Tf_config_time.CometListChange(Sender: TObject);
+begin
+  if CometList.ItemIndex<=0 then begin
+    csc.SimComet:='';
+    csc.SimCometName:='';
+  end
+  else begin
+    csc.SimComet:=cometid[CometList.ItemIndex-1];
+    csc.SimCometName:=CometList.Text;
+  end;
+end;
+
 procedure Tf_config_time.SimObjItemClick(Sender: TObject; Index: longint);
 var
   j: integer;
@@ -1096,6 +1186,16 @@ begin
       j := index;
   end;
   csc.SimObject[j] := SimObj.Checked[index];
+  panelast.Visible:=csc.SimObject[12];
+  if not csc.SimObject[12] then begin
+    AsteroidList.Clear;
+    AsteroidListChange(nil);
+  end;
+  panelcom.Visible:=csc.SimObject[13];
+  if not csc.SimObject[12] then begin
+    CometList.Clear;
+    CometListChange(nil);
+  end;
   if csc.SimObject[12] or csc.SimObject[13] then
   begin
     nbstep.MaxValue := MaxAstSim;
@@ -1185,6 +1285,10 @@ begin
   stepsize.Value := 1;
   stepunit.ItemIndex := 0;
   stepunitClick(Sender);
+  AsteroidList.Clear;
+  CometList.Clear;
+  AsteroidListChange(nil);
+  CometListChange(nil);
 end;
 
 procedure Tf_config_time.nbstepChanged(Sender: TObject);

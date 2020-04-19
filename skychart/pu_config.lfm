@@ -826,6 +826,8 @@ object f_config: Tf_config
             inherited PageControl1: TPageControl
               Height = 553
               Width = 491
+              ActivePage = f_config_time1.Page2
+              TabIndex = 1
               inherited Page1: TTabSheet
                 ClientHeight = 549
                 ClientWidth = 487
@@ -932,6 +934,7 @@ object f_config: Tf_config
                   inherited ADBC: TRadioGroup
                     Left = 276
                     Width = 139
+                    ClientHeight = 19
                     ClientWidth = 137
                   end
                   inherited Button5: TButton
@@ -1055,6 +1058,7 @@ object f_config: Tf_config
                   Height = 219
                   Width = 194
                   ItemHeight = 0
+                  TopIndex = -1
                   Data = {
                     0C000000000000000000000000000000
                   }
@@ -1077,7 +1081,6 @@ object f_config: Tf_config
                   ClientWidth = 446
                   inherited LongEdit1: TLongEdit
                     Left = 299
-                    Top = 29
                     Width = 139
                   end
                 end
@@ -1123,6 +1126,88 @@ object f_config: Tf_config
                   Left = 324
                   Top = 260
                   Width = 86
+                end
+                object Panel1: TPanel[17]
+                  Left = 176
+                  Height = 34
+                  Top = 176
+                  Width = 304
+                  BevelOuter = bvNone
+                  ClientHeight = 30
+                  ClientWidth = 300
+                  TabOrder = 13
+                  object AsteroidFilter: TEdit
+                    Left = 0
+                    Height = 28
+                    Top = 4
+                    Width = 80
+                    Constraints.MaxHeight = 28
+                    ParentFont = False
+                    TabOrder = 0
+                  end
+                  object btnAstFilter: TButton
+                    Left = 80
+                    Height = 24
+                    Top = 4
+                    Width = 76
+                    BorderSpacing.InnerBorder = 4
+                    Caption = 'Filter ->'
+                    OnClick = btnAstFilterClick
+                    ParentFont = False
+                    TabOrder = 1
+                  end
+                  object AsteroidList: TComboBox
+                    Left = 160
+                    Height = 28
+                    Top = 4
+                    Width = 144
+                    Constraints.MaxHeight = 28
+                    ItemHeight = 0
+                    ParentFont = False
+                    Style = csDropDownList
+                    TabOrder = 2
+                  end
+                end
+                object Panel2: TPanel[18]
+                  Left = 176
+                  Height = 34
+                  Top = 214
+                  Width = 304
+                  BevelOuter = bvNone
+                  ClientHeight = 30
+                  ClientWidth = 300
+                  TabOrder = 14
+                  object CometFilter: TEdit
+                    Left = 0
+                    Height = 28
+                    Top = 4
+                    Width = 80
+                    Constraints.MaxHeight = 28
+                    ParentFont = False
+                    TabOrder = 0
+                  end
+                  object btnCometFilter: TButton
+                    Left = 80
+                    Height = 24
+                    Top = 4
+                    Width = 76
+                    BorderSpacing.InnerBorder = 4
+                    Caption = 'Filter ->'
+                    OnClick = btnCometFilterClick
+                    ParentFont = False
+                    TabOrder = 1
+                  end
+                  object CometList: TComboBox
+                    Left = 160
+                    Height = 28
+                    Top = 4
+                    Width = 144
+                    Constraints.MaxHeight = 28
+                    ItemHeight = 0
+                    ParentFont = False
+                    Style = csDropDownList
+                    TabOrder = 2
+                  end
                 end
               end
               inherited Page3: TTabSheet

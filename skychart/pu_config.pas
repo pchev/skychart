@@ -568,6 +568,7 @@ begin
   f_config_solsys1.cdb := Value;
   f_config_pictures1.cdb := Value;
   f_config_observatory1.cdb := Value;
+  f_config_time1.cdb := Value;
 end;
 
 procedure Tf_config.SetCcat(Value: Tconf_catalog);
