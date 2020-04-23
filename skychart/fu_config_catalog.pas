@@ -49,6 +49,12 @@ type
     Button7: TButton;
     Button8: TButton;
     Button9: TButton;
+    fsac1: TLongEdit;
+    fsac2: TLongEdit;
+    Label98: TLabel;
+    OngcBox: TCheckBox;
+    frc31: TLongEdit;
+    frc32: TLongEdit;
     GaiaLimit: TCheckBox;
     Fgaia1: TLongEdit;
     Fgaia2: TLongEdit;
@@ -65,10 +71,15 @@ type
     Label21: TLabel;
     Label7: TLabel;
     Label90: TLabel;
+    Label92: TLabel;
+    Label95: TLabel;
     Panel1: TPanel;
+    rc33: TDirectoryEdit;
+    RC3box: TCheckBox;
+    sac3: TDirectoryEdit;
+    SacBox: TCheckBox;
     sh2box: TCheckBox;
     drkbox: TCheckBox;
-    defnBox: TCheckBox;
     ColorDialog1: TColorDialog;
     ComboBox1: TComboBox;
     delcat: TButton;
@@ -93,10 +104,6 @@ type
     focl2: TLongEdit;
     fpgc1: TLongEdit;
     fpgc2: TLongEdit;
-    frc31: TLongEdit;
-    frc32: TLongEdit;
-    fsac1: TLongEdit;
-    fsac2: TLongEdit;
     Fsky1: TLongEdit;
     Fsky2: TLongEdit;
     Fdef1: TLongEdit;
@@ -129,7 +136,6 @@ type
     drk3: TDirectoryEdit;
     maxrows: TLongEdit;
     Label1: TLabel;
-    Label95: TLabel;
     LabelWarning: TLabel;
     Label22: TLabel;
     Label23: TLabel;
@@ -150,11 +156,6 @@ type
     PanelSpec: TPanel;
     pgc3: TDirectoryEdit;
     PGCBox: TCheckBox;
-    btnsac: TRadioButton;
-    btnongc: TRadioButton;
-    rc33: TDirectoryEdit;
-    RC3box: TCheckBox;
-    sac3: TDirectoryEdit;
     Page1a: TTabSheet;
     SaveDialog1: TSaveDialog;
     sky3: TDirectoryEdit;
@@ -166,6 +167,7 @@ type
     DefBox: TCheckBox;
     gaia3: TDirectoryEdit;
     GAIABox: TCheckBox;
+    Page4b: TTabSheet;
     tyc3: TDirectoryEdit;
     tic3: TDirectoryEdit;
     gsc3: TDirectoryEdit;
@@ -256,7 +258,6 @@ type
     procedure Button8Click(Sender: TObject);
     procedure Button9Click(Sender: TObject);
     procedure CatgenClick(Sender: TObject);
-    procedure defnBoxClick(Sender: TObject);
     procedure delobjClick(Sender: TObject);
     procedure GaiaLimitChange(Sender: TObject);
     procedure hnNameChange(Sender: TObject);
@@ -396,7 +397,7 @@ begin
   Label118.Caption := rsFilesPath;
   Label121.Caption := rsDefault;
   Page5.Caption := rsOtherSoftwar;
-  Page4.Caption := rsObsolete;
+  Page4.Caption := rsObsolete+blank+rsStars;
   Label88.Caption := rsCDCObsoleteC;
   Label91.Caption := rsReplacedBy + ' GAIA';
   Label96.Caption := rsReplacedBy + ' XHIP';
@@ -404,6 +405,8 @@ begin
   Label95.Caption := rsReplacedBy + ' PGC/LEDA';
   Label97.Caption := rsReplacedBy + ' NOMAD';
   Label94.Caption := rsNotAvailable;
+  Page4b.Caption := rsObsolete+blank+rsNebulae;
+  Label92.Caption := rsCDCObsoleteC;
   Label5.Caption := rsFovNumber;
   LabelWarning.Caption := rsWarningYouAr2;
   if Fcatgen <> nil then
@@ -698,11 +701,8 @@ procedure Tf_config_catalog.ShowCDCNeb;
 var
   spec, def: boolean;
 begin
-  defnBox.Checked := ccat.NebCatDef[sac - BaseNeb] or ccat.NebCatDef[ngc - BaseNeb];
-  if ccat.NebCatDef[sac - BaseNeb] then
-    btnsac.Checked := True
-  else if ccat.NebCatDef[ngc - BaseNeb] then
-    btnongc.Checked := True;
+  OngcBox.Checked := ccat.NebCatDef[ngc - BaseNeb];
+  SacBox.Checked := ccat.NebCatDef[sac - BaseNeb];
   lbnbox.Checked := ccat.NebCatDef[lbn - BaseNeb];
   sh2box.Checked := ccat.NebCatDef[sh2 - BaseNeb];
   drkbox.Checked := ccat.NebCatDef[drk - BaseNeb];
@@ -741,7 +741,7 @@ begin
   ocl3.Text := changetext(systoutf8(ccat.NebCatPath[ocl - BaseNeb]), ocl3.Text);
   gcm3.Text := changetext(systoutf8(ccat.NebCatPath[gcm - BaseNeb]), gcm3.Text);
   gpn3.Text := changetext(systoutf8(ccat.NebCatPath[gpn - BaseNeb]), gpn3.Text);
-  def := defnBox.Checked;
+  def := OngcBox.Checked;
   spec := lbnbox.Checked or rc3box.Checked or pgcbox.Checked or oclbox.Checked or
     gcmbox.Checked or gpnbox.Checked;
   LabelWarning.Visible := (def and spec);
@@ -1417,31 +1417,6 @@ begin
   finally
     LockCatPath := False;
   end;
-end;
-
-procedure Tf_config_catalog.defnBoxClick(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  if defnBox.Checked then
-  begin
-    if btnsac.Checked then
-    begin
-      ccat.NebCatDef[1] := True;
-      ccat.NebCatDef[2] := False;
-    end
-    else
-    begin
-      ccat.NebCatDef[1] := False;
-      ccat.NebCatDef[2] := True;
-    end;
-  end
-  else
-  begin
-    ccat.NebCatDef[1] := False;
-    ccat.NebCatDef[2] := False;
-  end;
-  ShowCDCNeb;
 end;
 
 procedure Tf_config_catalog.CDCNebSelClick(Sender: TObject);
