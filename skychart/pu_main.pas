@@ -8226,7 +8226,7 @@ begin
     def_cfgsc.GRSjd := jd(2019, 8, 12, 0);
     def_cfgsc.GRSdrift := 18.3 / 365.25;
   end;
-  if Config_Version < '4.3b' then
+  if Config_Version < '4.3b' then begin
     DeleteFileUTF8(slash(SatDir) + 'F77L.EER');
     DeleteFileUTF8(slash(SatDir) + 'IRIDFLAR.EXE');
     DeleteFileUTF8(slash(SatDir) + 'SORT.COM');
@@ -8238,6 +8238,13 @@ begin
     DeleteFileUTF8(slash(SatDir) + 'SDL.dll');
     DeleteFileUTF8(slash(SatDir) + 'SDL_net.dll');
     {$endif}
+  end;
+  if Config_Version < '4.3c' then begin
+    if catalog.cfgcat.nebcatdef[sac - BaseNeb] then begin
+      catalog.cfgcat.nebcatdef[sac - BaseNeb] := False;
+      catalog.cfgcat.nebcatdef[ngc - BaseNeb] := True;
+    end;
+  end;
 end;
 
 procedure Tf_main.SaveVersion;
