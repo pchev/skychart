@@ -486,6 +486,7 @@ begin
   LockCatPath := False;
   LockActivePath := False;
   cmain.VOforceactive := False;
+  cmain.UOforceactive := False;
   LockChange := True;
   ShowGCat;
   ShowVO;
@@ -1720,8 +1721,10 @@ begin
     begin
       if stringgrid1.Cells[col, row] = '1' then
         stringgrid1.Cells[col, row] := '0'
-      else
+      else begin
         stringgrid1.Cells[col, row] := '1';
+        cmain.UOforceactive := True;
+      end;
     end;
     7:
     begin
@@ -1790,6 +1793,7 @@ begin
     stringgrid1.rowcount := stringgrid1.rowcount + 1;
     stringgrid1.cells[0, stringgrid1.rowcount - 1] := '0';
     stringgrid1.cells[1, stringgrid1.rowcount - 1] := StringGrid1.Columns[0].PickList[0];
+    cmain.UOforceactive := True;
   end;
 end;
 

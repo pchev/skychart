@@ -55,6 +55,8 @@ type
   Tf_main = class(TForm)
     MenuEditToolbar2: TMenuItem;
     MenuItem2: TMenuItem;
+    MenuShowVO: TMenuItem;
+    MenuShowUserObject: TMenuItem;
     MenuLockChart: TMenuItem;
     MenuUpdGrs: TMenuItem;
     MenuMosaic: TMenuItem;
@@ -5439,6 +5441,11 @@ begin
       ShowVO.Checked := True;
       ccat.starcatdef[vostar - BaseStar] := ShowVO.Checked;
       ccat.nebcatdef[voneb - BaseNeb] := ShowVO.Checked;
+    end;
+    if cmain.UOforceactive then
+    begin
+      ShowUobj.Checked := True;
+      ccat.nebcatdef[uneb - BaseNeb] := ShowUobj.Checked;
     end;
   end;
   if ccat <> nil then

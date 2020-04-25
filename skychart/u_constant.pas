@@ -1175,7 +1175,7 @@ type
     savetop, saveleft, saveheight, savewidth: integer;
     AnimDelay, AnimSx, AnimSy, AnimSize,
     VOurl, VOmaxrecord: integer;
-    VOforceactive: boolean;
+    VOforceactive, UOforceactive: boolean;
     PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec: boolean;
     maximized, updall, AutostartServer, keepalive, NewBackgroundImage: boolean;
     ServerCoordSys: integer;
@@ -2892,6 +2892,7 @@ begin
   VOurl := Source.VOurl;
   VOmaxrecord := Source.VOmaxrecord;
   VOforceactive := Source.VOforceactive;
+  UOforceactive := Source.UOforceactive;
   AnimDelay := Source.AnimDelay;
   AnimOpt := Source.AnimOpt;
   Animffmpeg := Source.Animffmpeg;

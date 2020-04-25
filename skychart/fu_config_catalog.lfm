@@ -42,7 +42,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 8
           Height = 19
           Top = 7
-          Width = 154
+          Width = 159
           Caption = 'CDC Stars Catalog Setting'
           ParentColor = False
           ParentFont = False
@@ -60,7 +60,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 270
           Height = 19
           Top = 7
-          Width = 79
+          Width = 82
           Alignment = taRightJustify
           Caption = 'Field number'
           ParentColor = False
@@ -70,7 +70,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 306
           Height = 19
           Top = 23
-          Width = 29
+          Width = 30
           Caption = ' max'
           ParentColor = False
           ParentFont = False
@@ -79,7 +79,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 349
           Height = 19
           Top = 23
-          Width = 57
+          Width = 59
           Caption = 'Files Path'
           ParentColor = False
           ParentFont = False
@@ -88,7 +88,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 8
           Height = 19
           Top = 65
-          Width = 30
+          Width = 32
           Caption = 'Stars'
           ParentColor = False
           ParentFont = False
@@ -97,7 +97,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 8
           Height = 19
           Top = 262
-          Width = 54
+          Width = 58
           Caption = 'Variables'
           ParentColor = False
           ParentFont = False
@@ -106,7 +106,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 8
           Height = 19
           Top = 350
-          Width = 50
+          Width = 51
           Caption = 'Doubles'
           ParentColor = False
           ParentFont = False
@@ -178,10 +178,10 @@ object f_config_catalog: Tf_config_catalog
         object GCVBox: TCheckBox
           Tag = 1
           Left = 94
-          Height = 23
+          Height = 21
           Hint = 'General Catalog of Variable Stars    (Kholopov+ 1998)'
           Top = 259
-          Width = 160
+          Width = 166
           HelpContext = 105
           Caption = 'Gen. Cat. Variable Star'
           Constraints.MaxHeight = 28
@@ -194,9 +194,9 @@ object f_config_catalog: Tf_config_catalog
         object IRVar: TCheckBox
           Tag = 1
           Left = 94
-          Height = 23
+          Height = 21
           Top = 281
-          Width = 130
+          Width = 134
           Caption = 'Show IR variables'
           Constraints.MaxHeight = 28
           OnClick = IRVarClick
@@ -206,10 +206,10 @@ object f_config_catalog: Tf_config_catalog
         object WDSbox: TCheckBox
           Tag = 1
           Left = 93
-          Height = 23
+          Height = 21
           Hint = 'The Washington Visual Double Star Catalog    (USNO, 2000)'
           Top = 350
-          Width = 173
+          Width = 175
           HelpContext = 106
           Caption = 'Washington Double Star'
           Constraints.MaxHeight = 28
@@ -262,10 +262,10 @@ object f_config_catalog: Tf_config_catalog
         object DefBox: TCheckBox
           Tag = 1
           Left = 94
-          Height = 23
+          Height = 21
           Hint = 'Extended Hipparcos Compilation (XHIP)  (Anderson+, 2011)'
           Top = 90
-          Width = 147
+          Width = 149
           HelpContext = 102
           Caption = 'Extended Hipparcos'
           Constraints.MaxHeight = 28
@@ -335,9 +335,9 @@ object f_config_catalog: Tf_config_catalog
         object GAIABox: TCheckBox
           Tag = 19
           Left = 93
-          Height = 23
+          Height = 21
           Top = 137
-          Width = 102
+          Width = 104
           HelpContext = 102
           Caption = 'Gaia Catalog'
           Constraints.MaxHeight = 28
@@ -397,9 +397,9 @@ object f_config_catalog: Tf_config_catalog
         end
         object GaiaLimit: TCheckBox
           Left = 93
-          Height = 23
+          Height = 21
           Top = 170
-          Width = 250
+          Width = 256
           Caption = 'Limit the number of level 3 faint stars'
           OnChange = GaiaLimitChange
           ParentFont = False
@@ -1200,7 +1200,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 7
           Height = 19
           Top = 19
-          Width = 166
+          Width = 174
           Caption = 'Virtual Observatory Catalog'
           ParentColor = False
           ParentFont = False
@@ -1294,7 +1294,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 292
           Height = 19
           Top = 19
-          Width = 58
+          Width = 61
           Caption = 'Max rows'
           ParentColor = False
           ParentFont = False
@@ -1337,9 +1337,9 @@ object f_config_catalog: Tf_config_catalog
         ParentFont = False
         object Label6: TLabel
           Left = 7
-          Height = 17
+          Height = 19
           Top = 19
-          Width = 133
+          Width = 128
           Caption = 'User defined objects'
           ParentColor = False
           ParentFont = False
