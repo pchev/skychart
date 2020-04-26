@@ -2415,7 +2415,7 @@ begin
     for n := 1 to 11 do
     begin
       ipla := draworder[n];
-      if ((j>0) or ((cfgsc.SimNb>1) and cfgsc.SimMark)) and (not cfgsc.SimObject[ipla]) then
+      if ((j>0) or ((cfgsc.SimNb>1) and cfgsc.SimMark and cfgsc.SimObject[ipla])) and (not cfgsc.SimObject[ipla]) then
         continue;
       if ipla = 3 then
         continue;
@@ -2515,7 +2515,7 @@ begin
           lid := rshash(lis, $7FFFFFFF);
           SetLabel(lid, xx, yy, round(pixscale * diam / 2), 2, 5, ltxt, lalign, lori, 1, lopt);
         end;
-        if (cfgsc.SimNb=1)or (not (cfgsc.SimLine and cfgsc.SimMark)) then case ipla of
+        if (cfgsc.SimNb=1)or (not (cfgsc.SimLine and cfgsc.SimMark and cfgsc.SimObject[ipla])) then case ipla of
           4:
           begin
             if (fov <= 5) and (cfgsc.Planetlst[j, 29, 6] < 90) then
