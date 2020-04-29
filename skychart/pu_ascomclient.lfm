@@ -1,164 +1,177 @@
 object pop_scope: Tpop_scope
   Left = 276
-  Height = 562
+  Height = 568
   Top = 124
-  Width = 311
+  Width = 314
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   Caption = 'ASCOM Telescope Interface'
-  ClientHeight = 562
-  ClientWidth = 311
-  DesignTimePPI = 95
+  ClientHeight = 568
+  ClientWidth = 314
   OnCloseQuery = kill
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  ParentFont = True
   Position = poDefaultPosOnly
   object GroupBox3: TGroupBox
     Left = 0
-    Height = 88
-    Top = 472
-    Width = 311
+    Height = 89
+    Top = 477
+    Width = 314
     Align = alTop
-    ClientHeight = 86
-    ClientWidth = 309
+    ClientHeight = 87
+    ClientWidth = 312
+    ParentFont = False
     TabOrder = 2
     object ButtonHide: TButton
-      Left = 211
+      Left = 213
       Height = 25
       Top = 6
-      Width = 65
+      Width = 66
       Caption = 'Hide'
       OnClick = ButtonHideClick
+      ParentFont = False
       TabOrder = 1
     end
     object ButtonDisconnect: TButton
-      Left = 115
+      Left = 116
       Height = 25
       Top = 6
-      Width = 84
+      Width = 85
       Caption = 'Disconnect'
       OnClick = ButtonDisconnectClick
+      ParentFont = False
       TabOrder = 3
     end
     object led: TShape
-      Left = 83
+      Left = 84
       Height = 25
       Top = 7
       Width = 25
       Brush.Color = clRed
     end
     object ButtonHelp: TButton
-      Left = 211
+      Left = 213
       Height = 25
       Top = 41
-      Width = 65
+      Width = 66
       Caption = 'Help'
       OnClick = ButtonHelpClick
+      ParentFont = False
       TabOrder = 2
     end
     object ButtonConnect: TButton
       Left = 4
       Height = 25
       Top = 6
-      Width = 74
+      Width = 75
       Caption = 'Connect'
       OnClick = ButtonConnectClick
+      ParentFont = False
       TabOrder = 0
     end
   end
   object GroupBox5: TGroupBox
     Left = 0
-    Height = 141
-    Top = 176
-    Width = 311
+    Height = 142
+    Top = 178
+    Width = 314
     Align = alTop
     Caption = 'Observatory '
     ClientHeight = 122
-    ClientWidth = 309
+    ClientWidth = 312
+    ParentFont = False
     TabOrder = 0
     object Label15: TLabel
       Left = 16
-      Height = 18
+      Height = 19
       Top = 12
-      Width = 59
+      Width = 62
       Caption = 'Latitude : '
       ParentColor = False
+      ParentFont = False
     end
     object Label16: TLabel
-      Left = 115
-      Height = 18
+      Left = 116
+      Height = 19
       Top = 12
-      Width = 68
+      Width = 70
       Caption = 'Longitude :'
       ParentColor = False
+      ParentFont = False
     end
     object ButtonSetTime: TSpeedButton
       Left = 9
       Height = 25
-      Top = 92
-      Width = 136
+      Top = 93
+      Width = 137
       Caption = 'Set Time'
       Enabled = False
       OnClick = ButtonSetTimeClick
+      ParentFont = False
     end
     object ButtonSetLocation: TSpeedButton
       Left = 9
       Height = 25
-      Top = 64
-      Width = 139
+      Top = 65
+      Width = 140
       Caption = 'Set to telescope'
       Enabled = False
       OnClick = ButtonSetLocationClick
+      ParentFont = False
     end
     object lat: TEdit
       Left = 16
       Height = 28
       Top = 32
-      Width = 88
+      Width = 89
       Color = clBtnFace
       Constraints.MaxHeight = 28
+      ParentFont = False
       ReadOnly = True
       TabStop = False
       TabOrder = 0
       Text = '0'
     end
     object long: TEdit
-      Left = 115
+      Left = 116
       Height = 28
       Top = 32
-      Width = 84
+      Width = 85
       Color = clBtnFace
       Constraints.MaxHeight = 28
+      ParentFont = False
       ReadOnly = True
       TabStop = False
       TabOrder = 1
       Text = '0'
     end
     object ButtonGetLocation: TSpeedButton
-      Left = 156
+      Left = 158
       Height = 25
-      Top = 64
-      Width = 139
+      Top = 65
+      Width = 140
       Caption = 'Get from telescope'
       Enabled = False
       OnClick = ButtonGetLocationClick
+      ParentFont = False
     end
     object Label2: TLabel
-      Left = 209
-      Height = 18
+      Left = 211
+      Height = 19
       Top = 12
-      Width = 47
+      Width = 49
       Caption = 'Altitude'
       ParentColor = False
+      ParentFont = False
     end
     object elev: TEdit
-      Left = 209
+      Left = 211
       Height = 28
       Top = 32
-      Width = 80
+      Width = 81
       Constraints.MaxHeight = 28
+      ParentFont = False
       ReadOnly = True
       TabOrder = 2
       Text = '0'
@@ -166,50 +179,55 @@ object pop_scope: Tpop_scope
   end
   object Panel1: TPanel
     Left = 0
-    Height = 155
-    Top = 317
-    Width = 311
+    Height = 157
+    Top = 320
+    Width = 314
     Align = alTop
-    ClientHeight = 155
-    ClientWidth = 311
+    ClientHeight = 157
+    ClientWidth = 314
+    ParentFont = False
     TabOrder = 1
     object LabelAlpha: TLabel
       Left = 32
-      Height = 18
+      Height = 19
       Top = 10
-      Width = 19
+      Width = 20
       Caption = 'RA '
       ParentColor = False
+      ParentFont = False
     end
     object LabelDelta: TLabel
-      Left = 165
-      Height = 18
+      Left = 167
+      Height = 19
       Top = 10
-      Width = 24
+      Width = 25
       Caption = 'DEC'
       ParentColor = False
+      ParentFont = False
     end
     object Label11: TLabel
       Left = 32
-      Height = 18
+      Height = 19
       Top = 34
-      Width = 15
+      Width = 17
       Caption = 'AZ'
       ParentColor = False
+      ParentFont = False
     end
     object Label12: TLabel
-      Left = 165
-      Height = 18
+      Left = 167
+      Height = 19
       Top = 34
-      Width = 22
+      Width = 23
       Caption = 'ALT'
       ParentColor = False
+      ParentFont = False
     end
     object ButtonAbort: TSpeedButton
       Left = 8
       Height = 25
-      Top = 64
-      Width = 152
+      Top = 65
+      Width = 154
       Caption = 'Abort Slew'
       Font.Color = clRed
       Font.Height = -11
@@ -219,93 +237,101 @@ object pop_scope: Tpop_scope
       ParentFont = False
     end
     object pos_x: TEdit
-      Left = 56
+      Left = 57
       Height = 25
       Top = 6
-      Width = 104
+      Width = 105
       Constraints.MaxHeight = 25
+      ParentFont = False
       ReadOnly = True
       TabStop = False
       TabOrder = 0
     end
     object pos_y: TEdit
-      Left = 200
+      Left = 202
       Height = 25
       Top = 6
-      Width = 90
+      Width = 91
       Constraints.MaxHeight = 25
+      ParentFont = False
       ReadOnly = True
       TabStop = False
       TabOrder = 1
     end
     object az_x: TEdit
-      Left = 56
+      Left = 57
       Height = 25
       Top = 30
-      Width = 104
+      Width = 105
       Constraints.MaxHeight = 25
+      ParentFont = False
       ReadOnly = True
       TabStop = False
       TabOrder = 3
     end
     object alt_y: TEdit
-      Left = 200
+      Left = 202
       Height = 25
       Top = 30
-      Width = 90
+      Width = 91
       Constraints.MaxHeight = 25
+      ParentFont = False
       ReadOnly = True
       TabStop = False
       TabOrder = 4
     end
     object ShowAltAz: TCheckBox
       Left = 8
-      Height = 23
+      Height = 21
       Top = 32
-      Width = 23
+      Width = 21
+      ParentFont = False
       TabOrder = 2
     end
     object ButtonTracking: TSpeedButton
-      Left = 100
+      Left = 101
       Height = 25
-      Top = 96
-      Width = 84
+      Top = 97
+      Width = 85
       Caption = 'Tracking'
       Enabled = False
       OnClick = ButtonTrackingClick
+      ParentFont = False
     end
     object trackingled: TShape
-      Left = 102
+      Left = 103
       Height = 16
-      Top = 125
-      Width = 80
+      Top = 126
+      Width = 81
       Brush.Color = clRed
       OnChangeBounds = trackingledChangeBounds
     end
     object ButtonPark: TSpeedButton
       Left = 8
       Height = 25
-      Top = 96
-      Width = 84
+      Top = 97
+      Width = 85
       Caption = 'Park'
       Enabled = False
       OnClick = ButtonParkClick
+      ParentFont = False
     end
     object parkled: TShape
       Left = 10
       Height = 16
-      Top = 125
-      Width = 80
+      Top = 126
+      Width = 81
       Brush.Color = clRed
     end
     object Handpad: TPanel
-      Left = 240
-      Height = 60
-      Top = 92
-      Width = 60
+      Left = 243
+      Height = 61
+      Top = 93
+      Width = 61
       BevelOuter = bvNone
-      ClientHeight = 60
-      ClientWidth = 60
+      ClientHeight = 61
+      ClientWidth = 61
+      ParentFont = False
       TabOrder = 5
       object ArrowLeft: TArrow
         Tag = 1
@@ -368,14 +394,15 @@ object pop_scope: Tpop_scope
         Top = 22
         Width = 16
         OnClick = ArrowStopClick
+        ParentFont = False
         TabOrder = 0
       end
     end
     object FlipNS: TRadioGroup
-      Left = 184
-      Height = 60
-      Top = 92
-      Width = 50
+      Left = 186
+      Height = 61
+      Top = 93
+      Width = 51
       AutoFill = True
       ChildSizing.LeftRightSpacing = 6
       ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
@@ -384,49 +411,56 @@ object pop_scope: Tpop_scope
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 1
-      ClientHeight = 58
-      ClientWidth = 48
+      ClientHeight = 59
+      ClientWidth = 49
       ItemIndex = 0
       Items.Strings = (
         '^'
         'v'
       )
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 6
     end
     object AxisRates: TSpinEdit
-      Left = 240
-      Height = 35
-      Top = 61
-      Width = 62
+      Left = 243
+      Height = 29
+      Top = 62
+      Width = 63
       MinValue = 1
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
       TabOrder = 7
       Value = 1
     end
     object Label4: TLabel
-      Left = 165
-      Height = 18
-      Top = 66
-      Width = 57
+      Left = 167
+      Height = 19
+      Top = 67
+      Width = 61
       Caption = 'Sidereal x'
       ParentColor = False
+      ParentFont = False
     end
   end
   object PageControl1: TPageControl
     Left = 0
-    Height = 176
+    Height = 178
     Top = 0
-    Width = 311
+    Width = 314
     ActivePage = ASCOMRemote
     Align = alTop
+    ParentFont = False
     TabIndex = 1
     TabOrder = 3
     OnChanging = PageControl1Changing
     object ASCOMLocal: TTabSheet
       Caption = 'ASCOM Local'
-      ClientHeight = 144
-      ClientWidth = 301
+      ClientHeight = 147
+      ClientWidth = 304
+      ParentFont = False
       object GroupBox1: TGroupBox
         Left = 0
         Height = 146
@@ -436,55 +470,61 @@ object pop_scope: Tpop_scope
         Caption = 'Driver Selection'
         ClientHeight = 126
         ClientWidth = 299
+        ParentFont = False
         TabOrder = 0
         object ButtonSelect: TSpeedButton
-          Left = 182
+          Left = 184
           Height = 22
           Top = 7
-          Width = 97
+          Width = 98
           Caption = 'Select'
           OnClick = ButtonSelectClick
+          ParentFont = False
         end
         object Label1: TLabel
           Left = 2
           Height = 18
-          Top = 56
+          Top = 57
           Width = 78
           Caption = 'Refresh rate :'
           ParentColor = False
+          ParentFont = False
         end
         object ButtonConfigure: TSpeedButton
-          Left = 182
+          Left = 184
           Height = 22
           Top = 32
-          Width = 97
+          Width = 98
           Caption = 'Configure'
           OnClick = ButtonConfigureClick
+          ParentFont = False
         end
         object ButtonAbout: TSpeedButton
-          Left = 182
+          Left = 184
           Height = 22
-          Top = 56
-          Width = 97
+          Top = 57
+          Width = 98
           Caption = 'About'
           OnClick = ButtonAboutClick
+          ParentFont = False
         end
         object Edit1: TEdit
           Left = 2
           Height = 28
           Top = 15
-          Width = 172
+          Width = 174
           Color = clBtnFace
           Constraints.MaxHeight = 28
+          ParentFont = False
           ReadOnly = True
           TabStop = False
           TabOrder = 0
         end
         object ReadIntBox: TComboBox
-          Left = 101
+          Left = 102
           Height = 28
-          Top = 52
-          Width = 73
+          Top = 53
+          Width = 74
           Constraints.MaxHeight = 28
           ItemHeight = 0
           ItemIndex = 2
@@ -496,38 +536,42 @@ object pop_scope: Tpop_scope
             '5000'
           )
           OnChange = ReadIntBoxChange
+          ParentFont = False
           TabOrder = 1
           Text = '1000'
         end
         object ButtonAdvSetting: TSpeedButton
-          Left = 101
+          Left = 102
           Height = 22
-          Top = 88
-          Width = 178
+          Top = 89
+          Width = 180
           Caption = 'Advanced setting'
           OnClick = ButtonAdvSettingClick
+          ParentFont = False
         end
       end
     end
     object ASCOMRemote: TTabSheet
       Caption = 'ASCOM Alpaca'
-      ClientHeight = 144
-      ClientWidth = 301
+      ClientHeight = 147
+      ClientWidth = 304
+      ParentFont = False
       object Panel3: TPanel
         Left = 0
-        Height = 144
+        Height = 147
         Top = 0
-        Width = 301
+        Width = 304
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 144
-        ClientWidth = 301
+        ClientHeight = 147
+        ClientWidth = 304
+        ParentFont = False
         TabOrder = 0
         object ARestProtocol: TComboBox
           Left = 13
           Height = 28
           Top = 20
-          Width = 74
+          Width = 75
           Constraints.MaxHeight = 28
           ItemHeight = 0
           ItemIndex = 0
@@ -536,112 +580,125 @@ object pop_scope: Tpop_scope
             'https:'
           )
           OnChange = ARestProtocolChange
+          ParentFont = False
           Style = csDropDownList
           TabOrder = 0
           Text = 'http:'
         end
         object Label34: TLabel
           Left = 13
-          Height = 18
+          Height = 19
           Top = 0
-          Width = 51
+          Width = 52
           Caption = 'Protocol'
           ParentColor = False
+          ParentFont = False
         end
         object ARestHost: TEdit
-          Left = 92
+          Left = 93
           Height = 28
           Top = 20
-          Width = 192
+          Width = 194
           Constraints.MaxHeight = 28
+          ParentFont = False
           TabOrder = 1
           Text = '127.0.0.1'
         end
         object Label35: TLabel
-          Left = 92
-          Height = 18
+          Left = 93
+          Height = 19
           Top = 0
-          Width = 158
+          Width = 165
           Caption = 'Remote host or IP address'
           ParentColor = False
+          ParentFont = False
         end
         object Label36: TLabel
           Left = 13
-          Height = 18
-          Top = 48
-          Width = 41
+          Height = 19
+          Top = 49
+          Width = 43
           Caption = 'IP Port'
           ParentColor = False
+          ParentFont = False
         end
         object Label37: TLabel
-          Left = 144
-          Height = 18
-          Top = 48
-          Width = 139
+          Left = 146
+          Height = 19
+          Top = 49
+          Width = 145
           Caption = 'Remote device number'
           ParentColor = False
+          ParentFont = False
         end
         object Label3: TLabel
-          Left = 144
-          Height = 18
-          Top = 71
-          Width = 63
+          Left = 146
+          Height = 19
+          Top = 72
+          Width = 66
           Caption = 'Telescope/'
           ParentColor = False
+          ParentFont = False
         end
         object Label38: TLabel
-          Left = 154
-          Height = 18
-          Top = 96
-          Width = 58
+          Left = 156
+          Height = 19
+          Top = 97
+          Width = 61
           Caption = 'Password'
           ParentColor = False
+          ParentFont = False
         end
         object Label39: TLabel
           Left = 13
-          Height = 18
-          Top = 96
-          Width = 65
+          Height = 19
+          Top = 97
+          Width = 69
           Caption = 'User name'
           ParentColor = False
+          ParentFont = False
         end
         object ARestPass: TEdit
-          Left = 154
+          Left = 156
           Height = 28
-          Top = 116
-          Width = 130
+          Top = 117
+          Width = 131
           AutoSelect = False
           Constraints.MaxHeight = 28
           EchoMode = emPassword
+          ParentFont = False
           PasswordChar = '*'
           TabOrder = 2
         end
         object ARestUser: TEdit
           Left = 13
           Height = 28
-          Top = 116
-          Width = 130
+          Top = 117
+          Width = 131
           AutoSelect = False
           Constraints.MaxHeight = 28
+          ParentFont = False
           TabOrder = 3
         end
         object ARestDevice: TSpinEditEx
-          Left = 216
+          Left = 218
           Height = 28
-          Top = 66
-          Width = 68
+          Top = 67
+          Width = 69
           Constraints.MaxHeight = 28
           MaxLength = 0
+          ParentFont = False
           TabOrder = 4
           MaxValue = 65535
         end
         object ARestPort: TSpinEditEx
           Left = 13
           Height = 28
-          Top = 66
-          Width = 81
+          Top = 67
+          Width = 82
           Constraints.MaxHeight = 28
           MaxLength = 0
+          ParentFont = False
           TabOrder = 5
           MaxValue = 65535
           MinValue = 1
@@ -654,13 +711,13 @@ object pop_scope: Tpop_scope
     Enabled = False
     OnTimer = Timer1Timer
     left = 16
-    top = 496
+    top = 501
   end
   object StopMoveTimer: TTimer
     Enabled = False
     Interval = 100
     OnTimer = StopMoveTimerTimer
-    left = 144
-    top = 496
+    left = 146
+    top = 501
   end
 end

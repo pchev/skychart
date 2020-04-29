@@ -408,8 +408,9 @@ begin
         if (nrates0>0)and(nrates1>0) then begin
            AxisRates.MinValue:=round(max(1,3600*max(axis0rates[0],axis1rates[0])/siderealrate));
            AxisRates.MaxValue:=round(min(3600,3600*min(axis0rates[1],axis1rates[1]))/siderealrate);
+           AxisRates.Hint:=IntToStr(AxisRates.MinValue)+'...'+IntToStr(AxisRates.MaxValue);
         end;
-        AxisRates.Value:=4;
+        AxisRates.Value:=min(AxisRates.MaxValue,max(32,AxisRates.MinValue));
         FlipNS.ItemIndex:=0;
       end;
       except
@@ -1271,6 +1272,8 @@ end;
 procedure Tpop_scope.StopMoveTimerTimer(Sender: TObject);
 begin
   StopMoveTimer.Enabled:=false;
+  ScopeMoveAxis(0,0);
+  ScopeMoveAxis(1,0);
   ScopeAbortSlew;
   case FLastArrow of
     1: ArrowLeft.ArrowColor:=clBtnText;
@@ -1283,6 +1286,8 @@ end;
 
 procedure Tpop_scope.ArrowStopClick(Sender: TObject);
 begin
+ ScopeMoveAxis(0,0);
+ ScopeMoveAxis(1,0);
  ScopeAbortSlew;
 end;
 

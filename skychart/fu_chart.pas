@@ -5234,9 +5234,8 @@ begin
       n1 := 0;
       if Fpop_scope.ScopeInterfaceVersion>1 then begin
       Fpop_scope.GetScopeRates(n0, n1, @ax0r, @ax1r);
-      if n0 > 1 then
+      if n0 >= 1 then
       begin
-        n0 := n0 div 2;
         for i := 0 to n0 - 1 do
         begin
           min := ax0r[2 * i];
