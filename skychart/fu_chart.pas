@@ -5220,58 +5220,14 @@ begin
 end;
 
 procedure Tf_chart.GetScopeRates(rates: TStringList);
-var
-  i, j, n0, n1: integer;
-  ax0r, ax1r: array of double;
-  min, max, step, rate, x: double;
+var n0: integer;
 begin
   rates.Clear;
   if Connect1.Checked then
   begin
     if sc.cfgsc.ASCOMTelescope then
     begin
-      n0 := 0;
-      n1 := 0;
-      if Fpop_scope.ScopeInterfaceVersion>1 then begin
-      Fpop_scope.GetScopeRates(n0, n1, @ax0r, @ax1r);
-      if n0 >= 1 then
-      begin
-        for i := 0 to n0 - 1 do
-        begin
-          min := ax0r[2 * i];
-          max := ax0r[2 * i + 1];
-          if min = max then
-            rates.Add(formatfloat(f4, ax0r[i]))
-          else
-          begin
-            step := (max - min) / 3;
-            for j := 0 to 3 do
-            begin
-              rate := min + j * step;
-              if (i=0) and (rate = 0) and (max > 0.15) then
-              begin  // add slow speed 2x ->32x sidereal
-                rates.add('0.0083');
-                rates.add('0.0167');
-                rates.add('0.0333');
-                rates.add('0.0667');
-                rates.add('0.1333');
-                x := step / 2;
-                if step > 0.3 then
-                  rates.add(formatfloat('0.0000', x));
-              end
-              else if rate > 0 then
-                rates.add(formatfloat('0.0000', rate));
-            end;
-          end;
-        end;
-        end
-        else begin
-          rates.add('Error getting supported rates!');
-        end;
-      end
-      else begin
-        rates.add('Unsupported by V1 driver!');
-      end;
+      Fpop_scope.GetScopeRates(n0, rates);
     end;
     if sc.cfgsc.INDITelescope then
     begin

@@ -1549,6 +1549,7 @@ resourcestring
   rsLHA = 'LHA';
   rsLockChartPos = 'Lock chart position';
   rsReplaceByTic = 'Replace by tick mark';
+  rsSpeed = 'Speed';
 
 // also update upsi_translation
 

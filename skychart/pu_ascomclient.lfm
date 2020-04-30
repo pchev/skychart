@@ -84,16 +84,16 @@ object pop_scope: Tpop_scope
     TabOrder = 0
     object Label15: TLabel
       Left = 16
-      Height = 19
+      Height = 17
       Top = 12
-      Width = 62
+      Width = 61
       Caption = 'Latitude : '
       ParentColor = False
       ParentFont = False
     end
     object Label16: TLabel
       Left = 116
-      Height = 19
+      Height = 17
       Top = 12
       Width = 70
       Caption = 'Longitude :'
@@ -158,7 +158,7 @@ object pop_scope: Tpop_scope
     end
     object Label2: TLabel
       Left = 211
-      Height = 19
+      Height = 17
       Top = 12
       Width = 49
       Caption = 'Altitude'
@@ -189,7 +189,7 @@ object pop_scope: Tpop_scope
     TabOrder = 1
     object LabelAlpha: TLabel
       Left = 32
-      Height = 19
+      Height = 17
       Top = 10
       Width = 20
       Caption = 'RA '
@@ -198,7 +198,7 @@ object pop_scope: Tpop_scope
     end
     object LabelDelta: TLabel
       Left = 167
-      Height = 19
+      Height = 17
       Top = 10
       Width = 25
       Caption = 'DEC'
@@ -207,7 +207,7 @@ object pop_scope: Tpop_scope
     end
     object Label11: TLabel
       Left = 32
-      Height = 19
+      Height = 17
       Top = 34
       Width = 17
       Caption = 'AZ'
@@ -216,7 +216,7 @@ object pop_scope: Tpop_scope
     end
     object Label12: TLabel
       Left = 167
-      Height = 19
+      Height = 17
       Top = 34
       Width = 23
       Caption = 'ALT'
@@ -423,26 +423,25 @@ object pop_scope: Tpop_scope
       ShowHint = True
       TabOrder = 6
     end
-    object AxisRates: TSpinEdit
-      Left = 243
-      Height = 29
-      Top = 62
-      Width = 63
-      MinValue = 1
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 7
-      Value = 1
-    end
     object Label4: TLabel
       Left = 167
-      Height = 19
+      Height = 17
       Top = 67
-      Width = 61
-      Caption = 'Sidereal x'
+      Width = 39
+      Caption = 'Speed'
       ParentColor = False
       ParentFont = False
+    end
+    object AxisRates: TComboBox
+      Left = 224
+      Height = 28
+      Top = 62
+      Width = 85
+      Constraints.MaxHeight = 28
+      ItemHeight = 0
+      ParentFont = False
+      Style = csDropDownList
+      TabOrder = 7
     end
   end
   object PageControl1: TPageControl
@@ -587,9 +586,9 @@ object pop_scope: Tpop_scope
         end
         object Label34: TLabel
           Left = 13
-          Height = 19
+          Height = 17
           Top = 0
-          Width = 52
+          Width = 51
           Caption = 'Protocol'
           ParentColor = False
           ParentFont = False
@@ -606,16 +605,16 @@ object pop_scope: Tpop_scope
         end
         object Label35: TLabel
           Left = 93
-          Height = 19
+          Height = 17
           Top = 0
-          Width = 165
+          Width = 163
           Caption = 'Remote host or IP address'
           ParentColor = False
           ParentFont = False
         end
         object Label36: TLabel
           Left = 13
-          Height = 19
+          Height = 17
           Top = 49
           Width = 43
           Caption = 'IP Port'
@@ -624,16 +623,16 @@ object pop_scope: Tpop_scope
         end
         object Label37: TLabel
           Left = 146
-          Height = 19
+          Height = 17
           Top = 49
-          Width = 145
+          Width = 144
           Caption = 'Remote device number'
           ParentColor = False
           ParentFont = False
         end
         object Label3: TLabel
           Left = 146
-          Height = 19
+          Height = 17
           Top = 72
           Width = 66
           Caption = 'Telescope/'
@@ -642,18 +641,18 @@ object pop_scope: Tpop_scope
         end
         object Label38: TLabel
           Left = 156
-          Height = 19
+          Height = 17
           Top = 97
-          Width = 61
+          Width = 59
           Caption = 'Password'
           ParentColor = False
           ParentFont = False
         end
         object Label39: TLabel
           Left = 13
-          Height = 19
+          Height = 17
           Top = 97
-          Width = 69
+          Width = 68
           Caption = 'User name'
           ParentColor = False
           ParentFont = False

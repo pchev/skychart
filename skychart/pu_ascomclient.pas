@@ -50,7 +50,7 @@ type
     ArrowDown: TArrow;
     ArrowStop: TButton;
     ArrowUp: TArrow;
-    AxisRates: TSpinEdit;
+    AxisRates: TComboBox;
     ButtonConnect: TButton;
     ButtonGetLocation: TSpeedButton;
     ButtonPark: TSpeedButton;
@@ -195,8 +195,8 @@ type
     procedure ScopeClose;
     function ScopeInterfaceVersion: integer;
     procedure ScopeReadConfig(ConfigPath: shortstring);
-    procedure GetScopeRates(var nrates0, nrates1: integer;
-      axis0rates, axis1rates: Pdoublearray);
+    procedure GetScopeRates(var nrates0, nrates1: integer; axis0rates, axis1rates: Pdoublearray); overload;
+    procedure GetScopeRates(var nrates: integer; var rates: TStringList); overload;
     procedure ScopeMoveAxis(axis: integer; rate: double);
     property Longitude: double read FLongitude;
     property Latitude: double read FLatitude;
@@ -344,7 +344,8 @@ end;
 procedure Tpop_scope.ScopeConnect(var ok: boolean);
 var
   dis_ok,c_ok: boolean;
-  nrates0, nrates1: integer;
+  nrates: integer;
+  rates: TStringList;
   axis0rates, axis1rates: array of double;
 begin
   led.brush.color := clRed;
@@ -404,13 +405,13 @@ begin
         Handpad.Visible:=TR.Get('canmoveaxis','Axis=0').AsBool and TR.Get('canmoveaxis','Axis=1').AsBool;
       end;
       if handpad.Visible then begin
-        GetScopeRates(nrates0, nrates1, @axis0rates, @axis1rates);
-        if (nrates0>0)and(nrates1>0) then begin
-           AxisRates.MinValue:=round(max(1,3600*max(axis0rates[0],axis1rates[0])/siderealrate));
-           AxisRates.MaxValue:=round(min(3600,3600*min(axis0rates[1],axis1rates[1]))/siderealrate);
-           AxisRates.Hint:=IntToStr(AxisRates.MinValue)+'...'+IntToStr(AxisRates.MaxValue);
+        rates:=TStringList.Create;
+        GetScopeRates(nrates, rates);
+        if (nrates>0) then begin
+           AxisRates.Items.Assign(rates);
+           if  AxisRates.Items.Count>0 then AxisRates.ItemIndex:=0;
         end;
-        AxisRates.Value:=min(AxisRates.MaxValue,max(32,AxisRates.MinValue));
+        rates.Free;
         FlipNS.ItemIndex:=0;
       end;
       except
@@ -839,6 +840,55 @@ begin
 
 end;
 
+procedure Tpop_scope.GetScopeRates(var nrates: integer; var rates: TStringList);
+var
+  i, j, n0, n1: integer;
+  ax0r, ax1r: array of double;
+  min, max, step, rate, x: double;
+begin
+  n0 := 0;
+  n1 := 0;
+  if ScopeInterfaceVersion>1 then begin
+    GetScopeRates(n0, n1, @ax0r, @ax1r);
+    if n0 >= 1 then
+    begin
+      for i := 0 to n0 - 1 do
+      begin
+        min := ax0r[2 * i];
+        max := ax0r[2 * i + 1];
+        if min = max then
+          rates.Add(formatfloat(f4s, min))
+        else
+        begin
+          step := (max - min) / 3;
+          for j := 0 to 3 do
+          begin
+            rate := min + j * step;
+            if (i=0) and (rate = 0) and (max > 0.15) then
+            begin  // add slow speed 2x ->32x sidereal
+              rates.add('0.0083');  // 2x
+              rates.add('0.0333');  // 8x
+              rates.add('0.1333');  //32x
+              x := step / 2;
+              if step > 0.3 then
+                rates.add(formatfloat('0.0000', x));
+            end
+            else if rate > 0 then
+              rates.add(formatfloat('0.0000', rate));
+          end;
+        end;
+      end;
+    end
+    else begin
+      rates.add('Error getting supported rates!');
+    end;
+  end
+  else begin
+    rates.add('Unsupported by V1 driver!');
+  end;
+  nrates := rates.Count;
+end;
+
 procedure Tpop_scope.ScopeMoveAxis(axis: integer; rate: double);
 begin
   if ScopeConnected then
@@ -894,7 +944,7 @@ begin
   ButtonDisconnect.Caption := rsDisconnect;
   ButtonHide.Caption := rsHide;
   ButtonAdvSetting.Caption := rsAdvancedSett2;
-  Label4.Caption:=rsSideral+' x';
+  Label4.Caption:=rsSpeed;
   flipns.Hint:=rsFlipNSMoveme;
 
   SetHelp(self, hlpASCOM);
@@ -1241,7 +1291,7 @@ end;
 procedure Tpop_scope.ArrowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var rate,flip: double;
 begin
-  rate:=siderealrate*AxisRates.Value/3600;  // deg/sec
+  rate:=StrToFloatDef(AxisRates.Text,0);  // deg/sec
   if FlipNS.ItemIndex=0 then
     flip:=1
   else
