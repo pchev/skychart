@@ -1740,84 +1740,114 @@ begin
   Result := d + 'h' + m + 'm' + s + 's';
 end;
 
-function Str3ToAR(dms: string): double;
-var
-  s, p: integer;
-  t: string;
+function Str3ToAR(dms : string): double;
+type tseplist=array[1..3] of string;
+var s,p : integer;
+    t : string;
+    sep: tseplist;
+const
+    sep1: tseplist = ('h','m','s');
+    sep2: tseplist = (':',':',':');
+    sep3: tseplist = (' ',' ',' ');
 begin
-
-  try
-    dms := StringReplace(dms, blank, '0', [rfReplaceAll]);
-
-    if copy(dms, 1, 1) = '-' then
-      s := -1
-    else
-      s := 1;
-
-    p := pos('h', dms);
-
-    if p = 0 then
-      Result := StrToFloatDef(dms, 0)
-    else
-    begin
-      t := copy(dms, 1, p - 1);
-      Delete(dms, 1, p);
-      Result := StrToIntDef(t, 0);
-      p := pos('m', dms);
-      t := copy(dms, 1, p - 1);
-      Delete(dms, 1, p);
-      Result := Result + s * StrToIntDef(t, 0) / 60;
-      p := pos('s', dms);
-      t := copy(dms, 1, p - 1);
-      Result := Result + s * StrToFloatDef(t, 0) / 3600;
-    end;
-
-  except
-    Result := 0;
+try
+  if copy(dms,1,1)='-' then s:=-1 else s:=1;
+  sep:=sep1;
+  p:=pos(sep[1],dms);
+  if p=0 then begin
+    sep:=sep2;
+    p:=pos(sep[1],dms);
   end;
-
+  if p=0 then begin
+    sep:=sep3;
+    p:=pos(sep[1],dms);
+  end;
+  if p=0 then
+    result:=StrToFloatDef(trim(dms),-9999)
+  else begin
+    t:=copy(dms,1,p-1); delete(dms,1,p);
+    result:=StrToFloatDef(trim(t),0);
+    p:=pos(sep[2],dms);
+    if p=0 then
+      result:=result+ s * StrToFloatDef(trim(dms),0) / 60
+    else begin
+      t:=copy(dms,1,p-1); delete(dms,1,p);
+      result:=result+ s * StrToFloatDef(trim(t),0) / 60;
+      p:=pos(sep[3],dms);
+      if p=0 then
+        t:=dms
+      else
+        t:=copy(dms,1,p-1);
+      result:=result+ s * StrToFloatDef(trim(t),0) / 3600;
+    end;
+  end;
+except
+result:=-9999;
+end;
 end;
 
-function Str3ToDE(dms: string): double;
-var
-  s, p: integer;
-  t: string;
+function Str3ToDE(dms : string): double;
+type tseplist=array[1..3] of string;
+var s,p,d1 : integer;
+    t : string;
+    sep: tseplist;
+const
+    sep1: tseplist = ('d','m','s');
+    sep2: tseplist = ('°','''','"');
+    sep3: tseplist = (#176,'''','"');
+    sep4: tseplist = (':',':',':');
+    sep5: tseplist = (' ',' ',' ');
 begin
-
-  try
-
-    dms := StringReplace(dms, blank, '0', [rfReplaceAll]);
-    dms:=StringReplace(dms,ldeg,'d',[]);
-    dms:=StringReplace(dms,lmin,'m',[]);
-    dms:=StringReplace(dms,lsec,'s',[]);
-
-    if copy(dms, 1, 1) = '-' then
-      s := -1
-    else
-      s := 1;
-
-    p := pos('d', dms);
-
-    if p = 0 then
-      Result := StrToFloatDef(dms, 0)
-    else
-    begin
-      t := copy(dms, 1, p - 1);
-      Delete(dms, 1, p);
-      Result := StrToIntDef(t, 0);
-      p := pos('m', dms);
-      t := copy(dms, 1, p - 1);
-      Delete(dms, 1, p);
-      Result := Result + s * StrToIntDef(t, 0) / 60;
-      p := pos('s', dms);
-      t := copy(dms, 1, p - 1);
-      Result := Result + s * StrToFloatDef(t, 0) / 3600;
-    end;
-
-  except
-    Result := 0;
+try
+  dms:=StringReplace(dms,ldeg,'d',[]);
+  dms:=StringReplace(dms,lmin,'m',[]);
+  dms:=StringReplace(dms,lsec,'s',[]);
+  if copy(dms,1,1)='-' then s:=-1 else s:=1;
+  sep:=sep1;
+  d1:=length(sep[1])-1;
+  p:=pos(sep[1],dms);
+  if p=0 then begin
+    sep:=sep2;
+    d1:=length(sep[1])-1;
+    p:=pos(sep[1],dms);
   end;
-
+  if p=0 then begin
+    sep:=sep3;
+    d1:=length(sep[1])-1;
+    p:=pos(sep[1],dms);
+  end;
+  if p=0 then begin
+    sep:=sep4;
+    d1:=length(sep[1])-1;
+    p:=pos(sep[1],dms);
+  end;
+  if p=0 then begin
+    sep:=sep5;
+    d1:=length(sep[1])-1;
+    p:=pos(sep[1],dms);
+  end;
+  if p=0 then
+    result:=StrToFloatDef(trim(dms),-9999)
+  else begin
+    t:=copy(dms,1,p-1); delete(dms,1,p+d1);
+    result:=StrToFloatDef(trim(t),0);
+    p:=pos(sep[2],dms);
+    if p=0 then
+      result:=result+ s * StrToFloatDef(trim(dms),0) / 60
+    else begin
+      t:=copy(dms,1,p-1); delete(dms,1,p);
+      result:=result+ s * StrToFloatDef(trim(t),0) / 60;
+      p:=pos(sep[3],dms);
+      if p=0 then
+        t:=dms
+      else
+        t:=copy(dms,1,p-1);
+      result:=result+ s * StrToFloatDef(trim(t),0) / 3600;
+    end;
+  end;
+except
+ result:=-9999;
+end;
 end;
 
 function isodate(a, m, d: integer): string;

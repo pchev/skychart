@@ -255,9 +255,9 @@ begin
     StringGrid1.RowCount := StringGrid1.RowCount + 1;
     StringGrid1.Cells[1, StringGrid1.RowCount - 1] := obj;
     StringGrid1.Cells[7, StringGrid1.RowCount - 1] := obj;
-    buf := FormatFloat(f5, ra);
+    buf := ARptoStr(ra/15,0);
     StringGrid1.Cells[2, StringGrid1.RowCount - 1] := buf;
-    buf := FormatFloat(f5, de);
+    buf := DEToStr3(de);
     StringGrid1.Cells[3, StringGrid1.RowCount - 1] := buf;
     StringGrid1.Cells[6, StringGrid1.RowCount - 1] := '';
     UpdateLabels(nil,upd);
@@ -318,9 +318,9 @@ begin
         end;
         if ra > -900 then
         begin
-          buf1 := FormatFloat(f5, ra);
+          buf1 := ARpToStr(ra/15,0);
           StringGrid1.Cells[2, StringGrid1.RowCount - 1] := buf1;
-          buf1 := FormatFloat(f5, de);
+          buf1 := DEToStr3(de);
           StringGrid1.Cells[3, StringGrid1.RowCount - 1] := buf1;
         end
         else
@@ -364,8 +364,8 @@ begin
     for i := 1 to StringGrid1.RowCount - 1 do
     begin
       buf := copy(StringGrid1.Cells[1, i] + bl, 1, objl);
-      buf := buf + copy(StringGrid1.Cells[2, i] + bl, 1, radecl);
-      buf := buf + copy(StringGrid1.Cells[3, i] + bl, 1, radecl);
+      buf := buf + copy(FormatFloat(f5,Str3ToAR(trim(StringGrid1.Cells[2, i]))*15) + bl, 1, radecl);
+      buf := buf + copy(FormatFloat(f5,Str3ToDE(trim(StringGrid1.Cells[3, i]))) + bl, 1, radecl);
       buf := buf + copy(StringGrid1.Cells[7, i] + bl, 1, objl);
       buf := buf + StringGrid1.Cells[6, i];
       writeln(f, buf);
@@ -402,8 +402,8 @@ var
 begin
   StringGrid1.Row := r;
   FObjName := trim(StringGrid1.Cells[1, r]);
-  ra := StrToFloatDef(trim(StringGrid1.Cells[2, r]), -1);
-  de := StrToFloatDef(trim(StringGrid1.Cells[3, r]), 0);
+  ra := Str3ToAR(trim(StringGrid1.Cells[2, r]))*15;
+  de := Str3ToDE(trim(StringGrid1.Cells[3, r]));
   if (ra >= 0) and assigned(FSelectObject) then
     FSelectObject(FObjName, ra, de);
   if (FObjName = rsTelescope) or (FObjName = rsCursor) then
@@ -590,8 +590,8 @@ begin
       if (lbl <> '') then
       begin
         crd := TLabelCoord.Create;
-        crd.ra := StrToFloatDef(trim(StringGrid1.Cells[2, i]), -9999);
-        crd.Dec := StrToFloatDef(trim(StringGrid1.Cells[3, i]), -9999);
+        crd.ra := Str3ToAR(trim(StringGrid1.Cells[2, i]))*15;
+        crd.Dec := Str3ToDE(trim(StringGrid1.Cells[3, i]));
         FObjLabels.AddObject(lbl, crd);
       end;
     end;
@@ -629,9 +629,9 @@ begin
   FGetObjectCoord(buf, lbl, ra, de);
   if ra >= 0 then
   begin
-    buf1 := FormatFloat(f5, ra);
+    buf1 := ARpToStr(ra/15,0);
     StringGrid1.Cells[2, arow] := buf1;
-    buf1 := FormatFloat(f5, de);
+    buf1 := DEToStr3(de);
     StringGrid1.Cells[3, arow] := buf1;
     StringGrid1.Cells[7, arow] := lbl;
     Result := True;
@@ -667,8 +667,8 @@ begin
   end;
   for i := 1 to StringGrid1.RowCount - 1 do
   begin
-    ra := StrToFloatDef(trim(StringGrid1.Cells[2, i]), -1);
-    de := StrToFloatDef(trim(StringGrid1.Cells[3, i]), 0);
+    ra := Str3ToAR(trim(StringGrid1.Cells[2, i]))*15;
+    de := Str3ToDE(trim(StringGrid1.Cells[3, i]));
     if ra >= 0 then
     begin
       ra := deg2rad * ra;
@@ -717,8 +717,8 @@ begin
     ha := 12;
   for i := 1 to StringGrid1.RowCount - 1 do
   begin
-    ra := StrToFloatDef(trim(StringGrid1.Cells[2, i]), -1);
-    de := StrToFloatDef(trim(StringGrid1.Cells[3, i]), 0);
+    ra := Str3ToAR(trim(StringGrid1.Cells[2, i]))*15;
+    de := Str3ToDE(trim(StringGrid1.Cells[3, i]));
     if ra >= 0 then
     begin
       ra := deg2rad * ra;
@@ -768,12 +768,12 @@ begin
   locknewlist := False;
   locktogglebox := False;
   StringGrid1.AllowOutboundEvents := True;
-  StringGrid1.ColWidths[0] := 32;
-  StringGrid1.ColWidths[1] := 200;
-  StringGrid1.ColWidths[2] := 80;
-  StringGrid1.ColWidths[3] := 80;
-  StringGrid1.ColWidths[4] := 80;
-  StringGrid1.ColWidths[5] := 80;
+  StringGrid1.ColWidths[0] := DoScaleX(32);
+  StringGrid1.ColWidths[1] := DoScaleX(200);
+  StringGrid1.ColWidths[2] := DoScaleX(96);
+  StringGrid1.ColWidths[3] := DoScaleX(90);
+  StringGrid1.ColWidths[4] := DoScaleX(80);
+  StringGrid1.ColWidths[5] := DoScaleX(80);
   StringGrid1.ColWidths[6] := StringGrid1.ClientWidth - StringGrid1.ColWidths[0] -
     StringGrid1.ColWidths[1] - StringGrid1.ColWidths[2] - StringGrid1.ColWidths[3] - 8;
   Newlist;
@@ -1033,7 +1033,22 @@ end;
 
 procedure Tf_obslist.StringGrid1ValidateEntry(Sender: TObject;
   aCol, aRow: integer; const OldValue: string; var NewValue: string);
+var x: double;
 begin
+  if aCol=2 then begin
+    x:=Str3ToAR(NewValue);
+    if x=-9999 then
+      NewValue:=OldValue
+    else
+      NewValue:=ARpToStr(x);
+  end;
+  if aCol=3 then begin
+    x:=Str3ToDE(NewValue);
+    if x=-9999 then
+      NewValue:=OldValue
+    else
+      NewValue:=DEToStr3(x);
+  end;
   if aCol in [0, 4, 5] then
     NewValue := OldValue
   else if OldValue <> NewValue then
@@ -1267,8 +1282,8 @@ begin
   FObjName := trim(StringGrid1.Cells[1, r]);
   if (FObjName = rsTelescope) or (FObjName = rsCursor) then
     FObjName := trim(StringGrid1.Cells[7, r]);
-  ra := StrToFloatDef(trim(StringGrid1.Cells[2, r]), -1);
-  de := StrToFloatDef(trim(StringGrid1.Cells[3, r]), 0);
+  ra := Str3ToAR(trim(StringGrid1.Cells[2, r]))*15;
+  de := Str3ToDE(trim(StringGrid1.Cells[3, r]));
   if (ra >= 0) and assigned(FSlew) then
     FSlew(FObjName, ra, de);
 end;

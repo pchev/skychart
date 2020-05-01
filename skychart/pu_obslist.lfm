@@ -1,31 +1,30 @@
 object f_obslist: Tf_obslist
   Left = 189
-  Height = 493
+  Height = 498
   Top = 34
-  Width = 792
+  Width = 800
   ActiveControl = Edit1
   Caption = 'f_obslist'
-  ClientHeight = 493
-  ClientWidth = 792
-  DesignTimePPI = 95
+  ClientHeight = 498
+  ClientWidth = 800
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
   object PanelBot: TPanel
     Left = 0
-    Height = 65
-    Top = 428
-    Width = 792
+    Height = 66
+    Top = 432
+    Width = 800
     Align = alBottom
-    ClientHeight = 65
-    ClientWidth = 792
+    ClientHeight = 66
+    ClientWidth = 800
     ParentFont = False
     TabOrder = 2
     object FileNameEdit1: TFileNameEdit
       Left = 0
       Height = 28
       Top = 3
-      Width = 190
+      Width = 192
       FilterIndex = 0
       HideDirectories = False
       ButtonWidth = 23
@@ -37,60 +36,60 @@ object f_obslist: Tf_obslist
       OnChange = ButtonLoadClick
     end
     object ButtonSave: TButton
-      Left = 293
+      Left = 296
       Height = 25
       Top = 3
-      Width = 74
+      Width = 75
       Caption = 'Save'
       OnClick = ButtonSaveClick
       ParentFont = False
       TabOrder = 1
     end
     object ButtonClear: TButton
-      Left = 372
+      Left = 376
       Height = 25
       Top = 3
-      Width = 74
+      Width = 75
       Caption = 'Clear'
       OnClick = ButtonClearClick
       ParentFont = False
       TabOrder = 2
     end
     object UpdAllCoord: TButton
-      Left = 238
+      Left = 241
       Height = 25
       Top = 35
-      Width = 185
+      Width = 187
       Caption = 'UpdAllCoord'
       OnClick = UpdAllCoordClick
       ParentFont = False
       TabOrder = 3
     end
     object Button1: TButton
-      Left = 116
+      Left = 117
       Height = 25
       Top = 35
-      Width = 74
+      Width = 75
       Caption = 'Help'
       OnClick = Button1Click
       ParentFont = False
       TabOrder = 4
     end
     object ButtonLoad: TButton
-      Left = 214
+      Left = 216
       Height = 25
       Top = 3
-      Width = 74
+      Width = 75
       Caption = 'Load'
       OnClick = ButtonLoadClick
       ParentFont = False
       TabOrder = 5
     end
     object AllLabels: TCheckBox
-      Left = 475
-      Height = 23
+      Left = 480
+      Height = 21
       Top = 3
-      Width = 235
+      Width = 240
       Caption = 'Add label for every object in the list'
       OnChange = AllLabelsChange
       ParentFont = False
@@ -99,42 +98,35 @@ object f_obslist: Tf_obslist
   end
   object StringGrid1: TStringGrid
     Left = 0
-    Height = 335
-    Top = 93
-    Width = 792
+    Height = 338
+    Top = 94
+    Width = 800
     Align = alClient
     ColCount = 8
     ColumnClickSorts = True
     Columns = <    
       item
-        MaxSize = 198
         Title.Caption = 'Title'
       end    
       item
-        MaxSize = 198
         Title.Caption = 'Title'
       end    
       item
-        MaxSize = 198
         Title.Caption = 'Title'
       end    
       item
-        MaxSize = 198
         Title.Caption = 'Title'
       end    
       item
-        MaxSize = 198
         Title.Caption = 'Title'
       end    
       item
-        MaxSize = 198
         Title.Caption = 'Title'
       end    
       item
-        MaxSize = 198
         Title.Caption = 'Title'
       end>
-    DefaultColWidth = 99
+    DefaultColWidth = 100
     MouseWheelOption = mwGrid
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowMoving, goEditing, goRowSelect, goSmoothScroll, goFixedRowNumbering, goFixedColSizing]
     ParentFont = False
@@ -150,19 +142,19 @@ object f_obslist: Tf_obslist
   end
   object PanelTop: TPanel
     Left = 0
-    Height = 93
+    Height = 94
     Top = 0
-    Width = 792
+    Width = 800
     Align = alTop
-    ClientHeight = 93
-    ClientWidth = 792
+    ClientHeight = 94
+    ClientWidth = 800
     ParentFont = False
     TabOrder = 0
     object Edit1: TEdit
       Left = 8
       Height = 28
       Top = 8
-      Width = 174
+      Width = 176
       Constraints.MaxHeight = 28
       ParentFont = False
       TabOrder = 0
@@ -178,7 +170,7 @@ object f_obslist: Tf_obslist
       TabOrder = 2
     end
     object Button6: TButton
-      Left = 55
+      Left = 56
       Height = 25
       Top = 40
       Width = 40
@@ -188,10 +180,10 @@ object f_obslist: Tf_obslist
       TabOrder = 3
     end
     object ToggleBox1: TToggleBox
-      Left = 190
+      Left = 192
       Height = 26
       Top = 3
-      Width = 89
+      Width = 90
       Caption = 'ToggleBox1'
       Checked = True
       OnClick = ToggleBox1Click
@@ -200,10 +192,10 @@ object f_obslist: Tf_obslist
       TabOrder = 1
     end
     object ToggleBox2: TToggleBox
-      Left = 190
+      Left = 192
       Height = 26
       Top = 30
-      Width = 89
+      Width = 90
       Caption = 'ToggleBox2'
       OnClick = ToggleBox2Click
       ParentFont = False
@@ -211,9 +203,9 @@ object f_obslist: Tf_obslist
     end
     object PageControl1: TPageControl
       Left = 278
-      Height = 91
+      Height = 92
       Top = 1
-      Width = 513
+      Width = 521
       ActivePage = TabSheet2
       Align = alRight
       Anchors = [akTop, akLeft, akBottom]
@@ -224,8 +216,8 @@ object f_obslist: Tf_obslist
       OnChange = PageControl1Change
       object TabSheet1: TTabSheet
         Caption = 'Airmass'
-        ClientHeight = 87
-        ClientWidth = 503
+        ClientHeight = 88
+        ClientWidth = 511
         ParentFont = False
         object LimitAirmassNow: TCheckBox
           Left = 16
@@ -248,7 +240,7 @@ object f_obslist: Tf_obslist
           TabOrder = 1
         end
         object Label2: TLabel
-          Left = 214
+          Left = 216
           Height = 19
           Top = 3
           Width = 40
@@ -257,10 +249,10 @@ object f_obslist: Tf_obslist
           ParentFont = False
         end
         object AirmassCombo: TComboBox
-          Left = 111
+          Left = 112
           Height = 26
           Top = 1
-          Width = 95
+          Width = 96
           Constraints.MaxHeight = 26
           ItemHeight = 0
           ItemIndex = 2
@@ -290,22 +282,22 @@ object f_obslist: Tf_obslist
       end
       object TabSheet2: TTabSheet
         Caption = 'Transit'
-        ClientHeight = 87
-        ClientWidth = 503
+        ClientHeight = 88
+        ClientWidth = 511
         ParentFont = False
         object LimitHourangleTonight: TCheckBox
-          Left = 142
-          Height = 23
+          Left = 143
+          Height = 21
           Top = 22
-          Width = 291
+          Width = 293
           Caption = 'Only objects within hour angle limits tonight'
           OnChange = LimitHourangleTonightChange
           ParentFont = False
           TabOrder = 2
         end
         object Label3: TLabel
-          Left = 142
-          Height = 19
+          Left = 143
+          Height = 17
           Top = 3
           Width = 30
           Caption = 'Limit'
@@ -313,10 +305,10 @@ object f_obslist: Tf_obslist
           ParentFont = False
         end
         object HourAngleCombo: TComboBox
-          Left = 238
+          Left = 241
           Height = 26
           Top = 1
-          Width = 71
+          Width = 72
           Constraints.MaxHeight = 26
           ItemHeight = 0
           ItemIndex = 1
@@ -332,19 +324,19 @@ object f_obslist: Tf_obslist
           Text = '2.0'
         end
         object Label4: TLabel
-          Left = 317
-          Height = 19
+          Left = 320
+          Height = 17
           Top = 3
-          Width = 37
+          Width = 38
           Caption = 'Hours'
           ParentColor = False
           ParentFont = False
         end
         object LimitHourangleNow: TCheckBox
-          Left = 142
-          Height = 23
+          Left = 143
+          Height = 21
           Top = 46
-          Width = 272
+          Width = 275
           Caption = 'Only objects within hour angle limits now'
           OnChange = LimitHourangleNowChange
           ParentFont = False
@@ -352,20 +344,20 @@ object f_obslist: Tf_obslist
         end
         object Panel1: TPanel
           Left = 0
-          Height = 87
+          Height = 88
           Top = 0
-          Width = 140
+          Width = 141
           Align = alLeft
           BevelOuter = bvLowered
-          ClientHeight = 87
-          ClientWidth = 140
+          ClientHeight = 88
+          ClientWidth = 141
           ParentFont = False
           TabOrder = 0
           object RadioButton1: TRadioButton
             Left = 2
-            Height = 23
+            Height = 21
             Top = 2
-            Width = 111
+            Width = 109
             Caption = 'RadioButton1'
             Checked = True
             OnClick = RadioGroup1Click
@@ -375,9 +367,9 @@ object f_obslist: Tf_obslist
           end
           object RadioButton2: TRadioButton
             Left = 2
-            Height = 23
+            Height = 21
             Top = 26
-            Width = 111
+            Width = 109
             Caption = 'RadioButton2'
             OnClick = RadioGroup1Click
             ParentFont = False
@@ -385,9 +377,9 @@ object f_obslist: Tf_obslist
           end
           object RadioButton3: TRadioButton
             Left = 2
-            Height = 23
-            Top = 49
-            Width = 111
+            Height = 21
+            Top = 50
+            Width = 109
             Caption = 'RadioButton3'
             OnClick = RadioGroup1Click
             ParentFont = False
@@ -397,10 +389,10 @@ object f_obslist: Tf_obslist
       end
     end
     object BtnTour: TButton
-      Left = 103
+      Left = 104
       Height = 25
       Top = 40
-      Width = 79
+      Width = 80
       Caption = 'Tour'
       OnClick = BtnTourClick
       ParentFont = False
@@ -409,8 +401,8 @@ object f_obslist: Tf_obslist
   end
   object PopupMenu1: TPopupMenu
     OnPopup = PopupMenu1Popup
-    left = 261
-    top = 230
+    left = 264
+    top = 232
     object MenuTitle: TMenuItem
       Enabled = False
     end
@@ -431,7 +423,7 @@ object f_obslist: Tf_obslist
     Enabled = False
     Interval = 60000
     OnTimer = RefreshTimerTimer
-    left = 356
-    top = 233
+    left = 360
+    top = 235
   end
 end
