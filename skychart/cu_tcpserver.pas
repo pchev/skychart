@@ -293,6 +293,8 @@ begin
               break;
             if (cmdresult = msgOK) and (uppercase(cmd[0]) = 'SELECTCHART') then
               active_chart := cmd[1];
+            if (copy(cmdresult,1,3) = msgOK) and (uppercase(cmd[0]) = 'NEWCHART') then
+              active_chart := trim(copy(cmdresult,4,9999));
           end
           else
           begin
