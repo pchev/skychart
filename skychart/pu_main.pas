@@ -6338,6 +6338,7 @@ begin
   def_cfgsc.ShowAsteroid := True;
   def_cfgsc.ShowSmallsat := True;
   def_cfgsc.DSLforcecolor := False;
+  def_cfgsc.DSLsurface := True;
   def_cfgsc.DSLcolor := 0;
   def_cfgsc.SurfaceAlpha := 128;
   def_cfgsc.SurfaceBlure := false;
@@ -7267,6 +7268,7 @@ begin
         csc.ShowSmallsat := ReadBool(section, 'ShowSmallsat', csc.ShowSmallsat);
         csc.ShowAsteroid := ReadBool(section, 'ShowAsteroid', csc.ShowAsteroid);
         csc.ShowComet := ReadBool(section, 'ShowComet', csc.ShowComet);
+        csc.DSLsurface := ReadBool(section, 'DSLsurface', csc.DSLsurface);
         csc.DSLforcecolor := ReadBool(section, 'DSLforcecolor', csc.DSLforcecolor);
         csc.DSLcolor := ReadInteger(section, 'DSLcolor', csc.DSLcolor);
         csc.SurfaceBlure := ReadBool(section, 'SurfaceBlure', csc.SurfaceBlure);
@@ -8614,6 +8616,7 @@ begin
         WriteBool(section, 'ShowSmallsat', csc.ShowSmallsat);
         WriteBool(section, 'ShowAsteroid', csc.ShowAsteroid);
         WriteBool(section, 'ShowComet', csc.ShowComet);
+        WriteBool(section, 'DSLsurface', csc.DSLsurface);
         WriteBool(section, 'DSLforcecolor', csc.DSLforcecolor);
         WriteInteger(section, 'DSLcolor', csc.DSLcolor);
         WriteBool(section, 'SurfaceBlure', csc.SurfaceBlure);

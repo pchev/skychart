@@ -1012,7 +1012,7 @@ type
     DrawPrePoint: Boolean;
     CurTime, DT_UT_val, GRSlongitude, GRSjd, GRSdrift, TelescopeTurnsX,
     TelescopeTurnsY, TelescopeJD, HorizonPictureRotate: double;
-    PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline, DSLforcecolor, SurfaceBlure: boolean;
+    PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline, DSLforcecolor, DSLsurface, SurfaceBlure: boolean;
     ManualTelescopeType, CoordType, DSLcolor, SurfaceAlpha: integer;
     IndiServerHost, IndiServerPort, IndiDevice: string;
     IndiLoadConfig, ShowCircle, ShowCrosshair, IndiTelescope, ASCOMTelescope,
@@ -2229,6 +2229,7 @@ begin
   SunOnline := Source.SunOnline;
   DSLcolor := Source.DSLcolor;
   DSLforcecolor := Source.DSLforcecolor;
+  DSLsurface := Source.DSLsurface;
   SurfaceBlure := Source.SurfaceBlure;
   SurfaceAlpha := Source.SurfaceAlpha;
   ab1 := Source.ab1;

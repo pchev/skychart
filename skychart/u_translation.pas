@@ -1550,6 +1550,7 @@ resourcestring
   rsLockChartPos = 'Lock chart position';
   rsReplaceByTic = 'Replace by tick mark';
   rsSpeed = 'Speed';
+  rsFillNebulae = 'Fill nebulae';
 
 // also update upsi_translation
 

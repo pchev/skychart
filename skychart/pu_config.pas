@@ -46,6 +46,7 @@ type
     f_config_calendar1: Tf_config_calendar;
     f_config_catalog1: Tf_config_catalog;
     f_config_chart1: Tf_config_chart;
+    f_config_display1: Tf_config_display;
     f_config_observatory1: Tf_config_observatory;
     f_config_system1: Tf_config_system;
     f_config_time1: Tf_config_time;
@@ -74,7 +75,6 @@ type
     CancelBtn: TButton;
     HelpBtn: TButton;
     f_config_solsys1: Tf_config_solsys;
-    f_config_display1: Tf_config_display;
     f_config_pictures1: Tf_config_pictures;
     f_config_internet1: Tf_config_internet;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);

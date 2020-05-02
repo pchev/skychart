@@ -24,11 +24,11 @@ object f_config_display: Tf_config_display
       Height = 532
       Top = 1
       Width = 508
-      ActivePage = Page9
+      ActivePage = Page5
       Align = alClient
       ParentFont = False
       ShowTabs = False
-      TabIndex = 8
+      TabIndex = 4
       TabOrder = 0
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
@@ -1765,8 +1765,8 @@ object f_config_display: Tf_config_display
         object EqGrid: TCheckBox
           Left = 16
           Height = 21
-          Top = 105
-          Width = 146
+          Top = 82
+          Width = 144
           Caption = 'Add Equatorial Grid'
           OnClick = EqGridClick
           ParentFont = False
@@ -1775,8 +1775,8 @@ object f_config_display: Tf_config_display
         object CGrid: TCheckBox
           Left = 16
           Height = 21
-          Top = 56
-          Width = 161
+          Top = 33
+          Width = 159
           Caption = 'Show Coordinate Grid'
           OnClick = CGridClick
           ParentFont = False
@@ -1785,7 +1785,7 @@ object f_config_display: Tf_config_display
         object ecliptic: TCheckBox
           Left = 280
           Height = 21
-          Top = 56
+          Top = 82
           Width = 102
           Caption = 'Show Ecliptic'
           OnClick = eclipticClick
@@ -1795,8 +1795,8 @@ object f_config_display: Tf_config_display
         object galactic: TCheckBox
           Left = 280
           Height = 21
-          Top = 105
-          Width = 163
+          Top = 139
+          Width = 160
           Caption = 'Show Galactic Equator'
           OnClick = galacticClick
           ParentFont = False
@@ -1806,7 +1806,7 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 21
           Top = 5
-          Width = 125
+          Width = 124
           Caption = 'Show Grid Label'
           OnClick = GridNumClick
           ParentFont = False
@@ -1815,7 +1815,7 @@ object f_config_display: Tf_config_display
         object GroupBox1: TGroupBox
           Left = 8
           Height = 126
-          Top = 210
+          Top = 216
           Width = 276
           Caption = 'Constellation Figures'
           ClientHeight = 106
@@ -1824,9 +1824,9 @@ object f_config_display: Tf_config_display
           TabOrder = 11
           object Label132: TLabel
             Left = 29
-            Height = 19
+            Height = 17
             Top = 61
-            Width = 199
+            Width = 196
             Caption = 'Constellation Figure File Name : '
             ParentColor = False
             ParentFont = False
@@ -1835,7 +1835,7 @@ object f_config_display: Tf_config_display
             Left = 8
             Height = 21
             Top = 6
-            Width = 185
+            Width = 183
             Caption = 'Show Constellation Figure'
             OnClick = ConstlClick
             ParentFont = False
@@ -1911,9 +1911,9 @@ object f_config_display: Tf_config_display
           TabOrder = 13
           object Label72: TLabel
             Left = 29
-            Height = 19
+            Height = 17
             Top = 61
-            Width = 221
+            Width = 218
             Caption = 'Constellation Boundary File Name : '
             ParentColor = False
             ParentFont = False
@@ -1922,7 +1922,7 @@ object f_config_display: Tf_config_display
             Left = 8
             Height = 21
             Top = 6
-            Width = 207
+            Width = 205
             Caption = 'Show Constellation Boundary'
             OnClick = ConstbClick
             ParentFont = False
@@ -1988,7 +1988,7 @@ object f_config_display: Tf_config_display
         object GroupBox4: TGroupBox
           Left = 296
           Height = 126
-          Top = 210
+          Top = 216
           Width = 187
           Caption = 'Milky Way'
           ClientHeight = 106
@@ -1999,7 +1999,7 @@ object f_config_display: Tf_config_display
             Left = 8
             Height = 21
             Top = 6
-            Width = 123
+            Width = 122
             Caption = 'Show Milky Way'
             OnClick = milkywayClick
             ParentFont = False
@@ -2009,7 +2009,7 @@ object f_config_display: Tf_config_display
             Left = 8
             Height = 21
             Top = 73
-            Width = 105
+            Width = 104
             Caption = 'Fill Milky Way'
             OnClick = fillmilkywayClick
             ParentFont = False
@@ -2019,7 +2019,7 @@ object f_config_display: Tf_config_display
             Left = 8
             Height = 21
             Top = 38
-            Width = 140
+            Width = 139
             Caption = 'linemodemilkyway'
             OnClick = linemodemilkywayClick
             ParentFont = False
@@ -2029,7 +2029,7 @@ object f_config_display: Tf_config_display
         object GridStyle: TComboBox
           Left = 40
           Height = 26
-          Top = 77
+          Top = 54
           Width = 121
           AutoSize = False
           Constraints.MaxHeight = 28
@@ -2053,7 +2053,7 @@ object f_config_display: Tf_config_display
         object EclipticStyle: TComboBox
           Left = 300
           Height = 26
-          Top = 77
+          Top = 106
           Width = 121
           AutoSize = False
           Constraints.MaxHeight = 28
@@ -2077,7 +2077,7 @@ object f_config_display: Tf_config_display
         object EqGridStyle: TComboBox
           Left = 39
           Height = 26
-          Top = 129
+          Top = 106
           Width = 121
           AutoSize = False
           Constraints.MaxHeight = 28
@@ -2101,7 +2101,7 @@ object f_config_display: Tf_config_display
         object GalEqStyle: TComboBox
           Left = 300
           Height = 26
-          Top = 129
+          Top = 163
           Width = 121
           AutoSize = False
           Constraints.MaxHeight = 28
@@ -2134,9 +2134,9 @@ object f_config_display: Tf_config_display
           TabOrder = 14
           object Label68: TLabel
             Left = 100
-            Height = 19
+            Height = 17
             Top = 83
-            Width = 35
+            Width = 34
             Caption = 'years'
             ParentColor = False
             ParentFont = False
@@ -2181,8 +2181,8 @@ object f_config_display: Tf_config_display
         object OnlyMeridian: TCheckBox
           Left = 16
           Height = 21
-          Top = 186
-          Width = 200
+          Top = 163
+          Width = 199
           Caption = 'Show only meridian in Alt/Az'
           OnClick = OnlyMeridianClick
           ParentFont = False
@@ -2207,9 +2207,9 @@ object f_config_display: Tf_config_display
         end
         object Label10: TLabel
           Left = 327
-          Height = 19
+          Height = 17
           Top = 33
-          Width = 50
+          Width = 49
           Caption = 'Label10'
           ParentColor = False
           ParentFont = False
@@ -2217,8 +2217,8 @@ object f_config_display: Tf_config_display
         object CheckBox8: TCheckBox
           Left = 16
           Height = 21
-          Top = 162
-          Width = 154
+          Top = 139
+          Width = 151
           Caption = 'Always add meridian'
           OnClick = CheckBox8Click
           ParentFont = False
@@ -2227,8 +2227,8 @@ object f_config_display: Tf_config_display
         object ShowEquator: TCheckBox
           Left = 280
           Height = 21
-          Top = 157
-          Width = 166
+          Top = 192
+          Width = 164
           Caption = 'Show Celestial Equator'
           OnClick = ShowEquatorClick
           ParentFont = False
@@ -2238,7 +2238,7 @@ object f_config_display: Tf_config_display
           Tag = 1
           Left = 175
           Height = 28
-          Top = 77
+          Top = 54
           Width = 51
           Constraints.MaxHeight = 28
           MaxLength = 0
@@ -2252,7 +2252,7 @@ object f_config_display: Tf_config_display
           Tag = 2
           Left = 175
           Height = 28
-          Top = 129
+          Top = 106
           Width = 51
           Constraints.MaxHeight = 28
           MaxLength = 0
@@ -2266,7 +2266,7 @@ object f_config_display: Tf_config_display
           Tag = 5
           Left = 433
           Height = 28
-          Top = 77
+          Top = 106
           Width = 51
           Constraints.MaxHeight = 28
           MaxLength = 0
@@ -2281,7 +2281,7 @@ object f_config_display: Tf_config_display
           Tag = 6
           Left = 433
           Height = 28
-          Top = 129
+          Top = 163
           Width = 51
           Constraints.MaxHeight = 28
           MaxLength = 0
@@ -2291,6 +2291,15 @@ object f_config_display: Tf_config_display
           MaxValue = 10
           MinValue = 1
           Value = 1
+        end
+        object DSLsurface: TCheckBox
+          Left = 300
+          Height = 21
+          Top = 55
+          Width = 94
+          Caption = 'DSLsurface'
+          OnClick = DSLsurfaceClick
+          TabOrder = 21
         end
       end
       object Page6: TTabSheet
@@ -4085,9 +4094,9 @@ object f_config_display: Tf_config_display
         ParentFont = False
         object Label308: TLabel
           Left = 26
-          Height = 19
+          Height = 17
           Top = 13
-          Width = 201
+          Width = 196
           Caption = 'Finder rectangle (CCD / Camera)'
           ParentColor = False
           ParentFont = False
@@ -4118,7 +4127,7 @@ object f_config_display: Tf_config_display
           Left = 26
           Height = 21
           Top = 447
-          Width = 164
+          Width = 162
           Caption = 'Mark the chart center '
           OnClick = CenterMark1Click
           ParentFont = False
@@ -4128,7 +4137,7 @@ object f_config_display: Tf_config_display
           Left = 296
           Height = 21
           Top = 416
-          Width = 91
+          Width = 90
           Caption = 'Show label'
           OnClick = CheckBox2Click
           ParentFont = False
@@ -4138,7 +4147,7 @@ object f_config_display: Tf_config_display
           Left = 296
           Height = 21
           Top = 447
-          Width = 131
+          Width = 129
           Caption = 'Show mark index'
           OnClick = MarkNumberClick
           ParentFont = False
@@ -4156,9 +4165,9 @@ object f_config_display: Tf_config_display
         end
         object Label16: TLabel
           Left = 26
-          Height = 19
+          Height = 17
           Top = 386
-          Width = 403
+          Width = 396
           Caption = 'Do not use row 10, it is reserved for external software interface.'
           ParentColor = False
         end

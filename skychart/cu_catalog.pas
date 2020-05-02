@@ -181,7 +181,7 @@ type
     function OpenMilkyWay(fill: boolean): boolean;
     function CloseMilkyWay: boolean;
     function ReadMilkyWay(var rec: GcatRec): boolean;
-    function OpenDSL(forcecolor: boolean; col: integer): boolean;
+    function OpenDSL(surface, forcecolor: boolean; col: integer): boolean;
     function CloseDSL: boolean;
     function ReadDSL(var rec: GcatRec): boolean;
     function OpenDefaultStars: boolean;
@@ -1116,7 +1116,7 @@ begin
   until not Result;
 end;
 
-function Tcatalog.OpenDSL(forcecolor: boolean; col: integer): boolean;
+function Tcatalog.OpenDSL(surface, forcecolor: boolean; col: integer): boolean;
 var
   GcatH: TCatHeader;
   info: TCatHdrInfo;
@@ -1124,7 +1124,10 @@ var
 begin
   DSLForceColor := forcecolor;
   DSLcolor := col;
-  SetGcatPath(slash(appdir) + pathdelim + 'cat' + pathdelim + 'DSoutlines', 'dsl');
+  if surface then
+    SetGcatPath(slash(appdir) + pathdelim + 'cat' + pathdelim + 'DSoutlines', 'ons')
+  else
+    SetGcatPath(slash(appdir) + pathdelim + 'cat' + pathdelim + 'DSoutlines', 'ono');
   GetGCatInfo(GcatH, info, v, GCatFilter, Result);
   if Result then
     Result := (v = rtLin);

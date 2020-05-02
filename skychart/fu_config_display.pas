@@ -47,6 +47,7 @@ type
     Button8: TButton;
     Button9: TButton;
     CheckBox1: TCheckBox;
+    DSLsurface: TCheckBox;
     Label16: TLabel;
     Transparency: TLabel;
     SurfaceBlure: TCheckBox;
@@ -422,6 +423,7 @@ type
     procedure CirclegridSelectCell(Sender: TObject; aCol, aRow: integer;
       var CanSelect: boolean);
     procedure DistLabelClick(Sender: TObject);
+    procedure DSLsurfaceClick(Sender: TObject);
     procedure LineStyleMeasureItem(Control: TWinControl; Index: integer;
       var AHeight: integer);
     procedure labelmagChange(Sender: TObject);
@@ -682,6 +684,7 @@ begin
   CheckBox8.Caption := rsAlwaysAddMer;
   ShowLines.Caption := rsShowDSOLines;
   Label10.Caption := rsEditDSOLines;
+  DSLsurface.Caption := rsFillNebulae;
   ecliptic.Caption := rsShowEcliptic;
   galactic.Caption := rsShowGalactic;
   ShowEquator.Caption := rsShowCelestia;
@@ -1526,6 +1529,7 @@ begin
     ShowLineShape.Brush.Color := csc.DSLcolor
   else
     ShowLineShape.Brush.Color := clWhite;
+  DSLsurface.Checked := csc.DSLsurface;
   Ecliptic.Checked := csc.ShowEcliptic;
   Galactic.Checked := csc.ShowGalactic;
   ShowEquator.Checked := csc.ShowEquator;
@@ -2766,5 +2770,11 @@ begin
   end;
   ColorDialog1.Title := buf;
 end;
+
+procedure Tf_config_display.DSLsurfaceClick(Sender: TObject);
+begin
+  csc.DSLsurface := DSLsurface.Checked;
+end;
+
 
 end.

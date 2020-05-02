@@ -53,10 +53,11 @@ cat/xhip/star48.dat
 cat/xhip/star49.dat
 cat/xhip/star50.dat
 cat/DSoutlines
-cat/DSoutlines/dsl.dat
-cat/DSoutlines/dsl.hdr
-cat/DSoutlines/dsln.dat
-cat/DSoutlines/dsln.hdr
+cat/DSoutlines/ono.dat
+cat/DSoutlines/ono.hdr
+cat/DSoutlines/ons.dat
+cat/DSoutlines/ons.hdr
+cat/DSoutlines/README.md
 cat/milkyway
 cat/milkyway/mwf.dat
 cat/milkyway/mwf.hdr
