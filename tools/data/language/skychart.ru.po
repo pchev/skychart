@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-31 09:15+0000\n"
-"PO-Revision-Date: 2020-02-07 14:39+0000\n"
+"POT-Creation-Date: 2020-05-02 18:54+0000\n"
+"PO-Revision-Date: 2020-04-17 09:26+0000\n"
 "Last-Translator: Sergey Tarantsov <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-03-31 09:25+0000\n"
-"X-Generator: Launchpad (build a296f04231dee355be5db73cc878b9e21689a253)\n"
+"X-Launchpad-Export-Date: 2020-05-02 19:01+0000\n"
+"X-Generator: Launchpad (build fbdff7602bd10fb883bf7e2ddcc7fd5a16f60398)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -211,7 +211,7 @@ msgstr "Возраст"
 
 #: u_translation.rsairmass
 msgid "Airmass"
-msgstr ""
+msgstr "Airmass"
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -831,7 +831,7 @@ msgstr "Проверка"
 
 #: u_translation.rschecklist
 msgid "CheckList"
-msgstr ""
+msgstr "CheckList"
 
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
@@ -2097,6 +2097,10 @@ msgstr "Заливка"
 msgid "Fill Milky Way"
 msgstr "Залить Млечный путь"
 
+#: u_translation.rsfillnebulae
+msgid "Fill nebulae"
+msgstr ""
+
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
 msgstr "Залить цветом"
@@ -2175,11 +2179,11 @@ msgstr "Для большого каталога всегда выбирайте
 
 #: u_translation.rsforcecolor
 msgid "Force color"
-msgstr ""
+msgstr "Force color"
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
-msgstr ""
+msgstr "Force EqSys"
 
 #: u_translation.rsforcej2000
 msgid "Force J2000"
@@ -2784,7 +2788,7 @@ msgstr "Меньше звёзд"
 
 #: u_translation.rslha
 msgid "LHA"
-msgstr ""
+msgstr "LHA"
 
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
@@ -2936,7 +2940,7 @@ msgstr "Блокировка"
 
 #: u_translation.rslockchartpos
 msgid "Lock chart position"
-msgstr ""
+msgstr "Блокировка положения карты"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -4128,7 +4132,7 @@ msgstr "Пропорционально блеску"
 
 #: u_translation.rsprotocoltrac
 msgid "Protocol trace"
-msgstr ""
+msgstr "Protocol trace"
 
 #: u_translation.rsproxy
 msgid "Proxy"
@@ -4328,7 +4332,7 @@ msgstr "Удалить последнюю метку"
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
-msgstr ""
+msgstr "Заменить крестиком"
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"
@@ -4900,7 +4904,7 @@ msgstr "Показать линию от перемещённой метки к 
 
 #: u_translation.rsshowmark
 msgid "Show mark"
-msgstr "Маркер"
+msgstr "Окуляр, камера"
 
 #: u_translation.rsshowmarkinde
 msgid "Show mark index"
@@ -4980,7 +4984,7 @@ msgstr "Каталоги Virtual Observatory"
 
 #: u_translation.rssideral
 msgid "Sidereal"
-msgstr "Звёздное"
+msgstr "Звёздная"
 
 #: u_translation.rssiderealday
 msgid "Sidereal day"
@@ -5121,6 +5125,10 @@ msgstr "Пробел"
 #: u_translation.rsspectralclas
 msgid "Spectral class"
 msgstr "Спектральный класс"
+
+#: u_translation.rsspeed
+msgid "Speed"
+msgstr ""
 
 #: u_translation.rsspline
 msgid "Spline"

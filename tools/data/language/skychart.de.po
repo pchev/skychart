@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-31 09:15+0000\n"
-"PO-Revision-Date: 2019-12-14 16:36+0000\n"
+"POT-Creation-Date: 2020-05-02 18:54+0000\n"
+"PO-Revision-Date: 2020-04-10 10:16+0000\n"
 "Last-Translator: Stefan Beck <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-03-31 09:24+0000\n"
-"X-Generator: Launchpad (build a296f04231dee355be5db73cc878b9e21689a253)\n"
+"X-Launchpad-Export-Date: 2020-05-02 19:01+0000\n"
+"X-Generator: Launchpad (build fbdff7602bd10fb883bf7e2ddcc7fd5a16f60398)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1644,7 +1644,7 @@ msgstr "%s nicht als %s ausführen"
 
 #: u_translation.rsdonotuserow1
 msgid "Do not use row %s, reserved for external software interface."
-msgstr ""
+msgstr "Reihe %s nicht nutzen, für ext. Softwareinterface reserviert."
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2097,6 +2097,10 @@ msgstr "Füllen?"
 #: u_translation.rsfillmilkyway
 msgid "Fill Milky Way"
 msgstr "Milchstraße füllen"
+
+#: u_translation.rsfillnebulae
+msgid "Fill nebulae"
+msgstr ""
 
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
@@ -2936,7 +2940,7 @@ msgstr "Lock"
 
 #: u_translation.rslockchartpos
 msgid "Lock chart position"
-msgstr ""
+msgstr "Kartenposition sperren"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -3156,7 +3160,7 @@ msgstr "Mittlere Position"
 
 #: u_translation.rsmeasurement
 msgid "Measurement"
-msgstr ""
+msgstr "Messwert"
 
 #: u_translation.rsmemo
 msgid "Memo"
@@ -3572,7 +3576,7 @@ msgstr "%sHöhe"
 
 #: u_translation.rsobservationt
 msgid "Observation time"
-msgstr ""
+msgstr "Beobachtungszeit"
 
 #: u_translation.rsobservatory
 msgid "Observatory"
@@ -3996,7 +4000,7 @@ msgstr "Monatliche Daten vorbereiten"
 
 #: u_translation.rsprepointing
 msgid "Pre-Pointing"
-msgstr ""
+msgstr "Vorpositionierung"
 
 #: u_translation.rsprepointline
 msgid "Pre-point line duration in minutes"
@@ -4465,7 +4469,7 @@ msgstr "Profil des SAMP-Hubs gefunden, aber ein benötigter Wert fehlt."
 
 #: u_translation.rssampisamessa
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
-msgstr "SAMP ist ein Protokoll, mit dem astronomische Programme untereinander kommunizieren können. %Skychart can Koordinaten, FITS-Bilder und VO-Tabellen senden und empfangen."
+msgstr "SAMP ist ein Protokoll, mit dem astronomische Programme untereinander kommunizieren können. %sSkychart can Koordinaten, FITS-Bilder und VO-Tabellen senden und empfangen."
 
 #: u_translation.rssampsendcoor
 msgid "SAMP send coordinates"
@@ -5122,6 +5126,10 @@ msgstr "Abstandshalter"
 #: u_translation.rsspectralclas
 msgid "Spectral class"
 msgstr "Spektralklasse"
+
+#: u_translation.rsspeed
+msgid "Speed"
+msgstr ""
 
 #: u_translation.rsspline
 msgid "Spline"

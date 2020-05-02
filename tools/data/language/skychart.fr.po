@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-31 09:15+0000\n"
-"PO-Revision-Date: 2020-03-31 09:22+0000\n"
+"POT-Creation-Date: 2020-05-02 18:54+0000\n"
+"PO-Revision-Date: 2020-05-02 18:57+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-03-31 09:24+0000\n"
-"X-Generator: Launchpad (build a296f04231dee355be5db73cc878b9e21689a253)\n"
+"X-Launchpad-Export-Date: 2020-05-02 19:01+0000\n"
+"X-Generator: Launchpad (build fbdff7602bd10fb883bf7e2ddcc7fd5a16f60398)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -2100,6 +2100,10 @@ msgstr "Remplir?"
 msgid "Fill Milky Way"
 msgstr "Remplir la voie lactée"
 
+#: u_translation.rsfillnebulae
+msgid "Fill nebulae"
+msgstr "Remplir les nébuleuses"
+
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
 msgstr "Remplir avec la couleur de l'horizon"
@@ -4059,7 +4063,7 @@ msgstr "Méthode d'impression"
 
 #: u_translation.rsprintpreview
 msgid "Print Preview"
-msgstr "Prévisualiser l'impression"
+msgstr "Aperçu avant impression"
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
@@ -5124,6 +5128,10 @@ msgstr "Espace"
 #: u_translation.rsspectralclas
 msgid "Spectral class"
 msgstr "Classe spectrale"
+
+#: u_translation.rsspeed
+msgid "Speed"
+msgstr "Vitesse"
 
 #: u_translation.rsspline
 msgid "Spline"

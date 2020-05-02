@@ -5974,3 +5974,11 @@ msgstr ""
 msgid "Replace by tick mark"
 msgstr ""
 
+#: u_translation:rsspeed
+msgid "Speed"
+msgstr ""
+
+#: u_translation:rsfillnebulae
+msgid "Fill nebulae"
+msgstr ""
+
