@@ -1071,6 +1071,8 @@ var
   ok: boolean;
   sep: string;
 begin
+  cname:=validsqlname(cname);
+  cname:=validfilename(cname);
   if copy(cname, length(cname), 1) = '_' then
     sep := ''
   else

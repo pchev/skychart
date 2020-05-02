@@ -65,6 +65,7 @@ function words(str, sep: string; p, n: integer; isep: char = blank): string;
 function wordspace(str: string): string;
 function nospace(str: string): string;
 function validfilename(str: string): string;
+function validsqlname(str: string): string;
 function pos2(sub, str: string; i: integer): integer;
 function InvertI16(X: word): smallint;
 function InvertI32(X: longword): longint;
@@ -720,16 +721,29 @@ begin
 end;
 
 function validfilename(str: string): string;
+const invalidchar='/\<>":|?*';
+var i: integer;
 begin
-  Result := StringReplace(str,'/','',[rfReplaceAll]);
-  Result := StringReplace(Result,'\','',[rfReplaceAll]);
-  Result := StringReplace(Result,'<','',[rfReplaceAll]);
-  Result := StringReplace(Result,'>','',[rfReplaceAll]);
-  Result := StringReplace(Result,'"','',[rfReplaceAll]);
-  Result := StringReplace(Result,':','',[rfReplaceAll]);
-  Result := StringReplace(Result,'|','',[rfReplaceAll]);
-  Result := StringReplace(Result,'?','',[rfReplaceAll]);
-  Result := StringReplace(Result,'*','',[rfReplaceAll]);
+  result:='';
+  for i:=1 to length(str) do begin
+     if pos(str[i],invalidchar)=0 then
+       result:=result+str[i]
+     else
+       result:=result+'';
+  end;
+end;
+
+function validsqlname(str: string): string;
+const invalidchar='|*/%+-<>&=!~';
+var i: integer;
+begin
+  result:='';
+  for i:=1 to length(str) do begin
+     if pos(str[i],invalidchar)=0 then
+       result:=result+str[i]
+     else
+       result:=result+'_';
+  end;
 end;
 
 function wordspace(str: string): string;
