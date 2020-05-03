@@ -2,16 +2,14 @@ object f_scriptengine: Tf_scriptengine
   Left = 403
   Height = 485
   Top = 124
-  Width = 758
+  Width = 783
   ActiveControl = TreeView1
   Caption = 'Script'
   ClientHeight = 485
-  ClientWidth = 758
+  ClientWidth = 783
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '1.6.2.0'
-  Visible = False
   object Panel1: TPanel
     Left = 0
     Height = 485
@@ -29,7 +27,6 @@ object f_scriptengine: Tf_scriptengine
       Width = 224
       Align = alClient
       AutoExpand = True
-      DefaultItemHeight = 18
       DragMode = dmAutomatic
       ReadOnly = True
       TabOrder = 0
@@ -62,23 +59,23 @@ object f_scriptengine: Tf_scriptengine
     Left = 234
     Height = 485
     Top = 0
-    Width = 524
+    Width = 549
     Align = alClient
     ClientHeight = 485
-    ClientWidth = 524
+    ClientWidth = 549
     TabOrder = 1
     object Panel2: TPanel
       Left = 1
       Height = 39
       Top = 1
-      Width = 522
+      Width = 547
       Align = alTop
       ClientHeight = 39
-      ClientWidth = 522
+      ClientWidth = 547
       TabOrder = 0
       object ScriptTitle: TEdit
         Left = 112
-        Height = 21
+        Height = 30
         Top = 8
         Width = 268
         TabOrder = 0
@@ -88,7 +85,7 @@ object f_scriptengine: Tf_scriptengine
       Left = 1
       Height = 76
       Top = 408
-      Width = 522
+      Width = 547
       Align = alClient
       Lines.Strings = (
         'CompileMemo'
@@ -99,11 +96,10 @@ object f_scriptengine: Tf_scriptengine
       Left = 1
       Height = 368
       Top = 40
-      Width = 522
+      Width = 547
       Align = alTop
-      Caption = 'Panel3'
       ClientHeight = 368
-      ClientWidth = 522
+      ClientWidth = 547
       TabOrder = 2
       object ButtonHelp: TButton
         Left = 328
@@ -243,10 +239,10 @@ object f_scriptengine: Tf_scriptengine
         Left = 112
         Height = 324
         Top = 8
-        Width = 400
+        Width = 432
         Caption = 'Component'
-        ClientHeight = 308
-        ClientWidth = 398
+        ClientHeight = 304
+        ClientWidth = 430
         TabOrder = 8
         object RadioButtonGroup: TRadioButton
           Left = 14
@@ -270,51 +266,54 @@ object f_scriptengine: Tf_scriptengine
         end
         object ButtonCaptionEdit: TEdit
           Left = 187
-          Height = 21
+          Height = 28
           Top = 29
           Width = 80
+          Constraints.MaxHeight = 28
           OnChange = ButtonCaptionEditChange
           TabOrder = 2
           Text = 'Button'
         end
         object Label3: TLabel
           Left = 134
-          Height = 15
+          Height = 17
           Top = 32
-          Width = 49
+          Width = 47
           Caption = 'Caption'
           ParentColor = False
         end
         object Label2: TLabel
           Left = 134
-          Height = 15
+          Height = 17
           Top = 6
-          Width = 49
+          Width = 47
           Caption = 'Caption'
           ParentColor = False
         end
         object GroupCaptionEdit: TEdit
           Left = 187
-          Height = 21
+          Height = 28
           Top = 3
           Width = 80
+          Constraints.MaxHeight = 28
           OnChange = GroupCaptionEditChange
           TabOrder = 3
           Text = 'Group'
         end
         object Label1: TLabel
           Left = 275
-          Height = 15
+          Height = 17
           Top = 6
-          Width = 56
+          Width = 53
           Caption = 'Columns'
           ParentColor = False
         end
         object GroupRowEdit: TEdit
           Left = 336
-          Height = 21
+          Height = 28
           Top = 3
           Width = 32
+          Constraints.MaxHeight = 28
           OnChange = GroupRowEditChange
           TabOrder = 4
           Text = '2'
@@ -323,7 +322,7 @@ object f_scriptengine: Tf_scriptengine
           Left = 14
           Height = 21
           Top = 52
-          Width = 48
+          Width = 47
           Caption = 'Edit'
           OnClick = RadioButtonClick
           TabOrder = 5
@@ -341,23 +340,24 @@ object f_scriptengine: Tf_scriptengine
           Left = 14
           Height = 21
           Top = 182
-          Width = 69
+          Width = 66
           Caption = 'Spacer'
           OnClick = RadioButtonClick
           TabOrder = 7
         end
         object MemoHeightEdit: TEdit
           Left = 187
-          Height = 21
+          Height = 28
           Top = 81
           Width = 80
+          Constraints.MaxHeight = 28
           OnChange = MemoHeightEditChange
           TabOrder = 8
           Text = '50'
         end
         object Label4: TLabel
           Left = 134
-          Height = 15
+          Height = 17
           Top = 82
           Width = 42
           Caption = 'Height'
@@ -367,16 +367,17 @@ object f_scriptengine: Tf_scriptengine
           Left = 14
           Height = 21
           Top = 208
-          Width = 60
+          Width = 59
           Caption = 'Event'
           OnClick = RadioButtonClick
           TabOrder = 9
         end
         object EventComboBox: TComboBox
           Left = 134
-          Height = 19
-          Top = 210
+          Height = 28
+          Top = 204
           Width = 180
+          Constraints.MaxHeight = 28
           ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
@@ -398,9 +399,10 @@ object f_scriptengine: Tf_scriptengine
         end
         object TimerIntervalEdit: TEdit
           Left = 318
-          Height = 21
-          Top = 212
+          Height = 28
+          Top = 204
           Width = 50
+          Constraints.MaxHeight = 28
           OnClick = TimerIntervalEditClick
           TabOrder = 11
           Text = '60'
@@ -410,7 +412,7 @@ object f_scriptengine: Tf_scriptengine
           Left = 14
           Height = 21
           Top = 156
-          Width = 70
+          Width = 68
           Caption = 'Combo'
           OnClick = RadioButtonClick
           TabOrder = 12
@@ -419,14 +421,14 @@ object f_scriptengine: Tf_scriptengine
           Left = 14
           Height = 21
           Top = 104
-          Width = 46
+          Width = 45
           Caption = 'List'
           OnClick = RadioButtonClick
           TabOrder = 13
         end
         object Label5: TLabel
           Left = 134
-          Height = 15
+          Height = 17
           Top = 112
           Width = 42
           Caption = 'Height'
@@ -434,9 +436,10 @@ object f_scriptengine: Tf_scriptengine
         end
         object ListHeightEdit: TEdit
           Left = 187
-          Height = 21
+          Height = 28
           Top = 109
           Width = 80
+          Constraints.MaxHeight = 28
           OnChange = ListHeightEditChange
           TabOrder = 14
           Text = '50'
@@ -445,7 +448,7 @@ object f_scriptengine: Tf_scriptengine
           Left = 14
           Height = 21
           Top = 256
-          Width = 263
+          Width = 257
           Caption = 'Activate the timer event when hidden'
           TabOrder = 15
         end
@@ -453,14 +456,14 @@ object f_scriptengine: Tf_scriptengine
           Left = 14
           Height = 21
           Top = 130
-          Width = 85
+          Width = 82
           Caption = 'CheckList'
           OnClick = RadioButtonClick
           TabOrder = 16
         end
         object Label6: TLabel
           Left = 134
-          Height = 15
+          Height = 17
           Top = 138
           Width = 42
           Caption = 'Height'
@@ -468,9 +471,10 @@ object f_scriptengine: Tf_scriptengine
         end
         object CheckListHeightEdit: TEdit
           Left = 187
-          Height = 21
+          Height = 28
           Top = 135
           Width = 80
+          Constraints.MaxHeight = 28
           OnChange = CheckListHeightEditChange
           TabOrder = 17
           Text = '50'
@@ -479,24 +483,25 @@ object f_scriptengine: Tf_scriptengine
           Left = 14
           Height = 21
           Top = 232
-          Width = 58
+          Width = 57
           Caption = 'Label'
           OnClick = RadioButtonClick
           TabOrder = 18
         end
         object Label7: TLabel
           Left = 134
-          Height = 15
-          Top = 240
-          Width = 49
+          Height = 17
+          Top = 234
+          Width = 47
           Caption = 'Caption'
           ParentColor = False
         end
         object LabelCaptionEdit: TEdit
           Left = 187
-          Height = 21
-          Top = 238
+          Height = 28
+          Top = 232
           Width = 80
+          Constraints.MaxHeight = 28
           OnChange = LabelCaptionEditChange
           TabOrder = 19
           Text = 'Label'
@@ -505,7 +510,7 @@ object f_scriptengine: Tf_scriptengine
           Left = 275
           Height = 21
           Top = 29
-          Width = 59
+          Width = 60
           Caption = 'Menu'
           OnChange = BtnMenuChange
           TabOrder = 20
@@ -514,9 +519,18 @@ object f_scriptengine: Tf_scriptengine
           Left = 14
           Height = 21
           Top = 280
-          Width = 265
+          Width = 258
           Caption = 'Activate all the functions when hidden'
           TabOrder = 21
+        end
+        object BtnUpDown: TCheckBox
+          Left = 336
+          Height = 21
+          Top = 29
+          Width = 84
+          Caption = 'Up/Down'
+          OnChange = BtnUpDownChange
+          TabOrder = 22
         end
       end
       object ButtonDelete: TButton

@@ -65,6 +65,7 @@ type
     ButtonClear: TButton;
     ButtonDelete: TButton;
     BtnMenu: TCheckBox;
+    BtnUpDown: TCheckBox;
     CheckBoxAlwaysActive: TCheckBox;
     CheckBoxHidenTimer: TCheckBox;
     LabelCaptionEdit: TEdit;
@@ -117,6 +118,7 @@ type
     TplPSScript: TPSScript;
     TreeView1: TTreeView;
     procedure BtnMenuChange(Sender: TObject);
+    procedure BtnUpDownChange(Sender: TObject);
     procedure ButtonAddClick(Sender: TObject);
     procedure ButtonCaptionEditChange(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
@@ -208,6 +210,7 @@ type
     DistanceText: string;
     TelescopeRA, TelescopeDE: double;
     FTelescopeConnected: boolean;
+    LastBtnEvent: string;
     vlist: array of variant;
     ilist: array of integer;
     dlist: array of double;
@@ -220,6 +223,7 @@ type
     function doRun(cmdline: string): boolean;
     function doRunOutput(cmdline: string; var output: TStringList): boolean;
     function doExecuteCmd(cname: string; arg: TStringList): string;
+    function doBtnEvent: string;
     function doGetS(varname: string; var str: string): boolean;
     function doSetS(varname: string; str: string): boolean;
     function doGetSL(varname: string; var strl: TStringList): boolean;
@@ -272,12 +276,15 @@ type
     procedure doTcpPurgeBuffer(socknum: integer);
     procedure JsonDataToStringlist(var SK, SV: TStringList; prefix: string; D: TJSONData);
     procedure doJsonToStringlist(jsontxt: string; var SK, SV: TStringList);
+    procedure Button_Event(Sender: TObject; BtnEvent:string);
     procedure Button_Click(Sender: TObject);
+    procedure Button_MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure Button_MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure Combo_Change(Sender: TObject);
     procedure ReorderGroup;
     function AddGroup(num, capt: string; pt: TWinControl;
       ctlperline, ordernum: integer): TGroupBox;
-    procedure AddButton(num, capt: string; addmenu: boolean; pt: TWinControl);
+    procedure AddButton(num, capt: string; addmenu,clickonly: boolean; pt: TWinControl);
     procedure AddEdit(num: string; pt: TWinControl);
     procedure AddMemo(num: string; pt: TWinControl; h: integer);
     procedure AddSpacer(num: string; pt: TWinControl);
@@ -618,6 +625,11 @@ var
 begin
   i := ExecProcess(cmdline, output, False);
   Result := (i = 0);
+end;
+
+function Tf_scriptengine.doBtnEvent: string;
+begin
+  result:=LastBtnEvent;
 end;
 
 function Tf_scriptengine.doGetS(varname: string; var str: string): boolean;
@@ -1498,7 +1510,7 @@ begin
   Result := gr[grnum - 1];
 end;
 
-procedure Tf_scriptengine.AddButton(num, capt: string; addmenu: boolean; pt: TWinControl);
+procedure Tf_scriptengine.AddButton(num, capt: string; addmenu,clickonly: boolean; pt: TWinControl);
 var
   n: integer;
 begin
@@ -1517,6 +1529,10 @@ begin
   else
     bt[btnum - 1].tag := n;
   bt[btnum - 1].OnClick := @Button_Click;
+  if not clickonly then begin
+    bt[btnum - 1].OnMouseDown := @Button_MouseDown;
+    bt[btnum - 1].OnMouseUp := @Button_MouseUp;
+  end;
   bt[btnum - 1].Parent := pt;
   btscrnum := max(btscrnum, n + 1);
   SetLength(btscr, btscrnum);
@@ -1528,7 +1544,7 @@ begin
   btscr[n].Plugins.Assign(TplPSScript.Plugins);
 end;
 
-procedure Tf_scriptengine.Button_Click(Sender: TObject);
+procedure Tf_scriptengine.Button_Event(Sender: TObject; BtnEvent:string);
 var
   n: integer;
   ok: boolean;
@@ -1538,6 +1554,7 @@ begin
     n := n - 10000;
   if (n < btscrnum) and (btscr[n].Script.Count > 0) and (not btscr[n].Running) then
   begin
+    LastBtnEvent:=BtnEvent;
     ok := btscr[n].Execute;
     if Visible then
     begin
@@ -1549,6 +1566,21 @@ begin
           ': ' + btscr[n].ExecErrorToString);
     end;
   end;
+end;
+
+procedure Tf_scriptengine.Button_Click(Sender: TObject);
+begin
+  Button_Event(Sender,'click');
+end;
+
+procedure Tf_scriptengine.Button_MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  Button_Event(Sender,'down');
+end;
+
+procedure Tf_scriptengine.Button_MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  Button_Event(Sender,'up');
 end;
 
 procedure Tf_scriptengine.Combo_Change(Sender: TObject);
@@ -1723,7 +1755,7 @@ procedure Tf_scriptengine.ApplyScript;
 var
   node: TTreeNode;
   curgroup: TGroupBox;
-  txt, parm1, parm2, buf, nu: string;
+  txt, parm1, parm2, parm3, buf, nu: string;
   i, groupseq: integer;
 begin
   StopAllScript;
@@ -1773,6 +1805,7 @@ begin
     nu := words(buf, '', 2, 1, '_');
     parm1 := words(node.Text, '', 2, 1, ';');
     parm2 := words(node.Text, '', 3, 1, ';');
+    parm3 := words(node.Text, '', 4, 1, ';');
     if txt = 'Group' then
     begin
       curgroup := AddGroup(nu, parm1, FEditSurface, StrToIntDef(parm2, 1), groupseq);
@@ -1781,7 +1814,7 @@ begin
     end
     else if txt = 'Button' then
     begin
-      AddButton(nu, parm1, (parm2 = '1'), curgroup);
+      AddButton(nu, parm1, (parm2 = '1'), (parm3 = ''), curgroup);
       ButtonIdx := max(ButtonIdx, StrToInt(nu));
     end
     else if txt = 'Edit' then
@@ -1865,7 +1898,7 @@ begin
       Inc(ButtonIdx);
       TreeView1.Items.AddChild(TreeView1.Selected, 'Button_' + IntToStr(
         ButtonIdx) + ';' + StringReplace(ButtonCaptionEdit.Text, ';', '', [rfReplaceAll]) +
-        ';' + BoolToStr(BtnMenu.Checked, '1', '0'));
+        ';' + BoolToStr(BtnMenu.Checked, '1', '0') + ';' + BoolToStr(BtnUpDown.Checked, '1', '') );
     end;
   end
   else if RadioButtonEdit.Checked then
@@ -1980,7 +2013,7 @@ begin
     begin
       TreeView1.Selected.Text := words(TreeView1.Selected.Text, '', 1, 1, ';') + ';' +
         StringReplace(ButtonCaptionEdit.Text, ';', '', [rfReplaceAll]) + ';' +
-        BoolToStr(BtnMenu.Checked, '1', '0');
+        BoolToStr(BtnMenu.Checked, '1', '0') + ';' + BoolToStr(BtnUpDown.Checked, '1', '');
     end
     else if RadioButtonEdit.Checked then
     begin
@@ -2083,6 +2116,12 @@ begin
     ButtonUpdate.Visible := True;
 end;
 
+procedure Tf_scriptengine.BtnUpDownChange(Sender: TObject);
+begin
+  if ButtonUpdate.Tag = 2 then
+    ButtonUpdate.Visible := True;
+end;
+
 procedure Tf_scriptengine.LabelCaptionEditChange(Sender: TObject);
 begin
   if ButtonUpdate.Tag = 8 then
@@ -2109,6 +2148,7 @@ begin
       RadioButtonButton.Checked := True;
       ButtonCaptionEdit.Text := words(node.Text, '', 2, 1, ';');
       BtnMenu.Checked := (words(node.Text, '', 3, 1, ';') = '1');
+      BtnUpDown.Checked := (words(node.Text, '', 4, 1, ';') = '1');
       ButtonUpdate.Visible := False;
       ButtonUpdate.Tag := 2;
     end
@@ -2709,6 +2749,8 @@ begin
     comp.AddConstantN('rad2deg', 'extended').SetExtended(rad2deg);
     AddMethod(self, @Tf_scriptengine.doExecuteCmd,
       'function  Cmd(cname:string; arg:Tstringlist):string;');
+    AddMethod(self, @Tf_scriptengine.doBtnEvent,
+      'function BtnEvent: string;');
     AddMethod(self, @Tf_scriptengine.doGetS,
       'function GetS(varname:string; var str: string):Boolean;');
     AddMethod(self, @Tf_scriptengine.doSetS,
