@@ -1,13 +1,21 @@
 Version 4.3 beta, release Notes
 
 New functions:
+- In Observer tool, stop the telescope motion when releasing the arrow button
+- Use the nebula outlines from OpenNGC, add option to select line or surface
+- Allow simulation for a single asteroid and comet
+- Add menu "Window/Lock chart position" to not move the chart after a search
+- Show hour angle and airmass under mouse cursor
 - Add telescope handpad for ASCOM and INDI
 - Add option to blure and set transparency of surface catalog
 - Add pre-pointing feature for asteroid occultation
 
 Bug fix:
+- Fix PHD2 comet tracking interface
+- Fix setting telescope time
 - Planet in line mode must be really transparent 
 - Fix "Show Mark" option for comet and asteroid simulation
 
 Removed:
+- Move SAC to obsolete catalog, replaced by OpenNGC
 - Remove Iridium flare computation

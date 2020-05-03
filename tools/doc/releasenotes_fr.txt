@@ -1,13 +1,21 @@
 Version 4.3 beta, Notes de la version
 
 Nouvelles fonctions:
+- Dans l'outil d'observation, arrête le mouvement du télescope lorsque vous relâchez le bouton
+- Utilise les contours des nébuleuses d'OpenNGC, ajoute une option pour sélectionner ligne ou surface
+- Autorise la simulation d'un seul astéroïde ou comète
+- Ajout du menu "Fenêtres / Bloquer la position de la carte" pour ne pas déplacer la carte après une recherche
+- Affiche l'angle horaire et la masse d'air sous le curseur de la souris
 - Ajout d'une raquette virtuelle pour les télescopes ASCOM et INDI
 - Ajout d'une option pour flouter et définir la transparence des catalogue de surfaces
 - Ajout d'une fonction de pré-pointage pour les occultations d'astéroïdes 
 
 Correction d'un bug:
+- Corrige l'interface de suivi des comètes PHD2
+- Corrige du réglage de l'heure du télescope
 - Les planètes en mode ligne doivent être vraiment transparentes
 - Corrige "Voir les marques" pour la simulation des comètes et astéroïdes
 
 Suppression:
+- Déplace le catalog SAC en obsolète, il est remplacé par OpenNGC
 - Supprime le calcul des flash Iridium
