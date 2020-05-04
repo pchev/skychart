@@ -2329,6 +2329,7 @@ begin
               fs := rec.outlines.linetype
             else
               fs := rec.options.LogSize;
+            if fs=2 then fs:=3; // no spline for milkyway
             First := False;
           end;
           precession(rec.options.EquinoxJD, cfgsc.JDChart, rec.ra, rec.Dec);

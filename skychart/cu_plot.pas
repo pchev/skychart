@@ -1520,7 +1520,7 @@ begin
           if outlinecol = cfgplot.bgColor then
             outlinecol := outlinecol xor clWhite;
           outlinemax := outlinenum + 1;
-          if (cfgplot.nebplot = 0) and (outlinetype = 2) then
+          if (cfgplot.nebplot = 0) and ((outlinetype = 2)or(outlinetype = 3)) then
             outlinetype := 0;
           if (cfgchart.onprinter) and (outlinetype = 1) then
             outlinetype := 0;
@@ -1561,6 +1561,10 @@ begin
                   sbmp.DrawPolygonAntialias(Spline, ColorToBGRA(outlinecol,salpha), outlinelw * cfgchart.drawpen, ColorToBGRA(outlinecol,salpha));
                end;
               end;
+              3:
+              begin
+                cbmp.DrawPolygonAntialias(outlineptsf, ColorToBGRA(outlinecol,salpha), outlinelw * cfgchart.drawpen, ColorToBGRA(outlinecol,salpha));
+              end;
             end;
 
           end
@@ -1582,7 +1586,7 @@ begin
 
               1: Bezierspline(outlinepts, outlinenum + 1);
 
-              2:
+              2,3:
               begin
                 setlength(outlinepts, outlinenum + 1);
                 cnv.polygon(outlinepts);
