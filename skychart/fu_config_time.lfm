@@ -34,7 +34,7 @@ object f_config_time: Tf_config_time
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
         Caption = 'Time'
-        ClientHeight = 502
+        ClientHeight = 532
         ClientWidth = 495
         ParentFont = False
         object Label142: TLabel
@@ -342,7 +342,7 @@ object f_config_time: Tf_config_time
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 19
+            ClientHeight = 37
             ClientWidth = 136
             Columns = 2
             Items.Strings = (
@@ -618,8 +618,8 @@ object f_config_time: Tf_config_time
             Width = 132
             Constraints.MaxHeight = 28
             DecimalPlaces = 5
-            MaxValue = 0
-            MinValue = 0
+            MaxValue = 999999999
+            MinValue = -999999999
             OnChange = JDEditChange
             ParentFont = False
             TabOrder = 18
@@ -650,7 +650,7 @@ object f_config_time: Tf_config_time
       end
       object Page2: TTabSheet
         Caption = 'Simulation'
-        ClientHeight = 502
+        ClientHeight = 532
         ClientWidth = 495
         ParentFont = False
         object stepreset: TSpeedButton
@@ -1039,7 +1039,7 @@ object f_config_time: Tf_config_time
       end
       object Page3: TTabSheet
         Caption = 'Animation'
-        ClientHeight = 502
+        ClientHeight = 532
         ClientWidth = 495
         ParentFont = False
         object GroupBox1: TGroupBox
