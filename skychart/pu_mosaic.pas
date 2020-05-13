@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses  u_constant, u_translation, UScaleDPI, u_util,
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls, Arrow, SpinEx, cu_radec;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls, Arrow, Spin, cu_radec;
 
 type
 
@@ -38,12 +38,12 @@ type
     DEdown: TButton;
     DEup: TButton;
     GroupBox3: TGroupBox;
-    Hoverlap: TSpinEditEx;
+    Hoverlap: TSpinEdit;
     Label9: TLabel;
     MosaicName: TEdit;
     Label8: TLabel;
     Panel1: TPanel;
-    Rotation: TFloatSpinEditEx;
+    Rotation: TFloatSpinEdit;
     Rotdown: TButton;
     RAright: TButton;
     ButtonClose: TButton;
@@ -61,10 +61,10 @@ type
     Ra: TRaDec;
     De: TRaDec;
     Rotup: TButton;
-    SizeX: TSpinEditEx;
+    SizeX: TSpinEdit;
     ApplyTimer: TTimer;
-    SizeY: TSpinEditEx;
-    Voverlap: TSpinEditEx;
+    SizeY: TSpinEdit;
+    Voverlap: TSpinEdit;
     procedure ButtonClearClick(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
     procedure ButtonSaveClick(Sender: TObject);

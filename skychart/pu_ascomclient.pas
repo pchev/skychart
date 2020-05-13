@@ -34,16 +34,16 @@ uses
   cu_ascomrest, math, LCLIntf, u_util, u_constant, u_help, u_translation,
   Messages, SysUtils, Classes, Graphics, Controls,
   Forms, Dialogs, UScaleDPI, LCLVersion,
-  StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls, Arrow, Spin, SpinEx;
+  StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls, Arrow, Spin;
 
 type
 
   { Tpop_scope }
 
   Tpop_scope = class(TForm)
-    ARestDevice: TSpinEditEx;
+    ARestDevice: TSpinEdit;
     ARestPass: TEdit;
-    ARestPort: TSpinEditEx;
+    ARestPort: TSpinEdit;
     ARestUser: TEdit;
     ArrowLeft: TArrow;
     ArrowRight: TArrow;

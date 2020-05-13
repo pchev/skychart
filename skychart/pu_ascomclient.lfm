@@ -679,28 +679,26 @@ object pop_scope: Tpop_scope
           ParentFont = False
           TabOrder = 3
         end
-        object ARestDevice: TSpinEditEx
+        object ARestDevice: TSpinEdit
           Left = 218
           Height = 28
           Top = 67
           Width = 69
           Constraints.MaxHeight = 28
-          MaxLength = 0
+          MaxValue = 65535
           ParentFont = False
           TabOrder = 4
-          MaxValue = 65535
         end
-        object ARestPort: TSpinEditEx
+        object ARestPort: TSpinEdit
           Left = 13
           Height = 28
           Top = 67
           Width = 82
           Constraints.MaxHeight = 28
-          MaxLength = 0
-          ParentFont = False
-          TabOrder = 5
           MaxValue = 65535
           MinValue = 1
+          ParentFont = False
+          TabOrder = 5
           Value = 11111
         end
       end

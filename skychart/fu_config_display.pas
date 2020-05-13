@@ -29,7 +29,7 @@ uses
   u_help, u_translation, u_constant, u_util, pu_fov, UScaleDPI, cu_radec,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Grids, Buttons, StdCtrls, ExtCtrls, ComCtrls, LResources,
-  EditBtn, LCLType, enhedits, LazHelpHTML_fix, SpinEx;
+  EditBtn, LCLType, enhedits, Spin, LazHelpHTML_fix;
 
 type
 
@@ -52,12 +52,12 @@ type
     Transparency: TLabel;
     SurfaceBlure: TCheckBox;
     GroupBox9: TGroupBox;
-    LineWidthConstB: TSpinEditEx;
-    LineWidthConstL: TSpinEditEx;
-    LineWidthEcliptic: TSpinEditEx;
-    LineWidthEqGrid: TSpinEditEx;
-    LineWidthGalEq: TSpinEditEx;
-    LineWidthGrid: TSpinEditEx;
+    LineWidthConstB: TSpinEdit;
+    LineWidthConstL: TSpinEdit;
+    LineWidthEcliptic: TSpinEdit;
+    LineWidthEqGrid: TSpinEdit;
+    LineWidthGalEq: TSpinEdit;
+    LineWidthGrid: TSpinEdit;
     ShowEquator: TCheckBox;
     DistLabel: TCheckBox;
     CheckBox2: TCheckBox;
@@ -865,7 +865,7 @@ end;
 
 procedure Tf_config_display.LineWidthChange(Sender: TObject);
 begin
-  if sender is TSpinEditEx then with Sender as TSpinEditEx do begin
+  if sender is TSpinEdit then with Sender as TSpinEdit do begin
     case Tag of
       1: csc.LineWidthGrid:=Value;
       2: csc.LineWidthEqGrid:=Value;

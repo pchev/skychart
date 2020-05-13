@@ -33,7 +33,7 @@ object f_config_display: Tf_config_display
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
         Caption = 'Display'
-        ClientHeight = 528
+        ClientHeight = 498
         ClientWidth = 498
         ParentFont = False
         object Panel5: TPanel
@@ -449,7 +449,7 @@ object f_config_display: Tf_config_display
       end
       object Page2: TTabSheet
         Caption = 'Colour'
-        ClientHeight = 528
+        ClientHeight = 498
         ClientWidth = 498
         ParentFont = False
         object Label181: TLabel
@@ -975,7 +975,7 @@ object f_config_display: Tf_config_display
       end
       object Page3: TTabSheet
         Caption = 'Deep-sky colour'
-        ClientHeight = 528
+        ClientHeight = 498
         ClientWidth = 498
         OnShow = Page3Show
         ParentFont = False
@@ -1004,8 +1004,8 @@ object f_config_display: Tf_config_display
             Top = 10
             Width = 67
             BevelOuter = bvNone
-            ClientHeight = 160
-            ClientWidth = 63
+            ClientHeight = 164
+            ClientWidth = 67
             ParentFont = False
             TabOrder = 1
             object chkFillNE: TCheckBox
@@ -1086,8 +1086,8 @@ object f_config_display: Tf_config_display
             Top = 10
             Width = 65
             BevelOuter = bvNone
-            ClientHeight = 177
-            ClientWidth = 61
+            ClientHeight = 181
+            ClientWidth = 65
             ParentFont = False
             TabOrder = 0
             object chkFillRN: TCheckBox
@@ -1570,7 +1570,7 @@ object f_config_display: Tf_config_display
       end
       object Page4: TTabSheet
         Caption = 'Sky colour'
-        ClientHeight = 528
+        ClientHeight = 498
         ClientWidth = 498
         ParentFont = False
         object Panel2: TPanel
@@ -1759,7 +1759,7 @@ object f_config_display: Tf_config_display
       end
       object Page5: TTabSheet
         Caption = 'Lines'
-        ClientHeight = 528
+        ClientHeight = 498
         ClientWidth = 498
         ParentFont = False
         object EqGrid: TCheckBox
@@ -1883,19 +1883,18 @@ object f_config_display: Tf_config_display
             TabOrder = 1
             Text = 'Line'
           end
-          object LineWidthConstL: TSpinEditEx
+          object LineWidthConstL: TSpinEdit
             Tag = 3
             Left = 167
             Height = 28
             Top = 30
             Width = 51
             Constraints.MaxHeight = 28
-            MaxLength = 0
-            ParentFont = False
-            TabOrder = 3
-            OnChange = LineWidthChange
             MaxValue = 10
             MinValue = 1
+            OnChange = LineWidthChange
+            ParentFont = False
+            TabOrder = 3
             Value = 1
           end
         end
@@ -1969,19 +1968,18 @@ object f_config_display: Tf_config_display
             TabOrder = 1
             Text = 'Line'
           end
-          object LineWidthConstB: TSpinEditEx
+          object LineWidthConstB: TSpinEdit
             Tag = 4
             Left = 167
             Height = 28
             Top = 30
             Width = 51
             Constraints.MaxHeight = 28
-            MaxLength = 0
-            ParentFont = False
-            TabOrder = 3
-            OnChange = LineWidthChange
             MaxValue = 10
             MinValue = 1
+            OnChange = LineWidthChange
+            ParentFont = False
+            TabOrder = 3
             Value = 1
           end
         end
@@ -2234,62 +2232,58 @@ object f_config_display: Tf_config_display
           ParentFont = False
           TabOrder = 16
         end
-        object LineWidthGrid: TSpinEditEx
+        object LineWidthGrid: TSpinEdit
           Tag = 1
           Left = 175
           Height = 28
           Top = 54
           Width = 51
           Constraints.MaxHeight = 28
-          MaxLength = 0
+          MaxValue = 10
+          OnChange = LineWidthChange
           ParentFont = False
           TabOrder = 17
-          OnChange = LineWidthChange
-          MaxValue = 10
           Value = 1
         end
-        object LineWidthEqGrid: TSpinEditEx
+        object LineWidthEqGrid: TSpinEdit
           Tag = 2
           Left = 175
           Height = 28
           Top = 106
           Width = 51
           Constraints.MaxHeight = 28
-          MaxLength = 0
+          MaxValue = 10
+          OnChange = LineWidthChange
           ParentFont = False
           TabOrder = 18
-          OnChange = LineWidthChange
-          MaxValue = 10
           Value = 1
         end
-        object LineWidthEcliptic: TSpinEditEx
+        object LineWidthEcliptic: TSpinEdit
           Tag = 5
           Left = 433
           Height = 28
           Top = 106
           Width = 51
           Constraints.MaxHeight = 28
-          MaxLength = 0
-          ParentFont = False
-          TabOrder = 19
-          OnChange = LineWidthChange
           MaxValue = 10
           MinValue = 1
+          OnChange = LineWidthChange
+          ParentFont = False
+          TabOrder = 19
           Value = 1
         end
-        object LineWidthGalEq: TSpinEditEx
+        object LineWidthGalEq: TSpinEdit
           Tag = 6
           Left = 433
           Height = 28
           Top = 163
           Width = 51
           Constraints.MaxHeight = 28
-          MaxLength = 0
-          ParentFont = False
-          TabOrder = 20
-          OnChange = LineWidthChange
           MaxValue = 10
           MinValue = 1
+          OnChange = LineWidthChange
+          ParentFont = False
+          TabOrder = 20
           Value = 1
         end
         object DSLsurface: TCheckBox
@@ -2304,7 +2298,7 @@ object f_config_display: Tf_config_display
       end
       object Page6: TTabSheet
         Caption = 'Labels'
-        ClientHeight = 528
+        ClientHeight = 498
         ClientWidth = 498
         ParentFont = False
         object GroupBox5: TGroupBox
@@ -2867,8 +2861,8 @@ object f_config_display: Tf_config_display
             Top = 0
             Width = 71
             BevelOuter = bvNone
-            ClientHeight = 295
-            ClientWidth = 67
+            ClientHeight = 299
+            ClientWidth = 71
             ParentFont = False
             TabOrder = 36
             object Label260: TLabel
@@ -3454,7 +3448,7 @@ object f_config_display: Tf_config_display
       end
       object Page7: TTabSheet
         Caption = 'Fonts'
-        ClientHeight = 528
+        ClientHeight = 498
         ClientWidth = 498
         ParentFont = False
         object Bevel10: TBevel
@@ -4002,7 +3996,7 @@ object f_config_display: Tf_config_display
       end
       object Page8: TTabSheet
         Caption = 'Finder circle'
-        ClientHeight = 528
+        ClientHeight = 498
         ClientWidth = 498
         ParentFont = False
         object Label307: TLabel
@@ -4089,7 +4083,7 @@ object f_config_display: Tf_config_display
       end
       object Page9: TTabSheet
         Caption = 'Finder rectangle'
-        ClientHeight = 528
+        ClientHeight = 498
         ClientWidth = 498
         ParentFont = False
         object Label308: TLabel

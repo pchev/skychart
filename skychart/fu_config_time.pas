@@ -30,7 +30,7 @@ uses
   cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math,
   StdCtrls, CheckLst, Buttons, ExtCtrls, enhedits, ComCtrls, LResources,
-  ButtonPanel, jdcalendar, LazHelpHTML_fix, EditBtn, SpinEx;
+  ButtonPanel, jdcalendar, Spin, LazHelpHTML_fix, EditBtn;
 
 const
   maxcombo = 500;
@@ -56,7 +56,7 @@ type
     CometFilter: TEdit;
     CometList: TComboBox;
     dt_ut: TFloatEdit;
-    JDEdit: TFloatSpinEditEx;
+    JDEdit: TFloatSpinEdit;
     Label12: TLabel;
     GregY: TLongEdit;
     GregM: TLongEdit;
