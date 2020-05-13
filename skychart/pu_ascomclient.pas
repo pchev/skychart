@@ -184,10 +184,10 @@ type
       var QueryOK, SyncOK, GotoOK: boolean; var refreshrate: integer);
     procedure ScopeGetEqSys(var EqSys: double);
     procedure ScopeSetObs(la, lo, alt: double);
-    procedure ScopeAlign(Source: string; ra, Dec: single);
+    procedure ScopeAlign(Source: string; ra, Dec: double);
     procedure ScopeGetRaDec(var ar, de: double; var ok: boolean);
     procedure ScopeGetAltAz(var alt, az: double; var ok: boolean);
-    procedure ScopeGoto(ar, de: single; var ok: boolean);
+    procedure ScopeGoto(ar, de: double; var ok: boolean);
     procedure ScopeAbortSlew;
     procedure ScopeReset;
     function ScopeInitialized: boolean;
@@ -505,7 +505,7 @@ begin
   Result := ScopeConnected;
 end;
 
-procedure Tpop_scope.ScopeAlign(Source: string; ra, Dec: single);
+procedure Tpop_scope.ScopeAlign(Source: string; ra, Dec: double);
 begin
   if not ScopeConnected then
     exit;
@@ -673,7 +673,7 @@ begin
   elev.Text := FormatFloat(f1,FElevation);
 end;
 
-procedure Tpop_scope.ScopeGoto(ar, de: single; var ok: boolean);
+procedure Tpop_scope.ScopeGoto(ar, de: double; var ok: boolean);
 begin
   if not ScopeConnected then
     exit;
