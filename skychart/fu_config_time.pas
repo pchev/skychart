@@ -825,6 +825,7 @@ end;
 
 procedure Tf_config_time.DateClick(Sender: TObject; Button: TUDBtnType);
 begin
+  // this trick because TUpDown position is limited to smallint but year need to go to 200000
   case button of
     btNext: if d_yearEdit.Value < d_yearEdit.MaxValue then
         d_yearEdit.Value := d_yearEdit.Value + 1;

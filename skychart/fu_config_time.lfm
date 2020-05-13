@@ -39,7 +39,7 @@ object f_config_time: Tf_config_time
         ParentFont = False
         object Label142: TLabel
           Left = 291
-          Height = 19
+          Height = 17
           Top = 57
           Width = 51
           Caption = 'Seconds'
@@ -50,7 +50,7 @@ object f_config_time: Tf_config_time
           Left = 40
           Height = 21
           Top = 57
-          Width = 147
+          Width = 144
           Caption = 'Auto-refresh every '
           OnClick = CheckBox2Click
           ParentFont = False
@@ -68,16 +68,16 @@ object f_config_time: Tf_config_time
           Visible = False
           object Label135: TLabel
             Left = 8
-            Height = 19
+            Height = 17
             Top = 67
-            Width = 54
+            Width = 55
             Caption = 'TT - UT  : '
             ParentColor = False
             ParentFont = False
           end
           object Tdt_Ut: TLabel
             Left = 86
-            Height = 19
+            Height = 17
             Top = 67
             Width = 32
             Caption = '0000'
@@ -86,7 +86,7 @@ object f_config_time: Tf_config_time
           end
           object Label136: TLabel
             Left = 143
-            Height = 19
+            Height = 17
             Top = 67
             Width = 51
             Caption = 'Seconds'
@@ -95,9 +95,9 @@ object f_config_time: Tf_config_time
           end
           object Label150: TLabel
             Left = 8
-            Height = 19
+            Height = 17
             Top = 49
-            Width = 348
+            Width = 343
             Caption = 'Difference between Terrestrial Time and Universal Time'
             ParentColor = False
             ParentFont = False
@@ -114,7 +114,7 @@ object f_config_time: Tf_config_time
           end
           object Label11: TLabel
             Left = 8
-            Height = 19
+            Height = 17
             Top = 12
             Width = 63
             Caption = 'Time zone'
@@ -152,9 +152,9 @@ object f_config_time: Tf_config_time
           end
           object Label12: TLabel
             Left = 8
-            Height = 19
+            Height = 17
             Top = 124
-            Width = 188
+            Width = 182
             Caption = 'Gregorian calendar start date'
             ParentColor = False
             ParentFont = False
@@ -240,7 +240,7 @@ object f_config_time: Tf_config_time
           TabOrder = 3
           object Label137: TLabel
             Left = 8
-            Height = 19
+            Height = 17
             Top = 76
             Width = 30
             Caption = 'Time'
@@ -249,7 +249,7 @@ object f_config_time: Tf_config_time
           end
           object Label139: TLabel
             Left = 128
-            Height = 19
+            Height = 17
             Top = 53
             Width = 12
             Caption = 'M'
@@ -258,7 +258,7 @@ object f_config_time: Tf_config_time
           end
           object Label141: TLabel
             Left = 197
-            Height = 19
+            Height = 17
             Top = 53
             Width = 7
             Caption = 'S'
@@ -267,7 +267,7 @@ object f_config_time: Tf_config_time
           end
           object Label138: TLabel
             Left = 57
-            Height = 19
+            Height = 17
             Top = 53
             Width = 10
             Caption = 'H'
@@ -276,7 +276,7 @@ object f_config_time: Tf_config_time
           end
           object Label143: TLabel
             Left = 57
-            Height = 19
+            Height = 17
             Top = 2
             Width = 8
             Caption = 'Y'
@@ -285,7 +285,7 @@ object f_config_time: Tf_config_time
           end
           object Label144: TLabel
             Left = 128
-            Height = 19
+            Height = 17
             Top = 2
             Width = 12
             Caption = 'M'
@@ -294,7 +294,7 @@ object f_config_time: Tf_config_time
           end
           object Label145: TLabel
             Left = 198
-            Height = 19
+            Height = 17
             Top = 2
             Width = 10
             Caption = 'D'
@@ -303,16 +303,16 @@ object f_config_time: Tf_config_time
           end
           object Label140: TLabel
             Left = 8
-            Height = 19
+            Height = 17
             Top = 25
-            Width = 31
+            Width = 30
             Caption = 'Date'
             ParentColor = False
             ParentFont = False
           end
           object Label1: TLabel
             Left = 8
-            Height = 19
+            Height = 17
             Top = 111
             Width = 18
             Caption = 'JD:'
@@ -321,9 +321,9 @@ object f_config_time: Tf_config_time
           end
           object tzLabel: TLabel
             Left = 270
-            Height = 19
+            Height = 17
             Top = 78
-            Width = 45
+            Width = 44
             Caption = 'tzLabel'
             ParentColor = False
             ParentFont = False
@@ -442,11 +442,11 @@ object f_config_time: Tf_config_time
           end
           object d_year: TMouseUpDown
             Left = 125
-            Height = 22
+            Height = 28
             Top = 22
             Width = 13
-            Max = 1
-            Min = -1
+            Max = 32767
+            Min = -32768
             OnClick = DateClick
             Position = 0
             TabOrder = 1
@@ -595,16 +595,16 @@ object f_config_time: Tf_config_time
           end
           object UTLabel: TLabel
             Left = 238
-            Height = 19
+            Height = 17
             Top = 111
-            Width = 51
+            Width = 50
             Caption = 'UTLabel'
             ParentColor = False
             ParentFont = False
           end
           object dterr: TLabel
             Left = 8
-            Height = 19
+            Height = 17
             Top = 137
             Width = 33
             Caption = 'dterr'
@@ -750,10 +750,11 @@ object f_config_time: Tf_config_time
             'Asteroids'
             'Comets'
           )
-          ItemHeight = 23
+          ItemHeight = 0
           OnItemClick = SimObjItemClick
           ParentFont = False
           TabOrder = 0
+          TopIndex = -1
           Data = {
             0C000000000000000000000000000000
           }
