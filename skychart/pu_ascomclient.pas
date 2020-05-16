@@ -153,6 +153,7 @@ type
     hasSync: Boolean;
     FScopeEqSys: double;
     EqSysVal: integer;
+    FScopeInterfaceVersion: integer;
     {$ifdef mswindows}
     T: variant;
     {$endif}
@@ -389,20 +390,29 @@ begin
       FConnected := True;
       Initialized := True;
       try
+      FScopeInterfaceVersion:=ScopeInterfaceVersion;
+      FCanSetTracking := false;
+      FCanParkUnpark := false;
+      hasSync := false;
+      Handpad.Visible:=false;
       {$ifdef mswindows}
       if not Remote then begin
-        FCanSetTracking := T.CanSetTracking;
-        FCanParkUnpark := T.CanPark and T.CanUnpark;
+        if FScopeInterfaceVersion>1 then begin
+          FCanSetTracking := T.CanSetTracking;
+          FCanParkUnpark := T.CanPark and T.CanUnpark;
+          Handpad.Visible:=T.CanMoveAxis(0) and T.CanMoveAxis(1);
+        end;
         hasSync := T.CanSync;
-        Handpad.Visible:=T.CanMoveAxis(0) and T.CanMoveAxis(1);
       end
       else
       {$endif}
       begin
-        FCanSetTracking := TR.Get('cansettracking').AsBool;
-        FCanParkUnpark := TR.Get('canpark').AsBool and TR.Get('canunpark').AsBool;
+        if FScopeInterfaceVersion>1 then begin
+          FCanSetTracking := TR.Get('cansettracking').AsBool;
+          FCanParkUnpark := TR.Get('canpark').AsBool and TR.Get('canunpark').AsBool;
+          Handpad.Visible:=TR.Get('canmoveaxis','Axis=0').AsBool and TR.Get('canmoveaxis','Axis=1').AsBool;
+        end;
         hasSync := TR.Get('cansync').AsBool;
-        Handpad.Visible:=TR.Get('canmoveaxis','Axis=0').AsBool and TR.Get('canmoveaxis','Axis=1').AsBool;
       end;
       if handpad.Visible then begin
         rates:=TStringList.Create;
@@ -629,6 +639,7 @@ begin
     if ScopeConnected then
     begin
       try
+      if FScopeInterfaceVersion>1 then begin
         {$ifdef mswindows}
         if not Remote then begin
            i := T.EquatorialSystem;
@@ -638,6 +649,8 @@ begin
         begin
           i := TR.Get('equatorialsystem').AsInt;
         end;
+      end
+      else i := 0;
       except
         i := 0;
       end;
