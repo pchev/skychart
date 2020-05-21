@@ -2777,6 +2777,7 @@ begin
   if cfgsc.ShowAsteroidValid then
   begin
     r := 5;
+    if Fplot.cfgplot.UseBMP then r := DoScaleX(5);
     for i := 0 to cfgsc.AsteroidMark.Count - 1 do
     begin
       if FPlanet.FindAsteroidName(cfgsc.AsteroidMark[i], ra, de, mag, cfgsc, False) then
@@ -2916,6 +2917,7 @@ begin
   if cfgsc.ShowCometValid then
   begin
     r := 5;
+    if Fplot.cfgplot.UseBMP then r := DoScaleX(5);
     for i := 0 to cfgsc.CometMark.Count - 1 do
     begin
       if FPlanet.FindCometName(cfgsc.CometMark[i], ra, de, mag, cfgsc, False) then

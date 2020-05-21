@@ -33,7 +33,7 @@ uses
   u_constant, u_util, PostscriptCanvas, process,
   SysUtils, Types, StrUtils, FPImage, LCLType, LCLIntf, IntfGraphics, FPCanvas,
   Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics, u_translation,
-  u_orbits, u_CacheBMP;
+  u_orbits, u_CacheBMP, UScaleDPI;
 
 type
 
@@ -1304,6 +1304,7 @@ begin
 
   if cfgplot.UseBMP then
   begin
+    ds:=DoScaleX(ds);
     c := ColorToBGRA(mcolor);
     cbmp.DrawHorizLine(xx - ds, yy, xx + ds, c);
     cbmp.DrawVertLine(xx, yy - ds, yy + ds, c);
@@ -2890,6 +2891,7 @@ begin
 
       if cfgplot.UseBMP then
       begin
+        ds := DoScaleX(ds);
         diamondf[0] := pointf(x, y - ds);
         diamondf[1] := pointf(x + ds, y);
         diamondf[2] := pointf(x, y + ds);
