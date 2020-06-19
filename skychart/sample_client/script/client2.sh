@@ -13,10 +13,10 @@ cdcport=$(cat $HOME/.skychart/tmp/tcpport)
 echo resize 640 480 | nc -C -w1 $cdchost $cdcport
 
 # send a group of command
-nc -C -w1 $cdchost $cdcport << QUIT
+nc -C -w1 $cdchost $cdcport << EOF
 setfov 15
 setproj EQUAT
 search M1
 redraw
 saveimg PNG /tmp/m1.png 0
-QUIT 
+EOF
