@@ -1551,6 +1551,7 @@ resourcestring
   rsReplaceByTic = 'Replace by tick mark';
   rsSpeed = 'Speed';
   rsFillNebulae = 'Fill nebulae';
+  rsImportMosaic = 'Import mosaic file';
 
 // also update upsi_translation
 

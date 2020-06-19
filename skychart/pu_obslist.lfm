@@ -95,6 +95,15 @@ object f_obslist: Tf_obslist
       ParentFont = False
       TabOrder = 6
     end
+    object BtnImportMosaic: TButton
+      Left = 453
+      Height = 25
+      Top = 35
+      Width = 195
+      Caption = 'Import mosaic file'
+      OnClick = BtnImportMosaicClick
+      TabOrder = 7
+    end
   end
   object StringGrid1: TStringGrid
     Left = 0
@@ -425,5 +434,13 @@ object f_obslist: Tf_obslist
     OnTimer = RefreshTimerTimer
     left = 360
     top = 235
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = '.cdcc'
+    FileName = 'mosaic'
+    Filter = 'Circle file|*.cdcc|All|*'
+    Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
+    left = 260
+    top = 290
   end
 end

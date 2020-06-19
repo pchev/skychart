@@ -44,8 +44,10 @@ type
   Tf_obslist = class(TForm)
     Button1: TButton;
     BtnTour: TButton;
+    BtnImportMosaic: TButton;
     ButtonLoad: TButton;
     AllLabels: TCheckBox;
+    OpenDialog1: TOpenDialog;
     Panel1: TPanel;
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
@@ -83,6 +85,7 @@ type
     TabSheet2: TTabSheet;
     procedure AirmassComboChange(Sender: TObject);
     procedure AllLabelsChange(Sender: TObject);
+    procedure BtnImportMosaicClick(Sender: TObject);
     procedure BtnTourClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure ButtonLoadClick(Sender: TObject);
@@ -152,6 +155,7 @@ type
     procedure Add(obj: string; ra, de: double; upd:boolean=true);
     procedure LoadObsList;
     procedure SaveObsList;
+    procedure ImportMosaic(fn: string);
     procedure SelectRow(r: integer);
     function FirstObj: boolean;
     function LastObj: boolean;
@@ -197,8 +201,8 @@ procedure Tf_obslist.SetLang;
 begin
   Caption := rsObservingLis;
   StringGrid1.Columns[0].Title.Caption := rsObject;
-  StringGrid1.Columns[1].Title.Caption := rsRA;
-  StringGrid1.Columns[2].Title.Caption := rsDEC;
+  StringGrid1.Columns[1].Title.Caption := rsRA+' J2000';
+  StringGrid1.Columns[2].Title.Caption := rsDEC+' J2000';
   StringGrid1.Columns[3].Title.Caption := rsStart;
   StringGrid1.Columns[4].Title.Caption := rsEnd;
   StringGrid1.Columns[5].Title.Caption := rsDescription;
@@ -227,6 +231,7 @@ begin
   button1.Caption := rshelp;
   SetHelp(self, hlpObslist);
   AllLabels.Caption := rsAddLabelForE;
+  BtnImportMosaic.Caption:=rsImportMosaic;
 end;
 
 procedure Tf_obslist.Newlist;
@@ -264,6 +269,52 @@ begin
     if upd then begin
       Refresh;
     end;
+  end;
+end;
+
+procedure Tf_obslist.ImportMosaic(fn: string);
+var
+  f: textfile;
+  buf1, buf2: string;
+  x,y,eq: double;
+begin
+  try
+    AssignFile(f, fn);
+    reset(f);
+    eq:=cfgsc.CurJDUT;
+    repeat
+      ReadLn(f, buf1);
+      if copy(buf1,1,8)='EQUINOX='  then begin
+         buf2:=copy(buf1,9,99);
+         eq:=StrToFloatDef(buf2,eq);
+         continue;
+      end;
+      buf2 := words(buf1, blank, 2, 1);
+      x := deg2rad * 15 * Str3ToAR(trim(buf2));
+      if x = 0 then
+      begin
+        continue;
+      end;
+      buf2 := words(buf1, blank, 3, 1);
+      y := deg2rad * Str3ToDE(trim(buf2));
+      if y = 0 then
+      begin
+        continue;
+      end;
+      Precession(eq,jd2000,x,y);
+      StringGrid1.RowCount := StringGrid1.RowCount + 1;
+      StringGrid1.Cells[1, StringGrid1.RowCount - 1] := words(buf1, blank, 1, 1); ;
+      buf2 := ARpToStr(rad2deg*x/15,0);
+      StringGrid1.Cells[2, StringGrid1.RowCount - 1] := buf2;
+      buf2 := DEToStr3(rad2deg*y);
+      StringGrid1.Cells[3, StringGrid1.RowCount - 1] := buf2;
+      StringGrid1.Cells[4, StringGrid1.RowCount - 1] := '';
+      StringGrid1.Cells[5, StringGrid1.RowCount - 1] := '';
+      StringGrid1.Cells[6, StringGrid1.RowCount - 1] := '';
+      StringGrid1.Cells[7, StringGrid1.RowCount - 1] := StringGrid1.Cells[1, StringGrid1.RowCount - 1];
+    until EOF(f);
+    CloseFile(f);
+  except
   end;
 end;
 
@@ -1140,6 +1191,17 @@ begin
   cfgsc.ObslistAlLabels := AllLabels.Checked;
   if Assigned(FObjLabelChange) then
     FObjLabelChange(self);
+end;
+
+procedure Tf_obslist.BtnImportMosaicClick(Sender: TObject);
+var fn: string;
+begin
+  if OpenDialog1.InitialDir = '' then
+    OpenDialog1.InitialDir := HomeDir;
+  if OpenDialog1.Execute then begin
+    fn:=OpenDialog1.FileName;
+    ImportMosaic(fn);
+  end;
 end;
 
 procedure Tf_obslist.BtnTourClick(Sender: TObject);
