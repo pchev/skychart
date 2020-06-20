@@ -4923,9 +4923,11 @@ begin
         ar:=deg2rad*ar*15;
         sc.cfgsc.racentre2000:=ar;
         Precession(jd2000,sc.cfgsc.JDChart,ar,de);
-        ar:=rad2deg*ar/15;
-      end;
-      sc.cfgsc.racentre := rmod(deg2rad * ar * 15 + pi2, pi2)
+        sc.cfgsc.racentre := rmod(ar + pi2, pi2);
+        sc.cfgsc.decentre := de;
+      end
+      else
+        sc.cfgsc.racentre := rmod(deg2rad * ar * 15 + pi2, pi2)
     end
     else
       Result := msgFailed + ' RA out of range';
@@ -4975,9 +4977,11 @@ begin
         de:=deg2rad*de;
         sc.cfgsc.decentre2000:=de;
         Precession(jd2000,sc.cfgsc.JDChart,ar,de);
-        de:=rad2deg*de;
-      end;
-      sc.cfgsc.decentre := deg2rad * de
+        sc.cfgsc.decentre := de;
+        sc.cfgsc.racentre := rmod(ar + pi2, pi2);
+      end
+      else
+        sc.cfgsc.decentre := deg2rad * de
     end
     else
       Result := msgFailed + ' DEC out of range';
