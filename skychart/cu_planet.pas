@@ -2638,6 +2638,8 @@ begin
       qry := qry + ' or (near_earth=1)';
     if searchid <> '' then
       qry := qry + ' or (id="' + searchid + '")';
+    if cfgsc.SimAsteroid <> '' then
+      qry := qry + ' or (id="' + cfgsc.SimAsteroid + '")';
     qry := qry + ' limit ' + IntToStr(MaxAsteroid);
     db2.Query(qry);
     if db2.Rowcount > 0 then
@@ -2747,6 +2749,8 @@ begin
       ' and de<' + IntToStr(round(1000 * (cfgsc.decentre + d))) + '))' + ' or (near_earth=1)';
     if searchid <> '' then
       qry := qry + ' or (id="' + searchid + '")';
+    if cfgsc.SimComet <> '' then
+      qry := qry + ' or (id="' + cfgsc.SimComet + '")';
     qry := qry + ' limit ' + IntToStr(MaxComet);
     db2.Query(qry);
     if db2.Rowcount > 0 then
