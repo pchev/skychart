@@ -1,8 +1,8 @@
 /*** File fitsfile.h  FITS and IRAF file access subroutines
- *** June 20, 2014
+ *** September 24, 2019
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1996-2014
+ *** Copyright (C) 1996-2019
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -461,6 +461,12 @@ float ftgetr4(		/* Extract column for keyword from FITS table line
 	char *angle);	/* Angle as dd:mm:ss.ss */
     double hr2ang (	/* Hours as hh:mm:ss.ss to fractional degrees */
 	char *angle);	/* Angle in sexigesimal hours (hh:mm:ss.sss) */
+    double ang2sec (	/* Angle in fractional arcseconds */
+	double  angle);	/* Angle in fractional degrees */
+    double hr2sec (	/* Angle in fractional arcseconds */
+	char *angle);	/* Angle in sexigesimal hours (hh:mm:ss.sss) */
+    double deg2sec (	/* Angle in fractional arcseconds */
+	char *angle);	/* Angle in sexigesimal degrees (dd:mm:ss.sss) */
 
     /* Subroutines to convert from year and day of year */
 
@@ -1046,6 +1052,9 @@ void ang2hr();		/* Fractional degrees to hours as hh:mm:ss.ss */
 void ang2deg();		/* Fractional degrees to degrees as dd:mm:ss.ss */
 double deg2ang();	/* Degrees as dd:mm:ss.ss to fractional degrees */
 double hr2ang();	/* Hours as hh:mm:ss.ss to fractional degrees */
+double ang2sec();	/* Angle as fractional degrees to fractional arcsec */
+double deg2sec();	/* Angle as dd:mm:ss.ss to fractional arcsec */
+double hr2sec();	/* Angle as hh:mm:ss.ss to fractional arcsec */
 
 void doy2dt();	/* year and day of year to yyyy.mmdd hh.mmss */
 double doy2ep(); /* year and day of year to fractional year (epoch) */
@@ -1290,4 +1299,6 @@ void compnut();	/* Compute nutation in longitude and obliquity and mean obliquit
  * Sep 25 2009	Add moveb()
  *
  * Jun 20 2014	Add next_line()
+ *
+ * Sep 24 2019	Add hr2sec(), deg2sec(), ang2sec() to convert to arcseconds
  */

@@ -1,8 +1,8 @@
 /*** File libwcs/wcsinit.c
- *** July 24, 2016
+ *** May 21, 2018
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1998-2016
+ *** Copyright (C) 1998-2018
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -416,9 +416,9 @@ char *wchar;		/* Suffix character for one of multiple WCS */
 
 	/* Read third and fourth coordinate types, if present */
 	strcpy (wcs->ctype[2], "");
-	hgetsc (hstring, "CTYPE3", &mchar, 9, wcs->ctype[2]);
+	hgetsc (hstring, "CTYPE3", &mchar, 16, wcs->ctype[2]);
 	strcpy (wcs->ctype[3], "");
-	hgetsc (hstring, "CTYPE4", &mchar, 9, wcs->ctype[3]);
+	hgetsc (hstring, "CTYPE4", &mchar, 16, wcs->ctype[3]);
 
 	/* Set projection type in WCS data structure */
 	if (wcstype (wcs, ctype1, ctype2)) {
@@ -1613,5 +1613,8 @@ char	*mchar;		/* Suffix character for one of multiple WCS */
  * Feb 07 2013	Avoid SWARP distortion if SIRTF distortion is present
  * Jul 25 2013	Initialize n=0 when checking for SCAMP distortion terms (fix from Martin Kuemmel)
  *
+ * Jun  8 2016	Read up tpo 16 characters for ctype[0] and ctype[1] for SIP distortion
  * Jun 24 2016	wcs->ptype contains only 3-letter projection code
+ *
+ * May 21 2018	Read up to 16 characters for ctype[2] and ctype[3], too.
  */

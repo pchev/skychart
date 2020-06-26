@@ -1,8 +1,8 @@
 /*** File libwcs/catutil.c
- *** November 25, 2015
+ *** October 29, 2019
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1998-2015
+ *** Copyright (C) 1998-2019
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -2099,7 +2099,6 @@ int	verbose;	/* 1 to print limits, else 0 */
     return;
 }
 
-
 /* REFLIM-- Set limits in reference catalog coordinates given search coords */
 void
 RefLim (cra, cdec, dra, ddec, sysc, sysr, eqc, eqr, epc, epr, secmarg,
@@ -2175,6 +2174,10 @@ int	verbose;	/* 1 to print limits, else 0 */
     if (adec < 90.0 && adec > acdec)
 	dra1 = dra * (cos (degrad(acdec)) / cos (degrad(adec)));
     else if (adec == 90.0)
+	dra1 = 180.0;
+
+    /* Deal with images containing a pole */
+    if (dra1 > 180.0)
 	dra1 = 180.0;
 
     /* Set right ascension limits for search */
@@ -2774,11 +2777,14 @@ char *value;	/* String (returned) */
 	*lastval = 0;
 	}
 
-    /* Drop trailing spaces/underscores */
+    /* Drop trailing spaces/underscores/commas */
     if (!fillblank) {
 	lval = strlen (value);
 	for (ival = value+lval-1; ival > value; ival--) {
 	    if (*ival == '_') {
+		*ival = (char) 0;
+		}
+	    else if (*ival == ',') {
 		*ival = (char) 0;
 		}
 	    else if (*ival == ' ') {
@@ -3571,4 +3577,8 @@ char *from, *last, *to;
  * Sep 23 2013	Finish adding UCAC4 catalog
  *
  * Nov 25 2015	Add tab as an assignment character in agets()
+ *
+ * Jul 31 2018	Keep RA limits to +- 180 (suggested by Ed Los, Harvard)
+ *
+ * Oct 29 2019	Drop trailing commas as well as underscores and spaces
  */

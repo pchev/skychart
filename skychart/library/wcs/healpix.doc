@@ -1,0 +1,43 @@
+Dear Jessica,
+
+when I upgraded the "Montage" Debian package to the new version 5.0, I
+discovered that it uses a slightly modified version of wcstools.
+Specifically it contains support for HEALPix and TOAST.
+
+To me, this extension looks quite straightforward, and it would enable
+to use HEALPix in the wcstools executable and also in other tools that
+link to wcstools, like DS9. For Debian, this patch would be important
+since it enables the Debian version of Montage to support Healpix and
+Toast -- we are dynamically linking the original version of the wcstools
+lib instead of the patched copy in Montage.
+
+Would you consider adding to the next version of wcstools? Or could I
+initiate a discussion about what would need to be changed to get it
+there? The author of wcstools is John Good (in Cc), and the github web
+page is
+
+https://github.com/Caltech-IPAC/Montage
+
+The patch (rebased to the current version 3.9.4 of wcstools) is attached.
+
+Thank you very much
+Best regards
+
+Ole
+
+P.S. There is still the issue with the amoeba from Numerical Recipes...
+
+
+wcstools-Support-for-HEALPix-and-TOAST.patch
+
+>From d6522fd9f08a96d247a3f4c23b6ed0d444d50b7a Mon Sep 17 00:00:00 2001
+From: Ole Streicher <olebole@debian.org>
+Date: Mon, 30 Jan 2017 17:52:38 +0100
+Subject: [PATCH] Support for HEALPix and TOAST
+
+Montage treats HEALPix and TOAST as if they were spherical projections
+that can processed with the existing reprojection routines.
+
+These are the changes made by John C Good <jcg@ipac.caltech.edu>
+(probably) for the Montage release 5.0. They are rebased here to
+wcstools 3.9.4.

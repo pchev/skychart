@@ -1,0 +1,2409 @@
+actread.c:    sysout = wcs->syswcs;
+actread.c:    eqout = wcs->equinox;
+actread.c:    epout = wcs->epoch;
+binread.c:    sysout = wcs->syswcs;
+binread.c:    eqout = wcs->equinox;
+binread.c:    epout = wcs->epoch;
+ctgread.c:    sysout = wcs->syswcs;
+ctgread.c:    eqout = wcs->equinox;
+ctgread.c:    epout = wcs->epoch;
+distort.c:    if (wcs->distcode == DISTORT_SIRTF) {
+distort.c:	if (wcs->wcsproj == WCS_OLD) {
+distort.c:	    wcs->wcsproj = WCS_NEW;
+distort.c:	    wcs->distort.a_order = 0;
+distort.c:	    wcs->distort.b_order = 0;
+distort.c:	    wcs->distort.ap_order = 0;
+distort.c:	    wcs->distort.bp_order = 0;
+distort.c:	    if (!hgeti4 (hstring, "A_ORDER", &wcs->distort.a_order)) {
+distort.c:		m = wcs->distort.a_order;
+distort.c:			wcs->distort.a[i][j] = 0.0;
+distort.c:			hgetr8 (hstring, keyword, &wcs->distort.a[i][j]);
+distort.c:	    if (!hgeti4 (hstring, "B_ORDER", &wcs->distort.b_order)) {
+distort.c:		m = wcs->distort.b_order;
+distort.c:			wcs->distort.b[i][j] = 0.0;
+distort.c:			hgetr8 (hstring, keyword, &wcs->distort.b[i][j]);
+distort.c:	    if (!hgeti4 (hstring, "AP_ORDER", &wcs->distort.ap_order)) {
+distort.c:		m = wcs->distort.ap_order;
+distort.c:			wcs->distort.ap[i][j] = 0.0;
+distort.c:			hgetr8 (hstring, keyword, &wcs->distort.ap[i][j]);
+distort.c:	    if (!hgeti4 (hstring, "BP_ORDER", &wcs->distort.bp_order)) {
+distort.c:		m = wcs->distort.bp_order;
+distort.c:			wcs->distort.bp[i][j] = 0.0;
+distort.c:			hgetr8 (hstring, keyword, &wcs->distort.bp[i][j]);
+distort.c:    if (wcs->distcode == DISTORT_SIRTF) {
+distort.c:	m = wcs->distort.ap_order;
+distort.c:	n = wcs->distort.bp_order;
+distort.c:	temp_x = x - wcs->xrefpix;
+distort.c:	temp_y = y - wcs->yrefpix;
+distort.c:	    s[j] = wcs->distort.ap[m-j][j];
+distort.c:	   	s[j] = (temp_y * s[j]) + wcs->distort.ap[m-j][k];
+distort.c:	    s[j] = wcs->distort.bp[n-j][j];
+distort.c:		s[j] = temp_y*s[j] + wcs->distort.bp[n-j][k];
+distort.c:    if (wcs->distcode == DISTORT_SIRTF) {
+distort.c:	m = wcs->distort.a_order;
+distort.c:	n = wcs->distort.b_order;
+distort.c:	temp_u = u - wcs->xrefpix;
+distort.c:	temp_v = v - wcs->yrefpix;
+distort.c:	    s[j] = wcs->distort.a[m-j][j];
+distort.c:		s[j] = (temp_v * s[j]) + wcs->distort.a[m-j][k];
+distort.c:	    s[j] = wcs->distort.b[n-j][j];
+distort.c:		s[j] =temp_v*s[j] + wcs->distort.b[n-j][k];
+distort.c:	wcs->distcode = DISTORT_NONE;
+distort.c:	    wcs->distcode = DISTORT_SIRTF;
+distort.c:	    wcs->distcode = DISTORT_NONE;
+distort.c:    if (wcs->distcode == DISTORT_SIRTF) {
+dsspos.c:  x = xpix + wcs->x_pixel_offset - 1.0 + 0.5;
+dsspos.c:  y = ypix + wcs->y_pixel_offset - 1.0 + 0.5;
+dsspos.c:  xmm = (wcs->ppo_coeff[2] - x * wcs->x_pixel_size) / 1000.0;
+dsspos.c:  ymm = (y * wcs->y_pixel_size - wcs->ppo_coeff[5]) / 1000.0;
+dsspos.c:  xi =  wcs->x_coeff[ 0]*xmm	+ wcs->x_coeff[ 1]*ymm +
+dsspos.c:	wcs->x_coeff[ 2]		+ wcs->x_coeff[ 3]*xmm2 +
+dsspos.c:	wcs->x_coeff[ 4]*xmm*ymm	+ wcs->x_coeff[ 5]*ymm2 +
+dsspos.c:	wcs->x_coeff[ 6]*(x2y2)	+ wcs->x_coeff[ 7]*xmm3 +
+dsspos.c:	wcs->x_coeff[ 8]*xmm2*ymm	+ wcs->x_coeff[ 9]*xmm*ymm2 +
+dsspos.c:	wcs->x_coeff[10]*ymm3	+ wcs->x_coeff[11]*xmm*(x2y2) +
+dsspos.c:	wcs->x_coeff[12]*xmm*x2y2*x2y2;
+dsspos.c:	+ wcs->x_coeff[13]*mag	+ wcs->x_coeff[14]*mag*mag +
+dsspos.c:	wcs->x_coeff[15]*mag*mag*mag + wcs->x_coeff[16]*mag*xmm +
+dsspos.c:	wcs->x_coeff[17]*mag*x2y2	+ wcs->x_coeff[18]*mag*xmm*x2y2 +
+dsspos.c:	wcs->x_coeff[19]*color; */
+dsspos.c:  eta =	wcs->y_coeff[ 0]*ymm	+ wcs->y_coeff[ 1]*xmm +
+dsspos.c:	wcs->y_coeff[ 2]		+ wcs->y_coeff[ 3]*ymm2 +
+dsspos.c:	wcs->y_coeff[ 4]*xmm*ymm	+ wcs->y_coeff[ 5]*xmm2 +
+dsspos.c:	wcs->y_coeff[ 6]*(x2y2)	+ wcs->y_coeff[ 7]*ymm3 +
+dsspos.c:	wcs->y_coeff[ 8]*ymm2*xmm	+ wcs->y_coeff[ 9]*ymm*xmm2 +
+dsspos.c:	wcs->y_coeff[10]*xmm3	+ wcs->y_coeff[11]*ymm*(x2y2) +
+dsspos.c:	wcs->y_coeff[12]*ymm*x2y2*x2y2;
+dsspos.c:	+ wcs->y_coeff[13]*mag	+ wcs->y_coeff[14]*mag*mag +
+dsspos.c:	wcs->y_coeff[15]*mag*mag*mag + wcs->y_coeff[16]*mag*ymm +
+dsspos.c:	wcs->y_coeff[17]*mag*x2y2)	+ wcs->y_coeff[18]*mag*ymm*x2y2 +
+dsspos.c:	wcs->y_coeff[19]*color; */
+dsspos.c:  ctan = tan (wcs->plate_dec);
+dsspos.c:  ccos = cos (wcs->plate_dec);
+dsspos.c:  ra = raoff + wcs->plate_ra;
+dsspos.c:  if (wcs->plate_dec == 0.0)
+dsspos.c:    wcs->plate_dec = degrad (wcs->yref);
+dsspos.c:  syplate = sin (wcs->plate_dec);
+dsspos.c:  cyplate = cos (wcs->plate_dec);
+dsspos.c:  if (wcs->plate_ra == 0.0)
+dsspos.c:    wcs->plate_ra = degrad (wcs->yref);
+dsspos.c:  sxdiff = sin (xr - wcs->plate_ra);
+dsspos.c:  cxdiff = cos (xr - wcs->plate_ra);
+dsspos.c:  if (wcs->plate_scale == 0.0)
+dsspos.c:  xmm = xi / wcs->plate_scale;
+dsspos.c:  ymm = eta / wcs->plate_scale;
+dsspos.c:    f = wcs->x_coeff[0]*xmm      + wcs->x_coeff[1]*ymm +
+dsspos.c:        wcs->x_coeff[2]          + wcs->x_coeff[3]*x2 +
+dsspos.c:        wcs->x_coeff[4]*xy       + wcs->x_coeff[5]*y2 +
+dsspos.c:        wcs->x_coeff[6]*x2y2     + wcs->x_coeff[7]*x3 +
+dsspos.c:        wcs->x_coeff[8]*x2y      + wcs->x_coeff[9]*y2x +
+dsspos.c:        wcs->x_coeff[10]*y3      + wcs->x_coeff[11]*xmm*x2y2 +
+dsspos.c:        wcs->x_coeff[12]*xmm*cjunk;
+dsspos.c:      + wcs->x_coeff[13]*mag +
+dsspos.c:        wcs->x_coeff[14]*mag*mag   + wcs->x_coeff[15]*mag*mag*mag +
+dsspos.c:        wcs->x_coeff[16]*mag*xmm   + wcs->x_coeff[17]*mag*(x2+y2) +
+dsspos.c:        wcs->x_coeff[18]*mag*xmm*(x2+y2)  + wcs->x_coeff[19]*color;
+dsspos.c:    fx = wcs->x_coeff[0]           + wcs->x_coeff[3]*2.0*xmm +
+dsspos.c:         wcs->x_coeff[4]*ymm       + wcs->x_coeff[6]*2.0*xmm +
+dsspos.c:         wcs->x_coeff[7]*3.0*x2    + wcs->x_coeff[8]*2.0*xy +
+dsspos.c:         wcs->x_coeff[9]*y2        + wcs->x_coeff[11]*(3.0*x2+y2) +
+dsspos.c:         wcs->x_coeff[12]*(5.0*x4 +6.0*x2*y2+y4);
+dsspos.c:         wcs->x_coeff[16]*mag      + wcs->x_coeff[17]*mag*2.0*xmm +
+dsspos.c:         wcs->x_coeff[18]*mag*(3.0*x2+y2);
+dsspos.c:    fy = wcs->x_coeff[1]           + wcs->x_coeff[4]*xmm +
+dsspos.c:         wcs->x_coeff[5]*2.0*ymm   + wcs->x_coeff[6]*2.0*ymm +
+dsspos.c:         wcs->x_coeff[8]*x2        + wcs->x_coeff[9]*2.0*xy +
+dsspos.c:         wcs->x_coeff[10]*3.0*y2   + wcs->x_coeff[11]*2.0*xy +
+dsspos.c:         wcs->x_coeff[12]*4.0*xy*x2y2;
+dsspos.c:         wcs->x_coeff[17]*mag*2.0*ymm +
+dsspos.c:         wcs->x_coeff[18]*mag*2.0*xy;
+dsspos.c:    g = wcs->y_coeff[0]*ymm       + wcs->y_coeff[1]*xmm +
+dsspos.c:       wcs->y_coeff[2]            + wcs->y_coeff[3]*y2 +
+dsspos.c:       wcs->y_coeff[4]*xy         + wcs->y_coeff[5]*x2 +
+dsspos.c:       wcs->y_coeff[6]*x2y2       + wcs->y_coeff[7]*y3 +
+dsspos.c:       wcs->y_coeff[8]*y2x        + wcs->y_coeff[9]*x2y +
+dsspos.c:       wcs->y_coeff[10]*x3        + wcs->y_coeff[11]*ymm*x2y2 +
+dsspos.c:       wcs->y_coeff[12]*ymm*cjunk;
+dsspos.c:       wcs->y_coeff[13]*mag        + wcs->y_coeff[14]*mag*mag +
+dsspos.c:       wcs->y_coeff[15]*mag*mag*mag + wcs->y_coeff[16]*mag*ymm +
+dsspos.c:       wcs->y_coeff[17]*mag*x2y2 +
+dsspos.c:       wcs->y_coeff[18]*mag*ymm*x2y2 + wcs->y_coeff[19]*color;
+dsspos.c:    gx = wcs->y_coeff[1]           + wcs->y_coeff[4]*ymm +
+dsspos.c:         wcs->y_coeff[5]*2.0*xmm   + wcs->y_coeff[6]*2.0*xmm +
+dsspos.c:         wcs->y_coeff[8]*y2       + wcs->y_coeff[9]*2.0*xy +
+dsspos.c:         wcs->y_coeff[10]*3.0*x2  + wcs->y_coeff[11]*2.0*xy +
+dsspos.c:         wcs->y_coeff[12]*4.0*xy*x2y2;
+dsspos.c:         wcs->y_coeff[17]*mag*2.0*xmm +
+dsspos.c:         wcs->y_coeff[18]*mag*ymm*2.0*xmm;
+dsspos.c:    gy = wcs->y_coeff[0]            + wcs->y_coeff[3]*2.0*ymm +
+dsspos.c:         wcs->y_coeff[4]*xmm        + wcs->y_coeff[6]*2.0*ymm +
+dsspos.c:         wcs->y_coeff[7]*3.0*y2     + wcs->y_coeff[8]*2.0*xy +
+dsspos.c:         wcs->y_coeff[9]*x2         + wcs->y_coeff[11]*(x2+3.0*y2) +
+dsspos.c:         wcs->y_coeff[12]*(5.0*y4 + 6.0*x2*y2 + x4);
+dsspos.c:         wcs->y_coeff[16]*mag       + wcs->y_coeff[17]*mag*2.0*ymm +
+dsspos.c:         wcs->y_coeff[18]*mag*(x2+3.0*y2);
+dsspos.c:  if (wcs->x_pixel_size == 0.0 || wcs->y_pixel_size == 0.0)
+dsspos.c:  x = (wcs->ppo_coeff[2] - xmm*1000.0) / wcs->x_pixel_size;
+dsspos.c:  y = (wcs->ppo_coeff[5] + ymm*1000.0) / wcs->y_pixel_size;
+dsspos.c:  *xpix = x - wcs->x_pixel_offset + 1.0 - 0.5;
+dsspos.c:  *ypix = y - wcs->y_pixel_offset + 1.0 - 0.5;
+dsspos.c:  if (*xpix < 0.5 || *xpix > wcs->nxpix+0.5)
+dsspos.c:  if (*ypix < 0.5 || *ypix > wcs->nypix+0.5)
+fitswcs.c:    if (wcs->xref < 0)
+fitswcs.c:	wcs->xref = 360.0 + wcs->xref;
+fitswcs.c:    hputra (header,"RA",wcs->xref);
+fitswcs.c:    hputdec (header,"DEC",wcs->yref);
+fitswcs.c:    hputr8 (header, "EQUINOX", wcs->equinox);
+fitswcs.c:	hputr8 (header, "EPOCH", wcs->equinox);
+fitswcs.c:	hputr8 (header, "EPOCH", wcs->equinox);
+fitswcs.c:    if (wcs->radecsys[0] == 'B' || wcs->radecsys[0] == 'b')
+fitswcs.c:    else if (wcs->radecsys[0] == 'I' || wcs->radecsys[0] == 'i')
+fitswcs.c:    else if (wcs->radecsys[0] == 'J' || wcs->radecsys[0] == 'j')
+fitswcs.c:	hputs (header, "RADECSYS", wcs->radecsys);
+fitswcs.c:    hputnr8 (header, "CRVAL1", 9, wcs->xref);
+fitswcs.c:    hputnr8 (header, "CRVAL2", 9, wcs->yref);
+fitswcs.c:    hputnr8 (header, "CRPIX1", 4, wcs->xrefpix);
+fitswcs.c:    hputnr8 (header, "CRPIX2", 4, wcs->yrefpix);
+fitswcs.c:    if (wcs->rotmat) {
+fitswcs.c:	hputnr8 (header, "CD1_1", 12, wcs->cd[0]);
+fitswcs.c:	hputnr8 (header, "CD1_2", 12, wcs->cd[1]);
+fitswcs.c:	hputnr8 (header, "CD2_1", 12, wcs->cd[2]);
+fitswcs.c:	hputnr8 (header, "CD2_2", 12, wcs->cd[3]);
+fitswcs.c:	hputnr8 (header, "CDELT1", 12, wcs->xinc);
+fitswcs.c:	hputnr8 (header, "CDELT2", 12, wcs->yinc);
+fitswcs.c:	hputnr8 (header, "CROTA1", 6, wcs->rot);
+fitswcs.c:	hputnr8 (header, "CROTA2", 6, wcs->rot);
+fitswcs.c:	hputnr8 (header, "CD1_1", 12, wcs->cd[0]);
+fitswcs.c:	hputnr8 (header, "CD1_2", 12, wcs->cd[1]);
+fitswcs.c:	hputnr8 (header, "CD2_1", 12, wcs->cd[2]);
+fitswcs.c:	hputnr8 (header, "CD2_2", 12, wcs->cd[3]);
+fitswcs.c:    if (-wcs->xinc != wcs->yinc) {
+fitswcs.c:	hputnr8 (header, "SECPIX1", 4, -wcs->xinc*3600.0);
+fitswcs.c:	hputnr8 (header, "SECPIX2", 4, wcs->yinc*3600.0);
+fitswcs.c:	hputnr8 (header, "SECPIX", 6, wcs->yinc*3600.0);
+fitswcs.c:    if (wcs->ncoeff1 > 0) {
+fitswcs.c:	for (i = 0; i < wcs->ncoeff1; i++) {
+fitswcs.c:	    hputr8 (header, keyword, wcs->x_coeff[i]);
+fitswcs.c:    if (wcs->ncoeff2 > 0) {
+fitswcs.c:	for (i = 0; i < wcs->ncoeff2; i++) {
+fitswcs.c:	    hputr8 (header, keyword, wcs->y_coeff[i]);
+fortwcs.c:	strcpy (radecsys, wcs->radecsys);
+fortwcs.c:	wcs->degout = *mode;
+fortwcs.c:	wcs->linmode = *mode;
+gscread.c:    int	sysout = wcs->syswcs;	/* Image coordinate system */
+gscread.c:    double eqout = wcs->equinox; /* Image coordinate equinox */
+gscread.c:    double epout = wcs->epoch;	/* Image epoch */
+imgetwcs.c:    *hp = (int) wcs->nypix;
+imgetwcs.c:    *wp = (int) wcs->nxpix;
+imgetwcs.c:    if (wcs->sysout < 1 || wcs->sysout == 6 || wcs->sysout == 10)
+imgetwcs.c:	wcs->degout = 1;
+imgetwcs.c:	*sysout = wcs->syswcs;
+imgetwcs.c:	*eqout = wcs->equinox;
+imgetwcs.c:    eq1 = wcs->equinox;
+imgetwcs.c:    if (wcs->coorflip) {
+imgetwcs.c:	ra1 = wcs->crval[1];
+imgetwcs.c:	dec1 = wcs->crval[0];
+imgetwcs.c:	ra1 = wcs->crval[0];
+imgetwcs.c:	dec1 = wcs->crval[1];
+imgetwcs.c:    if (verbose && (eq1 != *eqout || wcs->syswcs != *sysout)) {
+imgetwcs.c:	if (wcs->degout) {
+imgetwcs.c:	wcscstr (cstr, wcs->syswcs, wcs->equinox, wcs->epoch);
+imgetwcs.c:		 wcs->xrefpix, wcs->yrefpix, rstr, dstr, cstr);
+imgetwcs.c:    dx = wcs->nxpix;
+imgetwcs.c:    dy = wcs->nypix;
+imgetwcs.c:    if (wcs->syswcs > 0 && wcs->syswcs != 6 && wcs->syswcs != 10) {
+imgetwcs.c:	wcscon (wcs->syswcs,*sysout,wcs->equinox,*eqout,&ra1,&dec1,wcs->epoch);
+imgetwcs.c:	wcscon (wcs->syswcs,*sysout,wcs->equinox,*eqout,&ra2,&dec2,wcs->epoch);
+imgetwcs.c:	wcscon (wcs->syswcs,*sysout,wcs->equinox,*eqout,&ra3,&dec3,wcs->epoch);
+imgetwcs.c:	wcscon (wcs->syswcs,*sysout,wcs->equinox,*eqout,&ra4,&dec4,wcs->epoch);
+imgetwcs.c:    if (wcs->syswcs > 0 && wcs->syswcs != 6 && wcs->syswcs != 10)
+imgetwcs.c:	wcscon (wcs->syswcs,*sysout,wcs->equinox,*eqout,cra,cdec,wcs->epoch);
+imgetwcs.c:    if (wcs->xref == -999.0 && wcs->yref == -999.0) {
+imgetwcs.c:	wcs->xref = *cra;
+imgetwcs.c:	wcs->cel.ref[0] = *cra;
+imgetwcs.c:	wcs->crval[0] = *cra;
+imgetwcs.c:	wcs->yref = *cdec;
+imgetwcs.c:	wcs->cel.ref[1] = *cdec;
+imgetwcs.c:	wcs->crval[1] = *cdec;
+imgetwcs.c:	if (wcs->xrefpix == 0.0 && wcs->yrefpix == 0.0) {
+imgetwcs.c:	    wcs->xrefpix = 0.5 + (double) wcs->nxpix * 0.5;
+imgetwcs.c:	    wcs->yrefpix = 0.5 + (double) wcs->nypix * 0.5;
+imgetwcs.c:	wcs->xinc = *dra * 2.0 / (double) wcs->nxpix;
+imgetwcs.c:	wcs->yinc = *ddec * 2.0 / (double) wcs->nypix;
+imgetwcs.c:	wcs->plate_fit = 0; */
+imgetwcs.c:    else if (wcs->syswcs != *sysout && wcs->equinox != *eqout) {
+imgetwcs.c:	wcscon (wcs->syswcs, *sysout, wcs->equinox, *eqout, &ra1, &dec1, wcs->epoch);
+imgetwcs.c:	if (wcs->coorflip) {
+imgetwcs.c:	    wcs->yref = ra1;
+imgetwcs.c:	    wcs->xref = dec1;
+imgetwcs.c:	    wcs->xref = ra1;
+imgetwcs.c:	    wcs->yref = dec1;
+imgetwcs.c:	pix2wcs (wcs, wcs->xrefpix-0.5, wcs->yrefpix, &ra1, &dec1);
+imgetwcs.c:	pix2wcs (wcs, wcs->xrefpix+0.5, wcs->yrefpix, &ra2, &dec2);
+imgetwcs.c:    wcs->crval[0] = wcs->xref;
+imgetwcs.c:    wcs->crval[1] = wcs->yref;
+imgetwcs.c:    if (wcs->coorflip) {
+imgetwcs.c:	wcs->cel.ref[0] = wcs->crval[1];
+imgetwcs.c:	wcs->cel.ref[1] = wcs->crval[0];
+imgetwcs.c:	wcs->cel.ref[0] = wcs->crval[0];
+imgetwcs.c:	wcs->cel.ref[1] = wcs->crval[1];
+imgetwcs.c:    if (wcs->syswcs > 0 && wcs->syswcs != 6 && wcs->syswcs != 10) {
+imgetwcs.c:	wcs->cel.flag = 0;
+imgetwcs.c:	wcs->wcsl.flag = 0;
+imgetwcs.c:	wcs->lin.flag = LINSET;
+imgetwcs.c:	wcs->wcsl.flag = WCSSET;
+imgetwcs.c:    wcs->equinox = *eqout;
+imgetwcs.c:    wcs->syswcs = *sysout;
+imgetwcs.c:    wcs->sysout = *sysout;
+imgetwcs.c:    wcs->eqout = *eqout;
+imgetwcs.c:    wcs->sysin = *sysout;
+imgetwcs.c:    wcs->eqin = *eqout;
+imgetwcs.c:    wcscstr (cstr,*sysout,*eqout,wcs->epoch);
+imgetwcs.c:    strcpy (wcs->radecsys, cstr);
+imgetwcs.c:    strcpy (wcs->radecout, cstr);
+imgetwcs.c:    strcpy (wcs->radecin, cstr);
+imgetwcs.c:    wcsininit (wcs, wcs->radecsys);
+imgetwcs.c:    wcsoutinit (wcs, wcs->radecsys);
+imgetwcs.c:    naxes = wcs->naxis;
+imgetwcs.c:	naxes = wcs->naxes;
+imgetwcs.c:	wcs->naxis = naxes;
+imgetwcs.c:	hputnr8 (header, "CDELT1", 9, wcs->xinc);
+imgetwcs.c:	    hputnr8 (header, "CDELT2", 9, wcs->yinc);
+imgetwcs.c:	    hputnr8 (header, "CROTA2", 9, wcs->rot);
+imgetwcs.c:	hputnr8 (header, "CD1_1", 9, wcs->cd[0]);
+imgetwcs.c:	    hputnr8 (header, "CD1_2", 9, wcs->cd[1]);
+imgetwcs.c:	    hputnr8 (header, "CD2_1", 9, wcs->cd[2]);
+imgetwcs.c:	    hputnr8 (header, "CD2_2", 9, wcs->cd[3]);
+imgetwcs.c:	if (wcs->degout) {
+imgetwcs.c:	wcscstr (cstr,*sysout,*eqout,wcs->epoch);
+imgetwcs.c:		wcs->xrefpix, wcs->yrefpix, rstr, dstr, cstr);
+imgetwcs.c:	if (wcs->degout) {
+imgetwcs.c:	wcscstr (cstr, *sysout, *eqout, wcs->epoch);
+imgetwcs.c:	if (wcs->degout) {
+imgetwcs.c: * Oct  6 2003	Change wcs->naxes to wcs->naxis to match WCSLIB 3.2
+imgetwcs.c: * Dec  3 2003	Add wcs->naxes back as an alternative
+imsetwcs.c:    refep = wcs->epoch;
+imsetwcs.c:	wcs->prjcode = WCS_TAN;
+imsetwcs.c:	if (wcs->ncoeff1 > 0)
+imsetwcs.c:		    wcs->ncoeff1, wcs->ncoeff2);
+imsetwcs.c:		    3600.0*wcs->xinc, 3600.0*wcs->yinc, wcs->rot);
+imsetwcs.c:	ra2str (rstr, 32, wcs->xref, 3);
+imsetwcs.c:	dec2str (dstr, 32, wcs->yref, 2);
+imsetwcs.c:		rstr,dstr, refcoor, wcs->xrefpix, wcs->yrefpix);
+imsetwcs.c:	ra = wcs->xref;
+imsetwcs.c:	dec = wcs->yref;
+imsetwcs.c:		    rstr,dstr, wcs->xrefpix, wcs->yrefpix);
+imsetwcs.c:		    rstr,dstr, wcs->xrefpix, wcs->yrefpix);
+imsetwcs.c:/*	setdcenter (wcs->xref, wcs->yref);
+imsetwcs.c:	setsys (wcs->syswcs);
+imsetwcs.c:	setrefpix (wcs->xrefpix, wcs->yrefpix);
+imsetwcs.c:	    setcd (wcs->cd);
+imsetwcs.c:	    setsecpix (-3600.0 * wcs->xinc);
+imsetwcs.c:	    setsecpix2 (3600.0 * wcs->yinc);
+imsetwcs.c:	    setrot (wcs->rot);
+imsetwcs.c:/*	setdcenter (wcs->xref, wcs->yref);
+imsetwcs.c:	setsys (wcs->syswcs);
+imsetwcs.c:	setrefpix (wcs->xrefpix, wcs->yrefpix);
+imsetwcs.c:	    setcd (wcs->cd);
+imsetwcs.c:	    setsecpix (-3600.0 * wcs->xinc);
+imsetwcs.c:	    setsecpix2 (3600.0 * wcs->yinc);
+imsetwcs.c:	    setrot (wcs->rot);
+imsetwcs.c:	x = 0.5 * wcs->nxpix;
+imsetwcs.c:	y = 0.5 * wcs->nypix;
+imsetwcs.c:	setsys (wcs->syswcs);
+imsetwcs.c:	setsecpix (-3600.0 * wcs->xinc);
+imsetwcs.c:	setsecpix2 (3600.0 * wcs->yinc);
+imsetwcs.c:	setrot (wcs->rot);
+imsetwcs.c: * Jun 11 2001	Set refep from wcs->epoch after WCS is set
+matchstar1.c:    wcs->xref = wcs->xref + (bestdx * wcs->xinc);
+matchstar1.c:    if (wcs->xref < 0.0) wcs->xref = 360.0 + wcs->xref;
+matchstar1.c:    wcs->yref = wcs->yref + (bestdy * wcs->yinc);
+matchstar1.c:    xref_p = wcs->xref;
+matchstar1.c:    yref_p = wcs->yref;
+matchstar1.c:    xrefpix = wcs->xrefpix;
+matchstar1.c:    yrefpix = wcs->yrefpix;
+matchstar1.c:    xref0 = wcs->xref;
+matchstar1.c:    yref0 = wcs->yref;
+matchstar1.c:    xinc0 = wcs->xinc;
+matchstar1.c:    yinc0 = wcs->yinc;
+matchstar1.c:    rot0 = wcs->rot;
+matchstar1.c:    xrefpix0 = wcs->xrefpix;
+matchstar1.c:    yrefpix0 = wcs->yrefpix;
+matchstar1.c:    cd0[0] = wcs->cd[0];
+matchstar1.c:    cd0[1] = wcs->cd[1];
+matchstar1.c:    cd0[2] = wcs->cd[2];
+matchstar1.c:    cd0[3] = wcs->cd[3];
+matchstar1.c:	ra2str (rastr, 16, wcs->xref, 3);
+matchstar1.c:	dec2str (decstr, 16, wcs->yref, 2);
+matchstar1.c:		     rastr,decstr,wcs->cd[0],wcs->cd[1],wcs->cd[2],wcs->cd[3]);
+matchstar1.c:		     rastr,decstr,3600.0*wcs->xinc,3600.0*wcs->yinc,wcs->rot);
+matchstar1.c:	fprintf (stderr,"(%8.2f,%8.2f)\n", wcs->xrefpix, wcs->yrefpix);
+matchstar1.c:	xref_p = wcs->xref;
+matchstar1.c:	yref_p = wcs->yref;
+matchstar1.c:	xrefpix = wcs->xrefpix;
+matchstar1.c:	yrefpix = wcs->yrefpix;
+matchstar1.c:	    ra2str (rastr, 16, wcs->xref, 3);
+matchstar1.c:	    dec2str (decstr, 16, wcs->yref, 2);
+matchstar1.c:		 rastr, decstr, 3600.0*wcs->xinc, 3600.0*wcs->yinc, wcs->rot);
+matchstar1.c:	    fprintf (stderr,"(%8.2f,%8.2f)\n", wcs->xrefpix, wcs->yrefpix);
+matchstar1.c:/*    double equinox = wcs->equinox; */
+matchstar1.c:    xref_p = wcs->xref;
+matchstar1.c:    yref_p = wcs->yref;
+matchstar1.c:    xrefpix = wcs->xrefpix;
+matchstar1.c:    yrefpix = wcs->yrefpix;
+matchstar1.c:    xref0 = wcs->xref;
+matchstar1.c:    yref0 = wcs->yref;
+matchstar1.c:    xinc0 = wcs->xinc;
+matchstar1.c:    yinc0 = wcs->yinc;
+matchstar1.c:    rot0 = wcs->rot;
+matchstar1.c:    xrefpix0 = wcs->xrefpix;
+matchstar1.c:    yrefpix0 = wcs->yrefpix;
+matchstar1.c:    cd0[0] = wcs->cd[0];
+matchstar1.c:    cd0[1] = wcs->cd[1];
+matchstar1.c:    cd0[2] = wcs->cd[2];
+matchstar1.c:    cd0[3] = wcs->cd[3];
+matchstar1.c:	ra2str (rastr, 16, wcs->xref, 3);
+matchstar1.c:	dec2str (decstr, 16, wcs->yref, 2);
+matchstar1.c:		     rastr,decstr,wcs->cd[0],wcs->cd[1],wcs->cd[2],wcs->cd[3]);
+matchstar1.c:		     rastr,decstr,3600.0*wcs->xinc,3600.0*wcs->yinc,wcs->rot);
+matchstar1.c:	fprintf (stderr,"(%8.2f,%8.2f)\n", wcs->xrefpix, wcs->yrefpix);
+matchstar1.c:	xref_p = wcs->xref;
+matchstar1.c:	yref_p = wcs->yref;
+matchstar1.c:	xrefpix = wcs->xrefpix;
+matchstar1.c:	yrefpix = wcs->yrefpix;
+matchstar1.c:	    ra2str (rastr, 16, wcs->xref, 3);
+matchstar1.c:	    dec2str (decstr, 16, wcs->yref, 2);
+matchstar1.c:		 rastr, decstr, 3600.0*wcs->xinc, 3600.0*wcs->yinc, wcs->rot);
+matchstar1.c:	    fprintf (stderr,"(%8.2f,%8.2f)\n", wcs->xrefpix, wcs->yrefpix);
+matchstar.c:	nbx = wcs->nxpix / tol2;
+matchstar.c:	nby = wcs->nypix / tol2;
+matchstar.c:    wcs->xref = wcs->xref + (bestdx * wcs->xinc);
+matchstar.c:    if (wcs->xref < 0.0) wcs->xref = 360.0 + wcs->xref;
+matchstar.c:    wcs->yref = wcs->yref + (bestdy * wcs->yinc);
+matchstar.c:    xref_p = wcs->xref;
+matchstar.c:    yref_p = wcs->yref;
+matchstar.c:    xrefpix = wcs->xrefpix;
+matchstar.c:    yrefpix = wcs->yrefpix;
+matchstar.c:    xref0 = wcs->xref;
+matchstar.c:    yref0 = wcs->yref;
+matchstar.c:    xinc0 = wcs->xinc;
+matchstar.c:    yinc0 = wcs->yinc;
+matchstar.c:    rot0 = wcs->rot;
+matchstar.c:    xrefpix0 = wcs->xrefpix;
+matchstar.c:    yrefpix0 = wcs->yrefpix;
+matchstar.c:    cd0[0] = wcs->cd[0];
+matchstar.c:    cd0[1] = wcs->cd[1];
+matchstar.c:    cd0[2] = wcs->cd[2];
+matchstar.c:    cd0[3] = wcs->cd[3];
+matchstar.c:	ra2str (rastr, 31, wcs->xref, 3);
+matchstar.c:	dec2str (decstr, 31, wcs->yref, 2);
+matchstar.c:		     rastr,decstr,wcs->cd[0],wcs->cd[1],wcs->cd[2],wcs->cd[3]);
+matchstar.c:		     rastr,decstr,3600.0*wcs->xinc,3600.0*wcs->yinc,wcs->rot);
+matchstar.c:	fprintf (stderr,"(%8.2f,%8.2f)\n", wcs->xrefpix, wcs->yrefpix);
+matchstar.c:	xref_p = wcs->xref;
+matchstar.c:	yref_p = wcs->yref;
+matchstar.c:	xrefpix = wcs->xrefpix;
+matchstar.c:	yrefpix = wcs->yrefpix;
+matchstar.c:	    ra2str (rastr, 31, wcs->xref, 3);
+matchstar.c:	    dec2str (decstr, 31, wcs->yref, 2);
+matchstar.c:		 rastr, decstr, 3600.0*wcs->xinc, 3600.0*wcs->yinc, wcs->rot);
+matchstar.c:	    fprintf (stderr,"(%8.2f,%8.2f)\n", wcs->xrefpix, wcs->yrefpix);
+matchstar.c:/*    double equinox = wcs->equinox; */
+matchstar.c:    xref_p = wcs->xref;
+matchstar.c:    yref_p = wcs->yref;
+matchstar.c:    xrefpix = wcs->xrefpix;
+matchstar.c:    yrefpix = wcs->yrefpix;
+matchstar.c:    xref0 = wcs->xref;
+matchstar.c:    yref0 = wcs->yref;
+matchstar.c:    xinc0 = wcs->xinc;
+matchstar.c:    yinc0 = wcs->yinc;
+matchstar.c:    rot0 = wcs->rot;
+matchstar.c:    xrefpix0 = wcs->xrefpix;
+matchstar.c:    yrefpix0 = wcs->yrefpix;
+matchstar.c:    cd0[0] = wcs->cd[0];
+matchstar.c:    cd0[1] = wcs->cd[1];
+matchstar.c:    cd0[2] = wcs->cd[2];
+matchstar.c:    cd0[3] = wcs->cd[3];
+matchstar.c:	ra2str (rastr, 31, wcs->xref, 3);
+matchstar.c:	dec2str (decstr, 31, wcs->yref, 2);
+matchstar.c:		     rastr,decstr,wcs->cd[0],wcs->cd[1],wcs->cd[2],wcs->cd[3]);
+matchstar.c:		     rastr,decstr,3600.0*wcs->xinc,3600.0*wcs->yinc,wcs->rot);
+matchstar.c:	fprintf (stderr,"(%8.2f,%8.2f)\n", wcs->xrefpix, wcs->yrefpix);
+matchstar.c:	xref_p = wcs->xref;
+matchstar.c:	yref_p = wcs->yref;
+matchstar.c:	xrefpix = wcs->xrefpix;
+matchstar.c:	yrefpix = wcs->yrefpix;
+matchstar.c:	    ra2str (rastr, 31, wcs->xref, 3);
+matchstar.c:	    dec2str (decstr, 31, wcs->yref, 2);
+matchstar.c:		 rastr, decstr, 3600.0*wcs->xinc, 3600.0*wcs->yinc, wcs->rot);
+matchstar.c:	    fprintf (stderr,"(%8.2f,%8.2f)\n", wcs->xrefpix, wcs->yrefpix);
+NEWS:wcsinit.c:  Set wcs->naxes to actual number of image WCS axes, usually 2
+NEWS:In wcs.c, keep wcs->rot between 0 and 360 degrees (360.0 -> 0.0)
+NEWS:Add wcs->naxes back into wcs structure for backward compatibility; it
+NEWS:should always be equal to wcs->naxis.
+NEWS:Change wcs->naxes to wcs->naxis to prepare for WCSLIB 3.*
+platepos.c:    int ncoeff1 = wcs->ncoeff1;
+platepos.c:    int ncoeff2 = wcs->ncoeff2;
+platepos.c:    x = xpix - wcs->crpix[0];
+platepos.c:    y = ypix - wcs->crpix[1];
+platepos.c:    xi =  wcs->x_coeff[ 0]		+ wcs->x_coeff[ 1]*x +
+platepos.c:	  wcs->x_coeff[ 2]*y	+ wcs->x_coeff[ 3]*x2 +
+platepos.c:	  wcs->x_coeff[ 4]*y2	+ wcs->x_coeff[ 5]*x*y;
+platepos.c:	  xi = xi + wcs->x_coeff[ 6]*x3	+ wcs->x_coeff[ 7]*y3;
+platepos.c:	xi = xi + wcs->x_coeff[ 8]*x2*y	+ wcs->x_coeff[ 9]*x*y2 +
+platepos.c:		  wcs->x_coeff[10]*(r2)	+ wcs->x_coeff[11]*x*r2 +
+platepos.c:		  wcs->x_coeff[12]*y*r2;
+platepos.c:    eta = wcs->y_coeff[ 0]		+ wcs->y_coeff[ 1]*x +
+platepos.c:	  wcs->y_coeff[ 2]*y	+ wcs->y_coeff[ 3]*x2 +
+platepos.c:	  wcs->y_coeff[ 4]*y2	+ wcs->y_coeff[ 5]*x*y;
+platepos.c:	eta = eta + wcs->y_coeff[ 6]*x3	+ wcs->y_coeff[ 7]*y3;
+platepos.c:	eta = eta + wcs->y_coeff[ 8]*x2*y + wcs->y_coeff[ 9]*y2*x +
+platepos.c:		    wcs->y_coeff[10]*r2   + wcs->y_coeff[11]*x*r2 +
+platepos.c:		    wcs->y_coeff[12]*y*r2;
+platepos.c:    ra0 = degrad (wcs->crval[0]);
+platepos.c:    dec0 = degrad (wcs->crval[1]);
+platepos.c:    int	ncoeff1 = wcs->ncoeff1;
+platepos.c:    int	ncoeff2 = wcs->ncoeff2;
+platepos.c:    ra0 = degrad (wcs->crval[0]);
+platepos.c:    dec0 = degrad (wcs->crval[1]);
+platepos.c:    x = xi * wcs->dc[0] + eta * wcs->dc[1];
+platepos.c:    y = xi * wcs->dc[2] + eta * wcs->dc[3];
+platepos.c:    /* if (wcs->x_coeff[1] == 0.0)
+platepos.c:	x = xi - wcs->x_coeff[0];
+platepos.c:	x = (xi - wcs->x_coeff[0]) / wcs->x_coeff[1];
+platepos.c:    if (wcs->y_coeff[2] == 0.0)
+platepos.c:	y = eta - wcs->y_coeff[0];
+platepos.c:	y = (eta - wcs->y_coeff[0]) / wcs->y_coeff[2]; */
+platepos.c:	f = wcs->x_coeff[0]	+ wcs->x_coeff[1]*x +
+platepos.c:	    wcs->x_coeff[2]*y	+ wcs->x_coeff[3]*x2 +
+platepos.c:	    wcs->x_coeff[4]*y2	+ wcs->x_coeff[5]*xy;
+platepos.c:	fx = wcs->x_coeff[1]	+ wcs->x_coeff[3]*2.0*x +
+platepos.c:	     wcs->x_coeff[5]*y;
+platepos.c:	fy = wcs->x_coeff[2]	+ wcs->x_coeff[4]*2.0*y +
+platepos.c:	     wcs->x_coeff[5]*x;
+platepos.c:	    f = f + wcs->x_coeff[6]*x3	+ wcs->x_coeff[7]*y3;
+platepos.c:	    fx = fx + wcs->x_coeff[6]*3.0*x2;
+platepos.c:	    fy = fy + wcs->x_coeff[7]*3.0*y2;
+platepos.c:		wcs->x_coeff[8]*x2y	+ wcs->x_coeff[9]*y2x +
+platepos.c:		wcs->x_coeff[10]*r2 + wcs->x_coeff[11]*x*r2 +
+platepos.c:		wcs->x_coeff[12]*y*r2;
+platepos.c:	    fx = fx +	wcs->x_coeff[8]*2.0*xy + 
+platepos.c:			wcs->x_coeff[9]*y2 +
+platepos.c:	 		wcs->x_coeff[10]*2.0*x +
+platepos.c:			wcs->x_coeff[11]*(3.0*x2+y2) +
+platepos.c:			wcs->x_coeff[12]*2.0*xy;
+platepos.c:	    fy = fy +	wcs->x_coeff[8]*x2 +
+platepos.c:			wcs->x_coeff[9]*2.0*xy +
+platepos.c:			wcs->x_coeff[10]*2.0*y +
+platepos.c:			wcs->x_coeff[11]*2.0*xy +
+platepos.c:			wcs->x_coeff[12]*(3.0*y2+x2);
+platepos.c:	g = wcs->y_coeff[0]	+ wcs->y_coeff[1]*x +
+platepos.c:	    wcs->y_coeff[2]*y	+ wcs->y_coeff[3]*x2 +
+platepos.c:	    wcs->y_coeff[4]*y2	+ wcs->y_coeff[5]*xy;
+platepos.c:	gx = wcs->y_coeff[1]	+ wcs->y_coeff[3]*2.0*x +
+platepos.c:	     wcs->y_coeff[5]*y;
+platepos.c:	gy = wcs->y_coeff[2]	+ wcs->y_coeff[4]*2.0*y +
+platepos.c:	     wcs->y_coeff[5]*x;
+platepos.c:	    g = g + wcs->y_coeff[6]*x3	+ wcs->y_coeff[7]*y3;
+platepos.c:	    gx = gx + wcs->y_coeff[6]*3.0*x2;
+platepos.c:	    gy = gy + wcs->y_coeff[7]*3.0*y2;
+platepos.c:		wcs->y_coeff[8]*x2y	+ wcs->y_coeff[9]*y2x +
+platepos.c:		wcs->y_coeff[10]*r2	+ wcs->y_coeff[11]*x*r2 +
+platepos.c:		wcs->y_coeff[12]*y*r2;
+platepos.c:	    gx = gx +	wcs->y_coeff[8]*2.0*xy + 
+platepos.c:			wcs->y_coeff[9]*y2 +
+platepos.c:	 		wcs->y_coeff[10]*2.0*x +
+platepos.c:			wcs->y_coeff[11]*(3.0*x2+y2) +
+platepos.c:			wcs->y_coeff[12]*2.0*xy;
+platepos.c:	    gy = gy +	wcs->y_coeff[8]*x2 +
+platepos.c:			wcs->y_coeff[9]*2.0*xy +
+platepos.c:			wcs->y_coeff[10]*2.0*y +
+platepos.c:			wcs->y_coeff[11]*2.0*xy +
+platepos.c:			wcs->y_coeff[12]*(3.0*y2+x2);
+platepos.c:    *xpix = x + wcs->crpix[0];
+platepos.c:    *ypix = y + wcs->crpix[1];
+platepos.c:    if (*xpix < 0.5 || *xpix > wcs->nxpix+0.5)
+platepos.c:    if (*ypix < 0.5 || *ypix > wcs->nypix+0.5)
+platepos.c:    wcs->ncoeff1 = ncoeff1;
+platepos.c:    wcs->ncoeff2 = ncoeff2;
+platepos.c:    wcs->prjcode = WCS_PLT;
+platepos.c:	    wcs->x_coeff[i] = coeff[i];
+platepos.c:	    wcs->x_coeff[i] = 0.0;
+platepos.c:	    wcs->y_coeff[i] = coeff[ncoeff1+i];
+platepos.c:	    wcs->y_coeff[i] = 0.0;
+platepos.c:    *ncoeff1 = wcs->ncoeff1;
+platepos.c:    *ncoeff2 = wcs->ncoeff2;
+platepos.c:	coeff[i] = wcs->x_coeff[i];
+platepos.c:	coeff[*ncoeff1+i] = wcs->y_coeff[i];
+platepos.c:    for (i = 0; i < wcs->ncoeff1; i++) {
+platepos.c:	hputnr8 (header, keyword, -15, wcs->x_coeff[i]);
+platepos.c:    for (i = 0; i < wcs->ncoeff2; i++) {
+platepos.c:	hputnr8 (header, keyword, -15, wcs->y_coeff[i]);
+tabread.c:    sysout = wcs->syswcs;
+tabread.c:    eqout = wcs->equinox;
+tabread.c:    epout = wcs->epoch;
+temp:    wcs->wcschar = mchar;
+temp:	wcs->wcsname = (char *) calloc (strlen (wcsname)+2, 1);
+temp:	strcpy (wcs->wcsname, wcsname);
+temp:    wcs->cel.flag = 0;
+temp:    wcs->lin.flag = 0;
+temp:    wcs->wcsl.flag = 0;
+temp:    wcs->wcsl.cubeface = -1;
+temp:    wcs->ncoeff1 = 0;
+temp:    wcs->ncoeff2 = 0;
+temp:    wcs->rotmat = 0;
+temp:    wcs->rot = 0.0;
+temp:    wcs->naxis = naxes;
+temp:    wcs->naxes = naxes;
+temp:    wcs->lin.naxis = naxes;
+temp:    wcs->nxpix = 0;
+temp:    hgetr8 (hstring, "NAXIS1", &wcs->nxpix);
+temp:    if (wcs->nxpix < 1)
+temp:	hgetr8 (hstring, "IMAGEW", &wcs->nxpix);
+temp:    if (wcs->nxpix < 1) {
+temp:    wcs->nypix = 0;
+temp:    hgetr8 (hstring, "NAXIS2", &wcs->nypix);
+temp:    if (wcs->nypix < 1)
+temp:	hgetr8 (hstring, "IMAGEH", &wcs->nypix);
+temp:    if (naxes > 1 && wcs->nypix < 1) {
+temp:	    if (i == 0 && wcs->nxpix > 1) {
+temp:			 keyword, wcs->nxpix); */
+temp:		j = wcs->nxpix;
+temp:	    else if (i == 1 && wcs->nypix > 1) {
+temp:			 keyword, wcs->nypix); */
+temp:		j = wcs->nypix;
+temp:    wcs->naxes = nax;
+temp:    wcs->naxis = nax;
+temp:    hgets (hstring, "INSTRUME", 16, wcs->instrument);
+temp:    hgeti4 (hstring, "DETECTOR", &wcs->detector);
+temp:    wcs->wcsproj = getdefwcs();
+temp:    wcs->logwcs = 0;
+temp:    hgeti4 (hstring, "DC-FLAG", &wcs->logwcs);
+temp:    for (i = 0; i < 81; i++) wcs->pc[i] = 0.0;
+temp:    for (i = 0; i < naxes; i++) wcs->pc[(i*naxes)+i] = 1.0;
+temp:    for (i = 0; i < 9; i++) wcs->cdelt[i] = 0.0;
+temp:    for (i = 0; i < naxes; i++) wcs->cdelt[i] = 1.0;
+temp:	if ((wcs->wcs = wcsinitn (hstring, wcsname)) == NULL) {
+temp:	depwcs = wcs->wcs;
+temp:	depwcs->wcsdep = wcs;
+temp:	wcs->wcs = NULL;
+temp:    wcs->radvel = 0.0;
+temp:    wcs->zvel = 0.0;
+temp:    if (hgetr8c (hstring, "VSOURCE", &mchar, &wcs->radvel))
+temp:	wcs->zvel = wcs->radvel / cvel;
+temp:    else if (hgetr8c (hstring, "ZSOURCE", &mchar, &wcs->zvel))
+temp:	wcs->radvel = wcs->zvel * cvel;
+temp:    else if (hgetr8 (hstring, "VELOCITY", &wcs->radvel))
+temp:	wcs->zvel = wcs->radvel / cvel;
+temp:	wcs->prj.p[i] = 0.0;
+temp:	strcpy (wcs->ctype[0], ctype1);
+temp:	strcpy (wcs->ctype[1], ctype2);
+temp:	strcpy (wcs->ctype[2], "");
+temp:	hgetsc (hstring, "CTYPE3", &mchar, 9, wcs->ctype[2]);
+temp:	strcpy (wcs->ctype[3], "");
+temp:	hgetsc (hstring, "CTYPE4", &mchar, 9, wcs->ctype[3]);
+temp:	if (wcs->prjcode == WCS_LIN) {
+temp:	    if (!hgetsc (hstring, "CUNIT1", &mchar, 16, wcs->units[0])) {
+temp:		if (!mgetstr (hstring, "WAT1", "units", 16, wcs->units[0])) {
+temp:		    wcs->units[0][0] = 0;
+temp:	    if (!strcmp (wcs->units[0], "pixel"))
+temp:		wcs->prjcode = WCS_PIX;
+temp:		if (!hgetsc (hstring, "CUNIT2", &mchar, 16, wcs->units[1])) {
+temp:		    if (!mgetstr (hstring, "WAT2", "units", 16, wcs->units[1])) {
+temp:			wcs->units[1][0] = 0;
+temp:		if (!strcmp (wcs->units[0], "pixel"))
+temp:		    wcs->prjcode = WCS_PIX;
+temp:	wcs->crpix[0] = 1.0;
+temp:	hgetr8c (hstring, "CRPIX1", &mchar, &wcs->crpix[0]);
+temp:	wcs->crpix[1] = 1.0;
+temp:	hgetr8c (hstring, "CRPIX2", &mchar, &wcs->crpix[1]);
+temp:	wcs->xrefpix = wcs->crpix[0];
+temp:	wcs->yrefpix = wcs->crpix[1];
+temp:	wcs->crval[0] = 0.0;
+temp:	hgetr8c (hstring, "CRVAL1", &mchar, &wcs->crval[0]);
+temp:	wcs->crval[1] = 0.0;
+temp:	hgetr8c (hstring, "CRVAL2", &mchar, &wcs->crval[1]);
+temp:	if (wcs->syswcs == WCS_NPOLE)
+temp:	    wcs->crval[1] = 90.0 - wcs->crval[1];
+temp:	if (wcs->syswcs == WCS_SPA)
+temp:	    wcs->crval[1] = wcs->crval[1] - 90.0;
+temp:	wcs->xref = wcs->crval[0];
+temp:	wcs->yref = wcs->crval[1];
+temp:	if (wcs->coorflip) {
+temp:	    wcs->cel.ref[0] = wcs->crval[1];
+temp:	    wcs->cel.ref[1] = wcs->crval[0];
+temp:	    wcs->cel.ref[0] = wcs->crval[0];
+temp:	    wcs->cel.ref[1] = wcs->crval[1];
+temp:	wcs->longpole = 999.0;
+temp:	hgetr8c (hstring, "LONPOLE", &mchar, &wcs->longpole);
+temp:	wcs->cel.ref[2] = wcs->longpole;
+temp:	wcs->latpole = 999.0;
+temp:	hgetr8c (hstring, "LATPOLE", &mchar, &wcs->latpole);
+temp:	wcs->cel.ref[3] = wcs->latpole;
+temp:	wcs->lin.crpix = wcs->crpix;
+temp:	wcs->lin.cdelt = wcs->cdelt;
+temp:	wcs->lin.pc = wcs->pc;
+temp:	wcs->prj.r0 = 0.0;
+temp:	hgetr8c (hstring, "PROJR0", &mchar, &wcs->prj.r0);
+temp:	    hgetr8c (hstring, keyword, &mchar, &wcs->prj.p[i]);
+temp:	if (wcs->prjcode == WCS_AZP || wcs->prjcode == WCS_SIN ||
+temp:	    wcs->prjcode == WCS_COP || wcs->prjcode == WCS_COE ||
+temp:	    wcs->prjcode == WCS_COD || wcs->prjcode == WCS_COO) {
+temp:	    hgetr8c (hstring, pvkey1, &mchar, &wcs->prj.p[1]);
+temp:	    hgetr8c (hstring, pvkey2, &mchar, &wcs->prj.p[2]);
+temp:	else if (wcs->prjcode == WCS_SZP) {
+temp:	    hgetr8c (hstring, pvkey1, &mchar, &wcs->prj.p[1]);
+temp:	    hgetr8c (hstring, pvkey2, &mchar, &wcs->prj.p[2]);
+temp:	    if (wcs->prj.p[3] == 0.0)
+temp:		wcs->prj.p[3] = 90.0;
+temp:	    hgetr8c (hstring, pvkey3, &mchar, &wcs->prj.p[3]);
+temp:	else if (wcs->prjcode == WCS_CEA) {
+temp:	    if (wcs->prj.p[1] == 0.0)
+temp:		wcs->prj.p[1] = 1.0;
+temp:	    hgetr8c (hstring, pvkey1, &mchar, &wcs->prj.p[1]);
+temp:	else if (wcs->prjcode == WCS_CYP) {
+temp:	    if (wcs->prj.p[1] == 0.0)
+temp:		wcs->prj.p[1] = 1.0;
+temp:	    hgetr8c (hstring, pvkey1, &mchar, &wcs->prj.p[1]);
+temp:	    if (wcs->prj.p[2] == 0.0)
+temp:		wcs->prj.p[2] = 1.0;
+temp:	    hgetr8c (hstring, pvkey2, &mchar, &wcs->prj.p[2]);
+temp:	else if (wcs->prjcode == WCS_AIR) {
+temp:	    if (wcs->prj.p[1] == 0.0)
+temp:		wcs->prj.p[1] = 90.0;
+temp:	    hgetr8c (hstring, pvkey1, &mchar, &wcs->prj.p[1]);
+temp:	else if (wcs->prjcode == WCS_BON) {
+temp:	    hgetr8c (hstring, pvkey1, &mchar, &wcs->prj.p[1]);
+temp:	else if (wcs->prjcode == WCS_ZPN) {
+temp:		hgetr8c (hstring, keyword, &mchar, &wcs->prj.p[i]);
+temp:	if (wcs->prjcode == WCS_TNX) {
+temp:		wcs->ctype[0][6] = 'A';
+temp:		wcs->ctype[0][7] = 'N';
+temp:		wcs->ctype[1][6] = 'A';
+temp:		wcs->ctype[1][7] = 'N';
+temp:		wcs->prjcode = WCS_TAN;
+temp:	if (wcs->prjcode == WCS_ZPX) {
+temp:		wcs->ctype[0][7] = 'N';
+temp:		wcs->ctype[1][7] = 'N';
+temp:		wcs->prjcode = WCS_ZPN;
+temp:	if (wcs->prjcode == WCS_TPV) {
+temp:	    wcs->ctype[0][6] = 'A';
+temp:	    wcs->ctype[0][7] = 'N';
+temp:	    wcs->ctype[1][6] = 'A';
+temp:	    wcs->ctype[1][7] = 'N';
+temp:	    wcs->prjcode = WCS_TAN;
+temp:	if (wcs->wcsproj > 0)
+temp:	wcs->ncoeff1 = 0;
+temp:	wcs->ncoeff2 = 0;
+temp:	if (wcs->wcsproj != WCS_OLD &&
+temp:	    wcs->prjcode = WCS_PLT;
+temp:	    (void)strcpy (wcs->ptype, "PLATE");
+temp:		wcs->x_coeff[i] = 0.0;
+temp:		if (hgetr8 (hcoeff, keyword, &wcs->x_coeff[i]))
+temp:		    wcs->ncoeff1 = i + 1;
+temp:		wcs->y_coeff[i] = 0.0;
+temp:		if (hgetr8 (hcoeff, keyword, &wcs->y_coeff[i]))
+temp:		    wcs->ncoeff2 = i + 1;
+temp:	    platepos (wcs->crpix[0], wcs->crpix[1], wcs, &ra0, &dec0);
+temp:	    platepos (wcs->crpix[0], wcs->crpix[1]+1.0, wcs, &ra1, &dec1);
+temp:	    wcs->yinc = dec1 - dec0;
+temp:	    wcs->xinc = -wcs->yinc;
+temp:	    wcs->wcson = 1;
+temp:	    rot = degrad (wcs->rot);
+temp:	    platepos (wcs->crpix[0], wcs->crpix[1], wcs, &ra0, &dec0);
+temp:	    platepos (wcs->crpix[0]+cos(rot),
+temp:		      wcs->crpix[1]+sin(rot), wcs, &ra1, &dec1);
+temp:	    wcs->cdelt[0] = -wcsdist (ra0, dec0, ra1, dec1);
+temp:	    wcs->xinc = wcs->cdelt[0];
+temp:	    platepos (wcs->crpix[0]+sin(rot),
+temp:		      wcs->crpix[1]+cos(rot), wcs, &ra1, &dec1);
+temp:	    wcs->cdelt[1] = wcsdist (ra0, dec0, ra1, dec1);
+temp:	    wcs->yinc = wcs->cdelt[1];
+temp:	    wcs->cd[0] = cd[0];
+temp:	    wcs->cd[1] = cd[1];
+temp:	    wcs->cd[2] = cd[2];
+temp:	    wcs->cd[3] = cd[3];
+temp:	    (void) matinv (2, wcs->cd, wcs->dc);
+temp:	    wcs->rotmat = 1;
+temp:	    if (cdelt1 == 0.0 || (wcs->nypix > 1 && cdelt2 == 0.0)) {
+temp:	    if (cdelt2 == 0.0 && wcs->nypix > 1)
+temp:	    wcs->cdelt[2] = 1.0;
+temp:	    wcs->cdelt[3] = 1.0;
+temp:		wcs->pc[i] = 0.0;
+temp:	    wcs->xinc = 1.0;
+temp:	    wcs->yinc = 1.0;
+temp:	    wcs->cdelt[0] = 1.0;
+temp:	    wcs->cdelt[1] = 1.0;
+temp:	    wcs->rot = 0.0;
+temp:	    wcs->rotmat = 0;
+temp:	if (wcs->prjcode == WCS_TAN && wcs->naxis == 2) { 
+temp:	    if (wcs->inv_x) {
+temp:		poly_end(wcs->inv_x);
+temp:		wcs->inv_x = NULL;
+temp:	    if (wcs->inv_y) {
+temp:		poly_end(wcs->inv_y);
+temp:		wcs->inv_y = NULL;
+temp:	    wcs->pvfail = 0;
+temp:		wcs->projppv[i] = 0.0;
+temp:		wcs->prj.ppv[i] = 0.0;
+temp:		    if (hgetr8c(hstring, keyword,&mchar, &wcs->projppv[j+k*MAXPV]) == 0) {
+temp:			wcs->projppv[j+k*MAXPV] = 0.0;
+temp:	    if (n > 0 && wcs->distcode != DISTORT_SIRTF) {
+temp:		    wcs->prj.ppv[k] = wcs->projppv[k+wcs->wcsl.lat*MAXPV];
+temp:		    wcs->prj.ppv[k+MAXPV] = wcs->projppv[k+wcs->wcsl.lng*MAXPV];
+temp:		    if (!n && (wcs->prj.ppv[k] || wcs->prj.ppv[k+MAXPV]))  {
+temp:		wcs->cel.flag = 0;
+temp:	if (!strncmp (wcs->ptype,"LINEAR",6) ||
+temp:	    !strncmp (wcs->ptype,"PIXEL",5)) {
+temp:	    wcs->degout = -1;
+temp:	    wcs->ndec = 5;
+temp:	    wcs->epoch = 1900.0 + (mjd - 15019.81352) / 365.242198781;
+temp:	else if (!hgetdate (hstring,"DATE-OBS",&wcs->epoch)) {
+temp:	    if (!hgetdate (hstring,"DATE",&wcs->epoch)) {
+temp:		if (!hgetr8 (hstring,"EPOCH",&wcs->epoch))
+temp:		    wcs->epoch = wcs->equinox;
+temp:		    wcs->epoch = wcs->epoch + (ut / (24.0 * 365.242198781));
+temp:		    wcs->epoch = wcs->epoch + (ut / (24.0 * 365.242198781));
+temp:	wcs->wcson = 1;
+temp:	wcs->prjcode = WCS_DSS;
+temp:	wcs->plate_ra = hrrad (ra_hours);
+temp:	wcs->plate_dec = degrad (dec_deg);
+temp:	hgetr8 (hstring,"EQUINOX",&wcs->equinox);
+temp:	    strcpy (wcs->radecsys,"FK4");
+temp:	    strcpy (wcs->radecsys,"FK5");
+temp:	wcs->epoch = wcs->equinox;
+temp:	hgetr8 (hstring,"EPOCH",&wcs->epoch);
+temp:	(void)sprintf (wcs->center,"%2.0f:%2.0f:%5.3f %c%2.0f:%2.0f:%5.3f %s",
+temp:		       rah,ram,ras,decsign,decd,decm,decs,wcs->radecsys);
+temp:	hgetr8 (hstring,"PLTSCALE",&wcs->plate_scale);
+temp:	hgetr8 (hstring,"XPIXELSZ",&wcs->x_pixel_size);
+temp:	hgetr8 (hstring,"YPIXELSZ",&wcs->y_pixel_size);
+temp:	hgetr8 (hstring,"CNPIX1",&wcs->x_pixel_offset);
+temp:	hgetr8 (hstring,"CNPIX2",&wcs->y_pixel_offset);
+temp:	    wcs->ppo_coeff[i] = 0.0;
+temp:	    hgetr8 (hcoeff,keyword,&wcs->ppo_coeff[i]);
+temp:	    wcs->x_coeff[i] = 0.0;
+temp:	    hgetr8 (hcoeff, keyword, &wcs->x_coeff[i]);
+temp:	    wcs->y_coeff[i] = 0.0;
+temp:	    hgetr8 (hcoeff, keyword, &wcs->y_coeff[i]);
+temp:	wcs->wcson = 1;
+temp:	(void)strcpy (wcs->c1type, "RA");
+temp:	(void)strcpy (wcs->c2type, "DEC");
+temp:	(void)strcpy (wcs->ptype, "DSS");
+temp:	wcs->degout = 0;
+temp:	wcs->ndec = 3;
+temp:	strcpy (wcs->ctype[0], "RA---DSS");
+temp:	strcpy (wcs->ctype[1], "DEC--DSS");
+temp:	wcs->crpix[0] = 0.5 * wcs->nxpix;
+temp:	wcs->crpix[1] = 0.5 * wcs->nypix;
+temp:	wcs->xrefpix = wcs->crpix[0];
+temp:	wcs->yrefpix = wcs->crpix[1];
+temp:	dsspos (wcs->crpix[0], wcs->crpix[1], wcs, &ra0, &dec0);
+temp:	wcs->crval[0] = ra0;
+temp:	wcs->crval[1] = dec0;
+temp:	wcs->xref = wcs->crval[0];
+temp:	wcs->yref = wcs->crval[1];
+temp:	dsspos (wcs->crpix[0], wcs->crpix[1]+1.0, wcs, &ra1, &dec1);
+temp:	wcs->yinc = dec1 - dec0;
+temp:	wcs->xinc = -wcs->yinc;
+temp:	wcs->wcson = 1;
+temp:	rot = degrad (wcs->rot);
+temp:	dsspos (wcs->crpix[0]+cos(rot),
+temp:		wcs->crpix[1]+sin(rot), wcs, &ra1, &dec1);
+temp:	wcs->cdelt[0] = -wcsdist (ra0, dec0, ra1, dec1);
+temp:	dsspos (wcs->crpix[0]+sin(rot),
+temp:		wcs->crpix[1]+cos(rot), wcs, &ra1, &dec1);
+temp:	wcs->cdelt[1] = wcsdist (ra0, dec0, ra1, dec1);
+temp:	wcsdeltset (wcs, wcs->cdelt[0], wcs->cdelt[1], wcs->rot);
+temp:	if (wcs->rot == 0.)
+temp:	wcs->crpix[0] = 0.5 + (wcs->nxpix * 0.5);
+temp:	wcs->crpix[1] = 0.5 + (wcs->nypix * 0.5);
+temp:	    hgetr8 (hstring,"CRPIX1",&wcs->crpix[0]);
+temp:	    hgetr8 (hstring,"CRPIX2",&wcs->crpix[1]);
+temp:	    wcs->crpix[0] = dxrefpix - (double) (ix1 - 1);
+temp:	    wcs->crpix[1] = dyrefpix - (double) (iy1 - 1);
+temp:	wcs->xrefpix = wcs->crpix[0];
+temp:	wcs->yrefpix = wcs->crpix[1];
+temp:	wcs->crval[0] = -999.0;
+temp:	if (!hgetra (hstring,"RA",&wcs->crval[0])) {
+temp:	wcs->crval[1] = -999.0;
+temp:	if (!hgetdec (hstring,"DEC",&wcs->crval[1])) {
+temp:	wcs->xref = wcs->crval[0];
+temp:	wcs->yref = wcs->crval[1];
+temp:	wcs->coorflip = 0;
+temp:	wcs->cel.ref[0] = wcs->crval[0];
+temp:	wcs->cel.ref[1] = wcs->crval[1];
+temp:	wcs->cel.ref[2] = 999.0;
+temp:	if (!hgetr8 (hstring,"LONPOLE",&wcs->cel.ref[2]))
+temp:	    hgetr8 (hstring,"LONGPOLE",&wcs->cel.ref[2]);
+temp:	wcs->cel.ref[3] = 999.0;
+temp:	hgetr8 (hstring,"LATPOLE",&wcs->cel.ref[3]);
+temp:	    wcs->epoch = 1900.0 + (mjd - 15019.81352) / 365.242198781;
+temp:	else if (!hgetdate (hstring,"DATE-OBS",&wcs->epoch)) {
+temp:	    if (!hgetdate (hstring,"DATE",&wcs->epoch)) {
+temp:		if (!hgetr8 (hstring,"EPOCH",&wcs->epoch))
+temp:		    wcs->epoch = wcs->equinox;
+temp:		    wcs->epoch = wcs->epoch + (ut / (24.0 * 365.242198781));
+temp:		    wcs->epoch = wcs->epoch + (ut / (24.0 * 365.242198781));
+temp:	wcs->coorflip = 0;
+temp:	wcs->degout = 0;
+temp:	wcs->ndec = 3;
+temp:	wcs->wcson = 1;
+temp:    wcs->lin.crpix = wcs->crpix;
+temp:    wcs->lin.cdelt = wcs->cdelt;
+temp:    wcs->lin.pc = wcs->pc;
+temp:    wcs->printsys = 1;
+temp:    wcs->tabsys = 0;
+temp:    wcs->linmode = 0;
+temp:    lng = wcs->wcsl.lng;
+temp:    lat = wcs->wcsl.lat;
+temp:    if (wcs->naxis != NAXISPV) {
+temp:    if (strcmp(wcs->wcsl.pcode, "TAN") != 0) {
+temp:    if ((wcs->projppv[1+lng*MAXPV] == 0) &&
+temp:	(wcs->projppv[1+lat*MAXPV] == 0)) {
+temp:    if (wcs->wcs != NULL) {
+temp:	pix2wcs(wcs->wcs,0,0,&xmin,&ymin);
+temp:	pix2wcs(wcs->wcs,wcs->nxpix,wcs->nypix,&xmax,&ymax);
+temp:	xmax = wcs->nxpix;
+temp:	ymax = wcs->nypix;
+temp:	    if (linrev(raw, &wcs->lin, pixin)) {
+temp:			 wcs->wcsl.pcode);
+temp:	    raw_to_pv (&wcs->prj,pixin[lng],pixin[lat], outpost, outpost+1);
+temp:    linrev(rawmin, &wcs->lin, pixin);
+temp:    linfwd(pixin, &wcs->lin, raw);
+temp:		 wcs->wcsl.pcode);
+temp:	wcs->pvfail = 1;
+temp:    wcs->prj.inv_x = wcs->inv_x = poly;
+temp:    linrev(rawmin, &wcs->lin, pixin);
+temp:    linfwd(pixin, &wcs->lin, raw);
+temp:		 wcs->wcsl.pcode);
+temp:	wcs->pvfail = 1;
+temp:    wcs->prj.inv_y = wcs->inv_y = poly;
+temp:    if (strlen (wcs->radecsys) == 0 || wcs->prjcode == WCS_LIN)
+temp:	strcpy (wcs->radecsys, "LINEAR");
+temp:    if (wcs->prjcode == WCS_PIX)
+temp:	strcpy (wcs->radecsys, "PIXEL");
+temp:    wcs->syswcs = wcscsys (wcs->radecsys);
+temp:    if (wcs->syswcs == WCS_B1950)
+temp:	strcpy (wcs->radecout, "FK4");
+temp:    else if (wcs->syswcs == WCS_J2000)
+temp:	strcpy (wcs->radecout, "FK5");
+temp:	strcpy (wcs->radecout, wcs->radecsys);
+temp:    wcs->sysout = wcscsys (wcs->radecout);
+temp:    wcs->eqout = wcs->equinox;
+temp:    strcpy (wcs->radecin, wcs->radecsys);
+temp:    wcs->sysin = wcscsys (wcs->radecin);
+temp:    wcs->eqin = wcs->equinox;
+temp:	wcs->equinox = atof (eqstring+1);
+temp:	wcs->equinox = atof (eqstring+1);
+temp:	hgetr8 (hstring, eqkey, &wcs->equinox);
+temp:	    wcs->equinox = 1950.0;
+temp:            hgetr8 (hstring,"EPOCH",&wcs->equinox);
+temp:	    wcs->equinox = 1950.0;
+temp:	    wcs->equinox = 2000.0;
+temp:	    wcs->equinox = 2000.0;
+temp:	    wcs->equinox = 2000.0;
+temp:	    wcs->equinox = 2000.0;
+temp:	wcs->equinox = 2000.0;
+temp:	if (!strncmp (wcs->c1type, "RA",2) || !strncmp (wcs->c1type,"DEC",3))
+temp:    if (!hgetdate (hstring,"DATE-OBS",&wcs->epoch)) {
+temp:	if (!hgetdate (hstring,"DATE",&wcs->epoch)) {
+temp:	    if (!hgetr8 (hstring,"EPOCH",&wcs->epoch))
+temp:		wcs->epoch = wcs->equinox;
+temp:		wcs->epoch = wcs->epoch + (ut / (24.0 * 365.242198781));
+temp:		wcs->epoch = wcs->epoch + (ut / (24.0 * 365.242198781));
+temp:    if (wcs->epoch == 0.0)
+temp:	wcs->epoch = wcs->equinox;
+temp:	strcpy (wcs->radecsys,systring);
+temp:	    if (!strncmp (wcs->radecsys,"FK4",3))
+temp:		wcs->equinox = 1950.0;
+temp:	    else if (!strncmp (wcs->radecsys,"FK5",3))
+temp:		wcs->equinox = 2000.0;
+temp:	    else if (!strncmp (wcs->radecsys,"ICRS",4))
+temp:		wcs->equinox = 2000.0;
+temp:	    else if (!strncmp (wcs->radecsys,"GAL",3) && ieq == 0)
+temp:		wcs->equinox = 2000.0;
+temp:    else if (wcs->syswcs != WCS_NPOLE) {
+temp:	    strcpy (wcs->radecsys,"FK5");
+temp:	    strcpy (wcs->radecsys,"FK4");
+temp:    if (wcs->c1type[0] == 'G')
+temp:	strcpy (wcs->radecsys,"GALACTIC");
+temp:    else if (wcs->c1type[0] == 'E')
+temp:	strcpy (wcs->radecsys,"ECLIPTIC");
+temp:    else if (wcs->c1type[0] == 'S')
+temp:	strcpy (wcs->radecsys,"SGALACTC");
+temp:    else if (wcs->c1type[0] == 'H')
+temp:	strcpy (wcs->radecsys,"HELIOECL");
+temp:    else if (wcs->c1type[0] == 'A')
+temp:	strcpy (wcs->radecsys,"ALTAZ");
+temp:    else if (wcs->c1type[0] == 'L')
+temp:	strcpy (wcs->radecsys,"LINEAR");
+temp:    wcs->syswcs = wcscsys (wcs->radecsys);
+temp: * Oct  1 2003	Rename wcs->naxes to wcs->naxis to match WCSLIB 3.2
+temp: * Dec  3 2003	Add back wcs->naxes for backward compatibility
+temp: * Feb 15 2007	Check for wcs->wcsproj > 0 instead of CTYPEi != LINEAR or PIXEL
+tmcread.c:    sysout = wcs->syswcs;
+tmcread.c:    eqout = wcs->equinox;
+tmcread.c:    epout = wcs->epoch;
+tnxpos.c:    if (wcs->longpole > 360.0) {
+tnxpos.c:	if (!igetr8 (str1, "longpole", &wcs->longpole)) {
+tnxpos.c:	    if (!igetr8 (str2, "longpole", &wcs->longpole))
+tnxpos.c:		wcs->longpole = 180.0;
+tnxpos.c:    if (!igetr8 (str1, "ro", &wcs->rodeg)) {
+tnxpos.c:	if (!igetr8 (str2, "ro", &wcs->rodeg))
+tnxpos.c:	    wcs->rodeg = 180.0 / PI;
+tnxpos.c:	    wcs->lngcor = NULL;
+tnxpos.c:	    wcs->lngcor = wf_gsopen (lngstr);
+tnxpos.c:	wcs->lngcor = wf_gsopen (lngstr);
+tnxpos.c:	    wcs->latcor = NULL;
+tnxpos.c:	    wcs->latcor = wf_gsopen (latstr);
+tnxpos.c:	wcs->latcor = wf_gsopen (latstr);
+tnxpos.c:    if (wcs->latcor == NULL && wcs->lngcor == NULL)
+tnxpos.c:    xpix = xpix - wcs->crpix[0];
+tnxpos.c:    ypix = ypix - wcs->crpix[1];
+tnxpos.c:    if (wcs->rotmat) {
+tnxpos.c:	x = xpix * wcs->cd[0] + ypix * wcs->cd[1];
+tnxpos.c:	y = xpix * wcs->cd[2] + ypix * wcs->cd[3];
+tnxpos.c:	if (wcs->cdelt[0] == 0.0 || wcs->cdelt[1] == 0.0) {
+tnxpos.c:	xs = xpix * wcs->cdelt[0];
+tnxpos.c:	ys = ypix * wcs->cdelt[1];
+tnxpos.c:	if (wcs->rot != 0.0) {
+tnxpos.c:	    double cosr = cos (degrad (wcs->rot));
+tnxpos.c:	    double sinr = sin (degrad (wcs->rot));
+tnxpos.c:    if (wcs->coorflip) {
+tnxpos.c:    colatp = degrad (90.0 - wcs->crval[idec]);
+tnxpos.c:    longp = degrad(wcs->longpole);
+tnxpos.c:    if (wcs->lngcor != NULL)
+tnxpos.c:	xp = x + wf_gseval (wcs->lngcor, x, y);
+tnxpos.c:    if (wcs->latcor != NULL)
+tnxpos.c:	yp = y + wf_gseval (wcs->latcor, x, y);
+tnxpos.c:    theta = atan2 (wcs->rodeg, r);
+tnxpos.c:    ra =  wcs->crval[ira] + raddeg(dlng);
+tnxpos.c:    if (wcs->crval[ira] >= 0.0) {
+tnxpos.c:    if (wcs->coorflip) {
+tnxpos.c:    ra  = degrad (xpos - wcs->crval[ira]);
+tnxpos.c:    colatp = degrad (90.0 - wcs->crval[idec]);
+tnxpos.c:    if (wcs->longpole == 999.0)
+tnxpos.c:	longp = degrad(wcs->longpole);
+tnxpos.c:	r = wcs->rodeg * cos (theta) / s;
+tnxpos.c:	if (wcs->lngcor == NULL && wcs->latcor == NULL) {
+tnxpos.c:	    if (wcs->coorflip) {
+tnxpos.c:		if (wcs->lngcor != NULL) {
+tnxpos.c:		    f = x + wf_gseval (wcs->lngcor, x, y) - xm;
+tnxpos.c:		    fx = wf_gsder (wcs->lngcor, x, y, 1, 0);
+tnxpos.c:		    fy = wf_gsder (wcs->lngcor, x, y, 0, 1);
+tnxpos.c:		if (wcs->latcor != NULL) {
+tnxpos.c:		    g = y + wf_gseval (wcs->latcor, x, y) - ym;
+tnxpos.c:		    gx = wf_gsder (wcs->latcor, x, y, 1, 0);
+tnxpos.c:		    gy = wf_gsder (wcs->latcor, x, y, 0, 1);
+tnxpos.c:	    if (wcs->coorflip) {
+tnxpos.c:    if (wcs->rotmat) {
+tnxpos.c:	*xpix = x * wcs->dc[0] + y * wcs->dc[1];
+tnxpos.c:	*ypix = x * wcs->dc[2] + y * wcs->dc[3];
+tnxpos.c:	if (wcs->rot!=0.0) {
+tnxpos.c:	    double cosr = cos (degrad (wcs->rot));
+tnxpos.c:	    double sinr = sin (degrad (wcs->rot));
+tnxpos.c:	if (wcs->xinc != 0.)
+tnxpos.c:	    *xpix = *xpix / wcs->xinc;
+tnxpos.c:	if (wcs->yinc != 0.)
+tnxpos.c:	    *ypix = *ypix / wcs->yinc;
+tnxpos.c:    *xpix = *xpix + wcs->xrefpix;
+tnxpos.c:    *ypix = *ypix + wcs->yrefpix;
+tnxpos.c:    if (wcs->lngcor != NULL)
+tnxpos.c:	wf_gsclose (wcs->lngcor);
+tnxpos.c:    if (wcs->latcor != NULL)
+tnxpos.c:	wf_gsclose (wcs->latcor);
+tnxpos.c:    wcs->prjcode = WCS_TNX;
+tnxpos.c:    wcs->lngcor = wf_gspset (xorder, yorder, xterms, coeff);
+tnxpos.c:    ycoeff = coeff + wcs->lngcor->ncoeff;
+tnxpos.c:    wcs->latcor = wf_gspset (xorder, yorder, xterms, ycoeff);
+tnxpos.c: * Dec 10 1999	Compute wcs->rot using wcsrotset() in tnxinit()
+ty2read.c:    sysout = wcs->syswcs;
+ty2read.c:    eqout = wcs->equinox;
+ty2read.c:    epout = wcs->epoch;
+uacread.c:    sysout = wcs->syswcs;
+uacread.c:    eqout = wcs->equinox;
+uacread.c:    epout = wcs->epoch;
+ubcread.c:    sysout = wcs->syswcs;
+ubcread.c:    eqout = wcs->equinox;
+ubcread.c:    epout = wcs->epoch;
+ucacread.c:    sysout = wcs->syswcs;
+ucacread.c:    eqout = wcs->equinox;
+ucacread.c:    epout = wcs->epoch;
+ujcread.c:    sysout = wcs->syswcs;
+ujcread.c:    eqout = wcs->equinox;
+ujcread.c:    epout = wcs->epoch;
+wcs.c:    if (wcs->wcs) {
+wcs.c:	wcsfree (wcs->wcs);
+wcs.c:	wcs->wcs = NULL;
+wcs.c:    if (wcs->wcsname != NULL)
+wcs.c:	free (wcs->wcsname);
+wcs.c:    if (wcs->lin.imgpix != NULL)
+wcs.c:	free (wcs->lin.imgpix);
+wcs.c:    if (wcs->lin.piximg != NULL)
+wcs.c:	free (wcs->lin.piximg);
+wcs.c:    if (wcs->inv_x != NULL)
+wcs.c:	poly_end (wcs->inv_x);
+wcs.c:    if (wcs->inv_y != NULL)
+wcs.c:	poly_end (wcs->inv_y);
+wcs.c:    wcs->cel.flag = 0;
+wcs.c:    wcs->lin.flag = 0;
+wcs.c:    wcs->wcsl.flag = 0;
+wcs.c:    wcs->naxis = 2;
+wcs.c:    wcs->naxes = 2;
+wcs.c:    wcs->lin.naxis = 2;
+wcs.c:    wcs->nxpix = nxpix;
+wcs.c:    wcs->nypix = nypix;
+wcs.c:    wcs->wcsproj = wcsproj0;
+wcs.c:    wcs->crpix[0] = xrpix;
+wcs.c:    wcs->crpix[1] = yrpix;
+wcs.c:    wcs->xrefpix = wcs->crpix[0];
+wcs.c:    wcs->yrefpix = wcs->crpix[1];
+wcs.c:    wcs->lin.crpix = wcs->crpix;
+wcs.c:    wcs->crval[0] = cra;
+wcs.c:    wcs->crval[1] = cdec;
+wcs.c:    wcs->xref = wcs->crval[0];
+wcs.c:    wcs->yref = wcs->crval[1];
+wcs.c:    wcs->cel.ref[0] = wcs->crval[0];
+wcs.c:    wcs->cel.ref[1] = wcs->crval[1];
+wcs.c:    wcs->cel.ref[2] = 999.0;
+wcs.c:    strcpy (wcs->c1type,"RA");
+wcs.c:    strcpy (wcs->c2type,"DEC");
+wcs.c:    strcpy (wcs->ptype,proj);
+wcs.c:    strcpy (wcs->ctype[0],"RA---");
+wcs.c:    strcpy (wcs->ctype[1],"DEC--");
+wcs.c:    strcat (wcs->ctype[0],proj);
+wcs.c:    strcat (wcs->ctype[1],proj);
+wcs.c:    if (wcstype (wcs, wcs->ctype[0], wcs->ctype[1])) {
+wcs.c:    wcs->lin.cdelt = wcs->cdelt;
+wcs.c:    wcs->lin.pc = wcs->pc;
+wcs.c:    wcs->equinox =  (double) equinox;
+wcs.c:	strcpy (wcs->radecsys,"FK5");
+wcs.c:	strcpy (wcs->radecsys,"FK4");
+wcs.c:	wcs->epoch = epoch;
+wcs.c:	wcs->epoch = 0.0;
+wcs.c:    wcs->wcson = 1;
+wcs.c:    wcs->syswcs = wcscsys (wcs->radecsys);
+wcs.c:    wcsoutinit (wcs, wcs->radecsys);
+wcs.c:    wcsininit (wcs, wcs->radecsys);
+wcs.c:    wcs->eqout = 0.0;
+wcs.c:    wcs->printsys = 1;
+wcs.c:    wcs->tabsys = 0;
+wcs.c:    wcs->cel.flag = 0;
+wcs.c:    wcs->lin.flag = 0;
+wcs.c:    wcs->wcsl.flag = 0;
+wcs.c:    wcs->naxis = 2;
+wcs.c:    wcs->naxes = 2;
+wcs.c:    wcs->lin.naxis = 2;
+wcs.c:    wcs->nxpix = naxis1;
+wcs.c:    wcs->nypix = naxis2;
+wcs.c:    wcs->wcsproj = wcsproj0;
+wcs.c:    wcs->crpix[0] = crpix1;
+wcs.c:    wcs->crpix[1] = crpix2;
+wcs.c:    wcs->xrefpix = wcs->crpix[0];
+wcs.c:    wcs->yrefpix = wcs->crpix[1];
+wcs.c:    wcs->lin.crpix = wcs->crpix;
+wcs.c:    if (wcs->latbase == 90)
+wcs.c:    else if (wcs->latbase == -90)
+wcs.c:    wcs->crval[0] = crval1;
+wcs.c:    wcs->crval[1] = crval2;
+wcs.c:    wcs->xref = wcs->crval[0];
+wcs.c:    wcs->yref = wcs->crval[1];
+wcs.c:    wcs->cel.ref[0] = wcs->crval[0];
+wcs.c:    wcs->cel.ref[1] = wcs->crval[1];
+wcs.c:    wcs->cel.ref[2] = 999.0;
+wcs.c:    wcs->lin.cdelt = wcs->cdelt;
+wcs.c:    wcs->lin.pc = wcs->pc;
+wcs.c:    wcs->equinox =  (double) equinox;
+wcs.c:	strcpy (wcs->radecsys,"FK5");
+wcs.c:	strcpy (wcs->radecsys,"FK4");
+wcs.c:	wcs->epoch = epoch;
+wcs.c:	wcs->epoch = 0.0;
+wcs.c:    wcs->wcson = 1;
+wcs.c:    strcpy (wcs->radecout, wcs->radecsys);
+wcs.c:    wcs->syswcs = wcscsys (wcs->radecsys);
+wcs.c:    wcsoutinit (wcs, wcs->radecsys);
+wcs.c:    wcsininit (wcs, wcs->radecsys);
+wcs.c:    wcs->eqout = 0.0;
+wcs.c:    wcs->printsys = 1;
+wcs.c:    wcs->tabsys = 0;
+wcs.c:    strcpy (wcs->ctype[0], ctype1);
+wcs.c:    strcpy (wcs->c1type, ctype1);
+wcs.c:    strcpy (wcs->ptype, ctype1);
+wcs.c:	wcs->prjcode = WCS_LIN;
+wcs.c:	wcs->prjcode = WCS_PIX;
+wcs.c:	wcs->prjcode = WCS_PIX;
+wcs.c:	wcs->c1type[0] = ctype1[0];
+wcs.c:	wcs->c1type[1] = ctype1[1];
+wcs.c:	    wcs->c1type[2] = 0;
+wcs.c:	    wcs->c1type[2] = ctype1[2];
+wcs.c:		wcs->c1type[3] = 0;
+wcs.c:		wcs->c1type[3] = ctype1[3];
+wcs.c:		wcs->c1type[4] = 0;
+wcs.c:	wcs->ptype[0] = ctype1[iproj];
+wcs.c:	wcs->ptype[1] = ctype1[iproj+1];
+wcs.c:	wcs->ptype[2] = ctype1[iproj+2];
+wcs.c:	wcs->ptype[3] = 0;
+wcs.c:	sprintf (wcs->ctype[0],"%-4s%4s",wcs->c1type,wcs->ptype);
+wcs.c:	    if (wcs->ctype[0][i] == ' ') wcs->ctype[0][i] = '-';
+wcs.c:	wcs->prjcode = 0;  /* default type is linear */
+wcs.c:	    if (!strncmp(wcs->ptype, ctypes[i], 3))
+wcs.c:		wcs->prjcode = i;
+wcs.c:	if (wcs->prjcode == WCS_NCP) {
+wcs.c:	    if (wcs->wcsproj == WCS_BEST)
+wcs.c:		wcs->wcsproj = WCS_OLD;
+wcs.c:	    else if (wcs->wcsproj == WCS_ALT)
+wcs.c:		wcs->wcsproj = WCS_NEW;
+wcs.c:	else if (wcs->prjcode == WCS_CAR) {
+wcs.c:	    if (wcs->wcsproj == WCS_BEST)
+wcs.c:		wcs->wcsproj = WCS_OLD;
+wcs.c:	    else if (wcs->wcsproj == WCS_ALT)
+wcs.c:		wcs->wcsproj = WCS_NEW;
+wcs.c:	else if (wcs->prjcode == WCS_COE) {
+wcs.c:	    if (wcs->wcsproj == WCS_BEST)
+wcs.c:		wcs->wcsproj = WCS_OLD;
+wcs.c:	    else if (wcs->wcsproj == WCS_ALT)
+wcs.c:		wcs->wcsproj = WCS_NEW;
+wcs.c:	else if (wcs->wcsproj == WCS_BEST) */
+wcs.c:	if (wcs->wcsproj == WCS_BEST)
+wcs.c:	    wcs->wcsproj = WCS_NEW;
+wcs.c:	else if (wcs->wcsproj == WCS_ALT)
+wcs.c:	    wcs->wcsproj = WCS_OLD;
+wcs.c:	/* if (wcs->wcsproj == WCS_OLD && (
+wcs.c:	    wcs->prjcode != WCS_STG && wcs->prjcode != WCS_AIT &&
+wcs.c:	    wcs->prjcode != WCS_MER && wcs->prjcode != WCS_GLS &&
+wcs.c:	    wcs->prjcode != WCS_ARC && wcs->prjcode != WCS_TAN &&
+wcs.c:	    wcs->prjcode != WCS_TNX && wcs->prjcode != WCS_SIN &&
+wcs.c:	    wcs->prjcode != WCS_PIX && wcs->prjcode != WCS_LIN &&
+wcs.c:	    wcs->prjcode != WCS_CAR && wcs->prjcode != WCS_COE &&
+wcs.c:	    wcs->prjcode != WCS_NCP && wcs->prjcode != WCS_ZPX))
+wcs.c:	    wcs->wcsproj = WCS_NEW; */
+wcs.c:	if (wcs->wcsproj == WCS_OLD && wcs->prjcode == WCS_TNX) {
+wcs.c:	    wcs->ctype[0][6] = 'A';
+wcs.c:	    wcs->ctype[0][7] = 'N';
+wcs.c:	    wcs->prjcode = WCS_TAN;
+wcs.c:	if (wcs->wcsproj == WCS_OLD && wcs->prjcode == WCS_ZPX) {
+wcs.c:	    wcs->ctype[0][6] = 'P';
+wcs.c:	    wcs->ctype[0][7] = 'N';
+wcs.c:	    wcs->prjcode = WCS_ZPN;
+wcs.c:	wcs->prjcode = WCS_LIN;
+wcs.c:	wcs->latbase = 90;
+wcs.c:	strcpy (wcs->radecsys,"NPOLE");
+wcs.c:	wcs->syswcs = WCS_NPOLE;
+wcs.c:	wcs->latbase = -90;
+wcs.c:	strcpy (wcs->radecsys,"SPA");
+wcs.c:	wcs->syswcs = WCS_SPA;
+wcs.c:	wcs->latbase = 0;
+wcs.c:    strcpy (wcs->ctype[1], ctype2);
+wcs.c:    strcpy (wcs->c2type, ctype2);
+wcs.c:	wcs->prjcode = WCS_LIN;
+wcs.c:	wcs->prjcode = WCS_PIX;
+wcs.c:	wcs->c2type[0] = ctype2[0];
+wcs.c:	wcs->c2type[1] = ctype2[1];
+wcs.c:	    wcs->c2type[2] = 0;
+wcs.c:	    wcs->c2type[2] = ctype2[2];
+wcs.c:		wcs->c2type[3] = 0;
+wcs.c:		wcs->c2type[3] = ctype2[3];
+wcs.c:		wcs->c2type[4] = 0;
+wcs.c:	wcs->ptype[0] = ctype2[iproj];
+wcs.c:	wcs->ptype[1] = ctype2[iproj+1];
+wcs.c:	wcs->ptype[2] = ctype2[iproj+2];
+wcs.c:	wcs->ptype[3] = 0;
+wcs.c:	    wcs->coorflip = 1;
+wcs.c:	    wcs->coorflip = 0;
+wcs.c:	    wcs->degout = 1;
+wcs.c:	    wcs->ndec = 5;
+wcs.c:	    wcs->degout = 0;
+wcs.c:	    wcs->ndec = 3;
+wcs.c:	sprintf (wcs->ctype[1],"%-4s%4s",wcs->c2type,wcs->ptype);
+wcs.c:	    if (wcs->ctype[1][i] == ' ') wcs->ctype[1][i] = '-';
+wcs.c:	wcs->prjcode = WCS_LIN;
+wcs.c:    wcs->cel.flag = 0;
+wcs.c:    wcs->lin.flag = 0;
+wcs.c:    wcs->wcsl.flag = 0;
+wcs.c:    wcs->crpix[0] = crpix1;
+wcs.c:    wcs->crpix[1] = crpix2;
+wcs.c:    wcs->xrefpix = wcs->crpix[0];
+wcs.c:    wcs->yrefpix = wcs->crpix[1];
+wcs.c:    wcs->lin.crpix = wcs->crpix;
+wcs.c:    wcs->crval[0] = crval1;
+wcs.c:    wcs->crval[1] = crval2;
+wcs.c:    wcs->xref = wcs->crval[0];
+wcs.c:    wcs->yref = wcs->crval[1];
+wcs.c:    if (wcs->coorflip) {
+wcs.c:	wcs->cel.ref[1] = wcs->crval[0];
+wcs.c:	wcs->cel.ref[0] = wcs->crval[1];
+wcs.c:	wcs->cel.ref[0] = wcs->crval[0];
+wcs.c:	wcs->cel.ref[1] = wcs->crval[1];
+wcs.c:    wcs->ncoeff1 = 0;
+wcs.c:    wcs->ncoeff2 = 0;
+wcs.c:	wcs->xinc = 1.0;
+wcs.c:	wcs->yinc = 1.0;
+wcs.c:    if (!strncmp (wcs->ptype,"LINEAR",6) ||
+wcs.c:	!strncmp (wcs->ptype,"PIXEL",5))
+wcs.c:	wcs->degout = -1;
+wcs.c:    wcs->wcson = 1;
+wcs.c:    if (wcs->equinox == equinox)
+wcs.c:    if (equinox == 2000.0 && wcs->equinox == 1950.0) {
+wcs.c:	if (wcs->coorflip) { 
+wcs.c:	    fk425e (&wcs->crval[1], &wcs->crval[0], wcs->epoch);
+wcs.c:	    wcs->cel.ref[1] = wcs->crval[0];
+wcs.c:	    wcs->cel.ref[0] = wcs->crval[1];
+wcs.c:	    fk425e (&wcs->crval[0], &wcs->crval[1], wcs->epoch);
+wcs.c:	    wcs->cel.ref[0] = wcs->crval[0];
+wcs.c:	    wcs->cel.ref[1] = wcs->crval[1];
+wcs.c:	wcs->xref = wcs->crval[0];
+wcs.c:	wcs->yref = wcs->crval[1];
+wcs.c:	wcs->equinox = 2000.0;
+wcs.c:	strcpy (wcs->radecsys, "FK5");
+wcs.c:	wcs->syswcs = WCS_J2000;
+wcs.c:	wcs->cel.flag = 0;
+wcs.c:	wcs->wcsl.flag = 0;
+wcs.c:    else if (equinox == 1950.0 && wcs->equinox == 2000.0) {
+wcs.c:	if (wcs->coorflip) { 
+wcs.c:	    fk524e (&wcs->crval[1], &wcs->crval[0], wcs->epoch);
+wcs.c:	    wcs->cel.ref[1] = wcs->crval[0];
+wcs.c:	    wcs->cel.ref[0] = wcs->crval[1];
+wcs.c:	    fk524e (&wcs->crval[0], &wcs->crval[1], wcs->epoch);
+wcs.c:	    wcs->cel.ref[0] = wcs->crval[0];
+wcs.c:	    wcs->cel.ref[1] = wcs->crval[1];
+wcs.c:	wcs->xref = wcs->crval[0];
+wcs.c:	wcs->yref = wcs->crval[1];
+wcs.c:	wcs->equinox = 1950.0;
+wcs.c:	strcpy (wcs->radecsys, "FK4");
+wcs.c:	wcs->syswcs = WCS_B1950;
+wcs.c:	wcs->cel.flag = 0;
+wcs.c:	wcs->wcsl.flag = 0;
+wcs.c:    wcsoutinit (wcs, wcs->radecsys);
+wcs.c:    wcsininit (wcs, wcs->radecsys);
+wcs.c:    wcs->rotmat = 1;
+wcs.c:    wcs->cd[0] = cd[0];
+wcs.c:    wcs->cd[1] = cd[1];
+wcs.c:    wcs->cd[2] = cd[2];
+wcs.c:    wcs->cd[3] = cd[3];
+wcs.c:    (void) matinv (2, wcs->cd, wcs->dc);
+wcs.c:    wcs->xinc = sqrt (cd[0]*cd[0] + cd[2]*cd[2]);
+wcs.c:    wcs->yinc = sqrt (cd[1]*cd[1] + cd[3]*cd[3]);
+wcs.c:    if (wcs->coorflip) {
+wcs.c:    wcs->wcson = 1;
+wcs.c:    wcs->cdelt[0] = wcs->xinc;
+wcs.c:    wcs->cdelt[1] = wcs->yinc;
+wcs.c:    naxes = wcs->naxis;
+wcs.c:    wcs->cdelt[0] = cdelt1;
+wcs.c:	wcs->cdelt[1] = cdelt2;
+wcs.c:	wcs->cdelt[1] = cdelt1;
+wcs.c:    wcs->xinc = wcs->cdelt[0];
+wcs.c:    wcs->yinc = wcs->cdelt[1];
+wcs.c:    pci = wcs->pc;
+wcs.c:    wcs->rotmat = 0;
+wcs.c:    wcs->rot = crota;
+wcs.c:    if (wcs->rot < 0.0)
+wcs.c:	wcs->rot = wcs->rot + 360.0;
+wcs.c:    if (wcs->rot >= 360.0)
+wcs.c:	wcs->rot = wcs->rot - 360.0;
+wcs.c:    crot = cos (degrad(wcs->rot));
+wcs.c:	srot = sin (-degrad(wcs->rot));
+wcs.c:	srot = sin (degrad(wcs->rot));
+wcs.c:    wcs->cd[0] = wcs->cdelt[0] * crot;
+wcs.c:    if (wcs->cdelt[0] < 0)
+wcs.c:	wcs->cd[1] = -fabs (wcs->cdelt[1]) * srot;
+wcs.c:	wcs->cd[1] = fabs (wcs->cdelt[1]) * srot;
+wcs.c:    if (wcs->cdelt[1] < 0)
+wcs.c:	wcs->cd[2] = fabs (wcs->cdelt[0]) * srot;
+wcs.c:	wcs->cd[2] = -fabs (wcs->cdelt[0]) * srot;
+wcs.c:    wcs->cd[3] = wcs->cdelt[1] * crot;
+wcs.c:    (void) matinv (2, wcs->cd, wcs->dc);
+wcs.c:    if (wcs->coorflip) {
+wcs.c:	if (wcs->cdelt[0] < 0 && wcs->cdelt[1] > 0) {
+wcs.c:	    wcs->imflip = 1;
+wcs.c:	    wcs->imrot = wcs->rot - 90.0;
+wcs.c:	    if (wcs->imrot < -180.0) wcs->imrot = wcs->imrot + 360.0;
+wcs.c:	    wcs->pa_north = wcs->rot;
+wcs.c:	    wcs->pa_east = wcs->rot - 90.0;
+wcs.c:	    if (wcs->pa_east < -180.0) wcs->pa_east = wcs->pa_east + 360.0;
+wcs.c:	else if (wcs->cdelt[0] > 0 && wcs->cdelt[1] < 0) {
+wcs.c:	    wcs->imflip = 1;
+wcs.c:	    wcs->imrot = wcs->rot + 90.0;
+wcs.c:	    if (wcs->imrot > 180.0) wcs->imrot = wcs->imrot - 360.0;
+wcs.c:	    wcs->pa_north = wcs->rot;
+wcs.c:	    wcs->pa_east = wcs->rot - 90.0;
+wcs.c:	    if (wcs->pa_east < -180.0) wcs->pa_east = wcs->pa_east + 360.0;
+wcs.c:	else if (wcs->cdelt[0] > 0 && wcs->cdelt[1] > 0) {
+wcs.c:	    wcs->imflip = 0;
+wcs.c:	    wcs->imrot = wcs->rot + 90.0;
+wcs.c:	    if (wcs->imrot > 180.0) wcs->imrot = wcs->imrot - 360.0;
+wcs.c:	    wcs->pa_north = wcs->imrot;
+wcs.c:	    wcs->pa_east = wcs->rot + 90.0;
+wcs.c:	    if (wcs->pa_east > 180.0) wcs->pa_east = wcs->pa_east - 360.0;
+wcs.c:	else if (wcs->cdelt[0] < 0 && wcs->cdelt[1] < 0) {
+wcs.c:	    wcs->imflip = 0;
+wcs.c:	    wcs->imrot = wcs->rot - 90.0;
+wcs.c:	    if (wcs->imrot < -180.0) wcs->imrot = wcs->imrot + 360.0;
+wcs.c:	    wcs->pa_north = wcs->imrot;
+wcs.c:	    wcs->pa_east = wcs->rot + 90.0;
+wcs.c:	    if (wcs->pa_east > 180.0) wcs->pa_east = wcs->pa_east - 360.0;
+wcs.c:	if (wcs->cdelt[0] < 0 && wcs->cdelt[1] > 0) {
+wcs.c:	    wcs->imflip = 0;
+wcs.c:	    wcs->imrot = wcs->rot;
+wcs.c:	    wcs->pa_north = wcs->rot + 90.0;
+wcs.c:	    if (wcs->pa_north > 180.0) wcs->pa_north = wcs->pa_north - 360.0;
+wcs.c:	    wcs->pa_east = wcs->rot + 180.0;
+wcs.c:	    if (wcs->pa_east > 180.0) wcs->pa_east = wcs->pa_east - 360.0;
+wcs.c:	else if (wcs->cdelt[0] > 0 && wcs->cdelt[1] < 0) {
+wcs.c:	    wcs->imflip = 0;
+wcs.c:	    wcs->imrot = wcs->rot + 180.0;
+wcs.c:	    if (wcs->imrot > 180.0) wcs->imrot = wcs->imrot - 360.0;
+wcs.c:	    wcs->pa_north = wcs->imrot + 90.0;
+wcs.c:	    if (wcs->pa_north > 180.0) wcs->pa_north = wcs->pa_north - 360.0;
+wcs.c:	    wcs->pa_east = wcs->imrot + 180.0;
+wcs.c:	    if (wcs->pa_east > 180.0) wcs->pa_east = wcs->pa_east - 360.0;
+wcs.c:	else if (wcs->cdelt[0] > 0 && wcs->cdelt[1] > 0) {
+wcs.c:	    wcs->imflip = 1;
+wcs.c:	    wcs->imrot = -wcs->rot;
+wcs.c:	    wcs->pa_north = wcs->imrot + 90.0;
+wcs.c:	    if (wcs->pa_north > 180.0) wcs->pa_north = wcs->pa_north - 360.0;
+wcs.c:	    wcs->pa_east = wcs->rot;
+wcs.c:	else if (wcs->cdelt[0] < 0 && wcs->cdelt[1] < 0) {
+wcs.c:	    wcs->imflip = 1;
+wcs.c:	    wcs->imrot = wcs->rot + 180.0;
+wcs.c:	    if (wcs->imrot > 180.0) wcs->imrot = wcs->imrot - 360.0;
+wcs.c:	    wcs->pa_north = wcs->imrot + 90.0;
+wcs.c:	    if (wcs->pa_north > 180.0) wcs->pa_north = wcs->pa_north - 360.0;
+wcs.c:	    wcs->pa_east = wcs->rot + 90.0;
+wcs.c:	    if (wcs->pa_east > 180.0) wcs->pa_east = wcs->pa_east - 360.0;
+wcs.c:    naxes = wcs->naxis;
+wcs.c:	naxes = wcs->naxes;
+wcs.c:	wcs->naxis = naxes;
+wcs.c:    wcs->cdelt[0] = cdelt1;
+wcs.c:	wcs->cdelt[1] = cdelt2;
+wcs.c:	wcs->cdelt[1] = cdelt1;
+wcs.c:    wcs->xinc = wcs->cdelt[0];
+wcs.c:    wcs->yinc = wcs->cdelt[1];
+wcs.c:    pci = wcs->pc;
+wcs.c:	wcs->cd[0] = pc[0] * wcs->cdelt[0];
+wcs.c:	wcs->cd[1] = pc[1] * wcs->cdelt[0];
+wcs.c:	wcs->cd[2] = pc[naxes] * wcs->cdelt[1];
+wcs.c:	wcs->cd[3] = pc[naxes+1] * wcs->cdelt[1];
+wcs.c:	wcs->cd[0] = pc[0] * wcs->cdelt[0];
+wcs.c:	wcs->cd[1] = 0.0;
+wcs.c:	wcs->cd[2] = 0.0;
+wcs.c:	wcs->cd[3] = 1.0;
+wcs.c:    (void) matinv (2, wcs->cd, wcs->dc);
+wcs.c:    wcs->rotmat = 1;
+wcs.c:    (void)linset (&wcs->lin);
+wcs.c:    wcs->wcson = 1;
+wcs.c:    naxes = wcs->naxis;
+wcs.c:	naxes = wcs->naxes;
+wcs.c:	wcs->naxis = naxes;
+wcs.c:    if (wcs->lin.piximg == NULL)
+wcs.c:	wcs->lin.piximg = (double*)malloc(mem);
+wcs.c:    if (wcs->lin.piximg != NULL) {
+wcs.c:	if (wcs->lin.imgpix == NULL)
+wcs.c:	    wcs->lin.imgpix = (double*)malloc(mem);
+wcs.c:	if (wcs->lin.imgpix != NULL) {
+wcs.c:	    wcs->lin.flag = LINSET;
+wcs.c:		    wcs->lin.piximg[i] = wcs->cd[i];
+wcs.c:		    wcs->lin.piximg[i] = 0.0;
+wcs.c:		wcs->lin.piximg[0] = wcs->cd[0];
+wcs.c:		wcs->lin.piximg[1] = wcs->cd[1];
+wcs.c:		wcs->lin.piximg[3] = wcs->cd[2];
+wcs.c:		wcs->lin.piximg[4] = wcs->cd[3];
+wcs.c:		wcs->lin.piximg[8] = 1.0;
+wcs.c:		    wcs->lin.piximg[i] = 0.0;
+wcs.c:		wcs->lin.piximg[0] = wcs->cd[0];
+wcs.c:		wcs->lin.piximg[1] = wcs->cd[1];
+wcs.c:		wcs->lin.piximg[4] = wcs->cd[2];
+wcs.c:		wcs->lin.piximg[5] = wcs->cd[3];
+wcs.c:		wcs->lin.piximg[10] = 1.0;
+wcs.c:		wcs->lin.piximg[15] = 1.0;
+wcs.c:	    (void) matinv (naxes, wcs->lin.piximg, wcs->lin.imgpix);
+wcs.c:	    wcs->lin.crpix = wcs->crpix;
+wcs.c:	    wcs->lin.cdelt = wcs->cdelt;
+wcs.c:	    wcs->lin.pc = wcs->pc;
+wcs.c:	    wcs->lin.flag = LINSET;
+wcs.c:    if (wcs->nxpix < 1.5 || wcs->nypix < 1.5) {
+wcs.c:	wcs->imrot = wcs->rot;
+wcs.c:	wcs->pa_north = wcs->rot + 90.0;
+wcs.c:	wcs->pa_east = wcs->rot + 180.0;
+wcs.c:    if (wcs->syswcs == WCS_LINEAR)
+wcs.c:    wcs->xinc = fabs (wcs->xinc);
+wcs.c:    wcs->yinc = fabs (wcs->yinc);
+wcs.c:    xc = wcs->xrefpix;
+wcs.c:    yc = wcs->yrefpix;
+wcs.c:    if (wcs->coorflip) {
+wcs.c:	wcs2pix (wcs, cra+wcs->yinc, cdec, &xe, &ye, &off);
+wcs.c:	wcs2pix (wcs, cra, cdec+wcs->xinc, &xn, &yn, &off);
+wcs.c:	wcs2pix (wcs, cra+wcs->xinc, cdec, &xe, &ye, &off);
+wcs.c:	wcs2pix (wcs, cra, cdec+wcs->yinc, &xn, &yn, &off);
+wcs.c:    wcs->pa_north = raddeg (atan2 (yn-yc, xn-xc));
+wcs.c:    if (wcs->pa_north < -90.0)
+wcs.c:	wcs->pa_north = wcs->pa_north + 360.0;
+wcs.c:    wcs->pa_east = raddeg (atan2 (ye-yc, xe-xc));
+wcs.c:    if (wcs->pa_east < -90.0)
+wcs.c:	wcs->pa_east = wcs->pa_east + 360.0;
+wcs.c:    if (wcs->pa_north < -90.0)
+wcs.c:	wcs->imrot = 270.0 + wcs->pa_north;
+wcs.c:	wcs->imrot = wcs->pa_north - 90.0;
+wcs.c:    if (wcs->coorflip) {
+wcs.c:	wcs->rot = wcs->imrot + 90.0;
+wcs.c:	if (wcs->rot < 0.0)
+wcs.c:	    wcs->rot = wcs->rot + 360.0;
+wcs.c:	wcs->rot = wcs->imrot;
+wcs.c:    if (wcs->rot < 0.0)
+wcs.c:	wcs->rot = wcs->rot + 360.0;
+wcs.c:    if (wcs->rot >= 360.0)
+wcs.c:	wcs->rot = wcs->rot - 360.0;
+wcs.c:    wcs->imflip = 0;
+wcs.c:    if (wcs->pa_east - wcs->pa_north < -80.0 &&
+wcs.c:	wcs->pa_east - wcs->pa_north > -100.0)
+wcs.c:	wcs->imflip = 1;
+wcs.c:    if (wcs->pa_east - wcs->pa_north < 280.0 &&
+wcs.c:	wcs->pa_east - wcs->pa_north > 260.0)
+wcs.c:	wcs->imflip = 1;
+wcs.c:    if (wcs->pa_north - wcs->pa_east > 80.0 &&
+wcs.c:	wcs->pa_north - wcs->pa_east < 100.0)
+wcs.c:	wcs->imflip = 1;
+wcs.c:    if (wcs->coorflip) {
+wcs.c:	if (wcs->imflip)
+wcs.c:	    wcs->yinc = -wcs->yinc;
+wcs.c:	if (!wcs->imflip)
+wcs.c:	    wcs->xinc = -wcs->xinc;
+wcs.c:	return (wcs->wcson);
+wcs.c:	return (!wcs->wcson);
+wcs.c:    wcs->crval[0] = rra;
+wcs.c:    wcs->crval[1] = rdec;
+wcs.c:    wcs->xref = wcs->crval[0];
+wcs.c:    wcs->yref = wcs->crval[1];
+wcs.c:    strcpy (wcs->radecsys,coorsys);
+wcs.c:    wcs->syswcs = wcscsys (coorsys);
+wcs.c:    if (wcs->syswcs == WCS_B1950)
+wcs.c:	wcs->equinox = 1950.0;
+wcs.c:	wcs->equinox = 2000.0;
+wcs.c:	if (wcs->prjcode == WCS_DSS)
+wcs.c:	    (void)fprintf (stderr,"WCS plate center  %s\n", wcs->center);
+wcs.c:	xpix = 0.5 * wcs->nxpix;
+wcs.c:	ypix = 0.5 * wcs->nypix;
+wcs.c:		     wcs->ctype[0],wcs->ctype[1],wcstring,wcs->ptype,xpix,ypix);
+wcs.c:	(void) pix2wcs (wcs,wcs->nxpix,ypix,&xpos2,&ypos2);
+wcs.c:	if (wcs->syswcs == WCS_LINEAR) {
+wcs.c:	    (void)fprintf (stderr, "WCS width = %.5f %s ",width, wcs->units[0]);
+wcs.c:	    (void)fprintf (stderr, "WCS width = %.3f %s ",width, wcs->units[0]);
+wcs.c:	secpixw = width / (wcs->nxpix - 1.0);
+wcs.c:	(void) pix2wcs (wcs,xpix,wcs->nypix,&xpos2,&ypos2);
+wcs.c:	if (wcs->syswcs == WCS_LINEAR) {
+wcs.c:	    (void)fprintf (stderr, " height = %.5f %s ",height, wcs->units[1]);
+wcs.c:	    (void)fprintf (stderr, " height = %.3f %s ",height, wcs->units[1]);
+wcs.c:	secpixh = height / (wcs->nypix - 1.0);
+wcs.c:	if (wcs->syswcs == WCS_LINEAR) {
+wcs.c:			    wcs->xinc,wcs->units[0],wcs->yinc,wcs->units[1]);
+wcs.c:	    if (wcs->xinc != 0.0 && wcs->yinc != 0.0)
+wcs.c:		secpix = (fabs(wcs->xinc) + fabs(wcs->yinc)) * 0.5 * 3600.0;
+wcs.c:	    else if (wcs->xinc != 0.0 || wcs->yinc != 0.0)
+wcs.c:		secpix = (fabs(wcs->xinc) + fabs(wcs->yinc)) * 3600.0;
+wcs.c:	xcpix = (0.5 * wcs->nxpix) + 0.5;
+wcs.c:	ycpix = (0.5 * wcs->nypix) + 0.5;
+wcs.c:	xpix = wcs->nxpix + 0.499999;
+wcs.c:	if (strncmp (wcs->ptype,"LINEAR",6) &&
+wcs.c:	    strncmp (wcs->ptype,"PIXEL",5)) {
+wcs.c:	ypix = wcs->nypix + 0.5;
+wcs.c:	if (strncmp (wcs->ptype,"LINEAR",6) &&
+wcs.c:	    strncmp (wcs->ptype,"PIXEL",5))
+wcs.c:	(void) pix2wcs (wcs,1.0,wcs->nypix,&xpos2,&ypos2);
+wcs.c:	(void) pix2wcs (wcs,wcs->nxpix,1.0,&xpos3,&ypos3);
+wcs.c:	(void) pix2wcs (wcs,wcs->nxpix,wcs->nypix,&xpos4,&ypos4);
+wcs.c:	if (wcs->syswcs != WCS_LINEAR && wcs->syswcs != WCS_XY) {
+wcs.c:	    if (wcs->command_format[i] != NULL)
+wcs.c:		free (wcs->command_format[i]);
+wcs.c:	    wcs->command_format[i] = (char *) calloc (lcom+2, 1);
+wcs.c:	    if (wcs->command_format[i] == NULL)
+wcs.c:		    wcs->command_format[i][icom] = ' ';
+wcs.c:		    wcs->command_format[i][icom] = command[icom];
+wcs.c:	    wcs->command_format[i][lcom] = 0;
+wcs.c:    if (wcs->command_format[i] != NULL)
+wcs.c:	strcpy (comform, wcs->command_format[i]);
+wcs.c:	sysout = wcs->syswcs;
+wcs.c:	strcpy (wcs->radecout, wcs->radecsys);
+wcs.c:	wcs->eqout = wcs->equinox;
+wcs.c:	    if (wcs->eqout != 1950.0) {
+wcs.c:		wcs->radecout[0] = 'B';
+wcs.c:		sprintf (wcs->radecout+1,"%.4f", wcs->equinox);
+wcs.c:		i = strlen(wcs->radecout) - 1;
+wcs.c:		if (wcs->radecout[i] == '0')
+wcs.c:		    wcs->radecout[i] = (char)0;
+wcs.c:		i = strlen(wcs->radecout) - 1;
+wcs.c:		if (wcs->radecout[i] == '0')
+wcs.c:		    wcs->radecout[i] = (char)0;
+wcs.c:		i = strlen(wcs->radecout) - 1;
+wcs.c:		if (wcs->radecout[i] == '0')
+wcs.c:		    wcs->radecout[i] = (char)0;
+wcs.c:		strcpy (wcs->radecout, "B1950");
+wcs.c:	    if (wcs->eqout != 2000.0) {
+wcs.c:		wcs->radecout[0] = 'J';
+wcs.c:		sprintf (wcs->radecout+1,"%.4f", wcs->equinox);
+wcs.c:		i = strlen(wcs->radecout) - 1;
+wcs.c:		if (wcs->radecout[i] == '0')
+wcs.c:		    wcs->radecout[i] = (char)0;
+wcs.c:		i = strlen(wcs->radecout) - 1;
+wcs.c:		if (wcs->radecout[i] == '0')
+wcs.c:		    wcs->radecout[i] = (char)0;
+wcs.c:		i = strlen(wcs->radecout) - 1;
+wcs.c:		if (wcs->radecout[i] == '0')
+wcs.c:		    wcs->radecout[i] = (char)0;
+wcs.c:		strcpy (wcs->radecout, "J2000");
+wcs.c:	if (sysout != wcs->syswcs &&
+wcs.c:	    (wcs->syswcs == WCS_LINEAR || wcs->syswcs == WCS_ALTAZ))
+wcs.c:	strcpy (wcs->radecout, coorsys);
+wcs.c:	wcs->eqout = wcsceq (coorsys);
+wcs.c:    wcs->sysout = sysout;
+wcs.c:    if (wcs->wcson) {
+wcs.c:	if (wcs->sysout == WCS_GALACTIC || wcs->sysout == WCS_ECLIPTIC ||
+wcs.c:	    wcs->sysout == WCS_PLANET) {
+wcs.c:	    wcs->degout = 1;
+wcs.c:	    wcs->ndec = 5;
+wcs.c:	else if (wcs->sysout == WCS_ALTAZ) {
+wcs.c:	    wcs->degout = 1;
+wcs.c:	    wcs->ndec = 5;
+wcs.c:	else if (wcs->sysout == WCS_NPOLE || wcs->sysout == WCS_SPA) {
+wcs.c:	    wcs->degout = 1;
+wcs.c:	    wcs->ndec = 5;
+wcs.c:	    wcs->degout = 0;
+wcs.c:	    wcs->ndec = 3;
+wcs.c:	return(wcs->radecout);
+wcs.c:	wcs->sysin = wcs->syswcs;
+wcs.c:	strcpy (wcs->radecin, wcs->radecsys);
+wcs.c:	wcs->eqin = wcs->equinox;
+wcs.c:	if (wcs->sysin == WCS_B1950) {
+wcs.c:	    if (wcs->eqin != 1950.0) {
+wcs.c:		wcs->radecin[0] = 'B';
+wcs.c:		sprintf (wcs->radecin+1,"%.4f", wcs->equinox);
+wcs.c:		i = strlen(wcs->radecin) - 1;
+wcs.c:		if (wcs->radecin[i] == '0')
+wcs.c:		    wcs->radecin[i] = (char)0;
+wcs.c:		i = strlen(wcs->radecin) - 1;
+wcs.c:		if (wcs->radecin[i] == '0')
+wcs.c:		    wcs->radecin[i] = (char)0;
+wcs.c:		i = strlen(wcs->radecin) - 1;
+wcs.c:		if (wcs->radecin[i] == '0')
+wcs.c:		    wcs->radecin[i] = (char)0;
+wcs.c:		strcpy (wcs->radecin, "B1950");
+wcs.c:	else if (wcs->sysin == WCS_J2000) {
+wcs.c:	    if (wcs->eqin != 2000.0) {
+wcs.c:		wcs->radecin[0] = 'J';
+wcs.c:		sprintf (wcs->radecin+1,"%.4f", wcs->equinox);
+wcs.c:		i = strlen(wcs->radecin) - 1;
+wcs.c:		if (wcs->radecin[i] == '0')
+wcs.c:		    wcs->radecin[i] = (char)0;
+wcs.c:		i = strlen(wcs->radecin) - 1;
+wcs.c:		if (wcs->radecin[i] == '0')
+wcs.c:		    wcs->radecin[i] = (char)0;
+wcs.c:		i = strlen(wcs->radecin) - 1;
+wcs.c:		if (wcs->radecin[i] == '0')
+wcs.c:		    wcs->radecin[i] = (char)0;
+wcs.c:		strcpy (wcs->radecin, "J2000");
+wcs.c:    wcs->sysin = sysin;
+wcs.c:    wcs->eqin = wcsceq (coorsys);
+wcs.c:    strcpy (wcs->radecin, coorsys);
+wcs.c:	return (wcs->radecin);
+wcs.c:    old = wcs->degout;
+wcs.c:    wcs->degout = new;
+wcs.c:    if (new == 1 && old == 0 && wcs->ndec == 3)
+wcs.c:	wcs->ndec = 6;
+wcs.c:    if (new == 0 && old == 1 && wcs->ndec == 5)
+wcs.c:	wcs->ndec = 3;
+wcs.c:	wcs->ndec = ndec;
+wcs.c:    return (wcs->ndec);
+wcs.c:	return (wcs->radecsys);
+wcs.c:	wcs->linmode = mode;
+wcs.c:	if (wcs->offscl) {
+wcs.c:	else if (wcs->degout == 1) {
+wcs.c:	    minlength = 9 + (2 * wcs->ndec);
+wcs.c:		deg2str (rastr, 32, xpos, wcs->ndec);
+wcs.c:		deg2str (decstr, 32, ypos, wcs->ndec);
+wcs.c:		if (wcs->tabsys)
+wcs.c:		if (wcs->tabsys)
+wcs.c:	else if (wcs->degout == 0) {
+wcs.c:	    minlength = 18 + (2 * wcs->ndec);
+wcs.c:		if (wcs->sysout == WCS_J2000 || wcs->sysout == WCS_B1950) {
+wcs.c:		    ra2str (rastr, 32, xpos, wcs->ndec);
+wcs.c:		    dec2str (decstr, 32, ypos, wcs->ndec-1);
+wcs.c:		    dec2str (rastr, 32, xpos, wcs->ndec);
+wcs.c:		    dec2str (decstr, 32, ypos, wcs->ndec);
+wcs.c:		if (wcs->tabsys) {
+wcs.c:		if (wcs->tabsys) {
+wcs.c:	if (wcs->sysout == WCS_GALACTIC) {
+wcs.c:	    if (lstr > 9 && wcs->printsys) {
+wcs.c:		if (wcs->tabsys)
+wcs.c:	else if (wcs->sysout == WCS_ECLIPTIC) {
+wcs.c:	    if (lstr > 9 && wcs->printsys) {
+wcs.c:		if (wcs->tabsys)
+wcs.c:	else if (wcs->sysout == WCS_PLANET) {
+wcs.c:	    if (lstr > 9 && wcs->printsys) {
+wcs.c:		if (wcs->tabsys)
+wcs.c:	else if (wcs->sysout == WCS_ALTAZ) {
+wcs.c:	    if (lstr > 7 && wcs->printsys) {
+wcs.c:		if (wcs->tabsys)
+wcs.c:	else if (wcs->sysout == WCS_NPOLE) {
+wcs.c:	    if (lstr > 7 && wcs->printsys) {
+wcs.c:		if (wcs->tabsys)
+wcs.c:	else if (wcs->sysout == WCS_SPA) {
+wcs.c:	    if (lstr > 7 && wcs->printsys) {
+wcs.c:		if (wcs->tabsys)
+wcs.c:	else if (wcs->sysout==WCS_B1950 || wcs->sysout==WCS_J2000) {
+wcs.c:	    if (lstr > (int) strlen(wcs->radecout)+1 && wcs->printsys) {
+wcs.c:		if (wcs->tabsys)
+wcs.c:		strcat (wcstring, wcs->radecout);
+wcs.c:	    num2str (rastr, xpos, 0, wcs->ndec);
+wcs.c:	    num2str (decstr, ypos, 0, wcs->ndec);
+wcs.c:	    lunits = strlen (wcs->units[0]) + strlen (wcs->units[1]) + 2;
+wcs.c:	    if (wcs->syswcs == WCS_LINEAR && wcs->linmode == 1) {
+wcs.c:		    if (strlen (wcs->units[0]) > 0) {
+wcs.c:			strcat (rastr, wcs->units[0]);
+wcs.c:		    if (strlen (wcs->units[1]) > 0) {
+wcs.c:			strcat (decstr, wcs->units[1]);
+wcs.c:		if (wcs->tabsys)
+wcs.c:		if (wcs->tabsys)
+wcs.c:	    if (wcs->syswcs == WCS_LINEAR && wcs->linmode != 1 &&
+wcs.c:	    if (wcs->syswcs == WCS_LINEAR && wcs->linmode == 2 &&
+wcs.c:		if (strlen (wcs->units[0]) > 0) {
+wcs.c:		    strcat (wcstring, wcs->units[0]);
+wcs.c:		if (strlen (wcs->units[1]) > 0) {
+wcs.c:		    strcat (wcstring, wcs->units[1]);
+wcs.c:    wcs->xpix = xpix;
+wcs.c:    wcs->ypix = ypix;
+wcs.c:    wcs->zpix = zpix;
+wcs.c:    wcs->offscl = 0;
+wcs.c:    if (wcs->wcs != NULL) {
+wcs.c:	pix2wcs (wcs->wcs, xpix, ypix, &xpi, &ypi);
+wcs.c:    if (wcs->prjcode == WCS_DSS) {
+wcs.c:	    wcs->offscl = 1;
+wcs.c:    else if (wcs->prjcode == WCS_PLT) {
+wcs.c:	    wcs->offscl = 1;
+wcs.c:    else if (wcs->prjcode == WCS_TNX) {
+wcs.c:	    wcs->offscl = 1;
+wcs.c:    else if (wcs->prjcode == WCS_ZPX) {
+wcs.c:	    wcs->offscl = 1;
+wcs.c:    else if (wcs->wcsproj == WCS_OLD || wcs->prjcode <= 0) {
+wcs.c:	    wcs->offscl = 1;
+wcs.c:	wcs->offscl = 1;
+wcs.c:    if (wcs->offscl) {
+wcs.c:        if (wcs->prjcode > 0) {
+wcs.c:	    eqin = wcs->equinox;
+wcs.c:	    eqout = wcs->eqout;
+wcs.c:	    wcscon (wcs->syswcs,wcs->sysout,eqin,eqout,&xp,&yp,wcs->epoch);
+wcs.c:	if (wcs->latbase == 90)
+wcs.c:	else if (wcs->latbase == -90)
+wcs.c:	wcs->xpos = xp;
+wcs.c:	wcs->ypos = yp;
+wcs.c:    if (wcs->sysout > 0 && wcs->sysout != 6 && wcs->sysout != 10) {
+wcs.c:    wcsc2pix (wcs, xpos, ypos, wcs->radecin, xpix, ypix, offscl);
+wcs.c:    if (wcs->latbase == 90)
+wcs.c:    else if (wcs->latbase == -90)
+wcs.c:	sysin = wcs->syswcs;
+wcs.c:	eqin = wcs->equinox;
+wcs.c:    wcs->zpix = 1.0;
+wcs.c:	eqout = wcs->equinox;
+wcs.c:	wcscon (sysin, wcs->syswcs, eqin, eqout, &xp, &yp, wcs->epoch);
+wcs.c:    if (wcs->prjcode == WCS_DSS) {
+wcs.c:    else if (wcs->prjcode == WCS_PLT) {
+wcs.c:    else if (wcs->prjcode == WCS_TNX) {
+wcs.c:    else if (wcs->prjcode == WCS_ZPX) {
+wcs.c:    else if (wcs->wcsproj == WCS_OLD || wcs->prjcode <= 0) {
+wcs.c:    if (wcs->wcs != NULL) {
+wcs.c:	wcsc2pix (wcs->wcs, xpi, ypi, NULL, xpix, ypix, offscl);
+wcs.c:	    else if (*xpix > wcs->nxpix + 0.5 || *ypix > wcs->nypix + 0.5)
+wcs.c:    wcs->offscl = *offscl;
+wcs.c:    wcs->xpos = xpos;
+wcs.c:    wcs->ypos = ypos;
+wcs.c:    wcs->xpix = *xpix;
+wcs.c:    wcs->ypix = *ypix;
+wcs.c:    if (wcs->prjcode == WCS_CSC || wcs->prjcode == WCS_QSC ||
+wcs.c:	wcs->prjcode == WCS_TSC)
+wcs.c:    offscl = wcsrev1 ((void *)&wcs->ctype, &wcs->wcsl, pixcrd, &wcs->lin, imgcrd,
+wcs.c:		    &wcs->prj, &phi, &theta, wcs->crval, &wcs->cel, wcscrd);
+wcs.c:	*xpos = wcscrd[wcs->wcsl.lng];
+wcs.c:	*ypos = wcscrd[wcs->wcsl.lat];
+wcs.c:    if (wcs->wcsl.flag != WCSSET) {
+wcs.c:	if (wcsset1 (wcs->lin.naxis, (void *)&wcs->ctype, &wcs->wcsl) )
+wcs.c:    wcscrd[wcs->wcsl.lng] = xpos;
+wcs.c:    wcscrd[wcs->wcsl.lat] = ypos;
+wcs.c:    offscl = wcsfwd ((void *)&wcs->ctype, &wcs->wcsl, wcscrd, wcs->crval, &wcs->cel,
+wcs.c:		     &phi, &theta, &wcs->prj, imgcrd, &wcs->lin, pixcrd);
+wcs.c:	if (wcs->prjcode == WCS_CSC || wcs->prjcode == WCS_QSC ||
+wcs.c:	    wcs->prjcode == WCS_TSC)
+wcs.c:	    wcs->zpix = pixcrd[2] - 1.0;
+wcs.c:	    wcs->zpix = pixcrd[2];
+wcs.c:    return ((int) wcs->zpix);
+wcs.c:	    wcs->command_format[i] = NULL;
+wcs.c:	    if (wcs->command_format[i] != NULL) {
+wcs.c:		free (wcs->command_format[i]);
+wcs.c: * Nov  5 1996	Set wcs->crot to 1 if rotation matrix is used
+wcs.c: * Jul 30 1998	Set wcs->naxes and lin.naxis in wcsxinit() and wcskinit()
+wcs.c: * Feb 24 2000	If coorsys is null in wcsc2pix, wcs->radecin is assumed
+wcs.c: * Oct  1 2003	Rename wcs->naxes to wcs->naxis to match WCSLIB 3.2
+wcs.c: * Dec  3 2003	Add back wcs->naxes for compatibility
+wcs.c: * Nov  1 2004	Keep wcs->rot between 0 and 360
+wcs.h:/* Projections (1-26 are WCSLIB) (values for wcs->prjcode) */
+wcs.h:/* Distortion codes (values for wcs->distcode) */
+wcs.h: * Feb 20 2001	Add wcs->wcs to main data structure
+wcs.h: * Apr  9 2002	Add wcs->wcsdep for pointer to WCS depending on this WCS
+wcs.h: * Apr 26 2002	Add wcs->wcsname and wcs->wcschar to identify WCS structure
+wcs.h: * May  9 2002	Add wcs->radvel and wcs->zvel for radial velocity in km/sec
+wcs.h: * Apr  1 2003	Add wcs->distort Distort structure for distortion correction
+wcs.h: * Oct  1 2003	Rename wcs->naxes to wcs->naxis to match WCSLIB 3.2
+wcs.h: * Dec  3 2003	Add back wcs->naxes for backward compatibility
+wcsinit.c:    wcs->wcschar = mchar;
+wcsinit.c:	wcs->wcsname = (char *) calloc (strlen (wcsname)+2, 1);
+wcsinit.c:	strcpy (wcs->wcsname, wcsname);
+wcsinit.c:    wcs->cel.flag = 0;
+wcsinit.c:    wcs->lin.flag = 0;
+wcsinit.c:    wcs->wcsl.flag = 0;
+wcsinit.c:    wcs->wcsl.cubeface = -1;
+wcsinit.c:    wcs->ncoeff1 = 0;
+wcsinit.c:    wcs->ncoeff2 = 0;
+wcsinit.c:    wcs->rotmat = 0;
+wcsinit.c:    wcs->rot = 0.0;
+wcsinit.c:    wcs->naxis = naxes;
+wcsinit.c:    wcs->naxes = naxes;
+wcsinit.c:    wcs->lin.naxis = naxes;
+wcsinit.c:    wcs->nxpix = 0;
+wcsinit.c:    hgetr8 (hstring, "NAXIS1", &wcs->nxpix);
+wcsinit.c:    if (wcs->nxpix < 1)
+wcsinit.c:	hgetr8 (hstring, "IMAGEW", &wcs->nxpix);
+wcsinit.c:    if (wcs->nxpix < 1) {
+wcsinit.c:    wcs->nypix = 0;
+wcsinit.c:    hgetr8 (hstring, "NAXIS2", &wcs->nypix);
+wcsinit.c:    if (wcs->nypix < 1)
+wcsinit.c:	hgetr8 (hstring, "IMAGEH", &wcs->nypix);
+wcsinit.c:    if (naxes > 1 && wcs->nypix < 1) {
+wcsinit.c:	    if (i == 0 && wcs->nxpix > 1) {
+wcsinit.c:			 keyword, wcs->nxpix); */
+wcsinit.c:		j = wcs->nxpix;
+wcsinit.c:	    else if (i == 1 && wcs->nypix > 1) {
+wcsinit.c:			 keyword, wcs->nypix); */
+wcsinit.c:		j = wcs->nypix;
+wcsinit.c:    wcs->naxes = nax;
+wcsinit.c:    wcs->naxis = nax;
+wcsinit.c:    hgets (hstring, "INSTRUME", 16, wcs->instrument);
+wcsinit.c:    hgeti4 (hstring, "DETECTOR", &wcs->detector);
+wcsinit.c:    wcs->wcsproj = getdefwcs();
+wcsinit.c:    wcs->logwcs = 0;
+wcsinit.c:    hgeti4 (hstring, "DC-FLAG", &wcs->logwcs);
+wcsinit.c:    for (i = 0; i < 81; i++) wcs->pc[i] = 0.0;
+wcsinit.c:    for (i = 0; i < naxes; i++) wcs->pc[(i*naxes)+i] = 1.0;
+wcsinit.c:    for (i = 0; i < 9; i++) wcs->cdelt[i] = 0.0;
+wcsinit.c:    for (i = 0; i < naxes; i++) wcs->cdelt[i] = 1.0;
+wcsinit.c:	if ((wcs->wcs = wcsinitn (hstring, wcsname)) == NULL) {
+wcsinit.c:	depwcs = wcs->wcs;
+wcsinit.c:	depwcs->wcsdep = wcs;
+wcsinit.c:	wcs->wcs = NULL;
+wcsinit.c:    wcs->radvel = 0.0;
+wcsinit.c:    wcs->zvel = 0.0;
+wcsinit.c:    if (hgetr8c (hstring, "VSOURCE", &mchar, &wcs->radvel))
+wcsinit.c:	wcs->zvel = wcs->radvel / cvel;
+wcsinit.c:    else if (hgetr8c (hstring, "ZSOURCE", &mchar, &wcs->zvel))
+wcsinit.c:	wcs->radvel = wcs->zvel * cvel;
+wcsinit.c:    else if (hgetr8 (hstring, "VELOCITY", &wcs->radvel))
+wcsinit.c:	wcs->zvel = wcs->radvel / cvel;
+wcsinit.c:	wcs->prj.p[i] = 0.0;
+wcsinit.c:	strcpy (wcs->ctype[0], ctype1);
+wcsinit.c:	strcpy (wcs->ctype[1], ctype2);
+wcsinit.c:	strcpy (wcs->ctype[2], "");
+wcsinit.c:	hgetsc (hstring, "CTYPE3", &mchar, 9, wcs->ctype[2]);
+wcsinit.c:	strcpy (wcs->ctype[3], "");
+wcsinit.c:	hgetsc (hstring, "CTYPE4", &mchar, 9, wcs->ctype[3]);
+wcsinit.c:	if (wcs->prjcode == WCS_LIN) {
+wcsinit.c:	    if (!hgetsc (hstring, "CUNIT1", &mchar, 16, wcs->units[0])) {
+wcsinit.c:		if (!mgetstr (hstring, "WAT1", "units", 16, wcs->units[0])) {
+wcsinit.c:		    wcs->units[0][0] = 0;
+wcsinit.c:	    if (!strcmp (wcs->units[0], "pixel"))
+wcsinit.c:		wcs->prjcode = WCS_PIX;
+wcsinit.c:		if (!hgetsc (hstring, "CUNIT2", &mchar, 16, wcs->units[1])) {
+wcsinit.c:		    if (!mgetstr (hstring, "WAT2", "units", 16, wcs->units[1])) {
+wcsinit.c:			wcs->units[1][0] = 0;
+wcsinit.c:		if (!strcmp (wcs->units[0], "pixel"))
+wcsinit.c:		    wcs->prjcode = WCS_PIX;
+wcsinit.c:	wcs->crpix[0] = 1.0;
+wcsinit.c:	hgetr8c (hstring, "CRPIX1", &mchar, &wcs->crpix[0]);
+wcsinit.c:	wcs->crpix[1] = 1.0;
+wcsinit.c:	hgetr8c (hstring, "CRPIX2", &mchar, &wcs->crpix[1]);
+wcsinit.c:	wcs->xrefpix = wcs->crpix[0];
+wcsinit.c:	wcs->yrefpix = wcs->crpix[1];
+wcsinit.c:	wcs->crval[0] = 0.0;
+wcsinit.c:	hgetr8c (hstring, "CRVAL1", &mchar, &wcs->crval[0]);
+wcsinit.c:	wcs->crval[1] = 0.0;
+wcsinit.c:	hgetr8c (hstring, "CRVAL2", &mchar, &wcs->crval[1]);
+wcsinit.c:	if (wcs->syswcs == WCS_NPOLE)
+wcsinit.c:	    wcs->crval[1] = 90.0 - wcs->crval[1];
+wcsinit.c:	if (wcs->syswcs == WCS_SPA)
+wcsinit.c:	    wcs->crval[1] = wcs->crval[1] - 90.0;
+wcsinit.c:	wcs->xref = wcs->crval[0];
+wcsinit.c:	wcs->yref = wcs->crval[1];
+wcsinit.c:	if (wcs->coorflip) {
+wcsinit.c:	    wcs->cel.ref[0] = wcs->crval[1];
+wcsinit.c:	    wcs->cel.ref[1] = wcs->crval[0];
+wcsinit.c:	    wcs->cel.ref[0] = wcs->crval[0];
+wcsinit.c:	    wcs->cel.ref[1] = wcs->crval[1];
+wcsinit.c:	wcs->longpole = 999.0;
+wcsinit.c:	hgetr8c (hstring, "LONPOLE", &mchar, &wcs->longpole);
+wcsinit.c:	wcs->cel.ref[2] = wcs->longpole;
+wcsinit.c:	wcs->latpole = 999.0;
+wcsinit.c:	hgetr8c (hstring, "LATPOLE", &mchar, &wcs->latpole);
+wcsinit.c:	wcs->cel.ref[3] = wcs->latpole;
+wcsinit.c:	wcs->lin.crpix = wcs->crpix;
+wcsinit.c:	wcs->lin.cdelt = wcs->cdelt;
+wcsinit.c:	wcs->lin.pc = wcs->pc;
+wcsinit.c:	wcs->prj.r0 = 0.0;
+wcsinit.c:	hgetr8c (hstring, "PROJR0", &mchar, &wcs->prj.r0);
+wcsinit.c:	    hgetr8c (hstring, keyword, &mchar, &wcs->prj.p[i]);
+wcsinit.c:	if (wcs->prjcode == WCS_AZP || wcs->prjcode == WCS_SIN ||
+wcsinit.c:	    wcs->prjcode == WCS_COP || wcs->prjcode == WCS_COE ||
+wcsinit.c:	    wcs->prjcode == WCS_COD || wcs->prjcode == WCS_COO) {
+wcsinit.c:	    hgetr8c (hstring, pvkey1, &mchar, &wcs->prj.p[1]);
+wcsinit.c:	    hgetr8c (hstring, pvkey2, &mchar, &wcs->prj.p[2]);
+wcsinit.c:	else if (wcs->prjcode == WCS_SZP) {
+wcsinit.c:	    hgetr8c (hstring, pvkey1, &mchar, &wcs->prj.p[1]);
+wcsinit.c:	    hgetr8c (hstring, pvkey2, &mchar, &wcs->prj.p[2]);
+wcsinit.c:	    if (wcs->prj.p[3] == 0.0)
+wcsinit.c:		wcs->prj.p[3] = 90.0;
+wcsinit.c:	    hgetr8c (hstring, pvkey3, &mchar, &wcs->prj.p[3]);
+wcsinit.c:	else if (wcs->prjcode == WCS_CEA) {
+wcsinit.c:	    if (wcs->prj.p[1] == 0.0)
+wcsinit.c:		wcs->prj.p[1] = 1.0;
+wcsinit.c:	    hgetr8c (hstring, pvkey1, &mchar, &wcs->prj.p[1]);
+wcsinit.c:	else if (wcs->prjcode == WCS_CYP) {
+wcsinit.c:	    if (wcs->prj.p[1] == 0.0)
+wcsinit.c:		wcs->prj.p[1] = 1.0;
+wcsinit.c:	    hgetr8c (hstring, pvkey1, &mchar, &wcs->prj.p[1]);
+wcsinit.c:	    if (wcs->prj.p[2] == 0.0)
+wcsinit.c:		wcs->prj.p[2] = 1.0;
+wcsinit.c:	    hgetr8c (hstring, pvkey2, &mchar, &wcs->prj.p[2]);
+wcsinit.c:	else if (wcs->prjcode == WCS_AIR) {
+wcsinit.c:	    if (wcs->prj.p[1] == 0.0)
+wcsinit.c:		wcs->prj.p[1] = 90.0;
+wcsinit.c:	    hgetr8c (hstring, pvkey1, &mchar, &wcs->prj.p[1]);
+wcsinit.c:	else if (wcs->prjcode == WCS_BON) {
+wcsinit.c:	    hgetr8c (hstring, pvkey1, &mchar, &wcs->prj.p[1]);
+wcsinit.c:	else if (wcs->prjcode == WCS_ZPN) {
+wcsinit.c:		hgetr8c (hstring, keyword, &mchar, &wcs->prj.p[i]);
+wcsinit.c:	if (wcs->prjcode == WCS_TNX) {
+wcsinit.c:		wcs->ctype[0][6] = 'A';
+wcsinit.c:		wcs->ctype[0][7] = 'N';
+wcsinit.c:		wcs->ctype[1][6] = 'A';
+wcsinit.c:		wcs->ctype[1][7] = 'N';
+wcsinit.c:		wcs->prjcode = WCS_TAN;
+wcsinit.c:	if (wcs->prjcode == WCS_ZPX) {
+wcsinit.c:		wcs->ctype[0][7] = 'N';
+wcsinit.c:		wcs->ctype[1][7] = 'N';
+wcsinit.c:		wcs->prjcode = WCS_ZPN;
+wcsinit.c:	if (wcs->prjcode == WCS_TPV) {
+wcsinit.c:	    wcs->ctype[0][6] = 'A';
+wcsinit.c:	    wcs->ctype[0][7] = 'N';
+wcsinit.c:	    wcs->ctype[1][6] = 'A';
+wcsinit.c:	    wcs->ctype[1][7] = 'N';
+wcsinit.c:	    wcs->prjcode = WCS_TAN;
+wcsinit.c:	if (wcs->wcsproj > 0)
+wcsinit.c:	wcs->ncoeff1 = 0;
+wcsinit.c:	wcs->ncoeff2 = 0;
+wcsinit.c:	if (wcs->wcsproj != WCS_OLD &&
+wcsinit.c:	    wcs->prjcode = WCS_PLT;
+wcsinit.c:	    (void)strcpy (wcs->ptype, "PLATE");
+wcsinit.c:		wcs->x_coeff[i] = 0.0;
+wcsinit.c:		if (hgetr8 (hcoeff, keyword, &wcs->x_coeff[i]))
+wcsinit.c:		    wcs->ncoeff1 = i + 1;
+wcsinit.c:		wcs->y_coeff[i] = 0.0;
+wcsinit.c:		if (hgetr8 (hcoeff, keyword, &wcs->y_coeff[i]))
+wcsinit.c:		    wcs->ncoeff2 = i + 1;
+wcsinit.c:	    platepos (wcs->crpix[0], wcs->crpix[1], wcs, &ra0, &dec0);
+wcsinit.c:	    platepos (wcs->crpix[0], wcs->crpix[1]+1.0, wcs, &ra1, &dec1);
+wcsinit.c:	    wcs->yinc = dec1 - dec0;
+wcsinit.c:	    wcs->xinc = -wcs->yinc;
+wcsinit.c:	    wcs->wcson = 1;
+wcsinit.c:	    rot = degrad (wcs->rot);
+wcsinit.c:	    platepos (wcs->crpix[0], wcs->crpix[1], wcs, &ra0, &dec0);
+wcsinit.c:	    platepos (wcs->crpix[0]+cos(rot),
+wcsinit.c:		      wcs->crpix[1]+sin(rot), wcs, &ra1, &dec1);
+wcsinit.c:	    wcs->cdelt[0] = -wcsdist (ra0, dec0, ra1, dec1);
+wcsinit.c:	    wcs->xinc = wcs->cdelt[0];
+wcsinit.c:	    platepos (wcs->crpix[0]+sin(rot),
+wcsinit.c:		      wcs->crpix[1]+cos(rot), wcs, &ra1, &dec1);
+wcsinit.c:	    wcs->cdelt[1] = wcsdist (ra0, dec0, ra1, dec1);
+wcsinit.c:	    wcs->yinc = wcs->cdelt[1];
+wcsinit.c:	    wcs->cd[0] = cd[0];
+wcsinit.c:	    wcs->cd[1] = cd[1];
+wcsinit.c:	    wcs->cd[2] = cd[2];
+wcsinit.c:	    wcs->cd[3] = cd[3];
+wcsinit.c:	    (void) matinv (2, wcs->cd, wcs->dc);
+wcsinit.c:	    wcs->rotmat = 1;
+wcsinit.c:	    if (cdelt1 == 0.0 || (wcs->nypix > 1 && cdelt2 == 0.0)) {
+wcsinit.c:	    if (cdelt2 == 0.0 && wcs->nypix > 1)
+wcsinit.c:	    wcs->cdelt[2] = 1.0;
+wcsinit.c:	    wcs->cdelt[3] = 1.0;
+wcsinit.c:		wcs->pc[i] = 0.0;
+wcsinit.c:	    wcs->xinc = 1.0;
+wcsinit.c:	    wcs->yinc = 1.0;
+wcsinit.c:	    wcs->cdelt[0] = 1.0;
+wcsinit.c:	    wcs->cdelt[1] = 1.0;
+wcsinit.c:	    wcs->rot = 0.0;
+wcsinit.c:	    wcs->rotmat = 0;
+wcsinit.c:	if (wcs->prjcode == WCS_TAN && wcs->naxis == 2) { 
+wcsinit.c:	    if (wcs->inv_x) {
+wcsinit.c:		poly_end(wcs->inv_x);
+wcsinit.c:		wcs->inv_x = NULL;
+wcsinit.c:	    if (wcs->inv_y) {
+wcsinit.c:		poly_end(wcs->inv_y);
+wcsinit.c:		wcs->inv_y = NULL;
+wcsinit.c:	    wcs->pvfail = 0;
+wcsinit.c:		wcs->projppv[i] = 0.0;
+wcsinit.c:		wcs->prj.ppv[i] = 0.0;
+wcsinit.c:		    if (hgetr8c(hstring, keyword,&mchar, &wcs->projppv[j+k*MAXPV]) == 0) {
+wcsinit.c:			wcs->projppv[j+k*MAXPV] = 0.0;
+wcsinit.c:		    wcs->prj.ppv[k] = wcs->projppv[k+wcs->wcsl.lat*MAXPV];
+wcsinit.c:		    wcs->prj.ppv[k+MAXPV] = wcs->projppv[k+wcs->wcsl.lng*MAXPV];
+wcsinit.c:		    if (!n && (wcs->prj.ppv[k] || wcs->prj.ppv[k+MAXPV]))  {
+wcsinit.c:		wcs->cel.flag = 0;
+wcsinit.c:	if (!strncmp (wcs->ptype,"LINEAR",6) ||
+wcsinit.c:	    !strncmp (wcs->ptype,"PIXEL",5)) {
+wcsinit.c:	    wcs->degout = -1;
+wcsinit.c:	    wcs->ndec = 5;
+wcsinit.c:	    wcs->epoch = 1900.0 + (mjd - 15019.81352) / 365.242198781;
+wcsinit.c:	else if (!hgetdate (hstring,"DATE-OBS",&wcs->epoch)) {
+wcsinit.c:	    if (!hgetdate (hstring,"DATE",&wcs->epoch)) {
+wcsinit.c:		if (!hgetr8 (hstring,"EPOCH",&wcs->epoch))
+wcsinit.c:		    wcs->epoch = wcs->equinox;
+wcsinit.c:		    wcs->epoch = wcs->epoch + (ut / (24.0 * 365.242198781));
+wcsinit.c:		    wcs->epoch = wcs->epoch + (ut / (24.0 * 365.242198781));
+wcsinit.c:	wcs->wcson = 1;
+wcsinit.c:	wcs->prjcode = WCS_DSS;
+wcsinit.c:	wcs->plate_ra = hrrad (ra_hours);
+wcsinit.c:	wcs->plate_dec = degrad (dec_deg);
+wcsinit.c:	hgetr8 (hstring,"EQUINOX",&wcs->equinox);
+wcsinit.c:	    strcpy (wcs->radecsys,"FK4");
+wcsinit.c:	    strcpy (wcs->radecsys,"FK5");
+wcsinit.c:	wcs->epoch = wcs->equinox;
+wcsinit.c:	hgetr8 (hstring,"EPOCH",&wcs->epoch);
+wcsinit.c:	(void)sprintf (wcs->center,"%2.0f:%2.0f:%5.3f %c%2.0f:%2.0f:%5.3f %s",
+wcsinit.c:		       rah,ram,ras,decsign,decd,decm,decs,wcs->radecsys);
+wcsinit.c:	hgetr8 (hstring,"PLTSCALE",&wcs->plate_scale);
+wcsinit.c:	hgetr8 (hstring,"XPIXELSZ",&wcs->x_pixel_size);
+wcsinit.c:	hgetr8 (hstring,"YPIXELSZ",&wcs->y_pixel_size);
+wcsinit.c:	hgetr8 (hstring,"CNPIX1",&wcs->x_pixel_offset);
+wcsinit.c:	hgetr8 (hstring,"CNPIX2",&wcs->y_pixel_offset);
+wcsinit.c:	    wcs->ppo_coeff[i] = 0.0;
+wcsinit.c:	    hgetr8 (hcoeff,keyword,&wcs->ppo_coeff[i]);
+wcsinit.c:	    wcs->x_coeff[i] = 0.0;
+wcsinit.c:	    hgetr8 (hcoeff, keyword, &wcs->x_coeff[i]);
+wcsinit.c:	    wcs->y_coeff[i] = 0.0;
+wcsinit.c:	    hgetr8 (hcoeff, keyword, &wcs->y_coeff[i]);
+wcsinit.c:	wcs->wcson = 1;
+wcsinit.c:	(void)strcpy (wcs->c1type, "RA");
+wcsinit.c:	(void)strcpy (wcs->c2type, "DEC");
+wcsinit.c:	(void)strcpy (wcs->ptype, "DSS");
+wcsinit.c:	wcs->degout = 0;
+wcsinit.c:	wcs->ndec = 3;
+wcsinit.c:	strcpy (wcs->ctype[0], "RA---DSS");
+wcsinit.c:	strcpy (wcs->ctype[1], "DEC--DSS");
+wcsinit.c:	wcs->crpix[0] = 0.5 * wcs->nxpix;
+wcsinit.c:	wcs->crpix[1] = 0.5 * wcs->nypix;
+wcsinit.c:	wcs->xrefpix = wcs->crpix[0];
+wcsinit.c:	wcs->yrefpix = wcs->crpix[1];
+wcsinit.c:	dsspos (wcs->crpix[0], wcs->crpix[1], wcs, &ra0, &dec0);
+wcsinit.c:	wcs->crval[0] = ra0;
+wcsinit.c:	wcs->crval[1] = dec0;
+wcsinit.c:	wcs->xref = wcs->crval[0];
+wcsinit.c:	wcs->yref = wcs->crval[1];
+wcsinit.c:	dsspos (wcs->crpix[0], wcs->crpix[1]+1.0, wcs, &ra1, &dec1);
+wcsinit.c:	wcs->yinc = dec1 - dec0;
+wcsinit.c:	wcs->xinc = -wcs->yinc;
+wcsinit.c:	wcs->wcson = 1;
+wcsinit.c:	rot = degrad (wcs->rot);
+wcsinit.c:	dsspos (wcs->crpix[0]+cos(rot),
+wcsinit.c:		wcs->crpix[1]+sin(rot), wcs, &ra1, &dec1);
+wcsinit.c:	wcs->cdelt[0] = -wcsdist (ra0, dec0, ra1, dec1);
+wcsinit.c:	dsspos (wcs->crpix[0]+sin(rot),
+wcsinit.c:		wcs->crpix[1]+cos(rot), wcs, &ra1, &dec1);
+wcsinit.c:	wcs->cdelt[1] = wcsdist (ra0, dec0, ra1, dec1);
+wcsinit.c:	wcsdeltset (wcs, wcs->cdelt[0], wcs->cdelt[1], wcs->rot);
+wcsinit.c:	if (wcs->rot == 0.)
+wcsinit.c:	wcs->crpix[0] = 0.5 + (wcs->nxpix * 0.5);
+wcsinit.c:	wcs->crpix[1] = 0.5 + (wcs->nypix * 0.5);
+wcsinit.c:	    hgetr8 (hstring,"CRPIX1",&wcs->crpix[0]);
+wcsinit.c:	    hgetr8 (hstring,"CRPIX2",&wcs->crpix[1]);
+wcsinit.c:	    wcs->crpix[0] = dxrefpix - (double) (ix1 - 1);
+wcsinit.c:	    wcs->crpix[1] = dyrefpix - (double) (iy1 - 1);
+wcsinit.c:	wcs->xrefpix = wcs->crpix[0];
+wcsinit.c:	wcs->yrefpix = wcs->crpix[1];
+wcsinit.c:	wcs->crval[0] = -999.0;
+wcsinit.c:	if (!hgetra (hstring,"RA",&wcs->crval[0])) {
+wcsinit.c:	wcs->crval[1] = -999.0;
+wcsinit.c:	if (!hgetdec (hstring,"DEC",&wcs->crval[1])) {
+wcsinit.c:	wcs->xref = wcs->crval[0];
+wcsinit.c:	wcs->yref = wcs->crval[1];
+wcsinit.c:	wcs->coorflip = 0;
+wcsinit.c:	wcs->cel.ref[0] = wcs->crval[0];
+wcsinit.c:	wcs->cel.ref[1] = wcs->crval[1];
+wcsinit.c:	wcs->cel.ref[2] = 999.0;
+wcsinit.c:	if (!hgetr8 (hstring,"LONPOLE",&wcs->cel.ref[2]))
+wcsinit.c:	    hgetr8 (hstring,"LONGPOLE",&wcs->cel.ref[2]);
+wcsinit.c:	wcs->cel.ref[3] = 999.0;
+wcsinit.c:	hgetr8 (hstring,"LATPOLE",&wcs->cel.ref[3]);
+wcsinit.c:	    wcs->epoch = 1900.0 + (mjd - 15019.81352) / 365.242198781;
+wcsinit.c:	else if (!hgetdate (hstring,"DATE-OBS",&wcs->epoch)) {
+wcsinit.c:	    if (!hgetdate (hstring,"DATE",&wcs->epoch)) {
+wcsinit.c:		if (!hgetr8 (hstring,"EPOCH",&wcs->epoch))
+wcsinit.c:		    wcs->epoch = wcs->equinox;
+wcsinit.c:		    wcs->epoch = wcs->epoch + (ut / (24.0 * 365.242198781));
+wcsinit.c:		    wcs->epoch = wcs->epoch + (ut / (24.0 * 365.242198781));
+wcsinit.c:	wcs->coorflip = 0;
+wcsinit.c:	wcs->degout = 0;
+wcsinit.c:	wcs->ndec = 3;
+wcsinit.c:	wcs->wcson = 1;
+wcsinit.c:    wcs->lin.crpix = wcs->crpix;
+wcsinit.c:    wcs->lin.cdelt = wcs->cdelt;
+wcsinit.c:    wcs->lin.pc = wcs->pc;
+wcsinit.c:    wcs->printsys = 1;
+wcsinit.c:    wcs->tabsys = 0;
+wcsinit.c:    wcs->linmode = 0;
+wcsinit.c:    lng = wcs->wcsl.lng;
+wcsinit.c:    lat = wcs->wcsl.lat;
+wcsinit.c:    if (wcs->naxis != NAXISPV) {
+wcsinit.c:    if (strcmp(wcs->wcsl.pcode, "TAN") != 0) {
+wcsinit.c:    if ((wcs->projppv[1+lng*MAXPV] == 0) &&
+wcsinit.c:	(wcs->projppv[1+lat*MAXPV] == 0)) {
+wcsinit.c:    if (wcs->wcs != NULL) {
+wcsinit.c:	pix2wcs(wcs->wcs,0,0,&xmin,&ymin);
+wcsinit.c:	pix2wcs(wcs->wcs,wcs->nxpix,wcs->nypix,&xmax,&ymax);
+wcsinit.c:	xmax = wcs->nxpix;
+wcsinit.c:	ymax = wcs->nypix;
+wcsinit.c:	    if (linrev(raw, &wcs->lin, pixin)) {
+wcsinit.c:			 wcs->wcsl.pcode);
+wcsinit.c:	    raw_to_pv (&wcs->prj,pixin[lng],pixin[lat], outpost, outpost+1);
+wcsinit.c:    linrev(rawmin, &wcs->lin, pixin);
+wcsinit.c:    linfwd(pixin, &wcs->lin, raw);
+wcsinit.c:		 wcs->wcsl.pcode);
+wcsinit.c:	wcs->pvfail = 1;
+wcsinit.c:    wcs->prj.inv_x = wcs->inv_x = poly;
+wcsinit.c:    linrev(rawmin, &wcs->lin, pixin);
+wcsinit.c:    linfwd(pixin, &wcs->lin, raw);
+wcsinit.c:		 wcs->wcsl.pcode);
+wcsinit.c:	wcs->pvfail = 1;
+wcsinit.c:    wcs->prj.inv_y = wcs->inv_y = poly;
+wcsinit.c:    if (strlen (wcs->radecsys) == 0 || wcs->prjcode == WCS_LIN)
+wcsinit.c:	strcpy (wcs->radecsys, "LINEAR");
+wcsinit.c:    if (wcs->prjcode == WCS_PIX)
+wcsinit.c:	strcpy (wcs->radecsys, "PIXEL");
+wcsinit.c:    wcs->syswcs = wcscsys (wcs->radecsys);
+wcsinit.c:    if (wcs->syswcs == WCS_B1950)
+wcsinit.c:	strcpy (wcs->radecout, "FK4");
+wcsinit.c:    else if (wcs->syswcs == WCS_J2000)
+wcsinit.c:	strcpy (wcs->radecout, "FK5");
+wcsinit.c:	strcpy (wcs->radecout, wcs->radecsys);
+wcsinit.c:    wcs->sysout = wcscsys (wcs->radecout);
+wcsinit.c:    wcs->eqout = wcs->equinox;
+wcsinit.c:    strcpy (wcs->radecin, wcs->radecsys);
+wcsinit.c:    wcs->sysin = wcscsys (wcs->radecin);
+wcsinit.c:    wcs->eqin = wcs->equinox;
+wcsinit.c:	wcs->equinox = atof (eqstring+1);
+wcsinit.c:	wcs->equinox = atof (eqstring+1);
+wcsinit.c:	hgetr8 (hstring, eqkey, &wcs->equinox);
+wcsinit.c:	    wcs->equinox = 1950.0;
+wcsinit.c:            hgetr8 (hstring,"EPOCH",&wcs->equinox);
+wcsinit.c:	    wcs->equinox = 1950.0;
+wcsinit.c:	    wcs->equinox = 2000.0;
+wcsinit.c:	    wcs->equinox = 2000.0;
+wcsinit.c:	    wcs->equinox = 2000.0;
+wcsinit.c:	    wcs->equinox = 2000.0;
+wcsinit.c:	wcs->equinox = 2000.0;
+wcsinit.c:	if (!strncmp (wcs->c1type, "RA",2) || !strncmp (wcs->c1type,"DEC",3))
+wcsinit.c:    if (!hgetdate (hstring,"DATE-OBS",&wcs->epoch)) {
+wcsinit.c:	if (!hgetdate (hstring,"DATE",&wcs->epoch)) {
+wcsinit.c:	    if (!hgetr8 (hstring,"EPOCH",&wcs->epoch))
+wcsinit.c:		wcs->epoch = wcs->equinox;
+wcsinit.c:		wcs->epoch = wcs->epoch + (ut / (24.0 * 365.242198781));
+wcsinit.c:		wcs->epoch = wcs->epoch + (ut / (24.0 * 365.242198781));
+wcsinit.c:    if (wcs->epoch == 0.0)
+wcsinit.c:	wcs->epoch = wcs->equinox;
+wcsinit.c:	strcpy (wcs->radecsys,systring);
+wcsinit.c:	    if (!strncmp (wcs->radecsys,"FK4",3))
+wcsinit.c:		wcs->equinox = 1950.0;
+wcsinit.c:	    else if (!strncmp (wcs->radecsys,"FK5",3))
+wcsinit.c:		wcs->equinox = 2000.0;
+wcsinit.c:	    else if (!strncmp (wcs->radecsys,"ICRS",4))
+wcsinit.c:		wcs->equinox = 2000.0;
+wcsinit.c:	    else if (!strncmp (wcs->radecsys,"GAL",3) && ieq == 0)
+wcsinit.c:		wcs->equinox = 2000.0;
+wcsinit.c:    else if (wcs->syswcs != WCS_NPOLE) {
+wcsinit.c:	    strcpy (wcs->radecsys,"FK5");
+wcsinit.c:	    strcpy (wcs->radecsys,"FK4");
+wcsinit.c:    if (wcs->c1type[0] == 'G')
+wcsinit.c:	strcpy (wcs->radecsys,"GALACTIC");
+wcsinit.c:    else if (wcs->c1type[0] == 'E')
+wcsinit.c:	strcpy (wcs->radecsys,"ECLIPTIC");
+wcsinit.c:    else if (wcs->c1type[0] == 'S')
+wcsinit.c:	strcpy (wcs->radecsys,"SGALACTC");
+wcsinit.c:    else if (wcs->c1type[0] == 'H')
+wcsinit.c:	strcpy (wcs->radecsys,"HELIOECL");
+wcsinit.c:    else if (wcs->c1type[0] == 'A')
+wcsinit.c:	strcpy (wcs->radecsys,"ALTAZ");
+wcsinit.c:    else if (wcs->c1type[0] == 'L')
+wcsinit.c:	strcpy (wcs->radecsys,"LINEAR");
+wcsinit.c:    wcs->syswcs = wcscsys (wcs->radecsys);
+wcsinit.c: * Oct  1 2003	Rename wcs->naxes to wcs->naxis to match WCSLIB 3.2
+wcsinit.c: * Dec  3 2003	Add back wcs->naxes for backward compatibility
+wcsinit.c: * Feb 15 2007	Check for wcs->wcsproj > 0 instead of CTYPEi != LINEAR or PIXEL
+wcslib.c:*                        World coordinates.  world[wcs->lng] and
+wcslib.c:*                        world[wcs->lat] are the celestial longitude and
+wcslib.c:*      imgcrd   double[] Image coordinate.  imgcrd[wcs->lng] and
+wcslib.c:*                        imgcrd[wcs->lat] are the projected x-, and
+wcslib.c:*                        also returned in imgcrd[wcs->cubeface].
+wcslib.c:*      imgcrd   double[] Image coordinate.  imgcrd[wcs->lng] and
+wcslib.c:*                        imgcrd[wcs->lat] are the projected x-, and
+wcslib.c:*      world    double[] World coordinates.  world[wcs->lng] and
+wcslib.c:*                        world[wcs->lat] are the celestial longitude and
+wcslib.c:*                              world[wcs->lng], latitude returned in
+wcslib.c:*                              world[wcs->lat].
+wcslib.c:*                              world[wcs->lat], longitude returned in
+wcslib.c:*                              world[wcs->lng].
+wcslib.c:*      world    double[] World coordinates.  world[wcs->lng] and
+wcslib.c:*                        world[wcs->lat] are the celestial longitude and
+wcslib.c:*      imgcrd   double[] Image coordinate.  imgcrd[wcs->lng] and
+wcslib.c:*                        imgcrd[wcs->lat] are the projected x-, and
+wcslib.c:   strcpy(wcs->pcode, "");
+wcslib.c:   wcs->lng = -1;
+wcslib.c:   wcs->lat = -1;
+wcslib.c:   wcs->cubeface = -1;
+wcslib.c:            if (wcs->cubeface == -1) {
+wcslib.c:               wcs->cubeface = j;
+wcslib.c:      if (strcmp(wcs->pcode, "") == 0) {
+wcslib.c:         sprintf(wcs->pcode, "%.3s", &ctype[j][5]);
+wcslib.c:            wcs->lng = j;
+wcslib.c:            strcpy(wcs->lngtyp, "RA");
+wcslib.c:            strcpy(wcs->lattyp, "DEC");
+wcslib.c:            ndx = &wcs->lat;
+wcslib.c:            sprintf(requir, "DEC--%s", wcs->pcode);
+wcslib.c:            wcs->lat = j;
+wcslib.c:            strcpy(wcs->lngtyp, "RA");
+wcslib.c:            strcpy(wcs->lattyp, "DEC");
+wcslib.c:            ndx = &wcs->lng;
+wcslib.c:            sprintf(requir, "RA---%s", wcs->pcode);
+wcslib.c:            wcs->lng = j;
+wcslib.c:            sprintf(wcs->lngtyp, "%cLON", ctype[j][0]);
+wcslib.c:            sprintf(wcs->lattyp, "%cLAT", ctype[j][0]);
+wcslib.c:            ndx = &wcs->lat;
+wcslib.c:            sprintf(requir, "%s-%s", wcs->lattyp, wcs->pcode);
+wcslib.c:            wcs->lat = j;
+wcslib.c:            sprintf(wcs->lngtyp, "%cLON", ctype[j][0]);
+wcslib.c:            sprintf(wcs->lattyp, "%cLAT", ctype[j][0]);
+wcslib.c:            ndx = &wcs->lng;
+wcslib.c:            sprintf(requir, "%s-%s", wcs->lngtyp, wcs->pcode);
+wcslib.c:            wcs->lng = j;
+wcslib.c:            sprintf(wcs->lngtyp, "%c%cLN", ctype[j][0], ctype[j][1]);
+wcslib.c:            sprintf(wcs->lattyp, "%c%cLT", ctype[j][0], ctype[j][1]);
+wcslib.c:            ndx = &wcs->lat;
+wcslib.c:            sprintf(requir, "%s-%s", wcs->lattyp, wcs->pcode);
+wcslib.c:            wcs->lat = j;
+wcslib.c:            sprintf(wcs->lngtyp, "%c%cLN", ctype[j][0], ctype[j][1]);
+wcslib.c:            sprintf(wcs->lattyp, "%c%cLT", ctype[j][0], ctype[j][1]);
+wcslib.c:            ndx = &wcs->lng;
+wcslib.c:            sprintf(requir, "%s-%s", wcs->lngtyp, wcs->pcode);
+wcslib.c:   if (strncmp(wcs->pcode, "GLS", 3) == 0) {
+wcslib.c:      strcpy(wcs->pcode, "SFL");
+wcslib.c:   if (strcmp(wcs->pcode, "")) {
+wcslib.c:      wcs->flag = WCSSET;
+wcslib.c:      wcs->flag = 999;
+wcslib.c:   if (wcs->flag != WCSSET) {
+wcslib.c:      if (j == wcs->lng) continue;
+wcslib.c:      if (j == wcs->lat) continue;
+wcslib.c:   if (wcs->flag != 999) {
+wcslib.c:      if (strcmp(wcs->pcode, "NCP") == 0) {
+wcslib.c:         strcpy(wcs->pcode, "SIN");
+wcslib.c:      if ((err = celfwd(wcs->pcode, world[wcs->lng], world[wcs->lat], cel,
+wcslib.c:                   phi, theta, prj, &imgcrd[wcs->lng], &imgcrd[wcs->lat]))) {
+wcslib.c:      if (wcs->cubeface != -1) {
+wcslib.c:         if (imgcrd[wcs->lat] < -0.5*offset) {
+wcslib.c:            imgcrd[wcs->lat] += offset;
+wcslib.c:            imgcrd[wcs->cubeface] = 5.0;
+wcslib.c:         } else if (imgcrd[wcs->lat] > 0.5*offset) {
+wcslib.c:            imgcrd[wcs->lat] -= offset;
+wcslib.c:            imgcrd[wcs->cubeface] = 0.0;
+wcslib.c:         } else if (imgcrd[wcs->lng] > 2.5*offset) {
+wcslib.c:            imgcrd[wcs->lng] -= 3.0*offset;
+wcslib.c:            imgcrd[wcs->cubeface] = 4.0;
+wcslib.c:         } else if (imgcrd[wcs->lng] > 1.5*offset) {
+wcslib.c:            imgcrd[wcs->lng] -= 2.0*offset;
+wcslib.c:            imgcrd[wcs->cubeface] = 3.0;
+wcslib.c:         } else if (imgcrd[wcs->lng] > 0.5*offset) {
+wcslib.c:            imgcrd[wcs->lng] -= offset;
+wcslib.c:            imgcrd[wcs->cubeface] = 2.0;
+wcslib.c:            imgcrd[wcs->cubeface] = 1.0;
+wcslib.c:   if (wcs->flag != WCSSET) {
+wcslib.c:      if (j == wcs->lng) continue;
+wcslib.c:      if (j == wcs->lat) continue;
+wcslib.c:   if (wcs->flag != 999) {
+wcslib.c:      if (wcs->cubeface != -1) {
+wcslib.c:         face = (int)(imgcrd[wcs->cubeface] + 0.5);
+wcslib.c:         if (fabs(imgcrd[wcs->cubeface]-face) > 1e-10) {
+wcslib.c:            imgcrd[wcs->lat] += offset;
+wcslib.c:            imgcrd[wcs->lng] += offset;
+wcslib.c:            imgcrd[wcs->lng] += offset*2;
+wcslib.c:            imgcrd[wcs->lng] += offset*3;
+wcslib.c:            imgcrd[wcs->lat] -= offset;
+wcslib.c:      if (strcmp(wcs->pcode, "NCP") == 0) {
+wcslib.c:         strcpy(wcs->pcode, "SIN");
+wcslib.c:      if ((err = celrev(wcs->pcode, imgcrd[wcs->lng], imgcrd[wcs->lat], prj,
+wcslib.c:                   phi, theta, cel, &world[wcs->lng], &world[wcs->lat]))) {
+wcslib.c:   if (wcs->flag != WCSSET) {
+wcslib.c:         world[wcs->lat] = lat0;
+wcslib.c:         world[wcs->lat] = lat1;
+wcslib.c:               world[wcs->lat] = lat0;
+wcslib.c:                  world[wcs->lat] = lat;
+wcslib.c:               world[wcs->lat] = lat0;
+wcslib.c:               world[wcs->lat] = lat1;
+wcslib.c:                  world[wcs->lat] = lat0m;
+wcslib.c:                  world[wcs->lat] = lat1m;
+wcslib.c:         world[wcs->lng] = lng0;
+wcslib.c:         world[wcs->lng] = lng1;
+wcslib.c:               world[wcs->lng] = lng0;
+wcslib.c:                  world[wcs->lng] = lng;
+wcslib.c:               world[wcs->lng] = lng0;
+wcslib.c:               world[wcs->lng] = lng1;
+wcslib.c:                  world[wcs->lng] = lng0m;
+wcslib.c:                  world[wcs->lng] = lng1m;
+wcslib.c:         if (fabs(fmod(world[wcs->lng]-lng,360.0)) > tol) continue;
+wcslib.c:         world[wcs->lat] = lat;
+wcslib.c:         if (fabs(world[wcs->lat]-lat) > tol) continue;
+wcslib.c:         world[wcs->lng] = lng;
+wcslib.c:      lng = world[wcs->lng];
+wcslib.c:      lat = world[wcs->lat];
+wcslib.c:      world[wcs->lng] = -180.0;
+wcslib.c:      world[wcs->lat] = *theta;
+wcslib.c:         world[wcs->lng] = lng;
+wcslib.c:         world[wcs->lat] = lat;
+wcslib.c:         world[wcs->lng] = phi1;
+wcslib.c:            world[wcs->lng] = lng;
+wcslib.c:            world[wcs->lat] = lat;
+wcslib.c:         world[wcs->lng] = phi0 + lambda*dphi;
+wcslib.c:            world[wcs->lng] = lng;
+wcslib.c:            world[wcs->lat] = lat;
+wcslib.c:            phi0 = world[wcs->lng];
+wcslib.c:            phi1 = world[wcs->lng];
+worldpos.c:  int itype = wcs->prjcode;
+worldpos.c:  xref = wcs->xref;
+worldpos.c:  yref = wcs->yref;
+worldpos.c:  xrefpix = wcs->xrefpix;
+worldpos.c:  yrefpix = wcs->yrefpix;
+worldpos.c:  xinc = wcs->xinc;
+worldpos.c:  yinc = wcs->yinc;
+worldpos.c:  rot = degrad (wcs->rot);
+worldpos.c:  if (wcs->rotmat) {
+worldpos.c:    tx = dx * wcs->cd[0] + dy * wcs->cd[1];
+worldpos.c:    dy = dx * wcs->cd[2] + dy * wcs->cd[3];
+worldpos.c:  if (wcs->coorflip) {
+worldpos.c:  if (wcs->coorflip) {
+worldpos.c:  xref = wcs->xref;
+worldpos.c:  yref = wcs->yref;
+worldpos.c:  xrefpix = wcs->xrefpix;
+worldpos.c:  yrefpix = wcs->yrefpix;
+worldpos.c:  xinc = wcs->xinc;
+worldpos.c:  yinc = wcs->yinc;
+worldpos.c:  rot = degrad (wcs->rot);
+worldpos.c:  itype = wcs->prjcode;
+worldpos.c:    if (wcs->coorflip) {
+worldpos.c:	if (wcs->rotmat)
+worldpos.c:	    l = rap * an * (1.0 - ansq/6.0) * (wcs->cd[0] / fabs(wcs->cd[0]));
+worldpos.c:  if (wcs->coorflip) {
+worldpos.c:  if (wcs->rotmat) {
+worldpos.c:    tx = dx * wcs->dc[0] + dy * wcs->dc[1];
+worldpos.c:    dy = dx * wcs->dc[2] + dy * wcs->dc[3];
+worldpos.c:    if (*xpix > wcs->nxpix) {
+worldpos.c:      if (x <= wcs->nxpix) *xpix = x;
+zpxpos.c:    if (wcs->longpole > 360.0) {
+zpxpos.c:	if (!igetr8 (str1, "longpole", &wcs->longpole)) {
+zpxpos.c:	    if (!igetr8 (str2, "longpole", &wcs->longpole))
+zpxpos.c:		wcs->longpole = 180.0;
+zpxpos.c:    if (!igetr8 (str1, "ro", &wcs->rodeg)) {
+zpxpos.c:	if (!igetr8 (str2, "ro", &wcs->rodeg))
+zpxpos.c:	    wcs->rodeg = 180.0 / PI;
+zpxpos.c:	if (!igetr8 (str1, key, &wcs->prj.p[i]))
+zpxpos.c:	    wcs->prj.p[i] = 0.0;
+zpxpos.c:	    wcs->lngcor = NULL;
+zpxpos.c:	    wcs->lngcor = wf_gsopen (lngstr);
+zpxpos.c:	wcs->lngcor = wf_gsopen (lngstr);
+zpxpos.c:	    wcs->latcor = NULL;
+zpxpos.c:	    wcs->latcor = wf_gsopen (latstr);
+zpxpos.c:	wcs->latcor = wf_gsopen (latstr);
+zpxpos.c:    for (i = 9; i >= 0 && wcs->prj.p[i] == 0.; i--);
+zpxpos.c:    wcs->zpnp = i;
+zpxpos.c:	d1 = wcs->prj.p[1];
+zpxpos.c:	    for (j = wcs->zpnp; j >= 1; j--) {
+zpxpos.c:		d2 = d2 * zd2 + j * wcs->prj.p[j];
+zpxpos.c:		for (j = wcs->zpnp; j >= 1; j--) {
+zpxpos.c:		    d = d * zd + j * wcs->prj.p[j];
+zpxpos.c:	for (j = wcs->zpnp; j >= 0; j--)
+zpxpos.c:	    r = r * zd + wcs->prj.p[j];
+zpxpos.c:	wcs->zpzd = zd;
+zpxpos.c:	wcs->zpr = r;
+zpxpos.c:    if (wcs->latcor == NULL && wcs->lngcor == NULL)
+zpxpos.c:    xpix = xpix - wcs->crpix[0];
+zpxpos.c:    ypix = ypix - wcs->crpix[1];
+zpxpos.c:    if (wcs->rotmat) {
+zpxpos.c:	x = xpix * wcs->cd[0] + ypix * wcs->cd[1];
+zpxpos.c:	y = xpix * wcs->cd[2] + ypix * wcs->cd[3];
+zpxpos.c:	if (wcs->cdelt[0] == 0.0 || wcs->cdelt[1] == 0.0) {
+zpxpos.c:	xs = xpix * wcs->cdelt[0];
+zpxpos.c:	ys = ypix * wcs->cdelt[1];
+zpxpos.c:	if (wcs->rot != 0.0) {
+zpxpos.c:	    double cosr = cos (degrad (wcs->rot));
+zpxpos.c:	    double sinr = sin (degrad (wcs->rot));
+zpxpos.c:    if (wcs->coorflip) {
+zpxpos.c:    colatp = degrad (90.0 - wcs->crval[idec]);
+zpxpos.c:    longp = degrad(wcs->longpole);
+zpxpos.c:    k = wcs->zpnp;
+zpxpos.c:    if (wcs->lngcor != NULL)
+zpxpos.c:	xp = x + wf_gseval (wcs->lngcor, x, y);
+zpxpos.c:    if (wcs->latcor != NULL)
+zpxpos.c:	yp = y + wf_gseval (wcs->latcor, x, y);
+zpxpos.c:    r = sqrt (x * x + y * y) / wcs->rodeg;
+zpxpos.c:        zd = (r - wcs->prj.p[0]) / wcs->prj.p[1];
+zpxpos.c:        a = wcs->prj.p[2];
+zpxpos.c:        b = wcs->prj.p[1];
+zpxpos.c:        c = wcs->prj.p[0] - r;
+zpxpos.c:	r1 = wcs->prj.p[0];
+zpxpos.c:	zd2 = wcs->zpzd;
+zpxpos.c:	r2 = wcs->zpr;
+zpxpos.c:		    rt = (rt * zd) + wcs->prj.p[i];
+zpxpos.c:    ra =  wcs->crval[ira] + raddeg(dlng);
+zpxpos.c:    if (wcs->crval[ira] >= 0.0) {
+zpxpos.c:    if (wcs->coorflip) {
+zpxpos.c:    ra  = degrad (xpos - wcs->crval[ira]);
+zpxpos.c:    colatp = degrad (90.0 - wcs->crval[idec]);
+zpxpos.c:    if (wcs->longpole == 999.0)
+zpxpos.c:	longp = degrad(wcs->longpole);
+zpxpos.c:        r = r * s + wcs->prj.p[i];
+zpxpos.c:    r = wcs->rodeg * r;
+zpxpos.c:    if (wcs->lngcor == NULL && wcs->latcor == NULL) {
+zpxpos.c:	if (wcs->coorflip) {
+zpxpos.c:	    if (wcs->lngcor != NULL) {
+zpxpos.c:		f = x + wf_gseval (wcs->lngcor, x, y) - xm;
+zpxpos.c:		fx = wf_gsder (wcs->lngcor, x, y, 1, 0);
+zpxpos.c:		fy = wf_gsder (wcs->lngcor, x, y, 0, 1);
+zpxpos.c:	    if (wcs->latcor != NULL) {
+zpxpos.c:		g = y + wf_gseval (wcs->latcor, x, y) - ym;
+zpxpos.c:		gx = wf_gsder (wcs->latcor, x, y, 1, 0);
+zpxpos.c:		gy = wf_gsder (wcs->latcor, x, y, 0, 1);
+zpxpos.c:	if (wcs->coorflip) {
+zpxpos.c:    if (wcs->rotmat) {
+zpxpos.c:	*xpix = x * wcs->dc[0] + y * wcs->dc[1];
+zpxpos.c:	*ypix = x * wcs->dc[2] + y * wcs->dc[3];
+zpxpos.c:	if (wcs->rot!=0.0) {
+zpxpos.c:	    double cosr = cos (degrad (wcs->rot));
+zpxpos.c:	    double sinr = sin (degrad (wcs->rot));
+zpxpos.c:	if (wcs->xinc != 0.)
+zpxpos.c:	    *xpix = *xpix / wcs->xinc;
+zpxpos.c:	if (wcs->yinc != 0.)
+zpxpos.c:	    *ypix = *ypix / wcs->yinc;
+zpxpos.c:    *xpix = *xpix + wcs->xrefpix;
+zpxpos.c:    *ypix = *ypix + wcs->yrefpix;
+zpxpos.c:    if (wcs->lngcor != NULL)
+zpxpos.c:	wf_gsclose (wcs->lngcor);
+zpxpos.c:    if (wcs->latcor != NULL)
+zpxpos.c:	wf_gsclose (wcs->latcor);

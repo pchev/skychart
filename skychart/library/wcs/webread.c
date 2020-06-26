@@ -1,9 +1,9 @@
 /*** File webread.c
- *** February 6, 2015
+ *** November 5, 2018
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** (http code from John Roll)
- *** Copyright (C) 2000-2015
+ *** (http code originally from John Roll)
+ *** Copyright (C) 2000-2018
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -411,7 +411,7 @@ int	nlog;		/* 1 to print diagnostic messages */
     char *srchurl;
     int lsrch;
     char *tabbuff;
-    int	lbuff = 0;
+    int	lbuff = 0, lbuff0 = 0;
     char *tabnew, *tabline, *lastline, *tempbuff, *tabold;
     int formfeed = (char) 12;
     struct TabTable *tabtable;
@@ -489,9 +489,13 @@ int	nlog;		/* 1 to print diagnostic messages */
 	    }	
 	if (tempbuff == NULL) {
 	    tempbuff = tabbuff;
+	    lbuff0 = strlen (tabbuff);
 	    tabbuff = space2tab (tempbuff);
 	    lbuff = strlen (tabbuff);
 	    free (tempbuff);
+	    }
+	else {
+	    lbuff = strlen (tabbuff);
 	    }
 	}
     
@@ -539,7 +543,7 @@ int	nlog;		/* 1 to print diagnostic messages */
 	tabline = strchr (tabline,newline) + 1;
 	}
     if (*tabline != '-') {
-	fprintf (stderr,"WEBOPEN: No - line in tab table %s",srchurl);
+	fprintf (stderr,"WEBOPEN: No - line in %d tab table %s",lbuff,srchurl);
 	tabclose (tabtable);
 	free (srchurl);
 	return (NULL);
@@ -662,7 +666,7 @@ int	*lbuff;	/* Length of buffer (returned) */
     newpath = urlpath;
 
     /* Send HTTP GET command */
-    fprintf (sok, "GET %s HTTP/1.1\r\nHost: %s\n\n", newpath, server);
+    fprintf (sok, "GET %s HTTP/1.1\r\nHost: %s\r\n\r\n", newpath, server);
     fflush (sok);
     free (server);
     if (newpath != urlpath) {
@@ -715,7 +719,7 @@ int	*lbuff;	/* Length of buffer (returned) */
 	newpath = urlpath;
 
 	/* Send HTTP GET command (simbad forward fails if HTTP/1.1 included) */
-	fprintf(sok, "GET %s HTTP/1.1\r\nHost: %s\n\n", newpath, server);
+	fprintf(sok, "GET %s HTTP/1.1\r\nHost: %s\r\n\r\n", newpath, server);
 	fflush (sok);
 	free (server);
 	if (newpath != urlpath) {
@@ -728,7 +732,7 @@ int	*lbuff;	/* Length of buffer (returned) */
     /* Skip continue lines
     if (status == 100) {
 	while (status == 100)
-	    fscanf(sok, "%*s %d %*s\n", &status);
+	    fscanf(sok, "%*s %d %*s\r\n", &status);
 	} */
 
     /* If status is not 200 return without data */
@@ -1124,4 +1128,7 @@ char *encodeURL (char *str) {
  *		http://geekhideout.com/urlcode.shtml
  * 
  * Feb  6 2015	Drop URL encoding because GSC2 search fails when used.
+ *
+ * Jan 19 2018	Always use "\r\n" instead of "\n" when writing to socket (from Robert Wiegand)
+ * Nov  5 2018	Fix bug that failed to set lbuff when tab table returned by scat
  */

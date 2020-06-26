@@ -1,8 +1,8 @@
 /*** File libwcs/hput.c
- *** September 9, 2011
+ *** August 28, 2018
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1995-2011
+ *** Copyright (C) 1995-2018
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -544,9 +544,14 @@ const char *value; /* character string containing the value for variable
     strncpy (v1, keyword, lkeyword);
 
     /*  Add parameter value in the appropriate place */
-    vp = v1 + 8;
+    if (lkeyword < 9)
+	vp = v1 + 8;
+    else if (lkeyword < 28) 
+	vp = v1 + 28;
+    else
+	vp = v1 + lkeyword;
     *vp = '=';
-    vp = v1 + 9;
+    vp = vp + 1;
     *vp = ' ';
     vp = vp + 1;
     if (*value == squot) {
@@ -1313,4 +1318,6 @@ int	ndec;		/* Number of decimal places in degree string */
  * Aug 22 2007	If closing quote not found, make one up
  *
  * Sep  9 2011	Always initialize q2 and lroot
- */
+ *
+ * Aug 28 2018	Allow arbitrary length keywords up to 64 characters 
+*/

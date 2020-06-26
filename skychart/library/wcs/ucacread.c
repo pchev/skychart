@@ -1,8 +1,8 @@
 /*** File libwcs/ucacread.c
- *** June 22, 2016
+ *** August 3, 2018
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 2003-2016
+ *** Copyright (C) 2003-2018
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
  This library is free software; you can redistribute it and/or
@@ -145,9 +145,10 @@ char ucac3path[64]="/data/astrocat/ucac3";
 char ucac4path[64]="/data/astrocat/ucac4/u4b";
 
 /* Path name of UCAC4 proper motion catalog */
-char hpmpath[] = "/data/astrocat/ucac4/u4i/u4hpm.dat";
+char ucac4hpmpath[] = "/data/astrocat/ucac4/u4i/u4hpm.dat";
 
 char *ucacpath;
+char *hpmpath;
 static int ucat = 0;
 
 static double *gdist;	/* Array of distances to stars */
@@ -221,13 +222,17 @@ int	nlog;		/* 1 for diagnostics */
     int pass;
     int zone;
     int nmag;
+    int lstr;
     double num, ra, dec, rapm, decpm, mag;
     double rra1, rra2, rdec1, rdec2;
     double rdist, ddist;
     char cstr[32], rastr[32], decstr[32];
     char ucacenv[16];
-    char *str;
+    char *str, *str1;
+    char *hpmfile;
 
+    hpmpath = 0;
+    str1 = 0;
     ntot = 0;
     if (nlog > 0)
 	verbose = 1;
@@ -255,6 +260,8 @@ int	nlog;		/* 1 for diagnostics */
 	ucacpath = ucac4path;
 	strcpy (ucacenv, "UCAC4_PATH");
 	nmag = 10;
+	/* UCAC4 high proper motion catalog */
+	hpmpath = ucac4hpmpath;
 	}
     else {
 	ucat = UCAC1;
@@ -264,11 +271,22 @@ int	nlog;		/* 1 for diagnostics */
 	}
 
     /* If pathname is set in environment, override local value */
-    if ((str = getenv (ucacenv)) != NULL )
+    if ((str = getenv (ucacenv)) != NULL ) {
 	ucacpath = str;
+	if (hpmpath) {
+	    lstr = strlen (ucacpath) + 16;
+	    str1 = (char *) calloc (lstr, sizeof (char));
+	    strcpy (str1, str);
+	    hpmfile = strrchr (str1, '/') + 1;
+	    strcpy (hpmfile, "u4i/u4hpm.dat");
+	    }
+	}
 
     /* If pathname is a URL, search and return */
     if (!strncmp (ucacpath, "http:",5)) {
+	if (str1) {
+	    free ((void *)str1);
+	    }
 	return (webread (ucacpath,refcatname,distsort,cra,cdec,dra,ddec,drad,
                      dradi,sysout,eqout,epout,mag1,mag2,sortmag,nstarmax,
                      gnum,gra,gdec,gpra,gpdec,gmag,gtype,nlog));
@@ -298,6 +316,9 @@ int	nlog;		/* 1 for diagnostics */
 	    free ((void *)gdist);
 	gdist = (double *) malloc (nstarmax * sizeof (double));
 	if (gdist == NULL) {
+	    if (str1) {
+		free ((void *)str1);
+		}
 	    fprintf (stderr,"UCACREAD:  cannot allocate separation array\n");
 	    return (0);
 	    }
@@ -322,6 +343,9 @@ int	nlog;		/* 1 for diagnostics */
     /* Find UCAC Star Catalog zones in which to search */
     nz = ucaczones (rdec1,rdec2,nrmax,zlist,verbose);
     if (nz <= 0) {
+	if (str1) {
+	    free ((void *)str1);
+	    }
 	fprintf (stderr,"UCACREAD:  no UCAC zone for %.2f-%.2f %.2f %.2f\n",
 		 rra1, rra2, rdec1, rdec2);
 	return (0);
@@ -662,6 +686,9 @@ int	nlog;		/* 1 for diagnostics */
 	if (nstar > nstarmax)
 	    fprintf (stderr,"UCACREAD: %d stars found; only %d returned\n",
 		     nstar,nstarmax);
+	}
+    if (str1) {
+	free ((void *)str1);
 	}
     return (nstar);
 }
@@ -1930,4 +1957,6 @@ ucacswap4 (string)
  * Jun 12 2015	Fix UCAC4 support to include BVgriJHK magnitudes correctly
  *
  * Jun 22 2016	Remove extra variables from format string (via Ole Streicher)
+ *
+ * Aug  3 2018	Fix bug to set up UCAC4 hpm file path if environment UCAC4_PATH used
  */

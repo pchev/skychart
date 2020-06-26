@@ -1,6 +1,13 @@
 WCSTools WCS subroutine library release history
 
-Version 3.9.5 (March 30, 2017)
+Version 3.9.5 (October 29, 2019)
+datutil.c: In agets(), drop trailing commas, underscores, spaces (2019-10-29)
+dateutil.c: Add ang2sec() and deg2sec() to convert to arcseconds (2019-09-24)
+dateutil.c: Allocate new output string for fd2ofd() and fd2oft() (2017-05-02)
+fitsfile.c: Increase header length default to 288000 = 100 blocks (2019-09-23)
+hput.c: Allow arbitrary length keywords up to 64 characters (2018-08-28)
+wcs.c: Change strcpy() to strncpy() where destination shorter than origin (2017-12-12)
+wcsinit.c: Read up to 16 characters for ctype[2] and ctype[3] (2018-05-21)
 
 Version 3.9.4 (August 2, 2016) (after Ole Streicher)
 wcs.c: Clean up use of ptype so it is always 3 characters long

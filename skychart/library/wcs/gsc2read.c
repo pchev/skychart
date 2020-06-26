@@ -1,8 +1,8 @@
 /*** File libwcs/gsc2read.c
- *** March 24, 2015
+ *** August 7, 2018
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 2001-2015
+ *** Copyright (C) 2001-2018
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -158,6 +158,7 @@ int	nlog;		/* 1 for diagnostics */
     starcat->equinox = 2000.0;
 
     /* Extract desired sources from catalog  and return them */
+    settabkey ("gsc2ID");
     nstar = tabread (gsc2url,distsort,cra,cdec,dra,ddec,drad,dradi,
 	     sysout,eqout,epout,mag1,mag2,sortmag,nstarmax,&starcat,
 	     gnum,gra,gdec,gpra,gpdec,gmag,gtype,gobj,nlog);
@@ -390,4 +391,6 @@ gsc2t2t (tsvbuff)
  * Aug 29 2014	Add line of dashes after header to returned table
  *
  * Mar 24 2015	Drop concatenation of "empty" string to search URL
+ *
+ * Aug  7 2018	Set extra table keyword to objID
  */

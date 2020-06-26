@@ -1,8 +1,8 @@
 /*** File libwcs/wcs.c
- *** June 24, 2016
+ *** December 12, 2017
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1994-2016
+ *** Copyright (C) 1994-2017
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -150,6 +150,7 @@ char	*proj;	/* Projection */
 {
     struct WorldCoor *wcs;
     double cdelt1, cdelt2;
+    int lproj;
 
     wcs = (struct WorldCoor *) calloc (1, sizeof(struct WorldCoor));
 
@@ -191,8 +192,11 @@ char	*proj;	/* Projection */
     wcs->ptype[3] = (char) 0;
     strcpy (wcs->ctype[0],"RA---");
     strcpy (wcs->ctype[1],"DEC--");
-    strcat (wcs->ctype[0],proj);
-    strcat (wcs->ctype[1],proj);
+    lproj = strlen (proj);
+    if (lproj > 15)
+	lproj = 15; 
+    strncat (wcs->ctype[0],proj, lproj);
+    strncat (wcs->ctype[1],proj, lproj);
 
     if (wcstype (wcs, wcs->ctype[0], wcs->ctype[1])) {
 	wcsfree (wcs);
@@ -346,6 +350,7 @@ char	*ctype2;	/* FITS WCS projection for axis 2 */
     int nctype = NWCSTYPE;
     char ctypes[NWCSTYPE][4];
     char dtypes[10][4];
+    int lctype1;
 
     /* Initialize projection types */
     strcpy (ctypes[0], "LIN");
@@ -389,7 +394,8 @@ char	*ctype2;	/* FITS WCS projection for axis 2 */
     if (!strncmp (ctype1, "LONG",4))
 	strncpy (ctype1, "XLON",4);
 
-    strcpy (wcs->ctype[0], ctype1);
+    lctype1 = strlen (ctype1) + 1;
+    strncpy (wcs->ctype[0], ctype1, lctype1);
 
     /* This is only to catch special non-standard projections */
     strncpy (wcs->ptype, ctype1, 3);
@@ -2468,10 +2474,14 @@ struct WorldCoor *wcs;  /* WCS parameter structure */
 void
 setwcsfile (filename)
 char *filename;	/* FITS or IRAF file with WCS */
-{   if (strlen (filename) < 256)
-	strcpy (wcsfile, filename);
-    else
+{  
+    int lfn = strlen (filename) + 1;
+    if (lfn < 257)
+	strncpy (wcsfile, filename, lfn);
+    else {
 	strncpy (wcsfile, filename, 255);
+	wcsfile[255] = (char) 0;
+	}
     return; }
 
 /* Set error message */
@@ -3015,4 +3025,6 @@ char *cwcs;	/* Keyword suffix character for output WCS */
  * Jun  8 2016	Increase ctype, ctype1, and ctype2 to 16 characters for distortion
  * Jun 23 2016	Set initial allocation of keyword arrays to MAXNKWD instead of 100 in cpwcs()
  * Jun 24 2016	wcs->ptype contains only 3-letter projection code
+ *
+ * Dec 12 2017	Change strcpy() to strncpy() where destination variable shorter than origin
  */

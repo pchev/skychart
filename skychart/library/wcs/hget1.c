@@ -1,8 +1,8 @@
 /*** File libwcs/hget.c
- *** September 23, 2019
+ *** August 27, 2018
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1994-2019
+ *** Copyright (C) 1994-2018
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -58,7 +58,7 @@
  * Subroutine:	strfix (string,blankfill,zerodrop) removes extraneous characters
  */
 
-#include <string.h>	/* NULL, strlen, strstr, strcpy */
+#include <string.h>		/* NULL, strlen, strstr, strcpy */
 #include <stdio.h>
 #include "fitshead.h"	/* FITS header extraction subroutines */
 #include <stdlib.h>
@@ -69,7 +69,6 @@
 #define SHRT_MAX 32767
 #endif
 #define VLENGTH 81
-#define LHEAD0 288000	/* Maximum number of characters to search in header */
 
 #ifdef USE_SAOLIB
 static int use_saolib=0;
@@ -91,14 +90,10 @@ int	lhead;	/* Maximum length of FITS header */
     char *hend;
     if (lhead > 0)
 	lhead0 = lhead;
-
-    else if (lhead == 0) {
+    else {
 	lhead0 = 0;
 	hend = ksearch (header,"END");
 	lhead0 = hend + 80 - header;
-	}
-    else {
-	lhead0 = 0;
 	}
     return (lhead0);
 }
@@ -130,7 +125,7 @@ const char *keyword;	/* character string containing the name of the keyword
 const char *wchar;	/* Character of multiple WCS header; =0 if unused */
 int	*ival;		/* Keyword value returned */
 {
-    char keyword1[16];
+    char keyword1[64];
     int lkey;
 
     if (wchar[0] < (char) 64)
@@ -383,7 +378,7 @@ const char *keyword;	/* character string containing the name of the keyword
 const char *wchar;	/* Character of multiple WCS header; =0 if unused */
 double	*dval;		/* Keyword value returned */
 {
-    char keyword1[16];
+    char keyword1[64];
     int lkey;
 
     if (wchar[0] < (char) 64)
@@ -747,16 +742,23 @@ const char *wchar;	/* Character of multiple WCS header; =0 if unused */
 const int lstr;		/* Size of str in characters */
 char	*str;		/* String (returned) */
 {
-    char keyword1[16];
+    char keyword1[64];
     int lkey;
 
     if (wchar[0] < (char) 64)
 	return (hgets (hstring, keyword, lstr, str));
     else {
-	strcpy (keyword1, keyword);
 	lkey = strlen (keyword);
-	keyword1[lkey] = wchar[0];
-	keyword1[lkey+1] = (char) 0;
+	if (lkey < 8) {
+	    strncpy (keyword1, keyword, lkey);
+	    keyword1[lkey] = wchar[0];
+	    keyword1[lkey+1] = (char) 0;
+	    }
+	else {
+	    strncpy (keyword1, keyword, 7);
+	    keyword1[7] = wchar[0];
+	    keyword1[8] = (char) 0;
+	    }
 	return (hgets (hstring, keyword1, lstr, str));
 	}
 }
@@ -1090,18 +1092,20 @@ const char *keyword;	/* character string containing the name of the variable
 		or '$'.  it is truncated to 8 characters. */
 {
     const char *headlast;
-    char *loc, *headnext, *pval, *lc, *line;
+    char *loc, *headnext, *pval, *lc, *line, *loc1;
     char *bval;
     int icol, nextchar, lkey, nleft, lhstr;
+    char keywordh[80];
 
     pval = 0;
+    strcpy (keywordh,"HIERARCH ");
 
     /* Search header string for variable name */
     if (lhead0)
 	lhstr = lhead0;
     else {
 	lhstr = 0;
-	while (lhstr < LHEAD0 && hstring[lhstr] != 0)
+	while (lhstr < 256000 && hstring[lhstr] != 0)
 	    lhstr++;
 	}
     headlast = hstring + lhstr;
@@ -1120,9 +1124,29 @@ const char *keyword;	/* character string containing the name of the variable
 	lkey = strlen (keyword);
 	nextchar = (int) *(loc + lkey);
 
-	/* If this is not in the first 8 characters of a line, keep searching */
-	if (icol > 7)
-	    headnext = loc + 1;
+	/* If string match is not in the first 8 characters of a line */
+	if (icol > 7) {
+
+	    /* Check for ESO HIERARCH preceding keyword */
+	    strcat (keywordh, keyword);
+	    loc1 = strncsrch (headnext, keywordh, nleft);
+
+	    /* If HIERARCH string is found, get value */
+	    if (loc1 != NULL) {
+		icol = (loc1 - hstring) % 80;
+		lkey = strlen (keywordh);
+		nextchar = (int) *(loc1 + lkey);
+		line = loc - icol;
+		pval = line;
+		}
+
+	    /* Otherwise keep searching */
+	    else {
+		headnext = loc + 1;
+		}
+
+	    keywordh[9] = (char) 0;
+	    }
 
 	/* If parameter name in header is longer, keep searching */
 	else if (nextchar != 61 && nextchar > 32 && nextchar < 127)
@@ -1187,8 +1211,9 @@ const char *keyword;	/* character string containing the name of the variable
 		or '$'.  it is truncated to 8 characters. */
 {
     const char *headlast;
-    char *loc, *headnext, *pval, *lc, *line;
-    int icol, nextchar, lkey, nleft, lhead, lmax;
+    char *loc, *loc1, *headnext, *pval, *lc, *line, nextchar, nextchar1;
+    char keywordh[80];
+    int icol, lkey, nleft, lhead, lmax;
 
 #ifdef USE_SAOLIB
 	int iel=1, ip=1, nel, np, ier;
@@ -1198,12 +1223,13 @@ const char *keyword;	/* character string containing the name of the variable
 #endif
 
     pval = 0;
+    strcpy (keywordh,"HIERARCH ");
 
 /* Find current length of header string */
-    if (lhead0 > 0)
+    if (lhead0)
 	lmax = lhead0;
     else
-	lmax = LHEAD0;
+	lmax = 256000;
     for (lhead = 0; lhead < lmax; lhead++) {
 	if (hstring[lhead] <= (char) 0)
 	    break;
@@ -1224,15 +1250,48 @@ const char *keyword;	/* character string containing the name of the variable
 
 	icol = (loc - hstring) % 80;
 	lkey = strlen (keyword);
-	nextchar = (int) *(loc + lkey);
+	nextchar = *(loc + lkey);
 
-	/* If this is not in the first 8 characters of a line, keep searching */
-	if (icol > 7)
-	    headnext = loc + 1;
+	/* If string match is not in the first 8 characters of a line */
+	if (icol > 7) {
+
+	    /* Check for ESO HIERARCH preceding keyword */
+	    strcat (keywordh, keyword);
+	    loc1 = strncsrch (headnext, keywordh, nleft);
+
+	    /* If HIERARCH string is found, get value */
+	    if (loc1 != NULL) {
+		icol = (loc1 - hstring) % 80;
+		lkey = strlen (keywordh);
+		nextchar = *(loc1 + lkey);
+		nextchar1 = *(loc1 + lkey + 1);
+		if (nextchar == '=' ||
+		   (nextchar == ' ' && nextchar1 == '=') ||
+		   (nextchar == ' ' && nextchar1 == ' ') )  {
+		    line = loc - icol;
+		    pval = line;
+		    }
+
+		/* Otherwise keep searching */
+		else {
+		    headnext = loc + 1;
+		    }
+		}
+
+	    /* Otherwise keep searching */
+	    else {
+		headnext = loc + 1;
+		}
+
+	    keywordh[9] = (char) 0;
+	    }
 
 	/* If parameter name in header is longer, keep searching */
-	else if (nextchar != 61 && nextchar > 32 && nextchar < 127)
+	else if (nextchar != (char)61 &&
+		 nextchar > (char)32 && 
+		 nextchar < (char)127 ) {
 	    headnext = loc + 1;
+	    }
 
 	/* If preceeding characters in line are not blanks, keep searching */
 	else {
@@ -1926,5 +1985,7 @@ int	dropzero;	/* If nonzero, drop trailing zeroes */
  *
  * Jun  9 2016	Fix isnum() tests for added coloned times and dashed dates
  *
- * Sep 23 2019	Add -1 argument to hlen()
+ * Dec 12 2017	Compare source and destination string sizes before strcpy()
+ *
+ * Aug 27 2018	Finish implementing long keywords, with or without HIERARCH
  */

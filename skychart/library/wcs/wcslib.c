@@ -392,7 +392,7 @@
 #include "wcslib.h"
 
 /* Map error number to error message for each function. */
-const char *wcsset1_errmsg[] = {
+const char *wcsset_errmsg[] = {
    0,
    "Inconsistent or unrecognized coordinate axis types"};
 
@@ -403,7 +403,7 @@ const char *wcsfwd_errmsg[] = {
    "Invalid world coordinate",
    "Invalid linear transformation parameters"};
 
-const char *wcsrev1_errmsg[] = {
+const char *wcsrev_errmsg[] = {
    0,
    "Invalid coordinate transformation parameters",
    "Invalid projection parameters",

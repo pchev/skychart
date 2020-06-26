@@ -375,9 +375,9 @@ struct wcsprm {
    int wcsset1(), wcsfwd(), wcsrev1(), wcsmix();
 #endif
 
-extern const char *wcsset1_errmsg[];
+extern const char *wcsset_errmsg[];
 extern const char *wcsfwd_errmsg[];
-extern const char *wcsrev1_errmsg[];
+extern const char *wcsrev_errmsg[];
 extern const char *wcsmix_errmsg[];
 
 #define WCSSET 137

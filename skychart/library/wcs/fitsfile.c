@@ -1,8 +1,8 @@
 /*** File libwcs/fitsfile.c
- *** June 24, 2016
+ *** September 23, 2019
  *** By Jessica Mink, jmink@cfa.harvard.edu
  *** Harvard-Smithsonian Center for Astrophysics
- *** Copyright (C) 1996-2016
+ *** Copyright (C) 1996-2019
  *** Smithsonian Astrophysical Observatory, Cambridge, MA, USA
 
     This library is free software; you can redistribute it and/or
@@ -200,7 +200,7 @@ int	*nbhead;	/* Number of bytes before start of data (returned) */
     nbytes = FITSBLOCK;
     *nbhead = 0;
     headend = NULL;
-    nbh = FITSBLOCK * 20 + 4;
+    nbh = FITSBLOCK * 100 + 4;
     header = (char *) calloc ((unsigned int) nbh, 1);
     (void) hlength (header, nbh);
     headnext = header;
@@ -2325,4 +2325,6 @@ char *from, *last, *to;
  *
  * Jun  9 2016	Fix isnum() tests for added coloned times and dashed dates
  * Jun 24 2016	Add 1 to allocation of pheader for trailing null, fix by Ole Streicher
+ *
+ * Sep 23 2019	Increase header length default to 288000 = 100 blocks
  */
