@@ -116,20 +116,24 @@ BEGIN
 END  ;
 
 procedure ReadData;
-var i,p :integer;
+var i,p,rjra :integer;
     ar,de,sde : double;
     buf : shortstring;
+    x,y: integer;
 const blanc='                                                                  ';
 begin
 writeln('gcvs_cat.dat');
 Assignfile(F,pathi+PathDelim+'gcvs_cat.dat');
 Reset(F);
 i:=0;
+rjra:=0;
 repeat
   Readln(F,buf);
-  buf:=buf+blanc;
-  move(buf,lin1,sizeof(lin1));
-  if lin1.arh='  ' then continue;
+  buf:=buf+blanc+blanc+blanc+blanc;
+  x:=length(buf);
+  y:=sizeof(lin1);
+  move(buf,lin1,min(x,y));
+  if lin1.arh='  ' then begin inc(rjra); continue; end;
   sde:=strtofloat(lin1.sde+'1');
   de := sde*strtofloat(lin1.ded)+sde*strtofloat(lin1.dem)/60 ;
   if trim(lin1.des)>'' then de:=de+sde*strtofloat(lin1.des)/3600;
@@ -161,7 +165,9 @@ repeat
   inp[i]:=out;
 until eof(F);
 Close(F);
-writeln('tot stars '+inttostr(i));
+writeln('valid stars '+inttostr(i));
+writeln('rejected missing coordinates '+inttostr(rjra));
+writeln('total stars '+inttostr(i+rjra));
 
 nl:=i;
 end;

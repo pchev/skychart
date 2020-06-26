@@ -7,7 +7,6 @@
         <MainUnitHasCreateFormStatements Value="False"/>
         <MainUnitHasTitleStatement Value="False"/>
         <MainUnitHasScaledStatement Value="False"/>
-        <UseDefaultCompilerOptions Value="True"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
@@ -23,9 +22,6 @@
           <Target>
             <Filename Value="convgcvs"/>
           </Target>
-          <SearchPaths>
-            <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
-          </SearchPaths>
           <CodeGeneration>
             <TargetCPU Value="i386"/>
             <TargetOS Value="win32"/>
