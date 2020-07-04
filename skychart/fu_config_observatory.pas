@@ -449,8 +449,6 @@ begin
     countrylist.Visible := False;
   end;
   TZComboBox.Clear;
-  TZComboBox.ItemIndex := -1;
-  j := 0;
   for i := 0 to csc.tz.ZoneTabCnty.Count - 1 do
   begin
     if csc.tz.ZoneTabCnty[i] = isocode then
@@ -460,10 +458,9 @@ begin
         buf := buf + ' (' + csc.tz.ZoneTabComment[i] + ')';
       if (isocode = 'ZZ') then
         buf := TzGMT2UTC(buf);
-      TZComboBox.Items.Add(buf);
-      if (TZComboBox.ItemIndex = -1) and (csc.tz.ZoneTabZone[i] = csc.ObsTZ) then
+      j:=TZComboBox.Items.Add(buf);
+      if (csc.tz.ZoneTabZone[i] = csc.ObsTZ) then
         TZComboBox.ItemIndex := j;
-      Inc(j);
     end;
   end;
   if (TZComboBox.ItemIndex = -1) then
@@ -496,8 +493,6 @@ begin
     countrylist.Visible := False;
   end;
   TZComboBox.Clear;
-  TZComboBox.ItemIndex := -1;
-  j := 0;
   for i := 0 to csc.tz.ZoneTabCnty.Count - 1 do
   begin
     if csc.tz.ZoneTabCnty[i] = isocode then
@@ -507,8 +502,8 @@ begin
         buf := buf + ' (' + csc.tz.ZoneTabComment[i] + ')';
       if (isocode = 'ZZ') then
         buf := TzGMT2UTC(buf);
-      TZComboBox.Items.Add(buf);
-      if (TZComboBox.ItemIndex = -1) and (csc.tz.ZoneTabZone[i] = csc.ObsTZ) then
+      j:=TZComboBox.Items.Add(buf);
+      if (csc.tz.ZoneTabZone[i] = csc.ObsTZ) then
         TZComboBox.ItemIndex := j;
       Inc(j);
     end;

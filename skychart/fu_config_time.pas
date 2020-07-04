@@ -421,7 +421,12 @@ begin
   if copy(csc.ObsTZ, 1, 3) = 'Etc' then
     TZComboBox.ItemIndex := TZComboBox.Items.IndexOf(TzGMT2UTC(csc.ObsTZ))
   else
-    TZComboBox.ItemIndex := TZComboBox.Items.IndexOf(csc.ObsTZ);
+    for i:=0 to TZComboBox.Items.Count-1 do begin
+      if copy(TZComboBox.Items[i],1,length(csc.ObsTZ))=csc.ObsTZ then begin
+        TZComboBox.ItemIndex := i;
+        break;
+      end;
+    end;
   Application.ProcessMessages;
   LockChange := False;
 end;
