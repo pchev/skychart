@@ -1451,7 +1451,7 @@ begin
         end;
         lnum := 1;
         lp := 2;
-        if (rec.star.magv > catalog.cfgcat.StarMagMax) then
+        if catalog.cfgshr.StarFilter and (rec.star.magv > catalog.cfgcat.StarMagMax) then
           continue;
         if First then
         begin
