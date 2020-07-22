@@ -387,8 +387,8 @@ type
     function cmd_GetChartEqsys: string;
     function cmd_SetChartEquinox(equinox: string): string;
     function cmd_SetFieldnumber(field: string): string;
-    function cmd_SetRa(param1: string): string;
-    function cmd_SetDec(param1: string): string;
+    function cmd_SetRa(param1: string; strict:boolean=false): string;
+    function cmd_SetDec(param1: string; strict:boolean=false): string;
     function cmd_SetDate(dt: string): string;
     function cmd_SetObs(obs: string): string;
     function cmd_IdentCursor: string;
@@ -4891,7 +4891,7 @@ begin
     result:=msgFailed+' wrong parameter';
 end;
 
-function Tf_chart.cmd_SetRa(param1: string): string;
+function Tf_chart.cmd_SetRa(param1: string; strict:boolean=false): string;
 var
   buf: string;
   p: integer;
@@ -4901,9 +4901,15 @@ begin
   try
     p := pos('RA:', param1);
     if p > 0 then
+      buf := copy(param1, p + 3, 999)
+    else
+      if strict then
+        exit
+      else
+        buf := trim(param1);
+    p := pos('h', buf);
+    if p > 0 then
     begin
-      buf := copy(param1, p + 3, 999);
-      p := pos('h', buf);
       ar := strtofloat(copy(buf, 1, p - 1));
       buf := copy(buf, p + 1, 999);
       p := pos('m', buf);
@@ -4914,7 +4920,7 @@ begin
     end
     else
     begin
-      ar := strtofloat(param1);
+      ar := strtofloat(buf);
     end;
     Result := msgOK;
     if (ar >= 0) and (ar < 24) then begin
@@ -4936,7 +4942,7 @@ begin
   end;
 end;
 
-function Tf_chart.cmd_SetDec(param1: string): string;
+function Tf_chart.cmd_SetDec(param1: string; strict:boolean=false): string;
 var
   buf: string;
   p: integer;
@@ -4946,11 +4952,17 @@ begin
   try
     p := pos('DEC:', param1);
     if p > 0 then
+      buf := copy(param1, p + 4, 999)
+    else
+      if strict then
+        exit
+      else
+        buf := trim(param1);
+    p := pos('d', buf);
+    if p = 0 then
+      p := pos(#176, buf); // °
+    if p > 0 then
     begin
-      buf := copy(param1, p + 4, 999);
-      p := pos('d', buf);
-      if p = 0 then
-        p := pos(#176, buf); // °
       de := strtofloat(copy(buf, 1, p - 1));
       s := sgn(de);
       buf := copy(buf, p + 1, 999);
@@ -4968,7 +4980,7 @@ begin
     end
     else
     begin
-      de := strtofloat(param1);
+      de := strtofloat(buf);
     end;
     Result := msgOK;
     if (de >= -90) and (de <= 90) then begin
@@ -6495,8 +6507,8 @@ begin
     54: Result := cmd_GetTZ;
     55:
     begin
-      cmd_SetRa(arg[1]);
-      cmd_SetDec(arg[2]);
+      cmd_SetRa(arg[1],true);
+      cmd_SetDec(arg[2],true);
       cmd_SetFov(arg[3]);
       Refresh(True, True);
     end;
