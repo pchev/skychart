@@ -1419,7 +1419,7 @@ begin
     if (not ScopeConnected) or (not FCanParkUnpark) then
     begin
       ButtonPark.Enabled := False;
-      parkled.brush.color := clRed;
+      parkled.brush.color := clGray;
     end
     else
     begin

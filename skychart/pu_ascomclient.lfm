@@ -462,13 +462,13 @@ object pop_scope: Tpop_scope
       ParentFont = False
       object GroupBox1: TGroupBox
         Left = 0
-        Height = 146
+        Height = 147
         Top = 0
-        Width = 301
+        Width = 304
         Align = alClient
         Caption = 'Driver Selection'
-        ClientHeight = 126
-        ClientWidth = 299
+        ClientHeight = 127
+        ClientWidth = 302
         ParentFont = False
         TabOrder = 0
         object ButtonSelect: TSpeedButton
@@ -482,9 +482,9 @@ object pop_scope: Tpop_scope
         end
         object Label1: TLabel
           Left = 2
-          Height = 18
+          Height = 17
           Top = 57
-          Width = 78
+          Width = 83
           Caption = 'Refresh rate :'
           ParentColor = False
           ParentFont = False
@@ -707,14 +707,14 @@ object pop_scope: Tpop_scope
   object Timer1: TTimer
     Enabled = False
     OnTimer = Timer1Timer
-    left = 16
-    top = 501
+    Left = 16
+    Top = 501
   end
   object StopMoveTimer: TTimer
     Enabled = False
     Interval = 100
     OnTimer = StopMoveTimerTimer
-    left = 146
-    top = 501
+    Left = 146
+    Top = 501
   end
 end
