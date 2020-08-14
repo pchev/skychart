@@ -13,17 +13,24 @@ object f_getdss: Tf_getdss
   ParentFont = True
   LCLVersion = '1.6.0.2'
   Visible = False
-  object Memo1: TMemo
+  object Memo1: TIpHtmlPanel
     Left = 8
     Height = 232
     Top = 32
     Width = 406
-    Lines.Strings = (
-      'Memo1'
-    )
-    ScrollBars = ssAutoBoth
-    TabOrder = 0
-    Visible = False
+    FixedTypeface = 'Courier'
+    DefaultTypeFace = 'default'
+    DefaultFontSize = 12
+    FlagErrors = False
+    PrintSettings.MarginLeft = 0.5
+    PrintSettings.MarginTop = 0.5
+    PrintSettings.MarginRight = 0.5
+    PrintSettings.MarginBottom = 0.5
+    PrintSettings.Preview.Left = 420
+    PrintSettings.Preview.Top = 262
+    PrintSettings.Preview.Width = 1260
+    PrintSettings.Preview.Height = 787
+    TabOrder = 3
   end
   object ListBox1: TListBox
     Left = 8

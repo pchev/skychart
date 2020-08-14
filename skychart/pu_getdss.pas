@@ -30,7 +30,7 @@ interface
 
 uses
   u_help, u_translation, UScaleDPI,
-  dynlibs, u_constant, u_util, Math, LazUTF8,
+  dynlibs, u_constant, u_util, Math, LazUTF8, IpHtml,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, LResources, downloaddialog, LazHelpHTML_fix;
 
@@ -73,11 +73,11 @@ type
 
   Tf_getdss = class(TForm)
     DownloadDialog1: TDownloadDialog;
+    Memo1: TIpHtmlPanel;
     ListBox1: TListBox;
     Label1: TLabel;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
-    Memo1: TMemo;
     procedure BitBtn2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -187,6 +187,7 @@ end;
 function Tf_getdss.GetDss(ra, de, fov, ratio: double; imgx: integer): boolean;
 var
   i: SImageConfig;
+  errtxt:TMemoryStream;
   pl: Plate_data;
   gzbuf: array[0..4095] of char;
   rc, datasource, n, l, imgy: integer;
@@ -311,12 +312,13 @@ begin
         Caption := rsError;
         Label1.Caption := DownloadDialog1.ResponseText;
         RenameFile(ExpandFileName(cfgdss.dssfile), ExpandFileName(cfgdss.dssfile) + '.txt');
-        memo1.Visible := True;
+        Memo1.Visible:=true;
         ListBox1.Visible := False;
         BitBtn1.Visible := False;
-        memo1.Clear;
-        memo1.Lines.LoadFromFile((ExpandFileName(cfgdss.dssfile) + '.txt'));
-        memo1.Text := 'Response from server:' + crlf + striphtml(memo1.Text);
+        errtxt:=TMemoryStream.Create;
+        errtxt.LoadFromFile((ExpandFileName(cfgdss.dssfile) + '.txt'));
+        Memo1.SetHtmlFromStream(errtxt);
+        errtxt.Free;
         Show;
       end;
 
