@@ -190,6 +190,7 @@ begin
       c.x2 := double(intpower(x2 - x1, 2))
   else
     c.x2 := double(intpower(c.BxGlb * pid2, 2));
+  if c.fov > pi then c.x2 := c.x2/2;
 end;
 
 function RotationAngle(x1, y1, x2, y2: double; c: Tconf_skychart): double;
