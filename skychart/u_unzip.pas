@@ -93,8 +93,17 @@ begin
 end;
 
 procedure change_file_date(const filename: PChar; dosdate: longword; tmu_date: tm_unz);
+var fd: double;
+    sd: LongInt;
 begin
+  {$ifdef mswindows}
   FileSetDate(filename, dosdate);
+  {$else}
+  fd:=EncodeDate(tmu_date.tm_year,tmu_date.tm_mon,tmu_date.tm_mday);
+  fd:=fd+EncodeTime(tmu_date.tm_hour,tmu_date.tm_min,tmu_date.tm_sec,0);
+  sd:=DateTimeToFileDate(fd);
+  FileSetDate(string(filename), sd);
+  {$endif}
 end;
 
 
