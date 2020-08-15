@@ -2269,7 +2269,7 @@ begin
     begin
       val(Value, x, n);
       if n = 0 then
-        csc.circle[Arow, 3] := x
+        csc.circle[Arow, 3] := abs(x)
       else
         beep;
     end;
@@ -2341,7 +2341,7 @@ begin
     begin
       val(Value, x, n);
       if n = 0 then
-        csc.rectangle[Arow, 4] := x
+        csc.rectangle[Arow, 4] := abs(x)
       else
         beep;
     end;
