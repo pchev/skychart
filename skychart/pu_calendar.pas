@@ -3213,7 +3213,7 @@ procedure Tf_calendar.DownloadTle;
 var
   fn, ext: string;
   i, n: integer;
-  ok, zipfile: boolean;
+  ok, zipfile,qsmagfile: boolean;
 
   procedure ArchiveFile(fn, destdir: string);
   var
@@ -3298,6 +3298,7 @@ begin
       DownloadMemo.SelStart := length(DownloadMemo.Text) - 1;
       ext := LowerCase(ExtractFileExt(DownloadDialog1.URL));
       zipfile := (ext = '.zip');
+      qsmagfile := pos('qsmag',DownloadDialog1.URL)>0;
       fn := slash(SatDir) + ExtractFileName(DownloadDialog1.URL);
       DownloadDialog1.SaveToFile := fn;
       if DownloadDialog1.Execute then
@@ -3310,9 +3311,11 @@ begin
       end
       else
       begin
+       if not qsmagfile then begin
         ShowMessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
         ok := False;
         break;
+       end;
       end;
     end;
     if ok then
