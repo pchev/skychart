@@ -172,6 +172,8 @@ end;
 procedure TVO_Catalogs.LoadCats;
 var
   i: integer;
+  f:textfile;
+  buf:string;
 begin
   FCatList.Clear;
   votable := False;
@@ -184,13 +186,20 @@ begin
   aurl := False;
   i := pos('?', FListUrl);
   base_url := copy(FListUrl, 1, i) + '-source=';
-  XmlScanner.LoadFromFile(slash(Fvopath) + vo_list[Fvo_source]);
-  XmlScanner.Execute;
+  AssignFile(f,slash(Fvopath) + vo_list[Fvo_source]);
+  Reset(f);
+  ReadLn(f,buf);
+  CloseFile(f);
+  if LowerCase(copy(buf,1,5))='<?xml' then begin
+    XmlScanner.LoadFromFile(slash(Fvopath) + vo_list[Fvo_source]);
+    XmlScanner.Execute;
+  end;
 end;
 
 procedure TVO_Catalogs.GetCats;
 var
-  url: string;
+  url,buf: string;
+  stime: double;
 begin
   url := FListUrl;
   http.Clear;
@@ -220,10 +229,11 @@ begin
     if Fproxypass <> '' then
       http.ProxyPass := Fproxypass;
   end;
-  http.Timeout := 10000;
+  http.Timeout := 60000;
   http.Sock.ConnectionTimeout:=10000;
   http.Sock.OnStatus := httpstatus;
   Sockreadcount := 0;
+  stime:=now;
   if http.HTTPMethod('GET', url) and ((http.ResultCode = 200) or
     (http.ResultCode = 0)) then
   begin
@@ -235,7 +245,9 @@ begin
   end
   else
   begin
-    FLastErr := 'Error: ' + IntToStr(http.ResultCode) + ' ' + http.ResultString;
+    buf:=http.ResultString;
+    if (buf='')and(http.ResultCode=0) then buf:='No response from server after '+IntToStr(round((now-stime)*SecsPerDay))+' seconds';
+    FLastErr := 'Error: ' + IntToStr(http.ResultCode) + ' ' +buf;
     if Assigned(FDownloadFeedback) then
       FDownloadFeedback(FLastErr);
   end;
