@@ -56,11 +56,11 @@ const
     ('http://vizier.cfa.harvard.edu/viz-bin/votable?', 'VizieR at CFA Harvard - USA'),
     ('http://vizier.hia.nrc.ca/viz-bin/votable?', 'VizieR at CADC - Canada'),
     ('http://vizier.nao.ac.jp/viz-bin/votable?', 'VizieR at ADAC - Tokyo, Japan'),
-    ('http://urania.iucaa.ernet.in/viz-bin/votable?', 'VizieR at IUCAA - Pune, India'),
-    ('http://data.bao.ac.cn/viz-bin/votable?', 'VizieR at Bejing Obs. - China'),
-    ('http://archive.ast.cam.ac.uk/viz-bin/votable?', 'VizieR at Cambridge - UK'),
-    ('http://www.ukirt.jach.hawaii.edu/viz-bin/votable?', 'VizieR at JAC, Hawaii - USA'),
-    ('http://vizier.inasan.ru/viz-bin/votable?', 'VizieR at INASAN, Moscow, Russia'),
+    ('https://vizier.iucaa.in/viz-bin/votable?', 'VizieR at IUCAA - Pune, India'),
+    ('http://vizier.china-vo.org/viz-bin/votable?', 'VizieR at Bejing Obs. - China'),
+    ('http://vizier.ast.cam.ac.uk/viz-bin/votable?', 'VizieR at Cambridge - UK'),
+    ('http://vizier.idia.ac.za/vizier/votable?', 'VizieR at IDIA, South Africa'),
+    ('https://vizier.inasan.ru/viz-bin/votable?', 'VizieR at INASAN, Moscow, Russia'),
     ('', '')
     ), (
     ('', ''),
