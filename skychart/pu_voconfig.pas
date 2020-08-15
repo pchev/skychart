@@ -270,7 +270,10 @@ begin
     CatList.Cells[2, i + 1] := buf;
   end;
   CatList.SortColRow(True, 0);
-  msg.Caption := Format(rsCatalogsAvai, [IntToStr(CatList.RowCount - 1)]);
+  if VO_Catalogs1.CatList.Count < 1000 then
+    msg.Caption := Format(rsCatalogsAvai, [IntToStr(CatList.RowCount - 1)])
+  else
+    msg.Caption := Format(rsTruncatedToS, [IntToStr(CatList.RowCount - 1)]);
 end;
 
 procedure Tf_voconfig.FormShow(Sender: TObject);
@@ -284,14 +287,17 @@ end;
 
 procedure Tf_voconfig.SearchCatalogDesc(Sender: TObject);
 var
-  buf: string;
+  buf,sid: string;
 begin
   if trim(CatDescEdit.Text) > '' then
   begin
     screen.Cursor := crHourGlass;
+    sid:=StringReplace(trim(CatDescEdit.Text), ' ', '%20', [rfReplaceAll]);
+    sid:=StringReplace(sid, '+', '%2B', [rfReplaceAll]);
+    sid:=StringReplace(sid, '-', '%2D', [rfReplaceAll]);
+    sid:=StringReplace(sid, '/', '%2F', [rfReplaceAll]);
     buf := vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex + 1, 1];
-    buf := buf + '-meta&-meta.max=1000&-words=' + StringReplace(
-      trim(CatDescEdit.Text), ' ', '%20', [rfReplaceAll]);
+    buf := buf + '-meta&-meta.max=1000&-words=' + sid;
     VO_Catalogs1.ListUrl := buf;
     VO_Catalogs1.onDownloadFeedback := DownloadFeedback1;
     try

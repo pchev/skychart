@@ -1552,6 +1552,7 @@ resourcestring
   rsSpeed = 'Speed';
   rsFillNebulae = 'Fill nebulae';
   rsImportMosaic = 'Import mosaic file';
+  rsTruncatedToS = 'Truncated to %s catalogs';
 
 // also update upsi_translation
 
