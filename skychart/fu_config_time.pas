@@ -503,22 +503,22 @@ begin
   gr := trunc(gr / 100);
   GregY.Value := gr;
   nbstep.Value := csc.Simnb;
-  if csc.SimD > 0 then
+  if csc.SimD <> 0 then
   begin
     stepsize.Value := csc.SimD;
     stepunit.ItemIndex := 0;
   end;
-  if csc.SimH > 0 then
+  if csc.SimH <> 0 then
   begin
     stepsize.Value := csc.SimH;
     stepunit.ItemIndex := 1;
   end;
-  if csc.SimM > 0 then
+  if csc.SimM <> 0 then
   begin
     stepsize.Value := csc.SimM;
     stepunit.ItemIndex := 2;
   end;
-  if csc.SimS > 0 then
+  if csc.SimS <> 0 then
   begin
     stepsize.Value := csc.SimS;
     stepunit.ItemIndex := 3;
@@ -939,6 +939,11 @@ end;
 
 procedure Tf_config_time.UpDown2Click(Sender: TObject; Button: TUDBtnType);
 begin
+if UpDown2.Position=0 then
+  case Button of
+    btNext : UpDown2.Position := 1;
+    btPrev : UpDown2.Position := -1;
+  end;
 {$ifdef darwin}
   stepsizeChanged(Sender);
 {$endif}

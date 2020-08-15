@@ -906,7 +906,7 @@ object f_config_time: Tf_config_time
         object stepsize: TLongEdit
           Left = 316
           Height = 28
-          Hint = '1..999'
+          Hint = '-999..999'
           Top = 47
           Width = 76
           Constraints.MaxHeight = 28
@@ -916,7 +916,7 @@ object f_config_time: Tf_config_time
           TabOrder = 3
           OnChange = stepsizeChanged
           Value = 1
-          MinValue = 1
+          MinValue = -999
           MaxValue = 999
         end
         object UpDown1: TMouseUpDown
@@ -937,7 +937,7 @@ object f_config_time: Tf_config_time
           Width = 17
           Associate = stepsize
           Max = 999
-          Min = 1
+          Min = -999
           OnClick = UpDown2Click
           Position = 1
           TabOrder = 4
