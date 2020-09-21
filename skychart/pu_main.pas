@@ -6749,6 +6749,8 @@ begin
           l := ReadInteger(section, 'WinLeft', 40);
           w := ReadInteger(section, 'WinWidth', -1);
           h := ReadInteger(section, 'WinHeight', -1);
+          if t<0 then t:=0;
+          if l<0 then l:=0;
           if (w < 0) or (h < 0) then
           begin
             if screen.Width > screen.Height then
@@ -6772,6 +6774,8 @@ begin
             t := 0;
             h := screen.Height - 80;
           end;
+          if (t+h)>screen.Height then t:=0;
+          if (l+w)>screen.Width then l:=0;
           f_main.SetBounds(l, t, w, h);
         end;
         for i := 0 to MaxField do
