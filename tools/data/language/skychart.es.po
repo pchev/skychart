@@ -5,14 +5,14 @@ msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-02 18:54+0000\n"
-"PO-Revision-Date: 2020-01-09 16:14+0000\n"
-"Last-Translator: Luis Castedo <Unknown>\n"
+"PO-Revision-Date: 2020-08-09 23:24+0000\n"
+"Last-Translator: Víctor R. Ruiz <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-05-02 19:01+0000\n"
-"X-Generator: Launchpad (build fbdff7602bd10fb883bf7e2ddcc7fd5a16f60398)\n"
+"X-Launchpad-Export-Date: 2020-09-21 08:44+0000\n"
+"X-Generator: Launchpad (build 83bdf6c8a3a5f87722c8927e54838522f3e57504)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -53,7 +53,7 @@ msgstr "Abortado por el usuario"
 
 #: u_translation.rsabortslew
 msgid "Abort Slew"
-msgstr "Abortar rotación"
+msgstr "Abortar apuntado"
 
 #: u_translation.rsabout
 msgid "About"
@@ -2101,7 +2101,7 @@ msgstr "Rellenar Vía Láctea"
 
 #: u_translation.rsfillnebulae
 msgid "Fill nebulae"
-msgstr ""
+msgstr "Rellenar nebulosas"
 
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
@@ -2193,7 +2193,7 @@ msgstr "Forzar J2000"
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
-msgstr "Para más iformación, ver:"
+msgstr "Para más información, ver:"
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -2515,6 +2515,10 @@ msgstr "Directorio de imágenes"
 msgid "Image list"
 msgstr "Lista de imágenes"
 
+#: u_translation.rsimportmosaic
+msgid "Import mosaic file"
+msgstr ""
+
 #: u_translation.rsinclination
 msgid "Inclination"
 msgstr "Inclinación"
@@ -2789,7 +2793,7 @@ msgstr "Menos estrellas"
 
 #: u_translation.rslha
 msgid "LHA"
-msgstr ""
+msgstr "AHL"
 
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
@@ -2941,7 +2945,7 @@ msgstr "Bloquear"
 
 #: u_translation.rslockchartpos
 msgid "Lock chart position"
-msgstr ""
+msgstr "Bloquear posición de la carta"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -4125,7 +4129,7 @@ msgstr "Movimiento propio"
 
 #: u_translation.rsproportional
 msgid "Proportional to the tail length"
-msgstr "Proporcional a la longitud de cola"
+msgstr "Proporcional a la longitud de la cola"
 
 #: u_translation.rsproportional2
 msgid "Proportional to the magnitude"
@@ -4333,7 +4337,7 @@ msgstr "Quitar la última etiqueta"
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
-msgstr ""
+msgstr "Reemplazar por marca"
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"
@@ -5025,23 +5029,23 @@ msgstr "Ortográfica oblicua"
 
 #: u_translation.rsslew
 msgid "Slew"
-msgstr "Rotar"
+msgstr "Apuntar"
 
 #: u_translation.rsslewcomplete
 msgid "Slew complete"
-msgstr "Rotación completa"
+msgstr "Finalizó apuntado"
 
 #: u_translation.rsslewingto
 msgid "Slewing to %s / %s"
-msgstr "Rotando a %s / %s"
+msgstr "Apuntando a %s / %s"
 
 #: u_translation.rsslewtochartc
 msgid "Slew to chart center"
-msgstr "Rotar al centro de la carta"
+msgstr "Apuntar al centro de la carta"
 
 #: u_translation.rsslewtocursor
 msgid "Slew to cursor position"
-msgstr "Rotar a la posición del cursor"
+msgstr "Apuntar a la posición del cursor"
 
 #: u_translation.rsslower
 msgid "Slower"
@@ -5129,7 +5133,7 @@ msgstr "Clase espectral"
 
 #: u_translation.rsspeed
 msgid "Speed"
-msgstr ""
+msgstr "Velocidad"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -5586,6 +5590,10 @@ msgstr "Solar verdadera"
 #: u_translation.rstrumplerclas
 msgid "Trumpler class"
 msgstr "Clase Trumpler"
+
+#: u_translation.rstruncatedtos
+msgid "Truncated to %s catalogs"
+msgstr ""
 
 #: u_translation.rstrytoautocon
 msgid "Try to auto-connect to a SAMP hub when the program start"

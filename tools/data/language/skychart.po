@@ -5982,3 +5982,11 @@ msgstr ""
 msgid "Fill nebulae"
 msgstr ""
 
+#: u_translation:rsimportmosaic
+msgid "Import mosaic file"
+msgstr ""
+
+#: u_translation:rstruncatedtos
+msgid "Truncated to %s catalogs"
+msgstr ""
+

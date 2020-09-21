@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-02 18:54+0000\n"
-"PO-Revision-Date: 2020-04-10 10:16+0000\n"
-"Last-Translator: Stefan Beck <Unknown>\n"
+"PO-Revision-Date: 2020-08-04 10:39+0000\n"
+"Last-Translator: Stephan Woidowski <swoidowski@t-online.de>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-05-02 19:01+0000\n"
-"X-Generator: Launchpad (build fbdff7602bd10fb883bf7e2ddcc7fd5a16f60398)\n"
+"X-Launchpad-Export-Date: 2020-09-21 08:44+0000\n"
+"X-Generator: Launchpad (build 83bdf6c8a3a5f87722c8927e54838522f3e57504)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1416,7 +1416,7 @@ msgstr "Voreinstellung Größe (Bogensekunden)"
 
 #: u_translation.rsdeg
 msgid "d"
-msgstr "d"
+msgstr "°"
 
 #: u_translation.rsdegree
 msgid "Degree"
@@ -2100,7 +2100,7 @@ msgstr "Milchstraße füllen"
 
 #: u_translation.rsfillnebulae
 msgid "Fill nebulae"
-msgstr ""
+msgstr "Füllnebel"
 
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
@@ -2514,6 +2514,10 @@ msgstr "Bilderverzeichnis"
 msgid "Image list"
 msgstr "Bildliste"
 
+#: u_translation.rsimportmosaic
+msgid "Import mosaic file"
+msgstr ""
+
 #: u_translation.rsinclination
 msgid "Inclination"
 msgstr "Inklination"
@@ -2788,7 +2792,7 @@ msgstr "Weniger Sterne"
 
 #: u_translation.rslha
 msgid "LHA"
-msgstr ""
+msgstr "LHA"
 
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
@@ -3192,7 +3196,7 @@ msgstr "Millionen Km."
 
 #: u_translation.rsmin
 msgid "m"
-msgstr "m"
+msgstr "'"
 
 #: u_translation.rsmin2
 msgid "min"
@@ -4004,7 +4008,7 @@ msgstr "Vorpositionierung"
 
 #: u_translation.rsprepointline
 msgid "Pre-point line duration in minutes"
-msgstr ""
+msgstr "Dauer der Vor-Punkt-Linie in Minuten"
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"
@@ -4332,7 +4336,7 @@ msgstr "Lösche letzte Beschriftung"
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
-msgstr ""
+msgstr "Ersetzen durch Häkchen"
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"
@@ -4613,7 +4617,7 @@ msgstr "Software-Update suchen"
 
 #: u_translation.rssec
 msgid "s"
-msgstr "s"
+msgstr "\""
 
 #: u_translation.rssec2
 msgid "Sec."
@@ -5129,7 +5133,7 @@ msgstr "Spektralklasse"
 
 #: u_translation.rsspeed
 msgid "Speed"
-msgstr ""
+msgstr "Geschwindigkeit"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -5587,6 +5591,10 @@ msgstr "Wahre Ortszeit"
 #: u_translation.rstrumplerclas
 msgid "Trumpler class"
 msgstr "Trumpler Klasse"
+
+#: u_translation.rstruncatedtos
+msgid "Truncated to %s catalogs"
+msgstr ""
 
 #: u_translation.rstrytoautocon
 msgid "Try to auto-connect to a SAMP hub when the program start"

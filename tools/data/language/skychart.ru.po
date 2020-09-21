@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-05-02 18:54+0000\n"
-"PO-Revision-Date: 2020-04-17 09:26+0000\n"
+"PO-Revision-Date: 2020-05-03 09:19+0000\n"
 "Last-Translator: Sergey Tarantsov <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-05-02 19:01+0000\n"
-"X-Generator: Launchpad (build fbdff7602bd10fb883bf7e2ddcc7fd5a16f60398)\n"
+"X-Launchpad-Export-Date: 2020-09-21 08:44+0000\n"
+"X-Generator: Launchpad (build 83bdf6c8a3a5f87722c8927e54838522f3e57504)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -2099,7 +2099,7 @@ msgstr "Залить Млечный путь"
 
 #: u_translation.rsfillnebulae
 msgid "Fill nebulae"
-msgstr ""
+msgstr "Заливка"
 
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
@@ -2512,6 +2512,10 @@ msgstr "Папка с  изображениями"
 #: u_translation.rsimagelist
 msgid "Image list"
 msgstr "Список изображений"
+
+#: u_translation.rsimportmosaic
+msgid "Import mosaic file"
+msgstr ""
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -5128,7 +5132,7 @@ msgstr "Спектральный класс"
 
 #: u_translation.rsspeed
 msgid "Speed"
-msgstr ""
+msgstr "Скорость"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -5585,6 +5589,10 @@ msgstr "Солнечное ист."
 #: u_translation.rstrumplerclas
 msgid "Trumpler class"
 msgstr "Класс Трамплера"
+
+#: u_translation.rstruncatedtos
+msgid "Truncated to %s catalogs"
+msgstr ""
 
 #: u_translation.rstrytoautocon
 msgid "Try to auto-connect to a SAMP hub when the program start"
