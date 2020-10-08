@@ -1,6 +1,6 @@
 
         QuickSat Satellite Prediction Program
-        Version 2.15N            June 4, 2010
+        Version 2.15O            May 23, 2020
 
 
         Description of the Documentation
@@ -38,10 +38,10 @@ This program is freeware.  There are no restrictions on its distribution.
 The program is written in Fortran. This version requires the use of a
 coprocessor.  This is a "DOS" program.
 
-The program has certain "built-in" limits:  1) No more than 5000 names and
+The program has certain "built-in" limits:  1) No more than 10000 names and
 magnitudes may be stored from the "intrinsic magnitudes" file.  2) If the
-"store elements in memory" option is chosen, no more than 5000 element sets
-may be stored from the orbital elements files.  3) No more than 600 different
+"store elements in memory" option is chosen, no more than 10000 element sets
+may be stored from the orbital elements files.  3) No more than 4000 different
 set of "size" values can be stored.
 
 The following files are provided:
@@ -53,9 +53,11 @@ The following files are provided:
 6. quicksat.ref - the output file from the test
 
 The author of the program is Mike McCants.  I can be reached at
-"mmccants@io.com" on the Internet.  The current version of Quicksat is
-located in my ftp area, which can be accessed from my home page.
-(http://www.io.com/~mmccants/)
+"mmccants@prismnet.com" on the Internet.  The current version of Quicksat is
+located in my web area, which can be accessed from my home page.
+(http://www.prismnet.com/~mmccants/)
+
+Changes for version 2.15O:  Limits have been increased to 10,000 for all three
 
 Changes for version 2.15N:  This is a 32-bit executable.  It was generated
 by using f2c to convert the Fortran files to C and then by using Digital
@@ -73,11 +75,9 @@ The user is expected to operate the program in the following way:
 
 I. Input data preparation
    1. Orbital elements are obtained.  Note: the elements file must have
-      a carriage return character at the end of each line.  If you obtain
-      a file from kilroy.jpl.nasa.gov/pub/elements and you fail to add
-      a carriage return character to the end of each line, the message
-      "no elements were loaded" will be printed.  The program ADDCR can
-      be used with the command "ADDCR input-file output-file".
+      a carriage return character at the end of each line.  
+      If there are no CR characters at the end of each line, the message
+      "no elements were loaded" will be printed.
    2. Optionally, names, intrinsic magnitude, sizes, or comments
       can be added to an "intrinsic magnitudes override" file.
 
@@ -339,7 +339,7 @@ Line 10:  This line gives the "store elements in memory" flag.
 T True means store all elements in memory
 
 If this flag is true, elements are read from the input file(s) and
-stored in memory.  No more than 5000 elements may be stored.  The
+stored in memory.  No more than 10000 elements may be stored.  The
 "keep only the most recent elements" flag works across files.
 
 If this flag is false, elements are read in and processed, so there is
