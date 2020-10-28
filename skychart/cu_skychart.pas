@@ -4393,6 +4393,7 @@ const
   end;
 
   procedure FindatPosPlanet;
+  var eph: string;
   begin
     ok := fplanet.findplanet(x1, y1, x2, y2, False, cfgsc, n, m, d, desc, false);
     while ok do
@@ -4403,7 +4404,15 @@ const
       windowxy(xx1, yy1, xx, yy, cfgsc);
       if (xx > cfgsc.Xmin) and (xx < cfgsc.Xmax) and (yy > cfgsc.Ymin) and (yy < cfgsc.Ymax) then
       begin
-        Text := Text + fplanet.eph_method + tab + desc + crlf;
+        if cfgsc.FindIpla <= 11 then
+           eph := fplanet.eph_method
+        else begin
+           if cfgsc.SpiceActive then
+              eph := 'SPICE'
+           else
+              eph := '';
+        end;
+        Text := Text + eph + tab + desc + crlf;
         Inc(i);
       end;
       ok := fplanet.findplanet(x1, y1, x2, y2, True, cfgsc, n, m, d, desc, false);

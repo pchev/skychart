@@ -2640,6 +2640,31 @@ begin
         mtError, [mbAbort], 0);
       Halt;
     end;
+
+    step := 'Load libspice';
+    if VerboseMsg then
+      WriteTrace(step);
+    SpiceBaseOk:=false;
+    SpiceExtOk:=false;
+    SpiceLib := LoadLibrary(libspice);
+    if SpiceLib <> 0 then  begin
+      SpiceIniterr:=Tiniterr(GetProcAddress(SpiceLib, 'initerr'));
+      SpiceLoadspk := Tloadspk(GetProcAddress(SpiceLib, 'loadspk'));
+      SpiceComputepos := Tcomputepos(GetProcAddress(SpiceLib, 'computepos'));
+      SpiceGetlongerror := Tgetlongerror(GetProcAddress(SpiceLib, 'getlongerror'));
+      SpiceGetshorterror := Tgetshorterror(GetProcAddress(SpiceLib, 'getshorterror'));
+    end;
+    if (@SpiceIniterr=nil)or(@SpiceLoadspk=nil)or(@SpiceComputepos=nil)or(@SpiceGetlongerror=nil)or(@SpiceGetshorterror=nil) then
+      SpiceLib:=0;
+    if SpiceLib<>0 then begin
+      SpiceIniterr;
+      SpiceFolder:=slash(Appdir) + slash('data') + 'spice_eph';
+      i:=SpiceLoadspk(pchar(slash(SpiceFolder)+'cdcbase.bsp'));
+      SpiceBaseOk:=(i=0);
+      i:=i+SpiceLoadspk(pchar(slash(SpiceFolder)+'cdcext.bsp'));
+      SpiceExtOk:=(i=0);
+    end;
+
     step := 'Multiframe border';
     if VerboseMsg then
       WriteTrace(step);

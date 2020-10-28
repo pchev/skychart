@@ -1,0 +1,37 @@
+LEAPSECONDS_KERNEL = latest_leapseconds.tls
+
+SPK_KERNEL = cdcbase.bsp
+  BEGIN_TIME = 1 JAN 2000 00:00:00.000 TDB
+  END_TIME = 1 JAN 2050 00:00:00.000 TDB
+  SOURCE_SPK_KERNEL = mar097.bsp
+    BODIES          = 3, 399, 4, 401, 402
+  SOURCE_SPK_KERNEL = jup310.bsp
+    BODIES          = 5, 504, 503, 502, 501
+  SOURCE_SPK_KERNEL = sat427.bsp
+    BODIES          = 6, 699, 609, 608, 607, 606, 605, 604, 603, 602, 601
+  SOURCE_SPK_KERNEL = ura111.bsp
+    BODIES          = 7, 705, 704, 703, 702, 701
+  SOURCE_SPK_KERNEL = nep095.bsp
+    BODIES          = 8, 802, 801
+  SOURCE_SPK_KERNEL = plu055.bsp
+    BODIES          = 9, 901
+
+SPK_KERNEL = cdcext.bsp
+  BEGIN_TIME = 1 JAN 2000 00:00:00.000 TDB
+  END_TIME = 1 JAN 2050 00:00:00.000 TDB
+  SOURCE_SPK_KERNEL = jup310.bsp
+    BODIES          = 516, 515, 514, 505
+  SOURCE_SPK_KERNEL = sat427.bsp
+    BODIES          = 614, 613, 612 
+  SOURCE_SPK_KERNEL = sat393.bsp
+    BODIES          = 610, 611, 615, 616, 617
+  SOURCE_SPK_KERNEL = sat393-rocks_pan.bsp
+    BODIES          = 618
+  SOURCE_SPK_KERNEL = sat393_daphnis.bsp
+    BODIES          = 635
+  SOURCE_SPK_KERNEL = ura115.bsp
+    BODIES          = 706, 707, 708, 709, 710, 711, 712, 713, 714, 715, 725, 726, 727
+  SOURCE_SPK_KERNEL = nep095.bsp
+    BODIES          = 808, 807, 806, 805, 804, 803
+
+ 

@@ -328,6 +328,35 @@ const
     'Cordelia', 'Ophelia', 'Bianca', 'Cressida', 'Desdemona', 'Juliet',
     'Portia', 'Rosalind', 'Belinda', 'Puck', 'Perdita', 'Mab', 'Cupid',
     'Naiad', 'Thalassa', 'Despina', 'Galatea', 'Larissa', 'Proteus');
+
+  naif: array[1..MaxPla] of integer =
+    (199, 299, 399, 499, 599,
+    699, 799, 899, 999, 10, 301,
+    501, 502, 503, 504, 601, 602,
+    603, 604,
+    605, 606, 607, 608, 705, 701,
+    702, 703,
+    704, 401, 402, -1, -1,
+    609, 801, 802, 901,
+    505, 514, 515, 516,
+    610, 611, 612, 613, 614, 615,
+    616, 617, 618, 635,
+    706, 707, 708, 709, 710, 711,
+    712, 713, 714, 715, 725, 726, 727,
+    803, 804, 805, 806, 807, 808);
+
+  spicebody: array[1..9,1..20] of integer=(
+    (-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ),
+    (-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ),
+    (301 ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ),
+    (401 ,402 ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ),
+    (501 ,502 ,503 ,504 ,505 ,514 ,515 ,516 ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ),
+    (601 ,602 ,603 ,604 ,605 ,606 ,607 ,608 ,609 ,610 ,611 ,612 ,613 ,614 ,615 ,616 ,617 ,618 ,635 ,-1  ),
+    (705 ,701 ,702 ,703 ,704 ,706 ,707 ,708 ,709 ,710 ,711 ,712 ,713 ,714 ,715 ,725 ,726 ,727 ,-1  ,-1  ),
+    (801 ,802 ,803 ,804 ,805 ,806 ,807 ,808 ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ),
+    (901 ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ));
+
+
   CentralPlanet: array[1..36] of
     integer = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 4, 4, 6, 3, 6, 8, 8, 9);
   planetcolor: array[1..11] of double =
@@ -1027,7 +1056,7 @@ type
     HorizonRise: boolean;
     // working variable
     ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid,
-    SmallSatActive, ShowEarthShadowValid, ShowEclipticValid, PlotImageFirst: boolean;
+    SpiceActive, SmallSatActive, ShowEarthShadowValid, ShowEclipticValid, PlotImageFirst: boolean;
     HorizonMax, HorizonMin, rap2000, dep2000, RefractionOffset, ObsRAU, ObsZAU, Diurab: double;
     racentre2000,decentre2000: double;
     haicx, haicy, ObsRefractionCor, ObsRefA, ObsRefB, ObsHorizonDepression,
@@ -1245,21 +1274,25 @@ const
   lib404 = 'libpasplan404.so.1';
   libcdcwcs = 'libpaswcs.so.1';
   libz = 'libz.so.1';
+  libspice = 'libpasspice.so.1';
 {$endif}
 {$ifdef freebsd}
   lib404 = 'libplan404.so';
   libcdcwcs = 'libcdcwcs.so';
   libz = 'libz.so.1';
+  libspice = 'libpasspice.so.1';
 {$endif}
 {$ifdef darwin}
   lib404 = 'libplan404.dylib';
   libcdcwcs = 'libcdcwcs.dylib';
   libz = 'libz.dylib';
+  libspice = 'libpasspice.dylib';
 {$endif}
 {$ifdef mswindows}
   lib404 = 'libplan404.dll';
   libcdcwcs = 'libcdcwcs.dll';
   libz = 'zlib1.dll';
+  libspice = 'libpasspice.dll';
 {$endif}
 
 // libplan404
@@ -1323,6 +1356,33 @@ var
   gzclose: Tgzclose;
   zlibok: boolean;
   zlib: TLibHandle;
+
+//  libpasspice
+const
+  SpiceFirstYear = 2000;
+  SpiceLastYear = 2049;
+type
+  TcdcSpice = record
+    obs, target: integer;
+    et: double;
+    x,y,z: double;
+    segid: array [0..79] of Char;
+    err: integer;
+  end;
+  Tiniterr = procedure (); cdecl;
+  Tloadspk = function (fn:PChar): integer; cdecl;
+  Tcomputepos = procedure (var data:TcdcSpice); cdecl;
+  Tgetlongerror= procedure (msg:PChar); cdecl;
+  Tgetshorterror= procedure (msg:PChar); cdecl;
+var
+  SpiceFolder: string;
+  SpiceBaseOk,SpiceExtOk: boolean;
+  SpiceLib: TLibHandle;
+  SpiceIniterr: Tiniterr;
+  SpiceLoadspk: Tloadspk;
+  SpiceComputepos: Tcomputepos;
+  SpiceGetlongerror: Tgetlongerror;
+  SpiceGetshorterror: Tgetshorterror;
 
 // Encoders
 type
@@ -2540,6 +2600,7 @@ begin
   ShowEclipticValid := Source.ShowEclipticValid;
   PlotImageFirst := Source.PlotImageFirst;
   SmallSatActive := Source.SmallSatActive;
+  SpiceActive := Source.SpiceActive;
   BGalpha := Source.BGalpha;
   BGitt := Source.BGitt;
   BGmin_sigma := Source.BGmin_sigma;

@@ -90,19 +90,21 @@ type
     procedure SunRect(t0: double; var x, y, z: double; barycenter: boolean = False);
     procedure Sun(t0: double; var alpha, delta, dist, diam: double);
     procedure SunEcl(t0: double; var l, b: double);
-    procedure PlanSat(isat: integer; jde: double; var alpha, delta, distance: double;
-      var supconj: boolean);
-    function MarSat(jde, lighttime, xp, yp, zp: double; var xsat, ysat: double20;
+    procedure PlanSat(isat: integer; jde: double; c:Tconf_skychart; var alpha, delta, distance: double;
+      var supconj: boolean; var eph: string);
+    function SpiceSatOne(jdtt: double; isat: integer; out x, y, z: double; out segid: string):integer;
+    function SpiceSat(jdtt: double; pla,num: integer; out xt, yt, zt: double20):integer;
+    function MarSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart; var xsat, ysat: double20;
       var supconj: bool20): integer;
-    function JupSat(jde, lighttime, xp, yp, zp: double; smallsat: boolean;
+    function JupSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart;
       var xsat, ysat: double20; var supconj: bool20): integer;
-    function SatSat(jde, lighttime, xp, yp, zp: double; smallsat: boolean;
+    function SatSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart;
       var xsat, ysat: double20; var supconj: array of boolean): integer;
-    function UraSat(jde, lighttime, xp, yp, zp: double; smallsat: boolean;
+    function UraSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart;
       var xsat, ysat: double20; var supconj: array of boolean): integer;
-    function NepSat(jde, lighttime, xp, yp, zp: double; smallsat: boolean;
+    function NepSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart;
       var xsat, ysat: double20; var supconj: array of boolean): integer;
-    function PluSat(jde, lighttime, xp, yp, zp: double; var xsat, ysat: double20;
+    function PluSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart; var xsat, ysat: double20;
       var supconj: array of boolean): integer;
     procedure SatRing(jde: double; var P, a, b, be: double);
     function JupGRS(lon, drift, jdref, jdnow: double): double;
@@ -431,8 +433,8 @@ begin
   Result := rmod(x + 3600000000, 360);
 end;
 
-procedure TPlanet.PlanSat(isat: integer; jde: double; var alpha, delta, distance: double;
-  var supconj: boolean);
+procedure TPlanet.PlanSat(isat: integer; jde: double; c:Tconf_skychart; var alpha, delta, distance: double;
+  var supconj: boolean; var eph: string);
 var
   ipl, ix: integer;
   pra, pdec, dist, illum, phase, diam, magn, rp, xp, yp, zp, vel: double;
@@ -503,23 +505,29 @@ begin
   if ipl <> 0 then
   begin
     Planet(ipl, jde, pra, pdec, dist, illum, phase, diam, magn, rp, xp, yp, zp, vel);
-    lighttime := dist * tlight;
-    case ipl of
-      4: MarSatOne(jde - lighttime, ix, satx, saty, satz);
-      5: JupSatOne(jde - lighttime, ix, satx, saty, satz);
-      6: SatSatOne(jde - lighttime, ix, satx, saty, satz);
-      7: UraSatOne(jde - lighttime, ix, satx, saty, satz);
-      8: NepSatOne(jde - lighttime, ix, satx, saty, satz);
-      9: PluSatOne(jde - lighttime, ix, satx, saty, satz);
-    end;
     SunRect(jde, xs, ys, zs);
     x := xp + xs;
     y := yp + ys;
     z := zp + zs;
     d1 := sqrt(x * x + y * y + z * z);
-    x := x + satx;
-    y := y + saty;
-    z := z + satz;
+    if c.SpiceActive then begin
+      SpiceSatOne(jde, isat, x, y, z, eph);
+    end
+    else begin
+      lighttime := dist * tlight;
+      case ipl of
+        4: MarSatOne(jde - lighttime, ix, satx, saty, satz);
+        5: JupSatOne(jde - lighttime, ix, satx, saty, satz);
+        6: SatSatOne(jde - lighttime, ix, satx, saty, satz);
+        7: UraSatOne(jde - lighttime, ix, satx, saty, satz);
+        8: NepSatOne(jde - lighttime, ix, satx, saty, satz);
+        9: PluSatOne(jde - lighttime, ix, satx, saty, satz);
+      end;
+      x := x + satx;
+      y := y + saty;
+      z := z + satz;
+      eph := '';
+    end;
     d2 := sqrt(x * x + y * y + z * z);
     alpha := arctan2(y, x);
     if (alpha < 0) then
@@ -532,33 +540,113 @@ begin
   end;
 end;
 
-function TPlanet.MarSat(jde, lighttime, xp, yp, zp: double; var xsat, ysat: double20;
-  var supconj: bool20): integer;
+function TPlanet.SpiceSatOne(jdtt: double; isat: integer; out x, y, z: double; out segid: string):integer;
 var
   i: integer;
-  xs, ys, zs, x, y, z, alpha, delta, qr, d1, d2: double;
-  xst, yst, zst: double20;
+  data: TcdcSpice;
+  msg: array[0..1024] of char;
+  pmsg: PChar;
 begin
-  Result := MarSatAll(jde - lighttime, xst, yst, zst);
-  if Result = 0 then
+  try
+  pmsg:=@msg;
+  result:=0;
+  data.et := (jdtt-jd2000)*86400; // second since J2000
+  data.obs := 399;                // geocentric
+  data.target:=naif[isat];
+  SpiceComputepos(data);
+  if data.err<>0 then begin
+    SpiceGetlongerror(pmsg);
+    WriteTrace(msg);
+    x := 0;
+    y := 0;
+    z := 0;
+    segid:='';
+    result:=1;
+  end;
+  x := data.x / km_au;
+  y := data.y / km_au;
+  z := data.z / km_au;
+  segid:=trim(data.segid);
+  except
+    result:=1;
+  end;
+end;
+
+function TPlanet.SpiceSat(jdtt: double; pla,num: integer; out xt, yt, zt: double20):integer;
+var
+  i: integer;
+  data: TcdcSpice;
+  msg: array[0..1024] of char;
+  pmsg: PChar;
+begin
+  try
+  pmsg:=@msg;
+  result:=0;
+  for i := 1 to num do
   begin
-    SunRect(jde, xs, ys, zs);
-    x := xp + xs;
-    y := yp + ys;
-    z := zp + zs;
-    d1 := sqrt(x * x + y * y + z * z);
-    for i := 1 to 2 do
+    data.et := (jdtt-jd2000)*86400; // second since J2000
+    data.obs := 399;                // geocentric
+    data.target:=spicebody[pla,i];
+    SpiceComputepos(data);
+    if data.err<>0 then begin
+      SpiceGetlongerror(pmsg);
+      WriteTrace(msg);
+      xt[i] := 0;
+      yt[i] := 0;
+      zt[i] := 0;
+      result:=1;
+    end;
+    xt[i] := data.x / km_au;
+    yt[i] := data.y / km_au;
+    zt[i] := data.z / km_au;
+  end;
+  except
+    result:=1;
+  end;
+end;
+
+function TPlanet.MarSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart; var xsat, ysat: double20;
+  var supconj: bool20): integer;
+var
+  i,n: integer;
+  xs, ys, zs, x, y, z, alpha, delta, qr, d1, d2: double;
+  xst, yst, zst, xt, yt, zt: double20;
+begin
+  n:=2;
+  SunRect(jde, xs, ys, zs);
+  x := xp + xs;
+  y := yp + ys;
+  z := zp + zs;
+  d1 := sqrt(x * x + y * y + z * z);
+  d1 := sqrt(x * x + y * y + z * z);
+  if c.SpiceActive then
+  begin
+    Result:=SpiceSat(jde,4,n,xt,yt,zt);
+  end
+  else
+  begin
+    Result := MarSatAll(jde - lighttime, xst, yst, zst);
+    if Result = 0 then
     begin
-      x := xp + xst[i] + xs;
-      y := yp + yst[i] + ys;
-      z := zp + zst[i] + zs;
-      d2 := sqrt(x * x + y * y + z * z);
-      alpha := arctan2(y, x);
+      for i := 1 to n do
+      begin
+        xt[i] := xp + xst[i] + xs;
+        yt[i] := yp + yst[i] + ys;
+        zt[i] := zp + zst[i] + zs;
+      end;
+    end;
+  end;
+  if Result=0 then
+  begin
+    for i := 1 to n do
+    begin
+      d2 := sqrt(xt[i] * xt[i] + yt[i] * yt[i] + zt[i] * zt[i]);
+      alpha := arctan2(yt[i], xt[i]);
       if (alpha < 0) then
         alpha := alpha + 2 * pi;
-      qr := sqrt(x * x + y * y);
+      qr := sqrt(xt[i] * xt[i] + yt[i] * yt[i]);
       if qr <> 0 then
-        delta := arctan(z / qr)
+        delta := arctan(zt[i] / qr)
       else
         delta := 0;
       xsat[i] := alpha;
@@ -568,37 +656,50 @@ begin
   end;
 end;
 
-function TPlanet.JupSat(jde, lighttime, xp, yp, zp: double; smallsat: boolean;
+function TPlanet.JupSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart;
   var xsat, ysat: double20; var supconj: bool20): integer;
 var
   i, n: integer;
   xs, ys, zs, x, y, z, alpha, delta, qr, d1, d2: double;
-  xst, yst, zst: double20;
+  xst, yst, zst, xt, yt, zt: double20;
 begin
-  if smallsat then
+  if c.SmallSatActive then
     n := 8
   else
     n := 4;
-  Result := JupSatAll(jde - lighttime, smallsat, xst, yst, zst);
-  if Result = 0 then
+  SunRect(jde, xs, ys, zs);
+  x := xp + xs;
+  y := yp + ys;
+  z := zp + zs;
+  d1 := sqrt(x * x + y * y + z * z);
+  if c.SpiceActive then
   begin
-    SunRect(jde, xs, ys, zs);
-    x := xp + xs;
-    y := yp + ys;
-    z := zp + zs;
-    d1 := sqrt(x * x + y * y + z * z);
+    Result:=SpiceSat(jde,5,n,xt,yt,zt);
+  end
+  else
+  begin
+    Result := JupSatAll(jde - lighttime, c.SmallSatActive, xst, yst, zst);
+    if Result = 0 then
+    begin
+      for i := 1 to n do
+      begin
+        xt[i] := xp + xst[i] + xs;
+        yt[i] := yp + yst[i] + ys;
+        zt[i] := zp + zst[i] + zs;
+      end;
+    end;
+  end;
+  if Result=0 then
+  begin
     for i := 1 to n do
     begin
-      x := xp + xst[i] + xs;
-      y := yp + yst[i] + ys;
-      z := zp + zst[i] + zs;
-      d2 := sqrt(x * x + y * y + z * z);
-      alpha := arctan2(y, x);
+      d2 := sqrt(xt[i] * xt[i] + yt[i] * yt[i] + zt[i] * zt[i]);
+      alpha := arctan2(yt[i], xt[i]);
       if (alpha < 0) then
         alpha := alpha + 2 * pi;
-      qr := sqrt(x * x + y * y);
+      qr := sqrt(xt[i] * xt[i] + yt[i] * yt[i]);
       if qr <> 0 then
-        delta := arctan(z / qr)
+        delta := arctan(zt[i] / qr)
       else
         delta := 0;
       xsat[i] := alpha;
@@ -608,37 +709,51 @@ begin
   end;
 end;
 
-function TPlanet.SatSat(jde, lighttime, xp, yp, zp: double; smallsat: boolean;
+
+function TPlanet.SatSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart;
   var xsat, ysat: double20; var supconj: array of boolean): integer;
 var
   i, n: integer;
   xs, ys, zs, x, y, z, alpha, delta, qr, d1, d2: double;
-  xst, yst, zst: double20;
+  xst, yst, zst, xt, yt, zt: double20;
 begin
-  if smallsat then
+  if c.SmallSatActive then
     n := 19
   else
     n := 9;
-  Result := SatSatAll(jde - lighttime, smallsat, xst, yst, zst);
-  if Result = 0 then
+  SunRect(jde, xs, ys, zs);
+  x := xp + xs;
+  y := yp + ys;
+  z := zp + zs;
+  d1 := sqrt(x * x + y * y + z * z);
+  if c.SpiceActive then
   begin
-    SunRect(jde, xs, ys, zs);
-    x := xp + xs;
-    y := yp + ys;
-    z := zp + zs;
-    d1 := sqrt(x * x + y * y + z * z);
+    Result:=SpiceSat(jde,6,n,xt,yt,zt);
+  end
+  else
+  begin
+    Result := SatSatAll(jde - lighttime, c.SmallSatActive, xst, yst, zst);
+    if Result = 0 then
+    begin
+      for i := 1 to n do
+      begin
+        xt[i] := xp + xst[i] + xs;
+        yt[i] := yp + yst[i] + ys;
+        zt[i] := zp + zst[i] + zs;
+      end;
+    end;
+  end;
+  if Result=0 then
+  begin
     for i := 1 to n do
     begin
-      x := xp + xst[i] + xs;
-      y := yp + yst[i] + ys;
-      z := zp + zst[i] + zs;
-      d2 := sqrt(x * x + y * y + z * z);
-      alpha := arctan2(y, x);
+      d2 := sqrt(xt[i] * xt[i] + yt[i] * yt[i] + zt[i] * zt[i]);
+      alpha := arctan2(yt[i], xt[i]);
       if (alpha < 0) then
         alpha := alpha + 2 * pi;
-      qr := sqrt(x * x + y * y);
+      qr := sqrt(xt[i] * xt[i] + yt[i] * yt[i]);
       if qr <> 0 then
-        delta := arctan(z / qr)
+        delta := arctan(zt[i] / qr)
       else
         delta := 0;
       xsat[i] := alpha;
@@ -648,37 +763,50 @@ begin
   end;
 end;
 
-function TPlanet.UraSat(jde, lighttime, xp, yp, zp: double; smallsat: boolean;
+function TPlanet.UraSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart;
   var xsat, ysat: double20; var supconj: array of boolean): integer;
 var
   i, n: integer;
   xs, ys, zs, x, y, z, alpha, delta, qr, d1, d2: double;
-  xst, yst, zst: double20;
+  xst, yst, zst, xt, yt, zt: double20;
 begin
-  if smallsat then
+  if c.SmallSatActive then
     n := 18
   else
     n := 5;
-  Result := UraSatAll(jde - lighttime, smallsat, xst, yst, zst);
-  if Result = 0 then
+  SunRect(jde, xs, ys, zs);
+  x := xp + xs;
+  y := yp + ys;
+  z := zp + zs;
+  d1 := sqrt(x * x + y * y + z * z);
+  if c.SpiceActive then
   begin
-    SunRect(jde, xs, ys, zs);
-    x := xp + xs;
-    y := yp + ys;
-    z := zp + zs;
-    d1 := sqrt(x * x + y * y + z * z);
+    Result:=SpiceSat(jde,7,n,xt,yt,zt);
+  end
+  else
+  begin
+    Result := UraSatAll(jde - lighttime, c.SmallSatActive, xst, yst, zst);
+    if Result = 0 then
+    begin
+      for i := 1 to n do
+      begin
+        xt[i] := xp + xst[i] + xs;
+        yt[i] := yp + yst[i] + ys;
+        zt[i] := zp + zst[i] + zs;
+      end;
+    end;
+  end;
+  if Result=0 then
+  begin
     for i := 1 to n do
     begin
-      x := xp + xst[i] + xs;
-      y := yp + yst[i] + ys;
-      z := zp + zst[i] + zs;
-      d2 := sqrt(x * x + y * y + z * z);
-      alpha := arctan2(y, x);
+      d2 := sqrt(xt[i] * xt[i] + yt[i] * yt[i] + zt[i] * zt[i]);
+      alpha := arctan2(yt[i], xt[i]);
       if (alpha < 0) then
         alpha := alpha + 2 * pi;
-      qr := sqrt(x * x + y * y);
+      qr := sqrt(xt[i] * xt[i] + yt[i] * yt[i]);
       if qr <> 0 then
-        delta := arctan(z / qr)
+        delta := arctan(zt[i] / qr)
       else
         delta := 0;
       xsat[i] := alpha;
@@ -688,37 +816,50 @@ begin
   end;
 end;
 
-function TPlanet.NepSat(jde, lighttime, xp, yp, zp: double; smallsat: boolean;
+function TPlanet.NepSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart;
   var xsat, ysat: double20; var supconj: array of boolean): integer;
 var
   i, n: integer;
   xs, ys, zs, x, y, z, alpha, delta, qr, d1, d2: double;
-  xst, yst, zst: double20;
+  xst, yst, zst, xt, yt, zt: double20;
 begin
-  if smallsat then
+  if c.SmallSatActive then
     n := 8
   else
     n := 2;
-  Result := NepSatAll(jde - lighttime, smallsat, xst, yst, zst);
-  if Result = 0 then
+  SunRect(jde, xs, ys, zs);
+  x := xp + xs;
+  y := yp + ys;
+  z := zp + zs;
+  d1 := sqrt(x * x + y * y + z * z);
+  if c.SpiceActive then
   begin
-    SunRect(jde, xs, ys, zs);
-    x := xp + xs;
-    y := yp + ys;
-    z := zp + zs;
-    d1 := sqrt(x * x + y * y + z * z);
+    Result:=SpiceSat(jde,8,n,xt,yt,zt);
+  end
+  else
+  begin
+    Result := NepSatAll(jde - lighttime, c.SmallSatActive, xst, yst, zst);
+    if Result = 0 then
+    begin
+      for i := 1 to n do
+      begin
+        xt[i] := xp + xst[i] + xs;
+        yt[i] := yp + yst[i] + ys;
+        zt[i] := zp + zst[i] + zs;
+      end;
+    end;
+  end;
+  if Result=0 then
+  begin
     for i := 1 to n do
     begin
-      x := xp + xst[i] + xs;
-      y := yp + yst[i] + ys;
-      z := zp + zst[i] + zs;
-      d2 := sqrt(x * x + y * y + z * z);
-      alpha := arctan2(y, x);
+      d2 := sqrt(xt[i] * xt[i] + yt[i] * yt[i] + zt[i] * zt[i]);
+      alpha := arctan2(yt[i], xt[i]);
       if (alpha < 0) then
         alpha := alpha + 2 * pi;
-      qr := sqrt(x * x + y * y);
+      qr := sqrt(xt[i] * xt[i] + yt[i] * yt[i]);
       if qr <> 0 then
-        delta := arctan(z / qr)
+        delta := arctan(zt[i] / qr)
       else
         delta := 0;
       xsat[i] := alpha;
@@ -728,33 +869,47 @@ begin
   end;
 end;
 
-function TPlanet.PluSat(jde, lighttime, xp, yp, zp: double; var xsat, ysat: double20;
+function TPlanet.PluSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart; var xsat, ysat: double20;
   var supconj: array of boolean): integer;
 var
-  i: integer;
+  i,n: integer;
   xs, ys, zs, x, y, z, alpha, delta, qr, d1, d2: double;
-  xst, yst, zst: double20;
+  xst, yst, zst, xt, yt, zt: double20;
 begin
-  Result := PluSatAll(jde - lighttime, xst, yst, zst);
-  if Result = 0 then
+  n:=1;
+  SunRect(jde, xs, ys, zs);
+  x := xp + xs;
+  y := yp + ys;
+  z := zp + zs;
+  d1 := sqrt(x * x + y * y + z * z);
+  if c.SpiceActive then
   begin
-    SunRect(jde, xs, ys, zs);
-    x := xp + xs;
-    y := yp + ys;
-    z := zp + zs;
-    d1 := sqrt(x * x + y * y + z * z);
-    for i := 1 to 1 do
+    Result:=SpiceSat(jde,9,n,xt,yt,zt);
+  end
+  else
+  begin
+    Result := PluSatAll(jde - lighttime, xst, yst, zst);
+    if Result = 0 then
     begin
-      x := xp + xst[i] + xs;
-      y := yp + yst[i] + ys;
-      z := zp + zst[i] + zs;
-      d2 := sqrt(x * x + y * y + z * z);
-      alpha := arctan2(y, x);
+      for i := 1 to n do
+      begin
+        xt[i] := xp + xst[i] + xs;
+        yt[i] := yp + yst[i] + ys;
+        zt[i] := zp + zst[i] + zs;
+      end;
+    end;
+  end;
+  if Result=0 then
+  begin
+    for i := 1 to n do
+    begin
+      d2 := sqrt(xt[i] * xt[i] + yt[i] * yt[i] + zt[i] * zt[i]);
+      alpha := arctan2(yt[i], xt[i]);
       if (alpha < 0) then
         alpha := alpha + 2 * pi;
-      qr := sqrt(x * x + y * y);
+      qr := sqrt(xt[i] * xt[i] + yt[i] * yt[i]);
       if qr <> 0 then
-        delta := arctan(z / qr)
+        delta := arctan(zt[i] / qr)
       else
         delta := 0;
       xsat[i] := alpha;
@@ -1206,8 +1361,12 @@ begin
       application.ProcessMessages;
     end;
     lockpla := True;
-    cfgsc.SmallSatActive := cfgsc.ShowSmallsat and (cfgsc.CurYear > 1900) and
-      (cfgsc.CurYear < 2100);
+    cfgsc.SpiceActive:=SpiceBaseOk and (cfgsc.CurYear >= SpiceFirstYear) and (cfgsc.CurYear <= SpiceLastYear);
+    if cfgsc.SpiceActive
+    then
+      cfgsc.SmallSatActive := cfgsc.ShowSmallsat and SpiceExtOk
+    else
+      cfgsc.SmallSatActive := cfgsc.ShowSmallsat and (cfgsc.CurYear > 1900) and (cfgsc.CurYear < 2050);
     cfgsc.SimNb := min(cfgsc.SimNb, MaxPlSim);
     for j := 0 to cfgsc.SimNb - 1 do
     begin
@@ -1281,7 +1440,7 @@ begin
         pha := abs(phase);
         if ipla = 4 then
         begin
-          ierr := Marsat(jdt, dist * tlight, xp, yp, zp, satx, saty, supconj);
+          ierr := Marsat(jdt, dist * tlight, xp, yp, zp, cfgsc, satx, saty, supconj);
           if ierr > 0 then
             for i := 1 to 2 do
               cfgsc.PlanetLst[j, i + 28, 6] := 99
@@ -1315,7 +1474,7 @@ begin
         end;
         if ipla = 5 then
         begin
-          ierr := jupsat(jdt, dist * tlight, xp, yp, zp, cfgsc.SmallSatActive, satx, saty, supconj);
+          ierr := jupsat(jdt, dist * tlight, xp, yp, zp, cfgsc, satx, saty, supconj);
           if ierr > 0 then
           begin
             for i := 1 to 4 do
@@ -1381,7 +1540,7 @@ begin
         end;
         if ipla = 6 then
         begin
-          ierr := Satsat(jdt, dist * tlight, xp, yp, zp, cfgsc.SmallSatActive, satx, saty, supconj);
+          ierr := Satsat(jdt, dist * tlight, xp, yp, zp, cfgsc, satx, saty, supconj);
           if ierr > 0 then
           begin
             for i := 1 to 8 do
@@ -1460,7 +1619,7 @@ begin
         end;
         if ipla = 7 then
         begin
-          ierr := Urasat(jdt, dist * tlight, xp, yp, zp, cfgsc.SmallSatActive, satx, saty, supconj);
+          ierr := Urasat(jdt, dist * tlight, xp, yp, zp, cfgsc, satx, saty, supconj);
           if ierr > 0 then
           begin
             for i := 1 to 5 do
@@ -1528,7 +1687,7 @@ begin
         end;
         if ipla = 8 then
         begin
-          ierr := Nepsat(jdt, dist * tlight, xp, yp, zp, cfgsc.SmallSatActive, satx, saty, supconj);
+          ierr := Nepsat(jdt, dist * tlight, xp, yp, zp, cfgsc, satx, saty, supconj);
           if ierr > 0 then
           begin
             for i := 1 to 2 do
@@ -1596,7 +1755,7 @@ begin
         end;
         if ipla = 9 then
         begin
-          ierr := Plusat(jdt, dist * tlight, xp, yp, zp, satx, saty, supconj);
+          ierr := Plusat(jdt, dist * tlight, xp, yp, zp, cfgsc, satx, saty, supconj);
           if ierr > 0 then
             for i := 1 to 1 do
               cfgsc.PlanetLst[j, i + 35, 6] := 99

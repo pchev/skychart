@@ -4172,14 +4172,17 @@ begin
   end;
   if (otype = 'Ps') and (isat > 0) then
   begin
-    sc.planet.PlanSat(isat, njd, cra, cdec, dst, supconj);
+    sc.planet.PlanSat(isat, njd, sc.cfgsc, cra, cdec, dst, supconj, buf);
     precession(jd2000, sc.cfgsc.JDChart, cra, cdec);
     if sc.cfgsc.PlanetParalaxe then
       Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
     if sc.cfgsc.ApparentPos then
       apparent_equatorial(cra, cdec, sc.cfgsc, True, False);
     dist := rad2deg * angulardistance(sc.cfgsc.FindRA, sc.cfgsc.FindDec, cra, cdec);
+    if buf<>'' then
+       txt := txt + html_b + rsEphemeris + ': ' + htms_b + buf + html_br;
   end;
+
   if dist > (0.05 / 3600) then
   begin
     pa := round(rmod(rad2deg * PositionAngle(sc.cfgsc.FindRA, sc.cfgsc.FindDec,
