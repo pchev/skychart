@@ -24,6 +24,7 @@ if [ $OS_TARGET = win32 ]; then
   strip -v -o $destdir/libcdcwcs.dll skychart/library/wcs/libcdcwcs.dll
   strip -v -o $destdir/libgetdss.dll skychart/library/getdss/libgetdss.dll
   strip -v -o $destdir/libchealpix.dll skychart/library/chealpix/libchealpix.dll
+  strip -v -o $destdir/libpasspice.dll skychart/library/spice/libpasspice.dll
   unzip -d $destdir system_integration/Windows/data/sqlite3.zip
   unzip -d $destdir system_integration/Windows/data/zlib.zip
   unzip -d $destdir system_integration/Windows/data/openssl-win32.zip
@@ -40,6 +41,7 @@ if [ $OS_TARGET = win64 ]; then
   strip -v -o $destdir/libcdcwcs.dll skychart/library/wcs/libcdcwcs.dll
   strip -v -o $destdir/libgetdss.dll skychart/library/getdss/libgetdss.dll
   strip -v -o $destdir/libchealpix.dll skychart/library/chealpix/libchealpix.dll
+  strip -v -o $destdir/libpasspice.dll skychart/library/spice/libpasspice.dll
   unzip -d $destdir system_integration/Windows/data/sqlite3_x64.zip
   unzip -d $destdir system_integration/Windows/data/zlib_x64.zip
   unzip -d $destdir system_integration/Windows/data/openssl-win64.zip

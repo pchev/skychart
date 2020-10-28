@@ -1,0 +1,24 @@
+CC=x86_64-w64-mingw32-gcc
+
+CFLAGS= -O3  -w -fPIC $(arch_flags) -L./cspice  -I./cspice
+LIBS          = -lcspice -lm
+
+SO_Name       = libpasspice.dll
+LIBFLAGS      = -shared -Wl,-soname,$(SO_Name)
+
+SRC =	passpice.c 
+
+.PHONY: all cspice clean
+
+all: cspice $(SO_Name)
+
+$(SO_Name): $(OBJS)
+	$(CC) $(CFLAGS) $(LIBFLAGS) -o $@ $(SRC) $(LIBS)
+
+cspice:
+	$(MAKE) -C cspice -f Makefile.win64 all
+
+clean:
+	$(MAKE) -C cspice -f Makefile.win64 clean
+	rm -f *.a *.o $(SO_Name)
+

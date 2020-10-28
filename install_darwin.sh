@@ -33,6 +33,7 @@ install -v -m 755 skychart/library/getdss/libgetdss.dylib  $destdir/libgetdss.dy
 install -v -m 755 skychart/library/plan404/libplan404.dylib  $destdir/libplan404.dylib
 install -v -m 755 skychart/library/wcs/libcdcwcs.dylib  $destdir/libcdcwcs.dylib
 install -v -m 755 skychart/library/chealpix/libchealpix.dylib  $destdir/libchealpix.dylib
+install -v -m 755 skychart/library/spice/libpasspice.dylib  $destdir/libpasspice.dylib
 
 install -d -m 755 $destdir/data
 install -d -m 755 $destdir/data/planet

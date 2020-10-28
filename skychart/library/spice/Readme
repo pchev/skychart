@@ -1,0 +1,5 @@
+Shared library to use SPICE kernel from Pascal code.
+
+The code in the cspice directory is from the SPICE Toolkit for C
+available from:
+https://naif.jpl.nasa.gov/naif/toolkit.html
