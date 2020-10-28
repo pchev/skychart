@@ -1,0 +1,15 @@
+
+Copyright: 2020 Patrick Chevalley <pch@ap-i.net>
+
+Information :
+Name        : skychart-spice-ext
+Version     : 4.0
+Release     : 1
+Group       : Sciences/Astronomy
+License     : GPL-2+
+Packager    : Patrick Chevalley
+URL         : http://skychart.sourceforge.net
+Summary     : Skychart / Cartes du Ciel SPICE extended data
+Description :
+SPICE kernel to compute satellite position
+

@@ -1,0 +1,11 @@
+Package: skychart-spice-ext
+Version: 3
+Section: education
+Priority: optional
+Maintainer: Patrick Chevalley <pch@ap-i.net>
+Architecture: all
+Installed-Size: %size%
+Depends: skychart, skychart-spice-base
+Description: Skychart / Cartes du Ciel SPICE extended data
+ SPICE kernel to compute satellite position
+ .

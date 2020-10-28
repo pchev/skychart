@@ -64,6 +64,10 @@ install_cat2:
 	./install_darwin_cat2.sh $(PREFIX) 
 install_pict:
 	./install_darwin_pict.sh $(PREFIX) 
+install_spicebase:
+	./install_darwin_spice_base.sh $(PREFIX) 
+install_spiceext:
+	./install_darwin_spice_ext.sh $(PREFIX) 
 uninstall_data:
 	\$(MAKE) -C tools uninstall
 revision:
@@ -93,6 +97,10 @@ install_win_cat2:
 	./install_win_cat2.sh $(PREFIX) 
 install_win_pict:
 	./install_win_pict.sh $(PREFIX) 
+install_win_spicebase:
+	./install_win_spice_base.sh $(PREFIX) 
+install_win_spiceext:
+	./install_win_spice_ext.sh $(PREFIX) 
 uninstall_win_data:
 	\$(MAKE) -C tools uninstall_win
 data:
@@ -109,6 +117,10 @@ install_cat2:
 	./install_cat2.sh $(PREFIX) 
 install_pict:
 	./install_pict.sh $(PREFIX) 
+install_spicebase:
+	./install_spice_base.sh $(PREFIX) 
+install_spiceext:
+	./install_spice_ext.sh $(PREFIX) 
 uninstall_data:
 	\$(MAKE) -C tools uninstall
 revision:

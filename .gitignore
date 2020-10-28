@@ -62,6 +62,7 @@ skychart/library/getdss/libgetdss.*
 skychart/library/plan404/libplan404.*
 skychart/library/wcs/libcdcwcs.*
 skychart/library/chealpix/libchealpix.*
+skychart/library/spice/libpasspice.*
 skychart/cdc
 skychart/cdcicon
 skychart/cdc.exe
