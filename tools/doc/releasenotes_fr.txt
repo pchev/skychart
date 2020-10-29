@@ -1,6 +1,14 @@
 Version 4.3 beta, Notes de la version
 
+Nouveau calcul des satellites planétaire avec SPICE:
+Pour avoir la meilleur précision possible de la position il est maintenant possible de la calculer en utilisant SPICE.
+Il faut pour cela installer les fichiers de données correspondant depuis:
+https://sourceforge.net/projects/skychart/files/2-catalogs/SpiceKernel/
+Le fichier skychart-spice-base est requis et vous pouvez ajouter skychart-spice-ext pour plus de satellites. La liste des satellites dans chaque fichier figure sur la page de téléchargement.
+Avec Linux vous devez installer Libpasastro version 1.4.0 avant d'utiliser cette fonction: https://sourceforge.net/projects/libpasastro/
+
 Nouvelles fonctions:
+- Permet de charger une mosaique dans la liste d'observation
 - Dans l'outil d'observation, arrête le mouvement du télescope lorsque vous relâchez le bouton
 - Utilise les contours des nébuleuses d'OpenNGC, ajoute une option pour sélectionner ligne ou surface
 - Autorise la simulation d'un seul astéroïde ou comète
@@ -11,6 +19,7 @@ Nouvelles fonctions:
 - Ajout d'une fonction de pré-pointage pour les occultations d'astéroïdes 
 
 Correction d'un bug:
+- Mise à jour de Quicksat pour utiliser le nouveau fichier des magnitudes
 - Corrige l'interface de suivi des comètes PHD2
 - Corrige du réglage de l'heure du télescope
 - Les planètes en mode ligne doivent être vraiment transparentes

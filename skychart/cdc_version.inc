@@ -2,5 +2,5 @@
 const
   cdcbeta = true;
   cdcversion = '4.3';
-  cdcver = '4.3d';
+  cdcver = '4.3e';
 

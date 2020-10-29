@@ -1,6 +1,14 @@
 Version 4.3 beta, release Notes
 
+New calculation of the planetary satellites with SPICE:
+To have the best possible precision of the position it is now possible to calculate it using SPICE.
+To do this, you have to install the corresponding data files from:
+https://sourceforge.net/projects/skychart/files/2-catalogs/SpiceKernel/
+The skychart-spice-base file is required and you can add skychart-spice-ext for more satellites. The list of satellites in each file can be found on the download page.
+On Linux you also need to install Libpasastro version 1.4.0 before you can use this function: https://sourceforge.net/projects/libpasastro/
+
 New functions:
+- Allow to import a mosaic in the observing list
 - In Observer tool, stop the telescope motion when releasing the arrow button
 - Use the nebula outlines from OpenNGC, add option to select line or surface
 - Allow simulation for a single asteroid and comet
@@ -11,6 +19,7 @@ New functions:
 - Add pre-pointing feature for asteroid occultation
 
 Bug fix:
+- Update Quicksat to support the new magnitude file
 - Fix PHD2 comet tracking interface
 - Fix setting telescope time
 - Planet in line mode must be really transparent 
