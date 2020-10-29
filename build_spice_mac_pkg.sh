@@ -27,7 +27,7 @@ LANG=$lang
 # make spice Mac version
   ./configure $configopt prefix=$builddir target=x86_64-darwin
   if [[ $? -ne 0 ]]; then exit 1;fi
-  make install_spice_base
+  make install_spicebase
   if [[ $? -ne 0 ]]; then exit 1;fi
   # pkg
   cp system_integration/MacOSX/skychart-data-spice-base.packproj $basedir
@@ -43,14 +43,14 @@ LANG=$lang
   cd $wd
   rm -rf $basedir
 
-  make install_spice_ext
+  make install_spiceext
   if [[ $? -ne 0 ]]; then exit 1;fi
   # pkg
   cp system_integration/MacOSX/skychart-data-spice-ext.packproj $basedir
   cp system_integration/MacOSX/readme_spice.txt $basedir
   cd $basedir
   mv Cartes "Cartes du Ciel"
-  freeze -v skychart-data-spiceext.packproj
+  freeze -v skychart-data-spice-ext.packproj
   if [[ $? -ne 0 ]]; then exit 1;fi
   hdiutil create -anyowners -volname skychart-spice-ext-$version-$currentrev-macosx -imagekey zlib-level=9 -format UDZO -srcfolder ./build skychart-spice-ext-$version-$currentrev-macosx.dmg
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -58,4 +58,3 @@ LANG=$lang
   if [[ $? -ne 0 ]]; then exit 1;fi
   cd $wd
   rm -rf $basedir
-  
