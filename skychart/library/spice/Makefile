@@ -1,8 +1,10 @@
+OSTYPE = $(shell uname)
+
 CFLAGS= -O3  -w -fPIC $(arch_flags) -L./cspice  -I./cspice
 CC           = gcc
 LIBS          = -lcspice -lm
 
-ifeq ($(findstring Darwin,$(OSTYPE)),)
+ifneq ($(findstring Darwin,$(OSTYPE)),)
 SO_Name       = libpasspice.dylib
 CFLAGS        = -O3 -fPIC $(arch_flags) -L./cspice  -I./cspice -Wno-implicit-function-declaration
 LIBFLAGS      = -Wl,-single_module -dynamiclib  -lc -lm -mmacosx-version-min=10.6
