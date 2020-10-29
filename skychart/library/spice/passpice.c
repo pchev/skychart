@@ -45,6 +45,7 @@ char *fn;
       {
          return(1);
       }  
+  return(0);
 }    
 
 void computepos(data)

@@ -10,7 +10,7 @@ AR = ar
 RANLIB = ranlib
 
 ifneq ($(findstring Darwin,$(OSTYPE)),)
-  CFLAGS        = -c -ansi -O2 -fPIC -DNON_UNIX_STDIO $(arch_flags) -Wno-implicit-function-declaration
+  CFLAGS        = -c -ansi -O2 -fPIC -DNON_UNIX_STDIO $(arch_flags) -Wno-implicit-function-declaration -mmacosx-version-min=10.6
 else  
   CFLAGS        = -c -ansi -O2 -fPIC -DNON_UNIX_STDIO $(arch_flags)
 endif
