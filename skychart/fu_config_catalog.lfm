@@ -22,7 +22,7 @@ object f_config_catalog: Tf_config_catalog
     TabOrder = 0
     object PageControl1: TPageControl
       Left = 1
-      Height = 479
+      Height = 481
       Top = 1
       Width = 502
       ActivePage = Page3
@@ -35,21 +35,21 @@ object f_config_catalog: Tf_config_catalog
       OnChanging = PageControl1Changing
       object Page2: TTabSheet
         Caption = 'CdC Stars'
-        ClientHeight = 475
+        ClientHeight = 477
         ClientWidth = 492
         ParentFont = False
         object Label2: TLabel
           Left = 8
-          Height = 19
+          Height = 17
           Top = 7
-          Width = 159
+          Width = 156
           Caption = 'CDC Stars Catalog Setting'
           ParentColor = False
           ParentFont = False
         end
         object Label16: TLabel
           Left = 269
-          Height = 19
+          Height = 17
           Top = 23
           Width = 26
           Caption = ' min'
@@ -58,7 +58,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object Label28: TLabel
           Left = 270
-          Height = 19
+          Height = 17
           Top = 7
           Width = 82
           Alignment = taRightJustify
@@ -68,43 +68,43 @@ object f_config_catalog: Tf_config_catalog
         end
         object Label17: TLabel
           Left = 306
-          Height = 19
+          Height = 17
           Top = 23
-          Width = 30
+          Width = 29
           Caption = ' max'
           ParentColor = False
           ParentFont = False
         end
         object Label27: TLabel
           Left = 349
-          Height = 19
+          Height = 17
           Top = 23
-          Width = 59
+          Width = 58
           Caption = 'Files Path'
           ParentColor = False
           ParentFont = False
         end
         object Label18: TLabel
           Left = 8
-          Height = 19
+          Height = 17
           Top = 65
-          Width = 32
+          Width = 31
           Caption = 'Stars'
           ParentColor = False
           ParentFont = False
         end
         object Label19: TLabel
           Left = 8
-          Height = 19
+          Height = 17
           Top = 262
-          Width = 58
+          Width = 56
           Caption = 'Variables'
           ParentColor = False
           ParentFont = False
         end
         object Label20: TLabel
           Left = 8
-          Height = 19
+          Height = 17
           Top = 350
           Width = 51
           Caption = 'Doubles'
@@ -181,7 +181,7 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Hint = 'General Catalog of Variable Stars    (Kholopov+ 1998)'
           Top = 259
-          Width = 166
+          Width = 162
           HelpContext = 105
           Caption = 'Gen. Cat. Variable Star'
           Constraints.MaxHeight = 28
@@ -196,7 +196,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 94
           Height = 21
           Top = 281
-          Width = 134
+          Width = 132
           Caption = 'Show IR variables'
           Constraints.MaxHeight = 28
           OnClick = IRVarClick
@@ -209,7 +209,7 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Hint = 'The Washington Visual Double Star Catalog    (USNO, 2000)'
           Top = 350
-          Width = 175
+          Width = 173
           HelpContext = 106
           Caption = 'Washington Double Star'
           Constraints.MaxHeight = 28
@@ -251,7 +251,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object Label89: TLabel
           Left = 69
-          Height = 19
+          Height = 17
           Top = 92
           Width = 20
           Caption = 'pm'
@@ -265,7 +265,7 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Hint = 'Extended Hipparcos Compilation (XHIP)  (Anderson+, 2011)'
           Top = 90
-          Width = 149
+          Width = 147
           HelpContext = 102
           Caption = 'Extended Hipparcos'
           Constraints.MaxHeight = 28
@@ -321,10 +321,11 @@ object f_config_catalog: Tf_config_catalog
           MaxLength = 0
           ParentFont = False
           TabOrder = 3
+          OnChange = CDCStarPathChange
         end
         object Label90: TLabel
           Left = 69
-          Height = 19
+          Height = 17
           Top = 139
           Width = 20
           Caption = 'pm'
@@ -337,7 +338,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 93
           Height = 21
           Top = 137
-          Width = 104
+          Width = 100
           HelpContext = 102
           Caption = 'Gaia Catalog'
           Constraints.MaxHeight = 28
@@ -399,7 +400,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 93
           Height = 21
           Top = 170
-          Width = 256
+          Width = 253
           Caption = 'Limit the number of level 3 faint stars'
           OnChange = GaiaLimitChange
           ParentFont = False
@@ -408,7 +409,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page3: TTabSheet
         Caption = 'CdC Nebulae'
-        ClientHeight = 475
+        ClientHeight = 477
         ClientWidth = 492
         ParentFont = False
         object LabelWarning: TLabel
@@ -437,9 +438,9 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 0
           object Label121: TLabel
             Left = 12
-            Height = 19
+            Height = 17
             Top = 17
-            Width = 47
+            Width = 46
             Caption = 'Default'
             ParentColor = False
             ParentFont = False
@@ -575,7 +576,7 @@ object f_config_catalog: Tf_config_catalog
             Height = 21
             Hint = 'Open Cluster Data 5th Edition    (Lynga 1987)'
             Top = 145
-            Width = 139
+            Width = 137
             HelpContext = 110
             Caption = 'Open Cluster Data'
             OnClick = CDCNebSelClick
@@ -590,7 +591,7 @@ object f_config_catalog: Tf_config_catalog
             Height = 21
             Hint = 'Globular Clusters in the Milky Way (Harris, 1997)'
             Top = 193
-            Width = 164
+            Width = 162
             HelpContext = 111
             Caption = 'Globular Cl.  Milky Way'
             OnClick = CDCNebSelClick
@@ -605,7 +606,7 @@ object f_config_catalog: Tf_config_catalog
             Height = 21
             Hint = 'Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)'
             Top = 242
-            Width = 173
+            Width = 169
             HelpContext = 112
             Caption = 'Galactic Planetary Neb. '
             OnClick = CDCNebSelClick
@@ -620,7 +621,7 @@ object f_config_catalog: Tf_config_catalog
             Height = 21
             Hint = 'Lynds'' Catalogue of Bright Nebulae    (Lynds 1965)'
             Top = 9
-            Width = 158
+            Width = 157
             HelpContext = 108
             Caption = 'Lynds Bright Nebulae'
             OnClick = CDCNebSelClick
@@ -635,7 +636,7 @@ object f_config_catalog: Tf_config_catalog
             Height = 21
             Hint = 'HyperLeda database http://leda.univ-lyon1.fr'
             Top = 97
-            Width = 94
+            Width = 93
             HelpContext = 116
             Caption = 'HyperLeda'
             OnClick = CDCNebSelClick
@@ -900,7 +901,7 @@ object f_config_catalog: Tf_config_catalog
             Height = 21
             Hint = 'Barnard''s Catalogue of Dark Objects'
             Top = 63
-            Width = 109
+            Width = 107
             Caption = 'Dark nebulae'
             Constraints.MaxHeight = 28
             OnClick = CDCNebSelClick
@@ -1015,25 +1016,25 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 2
           object Label118: TLabel
             Left = 365
-            Height = 19
+            Height = 17
             Top = 16
-            Width = 59
+            Width = 58
             Caption = 'Files Path'
             ParentColor = False
             ParentFont = False
           end
           object Label3: TLabel
             Left = 9
-            Height = 19
+            Height = 17
             Top = 7
-            Width = 180
+            Width = 177
             Caption = 'CDC Nebulae Catalog Setting'
             ParentColor = False
             ParentFont = False
           end
           object Label15: TLabel
             Left = 283
-            Height = 19
+            Height = 17
             Top = 0
             Width = 82
             Alignment = taRightJustify
@@ -1043,7 +1044,7 @@ object f_config_catalog: Tf_config_catalog
           end
           object Label116: TLabel
             Left = 282
-            Height = 19
+            Height = 17
             Top = 16
             Width = 26
             Caption = ' min'
@@ -1052,9 +1053,9 @@ object f_config_catalog: Tf_config_catalog
           end
           object Label117: TLabel
             Left = 322
-            Height = 19
+            Height = 17
             Top = 16
-            Width = 30
+            Width = 29
             Caption = ' max'
             ParentColor = False
             ParentFont = False
@@ -1063,7 +1064,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page1: TTabSheet
         Caption = 'Catalog'
-        ClientHeight = 475
+        ClientHeight = 477
         ClientWidth = 492
         ParentFont = False
         object Label37: TLabel
@@ -1193,7 +1194,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page1a: TTabSheet
         Caption = 'VO Catalog'
-        ClientHeight = 475
+        ClientHeight = 477
         ClientWidth = 492
         ParentFont = False
         object Label1: TLabel
@@ -1332,7 +1333,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page1b: TTabSheet
         Caption = 'User defined objects'
-        ClientHeight = 475
+        ClientHeight = 477
         ClientWidth = 492
         ParentFont = False
         object Label6: TLabel
@@ -1449,7 +1450,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page5: TTabSheet
         Caption = 'Other software'
-        ClientHeight = 475
+        ClientHeight = 477
         ClientWidth = 492
         ParentFont = False
         object GroupBox1: TGroupBox
@@ -1784,7 +1785,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page4: TTabSheet
         Caption = 'Obsolete stars'
-        ClientHeight = 475
+        ClientHeight = 477
         ClientWidth = 492
         ParentFont = False
         object Label88: TLabel
@@ -2569,7 +2570,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page4b: TTabSheet
         Caption = 'Obsolete DSO'
-        ClientHeight = 475
+        ClientHeight = 477
         ClientWidth = 492
         object Label95: TLabel
           Left = 8
@@ -2728,18 +2729,18 @@ object f_config_catalog: Tf_config_catalog
     end
     object FOVPanel: TPanel
       Left = 1
-      Height = 45
-      Top = 480
+      Height = 43
+      Top = 482
       Width = 502
       Align = alBottom
       AutoSize = True
-      ClientHeight = 45
+      ClientHeight = 43
       ClientWidth = 502
       ParentFont = False
       TabOrder = 0
       object fw0: TLabel
         Left = 82
-        Height = 19
+        Height = 17
         Top = 1
         Width = 24
         Caption = 'fw0'
@@ -2748,7 +2749,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object fw1: TLabel
         Left = 163
-        Height = 19
+        Height = 17
         Top = 1
         Width = 24
         Caption = 'fw1'
@@ -2757,7 +2758,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object fw2: TLabel
         Left = 244
-        Height = 19
+        Height = 17
         Top = 1
         Width = 24
         Caption = 'fw2'
@@ -2766,7 +2767,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object fw3: TLabel
         Left = 324
-        Height = 19
+        Height = 17
         Top = 1
         Width = 24
         Caption = 'fw3'
@@ -2775,7 +2776,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object fw4: TLabel
         Left = 405
-        Height = 19
+        Height = 17
         Top = 1
         Width = 24
         Caption = 'fw4'
@@ -2784,7 +2785,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object fw5: TLabel
         Left = 1
-        Height = 19
+        Height = 17
         Top = 25
         Width = 24
         Caption = 'fw5'
@@ -2793,7 +2794,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object fw6: TLabel
         Left = 82
-        Height = 19
+        Height = 17
         Top = 25
         Width = 24
         Caption = 'fw6'
@@ -2802,7 +2803,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object fw7: TLabel
         Left = 163
-        Height = 19
+        Height = 17
         Top = 25
         Width = 24
         Caption = 'fw7'
@@ -2811,7 +2812,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object fw8: TLabel
         Left = 244
-        Height = 19
+        Height = 17
         Top = 25
         Width = 24
         Caption = 'fw8'
@@ -2820,7 +2821,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object fw9: TLabel
         Left = 324
-        Height = 19
+        Height = 17
         Top = 25
         Width = 24
         Caption = 'fw9'
@@ -2829,7 +2830,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object Label5: TLabel
         Left = 1
-        Height = 19
+        Height = 17
         Top = 1
         Width = 73
         Caption = 'fov number'
@@ -2838,7 +2839,7 @@ object f_config_catalog: Tf_config_catalog
       end
       object fw10: TLabel
         Left = 405
-        Height = 19
+        Height = 17
         Top = 25
         Width = 32
         Caption = 'fw10'
@@ -2849,8 +2850,8 @@ object f_config_catalog: Tf_config_catalog
   end
   object OpenDialog1: TOpenDialog
     FilterIndex = 0
-    left = 113
-    top = 534
+    Left = 113
+    Top = 534
   end
   object ColorDialog1: TColorDialog
     Color = clBlack
@@ -2876,12 +2877,12 @@ object f_config_catalog: Tf_config_catalog
       'ColorS=F0FBFF'
       'ColorT=A4A0A0'
     )
-    left = 57
-    top = 534
+    Left = 57
+    Top = 534
   end
   object ImageList1: TImageList
-    left = 8
-    top = 534
+    Left = 8
+    Top = 534
     Bitmap = {
       4C69040000001000000010000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3015,12 +3016,12 @@ object f_config_catalog: Tf_config_catalog
     }
   end
   object SaveDialog1: TSaveDialog
-    left = 158
-    top = 534
+    Left = 158
+    Top = 534
   end
   object OpenDialog2: TOpenDialog
-    left = 207
-    top = 534
+    Left = 207
+    Top = 534
   end
   object DownloadDialog1: TDownloadDialog
     Timeout = 90000
@@ -3028,7 +3029,7 @@ object f_config_catalog: Tf_config_catalog
     FtpFwPassive = True
     ConfirmDownload = True
     QuickCancel = False
-    left = 424
-    top = 448
+    Left = 424
+    Top = 448
   end
 end

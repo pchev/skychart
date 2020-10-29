@@ -184,6 +184,7 @@ type
     function OpenDSL(surface, forcecolor: boolean; col: integer): boolean;
     function CloseDSL: boolean;
     function ReadDSL(var rec: GcatRec): boolean;
+    Function IsDefaultStarspath(path : string) : Boolean;
     function OpenDefaultStars: boolean;
     procedure OpenDefaultStarsPos(ar1, ar2, de1, de2: double; var ok: boolean);
     function CloseDefaultStars: boolean;
@@ -1157,6 +1158,11 @@ begin
     end;
     break;
   until not Result;
+end;
+
+Function Tcatalog.IsDefaultStarspath(path : string) : Boolean;
+begin
+  result:= FileExists(slash(path)+'star.hdr');
 end;
 
 function Tcatalog.OpenDefaultStars: boolean;
@@ -5417,6 +5423,7 @@ end;
 function Tcatalog.CheckPath(cat: integer; catpath: string): boolean;
 begin
   case cat of
+    DefStar: Result := IsDefaultStarspath(catpath);
     bsc: Result := IsBSCPath(catpath);
     sky2000: Result := IsSkyPath(catpath);
     tyc: Result := IsTYCPath(catpath);
