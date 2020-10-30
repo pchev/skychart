@@ -6286,6 +6286,8 @@ begin
   def_cfgsc.ShowHorizonPicture := True;
   def_cfgsc.HorizonPictureLowQuality := True;
   def_cfgsc.HorizonPictureRotate := 0;
+  def_cfgsc.HorizonPictureElevation := 0;
+  def_cfgsc.DarkenHorizonPicture := True;
   def_cfgsc.ShowHorizonDepression := False;
   def_cfgsc.ShowHorizon0 := True;
   def_cfgsc.HorizonMax := 0;
@@ -7257,8 +7259,9 @@ begin
           ReadBool(section, 'ShowHorizonPicture', csc.ShowHorizonPicture);
         csc.HorizonPictureLowQuality :=
           ReadBool(section, 'HorizonPictureLowQuality', csc.HorizonPictureLowQuality);
-        csc.HorizonPictureRotate :=
-          ReadFloat(section, 'HorizonPictureRotate', csc.HorizonPictureRotate);
+        csc.HorizonPictureRotate := ReadFloat(section, 'HorizonPictureRotate', csc.HorizonPictureRotate);
+        csc.HorizonPictureElevation := ReadFloat(section, 'HorizonPictureElevation', csc.HorizonPictureElevation);
+        csc.DarkenHorizonPicture := ReadBool(section, 'DarkenHorizonPicture', csc.DarkenHorizonPicture);
         csc.FillHorizon := ReadBool(section, 'FillHorizon', csc.FillHorizon);
         csc.ShowHorizonDepression :=
           ReadBool(section, 'ShowHorizonDepression', csc.ShowHorizonDepression);
@@ -8611,6 +8614,8 @@ begin
         WriteBool(section, 'ShowHorizonPicture', csc.ShowHorizonPicture);
         WriteBool(section, 'HorizonPictureLowQuality', csc.HorizonPictureLowQuality);
         WriteFloat(section, 'HorizonPictureRotate', csc.HorizonPictureRotate);
+        WriteFloat(section, 'HorizonPictureElevation', csc.HorizonPictureElevation);
+        WriteBool(section, 'DarkenHorizonPicture', csc.DarkenHorizonPicture);
         WriteBool(section, 'FillHorizon', csc.FillHorizon);
         WriteBool(section, 'ShowHorizonDepression', csc.ShowHorizonDepression);
         WriteBool(section, 'ShowHorizon0', csc.ShowHorizon0);

@@ -38,7 +38,11 @@ type
 
   Tf_config_observatory = class(TFrame)
     altmeter: TFloatEdit;
+    DarkenHorizon: TCheckBox;
+    pictureelevation: TFloatEdit;
     HorizonRise: TCheckBox;
+    Label10: TLabel;
+    Label11: TLabel;
     ShowHorizon0: TCheckBox;
     HorizonQuality: TCheckBox;
     displayhorizonpicture: TCheckBox;
@@ -111,10 +115,12 @@ type
     procedure Button6Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
+    procedure DarkenHorizonChange(Sender: TObject);
     procedure HorizonRiseClick(Sender: TObject);
     procedure latKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure longKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: boolean);
+    procedure pictureelevationChange(Sender: TObject);
     procedure ShowHorizon0Click(Sender: TObject);
     procedure ComboBox1Select(Sender: TObject);
     procedure countrylistSelect(Sender: TObject);
@@ -714,6 +720,7 @@ begin
   csc.HorizonFile := TObsDetail(cmain.ObsNameList.Objects[i]).horizonfn;
   csc.HorizonPictureFile := TObsDetail(cmain.ObsNameList.Objects[i]).horizonpictfn;
   csc.HorizonPictureRotate := TObsDetail(cmain.ObsNameList.Objects[i]).pictureangleoffset;
+  csc.HorizonPictureElevation := TObsDetail(cmain.ObsNameList.Objects[i]).pictureelevation;
   csc.ShowHorizon := TObsDetail(cmain.ObsNameList.Objects[i]).showhorizonline;
   csc.ShowHorizonPicture := TObsDetail(cmain.ObsNameList.Objects[i]).showhorizonpicture;
   f_observatory_db.csc.ObsCountry := csc.ObsCountry;
@@ -1036,7 +1043,9 @@ begin
     horizonpicturefile.FilterIndex := 0;
   displayhorizonpicture.Checked := csc.ShowHorizonPicture;
   HorizonQuality.Checked := not csc.HorizonPictureLowQuality;
+  DarkenHorizon.Checked := csc.DarkenHorizonPicture;
   picturerotation.Value := csc.HorizonPictureRotate;
+  pictureelevation.Value := csc.HorizonPictureElevation;
   fillhorizon.Checked := csc.FillHorizon;
   ShowHorizon0.Checked := csc.ShowHorizon0;
   HorizonRise.Checked := csc.HorizonRise;
@@ -1110,6 +1119,16 @@ end;
 procedure Tf_config_observatory.HorizonQualityClick(Sender: TObject);
 begin
   csc.HorizonPictureLowQuality := not HorizonQuality.Checked;
+end;
+
+procedure Tf_config_observatory.DarkenHorizonChange(Sender: TObject);
+begin
+  csc.DarkenHorizonPicture := DarkenHorizon.Checked;
+end;
+
+procedure Tf_config_observatory.pictureelevationChange(Sender: TObject);
+begin
+  csc.HorizonPictureElevation := pictureelevation.Value;
 end;
 
 procedure Tf_config_observatory.picturerotationChange(Sender: TObject);

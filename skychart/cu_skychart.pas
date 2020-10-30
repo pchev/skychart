@@ -849,7 +849,8 @@ end;
 
 function Tskychart.InitColor: boolean;
 var
-  i: integer;
+  i,n: integer;
+  p: PBGRAPixel;
 begin
   if VerboseMsg then
     WriteTrace('SkyChart ' + cfgsc.chartname + ': Init colors');
@@ -864,54 +865,105 @@ begin
   end
   else
     cfgsc.WhiteBg := False;
+  if (cfgsc.fov > 10 * deg2rad) then
+  begin
+    if cfgsc.CurSunH > 0 then begin
+      i := 1;
+      n := 0;
+    end
+    else if cfgsc.CurSunH > -5 * deg2rad then begin
+      i := 2;
+      n := 30;
+    end
+    else if cfgsc.CurSunH > -11 * deg2rad then begin
+      i := 3;
+      n := 50;
+    end
+    else if cfgsc.CurSunH > -13 * deg2rad then begin
+      i := 4;
+      n := 70;
+    end
+    else if cfgsc.CurSunH > -15 * deg2rad then begin
+      i := 5;
+      n := 90;
+    end
+    else if cfgsc.CurSunH > -17 * deg2rad then begin
+      i := 6;
+      n := 110;
+    end
+    else begin
+      i := 7;
+      n := 130;
+    end;
+  end
+  else
+  if cfgsc.CurSunH > 0 then begin
+    i := 5;
+    n := 90;
+  end
+  else if cfgsc.CurSunH > -5 * deg2rad then begin
+    i := 5;
+    n := 90;
+  end
+  else if cfgsc.CurSunH > -11 * deg2rad then begin
+    i := 6;
+    n := 110;
+  end
+  else if cfgsc.CurSunH > -13 * deg2rad then begin
+    i := 6;
+    n := 110;
+  end
+  else if cfgsc.CurSunH > -15 * deg2rad then begin
+    i := 7;
+    n := 130;
+  end
+  else if cfgsc.CurSunH > -17 * deg2rad then begin
+    i := 7;
+    n := 130;
+  end
+  else begin
+    i := 7;
+    n := 130;
+  end;
+  if (i >= 5) and (cfgsc.CurMoonH > 0) then
+  begin
+    if (cfgsc.CurMoonIllum > 0.1) and (cfgsc.CurMoonIllum < 0.5) then begin
+      i := i - 1;
+      n := n - 20;
+    end;
+    if (cfgsc.CurMoonIllum >= 0.5) then begin
+      i := i - 2;
+      n := n - 50;
+    end;
+    if i < 5 then begin
+      i := 5;
+      n := 90;
+    end;
+  end;
   if Fplot.cfgplot.autoskycolorValid and (cfgsc.Projpole = AltAz) then
   begin
-    if (cfgsc.fov > 10 * deg2rad) then
-    begin
-      if cfgsc.CurSunH > 0 then
-        i := 1
-      else if cfgsc.CurSunH > -5 * deg2rad then
-        i := 2
-      else if cfgsc.CurSunH > -11 * deg2rad then
-        i := 3
-      else if cfgsc.CurSunH > -13 * deg2rad then
-        i := 4
-      else if cfgsc.CurSunH > -15 * deg2rad then
-        i := 5
-      else if cfgsc.CurSunH > -17 * deg2rad then
-        i := 6
-      else
-        i := 7;
-    end
-    else
-    if cfgsc.CurSunH > 0 then
-      i := 5
-    else if cfgsc.CurSunH > -5 * deg2rad then
-      i := 5
-    else if cfgsc.CurSunH > -11 * deg2rad then
-      i := 6
-    else if cfgsc.CurSunH > -13 * deg2rad then
-      i := 6
-    else if cfgsc.CurSunH > -15 * deg2rad then
-      i := 7
-    else if cfgsc.CurSunH > -17 * deg2rad then
-      i := 7
-    else
-      i := 7;
-    if (i >= 5) and (cfgsc.CurMoonH > 0) then
-    begin
-      if (cfgsc.CurMoonIllum > 0.1) and (cfgsc.CurMoonIllum < 0.5) then
-        i := i - 1;
-      if (cfgsc.CurMoonIllum >= 0.5) then
-        i := i - 2;
-      if i < 5 then
-        i := 5;
-    end;
     Fplot.cfgplot.color[0] := Fplot.cfgplot.SkyColor[i];
   end
   else
     Fplot.cfgplot.color[0] := Fplot.cfgplot.bgColor;
   Fplot.cfgplot.backgroundcolor := Fplot.cfgplot.color[0];
+  if not cfgsc.DarkenHorizonPicture then n:=0;
+  if cfgsc.horizonpicturevalid and (n <> cfgsc.horizondarken) then
+  begin
+    cfgsc.horizondarken := n;
+    cfgsc.horizonpicturedark.Assign(cfgsc.horizonpicture);
+    p := cfgsc.horizonpicturedark.Data;
+    for i := cfgsc.horizonpicturedark.NbPixels-1 downto 0 do
+    begin
+      if p^.alpha>0 then begin
+        p^.red := max(0,p^.red-n);
+        p^.green := max(0,p^.green-n);
+        p^.blue := max(0,p^.blue-n);
+      end;
+      inc(p);
+    end;
+    cfgsc.horizonpicturedark.InvalidateBitmap;
+  end;
   Fplot.init(Fplot.cfgchart.Width, Fplot.cfgchart.Height);
   if Fplot.cfgchart.onprinter and (Fplot.cfgplot.starplot = 0) and
     (Fplot.cfgplot.color[1] <> clBlack) then
@@ -5500,6 +5552,7 @@ begin
         begin
           az := rmod(pid2 + pi4 + az - cfgsc.HorizonPictureRotate * deg2rad, pi2);
           x := hsx * az * rad2deg;
+          h := min( max(-pid2, (h - cfgsc.HorizonPictureElevation * deg2rad)), pid2);
           y := hsy - hsx * h * rad2deg;
         end;
       end;
@@ -5546,12 +5599,12 @@ begin
   for i := 0 to n - 1 do
   begin
     thread[i] := TDrawHorizonThread.Create(True);
-    thread[i].horizonpicture := cfgsc.horizonpicture;
+    thread[i].horizonpicture := cfgsc.horizonpicturedark;
     thread[i].hbmp := hbmp;
     thread[i].col2 := ColorToBGRA(FPlot.cfgplot.Color[19]);
     thread[i].cfgsc := cfgsc;
     thread[i].lowquality := cfgsc.HorizonPictureLowQuality or
-      ((pi2 / cfgsc.horizonpicture.Width) > (2 * cfgsc.fov / hbmp.Width));
+      ((pi2 / cfgsc.horizonpicturedark.Width) > (2 * cfgsc.fov / hbmp.Width));
     thread[i].num := n;
     thread[i].id := i;
     thread[i].Start;
@@ -5579,7 +5632,7 @@ var
   az, h, hstep, azp, hpstep, x1, y1, hlimit, daz, fillfov, hh, de: double;
   ps: array[0..1, 0..2 * hdiv + 1] of single;
   psf: array of TPointF;
-  i, j: integer;
+  i, j, n: integer;
   xx, yy: int64;
   x, y, xh, yh, xp, yp, xph, yph, x0h, y0h, fillx1, filly1, fillx2, filly2: single;
   First, fill, ok, hlplot: boolean;
@@ -8637,6 +8690,7 @@ begin
     if cfgsc.horizonpicturevalid and (fname = cfgsc.horizonpicturename) then
       exit;
     cfgsc.horizonpicturevalid := False;
+    cfgsc.horizondarken := -1;
     cfgsc.horizonpicturename := '';
     if fname = '' then
       exit;
@@ -8669,6 +8723,7 @@ var
   f: textfile;
   fname,buf: string;
 begin
+  try
   fname:=cfgsc.HorizonFile;
   if (fname = cfgsc.horizonlistname) then
     exit;
@@ -8752,6 +8807,8 @@ begin
       cfgsc.horizonlist[0] := cfgsc.horizonlist[1];
       cfgsc.horizonlist[361] := cfgsc.horizonlist[1];
     end;
+  end;
+  except
   end;
 end;
 

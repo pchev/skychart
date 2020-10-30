@@ -1038,9 +1038,9 @@ type
     ShowHorizon0, ShowHorizonDepression: boolean;
     PrePointRA, PrePointDEC, PrePointTime, PrePointMarkRA, PrePointMarkDEC: double;
     PrePointLength: integer;
-    DrawPrePoint: Boolean;
+    DrawPrePoint, DarkenHorizonPicture: Boolean;
     CurTime, DT_UT_val, GRSlongitude, GRSjd, GRSdrift, TelescopeTurnsX,
-    TelescopeTurnsY, TelescopeJD, HorizonPictureRotate: double;
+    TelescopeTurnsY, TelescopeJD, HorizonPictureRotate, HorizonPictureElevation: double;
     PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline, DSLforcecolor, DSLsurface, SurfaceBlure: boolean;
     ManualTelescopeType, CoordType, DSLcolor, SurfaceAlpha: integer;
     IndiServerHost, IndiServerPort, IndiDevice: string;
@@ -1092,10 +1092,11 @@ type
     AsteroidName: TasteroidName;
     CometName: Tcometname;
     horizonlist: Thorizonlist;
-    horizonpicture: TBGRABitmap;
+    horizonpicture, horizonpicturedark: TBGRABitmap;
     HorizonFile, HorizonPictureFile: string;
     horizonlistname, horizonpicturename: string;
     horizonpicturevalid: boolean;
+    horizondarken: integer;
     nummodlabels, posmodlabels, numcustomlabels, poscustomlabels: integer;
     modlabels: array[1..maxmodlabels] of Tmodlabel;
     customlabels: array[1..maxmodlabels] of Tcustomlabel;
@@ -1180,7 +1181,7 @@ type
   TObsDetail = class(TObject)
   public
     country, tz, horizonfn, horizonpictfn: string;
-    lat, lon, alt, pictureangleoffset: double;
+    lat, lon, alt, pictureangleoffset,pictureelevation: double;
     countrytz, showhorizonline, showhorizonpicture: boolean;
     constructor Create;
     destructor Destroy; override;
@@ -2203,7 +2204,9 @@ constructor Tconf_skychart.Create;
 begin
   inherited Create;
   horizonpicture := TBGRABitmap.Create;
+  horizonpicturedark := TBGRABitmap.Create;
   horizonpicturevalid := False;
+  horizondarken := -1;
   horizonlistname := '';
   tz := TCdCTimeZone.Create;
   ncircle := 10;
@@ -2238,6 +2241,7 @@ begin
   SetLength(CometName, 0);
   tz.Free;
   horizonpicture.Free;
+  horizonpicturedark.Free;
   inherited Destroy;
 end;
 
@@ -2415,6 +2419,7 @@ begin
   ShowHorizonPicture := Source.ShowHorizonPicture;
   HorizonPictureLowQuality := Source.HorizonPictureLowQuality;
   HorizonPictureRotate := Source.HorizonPictureRotate;
+  HorizonPictureElevation := Source.HorizonPictureElevation;
   FillHorizon := Source.FillHorizon;
   ShowHorizonDepression := Source.ShowHorizonDepression;
   ShowHorizon0 := Source.ShowHorizon0;
@@ -2739,10 +2744,13 @@ begin
     ArchiveDirActive[i] := Source.ArchiveDirActive[i];
   HorizonFile := Source.HorizonFile;
   HorizonPictureFile := Source.HorizonPictureFile;
+  DarkenHorizonPicture := Source.DarkenHorizonPicture;
   for i := 0 to 360 do
     horizonlist[i] := Source.horizonlist[i];
   horizonpicture.Assign(Source.horizonpicture);
+  horizonpicturedark.Assign(Source.horizonpicturedark);
   horizonpicturevalid := Source.horizonpicturevalid;
+  horizondarken := Source.horizondarken;
   horizonpicturename := Source.horizonpicturename;
   horizonlistname := Source.horizonlistname;
 end;
