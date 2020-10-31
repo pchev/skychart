@@ -20,7 +20,7 @@ SRC =	passpice.c
 
 all: cspice $(SO_Name)
 
-$(SO_Name): $(OBJS)
+$(SO_Name): cspice $(OBJS)
 	$(CC) $(CFLAGS) $(LIBFLAGS) -o $@ $(SRC) $(LIBS)
 
 cspice:
