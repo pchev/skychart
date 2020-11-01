@@ -1,0 +1,24 @@
+CC = x86_64-w64-mingw32-gcc
+CP = cp
+
+SO_Name       = libcalceph.dll
+
+CFLAGS  = -DHAVE_CONFIG_H=1 -I. -O2 -fPIC $(arch_flags)
+LIBFLAGS = -shared -static -static-libgcc -Wl,-soname,$(SO_Name)
+
+.PHONY: all clean
+
+SRC=$(wildcard *.c)
+
+OBJ=$(SRC:.c=.o)
+
+all: $(SO_Name)
+
+$(SO_Name): calcephconfig.h $(OBJS)
+	$(CC) $(CFLAGS) $(LIBFLAGS) -o $@ $(SRC) $(LIBS)
+
+calcephconfig.h : 
+	$(CP) calcephconfig.vc calcephconfig.h
+
+clean:
+	rm -f calcephconfig.h *.a *.o $(SO_Name)

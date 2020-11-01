@@ -1,11 +1,11 @@
 Version 4.3 beta, release Notes
 
-New calculation of the planetary satellites with SPICE:
-To have the best possible precision of the position it is now possible to calculate it using SPICE.
+New calculation of the planetary satellites with CALCEPH library:
+To have the best possible precision of the position it is now possible to calculate it using a SPICE kernel.
 To do this, you have to install the corresponding data files from:
 https://sourceforge.net/projects/skychart/files/2-catalogs/SpiceKernel/
 The skychart-spice-base file is required and you can add skychart-spice-ext for more satellites. The list of satellites in each file can be found on the download page.
-On Linux you also need to install Libpasastro version 1.4.0 before you can use this function: https://sourceforge.net/projects/libpasastro/
+On Linux you also need to install libcalceph before you can use this function: https://sourceforge.net/projects/libpasastro/
 
 New functions:
 - Allow to import a mosaic in the observing list
