@@ -430,7 +430,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item25>
     </RequiredPackages>
-    <Units Count="86">
+    <Units Count="88">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -950,6 +950,14 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit85>
+      <Unit86>
+        <Filename Value="calceph.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit86>
+      <Unit87>
+        <Filename Value="cu_calceph.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit87>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

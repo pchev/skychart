@@ -35,7 +35,7 @@ uses
   {$ifdef unix}
   BaseUnix,
   {$endif}
-  lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet, cu_fits,
+  lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_calceph,
   cu_database, fu_chart, cu_tcpserver, pu_config_time, pu_config_observatory,
   pu_config_display, pu_config_pictures, pu_indigui, pu_config_catalog, pu_prepoint,
   pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
@@ -2430,6 +2430,7 @@ var
   step, buf: string;
   i: integer;
   c: TBGRAPixel;
+  fn: array of string;
 begin
   try
 
@@ -2641,12 +2642,12 @@ begin
       Halt;
     end;
 
-    step := 'Load libspice';
+{    step := 'Load libspice';
     if VerboseMsg then
-      WriteTrace(step);
-    SpiceBaseOk:=false;
+      WriteTrace(step);}
+    SpiceBaseOk:=false;       // Replaced by Calceph
     SpiceExtOk:=false;
-    SpiceLib := LoadLibrary(libspice);
+{    SpiceLib := LoadLibrary(libspice);
     if SpiceLib <> 0 then  begin
       SpiceIniterr:=Tiniterr(GetProcAddress(SpiceLib, 'initerr'));
       SpiceLoadspk := Tloadspk(GetProcAddress(SpiceLib, 'loadspk'));
@@ -2663,6 +2664,31 @@ begin
       SpiceBaseOk:=(i=0);
       i:=i+SpiceLoadspk(pchar(slash(SpiceFolder)+'cdcext.bsp'));
       SpiceExtOk:=(i=0);
+    end; }
+
+    step := 'Load Calceph';
+    CalcephBaseOk:=false;
+    CalcephExtOk:=false;
+    Load_LibCalceph;
+    if libcalceph<>0 then begin
+      CalcephFolder:=slash(Appdir) + slash('data') + 'spice_eph';
+      SetLength(fn,2);
+      fn[0]:=slash(CalcephFolder)+'cdcbase.bsp';
+      fn[1]:=slash(CalcephFolder)+'cdcext.bsp';
+      if FileExistsUTF8(fn[0]) then begin
+        i:=1;
+        CalcephBaseOk:=true;
+        if FileExistsUTF8(fn[1]) then begin
+          i:=2;
+          CalcephExtOk:=true;
+        end;
+        SetLength(fn,i);
+        InitCalceph(i,fn);
+        if libcalceph=0 then begin
+          CalcephBaseOk:=false;
+          CalcephExtOk:=false;
+        end;
+      end;
     end;
 
     step := 'Multiframe border';

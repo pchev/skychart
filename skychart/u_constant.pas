@@ -345,6 +345,22 @@ const
     712, 713, 714, 715, 725, 726, 727,
     803, 804, 805, 806, 807, 808);
 
+  spicesegid: array[1..MaxPla] of string =
+    ('', '', '', '', '',
+    '', '', '', '', '', '',
+    'JUP310', 'JUP310', 'JUP310', 'JUP310', 'SAT427', 'SAT427',
+    'SAT427', 'SAT427',
+    'SAT427', 'SAT427', 'SAT427', 'SAT427', 'URA111', 'URA111',
+    'URA111', 'URA111',
+    'URA111', 'MAR097', 'MAR097', '', '',
+    'SAT427', 'NEP095', 'NEP095', 'PLU055',
+    'JUP310', 'JUP310', 'JUP310', 'JUP310',
+    'SAT393', 'SAT393', 'SAT427', 'SAT427', 'SAT427', 'SAT393',
+    'SAT393', 'SAT393', 'SAT393-PAN', 'SAT393-DAPHNIS',
+    'URA115', 'URA115', 'URA115', 'URA115', 'URA115', 'URA115',
+    'URA115', 'URA115', 'URA115', 'URA115', 'URA115', 'URA115', 'URA115',
+    'NEP095', 'NEP095', 'NEP095', 'NEP095', 'NEP095', 'NEP095');
+
   spicebody: array[1..9,1..20] of integer=(
     (-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ),
     (-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ),
@@ -1056,7 +1072,7 @@ type
     HorizonRise: boolean;
     // working variable
     ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid,
-    SpiceActive, SmallSatActive, ShowEarthShadowValid, ShowEclipticValid, PlotImageFirst: boolean;
+    CalcephActive, SpiceActive, SmallSatActive, ShowEarthShadowValid, ShowEclipticValid, PlotImageFirst: boolean;
     HorizonMax, HorizonMin, rap2000, dep2000, RefractionOffset, ObsRAU, ObsZAU, Diurab: double;
     racentre2000,decentre2000: double;
     haicx, haicy, ObsRefractionCor, ObsRefA, ObsRefB, ObsHorizonDepression,
@@ -2606,6 +2622,7 @@ begin
   PlotImageFirst := Source.PlotImageFirst;
   SmallSatActive := Source.SmallSatActive;
   SpiceActive := Source.SpiceActive;
+  CalcephActive := Source.CalcephActive;
   BGalpha := Source.BGalpha;
   BGitt := Source.BGitt;
   BGmin_sigma := Source.BGmin_sigma;

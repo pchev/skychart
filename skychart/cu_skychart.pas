@@ -4459,7 +4459,7 @@ const
         if cfgsc.FindIpla <= 11 then
            eph := fplanet.eph_method
         else begin
-           if cfgsc.SpiceActive then
+           if cfgsc.SpiceActive or cfgsc.CalcephActive then
               eph := 'SPICE'
            else
               eph := '';

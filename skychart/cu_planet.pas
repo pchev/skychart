@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  passql, pasmysql, passqlite, uDE, cu_plansat,
+  passql, pasmysql, passqlite, uDE, cu_plansat, cu_calceph, calceph,
   u_translation, cu_database, u_constant, u_util, u_projection,
   Classes, SysUtils, Forms, Math;
 
@@ -92,6 +92,8 @@ type
     procedure SunEcl(t0: double; var l, b: double);
     procedure PlanSat(isat: integer; jde: double; c:Tconf_skychart; var alpha, delta, distance: double;
       var supconj: boolean; var eph: string);
+    function CalcephSatOne(jdtt: double; isat: integer; out x, y, z: double; out segid: string):integer;
+    function CalcephSat(jdtt: double; pla,num: integer; out xt, yt, zt: double20):integer;
     function SpiceSatOne(jdtt: double; isat: integer; out x, y, z: double; out segid: string):integer;
     function SpiceSat(jdtt: double; pla,num: integer; out xt, yt, zt: double20):integer;
     function MarSat(jde, lighttime, xp, yp, zp: double; c:Tconf_skychart; var xsat, ysat: double20;
@@ -510,7 +512,10 @@ begin
     y := yp + ys;
     z := zp + zs;
     d1 := sqrt(x * x + y * y + z * z);
-    if c.SpiceActive then begin
+    if c.CalcephActive then begin
+      CalcephSatOne(jde, isat, x, y, z, eph);
+    end
+    else if c.SpiceActive then begin
       SpiceSatOne(jde, isat, x, y, z, eph);
     end
     else begin
@@ -537,6 +542,64 @@ begin
       delta := arctan(z / qr);
     supconj := (d2 > d1);
     distance := d2;
+  end;
+end;
+
+function TPlanet.CalcephSatOne(jdtt: double; isat: integer; out x, y, z: double; out segid: string):integer;
+var
+  pv: TDoubleArray;
+  target,obs: integer;
+begin
+  try
+  obs := 399;                // geocentric
+  target:=naif[isat];
+  if CalcephCompute(jdtt,target,obs,pv) then begin
+    x := pv[0] / km_au;
+    y := pv[1] / km_au;
+    z := pv[2] / km_au;
+    segid:=trim(spicesegid[isat]);
+    result:=0;
+  end
+  else begin
+    WriteTrace(cu_calceph.LastError);
+    x := 0;
+    y := 0;
+    z := 0;
+    segid:='';
+    result:=1;
+  end;
+  except
+    result:=1;
+  end;
+end;
+
+function TPlanet.CalcephSat(jdtt: double; pla,num: integer; out xt, yt, zt: double20):integer;
+var
+  i: integer;
+  pv: TDoubleArray;
+  target,obs: integer;
+begin
+  try
+  result:=0;
+  for i := 1 to num do
+  begin
+    obs := 399;                // geocentric
+    target:=spicebody[pla,i];
+    if CalcephCompute(jdtt,target,obs,pv) then begin
+      xt[i] := pv[0] / km_au;
+      yt[i] := pv[1] / km_au;
+      zt[i] := pv[2] / km_au;
+    end
+    else begin
+      WriteTrace(cu_calceph.LastError);
+      xt[i] := 0;
+      yt[i] := 0;
+      zt[i] := 0;
+      result:=1;
+    end;
+  end;
+  except
+    result:=1;
   end;
 end;
 
@@ -619,7 +682,10 @@ begin
   z := zp + zs;
   d1 := sqrt(x * x + y * y + z * z);
   d1 := sqrt(x * x + y * y + z * z);
-  if c.SpiceActive then
+  if c.CalcephActive then begin
+    Result:=CalcephSat(jde,4,n,xt,yt,zt);
+  end
+  else if c.SpiceActive then
   begin
     Result:=SpiceSat(jde,4,n,xt,yt,zt);
   end
@@ -672,7 +738,10 @@ begin
   y := yp + ys;
   z := zp + zs;
   d1 := sqrt(x * x + y * y + z * z);
-  if c.SpiceActive then
+  if c.CalcephActive then begin
+    Result:=CalcephSat(jde,5,n,xt,yt,zt);
+  end
+  else if c.SpiceActive then
   begin
     Result:=SpiceSat(jde,5,n,xt,yt,zt);
   end
@@ -726,7 +795,10 @@ begin
   y := yp + ys;
   z := zp + zs;
   d1 := sqrt(x * x + y * y + z * z);
-  if c.SpiceActive then
+  if c.CalcephActive then begin
+    Result:=CalcephSat(jde,6,n,xt,yt,zt);
+  end
+  else if c.SpiceActive then
   begin
     Result:=SpiceSat(jde,6,n,xt,yt,zt);
   end
@@ -779,7 +851,10 @@ begin
   y := yp + ys;
   z := zp + zs;
   d1 := sqrt(x * x + y * y + z * z);
-  if c.SpiceActive then
+  if c.CalcephActive then begin
+    Result:=CalcephSat(jde,7,n,xt,yt,zt);
+  end
+  else if c.SpiceActive then
   begin
     Result:=SpiceSat(jde,7,n,xt,yt,zt);
   end
@@ -832,7 +907,10 @@ begin
   y := yp + ys;
   z := zp + zs;
   d1 := sqrt(x * x + y * y + z * z);
-  if c.SpiceActive then
+  if c.CalcephActive then begin
+    Result:=CalcephSat(jde,8,n,xt,yt,zt);
+  end
+  else if c.SpiceActive then
   begin
     Result:=SpiceSat(jde,8,n,xt,yt,zt);
   end
@@ -882,7 +960,10 @@ begin
   y := yp + ys;
   z := zp + zs;
   d1 := sqrt(x * x + y * y + z * z);
-  if c.SpiceActive then
+  if c.CalcephActive then begin
+    Result:=CalcephSat(jde,9,n,xt,yt,zt);
+  end
+  else if c.SpiceActive then
   begin
     Result:=SpiceSat(jde,9,n,xt,yt,zt);
   end
@@ -1361,8 +1442,12 @@ begin
       application.ProcessMessages;
     end;
     lockpla := True;
-    cfgsc.SpiceActive:=SpiceBaseOk and (cfgsc.CurYear >= SpiceFirstYear) and (cfgsc.CurYear <= SpiceLastYear);
-    if cfgsc.SpiceActive
+    cfgsc.CalcephActive:=CalcephBaseOk  and (cfgsc.CurYear >= SpiceFirstYear) and (cfgsc.CurYear <= SpiceLastYear);
+    cfgsc.SpiceActive:=(not cfgsc.CalcephActive) and SpiceBaseOk and (cfgsc.CurYear >= SpiceFirstYear) and (cfgsc.CurYear <= SpiceLastYear);
+    if cfgsc.CalcephActive
+    then
+      cfgsc.SmallSatActive := cfgsc.ShowSmallsat and CalcephExtOk
+    else if cfgsc.SpiceActive
     then
       cfgsc.SmallSatActive := cfgsc.ShowSmallsat and SpiceExtOk
     else
