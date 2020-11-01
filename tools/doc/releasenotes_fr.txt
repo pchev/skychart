@@ -5,7 +5,7 @@ Pour avoir la meilleur précision possible de la position il est maintenant poss
 Il faut pour cela installer les fichiers de données correspondant depuis:
 https://sourceforge.net/projects/skychart/files/2-catalogs/SpiceKernel/
 Le fichier skychart-spice-base est requis et vous pouvez ajouter skychart-spice-ext pour plus de satellites. La liste des satellites dans chaque fichier figure sur la page de téléchargement.
-Avec Linux vous devez installer libcalceph avant d'utiliser cette fonction: https://sourceforge.net/projects/libpasastro/
+Avec Linux vous devez installer libcalceph avant d'utiliser cette fonction: https://github.com/pchev/libcalceph/releases/tag/v1.0.0
 
 Nouvelles fonctions:
 - Permet de charger une mosaique dans la liste d'observation
