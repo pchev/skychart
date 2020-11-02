@@ -559,6 +559,10 @@ const
   URL_BugTracker = 'https://www.ap-i.net/mantis/';
   URL_DocPDF = 'https://www.ap-i.net/pub/skychart/doc/';
 
+  URL_DELTAT     = 'https://www.ap-i.net/pub/skychart/deltat/deltat.txt';
+  URL_LEAPSECOND = 'https://www.ap-i.net/pub/skychart/deltat/leap-seconds.list';
+
+
   URL_TLE = 'https://www.space-track.org';
   URL_QUICKSAT = 'https://www.prismnet.com/~mmccants/';
   URL_QSMAG = 'https://www.prismnet.com/~mmccants/programs/qsmag.zip';

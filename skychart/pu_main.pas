@@ -849,7 +849,7 @@ type
     procedure SendImageFits(client, imgname, imgid, url: string);
     procedure SendSelectRow(tableid, url, row: string);
     procedure LoadDeltaT;
-    procedure LoadLeapseconds;
+    procedure LoadLeapseconds(canrestart: boolean=true);
   end;
 
 var
@@ -11854,20 +11854,18 @@ end;
 
 procedure Tf_main.MenuUpdDeltaTClick(Sender: TObject);
 var
-  fn, url: string;
+  fn: string;
 begin
-    url := 'https://www.ap-i.net/pub/skychart/deltat/leap-seconds.list';
     fn :=slash(privatedir)+'leap-seconds.list';
-    if QuickDownload(url, fn, False) then begin
-      LoadLeapseconds;
+    if QuickDownload(URL_LEAPSECOND, fn, False) then begin
+      LoadLeapseconds(false);
     end
     else begin
       ShowMessage('Cannot update the Delta T file now, please check your Internet connection');
       exit;
     end;
-    url := 'https://www.ap-i.net/pub/skychart/deltat/deltat.txt';
     fn :=slash(privatedir)+'deltat.txt';
-    if QuickDownload(url, fn, False) then begin
+    if QuickDownload(URL_DELTAT, fn, False) then begin
       LoadDeltaT;
       ShowMessage(rsUpdatedSucce);
     end;
@@ -13069,7 +13067,7 @@ begin
   end;
 end;
 
-procedure Tf_main.LoadLeapseconds;
+procedure Tf_main.LoadLeapseconds(canrestart: boolean=true);
 var
   f: textfile;
   i, n: integer;
@@ -13134,9 +13132,15 @@ begin
         end;
       end;
     until EOF(f);
-    numleapseconds:=n;
-  finally
     closefile(f);
+    numleapseconds:=n;
+    if canrestart and (leapsecondexpires>0) and ((leapsecondexpires-DateTimetoJD(now))<30) then begin
+      // expire in less than one month, refresh now
+      if QuickDownload(URL_LEAPSECOND, fname, true) then begin
+        LoadLeapseconds(false);
+      end
+    end;
+  finally
     line.free;
   end;
 end;
