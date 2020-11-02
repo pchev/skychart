@@ -1468,6 +1468,9 @@ var
   ServerCoordSystem: TServerCoordSys;
   deltat: array of array of single;   // date, deltat, error
   numdeltat: integer;
+  leapseconds: array of array of double;   // date, delta_at
+  numleapseconds: integer;
+  leapsecondexpires: double;
 
 {$ifdef darwin}
   OpenFileCMD: string = 'open';

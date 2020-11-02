@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Download leap seconds file
+
+source="https://www.ietf.org/timezones/data/leap-seconds.list"
+wget $source
+
 ## Create Delta T file for Cartes du Ciel 
 
 #source=http://maia.usno.navy.mil/ser7

@@ -2047,7 +2047,7 @@ end;
 function DTminusUT(year, month, day: integer; c: Tconf_skychart): double;
 var
   i: integer;
-  y, u, v, t: double;
+  y, u, v, t, jdd: double;
 begin
   if c.Force_DT_UT then
     Result := c.DT_UT_val
@@ -2057,12 +2057,22 @@ begin
     if (numdeltat=0)or(y<deltat[0,0])or(y>=deltat[numdeltat-1,0]) then
        result:=DTminusUTComp(year, month, day, c)
     else begin
-       for i:=0 to numdeltat-1 do begin
-         if y<deltat[i,0] then begin
-            u:=(y-deltat[i-1,0])/(deltat[i,0]-deltat[i-1,0]);
-            v:=deltat[i,1]-deltat[i-1,1];
-            result:=(deltat[i-1,1]+v*u)/3600;
-            break;
+       jdd:=jd(year,month,day,23.9999999-c.TimeZone);
+       if (numleapseconds>0)and(leapsecondexpires>0)and(jdd>leapseconds[0,0])and(jdd<leapsecondexpires) then begin
+         for i:=numleapseconds-1 downto 0 do begin
+           result:=leapseconds[i,1];
+           if jdd>leapseconds[i,0] then break;
+         end;
+         result:=(result+32.184)/3600;
+       end
+       else begin
+         for i:=0 to numdeltat-1 do begin
+           if y<deltat[i,0] then begin
+              u:=(y-deltat[i-1,0])/(deltat[i,0]-deltat[i-1,0]);
+              v:=deltat[i,1]-deltat[i-1,1];
+              result:=(deltat[i-1,1]+v*u)/3600;
+              break;
+           end;
          end;
        end;
     end;
@@ -2072,18 +2082,24 @@ end;
 function DTminusUTError(year, month, day: integer; c: Tconf_skychart): double;
 var
   i: integer;
-  y, u, v, t: double;
+  y, u, v, t, jdd: double;
 begin
   y := year + (month - 1) / 12 + (day - 1) / 365.25;
   if (numdeltat=0)or(y<deltat[0,0])or(y>=deltat[numdeltat-1,0]) then
      result:=DTminusUTErrorComp(year, month, day, c)
   else begin
+    jdd:=jd(year,month,day,23.9999999-c.TimeZone);
+    if (numleapseconds>0)and(leapsecondexpires>0)and(jdd>leapseconds[0,0])and(jdd<leapsecondexpires) then begin
+      result:=0;
+    end
+    else begin
      for i:=0 to numdeltat-1 do begin
        if y<deltat[i,0] then begin
           result:=deltat[i-1,2];
           break;
        end;
      end;
+    end;
   end;
 end;
 

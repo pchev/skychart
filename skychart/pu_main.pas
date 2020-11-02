@@ -849,6 +849,7 @@ type
     procedure SendImageFits(client, imgname, imgid, url: string);
     procedure SendSelectRow(tableid, url, row: string);
     procedure LoadDeltaT;
+    procedure LoadLeapseconds;
   end;
 
 var
@@ -1398,6 +1399,7 @@ begin
     if VerboseMsg then
       WriteTrace('Load deltat');
     LoadDeltaT;
+    LoadLeapseconds;
     // must read db configuration before to create this one!
     if VerboseMsg then
       WriteTrace('Create DB');
@@ -13058,6 +13060,78 @@ begin
     numdeltat:=n;
   finally
     closefile(f);
+  end;
+end;
+
+procedure Tf_main.LoadLeapseconds;
+var
+  f: textfile;
+  i, n: integer;
+  fname,dfn,buf: string;
+  line: Tstringlist;
+  dat, sec: double;
+function toJD(ts:double):double;
+begin
+  result:=2400000.5+15020+(ts/secday);
+end;
+begin
+  numleapseconds := 0;
+  leapsecondexpires:=0;
+  setlength(leapseconds, 0, 0);
+  fname:=slash(privatedir)+'leap-seconds.list';
+  if not FileExistsUTF8(fname) then begin
+    // try to copy distribution file
+    dfn :=slash(appdir)+ slash('data')+ slash('deltat')+'leap-seconds.list';
+    if FileExistsUTF8(dfn) then
+        CopyFile( dfn , fname);
+  end;
+  if not FileExists(fname) then
+  begin
+    exit;
+  end;
+  line:=Tstringlist.Create;
+  Filemode := 0;
+  assignfile(f, fname);
+  try
+    reset(f);
+    n:=0;
+    // first loop to get the size
+    repeat
+      readln(f, buf);
+      Splitrec(buf,tab,line);
+      if (line.Count>=2)and(StrToFloatDef(trim(line[0]),-1)>0) then
+        Inc(n);
+    until EOF(f);
+    setlength(leapseconds, n, 2);
+    // read the file now
+    reset(f);
+    i := 0;
+    repeat
+      readln(f, buf);
+      Splitarg(buf,tab,line);
+      if line.Count>=2 then begin
+        if line[0]='#' then begin
+          continue;
+        end
+        else if line[0]='#@' then begin
+          dat:=StrToFloatDef(trim(line[1]),-1);
+          if dat>0 then leapsecondexpires:=toJD(dat);
+        end
+        else begin
+          dat:=StrToFloatDef(trim(line[0]),-1);
+          sec:=StrToFloatDef(trim(line[1]),-1);
+          if (i<n) and (dat>0) and (sec>0) then begin
+            leapseconds[i,0]:=toJD(dat);
+            leapseconds[i,1]:=sec;
+            inc(i);
+          end;
+        end;
+      end;
+    until EOF(f);
+    numleapseconds:=n;
+  finally
+    closefile(f);
+    line.free;
   end;
 end;
 
