@@ -11856,14 +11856,20 @@ procedure Tf_main.MenuUpdDeltaTClick(Sender: TObject);
 var
   fn, url: string;
 begin
+    url := 'https://www.ap-i.net/pub/skychart/deltat/leap-seconds.list';
+    fn :=slash(privatedir)+'leap-seconds.list';
+    if QuickDownload(url, fn, False) then begin
+      LoadLeapseconds;
+    end
+    else begin
+      ShowMessage('Cannot update the Delta T file now, please check your Internet connection');
+      exit;
+    end;
     url := 'https://www.ap-i.net/pub/skychart/deltat/deltat.txt';
     fn :=slash(privatedir)+'deltat.txt';
     if QuickDownload(url, fn, False) then begin
       LoadDeltaT;
       ShowMessage(rsUpdatedSucce);
-    end
-    else begin
-      ShowMessage('Cannot update the Delta T file now, please check your Internet connection');
     end;
 end;
 
