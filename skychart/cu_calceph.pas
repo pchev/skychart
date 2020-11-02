@@ -28,7 +28,7 @@ interface
   Use library Calceph for planetary satellite position
 }
 
-uses calceph, math;
+uses calceph, math, dynlibs;
 
   const
     {$ifdef linux}
