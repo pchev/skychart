@@ -2644,31 +2644,11 @@ begin
       Halt;
     end;
 
-{    step := 'Load libspice';
+    step := 'Try Calceph';
     if VerboseMsg then
-      WriteTrace(step);}
-    SpiceBaseOk:=false;       // Replaced by Calceph
+      WriteTrace(step);
+    SpiceBaseOk:=false;
     SpiceExtOk:=false;
-{    SpiceLib := LoadLibrary(libspice);
-    if SpiceLib <> 0 then  begin
-      SpiceIniterr:=Tiniterr(GetProcAddress(SpiceLib, 'initerr'));
-      SpiceLoadspk := Tloadspk(GetProcAddress(SpiceLib, 'loadspk'));
-      SpiceComputepos := Tcomputepos(GetProcAddress(SpiceLib, 'computepos'));
-      SpiceGetlongerror := Tgetlongerror(GetProcAddress(SpiceLib, 'getlongerror'));
-      SpiceGetshorterror := Tgetshorterror(GetProcAddress(SpiceLib, 'getshorterror'));
-    end;
-    if (@SpiceIniterr=nil)or(@SpiceLoadspk=nil)or(@SpiceComputepos=nil)or(@SpiceGetlongerror=nil)or(@SpiceGetshorterror=nil) then
-      SpiceLib:=0;
-    if SpiceLib<>0 then begin
-      SpiceIniterr;
-      SpiceFolder:=slash(Appdir) + slash('data') + 'spice_eph';
-      i:=SpiceLoadspk(pchar(slash(SpiceFolder)+'cdcbase.bsp'));
-      SpiceBaseOk:=(i=0);
-      i:=i+SpiceLoadspk(pchar(slash(SpiceFolder)+'cdcext.bsp'));
-      SpiceExtOk:=(i=0);
-    end; }
-
-    step := 'Load Calceph';
     CalcephBaseOk:=false;
     CalcephExtOk:=false;
     Load_LibCalceph;
@@ -2689,7 +2669,32 @@ begin
         if libcalceph=0 then begin
           CalcephBaseOk:=false;
           CalcephExtOk:=false;
-        end;
+        end
+        else WriteTrace('libcalceph loaded');
+      end;
+    end
+    else begin
+      step := 'Try libpasspice';
+      if VerboseMsg then
+        WriteTrace(step);
+      SpiceLib := LoadLibrary(libspice);
+      if SpiceLib <> 0 then  begin
+        SpiceIniterr:=Tiniterr(GetProcAddress(SpiceLib, 'initerr'));
+        SpiceLoadspk := Tloadspk(GetProcAddress(SpiceLib, 'loadspk'));
+        SpiceComputepos := Tcomputepos(GetProcAddress(SpiceLib, 'computepos'));
+        SpiceGetlongerror := Tgetlongerror(GetProcAddress(SpiceLib, 'getlongerror'));
+        SpiceGetshorterror := Tgetshorterror(GetProcAddress(SpiceLib, 'getshorterror'));
+        if (@SpiceIniterr=nil)or(@SpiceLoadspk=nil)or(@SpiceComputepos=nil)or(@SpiceGetlongerror=nil)or(@SpiceGetshorterror=nil) then
+          SpiceLib:=0;
+      end;
+      if SpiceLib<>0 then begin
+        SpiceIniterr;
+        SpiceFolder:=slash(Appdir) + slash('data') + 'spice_eph';
+        i:=SpiceLoadspk(pchar(slash(SpiceFolder)+'cdcbase.bsp'));
+        SpiceBaseOk:=(i=0);
+        i:=i+SpiceLoadspk(pchar(slash(SpiceFolder)+'cdcext.bsp'));
+        SpiceExtOk:=(i=0);
+        WriteTrace('libspice loaded');
       end;
     end;
 
