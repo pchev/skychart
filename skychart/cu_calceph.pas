@@ -168,7 +168,6 @@ var i: integer;
     fileeph: array [0..9] of Pchar;
 begin
 try
-  new(eph);//:=nil;
   n:=min(10,n);
   for i:=0 to n-1 do
     fileeph[i]:=Pchar(eph_files[i]);
