@@ -1,5 +1,11 @@
 Shared library to use SPICE kernel from Pascal code.
 
+CALCEPH is now the prefered library for Spice computation but if required 
+you can still compile this one for Skychart.
+
 The code in the cspice directory is from the SPICE Toolkit for C
 available from:
 https://naif.jpl.nasa.gov/naif/toolkit.html
+
+Download the latest C toolkit for Linux, extract in a temporary directory.
+Copy the content of src/cspice/ in the cspice directory here.
