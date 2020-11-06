@@ -4294,7 +4294,7 @@ begin
         sc.cfgsc.FindOK := True;
         sc.cfgsc.FindSize := 0;
         sc.cfgsc.FindPM := False;
-        sc.cfgsc.FindType := ftInv;
+        sc.cfgsc.FindType := ftLock;
         sc.cfgsc.FindName:=sc.cfgsc.TrackName;
         sc.cfgsc.FindId := sc.cfgsc.FindName;
         sc.cfgsc.FindDesc := '';

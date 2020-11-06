@@ -439,6 +439,7 @@ const
   ftlin = 5;
   ftInv = 6;
   ftOnline = 7;
+  ftLock = 8;
   ftCat = 99;
   ftPla = 100;
   ftCom = 101;

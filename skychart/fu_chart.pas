@@ -2383,7 +2383,7 @@ begin
     FImageSetFocus(self);
   xc := Image1.ScreenToClient(mouse.cursorpos).x;
   yc := Image1.ScreenToClient(mouse.cursorpos).y;
-  if (not sc.cfgsc.TrackOn)and((not Identlabel.Visible) or (abs(xcursor - xc) > 6) or (abs(ycursor - yc) > 6)) then
+  if (not(sc.cfgsc.TrackOn and (sc.cfgsc.FindType=ftLock))) and ((not Identlabel.Visible) or (abs(xcursor - xc) > 6) or (abs(ycursor - yc) > 6)) then
   begin
     xcursor := xc;
     ycursor := yc;
@@ -2463,7 +2463,7 @@ begin
     Gal   : CopyCoord2.Caption := rsGalacticCoor+', '+rsDecimalDegre;
     Ecl   : CopyCoord2.Caption := rsEclipticCoor+', '+rsDecimalDegre;
   end;
-  SlewCursor.Visible := not sc.cfgsc.TrackOn;
+  SlewCursor.Visible := not (sc.cfgsc.TrackOn and (sc.cfgsc.FindType=ftLock));
   if sc.cfgsc.ManualTelescope then
     Telescope1.Visible := False
   else
@@ -2715,6 +2715,7 @@ begin
       ftlin: identlabel.Picture.Bitmap.Canvas.font.size := sc.plot.cfgplot.LabelSize[4];
       ftInv: identlabel.Picture.Bitmap.Canvas.font.size := sc.plot.cfgplot.LabelSize[4];
       ftOnline: identlabel.Picture.Bitmap.Canvas.font.size := sc.plot.cfgplot.LabelSize[4];
+      ftLock: identlabel.Picture.Bitmap.Canvas.font.size := sc.plot.cfgplot.LabelSize[4];
       ftCat: identlabel.Picture.Bitmap.Canvas.font.size := sc.plot.cfgplot.LabelSize[4];
       ftPla: identlabel.Picture.Bitmap.Canvas.font.size := sc.plot.cfgplot.LabelSize[5];
       ftCom: identlabel.Picture.Bitmap.Canvas.font.size := sc.plot.cfgplot.LabelSize[5];
