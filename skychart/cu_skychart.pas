@@ -3890,8 +3890,10 @@ begin
           str(rec.neb.mag: 5: 2, txt)
         else
           txt := b5;
-        Desc := Desc + trim(rec.options.flabel[lOffset + vnMag]) + dp + txt + tab;
-      end;
+      end
+      else
+        txt := b5;
+      Desc := Desc + trim(rec.options.flabel[lOffset + vnMag]) + dp + txt + tab;
       for i := 1 to 10 do
       begin
         if rec.vstr[i] and rec.options.altname[i] and (trim(rec.str[i]) > '') then

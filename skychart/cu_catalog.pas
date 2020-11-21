@@ -2171,6 +2171,17 @@ begin
     end
     else
       rec.vstr[MessierStrPos] := False;
+    // replace missing magnitude
+    if (rec.neb.mag>90)and(rec.options.ShortName = 'ONGC') then begin
+      for i:=1 to 4 do begin
+       if rec.vnum[i] and (rec.num[i]>0) and (rec.num[i]<90) then begin
+         rec.neb.mag:=rec.num[i];
+         rec.neb.valid[vnMag]:=true;
+         rec.options.flabel[lOffset + vsMagv+1]:=rec.options.flabel[lOffsetNum + i];
+         break;
+       end;
+      end;
+    end;
   end;
   // Leda catalog
   if PgcLeda and (rec.options.ShortName = 'PGC ') then
