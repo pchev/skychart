@@ -4893,7 +4893,7 @@ begin
       usnoa: OpenUSNOAwin(ok);
       usnob: OpenUSNOBwin(ok);
       hn290: Open290win(ok);
-      gaia: OpenGaiawin(ok);
+      gaia: ok:=OpenGaia;
       microcat: OpenMCTwin(3, ok);
       dsbase: OpenDSbasewin(ok);
       dstyc: OpenDSTYCwin(ok);
