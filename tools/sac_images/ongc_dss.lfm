@@ -1,0 +1,95 @@
+object Form1: TForm1
+  Left = 272
+  Height = 301
+  Top = 110
+  Width = 398
+  ActiveControl = Button1
+  Caption = 'Form1'
+  ClientHeight = 301
+  ClientWidth = 398
+  Color = clBtnFace
+  Font.Name = 'Default'
+  OnCreate = FormCreate
+  LCLVersion = '2.0.10.0'
+  object Label2: TLabel
+    Left = 8
+    Height = 17
+    Top = 152
+    Width = 44
+    Caption = 'Output'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 8
+    Height = 17
+    Top = 84
+    Width = 95
+    Caption = 'RealSky header'
+    ParentColor = False
+  end
+  object Label4: TLabel
+    Left = 8
+    Height = 17
+    Top = 120
+    Width = 77
+    Caption = 'RealSky data'
+    ParentColor = False
+  end
+  object Button1: TButton
+    Left = 120
+    Height = 25
+    Top = 188
+    Width = 75
+    Caption = 'Button1'
+    OnClick = Button1Click
+    TabOrder = 0
+  end
+  object Edit2: TEdit
+    Left = 120
+    Height = 30
+    Top = 148
+    Width = 250
+    TabOrder = 1
+    Text = '/data/sac-pictures/ongc/'
+  end
+  object Edit3: TEdit
+    Left = 120
+    Height = 30
+    Top = 80
+    Width = 250
+    TabOrder = 2
+    Text = '/usr/local/share/skychart/cat/RealSky/'
+  end
+  object Edit4: TEdit
+    Left = 120
+    Height = 30
+    Top = 116
+    Width = 250
+    TabOrder = 3
+    Text = '/data/Astro-Images/DSS/dss/'
+  end
+  object Edit5: TEdit
+    Left = 120
+    Height = 30
+    Top = 228
+    Width = 250
+    Color = clBtnFace
+    TabOrder = 4
+  end
+  object Label5: TLabel
+    Left = 8
+    Height = 17
+    Top = 48
+    Width = 65
+    Caption = 'Open NGC'
+    ParentColor = False
+  end
+  object Edit6: TEdit
+    Left = 120
+    Height = 30
+    Top = 48
+    Width = 250
+    TabOrder = 5
+    Text = '/usr/local/share/skychart/cat/openngc'
+  end
+end
