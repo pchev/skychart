@@ -7403,7 +7403,8 @@ begin
           csc.ArchiveDirActive[i] :=
             ReadBool(section, 'ArchiveDirActive' + IntToStr(i),
             csc.ArchiveDirActive[i]);
-        csc.Simnb := ReadInteger(section, 'Simnb', csc.Simnb);
+// do not reload simulation on startup to prevent problem with solar system objects
+//        csc.Simnb := ReadInteger(section, 'Simnb', csc.Simnb);
         csc.SimLabel := ReadInteger(section, 'SimLabel', csc.SimLabel);
         if csc.SimLabel > 3 then
           csc.SimLabel := 3;
