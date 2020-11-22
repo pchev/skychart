@@ -8,5 +8,5 @@ Installed-Size: %size%
 Depends: skychart
 Replaces: skychart-pictures
 Description: DSO pictures for Skychart / Cartes du Ciel planetarium software
- Contain 9000 pictures of deep sky objects to show on the maps.
+ Contain 12000 pictures of deep sky objects to show on the maps.
  .
