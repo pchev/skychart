@@ -477,28 +477,28 @@ object pop_indi: Tpop_indi
     Enabled = False
     Interval = 20000
     OnTimer = InitTimerTimer
-    left = 128
-    top = 360
+    Left = 128
+    Top = 360
   end
   object ConnectTimer: TTimer
     Enabled = False
     Interval = 3000
     OnTimer = ConnectTimerTimer
-    left = 32
-    top = 360
+    Left = 32
+    Top = 360
   end
   object IndiTimer: TTimer
     Enabled = False
     Interval = 5000
     OnTimer = IndiTimerTimer
-    left = 224
-    top = 360
+    Left = 224
+    Top = 360
   end
   object StopMoveTimer: TTimer
     Enabled = False
     Interval = 100
     OnTimer = StopMoveTimerTimer
-    left = 40
-    top = 420
+    Left = 40
+    Top = 420
   end
 end

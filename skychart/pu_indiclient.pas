@@ -379,14 +379,14 @@ begin
     moveNS_prop := indiProp.getSwitch;
     moveN_prop := IUFindSwitch(moveNS_prop, 'MOTION_NORTH');
     moveS_prop := IUFindSwitch(moveNS_prop, 'MOTION_SOUTH');
-    if (moveNS_prop<>nil) and (moveEW_prop<>nil) and (SlewRate_prop<>nil) then InitHandpad;
+    if (moveNS_prop<>nil) and (moveEW_prop<>nil) then InitHandpad;
   end
   else if (proptype = INDI_SWITCH) and (moveEW_prop = nil) and (propname = 'TELESCOPE_MOTION_WE') then
   begin
     moveEW_prop := indiProp.getSwitch;
     moveE_prop := IUFindSwitch(moveEW_prop, 'MOTION_EAST');
     moveW_prop := IUFindSwitch(moveEW_prop, 'MOTION_WEST');
-    if (moveNS_prop<>nil) and (moveEW_prop<>nil) and (SlewRate_prop<>nil) then InitHandpad;
+    if (moveNS_prop<>nil) and (moveEW_prop<>nil) then InitHandpad;
   end
   else if (proptype=INDI_SWITCH)and(TrackState=nil)and(propname='TELESCOPE_TRACK_STATE') then begin
      TrackState:=indiProp.getSwitch;
@@ -1028,9 +1028,13 @@ begin
   else begin
     Handpad.Visible:=true;
     FlipNS.Visible:=true;
-    AxisRates.Visible:=true;
-    AxisRates.Items.Assign(SlewRateList);
-    if  AxisRates.Items.Count>0 then AxisRates.ItemIndex:=0;
+    if SlewRate_prop<>nil then begin
+      AxisRates.Visible:=true;
+      AxisRates.Items.Assign(SlewRateList);
+      if  AxisRates.Items.Count>0 then AxisRates.ItemIndex:=0;
+    end
+    else
+      AxisRates.Visible:=false;
   end;
 end;
 
