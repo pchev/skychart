@@ -449,10 +449,10 @@ object pop_scope: Tpop_scope
     Height = 178
     Top = 0
     Width = 314
-    ActivePage = ASCOMRemote
+    ActivePage = ASCOMLocal
     Align = alTop
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 3
     OnChanging = PageControl1Changing
     object ASCOMLocal: TTabSheet
@@ -643,7 +643,7 @@ object pop_scope: Tpop_scope
           Left = 156
           Height = 17
           Top = 97
-          Width = 59
+          Width = 58
           Caption = 'Password'
           ParentColor = False
           ParentFont = False

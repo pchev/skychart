@@ -2453,6 +2453,7 @@ begin
     compile_time := {$I %DATE%}+' '+{$I %TIME%};
     compile_version := 'Lazarus '+lcl_version+' Free Pascal '+{$I %FPCVERSION%}+' '+{$I %FPCTARGETOS%}+'-'+{$I %FPCTARGETCPU%}+'-'+buf;
     compile_system := {$I %FPCTARGETOS%};
+    compile_cpu := {$I %FPCTARGETCPU%};
     cpydate := {$I %DATE%};
     cpydate := copy(cpydate,1,4);
     DefaultFormatSettings.DecimalSeparator := '.';

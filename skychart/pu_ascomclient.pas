@@ -939,6 +939,8 @@ procedure Tpop_scope.SetLang;
 begin
   Caption := rsASCOMTelesc;
   GroupBox1.Caption := rsDriverSelect;
+  if compile_cpu = 'x86_64' then
+    GroupBox1.Caption := GroupBox1.Caption + ' 64 bit';
   Label1.Caption := rsRefreshRate;
   ButtonSelect.Caption := rsSelect;
   ButtonConfigure.Caption := rsConfigure;

@@ -1432,7 +1432,7 @@ var
   ScriptDir, PrivateScriptDir: string;
   VarObs, CdC, MPCDir, DBDir, PictureDir: string;
   ForceConfig, ForceUserDir, Configfile, Lang: string;
-  compile_time, compile_version, compile_system, lclver, cpydate: string;
+  compile_time, compile_version, compile_system, compile_cpu, lclver, cpydate: string;
   ldeg, lmin, lsec: string;
   MaxThreadCount: integer;
   ImageListCount: integer;
