@@ -1764,7 +1764,7 @@ var
   bmp: TBGRAbitmap;
   save_col: Starcolarray;
   al: TLabelAlign;
-  imageok: boolean;
+  imageok, ongcimg: boolean;
 
   procedure Drawing;
   begin
@@ -1815,7 +1815,7 @@ var
   begin
     save_nebplot := Fplot.cfgplot.nebplot;
     save_col := Fplot.cfgplot.color;
-    Fplot.cfgplot.nebplot := 1;
+    Fplot.cfgplot.nebplot := 0;
     Fplot.cfgplot.color := DfGray;
     Drawing;
     Fplot.cfgplot.nebplot := save_nebplot;
@@ -1829,6 +1829,7 @@ begin
   nebmagmax := 0;
   nebmagmin := 99;
   imageok := False;
+  ongcimg := FFits.ImagesForCatalog('ONGC');
   fillchar(rec, sizeof(rec), 0);
   bmp := TBGRAbitmap.Create;
   try
@@ -1880,8 +1881,8 @@ begin
             dsopos[numdsopos] := Point(round(xx), round(yy));
           end;
           ImgCat := rec.options.ShortName;
-          if ImgCat = 'ONGC' then
-            ImgCat := 'SAC';
+          if (ImgCat = 'ONGC')and(not ongcimg) then
+             ImgCat := 'SAC';
           if (not cfgsc.Quick) and cfgsc.ShowImages and (ImgCat <> CurrentCat) then
           begin
             CurrentCat := ImgCat;

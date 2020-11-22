@@ -1551,8 +1551,10 @@ begin
       WriteTrace('Add signal handler');
     CdcSigAction(@RecvSignal);
 {$endif}
-    if DirectoryExists(cfgm.ImagePath + 'sac') and (cdcdb.CountImages('SAC') = 0) and
-      Application.ShowMainForm then
+    if Application.ShowMainForm and (
+      (DirectoryExists(cfgm.ImagePath + 'ongc') and (cdcdb.CountImages('ONGC') = 0)) or
+      (DirectoryExists(cfgm.ImagePath + 'sac') and (cdcdb.CountImages('SAC') = 0))
+      ) then
     begin
       if VerboseMsg then
         WriteTrace('Init picture DB');
@@ -3664,7 +3666,7 @@ var
   dirok: boolean;
 begin
   dirok := DirectoryExists(cfgm.ImagePath);
-  nimg := cdcdb.CountImages('SAC');
+  nimg := cdcdb.CountImages('');
   if MultiFrame1.ActiveObject is Tf_chart then
     with MultiFrame1.ActiveObject as Tf_chart do
     begin

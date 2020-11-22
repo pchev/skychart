@@ -7,6 +7,7 @@ skychart/component/indiclient/backup/
 skychart/component/enhedits/backup/
 skychart/component/jdcalendar/backup/
 skychart/component/radec/backup/
+tools/sac_images/backup/
 #ignore external data
 BaseData/catalog*.tgz
 BaseData/*.xz
@@ -34,6 +35,7 @@ skychart/component/vosamp/lib/
 skychart/component/xmlparser/lib/
 skychart/component/zoomimage/lib/
 skychart/library/catalog/lib
+tools/sac_images/units/
 # ignore various files
 skychart/cdc.lps
 tools/doc/*.pdf

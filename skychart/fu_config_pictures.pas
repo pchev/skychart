@@ -319,7 +319,7 @@ begin
   ImgTrBar2.position := csc.BGalpha;
   ImgITT2.ItemIndex := Ord(csc.BGitt);
   ShowImagesBox.Checked := csc.ShowImages;
-  nimages.Caption := Format(rsThereAreCata, [IntToStr(cdb.CountImages('SAC'))]);
+  nimages.Caption := Format(rsThereAreCata, [IntToStr(cdb.CountImages(''))]);
   save := csc.ShowBackgroundImage;
   backimg.filename := SysToUTF8(csc.BackgroundImage);
   backimg.InitialDir := ExtractFilePath(backimg.filename);
@@ -425,7 +425,7 @@ begin
     ShowImagesBox.Checked := True;
     screen.cursor := crDefault;
     ProgressPanel.Visible := False;
-    nimages.Caption := Format(rsThereAreCata, [IntToStr(cdb.CountImages('SAC'))]);
+    nimages.Caption := Format(rsThereAreCata, [IntToStr(cdb.CountImages(''))]);
   end
   else
   begin

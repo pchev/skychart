@@ -1469,12 +1469,17 @@ begin
 end;
 
 function TCDCdb.CountImages(catname: string): integer;
+var cmd: string;
 begin
   try
     if DB.Active then
     begin
-      Result := strtointdef(DB.QueryOne('select count(*) from cdc_fits where catalogname="' +
-        uppercase(catname) + '"'), 0);
+      cmd:='select count(*) from cdc_fits ';
+      if trim(catname)='' then
+        cmd:=cmd+' where length(catalogname)<=4'
+      else
+        cmd:=cmd+' where catalogname="' + uppercase(catname) + '"';
+      Result := strtointdef(DB.QueryOne(cmd), 0);
     end
     else
       Result := 0;
@@ -1499,6 +1504,11 @@ begin
         begin
           ProgressCat.Caption := '';
           ProgressBar.position := 0;
+          DB.UnLockTables;
+          DB.starttransaction;
+          cmd := 'delete from cdc_fits where length(catalogname)<=4';
+          DB.query(cmd);
+          DB.commit;
           j := findfirst(slash(ImagePath) + '*', faDirectory, c);
           while j = 0 do
           begin
@@ -1508,11 +1518,6 @@ begin
               ProgressCat.Caption := c.Name;
               ProgressBar.position := 0;
               Application.ProcessMessages;
-              DB.UnLockTables;
-              DB.starttransaction;
-              cmd := 'delete from cdc_fits where catalogname="' + uppercase(c.Name) + '"';
-              DB.query(cmd);
-              DB.commit;
               i := findfirst(slash(catdir) + '*.*', 0, f);
               n := 1;
               while i = 0 do
