@@ -22,4 +22,5 @@ echo Install DSO pictures to $destdir
 
 install -m 755 -d $destdir
 
-InstPict pictures_sac_4.0 $destdir
+InstPict pictures_ongc_4.3 $destdir
+InstPict pictures_sh2_4.3 $destdir
