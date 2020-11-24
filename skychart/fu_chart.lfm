@@ -63,12 +63,12 @@ object f_chart: Tf_chart
     Enabled = False
     Interval = 300
     OnTimer = RefreshTimerTimer
-    left = 307
-    top = 24
+    Left = 307
+    Top = 24
   end
   object ActionList1: TActionList
-    left = 194
-    top = 65
+    Left = 194
+    Top = 65
     object chart_zoomplus: TAction
       Category = 'zoom'
       Caption = 'Zoom +'
@@ -200,8 +200,8 @@ object f_chart: Tf_chart
   end
   object PopupMenu1: TPopupMenu
     OnPopup = PopupMenu1Popup
-    left = 275
-    top = 129
+    Left = 275
+    Top = 129
     object About1: TMenuItem
       Caption = 'About'
       Visible = False
@@ -571,14 +571,14 @@ object f_chart: Tf_chart
     Enabled = False
     Interval = 500
     OnTimer = TelescopeTimerTimer
-    left = 348
-    top = 154
+    Left = 348
+    Top = 154
   end
   object BlinkTimer: TTimer
     Enabled = False
     OnTimer = BlinkTimerTimer
-    left = 307
-    top = 204
+    Left = 307
+    Top = 204
   end
   object DownloadDialog1: TDownloadDialog
     Timeout = 90000
@@ -586,30 +586,30 @@ object f_chart: Tf_chart
     FtpFwPassive = True
     ConfirmDownload = True
     QuickCancel = False
-    left = 213
-    top = 207
+    Left = 213
+    Top = 207
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = '.cdcc'
     FileName = 'circle'
     Filter = 'Circle file|*.cdcc|All|*'
     Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
-    left = 57
-    top = 56
+    Left = 57
+    Top = 56
   end
   object SaveDialog1: TSaveDialog
     DefaultExt = '.cdcc'
     FileName = 'circle'
     Filter = 'Circle file|*.cdcc|All|*'
     Options = [ofOverwritePrompt, ofPathMustExist, ofEnableSizing, ofViewDetail]
-    left = 59
-    top = 121
+    Left = 59
+    Top = 121
   end
   object PDSSTimer: TTimer
     Enabled = False
     Interval = 100
     OnTimer = PDSSTimerTimer
-    left = 388
-    top = 207
+    Left = 388
+    Top = 207
   end
 end

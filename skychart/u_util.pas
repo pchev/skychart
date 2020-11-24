@@ -153,6 +153,7 @@ procedure DeleteFilesInDir(dir: string);
 function ShowModalForm(f: TForm; SetFocus: boolean = False): TModalResult;
 function prepare_IAU_designation(rax,decx :double):string;
 function TruncDecimal(val: Extended; decimal: byte): Extended;
+procedure Wait(wt:single=5);
 
 {$ifdef unix}
 function ExecFork(cmd: string; p1: string = ''; p2: string = ''; p3: string = '';
@@ -3834,6 +3835,16 @@ begin
   x := trunc(val);
   xfrac := frac(val);
   Result := x + trunc(xfrac*10**decimal)/10**decimal;
+end;
+
+procedure Wait(wt:single=5);
+var endt: TDateTime;
+begin
+  endt:=now+wt/secday;
+  while now<endt do begin
+    Sleep(100);
+    if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
+  end;
 end;
 
 end.

@@ -5393,12 +5393,20 @@ begin
   if sc.cfgsc.ASCOMTelescope then
   begin
     ConnectASCOM(self, True);
-    Result := msgOK;
+    wait(5);
+    if Connect1.Checked then
+      Result := msgOK
+    else
+      Result := msgFailed;
   end
   else if sc.cfgsc.IndiTelescope then
   begin
     ConnectINDI(self, True);
-    Result := msgOK;
+    wait(5);
+    if Connect1.Checked then
+      Result := msgOK
+    else
+      Result := msgFailed;
   end;
 end;
 
