@@ -687,6 +687,7 @@ begin
   if cfgsc.quick and FPlot.cfgplot.red_move and
     (Fplot.cfgchart.min_ma = Fcatalog.cfgcat.StarMagMax) then
     Fplot.cfgchart.min_ma := Fplot.cfgchart.min_ma + 2;
+  cfgsc.ONGCimg := FFits.ImagesForCatalog('ONGC');
   Result := True;
 end;
 
@@ -1764,7 +1765,7 @@ var
   bmp: TBGRAbitmap;
   save_col: Starcolarray;
   al: TLabelAlign;
-  imageok, ongcimg: boolean;
+  imageok: boolean;
 
   procedure Drawing;
   begin
@@ -1829,7 +1830,6 @@ begin
   nebmagmax := 0;
   nebmagmin := 99;
   imageok := False;
-  ongcimg := FFits.ImagesForCatalog('ONGC');
   fillchar(rec, sizeof(rec), 0);
   bmp := TBGRAbitmap.Create;
   try
@@ -1881,7 +1881,7 @@ begin
             dsopos[numdsopos] := Point(round(xx), round(yy));
           end;
           ImgCat := rec.options.ShortName;
-          if (ImgCat = 'ONGC')and(not ongcimg) then
+          if (ImgCat = 'ONGC')and(not cfgsc.ONGCimg) then
              ImgCat := 'SAC';
           if (not cfgsc.Quick) and cfgsc.ShowImages and (ImgCat <> CurrentCat) then
           begin

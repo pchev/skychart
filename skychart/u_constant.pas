@@ -1100,7 +1100,7 @@ type
     DrawAllStarLabel, MovedLabelLine, StarFilter, NebFilter, FindOK,
     WhiteBg, ShowLegend, MagLabel, NameLabel, DistLabel, ConstFullLabel,
     ConstLatinLabel, ScopeMark, Scope2Mark, ScopeLock, FindPM,
-    FindStarPM, FindPMfullmotion, AstNEO, ChartLock : boolean;
+    FindStarPM, FindPMfullmotion, AstNEO, ChartLock, ONGCimg : boolean;
     EquinoxName, TargetName, TrackName, TrackId, FindName, FindDesc,
     FindDesc2, FindDesc2000, FindNote, FindCat, FindCatname, FindId: string;
     BGalpha: integer;

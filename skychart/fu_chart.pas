@@ -3999,8 +3999,8 @@ begin
     end;
     // DSO picture
     ImgCat := sc.cfgsc.FindCat;
-    if ImgCat = 'ONGC' then
-      ImgCat := 'SAC';
+    if (ImgCat = 'ONGC')and(not sc.cfgsc.ONGCimg) then
+       ImgCat := 'SAC';
     if sc.Fits.GetFileName(ImgCat, oname, fn) then
     begin
       if (ExtractFileExt(fn) <> '.nil') then
