@@ -5354,37 +5354,8 @@ begin
 end;
 
 function Tf_chart.cmd_ConnectINDI: string;
-var
-  ok: boolean;
 begin
-  if Fpop_indi = nil then
-  begin
-    Fpop_indi := Tpop_indi.Create(self);
-    Fpop_indi.csc := sc.cfgsc;
-    Fpop_indi.SetLang;
-  end;
-
-  Fpop_indi.ScopeReadConfig(ExtractFilePath(Configfile));
-  Fpop_indi.ScopeSetObs(sc.cfgsc.ObsLatitude, -sc.cfgsc.ObsLongitude, sc.cfgsc.ObsAltitude);
-  TelescopeTimer.Interval := 2000;
-  TelescopeTimer.Enabled := True;
-
-  Fpop_indi.ScopeConnect(ok);
-  Connect1.Checked := True;
-
-  Result := msgOK;
-
-end;
-
-
-
-function Tf_chart.cmd_DisconnectINDI: string;
-var
-  ok: boolean;
-begin
-  Fpop_indi.ScopeDisconnect(ok);
-  Connect1.Checked := False;
-  Result := msgOK;
+  Result := cmd_ConnectTelescope;
 end;
 
 function Tf_chart.cmd_ConnectTelescope: string;
@@ -5400,6 +5371,11 @@ begin
     ConnectINDI(self, True);
     Result := msgOK
   end;
+end;
+
+function Tf_chart.cmd_DisconnectINDI: string;
+begin
+  Result := cmd_DisconnectTelescope;
 end;
 
 function Tf_chart.cmd_DisconnectTelescope: string;
@@ -5425,6 +5401,11 @@ begin
     if ok then
       Result := msgOK;
   end;
+end;
+
+function Tf_chart.cmd_SyncINDI(RA2, DE2: string): string;
+begin
+  Result := cmd_Sync(RA2, DE2);
 end;
 
 function Tf_chart.cmd_Sync(RA2, DE2: string): string;
@@ -5463,6 +5444,11 @@ begin
       end;
     end;
   end;
+end;
+
+function Tf_chart.cmd_SlewINDI(RA1, DE1: string): string;
+begin
+  Result := cmd_Slew(RA1, DE1);
 end;
 
 function Tf_chart.cmd_Slew(RA1, DE1: string): string;
@@ -5524,6 +5510,12 @@ begin
   end;
 end;
 
+
+function Tf_chart.cmd_AbortSlewINDI: string;
+begin
+  Result := cmd_AbortSlew;
+end;
+
 function Tf_chart.cmd_AbortSlew: string;
 begin
   Result := msgFailed;
@@ -5556,78 +5548,6 @@ begin
       result:=BoolToStr(Fpop_indi.Slewing,msgTrue,msgFalse);
     end;
   end;
-end;
-
-function Tf_chart.cmd_SlewINDI(RA1, DE1: string): string;
-var
-  ra, Dec: double;
-  ok: boolean;
-begin
-
-  ra := StrToFloatDef(RA1, 9999);
-  Dec := StrToFloatDef(DE1, 9999);
-
-  if (ra >= 0) and (ra <= 24) and (abs(Dec) <= 90) then
-  begin
-    ra := ra * 15 * deg2rad;
-    Dec := Dec * deg2rad;
-
-    if sc.cfgsc.TelescopeJD = 0 then
-    begin
-      precession(sc.cfgsc.JDChart, sc.cfgsc.CurJDUT, ra, Dec);
-    end
-    else
-    begin
-      if sc.cfgsc.ApparentPos then
-        mean_equatorial(ra, Dec, sc.cfgsc, True, sc.cfgsc.FindType < ftPla);
-      precession(sc.cfgsc.JDChart, sc.cfgsc.TelescopeJD, ra, Dec);
-    end;
-    ra := rmod(ra + pi2, pi2);
-    Fpop_indi.ScopeGoto(ra * rad2deg / 15, Dec * rad2deg, ok);
-
-    Result := msgOK;
-  end
-  else
-    Result := msgFailed + ' out of range';
-end;
-
-function Tf_chart.cmd_AbortSlewINDI: string;
-begin
-  Fpop_indi.ScopeAbortSlew;
-  Result := msgOK;
-end;
-
-
-function Tf_chart.cmd_SyncINDI(RA2, DE2: string): string;
-var
-  ra, Dec: double;
-begin
-
-  ra := StrToFloatDef(RA2, 9999);
-  Dec := StrToFloatDef(DE2, 9999);
-
-  if (ra >= 0) and (ra <= 24) and (abs(Dec) <= 90) then
-  begin
-    ra := ra * 15 * deg2rad;
-    Dec := Dec * deg2rad;
-
-    if sc.cfgsc.TelescopeJD = 0 then
-    begin
-      precession(sc.cfgsc.JDChart, sc.cfgsc.CurJDUT, ra, Dec);
-    end
-    else
-    begin
-      if sc.cfgsc.ApparentPos then
-        mean_equatorial(ra, Dec, sc.cfgsc, True, sc.cfgsc.FindType < ftPla);
-      precession(sc.cfgsc.JDChart, sc.cfgsc.TelescopeJD, ra, Dec);
-    end;
-    ra := rmod(ra + pi2, pi2);
-    Fpop_indi.ScopeAlign('sync', ra * rad2deg / 15, Dec * rad2deg);
-
-    Result := msgOK;
-  end
-  else
-    Result := msgFailed + ' out of range';
 end;
 
 function Tf_chart.cmd_SetObs(obs: string): string;
