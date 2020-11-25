@@ -10395,6 +10395,7 @@ begin
     12: Result := HelpCmd(trim(uppercase(arg[1])));
     13:
     begin
+      result := msgOK;
       ForceClose := True;
       Close;
     end;
