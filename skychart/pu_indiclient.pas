@@ -150,7 +150,7 @@ type
     mountsavedev: string;
     receiveindidevice: boolean;
     indiclient: TIndiBaseClient;
-    FLastArrow: integer;
+    FLastArrow,InitRetry: integer;
     procedure IndiNewDevice(dp: Basedevice);
     procedure IndiDisconnected(Sender: TObject);
     procedure ClearStatus;
@@ -503,6 +503,7 @@ begin
     client.watchDevice(csc.IndiDevice);
     client.ConnectServer;
     led.brush.color := clYellow;
+    InitRetry := 0;
     InitTimer.Enabled := True;
     ok := True;
   end
@@ -1045,9 +1046,16 @@ begin
   InitTimer.Enabled := False;
   if (TelescopeDevice = nil) or (coord_prop = nil) then
   begin
-    ScopeDisconnect(ok);
-    Memomsg.Lines.Add('No response from server');
-    Memomsg.Lines.Add('Is driver"' + csc.IndiDevice + '" running?');
+    inc(InitRetry);
+    if InitRetry>4 then begin
+      Memomsg.Lines.Add('No response from server.');
+      Memomsg.Lines.Add('Is server and driver"' + csc.IndiDevice + '" running?');
+      ScopeDisconnect(ok);
+    end
+    else begin
+      Memomsg.Lines.Add('Waiting for server ...');
+      InitTimer.Enabled := True;
+    end;
   end;
 end;
 
