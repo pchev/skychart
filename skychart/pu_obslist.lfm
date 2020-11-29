@@ -298,7 +298,7 @@ object f_obslist: Tf_obslist
           Left = 143
           Height = 21
           Top = 22
-          Width = 293
+          Width = 292
           Caption = 'Only objects within hour angle limits tonight'
           OnChange = LimitHourangleTonightChange
           ParentFont = False
@@ -345,7 +345,7 @@ object f_obslist: Tf_obslist
           Left = 143
           Height = 21
           Top = 46
-          Width = 275
+          Width = 273
           Caption = 'Only objects within hour angle limits now'
           OnChange = LimitHourangleNowChange
           ParentFont = False
@@ -410,8 +410,8 @@ object f_obslist: Tf_obslist
   end
   object PopupMenu1: TPopupMenu
     OnPopup = PopupMenu1Popup
-    left = 264
-    top = 232
+    Left = 264
+    Top = 232
     object MenuTitle: TMenuItem
       Enabled = False
     end
@@ -432,15 +432,15 @@ object f_obslist: Tf_obslist
     Enabled = False
     Interval = 60000
     OnTimer = RefreshTimerTimer
-    left = 360
-    top = 235
+    Left = 360
+    Top = 235
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = '.cdcc'
     FileName = 'mosaic'
     Filter = 'Circle file|*.cdcc|All|*'
     Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
-    left = 260
-    top = 290
+    Left = 260
+    Top = 290
   end
 end

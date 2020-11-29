@@ -1567,6 +1567,14 @@ begin
       SAMPStart(True);
     end;
     f_print.cm := cfgm;
+    f_obslist.onSelectObject := ObsListSearch;
+    f_obslist.onGetObjectCoord := GetObjectCoord;
+    f_obslist.onObjLabelChange := ObsListChange;
+    f_obslist.onSlew := ObsListSlew;
+    if (cfgm.InitObsList <> '') and (FileExists(cfgm.InitObsList)) then
+    begin
+      f_obslist.FileNameEdit1.FileName := SysToUTF8(cfgm.InitObsList);
+    end;
     f_obslist.cfgsc := Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc;
     f_obslist.AllLabels.Checked := f_obslist.cfgsc.ObslistAlLabels;
     f_obslist.LimitType := cfgm.ObsListLimitType;
@@ -1577,15 +1585,7 @@ begin
     f_obslist.HourAngleCombo.Text := cfgm.ObslistHourAngle;
     f_obslist.LimitHourangleTonight.Checked := cfgm.ObslistHourAngleLimit1;
     f_obslist.LimitHourangleNow.Checked := cfgm.ObslistHourAngleLimit2;
-    if (cfgm.InitObsList <> '') and (FileExists(cfgm.InitObsList)) then
-    begin
-      f_obslist.FileNameEdit1.FileName := SysToUTF8(cfgm.InitObsList);
-    end;
     f_obslist.LoadObsList;
-    f_obslist.onSelectObject := ObsListSearch;
-    f_obslist.onGetObjectCoord := GetObjectCoord;
-    f_obslist.onObjLabelChange := ObsListChange;
-    f_obslist.onSlew := ObsListSlew;
     Autorefresh.Interval := max(10, cfgm.autorefreshdelay) * 1000;
     AutoRefreshLock := False;
     Autorefresh.Enabled := True;

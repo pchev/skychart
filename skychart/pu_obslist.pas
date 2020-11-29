@@ -321,7 +321,7 @@ end;
 procedure Tf_obslist.LoadObsList;
 var
   f: textfile;
-  obj, lbl, desc, buf, buf1: string;
+  obj, sra, sde, lbl, desc, buf, buf1: string;
   ra, de: double;
 begin
   if FileExistsUTF8(FileNameEdit1.FileName) then
@@ -337,36 +337,29 @@ begin
       begin
         StringGrid1.RowCount := StringGrid1.RowCount + 1;
         readln(f, buf);
-        buf1 := copy(buf, 1, objl);
-        obj := buf1;
-        StringGrid1.Cells[1, StringGrid1.RowCount - 1] := buf1;
+        obj := trim(copy(buf, 1, objl));
         Delete(buf, 1, objl);
-        buf1 := trim(copy(buf, 1, radecl));
-        ra := strtofloatdef(buf1, -999);
-        if ra < -900 then
-          desc := buf
-        else
-          desc := '';
+        sra := trim(copy(buf, 1, radecl));
         Delete(buf, 1, radecl);
-        buf1 := trim(copy(buf, 1, radecl));
-        de := strtofloatdef(buf1, -999);
+        sde := trim(copy(buf, 1, radecl));
         Delete(buf, 1, radecl);
+        lbl := trim(copy(buf, 1, objl));
+        Delete(buf, 1, objl);
+        desc:=trim(buf);
+        StringGrid1.Cells[1, StringGrid1.RowCount - 1] := obj;
+        ra := strtofloatdef(sra, -999);
+        de := strtofloatdef(sde, -999);
         if ((ra < -900) or (de < -900)) and assigned(FGetObjectCoord) then
         begin
+          desc:=sra+sde+lbl+desc; // for observing list from other software that use this format
           FGetObjectCoord(obj, lbl, ra, de);
           if ra < 0 then
           begin
             ra := -999;
             de := -999;
           end;
-          StringGrid1.Cells[7, StringGrid1.RowCount - 1] := lbl;
-        end
-        else
-        begin
-          buf1 := trim(copy(buf, 1, objl));
-          StringGrid1.Cells[7, StringGrid1.RowCount - 1] := buf1;
-          Delete(buf, 1, objl);
         end;
+        StringGrid1.Cells[7, StringGrid1.RowCount - 1] := lbl;
         if ra > -900 then
         begin
           buf1 := ARpToStr(ra/15,0);
@@ -381,8 +374,6 @@ begin
         end;
         StringGrid1.Cells[4, StringGrid1.RowCount - 1] := '';
         StringGrid1.Cells[5, StringGrid1.RowCount - 1] := '';
-        if desc = '' then
-          desc := buf;
         StringGrid1.Cells[6, StringGrid1.RowCount - 1] := desc;
       end;
       CloseFile(f);
