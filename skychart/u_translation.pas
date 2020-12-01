@@ -1553,6 +1553,7 @@ resourcestring
   rsFillNebulae = 'Fill nebulae';
   rsImportMosaic = 'Import mosaic file';
   rsTruncatedToS = 'Truncated to %s catalogs';
+  rsCivil = 'Civil';
 
 // also update upsi_translation
 

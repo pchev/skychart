@@ -356,7 +356,7 @@ begin
   if initial then
   begin
     date1.JD := jd(config.CurYear, config.CurMonth, config.CurDay, 0);
-    date2.JD := date1.JD + 5;
+    date2.JD := date1.JD + 14;
     deltajd := date2.JD - date1.JD;
     time.Time := config.CurTime / 24;
     CometFilter.Text := 'C/' + IntToStr(config.CurYear);
@@ -570,21 +570,26 @@ procedure Tf_calendar.crepusculetitle;
 begin
   with twilightgrid do
   begin
-    cells[1, 0] := appmsg[9];
+    cells[0, 0] := '';
+    cells[1, 0] := rsMorningTwili;
     cells[2, 0] := '';
-    cells[3, 0] := appmsg[10];
-    cells[4, 0] := '';
-    cells[5, 0] := rsDarkNight;
+    cells[3, 0] := '';
+    cells[4, 0] := rsEveningTwili;
+    cells[5, 0] := '';
     cells[6, 0] := '';
-    cells[0, 1] := appmsg[11];
-    cells[1, 1] := appmsg[12];
-    cells[2, 1] := appmsg[13];
-    cells[3, 1] := appmsg[13];
-    cells[4, 1] := appmsg[12];
-    cells[5, 1] := rsStart;
-    cells[6, 1] := rsEnd;
-    cells[7, 0] := rsMoon;
-    cells[7, 1] := rsIllum;
+    cells[7, 0] := rsDarkNight;
+    cells[8, 0] := '';
+    cells[9, 0] := rsMoon;
+    cells[0, 1] := rsDate;
+    cells[1, 1] := rsAstronomical;
+    cells[2, 1] := rsNautical;
+    cells[3, 1] := rsCivil;
+    cells[4, 1] := rsCivil;
+    cells[5, 1] := rsNautical;
+    cells[6, 1] := rsAstronomical;
+    cells[7, 1] := rsStart;
+    cells[8, 1] := rsEnd;
+    cells[9, 1] := rsIllum;
   end;
 end;
 
@@ -1189,7 +1194,6 @@ var
 begin
   screen.cursor := crHourglass;
   try
-    //TwilightGrid.Visible:=false;
     FreeCoord(TwilightGrid);
     dat11 := date1.JD;
     dat12 := date2.JD;
@@ -1226,6 +1230,28 @@ begin
         if (ars < 0) then
           ars := ars + pi2;
         objects[0, i] := SetObjCoord(jda, -999, -999);
+        // crepuscule civil
+        Time_Alt(jd0, ars, des, -6, hp1, hp2, config.ObsLatitude, config.ObsLongitude);
+        if abs(hp1) < 90 then
+        begin
+          cells[3, i] := armtostr(rmod(hp1 + config.timezone + 24, 24));
+          objects[3, i] := SetObjCoord(jda + (hp1 - h) / 24, -999, -999);
+        end
+        else
+        begin
+          cells[3, i] := '-';
+          objects[3, i] := nil;
+        end;
+        if abs(hp1) < 90 then
+        begin
+          cells[4, i] := armtostr(rmod(hp2 + config.timezone + 24, 24));
+          objects[4, i] := SetObjCoord(jda + (hp2 - h) / 24, -999, -999);
+        end
+        else
+        begin
+          cells[4, i] := '-';
+          objects[4, i] := nil;
+        end;
         // crepuscule nautique
         Time_Alt(jd0, ars, des, -12, hp1, hp2, config.ObsLatitude, config.ObsLongitude);
         if abs(hp1) < 90 then
@@ -1240,13 +1266,13 @@ begin
         end;
         if abs(hp1) < 90 then
         begin
-          cells[3, i] := armtostr(rmod(hp2 + config.timezone + 24, 24));
-          objects[3, i] := SetObjCoord(jda + (hp2 - h) / 24, -999, -999);
+          cells[5, i] := armtostr(rmod(hp2 + config.timezone + 24, 24));
+          objects[5, i] := SetObjCoord(jda + (hp2 - h) / 24, -999, -999);
         end
         else
         begin
-          cells[3, i] := '-';
-          objects[3, i] := nil;
+          cells[5, i] := '-';
+          objects[5, i] := nil;
         end;
         // crepuscule astro
         Time_Alt(jd0, ars, des, -18, hp1, hp2, config.ObsLatitude, config.ObsLongitude);
@@ -1265,14 +1291,14 @@ begin
         if abs(hp1) < 90 then
         begin
           tat2 := rmod(hp2 + config.timezone + 24, 24);
-          cells[4, i] := armtostr(tat2);
-          objects[4, i] := SetObjCoord(jda + (hp2 - h) / 24, -999, -999);
+          cells[6, i] := armtostr(tat2);
+          objects[6, i] := SetObjCoord(jda + (hp2 - h) / 24, -999, -999);
         end
         else
         begin
           tat2 := -99;
-          cells[4, i] := '-';
-          objects[4, i] := nil;
+          cells[6, i] := '-';
+          objects[6, i] := nil;
         end;
         // Moon visibility
         Planet.PlanetRiseSet(11, jd0, AzNorth, mr, mt, ms, azr, azs, jdr, jdt, jds,
@@ -1362,45 +1388,44 @@ begin
               end;
               if (tds > 0) then
               begin
-                cells[5, i] := armtostr(tds);
-                objects[5, i] := SetObjCoord(jda + (tds - h - config.timezone) / 24, -999, -999);
+                cells[7, i] := armtostr(tds);
+                objects[7, i] := SetObjCoord(jda + (tds - h - config.timezone) / 24, -999, -999);
               end
               else
-                cells[5, i] := '-';
+                cells[7, i] := '-';
               if (tde > 0) then
               begin
-                cells[6, i] := armtostr(tde);
-                objects[6, i] := SetObjCoord(jda + (tde - h - config.timezone) / 24, -999, -999);
+                cells[8, i] := armtostr(tde);
+                objects[8, i] := SetObjCoord(jda + (tde - h - config.timezone) / 24, -999, -999);
               end
               else
-                cells[6, i] := '-';
+                cells[8, i] := '-';
             end
             else
             begin
-              cells[5, i] := '-';
-              cells[6, i] := '-';
+              cells[7, i] := '-';
+              cells[8, i] := '-';
             end;
           end;
           1:
           begin // moon circumpolar
-            cells[5, i] := '-';
-            cells[6, i] := '-';
+            cells[7, i] := '-';
+            cells[8, i] := '-';
           end;
           2:
           begin // no moon rise
-            cells[5, i] := cells[4, i];
-            cells[6, i] := cells[1, i];
+            cells[7, i] := cells[6, i];
+            cells[8, i] := cells[1, i];
           end;
         end;
         // Moon illumination at midnight
         Planet.Moon(jda+0.5, rat, det, dist, dkm, diam, phase, illum,config);
-        cells[7, i] := FormatFloat(f2, illum);
+        cells[9, i] := FormatFloat(f2, illum);
       end;
       jda := jda + s;
       i := i + 1;
     until jda > jd2;
   finally
-    //TwilightGrid.Visible:=true;
     screen.cursor := crDefault;
   end;
 end;
@@ -1769,9 +1794,9 @@ procedure Tf_calendar.RefreshPlanetGraph;
         {Sunset}
         r[1].Valid := dzScaledTime(SoleilGrid, 8, rw, r[1].ScTime);
         {EndNatTL}
-        r[2].Valid := dzScaledTime(TwilightGrid, 3, rw, r[2].ScTime);
+        r[2].Valid := dzScaledTime(TwilightGrid, 5, rw, r[2].ScTime);
         {EndAstTL}
-        r[3].Valid := dzScaledTime(TwilightGrid, 4, rw, r[3].ScTime);
+        r[3].Valid := dzScaledTime(TwilightGrid, 6, rw, r[3].ScTime);
         {StartAstTL}
         r[4].Valid := dzScaledTime(TwilightGrid, 1, rw, r[4].ScTime);
         {StartNatTL}
