@@ -111,31 +111,60 @@ object f_obslist: Tf_obslist
     Top = 94
     Width = 800
     Align = alClient
+    AutoFillColumns = True
     ColCount = 8
     ColumnClickSorts = True
     Columns = <    
       item
+        MinSize = 100
+        MaxSize = 300
+        SizePriority = 0
         Title.Caption = 'Title'
+        Width = 205
       end    
       item
+        MinSize = 96
+        MaxSize = 100
+        SizePriority = 0
         Title.Caption = 'Title'
+        Width = 96
       end    
       item
+        MinSize = 90
+        MaxSize = 100
+        SizePriority = 0
         Title.Caption = 'Title'
+        Width = 96
       end    
       item
+        MinSize = 80
+        MaxSize = 80
+        SizePriority = 0
         Title.Caption = 'Title'
+        Width = 80
       end    
       item
+        MinSize = 80
+        MaxSize = 80
+        SizePriority = 0
         Title.Caption = 'Title'
+        Width = 80
       end    
       item
+        MinSize = 100
+        MaxSize = 500
+        SizePriority = 1
         Title.Caption = 'Title'
+        Width = 206
       end    
       item
+        MinSize = 3
+        MaxSize = 100
+        SizePriority = 0
         Title.Caption = 'Title'
+        Width = 3
       end>
-    DefaultColWidth = 100
+    DefaultColWidth = 32
     MouseWheelOption = mwGrid
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowMoving, goEditing, goRowSelect, goSmoothScroll, goFixedRowNumbering, goFixedColSizing]
     ParentFont = False
@@ -146,8 +175,17 @@ object f_obslist: Tf_obslist
     OnCompareCells = StringGrid1CompareCells
     OnMouseDown = StringGrid1MouseDown
     OnMouseUp = StringGrid1MouseUp
-    OnResize = StringGrid1Resize
     OnValidateEntry = StringGrid1ValidateEntry
+    ColWidths = (
+      32
+      205
+      96
+      96
+      80
+      80
+      206
+      3
+    )
   end
   object PanelTop: TPanel
     Left = 0

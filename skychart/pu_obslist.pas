@@ -118,7 +118,6 @@ type
       Shift: TShiftState; X, Y: integer);
     procedure StringGrid1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
-    procedure StringGrid1Resize(Sender: TObject);
     procedure StringGrid1ValidateEntry(Sender: TObject; aCol, aRow: integer;
       const OldValue: string; var NewValue: string);
     procedure ToggleBox1Click(Sender: TObject);
@@ -810,14 +809,6 @@ begin
   locknewlist := False;
   locktogglebox := False;
   StringGrid1.AllowOutboundEvents := True;
-  StringGrid1.ColWidths[0] := DoScaleX(32);
-  StringGrid1.ColWidths[1] := DoScaleX(200);
-  StringGrid1.ColWidths[2] := DoScaleX(96);
-  StringGrid1.ColWidths[3] := DoScaleX(90);
-  StringGrid1.ColWidths[4] := DoScaleX(80);
-  StringGrid1.ColWidths[5] := DoScaleX(80);
-  StringGrid1.ColWidths[6] := StringGrid1.ClientWidth - StringGrid1.ColWidths[0] -
-    StringGrid1.ColWidths[1] - StringGrid1.ColWidths[2] - StringGrid1.ColWidths[3] - 8;
   Newlist;
   gridchanged := False;
   {$ifdef lclcocoa}
@@ -1065,12 +1056,6 @@ begin
   StringGrid1.MouseToCell(X, Y, aCol, aRow);
   if (ClickCol = 0) and (aCol = ClickCol) and (aRow = ClickRow) then
     SelectRow(ClickRow);
-end;
-
-procedure Tf_obslist.StringGrid1Resize(Sender: TObject);
-begin
-  StringGrid1.ColWidths[6] := StringGrid1.ClientWidth - StringGrid1.ColWidths[0] -
-    StringGrid1.ColWidths[1] - StringGrid1.ColWidths[2] - StringGrid1.ColWidths[3] - 8;
 end;
 
 procedure Tf_obslist.StringGrid1ValidateEntry(Sender: TObject;
