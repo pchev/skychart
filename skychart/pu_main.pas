@@ -1537,6 +1537,9 @@ begin
         end;
       end;
     end;
+    for i := 0 to MultiFrame1.ChildCount - 1 do
+       if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+         Tf_chart(MultiFrame1.Childs[i].DockedObject).locked:=true;
     if VerboseMsg then
       WriteTrace('Read params');
     ProcessParams2;
@@ -1590,6 +1593,9 @@ begin
     AutoRefreshLock := False;
     Autorefresh.Enabled := True;
     AnimationEnabled := False;
+    for i := 0 to MultiFrame1.ChildCount - 1 do
+       if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+         Tf_chart(MultiFrame1.Childs[i].DockedObject).locked:=false;
     InitScriptPanel;
     if not Application.ShowMainForm then
       InitOK := True;  // no formshow if --daemon
