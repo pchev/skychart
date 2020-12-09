@@ -29,7 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 interface
 
-uses httpsend, synautil, fpjson, jsonparser,
+uses httpsend, synautil, fpjson, jsonparser, base64,
   Forms, Classes, SysUtils;
 
 type
@@ -80,6 +80,7 @@ type
        function GetAsStringArray: IStringArray;
        function GetIntArray: IIntArray;
      public
+       base64handoff: boolean;
        constructor Create;
        destructor Destroy; override;
        function GetName(name: string): TJSONData;
@@ -110,10 +111,11 @@ type
     procedure SetClientId(i: LongWord);
     function GetTimeout: integer;
     procedure SetTimeout(value:integer);
+    function GetImagearrayBase64:TMemoryStream;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    function Get(method:string; param: string=''):TAscomResult;
+    function Get(method:string; param: string=''; hdr: string=''):TAscomResult;
     function GetTrackingRates: ITrackingRates;
     function GetAxisRates(axis:string): IAxisRates;
     function GetImageArray: TImageArray;
@@ -174,6 +176,7 @@ constructor TAscomResult.Create;
 begin
   inherited Create;
   data:=nil;
+  base64handoff:=false;
 end;
 
 destructor TAscomResult.Destroy;
@@ -322,9 +325,9 @@ begin
   FClientId:=i;
 end;
 
-function TAscomRest.Get(method:string; param: string=''):TAscomResult;
+function TAscomRest.Get(method:string; param: string=''; hdr: string=''):TAscomResult;
  var ok: boolean;
-     url: string;
+     url,buf: string;
      i: integer;
      RESTRequest: THTTPthread;
  begin
@@ -343,6 +346,7 @@ function TAscomRest.Get(method:string; param: string=''):TAscomResult;
    inc(FClientTransactionID);
    url:=url+'&ClientTransactionID='+IntToStr(FClientTransactionID);
    RESTRequest.url:=url;
+   if hdr<>'' then RESTRequest.http.Headers.Add(hdr);
    RESTRequest.method:='GET';
    RESTRequest.Start;
    while not RESTRequest.Finished do begin
@@ -355,6 +359,14 @@ function TAscomRest.Get(method:string; param: string=''):TAscomResult;
        RESTRequest.http.Document.Position:=0;
        Result:=TAscomResult.Create;
        Result.data:=TJSONObject(GetJSON(RESTRequest.http.Document));
+       if hdr<>'' then begin
+         for i:=0 to RESTRequest.http.Headers.Count-1 do
+           if Pos('base64handoff:', lowercase(RESTRequest.http.Headers[i])) = 1 then
+           begin
+             buf:=lowercase(trim(SeparateRight(RESTRequest.http.Headers[i], ':')));
+             Result.base64handoff:=(buf='true');
+           end;
+       end;
        try
        FLastErrorCode:=Result.GetName('ErrorNumber').AsInteger;
        FLastError:=Result.GetName('ErrorMessage').AsString;
@@ -429,45 +441,144 @@ begin
   end;
 end;
 
+function TAscomRest.GetImagearrayBase64:TMemoryStream;
+ var ok: boolean;
+     i: integer;
+     url: string;
+     RESTRequest: THTTPthread;
+ begin
+   result:=nil;
+   RESTRequest:=THTTPthread.Create;
+   try
+   RESTRequest.http.Document.Clear;
+   RESTRequest.http.Headers.Clear;
+   RESTRequest.http.Timeout:=FTimeout;
+   url:=FbaseUrl+LowerCase(Fdevice)+'/imagearraybase64';
+   RESTRequest.url:=url;
+   RESTRequest.method:='GET';
+   RESTRequest.Start;
+   while not RESTRequest.Finished do begin
+     sleep(100);
+     if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
+   end;
+   ok := RESTRequest.ok;
+   if ok then begin
+     if (RESTRequest.http.ResultCode=200) then begin
+       RESTRequest.http.Document.Position:=0;
+       Result:=TMemoryStream.Create;
+       Result.CopyFrom(RESTRequest.http.Document,RESTRequest.http.Document.Size);
+     end
+     else begin
+       FLastErrorCode:=RESTRequest.http.ResultCode;
+       FLastError:=RESTRequest.http.ResultString;
+       i:=pos('<br>',FLastError);
+       if i>0 then FLastError:=copy(FLastError,1,i-1);
+       raise EApiException.Create(FLastError);
+     end;
+   end
+   else begin
+     FLastErrorCode:=RESTRequest.http.Sock.LastError;
+     FLastError:=RESTRequest.http.Sock.LastErrorDesc;
+     raise ESocketException.Create(Fhost+':'+Fport+' '+FLastError);
+   end;
+   finally
+     RESTRequest.Free;
+   end;
+ end;
+
 function TAscomRest.GetImageArray: TImageArray;
 var J: TAscomResult;
+    str1,img: TMemoryStream;
+    b64str: TBase64DecodingStream;
     x,y,k: integer;
 begin
-   J:=Get('imagearray');
+   J:=Get('imagearray','','base64handoff: true');
    try
+   x:=J.GetName('Type').AsInteger;
+   if x<>2 then
+      raise EApiException.Create('Invalid ImageArray Type '+inttostr(x));
+
    Result:=TImageArray.Create;
-   Result.nplane:=J.GetName('Rank').AsInteger;
-   if result.nplane=2 then begin
-     with TJSONArray(J.GetName('Value')) do begin
-       Result.width:=Count;
-       Result.height:=Arrays[0].Count;
-       SetLength(Result.img,1,Result.height,Result.width);
-       for x:=0 to Count-1 do begin
-         with Arrays[x] do begin
-           for y:=0 to Count-1 do begin
-              Result.img[0,y,x]:=Integers[y];
+   if J.base64handoff then begin
+     str1:=GetImagearrayBase64;
+     if (str1<>nil)and(str1.Size>0) then begin
+       try
+       img:=TMemoryStream.Create;
+       try
+       str1.Position:=0;
+       b64str:=TBase64DecodingStream.Create(str1);
+       img.CopyFrom(b64str, b64str.Size);
+       finally
+         str1.Free;
+         b64str.Free;
+       end;
+       Result.nplane:=J.GetName('Rank').AsInteger;
+       Result.width:=J.GetName('Dimension0Length').AsInteger;
+       Result.height:=J.GetName('Dimension1Length').AsInteger;
+       img.Position:=0;
+       if result.nplane=2 then begin
+         SetLength(Result.img,1,Result.height,Result.width);
+         for x:=0 to Result.width-1 do begin
+           for y:=0 to Result.height-1 do begin
+              img.Read(Result.img[0,y,x],sizeof(integer));
+           end;
+         end;
+       end
+       else
+       if result.nplane=3 then begin
+         SetLength(Result.img,3,Result.height,Result.width);
+         for x:=0 to Result.width-1 do begin
+           for y:=0 to Result.height-1 do begin
+             for k:=0 to 2 do begin
+              img.Read(Result.img[k,y,x],sizeof(integer));
+             end;
            end;
          end;
        end;
+       finally
+         img.free;
+       end;
+     end
+     else begin
+       FLastErrorCode:=500;
+       FLastError:='Error: empty imagearraybase64';
+       raise EApiException.Create(FLastError);
      end;
    end
-   else
-   if result.nplane=3 then begin
-     with TJSONArray(J.GetName('Value')) do begin
-       Result.width:=Count;
-       Result.height:=Arrays[0].Count;
-       SetLength(Result.img,3,Result.height,Result.width);
-       for x:=0 to Count-1 do begin
-         with Arrays[x] do begin
-           for y:=0 to Count-1 do begin
-             with Arrays[y] do begin
-               for k:=0 to 2 do begin
-                 Result.img[k,y,x]:=Integers[k];
-               end; //k
+   else begin
+     Result.nplane:=J.GetName('Rank').AsInteger;
+     if result.nplane=2 then begin
+       with TJSONArray(J.GetName('Value')) do begin
+         Result.width:=Count;
+         Result.height:=Arrays[0].Count;
+         SetLength(Result.img,1,Result.height,Result.width);
+         for x:=0 to Count-1 do begin
+           with Arrays[x] do begin
+             for y:=0 to Count-1 do begin
+                Result.img[0,y,x]:=Integers[y];
              end;
-           end; // y
+           end;
          end;
-       end; //x
+       end;
+     end
+     else
+     if result.nplane=3 then begin
+       with TJSONArray(J.GetName('Value')) do begin
+         Result.width:=Count;
+         Result.height:=Arrays[0].Count;
+         SetLength(Result.img,3,Result.height,Result.width);
+         for x:=0 to Count-1 do begin
+           with Arrays[x] do begin
+             for y:=0 to Count-1 do begin
+               with Arrays[y] do begin
+                 for k:=0 to 2 do begin
+                   Result.img[k,y,x]:=Integers[k];
+                 end; //k
+               end;
+             end; // y
+           end;
+         end; //x
+       end;
      end;
    end;
    finally
