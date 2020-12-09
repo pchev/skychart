@@ -1,12 +1,12 @@
 object pop_scope: Tpop_scope
   Left = 276
-  Height = 568
+  Height = 603
   Top = 124
   Width = 314
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   Caption = 'ASCOM Telescope Interface'
-  ClientHeight = 568
+  ClientHeight = 603
   ClientWidth = 314
   OnCloseQuery = kill
   OnCreate = FormCreate
@@ -16,7 +16,7 @@ object pop_scope: Tpop_scope
   object GroupBox3: TGroupBox
     Left = 0
     Height = 89
-    Top = 477
+    Top = 509
     Width = 314
     Align = alTop
     ClientHeight = 87
@@ -74,7 +74,7 @@ object pop_scope: Tpop_scope
   object GroupBox5: TGroupBox
     Left = 0
     Height = 142
-    Top = 178
+    Top = 210
     Width = 314
     Align = alTop
     Caption = 'Observatory '
@@ -180,7 +180,7 @@ object pop_scope: Tpop_scope
   object Panel1: TPanel
     Left = 0
     Height = 157
-    Top = 320
+    Top = 352
     Width = 314
     Align = alTop
     ClientHeight = 157
@@ -446,7 +446,7 @@ object pop_scope: Tpop_scope
   end
   object PageControl1: TPageControl
     Left = 0
-    Height = 178
+    Height = 210
     Top = 0
     Width = 314
     ActivePage = ASCOMLocal
@@ -457,23 +457,23 @@ object pop_scope: Tpop_scope
     OnChanging = PageControl1Changing
     object ASCOMLocal: TTabSheet
       Caption = 'ASCOM Local'
-      ClientHeight = 147
+      ClientHeight = 179
       ClientWidth = 304
       ParentFont = False
       object GroupBox1: TGroupBox
         Left = 0
-        Height = 147
+        Height = 179
         Top = 0
         Width = 304
         Align = alClient
         Caption = 'Driver Selection'
-        ClientHeight = 127
+        ClientHeight = 159
         ClientWidth = 302
         ParentFont = False
         TabOrder = 0
         object ButtonSelect: TSpeedButton
           Left = 184
-          Height = 22
+          Height = 26
           Top = 7
           Width = 98
           Caption = 'Select'
@@ -481,9 +481,11 @@ object pop_scope: Tpop_scope
           ParentFont = False
         end
         object Label1: TLabel
-          Left = 2
+          AnchorSideTop.Control = ButtonAbout
+          AnchorSideTop.Side = asrCenter
+          Left = 8
           Height = 17
-          Top = 57
+          Top = 77
           Width = 83
           Caption = 'Refresh rate :'
           ParentColor = False
@@ -491,8 +493,8 @@ object pop_scope: Tpop_scope
         end
         object ButtonConfigure: TSpeedButton
           Left = 184
-          Height = 22
-          Top = 32
+          Height = 26
+          Top = 40
           Width = 98
           Caption = 'Configure'
           OnClick = ButtonConfigureClick
@@ -500,17 +502,19 @@ object pop_scope: Tpop_scope
         end
         object ButtonAbout: TSpeedButton
           Left = 184
-          Height = 22
-          Top = 57
+          Height = 26
+          Top = 72
           Width = 98
           Caption = 'About'
           OnClick = ButtonAboutClick
           ParentFont = False
         end
         object Edit1: TEdit
-          Left = 2
+          AnchorSideTop.Control = ButtonSelect
+          AnchorSideTop.Side = asrCenter
+          Left = 8
           Height = 28
-          Top = 15
+          Top = 6
           Width = 174
           Color = clBtnFace
           Constraints.MaxHeight = 28
@@ -520,9 +524,11 @@ object pop_scope: Tpop_scope
           TabOrder = 0
         end
         object ReadIntBox: TComboBox
-          Left = 102
+          AnchorSideTop.Control = ButtonAbout
+          AnchorSideTop.Side = asrCenter
+          Left = 108
           Height = 28
-          Top = 53
+          Top = 71
           Width = 74
           Constraints.MaxHeight = 28
           ItemHeight = 0
@@ -541,8 +547,8 @@ object pop_scope: Tpop_scope
         end
         object ButtonAdvSetting: TSpeedButton
           Left = 102
-          Height = 22
-          Top = 89
+          Height = 26
+          Top = 112
           Width = 180
           Caption = 'Advanced setting'
           OnClick = ButtonAdvSettingClick
@@ -552,24 +558,26 @@ object pop_scope: Tpop_scope
     end
     object ASCOMRemote: TTabSheet
       Caption = 'ASCOM Alpaca'
-      ClientHeight = 147
+      ClientHeight = 179
       ClientWidth = 304
       ParentFont = False
       object Panel3: TPanel
         Left = 0
-        Height = 147
+        Height = 179
         Top = 0
         Width = 304
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 147
+        ClientHeight = 179
         ClientWidth = 304
         ParentFont = False
         TabOrder = 0
         object ARestProtocol: TComboBox
-          Left = 13
+          AnchorSideTop.Control = Label34
+          AnchorSideTop.Side = asrBottom
+          Left = 8
           Height = 28
-          Top = 20
+          Top = 81
           Width = 75
           Constraints.MaxHeight = 28
           ItemHeight = 0
@@ -585,121 +593,171 @@ object pop_scope: Tpop_scope
           Text = 'http:'
         end
         object Label34: TLabel
-          Left = 13
+          Left = 8
           Height = 17
-          Top = 0
+          Top = 64
           Width = 51
           Caption = 'Protocol'
           ParentColor = False
           ParentFont = False
         end
         object ARestHost: TEdit
-          Left = 93
+          AnchorSideTop.Control = ARestProtocol
+          AnchorSideTop.Side = asrCenter
+          Left = 88
           Height = 28
-          Top = 20
-          Width = 194
+          Top = 81
+          Width = 106
           Constraints.MaxHeight = 28
           ParentFont = False
           TabOrder = 1
           Text = '127.0.0.1'
         end
         object Label35: TLabel
-          Left = 93
+          AnchorSideTop.Control = Label34
+          Left = 88
           Height = 17
-          Top = 0
-          Width = 163
-          Caption = 'Remote host or IP address'
+          Top = 64
+          Width = 42
+          Caption = 'Server'
           ParentColor = False
           ParentFont = False
         end
         object Label36: TLabel
-          Left = 13
+          AnchorSideTop.Control = Label34
+          Left = 200
           Height = 17
-          Top = 49
+          Top = 64
           Width = 43
           Caption = 'IP Port'
           ParentColor = False
           ParentFont = False
         end
-        object Label37: TLabel
-          Left = 146
-          Height = 17
-          Top = 49
-          Width = 144
-          Caption = 'Remote device number'
-          ParentColor = False
-          ParentFont = False
-        end
         object Label3: TLabel
-          Left = 146
+          AnchorSideTop.Control = ARestDevice
+          AnchorSideTop.Side = asrCenter
+          Left = 8
           Height = 17
-          Top = 72
+          Top = 120
           Width = 66
           Caption = 'Telescope/'
           ParentColor = False
           ParentFont = False
         end
-        object Label38: TLabel
-          Left = 156
-          Height = 17
-          Top = 97
-          Width = 58
-          Caption = 'Password'
-          ParentColor = False
-          ParentFont = False
-        end
-        object Label39: TLabel
-          Left = 13
-          Height = 17
-          Top = 97
-          Width = 68
-          Caption = 'User name'
-          ParentColor = False
-          ParentFont = False
-        end
-        object ARestPass: TEdit
-          Left = 156
-          Height = 28
-          Top = 117
-          Width = 131
-          AutoSelect = False
-          Constraints.MaxHeight = 28
-          EchoMode = emPassword
-          ParentFont = False
-          PasswordChar = '*'
-          TabOrder = 2
-        end
-        object ARestUser: TEdit
-          Left = 13
-          Height = 28
-          Top = 117
-          Width = 131
-          AutoSelect = False
-          Constraints.MaxHeight = 28
-          ParentFont = False
-          TabOrder = 3
-        end
         object ARestDevice: TSpinEdit
-          Left = 218
+          Left = 88
           Height = 28
-          Top = 67
+          Top = 114
           Width = 69
           Constraints.MaxHeight = 28
           MaxValue = 65535
           ParentFont = False
-          TabOrder = 4
+          TabOrder = 3
         end
         object ARestPort: TSpinEdit
-          Left = 13
+          AnchorSideTop.Control = ARestProtocol
+          AnchorSideTop.Side = asrCenter
+          Left = 200
           Height = 28
-          Top = 67
-          Width = 82
+          Top = 81
+          Width = 92
           Constraints.MaxHeight = 28
           MaxValue = 65535
           MinValue = 1
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 2
           Value = 11111
+        end
+        object BtnDiscover: TButton
+          Left = 8
+          Height = 25
+          Top = 2
+          Width = 96
+          Caption = 'Discover'
+          OnClick = BtnDiscoverClick
+          TabOrder = 4
+        end
+        object AlpacaMountList: TComboBox
+          Left = 8
+          Height = 28
+          Top = 32
+          Width = 284
+          Constraints.MaxHeight = 28
+          ItemHeight = 0
+          OnChange = AlpacaMountListChange
+          ParentFont = False
+          Style = csDropDownList
+          TabOrder = 5
+        end
+        object AlpacaDiscoveryPort: TSpinEdit
+          AnchorSideTop.Control = BtnDiscover
+          AnchorSideTop.Side = asrCenter
+          Left = 228
+          Height = 28
+          Top = 0
+          Width = 64
+          Constraints.MaxHeight = 28
+          MaxValue = 65535
+          MinValue = 1
+          ParentFont = False
+          TabOrder = 6
+          Value = 32227
+        end
+        object Label5: TLabel
+          AnchorSideTop.Control = BtnDiscover
+          AnchorSideTop.Side = asrCenter
+          Left = 120
+          Height = 17
+          Top = 6
+          Width = 84
+          Caption = 'Discover port'
+          ParentColor = False
+        end
+        object PanelCredential: TPanel
+          Left = 0
+          Height = 34
+          Top = 145
+          Width = 304
+          Align = alBottom
+          BevelOuter = bvNone
+          ClientHeight = 34
+          ClientWidth = 304
+          TabOrder = 7
+          object Label39: TLabel
+            AnchorSideTop.Control = ARestPass
+            AnchorSideTop.Side = asrCenter
+            Left = 8
+            Height = 17
+            Top = 8
+            Width = 63
+            Caption = 'Credential'
+            ParentColor = False
+            ParentFont = False
+          end
+          object ARestPass: TEdit
+            Left = 200
+            Height = 28
+            Top = 2
+            Width = 92
+            AutoSelect = False
+            Constraints.MaxHeight = 28
+            EchoMode = emPassword
+            ParentFont = False
+            PasswordChar = '*'
+            TabOrder = 0
+          end
+          object ARestUser: TEdit
+            AnchorSideTop.Control = ARestPass
+            AnchorSideTop.Side = asrCenter
+            Left = 88
+            Height = 28
+            Top = 2
+            Width = 106
+            AutoSelect = False
+            Constraints.MaxHeight = 28
+            ParentFont = False
+            TabOrder = 1
+          end
         end
       end
     end
@@ -708,13 +766,13 @@ object pop_scope: Tpop_scope
     Enabled = False
     OnTimer = Timer1Timer
     Left = 16
-    Top = 501
+    Top = 552
   end
   object StopMoveTimer: TTimer
     Enabled = False
     Interval = 100
     OnTimer = StopMoveTimerTimer
-    Left = 146
-    Top = 501
+    Left = 128
+    Top = 552
   end
 end

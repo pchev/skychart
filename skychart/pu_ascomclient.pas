@@ -33,7 +33,7 @@ uses
   {$endif}
   cu_ascomrest, math, LCLIntf, u_util, u_constant, u_help, u_translation,
   Messages, SysUtils, Classes, Graphics, Controls,
-  Forms, Dialogs, UScaleDPI, LCLVersion,
+  Forms, Dialogs, UScaleDPI, LCLVersion, cu_alpacamanagement,
   StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls, Arrow, Spin;
 
 type
@@ -41,6 +41,8 @@ type
   { Tpop_scope }
 
   Tpop_scope = class(TForm)
+    AlpacaDiscoveryPort: TSpinEdit;
+    AlpacaMountList: TComboBox;
     ARestDevice: TSpinEdit;
     ARestPass: TEdit;
     ARestPort: TSpinEdit;
@@ -51,6 +53,7 @@ type
     ArrowStop: TButton;
     ArrowUp: TArrow;
     AxisRates: TComboBox;
+    BtnDiscover: TButton;
     ButtonConnect: TButton;
     ButtonGetLocation: TSpeedButton;
     ButtonPark: TSpeedButton;
@@ -62,12 +65,12 @@ type
     Label34: TLabel;
     Label35: TLabel;
     Label36: TLabel;
-    Label37: TLabel;
-    Label38: TLabel;
     Label39: TLabel;
     Label4: TLabel;
+    Label5: TLabel;
     PageControl1: TPageControl;
     Handpad: TPanel;
+    PanelCredential: TPanel;
     Panel3: TPanel;
     parkled: TShape;
     ASCOMLocal: TTabSheet;
@@ -109,10 +112,12 @@ type
     ARestHost: TEdit;
     ARestProtocol: TComboBox;
     {Utility and form functions}
+    procedure AlpacaMountListChange(Sender: TObject);
     procedure ARestProtocolChange(Sender: TObject);
     procedure ArrowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ArrowMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ArrowStopClick(Sender: TObject);
+    procedure BtnDiscoverClick(Sender: TObject);
     procedure ButtonGetLocationClick(Sender: TObject);
     procedure ButtonParkClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -167,6 +172,7 @@ type
     FSlewing: boolean;
     FLastArrow: integer;
     FObservatoryCoord: TNotifyEvent;
+    AlpacaServerList: TAlpacaServerList;
     procedure SetDef(Sender: TObject);
     function ScopeConnectedReal: boolean;
     procedure ScopeGetEqSysReal(var EqSys: double);
@@ -994,6 +1000,7 @@ begin
   PageControl1.ActivePageIndex := default_remote;
   {$endif}
   ARestProtocol.ItemIndex := ini.ReadInteger('AscomRemote', 'protocol', 0);
+  PanelCredential.Visible:=(ARestProtocol.ItemIndex=1);
   ARestHost.Text := ini.readstring('AscomRemote', 'host', '127.0.0.1');
   ARestPort.Value := ini.ReadInteger('AscomRemote', 'port', 11111);
   ARestUser.Text := DecryptStr(hextostr(ini.readstring('AscomRemote', 'u', '')), encryptpwd);
@@ -1301,6 +1308,7 @@ begin
     0: ARestPort.Value:=11111;
     1: ARestPort.Value:=443;
   end;
+  PanelCredential.Visible:=(ARestProtocol.ItemIndex=1);
 end;
 
 procedure Tpop_scope.ArrowMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -1354,6 +1362,54 @@ begin
  ScopeMoveAxis(0,0);
  ScopeMoveAxis(1,0);
  ScopeAbortSlew;
+end;
+
+procedure Tpop_scope.BtnDiscoverClick(Sender: TObject);
+var i,j,n:integer;
+    devtype: string;
+begin
+try
+  Screen.Cursor:=crHourGlass;
+  AlpacaServerList:=AlpacaDiscover(AlpacaDiscoveryPort.Value);
+  n:=length(AlpacaServerList);
+  AlpacaMountList.Clear;
+  if n>0 then begin
+    AlpacaMountList.Items.Add('Discovered telescope...');
+    for i:=0 to length(AlpacaServerList)-1 do begin
+      for j:=0 to AlpacaServerList[i].devicecount-1 do begin
+        devtype:=UpperCase(AlpacaServerList[i].devices[j].DeviceType);
+        if devtype='TELESCOPE' then begin
+          AlpacaMountList.Items.Add(AlpacaServerList[i].devices[j].DeviceName+tab+AlpacaServerList[i].ip+tab+AlpacaServerList[i].port+tab+'telescope/'+tab+IntToStr(AlpacaServerList[i].devices[j].DeviceNumber));
+        end;
+      end;
+    end;
+    AlpacaMountList.ItemIndex:=0;
+  end;
+  if AlpacaMountList.Items.Count<2 then begin
+    AlpacaMountList.Clear;
+    AlpacaMountList.Items.Add('No Alpaca server found');
+    AlpacaMountList.ItemIndex:=0;
+  end;
+finally
+  Screen.Cursor:=crDefault;
+end;
+end;
+
+procedure Tpop_scope.AlpacaMountListChange(Sender: TObject);
+var i: integer;
+    lst:TStringList;
+begin
+  i:=AlpacaMountList.ItemIndex;
+  if i>0 then begin
+    lst:=TStringList.Create;
+    SplitRec(AlpacaMountList.Items[i],tab,lst);
+    ARestHost.Text:=lst[1];
+    ARestPort.Text:=lst[2];
+    ARestDevice.Value:=StrToInt(lst[4]);
+    ARestProtocol.ItemIndex:=0;
+    PanelCredential.Visible:=(ARestProtocol.ItemIndex=1);
+    lst.Free;
+  end;
 end;
 
 procedure Tpop_scope.ButtonSetLocationClick(Sender: TObject);
