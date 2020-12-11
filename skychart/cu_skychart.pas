@@ -107,7 +107,7 @@ type
       write FObjectListLabels;
     property UpdObsList: boolean read FUpdObsList write FUpdObsList;
     function Refresh(newtime: boolean): boolean;
-    function InitCatalog: boolean;
+    function InitCatalog(fov:double): boolean;
     function InitTime(newtime: boolean): boolean;
     function InitChart(full: boolean = True): boolean;
     function InitColor: boolean;
@@ -179,8 +179,7 @@ type
     function FindatRaDec(ra, Dec, dx: double; searchcenter: boolean;
       showall: boolean = False; ftype: integer = ftAll): boolean;
     procedure GetLabPos(ra, Dec, r: double; w, h: integer; var x, y: integer);
-    procedure FindList(ra, Dec, dx, dy: double;
-      var Text, msg: string; showall, allobject, trunc: boolean);
+    procedure FindList(ra, Dec, dx, dy: double; var Text, msg: string; showall, allobject, trunc, usefov: boolean);
     procedure FindListWin(var Text, msg: string; showall, allobject: boolean);
     property OnShowDetailXY: Tint2func read FShowDetailXY write FShowDetailXY;
     function GetChartInfo(sep: string = blank): string;
@@ -346,7 +345,7 @@ begin
     step:='Open catalog';
     Fcatalog.OpenCat(cfgsc);
     step:='Init catalog';
-    InitCatalog;
+    InitCatalog(cfgsc.fov);
     if VerboseMsg then
       WriteTrace('SkyChart ' + cfgsc.chartname + ': begin drawing');
     // first the extended object
@@ -519,18 +518,18 @@ begin
   end;
 end;
 
-function Tskychart.InitCatalog: boolean;
+function Tskychart.InitCatalog(fov:double): boolean;
 var
-  i: integer;
-  mag, magmax,f: double;
+  i,FieldNum: integer;
+  mag, magmax, f: double;
   vostar_magmax: double;
 
   procedure InitStarC(cat: integer; defaultmag: double);
   { determine if the star catalog is active at this scale }
   begin
     if Fcatalog.cfgcat.starcatdef[cat - BaseStar] and
-      (cfgsc.FieldNum >= Fcatalog.cfgcat.starcatfield[cat - BaseStar, 1]) and
-      (cfgsc.FieldNum <= Fcatalog.cfgcat.starcatfield[cat - BaseStar, 2]) then
+      (FieldNum >= Fcatalog.cfgcat.starcatfield[cat - BaseStar, 1]) and
+      (FieldNum <= Fcatalog.cfgcat.starcatfield[cat - BaseStar, 2]) then
     begin
       Fcatalog.cfgcat.starcaton[cat - BaseStar] := True;
       magmax := max(magmax, defaultmag);
@@ -548,8 +547,8 @@ var
   { determine if the variable star catalog is active at this scale }
   begin
     if Fcatalog.cfgcat.varstarcatdef[cat - BaseVar] and
-      (cfgsc.FieldNum >= Fcatalog.cfgcat.varstarcatfield[cat - BaseVar, 1]) and
-      (cfgsc.FieldNum <= Fcatalog.cfgcat.varstarcatfield[cat - BaseVar, 2]) then
+      (FieldNum >= Fcatalog.cfgcat.varstarcatfield[cat - BaseVar, 1]) and
+      (FieldNum <= Fcatalog.cfgcat.varstarcatfield[cat - BaseVar, 2]) then
       Fcatalog.cfgcat.varstarcaton[cat - BaseVar] := True
     else
       Fcatalog.cfgcat.varstarcaton[cat - BaseVar] := False;
@@ -559,8 +558,8 @@ var
   { determine if the double star catalog is active at this scale }
   begin
     if Fcatalog.cfgcat.dblstarcatdef[cat - BaseDbl] and
-      (cfgsc.FieldNum >= Fcatalog.cfgcat.dblstarcatfield[cat - BaseDbl, 1]) and
-      (cfgsc.FieldNum <= Fcatalog.cfgcat.dblstarcatfield[cat - BaseDbl, 2]) then
+      (FieldNum >= Fcatalog.cfgcat.dblstarcatfield[cat - BaseDbl, 1]) and
+      (FieldNum <= Fcatalog.cfgcat.dblstarcatfield[cat - BaseDbl, 2]) then
       Fcatalog.cfgcat.dblstarcaton[cat - BaseDbl] := True
     else
       Fcatalog.cfgcat.dblstarcaton[cat - BaseDbl] := False;
@@ -570,8 +569,8 @@ var
   { determine if the nebulae catalog is active at this scale }
   begin
     if Fcatalog.cfgcat.nebcatdef[cat - BaseNeb] and
-      (cfgsc.FieldNum >= Fcatalog.cfgcat.nebcatfield[cat - BaseNeb, 1]) and
-      (cfgsc.FieldNum <= Fcatalog.cfgcat.nebcatfield[cat - BaseNeb, 2]) then
+      (FieldNum >= Fcatalog.cfgcat.nebcatfield[cat - BaseNeb, 1]) and
+      (FieldNum <= Fcatalog.cfgcat.nebcatfield[cat - BaseNeb, 2]) then
       Fcatalog.cfgcat.nebcaton[cat - BaseNeb] := True
     else
       Fcatalog.cfgcat.nebcaton[cat - BaseNeb] := False;
@@ -581,9 +580,13 @@ begin
   if VerboseMsg then
     WriteTrace('SkyChart ' + cfgsc.chartname + ': Init catalogs');
   vostar_magmax := Fcatalog.GetVOstarmag;
+  if fov=cfgsc.fov then
+    FieldNum:=cfgsc.FieldNum
+  else
+    FieldNum := GetFieldNum(fov - musec);
   if Fcatalog.cfgshr.AutoStarFilter then
   begin
-    f := cfgsc.fov - 15 * minarc;
+    f := fov - 15 * minarc;
     if (f > minarc) or cfgsc.Quick then
       Fcatalog.cfgcat.StarMagMax :=
         max(5,
@@ -595,15 +598,15 @@ begin
       Fcatalog.cfgcat.StarMagMax := 99;
   end
   else
-    Fcatalog.cfgcat.StarMagMax := Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
+    Fcatalog.cfgcat.StarMagMax := Fcatalog.cfgshr.StarMagFilter[FieldNum];
   if cfgsc.quick and FPlot.cfgplot.red_move then begin
     Fcatalog.cfgcat.Quick := true;
     Fcatalog.cfgcat.StarMagMax := min(16,Fcatalog.cfgcat.StarMagMax - 2);
   end
   else
     Fcatalog.cfgcat.Quick := false;
-  Fcatalog.cfgcat.NebMagMax := Fcatalog.cfgshr.NebMagFilter[cfgsc.FieldNum];
-  Fcatalog.cfgcat.NebSizeMin := Fcatalog.cfgshr.NebSizeFilter[cfgsc.FieldNum];
+  Fcatalog.cfgcat.NebMagMax := Fcatalog.cfgshr.NebMagFilter[FieldNum];
+  Fcatalog.cfgcat.NebSizeMin := Fcatalog.cfgshr.NebSizeFilter[FieldNum];
   Fplot.cfgchart.min_ma := 1;
   magmax := 1;
   { activate the star catalog}
@@ -654,8 +657,8 @@ begin
   Fcatalog.cfgcat.lincaton[gclin - Baselin] := False;
   for i := 1 to Fcatalog.cfgcat.GCatNum do
     if Fcatalog.cfgcat.GCatLst[i - 1].Actif and
-      (cfgsc.FieldNum >= Fcatalog.cfgcat.GCatLst[i - 1].min) and
-      (cfgsc.FieldNum <= Fcatalog.cfgcat.GCatLst[i - 1].max) then
+      (FieldNum >= Fcatalog.cfgcat.GCatLst[i - 1].min) and
+      (FieldNum <= Fcatalog.cfgcat.GCatLst[i - 1].max) then
     begin
       Fcatalog.cfgcat.GCatLst[i - 1].CatOn := True;
       case Fcatalog.cfgcat.GCatLst[i - 1].cattype of
@@ -4120,7 +4123,7 @@ begin
   cfgsc.FindDesc2000 := '';
   cfgsc.FindDesc := '';
   Fcatalog.OpenCat(cfgsc);
-  InitCatalog;
+  InitCatalog(cfgsc.fov);
   saveNebFilter := Fcatalog.cfgshr.NebFilter;
   saveStarFilter := Fcatalog.cfgshr.StarFilter;
   if showall then
@@ -4201,8 +4204,7 @@ begin
   end;
 end;
 
-procedure Tskychart.FindList(ra, Dec, dx, dy: double;
-  var Text, msg: string; showall, allobject, trunc: boolean);
+procedure Tskychart.FindList(ra, Dec, dx, dy: double; var Text, msg: string; showall, allobject, trunc, usefov: boolean);
 var
   x1, x2, y1, y2, xx1, yy1: double;
   rec: Gcatrec;
@@ -4220,14 +4222,9 @@ const
     begin
       if i > maxln then
         break;
-      projection(rec.ra, rec.Dec, xx1, yy1, True, cfgsc);
-      windowxy(xx1, yy1, xx, yy, cfgsc);
-      if (xx > cfgsc.Xmin) and (xx < cfgsc.Xmax) and (yy > cfgsc.Ymin) and (yy < cfgsc.Ymax) then
-      begin
-        FormatCatRec(rec, desc);
-        Text := Text + cfgsc.FindCat + tab + desc + crlf;
-        Inc(i);
-      end;
+      FormatCatRec(rec, desc);
+      Text := Text + cfgsc.FindCat + tab + desc + crlf;
+      Inc(i);
       ok := fcatalog.FindatPos(cat, x1, y1, x2, y2, True, trunc, True, cfgsc, rec);
     end;
     fcatalog.CloseCat;
@@ -4240,13 +4237,8 @@ const
     begin
       if i > maxln then
         break;
-      projection(cfgsc.findra, cfgsc.finddec, xx1, yy1, True, cfgsc);
-      windowxy(xx1, yy1, xx, yy, cfgsc);
-      if (xx > cfgsc.Xmin) and (xx < cfgsc.Xmax) and (yy > cfgsc.Ymin) and (yy < cfgsc.Ymax) then
-      begin
-        Text := Text + fplanet.eph_method + tab + desc + crlf;
-        Inc(i);
-      end;
+      Text := Text + fplanet.eph_method + tab + desc + crlf;
+      Inc(i);
       ok := fplanet.findplanet(x1, y1, x2, y2, True, cfgsc, n, m, d, desc, trunc);
     end;
   end;
@@ -4258,13 +4250,8 @@ const
     begin
       if i > maxln then
         break;
-      projection(cfgsc.findra, cfgsc.finddec, xx1, yy1, True, cfgsc);
-      windowxy(xx1, yy1, xx, yy, cfgsc);
-      if (xx > cfgsc.Xmin) and (xx < cfgsc.Xmax) and (yy > cfgsc.Ymin) and (yy < cfgsc.Ymax) then
-      begin
-        Text := Text + 'MPC' + tab + desc + crlf;
-        Inc(i);
-      end;
+      Text := Text + 'MPC' + tab + desc + crlf;
+      Inc(i);
       ok := fplanet.findasteroid(x1, y1, x2, y2, True, cfgsc, n, m, d, desc, trunc);
     end;
   end;
@@ -4276,13 +4263,8 @@ const
     begin
       if i > maxln then
         break;
-      projection(cfgsc.findra, cfgsc.finddec, xx1, yy1, True, cfgsc);
-      windowxy(xx1, yy1, xx, yy, cfgsc);
-      if (xx > cfgsc.Xmin) and (xx < cfgsc.Xmax) and (yy > cfgsc.Ymin) and (yy < cfgsc.Ymax) then
-      begin
-        Text := Text + 'MPC' + tab + desc + crlf;
-        Inc(i);
-      end;
+      Text := Text + 'MPC' + tab + desc + crlf;
+      Inc(i);
       ok := fplanet.findcomet(x1, y1, x2, y2, True, cfgsc, n, m, d, desc, trunc);
     end;
   end;
@@ -4304,7 +4286,10 @@ begin
   y2 := min(pid2, Dec + dy);
   Text := '';
   Fcatalog.OpenCat(cfgsc);
-  InitCatalog;
+  if usefov then
+    InitCatalog(dx)
+  else
+    InitCatalog(cfgsc.fov);
   saveNebFilter := Fcatalog.cfgshr.NebFilter;
   saveStarFilter := Fcatalog.cfgshr.StarFilter;
   if showall then
@@ -4533,7 +4518,7 @@ begin
   y2 := min(pid2, Dec + dy);
   Text := '';
   Fcatalog.OpenCat(cfgsc);
-  InitCatalog;
+  InitCatalog(cfgsc.fov);
   saveNebFilter := Fcatalog.cfgshr.NebFilter;
   saveStarFilter := Fcatalog.cfgshr.StarFilter;
   if showall then
@@ -6559,7 +6544,7 @@ var
   rr, xx, yy, o, hh: integer;
 begin
   // no precession, the label position is already for the rigth equinox
-  projection(ra, Dec, x1, y1, True, cfgsc);
+  projection(ra, Dec, x1, y1, false, cfgsc);
   WindowXY(x1, y1, xxx, yyy, cfgsc);
   rr := round(r * cfgsc.BxGlb);
   xx := RoundInt(xxx);

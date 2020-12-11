@@ -721,6 +721,7 @@ type
     procedure FirstSetup;
     procedure ShowReleaseNotes(shownext: boolean);
     function Find(kind: integer; num: string; def_ra: double = 0; def_de: double = 0): string;
+    procedure FindInfo(Sender: TObject);
     function SaveChart(fn: string): string;
     function OpenChart(fn: string): string;
     function LoadDefaultChart(fn: string): string;
@@ -1430,6 +1431,7 @@ begin
     f_search.showpluto := def_cfgsc.ShowPluto;
     f_search.SesameUrlNum := cfgm.SesameUrlNum;
     f_search.SesameCatNum := cfgm.SesameCatNum;
+    f_search.onFindInfo := FindInfo;
     f_search.Init;
     if VerboseMsg then
       WriteTrace('Connect DB');
@@ -4385,6 +4387,35 @@ begin
         ShowError(Format(rsNotFoundMayb, [f_search.Num, crlf]));
     end;
   until (ok = msgOK) or (f_search.ModalResult <> mrOk);
+end;
+
+procedure Tf_main.FindInfo(Sender: TObject);
+var savechartlock: boolean;
+    p: Tpoint;
+    ok: string;
+begin
+  if MultiFrame1.ActiveObject is Tf_chart then
+    with (MultiFrame1.ActiveObject as Tf_chart) do
+    begin
+      savechartlock:=sc.cfgsc.ChartLock;
+      sc.cfgsc.ChartLock := true;
+      sc.cfgsc.FindDesc:='';
+      sc.cfgsc.FindDesc2:='';
+      sc.cfgsc.FindDesc2000:='';
+      ok := Find(f_search.SearchKind, f_search.Num, f_search.ra, f_search.de);
+      if ok = msgOK then begin
+        p.x:=f_search.Left+f_search.Width;
+        p.y:=f_search.Top;
+        f_detail.Hide;
+        formpos(f_detail, p.x, p.y);
+        identlabelClick(nil);
+        f_detail.Show;
+      end
+      else begin
+        ShowError(Format(rsNotFoundMayb, [f_search.Num, crlf]));
+      end;
+      sc.cfgsc.ChartLock := savechartlock;
+    end;
 end;
 
 function Tf_main.Find(kind: integer; num: string; def_ra: double = 0;
@@ -11128,11 +11159,10 @@ begin
       if MultiFrame1.Childs[i].Caption = chart then
         with MultiFrame1.Childs[i].DockedObject as Tf_chart do
         begin
-          ra:=sc.cfgsc.FindRa;
-          de:=sc.cfgsc.FindDec;
-          projection(ra, de, x1, y1, True, sc.cfgsc);
-          WindowXY(x1, y1, x, y, sc.cfgsc);
-          ListXY(round(x), round(y), 50, false,10);
+          ra:=f_detail.ra;
+          de:=f_detail.de;
+          Precession(jd2000,sc.cfgsc.JDChart,ra,de);
+          ListRaDec(ra, de, 0.5*deg2rad, false, 10);
           f_info.SortRadius(ra,de);
           break;
         end;

@@ -1554,6 +1554,7 @@ resourcestring
   rsImportMosaic = 'Import mosaic file';
   rsTruncatedToS = 'Truncated to %s catalogs';
   rsCivil = 'Civil';
+  rsFindInfo = 'Find info';
 
 // also update upsi_translation
 

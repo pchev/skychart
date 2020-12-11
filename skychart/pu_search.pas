@@ -45,6 +45,7 @@ type
     btnCometFilter: TButton;
     btnAstFilter: TButton;
     AsteroidList: TComboBox;
+    btnFindInfo: TButton;
     btnHelp: TButton;
     PageControl1: TPageControl;
     Panel1: TPanel;
@@ -125,6 +126,7 @@ type
     ConstBox: TComboBox;
     procedure btnCometFilterClick(Sender: TObject);
     procedure btnAstFilterClick(Sender: TObject);
+    procedure btnFindInfoClick(Sender: TObject);
     procedure btnHelpClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -147,12 +149,14 @@ type
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
+    FFindInfo: TNotifyEvent;
     cometid, astid : array[0..maxcombo] of string;
     NebNameAR : array of single;
     NebNameDE : array of single;
     numNebName : integer;
     Fnightvision:boolean;
     http: THTTPSend;
+    procedure GetSearchText;
   protected
     Fproxy,Fproxyport,Fproxyuser,Fproxypass : string;
     FSocksproxy,FSockstype : string;
@@ -180,6 +184,7 @@ type
     property HttpProxyPass : string read Fproxypass  write Fproxypass ;
     property SocksProxy : string read FSocksproxy  write FSocksproxy ;
     property SocksType : string read FSockstype  write FSockstype ;
+    property onFindInfo: TNotifyEvent read FFindInfo write FFindInfo;
   end;
 
 var
@@ -213,6 +218,7 @@ begin
   RadioGroup1.Items[9]:=rsConstellatio;
   RadioGroup1.Items[10]:=rsInternet+' NED, Simbad, Vizier';
   btnFind.caption:=rsFind;
+  btnFindInfo.Caption:=rsFindInfo;
   btnCancel.caption:=rsCancel;
   btnHelp.caption:=rsHelp;
   SetHelp(self,hlpSearch);
@@ -609,13 +615,10 @@ begin
 
 end;
 
-procedure Tf_search.btnFindClick(Sender: TObject);
+procedure Tf_search.GetSearchText;
 begin
-
   searchkind := RadioGroup1.itemindex;
-
   case searchkind of
-
     1 :
       begin
         num := NebNameBox.Text;
@@ -623,13 +626,11 @@ begin
         ra := NebNameAR[NebNameBox.itemindex];
         de := NebNameDE[NebNameBox.itemindex];
       end;
-
     3 : num := 'HR'+inttostr(cfgshr.StarNameHR[starnamebox.itemindex]);
     6 : num := CometList.Text;
     7 : num := AsteroidList.Text;
     8 : num := PlanetBox.Text;
     9 : num := ConstBox.Text;
-
    10 :
       begin
         num:=OnlineEdit.Text;
@@ -637,15 +638,26 @@ begin
         if not SearchOnline then
            exit;
       end;
-
     else
       num:=Id.text;
-
   end;
+end;
 
+procedure Tf_search.btnFindInfoClick(Sender: TObject);
+begin
+  GetSearchText;
+  if trim(num)='' then
+    ShowMessage(rsPleaseEnterA)
+  else
+    if assigned(FFindInfo) then FFindInfo(self);
+end;
+
+
+procedure Tf_search.btnFindClick(Sender: TObject);
+begin
+  GetSearchText;
   if trim(num)='' then ShowMessage(rsPleaseEnterA)
                   else ModalResult := mrOk;
-
 end;
 
 procedure Tf_search.IdKeyDown(Sender: TObject; var Key: Word;

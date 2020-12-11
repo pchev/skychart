@@ -369,6 +369,7 @@ type
       ar1, de1: double; sr: string = ''; sn: string = ''; sd: string = '');
     procedure Identdetail(X, Y: integer);
     function ListXY(X, Y: integer; r: integer = 12; allobj:boolean=true; mincount:integer=0): boolean;
+    function ListRaDec(ra, de, r: double; allobj:boolean=true; mincount:integer=0): boolean;
     procedure rotation(rot: double);
     procedure GetSunImage;
     procedure CKeyDown(Key: word; Shift: TShiftState);
@@ -2919,7 +2920,9 @@ procedure Tf_chart.IdentSearchResult(num, stype: string; itype: integer;
   ar1, de1: double; sr: string = ''; sn: string = ''; sd: string = '');
 var
   fullmotion: boolean;
-  dyear, epoch, ra2000, dec2000: double;
+  dyear, epoch, ra2000, dec2000, x1, y1: double;
+  xx, yy: single;
+  sx,sy: integer;
   p: coordvector;
   rec: GCatrec;
 begin
@@ -2987,15 +2990,26 @@ begin
     if sc.cfgsc.ApparentPos then
       apparent_equatorial(ar1, de1, sc.cfgsc, True, itype < ftPla);
     // center chart
-    if not sc.cfgsc.ChartLock then sc.movetoradec(ar1, de1);
-    Refresh(True, False);
+    if not sc.cfgsc.ChartLock then begin
+      sc.movetoradec(ar1, de1);
+      Refresh(True, False);
+      sx := sc.cfgsc.Xcentre;
+      sy := sc.cfgsc.Ycentre;
+    end
+    else begin
+      projection(ar1, de1, x1, y1, false, sc.cfgsc);
+      WindowXY(x1, y1, xx, yy, sc.cfgsc);
+      sx := round(xx);
+      sy := round(yy);
+      Refresh(False, False);
+    end;
     // try to get more information and show the label
     if (itype = ftPla) then
     begin
       ShowIdentLabel;
     end
     else if (itype = ftOnline) or
-      (not IdentXY(sc.cfgsc.Xcentre, sc.cfgsc.Ycentre, False, True, itype)) then
+      (not IdentXY(sx, sy, False, True, itype,10)) then
     begin
       // object not found
       // online search result
@@ -3065,13 +3079,38 @@ begin
   dx := abs(r / sc.cfgsc.BxGlb)/2; // search a 12 pixel radius by default
   repeat
     dx:=2*dx;
-    sc.Findlist(ra, Dec, dx, dx, buf, msg, False, allobj, True);
+    sc.Findlist(ra, Dec, dx, dx, buf, msg, False, allobj, True, false);
     c:=0;
     if mincount>0 then begin
       for i:=1 to length(buf) do
         if buf[i]=chr(13) then inc(c);
     end;
   until (c>=mincount)or(dx>(sc.cfgsc.fov/4));
+  msg := msg + blank + rsSearchRadius + ': ' + DEToStrShort(rad2deg*dx, 0);
+  if assigned(FListInfo) then
+    FListInfo(buf, msg);
+end;
+
+function Tf_chart.ListRaDec(ra, de, r: double; allobj:boolean=true; mincount:integer=0): boolean;
+var
+  dx: double;
+  buf, msg: string;
+  i,c: integer;
+begin
+  Result := False;
+  if locked then
+    exit;
+  ra := rmod(ra + pi2, pi2);
+  dx := abs(r)/2;
+  repeat
+    dx:=2*dx;
+    sc.Findlist(ra, de, dx, dx, buf, msg, False, allobj, True, true);
+    c:=0;
+    if mincount>0 then begin
+      for i:=1 to length(buf) do
+        if buf[i]=chr(13) then inc(c);
+    end;
+  until (c>=mincount)or(dx>(r*10))or(dx>(pid2));
   msg := msg + blank + rsSearchRadius + ': ' + DEToStrShort(rad2deg*dx, 0);
   if assigned(FListInfo) then
     FListInfo(buf, msg);
