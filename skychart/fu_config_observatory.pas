@@ -1033,10 +1033,16 @@ procedure Tf_config_observatory.ShowHorizon;
 begin
   horizonopaque.Checked := not csc.horizonopaque;
   horizonfile.Text := csc.horizonfile;
-  horizonfile.InitialDir := slash(appdir) + 'data' + pathdelim + 'horizon';
+  if csc.horizonfile = '' then
+    horizonfile.InitialDir := slash(HomeDir)
+  else
+    horizonfile.InitialDir := ExtractFilePath(csc.horizonfile);
   displayhorizon.Checked := csc.ShowHorizon;
   horizonpicturefile.Text := csc.HorizonPictureFile;
-  horizonpicturefile.InitialDir := slash(HomeDir);
+  if csc.HorizonPictureFile = '' then
+    horizonpicturefile.InitialDir := slash(HomeDir)
+  else
+    horizonpicturefile.InitialDir := ExtractFilePath(csc.HorizonPictureFile);
   if uppercase(ExtractFileExt(csc.HorizonPictureFile)) = '.BMP' then
     horizonpicturefile.FilterIndex := 1
   else
