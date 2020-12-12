@@ -4404,12 +4404,13 @@ begin
       sc.cfgsc.FindDesc2000:='';
       ok := Find(f_search.SearchKind, f_search.Num, f_search.ra, f_search.de);
       if ok = msgOK then begin
-        p.x:=f_search.Left+f_search.Width;
-        p.y:=f_search.Top;
-        f_detail.Hide;
-        formpos(f_detail, p.x, p.y);
-        identlabelClick(nil);
+        if (not f_detail.Visible) then begin
+          p.x:=f_search.Left+f_search.Width;
+          p.y:=f_search.Top;
+          formpos(f_detail, p.x, p.y);
+        end;
         f_detail.Show;
+        identlabelClick(nil);
       end
       else begin
         ShowError(Format(rsNotFoundMayb, [f_search.Num, crlf]));
@@ -11132,14 +11133,18 @@ end;
 procedure Tf_main.CenterFindObj(chart: string);
 var
   i: integer;
+  ra, de: double;
 begin
   for i := 0 to MultiFrame1.ChildCount - 1 do
     if MultiFrame1.Childs[i].DockedObject is Tf_chart then
       if MultiFrame1.Childs[i].Caption = chart then
         with MultiFrame1.Childs[i].DockedObject as Tf_chart do
         begin
-          sc.cfgsc.racentre := sc.cfgsc.FindRa;
-          sc.cfgsc.decentre := sc.cfgsc.FindDec;
+          ra:=f_detail.ra;
+          de:=f_detail.de;
+          Precession(jd2000,sc.cfgsc.JDChart,ra,de);
+          sc.cfgsc.racentre := ra;
+          sc.cfgsc.decentre := de;
           sc.cfgsc.TrackOn := False;
           if VerboseMsg then
             WriteTrace('CenterFindObj');
