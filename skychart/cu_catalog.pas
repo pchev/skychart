@@ -4321,9 +4321,10 @@ begin
       exit;
   end;
   // then the id not in the default catalog
-  if uppercase(copy(Num, 1, 8)) = 'GAIA DR2' then
+  if uppercase(copy(Num, 1, 4)) = 'GAIA' then
   begin
-    buf := StringReplace(Num, 'gaia dr2', '', [rfReplaceAll, rfIgnoreCase]);
+    if GaiaVersion='' then SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia1'), 'gaia');
+    buf := StringReplace(Num, GaiaVersion, '', [rfReplaceAll, rfIgnoreCase]);
     Result := FindGaia(buf, ar1, de1);
     if Result then
       exit;
@@ -6224,9 +6225,14 @@ begin
 end;
 
 function Tcatalog.OpenGaia: boolean;
+var h : TCatHeader;
+    info:TCatHdrInfo;
+    version : integer;
+    filter,ok : boolean;
 begin
   cfgcat.GaiaLevel:=1;
   SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia'+inttostr(cfgcat.GaiaLevel)), 'gaia');
+  GetGaiaInfo(h,info,version,filter,ok);
   OpenGaiawin(Result);
 end;
 

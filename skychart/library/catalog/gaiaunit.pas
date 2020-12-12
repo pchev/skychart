@@ -38,6 +38,7 @@ type TGaiaRec = packed record
 function IsGaiapath(path : string) : Boolean;
 procedure SetGaiapath(path,catshortname : string);
 procedure GetGaiaInfo(var h : TCatHeader; var info:TCatHdrInfo; var version : integer; var filter,ok : boolean);
+function GaiaVersion: String;
 Procedure OpenGaiap(ar1,ar2,de1,de2: double ; var ok : boolean);
 Procedure OpenGaiawin(var ok : boolean);
 Procedure ReadGaia(var lin : GCatrec; var ok : boolean);
@@ -249,6 +250,15 @@ h:=catheader;
 version:=catversion;
 info:=catinfo;
 filter:=(cattype=ctBin);
+end;
+
+function GaiaVersion: String;
+begin
+  result:=trim(catheader.LongName);
+  if result='' then begin
+    ReadGaiaHeader;
+    result:=trim(catheader.LongName);
+  end;
 end;
 
 Procedure CloseGaiaRegion;
