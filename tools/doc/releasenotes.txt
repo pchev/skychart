@@ -8,6 +8,9 @@ The skychart-spice-base file is required and you can add skychart-spice-ext for 
 On Linux you also need to install libcalceph before you can use this function: https://github.com/pchev/libcalceph/releases/tag/v1.0.0
 
 New functions:
+- Display object information directly from the Search window
+- Add Alpaca telescope discovery
+- Add civil twilight in the calendar
 - Allow to import a mosaic in the observing list
 - In Observer tool, stop the telescope motion when releasing the arrow button
 - Use the nebula outlines from OpenNGC, add option to select line or surface
