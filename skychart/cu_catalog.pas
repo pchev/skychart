@@ -6263,6 +6263,8 @@ begin
   if GaiaVersion='Gaia DR2' then
     result:=GaiaBRtoBV_DR2(br)
   else if GaiaVersion='Gaia EDR3' then
+    result:=GaiaBRtoBV_EDR3(br)
+  else
     result:=GaiaBRtoBV_EDR3(br);
 end;
 
@@ -6363,6 +6365,8 @@ begin
   if GaiaVersion='Gaia DR2' then
     result:=GaiaGtoV_DR2(g,br)
   else if GaiaVersion='Gaia EDR3' then
+    result:=GaiaGtoV_EDR3(g,br)
+  else
     result:=GaiaGtoV_EDR3(g,br);
 end;
 
