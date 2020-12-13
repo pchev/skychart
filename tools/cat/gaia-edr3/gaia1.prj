@@ -2,16 +2,17 @@
 binarycat=0
 type=0
 shortname=Gaia
-longname=Gaia DR2
-numfiles=1
-inputfiles0=catgen_input15.txt
+longname=Gaia EDR3
+numfiles=2
+inputfiles0=gaia_hipparcos.txt
+inputfiles1=catgen_input15.txt
 caturl=
 
 [Page2]
 ratype=3
 dectype=1
 equinox=2000
-epoch=2015.5
+epoch=2016.0
 magmax=15
 identifierformat=1
 highprecpm=1
@@ -61,7 +62,7 @@ field31=0
 field32=0
 label1=RA
 label2=DEC
-label3=Gaia DR2
+label3=Gaia EDR3
 label4=mG
 label5=b-v
 label6=mB

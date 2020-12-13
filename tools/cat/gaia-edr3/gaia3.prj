@@ -2,17 +2,17 @@
 binarycat=0
 type=0
 shortname=Gaia
-longname=Gaia DR2
+longname=Gaia EDR3
 numfiles=1
-inputfiles0=catgen_input18.txt
+inputfiles0=catgen_input21.txt
 caturl=
 
 [Page2]
 ratype=3
 dectype=1
 equinox=2000
-epoch=2015.5
-magmax=18
+epoch=2016.0
+magmax=21
 identifierformat=1
 highprecpm=1
 nebsize=0
@@ -282,7 +282,7 @@ idprefix=1
 
 [Page4]
 numfile=3
-ouputdir=gaia2/
+ouputdir=gaia3/
 index=0
 altindex=0
 prefname=0

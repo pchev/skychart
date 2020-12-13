@@ -1,17 +1,17 @@
 Download gaia files:
 
-wget -r -l1 http://cdn.gea.esac.esa.int/Gaia/gdr2/gaia_source/csv/
-61234 files
-$ du -hs csv
-548G    csv
+wget -r -l1 http://cdn.gea.esac.esa.int/Gaia/gedr3/gaia_source/*
+
+3386 files , 613GB
 
 Download Hipparcos cross ref:
 https://gaia.aip.de/query/
-select "source_id","original_ext_source_id" from "gdr2"."hipparcos2_best_neighbour" order by "source_id"
+select "source_id","original_ext_source_id" from "gaiaedr3"."hipparcos2_best_neighbour" order by "source_id"
 Submit
-Download -> CSV
+Download -> CSV -> hipparcos_cross.csv 
 
-Compile extractgaia.lpr with Lazarus
+Compile extractgaia with Lazarus:
+lazbuild extractgaia.lpi
 
 Run extractgaia
 This produce files by magnitude range with the following column:

@@ -50,6 +50,7 @@ var
     gzf: pointer;
     ffile: file;
     gzbuf: array[0..4095] of char;
+    ok:boolean;
 
 const
     blank25='                         ';
@@ -71,14 +72,14 @@ begin
   reset(fc);
   readln(fc); // remove header
   fcrow:=TStringList.Create;
-  SetLength(hiplist,100000,2);
+  SetLength(hiplist,120000,2);
   i:=0;
   repeat
     ReadLn(fc,fcbuf);
     fcrow.Clear;
     ExtractStrings([','], [], PChar(fcbuf),fcrow,true);
-    hiplist[i,0]:=StrToQWord(trim(fcrow[0]));
-    hiplist[i,1]:=StrToQWord(trim(fcrow[1]));
+    hiplist[i,0]:=StrToQWord(trim(fcrow[0]));  // source_id
+    hiplist[i,1]:=StrToQWord(trim(fcrow[1]));  // hipparcos
     inc(i);
   until eof(fc);
   hipcount:=i;
@@ -165,7 +166,7 @@ begin
      until gzeof(gzf);
      gzclose(gzf);
      CloseFile(ffile);
-     DeleteFile(slash('csv') + filelst[j]);
+     //DeleteFile(slash('csv') + filelst[j]);
 
      AssignFile(ft,tmpfn);
      Reset(ft);
@@ -182,14 +183,14 @@ begin
              copy(row[5]+blank25,1,23)+    // ra
              copy(row[7]+blank25,1,23)+    // dec
              copy(row[9]+blank25,1,23)+    // parallax
-             copy(row[12]+blank25,1,23)+   // pmra
-             copy(row[14]+blank25,1,23)+   // pmdec
-             copy(row[50]+blank25,1,12)+   // phot_g_mean_mag
-             copy(row[55]+blank25,1,12)+   // phot_bp_mean_mag
-             copy(row[60]+blank25,1,12)+   // phot_rp_mean_mag
-             copy(row[66]+blank25,1,20);   // radial_velocity
+             copy(row[13]+blank25,1,23)+   // pmra
+             copy(row[15]+blank25,1,23)+   // pmdec
+             copy(row[69]+blank25,1,12)+   // phot_g_mean_mag
+             copy(row[74]+blank25,1,12)+   // phot_bp_mean_mag
+             copy(row[79]+blank25,1,12)+   // phot_rp_mean_mag
+             copy(row[89]+blank25,1,20);   // radial_velocity
 
-       mag:=StrToFloatDef(trim(row[50]),999);
+       mag:=StrToFloatDef(trim(row[69]),999);
 
        if mag<15 then begin
           if GetHipparcos(trim(row[2]),hipnum) then begin
