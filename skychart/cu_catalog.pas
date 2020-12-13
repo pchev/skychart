@@ -6171,6 +6171,10 @@ begin
   else if buf='G16' then result:=16
   else if buf='G17' then result:=17
   else if buf='G18' then result:=18
+  else if buf='V15' then result:=15
+  else if buf='V16' then result:=16
+  else if buf='V17' then result:=17
+  else if buf='V18' then result:=18
   else result:=15;
 end;
 
