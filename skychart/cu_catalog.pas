@@ -6403,7 +6403,10 @@ begin
   rec.star.pmra := deg2rad * rec.star.pmra / 3600;
   rec.star.pmdec := deg2rad * rec.star.pmdec / 3600;
   rec.star.id:=rec.options.flabel[lOffset+vsId]+' '+rec.star.id;
-  if (rec.star.magb<90)and(rec.star.magr<90) then begin
+  if (rec.star.magb<90)and(rec.star.magr<90) //and
+     // Gaia EDR3 BP/RP flux excess, see EDR3 documentation chapter 5.4.2.1
+     // (((10**((25-rec.star.magb)/2.5) + 10**((25-rec.star.magr)/2.5) ) /  10**((25-rec.star.magv)/2.5)) < 4)
+  then begin
     br:=(rec.star.magb-rec.star.magr);
     rec.star.b_v:=GaiaBRtoBV(br);
     rec.num[2]:=GaiaGtoV(rec.star.magv,br);
