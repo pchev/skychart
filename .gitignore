@@ -65,6 +65,8 @@ skychart/library/plan404/libplan404.*
 skychart/library/wcs/libcdcwcs.*
 skychart/library/chealpix/libchealpix.*
 skychart/library/spice/libpasspice.*
+skychart/library/calceph/calcephconfig.h
+skychart/library/calceph/libcalceph.dll
 skychart/cdc
 skychart/cdcicon
 skychart/cdc.exe
