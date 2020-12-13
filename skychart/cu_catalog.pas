@@ -151,7 +151,11 @@ type
     function NextGaiaLevel: boolean;
     function  GetGaia(var rec: GcatRec): boolean;
     function GaiaBRtoBV(br:double):double;
+    function GaiaBRtoBV_DR2(br:double):double;
+    function GaiaBRtoBV_EDR3(br:double):double;
     function GaiaGtoV(g,br:double):double;
+    function GaiaGtoV_DR2(g,br:double):double;
+    function GaiaGtoV_EDR3(g,br:double):double;
     procedure FormatGaia(var rec: GcatRec);
     function  FindGaia(id: string; var ar, de: double): boolean;
 
@@ -4323,8 +4327,9 @@ begin
   // then the id not in the default catalog
   if uppercase(copy(Num, 1, 4)) = 'GAIA' then
   begin
-    if GaiaVersion='' then SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia1'), 'gaia');
-    buf := StringReplace(Num, GaiaVersion, '', [rfReplaceAll, rfIgnoreCase]);
+    // Use GetGaiaVersion because the Gaia catalog is maybe inactive
+    if GetGaiaVersion='' then SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia1'), 'gaia');
+    buf := StringReplace(Num, GetGaiaVersion, '', [rfReplaceAll, rfIgnoreCase]);
     Result := FindGaia(buf, ar1, de1);
     if Result then
       exit;
@@ -6255,6 +6260,14 @@ end;
 
 function Tcatalog.GaiaBRtoBV(br:double):double;
 begin
+  if GaiaVersion='Gaia DR2' then
+    result:=GaiaBRtoBV_DR2(br)
+  else if GaiaVersion='Gaia EDR3' then
+    result:=GaiaBRtoBV_EDR3(br);
+end;
+
+function Tcatalog.GaiaBRtoBV_DR2(br:double):double;
+begin
   // Compute approximate B-V from the Gaia magnitudes
   // First try if we can use the color transformation relation given
   // in the paper: Gaia Data Release 2 Photometric content and validation
@@ -6299,12 +6312,82 @@ begin
   result := Round(result*100)/100;
 end;
 
+function Tcatalog.GaiaBRtoBV_EDR3(br:double):double;
+begin
+  // Compute approximate B-V from the Gaia magnitudes
+  // First try if we can use the color transformation relation given
+  // in the paper: GaiaEDR3  Documentation chapter 5.5
+  // We use the relation for G-Vt and G-Bt to get a Tycho2 Bt-VT :
+  // validity : VT: −0.35 < (GBP−GRP) < 4.0 ; BT: -0.3 < (GBP−GRP) < 3.0
+  // G - VT = -0.01077 - 0.0682 * (GBP−GRP) - 0.2387 * (GBP−GRP)**2 + 0.02342 * (GBP−GRP)**3
+  // G − BT = -0.004288 -0.8547 * (GBP−GRP) + 0.1244 * (GBP−GRP)**2 - 0.9085  * (GBP−GRP)**3 + 0.4843 * (GBP−GRP)**4 - 0.06814 * (GBP−GRP)**5
+  // thus:
+  // VT = G + 0.01077 + 0.0682 * (GBP−GRP) + 0.2387 * (GBP−GRP)**2 - 0.02342 * (GBP−GRP)**3
+  // BT = G + 0.004288 +0.8547 * (GBP−GRP) - 0.1244 * (GBP−GRP)**2 + 0.9085  * (GBP−GRP)**3 - 0.4843 * (GBP−GRP)**4 + 0.06814 * (GBP−GRP)**5
+  // So for the color index:
+  // validity : -0.3 < (GBP−GRP) < 3.0
+  // BT-VT = -0.006482 + 0.7865 * (GBP−GRP) -0.3631 * (GBP−GRP)**2 + 0.93192 * (GBP−GRP)**3 - 0.4843 * (GBP−GRP)**4 + 0.06814 * (GBP−GRP)**5
+  //
+  // Then convert Tycho2 BT-VT to B-V using the following relation:
+  // http://adsabs.harvard.edu/cgi-bin/nph-bib_query?bibcode=2006AJ....131.2360M&db_key=AST&data_type=HTML&format=&high=4447a24b6f18601
+  // for  -0.25 < (BT-VT) < 0.5  :
+  // B-V = (BT-VT) - 0.006 - 0.1069 * (BT-VT) + 0.1459 * (BT-VT)**2
+  // for 0.5 < (BT-VT) < 2.0  :
+  // B-V = (BT-VT) - 0.007813 * (BT-VT) - 0.1489 * (BT-VT)**2 + 0.03384 * (BT-VT)**3
+  // out of this range :
+  // B-V = 0.850 * (BT-VT)
+
+  // test in range for the standard Gaia relation
+  if ((br)>-0.3) and ((br) < 3.0) then begin
+    // transform Gb-Gr to Bt-Vt
+    result := -0.006482 + 0.7865 * (br) -0.3631 * (br)**2 + 0.93192 * (br)**3 - 0.4843 * (br)**4 + 0.06814 * (br)**5;
+    if (result>-0.25)and(result<0.5) then
+       // use Tycho2 relation for first range
+       result := result - 0.006 - 0.1069 * result  + 0.1459 * result*result
+    else if (result>0.5)and(result<2.0) then
+       // use Tycho2 relation for second range
+       result := result - 0.007813 * result - 0.1489 * result*result + 0.03384 * result*result*result
+    else
+       // Out of range for the Tycho2 relation, use a safe value
+       result := 0.850 * result;
+  end
+  else
+    // Out of range for the standard Gaia relation, use a safe value.
+    result:=0.5 * br;
+  // round result
+  result := Round(result*100)/100;
+end;
+
 function Tcatalog.GaiaGtoV(g,br:double):double;
+begin
+  if GaiaVersion='Gaia DR2' then
+    result:=GaiaGtoV_DR2(g,br)
+  else if GaiaVersion='Gaia EDR3' then
+    result:=GaiaGtoV_EDR3(g,br);
+end;
+
+function Tcatalog.GaiaGtoV_DR2(g,br:double):double;
 begin
   // G−V =  -0.01760  -0.006860 * (GBP−GRP) -0.1732 * (GBP−GRP)**2
   // Validity: −0.5 < (GBP−GRP) < 2.75
   if (br>-0.5)and(br<2.75) then
     result := g + 0.01760 + 0.006860 * br + 0.1732 * br*br
+  else
+    // Out of range, use safe value
+    result := g + 0.0176 + 0.1 * br;
+  // round result
+  result := Round(result*100)/100;
+end;
+
+function Tcatalog.GaiaGtoV_EDR3(g,br:double):double;
+begin
+  // Use the color relation for Johnson-Cousins given in the paper:
+  // GaiaEDR3  Documentation chapter 5.5
+  // G−V = -0.02704 + 0.01424 * (GBP−GRP) - 0.2156 * (GBP−GRP)**2 + 0.01426 * (GBP−GRP)**3
+  // V = G +0.02704 - 0.01424 * (GBP−GRP) + 0.2156 * (GBP−GRP)**2 - 0.01426 * (GBP−GRP)**3
+  // Validity: −0.5 < (GBP−GRP) < 5.0
+  if (br>-0.5)and(br<5.0) then
+    result := g + 0.02704 - 0.01424 * br + 0.2156 * br**2 - 0.01426 * br**3
   else
     // Out of range, use safe value
     result := g + 0.0176 + 0.1 * br;
