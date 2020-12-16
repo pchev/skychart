@@ -34,7 +34,7 @@ type TvocacheOption = record
      vofiledate: longint;
 end;
 
-const CacheInc=1000;
+const CacheInc=1;
       MaxCache=10;
       numucdtr=25;
       ucdtr : array [1..numucdtr] of array[1..2] of string =
@@ -510,8 +510,8 @@ end else begin
     if buf='DATA' then break;
     VoNode:=VoNode.NextSibling;
   end;
-  VoNode:=VoNode.FirstChild;   // TABLEDATA
-  VoNode:=VoNode.FirstChild;   // first TR
+  if Assigned(VoNode) then VoNode:=VoNode.FirstChild;   // TABLEDATA
+  if Assigned(VoNode) then VoNode:=VoNode.FirstChild;   // first TR
   if Assigned(VoNode) then begin
     buf:=string(VoNode.NodeName);
     if buf='TR' then begin
