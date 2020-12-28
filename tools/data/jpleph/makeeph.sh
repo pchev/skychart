@@ -4,18 +4,18 @@
 gfortran asc2eph2000-2050.f -o asc2eph
 
 # get the ascii files
-if [ ! -e header.430_572 ]; then
-   wget ftp://ssd.jpl.nasa.gov/pub/eph/planets/ascii/de430/header.430_572
+if [ ! -e header.440 ]; then
+   wget ftp://ssd.jpl.nasa.gov/pub/eph/planets/ascii/de440/header.440
 fi
-if [ ! -e ascp1950.430 ]; then
-   wget ftp://ssd.jpl.nasa.gov/pub/eph/planets/ascii/de430/ascp1950.430
+if [ ! -e ascp01950.440 ]; then
+   wget ftp://ssd.jpl.nasa.gov/pub/eph/planets/ascii/de440/ascp01950.440
 fi
-if [ ! -e ascp2050.430 ]; then
-   wget ftp://ssd.jpl.nasa.gov/pub/eph/planets/ascii/de430/ascp2050.430
+if [ ! -e ascp02050.440 ]; then
+   wget ftp://ssd.jpl.nasa.gov/pub/eph/planets/ascii/de440/ascp02050.440
 fi
 
 # make the binary file
-cat header.430_572 ascp1950.430 ascp2050.430 | ./asc2eph
+cat header.440 ascp01950.440 ascp02050.440 | ./asc2eph
 
-mv JPLEPH lnxp2000p2050.430
+mv JPLEPH lnxp2000p2050.440
 rm asc2eph
