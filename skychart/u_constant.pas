@@ -394,9 +394,9 @@ const
     (236, 581, 585, 789, 761, 13, 16, 22, 33, 29, 42, 55, 29, 34, 77, 5, 5, 5);
   D0nep: array [1..8] of double = (1350, 170, 29, 40, 74, 79, 104, 218);
   D0plu: array [1..1] of double = (605);
-  DefaultnJPL_DE = 9;
+  DefaultnJPL_DE = 11;
   DefaultJPL_DE: array [1..DefaultnJPL_DE] of integer =
-    (430, 431, 423, 421, 422, 405, 406, 403, 200);
+    (440, 441, 430, 431, 423, 421, 422, 405, 406, 403, 200);
   // JPL ephemeris to try, order by preference
 
   blank15 = '               ';

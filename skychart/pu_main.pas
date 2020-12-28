@@ -8084,7 +8084,7 @@ end;
 
 procedure Tf_main.UpdateConfig;
 var
-  i: integer;
+  i,n: integer;
   b1, b2: boolean;
   inif: TMemIniFile;
   section, buf: string;
@@ -8361,6 +8361,29 @@ begin
     if catalog.cfgcat.nebcatdef[sac - BaseNeb] then begin
       catalog.cfgcat.nebcatdef[sac - BaseNeb] := False;
       catalog.cfgcat.nebcatdef[ngc - BaseNeb] := True;
+    end;
+  end;
+  if Config_Version < '4.3g' then begin
+    // Add DE440 and DE441 on top if not present
+    n:=1;
+    for i:=1 to nJPL_DE do
+      if (JPL_DE[i]=441) then dec(n);
+    if n>0 then begin
+      inc(nJPL_DE);
+      SetLength(JPL_DE, nJPL_DE+1);
+      for i:=nJPL_DE-1 downto 1 do
+         JPL_DE[i+1] := JPL_DE[i];
+      JPL_DE[1] := 441;
+    end;
+    n:=1;
+    for i:=1 to nJPL_DE do
+      if (JPL_DE[i]=440) then dec(n);
+    if n>0 then begin
+      inc(nJPL_DE);
+      SetLength(JPL_DE, nJPL_DE+1);
+      for i:=nJPL_DE-1 downto 1 do
+         JPL_DE[i+1] := JPL_DE[i];
+      JPL_DE[1] := 440;
     end;
   end;
 end;
