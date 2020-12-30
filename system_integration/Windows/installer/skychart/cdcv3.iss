@@ -40,6 +40,7 @@ Name: {app}\data\script\script1.cdcps; Type: files; Components: ; Tasks:
 Name: {app}\data\script\script2.cdcps; Type: files; Components: ; Tasks:
 Name: {app}\data\script\script3.cdcps; Type: files; Components: ; Tasks:
 Name: {app}\data\script\phd.cdcps; Type: files; Components: ; Tasks:
+Name: {app}\data\jpleph\lnxp2000p2050.430; Type: files; Components: ; Tasks:
 
 [Files]
 Source: Data\*; DestDir: {app}; Flags: ignoreversion recursesubdirs createallsubdirs restartreplace
