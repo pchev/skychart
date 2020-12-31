@@ -28,7 +28,6 @@ uses
 
 
 var
-  area290:integer;           {290 files, should be set at 290+1 for before any read series}
   database2         : array[0..(11*10)] of ansichar;{info star database, length 110 char equals 10x11 bytes}
   naam2             : string; {contains star designation after read for records size above 7}
 
@@ -50,9 +49,10 @@ const
 //          naam2,  string containing the star Tycho/UCAC4 designation for record size above 7
 //          database2  : array[0..(11*10)] of ansichar;{text info star database used}
 // preconditions:
-//   area290 should be set at 290+1 before any read series
+//    procedure reset290index should be called before any read.
 //   maxmag [magnitude*10], double variable which specifies the maximum magnitude to be read. This is typical used in HNSKY if a star designation needs to be reported after a mouse click on it
 
+procedure reset290index;{call this procedure before start reading from the 290 files}
 function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diameter:double; var ra2,dec2, mag2, Bp_Rp : double): boolean;{star 290 file database search}
 
 
@@ -65,11 +65,11 @@ function readdatabase290(searchmode:char; telescope_ra,telescope_dec, field_diam
 // The 290 area's:
 // The areas are based on an mathematical method described in a paper of the PHILLIPS LABORATORY called "THE DIVISION OF A CIRCLE OR SPHERICAL SURFACE INTO EQUAL-AREA CELLS OR PIXELS"
 // by Irving I. Gringorten Penelope J. Yepez on 30 June 1992
-// First circles of constant declination are assumed. The first sphere segment defined by circle with number 1 has a height h1 from the pole and a surface of 2*pi*h1.
-// If the second circle of constant declination has a sphere segment with a height of 9*h1 then the surface area of the second sphere segment is nine times higher equal 2*pi*9*h1.
+// First circles of constant declination are assumed. The first sphere segment defined by circle with number 1 has a height h1 from the pole and a surface of pi*sqr(h1).
+// If the second circle of constant declination has a sphere segment with a height of 3*h1 then the surface area of the second sphere segment is nine times higher equal pi*sqr(3*h1).
 // If the area between circle 1 en 2 is divided in 8 segments then these eight have the same area as the area of the first segment.
 // The same is possible for the third circle by diving it in 16 segments, then in 24, 32, 40, 48, 56, 64 segments.
-// The area of the third segment is 2*pi*25*h1, where 25 equals 1+8+16. So the sphere segments have a height of h1, 9*h1, 25*h1, 49*h1.
+// The area of the third segment is pi*sqr(5*h1) so 25 times larger, where 25 equals 1+8+16. So the sphere segments have a height of h1, 3*h1, 5*h1, 7*h1.
 // The height of h1=1-sin(declination). All areas are equal area but rectangle.
 // In HNSKY all area's are a combination of two except for the polar areas to have a more square shape especially around the equator.
 // The south pole is stored in file 0101.290 Area A2 and A3 are stored in file 02_01.290, area A4 and A5 are stored in file 0202.290.
@@ -819,6 +819,7 @@ var
   p5        : ^hnskyhdr290_5;       { pointer to hns0kyrecord }
   dec9_storage: shortint;
 
+  area290:integer;           {290 files, should be set at 290+1 for before any read series}
   buf2: array[1..11] of byte;  {read buffer stars}
   thefile_stars      : tfilestream;
   Reader_stars       : TReader;
@@ -833,6 +834,11 @@ begin
 
   cos_sep:=sin_dec1*sin_dec2+ cos_dec1*cos_dec2*cos(ra1-ra2);
   sep:=arccos(cos_sep);
+end;
+
+procedure reset290index;{call this procedure before start reading from the 290 files}
+begin
+   area290:=290+1;
 end;
 
 procedure closedatabase;
@@ -893,6 +899,7 @@ begin
             ang_sep(telescope_ra,telescope_dec,centers290[area290,1],centers290[area290,2], sep );
             if sep<required_range then  nearbyarea:=true
             else
+            if sep<required_range+15*pi/180 then {center close enough to check the corners}
             begin {check if area is visible using corner position tile}
               ang_sep(telescope_ra,telescope_dec,centers290[area290,3],centers290[area290,5], sep );
               if sep<required_range then  nearbyarea:=true
@@ -1046,7 +1053,7 @@ begin
     {$endif}
     (
        (header_record=false) and
-       ((searchmode='T') or  ( (abs(delta_ra*cos_telescope_dec)<field_diameter/2) and (abs(dec2-telescope_dec)<field_diameter/2))  )
+       ( (searchmode='T') or ((field_diameter>4*pi/180) and ((area290=1) or (area290=290))) or (sqr( delta_ra*cos_telescope_dec) + sqr(dec2-telescope_dec)<sqr(field_diameter * 1.5) ) ) {check on areas 1 and 290 fixes some coverage problems with celestial poles in the corner}
                            {calculate distance and skip when to far from centre screen, {if false then outside screen,go quick to next line}
      ));
              {searchmode=S screen update}

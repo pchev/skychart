@@ -6134,7 +6134,7 @@ if Is290Path(slash(cfgcat.StarCatPath[hn290 - BaseStar])) then begin
      u_290.maxmag := 999;
   u_290.catalog_path := slash(cfgcat.StarCatPath[hn290 - BaseStar]);
   u_290.name_star:=cfgcat.Name290;
-  u_290.area290:=291;
+  reset290index;
   EmptyRec.options.ShortName:=u_290.name_star;
   ok:=true;
 end
@@ -6153,7 +6153,7 @@ if Is290Path(slash(cfgcat.StarCatPath[hn290 - BaseStar])) then begin
      u_290.maxmag := 999;
   u_290.catalog_path := slash(cfgcat.StarCatPath[hn290 - BaseStar]);
   u_290.name_star:=cfgcat.Name290;
-  u_290.area290:=291;
+  reset290index;
   EmptyRec.options.ShortName:=u_290.name_star;
   ok:=true;
 end
@@ -6180,7 +6180,7 @@ end;
 
 Procedure Tcatalog.Close290;
 begin
-  u_290.area290:=291;
+  reset290index;
 end;
 
 function Tcatalog.Is290Path(path : string) : Boolean;
