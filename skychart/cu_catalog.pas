@@ -6146,7 +6146,7 @@ begin
 if Is290Path(slash(cfgcat.StarCatPath[hn290 - BaseStar])) then begin
   u_290.RA_290 := deg2rad * 15 * skylibcat.arcentre;
   u_290.DE_290 := deg2rad * skylibcat.decentre;
-  u_290.FOV_290 := 1.5 * deg2rad * max(1,skylibcat.fov);
+  u_290.FOV_290 := deg2rad * max(1,skylibcat.fov);
   if cfgshr.StarFilter then
      u_290.maxmag := round(10 * cfgcat.StarMagMax)
   else
