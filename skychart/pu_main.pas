@@ -5380,11 +5380,7 @@ procedure Tf_main.ConfigDBChange(Sender: TObject);
 begin
   if ConfigSystem <> nil then
   begin
-    cfgm.dbhost := ConfigSystem.f_config_system1.cmain.dbhost;
     cfgm.db := ConfigSystem.f_config_system1.cmain.db;
-    cfgm.dbuser := ConfigSystem.f_config_system1.cmain.dbuser;
-    cfgm.dbpass := ConfigSystem.f_config_system1.cmain.dbpass;
-    cfgm.dbport := ConfigSystem.f_config_system1.cmain.dbport;
     ConnectDB;
   end;
 end;
@@ -5520,9 +5516,7 @@ begin
       themechange := True;
     if cfgm.starshape_file <> cmain.starshape_file then
       starchange := True;
-    if (cfgm.dbhost <> cmain.dbhost) or (cfgm.db <> cmain.db) or
-      (cfgm.dbuser <> cmain.dbuser) or (cfgm.dbpass <> cmain.dbpass) or
-      (cfgm.dbport <> cmain.dbport) then
+    if (cfgm.db <> cmain.db) then
       dbchange := True;
     nightchange := nightvision and (cfgm.NightColor<>cmain.NightColor);
     cfgm.Assign(cmain);
@@ -6132,11 +6126,7 @@ begin
   cfgm.AutostartServer := True;
   cfgm.ServerCoordSys:=1;
   ServerCoordSystem:=TServerCoordSys(cfgm.ServerCoordSys);
-  cfgm.dbhost := 'localhost';
-  cfgm.dbport := 3306;
   cfgm.db := slash(dbdir) + (defaultSqliteDB);
-  cfgm.dbuser := 'root';
-  cfgm.dbpass := '';
   cfgm.ImagePath := slash('data') + slash('pictures');
   cfgm.ShowChartInfo := False;
   cfgm.ShowTitlePos := False;
@@ -7725,9 +7715,6 @@ begin
         cfgm.ServerCoordSys :=
           ReadInteger(section, 'ServerCoordSys', cfgm.ServerCoordSys);
         ServerCoordSystem:=TServerCoordSys(cfgm.ServerCoordSys);
-        DBtype := TDBtype(ReadInteger(section, 'dbtype', 1));
-        cfgm.dbhost := ReadString(section, 'dbhost', cfgm.dbhost);
-        cfgm.dbport := ReadInteger(section, 'dbport', cfgm.dbport);
         buf := ReadString(section, 'db', cfgm.db);
         if (ConfigPrivateDir = '') or (ConfigPrivateDir = PrivateDir) or
           (pos(ConfigPrivateDir, buf) = 0) then
@@ -7737,9 +7724,6 @@ begin
           buf := ExtractSubPath(slash(ConfigPrivateDir), buf);
           cfgm.db := slash(PrivateDir) + buf;
         end;
-        cfgm.dbuser := ReadString(section, 'dbuser', cfgm.dbuser);
-        cryptedpwd := hextostr(ReadString(section, 'dbpass', cfgm.dbpass));
-        cfgm.dbpass := DecryptStr(cryptedpwd, encryptpwd);
         buf := ReadString(section, 'ImagePath', cfgm.ImagePath);
         buf := ExtractSubPath(ConfigAppdir, buf);
         if DirectoryExists(buf) then
@@ -8989,12 +8973,7 @@ begin
         WriteBool(section, 'TextOnlyDetail', cfgm.TextOnlyDetail);
         WriteBool(section, 'AutostartServer', cfgm.AutostartServer);
         WriteInteger(section, 'ServerCoordSys', cfgm.ServerCoordSys);
-        WriteInteger(section, 'dbtype', Ord(DBtype));
-        WriteString(section, 'dbhost', cfgm.dbhost);
-        WriteInteger(section, 'dbport', cfgm.dbport);
         WriteString(section, 'db', cfgm.db);
-        WriteString(section, 'dbuser', cfgm.dbuser);
-        WriteString(section, 'dbpass', strtohex(encryptStr(cfgm.dbpass, encryptpwd)));
         WriteString(section, 'ImagePath', cfgm.ImagePath);
         WriteBool(section, 'ShowChartInfo', cfgm.ShowChartInfo);
         WriteBool(section, 'ShowTitlePos', cfgm.ShowTitlePos);
@@ -11047,10 +11026,7 @@ var
 begin
   try
     NeedToInitializeDB := False;
-    if DBtype=mysql then begin
-      ShowError('Mysql support is deprecated and will be removed in a future version.'+crlf+'Please change to SQLite now: menu Setup/General');
-    end;
-    if ((DBtype = sqlite) and not Fileexists(cfgm.db)) then
+    if not Fileexists(cfgm.db) then
     begin
       dbpath := extractfilepath(cfgm.db);
       if VerboseMsg then
@@ -11060,15 +11036,15 @@ begin
       if not directoryexists(dbpath) then
         forcedirectories(dbpath);
     end;
-    cdcdb.ConnectDB(cfgm.dbhost, cfgm.db, cfgm.dbuser, cfgm.dbpass, cfgm.dbport);
+    cdcdb.ConnectDB(cfgm.db);
     if cdcdb.CheckDB then
     begin
       if VerboseMsg then
         WriteTrace('DB connected');
       if not NeedToInitializeDB then
         cdcdb.CheckForUpgrade(f_info.ProgressMemo, updversion);
-      planet.ConnectDB(cfgm.dbhost, cfgm.db, cfgm.dbuser, cfgm.dbpass, cfgm.dbport);
-      Fits.ConnectDB(cfgm.dbhost, cfgm.db, cfgm.dbuser, cfgm.dbpass, cfgm.dbport);
+      planet.ConnectDB(cfgm.db);
+      Fits.ConnectDB(cfgm.db);
       SetLpanel1(Format(rsConnectedToS, [cfgm.db]));
     end
     else

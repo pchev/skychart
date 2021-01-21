@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  passql, pasmysql, passqlite, uDE, cu_plansat, cu_calceph, calceph,
+  passql, passqlite, uDE, cu_plansat, cu_calceph, calceph,
   u_translation, cu_database, u_constant, u_util, u_projection,
   Classes, SysUtils, Forms, Math;
 
@@ -125,7 +125,7 @@ type
     procedure InitAsteroid(epoch, mh, mg, ma, ap, an, ic, ec, sa, eq: double; nam: string);
     procedure Asteroid(jd: double; highprec: boolean;
       var ar, de, dist, r, elong, phase, magn, xc, yc, zc: double);
-    function ConnectDB(host, db, user, pass: string; port: integer): boolean;
+    function ConnectDB(db: string): boolean;
     function NewAstDay(newjd, limitmag: double; cfgsc: Tconf_skychart): boolean;
     procedure NewAstDayCallback(Sender: TObject; Row: TResultRow);
     function FindAsteroid(x1, y1, x2, y2: double; nextobj: boolean;
@@ -166,16 +166,8 @@ begin
   de_jdcheck := MaxInt;
   de_jdstart := MaxInt;
   de_jdend := -MaxInt;
-  if DBtype = mysql then
-  begin
-    db1 := TMyDB.Create(self);
-    db2 := TMyDB.Create(self);
-  end
-  else if DBtype = sqlite then
-  begin
-    db1 := TLiteDB.Create(self);
-    db2 := TLiteDB.Create(self);
-  end;
+  db1 := TLiteDB.Create(self);
+  db2 := TLiteDB.Create(self);
 end;
 
 destructor TPlanet.Destroy;
@@ -2562,20 +2554,10 @@ begin
   magn := astelem.Ah + 5.0 * log10(dist * r) - 2.5 * log10((1 - astelem.Ag) * phi1 + astelem.Ag * phi2);
 end;
 
-function TPlanet.ConnectDB(host, db, user, pass: string; port: integer): boolean;
+function TPlanet.ConnectDB(db: string): boolean;
 begin
   try
-    if DBtype = mysql then
-    begin
-      db1.SetPort(port);
-      db1.Connect(host, user, pass, db);
-      db2.SetPort(port);
-      db2.Connect(host, user, pass, db);
-    end
-    else if DBtype = sqlite then
-    begin
-      db := UTF8Encode(db);
-    end;
+    db := UTF8Encode(db);
     if db1.database <> db then
       db1.Use(db);
     if db2.database <> db then
@@ -2611,9 +2593,9 @@ begin
       Result := True
     else
     begin
-      if cfgsc.ast_day <> db1.QueryOne(showtable[DBtype] + ' "' + cfgsc.ast_day + '"') then
+      if cfgsc.ast_day <> db1.QueryOne(showtable + ' "' + cfgsc.ast_day + '"') then
         db1.Query('CREATE TABLE ' + cfgsc.ast_day + create_table_ast_day);
-      if cfgsc.ast_daypos <> db1.QueryOne(showtable[DBtype] + ' "' + cfgsc.ast_daypos + '"') then
+      if cfgsc.ast_daypos <> db1.QueryOne(showtable + ' "' + cfgsc.ast_daypos + '"') then
       begin
         db1.Query('CREATE TABLE ' + cfgsc.ast_daypos + create_table_ast_day_pos);
         db1.Query('CREATE UNIQUE INDEX IDX_' + cfgsc.ast_daypos + ' ON ' +
@@ -2747,9 +2729,9 @@ begin
     end
     else
     begin
-      if cfgsc.com_day <> db1.QueryOne(showtable[DBtype] + ' "' + cfgsc.com_day + '"') then
+      if cfgsc.com_day <> db1.QueryOne(showtable + ' "' + cfgsc.com_day + '"') then
         db1.Query('CREATE TABLE ' + cfgsc.com_day + create_table_com_day);
-      if cfgsc.com_daypos <> db1.QueryOne(showtable[DBtype] + ' "' + cfgsc.com_daypos + '"') then
+      if cfgsc.com_daypos <> db1.QueryOne(showtable + ' "' + cfgsc.com_daypos + '"') then
       begin
         db1.Query('CREATE TABLE ' + cfgsc.com_daypos + create_table_com_day_pos);
         db1.Query('CREATE UNIQUE INDEX IDX_' + cfgsc.com_daypos + ' ON ' +

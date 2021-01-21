@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  passql, pasmysql, passqlite, u_constant, u_util, u_projection, cu_fits, FileUtil,
+  passql, passqlite, u_constant, u_util, u_projection, cu_fits, FileUtil,
   Forms, StdCtrls, ComCtrls, Classes, Dialogs, SysUtils, StrUtils, u_translation;
 
 type
@@ -47,7 +47,7 @@ type
     function createDB(cmain: Tconf_main; var ok: boolean): string;
     function dropDB(cmain: Tconf_main): string;
     function checkDBConfig(cmain: Tconf_main): string;
-    function ConnectDB(host, dbn, user, pass: string; port: integer): boolean;
+    function ConnectDB(dbn:string): boolean;
     function CheckForUpgrade(memo: Tmemo; updversion: string): boolean;
     function CheckDB: boolean;
     function LoadCountryList(locfile: string; memo: Tmemo): boolean;
@@ -116,10 +116,7 @@ constructor TCDCdb.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FFits := TFits.Create(self);
-  if DBtype = mysql then
-    db := TMyDB.Create(self)
-  else if DBtype = sqlite then
-    db := TLiteDB.Create(self);
+  db := TLiteDB.Create(self);
 end;
 
 destructor TCDCdb.Destroy;
@@ -133,18 +130,10 @@ begin
   end;
 end;
 
-function TCDCdb.ConnectDB(host, dbn, user, pass: string; port: integer): boolean;
+function TCDCdb.ConnectDB(dbn:string): boolean;
 begin
   try
-    if DBtype = mysql then
-    begin
-      DB.SetPort(port);
-      DB.Connect(host, user, pass, dbn);
-    end
-    else if DBtype = sqlite then
-    begin
-      dbn := UTF8Encode(dbn);
-    end;
+    dbn := UTF8Encode(dbn);
     if DB.database <> dbn then
       DB.Use(dbn);
     Result := DB.Active;
@@ -167,30 +156,30 @@ begin
     Result := True;
     for i := 1 to numsqltable do
     begin
-      ok := (sqltable[dbtype, i, 1] = DB.QueryOne(showtable[dbtype] + ' "' +
-        sqltable[dbtype, i, 1] + '"'));
+      ok := (sqltable[i, 1] = DB.QueryOne(showtable + ' "' +
+        sqltable[i, 1] + '"'));
       if not ok then
       begin  // try to create the missing table
-        DB.Query('CREATE TABLE ' + sqltable[dbtype, i, 1] + sqltable[dbtype, i, 2]);
+        DB.Query('CREATE TABLE ' + sqltable[i, 1] + sqltable[i, 2]);
         emsg := DB.ErrorMessage;
-        if sqltable[dbtype, i, 3] > '' then
+        if sqltable[i, 3] > '' then
         begin   // create the index
-          SplitRec(sqltable[dbtype, i, 3], ',', indexlist);
+          SplitRec(sqltable[i, 3], ',', indexlist);
           for j := 0 to indexlist.Count - 1 do
           begin
             k := StrToInt(indexlist[j]);
-            DB.Query('CREATE INDEX ' + sqlindex[dbtype, k, 1] + ' on ' + sqlindex[dbtype, k, 2]);
+            DB.Query('CREATE INDEX ' + sqlindex[k, 1] + ' on ' + sqlindex[k, 2]);
           end;
         end;
-        ok := (sqltable[dbtype, i, 1] = DB.QueryOne(showtable[dbtype] + ' "' +
-          sqltable[dbtype, i, 1] + '"'));
+        ok := (sqltable[i, 1] = DB.QueryOne(showtable + ' "' +
+          sqltable[i, 1] + '"'));
         if ok then
         begin
-          writetrace('Create table ' + sqltable[dbtype, i, 1] + ' ... Ok');
+          writetrace('Create table ' + sqltable[i, 1] + ' ... Ok');
           creatednow := True;
         end
         else
-          writetrace('Create table ' + sqltable[dbtype, i, 1] + ' ... Failed: ' + emsg);
+          writetrace('Create table ' + sqltable[i, 1] + ' ... Failed: ' + emsg);
       end;
       Result := Result and ok;
     end;
@@ -233,27 +222,13 @@ begin
       DB.Query('drop table cdc_country');
       writetrace('Drop table cdc_country ... ' + DB.ErrorMessage);
       DB.Commit;
-      DB.Query('CREATE TABLE ' + sqltable[dbtype, 9, 1] + sqltable[dbtype, 9, 2]);
-      writetrace('Create table ' + sqltable[dbtype, 9, 1] + ' ...  ' + DB.ErrorMessage);
+      DB.Query('CREATE TABLE ' + sqltable[9, 1] + sqltable[9, 2]);
+      writetrace('Create table ' + sqltable[9, 1] + ' ...  ' + DB.ErrorMessage);
       LoadCountryList(slash(sampledir) + 'country.dat', memo);
       Result := True;
     end;
     // Correct Fits index
-    if DBtype = mysql then
-    begin
-      DB.Query('show index from cdc_fits where Key_name="cdc_fits_objname"');
-      i := 0;
-      buf := ' ';
-      while i < DB.Rowcount do
-      begin
-        buf := buf + ' ' + DB.Results[i][4];
-        Inc(i);
-      end;
-    end
-    else
-    begin
-      buf := DB.QueryOne('select sql from sqlite_master where name="cdc_fits_objname"');
-    end;
+    buf := DB.QueryOne('select sql from sqlite_master where name="cdc_fits_objname"');
     if (pos('objectname', buf) > 0) and (pos('catalogname', buf) = 0) then
     begin
       if VerboseMsg then
@@ -261,35 +236,17 @@ begin
       DB.Query('drop table cdc_fits');
       writetrace('Drop table cdc_fits ... ' + DB.ErrorMessage);
       DB.Commit;
-      DB.Query('CREATE TABLE ' + sqltable[dbtype, 8, 1] + sqltable[dbtype, 8, 2]);
-      writetrace('Create table ' + sqltable[dbtype, 8, 1] + ' ...  ' + DB.ErrorMessage);
+      DB.Query('CREATE TABLE ' + sqltable[8, 1] + sqltable[8, 2]);
+      writetrace('Create table ' + sqltable[8, 1] + ' ...  ' + DB.ErrorMessage);
       k := 2;
-      DB.Query('CREATE INDEX ' + sqlindex[dbtype, k, 1] + ' on ' + sqlindex[dbtype, k, 2]);
-    end;
-    // change catalogname field length
-    if (DBtype = mysql) and (updversion < cdcver) and (updversion < '3.9b') then
-    begin
-      DB.Query('drop table cdc_fits');
-      writetrace('Drop table cdc_fits ... ' + DB.ErrorMessage);
-      DB.Commit;
-      DB.Query('CREATE TABLE ' + sqltable[dbtype, 8, 1] + sqltable[dbtype, 8, 2]);
-      writetrace('Create table ' + sqltable[dbtype, 8, 1] + ' ...  ' + DB.ErrorMessage);
-      k := 2;
-      DB.Query('CREATE INDEX ' + sqlindex[dbtype, k, 1] + ' on ' + sqlindex[dbtype, k, 2]);
+      DB.Query('CREATE INDEX ' + sqlindex[k, 1] + ' on ' + sqlindex[k, 2]);
     end;
     // change ast_day_pos primary index , drop the table to rebuild in cu_planet
     if (updversion < cdcver) and (updversion < '3.11w') then
     begin
       bb := TStringList.Create;
       try
-        if DBtype = mysql then
-        begin
-          DB.Query('show tables like "cdc_ast_day_%"');
-        end
-        else
-        begin
-          DB.Query('select name from sqlite_master where type="table" and name like "cdc_ast_day_%"');
-        end;
+        DB.Query('select name from sqlite_master where type="table" and name like "cdc_ast_day_%"');
         for i := 0 to DB.RowCount - 1 do
         begin
           bb.add(DB.Results[i][0]);
@@ -315,24 +272,7 @@ label
   dmsg;
 begin
   try
-    if DBtype = mysql then
-    begin
-      dbn := cmain.db;
-      DB.SetPort(cmain.dbport);
-      DB.Connect(cmain.dbhost, cmain.dbuser, cmain.dbpass, '');
-      if DB.Active then
-        msg := Format(rsConnectToSuc, [cmain.dbhost, IntToStr(cmain.dbport), crlf])
-      else
-      begin
-        msg := Format(rsConnectToFai, [cmain.dbhost, IntToStr(cmain.dbport),
-          trim(DB.ErrorMessage) + crlf]);
-        goto dmsg;
-      end;
-    end
-    else if DBtype = sqlite then
-    begin
-      dbn := UTF8Encode(cmain.db);
-    end;
+    dbn := UTF8Encode(cmain.db);
     if ((DB.database = dbn) or DB.use(dbn)) then
       msg := Format(rsDatabaseOpen, [msg, cmain.db, crlf])
     else
@@ -342,12 +282,12 @@ begin
     end;
     for i := 1 to numsqltable do
     begin
-      if sqltable[dbtype, i, 1] = DB.QueryOne(showtable[dbtype] + ' "' +
-        sqltable[dbtype, i, 1] + '"') then
-        msg := Format(rsTableExist, [msg, sqltable[dbtype, i, 1] + crlf])
+      if sqltable[i, 1] = DB.QueryOne(showtable + ' "' +
+        sqltable[i, 1] + '"') then
+        msg := Format(rsTableExist, [msg, sqltable[i, 1] + crlf])
       else
       begin
-        msg := Format(rsTableDoNotEx, [msg, sqltable[dbtype, i, 1], crlf]);
+        msg := Format(rsTableDoNotEx, [msg, sqltable[i, 1], crlf]);
         goto dmsg;
       end;
     end;
@@ -368,21 +308,7 @@ begin
   ok := False;
   Result := '';
   try
-    if DBtype = mysql then
-    begin
-      dbn := cmain.db;
-      DB.SetPort(cmain.dbport);
-      DB.database := '';
-      DB.Connect(cmain.dbhost, cmain.dbuser, cmain.dbpass, '');
-      if DB.Active then
-        DB.Query('Create Database if not exists ' + cmain.db);
-      Result := trim(DB.ErrorMessage);
-      DB.Connect(cmain.dbhost, cmain.dbuser, cmain.dbpass, cmain.db);
-    end
-    else if DBtype = sqlite then
-    begin
-      dbn := UTF8Encode(cmain.db);
-    end;
+    dbn := UTF8Encode(cmain.db);
     if DB.database <> dbn then
       DB.Use(dbn);
     if DB.database = dbn then
@@ -391,22 +317,22 @@ begin
       ok := True;
       for i := 1 to numsqltable do
       begin
-        DB.Query('CREATE TABLE ' + sqltable[dbtype, i, 1] + sqltable[dbtype, i, 2]);
+        DB.Query('CREATE TABLE ' + sqltable[i, 1] + sqltable[i, 2]);
         msg := trim(DB.ErrorMessage);
-        if sqltable[dbtype, i, 3] > '' then
+        if sqltable[i, 3] > '' then
         begin   // create the index
-          SplitRec(sqltable[dbtype, i, 3], ',', indexlist);
+          SplitRec(sqltable[i, 3], ',', indexlist);
           for j := 0 to indexlist.Count - 1 do
           begin
             k := StrToInt(indexlist[j]);
-            DB.Query('CREATE INDEX ' + sqlindex[dbtype, k, 1] + ' on ' + sqlindex[dbtype, k, 2]);
+            DB.Query('CREATE INDEX ' + sqlindex[k, 1] + ' on ' + sqlindex[k, 2]);
           end;
         end;
-        if sqltable[dbtype, i, 1] <> DB.QueryOne(showtable[dbtype] + ' "' +
-          sqltable[dbtype, i, 1] + '"') then
+        if sqltable[i, 1] <> DB.QueryOne(showtable + ' "' +
+          sqltable[i, 1] + '"') then
         begin
           ok := False;
-          Result := Format(rsErrorCreatin, [Result + crlf, sqltable[dbtype, i, 1] +
+          Result := Format(rsErrorCreatin, [Result + crlf, sqltable[i, 1] +
             blank + msg]);
           break;
         end;
@@ -426,41 +352,10 @@ end;
 function TCDCdb.dropDB(cmain: Tconf_main): string;
 var
   msg: string;
-  //i: integer;
 begin
   Result := '';
-  if DBtype = mysql then
-  begin
-    try
-      DB.SetPort(cmain.dbport);
-      DB.database := '';
-      DB.Connect(cmain.dbhost, cmain.dbuser, cmain.dbpass, '');
-      if DB.Active then
-        DB.Query('Drop Database ' + cmain.db);
-      msg := trim(DB.ErrorMessage);
-      if msg <> '0' then
-        Result := msg;
-      DB.Close;
-    except
-    end;
-  end
-  else if DBtype = sqlite then
-  begin
-    // do not work
-{  result:='';
-  db.StartTransaction;
-  for i:=0 to db.Tables.Count-1 do begin
-    db.Query('DROP TABLE '+db.Tables[i]);
-     msg:=trim(db.ErrorMessage);
-     if msg<>'0' then result:=result+msg;
-  end;
-  db.Commit;
-  db.Vacuum;
-  msg:=trim(db.ErrorMessage);
-  if msg<>'0' then result:=result+msg;}
-    DB.Close;
-    DeleteFile(cmain.db);
-  end;
+  DB.Close;
+  DeleteFile(cmain.db);
 end;
 
 procedure TCDCdb.GetCometFileList(cmain: Tconf_main; list: TStrings);
@@ -1107,7 +1002,7 @@ begin
   dailytable := TStringList.Create;
   try
     DB.UnLockTables;
-    DB.Query(showtable[DBtype] + ' "cdc_ast_day_%"');
+    DB.Query(showtable + ' "cdc_ast_day_%"');
     i := 0;
     while i < DB.Rowcount do
     begin
@@ -1136,7 +1031,7 @@ begin
   dailytable := TStringList.Create;
   try
     DB.UnLockTables;
-    DB.Query(showtable[DBtype] + ' "cdc_com_day_%"');
+    DB.Query(showtable + ' "cdc_com_day_%"');
     i := 0;
     while i < DB.Rowcount do
     begin
@@ -1534,10 +1429,7 @@ begin
                 ProgressBar.Step := 1;
               i := findfirst(slash(catdir) + '*.*', 0, f);
               n := 0;
-              if DBtype = sqlite then
-                 cmdl:='BEGIN;'
-              else
-                 db.StartTransaction;
+              cmdl:='BEGIN;';
               while i = 0 do
               begin
                 if f.Name = 'README.TXT' then
@@ -1584,24 +1476,15 @@ begin
                     ',"' + formatfloat(f5, ra) + '"' + ',"' + formatfloat(f5, de) + '"' +
                     ',"' + formatfloat(f5, w) + '"' + ',"' + formatfloat(f5, h) + '"' +
                     ',"' + formatfloat(f5, r) + '"' + ')';
-                  if DBtype = sqlite then
-                    cmdl:=cmdl+cmd+';'
-                  else begin
-                    if not DB.query(cmd) then
-                      writetrace(Format(rsDBInsertFail, [f.Name, DB.ErrorMessage]));
-                    end;
+                cmdl:=cmdl+cmd+';';
                 end
                 else
                   writetrace(Format(rsInvalidFITSF, [f.Name]));
                 i := findnext(f);
               end;
-              if DBtype = sqlite then begin
-                cmdl:=cmdl+'COMMIT;';
-                if not DB.query(cmdl) then
-                   writetrace(Format(rsDBInsertFail, [f.Name, DB.ErrorMessage]));
-              end
-              else
-                db.Commit;
+              cmdl:=cmdl+'COMMIT;';
+              if not DB.query(cmdl) then
+                 writetrace(Format(rsDBInsertFail, [f.Name, DB.ErrorMessage]));
               findclose(f);
             end;
             j := findnext(c);

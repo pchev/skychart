@@ -27,7 +27,7 @@ interface
 
 uses
   u_translation, UScaleDPI, BGRABitmap, BGRABitmapTypes,
-  u_util, u_constant, u_projection, SysUtils, Classes, passql, pasmysql,
+  u_util, u_constant, u_projection, SysUtils, Classes, passql,
   passqlite, LazUTF8, LazFileUtils,
   Graphics, Math, FPImage, Controls, LCLType, Forms, StdCtrls, ComCtrls,
   ExtCtrls, Buttons, IntfGraphics;
@@ -140,7 +140,7 @@ type
     fitslistra, fitslistdec: double;
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    function ConnectDB(host, db, user, pass: string; port: integer): boolean;
+    function ConnectDB(db: string): boolean;
     function OpenDB(catalogname: string; ra1, ra2, dec1, dec2: double): boolean;
     function GetDB(var filename, objname: string;
       var ra, de, Width, Height, rot: double): boolean;
@@ -177,10 +177,7 @@ constructor TFits.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Fitt := ittramp;
-  if DBtype = mysql then
-    db1 := TMyDB.Create(self)
-  else if DBtype = sqlite then
-    db1 := TLiteDB.Create(self);
+  db1 := TLiteDB.Create(self);
   dbconnected := False;
   fitslist := TStringList.Create;
   fitslistmodified := False;
@@ -1706,18 +1703,10 @@ begin
   end;
 end;
 
-function TFits.ConnectDB(host, db, user, pass: string; port: integer): boolean;
+function TFits.ConnectDB(db: string): boolean;
 begin
   try
-    if DBtype = mysql then
-    begin
-      db1.SetPort(port);
-      db1.Connect(host, user, pass, db);
-    end
-    else if DBtype = sqlite then
-    begin
-      db := UTF8Encode(db);
-    end;
+    db := UTF8Encode(db);
     if db1.database <> db then
       db1.Use(db);
     dbconnected := db1.Active;

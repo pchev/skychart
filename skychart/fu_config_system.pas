@@ -60,8 +60,6 @@ type
     Label16: TLabel;
     Label17: TLabel;
     Label18: TLabel;
-    MysqlBoxLabel: TLabel;
-    MysqlBox: TPanel;
     ASCOMPanel: TPanel;
     PageControl2: TPageControl;
     PageControl3: TPageControl;
@@ -91,16 +89,6 @@ type
     Page4: TTabSheet;
     Page2: TTabSheet;
     Label153: TLabel;
-    Label77: TLabel;
-    Label84: TLabel;
-    Label85: TLabel;
-    Label86: TLabel;
-    Label133: TLabel;
-    dbname: TEdit;
-    dbport: TLongEdit;
-    dbhost: TEdit;
-    dbuser: TEdit;
-    dbpass: TEdit;
     GroupBoxDir: TGroupBox;
     Label157: TLabel;
     GroupBox3: TGroupBox;
@@ -120,7 +108,6 @@ type
     AstDB: TButton;
     Label1: TLabel;
     dbnamesqlite: TEdit;
-    DBtypeGroup: TRadioGroup;
     Label2: TLabel;
     PanelCmd: TEdit;
     Label7: TLabel;
@@ -161,11 +148,6 @@ type
     procedure Label18Click(Sender: TObject);
     procedure LinuxCmdChange(Sender: TObject);
     procedure LinuxDesktopBoxChange(Sender: TObject);
-    procedure dbnameChange(Sender: TObject);
-    procedure dbhostChange(Sender: TObject);
-    procedure dbportChange(Sender: TObject);
-    procedure dbuserChange(Sender: TObject);
-    procedure dbpassChange(Sender: TObject);
     procedure chkdbClick(Sender: TObject);
     procedure credbClick(Sender: TObject);
     procedure dropdbClick(Sender: TObject);
@@ -178,7 +160,6 @@ type
     procedure AstDBClick(Sender: TObject);
     procedure CometDBClick(Sender: TObject);
     procedure ActivateDBchange;
-    procedure DBtypeGroupClick(Sender: TObject);
     procedure dbnamesqliteChange(Sender: TObject);
     procedure PanelCmdChange(Sender: TObject);
     procedure TurnsRaChange(Sender: TObject);
@@ -194,7 +175,7 @@ type
     FDBChange: TNotifyEvent;
     FSaveAndRestart: TNotifyEvent;
     FApplyConfig: TNotifyEvent;
-    dbchanged, skipDBtypeGroupClick, LockChange, LockMsg: boolean;
+    dbchanged, LockChange, LockMsg: boolean;
     procedure ShowSYS;
     procedure ShowServer;
     procedure ShowTelescope;
@@ -240,12 +221,6 @@ begin
   Page4.Caption := rsServer;
   Page5.Caption := 'SAMP';
   Label153.Caption := rsGeneralSetti;
-  MysqlBoxLabel.Caption := rsMySQLDatabas;
-  Label77.Caption := rsDBName;
-  Label84.Caption := rsHostName;
-  Label85.Caption := rsPort;
-  Label86.Caption := rsUserid;
-  Label133.Caption := rsPassword;
   SqliteBoxLabel.Caption := rsSqliteDataba;
   Label1.Caption := rsDatabaseFile;
   GroupBoxDir.Caption := rsDirectory;
@@ -255,8 +230,6 @@ begin
   dropdb.Caption := rsDropDatabase;
   CometDB.Caption := rsCometSetting;
   AstDB.Caption := rsAsteroidSett;
-  DBtypeGroup.Caption := rsDatabaseType;
-  DBtypeGroup.Hint := rsWarning + crlf + rsChangeToThis;
   GroupBoxLinux.Caption := rsDesktopEnvir;
   Label12.Caption := rsURLLaunchCom;
   GroupBox2.Caption := rsScreenResolu;
@@ -413,34 +386,8 @@ end;
 
 procedure Tf_config_system.ShowSYS;
 begin
-  skipDBtypeGroupClick := True;
-  case DBtype of
-    sqlite:
-    begin
-      DBtypeGroup.ItemIndex := 0;
-      MysqlBox.Visible := True;
-      MysqlBox.Visible := False;
-      SqliteBox.Visible := False;
-      SqliteBox.Visible := True;
-      dropdb.Visible := False;
-    end;
-    mysql:
-    begin
-      DBtypeGroup.ItemIndex := 1;
-      MysqlBox.Visible := False;
-      MysqlBox.Visible := True;
-      SqliteBox.Visible := True;
-      SqliteBox.Visible := False;
-      dropdb.Visible := True;
-    end;
-  end;
-  skipDBtypeGroupClick := False;
+  dropdb.Visible := False;
   dbnamesqlite.Text := SysToUTF8(cmain.db);
-  dbname.Text := cmain.db;
-  dbhost.Text := cmain.dbhost;
-  dbport.Value := cmain.dbport;
-  dbuser.Text := cmain.dbuser;
-  dbpass.Text := cmain.dbpass;
   persdir.Text := SysToUTF8(cmain.persdir);
   UseScaling.Checked := cmain.ScreenScaling;
 {$if defined(linux) or defined(freebsd)}
@@ -498,110 +445,11 @@ begin
   TelescopeselectClick(self);
 end;
 
-procedure Tf_config_system.DBtypeGroupClick(Sender: TObject);
-var
-  dbpath: string;
-begin
-  if skipDBtypeGroupClick then
-  begin
-    skipDBtypeGroupClick := False;
-    exit;
-  end;
-
-  if DBtypeGroup.ItemIndex>0 then begin
-     ShowMessage('Mysql support is deprecated and will be removed in a future version');
-     skipDBtypeGroupClick:=True;
-     DBtypeGroup.ItemIndex:=0;
-     exit;
-  end;
-
-  if messageDlg(Format(rsAlsoBeSureTh, [DBtypeGroup.hint + crlf + crlf, crlf, crlf]),
-    mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-  begin
-    case DBtypeGroup.ItemIndex of
-      0:
-      begin
-        DBtype := sqlite;
-        MysqlBox.Visible := False;
-        SqliteBox.Visible := True;
-        dbnamesqlite.Text := SysToUTF8(slash(dbdir) + defaultSqliteDB);
-        dbpath := extractfilepath(dbnamesqlite.Text);
-        if not directoryexists(dbpath) then
-          CreateDir(dbpath);
-        if not directoryexists(dbpath) then
-          forcedirectories(dbpath);
-      end;
-      1:
-      begin
-        DBtype := mysql;
-        MysqlBox.Visible := True;
-        SqliteBox.Visible := False;
-        dbname.Text := defaultMySqlDB;
-      end;
-    end;
-    if Assigned(FSaveAndRestart) then
-      FSaveAndRestart(self);
-  end
-  else
-  begin
-    skipDBtypeGroupClick := True;
-    case DBtype of
-      sqlite: DBtypeGroup.ItemIndex := 0;
-      mysql: DBtypeGroup.ItemIndex := 1;
-    end;
-  end;
-end;
-
 procedure Tf_config_system.dbnamesqliteChange(Sender: TObject);
 begin
   if LockChange then
     exit;
   cmain.db := utf8tosys(dbnamesqlite.Text);
-end;
-
-procedure Tf_config_system.dbnameChange(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  if cmain.db <> dbname.Text then
-    dbchanged := True;
-  cmain.db := dbname.Text;
-end;
-
-procedure Tf_config_system.dbhostChange(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  if cmain.dbhost <> dbhost.Text then
-    dbchanged := True;
-  cmain.dbhost := dbhost.Text;
-end;
-
-procedure Tf_config_system.dbportChange(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  if cmain.dbport <> dbport.Value then
-    dbchanged := True;
-  cmain.dbport := dbport.Value;
-end;
-
-procedure Tf_config_system.dbuserChange(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  if cmain.dbuser <> dbuser.Text then
-    dbchanged := True;
-  cmain.dbuser := dbuser.Text;
-end;
-
-procedure Tf_config_system.dbpassChange(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  if cmain.dbpass <> dbpass.Text then
-    dbchanged := True;
-  cmain.dbpass := dbpass.Text;
 end;
 
 procedure Tf_config_system.chkdbClick(Sender: TObject);

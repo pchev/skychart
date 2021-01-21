@@ -1216,13 +1216,12 @@ type
   public
     prtname, language, Constellationpath, ConstLfile, ConstBfile,
     EarthMapFile, Planetdir: string;
-    db, dbhost, dbuser, dbpass, ImagePath, persdir: string;
+    db, ImagePath, persdir: string;
     starshape_file, KioskPass: string;
     Paper, PrinterResolution, PrintMethod, PrintColor, PrintBmpWidth,
     PrintBmpHeight, btnsize: integer;
     btncaption, ScreenScaling: boolean;
     configpage, configpage_i, configpage_j, autorefreshdelay, MaxChildID,
-    dbport: integer;
     PrtLeftMargin, PrtRightMargin, PrtTopMargin, PrtBottomMargin, PrintCopies: integer;
     savetop, saveleft, saveheight, savewidth: integer;
     AnimDelay, AnimSx, AnimSy, AnimSize,
@@ -1706,22 +1705,10 @@ const
     );
 
 // Database
-type
-  TDBtype = (mysql, sqlite);
-
 const
-  showtable: array[mysql..sqlite] of string = (
-    'show tables like',
-    'select name from sqlite_master where type="table" and name like'
-    );
+  showtable: string = 'select name from sqlite_master where type="table" and name like';
   defaultSqliteDB = 'cdc.db';
-  defaultMysqlDB = 'cdc';
-
-var
-  DBtype: TDBtype = sqlite;
-
 // SQL Table structure
-const
   create_table_ast_day =
     ' ( jd int(11) NOT NULL default "0", limit_mag smallint(6) NOT NULL default "0")';
   create_table_ast_day_pos =
@@ -1735,66 +1722,8 @@ const
     'ra smallint(6) NOT NULL default "0", de smallint(6) NOT NULL default "0",' +
     'mag smallint(6) NOT NULL default "0", near_earth smallint(1) NOT NULL default "0", PRIMARY KEY (ra,de,mag))';
   numsqltable = 10;
-  sqltable: array[mysql..sqlite, 1..numsqltable, 1..3] of string = (
-    (  // mysql tables
-    ('cdc_ast_name',
-    ' ( id varchar(7) binary NOT NULL default "0", name varchar(27) NOT NULL default "",'
-    +
-    'PRIMARY KEY (id))', ''),
-    ('cdc_ast_elem_list',
-    ' ( elem_id smallint(6) NOT NULL default "0", filedesc varchar(80) NOT NULL default "",'
-    + 'PRIMARY KEY (elem_id))', ''),
-    ('cdc_ast_elem', ' ( id varchar(7) binary NOT NULL default "0",' +
-    'h double NOT NULL default "0", g double NOT NULL default "0",' +
-    'epoch double NOT NULL default "0", mean_anomaly double NOT NULL default "0",' +
-    'arg_perihelion double NOT NULL default "0", asc_node double NOT NULL default "0",'
-    +
-    'inclination double NOT NULL default "0", eccentricity double NOT NULL default "0",'
-    +
-    'semi_axis double NOT NULL default "0", ref varchar(10) binary NOT NULL default "",'
-    +
-    'name varchar(27) NOT NULL default "", equinox smallint(4) NOT NULL default "0",'
-    +
-    'elem_id smallint(6) NOT NULL default "0", PRIMARY KEY (id,epoch))', ''),
-    ('cdc_ast_mag', ' ( id varchar(7) binary NOT NULL default "",' +
-    'jd double NOT NULL default "0", epoch double NOT NULL default "0",' +
-    'mag smallint(6) NOT NULL default "0", elem_id smallint(6) NOT NULL default "0",'
-    +
-    'PRIMARY KEY (jd,id))', '1'),
-    ('cdc_com_name',
-    ' ( id varchar(12) binary NOT NULL default "0", name varchar(27) NOT NULL default "",'
-    + 'PRIMARY KEY (id))', ''),
-    ('cdc_com_elem_list',
-    ' ( elem_id smallint(6) NOT NULL default "0", filedesc varchar(80) NOT NULL default "",'
-    + 'PRIMARY KEY (elem_id))', ''),
-    ('cdc_com_elem', ' ( id varchar(12) binary NOT NULL default "0",' +
-    'peri_epoch double NOT NULL default "0", peri_dist double NOT NULL default "0",' +
-    'eccentricity double NOT NULL default "0",' +
-    'arg_perihelion double NOT NULL default "0", asc_node double NOT NULL default "0",'
-    +
-    'inclination double NOT NULL default "0",' +
-    'epoch double NOT NULL default "0",' +
-    'h double NOT NULL default "0", g double NOT NULL default "0",' +
-    'name varchar(27) NOT NULL default "", equinox smallint(4) NOT NULL default "0",' +
-    'elem_id smallint(6) NOT NULL default "0", PRIMARY KEY (id,epoch))', ''),
-    ('cdc_fits', ' (filename varchar(255) NOT NULL default "", ' +
-    'catalogname varchar(255)  NOT NULL default "", ' +
-    'objectname varchar(25) NOT NULL default "", ' +
-    'ra double NOT NULL default "0",' + 'de double NOT NULL default "0", ' +
-    'width double NOT NULL default "0", ' + 'height double NOT NULL default "0", ' +
-    'rotation  double NOT NULL default "0", ' +
-    'PRIMARY KEY (catalogname,ra,de))', '2'),
-    ('cdc_country', '(country varchar(5) NOT NULL default "",' +
-    'isocode varchar(5) NOT NULL default "",' +
-    'name varchar(50) NOT NULL default "",' + 'PRIMARY KEY (country))', ''),
-    ('cdc_location', '(locid integer NOT NULL ,' + 'country varchar(5) NOT NULL ,' +
-    'location varchar(50) NOT NULL ,' + 'type varchar(5) NOT NULL ,' +
-    'latitude double NOT NULL ,' + 'longitude double NOT NULL ,' +
-    'elevation double NOT NULL ,' + 'timezone double NOT NULL ,' +
-    'PRIMARY KEY (locid))', '3,4')
-    ),
-    (   // sqlite tables
-
+  sqltable: array[1..numsqltable, 1..3] of string = (
+     // sqlite tables
     ('cdc_ast_name',
     ' ( id TEXT NOT NULL default "0", name TEXT NOT NULL default "",' +
     'PRIMARY KEY (id))', ''),
@@ -1846,20 +1775,14 @@ const
     'latitude NUMERIC NOT NULL ,' + 'longitude NUMERIC NOT NULL ,' +
     'elevation NUMERIC NOT NULL ,' + 'timezone NUMERIC NOT NULL ,' +
     'PRIMARY KEY (locid))', '3,4')
-    ));
+    );
   numsqlindex = 4;
-  sqlindex: array[mysql..sqlite, 1..numsqlindex, 1..2] of string = (
-    (
+  sqlindex: array[1..numsqlindex, 1..2] of string = (
     ('ast_mag_idx', 'cdc_ast_mag (mag)'),
     ('cdc_fits_objname', 'cdc_fits (catalogname,objectname)'),
     ('cdc_location_idx1', 'cdc_location(country,location)'),
     ('cdc_location_idx2', 'cdc_location(latitude,longitude)')
-    ), (
-    ('ast_mag_idx', 'cdc_ast_mag (mag)'),
-    ('cdc_fits_objname', 'cdc_fits (catalogname,objectname)'),
-    ('cdc_location_idx1', 'cdc_location(country,location)'),
-    ('cdc_location_idx2', 'cdc_location(latitude,longitude)')
-    ));
+    );
 
 const
   // Minimal main toolbar
@@ -2957,10 +2880,6 @@ begin
   EarthMapFile := Source.EarthMapFile;
   Planetdir := Source.Planetdir;
   db := Source.db;
-  dbhost := Source.dbhost;
-  dbport := Source.dbport;
-  dbuser := Source.dbuser;
-  dbpass := Source.dbpass;
   ImagePath := Source.ImagePath;
   persdir := Source.persdir;
   Paper := Source.Paper;

@@ -764,7 +764,6 @@ begin
   CL.AddConstantN('rsToUseThisNew', 'String').SetString(rsToUseThisNew);
   CL.AddConstantN('rsNoAsteroidDa', 'String').SetString(rsNoAsteroidDa);
   CL.AddConstantN('rsYouAreNowRea', 'String').SetString(rsYouAreNowRea);
-  CL.AddConstantN('rsMySQLDatabas', 'String').SetString(rsMySQLDatabas);
   CL.AddConstantN('rsDBName', 'String').SetString(rsDBName);
   CL.AddConstantN('rsHostName', 'String').SetString(rsHostName);
   CL.AddConstantN('rsPort', 'String').SetString(rsPort);
@@ -850,7 +849,6 @@ begin
   CL.AddConstantN('rsMag', 'String').SetString(rsMag);
   CL.AddConstantN('rsFOV2', 'String').SetString(rsFOV2);
   CL.AddConstantN('rsConnectToSuc', 'String').SetString(rsConnectToSuc);
-  CL.AddConstantN('rsConnectToFai', 'String').SetString(rsConnectToFai);
   CL.AddConstantN('rsDatabaseOpen', 'String').SetString(rsDatabaseOpen);
   CL.AddConstantN('rsCannotOpenDa', 'String').SetString(rsCannotOpenDa);
   CL.AddConstantN('rsTableExist', 'String').SetString(rsTableExist);

@@ -770,7 +770,6 @@ resourcestring
     'Before you can use the new orbital elements, you must compute the monthly data.';
   rsNoAsteroidDa = 'No asteroids data found!%sPlease load a MPC file first.';
   rsYouAreNowRea = 'You are now ready to display the asteroid for this time period.';
-  rsMySQLDatabas = 'MySQL database';
   rsDBName = 'DB Name:';
   rsHostName = 'Hostname:';
   rsPort = 'Port:';
@@ -860,8 +859,6 @@ resourcestring
   rsMag = 'Mag:';
   rsFOV2 = 'FOV:';
   rsConnectToSuc = 'Connection to %s, %s successful.%s';
-  rsConnectToFai =
-    'Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password.';
   rsDatabaseOpen = '%sDatabase %s opened.%s';
   rsCannotOpenDa = '%sCannot open database %s! %s';
   rsTableExist = '%sThis table exists: %s';
