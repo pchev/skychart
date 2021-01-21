@@ -111,15 +111,15 @@ object f_config_system: Tf_config_system
           object TabSheet1: TTabSheet
             Caption = 'TabSheet1'
             ClientHeight = 352
-            ClientWidth = 469
+            ClientWidth = 475
             ParentFont = False
             object INDI: TPanel
               Left = 8
               Height = 331
               Top = 8
               Width = 455
-              ClientHeight = 331
-              ClientWidth = 455
+              ClientHeight = 327
+              ClientWidth = 451
               ParentFont = False
               TabOrder = 0
               object INDILabel: TLabel
@@ -136,8 +136,8 @@ object f_config_system: Tf_config_system
                 Height = 45
                 Top = 112
                 Width = 449
-                ClientHeight = 45
-                ClientWidth = 449
+                ClientHeight = 41
+                ClientWidth = 445
                 ParentFont = False
                 TabOrder = 0
                 object PanelCmd: TEdit
@@ -194,15 +194,15 @@ object f_config_system: Tf_config_system
           object TabSheet2: TTabSheet
             Caption = 'TabSheet2'
             ClientHeight = 352
-            ClientWidth = 469
+            ClientWidth = 475
             ParentFont = False
             object TelescopeManual: TPanel
               Left = 8
               Height = 333
               Top = 8
               Width = 455
-              ClientHeight = 333
-              ClientWidth = 455
+              ClientHeight = 329
+              ClientWidth = 451
               ParentFont = False
               TabOrder = 0
               object ManualMountType: TRadioGroup
@@ -454,15 +454,15 @@ object f_config_system: Tf_config_system
           object TabSheet4: TTabSheet
             Caption = 'TabSheet4'
             ClientHeight = 352
-            ClientWidth = 469
+            ClientWidth = 475
             ParentFont = False
             object ASCOMPanel: TPanel
               Left = 8
               Height = 331
               Top = 8
               Width = 457
-              ClientHeight = 331
-              ClientWidth = 457
+              ClientHeight = 327
+              ClientWidth = 453
               ParentFont = False
               TabOrder = 0
               object ASCOMLabel: TLabel
@@ -481,15 +481,15 @@ object f_config_system: Tf_config_system
           object TabSheet3: TTabSheet
             Caption = 'TabSheet3'
             ClientHeight = 352
-            ClientWidth = 469
+            ClientWidth = 475
             ParentFont = False
             object InterfacePanel: TPanel
               Left = 8
               Height = 331
               Top = 8
               Width = 457
-              ClientHeight = 331
-              ClientWidth = 457
+              ClientHeight = 327
+              ClientWidth = 453
               ParentFont = False
               TabOrder = 0
               object InterfaceLabel: TLabel
@@ -702,9 +702,11 @@ object f_config_system: Tf_config_system
             Text = 'KDE'
           end
           object LinuxCmd: TEdit
+            AnchorSideTop.Control = LinuxDesktopBox
+            AnchorSideTop.Side = asrCenter
             Left = 206
             Height = 28
-            Top = 33
+            Top = 27
             Width = 196
             Constraints.MaxHeight = 28
             OnChange = LinuxCmdChange

@@ -387,6 +387,7 @@ end;
 procedure Tf_config_system.ShowSYS;
 begin
   dropdb.Visible := False;
+  credb.Visible:=false;
   dbnamesqlite.Text := SysToUTF8(cmain.db);
   persdir.Text := SysToUTF8(cmain.persdir);
   UseScaling.Checked := cmain.ScreenScaling;
