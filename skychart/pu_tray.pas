@@ -63,8 +63,7 @@ type
     bmp: TBitmap;
     language: string;
     WantClose: boolean;
-    db, dbhost, dbuser, dbpass, cryptedpwd: string;
-    dbport: integer;
+    db: string;
     cdcdb: Tcdcdb;
     procedure TrayMsg(txt1, txt2, hint1: string);
     procedure UpdBmp(txt1, txt2: string; itype, isize: integer; ibg, ifg: TColor;
@@ -190,14 +189,8 @@ begin
       f_clock.cfgsc.countrytz := ReadBool(section, 'countrytz', False);
       section := 'main';
       f_clock.Font.Color := ReadInteger(section, 'ClockColor', f_clock.Font.Color);
-      DBtype := TDBtype(ReadInteger(section, 'dbtype', 1));
-      dbhost := ReadString(section, 'dbhost', 'localhost');
-      dbport := ReadInteger(section, 'dbport', 3306);
       db := ReadString(section, 'db', slash(privatedir) + StringReplace(
         defaultSqliteDB, '/', PathDelim, [rfReplaceAll]));
-      dbuser := ReadString(section, 'dbuser', 'root');
-      cryptedpwd := hextostr(ReadString(section, 'dbpass', ''));
-      dbpass := DecryptStr(cryptedpwd, encryptpwd);
     end;
   finally
     inif.Free;
@@ -835,13 +828,13 @@ end;
 procedure Tf_tray.ConnectDB;
 begin
   try
-    if ((DBtype = sqlite) and not Fileexists(db)) then
+    if  not Fileexists(db) then
     begin
       cdcdb := nil;
       exit;
     end;
     cdcdb := Tcdcdb.Create(self);
-    if (cdcdb.ConnectDB(dbhost, db, dbuser, dbpass, dbport) and cdcdb.CheckDB) then
+    if (cdcdb.ConnectDB(db) and cdcdb.CheckDB) then
     begin
          {$ifdef trace_debug}
       WriteTrace('DB connected');
