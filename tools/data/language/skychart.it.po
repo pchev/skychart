@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-02 18:54+0000\n"
-"PO-Revision-Date: 2019-10-25 18:30+0000\n"
+"POT-Creation-Date: 2021-01-23 17:45+0000\n"
+"PO-Revision-Date: 2020-11-30 18:26+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-09-21 08:44+0000\n"
-"X-Generator: Launchpad (build 83bdf6c8a3a5f87722c8927e54838522f3e57504)\n"
+"X-Launchpad-Export-Date: 2021-01-23 17:52+0000\n"
+"X-Generator: Launchpad (build 2d1d5e352f0d063d660df2300e31f66bed027fa5)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -285,6 +285,14 @@ msgstr "Aggiungi sempre il meridiano"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Salva sempre senza chiedere."
+
+#: u_translation.rsamplitudemax
+msgid "Amplitude max."
+msgstr ""
+
+#: u_translation.rsamplitudemin
+msgid "Amplitude min."
+msgstr ""
 
 #: u_translation.rsanewversiono
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
@@ -846,6 +854,10 @@ msgstr "Cerchio"
 msgid "Circumpolar"
 msgstr "Circumpolare"
 
+#: u_translation.rscivil
+msgid "Civil"
+msgstr ""
+
 #: u_translation.rsclass
 msgid "Class"
 msgstr "Classe"
@@ -1058,10 +1070,6 @@ msgstr "Connessione al server INDI fallita!"
 msgid "Connect telescope"
 msgstr "Connetti telescopio"
 
-#: u_translation.rsconnecttofai
-msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
-msgstr "Connessione a %s, %s fallita! %sVerifica se il server MySQL è in esecuzione e controlla nome utente e password"
-
 #: u_translation.rsconnecttosam
 msgid "Connect to SAMP hub"
 msgstr "Collegati a un hub SAMP"
@@ -1212,7 +1220,7 @@ msgstr "Culmina"
 
 #: u_translation.rscurrentchart
 msgid "Current chart coordinate system"
-msgstr ""
+msgstr "Attuale sistema di coordinate cartina"
 
 #: u_translation.rscurrentdate
 msgid "Date of validity"
@@ -1644,7 +1652,7 @@ msgstr "Non eseguire %s come %s!"
 
 #: u_translation.rsdonotuserow1
 msgid "Do not use row %s, reserved for external software interface."
-msgstr ""
+msgstr "Non usare linea %s, riservata per interfaccia software esterna."
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2030,6 +2038,10 @@ msgstr "Più debole"
 msgid "Faint Stars Size "
 msgstr "Dimensione stelle deboli "
 
+#: u_translation.rsfamily
+msgid "Family"
+msgstr ""
+
 #: u_translation.rsfaq
 msgid "FAQ"
 msgstr "FAQ"
@@ -2100,7 +2112,7 @@ msgstr "Riempi la Via Lattea"
 
 #: u_translation.rsfillnebulae
 msgid "Fill nebulae"
-msgstr ""
+msgstr "Colora nebulose"
 
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
@@ -2138,6 +2150,10 @@ msgstr "Campo Circolare"
 msgid "Finder rectangle (CCD)"
 msgstr "Campi rettangolari (CCD)"
 
+#: u_translation.rsfindinfo
+msgid "Find info"
+msgstr ""
+
 #: u_translation.rsfirst
 msgid "First"
 msgstr "Primo"
@@ -2168,7 +2184,7 @@ msgstr "Numero di Flamsteed"
 
 #: u_translation.rsflipnsmoveme
 msgid "Flip N/S movement"
-msgstr ""
+msgstr "Inverti movimento N/S"
 
 #: u_translation.rsfonts
 msgid "Fonts"
@@ -2188,7 +2204,7 @@ msgstr "Forza EqSys"
 
 #: u_translation.rsforcej2000
 msgid "Force J2000"
-msgstr ""
+msgstr "Forza J2000"
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
@@ -2594,6 +2610,10 @@ msgstr "Dettaglio Informazioni"
 msgid "Information from catalog"
 msgstr "Informazioni dal catalogo"
 
+#: u_translation.rsinformationf2
+msgid "Information from"
+msgstr ""
+
 #: u_translation.rsinitializeda
 msgid "Initialize database"
 msgstr "Inizializza Database"
@@ -2792,7 +2812,7 @@ msgstr "Meno stelle"
 
 #: u_translation.rslha
 msgid "LHA"
-msgstr ""
+msgstr "LHA"
 
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
@@ -2944,7 +2964,7 @@ msgstr "Blocco"
 
 #: u_translation.rslockchartpos
 msgid "Lock chart position"
-msgstr ""
+msgstr "Blocca posizione cartina"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -3164,7 +3184,7 @@ msgstr "Posizione media"
 
 #: u_translation.rsmeasurement
 msgid "Measurement"
-msgstr ""
+msgstr "Misurazione"
 
 #: u_translation.rsmemo
 msgid "Memo"
@@ -3309,10 +3329,6 @@ msgstr "Segnalino Multiplo"
 #: u_translation.rsmultiplestar
 msgid "Multiple star"
 msgstr "Stella multipla"
-
-#: u_translation.rsmysqldatabas
-msgid "MySQL database"
-msgstr "Database MySQL"
 
 #: u_translation.rsnakedeye
 msgid "Naked eye"
@@ -3580,7 +3596,7 @@ msgstr "%sAltitudine"
 
 #: u_translation.rsobservationt
 msgid "Observation time"
-msgstr ""
+msgstr "Tempo osservazione"
 
 #: u_translation.rsobservatory
 msgid "Observatory"
@@ -3936,7 +3952,7 @@ msgstr "Per favore, prova a reinstallare il programma."
 
 #: u_translation.rspleasewait
 msgid "Please wait..."
-msgstr ""
+msgstr "Attendere..."
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
@@ -4004,11 +4020,11 @@ msgstr "Prepara dati mensili"
 
 #: u_translation.rsprepointing
 msgid "Pre-Pointing"
-msgstr ""
+msgstr "Pre puntamento"
 
 #: u_translation.rsprepointline
 msgid "Pre-point line duration in minutes"
-msgstr ""
+msgstr "Durata linea di pre puntamento in minuti"
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"
@@ -4136,7 +4152,7 @@ msgstr "Proporzionale alla magnitudine"
 
 #: u_translation.rsprotocoltrac
 msgid "Protocol trace"
-msgstr ""
+msgstr "Traccia protocollo"
 
 #: u_translation.rsproxy
 msgid "Proxy"
@@ -4153,6 +4169,10 @@ msgstr "Porta proxy"
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
 msgstr "Metti i files con estensione .tle nella cartella %s"
+
+#: u_translation.rsqualityflag
+msgid "Quality flag"
+msgstr ""
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -4336,7 +4356,7 @@ msgstr "Rimuovi l'ultima etichetta"
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
-msgstr ""
+msgstr "Sostituisci con segno di spunta"
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"
@@ -4608,7 +4628,7 @@ msgstr "Indice di ricerca"
 
 #: u_translation.rssearchradius
 msgid "Search radius"
-msgstr ""
+msgstr "Raggio di ricerca"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
@@ -5132,7 +5152,7 @@ msgstr "Classe Spettrale"
 
 #: u_translation.rsspeed
 msgid "Speed"
-msgstr ""
+msgstr "Velocità"
 
 #: u_translation.rsspline
 msgid "Spline"

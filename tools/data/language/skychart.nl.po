@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-02 18:54+0000\n"
-"PO-Revision-Date: 2019-10-06 13:57+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2021-01-23 17:45+0000\n"
+"PO-Revision-Date: 2020-11-08 13:34+0000\n"
+"Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-09-21 08:44+0000\n"
-"X-Generator: Launchpad (build 83bdf6c8a3a5f87722c8927e54838522f3e57504)\n"
+"X-Launchpad-Export-Date: 2021-01-23 17:52+0000\n"
+"X-Generator: Launchpad (build 2d1d5e352f0d063d660df2300e31f66bed027fa5)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -191,7 +191,7 @@ msgstr "Pas de venster afmetingen aan op de scherm DPI"
 
 #: u_translation.rsadministrato
 msgid "administrator"
-msgstr ""
+msgstr "beheerder"
 
 #: u_translation.rsadvanced
 msgid "Advanced"
@@ -285,6 +285,14 @@ msgstr "Toon altijd meridiaan"
 msgid "Always save without asking."
 msgstr "Automatisch opslaan zonder bevestiging."
 
+#: u_translation.rsamplitudemax
+msgid "Amplitude max."
+msgstr ""
+
+#: u_translation.rsamplitudemin
+msgid "Amplitude min."
+msgstr ""
+
 #: u_translation.rsanewversiono
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
 msgstr "Een nieuwe versie %s van Skychart is beschikbaar.%sWil je deze nu downloaden?"
@@ -371,11 +379,11 @@ msgstr "Een SAMP applicatie stuurt de locatie coördinaten"
 
 #: u_translation.rsascomdrivere
 msgid "The ASCOM driver report an error"
-msgstr ""
+msgstr "De ASCOM driver raporteert een fout"
 
 #: u_translation.rsascomremote
 msgid "ASCOM Alpaca is available on %s"
-msgstr ""
+msgstr "ASCOM Alpaca is beschikbaar op %s"
 
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
@@ -845,6 +853,10 @@ msgstr "Cirkel"
 msgid "Circumpolar"
 msgstr "Circumpolair"
 
+#: u_translation.rscivil
+msgid "Civil"
+msgstr ""
+
 #: u_translation.rsclass
 msgid "Class"
 msgstr "Klasse"
@@ -1057,10 +1069,6 @@ msgstr "Verbinding met de INDI server mislukt!"
 msgid "Connect telescope"
 msgstr "Verbind telescoop"
 
-#: u_translation.rsconnecttofai
-msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
-msgstr "Verbinding naar %s, %s, mislukt! %sControleer of de MySQL Server draait en controleer de gebruikerID/password"
-
 #: u_translation.rsconnecttosam
 msgid "Connect to SAMP hub"
 msgstr "Koppel met SAMP hub"
@@ -1119,7 +1127,7 @@ msgstr "Converteer catalogus bestanden"
 
 #: u_translation.rscooordinates
 msgid "Coordinate system to use with the clients"
-msgstr ""
+msgstr "Coördinatensysteem te gebruiken door clients"
 
 #: u_translation.rscoord
 msgid "Coord."
@@ -1211,7 +1219,7 @@ msgstr "Culminatie"
 
 #: u_translation.rscurrentchart
 msgid "Current chart coordinate system"
-msgstr ""
+msgstr "Huidig kaart-coördinatensysteem"
 
 #: u_translation.rscurrentdate
 msgid "Date of validity"
@@ -1499,7 +1507,7 @@ msgstr "DeltaT onzekerheid"
 
 #: u_translation.rsdeltatrecent
 msgid "DeltaT recent value"
-msgstr ""
+msgstr "DeltaT huidige waarde"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -1631,7 +1639,7 @@ msgstr "Verander hier niets wanneer je onzeker bent over wat je doet!"
 
 #: u_translation.rsdonotfilterb
 msgid "Do not filter bright nebula by magnitude"
-msgstr ""
+msgstr "Filter heldere nevels niet op basis van magnitude"
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
@@ -1639,11 +1647,11 @@ msgstr "Filter niet de Messier-objecten"
 
 #: u_translation.rsdonotrunasad
 msgid "Do not run %s as %s!"
-msgstr ""
+msgstr "Bewerk niet %s als %s!"
 
 #: u_translation.rsdonotuserow1
 msgid "Do not use row %s, reserved for external software interface."
-msgstr ""
+msgstr "Gebruik rij %s niet, gereserveerd voor externe software interface."
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2030,6 +2038,10 @@ msgstr "Zwakker"
 msgid "Faint Stars Size "
 msgstr "Zwakke sterren grootte "
 
+#: u_translation.rsfamily
+msgid "Family"
+msgstr ""
+
 #: u_translation.rsfaq
 msgid "FAQ"
 msgstr "FAQ"
@@ -2100,7 +2112,7 @@ msgstr "Vul de Melkweg"
 
 #: u_translation.rsfillnebulae
 msgid "Fill nebulae"
-msgstr ""
+msgstr "Vul nevels"
 
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
@@ -2138,6 +2150,10 @@ msgstr "Zoekercirkel"
 msgid "Finder rectangle (CCD)"
 msgstr "Beeldveld camera"
 
+#: u_translation.rsfindinfo
+msgid "Find info"
+msgstr ""
+
 #: u_translation.rsfirst
 msgid "First"
 msgstr "Eerste"
@@ -2168,7 +2184,7 @@ msgstr "Flamsteed nummer"
 
 #: u_translation.rsflipnsmoveme
 msgid "Flip N/S movement"
-msgstr ""
+msgstr "Keer N/Z beweging om"
 
 #: u_translation.rsfonts
 msgid "Fonts"
@@ -2188,7 +2204,7 @@ msgstr "Forceer EqSys"
 
 #: u_translation.rsforcej2000
 msgid "Force J2000"
-msgstr ""
+msgstr "Forceer J2000"
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
@@ -2292,7 +2308,7 @@ msgstr "Geometrische hoogte"
 
 #: u_translation.rsget
 msgid "Get"
-msgstr ""
+msgstr "Ophalen"
 
 #: u_translation.rsgetasteroidl
 msgid "Get the asteroids list."
@@ -2436,7 +2452,7 @@ msgstr "Horizon"
 
 #: u_translation.rshorizontalov
 msgid "Horizontal overlap %"
-msgstr ""
+msgstr "Horizontale overlap %"
 
 #: u_translation.rshostname
 msgid "Hostname:"
@@ -2568,7 +2584,7 @@ msgstr "INDI driver instellingen"
 
 #: u_translation.rsindiready
 msgid "INDI server is ready"
-msgstr ""
+msgstr "INDI server is gereed"
 
 #: u_translation.rsindiserverho
 msgid "INDI server host "
@@ -2593,6 +2609,10 @@ msgstr "Gedetaileerde informatie"
 #: u_translation.rsinformationf
 msgid "Information from catalog"
 msgstr "Informatie uit catalogus"
+
+#: u_translation.rsinformationf2
+msgid "Information from"
+msgstr ""
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
@@ -2792,7 +2812,7 @@ msgstr "Minder sterren"
 
 #: u_translation.rslha
 msgid "LHA"
-msgstr ""
+msgstr "Lokale uurhoek"
 
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
@@ -2897,7 +2917,7 @@ msgstr "Laad uit bestand"
 
 #: u_translation.rsloadindiconf
 msgid "Load INDI configuration"
-msgstr ""
+msgstr "Laad INDI configuratie"
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."
@@ -2945,7 +2965,7 @@ msgstr "Vergrendel"
 
 #: u_translation.rslockchartpos
 msgid "Lock chart position"
-msgstr ""
+msgstr "Blokkeer kaart positie"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -3165,7 +3185,7 @@ msgstr "Gemiddelde positie"
 
 #: u_translation.rsmeasurement
 msgid "Measurement"
-msgstr ""
+msgstr "Meting"
 
 #: u_translation.rsmemo
 msgid "Memo"
@@ -3285,15 +3305,15 @@ msgstr "Ochtendschemer"
 
 #: u_translation.rsmosaic
 msgid "Mosaic"
-msgstr ""
+msgstr "Mozaïek"
 
 #: u_translation.rsmosaiccenter
 msgid "Mosaic center"
-msgstr ""
+msgstr "Mozaïek centrum"
 
 #: u_translation.rsmosaicsize
 msgid "Mosaic size"
-msgstr ""
+msgstr "Mozaïek afmetingen"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3310,10 +3330,6 @@ msgstr "Meervoudigheidsvlag"
 #: u_translation.rsmultiplestar
 msgid "Multiple star"
 msgstr "Meervoudige ster"
-
-#: u_translation.rsmysqldatabas
-msgid "MySQL database"
-msgstr "MySQL database"
 
 #: u_translation.rsnakedeye
 msgid "Naked eye"
@@ -3581,7 +3597,7 @@ msgstr "%sHoogte"
 
 #: u_translation.rsobservationt
 msgid "Observation time"
-msgstr ""
+msgstr "Observatietijd"
 
 #: u_translation.rsobservatory
 msgid "Observatory"
@@ -3937,7 +3953,7 @@ msgstr "Probeer alstublieft het programma opnieuw te installeren."
 
 #: u_translation.rspleasewait
 msgid "Please wait..."
-msgstr ""
+msgstr "Wacht even.."
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
@@ -4005,11 +4021,11 @@ msgstr "Creëer maandelijkse data"
 
 #: u_translation.rsprepointing
 msgid "Pre-Pointing"
-msgstr ""
+msgstr "Vooraanwijzing"
 
 #: u_translation.rsprepointline
 msgid "Pre-point line duration in minutes"
-msgstr ""
+msgstr "Vooraanwijzingslijn duur in minuten"
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"
@@ -4137,7 +4153,7 @@ msgstr "In verhouding tot magnitude"
 
 #: u_translation.rsprotocoltrac
 msgid "Protocol trace"
-msgstr ""
+msgstr "Protocol trace"
 
 #: u_translation.rsproxy
 msgid "Proxy"
@@ -4154,6 +4170,10 @@ msgstr "Proxy port"
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
 msgstr "Plaats de bestanden met een .tle extensie in de %s map"
+
+#: u_translation.rsqualityflag
+msgid "Quality flag"
+msgstr ""
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -4337,7 +4357,7 @@ msgstr "Verwijder laatste label"
 
 #: u_translation.rsreplacebytic
 msgid "Replace by tick mark"
-msgstr ""
+msgstr "Vervang stippel markering"
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"
@@ -4609,7 +4629,7 @@ msgstr "Zoek index"
 
 #: u_translation.rssearchradius
 msgid "Search radius"
-msgstr ""
+msgstr "Zoek radius"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
@@ -4721,7 +4741,7 @@ msgstr "Stuur tabellen naar"
 
 #: u_translation.rssendviaserve
 msgid "Send via server"
-msgstr ""
+msgstr "Verzend via server"
 
 #: u_translation.rsseparation
 msgid "Separation"
@@ -4833,7 +4853,7 @@ msgstr "Toon knop tekst"
 
 #: u_translation.rsshowcelestia
 msgid "Show celestial equator"
-msgstr ""
+msgstr "Toon hemel-equator"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
@@ -5033,7 +5053,7 @@ msgstr "Beweeg telescoop naar object"
 
 #: u_translation.rsslewcomplete
 msgid "Slew complete"
-msgstr ""
+msgstr "Zwenken gereed"
 
 #: u_translation.rsslewingto
 msgid "Slewing to %s / %s"
@@ -5133,7 +5153,7 @@ msgstr "Spectrale klasse"
 
 #: u_translation.rsspeed
 msgid "Speed"
-msgstr ""
+msgstr "Snelheid"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -5829,7 +5849,7 @@ msgstr "Versie"
 
 #: u_translation.rsverticalover
 msgid "Vertical overlap %"
-msgstr ""
+msgstr "Verticale overlap %"
 
 #: u_translation.rsvicinity
 msgid "Vicinity"

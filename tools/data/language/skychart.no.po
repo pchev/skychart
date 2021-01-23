@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.no\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-02 18:54+0000\n"
+"POT-Creation-Date: 2021-01-23 17:45+0000\n"
 "PO-Revision-Date: 2017-01-29 16:49+0000\n"
 "Last-Translator: ovl-1 <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-09-21 08:44+0000\n"
-"X-Generator: Launchpad (build 83bdf6c8a3a5f87722c8927e54838522f3e57504)\n"
+"X-Launchpad-Export-Date: 2021-01-23 17:52+0000\n"
+"X-Generator: Launchpad (build 2d1d5e352f0d063d660df2300e31f66bed027fa5)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -285,6 +285,14 @@ msgstr "Alltid legge til meridian"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Lagre alltid uten å spørre."
+
+#: u_translation.rsamplitudemax
+msgid "Amplitude max."
+msgstr ""
+
+#: u_translation.rsamplitudemin
+msgid "Amplitude min."
+msgstr ""
 
 #: u_translation.rsanewversiono
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
@@ -846,6 +854,10 @@ msgstr "Sirkel"
 msgid "Circumpolar"
 msgstr "Sirkumpolar"
 
+#: u_translation.rscivil
+msgid "Civil"
+msgstr ""
+
 #: u_translation.rsclass
 msgid "Class"
 msgstr "Klasse"
@@ -1057,10 +1069,6 @@ msgstr ""
 #: u_translation.rsconnectteles
 msgid "Connect telescope"
 msgstr "Koble til teleskop"
-
-#: u_translation.rsconnecttofai
-msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
-msgstr "Forbindelse til %s, %s feilet! %sVerifiser om MySQL-serveren kjører, og kontroller bruker-id/passord."
 
 #: u_translation.rsconnecttosam
 msgid "Connect to SAMP hub"
@@ -2030,6 +2038,10 @@ msgstr "Svakere"
 msgid "Faint Stars Size "
 msgstr "Størrelse på stjerner "
 
+#: u_translation.rsfamily
+msgid "Family"
+msgstr ""
+
 #: u_translation.rsfaq
 msgid "FAQ"
 msgstr "Ofte stilte spørsmål"
@@ -2137,6 +2149,10 @@ msgstr "Søkesirkel"
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Kamerafelt (CCD)"
+
+#: u_translation.rsfindinfo
+msgid "Find info"
+msgstr ""
 
 #: u_translation.rsfirst
 msgid "First"
@@ -2593,6 +2609,10 @@ msgstr "Detaljert informasjon"
 #: u_translation.rsinformationf
 msgid "Information from catalog"
 msgstr "Informasjon fra katalog"
+
+#: u_translation.rsinformationf2
+msgid "Information from"
+msgstr ""
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
@@ -3309,10 +3329,6 @@ msgstr "Multi-flagg"
 #: u_translation.rsmultiplestar
 msgid "Multiple star"
 msgstr "Fler-stjerne"
-
-#: u_translation.rsmysqldatabas
-msgid "MySQL database"
-msgstr "MySQL-database"
 
 #: u_translation.rsnakedeye
 msgid "Naked eye"
@@ -4153,6 +4169,10 @@ msgstr "Proxy-port"
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
 msgstr "Plasser filene med endelsen .tle i mappen %s"
+
+#: u_translation.rsqualityflag
+msgid "Quality flag"
+msgstr ""
 
 #: u_translation.rsquasar
 msgid "Quasar"

@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-02 18:54+0000\n"
-"PO-Revision-Date: 2020-05-30 12:47+0000\n"
-"Last-Translator: Jean-Marc <Unknown>\n"
+"POT-Creation-Date: 2021-01-23 17:45+0000\n"
+"PO-Revision-Date: 2021-01-23 17:51+0000\n"
+"Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-09-21 08:44+0000\n"
-"X-Generator: Launchpad (build 83bdf6c8a3a5f87722c8927e54838522f3e57504)\n"
+"X-Launchpad-Export-Date: 2021-01-23 17:52+0000\n"
+"X-Generator: Launchpad (build 2d1d5e352f0d063d660df2300e31f66bed027fa5)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -287,6 +287,14 @@ msgstr "Toujours ajouter le méridien"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Toujours enregistrer sans demander."
+
+#: u_translation.rsamplitudemax
+msgid "Amplitude max."
+msgstr "Amplitude max."
+
+#: u_translation.rsamplitudemin
+msgid "Amplitude min."
+msgstr "Amplitude min."
 
 #: u_translation.rsanewversiono
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
@@ -848,6 +856,10 @@ msgstr "Cercle"
 msgid "Circumpolar"
 msgstr "Circumpolaire"
 
+#: u_translation.rscivil
+msgid "Civil"
+msgstr "Civil"
+
 #: u_translation.rsclass
 msgid "Class"
 msgstr "Classe"
@@ -1059,10 +1071,6 @@ msgstr "La connexion au serveur INDI a échoué !"
 #: u_translation.rsconnectteles
 msgid "Connect telescope"
 msgstr "Connecte le télescope"
-
-#: u_translation.rsconnecttofai
-msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
-msgstr "Connexion $ %s, %s erreur ! %sContrôlez que le serveur MySQL est lancé et vérifiez le mot de passe"
 
 #: u_translation.rsconnecttosam
 msgid "Connect to SAMP hub"
@@ -2032,6 +2040,10 @@ msgstr "Faible"
 msgid "Faint Stars Size "
 msgstr "Taille des étoiles faibles "
 
+#: u_translation.rsfamily
+msgid "Family"
+msgstr "Famille"
+
 #: u_translation.rsfaq
 msgid "FAQ"
 msgstr "FAQ"
@@ -2139,6 +2151,10 @@ msgstr "Cercle du chercheur"
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Rectangle du chercheur (CCD)"
+
+#: u_translation.rsfindinfo
+msgid "Find info"
+msgstr "Information"
 
 #: u_translation.rsfirst
 msgid "First"
@@ -2518,7 +2534,7 @@ msgstr "Liste des images"
 
 #: u_translation.rsimportmosaic
 msgid "Import mosaic file"
-msgstr ""
+msgstr "Importer un fichier de mosaïque"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -2595,6 +2611,10 @@ msgstr "Information détaillée"
 #: u_translation.rsinformationf
 msgid "Information from catalog"
 msgstr "Informations du catalogue"
+
+#: u_translation.rsinformationf2
+msgid "Information from"
+msgstr "Information de"
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
@@ -3312,10 +3332,6 @@ msgstr "Multiple flag"
 #: u_translation.rsmultiplestar
 msgid "Multiple star"
 msgstr "Étoile multiple"
-
-#: u_translation.rsmysqldatabas
-msgid "MySQL database"
-msgstr "Base de données MySQL"
 
 #: u_translation.rsnakedeye
 msgid "Naked eye"
@@ -4156,6 +4172,10 @@ msgstr "Port"
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
 msgstr "Mettre les fichiers avec l'extension .tle dans le répertoire %s"
+
+#: u_translation.rsqualityflag
+msgid "Quality flag"
+msgstr "Indicateur de qualité"
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -5595,7 +5615,7 @@ msgstr "Classe de Trumpler"
 
 #: u_translation.rstruncatedtos
 msgid "Truncated to %s catalogs"
-msgstr ""
+msgstr "Tronqué à %s catalogues"
 
 #: u_translation.rstrytoautocon
 msgid "Try to auto-connect to a SAMP hub when the program start"

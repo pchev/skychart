@@ -2986,10 +2986,6 @@ msgstr ""
 msgid "You are now ready to display the asteroid for this time period."
 msgstr ""
 
-#: u_translation:rsmysqldatabas
-msgid "MySQL database"
-msgstr ""
-
 #: u_translation:rsdbname
 msgid "DB Name:"
 msgstr ""
@@ -3328,10 +3324,6 @@ msgstr ""
 
 #: u_translation:rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
-msgstr ""
-
-#: u_translation:rsconnecttofai
-msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
 msgstr ""
 
 #: u_translation:rsdatabaseopen
@@ -5988,5 +5980,33 @@ msgstr ""
 
 #: u_translation:rstruncatedtos
 msgid "Truncated to %s catalogs"
+msgstr ""
+
+#: u_translation:rscivil
+msgid "Civil"
+msgstr ""
+
+#: u_translation:rsfindinfo
+msgid "Find info"
+msgstr ""
+
+#: u_translation:rsinformationf2
+msgid "Information from"
+msgstr ""
+
+#: u_translation:rsfamily
+msgid "Family"
+msgstr ""
+
+#: u_translation:rsamplitudemin
+msgid "Amplitude min."
+msgstr ""
+
+#: u_translation:rsamplitudemax
+msgid "Amplitude max."
+msgstr ""
+
+#: u_translation:rsqualityflag
+msgid "Quality flag"
 msgstr ""
 
