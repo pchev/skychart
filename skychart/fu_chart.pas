@@ -4258,8 +4258,8 @@ begin
            'Asteroid Lightcurve Database'+ '</a>' + ':' + htms_b + html_br;
       txt:=txt + html_b + rsFamily +': ' + htms_b + efam + html_br;
       txt:=txt + html_b + rsDiameter +': ' + htms_b + ediam + blank + rsKm + html_br;
-      txt:=txt + html_b + rsMagnitude +': ' + htms_b + FormatFloat(f2,emagn) + html_br;
       txt:=txt + html_b + rsPeriod +': ' + htms_b + eperiod + blank + rsHours + html_br;
+      txt:=txt + html_b + rsMagnitude +': ' + htms_b + FormatFloat(f2,emagn) + html_br;
       if amin<>'' then txt:=txt + html_b + rsAmplitudeMin +': ' + htms_b + amin + html_br;
       if amax<>'' then txt:=txt + html_b + rsAmplitudeMax +': ' + htms_b + amax + html_br;
       txt:=txt + html_b + rsQualityFlag +': ' + htms_b + u + html_br;
