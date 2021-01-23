@@ -3838,7 +3838,7 @@ var
   tp, ec, ap, an, ic, g, eq, cra, cdec, dist, dst, dkm, rr, elong, phase, magn,
   diam, lc, ctar, ctde, rc, xc, yc, zc, ma, sa, dx, dy, illum, vel: double;
   nam, elem_id, ref: string;
-  phi1,phi2,eh,eg,emagn: double;
+  emagn: double;
   ename, enum,efam,sh,sg,ediam,eperiod,amin,amax,u: string;
 
   function Bold(s: string): string;
@@ -4524,11 +4524,7 @@ begin
         enum:='';
       end;
       if sc.cdb.GetAstExt(ename, enum, efam,sh,sg,ediam,eperiod,amin,amax,u) then begin
-        eh:=StrToFloat(sh);
-        eg:=StrToFloat(sg);
-        phi1 := exp(-3.33 * power(tan(phase / 2), 0.63));
-        phi2 := exp(-1.87 * power(tan(phase / 2), 1.22));
-        emagn := eh + 5.0 * log10(dst * rr) - 2.5 * log10((1 - eg) * phi1 + eg * phi2);
+        emagn:=sc.planet.AsteroidMag(phase,dst,rr,StrToFloat(sh),StrToFloat(sg));
         txt:=txt + html_br + html_b + rsInformationF2+ blank +
              '<a href="' + URL_Asteroid_Lightcurve_Database_Info + '">' +
              'Asteroid Lightcurve Database'+ '</a>' + ':' + htms_b + html_br;

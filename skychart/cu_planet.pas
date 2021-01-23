@@ -125,6 +125,7 @@ type
     procedure InitAsteroid(epoch, mh, mg, ma, ap, an, ic, ec, sa, eq: double; nam: string);
     procedure Asteroid(jd: double; highprec: boolean;
       var ar, de, dist, r, elong, phase, magn, xc, yc, zc: double);
+    function AsteroidMag(phase,dist,r,h,g: double): double;
     function ConnectDB(db: string): boolean;
     function NewAstDay(newjd, limitmag: double; cfgsc: Tconf_skychart): boolean;
     procedure NewAstDayCallback(Sender: TObject; Row: TResultRow);
@@ -2510,10 +2511,18 @@ begin
   astelem.Oc := sqrt(h * h + r * r);
 end;
 
+function TPlanet.AsteroidMag(phase,dist,r,h,g: double): double;
+var phi1, phi2: double;
+begin
+  phi1 := exp(-3.33 * power(tan(phase / 2), 0.63));  { meeus91 32.14 }
+  phi2 := exp(-1.87 * power(tan(phase / 2), 1.22));
+  result := h + 5.0 * log10(dist * r) - 2.5 * log10((1 - g) * phi1 + g * phi2);
+end;
+
 procedure TPlanet.Asteroid(jd: double; highprec: boolean;
   var ar, de, dist, r, elong, phase, magn, xc, yc, zc: double);
 var
-  xs, ys, zs, rr, phi1, phi2: double;
+  xs, ys, zs, rr: double;
   nu, da, n0, m, ex, num, den: double;
 
   procedure AstGeom;
@@ -2549,9 +2558,7 @@ begin
   rr := sqrt(xs * xs + ys * ys + zs * zs);
   elong := arccos((rr * rr + dist * dist - r * r) / (2.0 * rr * dist));
   phase := arccos((r * r + dist * dist - rr * rr) / (2.0 * r * dist));
-  phi1 := exp(-3.33 * power(tan(phase / 2), 0.63));  { meeus91 32.14 }
-  phi2 := exp(-1.87 * power(tan(phase / 2), 1.22));
-  magn := astelem.Ah + 5.0 * log10(dist * r) - 2.5 * log10((1 - astelem.Ag) * phi1 + astelem.Ag * phi2);
+  magn:=AsteroidMag(phase,dist,r,astelem.Ah,astelem.Ag);
 end;
 
 function TPlanet.ConnectDB(db: string): boolean;
