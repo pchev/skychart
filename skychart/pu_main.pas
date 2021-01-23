@@ -7477,6 +7477,7 @@ begin
         csc.TrackRA := ReadFloat(section, 'TrackRA', csc.TrackRA);
         csc.TrackEpoch := ReadFloat(section, 'TrackEpoch', csc.TrackEpoch);
         csc.TrackName := ReadString(section, 'TrackName', csc.TrackName);
+        if (csc.TrackName = rsTelescope) then csc.TrackOn:=false;
       except
         ShowError('Error reading ' + filename + ' default chart');
       end;
