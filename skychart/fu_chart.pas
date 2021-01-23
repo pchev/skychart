@@ -4966,6 +4966,7 @@ begin
       ar := strtofloat(buf);
     end;
     Result := msgOK;
+    sc.cfgsc.TrackOn := False;
     if (ar >= 0) and (ar < 24) then begin
       if ServerCoordSystem=csJ2000 then begin
         de:=sc.cfgsc.decentre2000;
@@ -5026,6 +5027,7 @@ begin
       de := strtofloat(buf);
     end;
     Result := msgOK;
+    sc.cfgsc.TrackOn := False;
     if (de >= -90) and (de <= 90) then begin
       if ServerCoordSystem=csJ2000 then begin
         ar:=sc.cfgsc.racentre2000;
