@@ -1139,6 +1139,7 @@ begin
       dropdb(cmain);
       raise Exception.Create('Error loading ' + slash(sampledir) + 'MPCsample.dat');
     end;
+    LoadAstExt(slash(sampledir) + 'F-D_FULL.TXT');
     // load sample comet data
     if not LoadCometFile(slash(sampledir) + 'Cometsample.dat', memo) then
     begin
