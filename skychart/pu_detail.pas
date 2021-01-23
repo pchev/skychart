@@ -171,8 +171,10 @@ begin
         url := infoname_url[i, 1];
         url := StringReplace(url, '$ID', n, []);
       end;
-      ExecuteFile(url);
-    end;
+    end
+    else
+      url:=src;
+    ExecuteFile(url);
   end;
 end;
 

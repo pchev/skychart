@@ -589,6 +589,9 @@ const
   URL_HTTPAsteroidElements3 = 'https://www.minorplanetcenter.net/iau/MPCORB/Distant.txt';
   URL_CDCAsteroidElements = 'https://www.ap-i.net/pub/skychart/mpc/mpc5000.dat';
 
+  URL_Asteroid_Lightcurve_Database_Info = 'http://www.minorplanet.info/lightcurvedatabase.html';
+  URL_Asteroid_Lightcurve_Database = 'https://www.ap-i.net/pub/skychart/asteroid/F-D_FULL.TXT';
+
   URL_IVOASAMP = 'http://www.ivoa.net/documents/SAMP/';
 
   URL_DSS_NAME1 = 'DSS 1';
@@ -1721,7 +1724,7 @@ const
     '( id varchar(12) NOT NULL default "", epoch double NOT NULL default "0",' +
     'ra smallint(6) NOT NULL default "0", de smallint(6) NOT NULL default "0",' +
     'mag smallint(6) NOT NULL default "0", near_earth smallint(1) NOT NULL default "0", PRIMARY KEY (ra,de,mag))';
-  numsqltable = 10;
+  numsqltable = 11;
   sqltable: array[1..numsqltable, 1..3] of string = (
      // sqlite tables
     ('cdc_ast_name',
@@ -1774,14 +1777,21 @@ const
     'location TEXT NOT NULL ,' + 'type TEXT NOT NULL ,' +
     'latitude NUMERIC NOT NULL ,' + 'longitude NUMERIC NOT NULL ,' +
     'elevation NUMERIC NOT NULL ,' + 'timezone NUMERIC NOT NULL ,' +
-    'PRIMARY KEY (locid))', '3,4')
+    'PRIMARY KEY (locid))', '3,4'),
+    ('cdc_ast_ext', ' ( name TEXT NOT NULL default "", '+
+     'number NUMERIC default "0", fam TEXT NOT NULL default "",' +
+    'h NUMERIC NOT NULL default "0", g NUMERIC NOT NULL default "0", ' +
+    'diam NUMERIC NOT NULL default "0", period NUMERIC NOT NULL default "0", ' +
+    'amin NUMERIC NOT NULL default "0", amax NUMERIC NOT NULL default "0",  u TEXT NOT NULL default "", ' +
+    'PRIMARY KEY (name))', '5')
     );
-  numsqlindex = 4;
+  numsqlindex = 5;
   sqlindex: array[1..numsqlindex, 1..2] of string = (
     ('ast_mag_idx', 'cdc_ast_mag (mag)'),
     ('cdc_fits_objname', 'cdc_fits (catalogname,objectname)'),
     ('cdc_location_idx1', 'cdc_location(country,location)'),
-    ('cdc_location_idx2', 'cdc_location(latitude,longitude)')
+    ('cdc_location_idx2', 'cdc_location(latitude,longitude)'),
+    ('cdc_ast_ext_idx1', 'cdc_ast_ext(number)')
     );
 
 const

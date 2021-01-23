@@ -750,6 +750,7 @@ type
     procedure EditToolBar(barnum: integer);
     procedure EnableAsteroid(Sender: TObject);
     procedure DisableAsteroid(Sender: TObject);
+    procedure UpdateAstExt;
 
   public
     { Public declarations }
@@ -11895,7 +11896,22 @@ end;
 
 procedure Tf_main.MenuUpdAsteroidClick(Sender: TObject);
 begin
+  UpdateAstExt;
   SetupSolsysPage(3, True);
+end;
+
+procedure Tf_main.UpdateAstExt;
+var
+  fn: string;
+begin
+    fn :=slash(tempdir)+'F-D_FULL.TXT';
+    if QuickDownload(URL_Asteroid_Lightcurve_Database, fn, False) then begin
+      cdcdb.LoadAstExt(fn);
+    end
+    else begin
+      ShowMessage('Cannot update the Asteroid light curve file now, please check your Internet connection');
+      exit;
+    end;
 end;
 
 procedure Tf_main.MenuUpdCometClick(Sender: TObject);

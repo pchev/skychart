@@ -75,6 +75,8 @@ type
     procedure DelCometAll(memocom: Tmemo);
     function AddCom(comid, comt, comep, comq, comec, comperi, comnode, comi,
       comh, comg, comnam, comeq: string): string;
+    function LoadAstExt(fdfile: string): boolean;
+    function GetAstExt(aname, anum: string; out fam,h,g,diam,period,amin,amax,u: string): boolean;
     function LoadAsteroidFile(astfile: string; astnumbered, stoperr, limit: boolean;
       astlimit: integer; memoast: Tmemo): boolean;
     procedure DelAsteroid(astelemlist: string; memoast: Tmemo);
@@ -176,7 +178,7 @@ begin
         if ok then
         begin
           writetrace('Create table ' + sqltable[i, 1] + ' ... Ok');
-          creatednow := True;
+          if i<10 then creatednow := True;
         end
         else
           writetrace('Create table ' + sqltable[i, 1] + ' ... Failed: ' + emsg);
@@ -260,6 +262,10 @@ begin
         bb.Free;
       end;
     end;
+    // load asteroid extension
+    i := strtointdef(DB.QueryOne('select count(*) from cdc_ast_ext where name="Ceres"'), 0);
+    if i=0 then
+      LoadAstExt(slash(sampledir) + 'F-D_FULL.TXT');
 
   end;
 end;
@@ -641,6 +647,77 @@ begin
     DB.flush('tables');
   except
   end;
+end;
+
+function TCDCdb.LoadAstExt(fdfile: string): boolean;
+var anum,aname,fam,h,g,diam,period,amin,amax,u: string;
+    buf,cmd: string;
+    f: textfile;
+begin
+  Result := False;
+  if not fileexists(fdfile) then
+    exit;
+  try
+    if DB.Active then
+    begin
+      assignfile(f, fdfile);
+      reset(f);
+      // skip headert
+      repeat
+        readln(f, buf);
+        if copy(buf,1,5)='-----' then break
+      until eof(f);
+      DB.starttransaction;
+      DB.LockTables('cdc_ast_ext WRITE');
+      // main loop
+      while not eof(f) do begin
+         readln(f, buf);
+         anum:=trim(copy(buf,1,8));
+         aname:=trim(copy(buf,10,20));
+         fam:=trim(copy(buf,39,4));
+         h:=trim(copy(buf,61,6));
+         g:=trim(copy(buf,69,6));
+         diam:=trim(copy(buf,77,8));
+         period:=trim(copy(buf,89,12));
+         amin:=trim(copy(buf,116,5));
+         amax:=trim(copy(buf,122,5));
+         u:=trim(copy(buf,129,2));
+         cmd := 'REPLACE INTO cdc_ast_ext (number,name,fam,h,g,diam,period,amin,amax,u) VALUES (' + '"' +
+          anum + '"' + ',"' + aname + '"'+ ',"' + fam + '"'+ ',"' + h + '"'+ ',"' + g + '"'+ ',"' +
+          diam + '"'+ ',"' + period + '"' + ',"' + amin + '"'+ ',"' + amax + '"'+ ',"' + u + '"'+
+          ' )';
+        DB.query(cmd);
+      end;
+      CloseFile(f);
+      DB.UnLockTables;
+      DB.commit;
+      DB.flush('tables');
+    end;
+  except
+  end;
+end;
+
+function TCDCdb.GetAstExt(aname, anum: string; out fam,h,g,diam,period,amin,amax,u: string): boolean;
+var cmd: string;
+begin
+  result:=false;
+  if anum='' then
+    cmd:='select fam,h,g,diam,period,amin,amax,u from cdc_ast_ext where name="'+trim(aname)+'"'
+  else
+    cmd:='select fam,h,g,diam,period,amin,amax,u from cdc_ast_ext where number="'+trim(anum)+'"';
+  DB.Query(cmd);
+  if DB.Rowcount > 0 then
+    begin
+      result:=true;
+      fam := DB.Results[0][0];
+      h := DB.Results[0][1];
+      g := DB.Results[0][2];
+      diam := DB.Results[0][3];
+      period := DB.Results[0][4];
+      amin := DB.Results[0][5];
+      amax := DB.Results[0][6];
+      u := DB.Results[0][7];
+    end;
 end;
 
 function TCDCdb.LoadAsteroidFile(astfile: string; astnumbered, stoperr, limit: boolean;

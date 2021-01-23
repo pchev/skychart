@@ -1552,6 +1552,11 @@ resourcestring
   rsTruncatedToS = 'Truncated to %s catalogs';
   rsCivil = 'Civil';
   rsFindInfo = 'Find info';
+  rsInformationF2 = 'Information from';
+  rsFamily = 'Family';
+  rsAmplitudeMin = 'Amplitude min.';
+  rsAmplitudeMax = 'Amplitude max.';
+  rsQualityFlag = 'Quality flag';
 
 // also update upsi_translation
 

@@ -3838,7 +3838,8 @@ var
   tp, ec, ap, an, ic, g, eq, cra, cdec, dist, dst, dkm, rr, elong, phase, magn,
   diam, lc, ctar, ctde, rc, xc, yc, zc, ma, sa, dx, dy, illum, vel: double;
   nam, elem_id, ref: string;
-
+  phi1,phi2,eh,eg,emagn: double;
+  ename, enum,efam,sh,sg,ediam,eperiod,amin,amax,u: string;
 
   function Bold(s: string): string;
   var
@@ -4506,6 +4507,39 @@ begin
         end;
         txt := txt + buf2 + html_br;
       until buf = '';
+    end;
+    // Asteroid extension
+    if otype = 'As' then
+    begin
+      i:=pos(')',nam);
+      if i>0 then begin
+        enum:=copy(nam,1,i-1);
+        enum:=trim(StringReplace(enum,'(','',[]));
+        ename:=nam;
+        delete(ename,1,i);
+        ename:=trim(ename);
+      end
+      else begin
+        ename:=trim(nam);
+        enum:='';
+      end;
+      if sc.cdb.GetAstExt(ename, enum, efam,sh,sg,ediam,eperiod,amin,amax,u) then begin
+        eh:=StrToFloat(sh);
+        eg:=StrToFloat(sg);
+        phi1 := exp(-3.33 * power(tan(phase / 2), 0.63));
+        phi2 := exp(-1.87 * power(tan(phase / 2), 1.22));
+        emagn := eh + 5.0 * log10(dst * rr) - 2.5 * log10((1 - eg) * phi1 + eg * phi2);
+        txt:=txt + html_br + html_b + rsInformationF2+ blank +
+             '<a href="' + URL_Asteroid_Lightcurve_Database_Info + '">' +
+             'Asteroid Lightcurve Database'+ '</a>' + ':' + htms_b + html_br;
+        txt:=txt + html_b + rsFamily +': ' + htms_b + efam + html_br;
+        txt:=txt + html_b + rsDiameter +': ' + htms_b + ediam + blank + rsKm + html_br;
+        txt:=txt + html_b + rsMagnitude +': ' + htms_b + FormatFloat(f2,emagn) + html_br;
+        txt:=txt + html_b + rsPeriod +': ' + htms_b + eperiod + blank + rsHours + html_br;
+        if amin<>'' then txt:=txt + html_b + rsAmplitudeMin +': ' + htms_b + amin + html_br;
+        if amax<>'' then txt:=txt + html_b + rsAmplitudeMax +': ' + htms_b + amax + html_br;
+        txt:=txt + html_b + rsQualityFlag +': ' + htms_b + u + html_br;
+      end;
     end;
   end;
 
