@@ -4236,6 +4236,36 @@ begin
     txt := txt + ' dRA:' + ARToStrShort(dx, 2) + ' dDec:' + DEToStrShort(dy) + html_br;
   end;
 
+  // Asteroid extension
+  if otype = 'As' then
+  begin
+    i:=pos(')',nam);
+    if i>0 then begin
+      enum:=copy(nam,1,i-1);
+      enum:=trim(StringReplace(enum,'(','',[]));
+      ename:=nam;
+      delete(ename,1,i);
+      ename:=trim(ename);
+    end
+    else begin
+      ename:=trim(nam);
+      enum:='';
+    end;
+    if sc.cdb.GetAstExt(ename, enum, efam,sh,sg,ediam,eperiod,amin,amax,u) then begin
+      emagn:=sc.planet.AsteroidMag(phase,dst,rr,StrToFloat(sh),StrToFloat(sg));
+      txt:=txt + html_br + html_b + rsInformationF2+ blank +
+           '<a href="' + URL_Asteroid_Lightcurve_Database_Info + '">' +
+           'Asteroid Lightcurve Database'+ '</a>' + ':' + htms_b + html_br;
+      txt:=txt + html_b + rsFamily +': ' + htms_b + efam + html_br;
+      txt:=txt + html_b + rsDiameter +': ' + htms_b + ediam + blank + rsKm + html_br;
+      txt:=txt + html_b + rsMagnitude +': ' + htms_b + FormatFloat(f2,emagn) + html_br;
+      txt:=txt + html_b + rsPeriod +': ' + htms_b + eperiod + blank + rsHours + html_br;
+      if amin<>'' then txt:=txt + html_b + rsAmplitudeMin +': ' + htms_b + amin + html_br;
+      if amax<>'' then txt:=txt + html_b + rsAmplitudeMax +': ' + htms_b + amax + html_br;
+      txt:=txt + html_b + rsQualityFlag +': ' + htms_b + u + html_br;
+    end;
+  end;
+
   if not cmain.SimpleDetail then
   begin
     // coordinates
@@ -4507,35 +4537,6 @@ begin
         end;
         txt := txt + buf2 + html_br;
       until buf = '';
-    end;
-    // Asteroid extension
-    if otype = 'As' then
-    begin
-      i:=pos(')',nam);
-      if i>0 then begin
-        enum:=copy(nam,1,i-1);
-        enum:=trim(StringReplace(enum,'(','',[]));
-        ename:=nam;
-        delete(ename,1,i);
-        ename:=trim(ename);
-      end
-      else begin
-        ename:=trim(nam);
-        enum:='';
-      end;
-      if sc.cdb.GetAstExt(ename, enum, efam,sh,sg,ediam,eperiod,amin,amax,u) then begin
-        emagn:=sc.planet.AsteroidMag(phase,dst,rr,StrToFloat(sh),StrToFloat(sg));
-        txt:=txt + html_br + html_b + rsInformationF2+ blank +
-             '<a href="' + URL_Asteroid_Lightcurve_Database_Info + '">' +
-             'Asteroid Lightcurve Database'+ '</a>' + ':' + htms_b + html_br;
-        txt:=txt + html_b + rsFamily +': ' + htms_b + efam + html_br;
-        txt:=txt + html_b + rsDiameter +': ' + htms_b + ediam + blank + rsKm + html_br;
-        txt:=txt + html_b + rsMagnitude +': ' + htms_b + FormatFloat(f2,emagn) + html_br;
-        txt:=txt + html_b + rsPeriod +': ' + htms_b + eperiod + blank + rsHours + html_br;
-        if amin<>'' then txt:=txt + html_b + rsAmplitudeMin +': ' + htms_b + amin + html_br;
-        if amax<>'' then txt:=txt + html_b + rsAmplitudeMax +': ' + htms_b + amax + html_br;
-        txt:=txt + html_b + rsQualityFlag +': ' + htms_b + u + html_br;
-      end;
     end;
   end;
 

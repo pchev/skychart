@@ -674,7 +674,7 @@ begin
          readln(f, buf);
          anum:=trim(copy(buf,1,8));
          aname:=trim(copy(buf,10,20));
-         fam:=trim(copy(buf,39,4));
+         fam:=trim(copy(buf,39,5));
          h:=trim(copy(buf,61,6));
          g:=trim(copy(buf,69,6));
          diam:=trim(copy(buf,77,8));
