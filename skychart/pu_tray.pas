@@ -93,9 +93,9 @@ uses pu_clock, pu_calendar;
 
 procedure Tf_tray.SetLang;
 begin
-  ldeg := rsdeg;
-  lmin := rsmin;
-  lsec := rssec;
+  ldeg := #$C2#$B0;
+  lmin := '''';
+  lsec := '"';
   Caption := rsSkychartIcon;
   TabSheet1.Caption := rsAppearance;
   RadioGroup2.Caption := rsIconSize;
