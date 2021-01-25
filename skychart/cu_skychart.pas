@@ -8661,7 +8661,7 @@ begin
     if catalog.cfgcat.NebMagMax < 90 then
       Result := Result + '/' + formatfloat(f1, catalog.cfgcat.NebMagMax);
     if catalog.cfgcat.NebSizeMin > 0 then
-      Result := Result + ',' + formatfloat(f1, catalog.cfgcat.NebSizeMin) + rsmin;
+      Result := Result + ',' + formatfloat(f1, catalog.cfgcat.NebSizeMin) + lmin;
   end;
   Result := Result + sep + rsFOV2 + detostr(cfgsc.fov * rad2deg);
 end;

@@ -9314,9 +9314,9 @@ procedure Tf_main.SetLang;
 var
   i: integer;
 begin
-  ldeg := rsdeg;
-  lmin := rsmin;
-  lsec := rssec;
+  ldeg := #$C2#$B0;
+  lmin := '''';
+  lsec := '"';
   // Tool bar
   ToolBarMain.Caption := rsMainBar;
   ToolBarObj.Caption := rsObjectBar;

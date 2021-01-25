@@ -704,7 +704,7 @@ begin
     if am < 1 then
       am := 1;
     Faltitude := 90 - rad2deg * arccos(1 / am);
-    label2.Caption := rsAltitude + ': ' + formatfloat('0', Faltitude) + rsdeg;
+    label2.Caption := rsAltitude + ': ' + formatfloat('0', Faltitude) + ldeg;
   end;
   for i := 1 to StringGrid1.RowCount - 1 do
   begin

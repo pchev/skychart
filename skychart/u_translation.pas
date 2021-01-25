@@ -12,9 +12,6 @@ procedure GetDefaultLanguage(var buf1, buf2: string);
 function Translate(lang: string = ''): string;
 
 resourcestring
-  rsdeg = 'd';
-  rsmin = 'm';
-  rssec = 's';
   rsHour = 'Hour';
   rsMinute = 'Minute';
   rsSecond = 'Second';

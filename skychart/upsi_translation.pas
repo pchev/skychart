@@ -17,9 +17,6 @@ uses u_translation;
 
 procedure SIRegister_translation(CL: TPSPascalCompiler);
 begin
-  CL.AddConstantN('rsdeg', 'String').SetString(rsdeg);
-  CL.AddConstantN('rsmin', 'String').SetString(rsmin);
-  CL.AddConstantN('rssec', 'String').SetString(rssec);
   CL.AddConstantN('rsHour', 'String').SetString(rsHour);
   CL.AddConstantN('rsMinute', 'String').SetString(rsMinute);
   CL.AddConstantN('rsSecond', 'String').SetString(rsSecond);
