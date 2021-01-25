@@ -472,7 +472,7 @@ begin
   appmsg[15] := rsMorning;
   appmsg[16] := rsEvening;
   appmsg[17] := rsElong;
-  appmsg[18] := rsPhase;
+  appmsg[18] := rsPhaseAngle;
   appmsg[19] := rsWarningCalcu;
   appmsg[20] := rsDatesMayTake;
   appmsg[21] := rsAz;

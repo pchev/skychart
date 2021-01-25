@@ -183,7 +183,7 @@ begin
   CL.AddConstantN('rsCentralStarV', 'String').SetString(rsCentralStarV);
   CL.AddConstantN('rsDiameter', 'String').SetString(rsDiameter);
   CL.AddConstantN('rsIlluminatedF', 'String').SetString(rsIlluminatedF);
-  CL.AddConstantN('rsPhase', 'String').SetString(rsPhase);
+  CL.AddConstantN('rsPhaseAngle', 'String').SetString(rsPhaseAngle);
   CL.AddConstantN('rsEstimatedTai', 'String').SetString(rsEstimatedTai);
   CL.AddConstantN('rsSolarElongat', 'String').SetString(rsSolarElongat);
   CL.AddConstantN('rsSolarDistanc', 'String').SetString(rsSolarDistanc);

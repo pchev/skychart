@@ -5994,7 +5994,7 @@ begin
     else if key = 'ILLUM' then
       Result := rsIlluminatedF + d + Value
     else if key = 'PHASE' then
-      Result := rsPhase + d + Value
+      Result := rsPhaseAngle + d + Value
     else if key = 'TL' then
       Result := rsEstimatedTai + d + Value
     else if key = 'EL' then

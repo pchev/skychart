@@ -178,7 +178,7 @@ resourcestring
   rsCentralStarV = 'Central star V magnitude';
   rsDiameter = 'Diameter';
   rsIlluminatedF = 'Illuminated fraction';
-  rsPhase = 'Phase';
+  rsPhaseAngle = 'Phase angle';
   rsEstimatedTai = 'Estimated tail length';
   rsSolarElongat = 'Solar elongation';
   rsSolarDistanc = 'Solar distance';
