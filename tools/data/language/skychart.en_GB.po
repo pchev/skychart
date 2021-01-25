@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-01-23 17:45+0000\n"
+"POT-Creation-Date: 2021-01-25 15:03+0000\n"
 "PO-Revision-Date: 2020-09-11 15:30+0000\n"
 "Last-Translator: Stephan Woidowski <swoidowski@t-online.de>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-01-23 17:52+0000\n"
-"X-Generator: Launchpad (build 2d1d5e352f0d063d660df2300e31f66bed027fa5)\n"
+"X-Launchpad-Export-Date: 2021-01-25 15:08+0000\n"
+"X-Generator: Launchpad (build e00fb96b2e64b75333d0178ec15cb78e5aadb64d)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1423,10 +1423,6 @@ msgstr "Default outline parameters"
 #: u_translation.rsdefaultsizea
 msgid "Default size (arcsec)"
 msgstr ""
-
-#: u_translation.rsdeg
-msgid "d"
-msgstr "d"
 
 #: u_translation.rsdegree
 msgid "Degree"
@@ -3216,10 +3212,6 @@ msgstr "Milky Way"
 msgid "million Km."
 msgstr ""
 
-#: u_translation.rsmin
-msgid "m"
-msgstr "m"
-
 #: u_translation.rsmin2
 msgid "min"
 msgstr "min"
@@ -3832,9 +3824,9 @@ msgstr "Period"
 msgid "Personal data"
 msgstr ""
 
-#: u_translation.rsphase
-msgid "Phase"
-msgstr "Phase"
+#: u_translation.rsphaseangle
+msgid "Phase angle"
+msgstr ""
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
@@ -4635,10 +4627,6 @@ msgstr ""
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
 msgstr ""
-
-#: u_translation.rssec
-msgid "s"
-msgstr "s"
 
 #: u_translation.rssec2
 msgid "Sec."

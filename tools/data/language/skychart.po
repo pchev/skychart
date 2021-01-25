@@ -1,15 +1,3 @@
-#: u_translation:rsdeg
-msgid "d"
-msgstr ""
-
-#: u_translation:rsmin
-msgid "m"
-msgstr ""
-
-#: u_translation:rssec
-msgid "s"
-msgstr ""
-
 #: u_translation:rshour
 msgid "Hour"
 msgstr ""
@@ -674,8 +662,8 @@ msgstr ""
 msgid "Illuminated fraction"
 msgstr ""
 
-#: u_translation:rsphase
-msgid "Phase"
+#: u_translation:rsphaseangle
+msgid "Phase angle"
 msgstr ""
 
 #: u_translation:rsestimatedtai

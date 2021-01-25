@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-23 17:45+0000\n"
+"POT-Creation-Date: 2021-01-25 15:03+0000\n"
 "PO-Revision-Date: 2020-05-10 13:41+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-01-23 17:52+0000\n"
-"X-Generator: Launchpad (build 2d1d5e352f0d063d660df2300e31f66bed027fa5)\n"
+"X-Launchpad-Export-Date: 2021-01-25 15:08+0000\n"
+"X-Generator: Launchpad (build e00fb96b2e64b75333d0178ec15cb78e5aadb64d)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -1424,10 +1424,6 @@ msgstr "Parâmetros do esboço padrão"
 #: u_translation.rsdefaultsizea
 msgid "Default size (arcsec)"
 msgstr "Tamanho padrão (arcsec)"
-
-#: u_translation.rsdeg
-msgid "d"
-msgstr "°"
 
 #: u_translation.rsdegree
 msgid "Degree"
@@ -3217,10 +3213,6 @@ msgstr "Via Láctea"
 msgid "million Km."
 msgstr "milhões de Km."
 
-#: u_translation.rsmin
-msgid "m"
-msgstr "'"
-
 #: u_translation.rsmin2
 msgid "min"
 msgstr "mín"
@@ -3833,9 +3825,9 @@ msgstr "Período"
 msgid "Personal data"
 msgstr "Dados pessoais"
 
-#: u_translation.rsphase
-msgid "Phase"
-msgstr "Fase"
+#: u_translation.rsphaseangle
+msgid "Phase angle"
+msgstr ""
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
@@ -4636,10 +4628,6 @@ msgstr "Buscar raio"
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
 msgstr "Pesquisar atualização de software"
-
-#: u_translation.rssec
-msgid "s"
-msgstr "\""
 
 #: u_translation.rssec2
 msgid "Sec."
