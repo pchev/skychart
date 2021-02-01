@@ -10,5 +10,5 @@
 #
 
 
-cat IAU-CSN.txt |grep -v \# | grep  HR | cut -c 19-28,1-18 | sed 's/^\(.*\)HR\(.*\)$/\2 \1/'> StarsNames.txt
+cat IAU-CSN.txt |grep -v \# | grep  HR | cut -c 37-46,1-18 | sed 's/^\(.*\)HR\(.*\)$/\2 \1/'> StarsNames.txt
 
