@@ -1,32 +1,31 @@
 object f_configobservatory: Tf_configobservatory
   Left = 552
-  Height = 577
+  Height = 583
   Top = 124
-  Width = 496
+  Width = 501
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Observatory'
-  ClientHeight = 577
-  ClientWidth = 496
-  DesignTimePPI = 95
+  ClientHeight = 583
+  ClientWidth = 501
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Panel1: TPanel
     Left = 0
-    Height = 49
-    Top = 528
-    Width = 496
+    Height = 50
+    Top = 533
+    Width = 501
     Align = alBottom
-    ClientHeight = 49
-    ClientWidth = 496
+    ClientHeight = 46
+    ClientWidth = 497
     ParentFont = False
     TabOrder = 0
     object Button1: TButton
-      Left = 187
+      Left = 189
       Height = 25
       Top = 10
-      Width = 82
+      Width = 83
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'OK'
@@ -36,10 +35,10 @@ object f_configobservatory: Tf_configobservatory
       TabOrder = 1
     end
     object Button2: TButton
-      Left = 290
+      Left = 293
       Height = 25
       Top = 10
-      Width = 82
+      Width = 83
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
@@ -48,124 +47,27 @@ object f_configobservatory: Tf_configobservatory
       TabOrder = 2
     end
     object Button3: TButton
-      Left = 393
+      Left = 397
       Height = 25
       Top = 10
-      Width = 82
+      Width = 83
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
-      Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
       ParentFont = False
       TabOrder = 3
     end
     object Button4: TButton
-      Left = 90
+      Left = 91
       Height = 25
       Top = 10
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Help'
       OnClick = Button4Click
       ParentFont = False
       TabOrder = 0
-    end
-  end
-  inline f_config_observatory1: Tf_config_observatory
-    Height = 528
-    Width = 496
-    Align = alClient
-    ClientHeight = 528
-    ClientWidth = 496
-    TabOrder = 1
-    inherited MainPanel: TPanel
-      Height = 528
-      Width = 496
-      ClientHeight = 528
-      ClientWidth = 496
-      inherited PageControl1: TPageControl
-        Height = 526
-        Width = 494
-        inherited Page1: TTabSheet
-          ClientHeight = 522
-          ClientWidth = 484
-          inherited Latitude: TGroupBox
-            inherited Label58: TLabel
-              Height = 17
-              Width = 47
-            end
-            inherited hemis: TComboBox
-              Height = 29
-            end
-            inherited latdeg: TFloatEdit
-              Height = 29
-            end
-            inherited latmin: TLongEdit
-              Height = 29
-            end
-            inherited latsec: TFloatEdit
-              Height = 29
-            end
-          end
-          inherited Longitude: TGroupBox
-            inherited Label61: TLabel
-              Height = 17
-              Width = 47
-            end
-            inherited long: TComboBox
-              Height = 29
-            end
-            inherited longdeg: TFloatEdit
-              Height = 29
-            end
-            inherited longmin: TLongEdit
-              Height = 29
-            end
-            inherited longsec: TFloatEdit
-              Height = 29
-            end
-          end
-          inherited Altitude: TGroupBox
-            inherited Label70: TLabel
-              Height = 17
-              Width = 44
-            end
-            inherited altmeter: TFloatEdit
-              Height = 29
-            end
-          end
-          inherited timezone: TGroupBox
-            inherited TZComboBox: TComboBox
-              Height = 33
-            end
-            inherited CountryTZ: TCheckBox
-              Width = 143
-            end
-            inherited countrylist: TComboBox
-              Height = 33
-            end
-          end
-          inherited ObsName: TEdit
-            Height = 29
-          end
-          inherited ComboBox1: TComboBox
-            Height = 33
-          end
-          inherited Label2: TLabel
-            Height = 17
-            Width = 52
-          end
-          inherited Label3: TLabel
-            Height = 17
-            Width = 39
-          end
-        end
-        inherited Page2: TTabSheet
-          ClientHeight = 522
-          ClientWidth = 484
-        end
-      end
     end
   end
 end

@@ -1,45 +1,43 @@
 object f_configcalendar: Tf_configcalendar
   Left = 243
-  Height = 577
+  Height = 583
   Top = 124
-  Width = 490
+  Width = 495
   ActiveControl = Button7
   BorderStyle = bsSingle
   Caption = 'f_configcalendar'
-  ClientHeight = 577
-  ClientWidth = 490
-  DesignTimePPI = 95
+  ClientHeight = 583
+  ClientWidth = 495
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Panel1: TPanel
     Left = 0
-    Height = 53
-    Top = 524
-    Width = 490
+    Height = 54
+    Top = 529
+    Width = 495
     Align = alBottom
-    ClientHeight = 53
-    ClientWidth = 490
+    ClientHeight = 50
+    ClientWidth = 491
     ParentFont = False
     TabOrder = 0
     object Button1: TButton
-      Left = 203
+      Left = 205
       Height = 25
       Top = 12
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'OK'
-      Default = True
       ModalResult = 1
       ParentFont = False
       TabOrder = 1
     end
     object Button2: TButton
-      Left = 298
+      Left = 301
       Height = 25
       Top = 12
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
@@ -48,59 +46,27 @@ object f_configcalendar: Tf_configcalendar
       TabOrder = 2
     end
     object Button3: TButton
-      Left = 393
+      Left = 397
       Height = 25
       Top = 12
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
-      Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
       ParentFont = False
       TabOrder = 3
     end
     object Button7: TButton
-      Left = 108
+      Left = 109
       Height = 25
       Top = 12
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Help'
       OnClick = Button7Click
       ParentFont = False
       TabOrder = 0
-    end
-  end
-  inline f_config_calendar1: Tf_config_calendar
-    Height = 524
-    Width = 490
-    Align = alClient
-    ClientHeight = 524
-    ClientWidth = 490
-    TabOrder = 1
-    inherited Mainpanel: TPanel
-      Height = 524
-      Width = 490
-      ClientHeight = 524
-      ClientWidth = 490
-      inherited PageControl1: TPageControl
-        Height = 522
-        Width = 488
-        inherited TabSheet1: TTabSheet
-          ClientHeight = 518
-          ClientWidth = 478
-          inherited GroupBox1: TGroupBox
-            inherited LongEdit1: TLongEdit
-              Height = 29
-            end
-            inherited Label2: TLabel
-              Height = 17
-              Width = 84
-            end
-          end
-        end
-      end
     end
   end
 end

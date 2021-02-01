@@ -18,7 +18,6 @@ type
     Button2: TButton;
     Button3: TButton;
     Button7: TButton;
-    f_config_calendar1: Tf_config_calendar;
     Panel1: TPanel;
     procedure Button2Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
@@ -29,6 +28,7 @@ type
     { private declarations }
   public
     { public declarations }
+    f_config_calendar1: Tf_config_calendar;
     procedure SetLang;
   end;
 
@@ -67,6 +67,9 @@ end;
 
 procedure Tf_configcalendar.FormCreate(Sender: TObject);
 begin
+  f_config_calendar1:= Tf_config_calendar.Create(Self);
+  f_config_calendar1.parent:=Self ;
+  f_config_calendar1.Align:=alClient;
   ScaleDPI(Self);
   SetLang;
 end;

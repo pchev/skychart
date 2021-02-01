@@ -1,47 +1,45 @@
 object f_configcatalog: Tf_configcatalog
   Left = 544
-  Height = 574
+  Height = 580
   Top = 124
-  Width = 495
+  Width = 500
   ActiveControl = Button4
   BorderStyle = bsSingle
   Caption = 'Catalog'
-  ClientHeight = 574
-  ClientWidth = 495
-  DesignTimePPI = 95
+  ClientHeight = 580
+  ClientWidth = 500
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Panel1: TPanel
     Left = 0
-    Height = 49
-    Top = 525
-    Width = 495
+    Height = 50
+    Top = 530
+    Width = 500
     HelpType = htKeyword
     HelpKeyword = 'help/catalog.html'
     Align = alBottom
-    ClientHeight = 49
-    ClientWidth = 495
+    ClientHeight = 46
+    ClientWidth = 496
     ParentFont = False
     TabOrder = 0
     object Button1: TButton
-      Left = 238
+      Left = 240
       Height = 25
       Top = 15
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'OK'
-      Default = True
       ModalResult = 1
       ParentFont = False
       TabOrder = 1
     end
     object Button2: TButton
-      Left = 325
+      Left = 328
       Height = 25
       Top = 15
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
@@ -50,82 +48,28 @@ object f_configcatalog: Tf_configcatalog
       TabOrder = 2
     end
     object Button3: TButton
-      Left = 412
+      Left = 416
       Height = 25
       Top = 15
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
-      Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
       ParentFont = False
       TabOrder = 3
     end
     object Button4: TButton
-      Left = 143
+      Left = 144
       Height = 25
       Top = 15
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'Help'
       OnClick = Button4Click
       ParentFont = False
       TabOrder = 0
-    end
-  end
-  inline f_config_catalog1: Tf_config_catalog
-    Height = 525
-    Width = 495
-    Align = alClient
-    ClientHeight = 525
-    ClientWidth = 495
-    TabOrder = 1
-    inherited MainPanel: TPanel
-      Height = 525
-      Width = 495
-      ClientHeight = 525
-      ClientWidth = 495
-      inherited PageControl1: TPageControl
-        Height = 480
-        Width = 493
-        ActivePage = f_config_catalog1.Page2
-        TabIndex = 0
-        inherited Page2: TTabSheet
-          ClientHeight = 476
-          ClientWidth = 483
-        end
-        inherited Page3: TTabSheet
-          ClientHeight = 476
-          ClientWidth = 483
-        end
-        inherited Page1: TTabSheet
-          ClientHeight = 476
-          ClientWidth = 483
-        end
-        inherited Page1a: TTabSheet
-          ClientHeight = 476
-          ClientWidth = 483
-        end
-        inherited Page1b: TTabSheet
-          ClientHeight = 476
-          ClientWidth = 483
-        end
-        inherited Page5: TTabSheet
-          ClientHeight = 476
-          ClientWidth = 483
-        end
-        inherited Page4: TTabSheet
-          ClientHeight = 476
-          ClientWidth = 483
-        end
-      end
-      inherited FOVPanel: TPanel
-        Top = 481
-        Width = 493
-        ClientWidth = 493
-      end
     end
   end
 end

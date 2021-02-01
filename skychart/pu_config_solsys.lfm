@@ -1,46 +1,44 @@
 object f_configsolsys: Tf_configsolsys
   Left = 534
-  Height = 570
+  Height = 576
   Top = 124
-  Width = 495
+  Width = 500
   ActiveControl = Button4
   BorderStyle = bsSingle
   Caption = 'Solar System'
-  ClientHeight = 570
-  ClientWidth = 495
-  DesignTimePPI = 95
+  ClientHeight = 576
+  ClientWidth = 500
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Panel1: TPanel
     Left = 0
-    Height = 49
-    Top = 521
-    Width = 495
+    Height = 50
+    Top = 526
+    Width = 500
     Align = alBottom
-    ClientHeight = 49
-    ClientWidth = 495
+    ClientHeight = 46
+    ClientWidth = 496
     ParentFont = False
     TabOrder = 0
     object Button1: TButton
-      Left = 207
+      Left = 209
       Height = 25
       Top = 12
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'OK'
-      Default = True
       ModalResult = 1
       OnClick = Button1Click
       ParentFont = False
       TabOrder = 1
     end
     object Button2: TButton
-      Left = 302
+      Left = 305
       Height = 25
       Top = 12
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
@@ -49,510 +47,27 @@ object f_configsolsys: Tf_configsolsys
       TabOrder = 2
     end
     object Button3: TButton
-      Left = 398
+      Left = 402
       Height = 25
       Top = 12
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
-      Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
       ParentFont = False
       TabOrder = 3
     end
     object Button4: TButton
-      Left = 112
+      Left = 113
       Height = 25
       Top = 12
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Help'
       OnClick = Button4Click
       ParentFont = False
       TabOrder = 0
-    end
-  end
-  inline f_config_solsys1: Tf_config_solsys
-    Height = 521
-    Width = 495
-    Align = alClient
-    ClientHeight = 521
-    ClientWidth = 495
-    TabOrder = 1
-    inherited MainPanel: TPanel
-      Height = 521
-      Width = 495
-      ClientHeight = 521
-      ClientWidth = 495
-      inherited PageControl1: TPageControl
-        Height = 519
-        Width = 493
-        inherited Page1: TTabSheet
-          ClientHeight = 515
-          ClientWidth = 483
-          inherited planetdir: TDirectoryEdit
-            Height = 28
-            Constraints.MaxHeight = 28
-          end
-          inherited CheckBoxPluto: TCheckBox
-            Height = 23
-            Width = 125
-          end
-          inherited smallsat: TCheckBox
-            Height = 23
-            Width = 293
-          end
-          inherited GroupBox2: TGroupBox
-            inherited EditEph: TEdit
-              Height = 28
-              Constraints.MaxHeight = 28
-            end
-          end
-        end
-        inherited Page2: TTabSheet
-          ClientHeight = 515
-          ClientWidth = 483
-          inherited SunPanel: TPanel
-            inherited ComboBox1: TComboBox
-              Height = 28
-              Constraints.MaxHeight = 28
-            end
-            inherited ComboBox2: TComboBox
-              Height = 28
-              Constraints.MaxHeight = 28
-            end
-          end
-          inherited GRSPanel: TPanel
-            inherited GRS: TFloatEdit
-              Height = 28
-              Constraints.MaxHeight = 28
-            end
-            inherited BtnDownloadGRS: TBitBtn
-              Height = 28
-              Constraints.MaxHeight = 28
-            end
-            inherited GRSdrift: TFloatEdit
-              Height = 28
-              Constraints.MaxHeight = 28
-            end
-            inherited GRSJDDate: TJDDatePicker
-              Height = 28
-              Constraints.MaxHeight = 28
-            end
-          end
-        end
-        inherited Page3: TTabSheet
-          ClientHeight = 515
-          ClientWidth = 483
-          inherited ComPageControl: TPageControl
-            Height = 515
-            Width = 483
-            ActivePage = f_config_solsys1.comsetting
-            TabIndex = 0
-            inherited comsetting: TTabSheet
-              ClientHeight = 511
-              ClientWidth = 479
-              inherited GroupBox13: TGroupBox
-                inherited Label216: TLabel
-                  Height = 19
-                  Width = 74
-                end
-                inherited comlimitmag: TFloatEdit
-                  Height = 28
-                  Constraints.MaxHeight = 28
-                end
-                inherited showcom: TCheckBox
-                  Height = 23
-                  Width = 182
-                end
-                inherited commagdiff: TFloatEdit
-                  Height = 28
-                  Constraints.MaxHeight = 28
-                end
-              end
-            end
-            inherited comload: TTabSheet
-              ClientHeight = 511
-              ClientWidth = 479
-              inherited Label232: TLabel
-                Height = 19
-                Width = 63
-              end
-              inherited ComPageControl1: TPageControl
-                inherited TabSheet1: TTabSheet
-                  ClientHeight = 92
-                  ClientWidth = 441
-                  inherited Label2: TLabel
-                    Height = 19
-                  end
-                end
-                inherited TabSheet2: TTabSheet
-                  ClientHeight = 92
-                  ClientWidth = 441
-                  inherited comfile: TFileNameEdit
-                    Height = 28
-                    Constraints.MaxHeight = 28
-                  end
-                end
-              end
-            end
-            inherited comdelete: TTabSheet
-              ClientHeight = 511
-              ClientWidth = 479
-              inherited Label238: TLabel
-                Height = 19
-                Width = 63
-              end
-              inherited GroupBox16: TGroupBox
-                inherited comelemlist: TComboBox
-                  Height = 28
-                  Constraints.MaxHeight = 28
-                end
-              end
-              inherited GroupBox17: TGroupBox
-                inherited Label239: TLabel
-                  Height = 19
-                  Width = 216
-                end
-              end
-            end
-            inherited Addsinglecom: TTabSheet
-              ClientHeight = 511
-              ClientWidth = 479
-              inherited Label241: TLabel
-                Width = 366
-              end
-              inherited Label242: TLabel
-                Width = 73
-              end
-              inherited Label244: TLabel
-                Width = 111
-              end
-              inherited Label245: TLabel
-                Width = 63
-              end
-              inherited Label247: TLabel
-                Width = 140
-              end
-              inherited comid: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited comh: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited comg: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited comep: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited comperi: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited comnode: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited comi: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited comec: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited comq: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited comnam: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited comeq: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited AddCom: TButton
-                Constraints.MaxHeight = 28
-              end
-              inherited comt_y: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited comt_m: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited comt_d: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-            end
-          end
-        end
-        inherited Page4: TTabSheet
-          ClientHeight = 515
-          ClientWidth = 483
-          inherited AstPageControl: TPageControl
-            Height = 515
-            Width = 483
-            ActivePage = f_config_solsys1.astsetting
-            TabIndex = 0
-            inherited astsetting: TTabSheet
-              ClientHeight = 511
-              ClientWidth = 479
-              inherited GroupBox9: TGroupBox
-                inherited Label212: TLabel
-                  Height = 19
-                  Width = 85
-                end
-                inherited astlimitmag: TFloatEdit
-                  Height = 28
-                  Constraints.MaxHeight = 28
-                end
-                inherited showast: TCheckBox
-                  Height = 23
-                  Width = 193
-                end
-                inherited astmagdiff: TFloatEdit
-                  Height = 28
-                  Constraints.MaxHeight = 28
-                end
-                inherited AstNeo: TCheckBox
-                  Height = 23
-                  Width = 380
-                end
-              end
-            end
-            inherited astload: TTabSheet
-              ClientHeight = 511
-              ClientWidth = 479
-              inherited Label206: TLabel
-                Height = 19
-                Width = 63
-              end
-              inherited GroupBox1: TGroupBox
-                inherited Label215: TLabel
-                  Height = 19
-                  Width = 133
-                end
-                inherited astnumbered: TCheckBox
-                  Height = 23
-                  Width = 178
-                end
-                inherited aststoperr: TCheckBox
-                  Height = 23
-                  Width = 157
-                end
-                inherited astlimitbox: TCheckBox
-                  Height = 23
-                  Width = 138
-                end
-                inherited astlimit: TLongEdit
-                  Height = 28
-                  Constraints.MaxHeight = 28
-                end
-              end
-              inherited AstPageControl2: TPageControl
-                inherited TabSheet3: TTabSheet
-                  ClientHeight = 92
-                  ClientWidth = 441
-                  inherited Label1: TLabel
-                    Height = 19
-                  end
-                end
-                inherited TabSheet4: TTabSheet
-                  ClientHeight = 92
-                  ClientWidth = 441
-                  inherited mpcfile: TFileNameEdit
-                    Height = 28
-                    Constraints.MaxHeight = 28
-                  end
-                end
-              end
-            end
-            inherited astprepare: TTabSheet
-              ClientHeight = 511
-              ClientWidth = 479
-              inherited Label210: TLabel
-                Height = 19
-                Width = 63
-              end
-              inherited GroupBox8: TGroupBox
-                inherited Label7: TLabel
-                  Height = 19
-                  Width = 73
-                end
-                inherited Label207: TLabel
-                  Height = 19
-                  Width = 110
-                end
-                inherited aststrtdate_y: TEdit
-                  Height = 28
-                  Constraints.MaxHeight = 28
-                end
-                inherited aststrtdate_m: TEdit
-                  Height = 28
-                  Constraints.MaxHeight = 28
-                end
-                inherited astnummonth: TMouseUpDown
-                  Height = 28
-                end
-                inherited astnummonthEdit: TEdit
-                  Height = 28
-                  Constraints.MaxHeight = 28
-                end
-              end
-            end
-            inherited astdelete: TTabSheet
-              ClientHeight = 511
-              ClientWidth = 479
-              inherited GroupBox10: TGroupBox
-                inherited astelemlist: TComboBox
-                  Height = 28
-                  Constraints.MaxHeight = 28
-                end
-              end
-              inherited GroupBox12: TGroupBox
-                inherited astdeldate_y: TEdit
-                  Left = 248
-                  Height = 28
-                  Constraints.MaxHeight = 28
-                end
-                inherited astdeldate_m: TEdit
-                  Left = 304
-                  Height = 28
-                  Width = 33
-                  Constraints.MaxHeight = 28
-                end
-              end
-            end
-            inherited AddsingleAst: TTabSheet
-              ClientHeight = 511
-              ClientWidth = 479
-              inherited Label217: TLabel
-                Height = 19
-                Width = 366
-              end
-              inherited Label218: TLabel
-                Height = 19
-                Width = 73
-              end
-              inherited Label219: TLabel
-                Height = 19
-                Width = 134
-              end
-              inherited Label220: TLabel
-                Height = 19
-                Width = 111
-              end
-              inherited Label221: TLabel
-                Height = 19
-                Width = 63
-              end
-              inherited Label222: TLabel
-                Height = 19
-                Width = 89
-              end
-              inherited Label223: TLabel
-                Height = 19
-                Width = 140
-              end
-              inherited Label224: TLabel
-                Height = 19
-                Width = 162
-              end
-              inherited Label225: TLabel
-                Height = 19
-                Width = 63
-              end
-              inherited Label226: TLabel
-                Height = 19
-                Width = 68
-              end
-              inherited Label227: TLabel
-                Height = 19
-                Width = 91
-              end
-              inherited Label228: TLabel
-                Height = 19
-                Width = 60
-              end
-              inherited Label229: TLabel
-                Height = 19
-                Width = 49
-              end
-              inherited Label230: TLabel
-                Height = 19
-                Width = 36
-              end
-              inherited astid: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited asth: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited astg: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited astep: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited astma: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited astperi: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited astnode: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited asti: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited astec: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited astax: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited astref: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited astnam: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-              inherited asteq: TEdit
-                Height = 28
-                Constraints.MaxHeight = 28
-              end
-            end
-          end
-        end
-      end
-    end
-    inherited DownloadDialog1: TDownloadDialog
-      left = 400
-      top = 8
     end
   end
 end

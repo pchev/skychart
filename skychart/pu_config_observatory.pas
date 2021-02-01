@@ -40,7 +40,6 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
-    f_config_observatory1: Tf_config_observatory;
     Panel1: TPanel;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -52,6 +51,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    f_config_observatory1: Tf_config_observatory;
     procedure SetLang;
   end;
 
@@ -71,6 +71,9 @@ end;
 
 procedure Tf_configobservatory.FormCreate(Sender: TObject);
 begin
+  f_config_observatory1:= Tf_config_observatory.Create(Self);
+  f_config_observatory1.parent:=Self ;
+  f_config_observatory1.Align:=alClient;
   ScaleDPI(Self);
   SetLang;
 end;

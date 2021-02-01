@@ -1,46 +1,44 @@
 object f_configtime: Tf_configtime
   Left = 504
-  Height = 577
+  Height = 583
   Top = 124
-  Width = 491
+  Width = 496
   ActiveControl = Button7
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Date / Time'
-  ClientHeight = 577
-  ClientWidth = 491
-  DesignTimePPI = 95
+  ClientHeight = 583
+  ClientWidth = 496
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Panel1: TPanel
     Left = 0
-    Height = 53
-    Top = 524
-    Width = 491
+    Height = 54
+    Top = 529
+    Width = 496
     Align = alBottom
-    ClientHeight = 53
-    ClientWidth = 491
+    ClientHeight = 50
+    ClientWidth = 492
     ParentFont = False
     TabOrder = 0
     object Button1: TButton
-      Left = 204
+      Left = 206
       Height = 25
       Top = 12
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'OK'
-      Default = True
       ModalResult = 1
       ParentFont = False
       TabOrder = 1
     end
     object Button2: TButton
-      Left = 299
+      Left = 302
       Height = 25
       Top = 12
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
@@ -49,78 +47,27 @@ object f_configtime: Tf_configtime
       TabOrder = 2
     end
     object Button3: TButton
-      Left = 394
+      Left = 398
       Height = 25
       Top = 12
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
-      Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
       ParentFont = False
       TabOrder = 3
     end
     object Button7: TButton
-      Left = 109
+      Left = 110
       Height = 25
       Top = 12
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Help'
       OnClick = Button7Click
       ParentFont = False
       TabOrder = 0
-    end
-  end
-  inline f_config_time1: Tf_config_time
-    Height = 524
-    Width = 491
-    Align = alClient
-    ClientHeight = 524
-    ClientWidth = 491
-    TabOrder = 1
-    inherited MainPanel: TPanel
-      Height = 524
-      Width = 491
-      ClientHeight = 524
-      ClientWidth = 491
-      inherited PageControl1: TPageControl
-        Height = 524
-        Width = 491
-        inherited Page1: TTabSheet
-          ClientHeight = 520
-          ClientWidth = 481
-          inherited Panel9: TPanel
-            inherited ADBC: TRadioGroup
-              ClientHeight = 37
-            end
-          end
-        end
-        inherited Page2: TTabSheet
-          ClientHeight = 520
-          ClientWidth = 481
-          inherited SimObj: TCheckListBox
-            Data = {
-              0C000000000000000000000000000000
-            }
-          end
-          inherited CheckGroup1: TCheckGroup
-            Data = {
-              03000000020202
-            }
-          end
-          inherited CheckGroup2: TCheckGroup
-            Data = {
-              06000000020202020202
-            }
-          end
-        end
-        inherited Page3: TTabSheet
-          ClientHeight = 520
-          ClientWidth = 481
-        end
-      end
     end
   end
 end

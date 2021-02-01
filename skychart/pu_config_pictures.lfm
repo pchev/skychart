@@ -1,45 +1,43 @@
 object f_configpictures: Tf_configpictures
   Left = 527
-  Height = 570
+  Height = 576
   Top = 124
-  Width = 496
+  Width = 501
   ActiveControl = Button4
   BorderStyle = bsSingle
   Caption = 'Pictures'
-  ClientHeight = 570
-  ClientWidth = 496
-  DesignTimePPI = 95
+  ClientHeight = 576
+  ClientWidth = 501
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Panel2: TPanel
     Left = 0
-    Height = 49
-    Top = 521
-    Width = 496
+    Height = 50
+    Top = 526
+    Width = 501
     Align = alBottom
-    ClientHeight = 49
-    ClientWidth = 496
+    ClientHeight = 46
+    ClientWidth = 497
     ParentFont = False
     TabOrder = 0
     object Button1: TButton
-      Left = 202
+      Left = 204
       Height = 25
       Top = 11
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'OK'
-      Default = True
       ModalResult = 1
       ParentFont = False
       TabOrder = 1
     end
     object Button2: TButton
-      Left = 297
+      Left = 300
       Height = 25
       Top = 11
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
       Caption = 'Apply'
@@ -48,98 +46,27 @@ object f_configpictures: Tf_configpictures
       TabOrder = 2
     end
     object Button3: TButton
-      Left = 392
+      Left = 396
       Height = 25
       Top = 11
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
-      Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
       ParentFont = False
       TabOrder = 3
     end
     object Button4: TButton
-      Left = 107
+      Left = 108
       Height = 25
       Top = 11
-      Width = 74
+      Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Help'
       OnClick = Button4Click
       ParentFont = False
       TabOrder = 0
-    end
-  end
-  inline f_config_pictures1: Tf_config_pictures
-    Height = 521
-    Width = 496
-    Align = alClient
-    ClientHeight = 521
-    ClientWidth = 496
-    TabOrder = 1
-    inherited MainPanel: TPanel
-      Height = 521
-      Width = 496
-      ClientHeight = 521
-      ClientWidth = 496
-      inherited PageControl1: TPageControl
-        Height = 519
-        Width = 494
-        inherited Page1: TTabSheet
-          ClientHeight = 515
-          ClientWidth = 484
-          inherited ProgressPanel: TPanel
-            inherited ProgressCat: TLabel
-              Height = 17
-              Width = 36
-            end
-          end
-          inherited Label50: TLabel
-            Height = 17
-            Width = 230
-          end
-          inherited Label264: TLabel
-            Height = 17
-            Width = 105
-          end
-          inherited Panel11: TPanel
-            inherited Label266: TLabel
-              Height = 17
-              Width = 72
-            end
-            inherited Label268: TLabel
-              Height = 17
-              Width = 55
-            end
-          end
-          inherited ShowImagesBox: TCheckBox
-            Width = 241
-          end
-          inherited imgpath: TDirectoryEdit
-            Height = 29
-          end
-        end
-        inherited Page2: TTabSheet
-          ClientHeight = 515
-          ClientWidth = 484
-        end
-        inherited Page3: TTabSheet
-          ClientHeight = 515
-          ClientWidth = 484
-          inherited GroupBox3: TGroupBox
-            inherited Panel2: TPanel
-              ClientHeight = 249
-              ClientWidth = 466
-            end
-          end
-        end
-        inherited Page4: TTabSheet
-          ClientHeight = 515
-          ClientWidth = 484
-        end
-      end
     end
   end
 end

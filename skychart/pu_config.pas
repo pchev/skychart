@@ -43,13 +43,6 @@ type
   { Tf_config }
 
   Tf_config = class(TForm)
-    f_config_calendar1: Tf_config_calendar;
-    f_config_catalog1: Tf_config_catalog;
-    f_config_chart1: Tf_config_chart;
-    f_config_display1: Tf_config_display;
-    f_config_observatory1: Tf_config_observatory;
-    f_config_system1: Tf_config_system;
-    f_config_time1: Tf_config_time;
     PageControl1: TPageControl;
     PanelConfig: TPanel;
     Panel3: TPanel;
@@ -74,9 +67,6 @@ type
     Apply: TButton;
     CancelBtn: TButton;
     HelpBtn: TButton;
-    f_config_solsys1: Tf_config_solsys;
-    f_config_pictures1: Tf_config_pictures;
-    f_config_internet1: Tf_config_internet;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure HelpBtnClick(Sender: TObject);
@@ -89,6 +79,16 @@ type
     procedure ApplyClick(Sender: TObject);
   private
     { Déclarations privées }
+    f_config_system1: Tf_config_system;
+    f_config_time1: Tf_config_time;
+    f_config_observatory1: Tf_config_observatory;
+    f_config_chart1: Tf_config_chart;
+    f_config_catalog1: Tf_config_catalog;
+    f_config_solsys1: Tf_config_solsys;
+    f_config_display1: Tf_config_display;
+    f_config_pictures1: Tf_config_pictures;
+    f_config_internet1: Tf_config_internet;
+    f_config_calendar1: Tf_config_calendar;
     locktree: boolean;
     Fccat: Tconf_catalog;
     Fcshr: Tconf_shared;
@@ -246,13 +246,43 @@ end;
 
 procedure Tf_config.FormCreate(Sender: TObject);
 begin
-  ScaleDPI(Self);
+  f_config_system1:= Tf_config_system.Create(Self);
+  f_config_time1:= Tf_config_time.Create(Self);
+  f_config_observatory1:= Tf_config_observatory.Create(Self);
+  f_config_chart1:= Tf_config_chart.Create(Self);
+  f_config_catalog1:= Tf_config_catalog.Create(Self);
+  f_config_solsys1:= Tf_config_solsys.Create(Self);
+  f_config_display1:= Tf_config_display.Create(Self);
+  f_config_pictures1:= Tf_config_pictures.Create(Self);
+  f_config_internet1:= Tf_config_internet.Create(Self);
+  f_config_calendar1:= Tf_config_calendar.Create(Self);
+  f_config_system1.parent:=TabSheet0 ;
+  f_config_time1.parent:=TabSheet1 ;
+  f_config_observatory1.parent:=TabSheet2 ;
+  f_config_chart1.parent:=TabSheet3 ;
+  f_config_catalog1.parent:=TabSheet4 ;
+  f_config_solsys1.parent:=TabSheet5 ;
+  f_config_display1.parent:=TabSheet6 ;
+  f_config_pictures1.parent:=TabSheet7 ;
+  f_config_internet1.parent:=TabSheet9 ;
+  f_config_calendar1.parent:=TabSheet10 ;
+  f_config_system1.Align:=alClient;
+  f_config_time1.Align:=alClient;
+  f_config_observatory1.Align:=alClient;
+  f_config_chart1.Align:=alClient;
+  f_config_catalog1.Align:=alClient;
+  f_config_solsys1.Align:=alClient;
+  f_config_display1.Align:=alClient;
+  f_config_pictures1.Align:=alClient;
+  f_config_internet1.Align:=alClient;
+  f_config_calendar1.Align:=alClient;
   Fcsc := Tconf_skychart.Create;
   Fccat := Tconf_catalog.Create;
   Fcshr := Tconf_shared.Create;
   Fcplot := Tconf_plot.Create;
   Fcmain := Tconf_main.Create;
   Fcdss := Tconf_dss.Create;
+  ScaleDPI(Self);
   SetLang;
   compage := 32;
   astpage := 33;

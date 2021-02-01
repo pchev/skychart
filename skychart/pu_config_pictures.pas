@@ -40,7 +40,6 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
-    f_config_pictures1: Tf_config_pictures;
     Panel2: TPanel;
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
@@ -51,6 +50,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    f_config_pictures1: Tf_config_pictures;
     procedure SetLang;
   end;
 
@@ -70,6 +70,9 @@ end;
 
 procedure Tf_configpictures.FormCreate(Sender: TObject);
 begin
+  f_config_pictures1:= Tf_config_pictures.Create(Self);
+  f_config_pictures1.parent:=Self ;
+  f_config_pictures1.Align:=alClient;
   ScaleDPI(Self);
   SetLang;
 end;

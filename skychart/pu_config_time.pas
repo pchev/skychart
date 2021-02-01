@@ -40,7 +40,6 @@ type
     Button2: TButton;
     Button3: TButton;
     Button7: TButton;
-    f_config_time1: Tf_config_time;
     Panel1: TPanel;
     procedure Button2Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
@@ -51,6 +50,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    f_config_time1: Tf_config_time;
     procedure SetLang;
   end;
 
@@ -86,6 +86,9 @@ end;
 
 procedure Tf_configtime.FormCreate(Sender: TObject);
 begin
+  f_config_time1:= Tf_config_time.Create(Self);
+  f_config_time1.parent:=Self ;
+  f_config_time1.Align:=alClient;
   ScaleDPI(Self);
   SetLang;
 end;

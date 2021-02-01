@@ -42,7 +42,6 @@ type
     Button4: TButton;
     Button5: TButton;
     Button6: TButton;
-    f_config_chart1: Tf_config_chart;
     Panel1: TPanel;
     procedure Button4Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
@@ -53,6 +52,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    f_config_chart1: Tf_config_chart;
     procedure SetLang;
   end;
 
@@ -82,6 +82,9 @@ end;
 
 procedure Tf_configchart.FormCreate(Sender: TObject);
 begin
+  f_config_chart1:= Tf_config_chart.Create(Self);
+  f_config_chart1.parent:=Self ;
+  f_config_chart1.Align:=alClient;
   ScaleDPI(Self);
   SetLang;
 end;

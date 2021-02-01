@@ -40,7 +40,6 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
-    f_config_solsys1: Tf_config_solsys;
     Panel1: TPanel;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -52,6 +51,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    f_config_solsys1: Tf_config_solsys;
     procedure SetLang;
   end;
 
@@ -76,6 +76,9 @@ end;
 
 procedure Tf_configsolsys.FormCreate(Sender: TObject);
 begin
+  f_config_solsys1:= Tf_config_solsys.Create(Self);
+  f_config_solsys1.parent:=Self ;
+  f_config_solsys1.Align:=alClient;
   ScaleDPI(Self);
   SetLang;
 end;

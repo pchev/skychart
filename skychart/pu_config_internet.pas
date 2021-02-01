@@ -42,7 +42,6 @@ type
     Button2: TButton;
     Button3: TButton;
     Button6: TButton;
-    f_config_internet1: Tf_config_internet;
     Panel1: TPanel;
     procedure Button2Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
@@ -53,6 +52,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    f_config_internet1: Tf_config_internet;
     procedure SetLang;
   end;
 
@@ -93,6 +93,9 @@ end;
 
 procedure Tf_configinternet.FormCreate(Sender: TObject);
 begin
+  f_config_internet1:= Tf_config_internet.Create(Self);
+  f_config_internet1.parent:=Self ;
+  f_config_internet1.Align:=alClient;
   ScaleDPI(Self);
   SetLang;
 end;
