@@ -2570,6 +2570,12 @@ begin
     if db2.database <> db then
       db2.Use(db);
     Result := db1.Active and db2.Active;
+    DB1.Query('PRAGMA journal_mode = MEMORY');
+    DB1.Query('PRAGMA synchronous = OFF');
+    DB1.Query('PRAGMA case_sensitive_like = 1');
+    DB2.Query('PRAGMA journal_mode = MEMORY');
+    DB2.Query('PRAGMA synchronous = OFF');
+    DB2.Query('PRAGMA case_sensitive_like = 1');
   except
     Result := False;
   end;
@@ -2581,6 +2587,13 @@ var
   currentjd, jd1, dt, t: double;
   currentmag, lmag: integer;
   i: integer;
+const
+  nprov=15;
+  prov: array[1..nprov] of string=('I','J','K0','K10','K11','K12','K13','K14','K15','K16','K17','K18','K19','K2','K3');
+  nperm=62;
+  perm: array[1..nperm] of string=('0','1','2','3','4','5','6','7','8','9',
+       'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+       'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z');
 begin
   try
     lmag := round(limitmag * 10);
@@ -2637,8 +2650,6 @@ begin
           + ' FROM cdc_ast_elem a, cdc_ast_mag b' +
           ' where b.mag<=' + IntToStr(lmag) + ' and b.jd=' + strim(
           formatfloat(f6s, jd1)) + ' and a.id=b.id' + ' and a.epoch=b.epoch';
-        db1.CallBackOnly := True;
-        db1.OnFetchRow := @NewAstDayCallback;
         db2.UnLockTables;
         db2.StartTransaction;
         db2.TruncateTable(cfgsc.ast_day);
@@ -2647,7 +2658,12 @@ begin
         jdnew := newjd;
         jdchart := cfgsc.JDChart;
         ast_daypos := cfgsc.ast_daypos;
-        db1.Query(qry);
+        db1.CallBackOnly := True;
+        db1.OnFetchRow := @NewAstDayCallback;
+        for i:=1 to nprov do
+          db1.Query(qry+' and a.id like "'+prov[i]+'%"');
+        for i:=1 to nperm do
+          db1.Query(qry+' and a.id like "00'+perm[i]+'%"');
         db1.CallBackOnly := False;
         db1.OnFetchRow := nil;
         qry := 'INSERT INTO ' + cfgsc.ast_day + ' (jd,limit_mag)' +

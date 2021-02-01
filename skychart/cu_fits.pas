@@ -1711,6 +1711,9 @@ begin
       db1.Use(db);
     dbconnected := db1.Active;
     Result := dbconnected;
+    DB1.Query('PRAGMA journal_mode = MEMORY');
+    DB1.Query('PRAGMA synchronous = OFF');
+    DB1.Query('PRAGMA case_sensitive_like = 1');
   except
     dbconnected := False;
     Result := False;

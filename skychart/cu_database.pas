@@ -139,6 +139,9 @@ begin
     if DB.database <> dbn then
       DB.Use(dbn);
     Result := DB.Active;
+    DB.Query('PRAGMA journal_mode = MEMORY');
+    DB.Query('PRAGMA synchronous = OFF');
+    DB.Query('PRAGMA case_sensitive_like = 1');
   except
     Result := False;
   end;
@@ -319,6 +322,9 @@ begin
       DB.Use(dbn);
     if DB.database = dbn then
     begin
+      DB.Query('PRAGMA journal_mode = MEMORY');
+      DB.Query('PRAGMA synchronous = OFF');
+      DB.Query('PRAGMA case_sensitive_like = 1');
       indexlist := TStringList.Create;
       ok := True;
       for i := 1 to numsqltable do
