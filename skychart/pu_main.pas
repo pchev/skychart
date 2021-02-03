@@ -4881,12 +4881,8 @@ begin
           ConfigSolsys.f_config_solsys1.ConfirmDownload := False;
           ConfigSolsys.f_config_solsys1.autoprocess := True;
           ConfigSolsys.Show;
-          ConfigSolsys.f_config_solsys1.GroupBox10.Visible:=false;
-          ConfigSolsys.f_config_solsys1.GroupBox11.Visible:=false;
-          ConfigSolsys.f_config_solsys1.GroupBox12.Visible:=false;
           ConfigSolsys.f_config_solsys1.AstCompute.Visible:=false;
           ConfigSolsys.f_config_solsys1.AstPageControl.ActivePageIndex := 3;
-          ConfigSolsys.f_config_solsys1.delallast.Click;
           ConfigSolsys.f_config_solsys1.AstPageControl.ActivePageIndex := 1;
           ConfigSolsys.f_config_solsys1.DownloadAsteroid.Click;
           if ConfigSolsys.f_config_solsys1.autoOK then

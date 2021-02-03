@@ -63,8 +63,6 @@ type
     comt_y: TEdit;
     comt_m: TEdit;
     comt_d: TEdit;
-    astdeldate_y: TEdit;
-    astdeldate_m: TEdit;
     aststrtdate_y: TEdit;
     aststrtdate_m: TEdit;
     DownloadAsteroid: TButton;
@@ -161,7 +159,6 @@ type
     showast: TCheckBox;
     astsymbol: TRadioGroup;
     astmagdiff: TFloatEdit;
-    astdbset: TButton;
     astload: TTabSheet;
     Label206: TLabel;
     Label215: TLabel;
@@ -178,17 +175,6 @@ type
     AstCompute: TButton;
     prepastmemo: TMemo;
     astdelete: TTabSheet;
-    Label211: TLabel;
-    GroupBox10: TGroupBox;
-    astelemlist: TComboBox;
-    delast: TButton;
-    GroupBox11: TGroupBox;
-    Label209: TLabel;
-    delallast: TButton;
-    delastMemo: TMemo;
-    GroupBox12: TGroupBox;
-    Label214: TLabel;
-    deldateast: TButton;
     AddsingleAst: TTabSheet;
     Label217: TLabel;
     Label218: TLabel;
@@ -256,12 +242,8 @@ type
     procedure astsymbolClick(Sender: TObject);
     procedure astlimitmagChange(Sender: TObject);
     procedure astmagdiffChange(Sender: TObject);
-    procedure astdbsetClick(Sender: TObject);
     procedure LoadMPCClick(Sender: TObject);
     procedure AstComputeClick(Sender: TObject);
-    procedure delastClick(Sender: TObject);
-    procedure deldateastClick(Sender: TObject);
-    procedure delallastClick(Sender: TObject);
     procedure AddastClick(Sender: TObject);
     procedure smallsatChange(Sender: TObject);
     procedure SunOnlineClick(Sender: TObject);
@@ -279,7 +261,6 @@ type
     procedure ShowComet;
     procedure UpdComList;
     procedure ShowAsteroid;
-    procedure UpdAstList;
     procedure AsteroidFeedback(txt: string);
     procedure CometFeedback(txt: string);
   public
@@ -404,7 +385,6 @@ begin
   Label213.Caption := rsMagnitudeFai;
   AstNeo.Caption := rsShowNearEart;
   showast.Caption := rsShowAsteroid3;
-  astdbset.Caption := rsDatabaseSett;
   astload.Caption := rsLoadMPCFile;
   Label206.Caption := rsMessages;
   TabSheet4.Caption := rsOrUseALocalF;
@@ -424,15 +404,6 @@ begin
   Label207.Caption := rsNumberOfMont;
   AstCompute.Caption := rsCompute;
   astdelete.Caption := rsDataMaintena;
-  Label211.Caption := rsMessages;
-  GroupBox10.Caption := rsDeleteMPCDat;
-  delast.Caption := rsDelete;
-  GroupBox11.Caption := rsQuickDelete;
-  Label209.Caption := rsQuicklyDelet2;
-  delallast.Caption := rsDelete;
-  GroupBox12.Caption := rsDeleteMonthl;
-  Label214.Caption := rsDeleteMonthl2;
-  deldateast.Caption := rsDelete;
   AddsingleAst.Caption := rsAdd;
   Label217.Caption := rsAddASingleEl;
   Label218.Caption := rsDesignation;
@@ -583,9 +554,6 @@ begin
   astmagdiff.Value := csc.AstmagDiff;
   aststrtdate_y.Text := IntToStr(csc.curyear);
   aststrtdate_m.Text := IntToStr(csc.curmonth);
-  astdeldate_y.Text := IntToStr(csc.curyear - 1);
-  astdeldate_m.Text := IntToStr(csc.curmonth);
-  UpdAstList;
   mpcfile.InitialDir := slash(MPCDir);
 end;
 
@@ -1141,15 +1109,6 @@ begin
     FShowDB(self);
 end;
 
-procedure Tf_config_solsys.UpdAstList;
-begin
-  cdb.GetAsteroidFileList(cmain, astelemlist.items);
-  astelemlist.ItemIndex := 0;
-  if astelemlist.items.Count > 0 then
-    astelemlist.Text := astelemlist.items[0];
-end;
-
-
 procedure Tf_config_solsys.showastClick(Sender: TObject);
 begin
   csc.ShowAsteroid := showast.Checked;
@@ -1175,12 +1134,6 @@ begin
   csc.AstmagDiff := astmagdiff.Value;
 end;
 
-procedure Tf_config_solsys.astdbsetClick(Sender: TObject);
-begin
-  if Assigned(FShowDB) then
-    FShowDB(self);
-end;
-
 procedure Tf_config_solsys.LoadMPCClick(Sender: TObject);
 var
   ok: boolean;
@@ -1190,7 +1143,6 @@ begin
   screen.cursor := crHourGlass;
   ok := cdb.LoadAsteroidFile(SafeUTF8ToSys(mpcfile.Text), astnumbered.Checked,
     aststoperr.Checked, astlimitbox.Checked, astlimit.Value, MemoMPC);
-  UpdAstList;
   screen.cursor := crDefault;
   if ok then
   begin
@@ -1237,34 +1189,6 @@ begin
   end;
 end;
 
-procedure Tf_config_solsys.delastClick(Sender: TObject);
-begin
-  if assigned(FDisableAsteroid) then FDisableAsteroid(self);
-  screen.cursor := crHourGlass;
-  Cdb.DelAsteroid(astelemlist.Text, delastMemo);
-  screen.cursor := crDefault;
-  UpdAstList;
-  if assigned(FEnableAsteroid) then FEnableAsteroid(self);
-end;
-
-procedure Tf_config_solsys.deldateastClick(Sender: TObject);
-begin
-  if assigned(FDisableAsteroid) then FDisableAsteroid(self);
-  screen.cursor := crHourGlass;
-  cdb.DelAstDate(trim(astdeldate_y.Text) + '.' + trim(astdeldate_m.Text), delastMemo);
-  screen.cursor := crDefault;
-  if assigned(FEnableAsteroid) then FEnableAsteroid(self);
-end;
-
-procedure Tf_config_solsys.delallastClick(Sender: TObject);
-begin
-  if assigned(FDisableAsteroid) then FDisableAsteroid(self);
-  screen.cursor := crHourGlass;
-  cdb.DelAstAll(delastMemo);
-  screen.cursor := crDefault;
-  UpdAstList;
-end;
-
 procedure Tf_config_solsys.AddastClick(Sender: TObject);
 var
   msg: string;
@@ -1272,7 +1196,6 @@ begin
   msg := Cdb.AddAsteroid(astid.Text, asth.Text, astg.Text, astep.Text,
     astma.Text, astperi.Text, astnode.Text, asti.Text, astec.Text, astax.Text,
     astref.Text, astnam.Text, asteq.Text);
-  UpdAstList;
   if msg <> '' then
     ShowMessage(msg);
 end;

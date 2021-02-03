@@ -128,13 +128,11 @@ type
     function AsteroidMag(phase,dist,r,h,g: double): double;
     function ConnectDB(db: string): boolean;
     function NewAstDay(newjd, limitmag: double; cfgsc: Tconf_skychart): boolean;
-//    procedure NewAstDayCallback(Sender: TObject; Row: TResultRow);
     function FindAsteroid(x1, y1, x2, y2: double; nextobj: boolean;
       cfgsc: Tconf_skychart; var nom, mag, date, desc: string; trunc: boolean = True): boolean;
     function FindAsteroidName(astname: string; var ra, de, mag: double;
       cfgsc: Tconf_skychart; upddb: boolean; MeanPos: boolean = False): boolean;
     function PrepareAsteroid(jd1, jd2, step: double; msg: TStrings): boolean;
-//    procedure PrepareAsteroidCallback(Sender: TObject; Row: TResultRow);
     function NewComDay(newjd, limitmag: double; cfgsc: Tconf_skychart): boolean;
     procedure NewComDayCallback(Sender: TObject; Row: TResultRow);
     function FindComet(x1, y1, x2, y2: double; nextobj: boolean;

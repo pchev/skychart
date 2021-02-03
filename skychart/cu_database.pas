@@ -75,7 +75,6 @@ type
     function DeleteCity(locid: integer): string;
     function DeleteCountry(country: string; deleteall: boolean): string;
     procedure GetCometFileList(cmain: Tconf_main; list: TStrings);
-    procedure GetAsteroidFileList(cmain: Tconf_main; list: TStrings);
     function LoadCometFile(comfile: string; memocom: Tmemo): boolean;
     procedure DelComet(comelemlist: string; memocom: Tmemo);
     procedure DelCometAll(memocom: Tmemo);
@@ -86,11 +85,9 @@ type
     function LoadAsteroidFile(astfile: string; astnumbered, stoperr, limit: boolean;
       astlimit: integer; memoast: Tmemo): boolean;
     procedure OpenAsteroid;
+    procedure SaveAsteroid;
     procedure SaveAsteroidMagnitude;
     procedure OpenAsteroidMagnitude;
-    procedure DelAsteroid(astelemlist: string; memoast: Tmemo);
-    procedure DelAstDate(astdeldate: string; memoast: Tmemo);
-    procedure DelAstAll(memoast: Tmemo);
     function AddAsteroid(astid, asth, astg, astep, astma, astperi, astnode,
       asti, astec, astax, astref, astnam, asteq: string): string;
     procedure TruncateDailyComet;
@@ -256,31 +253,12 @@ begin
       k := 2;
       DB.Query('CREATE INDEX ' + sqlindex[k, 1] + ' on ' + sqlindex[k, 2]);
     end;
-    // change ast_day_pos primary index , drop the table to rebuild in cu_planet
-    if (updversion < cdcver) and (updversion < '3.11w') then
-    begin
-      bb := TStringList.Create;
-      try
-        DB.Query('select name from sqlite_master where type="table" and name like "cdc_ast_day_%"');
-        for i := 0 to DB.RowCount - 1 do
-        begin
-          bb.add(DB.Results[i][0]);
-        end;
-        for i := 0 to bb.Count - 1 do
-        begin
-          buf := bb[i];
-          DB.Query('drop table ' + buf);
-        end;
-      finally
-        bb.Free;
-      end;
-    end;
     // load asteroid extension
     i := strtointdef(DB.QueryOne('select count(*) from cdc_ast_ext where name="Ceres"'), 0);
     if i=0 then
       LoadAstExt(slash(sampledir) + 'F-D_FULL.TXT');
 
-    // drop the asteroid table and reload default file
+    // drop the asteroid table and reload to binary file
     if (updversion < cdcver) and (updversion < '4.3i') then begin
       buf:=db.QueryOne('select filedesc from cdc_ast_elem_list order by elem_id desc');
       if buf='' then fn:=''
@@ -439,26 +417,6 @@ begin
   end;
 end;
 
-procedure TCDCdb.GetAsteroidFileList(cmain: Tconf_main; list: TStrings);
-var
-  i: integer;
-begin
-  list.Clear;
-  try
-    if DB.Active then
-    begin
-      DB.Query('Select elem_id,filedesc from cdc_ast_elem_list order by elem_id');
-      i := 0;
-      while i < DB.Rowcount do
-      begin
-        list.add(DB.Results[i][0] + '; ' + DB.Results[i][1]);
-        Inc(i);
-      end;
-    end;
-  except
-  end;
-end;
-
 function TCDCdb.LoadCometFile(comfile: string; memocom: Tmemo): boolean;
 var
   buf, cmd, filedesc, filenum: string;
@@ -482,7 +440,7 @@ begin
       assignfile(f, comfile);
       reset(f);
       DB.starttransaction;
-      DB.LockTables('cdc_com_elem WRITE, cdc_ast_com_list WRITE, cdc_com_name WRITE');
+      DB.LockTables('cdc_com_elem WRITE, cdc_com_name WRITE');
       nl := 0;
       repeat
         readln(f, buf);
@@ -938,15 +896,22 @@ begin
       memoast.Lines.add(Format(rsNumberOfIgno, [IntToStr(rerr)]));
     Result := (nerr = 0);
     if Result then begin
-      AssignFile(fb,slash(DBDir) +'mpcorb.bin');
-      rewrite(fb);
-      for i:=0 to FNumAsteroidElement-1 do
-        write(fb,FAsteroidElement[i]);
-      CloseFile(fb);
+      SaveAsteroid;
     end;
     memoast.Lines.SaveToFile(slash(DBDir) + 'LoadAsteroidFile.log');
   except
   end;
+end;
+
+procedure TCDCdb.SaveAsteroid;
+var i: integer;
+    fb: file of TAsteroidElement;
+begin
+  AssignFile(fb,slash(DBDir) +'mpcorb.bin');
+  rewrite(fb);
+  for i:=0 to FNumAsteroidElement-1 do
+    write(fb,FAsteroidElement[i]);
+  CloseFile(fb);
 end;
 
 procedure TCDCdb.OpenAsteroid;
@@ -1021,117 +986,13 @@ begin
   end;
 end;
 
-procedure TCDCdb.DelAsteroid(astelemlist: string; memoast: Tmemo);
-var
-  i: integer;
-  elem_id: string;
-begin
-  memoast.Clear;
-  i := pos(';', astelemlist);
-  elem_id := copy(astelemlist, 1, i - 1);
-  if trim(elem_id) = '' then
-    exit;
-  try
-    if DB.Active then
-    begin
-      DB.starttransaction;
-      DB.LockTables('cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_mag WRITE');
-      memoast.Lines.add(rsDeleteFromEl);
-      application.ProcessMessages;
-      if not DB.Query('Delete from cdc_ast_elem where elem_id=' + elem_id) then
-        memoast.Lines.add(Format(rsFailed, [trim(DB.ErrorMessage)]));
-      memoast.Lines.add(rsDeleteFromEl2);
-      application.ProcessMessages;
-      if not DB.Query('Delete from cdc_ast_elem_list where elem_id=' + elem_id) then
-        memoast.Lines.add(Format(rsFailed, [trim(DB.ErrorMessage)]));
-      memoast.Lines.add(rsDeleteFromMo);
-      application.ProcessMessages;
-      if not DB.Query('Delete from cdc_ast_mag where elem_id=' + elem_id) then
-        memoast.Lines.add(Format(rsFailed, [trim(DB.ErrorMessage)]));
-      DB.UnLockTables;
-      DB.commit;
-      DB.flush('tables');
-      memoast.Lines.add(rsDeleteDailyD);
-      TruncateDailyAsteroid;
-      DB.Vacuum;
-      memoast.Lines.add(rsDeleteComple);
-    end;
-  except
-  end;
-end;
 
-procedure TCDCdb.DelAstDate(astdeldate: string; memoast: Tmemo);
+function TCDCdb.AddAsteroid(astid, asth, astg, astep, astma, astperi,astnode, asti, astec, astax, astref, astnam, asteq: string): string;
 var
-  i, y, m: integer;
-  jds: string;
-begin
-  memoast.Clear;
-  i := pos('.', astdeldate);
-  y := StrToInt(trim(copy(astdeldate, 1, i - 1)));
-  m := StrToInt(trim(copy(astdeldate, i + 1, 99)));
-  jds := formatfloat(f1, jd(y, m, 1, 0));
-  try
-    if DB.Active then
-    begin
-      DB.starttransaction;
-      DB.LockTables('cdc_ast_mag WRITE');
-      memoast.Lines.add(Format(rsDeleteFromMo2, [jds]));
-      application.ProcessMessages;
-      if not DB.Query('Delete from cdc_ast_mag where jd<' + jds) then
-        memoast.Lines.add(Format(rsFailed, [trim(DB.ErrorMessage)]));
-      DB.UnLockTables;
-      DB.commit;
-      DB.flush('tables');
-      DB.Vacuum;
-      memoast.Lines.add(rsDeleteComple);
-    end;
-  except
-  end;
-end;
-
-procedure TCDCdb.DelAstAll(memoast: Tmemo);
-begin
-  memoast.Clear;
-  try
-    if DB.Active then
-    begin
-      DB.UnLockTables;
-      DB.starttransaction;
-      memoast.Lines.add(rsDeleteFromEl);
-      application.ProcessMessages;
-      DB.TruncateTable('cdc_ast_elem');
-      memoast.Lines.add(rsDeleteFromEl2);
-      application.ProcessMessages;
-      DB.TruncateTable('cdc_ast_elem_list');
-      memoast.Lines.add(rsDeleteFromNa);
-      application.ProcessMessages;
-      DB.TruncateTable('cdc_ast_name');
-      memoast.Lines.add(rsDeleteFromMo);
-      application.ProcessMessages;
-      DB.TruncateTable('cdc_ast_mag');
-      DB.commit;
-      memoast.Lines.add(rsDeleteDailyD);
-      application.ProcessMessages;
-      TruncateDailyAsteroid;
-      memoast.Lines.add(rsPleaseWait);
-      application.ProcessMessages;
-      DB.Vacuum;
-      memoast.Lines.add(rsDeleteComple);
-    end;
-  except
-  end;
-end;
-
-function TCDCdb.AddAsteroid(astid, asth, astg, astep, astma, astperi,
-  astnode, asti, astec, astax, astref, astnam, asteq: string): string;
-var
-  buf, cmd, filedesc, filenum: string;
   ep, id, nam, ec, ax, i, node, peri, eq, ma, h, g, ref: string;
   lid: integer;
 begin
   try
-    if DB.Active then
-    begin
       id := trim(copy(astid, 1, 7));
       lid := length(id);
       if lid < 7 then
@@ -1148,33 +1009,27 @@ begin
       ref := trim(astref);
       nam := stringreplace(trim(astnam), '"', '\"', [rfreplaceall]);
       eq := trim(asteq);
-      buf := DB.QueryOne('Select max(elem_id) from cdc_ast_elem_list');
-      if buf <> '' then
-        filenum := IntToStr(StrToInt(buf) + 1)
-      else
-        filenum := '1';
-      filedesc := 'Add ' + id + ', ' + nam + ', ' + ep;
-      DB.Query('Insert into cdc_ast_elem_list (elem_id, filedesc) Values("' +
-        filenum + '","' + filedesc + '")');
-      cmd := 'INSERT INTO cdc_ast_elem (id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id) VALUES (' + '"' + id + '"' + ',"' + h + '"' + ',"' + g + '"' + ',"' + ep + '"' + ',"' + ma + '"' + ',"' + peri + '"' + ',"' + node + '"' + ',"' + i + '"' + ',"' + ec + '"' + ',"' + ax + '"' + ',"' + ref + '"' + ',"' + nam + '"' + ',"' + eq + '"' + ',"' + filenum + '"' + ')';
-      if DB.query(cmd) then
-      begin
-        cmd := 'INSERT INTO cdc_ast_name (name, id) VALUES (' +
-          '"' + nam + '"' + ',"' + id + '"' + ')';
-        DB.query(cmd);
-        Result := 'OK!';
-      end
-      else
-        Result := Format(rsInsertFailed2, [trim(DB.ErrorMessage)]);
-    end
-    else
-    begin
-      buf := trim(DB.ErrorMessage);
-      if buf <> '0' then
-        Result := buf;
-    end;
-    DB.flush('tables');
+      FNumAsteroidElement:=FNumAsteroidElement+1;
+      SetLength(FAsteroidElement,FNumAsteroidElement);
+      FAsteroidElement[FNumAsteroidElement-1].id:=id;
+      FAsteroidElement[FNumAsteroidElement-1].h:=strtofloat(h);
+      FAsteroidElement[FNumAsteroidElement-1].g:=strtofloat(g);
+      FAsteroidElement[FNumAsteroidElement-1].epoch:=strtofloat(ep);
+      FAsteroidElement[FNumAsteroidElement-1].mean_anomaly:=strtofloat(ma);
+      FAsteroidElement[FNumAsteroidElement-1].arg_perihelion:=strtofloat(peri);
+      FAsteroidElement[FNumAsteroidElement-1].asc_node:=strtofloat(node);
+      FAsteroidElement[FNumAsteroidElement-1].inclination:=strtofloat(i);
+      FAsteroidElement[FNumAsteroidElement-1].eccentricity:=strtofloat(ec);
+      FAsteroidElement[FNumAsteroidElement-1].semi_axis:=strtofloat(ax);
+      FAsteroidElement[FNumAsteroidElement-1].ref:=ref;
+      FAsteroidElement[FNumAsteroidElement-1].name:=nam;
+      FAsteroidElement[FNumAsteroidElement-1].equinox:=strtofloat(eq);
+      SaveAsteroid;
+      Result := '';
   except
+    on E: Exception do begin
+     result:=E.Message;
+    end;
   end;
 end;
 
