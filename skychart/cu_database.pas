@@ -214,52 +214,57 @@ begin
   updcountry := False;
   if DB.Active then
   begin
-    // add isocode column to country table
-    if ((not DB.Query('select isocode from cdc_country where country="AF"')) or
-      (DB.RowCount < 1)) then
-      updcountry := True;
-    // Correct Japan code
-    if ((DB.Query('select isocode from cdc_country where isocode="JA"')) and
-      (DB.RowCount >= 1)) then
-      updcountry := True;
-    // Correct Australia code
-    i := strtointdef(DB.QueryOne('select count(*) from cdc_country where isocode="AU"'), 0);
-    if (i > 1) then
-      updcountry := True;
-    if (updcountry) then
-    begin
-      if VerboseMsg then
-        WriteTrace('Upgrade DB for country change ');
+    if updversion < '3.3c' then begin
+      // add isocode column to country table
+      if ((not DB.Query('select isocode from cdc_country where country="AF"')) or
+        (DB.RowCount < 1)) then
+        updcountry := True;
+      // Correct Japan code
+      if ((DB.Query('select isocode from cdc_country where isocode="JA"')) and
+        (DB.RowCount >= 1)) then
+        updcountry := True;
+      // Correct Australia code
+      i := strtointdef(DB.QueryOne('select count(*) from cdc_country where isocode="AU"'), 0);
+      if (i > 1) then
+        updcountry := True;
+      if (updcountry) then
+      begin
+        if VerboseMsg then
+          WriteTrace('Upgrade DB for country change ');
 
-      DB.Query('drop table cdc_country');
-      writetrace('Drop table cdc_country ... ' + DB.ErrorMessage);
-      DB.Commit;
-      DB.Query('CREATE TABLE ' + sqltable[5, 1] + sqltable[5, 2]);
-      writetrace('Create table ' + sqltable[5, 1] + ' ...  ' + DB.ErrorMessage);
-      LoadCountryList(slash(sampledir) + 'country.dat', memo);
-      Result := True;
+        DB.Query('drop table cdc_country');
+        writetrace('Drop table cdc_country ... ' + DB.ErrorMessage);
+        DB.Commit;
+        DB.Query('CREATE TABLE ' + sqltable[5, 1] + sqltable[5, 2]);
+        writetrace('Create table ' + sqltable[5, 1] + ' ...  ' + DB.ErrorMessage);
+        LoadCountryList(slash(sampledir) + 'country.dat', memo);
+        Result := True;
+      end;
     end;
-    // Correct Fits index
-    buf := DB.QueryOne('select sql from sqlite_master where name="cdc_fits_objname"');
-    if (pos('objectname', buf) > 0) and (pos('catalogname', buf) = 0) then
-    begin
-      if VerboseMsg then
-        WriteTrace('Upgrade DB for new Fits indexes');
-      DB.Query('drop table cdc_fits');
-      writetrace('Drop table cdc_fits ... ' + DB.ErrorMessage);
-      DB.Commit;
-      DB.Query('CREATE TABLE ' + sqltable[4, 1] + sqltable[4, 2]);
-      writetrace('Create table ' + sqltable[4, 1] + ' ...  ' + DB.ErrorMessage);
-      k := 2;
-      DB.Query('CREATE INDEX ' + sqlindex[k, 1] + ' on ' + sqlindex[k, 2]);
+    if updversion < '3.5i' then begin
+      // Correct Fits index
+      buf := DB.QueryOne('select sql from sqlite_master where name="cdc_fits_objname"');
+      if (pos('objectname', buf) > 0) and (pos('catalogname', buf) = 0) then
+      begin
+        if VerboseMsg then
+          WriteTrace('Upgrade DB for new Fits indexes');
+        DB.Query('drop table cdc_fits');
+        writetrace('Drop table cdc_fits ... ' + DB.ErrorMessage);
+        DB.Commit;
+        DB.Query('CREATE TABLE ' + sqltable[4, 1] + sqltable[4, 2]);
+        writetrace('Create table ' + sqltable[4, 1] + ' ...  ' + DB.ErrorMessage);
+        k := 2;
+        DB.Query('CREATE INDEX ' + sqlindex[k, 1] + ' on ' + sqlindex[k, 2]);
+      end;
     end;
-    // load asteroid extension
-    i := strtointdef(DB.QueryOne('select count(*) from cdc_ast_ext where name="Ceres"'), 0);
-    if i=0 then
-      LoadAstExt(slash(sampledir) + 'F-D_FULL.TXT');
-
+    if updversion < '4.3h' then begin
+      // load asteroid extension
+      i := strtointdef(DB.QueryOne('select count(*) from cdc_ast_ext where name="Ceres"'), 0);
+      if i=0 then
+        LoadAstExt(slash(sampledir) + 'F-D_FULL.TXT');
+    end;
     // drop the asteroid table and reload to binary file
-    if (updversion < cdcver) and (updversion < '4.3i') then begin
+    if updversion < '4.3i' then begin
       buf:=db.QueryOne('select filedesc from cdc_ast_elem_list order by elem_id desc');
       if buf='' then fn:=''
                 else fn:=slash(MPCDir)+trim(words(buf,blank,1,1));
