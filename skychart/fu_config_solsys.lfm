@@ -1119,10 +1119,10 @@ object f_config_solsys: Tf_config_solsys
           Height = 521
           Top = 0
           Width = 495
-          ActivePage = AddsingleAst
+          ActivePage = astsetting
           Align = alClient
           ParentFont = False
-          TabIndex = 4
+          TabIndex = 0
           TabOrder = 0
           object astsetting: TTabSheet
             Caption = 'General Setting'
@@ -1132,11 +1132,11 @@ object f_config_solsys: Tf_config_solsys
             ParentFont = False
             object GroupBox9: TGroupBox
               Left = 20
-              Height = 344
+              Height = 358
               Top = 10
               Width = 450
               Caption = 'Chart Setting'
-              ClientHeight = 324
+              ClientHeight = 338
               ClientWidth = 448
               ParentFont = False
               TabOrder = 0
@@ -1208,7 +1208,7 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 70
+                ClientHeight = 88
                 ClientWidth = 395
                 Color = clBtnFace
                 ItemIndex = 1
@@ -1245,6 +1245,22 @@ object f_config_solsys: Tf_config_solsys
                 TabOrder = 4
               end
             end
+            object LabelAstInfo1: TLabel
+              Left = 24
+              Height = 17
+              Top = 384
+              Width = 77
+              Caption = 'Current file: '
+              ParentColor = False
+            end
+            object LabelAsteroidCount: TLabel
+              Left = 24
+              Height = 17
+              Top = 408
+              Width = 90
+              Caption = 'Asteroid count'
+              ParentColor = False
+            end
           end
           object astload: TTabSheet
             Caption = 'Load MPC File'
@@ -1263,7 +1279,7 @@ object f_config_solsys: Tf_config_solsys
             end
             object MemoMPC: TMemo
               Left = 20
-              Height = 176
+              Height = 237
               Top = 235
               Width = 450
               ParentFont = False
@@ -1495,7 +1511,7 @@ object f_config_solsys: Tf_config_solsys
             end
             object prepastmemo: TMemo
               Left = 20
-              Height = 247
+              Height = 337
               Top = 135
               Width = 450
               ParentFont = False

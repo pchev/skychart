@@ -1554,6 +1554,7 @@ resourcestring
   rsAmplitudeMin = 'Amplitude min.';
   rsAmplitudeMax = 'Amplitude max.';
   rsQualityFlag = 'Quality flag';
+  rsTotalAsteroi = 'Total asteroid count';
 
 // also update upsi_translation
 

@@ -43,6 +43,8 @@ type
     ButtonEphDown: TButton;
     EditEph: TEdit;
     GroupBox2: TGroupBox;
+    LabelAsteroidCount: TLabel;
+    LabelAstInfo1: TLabel;
     ListBoxEph: TListBox;
     smallsat: TCheckBox;
     ComboBox2: TComboBox;
@@ -555,6 +557,8 @@ begin
   aststrtdate_y.Text := IntToStr(csc.curyear);
   aststrtdate_m.Text := IntToStr(csc.curmonth);
   mpcfile.InitialDir := slash(MPCDir);
+  LabelAstInfo1.Caption:=rsFile+': '+cdb.AsteroidFileInfo;
+  LabelAsteroidCount.Caption:=rsTotalAsteroi+': '+inttostr(cdb.NumAsteroidElement);
 end;
 
 procedure Tf_config_solsys.PlanetDirChange(Sender: TObject);
@@ -1144,6 +1148,8 @@ begin
   ok := cdb.LoadAsteroidFile(SafeUTF8ToSys(mpcfile.Text), astnumbered.Checked,
     aststoperr.Checked, astlimitbox.Checked, astlimit.Value, MemoMPC);
   screen.cursor := crDefault;
+  LabelAstInfo1.Caption:=rsFile+': '+cdb.AsteroidFileInfo;
+  LabelAsteroidCount.Caption:=rsTotalAsteroi+': '+inttostr(cdb.NumAsteroidElement);
   if ok then
   begin
     if not autoprocess then

@@ -42,6 +42,7 @@ type
     tstval: double;
     FNumAsteroidElement: integer;
     FAsteroidElement: TAsteroidElements;
+    FAsteroidFileInfo: string;
   public
     { Public declarations }
     NumAsteroidMagnitudesJD: integer;
@@ -112,6 +113,7 @@ type
     property ComMinDT: integer read FComMinDT write FComMinDT;
     property NumAsteroidElement: integer read FNumAsteroidElement;
     property AsteroidElement:TAsteroidElements read FAsteroidElement;
+    property AsteroidFileInfo: string read FAsteroidFileInfo;
   end;
 
 implementation
@@ -754,7 +756,7 @@ begin
     exit;
   end;
   try
-   // filedesc := extractfilename(astfile) + ' ' + FormatDateTime('yyyy-mm-dd hh:nn', FileDateToDateTime(FileAge(astfile)));
+    FAsteroidFileInfo := extractfilename(astfile) + ' ' + FormatDateTime('yyyy-mm-dd hh:nn', FileDateToDateTime(FileAge(astfile)));
     Filemode := 0;
     assignfile(f, astfile);
     reset(f);
@@ -916,7 +918,12 @@ end;
 procedure TCDCdb.SaveAsteroid;
 var i: integer;
     fb: file of TAsteroidElement;
+    f: TextFile;
 begin
+  AssignFile(f,slash(DBDir) +'mpcorb.lst');
+  rewrite(f);
+  writeln(f,FAsteroidFileInfo);
+  CloseFile(f);
   AssignFile(fb,slash(DBDir) +'mpcorb.bin');
   rewrite(fb);
   for i:=0 to FNumAsteroidElement-1 do
@@ -926,18 +933,30 @@ end;
 
 procedure TCDCdb.OpenAsteroid;
 var i: integer;
-    fn:string;
-    fb: file of TAsteroidElement;
+    fn1,fn2:string;
+    f: TextFile;
+    mem:TMemoryStream;
 begin
-  fn:=slash(DBDir) +'mpcorb.bin';
-  if FileExists(fn) then begin
-    AssignFile(fb, fn);
-    reset(fb);
-    FNumAsteroidElement:=FileSize(fb);
+  fn1:=slash(DBDir) +'mpcorb.bin';
+  fn2:=slash(DBDir) +'mpcorb.lst';
+  if FileExists(fn1) then begin
+    if FileExists(fn2) then begin
+      AssignFile(f,fn2);
+      reset(f);
+      readln(f,FAsteroidFileInfo);
+      CloseFile(f);
+    end;
+    mem:=TMemoryStream.Create;
+    try
+    mem.LoadFromFile(fn1);
+    FNumAsteroidElement:=mem.Size div sizeof(TAsteroidElement);
     SetLength(FAsteroidElement,FNumAsteroidElement);
+    mem.Position:=0;
     for i:=0 to FNumAsteroidElement-1 do
-      read(fb,FAsteroidElement[i]);
-    CloseFile(fb);
+      mem.Read(FAsteroidElement[i],sizeof(TAsteroidElement));
+    finally
+      mem.free;
+    end;
   end
   else begin
     FNumAsteroidElement:=0;
@@ -971,7 +990,7 @@ procedure TCDCdb.OpenAsteroidMagnitude;
 var i,j: integer;
     fn1,fn2: string;
     f: TextFile;
-    fb: file of TAsteroidMagnitude;
+    mem:TMemoryStream;
 begin
   fn1:=slash(DBDir) +'astmagn.lst';
   fn2:=slash(DBDir) +'astmagn.bin';
@@ -985,14 +1004,18 @@ begin
     for i:=0 to NumAsteroidMagnitudesJD-1 do
       readln(f,AsteroidMagnitudesJD[i]);
     CloseFile(f);
-    AssignFile(fb,fn2);
-    reset(fb);
+    mem:=TMemoryStream.Create;
+    try
+    mem.LoadFromFile(fn2);
+    mem.Position:=0;
     for i:=0 to NumAsteroidMagnitudesJD-1 do begin
       for j:=0 to NumAsteroidMagnitude-1 do begin
-        read(fb,AsteroidMagnitudes[i,j]);
+        mem.Read(AsteroidMagnitudes[i,j],sizeof(TAsteroidMagnitude));
       end;
     end;
-    CloseFile(fb);
+    finally
+      mem.free;
+    end;
   end;
 end;
 
