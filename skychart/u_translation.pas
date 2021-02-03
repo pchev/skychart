@@ -1229,7 +1229,7 @@ resourcestring
   rsAutomaticall2 = 'Automatically optimize the labels placement';
   rsDoNotFilterM = 'Do not filter Messier objects';
   rsAllObjectsAt = 'All the objects at this position';
-  rsZoomMoreToVi = 'Zoom more to view the object';
+  rsZoomMoreToVi = 'Object too faint to show on the chart';
   rsRotateBy180D = 'Rotate by 180 degrees';
   rsResetRotatio = 'Reset rotation';
   rsRotateCylind = 'Use oblique cylindrical projections';

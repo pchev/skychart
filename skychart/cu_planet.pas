@@ -3048,7 +3048,7 @@ function TPlanet.FindAsteroidName(astname: string; var ra, de, mag: double;
 var
   dist, r, elong, phase, rad, ded: double;
   epoch, h, g, ma, ap, an, ic, ec, sa, eq, xc, yc, zc: double;
-  qry, id, ref, nam, elem_id: string;
+  qry, id, ref, nam: string;
   i, idx, ira, idec, imag: integer;
 
   s1: string;
@@ -3111,7 +3111,7 @@ begin
     qry := 'INSERT INTO ' + cfgsc.ast_daypos + ' (id,epoch,ra,de,mag,idx) VALUES ('
       + '"' + id + '"' + ',"' + strim(formatfloat(f6s, epoch)) +
       '"' + ',"' + IntToStr(ira) + '"' + ',"' + IntToStr(
-      idec) + '"' + ',"' + IntToStr(imag) + ',"' + IntToStr(idx) + '")';
+      idec) + '"' + ',"' + IntToStr(imag) + '",' + IntToStr(idx) + ')';
 
     db1.Query(qry);
     db1.flush('tables');
