@@ -28,6 +28,9 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
+  {$ifdef mswindows}
+  Windows,
+  {$endif}
   Forms, Classes, Sysutils, Dialogs, LResources, cu_catalog, cu_skychart,
   cu_plot, cu_planet, cu_fits, cu_database, pu_info, pu_image, pu_getdss,
   pu_detail, fu_chart, pu_calendar, pu_zoom, pu_search, pu_printsetup,
@@ -54,6 +57,13 @@ var i : integer;
 {$R *.res}
 
 begin
+  {$ifdef mswindows}
+  {$ifdef cpui386}
+  // allow to use more than 2GB of memory
+  {$SetPEFlags IMAGE_FILE_LARGE_ADDRESS_AWARE}
+  {$endif}
+  {$endif}
+
   if LazarusResources.Find('sortasc')<>nil then LazarusResources.Find('sortasc').Name:='lcl_sortasc';
   if LazarusResources.Find('sortdesc')<>nil then LazarusResources.Find('sortdesc').Name:='lcl_sortdesc';
   {$I grid_images.lrs}
