@@ -795,6 +795,11 @@ begin
           else
             continue;
         end;
+        if (nl mod 100000) = 0 then
+        begin
+          memoast.Lines.add(Format(rsProcessingLi, [IntToStr(nl)]));
+          application.ProcessMessages;
+        end;
         buf1:=trim(copy(buf, 1, 7));
         if buf1 = '' then
         begin
@@ -1217,6 +1222,7 @@ begin
     nam := AsteroidElement[idx].name;
     eq := AsteroidElement[idx].equinox;
     epoch:=AsteroidElement[idx].epoch;
+    ref:=AsteroidElement[idx].ref;
     Result := True;
   except
     Result := False;

@@ -3495,7 +3495,7 @@ begin
           cdb.AsteroidMagnitudes[i,n_ast-1].magnitude:=round(magn * 10);
         end;
       end;
-      if (n_ast > 0) and ((n_ast mod 10000) = 0) then
+      if (n_ast > 0) and ((n_ast mod 100000) = 0) then
       begin
         msg.Add(Format(rsProcessing, [IntToStr(n_ast)]));
         application.ProcessMessages;
