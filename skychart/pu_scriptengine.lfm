@@ -448,7 +448,7 @@ object f_scriptengine: Tf_scriptengine
           Left = 14
           Height = 21
           Top = 256
-          Width = 257
+          Width = 256
           Caption = 'Activate the timer event when hidden'
           TabOrder = 15
         end
@@ -519,7 +519,7 @@ object f_scriptengine: Tf_scriptengine
           Left = 14
           Height = 21
           Top = 280
-          Width = 258
+          Width = 257
           Caption = 'Activate all the functions when hidden'
           TabOrder = 21
         end
@@ -527,7 +527,7 @@ object f_scriptengine: Tf_scriptengine
           Left = 336
           Height = 21
           Top = 29
-          Width = 84
+          Width = 83
           Caption = 'Up/Down'
           OnChange = BtnUpDownChange
           TabOrder = 22
@@ -596,58 +596,58 @@ object f_scriptengine: Tf_scriptengine
         Plugin = PSCustomPlugin1
       end>
     UsePreProcessor = False
-    left = 48
-    top = 16
+    Left = 48
+    Top = 16
   end
   object PSImport_Classes1: TPSImport_Classes
     EnableStreams = True
     EnableClasses = True
-    left = 48
-    top = 73
+    Left = 48
+    Top = 73
   end
   object PSImport_DateUtils1: TPSImport_DateUtils
-    left = 48
-    top = 128
+    Left = 48
+    Top = 128
   end
   object PSImport_Forms1: TPSImport_Forms
     EnableForms = True
     EnableMenus = True
-    left = 48
-    top = 192
+    Left = 48
+    Top = 192
   end
   object PSImport_Controls1: TPSImport_Controls
     EnableStreams = True
     EnableGraphics = True
     EnableControls = True
-    left = 48
-    top = 248
+    Left = 48
+    Top = 248
   end
   object PSImport_StdCtrls1: TPSImport_StdCtrls
     EnableExtCtrls = True
     EnableButtons = True
-    left = 48
-    top = 312
+    Left = 48
+    Top = 312
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = '.cdcps'
     Filter = 'CdC script|*.cdcps'
-    left = 152
-    top = 16
+    Left = 152
+    Top = 16
   end
   object EventTimer: TTimer
     Enabled = False
     OnTimer = EventTimerTimer
-    left = 152
-    top = 128
+    Left = 152
+    Top = 128
   end
   object PSDllPlugin1: TPSDllPlugin
-    left = 48
-    top = 368
+    Left = 48
+    Top = 368
   end
   object PSCustomPlugin1: TPSCustomPlugin
     OnCompileImport1 = PSCustomPlugin1CompileImport1
     OnExecImport1 = PSCustomPlugin1ExecImport1
-    left = 152
-    top = 192
+    Left = 152
+    Top = 192
   end
 end

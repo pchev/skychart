@@ -150,7 +150,8 @@ type
   private
     { Private declarations }
     FFindInfo: TNotifyEvent;
-    cometid, astid : array[0..maxcombo] of string;
+    cometid: array[0..maxcombo] of string;
+    astid: array[0..maxcombo] of integer;
     NebNameAR : array of single;
     NebNameDE : array of single;
     numNebName : integer;

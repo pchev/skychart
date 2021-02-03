@@ -181,7 +181,8 @@ type
     dat14, dat24, dat34, dat74, west, east, title: string;
     century_Solar, century_Lunar: string;
     appmsg: array[1..nummsg] of string;
-    cometid, astid: array[0..maxcombo] of string;
+    cometid: array[0..maxcombo] of string;
+    astid: array[0..maxcombo] of integer;
     PlanetGraphs: array[1..9] of TBitmap;
     procedure Sattitle;
     procedure Lunartitle;
@@ -3109,8 +3110,8 @@ end;
 
 procedure Tf_calendar.RefreshAsteroid;
 var
-  id, nam, elem_id, ref: string;
-  i, a, m, d, s, nj, irc, irc2: integer;
+  id, nam, ref: string;
+  i, a, m, d, s, nj, irc, irc2,idx: integer;
   cjd, epoch: double;
   ra, Dec, dist, r, elong, phase, magn, xc, yc, zc, st0, q, xac, yac, zac: double;
   hh, g, ma, ap, an, ic, ec, sa, eq: double;
@@ -3124,9 +3125,8 @@ begin
   screen.cursor := crHourGlass;
   try
     cjd := (date1.JD + date2.JD) / 2;
-    id := astid[ComboBox2.ItemIndex];
-    epoch := cdb.GetAsteroidEpoch(id, cjd);
-    if cdb.GetAstElem(id, epoch, hh, g, ma, ap, an, ic, ec, sa, eq, ref, nam, elem_id) then
+    idx := astid[ComboBox2.ItemIndex];
+    if cdb.GetAstElem(idx, epoch, hh, g, ma, ap, an, ic, ec, sa, eq, ref, nam) then
     begin
       Fplanet.InitAsteroid(epoch, hh, g, ma, ap, an, ic, ec, sa, eq, nam);
       //   Asteroidgrid.Visible:=false;

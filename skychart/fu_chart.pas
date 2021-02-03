@@ -4168,8 +4168,7 @@ begin
   end;
   if otype = 'As' then
   begin
-    if sc.cdb.GetAstElem(sc.cfgsc.FindId, sc.cfgsc.TrackElemEpoch, h, g,
-      ma, ap, an, ic, ec, sa, eq, ref, nam, elem_id) then
+    if sc.cdb.GetAstElem(strtoint(sc.cfgsc.FindId), sc.cfgsc.TrackElemEpoch, h, g, ma, ap, an, ic, ec, sa, eq, ref, nam) then
     begin
       sc.planet.InitAsteroid(sc.cfgsc.TrackElemEpoch, h, g, ma, ap, an, ic, ec, sa, eq, nam);
       sc.planet.Asteroid(njd, True, cra, cdec, dst, rr, elong, phase, magn, xc, yc, zc);

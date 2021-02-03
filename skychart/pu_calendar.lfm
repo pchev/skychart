@@ -627,9 +627,9 @@ object f_calendar: Tf_calendar
       ParentFont = False
       object AsteroidGrid: TStringGrid
         Left = 0
-        Height = 305
+        Height = 456
         Top = 43
-        Width = 827
+        Width = 990
         Align = alClient
         Anchors = [akLeft, akRight, akBottom]
         ColCount = 9
@@ -646,15 +646,15 @@ object f_calendar: Tf_calendar
         Left = 0
         Height = 43
         Top = 0
-        Width = 827
+        Width = 990
         Align = alTop
         ClientHeight = 43
-        ClientWidth = 827
+        ClientWidth = 990
         ParentFont = False
         TabOrder = 1
         object ComboBox2: TComboBox
           Left = 216
-          Height = 27
+          Height = 35
           Top = 13
           Width = 169
           ItemHeight = 0
@@ -676,7 +676,7 @@ object f_calendar: Tf_calendar
         end
         object AstFilter: TEdit
           Left = 8
-          Height = 21
+          Height = 30
           Top = 12
           Width = 121
           ParentFont = False

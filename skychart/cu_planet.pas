@@ -128,13 +128,13 @@ type
     function AsteroidMag(phase,dist,r,h,g: double): double;
     function ConnectDB(db: string): boolean;
     function NewAstDay(newjd, limitmag: double; cfgsc: Tconf_skychart): boolean;
-    procedure NewAstDayCallback(Sender: TObject; Row: TResultRow);
+//    procedure NewAstDayCallback(Sender: TObject; Row: TResultRow);
     function FindAsteroid(x1, y1, x2, y2: double; nextobj: boolean;
       cfgsc: Tconf_skychart; var nom, mag, date, desc: string; trunc: boolean = True): boolean;
     function FindAsteroidName(astname: string; var ra, de, mag: double;
       cfgsc: Tconf_skychart; upddb: boolean; MeanPos: boolean = False): boolean;
     function PrepareAsteroid(jd1, jd2, step: double; msg: TStrings): boolean;
-    procedure PrepareAsteroidCallback(Sender: TObject; Row: TResultRow);
+//    procedure PrepareAsteroidCallback(Sender: TObject; Row: TResultRow);
     function NewComDay(newjd, limitmag: double; cfgsc: Tconf_skychart): boolean;
     procedure NewComDayCallback(Sender: TObject; Row: TResultRow);
     function FindComet(x1, y1, x2, y2: double; nextobj: boolean;
@@ -2582,18 +2582,14 @@ begin
 end;
 
 function TPlanet.NewAstDay(newjd, limitmag: double; cfgsc: Tconf_skychart): boolean;
-var
-  qry: string;
+var qry: string;
   currentjd, jd1, dt, t: double;
-  currentmag, lmag: integer;
-  i: integer;
-const
-  nprov=15;
-  prov: array[1..nprov] of string=('I','J','K0','K10','K11','K12','K13','K14','K15','K16','K17','K18','K19','K2','K3');
-  nperm=62;
-  perm: array[1..nperm] of string=('0','1','2','3','4','5','6','7','8','9',
-       'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-       'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z');
+  njd, currentmag, lmag: integer;
+  i,idx: integer;
+  id: string;
+  imag, ira, idec, nea: integer;
+  dist, r, elong, phase, h, g, ma, ap, an, ic, ec, sa, eq, epoch, ra, Dec, mag, xc, yc, zc: double;
+  nam,ref: string;
 begin
   try
     lmag := round(limitmag * 10);
@@ -2623,18 +2619,18 @@ begin
         db1.Query('CREATE INDEX IDX2_' + cfgsc.ast_daypos + ' ON ' +
           cfgsc.ast_daypos + ' (near_earth)');
       end;
-      qry := 'SELECT distinct(jd) from cdc_ast_mag';
-      db1.Query(qry);
-      if db1.Rowcount > 0 then
+      if cdb.NumAsteroidMagnitudesJD > 0 then
       begin
-        jd1 := strtofloat(strim(db1.Results[0][0]));
+        njd:=0;
+        jd1 := cdb.AsteroidMagnitudesJD[0];
         dt := abs(newjd - jd1);
         i := 1;
-        while i < db1.Rowcount do
+        while i < cdb.NumAsteroidMagnitudesJD do
         begin
-          t := strtofloat(strim(db1.Results[i][0]));
+          t := cdb.AsteroidMagnitudesJD[1];
           if abs(newjd - t) < dt then
           begin
+            njd:=i;
             jd1 := t;
             dt := abs(newjd - t);
           end;
@@ -2645,27 +2641,43 @@ begin
           Result := False;
           exit;
         end;
-        qry :=
-          'SELECT a.id,a.h,a.g,a.epoch,a.mean_anomaly,a.arg_perihelion,a.asc_node,a.inclination,a.eccentricity,a.semi_axis,a.ref,a.name,a.equinox'
-          + ' FROM cdc_ast_elem a, cdc_ast_mag b' +
-          ' where b.mag<=' + IntToStr(lmag) + ' and b.jd=' + strim(
-          formatfloat(f6s, jd1)) + ' and a.id=b.id' + ' and a.epoch=b.epoch';
+        jdnew := newjd;
+        jdchart := cfgsc.JDChart;
+        ast_daypos := cfgsc.ast_daypos;
         db2.UnLockTables;
         db2.StartTransaction;
         db2.TruncateTable(cfgsc.ast_day);
         db2.TruncateTable(cfgsc.ast_daypos);
         db2.LockTables(cfgsc.ast_day + ' WRITE, ' + cfgsc.ast_daypos + ' WRITE');
-        jdnew := newjd;
-        jdchart := cfgsc.JDChart;
-        ast_daypos := cfgsc.ast_daypos;
-        db1.CallBackOnly := True;
-        db1.OnFetchRow := @NewAstDayCallback;
-        for i:=1 to nprov do
-          db1.Query(qry+' and a.id like "'+prov[i]+'%"');
-        for i:=1 to nperm do
-          db1.Query(qry+' and a.id like "00'+perm[i]+'%"');
-        db1.CallBackOnly := False;
-        db1.OnFetchRow := nil;
+        ////////////////////////////
+
+        for i:=0 to cdb.NumAsteroidMagnitude-1 do begin
+          if cdb.AsteroidMagnitudes[njd,i].magnitude<=lmag then begin
+            idx := cdb.AsteroidMagnitudes[njd,i].elementidx;
+            id := cdb.AsteroidElement[idx].id;
+            cdb.GetAstElem(idx,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam);
+            InitAsteroid(epoch, h, g, ma, ap, an, ic, ec, sa, eq, nam);
+            Asteroid(jdnew, False, ra, Dec, dist, r, elong, phase, mag, xc, yc, zc);
+            precession(jd2000, jdchart, ra, Dec);
+            ira := round(ra * 1000);
+            idec := round(Dec * 1000);
+            imag := round(mag * 10);
+            if dist < NEO_dist then
+              nea := 1
+            else
+              nea := 0;
+            qry := 'INSERT INTO ' + ast_daypos + ' (id,epoch,ra,de,mag,near_earth,idx) VALUES ('
+              + '"' + id + '"' + ',"' + strim(formatfloat(f6s, epoch)) +
+              '"' + ',"' + IntToStr(ira) + '"' + ',"' +
+              IntToStr(idec) + '"' + ',"' + IntToStr(imag) + '"' +
+              ',"' + IntToStr(nea) +'",' + IntToStr(idx) + ')';
+            db2.Query(qry);
+            qry:=db2.ErrorMessage;
+          end;
+        end;
+
+        ////////////////////////////
+
         qry := 'INSERT INTO ' + cfgsc.ast_day + ' (jd,limit_mag)' +
           ' VALUES ("' + IntToStr(trunc(newjd)) + '","' + IntToStr(lmag) + '")';
         db2.Query(qry);
@@ -2682,47 +2694,7 @@ begin
     end;
   except
     Result := False;
-    db1.CallBackOnly := False;
-    db1.OnFetchRow := nil;
   end;
-end;
-
-procedure TPlanet.NewAstDayCallback(Sender: TObject; Row: TResultRow);
-var
-  qry, id: string;
-  imag, ira, idec, nea: integer;
-  dist, r, elong, phase, h, g, ma, ap, an, ic, ec, sa, eq, epoch, ra, Dec, mag, xc, yc, zc: double;
-  nam: string;
-begin
-  id := row[0];
-  h := StrToFloatDef(strim(row[1]), 20);
-  g := StrToFloatDef(strim(row[2]), 0.15);
-  epoch := strtofloat(strim(row[3]));
-  ma := strtofloat(strim(row[4]));
-  ap := strtofloat(strim(row[5]));
-  an := strtofloat(strim(row[6]));
-  ic := strtofloat(strim(row[7]));
-  ec := strtofloat(strim(row[8]));
-  sa := strtofloat(strim(row[9]));
-  //            ref:=row[10];
-  nam := row[11];
-  eq := strtofloat(strim(row[12]));
-  InitAsteroid(epoch, h, g, ma, ap, an, ic, ec, sa, eq, nam);
-  Asteroid(jdnew, False, ra, Dec, dist, r, elong, phase, mag, xc, yc, zc);
-  precession(jd2000, jdchart, ra, Dec);
-  ira := round(ra * 1000);
-  idec := round(Dec * 1000);
-  imag := round(mag * 10);
-  if dist < NEO_dist then
-    nea := 1
-  else
-    nea := 0;
-  qry := 'INSERT INTO ' + ast_daypos + ' (id,epoch,ra,de,mag,near_earth) VALUES ('
-    + '"' + id + '"' + ',"' + strim(formatfloat(f6s, epoch)) +
-    '"' + ',"' + IntToStr(ira) + '"' + ',"' +
-    IntToStr(idec) + '"' + ',"' + IntToStr(imag) + '"' +
-    ',"' + IntToStr(nea) + '")';
-  db2.Query(qry);
 end;
 
 function TPlanet.NewComDay(newjd, limitmag: double; cfgsc: Tconf_skychart): boolean;
@@ -2843,7 +2815,7 @@ var
   ra, Dec, dist, r, elong, phase, magn, jdt, st0, q: double;
   epoch, h, g, ma, ap, an, ic, ec, sa, eq, d, da, xc, yc, zc: double;
   qry, id, ref, nam, elem_id: string;
-  j, i, SimNb: integer;
+  j, i, SimNb, idx: integer;
 begin
   try
     while lockdb do
@@ -2867,7 +2839,7 @@ begin
     end;
     d := MaxValue([0.6 * cfgsc.fov, 0.09]);
     da := d / cos(cfgsc.decentre);
-    qry := 'SELECT id,epoch from ' + cfgsc.ast_daypos + ' where';
+    qry := 'SELECT id,epoch,idx from ' + cfgsc.ast_daypos + ' where';
     qry := qry + ' (mag<=' + IntToStr(round((cfgsc.StarMagMax + cfgsc.AstMagDiff) * 10)) + ' and';
     if cfgsc.NP or cfgsc.SP then
       qry := qry + ' (ra>0 and ra<' + IntToStr(round(1000 * (pi2))) + ')'
@@ -2887,8 +2859,8 @@ begin
       qry := qry + ' or (near_earth=1)';
     if searchid <> '' then
       qry := qry + ' or (id="' + searchid + '")';
-    if cfgsc.SimAsteroid <> '' then
-      qry := qry + ' or (id="' + cfgsc.SimAsteroid + '")';
+    if cfgsc.SimAsteroid >=0  then
+      qry := qry + ' or (idx=' + inttostr(cfgsc.SimAsteroid) + ')';
     qry := qry + ' limit ' + IntToStr(MaxAsteroid);
     db2.Query(qry);
     if db2.Rowcount > 0 then
@@ -2914,10 +2886,13 @@ begin
         for i := 0 to db2.Rowcount - 1 do
         begin
          id := db2.Results[i][0];
-         if (cfgsc.SimAsteroid='')or(cfgsc.SimAsteroid=id) then begin
+         idx := strtoint(trim(db2.Results[i][2]));
+         if (cfgsc.SimAsteroid<0)or(cfgsc.SimAsteroid=idx) then begin
           epoch := strtofloat(strim(db2.Results[i][1]));
-          if cdb.GetAstElem(id, epoch, h, g, ma, ap, an, ic, ec, sa, eq, ref, nam, elem_id) then
+          if (idx>=0)and(idx<cdb.NumAsteroidElement) then
           begin
+            id := cdb.AsteroidElement[idx].id;
+            cdb.GetAstElem(idx,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam);
             InitAsteroid(epoch, h, g, ma, ap, an, ic, ec, sa, eq, nam);
             Asteroid(jdt, True, ra, Dec, dist, r, elong, phase, magn, xc, yc, zc);
             cfgsc.AsteroidLst[j, i + 1, 6] := ra;
@@ -2927,7 +2902,7 @@ begin
               Paralaxe(st0, dist, ra, Dec, ra, Dec, q, cfgsc);
             if cfgsc.ApparentPos then
               apparent_equatorial(ra, Dec, cfgsc, True, False);
-            cfgsc.AsteroidName[j, i + 1, 1] := id;
+            cfgsc.AsteroidName[j, i + 1, 1] := inttostr(idx);
             cfgsc.AsteroidName[j, i + 1, 2] := nam;
             cfgsc.AsteroidLst[j, i + 1, 1] := ra;
             cfgsc.AsteroidLst[j, i + 1, 2] := Dec;
@@ -2937,7 +2912,7 @@ begin
           end;
          end
          else begin
-           cfgsc.AsteroidName[j, i + 1, 1] := id;
+           cfgsc.AsteroidName[j, i + 1, 1] := inttostr(idx);
            cfgsc.AsteroidLst[j, i + 1, 5] := -1;
          end;
         end;
@@ -3076,14 +3051,14 @@ var
   dist, r, elong, phase, rad, ded: double;
   epoch, h, g, ma, ap, an, ic, ec, sa, eq, xc, yc, zc: double;
   qry, id, ref, nam, elem_id: string;
-  ira, idec, imag: integer;
+  i, idx, ira, idec, imag: integer;
 
   s1: string;
 begin
   Result := False;
   searchid := '';
 
-  if (not db1.Active) or (not cfgsc.ephvalid) then
+  if (cdb.NumAsteroidElement=0) or (not cfgsc.ephvalid) then
     exit;
 
   s1 := UpperCase(StringReplace(astname,' ','',[rfReplaceAll]));
@@ -3092,64 +3067,59 @@ begin
 
   id := '';
 
-  qry := 'SELECT id FROM cdc_ast_name' + ' where UPPER(REPLACE(name,'' '','''')) = "' + s1 + '"';
-
-  db1.Query(qry);
-
-  if db1.Rowcount > 0 then
-    id := db1.Results[0][0];
+  for i:=0 to cdb.NumAsteroidElement-1 do begin
+    if uppercase(StringReplace(cdb.AsteroidElement[i].name,' ','',[rfReplaceAll]))=s1 then begin
+      idx:=i;
+      id:=cdb.AsteroidElement[i].id;
+      break;
+    end;
+  end;
 
   if id = '' then
   begin
-
-    qry := 'SELECT id FROM cdc_ast_name' + ' where UPPER(REPLACE(name,'' '','''')) like "%' +
-      s1 + '%"' + ' limit 1';
-
-    db1.Query(qry);
-
-    if db1.RowCount > 0 then
-      id := db1.Results[0][0];
-
+    for i:=0 to cdb.NumAsteroidElement-1 do begin
+      if pos(s1,uppercase(StringReplace(cdb.AsteroidElement[i].name,' ','',[rfReplaceAll])))>0 then begin
+        idx:=i;
+        id:=cdb.AsteroidElement[i].id;
+        break;
+      end;
+    end;
   end;
 
   if id = '' then
     exit;
 
-  if cdb.GetAstElemEpoch(id, cfgsc.CurJDTT, epoch, h, g, ma, ap, an, ic, ec,
-    sa, eq, ref, nam, elem_id) then
+  id := cdb.AsteroidElement[idx].id;
+  cdb.GetAstElem(idx,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam);
+  InitAsteroid(epoch, h, g, ma, ap, an, ic, ec, sa, eq, nam);
+  Asteroid(cfgsc.CurJDTT, True, ra, de, dist, r, elong, phase, mag, xc, yc, zc);
+  Result := True;
+
+  if MeanPos then
+    exit;
+
+  if cfgsc.PlanetParalaxe then
+    Paralaxe(cfgsc.CurST, dist, ra, de, ra, de, r, cfgsc);
+
+  if upddb then
   begin
-    InitAsteroid(epoch, h, g, ma, ap, an, ic, ec, sa, eq, nam);
-    Asteroid(cfgsc.CurJDTT, True, ra, de, dist, r, elong, phase, mag, xc, yc, zc);
-    Result := True;
+    rad := ra;
+    ded := de;
+    precession(jd2000, cfgsc.jdchart, rad, ded);
+    ira := round(rad * 1000);
+    idec := round(ded * 1000);
+    imag := round(mag * 10);
 
-    if MeanPos then
-      exit;
+    qry := 'INSERT INTO ' + cfgsc.ast_daypos + ' (id,epoch,ra,de,mag,idx) VALUES ('
+      + '"' + id + '"' + ',"' + strim(formatfloat(f6s, epoch)) +
+      '"' + ',"' + IntToStr(ira) + '"' + ',"' + IntToStr(
+      idec) + '"' + ',"' + IntToStr(imag) + ',"' + IntToStr(idx) + '")';
 
-    if cfgsc.PlanetParalaxe then
-      Paralaxe(cfgsc.CurST, dist, ra, de, ra, de, r, cfgsc);
+    db1.Query(qry);
+    db1.flush('tables');
+    searchid := id;
 
-    if upddb then
-    begin
-      rad := ra;
-      ded := de;
-      precession(jd2000, cfgsc.jdchart, rad, ded);
-      ira := round(rad * 1000);
-      idec := round(ded * 1000);
-      imag := round(mag * 10);
-
-      qry := 'INSERT INTO ' + cfgsc.ast_daypos + ' (id,epoch,ra,de,mag) VALUES ('
-        + '"' + id + '"' + ',"' + strim(formatfloat(f6s, epoch)) +
-        '"' + ',"' + IntToStr(ira) + '"' + ',"' + IntToStr(
-        idec) + '"' + ',"' + IntToStr(imag) + '")';
-
-      db1.Query(qry);
-      db1.flush('tables');
-      searchid := id;
-
-    end;
-  end
-  else
-    Result := False;
+  end;
 
 end;
 
@@ -3235,7 +3205,7 @@ var
   yy, mm, dd: integer;
   tar, tde: double;
   h, g, ma, ap, an, ic, ec, sa, eq, ra, Dec, dist, r, elong, phase, magn, xc, yc, zc: double;
-  ref, nam, elem_id: string;
+  ref, nam: string;
   jdt, hh, jd0, st0, ar, de, q: double;
   sar, sde, shh, sdp, sdist, sphase: string;
 const
@@ -3301,9 +3271,8 @@ begin
     djd(jdt + (cfgsc.TimeZone - cfgsc.DT_UT) / 24, yy, mm, dd, hh);
     shh := ARtoStr3(rmod(hh, 24));
     date := Date2Str(yy, mm, dd) + blank + shh;
-    cdb.GetAstElem(cfgsc.AsteroidName[CurrentAstStep, CurrentAsteroid, 1],
-      cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 5], h, g, ma, ap, an, ic,
-      ec, sa, eq, ref, nam, elem_id);
+    cdb.GetAstElem(strtoint(cfgsc.AsteroidName[CurrentAstStep, CurrentAsteroid, 1]), cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 5], h, g, ma, ap, an, ic,
+      ec, sa, eq, ref, nam);
     InitAsteroid(cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 5],
       h, g, ma, ap, an, ic, ec, sa, eq, nam);
     Asteroid(jdt, True, ra, Dec, dist, r, elong, phase, magn, xc, yc, zc);
@@ -3475,32 +3444,28 @@ end;
 
 function TPlanet.PrepareAsteroid(jd1, jd2, step: double; msg: TStrings): boolean;
 var
-  jds, jde, qry: string;
-  i: integer;
+  jds, jde: string;
+  i,j: integer;
   x, y, z: double;
+  nam,ref: string;
+  epoch, h, g, ma, ap, an, ic, ec, sa, eq: double;
+  ra, Dec, dist, r, elong, phase, magn, xc, yc, zc: double;
 begin
   try
     jds := formatfloat(f1, jd1);
     jde := formatfloat(f1, jd2);
     step := max(1.0, step);
-    msg.Add(Format(rsBeginProcess, [jds, jddate(jd1)]) + ' - ' + Format('%s / %s',
-      [jde, jddate(jd2)]));
-    db1.StartTransaction;
-    db1.LockTables('cdc_ast_mag WRITE, cdc_ast_elem READ');
-    msg.Add(rsDeletePrevio);
-    application.ProcessMessages;
-    db1.Query('DELETE from cdc_ast_mag where jd between ' + jds + ' and ' + jde);
+    msg.Add(Format(rsBeginProcess, [jds, jddate(jd1)]) + ' - ' + Format('%s / %s',[jde, jddate(jd2)]));
     msg.Add(rsGetAsteroidL);
     application.ProcessMessages;
-    qry := 'SELECT distinct(id) from cdc_ast_elem';
-    db2.CallBackOnly := True;
-    db2.OnFetchRow := @PrepareAsteroidCallback;
     n_ast := 0;
     jdaststart := jd1;
     jdastend := jd2;
     jdaststep := step;
     jdastnstep := round((jd2 - jd1) / step) + 1;
     SetLength(AstSol, jdastnstep);
+    cdb.NumAsteroidMagnitudesJD:=jdastnstep;
+    SetLength(cdb.AsteroidMagnitudesJD, cdb.NumAsteroidMagnitudesJD);
     for i := 0 to jdastnstep - 1 do
     begin
       SunRect(jd1 + i * step, x, y, z);
@@ -3508,14 +3473,40 @@ begin
       AstSol[i, 1] := x;
       AstSol[i, 2] := y;
       AstSol[i, 3] := z;
+      cdb.AsteroidMagnitudesJD[i]:=AstSol[i, 0];
     end;
-    smsg := msg;
-    db2.Query(qry);
-    db2.CallBackOnly := False;
-    db2.OnFetchRow := nil;
-    db1.UnLockTables;
-    db1.Commit;
-    db1.flush('tables');
+    SetLength(cdb.AsteroidMagnitudes,cdb.NumAsteroidMagnitudesJD,cdb.NumAsteroidElement);
+    ///////
+    for j:=0 to cdb.NumAsteroidElement-1 do begin
+      cdb.GetAstElem(j,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam);
+      if abs(jdaststart - epoch) < 3650 then
+      begin // 10 years max limit
+        Inc(n_ast);
+        InitAsteroid(epoch, h, g, ma, ap, an, ic, ec, sa, eq, nam);
+        for i := 0 to jdastnstep - 1 do
+        begin
+          XSol := AstSol[i, 1];
+          YSol := AstSol[i, 2];
+          ZSol := AstSol[i, 3];
+          SolT0 := AstSol[i, 0];
+          jdnew := AstSol[i, 0];
+          Asteroid(jdnew, False, ra, Dec, dist, r, elong, phase, magn, xc, yc, zc);
+          if dist < NEO_dist then
+            magn := 0;
+          cdb.AsteroidMagnitudes[i,n_ast-1].elementidx:=j;
+          cdb.AsteroidMagnitudes[i,n_ast-1].magnitude:=round(magn * 10);
+        end;
+      end;
+      if (n_ast > 0) and ((n_ast mod 10000) = 0) then
+      begin
+        msg.Add(Format(rsProcessing, [IntToStr(n_ast)]));
+        application.ProcessMessages;
+      end;
+    end;
+    cdb.NumAsteroidMagnitude:=n_ast;
+    SetLength(cdb.AsteroidMagnitudes,cdb.NumAsteroidMagnitudesJD,cdb.NumAsteroidMagnitude);
+    ///////
+    cdb.SaveAsteroidMagnitude;
     cdb.TruncateDailyAsteroid;
     msg.Add(Format(rsEndProcessin, [IntToStr(n_ast)]));
     Result := (n_ast > 0);
@@ -3527,51 +3518,9 @@ begin
     end;
   except
     Result := False;
-    db2.CallBackOnly := False;
     msg.Add(rsErrorPleaseC);
     application.ProcessMessages;
     sleep(3000);
-  end;
-end;
-
-procedure TPlanet.PrepareAsteroidCallback(Sender: TObject; Row: TResultRow);
-var
-  id, jds, ref, nam, qry, elem_id: string;
-  epoch, h, g, ma, ap, an, ic, ec, sa, eq: double;
-  ra, Dec, dist, r, elong, phase, magn, xc, yc, zc: double;
-  i: integer;
-begin
-  id := row[0];
-  if cdb.GetAstElemEpoch(id, jdaststart, epoch, h, g, ma, ap, an, ic, ec,
-    sa, eq, ref, nam, elem_id) then
-  begin
-    if abs(jdaststart - epoch) < 3650 then
-    begin // 10 years max limit
-      Inc(n_ast);
-      InitAsteroid(epoch, h, g, ma, ap, an, ic, ec, sa, eq, nam);
-      for i := 0 to jdastnstep - 1 do
-      begin
-        XSol := AstSol[i, 1];
-        YSol := AstSol[i, 2];
-        ZSol := AstSol[i, 3];
-        SolT0 := AstSol[i, 0];
-        jdnew := AstSol[i, 0];
-        Asteroid(jdnew, False, ra, Dec, dist, r, elong, phase, magn, xc, yc, zc);
-        jds := formatfloat(f1, jdnew);
-        if dist < NEO_dist then
-          magn := 0;
-        qry := 'INSERT INTO cdc_ast_mag (id,jd,epoch,mag,elem_id) VALUES ('
-          + '"' + id + '"' + ',"' + jds + '"' +
-          ',"' + formatfloat(f1, epoch) + '"' + ',"' + IntToStr(round(magn * 10)) +
-          '"' + ',"' + elem_id + '"' + ')';
-        db1.Query(qry);
-      end;
-    end;
-  end;
-  if (n_ast > 0) and ((n_ast mod 10000) = 0) then
-  begin
-    smsg.Add(Format(rsProcessing, [IntToStr(n_ast)]));
-    application.ProcessMessages;
   end;
 end;
 

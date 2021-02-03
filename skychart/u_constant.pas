@@ -916,6 +916,21 @@ type
     oname, comment: string;
   end;
 
+  TAsteroidElement = record
+    id: array[0..6] of char;
+    ref: array[0..8]of char;
+    name: array[0..28]of char;
+    h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,equinox: double;
+  end;
+  TAsteroidElements = array of TAsteroidElement;
+  TAsteroidMagnitudesJD = array of double;
+  TAsteroidMagnitude = record
+    elementidx: integer;
+    magnitude: integer;
+  end;
+  TAsteroidMagnitudes = array of array of TAsteroidMagnitude;
+
+
   Tconf_catalog = class(TObject)    // catalog setting
   public
     GCatLst: array of TGCatLst;
@@ -1038,8 +1053,8 @@ type
     projtype: char;
     projname: array [0..MaxField] of string[3];
     FlipX, FlipY, ProjPole, TrackType, TrackObj, AstSymbol, ComSymbol: integer;
-    SimNb, SimD, SimH, SimM, SimS, SimLabel: integer;
-    SimComet, SimCometName, SimAsteroid, SimAsteroidName: string;
+    SimNb, SimD, SimH, SimM, SimS, SimLabel,SimAsteroid: integer;
+    SimComet, SimCometName, SimAsteroidName: string;
     SimObject: array[1..NumSimObject] of boolean;
     SimLine, SimMark, SimDateLabel, SimNameLabel, SimMagLabel,
     ShowPlanet, PlanetParalaxe, ShowEarthShadow, ShowAsteroid, ShowComet,
@@ -1717,35 +1732,17 @@ const
   create_table_ast_day_pos =
     '( id varchar(7) NOT NULL default "", epoch double NOT NULL default "0",' +
     'ra smallint(6) NOT NULL default "0",  de smallint(6) NOT NULL default "0",' +
-    'mag smallint(6) NOT NULL default "0", near_earth smallint(1) NOT NULL default "0", PRIMARY KEY (ra,de,mag,id))';
+    'mag smallint(6) NOT NULL default "0", near_earth smallint(1) NOT NULL default "0",'+
+    'idx integer NOT NULL, PRIMARY KEY (ra,de,mag,id))';
   create_table_com_day =
     ' ( jd int(11) NOT NULL default "0", limit_mag smallint(6) NOT NULL default "0")';
   create_table_com_day_pos =
     '( id varchar(12) NOT NULL default "", epoch double NOT NULL default "0",' +
     'ra smallint(6) NOT NULL default "0", de smallint(6) NOT NULL default "0",' +
     'mag smallint(6) NOT NULL default "0", near_earth smallint(1) NOT NULL default "0", PRIMARY KEY (ra,de,mag))';
-  numsqltable = 11;
+  numsqltable = 7;
   sqltable: array[1..numsqltable, 1..3] of string = (
      // sqlite tables
-    ('cdc_ast_name',
-    ' ( id TEXT NOT NULL default "0", name TEXT NOT NULL default "",' +
-    'PRIMARY KEY (id))', ''),
-    ('cdc_ast_elem_list',
-    ' ( elem_id INTEGER NOT NULL default "0", filedesc TEXT NOT NULL default "",' +
-    'PRIMARY KEY (elem_id))', ''),
-    ('cdc_ast_elem', ' ( id TEXT NOT NULL default "0",' +
-    'h NUMERIC NOT NULL default "0", g NUMERIC NOT NULL default "0",' +
-    'epoch NUMERIC NOT NULL default "0", mean_anomaly NUMERIC NOT NULL default "0",' +
-    'arg_perihelion NUMERIC NOT NULL default "0", asc_node NUMERIC NOT NULL default "0",'
-    +
-    'inclination NUMERIC NOT NULL default "0", eccentricity NUMERIC NOT NULL default "0",'
-    + 'semi_axis NUMERIC NOT NULL default "0", ref TEXT NOT NULL default "",' +
-    'name TEXT NOT NULL default "", equinox INTEGER NOT NULL default "0",' +
-    'elem_id INTEGER NOT NULL default "0", PRIMARY KEY (id,epoch))', ''),
-    ('cdc_ast_mag', ' ( id TEXT NOT NULL default "",' +
-    'jd NUMERIC NOT NULL default "0", epoch NUMERIC NOT NULL default "0",' +
-    'mag INTEGER NOT NULL default "0", elem_id INTEGER NOT NULL default "0",' +
-    'PRIMARY KEY (jd,id))', '1'),
     ('cdc_com_name',
     ' ( id TEXT NOT NULL default "0", name TEXT NOT NULL default "",' +
     'PRIMARY KEY (id))', ''),
@@ -1785,9 +1782,8 @@ const
     'amin NUMERIC NOT NULL default "0", amax NUMERIC NOT NULL default "0",  u TEXT NOT NULL default "", ' +
     'PRIMARY KEY (name))', '5')
     );
-  numsqlindex = 5;
+  numsqlindex = 4;
   sqlindex: array[1..numsqlindex, 1..2] of string = (
-    ('ast_mag_idx', 'cdc_ast_mag (mag)'),
     ('cdc_fits_objname', 'cdc_fits (catalogname,objectname)'),
     ('cdc_location_idx1', 'cdc_location(country,location)'),
     ('cdc_location_idx2', 'cdc_location(latitude,longitude)'),

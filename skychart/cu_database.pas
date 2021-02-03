@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 {$mode objfpc}{$H+}
 interface
 
-uses
+uses  math,
   passql, passqlite, u_constant, u_util, u_projection, cu_fits, FileUtil,
   Forms, StdCtrls, ComCtrls, Classes, Dialogs, SysUtils, StrUtils, u_translation;
 
@@ -40,8 +40,14 @@ type
     FAstmsg: string;
     FComMindt: integer;
     tstval: double;
+    FNumAsteroidElement: integer;
+    FAsteroidElement: TAsteroidElements;
   public
     { Public declarations }
+    NumAsteroidMagnitudesJD: integer;
+    AsteroidMagnitudesJD: TAsteroidMagnitudesJD;
+    NumAsteroidMagnitude: integer;
+    AsteroidMagnitudes: TAsteroidMagnitudes;
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     function createDB(cmain: Tconf_main; var ok: boolean): string;
@@ -79,6 +85,9 @@ type
     function GetAstExt(aname, anum: string; out fam,h,g,diam,period,amin,amax,u: string): boolean;
     function LoadAsteroidFile(astfile: string; astnumbered, stoperr, limit: boolean;
       astlimit: integer; memoast: Tmemo): boolean;
+    procedure OpenAsteroid;
+    procedure SaveAsteroidMagnitude;
+    procedure OpenAsteroidMagnitude;
     procedure DelAsteroid(astelemlist: string; memoast: Tmemo);
     procedure DelAstDate(astdeldate: string; memoast: Tmemo);
     procedure DelAstAll(memoast: Tmemo);
@@ -88,15 +97,9 @@ type
     procedure TruncateDailyAsteroid;
     procedure GetCometList(filter: string; maxnumber: integer;
       list: TStringList; var cometid: array of string);
-    procedure GetAsteroidList(filter: string; maxnumber: integer;
-      var list: TStringList; var astid: array of string);
+    procedure GetAsteroidList(filter: string; maxnumber: integer; var list: TStringList; var astid: array of integer);
     function GetCometEpoch(id: string; now_jd: double): double;
-    function GetAsteroidEpoch(id: string; now_jd: double): double;
-    function GetAstElem(id: string; epoch: double; var h, g, ma, ap, an, ic, ec, sa, eq: double;
-      var ref, nam, elem_id: string): boolean;
-  published
-    function GetAstElemEpoch(id: string; jd: double;
-      var epoch, h, g, ma, ap, an, ic, ec, sa, eq: double; var ref, nam, elem_id: string): boolean;
+    function GetAstElem(idx: integer; var epoch, h, g, ma, ap, an, ic, ec, sa, eq: double; var ref, nam: string): boolean;
     function GetComElem(id: string; epoch: double; var tp, q, ec, ap, an, ic, h, g, eq: double;
       var nam, elem_id: string): boolean;
     function GetComElemEpoch(id: string; jd: double;
@@ -110,6 +113,8 @@ type
     property onInitializeDB: TNotifyEvent read FInitializeDB write FInitializeDB;
     property AstMsg: string read FAstmsg write FAstmsg;
     property ComMinDT: integer read FComMinDT write FComMinDT;
+    property NumAsteroidElement: integer read FNumAsteroidElement;
+    property AsteroidElement:TAsteroidElements read FAsteroidElement;
   end;
 
 implementation
@@ -119,6 +124,9 @@ begin
   inherited Create(AOwner);
   FFits := TFits.Create(self);
   db := TLiteDB.Create(self);
+  NumAsteroidMagnitudesJD:=0;
+  NumAsteroidMagnitude:=0;
+  FNumAsteroidElement:=0;
 end;
 
 destructor TCDCdb.Destroy;
@@ -142,6 +150,8 @@ begin
     DB.Query('PRAGMA journal_mode = MEMORY');
     DB.Query('PRAGMA synchronous = OFF');
     DB.Query('PRAGMA case_sensitive_like = 1');
+    OpenAsteroid;
+    OpenAsteroidMagnitude;
   except
     Result := False;
   end;
@@ -200,7 +210,7 @@ function TCDCdb.CheckForUpgrade(memo: Tmemo; updversion: string): boolean;
 var
   updcountry: boolean;
   i, k: integer;
-  buf: string;
+  buf,fn: string;
   bb: TStringList;
 begin
   Result := False;
@@ -227,8 +237,8 @@ begin
       DB.Query('drop table cdc_country');
       writetrace('Drop table cdc_country ... ' + DB.ErrorMessage);
       DB.Commit;
-      DB.Query('CREATE TABLE ' + sqltable[9, 1] + sqltable[9, 2]);
-      writetrace('Create table ' + sqltable[9, 1] + ' ...  ' + DB.ErrorMessage);
+      DB.Query('CREATE TABLE ' + sqltable[5, 1] + sqltable[5, 2]);
+      writetrace('Create table ' + sqltable[5, 1] + ' ...  ' + DB.ErrorMessage);
       LoadCountryList(slash(sampledir) + 'country.dat', memo);
       Result := True;
     end;
@@ -241,8 +251,8 @@ begin
       DB.Query('drop table cdc_fits');
       writetrace('Drop table cdc_fits ... ' + DB.ErrorMessage);
       DB.Commit;
-      DB.Query('CREATE TABLE ' + sqltable[8, 1] + sqltable[8, 2]);
-      writetrace('Create table ' + sqltable[8, 1] + ' ...  ' + DB.ErrorMessage);
+      DB.Query('CREATE TABLE ' + sqltable[4, 1] + sqltable[4, 2]);
+      writetrace('Create table ' + sqltable[4, 1] + ' ...  ' + DB.ErrorMessage);
       k := 2;
       DB.Query('CREATE INDEX ' + sqlindex[k, 1] + ' on ' + sqlindex[k, 2]);
     end;
@@ -269,6 +279,45 @@ begin
     i := strtointdef(DB.QueryOne('select count(*) from cdc_ast_ext where name="Ceres"'), 0);
     if i=0 then
       LoadAstExt(slash(sampledir) + 'F-D_FULL.TXT');
+
+    // drop the asteroid table and reload default file
+    if (updversion < cdcver) and (updversion < '4.3i') then begin
+      buf:=db.QueryOne('select filedesc from cdc_ast_elem_list order by elem_id desc');
+      if buf='' then fn:=''
+                else fn:=slash(MPCDir)+trim(words(buf,blank,1,1));
+      DB.Query('drop table cdc_ast_elem');
+      writetrace('Drop table cdc_ast_elem ... ' + DB.ErrorMessage);
+      DB.Query('drop table cdc_ast_elem_list');
+      writetrace('Drop table cdc_ast_elem_list ... ' + DB.ErrorMessage);
+      DB.Query('drop table cdc_ast_name');
+      writetrace('Drop table cdc_ast_name ... ' + DB.ErrorMessage);
+      DB.Query('drop table cdc_ast_mag');
+      writetrace('Drop table cdc_ast_mag ... ' + DB.ErrorMessage);
+      bb := TStringList.Create;
+      try
+        DB.Query('select name from sqlite_master where type="table" and name like "cdc_ast_day_%"');
+        for i := 0 to DB.RowCount - 1 do
+        begin
+          bb.add(DB.Results[i][0]);
+        end;
+        for i := 0 to bb.Count - 1 do
+        begin
+          buf := bb[i];
+          DB.Query('drop table ' + buf);
+        end;
+        DB.Commit;
+        DB.flush('tables');
+        DB.Vacuum;
+      finally
+        bb.Free;
+      end;
+      if (fn<>'')and FileExists(fn) then begin
+        if not LoadAsteroidFile(fn, False, False, False, 1000, memo) then
+          LoadAsteroidFile(slash(sampledir) + 'MPCsample.dat', True, False, False, 1000, memo)
+      end
+      else
+        LoadAsteroidFile(slash(sampledir) + 'MPCsample.dat', True, False, False, 1000, memo);
+    end;
 
   end;
 end;
@@ -726,14 +775,13 @@ begin
     end;
 end;
 
-function TCDCdb.LoadAsteroidFile(astfile: string; astnumbered, stoperr, limit: boolean;
-  astlimit: integer; memoast: Tmemo): boolean;
+function TCDCdb.LoadAsteroidFile(astfile: string; astnumbered, stoperr, limit: boolean; astlimit: integer; memoast: Tmemo): boolean;
 var
-  buf, cmd, c, filedesc, filenum: string;
-  ep, id, nam, ec, ax, i, node, peri, eq, ma, h, g, ref: string;
-  y, m, d, nl, prefl, lid, nerr, ierr, rerr: integer;
+  buf, buf1: string;
+  i, y, m, d, nl, prefl, lid, nerr, ierr, rerr, linecount: integer;
   hh: double;
   f: textfile;
+  fb: file of TAsteroidElement;
 begin
   nerr := 1;
   Result := False;
@@ -743,41 +791,43 @@ begin
     exit;
   end;
   try
-    if DB.Active then
+   // filedesc := extractfilename(astfile) + ' ' + FormatDateTime('yyyy-mm-dd hh:nn', FileDateToDateTime(FileAge(astfile)));
+    Filemode := 0;
+    assignfile(f, astfile);
+    reset(f);
+    linecount:=0;
+    while not eof(f) do begin
+      readln(f);
+      inc(linecount);
+    end;
+    reset(f);
+    SetLength(FAsteroidElement,linecount+1);
+    // minimal file checking to distinguish full mpcorb from daily update
+    readln(f, buf);
+    nl := 1;
+    buf1 := trim(copy(buf, 27, 9));
+    val(buf1, hh, nerr);
+    if nerr = 0 then
     begin
-      filedesc := extractfilename(astfile) + blank + FormatDateTime(
-        'yyyy-mm-dd hh:nn', FileDateToDateTime(FileAge(astfile)));
-      Filemode := 0;
-      assignfile(f, astfile);
       reset(f);
-      // minimal file checking to distinguish full mpcorb from daily update
-      readln(f, buf);
-      nl := 1;
-      c := trim(copy(buf, 27, 9));
-      val(c, hh, nerr);
-      if nerr = 0 then
-      begin
-        reset(f);
-        nl := 0;
-      end
-      else
-        repeat
-          readln(f, buf);
-          Inc(nl);
-        until EOF(f) or (copy(buf, 1, 5) = '-----');
-      if EOF(f) then
-      begin
-        memoast.Lines.add(rsThisFileWasN);
-        raise Exception.Create('');
-      end;
-      memoast.Lines.add(Format(rsDataStartOnL, [IntToStr(nl + 1)]));
-      prefl := nl;
-      DB.starttransaction;
-      DB.LockTables('cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_name WRITE');
-      nerr := 0;
-      rerr := 0;
       nl := 0;
+    end
+    else
       repeat
+        readln(f, buf);
+        Inc(nl);
+      until EOF(f) or (copy(buf, 1, 5) = '-----');
+    if EOF(f) then
+    begin
+      memoast.Lines.add(rsThisFileWasN);
+      raise Exception.Create('');
+    end;
+    memoast.Lines.add(Format(rsDataStartOnL, [IntToStr(nl + 1)]));
+    prefl := nl;
+    nerr := 0;
+    rerr := 0;
+    nl := 0;
+    repeat
         readln(f, buf);
         Inc(nl);
         if trim(buf) = '' then
@@ -787,136 +837,187 @@ begin
           else
             continue;
         end;
-        if (nl mod 10000) = 0 then
-        begin
-          memoast.Lines.add(Format(rsProcessingLi, [IntToStr(nl)]));
-          application.ProcessMessages;
-        end;
-        id := trim(copy(buf, 1, 7));
-        if id = '' then
+        buf1:=trim(copy(buf, 1, 7));
+        if buf1 = '' then
         begin
           Dec(nl);
           Inc(rerr);
           Continue;
         end;
-        lid := length(id);
+        lid := length(buf1);
         if lid < 7 then
-          id := StringofChar('0', 7 - lid) + id;
-        h := trim(copy(buf, 9, 5));
-        g := trim(copy(buf, 15, 5));
-        ep := trim(copy(buf, 21, 5));
-        if ep = '' then
+          buf1 := StringofChar('0', 7 - lid) + buf1;
+        FAsteroidElement[nl-1].id := buf1;
+        FAsteroidElement[nl-1].h := StrToFloatDef(trim(copy(buf, 9, 5)),20.0);
+        FAsteroidElement[nl-1].g := StrToFloatDef(trim(copy(buf, 15, 5)),0.15);
+        buf1 := trim(copy(buf, 21, 5));
+        if buf1 = '' then
         begin
           Dec(nl);
           Inc(rerr);
           Continue;
         end;
-        if decode_mpc_date(ep, y, m, d, hh) then
-          ep := floattostr(jd(y, m, d, hh))
+        if decode_mpc_date(buf1, y, m, d, hh) then
+          FAsteroidElement[nl-1].epoch := jd(y, m, d, hh)
         else
         begin
           Inc(nerr);
           memoast.Lines.add(Format(rsInvalidEpoch, [IntToStr(nl + prefl), buf]));
           break;
         end;
-        ma := trim(copy(buf, 27, 9));
-        val(ma, tstval, ierr);
+        buf1 := trim(copy(buf, 27, 9));
+        val(buf1, tstval, ierr);
         if ierr <> 0 then
         begin
           Dec(nl);
           Inc(rerr);
           Continue;
         end;
-        peri := trim(copy(buf, 38, 9));
-        val(peri, tstval, ierr);
+        FAsteroidElement[nl-1].mean_anomaly:=tstval;
+        buf1 := trim(copy(buf, 38, 9));
+        val(buf1, tstval, ierr);
         if ierr <> 0 then
         begin
           Dec(nl);
           Inc(rerr);
           Continue;
         end;
-        node := trim(copy(buf, 49, 9));
-        val(node, tstval, ierr);
+        FAsteroidElement[nl-1].arg_perihelion:=tstval;
+        buf1 := trim(copy(buf, 49, 9));
+        val(buf1, tstval, ierr);
         if ierr <> 0 then
         begin
           Dec(nl);
           Inc(rerr);
           Continue;
         end;
-        i := trim(copy(buf, 60, 9));
-        val(i, tstval, ierr);
+        FAsteroidElement[nl-1].asc_node:=tstval;
+        buf1 := trim(copy(buf, 60, 9));
+        val(buf1, tstval, ierr);
         if ierr <> 0 then
         begin
           Dec(nl);
           Inc(rerr);
           Continue;
         end;
-        ec := trim(copy(buf, 71, 9));
-        val(ec, tstval, ierr);
+        FAsteroidElement[nl-1].inclination:=tstval;
+        buf1 := trim(copy(buf, 71, 9));
+        val(buf1, tstval, ierr);
         if ierr <> 0 then
         begin
           Dec(nl);
           Inc(rerr);
           Continue;
         end;
-        ax := trim(copy(buf, 93, 11));
-        val(ax, tstval, ierr);
+        FAsteroidElement[nl-1].eccentricity:=tstval;
+        buf1 := trim(copy(buf, 93, 11));
+        val(buf1, tstval, ierr);
         if ierr <> 0 then
         begin
           Dec(nl);
           Inc(rerr);
           Continue;
         end;
-        ref := trim(copy(buf, 108, 10));
-        nam := stringreplace(trim(copy(buf, 167, 27)), '"', '\"', [rfreplaceall]);
-        eq := '2000';
-        if nl = 1 then
+        FAsteroidElement[nl-1].semi_axis:=tstval;
+        FAsteroidElement[nl-1].ref := trim(copy(buf, 108, 9));
+        FAsteroidElement[nl-1].name := stringreplace(trim(copy(buf, 167, 28)), '"', '\"', [rfreplaceall]);
+        FAsteroidElement[nl-1].equinox := 2000;
+        if stoperr and (nerr > 1000) then
         begin
-          filedesc := filedesc + ', epoch=' + ep;
-          buf := DB.QueryOne('Select max(elem_id) from cdc_ast_elem_list');
-          if buf <> '' then
-            filenum := IntToStr(StrToInt(buf) + 1)
-          else
-            filenum := '1';
-          if not DB.Query('Insert into cdc_ast_elem_list (elem_id, filedesc) Values("' +
-            filenum + '","' + filedesc + '")') then
-            memoast.Lines.add(trim(DB.ErrorMessage));
+          memoast.Lines.add(rsMoreThan1000);
+          break;
         end;
-        cmd := 'REPLACE INTO cdc_ast_elem (id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id) VALUES (' + '"' + id + '"' + ',"' + h + '"' + ',"' + g + '"' + ',"' + ep + '"' + ',"' + ma + '"' + ',"' + peri + '"' + ',"' + node + '"' + ',"' + i + '"' + ',"' + ec + '"' + ',"' + ax + '"' + ',"' + ref + '"' + ',"' + nam + '"' + ',"' + eq + '"' + ',"' + filenum + '"' + ')';
-        if (not DB.query(cmd)) and (DB.LastError <> 19) then
-        begin
-          memoast.Lines.add(Format(rsInsertFailed, [IntToStr(nl + prefl),
-            trim(DB.ErrorMessage)]));
-          Inc(nerr);
-          if stoperr and (nerr > 1000) then
-          begin
-            memoast.Lines.add(rsMoreThan1000);
-            break;
-          end;
-        end;
-        cmd := 'REPLACE INTO cdc_ast_name (name, id) VALUES (' + '"' +
-          nam + '"' + ',"' + id + '"' + ')';
-        DB.query(cmd);
         if limit and (nl >= astlimit) then
           break;
-      until EOF(f);
-      closefile(f);
-      memoast.Lines.add(Format(rsProcessingEn2, [IntToStr(nl)]));
-      if rerr > 0 then
-        memoast.Lines.add(Format(rsNumberOfIgno, [IntToStr(rerr)]));
-    end
-    else
-    begin
-      buf := trim(DB.ErrorMessage);
-      if buf <> '0' then
-        memoast.Lines.add(buf);
-    end;
-    DB.UnLockTables;
-    DB.commit;
-    DB.flush('tables');
+    until EOF(f);
+    closefile(f);
+    FNumAsteroidElement:=nl;
+    SetLength(FAsteroidElement,FNumAsteroidElement);
+    memoast.Lines.add(Format(rsProcessingEn2, [IntToStr(nl)]));
+    if rerr > 0 then
+      memoast.Lines.add(Format(rsNumberOfIgno, [IntToStr(rerr)]));
     Result := (nerr = 0);
+    if Result then begin
+      AssignFile(fb,slash(DBDir) +'mpcorb.bin');
+      rewrite(fb);
+      for i:=0 to FNumAsteroidElement-1 do
+        write(fb,FAsteroidElement[i]);
+      CloseFile(fb);
+    end;
     memoast.Lines.SaveToFile(slash(DBDir) + 'LoadAsteroidFile.log');
   except
+  end;
+end;
+
+procedure TCDCdb.OpenAsteroid;
+var i: integer;
+    fn:string;
+    fb: file of TAsteroidElement;
+begin
+  fn:=slash(DBDir) +'mpcorb.bin';
+  if FileExists(fn) then begin
+    AssignFile(fb, fn);
+    reset(fb);
+    FNumAsteroidElement:=FileSize(fb);
+    SetLength(FAsteroidElement,FNumAsteroidElement);
+    for i:=0 to FNumAsteroidElement-1 do
+      read(fb,FAsteroidElement[i]);
+    CloseFile(fb);
+  end
+  else begin
+    FNumAsteroidElement:=0;
+    SetLength(FAsteroidElement,0);
+  end;
+end;
+
+procedure TCDCdb.SaveAsteroidMagnitude;
+var i,j: integer;
+    f: TextFile;
+    fb: file of TAsteroidMagnitude;
+begin
+  AssignFile(f,slash(DBDir) +'astmagn.lst');
+  rewrite(f);
+  writeln(f,NumAsteroidMagnitude);
+  writeln(f,NumAsteroidMagnitudesJD);
+  for i:=0 to NumAsteroidMagnitudesJD-1 do
+    writeln(f,AsteroidMagnitudesJD[i]);
+  CloseFile(f);
+  AssignFile(fb,slash(DBDir) +'astmagn.bin');
+  rewrite(fb);
+  for i:=0 to NumAsteroidMagnitudesJD-1 do begin
+    for j:=0 to NumAsteroidMagnitude-1 do begin
+      write(fb,AsteroidMagnitudes[i,j]);
+    end;
+  end;
+  CloseFile(fb);
+end;
+
+procedure TCDCdb.OpenAsteroidMagnitude;
+var i,j: integer;
+    fn1,fn2: string;
+    f: TextFile;
+    fb: file of TAsteroidMagnitude;
+begin
+  fn1:=slash(DBDir) +'astmagn.lst';
+  fn2:=slash(DBDir) +'astmagn.bin';
+  if FileExists(fn1) and FileExists(fn2) then begin
+    AssignFile(f,fn1);
+    reset(f);
+    readln(f,NumAsteroidMagnitude);
+    readln(f,NumAsteroidMagnitudesJD);
+    SetLength(AsteroidMagnitudesJD,NumAsteroidMagnitudesJD);
+    SetLength(AsteroidMagnitudes,NumAsteroidMagnitudesJD,NumAsteroidMagnitude);
+    for i:=0 to NumAsteroidMagnitudesJD-1 do
+      readln(f,AsteroidMagnitudesJD[i]);
+    CloseFile(f);
+    AssignFile(fb,fn2);
+    reset(fb);
+    for i:=0 to NumAsteroidMagnitudesJD-1 do begin
+      for j:=0 to NumAsteroidMagnitude-1 do begin
+        read(fb,AsteroidMagnitudes[i,j]);
+      end;
+    end;
+    CloseFile(fb);
   end;
 end;
 
@@ -1198,21 +1299,28 @@ begin
     end;
 end;
 
-procedure TCDCdb.GetAsteroidList(filter: string; maxnumber: integer;
-  var list: TStringList; var astid: array of string);
+procedure TCDCdb.GetAsteroidList(filter: string; maxnumber: integer; var list: TStringList; var astid: array of integer);
 var
-  qry: string;
-  i: integer;
+  i,n: integer;
 begin
-  qry := 'SELECT distinct(id),name FROM cdc_ast_elem where name like "%' +
-    trim(Filter) + '%" limit ' + IntToStr(maxnumber);
-  DB.Query(qry);
-  if DB.Rowcount > 0 then
-    for i := 0 to DB.Rowcount - 1 do
-    begin
-      astid[i] := DB.Results[i][0];
-      list.Add(DB.Results[i][1]);
+  filter:=uppercase(trim(filter));
+  n:=0;
+  if filter='' then begin
+    for i:=0 to min(maxnumber,FNumAsteroidElement-1) do begin
+        astid[i] := i;
+        list.Add(AsteroidElement[i].name);
     end;
+  end
+  else begin
+    for i:=0 to FNumAsteroidElement-1 do begin
+      if pos(filter,uppercase(trim(AsteroidElement[i].name)))>0 then begin
+        inc(n);
+        if n>maxnumber then break;
+        astid[n-1] := i;
+        list.Add(AsteroidElement[i].name);
+      end;
+    end;
+  end;
 end;
 
 function TCDCdb.GetCometEpoch(id: string; now_jd: double): double;
@@ -1237,61 +1345,24 @@ begin
     end;
 end;
 
-function TCDCdb.GetAsteroidEpoch(id: string; now_jd: double): double;
-var
-  diff, dif: double;
-  i: integer;
-  qry: string;
-begin
-  diff := 1E10;
-  Result := 0;
-  qry := 'SELECT epoch FROM cdc_ast_elem where id="' + id + '"';
-  DB.Query(qry);
-  if DB.Rowcount > 0 then
-    for i := 0 to DB.Rowcount - 1 do
-    begin
-      dif := abs(strtofloat(strim(DB.Results[i][0])) - now_jd);
-      if dif < diff then
-      begin
-        Result := strtofloat(strim(DB.Results[i][0]));
-        diff := dif;
-      end;
-    end;
-end;
-
-
-function TCDCdb.GetAstElem(id: string; epoch: double;
-  var h, g, ma, ap, an, ic, ec, sa, eq: double; var ref, nam, elem_id: string): boolean;
+function TCDCdb.GetAstElem(idx: integer; var epoch,h, g, ma, ap, an, ic, ec, sa, eq: double; var ref, nam: string): boolean;
 var
   qry: string;
 begin
   try
-    qry := 'SELECT id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id'
-      + ' from cdc_ast_elem ' + ' where id="' + id + '"' + ' and epoch=' +
-      strim(formatfloat(f6s, epoch));
-    DB.Query(qry);
-    if DB.rowcount > 0 then
-    begin
-      if not trystrtofloat(strim(DB.Results[0][1]), h) then
-        h := 17;
-      if not trystrtofloat(strim(DB.Results[0][2]), g) then
-        g := 0.15;
-      ma := strtofloat(strim(DB.Results[0][4]));
-      ap := strtofloat(strim(DB.Results[0][5]));
-      an := strtofloat(strim(DB.Results[0][6]));
-      ic := strtofloat(strim(DB.Results[0][7]));
-      ec := strtofloat(strim(DB.Results[0][8]));
-      sa := strtofloat(strim(DB.Results[0][9]));
-      ref := DB.Results[0][10];
-      nam := DB.Results[0][11];
-      eq := strtofloat(strim(DB.Results[0][12]));
-      elem_id := DB.Results[0][13];
-      Result := True;
-    end
-    else
-    begin
-      Result := False;
-    end;
+    h := AsteroidElement[idx].h;
+    g := AsteroidElement[idx].g;
+    epoch := AsteroidElement[idx].epoch;
+    ma := AsteroidElement[idx].mean_anomaly;
+    ap := AsteroidElement[idx].arg_perihelion;
+    an := AsteroidElement[idx].asc_node;
+    ic := AsteroidElement[idx].inclination;
+    ec := AsteroidElement[idx].eccentricity;
+    sa := AsteroidElement[idx].semi_axis;
+    nam := AsteroidElement[idx].name;
+    eq := AsteroidElement[idx].equinox;
+    epoch:=AsteroidElement[idx].epoch;
+    Result := True;
   except
     Result := False;
   end;
@@ -1320,62 +1391,6 @@ begin
       nam := DB.Results[0][10];
       eq := strtofloat(strim(DB.Results[0][11]));
       elem_id := DB.Results[0][12];
-      Result := True;
-    end
-    else
-    begin
-      Result := False;
-    end;
-  except
-    Result := False;
-  end;
-end;
-
-function TCDCdb.GetAstElemEpoch(id: string; jd: double;
-  var epoch, h, g, ma, ap, an, ic, ec, sa, eq: double; var ref, nam, elem_id: string): boolean;
-var
-  qry: string;
-  dt, t: double;
-  i, j: integer;
-begin
-  try
-    qry := 'SELECT id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id'
-      + ' from cdc_ast_elem' + ' where id="' + id + '"';
-    DB.Query(qry);
-    if DB.Rowcount > 0 then
-    begin
-      epoch := strtofloat(strim(DB.Results[0][3]));
-      dt := abs(jd - epoch);
-      j := 0;
-      i := 1;
-      while i < DB.Rowcount do
-      begin
-        t := strtofloat(strim(DB.Results[i][3]));
-        if abs(jd - t) < dt then
-        begin
-          epoch := t;
-          dt := abs(jd - t);
-          j := i;
-        end;
-        Inc(i);
-      end;
-      if dt > 365 then
-      begin
-        FAstmsg := rsWarningSomeA;
-      end;
-      h := StrToFloatDef(strim(DB.Results[j][1]), 20);
-      // H and G not present in file for some poorly observed asteroids
-      g := StrToFloatDef(strim(DB.Results[j][2]), 0.15);
-      ma := strtofloat(strim(DB.Results[j][4]));
-      ap := strtofloat(strim(DB.Results[j][5]));
-      an := strtofloat(strim(DB.Results[j][6]));
-      ic := strtofloat(strim(DB.Results[j][7]));
-      ec := strtofloat(strim(DB.Results[j][8]));
-      sa := strtofloat(strim(DB.Results[j][9]));
-      ref := DB.Results[j][10];
-      nam := DB.Results[j][11];
-      eq := strtofloat(strim(DB.Results[j][12]));
-      elem_id := DB.Results[j][13];
       Result := True;
     end
     else

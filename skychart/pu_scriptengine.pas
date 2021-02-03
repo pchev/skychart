@@ -501,10 +501,9 @@ begin
   Result := (pos(msgOK, str) > 0);
 end;
 
-function Tf_scriptengine.doGetAsteroidList(const filter: string;
-  maxnum: integer; list: TStringList): boolean;
+function Tf_scriptengine.doGetAsteroidList(const filter: string; maxnum: integer; list: TStringList): boolean;
 var
-  astid: array of string;
+  astid: array of integer;
 begin
   SetLength(astid, maxnum);
   list.Clear;

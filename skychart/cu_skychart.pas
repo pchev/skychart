@@ -1157,8 +1157,7 @@ begin
       3:
       begin
         // asteroid
-        if cdb.GetAstElem(cfgsc.TrackId, cfgsc.TrackElemEpoch, v1, v2,
-          v3, v4, v5, v6, v7, v8, v9, s1, s2, s3) then
+        if cdb.GetAstElem(strtoint(cfgsc.TrackId), cfgsc.TrackElemEpoch, v1, v2, v3, v4, v5, v6, v7, v8, v9, s1, s2) then
         begin
           Fplanet.InitAsteroid(cfgsc.TrackElemEpoch, v1, v2, v3, v4, v5, v6, v7, v8, v9, s2);
           Fplanet.Asteroid(cfgsc.CurJDTT, True, a, d, dist, v1, v2, v3, v4, v5, v6, v7);

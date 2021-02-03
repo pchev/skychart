@@ -202,7 +202,8 @@ type
     procedure UpDown3Click(Sender: TObject; Button: TUDBtnType);
   private
     { Private declarations }
-    cometid, astid : array[0..maxcombo] of string;
+    cometid: array[0..maxcombo] of string;
+    astid : array[0..maxcombo] of integer;
     LockChange, LockJD: boolean;
     FApplyConfig: TNotifyEvent;
     JDCalendarDialog1: TJDCalendarDialog;
@@ -1156,7 +1157,7 @@ end;
 procedure Tf_config_time.AsteroidListChange(Sender: TObject);
 begin
   if AsteroidList.ItemIndex<=0 then begin
-    csc.SimAsteroid:='';
+    csc.SimAsteroid:=-1;
     csc.SimAsteroidName:='';
   end
   else begin

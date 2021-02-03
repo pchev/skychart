@@ -3790,7 +3790,7 @@ end;
 
 procedure Tf_main.RecomputeAsteroid;
 var
-  cjd,jd1, jd2, h: double;
+  cjd,jd1, jd2, step, h: double;
   y, m, d: integer;
   dy, dm, dd: word;
 begin
@@ -3807,7 +3807,8 @@ begin
   djd(cjd, y, m, d, h);
   jd1 := jd(y, m, 1, 0);
   jd2 := jd(y, m + 1, 1, 0);
-  if Planet.PrepareAsteroid(jd1, jd2, 1, f_info.ProgressMemo.Lines) then
+  step := max(1.0, (jd2 - jd1));
+  if Planet.PrepareAsteroid(jd1, jd2, step, f_info.ProgressMemo.Lines) then
   begin
     if MultiFrame1.ActiveObject is Tf_chart then begin
       Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.ShowAsteroid := True;
@@ -6411,7 +6412,7 @@ begin
   def_cfgsc.SimH := 0;
   def_cfgsc.SimM := 0;
   def_cfgsc.SimS := 0;
-  def_cfgsc.SimAsteroid := '';
+  def_cfgsc.SimAsteroid := -1;
   def_cfgsc.SimAsteroidName := '';
   def_cfgsc.SimComet := '';
   def_cfgsc.SimCometName := '';
@@ -7454,7 +7455,7 @@ begin
         csc.SimS := ReadInteger(section, 'SimS', csc.SimS);
         csc.SimLine := ReadBool(section, 'SimLine', csc.SimLine);
         csc.SimMark := ReadBool(section, 'SimMark', csc.SimMark);
-        csc.SimAsteroid := ReadString(section, 'SimAsteroid', csc.SimAsteroid);
+        csc.SimAsteroid := ReadInteger(section, 'SimAsteroid', csc.SimAsteroid);
         csc.SimComet := ReadString(section, 'SimComet', csc.SimComet);
         csc.SimAsteroidName := ReadString(section, 'SimAsteroidName', csc.SimAsteroidName);
         csc.SimCometName := ReadString(section, 'SimCometName', csc.SimCometName);
@@ -8807,7 +8808,7 @@ begin
         WriteInteger(section, 'SimS', csc.SimS);
         WriteBool(section, 'SimLine', csc.SimLine);
         WriteBool(section, 'SimMark', csc.SimMark);
-        WriteString(section, 'SimAsteroid', csc.SimAsteroid);
+        WriteInteger(section, 'SimAsteroid', csc.SimAsteroid);
         WriteString(section, 'SimComet', csc.SimComet);
         WriteString(section, 'SimAsteroidName', csc.SimAsteroidName);
         WriteString(section, 'SimCometName', csc.SimCometName);

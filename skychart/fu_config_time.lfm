@@ -97,7 +97,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 17
             Top = 49
-            Width = 343
+            Width = 342
             Caption = 'Difference between Terrestrial Time and Universal Time'
             ParentColor = False
             ParentFont = False
@@ -146,7 +146,6 @@ object f_config_time: Tf_config_time
             ShowHint = True
             TabOrder = 2
             OnChange = dt_utChange
-            Value = 0
             MinValue = -99999999
             MaxValue = 99999999
           end
@@ -623,7 +622,6 @@ object f_config_time: Tf_config_time
             OnChange = JDEditChange
             ParentFont = False
             TabOrder = 18
-            Value = 0
           end
         end
         object CheckBox1: TCheckBox
