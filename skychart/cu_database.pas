@@ -188,7 +188,7 @@ begin
         if ok then
         begin
           writetrace('Create table ' + sqltable[i, 1] + ' ... Ok');
-          if i<10 then creatednow := True;
+          if i<6 then creatednow := True;
         end
         else
           writetrace('Create table ' + sqltable[i, 1] + ' ... Failed: ' + emsg);
