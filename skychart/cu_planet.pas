@@ -125,7 +125,7 @@ type
     procedure InitAsteroid(epoch, mh, mg, ma, ap, an, ic, ec, sa, eq: double; nam: string);
     procedure Asteroid(jd: double; highprec: boolean;
       var ar, de, dist, r, elong, phase, magn, xc, yc, zc: double);
-    function AsteroidMag(phase,dist,r,h,g: double): double;
+    function AsteroidMag(phase,dist,r,h,g: double): double; inline;
     function ConnectDB(db: string): boolean;
     function NewAstDay(newjd, limitmag: double; cfgsc: Tconf_skychart): boolean;
     function FindAsteroid(x1, y1, x2, y2: double; nextobj: boolean;
@@ -2509,7 +2509,7 @@ begin
   astelem.Oc := sqrt(h * h + r * r);
 end;
 
-function TPlanet.AsteroidMag(phase,dist,r,h,g: double): double;
+function TPlanet.AsteroidMag(phase,dist,r,h,g: double): double; inline;
 var phi1, phi2: double;
 begin
   phi1 := exp(-3.33 * power(tan(phase / 2), 0.63));  { meeus91 32.14 }
@@ -2571,9 +2571,13 @@ begin
     DB1.Query('PRAGMA journal_mode = MEMORY');
     DB1.Query('PRAGMA synchronous = OFF');
     DB1.Query('PRAGMA case_sensitive_like = 1');
+    DB1.Query('PRAGMA cache_size = -102400');
+    DB1.Query('PRAGMA temp_store = MEMORY');
     DB2.Query('PRAGMA journal_mode = MEMORY');
     DB2.Query('PRAGMA synchronous = OFF');
     DB2.Query('PRAGMA case_sensitive_like = 1');
+    DB2.Query('PRAGMA cache_size = -102400');
+    DB2.Query('PRAGMA temp_store = MEMORY');
   except
     Result := False;
   end;

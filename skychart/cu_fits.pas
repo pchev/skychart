@@ -1714,6 +1714,8 @@ begin
     DB1.Query('PRAGMA journal_mode = MEMORY');
     DB1.Query('PRAGMA synchronous = OFF');
     DB1.Query('PRAGMA case_sensitive_like = 1');
+    DB1.Query('PRAGMA cache_size = -102400');
+    DB1.Query('PRAGMA temp_store = MEMORY');
   except
     dbconnected := False;
     Result := False;

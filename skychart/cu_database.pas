@@ -149,6 +149,8 @@ begin
     DB.Query('PRAGMA journal_mode = MEMORY');
     DB.Query('PRAGMA synchronous = OFF');
     DB.Query('PRAGMA case_sensitive_like = 1');
+    DB.Query('PRAGMA cache_size = -102400');
+    DB.Query('PRAGMA temp_store = MEMORY');
     OpenAsteroid;
     OpenAsteroidMagnitude;
   except
@@ -359,6 +361,8 @@ begin
       DB.Query('PRAGMA journal_mode = MEMORY');
       DB.Query('PRAGMA synchronous = OFF');
       DB.Query('PRAGMA case_sensitive_like = 1');
+      DB.Query('PRAGMA cache_size = -102400');
+      DB.Query('PRAGMA temp_store = MEMORY');
       indexlist := TStringList.Create;
       ok := True;
       for i := 1 to numsqltable do
