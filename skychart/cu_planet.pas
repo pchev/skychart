@@ -2669,19 +2669,18 @@ begin
             else
               nea := 0;
             qry := 'INSERT INTO ' + ast_daypos + ' (id,epoch,ra,de,mag,near_earth,idx) VALUES ('
-              + '"' + id + '"' + ',"' + strim(formatfloat(f6s, epoch)) +
-              '"' + ',"' + IntToStr(ira) + '"' + ',"' +
-              IntToStr(idec) + '"' + ',"' + IntToStr(imag) + '"' +
-              ',"' + IntToStr(nea) +'",' + IntToStr(idx) + ')';
+              + '"' + id + '"' + ',' + strim(formatfloat(f6s, epoch)) +
+              ',' + IntToStr(ira) + ',' +
+              IntToStr(idec) +  ',' + IntToStr(imag) +
+              ',' + IntToStr(nea) +',' + IntToStr(idx) + ')';
             db2.Query(qry);
-            qry:=db2.ErrorMessage;
           end;
         end;
 
         ////////////////////////////
 
         qry := 'INSERT INTO ' + cfgsc.ast_day + ' (jd,limit_mag)' +
-          ' VALUES ("' + IntToStr(trunc(newjd)) + '","' + IntToStr(lmag) + '")';
+          ' VALUES (' + IntToStr(trunc(newjd)) + ',' + IntToStr(lmag) + ')';
         db2.Query(qry);
         db2.UnLockTables;
         db2.Commit;
@@ -3113,9 +3112,9 @@ begin
     imag := round(mag * 10);
 
     qry := 'INSERT INTO ' + cfgsc.ast_daypos + ' (id,epoch,ra,de,mag,idx) VALUES ('
-      + '"' + id + '"' + ',"' + strim(formatfloat(f6s, epoch)) +
-      '"' + ',"' + IntToStr(ira) + '"' + ',"' + IntToStr(
-      idec) + '"' + ',"' + IntToStr(imag) + '",' + IntToStr(idx) + ')';
+      + '"' + id + '"' + ',' + strim(formatfloat(f6s, epoch)) +
+      ',' + IntToStr(ira) + ',' + IntToStr(
+      idec) + ',' + IntToStr(imag) + ',' + IntToStr(idx) + ')';
 
     db1.Query(qry);
     db1.flush('tables');

@@ -916,17 +916,19 @@ type
     oname, comment: string;
   end;
 
-  TAsteroidElement = record
+  TAsteroidElement = packed record
     id: array[0..6] of char;
     ref: array[0..8]of char;
     name: array[0..28]of char;
-    h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,equinox: double;
+    h,g,epoch,equinox: single;
+    mean_anomaly,arg_perihelion,asc_node: single;
+    inclination,eccentricity,semi_axis: single;
   end;
   TAsteroidElements = array of TAsteroidElement;
   TAsteroidMagnitudesJD = array of double;
-  TAsteroidMagnitude = record
+  TAsteroidMagnitude = packed record
     elementidx: integer;
-    magnitude: integer;
+    magnitude: int16;
   end;
   TAsteroidMagnitudes = array of array of TAsteroidMagnitude;
 
@@ -1728,12 +1730,12 @@ const
   defaultSqliteDB = 'cdc.db';
 // SQL Table structure
   create_table_ast_day =
-    ' ( jd int(11) NOT NULL default "0", limit_mag smallint(6) NOT NULL default "0")';
+    ' ( jd int NOT NULL default 0, limit_mag int NOT NULL default 0)';
   create_table_ast_day_pos =
-    '( id varchar(7) NOT NULL default "", epoch double NOT NULL default "0",' +
-    'ra smallint(6) NOT NULL default "0",  de smallint(6) NOT NULL default "0",' +
-    'mag smallint(6) NOT NULL default "0", near_earth smallint(1) NOT NULL default "0",'+
-    'idx integer NOT NULL, PRIMARY KEY (ra,de,mag,id))';
+    '( id text NOT NULL default "", epoch double NOT NULL default 0,' +
+    'ra int NOT NULL default 0,  de int NOT NULL default 0,' +
+    'mag int NOT NULL default 0, near_earth int NOT NULL default 0,'+
+    'idx int NOT NULL default 0, PRIMARY KEY (ra,de,mag,id))';
   create_table_com_day =
     ' ( jd int(11) NOT NULL default "0", limit_mag smallint(6) NOT NULL default "0")';
   create_table_com_day_pos =
