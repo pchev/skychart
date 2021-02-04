@@ -830,6 +830,7 @@ type
     procedure ClearAndRestart;
     procedure SetPerformanceOptions;
     procedure InitializeDB(Sender: TObject);
+    procedure FinishAsteroidUpgrade(Sender: TObject);
     procedure Init;
     procedure InitToolBar;
     procedure InitScriptPanel;
@@ -1407,6 +1408,7 @@ begin
       WriteTrace('Create DB');
     cdcdb := TCDCdb.Create(self);
     cdcdb.onInitializeDB := InitializeDB;
+    cdcdb.onFinishAsteroidUpgrade := FinishAsteroidUpgrade;
     planet.cdb := cdcdb;
     f_search.cdb := cdcdb;
     planet.SetDE(slash(Appdir) + slash('data') + 'jpleph');
@@ -11040,9 +11042,9 @@ begin
     begin
       if VerboseMsg then
         WriteTrace('DB connected');
+      planet.ConnectDB(cfgm.db);
       if not NeedToInitializeDB then
         cdcdb.CheckForUpgrade(f_info.ProgressMemo, updversion);
-      planet.ConnectDB(cfgm.db);
       Fits.ConnectDB(cfgm.db);
       SetLpanel1(Format(rsConnectedToS, [cfgm.db]));
     end
@@ -11069,6 +11071,11 @@ begin
   except
     SetLpanel1(rsSQLDatabaseN);
   end;
+end;
+
+procedure Tf_main.FinishAsteroidUpgrade(Sender: TObject);
+begin
+  RecomputeAsteroid;
 end;
 
 procedure Tf_main.InitializeDB(Sender: TObject);

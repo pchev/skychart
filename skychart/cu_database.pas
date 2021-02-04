@@ -37,6 +37,7 @@ type
     db: TSqlDB;
     FFits: TFits;
     FInitializeDB: TNotifyEvent;
+    FFinishAsteroidUpgrade: TNotifyEvent;
     FAstmsg: string;
     FComMindt: integer;
     tstval: double;
@@ -109,6 +110,7 @@ type
     procedure ScanArchiveDirectory(ArchivePath: string; var Count: integer);
     function AddFitsArchiveFile(ArchivePath, fn: string): boolean;
     property onInitializeDB: TNotifyEvent read FInitializeDB write FInitializeDB;
+    property onFinishAsteroidUpgrade: TNotifyEvent read FFinishAsteroidUpgrade write FFinishAsteroidUpgrade;
     property AstMsg: string read FAstmsg write FAstmsg;
     property ComMinDT: integer read FComMinDT write FComMinDT;
     property NumAsteroidElement: integer read FNumAsteroidElement;
@@ -117,6 +119,8 @@ type
   end;
 
 implementation
+
+Uses pu_info;
 
 constructor TCDCdb.Create(AOwner: TComponent);
 begin
@@ -269,6 +273,10 @@ begin
     end;
     // drop the asteroid table and reload to binary file
     if updversion < '4.3i' then begin
+      f_info.setpage(2);
+      f_info.Show;
+      memo.Lines.add('Upgrade asteroid database ...');
+      application.ProcessMessages;
       buf:=db.QueryOne('select filedesc from cdc_ast_elem_list order by elem_id desc');
       if buf='' then fn:=''
                 else fn:=slash(MPCDir)+trim(words(buf,blank,1,1));
@@ -298,14 +306,17 @@ begin
       finally
         bb.Free;
       end;
+      memo.Lines.add('Reload file '+fn);
+      application.ProcessMessages;
       if (fn<>'')and FileExists(fn) then begin
         if not LoadAsteroidFile(fn, False, False, False, 1000, memo) then
           LoadAsteroidFile(slash(sampledir) + 'MPCsample.dat', True, False, False, 1000, memo)
       end
       else
         LoadAsteroidFile(slash(sampledir) + 'MPCsample.dat', True, False, False, 1000, memo);
+      if Assigned(FFinishAsteroidUpgrade) then FFinishAsteroidUpgrade(self);
+      f_info.hide;
     end;
-
   end;
 end;
 
