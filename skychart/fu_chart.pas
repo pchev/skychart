@@ -3912,13 +3912,13 @@ begin
   else if otype = 'As' then
     precision := 2
   else if otype = 'S*' then
-    precision := 1
+    precision := 2
   else if otype = 'Cm' then
-    precision := 1
+    precision := 2
   else if otype = 'P' then
-    precision := 1
+    precision := 2
   else if otype = 'Ps' then
-    precision := 1
+    precision := 2
   else
     precision := 0;
   isStar := (otype = '*');
