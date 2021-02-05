@@ -8,6 +8,7 @@ The skychart-spice-base file is required and you can add skychart-spice-ext for 
 On Linux you also need to install libcalceph before you can use this function: https://github.com/pchev/libcalceph/releases/tag/v1.0.0
 
 New functions:
+- Use binary file instead of database for asteroid element, improve performance
 - Show more asteroid information from the Asteroid lightcurve database
 - Display object information directly from the Search window
 - Add Alpaca telescope discovery

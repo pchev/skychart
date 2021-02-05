@@ -8,6 +8,7 @@ Le fichier skychart-spice-base est requis et vous pouvez ajouter skychart-spice-
 Avec Linux vous devez installer libcalceph avant d'utiliser cette fonction: https://github.com/pchev/libcalceph/releases/tag/v1.0.0
 
 Nouvelles fonctions:
+- Utilise un fichier binaire au lieu de la base de données pour les astéroïde, amélioration des performances 
 - Affiche plus d'informations sur les astéroïdes depuis l'Asteroid lightcurve database
 - Afficher les informations sur l'objet directement depuis la fenêtre de recherche
 - Ajout de la découverte des télescope Alpaca
