@@ -11159,7 +11159,7 @@ begin
           ra:=f_detail.ra;
           de:=f_detail.de;
           Precession(jd2000,sc.cfgsc.JDChart,ra,de);
-          ListRaDec(ra, de, 0.5*deg2rad, false, 10);
+          ListRaDec(ra, de, 0.5*deg2rad, false, 10,100);
           f_info.SortRadius(ra,de);
           break;
         end;

@@ -49,6 +49,8 @@ type
     FFindId: string;
     FFindRecOK: boolean;
     FFindRec: GCatrec;
+    Gaiawin: boolean;
+    Gaiara1,Gaiara2,Gaiade1,Gaiade2: double;
   protected
     { Protected declarations }
     function InitRec(cat: integer): boolean;
@@ -272,6 +274,7 @@ begin
   cfgcat := Tconf_catalog.Create;
   cfgshr := Tconf_shared.Create;
   lockcat := False;
+  Gaiawin := true;
 end;
 
 destructor Tcatalog.Destroy;
@@ -6243,6 +6246,7 @@ begin
   cfgcat.GaiaLevel:=1;
   SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia'+inttostr(cfgcat.GaiaLevel)), 'gaia');
   GetGaiaInfo(h,info,version,filter,ok);
+  Gaiawin:=true;
   OpenGaiawin(Result);
 end;
 
@@ -6250,6 +6254,11 @@ procedure Tcatalog.OpenGaiaPos(ar1, ar2, de1, de2: double; var ok: boolean);
 begin
   cfgcat.GaiaLevel:=1;
   SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia'+inttostr(cfgcat.GaiaLevel)), 'gaia');
+  Gaiawin:=false;
+  Gaiara1:=ar1;
+  Gaiara2:=ar2;
+  Gaiade1:=de1;
+  Gaiade2:=de2;
   OpenGaiap(ar1, ar2, de1, de2, ok);
 end;
 
@@ -6437,7 +6446,10 @@ begin
   inc(cfgcat.GaiaLevel);
   if (cfgcat.GaiaLevel=2)or((not cfgcat.Quick)and(cfgcat.GaiaLevel=3)) then  begin
      SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia'+inttostr(cfgcat.GaiaLevel)), 'gaia');
-     OpenGaiawin(Result);
+     if Gaiawin then
+       OpenGaiawin(Result)
+     else
+       OpenGaiap(Gaiara1,Gaiara2,Gaiade1,Gaiade2,Result);
      if (cfgcat.LimitGaiaCount)and(cfgcat.GaiaLevel=3) then
        MaxGaiaRec:=1000000  // truncate only level 3
      else

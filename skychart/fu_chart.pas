@@ -369,7 +369,7 @@ type
       ar1, de1: double; sr: string = ''; sn: string = ''; sd: string = '');
     procedure Identdetail(X, Y: integer);
     function ListXY(X, Y: integer; r: integer = 12; allobj:boolean=true; mincount:integer=0): boolean;
-    function ListRaDec(ra, de, r: double; allobj:boolean=true; mincount:integer=0): boolean;
+    function ListRaDec(ra, de, r: double; allobj:boolean=true; mincount:integer=0; maxcount:integer=100): boolean;
     procedure rotation(rot: double);
     procedure GetSunImage;
     procedure CKeyDown(Key: word; Shift: TShiftState);
@@ -3091,7 +3091,7 @@ begin
     FListInfo(buf, msg);
 end;
 
-function Tf_chart.ListRaDec(ra, de, r: double; allobj:boolean=true; mincount:integer=0): boolean;
+function Tf_chart.ListRaDec(ra, de, r: double; allobj:boolean=true; mincount:integer=0; maxcount:integer=100): boolean;
 var
   dx: double;
   buf, msg: string;
@@ -3104,7 +3104,7 @@ begin
   dx := abs(r)/2;
   repeat
     dx:=2*dx;
-    sc.Findlist(ra, de, dx, dx, buf, msg, False, allobj, True, true);
+    sc.Findlist(ra, de, dx, dx, buf, msg, False, allobj, True, true,maxcount);
     c:=0;
     if mincount>0 then begin
       for i:=1 to length(buf) do

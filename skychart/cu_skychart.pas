@@ -179,7 +179,7 @@ type
     function FindatRaDec(ra, Dec, dx: double; searchcenter: boolean;
       showall: boolean = False; ftype: integer = ftAll): boolean;
     procedure GetLabPos(ra, Dec, r: double; w, h: integer; var x, y: integer);
-    procedure FindList(ra, Dec, dx, dy: double; var Text, msg: string; showall, allobject, trunc, usefov: boolean);
+    procedure FindList(ra, Dec, dx, dy: double; var Text, msg: string; showall, allobject, trunc, usefov: boolean; maxln:integer=1000);
     procedure FindListWin(var Text, msg: string; showall, allobject: boolean);
     property OnShowDetailXY: Tint2func read FShowDetailXY write FShowDetailXY;
     function GetChartInfo(sep: string = blank): string;
@@ -4203,7 +4203,7 @@ begin
   end;
 end;
 
-procedure Tskychart.FindList(ra, Dec, dx, dy: double; var Text, msg: string; showall, allobject, trunc, usefov: boolean);
+procedure Tskychart.FindList(ra, Dec, dx, dy: double; var Text, msg: string; showall, allobject, trunc, usefov: boolean; maxln:integer=1000);
 var
   x1, x2, y1, y2, xx1, yy1: double;
   rec: Gcatrec;
@@ -4211,8 +4211,6 @@ var
   saveStarFilter, saveNebFilter, ok: boolean;
   i: integer;
   xx, yy: single;
-const
-  maxln: integer = 100000;
 
   procedure FindatPosCat(cat: integer);
   begin
@@ -4409,7 +4407,7 @@ var
   i: integer;
   xx, yy: single;
 const
-  maxln: integer = 100000;
+  maxln: integer = 10000;
 
   procedure FindatPosCat(cat: integer);
   begin
