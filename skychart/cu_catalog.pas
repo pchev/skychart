@@ -149,6 +149,7 @@ type
     function  OpenGaia: boolean;
     procedure OpenGaiaPos(ar1, ar2, de1, de2: double; var ok: boolean);
     function NextGaiaLevel: boolean;
+    function NextGaiaLevelPos(ar1, ar2, de1, de2: double): boolean;
     function  GetGaia(var rec: GcatRec): boolean;
     function GaiaBRtoBV(br:double):double;
     function GaiaBRtoBV_DR2(br:double):double;
@@ -6446,6 +6447,21 @@ begin
      result:=false;
 end;
 
+function Tcatalog.NextGaiaLevelPos(ar1, ar2, de1, de2: double): boolean;
+begin
+  inc(cfgcat.GaiaLevel);
+  if (cfgcat.GaiaLevel=2)or((not cfgcat.Quick)and(cfgcat.GaiaLevel=3)) then  begin
+     SetGaiaPath(slash(cfgcat.starcatpath[gaia - BaseStar])+slash('gaia'+inttostr(cfgcat.GaiaLevel)), 'gaia');
+     OpenGaiap(ar1, ar2, de1, de2,Result);
+     if (cfgcat.LimitGaiaCount)and(cfgcat.GaiaLevel=3) then
+       MaxGaiaRec:=1000000  // truncate only level 3
+     else
+       MaxGaiaRec:=MaxInt;
+  end
+  else
+     result:=false;
+end;
+
 function Tcatalog.GetGaia(var rec: GcatRec): boolean;
 begin
   Result := True;
@@ -6488,13 +6504,16 @@ begin
   // find coordinates from pixel
   pix2ang_nest64(nside,ipix,theta,phi);
   // theta is from north pole
-  theta:=rad2deg*(pid2-theta);
+  theta:=(pid2-theta);
+  // FindRegion need current chart equinox
+  Precession(jd2000,JDChart,phi,theta);
+  theta:=rad2deg*theta;
   phi:=rad2deg*phi/15;
   // small search area
-  ar1:=phi-0.001;
-  ar2:=phi+0.001;
-  de1:=theta-0.01;
-  de2:=theta+0.01;
+  ar1:=phi-0.05;
+  ar2:=phi+0.05;
+  de1:=theta-0.05;
+  de2:=theta+0.05;
   // open catalog
   OpenGaiaPos(ar1, ar2, de1, de2,Result);
   if not Result then exit;
@@ -6503,7 +6522,7 @@ begin
     ReadGaia(rec, Result);
     if not Result then
     begin
-      Result:=NextGaiaLevel;
+      Result:=NextGaiaLevelPos(ar1, ar2, de1, de2);
       if Result then
         continue;
     end;
