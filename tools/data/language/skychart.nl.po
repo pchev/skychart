@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-25 15:03+0000\n"
+"POT-Creation-Date: 2021-02-05 18:04+0000\n"
 "PO-Revision-Date: 2020-11-08 13:34+0000\n"
 "Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-01-25 15:08+0000\n"
-"X-Generator: Launchpad (build e00fb96b2e64b75333d0178ec15cb78e5aadb64d)\n"
+"X-Launchpad-Export-Date: 2021-02-05 18:12+0000\n"
+"X-Generator: Launchpad (build 3d7abcb776ec05aa0a89112accc21bf8b41dfc24)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -424,10 +424,6 @@ msgstr "Planetoïde elementen in MPC format (één URL per regel)"
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
 msgstr "Planetoide elementen"
-
-#: u_translation.rsasteroidsett
-msgid "Asteroid settings"
-msgstr "Planetoïde instelling"
 
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
@@ -957,10 +953,6 @@ msgstr "Komeet elementen in MPC format (één URL per regel)"
 msgid "Comet elements"
 msgstr "Komeet elementen"
 
-#: u_translation.rscometsetting
-msgid "Comet settings"
-msgstr "Komeet instelling"
-
 #: u_translation.rscometupdates
 msgid "Comet update successful"
 msgstr "Komeetgegevens bijwerken succesvol"
@@ -1189,10 +1181,6 @@ msgstr "Creëer een nieuwe kaart"
 msgid "Create a search index file"
 msgstr "Creëer een zoek-index bestand"
 
-#: u_translation.rscreatedataba
-msgid "Create database"
-msgstr "Creëer database"
-
 #: u_translation.rscreatefiles
 msgid "Create files"
 msgstr "Creëer bestanden"
@@ -1264,10 +1252,6 @@ msgstr "%sDatabase %s geopend.%s"
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
 msgstr "Database instellen..."
-
-#: u_translation.rsdatabasetype
-msgid "Database type"
-msgstr "Database type"
 
 #: u_translation.rsdatafiles
 msgid "Data files:"
@@ -1760,10 +1744,6 @@ msgstr "Jaarlijkse drift"
 #: u_translation.rsdriverselect
 msgid "Driver Selection"
 msgstr "Stuurprogramma selectie"
-
-#: u_translation.rsdropdatabase
-msgid "Drop database"
-msgstr "Ontkoppel database"
 
 #: u_translation.rsdsocatalogpi
 msgid "DSO Catalog pictures"
@@ -5527,6 +5507,10 @@ msgstr "Topocentrisch"
 msgid "Totality"
 msgstr "Totaliteit"
 
+#: u_translation.rstotalasteroi
+msgid "Total asteroid count"
+msgstr ""
+
 #: u_translation.rstotalradius
 msgid "Total radius"
 msgstr "Totale straal"
@@ -6008,8 +5992,8 @@ msgid "Zoom in"
 msgstr "Zoom in"
 
 #: u_translation.rszoommoretovi
-msgid "Zoom more to view the object"
-msgstr "Zoom meer om object te bekijken"
+msgid "Object too faint to show on the chart"
+msgstr ""
 
 #: u_translation.rszoomout
 msgid "Zoom out"

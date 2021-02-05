@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-25 15:03+0000\n"
+"POT-Creation-Date: 2021-02-05 18:04+0000\n"
 "PO-Revision-Date: 2017-01-14 17:41+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-01-25 15:08+0000\n"
-"X-Generator: Launchpad (build e00fb96b2e64b75333d0178ec15cb78e5aadb64d)\n"
+"X-Launchpad-Export-Date: 2021-02-05 18:12+0000\n"
+"X-Generator: Launchpad (build 3d7abcb776ec05aa0a89112accc21bf8b41dfc24)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -424,10 +424,6 @@ msgstr "Πηγές για στοιχεία αστεροειδών σε μορφ�
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
 msgstr ""
-
-#: u_translation.rsasteroidsett
-msgid "Asteroid settings"
-msgstr "Ρυθμίσεις αστεροειδών"
 
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
@@ -957,10 +953,6 @@ msgstr "Πηγές για στοιχεία κομητών σε MPC format (έν�
 msgid "Comet elements"
 msgstr ""
 
-#: u_translation.rscometsetting
-msgid "Comet settings"
-msgstr "Ρύθμιση κομήτη"
-
 #: u_translation.rscometupdates
 msgid "Comet update successful"
 msgstr ""
@@ -1189,10 +1181,6 @@ msgstr "Δημιουργία νέου χάρτη"
 msgid "Create a search index file"
 msgstr "Δημιουργία αρχείου ευρετηρίου αναζήτησης"
 
-#: u_translation.rscreatedataba
-msgid "Create database"
-msgstr "Δημιουργ. Βάσης Δεδ."
-
 #: u_translation.rscreatefiles
 msgid "Create files"
 msgstr "Δημιουργία αρχείων"
@@ -1264,10 +1252,6 @@ msgstr "%sΒάση δεδομένων %s άνοιξε.%s"
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
 msgstr "Ρύθμιση βάσης δεδομένων..."
-
-#: u_translation.rsdatabasetype
-msgid "Database type"
-msgstr "Τύπος βάσης δεδομένων"
 
 #: u_translation.rsdatafiles
 msgid "Data files:"
@@ -1760,10 +1744,6 @@ msgstr "Ετήσια ολίσθηση"
 #: u_translation.rsdriverselect
 msgid "Driver Selection"
 msgstr "Επιλογή οδηγού"
-
-#: u_translation.rsdropdatabase
-msgid "Drop database"
-msgstr "Διαγραφή βάσης δεδομένων"
 
 #: u_translation.rsdsocatalogpi
 msgid "DSO Catalog pictures"
@@ -5525,6 +5505,10 @@ msgstr "Τοποκεντρικό"
 msgid "Totality"
 msgstr "Ολικότητα"
 
+#: u_translation.rstotalasteroi
+msgid "Total asteroid count"
+msgstr ""
+
 #: u_translation.rstotalradius
 msgid "Total radius"
 msgstr "Συνολική ακτίνα"
@@ -6006,8 +5990,8 @@ msgid "Zoom in"
 msgstr "Μεγέθυνση"
 
 #: u_translation.rszoommoretovi
-msgid "Zoom more to view the object"
-msgstr "Περισσότερο zoom να εμφανιστεί το αντικείμενο"
+msgid "Object too faint to show on the chart"
+msgstr ""
 
 #: u_translation.rszoomout
 msgid "Zoom out"

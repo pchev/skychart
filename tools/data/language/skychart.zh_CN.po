@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-01-25 15:03+0000\n"
+"POT-Creation-Date: 2021-02-05 18:04+0000\n"
 "PO-Revision-Date: 2019-06-04 15:15+0000\n"
 "Last-Translator: Zachary Wu <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-01-25 15:08+0000\n"
-"X-Generator: Launchpad (build e00fb96b2e64b75333d0178ec15cb78e5aadb64d)\n"
+"X-Launchpad-Export-Date: 2021-02-05 18:12+0000\n"
+"X-Generator: Launchpad (build 3d7abcb776ec05aa0a89112accc21bf8b41dfc24)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -428,10 +428,6 @@ msgstr "MPC格式的小行星轨道文件来源（每行一个链接）"
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
 msgstr ""
-
-#: u_translation.rsasteroidsett
-msgid "Asteroid settings"
-msgstr "小行星设置"
 
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
@@ -961,10 +957,6 @@ msgstr "MPC格式的彗星轨道文件来源（每行一个链接）"
 msgid "Comet elements"
 msgstr ""
 
-#: u_translation.rscometsetting
-msgid "Comet settings"
-msgstr "彗星设置"
-
 #: u_translation.rscometupdates
 msgid "Comet update successful"
 msgstr ""
@@ -1193,10 +1185,6 @@ msgstr "新建星图"
 msgid "Create a search index file"
 msgstr "创建搜索索引文件"
 
-#: u_translation.rscreatedataba
-msgid "Create database"
-msgstr "创建数据库"
-
 #: u_translation.rscreatefiles
 msgid "Create files"
 msgstr "创建文件"
@@ -1268,10 +1256,6 @@ msgstr "%s数据库%s已打开。%s"
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
 msgstr "数据库设置..."
-
-#: u_translation.rsdatabasetype
-msgid "Database type"
-msgstr "数据库类型"
 
 #: u_translation.rsdatafiles
 msgid "Data files:"
@@ -1764,10 +1748,6 @@ msgstr "年度漂移"
 #: u_translation.rsdriverselect
 msgid "Driver Selection"
 msgstr "驱动选择"
-
-#: u_translation.rsdropdatabase
-msgid "Drop database"
-msgstr "删除数据库(Drop database)"
 
 #: u_translation.rsdsocatalogpi
 msgid "DSO Catalog pictures"
@@ -5532,6 +5512,10 @@ msgstr "站心"
 msgid "Totality"
 msgstr "全食"
 
+#: u_translation.rstotalasteroi
+msgid "Total asteroid count"
+msgstr ""
+
 #: u_translation.rstotalradius
 msgid "Total radius"
 msgstr "总半径"
@@ -6013,7 +5997,7 @@ msgid "Zoom in"
 msgstr "放大"
 
 #: u_translation.rszoommoretovi
-msgid "Zoom more to view the object"
+msgid "Object too faint to show on the chart"
 msgstr ""
 
 #: u_translation.rszoomout

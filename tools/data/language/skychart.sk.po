@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-01-25 15:03+0000\n"
+"POT-Creation-Date: 2021-02-05 18:04+0000\n"
 "PO-Revision-Date: 2016-02-15 08:14+0000\n"
 "Last-Translator: P_E_T_O <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-01-25 15:08+0000\n"
-"X-Generator: Launchpad (build e00fb96b2e64b75333d0178ec15cb78e5aadb64d)\n"
+"X-Launchpad-Export-Date: 2021-02-05 18:12+0000\n"
+"X-Generator: Launchpad (build 3d7abcb776ec05aa0a89112accc21bf8b41dfc24)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -426,10 +426,6 @@ msgstr ""
 
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
-msgstr ""
-
-#: u_translation.rsasteroidsett
-msgid "Asteroid settings"
 msgstr ""
 
 #: u_translation.rsasteroidsfro
@@ -960,10 +956,6 @@ msgstr ""
 msgid "Comet elements"
 msgstr ""
 
-#: u_translation.rscometsetting
-msgid "Comet settings"
-msgstr ""
-
 #: u_translation.rscometupdates
 msgid "Comet update successful"
 msgstr ""
@@ -1192,10 +1184,6 @@ msgstr "Vytvorť nový graf"
 msgid "Create a search index file"
 msgstr ""
 
-#: u_translation.rscreatedataba
-msgid "Create database"
-msgstr ""
-
 #: u_translation.rscreatefiles
 msgid "Create files"
 msgstr ""
@@ -1266,10 +1254,6 @@ msgstr ""
 
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
-msgstr ""
-
-#: u_translation.rsdatabasetype
-msgid "Database type"
 msgstr ""
 
 #: u_translation.rsdatafiles
@@ -1762,10 +1746,6 @@ msgstr ""
 
 #: u_translation.rsdriverselect
 msgid "Driver Selection"
-msgstr ""
-
-#: u_translation.rsdropdatabase
-msgid "Drop database"
 msgstr ""
 
 #: u_translation.rsdsocatalogpi
@@ -5528,6 +5508,10 @@ msgstr ""
 msgid "Totality"
 msgstr ""
 
+#: u_translation.rstotalasteroi
+msgid "Total asteroid count"
+msgstr ""
+
 #: u_translation.rstotalradius
 msgid "Total radius"
 msgstr ""
@@ -6009,7 +5993,7 @@ msgid "Zoom in"
 msgstr "Priblížiť"
 
 #: u_translation.rszoommoretovi
-msgid "Zoom more to view the object"
+msgid "Object too faint to show on the chart"
 msgstr ""
 
 #: u_translation.rszoomout

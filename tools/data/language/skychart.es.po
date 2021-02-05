@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-25 15:03+0000\n"
-"PO-Revision-Date: 2020-08-09 23:24+0000\n"
-"Last-Translator: Víctor R. Ruiz <Unknown>\n"
+"POT-Creation-Date: 2021-02-05 18:04+0000\n"
+"PO-Revision-Date: 2021-01-31 12:42+0000\n"
+"Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-01-25 15:08+0000\n"
-"X-Generator: Launchpad (build e00fb96b2e64b75333d0178ec15cb78e5aadb64d)\n"
+"X-Launchpad-Export-Date: 2021-02-05 18:12+0000\n"
+"X-Generator: Launchpad (build 3d7abcb776ec05aa0a89112accc21bf8b41dfc24)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -289,11 +289,11 @@ msgstr "Guardar siempre sin preguntar."
 
 #: u_translation.rsamplitudemax
 msgid "Amplitude max."
-msgstr ""
+msgstr "Amplitud máx."
 
 #: u_translation.rsamplitudemin
 msgid "Amplitude min."
-msgstr ""
+msgstr "Amplitud mín."
 
 #: u_translation.rsanewversiono
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
@@ -426,10 +426,6 @@ msgstr "Elementos de asteroides en formato MPC (una URL por línea)"
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
 msgstr "Elementos asteroides"
-
-#: u_translation.rsasteroidsett
-msgid "Asteroid settings"
-msgstr "Ajustes de asteroides"
 
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
@@ -857,7 +853,7 @@ msgstr "Circumpolar"
 
 #: u_translation.rscivil
 msgid "Civil"
-msgstr ""
+msgstr "Civil"
 
 #: u_translation.rsclass
 msgid "Class"
@@ -958,10 +954,6 @@ msgstr "Elementos de cometa en formato MPC (una URL por línea)"
 #: u_translation.rscometelement2
 msgid "Comet elements"
 msgstr "Elementos cometas"
-
-#: u_translation.rscometsetting
-msgid "Comet settings"
-msgstr "Ajustes de cometas"
 
 #: u_translation.rscometupdates
 msgid "Comet update successful"
@@ -1191,10 +1183,6 @@ msgstr "Crear una nueva carta"
 msgid "Create a search index file"
 msgstr "Crear un archivo de índice de búsquedas"
 
-#: u_translation.rscreatedataba
-msgid "Create database"
-msgstr "Crear base de datos"
-
 #: u_translation.rscreatefiles
 msgid "Create files"
 msgstr "Crear archivos"
@@ -1266,10 +1254,6 @@ msgstr "%sBase de datos %s abierta.%s"
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
 msgstr "Ajustes de la base de datos..."
-
-#: u_translation.rsdatabasetype
-msgid "Database type"
-msgstr "Tipo de base de datos"
 
 #: u_translation.rsdatafiles
 msgid "Data files:"
@@ -1763,10 +1747,6 @@ msgstr "Deriva anual"
 msgid "Driver Selection"
 msgstr "Selección del driver"
 
-#: u_translation.rsdropdatabase
-msgid "Drop database"
-msgstr "Borrar base de datos"
-
 #: u_translation.rsdsocatalogpi
 msgid "DSO Catalog pictures"
 msgstr "Imágenes del catálogo DSO"
@@ -2037,7 +2017,7 @@ msgstr "Tamaño estrellas débiles "
 
 #: u_translation.rsfamily
 msgid "Family"
-msgstr ""
+msgstr "Familia"
 
 #: u_translation.rsfaq
 msgid "FAQ"
@@ -2149,7 +2129,7 @@ msgstr "Rectángulo del buscador (CCD)"
 
 #: u_translation.rsfindinfo
 msgid "Find info"
-msgstr ""
+msgstr "Encontrar info"
 
 #: u_translation.rsfirst
 msgid "First"
@@ -2529,7 +2509,7 @@ msgstr "Lista de imágenes"
 
 #: u_translation.rsimportmosaic
 msgid "Import mosaic file"
-msgstr ""
+msgstr "Importar fichero de mosaico"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -2609,7 +2589,7 @@ msgstr "Información del catálogo"
 
 #: u_translation.rsinformationf2
 msgid "Information from"
-msgstr ""
+msgstr "Información desde"
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
@@ -3825,7 +3805,7 @@ msgstr "Datos personales"
 
 #: u_translation.rsphaseangle
 msgid "Phase angle"
-msgstr ""
+msgstr "Ángulo de fase"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
@@ -4165,7 +4145,7 @@ msgstr "Ponga los archivos con la extensión .tle en la carpeta %s"
 
 #: u_translation.rsqualityflag
 msgid "Quality flag"
-msgstr ""
+msgstr "Marca de calidad"
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -5527,6 +5507,10 @@ msgstr "Topocéntrica"
 msgid "Totality"
 msgstr "Totalidad"
 
+#: u_translation.rstotalasteroi
+msgid "Total asteroid count"
+msgstr ""
+
 #: u_translation.rstotalradius
 msgid "Total radius"
 msgstr "Radio Total"
@@ -5601,7 +5585,7 @@ msgstr "Clase Trumpler"
 
 #: u_translation.rstruncatedtos
 msgid "Truncated to %s catalogs"
-msgstr ""
+msgstr "Truncado a %s catálogos"
 
 #: u_translation.rstrytoautocon
 msgid "Try to auto-connect to a SAMP hub when the program start"
@@ -6008,8 +5992,8 @@ msgid "Zoom in"
 msgstr "Acercar"
 
 #: u_translation.rszoommoretovi
-msgid "Zoom more to view the object"
-msgstr "Enfocar más para ver Objeto"
+msgid "Object too faint to show on the chart"
+msgstr ""
 
 #: u_translation.rszoomout
 msgid "Zoom out"

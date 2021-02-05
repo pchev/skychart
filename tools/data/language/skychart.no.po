@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.no\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-25 15:03+0000\n"
+"POT-Creation-Date: 2021-02-05 18:04+0000\n"
 "PO-Revision-Date: 2017-01-29 16:49+0000\n"
 "Last-Translator: ovl-1 <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-01-25 15:08+0000\n"
-"X-Generator: Launchpad (build e00fb96b2e64b75333d0178ec15cb78e5aadb64d)\n"
+"X-Launchpad-Export-Date: 2021-02-05 18:12+0000\n"
+"X-Generator: Launchpad (build 3d7abcb776ec05aa0a89112accc21bf8b41dfc24)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -425,10 +425,6 @@ msgstr "Kilder for asteroideelementer i MPC-format (en nettadresse pr. linje)"
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
 msgstr "Asteroideelementer"
-
-#: u_translation.rsasteroidsett
-msgid "Asteroid settings"
-msgstr "Asteroide-innstillinger"
 
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
@@ -958,10 +954,6 @@ msgstr "Kilder for kometelementer i MPC-format (en nettadresse pr. linje)"
 msgid "Comet elements"
 msgstr "Kometelementer"
 
-#: u_translation.rscometsetting
-msgid "Comet settings"
-msgstr "Kometinnstillinger"
-
 #: u_translation.rscometupdates
 msgid "Comet update successful"
 msgstr "Kometoppdatering fullført"
@@ -1190,10 +1182,6 @@ msgstr "Opprett et nytt kart"
 msgid "Create a search index file"
 msgstr "Opprett en søkeindeksfil"
 
-#: u_translation.rscreatedataba
-msgid "Create database"
-msgstr "Opprett database"
-
 #: u_translation.rscreatefiles
 msgid "Create files"
 msgstr "Opprett filer"
@@ -1265,10 +1253,6 @@ msgstr "%sDatabase %s åpnet.%s"
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
 msgstr "Databaseinnstillinger..."
-
-#: u_translation.rsdatabasetype
-msgid "Database type"
-msgstr "Databasetype"
 
 #: u_translation.rsdatafiles
 msgid "Data files:"
@@ -1761,10 +1745,6 @@ msgstr "Årlig drift"
 #: u_translation.rsdriverselect
 msgid "Driver Selection"
 msgstr "Driver-valg"
-
-#: u_translation.rsdropdatabase
-msgid "Drop database"
-msgstr "Lukk database"
 
 #: u_translation.rsdsocatalogpi
 msgid "DSO Catalog pictures"
@@ -5526,6 +5506,10 @@ msgstr "Toposentrisk"
 msgid "Totality"
 msgstr "Totalitet"
 
+#: u_translation.rstotalasteroi
+msgid "Total asteroid count"
+msgstr ""
+
 #: u_translation.rstotalradius
 msgid "Total radius"
 msgstr "Total radius"
@@ -6007,8 +5991,8 @@ msgid "Zoom in"
 msgstr "Zoom inn"
 
 #: u_translation.rszoommoretovi
-msgid "Zoom more to view the object"
-msgstr "Zoom mer for å vise objektet"
+msgid "Object too faint to show on the chart"
+msgstr ""
 
 #: u_translation.rszoomout
 msgid "Zoom out"

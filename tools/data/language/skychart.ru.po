@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-25 15:03+0000\n"
+"POT-Creation-Date: 2021-02-05 18:04+0000\n"
 "PO-Revision-Date: 2020-05-03 09:19+0000\n"
 "Last-Translator: Sergey Tarantsov <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-01-25 15:08+0000\n"
-"X-Generator: Launchpad (build e00fb96b2e64b75333d0178ec15cb78e5aadb64d)\n"
+"X-Launchpad-Export-Date: 2021-02-05 18:12+0000\n"
+"X-Generator: Launchpad (build 3d7abcb776ec05aa0a89112accc21bf8b41dfc24)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -424,10 +424,6 @@ msgstr "Элементы орбит астероидов в формате МР�
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
 msgstr "Астероиды"
-
-#: u_translation.rsasteroidsett
-msgid "Asteroid settings"
-msgstr "Опции астероидов"
 
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
@@ -957,10 +953,6 @@ msgstr "Элементы орбит комет в формате МРС (оди�
 msgid "Comet elements"
 msgstr "Кометы"
 
-#: u_translation.rscometsetting
-msgid "Comet settings"
-msgstr "Опции комет"
-
 #: u_translation.rscometupdates
 msgid "Comet update successful"
 msgstr "База комет обновлена!"
@@ -1189,10 +1181,6 @@ msgstr "Создать новую карту"
 msgid "Create a search index file"
 msgstr "Создать файл поискового индекса"
 
-#: u_translation.rscreatedataba
-msgid "Create database"
-msgstr "Создать БД"
-
 #: u_translation.rscreatefiles
 msgid "Create files"
 msgstr "Создать файлы"
@@ -1264,10 +1252,6 @@ msgstr "%sБаза данных %s открыта.%s"
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
 msgstr "Параметры БД..."
-
-#: u_translation.rsdatabasetype
-msgid "Database type"
-msgstr "Тип базы данных"
 
 #: u_translation.rsdatafiles
 msgid "Data files:"
@@ -1760,10 +1744,6 @@ msgstr "Год. смещение"
 #: u_translation.rsdriverselect
 msgid "Driver Selection"
 msgstr "Выбор драйвера"
-
-#: u_translation.rsdropdatabase
-msgid "Drop database"
-msgstr "Падение базы данных"
 
 #: u_translation.rsdsocatalogpi
 msgid "DSO Catalog pictures"
@@ -5526,6 +5506,10 @@ msgstr "Топоцентрические"
 msgid "Totality"
 msgstr "Полное"
 
+#: u_translation.rstotalasteroi
+msgid "Total asteroid count"
+msgstr ""
+
 #: u_translation.rstotalradius
 msgid "Total radius"
 msgstr "Полный радиус"
@@ -6007,8 +5991,8 @@ msgid "Zoom in"
 msgstr "Увеличить масштаб"
 
 #: u_translation.rszoommoretovi
-msgid "Zoom more to view the object"
-msgstr "Увеличьте масштаб, чтобы увидеть объект"
+msgid "Object too faint to show on the chart"
+msgstr ""
 
 #: u_translation.rszoomout
 msgid "Zoom out"

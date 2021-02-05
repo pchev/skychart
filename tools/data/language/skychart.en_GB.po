@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-01-25 15:03+0000\n"
-"PO-Revision-Date: 2020-09-11 15:30+0000\n"
+"POT-Creation-Date: 2021-02-05 18:04+0000\n"
+"PO-Revision-Date: 2021-02-01 08:50+0000\n"
 "Last-Translator: Stephan Woidowski <swoidowski@t-online.de>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-01-25 15:08+0000\n"
-"X-Generator: Launchpad (build e00fb96b2e64b75333d0178ec15cb78e5aadb64d)\n"
+"X-Launchpad-Export-Date: 2021-02-05 18:12+0000\n"
+"X-Generator: Launchpad (build 3d7abcb776ec05aa0a89112accc21bf8b41dfc24)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -182,7 +182,7 @@ msgstr ""
 
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
-msgstr ""
+msgstr "Adjust colour brightness"
 
 #: u_translation.rsadjustthevis
 msgid "Adjust the visualisation scale"
@@ -428,10 +428,6 @@ msgstr ""
 msgid "Asteroid elements"
 msgstr ""
 
-#: u_translation.rsasteroidsett
-msgid "Asteroid settings"
-msgstr ""
-
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
 msgstr ""
@@ -450,7 +446,7 @@ msgstr "Astronomical"
 
 #: u_translation.rsastronomical2
 msgid "Astronomical twilight"
-msgstr ""
+msgstr "Astronomical twilight"
 
 #: u_translation.rsat
 msgid "at"
@@ -594,7 +590,7 @@ msgstr "Boundary"
 
 #: u_translation.rsbrighter
 msgid "Brighter"
-msgstr ""
+msgstr "Brighter"
 
 #: u_translation.rsbrightest
 msgid "Brightest"
@@ -960,10 +956,6 @@ msgstr ""
 msgid "Comet elements"
 msgstr ""
 
-#: u_translation.rscometsetting
-msgid "Comet settings"
-msgstr ""
-
 #: u_translation.rscometupdates
 msgid "Comet update successful"
 msgstr ""
@@ -1086,15 +1078,15 @@ msgstr "Constellation"
 
 #: u_translation.rsconstellatio2
 msgid "Constellation figures"
-msgstr ""
+msgstr "Constellation figures"
 
 #: u_translation.rsconstellatio3
 msgid "Constellation figures file name: "
-msgstr ""
+msgstr "Constellation figures file name: "
 
 #: u_translation.rsconstellatio4
 msgid "Constellation boundaries"
-msgstr ""
+msgstr "Constellation boundaries"
 
 #: u_translation.rsconstellatio5
 msgid "Constellation boundaries file name: "
@@ -1192,10 +1184,6 @@ msgstr "Create a new chart"
 msgid "Create a search index file"
 msgstr "Create a search index file"
 
-#: u_translation.rscreatedataba
-msgid "Create database"
-msgstr ""
-
 #: u_translation.rscreatefiles
 msgid "Create files"
 msgstr "Create files"
@@ -1246,11 +1234,11 @@ msgstr ""
 
 #: u_translation.rsdash1
 msgid "Dash"
-msgstr ""
+msgstr "Dash"
 
 #: u_translation.rsdashdot1
 msgid "Dash dot"
-msgstr ""
+msgstr "Dash dot"
 
 #: u_translation.rsdashdotdot1
 msgid "Dash dot dot"
@@ -1266,10 +1254,6 @@ msgstr ""
 
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
-msgstr ""
-
-#: u_translation.rsdatabasetype
-msgid "Database type"
 msgstr ""
 
 #: u_translation.rsdatafiles
@@ -1330,7 +1314,7 @@ msgstr "days"
 
 #: u_translation.rsdaytime
 msgid "Day Time"
-msgstr ""
+msgstr "Day Time"
 
 #: u_translation.rsdbinsertfail
 msgid "DB insert failed for %s: %s"
@@ -1398,7 +1382,7 @@ msgstr "Default"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
-msgstr ""
+msgstr "Default colour"
 
 #: u_translation.rsdefaultlabel
 msgid "Default label"
@@ -1654,7 +1638,7 @@ msgstr ""
 
 #: u_translation.rsdot1
 msgid "Dot"
-msgstr ""
+msgstr "Dot"
 
 #: u_translation.rsdoubles
 msgid "Doubles"
@@ -1762,10 +1746,6 @@ msgstr ""
 
 #: u_translation.rsdriverselect
 msgid "Driver Selection"
-msgstr ""
-
-#: u_translation.rsdropdatabase
-msgid "Drop database"
 msgstr ""
 
 #: u_translation.rsdsocatalogpi
@@ -2030,7 +2010,7 @@ msgstr ""
 
 #: u_translation.rsfainter
 msgid "Fainter"
-msgstr ""
+msgstr "Fainter"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
@@ -2442,7 +2422,7 @@ msgstr ""
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
-msgstr ""
+msgstr "High surface brightness"
 
 #: u_translation.rshorizon
 msgid "Horizon"
@@ -2854,7 +2834,7 @@ msgstr ""
 
 #: u_translation.rsline1
 msgid "Line"
-msgstr ""
+msgstr "Line"
 
 #: u_translation.rslinear
 msgid "Linear"
@@ -2998,7 +2978,7 @@ msgstr "Lozenge"
 
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
-msgstr ""
+msgstr "Low surface brightness"
 
 #: u_translation.rsluminosity
 msgid "Luminosity"
@@ -3826,7 +3806,7 @@ msgstr ""
 
 #: u_translation.rsphaseangle
 msgid "Phase angle"
-msgstr ""
+msgstr "Phase angle"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
@@ -4866,7 +4846,7 @@ msgstr "Show constellation limits"
 
 #: u_translation.rsshowconstell3
 msgid "Show constellation figures"
-msgstr ""
+msgstr "Show constellation figures"
 
 #: u_translation.rsshowconstell4
 msgid "Show constellation boundaries"
@@ -4894,7 +4874,7 @@ msgstr "Show galactic equator"
 
 #: u_translation.rsshowgridlabe
 msgid "Show grid label"
-msgstr ""
+msgstr "Show grid label"
 
 #: u_translation.rsshowhidedssi
 msgid "Show/hide DSS image"
@@ -5030,7 +5010,7 @@ msgstr "Sky Charts"
 
 #: u_translation.rsskycolour
 msgid "Sky colour"
-msgstr ""
+msgstr "Sky colour"
 
 #: u_translation.rsslantorthogr
 msgid "Slant orthographic"
@@ -5528,6 +5508,10 @@ msgstr ""
 msgid "Totality"
 msgstr "Totality"
 
+#: u_translation.rstotalasteroi
+msgid "Total asteroid count"
+msgstr ""
+
 #: u_translation.rstotalradius
 msgid "Total radius"
 msgstr "Total radius"
@@ -6009,7 +5993,7 @@ msgid "Zoom in"
 msgstr "Zoom in"
 
 #: u_translation.rszoommoretovi
-msgid "Zoom more to view the object"
+msgid "Object too faint to show on the chart"
 msgstr ""
 
 #: u_translation.rszoomout

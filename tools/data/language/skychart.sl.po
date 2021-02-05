@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-25 15:03+0000\n"
-"PO-Revision-Date: 2020-08-21 19:02+0000\n"
+"POT-Creation-Date: 2021-02-05 18:04+0000\n"
+"PO-Revision-Date: 2021-02-01 14:54+0000\n"
 "Last-Translator: grofaty <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-01-25 15:08+0000\n"
-"X-Generator: Launchpad (build e00fb96b2e64b75333d0178ec15cb78e5aadb64d)\n"
+"X-Launchpad-Export-Date: 2021-02-05 18:12+0000\n"
+"X-Generator: Launchpad (build 3d7abcb776ec05aa0a89112accc21bf8b41dfc24)\n"
 "Language: en_US\n"
 
 #: u_translation.rs102cddss
@@ -289,11 +289,11 @@ msgstr "Vedno shrani brez spraševanja."
 
 #: u_translation.rsamplitudemax
 msgid "Amplitude max."
-msgstr ""
+msgstr "Največja amplituda"
 
 #: u_translation.rsamplitudemin
 msgid "Amplitude min."
-msgstr ""
+msgstr "Najmanjša amplituda"
 
 #: u_translation.rsanewversiono
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
@@ -426,10 +426,6 @@ msgstr "Orbitalni elementi asteroida v MPC obliki (en URL naslov za vsako vrstic
 #: u_translation.rsasteroidelem2
 msgid "Asteroid elements"
 msgstr "Elementi asteroida"
-
-#: u_translation.rsasteroidsett
-msgid "Asteroid settings"
-msgstr "Nastavitve asteroida"
 
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
@@ -857,7 +853,7 @@ msgstr "Cirkumpolaren"
 
 #: u_translation.rscivil
 msgid "Civil"
-msgstr ""
+msgstr "Civilno"
 
 #: u_translation.rsclass
 msgid "Class"
@@ -958,10 +954,6 @@ msgstr "Orbitalni elementi kometa v MPC obliki (en URL naslov za vsako vrstico)"
 #: u_translation.rscometelement2
 msgid "Comet elements"
 msgstr "Elementi kometa"
-
-#: u_translation.rscometsetting
-msgid "Comet settings"
-msgstr "Nastavitve kometa"
 
 #: u_translation.rscometupdates
 msgid "Comet update successful"
@@ -1191,10 +1183,6 @@ msgstr "Ustvari novo karto"
 msgid "Create a search index file"
 msgstr "Ustvari indeks iskalne datoteke"
 
-#: u_translation.rscreatedataba
-msgid "Create database"
-msgstr "Ustvari zbirko"
-
 #: u_translation.rscreatefiles
 msgid "Create files"
 msgstr "Ustvari datoteke"
@@ -1266,10 +1254,6 @@ msgstr "%sPodatkovna zbirka %s je odprta.%s"
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
 msgstr "Nastavitve podatkovne zbirke..."
-
-#: u_translation.rsdatabasetype
-msgid "Database type"
-msgstr "Tip zbirke"
 
 #: u_translation.rsdatafiles
 msgid "Data files:"
@@ -1763,10 +1747,6 @@ msgstr "Letni premik"
 msgid "Driver Selection"
 msgstr "Izbira gonilnika"
 
-#: u_translation.rsdropdatabase
-msgid "Drop database"
-msgstr "Briši zbirko"
-
 #: u_translation.rsdsocatalogpi
 msgid "DSO Catalog pictures"
 msgstr "slike DSO kataloga"
@@ -2037,7 +2017,7 @@ msgstr "Velikost šibkih zvezd "
 
 #: u_translation.rsfamily
 msgid "Family"
-msgstr ""
+msgstr "Družina"
 
 #: u_translation.rsfaq
 msgid "FAQ"
@@ -2149,7 +2129,7 @@ msgstr "Iskalni pravokotnik (CCD)"
 
 #: u_translation.rsfindinfo
 msgid "Find info"
-msgstr ""
+msgstr "Najdi podatke"
 
 #: u_translation.rsfirst
 msgid "First"
@@ -2529,7 +2509,7 @@ msgstr "Seznam slik"
 
 #: u_translation.rsimportmosaic
 msgid "Import mosaic file"
-msgstr ""
+msgstr "Uvozi datoteko tipa mosaic"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -2609,7 +2589,7 @@ msgstr "Podatki iz kataloga"
 
 #: u_translation.rsinformationf2
 msgid "Information from"
-msgstr ""
+msgstr "Informacije iz"
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
@@ -3825,7 +3805,7 @@ msgstr "Osebni podatki"
 
 #: u_translation.rsphaseangle
 msgid "Phase angle"
-msgstr ""
+msgstr "Fazni kot"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
@@ -4165,7 +4145,7 @@ msgstr "Datoteke s .tle pipono daj v %s mapo"
 
 #: u_translation.rsqualityflag
 msgid "Quality flag"
-msgstr ""
+msgstr "Kakovostna zastavica"
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -5529,6 +5509,10 @@ msgstr "Topocentrične"
 msgid "Totality"
 msgstr "Popolni"
 
+#: u_translation.rstotalasteroi
+msgid "Total asteroid count"
+msgstr ""
+
 #: u_translation.rstotalradius
 msgid "Total radius"
 msgstr "Celoten polmer"
@@ -5603,7 +5587,7 @@ msgstr "Trumplerjev razred"
 
 #: u_translation.rstruncatedtos
 msgid "Truncated to %s catalogs"
-msgstr ""
+msgstr "Okrnjeno na %s katalogov"
 
 #: u_translation.rstrytoautocon
 msgid "Try to auto-connect to a SAMP hub when the program start"
@@ -6010,8 +5994,8 @@ msgid "Zoom in"
 msgstr "Približaj"
 
 #: u_translation.rszoommoretovi
-msgid "Zoom more to view the object"
-msgstr "Bolj približaj, da vidiš objekt"
+msgid "Object too faint to show on the chart"
+msgstr ""
 
 #: u_translation.rszoomout
 msgid "Zoom out"
