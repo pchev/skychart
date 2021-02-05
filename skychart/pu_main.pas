@@ -2524,6 +2524,20 @@ begin
     {$else}
     MenuUpdSoft.Visible := False;
     {$endif}
+    if isAdmin then begin
+       if MessageDlg('Error!','Carte du Ciel program should never be run as administrator, '+
+           'this is useless, dangerous and the source of many unwanted issues.'+crlf+
+           'Please close it now and fix the startup icon or command.',
+           mtError,[mbClose,mbIgnore],0,mbClose) <> mrIgnore
+           then halt;
+       {$ifdef mswindows}
+       basecaption := Format(rsDoNotRunAsAd, [Caption, rsAdministrato])
+       {$else}
+       basecaption := Format(rsDoNotRunAsAd, [Caption, 'root'])
+       {$endif}
+    end
+    else
+       basecaption := Caption;
     step := 'Create config';
     if VerboseMsg then
       debugln(step);
@@ -2539,14 +2553,6 @@ begin
     step := 'Application directory';
     if VerboseMsg then
       debugln(step);
-    if isAdmin then
-       {$ifdef mswindows}
-       basecaption := Format(rsDoNotRunAsAd, [Caption, rsAdministrato])
-       {$else}
-       basecaption := Format(rsDoNotRunAsAd, [Caption, 'root'])
-       {$endif}
-    else
-       basecaption := Caption;
     GetAppDir;
     chdir(appdir);
     step := 'Trace';
