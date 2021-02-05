@@ -99,7 +99,6 @@ type
     astpage, compage, dbpage: integer;
     lastSelectedNode: TTreeNode;
     FApplyConfig,FDisableAsteroid,FEnableAsteroid: TNotifyEvent;
-    FDBChange: TNotifyEvent;
     FSaveAndRestart: TNotifyEvent;
     FPrepareAsteroid: TPrepareAsteroid;
     FGetTwilight: TGetTwilight;
@@ -116,10 +115,6 @@ type
     procedure SetCmain(Value: Tconf_main);
     procedure SetCdss(Value: Tconf_dss);
     procedure ShowDBSetting(Sender: TObject);
-    procedure ShowCometSetting(Sender: TObject);
-    procedure ShowAsteroidSetting(Sender: TObject);
-    procedure LoadMPCSample(Sender: TObject);
-    procedure SysDBChange(Sender: TObject);
     procedure SysSaveAndRestart(Sender: TObject);
     function SolSysPrepareAsteroid(jd1, jd2, step: double; msg: TStrings): boolean;
     procedure TimeGetTwilight(jd0: double; out ht: double);
@@ -140,10 +135,8 @@ type
     property catalog: Tcatalog read GetCatalog write SetCatalog;
     property db: Tcdcdb read GetDB write SetDB;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
-    property onDBChange: TNotifyEvent read FDBChange write FDBChange;
     property onSaveAndRestart: TNotifyEvent read FSaveAndRestart write FSaveAndRestart;
-    property onPrepareAsteroid: TPrepareAsteroid
-      read FPrepareAsteroid write FPrepareAsteroid;
+    property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
     property onGetTwilight: TGetTwilight read FGetTwilight write FGetTwilight;
     property onDisableAsteroid: TNotifyEvent read FDisableAsteroid write FDisableAsteroid;
     property onEnableAsteroid: TNotifyEvent read FEnableAsteroid write FEnableAsteroid;
@@ -289,10 +282,6 @@ begin
   dbpage := 1;
   f_config_solsys1.onShowDB := ShowDBSetting;
   f_config_solsys1.onPrepareAsteroid := SolSysPrepareAsteroid;
-  f_config_system1.onShowAsteroid := ShowAsteroidSetting;
-  f_config_system1.onShowComet := ShowCometSetting;
-  f_config_system1.onLoadMPCSample := LoadMPCSample;
-  f_config_system1.onDBChange := SysDBChange;
   f_config_system1.onSaveAndRestart := SysSaveAndRestart;
   f_config_time1.onGetTwilight := TimeGetTwilight;
 end;
@@ -362,11 +351,6 @@ begin
     if f_config_catalog1.PageControl1.ActivePage = f_config_catalog1.Page1b then
       f_config_catalog1.ActivateUserObjects;
   end;
-  if PageControl1.PageIndex = 0 then
-  begin // config system
-    if f_config_system1.PageControl1.ActivePage = f_config_system1.Page3 then
-      f_config_system1.ActivateDBchange;
-  end;
   // page change
   PageControl1.PageIndex := i;
   case i of
@@ -435,11 +419,6 @@ begin
       f_config_catalog1.ActivateGCat;
     if f_config_catalog1.PageControl1.ActivePage = f_config_catalog1.Page1b then
       f_config_catalog1.ActivateUserObjects;
-  end;
-  if PageControl1.PageIndex = 0 then
-  begin // config system
-    if f_config_system1.PageControl1.ActivePage = f_config_system1.Page3 then
-      f_config_system1.ActivateDBchange;
   end;
   Fcdss := f_config_internet1.cdss;
 end;
@@ -513,27 +492,6 @@ end;
 procedure Tf_config.ShowDBSetting(Sender: TObject);
 begin
   Treeview1.selected := Treeview1.items[dbpage];
-end;
-
-procedure Tf_config.ShowCometSetting(Sender: TObject);
-begin
-  Treeview1.selected := Treeview1.items[compage];
-end;
-
-procedure Tf_config.ShowAsteroidSetting(Sender: TObject);
-begin
-  Treeview1.selected := Treeview1.items[astpage];
-end;
-
-procedure Tf_config.LoadMPCSample(Sender: TObject);
-begin
-  f_config_solsys1.LoadSampleData;
-end;
-
-procedure Tf_config.SysDBChange(Sender: TObject);
-begin
-  if Assigned(FDBChange) then
-    FDBChange(self);
 end;
 
 procedure Tf_config.SysSaveAndRestart(Sender: TObject);

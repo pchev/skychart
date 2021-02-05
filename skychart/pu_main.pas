@@ -825,7 +825,6 @@ type
     procedure PrintSetup(Sender: TObject);
     procedure GetChartConfig(csc: Tconf_skychart);
     procedure DrawChart(csc: Tconf_skychart);
-    procedure ConfigDBChange(Sender: TObject);
     procedure SaveAndRestart(Sender: TObject);
     procedure ClearAndRestart;
     procedure SetPerformanceOptions;
@@ -4702,7 +4701,6 @@ begin
   begin
     f_config := Tf_config.Create(application);
     f_config.onApplyConfig := ApplyConfig;
-    f_config.onDBChange := ConfigDBChange;
     f_config.onSaveAndRestart := SaveAndRestart;
     f_config.onPrepareAsteroid := PrepareAsteroid;
     f_config.onEnableAsteroid:=EnableAsteroid;
@@ -4976,7 +4974,6 @@ begin
     ConfigSystem.f_config_system1.PageControl1.ShowTabs := True;
     ConfigSystem.f_config_system1.PageControl1.PageIndex := 0;
     ConfigSystem.f_config_system1.onApplyConfig := ApplyConfigSystem;
-    ConfigSystem.f_config_system1.onDBChange := ConfigDBChange;
     ConfigSystem.f_config_system1.onSaveAndRestart := SaveAndRestart;
     ConfigSystem.f_config_system1.cdb := cdcdb;
     ConfigSystem.f_config_system1.ccat.Assign(catalog.cfgcat);
@@ -4996,7 +4993,6 @@ begin
     ConfigSystem.showmodal;
     if ConfigSystem.ModalResult = mrOk then
     begin
-      ConfigSystem.f_config_system1.ActivateDBchange;
       activateconfig(ConfigSystem.f_config_system1.cmain,
         ConfigSystem.f_config_system1.csc,
         ConfigSystem.f_config_system1.ccat, ConfigSystem.f_config_system1.cshr,
@@ -5017,7 +5013,6 @@ begin
     ConfigSystem.f_config_system1.PageControl1.ShowTabs := True;
     ConfigSystem.f_config_system1.PageControl1.PageIndex := 0;
     ConfigSystem.f_config_system1.onApplyConfig := ApplyConfigSystem;
-    ConfigSystem.f_config_system1.onDBChange := ConfigDBChange;
     ConfigSystem.f_config_system1.onSaveAndRestart := SaveAndRestart;
   end;
   ConfigSystem.f_config_system1.cdb := cdcdb;
@@ -5034,7 +5029,6 @@ begin
   cfgm.persdir := privatedir;
   ConfigSystem.f_config_system1.cmain.Assign(cfgm);
   ConfigSystem.f_config_system1.cmain.language := '';
-  ConfigSystem.f_config_system1.ActivateDBchange;
   activateconfig(ConfigSystem.f_config_system1.cmain, ConfigSystem.f_config_system1.csc,
     ConfigSystem.f_config_system1.ccat, ConfigSystem.f_config_system1.cshr,
     ConfigSystem.f_config_system1.cplot, nil, False);
@@ -5374,15 +5368,6 @@ end;
 function Tf_main.PrepareAsteroid(jd1, jd2, step: double; msg: TStrings): boolean;
 begin
   Result := planet.PrepareAsteroid(jd1, jd2, step, msg);
-end;
-
-procedure Tf_main.ConfigDBChange(Sender: TObject);
-begin
-  if ConfigSystem <> nil then
-  begin
-    cfgm.db := ConfigSystem.f_config_system1.cmain.db;
-    ConnectDB;
-  end;
 end;
 
 procedure Tf_main.SaveAndRestart(Sender: TObject);
@@ -11046,6 +11031,8 @@ begin
       if not NeedToInitializeDB then
         cdcdb.CheckForUpgrade(f_info.ProgressMemo, updversion);
       Fits.ConnectDB(cfgm.db);
+      cdcdb.OpenAsteroid;
+      cdcdb.OpenAsteroidMagnitude;
       SetLpanel1(Format(rsConnectedToS, [cfgm.db]));
     end
     else

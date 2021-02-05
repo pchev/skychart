@@ -770,11 +770,6 @@ begin
   CL.AddConstantN('rsDirectory', 'String').SetString(rsDirectory);
   CL.AddConstantN('rsPersonalData', 'String').SetString(rsPersonalData);
   CL.AddConstantN('rsCheck', 'String').SetString(rsCheck);
-  CL.AddConstantN('rsCreateDataba', 'String').SetString(rsCreateDataba);
-  CL.AddConstantN('rsDropDatabase', 'String').SetString(rsDropDatabase);
-  CL.AddConstantN('rsCometSetting', 'String').SetString(rsCometSetting);
-  CL.AddConstantN('rsAsteroidSett', 'String').SetString(rsAsteroidSett);
-  CL.AddConstantN('rsDatabaseType', 'String').SetString(rsDatabaseType);
   CL.AddConstantN('rsDesktopEnvir', 'String').SetString(rsDesktopEnvir);
   CL.AddConstantN('rsURLLaunchCom', 'String').SetString(rsURLLaunchCom);
   CL.AddConstantN('rsTCPIPServer', 'String').SetString(rsTCPIPServer);

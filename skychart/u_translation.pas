@@ -776,11 +776,6 @@ resourcestring
   rsDirectory = 'Directory';
   rsPersonalData = 'Personal data';
   rsCheck = 'Check';
-  rsCreateDataba = 'Create database';
-  rsDropDatabase = 'Drop database';
-  rsCometSetting = 'Comet settings';
-  rsAsteroidSett = 'Asteroid settings';
-  rsDatabaseType = 'Database type';
   rsDesktopEnvir = 'Desktop environment';
   rsURLLaunchCom = 'URL launch command';
   rsTCPIPServer = 'TCP/IP server';

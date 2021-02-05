@@ -39,6 +39,7 @@ type
     IndiMsg: TLabel;
     INDILabel2: TLabel;
     LanguageList: TCheckListBox;
+    persdir: TEdit;
     ServerCoordSys: TRadioGroup;
     UseScaling: TCheckBox;
     CheckBox1: TCheckBox;
@@ -79,7 +80,6 @@ type
     Page1: TTabSheet;
     TelescopeManual: TPanel;
     INDI: TPanel;
-    persdir: TDirectoryEdit;
     Label12: TLabel;
     LinuxCmd: TEdit;
     LinuxDesktopBox: TComboBox;
@@ -102,10 +102,6 @@ type
     TelescopeSelect: TRadioGroup;
     GroupBox1: TGroupBox;
     chkdb: TButton;
-    credb: TButton;
-    dropdb: TButton;
-    CometDB: TButton;
-    AstDB: TButton;
     Label1: TLabel;
     dbnamesqlite: TEdit;
     Label2: TLabel;
@@ -149,18 +145,11 @@ type
     procedure LinuxCmdChange(Sender: TObject);
     procedure LinuxDesktopBoxChange(Sender: TObject);
     procedure chkdbClick(Sender: TObject);
-    procedure credbClick(Sender: TObject);
-    procedure dropdbClick(Sender: TObject);
     procedure UseIPserverClick(Sender: TObject);
     procedure keepaliveClick(Sender: TObject);
     procedure ipaddrChange(Sender: TObject);
     procedure ipportChange(Sender: TObject);
     procedure TelescopeSelectClick(Sender: TObject);
-    procedure persdirChange(Sender: TObject);
-    procedure AstDBClick(Sender: TObject);
-    procedure CometDBClick(Sender: TObject);
-    procedure ActivateDBchange;
-    procedure dbnamesqliteChange(Sender: TObject);
     procedure PanelCmdChange(Sender: TObject);
     procedure TurnsRaChange(Sender: TObject);
     procedure TurnsDecChange(Sender: TObject);
@@ -169,13 +158,9 @@ type
     procedure TurnsAltChange(Sender: TObject);
   private
     { Private declarations }
-    FShowAsteroid: TNotifyEvent;
-    FShowComet: TNotifyEvent;
-    FLoadMPCSample: TNotifyEvent;
-    FDBChange: TNotifyEvent;
     FSaveAndRestart: TNotifyEvent;
     FApplyConfig: TNotifyEvent;
-    dbchanged, LockChange, LockMsg: boolean;
+    LockChange, LockMsg: boolean;
     procedure ShowSYS;
     procedure ShowServer;
     procedure ShowTelescope;
@@ -198,10 +183,6 @@ type
     procedure Init; // FormShow
     procedure Lock; // FormClose
     procedure SetLang;
-    property onShowAsteroid: TNotifyEvent read FShowAsteroid write FShowAsteroid;
-    property onShowComet: TNotifyEvent read FShowComet write FShowComet;
-    property onLoadMPCSample: TNotifyEvent read FLoadMPCSample write FLoadMPCSample;
-    property onDBChange: TNotifyEvent read FDBChange write FDBChange;
     property onSaveAndRestart: TNotifyEvent read FSaveAndRestart write FSaveAndRestart;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
@@ -226,10 +207,6 @@ begin
   GroupBoxDir.Caption := rsDirectory;
   Label157.Caption := rsPersonalData;
   chkdb.Caption := rsCheck;
-  credb.Caption := rsCreateDataba;
-  dropdb.Caption := rsDropDatabase;
-  CometDB.Caption := rsCometSetting;
-  AstDB.Caption := rsAsteroidSett;
   GroupBoxLinux.Caption := rsDesktopEnvir;
   Label12.Caption := rsURLLaunchCom;
   GroupBox2.Caption := rsScreenResolu;
@@ -320,16 +297,9 @@ begin
   inherited Destroy;
 end;
 
-procedure Tf_config_system.ActivateDBchange;
-begin
-  if dbchanged and Assigned(FDBChange) then
-    FDBChange(self);
-end;
-
 procedure Tf_config_system.Init;
 begin
   LockChange := True;
-  dbchanged := False;
   IndiMsg.Caption:='';
 {$if defined(mswindows) or defined(darwin)}
   GroupBoxLinux.Visible := False;
@@ -386,8 +356,6 @@ end;
 
 procedure Tf_config_system.ShowSYS;
 begin
-  dropdb.Visible := False;
-  credb.Visible:=false;
   dbnamesqlite.Text := SysToUTF8(cmain.db);
   persdir.Text := SysToUTF8(cmain.persdir);
   UseScaling.Checked := cmain.ScreenScaling;
@@ -446,12 +414,6 @@ begin
   TelescopeselectClick(self);
 end;
 
-procedure Tf_config_system.dbnamesqliteChange(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  cmain.db := utf8tosys(dbnamesqlite.Text);
-end;
 
 procedure Tf_config_system.chkdbClick(Sender: TObject);
 var
@@ -459,62 +421,6 @@ var
 begin
   msg := cdb.checkdbconfig(cmain);
   ShowMessage(msg);
-end;
-
-procedure Tf_config_system.credbClick(Sender: TObject);
-var
-  ok: boolean;
-begin
-  screen.cursor := crHourGlass;
-  cdb.createdb(cmain, ok);
-  if ok then
-  begin
-    // signal new database
-    if Assigned(FDBChange) then
-      FDBChange(self);
-    // load sample data
-    if Assigned(FLoadMPCSample) then
-      FLoadMPCSample(self);
-  end;
-  screen.cursor := crDefault;
-  chkdbClick(Sender);
-end;
-
-procedure Tf_config_system.dropdbClick(Sender: TObject);
-var
-  msg: string;
-begin
-  if messagedlg(Format(rsWarningYouAr, [crlf, cmain.db, crlf]),
-    mtWarning, [mbYes, mbNo], 0) = mrYes then
-  begin
-    msg := cdb.dropdb(cmain);
-    if msg <> '' then
-      ShowMessage(msg);
-    // signal database no more exists
-    if Assigned(FDBChange) then
-      FDBChange(self);
-  end;
-end;
-
-procedure Tf_config_system.AstDBClick(Sender: TObject);
-begin
-  if Assigned(FShowAsteroid) then
-    FShowAsteroid(self);
-end;
-
-procedure Tf_config_system.CometDBClick(Sender: TObject);
-begin
-  if Assigned(FShowComet) then
-    FShowComet(self);
-end;
-
-procedure Tf_config_system.persdirChange(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  cmain.persdir := utf8tosys(persdir.Text);
-  dbnamesqlite.Text := systoutf8(slash(cmain.persdir) + slash('database') + 'cdc.db');
-  dbchanged := True;
 end;
 
 procedure Tf_config_system.UseScalingChange(Sender: TObject);

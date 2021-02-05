@@ -155,8 +155,6 @@ begin
     DB.Query('PRAGMA case_sensitive_like = 1');
     DB.Query('PRAGMA cache_size = -102400');
     DB.Query('PRAGMA temp_store = MEMORY');
-    OpenAsteroid;
-    OpenAsteroidMagnitude;
   except
     Result := False;
   end;

@@ -149,7 +149,6 @@ object f_config: Tf_config
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '2.0.10.0'
   object PanelBottom: TPanel
     Left = 0
     Height = 41

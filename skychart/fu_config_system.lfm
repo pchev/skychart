@@ -528,7 +528,6 @@ object f_config_system: Tf_config_system
             Width = 284
             Color = clBtnFace
             Constraints.MaxHeight = 28
-            OnChange = dbnamesqliteChange
             ParentFont = False
             ReadOnly = True
             TabOrder = 0
@@ -583,19 +582,15 @@ object f_config_system: Tf_config_system
             ParentColor = False
             ParentFont = False
           end
-          object persdir: TDirectoryEdit
+          object persdir: TEdit
             Left = 175
             Height = 28
             Top = 8
             Width = 243
-            ShowHidden = False
-            ButtonWidth = 23
             Constraints.MaxHeight = 28
-            NumGlyphs = 1
-            MaxLength = 0
             ParentFont = False
+            ReadOnly = True
             TabOrder = 0
-            OnChange = persdirChange
           end
         end
         object GroupBox1: TGroupBox
@@ -617,52 +612,6 @@ object f_config_system: Tf_config_system
             OnClick = chkdbClick
             ParentFont = False
             TabOrder = 0
-          end
-          object credb: TButton
-            Left = 170
-            Height = 25
-            Top = 16
-            Width = 111
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Create Database'
-            OnClick = credbClick
-            ParentFont = False
-            TabOrder = 1
-          end
-          object dropdb: TButton
-            Left = 320
-            Height = 25
-            Top = 16
-            Width = 111
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Drop Database'
-            OnClick = dropdbClick
-            ParentFont = False
-            TabOrder = 2
-          end
-          object CometDB: TButton
-            Left = 170
-            Height = 25
-            Top = 49
-            Width = 111
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Comet Setting'
-            OnClick = CometDBClick
-            ParentFont = False
-            TabOrder = 4
-            Visible = False
-          end
-          object AstDB: TButton
-            Left = 16
-            Height = 25
-            Top = 49
-            Width = 111
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Asteroid Setting'
-            OnClick = AstDBClick
-            ParentFont = False
-            TabOrder = 3
-            Visible = False
           end
         end
         object GroupBoxLinux: TGroupBox
