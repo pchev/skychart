@@ -33,3 +33,9 @@ Correction d'un bug:
 Suppression:
 - Déplace le catalog SAC en obsolète, il est remplacé par OpenNGC
 - Supprime le calcul des flash Iridium
+
+Notez que vous ne devez pas exécuter ce logiciel avec les droits d'administrateur.
+Depuis la version 4.2, un avertissement s'affiche dans la barre de titre si vous le faites.
+Maintenant, cette version affiche une invite chaque fois que le programme est démarré dans ce mode.
+Dans une version future, le programme refusera de démarrer dans ce cas.
+Si vous exécutez actuellement vos logiciels d'astronomie en mode administrateur, il est temps de changer car cela est totalement inutile. Le point important est que vous exécutez tous vos logiciels avec le même utilisateur. Mais tout exécuter avec l'utilisateur standard est bien mieux que de tout exécuter en administrateur!

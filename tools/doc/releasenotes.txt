@@ -33,3 +33,9 @@ Bug fix:
 Removed:
 - Move SAC to obsolete catalog, replaced by OpenNGC
 - Remove Iridium flare computation
+
+Take note you must not run this software with administrator right.
+Since the version 4.2 a warning is show in the title bar if you do so.
+Now this version show a prompt every time the program is started in this mode.
+In a future version the program will refuse to start in this case.
+If you are currently running your astronomy software in administrator mode it is time to change that because this is totally useless. The important point is you run all your software with the same user. But running all with the standard user is much better than running all in administrator!
