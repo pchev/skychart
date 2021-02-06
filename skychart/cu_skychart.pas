@@ -1084,7 +1084,7 @@ begin
     cfgsc.asl := False;
   end;
   // Earth barycentric position in parsec for parallax
-  fplanet.SunRect(cfgsc.CurJDTT, v1, v2, v3, True);
+  fplanet.Barycenter(cfgsc.CurJDTT, v1, v2, v3);
   cfgsc.EarthB[1] := -v1 * au2parsec;
   cfgsc.EarthB[2] := -v2 * au2parsec;
   cfgsc.EarthB[3] := -v3 * au2parsec;

@@ -54,13 +54,12 @@ type
     db1, db2: TSqlDB;
     LockPla, LockDB: boolean;
     SolT0, XSol, YSol, ZSol: double;
+    BaryT0, XBary, YBary, ZBary: double;
     AstSol: array of array[0..3] of double;
     jdnew, jdaststart, jdastend, jdaststep, jdchart, com_limitmag: double;
     ast_daypos, com_daypos: string;
     Feph_method: string;
     searchid: string;
-    smsg: TStrings;
-    SolBarycenter: boolean;
     CurrentStep, CurrentPlanet, n_com, n_ast, jdastnstep: integer;
     CurrentAstStep, CurrentAsteroid: integer;
     CurrentComStep, CurrentComet: integer;
@@ -87,7 +86,8 @@ type
     procedure Plan(ipla: integer; t: double; var p: TPlanData);
     procedure Planet(ipla: integer; t0: double;
       var alpha, delta, distance, illum, phase, diameter, magn, dp, xp, yp, zp, vel: double);
-    procedure SunRect(t0: double; var x, y, z: double; barycenter: boolean = False);
+    procedure Barycenter(t0: double; var x, y, z: double);
+    procedure SunRect(t0: double; var x, y, z: double);
     procedure Sun(t0: double; var alpha, delta, dist, diam: double);
     procedure SunEcl(t0: double; var l, b: double);
     procedure PlanSat(isat: integer; jde: double; c:Tconf_skychart; var alpha, delta, distance: double;
@@ -190,7 +190,7 @@ var
 begin
   if load_de(t) then
   begin    // use jpl DE-
-    Calc_Planet_de(t, ipla, v2, True, 11, False);
+    Calc_Planet_de(t, ipla, v2, True, 12, False);
     p.x := v2[0];
     p.y := v2[1];
     p.z := v2[2];
@@ -279,6 +279,7 @@ begin
   yt := pl.y + v1[2];
   zt := pl.z + v1[3];
   distance := sqrt(xt * xt + yt * yt + zt * zt);
+
   // equatorial coord
   w[1] := pl.x + v1[1];
   w[2] := pl.y + v1[2];
@@ -333,13 +334,13 @@ begin
   end;
 end;
 
-procedure TPlanet.SunRect(t0: double; var x, y, z: double; barycenter: boolean = False);
+procedure TPlanet.SunRect(t0: double; var x, y, z: double);
 var
   p: TPlanetData;
   planet_arr: Array_5D;
-  i, sol: integer;
+  i: integer;
 begin
-  if (t0 = SolT0) and (SolBarycenter = barycenter) then
+  if (t0 = SolT0) then
   begin
     x := XSol;
     y := YSol;
@@ -349,11 +350,7 @@ begin
   begin
     if load_de(t0) then
     begin    // use jpl DE-
-      if barycenter then
-        sol := 12
-      else
-        sol := 11;
-      Calc_Planet_de(t0, sol, planet_arr, True, 3, False);
+      Calc_Planet_de(t0, 11, planet_arr, True, 3, False);
       x := planet_arr[0];
       y := planet_arr[1];
       z := planet_arr[2];
@@ -379,11 +376,59 @@ begin
       Feph_method := '';
     end;
     // save result for repetitive call
-    SolBarycenter := barycenter;
     SolT0 := t0;
     XSol := x;
     YSol := y;
     ZSol := z;
+  end;
+end;
+
+procedure TPlanet.Barycenter(t0: double; var x, y, z: double);
+var
+  p: TPlanetData;
+  planet_arr: Array_5D;
+  i: integer;
+begin
+  if (t0 = BaryT0) then
+  begin
+    x := XBary;
+    y := YBary;
+    z := ZBary;
+  end
+  else
+  begin
+    if load_de(t0) then
+    begin    // use jpl DE-
+      Calc_Planet_de(t0, 12, planet_arr, True, 3, False);
+      x := planet_arr[0];
+      y := planet_arr[1];
+      z := planet_arr[2];
+      Feph_method := 'DE' + IntToStr(de_type);
+    end
+    else if (t0 > jdmin404) and (t0 < jdmax404) then
+    begin    // use Plan404
+      p.ipla := 3;
+      p.JD := t0;
+      i := Plan404(addr(p));
+      if (i <> 0) then
+        exit;
+      x := -p.x;
+      y := -p.y;
+      z := -p.z;
+      Feph_method := 'plan404';
+    end
+    else
+    begin
+      x := 0;
+      y := 0;
+      z := 0;
+      Feph_method := '';
+    end;
+    // save result for repetitive call
+    BaryT0 := t0;
+    XBary := x;
+    YBary := y;
+    ZBary := z;
   end;
 end;
 
@@ -498,7 +543,7 @@ begin
   if ipl <> 0 then
   begin
     Planet(ipl, jde, pra, pdec, dist, illum, phase, diam, magn, rp, xp, yp, zp, vel);
-    SunRect(jde, xs, ys, zs);
+    Barycenter(jde, xs, ys, zs);
     x := xp + xs;
     y := yp + ys;
     z := zp + zs;
@@ -667,7 +712,7 @@ var
   xst, yst, zst, xt, yt, zt: double20;
 begin
   n:=2;
-  SunRect(jde, xs, ys, zs);
+  Barycenter(jde, xs, ys, zs);
   x := xp + xs;
   y := yp + ys;
   z := zp + zs;
@@ -724,7 +769,7 @@ begin
     n := 8
   else
     n := 4;
-  SunRect(jde, xs, ys, zs);
+  Barycenter(jde, xs, ys, zs);
   x := xp + xs;
   y := yp + ys;
   z := zp + zs;
@@ -781,7 +826,7 @@ begin
     n := 19
   else
     n := 9;
-  SunRect(jde, xs, ys, zs);
+  Barycenter(jde, xs, ys, zs);
   x := xp + xs;
   y := yp + ys;
   z := zp + zs;
@@ -837,7 +882,7 @@ begin
     n := 18
   else
     n := 5;
-  SunRect(jde, xs, ys, zs);
+  Barycenter(jde, xs, ys, zs);
   x := xp + xs;
   y := yp + ys;
   z := zp + zs;
@@ -893,7 +938,7 @@ begin
     n := 8
   else
     n := 2;
-  SunRect(jde, xs, ys, zs);
+  Barycenter(jde, xs, ys, zs);
   x := xp + xs;
   y := yp + ys;
   z := zp + zs;
@@ -946,7 +991,7 @@ var
   xst, yst, zst, xt, yt, zt: double20;
 begin
   n:=1;
-  SunRect(jde, xs, ys, zs);
+  Barycenter(jde, xs, ys, zs);
   x := xp + xs;
   y := yp + ys;
   z := zp + zs;
@@ -1352,11 +1397,11 @@ var
 begin
   if load_de(t0) then
   begin
-    SunRect(t0, sun_arr[0], sun_arr[1], sun_arr[2]);
+    Barycenter(t0, sun_arr[0], sun_arr[1], sun_arr[2]);
     Calc_Planet_de(t0, 10, planet_arr, True, 3, False);
     dist := sqrt(planet_arr[0] * planet_arr[0] + planet_arr[1] * planet_arr[1] + planet_arr[2] * planet_arr[2]);
     t0 := t0 - tlight * dist;
-    Calc_Planet_de(t0, 10, planet_arr, True, 11, False);
+    Calc_Planet_de(t0, 10, planet_arr, True, 12, False);
     for i := 0 to 2 do
       w[i + 1] := planet_arr[i] + sun_arr[i];
     alpha := arctan2(w[2], w[1]);
