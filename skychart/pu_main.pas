@@ -664,7 +664,7 @@ type
     ConfigPictures: Tf_configpictures;
     ConfigCatalog: Tf_configcatalog;
     ConfigCalendar: Tf_configcalendar;
-    cryptedpwd, basecaption, kioskpwd: string;
+    basecaption, kioskpwd: string;
     rotspeed: double;
     NeedRestart, NeedToInitializeDB, ConfirmSaveConfig, InitOK, RestoreState,
     ForceClose, SaveBlinkBG: boolean;
@@ -851,7 +851,7 @@ type
     procedure SendImageFits(client, imgname, imgid, url: string);
     procedure SendSelectRow(tableid, url, row: string);
     procedure LoadDeltaT;
-    procedure LoadLeapseconds(canrestart: boolean=true);
+    procedure LoadLeapseconds(CanUpdate: boolean=true);
   end;
 
 var
@@ -1401,7 +1401,7 @@ begin
     if VerboseMsg then
       WriteTrace('Load deltat');
     LoadDeltaT;
-    LoadLeapseconds;
+    LoadLeapseconds(true);
     // must read db configuration before to create this one!
     if VerboseMsg then
       WriteTrace('Create DB');
@@ -4117,7 +4117,6 @@ begin
 end;
 
 procedure Tf_main.EquatorialProjectionExecute(Sender: TObject);
-var ok: boolean;
 begin
   if MultiFrame1.ActiveObject is Tf_chart then
     with MultiFrame1.ActiveObject as Tf_chart do
@@ -8063,7 +8062,6 @@ var
   i,n: integer;
   b1, b2: boolean;
   inif: TMemIniFile;
-  section, buf: string;
 begin
   if Config_Version < '3.0.1.3d' then
   begin
@@ -11154,8 +11152,7 @@ end;
 procedure Tf_main.NeighborObj(chart: string);
 var
   i: integer;
-  x, y: single;
-  x1, y1, ra, de: double;
+  ra, de: double;
 begin
   for i := 0 to MultiFrame1.ChildCount - 1 do
     if MultiFrame1.Childs[i].DockedObject is Tf_chart then
@@ -13131,7 +13128,7 @@ begin
   end;
 end;
 
-procedure Tf_main.LoadLeapseconds(canrestart: boolean=true);
+procedure Tf_main.LoadLeapseconds(CanUpdate: boolean=true);
 var
   f: textfile;
   i, n: integer;
@@ -13198,7 +13195,7 @@ begin
     until EOF(f);
     closefile(f);
     numleapseconds:=n;
-    if canrestart and (leapsecondexpires>0) and ((leapsecondexpires-DateTimetoJD(now))<30) then begin
+    if CanUpdate and (leapsecondexpires>0) and ((leapsecondexpires-DateTimetoJD(now))<30) then begin
       // expire in less than one month, refresh now
       if QuickDownload(URL_LEAPSECOND, fname, true) then begin
         LoadLeapseconds(false);
