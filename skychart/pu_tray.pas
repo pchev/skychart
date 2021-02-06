@@ -546,7 +546,7 @@ begin
       f_calendar.config.abp, f_calendar.config.gr2e, f_calendar.config.abm,
       f_calendar.config.asl);
     // Earth barycentric position in parsec for parallax
-    f_calendar.planet.SunRect(f_calendar.config.CurJDTT, v1, v2, v3, True);
+    f_calendar.planet.Barycenter(f_calendar.config.CurJDTT, v1, v2, v3);
     f_calendar.config.EarthB[1] := -v1 * au2parsec;
     f_calendar.config.EarthB[2] := -v2 * au2parsec;
     f_calendar.config.EarthB[3] := -v3 * au2parsec;
