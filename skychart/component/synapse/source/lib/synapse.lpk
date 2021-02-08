@@ -16,7 +16,7 @@
         </SyntaxOptions>
       </Parsing>
     </CompilerOptions>
-    <Files Count="7">
+    <Files Count="8">
       <Item1>
         <Filename Value="blcksock.pas"/>
         <UnitName Value="blcksock"/>
@@ -45,6 +45,10 @@
         <Filename Value="smtpsend.pas"/>
         <UnitName Value="smtpsend"/>
       </Item7>
+      <Item8>
+        <Filename Value="tlntsend.pas"/>
+        <UnitName Value="tlntsend"/>
+      </Item8>
     </Files>
     <RequiredPkgs Count="1">
       <Item1>
