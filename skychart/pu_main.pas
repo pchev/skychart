@@ -11129,6 +11129,7 @@ begin
           sc.cfgsc.FindDec := Dec;
           sc.cfgsc.FindDesc := desc;
           sc.cfgsc.FindName := nm;
+          sc.cfgsc.FindId := '-1';
           sc.cfgsc.FindNote := '';
           sc.cfgsc.FindPM := False;
           sc.cfgsc.FindOK := True;
