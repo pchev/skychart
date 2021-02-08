@@ -2984,7 +2984,7 @@ end;
 
 function Tskychart.DrawBodies: boolean;
 var
-  x1, y1, x2, y2, ra, Dec, magn: double;
+  x1, y1, x2, y2, ra, Dec: double;
   xx, yy, lori: single;
   lopt: boolean;
   lalign: TLabelAlign;
@@ -3006,18 +3006,14 @@ begin
          if (cfgsc.BodiesLst[j, i, 5]>0) then begin
           ra := cfgsc.BodiesLst[j, i, 1];
           Dec := cfgsc.BodiesLst[j, i, 2];
-          magn := cfgsc.BodiesLst[j, i, 3];
           projection(ra, Dec, x1, y1, True, cfgsc);
           WindowXY(x1, y1, xx, yy, cfgsc);
           if (xx > cfgsc.Xmin) and (xx < cfgsc.Xmax) and (yy > cfgsc.Ymin) and (yy < cfgsc.Ymax) then
           begin
-            if magn > (cfgsc.StarMagMax + cfgsc.AstMagDiff) then
-              continue;
             if (cfgsc.SimNb=1)or (not (cfgsc.SimLine and cfgsc.SimMark)) then begin
-              Fplot.PlotAsteroid(xx, yy, cfgsc.AstSymbol, magn);
+              Fplot.PlotAsteroid(xx, yy, cfgsc.AstSymbol, 8);
             end;
-            if ((doSimLabel(cfgsc.SimNb, j, cfgsc.SimLabel)) and
-              (magn < cfgsc.StarMagMax + cfgsc.AstMagDiff - cfgsc.LabelMagDiff[10])) then
+            if doSimLabel(cfgsc.SimNb, j, cfgsc.SimLabel) then
             begin
               lis := cfgsc.BodiesName[j, i, 1] + FormatFloat(f3, cfgsc.BodiesLst[j, i, 6]) + FormatFloat(f3, cfgsc.BodiesLst[j, i, 7]);
               lid := rshash(lis, $7FFFFFFF);
@@ -3038,8 +3034,6 @@ begin
                   ltxt := ltxt + jddatetime(cfgsc.BodiesLst[j, i, 4] +
                     (cfgsc.TimeZone - cfgsc.DT_UT) / 24, cfgsc.SimDateYear, cfgsc.SimDateMonth,
                     cfgsc.SimDateDay, cfgsc.SimDateHour, cfgsc.SimDateMinute, cfgsc.SimDateSecond) + blank;
-                if cfgsc.SimMagLabel then
-                  ltxt := ltxt + formatfloat(f1, magn);
                 if j < cfgsc.SimNb - 1 then
                   jj := j + 1
                 else
