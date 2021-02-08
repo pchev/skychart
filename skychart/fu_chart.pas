@@ -4191,6 +4191,17 @@ begin
       dist := rad2deg * angulardistance(sc.cfgsc.FindRA, sc.cfgsc.FindDec, cra, cdec);
     end;
   end;
+  if otype = 'Spk' then
+  begin
+    if sc.planet.Body(njd,strtoint(sc.cfgsc.FindId),cra,cdec,dst,rr) then begin
+      precession(jd2000, sc.cfgsc.jdchart, cra, cdec);
+      if sc.cfgsc.PlanetParalaxe then
+        Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
+      if sc.cfgsc.ApparentPos then
+        apparent_equatorial(cra, cdec, sc.cfgsc, True, False);
+      dist := rad2deg * angulardistance(sc.cfgsc.FindRA, sc.cfgsc.FindDec, cra, cdec);
+    end;
+  end;
   if (otype = 'P') then
   begin
     sc.planet.Planet(ipla, njd, cra, cdec, dst, illum, phase, diam, magn, rc, xc, yc, zc, vel);
