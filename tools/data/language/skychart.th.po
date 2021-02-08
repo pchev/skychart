@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-02-05 18:04+0000\n"
+"POT-Creation-Date: 2021-02-08 20:51+0000\n"
 "PO-Revision-Date: 2016-12-11 09:03+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-05 18:12+0000\n"
-"X-Generator: Launchpad (build 3d7abcb776ec05aa0a89112accc21bf8b41dfc24)\n"
+"X-Launchpad-Export-Date: 2021-02-08 21:08+0000\n"
+"X-Generator: Launchpad (build e34ce994f03aae76d4610a97bccf86c0f2cf9f70)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -287,6 +287,10 @@ msgstr "แสดงเส้นเมริเดียนเสมอ"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "บันทึกเสมอโดยไม่ต้องถาม"
+
+#: u_translation.rsamaximumoffi
+msgid "A maximum of %s files can be selected"
+msgstr ""
 
 #: u_translation.rsamplitudemax
 msgid "Amplitude max."
@@ -1684,6 +1688,10 @@ msgstr "ดาวน์โหลดบัญชีฉบับเต็ม"
 msgid "Download the latest orbital elements"
 msgstr "ดาวน์โหลดรายละเอียดวงโคจรล่าสุด"
 
+#: u_translation.rsdownloadsola
+msgid "Download Solar System object SPICE kernel from JPL Horizon"
+msgstr ""
+
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
 msgstr "ดาวน์โหลด TLE"
@@ -1839,6 +1847,10 @@ msgstr "แก้ไขหน่วย"
 #: u_translation.rselong
 msgid "Elong."
 msgstr "มุมห่าง"
+
+#: u_translation.rsemail
+msgid "email"
+msgstr ""
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
@@ -3504,6 +3516,10 @@ msgstr "ขณะนี้"
 msgid "Number of copies"
 msgstr "จำนวนสำเนา"
 
+#: u_translation.rsnumberofdays
+msgid "Number of days"
+msgstr ""
+
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr "จำนวนแฟ้ม"
@@ -5072,6 +5088,10 @@ msgstr "มุมห่างจากดวงอาทิตย์"
 msgid "Solar System"
 msgstr "ระบบสุริยะ"
 
+#: u_translation.rssolarsystemb
+msgid "Solar system body"
+msgstr ""
+
 #: u_translation.rssolarsystemi
 msgid "Solar System Information"
 msgstr "ข้อมูลระบบสุริยะ"
@@ -5122,6 +5142,10 @@ msgstr "ชนิดสเปกตรัม"
 
 #: u_translation.rsspeed
 msgid "Speed"
+msgstr ""
+
+#: u_translation.rsspiceephemer
+msgid "SPICE ephemeris"
 msgstr ""
 
 #: u_translation.rsspline
@@ -5210,6 +5234,10 @@ msgstr "เริ่มต้น"
 
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
+msgstr ""
+
+#: u_translation.rsstartdate
+msgid "Start date"
 msgstr ""
 
 #: u_translation.rsstartforward

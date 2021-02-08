@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 18:04+0000\n"
+"POT-Creation-Date: 2021-02-08 20:51+0000\n"
 "PO-Revision-Date: 2016-12-11 09:06+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-05 18:12+0000\n"
-"X-Generator: Launchpad (build 3d7abcb776ec05aa0a89112accc21bf8b41dfc24)\n"
+"X-Launchpad-Export-Date: 2021-02-08 21:08+0000\n"
+"X-Generator: Launchpad (build e34ce994f03aae76d4610a97bccf86c0f2cf9f70)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -285,6 +285,10 @@ msgstr ""
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
+msgstr ""
+
+#: u_translation.rsamaximumoffi
+msgid "A maximum of %s files can be selected"
 msgstr ""
 
 #: u_translation.rsamplitudemax
@@ -1683,6 +1687,10 @@ msgstr ""
 msgid "Download the latest orbital elements"
 msgstr "下載最新軌道要素"
 
+#: u_translation.rsdownloadsola
+msgid "Download Solar System object SPICE kernel from JPL Horizon"
+msgstr ""
+
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
 msgstr ""
@@ -1838,6 +1846,10 @@ msgstr "編輯單位"
 #: u_translation.rselong
 msgid "Elong."
 msgstr "距角"
+
+#: u_translation.rsemail
+msgid "email"
+msgstr ""
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
@@ -3503,6 +3515,10 @@ msgstr "現在"
 msgid "Number of copies"
 msgstr ""
 
+#: u_translation.rsnumberofdays
+msgid "Number of days"
+msgstr ""
+
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr "檔案數"
@@ -5071,6 +5087,10 @@ msgstr "太陽距角"
 msgid "Solar System"
 msgstr "太陽系"
 
+#: u_translation.rssolarsystemb
+msgid "Solar system body"
+msgstr ""
+
 #: u_translation.rssolarsystemi
 msgid "Solar System Information"
 msgstr ""
@@ -5121,6 +5141,10 @@ msgstr "光譜型"
 
 #: u_translation.rsspeed
 msgid "Speed"
+msgstr ""
+
+#: u_translation.rsspiceephemer
+msgid "SPICE ephemeris"
 msgstr ""
 
 #: u_translation.rsspline
@@ -5209,6 +5233,10 @@ msgstr ""
 
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
+msgstr ""
+
+#: u_translation.rsstartdate
+msgid "Start date"
 msgstr ""
 
 #: u_translation.rsstartforward

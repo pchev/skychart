@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 18:04+0000\n"
-"PO-Revision-Date: 2021-02-05 18:08+0000\n"
+"POT-Creation-Date: 2021-02-08 20:51+0000\n"
+"PO-Revision-Date: 2021-02-08 21:04+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-05 18:12+0000\n"
-"X-Generator: Launchpad (build 3d7abcb776ec05aa0a89112accc21bf8b41dfc24)\n"
+"X-Launchpad-Export-Date: 2021-02-08 21:08+0000\n"
+"X-Generator: Launchpad (build e34ce994f03aae76d4610a97bccf86c0f2cf9f70)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -287,6 +287,10 @@ msgstr "Toujours ajouter le méridien"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Toujours enregistrer sans demander."
+
+#: u_translation.rsamaximumoffi
+msgid "A maximum of %s files can be selected"
+msgstr "Un maximum de %s fichier peuvent être sélectionner"
 
 #: u_translation.rsamplitudemax
 msgid "Amplitude max."
@@ -1684,6 +1688,10 @@ msgstr "Télécharge le catalogue complet"
 msgid "Download the latest orbital elements"
 msgstr "Télécharger les éléments orbitaux"
 
+#: u_translation.rsdownloadsola
+msgid "Download Solar System object SPICE kernel from JPL Horizon"
+msgstr "Télécharge un kernel SPICE pour les corps du système solaire depuis JPL Horizon"
+
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
 msgstr "Télécharger TLE"
@@ -1839,6 +1847,10 @@ msgstr "Modifier les unités"
 #: u_translation.rselong
 msgid "Elong."
 msgstr "Élong."
+
+#: u_translation.rsemail
+msgid "email"
+msgstr "email"
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
@@ -3505,6 +3517,10 @@ msgstr "Maintenant"
 msgid "Number of copies"
 msgstr "Nombre de copies"
 
+#: u_translation.rsnumberofdays
+msgid "Number of days"
+msgstr "Nombre de jours"
+
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr "Nombre de fichiers"
@@ -5073,6 +5089,10 @@ msgstr "Élongation solaire"
 msgid "Solar System"
 msgstr "Système solaire"
 
+#: u_translation.rssolarsystemb
+msgid "Solar system body"
+msgstr "Corps du système solaire"
+
 #: u_translation.rssolarsystemi
 msgid "Solar System Information"
 msgstr "Informations sur le système solaire"
@@ -5124,6 +5144,10 @@ msgstr "Classe spectrale"
 #: u_translation.rsspeed
 msgid "Speed"
 msgstr "Vitesse"
+
+#: u_translation.rsspiceephemer
+msgid "SPICE ephemeris"
+msgstr "Éphéméride SPICE"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -5212,6 +5236,10 @@ msgstr "Début"
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
 msgstr "Animation en arrière"
+
+#: u_translation.rsstartdate
+msgid "Start date"
+msgstr "Date de début"
 
 #: u_translation.rsstartforward
 msgid "Animation forward"

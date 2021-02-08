@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 18:04+0000\n"
+"POT-Creation-Date: 2021-02-08 20:51+0000\n"
 "PO-Revision-Date: 2020-05-03 09:19+0000\n"
 "Last-Translator: Sergey Tarantsov <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-05 18:12+0000\n"
-"X-Generator: Launchpad (build 3d7abcb776ec05aa0a89112accc21bf8b41dfc24)\n"
+"X-Launchpad-Export-Date: 2021-02-08 21:08+0000\n"
+"X-Generator: Launchpad (build e34ce994f03aae76d4610a97bccf86c0f2cf9f70)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -284,6 +284,10 @@ msgstr "Всегда показывать меридиан"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Всегда сохранять без подтверждения."
+
+#: u_translation.rsamaximumoffi
+msgid "A maximum of %s files can be selected"
+msgstr ""
 
 #: u_translation.rsamplitudemax
 msgid "Amplitude max."
@@ -1681,6 +1685,10 @@ msgstr "Загрузить весь каталог"
 msgid "Download the latest orbital elements"
 msgstr "Загрузить элементы орбит в формате MPC"
 
+#: u_translation.rsdownloadsola
+msgid "Download Solar System object SPICE kernel from JPL Horizon"
+msgstr ""
+
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
 msgstr "Загрузить TLE"
@@ -1836,6 +1844,10 @@ msgstr "Изм. величин"
 #: u_translation.rselong
 msgid "Elong."
 msgstr "Элонгация"
+
+#: u_translation.rsemail
+msgid "email"
+msgstr ""
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
@@ -3502,6 +3514,10 @@ msgstr "Текущее время"
 msgid "Number of copies"
 msgstr "Количество копий"
 
+#: u_translation.rsnumberofdays
+msgid "Number of days"
+msgstr ""
+
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr "Количество файлов"
@@ -5070,6 +5086,10 @@ msgstr "Элонгация"
 msgid "Solar System"
 msgstr "Солнечная система"
 
+#: u_translation.rssolarsystemb
+msgid "Solar system body"
+msgstr ""
+
 #: u_translation.rssolarsystemi
 msgid "Solar System Information"
 msgstr "Информация по Солнечной системе"
@@ -5121,6 +5141,10 @@ msgstr "Спектральный класс"
 #: u_translation.rsspeed
 msgid "Speed"
 msgstr "Скорость"
+
+#: u_translation.rsspiceephemer
+msgid "SPICE ephemeris"
+msgstr ""
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -5209,6 +5233,10 @@ msgstr "Начало"
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
 msgstr "Анимация назад"
+
+#: u_translation.rsstartdate
+msgid "Start date"
+msgstr ""
 
 #: u_translation.rsstartforward
 msgid "Animation forward"

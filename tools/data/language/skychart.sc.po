@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-02-05 18:04+0000\n"
+"POT-Creation-Date: 2021-02-08 20:51+0000\n"
 "PO-Revision-Date: 2019-10-19 08:22+0000\n"
 "Last-Translator: Costantino <Unknown>\n"
 "Language-Team: Sardinian <sc@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-05 18:12+0000\n"
-"X-Generator: Launchpad (build 3d7abcb776ec05aa0a89112accc21bf8b41dfc24)\n"
+"X-Launchpad-Export-Date: 2021-02-08 21:08+0000\n"
+"X-Generator: Launchpad (build e34ce994f03aae76d4610a97bccf86c0f2cf9f70)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -286,6 +286,10 @@ msgstr ""
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
+msgstr ""
+
+#: u_translation.rsamaximumoffi
+msgid "A maximum of %s files can be selected"
 msgstr ""
 
 #: u_translation.rsamplitudemax
@@ -1685,6 +1689,10 @@ msgstr ""
 msgid "Download the latest orbital elements"
 msgstr ""
 
+#: u_translation.rsdownloadsola
+msgid "Download Solar System object SPICE kernel from JPL Horizon"
+msgstr ""
+
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
 msgstr ""
@@ -1840,6 +1848,10 @@ msgstr ""
 #: u_translation.rselong
 msgid "Elong."
 msgstr "Elong."
+
+#: u_translation.rsemail
+msgid "email"
+msgstr ""
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
@@ -3507,6 +3519,10 @@ msgstr "Como como"
 msgid "Number of copies"
 msgstr ""
 
+#: u_translation.rsnumberofdays
+msgid "Number of days"
+msgstr ""
+
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr ""
@@ -5075,6 +5091,10 @@ msgstr "Elongatzione solare"
 msgid "Solar System"
 msgstr ""
 
+#: u_translation.rssolarsystemb
+msgid "Solar system body"
+msgstr ""
+
 #: u_translation.rssolarsystemi
 msgid "Solar System Information"
 msgstr ""
@@ -5125,6 +5145,10 @@ msgstr "Classe ispetrale"
 
 #: u_translation.rsspeed
 msgid "Speed"
+msgstr ""
+
+#: u_translation.rsspiceephemer
+msgid "SPICE ephemeris"
 msgstr ""
 
 #: u_translation.rsspline
@@ -5213,6 +5237,10 @@ msgstr ""
 
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
+msgstr ""
+
+#: u_translation.rsstartdate
+msgid "Start date"
 msgstr ""
 
 #: u_translation.rsstartforward

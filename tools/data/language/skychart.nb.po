@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-05 18:04+0000\n"
+"POT-Creation-Date: 2021-02-08 20:51+0000\n"
 "PO-Revision-Date: 2019-10-06 13:44+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-05 18:12+0000\n"
-"X-Generator: Launchpad (build 3d7abcb776ec05aa0a89112accc21bf8b41dfc24)\n"
+"X-Launchpad-Export-Date: 2021-02-08 21:08+0000\n"
+"X-Generator: Launchpad (build e34ce994f03aae76d4610a97bccf86c0f2cf9f70)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -285,6 +285,10 @@ msgstr "Alltid legge til meridian"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Lagre alltid uten å spørre."
+
+#: u_translation.rsamaximumoffi
+msgid "A maximum of %s files can be selected"
+msgstr ""
 
 #: u_translation.rsamplitudemax
 msgid "Amplitude max."
@@ -1682,6 +1686,10 @@ msgstr "Last ned fullstendig katalog"
 msgid "Download the latest orbital elements"
 msgstr "Last ned de siste baneelementene"
 
+#: u_translation.rsdownloadsola
+msgid "Download Solar System object SPICE kernel from JPL Horizon"
+msgstr ""
+
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
 msgstr "Last ned TLE"
@@ -1837,6 +1845,10 @@ msgstr "Rediger enheter"
 #: u_translation.rselong
 msgid "Elong."
 msgstr "Elong."
+
+#: u_translation.rsemail
+msgid "email"
+msgstr ""
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
@@ -3502,6 +3514,10 @@ msgstr "Nå"
 msgid "Number of copies"
 msgstr "Antall kopier"
 
+#: u_translation.rsnumberofdays
+msgid "Number of days"
+msgstr ""
+
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr "Antall filer"
@@ -5070,6 +5086,10 @@ msgstr "Solar elongasjon"
 msgid "Solar System"
 msgstr "Solsystem"
 
+#: u_translation.rssolarsystemb
+msgid "Solar system body"
+msgstr ""
+
 #: u_translation.rssolarsystemi
 msgid "Solar System Information"
 msgstr "Solsysteminformasjon"
@@ -5120,6 +5140,10 @@ msgstr "Spektralklasse"
 
 #: u_translation.rsspeed
 msgid "Speed"
+msgstr ""
+
+#: u_translation.rsspiceephemer
+msgid "SPICE ephemeris"
 msgstr ""
 
 #: u_translation.rsspline
@@ -5209,6 +5233,10 @@ msgstr "Start"
 #: u_translation.rsstartbackwar
 msgid "Animation backward"
 msgstr "Animasjon bakover"
+
+#: u_translation.rsstartdate
+msgid "Start date"
+msgstr ""
 
 #: u_translation.rsstartforward
 msgid "Animation forward"

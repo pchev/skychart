@@ -5982,3 +5982,31 @@ msgstr ""
 msgid "Total asteroid count"
 msgstr ""
 
+#: u_translation:rssolarsystemb
+msgid "Solar system body"
+msgstr ""
+
+#: u_translation:rsamaximumoffi
+msgid "A maximum of %s files can be selected"
+msgstr ""
+
+#: u_translation:rsemail
+msgid "email"
+msgstr ""
+
+#: u_translation:rsspiceephemer
+msgid "SPICE ephemeris"
+msgstr ""
+
+#: u_translation:rsdownloadsola
+msgid "Download Solar System object SPICE kernel from JPL Horizon"
+msgstr ""
+
+#: u_translation:rsstartdate
+msgid "Start date"
+msgstr ""
+
+#: u_translation:rsnumberofdays
+msgid "Number of days"
+msgstr ""
+
