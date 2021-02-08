@@ -5870,6 +5870,8 @@ begin
     txt := rsPlanet
   else if txt = 'Ps' then
     txt := rsPlanetarySat
+  else if txt = 'Spk' then
+    txt := rsSolarSystemB
   else if txt = 'As' then
     txt := rsAsteroid
   else if txt = 'DSAs' then

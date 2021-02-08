@@ -962,7 +962,7 @@ begin
   if (not Child.sc.cfgsc.TrackOn) and (Child.sc.cfgsc.Projpole = Altaz) then
   begin
     Child.sc.cfgsc.TrackOn := True;
-    Child.sc.cfgsc.TrackType := 4;
+    Child.sc.cfgsc.TrackType := TTaltaz;
   end;
   if not maxi then
   begin
@@ -1411,6 +1411,7 @@ begin
     planet.cdb := cdcdb;
     f_search.cdb := cdcdb;
     planet.SetDE(slash(Appdir) + slash('data') + 'jpleph');
+    if libcalceph<>0 then InitCalcephBody(def_cfgsc);
     if VerboseMsg then
       WriteTrace('Background Image');
     if def_cfgsc.BackgroundImage = '' then
@@ -1879,7 +1880,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, False);
     end;
@@ -1894,7 +1895,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, False);
     end;
@@ -2256,6 +2257,11 @@ begin
     CreateDir(MPCDir);
   if not directoryexists(MPCDir) then
     forcedirectories(MPCDir);
+  SPKDir := slash(privatedir) + 'spk';
+  if not directoryexists(SPKDir) then
+    CreateDir(SPKDir);
+  if not directoryexists(SPKDir) then
+    forcedirectories(SPKDir);
   DBDir := slash(privatedir) + 'database';
   if not directoryexists(DBDir) then
     CreateDir(DBDir);
@@ -2684,7 +2690,7 @@ begin
           CalcephExtOk:=true;
         end;
         SetLength(fn,i);
-        InitCalceph(i,fn);
+        InitCalcephSat(i,fn);
         if libcalceph=0 then begin
           CalcephBaseOk:=false;
           CalcephExtOk:=false;
@@ -2853,6 +2859,8 @@ begin
     configobjectbar.Free;
     configleftbar.Free;
     configrightbar.Free;
+    CloseCalcephSat;
+    CloseCalcephBody;
     if NeedRestart then
       ExecNoWait(ParamStr(0));
 {$ifndef lclqt}{$ifndef lclqt5}{$ifndef lclcocoa}
@@ -3630,7 +3638,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       if VerboseMsg then
         WriteTrace('TimeResetExecute');
@@ -3654,7 +3662,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, False);
     end;
@@ -3671,7 +3679,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, False);
     end;
@@ -3772,7 +3780,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, False);
     end;
@@ -3789,7 +3797,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, False);
     end;
@@ -3839,7 +3847,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, True);
       if showast and (showast <> sc.cfgsc.ShowAsteroid) then
@@ -3863,7 +3871,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, True);
       if showcom <> sc.cfgsc.ShowComet then
@@ -3882,7 +3890,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, False);
     end;
@@ -3899,7 +3907,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, False);
     end;
@@ -4025,7 +4033,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, False);
     end;
@@ -4042,7 +4050,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, False);
     end;
@@ -4059,7 +4067,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, False);
     end;
@@ -4076,7 +4084,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, False);
     end;
@@ -4093,7 +4101,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, False);
     end;
@@ -4110,7 +4118,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, True);
     end;
@@ -4251,8 +4259,8 @@ begin
         sc.cfgsc.TrackOn := False;
         Refresh(True, False);
       end
-      else if (((sc.cfgsc.TrackType >= 1) and (sc.cfgsc.TrackType <= 3)) or
-        (sc.cfgsc.TrackType = 6)) and (sc.cfgsc.TrackName <> '') then
+      else if (((sc.cfgsc.TrackType >= TTplanet) and (sc.cfgsc.TrackType <= TTasteroid)) or
+        (sc.cfgsc.TrackType = TTequat) or (sc.cfgsc.TrackType = TTbody)) and (sc.cfgsc.TrackName <> '') then
       begin
         if VerboseMsg then
           WriteTrace('TrackExecute 2');
@@ -4326,7 +4334,7 @@ begin
         sc.cfgsc.fov := deg2rad * f_position.fov.Value;
         sc.cfgsc.theta := deg2rad * f_position.rot.Value;
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 6;
+        sc.cfgsc.TrackType := TTequat;
         cmd_SetCursorPosition(Image1.Width div 2, Image1.Height div 2);
       end
       else
@@ -4334,7 +4342,7 @@ begin
         if sc.cfgsc.Projpole = Altaz then
         begin
           sc.cfgsc.TrackOn := True;
-          sc.cfgsc.TrackType := 4;
+          sc.cfgsc.TrackType := TTaltaz;
           sc.cfgsc.acentre := deg2rad * f_position.long.Value;
           if sc.catalog.cfgshr.AzNorth then
             sc.cfgsc.acentre := rmod(sc.cfgsc.acentre + pi, pi2);
@@ -5281,7 +5289,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, False);
     end;
@@ -5298,7 +5306,7 @@ begin
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
-        sc.cfgsc.TrackType := 4;
+        sc.cfgsc.TrackType := TTaltaz;
       end;
       Refresh(True, False);
     end;
@@ -5449,6 +5457,7 @@ begin
       csc.ShowImageLabel := False;
       csc.ShowBackgroundImage := False;
       csc.BackgroundImage := '';
+      csc.SPKlist.Clear;
       csc.AstmagMax := 18;
       csc.AstmagDiff := 6;
       csc.ShowArtSat := False;
@@ -5566,6 +5575,7 @@ begin
     csc.ProjOptions[csc.ProjPole].DefaultJDChart := csc.DefaultJDChart ;
     csc.ProjOptions[csc.ProjPole].CoordExpertMode := csc.CoordExpertMode ;
     csc.ProjOptions[csc.ProjPole].CoordType := csc.CoordType ;
+    if libcalceph<>0 then InitCalcephBody(csc);
     def_cfgsc.Assign(csc);
   end;
   if cplot <> nil then
@@ -5610,7 +5620,7 @@ begin
               0.00001, sc.Fits.Img_Width,
               sc.Fits.Img_Height, sc.Fits.Rotation);
           sc.cfgsc.TrackOn := True;
-          sc.cfgsc.TrackType := 5;
+          sc.cfgsc.TrackType := TTimage;
         end;
         cfgm.NewBackgroundImage := False;
       end;
@@ -5992,8 +6002,8 @@ begin
         Track.Hint := rsUnlockChart;
         Track.Caption := rsUnlockChart;
       end
-      else if ((sc.cfgsc.TrackType >= 1) and (sc.cfgsc.TrackType <= 3)) or
-        (sc.cfgsc.TrackType = 6) then
+      else if ((sc.cfgsc.TrackType >= TTplanet) and (sc.cfgsc.TrackType <= TTasteroid)) or
+        (sc.cfgsc.TrackType = TTequat)or (sc.cfgsc.TrackType = TTbody) then
       begin
         if (sc.cfgsc.Trackname = '') and TelescopeConnect.Checked then
           sc.cfgsc.Trackname := rsTelescope;
@@ -6153,6 +6163,8 @@ begin
   cfgm.TleUrlList.add(URL_QSMAG);
   cfgm.starshape_file := '';
   cfgm.tlelst := '';
+  cfgm.HorizonNumDay:=15;
+  cfgm.HorizonEmail:='';
   cfgm.SampAutoconnect := False;
   cfgm.SampKeepTables := False;
   cfgm.SampKeepImages := False;
@@ -6418,6 +6430,7 @@ begin
   def_cfgsc.ShowPluto := True;
   def_cfgsc.ShowAsteroid := True;
   def_cfgsc.ShowSmallsat := True;
+  def_cfgsc.SPKlist.Clear;
   def_cfgsc.DSLforcecolor := False;
   def_cfgsc.DSLsurface := True;
   def_cfgsc.DSLcolor := 0;
@@ -7354,6 +7367,10 @@ begin
         csc.ShowSmallsat := ReadBool(section, 'ShowSmallsat', csc.ShowSmallsat);
         csc.ShowAsteroid := ReadBool(section, 'ShowAsteroid', csc.ShowAsteroid);
         csc.ShowComet := ReadBool(section, 'ShowComet', csc.ShowComet);
+        csc.SPKlist.Clear;
+        n := ReadInteger(section, 'SPKCount', 0);
+        for i:=1 to n do
+           csc.SPKlist.Add(ReadString(section, 'SPK'+inttostr(i), ''));
         csc.DSLsurface := ReadBool(section, 'DSLsurface', csc.DSLsurface);
         csc.DSLforcecolor := ReadBool(section, 'DSLforcecolor', csc.DSLforcecolor);
         csc.DSLcolor := ReadInteger(section, 'DSLcolor', csc.DSLcolor);
@@ -7766,6 +7783,8 @@ begin
         cfgm.starshape_file :=
           ReadString(section, 'starshape_file', cfgm.starshape_file);
         cfgm.tlelst := ReadString(section, 'tlelst', cfgm.tlelst);
+        cfgm.HorizonEmail := ReadString(section, 'HorizonEmail', cfgm.HorizonEmail);
+        cfgm.HorizonNumDay := ReadInteger(section, 'HorizonNumDay', cfgm.HorizonNumDay);
         j := ReadInteger(section, 'CometUrlCount', 0);
         if (j > 0) then
         begin
@@ -8606,7 +8625,6 @@ begin
 
         section := 'Calendar';
         WriteInteger(section, 'CalGraphHeight', csc.CalGraphHeight);
-        ;
 
         section := 'Finder';
         WriteBool(section, 'ShowCircle', csc.ShowCircle);
@@ -8722,6 +8740,9 @@ begin
         WriteBool(section, 'ShowSmallsat', csc.ShowSmallsat);
         WriteBool(section, 'ShowAsteroid', csc.ShowAsteroid);
         WriteBool(section, 'ShowComet', csc.ShowComet);
+        WriteInteger(section, 'SPKCount', csc.SPKlist.Count);
+        for i:=1 to csc.SPKlist.Count do
+          WriteString(section, 'SPK'+inttostr(i), csc.SPKlist[i-1]);
         WriteBool(section, 'DSLsurface', csc.DSLsurface);
         WriteBool(section, 'DSLforcecolor', csc.DSLforcecolor);
         WriteInteger(section, 'DSLcolor', csc.DSLcolor);
@@ -9002,6 +9023,8 @@ begin
         WriteString(section, 'AnonPass', cfgm.AnonPass);
         WriteString(section, 'starshape_file', cfgm.starshape_file);
         WriteString(section, 'tlelst', f_calendar.tle1.Text);
+        WriteString(section, 'HorizonEmail', cfgm.HorizonEmail);
+        WriteInteger(section, 'HorizonNumDay', cfgm.HorizonNumDay);
         j := cfgm.CometUrlList.Count;
         WriteInteger(section, 'CometUrlCount', j);
         if j > 0 then
@@ -10020,21 +10043,21 @@ begin
       ok := f_search.SearchNebNameExact(Num, ar1, de1);
       if ok then
         goto findit;
+      // spk bodies, before comet and asteroid
+      if sc.cfgsc.ShowBodiesValid then
+      begin
+        stype := 'Spk';
+        itype := ftBody;
+        ok := planet.FindBodyName(trim(Num), ar1, de1, mag, sc.cfgsc, True);
+        if ok then
+          goto findit;
+      end;
       // comet
       if sc.cfgsc.ShowComet then
       begin
         stype := 'Cm';
         itype := ftCom;
         ok := planet.FindCometName(trim(Num), ar1, de1, mag, sc.cfgsc, True);
-        if ok then
-          goto findit;
-      end;
-      // asteroid
-      if sc.cfgsc.ShowAsteroid then
-      begin
-        stype := 'As';
-        itype := ftAst;
-        ok := planet.FindAsteroidName(trim(Num), ar1, de1, mag, sc.cfgsc, True);
         if ok then
           goto findit;
       end;
@@ -10050,6 +10073,15 @@ begin
       ok := f_search.SearchNebNameGeneric(Num, ar1, de1);
       if ok then
         goto findit;
+      // asteroid
+      if sc.cfgsc.ShowAsteroid then
+      begin
+        stype := 'As';
+        itype := ftAst;
+        ok := planet.FindAsteroidName(trim(Num), ar1, de1, mag, sc.cfgsc, True);
+        if ok then
+          goto findit;
+      end;
 
       Findit:
         Result := ok;
@@ -10196,8 +10228,8 @@ begin
         Track.Hint := rsUnlockChart;
         Track.Caption := rsUnlockChart;
       end
-      else if ((sc.cfgsc.TrackType >= 1) and (sc.cfgsc.TrackType <= 3)) or
-        (sc.cfgsc.TrackType = 6) then
+      else if ((sc.cfgsc.TrackType >= TTplanet) and (sc.cfgsc.TrackType <= TTasteroid)) or
+        (sc.cfgsc.TrackType = TTequat) or (sc.cfgsc.TrackType = TTbody) then
       begin
         Track.Hint := Format(rsLockOn, [sc.cfgsc.Trackname]);
         Track.Caption := Format(rsLockOn, [sc.cfgsc.Trackname]);
@@ -11102,7 +11134,7 @@ begin
           sc.cfgsc.FindOK := True;
           sc.cfgsc.FindSize := 0;
           sc.cfgsc.TrackName := '';
-          sc.cfgsc.TrackType := 0;
+          sc.cfgsc.TrackType := TTNone;
           ShowIdentLabel;
           identlabelClick(nil);
           UpdateBtn(sc.cfgsc.flipx, sc.cfgsc.flipy, Connect1.Checked,

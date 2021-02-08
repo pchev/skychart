@@ -430,6 +430,8 @@ type
   Tcalcstr = array[0..CALCEPH_MAX_CONSTANTVALUE] of char;
   Terrproc = procedure (_para1:Pchar);
   TDoubleArray = array[0..11] of double;
+  TTargetArray = array of integer;
+  TBodyNameArray = array of string;
 
   {----------------------------------------------------------------- }
   { error handler  }
@@ -491,24 +493,24 @@ type
   Tcalceph_open_array = function (n:longint; filename:PPchar):Pt_calcephbin;cdecl;
 
   {! return the version of the ephemeris data file as a null-terminated string  }
-  Tcalceph_getfileversion = function (var eph:Pt_calcephbin; var szversion:Tcalcstr):longint;cdecl;
+  Tcalceph_getfileversion = function (eph: Pt_calcephbin; var szversion:Tcalcstr):longint;cdecl;
 
   {! prefetch all data to memory  }
-  Tcalceph_prefetch = function (var eph:Pt_calcephbin):longint;cdecl;
+  Tcalceph_prefetch = function (eph: Pt_calcephbin):longint;cdecl;
 
   {! return non-zero value if eph could be accessed by multiple threads  }
-  Tcalceph_isthreadsafe = function (var eph:Pt_calcephbin):longint;cdecl;
+  Tcalceph_isthreadsafe = function (eph: Pt_calcephbin):longint;cdecl;
 
   {! compute the position <x,y,z> and velocity <xdot,ydot,zdot>
      for a given target and center at a single time. The output is in UA, UA/day,
      radians  }
-  Tcalceph_compute = function (var eph:Pt_calcephbin; JD0:double; time:double; target:longint; center:longint;
+  Tcalceph_compute = function (eph: Pt_calcephbin; JD0:double; time:double; target:longint; center:longint;
              var PV:TDoubleArray):longint;cdecl;
 
   {! compute the position <x,y,z> and velocity <xdot,ydot,zdot>
      for a given target and center at a single time. The output is expressed
      according to unit  }
-  Tcalceph_compute_unit = function (var eph:Pt_calcephbin; JD0:double; time:double; target:longint; center:longint;
+  Tcalceph_compute_unit = function (eph: Pt_calcephbin; JD0:double; time:double; target:longint; center:longint;
              eunit:longint; var PV:TDoubleArray):longint;cdecl;
 
   {! compute the orientation <euler angles> and their derivatives for a given
@@ -518,7 +520,7 @@ type
 
   {! compute the rotational angular momentum G/(mR^2) and their derivatives for a
      given target  at a single time. The output is expressed according to unit  }
-  Tcalceph_rotangmom_unit = function (var eph:Pt_calcephbin; JD0:double; time:double; target:longint; eunit:longint;
+  Tcalceph_rotangmom_unit = function (eph: Pt_calcephbin; JD0:double; time:double; target:longint; eunit:longint;
              var PV:TDoubleArray):longint;cdecl;
 
   {! According to the value of order, compute the position <x,y,z>
@@ -531,7 +533,7 @@ type
   {! According to the value of order,  compute the orientation <euler angles> and
      their first, second and third derivatives for a given target  at a single time.
      The output is expressed according to unit  }
-  Tcalceph_orient_order = function (var eph:Pt_calcephbin; JD0:double; time:double; target:longint; eunit:longint;
+  Tcalceph_orient_order = function (eph: Pt_calcephbin; JD0:double; time:double; target:longint; eunit:longint;
              order:longint; var PVAJ:double):longint;cdecl;
 
   {! compute the rotational angular momentum G/(mR^2) and their first, second and
@@ -542,58 +544,58 @@ type
 
   {! get the first value from the specified name constant in the ephemeris file
       }
-  Tcalceph_getconstant = function (var eph:Pt_calcephbin; name:Pchar; var value:double):longint;cdecl;
+  Tcalceph_getconstant = function (eph: Pt_calcephbin; name:Pchar; var value:double):longint;cdecl;
 
   {! get the first value from the specified name constant in the ephemeris file
       }
-  Tcalceph_getconstantsd = function (var eph:Pt_calcephbin; name:Pchar; var value:double):longint;cdecl;
+  Tcalceph_getconstantsd = function (eph: Pt_calcephbin; name:Pchar; var value:double):longint;cdecl;
 
   {! get the nvalue values from the specified name constant in the ephemeris file
       }
-  Tcalceph_getconstantvd = function (var eph:Pt_calcephbin; name:Pchar; var arrayvalue:double; nvalue:longint):longint;cdecl;
+  Tcalceph_getconstantvd = function (eph: Pt_calcephbin; name:Pchar; var arrayvalue:double; nvalue:longint):longint;cdecl;
 
   {! get the first value from the specified name constant in the ephemeris file
       }
-  Tcalceph_getconstantss = function (var eph:Pt_calcephbin; name:Pchar; var value:t_calcephcharvalue):longint;cdecl;
+  Tcalceph_getconstantss = function (eph: Pt_calcephbin; name:Pchar; var value:t_calcephcharvalue):longint;cdecl;
 
   {! get the nvalue values from the specified name constant in the ephemeris file
       }
-  Tcalceph_getconstantvs = function (var eph:Pt_calcephbin; name:Pchar; var arrayvalue:Pt_calcephcharvalue; nvalue:longint):longint;cdecl;
+  Tcalceph_getconstantvs = function (eph: Pt_calcephbin; name:Pchar; var arrayvalue:Pt_calcephcharvalue; nvalue:longint):longint;cdecl;
 
   {! return the number of constants available in the ephemeris file  }
-  Tcalceph_getconstantcount = function (var eph:Pt_calcephbin):longint;cdecl;
+  Tcalceph_getconstantcount = function (eph: Pt_calcephbin):longint;cdecl;
 
   {! return the name and the associated first value of the constant available at
      * some index in the ephemeris file  }
-  Tcalceph_getconstantindex = function (var eph:Pt_calcephbin; index:longint; var name:Tcalcstr; var value:double):longint;cdecl;
+  Tcalceph_getconstantindex = function (eph: Pt_calcephbin; index:longint; var name:Tcalcstr; var value:double):longint;cdecl;
 
   {! return the time scale in the ephemeris file  }
-  Tcalceph_gettimescale = function (var eph:Pt_calcephbin):longint;cdecl;
+  Tcalceph_gettimescale = function (eph: Pt_calcephbin):longint;cdecl;
 
   {! return the first and last time available in the ephemeris file  }
   Tcalceph_gettimespan = function (var eph:t_calcephbin; var firsttime:double; var lasttime:double; var continuous:longint):longint;cdecl;
 
   {! return the number of position’s records available in the ephemeris file  }
-  Tcalceph_getpositionrecordcount = function (var eph:Pt_calcephbin):longint;cdecl;
+  Tcalceph_getpositionrecordcount = function (eph: Pt_calcephbin):longint;cdecl;
 
   {! return the target and origin bodies, the first and last time, and the
      reference frame available at the specified position’s records' index of the
      ephemeris file  }
-  Tcalceph_getpositionrecordindex = function (var eph:Pt_calcephbin; index:longint; var target:longint; var center:longint; var firsttime:double;
+  Tcalceph_getpositionrecordindex = function (eph: Pt_calcephbin; index:longint; var target:longint; var center:longint; var firsttime:double;
              var lasttime:double; var frame:longint):longint;cdecl;
 
   {! return the number of orientation’s records available in the ephemeris file
       }
-  Tcalceph_getorientrecordcount = function (var eph:Pt_calcephbin):longint;cdecl;
+  Tcalceph_getorientrecordcount = function (eph: Pt_calcephbin):longint;cdecl;
 
   {! return the target body, the first and last time, and the reference frame
      available at the specified orientation’s records' index of the ephemeris file
       }
-  Tcalceph_getorientrecordindex = function (var eph:Pt_calcephbin; index:longint; var target:longint; var firsttime:double; var lasttime:double;
+  Tcalceph_getorientrecordindex = function (eph: Pt_calcephbin; index:longint; var target:longint; var firsttime:double; var lasttime:double;
              var frame:longint):longint;cdecl;
 
   {! close an ephemeris data file and destroy the ephemeris descriptor  }
-  Tcalceph_close = procedure (var eph:Pt_calcephbin);cdecl;
+  Tcalceph_close = procedure (eph: Pt_calcephbin);cdecl;
 
   {! return the version of the library as a null-terminated string  }
   Tcalceph_getversion_str = procedure (var szversion:Tcalcstr);cdecl;

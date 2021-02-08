@@ -130,6 +130,7 @@ type
     function DrawAsteroid: boolean;
     function DrawCometMark: boolean;
     function DrawComet: boolean;
+    function DrawBodies: boolean;
     procedure DrawArtSat;
     function CloseSat: integer;
     function FindArtSat(x1, y1, x2, y2: double; nextobj: boolean;
@@ -413,6 +414,7 @@ begin
     begin
       DrawAsteroidMark;
       DrawAsteroid;
+      DrawBodies;
       if cfgsc.SimLine then
         DrawOrbitPath;
     end;
@@ -711,7 +713,7 @@ begin
   // UT
   cfgsc.jd0 := jd(cfgsc.CurYear, cfgsc.CurMonth, cfgsc.CurDay, 0);
   // thing to do when the date change
-  if (not (cfgsc.TrackOn and ((cfgsc.TrackType <= 1) or (cfgsc.TrackType = 6)))) and
+  if (not (cfgsc.TrackOn and ((cfgsc.TrackType <= TTplanet) or (cfgsc.TrackType = TTequat)))) and
     (((cfgsc.FindType < ftPla) and (abs(cfgsc.CurJDTT - cfgsc.FindJD) > (3652))) or
     // 10 year limit for precession
     ((cfgsc.FindType >= ftPla) and (abs(cfgsc.CurJDTT - cfgsc.LastJD) >
@@ -1068,6 +1070,7 @@ begin
   cfgsc.ephvalid := (Fplanet.eph_method > '');
   cfgsc.ShowPlanetValid := cfgsc.ShowPlanet and cfgsc.ephvalid;
   cfgsc.ShowAsteroidValid := cfgsc.ShowAsteroid and cfgsc.ephvalid;
+  cfgsc.ShowBodiesValid := Length(cfgsc.SPKBodies)>0;
   cfgsc.ShowCometValid := cfgsc.ShowComet and cfgsc.ephvalid;
   cfgsc.ShowEarthShadowValid := cfgsc.ShowEarthShadow and cfgsc.ephvalid;
   cfgsc.ShowEclipticValid := cfgsc.ShowEcliptic and cfgsc.ephvalid;
@@ -1118,7 +1121,7 @@ begin
   if cfgsc.TrackOn then
   begin
     case cfgsc.TrackType of
-      1:
+      TTplanet:
       begin
         // planet
         cfgsc.racentre := cfgsc.PlanetLst[0, cfgsc.Trackobj, 1];
@@ -1129,7 +1132,7 @@ begin
         cfgsc.lastJDchart := cfgsc.JDchart;
         Planet.FormatPlanet(0, cfgsc.Trackobj, cfgsc, nom, ma, date, desc);
       end;
-      2:
+      TTcomet:
       begin
         // comet
         if cdb.GetComElem(cfgsc.TrackId, cfgsc.TrackElemEpoch, v1, v2,
@@ -1154,7 +1157,7 @@ begin
         else
           cfgsc.TrackOn := False;
       end;
-      3:
+      TTasteroid:
       begin
         // asteroid
         if cdb.GetAstElem(strtoint(cfgsc.TrackId), cfgsc.TrackElemEpoch, v1, v2, v3, v4, v5, v6, v7, v8, v9, s1, s2) then
@@ -1177,7 +1180,7 @@ begin
         else
           cfgsc.TrackOn := False;
       end;
-      4:
+      TTaltaz:
       begin
         // azimuth - altitude
         if cfgsc.Projpole = AltAz then
@@ -1188,7 +1191,7 @@ begin
         cfgsc.TrackOn := False;
         TrackAltAz := True;
       end;
-      5:
+      TTimage:
       begin
         // fits image
         cfgsc.TrackOn := False;
@@ -1210,13 +1213,34 @@ begin
           ScaleWindow(cfgsc);
         end;
       end;
-      6:
+      TTequat:
       begin
         // ra - dec
         cfgsc.racentre := cfgsc.TrackRA;
         cfgsc.decentre := cfgsc.TrackDec;
         Precession(cfgsc.TrackEpoch, cfgsc.JDChart, cfgsc.TrackRA, cfgsc.TrackDec);
         cfgsc.TrackEpoch := cfgsc.JDChart;
+      end;
+      TTbody:
+      begin
+        // spk body
+        if Fplanet.Body(cfgsc.CurJDTT, strtoint(cfgsc.TrackId), a, d, dist, v1) then
+        begin
+          precession(jd2000, cfgsc.JDChart, a, d);
+          cfgsc.LastJDChart := cfgsc.JDChart;
+          if cfgsc.PlanetParalaxe then
+            Paralaxe(cfgsc.CurST, dist, a, d, a, d, v1, cfgsc);
+          if cfgsc.ApparentPos then
+            apparent_equatorial(a, d, cfgsc, True, False);
+          cfgsc.racentre := a;
+          cfgsc.decentre := d;
+          cfgsc.TrackRA := cfgsc.racentre;
+          cfgsc.TrackDec := cfgsc.decentre;
+          cfgsc.TrackEpoch := cfgsc.JDChart;
+          cfgsc.lastJDchart := cfgsc.JDchart;
+        end
+        else
+          cfgsc.TrackOn := False;
       end;
     end;
   end
@@ -2958,6 +2982,98 @@ begin
   end;
 end;
 
+function Tskychart.DrawBodies: boolean;
+var
+  x1, y1, x2, y2, ra, Dec, magn: double;
+  xx, yy, lori: single;
+  lopt: boolean;
+  lalign: TLabelAlign;
+  i, j, jj, lid: integer;
+  ltxt, lis: string;
+begin
+  if cfgsc.ShowBodiesValid then
+  begin
+    if VerboseMsg then
+      WriteTrace('SkyChart ' + cfgsc.chartname + ': draw spk bodies');
+    try
+      Fplanet.ComputeBodies(cfgsc);
+      for j := 0 to cfgsc.SimNb - 1 do
+      begin
+        if ((j>0)or ((cfgsc.SimNb>1) and cfgsc.SimMark)) and (not cfgsc.SimObject[12]) then
+          break;
+        for i := 1 to cfgsc.BodiesNb do
+        begin
+         if (cfgsc.BodiesLst[j, i, 5]>0) then begin
+          ra := cfgsc.BodiesLst[j, i, 1];
+          Dec := cfgsc.BodiesLst[j, i, 2];
+          magn := cfgsc.BodiesLst[j, i, 3];
+          projection(ra, Dec, x1, y1, True, cfgsc);
+          WindowXY(x1, y1, xx, yy, cfgsc);
+          if (xx > cfgsc.Xmin) and (xx < cfgsc.Xmax) and (yy > cfgsc.Ymin) and (yy < cfgsc.Ymax) then
+          begin
+            if magn > (cfgsc.StarMagMax + cfgsc.AstMagDiff) then
+              continue;
+            if (cfgsc.SimNb=1)or (not (cfgsc.SimLine and cfgsc.SimMark)) then begin
+              Fplot.PlotAsteroid(xx, yy, cfgsc.AstSymbol, magn);
+            end;
+            if ((doSimLabel(cfgsc.SimNb, j, cfgsc.SimLabel)) and
+              (magn < cfgsc.StarMagMax + cfgsc.AstMagDiff - cfgsc.LabelMagDiff[10])) then
+            begin
+              lis := cfgsc.BodiesName[j, i, 1] + FormatFloat(f3, cfgsc.BodiesLst[j, i, 6]) + FormatFloat(f3, cfgsc.BodiesLst[j, i, 7]);
+              lid := rshash(lis, $7FFFFFFF);
+              if (cfgsc.SimNb = 1) or (not cfgsc.SimObject[12]) then
+              begin
+                ltxt := cfgsc.BodiesName[j, i, 2];
+                lori := labrotation(ra, Dec, 10, cfgsc);
+                lopt := True;
+                lalign := laLeft;
+              end
+              else
+              begin
+                if cfgsc.SimNameLabel then
+                  ltxt := cfgsc.BodiesName[j, i, 2] + blank
+                else
+                  ltxt := '';
+                if cfgsc.SimDateLabel then
+                  ltxt := ltxt + jddatetime(cfgsc.BodiesLst[j, i, 4] +
+                    (cfgsc.TimeZone - cfgsc.DT_UT) / 24, cfgsc.SimDateYear, cfgsc.SimDateMonth,
+                    cfgsc.SimDateDay, cfgsc.SimDateHour, cfgsc.SimDateMinute, cfgsc.SimDateSecond) + blank;
+                if cfgsc.SimMagLabel then
+                  ltxt := ltxt + formatfloat(f1, magn);
+                if j < cfgsc.SimNb - 1 then
+                  jj := j + 1
+                else
+                  jj := j - 1;
+                projection(cfgsc.BodiesLst[jj, i, 1], cfgsc.BodiesLst[jj, i, 2],
+                  x2, y2, True, cfgsc);
+                lori := rmod(rad2deg * RotationAngle(x2, y2, x1, y1, cfgsc) + 360, 360);
+                if (lori < 90) or (lori > 270) then
+                begin
+                  lalign := laLeft;
+                end
+                else
+                begin
+                  lalign := laRight;
+                  lori := lori - 180;
+                end;
+                lopt := False;
+              end;
+              SetLabel(lid, xx, yy, 0, 2, 10, ltxt, lalign, lori, 4, lopt);
+            end;
+          end;
+         end;
+        end;
+      end;
+      Result := True;
+    finally
+    end;
+  end
+  else
+  begin
+    Result := False;
+  end;
+end;
+
 function Tskychart.DrawCometMark: boolean;
 var
   i: integer;
@@ -4147,7 +4263,7 @@ begin
   begin
     FormatCatRec(rec, desc);
     FindRiseSet(0);
-    cfgsc.TrackType := 6;
+    cfgsc.TrackType := TTequat;
     cfgsc.TrackName := cfgsc.FindName;
     cfgsc.TrackRA := rec.ra;
     cfgsc.TrackDec := rec.Dec;
@@ -4171,6 +4287,16 @@ begin
     end
     else
     begin
+      if cfgsc.ShowBodiesValid and ((ftype = ftAll) or (ftype = ftBody)) then
+        Result := fplanet.FindBody(x1, y1, x2, y2, False, cfgsc, n, m, d, desc);
+      if Result then
+      begin
+        if cfgsc.SimNb > 1 then
+          cfgsc.FindName := cfgsc.FindName + blank + d;
+        FindRiseSet(0);
+      end
+      else
+      begin
       if cfgsc.ShowAsteroidValid and ((ftype = ftAll) or (ftype = ftAst)) then
         Result := fplanet.findasteroid(x1, y1, x2, y2, False, cfgsc, n, m, d, desc);
       if Result then
@@ -4198,6 +4324,7 @@ begin
             CloseSat;
           end;
         end;
+      end;
       end;
     end;
   end;
@@ -4265,6 +4392,20 @@ var
       ok := fplanet.findcomet(x1, y1, x2, y2, True, cfgsc, n, m, d, desc, trunc);
     end;
   end;
+
+  procedure FindatPosBodies;
+  begin
+    ok := fplanet.FindBody(x1, y1, x2, y2, False, cfgsc, n, m, d, desc, trunc);
+    while ok do
+    begin
+      if i > maxln then
+        break;
+      Text := Text + 'SPK' + tab + desc + crlf;
+      Inc(i);
+      ok := fplanet.FindBody(x1, y1, x2, y2, True, cfgsc, n, m, d, desc, trunc);
+    end;
+  end;
+
   /////////////
 begin
   if ((abs(Dec) + abs(dx)) > pid2) or ((abs(Dec) + abs(dy)) > pid2) then
@@ -4303,6 +4444,8 @@ begin
       FindatPosComet;
     if allobject or Fcatalog.cfgshr.ListPla then
       FindatPosAsteroid;
+    if (allobject or Fcatalog.cfgshr.ListPla)and cfgsc.ShowBodiesValid then
+      FindatPosBodies;
     if allobject or Fcatalog.cfgshr.ListNeb then
     begin
       FindAtPosCat(gcneb);
@@ -4491,6 +4634,26 @@ const
       ok := fplanet.findcomet(x1, y1, x2, y2, True, cfgsc, n, m, d, desc, false);
     end;
   end;
+
+  procedure FindatPosBodies;
+  begin
+    ok := fplanet.FindBody(x1, y1, x2, y2, False, cfgsc, n, m, d, desc, false);
+    while ok do
+    begin
+      if i > maxln then
+        break;
+      projection(cfgsc.findra, cfgsc.finddec, xx1, yy1, True, cfgsc);
+      windowxy(xx1, yy1, xx, yy, cfgsc);
+      if (xx > cfgsc.Xmin) and (xx < cfgsc.Xmax) and (yy > cfgsc.Ymin) and (yy < cfgsc.Ymax) then
+      begin
+        Text := Text + 'SPK' + tab + desc + crlf;
+        Inc(i);
+      end;
+      ok := fplanet.FindBody(x1, y1, x2, y2, True, cfgsc, n, m, d, desc, false);
+    end;
+  end;
+
+
   /////////////
 begin
   if cfgsc.windowratio = 0 then
@@ -4532,6 +4695,8 @@ begin
       FindatPosComet;
     if allobject or Fcatalog.cfgshr.ListPla then
       FindatPosAsteroid;
+    if (allobject or Fcatalog.cfgshr.ListPla)and cfgsc.ShowBodiesValid then
+      FindatPosBodies;
     if allobject or Fcatalog.cfgshr.ListNeb then
     begin
       FindAtPosCat(gcneb);
@@ -8563,7 +8728,7 @@ begin
         cfgsc.scopelock := True;
         if cfgsc.TrackOn and (cfgsc.TrackName = rsTelescope) then
         begin
-          cfgsc.TrackType := 6;
+          cfgsc.TrackType := TTequat;
           cfgsc.TrackRA := ra;
           cfgsc.TrackDec := Dec;
           cfgsc.TrackEpoch := cfgsc.JDChart;
@@ -8600,7 +8765,7 @@ begin
       cfgsc.scopelock := True;
       if cfgsc.TrackOn and (cfgsc.TrackName = rsTelescope + '-2') then
       begin
-        cfgsc.TrackType := 6;
+        cfgsc.TrackType := TTequat;
         cfgsc.TrackRA := ra;
         cfgsc.TrackDec := Dec;
         cfgsc.TrackEpoch := cfgsc.JDChart;

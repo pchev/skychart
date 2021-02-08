@@ -812,7 +812,7 @@ begin
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 4;
+    sc.cfgsc.TrackType := TTaltaz;
   end;
   Refresh(False, True);  // do not steal focus with autorefresh
 end;
@@ -937,6 +937,14 @@ begin
             ShowIdentLabel(False);
             Fshowinfo(sc.cfgsc.FindDesc, Caption, False, nil, sc.cfgsc.FindDesc2, sc.cfgsc.FindDesc2000);
           end;
+          ftBody:
+          begin
+            sc.planet.FindBodyName(sc.cfgsc.FindName, sra, sde, mag, sc.cfgsc, False, True);
+            sc.cfgsc.FindRA2000 := sra;
+            sc.cfgsc.FindDec2000 := sde;
+            ShowIdentLabel(False);
+            Fshowinfo(sc.cfgsc.FindDesc, Caption, False, nil, sc.cfgsc.FindDesc2, sc.cfgsc.FindDesc2000);
+          end;
           else
             ShowIdentLabel(False);
         end;
@@ -967,7 +975,7 @@ begin
   {$else}
     if sc.cfgsc.TrackOn then
     begin
-      if ((sc.cfgsc.TrackType > 1) and (sc.cfgsc.TrackType < 6)) then
+      if ((sc.cfgsc.TrackType > TTplanet) and (sc.cfgsc.TrackType < TTequat)) or (sc.cfgsc.TrackType = TTbody) then
         IdentXY(Image1.Width div 2, Image1.Height div 2)
       else
       begin
@@ -1258,7 +1266,7 @@ begin
   begin
     sc.DrawFinderMark(sc.cfgsc.Scope2Ra, sc.cfgsc.Scope2Dec, True, -1, MarkType);
   end;
-  if (((sc.cfgsc.Trackon) and (sc.cfgsc.TrackType >= 1) and (sc.cfgsc.TrackType <= 3)) or
+  if (((sc.cfgsc.Trackon) and (sc.cfgsc.TrackType >= TTplanet) and (sc.cfgsc.TrackType <= TTasteroid)) or
     (sc.cfgsc.FindOK)) and (sc.cfgsc.TrackName <> rsTelescope) and (sc.cfgsc.TrackName <> '') then
   begin
     sc.DrawSearchMark(sc.cfgsc.TrackRA, sc.cfgsc.TrackDec, False);
@@ -1407,7 +1415,7 @@ begin
     sc.cfgsc.TargetOn := False;
     Refresh(True, False);
   end
-  else if ((sc.cfgsc.TrackType >= 1) and (sc.cfgsc.TrackType <= 3)) or (sc.cfgsc.TrackType = 6) then
+  else if ((sc.cfgsc.TrackType >= TTplanet) and (sc.cfgsc.TrackType <= TTasteroid)) or (sc.cfgsc.TrackType = TTequat) or (sc.cfgsc.TrackType = TTbody) then
   begin
     if VerboseMsg then
       WriteTrace('Target click 2');
@@ -1433,7 +1441,7 @@ begin
     if VerboseMsg then
       WriteTrace('Track Telescope 2');
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 6;
+    sc.cfgsc.TrackType := TTequat;
     sc.cfgsc.TrackName := rsTelescope;
     sc.cfgsc.TrackRA := sc.cfgsc.ScopeRa;
     sc.cfgsc.TrackDec := sc.cfgsc.ScopeDec;
@@ -2009,7 +2017,7 @@ begin
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 4;
+    sc.cfgsc.TrackType := TTaltaz;
   end;
   Refresh(True, False);
 end;
@@ -2022,7 +2030,7 @@ begin
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 4;
+    sc.cfgsc.TrackType := TTaltaz;
   end;
   Refresh(True, False);
 end;
@@ -2037,7 +2045,7 @@ begin
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 4;
+    sc.cfgsc.TrackType := TTaltaz;
   end;
   Refresh(True, False);
 end;
@@ -2399,7 +2407,7 @@ begin
   else
   begin
     TrackOff1.Visible := False;
-    if ((sc.cfgsc.TrackType >= 1) and (sc.cfgsc.TrackType <= 3)) or (sc.cfgsc.TrackType = 6) then
+    if ((sc.cfgsc.TrackType >= TTplanet) and (sc.cfgsc.TrackType <= TTasteroid)) or (sc.cfgsc.TrackType = TTequat) or (sc.cfgsc.TrackType = TTbody) then
     begin
       TrackOn1.Caption := Format(rsLockOn, [sc.cfgsc.TrackName]);
       TrackOn1.Visible := True;
@@ -2411,7 +2419,7 @@ begin
   begin
     Target1.Caption := rsClearTarget;
   end
-  else if ((sc.cfgsc.TrackType >= 1) and (sc.cfgsc.TrackType <= 3)) or (sc.cfgsc.TrackType = 6) then
+  else if ((sc.cfgsc.TrackType >= TTplanet) and (sc.cfgsc.TrackType <= TTasteroid)) or (sc.cfgsc.TrackType = TTequat) or (sc.cfgsc.TrackType = TTbody) then
   begin
     Target1.Caption := Format(rsSetTargetTo, [sc.cfgsc.TrackName]);
   end
@@ -2721,6 +2729,7 @@ begin
       ftPla: identlabel.Picture.Bitmap.Canvas.font.size := sc.plot.cfgplot.LabelSize[5];
       ftCom: identlabel.Picture.Bitmap.Canvas.font.size := sc.plot.cfgplot.LabelSize[5];
       ftAst: identlabel.Picture.Bitmap.Canvas.font.size := sc.plot.cfgplot.LabelSize[5];
+      ftBody: identlabel.Picture.Bitmap.Canvas.font.size := sc.plot.cfgplot.LabelSize[5];
       else
         identlabel.Picture.Bitmap.Canvas.font.size := sc.plot.cfgplot.LabelSize[1];
     end;
@@ -2793,7 +2802,7 @@ begin
   lastY := sc.cfgsc.FindY;
   lastZ := sc.cfgsc.FindZ;
   sc.cfgsc.TrackName := '';
-  sc.cfgsc.TrackType := 4;
+  sc.cfgsc.TrackType := TTaltaz;
   lastsolsys := ((sc.cfgsc.Findtype = ftAst) or (sc.cfgsc.Findtype = ftCom) or
     (sc.cfgsc.Findtype = ftPla)) and ((sc.cfgsc.FindX + sc.cfgsc.FindY + sc.cfgsc.FindZ) <> 0);
   sc.GetCoord(x, y, ra, Dec, a, h, l, b, le, be);
@@ -2965,7 +2974,7 @@ begin
     sc.cfgsc.TrackDec := sc.cfgsc.FindDec;
     sc.cfgsc.TrackEpoch := sc.cfgsc.JDChart;
     sc.cfgsc.TrackOn := False;
-    sc.cfgsc.TrackType := 6;
+    sc.cfgsc.TrackType := TTequat;
     sc.cfgsc.TrackName := sc.cfgsc.FindName;
     // center chart
     if not sc.cfgsc.ChartLock then sc.movetoradec(sc.cfgsc.FindRA, sc.cfgsc.FindDec);
@@ -3049,7 +3058,7 @@ begin
       sc.cfgsc.FindOK := True;
       sc.cfgsc.FindType := itype;
       sc.cfgsc.TrackOn := False;
-      sc.cfgsc.TrackType := 6;
+      sc.cfgsc.TrackType := TTequat;
       sc.cfgsc.TrackRA := ar1;
       sc.cfgsc.TrackDec := de1;
       sc.cfgsc.TrackEpoch := sc.cfgsc.JDChart;
@@ -3348,7 +3357,7 @@ begin
       // begin measure
       GetADxy(X, Y, MeasureRa, MeasureDe, sc.cfgsc);
       // start on tracked object?
-      if sc.cfgsc.TrackOn and (sc.cfgsc.TrackType=6) then
+      if sc.cfgsc.TrackOn and (sc.cfgsc.TrackType=TTequat) then
       begin
         MeasureRa := sc.cfgsc.TrackRA;
         MeasureDe := sc.cfgsc.TrackDec;
@@ -3767,7 +3776,7 @@ begin
   sc.cfgsc.TargetOn := False;
   sc.cfgsc.Trackon := False;
   sc.cfgsc.TrackName := '';
-  sc.cfgsc.TrackType := 0;
+  sc.cfgsc.TrackType := TTNone;
   sc.cfgsc.FindOK := False;
   sc.cfgsc.FindName := '';
   Refresh(True, True);
@@ -3911,6 +3920,8 @@ begin
     precision := 2
   else if otype = 'As' then
     precision := 2
+  else if otype = 'Spk' then
+    precision := 2
   else if otype = 'S*' then
     precision := 2
   else if otype = 'Cm' then
@@ -3922,7 +3933,7 @@ begin
   else
     precision := 0;
   isStar := (otype = '*');
-  isSolarSystem := ((otype = 'P') or (otype = 'Ps') or (otype = 'S*') or (otype = 'As') or (otype = 'Cm'));
+  isSolarSystem := ((otype = 'P') or (otype = 'Ps') or (otype = 'S*') or (otype = 'As') or (otype = 'Cm')or (otype = 'Spk'));
   isOsr := (otype = 'OSR');
   isArtSat := (otype = 'Sat');
   if isSolarSystem and (sc.cfgsc.FindSimjd <> 0) then
@@ -4578,7 +4589,7 @@ begin
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 4;
+    sc.cfgsc.TrackType := TTaltaz;
   end;
   Refresh(True, False);
 end;
@@ -4592,7 +4603,7 @@ begin
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 4;
+    sc.cfgsc.TrackType := TTaltaz;
   end;
   Refresh(True, False);
 end;
@@ -4644,7 +4655,7 @@ begin
           sc.Fits.Center_RA + 0.00001, sc.Fits.Center_DE + 0.00001, sc.Fits.Img_Width,
           sc.Fits.Img_Height, sc.Fits.Rotation);
       sc.cfgsc.TrackOn := True;
-      sc.cfgsc.TrackType := 5;
+      sc.cfgsc.TrackType := TTimage;
       Result := msgOK;
     end
     else
@@ -4673,7 +4684,7 @@ begin
         sc.Fits.Center_RA + 0.00001, sc.Fits.Center_DE + 0.00001, sc.Fits.Img_Width,
         sc.Fits.Img_Height, sc.Fits.Rotation);
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 5;
+    sc.cfgsc.TrackType := TTimage;
     Result := msgOK;
   end
   else
@@ -5183,7 +5194,7 @@ begin
     if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
     begin
       sc.cfgsc.TrackOn := True;
-      sc.cfgsc.TrackType := 4;
+      sc.cfgsc.TrackType := TTaltaz;
     end;
   except
     exit;
@@ -5226,7 +5237,7 @@ begin
     de := deg2rad * dd;
     ra := sc.cfgsc.CurST - deg2rad * hh;
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 6;
+    sc.cfgsc.TrackType := TTequat;
     sc.cfgsc.TrackName := rsTelescope + '-2';
     sc.cfgsc.scopelock := False;
     if sc.Telescope2Move(ra, de) then
@@ -5242,7 +5253,7 @@ begin
   if onoff = 'ON' then
   begin
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 6;
+    sc.cfgsc.TrackType := TTequat;
     if Connect1.Checked then
     begin
       sc.cfgsc.TrackName := rsTelescope;
@@ -6000,7 +6011,7 @@ begin
           sc.Fits.Center_RA + 0.00001, sc.Fits.Center_DE + 0.00001, sc.Fits.Img_Width,
           sc.Fits.Img_Height, sc.Fits.Rotation);
       sc.cfgsc.TrackOn := True;
-      sc.cfgsc.TrackType := 5;
+      sc.cfgsc.TrackType := TTimage;
       sc.cfgsc.BackgroundImage := sc.Fits.Filename;
       sc.cfgsc.ShowBackgroundImage := True;
       if f_getdss.cfgdss.dssarchive then
@@ -6326,7 +6337,7 @@ begin
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 4;
+    sc.cfgsc.TrackType := TTaltaz;
   end;
   refresh(True, False);
 end;
@@ -6348,7 +6359,7 @@ begin
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 4;
+    sc.cfgsc.TrackType := TTaltaz;
   end;
   refresh(True, False);
 end;
@@ -6368,7 +6379,7 @@ begin
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 4;
+    sc.cfgsc.TrackType := TTaltaz;
   end;
   refresh(True, False);
 end;
@@ -6394,7 +6405,7 @@ begin
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 4;
+    sc.cfgsc.TrackType := TTaltaz;
   end;
   refresh(True, False);
 end;
@@ -6622,7 +6633,7 @@ begin
   if trackAltAz and (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 4;
+    sc.cfgsc.TrackType := TTaltaz;
   end;
   if doRefresh then Refresh(True, False);
 end;
@@ -6748,7 +6759,7 @@ begin
   if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
   begin
     sc.cfgsc.TrackOn := True;
-    sc.cfgsc.TrackType := 4;
+    sc.cfgsc.TrackType := TTaltaz;
   end;
   if VerboseMsg then
     WriteTrace(Caption + ' SetJD');
@@ -7933,7 +7944,7 @@ begin
           end;
           if (sc.cfgsc.TrackName = rsTelescope) and (not sc.cfgsc.TrackOn) then
           begin
-            sc.cfgsc.TrackType := 6;
+            sc.cfgsc.TrackType := TTequat;
             sc.cfgsc.TrackName := rsTelescope;
             sc.cfgsc.TrackRA := sc.cfgsc.ScopeRa;
             sc.cfgsc.TrackDec := sc.cfgsc.ScopeDec;

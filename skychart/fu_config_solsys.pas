@@ -26,21 +26,41 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  u_help, u_translation, u_constant, u_util, u_projection, cu_database, cu_radec,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math, IniFiles,
+  u_help, u_translation, u_constant, u_util, u_projection, cu_database, cu_radec, cu_calceph,
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math, IniFiles, tlntsend,
   Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources, UScaleDPI,
-  downloaddialog, jdcalendar, EditBtn, Process, LazHelpHTML_fix, LazUTF8, LazFileUtils;
+  downloaddialog, jdcalendar, EditBtn, CheckLst, Menus, Process, LazHelpHTML_fix, LazUTF8, LazFileUtils, Types;
 
 type
 
   { Tf_config_solsys }
 
   Tf_config_solsys = class(TFrame)
+    ButtonDownloadSpk: TButton;
+    ButtonReturn: TButton;
     ButtonEphDefault: TButton;
     ButtonEphAdd: TButton;
     ButtonEphDel: TButton;
     ButtonEphUp: TButton;
     ButtonEphDown: TButton;
+    DateEdit1: TDateEdit;
+    LabelTitle: TLabel;
+    LabelDate2: TLabel;
+    LabelDate1: TLabel;
+    Labelemail: TLabel;
+    LabelObjSpk: TLabel;
+    MemoSPK: TMemo;
+    SPKdelete: TMenuItem;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    PanelSpkmemo: TPanel;
+    PanelSPKlist: TPanel;
+    NumDays: TSpinEdit;
+    SPKpopup: TPopupMenu;
+    SPKobject: TEdit;
+    SPKemail: TEdit;
+    Labelmsgspk: TLabel;
+    SPKlist: TCheckListBox;
     EditEph: TEdit;
     GroupBox2: TGroupBox;
     LabelAsteroidCount: TLabel;
@@ -83,6 +103,7 @@ type
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
     TabSheet4: TTabSheet;
+    Page5: TTabSheet;
     TransparentPlanet: TCheckBox;
     planetdir: TDirectoryEdit;
     DownloadDialog1: TDownloadDialog;
@@ -210,6 +231,8 @@ type
     PageControl1: TPageControl;
     procedure AstNeoClick(Sender: TObject);
     procedure AstPageControl2Changing(Sender: TObject; var AllowChange: boolean);
+    procedure ButtonDownloadSpkClick(Sender: TObject);
+    procedure ButtonReturnClick(Sender: TObject);
     procedure ButtonEphAddClick(Sender: TObject);
     procedure ButtonEphDefaultClick(Sender: TObject);
     procedure ButtonEphDelClick(Sender: TObject);
@@ -223,6 +246,8 @@ type
     procedure DownloadCometClick(Sender: TObject);
     procedure GRSdriftChange(Sender: TObject);
     procedure GRSJDDateChange(Sender: TObject);
+    procedure LabelTitleClick(Sender: TObject);
+    procedure NumDaysChange(Sender: TObject);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: boolean);
     procedure PlanetDirChange(Sender: TObject);
     procedure PlaParalaxeClick(Sender: TObject);
@@ -248,6 +273,10 @@ type
     procedure AstComputeClick(Sender: TObject);
     procedure AddastClick(Sender: TObject);
     procedure smallsatChange(Sender: TObject);
+    procedure SPKdeleteClick(Sender: TObject);
+    procedure SPKemailChange(Sender: TObject);
+    procedure SPKlistClickCheck(Sender: TObject);
+    procedure SPKlistContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
     procedure SunOnlineClick(Sender: TObject);
     procedure TransparentPlanetClick(Sender: TObject);
   private
@@ -259,12 +288,16 @@ type
     FConfirmDownload: boolean;
     FDisableAsteroid: TNotifyEvent;
     FEnableAsteroid: TNotifyEvent;
+    CurrentSPKfile: string;
     procedure ShowPlanet;
     procedure ShowComet;
     procedure UpdComList;
     procedure ShowAsteroid;
+    procedure ShowSPK;
+    procedure ListSPK;
     procedure AsteroidFeedback(txt: string);
     procedure CometFeedback(txt: string);
+    function HorizonSPK(obj:string; date1,date2: TDateTime; email: string; out filetodownload: string):boolean;
   public
     { Public declarations }
     cdb: Tcdcdb;
@@ -309,6 +342,7 @@ begin
   page2.Caption := rsPlanet;
   page3.Caption := rsComet;
   page4.Caption := rsAsteroid;
+  page5.Caption := rsSPICEEphemer;
   Label12.Caption := rsSolarSystemS;
   Label131.Caption := rsDataFiles;
   PlaParalaxe.Caption := rsPosition;
@@ -443,6 +477,12 @@ begin
   Alabels.jd := rsJulianDay;
   Alabels.today := rsToday;
   GRSJDDate.labels := Alabels;
+  LabelTitle.Caption:=rsDownloadSola;
+  LabelObjSpk.Caption:=rsObjectName;
+  Labelemail.Caption:=rsEmail;
+  LabelDate1.Caption:=rsStartDate;
+  LabelDate2.Caption:=rsNumberOfDays;
+  ButtonDownloadSpk.Caption:=rsDownload;
 end;
 
 constructor Tf_config_solsys.Create(AOwner: TComponent);
@@ -482,6 +522,37 @@ end;
 procedure Tf_config_solsys.Init;
 begin
   LockChange := True;
+  if cmain.HttpProxy then
+  begin
+    DownloadDialog1.SocksProxy := '';
+    DownloadDialog1.SocksType := '';
+    DownloadDialog1.HttpProxy := cmain.ProxyHost;
+    DownloadDialog1.HttpProxyPort := cmain.ProxyPort;
+    DownloadDialog1.HttpProxyUser := cmain.ProxyUser;
+    DownloadDialog1.HttpProxyPass := cmain.ProxyPass;
+  end
+  else if cmain.SocksProxy then
+  begin
+    DownloadDialog1.HttpProxy := '';
+    DownloadDialog1.SocksType := cmain.SocksType;
+    DownloadDialog1.SocksProxy := cmain.ProxyHost;
+    DownloadDialog1.HttpProxyPort := cmain.ProxyPort;
+    DownloadDialog1.HttpProxyUser := cmain.ProxyUser;
+    DownloadDialog1.HttpProxyPass := cmain.ProxyPass;
+  end
+  else
+  begin
+    DownloadDialog1.SocksProxy := '';
+    DownloadDialog1.SocksType := '';
+    DownloadDialog1.HttpProxy := '';
+    DownloadDialog1.HttpProxyPort := '';
+    DownloadDialog1.HttpProxyUser := '';
+    DownloadDialog1.HttpProxyPass := '';
+  end;
+  DownloadDialog1.FtpUserName := 'anonymous';
+  DownloadDialog1.FtpPassword := cmain.AnonPass;
+  DownloadDialog1.FtpFwPassive := cmain.FtpPassive;
+  DownloadDialog1.ScaleDpi:=UScaleDPI.scale;
   ComPageControl.ActivePageIndex := 1;
   ComPageControl.ActivePageIndex := 0;
   ComPageControl1.ActivePageIndex := 1;
@@ -493,6 +564,7 @@ begin
   ShowPlanet;
   ShowComet;
   ShowAsteroid;
+  ShowSPK;
   LockChange := False;
   if PageControl1.ActivePage = page2 then
     PlanetModeClick(nil);
@@ -561,6 +633,89 @@ begin
   LabelAsteroidCount.Caption:=rsTotalAsteroi+': '+inttostr(cdb.NumAsteroidElement);
 end;
 
+procedure Tf_config_solsys.ShowSPK;
+begin
+  page5.TabVisible:=(libcalceph<>0);
+  if page5.TabVisible then begin
+    Labelmsgspk.Caption:='';
+    PanelSPKmemo.visible:=false;
+    PanelSPKlist.visible:=true;
+    DateEdit1.Date:=now;
+    NumDays.Value:=cmain.HorizonNumDay;
+    SPKemail.Text:=cmain.HorizonEmail;
+    ListSPK;
+  end;
+end;
+
+procedure Tf_config_solsys.ListSPK;
+var
+  fs: TSearchRec;
+  i,n: integer;
+begin
+  SPKlist.Clear;
+  if page5.TabVisible then begin
+    // search files and check the active one
+    i := findfirst(slash(SPKdir) + '*.bsp', 0, fs);
+    while i=0 do begin
+      n:=SPKlist.Items.Add(fs.Name);
+      if csc.SPKlist.IndexOf(fs.Name)>=0 then
+        SPKlist.Checked[n]:=true;
+      i := FindNext(fs);
+    end;
+    findclose(fs);
+    // inactivate the files that are no more present
+    for i:=csc.SPKlist.Count-1 downto 0 do begin
+      if SPKlist.Items.IndexOf(csc.SPKlist[i])<0 then
+        csc.SPKlist.Delete(i);
+    end;
+  end;
+end;
+
+procedure Tf_config_solsys.SPKlistClickCheck(Sender: TObject);
+var i,n,k: integer;
+  buf:string;
+begin
+  // add the checked files to the list
+  csc.SPKlist.Clear;
+  n:=SPKlist.Count;
+  k:=0;
+  Labelmsgspk.Caption:='';
+  for i:=0 to n-1 do begin
+    if SPKlist.Checked[i] then begin
+      inc(k);
+      if k<=MaxSpkFiles then begin
+        buf:= SPKlist.Items[i];
+        csc.SPKlist.Add(buf);
+      end
+      else begin
+        Labelmsgspk.Caption:=Format(rsAMaximumOfFi, [inttostr(MaxSpkFiles)]);
+        SPKlist.Checked[i]:=false;
+      end;
+    end;
+  end;
+end;
+
+procedure Tf_config_solsys.SPKlistContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
+var i: integer;
+begin
+  CurrentSPKfile:='';
+  i:=SPKlist.ItemAtPos(MousePos,true);
+  if i>=0 then
+    CurrentSPKfile:=SPKlist.Items[i];
+
+  Handled:=(CurrentSPKfile='');
+end;
+
+procedure Tf_config_solsys.SPKdeleteClick(Sender: TObject);
+begin
+  if MessageDlg(rsConfirmFileD + CurrentSPKfile, mtConfirmation, mbYesNo, 0) = mrYes then
+    begin
+      DeleteFile(slash(SPKdir)+CurrentSPKfile);
+      CurrentSPKfile:='';
+      ListSPK;
+    end;
+end;
+
 procedure Tf_config_solsys.PlanetDirChange(Sender: TObject);
 begin
   if LockChange then
@@ -586,37 +741,6 @@ begin
     exit;
   end;
   fn := slash(MPCDir) + 'MPCORB-' + FormatDateTime('yyyy-mm-dd', now) + '.DAT';
-  DownloadDialog1.ScaleDpi:=UScaleDPI.scale;
-  if cmain.HttpProxy then
-  begin
-    DownloadDialog1.SocksProxy := '';
-    DownloadDialog1.SocksType := '';
-    DownloadDialog1.HttpProxy := cmain.ProxyHost;
-    DownloadDialog1.HttpProxyPort := cmain.ProxyPort;
-    DownloadDialog1.HttpProxyUser := cmain.ProxyUser;
-    DownloadDialog1.HttpProxyPass := cmain.ProxyPass;
-  end
-  else if cmain.SocksProxy then
-  begin
-    DownloadDialog1.HttpProxy := '';
-    DownloadDialog1.SocksType := cmain.SocksType;
-    DownloadDialog1.SocksProxy := cmain.ProxyHost;
-    DownloadDialog1.HttpProxyPort := cmain.ProxyPort;
-    DownloadDialog1.HttpProxyUser := cmain.ProxyUser;
-    DownloadDialog1.HttpProxyPass := cmain.ProxyPass;
-  end
-  else
-  begin
-    DownloadDialog1.SocksProxy := '';
-    DownloadDialog1.SocksType := '';
-    DownloadDialog1.HttpProxy := '';
-    DownloadDialog1.HttpProxyPort := '';
-    DownloadDialog1.HttpProxyUser := '';
-    DownloadDialog1.HttpProxyPass := '';
-  end;
-  DownloadDialog1.FtpUserName := 'anonymous';
-  DownloadDialog1.FtpPassword := cmain.AnonPass;
-  DownloadDialog1.FtpFwPassive := cmain.FtpPassive;
   DownloadDialog1.onFeedback := AsteroidFeedback;
   ok := False;
   gzfile := False;
@@ -745,6 +869,136 @@ begin
   {$ifndef darwin}MemoMPC.SetFocus;  {$endif}
 end;
 
+function Tf_config_solsys.HorizonSPK(obj:string; date1,date2: TDateTime; email: string; out filetodownload: string):boolean;
+var tn: TTelnetSend;
+    dt1,dt2: string;
+    ok: boolean;
+begin
+  result:=false;
+  screen.Cursor:=crHourGlass;
+  dt1:=FormatDateTime('yyyy"-"mm"-"dd',date1);
+  dt2:=FormatDateTime('yyyy"-"mm"-"dd',date2);
+  tn := TTelnetSend.Create;
+  try
+    tn.Timeout:=(5000);
+    tn.TermType:='vt102';
+    tn.TargetHost:=Horizon_Telnet_Host;
+    tn.TargetPort:=Horizon_Telnet_Port;
+    tn.Login;
+    ok := (tn.Sock.LastError = 0);
+    if not ok then exit;
+
+    // paging off
+    if not tn.WaitFor('Horizons>') then exit;
+    tn.Send('PAGE' + crlf);
+
+    // set I/O model 2
+    if not tn.WaitFor('Horizons>') then exit;
+    tn.Send('##2' + crlf);
+
+    // send object name
+    if not tn.WaitFor('Horizons>') then exit;
+    tn.Send('"'+obj+'"' + crlf);
+
+    // eventual space sensitive prompt
+    if tn.WaitFor('Continue [ <cr>=yes, n=no, ? ] :') then
+      tn.Send(crlf);
+
+    // select spk, at this point it may fail if the selection is not unique,
+    // in this case let the user see the log and retry with a more selective name
+    if not tn.WaitFor('[S]PK,?,<cr>:') then exit;
+    tn.Send('s' + crlf);
+
+    // enter email
+    if not tn.WaitFor('e-mail address [?]:') then exit;
+    tn.Send(email + crlf);
+
+    // confirm email
+    if not tn.WaitFor('[yes(<cr>),no]') then exit;
+    tn.Send(crlf);
+
+    // select binary format
+    if not tn.WaitFor('[Binary, ASCII, 1, ?] :') then exit;
+    tn.Send('b'+crlf);
+
+    // start and stop date
+    if not tn.WaitFor('SPK object START') then exit;
+    tn.Send(dt1+crlf);
+    if not tn.WaitFor('SPK object STOP') then exit;
+    tn.Send(dt2+crlf);
+
+    // prompt to add more
+    if not tn.WaitFor('[ YES, NO, ? ] :') then exit;
+    tn.Send('no'+crlf);
+
+    // extract to download url for the file
+    if not tn.WaitFor('Full path   :') then exit;
+    filetodownload:=tn.RecvTerminated(crlf);
+
+    filetodownload:=trim(filetodownload);
+    result:=filetodownload<>'';
+
+    // return to main prompt
+    if not tn.WaitFor('[R]edisplay, ?, <cr>:') then exit;
+    tn.Send(crlf);
+
+    // quit
+    if not tn.WaitFor('Horizons>') then exit;
+    tn.Send('x' + crlf);
+
+  finally
+    screen.Cursor:=crDefault;
+    if not Result then begin
+      MemoSPK.lines.add(tn.SessionLog);
+      MemoSPK.lines.add(tn.Sock.LastErrorDesc);
+      MemoSPK.SelStart := length(MemoSPK.Text) - 1;
+      PanelSPKmemo.visible:=true;
+      PanelSPKlist.visible:=false;
+    end;
+    tn.free;
+  end;
+end;
+
+procedure Tf_config_solsys.ButtonReturnClick(Sender: TObject);
+begin
+  PanelSPKmemo.visible:=false;
+  PanelSPKlist.visible:=true;
+end;
+
+procedure Tf_config_solsys.ButtonDownloadSpkClick(Sender: TObject);
+var obj,email,dlf,fn: string;
+    dt1,dt2: TDateTime;
+begin
+  PanelSPKmemo.visible:=false;
+  PanelSPKlist.visible:=true;
+  obj:=trim(uppercase(SPKobject.Text));
+  if obj='' then begin
+    Labelmsgspk.Caption:=rsRequiredFiel+': '+rsObjectName;
+    exit;
+  end;
+  email:=trim(SPKemail.Text);
+  if (email='')or(pos('@',email)=0) then begin
+    Labelmsgspk.Caption:=rsRequiredFiel+': '+rsEmail;
+    exit;
+  end;
+  dt1:=DateEdit1.Date;
+  dt2:=dt1+NumDays.Value;
+  if HorizonSPK(obj,dt1,dt2,email,dlf) then begin
+    fn:=CleanName(obj);
+    DownloadDialog1.URL := dlf;
+    DownloadDialog1.SaveToFile := slash(SPKdir) + fn + '.bsp';
+    DownloadDialog1.onFeedback := nil;
+    DownloadDialog1.ConfirmDownload := False;
+    if DownloadDialog1.Execute then begin
+      ListSPK;
+    end
+    else
+    begin
+      ShowMessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
+    end;
+  end;
+end;
+
 procedure Tf_config_solsys.ButtonEphAddClick(Sender: TObject);
 begin
   if IsInteger(EditEph.Text) then
@@ -835,37 +1089,6 @@ begin
   end;
   fn := slash(MPCDir) + 'COMET-' + FormatDateTime('yyyy-mm-dd', now) + '.DAT';
   tmpfn := slash(TempDir) + 'mpc.tmp';
-  DownloadDialog1.ScaleDpi:=UScaleDPI.scale;
-  if cmain.HttpProxy then
-  begin
-    DownloadDialog1.SocksProxy := '';
-    DownloadDialog1.SocksType := '';
-    DownloadDialog1.HttpProxy := cmain.ProxyHost;
-    DownloadDialog1.HttpProxyPort := cmain.ProxyPort;
-    DownloadDialog1.HttpProxyUser := cmain.ProxyUser;
-    DownloadDialog1.HttpProxyPass := cmain.ProxyPass;
-  end
-  else if cmain.SocksProxy then
-  begin
-    DownloadDialog1.HttpProxy := '';
-    DownloadDialog1.SocksType := cmain.SocksType;
-    DownloadDialog1.SocksProxy := cmain.ProxyHost;
-    DownloadDialog1.HttpProxyPort := cmain.ProxyPort;
-    DownloadDialog1.HttpProxyUser := cmain.ProxyUser;
-    DownloadDialog1.HttpProxyPass := cmain.ProxyPass;
-  end
-  else
-  begin
-    DownloadDialog1.SocksProxy := '';
-    DownloadDialog1.SocksType := '';
-    DownloadDialog1.HttpProxy := '';
-    DownloadDialog1.HttpProxyPort := '';
-    DownloadDialog1.HttpProxyUser := '';
-    DownloadDialog1.HttpProxyPass := '';
-  end;
-  DownloadDialog1.FtpUserName := 'anonymous';
-  DownloadDialog1.FtpPassword := cmain.AnonPass;
-  DownloadDialog1.FtpFwPassive := cmain.FtpPassive;
   DownloadDialog1.onFeedback := CometFeedback;
   ok := False;
   for i := 1 to n do
@@ -976,6 +1199,16 @@ begin
   if LockChange then
     exit;
   csc.GRSjd := GRSJDDate.JD;
+end;
+
+procedure Tf_config_solsys.LabelTitleClick(Sender: TObject);
+begin
+  ExecuteFile(Horizon_Help);
+end;
+
+procedure Tf_config_solsys.NumDaysChange(Sender: TObject);
+begin
+  cmain.HorizonNumDay := NumDays.Value;
 end;
 
 procedure Tf_config_solsys.PageControl1Changing(Sender: TObject;
@@ -1211,6 +1444,11 @@ begin
   if LockChange then
     exit;
   csc.ShowSmallsat := smallsat.Checked;
+end;
+
+procedure Tf_config_solsys.SPKemailChange(Sender: TObject);
+begin
+  cmain.HorizonEmail  := SPKemail.Text;
 end;
 
 procedure Tf_config_solsys.SunOnlineClick(Sender: TObject);

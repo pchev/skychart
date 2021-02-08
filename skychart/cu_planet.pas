@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  passql, passqlite, uDE, cu_plansat, cu_calceph, calceph,
+  passql, passqlite, uDE, cu_plansat, cu_calceph, calceph, LazFileUtils,
   u_translation, cu_database, u_constant, u_util, u_projection,
   Classes, SysUtils, Forms, Math;
 
@@ -63,6 +63,7 @@ type
     CurrentStep, CurrentPlanet, n_com, n_ast, jdastnstep: integer;
     CurrentAstStep, CurrentAsteroid: integer;
     CurrentComStep, CurrentComet: integer;
+    CurrentBodyStep, CurrentBody: integer;
     astelem: Tastelem;
     comelem: Tcomelem;
   protected
@@ -116,6 +117,10 @@ type
     procedure PlanetOrientation(jde: double; ipla: integer;
       var P, De, Ds, w1, w2, w3: double);
     procedure MoonOrientation(jde, ra, Dec, d: double; var P, llat, lats, llong: double);
+    function Body(jdt: double; target: integer; var ra, de, dist, r: double): boolean;
+    procedure ComputeBodies(cfgsc: Tconf_skychart);
+    function FindBody(x1, y1, x2, y2: double; nextobj: boolean;cfgsc: Tconf_skychart; var nom, mag, date, desc: string; trunc: boolean = True): boolean;
+    function FindBodyName(bname: string; var ra, de, mag: double;cfgsc: Tconf_skychart; upddb: boolean; MeanPos: boolean = False): boolean;
     procedure ComputeAsteroid(cfgsc: Tconf_skychart);
     procedure ComputeComet(cfgsc: Tconf_skychart);
     procedure OrbRect(jd: double; var xc, yc, zc, rs: double);
@@ -589,7 +594,7 @@ begin
   try
   obs := 399;                // geocentric
   target:=naif[isat];
-  if CalcephCompute(jdtt,target,obs,pv) then begin
+  if CalcephComputeSat(jdtt,target,obs,pv) then begin
     x := pv[0] / km_au;
     y := pv[1] / km_au;
     z := pv[2] / km_au;
@@ -621,7 +626,7 @@ begin
   begin
     obs := 399;                // geocentric
     target:=spicebody[pla,i];
-    if CalcephCompute(jdtt,target,obs,pv) then begin
+    if CalcephComputeSat(jdtt,target,obs,pv) then begin
       xt[i] := pv[0] / km_au;
       yt[i] := pv[1] / km_au;
       zt[i] := pv[2] / km_au;
@@ -641,7 +646,6 @@ end;
 
 function TPlanet.SpiceSatOne(jdtt: double; isat: integer; out x, y, z: double; out segid: string):integer;
 var
-  i: integer;
   data: TcdcSpice;
   msg: array[0..1024] of char;
   pmsg: PChar;
@@ -716,7 +720,6 @@ begin
   x := xp + xs;
   y := yp + ys;
   z := zp + zs;
-  d1 := sqrt(x * x + y * y + z * z);
   d1 := sqrt(x * x + y * y + z * z);
   if c.CalcephActive then begin
     Result:=CalcephSat(jde,4,n,xt,yt,zt);
@@ -2156,7 +2159,7 @@ begin
   end
   else
       cfgsc.FindDesc2000 := '';
-  cfgsc.TrackType := 1;
+  cfgsc.TrackType := TTplanet;
   cfgsc.TrackObj := CurrentPlanet;
   cfgsc.TrackName := trim(pla[CurrentPlanet]);
   if (currentplanet < 10) then
@@ -2270,7 +2273,7 @@ begin
     djd(jdt + (cfgsc.TimeZone - cfgsc.DT_UT) / 24, yy, mm, dd, hh);
     shh := ARmtoStr(rmod(hh, 24));
     date := Date2Str(yy, mm, dd) + blank + shh;
-    cfgsc.TrackType := 1;
+    cfgsc.TrackType := TTplanet;
     cfgsc.TrackObj := CurrentPlanet;
     cfgsc.TrackName := rsEarthShadow;
     nom := cfgsc.Trackname;
@@ -2856,11 +2859,127 @@ begin
   end;
 end;
 
+function TPlanet.Body(jdt: double; target: integer; var ra, de, dist, r: double): boolean;
+var pv: TDoubleArray;
+    xs, ys, zs, x, y, z, lt, jdlt,qr: double;
+begin
+  Barycenter(jdt, xs, ys, zs);
+  if CalcephComputeBody(jdt, target, 0, pv) then begin
+     r:=pv[0]*pv[0]+pv[1]*pv[1]+pv[2]*pv[2];
+     x := xs + pv[0];
+     y := ys + pv[1];
+     z := zs + pv[2];
+     dist := sqrt(x*x+y*y+z*z);
+     lt := dist * km_au / clight;
+     jdlt := jdt-(lt/secday);
+     if CalcephComputeBody(jdlt, target, 0, pv) then begin
+       x := xs + pv[0];
+       y := ys + pv[1];
+       z := zs + pv[2];
+       dist := sqrt(x*x+y*y+z*z);
+     end;
+     ra := arctan2(y, x);
+     if (ra < 0) then
+       ra := ra + 2 * pi;
+     qr := sqrt(x*x + y*y);
+     if qr <> 0 then
+       de := arctan(z / qr)
+     else
+       de := 0;
+     result:=true;
+
+  end
+  else
+    result:=false;
+end;
+
+
+procedure TPlanet.ComputeBodies(cfgsc: Tconf_skychart);
+  var
+    ra, de, dist, r, jdt, jdlt, st0, q, qr: double;
+    j, i, SimNb, target: integer;
+    pv: TDoubleArray;
+    xs, ys, zs, x, y, z, lt: double;
+begin
+  try
+    while lockdb do
+    begin
+      sleep(10);
+      application.ProcessMessages;
+    end;
+    lockdb := True;
+      if cfgsc.SimObject[12] then
+        SimNb := min(cfgsc.Simnb, MaxAstSim)
+      else
+        SimNb := 1;
+      if SimNb > Length(cfgsc.BodiesLst) then
+      begin
+        SetLength(cfgsc.BodiesLst, SimNb);
+        SetLength(cfgsc.BodiesName, SimNb);
+      end;
+      for j := 0 to SimNb - 1 do
+      begin
+        jdt := cfgsc.CurJDTT + j * cfgsc.SimD + j * cfgsc.SimH / 24 + j * cfgsc.SimM / 60 /
+          24 + j * cfgsc.SimS / 3600 / 24;
+        st0 := Rmod(cfgsc.CurST + 1.00273790935 *
+          (j * cfgsc.SimD * 24 + j * cfgsc.SimH + j * cfgsc.SimM / 60 + j * cfgsc.SimS / 3600) * 15 * deg2rad, pi2);
+        Barycenter(jdt, xs, ys, zs);
+        cfgsc.BodiesNb := Length(cfgsc.SPKBodies);
+        for i := 0 to cfgsc.BodiesNb - 1 do
+        begin
+         target := cfgsc.SPKBodies[i];
+         cfgsc.BodiesName[j, i + 1, 2] := cfgsc.SPKNames[i];
+         cfgsc.BodiesLst[j, i + 1, 5] := -1;
+         if CalcephComputeBody(jdt, target, 0, pv) then begin
+           x := xs + pv[0];
+           y := ys + pv[1];
+           z := zs + pv[2];
+           dist := sqrt(x*x+y*y+z*z);
+           lt := dist * km_au / clight;
+           jdlt := jdt-(lt/secday);
+           if CalcephComputeBody(jdlt, target, 0, pv) then begin
+             r:=sqrt(pv[0]*pv[0]+pv[1]*pv[1]+pv[2]*pv[2]);
+             x := xs + pv[0];
+             y := ys + pv[1];
+             z := zs + pv[2];
+             dist := sqrt(x*x+y*y+z*z);
+           end;
+           ra := arctan2(y, x);
+           if (ra < 0) then
+             ra := ra + 2 * pi;
+           qr := sqrt(x*x + y*y);
+           if qr <> 0 then
+             de := arctan(z / qr)
+           else
+             de := 0;
+           cfgsc.BodiesLst[j, i + 1, 6] := ra;
+           cfgsc.BodiesLst[j, i + 1, 7] := de;
+           precession(jd2000, cfgsc.jdchart, ra, de);
+           if cfgsc.PlanetParalaxe then
+              Paralaxe(st0, dist, ra, de, ra, de, q, cfgsc);
+            if cfgsc.ApparentPos then
+              apparent_equatorial(ra, de, cfgsc, True, False);
+            cfgsc.BodiesName[j, i + 1, 1] := inttostr(target);
+            cfgsc.BodiesLst[j, i + 1, 1] := ra;
+            cfgsc.BodiesLst[j, i + 1, 2] := de;
+            cfgsc.BodiesLst[j, i + 1, 3] := r;
+            cfgsc.BodiesLst[j, i + 1, 4] := jdt;
+            cfgsc.BodiesLst[j, i + 1, 5] := dist;
+         end
+         else
+           cfgsc.msg := cu_calceph.LastError;
+        end;
+      end;
+  finally
+    lockdb := False;
+  end;
+end;
+
 procedure TPlanet.ComputeAsteroid(cfgsc: Tconf_skychart);
 var
   ra, Dec, dist, r, elong, phase, magn, jdt, st0, q: double;
   epoch, h, g, ma, ap, an, ic, ec, sa, eq, d, da, xc, yc, zc: double;
-  qry, id, ref, nam, elem_id: string;
+  qry, ref, nam: string;
   j, i, SimNb, idx: integer;
 begin
   try
@@ -2931,13 +3050,11 @@ begin
           (j * cfgsc.SimD * 24 + j * cfgsc.SimH + j * cfgsc.SimM / 60 + j * cfgsc.SimS / 3600) * 15 * deg2rad, pi2);
         for i := 0 to db2.Rowcount - 1 do
         begin
-         id := db2.Results[i][0];
-         idx := strtoint(trim(db2.Results[i][2]));
+         idx := strtoint(strim(db2.Results[i][2]));
          if (cfgsc.SimAsteroid<0)or(cfgsc.SimAsteroid=idx) then begin
           epoch := strtofloat(strim(db2.Results[i][1]));
           if (idx>=0)and(idx<cdb.NumAsteroidElement) then
           begin
-            id := cdb.AsteroidElement[idx].id;
             cdb.GetAstElem(idx,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam);
             InitAsteroid(epoch, h, g, ma, ap, an, ic, ec, sa, eq, nam);
             Asteroid(jdt, True, ra, Dec, dist, r, elong, phase, magn, xc, yc, zc);
@@ -3113,13 +3230,13 @@ begin
 
   id := '';
 
-  for i:=0 to cdb.NumAsteroidElement-1 do begin
+{  for i:=0 to cdb.NumAsteroidElement-1 do begin
     if uppercase(StringReplace(cdb.AsteroidElement[i].name,' ','',[rfReplaceAll]))=s1 then begin
       idx:=i;
       id:=cdb.AsteroidElement[i].id;
       break;
     end;
-  end;
+  end;}
 
   if id = '' then
   begin
@@ -3245,6 +3362,157 @@ begin
     Result := False;
 end;
 
+function TPlanet.FindBody(x1, y1, x2, y2: double; nextobj: boolean;cfgsc: Tconf_skychart; var nom, mag, date, desc: string; trunc: boolean = True): boolean;
+var
+  yy, mm, dd: integer;
+  tar, tde: double;
+  dist, r: double;
+  target: string;
+  jdt, hh, jd0, st0, ar, de, q: double;
+  sar, sde, shh, sdp, sdist, sdpkm, sdistkm: string;
+const
+  d1 = '0.0';
+  d2 = '0.00';
+begin
+  if not nextobj then
+  begin
+    CurrentBodyStep := 0;
+    CurrentBody := 0;
+  end;
+  Result := False;
+  desc := '';
+  tar := 1;
+  tde := 1;
+  if cfgsc.ShowBodiesValid and (cfgsc.BodiesNb > 0) then
+    repeat
+      Inc(CurrentBody);
+      if CurrentBody > cfgsc.BodiesNb then
+      begin
+        Inc(CurrentBodyStep);
+        if (not cfgsc.SimObject[12]) or nextobj or (CurrentBodyStep >= cfgsc.SimNb) then
+          break
+        else
+        begin
+          CurrentBody := 0;
+          continue;
+        end;
+      end;
+      if cfgsc.BodiesLst[CurrentBodyStep, CurrentBody, 5]<0 then continue;
+      tar := NormRa(cfgsc.BodiesLst[CurrentBodyStep, CurrentBody, 1]);
+      tde := cfgsc.BodiesLst[CurrentBodyStep, CurrentBody, 2];
+      // search if at the position
+      if trunc then
+      begin
+        if (tar < x1) or (tar > x2) or (tde < y1) or (tde > y2) then
+        begin
+          // no
+          Result := False;
+        end
+        else
+          Result := True;
+      end
+      else
+        Result := True;
+    until Result;
+  cfgsc.FindOK := Result;
+  if Result then
+  begin
+    cfgsc.FindSize := 0;
+    cfgsc.FindRA := tar;
+    cfgsc.FindDec := tde;
+    cfgsc.FindPM := False;
+    cfgsc.FindType := ftBody;
+    cfgsc.TrackRA := cfgsc.FindRA;
+    cfgsc.TrackDec := cfgsc.FindDec;
+    cfgsc.TrackEpoch := cfgsc.JDChart;
+    sar := ARpToStr(rad2deg * tar / 15);
+    sde := DEpToStr(rad2deg * tde);
+    jdt := cfgsc.BodiesLst[CurrentBodyStep, CurrentBody, 4];
+    cfgsc.FindSimjd := jdt;
+    djd(jdt + (cfgsc.TimeZone - cfgsc.DT_UT) / 24, yy, mm, dd, hh);
+    shh := ARtoStr3(rmod(hh, 24));
+    date := Date2Str(yy, mm, dd) + blank + shh;
+    cfgsc.FindRA2000 := cfgsc.BodiesLst[CurrentBodyStep, CurrentBody, 6];
+    cfgsc.FindDec2000 := cfgsc.BodiesLst[CurrentBodyStep, CurrentBody, 7];
+    cfgsc.FindDist := cfgsc.BodiesLst[CurrentBodyStep, CurrentBody, 5];
+    if ServerCoordSystem=csJ2000 then begin
+       jd0 := jd(yy, mm, dd, 0);
+       st0 := SidTim(jd0, hh - cfgsc.TimeZone, cfgsc.ObsLongitude);
+       ar := cfgsc.FindRA2000;
+       de := cfgsc.FindDec2000;
+       if cfgsc.PlanetParalaxe then
+          Paralaxe(st0, cfgsc.FindDist, ar, de, ar, de, q, cfgsc);
+       cfgsc.FindDesc2000 := ARpToStr(rmod(24+rad2deg * ar / 15,24)) + tab + DEpToStr(rad2deg * de);
+    end
+    else
+       cfgsc.FindDesc2000 := '';
+    target := cfgsc.BodiesName[CurrentBodyStep, CurrentBody,1];
+    nom := cfgsc.BodiesName[CurrentBodyStep, CurrentBody,2];
+    r := cfgsc.BodiesLst[CurrentBodyStep, CurrentBody, 3];
+    dist := cfgsc.BodiesLst[CurrentBodyStep, CurrentBody, 5];
+    str(r: 7: 4, sdp);
+    str(dist: 7: 4, sdist);
+    str(r*km_au: 7: 0, sdpkm);
+    str(dist*km_au: 7: 0, sdistkm);
+    Desc := sar + tab + sde + tab + ' Spk' + tab + nom + tab + 'SPK id:'+ target + tab +
+            'dist:' + sdist + ' au' + tab + 'dist:' + sdistkm + ' km' + tab + 'rsol:' +
+             sdp + ' au' + tab + 'rsol:' + sdpkm + ' km' + tab + 'date:' + date;
+    cfgsc.TrackType := TTbody;
+    cfgsc.TrackId := target;
+    cfgsc.TrackName := nom;
+    cfgsc.FindId := target;
+  end;
+  cfgsc.FindName := nom;
+  cfgsc.FindDesc := Desc;
+  cfgsc.FindDesc2 := '';
+  cfgsc.FindNote := '';
+end;
+
+function TPlanet.FindBodyName(bname: string; var ra, de, mag: double;cfgsc: Tconf_skychart; upddb: boolean; MeanPos: boolean = False): boolean;
+var
+  dist, r: double;
+  id: string;
+  i, idx: integer;
+  s1: string;
+begin
+  Result := False;
+  searchid := '';
+
+  if (not cfgsc.ShowBodiesValid) or (cfgsc.BodiesNb = 0) then
+    exit;
+
+  s1 := UpperCase(StringReplace(bname,' ','',[rfReplaceAll]));
+  if s1 = '' then
+    exit;
+
+  id := '';
+
+  for i:=1 to cfgsc.BodiesNb do begin
+    if uppercase(StringReplace(cfgsc.BodiesName[0, i, 2],' ','',[rfReplaceAll]))=s1 then begin
+      idx:=i;
+      id:=cfgsc.BodiesName[0, i, 1];
+      break;
+    end;
+  end;
+
+  if id = '' then
+    exit;
+
+  ra := cfgsc.BodiesLst[0, idx, 6];
+  de := cfgsc.BodiesLst[0, idx, 7];
+  r := cfgsc.BodiesLst[0, idx, 3];
+  dist := cfgsc.BodiesLst[0, idx, 5];
+  mag:=0;
+  Result := True;
+
+  if MeanPos then
+    exit;
+
+  if cfgsc.PlanetParalaxe then
+    Paralaxe(cfgsc.CurST, dist, ra, de, ra, de, r, cfgsc);
+
+ end;
+
 function TPlanet.FindAsteroid(x1, y1, x2, y2: double; nextobj: boolean;
   cfgsc: Tconf_skychart; var nom, mag, date, desc: string; trunc: boolean = True): boolean;
 var
@@ -3350,7 +3618,7 @@ begin
     Desc := Desc + '/' + Date2Str(yy, mm, dd) + tab; // ephemeris date
     if abs(cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 5] - cfgsc.CurJDUT) > 365 then
       desc := desc + rsWarningSomeA + tab;
-    cfgsc.TrackType := 3;
+    cfgsc.TrackType := TTasteroid;
     cfgsc.TrackId := cfgsc.AsteroidName[CurrentAstStep, CurrentAsteroid, 1];
     cfgsc.TrackElemEpoch := cfgsc.AsteroidLst[CurrentAstStep, CurrentAsteroid, 5];
     cfgsc.TrackName := nom;
@@ -3473,7 +3741,7 @@ begin
     Desc := Desc + '/' + Date2Str(yy, mm, dd) + tab;
     if abs(cfgsc.CometLst[CurrentComStep, CurrentComet, 8] - cfgsc.CurJDUT) > 180 then
       desc := desc + rsWarningSomeC + tab;
-    cfgsc.TrackType := 2;
+    cfgsc.TrackType := TTcomet;
     cfgsc.TrackId := cfgsc.CometName[CurrentComStep, CurrentComet, 1];
     cfgsc.TrackElemEpoch := cfgsc.CometLst[CurrentComStep, CurrentComet, 8];
     cfgsc.TrackName := nom;

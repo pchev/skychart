@@ -154,6 +154,7 @@ function ShowModalForm(f: TForm; SetFocus: boolean = False): TModalResult;
 function prepare_IAU_designation(rax,decx :double):string;
 function TruncDecimal(val: Extended; decimal: byte): Extended;
 procedure Wait(wt:single=5);
+function CleanName(fn:string):string;
 
 {$ifdef unix}
 function ExecFork(cmd: string; p1: string = ''; p2: string = ''; p3: string = '';
@@ -3845,6 +3846,25 @@ begin
     Sleep(100);
     if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
   end;
+end;
+
+function CleanName(fn:string):string;
+begin
+  result:=fn;
+  result:=StringReplace(result,'/','',[rfReplaceAll]);
+  result:=StringReplace(result,'\','',[rfReplaceAll]);
+  result:=StringReplace(result,':','',[rfReplaceAll]);
+  result:=StringReplace(result,'.','',[rfReplaceAll]);
+  result:=StringReplace(result,';','',[rfReplaceAll]);
+  result:=StringReplace(result,',','',[rfReplaceAll]);
+  result:=StringReplace(result,'=','',[rfReplaceAll]);
+  result:=StringReplace(result,'''','',[rfReplaceAll]);
+  result:=StringReplace(result,'"','',[rfReplaceAll]);
+  result:=StringReplace(result,'$','',[rfReplaceAll]);
+  result:=StringReplace(result,'*','',[rfReplaceAll]);
+  result:=StringReplace(result,'@','',[rfReplaceAll]);
+  result:=StringReplace(result,'>','',[rfReplaceAll]);
+  result:=StringReplace(result,'<','',[rfReplaceAll]);
 end;
 
 end.

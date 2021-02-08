@@ -2281,7 +2281,7 @@ begin
             else
             begin
               csconfig.TrackOn := True;     // set tracking to the Sun
-              csconfig.TrackType := 1;
+              csconfig.TrackType := TTplanet;
               csconfig.TrackObj := 10;
               csconfig.PlanetParalaxe := True;
               csconfig.ShowPlanet := True;
@@ -2308,7 +2308,7 @@ begin
           else if Sender = lunargrid then
           begin
             csconfig.TrackOn := True;         // Lunar eclipse
-            csconfig.TrackType := 1;          // set tracking to the Moon
+            csconfig.TrackType := TTplanet;          // set tracking to the Moon
             csconfig.TrackObj := 11;
             csconfig.PlanetParalaxe := True;
             csconfig.ShowPlanet := True;
@@ -2347,7 +2347,7 @@ begin
             else
             begin
               csconfig.TrackOn := True;
-              csconfig.TrackType := 4;
+              csconfig.TrackType := TTaltaz;
             end;
             if assigned(Fupdchart) then
             begin

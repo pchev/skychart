@@ -1550,6 +1550,13 @@ resourcestring
   rsAmplitudeMax = 'Amplitude max.';
   rsQualityFlag = 'Quality flag';
   rsTotalAsteroi = 'Total asteroid count';
+  rsSolarSystemB = 'Solar system body';
+  rsAMaximumOfFi = 'A maximum of %s files can be selected';
+  rsEmail = 'email';
+  rsSPICEEphemer = 'SPICE ephemeris';
+  rsDownloadSola = 'Download Solar System object SPICE kernel from JPL Horizon';
+  rsStartDate = 'Start date';
+  rsNumberOfDays = 'Number of days';
 
 // also update upsi_translation
 

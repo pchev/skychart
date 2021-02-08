@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses gcatunit,
-  cu_tz, dynlibs, BGRABitmap,
+  cu_tz, dynlibs, BGRABitmap, calceph,
   Classes, SysUtils, Controls, FPCanvas, Graphics;
 
 const
@@ -372,6 +372,14 @@ const
     (801 ,802 ,803 ,804 ,805 ,806 ,807 ,808 ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ),
     (901 ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ));
 
+  TTNone = 0;
+  TTplanet = 1;
+  TTcomet = 2;
+  TTasteroid = 3;
+  TTaltaz = 4;
+  TTimage = 5;
+  TTequat = 6;
+  TTbody = 7;
 
   CentralPlanet: array[1..36] of
     integer = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 4, 4, 6, 3, 6, 8, 8, 9);
@@ -444,6 +452,7 @@ const
   ftPla = 100;
   ftCom = 101;
   ftAst = 102;
+  ftBody = 103;
   BaseStar = 1000;
   MaxStarCatalog = 19;
   DefStar = 1001;
@@ -553,6 +562,11 @@ const
   baseurl_us = 'https://www.ap-i.net/pub/skychart/gn/stategaz/';
   baseurl_world = 'https://www.ap-i.net/pub/skychart/gn/cntyfile/';
   location_url = 'https://ap-i.net/geoip/iploc.php';
+
+  // Horizon Telnet
+  Horizon_Telnet_Host = 'ssd.jpl.nasa.gov';
+  Horizon_Telnet_Port = '6775';
+  Horizon_Help = 'https://ssd.jpl.nasa.gov/?horizons_doc#intro';
 
   //Default URL
   URL_WebHome = 'https://www.ap-i.net/skychart';
@@ -840,6 +854,8 @@ type
   Tasteroidlst = array of array[1..MaxAsteroid, 1..7] of double;
   // ra, dec, magn, jd, epoch, ra2000, dec2000
   TasteroidName = array of array[1..MaxAsteroid, 1..2] of string[27]; // id, name
+  TBodieslst = array of array[1..MaxAsteroid, 1..7] of double;
+  TBodiesName = array of array[1..MaxAsteroid, 1..2] of string[27]; // id, name
   double6 = array[1..6] of double;
   Pdouble6 = ^double6;
   doublearray = array of double;
@@ -1096,7 +1112,7 @@ type
     ArchiveDirActive: array[1..MaxArchiveDir] of boolean;
     HorizonRise: boolean;
     // working variable
-    ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid,
+    ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid, ShowBodiesValid,
     CalcephActive, SpiceActive, SmallSatActive, ShowEarthShadowValid, ShowEclipticValid, PlotImageFirst: boolean;
     HorizonMax, HorizonMin, rap2000, dep2000, RefractionOffset, ObsRAU, ObsZAU, Diurab: double;
     racentre2000,decentre2000: double;
@@ -1127,11 +1143,15 @@ type
     BGitt: Titt;
     BGmin_sigma, BGmax_sigma, NEBmin_sigma, NEBmax_sigma: double;
     PlanetLst: Tplanetlst;
-    AsteroidNb, CometNb, AsteroidLstSize, CometLstSize, NumCircle: integer;
+    AsteroidNb, CometNb, BodiesNb, AsteroidLstSize, CometLstSize, NumCircle: integer;
     AsteroidLst: Tasteroidlst;
     CometLst: Tcometlst;
     AsteroidName: TasteroidName;
     CometName: Tcometname;
+    SPKBodies: TTargetArray;
+    SPKNames: TBodyNameArray;
+    BodiesLst: TBodieslst;
+    BodiesName: TBodiesName;
     horizonlist: Thorizonlist;
     horizonpicture, horizonpicturedark: TBGRABitmap;
     HorizonFile, HorizonPictureFile: string;
@@ -1156,6 +1176,7 @@ type
     CircleLabel, RectangleLabel, marknumlabel: boolean;
     msg: string;
     CometMark, AsteroidMark: TStringList;
+    SPKlist: TStringList;
     // Calendar
     CalGraphHeight: integer;
     // Planisphere
@@ -1273,6 +1294,8 @@ type
     ObslistAirmassLimit1, ObslistAirmassLimit2, ObslistHourAngleLimit1,
     ObslistHourAngleLimit2: boolean;
     tlelst: string;
+    HorizonEmail:string;
+    HorizonNumDay: integer;
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_main);
@@ -1449,7 +1472,7 @@ var
   ConfigAppdir, ConfigPrivateDir, Appdir, PrivateDir, SampleDir,
   SatDir, SatArchiveDir, ArchiveDir, TempDir, ZoneDir, HomeDir, VODir,
   ScriptDir, PrivateScriptDir: string;
-  VarObs, CdC, MPCDir, DBDir, PictureDir: string;
+  VarObs, CdC, MPCDir, DBDir, PictureDir, SPKdir: string;
   ForceConfig, ForceUserDir, Configfile, Lang: string;
   compile_time, compile_version, compile_system, compile_cpu, lclver, cpydate: string;
   ldeg, lmin, lsec: string;
@@ -2178,12 +2201,14 @@ begin
   FooterHeight := 0;
   CometMark := TStringList.Create;
   AsteroidMark := TStringList.Create;
+  SPKlist:=TStringList.Create;
 end;
 
 destructor Tconf_skychart.Destroy;
 begin
   CometMark.Free;
   AsteroidMark.Free;
+  SPKlist.Free;
   SetLength(circle, 0);
   SetLength(circleok, 0);
   SetLength(circlelbl, 0);
@@ -2194,6 +2219,10 @@ begin
   SetLength(CometLst, 0);
   SetLength(AsteroidName, 0);
   SetLength(CometName, 0);
+  SetLength(SPKBodies,0);
+  SetLength(SPKNames,0);
+  SetLength(BodiesLst,0);
+  SetLength(BodiesName,0);
   tz.Free;
   horizonpicture.Free;
   horizonpicturedark.Free;
@@ -2614,6 +2643,21 @@ begin
   for i := 0 to Source.AsteroidMark.Count - 1 do
     AsteroidMark.Add(Source.AsteroidMark.Strings[i]);
   marknumlabel := Source.marknumlabel;
+  SPKlist.Clear;
+  for i := 0 to Source.SPKlist.Count - 1 do
+    SPKlist.Add(Source.SPKlist.Strings[i]);
+  SetLength(SPKBodies,length(Source.SPKBodies));
+  for i:=0 to length(Source.SPKBodies)-1 do
+     SPKBodies[i]:=Source.SPKBodies[i];
+  SetLength(SPKNames,length(Source.SPKNames));
+  for i:=0 to length(Source.SPKNames)-1 do
+     SPKNames[i]:=Source.SPKNames[i];
+  SetLength(BodiesLst,length(Source.BodiesLst));
+  for i:=0 to length(Source.BodiesLst)-1 do
+     BodiesLst[i]:=Source.BodiesLst[i];
+  SetLength(BodiesName,length(Source.BodiesName));
+  for i:=0 to length(Source.BodiesName)-1 do
+     BodiesName[i]:=Source.BodiesName[i];
   for i := 0 to Source.NumCircle do
     for j := 1 to 2 do
       CircleLst[i, j] := Source.CircleLst[i, j];
@@ -2963,6 +3007,8 @@ begin
   ConfirmDownload := Source.ConfirmDownload;
   starshape_file := Source.starshape_file;
   tlelst := Source.tlelst;
+  HorizonEmail:=Source.HorizonEmail;
+  HorizonNumDay:=Source.HorizonNumDay;
   CometUrlList.Clear;
   for i := 0 to Source.CometUrlList.Count - 1 do
     CometUrlList.Add(Source.CometUrlList.Strings[i]);
