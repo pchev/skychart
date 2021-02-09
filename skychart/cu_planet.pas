@@ -119,6 +119,7 @@ type
     procedure MoonOrientation(jde, ra, Dec, d: double; var P, llat, lats, llong: double);
     function Body(jdt: double; target: integer; var ra, de, dist, r: double): boolean;
     procedure ComputeBodies(cfgsc: Tconf_skychart);
+    procedure FindBodyIndex(bname: string; cfgsc: Tconf_skychart; out idx:integer);
     function FindBody(x1, y1, x2, y2: double; nextobj: boolean;cfgsc: Tconf_skychart; var nom, mag, date, desc: string; trunc: boolean = True): boolean;
     function FindBodyName(bname: string; var ra, de, mag: double;cfgsc: Tconf_skychart; upddb: boolean; MeanPos: boolean = False): boolean;
     procedure ComputeAsteroid(cfgsc: Tconf_skychart);
@@ -135,13 +136,14 @@ type
     function NewAstDay(newjd, limitmag: double; cfgsc: Tconf_skychart): boolean;
     function FindAsteroid(x1, y1, x2, y2: double; nextobj: boolean;
       cfgsc: Tconf_skychart; var nom, mag, date, desc: string; trunc: boolean = True): boolean;
-    function FindAsteroidName(astname: string; var ra, de, mag: double;
-      cfgsc: Tconf_skychart; upddb: boolean; MeanPos: boolean = False): boolean;
+    procedure FindAsteroidIndex(astname: string; out idx:integer);
+    function FindAsteroidName(astname: string; var ra, de, mag: double; cfgsc: Tconf_skychart; upddb: boolean; MeanPos: boolean = False): boolean;
     function PrepareAsteroid(jd1, jd2, step: double; msg: TStrings): boolean;
     function NewComDay(newjd, limitmag: double; cfgsc: Tconf_skychart): boolean;
     procedure NewComDayCallback(Sender: TObject; Row: TResultRow);
     function FindComet(x1, y1, x2, y2: double; nextobj: boolean;
       cfgsc: Tconf_skychart; var nom, mag, date, desc: string; trunc: boolean = True): boolean;
+    procedure FindCometId(comname: string; out id: string);
     function FindCometName(comname: string; var ra, de, mag: double;
       cfgsc: Tconf_skychart; upddb: boolean; MeanPos: boolean = False): boolean;
     procedure PlanetRiseSet(pla: integer; jd0: double; AzNorth: boolean;
@@ -3208,23 +3210,12 @@ begin
   end;
 end;
 
-function TPlanet.FindAsteroidName(astname: string; var ra, de, mag: double;
-  cfgsc: Tconf_skychart; upddb: boolean; MeanPos: boolean = False): boolean;
-var
-  dist, r, elong, phase, rad, ded: double;
-  epoch, h, g, ma, ap, an, ic, ec, sa, eq, xc, yc, zc: double;
-  qry, id, ref, nam: string;
-  i, idx, ira, idec, imag: integer;
-
-  s1: string;
+procedure TPlanet.FindAsteroidIndex(astname: string; out idx:integer);
+var i: integer;
+   s1: string;
 begin
-  Result := False;
-  searchid := '';
-
-  if (cdb.NumAsteroidElement=0) or (not cfgsc.ephvalid) then
-    exit;
-
-  // load search name cache
+  idx:=-1;
+  // load search name cache on first search
   if cdb.NumAsteroidSearchNames<>cdb.NumAsteroidElement then
     cdb.LoadAsteroidSearchNames;
 
@@ -3234,17 +3225,31 @@ begin
     exit;
 
   // search
-  id:='';
   for i:=0 to cdb.NumAsteroidElement-1 do begin
     if pos(s1,cdb.AsteroidSearchNames[i].searchname)>0 then begin
       idx:=cdb.AsteroidSearchNames[i].elementidx;
-      id:=cdb.AsteroidElement[i].id;
       break;
     end;
   end;
+end;
+
+function TPlanet.FindAsteroidName(astname: string; var ra, de, mag: double; cfgsc: Tconf_skychart; upddb: boolean; MeanPos: boolean = False): boolean;
+var
+  dist, r, elong, phase, rad, ded: double;
+  epoch, h, g, ma, ap, an, ic, ec, sa, eq, xc, yc, zc: double;
+  qry, id, ref, nam: string;
+  i, idx, ira, idec, imag: integer;
+begin
+  Result := False;
+  searchid := '';
+
+  if (cdb.NumAsteroidElement=0) or (not cfgsc.ephvalid) then
+    exit;
+
+  FindAsteroidIndex(astname,idx);
 
   // not found
-  if id = '' then
+  if idx < 0 then
     exit;
 
   // compute position
@@ -3275,6 +3280,23 @@ begin
     db1.flush('tables');
     searchid := id;
   end;
+end;
+
+procedure TPlanet.FindCometId(comname: string; out id: string);
+var s1,qry: string;
+begin
+  id:='';
+  if (not db1.Active) then
+    exit;
+
+  s1 := UpperCase(StringReplace(comname,' ','',[rfReplaceAll]));
+  if s1 = '' then
+    exit;
+
+  qry := 'SELECT id FROM cdc_com_name' + ' where UPPER(REPLACE(name,'' '','''')) = "' + s1 + '"';
+  db1.Query(qry);
+  if db1.Rowcount > 0 then
+    id := db1.Results[0][0];
 end;
 
 function TPlanet.FindCometName(comname: string; var ra, de, mag: double;
@@ -3459,15 +3481,10 @@ begin
   cfgsc.FindNote := '';
 end;
 
-function TPlanet.FindBodyName(bname: string; var ra, de, mag: double;cfgsc: Tconf_skychart; upddb: boolean; MeanPos: boolean = False): boolean;
-var
-  dist, r: double;
-  id: string;
-  i, idx: integer;
-  s1: string;
+procedure TPlanet.FindBodyIndex(bname: string; cfgsc: Tconf_skychart; out idx:integer);
+var s1: string;
+    i: integer;
 begin
-  Result := False;
-  searchid := '';
 
   if (not cfgsc.ShowBodiesValid) or (cfgsc.BodiesNb = 0) then
     exit;
@@ -3476,17 +3493,29 @@ begin
   if s1 = '' then
     exit;
 
-  id := '';
-
   for i:=1 to cfgsc.BodiesNb do begin
     if uppercase(StringReplace(cfgsc.BodiesName[0, i, 2],' ','',[rfReplaceAll]))=s1 then begin
       idx:=i;
-      id:=cfgsc.BodiesName[0, i, 1];
       break;
     end;
   end;
 
-  if id = '' then
+end;
+
+function TPlanet.FindBodyName(bname: string; var ra, de, mag: double;cfgsc: Tconf_skychart; upddb: boolean; MeanPos: boolean = False): boolean;
+var
+  dist, r: double;
+  idx: integer;
+begin
+  Result := False;
+  searchid := '';
+
+  if (not cfgsc.ShowBodiesValid) or (cfgsc.BodiesNb = 0) then
+    exit;
+
+  FindBodyIndex(bname,cfgsc, idx);
+
+  if idx < 0 then
     exit;
 
   ra := cfgsc.BodiesLst[0, idx, 6];

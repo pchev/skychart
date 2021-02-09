@@ -1271,7 +1271,6 @@ begin
   try
     h := AsteroidElement[idx].h;
     g := AsteroidElement[idx].g;
-    epoch := AsteroidElement[idx].epoch;
     ma := AsteroidElement[idx].mean_anomaly;
     ap := AsteroidElement[idx].arg_perihelion;
     an := AsteroidElement[idx].asc_node;
@@ -1280,7 +1279,7 @@ begin
     sa := AsteroidElement[idx].semi_axis;
     nam := AsteroidElement[idx].name;
     eq := AsteroidElement[idx].equinox;
-    epoch:=AsteroidElement[idx].epoch;
+    epoch := AsteroidElement[idx].epoch;
     ref:=AsteroidElement[idx].ref;
     Result := True;
   except
