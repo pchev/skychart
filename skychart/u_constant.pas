@@ -947,6 +947,11 @@ type
     magnitude: int16;
   end;
   TAsteroidMagnitudes = array of array of TAsteroidMagnitude;
+  TAsteroidSearchName = record
+    elementidx: integer;
+    searchname: String;
+  end;
+  TAsteroidSearchNames = array of TAsteroidSearchName;
 
 
   Tconf_catalog = class(TObject)    // catalog setting

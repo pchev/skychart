@@ -50,6 +50,8 @@ type
     AsteroidMagnitudesJD: TAsteroidMagnitudesJD;
     NumAsteroidMagnitude: integer;
     AsteroidMagnitudes: TAsteroidMagnitudes;
+    NumAsteroidSearchNames: integer;
+    AsteroidSearchNames: TAsteroidSearchNames;
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     function createDB(cmain: Tconf_main; var ok: boolean): string;
@@ -90,6 +92,7 @@ type
     procedure SaveAsteroid;
     procedure SaveAsteroidMagnitude;
     procedure OpenAsteroidMagnitude;
+    procedure LoadAsteroidSearchNames;
     function AddAsteroid(astid, asth, astg, astep, astma, astperi, astnode,
       asti, astec, astax, astref, astnam, asteq: string): string;
     procedure TruncateDailyComet;
@@ -916,6 +919,8 @@ begin
     closefile(f);
     FNumAsteroidElement:=nl;
     SetLength(FAsteroidElement,FNumAsteroidElement);
+    SetLength(AsteroidSearchNames,0);
+    NumAsteroidSearchNames:=0;
     memoast.Lines.add(Format(rsProcessingEn2, [IntToStr(nl)]));
     if rerr > 0 then
       memoast.Lines.add(Format(rsNumberOfIgno, [IntToStr(rerr)]));
@@ -975,6 +980,19 @@ begin
     FNumAsteroidElement:=0;
     SetLength(FAsteroidElement,0);
   end;
+  SetLength(AsteroidSearchNames,0);
+  NumAsteroidSearchNames:=0;
+end;
+
+procedure TCDCdb.LoadAsteroidSearchNames;
+var i: integer;
+begin
+  SetLength(AsteroidSearchNames,FNumAsteroidElement);
+  for i:=0 to FNumAsteroidElement-1 do begin
+     AsteroidSearchNames[i].elementidx:=i;
+     AsteroidSearchNames[i].searchname:=UpperCase(StringReplace(FAsteroidElement[i].name,' ','',[rfReplaceAll]));
+  end;
+  NumAsteroidSearchNames:=FNumAsteroidElement;
 end;
 
 procedure TCDCdb.SaveAsteroidMagnitude;

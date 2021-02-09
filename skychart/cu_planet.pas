@@ -3224,46 +3224,41 @@ begin
   if (cdb.NumAsteroidElement=0) or (not cfgsc.ephvalid) then
     exit;
 
+  // load search name cache
+  if cdb.NumAsteroidSearchNames<>cdb.NumAsteroidElement then
+    cdb.LoadAsteroidSearchNames;
+
+  // case insensitive and without blank space
   s1 := UpperCase(StringReplace(astname,' ','',[rfReplaceAll]));
   if s1 = '' then
     exit;
 
-  id := '';
-
-{  for i:=0 to cdb.NumAsteroidElement-1 do begin
-    if uppercase(StringReplace(cdb.AsteroidElement[i].name,' ','',[rfReplaceAll]))=s1 then begin
-      idx:=i;
+  // search
+  id:='';
+  for i:=0 to cdb.NumAsteroidElement-1 do begin
+    if pos(s1,cdb.AsteroidSearchNames[i].searchname)>0 then begin
+      idx:=cdb.AsteroidSearchNames[i].elementidx;
       id:=cdb.AsteroidElement[i].id;
       break;
     end;
-  end;}
-
-  if id = '' then
-  begin
-    for i:=0 to cdb.NumAsteroidElement-1 do begin
-      if pos(s1,uppercase(StringReplace(cdb.AsteroidElement[i].name,' ','',[rfReplaceAll])))>0 then begin
-        idx:=i;
-        id:=cdb.AsteroidElement[i].id;
-        break;
-      end;
-    end;
   end;
 
+  // not found
   if id = '' then
     exit;
 
+  // compute position
   id := cdb.AsteroidElement[idx].id;
   cdb.GetAstElem(idx,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam);
   InitAsteroid(epoch, h, g, ma, ap, an, ic, ec, sa, eq, nam);
   Asteroid(cfgsc.CurJDTT, True, ra, de, dist, r, elong, phase, mag, xc, yc, zc);
   Result := True;
-
   if MeanPos then
     exit;
-
   if cfgsc.PlanetParalaxe then
     Paralaxe(cfgsc.CurST, dist, ra, de, ra, de, r, cfgsc);
 
+  // store to show on the chart
   if upddb then
   begin
     rad := ra;
@@ -3272,18 +3267,14 @@ begin
     ira := round(rad * 1000);
     idec := round(ded * 1000);
     imag := round(mag * 10);
-
     qry := 'INSERT INTO ' + cfgsc.ast_daypos + ' (id,epoch,ra,de,mag,idx) VALUES ('
       + '"' + id + '"' + ',' + strim(formatfloat(f6s, epoch)) +
       ',' + IntToStr(ira) + ',' + IntToStr(
       idec) + ',' + IntToStr(imag) + ',' + IntToStr(idx) + ')';
-
     db1.Query(qry);
     db1.flush('tables');
     searchid := id;
-
   end;
-
 end;
 
 function TPlanet.FindCometName(comname: string; var ra, de, mag: double;
