@@ -1796,7 +1796,7 @@ const
     'de NUMERIC NOT NULL default "0", ' + 'width NUMERIC NOT NULL default "0", ' +
     'height NUMERIC NOT NULL default "0", ' +
     'rotation  NUMERIC NOT NULL default "0", ' +
-    'PRIMARY KEY (catalogname,ra,de))', '2'),
+    'PRIMARY KEY (catalogname,ra,de))', '1'),
     ('cdc_country', '(country TEXT NOT NULL default "",' +
     'isocode TEXT NOT NULL default "",' + 'name TEXT NOT NULL default "",' +
     'PRIMARY KEY (country))', ''),
@@ -1804,13 +1804,13 @@ const
     'location TEXT NOT NULL ,' + 'type TEXT NOT NULL ,' +
     'latitude NUMERIC NOT NULL ,' + 'longitude NUMERIC NOT NULL ,' +
     'elevation NUMERIC NOT NULL ,' + 'timezone NUMERIC NOT NULL ,' +
-    'PRIMARY KEY (locid))', '3,4'),
+    'PRIMARY KEY (locid))', '2,3'),
     ('cdc_ast_ext', ' ( name TEXT NOT NULL default "", '+
      'number NUMERIC default "0", fam TEXT NOT NULL default "",' +
     'h NUMERIC NOT NULL default "0", g NUMERIC NOT NULL default "0", ' +
     'diam NUMERIC NOT NULL default "0", period NUMERIC NOT NULL default "0", ' +
     'amin NUMERIC NOT NULL default "0", amax NUMERIC NOT NULL default "0",  u TEXT NOT NULL default "", ' +
-    'PRIMARY KEY (name))', '5')
+    'PRIMARY KEY (name))', '4')
     );
   numsqlindex = 4;
   sqlindex: array[1..numsqlindex, 1..2] of string = (
