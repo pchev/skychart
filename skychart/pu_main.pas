@@ -4425,7 +4425,7 @@ begin
           p.y:=f_search.Top;
           formpos(f_detail, p.x, p.y);
         end;
-        f_detail.Show;
+        f_detail.Hide;
         identlabelClick(nil);
       end
       else begin
@@ -11123,20 +11123,8 @@ begin
       if MultiFrame1.Childs[i].Caption = chart then
         with MultiFrame1.Childs[i].DockedObject as Tf_chart do
         begin
-          sc.cfgsc.FindCatname := trim(cat);
-          sc.cfgsc.FindCat := trim(cat);
-          sc.cfgsc.FindRa := ra;
-          sc.cfgsc.FindDec := Dec;
-          sc.cfgsc.FindDesc := desc;
-          sc.cfgsc.FindName := nm;
-          sc.cfgsc.FindId := '-1';
-          sc.cfgsc.FindNote := '';
-          sc.cfgsc.FindPM := False;
-          sc.cfgsc.FindOK := True;
-          sc.cfgsc.FindSize := 0;
-          sc.cfgsc.TrackName := '';
-          sc.cfgsc.TrackType := TTNone;
-          ShowIdentLabel;
+          GenericSearch(chart,nm,ra,dec);
+          f_detail.Hide;
           identlabelClick(nil);
           UpdateBtn(sc.cfgsc.flipx, sc.cfgsc.flipy, Connect1.Checked,
             MultiFrame1.Childs[i].DockedObject);

@@ -3486,6 +3486,8 @@ var s1: string;
     i: integer;
 begin
 
+  idx:=-1;
+
   if (not cfgsc.ShowBodiesValid) or (cfgsc.BodiesNb = 0) then
     exit;
 
