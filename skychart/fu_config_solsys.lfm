@@ -141,7 +141,7 @@ object f_config_solsys: Tf_config_solsys
             Width = 109
             ItemHeight = 0
             ParentFont = False
-            ScrollWidth = 107
+            ScrollWidth = 105
             TabOrder = 0
             TopIndex = -1
           end
@@ -545,8 +545,8 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 0
           object comsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 3
             ParentFont = False
             object GroupBox13: TGroupBox
@@ -627,7 +627,7 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 88
+                ClientHeight = 70
                 ClientWidth = 395
                 Color = clBtnFace
                 ItemIndex = 1
@@ -669,8 +669,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object comload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 1
             ParentFont = False
             object Label232: TLabel
@@ -764,8 +764,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object comdelete: TTabSheet
             Caption = 'Data Maintenance'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 3
             ParentFont = False
             object Label238: TLabel
@@ -854,8 +854,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object Addsinglecom: TTabSheet
             Caption = 'Add'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 4
             ParentFont = False
             object Label241: TLabel
@@ -1126,8 +1126,8 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 0
           object astsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 3
             ParentFont = False
             object GroupBox9: TGroupBox
@@ -1208,7 +1208,7 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 88
+                ClientHeight = 70
                 ClientWidth = 395
                 Color = clBtnFace
                 ItemIndex = 1
@@ -1264,8 +1264,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object astload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 1
             ParentFont = False
             object Label206: TLabel
@@ -1421,8 +1421,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object astprepare: TTabSheet
             Caption = 'Prepare Monthly Data'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 2
             ParentFont = False
             object Label210: TLabel
@@ -1528,8 +1528,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object AddsingleAst: TTabSheet
             Caption = 'Add'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 4
             ParentFont = False
             object Label217: TLabel

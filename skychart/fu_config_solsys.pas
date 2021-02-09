@@ -878,6 +878,9 @@ begin
   screen.Cursor:=crHourGlass;
   dt1:=FormatDateTime('yyyy"-"mm"-"dd',date1);
   dt2:=FormatDateTime('yyyy"-"mm"-"dd',date2);
+  MemoSPK.Lines.Add('Request SPK file for '+obj+' between '+dt1+' and '+dt2);
+  MemoSPK.Lines.Add('Start telnet session with '+Horizon_Telnet_Host+':'+Horizon_Telnet_Port);
+  Application.ProcessMessages;
   tn := TTelnetSend.Create;
   try
     tn.Timeout:=(5000);
@@ -949,11 +952,14 @@ begin
   finally
     screen.Cursor:=crDefault;
     if not Result then begin
+      ButtonReturn.Visible:=true;
       MemoSPK.lines.add(tn.SessionLog);
       MemoSPK.lines.add(tn.Sock.LastErrorDesc);
+      MemoSPK.lines.add('');
       MemoSPK.SelStart := length(MemoSPK.Text) - 1;
       PanelSPKmemo.visible:=true;
       PanelSPKlist.visible:=false;
+      Application.ProcessMessages;
     end;
     tn.free;
   end;
@@ -969,8 +975,10 @@ procedure Tf_config_solsys.ButtonDownloadSpkClick(Sender: TObject);
 var obj,email,dlf,fn: string;
     dt1,dt2: TDateTime;
 begin
-  PanelSPKmemo.visible:=false;
-  PanelSPKlist.visible:=true;
+  MemoSPK.Clear;
+  PanelSPKmemo.Visible:=true;
+  PanelSPKlist.Visible:=false;
+  ButtonReturn.Visible:=false;
   obj:=trim(uppercase(SPKobject.Text));
   if obj='' then begin
     Labelmsgspk.Caption:=rsRequiredFiel+': '+rsObjectName;
@@ -984,6 +992,8 @@ begin
   dt1:=DateEdit1.Date;
   dt2:=dt1+NumDays.Value;
   if HorizonSPK(obj,dt1,dt2,email,dlf) then begin
+    MemoSPK.lines.add('Downloading file '+dlf);
+    Application.ProcessMessages;
     fn:=CleanName(obj);
     DownloadDialog1.URL := dlf;
     DownloadDialog1.SaveToFile := slash(SPKdir) + fn + '.bsp';
@@ -996,6 +1006,9 @@ begin
     begin
       ShowMessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
     end;
+    PanelSPKmemo.visible:=false;
+    PanelSPKlist.visible:=true;
+    ButtonReturn.Visible:=true;
   end;
 end;
 
