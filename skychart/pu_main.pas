@@ -4364,7 +4364,19 @@ end;
 procedure Tf_main.Search1Execute(Sender: TObject);
 var
   ok: string;
+  i: integer;
+  chart: Tf_chart;
 begin
+  if MultiFrame1.ActiveObject is Tf_chart then
+    chart := Tf_chart(MultiFrame1.ActiveObject)
+  else
+    for i := 0 to MultiFrame1.ChildCount - 1 do
+      if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+      begin
+        chart := Tf_chart(MultiFrame1.Childs[i].DockedObject);
+        break;
+      end;
+
   if cfgm.HttpProxy then
   begin
     f_search.SocksProxy := '';
@@ -4394,6 +4406,8 @@ begin
   end;
   formpos(f_search, mouse.cursorpos.x, mouse.cursorpos.y);
   ok := '';
+  f_search.csc:=chart.sc.cfgsc;
+  f_search.InitBody;
   repeat
     f_search.showmodal;
     if f_search.modalresult = mrOk then
@@ -4545,9 +4559,9 @@ begin
         end;
         11:
         begin
-          ok := catalog.SearchConstAbrev(num, ar1, de1);
-          itype := ftlin;
-          stype := '';
+          ok := planet.FindBodyName(trim(num), ar1, de1, mag, sc.cfgsc, false);
+          itype := ftBody;
+          stype := 'Spk';
         end;
         else
         begin

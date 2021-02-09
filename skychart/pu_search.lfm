@@ -3,7 +3,6 @@ object f_search: Tf_search
   Height = 403
   Top = 106
   Width = 461
-  ActiveControl = RadioGroup1.RadioButton0
   Caption = 'Search'
   ClientHeight = 403
   ClientWidth = 461
@@ -172,19 +171,19 @@ object f_search: Tf_search
           ParentFont = False
           object PlanetPanel: TPanel
             Left = 0
-            Height = 119
+            Height = 120
             Top = 0
-            Width = 442
+            Width = 447
             Align = alClient
-            ClientHeight = 119
-            ClientWidth = 442
+            ClientHeight = 120
+            ClientWidth = 447
             ParentFont = False
             TabOrder = 0
             object Label2: TLabel
               Left = 13
-              Height = 18
+              Height = 17
               Top = 24
-              Width = 41
+              Width = 42
               Caption = 'Planet '
               ParentColor = False
               ParentFont = False
@@ -210,12 +209,12 @@ object f_search: Tf_search
           ParentFont = False
           object CometPanel: TPanel
             Left = 0
-            Height = 119
+            Height = 120
             Top = 0
-            Width = 442
+            Width = 447
             Align = alClient
-            ClientHeight = 119
-            ClientWidth = 442
+            ClientHeight = 120
+            ClientWidth = 447
             ParentFont = False
             TabOrder = 0
             object CometFilter: TEdit
@@ -258,12 +257,12 @@ object f_search: Tf_search
           ParentFont = False
           object AsteroidPanel: TPanel
             Left = 0
-            Height = 119
+            Height = 120
             Top = 0
-            Width = 442
+            Width = 447
             Align = alClient
-            ClientHeight = 119
-            ClientWidth = 442
+            ClientHeight = 120
+            ClientWidth = 447
             ParentFont = False
             TabOrder = 0
             object AsteroidFilter: TEdit
@@ -306,19 +305,19 @@ object f_search: Tf_search
           ParentFont = False
           object NebNamePanel: TPanel
             Left = 0
-            Height = 119
+            Height = 120
             Top = 0
-            Width = 442
+            Width = 447
             Align = alClient
-            ClientHeight = 119
-            ClientWidth = 442
+            ClientHeight = 120
+            ClientWidth = 447
             ParentFont = False
             TabOrder = 0
             object Label3: TLabel
               Left = 13
-              Height = 18
+              Height = 17
               Top = 22
-              Width = 43
+              Width = 44
               Caption = 'Nebula'
               ParentColor = False
               ParentFont = False
@@ -343,19 +342,19 @@ object f_search: Tf_search
           ParentFont = False
           object IDPanel: TPanel
             Left = 0
-            Height = 119
+            Height = 120
             Top = 0
-            Width = 442
+            Width = 447
             Align = alClient
-            ClientHeight = 119
-            ClientWidth = 442
+            ClientHeight = 120
+            ClientWidth = 447
             ParentFont = False
             TabOrder = 0
             object Label1: TLabel
               Left = 6
-              Height = 18
+              Height = 17
               Top = 14
-              Width = 78
+              Width = 80
               Caption = 'Object Name'
               ParentColor = False
               ParentFont = False
@@ -714,19 +713,19 @@ object f_search: Tf_search
           ParentFont = False
           object StarNamePanel: TPanel
             Left = 0
-            Height = 119
+            Height = 120
             Top = 0
-            Width = 442
+            Width = 447
             Align = alClient
-            ClientHeight = 119
-            ClientWidth = 442
+            ClientHeight = 120
+            ClientWidth = 447
             ParentFont = False
             TabOrder = 0
             object Label4: TLabel
               Left = 16
-              Height = 18
+              Height = 17
               Top = 24
-              Width = 24
+              Width = 25
               Caption = 'Star'
               ParentColor = False
               ParentFont = False
@@ -751,19 +750,19 @@ object f_search: Tf_search
           ParentFont = False
           object ConstPanel: TPanel
             Left = 0
-            Height = 119
+            Height = 120
             Top = 0
-            Width = 442
+            Width = 447
             Align = alClient
-            ClientHeight = 119
-            ClientWidth = 442
+            ClientHeight = 120
+            ClientWidth = 447
             ParentFont = False
             TabOrder = 0
             object Label5: TLabel
               Left = 13
-              Height = 18
+              Height = 17
               Top = 22
-              Width = 79
+              Width = 80
               Caption = 'Constellation'
               ParentColor = False
               ParentFont = False
@@ -780,6 +779,29 @@ object f_search: Tf_search
               Style = csDropDownList
               TabOrder = 0
             end
+          end
+        end
+        object tsBody: TTabSheet
+          Caption = 'tsBody'
+          ClientHeight = 120
+          ClientWidth = 447
+          object SPKbox: TComboBox
+            Left = 168
+            Height = 28
+            Top = 16
+            Width = 221
+            Constraints.MaxHeight = 28
+            ItemHeight = 0
+            Style = csDropDownList
+            TabOrder = 0
+          end
+          object Label6: TLabel
+            Left = 13
+            Height = 17
+            Top = 22
+            Width = 41
+            Caption = 'Label6'
+            ParentColor = False
           end
         end
       end

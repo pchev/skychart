@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses
-  u_help, u_translation, u_constant, u_util, cu_database,
+  u_help, u_translation, u_constant, u_util, cu_database, cu_calceph,
   httpsend, blcksock, XMLRead, DOM, LCLType, UScaleDPI,
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, Buttons, LResources, LazHelpHTML_fix, ComCtrls, Types;
@@ -47,6 +47,8 @@ type
     AsteroidList: TComboBox;
     btnFindInfo: TButton;
     btnHelp: TButton;
+    Label6: TLabel;
+    SPKbox: TComboBox;
     PageControl1: TPageControl;
     Panel1: TPanel;
     Panel2: TPanel;
@@ -93,6 +95,7 @@ type
     SpeedButton20: TSpeedButton;
     SpeedButton22: TSpeedButton;
     SpeedButton23: TSpeedButton;
+    tsBody: TTabSheet;
     tsStarName: TTabSheet;
     tsConst: TTabSheet;
     tsStars: TTabSheet;
@@ -146,6 +149,7 @@ type
     procedure InitConst;
     procedure InitStarName;
     procedure InitNebName;
+    procedure InitBody;
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
@@ -157,6 +161,7 @@ type
     numNebName : integer;
     Fnightvision:boolean;
     http: THTTPSend;
+    pagespk: integer;
     procedure GetSearchText;
   protected
     Fproxy,Fproxyport,Fproxyuser,Fproxypass : string;
@@ -166,6 +171,7 @@ type
   public
     { Public declarations }
     cdb: Tcdcdb;
+    csc: Tconf_skychart;
     Num,sesame_resolver,sesame_name,sesame_desc : string;
     ra,de: double;
     onlineOK: string;
@@ -206,6 +212,7 @@ begin
   Label4.caption:=rsStar;
   Label5.caption:=rsConstellatio;
   Label1.caption:=rsObjectName;
+  label6.Caption:=rsSPICEEphemer;
   RadioGroup1.caption:=rsSearchFor;
   RadioGroup1.Items[0]:=rsNebula;
   RadioGroup1.Items[1]:=rsNebulaCommon;
@@ -218,6 +225,7 @@ begin
   RadioGroup1.Items[8]:=rsSolarSystem;
   RadioGroup1.Items[9]:=rsConstellatio;
   RadioGroup1.Items[10]:=rsInternet+' NED, Simbad, Vizier';
+  if pagespk>0 then RadioGroup1.Items[pagespk]:=rsSolarSystemB;
   btnFind.caption:=rsFind;
   btnFindInfo.Caption:=rsFindInfo;
   btnCancel.caption:=rsCancel;
@@ -273,6 +281,7 @@ begin
     8 : ActiveControl:=PlanetBox;      //planet
     9 : ActiveControl:=ConstBox;       //const
    10 : ActiveControl:=OnlineEdit;     //online
+   11 : ActiveControl:=SPKbox;         //spk
 
   end;
 end;
@@ -304,6 +313,8 @@ begin
 
   Fproxy:='';
   FSocksproxy:='';
+
+  pagespk:=-1;
 
 end;
 
@@ -639,6 +650,7 @@ begin
         if not SearchOnline then
            exit;
       end;
+   11: num := SPKbox.Text;
     else
       num:=Id.text;
   end;
@@ -691,7 +703,6 @@ begin
 
     2 :                       //star
       begin
-        //IDPanel.Visible:=true;
         NumPanel.Visible:=true;
         StarPanel.Visible:=true;
 
@@ -703,7 +714,6 @@ begin
 
     4 :                       //var
       begin
-        //IDPanel.Visible:=true;
         NumPanel.Visible:=true;
         VarPanel.Visible:=true;
 
@@ -712,7 +722,6 @@ begin
 
     5 :                       //dbl
       begin
-        //IDPanel.Visible:=true;
         NumPanel.Visible:=true;
         DblPanel.Visible:=true;
 
@@ -725,22 +734,40 @@ begin
     8 : PageControl1.ActivePage := tsPlanet;   //planet
     9 : PageControl1.ActivePage := tsConst;    //const
    10 : PageControl1.ActivePage := tsOnline;   //online
+   else begin
+     if RadioGroup1.itemindex=pagespk then PageControl1.ActivePage := tsBody;     //SPK
+   end;
 
-   {  10 : begin                      //Other Line Catalog , not active at the moment as Catgen do not allow to create the index for line cat.
-          IDPanel.Visible:=true;
-   }
   end;
-
 end;
 
 
 procedure Tf_search.Init;
 begin
+  if (pagespk<0)and(libcalceph<>0) then begin
+    pagespk := RadioGroup1.Items.Add(rsSolarSystemB);
+  end;
   InitPlanet;
   InitConst;
   InitNebName;
   InitStarName;
   SetServerList;
+end;
+
+procedure Tf_search.InitBody;
+var i,j: integer;
+  buf:string;
+begin
+  buf:=SPKbox.Text;
+  SPKbox.Clear;
+
+  j:=0;
+  for i:=0 to csc.BodiesNb-1 do begin
+    SPKbox.Items.Add(csc.SPKNames[i]);
+    if csc.SPKNames[i]=buf then j:=i;
+  end;
+
+  SPKbox.ItemIndex:=j;
 end;
 
 procedure Tf_search.InitPlanet;
