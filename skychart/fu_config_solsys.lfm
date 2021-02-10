@@ -1884,7 +1884,7 @@ object f_config_solsys: Tf_config_solsys
           object ButtonDownloadSpk: TButton
             Left = 352
             Height = 25
-            Top = 103
+            Top = 112
             Width = 120
             Caption = 'Download'
             OnClick = ButtonDownloadSpkClick
@@ -1893,7 +1893,7 @@ object f_config_solsys: Tf_config_solsys
           object SPKobject: TEdit
             Left = 112
             Height = 30
-            Top = 27
+            Top = 24
             Width = 120
             TabOrder = 1
           end
@@ -1901,25 +1901,24 @@ object f_config_solsys: Tf_config_solsys
             AnchorSideTop.Control = SPKobject
             Left = 352
             Height = 30
-            Top = 27
+            Top = 24
             Width = 120
             OnChange = SPKemailChange
             TabOrder = 2
           end
           object Labelmsgspk: TLabel
-            AnchorSideTop.Control = ButtonDownloadSpk
             AnchorSideTop.Side = asrCenter
             Left = 8
             Height = 17
-            Top = 107
-            Width = 80
-            Caption = 'Labelmsgspk'
+            Top = 96
+            Width = 242
+            Caption = 'A maximum of 100 files can be selected'
             ParentColor = False
           end
           object DateEdit1: TDateEdit
             Left = 112
             Height = 30
-            Top = 65
+            Top = 60
             Width = 120
             CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
             DateOrder = doNone
@@ -1936,7 +1935,7 @@ object f_config_solsys: Tf_config_solsys
             Cursor = crHandPoint
             Left = 8
             Height = 17
-            Top = 34
+            Top = 31
             Width = 78
             Caption = 'Object name'
             ParentColor = False
@@ -1946,7 +1945,7 @@ object f_config_solsys: Tf_config_solsys
             AnchorSideTop.Side = asrCenter
             Left = 240
             Height = 17
-            Top = 34
+            Top = 31
             Width = 33
             Caption = 'email'
             ParentColor = False
@@ -1956,7 +1955,7 @@ object f_config_solsys: Tf_config_solsys
             AnchorSideTop.Side = asrCenter
             Left = 8
             Height = 17
-            Top = 72
+            Top = 67
             Width = 61
             Caption = 'Start date'
             ParentColor = False
@@ -1966,7 +1965,7 @@ object f_config_solsys: Tf_config_solsys
             AnchorSideTop.Side = asrCenter
             Left = 240
             Height = 17
-            Top = 72
+            Top = 67
             Width = 99
             Caption = 'Number of days'
             ParentColor = False
@@ -1986,13 +1985,22 @@ object f_config_solsys: Tf_config_solsys
             AnchorSideTop.Side = asrCenter
             Left = 352
             Height = 28
-            Top = 66
+            Top = 61
             Width = 120
             MaxValue = 365
             MinValue = 1
             OnChange = NumDaysChange
             TabOrder = 4
             Value = 15
+          end
+          object CheckAllSPK: TCheckBox
+            Left = 1
+            Height = 21
+            Top = 120
+            Width = 77
+            Caption = 'Select all'
+            OnClick = CheckAllSPKClick
+            TabOrder = 5
           end
         end
       end

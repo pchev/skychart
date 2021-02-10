@@ -43,6 +43,7 @@ type
     ButtonEphDel: TButton;
     ButtonEphUp: TButton;
     ButtonEphDown: TButton;
+    CheckAllSPK: TCheckBox;
     DateEdit1: TDateEdit;
     LabelTitle: TLabel;
     LabelDate2: TLabel;
@@ -239,6 +240,7 @@ type
     procedure ButtonEphDelClick(Sender: TObject);
     procedure ButtonEphDownClick(Sender: TObject);
     procedure ButtonEphUpClick(Sender: TObject);
+    procedure CheckAllSPKClick(Sender: TObject);
     procedure CheckBoxPlutoChange(Sender: TObject);
     procedure ComboBox1Select(Sender: TObject);
     procedure ComboBox2Select(Sender: TObject);
@@ -485,6 +487,7 @@ begin
   LabelDate1.Caption:=rsStartDate;
   LabelDate2.Caption:=rsNumberOfDays;
   ButtonDownloadSpk.Caption:=rsDownload;
+  CheckAllSPK.Caption:=rsSelectAll;
   SPKdelete.Caption:=rsDelete;
   SPKrefresh.Caption:=rsRefresh;
   SPKListView.Column[0].Caption:=rsFile;
@@ -1308,6 +1311,7 @@ begin
       if SPKListView.Items.FindCaption(0,csc.SPKlist[i],False,True,False)=nil then
          csc.SPKlist.Delete(i);
     end;
+    CheckAllSPK.Checked:=(SPKListView.Items.Count=csc.SPKlist.Count);
   end;
 end;
 
@@ -1329,6 +1333,16 @@ begin
        end;
     end;
   end;
+end;
+
+procedure Tf_config_solsys.CheckAllSPKClick(Sender: TObject);
+var i: integer;
+begin
+  for i:=0 to SPKListView.Items.Count-1 do begin
+     SPKListView.Items[i].Checked:=CheckAllSPK.Checked;
+  end;
+  SPKListView.Invalidate;
+  SPKListViewItemChecked(nil,nil);
 end;
 
 procedure Tf_config_solsys.SPKListViewContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
