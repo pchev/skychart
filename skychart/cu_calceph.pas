@@ -53,7 +53,6 @@ uses calceph, math, dynlibs, u_constant, u_util, LazFileUtils, Classes,sysutils;
   Function InitCalcephBody(csc: Tconf_skychart):boolean;
   Procedure CloseCalcephBody;
   Function CalcephComputeBody(jdt: double; target, center: integer; out pv: TDoubleArray): boolean;
-  Procedure ListContent(out targets: TTargetArray);
   procedure ListContent(fn: string; out targets: string; out firsttime,lasttime:double);
 
   var
@@ -175,6 +174,7 @@ Procedure InitCalcephSat(n: integer; eph_files: array of string);
 var i: integer;
     fileeph: array [0..9] of Pchar;
 begin
+// load ephemeris file for planetary satellite
 try
   if libcalceph=0 then exit;
   CloseCalcephSat;
@@ -191,6 +191,7 @@ end;
 
 Procedure CloseCalcephSat;
 begin
+// close planetary satellite
   if libcalceph=0 then exit;
   if ephsat<>nil then
     calceph_close(ephsat);
@@ -202,26 +203,29 @@ var pvo,pvt: TDoubleArray;
     jd0,t,r,lt: double;
     res: integer;
 begin
+// compute planetary satellite
   result:=false;
   if libcalceph=0 then exit;
   try
   jd0:=jdt;
   t := 0.0;
+  // earth barycentric position
   res := calceph_compute_order(ephsat, jd0, t, center, 0, CALCEPH_USE_NAIFID+CALCEPH_UNIT_KM+CALCEPH_UNIT_SEC, 0, pvo);
   if res=0 then exit;
+  // satellite barycentric position
   res := calceph_compute_order(ephsat, jd0, t, target, 0, CALCEPH_USE_NAIFID+CALCEPH_UNIT_KM+CALCEPH_UNIT_SEC, 0, pvt);
   if res=0 then exit;
-
+  // light time
   pv[0] := pvt[0]-pvo[0];
   pv[1] := pvt[1]-pvo[1];
   pv[2] := pvt[2]-pvo[2];
   r := sqrt(pv[0]*pv[0]+pv[1]*pv[1]+pv[2]*pv[2]);
   lt := r / clight;
   jd0 := jd0-(lt/secday);
-
+  // satelite position with light time
   res := calceph_compute_order(ephsat, jd0, t , target, 0, CALCEPH_USE_NAIFID+CALCEPH_UNIT_KM+CALCEPH_UNIT_SEC, 0, pvt);
   if res=0 then exit;
-
+  // satellite position from earth
   pv[0] := pvt[0]-pvo[0];
   pv[1] := pvt[1]-pvo[1];
   pv[2] := pvt[2]-pvo[2];
@@ -233,32 +237,61 @@ begin
 end;
 
 function InitCalcephBody(csc:Tconf_skychart):boolean;
-var i,n: integer;
+var i,j,k,n,m: integer;
     fileeph: array [0..MaxSpkFiles-1] of Pchar;
     eph_files: array of string;
+    targets: string;
+    ft,lt: double;
+    targ: TStringList;
 begin
+// load ephemeris file for solar system body
 try
   result:=false;
   if libcalceph=0 then exit;
+  // close previous files
   CloseCalcephBody;
+  // put all the files in array
   n:=min(MaxSpkFiles,csc.SPKlist.Count);
   SetLength(eph_files,n);
   for i:=0 to n-1 do begin
     eph_files[i]:=slash(SPKdir)+csc.SPKlist[i];
     fileeph[i]:=Pchar(eph_files[i]);
   end;
+  // open the ephemeris
   ephbody:=calceph_open_array(n,fileeph);
   result := ephbody<>nil;
   if result then begin
-    ListContent(csc.SPKBodies);
-    SetLength(csc.SPKNames,Length(csc.SPKBodies));
-    if Length(csc.SPKBodies)=n then begin
-      for i:=0 to Length(csc.SPKBodies)-1 do
-        csc.SPKNames[i]:=ExtractFileNameOnly(csc.SPKlist[i]);
-    end
-    else begin
-      for i:=0 to Length(csc.SPKBodies)-1 do
-        csc.SPKNames[i]:='SPK'+IntToStr(csc.SPKBodies[i]);
+    // get maximum number of targets
+    m:=calceph_getpositionrecordcount(ephbody);
+    SetLength(csc.SPKBodies,m);
+    SetLength(csc.SPKNames,m);
+    j:=0;
+    targ:=TStringList.Create;
+    try
+    // look for target id in each file
+    for i:=0 to n-1 do begin
+      ListContent(eph_files[i],targets,ft,lt);
+      if pos(';',targets)=0 then begin
+        // single target in file, use the filename as object name
+        inc(j);
+        csc.SPKBodies[j-1]:=StrToInt(targets);
+        csc.SPKNames[j-1]:=ExtractFileNameOnly(eph_files[i]);
+      end
+      else begin
+        // many targets in file, use spk id as object name
+        Splitarg(targets,';',targ);
+        for k:=0 to targ.Count-1 do begin
+          inc(j);
+          csc.SPKBodies[j-1]:=StrToInt(targ[k]);
+          csc.SPKNames[j-1]:='SPK'+targ[k];
+        end;
+      end;
+    end;
+    // total number can be smaller if more than one record per target
+    SetLength(csc.SPKBodies,j);
+    SetLength(csc.SPKNames,j);
+    finally
+    targ.free;
     end;
   end
   else begin
@@ -271,6 +304,7 @@ end;
 
 Procedure CloseCalcephBody;
 begin
+// close files
   if libcalceph=0 then exit;
   if ephbody<>nil then
     calceph_close(ephbody);
@@ -281,6 +315,8 @@ Function CalcephComputeBody(jdt: double; target, center: integer; out pv: TDoubl
 var jd0,t: double;
     res,i: integer;
 begin
+// compute target body rectangular coordinates
+// beware that only center=0 (barycentric) is available if no other planetary spk is loaded
   result:=false;
   if libcalceph=0 then exit;
   try
@@ -289,36 +325,12 @@ begin
   res := calceph_compute_order(ephbody, jd0, t, target, center, CALCEPH_USE_NAIFID+CALCEPH_UNIT_KM+CALCEPH_UNIT_SEC, 0, pv);
   if res=0 then
     exit;
+  // AU not available in Horizon spk file
   for i:=0 to 2 do
-    pv[i]:=pv[i] / km_au; // AU not available in Horizon spk file
+    pv[i]:=pv[i] / km_au;
   result:=true;
   except
   end;
-end;
-
-procedure ListContent(out targets: TTargetArray);
-var
-  i,j,k,n: integer;
-  firsttime, lasttime: double;
-  itarget, icenter, iframe: integer;
-  dup: boolean;
-begin
-  if libcalceph=0 then exit;
-  n:= calceph_getpositionrecordcount(ephbody);
-  SetLength(targets,n);
-  k:=0;
-  for i:=1 to n do begin
-    calceph_getpositionrecordindex(ephbody, i, itarget, icenter, firsttime, lasttime, iframe);
-    dup:=false;
-    for j:=0 to Length(targets)-1 do begin
-       if targets[j]=itarget then dup:=true;
-    end;
-    if not dup then begin
-      targets[k]:=itarget;
-      inc(k);
-    end;
-  end;
-  SetLength(targets,k);
 end;
 
 procedure ListContent(fn: string; out targets: string; out firsttime,lasttime:double);
@@ -330,26 +342,35 @@ var
   itarget, icenter, iframe: integer;
   buf:string;
 begin
+  // return list of target and date range for a specific spk file
   targets:='';
   firsttime:=1E99;
   lasttime:=0;
   if libcalceph=0 then exit;
+  // only one file
   fileeph[0]:=PChar(fn);
   eph:=calceph_open_array(1,fileeph);
   if eph=nil then exit;
+  // number of records
   n:= calceph_getpositionrecordcount(eph);
   targets:=';';
   for i:=1 to n do begin
+    // get record information
     calceph_getpositionrecordindex(eph, i, itarget, icenter, ft, lt, iframe);
     buf:=inttostr(itarget);
+    // remove duplicate from same file
     if pos(';'+buf+';',targets)=0 then begin
       targets:=targets+buf+';';
     end;
+    // probably right if many contiguous record for the same target,
+    // not critical otherwise because the date is only for information
     firsttime:=min(firsttime,ft);
     lasttime:=max(lasttime,lt);
   end;
+  // remove first and last ";"
   Delete(targets,1,1);
   if length(targets)>1 then Delete(targets,length(targets),1);
+  // close files
   calceph_close(eph);
 end;
 
