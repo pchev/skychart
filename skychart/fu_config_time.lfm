@@ -664,16 +664,16 @@ object f_config_time: Tf_config_time
         end
         object Label178: TLabel
           Left = 316
-          Height = 19
+          Height = 17
           Top = 23
-          Width = 42
+          Width = 41
           Caption = 'every  '
           ParentColor = False
           ParentFont = False
         end
         object Label179: TLabel
           Left = 176
-          Height = 19
+          Height = 17
           Top = 23
           Width = 104
           Caption = 'Number of steps'
@@ -682,16 +682,16 @@ object f_config_time: Tf_config_time
         end
         object Label56: TLabel
           Left = 8
-          Height = 19
+          Height = 17
           Top = 4
-          Width = 259
+          Width = 257
           Caption = 'Plot orbital motion of solar system objects'
           ParentColor = False
           ParentFont = False
         end
         object stepunit: TRadioGroup
           Left = 176
-          Height = 62
+          Height = 56
           Top = 72
           Width = 304
           AutoFill = True
@@ -704,7 +704,7 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 4
-          ClientHeight = 42
+          ClientHeight = 36
           ClientWidth = 302
           Columns = 4
           Items.Strings = (
@@ -721,7 +721,7 @@ object f_config_time: Tf_config_time
           Left = 8
           Height = 21
           Top = 257
-          Width = 272
+          Width = 270
           Caption = 'Connection lines between each position '
           OnClick = steplineClick
           ParentFont = False
@@ -745,14 +745,14 @@ object f_config_time: Tf_config_time
             'Pluto'
             'Asteroids'
             'Comets'
+            'SPK'
           )
-          ItemHeight = 0
+          ItemHeight = 23
           OnItemClick = SimObjItemClick
           ParentFont = False
           TabOrder = 0
-          TopIndex = -1
           Data = {
-            0C000000000000000000000000000000
+            0D00000000000000000000000000000000
           }
         end
         object AllSim: TButton
@@ -940,23 +940,13 @@ object f_config_time: Tf_config_time
           Position = 1
           TabOrder = 4
         end
-        object stepmark: TCheckBox
-          Left = 321
-          Height = 21
-          Top = 257
-          Width = 84
-          Caption = 'stepmark'
-          OnClick = stepmarkClick
-          ParentFont = False
-          TabOrder = 12
-        end
         object PanelAst: TPanel
           Left = 176
-          Height = 34
-          Top = 176
+          Height = 32
+          Top = 160
           Width = 304
           BevelOuter = bvNone
-          ClientHeight = 34
+          ClientHeight = 32
           ClientWidth = 304
           TabOrder = 13
           object AsteroidFilter: TEdit
@@ -993,12 +983,14 @@ object f_config_time: Tf_config_time
           end
         end
         object PanelCom: TPanel
+          AnchorSideTop.Control = PanelAst
+          AnchorSideTop.Side = asrBottom
           Left = 176
-          Height = 34
-          Top = 214
+          Height = 32
+          Top = 192
           Width = 304
           BevelOuter = bvNone
-          ClientHeight = 34
+          ClientHeight = 32
           ClientWidth = 304
           TabOrder = 14
           object CometFilter: TEdit
@@ -1033,6 +1025,48 @@ object f_config_time: Tf_config_time
             Style = csDropDownList
             TabOrder = 2
           end
+        end
+        object PanelBody: TPanel
+          AnchorSideTop.Control = PanelCom
+          AnchorSideTop.Side = asrBottom
+          Left = 176
+          Height = 32
+          Top = 224
+          Width = 312
+          BevelOuter = bvNone
+          ClientHeight = 32
+          ClientWidth = 312
+          TabOrder = 15
+          object SPKbox: TComboBox
+            Left = 80
+            Height = 28
+            Top = 4
+            Width = 224
+            Constraints.MaxHeight = 28
+            ItemHeight = 0
+            OnChange = SPKboxChange
+            ParentFont = False
+            Style = csDropDownList
+            TabOrder = 0
+          end
+          object Label13: TLabel
+            Left = 6
+            Height = 17
+            Top = 8
+            Width = 23
+            Caption = 'SPK'
+            ParentColor = False
+          end
+        end
+        object stepmark: TCheckBox
+          Left = 321
+          Height = 21
+          Top = 257
+          Width = 83
+          Caption = 'stepmark'
+          OnClick = stepmarkClick
+          ParentFont = False
+          TabOrder = 12
         end
       end
       object Page3: TTabSheet

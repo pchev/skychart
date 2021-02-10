@@ -2910,7 +2910,7 @@ begin
       application.ProcessMessages;
     end;
     lockdb := True;
-      if cfgsc.SimObject[12] then
+      if cfgsc.SimObject[14] then
         SimNb := min(cfgsc.Simnb, MaxAstSim)
       else
         SimNb := 1;
@@ -2930,46 +2930,48 @@ begin
         for i := 0 to cfgsc.BodiesNb - 1 do
         begin
          target := cfgsc.SPKBodies[i];
-         cfgsc.BodiesName[j, i + 1, 2] := cfgsc.SPKNames[i];
-         cfgsc.BodiesLst[j, i + 1, 5] := -1;
-         if CalcephComputeBody(jdt, target, 0, pv) then begin
-           x := xs + pv[0];
-           y := ys + pv[1];
-           z := zs + pv[2];
-           dist := sqrt(x*x+y*y+z*z);
-           lt := dist * km_au / clight;
-           jdlt := jdt-(lt/secday);
-           if CalcephComputeBody(jdlt, target, 0, pv) then begin
-             r:=sqrt(pv[0]*pv[0]+pv[1]*pv[1]+pv[2]*pv[2]);
+         if (cfgsc.SimBody<0)or(cfgsc.SimBody=target) then begin
+           cfgsc.BodiesName[j, i + 1, 2] := cfgsc.SPKNames[i];
+           cfgsc.BodiesLst[j, i + 1, 5] := -1;
+           if CalcephComputeBody(jdt, target, 0, pv) then begin
              x := xs + pv[0];
              y := ys + pv[1];
              z := zs + pv[2];
              dist := sqrt(x*x+y*y+z*z);
-           end;
-           ra := arctan2(y, x);
-           if (ra < 0) then
-             ra := ra + 2 * pi;
-           qr := sqrt(x*x + y*y);
-           if qr <> 0 then
-             de := arctan(z / qr)
+             lt := dist * km_au / clight;
+             jdlt := jdt-(lt/secday);
+             if CalcephComputeBody(jdlt, target, 0, pv) then begin
+               r:=sqrt(pv[0]*pv[0]+pv[1]*pv[1]+pv[2]*pv[2]);
+               x := xs + pv[0];
+               y := ys + pv[1];
+               z := zs + pv[2];
+               dist := sqrt(x*x+y*y+z*z);
+             end;
+             ra := arctan2(y, x);
+             if (ra < 0) then
+               ra := ra + 2 * pi;
+             qr := sqrt(x*x + y*y);
+             if qr <> 0 then
+               de := arctan(z / qr)
+             else
+               de := 0;
+             cfgsc.BodiesLst[j, i + 1, 6] := ra;
+             cfgsc.BodiesLst[j, i + 1, 7] := de;
+             precession(jd2000, cfgsc.jdchart, ra, de);
+             if cfgsc.PlanetParalaxe then
+                Paralaxe(st0, dist, ra, de, ra, de, q, cfgsc);
+              if cfgsc.ApparentPos then
+                apparent_equatorial(ra, de, cfgsc, True, False);
+              cfgsc.BodiesName[j, i + 1, 1] := inttostr(target);
+              cfgsc.BodiesLst[j, i + 1, 1] := ra;
+              cfgsc.BodiesLst[j, i + 1, 2] := de;
+              cfgsc.BodiesLst[j, i + 1, 3] := r;
+              cfgsc.BodiesLst[j, i + 1, 4] := jdt;
+              cfgsc.BodiesLst[j, i + 1, 5] := dist;
+           end
            else
-             de := 0;
-           cfgsc.BodiesLst[j, i + 1, 6] := ra;
-           cfgsc.BodiesLst[j, i + 1, 7] := de;
-           precession(jd2000, cfgsc.jdchart, ra, de);
-           if cfgsc.PlanetParalaxe then
-              Paralaxe(st0, dist, ra, de, ra, de, q, cfgsc);
-            if cfgsc.ApparentPos then
-              apparent_equatorial(ra, de, cfgsc, True, False);
-            cfgsc.BodiesName[j, i + 1, 1] := inttostr(target);
-            cfgsc.BodiesLst[j, i + 1, 1] := ra;
-            cfgsc.BodiesLst[j, i + 1, 2] := de;
-            cfgsc.BodiesLst[j, i + 1, 3] := r;
-            cfgsc.BodiesLst[j, i + 1, 4] := jdt;
-            cfgsc.BodiesLst[j, i + 1, 5] := dist;
-         end
-         else
-           cfgsc.msg := cu_calceph.LastError;
+             cfgsc.msg := cu_calceph.LastError;
+          end;
         end;
       end;
   finally
@@ -3402,7 +3404,7 @@ begin
       if CurrentBody > cfgsc.BodiesNb then
       begin
         Inc(CurrentBodyStep);
-        if (not cfgsc.SimObject[12]) or nextobj or (CurrentBodyStep >= cfgsc.SimNb) then
+        if (not cfgsc.SimObject[14]) or nextobj or (CurrentBodyStep >= cfgsc.SimNb) then
           break
         else
         begin

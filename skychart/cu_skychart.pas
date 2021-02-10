@@ -2999,7 +2999,7 @@ begin
       Fplanet.ComputeBodies(cfgsc);
       for j := 0 to cfgsc.SimNb - 1 do
       begin
-        if ((j>0)or ((cfgsc.SimNb>1) and cfgsc.SimMark)) and (not cfgsc.SimObject[12]) then
+        if ((j>0)or ((cfgsc.SimNb>1) and cfgsc.SimMark)) and (not cfgsc.SimObject[14]) then
           break;
         for i := 1 to cfgsc.BodiesNb do
         begin
@@ -3017,7 +3017,7 @@ begin
             begin
               lis := cfgsc.BodiesName[j, i, 1] + FormatFloat(f3, cfgsc.BodiesLst[j, i, 6]) + FormatFloat(f3, cfgsc.BodiesLst[j, i, 7]);
               lid := rshash(lis, $7FFFFFFF);
-              if (cfgsc.SimNb = 1) or (not cfgsc.SimObject[12]) then
+              if (cfgsc.SimNb = 1) or (not cfgsc.SimObject[14]) then
               begin
                 ltxt := cfgsc.BodiesName[j, i, 2];
                 lori := labrotation(ra, Dec, 10, cfgsc);
@@ -3515,6 +3515,26 @@ begin
         for j := 0 to cfgsc.SimNb - 1 do
          if cfgsc.AsteroidLst[j, i, 5]>0 then begin
           projection(cfgsc.AsteroidLst[j, i, 1], cfgsc.AsteroidLst[j, i, 2], x1, y1, True, cfgsc);
+          windowxy(x1, y1, xx, yy, cfgsc);
+          if (j <> 0) and ((xx > -dx) and (yy > -dy) and (xx < dx) and (yy < dy)) and
+            ((xp > -dx) and (yp > -dy) and (xp < dx) and (yp < dy)) then
+          begin
+            Fplot.PlotLine(xp, yp, xx, yy, color, 1);
+            if cfgsc.SimMark then
+              Fplot.PlotSimMark(xx, yy, color);
+          end;
+          if cfgsc.SimMark and (j = 0) then
+            Fplot.PlotSimMark(xx, yy, color);
+          xp := xx;
+          yp := yy;
+        end;
+    xp := 0;
+    yp := 0;
+    if cfgsc.SimObject[14] then
+      for i := 1 to cfgsc.BodiesNb do
+        for j := 0 to cfgsc.SimNb - 1 do
+         if cfgsc.BodiesLst[j, i, 5]>0 then begin
+          projection(cfgsc.BodiesLst[j, i, 1], cfgsc.BodiesLst[j, i, 2], x1, y1, True, cfgsc);
           windowxy(x1, y1, xx, yy, cfgsc);
           if (j <> 0) and ((xx > -dx) and (yy > -dy) and (xx < dx) and (yy < dy)) and
             ((xp > -dx) and (yp > -dy) and (xp < dx) and (yp < dy)) then

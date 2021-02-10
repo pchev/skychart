@@ -6428,12 +6428,13 @@ begin
   def_cfgsc.SimS := 0;
   def_cfgsc.SimAsteroid := -1;
   def_cfgsc.SimAsteroidName := '';
+  def_cfgsc.SimBody := -1;
   def_cfgsc.SimComet := '';
   def_cfgsc.SimCometName := '';
   def_cfgsc.SimLine := True;
   def_cfgsc.SimMark := True;
   for i := 1 to NumSimObject do
-    def_cfgsc.SimObject[i] := True;
+    def_cfgsc.SimObject[i] := (i<>14);
   def_cfgsc.sunurlname := URL_SUN_NAME[1];
   def_cfgsc.sunurl := URL_SUN[1];
   def_cfgsc.sunurlsize := URL_SUN_SIZE[1];
@@ -7475,6 +7476,7 @@ begin
         csc.SimLine := ReadBool(section, 'SimLine', csc.SimLine);
         csc.SimMark := ReadBool(section, 'SimMark', csc.SimMark);
         csc.SimAsteroid := ReadInteger(section, 'SimAsteroid', csc.SimAsteroid);
+        csc.SimBody := ReadInteger(section, 'SimBody', csc.SimBody);
         csc.SimComet := ReadString(section, 'SimComet', csc.SimComet);
         csc.SimAsteroidName := ReadString(section, 'SimAsteroidName', csc.SimAsteroidName);
         csc.SimCometName := ReadString(section, 'SimCometName', csc.SimCometName);
@@ -8834,6 +8836,7 @@ begin
         WriteString(section, 'SimComet', csc.SimComet);
         WriteString(section, 'SimAsteroidName', csc.SimAsteroidName);
         WriteString(section, 'SimCometName', csc.SimCometName);
+        WriteInteger(section, 'SimBody', csc.SimBody);
         for i := 1 to NumSimObject do
           WriteBool(section, 'SimObject' + IntToStr(i), csc.SimObject[i]);
         for i := 1 to numlabtype do

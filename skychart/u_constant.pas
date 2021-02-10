@@ -431,7 +431,7 @@ const
   labspacing = 6;
   numlabtype = 11;
   numfont = 7;
-  NumSimObject = 13;
+  NumSimObject = 14;
   MaxField = 10;
   MaxArchiveDir = 10;
   Equat = 0;
@@ -1076,9 +1076,9 @@ type
     projtype: char;
     projname: array [0..MaxField] of string[3];
     FlipX, FlipY, ProjPole, TrackType, TrackObj, AstSymbol, ComSymbol: integer;
-    SimNb, SimD, SimH, SimM, SimS, SimLabel,SimAsteroid: integer;
+    SimNb, SimD, SimH, SimM, SimS, SimLabel,SimAsteroid,SimBody: integer;
     SimComet, SimCometName, SimAsteroidName: string;
-    SimObject: array[1..NumSimObject] of boolean;
+    SimObject: array[1..NumSimObject] of boolean; // 1-11=ipla, 12=ast, 13=com, 14=spk
     SimLine, SimMark, SimDateLabel, SimNameLabel, SimMagLabel,
     ShowPlanet, PlanetParalaxe, ShowEarthShadow, ShowAsteroid, ShowComet,
     ShowArtSat, NewArtSat, ShowSmallsat: boolean;
@@ -2330,6 +2330,7 @@ begin
   SimCometName := Source.SimCometName;
   SimAsteroid := Source.SimAsteroid;
   SimAsteroidName := Source.SimAsteroidName;
+  SimBody := Source.SimBody;
   SimLabel := Source.SimLabel;
   SimLine := Source.SimLine;
   SimMark := Source.SimMark;
@@ -2578,6 +2579,7 @@ begin
   FindCatname := Source.FindCatname;
   AsteroidNb := Source.AsteroidNb;
   CometNb := Source.CometNb;
+  BodiesNb := Source.BodiesNb;
   AsteroidLstSize := Source.AsteroidLstSize;
   CometLstSize := Source.CometLstSize;
   NumCircle := Source.NumCircle;
@@ -2741,6 +2743,30 @@ begin
     for j := 1 to Source.CometNb do
       for k := 1 to 2 do
         CometName[0, j, k] := Source.CometName[0, j, k];
+  end;
+  if SimObject[14] then
+  begin
+    SetLength(BodiesLst, Source.SimNb);
+    for i := 0 to Source.SimNb - 1 do
+      for j := 1 to Source.BodiesNb do
+        for k := 1 to 5 do
+          BodiesLst[i, j, k] := Source.BodiesLst[i, j, k];
+    SetLength(BodiesName, Source.SimNb);
+    for i := 0 to Source.SimNb - 1 do
+      for j := 1 to Source.BodiesNb do
+        for k := 1 to 2 do
+          BodiesName[i, j, k] := Source.BodiesName[i, j, k];
+  end
+  else
+  begin
+    Setlength(BodiesLst, 1);
+    for j := 1 to Source.BodiesNb do
+      for k := 1 to 5 do
+        BodiesLst[0, j, k] := Source.BodiesLst[0, j, k];
+    SetLength(BodiesName, 1);
+    for j := 1 to Source.BodiesNb do
+      for k := 1 to 2 do
+        BodiesName[0, j, k] := Source.BodiesName[0, j, k];
   end;
   MaxArchiveImg := Source.MaxArchiveImg;
   for i := 1 to MaxArchiveDir do

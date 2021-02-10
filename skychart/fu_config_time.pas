@@ -42,6 +42,7 @@ type
   Tf_config_time = class(TFrame)
     AsteroidFilter: TEdit;
     AsteroidList: TComboBox;
+    SPKbox: TComboBox;
     BitBtn1: TBitBtn;
     btnAstFilter: TButton;
     btnCometFilter: TButton;
@@ -61,6 +62,8 @@ type
     GregY: TLongEdit;
     GregM: TLongEdit;
     GregD: TLongEdit;
+    Label13: TLabel;
+    PanelBody: TPanel;
     PanelAst: TPanel;
     PanelCom: TPanel;
     stepmark: TCheckBox;
@@ -182,6 +185,7 @@ type
     procedure PageControl1Changing(Sender: TObject; var AllowChange: boolean);
     procedure RadioGroup1Click(Sender: TObject);
     procedure SimObjItemClick(Sender: TObject; Index: longint);
+    procedure SPKboxChange(Sender: TObject);
     procedure stepmarkClick(Sender: TObject);
     procedure TimeChange(Sender: TObject; Button: TUDBtnType);
     procedure BitBtn4Click(Sender: TObject);
@@ -289,6 +293,8 @@ begin
   SimObj.items[9] := rsPluto;
   SimObj.items[10] := rsAsteroid;
   SimObj.items[11] := rsComet;
+  SimObj.items[12] := rsSPICEEphemer;
+  Label13.Caption:=rsObject;
   AllSim.Caption := rsAll;
   NoSim.Caption := rsNone1;
   JDCalendarDialog1.Caption := rsJDCalendar;
@@ -371,7 +377,7 @@ end;
 
 procedure Tf_config_time.Init;
 var
-  i: integer;
+  i,j: integer;
   buf: string;
 begin
   d_year.Height := d_yearEdit.Height;
@@ -392,6 +398,14 @@ begin
     CometFilter.Text:=csc.SimCometName;
     btnCometFilterClick(nil);
   end;
+  // fill body list
+  SPKbox.Clear;
+  j:=0;
+  for i:=0 to csc.BodiesNb-1 do begin
+    SPKbox.Items.Add(csc.SPKNames[i]);
+    if csc.SPKBodies[i]=csc.SimBody then j:=i;
+  end;
+  SPKbox.ItemIndex:=j;
   // fill time zone
   TZComboBox.Clear;
   TZComboBox.ItemIndex := -1;
@@ -540,13 +554,17 @@ begin
           j := 12
         else
           j := 13;   // asteroid / comet
-      11: j := 13;   // comet
+      11: if csc.ShowPluto then
+          j := 13
+        else
+          j := 14;   // comet / spk
+      12: j := 14;   // spk
       else
         j := i;
     end;
     SimObj.Checked[i] := csc.SimObject[j];
   end;
-  if csc.SimObject[12] or csc.SimObject[13] then
+  if csc.SimObject[12] or csc.SimObject[13] or csc.SimObject[14] then
   begin
     nbstep.MaxValue := 100;
     UpDown1.Max := 100;
@@ -559,6 +577,7 @@ begin
   end;
   panelast.Visible:=csc.SimObject[12];
   panelcom.Visible:=csc.SimObject[13];
+  PanelBody.Visible:=csc.SimObject[14];
   if csc.SimLabel >= 0 then
   begin
     if csc.SimLabel > 3 then
@@ -1178,6 +1197,16 @@ begin
   end;
 end;
 
+procedure Tf_config_time.SPKboxChange(Sender: TObject);
+begin
+  if SPKbox.ItemIndex<=0 then begin
+    csc.SimBody:=-1;
+  end
+  else begin
+    csc.SimBody:=csc.SPKBodies[SPKbox.ItemIndex];
+  end;
+end;
+
 procedure Tf_config_time.SimObjItemClick(Sender: TObject; Index: longint);
 var
   j: integer;
@@ -1193,7 +1222,11 @@ begin
         j := 12
       else
         j := 13;   // asteroid / comet
-    11: j := 13;   // comet
+    11: if csc.ShowPluto then
+        j := 13
+      else
+        j := 14;   // comet ( spk
+    12: j := 14;   // spk
     else
       j := index;
   end;
@@ -1208,7 +1241,8 @@ begin
     CometList.Clear;
     CometListChange(nil);
   end;
-  if csc.SimObject[12] or csc.SimObject[13] then
+  PanelBody.Visible:=csc.SimObject[14];
+  if csc.SimObject[12] or csc.SimObject[13] or csc.SimObject[14] then
   begin
     nbstep.MaxValue := MaxAstSim;
     UpDown1.Max := MaxAstSim;
@@ -1220,6 +1254,7 @@ begin
     UpDown1.Max := MaxPlSim;
   end;
 end;
+
 
 procedure Tf_config_time.AllSimClick(Sender: TObject);
 var
@@ -1329,6 +1364,17 @@ begin
   begin
     SetLength(csc.CometLst, csc.SimNb);
     SetLength(csc.CometName, csc.SimNb);
+  end;
+  if csc.SimObject[14] then
+  begin
+    csc.Simnb := min(csc.Simnb, MaxAstSim);
+    Setlength(csc.BodiesLst, csc.Simnb);
+    SetLength(csc.BodiesName, csc.SimNb);
+  end
+  else
+  begin
+    Setlength(csc.BodiesLst, 1);
+    SetLength(csc.BodiesName, 1);
   end;
 end;
 
