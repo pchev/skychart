@@ -1837,26 +1837,39 @@ object f_config_solsys: Tf_config_solsys
           ClientHeight = 377
           ClientWidth = 495
           TabOrder = 1
-          object SPKlist: TCheckListBox
+          object SPKListView: TListView
             Left = 1
             Height = 375
             Top = 1
             Width = 493
             Align = alClient
-            Items.Strings = (
-              '1'
-              '2'
-              '3'
-              '4'
-            )
-            ItemHeight = 23
-            OnClickCheck = SPKlistClickCheck
-            OnContextPopup = SPKlistContextPopup
+            AutoSort = False
+            Checkboxes = True
+            Columns = <            
+              item
+                Caption = 'File'
+                Width = 130
+              end            
+              item
+                Caption = 'SPK  Id'
+                Width = 180
+              end            
+              item
+                Caption = 'From'
+                Width = 90
+              end            
+              item
+                Caption = 'To'
+                Width = 91
+              end>
+            ColumnClick = False
             PopupMenu = SPKpopup
+            ReadOnly = True
+            ScrollBars = ssAutoBoth
             TabOrder = 0
-            Data = {
-              0400000000000000
-            }
+            ViewStyle = vsReport
+            OnContextPopup = SPKListViewContextPopup
+            OnItemChecked = SPKListViewItemChecked
           end
         end
         object Panel1: TPanel
@@ -2002,6 +2015,10 @@ object f_config_solsys: Tf_config_solsys
   object SPKpopup: TPopupMenu
     Left = 457
     Top = 124
+    object SPKrefresh: TMenuItem
+      Caption = 'SPKrefresh'
+      OnClick = SPKrefreshClick
+    end
     object SPKdelete: TMenuItem
       Caption = 'Delete'
       OnClick = SPKdeleteClick

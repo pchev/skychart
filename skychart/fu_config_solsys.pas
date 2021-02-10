@@ -49,6 +49,8 @@ type
     LabelDate1: TLabel;
     Labelemail: TLabel;
     LabelObjSpk: TLabel;
+    SPKrefresh: TMenuItem;
+    SPKListView: TListView;
     MemoSPK: TMemo;
     SPKdelete: TMenuItem;
     Panel1: TPanel;
@@ -60,7 +62,6 @@ type
     SPKobject: TEdit;
     SPKemail: TEdit;
     Labelmsgspk: TLabel;
-    SPKlist: TCheckListBox;
     EditEph: TEdit;
     GroupBox2: TGroupBox;
     LabelAsteroidCount: TLabel;
@@ -275,8 +276,9 @@ type
     procedure smallsatChange(Sender: TObject);
     procedure SPKdeleteClick(Sender: TObject);
     procedure SPKemailChange(Sender: TObject);
-    procedure SPKlistClickCheck(Sender: TObject);
-    procedure SPKlistContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
+    procedure SPKListViewContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
+    procedure SPKListViewItemChecked(Sender: TObject; Item: TListItem);
+    procedure SPKrefreshClick(Sender: TObject);
     procedure SunOnlineClick(Sender: TObject);
     procedure TransparentPlanetClick(Sender: TObject);
   private
@@ -483,6 +485,12 @@ begin
   LabelDate1.Caption:=rsStartDate;
   LabelDate2.Caption:=rsNumberOfDays;
   ButtonDownloadSpk.Caption:=rsDownload;
+  SPKdelete.Caption:=rsDelete;
+  SPKrefresh.Caption:=rsRefresh;
+  SPKListView.Column[0].Caption:=rsFile;
+  SPKListView.Column[1].Caption:='SPK  Id';
+  SPKListView.Column[2].Caption:=capitalize(rsFrom);
+  SPKListView.Column[3].Caption:=capitalize(rsTo);
 end;
 
 constructor Tf_config_solsys.Create(AOwner: TComponent);
@@ -631,89 +639,6 @@ begin
   mpcfile.InitialDir := slash(MPCDir);
   LabelAstInfo1.Caption:=rsFile+': '+cdb.AsteroidFileInfo;
   LabelAsteroidCount.Caption:=rsTotalAsteroi+': '+inttostr(cdb.NumAsteroidElement);
-end;
-
-procedure Tf_config_solsys.ShowSPK;
-begin
-  page5.TabVisible:=(libcalceph<>0);
-  if page5.TabVisible then begin
-    Labelmsgspk.Caption:='';
-    PanelSPKmemo.visible:=false;
-    PanelSPKlist.visible:=true;
-    DateEdit1.Date:=now;
-    NumDays.Value:=cmain.HorizonNumDay;
-    SPKemail.Text:=cmain.HorizonEmail;
-    ListSPK;
-  end;
-end;
-
-procedure Tf_config_solsys.ListSPK;
-var
-  fs: TSearchRec;
-  i,n: integer;
-begin
-  SPKlist.Clear;
-  if page5.TabVisible then begin
-    // search files and check the active one
-    i := findfirst(slash(SPKdir) + '*.bsp', 0, fs);
-    while i=0 do begin
-      n:=SPKlist.Items.Add(fs.Name);
-      if csc.SPKlist.IndexOf(fs.Name)>=0 then
-        SPKlist.Checked[n]:=true;
-      i := FindNext(fs);
-    end;
-    findclose(fs);
-    // inactivate the files that are no more present
-    for i:=csc.SPKlist.Count-1 downto 0 do begin
-      if SPKlist.Items.IndexOf(csc.SPKlist[i])<0 then
-        csc.SPKlist.Delete(i);
-    end;
-  end;
-end;
-
-procedure Tf_config_solsys.SPKlistClickCheck(Sender: TObject);
-var i,n,k: integer;
-  buf:string;
-begin
-  // add the checked files to the list
-  csc.SPKlist.Clear;
-  n:=SPKlist.Count;
-  k:=0;
-  Labelmsgspk.Caption:='';
-  for i:=0 to n-1 do begin
-    if SPKlist.Checked[i] then begin
-      inc(k);
-      if k<=MaxSpkFiles then begin
-        buf:= SPKlist.Items[i];
-        csc.SPKlist.Add(buf);
-      end
-      else begin
-        Labelmsgspk.Caption:=Format(rsAMaximumOfFi, [inttostr(MaxSpkFiles)]);
-        SPKlist.Checked[i]:=false;
-      end;
-    end;
-  end;
-end;
-
-procedure Tf_config_solsys.SPKlistContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
-var i: integer;
-begin
-  CurrentSPKfile:='';
-  i:=SPKlist.ItemAtPos(MousePos,true);
-  if i>=0 then
-    CurrentSPKfile:=SPKlist.Items[i];
-
-  Handled:=(CurrentSPKfile='');
-end;
-
-procedure Tf_config_solsys.SPKdeleteClick(Sender: TObject);
-begin
-  if MessageDlg(rsConfirmFileD + CurrentSPKfile, mtConfirmation, mbYesNo, 0) = mrYes then
-    begin
-      DeleteFile(slash(SPKdir)+CurrentSPKfile);
-      CurrentSPKfile:='';
-      ListSPK;
-    end;
 end;
 
 procedure Tf_config_solsys.PlanetDirChange(Sender: TObject);
@@ -869,148 +794,6 @@ begin
   {$ifndef darwin}MemoMPC.SetFocus;  {$endif}
 end;
 
-function Tf_config_solsys.HorizonSPK(obj:string; date1,date2: TDateTime; email: string; out filetodownload: string):boolean;
-var tn: TTelnetSend;
-    dt1,dt2: string;
-    ok: boolean;
-begin
-  result:=false;
-  screen.Cursor:=crHourGlass;
-  dt1:=FormatDateTime('yyyy"-"mm"-"dd',date1);
-  dt2:=FormatDateTime('yyyy"-"mm"-"dd',date2);
-  MemoSPK.Lines.Add('Request SPK file for '+obj+' between '+dt1+' and '+dt2);
-  MemoSPK.Lines.Add('Start telnet session with '+Horizon_Telnet_Host+':'+Horizon_Telnet_Port);
-  Application.ProcessMessages;
-  tn := TTelnetSend.Create;
-  try
-    tn.Timeout:=(5000);
-    tn.TermType:='vt102';
-    tn.TargetHost:=Horizon_Telnet_Host;
-    tn.TargetPort:=Horizon_Telnet_Port;
-    tn.Login;
-    ok := (tn.Sock.LastError = 0);
-    if not ok then exit;
-
-    // paging off
-    if not tn.WaitFor('Horizons>') then exit;
-    tn.Send('PAGE' + crlf);
-
-    // set I/O model 2
-    if not tn.WaitFor('Horizons>') then exit;
-    tn.Send('##2' + crlf);
-
-    // send object name
-    if not tn.WaitFor('Horizons>') then exit;
-    tn.Send('"'+obj+'"' + crlf);
-
-    // eventual space sensitive prompt
-    if tn.WaitFor('Continue [ <cr>=yes, n=no, ? ] :') then
-      tn.Send(crlf);
-
-    // select spk, at this point it may fail if the selection is not unique,
-    // in this case let the user see the log and retry with a more selective name
-    if not tn.WaitFor('[S]PK,?,<cr>:') then exit;
-    tn.Send('s' + crlf);
-
-    // enter email
-    if not tn.WaitFor('e-mail address [?]:') then exit;
-    tn.Send(email + crlf);
-
-    // confirm email
-    if not tn.WaitFor('[yes(<cr>),no]') then exit;
-    tn.Send(crlf);
-
-    // select binary format
-    if not tn.WaitFor('[Binary, ASCII, 1, ?] :') then exit;
-    tn.Send('b'+crlf);
-
-    // start and stop date
-    if not tn.WaitFor('SPK object START') then exit;
-    tn.Send(dt1+crlf);
-    if not tn.WaitFor('SPK object STOP') then exit;
-    tn.Send(dt2+crlf);
-
-    // prompt to add more
-    if not tn.WaitFor('[ YES, NO, ? ] :') then exit;
-    tn.Send('no'+crlf);
-
-    // extract to download url for the file
-    if not tn.WaitFor('Full path   :') then exit;
-    filetodownload:=tn.RecvTerminated(crlf);
-
-    filetodownload:=trim(filetodownload);
-    result:=filetodownload<>'';
-
-    // return to main prompt
-    if not tn.WaitFor('[R]edisplay, ?, <cr>:') then exit;
-    tn.Send(crlf);
-
-    // quit
-    if not tn.WaitFor('Horizons>') then exit;
-    tn.Send('x' + crlf);
-
-  finally
-    screen.Cursor:=crDefault;
-    if not Result then begin
-      ButtonReturn.Visible:=true;
-      MemoSPK.lines.add(tn.SessionLog);
-      MemoSPK.lines.add(tn.Sock.LastErrorDesc);
-      MemoSPK.lines.add('');
-      MemoSPK.SelStart := length(MemoSPK.Text) - 1;
-      PanelSPKmemo.visible:=true;
-      PanelSPKlist.visible:=false;
-      Application.ProcessMessages;
-    end;
-    tn.free;
-  end;
-end;
-
-procedure Tf_config_solsys.ButtonReturnClick(Sender: TObject);
-begin
-  PanelSPKmemo.visible:=false;
-  PanelSPKlist.visible:=true;
-end;
-
-procedure Tf_config_solsys.ButtonDownloadSpkClick(Sender: TObject);
-var obj,email,dlf,fn: string;
-    dt1,dt2: TDateTime;
-begin
-  MemoSPK.Clear;
-  PanelSPKmemo.Visible:=true;
-  PanelSPKlist.Visible:=false;
-  ButtonReturn.Visible:=false;
-  obj:=trim(uppercase(SPKobject.Text));
-  if obj='' then begin
-    Labelmsgspk.Caption:=rsRequiredFiel+': '+rsObjectName;
-    exit;
-  end;
-  email:=trim(SPKemail.Text);
-  if (email='')or(pos('@',email)=0) then begin
-    Labelmsgspk.Caption:=rsRequiredFiel+': '+rsEmail;
-    exit;
-  end;
-  dt1:=DateEdit1.Date;
-  dt2:=dt1+NumDays.Value;
-  if HorizonSPK(obj,dt1,dt2,email,dlf) then begin
-    MemoSPK.lines.add('Downloading file '+dlf);
-    Application.ProcessMessages;
-    fn:=CleanName(obj);
-    DownloadDialog1.URL := dlf;
-    DownloadDialog1.SaveToFile := slash(SPKdir) + fn + '.bsp';
-    DownloadDialog1.onFeedback := nil;
-    DownloadDialog1.ConfirmDownload := False;
-    if DownloadDialog1.Execute then begin
-      ListSPK;
-    end
-    else
-    begin
-      ShowMessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
-    end;
-    PanelSPKmemo.visible:=false;
-    PanelSPKlist.visible:=true;
-    ButtonReturn.Visible:=true;
-  end;
-end;
 
 procedure Tf_config_solsys.ButtonEphAddClick(Sender: TObject);
 begin
@@ -1459,11 +1242,6 @@ begin
   csc.ShowSmallsat := smallsat.Checked;
 end;
 
-procedure Tf_config_solsys.SPKemailChange(Sender: TObject);
-begin
-  cmain.HorizonEmail  := SPKemail.Text;
-end;
-
 procedure Tf_config_solsys.SunOnlineClick(Sender: TObject);
 begin
   csc.SunOnline := SunOnline.Checked;
@@ -1483,6 +1261,249 @@ begin
   comfile.Text := '';
   csc.ShowComet := True;
   csc.ShowAsteroid := True;
+end;
+
+
+procedure Tf_config_solsys.ShowSPK;
+begin
+  page5.TabVisible:=(libcalceph<>0);
+  if page5.TabVisible then begin
+    Labelmsgspk.Caption:='';
+    PanelSPKmemo.visible:=false;
+    PanelSPKlist.visible:=true;
+    DateEdit1.Date:=now;
+    NumDays.Value:=cmain.HorizonNumDay;
+    SPKemail.Text:=cmain.HorizonEmail;
+    ListSPK;
+  end;
+end;
+
+procedure Tf_config_solsys.ListSPK;
+var
+  fs: TSearchRec;
+  i: integer;
+  item:TListItem;
+  target:string;
+  ft,lt: double;
+begin
+  SPKListView.Clear;
+  if page5.TabVisible then begin
+    // search files and check the active one
+    i := findfirst(slash(SPKdir) + '*.bsp', 0, fs);
+    while i=0 do begin
+      item:=SPKListView.Items.Add;
+      item.Caption:=fs.name;
+      ListContent(slash(SPKdir)+fs.name,target,ft,lt);
+      item.SubItems.Add(target);
+      item.SubItems.Add(jddate(ft));
+      item.SubItems.Add(jddate(lt));
+      if csc.SPKlist.IndexOf(fs.Name)>=0 then begin
+        item.Checked:=true;
+      end;
+      i := FindNext(fs);
+    end;
+    findclose(fs);
+    // inactivate the files that are no more present
+    for i:=csc.SPKlist.Count-1 downto 0 do begin
+      if SPKListView.Items.FindCaption(0,csc.SPKlist[i],False,True,False)=nil then
+         csc.SPKlist.Delete(i);
+    end;
+  end;
+end;
+
+procedure Tf_config_solsys.SPKListViewItemChecked(Sender: TObject; Item: TListItem);
+var i,k: integer;
+begin
+  // add the checked files to the list
+  csc.SPKlist.Clear;
+  k:=0;
+  for i:=0 to SPKListView.Items.Count-1 do begin
+    if SPKListView.Items[i].Checked then begin
+       inc(k);
+       if k<=MaxSpkFiles then begin
+         csc.SPKlist.Add(SPKListView.Items[i].Caption);
+       end
+       else begin
+         Labelmsgspk.Caption:=Format(rsAMaximumOfFi, [inttostr(MaxSpkFiles)]);
+         SPKListView.Items[i].Checked:=false;
+       end;
+    end;
+  end;
+end;
+
+procedure Tf_config_solsys.SPKListViewContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
+var item: TListItem;
+begin
+  CurrentSPKfile:='';
+  item:=SPKListView.GetItemAt(MousePos.X,MousePos.Y);
+  if item<>nil then
+    CurrentSPKfile:=item.Caption;
+
+  Handled:=(CurrentSPKfile='');
+end;
+
+procedure Tf_config_solsys.SPKrefreshClick(Sender: TObject);
+begin
+  SPKobject.Text:=ExtractFileNameOnly(CurrentSPKfile);
+  ButtonDownloadSpk.Click;
+end;
+
+procedure Tf_config_solsys.SPKdeleteClick(Sender: TObject);
+begin
+  if MessageDlg(rsConfirmFileD + CurrentSPKfile, mtConfirmation, mbYesNo, 0) = mrYes then
+    begin
+      DeleteFile(slash(SPKdir)+CurrentSPKfile);
+      CurrentSPKfile:='';
+      ListSPK;
+    end;
+end;
+
+procedure Tf_config_solsys.SPKemailChange(Sender: TObject);
+begin
+  cmain.HorizonEmail  := SPKemail.Text;
+end;
+
+procedure Tf_config_solsys.ButtonReturnClick(Sender: TObject);
+begin
+  PanelSPKmemo.visible:=false;
+  PanelSPKlist.visible:=true;
+end;
+
+procedure Tf_config_solsys.ButtonDownloadSpkClick(Sender: TObject);
+var obj,email,dlf,fn: string;
+    dt1,dt2: TDateTime;
+begin
+  MemoSPK.Clear;
+  PanelSPKmemo.Visible:=true;
+  PanelSPKlist.Visible:=false;
+  ButtonReturn.Visible:=false;
+  obj:=trim(uppercase(SPKobject.Text));
+  if obj='' then begin
+    Labelmsgspk.Caption:=rsRequiredFiel+': '+rsObjectName;
+    exit;
+  end;
+  email:=trim(SPKemail.Text);
+  if (email='')or(pos('@',email)=0) then begin
+    Labelmsgspk.Caption:=rsRequiredFiel+': '+rsEmail;
+    exit;
+  end;
+  dt1:=DateEdit1.Date;
+  dt2:=dt1+NumDays.Value;
+  if HorizonSPK(obj,dt1,dt2,email,dlf) then begin
+    MemoSPK.lines.add('Downloading file '+dlf);
+    Application.ProcessMessages;
+    fn:=CleanName(obj);
+    DownloadDialog1.URL := dlf;
+    DownloadDialog1.SaveToFile := slash(SPKdir) + fn + '.bsp';
+    DownloadDialog1.onFeedback := nil;
+    DownloadDialog1.ConfirmDownload := False;
+    if DownloadDialog1.Execute then begin
+      ListSPK;
+    end
+    else
+    begin
+      ShowMessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
+    end;
+    PanelSPKmemo.visible:=false;
+    PanelSPKlist.visible:=true;
+    ButtonReturn.Visible:=true;
+  end;
+end;
+
+function Tf_config_solsys.HorizonSPK(obj:string; date1,date2: TDateTime; email: string; out filetodownload: string):boolean;
+var tn: TTelnetSend;
+    dt1,dt2: string;
+    ok: boolean;
+begin
+  result:=false;
+  screen.Cursor:=crHourGlass;
+  dt1:=FormatDateTime('yyyy"-"mm"-"dd',date1);
+  dt2:=FormatDateTime('yyyy"-"mm"-"dd',date2);
+  MemoSPK.Lines.Add('Request SPK file for '+obj+' between '+dt1+' and '+dt2);
+  MemoSPK.Lines.Add('Start telnet session with '+Horizon_Telnet_Host+':'+Horizon_Telnet_Port);
+  Application.ProcessMessages;
+  tn := TTelnetSend.Create;
+  try
+    tn.Timeout:=(5000);
+    tn.TermType:='vt102';
+    tn.TargetHost:=Horizon_Telnet_Host;
+    tn.TargetPort:=Horizon_Telnet_Port;
+    tn.Login;
+    ok := (tn.Sock.LastError = 0);
+    if not ok then exit;
+
+    // paging off
+    if not tn.WaitFor('Horizons>') then exit;
+    tn.Send('PAGE' + crlf);
+
+    // set I/O model 2
+    if not tn.WaitFor('Horizons>') then exit;
+    tn.Send('##2' + crlf);
+
+    // send object name
+    if not tn.WaitFor('Horizons>') then exit;
+    tn.Send('"'+obj+'"' + crlf);
+
+    // eventual space sensitive prompt
+    if tn.WaitFor('Continue [ <cr>=yes, n=no, ? ] :') then
+      tn.Send(crlf);
+
+    // select spk, at this point it may fail if the selection is not unique,
+    // in this case let the user see the log and retry with a more selective name
+    if not tn.WaitFor('[S]PK,?,<cr>:') then exit;
+    tn.Send('s' + crlf);
+
+    // enter email
+    if not tn.WaitFor('e-mail address [?]:') then exit;
+    tn.Send(email + crlf);
+
+    // confirm email
+    if not tn.WaitFor('[yes(<cr>),no]') then exit;
+    tn.Send(crlf);
+
+    // select binary format
+    if not tn.WaitFor('[Binary, ASCII, 1, ?] :') then exit;
+    tn.Send('b'+crlf);
+
+    // start and stop date
+    if not tn.WaitFor('SPK object START') then exit;
+    tn.Send(dt1+crlf);
+    if not tn.WaitFor('SPK object STOP') then exit;
+    tn.Send(dt2+crlf);
+
+    // prompt to add more
+    if not tn.WaitFor('[ YES, NO, ? ] :') then exit;
+    tn.Send('no'+crlf);
+
+    // extract to download url for the file
+    if not tn.WaitFor('Full path   :') then exit;
+    filetodownload:=tn.RecvTerminated(crlf);
+
+    filetodownload:=trim(filetodownload);
+    result:=filetodownload<>'';
+
+    // return to main prompt
+    if not tn.WaitFor('[R]edisplay, ?, <cr>:') then exit;
+    tn.Send(crlf);
+
+    // quit
+    if not tn.WaitFor('Horizons>') then exit;
+    tn.Send('x' + crlf);
+
+  finally
+    screen.Cursor:=crDefault;
+    if not Result then begin
+      ButtonReturn.Visible:=true;
+      MemoSPK.lines.add(tn.SessionLog);
+      MemoSPK.lines.add(tn.Sock.LastErrorDesc);
+      MemoSPK.lines.add('');
+      MemoSPK.SelStart := length(MemoSPK.Text) - 1;
+      PanelSPKmemo.visible:=true;
+      PanelSPKlist.visible:=false;
+      Application.ProcessMessages;
+    end;
+    tn.free;
+  end;
 end;
 
 end.

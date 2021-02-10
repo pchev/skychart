@@ -3483,7 +3483,7 @@ end;
 
 procedure TPlanet.FindBodyIndex(bname: string; cfgsc: Tconf_skychart; out idx:integer);
 var s1: string;
-    i: integer;
+    i,n: integer;
 begin
 
   idx:=-1;
@@ -3495,8 +3495,15 @@ begin
   if s1 = '' then
     exit;
 
+  if copy(s1,1,3)='SPK' then begin
+    n:=1;
+    delete(s1,1,3);
+  end
+  else
+    n:=2;
+
   for i:=1 to cfgsc.BodiesNb do begin
-    if uppercase(StringReplace(cfgsc.BodiesName[0, i, 2],' ','',[rfReplaceAll]))=s1 then begin
+    if uppercase(StringReplace(cfgsc.BodiesName[0, i, n],' ','',[rfReplaceAll]))=s1 then begin
       idx:=i;
       break;
     end;

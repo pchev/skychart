@@ -54,6 +54,7 @@ uses calceph, math, dynlibs, u_constant, u_util, LazFileUtils, Classes,sysutils;
   Procedure CloseCalcephBody;
   Function CalcephComputeBody(jdt: double; target, center: integer; out pv: TDoubleArray): boolean;
   Procedure ListContent(out targets: TTargetArray);
+  procedure ListContent(fn: string; out targets: string; out firsttime,lasttime:double);
 
   var
     libcalceph: TLibHandle;
@@ -318,6 +319,38 @@ begin
     end;
   end;
   SetLength(targets,k);
+end;
+
+procedure ListContent(fn: string; out targets: string; out firsttime,lasttime:double);
+var
+  eph: Pt_calcephbin;
+  fileeph: array[0..1] of Pchar;
+  i,n: integer;
+  ft, lt: double;
+  itarget, icenter, iframe: integer;
+  buf:string;
+begin
+  targets:='';
+  firsttime:=1E99;
+  lasttime:=0;
+  if libcalceph=0 then exit;
+  fileeph[0]:=PChar(fn);
+  eph:=calceph_open_array(1,fileeph);
+  if eph=nil then exit;
+  n:= calceph_getpositionrecordcount(eph);
+  targets:=';';
+  for i:=1 to n do begin
+    calceph_getpositionrecordindex(eph, i, itarget, icenter, ft, lt, iframe);
+    buf:=inttostr(itarget);
+    if pos(';'+buf+';',targets)=0 then begin
+      targets:=targets+buf+';';
+    end;
+    firsttime:=min(firsttime,ft);
+    lasttime:=max(lasttime,lt);
+  end;
+  Delete(targets,1,1);
+  if length(targets)>1 then Delete(targets,length(targets),1);
+  calceph_close(eph);
 end;
 
 initialization
