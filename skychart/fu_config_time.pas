@@ -1242,6 +1242,10 @@ begin
     CometListChange(nil);
   end;
   PanelBody.Visible:=csc.SimObject[14];
+  if not csc.SimObject[14] then begin
+    SPKbox.Clear;
+    SPKboxChange(nil);
+  end;
   if csc.SimObject[12] or csc.SimObject[13] or csc.SimObject[14] then
   begin
     nbstep.MaxValue := MaxAstSim;
