@@ -3064,6 +3064,7 @@ begin
   end
   else
   begin
+    cfgsc.BodiesNb := 0;
     Result := False;
   end;
 end;

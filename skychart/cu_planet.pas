@@ -2910,6 +2910,7 @@ begin
       application.ProcessMessages;
     end;
     lockdb := True;
+    cfgsc.BodiesNb := 0;
       if cfgsc.SimObject[14] then
         SimNb := min(cfgsc.Simnb, MaxAstSim)
       else
