@@ -1210,6 +1210,7 @@ end;
 procedure Tf_config_time.SimObjItemClick(Sender: TObject; Index: longint);
 var
   j: integer;
+  simok: boolean;
 begin
   case index of
     0: j := 10;   // sun
@@ -1237,14 +1238,13 @@ begin
     AsteroidListChange(nil);
   end;
   panelcom.Visible:=csc.SimObject[13];
-  if not csc.SimObject[12] then begin
+  if not csc.SimObject[13] then begin
     CometList.Clear;
     CometListChange(nil);
   end;
   PanelBody.Visible:=csc.SimObject[14];
   if not csc.SimObject[14] then begin
-    SPKbox.Clear;
-    SPKboxChange(nil);
+    csc.SimBody:=-1;
   end;
   if csc.SimObject[12] or csc.SimObject[13] or csc.SimObject[14] then
   begin
@@ -1257,6 +1257,10 @@ begin
     nbstep.MaxValue := MaxPlSim;
     UpDown1.Max := MaxPlSim;
   end;
+  simok:=false;
+  for j:=0 to SimObj.Count-1 do
+    simok := simok or SimObj.Checked[j];
+  if not simok then stepreset.Click;
 end;
 
 
