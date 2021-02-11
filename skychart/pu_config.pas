@@ -203,10 +203,10 @@ begin
   TreeView1.items[i].Text :=  '3- ' + rsDSSRealSky;  inc(i);
   TreeView1.items[i].Text :=  '4- ' + rsImageArchive;  inc(i);
   TreeView1.items[i].Text :='9- ' + rsUpdate1;  inc(i);
-  TreeView1.items[i].Text :=  '1- ' + rsProxy;  inc(i);
-  TreeView1.items[i].Text :=  '2- ' + rsOrbitalEleme;  inc(i);
-  TreeView1.items[i].Text :=  '3- ' + rsOnlineDSSPic;  inc(i);
-  TreeView1.items[i].Text :=  '4- ' + rsArtificialSa2;  inc(i);
+  TreeView1.items[i].Text :=  '1- ' + rsOrbitalEleme;  inc(i);
+  TreeView1.items[i].Text :=  '2- ' + rsOnlineDSSPic;  inc(i);
+  TreeView1.items[i].Text :=  '3- ' + rsArtificialSa2;  inc(i);
+  TreeView1.items[i].Text :=  '4- ' + rsProxy;  inc(i);
   TreeView1.items[i].Text :='10- ' + rsCalendar;  inc(i);
   TreeView1.items[i].Text :=  '1- ' + rsGraphs;  inc(i);
 

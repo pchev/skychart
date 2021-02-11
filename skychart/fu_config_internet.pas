@@ -60,7 +60,7 @@ type
     anonpass: TEdit;
     CometUrlList: TMemo;
     AsteroidUrlList: TMemo;
-    Page3: TTabSheet;
+    PagePict: TTabSheet;
     Panel2: TPanel;
     proxyhost: TEdit;
     proxyport: TEdit;
@@ -74,11 +74,11 @@ type
     Label4: TLabel;
     Label5: TLabel;
     MainPanel: TPanel;
-    Page1: TTabSheet;
+    PageProxy: TTabSheet;
     PageControl1: TPageControl;
-    Page2: TTabSheet;
+    PageElem: TTabSheet;
     DSSpictures: TStringGrid;
-    Page4: TTabSheet;
+    PageArtSat: TTabSheet;
     procedure astcdcneoClick(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure anonpassChange(Sender: TObject);
@@ -134,7 +134,7 @@ implementation
 procedure Tf_config_internet.SetLang;
 begin
   Caption := rsUpdate1;
-  Page1.Caption := rsProxy;
+  PageProxy.Caption := rsProxy;
   GroupBox1.Caption := rsHTTPProxy;
   httpproxy.Caption := rsUseHTTPProxy;
   SocksProxy.Caption := rsUseSocksProx;
@@ -146,7 +146,7 @@ begin
   Label1.Caption := rsAnonymousPas;
   ftppassive.Caption := rsFTPPassiveMo;
   CheckBox1.Caption := rsAskConfirmat;
-  Page2.Caption := rsOrbitalEleme;
+  PageElem.Caption := rsOrbitalEleme;
   GroupBox3.Caption := rsCometElement;
   GroupBox4.Caption := rsAsteroidElem;
   comdefault.Caption := rsDefault;
@@ -154,10 +154,10 @@ begin
   commpc.Caption := rsMPCHttp;
   astcdc.Caption := rsFirst5000;
   astcdcneo.Caption := rsFirst5000 + ' NEO + TNO';
-  Page3.Caption := rsOnlineDSS;
+  PagePict.Caption := rsOnlineDSS;
   GroupBox5.Caption := rsOnlinePictur;
   DefaultDSS.Caption := rsDefault;
-  Page4.Caption := rsArtificialSa;
+  PageArtSat.Caption := rsArtificialSa;
   GroupBox6.Caption := rsArtificialSa3;
   tlemanual.Caption := rsManual;
   SetHelp(self, hlpCfgInt);
