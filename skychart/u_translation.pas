@@ -1558,7 +1558,9 @@ resourcestring
   rsStartDate = 'Start date';
   rsNumberOfDays = 'Number of days';
   rsThisFileCont = 'This file contain %s elements.%sThis is probably a base file you want to load without the "Append" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?';
-  rsDeleteAllExp = 'Delete all expired files';
+  rsDeleteAllExp = 'Delete all expired ephemeris';
+  rsRefreshAllEp = 'Refresh all ephemeris';
+  rsAppendToCurr = 'Append to current file';
 
 // also update upsi_translation
 

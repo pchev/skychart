@@ -1114,8 +1114,8 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 0
           object astsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 517
-            ClientWidth = 491
+            ClientHeight = 490
+            ClientWidth = 485
             ImageIndex = 3
             ParentFont = False
             object GroupBox9: TGroupBox
@@ -1196,7 +1196,7 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 70
+                ClientHeight = 88
                 ClientWidth = 395
                 Color = clBtnFace
                 ItemIndex = 1
@@ -1254,8 +1254,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object astload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 517
-            ClientWidth = 491
+            ClientHeight = 490
+            ClientWidth = 485
             ImageIndex = 1
             ParentFont = False
             object Label206: TLabel
@@ -1351,8 +1351,8 @@ object f_config_solsys: Tf_config_solsys
               OnChanging = AstPageControl2Changing
               object TabSheet3: TTabSheet
                 Caption = 'Load MPC format file'
-                ClientHeight = 93
-                ClientWidth = 446
+                ClientHeight = 66
+                ClientWidth = 440
                 ParentFont = False
                 object Label1: TLabel
                   Left = 15
@@ -1377,8 +1377,8 @@ object f_config_solsys: Tf_config_solsys
               end
               object TabSheet4: TTabSheet
                 Caption = 'Or use a local file :'
-                ClientHeight = 93
-                ClientWidth = 446
+                ClientHeight = 66
+                ClientWidth = 440
                 ParentFont = False
                 object mpcfile: TFileNameEdit
                   Left = 15
@@ -1419,8 +1419,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object astprepare: TTabSheet
             Caption = 'Prepare Monthly Data'
-            ClientHeight = 517
-            ClientWidth = 491
+            ClientHeight = 490
+            ClientWidth = 485
             ImageIndex = 2
             ParentFont = False
             object Label210: TLabel
@@ -1526,8 +1526,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object AddsingleAst: TTabSheet
             Caption = 'Add'
-            ClientHeight = 517
-            ClientWidth = 491
+            ClientHeight = 490
+            ClientWidth = 485
             ImageIndex = 4
             ParentFont = False
             object Label217: TLabel
@@ -2034,13 +2034,13 @@ object f_config_solsys: Tf_config_solsys
       Caption = 'Refresh'
       OnClick = SPKrefreshClick
     end
-    object SPKRefreshAll: TMenuItem
-      Caption = 'Refresh all'
-      OnClick = SPKRefreshAllClick
-    end
     object SPKdelete: TMenuItem
       Caption = 'Delete'
       OnClick = SPKdeleteClick
+    end
+    object SPKRefreshAll: TMenuItem
+      Caption = 'Refresh all'
+      OnClick = SPKRefreshAllClick
     end
     object SPKDeleteExpired: TMenuItem
       Caption = 'Delete all expired files'

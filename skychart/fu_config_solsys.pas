@@ -440,6 +440,7 @@ begin
   aststoperr.Caption := rsHaltAfter100;
   astlimitbox.Caption := rsLoadOnlyTheF;
   LoadMPC.Caption := rsLoadFile;
+  astappend.Caption:=rsAppendToCurr;
   astprepare.Caption := rsPrepareMonth;
   Label210.Caption := rsMessages;
   GroupBox8.Caption := rsPrepareData;
@@ -495,6 +496,7 @@ begin
   ButtonCancel.Caption:=rsCancel;
   SPKdelete.Caption:=rsDelete;
   SPKrefresh.Caption:=rsRefresh;
+  SPKRefreshAll.Caption:=rsRefreshAllEp;
   SPKDeleteExpired.Caption:=rsDeleteAllExp;
   SPKListView.Column[0].Caption:=rsFile;
   SPKListView.Column[1].Caption:='SPK  Id';
@@ -1349,8 +1351,11 @@ var item: TListItem;
 begin
   CurrentSPKfile:='';
   item:=SPKListView.GetItemAt(MousePos.X,MousePos.Y);
-  if item<>nil then
+  if item<>nil then begin
     CurrentSPKfile:=item.Caption;
+    SPKdelete.Caption:=rsDelete+blank+CurrentSPKfile;
+    SPKrefresh.Caption:=rsRefresh+blank+CurrentSPKfile;
+  end;
 
   Handled:=(CurrentSPKfile='');
 end;
