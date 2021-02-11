@@ -13,10 +13,13 @@ procedure SIRegister_translation(CL: TPSPascalCompiler);
 
 implementation
 
-uses u_translation;
+uses u_translation, u_constant;
 
 procedure SIRegister_translation(CL: TPSPascalCompiler);
 begin
+  CL.AddConstantN('rsdeg', 'String').SetString(ldeg);
+  CL.AddConstantN('rsmin', 'String').SetString(lmin);
+  CL.AddConstantN('rssec', 'String').SetString(lsec);
   CL.AddConstantN('rsHour', 'String').SetString(rsHour);
   CL.AddConstantN('rsMinute', 'String').SetString(rsMinute);
   CL.AddConstantN('rsSecond', 'String').SetString(rsSecond);
