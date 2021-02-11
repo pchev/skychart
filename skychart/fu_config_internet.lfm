@@ -1,31 +1,30 @@
 object f_config_internet: Tf_config_internet
   Left = 0
-  Height = 511
+  Height = 516
   Top = 0
-  Width = 498
-  ClientHeight = 511
-  ClientWidth = 498
-  DesignTimePPI = 95
+  Width = 503
+  ClientHeight = 516
+  ClientWidth = 503
   ParentFont = False
   TabOrder = 0
   DesignTop = 23
   object MainPanel: TPanel
     Left = 0
-    Height = 511
+    Height = 516
     Top = 0
-    Width = 498
+    Width = 503
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 511
-    ClientWidth = 498
+    ClientHeight = 516
+    ClientWidth = 503
     ParentColor = False
     ParentFont = False
     TabOrder = 0
     object PageControl1: TPageControl
       Left = 0
-      Height = 511
+      Height = 516
       Top = 0
-      Width = 498
+      Width = 503
       ActivePage = Page4
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
@@ -36,17 +35,17 @@ object f_config_internet: Tf_config_internet
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
         Caption = 'Proxy'
-        ClientHeight = 507
-        ClientWidth = 488
+        ClientHeight = 512
+        ClientWidth = 493
         ParentFont = False
         object GroupBox1: TGroupBox
           Left = 20
-          Height = 201
+          Height = 203
           Top = 12
-          Width = 401
+          Width = 405
           Caption = 'HTTP Proxy'
-          ClientHeight = 181
-          ClientWidth = 399
+          ClientHeight = 183
+          ClientWidth = 403
           ParentFont = False
           TabOrder = 0
           object httpproxy: TCheckBox
@@ -61,35 +60,35 @@ object f_config_internet: Tf_config_internet
           end
           object Panel2: TPanel
             Left = 16
-            Height = 137
+            Height = 138
             Top = 40
-            Width = 378
-            ClientHeight = 137
+            Width = 382
+            ClientHeight = 134
             ClientWidth = 378
             ParentFont = False
             TabOrder = 1
             object proxypass: TEdit
-              Left = 123
+              Left = 124
               Height = 28
-              Top = 98
-              Width = 90
+              Top = 99
+              Width = 91
               Constraints.MaxHeight = 28
               OnChange = proxypassChange
               ParentFont = False
               TabOrder = 4
             end
             object proxyuser: TEdit
-              Left = 123
+              Left = 124
               Height = 28
-              Top = 57
-              Width = 90
+              Top = 58
+              Width = 91
               Constraints.MaxHeight = 28
               OnChange = proxyuserChange
               ParentFont = False
               TabOrder = 2
             end
             object proxyport: TEdit
-              Left = 307
+              Left = 310
               Height = 28
               Top = 13
               Width = 40
@@ -99,10 +98,10 @@ object f_config_internet: Tf_config_internet
               TabOrder = 1
             end
             object proxyhost: TEdit
-              Left = 123
+              Left = 124
               Height = 28
               Top = 13
-              Width = 90
+              Width = 91
               Constraints.MaxHeight = 28
               OnChange = proxyhostChange
               ParentFont = False
@@ -111,7 +110,7 @@ object f_config_internet: Tf_config_internet
             object Label5: TLabel
               Left = 22
               Height = 19
-              Top = 105
+              Top = 106
               Width = 58
               Caption = 'Password'
               ParentColor = False
@@ -120,14 +119,14 @@ object f_config_internet: Tf_config_internet
             object Label4: TLabel
               Left = 22
               Height = 19
-              Top = 61
+              Top = 62
               Width = 67
               Caption = 'User Name'
               ParentColor = False
               ParentFont = False
             end
             object Label3: TLabel
-              Left = 227
+              Left = 229
               Height = 19
               Top = 17
               Width = 64
@@ -145,10 +144,10 @@ object f_config_internet: Tf_config_internet
               ParentFont = False
             end
             object SocksType: TComboBox
-              Left = 247
+              Left = 250
               Height = 28
-              Top = 52
-              Width = 100
+              Top = 53
+              Width = 101
               Constraints.MaxHeight = 28
               ItemHeight = 0
               ItemIndex = 0
@@ -164,7 +163,7 @@ object f_config_internet: Tf_config_internet
             end
           end
           object SocksProxy: TCheckBox
-            Left = 202
+            Left = 204
             Height = 23
             Top = 11
             Width = 98
@@ -176,18 +175,18 @@ object f_config_internet: Tf_config_internet
         end
         object GroupBox2: TGroupBox
           Left = 20
-          Height = 120
-          Top = 222
-          Width = 401
+          Height = 121
+          Top = 224
+          Width = 405
           Caption = 'FTP '
-          ClientHeight = 100
-          ClientWidth = 399
+          ClientHeight = 101
+          ClientWidth = 403
           ParentFont = False
           TabOrder = 1
           object Label1: TLabel
             Left = 39
             Height = 19
-            Top = 60
+            Top = 61
             Width = 134
             Caption = 'Anonymous password'
             ParentColor = False
@@ -204,10 +203,10 @@ object f_config_internet: Tf_config_internet
             TabOrder = 0
           end
           object anonpass: TEdit
-            Left = 210
+            Left = 212
             Height = 28
-            Top = 52
-            Width = 144
+            Top = 53
+            Width = 146
             Constraints.MaxHeight = 28
             OnChange = anonpassChange
             ParentFont = False
@@ -217,7 +216,7 @@ object f_config_internet: Tf_config_internet
         object CheckBox1: TCheckBox
           Left = 20
           Height = 23
-          Top = 350
+          Top = 354
           Width = 318
           Caption = 'Ask confirmation before any Internet connection'
           OnClick = CheckBox1Click
@@ -227,14 +226,14 @@ object f_config_internet: Tf_config_internet
       end
       object Page2: TTabSheet
         Caption = 'Orbital Elements'
-        ClientHeight = 507
-        ClientWidth = 488
+        ClientHeight = 512
+        ClientWidth = 493
         ParentFont = False
         object comdefault: TButton
-          Left = 371
+          Left = 375
           Height = 25
-          Top = 142
-          Width = 75
+          Top = 143
+          Width = 76
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
           OnClick = comdefaultClick
@@ -242,10 +241,10 @@ object f_config_internet: Tf_config_internet
           TabOrder = 1
         end
         object astdefault: TButton
-          Left = 371
+          Left = 375
           Height = 25
-          Top = 326
-          Width = 75
+          Top = 329
+          Width = 76
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
           OnClick = astdefaultClick
@@ -255,8 +254,8 @@ object f_config_internet: Tf_config_internet
         object mpcorb: TButton
           Left = 24
           Height = 25
-          Top = 368
-          Width = 138
+          Top = 372
+          Width = 139
           BorderSpacing.InnerBorder = 4
           Caption = 'MPCORB > 70Mb!'
           OnClick = mpcorbClick
@@ -264,10 +263,10 @@ object f_config_internet: Tf_config_internet
           TabOrder = 4
         end
         object commpc: TButton
-          Left = 248
+          Left = 251
           Height = 25
-          Top = 142
-          Width = 102
+          Top = 143
+          Width = 103
           BorderSpacing.InnerBorder = 4
           Caption = 'MPC Http'
           OnClick = commpcClick
@@ -275,21 +274,21 @@ object f_config_internet: Tf_config_internet
           TabOrder = 0
         end
         object comvanbuitenen: TButton
-          Left = 72
+          Left = 73
           Height = 25
-          Top = 144
-          Width = 159
+          Top = 146
+          Width = 161
           BorderSpacing.InnerBorder = 4
           Caption = 'astro.vanbuitenen.nl'
           OnClick = comvanbuitenenClick
           ParentFont = False
           TabOrder = 8
-       end
-       object astcdc: TButton
+        end
+        object astcdc: TButton
           Left = 24
           Height = 25
-          Top = 326
-          Width = 138
+          Top = 329
+          Width = 139
           BorderSpacing.InnerBorder = 4
           Caption = 'First 5000'
           OnClick = astcdcClick
@@ -297,10 +296,10 @@ object f_config_internet: Tf_config_internet
           TabOrder = 2
         end
         object astcdcneo: TButton
-          Left = 176
+          Left = 178
           Height = 25
-          Top = 326
-          Width = 180
+          Top = 329
+          Width = 182
           Caption = 'First 5000 + NEO + TNO'
           OnClick = astcdcneoClick
           ParentFont = False
@@ -308,12 +307,12 @@ object f_config_internet: Tf_config_internet
         end
         object GroupBox3: TGroupBox
           Left = 16
-          Height = 128
+          Height = 129
           Top = 8
-          Width = 432
+          Width = 437
           Caption = 'Comet elements in MPC format (one URL by line) '
-          ClientHeight = 108
-          ClientWidth = 430
+          ClientHeight = 109
+          ClientWidth = 435
           ParentFont = False
           TabOrder = 6
           object CometUrlList: TMemo
@@ -332,12 +331,12 @@ object f_config_internet: Tf_config_internet
         end
         object GroupBox4: TGroupBox
           Left = 16
-          Height = 136
-          Top = 184
-          Width = 432
+          Height = 137
+          Top = 186
+          Width = 437
           Caption = 'Asteroid elements in MPC format (one URL by line)'
-          ClientHeight = 116
-          ClientWidth = 430
+          ClientHeight = 117
+          ClientWidth = 435
           ParentFont = False
           TabOrder = 7
           object AsteroidUrlList: TMemo
@@ -357,14 +356,14 @@ object f_config_internet: Tf_config_internet
       end
       object Page3: TTabSheet
         Caption = 'Online DSS'
-        ClientHeight = 507
-        ClientWidth = 488
+        ClientHeight = 512
+        ClientWidth = 493
         ParentFont = False
         object DefaultDSS: TButton
-          Left = 394
+          Left = 398
           Height = 25
-          Top = 373
-          Width = 75
+          Top = 377
+          Width = 76
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
           OnClick = DefaultDSSClick
@@ -373,12 +372,12 @@ object f_config_internet: Tf_config_internet
         end
         object GroupBox5: TGroupBox
           Left = 16
-          Height = 353
+          Height = 357
           Top = 8
-          Width = 457
+          Width = 462
           Caption = 'Online pictures servers'
-          ClientHeight = 333
-          ClientWidth = 455
+          ClientHeight = 337
+          ClientWidth = 460
           ParentFont = False
           TabOrder = 1
           object DSSpictures: TStringGrid
@@ -389,7 +388,7 @@ object f_config_internet: Tf_config_internet
             Align = alClient
             Anchors = [akTop, akLeft, akRight]
             ColCount = 2
-            DefaultColWidth = 120
+            DefaultColWidth = 121
             FixedCols = 0
             Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goAlwaysShowEditor, goSmoothScroll]
             ParentFont = False
@@ -401,14 +400,14 @@ object f_config_internet: Tf_config_internet
       end
       object Page4: TTabSheet
         Caption = 'Page4'
-        ClientHeight = 507
-        ClientWidth = 488
+        ClientHeight = 512
+        ClientWidth = 493
         ParentFont = False
         object tlecelestrack: TButton
           Left = 16
           Height = 25
-          Top = 248
-          Width = 112
+          Top = 251
+          Width = 113
           BorderSpacing.InnerBorder = 4
           Caption = 'Celestrak'
           OnClick = tlecelestrackClick
@@ -416,10 +415,10 @@ object f_config_internet: Tf_config_internet
           TabOrder = 0
         end
         object tleinfo: TButton
-          Left = 184
+          Left = 186
           Height = 25
-          Top = 248
-          Width = 112
+          Top = 251
+          Width = 113
           BorderSpacing.InnerBorder = 4
           Caption = 'Tle.info'
           OnClick = tleinfoClick
@@ -427,10 +426,10 @@ object f_config_internet: Tf_config_internet
           TabOrder = 1
         end
         object tlemanual: TButton
-          Left = 338
+          Left = 342
           Height = 25
-          Top = 248
-          Width = 112
+          Top = 251
+          Width = 113
           Caption = 'Manual'
           OnClick = tlemanualClick
           ParentFont = False
@@ -438,19 +437,19 @@ object f_config_internet: Tf_config_internet
         end
         object GroupBox6: TGroupBox
           Left = 16
-          Height = 233
+          Height = 235
           Top = 8
-          Width = 448
+          Width = 453
           Caption = 'Artificial satellites TLE (one URL by line)'
-          ClientHeight = 213
-          ClientWidth = 446
+          ClientHeight = 215
+          ClientWidth = 451
           ParentFont = False
           TabOrder = 3
           object TLEUrlList: TMemo
             Left = 0
-            Height = 213
+            Height = 215
             Top = 0
-            Width = 446
+            Width = 451
             Align = alClient
             Anchors = [akTop, akLeft, akRight]
             OnExit = TLEUrlListExit

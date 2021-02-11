@@ -133,7 +133,7 @@ implementation
 
 procedure Tf_config_internet.SetLang;
 begin
-  Caption := rsInternet;
+  Caption := rsUpdate1;
   Page1.Caption := rsProxy;
   GroupBox1.Caption := rsHTTPProxy;
   httpproxy.Caption := rsUseHTTPProxy;

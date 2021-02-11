@@ -139,7 +139,6 @@ type
     showcom: TCheckBox;
     comsymbol: TRadioGroup;
     commagdiff: TFloatEdit;
-    comdbset: TButton;
     comload: TTabSheet;
     Label232: TLabel;
     MemoCom: TMemo;
@@ -272,7 +271,6 @@ type
     procedure DelComClick(Sender: TObject);
     procedure DelComAllClick(Sender: TObject);
     procedure AddComClick(Sender: TObject);
-    procedure comdbsetClick(Sender: TObject);
     procedure showastClick(Sender: TObject);
     procedure astsymbolClick(Sender: TObject);
     procedure astlimitmagChange(Sender: TObject);
@@ -292,7 +290,6 @@ type
     procedure TransparentPlanetClick(Sender: TObject);
   private
     { Private declarations }
-    FShowDB: TNotifyEvent;
     FPrepareAsteroid: TPrepareAsteroid;
     FApplyConfig: TNotifyEvent;
     LockChange: boolean;
@@ -332,7 +329,6 @@ type
     procedure LoadSampleData;
     procedure ActivateJplEph;
     property ConfirmDownload: boolean read FConfirmDownload write FConfirmDownload;
-    property onShowDB: TNotifyEvent read FShowDB write FShowDB;
     property onPrepareAsteroid: TPrepareAsteroid
       read FPrepareAsteroid write FPrepareAsteroid;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
@@ -396,7 +392,6 @@ begin
   Label216.Caption := rsShowComets;
   Label231.Caption := rsMagnitudeFai;
   showcom.Caption := rsShowCometsOn;
-  comdbset.Caption := rsDatabaseSett;
   comload.Caption := rsLoadMPCFile;
   Label232.Caption := rsMessages;
   TabSheet2.Caption := rsOrUseALocalF;
@@ -1147,12 +1142,6 @@ begin
   UpdComList;
   if msg <> '' then
     ShowMessage(msg);
-end;
-
-procedure Tf_config_solsys.comdbsetClick(Sender: TObject);
-begin
-  if Assigned(FShowDB) then
-    FShowDB(self);
 end;
 
 procedure Tf_config_solsys.showastClick(Sender: TObject);

@@ -9447,8 +9447,8 @@ begin
   SetupSystem.Caption := '&' + rsGeneral + Ellipsis;
   SetupSystem.Hint := rsGeneral;
   SetupSystem.Category := CatSetupOption;
-  SetupInternet.Caption := '&' + rsInternet + Ellipsis;
-  SetupInternet.Hint := rsInternet;
+  SetupInternet.Caption := '&' + rsUpdate1 + Ellipsis;
+  SetupInternet.Hint := rsUpdate1;
   SetupInternet.Category := CatSetupOption;
   SetupPictures.Caption := '&' + rsPictures + Ellipsis;
   SetupPictures.Hint := rsPictures;

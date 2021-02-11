@@ -62,7 +62,7 @@ implementation
 
 procedure Tf_configinternet.SetLang;
 begin
-  Caption := rsInternet;
+  Caption := rsUpdate1;
   Button1.Caption := rsOK;
   Button2.Caption := rsApply;
   Button3.Caption := rsCancel;

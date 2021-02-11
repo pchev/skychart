@@ -18,12 +18,12 @@ object f_configinternet: Tf_configinternet
     Top = 526
     Width = 499
     Align = alBottom
-    ClientHeight = 46
-    ClientWidth = 495
+    ClientHeight = 50
+    ClientWidth = 499
     ParentFont = False
     TabOrder = 0
     object Button1: TButton
-      Left = 204
+      Left = 208
       Height = 25
       Top = 12
       Width = 75
@@ -35,7 +35,7 @@ object f_configinternet: Tf_configinternet
       TabOrder = 1
     end
     object Button2: TButton
-      Left = 302
+      Left = 306
       Height = 25
       Top = 12
       Width = 75
@@ -47,7 +47,7 @@ object f_configinternet: Tf_configinternet
       TabOrder = 2
     end
     object Button3: TButton
-      Left = 400
+      Left = 404
       Height = 25
       Top = 12
       Width = 75
@@ -59,7 +59,7 @@ object f_configinternet: Tf_configinternet
       TabOrder = 3
     end
     object Button6: TButton
-      Left = 106
+      Left = 110
       Height = 25
       Top = 12
       Width = 75
