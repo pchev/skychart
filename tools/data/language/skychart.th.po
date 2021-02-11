@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-02-08 20:51+0000\n"
+"POT-Creation-Date: 2021-02-11 16:30+0000\n"
 "PO-Revision-Date: 2016-12-11 09:03+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-08 21:08+0000\n"
+"X-Launchpad-Export-Date: 2021-02-11 16:41+0000\n"
 "X-Generator: Launchpad (build e34ce994f03aae76d4610a97bccf86c0f2cf9f70)\n"
 
 #: u_translation.rs102cddss
@@ -331,6 +331,10 @@ msgstr "รูปลักษณ์"
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
 msgstr "ผนวกเข้าในบัญชีที่มีอยู่แล้ว "
+
+#: u_translation.rsappendtocurr
+msgid "Append to current file"
+msgstr ""
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -1431,6 +1435,10 @@ msgstr "หน่วงเวลาระหว่างเฟรม"
 #: u_translation.rsdelete
 msgid "Delete"
 msgstr "ลบ"
+
+#: u_translation.rsdeleteallexp
+msgid "Delete all expired ephemeris"
+msgstr ""
 
 #: u_translation.rsdeleteallthe
 msgid "Delete %s, all the child nodes and the scripts?"
@@ -4304,6 +4312,10 @@ msgstr "เนบิวลาสะท้อนแสง"
 msgid "Refresh"
 msgstr "เรียกใหม่"
 
+#: u_translation.rsrefreshallep
+msgid "Refresh all ephemeris"
+msgstr ""
+
 #: u_translation.rsrefreshimage
 msgid "Refresh image every"
 msgstr "รีเฟรชภาพทุก ๆ"
@@ -5442,6 +5454,10 @@ msgstr "บัญชีนี้มี %s ระเบียน ไม่สา�
 
 #: u_translation.rsthisdirectdr
 msgid "This direct driver is kept for compatibility, it may work or not for you. But the preference is to use the INDI or ASCOM driver for your telescope."
+msgstr ""
+
+#: u_translation.rsthisfilecont
+msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
 msgstr ""
 
 #: u_translation.rsthisfilewasn
