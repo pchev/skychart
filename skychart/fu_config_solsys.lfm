@@ -24,11 +24,11 @@ object f_config_solsys: Tf_config_solsys
       Height = 525
       Top = 1
       Width = 505
-      ActivePage = Page4
+      ActivePage = Page5
       Align = alClient
       ParentFont = False
       ShowTabs = False
-      TabIndex = 3
+      TabIndex = 4
       TabOrder = 0
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
@@ -1126,8 +1126,8 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 0
           object astsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 3
             ParentFont = False
             object GroupBox9: TGroupBox
@@ -1208,7 +1208,7 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 88
+                ClientHeight = 70
                 ClientWidth = 395
                 Color = clBtnFace
                 ItemIndex = 1
@@ -1266,8 +1266,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object astload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 1
             ParentFont = False
             object Label206: TLabel
@@ -1363,8 +1363,8 @@ object f_config_solsys: Tf_config_solsys
               OnChanging = AstPageControl2Changing
               object TabSheet3: TTabSheet
                 Caption = 'Load MPC format file'
-                ClientHeight = 66
-                ClientWidth = 440
+                ClientHeight = 93
+                ClientWidth = 446
                 ParentFont = False
                 object Label1: TLabel
                   Left = 15
@@ -1389,8 +1389,8 @@ object f_config_solsys: Tf_config_solsys
               end
               object TabSheet4: TTabSheet
                 Caption = 'Or use a local file :'
-                ClientHeight = 66
-                ClientWidth = 440
+                ClientHeight = 93
+                ClientWidth = 446
                 ParentFont = False
                 object mpcfile: TFileNameEdit
                   Left = 15
@@ -1431,8 +1431,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object astprepare: TTabSheet
             Caption = 'Prepare Monthly Data'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 2
             ParentFont = False
             object Label210: TLabel
@@ -1538,8 +1538,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object AddsingleAst: TTabSheet
             Caption = 'Add'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 4
             ParentFont = False
             object Label217: TLabel
@@ -1836,6 +1836,15 @@ object f_config_solsys: Tf_config_solsys
               OnClick = ButtonReturnClick
               TabOrder = 0
             end
+            object ButtonCancel: TButton
+              Left = 240
+              Height = 25
+              Top = 8
+              Width = 99
+              Caption = 'Cancel'
+              OnClick = ButtonCancelClick
+              TabOrder = 1
+            end
           end
         end
         object PanelSPKlist: TPanel
@@ -2034,12 +2043,20 @@ object f_config_solsys: Tf_config_solsys
     Left = 457
     Top = 124
     object SPKrefresh: TMenuItem
-      Caption = 'SPKrefresh'
+      Caption = 'Refresh'
       OnClick = SPKrefreshClick
+    end
+    object SPKRefreshAll: TMenuItem
+      Caption = 'Refresh all'
+      OnClick = SPKRefreshAllClick
     end
     object SPKdelete: TMenuItem
       Caption = 'Delete'
       OnClick = SPKdeleteClick
+    end
+    object SPKDeleteExpired: TMenuItem
+      Caption = 'Delete all expired files'
+      OnClick = SPKDeleteExpiredClick
     end
   end
 end

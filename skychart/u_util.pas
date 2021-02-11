@@ -98,6 +98,8 @@ function DEToStr4(de: double): string;
 function isodate(a, m, d: integer): string;
 function LeapYear(Year: longint): boolean;
 function DayofYear(y, m, d: integer): integer;
+procedure iso2date(dt: string; out a, m, d: integer);
+function datejd(dt:string): double;
 function jddate(jd: double): string;
 function jddate2(jd: double): string;
 function jddatetime(jd: double; fy, fm, fd, fh, fn, fs: boolean): string;
@@ -1873,6 +1875,13 @@ begin
     padzeros(IntToStr(d), 2);
 end;
 
+procedure iso2date(dt: string; out a, m, d: integer);
+begin
+  a:=StrToIntDef(copy(dt,1,4),0);
+  m:=StrToIntDef(copy(dt,6,2),0);
+  d:=StrToIntDef(copy(dt,9,2),0);
+end;
+
 function jddatetime(jd: double; fy, fm, fd, fh, fn, fs: boolean): string;
 var
   a, m, d: integer;
@@ -1921,6 +1930,14 @@ var
 begin
   djd(jd, a, m, d, h);
   Result := isodate(a, m, d);
+end;
+
+function datejd(dt:string): double;
+var
+  a, m, d: integer;
+begin
+  iso2date(dt, a, m, d);
+  result:=jd(a, m, d, 0);
 end;
 
 function jddate2(jd: double): string;

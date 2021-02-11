@@ -36,6 +36,7 @@ type
   { Tf_config_solsys }
 
   Tf_config_solsys = class(TFrame)
+    ButtonCancel: TButton;
     ButtonDownloadSpk: TButton;
     ButtonReturn: TButton;
     ButtonEphDefault: TButton;
@@ -51,6 +52,8 @@ type
     LabelDate1: TLabel;
     Labelemail: TLabel;
     LabelObjSpk: TLabel;
+    SPKRefreshAll: TMenuItem;
+    SPKDeleteExpired: TMenuItem;
     SPKrefresh: TMenuItem;
     SPKListView: TListView;
     MemoSPK: TMemo;
@@ -234,6 +237,7 @@ type
     PageControl1: TPageControl;
     procedure AstNeoClick(Sender: TObject);
     procedure AstPageControl2Changing(Sender: TObject; var AllowChange: boolean);
+    procedure ButtonCancelClick(Sender: TObject);
     procedure ButtonDownloadSpkClick(Sender: TObject);
     procedure ButtonReturnClick(Sender: TObject);
     procedure ButtonEphAddClick(Sender: TObject);
@@ -278,9 +282,11 @@ type
     procedure AddastClick(Sender: TObject);
     procedure smallsatChange(Sender: TObject);
     procedure SPKdeleteClick(Sender: TObject);
+    procedure SPKDeleteExpiredClick(Sender: TObject);
     procedure SPKemailChange(Sender: TObject);
     procedure SPKListViewContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
     procedure SPKListViewItemChecked(Sender: TObject; Item: TListItem);
+    procedure SPKRefreshAllClick(Sender: TObject);
     procedure SPKrefreshClick(Sender: TObject);
     procedure SunOnlineClick(Sender: TObject);
     procedure TransparentPlanetClick(Sender: TObject);
@@ -294,6 +300,7 @@ type
     FDisableAsteroid: TNotifyEvent;
     FEnableAsteroid: TNotifyEvent;
     CurrentSPKfile: string;
+    CancelDownloadSpk: boolean;
     procedure ShowPlanet;
     procedure ShowComet;
     procedure UpdComList;
@@ -489,8 +496,11 @@ begin
   LabelDate2.Caption:=rsNumberOfDays;
   ButtonDownloadSpk.Caption:=rsDownload;
   CheckAllSPK.Caption:=rsSelectAll;
+  ButtonReturn.Caption:=rsReturn;
+  ButtonCancel.Caption:=rsCancel;
   SPKdelete.Caption:=rsDelete;
   SPKrefresh.Caption:=rsRefresh;
+  SPKDeleteExpired.Caption:=rsDeleteAllExp;
   SPKListView.Column[0].Caption:=rsFile;
   SPKListView.Column[1].Caption:='SPK  Id';
   SPKListView.Column[2].Caption:=capitalize(rsFrom);
@@ -797,7 +807,6 @@ begin
   // remove focus from filenamedit to avoid focus bug
   {$ifndef darwin}MemoMPC.SetFocus;  {$endif}
 end;
-
 
 procedure Tf_config_solsys.ButtonEphAddClick(Sender: TObject);
 begin
@@ -1339,7 +1348,7 @@ end;
 procedure Tf_config_solsys.CheckAllSPKClick(Sender: TObject);
 var i: integer;
 begin
-  for i:=0 to SPKListView.Items.Count-1 do begin
+  for i:=0 to min(MaxSpkFiles,SPKListView.Items.Count)-1 do begin
      SPKListView.Items[i].Checked:=CheckAllSPK.Checked;
   end;
   SPKListView.Invalidate;
@@ -1363,6 +1372,16 @@ begin
   ButtonDownloadSpk.Click;
 end;
 
+procedure Tf_config_solsys.SPKRefreshAllClick(Sender: TObject);
+var i:integer;
+begin
+  for i:=0 to SPKListView.Items.Count-1 do begin
+     CurrentSPKfile:=SPKListView.Items[i].Caption;
+     SPKrefreshClick(sender);
+     if CancelDownloadSpk then exit;
+  end;
+end;
+
 procedure Tf_config_solsys.SPKdeleteClick(Sender: TObject);
 begin
   if MessageDlg(rsConfirmFileD + CurrentSPKfile, mtConfirmation, mbYesNo, 0) = mrYes then
@@ -1371,6 +1390,22 @@ begin
       CurrentSPKfile:='';
       ListSPK;
     end;
+end;
+
+procedure Tf_config_solsys.SPKDeleteExpiredClick(Sender: TObject);
+var dat: string;
+    i:integer;
+    jd1,jd2: double;
+begin
+  jd1:=DateTimetoJD(now);
+  for i:=0 to SPKListView.Items.Count-1 do begin
+     dat:=SPKListView.Items[i].SubItems[2];
+     jd2:=datejd(dat);
+     if jd2<jd1 then begin
+       DeleteFile(slash(SPKdir)+SPKListView.Items[i].Caption);
+     end;
+  end;
+  ListSPK;
 end;
 
 procedure Tf_config_solsys.SPKemailChange(Sender: TObject);
@@ -1384,14 +1419,21 @@ begin
   PanelSPKlist.visible:=true;
 end;
 
+procedure Tf_config_solsys.ButtonCancelClick(Sender: TObject);
+begin
+  CancelDownloadSpk:=true;
+end;
+
 procedure Tf_config_solsys.ButtonDownloadSpkClick(Sender: TObject);
 var obj,email,dlf,fn: string;
     dt1,dt2: TDateTime;
 begin
+  CancelDownloadSpk:=false;
   MemoSPK.Clear;
   PanelSPKmemo.Visible:=true;
   PanelSPKlist.Visible:=false;
   ButtonReturn.Visible:=false;
+  ButtonCancel.Visible:=true;
   obj:=trim(uppercase(SPKobject.Text));
   if obj='' then begin
     Labelmsgspk.Caption:=rsRequiredFiel+': '+rsObjectName;
@@ -1404,7 +1446,7 @@ begin
   end;
   dt1:=DateEdit1.Date;
   dt2:=dt1+NumDays.Value;
-  if HorizonSPK(obj,dt1,dt2,email,dlf) then begin
+  if HorizonSPK(obj,dt1,dt2,email,dlf) and (not CancelDownloadSpk) then begin
     MemoSPK.lines.add('Downloading file '+dlf);
     Application.ProcessMessages;
     fn:=CleanName(obj);
@@ -1418,10 +1460,12 @@ begin
     else
     begin
       ShowMessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
+      CancelDownloadSpk:=true;
     end;
     PanelSPKmemo.visible:=false;
     PanelSPKlist.visible:=true;
     ButtonReturn.Visible:=true;
+    ButtonCancel.Visible:=false;
   end;
 end;
 
@@ -1431,7 +1475,6 @@ var tn: TTelnetSend;
     ok: boolean;
 begin
   result:=false;
-  screen.Cursor:=crHourGlass;
   dt1:=FormatDateTime('yyyy"-"mm"-"dd',date1);
   dt2:=FormatDateTime('yyyy"-"mm"-"dd',date2);
   MemoSPK.Lines.Add('Request SPK file for '+obj+' between '+dt1+' and '+dt2);
@@ -1446,52 +1489,77 @@ begin
     tn.Login;
     ok := (tn.Sock.LastError = 0);
     if not ok then exit;
+    Application.ProcessMessages;
+    if CancelDownloadSpk then exit;
 
     // paging off
     if not tn.WaitFor('Horizons>') then exit;
+    Application.ProcessMessages;
+    if CancelDownloadSpk then exit;
     tn.Send('PAGE' + crlf);
 
     // set I/O model 2
     if not tn.WaitFor('Horizons>') then exit;
+    Application.ProcessMessages;
+    if CancelDownloadSpk then exit;
     tn.Send('##2' + crlf);
 
     // send object name
     if not tn.WaitFor('Horizons>') then exit;
+    Application.ProcessMessages;
+    if CancelDownloadSpk then exit;
     tn.Send('"'+obj+'"' + crlf);
 
     // eventual space sensitive prompt
     if tn.WaitFor('Continue [ <cr>=yes, n=no, ? ] :') then
       tn.Send(crlf);
+    Application.ProcessMessages;
+    if CancelDownloadSpk then exit;
 
     // select spk, at this point it may fail if the selection is not unique,
     // in this case let the user see the log and retry with a more selective name
     if not tn.WaitFor('[S]PK,?,<cr>:') then exit;
+    Application.ProcessMessages;
+    if CancelDownloadSpk then exit;
     tn.Send('s' + crlf);
 
     // enter email
     if not tn.WaitFor('e-mail address [?]:') then exit;
+    Application.ProcessMessages;
+    if CancelDownloadSpk then exit;
     tn.Send(email + crlf);
 
     // confirm email
     if not tn.WaitFor('[yes(<cr>),no]') then exit;
+    Application.ProcessMessages;
+    if CancelDownloadSpk then exit;
     tn.Send(crlf);
 
     // select binary format
     if not tn.WaitFor('[Binary, ASCII, 1, ?] :') then exit;
+    Application.ProcessMessages;
+    if CancelDownloadSpk then exit;
     tn.Send('b'+crlf);
 
     // start and stop date
     if not tn.WaitFor('SPK object START') then exit;
+    Application.ProcessMessages;
+    if CancelDownloadSpk then exit;
     tn.Send(dt1+crlf);
     if not tn.WaitFor('SPK object STOP') then exit;
+    if CancelDownloadSpk then exit;
     tn.Send(dt2+crlf);
 
     // prompt to add more
     if not tn.WaitFor('[ YES, NO, ? ] :') then exit;
+    Application.ProcessMessages;
+    if CancelDownloadSpk then exit;
     tn.Send('no'+crlf);
 
     // extract to download url for the file
     if not tn.WaitFor('Full path   :') then exit;
+    Application.ProcessMessages;
+    if CancelDownloadSpk then exit;
     filetodownload:=tn.RecvTerminated(crlf);
 
     filetodownload:=trim(filetodownload);
@@ -1506,13 +1574,19 @@ begin
     tn.Send('x' + crlf);
 
   finally
-    screen.Cursor:=crDefault;
     if not Result then begin
-      ButtonReturn.Visible:=true;
-      MemoSPK.lines.add(tn.SessionLog);
-      MemoSPK.lines.add(tn.Sock.LastErrorDesc);
+      if CancelDownloadSpk then begin
+        MemoSPK.lines.add(rsAbortedByUse);
+      end
+      else begin
+        MemoSPK.lines.add(tn.SessionLog);
+        MemoSPK.lines.add(tn.Sock.LastErrorDesc);
+      end;
       MemoSPK.lines.add('');
       MemoSPK.SelStart := length(MemoSPK.Text) - 1;
+      CancelDownloadSpk:=true;
+      ButtonCancel.Visible:=false;
+      ButtonReturn.Visible:=true;
       PanelSPKmemo.visible:=true;
       PanelSPKlist.visible:=false;
       Application.ProcessMessages;
