@@ -44,6 +44,7 @@ type
     ButtonEphUp: TButton;
     ButtonEphDown: TButton;
     CheckAllSPK: TCheckBox;
+    astappend: TCheckBox;
     DateEdit1: TDateEdit;
     LabelTitle: TLabel;
     LabelDate2: TLabel;
@@ -1177,7 +1178,7 @@ begin
   if assigned(FDisableAsteroid) then FDisableAsteroid(self);
   MemoMpc.Clear;
   screen.cursor := crHourGlass;
-  ok := cdb.LoadAsteroidFile(SafeUTF8ToSys(mpcfile.Text), astnumbered.Checked,
+  ok := cdb.LoadAsteroidFile(SafeUTF8ToSys(mpcfile.Text), astappend.checked, astnumbered.Checked,
     aststoperr.Checked, astlimitbox.Checked, astlimit.Value, MemoMPC);
   screen.cursor := crDefault;
   LabelAstInfo1.Caption:=rsFile+': '+cdb.AsteroidFileInfo;

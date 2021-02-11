@@ -24,11 +24,11 @@ object f_config_solsys: Tf_config_solsys
       Height = 525
       Top = 1
       Width = 505
-      ActivePage = Page5
+      ActivePage = Page4
       Align = alClient
       ParentFont = False
       ShowTabs = False
-      TabIndex = 4
+      TabIndex = 3
       TabOrder = 0
       OnChanging = PageControl1Changing
       object Page1: TTabSheet
@@ -1126,17 +1126,17 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 0
           object astsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 517
-            ClientWidth = 491
+            ClientHeight = 490
+            ClientWidth = 485
             ImageIndex = 3
             ParentFont = False
             object GroupBox9: TGroupBox
               Left = 20
-              Height = 358
+              Height = 334
               Top = 10
               Width = 450
               Caption = 'Chart Setting'
-              ClientHeight = 338
+              ClientHeight = 314
               ClientWidth = 448
               ParentFont = False
               TabOrder = 0
@@ -1208,7 +1208,7 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 70
+                ClientHeight = 88
                 ClientWidth = 395
                 Color = clBtnFace
                 ItemIndex = 1
@@ -1247,16 +1247,18 @@ object f_config_solsys: Tf_config_solsys
             end
             object LabelAstInfo1: TLabel
               Left = 24
-              Height = 17
-              Top = 384
-              Width = 77
+              Height = 112
+              Top = 376
+              Width = 446
+              AutoSize = False
               Caption = 'Current file: '
               ParentColor = False
+              WordWrap = True
             end
             object LabelAsteroidCount: TLabel
               Left = 24
               Height = 17
-              Top = 408
+              Top = 352
               Width = 90
               Caption = 'Asteroid count'
               ParentColor = False
@@ -1264,8 +1266,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object astload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 517
-            ClientWidth = 491
+            ClientHeight = 490
+            ClientWidth = 485
             ImageIndex = 1
             ParentFont = False
             object Label206: TLabel
@@ -1361,8 +1363,8 @@ object f_config_solsys: Tf_config_solsys
               OnChanging = AstPageControl2Changing
               object TabSheet3: TTabSheet
                 Caption = 'Load MPC format file'
-                ClientHeight = 93
-                ClientWidth = 446
+                ClientHeight = 66
+                ClientWidth = 440
                 ParentFont = False
                 object Label1: TLabel
                   Left = 15
@@ -1387,15 +1389,15 @@ object f_config_solsys: Tf_config_solsys
               end
               object TabSheet4: TTabSheet
                 Caption = 'Or use a local file :'
-                ClientHeight = 93
-                ClientWidth = 446
+                ClientHeight = 66
+                ClientWidth = 440
                 ParentFont = False
                 object mpcfile: TFileNameEdit
                   Left = 15
                   Height = 30
-                  Top = 21
-                  Width = 268
-                  DialogOptions = []
+                  Top = 4
+                  Width = 411
+                  DialogOptions = [ofFileMustExist]
                   Filter = 'MPCORB Files|MPCORB*.DAT|All Files|*.*'
                   FilterIndex = 0
                   HideDirectories = False
@@ -1406,23 +1408,31 @@ object f_config_solsys: Tf_config_solsys
                   TabOrder = 0
                 end
                 object LoadMPC: TButton
-                  Left = 328
+                  Left = 280
                   Height = 25
-                  Top = 19
-                  Width = 98
+                  Top = 40
+                  Width = 146
                   BorderSpacing.InnerBorder = 4
                   Caption = 'Load file'
                   OnClick = LoadMPCClick
                   ParentFont = False
                   TabOrder = 1
                 end
+                object astappend: TCheckBox
+                  Left = 17
+                  Height = 21
+                  Top = 40
+                  Width = 160
+                  Caption = 'Append to current file'
+                  TabOrder = 2
+                end
               end
             end
           end
           object astprepare: TTabSheet
             Caption = 'Prepare Monthly Data'
-            ClientHeight = 517
-            ClientWidth = 491
+            ClientHeight = 490
+            ClientWidth = 485
             ImageIndex = 2
             ParentFont = False
             object Label210: TLabel
@@ -1528,8 +1538,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object AddsingleAst: TTabSheet
             Caption = 'Add'
-            ClientHeight = 517
-            ClientWidth = 491
+            ClientHeight = 490
+            ClientWidth = 485
             ImageIndex = 4
             ParentFont = False
             object Label217: TLabel

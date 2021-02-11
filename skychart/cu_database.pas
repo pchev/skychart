@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 interface
 
 uses  math,
-  passql, passqlite, u_constant, u_util, u_projection, cu_fits, FileUtil,
+  passql, passqlite, u_constant, u_util, u_projection, cu_fits, FileUtil, Controls,
   Forms, StdCtrls, ComCtrls, Classes, Dialogs, SysUtils, StrUtils, u_translation;
 
 type
@@ -86,9 +86,8 @@ type
       comh, comg, comnam, comeq: string): string;
     function LoadAstExt(fdfile: string): boolean;
     function GetAstExt(aname, anum: string; out fam,h,g,diam,period,amin,amax,u: string): boolean;
-    function LoadAsteroidFile(astfile: string; astnumbered, stoperr, limit: boolean;
-      astlimit: integer; memoast: Tmemo): boolean;
-    procedure OpenAsteroid;
+    function LoadAsteroidFile(astfile: string; append, astnumbered, stoperr, limit: boolean; astlimit: integer; memoast: Tmemo): boolean;
+    procedure OpenAsteroid(append: boolean=false);
     procedure SaveAsteroid;
     procedure SaveAsteroidMagnitude;
     procedure OpenAsteroidMagnitude;
@@ -310,11 +309,11 @@ begin
       memo.Lines.add('Reload file '+fn);
       application.ProcessMessages;
       if (fn<>'')and FileExists(fn) then begin
-        if not LoadAsteroidFile(fn, False, False, False, 1000, memo) then
-          LoadAsteroidFile(slash(sampledir) + 'MPCsample.dat', True, False, False, 1000, memo)
+        if not LoadAsteroidFile(fn, False, False, False, False, 1000, memo) then
+          LoadAsteroidFile(slash(sampledir) + 'MPCsample.dat', False, True, False, False, 1000, memo)
       end
       else
-        LoadAsteroidFile(slash(sampledir) + 'MPCsample.dat', True, False, False, 1000, memo);
+        LoadAsteroidFile(slash(sampledir) + 'MPCsample.dat', False, True, False, False, 1000, memo);
       if Assigned(FFinishAsteroidUpgrade) then FFinishAsteroidUpgrade(self);
       f_info.hide;
     end;
@@ -756,13 +755,12 @@ begin
     end;
 end;
 
-function TCDCdb.LoadAsteroidFile(astfile: string; astnumbered, stoperr, limit: boolean; astlimit: integer; memoast: Tmemo): boolean;
+function TCDCdb.LoadAsteroidFile(astfile: string; append, astnumbered, stoperr, limit: boolean; astlimit: integer; memoast: Tmemo): boolean;
 var
   buf, buf1: string;
   i, y, m, d, nl, prefl, lid, nerr, ierr, rerr, linecount: integer;
   hh: double;
   f: textfile;
-  fb: file of TAsteroidElement;
 begin
   nerr := 1;
   Result := False;
@@ -772,7 +770,6 @@ begin
     exit;
   end;
   try
-    FAsteroidFileInfo := extractfilename(astfile) + ' ' + FormatDateTime('yyyy-mm-dd hh:nn', FileDateToDateTime(FileAge(astfile)));
     Filemode := 0;
     assignfile(f, astfile);
     reset(f);
@@ -782,6 +779,13 @@ begin
       inc(linecount);
     end;
     reset(f);
+    if append and(linecount>100000) then begin
+      if MessageDlg(Format(rsThisFileCont, [inttostr(linecount), crlf, crlf, crlf]),mtConfirmation,mbYesNo,0)=mrNo then begin
+        CloseFile(f);
+        exit;
+      end;
+    end;
+    FAsteroidFileInfo := extractfilename(astfile) + ' ' + FormatDateTime('yyyy-mm-dd hh:nn', FileDateToDateTime(FileAge(astfile)));
     SetLength(FAsteroidElement,linecount+1);
     // minimal file checking to distinguish full mpcorb from daily update
     readln(f, buf);
@@ -919,9 +923,13 @@ begin
     closefile(f);
     FNumAsteroidElement:=nl;
     SetLength(FAsteroidElement,FNumAsteroidElement);
+    if append then begin
+      // add current binary file after the last data so newly loaded elements take precedence
+      OpenAsteroid(true);
+    end;
     SetLength(AsteroidSearchNames,0);
     NumAsteroidSearchNames:=0;
-    memoast.Lines.add(Format(rsProcessingEn2, [IntToStr(nl)]));
+    memoast.Lines.add(Format(rsProcessingEn2, [IntToStr(FNumAsteroidElement)]));
     if rerr > 0 then
       memoast.Lines.add(Format(rsNumberOfIgno, [IntToStr(rerr)]));
     Result := (nerr = 0);
@@ -949,9 +957,9 @@ begin
   CloseFile(fb);
 end;
 
-procedure TCDCdb.OpenAsteroid;
-var i: integer;
-    fn1,fn2:string;
+procedure TCDCdb.OpenAsteroid(append: boolean=false);
+var i,n,start: integer;
+    fn1,fn2,buf:string;
     f: TextFile;
     mem:TMemoryStream;
 begin
@@ -961,24 +969,38 @@ begin
     if FileExists(fn2) then begin
       AssignFile(f,fn2);
       reset(f);
-      readln(f,FAsteroidFileInfo);
+      readln(f,buf);
+      if append then
+        FAsteroidFileInfo:=buf+'; '+FAsteroidFileInfo
+      else
+        FAsteroidFileInfo:=buf;
       CloseFile(f);
     end;
     mem:=TMemoryStream.Create;
     try
     mem.LoadFromFile(fn1);
-    FNumAsteroidElement:=mem.Size div sizeof(TAsteroidElement);
+    n:=mem.Size div sizeof(TAsteroidElement);
+    if append then begin
+      start:=FNumAsteroidElement;
+      FNumAsteroidElement:=FNumAsteroidElement+n;
+    end
+    else begin
+      start:=0;
+      FNumAsteroidElement:=n;
+    end;
     SetLength(FAsteroidElement,FNumAsteroidElement);
     mem.Position:=0;
-    for i:=0 to FNumAsteroidElement-1 do
+    for i:=start to FNumAsteroidElement-1 do
       mem.Read(FAsteroidElement[i],sizeof(TAsteroidElement));
     finally
       mem.free;
     end;
   end
   else begin
-    FNumAsteroidElement:=0;
-    SetLength(FAsteroidElement,0);
+    if not append then begin
+      FNumAsteroidElement:=0;
+      SetLength(FAsteroidElement,0);
+    end;
   end;
   SetLength(AsteroidSearchNames,0);
   NumAsteroidSearchNames:=0;
@@ -1159,8 +1181,7 @@ procedure TCDCdb.LoadSampleData(memo: Tmemo; cmain: Tconf_main);
 begin
   try
     // load sample asteroid data
-    if not LoadAsteroidFile(slash(sampledir) + 'MPCsample.dat', True, False,
-      False, 1000, memo) then
+    if not LoadAsteroidFile(slash(sampledir) + 'MPCsample.dat', False, True, False, False, 1000, memo) then
     begin
       dropdb(cmain);
       raise Exception.Create('Error loading ' + slash(sampledir) + 'MPCsample.dat');

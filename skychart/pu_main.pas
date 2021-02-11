@@ -4973,7 +4973,7 @@ begin
   Result := msgFailed;
   memo:=Tmemo.Create(nil);
   try
-    if cdcdb.LoadAsteroidFile(fn,false,false,false,0,memo) then begin
+    if cdcdb.LoadAsteroidFile(fn, False,false,false,false,0,memo) then begin
       RecomputeAsteroid;
       Result := msgOK;
     end;
