@@ -4168,6 +4168,12 @@ begin
         sc.planet.InitComet(tp, q, ec, ap, an, ic, h, g, eq, nam);
         sc.planet.Comet(cjd, True, cra1, cde1, dst1, rr, elong, phase, magn, diam, lc, ctar, ctde, rc, xc, yc, zc);
         sc.planet.Comet(njd, True, cra, cdec, dst, rr, elong, phase, magn, diam, lc, ctar, ctde, rc, xc, yc, zc);
+        Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
+        Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
+        if sc.cfgsc.ApparentPos then begin
+          apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
+          apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
+        end;
         if sc.cfgsc.PlanetParalaxe then begin
           Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
           Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
@@ -4184,6 +4190,12 @@ begin
         sc.planet.InitAsteroid(sc.cfgsc.TrackElemEpoch, h, g, ma, ap, an, ic, ec, sa, eq, nam);
         sc.planet.Asteroid(cjd, True, cra1, cde1, dst1, rr, elong, phase, magn, xc, yc, zc);
         sc.planet.Asteroid(njd, True, cra, cdec, dst, rr, elong, phase, magn, xc, yc, zc);
+        Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
+        Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
+        if sc.cfgsc.ApparentPos then begin
+          apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
+          apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
+        end;
         if sc.cfgsc.PlanetParalaxe then begin
           Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
           Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
@@ -4198,6 +4210,12 @@ begin
     if idx>=0 then begin
       id:=sc.cfgsc.BodiesName[0, idx, 1];
       if sc.planet.Body(cjd,strtoint(id),cra1,cde1,dst1,rr) and sc.planet.Body(njd,strtoint(id),cra,cdec,dst,rr) then begin
+        Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
+        Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
+        if sc.cfgsc.ApparentPos then begin
+          apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
+          apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
+        end;
         if sc.cfgsc.PlanetParalaxe then begin
           Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
           Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
@@ -4210,6 +4228,12 @@ begin
   begin
     sc.planet.Planet(ipla, cjd, cra1, cde1, dst1, illum, phase, diam, magn, rc, xc, yc, zc, vel);
     sc.planet.Planet(ipla, njd, cra, cdec, dst, illum, phase, diam, magn, rc, xc, yc, zc, vel);
+    Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
+    Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
+    if sc.cfgsc.ApparentPos then begin
+      apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
+      apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
+    end;
     if sc.cfgsc.PlanetParalaxe then begin
       Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
       Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
@@ -4220,6 +4244,12 @@ begin
   begin
     sc.planet.Sun(cjd, cra1, cde1, dst1, diam);
     sc.planet.Sun(njd, cra, cdec, dst, diam);
+    Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
+    Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
+    if sc.cfgsc.ApparentPos then begin
+      apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
+      apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
+    end;
     if sc.cfgsc.PlanetParalaxe then begin
       Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
       Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
@@ -4230,6 +4260,12 @@ begin
   begin
     sc.planet.Moon(cjd, cra1, cde1, dst1, dkm, diam, phase, illum,sc.cfgsc);
     sc.planet.Moon(njd, cra, cdec, dst, dkm, diam, phase, illum,sc.cfgsc);
+    Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
+    Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
+    if sc.cfgsc.ApparentPos then begin
+      apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
+      apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
+    end;
     if sc.cfgsc.PlanetParalaxe then begin
       Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
       Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
@@ -4240,6 +4276,12 @@ begin
   begin
     sc.planet.PlanSat(isat, cjd, sc.cfgsc, cra1, cde1, dst1, supconj, buf);
     sc.planet.PlanSat(isat, njd, sc.cfgsc, cra, cdec, dst, supconj, buf);
+    Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
+    Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
+    if sc.cfgsc.ApparentPos then begin
+      apparent_equatorial(cra1,cde1,sc.cfgsc,true,true);
+      apparent_equatorial(cra,cdec,sc.cfgsc,true,true);
+    end;
     if sc.cfgsc.PlanetParalaxe then begin
       Paralaxe(cst, dst1, cra1, cde1, cra1, cde1, q, sc.cfgsc);
       Paralaxe(nst, dst, cra, cdec, cra, cdec, q, sc.cfgsc);
