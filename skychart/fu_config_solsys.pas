@@ -1279,16 +1279,16 @@ end;
 
 procedure Tf_config_solsys.ShowSPK;
 begin
-  page5.TabVisible:=(libcalceph<>0);
-  if page5.TabVisible then begin
+  if libcalceph=0 then
+    Labelmsgspk.Caption:='Please install '+cu_calceph.libname+' before to use this functions'
+  else
     Labelmsgspk.Caption:='';
-    PanelSPKmemo.visible:=false;
-    PanelSPKlist.visible:=true;
-    DateEdit1.Date:=now;
-    NumDays.Value:=cmain.HorizonNumDay;
-    SPKemail.Text:=cmain.HorizonEmail;
-    ListSPK;
-  end;
+  PanelSPKmemo.visible:=false;
+  PanelSPKlist.visible:=true;
+  DateEdit1.Date:=now;
+  NumDays.Value:=cmain.HorizonNumDay;
+  SPKemail.Text:=cmain.HorizonEmail;
+  ListSPK;
 end;
 
 procedure Tf_config_solsys.ListSPK;
@@ -1300,7 +1300,7 @@ var
   ft,lt: double;
 begin
   SPKListView.Clear;
-  if page5.TabVisible then begin
+  if (libcalceph<>0) then begin
     // search files and check the active one
     i := findfirst(slash(SPKdir) + '*.bsp', 0, fs);
     while i=0 do begin
