@@ -37,37 +37,19 @@ object f_config_time: Tf_config_time
         ClientHeight = 532
         ClientWidth = 495
         ParentFont = False
-        object Label142: TLabel
-          Left = 291
-          Height = 17
-          Top = 57
-          Width = 51
-          Caption = 'Seconds'
-          ParentColor = False
-          ParentFont = False
-        end
-        object CheckBox2: TCheckBox
-          Left = 40
-          Height = 21
-          Top = 57
-          Width = 144
-          Caption = 'Auto-refresh every '
-          OnClick = CheckBox2Click
+        object Panel8: TPanel
+          Left = 0
+          Height = 204
+          Top = 328
+          Width = 495
+          Align = alClient
+          ClientHeight = 204
+          ClientWidth = 495
           ParentFont = False
           TabOrder = 1
-        end
-        object Panel8: TPanel
-          Left = 30
-          Height = 154
-          Top = 329
-          Width = 421
-          ClientHeight = 154
-          ClientWidth = 421
-          ParentFont = False
-          TabOrder = 5
           Visible = False
           object Label135: TLabel
-            Left = 8
+            Left = 20
             Height = 17
             Top = 67
             Width = 55
@@ -76,7 +58,7 @@ object f_config_time: Tf_config_time
             ParentFont = False
           end
           object Tdt_Ut: TLabel
-            Left = 86
+            Left = 98
             Height = 17
             Top = 67
             Width = 32
@@ -85,7 +67,7 @@ object f_config_time: Tf_config_time
             ParentFont = False
           end
           object Label136: TLabel
-            Left = 143
+            Left = 155
             Height = 17
             Top = 67
             Width = 51
@@ -94,7 +76,7 @@ object f_config_time: Tf_config_time
             ParentFont = False
           end
           object Label150: TLabel
-            Left = 8
+            Left = 20
             Height = 17
             Top = 49
             Width = 342
@@ -103,9 +85,11 @@ object f_config_time: Tf_config_time
             ParentFont = False
           end
           object CheckBox4: TCheckBox
-            Left = 6
+            AnchorSideTop.Control = dt_ut
+            AnchorSideTop.Side = asrCenter
+            Left = 18
             Height = 21
-            Top = 89
+            Top = 108
             Width = 176
             Caption = 'Use another TT-UT value'
             OnClick = CheckBox4Click
@@ -113,16 +97,18 @@ object f_config_time: Tf_config_time
             TabOrder = 1
           end
           object Label11: TLabel
-            Left = 8
+            AnchorSideTop.Control = TZComboBox
+            AnchorSideTop.Side = asrCenter
+            Left = 20
             Height = 17
-            Top = 12
+            Top = 14
             Width = 63
             Caption = 'Time zone'
             ParentColor = False
             ParentFont = False
           end
           object TZComboBox: TComboBox
-            Left = 130
+            Left = 142
             Height = 28
             Top = 8
             Width = 286
@@ -134,10 +120,10 @@ object f_config_time: Tf_config_time
             TabOrder = 0
           end
           object dt_ut: TFloatEdit
-            Left = 217
+            Left = 245
             Height = 28
             Hint = '-99999999..99999999'
-            Top = 89
+            Top = 104
             Width = 106
             Constraints.MaxHeight = 28
             Enabled = False
@@ -150,18 +136,20 @@ object f_config_time: Tf_config_time
             MaxValue = 99999999
           end
           object Label12: TLabel
-            Left = 8
+            AnchorSideTop.Control = GregY
+            AnchorSideTop.Side = asrCenter
+            Left = 20
             Height = 17
-            Top = 124
+            Top = 142
             Width = 182
             Caption = 'Gregorian calendar start date'
             ParentColor = False
             ParentFont = False
           end
           object GregY: TLongEdit
-            Left = 197
+            Left = 209
             Height = 28
-            Top = 121
+            Top = 136
             Width = 57
             Constraints.MaxHeight = 28
             ParentFont = False
@@ -170,10 +158,12 @@ object f_config_time: Tf_config_time
             Value = 0
           end
           object GregM: TLongEdit
-            Left = 259
+            AnchorSideTop.Control = GregY
+            AnchorSideTop.Side = asrCenter
+            Left = 271
             Height = 28
             Hint = '1..12'
-            Top = 121
+            Top = 136
             Width = 36
             Constraints.MaxHeight = 28
             ParentFont = False
@@ -186,10 +176,12 @@ object f_config_time: Tf_config_time
             MaxValue = 12
           end
           object GregD: TLongEdit
-            Left = 299
+            AnchorSideTop.Control = GregY
+            AnchorSideTop.Side = asrCenter
+            Left = 311
             Height = 28
             Hint = '1..31'
-            Top = 121
+            Top = 136
             Width = 40
             Constraints.MaxHeight = 28
             ParentFont = False
@@ -202,9 +194,11 @@ object f_config_time: Tf_config_time
             MaxValue = 31
           end
           object ButtonDefGreg: TButton
-            Left = 345
+            AnchorSideTop.Control = GregY
+            AnchorSideTop.Side = asrCenter
+            Left = 357
             Height = 25
-            Top = 119
+            Top = 138
             Width = 67
             Caption = 'Default'
             OnClick = ButtonDefGregClick
@@ -212,125 +206,120 @@ object f_config_time: Tf_config_time
             TabOrder = 6
           end
         end
-        object LongEdit2: TLongEdit
-          Left = 232
-          Height = 28
-          Hint = '10..86400'
-          Top = 51
-          Width = 41
-          Constraints.MaxHeight = 28
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 2
-          OnChange = LongEdit2Change
-          Value = 10
-          MinValue = 10
-          MaxValue = 86400
-        end
         object Panel9: TPanel
-          Left = 30
-          Height = 202
-          Top = 87
-          Width = 421
-          ClientHeight = 202
-          ClientWidth = 421
+          Left = 0
+          Height = 238
+          Top = 90
+          Width = 495
+          Align = alTop
+          ClientHeight = 238
+          ClientWidth = 495
           ParentFont = False
-          TabOrder = 3
+          TabOrder = 0
           object Label137: TLabel
-            Left = 8
+            AnchorSideTop.Control = t_hourEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 18
             Height = 17
-            Top = 76
+            Top = 77
             Width = 30
             Caption = 'Time'
             ParentColor = False
             ParentFont = False
           end
           object Label139: TLabel
-            Left = 128
+            Left = 138
             Height = 17
-            Top = 53
+            Top = 51
             Width = 12
             Caption = 'M'
             ParentColor = False
             ParentFont = False
           end
           object Label141: TLabel
-            Left = 197
+            Left = 207
             Height = 17
-            Top = 53
+            Top = 51
             Width = 7
             Caption = 'S'
             ParentColor = False
             ParentFont = False
           end
           object Label138: TLabel
-            Left = 57
+            Left = 67
             Height = 17
-            Top = 53
+            Top = 51
             Width = 10
             Caption = 'H'
             ParentColor = False
             ParentFont = False
           end
           object Label143: TLabel
-            Left = 57
+            Left = 67
             Height = 17
-            Top = 2
+            Top = 0
             Width = 8
             Caption = 'Y'
             ParentColor = False
             ParentFont = False
           end
           object Label144: TLabel
-            Left = 128
+            Left = 138
             Height = 17
-            Top = 2
+            Top = 0
             Width = 12
             Caption = 'M'
             ParentColor = False
             ParentFont = False
           end
           object Label145: TLabel
-            Left = 198
+            Left = 208
             Height = 17
-            Top = 2
+            Top = 0
             Width = 10
             Caption = 'D'
             ParentColor = False
             ParentFont = False
           end
           object Label140: TLabel
-            Left = 8
+            AnchorSideTop.Control = d_yearEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 18
             Height = 17
-            Top = 25
+            Top = 26
             Width = 30
             Caption = 'Date'
             ParentColor = False
             ParentFont = False
           end
           object Label1: TLabel
-            Left = 8
+            AnchorSideTop.Control = JDEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 18
             Height = 17
-            Top = 111
+            Top = 112
             Width = 18
             Caption = 'JD:'
             ParentColor = False
             ParentFont = False
           end
           object tzLabel: TLabel
-            Left = 270
+            AnchorSideTop.Control = t_hourEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 280
             Height = 17
-            Top = 78
+            Top = 77
             Width = 44
             Caption = 'tzLabel'
             ParentColor = False
             ParentFont = False
           end
           object ADBC: TRadioGroup
-            Left = 273
+            AnchorSideTop.Control = d_yearEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 283
             Height = 39
-            Top = 16
+            Top = 15
             Width = 138
             AutoFill = True
             ChildSizing.LeftRightSpacing = 6
@@ -353,9 +342,11 @@ object f_config_time: Tf_config_time
             TabOrder = 6
           end
           object Button5: TButton
-            Left = 263
+            AnchorSideTop.Control = BitBtn4
+            AnchorSideTop.Side = asrCenter
+            Left = 273
             Height = 25
-            Top = 162
+            Top = 160
             Width = 45
             BorderSpacing.InnerBorder = 4
             Caption = '0h'
@@ -364,9 +355,11 @@ object f_config_time: Tf_config_time
             TabOrder = 16
           end
           object Button6: TButton
-            Left = 335
+            AnchorSideTop.Control = BitBtn4
+            AnchorSideTop.Side = asrCenter
+            Left = 345
             Height = 25
-            Top = 162
+            Top = 160
             Width = 62
             BorderSpacing.InnerBorder = 4
             Caption = '0h UT'
@@ -375,9 +368,9 @@ object f_config_time: Tf_config_time
             TabOrder = 17
           end
           object BitBtn4: TButton
-            Left = 6
+            Left = 16
             Height = 25
-            Top = 162
+            Top = 160
             Width = 138
             Caption = 'Actual system time'
             OnClick = BitBtn4Click
@@ -385,9 +378,11 @@ object f_config_time: Tf_config_time
             TabOrder = 14
           end
           object BitBtn1: TBitBtn
-            Left = 202
+            AnchorSideTop.Control = JDEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 212
             Height = 30
-            Top = 108
+            Top = 105
             Width = 32
             Glyph.Data = {
               76050000424D7605000000000000360000002800000015000000150000000100
@@ -440,9 +435,11 @@ object f_config_time: Tf_config_time
             TabOrder = 13
           end
           object d_year: TMouseUpDown
-            Left = 125
+            AnchorSideTop.Control = d_yearEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 135
             Height = 28
-            Top = 22
+            Top = 20
             Width = 13
             Max = 32767
             Min = -32768
@@ -452,9 +449,11 @@ object f_config_time: Tf_config_time
             Thousands = False
           end
           object d_monthEdit: TEdit
-            Left = 137
+            AnchorSideTop.Control = d_yearEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 147
             Height = 28
-            Top = 22
+            Top = 20
             Width = 47
             Constraints.MaxHeight = 28
             OnChange = DateEditChange
@@ -462,9 +461,11 @@ object f_config_time: Tf_config_time
             TabOrder = 2
           end
           object d_month: TMouseUpDown
-            Left = 184
+            AnchorSideTop.Control = d_yearEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 194
             Height = 28
-            Top = 22
+            Top = 20
             Width = 13
             Associate = d_monthEdit
             Max = 12
@@ -475,9 +476,11 @@ object f_config_time: Tf_config_time
             Thousands = False
           end
           object d_dayEdit: TEdit
-            Left = 197
+            AnchorSideTop.Control = d_yearEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 207
             Height = 28
-            Top = 22
+            Top = 20
             Width = 47
             Constraints.MaxHeight = 28
             OnChange = DateEditChange
@@ -485,9 +488,11 @@ object f_config_time: Tf_config_time
             TabOrder = 4
           end
           object d_day: TMouseUpDown
-            Left = 244
+            AnchorSideTop.Control = d_yearEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 254
             Height = 28
-            Top = 22
+            Top = 20
             Width = 13
             Associate = d_dayEdit
             Max = 31
@@ -498,9 +503,9 @@ object f_config_time: Tf_config_time
             Thousands = False
           end
           object t_hourEdit: TEdit
-            Left = 57
+            Left = 67
             Height = 28
-            Top = 73
+            Top = 71
             Width = 47
             Constraints.MaxHeight = 28
             OnChange = TimeEditChange
@@ -508,9 +513,11 @@ object f_config_time: Tf_config_time
             TabOrder = 7
           end
           object t_hour: TMouseUpDown
-            Left = 104
+            AnchorSideTop.Control = t_hourEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 114
             Height = 28
-            Top = 73
+            Top = 71
             Width = 13
             Associate = t_hourEdit
             Max = 23
@@ -521,9 +528,11 @@ object f_config_time: Tf_config_time
             Thousands = False
           end
           object t_minEdit: TEdit
-            Left = 128
+            AnchorSideTop.Control = t_hourEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 138
             Height = 28
-            Top = 73
+            Top = 71
             Width = 47
             Constraints.MaxHeight = 28
             OnChange = TimeEditChange
@@ -531,9 +540,11 @@ object f_config_time: Tf_config_time
             TabOrder = 9
           end
           object t_min: TMouseUpDown
-            Left = 175
+            AnchorSideTop.Control = t_hourEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 185
             Height = 28
-            Top = 73
+            Top = 71
             Width = 13
             Associate = t_minEdit
             Max = 59
@@ -544,9 +555,9 @@ object f_config_time: Tf_config_time
             Thousands = False
           end
           object t_sec: TMouseUpDown
-            Left = 244
+            Left = 254
             Height = 28
-            Top = 73
+            Top = 71
             Width = 13
             Associate = t_secEdit
             Max = 59
@@ -557,9 +568,11 @@ object f_config_time: Tf_config_time
             Thousands = False
           end
           object t_secEdit: TEdit
-            Left = 197
+            AnchorSideTop.Control = t_hourEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 207
             Height = 28
-            Top = 73
+            Top = 71
             Width = 47
             Constraints.MaxHeight = 28
             OnChange = TimeEditChange
@@ -567,9 +580,11 @@ object f_config_time: Tf_config_time
             TabOrder = 11
           end
           object Button8: TButton
-            Left = 159
+            AnchorSideTop.Control = BitBtn4
+            AnchorSideTop.Side = asrCenter
+            Left = 169
             Height = 25
-            Top = 162
+            Top = 160
             Width = 84
             Caption = 'Tonight'
             OnClick = Button8Click
@@ -577,10 +592,10 @@ object f_config_time: Tf_config_time
             TabOrder = 15
           end
           object d_yearEdit: TLongEdit
-            Left = 57
+            Left = 67
             Height = 28
             Hint = '1..200000'
-            Top = 22
+            Top = 20
             Width = 69
             Constraints.MaxHeight = 28
             ParentFont = False
@@ -593,27 +608,29 @@ object f_config_time: Tf_config_time
             MaxValue = 200000
           end
           object UTLabel: TLabel
-            Left = 238
+            AnchorSideTop.Control = JDEdit
+            AnchorSideTop.Side = asrCenter
+            Left = 248
             Height = 17
-            Top = 111
+            Top = 112
             Width = 50
             Caption = 'UTLabel'
             ParentColor = False
             ParentFont = False
           end
           object dterr: TLabel
-            Left = 8
+            Left = 18
             Height = 17
-            Top = 137
+            Top = 135
             Width = 33
             Caption = 'dterr'
             ParentColor = False
             ParentFont = False
           end
           object JDEdit: TFloatSpinEdit
-            Left = 57
+            Left = 67
             Height = 28
-            Top = 108
+            Top = 106
             Width = 132
             Constraints.MaxHeight = 28
             DecimalPlaces = 5
@@ -623,27 +640,76 @@ object f_config_time: Tf_config_time
             ParentFont = False
             TabOrder = 18
           end
+          object Button4: TButton
+            Left = 16
+            Height = 25
+            Top = 200
+            Width = 138
+            BorderSpacing.InnerBorder = 4
+            Caption = 'More Options'
+            OnClick = Button4Click
+            ParentFont = False
+            TabOrder = 19
+          end
         end
-        object CheckBox1: TCheckBox
-          Left = 40
-          Height = 21
-          Top = 24
-          Width = 126
-          Caption = 'Use system time'
-          OnClick = CheckBox1Click
-          ParentFont = False
-          TabOrder = 0
-        end
-        object Button4: TButton
-          Left = 32
-          Height = 25
-          Top = 297
-          Width = 120
-          BorderSpacing.InnerBorder = 4
-          Caption = 'More Options'
-          OnClick = Button4Click
-          ParentFont = False
-          TabOrder = 4
+        object Panel1: TPanel
+          Left = 0
+          Height = 90
+          Top = 0
+          Width = 495
+          Align = alTop
+          ClientHeight = 90
+          ClientWidth = 495
+          TabOrder = 2
+          object CheckBox1: TCheckBox
+            Left = 18
+            Height = 21
+            Top = 24
+            Width = 126
+            Caption = 'Use system time'
+            OnClick = CheckBox1Click
+            ParentFont = False
+            TabOrder = 0
+          end
+          object CheckBox2: TCheckBox
+            Left = 18
+            Height = 21
+            Top = 57
+            Width = 144
+            Caption = 'Auto-refresh every '
+            OnClick = CheckBox2Click
+            ParentFont = False
+            TabOrder = 1
+          end
+          object LongEdit2: TLongEdit
+            AnchorSideTop.Control = CheckBox2
+            AnchorSideTop.Side = asrCenter
+            Left = 210
+            Height = 28
+            Hint = '10..86400'
+            Top = 53
+            Width = 41
+            Constraints.MaxHeight = 28
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 2
+            OnChange = LongEdit2Change
+            Value = 10
+            MinValue = 10
+            MaxValue = 86400
+          end
+          object Label142: TLabel
+            AnchorSideTop.Control = CheckBox2
+            AnchorSideTop.Side = asrCenter
+            Left = 269
+            Height = 17
+            Top = 59
+            Width = 51
+            Caption = 'Seconds'
+            ParentColor = False
+            ParentFont = False
+          end
         end
       end
       object Page2: TTabSheet
@@ -651,137 +717,12 @@ object f_config_time: Tf_config_time
         ClientHeight = 532
         ClientWidth = 495
         ParentFont = False
-        object stepreset: TSpeedButton
-          Left = 377
-          Height = 25
-          Top = 136
-          Width = 82
-          Caption = 'Reset '
-          Layout = blGlyphTop
-          NumGlyphs = 2
-          OnClick = stepresetClick
-          ParentFont = False
-        end
-        object Label178: TLabel
-          Left = 316
-          Height = 17
-          Top = 23
-          Width = 41
-          Caption = 'every  '
-          ParentColor = False
-          ParentFont = False
-        end
-        object Label179: TLabel
-          Left = 176
-          Height = 17
-          Top = 23
-          Width = 104
-          Caption = 'Number of steps'
-          ParentColor = False
-          ParentFont = False
-        end
-        object Label56: TLabel
-          Left = 8
-          Height = 17
-          Top = 4
-          Width = 257
-          Caption = 'Plot orbital motion of solar system objects'
-          ParentColor = False
-          ParentFont = False
-        end
-        object stepunit: TRadioGroup
-          Left = 176
-          Height = 56
-          Top = 72
-          Width = 304
-          AutoFill = True
-          Caption = 'Step unit'
-          ChildSizing.LeftRightSpacing = 6
-          ChildSizing.TopBottomSpacing = 6
-          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-          ChildSizing.EnlargeVertical = crsHomogenousChildResize
-          ChildSizing.ShrinkHorizontal = crsScaleChilds
-          ChildSizing.ShrinkVertical = crsScaleChilds
-          ChildSizing.Layout = cclLeftToRightThenTopToBottom
-          ChildSizing.ControlsPerLine = 4
-          ClientHeight = 36
-          ClientWidth = 302
-          Columns = 4
-          Items.Strings = (
-            'Days'
-            'Hours'
-            'Minutes'
-            'Seconds'
-          )
-          OnClick = stepunitClick
-          ParentFont = False
-          TabOrder = 7
-        end
-        object stepline: TCheckBox
-          Left = 8
-          Height = 21
-          Top = 257
-          Width = 270
-          Caption = 'Connection lines between each position '
-          OnClick = steplineClick
-          ParentFont = False
-          TabOrder = 8
-        end
-        object SimObj: TCheckListBox
-          Left = 8
-          Height = 225
-          Top = 23
-          Width = 160
-          Items.Strings = (
-            'Sun'
-            'Mercury '
-            'Venus'
-            'Moon'
-            'Mars'
-            'Jupiter'
-            'Saturn'
-            'Uranus'
-            'Neptune'
-            'Pluto'
-            'Asteroids'
-            'Comets'
-            'SPK'
-          )
-          ItemHeight = 23
-          OnItemClick = SimObjItemClick
-          ParentFont = False
-          TabOrder = 0
-          Data = {
-            0D00000000000000000000000000000000
-          }
-        end
-        object AllSim: TButton
-          Left = 176
-          Height = 25
-          Top = 136
-          Width = 76
-          BorderSpacing.InnerBorder = 4
-          Caption = 'All'
-          OnClick = AllSimClick
-          ParentFont = False
-          TabOrder = 5
-        end
-        object NoSim: TButton
-          Left = 280
-          Height = 25
-          Top = 136
-          Width = 76
-          BorderSpacing.InnerBorder = 4
-          Caption = 'None'
-          OnClick = NoSimClick
-          ParentFont = False
-          TabOrder = 6
-        end
         object RadioGroup1: TRadioGroup
-          Left = 8
+          Left = 0
           Height = 85
-          Top = 283
-          Width = 472
+          Top = 322
+          Width = 495
+          Align = alTop
           AutoFill = True
           Caption = 'Show Labels'
           ChildSizing.LeftRightSpacing = 6
@@ -793,7 +734,7 @@ object f_config_time: Tf_config_time
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
           ClientHeight = 65
-          ClientWidth = 470
+          ClientWidth = 493
           Columns = 3
           Items.Strings = (
             'None'
@@ -804,13 +745,13 @@ object f_config_time: Tf_config_time
           )
           OnClick = RadioGroup1Click
           ParentFont = False
-          TabOrder = 9
+          TabOrder = 0
           object LongEdit1: TLongEdit
-            Left = 317
+            Left = 333
             Height = 28
             Hint = '2..500'
             Top = 29
-            Width = 147
+            Width = 154
             Constraints.MaxHeight = 28
             ParentFont = False
             ParentShowHint = False
@@ -823,10 +764,11 @@ object f_config_time: Tf_config_time
           end
         end
         object CheckGroup1: TCheckGroup
-          Left = 8
-          Height = 51
-          Top = 372
-          Width = 472
+          Left = 0
+          Height = 57
+          Top = 407
+          Width = 495
+          Align = alTop
           AutoFill = True
           Caption = 'Label Text'
           ChildSizing.LeftRightSpacing = 6
@@ -837,8 +779,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 31
-          ClientWidth = 470
+          ClientHeight = 37
+          ClientWidth = 493
           Columns = 3
           Items.Strings = (
             'Object Name'
@@ -847,16 +789,17 @@ object f_config_time: Tf_config_time
           )
           OnItemClick = CheckGroup1ItemClick
           ParentFont = False
-          TabOrder = 10
+          TabOrder = 1
           Data = {
             03000000020202
           }
         end
         object CheckGroup2: TCheckGroup
-          Left = 8
-          Height = 51
-          Top = 428
-          Width = 472
+          Left = 0
+          Height = 56
+          Top = 464
+          Width = 495
+          Align = alTop
           AutoFill = True
           Caption = 'Date Format'
           ChildSizing.LeftRightSpacing = 6
@@ -867,8 +810,8 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 6
-          ClientHeight = 31
-          ClientWidth = 470
+          ClientHeight = 36
+          ClientWidth = 493
           Columns = 6
           Items.Strings = (
             'Year'
@@ -880,193 +823,342 @@ object f_config_time: Tf_config_time
           )
           OnItemClick = CheckGroup2ItemClick
           ParentFont = False
-          TabOrder = 11
+          TabOrder = 2
           Data = {
             06000000020202020202
           }
         end
-        object nbstep: TLongEdit
-          Left = 176
-          Height = 28
-          Hint = '1..100'
-          Top = 47
-          Width = 76
-          Constraints.MaxHeight = 28
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 1
-          OnChange = nbstepChanged
-          Value = 1
-          MinValue = 1
-          MaxValue = 100
-        end
-        object stepsize: TLongEdit
-          Left = 316
-          Height = 28
-          Hint = '-999..999'
-          Top = 47
-          Width = 76
-          Constraints.MaxHeight = 28
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
+        object Panel2: TPanel
+          Left = 0
+          Height = 288
+          Top = 0
+          Width = 495
+          Align = alTop
+          ClientHeight = 288
+          ClientWidth = 495
           TabOrder = 3
-          OnChange = stepsizeChanged
-          Value = 1
-          MinValue = -999
-          MaxValue = 999
-        end
-        object UpDown1: TMouseUpDown
-          Left = 252
-          Height = 28
-          Top = 47
-          Width = 17
-          Associate = nbstep
-          Min = 1
-          OnClick = UpDown1Click
-          Position = 1
-          TabOrder = 2
-        end
-        object UpDown2: TMouseUpDown
-          Left = 392
-          Height = 28
-          Top = 47
-          Width = 17
-          Associate = stepsize
-          Max = 999
-          Min = -999
-          OnClick = UpDown2Click
-          Position = 1
-          TabOrder = 4
-        end
-        object PanelAst: TPanel
-          Left = 176
-          Height = 32
-          Top = 160
-          Width = 304
-          BevelOuter = bvNone
-          ClientHeight = 32
-          ClientWidth = 304
-          TabOrder = 13
-          object AsteroidFilter: TEdit
-            Left = 0
-            Height = 28
-            Top = 4
-            Width = 80
-            Constraints.MaxHeight = 28
+          object stepreset: TSpeedButton
+            Left = 377
+            Height = 25
+            Top = 144
+            Width = 82
+            Caption = 'Reset '
+            Layout = blGlyphTop
+            NumGlyphs = 2
+            OnClick = stepresetClick
             ParentFont = False
-            TabOrder = 0
           end
-          object btnAstFilter: TButton
-            Left = 80
-            Height = 24
-            Top = 4
-            Width = 76
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Filter ->'
-            OnClick = btnAstFilterClick
-            ParentFont = False
-            TabOrder = 1
-          end
-          object AsteroidList: TComboBox
-            Left = 160
-            Height = 28
-            Top = 4
-            Width = 144
-            Constraints.MaxHeight = 28
-            ItemHeight = 0
-            OnChange = AsteroidListChange
-            ParentFont = False
-            Style = csDropDownList
-            TabOrder = 2
-          end
-        end
-        object PanelCom: TPanel
-          AnchorSideTop.Control = PanelAst
-          AnchorSideTop.Side = asrBottom
-          Left = 176
-          Height = 32
-          Top = 192
-          Width = 304
-          BevelOuter = bvNone
-          ClientHeight = 32
-          ClientWidth = 304
-          TabOrder = 14
-          object CometFilter: TEdit
-            Left = 0
-            Height = 28
-            Top = 4
-            Width = 80
-            Constraints.MaxHeight = 28
-            ParentFont = False
-            TabOrder = 0
-          end
-          object btnCometFilter: TButton
-            Left = 80
-            Height = 24
-            Top = 4
-            Width = 76
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Filter ->'
-            OnClick = btnCometFilterClick
-            ParentFont = False
-            TabOrder = 1
-          end
-          object CometList: TComboBox
-            Left = 160
-            Height = 28
-            Top = 4
-            Width = 144
-            Constraints.MaxHeight = 28
-            ItemHeight = 0
-            OnChange = CometListChange
-            ParentFont = False
-            Style = csDropDownList
-            TabOrder = 2
-          end
-        end
-        object PanelBody: TPanel
-          AnchorSideTop.Control = PanelCom
-          AnchorSideTop.Side = asrBottom
-          Left = 176
-          Height = 32
-          Top = 224
-          Width = 312
-          BevelOuter = bvNone
-          ClientHeight = 32
-          ClientWidth = 312
-          TabOrder = 15
-          object SPKbox: TComboBox
-            Left = 80
-            Height = 28
-            Top = 4
-            Width = 224
-            Constraints.MaxHeight = 28
-            ItemHeight = 0
-            OnChange = SPKboxChange
-            ParentFont = False
-            Style = csDropDownList
-            TabOrder = 0
-          end
-          object Label13: TLabel
-            Left = 6
+          object Label178: TLabel
+            Left = 316
             Height = 17
-            Top = 8
-            Width = 23
-            Caption = 'SPK'
+            Top = 23
+            Width = 41
+            Caption = 'every  '
             ParentColor = False
+            ParentFont = False
+          end
+          object Label179: TLabel
+            Left = 176
+            Height = 17
+            Top = 23
+            Width = 104
+            Caption = 'Number of steps'
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label56: TLabel
+            Left = 1
+            Height = 17
+            Top = 1
+            Width = 493
+            Align = alTop
+            Caption = 'Plot orbital motion of solar system objects'
+            ParentColor = False
+            ParentFont = False
+          end
+          object stepunit: TRadioGroup
+            Left = 176
+            Height = 56
+            Top = 80
+            Width = 304
+            AutoFill = True
+            Caption = 'Step unit'
+            ChildSizing.LeftRightSpacing = 6
+            ChildSizing.TopBottomSpacing = 6
+            ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+            ChildSizing.EnlargeVertical = crsHomogenousChildResize
+            ChildSizing.ShrinkHorizontal = crsScaleChilds
+            ChildSizing.ShrinkVertical = crsScaleChilds
+            ChildSizing.Layout = cclLeftToRightThenTopToBottom
+            ChildSizing.ControlsPerLine = 4
+            ClientHeight = 36
+            ClientWidth = 302
+            Columns = 4
+            Items.Strings = (
+              'Days'
+              'Hours'
+              'Minutes'
+              'Seconds'
+            )
+            OnClick = stepunitClick
+            ParentFont = False
+            TabOrder = 0
+          end
+          object SimObj: TCheckListBox
+            Left = 8
+            Height = 265
+            Top = 23
+            Width = 160
+            Items.Strings = (
+              'Sun'
+              'Mercury '
+              'Venus'
+              'Moon'
+              'Mars'
+              'Jupiter'
+              'Saturn'
+              'Uranus'
+              'Neptune'
+              'Pluto'
+              'Asteroids'
+              'Comets'
+              'SPK'
+            )
+            ItemHeight = 23
+            OnItemClick = SimObjItemClick
+            ParentFont = False
+            TabOrder = 1
+            Data = {
+              0D00000000000000000000000000000000
+            }
+          end
+          object AllSim: TButton
+            Left = 176
+            Height = 25
+            Top = 144
+            Width = 76
+            BorderSpacing.InnerBorder = 4
+            Caption = 'All'
+            OnClick = AllSimClick
+            ParentFont = False
+            TabOrder = 2
+          end
+          object NoSim: TButton
+            Left = 280
+            Height = 25
+            Top = 144
+            Width = 76
+            BorderSpacing.InnerBorder = 4
+            Caption = 'None'
+            OnClick = NoSimClick
+            ParentFont = False
+            TabOrder = 3
+          end
+          object nbstep: TLongEdit
+            Left = 176
+            Height = 28
+            Hint = '1..100'
+            Top = 47
+            Width = 76
+            Constraints.MaxHeight = 28
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 4
+            OnChange = nbstepChanged
+            Value = 1
+            MinValue = 1
+            MaxValue = 100
+          end
+          object stepsize: TLongEdit
+            Left = 316
+            Height = 28
+            Hint = '-999..999'
+            Top = 47
+            Width = 76
+            Constraints.MaxHeight = 28
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 5
+            OnChange = stepsizeChanged
+            Value = 1
+            MinValue = -999
+            MaxValue = 999
+          end
+          object UpDown1: TMouseUpDown
+            Left = 252
+            Height = 28
+            Top = 47
+            Width = 17
+            Associate = nbstep
+            Min = 1
+            OnClick = UpDown1Click
+            Position = 1
+            TabOrder = 6
+          end
+          object UpDown2: TMouseUpDown
+            Left = 392
+            Height = 28
+            Top = 47
+            Width = 17
+            Associate = stepsize
+            Max = 999
+            Min = -999
+            OnClick = UpDown2Click
+            Position = 1
+            TabOrder = 7
+          end
+          object PanelAst: TPanel
+            Left = 176
+            Height = 32
+            Top = 174
+            Width = 304
+            BevelOuter = bvNone
+            ClientHeight = 32
+            ClientWidth = 304
+            TabOrder = 8
+            object AsteroidFilter: TEdit
+              Left = 0
+              Height = 28
+              Top = 4
+              Width = 80
+              Constraints.MaxHeight = 28
+              ParentFont = False
+              TabOrder = 0
+            end
+            object btnAstFilter: TButton
+              Left = 80
+              Height = 24
+              Top = 4
+              Width = 76
+              BorderSpacing.InnerBorder = 4
+              Caption = 'Filter ->'
+              OnClick = btnAstFilterClick
+              ParentFont = False
+              TabOrder = 1
+            end
+            object AsteroidList: TComboBox
+              Left = 160
+              Height = 28
+              Top = 4
+              Width = 144
+              Constraints.MaxHeight = 28
+              ItemHeight = 0
+              OnChange = AsteroidListChange
+              ParentFont = False
+              Style = csDropDownList
+              TabOrder = 2
+            end
+          end
+          object PanelCom: TPanel
+            AnchorSideTop.Control = PanelAst
+            AnchorSideTop.Side = asrBottom
+            Left = 176
+            Height = 32
+            Top = 209
+            Width = 304
+            BorderSpacing.Top = 3
+            BevelOuter = bvNone
+            ClientHeight = 32
+            ClientWidth = 304
+            TabOrder = 9
+            object CometFilter: TEdit
+              Left = 0
+              Height = 28
+              Top = 4
+              Width = 80
+              Constraints.MaxHeight = 28
+              ParentFont = False
+              TabOrder = 0
+            end
+            object btnCometFilter: TButton
+              Left = 80
+              Height = 24
+              Top = 4
+              Width = 76
+              BorderSpacing.InnerBorder = 4
+              Caption = 'Filter ->'
+              OnClick = btnCometFilterClick
+              ParentFont = False
+              TabOrder = 1
+            end
+            object CometList: TComboBox
+              Left = 160
+              Height = 28
+              Top = 4
+              Width = 144
+              Constraints.MaxHeight = 28
+              ItemHeight = 0
+              OnChange = CometListChange
+              ParentFont = False
+              Style = csDropDownList
+              TabOrder = 2
+            end
+          end
+          object PanelBody: TPanel
+            AnchorSideTop.Control = PanelCom
+            AnchorSideTop.Side = asrBottom
+            Left = 176
+            Height = 32
+            Top = 244
+            Width = 312
+            BorderSpacing.Top = 3
+            BevelOuter = bvNone
+            ClientHeight = 32
+            ClientWidth = 312
+            TabOrder = 10
+            object SPKbox: TComboBox
+              Left = 80
+              Height = 28
+              Top = 4
+              Width = 224
+              Constraints.MaxHeight = 28
+              ItemHeight = 0
+              OnChange = SPKboxChange
+              ParentFont = False
+              Style = csDropDownList
+              TabOrder = 0
+            end
+            object Label13: TLabel
+              Left = 6
+              Height = 17
+              Top = 8
+              Width = 23
+              Caption = 'SPK'
+              ParentColor = False
+            end
           end
         end
-        object stepmark: TCheckBox
-          Left = 321
-          Height = 21
-          Top = 257
-          Width = 83
-          Caption = 'stepmark'
-          OnClick = stepmarkClick
-          ParentFont = False
-          TabOrder = 12
+        object Panel3: TPanel
+          Left = 0
+          Height = 34
+          Top = 288
+          Width = 495
+          Align = alTop
+          ClientHeight = 34
+          ClientWidth = 495
+          TabOrder = 4
+          object stepline: TCheckBox
+            Left = 8
+            Height = 21
+            Top = 6
+            Width = 270
+            Caption = 'Connection lines between each position '
+            OnClick = steplineClick
+            ParentFont = False
+            TabOrder = 0
+          end
+          object stepmark: TCheckBox
+            Left = 321
+            Height = 21
+            Top = 6
+            Width = 83
+            Caption = 'stepmark'
+            OnClick = stepmarkClick
+            ParentFont = False
+            TabOrder = 1
+          end
         end
       end
       object Page3: TTabSheet
@@ -1075,20 +1167,21 @@ object f_config_time: Tf_config_time
         ClientWidth = 495
         ParentFont = False
         object GroupBox1: TGroupBox
-          Left = 6
+          Left = 0
           Height = 81
-          Top = 14
-          Width = 462
+          Top = 0
+          Width = 495
+          Align = alTop
           Caption = 'Real time options'
           ClientHeight = 61
-          ClientWidth = 460
+          ClientWidth = 493
           ParentFont = False
           TabOrder = 0
           object Label2: TLabel
             Left = 3
-            Height = 19
+            Height = 17
             Top = 24
-            Width = 128
+            Width = 133
             Caption = 'Delay between frame'
             ParentColor = False
             ParentFont = False
@@ -1109,13 +1202,14 @@ object f_config_time: Tf_config_time
           end
         end
         object GroupBox2: TGroupBox
-          Left = 6
-          Height = 380
-          Top = 103
-          Width = 462
+          Left = 0
+          Height = 451
+          Top = 81
+          Width = 495
+          Align = alClient
           Caption = 'Recording options'
-          ClientHeight = 360
-          ClientWidth = 460
+          ClientHeight = 431
+          ClientWidth = 493
           ParentFont = False
           TabOrder = 1
           object DirectoryEdit1: TDirectoryEdit
@@ -1134,18 +1228,18 @@ object f_config_time: Tf_config_time
           end
           object Label3: TLabel
             Left = 3
-            Height = 19
+            Height = 17
             Top = 66
-            Width = 118
+            Width = 121
             Caption = 'Recording directory'
             ParentColor = False
             ParentFont = False
           end
           object Label4: TLabel
             Left = 3
-            Height = 19
+            Height = 17
             Top = 112
-            Width = 99
+            Width = 101
             Caption = 'Recording prefix'
             ParentColor = False
             ParentFont = False
@@ -1162,9 +1256,9 @@ object f_config_time: Tf_config_time
           end
           object Label5: TLabel
             Left = 3
-            Height = 19
+            Height = 17
             Top = 187
-            Width = 113
+            Width = 117
             Caption = 'Frames per second'
             Constraints.MaxHeight = 28
             ParentColor = False
@@ -1172,9 +1266,9 @@ object f_config_time: Tf_config_time
           end
           object Label6: TLabel
             Left = 3
-            Height = 19
+            Height = 17
             Top = 260
-            Width = 158
+            Width = 159
             Caption = 'Additional ffmpeg options'
             Constraints.MaxHeight = 28
             ParentColor = False
@@ -1192,9 +1286,9 @@ object f_config_time: Tf_config_time
           end
           object Label7: TLabel
             Left = 3
-            Height = 19
+            Height = 17
             Top = 223
-            Width = 69
+            Width = 71
             Caption = 'Frames size'
             Constraints.MaxHeight = 28
             ParentColor = False
@@ -1212,7 +1306,7 @@ object f_config_time: Tf_config_time
           end
           object Label8: TLabel
             Left = 368
-            Height = 19
+            Height = 17
             Top = 223
             Width = 7
             Caption = 'x'
@@ -1264,9 +1358,9 @@ object f_config_time: Tf_config_time
           end
           object Label9: TLabel
             Left = 3
-            Height = 19
+            Height = 17
             Top = 145
-            Width = 122
+            Width = 124
             Caption = 'Recording extention'
             Constraints.MaxHeight = 28
             ParentColor = False
@@ -1295,7 +1389,7 @@ object f_config_time: Tf_config_time
           end
           object Label10: TLabel
             Left = 3
-            Height = 19
+            Height = 17
             Top = 299
             Width = 132
             Caption = 'ffmpeg program path'

@@ -39,6 +39,9 @@ type
   Tf_config_observatory = class(TFrame)
     altmeter: TFloatEdit;
     DarkenHorizon: TCheckBox;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
     pictureelevation: TFloatEdit;
     HorizonRise: TCheckBox;
     Label10: TLabel;

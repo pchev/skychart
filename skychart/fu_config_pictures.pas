@@ -41,6 +41,10 @@ type
     ArchiveBox: TCheckBox;
     ArchiveDirectory1: TDirectoryEdit;
     Button1: TButton;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Panel7: TPanel;
     ShowImageLabel: TCheckBox;
     ConfirmArchive: TCheckBox;
     ImgITT2: TComboBox;

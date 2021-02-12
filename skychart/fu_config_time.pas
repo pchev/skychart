@@ -42,6 +42,9 @@ type
   Tf_config_time = class(TFrame)
     AsteroidFilter: TEdit;
     AsteroidList: TComboBox;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
     SPKbox: TComboBox;
     BitBtn1: TBitBtn;
     btnAstFilter: TButton;

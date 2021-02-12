@@ -52,6 +52,14 @@ type
     LabelDate1: TLabel;
     Labelemail: TLabel;
     LabelObjSpk: TLabel;
+    Panel10: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    Panel9: TPanel;
     SPKRefreshAll: TMenuItem;
     SPKDeleteExpired: TMenuItem;
     SPKrefresh: TMenuItem;
@@ -111,7 +119,6 @@ type
     TabSheet4: TTabSheet;
     Page5: TTabSheet;
     TransparentPlanet: TCheckBox;
-    planetdir: TDirectoryEdit;
     DownloadDialog1: TDownloadDialog;
     GroupBox1: TGroupBox;
     MainPanel: TPanel;
@@ -256,7 +263,6 @@ type
     procedure LabelTitleClick(Sender: TObject);
     procedure NumDaysChange(Sender: TObject);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: boolean);
-    procedure PlanetDirChange(Sender: TObject);
     procedure PlaParalaxeClick(Sender: TObject);
     procedure PlanetBoxClick(Sender: TObject);
     procedure PlanetModeClick(Sender: TObject);
@@ -605,7 +611,6 @@ begin
   GRSdrift.Value := csc.GRSdrift * 365.25;
   GRSJDDate.JD := csc.GRSjd;
   PlanetBox3.Checked := csc.ShowEarthShadow;
-  Planetdir.Text := cmain.planetdir;
   TransparentPlanet.Checked := cplot.TransparentPlanet;
   SunOnline.Checked := csc.SunOnline;
   for i := 0 to URL_SUN_NUMBER - 1 do
@@ -650,13 +655,6 @@ begin
   mpcfile.InitialDir := slash(MPCDir);
   LabelAstInfo1.Caption:=rsFile+': '+cdb.AsteroidFileInfo;
   LabelAsteroidCount.Caption:=rsTotalAsteroi+': '+inttostr(cdb.NumAsteroidElement);
-end;
-
-procedure Tf_config_solsys.PlanetDirChange(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  cmain.planetdir := planetdir.Text;
 end;
 
 procedure Tf_config_solsys.DownloadAsteroidClick(Sender: TObject);

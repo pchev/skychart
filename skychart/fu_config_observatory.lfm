@@ -35,298 +35,17 @@ object f_config_observatory: Tf_config_observatory
         ClientHeight = 548
         ClientWidth = 495
         ParentFont = False
-        object Obszp: TButton
-          Left = 5
-          Height = 25
-          Top = 290
-          Width = 41
-          BorderSpacing.InnerBorder = 4
-          Caption = '+'
-          OnClick = ObszpClick
-          ParentFont = False
-          TabOrder = 9
-        end
-        object Obszm: TButton
-          Left = 5
-          Height = 25
-          Top = 330
-          Width = 41
-          BorderSpacing.InnerBorder = 4
-          Caption = '-'
-          OnClick = ObszmClick
-          ParentFont = False
-          TabOrder = 10
-        end
-        object Obsmap: TButton
-          Left = 47
-          Height = 25
-          Top = 471
-          Width = 111
-          BorderSpacing.InnerBorder = 4
-          Caption = 'Load'
-          OnClick = ObsmapClick
-          ParentFont = False
-          TabOrder = 14
-        end
-        object ZoomImage1: TZoomImage
-          Cursor = crCross
-          Left = 47
-          Height = 202
-          Top = 251
-          Width = 404
-          Canvas.AutoRedraw = False
-          Canvas.Brush.Color = clBlack
-          Zoom = 25
-          ZoomMin = 25
-          ZoomMax = 26
-          Xcentre = 0
-          Ycentre = 0
-          BGcolor = clBlack
-          OnMouseUp = ZoomImage1MouseUp
-          OnPaint = ZoomImage1Paint
-          OnPosChange = ZoomImage1PosChange
-        end
-        object HScrollBar: TScrollBar
-          Left = 47
-          Height = 20
-          Top = 453
-          Width = 404
-          PageSize = 1
-          TabOrder = 12
-          TabStop = False
-          OnScroll = HScrollBarScroll
-        end
-        object VScrollBar: TScrollBar
-          Left = 455
-          Height = 97
-          Top = 251
-          Width = 20
-          Kind = sbVertical
-          PageSize = 1
-          TabOrder = 13
-          TabStop = False
-          OnScroll = VScrollBarScroll
-        end
-        object Latitude: TGroupBox
-          Left = 10
-          Height = 74
-          Top = 73
-          Width = 188
-          Caption = 'Latitude'
-          ClientHeight = 54
-          ClientWidth = 186
-          ParentFont = False
-          TabOrder = 5
-          object Label58: TLabel
-            Left = 4
-            Height = 17
-            Top = 4
-            Width = 47
-            Caption = 'Degree'
-            ParentColor = False
-            ParentFont = False
-          end
-          object hemis: TComboBox
-            Left = 127
-            Height = 28
-            Top = 20
-            Width = 57
-            AutoCompleteText = [cbactSearchAscending]
-            Constraints.MaxHeight = 28
-            ItemHeight = 0
-            Items.Strings = (
-              'N'
-              'S'
-            )
-            OnChange = latdegChange
-            ParentFont = False
-            TabOrder = 3
-          end
-          object latdeg: TFloatEdit
-            Left = 2
-            Height = 28
-            Hint = '0..90'
-            Top = 20
-            Width = 44
-            Constraints.MaxHeight = 28
-            MaxLength = 12
-            ParentFont = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 0
-            OnKeyDown = latKeyDown
-            Decimals = 0
-            MaxValue = 90
-            NumericType = ntFixed
-            OnExit = latdegChange
-          end
-          object latmin: TLongEdit
-            Left = 46
-            Height = 28
-            Hint = '0..59'
-            Top = 20
-            Width = 36
-            Constraints.MaxHeight = 28
-            MaxLength = 2
-            ParentFont = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 1
-            OnKeyDown = latKeyDown
-            Value = 0
-            MaxValue = 59
-            OnExit = latdegChange
-          end
-          object latsec: TFloatEdit
-            Left = 83
-            Height = 28
-            Hint = '0..59.99'
-            Top = 20
-            Width = 44
-            Constraints.MaxHeight = 28
-            ParentFont = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 2
-            OnKeyDown = latKeyDown
-            MaxValue = 59.99
-            NumericType = ntFixed
-            OnExit = latdegChange
-          end
-        end
-        object Longitude: TGroupBox
-          Left = 198
-          Height = 74
-          Top = 73
-          Width = 189
-          Caption = 'Longitude'
-          ClientHeight = 54
-          ClientWidth = 187
-          ParentFont = False
-          TabOrder = 6
-          object Label61: TLabel
-            Left = 4
-            Height = 17
-            Top = 4
-            Width = 47
-            Caption = 'Degree'
-            ParentColor = False
-            ParentFont = False
-          end
-          object long: TComboBox
-            Left = 127
-            Height = 28
-            Top = 20
-            Width = 57
-            AutoCompleteText = [cbactSearchAscending]
-            Constraints.MaxHeight = 28
-            ItemHeight = 0
-            Items.Strings = (
-              'W'
-              'E'
-            )
-            OnChange = longdegChange
-            ParentFont = False
-            TabOrder = 3
-          end
-          object longdeg: TFloatEdit
-            Left = 2
-            Height = 28
-            Hint = '0..180'
-            Top = 20
-            Width = 44
-            Constraints.MaxHeight = 28
-            MaxLength = 12
-            ParentFont = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 0
-            OnKeyDown = longKeyDown
-            Decimals = 0
-            MaxValue = 180
-            NumericType = ntFixed
-            OnExit = longdegChange
-          end
-          object longmin: TLongEdit
-            Left = 46
-            Height = 28
-            Hint = '0..59'
-            Top = 20
-            Width = 36
-            Constraints.MaxHeight = 28
-            MaxLength = 2
-            ParentFont = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 1
-            OnKeyDown = longKeyDown
-            Value = 0
-            MaxValue = 59
-            OnExit = longdegChange
-          end
-          object longsec: TFloatEdit
-            Left = 83
-            Height = 28
-            Hint = '0..59.99'
-            Top = 20
-            Width = 44
-            Constraints.MaxHeight = 28
-            ParentFont = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 2
-            OnKeyDown = longKeyDown
-            MaxValue = 59.99
-            NumericType = ntFixed
-            OnExit = longdegChange
-          end
-        end
-        object Altitude: TGroupBox
-          Left = 388
-          Height = 74
-          Top = 73
-          Width = 82
-          Caption = 'Altitude'
-          ClientHeight = 54
-          ClientWidth = 80
-          ParentFont = False
-          TabOrder = 7
-          object Label70: TLabel
-            Left = 8
-            Height = 17
-            Top = 4
-            Width = 45
-            Caption = 'Meters'
-            ParentColor = False
-            ParentFont = False
-          end
-          object altmeter: TFloatEdit
-            Left = 0
-            Height = 28
-            Hint = '-500..15000'
-            Top = 20
-            Width = 73
-            Constraints.MaxHeight = 28
-            ParentFont = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 0
-            OnChange = altmeterChange
-            MinValue = -500
-            MaxValue = 15000
-            Digits = 7
-          end
-        end
         object timezone: TGroupBox
-          Left = 10
-          Height = 100
-          Top = 151
-          Width = 460
+          Left = 0
+          Height = 92
+          Top = 163
+          Width = 495
+          Align = alTop
           Caption = 'Time Zone'
-          ClientHeight = 80
-          ClientWidth = 458
+          ClientHeight = 72
+          ClientWidth = 493
           ParentFont = False
-          TabOrder = 8
+          TabOrder = 0
           object TZComboBox: TComboBox
             Left = 8
             Height = 28
@@ -340,9 +59,11 @@ object f_config_observatory: Tf_config_observatory
             TabOrder = 0
           end
           object CountryTZ: TCheckBox
+            AnchorSideTop.Control = countrylist
+            AnchorSideTop.Side = asrCenter
             Left = 8
             Height = 21
-            Top = 1
+            Top = 6
             Width = 136
             Caption = 'Country Timezone'
             Checked = True
@@ -365,86 +86,413 @@ object f_config_observatory: Tf_config_observatory
             TabOrder = 2
           end
         end
-        object ObsName: TEdit
-          Left = 94
-          Height = 28
-          Top = 2
-          Width = 194
-          Constraints.MaxHeight = 28
-          OnChange = ObsNameChange
-          ParentFont = False
-          TabOrder = 0
-          Text = 'ObsName'
-        end
-        object ComboBox1: TComboBox
-          Left = 94
-          Height = 28
-          Top = 35
-          Width = 194
-          Constraints.MaxHeight = 28
-          ItemHeight = 0
-          OnSelect = ComboBox1Select
-          ParentFont = False
-          Style = csDropDownList
-          TabOrder = 2
-        end
-        object Button5: TButton
-          Left = 305
-          Height = 25
-          Top = 2
-          Width = 165
-          Caption = 'Country Database'
-          OnClick = Button5Click
-          ParentFont = False
+        object Panel1: TPanel
+          Left = 0
+          Height = 80
+          Top = 0
+          Width = 495
+          Align = alTop
+          ClientHeight = 80
+          ClientWidth = 495
           TabOrder = 1
+          object ObsName: TEdit
+            Left = 94
+            Height = 28
+            Top = 4
+            Width = 194
+            Constraints.MaxHeight = 28
+            OnChange = ObsNameChange
+            ParentFont = False
+            TabOrder = 0
+            Text = 'ObsName'
+          end
+          object ComboBox1: TComboBox
+            Left = 94
+            Height = 28
+            Top = 37
+            Width = 194
+            Constraints.MaxHeight = 28
+            ItemHeight = 0
+            OnSelect = ComboBox1Select
+            ParentFont = False
+            Style = csDropDownList
+            TabOrder = 1
+          end
+          object Button5: TButton
+            AnchorSideTop.Control = ObsName
+            AnchorSideTop.Side = asrCenter
+            Left = 305
+            Height = 25
+            Top = 6
+            Width = 165
+            Caption = 'Country Database'
+            OnClick = Button5Click
+            ParentFont = False
+            TabOrder = 2
+          end
+          object Button6: TButton
+            AnchorSideTop.Control = ComboBox1
+            AnchorSideTop.Side = asrCenter
+            Left = 305
+            Height = 25
+            Top = 39
+            Width = 76
+            Caption = 'Add'
+            OnClick = Button6Click
+            ParentFont = False
+            TabOrder = 3
+          end
+          object Button7: TButton
+            AnchorSideTop.Control = ComboBox1
+            AnchorSideTop.Side = asrCenter
+            Left = 394
+            Height = 25
+            Top = 39
+            Width = 76
+            Caption = 'Delete'
+            OnClick = Button7Click
+            ParentFont = False
+            TabOrder = 4
+          end
+          object Label2: TLabel
+            AnchorSideTop.Control = ComboBox1
+            AnchorSideTop.Side = asrCenter
+            Left = 21
+            Height = 17
+            Top = 43
+            Width = 51
+            Caption = 'Favorite'
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label3: TLabel
+            AnchorSideTop.Control = ObsName
+            AnchorSideTop.Side = asrCenter
+            Left = 21
+            Height = 17
+            Top = 10
+            Width = 37
+            Caption = 'Name'
+            ParentColor = False
+            ParentFont = False
+          end
         end
-        object Button6: TButton
-          Left = 305
-          Height = 25
-          Top = 35
-          Width = 76
-          Caption = 'Add'
-          OnClick = Button6Click
-          ParentFont = False
+        object Panel2: TPanel
+          Left = 0
+          Height = 83
+          Top = 80
+          Width = 495
+          Align = alTop
+          Caption = 'Panel2'
+          ClientHeight = 83
+          ClientWidth = 495
+          TabOrder = 2
+          object Latitude: TGroupBox
+            Left = 1
+            Height = 81
+            Top = 1
+            Width = 188
+            Align = alLeft
+            Caption = 'Latitude'
+            ClientHeight = 61
+            ClientWidth = 186
+            ParentFont = False
+            TabOrder = 0
+            object Label58: TLabel
+              Left = 4
+              Height = 17
+              Top = 4
+              Width = 47
+              Caption = 'Degree'
+              ParentColor = False
+              ParentFont = False
+            end
+            object hemis: TComboBox
+              Left = 127
+              Height = 28
+              Top = 20
+              Width = 57
+              AutoCompleteText = [cbactSearchAscending]
+              Constraints.MaxHeight = 28
+              ItemHeight = 0
+              Items.Strings = (
+                'N'
+                'S'
+              )
+              OnChange = latdegChange
+              ParentFont = False
+              TabOrder = 3
+            end
+            object latdeg: TFloatEdit
+              Left = 2
+              Height = 28
+              Hint = '0..90'
+              Top = 20
+              Width = 44
+              Constraints.MaxHeight = 28
+              MaxLength = 12
+              ParentFont = False
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 0
+              OnKeyDown = latKeyDown
+              Decimals = 0
+              MaxValue = 90
+              NumericType = ntFixed
+              OnExit = latdegChange
+            end
+            object latmin: TLongEdit
+              Left = 46
+              Height = 28
+              Hint = '0..59'
+              Top = 20
+              Width = 36
+              Constraints.MaxHeight = 28
+              MaxLength = 2
+              ParentFont = False
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 1
+              OnKeyDown = latKeyDown
+              Value = 0
+              MaxValue = 59
+              OnExit = latdegChange
+            end
+            object latsec: TFloatEdit
+              Left = 83
+              Height = 28
+              Hint = '0..59.99'
+              Top = 20
+              Width = 44
+              Constraints.MaxHeight = 28
+              ParentFont = False
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 2
+              OnKeyDown = latKeyDown
+              MaxValue = 59.99
+              NumericType = ntFixed
+              OnExit = latdegChange
+            end
+          end
+          object Longitude: TGroupBox
+            Left = 189
+            Height = 81
+            Top = 1
+            Width = 189
+            Align = alLeft
+            Caption = 'Longitude'
+            ClientHeight = 61
+            ClientWidth = 187
+            ParentFont = False
+            TabOrder = 1
+            object Label61: TLabel
+              Left = 4
+              Height = 17
+              Top = 4
+              Width = 47
+              Caption = 'Degree'
+              ParentColor = False
+              ParentFont = False
+            end
+            object long: TComboBox
+              Left = 127
+              Height = 28
+              Top = 20
+              Width = 57
+              AutoCompleteText = [cbactSearchAscending]
+              Constraints.MaxHeight = 28
+              ItemHeight = 0
+              Items.Strings = (
+                'W'
+                'E'
+              )
+              OnChange = longdegChange
+              ParentFont = False
+              TabOrder = 3
+            end
+            object longdeg: TFloatEdit
+              Left = 2
+              Height = 28
+              Hint = '0..180'
+              Top = 20
+              Width = 44
+              Constraints.MaxHeight = 28
+              MaxLength = 12
+              ParentFont = False
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 0
+              OnKeyDown = longKeyDown
+              Decimals = 0
+              MaxValue = 180
+              NumericType = ntFixed
+              OnExit = longdegChange
+            end
+            object longmin: TLongEdit
+              Left = 46
+              Height = 28
+              Hint = '0..59'
+              Top = 20
+              Width = 36
+              Constraints.MaxHeight = 28
+              MaxLength = 2
+              ParentFont = False
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 1
+              OnKeyDown = longKeyDown
+              Value = 0
+              MaxValue = 59
+              OnExit = longdegChange
+            end
+            object longsec: TFloatEdit
+              Left = 83
+              Height = 28
+              Hint = '0..59.99'
+              Top = 20
+              Width = 44
+              Constraints.MaxHeight = 28
+              ParentFont = False
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 2
+              OnKeyDown = longKeyDown
+              MaxValue = 59.99
+              NumericType = ntFixed
+              OnExit = longdegChange
+            end
+          end
+          object Altitude: TGroupBox
+            Left = 378
+            Height = 81
+            Top = 1
+            Width = 116
+            Align = alClient
+            Caption = 'Altitude'
+            ClientHeight = 61
+            ClientWidth = 114
+            ParentFont = False
+            TabOrder = 2
+            object Label70: TLabel
+              Left = 8
+              Height = 17
+              Top = 4
+              Width = 45
+              Caption = 'Meters'
+              ParentColor = False
+              ParentFont = False
+            end
+            object altmeter: TFloatEdit
+              Left = 0
+              Height = 28
+              Hint = '-500..15000'
+              Top = 20
+              Width = 73
+              Constraints.MaxHeight = 28
+              ParentFont = False
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 0
+              OnChange = altmeterChange
+              MinValue = -500
+              MaxValue = 15000
+              Digits = 7
+            end
+          end
+        end
+        object Panel3: TPanel
+          Left = 0
+          Height = 293
+          Top = 255
+          Width = 495
+          Align = alClient
+          Caption = 'Panel3'
+          ClientHeight = 293
+          ClientWidth = 495
           TabOrder = 3
-        end
-        object Button7: TButton
-          Left = 394
-          Height = 25
-          Top = 35
-          Width = 76
-          Caption = 'Delete'
-          OnClick = Button7Click
-          ParentFont = False
-          TabOrder = 4
-        end
-        object Label2: TLabel
-          Left = 21
-          Height = 17
-          Top = 39
-          Width = 51
-          Caption = 'Favorite'
-          ParentColor = False
-          ParentFont = False
-        end
-        object Label3: TLabel
-          Left = 21
-          Height = 17
-          Top = 6
-          Width = 37
-          Caption = 'Name'
-          ParentColor = False
-          ParentFont = False
-        end
-        object Button8: TButton
-          Left = 238
-          Height = 25
-          Top = 471
-          Width = 213
-          Caption = 'Internet localization'
-          OnClick = Button8Click
-          ParentFont = False
-          TabOrder = 15
+          object Obszp: TButton
+            Left = 0
+            Height = 25
+            Top = 49
+            Width = 41
+            BorderSpacing.InnerBorder = 4
+            Caption = '+'
+            OnClick = ObszpClick
+            ParentFont = False
+            TabOrder = 0
+          end
+          object Obszm: TButton
+            Left = 0
+            Height = 25
+            Top = 89
+            Width = 41
+            BorderSpacing.InnerBorder = 4
+            Caption = '-'
+            OnClick = ObszmClick
+            ParentFont = False
+            TabOrder = 1
+          end
+          object ZoomImage1: TZoomImage
+            Cursor = crCross
+            Left = 42
+            Height = 202
+            Top = 10
+            Width = 404
+            Canvas.AutoRedraw = False
+            Canvas.Brush.Color = clBlack
+            Zoom = 25
+            ZoomMin = 25
+            ZoomMax = 26
+            Xcentre = 0
+            Ycentre = 0
+            BGcolor = clBlack
+            OnMouseUp = ZoomImage1MouseUp
+            OnPaint = ZoomImage1Paint
+            OnPosChange = ZoomImage1PosChange
+          end
+          object VScrollBar: TScrollBar
+            Left = 450
+            Height = 97
+            Top = 10
+            Width = 20
+            Kind = sbVertical
+            PageSize = 1
+            TabOrder = 3
+            TabStop = False
+            OnScroll = VScrollBarScroll
+          end
+          object HScrollBar: TScrollBar
+            Left = 42
+            Height = 20
+            Top = 212
+            Width = 404
+            PageSize = 1
+            TabOrder = 4
+            TabStop = False
+            OnScroll = HScrollBarScroll
+          end
+          object Button8: TButton
+            Left = 233
+            Height = 25
+            Top = 230
+            Width = 213
+            Caption = 'Internet localization'
+            OnClick = Button8Click
+            ParentFont = False
+            TabOrder = 5
+          end
+          object Obsmap: TButton
+            Left = 42
+            Height = 25
+            Top = 230
+            Width = 111
+            BorderSpacing.InnerBorder = 4
+            Caption = 'Load'
+            OnClick = ObsmapClick
+            ParentFont = False
+            TabOrder = 6
+          end
         end
       end
       object Page2: TTabSheet
@@ -467,7 +515,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 13
             Height = 21
             Top = 13
-            Width = 216
+            Width = 214
             Caption = 'Show Object below the horizon'
             OnClick = horizonopaqueClick
             ParentFont = False
@@ -516,7 +564,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 4
             Height = 21
             Top = 8
-            Width = 154
+            Width = 153
             Caption = 'Fill with horizon color'
             OnClick = fillhorizonClick
             ParentFont = False
@@ -588,7 +636,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 267
             Height = 21
             Top = 8
-            Width = 153
+            Width = 152
             Caption = 'Show 0° horizon line '
             OnClick = ShowHorizon0Click
             ParentFont = False
@@ -670,7 +718,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 13
             Height = 21
             Top = 57
-            Width = 283
+            Width = 282
             Caption = 'Draw the apparent depressed horizon line'
             OnClick = horizondepressionClick
             ParentFont = False
