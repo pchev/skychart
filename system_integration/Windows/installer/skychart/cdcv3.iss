@@ -47,6 +47,9 @@ Source: Data\*; DestDir: {app}; Flags: ignoreversion recursesubdirs createallsub
 Source: PrivateFiles\*; DestDir: {localappdata}\skychart\; Flags: onlyifdoesntexist 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
+[UninstallDelete]
+Type: filesandordirs; Name: "{localappdata}\skychart\database"
+
 [Registry]
 Root: HKCU; Subkey: Software\Astro_PC\Ciel; ValueType: string; ValueName: Install_Dir; ValueData: {app}; Flags: uninsdeletekey
 Root: HKCU; Subkey: Software\Astro_PC\VarObs; ValueType: string; ValueName: Install_Dir; ValueData: {app}; Flags: uninsdeletekey
@@ -55,6 +58,6 @@ Root: HKCU; Subkey: Software\Astro_PC\VarObs; ValueType: string; ValueName: Inst
 Name: {group}\Cartes du Ciel; Filename: {app}\skychart.exe; WorkingDir: {app}
 Name: {group}\Variables Stars; Filename: {app}\varobs.exe; WorkingDir: {app}
 Name: {group}\Cartes du Ciel Clock; Filename: {app}\cdcicon.exe; WorkingDir: {app}; 
-Name: {commondesktop}\Cartes du Ciel; Filename: {app}\skychart.exe; WorkingDir: {app}; Tasks: desktopicon
-Name: {commonstartup}\Cartes du Ciel Clock; Filename: {app}\cdcicon.exe; WorkingDir: {app}; Tasks: startupicon
+Name: {userdesktop}\Cartes du Ciel; Filename: {app}\skychart.exe; WorkingDir: {app}; Tasks: desktopicon
+Name: {userstartup}\Cartes du Ciel Clock; Filename: {app}\cdcicon.exe; WorkingDir: {app}; Tasks: startupicon
  
