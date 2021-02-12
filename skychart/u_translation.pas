@@ -1561,6 +1561,11 @@ resourcestring
   rsDeleteAllExp = 'Delete all expired ephemeris';
   rsRefreshAllEp = 'Refresh all ephemeris';
   rsAppendToCurr = 'Append to current file';
+  rsLineForTeles = 'Line for telescope pointing limit';
+  rsMaximumDecli = 'Maximum declination';
+  rsMinimumDecli = 'Minimum declination';
+  rsEastHourAngl = 'East hour angle';
+  rsWestHourAngl = 'West hour angle';
 
 // also update upsi_translation
 

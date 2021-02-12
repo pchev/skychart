@@ -83,6 +83,8 @@ type
     procedure LabelClick(lnum: integer);
     procedure SetImage(Value: TCanvas);
     procedure DrawHorizonPicture(hbmp: TBGRABitmap);
+    function DrawRAline(ra, de, dd, dra: double; drawlabel: boolean; col,linewidth,dir,lh,lt: integer; linestyle: TFPPenStyle; var labelok:boolean): boolean;
+    function DrawDEline(ra, de, da,dde,ra1: double; drawlabel: boolean; col,linewidth,dir,lh,lt: integer; linestyle: TFPPenStyle; var labelok:boolean): boolean;
   public
     cfgsc: Tconf_skychart;
     labels: array[1..maxlabels] of Tobjlabel;
@@ -144,6 +146,7 @@ type
     procedure DrawAzGrid(drawlabel: boolean);
     procedure DrawGalGrid(drawlabel: boolean);
     procedure DrawEclGrid(drawlabel: boolean);
+    procedure DrawTelescopeLimit;
     procedure DrawMeridian;
     procedure DrawScale;
     procedure DrawBorder;
@@ -395,6 +398,7 @@ begin
         DrawGalactic;
         DrawEquator;
         DrawPrePointLine;
+        DrawTelescopeLimit;
       end;
     end;
     // the stars
@@ -434,6 +438,7 @@ begin
         DrawGalactic;
         DrawEquator;
         DrawPrePointLine;
+        DrawTelescopeLimit;
       end;
     end;
     // Finder mark
@@ -5066,6 +5071,132 @@ begin
   end;
 end;
 
+function Tskychart.DrawRAline(ra, de, dd, dra: double; drawlabel: boolean; col,linewidth,dir,lh,lt: integer; linestyle: TFPPenStyle; var labelok:boolean): boolean;
+var
+  n, lx, ly: integer;
+  x1, y1: double;
+  xx, yy, xxp, yyp: single;
+  plotok: boolean;
+begin
+  projection(ra, de, x1, y1, False, cfgsc);
+  WindowXY(x1, y1, xxp, yyp, cfgsc);
+  n := 0;
+  plotok := False;
+  repeat
+    Inc(n);
+    de := de + dd / 3;
+    projection(ra, de, x1, y1, cfgsc.ProjPole=Altaz, cfgsc);
+    WindowXY(x1, y1, xx, yy, cfgsc);
+    if (intpower(xxp - xx, 2) + intpower(yyp - yy, 2)) < cfgsc.x2 then
+      if (xx > -cfgsc.Xmax) and (xx < 2 * cfgsc.Xmax) and (yy > -cfgsc.Ymax) and (yy < 2 * cfgsc.Ymax) then
+      begin
+        if (not drawlabel) then
+          Fplot.Plotline(xxp, yyp, xx, yy, col, linewidth, linestyle);
+        if (xx > 0) and (xx < cfgsc.Xmax) and (yy > 0) and (yy < cfgsc.Ymax) then
+          plotok := True;
+      end;
+    if drawlabel and (cfgsc.ShowGridNum) and (plotok) and (not labelok) and
+      (((dir = 1) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax))) or
+      ((dir = 2) and ((abs(yy - cfgsc.Ymin) < lt) and (xx > 0) and (xx < cfgsc.Xmax))) or
+      ((dir = 3) and ((abs(xx - cfgsc.Xmin) < lt) and (yy > 0) and (yy < cfgsc.Ymax))) or
+      ((dir = 4) and ((abs(xx - cfgsc.Xmax) < lt) and (yy > 0) and (yy < cfgsc.Ymax)))) then
+    begin
+      if dir <= 2 then
+      begin
+        lx := round(xx);
+        if yy < (cfgsc.Ymax div 2) then
+          ly := (lh div 2)
+        else
+          ly := cfgsc.Ymax - (lh div 2);
+      end
+      else
+      begin
+        ly := round(yy);
+        if xx < (cfgsc.Xmax div 2) then
+          lx := (lh div 2)
+        else
+          lx := cfgsc.Xmax - (lh div 2);
+      end;
+      if dra <= 15 * minarc then
+        Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laCenter, laTop,
+          artostr3(rmod(ra + pi2, pi2) * rad2deg / 15), cfgsc.WhiteBg, True, True, 5)
+      else
+        Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laCenter, laTop,
+          armtostr(rmod(ra + pi2, pi2) * rad2deg / 15), cfgsc.WhiteBg, True, True, 5);
+      labelok := True;
+    end;
+    xxp := xx;
+    yyp := yy;
+  until (xx < -cfgsc.Xmax) or (xx > 2 * cfgsc.Xmax) or (yy < -cfgsc.Ymax) or
+    (yy > 2 * cfgsc.Ymax) or (de > (pid2 - 2 * dd / 3)) or (de < (-pid2 - 2 * dd / 3));
+  Result := (n > 1);
+end;
+
+function Tskychart.DrawDEline(ra, de, da,dde,ra1: double; drawlabel: boolean; col,linewidth,dir,lh,lt: integer; linestyle: TFPPenStyle; var labelok:boolean): boolean;
+var
+  n, w, lx, ly: integer;
+  x1, y1: double;
+  xx, yy, xxp, yyp: single;
+  plotok: boolean;
+begin
+  if de = 0 then
+    w := WideLine+linewidth
+  else
+    w := linewidth;
+  projection(ra, de, x1, y1, False, cfgsc);
+  WindowXY(x1, y1, xxp, yyp, cfgsc);
+  n := 0;
+  plotok := False;
+  repeat
+    Inc(n);
+    ra := ra + da / 3;
+    projection(ra, de, x1, y1, cfgsc.ProjPole=Altaz, cfgsc);
+    WindowXY(x1, y1, xx, yy, cfgsc);
+    if (intpower(xxp - xx, 2) + intpower(yyp - yy, 2)) < cfgsc.x2 then
+      if (xx > -cfgsc.Xmax) and (xx < 2 * cfgsc.Xmax) and (yy > -cfgsc.Ymax) and (yy < 2 * cfgsc.Ymax) then
+      begin
+        if (not drawlabel) then
+          Fplot.Plotline(xxp, yyp, xx, yy, col, w, linestyle);
+        if (xx > 0) and (xx < cfgsc.Xmax) and (yy > 0) and (yy < cfgsc.Ymax) then
+          plotok := True;
+      end;
+    if drawlabel and (cfgsc.ShowGridNum) and (plotok) and (not labelok) and
+      (((dir = 1) and ((abs(xx - cfgsc.Xmin) < lt) and (yy > 0) and (yy < cfgsc.Ymax))) or
+      ((dir = 2) and ((abs(xx - cfgsc.Xmin) < lt) and (yy > 0) and (yy < cfgsc.Ymax))) or
+      ((dir = 3) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax))) or
+      ((dir = 4) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax)))) then
+    begin
+      if dir > 2 then
+      begin
+        lx := round(xx);
+        if yy < (cfgsc.Ymax div 2) then
+          ly := (lh div 2)
+        else
+          ly := cfgsc.Ymax - (lh div 2);
+      end
+      else
+      begin
+        ly := round(yy);
+        if xx < (cfgsc.Xmax div 2) then
+          lx := (lh div 2)
+        else
+          lx := cfgsc.Xmax - (lh div 2);
+      end;
+      if dde <= 5 * minarc then
+        Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
+          detostr(de * rad2deg), cfgsc.WhiteBg, True, True, 5)
+      else
+        Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
+          demtostr(de * rad2deg), cfgsc.WhiteBg, True, True, 5);
+      labelok := True;
+    end;
+    xxp := xx;
+    yyp := yy;
+  until (xx < -cfgsc.Xmax) or (xx > 2 * cfgsc.Xmax) or (yy < -cfgsc.Ymax) or
+    (yy > 2 * cfgsc.Ymax) or (ra > ra1 + pi) or (ra < ra1 - pi);
+  Result := (n > 1);
+end;
+
 procedure Tskychart.DrawEqGrid(drawlabel: boolean; altstyle: boolean = False);
 var
   ra1, de1, ac, dc, dra, dde, lda1, lda2, rot: double;
@@ -5073,134 +5204,6 @@ var
   ok, labelok: boolean;
   linestyle: TFPPenStyle;
   linewidth: integer;
-
-  function DrawRAline(ra, de, dd: double): boolean;
-  var
-    n, lx, ly: integer;
-    x1, y1: double;
-    xx, yy, xxp, yyp: single;
-    plotok: boolean;
-  begin
-    projection(ra, de, x1, y1, False, cfgsc);
-    WindowXY(x1, y1, xxp, yyp, cfgsc);
-    n := 0;
-    plotok := False;
-    repeat
-      Inc(n);
-      de := de + dd / 3;
-      projection(ra, de, x1, y1, ((not Fplot.cfgplot.UseBMP) and (cfgsc.horizonopaque)), cfgsc);
-      WindowXY(x1, y1, xx, yy, cfgsc);
-      if (intpower(xxp - xx, 2) + intpower(yyp - yy, 2)) < cfgsc.x2 then
-        if (xx > -cfgsc.Xmax) and (xx < 2 * cfgsc.Xmax) and (yy > -cfgsc.Ymax) and (yy < 2 * cfgsc.Ymax) then
-        begin
-          if (not drawlabel) then
-            Fplot.Plotline(xxp, yyp, xx, yy, col, linewidth, linestyle);
-          if (xx > 0) and (xx < cfgsc.Xmax) and (yy > 0) and (yy < cfgsc.Ymax) then
-            plotok := True;
-        end;
-      if drawlabel and (cfgsc.ShowGridNum) and (plotok) and (not labelok) and
-        (((dir = 1) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax))) or
-        ((dir = 2) and ((abs(yy - cfgsc.Ymin) < lt) and (xx > 0) and (xx < cfgsc.Xmax))) or
-        ((dir = 3) and ((abs(xx - cfgsc.Xmin) < lt) and (yy > 0) and (yy < cfgsc.Ymax))) or
-        ((dir = 4) and ((abs(xx - cfgsc.Xmax) < lt) and (yy > 0) and (yy < cfgsc.Ymax)))) then
-      begin
-        if dir <= 2 then
-        begin
-          lx := round(xx);
-          if yy < (cfgsc.Ymax div 2) then
-            ly := (lh div 2)
-          else
-            ly := cfgsc.Ymax - (lh div 2);
-        end
-        else
-        begin
-          ly := round(yy);
-          if xx < (cfgsc.Xmax div 2) then
-            lx := (lh div 2)
-          else
-            lx := cfgsc.Xmax - (lh div 2);
-        end;
-        if dra <= 15 * minarc then
-          Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laCenter, laTop,
-            artostr3(rmod(ra + pi2, pi2) * rad2deg / 15), cfgsc.WhiteBg, True, True, 5)
-        else
-          Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laCenter, laTop,
-            armtostr(rmod(ra + pi2, pi2) * rad2deg / 15), cfgsc.WhiteBg, True, True, 5);
-        labelok := True;
-      end;
-      xxp := xx;
-      yyp := yy;
-    until (xx < -cfgsc.Xmax) or (xx > 2 * cfgsc.Xmax) or (yy < -cfgsc.Ymax) or
-      (yy > 2 * cfgsc.Ymax) or (de > (pid2 - 2 * dd / 3)) or (de < (-pid2 - 2 * dd / 3));
-    Result := (n > 1);
-  end;
-
-  function DrawDEline(ra, de, da: double): boolean;
-  var
-    n, w, lx, ly: integer;
-    x1, y1: double;
-    xx, yy, xxp, yyp: single;
-    plotok: boolean;
-  begin
-    if de = 0 then
-      w := WideLine+linewidth
-    else
-      w := linewidth;
-    projection(ra, de, x1, y1, False, cfgsc);
-    WindowXY(x1, y1, xxp, yyp, cfgsc);
-    n := 0;
-    plotok := False;
-    repeat
-      Inc(n);
-      ra := ra + da / 3;
-      projection(ra, de, x1, y1, ((not Fplot.cfgplot.UseBMP) and (cfgsc.horizonopaque)), cfgsc);
-      WindowXY(x1, y1, xx, yy, cfgsc);
-      if (intpower(xxp - xx, 2) + intpower(yyp - yy, 2)) < cfgsc.x2 then
-        if (xx > -cfgsc.Xmax) and (xx < 2 * cfgsc.Xmax) and (yy > -cfgsc.Ymax) and (yy < 2 * cfgsc.Ymax) then
-        begin
-          if (not drawlabel) then
-            Fplot.Plotline(xxp, yyp, xx, yy, col, w, linestyle);
-          if (xx > 0) and (xx < cfgsc.Xmax) and (yy > 0) and (yy < cfgsc.Ymax) then
-            plotok := True;
-        end;
-      if drawlabel and (cfgsc.ShowGridNum) and (plotok) and (not labelok) and
-        (((dir = 1) and ((abs(xx - cfgsc.Xmin) < lt) and (yy > 0) and (yy < cfgsc.Ymax))) or
-        ((dir = 2) and ((abs(xx - cfgsc.Xmin) < lt) and (yy > 0) and (yy < cfgsc.Ymax))) or
-        ((dir = 3) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax))) or
-        ((dir = 4) and ((abs(yy - cfgsc.Ymax) < lt) and (xx > 0) and (xx < cfgsc.Xmax)))) then
-      begin
-        if dir > 2 then
-        begin
-          lx := round(xx);
-          if yy < (cfgsc.Ymax div 2) then
-            ly := (lh div 2)
-          else
-            ly := cfgsc.Ymax - (lh div 2);
-        end
-        else
-        begin
-          ly := round(yy);
-          if xx < (cfgsc.Xmax div 2) then
-            lx := (lh div 2)
-          else
-            lx := cfgsc.Xmax - (lh div 2);
-        end;
-        if dde <= 5 * minarc then
-          Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
-            detostr(de * rad2deg), cfgsc.WhiteBg, True, True, 5)
-        else
-          Fplot.PlotText(lx, ly, 1, Fplot.cfgplot.LabelColor[7], laLeft, laBottom,
-            demtostr(de * rad2deg), cfgsc.WhiteBg, True, True, 5);
-        labelok := True;
-      end;
-      xxp := xx;
-      yyp := yy;
-    until (xx < -cfgsc.Xmax) or (xx > 2 * cfgsc.Xmax) or (yy < -cfgsc.Ymax) or
-      (yy > 2 * cfgsc.Ymax) or (ra > ra1 + pi) or (ra < ra1 - pi);
-    Result := (n > 1);
-  end;
-
-  //Tskychart.DrawEqGrid
 begin
   if altstyle then
   begin
@@ -5266,53 +5269,101 @@ begin
         else
           dir := 2;
     end;
+    //RA, east of chart center
     repeat
       labelok := False;
       if cfgsc.decentre > 0 then
       begin
-        ok := DrawRAline(ac, dc, -dde);
-        ok := DrawRAline(ac, dc, dde) or ok;
+        ok := DrawRAline(ac, dc, -dde,dra,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok);
+        ok := DrawRAline(ac, dc, dde,dra,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok) or ok;
       end
       else
       begin
-        ok := DrawRAline(ac, dc, dde);
-        ok := DrawRAline(ac, dc, -dde) or ok;
+        ok := DrawRAline(ac, dc, dde,dra,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok);
+        ok := DrawRAline(ac, dc, -dde,dra,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok) or ok;
       end;
       ac := ac + dra;
     until (not ok) or (ac > ra1 + pi + musec);
     ac := ra1;
     dc := de1;
+    //RA, west of chart center
     repeat
       labelok := False;
       if cfgsc.decentre > 0 then
       begin
-        ok := DrawRAline(ac, dc, -dde);
-        ok := DrawRAline(ac, dc, dde) or ok;
+        ok := DrawRAline(ac, dc, -dde,dra,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok);
+        ok := DrawRAline(ac, dc, dde,dra,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok) or ok;
       end
       else
       begin
-        ok := DrawRAline(ac, dc, dde);
-        ok := DrawRAline(ac, dc, -dde) or ok;
+        ok := DrawRAline(ac, dc, dde,dra,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok);
+        ok := DrawRAline(ac, dc, -dde,dra,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok) or ok;
       end;
       ac := ac - dra;
     until (not ok) or (ac < ra1 - pi - musec);
     ac := ra1;
     dc := de1;
     lt := round(abs(1.2 * cfgsc.BxGlb * dra / 3));
+    //DEC, north of chart center
     repeat
       labelok := False;
-      ok := DrawDEline(ac, dc, dra);
-      ok := DrawDEline(ac, dc, -dra) or ok;
+      ok := DrawDEline(ac, dc, dra,dde,ra1,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok);
+      ok := DrawDEline(ac, dc, -dra,dde,ra1,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok) or ok;
       dc := dc + dde;
     until (not ok) or (dc > pid2);
     ac := ra1;
     dc := de1;
+    //DEC, south of chart center
     repeat
       labelok := False;
-      ok := DrawDEline(ac, dc, dra);
-      ok := DrawDEline(ac, dc, -dra) or ok;
+      ok := DrawDEline(ac, dc, dra,dde,ra1,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok);
+      ok := DrawDEline(ac, dc, -dra,dde,ra1,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok) or ok;
       dc := dc - dde;
     until (not ok) or (dc < -pid2);
+  end;
+end;
+
+procedure Tskychart.DrawTelescopeLimit;
+var n,col,linewidth,dir,lh,lt: integer;
+  ac,dc,ah,dra,dde: double;
+  drawlabel, labelok: boolean;
+  linestyle: TFPPenStyle;
+begin
+  // drawing step
+  n := cfgsc.FieldNum;
+  dde := deg2rad * Fcatalog.cfgshr.DegreeGridSpacing[n];
+  dra := dde;
+  // chart center
+  ac := cfgsc.racentre;
+  dc := cfgsc.decentre;
+  // no label
+  drawlabel:=False; dir:=1; lh:=1; lt:=1;
+  labelok := False;
+  // same color and width as the meridian line
+  col := Fplot.cfgplot.Color[15];
+  linestyle := cfgsc.StyleGrid;
+  linewidth := cfgsc.LineWidthGrid+WideLine;
+  // max dec
+  if cfgsc.TelLimitDecMaxActive then begin
+    DrawDEline(ac, cfgsc.TelLimitDecMax*deg2rad, dra,dde,ac,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok);
+    DrawDEline(ac, cfgsc.TelLimitDecMax*deg2rad, -dra,dde,ac,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok);
+  end;
+  // min dec
+  if cfgsc.TelLimitDecMinActive then begin
+    DrawDEline(ac, cfgsc.TelLimitDecMin*deg2rad, dra,dde,ac,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok);
+    DrawDEline(ac, cfgsc.TelLimitDecMin*deg2rad, -dra,dde,ac,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok);
+  end;
+  // east hour angle
+  if cfgsc.TelLimitHaEActive then begin
+    ah:=rmod(cfgsc.CurST+cfgsc.TelLimitHaE*15*deg2rad+pi2,pi2);
+    DrawRAline(ah, dc, -dde,dra,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok);
+    DrawRAline(ah, dc, dde,dra,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok);
+  end;
+  // west hour angle
+  if cfgsc.TelLimitHaWActive then begin
+    ah:=rmod(cfgsc.CurST-cfgsc.TelLimitHaW*15*deg2rad+pi2,pi2);
+    DrawRAline(ah, dc, -dde,dra,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok);
+    DrawRAline(ah, dc, dde,dra,drawlabel,col,linewidth,dir,lh,lt,linestyle,labelok);
   end;
 end;
 

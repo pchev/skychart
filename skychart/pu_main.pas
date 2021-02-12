@@ -6554,6 +6554,14 @@ begin
   def_cfgsc.TelescopeTurnsX := 6;    // Vixen GP
   def_cfgsc.TelescopeTurnsY := 0.4;
   def_cfgsc.TelescopeJD := 0;
+  def_cfgsc.TelLimitDecMaxActive := false;
+  def_cfgsc.TelLimitDecMax := 90;
+  def_cfgsc.TelLimitDecMinActive := false;
+  def_cfgsc.TelLimitDecMin := -90;
+  def_cfgsc.TelLimitHaEActive := false;
+  def_cfgsc.TelLimitHaE := 12;
+  def_cfgsc.TelLimitHaWActive := false;
+  def_cfgsc.TelLimitHaW := 12;
   catalog.cfgshr.ListStar := False;
   catalog.cfgshr.ListNeb := True;
   catalog.cfgshr.ListVar := True;
@@ -7909,6 +7917,14 @@ begin
   {$endif}
         end;
         TelescopePanel.Visible := def_cfgsc.IndiTelescope;
+        def_cfgsc.TelLimitDecMax := ReadFloat(section, 'TelLimitDecMax', def_cfgsc.TelLimitDecMax);
+        def_cfgsc.TelLimitDecMin := ReadFloat(section, 'TelLimitDecMin', def_cfgsc.TelLimitDecMin);
+        def_cfgsc.TelLimitHaE := ReadFloat(section, 'TelLimitHaE', def_cfgsc.TelLimitHaE);
+        def_cfgsc.TelLimitHaW := ReadFloat(section, 'TelLimitHaW', def_cfgsc.TelLimitHaW);
+        def_cfgsc.TelLimitDecMaxActive := ReadBool(section, 'TelLimitDecMaxActive', def_cfgsc.TelLimitDecMaxActive);
+        def_cfgsc.TelLimitDecMinActive := ReadBool(section, 'TelLimitDecMinActive', def_cfgsc.TelLimitDecMinActive);
+        def_cfgsc.TelLimitHaEActive := ReadBool(section, 'TelLimitHaEActive', def_cfgsc.TelLimitHaEActive);
+        def_cfgsc.TelLimitHaWActive := ReadBool(section, 'TelLimitHaWActive', def_cfgsc.TelLimitHaWActive);
         PanelToolBarMain.Visible := ReadBool(section, 'ViewMainBar', True);
         PanelLeft.Visible := ReadBool(section, 'ViewLeftBar', True);
         PanelRight.Visible := ReadBool(section, 'ViewRightBar', True);
@@ -9115,6 +9131,14 @@ begin
           WriteString(section, 'IndiServerPort', def_cfgsc.IndiServerPort);
           WriteString(section, 'IndiDevice', def_cfgsc.IndiDevice);
         end;
+        WriteFloat(section, 'TelLimitDecMax', def_cfgsc.TelLimitDecMax);
+        WriteFloat(section, 'TelLimitDecMin', def_cfgsc.TelLimitDecMin);
+        WriteFloat(section, 'TelLimitHaE', def_cfgsc.TelLimitHaE);
+        WriteFloat(section, 'TelLimitHaW', def_cfgsc.TelLimitHaW);
+        WriteBool(section, 'TelLimitDecMaxActive', def_cfgsc.TelLimitDecMaxActive);
+        WriteBool(section, 'TelLimitDecMinActive', def_cfgsc.TelLimitDecMinActive);
+        WriteBool(section, 'TelLimitHaEActive', def_cfgsc.TelLimitHaEActive);
+        WriteBool(section, 'TelLimitHaWActive', def_cfgsc.TelLimitHaWActive);
         WriteBool(section, 'ViewMainBar', PanelToolBarMain.Visible);
         WriteBool(section, 'ViewLeftBar', PanelLeft.Visible);
         WriteBool(section, 'ViewRightBar', PanelRight.Visible);

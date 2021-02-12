@@ -1103,6 +1103,8 @@ type
     DrawPrePoint, DarkenHorizonPicture: Boolean;
     CurTime, DT_UT_val, GRSlongitude, GRSjd, GRSdrift, TelescopeTurnsX,
     TelescopeTurnsY, TelescopeJD, HorizonPictureRotate, HorizonPictureElevation: double;
+    TelLimitDecMax,TelLimitDecMin,TelLimitHaE,TelLimitHaW: double;
+    TelLimitDecMaxActive,TelLimitDecMinActive,TelLimitHaEActive,TelLimitHaWActive:Boolean;
     PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline, DSLforcecolor, DSLsurface, SurfaceBlure: boolean;
     ManualTelescopeType, CoordType, DSLcolor, SurfaceAlpha: integer;
     IndiServerHost, IndiServerPort, IndiDevice: string;
@@ -2426,6 +2428,14 @@ begin
   TelescopeTurnsX := Source.TelescopeTurnsX;
   TelescopeTurnsY := Source.TelescopeTurnsY;
   TelescopeJD := Source.TelescopeJD;
+  TelLimitDecMax := Source.TelLimitDecMax;
+  TelLimitDecMin := Source.TelLimitDecMin;
+  TelLimitHaE := Source.TelLimitHaE;
+  TelLimitHaW := Source.TelLimitHaW;
+  TelLimitDecMaxActive := Source.TelLimitDecMaxActive;
+  TelLimitDecMinActive := Source.TelLimitDecMinActive;
+  TelLimitHaEActive := Source.TelLimitHaEActive;
+  TelLimitHaWActive := Source.TelLimitHaWActive;
   PMon := Source.PMon;
   DrawPMon := Source.DrawPMon;
   ApparentPos := Source.ApparentPos;

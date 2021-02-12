@@ -29,18 +29,30 @@ uses
   indibaseclient, indibasedevice, indiapi,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms, LazUTF8, LazFileUtils, Math,
-  ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML_fix, CheckLst, Types;
+  ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML_fix, CheckLst, Spin, Types;
 
 type
 
   { Tf_config_system }
 
   Tf_config_system = class(TFrame)
+    Panel3: TPanel;
+    TelLimitDecMax: TFloatSpinEdit;
+    TelLimitDecMin: TFloatSpinEdit;
+    TelLimitHaW: TFloatSpinEdit;
+    TelLimitDecMaxActive: TCheckBox;
+    TelLimitHaE: TFloatSpinEdit;
+    TelLimitHaEActive: TCheckBox;
+    TelLimitDecMinActive: TCheckBox;
+    TelescopeLimit: TGroupBox;
     IndiMsg: TLabel;
     INDILabel2: TLabel;
     LanguageList: TCheckListBox;
+    Panel1: TPanel;
+    Panel2: TPanel;
     persdir: TEdit;
     ServerCoordSys: TRadioGroup;
+    TelLimitHaWActive: TCheckBox;
     UseScaling: TCheckBox;
     CheckBox1: TCheckBox;
     GroupBox2: TGroupBox;
@@ -130,6 +142,14 @@ type
     procedure LanguageListItemClick(Sender: TObject; Index: integer);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: boolean);
     procedure ServerCoordSysClick(Sender: TObject);
+    procedure TelLimitDecMaxActiveChange(Sender: TObject);
+    procedure TelLimitDecMaxChange(Sender: TObject);
+    procedure TelLimitDecMinActiveChange(Sender: TObject);
+    procedure TelLimitDecMinChange(Sender: TObject);
+    procedure TelLimitHaEActiveChange(Sender: TObject);
+    procedure TelLimitHaEChange(Sender: TObject);
+    procedure TelLimitHaWActiveChange(Sender: TObject);
+    procedure TelLimitHaWChange(Sender: TObject);
     procedure UseScalingChange(Sender: TObject);
     procedure CheckBox1Change(Sender: TObject);
     procedure CheckBox2Change(Sender: TObject);
@@ -247,6 +267,11 @@ begin
   TelescopeSelect.Items[0] := rsINDIDriver;
   TelescopeSelect.Items[1] := rsManualMount;
   TelescopeSelect.Items[2] := 'ASCOM';
+  TelescopeLimit.Caption:=rsLineForTeles;
+  TelLimitDecMaxActive.Caption:=rsMaximumDecli;
+  TelLimitDecMinActive.Caption:=rsMinimumDecli;
+  TelLimitHaEActive.Caption:=rsEastHourAngl;
+  TelLimitHaWActive.Caption:=rsWestHourAngl;
   label15.Caption := rsVOSAMPSettin;
   label16.Caption := Format(rsSAMPIsAMessa, [crlf]);
   label17.Caption := rsForMoreInfor;
@@ -392,9 +417,18 @@ end;
 
 procedure Tf_config_system.ShowTelescope;
 begin
+
   InternalIndiGui.Checked := cmain.InternalIndiPanel;
   PanelCmd.Text := cmain.IndiPanelCmd;
   ExternalControlPanel.Visible := (not cmain.InternalIndiPanel);
+  TelLimitDecMaxActive.Checked:=csc.TelLimitDecMaxActive;
+  TelLimitDecMax.Value:=csc.TelLimitDecMax;
+  TelLimitDecMinActive.Checked:=csc.TelLimitDecMinActive;
+  TelLimitDecMin.Value:=csc.TelLimitDecMin;
+  TelLimitHaEActive.Checked:=csc.TelLimitHaEActive;
+  TelLimitHaE.Value:=csc.TelLimitHaE;
+  TelLimitHaWActive.Checked:=csc.TelLimitHaWActive;
+  TelLimitHaW.Value:=csc.TelLimitHaW;
   TurnsRa.Value := abs(csc.TelescopeTurnsX);
   TurnsDec.Value := abs(csc.TelescopeTurnsY);
   RevertTurnsRa.Checked := csc.TelescopeTurnsX < 0;
@@ -590,6 +624,46 @@ begin
   if LockChange then
     exit;
   cmain.ServerCoordSys := ServerCoordSys.ItemIndex;
+end;
+
+procedure Tf_config_system.TelLimitDecMaxActiveChange(Sender: TObject);
+begin
+   csc.TelLimitDecMaxActive:=TelLimitDecMaxActive.Checked;
+end;
+
+procedure Tf_config_system.TelLimitDecMaxChange(Sender: TObject);
+begin
+  csc.TelLimitDecMax:=TelLimitDecMax.Value;
+end;
+
+procedure Tf_config_system.TelLimitDecMinActiveChange(Sender: TObject);
+begin
+  csc.TelLimitDecMinActive:=TelLimitDecMinActive.Checked;
+end;
+
+procedure Tf_config_system.TelLimitDecMinChange(Sender: TObject);
+begin
+   csc.TelLimitDecMin:=TelLimitDecMin.Value;
+end;
+
+procedure Tf_config_system.TelLimitHaEActiveChange(Sender: TObject);
+begin
+  csc.TelLimitHaEActive:=TelLimitHaEActive.Checked;
+end;
+
+procedure Tf_config_system.TelLimitHaEChange(Sender: TObject);
+begin
+  csc.TelLimitHaE:=TelLimitHaE.Value;
+end;
+
+procedure Tf_config_system.TelLimitHaWActiveChange(Sender: TObject);
+begin
+  csc.TelLimitHaWActive:=TelLimitHaWActive.Checked;
+end;
+
+procedure Tf_config_system.TelLimitHaWChange(Sender: TObject);
+begin
+  csc.TelLimitHaW:=TelLimitHaW.Value;
 end;
 
 procedure Tf_config_system.TelescopeSelectClick(Sender: TObject);
