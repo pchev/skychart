@@ -966,8 +966,8 @@ object f_config_display: Tf_config_display
             Top = 10
             Width = 51
             BevelOuter = bvNone
-            ClientHeight = 234
-            ClientWidth = 51
+            ClientHeight = 230
+            ClientWidth = 47
             ParentFont = False
             TabOrder = 1
             object chkFillNE: TCheckBox
@@ -1053,8 +1053,8 @@ object f_config_display: Tf_config_display
             Top = 10
             Width = 53
             BevelOuter = bvNone
-            ClientHeight = 234
-            ClientWidth = 53
+            ClientHeight = 230
+            ClientWidth = 49
             ParentFont = False
             TabOrder = 0
             object chkFillRN: TCheckBox
@@ -1527,8 +1527,8 @@ object f_config_display: Tf_config_display
             Height = 41
             Top = 94
             Width = 235
-            ClientHeight = 41
-            ClientWidth = 235
+            ClientHeight = 37
+            ClientWidth = 231
             ParentFont = False
             TabOrder = 2
             object Shape29: TShape
@@ -1780,21 +1780,481 @@ object f_config_display: Tf_config_display
         Caption = 'Grids'
         ClientHeight = 528
         ClientWidth = 498
-        object GroupBox3: TGroupBox
+        object GroupBox10: TGroupBox
           Left = 0
-          Height = 131
-          Top = 224
+          Height = 256
+          Top = 0
           Width = 498
           Align = alTop
-          Caption = 'Constellation Boundaries'
-          ClientHeight = 111
+          Caption = 'Coordinates grid'
+          ClientHeight = 236
+          ClientWidth = 496
+          TabOrder = 0
+          object EqGrid: TCheckBox
+            Left = 8
+            Height = 21
+            Top = 80
+            Width = 144
+            Caption = 'Add Equatorial Grid'
+            OnClick = EqGridClick
+            ParentFont = False
+            TabOrder = 0
+          end
+          object CGrid: TCheckBox
+            Left = 8
+            Height = 21
+            Top = 8
+            Width = 158
+            Caption = 'Show Coordinate Grid'
+            OnClick = CGridClick
+            ParentFont = False
+            TabOrder = 1
+          end
+          object GridNum: TCheckBox
+            AnchorSideTop.Control = CGrid
+            AnchorSideTop.Side = asrCenter
+            Left = 272
+            Height = 21
+            Top = 8
+            Width = 123
+            Caption = 'Show Grid Label'
+            OnClick = GridNumClick
+            ParentFont = False
+            TabOrder = 2
+          end
+          object GridStyle: TComboBox
+            Left = 40
+            Height = 26
+            Top = 40
+            Width = 201
+            AutoSize = False
+            Constraints.MaxHeight = 28
+            ItemHeight = 16
+            ItemIndex = 0
+            Items.Strings = (
+              'Line'
+              'Dash'
+              'Dot'
+              'Dash Dot'
+              'Dash Dot Dot'
+            )
+            OnChange = GridStyleChange
+            OnDrawItem = StyleDrawItem
+            OnMeasureItem = LineStyleMeasureItem
+            ParentFont = False
+            Style = csOwnerDrawVariable
+            TabOrder = 3
+            Text = 'Line'
+          end
+          object EqGridStyle: TComboBox
+            Left = 40
+            Height = 26
+            Top = 112
+            Width = 201
+            AutoSize = False
+            Constraints.MaxHeight = 28
+            ItemHeight = 16
+            ItemIndex = 0
+            Items.Strings = (
+              'Line'
+              'Dash'
+              'Dot'
+              'Dash Dot'
+              'Dash Dot Dot'
+            )
+            OnChange = EqGridStyleChange
+            OnDrawItem = StyleDrawItem
+            OnMeasureItem = LineStyleMeasureItem
+            ParentFont = False
+            Style = csOwnerDrawVariable
+            TabOrder = 4
+            Text = 'Line'
+          end
+          object OnlyMeridian: TCheckBox
+            AnchorSideTop.Side = asrCenter
+            Left = 8
+            Height = 21
+            Top = 192
+            Width = 198
+            Caption = 'Show only meridian in Alt/Az'
+            OnClick = OnlyMeridianClick
+            ParentFont = False
+            TabOrder = 5
+          end
+          object CheckBox8: TCheckBox
+            Left = 8
+            Height = 21
+            Top = 152
+            Width = 150
+            Caption = 'Always add meridian'
+            OnClick = CheckBox8Click
+            ParentFont = False
+            TabOrder = 6
+          end
+          object LineWidthGrid: TSpinEdit
+            Tag = 1
+            AnchorSideTop.Control = GridStyle
+            AnchorSideTop.Side = asrCenter
+            Left = 272
+            Height = 28
+            Top = 39
+            Width = 51
+            Constraints.MaxHeight = 28
+            MaxValue = 10
+            OnChange = LineWidthChange
+            ParentFont = False
+            TabOrder = 7
+            Value = 1
+          end
+          object LineWidthEqGrid: TSpinEdit
+            Tag = 2
+            AnchorSideTop.Control = EqGridStyle
+            AnchorSideTop.Side = asrCenter
+            Left = 272
+            Height = 28
+            Top = 111
+            Width = 51
+            Constraints.MaxHeight = 28
+            MaxValue = 10
+            OnChange = LineWidthChange
+            ParentFont = False
+            TabOrder = 8
+            Value = 1
+          end
+        end
+        object GroupBox12: TGroupBox
+          Left = 0
+          Height = 272
+          Top = 256
+          Width = 498
+          Align = alClient
+          Caption = 'Equator'
+          ClientHeight = 252
+          ClientWidth = 496
+          TabOrder = 1
+          object ecliptic: TCheckBox
+            Left = 8
+            Height = 21
+            Top = 16
+            Width = 101
+            Caption = 'Show Ecliptic'
+            OnClick = eclipticClick
+            ParentFont = False
+            TabOrder = 0
+          end
+          object galactic: TCheckBox
+            Left = 8
+            Height = 21
+            Top = 96
+            Width = 159
+            Caption = 'Show Galactic Equator'
+            OnClick = galacticClick
+            ParentFont = False
+            TabOrder = 1
+          end
+          object EclipticStyle: TComboBox
+            AnchorSideTop.Side = asrCenter
+            Left = 40
+            Height = 26
+            Top = 49
+            Width = 201
+            AutoSize = False
+            Constraints.MaxHeight = 28
+            ItemHeight = 16
+            ItemIndex = 0
+            Items.Strings = (
+              'Line'
+              'Dash'
+              'Dot'
+              'Dash Dot'
+              'Dash Dot Dot'
+            )
+            OnChange = EclipticStyleChange
+            OnDrawItem = StyleDrawItem
+            OnMeasureItem = LineStyleMeasureItem
+            ParentFont = False
+            Style = csOwnerDrawVariable
+            TabOrder = 2
+            Text = 'Line'
+          end
+          object GalEqStyle: TComboBox
+            AnchorSideTop.Side = asrCenter
+            Left = 40
+            Height = 26
+            Top = 134
+            Width = 201
+            AutoSize = False
+            Constraints.MaxHeight = 28
+            ItemHeight = 16
+            ItemIndex = 0
+            Items.Strings = (
+              'Line'
+              'Dash'
+              'Dot'
+              'Dash Dot'
+              'Dash Dot Dot'
+            )
+            OnChange = GalEqStyleChange
+            OnDrawItem = StyleDrawItem
+            OnMeasureItem = LineStyleMeasureItem
+            ParentFont = False
+            Style = csOwnerDrawVariable
+            TabOrder = 3
+            Text = 'Line'
+          end
+          object ShowEquator: TCheckBox
+            Left = 8
+            Height = 21
+            Top = 184
+            Width = 163
+            Caption = 'Show Celestial Equator'
+            OnClick = ShowEquatorClick
+            ParentFont = False
+            TabOrder = 4
+          end
+          object LineWidthEcliptic: TSpinEdit
+            Tag = 5
+            AnchorSideTop.Control = EclipticStyle
+            AnchorSideTop.Side = asrCenter
+            Left = 272
+            Height = 28
+            Top = 48
+            Width = 51
+            Constraints.MaxHeight = 28
+            MaxValue = 10
+            MinValue = 1
+            OnChange = LineWidthChange
+            ParentFont = False
+            TabOrder = 5
+            Value = 1
+          end
+          object LineWidthGalEq: TSpinEdit
+            Tag = 6
+            AnchorSideTop.Control = GalEqStyle
+            AnchorSideTop.Side = asrCenter
+            Left = 272
+            Height = 28
+            Top = 133
+            Width = 51
+            Constraints.MaxHeight = 28
+            MaxValue = 10
+            MinValue = 1
+            OnChange = LineWidthChange
+            ParentFont = False
+            TabOrder = 6
+            Value = 1
+          end
+        end
+      end
+      object PageLines: TTabSheet
+        Caption = 'Lines'
+        ClientHeight = 528
+        ClientWidth = 498
+        ParentFont = False
+        object GroupBox4: TGroupBox
+          Left = 0
+          Height = 87
+          Top = 121
+          Width = 498
+          Align = alTop
+          Caption = 'Milky Way'
+          ClientHeight = 67
           ClientWidth = 496
           ParentFont = False
           TabOrder = 0
+          object milkyway: TCheckBox
+            Left = 8
+            Height = 21
+            Top = 6
+            Width = 121
+            Caption = 'Show Milky Way'
+            OnClick = milkywayClick
+            ParentFont = False
+            TabOrder = 0
+          end
+          object fillmilkyway: TCheckBox
+            AnchorSideTop.Control = linemodemilkyway
+            AnchorSideTop.Side = asrCenter
+            Left = 232
+            Height = 21
+            Top = 32
+            Width = 104
+            Caption = 'Fill Milky Way'
+            OnClick = fillmilkywayClick
+            ParentFont = False
+            TabOrder = 1
+          end
+          object linemodemilkyway: TCheckBox
+            Left = 8
+            Height = 21
+            Top = 32
+            Width = 138
+            Caption = 'linemodemilkyway'
+            OnClick = linemodemilkywayClick
+            ParentFont = False
+            TabOrder = 2
+          end
+        end
+        object GroupBox8: TGroupBox
+          Left = 0
+          Height = 84
+          Top = 208
+          Width = 498
+          Align = alTop
+          Caption = 'Proper Motion'
+          ClientHeight = 64
+          ClientWidth = 496
+          ParentFont = False
+          TabOrder = 1
+          object Label68: TLabel
+            AnchorSideTop.Control = DrawPMy
+            AnchorSideTop.Side = asrCenter
+            Left = 110
+            Height = 17
+            Top = 37
+            Width = 34
+            Caption = 'years'
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label8: TLabel
+            Left = 36
+            Height = 17
+            Top = 8
+            Width = 355
+            Caption = 'Draw a line that represent the proper motion for the next '
+            ParentColor = False
+            ParentFont = False
+          end
+          object DrawPmBox: TCheckBox
+            Left = 8
+            Height = 21
+            Top = 6
+            Width = 21
+            OnClick = DrawPmBoxClick
+            ParentFont = False
+            TabOrder = 0
+          end
+          object DrawPMy: TLongEdit
+            Left = 40
+            Height = 26
+            Hint = '-99999..99999'
+            Top = 32
+            Width = 57
+            Constraints.MaxHeight = 26
+            ParentFont = False
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 1
+            OnChange = DrawPMyChange
+            Value = 0
+            MinValue = -99999
+            MaxValue = 99999
+          end
+        end
+        object GroupBox11: TGroupBox
+          Left = 0
+          Height = 121
+          Top = 0
+          Width = 498
+          Align = alTop
+          Caption = 'Nebulae outlines'
+          ClientHeight = 101
+          ClientWidth = 496
+          TabOrder = 2
+          object SurfaceAlpha: TTrackBar
+            AnchorSideTop.Control = SurfaceBlure
+            AnchorSideTop.Side = asrCenter
+            Left = 336
+            Height = 43
+            Top = 55
+            Width = 143
+            Max = 255
+            Min = 10
+            OnChange = SurfaceAlphaChange
+            Position = 10
+            Reversed = True
+            ShowSelRange = False
+            TickStyle = tsNone
+            ParentFont = False
+            TabOrder = 2
+          end
+          object ShowLines: TCheckBox
+            Left = 8
+            Height = 21
+            Top = 8
+            Width = 89
+            Caption = 'ShowLines'
+            OnClick = ShowLinesClick
+            ParentFont = False
+            TabOrder = 0
+          end
+          object ShowLineShape: TShape
+            AnchorSideTop.Control = DSLsurface
+            AnchorSideTop.Side = asrCenter
+            Left = 232
+            Height = 18
+            Top = 39
+            Width = 18
+            OnMouseUp = ShowLineShapeMouseUp
+          end
+          object Label10: TLabel
+            AnchorSideTop.Control = DSLsurface
+            AnchorSideTop.Side = asrCenter
+            Left = 256
+            Height = 17
+            Top = 40
+            Width = 49
+            Caption = 'Label10'
+            ParentColor = False
+            ParentFont = False
+          end
+          object DSLsurface: TCheckBox
+            Left = 8
+            Height = 21
+            Top = 38
+            Width = 94
+            Caption = 'DSLsurface'
+            OnClick = DSLsurfaceClick
+            TabOrder = 1
+          end
+          object SurfaceBlure: TCheckBox
+            Left = 8
+            Height = 21
+            Top = 66
+            Width = 71
+            Caption = 'Blurred'
+            OnClick = SurfaceBlureClick
+            ParentFont = False
+            TabOrder = 3
+          end
+          object Transparency: TLabel
+            AnchorSideTop.Control = SurfaceBlure
+            AnchorSideTop.Side = asrCenter
+            Left = 232
+            Height = 17
+            Top = 68
+            Width = 82
+            Caption = 'Transparency'
+            ParentColor = False
+            ParentFont = False
+          end
+        end
+        object GroupBox3: TGroupBox
+          Left = 0
+          Height = 120
+          Top = 292
+          Width = 498
+          Align = alTop
+          Caption = 'Constellation Boundaries'
+          ClientHeight = 100
+          ClientWidth = 496
+          ParentFont = False
+          TabOrder = 3
           object Label72: TLabel
             Left = 29
             Height = 17
-            Top = 61
+            Top = 48
             Width = 218
             Caption = 'Constellation Boundary File Name : '
             ParentColor = False
@@ -1813,7 +2273,7 @@ object f_config_display: Tf_config_display
           object ConstbFile: TFileNameEdit
             Left = 29
             Height = 26
-            Top = 79
+            Top = 66
             Width = 405
             OnAcceptFileName = ConstbFileAcceptFileName
             DialogOptions = []
@@ -1872,19 +2332,19 @@ object f_config_display: Tf_config_display
         end
         object GroupBox1: TGroupBox
           Left = 0
-          Height = 173
-          Top = 355
+          Height = 116
+          Top = 412
           Width = 498
           Align = alClient
           Caption = 'Constellation Figures'
-          ClientHeight = 153
+          ClientHeight = 96
           ClientWidth = 496
           ParentFont = False
-          TabOrder = 1
+          TabOrder = 4
           object Label132: TLabel
             Left = 29
             Height = 17
-            Top = 48
+            Top = 40
             Width = 196
             Caption = 'Constellation Figure File Name : '
             ParentColor = False
@@ -1903,7 +2363,7 @@ object f_config_display: Tf_config_display
           object ConstlFile: TFileNameEdit
             Left = 29
             Height = 26
-            Top = 66
+            Top = 58
             Width = 405
             OnAcceptFileName = ConstlFileAcceptFileName
             DialogOptions = []
@@ -1958,469 +2418,6 @@ object f_config_display: Tf_config_display
             OnChange = LineWidthChange
             ParentFont = False
             TabOrder = 3
-            Value = 1
-          end
-        end
-        object GroupBox10: TGroupBox
-          Left = 0
-          Height = 224
-          Top = 0
-          Width = 498
-          Align = alTop
-          Caption = 'Coordinates grid'
-          ClientHeight = 204
-          ClientWidth = 496
-          TabOrder = 2
-          object EqGrid: TCheckBox
-            Left = 8
-            Height = 21
-            Top = 80
-            Width = 144
-            Caption = 'Add Equatorial Grid'
-            OnClick = EqGridClick
-            ParentFont = False
-            TabOrder = 0
-          end
-          object CGrid: TCheckBox
-            Left = 8
-            Height = 21
-            Top = 8
-            Width = 158
-            Caption = 'Show Coordinate Grid'
-            OnClick = CGridClick
-            ParentFont = False
-            TabOrder = 1
-          end
-          object GridNum: TCheckBox
-            AnchorSideTop.Control = GridStyle
-            AnchorSideTop.Side = asrCenter
-            Left = 248
-            Height = 21
-            Top = 43
-            Width = 123
-            Caption = 'Show Grid Label'
-            OnClick = GridNumClick
-            ParentFont = False
-            TabOrder = 2
-          end
-          object GridStyle: TComboBox
-            Left = 40
-            Height = 26
-            Top = 40
-            Width = 121
-            AutoSize = False
-            Constraints.MaxHeight = 28
-            ItemHeight = 16
-            ItemIndex = 0
-            Items.Strings = (
-              'Line'
-              'Dash'
-              'Dot'
-              'Dash Dot'
-              'Dash Dot Dot'
-            )
-            OnChange = GridStyleChange
-            OnDrawItem = StyleDrawItem
-            OnMeasureItem = LineStyleMeasureItem
-            ParentFont = False
-            Style = csOwnerDrawVariable
-            TabOrder = 3
-            Text = 'Line'
-          end
-          object EqGridStyle: TComboBox
-            Left = 39
-            Height = 26
-            Top = 112
-            Width = 121
-            AutoSize = False
-            Constraints.MaxHeight = 28
-            ItemHeight = 16
-            ItemIndex = 0
-            Items.Strings = (
-              'Line'
-              'Dash'
-              'Dot'
-              'Dash Dot'
-              'Dash Dot Dot'
-            )
-            OnChange = EqGridStyleChange
-            OnDrawItem = StyleDrawItem
-            OnMeasureItem = LineStyleMeasureItem
-            ParentFont = False
-            Style = csOwnerDrawVariable
-            TabOrder = 4
-            Text = 'Line'
-          end
-          object OnlyMeridian: TCheckBox
-            AnchorSideTop.Control = CheckBox8
-            AnchorSideTop.Side = asrCenter
-            Left = 248
-            Height = 21
-            Top = 152
-            Width = 198
-            Caption = 'Show only meridian in Alt/Az'
-            OnClick = OnlyMeridianClick
-            ParentFont = False
-            TabOrder = 5
-          end
-          object CheckBox8: TCheckBox
-            Left = 8
-            Height = 21
-            Top = 152
-            Width = 150
-            Caption = 'Always add meridian'
-            OnClick = CheckBox8Click
-            ParentFont = False
-            TabOrder = 6
-          end
-          object LineWidthGrid: TSpinEdit
-            Tag = 1
-            AnchorSideTop.Control = GridStyle
-            AnchorSideTop.Side = asrCenter
-            Left = 176
-            Height = 28
-            Top = 39
-            Width = 51
-            Constraints.MaxHeight = 28
-            MaxValue = 10
-            OnChange = LineWidthChange
-            ParentFont = False
-            TabOrder = 7
-            Value = 1
-          end
-          object LineWidthEqGrid: TSpinEdit
-            Tag = 2
-            AnchorSideTop.Control = EqGridStyle
-            AnchorSideTop.Side = asrCenter
-            Left = 174
-            Height = 28
-            Top = 111
-            Width = 51
-            Constraints.MaxHeight = 28
-            MaxValue = 10
-            OnChange = LineWidthChange
-            ParentFont = False
-            TabOrder = 8
-            Value = 1
-          end
-        end
-      end
-      object PageLines: TTabSheet
-        Caption = 'Lines'
-        ClientHeight = 528
-        ClientWidth = 498
-        ParentFont = False
-        object GroupBox4: TGroupBox
-          Left = 0
-          Height = 95
-          Top = 137
-          Width = 498
-          Align = alTop
-          Caption = 'Milky Way'
-          ClientHeight = 75
-          ClientWidth = 496
-          ParentFont = False
-          TabOrder = 0
-          object milkyway: TCheckBox
-            Left = 8
-            Height = 21
-            Top = 6
-            Width = 121
-            Caption = 'Show Milky Way'
-            OnClick = milkywayClick
-            ParentFont = False
-            TabOrder = 0
-          end
-          object fillmilkyway: TCheckBox
-            AnchorSideTop.Control = linemodemilkyway
-            AnchorSideTop.Side = asrCenter
-            Left = 232
-            Height = 21
-            Top = 38
-            Width = 104
-            Caption = 'Fill Milky Way'
-            OnClick = fillmilkywayClick
-            ParentFont = False
-            TabOrder = 1
-          end
-          object linemodemilkyway: TCheckBox
-            Left = 8
-            Height = 21
-            Top = 38
-            Width = 138
-            Caption = 'linemodemilkyway'
-            OnClick = linemodemilkywayClick
-            ParentFont = False
-            TabOrder = 2
-          end
-        end
-        object GroupBox8: TGroupBox
-          Left = 0
-          Height = 107
-          Top = 232
-          Width = 498
-          Align = alTop
-          Caption = 'Proper Motion'
-          ClientHeight = 87
-          ClientWidth = 496
-          ParentFont = False
-          TabOrder = 1
-          object Label68: TLabel
-            AnchorSideTop.Control = DrawPMy
-            AnchorSideTop.Side = asrCenter
-            Left = 110
-            Height = 17
-            Top = 45
-            Width = 34
-            Caption = 'years'
-            ParentColor = False
-            ParentFont = False
-          end
-          object Label8: TLabel
-            Left = 36
-            Height = 17
-            Top = 8
-            Width = 355
-            Caption = 'Draw a line that represent the proper motion for the next '
-            ParentColor = False
-            ParentFont = False
-          end
-          object DrawPmBox: TCheckBox
-            Left = 8
-            Height = 21
-            Top = 6
-            Width = 21
-            OnClick = DrawPmBoxClick
-            ParentFont = False
-            TabOrder = 0
-          end
-          object DrawPMy: TLongEdit
-            Left = 40
-            Height = 26
-            Hint = '-99999..99999'
-            Top = 40
-            Width = 57
-            Constraints.MaxHeight = 26
-            ParentFont = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 1
-            OnChange = DrawPMyChange
-            Value = 0
-            MinValue = -99999
-            MaxValue = 99999
-          end
-        end
-        object GroupBox11: TGroupBox
-          Left = 0
-          Height = 137
-          Top = 0
-          Width = 498
-          Align = alTop
-          Caption = 'Nebulae outlines'
-          ClientHeight = 117
-          ClientWidth = 496
-          TabOrder = 2
-          object SurfaceAlpha: TTrackBar
-            AnchorSideTop.Control = SurfaceBlure
-            AnchorSideTop.Side = asrCenter
-            Left = 336
-            Height = 43
-            Top = 69
-            Width = 143
-            Max = 255
-            Min = 10
-            OnChange = SurfaceAlphaChange
-            Position = 10
-            Reversed = True
-            ShowSelRange = False
-            TickStyle = tsNone
-            ParentFont = False
-            TabOrder = 2
-          end
-          object ShowLines: TCheckBox
-            Left = 16
-            Height = 21
-            Top = 8
-            Width = 89
-            Caption = 'ShowLines'
-            OnClick = ShowLinesClick
-            ParentFont = False
-            TabOrder = 0
-          end
-          object ShowLineShape: TShape
-            AnchorSideTop.Control = DSLsurface
-            AnchorSideTop.Side = asrCenter
-            Left = 232
-            Height = 18
-            Top = 43
-            Width = 18
-            OnMouseUp = ShowLineShapeMouseUp
-          end
-          object Label10: TLabel
-            AnchorSideTop.Control = DSLsurface
-            AnchorSideTop.Side = asrCenter
-            Left = 256
-            Height = 17
-            Top = 44
-            Width = 49
-            Caption = 'Label10'
-            ParentColor = False
-            ParentFont = False
-          end
-          object DSLsurface: TCheckBox
-            Left = 16
-            Height = 21
-            Top = 42
-            Width = 94
-            Caption = 'DSLsurface'
-            OnClick = DSLsurfaceClick
-            TabOrder = 1
-          end
-          object SurfaceBlure: TCheckBox
-            Left = 16
-            Height = 21
-            Top = 80
-            Width = 71
-            Caption = 'Blurred'
-            OnClick = SurfaceBlureClick
-            ParentFont = False
-            TabOrder = 3
-          end
-          object Transparency: TLabel
-            AnchorSideTop.Control = SurfaceBlure
-            AnchorSideTop.Side = asrCenter
-            Left = 232
-            Height = 17
-            Top = 82
-            Width = 82
-            Caption = 'Transparency'
-            ParentColor = False
-            ParentFont = False
-          end
-        end
-        object GroupBox12: TGroupBox
-          Left = 0
-          Height = 189
-          Top = 339
-          Width = 498
-          Align = alClient
-          Caption = 'Equator'
-          ClientHeight = 169
-          ClientWidth = 496
-          TabOrder = 3
-          object ecliptic: TCheckBox
-            Left = 8
-            Height = 21
-            Top = 16
-            Width = 101
-            Caption = 'Show Ecliptic'
-            OnClick = eclipticClick
-            ParentFont = False
-            TabOrder = 0
-          end
-          object galactic: TCheckBox
-            Left = 8
-            Height = 21
-            Top = 61
-            Width = 159
-            Caption = 'Show Galactic Equator'
-            OnClick = galacticClick
-            ParentFont = False
-            TabOrder = 1
-          end
-          object EclipticStyle: TComboBox
-            AnchorSideTop.Control = ecliptic
-            AnchorSideTop.Side = asrCenter
-            Left = 232
-            Height = 26
-            Top = 13
-            Width = 121
-            AutoSize = False
-            Constraints.MaxHeight = 28
-            ItemHeight = 16
-            ItemIndex = 0
-            Items.Strings = (
-              'Line'
-              'Dash'
-              'Dot'
-              'Dash Dot'
-              'Dash Dot Dot'
-            )
-            OnChange = EclipticStyleChange
-            OnDrawItem = StyleDrawItem
-            OnMeasureItem = LineStyleMeasureItem
-            ParentFont = False
-            Style = csOwnerDrawVariable
-            TabOrder = 2
-            Text = 'Line'
-          end
-          object GalEqStyle: TComboBox
-            AnchorSideTop.Control = galactic
-            AnchorSideTop.Side = asrCenter
-            Left = 232
-            Height = 26
-            Top = 58
-            Width = 121
-            AutoSize = False
-            Constraints.MaxHeight = 28
-            ItemHeight = 16
-            ItemIndex = 0
-            Items.Strings = (
-              'Line'
-              'Dash'
-              'Dot'
-              'Dash Dot'
-              'Dash Dot Dot'
-            )
-            OnChange = GalEqStyleChange
-            OnDrawItem = StyleDrawItem
-            OnMeasureItem = LineStyleMeasureItem
-            ParentFont = False
-            Style = csOwnerDrawVariable
-            TabOrder = 3
-            Text = 'Line'
-          end
-          object ShowEquator: TCheckBox
-            Left = 8
-            Height = 21
-            Top = 104
-            Width = 163
-            Caption = 'Show Celestial Equator'
-            OnClick = ShowEquatorClick
-            ParentFont = False
-            TabOrder = 4
-          end
-          object LineWidthEcliptic: TSpinEdit
-            Tag = 5
-            AnchorSideTop.Control = ecliptic
-            AnchorSideTop.Side = asrCenter
-            Left = 368
-            Height = 28
-            Top = 12
-            Width = 51
-            Constraints.MaxHeight = 28
-            MaxValue = 10
-            MinValue = 1
-            OnChange = LineWidthChange
-            ParentFont = False
-            TabOrder = 5
-            Value = 1
-          end
-          object LineWidthGalEq: TSpinEdit
-            Tag = 6
-            AnchorSideTop.Control = galactic
-            AnchorSideTop.Side = asrCenter
-            Left = 368
-            Height = 28
-            Top = 57
-            Width = 51
-            Constraints.MaxHeight = 28
-            MaxValue = 10
-            MinValue = 1
-            OnChange = LineWidthChange
-            ParentFont = False
-            TabOrder = 6
             Value = 1
           end
         end
