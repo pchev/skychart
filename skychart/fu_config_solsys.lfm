@@ -179,7 +179,6 @@ object f_config_solsys: Tf_config_solsys
           Top = 294
           Width = 495
           Align = alClient
-          Caption = 'Panel4'
           ClientHeight = 227
           ClientWidth = 495
           TabOrder = 3
@@ -577,8 +576,8 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 0
           object comsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 3
             ParentFont = False
             object GroupBox13: TGroupBox
@@ -660,7 +659,7 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 88
+                ClientHeight = 70
                 ClientWidth = 395
                 Color = clBtnFace
                 ItemIndex = 1
@@ -690,8 +689,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object comload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 1
             ParentFont = False
             object MemoCom: TMemo
@@ -718,8 +717,8 @@ object f_config_solsys: Tf_config_solsys
               OnChanging = ComPageControl1Changing
               object TabSheet1: TTabSheet
                 Caption = 'Load MPC format file'
-                ClientHeight = 74
-                ClientWidth = 475
+                ClientHeight = 101
+                ClientWidth = 481
                 ParentFont = False
                 object Label2: TLabel
                   Left = 15
@@ -746,8 +745,8 @@ object f_config_solsys: Tf_config_solsys
               end
               object TabSheet2: TTabSheet
                 Caption = 'Or use a local file :'
-                ClientHeight = 74
-                ClientWidth = 475
+                ClientHeight = 101
+                ClientWidth = 481
                 ParentFont = False
                 object comfile: TFileNameEdit
                   Left = 15
@@ -785,8 +784,8 @@ object f_config_solsys: Tf_config_solsys
               Top = 105
               Width = 485
               Align = alTop
-              ClientHeight = 34
-              ClientWidth = 485
+              ClientHeight = 30
+              ClientWidth = 481
               TabOrder = 2
               object Label232: TLabel
                 Left = 20
@@ -801,8 +800,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object comdelete: TTabSheet
             Caption = 'Data Maintenance'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 3
             ParentFont = False
             object GroupBox16: TGroupBox
@@ -888,8 +887,8 @@ object f_config_solsys: Tf_config_solsys
               Top = 144
               Width = 485
               Align = alTop
-              ClientHeight = 34
-              ClientWidth = 485
+              ClientHeight = 30
+              ClientWidth = 481
               TabOrder = 3
               object Label238: TLabel
                 Left = 20
@@ -904,8 +903,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object Addsinglecom: TTabSheet
             Caption = 'Add'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 4
             ParentFont = False
             object Label241: TLabel
@@ -1176,8 +1175,8 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 0
           object astsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 3
             ParentFont = False
             object GroupBox9: TGroupBox
@@ -1259,7 +1258,7 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 88
+                ClientHeight = 70
                 ClientWidth = 395
                 Color = clBtnFace
                 ItemIndex = 1
@@ -1320,8 +1319,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object astload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 1
             ParentFont = False
             object MemoMPC: TMemo
@@ -1411,8 +1410,8 @@ object f_config_solsys: Tf_config_solsys
               OnChanging = AstPageControl2Changing
               object TabSheet3: TTabSheet
                 Caption = 'Load MPC format file'
-                ClientHeight = 66
-                ClientWidth = 475
+                ClientHeight = 93
+                ClientWidth = 481
                 ParentFont = False
                 object Label1: TLabel
                   Left = 15
@@ -1439,8 +1438,8 @@ object f_config_solsys: Tf_config_solsys
               end
               object TabSheet4: TTabSheet
                 Caption = 'Or use a local file :'
-                ClientHeight = 66
-                ClientWidth = 475
+                ClientHeight = 93
+                ClientWidth = 481
                 ParentFont = False
                 object mpcfile: TFileNameEdit
                   Left = 15
@@ -1486,8 +1485,8 @@ object f_config_solsys: Tf_config_solsys
               Top = 194
               Width = 485
               Align = alTop
-              ClientHeight = 34
-              ClientWidth = 485
+              ClientHeight = 30
+              ClientWidth = 481
               TabOrder = 3
               object Label206: TLabel
                 Left = 20
@@ -1502,8 +1501,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object astprepare: TTabSheet
             Caption = 'Prepare Monthly Data'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 2
             ParentFont = False
             object GroupBox8: TGroupBox
@@ -1609,8 +1608,8 @@ object f_config_solsys: Tf_config_solsys
               Top = 103
               Width = 485
               Align = alTop
-              ClientHeight = 34
-              ClientWidth = 485
+              ClientHeight = 30
+              ClientWidth = 481
               TabOrder = 2
               object Label210: TLabel
                 Left = 20
@@ -1631,8 +1630,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object AddsingleAst: TTabSheet
             Caption = 'Add'
-            ClientHeight = 490
-            ClientWidth = 485
+            ClientHeight = 517
+            ClientWidth = 491
             ImageIndex = 4
             ParentFont = False
             object Label217: TLabel

@@ -20,9 +20,9 @@ object f_prepoint: Tf_prepoint
     TabOrder = 1
     object ObjLabel: TLabel
       Left = 8
-      Height = 19
+      Height = 17
       Top = 1
-      Width = 55
+      Width = 54
       Caption = 'ObjLabel'
       ParentColor = False
     end
@@ -43,23 +43,23 @@ object f_prepoint: Tf_prepoint
       ClientWidth = 316
       object Label1: TLabel
         Left = 8
-        Height = 19
+        Height = 17
         Top = 8
-        Width = 108
+        Width = 107
         Caption = 'Observation time'
         ParentColor = False
       end
       object Label2: TLabel
         Left = 8
-        Height = 19
+        Height = 17
         Top = 80
-        Width = 207
+        Width = 204
         Caption = 'Pre-point line duration in minutes'
         ParentColor = False
       end
       object TimeLength: TSpinEdit
         Left = 8
-        Height = 29
+        Height = 28
         Top = 104
         Width = 74
         Increment = 10
@@ -70,7 +70,7 @@ object f_prepoint: Tf_prepoint
       end
       object TimeObsH: TSpinEdit
         Left = 8
-        Height = 29
+        Height = 28
         Top = 32
         Width = 60
         MaxValue = 23
@@ -78,7 +78,7 @@ object f_prepoint: Tf_prepoint
       end
       object TimeObsM: TSpinEdit
         Left = 80
-        Height = 29
+        Height = 28
         Top = 32
         Width = 60
         MaxValue = 59
@@ -86,7 +86,7 @@ object f_prepoint: Tf_prepoint
       end
       object TimeObsS: TSpinEdit
         Left = 152
-        Height = 29
+        Height = 28
         Top = 32
         Width = 60
         MaxValue = 59
@@ -99,7 +99,6 @@ object f_prepoint: Tf_prepoint
         Width = 316
         Align = alBottom
         BevelOuter = bvNone
-        Caption = 'Panel3'
         ClientHeight = 30
         ClientWidth = 316
         TabOrder = 4

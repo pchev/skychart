@@ -183,7 +183,6 @@ object f_config_observatory: Tf_config_observatory
           Top = 80
           Width = 495
           Align = alTop
-          Caption = 'Panel2'
           ClientHeight = 83
           ClientWidth = 495
           TabOrder = 2
@@ -407,7 +406,6 @@ object f_config_observatory: Tf_config_observatory
           Top = 255
           Width = 495
           Align = alClient
-          Caption = 'Panel3'
           ClientHeight = 293
           ClientWidth = 495
           TabOrder = 3

@@ -16,7 +16,6 @@ object f_scriptengine: Tf_scriptengine
     Top = 0
     Width = 226
     Align = alLeft
-    Caption = 'Panel1'
     ClientHeight = 485
     ClientWidth = 226
     TabOrder = 0

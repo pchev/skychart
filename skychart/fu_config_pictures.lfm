@@ -24,11 +24,11 @@ object f_config_pictures: Tf_config_pictures
       Height = 528
       Top = 1
       Width = 506
-      ActivePage = Page1
+      ActivePage = Page2
       Align = alClient
       ParentFont = False
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       OnChange = PageControl1PageChanged
       OnChanging = PageControl1Changing
@@ -389,7 +389,6 @@ object f_config_pictures: Tf_config_pictures
           Top = 0
           Width = 496
           Align = alTop
-          Caption = 'Panel5'
           ClientHeight = 112
           ClientWidth = 496
           TabOrder = 1
@@ -521,8 +520,8 @@ object f_config_pictures: Tf_config_pictures
             Top = 4
             Width = 484
             BevelOuter = bvNone
-            ClientHeight = 292
-            ClientWidth = 484
+            ClientHeight = 288
+            ClientWidth = 480
             ParentFont = False
             TabOrder = 0
             object RealSkyNorth: TCheckBox

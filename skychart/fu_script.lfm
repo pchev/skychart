@@ -1,34 +1,33 @@
 object f_script: Tf_script
   Left = 0
-  Height = 271
+  Height = 274
   Top = 0
-  Width = 178
+  Width = 180
   HorzScrollBar.Page = 1
   HorzScrollBar.Tracking = True
   VertScrollBar.Page = 1
   VertScrollBar.Tracking = True
   AutoScroll = True
-  ClientHeight = 271
-  ClientWidth = 178
-  DesignTimePPI = 95
+  ClientHeight = 274
+  ClientWidth = 180
   OnResize = FrameResize
   ParentFont = False
   TabOrder = 0
   object BottomPanel: TPanel
     Left = 0
-    Height = 49
-    Top = 222
-    Width = 178
+    Height = 50
+    Top = 224
+    Width = 180
     Align = alBottom
-    ClientHeight = 49
-    ClientWidth = 178
+    ClientHeight = 50
+    ClientWidth = 180
     ParentFont = False
     TabOrder = 0
     object ButtonEditSrc: TBitBtn
       Left = 0
       Height = 25
       Top = 24
-      Width = 174
+      Width = 176
       Caption = 'Script'
       OnClick = ButtonEditSrcClick
       ParentFont = False
@@ -38,7 +37,7 @@ object f_script: Tf_script
       Left = 0
       Height = 25
       Top = 0
-      Width = 174
+      Width = 176
       Caption = 'ButtonConfig'
       OnClick = ButtonConfigClick
       ParentFont = False
@@ -49,7 +48,7 @@ object f_script: Tf_script
     Left = 0
     Height = 26
     Top = 28
-    Width = 178
+    Width = 180
     AutoSize = True
     Caption = 'Toolbar 1'
     ParentFont = False
@@ -61,7 +60,7 @@ object f_script: Tf_script
     Left = 0
     Height = 26
     Top = 54
-    Width = 178
+    Width = 180
     AutoSize = True
     Caption = 'Toolbar 2'
     ParentFont = False
@@ -71,9 +70,9 @@ object f_script: Tf_script
   end
   object MainPanel: TPanel
     Left = 0
-    Height = 142
+    Height = 144
     Top = 80
-    Width = 178
+    Width = 180
     Align = alClient
     ChildSizing.ShrinkHorizontal = crsHomogenousChildResize
     ChildSizing.ShrinkVertical = crsHomogenousSpaceResize
@@ -86,19 +85,19 @@ object f_script: Tf_script
     Left = 0
     Height = 28
     Top = 0
-    Width = 178
+    Width = 180
     Align = alTop
-    Caption = 'PanelTitle'
+    Caption = 'Title'
     ClientHeight = 28
-    ClientWidth = 178
+    ClientWidth = 180
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 4
     OnMouseEnter = PanelTitleMouseEnter
     OnMouseLeave = PanelTitleMouseLeave
     object LabelShortcut: TLabel
-      Left = 154
-      Height = 19
+      Left = 156
+      Height = 17
       Top = 6
       Width = 22
       Anchors = [akTop, akRight]

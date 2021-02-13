@@ -1,41 +1,41 @@
 object f_about: Tf_about
   Left = 459
-  Height = 305
+  Height = 308
   Top = 104
-  Width = 581
+  Width = 587
   ActiveControl = Button1
   Caption = 'About'
-  ClientHeight = 305
-  ClientWidth = 581
-  DesignTimePPI = 95
+  ClientHeight = 308
+  ClientWidth = 587
   OnCreate = FormCreate
-  ParentFont = True
   Position = poMainFormCenter
   object Panel2: TPanel
     Left = 0
-    Height = 305
+    Height = 308
     Top = 0
-    Width = 581
+    Width = 587
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 305
-    ClientWidth = 581
+    ClientHeight = 308
+    ClientWidth = 587
+    ParentFont = False
     TabOrder = 0
     object Panel0: TPanel
       Left = 0
-      Height = 305
+      Height = 308
       Top = 0
-      Width = 80
+      Width = 81
       Align = alLeft
       BevelOuter = bvNone
-      ClientHeight = 305
-      ClientWidth = 80
+      ClientHeight = 308
+      ClientWidth = 81
+      ParentFont = False
       TabOrder = 0
       object Image2: TImage
         Left = 0
-        Height = 305
+        Height = 308
         Top = 0
-        Width = 80
+        Width = 81
         Align = alClient
         Picture.Data = {
           07545069786D6170B31F01002F2A2058504D202A2F0A73746174696320636861
@@ -2345,51 +2345,56 @@ object f_about: Tf_about
       end
     end
     object Panel4: TPanel
-      Left = 80
-      Height = 305
+      Left = 81
+      Height = 308
       Top = 0
-      Width = 501
+      Width = 506
       Align = alClient
-      ClientHeight = 305
-      ClientWidth = 501
+      ClientHeight = 308
+      ClientWidth = 506
+      ParentFont = False
       TabOrder = 1
       object Panel3: TPanel
         Left = 1
         Height = 39
-        Top = 265
-        Width = 499
+        Top = 268
+        Width = 504
         Align = alBottom
         ClientHeight = 39
-        ClientWidth = 499
+        ClientWidth = 504
+        ParentFont = False
         TabOrder = 0
         object Button1: TButton
-          Left = 151
+          Left = 153
           Height = 25
           Top = 8
-          Width = 75
+          Width = 76
           BorderSpacing.InnerBorder = 4
           Cancel = True
           Caption = 'Close'
           ModalResult = 1
+          ParentFont = False
           TabOrder = 0
         end
       end
       object PageControl1: TPageControl
         Left = 1
-        Height = 264
+        Height = 267
         Top = 1
-        Width = 499
+        Width = 504
         ActivePage = Page1
         Align = alClient
+        ParentFont = False
         TabIndex = 0
         TabOrder = 1
         object Page1: TTabSheet
           Caption = 'About'
-          ClientHeight = 234
-          ClientWidth = 489
+          ClientHeight = 236
+          ClientWidth = 494
+          ParentFont = False
           object Label5: TLabel
             Left = 20
-            Height = 19
+            Height = 17
             Top = 30
             Width = 70
             Caption = 'Sky Charts'
@@ -2399,7 +2404,7 @@ object f_about: Tf_about
           end
           object Label6: TLabel
             Left = 20
-            Height = 19
+            Height = 17
             Top = 6
             Width = 90
             Caption = 'Cartes du Ciel'
@@ -2409,47 +2414,51 @@ object f_about: Tf_about
           end
           object Label7: TLabel
             Left = 20
-            Height = 49
-            Top = 102
-            Width = 380
+            Height = 50
+            Top = 103
+            Width = 384
             AutoSize = False
             Caption = 'Label7'
             ParentColor = False
+            ParentFont = False
             WordWrap = True
           end
           object Label8: TLabel
             Left = 20
-            Height = 18
-            Top = 78
-            Width = 60
+            Height = 17
+            Top = 79
+            Width = 61
             Caption = 'Copyright'
             ParentColor = False
+            ParentFont = False
           end
           object Label2: TLabel
             Left = 20
-            Height = 18
-            Top = 54
-            Width = 45
+            Height = 17
+            Top = 55
+            Width = 47
             Caption = 'Version'
             ParentColor = False
+            ParentFont = False
           end
           object Label4: TLabel
             Left = 20
-            Height = 18
-            Top = 158
-            Width = 54
+            Height = 17
+            Top = 160
+            Width = 56
             Caption = 'Compiler'
             ParentColor = False
+            ParentFont = False
           end
           object Panel1: TPanel
             Cursor = crHandPoint
             Left = 20
             Height = 20
-            Top = 174
-            Width = 328
+            Top = 176
+            Width = 331
             Alignment = taLeftJustify
             BevelOuter = bvNone
-            Caption = 'Panel1'
+            Caption = 'cdc url'
             Font.Color = clBlue
             ParentFont = False
             TabOrder = 0
@@ -2458,8 +2467,9 @@ object f_about: Tf_about
         end
         object Page2: TTabSheet
           Caption = 'Authors'
-          ClientHeight = 234
-          ClientWidth = 489
+          ClientHeight = 236
+          ClientWidth = 494
+          ParentFont = False
           object Label3: TLabel
             Left = 11
             Height = 18
@@ -2467,23 +2477,26 @@ object f_about: Tf_about
             Width = 177
             Caption = 'Please report any problem to:'
             ParentColor = False
+            ParentFont = False
           end
           object Button2: TButton
             Left = 12
             Height = 25
             Top = 21
-            Width = 250
+            Width = 253
             Caption = 'Button2'
             OnClick = Button2Click
+            ParentFont = False
             TabOrder = 0
           end
           object Panel5: TPanel
             Left = 11
-            Height = 146
-            Top = 56
-            Width = 428
-            ClientHeight = 146
-            ClientWidth = 428
+            Height = 148
+            Top = 57
+            Width = 433
+            ClientHeight = 148
+            ClientWidth = 433
+            ParentFont = False
             TabOrder = 1
             object Memo1: TMemo
               Cursor = crArrow
@@ -2496,6 +2509,7 @@ object f_about: Tf_about
               Lines.Strings = (
                 'Memo1'
               )
+              ParentFont = False
               ReadOnly = True
               ScrollBars = ssAutoBoth
               TabOrder = 0
@@ -2504,8 +2518,9 @@ object f_about: Tf_about
         end
         object Page3: TTabSheet
           Caption = 'License Agreement'
-          ClientHeight = 234
-          ClientWidth = 489
+          ClientHeight = 236
+          ClientWidth = 494
+          ParentFont = False
           object Memo2: TMemo
             Left = 0
             Height = 234
@@ -2830,6 +2845,7 @@ object f_about: Tf_about
               ''
               #9#9'     END OF TERMS AND CONDITIONS'
             )
+            ParentFont = False
             ReadOnly = True
             ScrollBars = ssBoth
             TabOrder = 0
