@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-11 16:30+0000\n"
-"PO-Revision-Date: 2020-05-03 09:19+0000\n"
+"POT-Creation-Date: 2021-02-13 22:24+0000\n"
+"PO-Revision-Date: 2021-02-13 11:09+0000\n"
 "Last-Translator: Sergey Tarantsov <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-11 16:41+0000\n"
-"X-Generator: Launchpad (build e34ce994f03aae76d4610a97bccf86c0f2cf9f70)\n"
+"X-Launchpad-Export-Date: 2021-02-13 22:32+0000\n"
+"X-Generator: Launchpad (build b3a93345a124168b715ec9ae0945884caa15f58f)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -287,7 +287,7 @@ msgstr "Всегда сохранять без подтверждения."
 
 #: u_translation.rsamaximumoffi
 msgid "A maximum of %s files can be selected"
-msgstr ""
+msgstr "Можно выбрать максимум %s файлов"
 
 #: u_translation.rsamplitudemax
 msgid "Amplitude max."
@@ -331,7 +331,7 @@ msgstr "Добавить существующий каталог "
 
 #: u_translation.rsappendtocurr
 msgid "Append to current file"
-msgstr ""
+msgstr "Добавить в текущий файл"
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -859,7 +859,7 @@ msgstr "Незаходящий объект"
 
 #: u_translation.rscivil
 msgid "Civil"
-msgstr ""
+msgstr "Гражданские"
 
 #: u_translation.rsclass
 msgid "Class"
@@ -1435,7 +1435,7 @@ msgstr "Удалить"
 
 #: u_translation.rsdeleteallexp
 msgid "Delete all expired ephemeris"
-msgstr ""
+msgstr "Удалить все эфемериды с истекшим сроком действия"
 
 #: u_translation.rsdeleteallthe
 msgid "Delete %s, all the child nodes and the scripts?"
@@ -1695,7 +1695,7 @@ msgstr "Загрузить элементы орбит в формате MPC"
 
 #: u_translation.rsdownloadsola
 msgid "Download Solar System object SPICE kernel from JPL Horizon"
-msgstr ""
+msgstr "Загрузите ядро ​​SPICE объектов Солнечной системы из JPL Horizon"
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
@@ -1789,6 +1789,10 @@ msgstr "Тень Земли"
 msgid "East"
 msgstr "Восток"
 
+#: u_translation.rseasthourangl
+msgid "East hour angle"
+msgstr ""
+
 #: u_translation.rseastside
 msgid "East side"
 msgstr "Восток"
@@ -1855,7 +1859,7 @@ msgstr "Элонгация"
 
 #: u_translation.rsemail
 msgid "email"
-msgstr ""
+msgstr "email"
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
@@ -1904,6 +1908,10 @@ msgstr "Эпоха максимума"
 #: u_translation.rseqgrid
 msgid "Eq. grid"
 msgstr "Экв. сетка"
+
+#: u_translation.rsequator
+msgid "Equator"
+msgstr ""
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
@@ -2035,7 +2043,7 @@ msgstr "Размер слабых звёзд "
 
 #: u_translation.rsfamily
 msgid "Family"
-msgstr ""
+msgstr "Семейство"
 
 #: u_translation.rsfaq
 msgid "FAQ"
@@ -2147,7 +2155,7 @@ msgstr "Камера"
 
 #: u_translation.rsfindinfo
 msgid "Find info"
-msgstr ""
+msgstr "Информация"
 
 #: u_translation.rsfirst
 msgid "First"
@@ -2361,6 +2369,10 @@ msgstr "Зелёный"
 msgid "Gregorian calendar start date"
 msgstr "Дата начала Грегор. календаря"
 
+#: u_translation.rsgrids
+msgid "Grids"
+msgstr ""
+
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
 msgstr "Шаг сетки"
@@ -2527,7 +2539,7 @@ msgstr "Список изображений"
 
 #: u_translation.rsimportmosaic
 msgid "Import mosaic file"
-msgstr ""
+msgstr "Загрузить файл мозаики"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -2607,7 +2619,7 @@ msgstr "Информация из каталога"
 
 #: u_translation.rsinformationf2
 msgid "Information from"
-msgstr ""
+msgstr "Информация из"
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
@@ -2857,6 +2869,10 @@ msgstr "Слошная"
 #: u_translation.rslinear
 msgid "Linear"
 msgstr "Линейная"
+
+#: u_translation.rslineforteles
+msgid "Line for telescope pointing limit"
+msgstr ""
 
 #: u_translation.rslinemode
 msgid "Line mode"
@@ -3122,6 +3138,10 @@ msgstr "макс."
 msgid "Maximize"
 msgstr "Развернуть"
 
+#: u_translation.rsmaximumdecli
+msgid "Maximum declination"
+msgstr ""
+
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
 msgstr "Макс. величина"
@@ -3221,6 +3241,10 @@ msgstr "Минимум"
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
 msgstr "Минимальная высота"
+
+#: u_translation.rsminimumdecli
+msgid "Minimum declination"
+msgstr ""
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -3368,7 +3392,7 @@ msgstr "Контуры туманностей"
 
 #: u_translation.rsneighbor
 msgid "Neighbour"
-msgstr "Сосед"
+msgstr "Объекты рядом"
 
 #: u_translation.rsneptune
 msgid "Neptune"
@@ -3524,7 +3548,7 @@ msgstr "Количество копий"
 
 #: u_translation.rsnumberofdays
 msgid "Number of days"
-msgstr ""
+msgstr "Число дней"
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
@@ -3828,7 +3852,7 @@ msgstr "Папка пользователя"
 
 #: u_translation.rsphaseangle
 msgid "Phase angle"
-msgstr ""
+msgstr "Фазовый угол"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
@@ -4312,7 +4336,7 @@ msgstr "Обновить"
 
 #: u_translation.rsrefreshallep
 msgid "Refresh all ephemeris"
-msgstr ""
+msgstr "Обновить все эфемериды"
 
 #: u_translation.rsrefreshimage
 msgid "Refresh image every"
@@ -5100,7 +5124,7 @@ msgstr "Солнечная система"
 
 #: u_translation.rssolarsystemb
 msgid "Solar system body"
-msgstr ""
+msgstr "Тело солнечной системы"
 
 #: u_translation.rssolarsystemi
 msgid "Solar System Information"
@@ -5156,7 +5180,7 @@ msgstr "Скорость"
 
 #: u_translation.rsspiceephemer
 msgid "SPICE ephemeris"
-msgstr ""
+msgstr "Эфемериды SPICE"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -5248,7 +5272,7 @@ msgstr "Анимация назад"
 
 #: u_translation.rsstartdate
 msgid "Start date"
-msgstr ""
+msgstr "Дата начала"
 
 #: u_translation.rsstartforward
 msgid "Animation forward"
@@ -5456,7 +5480,7 @@ msgstr "Этот драйвер сохранён для совместимост
 
 #: u_translation.rsthisfilecont
 msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
-msgstr ""
+msgstr "Этот файл содержит элементы %s.%sЭто, вероятно, базовый файл, который вы хотите загрузить без опции «Добавить».%sДобавление всех этих данных в текущий файл может повлиять на производительность.%sВы хотите продолжить?"
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -5552,7 +5576,7 @@ msgstr "Полное"
 
 #: u_translation.rstotalasteroi
 msgid "Total asteroid count"
-msgstr ""
+msgstr "Общее количество астероидов"
 
 #: u_translation.rstotalradius
 msgid "Total radius"
@@ -5628,7 +5652,7 @@ msgstr "Класс Трамплера"
 
 #: u_translation.rstruncatedtos
 msgid "Truncated to %s catalogs"
-msgstr ""
+msgstr "Усечено до %s каталогов"
 
 #: u_translation.rstrytoautocon
 msgid "Try to auto-connect to a SAMP hub when the program start"
@@ -5966,6 +5990,10 @@ msgstr "Ср."
 msgid "West"
 msgstr "Запад"
 
+#: u_translation.rswesthourangl
+msgid "West hour angle"
+msgstr ""
+
 #: u_translation.rswestside
 msgid "West side"
 msgstr "Запад"
@@ -6036,7 +6064,7 @@ msgstr "Увеличить масштаб"
 
 #: u_translation.rszoommoretovi
 msgid "Object too faint to show on the chart"
-msgstr ""
+msgstr "Объект слишком слабый, чтобы его можно было увидеть на карте"
 
 #: u_translation.rszoomout
 msgid "Zoom out"

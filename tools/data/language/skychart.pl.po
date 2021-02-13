@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-11 16:30+0000\n"
+"POT-Creation-Date: 2021-02-13 22:24+0000\n"
 "PO-Revision-Date: 2019-10-06 13:44+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-11 16:41+0000\n"
-"X-Generator: Launchpad (build e34ce994f03aae76d4610a97bccf86c0f2cf9f70)\n"
+"X-Launchpad-Export-Date: 2021-02-13 22:32+0000\n"
+"X-Generator: Launchpad (build b3a93345a124168b715ec9ae0945884caa15f58f)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -1792,6 +1792,10 @@ msgstr "Cień Ziemi"
 msgid "East"
 msgstr "Wschód"
 
+#: u_translation.rseasthourangl
+msgid "East hour angle"
+msgstr ""
+
 #: u_translation.rseastside
 msgid "East side"
 msgstr "Strona wschodnia"
@@ -1907,6 +1911,10 @@ msgstr "Epoka maksimum"
 #: u_translation.rseqgrid
 msgid "Eq. grid"
 msgstr "Siatka równ."
+
+#: u_translation.rsequator
+msgid "Equator"
+msgstr ""
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
@@ -2363,6 +2371,10 @@ msgstr "Zielony"
 #: u_translation.rsgregoriancal
 msgid "Gregorian calendar start date"
 msgstr "Data startu wg. kalendarza Gregoriańskiego"
+
+#: u_translation.rsgrids
+msgid "Grids"
+msgstr ""
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -2861,6 +2873,10 @@ msgstr "Linia"
 msgid "Linear"
 msgstr "Liniowe"
 
+#: u_translation.rslineforteles
+msgid "Line for telescope pointing limit"
+msgstr ""
+
 #: u_translation.rslinemode
 msgid "Line mode"
 msgstr "Tryb liniowy"
@@ -3125,6 +3141,10 @@ msgstr "max"
 msgid "Maximize"
 msgstr "Maksymalizuj"
 
+#: u_translation.rsmaximumdecli
+msgid "Maximum declination"
+msgstr ""
+
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
 msgstr "Maksymalna wielkość gwiazdowa"
@@ -3224,6 +3244,10 @@ msgstr "Minimalny"
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
 msgstr "Minimalna wysokość"
+
+#: u_translation.rsminimumdecli
+msgid "Minimum declination"
+msgstr ""
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -5968,6 +5992,10 @@ msgstr "Śr."
 #: u_translation.rswest
 msgid "West"
 msgstr "Zachód"
+
+#: u_translation.rswesthourangl
+msgid "West hour angle"
+msgstr ""
 
 #: u_translation.rswestside
 msgid "West side"

@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-02-11 16:30+0000\n"
+"POT-Creation-Date: 2021-02-13 22:24+0000\n"
 "PO-Revision-Date: 2017-06-18 03:42+0000\n"
 "Last-Translator: Osamu <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-11 16:41+0000\n"
-"X-Generator: Launchpad (build e34ce994f03aae76d4610a97bccf86c0f2cf9f70)\n"
+"X-Launchpad-Export-Date: 2021-02-13 22:32+0000\n"
+"X-Generator: Launchpad (build b3a93345a124168b715ec9ae0945884caa15f58f)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1792,6 +1792,10 @@ msgstr ""
 msgid "East"
 msgstr "東"
 
+#: u_translation.rseasthourangl
+msgid "East hour angle"
+msgstr ""
+
 #: u_translation.rseastside
 msgid "East side"
 msgstr ""
@@ -1906,6 +1910,10 @@ msgstr ""
 
 #: u_translation.rseqgrid
 msgid "Eq. grid"
+msgstr ""
+
+#: u_translation.rsequator
+msgid "Equator"
 msgstr ""
 
 #: u_translation.rsequatorialco
@@ -2362,6 +2370,10 @@ msgstr ""
 
 #: u_translation.rsgregoriancal
 msgid "Gregorian calendar start date"
+msgstr ""
+
+#: u_translation.rsgrids
+msgid "Grids"
 msgstr ""
 
 #: u_translation.rsgridspacing
@@ -2860,6 +2872,10 @@ msgstr ""
 msgid "Linear"
 msgstr ""
 
+#: u_translation.rslineforteles
+msgid "Line for telescope pointing limit"
+msgstr ""
+
 #: u_translation.rslinemode
 msgid "Line mode"
 msgstr ""
@@ -3124,6 +3140,10 @@ msgstr ""
 msgid "Maximize"
 msgstr ""
 
+#: u_translation.rsmaximumdecli
+msgid "Maximum declination"
+msgstr ""
+
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
 msgstr ""
@@ -3222,6 +3242,10 @@ msgstr ""
 
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
+msgstr ""
+
+#: u_translation.rsminimumdecli
+msgid "Minimum declination"
 msgstr ""
 
 #: u_translation.rsminute
@@ -5967,6 +5991,10 @@ msgstr ""
 #: u_translation.rswest
 msgid "West"
 msgstr "西"
+
+#: u_translation.rswesthourangl
+msgid "West hour angle"
+msgstr ""
 
 #: u_translation.rswestside
 msgid "West side"

@@ -6026,3 +6026,31 @@ msgstr ""
 msgid "Append to current file"
 msgstr ""
 
+#: u_translation:rslineforteles
+msgid "Line for telescope pointing limit"
+msgstr ""
+
+#: u_translation:rsmaximumdecli
+msgid "Maximum declination"
+msgstr ""
+
+#: u_translation:rsminimumdecli
+msgid "Minimum declination"
+msgstr ""
+
+#: u_translation:rseasthourangl
+msgid "East hour angle"
+msgstr ""
+
+#: u_translation:rswesthourangl
+msgid "West hour angle"
+msgstr ""
+
+#: u_translation:rsgrids
+msgid "Grids"
+msgstr ""
+
+#: u_translation:rsequator
+msgid "Equator"
+msgstr ""
+
