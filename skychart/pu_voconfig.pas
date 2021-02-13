@@ -680,7 +680,7 @@ begin
     dm := config.GetValue('VOcat/default/defmag', 12);
     ActiveFieldNum := config.GetValue('VOcat/fields/fieldcount', 0);
     ActiveFields.Clear;
-    for i := 0 to ActiveFieldNum do
+    for i := 0 to ActiveFieldNum-1 do
     begin
       buf := config.GetValue('VOcat/fields/field_' + IntToStr(i), '');
       ActiveFields.Add(buf);
@@ -791,11 +791,11 @@ begin
       end
       else
       begin
-        Grid.RowCount := ActiveFieldNum;
+        Grid.RowCount := ActiveFieldNum+1;
         for i := 0 to ActiveFieldNum - 1 do
         begin
-          Grid.Cells[0, i] := 'x';
-          Grid.Cells[1, i] := ActiveFields[i];
+          Grid.Cells[0, i+1] := 'x';
+          Grid.Cells[1, i+1] := ActiveFields[i];
         end;
         Grid.OnMouseUp := nil;
         SelectAll := True;
