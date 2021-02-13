@@ -47,7 +47,8 @@ type
     currentitem: integer;
     http: THTTPSend;
     XmlScanner: TEasyXmlScanner;
-    votable, description, resource, info, table, tname, ArrayOfResource, aurl: boolean;
+    votable, description, info, table, tname, ArrayOfResource, aurl: boolean;
+    resource: integer;
     catalog, catalog_desc, catalog_info, base_url, catalog_url: string;
     procedure XmlStartTag(Sender: TObject; TagName: string; Attributes: TAttrList);
     procedure XmlContent(Sender: TObject; Content: string);
@@ -178,7 +179,7 @@ begin
   FCatList.Clear;
   votable := False;
   description := False;
-  resource := False;
+  resource := 0;
   info := False;
   table := False;
   tname := False;
@@ -321,7 +322,7 @@ begin
       table := True
     else if TagName = 'RESOURCE' then
     begin
-      resource := True;
+      resource += 1;
       catalog := Attributes.Value('name');
       catalog_url := base_url + catalog;
       catalog_desc := '';
@@ -342,7 +343,7 @@ begin
       aurl := True
     else if TagName = 'Resource' then
     begin
-      resource := True;
+      resource += 1;
       catalog := '';
       catalog_url := '';
       catalog_desc := '';
@@ -355,7 +356,7 @@ procedure TVO_Catalogs.XmlContent(Sender: TObject; Content: string);
 begin
   // Vizier
   if Fvo_source = Vizier then
-    if votable and resource and description and (not table) then
+    if votable and (resource>0) and description and (not table) then
     begin
       catalog_desc := Content;
     end
@@ -364,15 +365,15 @@ begin
 end};
   // NVO
   if Fvo_source = NVO then
-    if ArrayOfResource and resource and description then
+    if ArrayOfResource and (resource>0) and description then
     begin
       catalog_desc := Content;
     end
-    else if ArrayOfResource and resource and tname then
+    else if ArrayOfResource and (resource>0) and tname then
     begin
       catalog := Content;
     end
-    else if ArrayOfResource and resource and aurl then
+    else if ArrayOfResource and (resource>0) and aurl then
     begin
       catalog_url := Content;
     end
@@ -398,8 +399,8 @@ begin
       table := False
     else if TagName = 'RESOURCE' then
     begin
-      resource := False;
-      if catalog <> 'META' then
+      resource -= 1;
+      if (resource=0)and(catalog <> 'META') then
         FCatList.Add(' ' + catalog + tab + catalog_desc + tab +
           catalog_info + tab + catalog_url);
     end;
@@ -420,8 +421,8 @@ begin
       aurl := False
     else if TagName = 'Resource' then
     begin
-      resource := False;
-      if catalog_url <> '' then
+      resource -= 1;
+      if (resource=0)and (catalog_url <> '') then
         FCatList.Add(' ' + catalog + tab + catalog_desc + tab +
           catalog_info + tab + fixurl(catalog_url));
     end;

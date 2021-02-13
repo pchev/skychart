@@ -796,6 +796,9 @@ begin
         begin
           Grid.Cells[0, i+1] := 'x';
           Grid.Cells[1, i+1] := ActiveFields[i];
+          fr.MagField.Items.Add(ActiveFields[i]);
+          fr.SizeField.Items.Add(ActiveFields[i]);
+          fr.NameField.Items.Add(ActiveFields[i]);
         end;
         Grid.OnMouseUp := nil;
         SelectAll := True;
@@ -805,10 +808,15 @@ begin
         tr.Visible := False;
         Rows.Visible := False;
         desc.Caption := CatName;
-        RadioGroup1.ItemIndex := 2;
+        if objtype = '' then objtype:='dso';
+        if objtype = 'star' then
+          RadioGroup1.ItemIndex := 1
+        else if objtype = 'dso' then
+          RadioGroup1.ItemIndex := 2
+        else
+          RadioGroup1.ItemIndex := 0;
         RadioGroup1Click(self);
         FullDownload.Checked := True;
-        RadioGroup1.Enabled := False;
         FullDownload.Enabled := False;
         button2.Visible := False;
       end;

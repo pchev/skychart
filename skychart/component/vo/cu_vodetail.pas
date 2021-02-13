@@ -47,7 +47,8 @@ type
     Fnrow: TIntegerArray;
     http: THTTPSend;
     XmlScanner: TEasyXmlScanner;
-    votable, table, param, descr, definition, resource, field, Coord, Magnitude, Size: boolean;
+    votable, table, param, descr, definition, field, Coord, Magnitude, Size: boolean;
+    resource: integer;
     Fequinox, Fepoch, Fsystem, Fcatalog, cat_desc: TStringArray;
     param_desc, resdesc, Fequ, Fepo, Fsys, resourcename: string;
     fieldnum: integer;
@@ -317,7 +318,7 @@ procedure TVO_Detail.XmlStartTag(Sender: TObject; TagName: string;
 begin
   if TagName = 'VOTABLE' then
     votable := True
-  else if resource and (TagName = 'TABLE') then
+  else if (resource>0) and (TagName = 'TABLE') then
   begin
     NewList;
     fieldnum := -1;
@@ -334,15 +335,15 @@ begin
     table := True;
     Fnrow[Nlist - 1] := strtointdef(Attributes.Value('nrows'), 0);
   end
-  else if resource and (TagName = 'DESCRIPTION') then
+  else if (resource>0) and (TagName = 'DESCRIPTION') then
     descr := True
-  else if resource and (TagName = 'DEFINITIONS') then
+  else if (resource>0) and (TagName = 'DEFINITIONS') then
     definition := True
-  else if resource and (TagName = 'PARAM') then
+  else if (resource>0) and (TagName = 'PARAM') then
     param := True
   else if votable and (TagName = 'RESOURCE') then
   begin
-    resource := True;
+    resource += 1;
     resourcename := Attributes.Value('name');
   end
   else if table and (TagName = 'FIELD') then
@@ -354,7 +355,7 @@ end;
 
 procedure TVO_Detail.XmlContent(Sender: TObject; Content: string);
 begin
-  if resource and (not table) and (not param) and (not definition) and descr then
+  if (resource>0) and (not table) and (not param) and (not definition) and descr then
   begin
     resdesc := Content;
   end;
@@ -375,7 +376,7 @@ begin
   begin
     votable := False;
   end
-  else if resource and (TagName = 'TABLE') then
+  else if (resource>0) and (TagName = 'TABLE') then
   begin
     table := False;
     Fequinox[Nlist - 1] := Fequ;
@@ -387,17 +388,17 @@ begin
     if trim(cat_desc[Nlist - 1]) = '' then
       cat_desc[Nlist - 1] := resdesc;
   end
-  else if resource and (TagName = 'DEFINITIONS') then
+  else if (resource>0) and (TagName = 'DEFINITIONS') then
     definition := False
-  else if resource and (TagName = 'DESCRIPTION') then
+  else if (resource>0) and (TagName = 'DESCRIPTION') then
     descr := False
-  else if resource and (TagName = 'PARAM') then
+  else if (resource>0) and (TagName = 'PARAM') then
     param := False
   else if votable and (TagName = 'RESOURCE') then
   begin
-    resource := False;
+    resource -= 1;
   end
-  else if resource and (TagName = 'FIELD') then
+  else if (resource>0) and (TagName = 'FIELD') then
   begin
     field := False;
   end;
@@ -415,7 +416,7 @@ begin
     Fepo := Attributes.Value('epoch');
     Fsys := Attributes.Value('system');
   end
-  else if resource and (TagName = 'FIELD') then
+  else if (resource>0) and (TagName = 'FIELD') then
   begin
     Inc(fieldnum);
     b1 := '';

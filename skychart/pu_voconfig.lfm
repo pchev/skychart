@@ -12,8 +12,7 @@ object f_voconfig: Tf_voconfig
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '1.6.0.4'
-  Visible = False
+  LCLVersion = '2.0.10.0'
   object PageControl1: TPageControl
     Left = 0
     Height = 516
@@ -26,8 +25,8 @@ object f_voconfig: Tf_voconfig
     TabOrder = 0
     object TabCat: TTabSheet
       Caption = 'Catalog List'
-      ClientHeight = 512
-      ClientWidth = 779
+      ClientHeight = 482
+      ClientWidth = 773
       object Panel1: TPanel
         Left = 0
         Height = 96
@@ -133,8 +132,8 @@ object f_voconfig: Tf_voconfig
     end
     object TabDetail: TTabSheet
       Caption = 'Catalog Detail'
-      ClientHeight = 512
-      ClientWidth = 779
+      ClientHeight = 482
+      ClientWidth = 773
       ImageIndex = 1
       object PageControl2: TPageControl
         Left = 0
@@ -202,8 +201,8 @@ object f_voconfig: Tf_voconfig
     end
     object TabData: TTabSheet
       Caption = 'Catalog Data'
-      ClientHeight = 512
-      ClientWidth = 779
+      ClientHeight = 482
+      ClientWidth = 773
       ImageIndex = 2
       object DataGrid: TStringGrid
         Left = 0
@@ -249,8 +248,8 @@ object f_voconfig: Tf_voconfig
     end
     object TabRegistry: TTabSheet
       Caption = 'Registry'
-      ClientHeight = 512
-      ClientWidth = 779
+      ClientHeight = 482
+      ClientWidth = 773
       ImageIndex = 3
       TabVisible = False
       object RadioGroup1: TRadioGroup
@@ -268,8 +267,8 @@ object f_voconfig: Tf_voconfig
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 130
-        ClientWidth = 429
+        ClientHeight = 125
+        ClientWidth = 431
         ItemIndex = 0
         Items.Strings = (
           'VizieR Catalogue Service'
@@ -305,39 +304,37 @@ object f_voconfig: Tf_voconfig
     vo_source = Vizier
     ListUrl = 'http://vizier.u-strasbg.fr/cgi-bin/votable?-source=*&-meta&-meta.max=100000&-out.form=XML-VOTable(XSL)'
     CachePath = '.'
-    left = 672
+    Left = 672
   end
   object VO_Detail1: TVO_Detail
     BaseUrl = 'http://vizier.u-strasbg.fr/cgi-bin/'
     vo_type = VizierMeta
     CachePath = '.'
-    left = 640
+    Left = 640
   end
   object VO_TableData1: TVO_TableData
     BaseUrl = 'http://vizier.u-strasbg.fr/cgi-bin/'
     vo_type = VizierMeta
     CachePath = '.'
     SelectCoord = True
-    Ra = 0
-    Dec = 0
     FOV = 0.1
     MaxData = 50
-    left = 608
+    Left = 608
   end
   object Timer1: TTimer
     Enabled = False
     Interval = 100
     OnTimer = Timer1Timer
-    left = 576
+    Left = 576
   end
   object SaveDialog1: TSaveDialog
     FilterIndex = 0
-    left = 544
+    Left = 544
   end
   object CloseTimer: TTimer
     Enabled = False
     Interval = 200
     OnTimer = CloseTimerTimer
-    left = 712
+    Left = 712
   end
 end

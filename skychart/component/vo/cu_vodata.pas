@@ -50,7 +50,8 @@ type
     MetaOnly: boolean;
     http: THTTPSend;
     XmlScanner: TEasyXmlScanner;
-    votable, table, description, definition, resource, field, Data, tabledata, tr, td: boolean;
+    votable, table, description, definition, field, Data, tabledata, tr, td: boolean;
+    resource: integer;
     Fequinox, Fepoch, Fsystem, Fcatalog: string;
     Fequ, Fepo, Fsys: string;
     FSelectCoord: boolean;
@@ -161,6 +162,7 @@ begin
   setlength(FColumns, 0);
   fieldnum := 0;
   FnCol := 0;
+  resource := 0;
 end;
 
 procedure TVO_TableData.LoadData;
@@ -304,13 +306,13 @@ var
 begin
   if TagName = 'VOTABLE' then
     votable := True
-  else if resource and (TagName = 'DESCRIPTION') then
+  else if (resource>0) and (TagName = 'DESCRIPTION') then
     description := True
-  else if resource and (TagName = 'DEFINITIONS') then
+  else if (resource>0) and (TagName = 'DEFINITIONS') then
     definition := True
-  else if resource and (TagName = 'DATA') then
+  else if (resource>0) and (TagName = 'DATA') then
     Data := True
-  else if resource and (TagName = 'TABLE') then
+  else if (resource>0) and (TagName = 'TABLE') then
   begin
     table := True;
     buf := Attributes.Value('name');
@@ -319,7 +321,7 @@ begin
   end
   else if votable and (TagName = 'RESOURCE') then
   begin
-    resource := True;
+    resource += 1;
     fieldnum := 0;
     buf := Attributes.Value('name');
     if buf = '' then
@@ -327,12 +329,12 @@ begin
     if buf <> '' then
       Fcatalog := buf;
   end
-  else if resource and (TagName = 'FIELD') then
+  else if (resource>0) and (TagName = 'FIELD') then
   begin
     field := True;
     XmlEmptyTag(Sender, TagName, Attributes);
   end
-  else if resource and (TagName = 'TABLEDATA') then
+  else if (resource>0) and (TagName = 'TABLEDATA') then
   begin
     if MetaOnly then
     begin
@@ -375,30 +377,30 @@ begin
   begin
     votable := False;
   end
-  else if resource and (TagName = 'DEFINITIONS') then
+  else if (resource>0) and (TagName = 'DEFINITIONS') then
     definition := False
-  else if resource and (TagName = 'DESCRIPTION') then
+  else if (resource>0) and (TagName = 'DESCRIPTION') then
     description := False
-  else if resource and (TagName = 'DATA') then
+  else if (resource>0) and (TagName = 'DATA') then
     Data := False
-  else if resource and (TagName = 'TABLEDATA') then
+  else if (resource>0) and (TagName = 'TABLEDATA') then
     tabledata := False
   else if votable and (TagName = 'RESOURCE') then
   begin
-    resource := False;
+    resource -= 1;
     Fequinox := Fequ;
     Fepoch := Fepo;
     Fsystem := Fsys;
   end
-  else if resource and (TagName = 'FIELD') then
+  else if (resource>0) and (TagName = 'FIELD') then
     field := False
-  else if resource and (TagName = 'TR') then
+  else if (resource>0) and (TagName = 'TR') then
   begin
     tr := False;
     if assigned(FGetDataRow) then
       FGetDataRow(self);
   end
-  else if resource and (TagName = 'TD') then
+  else if (resource>0) and (TagName = 'TD') then
   begin
     td := False;
   end;
@@ -413,7 +415,7 @@ begin
     Fepo := Attributes.Value('epoch');
     Fsys := Attributes.Value('system');
   end
-  else if resource and (TagName = 'FIELD') then
+  else if (resource>0) and (TagName = 'FIELD') then
   begin
     Inc(fieldnum);
     setlength(FColumns, fieldnum);
