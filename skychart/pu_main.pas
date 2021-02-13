@@ -11958,16 +11958,34 @@ end;
 
 procedure Tf_main.UpdateAstExt;
 var
-  fn: string;
+  fn,dt1,dt2: string;
+  f: textfile;
 begin
-    fn :=slash(tempdir)+'F-D_FULL.TXT';
-    if QuickDownload(URL_Asteroid_Lightcurve_Database, fn, False) then begin
-      cdcdb.LoadAstExt(fn);
-    end
-    else begin
-      ShowMessage('Cannot update the Asteroid light curve file now, please check your Internet connection');
-      exit;
+try
+  fn :=slash(tempdir)+'F-D_FULL.DATE';
+  if FileExists(fn) then begin
+    AssignFile(f,fn);
+    reset(f);
+    readln(f,dt1);
+    closefile(f);
+  end
+  else begin
+    dt1:='0000-00-00';
+  end;
+  if QuickDownload(URL_Asteroid_Lightcurve_Date, fn, False) then begin
+    AssignFile(f,fn);
+    reset(f);
+    readln(f,dt2);
+    closefile(f);
+    if dt1<>dt2 then begin
+      fn :=slash(tempdir)+'F-D_FULL.TXT';
+      if QuickDownload(URL_Asteroid_Lightcurve_Database, fn, False) then begin
+        cdcdb.LoadAstExt(fn);
+      end;
     end;
+  end;
+except
+end;
 end;
 
 procedure Tf_main.MenuUpdCometClick(Sender: TObject);
