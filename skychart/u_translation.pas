@@ -1566,6 +1566,8 @@ resourcestring
   rsMinimumDecli = 'Minimum declination';
   rsEastHourAngl = 'East hour angle';
   rsWestHourAngl = 'West hour angle';
+  rsGrids = 'Grids';
+  rsEquator = 'Equator';
 
 // also update upsi_translation
 

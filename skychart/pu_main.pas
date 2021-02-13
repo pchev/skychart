@@ -12364,13 +12364,13 @@ begin
       else if act = 'ShowMilkyWay' then
         SetMenu2(rsSetup + ' / ' + rsDisplay + ' / ' + rsLines + Ellipsis, 13)
       else if act = 'Grid' then
-        SetMenu2(rsSetup + ' / ' + rsDisplay + ' / ' + rsLines + Ellipsis, 14)
+        SetMenu2(rsSetup + ' / ' + rsDisplay + ' / ' + rsGrids + Ellipsis, 14)
       else if act = 'GridEQ' then
-        SetMenu2(rsSetup + ' / ' + rsDisplay + ' / ' + rsLines + Ellipsis, 15)
+        SetMenu2(rsSetup + ' / ' + rsDisplay + ' / ' + rsGrids + Ellipsis, 15)
       else if act = 'ShowConstellationLine' then
-        SetMenu2(rsSetup + ' / ' + rsDisplay + ' / ' + rsLines + Ellipsis, 16)
+        SetMenu2(rsSetup + ' / ' + rsDisplay + ' / ' + rsGrids + Ellipsis, 16)
       else if act = 'ShowConstellationLimit' then
-        SetMenu2(rsSetup + ' / ' + rsDisplay + ' / ' + rsLines + Ellipsis, 17)
+        SetMenu2(rsSetup + ' / ' + rsDisplay + ' / ' + rsGrids + Ellipsis, 17)
       else if act = 'ShowGalacticEquator' then
         SetMenu2(rsSetup + ' / ' + rsDisplay + ' / ' + rsLines + Ellipsis, 18)
       else if act = 'ShowEcliptic' then
@@ -12458,7 +12458,7 @@ begin
     0: SetupChartPage(3);
     1: SetupCatalogPage(0);
     2: SetupCatalogPage(1);
-    3: SetupDisplayPage(4);
+    3: SetupDisplayPage(5);
     4: SetupPicturesPage(0);
     5: SetupCatalogPage(3);
     6: SetupCatalogPage(4);
@@ -12467,17 +12467,17 @@ begin
     9: SetupSolsysPage(1);
     10: SetupSolsysPage(3);
     11: SetupSolsysPage(2);
-    12: SetupDisplayPage(4);
-    13: SetupDisplayPage(4);
+    12: SetupDisplayPage(5);
+    13: SetupDisplayPage(5);
     14: SetupDisplayPage(4);
     15: SetupDisplayPage(4);
     16: SetupDisplayPage(4);
     17: SetupDisplayPage(4);
-    18: SetupDisplayPage(4);
-    19: SetupDisplayPage(4);
+    18: SetupDisplayPage(5);
+    19: SetupDisplayPage(5);
     20: SetupChartPage(4);
-    21: SetupDisplayPage(8);
-    22: SetupDisplayPage(5);
+    21: SetupDisplayPage(9);
+    22: SetupDisplayPage(6);
     23: ResetAllLabels1Click(Sender);
     24: SetupObservatoryPage(1);
     25: SetupDisplayPage(3);

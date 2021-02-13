@@ -192,11 +192,12 @@ begin
   TreeView1.items[i].Text :=  '2- ' + rsDisplayColou;  inc(i);
   TreeView1.items[i].Text :=  '3- ' + rsDeepSkyObjec;  inc(i);
   TreeView1.items[i].Text :=  '4- ' + rsSkyBackgroun;  inc(i);
-  TreeView1.items[i].Text :=  '5- ' + rsLines;  inc(i);
-  TreeView1.items[i].Text :=  '6- ' + rsLabels;  inc(i);
-  TreeView1.items[i].Text :=  '7- ' + rsFonts;  inc(i);
-  TreeView1.items[i].Text :=  '8- ' + rsFinderCircle;  inc(i);
-  TreeView1.items[i].Text :=  '9- ' + rsFinderRectan;  inc(i);
+  TreeView1.items[i].Text :=  '5- ' + rsGrids;  inc(i);
+  TreeView1.items[i].Text :=  '6- ' + rsLines;  inc(i);
+  TreeView1.items[i].Text :=  '7- ' + rsLabels;  inc(i);
+  TreeView1.items[i].Text :=  '8- ' + rsFonts;  inc(i);
+  TreeView1.items[i].Text :=  '9- ' + rsFinderCircle;  inc(i);
+  TreeView1.items[i].Text :=  '10- ' + rsFinderRectan;  inc(i);
   TreeView1.items[i].Text :='8- ' + rsPictures;  inc(i);
   TreeView1.items[i].Text :=  '1- ' + rsObject;  inc(i);
   TreeView1.items[i].Text :=  '2- ' + rsBackground;  inc(i);

@@ -48,10 +48,15 @@ type
     Button9: TButton;
     CheckBox1: TCheckBox;
     DSLsurface: TCheckBox;
+    GroupBox10: TGroupBox;
+    GroupBox11: TGroupBox;
+    GroupBox12: TGroupBox;
     Label16: TLabel;
+    PageGrid: TTabSheet;
+    Panel1: TPanel;
+    Panel8: TPanel;
     Transparency: TLabel;
     SurfaceBlure: TCheckBox;
-    GroupBox9: TGroupBox;
     LineWidthConstB: TSpinEdit;
     LineWidthConstL: TSpinEdit;
     LineWidthEcliptic: TSpinEdit;
@@ -183,15 +188,15 @@ type
     StarSizeBar1: TTrackBar;
     ThemeList: TComboBox;
     MainPanel: TPanel;
-    Page1: TTabSheet;
-    Page2: TTabSheet;
-    Page3: TTabSheet;
-    Page4: TTabSheet;
-    Page5: TTabSheet;
-    Page6: TTabSheet;
-    Page7: TTabSheet;
-    Page8: TTabSheet;
-    Page9: TTabSheet;
+    PageDisplay: TTabSheet;
+    PageColour: TTabSheet;
+    PageDSOColour: TTabSheet;
+    PageSkyColour: TTabSheet;
+    PageLines: TTabSheet;
+    PageLabel: TTabSheet;
+    PageFont: TTabSheet;
+    PageCircle: TTabSheet;
+    PageRectangle: TTabSheet;
     stardisplay: TRadioGroup;
     nebuladisplay: TRadioGroup;
     Label256: TLabel;
@@ -447,7 +452,7 @@ type
     procedure lstDSOCSchemeChange(Sender: TObject);
     procedure OnlyMeridianClick(Sender: TObject);
     procedure OptLabelsClick(Sender: TObject);
-    procedure Page3Show(Sender: TObject);
+    procedure PageDSOColourShow(Sender: TObject);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: boolean);
     procedure GroupNightColorClick(Sender: TObject);
     procedure RectangleGridColRowInserted(Sender: TObject; IsColumn: boolean;
@@ -588,7 +593,7 @@ implementation
 procedure Tf_config_display.SetLang;
 begin
   Caption := rsDisplay;
-  Page1.Caption := rsDisplay;
+  PageDisplay.Caption := rsDisplay;
   stardisplay.Caption := rsStarDisplay;
   stardisplay.Items[0] := rsLineMode;
   stardisplay.Items[1] := rsPhotographic2;
@@ -612,7 +617,7 @@ begin
   label9.Caption := rsStarsBitmapF;
   Button7.Caption := rsDefault;
 
-  Page2.Caption := rsColor;
+  PageColour.Caption := rsColor;
   Label189.Caption := rsStarColourBV;
   Label193.Caption := rsCoordGrid;
   Label194.Caption := rsEqGrid;
@@ -634,7 +639,7 @@ begin
   GroupBox6.Caption := rsTheme;
   GroupNightColor.Caption := rsNightVisionC;
 
-  Page3.Caption := rsDeepSkyColou;
+  PageDSOColour.Caption := rsDeepSkyColou;
   lblDSOCScheme.Caption := rsUseAPresetCo;
   gbDSOCOverrides.Caption := rsChooseColour;
   lblAst.Caption := rsAsterism;
@@ -667,7 +672,7 @@ begin
   lstDSOCScheme.items[2] := rsPrintedChart;
   lstDSOCScheme.items[3] := rsGreen;
 
-  Page4.Caption := rsSkyColour;
+  PageSkyColour.Caption := rsSkyColour;
   skycolorbox.Caption := rsSkyColour;
   skycolorbox.items[0] := rsFixedBlack;
   skycolorbox.items[1] := rsAutomatic;
@@ -677,7 +682,11 @@ begin
   Label5.Caption := rsFixedSkyColo;
   Button3.Caption := rsDefaultColor;
 
-  Page5.Caption := rsLines;
+  PageGrid.Caption := rsGrids;
+  PageLines.Caption := rsLines;
+  GroupBox10.Caption:=rsCoordinatesG;
+  GroupBox11.Caption:=rsNebulaeOutli;
+  GroupBox12.Caption:=rsEquator;
   EqGrid.Caption := rsAddEquatoria;
   CGrid.Caption := rsShowCoordina;
   OnlyMeridian.Caption := rsShowOnlyMeri;
@@ -731,7 +740,7 @@ begin
   GalEqStyle.items[3] := rsDashDot1;
   GalEqStyle.items[4] := rsDashDotDot1;
 
-  Page6.Caption := rsLabels;
+  PageLabel.Caption := rsLabels;
   DrawAllStarLabel.Caption := rsDisplayLabel;
   LabelLine.Caption := rsShowLineFrom;
   OptLabels.Caption := rsAutomaticall2;
@@ -765,7 +774,7 @@ begin
   CheckBox9.Caption := rsOrientToTheP;
   Button9.Caption := rsDefault;
 
-  Page7.Caption := rsFonts;
+  PageFont.Caption := rsFonts;
   Label121.Caption := rsCoordinatesG;
   Label122.Caption := rsObject;
   Label123.Caption := rsLabels;
@@ -778,7 +787,7 @@ begin
   Label235.Caption := rsGreekSymbol;
   Button1.Caption := rsDefault;
 
-  Page8.Caption := rsFinderCircle;
+  PageCircle.Caption := rsFinderCircle;
   Label307.Caption := rsFinderCircle;
   ButtonComputeCircle.Caption := rsCompute;
   CenterMark1.Caption := rsMarkTheChart;
@@ -786,7 +795,7 @@ begin
   CheckBox1.Caption := rsShowLabels;
   CheckBox3.Caption := rsShowMarkInde;
 
-  Page9.Caption := rsFinderRectan;
+  PageRectangle.Caption := rsFinderRectan;
   Label308.Caption := rsFinderRectan;
   ButtonComputeRectangle.Caption := rsCompute;
   CenterMark2.Caption := rsMarkTheChart;
@@ -2582,7 +2591,7 @@ begin
   cplot.Color[35] := shpNE.Brush.Color;
 end;
 
-procedure Tf_config_display.Page3Show(Sender: TObject);
+procedure Tf_config_display.PageDSOColourShow(Sender: TObject);
 begin
   if cplot.nebplot = 0 then
   begin
