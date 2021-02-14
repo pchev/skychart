@@ -2770,7 +2770,7 @@ begin
   ColorDialog1.Color := csc.DSLcolor;
   if ColorDialog1.Execute then
   begin
-    csc.DSLforcecolor := (ColorDialog1.Color <> 0);
+    csc.DSLforcecolor := (ColorDialog1.Color <> clBlack)and(ColorDialog1.Color <> clWhite);
     csc.DSLcolor := ColorDialog1.Color;
     if csc.DSLforcecolor then
       ShowLineShape.Brush.Color := csc.DSLcolor

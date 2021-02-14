@@ -2293,7 +2293,7 @@ begin
       end;
       if sbmpUsed then begin
         if cfgsc.SurfaceBlure then
-           BGRAReplace(sbmp,sbmp.FilterBlurRadial(10,rbFast));
+           BGRAReplace(sbmp,sbmp.FilterBlurRadial(5*min(1,10*deg2rad/cfgsc.fov),rbFast));
         Fplot.cbmp.PutImage(0, 0, sbmp, dmLinearBlend);
       end;
       sbmp.Free;
@@ -2353,7 +2353,7 @@ begin
       end;
       if sbmpUsed then begin
         if cfgsc.SurfaceBlure then
-           BGRAReplace(sbmp,sbmp.FilterBlurRadial(10,rbFast));
+           BGRAReplace(sbmp,sbmp.FilterBlurRadial(5*min(1,10*deg2rad/cfgsc.fov),rbFast));
         Fplot.cbmp.PutImage(0, 0, sbmp, dmLinearBlend);
       end;
       sbmp.Free;
