@@ -1568,6 +1568,7 @@ resourcestring
   rsWestHourAngl = 'West hour angle';
   rsGrids = 'Grids';
   rsEquator = 'Equator';
+  rsBlurred = 'Blurred';
 
 // also update upsi_translation
 

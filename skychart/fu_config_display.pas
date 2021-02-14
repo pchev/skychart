@@ -694,6 +694,8 @@ begin
   ShowLines.Caption := rsShowDSOLines;
   Label10.Caption := rsEditDSOLines;
   DSLsurface.Caption := rsFillNebulae;
+  SurfaceBlure.Caption:=rsBlurred;
+  Transparency.Caption:=rsTransparency;
   ecliptic.Caption := rsShowEcliptic;
   galactic.Caption := rsShowGalactic;
   ShowEquator.Caption := rsShowCelestia;

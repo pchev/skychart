@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-13 22:24+0000\n"
+"POT-Creation-Date: 2021-02-14 10:00+0000\n"
 "PO-Revision-Date: 2016-12-11 09:06+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-13 22:32+0000\n"
+"X-Launchpad-Export-Date: 2021-02-14 10:08+0000\n"
 "X-Generator: Launchpad (build b3a93345a124168b715ec9ae0945884caa15f58f)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
@@ -586,6 +586,10 @@ msgstr "閃爍圖片"
 #: u_translation.rsbluemagnitud
 msgid "Blue magnitude"
 msgstr "藍星等"
+
+#: u_translation.rsblurred
+msgid "Blurred"
+msgstr ""
 
 #: u_translation.rsbottom
 msgid "Bottom"

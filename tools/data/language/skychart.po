@@ -6054,3 +6054,7 @@ msgstr ""
 msgid "Equator"
 msgstr ""
 
+#: u_translation:rsblurred
+msgid "Blurred"
+msgstr ""
+

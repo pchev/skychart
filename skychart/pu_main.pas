@@ -6450,7 +6450,7 @@ begin
   def_cfgsc.DSLsurface := True;
   def_cfgsc.DSLcolor := 0;
   def_cfgsc.SurfaceAlpha := 128;
-  def_cfgsc.SurfaceBlure := false;
+  def_cfgsc.SurfaceBlure := True;
   def_cfgsc.ShowImages := False;
   def_cfgsc.ShowImageList := False;
   def_cfgsc.ShowImageLabel := False;
