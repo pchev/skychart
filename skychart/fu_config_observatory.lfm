@@ -37,12 +37,12 @@ object f_config_observatory: Tf_config_observatory
         ParentFont = False
         object timezone: TGroupBox
           Left = 0
-          Height = 92
-          Top = 163
+          Height = 90
+          Top = 152
           Width = 495
           Align = alTop
           Caption = 'Time Zone'
-          ClientHeight = 72
+          ClientHeight = 70
           ClientWidth = 493
           ParentFont = False
           TabOrder = 0
@@ -88,11 +88,11 @@ object f_config_observatory: Tf_config_observatory
         end
         object Panel1: TPanel
           Left = 0
-          Height = 80
+          Height = 72
           Top = 0
           Width = 495
           Align = alTop
-          ClientHeight = 80
+          ClientHeight = 72
           ClientWidth = 495
           TabOrder = 1
           object ObsName: TEdit
@@ -179,21 +179,21 @@ object f_config_observatory: Tf_config_observatory
         end
         object Panel2: TPanel
           Left = 0
-          Height = 83
-          Top = 80
+          Height = 80
+          Top = 72
           Width = 495
           Align = alTop
-          ClientHeight = 83
+          ClientHeight = 80
           ClientWidth = 495
           TabOrder = 2
           object Latitude: TGroupBox
             Left = 1
-            Height = 81
+            Height = 78
             Top = 1
             Width = 188
             Align = alLeft
             Caption = 'Latitude'
-            ClientHeight = 61
+            ClientHeight = 58
             ClientWidth = 186
             ParentFont = False
             TabOrder = 0
@@ -276,12 +276,12 @@ object f_config_observatory: Tf_config_observatory
           end
           object Longitude: TGroupBox
             Left = 189
-            Height = 81
+            Height = 78
             Top = 1
             Width = 189
             Align = alLeft
             Caption = 'Longitude'
-            ClientHeight = 61
+            ClientHeight = 58
             ClientWidth = 187
             ParentFont = False
             TabOrder = 1
@@ -364,12 +364,12 @@ object f_config_observatory: Tf_config_observatory
           end
           object Altitude: TGroupBox
             Left = 378
-            Height = 81
+            Height = 78
             Top = 1
             Width = 116
             Align = alClient
             Caption = 'Altitude'
-            ClientHeight = 61
+            ClientHeight = 58
             ClientWidth = 114
             ParentFont = False
             TabOrder = 2
@@ -402,11 +402,11 @@ object f_config_observatory: Tf_config_observatory
         end
         object Panel3: TPanel
           Left = 0
-          Height = 293
-          Top = 255
+          Height = 306
+          Top = 242
           Width = 495
           Align = alClient
-          ClientHeight = 293
+          ClientHeight = 306
           ClientWidth = 495
           TabOrder = 3
           object Obszp: TButton
