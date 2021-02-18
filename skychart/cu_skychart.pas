@@ -790,6 +790,8 @@ const
 begin
   if VerboseMsg then
     WriteTrace('SkyChart ' + cfgsc.chartname + ': Init observatory');
+  cfgsc.tz.Longitude:=cfgsc.ObsLongitude;
+  cfgsc.TimeZone := cfgsc.tz.SecondsOffset / 3600;
   p := deg2rad * cfgsc.ObsLatitude;
   u := arctan(ratio * tan(p));
   cfgsc.ObsRoSinPhi := ratio * sin(u) + (cfgsc.ObsAltitude / H0) * sin(p);

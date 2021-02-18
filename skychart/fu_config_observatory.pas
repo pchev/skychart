@@ -541,6 +541,7 @@ begin
   if copy(buf, 1, 3) = 'UTC' then
     buf := TzUTC2GMT(buf);
   csc.ObsTZ := buf;
+  csc.tz.Longitude:=csc.ObsLongitude;
   csc.tz.TimeZoneFile := ZoneDir + StringReplace(buf, '/', PathDelim, [rfReplaceAll]);
   csc.timezone := csc.tz.SecondsOffset / 3600;
 end;

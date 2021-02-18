@@ -95,6 +95,7 @@ type
     fZoneTabCoord: TStringList;
     fZoneTabZone: TStringList;
     fZoneTabComment: TStringList;
+    fLongitude: double;
     num_transitions, num_leaps, num_types: longint;
     transitions: PInt64;
     type_idxs: pbyte;
@@ -111,6 +112,8 @@ type
     function GetTZName: string;
     procedure SetDate(Value: TDateTime);
     function GetDate: TDateTime;
+    procedure SetLongitude(Value: double);
+    function GetLongitude: double;
     procedure SetJD(Value: double);
     function GetJD: double;
     procedure SetTimeZoneFile(Value: string);
@@ -129,6 +132,7 @@ type
     procedure Assign(Source: TCdCTimeZone);
     function LoadZoneTab(fn: string): boolean;
     property TimeZoneFile: string read GetTimeZoneFile write SetTimeZoneFile;
+    property Longitude: double read GetLongitude write SetLongitude;
     property JD: double read GetJD write SetJD;
     property SecondsOffset: longint read fTZInfo.seconds;
     property ZoneName: string read GetTZName;
@@ -156,6 +160,7 @@ begin
   fZoneTabZone := TStringList.Create;
   fZoneTabComment := TStringList.Create;
   fTimeZoneFile := '';
+  fLongitude:=maxint;
   ReadTimezoneFile(GetTimezoneFile);
   GetLocalTimezone(round((now - UnixDateDelta) * 24 * 3600),true,fTZInfo,fTZInfoEx);
 end;
@@ -186,6 +191,7 @@ procedure TCdCTimeZone.Assign(Source: TCdCTimeZone);
 var
   i: integer;
 begin
+  fLongitude:=Source.fLongitude;
   TimeZoneFile := Source.TimeZoneFile;
   JD := Source.JD;
   fZoneTabCnty.Clear;
@@ -395,6 +401,9 @@ end;
 procedure TCdCTimeZone.GetLocalTimezone(timer:Int64);
 begin
   GetLocalTimezone(timer,true,fTZInfo,fTZInfoEx);
+  if (fTZInfoEx.name[fTZInfo.daylight]='LMT')and(fLongitude<maxint) then begin
+    fTZInfo.seconds:=round(3600*fLongitude/15);
+  end;
   fTimer:=timer;
 end;
 
@@ -582,9 +591,7 @@ var
   end;
 
 begin
-  if fn = '' then
-    fn := 'localtime';
-  if FileExists(fn) and ((FileGetAttr(fn) and faDirectory) = 0) then
+  if (fn<>'') and FileExists(fn) and ((FileGetAttr(fn) and faDirectory) = 0) then
   begin
     Filemode := 0;
     system.Assign(f, fn);
@@ -615,6 +622,19 @@ end;
 function TCdCTimeZone.GetDate: TDateTime;
 begin
   Result := (fTimer / SecsPerDay) + UnixDateDelta;
+end;
+
+procedure TCdCTimeZone.SetLongitude(Value: double);
+begin
+  fLongitude:=-value;
+  if fTZInfoEx.name[fTZInfo.daylight]='LMT' then begin
+    fTZInfo.seconds:=round(3600*fLongitude/15);
+  end;
+end;
+
+function TCdCTimeZone.GetLongitude: double;
+begin
+  result:=-fLongitude;
 end;
 
 procedure TCdCTimeZone.SetJD(Value: double);

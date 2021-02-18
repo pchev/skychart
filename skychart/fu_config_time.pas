@@ -409,6 +409,7 @@ begin
     if csc.SPKBodies[i]=csc.SimBody then j:=i;
   end;
   SPKbox.ItemIndex:=j;
+  csc.tz.Longitude:=csc.ObsLongitude;
   // fill time zone
   TZComboBox.Clear;
   TZComboBox.ItemIndex := -1;

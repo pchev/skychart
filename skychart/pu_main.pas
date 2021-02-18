@@ -1644,6 +1644,7 @@ procedure Tf_main.FirstSetup;
 begin
   ShowReleaseNotes(True);
   SetupObservatoryPage(0, -1);
+  def_cfgsc.tz.Longitude:=def_cfgsc.ObsLongitude;
   def_cfgsc.tz.TimeZoneFile :=
     ZoneDir + StringReplace(def_cfgsc.ObsTZ, '/', PathDelim, [rfReplaceAll]);
   if def_cfgsc.tz.TimeZoneFile = '' then
@@ -7595,6 +7596,7 @@ begin
     try
       csc.tz.TimeZoneFile := ZoneDir + StringReplace(csc.ObsTZ,
         '/', PathDelim, [rfReplaceAll]);
+      csc.tz.Longitude:=csc.ObsLongitude;
       csc.tz.JD := jd(csc.CurYear, csc.CurMonth, csc.CurDay, csc.CurTime);
       csc.TimeZone := csc.tz.SecondsOffset / 3600;
       if not csc.CoordExpertMode then
