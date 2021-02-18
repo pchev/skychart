@@ -455,7 +455,7 @@ var
   h, err: double;
   s: string;
 begin
-  djd(TruncDecimal(JDEdit.Value,5), y, m, d, h);
+  djd(TruncDecimal(JDEdit.Value,6), y, m, d, h);
   UTlabel.Caption := date2str(y, m, d) + blank + timtostr(h) + blank + rsUT;
   h := csc.tz.SecondsOffset / 3600;
   if h = 0 then
@@ -659,7 +659,7 @@ end;
 
 procedure Tf_config_time.BitBtn1Click(Sender: TObject);
 begin
-  JDCalendarDialog1.JD := TruncDecimal(JDEdit.Value,5);
+  JDCalendarDialog1.JD := TruncDecimal(JDEdit.Value,6);
   if JDCalendarDialog1.Execute then
   begin
     JDEdit.Value := JDCalendarDialog1.JD + csc.CurTime / 24 - csc.timezone / 24;
@@ -677,7 +677,7 @@ begin
   try
     LockChange := True;
     LockJD := True;
-    newjd := TruncDecimal(JDEdit.Value,5);
+    newjd := TruncDecimal(JDEdit.Value,6);
     csc.tz.JD := newjd;
     csc.TimeZone := csc.tz.SecondsOffset / 3600;
     Djd(newjd + csc.timezone / 24, csc.curyear, csc.curmonth, csc.curday, csc.CurTime);
@@ -1028,17 +1028,25 @@ end;
 
 procedure Tf_config_time.Button5Click(Sender: TObject);
 var
-  y, m, d, h, n, s, ms: word;
+  y, m, d : integer;
+  h, n, s, ms: word;
+  hh:double;
 begin
   csc.tz.JD := Jd(csc.curyear, csc.curmonth, csc.curday, 0);
-  if (csc.curyear > cu_tz.minYear) and (csc.curyear < cu_tz.maxYear) then
+  djd(csc.tz.JD,y,m,d,hh);
+  if y > 0 then
   begin
-    decodedate(csc.tz.Date, y, m, d);
     d_yearEdit.Value := y;
-    d_month.Position := m;
-    d_day.Position := d;
+    adbc.ItemIndex := 0;
+  end
+  else
+  begin
+    d_yearEdit.Value := 1 - y;
+    adbc.ItemIndex := 1;
   end;
-  decodeTime(csc.tz.Date, h, n, s, ms);
+  d_month.Position := m;
+  d_day.Position := d;
+  decodeTime(hh/24, h, n, s, ms);
   t_hour.Position := h;
   t_min.Position := n;
   t_sec.Position := s;
@@ -1048,7 +1056,9 @@ end;
 
 procedure Tf_config_time.Button6Click(Sender: TObject);
 var
-  y, m, d, h, n, s, ms: word;
+  y, m, d : integer;
+  h, n, s, ms: word;
+  hh:double;
   day: integer;
 begin
   LockChange := True;
@@ -1058,14 +1068,20 @@ begin
     else
       day := csc.curday + 1;
     csc.tz.JD := Jd(csc.curyear, csc.curmonth, day, csc.timezone);
-    if (csc.curyear > cu_tz.minYear) and (csc.curyear < cu_tz.maxYear) then
+    djd(csc.tz.JD,y,m,d,hh);
+    if y > 0 then
     begin
-      decodedate(csc.tz.Date, y, m, d);
       d_yearEdit.Value := y;
-      d_month.Position := m;
-      d_day.Position := d;
+      adbc.ItemIndex := 0;
+    end
+    else
+    begin
+      d_yearEdit.Value := 1 - y;
+      adbc.ItemIndex := 1;
     end;
-    decodeTime(csc.tz.Date, h, n, s, ms);
+    d_month.Position := m;
+    d_day.Position := d;
+    decodeTime(hh/24, h, n, s, ms);
     t_hour.Position := h;
     t_min.Position := n;
     t_sec.Position := s;

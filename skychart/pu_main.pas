@@ -1472,8 +1472,6 @@ begin
     end;
     if VerboseMsg then
       WriteTrace('Timezone');
-    def_cfgsc.tz.GregorianStart := GregorianStart;
-    def_cfgsc.tz.GregorianStartJD := GregorianStartJD;
     def_cfgsc.tz.TimeZoneFile :=
       ZoneDir + StringReplace(def_cfgsc.ObsTZ, '/', PathDelim, [rfReplaceAll]);
     if def_cfgsc.tz.TimeZoneFile = '' then
@@ -7595,8 +7593,6 @@ begin
       end;
     end;
     try
-      csc.tz.GregorianStart := GregorianStart;
-      csc.tz.GregorianStartJD := GregorianStartJD;
       csc.tz.TimeZoneFile := ZoneDir + StringReplace(csc.ObsTZ,
         '/', PathDelim, [rfReplaceAll]);
       csc.tz.JD := jd(csc.CurYear, csc.CurMonth, csc.CurDay, csc.CurTime);
