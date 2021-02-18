@@ -638,6 +638,7 @@ begin
   begin
     fTimeZoneFile := Value;
     ReadTimezoneFile(fTimezoneFile);
+    fTZInfo.validsince:=low(int64);
     GetLocalTimezone(fTimer);
   end;
 end;
