@@ -5,9 +5,11 @@ To have the best possible precision of the position it is now possible to calcul
 To do this, you have to install the corresponding data files from:
 https://sourceforge.net/projects/skychart/files/2-catalogs/SpiceKernel/
 The skychart-spice-base file is required and you can add skychart-spice-ext for more satellites. The list of satellites in each file can be found on the download page.
-On Linux you also need to install libcalceph before you can use this function: https://github.com/pchev/libcalceph/releases/tag/v1.0.0
+On Linux you also need to install libcalceph before you can use this function: https://github.com/pchev/libcalceph/releases/tag/v3.4.7
 
 New functions:
+- For date older than 1840-1950, depending on the country, when the LMT timezone is in use, the time offset is now for the longitude of the observatory.
+- Can use SPICE kernel for NEO or other solar system objects. On Linux this require installation of libcalceph, see above.
 - Use binary file instead of database for asteroid element, improve performance
 - Show more asteroid information from the Asteroid lightcurve database
 - Display object information directly from the Search window

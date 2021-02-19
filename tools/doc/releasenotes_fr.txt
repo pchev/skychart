@@ -5,9 +5,11 @@ Pour avoir la meilleur précision possible de la position il est maintenant poss
 Il faut pour cela installer les fichiers de données correspondant depuis:
 https://sourceforge.net/projects/skychart/files/2-catalogs/SpiceKernel/
 Le fichier skychart-spice-base est requis et vous pouvez ajouter skychart-spice-ext pour plus de satellites. La liste des satellites dans chaque fichier figure sur la page de téléchargement.
-Avec Linux vous devez installer libcalceph avant d'utiliser cette fonction: https://github.com/pchev/libcalceph/releases/tag/v1.0.0
+Avec Linux vous devez installer libcalceph avant d'utiliser cette fonction: https://github.com/pchev/libcalceph/releases/tag/v3.4.7
 
 Nouvelles fonctions:
+- Pour les dates antérieures à 1840-1950, selon le pays, lorsque le fuseau horaire LMT est utilisé, le décalage horaire correspond désormais à la longitude de l'observatoire.
+- Peut utiliser un kernel SPICE pour les NEO ou d'autres objets du système solaire. Sous Linux, cela nécessite l'installation de libcalceph, voir ci-dessus. 
 - Utilise un fichier binaire au lieu de la base de données pour les astéroïde, amélioration des performances 
 - Affiche plus d'informations sur les astéroïdes depuis l'Asteroid lightcurve database
 - Afficher les informations sur l'objet directement depuis la fenêtre de recherche
