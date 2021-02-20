@@ -5245,7 +5245,6 @@ begin
       sc.cfgsc.CurTime := h + n / 60 + s / 3600
     else
       Result := msgFailed + ' Time out of range';
-    sc.cfgsc.tz.Longitude:=sc.cfgsc.ObsLongitude;
     sc.cfgsc.tz.JD := jd(sc.cfgsc.CurYear, sc.cfgsc.CurMonth, sc.cfgsc.CurDay, sc.cfgsc.CurTime);
     sc.cfgsc.TimeZone := sc.cfgsc.tz.SecondsOffset / 3600;
     if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
@@ -5804,7 +5803,6 @@ begin
     if FileExists(buf) then
     begin
       sc.cfgsc.ObsTZ := tz;
-      sc.cfgsc.tz.Longitude:=sc.cfgsc.ObsLongitude;
       sc.cfgsc.tz.TimeZoneFile := buf;
       sc.cfgsc.TimeZone := sc.cfgsc.tz.SecondsOffset / 3600;
       Result := msgOK;
@@ -6801,7 +6799,6 @@ var
 begin
   if (njd > maxjd) or (njd < minjd) then
     exit;
-  sc.cfgsc.tz.Longitude:=sc.cfgsc.ObsLongitude;
   sc.cfgsc.tz.JD := njd;
   sc.cfgsc.TimeZone := sc.cfgsc.tz.SecondsOffset / 3600;
   djd(njd + sc.cfgsc.TimeZone / 24, y, m, d, h);  // local time

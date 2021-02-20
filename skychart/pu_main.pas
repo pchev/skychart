@@ -7526,6 +7526,7 @@ begin
         csc.ObsCountry := ReadString(section, 'ObsCountry', csc.ObsCountry);
         csc.ObsTZ := ReadString(section, 'ObsTZ', csc.ObsTZ);
         csc.countrytz := ReadBool(section, 'countrytz', csc.countrytz);
+        csc.tz.Longitude:=csc.ObsLongitude;
       except
         ShowError('Error reading ' + filename + ' observatory');
       end;
@@ -7596,7 +7597,6 @@ begin
     try
       csc.tz.TimeZoneFile := ZoneDir + StringReplace(csc.ObsTZ,
         '/', PathDelim, [rfReplaceAll]);
-      csc.tz.Longitude:=csc.ObsLongitude;
       csc.tz.JD := jd(csc.CurYear, csc.CurMonth, csc.CurDay, csc.CurTime);
       csc.TimeZone := csc.tz.SecondsOffset / 3600;
       if not csc.CoordExpertMode then

@@ -187,6 +187,7 @@ begin
       f_clock.cfgsc.ObsCountry := ReadString(section, 'ObsCountry', '');
       f_clock.cfgsc.ObsTZ := ReadString(section, 'ObsTZ', 'Etc/GMT');
       f_clock.cfgsc.countrytz := ReadBool(section, 'countrytz', False);
+      f_clock.cfgsc.tz.Longitude:=f_clock.cfgsc.ObsLongitude;
       section := 'main';
       f_clock.Font.Color := ReadInteger(section, 'ClockColor', f_clock.Font.Color);
       db := ReadString(section, 'db', slash(privatedir) + StringReplace(
@@ -206,6 +207,7 @@ begin
   f_clock.cfgsc.tz.LoadZoneTab(ZoneDir + 'zone.tab');
   f_clock.cfgsc.tz.TimeZoneFile :=
     ZoneDir + StringReplace(f_clock.cfgsc.ObsTZ, '/', PathDelim, [rfReplaceAll]);
+  f_clock.cfgsc.CalGraphHeight:=200;
   ConnectDB;
   LoadIcon;
   UpdateIcon(nil);

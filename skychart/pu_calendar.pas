@@ -348,7 +348,6 @@ procedure Tf_calendar.FormShow(Sender: TObject);
 var
   i: integer;
 begin
-  config.tz.Longitude:=config.ObsLongitude;
   // apply graph setting (config is not available in formcreate)
   dgPlanet.DefaultRowHeight := config.CalGraphHeight;
   for i := low(PlanetGraphs) to high(PlanetGraphs) do

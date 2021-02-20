@@ -90,6 +90,7 @@ type
     fTZInfo: TTZInfo;
     fTZInfoEx: TTZInfoEx;
     fTimer: Int64;
+    fTimeZoneLMT: boolean;
     fTimeZoneFile: string;
     fZoneTabCnty: TStringList;
     fZoneTabCoord: TStringList;
@@ -126,6 +127,7 @@ type
     function UTC2Local(t: double): double; // jd
     function Local2UTC(t: TDateTime): TDateTime;
     function Local2UTC(t: double): double; // jd
+    function GetSecondOffset: longint;
   public
     constructor Create;
     destructor Destroy; override;
@@ -134,7 +136,7 @@ type
     property TimeZoneFile: string read GetTimeZoneFile write SetTimeZoneFile;
     property Longitude: double read GetLongitude write SetLongitude;
     property JD: double read GetJD write SetJD;
-    property SecondsOffset: longint read fTZInfo.seconds;
+    property SecondsOffset: longint read GetSecondOffset;
     property ZoneName: string read GetTZName;
     property Daylight: boolean read fTZInfo.daylight;
     property ZoneTabCnty: TStringList read fZoneTabCnty;
@@ -161,6 +163,7 @@ begin
   fZoneTabComment := TStringList.Create;
   fTimeZoneFile := '';
   fLongitude:=maxint;
+  fTimeZoneLMT:=false;
   ReadTimezoneFile(GetTimezoneFile);
   GetLocalTimezone(round((now - UnixDateDelta) * 24 * 3600),true,fTZInfo,fTZInfoEx);
 end;
@@ -398,15 +401,6 @@ begin
   UnlockTZInfo;
 end;
 
-procedure TCdCTimeZone.GetLocalTimezone(timer:Int64);
-begin
-  GetLocalTimezone(timer,true,fTZInfo,fTZInfoEx);
-  if (fTZInfoEx.name[fTZInfo.daylight]='LMT')and(fLongitude<maxint) then begin
-    fTZInfo.seconds:=round(3600*fLongitude/15);
-  end;
-  fTimer:=timer;
-end;
-
 function TCdCTimeZone.ReadTimezoneFile(fn: shortstring):boolean;
 
 function decode(const l:longint):longint;
@@ -605,6 +599,32 @@ begin
   end;
 end;
 
+procedure TCdCTimeZone.SetLongitude(Value: double);
+begin
+  fLongitude:=-value;
+  fTimeZoneLMT:=(fTZInfoEx.name[fTZInfo.daylight]='LMT')and(fLongitude<maxint);
+end;
+
+function TCdCTimeZone.GetLongitude: double;
+begin
+  result:=-fLongitude;
+end;
+
+procedure TCdCTimeZone.GetLocalTimezone(timer:Int64);
+begin
+  GetLocalTimezone(timer,true,fTZInfo,fTZInfoEx);
+  fTimeZoneLMT:=(fTZInfoEx.name[fTZInfo.daylight]='LMT')and(fLongitude<maxint);
+  fTimer:=timer;
+end;
+
+function TCdCTimeZone.GetSecondOffset: longint;
+begin
+  if fTimeZoneLMT then
+    result:=round(3600*fLongitude/15)
+  else
+    result:=fTZInfo.seconds;
+end;
+
 function TCdCTimeZone.GetTZName: string;
 begin
   Result := string(fTZInfoEx.name[fTZInfo.daylight]);
@@ -622,19 +642,6 @@ end;
 function TCdCTimeZone.GetDate: TDateTime;
 begin
   Result := (fTimer / SecsPerDay) + UnixDateDelta;
-end;
-
-procedure TCdCTimeZone.SetLongitude(Value: double);
-begin
-  fLongitude:=-value;
-  if fTZInfoEx.name[fTZInfo.daylight]='LMT' then begin
-    fTZInfo.seconds:=round(3600*fLongitude/15);
-  end;
-end;
-
-function TCdCTimeZone.GetLongitude: double;
-begin
-  result:=-fLongitude;
 end;
 
 procedure TCdCTimeZone.SetJD(Value: double);
