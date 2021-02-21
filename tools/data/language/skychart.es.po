@@ -5,14 +5,14 @@ msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-14 10:00+0000\n"
-"PO-Revision-Date: 2021-01-31 12:42+0000\n"
+"PO-Revision-Date: 2021-02-15 11:58+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-14 10:08+0000\n"
-"X-Generator: Launchpad (build b3a93345a124168b715ec9ae0945884caa15f58f)\n"
+"X-Launchpad-Export-Date: 2021-02-21 17:08+0000\n"
+"X-Generator: Launchpad (build bbfee60eef9f7fd8d30b24b3f53e75656e4d5fb0)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -289,7 +289,7 @@ msgstr "Guardar siempre sin preguntar."
 
 #: u_translation.rsamaximumoffi
 msgid "A maximum of %s files can be selected"
-msgstr ""
+msgstr "Se puden seleccionar un máximo de %s archivos"
 
 #: u_translation.rsamplitudemax
 msgid "Amplitude max."
@@ -333,7 +333,7 @@ msgstr "Añadir a un catálogo existente "
 
 #: u_translation.rsappendtocurr
 msgid "Append to current file"
-msgstr ""
+msgstr "Añadir al archivo actual"
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -589,7 +589,7 @@ msgstr "Magnitud azul"
 
 #: u_translation.rsblurred
 msgid "Blurred"
-msgstr ""
+msgstr "Borroso"
 
 #: u_translation.rsbottom
 msgid "Bottom"
@@ -1441,7 +1441,7 @@ msgstr "Eliminar"
 
 #: u_translation.rsdeleteallexp
 msgid "Delete all expired ephemeris"
-msgstr ""
+msgstr "Borrar todas las efemérides expiradas"
 
 #: u_translation.rsdeleteallthe
 msgid "Delete %s, all the child nodes and the scripts?"
@@ -1701,7 +1701,7 @@ msgstr "Descargar los elementos orbitales más recientes"
 
 #: u_translation.rsdownloadsola
 msgid "Download Solar System object SPICE kernel from JPL Horizon"
-msgstr ""
+msgstr "Descargar núcleo SPICE para objeto del Sistema Solar de la JPL Horizon"
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
@@ -1797,7 +1797,7 @@ msgstr "Este"
 
 #: u_translation.rseasthourangl
 msgid "East hour angle"
-msgstr ""
+msgstr "Ángulo horario este"
 
 #: u_translation.rseastside
 msgid "East side"
@@ -1865,7 +1865,7 @@ msgstr "Elong."
 
 #: u_translation.rsemail
 msgid "email"
-msgstr ""
+msgstr "correo electrónico"
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
@@ -1917,7 +1917,7 @@ msgstr "Cuad. Ecuat."
 
 #: u_translation.rsequator
 msgid "Equator"
-msgstr ""
+msgstr "Ecuador"
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
@@ -2377,7 +2377,7 @@ msgstr "Fecha de comienzo del calendario Gregoriano"
 
 #: u_translation.rsgrids
 msgid "Grids"
-msgstr ""
+msgstr "Cuadrículas"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -2877,7 +2877,7 @@ msgstr "Lineal"
 
 #: u_translation.rslineforteles
 msgid "Line for telescope pointing limit"
-msgstr ""
+msgstr "Límite de la línea de apuntado del telescopio"
 
 #: u_translation.rslinemode
 msgid "Line mode"
@@ -3145,7 +3145,7 @@ msgstr "Maximizar"
 
 #: u_translation.rsmaximumdecli
 msgid "Maximum declination"
-msgstr ""
+msgstr "Declinación máxima"
 
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
@@ -3249,7 +3249,7 @@ msgstr "Altitud mínima"
 
 #: u_translation.rsminimumdecli
 msgid "Minimum declination"
-msgstr ""
+msgstr "Declinación mínima"
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -3553,7 +3553,7 @@ msgstr "Número de copias"
 
 #: u_translation.rsnumberofdays
 msgid "Number of days"
-msgstr ""
+msgstr "Número de días"
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
@@ -4341,7 +4341,7 @@ msgstr "Actualizar"
 
 #: u_translation.rsrefreshallep
 msgid "Refresh all ephemeris"
-msgstr ""
+msgstr "Refrescar todas las efemérides"
 
 #: u_translation.rsrefreshimage
 msgid "Refresh image every"
@@ -5129,7 +5129,7 @@ msgstr "Sistema Solar"
 
 #: u_translation.rssolarsystemb
 msgid "Solar system body"
-msgstr ""
+msgstr "Cuerpo del Sistema Solar"
 
 #: u_translation.rssolarsystemi
 msgid "Solar System Information"
@@ -5185,7 +5185,7 @@ msgstr "Velocidad"
 
 #: u_translation.rsspiceephemer
 msgid "SPICE ephemeris"
-msgstr ""
+msgstr "Efemérides SPICE"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -5277,7 +5277,7 @@ msgstr "Retroceso animación"
 
 #: u_translation.rsstartdate
 msgid "Start date"
-msgstr ""
+msgstr "Fecha de inicio"
 
 #: u_translation.rsstartforward
 msgid "Animation forward"
@@ -5485,7 +5485,7 @@ msgstr "Este controlador directo se conserva por compatibilidad, podría funcion
 
 #: u_translation.rsthisfilecont
 msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
-msgstr ""
+msgstr "Este archivo contiene %s elementos. %s Probablemente sea un archivo base que quiere cargar sin la opción \"Añadir\".%slt añadir todos estos datos al fichero actual%s  puede afectar al rendimiento. ¿Quiere continuar de todas formas?"
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -5581,7 +5581,7 @@ msgstr "Totalidad"
 
 #: u_translation.rstotalasteroi
 msgid "Total asteroid count"
-msgstr ""
+msgstr "Número total de asteroides"
 
 #: u_translation.rstotalradius
 msgid "Total radius"
@@ -5997,7 +5997,7 @@ msgstr "Oeste"
 
 #: u_translation.rswesthourangl
 msgid "West hour angle"
-msgstr ""
+msgstr "Ángulo horario oeste"
 
 #: u_translation.rswestside
 msgid "West side"
@@ -6069,7 +6069,7 @@ msgstr "Acercar"
 
 #: u_translation.rszoommoretovi
 msgid "Object too faint to show on the chart"
-msgstr ""
+msgstr "Objeto demasiado débil para mostrar en la carta"
 
 #: u_translation.rszoomout
 msgid "Zoom out"

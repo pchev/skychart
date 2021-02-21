@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-14 10:00+0000\n"
-"PO-Revision-Date: 2021-02-13 11:09+0000\n"
+"PO-Revision-Date: 2021-02-19 17:16+0000\n"
 "Last-Translator: Sergey Tarantsov <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-14 10:08+0000\n"
-"X-Generator: Launchpad (build b3a93345a124168b715ec9ae0945884caa15f58f)\n"
+"X-Launchpad-Export-Date: 2021-02-21 17:08+0000\n"
+"X-Generator: Launchpad (build bbfee60eef9f7fd8d30b24b3f53e75656e4d5fb0)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -291,11 +291,11 @@ msgstr "Можно выбрать максимум %s файлов"
 
 #: u_translation.rsamplitudemax
 msgid "Amplitude max."
-msgstr ""
+msgstr "Амплитуда макс."
 
 #: u_translation.rsamplitudemin
 msgid "Amplitude min."
-msgstr ""
+msgstr "Амплитуда мин."
 
 #: u_translation.rsanewversiono
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
@@ -587,7 +587,7 @@ msgstr "B- величина"
 
 #: u_translation.rsblurred
 msgid "Blurred"
-msgstr ""
+msgstr "Размытие"
 
 #: u_translation.rsbottom
 msgid "Bottom"
@@ -1795,7 +1795,7 @@ msgstr "Восток"
 
 #: u_translation.rseasthourangl
 msgid "East hour angle"
-msgstr ""
+msgstr "Часовой угол к востоку"
 
 #: u_translation.rseastside
 msgid "East side"
@@ -1915,7 +1915,7 @@ msgstr "Экв. сетка"
 
 #: u_translation.rsequator
 msgid "Equator"
-msgstr ""
+msgstr "Экватор"
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
@@ -2115,7 +2115,7 @@ msgstr "Заливка"
 
 #: u_translation.rsfillmilkyway
 msgid "Fill Milky Way"
-msgstr "Залить Млечный путь"
+msgstr "Заливка"
 
 #: u_translation.rsfillnebulae
 msgid "Fill nebulae"
@@ -2375,7 +2375,7 @@ msgstr "Дата начала Грегор. календаря"
 
 #: u_translation.rsgrids
 msgid "Grids"
-msgstr ""
+msgstr "Сетки"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -2559,7 +2559,7 @@ msgstr "Дневные проходы"
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
-msgstr "Приращение для ярких звёзд"
+msgstr "Приращение яркости"
 
 #: u_translation.rsincrementtim
 msgid "Increment time"
@@ -2876,7 +2876,7 @@ msgstr "Линейная"
 
 #: u_translation.rslineforteles
 msgid "Line for telescope pointing limit"
-msgstr ""
+msgstr "Линия лимита наведения телескопа"
 
 #: u_translation.rslinemode
 msgid "Line mode"
@@ -3144,7 +3144,7 @@ msgstr "Развернуть"
 
 #: u_translation.rsmaximumdecli
 msgid "Maximum declination"
-msgstr ""
+msgstr "Максимальное склонение"
 
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
@@ -3248,7 +3248,7 @@ msgstr "Минимальная высота"
 
 #: u_translation.rsminimumdecli
 msgid "Minimum declination"
-msgstr ""
+msgstr "Минимальное склонение"
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -5996,7 +5996,7 @@ msgstr "Запад"
 
 #: u_translation.rswesthourangl
 msgid "West hour angle"
-msgstr ""
+msgstr "Часовой угол к западу"
 
 #: u_translation.rswestside
 msgid "West side"
