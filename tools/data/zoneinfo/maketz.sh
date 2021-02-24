@@ -19,7 +19,7 @@ cd tzdata
 tar xzf ../tzcode*.tar.gz
 tar xzf ../tzdata*.tar.gz
 
-make TOPDIR=$wd/tzdata/ install
+make TOPDIR=$wd/tzdata/ ZFLAGS="-b fat" install
 if [[ $? != 0 ]]; then echo make error;  exit 1; fi
 
 cd usr/share/zoneinfo
