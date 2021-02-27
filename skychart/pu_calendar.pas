@@ -2295,6 +2295,10 @@ begin
                   a := -a;
                 csconfig.ObsLatitude := d;
                 csconfig.ObsLongitude := a;
+                csconfig.tz.Longitude := a;
+                csconfig.tz.JD := p.jd;
+                csconfig.TimeZone := csconfig.tz.SecondsOffset / 3600;
+                djd(p.jd + csconfig.timezone / 24, csconfig.CurYear, csconfig.CurMonth, csconfig.CurDay, csconfig.CurTime);
                 csconfig.ObsName := 'Max. Solar Eclipse ' + IntToStr(
                   csconfig.CurMonth) + '/' + IntToStr(csconfig.CurYear);
               end;
