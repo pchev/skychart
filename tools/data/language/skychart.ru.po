@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-14 10:00+0000\n"
-"PO-Revision-Date: 2021-02-19 17:16+0000\n"
+"PO-Revision-Date: 2021-02-23 08:59+0000\n"
 "Last-Translator: Sergey Tarantsov <tsn-ast@yandex.ru>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-21 17:08+0000\n"
-"X-Generator: Launchpad (build bbfee60eef9f7fd8d30b24b3f53e75656e4d5fb0)\n"
+"X-Launchpad-Export-Date: 2021-02-28 13:56+0000\n"
+"X-Generator: Launchpad (build cd61f0bfc5208dd4b58a15e953892eaabba1e0b8)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -3068,7 +3068,7 @@ msgstr "Ошибка величины"
 
 #: u_translation.rsmagnitudefai
 msgid "magnitudes fainter than the stars."
-msgstr "величин слабее, чем звёзды."
+msgstr "зв. вел. слабее звёзд на карте."
 
 #: u_translation.rsmagnitudetyc
 msgid "Magnitude Tycho BT"
@@ -4864,7 +4864,7 @@ msgstr "Показать одно изображение на карте."
 
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
-msgstr "Астероиды"
+msgstr "Астероиды на"
 
 #: u_translation.rsshowasteroid3
 msgid "Show asteroids on the chart"
@@ -4880,7 +4880,7 @@ msgstr "Небесный экватор"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
-msgstr "Кометы"
+msgstr "Отображать кометы на"
 
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
@@ -4964,7 +4964,7 @@ msgstr "Млечный Путь"
 
 #: u_translation.rsshowneareart
 msgid "Show near Earth asteroids independently of the magnitude"
-msgstr "Показать околоземные астероиды без ограничений по блеску"
+msgstr "Показать околоземные астероиды без ограничения по блеску"
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
@@ -5712,7 +5712,7 @@ msgstr "Невозможно создать директорию "
 
 #: u_translation.rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
-msgstr "Отметить, чтобы избежать дублирования с малой планетой 134340."
+msgstr "Отметить, чтобы избежать дублирования с малой планетой 134340"
 
 #: u_translation.rsundo
 msgid "Undo"
