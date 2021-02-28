@@ -692,14 +692,15 @@ object f_calendar: Tf_calendar
       ParentFont = False
       object SolarGrid: TStringGrid
         Left = 0
-        Height = 356
+        Height = 499
         Top = 0
-        Width = 831
+        Width = 990
         Align = alClient
+        AutoEdit = False
         ColCount = 12
         DefaultColWidth = 100
         FixedRows = 2
-        Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
+        Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goSmoothScroll, goFixedColSizing]
         ParentFont = False
         RowCount = 3
         TabOrder = 0
@@ -715,14 +716,15 @@ object f_calendar: Tf_calendar
       ParentFont = False
       object LunarGrid: TStringGrid
         Left = 0
-        Height = 356
+        Height = 499
         Top = 0
-        Width = 831
+        Width = 990
         Align = alClient
-        ColCount = 9
+        AutoEdit = False
+        ColCount = 10
         DefaultColWidth = 100
         FixedRows = 2
-        Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedColSizing]
+        Options = [goVertLine, goHorzLine, goRangeSelect, goColSizing, goSmoothScroll, goFixedColSizing]
         ParentFont = False
         RowCount = 3
         TabOrder = 0

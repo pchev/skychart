@@ -179,7 +179,6 @@ type
     dat11, dat12, dat13, dat21, dat22, dat23, dat31, dat32, dat33: double;
     dat41, dat51, dat61, dat71, dat72, dat73: double;
     dat14, dat24, dat34, dat74, west, east, title: string;
-    century_Solar, century_Lunar: string;
     appmsg: array[1..nummsg] of string;
     cometid: array[0..maxcombo] of string;
     astid: array[0..maxcombo] of integer;
@@ -216,6 +215,8 @@ type
     AzNorth: boolean;
     config: Tconf_skychart;
     procedure SetLang;
+    procedure LoadSolarEclipse;
+    procedure LoadLunarEclipse;
     property planet: Tplanet read Fplanet write Fplanet;
     property EclipsePath: string read Feclipsepath write Feclipsepath;
     property OnGetChartConfig: TScFunc read FGetChartConfig write FGetChartConfig;
@@ -766,9 +767,11 @@ begin
     cells[6, 0] := appmsg[37];
     cells[6, 1] := appmsg[28];
     cells[7, 0] := appmsg[39];
-    cells[7, 1] := appmsg[40];
+    cells[7, 1] := appmsg[36];
     cells[8, 0] := appmsg[39];
-    cells[8, 1] := appmsg[41];
+    cells[8, 1] := appmsg[40];
+    cells[9, 0] := appmsg[39];
+    cells[9, 1] := appmsg[41];
   end;
 end;
 
@@ -830,88 +833,92 @@ begin
     end;
 end;
 
-procedure Tf_calendar.RefreshSolarEclipse;
+procedure Tf_calendar.LoadSolarEclipse;
 var
   f: textfile;
-  buf, mm, century, pathimage: string;
-  h, jda: double;
+  fn, buf, mm,hh: string;
+  h, jda, dt: double;
   i, n, a, m, j: integer;
 begin
-  dat41 := date1.JD;
-  djd(dat41, j, m, a, h);
-  if j > 0 then
-  begin
-    j := j - 1;
-    century := padzeros(IntToStr(1 + ((abs(j)) div 100)), 2);
-  end
-  else
-  begin
-    century := padzeros(IntToStr(((abs(j)) div 100)), 2);
-    century := '-' + century;
-  end;
-  if century_Solar <> century then
-  begin // lire le fichier la premiere fois
     FreeCoord(Solargrid);
     solargrid.RowCount := 3;
     for i := 0 to solargrid.ColCount - 1 do
       solargrid.Cells[i, 2] := '';
-    if not fileexists(slash(Feclipsepath) + 'solar' + century + '.txt') then
+    fn := slash(Feclipsepath) + '5MKSEcatalog.txt';
+    if not fileexists(fn) then
       exit;
     screen.cursor := crHourglass;
     try
       Filemode := 0;
-      Assignfile(f, slash(Feclipsepath) + 'solar' + century + '.txt');
+      Assignfile(f, fn);
       reset(f);
+      n:=0;
+      // find first row
+      repeat
+        inc(n);
+        readln(f,buf);
+        buf:=trim(copy(buf,1,5));
+      until eof(f)or(buf='1');
+      if eof(f) then exit;
+      // count rows
+      m:=0;
+      repeat
+        inc(m);
+        readln(f);
+      until eof(f);
+      SolarGrid.RowCount:=m+3;
+      // skip to first row
+      reset(f);
+      for i:=1 to n-1 do readln(f,buf);
       i := 2;
-      //solargrid.visible:=false;
+      SolarGrid.BeginUpdate;
       repeat
         Readln(f, buf);
         with solargrid do
         begin
-          RowCount := i + 1;
-          cells[0, i] := copy(buf, 1, 12);
-          cells[2, i] := copy(buf, 15, 5);
-          cells[3, i] := copy(buf, 23, 3);
-          cells[4, i] := copy(buf, 26, 4);
-          cells[5, i] := copy(buf, 31, 6);
-          cells[6, i] := copy(buf, 39, 5);
-          cells[7, i] := copy(buf, 46, 5);
-          cells[8, i] := copy(buf, 52, 6);
-          cells[9, i] := copy(buf, 60, 2);
-          cells[10, i] := copy(buf, 63, 4);
-          cells[11, i] := copy(buf, 69, 6);
-          pathimage := slash(Feclipsepath) + 'SE' + stringreplace(cells[0, i], blank, '', [rfReplaceAll]) +
-            copy(cells[3, i], 1, 1) + '.png';
-          if fileexists(pathimage) then
-            cells[1, i] := appmsg[47]
-          else
-            cells[1, i] := '';
-          a := strtointdef(copy(cells[0, i], 1, 5), -9999);
-          mm := copy(cells[0, i], 7, 3);
+          dt := StrToFloat(trim(copy(buf, 37, 5)));
+          a := StrToInt(trim(copy(buf, 13, 5)));
+          mm := copy(buf, 19, 3);
+          j := StrToInt(trim(copy(buf, 23, 2)));
+          hh := copy(buf, 27, 8);
           m := 0;
           for n := 1 to 12 do
-            if mm = monthlst[n] then
-            begin
+            if mm = monthlst[n] then begin
               m := n;
               break;
             end;
-          j := strtointdef(copy(cells[0, i], 11, 2), 0);
-          if (a <> -9999) and (m <> 0) and (j <> 0) then
-          begin
-            h := strtofloat(copy(cells[2, i], 1, 2)) + strtofloat(copy(cells[2, i], 4, 2)) / 60;
-            jda := jd(a, m, j, h);
-            objects[0, i] := SetObjCoord(jda, -1000, -1000);
-          end;
+          h := strtofloat(copy(hh, 1, 2)) + strtofloat(copy(hh, 4, 2)) / 60 + strtofloat(copy(hh, 7, 2)) / 3600 - dt / 3600;
+          jda := jd(a, m, j, h);
+          objects[0, i] := SetObjCoord(jda, -1000, -1000);
+          djd(jda,a,m,j,h);
+          cells[0, i] := FormatFloat(' 0000;-0000; 0000',a)+blank+monthlst[m]+blank+FormatFloat('00',j);
+          cells[1, i] := copy(buf, 8, 3);
+          cells[2, i] := TimToStr(h);
+          cells[3, i] := copy(buf, 57, 3);
+          cells[4, i] := copy(buf, 50, 4);
+          cells[5, i] := copy(buf, 65, 7);
+          cells[6, i] := copy(buf, 74, 6);
+          cells[7, i] := copy(buf, 82, 5);
+          cells[8, i] := copy(buf, 88, 6);
+          cells[9, i] := copy(buf, 96, 2);
+          cells[10, i] := copy(buf, 104, 4);
+          cells[11, i] := copy(buf, 110, 6);
         end;
         i := i + 1;
       until EOF(f);
-      century_Solar := century;
+      SolarGrid.EndUpdate;
     finally
-      //solargrid.visible:=true;
       Closefile(f);
       screen.cursor := crDefault;
     end;
-  end; // fin lecture fichier
+end;
+
+procedure Tf_calendar.RefreshSolarEclipse;
+var
+  h: double;
+  i, a, m, j: integer;
+begin
+  dat41 := date1.JD;
   djd(dat41, a, m, j, h);
   with solargrid do
   begin
@@ -928,101 +935,94 @@ begin
         break;
       end;
     end;
+    row:=toprow;
+  end;
+end;
+
+procedure Tf_calendar.LoadLunarEclipse;
+var
+  f: textfile;
+  fn, buf, mm, hh: string;
+  h, jda, dt: double;
+  i, n, a, m, j: integer;
+begin
+  FreeCoord(Lunargrid);
+  lunargrid.RowCount := 3;
+  for i := 0 to lunargrid.ColCount - 1 do
+    lunargrid.Cells[i, 2] := '';
+  fn := slash(Feclipsepath) + '5MKLEcatalog.txt';
+  if not fileexists(fn) then
+    exit;
+  screen.cursor := crHourglass;
+  try
+    Filemode := 0;
+    Assignfile(f, fn);
+    reset(f);
+    n:=0;
+    // find first row
+    repeat
+      inc(n);
+      readln(f,buf);
+      buf:=trim(copy(buf,1,5));
+    until eof(f)or(buf='00001');
+    if eof(f) then exit;
+    // count rows
+    m:=0;
+    repeat
+      inc(m);
+      readln(f);
+    until eof(f);
+    LunarGrid.RowCount:=m+3;
+    // skip to first row
+    reset(f);
+    for i:=1 to n-1 do readln(f,buf);
+    i := 2;
+    LunarGrid.BeginUpdate;
+    repeat
+      Readln(f, buf);
+      with lunargrid do
+      begin
+        dt := StrToFloat(trim(copy(buf, 32, 5)));
+        a := StrToInt(trim(copy(buf, 8, 5)));
+        mm := copy(buf, 14, 3);
+        j := StrToInt(trim(copy(buf, 18, 2)));
+        hh := copy(buf, 22, 8);
+        m := 0;
+        for n := 1 to 12 do
+          if mm = monthlst[n] then begin
+            m := n;
+            break;
+          end;
+        h := strtofloat(copy(hh, 1, 2)) + strtofloat(copy(hh, 4, 2)) / 60 + strtofloat(copy(hh, 7, 2)) / 3600 - dt / 3600;
+        jda := jd(a, m, j, h);
+        objects[0, i] := SetObjCoord(jda, -1000, -1000);
+        djd(jda,a,m,j,h);
+        cells[0, i] := FormatFloat(' 0000;-0000; 0000',a)+blank+monthlst[m]+blank+FormatFloat('00',j);
+        cells[1, i] := TimToStr(h);
+        cells[2, i] := copy(buf, 52, 3);
+        cells[3, i] := copy(buf, 45, 4);
+        cells[4, i] := copy(buf, 60, 7);
+        cells[5, i] := copy(buf, 69, 6);
+        cells[6, i] := copy(buf, 76, 7);
+        cells[7, i] := copy(buf, 85, 5);
+        cells[8, i] := copy(buf, 92, 5);
+        cells[9, i] := copy(buf, 99, 5);
+      end;
+      i := i + 1;
+    until EOF(f);
+    LunarGrid.EndUpdate;
+  finally
+    Closefile(f);
+    screen.cursor := crDefault;
   end;
 end;
 
 procedure Tf_calendar.RefreshLunarEclipse;
 var
-  f: textfile;
-  buf, mm, century, dbuf: string;
-  h, jda: double;
-  i, n, a, m, j, d: integer;
+  h: double;
+  i, a, m, j: integer;
 begin
   dat51 := date1.jd;
-  djd(dat51, j, m, a, h);
-  if j > 0 then
-  begin
-    j := j - 1;
-    century := padzeros(IntToStr(1 + ((abs(j)) div 100)), 2);
-  end
-  else
-  begin
-    century := padzeros(IntToStr(((abs(j)) div 100)), 2);
-    century := '-' + century;
-  end;
-  if century_Lunar <> century then
-  begin // lire le fichier la premiere fois
-    FreeCoord(Lunargrid);
-    lunargrid.RowCount := 3;
-    for i := 0 to lunargrid.ColCount - 1 do
-      lunargrid.Cells[i, 2] := '';
-    if not fileexists(slash(Feclipsepath) + 'lunar' + century + '.txt') then
-      exit;
-    screen.cursor := crHourglass;
-    try
-      Filemode := 0;
-      Assignfile(f, slash(Feclipsepath) + 'lunar' + century + '.txt');
-      reset(f);
-      i := 2;
-      //lunargrid.visible:=false;
-      repeat
-        Readln(f, buf);
-        with lunargrid do
-        begin
-          RowCount := i + 1;
-          cells[0, i] := copy(buf, 1, 12);
-          cells[1, i] := copy(buf, 15, 5);
-          cells[2, i] := copy(buf, 21, 3);
-          cells[3, i] := copy(buf, 25, 3);
-          cells[4, i] := copy(buf, 30, 6);
-          cells[5, i] := copy(buf, 38, 5);
-          cells[6, i] := copy(buf, 44, 6);
-          dbuf := copy(buf, 51, 4);
-          if pos('m', dbuf) > 0 then
-          begin
-            d := strtointdef(trim(StringReplace(dbuf, 'm', '', [rfReplaceAll])), -1);
-            if d > 0 then
-            begin
-              dbuf := IntToStr(2 * d) + 'm';
-            end;
-          end;
-          cells[7, i] := dbuf;
-          dbuf := copy(buf, 56, 4);
-          if pos('m', dbuf) > 0 then
-          begin
-            d := strtointdef(trim(StringReplace(dbuf, 'm', '', [rfReplaceAll])), -1);
-            if d > 0 then
-            begin
-              dbuf := IntToStr(2 * d) + 'm';
-            end;
-          end;
-          cells[8, i] := dbuf;
-          a := strtointdef(copy(cells[0, i], 1, 5), -9999);
-          mm := copy(cells[0, i], 7, 3);
-          m := 0;
-          for n := 1 to 12 do
-            if mm = monthlst[n] then
-            begin
-              m := n;
-              break;
-            end;
-          j := strtointdef(copy(cells[0, i], 11, 2), 0);
-          if (a <> -9999) and (m <> 0) and (j <> 0) then
-          begin
-            h := strtofloat(copy(cells[1, i], 1, 2)) + strtofloat(copy(cells[1, i], 4, 2)) / 60;
-            jda := jd(a, m, j, h);
-            objects[0, i] := SetObjCoord(jda, -1000, -1000);
-          end;
-        end;
-        i := i + 1;
-      until EOF(f);
-      century_Lunar := century;
-    finally
-      //lunargrid.visible:=true;
-      Closefile(f);
-      screen.cursor := crDefault;
-    end;
-  end; // fin lecture fichier
   djd(dat51, a, m, j, h);
   with lunargrid do
   begin
@@ -1039,6 +1039,7 @@ begin
         break;
       end;
     end;
+    row:=toprow;
   end;
 end;
 
@@ -2259,24 +2260,8 @@ begin
           begin      // Solar eclipse
             if (aColumn = 1) then
             begin   // image map
-              pathimage := slash(Feclipsepath) + 'SE' + stringreplace(
-                cells[0, aRow], blank, '', [rfReplaceAll]) + copy(cells[3, aRow], 1, 1) + '.png';
-              if fileexists(pathimage) then
-              begin
-                ShowImage.ButtonPrint.Visible := False;
-                ShowImage.labeltext := eclipanel.Caption;
-                ShowImage.titre := solar.Caption + blank + IntToStr(csconfig.CurMonth) +
-                  '/' + IntToStr(csconfig.CurYear);
-                ShowImage.LoadImage(pathimage);
-                ShowImage.ClientHeight :=
-                  min(screen.Height - 80, ShowImage.imageheight + ShowImage.Panel1.Height +
-                  ShowImage.HScrollBar.Height);
-                ShowImage.ClientWidth :=
-                  min(screen.Width - 50, ShowImage.imagewidth + ShowImage.VScrollBar.Width);
-                ShowImage.image1.ZoomMin := 1;
-                ShowImage.Init;
-                ShowImage.Show;
-              end;
+              pathimage := format(URL_5MCSE,[cells[1, aRow]]);
+              ExecuteFile(pathimage);
             end
             else
             begin
@@ -2429,6 +2414,7 @@ begin
     end;
     4:
     begin
+      if solargrid.RowCount<10 then LoadSolarEclipse;
       Dategroup1(False);
       Dategroup2(False);
       EcliPanel.Visible := True;
@@ -2437,6 +2423,7 @@ begin
     end;
     5:
     begin
+      if LunarGrid.RowCount<10 then LoadLunarEclipse;
       Dategroup1(False);
       Dategroup2(False);
       EcliPanel.Visible := True;

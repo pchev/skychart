@@ -609,6 +609,8 @@ const
 
   URL_IVOASAMP = 'http://www.ivoa.net/documents/SAMP/';
 
+  URL_5MCSE = 'https://eclipse.gsfc.nasa.gov/5MCSE/plate%s.pdf';
+
   URL_DSS_NAME1 = 'DSS 1';
   URL_DSS1 =
     'http://archive.eso.org/dss/dss/image?ra=$RAH+$RAM+$RAS&dec=+$DED+$DEM+$DES&equinox=J2000&x=$XSZ&y=$YSZ&Sky-Survey=DSS1&mime-type=display/gz-fits';
