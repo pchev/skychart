@@ -8,6 +8,8 @@ The skychart-spice-base file is required and you can add skychart-spice-ext for 
 On Linux you also need to install libcalceph before you can use this function: https://github.com/pchev/libcalceph/releases/tag/v3.4.7
 
 New functions:
+- Update to latest version of solar and lunar eclipse catalog.
+- For date before 1657 the Delta T computation is from Morrison, Stephenson, Hohenkerk, Zawilski 2021. 
 - For date older than 1840-1950, depending on the country, when the LMT timezone is in use, the time offset is now for the longitude of the observatory.
 - Can use SPICE kernel for NEO or other solar system objects. On Linux this require installation of libcalceph, see above.
 - Use binary file instead of database for asteroid element, improve performance
