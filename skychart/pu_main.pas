@@ -2450,6 +2450,9 @@ var
   i: integer;
   c: TBGRAPixel;
   fn: array of string;
+  {$ifdef mswindows}
+  Registry: TRegistry;
+  {$endif}
 begin
   try
 
@@ -2500,6 +2503,7 @@ begin
     DisplayIs32bpp := True;
     isWOW64 := False;
     isAdmin := False;
+    UacEnabled := True;
     {$ifdef mswindows}
     step := 'Windows spefic';
     isWOW64 := FindWOW64;
@@ -2507,6 +2511,16 @@ begin
     DisplayIs32bpp := (ScreenBPP = 32);
     configfile := Defaultconfigfile;
     SaveDialog.Options := SaveDialog.Options - [ofNoReadOnlyReturn];
+    try
+    Registry := TRegistry.Create;
+    Registry.RootKey := HKEY_LOCAL_MACHINE;
+    if Registry.OpenKeyReadOnly('\Software\Microsoft\Windows\CurrentVersion\Policies\System\') then begin
+      UacEnabled := (Registry.ReadInteger('EnableLUA')=1);
+      Registry.CloseKey;
+    end;
+    Registry.Free;
+    except
+    end;
     { TODO : check readonly test on Windows }
     {$endif}
     CanShowScrollbar := True;
@@ -2530,11 +2544,21 @@ begin
     MenuUpdSoft.Visible := False;
     {$endif}
     if isAdmin then begin
-       if MessageDlg('Error!','Carte du Ciel program should never be run as administrator, '+
-           'this is useless, dangerous and the source of many unwanted issues.'+crlf+
-           'Please close it now and fix the startup icon or command.',
-           mtError,[mbClose,mbIgnore],0,mbClose) <> mrIgnore
-           then halt;
+       if UacEnabled then begin
+         if MessageDlg('Error!','Carte du Ciel program should never be run as administrator, '+
+             'this is useless, dangerous and the source of many unwanted issues.'+crlf+
+             'Please close the program now and fix the startup icon or command.',
+             mtError,[mbClose,mbIgnore],0,mbClose) <> mrIgnore
+             then halt;
+       end
+       else begin
+         if MessageDlg('Error!','Carte du Ciel program should never be run as administrator,'+
+             'this is useless, dangerous and the source of many unwanted issues.'+crlf+
+             'UAC is disabled in the system, this is a dangerous choice.'+crlf+
+             'Please close the program now and enable UAC, or run it from a standard, non administrator user.',
+             mtError,[mbClose,mbIgnore],0,mbClose) <> mrIgnore
+             then halt;
+       end;
        {$ifdef mswindows}
        basecaption := Format(rsDoNotRunAsAd, [Caption, rsAdministrato])
        {$else}
@@ -2841,7 +2865,7 @@ begin
     cdcdb.Free;
     def_cfgsc.Free;
     cfgs.Free;
-    cfgm.ObsNameList.OwnsObjects := True;  // destroy objects only on exit
+    if cfgm<>nil then cfgm.ObsNameList.OwnsObjects := True;  // destroy objects only on exit
     cfgm.Free;
     def_cfgplot.Free;
     cfgp.Free;
