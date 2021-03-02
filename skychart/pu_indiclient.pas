@@ -49,6 +49,7 @@ type
     ButtonGetLocation: TSpeedButton;
     ButtonSetLocation: TSpeedButton;
     AxisRates: TComboBox;
+    CheckBoxOnTop: TCheckBox;
     Connect: TButton;
     Disconnect: TButton;
     Elev: TEdit;
@@ -93,6 +94,7 @@ type
     procedure BtnIndiGuiClick(Sender: TObject);
     procedure ButtonGetLocationClick(Sender: TObject);
     procedure ButtonSetLocationClick(Sender: TObject);
+    procedure CheckBoxOnTopChange(Sender: TObject);
     procedure ConnectTimerTimer(Sender: TObject);
     procedure FormChangeBounds(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -788,6 +790,14 @@ begin
   end;
 end;
 
+procedure Tpop_indi.CheckBoxOnTopChange(Sender: TObject);
+begin
+  if CheckBoxOnTop.Checked then
+    FormStyle:=fsStayOnTop
+  else
+    FormStyle:=fsNormal;
+end;
+
 
 {-------------------------------------------------------------------------------
 
@@ -810,6 +820,7 @@ begin
   SpeedButton6.Caption := rsAbortSlew;
   SpeedButton2.Caption := rsHide;
   SpeedButton4.Caption := rsHelp;
+  CheckBoxOnTop.Caption := rsAlwaysOnTop;
   ButtonSetLocation.Caption := rsSetToTelesco;
   ButtonGetLocation.Caption := rsGetFromTeles;
   GroupBox5.Caption:=rsObservatory;

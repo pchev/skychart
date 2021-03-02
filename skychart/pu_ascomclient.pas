@@ -57,6 +57,7 @@ type
     ButtonConnect: TButton;
     ButtonGetLocation: TSpeedButton;
     ButtonPark: TSpeedButton;
+    CheckBoxOnTop: TCheckBox;
     elev: TEdit;
     GroupBox3: TGroupBox;
     ButtonAdvSetting: TSpeedButton;
@@ -120,6 +121,7 @@ type
     procedure BtnDiscoverClick(Sender: TObject);
     procedure ButtonGetLocationClick(Sender: TObject);
     procedure ButtonParkClick(Sender: TObject);
+    procedure CheckBoxOnTopChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure kill(Sender: TObject; var CanClose: boolean);
@@ -961,6 +963,7 @@ begin
   ButtonTracking.Caption := rsTracking;
   ButtonAbort.Caption := rsAbortSlew;
   ButtonHelp.Caption := rsHelp;
+  CheckBoxOnTop.Caption := rsAlwaysOnTop;
   ButtonConnect.Caption := rsConnect;
   ButtonDisconnect.Caption := rsDisconnect;
   ButtonHide.Caption := rsHide;
@@ -975,7 +978,6 @@ function Tpop_scope.ReadConfig(ConfigPath: shortstring): boolean;
 var
   ini: tinifile;
   nom: string;
-  t,l: integer;
 const
   {$ifdef mswindows}
   default_remote=0;
@@ -1591,6 +1593,14 @@ begin
         MessageDlg(rsASCOMDriverE + ': ' + E.Message, mtWarning, [mbOK], 0);
     end;
   end;
+end;
+
+procedure Tpop_scope.CheckBoxOnTopChange(Sender: TObject);
+begin
+ if CheckBoxOnTop.Checked then
+   FormStyle:=fsStayOnTop
+ else
+   FormStyle:=fsNormal;
 end;
 
 procedure Tpop_scope.ButtonTrackingClick(Sender: TObject);

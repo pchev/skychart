@@ -206,7 +206,7 @@ object pop_indi: Tpop_indi
     end
     object ButtonSetLocation: TSpeedButton
       Left = 8
-      Height = 22
+      Height = 25
       Top = 65
       Width = 140
       Caption = 'Set to telescope'
@@ -241,7 +241,7 @@ object pop_indi: Tpop_indi
     end
     object ButtonGetLocation: TSpeedButton
       Left = 159
-      Height = 22
+      Height = 25
       Top = 65
       Width = 140
       Caption = 'Get from telescope'
@@ -440,6 +440,17 @@ object pop_indi: Tpop_indi
       OnClick = SpeedButton2Click
       ParentFont = False
       TabOrder = 2
+    end
+    object CheckBoxOnTop: TCheckBox
+      AnchorSideTop.Control = SpeedButton4
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 21
+      Top = 42
+      Width = 109
+      Caption = 'Always on top'
+      OnChange = CheckBoxOnTopChange
+      TabOrder = 4
     end
   end
   object Panel3: TPanel

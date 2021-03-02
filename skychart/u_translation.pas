@@ -1569,6 +1569,7 @@ resourcestring
   rsGrids = 'Grids';
   rsEquator = 'Equator';
   rsBlurred = 'Blurred';
+  rsAlwaysOnTop = 'Always on top';
 
 // also update upsi_translation
 

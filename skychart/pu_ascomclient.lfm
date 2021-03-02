@@ -70,6 +70,17 @@ object pop_scope: Tpop_scope
       ParentFont = False
       TabOrder = 0
     end
+    object CheckBoxOnTop: TCheckBox
+      AnchorSideTop.Control = ButtonHelp
+      AnchorSideTop.Side = asrCenter
+      Left = 7
+      Height = 21
+      Top = 43
+      Width = 109
+      Caption = 'Always on top'
+      OnChange = CheckBoxOnTopChange
+      TabOrder = 4
+    end
   end
   object GroupBox5: TGroupBox
     Left = 0
