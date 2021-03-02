@@ -7756,6 +7756,7 @@ begin
     Fpop_indi.csc := sc.cfgsc;
     Fpop_indi.onObservatoryCoord:=ObservatoryFromTelescope;
     Fpop_indi.SetLang;
+    Fpop_indi.SetPos;
   end;
   if Connect1.Checked then
   begin

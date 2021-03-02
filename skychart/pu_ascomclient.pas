@@ -975,6 +975,7 @@ function Tpop_scope.ReadConfig(ConfigPath: shortstring): boolean;
 var
   ini: tinifile;
   nom: string;
+  t,l: integer;
 const
   {$ifdef mswindows}
   default_remote=0;
@@ -1008,6 +1009,7 @@ begin
   ARestDevice.Value := ini.ReadInteger('AscomRemote', 'device', 0);
   lat.Text := ini.readstring('observatory', 'latitude', '0');
   long.Text := ini.readstring('observatory', 'longitude', '0');
+  FormPos(self, ini.ReadInteger('Position', 'left', left), ini.ReadInteger('Position', 'top', top), False);
   ini.Free;
   Timer1.Interval := strtointdef(ReadIntBox.Text, 1000);
 end;
@@ -1185,6 +1187,8 @@ begin
   ini.writestring('AscomRemote', 'p', strtohex(encryptStr(ARestPass.Text, encryptpwd)));
   ini.writestring('observatory', 'latitude', lat.Text);
   ini.writestring('observatory', 'longitude', long.Text);
+  ini.WriteInteger('Position', 'top', top);
+  ini.WriteInteger('Position', 'left', left);
   ini.UpdateFile;
   ini.Free;
 end;

@@ -8,6 +8,7 @@ object pop_indi: Tpop_indi
   Caption = 'INDI Telescope Interface'
   ClientHeight = 541
   ClientWidth = 321
+  OnChangeBounds = FormChangeBounds
   OnCloseQuery = kill
   OnCreate = FormCreate
   OnDestroy = FormDestroy

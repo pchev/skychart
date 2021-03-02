@@ -6565,6 +6565,8 @@ begin
   def_cfgsc.IndiServerPort := '7624';
   def_cfgsc.IndiDevice := 'Telescope Simulator';
   def_cfgsc.IndiTelescope := False;
+  def_cfgsc.IndiTop := 0;
+  def_cfgsc.IndiLeft := 0;
   def_cfgsc.ASCOMTelescope := False;
   def_cfgsc.ManualTelescope := False;
 {$ifdef unix}
@@ -7918,6 +7920,8 @@ begin
         def_cfgsc.IndiDevice := ReadString(section, 'IndiDevice', def_cfgsc.IndiDevice);
         def_cfgsc.IndiTelescope :=
           ReadBool(section, 'IndiTelescope', def_cfgsc.IndiTelescope);
+        def_cfgsc.IndiLeft := ReadInteger(section, 'IndiLeft', def_cfgsc.IndiLeft);
+        def_cfgsc.IndiTop := ReadInteger(section, 'IndiTop', def_cfgsc.IndiTop);
         def_cfgsc.ASCOMTelescope :=
           ReadBool(section, 'ASCOMTelescope', def_cfgsc.ASCOMTelescope);
         def_cfgsc.ManualTelescope :=
@@ -9146,12 +9150,16 @@ begin
           WriteString(section, 'IndiServerHost', cfgsc.IndiServerHost);
           WriteString(section, 'IndiServerPort', cfgsc.IndiServerPort);
           WriteString(section, 'IndiDevice', cfgsc.IndiDevice);
+          WriteInteger(section, 'IndiLeft', cfgsc.IndiLeft);
+          WriteInteger(section, 'IndiTop', cfgsc.IndiTop);
         end
         else begin
           WriteBool(section, 'IndiLoadConfig', def_cfgsc.IndiLoadConfig);
           WriteString(section, 'IndiServerHost', def_cfgsc.IndiServerHost);
           WriteString(section, 'IndiServerPort', def_cfgsc.IndiServerPort);
           WriteString(section, 'IndiDevice', def_cfgsc.IndiDevice);
+          WriteInteger(section, 'IndiLeft', def_cfgsc.IndiLeft);
+          WriteInteger(section, 'IndiTop', def_cfgsc.IndiTop);
         end;
         WriteFloat(section, 'TelLimitDecMax', def_cfgsc.TelLimitDecMax);
         WriteFloat(section, 'TelLimitDecMin', def_cfgsc.TelLimitDecMin);

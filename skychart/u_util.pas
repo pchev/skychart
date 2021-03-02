@@ -111,7 +111,7 @@ function DTminusUT(year, month, day: integer; c: Tconf_skychart): double;
 function DTminusUTComp(year, month, day: integer; c: Tconf_skychart): double;
 function DTminusUTError(year, month, day: integer; c: Tconf_skychart): double;
 function DTminusUTErrorComp(year, month, day: integer; c: Tconf_skychart): double;
-procedure FormPos(form: TForm; x, y: integer);
+procedure FormPos(form: TForm; x, y: integer; safemargin: boolean = True);
 function ExecProcess(cmd: string; output: TStringList;
   ShowConsole: boolean = False): integer;
 function Exec(cmd: string; hide: boolean = True): integer;
@@ -2418,11 +2418,14 @@ begin
 
 end;
 
-procedure FormPos(form: TForm; x, y: integer);
-const
-  margin = 60; //minimal distance from screen border
+procedure FormPos(form: TForm; x, y: integer; safemargin: boolean = True);
+var
+  margin: integer; //minimal distance from screen border
 begin
-
+  if safemargin then
+    margin:=60
+  else
+    margin:=0;
   with Form do
   begin
     if x > margin then

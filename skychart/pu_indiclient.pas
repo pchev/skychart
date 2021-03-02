@@ -94,6 +94,7 @@ type
     procedure ButtonGetLocationClick(Sender: TObject);
     procedure ButtonSetLocationClick(Sender: TObject);
     procedure ConnectTimerTimer(Sender: TObject);
+    procedure FormChangeBounds(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure IndiServerHostChange(Sender: TObject);
     procedure IndiServerPortChange(Sender: TObject);
@@ -174,6 +175,7 @@ type
     { Public declarations }
     csc: Tconf_skychart;
     procedure SetLang;
+    procedure SetPos;
     function ReadConfig(ConfigPath: shortstring): boolean;
     procedure SetRefreshRate(rate: integer);
     procedure ScopeShow;
@@ -269,6 +271,12 @@ procedure Tpop_indi.ConnectTimerTimer(Sender: TObject);
 begin
   ConnectTimer.Enabled := False;
   client.connectDevice(csc.IndiDevice);
+end;
+
+procedure Tpop_indi.FormChangeBounds(Sender: TObject);
+begin
+   csc.IndiLeft:=left;
+   csc.IndiTop:=top;
 end;
 
 procedure Tpop_indi.ServerDisconnected(Sender: TObject);
@@ -812,6 +820,11 @@ begin
   LabelDelta.Caption:=rsDEC;
   flipns.Hint:=rsFlipNSMoveme;
   SetHelp(self, hlpINDI);
+end;
+
+procedure Tpop_indi.SetPos;
+begin
+  FormPos(self, csc.IndiLeft, csc.IndiTop, False);
 end;
 
 function Tpop_indi.ReadConfig(ConfigPath: shortstring): boolean;
