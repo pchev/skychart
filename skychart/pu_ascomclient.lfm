@@ -39,6 +39,7 @@ object pop_scope: Tpop_scope
       Top = 6
       Width = 85
       Caption = 'Disconnect'
+      Enabled = False
       OnClick = ButtonDisconnectClick
       ParentFont = False
       TabOrder = 3

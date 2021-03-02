@@ -336,6 +336,7 @@ begin
     ok := True;
     led.brush.color := clRed;
     ButtonConnect.Enabled := True;
+    ButtonDisconnect.Enabled := False;
     ButtonSelect.Enabled := True;
     ButtonConfigure.Enabled := True;
     ButtonSetTime.Enabled := False;
@@ -448,6 +449,7 @@ begin
       ok := True;
       timer1.Enabled := True;
       ButtonConnect.Enabled := False;
+      ButtonDisconnect.Enabled := True;
       ButtonSelect.Enabled := False;
       ButtonConfigure.Enabled := False;
       ButtonSetTime.Enabled := True;
