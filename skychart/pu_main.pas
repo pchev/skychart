@@ -2567,6 +2567,7 @@ begin
     end
     else
        basecaption := Caption;
+    basecaption:=basecaption+blank+cdcversion + blank + RevisionStr;
     step := 'Create config';
     if VerboseMsg then
       debugln(step);
