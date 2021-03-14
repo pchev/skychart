@@ -1144,7 +1144,7 @@ type
     TargetRA, TargetDec, FindPMra, FindPMde, FindPMEpoch, FindPMpx,
     FindPMrv, FindDist, FindBV, FindMag: double;
     Scope2Ra, Scope2Dec: double;
-    DrawAllStarLabel, MovedLabelLine, StarFilter, NebFilter, FindOK,
+    DrawAllStarLabel, MovedLabelLine, MagNoDecimal, StarFilter, NebFilter, FindOK,
     WhiteBg, ShowLegend, MagLabel, NameLabel, DistLabel, ConstFullLabel,
     ConstLatinLabel, ScopeMark, Scope2Mark, ScopeLock, FindPM,
     FindStarPM, FindPMfullmotion, AstNEO, ChartLock, ONGCimg : boolean;
@@ -2577,6 +2577,7 @@ begin
   ConstFullLabel := Source.ConstFullLabel;
   DrawAllStarLabel := Source.DrawAllStarLabel;
   MovedLabelLine := Source.MovedLabelLine;
+  MagNoDecimal := Source.MagNoDecimal;
   ConstLatinLabel := Source.ConstLatinLabel;
   ScopeMark := Source.ScopeMark;
   Scope2Mark := Source.Scope2Mark;

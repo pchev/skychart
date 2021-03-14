@@ -1570,6 +1570,7 @@ resourcestring
   rsEquator = 'Equator';
   rsBlurred = 'Blurred';
   rsAlwaysOnTop = 'Always on top';
+  rsNoDecimalSep = 'No decimal separator';
 
 // also update upsi_translation
 

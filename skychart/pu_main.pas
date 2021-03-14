@@ -6494,6 +6494,7 @@ begin
   def_cfgsc.DistLabel := False;
   def_cfgsc.ConstFullLabel := True;
   def_cfgsc.DrawAllStarLabel := False;
+  def_cfgsc.MagNoDecimal := False;
   def_cfgsc.MovedLabelLine := True;
   def_cfgsc.ConstLatinLabel := False;
   def_cfgsc.PlanetParalaxe := True;
@@ -7451,8 +7452,8 @@ begin
         csc.MagLabel := ReadBool(section, 'MagLabel', csc.MagLabel);
         csc.NameLabel := ReadBool(section, 'NameLabel', csc.NameLabel);
         csc.DistLabel := ReadBool(section, 'DistLabel', csc.DistLabel);
-        csc.DrawAllStarLabel :=
-          ReadBool(section, 'DrawAllStarLabel', csc.DrawAllStarLabel);
+        csc.DrawAllStarLabel := ReadBool(section, 'DrawAllStarLabel', csc.DrawAllStarLabel);
+        csc.MagNoDecimal := ReadBool(section, 'MagNoDecimal', csc.MagNoDecimal);
         csc.MovedLabelLine := ReadBool(section, 'MovedLabelLine', csc.MovedLabelLine);
         csc.ConstFullLabel := ReadBool(section, 'ConstFullLabel', csc.ConstFullLabel);
         csc.ConstLatinLabel := ReadBool(section, 'ConstLatinLabel', csc.ConstLatinLabel);
@@ -8825,6 +8826,7 @@ begin
         WriteBool(section, 'NameLabel', csc.NameLabel);
         WriteBool(section, 'DistLabel', csc.DistLabel);
         WriteBool(section, 'DrawAllStarLabel', csc.DrawAllStarLabel);
+        WriteBool(section, 'MagNoDecimal', csc.MagNoDecimal);
         WriteBool(section, 'MovedLabelLine', csc.MovedLabelLine);
         WriteBool(section, 'ConstFullLabel', csc.ConstFullLabel);
         WriteBool(section, 'ConstLatinLabel', csc.ConstLatinLabel);

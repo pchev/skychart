@@ -1490,7 +1490,7 @@ var
   j, lid, saveplot, lnum, lp, rs: integer;
   First: boolean;
   firstcat: TSname;
-  gk, lis, dlbl: string;
+  gk, lis, dlbl, lmag: string;
   al: TLabelAlign;
   p: coordvector;
 begin
@@ -1600,9 +1600,13 @@ begin
             end
             else
               dlbl := '';
-            if cfgsc.MagLabel then
-              SetLabel(lid, xx, yy, rs, 2, lnum, formatfloat(f2, rec.star.magv) +
-                dlbl, al, labrotation(rec.ra, rec.Dec, lnum, cfgsc), 4, True)
+            if cfgsc.MagLabel then begin
+              if cfgsc.MagNoDecimal then
+                lmag := FormatFloat(f0,rec.star.magv*100)
+              else
+                lmag := formatfloat(f2, rec.star.magv);
+              SetLabel(lid, xx, yy, rs, 2, lnum, lmag + dlbl, al, labrotation(rec.ra, rec.Dec, lnum, cfgsc), 4, True);
+            end
             else if ((cfgsc.NameLabel) and rec.vstr[3] and
               (trim(copy(rec.options.flabel[18], 1, 8)) = trim(copy(rsCommonName, 1, 8)))) then
               SetLabel(lid, xx, yy, rs, 2, lnum, rec.str[3] + dlbl, al,
@@ -1642,7 +1646,7 @@ var
   x1, y1, timelimit: double;
   xx, yy: single;
   lid, lnum, lp, rs: integer;
-  lis: string;
+  lis,lmag: string;
 begin
   if VerboseMsg then
     WriteTrace('SkyChart ' + cfgsc.chartname + ': draw variable stars');
@@ -1673,9 +1677,14 @@ begin
           rs := Fplot.PlotVarStar(xx, yy, rec.variable.magmax, rec.variable.magmin);
           if (rec.variable.magmax < cfgsc.StarmagMax - cfgsc.LabelMagDiff[2]) then
           begin
-            if cfgsc.MagLabel then
-              SetLabel(lid, xx, yy, rs, 2, lnum, formatfloat(f2, rec.variable.magmax) + '-' +
-                formatfloat(f2, rec.variable.magmin), laTopLeft, labrotation(rec.ra, rec.Dec, lnum, cfgsc), 4)
+            if cfgsc.MagLabel then begin
+              if cfgsc.MagNoDecimal then
+                lmag := formatfloat(f0, rec.variable.magmax*100) + '-' + formatfloat(f0, rec.variable.magmin*100)
+              else
+                lmag := formatfloat(f2, rec.variable.magmax) + '-' + formatfloat(f2, rec.variable.magmin);
+
+              SetLabel(lid, xx, yy, rs, 2, lnum, lmag, laTopLeft, labrotation(rec.ra, rec.Dec, lnum, cfgsc), 4)
+            end
             else
               SetLabel(lid, xx, yy, rs, 2, lnum, rec.variable.id, laTopLeft, labrotation(
                 rec.ra, rec.Dec, lnum, cfgsc), lp);
@@ -1695,7 +1704,7 @@ var
   xx, yy: single;
   lid, lnum, lp, rs: integer;
   sp: char;
-  lis, buf: string;
+  lis, buf, lmag: string;
 begin
   if VerboseMsg then
     WriteTrace('SkyChart ' + cfgsc.chartname + ': draw double stars');
@@ -1751,9 +1760,13 @@ begin
             rec.double.mag1, rec.double.sep, rec.double.pa, bv);
           if (rec.double.mag1 < cfgsc.StarmagMax - cfgsc.LabelMagDiff[3]) then
           begin
-            if cfgsc.MagLabel then
-              SetLabel(lid, xx, yy, rs, 2, lnum, formatfloat(f2, rec.double.mag1),
-                laTopRight, labrotation(rec.ra, rec.Dec, lnum, cfgsc), 4)
+            if cfgsc.MagLabel then begin
+              if cfgsc.MagNoDecimal then
+                lmag := FormatFloat(f0,rec.double.mag1*100)
+              else
+                lmag := formatfloat(f2, rec.double.mag1);
+              SetLabel(lid, xx, yy, rs, 2, lnum, lmag, laTopRight, labrotation(rec.ra, rec.Dec, lnum, cfgsc), 4)
+            end
             else
             begin
               buf := rec.double.id;
