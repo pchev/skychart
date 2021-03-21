@@ -1845,6 +1845,8 @@ var
   i, k: integer;
   prev, buf, bufutf8: string;
 begin
+  try
+  DB.Query('PRAGMA case_sensitive_like = 0');
   citylist.Clear;
   codelist.Clear;
   filter := Condutf8encode(filter);
@@ -1878,6 +1880,9 @@ begin
   end;
   if DB.RowCount >= limit then
     citylist.add('...');
+  finally
+    DB.Query('PRAGMA case_sensitive_like = 1');
+  end;
 end;
 
 procedure TCDCdb.GetCityRange(country: string; lat1, lat2, lon1, lon2: double;
