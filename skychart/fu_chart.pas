@@ -467,7 +467,7 @@ type
     function cmd_GetObs: string;
     function cmd_SetTZ(tz: string): string;
     function cmd_GetTZ: string;
-    function cmd_SetBGimage(onoff: string; loadnew: boolean = True): string;
+    function cmd_SetBGimage(onoff,setfov: string; loadnew: boolean=true): string;
     function cmd_LoadBGimage(fn: string): string;
     function cmd_SetShowPicture(onoff: string): string;
     function cmd_PDSS(DssDir, ImagePath, ImageName, useexisting: string): string;
@@ -4683,7 +4683,7 @@ begin
   Result := msgOK + blank + IntToStr(xcursor) + blank + IntToStr(ycursor);
 end;
 
-function Tf_Chart.cmd_SetBGimage(onoff: string; loadnew: boolean = True): string;
+function Tf_Chart.cmd_SetBGimage(onoff,setfov: string; loadnew:boolean=true): string;
 begin
   Result := msgOK;
   sc.cfgsc.ShowImageList := (uppercase(onoff) = 'ON');
@@ -4710,6 +4710,7 @@ begin
         sc.Fits.InsertDB(sc.cfgsc.BackgroundImage, 'OTHER', 'BKG',
           sc.Fits.Center_RA + 0.00001, sc.Fits.Center_DE + 0.00001, sc.Fits.Img_Width,
           sc.Fits.Img_Height, sc.Fits.Rotation);
+      if (uppercase(setfov) = 'ON') then sc.cfgsc.fov := 1.25 * sc.Fits.Img_Width;
       sc.cfgsc.TrackOn := True;
       sc.cfgsc.TrackType := TTimage;
       Result := msgOK;
@@ -4739,6 +4740,7 @@ begin
       sc.Fits.InsertDB(sc.cfgsc.BackgroundImage, 'OTHER', 'BKG',
         sc.Fits.Center_RA + 0.00001, sc.Fits.Center_DE + 0.00001, sc.Fits.Img_Width,
         sc.Fits.Img_Height, sc.Fits.Rotation);
+    sc.cfgsc.fov := 1.25 * sc.Fits.Img_Width;
     sc.cfgsc.TrackOn := True;
     sc.cfgsc.TrackType := TTimage;
     Result := msgOK;
@@ -6067,6 +6069,7 @@ begin
         sc.Fits.InsertDB(sc.Fits.Filename, 'OTHER', 'BKG',
           sc.Fits.Center_RA + 0.00001, sc.Fits.Center_DE + 0.00001, sc.Fits.Img_Width,
           sc.Fits.Img_Height, sc.Fits.Rotation);
+      sc.cfgsc.fov := 1.25 * sc.Fits.Img_Width;
       sc.cfgsc.TrackOn := True;
       sc.cfgsc.TrackType := TTimage;
       sc.cfgsc.BackgroundImage := sc.Fits.Filename;
@@ -6633,7 +6636,7 @@ begin
     85: Result := cmd_IdentCenter;
     86: Result := cmd_IdentTelescope;
     87: Result := cmd_SetShowPicture(arg[1]);
-    88: Result := cmd_SetBGimage(arg[1]);
+    88: Result := cmd_SetBGimage(arg[1],arg[2]);
     89: Result := cmd_LoadBGimage(arg[1]);
     90: Result := cmd_GetObjectList;
     91: Result := cmd_LoadCircle(arg[1]);

@@ -3734,9 +3734,9 @@ begin
     with MultiFrame1.ActiveObject as Tf_chart do
     begin
       if sc.cfgsc.ShowImageList then
-        cmd_SetBGimage('OFF')
+        cmd_SetBGimage('OFF','ON')
       else
-        cmd_SetBGimage('ON', False);
+        cmd_SetBGimage('ON','ON', False);
       if VerboseMsg then
         WriteTrace('ShowBackgroundImageExecute');
     end;
@@ -5657,6 +5657,7 @@ begin
               'BKG', sc.Fits.Center_RA + 0.00001, sc.Fits.Center_DE +
               0.00001, sc.Fits.Img_Width,
               sc.Fits.Img_Height, sc.Fits.Rotation);
+          sc.cfgsc.fov := 1.25 * sc.Fits.Img_Width;
           sc.cfgsc.TrackOn := True;
           sc.cfgsc.TrackType := TTimage;
         end;

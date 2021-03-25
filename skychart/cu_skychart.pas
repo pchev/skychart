@@ -1216,7 +1216,6 @@ begin
             apparent_equatorial(v1, v2, cfgsc, True, True);
           cfgsc.racentre := v1;
           cfgsc.decentre := v2;
-          cfgsc.fov := 1.25 * FFits.Img_Width;
           ScaleWindow(cfgsc);
         end;
       end;
