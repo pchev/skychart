@@ -166,7 +166,7 @@ type
     procedure UpdateLabels(Sender: TObject;upd:boolean=true);
     function UpdateCoord(arow: integer): boolean;
     procedure SetVisibleRows;
-    procedure Refresh;
+    procedure Refresh(data:PtrInt=0);
     // total number of object added or loaded from the file
     property ObjCount: integer read GetObjCount;
     // number of object within visibilty criterion
@@ -679,7 +679,7 @@ begin
   end;
 end;
 
-procedure Tf_obslist.Refresh;
+procedure Tf_obslist.Refresh(data:PtrInt=0);
 begin
   ComputeLimits;
   SetVisibleRows;
@@ -838,7 +838,7 @@ end;
 procedure Tf_obslist.FormShow(Sender: TObject);
 begin
   SetLang;
-  Refresh;
+  Application.QueueAsyncCall(@Refresh,0);
 end;
 
 procedure Tf_obslist.UpdAllCoordClick(Sender: TObject);
