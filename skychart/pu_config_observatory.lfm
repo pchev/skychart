@@ -1,30 +1,32 @@
 object f_configobservatory: Tf_configobservatory
   Left = 552
-  Height = 583
+  Height = 630
   Top = 124
-  Width = 501
+  Width = 500
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Observatory'
-  ClientHeight = 583
-  ClientWidth = 501
+  ClientHeight = 630
+  ClientWidth = 500
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Panel1: TPanel
     Left = 0
-    Height = 50
-    Top = 533
-    Width = 501
+    Height = 41
+    Top = 589
+    Width = 500
     Align = alBottom
-    ClientHeight = 46
-    ClientWidth = 497
+    ClientHeight = 41
+    ClientWidth = 500
     ParentFont = False
     TabOrder = 0
     object Button1: TButton
-      Left = 189
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 192
       Height = 25
-      Top = 10
+      Top = 8
       Width = 83
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -35,9 +37,11 @@ object f_configobservatory: Tf_configobservatory
       TabOrder = 1
     end
     object Button2: TButton
-      Left = 293
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 296
       Height = 25
-      Top = 10
+      Top = 8
       Width = 83
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -47,9 +51,11 @@ object f_configobservatory: Tf_configobservatory
       TabOrder = 2
     end
     object Button3: TButton
-      Left = 397
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 400
       Height = 25
-      Top = 10
+      Top = 8
       Width = 83
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -59,9 +65,11 @@ object f_configobservatory: Tf_configobservatory
       TabOrder = 3
     end
     object Button4: TButton
-      Left = 91
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 94
       Height = 25
-      Top = 10
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Help'

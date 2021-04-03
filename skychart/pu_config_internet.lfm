@@ -1,31 +1,33 @@
 object f_configinternet: Tf_configinternet
   Left = 551
-  Height = 576
+  Height = 630
   Top = 124
-  Width = 499
+  Width = 500
   ActiveControl = Button6
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Internet'
-  ClientHeight = 576
-  ClientWidth = 499
+  ClientHeight = 630
+  ClientWidth = 500
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Panel1: TPanel
     Left = 0
-    Height = 50
-    Top = 526
-    Width = 499
+    Height = 41
+    Top = 589
+    Width = 500
     Align = alBottom
-    ClientHeight = 50
-    ClientWidth = 499
+    ClientHeight = 41
+    ClientWidth = 500
     ParentFont = False
     TabOrder = 0
     object Button1: TButton
-      Left = 208
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 209
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -35,9 +37,11 @@ object f_configinternet: Tf_configinternet
       TabOrder = 1
     end
     object Button2: TButton
-      Left = 306
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 307
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -47,9 +51,11 @@ object f_configinternet: Tf_configinternet
       TabOrder = 2
     end
     object Button3: TButton
-      Left = 404
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 405
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -59,9 +65,11 @@ object f_configinternet: Tf_configinternet
       TabOrder = 3
     end
     object Button6: TButton
-      Left = 110
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 111
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Help'

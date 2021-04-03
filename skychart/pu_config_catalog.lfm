@@ -1,32 +1,34 @@
 object f_configcatalog: Tf_configcatalog
   Left = 544
-  Height = 580
+  Height = 630
   Top = 124
   Width = 500
   ActiveControl = Button4
   BorderStyle = bsSingle
   Caption = 'Catalog'
-  ClientHeight = 580
+  ClientHeight = 630
   ClientWidth = 500
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Panel1: TPanel
     Left = 0
-    Height = 50
-    Top = 530
+    Height = 41
+    Top = 589
     Width = 500
     HelpType = htKeyword
     HelpKeyword = 'help/catalog.html'
     Align = alBottom
-    ClientHeight = 46
-    ClientWidth = 496
+    ClientHeight = 41
+    ClientWidth = 500
     ParentFont = False
     TabOrder = 0
     object Button1: TButton
-      Left = 240
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 244
       Height = 25
-      Top = 15
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -36,9 +38,11 @@ object f_configcatalog: Tf_configcatalog
       TabOrder = 1
     end
     object Button2: TButton
-      Left = 328
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 332
       Height = 25
-      Top = 15
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -48,9 +52,11 @@ object f_configcatalog: Tf_configcatalog
       TabOrder = 2
     end
     object Button3: TButton
-      Left = 416
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 420
       Height = 25
-      Top = 15
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -60,9 +66,11 @@ object f_configcatalog: Tf_configcatalog
       TabOrder = 3
     end
     object Button4: TButton
-      Left = 144
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 148
       Height = 25
-      Top = 15
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4

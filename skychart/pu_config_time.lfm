@@ -1,31 +1,33 @@
 object f_configtime: Tf_configtime
   Left = 504
-  Height = 583
+  Height = 630
   Top = 124
-  Width = 496
+  Width = 500
   ActiveControl = Button7
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Date / Time'
-  ClientHeight = 583
-  ClientWidth = 496
+  ClientHeight = 630
+  ClientWidth = 500
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Panel1: TPanel
     Left = 0
-    Height = 54
-    Top = 529
-    Width = 496
+    Height = 41
+    Top = 589
+    Width = 500
     Align = alBottom
-    ClientHeight = 50
-    ClientWidth = 492
+    ClientHeight = 41
+    ClientWidth = 500
     ParentFont = False
     TabOrder = 0
     object Button1: TButton
-      Left = 206
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 214
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -35,9 +37,11 @@ object f_configtime: Tf_configtime
       TabOrder = 1
     end
     object Button2: TButton
-      Left = 302
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 310
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -47,9 +51,11 @@ object f_configtime: Tf_configtime
       TabOrder = 2
     end
     object Button3: TButton
-      Left = 398
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 406
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -59,9 +65,11 @@ object f_configtime: Tf_configtime
       TabOrder = 3
     end
     object Button7: TButton
-      Left = 110
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 118
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Help'

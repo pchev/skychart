@@ -1,30 +1,32 @@
 object f_configsolsys: Tf_configsolsys
   Left = 534
-  Height = 576
+  Height = 630
   Top = 124
   Width = 500
   ActiveControl = Button4
   BorderStyle = bsSingle
   Caption = 'Solar System'
-  ClientHeight = 576
+  ClientHeight = 630
   ClientWidth = 500
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Panel1: TPanel
     Left = 0
-    Height = 50
-    Top = 526
+    Height = 41
+    Top = 589
     Width = 500
     Align = alBottom
-    ClientHeight = 46
-    ClientWidth = 496
+    ClientHeight = 41
+    ClientWidth = 500
     ParentFont = False
     TabOrder = 0
     object Button1: TButton
-      Left = 209
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 213
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -35,9 +37,11 @@ object f_configsolsys: Tf_configsolsys
       TabOrder = 1
     end
     object Button2: TButton
-      Left = 305
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 309
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -47,9 +51,11 @@ object f_configsolsys: Tf_configsolsys
       TabOrder = 2
     end
     object Button3: TButton
-      Left = 402
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 406
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -59,9 +65,11 @@ object f_configsolsys: Tf_configsolsys
       TabOrder = 3
     end
     object Button4: TButton
-      Left = 113
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 117
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Help'

@@ -1,30 +1,32 @@
 object f_configchart: Tf_configchart
   Left = 124
-  Height = 578
+  Height = 630
   Top = 331
-  Width = 503
+  Width = 500
   ActiveControl = Button6
   BorderStyle = bsSingle
   Caption = 'Charts'
-  ClientHeight = 578
-  ClientWidth = 503
+  ClientHeight = 630
+  ClientWidth = 500
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Panel1: TPanel
     Left = 0
-    Height = 50
-    Top = 528
-    Width = 503
+    Height = 41
+    Top = 589
+    Width = 500
     Align = alBottom
-    ClientHeight = 46
-    ClientWidth = 499
+    ClientHeight = 41
+    ClientWidth = 500
     ParentFont = False
     TabOrder = 0
     object Button3: TButton
-      Left = 205
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 206
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -34,9 +36,11 @@ object f_configchart: Tf_configchart
       TabOrder = 1
     end
     object Button4: TButton
-      Left = 301
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 302
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -46,9 +50,11 @@ object f_configchart: Tf_configchart
       TabOrder = 2
     end
     object Button5: TButton
-      Left = 405
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 406
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -58,9 +64,11 @@ object f_configchart: Tf_configchart
       TabOrder = 3
     end
     object Button6: TButton
-      Left = 113
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 114
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Help'

@@ -1,30 +1,32 @@
 object f_configcalendar: Tf_configcalendar
   Left = 243
-  Height = 583
+  Height = 630
   Top = 124
-  Width = 495
+  Width = 500
   ActiveControl = Button7
   BorderStyle = bsSingle
   Caption = 'f_configcalendar'
-  ClientHeight = 583
-  ClientWidth = 495
+  ClientHeight = 630
+  ClientWidth = 500
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Panel1: TPanel
     Left = 0
-    Height = 54
-    Top = 529
-    Width = 495
+    Height = 41
+    Top = 589
+    Width = 500
     Align = alBottom
-    ClientHeight = 50
-    ClientWidth = 491
+    ClientHeight = 41
+    ClientWidth = 500
     ParentFont = False
     TabOrder = 0
     object Button1: TButton
-      Left = 205
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 214
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -34,9 +36,11 @@ object f_configcalendar: Tf_configcalendar
       TabOrder = 1
     end
     object Button2: TButton
-      Left = 301
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 310
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -46,9 +50,11 @@ object f_configcalendar: Tf_configcalendar
       TabOrder = 2
     end
     object Button3: TButton
-      Left = 397
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 406
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -58,9 +64,11 @@ object f_configcalendar: Tf_configcalendar
       TabOrder = 3
     end
     object Button7: TButton
-      Left = 109
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 118
       Height = 25
-      Top = 12
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Help'

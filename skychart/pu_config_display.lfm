@@ -1,30 +1,32 @@
 object f_configdisplay: Tf_configdisplay
   Left = 258
-  Height = 602
+  Height = 630
   Top = 337
-  Width = 502
+  Width = 500
   ActiveControl = Button6
   BorderStyle = bsSingle
   Caption = 'Display'
-  ClientHeight = 602
-  ClientWidth = 502
+  ClientHeight = 630
+  ClientWidth = 500
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   object Panel1: TPanel
     Left = 0
-    Height = 50
-    Top = 552
-    Width = 502
+    Height = 41
+    Top = 589
+    Width = 500
     Align = alBottom
-    ClientHeight = 46
-    ClientWidth = 498
+    ClientHeight = 41
+    ClientWidth = 500
     ParentFont = False
     TabOrder = 0
     object Button2: TButton
-      Left = 182
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 184
       Height = 25
-      Top = 10
+      Top = 8
       Width = 77
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -34,9 +36,11 @@ object f_configdisplay: Tf_configdisplay
       TabOrder = 1
     end
     object Button4: TButton
-      Left = 286
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 288
       Height = 25
-      Top = 10
+      Top = 8
       Width = 77
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -46,9 +50,11 @@ object f_configdisplay: Tf_configdisplay
       TabOrder = 2
     end
     object Button5: TButton
-      Left = 395
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 397
       Height = 25
-      Top = 10
+      Top = 8
       Width = 77
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
@@ -59,9 +65,11 @@ object f_configdisplay: Tf_configdisplay
       TabOrder = 3
     end
     object Button6: TButton
-      Left = 80
+      AnchorSideTop.Control = Panel1
+      AnchorSideTop.Side = asrCenter
+      Left = 82
       Height = 25
-      Top = 10
+      Top = 8
       Width = 75
       Anchors = [akTop, akRight]
       Caption = 'Help'
