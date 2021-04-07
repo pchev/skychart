@@ -7761,6 +7761,8 @@ begin
     Fpop_indi.SetLang;
     Fpop_indi.SetPos;
   end;
+  sc.cfgsc.autorefresh:=true;
+  sc.cfgsc.UseSystemTime:=true;
   if Connect1.Checked then
   begin
     Fpop_indi.ScopeShow;
@@ -7856,6 +7858,8 @@ begin
     Fpop_scope.SetLang;
     Fpop_scope.onObservatoryCoord:=ObservatoryFromTelescope;
   end;
+  sc.cfgsc.autorefresh:=true;
+  sc.cfgsc.UseSystemTime:=true;
   if Connect1.Checked then
   begin
     Fpop_scope.ScopeShow;
