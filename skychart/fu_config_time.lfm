@@ -686,7 +686,7 @@ object f_config_time: Tf_config_time
             AnchorSideTop.Side = asrCenter
             Left = 210
             Height = 28
-            Hint = '10..86400'
+            Hint = '10..60'
             Top = 53
             Width = 41
             Constraints.MaxHeight = 28
@@ -697,7 +697,7 @@ object f_config_time: Tf_config_time
             OnChange = LongEdit2Change
             Value = 10
             MinValue = 10
-            MaxValue = 86400
+            MaxValue = 60
           end
           object Label142: TLabel
             AnchorSideTop.Control = CheckBox2

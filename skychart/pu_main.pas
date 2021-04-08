@@ -1592,7 +1592,7 @@ begin
     f_obslist.LimitHourangleTonight.Checked := cfgm.ObslistHourAngleLimit1;
     f_obslist.LimitHourangleNow.Checked := cfgm.ObslistHourAngleLimit2;
     f_obslist.LoadObsList;
-    Autorefresh.Interval := max(10, cfgm.autorefreshdelay) * 1000;
+    Autorefresh.Interval := max(10, min(60,cfgm.autorefreshdelay)) * 1000;
     AutoRefreshLock := False;
     Autorefresh.Enabled := True;
     AnimationEnabled := False;
@@ -3659,6 +3659,8 @@ begin
     begin
       showast := sc.cfgsc.ShowAsteroid;
       sc.cfgsc.UseSystemTime := True;
+      if Connect1.Checked then
+         sc.cfgsc.autorefresh:=true;
       if (not sc.cfgsc.TrackOn) and (sc.cfgsc.Projpole = Altaz) then
       begin
         sc.cfgsc.TrackOn := True;
@@ -5684,7 +5686,7 @@ begin
      ViewNightVision.Execute;
   end;
   Autorefresh.Enabled := False;
-  Autorefresh.Interval := max(10, cfgm.autorefreshdelay) * 1000;
+  Autorefresh.Interval := max(10, min(60,cfgm.autorefreshdelay)) * 1000;
   AutoRefreshLock := False;
   Autorefresh.Enabled := True;
 end;
