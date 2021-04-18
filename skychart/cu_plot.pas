@@ -1514,6 +1514,10 @@ begin
         else if processpoint(xx, yy) then
           addpoint(outx1, outy1);
 
+        // only start and end point is defined
+        if outlinenum=2 then
+          addpoint(outx1, outy1);
+
         if outlineinscreen and (outlinenum >= 2) and (not SingularPolygon) then
         begin
           // object is to be draw
