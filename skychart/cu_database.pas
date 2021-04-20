@@ -1193,6 +1193,7 @@ begin
       dropdb(cmain);
       raise Exception.Create('Error loading ' + slash(sampledir) + 'Cometsample.dat');
     end;
+    LoadCometFile(slash(sampledir) + 'historical_comet.txt', memo);
     // load location
     if not LoadCountryList(slash(sampledir) + 'country.dat', memo) then
     begin

@@ -1110,6 +1110,7 @@ begin
   if Sender = LoadCom then
     MemoCom.Clear;
   screen.cursor := crHourGlass;
+  cdb.LoadCometFile(slash(sampledir) + 'historical_comet.txt', MemoCom);
   cdb.LoadCometFile(SafeUTF8ToSys(comfile.Text), MemoCom);
   memocom.SelStart := length(memocom.Text) - 1;
   UpdComList;

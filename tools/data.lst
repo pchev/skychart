@@ -183,6 +183,7 @@ data/sample/d2k.info2
 data/sample/d2k.prj
 data/sample/ds2000.cdc3
 data/sample/Cometsample.dat
+data/sample/historical_comet.txt
 data/sample/country.dat
 data/sample/MPCsample.dat
 data/sample/F-D_FULL.TXT
