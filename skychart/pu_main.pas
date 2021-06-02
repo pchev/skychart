@@ -11998,7 +11998,7 @@ var
   f: textfile;
 begin
 try
-  fn :=slash(tempdir)+'F-D_FULL.DATE';
+  fn :=slash(tempdir)+'lc_summary_pub.DATE';
   if FileExists(fn) then begin
     AssignFile(f,fn);
     reset(f);
@@ -12014,7 +12014,7 @@ try
     readln(f,dt2);
     closefile(f);
     if dt1<>dt2 then begin
-      fn :=slash(tempdir)+'F-D_FULL.TXT';
+      fn :=slash(tempdir)+'lc_summary_pub.txt';
       if QuickDownload(URL_Asteroid_Lightcurve_Database, fn, False) then begin
         cdcdb.LoadAstExt(fn);
       end;

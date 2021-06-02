@@ -603,9 +603,9 @@ const
   URL_HTTPAsteroidElements3 = 'https://www.minorplanetcenter.net/iau/MPCORB/Distant.txt';
   URL_CDCAsteroidElements = 'https://www.ap-i.net/pub/skychart/mpc/mpc5000.dat';
 
-  URL_Asteroid_Lightcurve_Database_Info = 'http://www.minorplanet.info/lightcurvedatabase.html';
-  URL_Asteroid_Lightcurve_Date = 'https://www.ap-i.net/pub/skychart/asteroid/F-D_FULL.DATE';
-  URL_Asteroid_Lightcurve_Database = 'https://www.ap-i.net/pub/skychart/asteroid/F-D_FULL.TXT';
+  URL_Asteroid_Lightcurve_Database_Info = 'https://minplanobs.org/MPInfo/php/lcdb.php';
+  URL_Asteroid_Lightcurve_Date = 'https://www.ap-i.net/pub/skychart/asteroid/lc_summary_pub.DATE';
+  URL_Asteroid_Lightcurve_Database = 'https://www.ap-i.net/pub/skychart/asteroid/lc_summary_pub.txt';
 
   URL_IVOASAMP = 'http://www.ivoa.net/documents/SAMP/';
 

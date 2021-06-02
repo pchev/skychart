@@ -269,7 +269,7 @@ begin
       // load asteroid extension
       i := strtointdef(DB.QueryOne('select count(*) from cdc_ast_ext where name="Ceres"'), 0);
       if i=0 then
-        LoadAstExt(slash(sampledir) + 'F-D_FULL.TXT');
+        LoadAstExt(slash(sampledir) + 'lc_summary_pub.txt');
     end;
     // drop the asteroid table and reload to binary file
     if updversion < '4.3i' then begin
@@ -697,7 +697,7 @@ begin
     begin
       assignfile(f, fdfile);
       reset(f);
-      // skip headert
+      // skip header
       repeat
         readln(f, buf);
         if copy(buf,1,5)='-----' then break
@@ -707,16 +707,16 @@ begin
       // main loop
       while not eof(f) do begin
          readln(f, buf);
-         anum:=trim(copy(buf,1,8));
-         aname:=trim(copy(buf,10,20));
-         fam:=trim(copy(buf,39,5));
-         h:=trim(copy(buf,61,6));
-         g:=trim(copy(buf,69,6));
-         diam:=trim(copy(buf,77,8));
-         period:=trim(copy(buf,89,12));
-         amin:=trim(copy(buf,116,5));
-         amax:=trim(copy(buf,122,5));
-         u:=trim(copy(buf,129,2));
+         anum:=trim(copy(buf,1,7));
+         aname:=trim(copy(buf,11,30));
+         fam:=trim(copy(buf,63,8));
+         h:=trim(copy(buf,100,6));
+         g:=trim(copy(buf,112,6));
+         diam:=trim(copy(buf,89,8));
+         period:=trim(copy(buf,139,13));
+         amin:=trim(copy(buf,171,4));
+         amax:=trim(copy(buf,176,4));
+         u:=trim(copy(buf,181,2));
          cmd := 'REPLACE INTO cdc_ast_ext (number,name,fam,h,g,diam,period,amin,amax,u) VALUES (' + '"' +
           anum + '"' + ',"' + aname + '"'+ ',"' + fam + '"'+ ',"' + h + '"'+ ',"' + g + '"'+ ',"' +
           diam + '"'+ ',"' + period + '"' + ',"' + amin + '"'+ ',"' + amax + '"'+ ',"' + u + '"'+
@@ -1186,7 +1186,7 @@ begin
       dropdb(cmain);
       raise Exception.Create('Error loading ' + slash(sampledir) + 'MPCsample.dat');
     end;
-    LoadAstExt(slash(sampledir) + 'F-D_FULL.TXT');
+    LoadAstExt(slash(sampledir) + 'lc_summary_pub.txt');
     // load sample comet data
     if not LoadCometFile(slash(sampledir) + 'Cometsample.dat', memo) then
     begin
