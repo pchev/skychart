@@ -12018,6 +12018,10 @@ try
       if QuickDownload(URL_Asteroid_Lightcurve_Database, fn, False) then begin
         cdcdb.LoadAstExt(fn);
       end;
+      fn :=slash(tempdir)+'lc_familylookup.txt';
+      if QuickDownload(URL_Asteroid_Lightcurve_Family, fn, False) then begin
+        cdcdb.LoadAstFam(fn);
+      end;
     end;
   end;
 except

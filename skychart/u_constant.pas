@@ -606,7 +606,7 @@ const
   URL_Asteroid_Lightcurve_Database_Info = 'https://minplanobs.org/MPInfo/php/lcdb.php';
   URL_Asteroid_Lightcurve_Date = 'https://www.ap-i.net/pub/skychart/asteroid/lc_summary_pub.DATE';
   URL_Asteroid_Lightcurve_Database = 'https://www.ap-i.net/pub/skychart/asteroid/lc_summary_pub.txt';
-
+  URL_Asteroid_Lightcurve_Family = 'https://www.ap-i.net/pub/skychart/asteroid/lc_familylookup.txt';
   URL_IVOASAMP = 'http://www.ivoa.net/documents/SAMP/';
 
   URL_5MCSE = 'https://eclipse.gsfc.nasa.gov/5MCSE/plate%s.pdf';
@@ -1776,7 +1776,7 @@ const
     '( id varchar(12) NOT NULL default "", epoch double NOT NULL default "0",' +
     'ra smallint(6) NOT NULL default "0", de smallint(6) NOT NULL default "0",' +
     'mag smallint(6) NOT NULL default "0", near_earth smallint(1) NOT NULL default "0", PRIMARY KEY (ra,de,mag))';
-  numsqltable = 7;
+  numsqltable = 8;
   sqltable: array[1..numsqltable, 1..3] of string = (
      // sqlite tables
     ('cdc_com_name',
@@ -1816,7 +1816,8 @@ const
     'h NUMERIC NOT NULL default "0", g NUMERIC NOT NULL default "0", ' +
     'diam NUMERIC NOT NULL default "0", period NUMERIC NOT NULL default "0", ' +
     'amin NUMERIC NOT NULL default "0", amax NUMERIC NOT NULL default "0",  u TEXT NOT NULL default "", ' +
-    'PRIMARY KEY (name))', '4')
+    'PRIMARY KEY (name))', '4'),
+    ('cdc_ast_fam', ' ( number NUMERIC, parent NUMERIC, name TEXT, PRIMARY KEY (number))', '')
     );
   numsqlindex = 4;
   sqlindex: array[1..numsqlindex, 1..2] of string = (

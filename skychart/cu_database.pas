@@ -85,6 +85,7 @@ type
     function AddCom(comid, comt, comep, comq, comec, comperi, comnode, comi,
       comh, comg, comnam, comeq: string): string;
     function LoadAstExt(fdfile: string): boolean;
+    function LoadAstFam(famfile: string): boolean;
     function GetAstExt(aname, anum: string; out fam,h,g,diam,period,amin,amax,u: string): boolean;
     function LoadAsteroidFile(astfile: string; append, astnumbered, stoperr, limit: boolean; astlimit: integer; memoast: Tmemo): boolean;
     procedure OpenAsteroid(append: boolean=false);
@@ -265,12 +266,6 @@ begin
         DB.Query('CREATE INDEX ' + sqlindex[k, 1] + ' on ' + sqlindex[k, 2]);
       end;
     end;
-    if updversion < '4.3h' then begin
-      // load asteroid extension
-      i := strtointdef(DB.QueryOne('select count(*) from cdc_ast_ext where name="Ceres"'), 0);
-      if i=0 then
-        LoadAstExt(slash(sampledir) + 'lc_summary_pub.txt');
-    end;
     // drop the asteroid table and reload to binary file
     if updversion < '4.3i' then begin
       f_info.setpage(2);
@@ -316,6 +311,14 @@ begin
         LoadAsteroidFile(slash(sampledir) + 'MPCsample.dat', False, True, False, False, 1000, memo);
       if Assigned(FFinishAsteroidUpgrade) then FFinishAsteroidUpgrade(self);
       f_info.hide;
+    end;
+    if updversion < '4.3m' then begin
+      // load asteroid extension
+      i := strtointdef(DB.QueryOne('select count(*) from cdc_ast_fam where number=1'), 0);
+      if i=0 then begin
+        LoadAstExt(slash(sampledir) + 'lc_summary_pub.txt');
+        LoadAstFam(slash(sampledir) + 'lc_familylookup.txt');
+      end;
     end;
   end;
 end;
@@ -732,8 +735,49 @@ begin
   end;
 end;
 
+function TCDCdb.LoadAstFam(famfile: string): boolean;
+var anum,aparent,aname: string;
+    buf,cmd: string;
+    f: textfile;
+begin
+  Result := False;
+  if not fileexists(famfile) then
+    exit;
+  try
+    if DB.Active then
+    begin
+      assignfile(f, famfile);
+      reset(f);
+      // skip header
+      repeat
+        readln(f, buf);
+        if copy(buf,1,5)='-----' then break
+      until eof(f);
+      DB.starttransaction;
+      DB.LockTables('cdc_ast_fam WRITE');
+      // main loop
+      while not eof(f) do begin
+         readln(f, buf);
+         if trim(buf)='' then continue;
+         anum:=trim(copy(buf,1,7));
+         aparent:=trim(copy(buf,9,7));
+         aname:=trim(copy(buf,17,20));
+         cmd := 'REPLACE INTO cdc_ast_fam (number,parent,name) VALUES (' + '"' +
+          anum + '"' + ',"' + aparent + '"'+ ',"' + aname + '"'+
+          ' )';
+        DB.query(cmd);
+      end;
+      CloseFile(f);
+      DB.UnLockTables;
+      DB.commit;
+      DB.flush('tables');
+    end;
+  except
+  end;
+end;
+
 function TCDCdb.GetAstExt(aname, anum: string; out fam,h,g,diam,period,amin,amax,u: string): boolean;
-var cmd: string;
+var cmd,aparent,afamname: string;
 begin
   result:=false;
   if anum='' then
@@ -752,6 +796,18 @@ begin
       amin := DB.Results[0][5];
       amax := DB.Results[0][6];
       u := DB.Results[0][7];
+      if trim(fam)<>'' then begin
+        cmd:='select parent,name from cdc_ast_fam where number='+trim(fam);
+        DB.Query(cmd);
+        if DB.Rowcount > 0 then begin
+          aparent:=DB.Results[0][0];
+          afamname:=DB.Results[0][1];
+          if trim(aparent)<>'0' then
+            fam:=aparent+' '+afamname
+          else
+            fam:=afamname;
+        end;
+      end;
     end;
 end;
 
@@ -1187,6 +1243,7 @@ begin
       raise Exception.Create('Error loading ' + slash(sampledir) + 'MPCsample.dat');
     end;
     LoadAstExt(slash(sampledir) + 'lc_summary_pub.txt');
+    LoadAstFam(slash(sampledir) + 'lc_familylookup.txt');
     // load sample comet data
     if not LoadCometFile(slash(sampledir) + 'Cometsample.dat', memo) then
     begin
