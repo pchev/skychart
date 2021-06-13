@@ -397,7 +397,7 @@ end;
 
 procedure Tf_info.FormShow(Sender: TObject);
 begin
-  ButtonPrint.Enabled := (Printer.PrinterIndex >= 0);
+  ButtonPrint.Enabled := (GetPrinterIndex >= 0);
   case ActivePage of
     0:
     begin

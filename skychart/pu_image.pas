@@ -185,7 +185,7 @@ end;
 
 procedure Tf_image.FormShow(Sender: TObject);
 begin
-  if Printer.PrinterIndex < 0 then
+  if GetPrinterIndex < 0 then
     ButtonPrint.Visible := False;
 end;
 

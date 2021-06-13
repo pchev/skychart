@@ -366,7 +366,7 @@ begin
     initial := False;
   end;
   BtnReset.Visible := False;
-  BtnPrint.Visible := (Printer.PrinterIndex >= 0);
+  BtnPrint.Visible := (GetPrinterIndex >= 0);
   if cdb = nil then
   begin
     comet.TabVisible := False;

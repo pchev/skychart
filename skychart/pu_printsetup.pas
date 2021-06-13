@@ -140,7 +140,7 @@ var
 begin
   try
     lockupd := True;
-    if (cm.PrintMethod = 0) and (Printer.PrinterIndex < 0) then
+    if (cm.PrintMethod = 0) and (GetPrinterIndex < 0) then
     begin
       ShowMessage(rsNoPrinterFou);
       cm.PrintMethod := 2;

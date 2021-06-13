@@ -197,7 +197,7 @@ procedure Tf_print.ShowPrtInfo;
 var
   i: integer;
 begin
-  if (cm.PrintMethod = 0) and (Printer.PrinterIndex < 0) then
+  if (cm.PrintMethod = 0) and (GetPrinterIndex < 0) then
   begin
     cm.PrintMethod := 1;
   end;

@@ -120,6 +120,7 @@ function decode_mpc_date(s: string; var y, m, d: integer; var hh: double): boole
 function GreekLetter(gr: shortstring): shortstring;
 function GetId(str: string): integer;
 procedure GetPrinterResolution(var Name: string; var resol: integer);
+function GetPrinterIndex: integer;
 function ExecuteFile(const FileName: string): integer;
 procedure PrintStrings(str: TStrings; PrtTitle, PrtText, PrtTextDate: string;
   orient: TPrinterOrientation);
@@ -2834,7 +2835,7 @@ end;
 
 procedure GetPrinterResolution(var Name: string; var resol: integer);
 begin
-  if Printer.PrinterIndex >= 0 then
+  if GetPrinterIndex >= 0 then
   begin
     Name := Printer.Printers[Printer.PrinterIndex];
     resol := Printer.XDPI;
@@ -2843,6 +2844,15 @@ begin
   begin
     Name := '';
     resol := 72;
+  end;
+end;
+
+function GetPrinterIndex: integer;
+begin
+  try
+    result := Printer.PrinterIndex; // may crash on some case
+  except
+    result := -1;
   end;
 end;
 
@@ -2885,7 +2895,7 @@ begin
   y := 0;
   StrDate := PrtTextDate + DateToStr(Date);
 
-  if (Printer<>nil) and (Printer.PrinterIndex >= 0) then with Printer do
+  if (Printer<>nil) and (GetPrinterIndex >= 0) then with Printer do
   begin
     Title := PrtTitle;
     Orientation := orient;
@@ -3021,7 +3031,7 @@ begin
   GetMem(Cols, Grid.ColCount * SizeOf(integer));
   StrDate := PrtTextDate + DateToStr(Date);
 
-  if (Printer<>nil) and (Printer.PrinterIndex >= 0) then with Printer do
+  if (Printer<>nil) and (GetPrinterIndex >= 0) then with Printer do
   begin
     Title := PrtTitle;
     Orientation := orient;

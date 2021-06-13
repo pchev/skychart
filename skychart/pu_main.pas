@@ -6135,7 +6135,7 @@ begin
   cfgm.PrintBmpWidth := 1920;
   cfgm.PrintBmpHeight := 1080;
   cfgm.PrintLandscape := True;
-  if Printer.PrinterIndex >= 0 then
+  if GetPrinterIndex >= 0 then
     cfgm.PrintMethod := 0
   else
     cfgm.PrintMethod := 2;
@@ -7719,7 +7719,7 @@ begin
           ReadInteger(section, 'PrintBmpHeight', cfgm.PrintBmpHeight);
         cfgm.PrintLandscape := ReadBool(section, 'PrintLandscape', cfgm.PrintLandscape);
         cfgm.PrintMethod := ReadInteger(section, 'PrintMethod', cfgm.PrintMethod);
-        if (cfgm.PrintMethod = 0) and (Printer.PrinterIndex < 0) then
+        if (cfgm.PrintMethod = 0) and (GetPrinterIndex < 0) then
           cfgm.PrintMethod := 2;
         cfgm.PrintCmd1 := ReadString(section, 'PrintCmd1', cfgm.PrintCmd1);
         cfgm.PrintCmd2 := ReadString(section, 'PrintCmd2', cfgm.PrintCmd2);
