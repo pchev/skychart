@@ -2545,28 +2545,24 @@ begin
     {$endif}
     if isAdmin then begin
        if UacEnabled then begin
-         if MessageDlg('Error!','Carte du Ciel program should never be run as administrator, '+
-             'this is useless, dangerous and the source of many unwanted issues.'+crlf+
-             'Please close the program now and fix the startup icon or command.',
-             mtError,[mbClose,mbIgnore],0,mbClose) <> mrIgnore
-             then halt;
+          MessageDlg('Error, running as administrator!','Carte du Ciel, like any other astronomy software, should never be run as an administrator, '+
+             'this is unnecessary, dangerous and a source of many unwanted problems.'+crlf+
+             'The program will close now.'+crlf+crlf+
+             'Please fix the start icon or command before trying again.',
+             mtError,[mbClose],0,mbClose);
+          halt;
        end
        else begin
-         if MessageDlg('Error!','Carte du Ciel program should never be run as administrator,'+
-             'this is useless, dangerous and the source of many unwanted issues.'+crlf+
-             'UAC is disabled in the system, this is a dangerous choice.'+crlf+
-             'Please close the program now and enable UAC, or run it from a standard, non administrator user.',
-             mtError,[mbClose,mbIgnore],0,mbClose) <> mrIgnore
-             then halt;
+          MessageDlg('Error, running as administrator!','Carte du Ciel, like any other astronomy software, should never be run as an administrator, '+
+             'this is unnecessary, dangerous and a source of many unwanted problems.'+crlf+
+             'The program will close now.'+crlf+crlf+
+             'UAC is disabled in the system, this is a very dangerous choice.'+crlf+
+             'Please enable UAC, or run the program from a standard, non-administrative user',
+             mtError,[mbClose],0,mbClose);
+          halt;
        end;
-       {$ifdef mswindows}
-       basecaption := Format(rsDoNotRunAsAd, [Caption, rsAdministrato])
-       {$else}
-       basecaption := Format(rsDoNotRunAsAd, [Caption, 'root'])
-       {$endif}
-    end
-    else
-       basecaption := Caption;
+    end;
+    basecaption := Caption;
     basecaption:=basecaption+blank+cdcversion + blank + RevisionStr;
     step := 'Create config';
     if VerboseMsg then
