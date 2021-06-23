@@ -671,6 +671,7 @@ var J: TAscomResult;
     ok: boolean;
     i,n: integer;
     RESTRequest: THTTPthread;
+    buf: array[0..512] of char;
 begin
   RESTRequest:=THTTPthread.Create;
   try
@@ -727,10 +728,17 @@ begin
       end;
     end
     else begin
+      try
+      RESTRequest.http.Document.Position:=0;
+      n:=RESTRequest.http.Document.Read(buf,sizeof(buf));
+      except
+        buf:='';
+      end;
       FLastErrorCode:=RESTRequest.http.ResultCode;
       FLastError:=RESTRequest.http.ResultString;
       i:=pos('<br>',FLastError);
       if i>0 then FLastError:=copy(FLastError,1,i-1);
+      FLastError:=FLastError+trim(copy(buf,1,n));
       raise EApiException.Create(FLastError);
     end;
   end
