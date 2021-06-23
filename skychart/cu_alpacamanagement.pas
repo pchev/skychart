@@ -195,6 +195,16 @@ begin
     Result.Add('255.255.255.255');
 end;
 
+function GetInsensitivePath(src:TJSONData; path:string):TJSONData;
+var i: integer;
+begin
+  i:=TJSONObject(src).IndexOfName(path,true);
+  if i>=0 then
+     result:=TJSONObject(src).Items[i].GetPath('')
+  else
+     result:=nil;
+end;
+
 function AlpacaDiscoverServer: TAlpacaServerList;
 var sock : TUDPBlockSocket;
     brip,ip,port,id:string;
@@ -233,7 +243,7 @@ begin
         Fjson:=GetJSON(data);
         if Fjson<>nil then begin
             try
-            port:=Fjson.GetPath('AlpacaPort').AsString;
+            port:=GetInsensitivePath(Fjson,'AlpacaPort').AsString;
             except
               // not a alpaca response
               Fjson.Free;
@@ -320,15 +330,15 @@ function ManagementGet(url:string; param: string=''):TAscomResult;
 
 procedure AlpacaServerDescription(var srv:TAlpacaServer);
 var J: TAscomResult;
+    d: TJSONData;
 begin
   J:=ManagementGet('http://'+srv.ip+':'+srv.port+'/management/v'+IntToStr(srv.apiversion)+'/description');
   try
-  with J.GetName('Value') do begin
-    srv.servername:=GetPath('ServerName').AsString;
-    srv.manufacturer:=GetPath('Manufacturer').AsString;
-    srv.version:=GetPath('ManufacturerVersion').AsString;
-    srv.location:=GetPath('Location').AsString;
-  end;
+    d:=J.GetName('Value');
+    srv.servername:=GetInsensitivePath(d,'ServerName').AsString;
+    srv.manufacturer:=GetInsensitivePath(d,'Manufacturer').AsString;
+    srv.version:=GetInsensitivePath(d,'ManufacturerVersion').AsString;
+    srv.location:=GetInsensitivePath(d,'Location').AsString;
   finally
     J.Free;
   end;
@@ -341,20 +351,20 @@ end;
 
 function AlpacaDevices(ip,port,apiversion: string):TAlpacaDeviceList;
 var J: TAscomResult;
+    d: TJSONArray;
     i,n: integer;
 begin
   J:=ManagementGet('http://'+ip+':'+port+'/management/v'+apiversion+'/configureddevices');
   try
-  with TJSONArray(J.GetName('Value')) do begin
-    n:=Count;
+    d:=TJSONArray(J.GetName('Value'));
+    n:=d.Count;
     SetLength(Result,n);
     for i:=0 to n-1 do begin
-      Result[i].DeviceName:=Objects[i].GetPath('DeviceName').AsString;
-      Result[i].DeviceType:=Objects[i].GetPath('DeviceType').AsString;
-      Result[i].DeviceNumber:=Objects[i].GetPath('DeviceNumber').AsInteger;
-      Result[i].DeviceId:=Objects[i].GetPath('UniqueID').AsString;
+      Result[i].DeviceName:=GetInsensitivePath(d.Objects[i],'DeviceName').AsString;
+      Result[i].DeviceType:=GetInsensitivePath(d.Objects[i],'DeviceType').AsString;
+      Result[i].DeviceNumber:=GetInsensitivePath(d.Objects[i],'DeviceNumber').AsInteger;
+      Result[i].DeviceId:=GetInsensitivePath(d.Objects[i],'UniqueID').AsString;
     end;
-  end;
   finally
     J.Free;
   end;
