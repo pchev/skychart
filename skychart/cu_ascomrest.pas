@@ -350,7 +350,7 @@ function TAscomRest.Get(method:string; param: string=''; hdr: string=''):TAscomR
    RESTRequest.method:='GET';
    RESTRequest.Start;
    while not RESTRequest.Finished do begin
-     sleep(100);
+     sleep(5);
      if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
    end;
    ok := RESTRequest.ok;
@@ -458,7 +458,7 @@ function TAscomRest.GetImagearrayBase64:TMemoryStream;
    RESTRequest.method:='GET';
    RESTRequest.Start;
    while not RESTRequest.Finished do begin
-     sleep(100);
+     sleep(5);
      if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
    end;
    ok := RESTRequest.ok;
@@ -625,7 +625,7 @@ begin
   RESTRequest.method:='PUT';
   RESTRequest.Start;
   while not RESTRequest.Finished do begin
-    sleep(100);
+    sleep(5);
     if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
   end;
   ok := RESTRequest.ok;
@@ -706,7 +706,7 @@ begin
   RESTRequest.method:='PUT';
   RESTRequest.Start;
   while not RESTRequest.Finished do begin
-    sleep(100);
+    sleep(5);
     if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
   end;
   ok := RESTRequest.ok;
