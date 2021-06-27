@@ -116,7 +116,6 @@ begin
   Result:=TStringList.Create;
   sl:=TStringList.Create();
   {$IFDEF WINDOWS}
-  Result.Add('127.0.0.1'); // local loopback not listed by ipconfig
   AProcess:=TProcess.Create(nil);
   AProcess.Executable := 'ipconfig.exe';
   AProcess.Options := AProcess.Options + [poUsePipes, poNoConsole];
@@ -127,6 +126,7 @@ begin
   finally
     AProcess.Free();
   end;
+  Result.Add('127.255.255.255'); // always add local loopback
   hasIP:=false;
   hasMask:=false;
   for i:=0 to sl.Count-1 do //!response text are localized!
@@ -178,7 +178,7 @@ begin
   finally
     AProcess.Free();
   end;
-
+  Result.Add('127.255.255.255'); // always add local loopback
   for i:=0 to sl.Count-1 do
   begin
     n:=Pos('broadcast ', sl[i]);
