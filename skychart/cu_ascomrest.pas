@@ -95,7 +95,7 @@ type
 
   TAscomRest = class(TComponent)
   protected
-    Fhost, Fport, Fprotocol, FDevice, FbaseUrl, FApiVersion: string;
+    Fhost, Fport, Fprotocol, FDevice, FbaseUrl, FApiVersion, FRemoteIP: string;
     Fuser, Fpassword: string;
     FClientId,FClientTransactionID: LongWord;
     FTimeout: integer;
@@ -137,6 +137,7 @@ type
     property Timeout: integer read GetTimeout write SetTimeout;
     property LastError: string read FLastError;
     property LastErrorCode: integer read FLastErrorCode;
+    property RemoteIP: string read FRemoteIP;
 
   end;
 
@@ -250,6 +251,7 @@ begin
   Fprotocol:='http:';
   Fhost:='localhost';
   Fport:='11111';
+  FRemoteIP:='';
   FTimeout:=120000;
   FDevice:='';
   Fuser:='';
@@ -709,6 +711,8 @@ begin
     sleep(5);
     if GetCurrentThreadId=MainThreadID then Application.ProcessMessages;
   end;
+  if method='Connected' then
+    FRemoteIP:=RESTRequest.http.Sock.GetRemoteSinIP;
   ok := RESTRequest.ok;
   if ok then begin
     if (RESTRequest.http.ResultCode=200) then begin
