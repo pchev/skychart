@@ -61,6 +61,7 @@ type
     elev: TEdit;
     GroupBox3: TGroupBox;
     ButtonAdvSetting: TSpeedButton;
+    Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label34: TLabel;
@@ -77,6 +78,7 @@ type
     ASCOMLocal: TTabSheet;
     ASCOMRemote: TTabSheet;
     FlipNS: TRadioGroup;
+    ReadIntBox: TComboBox;
     StopMoveTimer: TTimer;
     trackingled: TShape;
     ButtonTracking: TSpeedButton;
@@ -102,8 +104,6 @@ type
     GroupBox1: TGroupBox;
     Edit1: TEdit;
     ButtonSelect: TSpeedButton;
-    ReadIntBox: TComboBox;
-    Label1: TLabel;
     ButtonConfigure: TSpeedButton;
     ButtonAbort: TSpeedButton;
     ButtonSetTime: TSpeedButton;

@@ -1,12 +1,12 @@
 object pop_scope: Tpop_scope
   Left = 276
-  Height = 603
+  Height = 616
   Top = 124
   Width = 314
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   Caption = 'ASCOM Telescope Interface'
-  ClientHeight = 603
+  ClientHeight = 616
   ClientWidth = 314
   OnCloseQuery = kill
   OnCreate = FormCreate
@@ -16,7 +16,7 @@ object pop_scope: Tpop_scope
   object GroupBox3: TGroupBox
     Left = 0
     Height = 89
-    Top = 509
+    Top = 541
     Width = 314
     Align = alTop
     ClientHeight = 87
@@ -191,18 +191,18 @@ object pop_scope: Tpop_scope
   end
   object Panel1: TPanel
     Left = 0
-    Height = 157
+    Height = 189
     Top = 352
     Width = 314
     Align = alTop
-    ClientHeight = 157
+    ClientHeight = 189
     ClientWidth = 314
     ParentFont = False
     TabOrder = 1
     object LabelAlpha: TLabel
       Left = 32
       Height = 17
-      Top = 10
+      Top = 36
       Width = 20
       Caption = 'RA '
       ParentColor = False
@@ -211,7 +211,7 @@ object pop_scope: Tpop_scope
     object LabelDelta: TLabel
       Left = 167
       Height = 17
-      Top = 10
+      Top = 36
       Width = 25
       Caption = 'DEC'
       ParentColor = False
@@ -220,7 +220,7 @@ object pop_scope: Tpop_scope
     object Label11: TLabel
       Left = 32
       Height = 17
-      Top = 34
+      Top = 60
       Width = 17
       Caption = 'AZ'
       ParentColor = False
@@ -229,7 +229,7 @@ object pop_scope: Tpop_scope
     object Label12: TLabel
       Left = 167
       Height = 17
-      Top = 34
+      Top = 60
       Width = 23
       Caption = 'ALT'
       ParentColor = False
@@ -238,7 +238,7 @@ object pop_scope: Tpop_scope
     object ButtonAbort: TSpeedButton
       Left = 8
       Height = 25
-      Top = 65
+      Top = 91
       Width = 154
       Caption = 'Abort Slew'
       Font.Color = clRed
@@ -251,7 +251,7 @@ object pop_scope: Tpop_scope
     object pos_x: TEdit
       Left = 57
       Height = 25
-      Top = 6
+      Top = 32
       Width = 105
       Constraints.MaxHeight = 25
       ParentFont = False
@@ -262,7 +262,7 @@ object pop_scope: Tpop_scope
     object pos_y: TEdit
       Left = 202
       Height = 25
-      Top = 6
+      Top = 32
       Width = 91
       Constraints.MaxHeight = 25
       ParentFont = False
@@ -273,7 +273,7 @@ object pop_scope: Tpop_scope
     object az_x: TEdit
       Left = 57
       Height = 25
-      Top = 30
+      Top = 56
       Width = 105
       Constraints.MaxHeight = 25
       ParentFont = False
@@ -284,7 +284,7 @@ object pop_scope: Tpop_scope
     object alt_y: TEdit
       Left = 202
       Height = 25
-      Top = 30
+      Top = 56
       Width = 91
       Constraints.MaxHeight = 25
       ParentFont = False
@@ -295,7 +295,7 @@ object pop_scope: Tpop_scope
     object ShowAltAz: TCheckBox
       Left = 8
       Height = 21
-      Top = 32
+      Top = 58
       Width = 21
       ParentFont = False
       TabOrder = 2
@@ -303,7 +303,7 @@ object pop_scope: Tpop_scope
     object ButtonTracking: TSpeedButton
       Left = 101
       Height = 25
-      Top = 97
+      Top = 123
       Width = 85
       Caption = 'Tracking'
       Enabled = False
@@ -313,7 +313,7 @@ object pop_scope: Tpop_scope
     object trackingled: TShape
       Left = 103
       Height = 16
-      Top = 126
+      Top = 152
       Width = 81
       Brush.Color = clRed
       OnChangeBounds = trackingledChangeBounds
@@ -321,7 +321,7 @@ object pop_scope: Tpop_scope
     object ButtonPark: TSpeedButton
       Left = 8
       Height = 25
-      Top = 97
+      Top = 123
       Width = 85
       Caption = 'Park'
       Enabled = False
@@ -331,14 +331,14 @@ object pop_scope: Tpop_scope
     object parkled: TShape
       Left = 10
       Height = 16
-      Top = 126
+      Top = 152
       Width = 81
       Brush.Color = clRed
     end
     object Handpad: TPanel
       Left = 243
       Height = 61
-      Top = 93
+      Top = 119
       Width = 61
       BevelOuter = bvNone
       ClientHeight = 61
@@ -413,7 +413,7 @@ object pop_scope: Tpop_scope
     object FlipNS: TRadioGroup
       Left = 186
       Height = 61
-      Top = 93
+      Top = 119
       Width = 51
       AutoFill = True
       ChildSizing.LeftRightSpacing = 6
@@ -438,7 +438,7 @@ object pop_scope: Tpop_scope
     object Label4: TLabel
       Left = 167
       Height = 17
-      Top = 67
+      Top = 93
       Width = 39
       Caption = 'Speed'
       ParentColor = False
@@ -447,13 +447,45 @@ object pop_scope: Tpop_scope
     object AxisRates: TComboBox
       Left = 224
       Height = 28
-      Top = 62
+      Top = 88
       Width = 85
       Constraints.MaxHeight = 28
       ItemHeight = 0
       ParentFont = False
       Style = csDropDownList
       TabOrder = 7
+    end
+    object Label1: TLabel
+      AnchorSideTop.Control = ReadIntBox
+      AnchorSideTop.Side = asrCenter
+      Left = 57
+      Height = 17
+      Top = 8
+      Width = 83
+      Caption = 'Refresh rate :'
+      ParentColor = False
+      ParentFont = False
+    end
+    object ReadIntBox: TComboBox
+      AnchorSideTop.Side = asrCenter
+      Left = 202
+      Height = 28
+      Top = 2
+      Width = 91
+      Constraints.MaxHeight = 28
+      ItemHeight = 0
+      ItemIndex = 2
+      Items.Strings = (
+        '250'
+        '500'
+        '1000'
+        '2000'
+        '5000'
+      )
+      OnChange = ReadIntBoxChange
+      ParentFont = False
+      TabOrder = 8
+      Text = '1000'
     end
   end
   object PageControl1: TPageControl
@@ -492,17 +524,6 @@ object pop_scope: Tpop_scope
           OnClick = ButtonSelectClick
           ParentFont = False
         end
-        object Label1: TLabel
-          AnchorSideTop.Control = ButtonAbout
-          AnchorSideTop.Side = asrCenter
-          Left = 8
-          Height = 17
-          Top = 77
-          Width = 83
-          Caption = 'Refresh rate :'
-          ParentColor = False
-          ParentFont = False
-        end
         object ButtonConfigure: TSpeedButton
           Left = 184
           Height = 26
@@ -534,28 +555,6 @@ object pop_scope: Tpop_scope
           ReadOnly = True
           TabStop = False
           TabOrder = 0
-        end
-        object ReadIntBox: TComboBox
-          AnchorSideTop.Control = ButtonAbout
-          AnchorSideTop.Side = asrCenter
-          Left = 108
-          Height = 28
-          Top = 71
-          Width = 74
-          Constraints.MaxHeight = 28
-          ItemHeight = 0
-          ItemIndex = 2
-          Items.Strings = (
-            '250'
-            '500'
-            '1000'
-            '2000'
-            '5000'
-          )
-          OnChange = ReadIntBoxChange
-          ParentFont = False
-          TabOrder = 1
-          Text = '1000'
         end
         object ButtonAdvSetting: TSpeedButton
           Left = 102
