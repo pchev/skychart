@@ -358,6 +358,7 @@ function TAscomRest.Get(method:string; param: string=''; hdr: string=''):TAscomR
    ok := RESTRequest.ok;
    if ok then begin
      if (RESTRequest.http.ResultCode=200) then begin
+       try
        RESTRequest.http.Document.Position:=0;
        Result:=TAscomResult.Create;
        Result.data:=TJSONObject(GetJSON(RESTRequest.http.Document));
@@ -368,6 +369,12 @@ function TAscomRest.Get(method:string; param: string=''; hdr: string=''):TAscomR
              buf:=lowercase(trim(SeparateRight(RESTRequest.http.Headers[i], ':')));
              Result.base64handoff:=(buf='true');
            end;
+       end;
+       except
+         FLastErrorCode:=500;
+         FLastError:='Unknown error response from server';
+         Result.Free;
+         raise EApiException.Create(FLastError);
        end;
        try
        FLastErrorCode:=Result.GetName('ErrorNumber').AsInteger;
