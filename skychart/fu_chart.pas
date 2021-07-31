@@ -863,6 +863,7 @@ begin
     frommovecam := False;
     step:='init plot';
     identlabel.Visible := False;
+    MeasureOn:=false;
     Image1.Width := clientwidth;
     Image1.Height := clientheight;
     if VerboseMsg then
@@ -1258,6 +1259,18 @@ begin
       brush.Style := bsSolid;
     end;
   end;
+  if MeasureOn then
+    with Image1.Canvas do
+    begin
+      Pen.Width := 1;
+      pen.Color := clWhite;
+      Pen.Mode := pmXor;
+      brush.Style := bsclear;
+      MoveTo(XM1, YM1);
+      LineTo(XMD1, YMD1);
+      Pen.Mode := pmCopy;
+      brush.Style := bsSolid;
+    end;
   if sc.cfgsc.scopemark then
   begin
     sc.DrawFinderMark(sc.cfgsc.ScopeRa, sc.cfgsc.ScopeDec, True, -1);
