@@ -2836,7 +2836,7 @@ begin
   umbra := 1.01 * arctan2(umbra, MoonDistTopo);
   penumbra := umbra + 1.07 * deg2rad;  // + 2x sun diameter
   pixscale := abs(cfgsc.BxGlb);
-  Fplot.PlotEarthShadow(xx, yy, umbra, penumbra, pixscale, flatten);
+  Fplot.PlotEarthShadow(xx, yy, umbra, penumbra, pixscale, flatten, cfgsc.EarthShadowForceLine);
 end;
 
 procedure Tskychart.DrawSatel(j, ipla: integer; ra, Dec, ma, diam, pixscale, rot: double;

@@ -5501,6 +5501,7 @@ begin
       csc.CommagDiff := 4;
       csc.DrawAllStarLabel := False;
       csc.ShowEarthShadow := False;
+      csc.EarthShadowForceLine := True;
       csc.StarFilter := True;
       cshr.AutoStarFilter := True;
       cshr.AutoStarFilterMag := 7.5;
@@ -6499,6 +6500,7 @@ begin
   def_cfgsc.ConstLatinLabel := False;
   def_cfgsc.PlanetParalaxe := True;
   def_cfgsc.ShowEarthShadow := False;
+  def_cfgsc.EarthShadowForceLine := False;
   def_cfgsc.GRSlongitude := 314.5;
   def_cfgsc.GRSjd := jd(2019, 8, 12, 0);
   def_cfgsc.GRSdrift := 18.3 / 365.25;
@@ -7459,6 +7461,7 @@ begin
         csc.ConstLatinLabel := ReadBool(section, 'ConstLatinLabel', csc.ConstLatinLabel);
         csc.PlanetParalaxe := ReadBool(section, 'PlanetParalaxe', csc.PlanetParalaxe);
         csc.ShowEarthShadow := ReadBool(section, 'ShowEarthShadow', csc.ShowEarthShadow);
+        csc.EarthShadowForceLine := ReadBool(section, 'EarthShadowForceLine', csc.EarthShadowForceLine);
         csc.GRSlongitude := ReadFloat(section, 'GRSlongitude', csc.GRSlongitude);
         csc.GRSjd := ReadFloat(section, 'GRSjd', csc.GRSjd);
         csc.GRSdrift := ReadFloat(section, 'GRSdrift', csc.GRSdrift);
@@ -8832,6 +8835,7 @@ begin
         WriteBool(section, 'ConstLatinLabel', csc.ConstLatinLabel);
         WriteBool(section, 'PlanetParalaxe', csc.PlanetParalaxe);
         WriteBool(section, 'ShowEarthShadow', csc.ShowEarthShadow);
+        WriteBool(section, 'EarthShadowForceLine', csc.EarthShadowForceLine);
         WriteFloat(section, 'GRSlongitude', csc.GRSlongitude);
         WriteFloat(section, 'GRSjd', csc.GRSjd);
         WriteFloat(section, 'GRSdrift', csc.GRSdrift);

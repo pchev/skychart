@@ -46,6 +46,7 @@ type
     ButtonEphDown: TButton;
     CheckAllSPK: TCheckBox;
     astappend: TCheckBox;
+    PlanetBox31: TCheckBox;
     DateEdit1: TDateEdit;
     LabelTitle: TLabel;
     LabelDate2: TLabel;
@@ -263,6 +264,7 @@ type
     procedure LabelTitleClick(Sender: TObject);
     procedure NumDaysChange(Sender: TObject);
     procedure PageControl1Changing(Sender: TObject; var AllowChange: boolean);
+    procedure PlanetBox31Click(Sender: TObject);
     procedure PlaParalaxeClick(Sender: TObject);
     procedure PlanetBoxClick(Sender: TObject);
     procedure PlanetModeClick(Sender: TObject);
@@ -386,6 +388,7 @@ begin
   PlanetMode.Items[2] := PlanetMode.Items[2] + blank + rsRequireXplan;
 {$endif}
   PlanetBox3.Caption := rsShowEarthSha;
+  PlanetBox31.Caption := rsLineMode;
   TransparentPlanet.Caption := rsTransparentL;
   SunOnline.Caption := rsUseOnlineSun;
   smallsat.Caption := rsShowTheSmall;
@@ -611,6 +614,7 @@ begin
   GRSdrift.Value := csc.GRSdrift * 365.25;
   GRSJDDate.JD := csc.GRSjd;
   PlanetBox3.Checked := csc.ShowEarthShadow;
+  PlanetBox31.Checked := csc.EarthShadowForceLine;
   TransparentPlanet.Checked := cplot.TransparentPlanet;
   SunOnline.Checked := csc.SunOnline;
   for i := 0 to URL_SUN_NUMBER - 1 do
@@ -1020,6 +1024,11 @@ procedure Tf_config_solsys.PageControl1Changing(Sender: TObject;
 begin
   if parent is TForm then
     TForm(Parent).ActiveControl := PageControl1;
+end;
+
+procedure Tf_config_solsys.PlanetBox31Click(Sender: TObject);
+begin
+  csc.EarthShadowForceLine := PlanetBox31.Checked;
 end;
 
 

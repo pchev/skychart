@@ -182,7 +182,7 @@ type
     procedure PlotPlanet(x, y: single; flipx, flipy, ipla: integer;
       jdt, pixscale, diam, flatten, magn, phase, pa, rot, poleincl, sunincl, w, r1, r2, be: double;
       WhiteBg: boolean; size: integer = 0; margin: integer = 0);
-    procedure PlotEarthShadow(x, y: single; r1, r2, pixscale, flatten: double);
+    procedure PlotEarthShadow(x, y: single; r1, r2, pixscale, flatten: double; forceline: boolean);
     procedure PlotSatel(x, y: single; ipla: integer; JD, pixscale, ma, diam, rot: double;
       hidesat, showhide, whitebg: boolean; flipx, flipy: integer);
     procedure PlotAsteroid(x, y: single; symbol: integer; ma: double);
@@ -2542,9 +2542,9 @@ begin
 
 end;
 
-procedure TSplot.PlotEarthShadow(x, y: single; r1, r2, pixscale, flatten: double);
+procedure TSplot.PlotEarthShadow(x, y: single; r1, r2, pixscale, flatten: double; forceline: boolean);
 var
-  ds1, ds2, xx, yy, xm, ym: integer;
+  ds1, ds2, xx, yy, xm, ym, mode: integer;
   mc: TBGRABitmap;
 begin
 
@@ -2564,7 +2564,10 @@ begin
       if cfgplot.UseBMP then
       begin
 
-        case cfgplot.nebplot of
+        if forceline then mode := 0
+                     else mode := cfgplot.nebplot;
+
+        case mode of
 
           0:
 

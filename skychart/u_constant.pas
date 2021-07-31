@@ -1083,7 +1083,7 @@ type
     SimComet, SimCometName, SimAsteroidName: string;
     SimObject: array[1..NumSimObject] of boolean; // 1-11=ipla, 12=ast, 13=com, 14=spk
     SimLine, SimMark, SimDateLabel, SimNameLabel, SimMagLabel,
-    ShowPlanet, PlanetParalaxe, ShowEarthShadow, ShowAsteroid, ShowComet,
+    ShowPlanet, PlanetParalaxe, ShowEarthShadow, EarthShadowForceLine, ShowAsteroid, ShowComet,
     ShowArtSat, NewArtSat, ShowSmallsat: boolean;
     SimDateYear, SimDateMonth, SimDateDay, SimDateHour, SimDateMinute,
     SimDateSecond: boolean;
@@ -2354,6 +2354,7 @@ begin
   ShowPlanet := Source.ShowPlanet;
   PlanetParalaxe := Source.PlanetParalaxe;
   ShowEarthShadow := Source.ShowEarthShadow;
+  EarthShadowForceLine := Source.EarthShadowForceLine;
   ShowAsteroid := Source.ShowAsteroid;
   ShowSmallsat := Source.ShowSmallsat;
   ShowComet := Source.ShowComet;
