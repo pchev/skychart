@@ -2346,11 +2346,11 @@ begin
     begin
 
       if cfgplot.TransparentPlanet then
-        mode := 0
+        mode := 3
       else
         mode := 2;
 
-      PlotImage(xx, yy, ds, ds * flatten, 0, flipx, flipy, WhiteBg, True, BGRA, mode);
+      PlotImage(xx, yy, ds, ds * flatten, 0, flipx, flipy, WhiteBg, True, BGRA, mode, 200);
 
     end;
 
@@ -2587,7 +2587,7 @@ begin
               xm := ds2;
               ym := ds2;
               mc.Fill(BGRAPixelTransparent);
-              mc.FillEllipseAntialias(xm, ym, ds2, ds2*flatten, ColorToBGRA(clRed, 10));
+              mc.FillEllipseAntialias(xm, ym, ds2, ds2*flatten, ColorToBGRA(clRed, 5));
               mc.FillEllipseAntialias(xm, ym, ds1, ds1*flatten, ColorToBGRA(clRed, 10));
               // Apply the shadow
               cbmp.PutImage(xx - xm, yy - xm, mc, dmDrawWithTransparency);
