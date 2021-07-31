@@ -181,7 +181,7 @@ type
     procedure FormatCatRec(rec: Gcatrec; var desc: string);
     procedure FindRiseSet(mode: integer);
     function FindatRaDec(ra, Dec, dx: double; searchcenter: boolean;
-      showall: boolean = False; ftype: integer = ftAll): boolean;
+      showall: boolean = False; ftype: integer = ftAll; planetcenter: boolean = False): boolean;
     procedure GetLabPos(ra, Dec, r: double; w, h: integer; var x, y: integer);
     procedure FindList(ra, Dec, dx, dy: double; var Text, msg: string; showall, allobject, trunc, usefov: boolean; maxln:integer=1000);
     procedure FindListWin(var Text, msg: string; showall, allobject: boolean);
@@ -4253,7 +4253,7 @@ begin
 end;
 
 function Tskychart.FindatRaDec(ra, Dec, dx: double; searchcenter: boolean;
-  showall: boolean = False; ftype: integer = ftAll): boolean;
+  showall: boolean = False; ftype: integer = ftAll; planetcenter: boolean = False): boolean;
 var
   x1, x2, y1, y2: double;
   rec: Gcatrec;
@@ -4311,7 +4311,7 @@ begin
     cfgsc.FindCatname := '';
     // search solar system object
     if cfgsc.ShowPlanetValid and ((ftype = ftAll) or (ftype = ftPla)) then
-      Result := fplanet.findplanet(x1, y1, x2, y2, False, cfgsc, n, m, d, desc);
+      Result := fplanet.findplanet(x1, y1, x2, y2, False, cfgsc, n, m, d, desc, true, planetcenter);
     if Result then
     begin
       if cfgsc.SimNb > 1 then

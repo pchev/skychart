@@ -364,7 +364,7 @@ type
     function FormatDesc: string;
     procedure ShowIdentLabel(newjd: boolean = True);
     function IdentXY(X, Y: integer; searchcenter: boolean = True;
-      showlabel: boolean = True; ftype: integer = ftAll; radius: integer = 2): boolean;
+      showlabel: boolean = True; ftype: integer = ftAll; radius: integer = 2; planetcenter: boolean = False): boolean;
     procedure IdentSearchResult(num, stype: string; itype: integer;
       ar1, de1: double; sr: string = ''; sn: string = ''; sd: string = '');
     procedure Identdetail(X, Y: integer);
@@ -2777,7 +2777,7 @@ begin
 end;
 
 function Tf_chart.IdentXY(X, Y: integer; searchcenter: boolean = True;
-  showlabel: boolean = True; ftype: integer = ftAll; radius: integer = 2): boolean;
+  showlabel: boolean = True; ftype: integer = ftAll; radius: integer = 2; planetcenter: boolean = False): boolean;
 var
   ra, Dec, a, h, a1, h1, l, b, le, be, dx, dy, lastra, lastdec, lasttrra, lasttrde,
   lastepoch, lastx, lasty, lastz, dist, ds, ax, ay: double;
@@ -2818,9 +2818,9 @@ begin
   begin
     ra := rmod(ra + pi2, pi2);
     dx := abs(radius / sc.cfgsc.BxGlb); // search a 2 pixel radius
-    Result := sc.FindatRaDec(ra, Dec, dx, searchcenter, False, ftype);
+    Result := sc.FindatRaDec(ra, Dec, dx, searchcenter, False, ftype, planetcenter);
     if (not Result) then
-      Result := sc.FindatRaDec(ra, Dec, 3 * dx, searchcenter, False, ftype);  //else 6 pixel
+      Result := sc.FindatRaDec(ra, Dec, 3 * dx, searchcenter, False, ftype, planetcenter);  //else 6 pixel
     if Result and showlabel then
       ShowIdentLabel
     else
@@ -3369,7 +3369,7 @@ begin
       end
       else
       // start on object?
-      if IdentXY(X, Y, True, True) then
+      if IdentXY(X, Y, True, True, ftAll, 2, True) then
       begin
         MeasureRa := sc.cfgsc.FindRA;
         MeasureDe := sc.cfgsc.FindDec;
@@ -3405,7 +3405,7 @@ begin
         end;
         GetADxy(X, Y, ra, de, sc.cfgsc);
         // end on object?
-        if (action = 3) and IdentXY(X, Y, True, True) then
+        if (action = 3) and IdentXY(X, Y, True, True, ftAll, 2, True) then
         begin
           ra := sc.cfgsc.FindRA;
           de := sc.cfgsc.FindDec;

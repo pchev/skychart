@@ -81,7 +81,7 @@ type
     function FindPlanetName(planetname: string; var ra, de: double;
       cfgsc: Tconf_skychart; MeanPos: boolean = False): boolean;
     function FindPlanet(x1, y1, x2, y2: double; nextobj: boolean;
-      cfgsc: Tconf_skychart; var nom, ma, date, desc: string; trunc: boolean = True): boolean;
+      cfgsc: Tconf_skychart; var nom, ma, date, desc: string; trunc: boolean = True; searchcenter: boolean = False): boolean;
     procedure FormatPlanet(St, Pl: integer; cfgsc: Tconf_skychart;
       var nom, ma, date, desc: string);
     procedure Plan(ipla: integer; t: double; var p: TPlanData);
@@ -2005,7 +2005,7 @@ begin
 end;
 
 function TPlanet.FindPlanet(x1, y1, x2, y2: double; nextobj: boolean;
-  cfgsc: Tconf_skychart; var nom, ma, date, desc: string; trunc: boolean = True): boolean;
+  cfgsc: Tconf_skychart; var nom, ma, date, desc: string; trunc: boolean = True; searchcenter: boolean = False): boolean;
 var
   i, j: integer;
   tar, tde, ar, de: double;
@@ -2078,8 +2078,8 @@ begin
         begin
           distancetocenter[CurrentStep, CurrentPlanet] :=
             3600 * rad2deg * angulardistance(ar, de, tar, tde);
-          if distancetocenter[CurrentStep, CurrentPlanet] <=
-            (cfgsc.PlanetLst[CurrentStep, CurrentPlanet, 4] / 2) then
+          if (not searchcenter) and (distancetocenter[CurrentStep, CurrentPlanet] <=
+            (cfgsc.PlanetLst[CurrentStep, CurrentPlanet, 4] / 2)) then
             Result := True
           else
             distancetocenter[CurrentStep, CurrentPlanet] := maxdouble;
