@@ -46,7 +46,7 @@
           </CodeGeneration>
           <Linking>
             <Debugging>
-              <UseExternalDbgSyms Value="True"/>
+              <DebugInfoType Value="dsDwarf2"/>
             </Debugging>
             <Options>
               <Win32>
@@ -90,6 +90,7 @@
           </CodeGeneration>
           <Linking>
             <Debugging>
+              <DebugInfoType Value="dsDwarf2"/>
               <UseHeaptrc Value="True"/>
             </Debugging>
             <Options>
@@ -227,6 +228,7 @@
           </CodeGeneration>
           <Linking>
             <Debugging>
+              <DebugInfoType Value="dsDwarf2"/>
               <StripSymbols Value="True"/>
             </Debugging>
             <Options>
@@ -273,6 +275,9 @@
             </Optimizations>
           </CodeGeneration>
           <Linking>
+            <Debugging>
+              <DebugInfoType Value="dsDwarf2"/>
+            </Debugging>
             <Options>
               <Win32>
                 <GraphicApplication Value="True"/>
@@ -317,6 +322,9 @@
             </Optimizations>
           </CodeGeneration>
           <Linking>
+            <Debugging>
+              <DebugInfoType Value="dsDwarf2"/>
+            </Debugging>
             <Options>
               <Win32>
                 <GraphicApplication Value="True"/>
