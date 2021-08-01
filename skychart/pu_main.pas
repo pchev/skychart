@@ -55,6 +55,7 @@ type
   Tf_main = class(TForm)
     MenuEditToolbar2: TMenuItem;
     MenuItem2: TMenuItem;
+    StatusCopy: TMenuItem;
     MenuShowVO: TMenuItem;
     MenuShowUserObject: TMenuItem;
     MenuLockChart: TMenuItem;
@@ -62,6 +63,7 @@ type
     MenuMosaic: TMenuItem;
     Mosaic: TAction;
     MenuUpdDeltaT: TMenuItem;
+    StatusPopup: TPopupMenu;
     SavePictureDialog1: TSavePictureDialog;
     UniqueInstance1: TUniqueInstance;
     ViewAllTollbar: TAction;
@@ -516,6 +518,7 @@ type
     procedure ShowCompassExecute(Sender: TObject);
     procedure ShowUobjExecute(Sender: TObject);
     procedure ShowVOExecute(Sender: TObject);
+    procedure StatusCopyClick(Sender: TObject);
     procedure tbFOVMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
     procedure TelescopeSetupExecute(Sender: TObject);
@@ -6058,6 +6061,11 @@ begin
     end;
 end;
 
+procedure Tf_main.StatusCopyClick(Sender: TObject);
+begin
+  Clipboard.SetTextBuf(PChar(P1L1.Caption));
+end;
+
 procedure Tf_main.SetLPanel0(txt: string);
 begin
   P0L1.Caption := txt;
@@ -9893,6 +9901,8 @@ begin
   SetFOV08.Category := CatFOV;
   SetFOV09.Category := CatFOV;
   SetFOV10.Category := CatFOV;
+  // status bar
+  StatusCopy.Caption := rsCopy;
 
   //ToolBox
   for i := 0 to numscript - 1 do
