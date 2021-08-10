@@ -5108,7 +5108,7 @@ begin
   try
     p := pos('DEC:', param1);
     if p > 0 then
-      buf := copy(param1, p + 4, 999)
+      buf := trim(copy(param1, p + 4, 999))
     else
       if strict then
         exit
@@ -5119,8 +5119,11 @@ begin
       p := pos(#176, buf); // °
     if p > 0 then
     begin
+      if buf[1] = '-' then
+        s := -1
+      else
+        s := 1;
       de := strtofloat(copy(buf, 1, p - 1));
-      s := sgn(de);
       buf := copy(buf, p + 1, 999);
       p := pos('m', buf);
       if p = 0 then
