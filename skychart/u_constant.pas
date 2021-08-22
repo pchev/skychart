@@ -1031,6 +1031,8 @@ type
     ShowCRose, SimplePointer: boolean; //  compass rose
     CRoseSz: integer;
     AzNorth, ListNeb, ListStar, ListVar, ListDbl, ListPla: boolean;
+    VariableAlias: array of array[1..2] of string;
+    VariableAliasNum: integer;
     ConstelName: array of array[1..2] of string;
     // constellation three letter abbrev and name.
     ConstLnum, ConstBnum, ConstelNum, StarNameNum: integer;

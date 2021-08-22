@@ -6,6 +6,7 @@ cat/RealSky
 cat/sac
 cat/openngc
 data
+data/alias
 data/common_names
 data/constellation
 data/deltat

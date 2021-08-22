@@ -1,4 +1,6 @@
 data
+data/alias
+data/alias/varcross.txt
 data/common_names
 data/common_names/NebulaNames.txt
 data/common_names/NebulaNames_is.txt

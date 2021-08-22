@@ -205,6 +205,7 @@ type
     function SearchStarNameGeneric(Num: string; var ar1, de1: double): boolean;
     function SearchDblStar(Num: string; var ar1, de1: double): boolean;
     function SearchVarStar(Num: string; var ar1, de1: double): boolean;
+    function SearchVarAlias(Num: string; out buf:string): boolean;
     function SearchLines(Num: string; var ar1, de1: double): boolean;
     function SearchConstellation(Num: string; var ar1, de1: double): boolean;
     function SearchConstAbrev(Num: string; var ar1, de1: double): boolean;
@@ -223,6 +224,7 @@ type
     function GetCatURL(path, cat: string): string;
     function GetCatTxtFile(path, cat: string): string;
     function GetVOstarmag: double;
+    procedure LoadVariableAlias(fpath: string);
     procedure LoadConstellation(fpath, lang: string);
     procedure LoadConstL(fname: string);
     procedure LoadConstB(fname: string);
@@ -4487,6 +4489,21 @@ begin
   end;
 end;
 
+function Tcatalog.SearchVarAlias(Num: string; out buf:string): boolean;
+var
+  i: integer;
+begin
+  Result := False;
+  Num := UpperCase(trim(Num));
+  for i := 0 to cfgshr.VariableAliasNum - 1 do
+    if trim(cfgshr.VariableAlias[i, 2]) = Num then
+    begin
+      Result := True;
+      buf:=cfgshr.VariableAlias[i, 1];
+      break;
+    end;
+end;
+
 function Tcatalog.SearchLines(Num: string; var ar1, de1: double): boolean;
 begin
   FindNGcat(Num, ar1, de1, Result, rtLin);
@@ -5475,6 +5492,47 @@ begin
     gpn: Result := IsGPNPath(catpath);
     else
       Result := False;
+  end;
+end;
+
+procedure Tcatalog.LoadVariableAlias(fpath: string);
+var
+  f: textfile;
+  i, n, p: integer;
+  fname, txt: string;
+begin
+  fname := slash(fpath) + 'varcross.txt';
+  if not FileExists(fname) then
+  begin
+    cfgshr.VariableAliasNum := 0;
+    setlength(cfgshr.VariableAlias, 0);
+    exit;
+  end;
+  Filemode := 0;
+  assignfile(f, fname);
+  try
+    reset(f);
+    n := 0;
+    // first loop to get the size
+    repeat
+      readln(f, txt);
+      Inc(n);
+    until EOF(f);
+    setlength(cfgshr.VariableAlias, n);
+    cfgshr.VariableAliasNum := n;
+    // read the file now
+    reset(f);
+    i:=0;
+    repeat
+      readln(f, txt);
+      p:=pos('=',txt);
+      if p=0 then continue;
+      cfgshr.VariableAlias[i,1]:=UpperCase(trim(copy(txt,6,p-6)));
+      cfgshr.VariableAlias[i,2]:=UpperCase(trim(copy(txt,p+1,99)));
+      inc(i);
+    until EOF(f);
+  finally
+    closefile(f);
   end;
 end;
 

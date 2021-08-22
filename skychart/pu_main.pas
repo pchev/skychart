@@ -1425,6 +1425,9 @@ begin
     end;
     if VerboseMsg then
       WriteTrace('Constellation');
+    catalog.LoadVariableAlias(slash(Appdir) + slash('data') + 'alias');
+    if VerboseMsg then
+      WriteTrace('Constellation');
     if def_cfgsc.ConstLatinLabel then
       catalog.LoadConstellation(cfgm.Constellationpath, 'Latin')
     else
@@ -4481,7 +4484,7 @@ var
   ar1, de1, mag: double;
   i, itype: integer;
   chart: TFrame;
-  stype: string;
+  stype, buf: string;
 begin
   if VerboseMsg then
     WriteTrace('Search1Execute');
@@ -4537,6 +4540,13 @@ begin
         begin
           sc.cfgsc.showstars:=true;
           ok := catalog.SearchVarStar(num, ar1, de1);
+          if not ok then begin
+            ok := catalog.SearchVarAlias(num, buf);
+            if ok then begin
+              num:=buf;
+              ok := catalog.SearchVarStar(num, ar1, de1);
+            end;
+          end;
           itype := ftVar;
           stype := 'V*';
         end;
@@ -10053,7 +10063,7 @@ var
   i: integer;
   chart: TFrame;
   mag: double;
-  stype: string;
+  stype,buf: string;
   itype: integer;
 label
   findit;
@@ -10166,6 +10176,16 @@ begin
         stype := 'As';
         itype := ftAst;
         ok := planet.FindAsteroidName(trim(Num), ar1, de1, mag, sc.cfgsc, True);
+        if ok then
+          goto findit;
+      end;
+      // variable star alias
+      stype := 'V*';
+      itype := ftVar;
+      ok := catalog.SearchVarAlias(Num, buf);
+      if ok then begin
+        num:=buf;
+        ok := catalog.SearchVarStar(Num, ar1, de1);
         if ok then
           goto findit;
       end;
