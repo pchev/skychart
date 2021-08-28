@@ -129,8 +129,8 @@ begin
   Ferrortext:='';
   Fappname:='skychart';
   Fappdesc:='Cartes du Ciel - Skychart planetarium';
-  Fappicon:='http://ap-i.net/skychart/ciel.png';
-  Fappdoc:='http://ap-i.net/skychart/en/documentation/start';
+  Fappicon:='https://ap-i.net/skychart/ciel.png';
+  Fappdoc:='https://ap-i.net/skychart/en/documentation/start';
   Fhubprofileerror:='Unsupported SAMP hub profile. Must be a File URL';
   Fhubmissingvalue:='SAMP hub profile %s found, but it is missing a required value.';
   Fnohuberror:='No SAMP hub profile found, no hub is running.';
