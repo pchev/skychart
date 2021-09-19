@@ -48,7 +48,7 @@ if [[ $? != 0 ]]; then exit; fi
 gpg --no-default-keyring --keyring ./skychart-temp-keyring.gpg --import $key.key
 gpg --no-default-keyring --keyring ./skychart-temp-keyring.gpg --export --output skychart.gpg
 if [[ $? != 0 ]]; then exit; fi
-rm skychart-temp-keyring.gpg $key.key 2>/dev/null
+rm skychart-temp-keyring.gpg skychart-temp-keyring.gpg~ $key.key 2>/dev/null
 
 #Install the key and set the new repo list:
 sudo mkdir /usr/local/share/keyrings 2>/dev/null
