@@ -34,6 +34,8 @@ do
 done
 
 echo "You may now give your password for the sudo apt command."
+sudo echo OK
+if [[ $? != 0 ]]; then exit; fi
 
 #First remove the existing key and repo list if it already exists
 sudo apt-key del $key 2>/dev/null
