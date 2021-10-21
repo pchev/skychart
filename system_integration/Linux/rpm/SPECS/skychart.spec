@@ -25,7 +25,9 @@ Planetarium software for the advanced amateur astronomer.
 /usr/share/applications/skychart.desktop
 /usr/share/metainfo/skychart.appdata.xml
 /usr/share/pixmaps/skychart.png
+/usr/share/icons/hicolor/32x32/apps/skychart.png
 /usr/share/icons/hicolor/48x48/apps/skychart.png
+/usr/share/icons/hicolor/96x96/apps/skychart.png
 /usr/share/icons/hicolor/scalable/apps/skychart.svg
 /usr/share/skychart/data
 /usr/share/skychart/cat/DSoutlines
