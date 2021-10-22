@@ -9,3 +9,4 @@ Exec=skychart %f
 Icon=skychart
 Terminal=false
 Categories=Science;Astronomy;
+MimeType=text/x-skychart;

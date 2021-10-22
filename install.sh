@@ -15,6 +15,8 @@ install -m 755 -d $destdir/bin
 install -m 755 -d $destdir/share
 install -m 755 -d $destdir/share/metainfo
 install -m 755 -d $destdir/share/applications
+install -m 755 -d $destdir/share/mime
+install -m 755 -d $destdir/share/mime/packages
 install -m 755 -d $destdir/share/doc
 install -m 755 -d $destdir/share/doc/skychart
 install -m 755 -d $destdir/share/pixmaps
@@ -35,6 +37,7 @@ install -v -m 755 -s varobs/varobs  $destdir/bin/varobs
 install -v -m 755 -s varobs/varobs_lpv_bulletin  $destdir/bin/varobs_lpv_bulletin
 install -v -m 644 system_integration/Linux/share/applications/net.ap_i.skychart.desktop $destdir/share/applications/net.ap_i.skychart.desktop
 install -v -m 644 system_integration/Linux/share/metainfo/net.ap_i.skychart.metainfo.xml $destdir/share/metainfo/net.ap_i.skychart.metainfo.xml
+install -v -m 644 system_integration/Linux/share/mime/packages/net.ap_i.skychart.xml $destdir/share/mime/packages/net.ap_i.skychart.xml
 install -v -m 644 system_integration/Linux/share/doc/skychart/changelog $destdir/share/doc/skychart/changelog
 install -v -m 644 system_integration/Linux/share/doc/skychart/copyright $destdir/share/doc/skychart/copyright
 install -v -m 644 system_integration/Linux/share/pixmaps/skychart.png $destdir/share/pixmaps/skychart.png
