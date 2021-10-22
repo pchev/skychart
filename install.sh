@@ -34,7 +34,7 @@ install -v -m 755 -s skychart/cdcicon  $destdir/bin/cdcicon
 install -v -m 755 -s varobs/varobs  $destdir/bin/varobs
 install -v -m 755 -s varobs/varobs_lpv_bulletin  $destdir/bin/varobs_lpv_bulletin
 install -v -m 644 system_integration/Linux/share/applications/net.ap_i.skychart.desktop $destdir/share/applications/net.ap_i.skychart.desktop
-install -v -m 644 system_integration/Linux/share/metainfo/skychart.appdata.xml $destdir/share/metainfo/skychart.appdata.xml
+install -v -m 644 system_integration/Linux/share/metainfo/net.ap_i.skychart.metainfo.xml $destdir/share/metainfo/net.ap_i.skychart.metainfo.xml
 install -v -m 644 system_integration/Linux/share/doc/skychart/changelog $destdir/share/doc/skychart/changelog
 install -v -m 644 system_integration/Linux/share/doc/skychart/copyright $destdir/share/doc/skychart/copyright
 install -v -m 644 system_integration/Linux/share/pixmaps/skychart.png $destdir/share/pixmaps/skychart.png

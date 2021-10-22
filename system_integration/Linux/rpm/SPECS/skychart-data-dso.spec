@@ -28,4 +28,4 @@ DSO catalog data for use with Skychart planetarium software.
 /usr/share/skychart/cat/gpn
 /usr/share/skychart/cat/barnard
 /usr/share/skychart/cat/sh2
-/usr/share/metainfo/skychart-data-dso.metainfo.xml
+/usr/share/metainfo/net.ap_i.skychart.skychart_data_dso.metainfo.xml

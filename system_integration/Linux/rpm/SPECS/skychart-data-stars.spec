@@ -31,4 +31,4 @@ Stars catalog data for use with Skychart planetarium software.
 /usr/share/skychart/cat/tycho2
 /usr/share/skychart/cat/wds
 /usr/share/skychart/cat/bsc5
-/usr/share/metainfo/skychart-data-stars.metainfo.xml
+/usr/share/metainfo/net.ap_i.skychart.skychart_data_stars.metainfo.xml
