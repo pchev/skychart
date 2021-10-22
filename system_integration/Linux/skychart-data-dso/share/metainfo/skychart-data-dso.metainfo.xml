@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="addon">
   <id>skychart-data-dso</id>
-  <extends>skychart.desktop</extends>
+  <extends>net.ap_i.skychart.desktop</extends>
   <name>Additional Nebulae Catalogs</name>
   <summary>Standard nebulae catalogs: HyperLeda database; 
     Lynds Bright Nebulae; Sharpless HII Regions; Barnard Dark Objects; Open Cluster Data; 

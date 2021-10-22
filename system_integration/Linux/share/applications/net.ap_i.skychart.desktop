@@ -1,11 +1,11 @@
 [Desktop Entry]
 Version=1.0
-Encoding=UTF-8
+Type=Application
 Name=Skychart
+GenericName=Planetarium
 Comment=Planetarium software for the advanced amateur astronomer
-Exec=skychart
+TryExec=skychart
+Exec=skychart %f
 Icon=skychart
 Terminal=false
-Type=Application
-Categories=Education;Science;Astronomy;
-GenericName=SkyChart
+Categories=Science;Astronomy;

@@ -22,7 +22,7 @@ Planetarium software for the advanced amateur astronomer.
 /usr/bin/varobs
 /usr/bin/varobs_lpv_bulletin
 /usr/share/doc/skychart
-/usr/share/applications/skychart.desktop
+/usr/share/applications/net.ap_i.skychart.desktop
 /usr/share/metainfo/skychart.appdata.xml
 /usr/share/pixmaps/skychart.png
 /usr/share/icons/hicolor/32x32/apps/skychart.png
