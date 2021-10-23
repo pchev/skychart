@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="text/x-skychart">
+         <comment>Skychart Chart</comment>
+         <comment xml:lang="it">Cartina di Skychart</comment>
+         <glob pattern="*.cdc3"/>
+         <icon name="skychart"/>
+  </mime-type>
+</mime-info>

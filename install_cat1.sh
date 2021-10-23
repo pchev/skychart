@@ -24,7 +24,7 @@ install -m 755 -d $destdir
 install -m 755 -d $destdir/share
 install -m 755 -d $destdir/share/metainfo
 install -m 755 -d $destdir/share/skychart
-install -v -m 644 system_integration/Linux/skychart-data-stars/share/metainfo/skychart-data-stars.metainfo.xml $destdir/share/metainfo/skychart-data-stars.metainfo.xml
+install -v -m 644 system_integration/Linux/skychart-data-stars/share/metainfo/net.ap_i.skychart.skychart_data_stars.metainfo.xml $destdir/share/metainfo/net.ap_i.skychart.skychart_data_stars.metainfo.xml
 
 InstCat catalog_gcvs $destdir/share/skychart
 InstCat catalog_idx  $destdir/share/skychart
