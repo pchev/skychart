@@ -74,20 +74,16 @@ begin
   {$endif}
 
   Params:=TStringList.Create;
-  buf:='';
   WantUnique:=false;
-  for i:=1 to Paramcount do begin
+  for i:=1 to ParamCount() do begin
       p:=ParamStr(i);
-      if copy(p,1,2)='--' then begin
-         if buf<>'' then Params.Add(buf);
-         if buf='--verbose' then VerboseMsg:=true;
-         if buf='--unique' then WantUnique:=true;
-         buf:=p;
-      end
+      if p='--verbose' then
+        VerboseMsg:=true
+      else if p='--unique' then
+        WantUnique:=true
       else
-         buf:=buf+blank+p;
+        Params.Add(p);
   end;
-  if buf<>'' then Params.Add(buf);
 
   Application.Title:='Skychart';
   Application.Initialize;
