@@ -10741,7 +10741,7 @@ procedure Tf_main.UniqueInstance1OtherInstance(Sender: TObject;
   ParamCount: Integer; const Parameters: array of String);
 var
   i: integer;
-  buf, p: string;
+  buf: string;
 begin
   // process param from new instance
   if not InitOK then
@@ -10750,18 +10750,8 @@ begin
   Params.Clear;
   for i := 0 to Paramcount - 1 do
   begin
-    p := Parameters[i];
-    if copy(p, 1, 2) = '--' then
-    begin
-      if buf <> '' then
-        Params.Add(buf);
-      buf := p;
-    end
-    else
-      buf := buf + blank + p;
+    Params.Add(Parameters[i]);
   end;
-  if buf <> '' then
-    Params.Add(buf);
   buf := '';
   for i := 0 to Params.Count - 1 do
     buf := buf + blank + params[i];

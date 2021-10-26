@@ -1505,7 +1505,6 @@ var
   de_type, de_jdcheck: integer;
   de_jdstart, de_jdend: double;
   VerboseMsg: boolean = False;
-  WantUnique: boolean;
   WideLine: integer = 2;
   MarkWidth: integer = 1;
   MarkType: integer = 1;
