@@ -1363,8 +1363,9 @@ end;
 
 procedure Tf_main.Init;
 var
-  i: integer;
+  i,p: integer;
   firstuse: boolean;
+  cname: string;
 begin
   firstuse := False;
   try
@@ -1530,7 +1531,17 @@ begin
     end;
     if VerboseMsg then
       WriteTrace('Create default chart');
-    CreateChild(GetUniqueName(rsChart_, True), True, def_cfgsc, def_cfgplot, True);
+    if FirstChart<>'' then begin
+      ReadChartConfig(SafeUTF8ToSys(ExpandFileNameUTF8(FirstChart)), True, false, def_cfgplot, def_cfgsc);
+      cname := stringreplace(extractfilename(FirstChart), blank, '_', [rfReplaceAll]);
+      p := pos('.', cname);
+      if p > 0 then
+        cname := copy(cname, 1, p - 1);
+    end
+    else begin
+      cname:=GetUniqueName(rsChart_, True);
+    end;
+    CreateChild(cname, True, def_cfgsc, def_cfgplot, True);
     if InitialChartNum > 1 then
     begin
       if VerboseMsg then
@@ -2497,6 +2508,7 @@ begin
     ConfigAppdir := '';
     ConfigPrivateDir := '';
     CurrentTheme := 'default';
+    FirstChart := '';
     ProcessParams1;
     step := 'Init';
     if VerboseMsg then
@@ -10780,7 +10792,10 @@ begin
       cmd := trim(parms);
       parm := '';
     end;
-    if cmd = '--config' then
+    if (ExtractFileExt(cmd) = '.cdc3') and (parm = '') and (FirstChart = '') then begin
+      FirstChart:=cmd;
+    end
+    else if cmd = '--config' then
     begin  // specify .ini file
       if parm <> '' then
       begin
@@ -10845,6 +10860,7 @@ begin
       end;
       if (ExtractFileExt(cmd) = '.cdc3') and (parm = '') then
       begin
+        if cmd = FirstChart then Continue;
         parm := cmd;
         cmd := '--load';
       end;
@@ -10862,7 +10878,7 @@ begin
       if cmd = '--load' then
       begin
         pp.Add('LOAD');
-        pp.Add(parm);
+        pp.Add(ExpandFileNameUTF8(parm));
         for p := pp.Count to MaxCmdArg do
           pp.add('');
         resp := ExecuteCmd('', pp);

@@ -1485,6 +1485,7 @@ var
   ConfigAppdir, ConfigPrivateDir, Appdir, PrivateDir, SampleDir,
   SatDir, SatArchiveDir, ArchiveDir, TempDir, ZoneDir, HomeDir, VODir,
   ScriptDir, PrivateScriptDir: string;
+  FirstChart: string;
   VarObs, CdC, MPCDir, DBDir, PictureDir, SPKdir: string;
   ForceConfig, ForceUserDir, Configfile, Lang: string;
   compile_time, compile_version, compile_system, compile_cpu, lclver, cpydate: string;
