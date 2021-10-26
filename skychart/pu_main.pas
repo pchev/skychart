@@ -2941,7 +2941,7 @@ begin
   else
   begin
     try
-      if SaveConfigOnExit.Checked and Application.ShowMainForm then
+      if SaveConfigOnExit.Checked and Application.ShowMainForm and (FirstChart='') then
       begin
         if ConfirmSaveConfig then
         begin
