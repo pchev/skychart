@@ -1492,6 +1492,7 @@ var
   gk, lis, dlbl, lmag: string;
   al: TLabelAlign;
   p: coordvector;
+  distfact: double;
 begin
   if VerboseMsg then
     WriteTrace('SkyChart ' + cfgsc.chartname + ': draw stars');
@@ -1555,8 +1556,9 @@ begin
         if cfgsc.PMon and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then
         begin
           propermotion(rec.ra, rec.Dec, dyear, rec.star.pmra, rec.star.pmdec,
-            ((abs(dyear)>50)and rec.star.valid[vsPx] and(rec.star.px>0)and(rec.star.px<0.8) and (trim(rec.options.flabel[26]) = 'RV')),
-            rec.star.px, rec.num[1]);
+                      ((abs(dyear)>50)and rec.star.valid[vsPx] and(rec.star.px>0)and(rec.star.px<0.8) and (trim(rec.options.flabel[26]) = 'RV')),
+                       rec.star.px, rec.num[1], distfact);
+          catalog.AdjustStarForDistance(rec,distfact);
         end;
         lra:=rec.ra;
         ldec:=rec.Dec;
@@ -1573,7 +1575,7 @@ begin
           if cfgsc.DrawPMon and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then
           begin
             propermotion(pra, pdec, cfgsc.DrawPMyear, rec.star.pmra, rec.star.pmdec,
-              (rec.star.valid[vsPx] and(rec.star.px>0)and(rec.star.px<0.8)and (trim(rec.options.flabel[26]) = 'RV')), rec.star.px, rec.num[1]);
+              (rec.star.valid[vsPx] and(rec.star.px>0)and(rec.star.px<0.8)and (trim(rec.options.flabel[26]) = 'RV')), rec.star.px, rec.num[1], distfact);
             precession(rec.options.EquinoxJD, cfgsc.JDChart, pra, pdec);
             if cfgsc.ApparentPos then
               apparent_equatorial(pra, pdec, cfgsc, True, True);
@@ -6827,6 +6829,7 @@ var
   i, color: integer;
   pmok: boolean;
   x1, y1, x2, y2: single;
+  distfact: double;
 begin
   Result := False;
   if not cfgsc.ShowConstl then
@@ -6851,10 +6854,10 @@ begin
     begin
       propermotion(ra1, de1, dyear, Fcatalog.cfgshr.ConstL[i].pmra1,
         Fcatalog.cfgshr.ConstL[i].pmde1, Fcatalog.cfgshr.ConstL[i].pxrv1,
-        Fcatalog.cfgshr.ConstL[i].px1, Fcatalog.cfgshr.ConstL[i].rv1);
+        Fcatalog.cfgshr.ConstL[i].px1, Fcatalog.cfgshr.ConstL[i].rv1,distfact);
       propermotion(ra2, de2, dyear, Fcatalog.cfgshr.ConstL[i].pmra2,
         Fcatalog.cfgshr.ConstL[i].pmde2, Fcatalog.cfgshr.ConstL[i].pxrv2,
-        Fcatalog.cfgshr.ConstL[i].px2, Fcatalog.cfgshr.ConstL[i].rv2);
+        Fcatalog.cfgshr.ConstL[i].px2, Fcatalog.cfgshr.ConstL[i].rv2,distfact);
     end;
     precession(jd2000, cfgsc.JDChart, ra1, de1);
     if cfgsc.ApparentPos then

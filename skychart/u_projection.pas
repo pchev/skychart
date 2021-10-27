@@ -66,7 +66,7 @@ function Jd(annee, mois, jour: integer; Heure: double): double;
 procedure Djd(jd: double; var annee, mois, jour: integer; var Heure: double);
 function SidTim(jd0, ut, long: double; eqeq: double = 0): double;
 procedure ProperMotion(var r0, d0: double; t, pr, pd: double;
-  fullmotion: boolean; px, rv: double);
+  fullmotion: boolean; px, rv: double; out distfact:double);
 procedure Paralaxe(SideralTime, dist, ar1, de1: double; var ar, de, q: double; c: Tconf_skychart; coordepoch: double = 0);
 procedure PrecessionFK4(ti, tf: double; var ari, dei: double);
 procedure PrecessionFK5(ti, tf: double; var ari, dei: double);
@@ -1022,7 +1022,7 @@ begin
 end;
 
 procedure ProperMotion(var r0, d0: double; t, pr, pd: double;
-  fullmotion: boolean; px, rv: double);
+  fullmotion: boolean; px, rv: double; out distfact:double);
 var
   w: extended;
   cr0, sr0, cd0, sd0: extended;
@@ -1042,12 +1042,14 @@ begin
     em[3] := pd * cd0 + w * p[3];
     for i := 1 to 3 do
       p[i] := p[i] + t * em[i];
+    sofa_PM(p,distfact);
     sofa_C2S(p, r0, d0);
   end
   else
   begin
     r0 := r0 + (pr / cos(d0)) * t;
     d0 := d0 + (pd) * t;
+    distfact:=1.0;
   end;
   r0 := rmod(r0 + pi2, pi2);
 end;

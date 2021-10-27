@@ -2947,6 +2947,7 @@ var
   sx,sy: integer;
   p: coordvector;
   rec: GCatrec;
+  distfact: double;
 begin
   sc.cfgsc.TrackOn := False;
   IdentLabel.Visible := False;
@@ -2967,8 +2968,9 @@ begin
         sc.cfgsc.CurDay) / 365.25) - epoch;
       fullmotion := (rec.star.valid[vsPx] and (rec.star.px>0)and(rec.star.px<0.8) and (trim(rec.options.flabel[26]) = 'RV'));
       propermotion(rec.ra, rec.Dec, dyear, rec.star.pmra, rec.star.pmdec,
-        fullmotion, rec.star.px, rec.num[1]);
+        fullmotion, rec.star.px, rec.num[1], distfact);
       sc.cfgsc.FindStarPM := True;
+      sc.catalog.AdjustStarForDistance(rec,distfact);
     end;
     sc.cfgsc.FindRA2000 := rec.ra;
     sc.cfgsc.FindDec2000 := rec.Dec;

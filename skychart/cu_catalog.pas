@@ -239,6 +239,7 @@ type
     function GetGaiaMagMax: double;
     procedure ClearSearch;
     procedure CleanCache;
+    procedure AdjustStarForDistance(var rec:GCatrec; distfact:double);
     property FindId: string read FFindId;
     property FindRecOK: boolean read FFindRecOK;
     property FindRec: GCatrec read FFindRec write FFindRec;
@@ -4551,6 +4552,7 @@ var
   xx1, xx2, yy1, yy2, xxc, yyc, cyear, dyear, radius, rac, epoch: double;
   p: coordvector;
   ok, found, fullmotion: boolean;
+  distfact: double;
 begin
   if x2 > pi2 then
     rac := pi2
@@ -4837,8 +4839,9 @@ begin
       dyear := cyear - epoch;
       fullmotion := (rec.star.valid[vsPx] and(rec.star.px>0)and(rec.star.px<0.8) and (trim(rec.options.flabel[26]) = 'RV'));
       propermotion(rec.ra, rec.Dec, dyear, rec.star.pmra, rec.star.pmdec,
-        fullmotion, rec.star.px, rec.num[1]);
+        fullmotion, rec.star.px, rec.num[1], distfact);
       cfgsc.FindStarPM := True;
+      AdjustStarForDistance(rec,distfact);
     end;
     cfgsc.FindRA2000 := rec.ra;
     cfgsc.FindDec2000 := rec.Dec;
@@ -4911,6 +4914,7 @@ var
   xx, yy: single;
   p: coordvector;
   ok, found, fullmotion: boolean;
+  distfact: double;
 begin
   if cfgsc.YPmon = 0 then
     cyear := cfgsc.CurYear + DayofYear(cfgsc.CurYear, cfgsc.CurMonth, cfgsc.CurDay) / 365.25
@@ -5176,8 +5180,9 @@ begin
       dyear := cyear - epoch;
       fullmotion := (rec.star.valid[vsPx] and(rec.star.px>0)and(rec.star.px<0.8) and (trim(rec.options.flabel[26]) = 'RV'));
       propermotion(rec.ra, rec.Dec, dyear, rec.star.pmra, rec.star.pmdec,
-        fullmotion, rec.star.px, rec.num[1]);
+        fullmotion, rec.star.px, rec.num[1], distfact);
       cfgsc.FindStarPM := True;
+      AdjustStarForDistance(rec,distfact);
     end;
     cfgsc.FindRA2000 := rec.ra;
     cfgsc.FindDec2000 := rec.Dec;
@@ -6619,5 +6624,14 @@ begin
   end;
 end;
 
+procedure Tcatalog.AdjustStarForDistance(var rec:GCatrec; distfact:double);
+begin
+  if distfact<>1.0 then begin
+     if rec.star.valid[vsPx] then rec.star.px:=rec.star.px / distfact;
+     if rec.star.valid[vsMagv] then rec.star.magv := rec.star.magv + 5*Log10(distfact);
+     if rec.star.valid[vsMagb] then rec.star.magb := rec.star.magb + 5*Log10(distfact);
+     if rec.star.valid[vsMagr] then rec.star.magr := rec.star.magr + 5*Log10(distfact);
+   end;
+end;
 
 end.
