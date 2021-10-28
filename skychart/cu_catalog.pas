@@ -2077,8 +2077,6 @@ begin
       rec.star.greeksymbol := GreekLetter(rec.str[5]);
       if rec.star.greeksymbol <> '' then
         rec.star.valid[vsGreekSymbol] := True
-      else
-        bayer := False;
     end;
     if (not bayer) and flam then
     begin
@@ -2096,7 +2094,7 @@ begin
       rec.star.id := '';
     if bayer or flam then
     begin
-      rec.star.id := rec.star.id + blank + trim(rec.str[5]) + blank + trim(rec.str[6]);
+      rec.star.id := trim(rec.star.id + blank + trim(rec.str[5]) + blank + trim(rec.str[6]));
       rec.star.valid[vsId] := True;
     end;
   end;
@@ -6175,10 +6173,10 @@ function Tcatalog.LongLabelGreek(txt: string): string;
 var
   i: integer;
 begin
-  txt := uppercase(trim(txt));
+  txt := trim(txt);
   for i := 1 to 24 do
   begin
-    if txt = UpperCase(trim(greek[2, i])) then
+    if uppercase(txt) = UpperCase(trim(greek[2, i])) then
     begin
       txt := greek[1, i];
       break;
