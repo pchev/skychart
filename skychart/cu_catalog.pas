@@ -2077,6 +2077,8 @@ begin
       rec.star.greeksymbol := GreekLetter(rec.str[5]);
       if rec.star.greeksymbol <> '' then
         rec.star.valid[vsGreekSymbol] := True
+      else
+        rec.star.greeksymbol:=trim(rec.str[5]);
     end;
     if (not bayer) and flam then
     begin

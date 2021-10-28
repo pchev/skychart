@@ -1628,7 +1628,9 @@ begin
             begin
               if lp > 0 then
                 lp := 4;
-              SetLabel(lid, xx, yy, rs, 2, lnum, rec.star.id + dlbl, al, labrotation(
+              gk:=rec.star.greeksymbol;
+              if gk=''  then gk:=rec.star.id;
+              SetLabel(lid, xx, yy, rs, 2, lnum, gk + dlbl, al, labrotation(
                 rec.ra, rec.Dec, lnum, cfgsc), lp, True);
             end;
           end;
