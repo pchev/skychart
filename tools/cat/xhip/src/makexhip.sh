@@ -1,8 +1,7 @@
 #!/bin/bash
 
 if [[ ! -e hip_main.dat ]]; then 
-  wget ftp://cdsarc.u-strasbg.fr/pub/cats/I/239/hip_main.dat.gz 
-  gunzip hip_main.dat.gz
+  wget ftp://cdsarc.u-strasbg.fr/pub/cats/I/239/hip_main.dat 
 fi
 
 if [[ ! -e crossid_catalog.dat ]]; then 

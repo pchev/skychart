@@ -149,8 +149,10 @@ const
       flam := trim(copyp(bufin, 65, 67));         //Flamsteed
       buf := trim(copyp(bufin, 69, 73));          //Bayer
       buf := StringReplace(buf, 'alf', 'alp', []);
-      if hdid=68273 then buf:='gam';                  //Fix Gam Vel
-      bay := capitalize(buf);
+      if hdid=68273 then buf:='gam';              //Fix Gam Vel
+      if hdid=61555 then buf:='k';                //Fix k Pup
+      bay := trim(buf);
+      if length(bay)>1 then bay := capitalize(bay);
       cst[hdid] := trim(copyp(bufin, 75, 77));   //Constellation
       chk:=flam+'-'+cst[hdid]+':';
       if pos(':'+chk,chkflam)<=0 then begin
