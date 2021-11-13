@@ -65,6 +65,7 @@ type
     WantClose: boolean;
     db: string;
     cdcdb: Tcdcdb;
+    lasttxt1,lasttxt2: string;
     procedure TrayMsg(txt1, txt2, hint1: string);
     procedure UpdBmp(txt1, txt2: string; itype, isize: integer; ibg, ifg: TColor;
       ubmp: TBitmap);
@@ -342,8 +343,12 @@ procedure Tf_tray.TrayMsg(txt1, txt2, hint1: string);
 begin
   if iconinfo <> 5 then
   begin
-    UpdBmp(txt1, txt2, icontype, icontextsize, iconbg, icontext, bmp);
-    SysTray.Icon.Assign(bmp);
+    if (txt1<>lasttxt1)or(txt2<>lasttxt2) then begin
+      UpdBmp(txt1, txt2, icontype, icontextsize, iconbg, icontext, bmp);
+      SysTray.Icon.Assign(bmp);
+      lasttxt1:=txt1;
+      lasttxt2:=txt2;
+    end;
   end;
   Systray.Hint := hint1;
 end;
