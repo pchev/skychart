@@ -76,6 +76,8 @@ type
     procedure SaveConfig;
     procedure LoadIcon;
     procedure ConnectDB;
+    procedure LoadDeltaT;
+    procedure LoadLeapseconds(CanUpdate: boolean=true);
   public
     { public declarations }
     procedure Init;
@@ -212,6 +214,8 @@ begin
   ConnectDB;
   LoadIcon;
   UpdateIcon(nil);
+  LoadDeltaT;
+  LoadLeapseconds(false);
   Timer1.Enabled := True;
   SysTray.Visible := True;
 end;
@@ -708,6 +712,7 @@ begin
   end;
   Tempdir := slash(privatedir) + DefaultTmpDir;
   SatDir := slash(privatedir) + 'satellites';
+  DBDir := slash(privatedir) + 'database';
   if not directoryexists(SatDir) then
     CreateDir(SatDir);
   if not directoryexists(SatDir) then
@@ -846,6 +851,8 @@ begin
          {$ifdef trace_debug}
       WriteTrace('DB connected');
          {$endif}
+      cdcdb.OpenAsteroid;
+      cdcdb.OpenAsteroidMagnitude;
     end
     else
     begin
@@ -854,6 +861,130 @@ begin
     end;
   except
     cdcdb := nil;
+  end;
+end;
+
+procedure Tf_tray.LoadDeltaT;
+var
+  f: textfile;
+  i, n: integer;
+  fname,dfn,buf: string;
+  dat, del, err: single;
+begin
+  fname:=slash(privatedir)+'deltat.txt';
+  if not FileExists(fname) then begin
+    // try to copy distribution file
+    dfn :=slash(appdir)+ slash('data')+ slash('deltat')+'deltat.txt';
+    if FileExists(dfn) then
+        CopyFile( dfn , fname);
+  end;
+  if not FileExists(fname) then
+  begin
+    numdeltat := 0;
+    setlength(deltat, 0, 0);
+    exit;
+  end;
+  Filemode := 0;
+  assignfile(f, fname);
+  try
+    reset(f);
+    n := 0;
+    // first loop to get the size
+    repeat
+      readln(f, buf);
+      Inc(n);
+    until EOF(f);
+    setlength(deltat, n, 3);
+    // read the file now
+    reset(f);
+    for i := 0 to n - 1 do
+    begin
+      readln(f, dat, del, err);
+      deltat[i,0]:=dat;
+      deltat[i,1]:=del;
+      deltat[i,2]:=err;
+    end;
+    numdeltat:=n;
+  finally
+    closefile(f);
+  end;
+end;
+
+procedure Tf_tray.LoadLeapseconds(CanUpdate: boolean=true);
+var
+  f: textfile;
+  i, n: integer;
+  fname,dfn,buf: string;
+  line: Tstringlist;
+  dat, sec: double;
+function toJD(ts:double):double;
+begin
+  result:=2400000.5+15020+(ts/secday);
+end;
+begin
+  numleapseconds := 0;
+  leapsecondexpires:=0;
+  setlength(leapseconds, 0, 0);
+  fname:=slash(privatedir)+'leap-seconds.list';
+  if not FileExists(fname) then begin
+    // try to copy distribution file
+    dfn :=slash(appdir)+ slash('data')+ slash('deltat')+'leap-seconds.list';
+    if FileExists(dfn) then
+        CopyFile( dfn , fname);
+  end;
+  if not FileExists(fname) then
+  begin
+    exit;
+  end;
+  line:=Tstringlist.Create;
+  Filemode := 0;
+  assignfile(f, fname);
+  try
+    reset(f);
+    n:=0;
+    // first loop to get the size
+    repeat
+      readln(f, buf);
+      Splitrec(buf,tab,line);
+      if (line.Count>=2)and(StrToFloatDef(trim(line[0]),-1)>0) then
+        Inc(n);
+    until EOF(f);
+    setlength(leapseconds, n, 2);
+    // read the file now
+    reset(f);
+    i := 0;
+    repeat
+      readln(f, buf);
+      Splitarg(buf,tab,line);
+      if line.Count>=2 then begin
+        if line[0]='#' then begin
+          continue;
+        end
+        else if line[0]='#@' then begin
+          dat:=StrToFloatDef(trim(line[1]),-1);
+          if dat>0 then leapsecondexpires:=toJD(dat);
+        end
+        else begin
+          dat:=StrToFloatDef(trim(line[0]),-1);
+          sec:=StrToFloatDef(trim(line[1]),-1);
+          if (i<n) and (dat>0) and (sec>0) then begin
+            leapseconds[i,0]:=toJD(dat);
+            leapseconds[i,1]:=sec;
+            inc(i);
+          end;
+        end;
+      end;
+    until EOF(f);
+    closefile(f);
+    numleapseconds:=n;
+{    if CanUpdate and (leapsecondexpires>0) and ((leapsecondexpires-DateTimetoJD(now))<30) then begin
+      // expire in less than one month, refresh now
+      if QuickDownload(URL_LEAPSECOND, fname, true) then begin
+        LoadLeapseconds(false);
+      end
+    end;}
+  finally
+    line.free;
   end;
 end;
 
