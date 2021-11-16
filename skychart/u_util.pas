@@ -2075,7 +2075,7 @@ begin
   begin
     y := year + (month - 1) / 12 + (day - 1) / 365.25;
     if (numdeltat=0)or(y<deltat[0,0])or(y>=deltat[numdeltat-1,0]) then
-       result:=DTminusUTComp(year, month, day, c)/3600
+       result:=DTminusUTComp(year, month, day, c)
     else begin
        jdd:=jd(year,month,day,23.9999999-c.TimeZone);
        if (numleapseconds>0)and(leapsecondexpires>0)and(jdd>leapseconds[0,0])and(jdd<leapsecondexpires) then begin
@@ -2227,7 +2227,7 @@ begin
 
       2019..2021:
       begin
-        Result := 69.18;
+        Result := 69.18 / 3600;
       end;
 
       2022..2026:
