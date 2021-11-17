@@ -4,7 +4,7 @@ object f_configchart: Tf_configchart
   Top = 331
   Width = 500
   ActiveControl = Button6
-  BorderStyle = bsSingle
+  BorderIcons = [biSystemMenu]
   Caption = 'Charts'
   ClientHeight = 630
   ClientWidth = 500

@@ -5,7 +5,6 @@ object f_configtime: Tf_configtime
   Width = 500
   ActiveControl = Button7
   BorderIcons = [biSystemMenu]
-  BorderStyle = bsSingle
   Caption = 'Date / Time'
   ClientHeight = 630
   ClientWidth = 500

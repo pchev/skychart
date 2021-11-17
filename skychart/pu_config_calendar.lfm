@@ -4,7 +4,7 @@ object f_configcalendar: Tf_configcalendar
   Top = 124
   Width = 500
   ActiveControl = Button7
-  BorderStyle = bsSingle
+  BorderIcons = [biSystemMenu]
   Caption = 'f_configcalendar'
   ClientHeight = 630
   ClientWidth = 500

@@ -4,7 +4,7 @@ object f_configdisplay: Tf_configdisplay
   Top = 337
   Width = 500
   ActiveControl = Button6
-  BorderStyle = bsSingle
+  BorderIcons = [biSystemMenu]
   Caption = 'Display'
   ClientHeight = 630
   ClientWidth = 500
@@ -58,7 +58,6 @@ object f_configdisplay: Tf_configdisplay
       Width = 77
       Anchors = [akTop, akRight]
       BorderSpacing.InnerBorder = 4
-      Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
       ParentFont = False

@@ -4,7 +4,7 @@ object f_configsolsys: Tf_configsolsys
   Top = 124
   Width = 500
   ActiveControl = Button4
-  BorderStyle = bsSingle
+  BorderIcons = [biSystemMenu]
   Caption = 'Solar System'
   ClientHeight = 630
   ClientWidth = 500

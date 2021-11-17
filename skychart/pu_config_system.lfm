@@ -4,7 +4,7 @@ object f_configsystem: Tf_configsystem
   Top = 124
   Width = 500
   ActiveControl = Button4
-  BorderStyle = bsSingle
+  BorderIcons = [biSystemMenu]
   Caption = 'System'
   ClientHeight = 630
   ClientWidth = 500

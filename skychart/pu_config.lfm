@@ -4,7 +4,7 @@ object f_config: Tf_config
   Top = 197
   Width = 748
   ActiveControl = PanelConfig
-  BorderStyle = bsSingle
+  BorderIcons = [biSystemMenu]
   Caption = 'Configuration'
   ClientHeight = 606
   ClientWidth = 748
@@ -177,7 +177,6 @@ object f_config: Tf_config
       Width = 76
       BorderSpacing.InnerBorder = 4
       Caption = 'OK'
-      Default = True
       ModalResult = 1
       OnClick = OKBtnClick
       ParentFont = False
