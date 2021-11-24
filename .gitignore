@@ -67,6 +67,7 @@ skychart/library/chealpix/libchealpix.*
 skychart/library/spice/libpasspice.*
 skychart/library/calceph/calcephconfig.h
 skychart/library/calceph/libcalceph.dll
+skychart/library/calceph/libcalceph.dylib
 skychart/cdc
 skychart/cdcicon
 skychart/cdc.exe
