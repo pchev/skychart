@@ -58,7 +58,7 @@ const
   MaxComet = 500;
   MaxAsteroid = 10000;
   NEO_dist = 0.1; // distance to always take account of NEO
-  MaxPla = 69;
+  MaxPla = 77;
   MaxQuickSearch = 15;
   MaxWindow = 10;  // maximum number of chart window
   maxlabels = 3500; //maximum number of label to a chart
@@ -309,8 +309,8 @@ const
     'Prometheus', 'Pandora', 'Pan', 'Daphnis',
     'Cordelia', 'Ophelia', 'Bianca', 'Cressida', 'Desdemona', 'Juliet',
     'Portia', 'Rosalind', 'Belinda', 'Puck', 'Perdita', 'Mab', 'Cupid',
-    'Naiad', 'Thalassa', 'Despina', 'Galatea', 'Larissa', 'Proteus');
-
+    'Naiad', 'Thalassa', 'Despina', 'Galatea', 'Larissa', 'Proteus',
+    'Himalia', 'Elara', 'Pasiphae', 'Sinope', 'Lysithea', 'Carme', 'Ananke', 'Leda');
 
   // the same but always with English name
   epla: array[1..MaxPla] of string =
@@ -327,7 +327,9 @@ const
     'Prometheus', 'Pandora', 'Pan', 'Daphnis',
     'Cordelia', 'Ophelia', 'Bianca', 'Cressida', 'Desdemona', 'Juliet',
     'Portia', 'Rosalind', 'Belinda', 'Puck', 'Perdita', 'Mab', 'Cupid',
-    'Naiad', 'Thalassa', 'Despina', 'Galatea', 'Larissa', 'Proteus');
+    'Naiad', 'Thalassa', 'Despina', 'Galatea', 'Larissa', 'Proteus',
+    'Himalia', 'Elara', 'Pasiphae', 'Sinope', 'Lysithea', 'Carme', 'Ananke', 'Leda');
+
 
   naif: array[1..MaxPla] of integer =
     (199, 299, 399, 499, 599,
@@ -343,30 +345,32 @@ const
     616, 617, 618, 635,
     706, 707, 708, 709, 710, 711,
     712, 713, 714, 715, 725, 726, 727,
-    803, 804, 805, 806, 807, 808);
+    803, 804, 805, 806, 807, 808,
+    506, 507, 508, 509, 510, 511, 512, 513);
 
   spicesegid: array[1..MaxPla] of string =
     ('', '', '', '', '',
     '', '', '', '', '', '',
-    'JUP310', 'JUP310', 'JUP310', 'JUP310', 'SAT427', 'SAT427',
+    'JUP365', 'JUP365', 'JUP365', 'JUP365', 'SAT427', 'SAT427',
     'SAT427', 'SAT427',
     'SAT427', 'SAT427', 'SAT427', 'SAT427', 'URA111', 'URA111',
     'URA111', 'URA111',
     'URA111', 'MAR097', 'MAR097', '', '',
-    'SAT427', 'NEP095', 'NEP095', 'PLU055',
-    'JUP310', 'JUP310', 'JUP310', 'JUP310',
+    'SAT427', 'NEP095', 'NEP095', 'PLU058',
+    'JUP365', 'JUP365', 'JUP365', 'JUP365',
     'SAT393', 'SAT393', 'SAT427', 'SAT427', 'SAT427', 'SAT393',
     'SAT393', 'SAT393', 'SAT393-PAN', 'SAT393-DAPHNIS',
     'URA115', 'URA115', 'URA115', 'URA115', 'URA115', 'URA115',
     'URA115', 'URA115', 'URA115', 'URA115', 'URA115', 'URA115', 'URA115',
-    'NEP095', 'NEP095', 'NEP095', 'NEP095', 'NEP095', 'NEP095');
+    'NEP095', 'NEP095', 'NEP095', 'NEP095', 'NEP095', 'NEP095',
+    'JUP344', 'JUP344', 'JUP344', 'JUP344', 'JUP344', 'JUP344', 'JUP344', 'JUP344');
 
   spicebody: array[1..9,1..20] of integer=(
     (-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ),
     (-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ),
     (301 ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ),
     (401 ,402 ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ),
-    (501 ,502 ,503 ,504 ,505 ,514 ,515 ,516 ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ),
+    (501 ,502 ,503 ,504 ,505 ,514 ,515 ,516 ,506 ,507 ,508 ,509 ,510 ,511 ,512 ,513 ,-1  ,-1  ,-1  ,-1  ),
     (601 ,602 ,603 ,604 ,605 ,606 ,607 ,608 ,609 ,610 ,611 ,612 ,613 ,614 ,615 ,616 ,617 ,618 ,635 ,-1  ),
     (705 ,701 ,702 ,703 ,704 ,706 ,707 ,708 ,709 ,710 ,711 ,712 ,713 ,714 ,715 ,725 ,726 ,727 ,-1  ,-1  ),
     (801 ,802 ,803 ,804 ,805 ,806 ,807 ,808 ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ,-1  ),
@@ -386,7 +390,7 @@ const
   planetcolor: array[1..11] of double =
     (0.7, 0, 0, 1.5, 0.7, 0.7, -1.5, -1.5, 0, 0.7, 0);
   V0mar: array [1..2] of double = (11.80, 12.89);
-  V0jup: array [1..8] of double = (-1.68, -1.41, -2.09, -1.05, 7.4, 9.0, 12.4, 10.8);
+  V0jup: array [1..16] of double = (-1.68, -1.41, -2.09, -1.05, 7.4, 9.0, 12.4, 10.8, 8.14, 10.07, 10.33, 11.6, 11.7, 11.3, 12.2, 13.5);
   V0sat: array [1..19] of double =
     (3.30, 2.10, 0.60, 0.80, 0.10, -1.28, 4.63, 1.50,
     6.7, 4.9, 6.1, 8.8, 9.1, 9.4, 9.5, 6.2, 6.9, 12, 13);
@@ -395,7 +399,7 @@ const
   V0nep: array [1..8] of double = (-1.22, 4.0, 10.0, 9.1, 7.9, 7.6, 7.3, 5.6);
   V0plu: array [1..1] of double = (1.0);
   D0mar: array [1..2] of double = (11, 6);
-  D0jup: array [1..8] of double = (1821, 1565, 2634, 2403, 125, 58, 10, 20);
+  D0jup: array [1..16] of double = (1821, 1565, 2634, 2403, 125, 58, 10, 20, 85, 40, 18, 14, 12, 15, 10, 5);
   D0sat: array [1..19] of double =
     (199, 249, 530, 560, 764, 2575, 143, 718, 110, 97, 69, 16, 15, 15, 18.5, 74, 55, 10, 4);
   D0ura: array [1..18] of double =
@@ -851,6 +855,7 @@ type
   //41:Janus 42:Epimetheus 43:Helene 44:Telesto 45:Calypso 46:Atlas 47:Prometheus 48:Pandora 49:Pan 50:Daphnis
   //51:Cordelia 52:Ophelia 53:Bianca 54:Cressida 55:Desdemona 56:Juliet 57:Portia 58:Rosalind 59:Belinda 60:Puck 61:Perdita 62:Mab 63:Cupid
   //64:Naiad 65:Thalassa 66:Despina 67:Galatea 68:Larissa 69:Proteus
+  //70:Himalia 71:Elara 72:Pasiphae 73:Sinope 74:Lysithea 75:Carme 76:Ananke 77:Leda
   Tcometlst = array of array[1..MaxComet, 1..10] of double;
   // ra, dec, magn, diam, tail_ra, tail_dec, jd, epoch, ra2000, dec2000
   TcometName = array of array[1..MaxComet, 1..2] of string[27];   // id, name

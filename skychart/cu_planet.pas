@@ -541,6 +541,11 @@ begin
       ipl := 8;
       ix := isat - 63 + 2;
     end;
+    70..77:
+    begin
+      ipl := 6;
+      ix := 0;
+    end;
     else
     begin
       ipl := 0;
@@ -770,8 +775,12 @@ var
   xs, ys, zs, x, y, z, alpha, delta, qr, d1, d2: double;
   xst, yst, zst, xt, yt, zt: double20;
 begin
-  if c.SmallSatActive then
-    n := 8
+  if c.SmallSatActive then begin
+    if c.CalcephActive or c.SpiceActive then
+      n := 16
+    else
+      n := 8;
+  end
   else
     n := 4;
   Barycenter(jde, xs, ys, zs);
@@ -1605,9 +1614,12 @@ begin
           begin
             for i := 1 to 4 do
               cfgsc.PlanetLst[j, i + 11, 6] := 99;
-            if cfgsc.SmallSatActive then
+            if cfgsc.SmallSatActive then begin
               for i := 1 to 4 do
                 cfgsc.PlanetLst[j, i + 36, 6] := 99;
+              for i := 1 to 8 do
+                cfgsc.PlanetLst[j, i + 69, 6] := 99;
+            end;
           end
           else
           begin
@@ -1636,7 +1648,7 @@ begin
               else
                 cfgsc.PlanetLst[j, i + 11, 6] := 0;
             end;
-            if cfgsc.SmallSatActive then
+            if cfgsc.SmallSatActive then begin
               for i := 1 to 4 do
               begin
                 ars := satx[4 + i];
@@ -1662,6 +1674,34 @@ begin
                 else
                   cfgsc.PlanetLst[j, i + 36, 6] := 0;
               end;
+              if cfgsc.CalcephActive or cfgsc.SpiceActive then begin
+                for i := 1 to 8 do
+                begin
+                  ars := satx[8 + i];
+                  des := saty[8 + i];
+                  cfgsc.PlanetLst[j, i + 69, 8] := NormRA(ars); //J2000
+                  cfgsc.PlanetLst[j, i + 69, 9] := des;
+                  cfgsc.PlanetLst[j, i + 69, 10] := cfgsc.PlanetLst[j, ipla, 10];
+                  precession(jd2000, cfgsc.JDChart, ars, des);     // equinox require for the chart
+                  if cfgsc.PlanetParalaxe then
+                  begin
+                    Paralaxe(st0, dist, ars, des, ars, des, q, cfgsc);
+                  end;
+                  if cfgsc.ApparentPos then
+                    apparent_equatorial(ars, des, cfgsc, True, False);
+                  ars := rmod(ars, pi2);
+                  cfgsc.PlanetLst[j, i + 69, 1] := ars;
+                  cfgsc.PlanetLst[j, i + 69, 2] := des;
+                  cfgsc.PlanetLst[j, i + 69, 3] := jdt;
+                  cfgsc.PlanetLst[j, i + 69, 4] := rad2deg * (2 * D0jup[i + 8] / km_au / dist) * 3600;
+                  cfgsc.PlanetLst[j, i + 69, 5] := V0jup[i + 8] + 5 * log10(dp * dist) + 0.005 * pha;
+                  if supconj[i] then
+                    cfgsc.PlanetLst[j, i + 69, 6] := 10
+                  else
+                    cfgsc.PlanetLst[j, i + 69, 6] := 0;
+                end;
+              end;
+            end;
           end;
         end;
         if ipla = 6 then
@@ -1959,6 +1999,8 @@ var
 begin
   ok := False;
   if (not cfgsc.ephvalid) or (id < 1) or (id > MaxPla) or (id = 31) or (id = 32) then
+    exit;
+  if (cfgsc.Planetlst[0, id, 1]=0)and(cfgsc.Planetlst[0, id, 2]=0) then
     exit;
   ok := True;
   cfgsc.FindOK := True;

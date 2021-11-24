@@ -2655,11 +2655,18 @@ begin
                 DrawSatel(j, i + 11, cfgsc.Planetlst[j, i + 11, 1], cfgsc.Planetlst[j, i + 11, 2],
                   cfgsc.Planetlst[j, i + 11, 5], cfgsc.Planetlst[j, i + 11, 4], pixscale, rot,
                   cfgsc.Planetlst[j, i + 11, 6] > 1.0, True, cfgsc.Planetlst[j, i + 11, 8], cfgsc.Planetlst[j, i + 11, 9]);
-              if cfgsc.SmallSatActive then
+              if cfgsc.SmallSatActive then begin
                 for i := 1 to 4 do
                   DrawSatel(j, i + 36, cfgsc.Planetlst[j, i + 36, 1], cfgsc.Planetlst[j, i + 36, 2],
                     cfgsc.Planetlst[j, i + 36, 5], cfgsc.Planetlst[j, i + 36, 4], pixscale, rot,
                     cfgsc.Planetlst[j, i + 36, 6] > 1.0, True, cfgsc.Planetlst[j, i + 36, 8], cfgsc.Planetlst[j, i + 36, 9]);
+                if cfgsc.CalcephActive or cfgsc.SpiceActive then begin
+                for i := 1 to 8 do
+                  DrawSatel(j, i + 69, cfgsc.Planetlst[j, i + 69, 1], cfgsc.Planetlst[j, i + 69, 2],
+                    cfgsc.Planetlst[j, i + 69, 5], cfgsc.Planetlst[j, i + 69, 4], pixscale, rot,
+                    cfgsc.Planetlst[j, i + 69, 6] > 1.0, True, cfgsc.Planetlst[j, i + 69, 8], cfgsc.Planetlst[j, i + 69, 9]);
+                end;
+              end;
             end;
             Fplot.PlotPlanet(xx, yy, cfgsc.FlipX, cfgsc.FlipY, ipla,
               jdt, pixscale, diam, flatten, magn, phase, ppa, rot, poleincl, sunincl, w2,
@@ -2670,11 +2677,18 @@ begin
                 DrawSatel(j, i + 11, cfgsc.Planetlst[j, i + 11, 1], cfgsc.Planetlst[j, i + 11, 2],
                   cfgsc.Planetlst[j, i + 11, 5], cfgsc.Planetlst[j, i + 11, 4], pixscale, rot,
                   cfgsc.Planetlst[j, i + 11, 6] > 1.0, False, cfgsc.Planetlst[j, i + 11, 8], cfgsc.Planetlst[j, i + 11, 9]);
-              if cfgsc.SmallSatActive then
+              if cfgsc.SmallSatActive then begin
                 for i := 1 to 4 do
                   DrawSatel(j, i + 36, cfgsc.Planetlst[j, i + 36, 1], cfgsc.Planetlst[j, i + 36, 2],
                     cfgsc.Planetlst[j, i + 36, 5], cfgsc.Planetlst[j, i + 36, 4], pixscale, rot,
                     cfgsc.Planetlst[j, i + 36, 6] > 1.0, False, cfgsc.Planetlst[j, i + 36, 8], cfgsc.Planetlst[j, i + 36, 9]);
+                if cfgsc.CalcephActive or cfgsc.SpiceActive then begin
+                for i := 1 to 8 do
+                  DrawSatel(j, i + 69, cfgsc.Planetlst[j, i + 69, 1], cfgsc.Planetlst[j, i + 69, 2],
+                    cfgsc.Planetlst[j, i + 69, 5], cfgsc.Planetlst[j, i + 69, 4], pixscale, rot,
+                    cfgsc.Planetlst[j, i + 69, 6] > 1.0, False, cfgsc.Planetlst[j, i + 69, 8], cfgsc.Planetlst[j, i + 69, 9]);
+                end;
+              end;
             end;
           end;
           6:

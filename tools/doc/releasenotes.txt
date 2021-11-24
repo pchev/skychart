@@ -8,6 +8,9 @@ The skychart-spice-base file is required and you can add skychart-spice-ext for 
 On Linux you also need to install libcalceph before you can use this function: https://github.com/pchev/libcalceph/releases/tag/v3.4.7
 
 New functions:
+- Add 8 faint satellite of Jupiter, this require to install the updated Spice kernel as of November 2021.
+- New program icon by Mattia Verga.
+- Adjust magnitude and distance for the effect of proper motion.
 - Update to latest version of solar and lunar eclipse catalog.
 - For date before 1657 the Delta T computation is from Morrison, Stephenson, Hohenkerk, Zawilski 2021. 
 - For date older than 1840-1950, depending on the country, when the LMT timezone is in use, the time offset is now for the longitude of the observatory.
@@ -28,6 +31,7 @@ New functions:
 - Add pre-pointing feature for asteroid occultation
 
 Bug fix:
+- Fix Bayer labels
 - Update Quicksat to support the new magnitude file
 - Fix PHD2 comet tracking interface
 - Fix setting telescope time
@@ -40,6 +44,5 @@ Removed:
 
 Take note you must not run this software with administrator right.
 Since the version 4.2 a warning is show in the title bar if you do so.
-Now this version show a prompt every time the program is started in this mode.
-In a future version the program will refuse to start in this case.
+Now this version refuse to start if launched as administrator.
 If you are currently running your astronomy software in administrator mode it is time to change that because this is totally useless. The important point is you run all your software with the same user. But running all with the standard user is much better than running all in administrator!
