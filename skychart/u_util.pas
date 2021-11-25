@@ -2069,6 +2069,8 @@ var
   i: integer;
   y, u, v, t, jdd: double;
 begin
+  c.ObsXP:=0;
+  c.ObsYP:=0;
   if c.Force_DT_UT then
     Result := c.DT_UT_val
   else
@@ -2082,6 +2084,17 @@ begin
          for i:=numleapseconds-1 downto 0 do begin
            result:=leapseconds[i,1];
            if jdd>leapseconds[i,0] then break;
+         end;
+         jdd:=trunc(jd(year,month,day,0));
+         if (numiers>0)and(jdd>=iers[0,0])and(jdd<=iers[numiers-1,0]) then begin
+           for i:=numiers-1 downto 0 do begin
+              if jdd=iers[i,0] then begin
+                result:=result-iers[i,1];
+                c.ObsXP:=iers[i,2];
+                c.ObsYP:=iers[i,3];
+                break;
+              end;
+           end;
          end;
          result:=(result+32.184)/3600;
        end

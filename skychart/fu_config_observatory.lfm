@@ -158,22 +158,20 @@ object f_config_observatory: Tf_config_observatory
             AnchorSideTop.Control = ComboBox1
             AnchorSideTop.Side = asrCenter
             Left = 21
-            Height = 17
-            Top = 43
+            Height = 19
+            Top = 42
             Width = 51
             Caption = 'Favorite'
-            ParentColor = False
             ParentFont = False
           end
           object Label3: TLabel
             AnchorSideTop.Control = ObsName
             AnchorSideTop.Side = asrCenter
             Left = 21
-            Height = 17
-            Top = 10
+            Height = 19
+            Top = 9
             Width = 37
             Caption = 'Name'
-            ParentColor = False
             ParentFont = False
           end
         end
@@ -199,11 +197,10 @@ object f_config_observatory: Tf_config_observatory
             TabOrder = 0
             object Label58: TLabel
               Left = 4
-              Height = 17
+              Height = 19
               Top = 4
               Width = 47
               Caption = 'Degree'
-              ParentColor = False
               ParentFont = False
             end
             object hemis: TComboBox
@@ -287,11 +284,10 @@ object f_config_observatory: Tf_config_observatory
             TabOrder = 1
             object Label61: TLabel
               Left = 4
-              Height = 17
+              Height = 19
               Top = 4
               Width = 47
               Caption = 'Degree'
-              ParentColor = False
               ParentFont = False
             end
             object long: TComboBox
@@ -375,11 +371,10 @@ object f_config_observatory: Tf_config_observatory
             TabOrder = 2
             object Label70: TLabel
               Left = 8
-              Height = 17
+              Height = 19
               Top = 4
               Width = 45
               Caption = 'Meters'
-              ParentColor = False
               ParentFont = False
             end
             object altmeter: TFloatEdit
@@ -623,11 +618,10 @@ object f_config_observatory: Tf_config_observatory
           end
           object Label9: TLabel
             Left = 28
-            Height = 17
+            Height = 19
             Top = 120
             Width = 119
             Caption = 'Picture angle offset'
-            ParentColor = False
             ParentFont = False
           end
           object ShowHorizon0: TCheckBox
@@ -661,19 +655,17 @@ object f_config_observatory: Tf_config_observatory
           end
           object Label10: TLabel
             Left = 198
-            Height = 17
+            Height = 19
             Top = 120
             Width = 10
             Caption = 'H'
-            ParentColor = False
           end
           object Label11: TLabel
             Left = 304
-            Height = 17
+            Height = 19
             Top = 120
             Width = 8
             Caption = 'V'
-            ParentColor = False
           end
           object pictureelevation: TFloatEdit
             Left = 325
@@ -708,7 +700,6 @@ object f_config_observatory: Tf_config_observatory
             Width = 419
             AutoSize = False
             Caption = 'You live on a big mountain near the ocean shore and you like to observe the distorded image of the object below the horizon.'
-            ParentColor = False
             ParentFont = False
             WordWrap = True
           end
@@ -736,20 +727,18 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 3
           object Label82: TLabel
             Left = 13
-            Height = 17
+            Height = 19
             Top = 7
             Width = 110
             Caption = 'Pressure (millibar)'
-            ParentColor = False
             ParentFont = False
           end
           object Label83: TLabel
             Left = 173
-            Height = 17
+            Height = 19
             Top = 7
             Width = 133
             Caption = 'Temperature (Celsius)'
-            ParentColor = False
             ParentFont = False
           end
           object pressure: TFloatEdit
@@ -800,11 +789,10 @@ object f_config_observatory: Tf_config_observatory
           end
           object Label4: TLabel
             Left = 345
-            Height = 17
+            Height = 19
             Top = 7
             Width = 70
             Caption = 'Humidity %'
-            ParentColor = False
             ParentFont = False
           end
           object tlrate: TFloatEdit
@@ -826,76 +814,12 @@ object f_config_observatory: Tf_config_observatory
           end
           object Label5: TLabel
             Left = 13
-            Height = 17
+            Height = 19
             Top = 61
             Width = 267
             Caption = 'Troposphere temperature lapse rate (K/km)'
-            ParentColor = False
             ParentFont = False
           end
-        end
-        object polary: TFloatEdit
-          Left = 309
-          Height = 28
-          Hint = '-0.5..0.5'
-          Top = 470
-          Width = 66
-          Constraints.MaxHeight = 28
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 5
-          OnChange = polaryChange
-          Decimals = 5
-          MinValue = -0.5
-          MaxValue = 0.5
-        end
-        object Label8: TLabel
-          Left = 291
-          Height = 17
-          Top = 473
-          Width = 12
-          Caption = 'Y:'
-          ParentColor = False
-          ParentFont = False
-        end
-        object polarx: TFloatEdit
-          Left = 202
-          Height = 28
-          Hint = '-0.5..0.5'
-          Top = 470
-          Width = 66
-          Constraints.MaxHeight = 28
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 4
-          OnChange = polarxChange
-          Decimals = 5
-          MinValue = -0.5
-          MaxValue = 0.5
-        end
-        object Label7: TLabel
-          Left = 186
-          Height = 17
-          Top = 473
-          Width = 12
-          Caption = 'X:'
-          ParentColor = False
-          ParentFont = False
-        end
-        object Label6: TLabel
-          Cursor = crHandPoint
-          Left = 16
-          Height = 17
-          Top = 473
-          Width = 131
-          Caption = 'polar motion (arc sec)'
-          Font.Color = clBlue
-          Font.Style = [fsUnderline]
-          ParentColor = False
-          ParentFont = False
-          OnClick = Label6Click
         end
         object RefDefault: TButton
           Left = 389
@@ -905,7 +829,7 @@ object f_config_observatory: Tf_config_observatory
           Caption = 'Default'
           OnClick = RefDefaultClick
           ParentFont = False
-          TabOrder = 6
+          TabOrder = 4
         end
       end
     end

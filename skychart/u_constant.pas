@@ -580,6 +580,7 @@ const
 
   URL_DELTAT     = 'https://www.ap-i.net/pub/skychart/deltat/deltat.txt';
   URL_LEAPSECOND = 'https://www.ap-i.net/pub/skychart/deltat/leap-seconds.list';
+  URL_IERS = 'https://www.ap-i.net/pub/skychart/deltat/finals.data';
 
 
   URL_TLE = 'https://www.space-track.org';
@@ -594,8 +595,6 @@ const
 
   URL_GRS = 'https://www.ap-i.net/pub/virtualplanet/grs.txt';
   URL_JUPOS = 'http://jupos.org';
-
-  URL_IERSBulletins = 'https://www.iers.org/IERS/EN/Publications/Bulletins/bulletins.html';
 
   URL_HTTPCometElements1 = 'http://astro.vanbuitenen.nl/cometelements?format=mpc&mag=obs';
   URL_HTTPCometElements2 = 'https://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt';
@@ -1536,6 +1535,8 @@ var
   leapseconds: array of array of double;   // date, delta_at
   numleapseconds: integer;
   leapsecondexpires: double;
+  iers: array of array of double;   // date, ut1-utc, polex, poley
+  numiers: integer;
 
 {$ifdef darwin}
   OpenFileCMD: string = 'open';

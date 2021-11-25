@@ -1239,7 +1239,6 @@ resourcestring
     + 'system object';
   rsHumidity = 'Humidity %';
   rsTroposphereT = 'Troposphere temperature lapse rate (K/km)';
-  rsPolarMotionA = 'Polar motion (arc sec)';
   rsEarth = 'Earth';
   rsPlanetVisibi = 'Planet visibility';
   rsInnerSolarSy = 'Inner Solar System';

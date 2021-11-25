@@ -63,12 +63,7 @@ type
     DownloadDialog1: TDownloadDialog;
     humidity: TFloatEdit;
     Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
     tlrate: TFloatEdit;
-    polarx: TFloatEdit;
-    polary: TFloatEdit;
     Label4: TLabel;
     latsec: TFloatEdit;
     longsec: TFloatEdit;
@@ -136,11 +131,8 @@ type
     procedure HScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: integer);
     procedure humidityChange(Sender: TObject);
-    procedure Label6Click(Sender: TObject);
     procedure ObsNameChange(Sender: TObject);
     procedure picturerotationChange(Sender: TObject);
-    procedure polarxChange(Sender: TObject);
-    procedure polaryChange(Sender: TObject);
     procedure RefDefaultClick(Sender: TObject);
     procedure tlrateChange(Sender: TObject);
     procedure TZComboBoxChange(Sender: TObject);
@@ -228,7 +220,6 @@ begin
   Label83.Caption := rsTemperatureC;
   label4.Caption := rsHumidity;
   label5.Caption := rsTroposphereT;
-  label6.Caption := rsPolarMotionA;
   RefDefault.Caption := rsDefault;
   Page2.Caption := rsHorizon;
   GroupBox2.Caption := rsWantToTrackA;
@@ -376,8 +367,6 @@ begin
     temperature.Value := csc.obstemperature;
     humidity.Value := csc.ObsRH * 100;
     tlrate.Value := csc.ObsTlr * 1000;
-    polarx.Value := csc.ObsXP;
-    polary.Value := csc.ObsYP;
     ShowObsCoord;
     ShowCountryList;
     UpdTZList(self);
@@ -910,11 +899,6 @@ begin
   csc.ObsRH := humidity.Value / 100;
 end;
 
-procedure Tf_config_observatory.Label6Click(Sender: TObject);
-begin
-  ExecuteFile(URL_IERSBulletins);
-end;
-
 procedure Tf_config_observatory.tlrateChange(Sender: TObject);
 begin
   if LockChange then
@@ -922,24 +906,8 @@ begin
   csc.ObsTlr := tlrate.Value / 1000;
 end;
 
-procedure Tf_config_observatory.polarxChange(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  csc.ObsXP := polarx.Value;
-end;
-
-procedure Tf_config_observatory.polaryChange(Sender: TObject);
-begin
-  if LockChange then
-    exit;
-  csc.ObsYP := polary.Value;
-end;
-
 procedure Tf_config_observatory.RefDefaultClick(Sender: TObject);
 begin
-  csc.ObsXP := 0;
-  csc.ObsYP := 0;
   csc.ObsTlr := 0.0065;
   csc.ObsRH := 0.5;
   csc.ObsTemperature := 10;

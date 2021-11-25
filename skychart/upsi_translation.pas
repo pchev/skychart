@@ -1214,7 +1214,6 @@ begin
   CL.AddConstantN('rsEphemerisPro', 'String').SetString(rsEphemerisPro);
   CL.AddConstantN('rsHumidity', 'String').SetString(rsHumidity);
   CL.AddConstantN('rsTroposphereT', 'String').SetString(rsTroposphereT);
-  CL.AddConstantN('rsPolarMotionA', 'String').SetString(rsPolarMotionA);
   CL.AddConstantN('rsEarth', 'String').SetString(rsEarth);
   CL.AddConstantN('rsPlanetVisibi', 'String').SetString(rsPlanetVisibi);
   CL.AddConstantN('rsInnerSolarSy', 'String').SetString(rsInnerSolarSy);

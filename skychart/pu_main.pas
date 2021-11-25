@@ -855,6 +855,7 @@ type
     procedure SendSelectRow(tableid, url, row: string);
     procedure LoadDeltaT;
     procedure LoadLeapseconds(CanUpdate: boolean=true);
+    procedure LoadIERS;
   end;
 
 var
@@ -1406,6 +1407,7 @@ begin
       WriteTrace('Load deltat');
     LoadDeltaT;
     LoadLeapseconds(true);
+    LoadIERS;
     // must read db configuration before to create this one!
     if VerboseMsg then
       WriteTrace('Create DB');
@@ -7576,8 +7578,6 @@ begin
         csc.ObsLatitude := ReadFloat(section, 'ObsLatitude', csc.ObsLatitude);
         csc.ObsLongitude := ReadFloat(section, 'ObsLongitude', csc.ObsLongitude);
         csc.ObsAltitude := ReadFloat(section, 'ObsAltitude', csc.ObsAltitude);
-        csc.ObsXP := ReadFloat(section, 'ObsXP', csc.ObsXP);
-        csc.ObsYP := ReadFloat(section, 'ObsYP', csc.ObsYP);
         csc.ObsRH := ReadFloat(section, 'ObsRH', csc.ObsRH);
         csc.ObsTlr := ReadFloat(section, 'ObsTlr', csc.ObsTlr);
         csc.ObsTemperature := ReadFloat(section, 'ObsTemperature', csc.ObsTemperature);
@@ -8935,8 +8935,6 @@ begin
         WriteFloat(section, 'ObsLatitude', csc.ObsLatitude);
         WriteFloat(section, 'ObsLongitude', csc.ObsLongitude);
         WriteFloat(section, 'ObsAltitude', csc.ObsAltitude);
-        WriteFloat(section, 'ObsXP', csc.ObsXP);
-        WriteFloat(section, 'ObsYP', csc.ObsYP);
         WriteFloat(section, 'ObsRH', csc.ObsRH);
         WriteFloat(section, 'ObsTlr', csc.ObsTlr);
         WriteFloat(section, 'ObsTemperature', csc.ObsTemperature);
@@ -12081,6 +12079,10 @@ begin
       ShowMessage('Cannot update the Delta T file now, please check your Internet connection');
       exit;
     end;
+    fn:=slash(privatedir)+'finals.data';
+    if QuickDownload(URL_IERS, fn, false) then begin
+      LoadIERS;
+    end;
     fn :=slash(privatedir)+'deltat.txt';
     if QuickDownload(URL_DELTAT, fn, False) then begin
       LoadDeltaT;
@@ -13359,6 +13361,56 @@ begin
     end;
   finally
     line.free;
+  end;
+end;
+
+procedure Tf_main.LoadIERS;
+var
+  f: textfile;
+  i, n: integer;
+  fname,buf: string;
+begin
+  fname:=slash(privatedir)+'finals.data';
+  if not FileExistsUTF8(fname) then begin
+    // download the last file
+    QuickDownload(URL_IERS, fname, true);
+  end;
+  if not FileExists(fname) then
+  begin
+    numiers := 0;
+    setlength(iers, 0, 0);
+    exit;
+  end;
+  Filemode := 0;
+  assignfile(f, fname);
+  try
+    reset(f);
+    n := 0;
+    // first loop to get the size
+    repeat
+      readln(f, buf);
+      if trim(copy(buf,19,4))='' then break;
+      Inc(n);
+    until EOF(f);
+    setlength(iers, n, 4);
+    // read the file now
+    reset(f);
+    try
+    for i := 0 to n - 1 do
+    begin
+      readln(f, buf);
+      iers[i,0]:=round(2400000+strtofloat(copy(buf,8,8))); // jd
+      iers[i,1]:=strtofloat(trim(copy(buf,59,10))); // ut1-utc
+      iers[i,2]:=strtofloat(trim(copy(buf,19,9)));  // pole x
+      iers[i,3]:=strtofloat(trim(copy(buf,38,9)));  // pole y
+    end;
+    numiers:=n;
+    except
+      numiers := 0;
+      setlength(iers, 0, 0);
+    end;
+  finally
+    closefile(f);
   end;
 end;
 

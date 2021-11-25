@@ -509,7 +509,7 @@ begin
   t_hour.Position := StrToInt(h);
   t_min.Position := StrToInt(n);
   t_sec.Position := StrToInt(s);
-  Tdt_Ut.Caption := formatfloat(f2, (csc.DT_UT * 3600));
+  Tdt_Ut.Caption := formatfloat(f4, (csc.DT_UT * 3600));
   checkbox4.Checked := csc.Force_DT_UT;
   if not csc.Force_DT_UT then
     csc.DT_UT_val := csc.DT_UT;
@@ -898,7 +898,7 @@ begin
     csc.tz.JD := Jd(csc.curyear, csc.curmonth, csc.curday, csc.curtime - csc.timezone);
     csc.TimeZone := csc.tz.SecondsOffset / 3600;
     csc.DT_UT := DTminusUT(csc.CurYear, csc.CurMonth, csc.CurDay, csc);
-    Tdt_Ut.Caption := formatfloat(f2, (csc.DT_UT * 3600));
+    Tdt_Ut.Caption := formatfloat(f4, (csc.DT_UT * 3600));
     dt_ut.Text := Tdt_Ut.Caption;
     JDEdit.Value := Jd(csc.curyear, csc.curmonth, csc.curday, csc.curtime - csc.timezone);
     ShowUTTime;
@@ -1141,7 +1141,7 @@ begin
   csc.Force_DT_UT := checkbox4.Checked;
   dt_ut.Enabled := csc.Force_DT_UT;
   csc.DT_UT := DTminusUT(csc.CurYear, csc.CurMonth, csc.CurDay, csc);
-  Tdt_Ut.Caption := formatfloat(f2, (csc.DT_UT * 3600));
+  Tdt_Ut.Caption := formatfloat(f4, (csc.DT_UT * 3600));
   dt_ut.Text := Tdt_Ut.Caption;
 end;
 
