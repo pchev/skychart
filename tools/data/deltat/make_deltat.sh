@@ -7,9 +7,10 @@ wget $source
 
 ## Create Delta T file for Cartes du Ciel 
 
-#source=http://maia.usno.navy.mil/ser7
-#source="--inet4-only ftp://cddis.gsfc.nasa.gov/pub/products/iers"
 source="ftps://gdc.cddis.eosdis.nasa.gov/products/iers"
+
+# Get IERS
+wget $source/finals.data
 
 rm deltat.tmp deltat.txt 
 rm historic_deltat.data deltat.data deltat.preds
