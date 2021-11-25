@@ -643,7 +643,7 @@ begin
       xt[i] := 0;
       yt[i] := 0;
       zt[i] := 0;
-      result:=1;
+      if i<8 then result:=1;
     end;
   end;
   except
@@ -2000,7 +2000,7 @@ begin
   ok := False;
   if (not cfgsc.ephvalid) or (id < 1) or (id > MaxPla) or (id = 31) or (id = 32) then
     exit;
-  if (cfgsc.Planetlst[0, id, 1]=0)and(cfgsc.Planetlst[0, id, 2]=0) then
+  if (cfgsc.Planetlst[0, id, 8]=0)and(cfgsc.Planetlst[0, id, 9]=0) then
     exit;
   ok := True;
   cfgsc.FindOK := True;
