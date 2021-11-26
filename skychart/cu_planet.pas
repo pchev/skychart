@@ -86,7 +86,7 @@ type
       var nom, ma, date, desc: string);
     procedure Plan(ipla: integer; t: double; var p: TPlanData);
     procedure Planet(ipla: integer; t0: double;
-      var alpha, delta, distance, illum, phase, diameter, magn, dp, xp, yp, zp, vel: double);
+      var alpha, delta, distance, illum, phase, diameter, magn, dp, xp, yp, zp, vel, lighttime: double);
     procedure Barycenter(t0: double; var x, y, z: double);
     procedure SunRect(t0: double; var x, y, z: double);
     procedure Sun(t0: double; var alpha, delta, dist, diam: double);
@@ -241,7 +241,7 @@ begin
 end;
 
 procedure TPlanet.Planet(ipla: integer; t0: double;
-  var alpha, delta, distance, illum, phase, diameter, magn, dp, xp, yp, zp, vel: double);
+  var alpha, delta, distance, illum, phase, diameter, magn, dp, xp, yp, zp, vel, lighttime: double);
 const
   sa: array[1..9] of double =
     (0.38709893, 0.72333199, 1.00000011, 1.52366231, 5.20336301, 9.53707032,
@@ -278,7 +278,8 @@ begin
   zt := pl.z + v1[3];
   distance := sqrt(xt * xt + yt * yt + zt * zt);
   // planet using light correction
-  t := t0 - distance * tlight;
+  lighttime := distance * tlight;
+  t := t0 - lighttime;
   Plan(ipla, t, pl);
   // get light corrected distance
   dp := pl.r;
@@ -554,7 +555,7 @@ begin
   end;
   if ipl <> 0 then
   begin
-    Planet(ipl, jde, pra, pdec, dist, illum, phase, diam, magn, rp, xp, yp, zp, vel);
+    Planet(ipl, jde, pra, pdec, dist, illum, phase, diam, magn, rp, xp, yp, zp, vel, lighttime);
     Barycenter(jde, xs, ys, zs);
     x := xp + xs;
     y := yp + ys;
@@ -567,7 +568,6 @@ begin
       SpiceSatOne(jde, isat, x, y, z, eph);
     end
     else begin
-      lighttime := dist * tlight;
       case ipl of
         4: MarSatOne(jde - lighttime, ix, satx, saty, satz);
         5: JupSatOne(jde - lighttime, ix, satx, saty, satz);
@@ -1478,7 +1478,7 @@ end;
 
 function TPlanet.ComputePlanet(cfgsc: Tconf_skychart): boolean;
 var
-  ar, de, dist, illum, phase, diam, jdt, magn, st0, dkm, q, P, a, b, be, dp, sb, pha, xp, yp, zp, vel: double;
+  ar, de, dist, illum, phase, diam, jdt, magn, st0, dkm, q, P, a, b, be, dp, sb, pha, xp, yp, zp, vel,lightime: double;
   ipla, k, j, i, ierr: integer;
   satx, saty: double20;
   supconj: bool20;
@@ -1551,7 +1551,7 @@ begin
       begin
         if ipla = 3 then
           continue;
-        Planet(ipla, jdt, ar, de, dist, illum, phase, diam, magn, dp, xp, yp, zp, vel);
+        Planet(ipla, jdt, ar, de, dist, illum, phase, diam, magn, dp, xp, yp, zp, vel,lightime);
         cfgsc.PlanetLst[j, ipla, 8] := NormRA(ar); //J2000
         cfgsc.PlanetLst[j, ipla, 9] := de;
         cfgsc.PlanetLst[j, ipla, 10] := dist;
@@ -2160,8 +2160,9 @@ var
   yy, mm, dd: integer;
   ar, de: double;
   dist, illum, phase, diam, jdt, magn, dkm, hh, dp, p, pde, pds, w1, w2, w3, jd0,
-  st0, q, xp, yp, zp, vel: double;
+  st0, q, xp, yp, zp, vel, lighttime: double;
   sar, sde, sdist, skm, sillum, sphase, sdiam, smagn, shh, sdp, sdpkm, datett: string;
+  sunv: Array_5D;
 const
   d1 = '0.0';
   d2 = '0.00';
@@ -2208,10 +2209,17 @@ begin
   cfgsc.TrackName := trim(pla[CurrentPlanet]);
   if (currentplanet < 10) then
   begin
-    Planet(CurrentPlanet, jdt, ar, de, dist, illum, phase, diam, magn, dp, xp, yp, zp, vel);
+    Planet(CurrentPlanet, jdt, ar, de, dist, illum, phase, diam, magn, dp, xp, yp, zp, vel, lighttime);
     cfgsc.FindX := xp;
     cfgsc.FindY := yp;
     cfgsc.FindZ := zp;
+    if load_de(jdt) then
+    begin
+      // Sun to barycenter
+      Calc_Planet_de(jdt-lighttime, 11, sunv, True, 12, False);
+      // distance to the Sun
+      dp:=sqrt(sqr(xp-sunv[0])+sqr(yp-sunv[1])+sqr(zp-sunv[2]));
+    end;
     str(dp: 12: 9, sdp);
     str((dp * km_au): 12: 0, sdpkm);
     str(illum: 5: 3, sillum);
@@ -3915,11 +3923,11 @@ end;
 procedure TPlanet.PlanetAltitude(pla: integer; jd0, hh: double;
   cfgsc: Tconf_skychart; var har, sina: double);
 var
-  jdt, ra, de, dm4, dm5, dm6, dm7, dm8, dm9, dm10, dm11, dm12, dm13: double;
+  jdt, ra, de, dm4, dm5, dm6, dm7, dm8, dm9, dm10, dm11, dm12, dm13, dm14: double;
 begin
   jdt := jd0 + (hh - cfgsc.TimeZone + cfgsc.DT_UT) / 24;   // local time -> TT
   case pla of
-    1..9: Planet(pla, jdt, ra, de, dm4, dm5, dm6, dm7, dm8, dm9, dm10, dm11, dm12, dm13);
+    1..9: Planet(pla, jdt, ra, de, dm4, dm5, dm6, dm7, dm8, dm9, dm10, dm11, dm12, dm13, dm14);
     10: Sun(jdt, ra, de, dm4, dm5);
     11: Moon(jdt, ra, de, dm4, dm5, dm6, dm7, dm8,cfgsc);
   end;
@@ -3935,7 +3943,7 @@ procedure TPlanet.PlanetRiseSet(pla: integer; jd0: double; AzNorth: boolean;
 var
   hr, ht, hs, h1, h2, azr, azs, dist, q, diam, dh, hmin, hhmax: double;
   ho, sinho, dt, hh, y1, y2, y3, x1, x2, x3, xmax, ymax, xmax2, ymax2, ymax0, ra,
-  de, dm5, dm6, dm7, dm8, dm9, dm10, dm11, dm12, dm13: double;
+  de, dm5, dm6, dm7, dm8, dm9, dm10, dm11, dm12, dm13, dm14: double;
   frise, fset, ftransit: boolean;
   n: integer;
 const
@@ -4133,7 +4141,7 @@ begin
       jdr := jd0 + (hr - cfgsc.TimeZone) / 24;
       case pla of
         1..9: Planet(pla, jdr + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7,
-            dm8, dm9, dm10, dm11, dm12, dm13);
+            dm8, dm9, dm10, dm11, dm12, dm13, dm14);
         10: Sun(jdr + cfgsc.DT_UT / 24, ra, de, dist, dm5);
         11: Moon(jdr + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7, dm8,cfgsc);
       end;
@@ -4164,7 +4172,7 @@ begin
       jds := jd0 + (hs - cfgsc.TimeZone) / 24;
       case pla of
         1..9: Planet(pla, jds + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7,
-            dm8, dm9, dm10, dm11, dm12, dm13);
+            dm8, dm9, dm10, dm11, dm12, dm13, dm14);
         10: Sun(jds + cfgsc.DT_UT / 24, ra, de, dist, dm5);
         11: Moon(jds + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7, dm8,cfgsc);
       end;
@@ -4195,7 +4203,7 @@ begin
       jdt := jd0 + (ht - cfgsc.TimeZone) / 24;
       case pla of
         1..9: Planet(pla, jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7,
-            dm8, dm9, dm10, dm11, dm12, dm13);
+            dm8, dm9, dm10, dm11, dm12, dm13, dm14);
         10: Sun(jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5);
         11: Moon(jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7, dm8,cfgsc);
       end;
@@ -4229,7 +4237,7 @@ begin
       jdt := jd0 + (ht - cfgsc.TimeZone) / 24;
       case pla of
         1..9: Planet(pla, jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7,
-            dm8, dm9, dm10, dm11, dm12, dm13);
+            dm8, dm9, dm10, dm11, dm12, dm13, dm14);
         10: Sun(jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5);
         11: Moon(jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7, dm8,cfgsc);
       end;

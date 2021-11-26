@@ -3860,7 +3860,7 @@ var
   ra2000, de2000, radate, dedate, raapp, deapp, cjd, cjd0, cst, nst, njd, err, gw: double;
   r: TStringList;
   tp, ec, ap, an, ic, g, eq, cra1, cde1, dst1, cra, cdec, dist, dst, dkm, rr, elong, phase, magn,
-  diam, lc, ctar, ctde, rc, xc, yc, zc, ma, sa, dx, dy, illum, vel: double;
+  diam, lc, ctar, ctde, rc, xc, yc, zc, ma, sa, dx, dy, illum, vel, lighttime: double;
   nam, elem_id, ref: string;
   emagn: double;
   ename, enum,efam,sh,sg,ediam,eperiod,amin,amax,u: string;
@@ -4241,8 +4241,8 @@ begin
   end;
   if (otype = 'P') then
   begin
-    sc.planet.Planet(ipla, cjd, cra1, cde1, dst1, illum, phase, diam, magn, rc, xc, yc, zc, vel);
-    sc.planet.Planet(ipla, njd, cra, cdec, dst, illum, phase, diam, magn, rc, xc, yc, zc, vel);
+    sc.planet.Planet(ipla, cjd, cra1, cde1, dst1, illum, phase, diam, magn, rc, xc, yc, zc, vel, lighttime);
+    sc.planet.Planet(ipla, njd, cra, cdec, dst, illum, phase, diam, magn, rc, xc, yc, zc, vel, lighttime);
     Precession(jd2000,sc.cfgsc.JDChart,cra1,cde1);
     Precession(jd2000,sc.cfgsc.JDChart,cra,cdec);
     if sc.cfgsc.ApparentPos then begin

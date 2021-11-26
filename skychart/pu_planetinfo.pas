@@ -2201,7 +2201,7 @@ end;
 
 Procedure Tf_planetinfo.PlotPlanet(bmp:TBGRABitmap);
 var ipla,yc,ys,i:integer;
-    ar,de,dist,diam,dkm,phase,illum,magn,dp,xp,yp,zp,vel,hp1,hp2,ht,azr,azs: double;
+    ar,de,dist,diam,dkm,phase,illum,magn,dp,xp,yp,zp,vel,lighttime,hp1,hp2,ht,azr,azs: double;
 begin
 
   if ShowCurrentObject and config.FindOK and (config.FindType<>ftPla) then
@@ -2241,7 +2241,7 @@ begin
   begin
     if ipla=C_Earth then continue; // skip earth
     yc:=yc+ys;
-    Fplanet.Planet(ipla,config.CurJDTT,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel);
+    Fplanet.Planet(ipla,config.CurJDTT,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel,lighttime);
     precession(jd2000,config.CurJDUT,ar,de);
     if (ar<0) then ar:=ar+pi2;
     RiseSet(config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);

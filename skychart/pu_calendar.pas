@@ -1434,7 +1434,7 @@ end;
 
 procedure Tf_calendar.RefreshPlanet;
 var
-  ar, de, dist, illum, phase, diam, jda, magn, dkm, q, az, ha, dp, xp, yp, zp, vel: double;
+  ar, de, dist, illum, phase, diam, jda, magn, dkm, q, az, ha, dp, xp, yp, zp, vel, lighttime: double;
   i, ipla, nj: integer;
   s, a, m, d, irc: integer;
   jd1, jd2, jd0, h, jdr, jdt, jds, st0, hh: double;
@@ -1452,7 +1452,7 @@ var
       case ipla of
         1..9:
         begin
-          planet.Planet(ipla, jda + jdt_ut, ar, de, dist, illum, phase, diam, magn, dp, xp, yp, zp, vel);
+          planet.Planet(ipla, jda + jdt_ut, ar, de, dist, illum, phase, diam, magn, dp, xp, yp, zp, vel, lighttime);
           precession(jd2000, config.JDChart, ar, de);
           if config.PlanetParalaxe then
             Paralaxe(st0, dist, ar, de, ar, de, q, config);
