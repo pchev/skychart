@@ -8,6 +8,7 @@ Le fichier skychart-spice-base est requis et vous pouvez ajouter skychart-spice-
 Avec Linux vous devez installer libcalceph avant d'utiliser cette fonction: https://github.com/pchev/libcalceph/releases/tag/v3.4.7
 
 Nouvelles fonctions:
+- Utilise les données IERS pour UT1-UTC et le mouvement du pole, supprime le réglage du mouvement du pole.
 - Ajout de 8 faibles satellites de Jupiter, cela nécessite d'installer le kernel Spice mis à jour de novembre 2021.
 - Nouvelle icône du programme par Mattia Verga.
 - Ajuste la magnitude et la distance pour l'effet du mouvement propre.

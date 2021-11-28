@@ -8,6 +8,7 @@ The skychart-spice-base file is required and you can add skychart-spice-ext for 
 On Linux you also need to install libcalceph before you can use this function: https://github.com/pchev/libcalceph/releases/tag/v3.4.7
 
 New functions:
+- use IERS data for UT1-UTC and pole motion, remove pole motion settings.
 - Add 8 faint satellite of Jupiter, this require to install the updated Spice kernel as of November 2021.
 - New program icon by Mattia Verga.
 - Adjust magnitude and distance for the effect of proper motion.
