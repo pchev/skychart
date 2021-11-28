@@ -2087,14 +2087,10 @@ begin
          end;
          jdd:=trunc(jd(year,month,day,0));
          if (numiers>0)and(jdd>=iers[0,0])and(jdd<=iers[numiers-1,0]) then begin
-           for i:=numiers-1 downto 0 do begin
-              if jdd=iers[i,0] then begin
-                result:=result-iers[i,1];
-                c.ObsXP:=iers[i,2];
-                c.ObsYP:=iers[i,3];
-                break;
-              end;
-           end;
+           i:=round(jdd-iers[0,0]);
+           result:=result-iers[i,1];
+           c.ObsXP:=iers[i,2];
+           c.ObsYP:=iers[i,3];
          end;
          result:=(result+32.184)/3600;
        end
