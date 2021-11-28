@@ -57,18 +57,26 @@ object f_config_time: Tf_config_time
             ParentFont = False
           end
           object Tdt_Ut: TLabel
-            Left = 98
+            AnchorSideLeft.Control = Label135
+            AnchorSideLeft.Side = asrBottom
+            AnchorSideTop.Control = Label135
+            Left = 82
             Height = 19
             Top = 67
             Width = 32
+            BorderSpacing.Left = 7
             Caption = '0000'
             ParentFont = False
           end
           object Label136: TLabel
-            Left = 155
+            AnchorSideLeft.Control = Tdt_Ut
+            AnchorSideLeft.Side = asrBottom
+            AnchorSideTop.Control = Label135
+            Left = 122
             Height = 19
             Top = 67
             Width = 51
+            BorderSpacing.Left = 8
             Caption = 'Seconds'
             ParentFont = False
           end
