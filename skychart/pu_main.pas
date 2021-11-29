@@ -13357,6 +13357,9 @@ begin
       // expire in less than one month, refresh now
       if QuickDownload(URL_LEAPSECOND, fname, true) then begin
         LoadLeapseconds(false);
+        fname:=slash(privatedir)+'finals.data';
+        if QuickDownload(URL_IERS, fname, true) then
+          LoadIERS;
       end
     end;
   finally
