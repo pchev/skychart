@@ -1406,8 +1406,8 @@ begin
     if VerboseMsg then
       WriteTrace('Load deltat');
     LoadDeltaT;
-    LoadLeapseconds(true);
     LoadIERS;
+    LoadLeapseconds(true);
     // must read db configuration before to create this one!
     if VerboseMsg then
       WriteTrace('Create DB');
@@ -13358,7 +13358,7 @@ begin
       if QuickDownload(URL_LEAPSECOND, fname, true) then begin
         LoadLeapseconds(false);
         fname:=slash(privatedir)+'finals.data';
-        if QuickDownload(URL_IERS, fname, true) then
+        if QuickDownload(URL_IERS, fname, false) then
           LoadIERS;
       end
     end;
@@ -13371,12 +13371,14 @@ procedure Tf_main.LoadIERS;
 var
   f: textfile;
   i, n: integer;
-  fname,buf: string;
+  fname,dfn,buf: string;
 begin
   fname:=slash(privatedir)+'finals.data';
-  if not FileExistsUTF8(fname) then begin
-    // download the last file
-    QuickDownload(URL_IERS, fname, true);
+  if not FileExists(fname) then begin
+    // try to copy distribution file
+    dfn :=slash(appdir)+ slash('data')+ slash('deltat')+'finals.data';
+    if FileExists(dfn) then
+        CopyFile( dfn , fname);
   end;
   if not FileExists(fname) then
   begin

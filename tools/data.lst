@@ -44,6 +44,7 @@ data/constellation/TirionConstLCoord.cln
 data/deltat
 data/deltat/deltat.txt
 data/deltat/leap-seconds.list
+data/deltat/finals.data
 data/earthmap
 data/earthmap/earthmap1k.jpg
 data/earthmap/earthmap4k.jpg
