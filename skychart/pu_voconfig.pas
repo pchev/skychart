@@ -1008,7 +1008,7 @@ end;
 
 procedure Tf_voconfig.Updateconfig(Sender: TObject);
 var
-  objtype, extfn: string;
+  objtype, oldtype, extfn: string;
   i: integer;
   config: TCCDconfig;
 begin
@@ -1033,6 +1033,7 @@ begin
         extfn := Fcurrentconfig;
         config := TCCDconfig.Create(self);
         config.Filename := extfn;
+        oldtype := config.GetValue('VOcat/catalog/objtype', '');
         config.SetValue('VOcat/catalog/objtype', objtype);
         config.SetValue('VOcat/update/fullcat', FullDownload.Checked);
         config.DeletePath('VOcat/data');
@@ -1071,6 +1072,11 @@ begin
         config.Flush;
         config.Free;
       end;
+    if (oldtype<>'')and(oldtype<>objtype) then begin
+      RenameFile(extfn,StringReplace(extfn,'vo_'+oldtype+'_','vo_'+objtype+'_',[]));
+      extfn:=ChangeFileExt(extfn,'.xml');
+      RenameFile(extfn,StringReplace(extfn,'vo_'+oldtype+'_','vo_'+objtype+'_',[]));
+    end;
   finally
     screen.Cursor := crDefault;
     CloseTimer.Enabled := True;
