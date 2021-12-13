@@ -68,10 +68,12 @@ begin
   if LazarusResources.Find('sortdesc')<>nil then LazarusResources.Find('sortdesc').Name:='lcl_sortdesc';
   {$I grid_images.lrs}
 
+(* // To stdout by default, uncomment to write to file
   {$ifdef USEHEAPTRC}
   DeleteFile('/tmp/skychart_heap.trc');
   SetHeapTraceOutput('/tmp/skychart_heap.trc');
   {$endif}
+*)
 
   Params:=TStringList.Create;
   for i:=1 to ParamCount() do begin
