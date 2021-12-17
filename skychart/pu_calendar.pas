@@ -37,6 +37,10 @@ type
 
   TObjCoord = class(TObject)
     jd, ra, Dec: double;
+    magn,diam,illum,elong,phase: double;
+    jdrise,jdtransit,jdset: double;
+    az,alt: double;
+    riseset:integer;
   end;
 
   TLine = record
@@ -190,7 +194,9 @@ type
     procedure crepusculetitle;
     procedure cometetitle;
     procedure asteroidtitle;
-    function SetObjCoord(jd, ra, Dec: double): TObject;
+    function SetObjCoord(jd, ra, Dec: double;magn:double=0;diam:double=0;illum:double=0;
+                         elong:double=0;phase:double=0;trise:double=0;ttransit:double=0;
+                         tset:double=0;az:double=0;alt:double=0;riseset:integer=0): TObject;
     procedure FreeCoord(var gr: Tstringgrid);
     procedure InitRiseCell(var gr: Tstringgrid);
     //    procedure PlanetRiseCell(var gr : Tstringgrid; i,irc : integer; hr,ht,hs,azr,azs,jda,h,ar,de : double);
@@ -792,7 +798,9 @@ begin
   end;
 end;
 
-function Tf_calendar.SetObjCoord(jd, ra, Dec: double): TObject;
+function Tf_calendar.SetObjCoord(jd, ra, Dec: double;magn:double=0;diam:double=0;illum:double=0;
+                     elong:double=0;phase:double=0;trise:double=0;ttransit:double=0;
+                     tset:double=0;az:double=0;alt:double=0;riseset:integer=0): TObject;
 var
   p: TObjCoord;
 begin
@@ -800,6 +808,17 @@ begin
   p.jd := jd;
   p.ra := ra;
   p.Dec := Dec;
+  p.magn:=magn;
+  p.diam:=diam;
+  p.illum:=illum;
+  p.elong:=elong;
+  p.phase:=phase;
+  p.jdrise:=trise;
+  p.jdtransit:=ttransit;
+  p.jdset:=tset;
+  p.az:=az;
+  p.alt:=alt;
+  p.riseset :=riseset;
   Result := p;
 end;
 
@@ -1491,8 +1510,6 @@ var
         end;
       end;
       ar := rmod(ar + pi2, pi2);
-      objects[0, i] := SetObjCoord(jda, ar, de);
-      objects[3, i] := SetObjCoord(magn, diam, illum);
       Eq2Hz((st0 - ar), de, az, ha, config);
       az := rmod(az + pi, pi2);
       cells[0, 0] := pla[ipla];
@@ -1508,7 +1525,7 @@ var
       cells[10, i] := demtostr(rad2deg * ha);
       Planet.PlanetRiseSet(ipla, jd0, AzNorth, mr, mt, ms, azr, azs, jdr, jdt, jds,
         rar, der, rat, det, ras, des, irc, config);
-      objects[9, i] := SetObjCoord(irc, rad2deg * az, rad2deg * ha);
+      objects[0, i] := SetObjCoord(jda,ar,de,magn,diam,illum,0,0,jdr,jdt,jds,rad2deg*az,rad2deg*ha,irc);
       case irc of
         0:
         begin
@@ -1809,9 +1826,9 @@ procedure Tf_calendar.RefreshPlanetGraph;
         r[7].Valid := True;
         r[7].ScTime := xte;
         {Sun behaviour}
-        r[8].Valid := Assigned(SoleilGrid) and Assigned(SoleilGrid.Objects[9, rw]);
+        r[8].Valid := Assigned(SoleilGrid) and Assigned(SoleilGrid.Objects[0, rw]);
         if r[8].Valid then
-          r[8].ScTime := round((SoleilGrid.Objects[9, rw] as TObjCoord).jd);
+          r[8].ScTime := round((SoleilGrid.Objects[0, rw] as TObjCoord).riseset);
         {Now tidy up exceptions}
         if not r[8].Valid then
         begin {give up - make everything night}
@@ -1839,8 +1856,8 @@ procedure Tf_calendar.RefreshPlanetGraph;
               else
               {none valid - twilight doesn't change all day - very near poles (or something horribly wrong)}
               {get twilight estimate from sun's altitude - as it doesn't change (much)}
-              if assigned(SoleilGrid) and assigned(SoleilGrid.Objects[9, rw]) then
-                ai := trunc((SoleilGrid.Objects[9, rw] as TObjCoord).Dec / 6)
+              if assigned(SoleilGrid) and assigned(SoleilGrid.Objects[0, rw]) then
+                ai := trunc((SoleilGrid.Objects[0, rw] as TObjCoord).alt / 6)
               else
                 ai := -3; {give up and treat as night}
               case ai of {note this should never be positive if we get here}
@@ -2035,7 +2052,7 @@ procedure Tf_calendar.RefreshPlanetGraph;
         x := x - xSInc * 2;
       until (ix + txtsz.cx div 2) > xte;
       pen.Width := 2;
-      ix := trunc((tstrt - (gr.Objects[3, 2] as TObjCoord).jd) * tsc) + xts;
+      ix := trunc((tstrt - (gr.Objects[0, 2] as TObjCoord).magn) * tsc) + xts;
       iy := ygtop;
       y := iy;
       MoveTo(ix, iy);
@@ -2044,7 +2061,7 @@ procedure Tf_calendar.RefreshPlanetGraph;
       begin
         y := y + ytick;
         iy := trunc(y);
-        ix := trunc((tstrt - (gr.Objects[3, i] as TObjCoord).jd) * tsc) + xts;
+        ix := trunc((tstrt - (gr.Objects[0, i] as TObjCoord).magn) * tsc) + xts;
         lineto(ix, iy);
         Inc(i);
       end;
@@ -2073,7 +2090,7 @@ procedure Tf_calendar.RefreshPlanetGraph;
         x := x + xSInc;
       until (ix + txtsz.cx div 2) > xte;
       pen.Width := 2;
-      ix := trunc(((gr.Objects[3, 2] as TObjCoord).ra - xSStrt) * tsc) + xts;
+      ix := trunc(((gr.Objects[0, 2] as TObjCoord).diam - xSStrt) * tsc) + xts;
       iy := ygtop;
       y := iy;
       MoveTo(ix, iy);
@@ -2082,7 +2099,7 @@ procedure Tf_calendar.RefreshPlanetGraph;
       begin
         y := y + ytick;
         iy := trunc(y);
-        ix := trunc(((gr.Objects[3, i] as TObjCoord).ra - xSStrt) * tsc) + xts;
+        ix := trunc(((gr.Objects[0, i] as TObjCoord).diam - xSStrt) * tsc) + xts;
         lineto(ix, iy);
         Inc(i);
       end;
@@ -2111,7 +2128,7 @@ procedure Tf_calendar.RefreshPlanetGraph;
         x := x + xSInc;
       until (ix + txtsz.cx div 2) > xte;
       pen.Width := 2;
-      ix := trunc(((gr.Objects[3, 2] as TObjCoord).Dec * 100 - xSStrt) * tsc) + xts;
+      ix := trunc(((gr.Objects[0, 2] as TObjCoord).illum * 100 - xSStrt) * tsc) + xts;
       iy := ygtop;
       y := iy;
       MoveTo(ix, iy);
@@ -2120,7 +2137,7 @@ procedure Tf_calendar.RefreshPlanetGraph;
       begin
         y := y + ytick;
         iy := trunc(y);
-        ix := trunc(((gr.Objects[3, i] as TObjCoord).Dec * 100 - xSStrt) * tsc) + xts;
+        ix := trunc(((gr.Objects[0, i] as TObjCoord).illum * 100 - xSStrt) * tsc) + xts;
         lineto(ix, iy);
         Inc(i);
       end;
@@ -2573,7 +2590,7 @@ var
   grid: TStringGrid;
   buf, d, z1, z2: string;
   x: double;
-  planetgrid: boolean;
+  planetgrid,comgrid,astgrid: boolean;
   i, j: integer;
 
   procedure AddToBuff(vals: array of double); {of BtnCopyClipClick}
@@ -2581,7 +2598,41 @@ var
     k: integer;
   begin {AddToBuff of BtnCopyClipClick}
     for k := Low(vals) to high(vals) do
-      buf := buf + FloatToStr(vals[k]) + tab;
+      buf := buf + FormatFloat(f6,vals[k]) + tab;
+  end;
+
+  procedure AddHeader;
+  var i,j: integer;
+  begin
+    buf := config.ObsName;
+    x := abs(config.ObsLongitude);
+    if config.ObsLongitude > 0 then
+      d := west
+    else
+      d := east;
+    buf := buf + blank + appmsg[32] + '=' + copy(detostr(x), 2, 99) + d + blank +
+      appmsg[31] + '=' + detostr(config.ObsLatitude);
+    config.tz.JD := date1.JD;
+    z1 := config.tz.ZoneName;
+    config.tz.JD := date2.JD;
+    z2 := config.tz.ZoneName;
+    if z1 <> z2 then
+      z1 := z1 + '/' + z2;
+    buf := buf + blank + rsTimeZone + '=' + TzGMT2UTC(z1) + LineEnding;
+    {At this stage we have something like
+     "Churchill Longitude=146Â°24'55"East Latitude=-38Â°21'50" Time Zone=LHST"}
+    for i := 0 to 1 do
+    begin
+      for j := 0 to grid.ColCount - 1 do
+        buf := buf + grid.Cells[j, i] + tab;
+      {it will have a spurious last cloumn, but too bad!}
+      buf := buf + LineEnding;
+    end;
+    {Now have added titles}
+    {Churchill Longitude=146Â°24'55"East Latitude=-38Â°21'50" Time Zone=LHST
+    Venus  Date Coord.
+    7h37m UT  RA  DE  Magn.  Diam.  Illum.  Rise  Culmination
+    }
   end;
 
 begin {BtnCopyClipClick}
@@ -2590,6 +2641,8 @@ begin {BtnCopyClipClick}
    spreadsheet}
   grid := nil;
   planetgrid := False;
+  comgrid := False;
+  astgrid := False;
   case pagecontrol1.ActivePage.TabIndex of
     0: Grid := TwilightGrid;
     1:
@@ -2609,8 +2662,14 @@ begin {BtnCopyClipClick}
         10: Clipboard.Assign(PlanetGraphs[dgPlanet.Selection.Top + 1]);
       end {case};
     end;
-    2: Grid := CometGrid;
-    3: Grid := AsteroidGrid;
+    2: begin
+         comgrid := True;
+         Grid := CometGrid;
+       end;
+    3: begin
+         astgrid := True;
+         Grid := AsteroidGrid;
+       end;
     4: Grid := SolarGrid;
     5: Grid := LunarGrid;
     6: Grid := SatGrid;
@@ -2621,78 +2680,89 @@ begin {BtnCopyClipClick}
   begin
     if planetgrid then
     begin
-      buf := config.ObsName;
-      x := abs(config.ObsLongitude);
-      if config.ObsLongitude > 0 then
-        d := west
-      else
-        d := east;
-      buf := buf + blank + appmsg[32] + '=' + copy(detostr(x), 2, 99) + d + blank +
-        appmsg[31] + '=' + detostr(config.ObsLatitude);
-      config.tz.JD := date1.JD;
-      z1 := config.tz.ZoneName;
-      config.tz.JD := date2.JD;
-      z2 := config.tz.ZoneName;
-      if z1 <> z2 then
-        z1 := z1 + '/' + z2;
-      buf := buf + blank + rsTimeZone + '=' + TzGMT2UTC(z1) + LineEnding;
-      {At this stage we have something like
-       "Churchill Longitude=146Â°24'55"East Latitude=-38Â°21'50" Time Zone=LHST"}
-      for i := 0 to 1 do
-      begin
-        for j := 0 to grid.ColCount - 1 do
-          buf := buf + grid.Cells[j, i] + tab;
-        {it will have a spurious last cloumn, but too bad!}
-        buf := buf + LineEnding;
-      end;
-      {Now have added titles}
-      {Churchill Longitude=146Â°24'55"East Latitude=-38Â°21'50" Time Zone=LHST
-      Venus  Date Coord.
-      7h37m UT  RA  DE  Magn.  Diam.  Illum.  Rise  Culmination
-      }
+      // Planet
+      AddHeader;
       for i := 2 to grid.RowCount - 1 do
       begin
         buf := buf + grid.Cells[0, i] + tab;
-        if assigned(grid.Objects[0, i]) then
-          with grid.Objects[0, i] as TObjCoord do
-            AddToBuff([rad2deg * ra / 15, rad2deg * Dec])
+        if assigned(grid.Objects[0, i]) then  begin
+          with grid.Objects[0, i] as TObjCoord do begin
+            AddToBuff([rad2deg * ra / 15, rad2deg * Dec, magn, diam, illum]);
+            if jdrise>0 then AddToBuff([frac(jdrise - 0.5 + config.tz.SecondsOffset / (3600 * 24))])
+                        else buf := buf + tab;
+            if jdtransit>0 then AddToBuff([frac(jdtransit - 0.5 + config.tz.SecondsOffset / (3600 * 24))])
+                        else buf := buf + tab;
+            if jdset>0 then AddToBuff([frac(jdset - 0.5 + config.tz.SecondsOffset / (3600 * 24))])
+                        else buf := buf + tab;
+            AddToBuff([az,alt]);
+
+          end
+        end
         else
-          buf := buf + tab + tab;
-        if (grid.ColCount >= 4) and assigned(grid.Objects[3, i]) then
-          with grid.Objects[3, i] as TObjCoord do
-            AddToBuff([jd, ra, Dec])
-        else
-          buf := buf + tab + tab + tab;
-        if (grid.ColCount >= 7) and assigned(grid.Objects[6, i]) then
-          with grid.Objects[6, i] as TObjCoord do
-            AddToBuff([frac(jd - 0.5 + config.tz.SecondsOffset / (3600 * 24))])
-        else
-          buf := buf + tab;
-        if (grid.ColCount >= 8) and assigned(grid.Objects[7, i]) then
-          with grid.Objects[7, i] as TObjCoord do
-            AddToBuff([frac(jd - 0.5 + config.tz.SecondsOffset / (3600 * 24))])
-        else
-          buf := buf + tab;
-        if (grid.ColCount >= 9) and assigned(grid.Objects[8, i]) then
-          with grid.Objects[8, i] as TObjCoord do
-            AddToBuff([frac(jd - 0.5 + config.tz.SecondsOffset / (3600 * 24))])
-        else
-          buf := buf + tab;
-        if (grid.ColCount >= 10) and assigned(grid.Objects[9, i]) then
-          with grid.Objects[9, i] as TObjCoord do
-            AddToBuff([ra, Dec])
-        else
-          buf := buf + tab + tab;
+          buf := buf + tab + tab + tab + tab + tab + tab + tab + tab;
         buf := buf + LineEnding;
       end;
       buf := buf + 'Times are in days - format rise/transit/set columns as time' +
         LineEnding;
       Clipboard.AsText := buf;
     end {planet grid}
+    else if comgrid then
+    begin
+      // Comet
+      AddHeader;
+      for i := 2 to grid.RowCount - 1 do
+      begin
+        buf := buf + grid.Cells[0, i] + tab;
+        if assigned(grid.Objects[0, i]) then  begin
+          with grid.Objects[0, i] as TObjCoord do begin
+            AddToBuff([rad2deg * ra / 15, rad2deg * Dec, magn, rad2deg * elong, rad2deg * phase]);
+            if jdrise>0 then AddToBuff([frac(jdrise - 0.5 + config.tz.SecondsOffset / (3600 * 24))])
+                        else buf := buf + tab;
+            if jdtransit>0 then AddToBuff([frac(jdtransit - 0.5 + config.tz.SecondsOffset / (3600 * 24))])
+                        else buf := buf + tab;
+            if jdset>0 then AddToBuff([frac(jdset - 0.5 + config.tz.SecondsOffset / (3600 * 24))])
+                        else buf := buf + tab;
+          end
+        end
+        else
+          buf := buf + tab + tab + tab + tab + tab + tab + tab + tab;
+        for j:=9 to 12 do
+           buf := buf + grid.Cells[j,i] + tab;
+        buf := buf + LineEnding;
+      end;
+      buf := buf + 'Times are in days - format rise/transit/set columns as time' +
+        LineEnding;
+      Clipboard.AsText := buf;
+    end  {comgrid}
+    else if astgrid then
+    begin
+      // Asteroid
+      AddHeader;
+      for i := 2 to grid.RowCount - 1 do
+      begin
+        buf := buf + grid.Cells[0, i] + tab;
+        if assigned(grid.Objects[0, i]) then  begin
+          with grid.Objects[0, i] as TObjCoord do begin
+            AddToBuff([rad2deg * ra / 15, rad2deg * Dec, magn, rad2deg * elong, rad2deg * phase]);
+            if jdrise>0 then AddToBuff([frac(jdrise - 0.5 + config.tz.SecondsOffset / (3600 * 24))])
+                        else buf := buf + tab;
+            if jdtransit>0 then AddToBuff([frac(jdtransit - 0.5 + config.tz.SecondsOffset / (3600 * 24))])
+                        else buf := buf + tab;
+            if jdset>0 then AddToBuff([frac(jdset - 0.5 + config.tz.SecondsOffset / (3600 * 24))])
+                        else buf := buf + tab;
+          end
+        end
+        else
+          buf := buf + tab + tab + tab + tab + tab + tab + tab + tab;
+        buf := buf + LineEnding;
+      end;
+      buf := buf + 'Times are in days - format rise/transit/set columns as time' +
+        LineEnding;
+      Clipboard.AsText := buf;
+    end  {astgrid}
     else
     begin
-      { TODO : Add number formating for other grid }
-      grid.CopyToClipboard(False);
+       grid.CopyToClipboard(False);
     end;
   end;
 end;
@@ -2878,9 +2948,10 @@ var
   i, a, m, d, s, nj, irc, irc2: integer;
   cjd, epoch: double;
   ra, Dec, dist, r, elong, phase, magn, st0, q: double;
+  p1,p2,p3,p4: double;
   hh, g, ap, an, ic, ec, eq, tp, diam, lc, car, cde, rc, xc, yc, zc: double;
   hr, ht, hs, azr, azs, hp1, hp2, ars, des, ds, dds, az, ha: double;
-  jda, jd0, jd1, jd2, jdt, h, st, hhh: double;
+  jda, jd0, jd1, jd2, jdt, h, st, hhh,jdr,jdtr,jds: double;
   hr1, ht1, hs1, hr2, ht2, hs2: double;
   ra1, dec1, ra2, dec2, ra3, dec3: double;
 begin
@@ -2939,18 +3010,17 @@ begin
           cells[3, i] := floattostrf(magn, ffFixed, 5, 1);
           cells[4, i] := demtostr(rad2deg * elong);
           cells[5, i] := demtostr(rad2deg * phase);
-          objects[0, i] := SetObjCoord(jda, ra, Dec);
           RiseSet(jd0, ra, Dec, hr1, ht1, hs1, azr, azs, irc, config);
           Fplanet.Comet(jd0 + rmod((hr1 - config.TimeZone) + 24, 24) / 24, False,
-            ra1, dec1, dist, r, elong, phase, magn, diam, lc, car, cde, rc, xc, yc, zc);
+            ra1, dec1, dist, r, p1,p2,p3,p4, lc, car, cde, rc, xc, yc, zc);
           precession(jd2000, config.jdchart, ra1, dec1);
           RiseSet(jd0, ra1, dec1, hr, ht2, hs2, azr, azs, irc2, config);
           Fplanet.Comet(jd0 + rmod((ht1 - config.TimeZone) + 24, 24) / 24, False,
-            ra2, dec2, dist, r, elong, phase, magn, diam, lc, car, cde, rc, xc, yc, zc);
+            ra2, dec2, dist, r, p1,p2,p3,p4, lc, car, cde, rc, xc, yc, zc);
           precession(jd2000, config.jdchart, ra2, dec2);
           RiseSet(jd0, ra2, dec2, hr2, ht, hs2, azr, azs, irc2, config);
           Fplanet.Comet(jd0 + rmod((hs1 - config.TimeZone) + 24, 24) / 24, False,
-            ra3, dec3, dist, r, elong, phase, magn, diam, lc, car, cde, rc, xc, yc, zc);
+            ra3, dec3, dist, r, p1,p2,p3,p4, lc, car, cde, rc, xc, yc, zc);
           precession(jd2000, config.jdchart, ra3, dec3);
           RiseSet(jd0, ra3, dec3, hr2, ht2, hs, azr, azs, irc2, config);
           case irc of
@@ -2959,16 +3029,22 @@ begin
               cells[6, i] := armtostr(hr);
               cells[7, i] := armtostr(ht);
               cells[8, i] := armtostr(hs);
-              objects[6, i] := SetObjCoord(jda + (hr - config.TimeZone - h) / 24, ra1, dec1);
-              objects[7, i] := SetObjCoord(jda + (ht - config.TimeZone - h) / 24, ra2, dec2);
-              objects[8, i] := SetObjCoord(jda + (hs - config.TimeZone - h) / 24, ra3, dec3);
+              jdr:=jda + (hr - config.TimeZone - h) / 24;
+              jdtr:=jda + (ht - config.TimeZone - h) / 24;
+              jds:=jda + (hs - config.TimeZone - h) / 24;
+              objects[0, i] := SetObjCoord(jda,ra,Dec,magn,diam,0,elong,phase,jdr,jdtr,jds);
+              objects[6, i] := SetObjCoord(jdr, ra1, dec1);
+              objects[7, i] := SetObjCoord(jdtr, ra2, dec2);
+              objects[8, i] := SetObjCoord(jds, ra3, dec3);
             end;
             1:
             begin
               cells[6, i] := '-';
               cells[7, i] := armtostr(ht);
-              objects[7, i] := SetObjCoord(jda + (ht - config.TimeZone - h) / 24, ra2, dec2);
               cells[8, i] := '-';
+              jdtr:=jda + (ht - config.TimeZone - h) / 24;
+              objects[0, i] := SetObjCoord(jda,ra,Dec,magn,diam,0,elong,phase,0,jdtr,0);
+              objects[7, i] := SetObjCoord(jdtr, ra2, dec2);
               objects[6, i] := nil;
               objects[8, i] := nil;
             end;
@@ -2977,10 +3053,13 @@ begin
               cells[6, i] := '-';
               cells[7, i] := '-';
               cells[8, i] := '-';
+              objects[0, i] := SetObjCoord(jda,ra,Dec,magn,diam,0,elong,phase,0,0,0);
               objects[6, i] := nil;
               objects[7, i] := nil;
               objects[8, i] := nil;
             end;
+            else
+              objects[0, i] := SetObjCoord(jda,ra,Dec,magn,diam,0,elong,phase,0,0,0);
           end;
           Fplanet.Sun(jda, ars, des, ds, dds);
           precession(jd2000, config.jdchart, ars, des);
@@ -3101,13 +3180,14 @@ end;
 
 procedure Tf_calendar.RefreshAsteroid;
 var
-  id, nam, ref: string;
+  nam, ref: string;
   i, a, m, d, s, nj, irc, irc2,idx: integer;
-  cjd, epoch: double;
+  epoch: double;
   ra, Dec, dist, r, elong, phase, magn, xc, yc, zc, st0, q, xac, yac, zac: double;
+  p1,p2,p3: double;
   hh, g, ma, ap, an, ic, ec, sa, eq: double;
   hr, ht, hs, azr, azs: double;
-  jda, jd0, jd1, jd2, h, hhh: double;
+  jda, jd0, jd1, jd2, h, hhh, jdr,jdtr,jds: double;
   hr1, ht1, hs1, hr2, ht2, hs2: double;
   ra1, dec1, ra2, dec2, ra3, dec3: double;
 begin
@@ -3115,7 +3195,6 @@ begin
     exit;
   screen.cursor := crHourGlass;
   try
-    cjd := (date1.JD + date2.JD) / 2;
     idx := astid[ComboBox2.ItemIndex];
     if cdb.GetAstElem(idx, epoch, hh, g, ma, ap, an, ic, ec, sa, eq, ref, nam) then
     begin
@@ -3168,15 +3247,15 @@ begin
           objects[0, i] := SetObjCoord(jda, ra, Dec);
           RiseSet(jd0, ra, Dec, hr1, ht1, hs1, azr, azs, irc, config);
           Fplanet.Asteroid(jd0 + rmod((hr1 - config.TimeZone) + 24, 24) / 24,
-            False, ra1, dec1, dist, r, elong, phase, magn, xac, yac, zac);
+            False, ra1, dec1, dist, r, p1,p2,p3, xac, yac, zac);
           precession(jd2000, config.jdchart, ra1, dec1);
           RiseSet(jd0, ra1, dec1, hr, ht2, hs2, azr, azs, irc2, config);
           Fplanet.Asteroid(jd0 + rmod((ht1 - config.TimeZone) + 24, 24) / 24,
-            False, ra2, dec2, dist, r, elong, phase, magn, xac, yac, zac);
+            False, ra2, dec2, dist, r, p1,p2,p3, xac, yac, zac);
           precession(jd2000, config.jdchart, ra2, dec2);
           RiseSet(jd0, ra2, dec2, hr2, ht, hs2, azr, azs, irc2, config);
           Fplanet.Asteroid(jd0 + rmod((hs1 - config.TimeZone) + 24, 24) / 24,
-            False, ra3, dec3, dist, r, elong, phase, magn, xac, yac, zac);
+            False, ra3, dec3, dist, r, p1,p2,p3, xac, yac, zac);
           precession(jd2000, config.jdchart, ra3, dec3);
           RiseSet(jd0, ra3, dec3, hr2, ht2, hs, azr, azs, irc2, config);
           case irc of
@@ -3185,16 +3264,22 @@ begin
               cells[6, i] := armtostr(hr);
               cells[7, i] := armtostr(ht);
               cells[8, i] := armtostr(hs);
-              objects[6, i] := SetObjCoord(jda + (hr - config.TimeZone - h) / 24, ra1, dec1);
-              objects[7, i] := SetObjCoord(jda + (ht - config.TimeZone - h) / 24, ra2, dec2);
-              objects[8, i] := SetObjCoord(jda + (hs - config.TimeZone - h) / 24, ra3, dec3);
+              jdr:=jda + (hr - config.TimeZone - h) / 24;
+              jdtr:=jda + (ht - config.TimeZone - h) / 24;
+              jds:=jda + (hs - config.TimeZone - h) / 24;
+              objects[0, i] := SetObjCoord(jda,ra,Dec,magn,0,0,elong,phase,jdr,jdtr,jds);
+              objects[6, i] := SetObjCoord(jdr, ra1, dec1);
+              objects[7, i] := SetObjCoord(jdtr, ra2, dec2);
+              objects[8, i] := SetObjCoord(jds, ra3, dec3);
             end;
             1:
             begin
               cells[6, i] := '-';
               cells[7, i] := armtostr(ht);
-              objects[7, i] := SetObjCoord(jda + (ht - config.TimeZone - h) / 24, ra2, dec2);
               cells[8, i] := '-';
+              jdtr:=jda + (ht - config.TimeZone - h) / 24;
+              objects[0, i] := SetObjCoord(jda,ra,Dec,magn,0,0,elong,phase,0,jdtr,0);
+              objects[7, i] := SetObjCoord(jdtr, ra2, dec2);
               objects[6, i] := nil;
               objects[8, i] := nil;
             end;
@@ -3203,6 +3288,7 @@ begin
               cells[6, i] := '-';
               cells[7, i] := '-';
               cells[8, i] := '-';
+              objects[0, i] := SetObjCoord(jda,ra,Dec,magn,0,0,elong,phase,0,0,0);
               objects[6, i] := nil;
               objects[7, i] := nil;
               objects[8, i] := nil;
