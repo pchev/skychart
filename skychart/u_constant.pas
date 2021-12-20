@@ -1129,6 +1129,8 @@ type
     ArchiveDirActive: array[1..MaxArchiveDir] of boolean;
     HorizonRise: boolean;
     // working variable
+    lockMagn: boolean;
+    lockStarMag,lockNebMag,lockNebSize: double;
     ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid, ShowBodiesValid,
     CalcephActive, SpiceActive, SmallSatActive, ShowEarthShadowValid, ShowEclipticValid, PlotImageFirst: boolean;
     HorizonMax, HorizonMin, rap2000, dep2000, RefractionOffset, ObsRAU, ObsZAU, Diurab: double;
@@ -1904,7 +1906,7 @@ const
   ('41;toZenith'));
 
   // Standard main toolbar
-  numstandardmainbar = 35;
+  numstandardmainbar = 36;
   standardmainbar: array[1..numstandardmainbar] of string = (
     ('0;FileNew1'),
     ('1;FileOpen1'),
@@ -1921,6 +1923,7 @@ const
     ('7;zoomminus'),
     ('8;ZoomBar'),
     ('99;MagPanel'),
+    ('121;LockMagnitude'),
     ('102;quicksearch'),
     ('100;Divider'),
     ('76;Search1'),
@@ -2811,6 +2814,10 @@ begin
   horizondarken := Source.horizondarken;
   horizonpicturename := Source.horizonpicturename;
   horizonlistname := Source.horizonlistname;
+  lockMagn := Source.lockMagn;
+  lockStarMag := Source.lockStarMag;
+  lockNebMag := Source.lockNebMag;
+  lockNebSize := Source.lockNebSize;
 end;
 
 { Tconf_plot }

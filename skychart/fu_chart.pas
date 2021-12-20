@@ -478,6 +478,7 @@ type
     procedure cmd_LessStar;
     procedure cmd_MoreNeb;
     procedure cmd_LessNeb;
+    procedure cmd_LockMagn;
     function cmd_SetGridNum(onoff: string): string;
     function cmd_SetConstL(onoff: string): string;
     function cmd_SetConstB(onoff: string): string;
@@ -6484,6 +6485,17 @@ begin
   begin
     sc.cfgsc.TrackOn := True;
     sc.cfgsc.TrackType := TTaltaz;
+  end;
+  refresh(True, False);
+end;
+
+procedure Tf_chart.cmd_LockMagn;
+begin
+  sc.cfgsc.lockMagn:=not sc.cfgsc.lockMagn;
+  if sc.cfgsc.lockMagn then begin
+    sc.cfgsc.lockStarMag := sc.catalog.cfgcat.StarMagMax;
+    sc.cfgsc.lockNebMag  := sc.catalog.cfgcat.NebMagMax;
+    sc.cfgsc.lockNebSize := sc.catalog.cfgcat.NebSizeMin;
   end;
   refresh(True, False);
 end;

@@ -614,6 +614,13 @@ begin
     Fcatalog.cfgcat.Quick := false;
   Fcatalog.cfgcat.NebMagMax := Fcatalog.cfgshr.NebMagFilter[FieldNum];
   Fcatalog.cfgcat.NebSizeMin := Fcatalog.cfgshr.NebSizeFilter[FieldNum];
+
+  if cfgsc.lockMagn then begin
+    Fcatalog.cfgcat.StarMagMax := cfgsc.lockStarMag;
+    Fcatalog.cfgcat.NebMagMax := cfgsc.lockNebMag;
+    Fcatalog.cfgcat.NebSizeMin := cfgsc.lockNebSize;
+  end;
+
   Fplot.cfgchart.min_ma := 6;
   magmax := 1;
   { activate the star catalog}

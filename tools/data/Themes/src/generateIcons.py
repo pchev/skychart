@@ -35,7 +35,7 @@ pngDir = os.path.join(os.path.dirname(__file__), 'icons')
 styles = ('daylight', 'night-vision')
 # Use 16px SVGs only for 16px icons and 22px SVGs for upscale
 mapSizes = {'16': ('16', ),
-            '22': ('22', '32', '48', '64', )}
+            '22': ('22', '32', )}
 
 with open('corrispondenze.txt', 'r') as indexFile:
     for line in indexFile:
@@ -68,4 +68,4 @@ with open('corrispondenze.txt', 'r') as indexFile:
                                            )
                     # Create icon only if not existent
                     if not os.path.isfile(pngFile):
-                        os.system(f'inkscape -z -f "{svgFile}" -w {pngSize} -e "{pngFile}"')
+                        os.system(f'inkscape -w {pngSize} -o "{pngFile}" "{svgFile}"')

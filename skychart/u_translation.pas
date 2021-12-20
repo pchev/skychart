@@ -1570,6 +1570,7 @@ resourcestring
   rsBlurred = 'Blurred';
   rsAlwaysOnTop = 'Always on top';
   rsNoDecimalSep = 'No decimal separator';
+  rsLockMagnitud = 'Lock magnitude';
 
 // also update upsi_translation
 

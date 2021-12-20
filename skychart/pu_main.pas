@@ -53,6 +53,7 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    LockMagnitude: TAction;
     MenuEditToolbar2: TMenuItem;
     MenuItem2: TMenuItem;
     StatusCopy: TMenuItem;
@@ -465,6 +466,7 @@ type
     procedure AnimationExecute(Sender: TObject);
     procedure AnimationTimerTimer(Sender: TObject);
     procedure BlinkImageExecute(Sender: TObject);
+    procedure LockMagnitudeExecute(Sender: TObject);
     procedure MenuLockChartClick(Sender: TObject);
     procedure MDEditToolBar(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
@@ -3502,6 +3504,13 @@ begin
       cmd_LessNeb;
 end;
 
+procedure Tf_main.LockMagnitudeExecute(Sender: TObject);
+begin
+  if MultiFrame1.ActiveObject is Tf_chart then
+    with MultiFrame1.ActiveObject as Tf_chart do
+      cmd_LockMagn;
+end;
+
 procedure Tf_main.AnimationExecute(Sender: TObject);
 var
   fs: TSearchRec;
@@ -6311,6 +6320,7 @@ begin
   def_cfgsc.LabelMagDiff[5] := 0;
   def_cfgsc.LabelMagDiff[10] := 2;
   def_cfgsc.LabelMagDiff[11] := 0;
+  def_cfgsc.lockMagn := false;
   def_cfgsc.horizonfile := '';
   def_cfgsc.HorizonPictureFile := '';
   def_cfgplot.LabelColor[6] := clYellow;
@@ -9736,6 +9746,9 @@ begin
   LessNeb.Caption := '&' + rsLessNebulae;
   LessNeb.Hint := rsLessNebulae;
   LessNeb.Category := CatFilter;
+  LockMagnitude.Caption := '&' + rsLockMagnitud;
+  LockMagnitude.Hint := rsLockMagnitud;
+  LockMagnitude.Category := CatFilter;
   DSSImage.Caption := '&' + rsGetDSSImage + Ellipsis;
   DSSImage.hint := rsGetDSSImage;
   DSSImage.Category := CatDrawing;
@@ -10357,6 +10370,7 @@ begin
         Track.Caption := rsNoObjectToLo;
       end;
       MenuLockChart.Checked:=sc.cfgsc.ChartLock;
+      LockMagnitude.Checked:=sc.cfgsc.lockMagn;
       switchstars.ImageIndex := 117 + sc.plot.cfgplot.starplot;
       EquatorialProjection.Checked := (sc.cfgsc.projpole = Equat);
       AltAzProjection.Checked := (sc.cfgsc.projpole = AltAz);
