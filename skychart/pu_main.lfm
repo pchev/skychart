@@ -3991,6 +3991,10 @@ object f_main: Tf_main
           Action = LessNeb
         end
       end
+      object MenuLockMagnitude: TMenuItem
+        Action = LockMagnitude
+        ShowAlwaysCheckable = True
+      end
       object MenuDSS: TMenuItem
         Action = DSSImage
       end

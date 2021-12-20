@@ -56,6 +56,7 @@ type
     LockMagnitude: TAction;
     MenuEditToolbar2: TMenuItem;
     MenuItem2: TMenuItem;
+    MenuLockMagnitude: TMenuItem;
     StatusCopy: TMenuItem;
     MenuShowVO: TMenuItem;
     MenuShowUserObject: TMenuItem;
