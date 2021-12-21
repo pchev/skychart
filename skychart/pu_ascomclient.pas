@@ -33,7 +33,7 @@ uses
   {$endif}
   cu_ascomrest, math, LCLIntf, u_util, u_constant, u_help, u_translation,
   Messages, SysUtils, Classes, Graphics, Controls,
-  Forms, Dialogs, UScaleDPI, LCLVersion, cu_alpacamanagement,
+  Forms, Dialogs, UScaleDPI, LazSysUtils, cu_alpacamanagement,
   StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls, Arrow, Spin;
 
 type
@@ -217,13 +217,6 @@ type
 
 
 implementation
-
-uses
-{$if lcl_major > 1}
-LazSysUtils;
-{$else}
-LazUTF8SysUtils;
-{$endif}
 
 {$R *.lfm}
 
