@@ -53,6 +53,8 @@ type
     LabelDeg, LabelMin, LabelSec: TLabel;
     Fkind: Tradeckind;
     FOnChange: TNotifyEvent;
+    FValue: double;
+    FChanged: boolean;
     procedure Paint; override;
     procedure SetValue(Val: double);
     function ReadValue: double;
@@ -471,6 +473,8 @@ procedure TRaDec.SetValue(Val: double);
 var
   d, m, s: string;
 begin
+  FValue:=val;
+  FChanged:=false;
   case Fkind of
     RA:
     begin
@@ -495,9 +499,14 @@ begin
       s := '';
     end;
   end;
+  try
+  lockchange := True;
   EditDeg.Text := d;
   EditMin.Text := m;
   EditSec.Text := s;
+  finally
+  lockchange := false;
+  end;
 end;
 
 function FixNum(txt: string; maxl: integer): string;
@@ -523,38 +532,42 @@ begin
   try
     Result := 0;
     lockchange := True;
-    try
-      EditMin.Text := FixNum(EditMin.Text, 2);
-      EditSec.Text := FixNum(EditSec.Text, 2);
-      case Fkind of
-        RA:
-        begin
-          EditDeg.Text := FixNum(EditDeg.Text, 2);
-          val := trim(EditDeg.Text) + 'h' + trim(EditMin.Text) + 'm' + trim(EditSec.Text) + 's';
-          Result := StrToAR(val);
+    if FChanged then begin
+      try
+        EditMin.Text := FixNum(EditMin.Text, 2);
+        EditSec.Text := FixNum(EditSec.Text, 2);
+        case Fkind of
+          RA:
+          begin
+            EditDeg.Text := FixNum(EditDeg.Text, 2);
+            val := trim(EditDeg.Text) + 'h' + trim(EditMin.Text) + 'm' + trim(EditSec.Text) + 's';
+            Result := StrToAR(val);
+          end;
+          DE:
+          begin
+            EditDeg.Text := FixNum(EditDeg.Text, 3);
+            val := trim(EditDeg.Text) + 'd' + trim(EditMin.Text) + 'm' + trim(EditSec.Text) + 's';
+            Result := StrToDE(val);
+          end;
+          Az:
+          begin
+            EditDeg.Text := FixNum(EditDeg.Text, 4);
+            val := trim(EditDeg.Text) + 'd' + trim(EditMin.Text) + 'm' + trim(EditSec.Text) + 's';
+            Result := StrToDE(val);
+          end;
+          Alt:
+          begin
+            EditDeg.Text := FixNum(EditDeg.Text, 3);
+            val := trim(EditDeg.Text) + 'd' + trim(EditMin.Text) + 'm' + trim(EditSec.Text) + 's';
+            Result := StrToDE(val);
+          end;
         end;
-        DE:
-        begin
-          EditDeg.Text := FixNum(EditDeg.Text, 3);
-          val := trim(EditDeg.Text) + 'd' + trim(EditMin.Text) + 'm' + trim(EditSec.Text) + 's';
-          Result := StrToDE(val);
-        end;
-        Az:
-        begin
-          EditDeg.Text := FixNum(EditDeg.Text, 4);
-          val := trim(EditDeg.Text) + 'd' + trim(EditMin.Text) + 'm' + trim(EditSec.Text) + 's';
-          Result := StrToDE(val);
-        end;
-        Alt:
-        begin
-          EditDeg.Text := FixNum(EditDeg.Text, 3);
-          val := trim(EditDeg.Text) + 'd' + trim(EditMin.Text) + 'm' + trim(EditSec.Text) + 's';
-          Result := StrToDE(val);
-        end;
+      except
+        beep;
       end;
-    except
-      beep;
-    end;
+    end
+    else
+      Result:=FValue;
   finally
     lockchange := False;
   end;
@@ -606,8 +619,10 @@ end;
 
 procedure TRaDec.EditChange(Sender: TObject);
 begin
-  if (not lockchange) and assigned(FOnChange) then
-    FOnChange(self);
+  if (not lockchange) then begin
+    FChanged:=true;
+    if assigned(FOnChange) then FOnChange(self);
+  end;
 end;
 
 procedure TRaDec.SetEnabled(Value: boolean);
