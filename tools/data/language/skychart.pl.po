@@ -2,19 +2,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-14 10:00+0000\n"
-"PO-Revision-Date: 2019-10-06 13:44+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2021-12-21 13:09+0000\n"
+"PO-Revision-Date: 2021-06-30 23:15+0000\n"
+"Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-28 13:56+0000\n"
-"X-Generator: Launchpad (build cd61f0bfc5208dd4b58a15e953892eaabba1e0b8)\n"
-"X-Poedit-Country: Poland\n"
-"Language: fr\n"
+"X-Launchpad-Export-Date: 2021-12-21 13:12+0000\n"
+"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
 "X-Poedit-Language: Polish\n"
+"X-Poedit-Country: Poland\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"Language: fr\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -61,10 +61,12 @@ msgid "About"
 msgstr "O programie"
 
 #: u_translation.rsabout2
+#, object-pascal-format
 msgid "About %s"
 msgstr "O %s"
 
 #: u_translation.rsabove
+#, object-pascal-format
 msgid "Above %s"
 msgstr "Ponad %s"
 
@@ -177,6 +179,7 @@ msgid "Add the alternative names to the index"
 msgstr "Dodaj nazwy alternatywne do indeksu"
 
 #: u_translation.rsaddtoobservi
+#, object-pascal-format
 msgid "Add %s to observing list"
 msgstr "Dodaj %s do listy obserwacyjnej"
 
@@ -194,7 +197,7 @@ msgstr "Dostosuj rozmiar okna do DPI ekranu"
 
 #: u_translation.rsadministrato
 msgid "administrator"
-msgstr ""
+msgstr "administrator"
 
 #: u_translation.rsadvanced
 msgid "Advanced"
@@ -237,6 +240,7 @@ msgid "All SAMP clients"
 msgstr "Wszyscy klienci SAMP"
 
 #: u_translation.rsalltablesstr
+#, object-pascal-format
 msgid "%sAll table structures exist."
 msgstr "%sWszystkie struktury tabeli istnieją."
 
@@ -245,6 +249,7 @@ msgid "All toolbars"
 msgstr "Wszystkie paski narzędzi"
 
 #: u_translation.rsalsobesureth
+#, object-pascal-format
 msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
 msgstr "%sUpewnij się, czy wymagana baza danych jest zainstalowana.%sPrzejrzyj dokumentację jeśli nie jesteś tego pewny.%sCzy chcesz kontynuować?"
 
@@ -273,6 +278,7 @@ msgid "Altitude"
 msgstr "Wysokość"
 
 #: u_translation.rsaltturns
+#, object-pascal-format
 msgid "%sAlt turns:"
 msgstr "%sAlt obrotów:"
 
@@ -284,11 +290,16 @@ msgstr "zawsze"
 msgid "Always add meridian"
 msgstr "Zawsze pokazuj południk niebieski"
 
+#: u_translation.rsalwaysontop
+msgid "Always on top"
+msgstr ""
+
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Zawsze zapisuj bez pytania."
 
 #: u_translation.rsamaximumoffi
+#, object-pascal-format
 msgid "A maximum of %s files can be selected"
 msgstr ""
 
@@ -301,6 +312,7 @@ msgid "Amplitude min."
 msgstr ""
 
 #: u_translation.rsanewversiono
+#, object-pascal-format
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
 msgstr "Nowa wersja %s programu Skychart jest dostępna.%sCzy chcesz pobrać ją teraz?"
 
@@ -334,7 +346,7 @@ msgstr "Dodaj do istniejącego katalogu "
 
 #: u_translation.rsappendtocurr
 msgid "Append to current file"
-msgstr ""
+msgstr "Dołącz do bieżącego pliku"
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -393,6 +405,7 @@ msgid "The ASCOM driver report an error"
 msgstr ""
 
 #: u_translation.rsascomremote
+#, object-pascal-format
 msgid "ASCOM Alpaca is available on %s"
 msgstr ""
 
@@ -513,6 +526,7 @@ msgid "Azimuth origin"
 msgstr "Początek skali azymutu"
 
 #: u_translation.rsazturns
+#, object-pascal-format
 msgid "%sAz turns:"
 msgstr "%sAz obrotów:"
 
@@ -541,6 +555,7 @@ msgid "BC"
 msgstr "BC"
 
 #: u_translation.rsbeginprocess
+#, object-pascal-format
 msgid "Begin processing for jd=%s / %s"
 msgstr "Rozpocznij przetwarzanie dla jd=%s / %s"
 
@@ -590,7 +605,7 @@ msgstr "Wielkość gwiazdowa Blue"
 
 #: u_translation.rsblurred
 msgid "Blurred"
-msgstr ""
+msgstr "Rozmyty"
 
 #: u_translation.rsbottom
 msgid "Bottom"
@@ -665,10 +680,12 @@ msgid "Cancel"
 msgstr "Anuluj"
 
 #: u_translation.rscancel2
+#, object-pascal-format
 msgid "Cancel %s"
 msgstr "Anuluj %s"
 
 #: u_translation.rscancelwrongz
+#, object-pascal-format
 msgid "Cancel, wrong zip file ?? %s"
 msgstr "Anuluj, może błędny plik zip ?? %s"
 
@@ -677,6 +694,7 @@ msgid "Cannot compute satellites."
 msgstr "Nie można wyliczyć pozycji satelitów."
 
 #: u_translation.rscannotconnec
+#, object-pascal-format
 msgid "Cannot connect to server. %s"
 msgstr "Problem z połączeniem do serwera %s"
 
@@ -693,6 +711,7 @@ msgid "Cannot get your IP address, or no location found for this address."
 msgstr "Nie udało się ustalić Twojego adresu IP albo nie znaleziono pozycji dla danego adresu."
 
 #: u_translation.rscannotopenda
+#, object-pascal-format
 msgid "%sCannot open database %s! %s"
 msgstr "%sNie można otworzyć bazy danych %s! %s"
 
@@ -725,6 +744,7 @@ msgid "Catalog long name"
 msgstr "Długa nazwa katalogu"
 
 #: u_translation.rscatalogsavai
+#, object-pascal-format
 msgid "%s Catalogs available"
 msgstr "%s Dostępnych katalogów"
 
@@ -741,6 +761,7 @@ msgid "Catalog type"
 msgstr "Typ katalogu"
 
 #: u_translation.rsccw
+#, object-pascal-format
 msgid "%sCCW"
 msgstr "%srektascensja (CCW)"
 
@@ -1057,10 +1078,12 @@ msgid "Connected"
 msgstr "Połączony"
 
 #: u_translation.rsconnectedfro
+#, object-pascal-format
 msgid "%s connected with %s, using chart %s, connected time:%s"
 msgstr "%s połączony z %s używając mapy %s, czas połączenia: %s"
 
 #: u_translation.rsconnectedtos
+#, object-pascal-format
 msgid "Connected to the SQL database %s"
 msgstr "Podłączony do bazy danych SQL %s"
 
@@ -1081,6 +1104,7 @@ msgid "Connect to SAMP hub"
 msgstr "Podłącz do koncentratora SAMP"
 
 #: u_translation.rsconnecttosuc
+#, object-pascal-format
 msgid "Connection to %s, %s successful.%s"
 msgstr "Podłączenie do %s, %s zakończone sukcesem. %s"
 
@@ -1125,6 +1149,7 @@ msgid "Control panel command "
 msgstr "Polecenie panelu sterowania "
 
 #: u_translation.rsconvertcatal
+#, object-pascal-format
 msgid "Convert catalog file %s"
 msgstr "Konwertuj plik katalogu %s"
 
@@ -1209,6 +1234,7 @@ msgid "Create postscript chart. Please wait..."
 msgstr "Tworzenie mapy w PostScript. Proszę czekać..."
 
 #: u_translation.rscreaterasterwh
+#, object-pascal-format
 msgid "Create raster chart %d x %d. Please wait..."
 msgstr "Tworzenie mapy rastrowej %d x %d. Czekaj..."
 
@@ -1222,7 +1248,7 @@ msgstr "Kulminacja"
 
 #: u_translation.rscurrentchart
 msgid "Current chart coordinate system"
-msgstr ""
+msgstr "Bieżący system współrzędnych mapy"
 
 #: u_translation.rscurrentdate
 msgid "Date of validity"
@@ -1233,6 +1259,7 @@ msgid "Cursor"
 msgstr "Kursor"
 
 #: u_translation.rscw
+#, object-pascal-format
 msgid "%sCW"
 msgstr "%sCW"
 
@@ -1261,6 +1288,7 @@ msgid "Database file: "
 msgstr "Plik bazy danych: "
 
 #: u_translation.rsdatabaseopen
+#, object-pascal-format
 msgid "%sDatabase %s opened.%s"
 msgstr "%sBaza danych %s jest już utworzona.%s"
 
@@ -1285,6 +1313,7 @@ msgid "Data preview"
 msgstr "Podgląd danych"
 
 #: u_translation.rsdatastartonl
+#, object-pascal-format
 msgid "Data starts on line %s"
 msgstr "Dane zaczynają się w linii %s"
 
@@ -1329,6 +1358,7 @@ msgid "Day Time"
 msgstr "Dzień Czas"
 
 #: u_translation.rsdbinsertfail
+#, object-pascal-format
 msgid "DB insert failed for %s: %s"
 msgstr "Wstawianie DB nieudane dla %s :%s"
 
@@ -1377,6 +1407,7 @@ msgid "DEC turns: "
 msgstr "DEC obrotów: "
 
 #: u_translation.rsdecturns2
+#, object-pascal-format
 msgid "%sDEC turns:"
 msgstr "%sDEC obrotów:"
 
@@ -1442,9 +1473,10 @@ msgstr "Usuń"
 
 #: u_translation.rsdeleteallexp
 msgid "Delete all expired ephemeris"
-msgstr ""
+msgstr "Usuń wszystkie przestarzałe efemerydy"
 
 #: u_translation.rsdeleteallthe
+#, object-pascal-format
 msgid "Delete %s, all the child nodes and the scripts?"
 msgstr "Czy usunąć %s, wraz z węzłami pochodnymi i skryptami?"
 
@@ -1473,6 +1505,7 @@ msgid "Deleting from the monthly table ..."
 msgstr "Usuwanie z tabeli miesięcznej"
 
 #: u_translation.rsdeletefrommo2
+#, object-pascal-format
 msgid "Delete from monthly table for jd<%s"
 msgstr "Skasuj z tablicy miesięcznej dla jd<%s"
 
@@ -1549,6 +1582,7 @@ msgid "Difference between Terrestrial Time and Universal Time"
 msgstr "Różnica między czasem ziemskim a uniwersalnym."
 
 #: u_translation.rsdifferenttha
+#, object-pascal-format
 msgid "%s (different than the configured port, maybe busy or other error.)"
 msgstr "%s (inny niż skonfigurowany port, może zajęty bądź inny błąd.)"
 
@@ -1645,10 +1679,12 @@ msgid "Do not filter Messier objects"
 msgstr "Nie filtruj obiektów Messiera"
 
 #: u_translation.rsdonotrunasad
+#, object-pascal-format
 msgid "Do not run %s as %s!"
 msgstr ""
 
 #: u_translation.rsdonotuserow1
+#, object-pascal-format
 msgid "Do not use row %s, reserved for external software interface."
 msgstr ""
 
@@ -1673,6 +1709,7 @@ msgid "Download"
 msgstr "Pobierz"
 
 #: u_translation.rsdownload2
+#, object-pascal-format
 msgid "Download %s"
 msgstr "Pobierz %s"
 
@@ -1798,7 +1835,7 @@ msgstr "Wschód"
 
 #: u_translation.rseasthourangl
 msgid "East hour angle"
-msgstr ""
+msgstr "Wschodni kąt godzinny"
 
 #: u_translation.rseastside
 msgid "East side"
@@ -1885,6 +1922,7 @@ msgid "End of object"
 msgstr "Koniec obiektu"
 
 #: u_translation.rsendprocessin
+#, object-pascal-format
 msgid "End of processing: %s asteroids"
 msgstr "Koniec przetwarzania: %s planetoid"
 
@@ -1918,13 +1956,14 @@ msgstr "Siatka równ."
 
 #: u_translation.rsequator
 msgid "Equator"
-msgstr ""
+msgstr "Równik"
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
 msgstr "Współrzędne równikowe"
 
 #: u_translation.rsequatorialco2
+#, object-pascal-format
 msgid "Equatorial coordinates, equinox: %s"
 msgstr "Współrzędne równikowe, równonoc: %s"
 
@@ -1949,6 +1988,7 @@ msgid "Error"
 msgstr "Błąd"
 
 #: u_translation.rserrorcreatin
+#, object-pascal-format
 msgid "%sError creating table %s"
 msgstr "%sBłąd tworzenia tablicy %s"
 
@@ -1969,6 +2009,7 @@ msgid "Error! Please check the database parameters and load the picture package.
 msgstr "Błąd! Proszę sprawdzić parametry bazy danych i załadować pakiet obrazów."
 
 #: u_translation.rsestimatedfil
+#, object-pascal-format
 msgid "Estimated file size: %sMB %sDo you want to continue?"
 msgstr "Szacowany rozmiar pliku: %sMB %sCzy chcesz kontynuować?"
 
@@ -2037,6 +2078,7 @@ msgid "Eyepiece vision"
 msgstr "Widok w okularze"
 
 #: u_translation.rsfailed
+#, object-pascal-format
 msgid "Failed: %s"
 msgstr "Nie powiodło się : %s"
 
@@ -2050,7 +2092,7 @@ msgstr "Siła rozmycia gwiazd "
 
 #: u_translation.rsfamily
 msgid "Family"
-msgstr ""
+msgstr "Rodzina"
 
 #: u_translation.rsfaq
 msgid "FAQ"
@@ -2093,6 +2135,7 @@ msgid "Field of vision number :"
 msgstr "Numer pola widzenia :"
 
 #: u_translation.rsfieldtoowidt
+#, object-pascal-format
 msgid "Field too wide! Maximum is %s"
 msgstr "Pole zbyt szerokie! Maksimum to %s"
 
@@ -2162,7 +2205,7 @@ msgstr "Ramka szukacza (CCD)"
 
 #: u_translation.rsfindinfo
 msgid "Find info"
-msgstr ""
+msgstr "Znajdź info"
 
 #: u_translation.rsfirst
 msgid "First"
@@ -2214,7 +2257,7 @@ msgstr "Wymuś EqSys"
 
 #: u_translation.rsforcej2000
 msgid "Force J2000"
-msgstr ""
+msgstr "Wymuś J2000"
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
@@ -2378,7 +2421,7 @@ msgstr "Data startu wg. kalendarza Gregoriańskiego"
 
 #: u_translation.rsgrids
 msgid "Grids"
-msgstr ""
+msgstr "Siatki"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -2546,7 +2589,7 @@ msgstr "Lista obrazów"
 
 #: u_translation.rsimportmosaic
 msgid "Import mosaic file"
-msgstr ""
+msgstr "Importuj plik mozaiki"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -2598,7 +2641,7 @@ msgstr "Ustawienia sterownika INDI"
 
 #: u_translation.rsindiready
 msgid "INDI server is ready"
-msgstr ""
+msgstr "Serwer INDI gotowy"
 
 #: u_translation.rsindiserverho
 msgid "INDI server host "
@@ -2641,10 +2684,12 @@ msgid "Input catalog files"
 msgstr "Wejściowy katalog"
 
 #: u_translation.rsinsertfailed
+#, object-pascal-format
 msgid "insert failed line %s: %s"
 msgstr "wstawianie nie powiodło się na linii %s : %s"
 
 #: u_translation.rsinsertfailed2
+#, object-pascal-format
 msgid "Insert failed! %s"
 msgstr "Wstawianie nie powiodło się! %s"
 
@@ -2661,11 +2706,12 @@ msgid "Integrated telescope driver."
 msgstr "Zintegrowany  sterownik teleskopu."
 
 #: u_translation.rsinvalidepoch
+#, object-pascal-format
 msgid "invalid epoch on line%s: %s"
 msgstr "błędna epoka w linii%s : %s"
 
 #: u_translation.rsinvalidfitsf
-#, fuzzy,badformat
+#, object-pascal-format, fuzzy, badformat
 msgid "Invalid FITS file: %s"
 msgstr "Nieprawidłowy plik FITS"
 
@@ -2678,14 +2724,17 @@ msgid "Invisible at this latitude"
 msgstr "Niewidoczne na tej szerokości geograficznej"
 
 #: u_translation.rsiscoordinate
+#, object-pascal-format
 msgid "Is the coordinates epoch really %s?"
 msgstr "Czy współrzędne epoki to naprawdę %s?"
 
 #: u_translation.rsisempty
+#, object-pascal-format
 msgid "%s is empty!"
 msgstr "%s jest pusty!"
 
 #: u_translation.rsittaketoolon
+#, object-pascal-format
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
 msgstr "Wyświetlenie %s z katalogu %s zajęło zbyt dużo czasu,  rozważ użycie tego katalogu dla mniejszych pól widzenia (FOV)."
 
@@ -2914,6 +2963,7 @@ msgid "List"
 msgstr "Lista"
 
 #: u_translation.rslistenonport
+#, object-pascal-format
 msgid "Listen on port: %s"
 msgstr "Nasłuchuj na porcie: %s"
 
@@ -2935,7 +2985,7 @@ msgstr "Wczytaj z pliku"
 
 #: u_translation.rsloadindiconf
 msgid "Load INDI configuration"
-msgstr ""
+msgstr "Załaduj konfigurację INDI"
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."
@@ -2983,9 +3033,14 @@ msgstr "Blokada"
 
 #: u_translation.rslockchartpos
 msgid "Lock chart position"
+msgstr "Zablokuj pozycję mapy"
+
+#: u_translation.rslockmagnitud
+msgid "Lock the magnitude filter"
 msgstr ""
 
 #: u_translation.rslockon
+#, object-pascal-format
 msgid "Lock on %s"
 msgstr "Śledzenie %s"
 
@@ -3091,7 +3146,7 @@ msgstr "Pasek główny"
 
 #: u_translation.rsmainmenu
 msgid "Main menu"
-msgstr ""
+msgstr "Menu główne"
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
@@ -3147,7 +3202,7 @@ msgstr "Maksymalizuj"
 
 #: u_translation.rsmaximumdecli
 msgid "Maximum declination"
-msgstr ""
+msgstr "Maksymalna deklinacja"
 
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
@@ -3251,7 +3306,7 @@ msgstr "Minimalna wysokość"
 
 #: u_translation.rsminimumdecli
 msgid "Minimum declination"
-msgstr ""
+msgstr "Minimalna deklinacja"
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -3314,6 +3369,7 @@ msgid "More than 1000 errors! The processing is aborted."
 msgstr "Wiecej niż 1000 błędów! Pzretwarzanie anulowane."
 
 #: u_translation.rsmorethanobje
+#, object-pascal-format
 msgid "More than %s objects, the result is truncated."
 msgstr "Wiecej niż %s obiektów, wynik jest okrojony."
 
@@ -3327,15 +3383,15 @@ msgstr "Świt"
 
 #: u_translation.rsmosaic
 msgid "Mosaic"
-msgstr ""
+msgstr "Mozaika"
 
 #: u_translation.rsmosaiccenter
 msgid "Mosaic center"
-msgstr ""
+msgstr "Środek mozaiki"
 
 #: u_translation.rsmosaicsize
 msgid "Mosaic size"
-msgstr ""
+msgstr "Rozmiar mozaiki"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3450,6 +3506,7 @@ msgid "Night vision color"
 msgstr "Kolor trybu nocnego"
 
 #: u_translation.rsnoasteroidda
+#, object-pascal-format
 msgid "No asteroids data found!%sPlease load a MPC file first."
 msgstr "Nie znaleziono danych planetoid! %s Proszę najpierw wczytać plik MPC."
 
@@ -3468,6 +3525,10 @@ msgstr "Bez zmian"
 #: u_translation.rsnodata
 msgid "No Data"
 msgstr "Brak danych"
+
+#: u_translation.rsnodecimalsep
+msgid "No decimal separator"
+msgstr ""
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -3522,6 +3583,7 @@ msgid "Not available"
 msgstr "Niedostępny"
 
 #: u_translation.rsnotconnected
+#, object-pascal-format
 msgid "%s not connected."
 msgstr "%s nie podłączony."
 
@@ -3530,14 +3592,17 @@ msgid "Note"
 msgstr "Notatka"
 
 #: u_translation.rsnotfound
+#, object-pascal-format
 msgid "%s not found"
 msgstr "%s nie znaleziony"
 
 #: u_translation.rsnotfoundinan
+#, object-pascal-format
 msgid "%s  Not found in any of the installed catalog indices."
 msgstr "%s nie znaleziono w żadnym z zainstalowanych indeksach katalogu"
 
 #: u_translation.rsnotfoundmayb
+#, object-pascal-format
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
 msgstr "%s nie znaleziono!%s Katalog nie jest zainstalowany, albo ścieżka w ustawieniach katalogu jest nieprawidłowa."
 
@@ -3555,13 +3620,14 @@ msgstr "Liczba kopii"
 
 #: u_translation.rsnumberofdays
 msgid "Number of days"
-msgstr ""
+msgstr "Liczba dni"
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr "Liczba plików"
 
 #: u_translation.rsnumberofigno
+#, object-pascal-format
 msgid "Number of ignored invalid rows: %s"
 msgstr "Liczba pominiętych nieprawidłowych wierszy: %s"
 
@@ -3618,12 +3684,13 @@ msgid "Object type"
 msgstr "Typ obiektu"
 
 #: u_translation.rsobsaltitude
+#, object-pascal-format
 msgid "%sAltitude"
 msgstr "%sWysokość"
 
 #: u_translation.rsobservationt
 msgid "Observation time"
-msgstr ""
+msgstr "Czas obserwacji"
 
 #: u_translation.rsobservatory
 msgid "Observatory"
@@ -3859,7 +3926,7 @@ msgstr "Ustawienia osobiste"
 
 #: u_translation.rsphaseangle
 msgid "Phase angle"
-msgstr ""
+msgstr "Kąt fazowy"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
@@ -3930,6 +3997,7 @@ msgid "Please configure the orbital elements URL!"
 msgstr "Proszę skonfigurować adres URL dla elementu orbit!"
 
 #: u_translation.rspleaseconfir
+#, object-pascal-format
 msgid "Please confirm that the telescope is pointed at %s"
 msgstr "Proszę potwierdzić, że teleskop wskazuje na %s"
 
@@ -3979,7 +4047,7 @@ msgstr "Proszę przeinstalować program."
 
 #: u_translation.rspleasewait
 msgid "Please wait..."
-msgstr ""
+msgstr "Czekaj..."
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
@@ -3992,10 +4060,6 @@ msgstr "Pluton"
 #: u_translation.rsplutoisaplan
 msgid "Pluto is a planet."
 msgstr "Pluton jest planetą."
-
-#: u_translation.rspolarmotiona
-msgid "Polar motion (arc sec)"
-msgstr "Ruch bieguna północnego (arc sec)"
 
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
@@ -4114,22 +4178,27 @@ msgid "Print the chart"
 msgstr "Drukuj mapę"
 
 #: u_translation.rsprocessing
+#, object-pascal-format
 msgid "Processing... %s"
 msgstr "Przetwarzanie... %s"
 
 #: u_translation.rsprocessingen
+#, object-pascal-format
 msgid "Processing ended. Total number of comets: %s"
 msgstr "Koniec przetwarzania. Całkowita liczba komet: %s"
 
 #: u_translation.rsprocessingen2
+#, object-pascal-format
 msgid "Processing ended. Total number of asteroids: %s"
 msgstr "Koniec przetwarzania. Całkowita liczba planetoid: %s"
 
 #: u_translation.rsprocessingen3
+#, object-pascal-format
 msgid "Processing ended. Total number of location :%s"
 msgstr "Koniec przetwarzania. Całkowita liczba lokacji: %s"
 
 #: u_translation.rsprocessingli
+#, object-pascal-format
 msgid "Processing line %s"
 msgstr "Przetwarzana linia %s"
 
@@ -4194,12 +4263,13 @@ msgid "Proxy port"
 msgstr "Port Proxy:"
 
 #: u_translation.rsputthefilesw
+#, object-pascal-format
 msgid "Put the files with a .tle extention to the %s folder"
 msgstr "Przenieś pliki z rozszerzeniem .tle do folderu %s"
 
 #: u_translation.rsqualityflag
 msgid "Quality flag"
-msgstr ""
+msgstr "Flaga jakości"
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -4246,6 +4316,7 @@ msgid "RA turns: "
 msgstr "Obroty RA: "
 
 #: u_translation.rsraturns2
+#, object-pascal-format
 msgid "%sRA turns:"
 msgstr "%sRa obrotów:"
 
@@ -4343,7 +4414,7 @@ msgstr "Odśwież"
 
 #: u_translation.rsrefreshallep
 msgid "Refresh all ephemeris"
-msgstr ""
+msgstr "Odświerz wszystkie efemerydy"
 
 #: u_translation.rsrefreshimage
 msgid "Refresh image every"
@@ -4362,6 +4433,7 @@ msgid "Reload"
 msgstr "Przeładuj"
 
 #: u_translation.rsreloadforcur
+#, object-pascal-format
 msgid "Reload %s for current chart"
 msgstr "Przeładuj %s dla bieżącej mapy"
 
@@ -4518,10 +4590,12 @@ msgid "SAMP Confirmation"
 msgstr "Potwierdzenie SAMP"
 
 #: u_translation.rssamphubprofi
+#, object-pascal-format
 msgid "SAMP hub profile %s found, but it is missing a required value."
 msgstr "Znaleziono profil %s koncentratora SAMP, lecz nie zawiera on wymaganej wartości."
 
 #: u_translation.rssampisamessa
+#, object-pascal-format
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
 msgstr "SAMP jest protokołem wymiany komunikatów, który umożliwia programom astronomicznym komunikację i współpracę.%sSkychart może wysyłać i odbierać współrzędne, obrazy FITS oraz tabele VO."
 
@@ -4618,6 +4692,7 @@ msgid "Script editor"
 msgstr "Edytor skryptów"
 
 #: u_translation.rsscriptisalre
+#, object-pascal-format
 msgid "Script is already assigned to %s are you sure you want to duplicate it to %s ?"
 msgstr "Skrypt już jest przypisany do %s,czy jesteś pewien że chcesz go zdublować do %s ?"
 
@@ -4659,7 +4734,7 @@ msgstr "Indeks wyszukiwania"
 
 #: u_translation.rssearchradius
 msgid "Search radius"
-msgstr ""
+msgstr "Promień wyszukiwania"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
@@ -4678,6 +4753,7 @@ msgid "Seconds"
 msgstr "sekund(y)"
 
 #: u_translation.rsseehttpascom
+#, object-pascal-format
 msgid "See %s for more information."
 msgstr "Zobacz %s aby uzyskać więcej informacji."
 
@@ -4767,7 +4843,7 @@ msgstr "Wyślij tabelę do"
 
 #: u_translation.rssendviaserve
 msgid "Send via server"
-msgstr ""
+msgstr "Wyślij przez serwer"
 
 #: u_translation.rsseparation
 msgid "Separation"
@@ -4830,6 +4906,7 @@ msgid "Set options for best performance"
 msgstr "Ustaw opcje dla najlepszej wydajności"
 
 #: u_translation.rssettargetto
+#, object-pascal-format
 msgid "Set target to %s"
 msgstr "Ustaw cel na %s"
 
@@ -4879,7 +4956,7 @@ msgstr "Pokaż tekst przycisku"
 
 #: u_translation.rsshowcelestia
 msgid "Show celestial equator"
-msgstr ""
+msgstr "Pokaż równik niebieski"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
@@ -5082,6 +5159,7 @@ msgid "Slew complete"
 msgstr ""
 
 #: u_translation.rsslewingto
+#, object-pascal-format
 msgid "Slewing to %s / %s"
 msgstr "Obrót do %s / %s"
 
@@ -5110,6 +5188,7 @@ msgid "M."
 msgstr "M"
 
 #: u_translation.rssocketerror
+#, object-pascal-format
 msgid "Socket error %s.  %s"
 msgstr "Błąd gniazda %s. %s"
 
@@ -5131,7 +5210,7 @@ msgstr "Układ Słoneczny"
 
 #: u_translation.rssolarsystemb
 msgid "Solar system body"
-msgstr ""
+msgstr "Ciało systemu słonecznego"
 
 #: u_translation.rssolarsystemi
 msgid "Solar System Information"
@@ -5146,6 +5225,7 @@ msgid "Solar system settings"
 msgstr "Ustawienia Układu Słonecznego"
 
 #: u_translation.rssomerecordsw
+#, object-pascal-format
 msgid "Some records where rejected, see the file %sreject.txt for details."
 msgstr "Niektóre rekordy zostały odrzucone, zobacz plik %sreject.txt w celu uzyskania szczegółów."
 
@@ -5183,11 +5263,11 @@ msgstr "Typ widmowy"
 
 #: u_translation.rsspeed
 msgid "Speed"
-msgstr ""
+msgstr "Prędkość"
 
 #: u_translation.rsspiceephemer
 msgid "SPICE ephemeris"
-msgstr ""
+msgstr "Efemeryda SPICE"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -5279,7 +5359,7 @@ msgstr "Animacja wstecz"
 
 #: u_translation.rsstartdate
 msgid "Start date"
-msgstr ""
+msgstr "Data początku"
 
 #: u_translation.rsstartforward
 msgid "Animation forward"
@@ -5370,6 +5450,7 @@ msgid "Sync"
 msgstr "Synchronizacja"
 
 #: u_translation.rssyncedto
+#, object-pascal-format
 msgid "Synced to %s / %s"
 msgstr "Synchronizacja do %s / %s"
 
@@ -5386,10 +5467,12 @@ msgid "Table"
 msgstr "Tabela"
 
 #: u_translation.rstabledonotex
+#, object-pascal-format
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
 msgstr "%sTablica %s nie istnieje! %sProszę poprawić błąd i spróbować ponownie."
 
 #: u_translation.rstableexist
+#, object-pascal-format
 msgid "%sThis table exists: %s"
 msgstr "%sTablica już istnieje: %s"
 
@@ -5458,26 +5541,32 @@ msgid "Theme"
 msgstr "Kompozycja"
 
 #: u_translation.rsthenumberofr
+#, object-pascal-format
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
 msgstr "Liczba rekordów w tym katalogu nie jest znana. Pobranych zostanie %s rekordów."
 
 #: u_translation.rstheobserving
+#, object-pascal-format
 msgid "The observing list %s was modified."
 msgstr "Lista obseracyjna: %s została zmodyfikowana."
 
 #: u_translation.rstherearecata
+#, object-pascal-format
 msgid "There are %s catalogued images"
 msgstr "Występuje %s skatalogowanych obrazów"
 
 #: u_translation.rsthereareobjec
+#, object-pascal-format
 msgid "There are %s objects in this field."
 msgstr "Występuje %s obiektów w tym polu"
 
 #: u_translation.rsthisactionre
+#, object-pascal-format
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
 msgstr "Ta operacja nadpisze całą zawartość bazy danych dla kraju %s, używając najnowszych danych z NGA oraz GNIS.%sWszystkie zmiany dla tego kraju zostaną utracone, poza miejscami, dla których zostały nadane nowe nazwy.%sCzy chcesz kontynuować?"
 
 #: u_translation.rsthiscatalogc
+#, object-pascal-format
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
 msgstr "Katalog zawiera %s rekordów. Nie jest możliwe pobranie  katalogu w całości z powodu możliwych problemów z wydajnością."
 
@@ -5486,6 +5575,7 @@ msgid "This direct driver is kept for compatibility, it may work or not for you.
 msgstr "Ten sterownik bezpośredni trzymany jest, ze względu na kompatybilność, może zadziałać bądź nie. Preferowane jest użycie sterownika INDI lub ASCOM"
 
 #: u_translation.rsthisfilecont
+#, object-pascal-format
 msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
 msgstr ""
 
@@ -5658,6 +5748,7 @@ msgid "Trumpler class"
 msgstr "Klasa Trumplera"
 
 #: u_translation.rstruncatedtos
+#, object-pascal-format
 msgid "Truncated to %s catalogs"
 msgstr ""
 
@@ -5750,6 +5841,7 @@ msgid "Unpark"
 msgstr ""
 
 #: u_translation.rsunsupportedf
+#, object-pascal-format
 msgid "Unsupported file extension: %sPlease fix it."
 msgstr "Niewspierane rozszerzenie pliku: %s Napraw to."
 
@@ -5850,6 +5942,7 @@ msgid "Use the internal INDI gui panel"
 msgstr ""
 
 #: u_translation.rsusethemenuor
+#, object-pascal-format
 msgid "Use the menu or button \"%s\" to configure this driver."
 msgstr "Użyj menu albo przycisku \"%s\" żeby skonfigurować sterownik."
 
@@ -5862,6 +5955,7 @@ msgid "Use this field as an alternative name"
 msgstr "Użyj tego pola jako nazwy alternatywnej"
 
 #: u_translation.rsusingexistin
+#, object-pascal-format
 msgid "Using the existing file %s"
 msgstr "Użycie istniejącego pliku %s"
 
@@ -5974,10 +6068,12 @@ msgid "Warning! Some comet elements are outdated. Load element valid for the cur
 msgstr "Uwaga! Niektóre elementy orbitalne komet są przeterminowane. Załaduj element odpowiedni dla daty bieżącej mapy."
 
 #: u_translation.rswarningthecu
+#, object-pascal-format
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
 msgstr "Uwaga! Aktualna data i położenie obserwatorium mogło się zmienić od standardowych wartości. Jeśli nie i użyj przycisku %s teraz żeby powrócić do standardowych wartości, w przeciwym wypadku mogą one zostać utracone. Czy chcesz kontynuować ?"
 
 #: u_translation.rswarningyouar
+#, object-pascal-format
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
 msgstr "Uwaga! %sChcesz usunąć bazę danych %s wraz z całą zawartością, nawet jeśli zawartość nie ma nic wspólnego z programem. %s Czy aby napewno chcesz kontynuować?"
 
@@ -5986,6 +6082,7 @@ msgid "Warning! you are using multiple catalogs as sources for identical objects
 msgstr "Uwaga! Używasz wielu katalogów dla tego samego obiektu. Upewnij się, że tego właśnie chcesz."
 
 #: u_translation.rswarningyouha
+#, object-pascal-format
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
 msgstr "UWAGA ! %sZostało wybrane dodanie danych do istniejącego katalogu.%sBieżący katalog i indeks muszą być dokładnie tego samego formatu, inaczej zostanie uszkodzony. %s Dobrym posunięciem jest zrobienie kopi zapasowej przed wykonaniem tej operacji. %sCzy chcesz kontynuować ?"
 
@@ -5999,7 +6096,7 @@ msgstr "Zachód"
 
 #: u_translation.rswesthourangl
 msgid "West hour angle"
-msgstr ""
+msgstr "Zachdni kąt godzinny"
 
 #: u_translation.rswestside
 msgid "West side"
@@ -6071,7 +6168,7 @@ msgstr "Przybliż (+)"
 
 #: u_translation.rszoommoretovi
 msgid "Object too faint to show on the chart"
-msgstr ""
+msgstr "Obiekt zbyt ciemny  by pokazać go na mapie."
 
 #: u_translation.rszoomout
 msgid "Zoom out"

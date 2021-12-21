@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-14 10:00+0000\n"
+"POT-Creation-Date: 2021-12-21 13:09+0000\n"
 "PO-Revision-Date: 2017-01-14 17:43+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-28 13:56+0000\n"
-"X-Generator: Launchpad (build cd61f0bfc5208dd4b58a15e953892eaabba1e0b8)\n"
+"X-Launchpad-Export-Date: 2021-12-21 13:12+0000\n"
+"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -58,10 +58,12 @@ msgid "About"
 msgstr "Névjegy"
 
 #: u_translation.rsabout2
+#, object-pascal-format
 msgid "About %s"
 msgstr "Adatok: %s"
 
 #: u_translation.rsabove
+#, object-pascal-format
 msgid "Above %s"
 msgstr ""
 
@@ -174,6 +176,7 @@ msgid "Add the alternative names to the index"
 msgstr "Alternatív nevek hozzáadása az indexhez"
 
 #: u_translation.rsaddtoobservi
+#, object-pascal-format
 msgid "Add %s to observing list"
 msgstr ""
 
@@ -234,6 +237,7 @@ msgid "All SAMP clients"
 msgstr ""
 
 #: u_translation.rsalltablesstr
+#, object-pascal-format
 msgid "%sAll table structures exist."
 msgstr "%s Minden szükséges tábla létezik."
 
@@ -242,6 +246,7 @@ msgid "All toolbars"
 msgstr "Minden eszköztár"
 
 #: u_translation.rsalsobesureth
+#, object-pascal-format
 msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
 msgstr "%sGyőződj meg arról, hogy a szükséges adatbáziskezelő szoftver installálva van. %sHa nem vagy ebben biztos, használd a dokumentációt. %sValóban folytatni akarod?"
 
@@ -270,6 +275,7 @@ msgid "Altitude"
 msgstr "Magasság"
 
 #: u_translation.rsaltturns
+#, object-pascal-format
 msgid "%sAlt turns:"
 msgstr "%sforgatás függőlegesen:"
 
@@ -281,11 +287,16 @@ msgstr "mindig"
 msgid "Always add meridian"
 msgstr ""
 
+#: u_translation.rsalwaysontop
+msgid "Always on top"
+msgstr ""
+
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Mentés megerősítés nélkül is."
 
 #: u_translation.rsamaximumoffi
+#, object-pascal-format
 msgid "A maximum of %s files can be selected"
 msgstr ""
 
@@ -298,6 +309,7 @@ msgid "Amplitude min."
 msgstr ""
 
 #: u_translation.rsanewversiono
+#, object-pascal-format
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
 msgstr ""
 
@@ -390,6 +402,7 @@ msgid "The ASCOM driver report an error"
 msgstr ""
 
 #: u_translation.rsascomremote
+#, object-pascal-format
 msgid "ASCOM Alpaca is available on %s"
 msgstr ""
 
@@ -510,6 +523,7 @@ msgid "Azimuth origin"
 msgstr ""
 
 #: u_translation.rsazturns
+#, object-pascal-format
 msgid "%sAz turns:"
 msgstr "%sforgatás vízszintesen:"
 
@@ -538,6 +552,7 @@ msgid "BC"
 msgstr "I.e."
 
 #: u_translation.rsbeginprocess
+#, object-pascal-format
 msgid "Begin processing for jd=%s / %s"
 msgstr "Adatok feldolgozása: JD=%s / %s"
 
@@ -662,10 +677,12 @@ msgid "Cancel"
 msgstr "Vissza"
 
 #: u_translation.rscancel2
+#, object-pascal-format
 msgid "Cancel %s"
 msgstr "Megszakít %s"
 
 #: u_translation.rscancelwrongz
+#, object-pascal-format
 msgid "Cancel, wrong zip file ?? %s"
 msgstr "Megszakítás, hibás zip fájl? %s"
 
@@ -674,6 +691,7 @@ msgid "Cannot compute satellites."
 msgstr "A műholdakat nem lehet kiszámítani."
 
 #: u_translation.rscannotconnec
+#, object-pascal-format
 msgid "Cannot connect to server. %s"
 msgstr "Nem lehet a (%s) szerverhez kapcsolódni"
 
@@ -690,6 +708,7 @@ msgid "Cannot get your IP address, or no location found for this address."
 msgstr "Nem található IP-cím, illetve helyszín."
 
 #: u_translation.rscannotopenda
+#, object-pascal-format
 msgid "%sCannot open database %s! %s"
 msgstr "%sNem lehet megnyitni az adatbázist %s! %s"
 
@@ -722,6 +741,7 @@ msgid "Catalog long name"
 msgstr "Katalógus hosszú név"
 
 #: u_translation.rscatalogsavai
+#, object-pascal-format
 msgid "%s Catalogs available"
 msgstr "%s katalógus elérhető"
 
@@ -738,6 +758,7 @@ msgid "Catalog type"
 msgstr "Katalógus típus"
 
 #: u_translation.rsccw
+#, object-pascal-format
 msgid "%sCCW"
 msgstr "%sCCW"
 
@@ -1054,10 +1075,12 @@ msgid "Connected"
 msgstr "Kapcsolódva"
 
 #: u_translation.rsconnectedfro
+#, object-pascal-format
 msgid "%s connected with %s, using chart %s, connected time:%s"
 msgstr "%s kapcsolódott %s-ról, a %s térkép használata, kapcsolódás ideje: %s"
 
 #: u_translation.rsconnectedtos
+#, object-pascal-format
 msgid "Connected to the SQL database %s"
 msgstr "Kapcsolódás SQL adatbázishoz %s"
 
@@ -1078,6 +1101,7 @@ msgid "Connect to SAMP hub"
 msgstr ""
 
 #: u_translation.rsconnecttosuc
+#, object-pascal-format
 msgid "Connection to %s, %s successful.%s"
 msgstr "Kapcsolódás %s-hez, %s sikeres. %s"
 
@@ -1122,6 +1146,7 @@ msgid "Control panel command "
 msgstr "Vezérlőpult parancs "
 
 #: u_translation.rsconvertcatal
+#, object-pascal-format
 msgid "Convert catalog file %s"
 msgstr "%s katalógusfájl konvertálása"
 
@@ -1206,6 +1231,7 @@ msgid "Create postscript chart. Please wait..."
 msgstr "Postscript térkép készítése. Kérem várj..."
 
 #: u_translation.rscreaterasterwh
+#, object-pascal-format
 msgid "Create raster chart %d x %d. Please wait..."
 msgstr ""
 
@@ -1230,6 +1256,7 @@ msgid "Cursor"
 msgstr ""
 
 #: u_translation.rscw
+#, object-pascal-format
 msgid "%sCW"
 msgstr "%sCW"
 
@@ -1258,6 +1285,7 @@ msgid "Database file: "
 msgstr "Adatbázis helye: "
 
 #: u_translation.rsdatabaseopen
+#, object-pascal-format
 msgid "%sDatabase %s opened.%s"
 msgstr "%sAdatbázis %s nyitva. %s"
 
@@ -1282,6 +1310,7 @@ msgid "Data preview"
 msgstr "Adatok előnézete"
 
 #: u_translation.rsdatastartonl
+#, object-pascal-format
 msgid "Data starts on line %s"
 msgstr "Adatok kezdete: %s sor"
 
@@ -1326,6 +1355,7 @@ msgid "Day Time"
 msgstr "Nappal"
 
 #: u_translation.rsdbinsertfail
+#, object-pascal-format
 msgid "DB insert failed for %s: %s"
 msgstr "Sikertelen DB beszúrás %s : %s"
 
@@ -1374,6 +1404,7 @@ msgid "DEC turns: "
 msgstr "DEC forgatás: "
 
 #: u_translation.rsdecturns2
+#, object-pascal-format
 msgid "%sDEC turns:"
 msgstr "%sDEC forgatás:"
 
@@ -1442,6 +1473,7 @@ msgid "Delete all expired ephemeris"
 msgstr ""
 
 #: u_translation.rsdeleteallthe
+#, object-pascal-format
 msgid "Delete %s, all the child nodes and the scripts?"
 msgstr ""
 
@@ -1470,6 +1502,7 @@ msgid "Deleting from the monthly table ..."
 msgstr "Törlés a havi táblából..."
 
 #: u_translation.rsdeletefrommo2
+#, object-pascal-format
 msgid "Delete from monthly table for jd<%s"
 msgstr "Törlés a havi táblából, JD<%s"
 
@@ -1546,6 +1579,7 @@ msgid "Difference between Terrestrial Time and Universal Time"
 msgstr "A Földi (TT) és Universal Time közti különbség"
 
 #: u_translation.rsdifferenttha
+#, object-pascal-format
 msgid "%s (different than the configured port, maybe busy or other error.)"
 msgstr "%s (különböző a beállított porttól, foglalt, vagy más hiba.)"
 
@@ -1642,10 +1676,12 @@ msgid "Do not filter Messier objects"
 msgstr "A Messier objektumokat ne szűrje"
 
 #: u_translation.rsdonotrunasad
+#, object-pascal-format
 msgid "Do not run %s as %s!"
 msgstr ""
 
 #: u_translation.rsdonotuserow1
+#, object-pascal-format
 msgid "Do not use row %s, reserved for external software interface."
 msgstr ""
 
@@ -1670,6 +1706,7 @@ msgid "Download"
 msgstr "Letöltés"
 
 #: u_translation.rsdownload2
+#, object-pascal-format
 msgid "Download %s"
 msgstr "Letöltés %s"
 
@@ -1882,6 +1919,7 @@ msgid "End of object"
 msgstr "Objektum vége"
 
 #: u_translation.rsendprocessin
+#, object-pascal-format
 msgid "End of processing: %s asteroids"
 msgstr "Feldolgozás vége: %s kisbolygó"
 
@@ -1922,6 +1960,7 @@ msgid "Equatorial coordinates"
 msgstr "Ekvatoriális koordináta"
 
 #: u_translation.rsequatorialco2
+#, object-pascal-format
 msgid "Equatorial coordinates, equinox: %s"
 msgstr "Ekvatoriális koordináták (tavaszpont: %s)"
 
@@ -1946,6 +1985,7 @@ msgid "Error"
 msgstr "Hiba"
 
 #: u_translation.rserrorcreatin
+#, object-pascal-format
 msgid "%sError creating table %s"
 msgstr "%sHiba a táblázat készítésekor %s"
 
@@ -1966,6 +2006,7 @@ msgid "Error! Please check the database parameters and load the picture package.
 msgstr "Hiba! Ellenőrizd az adatbázis paramétereit és töltsd be a kép csomagot."
 
 #: u_translation.rsestimatedfil
+#, object-pascal-format
 msgid "Estimated file size: %sMB %sDo you want to continue?"
 msgstr "A becsült fájlméret: %sMB %s. Akarod folytatni?"
 
@@ -2034,6 +2075,7 @@ msgid "Eyepiece vision"
 msgstr ""
 
 #: u_translation.rsfailed
+#, object-pascal-format
 msgid "Failed: %s"
 msgstr "Sikertelen: %s"
 
@@ -2090,6 +2132,7 @@ msgid "Field of vision number :"
 msgstr "Látómező száma:"
 
 #: u_translation.rsfieldtoowidt
+#, object-pascal-format
 msgid "Field too wide! Maximum is %s"
 msgstr "Túl széles mező! Max: %s"
 
@@ -2638,10 +2681,12 @@ msgid "Input catalog files"
 msgstr "Input katalógus fájl"
 
 #: u_translation.rsinsertfailed
+#, object-pascal-format
 msgid "insert failed line %s: %s"
 msgstr "Sikertelen beszúrás %s sorban: %s"
 
 #: u_translation.rsinsertfailed2
+#, object-pascal-format
 msgid "Insert failed! %s"
 msgstr "Sikertelen beszúrás! %s"
 
@@ -2658,10 +2703,12 @@ msgid "Integrated telescope driver."
 msgstr "Integrált telescope driver"
 
 #: u_translation.rsinvalidepoch
+#, object-pascal-format
 msgid "invalid epoch on line%s: %s"
 msgstr "Hibás epocha a %s sorban: %s"
 
 #: u_translation.rsinvalidfitsf
+#, object-pascal-format
 msgid "Invalid FITS file: %s"
 msgstr "Hibás FITS fájl: %s"
 
@@ -2674,14 +2721,17 @@ msgid "Invisible at this latitude"
 msgstr "Ezen a szélességi körön nem megfigyelhető"
 
 #: u_translation.rsiscoordinate
+#, object-pascal-format
 msgid "Is the coordinates epoch really %s?"
 msgstr "A koordináták epochája %s?"
 
 #: u_translation.rsisempty
+#, object-pascal-format
 msgid "%s is empty!"
 msgstr ""
 
 #: u_translation.rsittaketoolon
+#, object-pascal-format
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
 msgstr ""
 
@@ -2910,6 +2960,7 @@ msgid "List"
 msgstr ""
 
 #: u_translation.rslistenonport
+#, object-pascal-format
 msgid "Listen on port: %s"
 msgstr "Port használata: %s"
 
@@ -2981,7 +3032,12 @@ msgstr ""
 msgid "Lock chart position"
 msgstr ""
 
+#: u_translation.rslockmagnitud
+msgid "Lock the magnitude filter"
+msgstr ""
+
 #: u_translation.rslockon
+#, object-pascal-format
 msgid "Lock on %s"
 msgstr "Rögzít: %s"
 
@@ -3310,6 +3366,7 @@ msgid "More than 1000 errors! The processing is aborted."
 msgstr "Több mint 1000 hiba! Folyamat megszakítva."
 
 #: u_translation.rsmorethanobje
+#, object-pascal-format
 msgid "More than %s objects, the result is truncated."
 msgstr "Több mint %s objektum, eredmény hiányos."
 
@@ -3446,6 +3503,7 @@ msgid "Night vision color"
 msgstr "Éjszakai üzemmód"
 
 #: u_translation.rsnoasteroidda
+#, object-pascal-format
 msgid "No asteroids data found!%sPlease load a MPC file first."
 msgstr "Nincs kisbolygó adat! %s Töltsd be először az MPC táblázatot."
 
@@ -3464,6 +3522,10 @@ msgstr "Nincs változás"
 #: u_translation.rsnodata
 msgid "No Data"
 msgstr "Nincs adat"
+
+#: u_translation.rsnodecimalsep
+msgid "No decimal separator"
+msgstr ""
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -3518,6 +3580,7 @@ msgid "Not available"
 msgstr "Nem érvényes"
 
 #: u_translation.rsnotconnected
+#, object-pascal-format
 msgid "%s not connected."
 msgstr "%s nincs kapcsolat."
 
@@ -3526,14 +3589,17 @@ msgid "Note"
 msgstr "jegyzet"
 
 #: u_translation.rsnotfound
+#, object-pascal-format
 msgid "%s not found"
 msgstr "%s nincs"
 
 #: u_translation.rsnotfoundinan
+#, object-pascal-format
 msgid "%s  Not found in any of the installed catalog indices."
 msgstr "%s Nem található egyik installált katalógus keresőjében sem."
 
 #: u_translation.rsnotfoundmayb
+#, object-pascal-format
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
 msgstr "%s Nem található!%sA katalógus nincs installálva, vagy rossz az elérési út a beállításokban."
 
@@ -3558,6 +3624,7 @@ msgid "Number of files"
 msgstr "Fájlok száma"
 
 #: u_translation.rsnumberofigno
+#, object-pascal-format
 msgid "Number of ignored invalid rows: %s"
 msgstr ""
 
@@ -3614,6 +3681,7 @@ msgid "Object type"
 msgstr "Objektum típusa"
 
 #: u_translation.rsobsaltitude
+#, object-pascal-format
 msgid "%sAltitude"
 msgstr "%sMagasság"
 
@@ -3926,6 +3994,7 @@ msgid "Please configure the orbital elements URL!"
 msgstr "Állítsd be a pályaelemek URL-jét!"
 
 #: u_translation.rspleaseconfir
+#, object-pascal-format
 msgid "Please confirm that the telescope is pointed at %s"
 msgstr "A távcső középpontja ide mutasson: %s"
 
@@ -3988,10 +4057,6 @@ msgstr "Pluto"
 #: u_translation.rsplutoisaplan
 msgid "Pluto is a planet."
 msgstr "A Plútó egy bolygó"
-
-#: u_translation.rspolarmotiona
-msgid "Polar motion (arc sec)"
-msgstr ""
 
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
@@ -4110,22 +4175,27 @@ msgid "Print the chart"
 msgstr "Térkép nyomtatása"
 
 #: u_translation.rsprocessing
+#, object-pascal-format
 msgid "Processing... %s"
 msgstr "Feldolgozás... %s"
 
 #: u_translation.rsprocessingen
+#, object-pascal-format
 msgid "Processing ended. Total number of comets: %s"
 msgstr "Feldolgozás vége. Összesen %s számú üstökös."
 
 #: u_translation.rsprocessingen2
+#, object-pascal-format
 msgid "Processing ended. Total number of asteroids: %s"
 msgstr "Feldolgozás vége. Összesen %s számú kisbolygó."
 
 #: u_translation.rsprocessingen3
+#, object-pascal-format
 msgid "Processing ended. Total number of location :%s"
 msgstr "Feldolgozás vége. Összesen %s számú hely."
 
 #: u_translation.rsprocessingli
+#, object-pascal-format
 msgid "Processing line %s"
 msgstr "Sor feldolgozása %s"
 
@@ -4190,6 +4260,7 @@ msgid "Proxy port"
 msgstr "Proxy port"
 
 #: u_translation.rsputthefilesw
+#, object-pascal-format
 msgid "Put the files with a .tle extention to the %s folder"
 msgstr "Tedd a .TLE kiterjesztésű fájlokat ebbe a könyvtárba: %s"
 
@@ -4242,6 +4313,7 @@ msgid "RA turns: "
 msgstr "RA forgatás: "
 
 #: u_translation.rsraturns2
+#, object-pascal-format
 msgid "%sRA turns:"
 msgstr "%sRA forgatás:"
 
@@ -4358,6 +4430,7 @@ msgid "Reload"
 msgstr "Frissítés"
 
 #: u_translation.rsreloadforcur
+#, object-pascal-format
 msgid "Reload %s for current chart"
 msgstr ""
 
@@ -4514,10 +4587,12 @@ msgid "SAMP Confirmation"
 msgstr ""
 
 #: u_translation.rssamphubprofi
+#, object-pascal-format
 msgid "SAMP hub profile %s found, but it is missing a required value."
 msgstr ""
 
 #: u_translation.rssampisamessa
+#, object-pascal-format
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
 msgstr ""
 
@@ -4614,6 +4689,7 @@ msgid "Script editor"
 msgstr ""
 
 #: u_translation.rsscriptisalre
+#, object-pascal-format
 msgid "Script is already assigned to %s are you sure you want to duplicate it to %s ?"
 msgstr ""
 
@@ -4674,6 +4750,7 @@ msgid "Seconds"
 msgstr "másodpercenként"
 
 #: u_translation.rsseehttpascom
+#, object-pascal-format
 msgid "See %s for more information."
 msgstr "További információkért lásd: %s"
 
@@ -4826,6 +4903,7 @@ msgid "Set options for best performance"
 msgstr ""
 
 #: u_translation.rssettargetto
+#, object-pascal-format
 msgid "Set target to %s"
 msgstr "Cél beállítva: %s"
 
@@ -5078,6 +5156,7 @@ msgid "Slew complete"
 msgstr ""
 
 #: u_translation.rsslewingto
+#, object-pascal-format
 msgid "Slewing to %s / %s"
 msgstr ""
 
@@ -5106,6 +5185,7 @@ msgid "M."
 msgstr "M."
 
 #: u_translation.rssocketerror
+#, object-pascal-format
 msgid "Socket error %s.  %s"
 msgstr "Socket hiba %s. %s"
 
@@ -5142,6 +5222,7 @@ msgid "Solar system settings"
 msgstr "Naprendszer beállításai"
 
 #: u_translation.rssomerecordsw
+#, object-pascal-format
 msgid "Some records where rejected, see the file %sreject.txt for details."
 msgstr "Néhány rekord nem lett elfogadva, ellenőrizd a %s reject.txt fájlban a részleteket."
 
@@ -5366,6 +5447,7 @@ msgid "Sync"
 msgstr "Szinkronizálás"
 
 #: u_translation.rssyncedto
+#, object-pascal-format
 msgid "Synced to %s / %s"
 msgstr ""
 
@@ -5382,10 +5464,12 @@ msgid "Table"
 msgstr "Táblázat"
 
 #: u_translation.rstabledonotex
+#, object-pascal-format
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
 msgstr "%sTábla %s nem létezik! %sjavítsd ki a hibát és próbáld újra."
 
 #: u_translation.rstableexist
+#, object-pascal-format
 msgid "%sThis table exists: %s"
 msgstr "%sTábla létezik %s"
 
@@ -5454,26 +5538,32 @@ msgid "Theme"
 msgstr "Téma"
 
 #: u_translation.rsthenumberofr
+#, object-pascal-format
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
 msgstr "A katalógusban lévő rekordok száma ismeretlen. A letöltés %s darab rekordra korlátozódik."
 
 #: u_translation.rstheobserving
+#, object-pascal-format
 msgid "The observing list %s was modified."
 msgstr "A megfigyelési lista módosult (%s)"
 
 #: u_translation.rstherearecata
+#, object-pascal-format
 msgid "There are %s catalogued images"
 msgstr "%s db katalogizált objektum"
 
 #: u_translation.rsthereareobjec
+#, object-pascal-format
 msgid "There are %s objects in this field."
 msgstr "%s darab objektum a mezőben."
 
 #: u_translation.rsthisactionre
+#, object-pascal-format
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
 msgstr "Ez a művelet felülírja az adatbázis tartalmát %s ország esetén, az NGA és GNIS %s használatával. Erre az országra vonatkozó  minden előző módosítás elvész, kivéve, ha új néven lett lementve az adat. %s Folytatod?"
 
 #: u_translation.rsthiscatalogc
+#, object-pascal-format
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
 msgstr "Ez a katalógus %s számú rekordot tartalmaz. Teljesítményi okokból nem lehetséges a teljes letöltése."
 
@@ -5482,6 +5572,7 @@ msgid "This direct driver is kept for compatibility, it may work or not for you.
 msgstr ""
 
 #: u_translation.rsthisfilecont
+#, object-pascal-format
 msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
 msgstr ""
 
@@ -5654,6 +5745,7 @@ msgid "Trumpler class"
 msgstr "Trumpler osztály"
 
 #: u_translation.rstruncatedtos
+#, object-pascal-format
 msgid "Truncated to %s catalogs"
 msgstr ""
 
@@ -5746,6 +5838,7 @@ msgid "Unpark"
 msgstr ""
 
 #: u_translation.rsunsupportedf
+#, object-pascal-format
 msgid "Unsupported file extension: %sPlease fix it."
 msgstr ""
 
@@ -5846,6 +5939,7 @@ msgid "Use the internal INDI gui panel"
 msgstr ""
 
 #: u_translation.rsusethemenuor
+#, object-pascal-format
 msgid "Use the menu or button \"%s\" to configure this driver."
 msgstr "Használd a menüt vagy a \"%s\" gombot a driver beállításához."
 
@@ -5858,6 +5952,7 @@ msgid "Use this field as an alternative name"
 msgstr "Használd ezt a mezőt alternatív névként"
 
 #: u_translation.rsusingexistin
+#, object-pascal-format
 msgid "Using the existing file %s"
 msgstr "A meglevő fájl használata %s"
 
@@ -5970,10 +6065,12 @@ msgid "Warning! Some comet elements are outdated. Load element valid for the cur
 msgstr "Figyelem! Néhány üstökös pályaeleme régi lehet. Töltse be a friss adatokat a térképhez."
 
 #: u_translation.rswarningthecu
+#, object-pascal-format
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
 msgstr "Figyelem! Az aktuális dátum és a megfigyelés helye meg lett változtatva az alapértelmezetthez képest. Ha \"Nem\"-el válaszolsz és a %s gombot használod, vissza tudsz térni az alapértelmezett beállításokhoz, egyébként elveszted azokat. Valóban folytatni akarod?"
 
 #: u_translation.rswarningyouar
+#, object-pascal-format
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
 msgstr "Figyelem! %s A %s adatbázis adatainak teljes megsemmisitése előtt állsz, még ha a tartalom nem kapcsolódik ehhez a programhoz. %s Biztos hogy folytatod?"
 
@@ -5982,6 +6079,7 @@ msgid "Warning! you are using multiple catalogs as sources for identical objects
 msgstr "FIGYELEM! Több katalógust használsz azonos objektumokra. Tényleg ezt akarod?"
 
 #: u_translation.rswarningyouha
+#, object-pascal-format
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
 msgstr "Figyelem! %s Egy létező katalógushoz akarsz adatokat hozzáadni. %s A meglevő katalógus és index formátuma azonos kell hogy maradjon, egyébként sérült lesz. %s Javasolt a jelenlegi fájlokat a művelet előtt lementeni. %s Folytatod?"
 

@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-02-14 10:00+0000\n"
+"POT-Creation-Date: 2021-12-21 13:09+0000\n"
 "PO-Revision-Date: 2019-06-04 15:15+0000\n"
 "Last-Translator: Zachary Wu <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-28 13:56+0000\n"
-"X-Generator: Launchpad (build cd61f0bfc5208dd4b58a15e953892eaabba1e0b8)\n"
+"X-Launchpad-Export-Date: 2021-12-21 13:12+0000\n"
+"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -61,10 +61,12 @@ msgid "About"
 msgstr "关于"
 
 #: u_translation.rsabout2
+#, object-pascal-format
 msgid "About %s"
 msgstr "关于%s"
 
 #: u_translation.rsabove
+#, object-pascal-format
 msgid "Above %s"
 msgstr ""
 
@@ -177,6 +179,7 @@ msgid "Add the alternative names to the index"
 msgstr "向索引添加替代名称"
 
 #: u_translation.rsaddtoobservi
+#, object-pascal-format
 msgid "Add %s to observing list"
 msgstr "将 %s 添加到观测列表"
 
@@ -237,6 +240,7 @@ msgid "All SAMP clients"
 msgstr ""
 
 #: u_translation.rsalltablesstr
+#, object-pascal-format
 msgid "%sAll table structures exist."
 msgstr "%s所有表格结构均存在。"
 
@@ -245,7 +249,7 @@ msgid "All toolbars"
 msgstr "全部工具栏"
 
 #: u_translation.rsalsobesureth
-#, fuzzy,badformat
+#, object-pascal-format, fuzzy, badformat
 msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
 msgstr "另外，请务必安装所需的数据库软件。如果您不能确定，请参考相关文件。您要继续吗？"
 
@@ -274,6 +278,7 @@ msgid "Altitude"
 msgstr "海拔"
 
 #: u_translation.rsaltturns
+#, object-pascal-format
 msgid "%sAlt turns:"
 msgstr "%s高度转数:"
 
@@ -285,11 +290,16 @@ msgstr "总是"
 msgid "Always add meridian"
 msgstr ""
 
+#: u_translation.rsalwaysontop
+msgid "Always on top"
+msgstr ""
+
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "总是不询问而保存。"
 
 #: u_translation.rsamaximumoffi
+#, object-pascal-format
 msgid "A maximum of %s files can be selected"
 msgstr ""
 
@@ -302,6 +312,7 @@ msgid "Amplitude min."
 msgstr ""
 
 #: u_translation.rsanewversiono
+#, object-pascal-format
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
 msgstr ""
 
@@ -394,6 +405,7 @@ msgid "The ASCOM driver report an error"
 msgstr ""
 
 #: u_translation.rsascomremote
+#, object-pascal-format
 msgid "ASCOM Alpaca is available on %s"
 msgstr ""
 
@@ -514,6 +526,7 @@ msgid "Azimuth origin"
 msgstr "方位角原点"
 
 #: u_translation.rsazturns
+#, object-pascal-format
 msgid "%sAz turns:"
 msgstr "%s方位转数:"
 
@@ -542,6 +555,7 @@ msgid "BC"
 msgstr "公元前"
 
 #: u_translation.rsbeginprocess
+#, object-pascal-format
 msgid "Begin processing for jd=%s / %s"
 msgstr "开始处理儒略日=%s/%s的数据"
 
@@ -666,10 +680,12 @@ msgid "Cancel"
 msgstr "取消"
 
 #: u_translation.rscancel2
+#, object-pascal-format
 msgid "Cancel %s"
 msgstr "取消%s"
 
 #: u_translation.rscancelwrongz
+#, object-pascal-format
 msgid "Cancel, wrong zip file ?? %s"
 msgstr "取消，错误的zip文件 ?? %s"
 
@@ -678,6 +694,7 @@ msgid "Cannot compute satellites."
 msgstr "无法计算卫星数据。"
 
 #: u_translation.rscannotconnec
+#, object-pascal-format
 msgid "Cannot connect to server. %s"
 msgstr "无法连接到服务器。%s"
 
@@ -694,6 +711,7 @@ msgid "Cannot get your IP address, or no location found for this address."
 msgstr "无法获取您的IP地址，或未找到地址对应的位置。"
 
 #: u_translation.rscannotopenda
+#, object-pascal-format
 msgid "%sCannot open database %s! %s"
 msgstr "%s无法打开数据库%s！ %s"
 
@@ -726,6 +744,7 @@ msgid "Catalog long name"
 msgstr "星表短名"
 
 #: u_translation.rscatalogsavai
+#, object-pascal-format
 msgid "%s Catalogs available"
 msgstr ""
 
@@ -742,6 +761,7 @@ msgid "Catalog type"
 msgstr "星表类型"
 
 #: u_translation.rsccw
+#, object-pascal-format
 msgid "%sCCW"
 msgstr ""
 
@@ -1058,10 +1078,12 @@ msgid "Connected"
 msgstr "已连接"
 
 #: u_translation.rsconnectedfro
+#, object-pascal-format
 msgid "%s connected with %s, using chart %s, connected time:%s"
 msgstr "%s已连接%s，使用星图%s连接时间：%s"
 
 #: u_translation.rsconnectedtos
+#, object-pascal-format
 msgid "Connected to the SQL database %s"
 msgstr "已连接SQL数据库 %s"
 
@@ -1082,6 +1104,7 @@ msgid "Connect to SAMP hub"
 msgstr ""
 
 #: u_translation.rsconnecttosuc
+#, object-pascal-format
 msgid "Connection to %s, %s successful.%s"
 msgstr "连接到%s，%s成功。 %s"
 
@@ -1126,6 +1149,7 @@ msgid "Control panel command "
 msgstr "控制面板命令 "
 
 #: u_translation.rsconvertcatal
+#, object-pascal-format
 msgid "Convert catalog file %s"
 msgstr "转换星表文件%s"
 
@@ -1210,6 +1234,7 @@ msgid "Create postscript chart. Please wait..."
 msgstr "创建postscript星图。请稍候..."
 
 #: u_translation.rscreaterasterwh
+#, object-pascal-format
 msgid "Create raster chart %d x %d. Please wait..."
 msgstr ""
 
@@ -1234,6 +1259,7 @@ msgid "Cursor"
 msgstr ""
 
 #: u_translation.rscw
+#, object-pascal-format
 msgid "%sCW"
 msgstr ""
 
@@ -1262,6 +1288,7 @@ msgid "Database file: "
 msgstr "数据库文件： "
 
 #: u_translation.rsdatabaseopen
+#, object-pascal-format
 msgid "%sDatabase %s opened.%s"
 msgstr "%s数据库%s已打开。%s"
 
@@ -1286,6 +1313,7 @@ msgid "Data preview"
 msgstr "数据预览"
 
 #: u_translation.rsdatastartonl
+#, object-pascal-format
 msgid "Data starts on line %s"
 msgstr "数据从第%s行开始"
 
@@ -1330,6 +1358,7 @@ msgid "Day Time"
 msgstr "日间"
 
 #: u_translation.rsdbinsertfail
+#, object-pascal-format
 msgid "DB insert failed for %s: %s"
 msgstr "%s数据库插入失败：%s"
 
@@ -1378,6 +1407,7 @@ msgid "DEC turns: "
 msgstr "赤纬转数: "
 
 #: u_translation.rsdecturns2
+#, object-pascal-format
 msgid "%sDEC turns:"
 msgstr "%s赤纬转数:"
 
@@ -1446,6 +1476,7 @@ msgid "Delete all expired ephemeris"
 msgstr ""
 
 #: u_translation.rsdeleteallthe
+#, object-pascal-format
 msgid "Delete %s, all the child nodes and the scripts?"
 msgstr ""
 
@@ -1474,6 +1505,7 @@ msgid "Deleting from the monthly table ..."
 msgstr "正在从每月表格删除..."
 
 #: u_translation.rsdeletefrommo2
+#, object-pascal-format
 msgid "Delete from monthly table for jd<%s"
 msgstr "从每月表格删除儒略日小于%s的数据"
 
@@ -1550,6 +1582,7 @@ msgid "Difference between Terrestrial Time and Universal Time"
 msgstr "地球时(TT)与世界时(UT)之间的差距"
 
 #: u_translation.rsdifferenttha
+#, object-pascal-format
 msgid "%s (different than the configured port, maybe busy or other error.)"
 msgstr "%s（不同于配置的端口，可能繁忙或有其他错误）。"
 
@@ -1646,10 +1679,12 @@ msgid "Do not filter Messier objects"
 msgstr "不要过滤梅西耶天体"
 
 #: u_translation.rsdonotrunasad
+#, object-pascal-format
 msgid "Do not run %s as %s!"
 msgstr ""
 
 #: u_translation.rsdonotuserow1
+#, object-pascal-format
 msgid "Do not use row %s, reserved for external software interface."
 msgstr ""
 
@@ -1674,6 +1709,7 @@ msgid "Download"
 msgstr "下载"
 
 #: u_translation.rsdownload2
+#, object-pascal-format
 msgid "Download %s"
 msgstr "下载%s"
 
@@ -1886,6 +1922,7 @@ msgid "End of object"
 msgstr ""
 
 #: u_translation.rsendprocessin
+#, object-pascal-format
 msgid "End of processing: %s asteroids"
 msgstr "结束处理：%s小行星"
 
@@ -1926,6 +1963,7 @@ msgid "Equatorial coordinates"
 msgstr "赤道坐标系"
 
 #: u_translation.rsequatorialco2
+#, object-pascal-format
 msgid "Equatorial coordinates, equinox: %s"
 msgstr "赤道坐标系，春分点纪元：%s"
 
@@ -1950,6 +1988,7 @@ msgid "Error"
 msgstr "错误"
 
 #: u_translation.rserrorcreatin
+#, object-pascal-format
 msgid "%sError creating table %s"
 msgstr "%s创建表格错误 %s"
 
@@ -1970,6 +2009,7 @@ msgid "Error! Please check the database parameters and load the picture package.
 msgstr "错误！请检查数据库参数并加载图片包。"
 
 #: u_translation.rsestimatedfil
+#, object-pascal-format
 msgid "Estimated file size: %sMB %sDo you want to continue?"
 msgstr "预计文件大小：%sMB %s 您要继续吗？"
 
@@ -2038,6 +2078,7 @@ msgid "Eyepiece vision"
 msgstr ""
 
 #: u_translation.rsfailed
+#, object-pascal-format
 msgid "Failed: %s"
 msgstr "失败：%s"
 
@@ -2094,6 +2135,7 @@ msgid "Field of vision number :"
 msgstr "视场编号："
 
 #: u_translation.rsfieldtoowidt
+#, object-pascal-format
 msgid "Field too wide! Maximum is %s"
 msgstr "视场过大！最大视场 %s"
 
@@ -2642,10 +2684,12 @@ msgid "Input catalog files"
 msgstr "导入星表文件"
 
 #: u_translation.rsinsertfailed
+#, object-pascal-format
 msgid "insert failed line %s: %s"
 msgstr "行插入失败%s：%s"
 
 #: u_translation.rsinsertfailed2
+#, object-pascal-format
 msgid "Insert failed! %s"
 msgstr "插入失败！%s"
 
@@ -2662,11 +2706,12 @@ msgid "Integrated telescope driver."
 msgstr "已整合望远镜驱动程序。"
 
 #: u_translation.rsinvalidepoch
+#, object-pascal-format
 msgid "invalid epoch on line%s: %s"
 msgstr "第%s行的时间无效：%s"
 
 #: u_translation.rsinvalidfitsf
-#, fuzzy,badformat
+#, object-pascal-format, fuzzy, badformat
 msgid "Invalid FITS file: %s"
 msgstr "无效FITS文件"
 
@@ -2679,14 +2724,17 @@ msgid "Invisible at this latitude"
 msgstr "在此纬度不可见"
 
 #: u_translation.rsiscoordinate
+#, object-pascal-format
 msgid "Is the coordinates epoch really %s?"
 msgstr "坐标系纪元确实是%s吗？"
 
 #: u_translation.rsisempty
+#, object-pascal-format
 msgid "%s is empty!"
 msgstr ""
 
 #: u_translation.rsittaketoolon
+#, object-pascal-format
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
 msgstr ""
 
@@ -2915,6 +2963,7 @@ msgid "List"
 msgstr "列表"
 
 #: u_translation.rslistenonport
+#, object-pascal-format
 msgid "Listen on port: %s"
 msgstr "监听端口：%s"
 
@@ -2986,7 +3035,12 @@ msgstr "锁定"
 msgid "Lock chart position"
 msgstr ""
 
+#: u_translation.rslockmagnitud
+msgid "Lock the magnitude filter"
+msgstr ""
+
 #: u_translation.rslockon
+#, object-pascal-format
 msgid "Lock on %s"
 msgstr "锁定在 %s"
 
@@ -3315,7 +3369,7 @@ msgid "More than 1000 errors! The processing is aborted."
 msgstr "超过1000个错误！处理已被终止"
 
 #: u_translation.rsmorethanobje
-#, fuzzy,badformat
+#, object-pascal-format, fuzzy, badformat
 msgid "More than %s objects, the result is truncated."
 msgstr "超过％s个对象，结果未完全显示。"
 
@@ -3452,6 +3506,7 @@ msgid "Night vision color"
 msgstr "夜间模式"
 
 #: u_translation.rsnoasteroidda
+#, object-pascal-format
 msgid "No asteroids data found!%sPlease load a MPC file first."
 msgstr "未找到小行星数据！%s请先读取MPC文件。"
 
@@ -3470,6 +3525,10 @@ msgstr "未更改"
 #: u_translation.rsnodata
 msgid "No Data"
 msgstr "无数据"
+
+#: u_translation.rsnodecimalsep
+msgid "No decimal separator"
+msgstr ""
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -3524,6 +3583,7 @@ msgid "Not available"
 msgstr "不可用"
 
 #: u_translation.rsnotconnected
+#, object-pascal-format
 msgid "%s not connected."
 msgstr "%s 未连接。"
 
@@ -3532,14 +3592,17 @@ msgid "Note"
 msgstr "备注"
 
 #: u_translation.rsnotfound
+#, object-pascal-format
 msgid "%s not found"
 msgstr "%s 未找到"
 
 #: u_translation.rsnotfoundinan
+#, object-pascal-format
 msgid "%s  Not found in any of the installed catalog indices."
 msgstr "在所有已安装的星表中都无法找到 %s."
 
 #: u_translation.rsnotfoundmayb
+#, object-pascal-format
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
 msgstr "%s 未找到！%s星表未安装或路径错误。"
 
@@ -3564,6 +3627,7 @@ msgid "Number of files"
 msgstr "文件数"
 
 #: u_translation.rsnumberofigno
+#, object-pascal-format
 msgid "Number of ignored invalid rows: %s"
 msgstr ""
 
@@ -3620,6 +3684,7 @@ msgid "Object type"
 msgstr "天体类型"
 
 #: u_translation.rsobsaltitude
+#, object-pascal-format
 msgid "%sAltitude"
 msgstr "%s海拔"
 
@@ -3932,6 +3997,7 @@ msgid "Please configure the orbital elements URL!"
 msgstr "请设置轨道根数地址！"
 
 #: u_translation.rspleaseconfir
+#, object-pascal-format
 msgid "Please confirm that the telescope is pointed at %s"
 msgstr "请确认望远镜已指向%s"
 
@@ -3994,10 +4060,6 @@ msgstr "冥王星"
 #: u_translation.rsplutoisaplan
 msgid "Pluto is a planet."
 msgstr "冥王星是行星"
-
-#: u_translation.rspolarmotiona
-msgid "Polar motion (arc sec)"
-msgstr "极轴运动（角秒）"
 
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
@@ -4116,22 +4178,27 @@ msgid "Print the chart"
 msgstr "打印星图"
 
 #: u_translation.rsprocessing
+#, object-pascal-format
 msgid "Processing... %s"
 msgstr "正在处理...%s"
 
 #: u_translation.rsprocessingen
+#, object-pascal-format
 msgid "Processing ended. Total number of comets: %s"
 msgstr "处理完成。彗星总数：%s"
 
 #: u_translation.rsprocessingen2
+#, object-pascal-format
 msgid "Processing ended. Total number of asteroids: %s"
 msgstr "处理完成。小行星总数：%s"
 
 #: u_translation.rsprocessingen3
+#, object-pascal-format
 msgid "Processing ended. Total number of location :%s"
 msgstr "处理结束。地点总数：%s"
 
 #: u_translation.rsprocessingli
+#, object-pascal-format
 msgid "Processing line %s"
 msgstr "处理行%s"
 
@@ -4196,6 +4263,7 @@ msgid "Proxy port"
 msgstr "代理服务器端口"
 
 #: u_translation.rsputthefilesw
+#, object-pascal-format
 msgid "Put the files with a .tle extention to the %s folder"
 msgstr "将扩展名为.tle的文件放置在%s文件夹"
 
@@ -4248,6 +4316,7 @@ msgid "RA turns: "
 msgstr "赤经转数: "
 
 #: u_translation.rsraturns2
+#, object-pascal-format
 msgid "%sRA turns:"
 msgstr "%s赤经转数:"
 
@@ -4364,6 +4433,7 @@ msgid "Reload"
 msgstr "重新加载"
 
 #: u_translation.rsreloadforcur
+#, object-pascal-format
 msgid "Reload %s for current chart"
 msgstr "为当前星图重新加载%s"
 
@@ -4520,10 +4590,12 @@ msgid "SAMP Confirmation"
 msgstr ""
 
 #: u_translation.rssamphubprofi
+#, object-pascal-format
 msgid "SAMP hub profile %s found, but it is missing a required value."
 msgstr ""
 
 #: u_translation.rssampisamessa
+#, object-pascal-format
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
 msgstr ""
 
@@ -4620,6 +4692,7 @@ msgid "Script editor"
 msgstr "脚本编辑器"
 
 #: u_translation.rsscriptisalre
+#, object-pascal-format
 msgid "Script is already assigned to %s are you sure you want to duplicate it to %s ?"
 msgstr ""
 
@@ -4680,6 +4753,7 @@ msgid "Seconds"
 msgstr "秒"
 
 #: u_translation.rsseehttpascom
+#, object-pascal-format
 msgid "See %s for more information."
 msgstr "参看%s以获取更多信息"
 
@@ -4832,6 +4906,7 @@ msgid "Set options for best performance"
 msgstr ""
 
 #: u_translation.rssettargetto
+#, object-pascal-format
 msgid "Set target to %s"
 msgstr "将目标设置为%s"
 
@@ -5084,6 +5159,7 @@ msgid "Slew complete"
 msgstr ""
 
 #: u_translation.rsslewingto
+#, object-pascal-format
 msgid "Slewing to %s / %s"
 msgstr ""
 
@@ -5112,6 +5188,7 @@ msgid "M."
 msgstr "月"
 
 #: u_translation.rssocketerror
+#, object-pascal-format
 msgid "Socket error %s.  %s"
 msgstr "Socket 错误 %s。 %s"
 
@@ -5148,6 +5225,7 @@ msgid "Solar system settings"
 msgstr "太阳系设置："
 
 #: u_translation.rssomerecordsw
+#, object-pascal-format
 msgid "Some records where rejected, see the file %sreject.txt for details."
 msgstr "部分记录被拒绝，请参阅文件%sreject.txt以获取详细信息。"
 
@@ -5372,6 +5450,7 @@ msgid "Sync"
 msgstr "同步"
 
 #: u_translation.rssyncedto
+#, object-pascal-format
 msgid "Synced to %s / %s"
 msgstr ""
 
@@ -5388,10 +5467,12 @@ msgid "Table"
 msgstr "表格"
 
 #: u_translation.rstabledonotex
+#, object-pascal-format
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
 msgstr "%s表格%s不存在！%s请更正错误并重试"
 
 #: u_translation.rstableexist
+#, object-pascal-format
 msgid "%sThis table exists: %s"
 msgstr "%s此表格包含：%s"
 
@@ -5460,27 +5541,32 @@ msgid "Theme"
 msgstr "主题"
 
 #: u_translation.rsthenumberofr
+#, object-pascal-format
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
 msgstr "该星表的记录数量未知。下载将被限制在%s记录"
 
 #: u_translation.rstheobserving
+#, object-pascal-format
 msgid "The observing list %s was modified."
 msgstr "观测列表 %s 已修改"
 
 #: u_translation.rstherearecata
+#, object-pascal-format
 msgid "There are %s catalogued images"
 msgstr "存在%s已编制星表的图像"
 
 #: u_translation.rsthereareobjec
+#, object-pascal-format
 msgid "There are %s objects in this field."
 msgstr "这个区域中共有%s个天体"
 
 #: u_translation.rsthisactionre
+#, object-pascal-format
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
 msgstr "这个操作将会覆盖所有这个国家的信息%s，使用来自NGA和GNIS的新信息%s您对这个国家的所有编辑将会丢失，只有您使用新名称添加的地点会被保留。%s您要继续吗？"
 
 #: u_translation.rsthiscatalogc
-#, fuzzy,badformat
+#, object-pascal-format, fuzzy, badformat
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
 msgstr "该星表包含％记录。由于性能的原因，无法下载全部。"
 
@@ -5489,6 +5575,7 @@ msgid "This direct driver is kept for compatibility, it may work or not for you.
 msgstr ""
 
 #: u_translation.rsthisfilecont
+#, object-pascal-format
 msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
 msgstr ""
 
@@ -5661,6 +5748,7 @@ msgid "Trumpler class"
 msgstr "特朗普勒分类"
 
 #: u_translation.rstruncatedtos
+#, object-pascal-format
 msgid "Truncated to %s catalogs"
 msgstr ""
 
@@ -5753,6 +5841,7 @@ msgid "Unpark"
 msgstr ""
 
 #: u_translation.rsunsupportedf
+#, object-pascal-format
 msgid "Unsupported file extension: %sPlease fix it."
 msgstr ""
 
@@ -5853,6 +5942,7 @@ msgid "Use the internal INDI gui panel"
 msgstr ""
 
 #: u_translation.rsusethemenuor
+#, object-pascal-format
 msgid "Use the menu or button \"%s\" to configure this driver."
 msgstr "使用菜单或 \"%s\" 按钮来设置本驱动。"
 
@@ -5865,6 +5955,7 @@ msgid "Use this field as an alternative name"
 msgstr ""
 
 #: u_translation.rsusingexistin
+#, object-pascal-format
 msgid "Using the existing file %s"
 msgstr "使用已存在的文件%s"
 
@@ -5977,10 +6068,12 @@ msgid "Warning! Some comet elements are outdated. Load element valid for the cur
 msgstr ""
 
 #: u_translation.rswarningthecu
+#, object-pascal-format
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
 msgstr "警告！您使用的日期或观测地点设置已更改。您可以选择“否”，并用%s按钮返回原来的设置，否则这些更改将被应用。您要继续吗？"
 
 #: u_translation.rswarningyouar
+#, object-pascal-format
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
 msgstr "警告！%s您将要删除数据库%s及其所有内容，即使其与本程序无关。%s您确定要继续吗？"
 
@@ -5989,6 +6082,7 @@ msgid "Warning! you are using multiple catalogs as sources for identical objects
 msgstr "警告！您正在使用多个星表作为同一天体信息的来源，有重复显示的风险。请确定这是您想要的。"
 
 #: u_translation.rswarningyouha
+#, object-pascal-format
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
 msgstr "警告！%s您选择将数据附加到已存在的星表。%s这个已存在的星表和索引必须为同一格式否则星表将会被损坏。%s在这个操作前最好备份相应文件。%s您要继续吗？"
 

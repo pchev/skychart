@@ -4774,10 +4774,6 @@ msgstr ""
 msgid "Troposphere temperature lapse rate (K/km)"
 msgstr ""
 
-#: u_translation:rspolarmotiona
-msgid "Polar motion (arc sec)"
-msgstr ""
-
 #: u_translation:rsearth
 msgid "Earth"
 msgstr ""
@@ -6056,5 +6052,17 @@ msgstr ""
 
 #: u_translation:rsblurred
 msgid "Blurred"
+msgstr ""
+
+#: u_translation:rsalwaysontop
+msgid "Always on top"
+msgstr ""
+
+#: u_translation:rsnodecimalsep
+msgid "No decimal separator"
+msgstr ""
+
+#: u_translation:rslockmagnitud
+msgid "Lock the magnitude filter"
 msgstr ""
 

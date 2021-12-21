@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2021-02-14 10:00+0000\n"
-"PO-Revision-Date: 2016-12-11 09:03+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2021-12-21 13:09+0000\n"
+"PO-Revision-Date: 2021-03-13 08:45+0000\n"
+"Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-02-28 13:56+0000\n"
-"X-Generator: Launchpad (build cd61f0bfc5208dd4b58a15e953892eaabba1e0b8)\n"
+"X-Launchpad-Export-Date: 2021-12-21 13:12+0000\n"
+"X-Generator: Launchpad (build adb364d6a74a28e7b95d51cd30446ec16160de6c)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -61,10 +61,12 @@ msgid "About"
 msgstr "เกี่ยวกับ"
 
 #: u_translation.rsabout2
+#, object-pascal-format
 msgid "About %s"
 msgstr "เกี่ยวกับ %s"
 
 #: u_translation.rsabove
+#, object-pascal-format
 msgid "Above %s"
 msgstr ""
 
@@ -177,6 +179,7 @@ msgid "Add the alternative names to the index"
 msgstr "เพิ่มชื่ออื่น ๆ ลงในดัชนี"
 
 #: u_translation.rsaddtoobservi
+#, object-pascal-format
 msgid "Add %s to observing list"
 msgstr "เพิ่ม %s ลงในรายการสังเกตการณ์"
 
@@ -237,6 +240,7 @@ msgid "All SAMP clients"
 msgstr ""
 
 #: u_translation.rsalltablesstr
+#, object-pascal-format
 msgid "%sAll table structures exist."
 msgstr "%sมีโครงสร้างทั้งหมดของตาราง"
 
@@ -245,6 +249,7 @@ msgid "All toolbars"
 msgstr "แถบเครื่องมือทั้งหมด"
 
 #: u_translation.rsalsobesureth
+#, object-pascal-format
 msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
 msgstr ""
 
@@ -273,6 +278,7 @@ msgid "Altitude"
 msgstr "มุมเงย"
 
 #: u_translation.rsaltturns
+#, object-pascal-format
 msgid "%sAlt turns:"
 msgstr ""
 
@@ -284,11 +290,16 @@ msgstr ""
 msgid "Always add meridian"
 msgstr "แสดงเส้นเมริเดียนเสมอ"
 
+#: u_translation.rsalwaysontop
+msgid "Always on top"
+msgstr ""
+
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "บันทึกเสมอโดยไม่ต้องถาม"
 
 #: u_translation.rsamaximumoffi
+#, object-pascal-format
 msgid "A maximum of %s files can be selected"
 msgstr ""
 
@@ -301,6 +312,7 @@ msgid "Amplitude min."
 msgstr ""
 
 #: u_translation.rsanewversiono
+#, object-pascal-format
 msgid "A new version %s of Skychart is available.%sDo you want to download it now?"
 msgstr ""
 
@@ -390,9 +402,10 @@ msgstr ""
 
 #: u_translation.rsascomdrivere
 msgid "The ASCOM driver report an error"
-msgstr ""
+msgstr "ไดรเวอร์ ASCOM รายงานข้อผิดพลาด"
 
 #: u_translation.rsascomremote
+#, object-pascal-format
 msgid "ASCOM Alpaca is available on %s"
 msgstr ""
 
@@ -513,6 +526,7 @@ msgid "Azimuth origin"
 msgstr "จุดกำเนิดมุมทิศ"
 
 #: u_translation.rsazturns
+#, object-pascal-format
 msgid "%sAz turns:"
 msgstr ""
 
@@ -541,6 +555,7 @@ msgid "BC"
 msgstr "ก่อน ค.ศ."
 
 #: u_translation.rsbeginprocess
+#, object-pascal-format
 msgid "Begin processing for jd=%s / %s"
 msgstr "กำลังเริ่มประมวลผลสำหรับ jd=%s / %s"
 
@@ -665,10 +680,12 @@ msgid "Cancel"
 msgstr "ยกเลิก"
 
 #: u_translation.rscancel2
+#, object-pascal-format
 msgid "Cancel %s"
 msgstr "ยกเลิก %s"
 
 #: u_translation.rscancelwrongz
+#, object-pascal-format
 msgid "Cancel, wrong zip file ?? %s"
 msgstr ""
 
@@ -677,6 +694,7 @@ msgid "Cannot compute satellites."
 msgstr "ไม่สามารถคำนวณดาวเทียมได้"
 
 #: u_translation.rscannotconnec
+#, object-pascal-format
 msgid "Cannot connect to server. %s"
 msgstr "ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ %s"
 
@@ -693,6 +711,7 @@ msgid "Cannot get your IP address, or no location found for this address."
 msgstr "ไม่สามารถระบุที่อยู่ไอพีของคุณ หรือไม่พบสถานที่สำหรับไอพีนี้"
 
 #: u_translation.rscannotopenda
+#, object-pascal-format
 msgid "%sCannot open database %s! %s"
 msgstr "%sไม่สามารถเปิดฐานข้อมูล %s! %s"
 
@@ -725,6 +744,7 @@ msgid "Catalog long name"
 msgstr "ชื่อเต็มของบัญชี"
 
 #: u_translation.rscatalogsavai
+#, object-pascal-format
 msgid "%s Catalogs available"
 msgstr "มีบัญชีที่ใช้งานได้ %s บัญชี"
 
@@ -741,6 +761,7 @@ msgid "Catalog type"
 msgstr "ชนิดของบัญชี"
 
 #: u_translation.rsccw
+#, object-pascal-format
 msgid "%sCCW"
 msgstr "%sทวนเข็มนาฬิกา"
 
@@ -1057,10 +1078,12 @@ msgid "Connected"
 msgstr "เชื่อมต่อแล้ว"
 
 #: u_translation.rsconnectedfro
+#, object-pascal-format
 msgid "%s connected with %s, using chart %s, connected time:%s"
 msgstr "%s ได้รับการเชื่อมต่อกับ %s, โดยใช้แผนที่ %s, เวลาเชื่อมต่อ:%s"
 
 #: u_translation.rsconnectedtos
+#, object-pascal-format
 msgid "Connected to the SQL database %s"
 msgstr "เชื่อมต่อไปยังฐานข้อมูล SQL %s"
 
@@ -1081,6 +1104,7 @@ msgid "Connect to SAMP hub"
 msgstr "เชื่อมต่อไปยังฮับ SAMP"
 
 #: u_translation.rsconnecttosuc
+#, object-pascal-format
 msgid "Connection to %s, %s successful.%s"
 msgstr "การเชื่อมต่อไปยัง %s, %s สำเร็จ%s"
 
@@ -1125,6 +1149,7 @@ msgid "Control panel command "
 msgstr "คำสั่งแผงควบคุม "
 
 #: u_translation.rsconvertcatal
+#, object-pascal-format
 msgid "Convert catalog file %s"
 msgstr "แปลงแฟ้มบัญชี %s"
 
@@ -1209,6 +1234,7 @@ msgid "Create postscript chart. Please wait..."
 msgstr "สร้างแผนที่โพสต์สคริปต์ กรุณารอ..."
 
 #: u_translation.rscreaterasterwh
+#, object-pascal-format
 msgid "Create raster chart %d x %d. Please wait..."
 msgstr ""
 
@@ -1222,7 +1248,7 @@ msgstr "ขึ้นถึงจุดสูงสุด"
 
 #: u_translation.rscurrentchart
 msgid "Current chart coordinate system"
-msgstr ""
+msgstr "ระบบพิกัดของแผนที่ปัจจุบัน"
 
 #: u_translation.rscurrentdate
 msgid "Date of validity"
@@ -1233,6 +1259,7 @@ msgid "Cursor"
 msgstr ""
 
 #: u_translation.rscw
+#, object-pascal-format
 msgid "%sCW"
 msgstr "%sตามเข็มนาฬิกา"
 
@@ -1261,6 +1288,7 @@ msgid "Database file: "
 msgstr "แฟ้มฐานข้อมูล: "
 
 #: u_translation.rsdatabaseopen
+#, object-pascal-format
 msgid "%sDatabase %s opened.%s"
 msgstr "%sฐานข้อมูล %s ถูกเปิด%s"
 
@@ -1285,6 +1313,7 @@ msgid "Data preview"
 msgstr "ดูตัวอย่างข้อมูล"
 
 #: u_translation.rsdatastartonl
+#, object-pascal-format
 msgid "Data starts on line %s"
 msgstr "ข้อมูลเริ่มต้นจากบรรทัดที่ %s"
 
@@ -1329,6 +1358,7 @@ msgid "Day Time"
 msgstr "เวลากลางวัน"
 
 #: u_translation.rsdbinsertfail
+#, object-pascal-format
 msgid "DB insert failed for %s: %s"
 msgstr "การแทรกฐานข้อมูลล้มเหลวสำหรับ %s: %s"
 
@@ -1377,6 +1407,7 @@ msgid "DEC turns: "
 msgstr ""
 
 #: u_translation.rsdecturns2
+#, object-pascal-format
 msgid "%sDEC turns:"
 msgstr ""
 
@@ -1445,6 +1476,7 @@ msgid "Delete all expired ephemeris"
 msgstr ""
 
 #: u_translation.rsdeleteallthe
+#, object-pascal-format
 msgid "Delete %s, all the child nodes and the scripts?"
 msgstr ""
 
@@ -1473,6 +1505,7 @@ msgid "Deleting from the monthly table ..."
 msgstr "กำลังลบข้อมูลจากตารางรายเดือน ..."
 
 #: u_translation.rsdeletefrommo2
+#, object-pascal-format
 msgid "Delete from monthly table for jd<%s"
 msgstr "ลบข้อมูลจากตารางรายเดือนสำหรับ jd<%s"
 
@@ -1506,7 +1539,7 @@ msgstr "ความไม่แน่นอนของ DeltaT"
 
 #: u_translation.rsdeltatrecent
 msgid "DeltaT recent value"
-msgstr ""
+msgstr "ค่า DeltaT ล่าสุด"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -1549,6 +1582,7 @@ msgid "Difference between Terrestrial Time and Universal Time"
 msgstr "ความต่างระหว่างเวลาพื้นดินกับเวลาสากล"
 
 #: u_translation.rsdifferenttha
+#, object-pascal-format
 msgid "%s (different than the configured port, maybe busy or other error.)"
 msgstr "%s (แตกต่างจากพอร์ตที่ตั้งไว้ อาจกำลังทำงานค้างอยู่หรือมีข้อผิดพลาดอื่น ๆ)"
 
@@ -1645,10 +1679,12 @@ msgid "Do not filter Messier objects"
 msgstr "ไม่ต้องกรองวัตถุเมซีเย"
 
 #: u_translation.rsdonotrunasad
+#, object-pascal-format
 msgid "Do not run %s as %s!"
 msgstr ""
 
 #: u_translation.rsdonotuserow1
+#, object-pascal-format
 msgid "Do not use row %s, reserved for external software interface."
 msgstr ""
 
@@ -1673,6 +1709,7 @@ msgid "Download"
 msgstr "ดาวน์โหลด"
 
 #: u_translation.rsdownload2
+#, object-pascal-format
 msgid "Download %s"
 msgstr "ดาวน์โหลด %s"
 
@@ -1798,7 +1835,7 @@ msgstr "ตะวันออก"
 
 #: u_translation.rseasthourangl
 msgid "East hour angle"
-msgstr ""
+msgstr "มุมชั่วโมงตะวันออก"
 
 #: u_translation.rseastside
 msgid "East side"
@@ -1866,7 +1903,7 @@ msgstr "มุมห่าง"
 
 #: u_translation.rsemail
 msgid "email"
-msgstr ""
+msgstr "อีเมล"
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
@@ -1885,6 +1922,7 @@ msgid "End of object"
 msgstr "จุดสิ้นสุดของวัตถุ"
 
 #: u_translation.rsendprocessin
+#, object-pascal-format
 msgid "End of processing: %s asteroids"
 msgstr "การประมวลผลเสร็จสิ้น: ดาวเคราะห์น้อย %s ดวง"
 
@@ -1918,13 +1956,14 @@ msgstr "กริดศูนย์สูตร"
 
 #: u_translation.rsequator
 msgid "Equator"
-msgstr ""
+msgstr "เส้นศูนย์สูตร"
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
 msgstr "พิกัดศูนย์สูตร"
 
 #: u_translation.rsequatorialco2
+#, object-pascal-format
 msgid "Equatorial coordinates, equinox: %s"
 msgstr "พิกัดศูนย์สูตร, วิษุวัต: %s"
 
@@ -1949,6 +1988,7 @@ msgid "Error"
 msgstr "เกิดข้อผิดพลาด"
 
 #: u_translation.rserrorcreatin
+#, object-pascal-format
 msgid "%sError creating table %s"
 msgstr "%sเกิดข้อผิดพลาดในการสร้างตาราง %s"
 
@@ -1969,6 +2009,7 @@ msgid "Error! Please check the database parameters and load the picture package.
 msgstr "เกิดข้อผิดพลาด! กรุณาตรวจสอบพารามิเตอร์ของฐานข้อมูล แล้วโหลดแพ็กเกจภาพ"
 
 #: u_translation.rsestimatedfil
+#, object-pascal-format
 msgid "Estimated file size: %sMB %sDo you want to continue?"
 msgstr "ขนาดแฟ้มโดยประมาณ: %sMB %s ต้องการดำเนินการต่อหรือไม่?"
 
@@ -2037,6 +2078,7 @@ msgid "Eyepiece vision"
 msgstr ""
 
 #: u_translation.rsfailed
+#, object-pascal-format
 msgid "Failed: %s"
 msgstr "ล้มเหลว: %s"
 
@@ -2093,6 +2135,7 @@ msgid "Field of vision number :"
 msgstr "หมายเลขขอบเขตการมองเห็น :"
 
 #: u_translation.rsfieldtoowidt
+#, object-pascal-format
 msgid "Field too wide! Maximum is %s"
 msgstr "ขอบเขตมีขนาดใหญ่เกินไป! ต้องไม่เกิน %s"
 
@@ -2214,7 +2257,7 @@ msgstr ""
 
 #: u_translation.rsforcej2000
 msgid "Force J2000"
-msgstr ""
+msgstr "ใช้ J2000"
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
@@ -2318,7 +2361,7 @@ msgstr "มุมเงยเรขาคณิต"
 
 #: u_translation.rsget
 msgid "Get"
-msgstr ""
+msgstr "รับ"
 
 #: u_translation.rsgetasteroidl
 msgid "Get the asteroids list."
@@ -2378,7 +2421,7 @@ msgstr ""
 
 #: u_translation.rsgrids
 msgid "Grids"
-msgstr ""
+msgstr "กริด"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -2641,10 +2684,12 @@ msgid "Input catalog files"
 msgstr "แฟ้มข้อมูลที่จะนำเข้า"
 
 #: u_translation.rsinsertfailed
+#, object-pascal-format
 msgid "insert failed line %s: %s"
 msgstr "แทรกบรรทัดที่ล้มเหลว %s: %s"
 
 #: u_translation.rsinsertfailed2
+#, object-pascal-format
 msgid "Insert failed! %s"
 msgstr "การแทรกล้มเหลว! %s"
 
@@ -2661,10 +2706,12 @@ msgid "Integrated telescope driver."
 msgstr "ตัวขับกล้องโทรทรรศน์แบบเบ็ดเสร็จ"
 
 #: u_translation.rsinvalidepoch
+#, object-pascal-format
 msgid "invalid epoch on line%s: %s"
 msgstr "จุดเริ่มยุคไม่ถูกต้องในบรรทัด%s: %s"
 
 #: u_translation.rsinvalidfitsf
+#, object-pascal-format
 msgid "Invalid FITS file: %s"
 msgstr "แฟ้ม FITS ไม่ถูกต้อง: %s"
 
@@ -2677,14 +2724,17 @@ msgid "Invisible at this latitude"
 msgstr "มองไม่เห็นในละติจูดนี้"
 
 #: u_translation.rsiscoordinate
+#, object-pascal-format
 msgid "Is the coordinates epoch really %s?"
 msgstr "ต้องการจะใช้จุดเริ่มยุค %s จริงหรือไม่?"
 
 #: u_translation.rsisempty
+#, object-pascal-format
 msgid "%s is empty!"
 msgstr ""
 
 #: u_translation.rsittaketoolon
+#, object-pascal-format
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
 msgstr "การวาด %s จากบัญชี %s ใช้เวลานานเกินไป กรุณาหลีกเลี่ยงการใช้บัญชีนี้สำหรับขอบเขตการมองเห็นปัจจุบัน"
 
@@ -2913,6 +2963,7 @@ msgid "List"
 msgstr ""
 
 #: u_translation.rslistenonport
+#, object-pascal-format
 msgid "Listen on port: %s"
 msgstr "คอยรับข้อมูลจากพอร์ต: %s"
 
@@ -2934,7 +2985,7 @@ msgstr "โหลดจากแฟ้ม"
 
 #: u_translation.rsloadindiconf
 msgid "Load INDI configuration"
-msgstr ""
+msgstr "โหลดการปรับแต่ง INDI"
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."
@@ -2974,7 +3025,7 @@ msgstr "รหัสสถานที่"
 
 #: u_translation.rslocationtime
 msgid "Location / Time"
-msgstr ""
+msgstr "สถานที่ / เวลา"
 
 #: u_translation.rslock
 msgid "Lock"
@@ -2984,17 +3035,22 @@ msgstr ""
 msgid "Lock chart position"
 msgstr ""
 
+#: u_translation.rslockmagnitud
+msgid "Lock the magnitude filter"
+msgstr ""
+
 #: u_translation.rslockon
+#, object-pascal-format
 msgid "Lock on %s"
 msgstr "ล็อกอยู่ที่ %s"
 
 #: u_translation.rslockthechart
 msgid "Lock the chart at this position"
-msgstr ""
+msgstr "ตรึงแผนที่ตรงตำแหน่งนี้"
 
 #: u_translation.rslog
 msgid "Log"
-msgstr ""
+msgstr "บันทึก"
 
 #: u_translation.rslogarithmics
 msgid "Logarithmic scale"
@@ -3090,7 +3146,7 @@ msgstr "แถบหลัก"
 
 #: u_translation.rsmainmenu
 msgid "Main menu"
-msgstr ""
+msgstr "เมนูหลัก"
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
@@ -3122,7 +3178,7 @@ msgstr ""
 
 #: u_translation.rsmark
 msgid "Mark"
-msgstr ""
+msgstr "ทำเครื่องหมาย"
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3146,7 +3202,7 @@ msgstr "ขยายเต็มจอ"
 
 #: u_translation.rsmaximumdecli
 msgid "Maximum declination"
-msgstr ""
+msgstr "เดคลิเนชันสูงสุด"
 
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
@@ -3250,7 +3306,7 @@ msgstr "มุมเงยต่ำสุด"
 
 #: u_translation.rsminimumdecli
 msgid "Minimum declination"
-msgstr ""
+msgstr "เดคลิเนชันต่ำสุด"
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -3313,6 +3369,7 @@ msgid "More than 1000 errors! The processing is aborted."
 msgstr "เกิดข้อผิดพลาดมากกว่า 1,000 ครั้ง! การประมวลผลถูกยกเลิก"
 
 #: u_translation.rsmorethanobje
+#, object-pascal-format
 msgid "More than %s objects, the result is truncated."
 msgstr "พบวัตถุมากกว่า %s วัตถุ ผลการค้นหาถูกตัดทอนลง"
 
@@ -3449,6 +3506,7 @@ msgid "Night vision color"
 msgstr "สีสำหรับโหมดกลางคืน"
 
 #: u_translation.rsnoasteroidda
+#, object-pascal-format
 msgid "No asteroids data found!%sPlease load a MPC file first."
 msgstr "ไม่พบข้อมูลดาวเคราะห์น้อย!%s กรุณาโหลดแฟ้ม MPC ก่อน"
 
@@ -3467,6 +3525,10 @@ msgstr "ไม่เปลี่ยนแปลง"
 #: u_translation.rsnodata
 msgid "No Data"
 msgstr "ไม่มีข้อมูล"
+
+#: u_translation.rsnodecimalsep
+msgid "No decimal separator"
+msgstr ""
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -3521,6 +3583,7 @@ msgid "Not available"
 msgstr "ไม่มี"
 
 #: u_translation.rsnotconnected
+#, object-pascal-format
 msgid "%s not connected."
 msgstr "ไม่ได้เชื่อมต่อ %s"
 
@@ -3529,14 +3592,17 @@ msgid "Note"
 msgstr "หมายเหตุ"
 
 #: u_translation.rsnotfound
+#, object-pascal-format
 msgid "%s not found"
 msgstr "ไม่พบ %s"
 
 #: u_translation.rsnotfoundinan
+#, object-pascal-format
 msgid "%s  Not found in any of the installed catalog indices."
 msgstr "ไม่พบ %s ในดัชนีวัตถุของบัญชีที่ติดตั้ง"
 
 #: u_translation.rsnotfoundmayb
+#, object-pascal-format
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
 msgstr "%s ไม่พบ!%sอาจไม่ได้ติดตั้งบัญชี หรือตั้งค่าที่อยู่ของบัญชีไม่ถูกต้อง"
 
@@ -3554,13 +3620,14 @@ msgstr "จำนวนสำเนา"
 
 #: u_translation.rsnumberofdays
 msgid "Number of days"
-msgstr ""
+msgstr "จำนวนวัน"
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr "จำนวนแฟ้ม"
 
 #: u_translation.rsnumberofigno
+#, object-pascal-format
 msgid "Number of ignored invalid rows: %s"
 msgstr ""
 
@@ -3617,6 +3684,7 @@ msgid "Object type"
 msgstr "ชนิดของวัตถุ"
 
 #: u_translation.rsobsaltitude
+#, object-pascal-format
 msgid "%sAltitude"
 msgstr "%sระดับความสูง"
 
@@ -3858,7 +3926,7 @@ msgstr "ข้อมูลส่วนตัว"
 
 #: u_translation.rsphaseangle
 msgid "Phase angle"
-msgstr ""
+msgstr "มุมดิถี"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
@@ -3929,6 +3997,7 @@ msgid "Please configure the orbital elements URL!"
 msgstr "กรุณาปรับแต่ง URL ของรายละเอียดวงโคจร!"
 
 #: u_translation.rspleaseconfir
+#, object-pascal-format
 msgid "Please confirm that the telescope is pointed at %s"
 msgstr "กรุณายืนยันว่ากล้องโทรทรรศน์เล็งไปที่ %s"
 
@@ -3982,7 +4051,7 @@ msgstr ""
 
 #: u_translation.rsplottheposit
 msgid "Plot orbital motion of solar system objects."
-msgstr ""
+msgstr "วาดแนวการเคลื่อนที่ในวงโคจรของวัตถุในระบบสุริยะ"
 
 #: u_translation.rspluto
 msgid "Pluto"
@@ -3991,10 +4060,6 @@ msgstr "ดาวพลูโต"
 #: u_translation.rsplutoisaplan
 msgid "Pluto is a planet."
 msgstr "กำหนดให้พลูโตเป็นดาวเคราะห์"
-
-#: u_translation.rspolarmotiona
-msgid "Polar motion (arc sec)"
-msgstr "การเคลื่อนที่ของขั้ว (พิลิปดา)"
 
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
@@ -4113,22 +4178,27 @@ msgid "Print the chart"
 msgstr "พิมพ์แผนที่"
 
 #: u_translation.rsprocessing
+#, object-pascal-format
 msgid "Processing... %s"
 msgstr "กำลังประมวลผล... %s"
 
 #: u_translation.rsprocessingen
+#, object-pascal-format
 msgid "Processing ended. Total number of comets: %s"
 msgstr "การประมวลผลเสร็จสิ้น มีดาวหางทั้งหมด: %s"
 
 #: u_translation.rsprocessingen2
+#, object-pascal-format
 msgid "Processing ended. Total number of asteroids: %s"
 msgstr "การประมวลผลสิ้นสุด มีจำนวนดาวเคราะห์น้อยทั้งหมด: %s"
 
 #: u_translation.rsprocessingen3
+#, object-pascal-format
 msgid "Processing ended. Total number of location :%s"
 msgstr "การประมวลผลเสร็จสิ้น จำนวนสถานที่ทั้งหมด :%s"
 
 #: u_translation.rsprocessingli
+#, object-pascal-format
 msgid "Processing line %s"
 msgstr "กำลังประมวลผลบรรทัดที่ %s"
 
@@ -4193,6 +4263,7 @@ msgid "Proxy port"
 msgstr "พอร์ตของพร็อกซี"
 
 #: u_translation.rsputthefilesw
+#, object-pascal-format
 msgid "Put the files with a .tle extention to the %s folder"
 msgstr "วางแฟ้มที่มีส่วนขยาย .tle ในโฟลเดอร์ %s"
 
@@ -4245,6 +4316,7 @@ msgid "RA turns: "
 msgstr ""
 
 #: u_translation.rsraturns2
+#, object-pascal-format
 msgid "%sRA turns:"
 msgstr ""
 
@@ -4361,6 +4433,7 @@ msgid "Reload"
 msgstr "โหลดใหม่"
 
 #: u_translation.rsreloadforcur
+#, object-pascal-format
 msgid "Reload %s for current chart"
 msgstr "โหลด %s ใหม่ สำหรับแผนที่ที่ใช้งานอยู่"
 
@@ -4517,10 +4590,12 @@ msgid "SAMP Confirmation"
 msgstr ""
 
 #: u_translation.rssamphubprofi
+#, object-pascal-format
 msgid "SAMP hub profile %s found, but it is missing a required value."
 msgstr ""
 
 #: u_translation.rssampisamessa
+#, object-pascal-format
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
 msgstr ""
 
@@ -4617,6 +4692,7 @@ msgid "Script editor"
 msgstr "เครื่องมือแก้ไขสคริปต์"
 
 #: u_translation.rsscriptisalre
+#, object-pascal-format
 msgid "Script is already assigned to %s are you sure you want to duplicate it to %s ?"
 msgstr ""
 
@@ -4658,7 +4734,7 @@ msgstr "ดัชนีสืบค้น"
 
 #: u_translation.rssearchradius
 msgid "Search radius"
-msgstr ""
+msgstr "รัศมีการค้นหา"
 
 #: u_translation.rssearchsoftwa
 msgid "Search software update"
@@ -4677,6 +4753,7 @@ msgid "Seconds"
 msgstr "วินาที"
 
 #: u_translation.rsseehttpascom
+#, object-pascal-format
 msgid "See %s for more information."
 msgstr "ดู %s สำหรับข้อมูลเพิ่มเติม"
 
@@ -4766,7 +4843,7 @@ msgstr "ส่งตารางไปยัง"
 
 #: u_translation.rssendviaserve
 msgid "Send via server"
-msgstr ""
+msgstr "ส่งผ่านเซิร์ฟเวอร์"
 
 #: u_translation.rsseparation
 msgid "Separation"
@@ -4829,6 +4906,7 @@ msgid "Set options for best performance"
 msgstr ""
 
 #: u_translation.rssettargetto
+#, object-pascal-format
 msgid "Set target to %s"
 msgstr "วางเป้าหมายไปยัง %s"
 
@@ -4878,7 +4956,7 @@ msgstr ""
 
 #: u_translation.rsshowcelestia
 msgid "Show celestial equator"
-msgstr ""
+msgstr "แสดงเส้นศูนย์สูตรฟ้า"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
@@ -4986,7 +5064,7 @@ msgstr "แสดงวัตถุ"
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian"
-msgstr ""
+msgstr "แสดงเฉพาะเมริเดียน"
 
 #: u_translation.rsshowonlytext
 msgid "Show only text in detail window"
@@ -5081,6 +5159,7 @@ msgid "Slew complete"
 msgstr ""
 
 #: u_translation.rsslewingto
+#, object-pascal-format
 msgid "Slewing to %s / %s"
 msgstr ""
 
@@ -5109,6 +5188,7 @@ msgid "M."
 msgstr "เดือน"
 
 #: u_translation.rssocketerror
+#, object-pascal-format
 msgid "Socket error %s.  %s"
 msgstr "เกิดข้อผิดพลาดของซ็อกเก็ต %s  %s"
 
@@ -5130,7 +5210,7 @@ msgstr "ระบบสุริยะ"
 
 #: u_translation.rssolarsystemb
 msgid "Solar system body"
-msgstr ""
+msgstr "วัตถุในระบบสุริยะ"
 
 #: u_translation.rssolarsystemi
 msgid "Solar System Information"
@@ -5145,6 +5225,7 @@ msgid "Solar system settings"
 msgstr "การตั้งค่าระบบสุริยะ"
 
 #: u_translation.rssomerecordsw
+#, object-pascal-format
 msgid "Some records where rejected, see the file %sreject.txt for details."
 msgstr "บางระเบียนถูกปฏิเสธ ดูแฟ้ม %sreject.txt สำหรับรายละเอียด"
 
@@ -5182,7 +5263,7 @@ msgstr "ชนิดสเปกตรัม"
 
 #: u_translation.rsspeed
 msgid "Speed"
-msgstr ""
+msgstr "อัตราเร็ว"
 
 #: u_translation.rsspiceephemer
 msgid "SPICE ephemeris"
@@ -5278,7 +5359,7 @@ msgstr ""
 
 #: u_translation.rsstartdate
 msgid "Start date"
-msgstr ""
+msgstr "วันที่เริ่ม"
 
 #: u_translation.rsstartforward
 msgid "Animation forward"
@@ -5369,6 +5450,7 @@ msgid "Sync"
 msgstr "ทำให้ตรงกัน"
 
 #: u_translation.rssyncedto
+#, object-pascal-format
 msgid "Synced to %s / %s"
 msgstr ""
 
@@ -5385,16 +5467,18 @@ msgid "Table"
 msgstr "ตาราง"
 
 #: u_translation.rstabledonotex
+#, object-pascal-format
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
 msgstr "%sไม่มีตาราง %s ! %sกรุณาแก้ไขข้อผิดพลาด แล้วพยายามอีกครั้ง"
 
 #: u_translation.rstableexist
+#, object-pascal-format
 msgid "%sThis table exists: %s"
 msgstr "%sมีตารางนี้: %s"
 
 #: u_translation.rstarget
 msgid "Target"
-msgstr ""
+msgstr "เป้าหมาย"
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
@@ -5457,26 +5541,32 @@ msgid "Theme"
 msgstr ""
 
 #: u_translation.rsthenumberofr
+#, object-pascal-format
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
 msgstr "ไม่ทราบจำนวนระเบียนในบัญชีนี้ การดาวน์โหลดจะถูกจำกัดอยู่ที่ %s ระเบียน"
 
 #: u_translation.rstheobserving
+#, object-pascal-format
 msgid "The observing list %s was modified."
 msgstr "รายการสังเกตการณ์ %s ถูกแก้ไข"
 
 #: u_translation.rstherearecata
+#, object-pascal-format
 msgid "There are %s catalogued images"
 msgstr "พบ %s ภาพ ในบัญชี"
 
 #: u_translation.rsthereareobjec
+#, object-pascal-format
 msgid "There are %s objects in this field."
 msgstr "พบ %s วัตถุในขอบเขตการมองเห็นนี้"
 
 #: u_translation.rsthisactionre
+#, object-pascal-format
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
 msgstr "การกระทำนี้จะเขียนทับเนื้อหาทั้งหมดในฐานข้อมูลสำหรับประเทศ%s โดยใช้ข้อมูลล่าสุดจาก NGA และ GNIS%sการแก้ไขของคุณสำหรับประเทศนี้จะสูญหายไป เฉพาะสถานที่ที่คุณเพิ่มเข้ามาด้วยชื่อใหม่เท่านั้น ที่จะยังคงอยู่%sคุณต้องการดำเนินการต่อหรือไม่?"
 
 #: u_translation.rsthiscatalogc
+#, object-pascal-format
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
 msgstr "บัญชีนี้มี %s ระเบียน ไม่สามารถดาวน์โหลดทั้งหมดได้เนื่องจากจะลดสมรรถภาพของโปรแกรมลง"
 
@@ -5485,6 +5575,7 @@ msgid "This direct driver is kept for compatibility, it may work or not for you.
 msgstr ""
 
 #: u_translation.rsthisfilecont
+#, object-pascal-format
 msgid "This file contain %s elements.%sThis is probably a base file you want to load without the \"Append\" option.%sIt can affect the performance to append all this data to the current file%sDo you want to continue anyway?"
 msgstr ""
 
@@ -5582,7 +5673,7 @@ msgstr "เต็มดวง"
 
 #: u_translation.rstotalasteroi
 msgid "Total asteroid count"
-msgstr ""
+msgstr "ดาวเคราะห์น้อยทั้งหมดที่นับได้"
 
 #: u_translation.rstotalradius
 msgid "Total radius"
@@ -5657,6 +5748,7 @@ msgid "Trumpler class"
 msgstr "ชนิดทรัมเพลอร์"
 
 #: u_translation.rstruncatedtos
+#, object-pascal-format
 msgid "Truncated to %s catalogs"
 msgstr ""
 
@@ -5749,8 +5841,9 @@ msgid "Unpark"
 msgstr ""
 
 #: u_translation.rsunsupportedf
+#, object-pascal-format
 msgid "Unsupported file extension: %sPlease fix it."
-msgstr ""
+msgstr "ส่วนขยายแฟ้มที่ไม่รองรับ: %sกรุณาแก้ไข"
 
 #: u_translation.rsunsupporteds
 msgid "Unsupported SAMP hub profile. Must be a File URL"
@@ -5849,6 +5942,7 @@ msgid "Use the internal INDI gui panel"
 msgstr ""
 
 #: u_translation.rsusethemenuor
+#, object-pascal-format
 msgid "Use the menu or button \"%s\" to configure this driver."
 msgstr "ใช้เมนูหรือปุ่ม \"%s\" ในการปรับแต่งตัวขับนี้"
 
@@ -5861,6 +5955,7 @@ msgid "Use this field as an alternative name"
 msgstr "ใช้เขตข้อมูลนี้สำหรับชื่ออื่น ๆ"
 
 #: u_translation.rsusingexistin
+#, object-pascal-format
 msgid "Using the existing file %s"
 msgstr "กำลังใช้แฟ้ม %s ที่มีอยู่แล้ว"
 
@@ -5973,10 +6068,12 @@ msgid "Warning! Some comet elements are outdated. Load element valid for the cur
 msgstr "คำเตือน! ข้อมูลดาวหางบางดวงล้าสมัยแล้ว ให้โหลดข้อมูลที่ถูกต้องสำหรับวันในแผนที่ปัจจุบัน"
 
 #: u_translation.rswarningthecu
+#, object-pascal-format
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
 msgstr "คำเตือน! วันที่หรือสถานที่สังเกตการณ์ของคุณถูกเปลี่ยนแปลงไปจากการตั้งค่าก่อนหน้านี้ คุณสามารถตอบว่าไม่ในตอนนี้ และคลิกปุ่ม %s เพื่อกลับไปยังวันที่/เวลา และสถานที่สังเกตการณ์ดั้งเดิม มิฉะนั้น การเปลี่ยนแปลงจะถูกใช้ คุณต้องการดำเนินการต่อหรือไม่?"
 
 #: u_translation.rswarningyouar
+#, object-pascal-format
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
 msgstr "คำเตือน!%sคุณกำลังจะทำลายฐานข้อมูล %s และเนื้อหาทั้งหมดของมัน แม้ว่าเนื้อหานี้อาจไม่เกี่ยวข้องกับโปรแกรมนี้ %sคุณแน่ใจที่จะดำเนินการต่อหรือไม่?"
 
@@ -5985,6 +6082,7 @@ msgid "Warning! you are using multiple catalogs as sources for identical objects
 msgstr "คำเตือน! คุณกำลังใช้แหล่งข้อมูลจากหลายบัญชี ซึ่งเสี่ยงต่อการแสดงวัตถุซ้ำซ้อนกัน โปรดแน่ใจว่านี่คือสิ่งที่คุณต้องการ"
 
 #: u_translation.rswarningyouha
+#, object-pascal-format
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
 msgstr "คำเตือน !%sคุณเลือกที่จะแทรกข้อมูลลงในบัญชีที่มีอยู่แล้ว%sรูปแบบของบัญชีและดัชนีต้องเหมือนกัน มิฉะนั้น บัญชีจะเกิดความเสียหาย%sเป็นความคิดที่ดีหากได้มีการสำรองแฟ้มไว้ก่อนที่จะดำเนินการต่อ%sคุณต้องการดำเนินการต่อหรือไม่?"
 
@@ -5998,7 +6096,7 @@ msgstr "ตะวันตก"
 
 #: u_translation.rswesthourangl
 msgid "West hour angle"
-msgstr ""
+msgstr "มุมชั่วโมงตะวันตก"
 
 #: u_translation.rswestside
 msgid "West side"
@@ -6070,7 +6168,7 @@ msgstr "ซูมเข้า"
 
 #: u_translation.rszoommoretovi
 msgid "Object too faint to show on the chart"
-msgstr ""
+msgstr "วัตถุมีความสว่างน้อยเกินไปที่จะแสดงในแผนที่"
 
 #: u_translation.rszoomout
 msgid "Zoom out"
