@@ -4360,15 +4360,17 @@ begin
 end;
 
 procedure Tf_main.PositionApply(Sender: TObject);
+var r,d: double;
 begin
+  f_position.GetRaDec(r,d);
   if MultiFrame1.ActiveObject is Tf_chart then
     with MultiFrame1.ActiveObject as Tf_chart do
     begin
       if f_position.LockPosition.Checked then
       begin
         sc.cfgsc.TrackName:=f_position.ra.Text+' '+f_position.de.Text;
-        sc.cfgsc.TrackRA := 15 * deg2rad * f_position.ra.Value;
-        sc.cfgsc.TrackDec := deg2rad * f_position.de.Value;
+        sc.cfgsc.TrackRA := 15 * deg2rad * r;
+        sc.cfgsc.TrackDec := deg2rad * d;
         sc.cfgsc.TrackEpoch := sc.cfgsc.JDChart;
         sc.cfgsc.FindOK := True;
         sc.cfgsc.FindSize := 0;
@@ -4402,8 +4404,8 @@ begin
         end
         else
           sc.cfgsc.TrackOn := False;
-        sc.cfgsc.racentre := 15 * deg2rad * f_position.ra.Value;
-        sc.cfgsc.decentre := deg2rad * f_position.de.Value;
+        sc.cfgsc.racentre := 15 * deg2rad * r;
+        sc.cfgsc.decentre := deg2rad * d;
         sc.cfgsc.fov := deg2rad * f_position.fov.Value;
         sc.cfgsc.theta := deg2rad * f_position.rot.Value;
       end;
