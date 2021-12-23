@@ -127,11 +127,11 @@ begin
   Equinox[1]:=jd2000;
   if cfgsc.EquinoxName = rsDate then begin
     InputEquinox.ItemIndex:=0;
-    CurrentEquinox:=cfgsc.JDChart;
+    CurrentEquinox:=Equinox[0];
   end
   else if cfgsc.EquinoxName = 'J2000' then begin
     InputEquinox.ItemIndex:=1;
-    CurrentEquinox:=jd2000;
+    CurrentEquinox:=Equinox[1];
   end
   else begin
     x:=StrToFloatDef(cfgsc.EquinoxName,-1);
