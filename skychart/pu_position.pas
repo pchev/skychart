@@ -123,7 +123,7 @@ begin
   InputEquinox.Clear;
   InputEquinox.Items.Add(rsDate);
   InputEquinox.Items.Add('J2000');
-  Equinox[0]:=cfgsc.JDChart;
+  Equinox[0]:=cfgsc.CurJDUT;
   Equinox[1]:=jd2000;
   if cfgsc.EquinoxName = rsDate then begin
     InputEquinox.ItemIndex:=0;
