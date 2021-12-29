@@ -768,6 +768,8 @@ begin
   end else
   begin
     MergeStream.Free;
+    if FParts.Count>0 then TmMergePart(FParts[0]).Free;
+    FParts.Free;
     DeleteFile(SorFileName);
     RenameFile(TempFileName, SorFileName);
   end;
