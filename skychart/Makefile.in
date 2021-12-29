@@ -76,4 +76,4 @@ revision:
 	$(LAZDIR)/tools/svn2revisioninc . revision.inc
 
 catgen:
-	$(LAZDIR)/lazbuild --os=$(OS_TARGET) --cpu=$(CPU_TARGET) --ws=$(LCL_PLATFORM) --bm=Release catgen.lpi
+	$(LAZDIR)/lazbuild --lazarusdir=$(LAZDIR) --os=$(OS_TARGET) --cpu=$(CPU_TARGET) --ws=$(LCL_PLATFORM) --bm=Release catgen.lpi
