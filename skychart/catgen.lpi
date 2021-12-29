@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="12"/>
+    <Version Value="11"/>
     <General>
-      <SessionStorage Value="InProjectDir"/>
+      <Flags>
+        <SaveClosedFiles Value="False"/>
+        <SaveJumpHistory Value="False"/>
+        <SaveFoldState Value="False"/>
+      </Flags>
+      <MainUnit Value="0"/>
       <Title Value="catgen"/>
       <Scaled Value="True"/>
       <ResourceType Value="res"/>
@@ -13,9 +18,9 @@
       </XPManifest>
       <Icon Value="0"/>
     </General>
-    <BuildModes>
-      <Item Name="Release" Default="True"/>
-      <Item Name="Debug">
+    <BuildModes Count="2" Active="Release">
+      <Item1 Name="Release" Default="True"/>
+      <Item2 Name="Debug">
         <CompilerOptions>
           <Version Value="11"/>
           <Target>
@@ -36,8 +41,12 @@
               </Win32>
             </Options>
           </Linking>
+          <Other>
+            <CustomOptions Value="if TargetOS='darwin' then
+   LinkerOptions := ' -macosx_version_min 10.10';"/>
+          </Other>
         </CompilerOptions>
-      </Item>
+      </Item2>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
@@ -45,42 +54,51 @@
     </PublishOptions>
     <RunParams>
       <FormatVersion Value="2"/>
+      <Modes Count="0"/>
     </RunParams>
-    <RequiredPackages>
-      <Item>
-        <PackageName Value="mrecsort"/>
-      </Item>
-      <Item>
+    <RequiredPackages Count="7">
+      <Item1>
         <PackageName Value="radec"/>
-      </Item>
-      <Item>
+      </Item1>
+      <Item2>
         <PackageName Value="Printer4Lazarus"/>
-      </Item>
-      <Item>
-        <PackageName Value="enhedit"/>
-      </Item>
-      <Item>
-        <PackageName Value="BGRABitmapPack_nogl"/>
-      </Item>
-      <Item>
-        <PackageName Value="cdccatalog"/>
-      </Item>
-      <Item>
+      </Item2>
+      <Item3>
+        <PackageName Value="mrecsort"/>
+      </Item3>
+      <Item4>
         <PackageName Value="LCL"/>
-      </Item>
+      </Item4>
+      <Item5>
+        <PackageName Value="enhedit"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="cdccatalog"/>
+      </Item6>
+      <Item7>
+        <PackageName Value="BGRABitmapPack_nogl"/>
+      </Item7>
     </RequiredPackages>
-    <Units>
-      <Unit>
+    <Units Count="2">
+      <Unit0>
         <Filename Value="catgen.lpr"/>
         <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="75" Y="32"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
         <Filename Value="pu_catgen.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="f_catgen"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -113,21 +131,8 @@
       </Options>
     </Linking>
     <Other>
-      <CustomOptions Value="if TargetOS=&apos;darwin&apos; then
-   LinkerOptions := &apos; -macosx_version_min 10.10&apos;;"/>
+      <CustomOptions Value="if TargetOS='darwin' then
+   LinkerOptions := ' -macosx_version_min 10.10';"/>
     </Other>
   </CompilerOptions>
-  <Debugging>
-    <Exceptions>
-      <Item>
-        <Name Value="EAbort"/>
-      </Item>
-      <Item>
-        <Name Value="ECodetoolError"/>
-      </Item>
-      <Item>
-        <Name Value="EFOpenError"/>
-      </Item>
-    </Exceptions>
-  </Debugging>
 </CONFIG>
