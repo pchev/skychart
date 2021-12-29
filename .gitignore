@@ -70,8 +70,10 @@ skychart/library/calceph/libcalceph.dll
 skychart/library/calceph/libcalceph.dylib
 skychart/cdc
 skychart/cdcicon
+skychart/catgen
 skychart/cdc.exe
 skychart/cdcicon.exe
+skychart/catgen.exe
 varobs/varobs
 varobs/varobs.exe
 varobs/varobs_lpv_bulletin
@@ -83,6 +85,8 @@ skychart*.zip
 skychart*.tar.xz
 skychart*.tar.bz2
 skychart*.dmg
+catgen*.tgz
+catgen*.zip
 bin-*.tar.bz2
 bin-*.tar.xz
 bin-*.zip

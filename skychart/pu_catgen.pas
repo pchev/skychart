@@ -31,7 +31,7 @@ uses
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs, UScaleDPI,
   StdCtrls, ExtCtrls, ComCtrls, CheckLst, EnhEdits,
   Buttons, Math, Inifiles, Grids, mwFixedRecSort, mwCompFrom,
-  LResources, EditBtn, LazHelpHTML_fix;
+  LCLProc, LResources, EditBtn, LazHelpHTML_fix;
 
 const
   l_sup = 10;
@@ -223,6 +223,7 @@ type
     ixf: file;
     ixfn: string;
     {$endif}
+    procedure LoadProject(fn: string);
     procedure SetFieldlist(field: array of string; n: integer);
     procedure BuildFieldList;
     procedure OpenCatalog(filename: string);
@@ -265,6 +266,8 @@ type
     procedure BuildFiles;
     function filegetsize(fn: string): integer;
     procedure Sortfiles;
+    procedure BuildAsync(data:PtrInt);
+    procedure BuildCat;
     procedure BuildBinCat;
     procedure BuildTxtCat;
     procedure ProgressAbort(Sender: TObject);
@@ -276,6 +279,8 @@ type
     procedure SortIXfile;
     {$endif}
   public
+    autorun: boolean;
+    autoproject,autoinput: string;
     procedure SetLang;
 
   end;
@@ -611,6 +616,9 @@ begin
   Fprogress := Tf_progress.Create(self);
   rejectopen := False;
   lockchange := False;
+  autorun := false;
+  autoproject := '';
+  autoinput := '';
   for i := 1 to l_sup do
     altname[i] := 0;
   for i := 1 to l_sup do
@@ -2788,7 +2796,7 @@ begin
   begin
     rejectopen := False;
     closefile(freject);
-    ShowMessage(Format(rsSomeRecordsW, [destdir]));
+    if not autorun then ShowMessage(Format(rsSomeRecordsW, [destdir]));
   end;
 end;
 
@@ -2798,28 +2806,12 @@ begin
   CreateTxtfiles;
 end;
 
-procedure Tf_catgen.EndbtClick(Sender: TObject);
+procedure Tf_catgen.BuildCat;
 var
   i: integer;
 begin
   try
     abort := False;
-    chdir(appdir);
-    if not DirectoryExists(OutputDirectory.Text) then
-    begin
-      ShowMessage(rsPleaseIndica3);
-      OutputDirectory.SetFocus;
-      exit;
-    end;
-    if FileIsReadOnly(OutputDirectory.Text) then
-    begin
-      ShowMessage(rsCannotWriteT + ' ' + OutputDirectory.Text);
-      OutputDirectory.SetFocus;
-      exit;
-    end;
-    if OutputAppend.Checked and (messagedlg(Format(rsWARNINGYouHa, [crlf, crlf, crlf, crlf]),
-      mtConfirmation, [mbYes, mbNo], 0) <> mrYes) then
-      exit;
     try
       destdir := slash(OutputDirectory.Text);
       panel1.Enabled := False;
@@ -2845,11 +2837,43 @@ begin
     end;
   except
     on E: Exception do
-    begin
+    if not autorun then begin
       WriteTrace('Catgen error: ' + E.Message);
       MessageDlg('Error: ' + E.Message, mtError, [mbClose], 0);
-    end;
+    end
+    else
+      debugln('Error: ' + E.Message);
   end;
+end;
+
+procedure Tf_catgen.EndbtClick(Sender: TObject);
+begin
+    chdir(appdir);
+    if not DirectoryExists(OutputDirectory.Text) then
+    begin
+      ShowMessage(rsPleaseIndica3);
+      OutputDirectory.SetFocus;
+      exit;
+    end;
+    if FileIsReadOnly(OutputDirectory.Text) then
+    begin
+      ShowMessage(rsCannotWriteT + ' ' + OutputDirectory.Text);
+      OutputDirectory.SetFocus;
+      exit;
+    end;
+    if OutputAppend.Checked and (messagedlg(Format(rsWARNINGYouHa, [crlf, crlf, crlf, crlf]),
+      mtConfirmation, [mbYes, mbNo], 0) <> mrYes) then
+      exit;
+    BuildCat;
+end;
+
+procedure Tf_catgen.BuildAsync(data:PtrInt);
+begin
+try
+  BuildCat;
+finally
+  Close;
+end;
 end;
 
 procedure Tf_catgen.NebDefaultUnitChange(Sender: TObject);
@@ -3000,21 +3024,13 @@ begin
   chdir(appdir);
 end;
 
-procedure Tf_catgen.BtnLoadClick(Sender: TObject);
+procedure Tf_catgen.LoadProject(fn: string);
 var
   ini: Tinifile;
   i, n: integer;
-  buf, fn, prjdir: string;
+  buf, prjdir: string;
   bufok: boolean;
 begin
-  chdir(appdir);
-  opendialog1.filterindex := 2;
-  opendialog1.DefaultExt := '.prj';
-  OpenDialog1.Options := OpenDialog1.Options - [ofAllowMultiSelect];
-  opendialog1.filename := '';
-  if opendialog1.Execute then
-  begin
-    fn := SafeUTF8ToSys(OpenDialog1.filename);
     prjdir := ExtractFilePath(fn);
     ini := Tinifile.Create(fn);
     OutputType.ItemIndex := ini.ReadInteger('Page1', 'binarycat', 0);
@@ -3111,6 +3127,18 @@ begin
     Color10.Brush.Color := ini.readInteger('Page7', 'color10', Color10.Brush.Color);
     ini.Free;
   end;
+
+procedure Tf_catgen.BtnLoadClick(Sender: TObject);
+begin
+  chdir(appdir);
+  opendialog1.filterindex := 2;
+  opendialog1.DefaultExt := '.prj';
+  OpenDialog1.Options := OpenDialog1.Options - [ofAllowMultiSelect];
+  opendialog1.filename := '';
+  if opendialog1.Execute then
+  begin
+    LoadProject(OpenDialog1.filename);
+  end;
   chdir(appdir);
 end;
 
@@ -3136,6 +3164,26 @@ begin
   exitbt.Visible := True;
   endbt.Visible := False;
   endbt.Enabled := False;
+  if autorun then begin
+    if FileExists(autoproject) then begin
+      LoadProject(autoproject);
+      if autoinput<>'' then begin
+        if FileExists(autoinput) then begin
+          InputFiles.Items.Clear;
+          InputFiles.Items.Add(autoinput);
+        end
+        else begin
+          debugln('File not found: '+autoinput);
+          Halt(1);
+        end;
+      end;
+      Application.QueueAsyncCall(@BuildAsync,0);
+    end
+    else begin
+      debugln('File not found: '+autoproject);
+      Halt(1);
+    end;
+  end;
 end;
 
 procedure Tf_catgen.PageControl1Change(Sender: TObject);

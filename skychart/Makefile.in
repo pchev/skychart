@@ -25,7 +25,8 @@ files=$(wildcard $(COMPILER_UNITTARGETDIR)/*$(OEXT)) \
       $(wildcard $(COMPILER_UNITTARGETDIR)/*$(PPUEXT)) \
       $(wildcard $(COMPILER_UNITTARGETDIR)/*$(RSTEXT)) \
       $(wildcard $(COMPILER_UNITTARGETDIR)/*.compiled) \
-      $(wildcard *$(OEXT)) $(wildcard *$(PPUEXT)) $(wildcard *$(RSTEXT))
+      $(wildcard *$(OEXT)) $(wildcard *$(PPUEXT)) $(wildcard *$(RSTEXT)) \
+      catgen 
 
 [prerules]
 LAZDIR=%LAZDIR%
@@ -74,3 +75,5 @@ all: outdir component_all library_all cdc$(EXEEXT) cdcicon$(EXEEXT)
 revision:
 	$(LAZDIR)/tools/svn2revisioninc . revision.inc
 
+catgen:
+	$(LAZDIR)/lazbuild --os=$(OS_TARGET) --cpu=$(CPU_TARGET) --ws=$(LCL_PLATFORM) --bm=Release catgen.lpi
