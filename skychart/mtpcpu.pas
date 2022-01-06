@@ -77,7 +77,7 @@ begin
   mib[0] := CTL_HW;
   mib[1] := HW_NCPU;
   len := sizeof(t);
-  {$IF defined(CPU64) and defined(darwin)}
+  {$IF defined(CPU64)}
   fpsysctl(@mib, 2, @t, @len, Nil, 0);
   {$ELSE}
   fpsysctl(pchar(@mib), 2, @t, @len, Nil, 0);
