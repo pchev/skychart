@@ -1306,9 +1306,14 @@ begin
       item:=SPKListView.Items.Add;
       item.Caption:=fs.name;
       ListContent(slash(SPKdir)+fs.name,target,ft,lt);
-      item.SubItems.Add(target);
-      item.SubItems.Add(jddate(ft));
-      item.SubItems.Add(jddate(lt));
+      if lt>0 then begin
+        item.SubItems.Add(target);
+        item.SubItems.Add(jddate(ft));
+        item.SubItems.Add(jddate(lt));
+      end
+      else begin
+        item.SubItems.Add(LastError);
+      end;
       if csc.SPKlist.IndexOf(fs.Name)>=0 then begin
         item.Checked:=true;
       end;
