@@ -36,6 +36,8 @@ type
   { Tf_config_solsys }
 
   Tf_config_solsys = class(TFrame)
+    BtnSaveAst: TButton;
+    BtnLoadAst: TButton;
     ButtonCancel: TButton;
     ButtonDownloadSpk: TButton;
     ButtonReturn: TButton;
@@ -46,6 +48,12 @@ type
     ButtonEphDown: TButton;
     CheckAllSPK: TCheckBox;
     astappend: TCheckBox;
+    Label11: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
     PlanetBox31: TCheckBox;
     DateEdit1: TDateEdit;
     LabelTitle: TLabel;
@@ -61,6 +69,7 @@ type
     Panel7: TPanel;
     Panel8: TPanel;
     Panel9: TPanel;
+    SaveDialog1: TSaveDialog;
     SPKRefreshAll: TMenuItem;
     SPKDeleteExpired: TMenuItem;
     SPKrefresh: TMenuItem;
@@ -244,6 +253,8 @@ type
     PageControl1: TPageControl;
     procedure AstNeoClick(Sender: TObject);
     procedure AstPageControl2Changing(Sender: TObject; var AllowChange: boolean);
+    procedure BtnSaveAstClick(Sender: TObject);
+    procedure BtnLoadAstClick(Sender: TObject);
     procedure ButtonCancelClick(Sender: TObject);
     procedure ButtonDownloadSpkClick(Sender: TObject);
     procedure ButtonReturnClick(Sender: TObject);
@@ -1234,6 +1245,81 @@ begin
   except
     screen.cursor := crDefault;
   end;
+end;
+
+procedure Tf_config_solsys.BtnSaveAstClick(Sender: TObject);
+var f: textfile;
+    fn,buf,s:string;
+    y,m,d: integer;
+    h:double;
+begin
+  if not SaveDialog1.Execute then exit;
+  fn:=SaveDialog1.FileName;
+  AssignFile(f,fn);
+  Rewrite(f);
+  WriteLn(f,'MPCORB format file for '+trim(astnam.Text));
+  writeln(f,'-----------------------------------------------');
+  buf:=copy(trim(astid.Text)+blank15,1,7)+blank;
+  buf:=buf+FormatFloat('00.00',StrToFloat(trim(asth.Text)))+blank;
+  buf:=buf+FormatFloat('00.00',StrToFloat(trim(astg.Text)))+blank;
+  djd(StrToFloat(trim(astep.Text)),y,m,d,h);
+  encode_mpc_date(y,m,d,0,s);
+  buf:=buf+copy(s+blank15,1,5)+blank;
+  buf:=buf+FormatFloat('000.00000',StrToFloat(trim(astma.Text)))+blank+blank;
+  buf:=buf+FormatFloat('000.00000',StrToFloat(trim(astperi.Text)))+blank+blank;
+  buf:=buf+FormatFloat('000.00000',StrToFloat(trim(astnode.Text)))+blank+blank;
+  buf:=buf+FormatFloat('000.00000',StrToFloat(trim(asti.Text)))+blank+blank;
+  buf:=buf+FormatFloat('0.0000000',StrToFloat(trim(astec.Text)))+blank;
+  buf:=buf+FormatFloat('00.00000000',0.0)+blank; // mean daily motion, not used
+  buf:=buf+FormatFloat('000.0000000',StrToFloat(trim(astax.Text)))+blank+blank;
+  buf:=buf+'0'+blank; // uncertainty
+  buf:=buf+copy(trim(astref.Text)+blank15,1,9)+blank;
+  buf:=buf+'    0'+blank; // nb obs
+  buf:=buf+'  0'+blank;   // np opp
+  buf:=buf+'         '+blank; // arc
+  buf:=buf+FormatFloat('0.00',0.0)+blank; // rms
+  buf:=buf+'   '+blank+'   '+blank; // perturber
+  buf:=buf+'          '+blank; // computer
+  buf:=buf+'0000'+blank; // flag
+  buf:=buf+copy(trim(astnam.Text)+blank15+blank15,1,28);
+  buf:=buf+'00000000'; // last obs
+  writeln(f,buf);
+  CloseFile(f);
+end;
+
+procedure Tf_config_solsys.BtnLoadAstClick(Sender: TObject);
+var f: textfile;
+    fn,buf,s:string;
+    y,m,d,nl: integer;
+    h:double;
+begin
+  if not OpenDialog1.Execute then exit;
+  fn:=OpenDialog1.FileName;
+  AssignFile(f,fn);
+  Reset(f);
+  nl:=0;
+  repeat
+    readln(f, buf);
+    Inc(nl);
+  until EOF(f) or (copy(buf, 1, 5) = '-----');
+  if EOF(f) then reset(f);
+  readln(f,buf);
+  CloseFile(f);
+  astid.Text:=trim(copy(buf,1,7));
+  asth.Text:=trim(copy(buf,9,5));
+  astg.Text:=trim(copy(buf,15,5));
+  s:=trim(copy(buf,21,5));
+  decode_mpc_date(s,y,m,d,h);
+  astep.Text:=FormatFloat('0.0',jd(y,m,d,h));
+  astma.Text:=trim(copy(buf,27,9));
+  astperi.Text:=trim(copy(buf,38,9));
+  astnode.Text:=trim(copy(buf,49,9));
+  asti.Text:=trim(copy(buf,60,9));
+  astec.Text:=trim(copy(buf,71,9));
+  astax.Text:=trim(copy(buf,93,11));
+  astref.Text:=trim(copy(buf,108,9));
+  astnam.Text:=trim(copy(buf,167,28));
+  asteq.Text:='2000';
 end;
 
 procedure Tf_config_solsys.AddastClick(Sender: TObject);

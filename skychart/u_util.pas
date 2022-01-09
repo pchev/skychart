@@ -117,6 +117,7 @@ function ExecProcess(cmd: string; output: TStringList;
 function Exec(cmd: string; hide: boolean = True): integer;
 procedure ExecNoWait(cmd: string; title: string = ''; hide: boolean = True);
 function decode_mpc_date(s: string; var y, m, d: integer; var hh: double): boolean;
+function encode_mpc_date(y, m, d: integer; hh: double; var s: string): boolean;
 function GreekLetter(gr: shortstring): shortstring;
 function GetId(str: string): integer;
 procedure GetPrinterResolution(var Name: string; var resol: integer);
@@ -2778,6 +2779,36 @@ begin
       hh := strtofloat(trim(s))
     else
       hh := 0;
+
+    Result := True;
+
+  except
+    Result := False;
+  end;
+
+end;
+
+function encode_mpc_date(y, m, d: integer; hh: double; var s: string): boolean;
+var
+  buf: string;
+  c: char;
+begin
+
+  result:=false;
+  try
+    buf:=inttostr(y);
+    if copy(buf,1,2)='18' then s:='I'+copy(buf,3,2)
+    else if copy(buf,1,2)='19' then s:='J'+copy(buf,3,2)
+    else if copy(buf,1,2)='20' then s:='K'+copy(buf,3,2)
+    else exit;
+
+    if m<9 then s:=s+inttostr(m)
+           else s:=s+chr(55+m);
+
+    if d<9 then s:=s+inttostr(d)
+           else s:=s+chr(55+d);
+
+    if hh<>0 then s:=s+inttostr(trunc(frac(hh/24)*1000000));
 
     Result := True;
 
