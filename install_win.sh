@@ -18,8 +18,8 @@ install -m 755 -d $destdir
 if [ $OS_TARGET = win32 ]; then 
   strip -v -o $destdir/skychart.exe skychart/cdc.exe 
   strip -v -o $destdir/cdcicon.exe skychart/cdcicon.exe
+  strip -v -o $destdir/catgen.exe skychart/catgen.exe
   strip -v -o $destdir/varobs.exe varobs/varobs.exe
-  strip -v -o $destdir/varobs_lpv_bulletin.exe varobs/varobs_lpv_bulletin.exe
   strip -v -o $destdir/libplan404.dll skychart/library/plan404/libplan404.dll
   strip -v -o $destdir/libcdcwcs.dll skychart/library/wcs/libcdcwcs.dll
   strip -v -o $destdir/libgetdss.dll skychart/library/getdss/libgetdss.dll
@@ -35,8 +35,8 @@ fi
 if [ $OS_TARGET = win64 ]; then
   strip -v -o $destdir/skychart.exe skychart/cdc.exe
   strip -v -o $destdir/cdcicon.exe skychart/cdcicon.exe
+  strip -v -o $destdir/catgen.exe skychart/catgen.exe
   strip -v -o $destdir/varobs.exe varobs/varobs.exe
-  strip -v -o $destdir/varobs_lpv_bulletin.exe varobs/varobs_lpv_bulletin.exe
   strip -v -o $destdir/libplan404.dll skychart/library/plan404/libplan404.dll
   strip -v -o $destdir/libcdcwcs.dll skychart/library/wcs/libcdcwcs.dll
   strip -v -o $destdir/libgetdss.dll skychart/library/getdss/libgetdss.dll

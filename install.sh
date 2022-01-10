@@ -33,8 +33,8 @@ install -m 755 -d $destdir/share/icons/hicolor/scalable/apps
 
 install -v -m 755 -s skychart/cdc  $destdir/bin/skychart
 install -v -m 755 -s skychart/cdcicon  $destdir/bin/cdcicon
+install -v -m 755 -s skychart/catgen  $destdir/bin/catgen
 install -v -m 755 -s varobs/varobs  $destdir/bin/varobs
-install -v -m 755 -s varobs/varobs_lpv_bulletin  $destdir/bin/varobs_lpv_bulletin
 install -v -m 644 system_integration/Linux/share/applications/net.ap_i.skychart.desktop $destdir/share/applications/net.ap_i.skychart.desktop
 install -v -m 644 system_integration/Linux/share/metainfo/net.ap_i.skychart.metainfo.xml $destdir/share/metainfo/net.ap_i.skychart.metainfo.xml
 install -v -m 644 system_integration/Linux/share/mime/packages/net.ap_i.skychart.xml $destdir/share/mime/packages/net.ap_i.skychart.xml

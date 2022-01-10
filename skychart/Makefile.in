@@ -8,7 +8,7 @@ version=3
 
 [target]
 dirs=component library
-programs=cdc cdcicon
+programs=cdc cdcicon catgen
 
 [require]
 libc=y
@@ -26,7 +26,6 @@ files=$(wildcard $(COMPILER_UNITTARGETDIR)/*$(OEXT)) \
       $(wildcard $(COMPILER_UNITTARGETDIR)/*$(RSTEXT)) \
       $(wildcard $(COMPILER_UNITTARGETDIR)/*.compiled) \
       $(wildcard *$(OEXT)) $(wildcard *$(PPUEXT)) $(wildcard *$(RSTEXT)) \
-      catgen 
 
 [prerules]
 LAZDIR=%LAZDIR%
@@ -70,10 +69,8 @@ export LCL_PLATFORM
 outdir:
 	mkdir -p units/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
 
-all: outdir component_all library_all cdc$(EXEEXT) cdcicon$(EXEEXT)
+all: outdir component_all library_all cdc$(EXEEXT) cdcicon$(EXEEXT) catgen$(EXEEXT)
 
 revision:
 	$(LAZDIR)/tools/svn2revisioninc . revision.inc
 
-catgen:
-	$(LAZDIR)/lazbuild --lazarusdir=$(LAZDIR) --os=$(OS_TARGET) --cpu=$(CPU_TARGET) --ws=$(LCL_PLATFORM) --bm=Release catgen.lpi

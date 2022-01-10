@@ -7,7 +7,7 @@ name=varobs
 version=3
 
 [target]
-programs=varobs varobs_lpv_bulletin
+programs=varobs
 
 [require]
 packages=rtl
@@ -67,6 +67,6 @@ export LCL_PLATFORM
 outdir:
 	mkdir -p units/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
 
-all: outdir varobs$(EXEEXT) varobs_lpv_bulletin$(EXEEXT)
+all: outdir varobs$(EXEEXT)
 
 
