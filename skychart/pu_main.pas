@@ -2930,6 +2930,7 @@ end;
 procedure Tf_main.FormClose(Sender: TObject; var Action: TCloseAction);
 var
   i, h, w, mresult: integer;
+  buf: string;
   f1: TForm;
   l1: TLabel;
   c1: Tcheckbox;
@@ -2941,7 +2942,9 @@ begin
     Action := caMinimize;
     SaveState := WindowState;
     RestoreState := True;
-    writetrace('Client still connected, minimize instead of close.');
+    buf:='Client application still connected, minimize instead of closing.';
+    SetLPanel1(buf);
+    writetrace(buf);
   end
   else
   begin
