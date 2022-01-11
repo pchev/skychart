@@ -2942,8 +2942,8 @@ begin
     Action := caMinimize;
     SaveState := WindowState;
     RestoreState := True;
-    buf:='Client application still connected, minimize instead of closing.';
-    SetLPanel1(buf);
+    buf:='Client application is still connected, minimize instead of closing.';
+    SetLPanel1(buf+crlf+'If it is no longer used, you can close the session from the menu View / Server information.');
     writetrace(buf);
   end
   else
