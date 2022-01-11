@@ -52,7 +52,7 @@ object f_edittoolbar: Tf_edittoolbar
     object ButtonStd: TButton
       Left = 186
       Height = 25
-      Top = 8
+      Top = 4
       Width = 75
       Caption = 'Standard'
       OnClick = ButtonStdClick
