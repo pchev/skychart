@@ -575,18 +575,18 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 0
           object comsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 517
+            ClientHeight = 490
             ClientWidth = 485
             ImageIndex = 3
             ParentFont = False
             object GroupBox13: TGroupBox
               Left = 0
-              Height = 517
+              Height = 490
               Top = 0
               Width = 485
               Align = alClient
               Caption = 'Chart Setting'
-              ClientHeight = 515
+              ClientHeight = 470
               ClientWidth = 483
               ParentFont = False
               TabOrder = 0
@@ -655,7 +655,7 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 70
+                ClientHeight = 88
                 ClientWidth = 395
                 Color = clBtnFace
                 ItemIndex = 1
@@ -686,13 +686,13 @@ object f_config_solsys: Tf_config_solsys
           end
           object comload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 517
+            ClientHeight = 490
             ClientWidth = 485
             ImageIndex = 1
             ParentFont = False
             object MemoCom: TMemo
               Left = 0
-              Height = 378
+              Height = 351
               Top = 139
               Width = 485
               Align = alClient
@@ -780,8 +780,8 @@ object f_config_solsys: Tf_config_solsys
               Top = 105
               Width = 485
               Align = alTop
-              ClientHeight = 30
-              ClientWidth = 481
+              ClientHeight = 34
+              ClientWidth = 485
               TabOrder = 2
               object Label232: TLabel
                 Left = 20
@@ -795,7 +795,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object comdelete: TTabSheet
             Caption = 'Data Maintenance'
-            ClientHeight = 517
+            ClientHeight = 490
             ClientWidth = 485
             ImageIndex = 3
             ParentFont = False
@@ -866,7 +866,7 @@ object f_config_solsys: Tf_config_solsys
             end
             object DelComMemo: TMemo
               Left = 0
-              Height = 339
+              Height = 312
               Top = 178
               Width = 485
               Align = alClient
@@ -881,8 +881,8 @@ object f_config_solsys: Tf_config_solsys
               Top = 144
               Width = 485
               Align = alTop
-              ClientHeight = 30
-              ClientWidth = 481
+              ClientHeight = 34
+              ClientWidth = 485
               TabOrder = 3
               object Label238: TLabel
                 Left = 20
@@ -896,7 +896,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object Addsinglecom: TTabSheet
             Caption = 'Add'
-            ClientHeight = 517
+            ClientHeight = 490
             ClientWidth = 485
             ImageIndex = 4
             ParentFont = False
@@ -909,182 +909,201 @@ object f_config_solsys: Tf_config_solsys
               ParentFont = False
             end
             object Label242: TLabel
+              AnchorSideTop.Control = comid
+              AnchorSideTop.Side = asrCenter
               Left = 10
               Height = 19
-              Top = 40
+              Top = 46
               Width = 74
               Caption = 'Designation'
               ParentFont = False
             end
             object Label243: TLabel
+              AnchorSideTop.Control = comh
+              AnchorSideTop.Side = asrCenter
               Left = 10
               Height = 19
-              Top = 364
+              Top = 393
               Width = 136
               Caption = 'H absolute magnitude'
               ParentFont = False
             end
             object Label244: TLabel
+              AnchorSideTop.Control = comg
+              AnchorSideTop.Side = asrCenter
               Left = 10
               Height = 19
-              Top = 396
+              Top = 425
               Width = 115
               Caption = 'G slope parameter'
               ParentFont = False
             end
             object Label245: TLabel
+              AnchorSideTop.Control = comep
+              AnchorSideTop.Side = asrCenter
               Left = 10
               Height = 19
-              Top = 299
+              Top = 328
               Width = 63
               Caption = 'Epoch (JD)'
               ParentFont = False
             end
             object Label246: TLabel
+              AnchorSideTop.Control = comt_jd
+              AnchorSideTop.Side = asrCenter
               Left = 10
               Height = 19
-              Top = 105
+              Top = 130
               Width = 94
               Caption = 'Perihelion date'
               ParentFont = False
             end
             object Label247: TLabel
+              AnchorSideTop.Control = comperi
+              AnchorSideTop.Side = asrCenter
               Left = 10
               Height = 19
-              Top = 202
+              Top = 231
               Width = 145
               Caption = 'Argument of perihelion'
               ParentFont = False
             end
             object Label248: TLabel
+              AnchorSideTop.Control = comnode
+              AnchorSideTop.Side = asrCenter
               Left = 10
               Height = 19
-              Top = 234
+              Top = 263
               Width = 165
               Caption = 'Longitude ascending Node'
               ParentFont = False
             end
             object Label249: TLabel
+              AnchorSideTop.Control = comi
+              AnchorSideTop.Side = asrCenter
               Left = 10
               Height = 19
-              Top = 267
+              Top = 296
               Width = 64
               Caption = 'Inclination'
               ParentFont = False
             end
             object Label250: TLabel
+              AnchorSideTop.Control = comec
+              AnchorSideTop.Side = asrCenter
               Left = 10
               Height = 19
-              Top = 170
+              Top = 199
               Width = 70
               Caption = 'Eccentricity'
               ParentFont = False
             end
             object Label251: TLabel
+              AnchorSideTop.Control = comq
+              AnchorSideTop.Side = asrCenter
               Left = 10
               Height = 19
-              Top = 137
+              Top = 166
               Width = 117
               Caption = 'Perihelion distance'
               ParentFont = False
             end
             object Label253: TLabel
+              AnchorSideTop.Control = comeq
+              AnchorSideTop.Side = asrCenter
               Left = 10
               Height = 19
-              Top = 331
+              Top = 360
               Width = 49
               Caption = 'Equinox'
               ParentFont = False
             end
             object Label254: TLabel
+              AnchorSideTop.Control = comnam
+              AnchorSideTop.Side = asrCenter
               Left = 10
               Height = 19
-              Top = 73
+              Top = 79
               Width = 37
               Caption = 'Name'
               ParentFont = False
             end
             object comid: TEdit
-              Left = 212
+              Left = 200
               Height = 30
               Top = 40
-              Width = 101
+              Width = 170
               ParentFont = False
               TabOrder = 0
             end
             object comh: TEdit
-              Left = 212
+              Left = 200
               Height = 30
-              Top = 364
-              Width = 101
+              Top = 387
+              Width = 170
               ParentFont = False
               TabOrder = 12
-              Text = '5'
+              Text = '10'
             end
             object comg: TEdit
-              Left = 212
+              Left = 200
               Height = 30
-              Top = 396
-              Width = 101
+              Top = 419
+              Width = 170
               ParentFont = False
               TabOrder = 13
-              Text = '11'
+              Text = '4'
             end
             object comep: TEdit
-              Left = 212
+              Left = 200
               Height = 30
-              Top = 299
-              Width = 101
+              Top = 322
+              Width = 170
               ParentFont = False
               TabOrder = 10
             end
             object comperi: TEdit
-              Left = 212
+              Left = 200
               Height = 30
-              Top = 202
-              Width = 101
+              Top = 225
+              Width = 170
               ParentFont = False
               TabOrder = 7
-              Text = '0.0'
             end
             object comnode: TEdit
-              Left = 212
+              Left = 200
               Height = 30
-              Top = 234
-              Width = 101
+              Top = 257
+              Width = 170
               ParentFont = False
               TabOrder = 8
-              Text = '0.0'
             end
             object comi: TEdit
-              Left = 212
+              Left = 200
               Height = 30
-              Top = 267
-              Width = 101
+              Top = 290
+              Width = 170
               ParentFont = False
               TabOrder = 9
-              Text = '0.0'
             end
             object comec: TEdit
-              Left = 212
+              Left = 200
               Height = 30
-              Top = 170
-              Width = 101
+              Top = 193
+              Width = 170
               ParentFont = False
               TabOrder = 6
-              Text = '0.0'
             end
             object comq: TEdit
-              Left = 212
+              Left = 200
               Height = 30
-              Top = 137
-              Width = 101
+              Top = 160
+              Width = 170
               ParentFont = False
               TabOrder = 5
-              Text = '2'
             end
             object comnam: TEdit
-              Left = 212
+              Left = 200
               Height = 30
               Top = 73
               Width = 260
@@ -1092,19 +1111,21 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 1
             end
             object comeq: TEdit
-              Left = 212
+              Left = 200
               Height = 30
-              Top = 331
-              Width = 101
+              Top = 354
+              Width = 170
               ParentFont = False
               TabOrder = 11
               Text = '2000'
             end
             object AddCom: TButton
-              Left = 396
+              AnchorSideTop.Control = comeq
+              AnchorSideTop.Side = asrCenter
+              Left = 397
               Height = 25
-              Top = 435
-              Width = 76
+              Top = 357
+              Width = 75
               BorderSpacing.InnerBorder = 4
               Caption = 'Add'
               OnClick = AddComClick
@@ -1112,28 +1133,140 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 14
             end
             object comt_y: TEdit
-              Left = 212
+              AnchorSideTop.Control = comt_jd
+              AnchorSideTop.Side = asrCenter
+              Left = 200
               Height = 30
-              Top = 105
+              Top = 124
               Width = 43
+              OnChange = ComDateChange
               ParentFont = False
               TabOrder = 2
             end
             object comt_m: TEdit
-              Left = 262
+              AnchorSideTop.Control = comt_jd
+              AnchorSideTop.Side = asrCenter
+              Left = 248
               Height = 30
-              Top = 105
+              Top = 124
               Width = 27
+              OnChange = ComDateChange
               ParentFont = False
               TabOrder = 3
             end
             object comt_d: TEdit
-              Left = 295
+              AnchorSideTop.Control = comt_jd
+              AnchorSideTop.Side = asrCenter
+              Left = 280
               Height = 30
-              Top = 105
+              Top = 124
               Width = 58
+              OnChange = ComDateChange
               ParentFont = False
               TabOrder = 4
+            end
+            object Label18: TLabel
+              Left = 200
+              Height = 19
+              Top = 104
+              Width = 28
+              Caption = 'year'
+            end
+            object Label19: TLabel
+              Left = 240
+              Height = 19
+              Top = 104
+              Width = 41
+              Caption = 'month'
+            end
+            object Label20: TLabel
+              Left = 289
+              Height = 19
+              Top = 104
+              Width = 22
+              Caption = 'day'
+            end
+            object Label21: TLabel
+              Left = 344
+              Height = 19
+              Top = 104
+              Width = 14
+              Caption = 'JD'
+            end
+            object comt_jd: TEdit
+              Left = 344
+              Height = 30
+              Top = 124
+              Width = 116
+              OnChange = ComJdChange
+              TabOrder = 15
+            end
+            object Label22: TLabel
+              AnchorSideTop.Control = comq
+              AnchorSideTop.Side = asrCenter
+              Left = 379
+              Height = 19
+              Top = 166
+              Width = 18
+              Caption = 'QR'
+            end
+            object Label23: TLabel
+              AnchorSideTop.Control = comec
+              AnchorSideTop.Side = asrCenter
+              Left = 379
+              Height = 19
+              Top = 199
+              Width = 15
+              Caption = 'EC'
+            end
+            object Label24: TLabel
+              AnchorSideTop.Control = comperi
+              AnchorSideTop.Side = asrCenter
+              Left = 379
+              Height = 19
+              Top = 231
+              Width = 12
+              Caption = 'W'
+            end
+            object Label25: TLabel
+              AnchorSideTop.Control = comnode
+              AnchorSideTop.Side = asrCenter
+              Left = 379
+              Height = 19
+              Top = 263
+              Width = 22
+              Caption = 'OM'
+            end
+            object Label26: TLabel
+              AnchorSideTop.Control = comi
+              AnchorSideTop.Side = asrCenter
+              Left = 379
+              Height = 19
+              Top = 296
+              Width = 15
+              Caption = 'IN'
+            end
+            object BtnLoadCom: TButton
+              AnchorSideTop.Control = comg
+              AnchorSideTop.Side = asrCenter
+              Left = 397
+              Height = 25
+              Top = 422
+              Width = 75
+              Caption = 'Load'
+              OnClick = BtnLoadComClick
+              TabOrder = 16
+            end
+            object BtnSaveCom: TButton
+              AnchorSideTop.Control = comh
+              AnchorSideTop.Side = asrCenter
+              Left = 397
+              Height = 25
+              Top = 390
+              Width = 75
+              Caption = 'Save'
+              OnClick = BtnSaveComClick
+              TabOrder = 17
             end
           end
         end
@@ -1155,7 +1288,7 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 0
           object astsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 490
+            ClientHeight = 517
             ClientWidth = 485
             ImageIndex = 3
             ParentFont = False
@@ -1166,7 +1299,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 485
               Align = alTop
               Caption = 'Chart Setting'
-              ClientHeight = 314
+              ClientHeight = 332
               ClientWidth = 483
               ParentFont = False
               TabOrder = 0
@@ -1235,7 +1368,7 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 88
+                ClientHeight = 70
                 ClientWidth = 395
                 Color = clBtnFace
                 ItemIndex = 1
@@ -1275,7 +1408,7 @@ object f_config_solsys: Tf_config_solsys
             end
             object LabelAstInfo1: TLabel
               Left = 0
-              Height = 135
+              Height = 162
               Top = 355
               Width = 485
               Align = alClient
@@ -1295,13 +1428,13 @@ object f_config_solsys: Tf_config_solsys
           end
           object astload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 490
+            ClientHeight = 517
             ClientWidth = 485
             ImageIndex = 1
             ParentFont = False
             object MemoMPC: TMemo
               Left = 0
-              Height = 262
+              Height = 289
               Top = 228
               Width = 485
               Align = alClient
@@ -1317,7 +1450,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 485
               Align = alTop
               Caption = 'Options'
-              ClientHeight = 77
+              ClientHeight = 95
               ClientWidth = 483
               ParentFont = False
               TabOrder = 1
@@ -1385,7 +1518,7 @@ object f_config_solsys: Tf_config_solsys
               OnChanging = AstPageControl2Changing
               object TabSheet3: TTabSheet
                 Caption = 'Load MPC format file'
-                ClientHeight = 66
+                ClientHeight = 63
                 ClientWidth = 475
                 ParentFont = False
                 object Label1: TLabel
@@ -1412,7 +1545,7 @@ object f_config_solsys: Tf_config_solsys
               end
               object TabSheet4: TTabSheet
                 Caption = 'Or use a local file :'
-                ClientHeight = 66
+                ClientHeight = 63
                 ClientWidth = 475
                 ParentFont = False
                 object mpcfile: TFileNameEdit
@@ -1474,7 +1607,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object astprepare: TTabSheet
             Caption = 'Prepare Monthly Data'
-            ClientHeight = 490
+            ClientHeight = 517
             ClientWidth = 485
             ImageIndex = 2
             ParentFont = False
@@ -1564,7 +1697,7 @@ object f_config_solsys: Tf_config_solsys
             end
             object prepastmemo: TMemo
               Left = 0
-              Height = 353
+              Height = 380
               Top = 137
               Width = 485
               Align = alClient
@@ -1600,7 +1733,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object AddsingleAst: TTabSheet
             Caption = 'Add'
-            ClientHeight = 490
+            ClientHeight = 517
             ClientWidth = 485
             ImageIndex = 4
             ParentFont = False

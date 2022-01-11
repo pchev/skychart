@@ -38,6 +38,8 @@ type
   Tf_config_solsys = class(TFrame)
     BtnSaveAst: TButton;
     BtnLoadAst: TButton;
+    BtnLoadCom: TButton;
+    BtnSaveCom: TButton;
     ButtonCancel: TButton;
     ButtonDownloadSpk: TButton;
     ButtonReturn: TButton;
@@ -48,12 +50,22 @@ type
     ButtonEphDown: TButton;
     CheckAllSPK: TCheckBox;
     astappend: TCheckBox;
+    comt_jd: TEdit;
     Label11: TLabel;
     Label13: TLabel;
     Label14: TLabel;
     Label15: TLabel;
     Label16: TLabel;
     Label17: TLabel;
+    Label18: TLabel;
+    Label19: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
     PlanetBox31: TCheckBox;
     DateEdit1: TDateEdit;
     LabelTitle: TLabel;
@@ -253,8 +265,10 @@ type
     PageControl1: TPageControl;
     procedure AstNeoClick(Sender: TObject);
     procedure AstPageControl2Changing(Sender: TObject; var AllowChange: boolean);
+    procedure BtnLoadComClick(Sender: TObject);
     procedure BtnSaveAstClick(Sender: TObject);
     procedure BtnLoadAstClick(Sender: TObject);
+    procedure BtnSaveComClick(Sender: TObject);
     procedure ButtonCancelClick(Sender: TObject);
     procedure ButtonDownloadSpkClick(Sender: TObject);
     procedure ButtonReturnClick(Sender: TObject);
@@ -267,6 +281,8 @@ type
     procedure CheckBoxPlutoChange(Sender: TObject);
     procedure ComboBox1Select(Sender: TObject);
     procedure ComboBox2Select(Sender: TObject);
+    procedure ComDateChange(Sender: TObject);
+    procedure ComJdChange(Sender: TObject);
     procedure ComPageControl1Changing(Sender: TObject; var AllowChange: boolean);
     procedure DownloadAsteroidClick(Sender: TObject);
     procedure DownloadCometClick(Sender: TObject);
@@ -311,7 +327,7 @@ type
     { Private declarations }
     FPrepareAsteroid: TPrepareAsteroid;
     FApplyConfig: TNotifyEvent;
-    LockChange: boolean;
+    LockChange,LockComt: boolean;
     FConfirmDownload: boolean;
     FDisableAsteroid: TNotifyEvent;
     FEnableAsteroid: TNotifyEvent;
@@ -427,6 +443,10 @@ begin
   Label239.Caption := rsQuicklyDelet;
   DelComAll.Caption := rsDelete;
   Addsinglecom.Caption := rsAdd;
+  Label18.Caption:=rsYear;
+  Label19.Caption:=rsMonth;
+  Label20.Caption:=rsDay;
+  Label21.Caption:=rsJD2;
   Label241.Caption := rsAddASingleEl;
   Label242.Caption := rsDesignation;
   Label243.Caption := rsHAbsoluteMag;
@@ -441,6 +461,8 @@ begin
   Label253.Caption := rsEquinox2;
   Label254.Caption := rsName;
   AddCom.Caption := rsAdd;
+  BtnSaveCom.Caption:=rsSave;
+  BtnLoadCom.Caption:=rsLoad;
   astsetting.Caption := rsGeneralSetti;
   GroupBox9.Caption := rsChartSetting;
   Label203.Caption := rsButNeverFain;
@@ -484,6 +506,8 @@ begin
   Label229.Caption := rsEquinox2;
   Label230.Caption := rsName;
   Addast.Caption := rsAdd;
+  BtnSaveAst.Caption:=rsSave;
+  BtnLoadAst.Caption:=rsLoad;
   comsymbol.Items[0] := rsDisplayAsASy;
   comsymbol.Items[1] := rsProportional;
   astsymbol.Items[0] := rsDisplayAsASy;
@@ -543,6 +567,7 @@ begin
   FConfirmDownload := True;
   SetLang;
   LockChange := True;
+  LockComt := False;
   ComboBox1.Clear;
   for i := 1 to URL_SUN_NUMBER do
     ComboBox1.Items.Add(URL_SUN_NAME[i]);
@@ -1153,6 +1178,67 @@ begin
   UpdComList;
 end;
 
+procedure Tf_config_solsys.BtnSaveComClick(Sender: TObject);
+var f: textfile;
+    fn,buf,s:string;
+    y,m,d: integer;
+    h,jdt:double;
+begin
+  if not SaveDialog1.Execute then exit;
+  fn:=SaveDialog1.FileName;
+  AssignFile(f,fn);
+  Rewrite(f);
+  buf:=copy(trim(comid.Text)+blank15,1,12)+blank+blank;
+  buf:=buf+copy(trim(comt_y.Text)+blank15,1,4)+blank;
+  buf:=buf+PadZeros(trim(comt_m.Text),2)+blank;
+  buf:=buf+PadZeros(trim(comt_d.Text),7)+blank;
+  buf:=buf+FormatFloat('00.000000',StrToFloat(trim(comq.Text)))+blank+blank;
+
+  buf:=buf+FormatFloat('0.000000',StrToFloat(trim(comec.Text)))+blank+blank;
+  buf:=buf+FormatFloat('000.0000',StrToFloat(trim(comperi.Text)))+blank+blank;
+  buf:=buf+FormatFloat('000.0000',StrToFloat(trim(comnode.Text)))+blank+blank;
+  buf:=buf+FormatFloat('000.0000',StrToFloat(trim(comi.Text)))+blank+blank;
+  jdt:=StrToFloat(trim(comep.Text));
+  djd(jdt,y,m,d,h);
+  buf:=buf+PadZeros(inttostr(y),4)+PadZeros(inttostr(m),2)+PadZeros(inttostr(d),2)+blank+blank;
+  buf:=buf+FormatFloat('00.0',StrToFloat(trim(comh.Text)))+blank;
+  buf:=buf+FormatFloat('00.0',StrToFloat(trim(comg.Text)))+blank+blank;
+  buf:=buf+copy(trim(comnam.Text)+blank15+blank15+blank15+blank15,1,56)+blank;
+  buf:=buf+copy('UserEntry'+blank15,1,9);
+  writeln(f,buf);
+  CloseFile(f);
+end;
+
+procedure Tf_config_solsys.BtnLoadComClick(Sender: TObject);
+var f: textfile;
+    fn,buf:string;
+    y,m,d: integer;
+begin
+  if not OpenDialog1.Execute then exit;
+  fn:=OpenDialog1.FileName;
+  AssignFile(f,fn);
+  Reset(f);
+  readln(f,buf);
+  CloseFile(f);
+  comid.Text := trim(copy(buf, 1, 12));
+  comt_y.Text := trim(copy(buf, 15, 4));
+  comt_m.Text := trim(copy(buf, 20, 2));
+  comt_d.Text := trim(copy(buf, 23, 7));
+  y := strtoint(trim(copy(buf, 82, 4)));
+  m := strtoint(trim(copy(buf, 86, 2)));
+  d := strtoint(trim(copy(buf, 88, 2)));
+  comep.Text := FormatFloat(f1,jd(y,m,d,0));
+  comq.Text := trim(copy(buf, 31, 9));
+  comec.Text := trim(copy(buf, 41, 9));
+  comperi.Text := trim(copy(buf, 51, 9));
+  comnode.Text := trim(copy(buf, 61, 9));
+  comi.Text := trim(copy(buf, 71, 9));
+  comh.Text := trim(copy(buf, 92, 4));
+  comg.Text := trim(copy(buf, 97, 4));
+  comnam.Text := trim(copy(buf, 103, 27));
+  comeq.Text := '2000';
+end;
+
 procedure Tf_config_solsys.AddComClick(Sender: TObject);
 var
   msg: string;
@@ -1163,6 +1249,44 @@ begin
   UpdComList;
   if msg <> '' then
     ShowMessage(msg);
+end;
+
+
+procedure Tf_config_solsys.ComDateChange(Sender: TObject);
+var y,m,d: integer;
+    h,jdt:double;
+begin
+  if LockComt then exit;
+  try
+  LockComt:=true;
+  y:=StrToInt(comt_y.Text);
+  m:=StrToInt(comt_m.Text);
+  d:=trunc(StrToFloat(comt_d.Text));
+  h:=frac(StrToFloat(comt_d.Text))*24;
+  jdt:=jd(y,m,d,h);
+  comt_jd.text:=FormatFloat(f6,jdt);
+  LockComt:=false;
+  except
+    LockComt:=false;
+  end;
+end;
+
+procedure Tf_config_solsys.ComJdChange(Sender: TObject);
+var y,m,d: integer;
+    h,jdt:double;
+begin
+  if LockComt then exit;
+  try
+  LockComt:=true;
+  jdt:=StrToFloat(comt_jd.Text);
+  djd(jdt,y,m,d,h);
+  comt_y.Text:=IntToStr(y);
+  comt_m.Text:=IntToStr(m);
+  comt_d.Text:=FormatFloat(f4,d+h/24);
+  LockComt:=false;
+  except
+    LockComt:=false;
+  end;
 end;
 
 procedure Tf_config_solsys.showastClick(Sender: TObject);
