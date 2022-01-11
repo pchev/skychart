@@ -19,8 +19,8 @@ Planetarium software for the advanced amateur astronomer.
 %defattr(-,root,root)
 /usr/bin/skychart
 /usr/bin/cdcicon
+/usr/bin/catgen
 /usr/bin/varobs
-/usr/bin/varobs_lpv_bulletin
 /usr/share/doc/skychart
 /usr/share/applications/net.ap_i.skychart.desktop
 /usr/share/metainfo/net.ap_i.skychart.metainfo.xml
