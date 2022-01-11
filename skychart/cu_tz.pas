@@ -264,9 +264,6 @@ begin
       end;
      if not found then begin
        i:=num_transitions; // use last std transition to not fallback to LMT in the future
-       if (i>1) and (types[i-1].isdst) then i:=num_transitions-1;
-       if i<1 then i:=1;
-       //Exit(nil);
      end;
      trans_start:=transitions[i-1];
      trans_end:=transitions[i];
