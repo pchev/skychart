@@ -1132,7 +1132,7 @@ end;
 function TCDCdb.AddAsteroid(astid, asth, astg, astep, astma, astperi,astnode, asti, astec, astax, astref, astnam, asteq: string): string;
 var
   ep, id, nam, ec, ax, i, node, peri, eq, ma, h, g, ref: string;
-  lid: integer;
+  j,idx,lid: integer;
 begin
   try
       id := trim(copy(astid, 1, 7));
@@ -1151,21 +1151,34 @@ begin
       ref := trim(astref);
       nam := stringreplace(trim(astnam), '"', '\"', [rfreplaceall]);
       eq := trim(asteq);
-      FNumAsteroidElement:=FNumAsteroidElement+1;
-      SetLength(FAsteroidElement,FNumAsteroidElement);
-      FAsteroidElement[FNumAsteroidElement-1].id:=id;
-      FAsteroidElement[FNumAsteroidElement-1].h:=strtofloat(h);
-      FAsteroidElement[FNumAsteroidElement-1].g:=strtofloat(g);
-      FAsteroidElement[FNumAsteroidElement-1].epoch:=strtofloat(ep);
-      FAsteroidElement[FNumAsteroidElement-1].mean_anomaly:=strtofloat(ma);
-      FAsteroidElement[FNumAsteroidElement-1].arg_perihelion:=strtofloat(peri);
-      FAsteroidElement[FNumAsteroidElement-1].asc_node:=strtofloat(node);
-      FAsteroidElement[FNumAsteroidElement-1].inclination:=strtofloat(i);
-      FAsteroidElement[FNumAsteroidElement-1].eccentricity:=strtofloat(ec);
-      FAsteroidElement[FNumAsteroidElement-1].semi_axis:=strtofloat(ax);
-      FAsteroidElement[FNumAsteroidElement-1].ref:=ref;
-      FAsteroidElement[FNumAsteroidElement-1].name:=nam;
-      FAsteroidElement[FNumAsteroidElement-1].equinox:=strtofloat(eq);
+      idx:=-1;
+      // search existing entry
+      for j:=0 to FNumAsteroidElement-1 do begin
+         if FAsteroidElement[j].id=id then begin
+           // replace
+           idx:=j;
+           break;
+         end;
+      end;
+      if idx<0 then begin
+        // insert at the end
+        FNumAsteroidElement:=FNumAsteroidElement+1;
+        SetLength(FAsteroidElement,FNumAsteroidElement);
+        idx:=FNumAsteroidElement-1;
+      end;
+      FAsteroidElement[idx].id:=id;
+      FAsteroidElement[idx].h:=strtofloat(h);
+      FAsteroidElement[idx].g:=strtofloat(g);
+      FAsteroidElement[idx].epoch:=strtofloat(ep);
+      FAsteroidElement[idx].mean_anomaly:=strtofloat(ma);
+      FAsteroidElement[idx].arg_perihelion:=strtofloat(peri);
+      FAsteroidElement[idx].asc_node:=strtofloat(node);
+      FAsteroidElement[idx].inclination:=strtofloat(i);
+      FAsteroidElement[idx].eccentricity:=strtofloat(ec);
+      FAsteroidElement[idx].semi_axis:=strtofloat(ax);
+      FAsteroidElement[idx].ref:=ref;
+      FAsteroidElement[idx].name:=nam;
+      FAsteroidElement[idx].equinox:=strtofloat(eq);
       SaveAsteroid;
       Result := '';
   except
