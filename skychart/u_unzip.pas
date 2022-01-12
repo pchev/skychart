@@ -265,11 +265,9 @@ begin
           end;
       until (err = 0);
       fclose(fout);
-(*     Removed because of bug in FPC 3.2.2 that set tmu_date.tm_mon=0 instead of 1 for dosdate=1412176370  (2022/01/12 3:15)
-      { #todo : check with new fpc version }
       if (err = 0) then
         change_file_date(write_filename, file_info.dosDate,
-          file_info.tmu_date); *)
+          file_info.tmu_date);
     end;
 
     if (err = UNZ_OK) then
