@@ -99,7 +99,7 @@ begin
   {$ifdef mswindows}
   FileSetDate(filename, dosdate);
   {$else}
-  fd:=EncodeDate(tmu_date.tm_year,tmu_date.tm_mon,tmu_date.tm_mday);
+  fd:=EncodeDate(tmu_date.tm_year,tmu_date.tm_mon+1,tmu_date.tm_mday);    // tm_mon count from 0
   fd:=fd+EncodeTime(tmu_date.tm_hour,tmu_date.tm_min,tmu_date.tm_sec,0);
   sd:=DateTimeToFileDate(fd);
   FileSetDate(string(filename), sd);
