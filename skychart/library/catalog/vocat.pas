@@ -36,6 +36,7 @@ end;
 
 const CacheInc=1;
       MaxCache=10;
+      MagnitudeMin = 4;
       numucdtr=25;
       ucdtr : array [1..numucdtr] of array[1..2] of string =
       (('POS_ANG_DIST_GENERAL', 'pos.angDistance'),
@@ -902,7 +903,7 @@ while CurCat<Ncat do begin
 end;
 VOopen:=true;
 CloseVOCat;
-result:=max(result,6);
+result:=max(result,MagnitudeMin);
 result:=min(result,20);
 end;
 

@@ -596,7 +596,7 @@ begin
     f := fov - 15 * minarc;
     if (f > minarc) or cfgsc.Quick then
       Fcatalog.cfgcat.StarMagMax :=
-        max(5,
+        max(MagnitudeMin,
         round(10 * (
         Fcatalog.cfgshr.AutoStarFilterMag + 2.4 * log10((pid2*pid2) / (f*f*(1+2*cos(min(3*f,pid2)) ))))
         ) / 10
@@ -621,8 +621,8 @@ begin
     Fcatalog.cfgcat.NebSizeMin := cfgsc.lockNebSize;
   end;
 
-  Fplot.cfgchart.min_ma := 6;
-  magmax := 1;
+  Fplot.cfgchart.min_ma := MagnitudeMin;
+  magmax := MagnitudeMin;
   { activate the star catalog}
   InitStarC(dsbase, 5.5);
   InitStarC(bsc, 6.5);

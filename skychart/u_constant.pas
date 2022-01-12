@@ -59,6 +59,7 @@ const
   MaxAsteroid = 10000;
   NEO_dist = 0.1; // distance to always take account of NEO
   MaxPla = 77;
+  MagnitudeMin = 4;
   MaxQuickSearch = 15;
   MaxWindow = 10;  // maximum number of chart window
   maxlabels = 3500; //maximum number of label to a chart
