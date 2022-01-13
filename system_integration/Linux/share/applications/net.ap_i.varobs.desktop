@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Variable Stars Observer
+GenericName=Observation planner
+Comment=Plan and log variable stars observations
+TryExec=varobs
+Exec=varobs
+Icon=varobs
+Terminal=false
+Categories=Science;Astronomy;
