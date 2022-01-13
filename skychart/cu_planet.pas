@@ -3941,7 +3941,7 @@ procedure TPlanet.PlanetRiseSet(pla: integer; jd0: double; AzNorth: boolean;
   var thr, tht, ths, tazr, tazs: string; var jdr, jdt, jds, rar, der, rat, det, ras, des: double;
   var i: integer; cfgsc: Tconf_skychart);
 var
-  hr, ht, hs, h1, h2, azr, azs, dist, q, diam, dh, hmin, hhmax: double;
+  hr, ht, hs, h1, h2, azr, azs, dist, q, diam, dh, hmin, hhmax,st: double;
   ho, sinho, dt, hh, y1, y2, y3, x1, x2, x3, xmax, ymax, xmax2, ymax2, ymax0, ra,
   de, dm5, dm6, dm7, dm8, dm9, dm10, dm11, dm12, dm13, dm14: double;
   frise, fset, ftransit: boolean;
@@ -4196,6 +4196,32 @@ begin
     begin
       ths := na;
       tazs := na;
+    end;
+    if frise and fset then begin
+      // better transit precision
+      ht:=(hs+hr)/2;
+      jdt := jd0 + (ht - cfgsc.TimeZone) / 24;
+      st:=SidTim(jd0, ht - cfgsc.TimeZone, cfgsc.ObsLongitude);
+      case pla of
+        1..9: Planet(pla, jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7,
+            dm8, dm9, dm10, dm11, dm12, dm13, dm14);
+        10: Sun(jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5);
+        11: Moon(jdt + cfgsc.DT_UT / 24, ra, de, dist, dm5, dm6, dm7, dm8,cfgsc);
+      end;
+      precession(jd2000, jd0, ra, de);
+      if cfgsc.PlanetParalaxe then
+      begin
+        Paralaxe(st, dist, ra, de, rat, det, q, cfgsc);
+      end
+      else
+      begin
+        rat := ra;
+        det := de;
+      end;
+      ra:=rmod(pi2+ra,pi2);
+      st:=rmod(pi2+st,pi2);
+      ht:=ht-(st-ra)*1.00273790935*rad2deg/15;
+      ftransit:=true;
     end;
     if (ftransit) then
     begin      // transit
