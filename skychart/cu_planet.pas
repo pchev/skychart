@@ -4220,7 +4220,7 @@ begin
       end;
       ra:=rmod(pi2+ra,pi2);
       st:=rmod(pi2+st,pi2);
-      ht:=ht-(st-ra)*1.00273790935*rad2deg/15;
+      ht:=rmod(24+ht-(st-ra)*1.00273790935*rad2deg/15,24);
       ftransit:=true;
     end;
     if (ftransit) then
