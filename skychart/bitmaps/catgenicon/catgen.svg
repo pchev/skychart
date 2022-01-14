@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="48"
+   height="48"
+   viewBox="0 0 12.7 12.7"
+   version="1.1"
+   id="svg138"
+   inkscape:export-filename="/home/mattia/bitmap128.png"
+   inkscape:export-xdpi="256"
+   inkscape:export-ydpi="256"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="catgen.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <title
+     id="title969">Catgen Icon</title>
+  <sodipodi:namedview
+     id="namedview140"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="true"
+     units="px"
+     width="64px"
+     inkscape:snap-object-midpoints="false"
+     inkscape:snap-center="false"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:object-paths="true"
+     inkscape:snap-others="false"
+     inkscape:object-nodes="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-nodes="false"
+     inkscape:snap-global="true"
+     inkscape:zoom="12.740662"
+     inkscape:cx="18.052437"
+     inkscape:cy="25.273412"
+     inkscape:window-width="2560"
+     inkscape:window-height="1367"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:snap-midpoints="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid188" />
+  </sodipodi:namedview>
+  <defs
+     id="defs135">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient10280">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop10276" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop10278" />
+    </linearGradient>
+    <linearGradient
+       id="a"
+       x1="250"
+       x2="341.47"
+       y1="802.35999"
+       y2="802.35999"
+       gradientTransform="matrix(0.04242378,0,0,0.0464814,-4.255458,-30.952731)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#c8c5c5"
+         offset="0"
+         id="stop2" />
+      <stop
+         stop-color="#ddd"
+         offset="1"
+         id="stop4" />
+    </linearGradient>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7829"
+       x="-0.14821427"
+       y="-0.074107124"
+       width="1.2964285"
+       height="1.1482142">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.17363281"
+         id="feGaussianBlur7831" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter7829-7"
+       x="-0.12968747"
+       y="-0.071551703"
+       width="1.2593749"
+       height="1.1431034">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.17363281"
+         id="feGaussianBlur7831-5" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient10280"
+       id="linearGradient10282-7"
+       x1="4.4979167"
+       y1="7.4083333"
+       x2="15.345834"
+       y2="-1.8520833"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-5.820833,4.4979164)" />
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter9786-3"
+       x="-0.043199997"
+       y="-0.053999996"
+       width="1.0864"
+       height="1.108">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.19049999"
+         id="feGaussianBlur9788-6" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Livello 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       x="0.94674486"
+       y="1.6602393"
+       width="10.80651"
+       height="9.3604193"
+       fill="#dddddd"
+       id="rect11"
+       style="stroke:#4ca835;stroke-width:0.309979;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       style="fill:#233f94;fill-opacity:1;stroke:none;stroke-width:0.14314;stroke-linecap:round"
+       id="rect7885"
+       width="4.351655"
+       height="4.1621127"
+       x="1.5528286"
+       y="2.84642" />
+    <rect
+       x="1.3229166"
+       y="7.6729169"
+       width="4.4979167"
+       height="0.26458308"
+       fill="#989898"
+       id="rect51"
+       style="fill:#7f7f7f;fill-opacity:1;stroke-width:0.0448263" />
+    <rect
+       x="1.3229166"
+       y="8.4666672"
+       width="4.4979167"
+       height="0.26458308"
+       fill="#989898"
+       id="rect51-6"
+       style="fill:#7f7f7f;fill-opacity:1;stroke-width:0.0448263" />
+    <rect
+       x="1.3229166"
+       y="9.260417"
+       width="4.4979167"
+       height="0.26458308"
+       fill="#989898"
+       id="rect51-1"
+       style="fill:#7f7f7f;fill-opacity:1;stroke-width:0.0448263" />
+    <rect
+       x="1.3229166"
+       y="10.054167"
+       width="2.6458333"
+       height="0.26458308"
+       fill="#989898"
+       id="rect51-8"
+       style="fill:#7f7f7f;fill-opacity:1;stroke-width:0.0343802" />
+    <rect
+       x="2.6458333"
+       y="2.1166666"
+       width="2.3812501"
+       height="0.52916676"
+       fill="#989898"
+       id="rect61-6"
+       style="fill:#696969;fill-opacity:1;stroke-width:0.0631962" />
+    <path
+       style="opacity:0.9;fill:none;stroke:#dddddd;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter7829)"
+       d="M -1.058333,11.641666 1.406447,6.6294797 2.645833,4.233333"
+       id="path7365"
+       sodipodi:nodetypes="ccc"
+       transform="matrix(0.36931868,0,0,0.46191945,2.7805953,0.82439732)" />
+    <path
+       style="opacity:0.9;fill:none;stroke:#dddddd;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter7829-7)"
+       d="M -0.79375,11.377083 2.200197,6.100313 3.439583,3.7041664"
+       id="path7365-3"
+       sodipodi:nodetypes="ccc"
+       transform="matrix(0.34768948,0,0,0.43486707,2.7458298,1.1541842)" />
+    <path
+       style="mix-blend-mode:normal;fill:url(#linearGradient10282-7);fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter9786-3)"
+       d="M 9.2604165,7.4083331 5.447064,8.5632575 2.38125,9.7895831 -1.322917,11.90625 0.79375,8.9958331 l 2.910417,-2.38125 4.2333325,-3.175 z"
+       id="path9146-0"
+       sodipodi:nodetypes="cccccccc"
+       transform="matrix(0.37380403,0,0,0.46752943,2.7839583,0.76081919)" />
+    <rect
+       x="6.8791666"
+       y="2.3812501"
+       width="4.4979167"
+       height="0.26458308"
+       fill="#989898"
+       id="rect51-7"
+       style="fill:#7f7f7f;fill-opacity:1;stroke-width:0.0448263" />
+    <rect
+       x="6.8791666"
+       y="3.1750002"
+       width="4.4979167"
+       height="0.26458308"
+       fill="#989898"
+       id="rect51-9"
+       style="fill:#7f7f7f;fill-opacity:1;stroke-width:0.0448263" />
+    <rect
+       x="6.8791666"
+       y="4.2333336"
+       width="3.7041667"
+       height="0.26458308"
+       fill="#989898"
+       id="rect51-2"
+       style="fill:#7f7f7f;fill-opacity:1;stroke-width:0.0406792" />
+    <rect
+       x="6.8791666"
+       y="5.0270834"
+       width="4.4979167"
+       height="0.26458308"
+       fill="#989898"
+       id="rect51-0"
+       style="fill:#7f7f7f;fill-opacity:1;stroke-width:0.0448263" />
+    <rect
+       x="6.8791666"
+       y="5.8208337"
+       width="4.4979167"
+       height="0.26458308"
+       fill="#989898"
+       id="rect51-23"
+       style="fill:#7f7f7f;fill-opacity:1;stroke-width:0.0448263" />
+    <rect
+       x="6.8791666"
+       y="7.4083338"
+       width="4.4979167"
+       height="0.26458308"
+       fill="#989898"
+       id="rect51-75"
+       style="fill:#7f7f7f;fill-opacity:1;stroke-width:0.0448263" />
+    <rect
+       x="6.8791666"
+       y="8.2020836"
+       width="3.96875"
+       height="0.26458308"
+       fill="#989898"
+       id="rect51-92"
+       style="fill:#7f7f7f;fill-opacity:1;stroke-width:0.042107" />
+    <rect
+       x="6.8791666"
+       y="8.9958334"
+       width="4.4979167"
+       height="0.26458308"
+       fill="#989898"
+       id="rect51-28"
+       style="fill:#7f7f7f;fill-opacity:1;stroke-width:0.0448263" />
+    <path
+       d="M 6.3499991,1.833756 10.23041,0.79375 V 11.887149 L 6.3499991,10.847143 Z"
+       fill="url(#a)"
+       id="path45"
+       style="fill:url(#a);stroke-width:0.0441017"
+       sodipodi:nodetypes="ccccc" />
+    <g
+       transform="matrix(0.05525857,0.03310121,0.03310121,-0.05525857,-21.173398,51.32828)"
+       id="g77">
+      <path
+         transform="matrix(0.78195,0,0,1,22.309,549.37)"
+         d="m 70.58,327.99 a 5.9375,3.125 0 0 1 -5.9375,3.125 5.9375,3.125 0 0 1 -5.9375,-3.125 5.9375,3.125 0 0 1 5.9375,-3.125 5.9375,3.125 0 0 1 5.9375,3.125 z"
+         id="path67" />
+      <rect
+         x="68.213997"
+         y="764.51001"
+         width="9.2856998"
+         height="112.86"
+         fill="#ff4c4c"
+         id="rect69" />
+      <path
+         transform="matrix(0.58025,0,0,1,60.108,591.72)"
+         d="m 21.971,158.93 4.0007,6.9294 4.0007,6.9294 h -16.003 l 4.0007,-6.9294 z"
+         fill="#dddddd"
+         id="path71" />
+      <path
+         d="m 72.853,750.64 -1.4062,4.1875 h 2.8125 L 72.8531,750.64 Z"
+         id="path73" />
+      <rect
+         x="68.213997"
+         y="864.23999"
+         width="9.2856998"
+         height="13.125"
+         fill="#dddddd"
+         id="rect75" />
+    </g>
+  </g>
+  <metadata
+     id="metadata967">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Catgen Icon</dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Mattia Verga</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by/4.0/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by/4.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

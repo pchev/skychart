@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>net.ap_i.varobs</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>Variable Stars Observer</name>
+  <summary>Plan and log variable stars observations</summary>
+
+  <description>
+    <p>
+      This program help you to plan and log variable stars observations.
+    </p>
+  </description>
+
+  <launchable type="desktop-id">net.ap_i.varobs.desktop</launchable>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>Varobs main window helps planning your observation session</caption>
+      <image>https://www.ap-i.net/skychart/_media/en/documentation/varobs1.png</image>
+    </screenshot>
+  </screenshots>
+
+  <screenshots>
+    <screenshot>
+      <caption>Plot your own observation in VSNET format or data from AAVSO or AFOEV</caption>
+      <image>https://www.ap-i.net/skychart/_media/en/documentation/varobs2.png</image>
+    </screenshot>
+  </screenshots>
+
+  <url type="homepage">http://www.ap-i.net/skychart/</url>
+  <developer_name>Patrick Chevalley</developer_name>
+  <updatecontact>pch_AT_ap-i.net</updatecontact>
+
+  <provides>
+    <binary>varobs</binary>
+  </provides>
+</component>

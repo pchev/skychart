@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Catgen
+GenericName=Catalog builder
+Comment=Generate astronomical objects catalogs for use with Skychart
+TryExec=catgen
+Exec=catgen
+Icon=catgen
+Terminal=false
+Categories=Science;Astronomy;

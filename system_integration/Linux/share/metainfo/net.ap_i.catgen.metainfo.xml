@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>net.ap_i.catgen</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>Catgen</name>
+  <summary>Generate astronomical objects catalogs for use with Skychart</summary>
+
+  <description>
+    <p>
+      Catgen is a utility for generating astronomical objects catalogs that
+      can be imported and used with Skychart planetarium.
+    </p>
+    <p>
+      Due to the large amount of available data, it would be impossible to make
+      a choice that will fit everyone's needs. When you have a specific interest,
+      you can use CatGen to build your own data set from the original professional
+      catalog data. You can also use any new catalog without delay, as soon as it
+      is published.
+    </p>
+  </description>
+
+  <launchable type="desktop-id">net.ap_i.catgen.desktop</launchable>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>Build the PPMXL catalog with Catgen</caption>
+      <image>http://www.ap-i.net/skychart/_media/en/screenshot/ppmxl1.jpg</image>
+    </screenshot>
+  </screenshots>
+
+  <url type="homepage">http://www.ap-i.net/skychart/</url>
+  <developer_name>Patrick Chevalley</developer_name>
+  <updatecontact>pch_AT_ap-i.net</updatecontact>
+
+  <provides>
+    <binary>catgen</binary>
+  </provides>
+</component>
