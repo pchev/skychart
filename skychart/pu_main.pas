@@ -1276,10 +1276,9 @@ begin
     InitFonts;
     SetLpanel1('');
   except
-    on E: Exception do
-    begin
-      WriteTrace('FormShow error: ' + E.Message);
-      MessageDlg('FormShow error: ' + E.Message, mtError, [mbClose], 0);
+    on E: Exception do begin
+      WriteTrace('FormShow InitFonts error: ' + E.Message);
+      MessageDlg('FormShow InitFonts error: ' + E.Message, mtError, [mbOK], 0);
     end;
   end;
   // Init tool bar
@@ -1289,8 +1288,22 @@ begin
       WriteTrace('Night vision');
     ViewNightVision.Checked := NightVision;
   end;
+  try
   SetTheme;
+  except
+    on E: Exception do begin
+      WriteTrace('FormShow SetTheme error: ' + E.Message);
+      MessageDlg('FormShow SetTheme error: ' + E.Message, mtError, [mbOK], 0);
+    end;
+  end;
+  try
   InitToolBar;
+  except
+    on E: Exception do begin
+      WriteTrace('FormShow InitToolBar error: ' + E.Message);
+      MessageDlg('FormShow InitToolBar error: ' + E.Message, mtError, [mbOK], 0);
+    end;
+  end;
   InitTimer.Enabled := True;
   InitOK := True;
   if VerboseMsg then
@@ -11773,12 +11786,15 @@ procedure Tf_main.ViewNightVisionExecute(Sender: TObject);
 var
   i: integer;
 begin
+try
   NightVision := not NightVision;
   SetNightVision(NightVision);
   ViewNightVision.Checked := NightVision;
   for i := 0 to MultiFrame1.ChildCount - 1 do
     if MultiFrame1.Childs[i].DockedObject is Tf_chart then
       (MultiFrame1.Childs[i].DockedObject as Tf_chart).NightVision := NightVision;
+except
+end;
 end;
 
 {$ifdef mswindows}
