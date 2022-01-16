@@ -33,16 +33,25 @@ const
   designlen = 125;
   designhig = 18;
 begin
-  {$ifdef SCALE_BY_DPI_ONLY}
+  RunDPI:=DesignDPI;
+  try
   RunDPI := Screen.PixelsPerInch;
+  RunDPI:=max(RunDPI,72);
+  RunDPI:=min(RunDPI,480);
+  {$ifdef SCALE_BY_DPI_ONLY}
+  exit;
   {$else}
+  // take account for font size
   rs := cnv.TextExtent(teststr);
   sc := rs.cx / designlen;
   sc := max(sc, rs.cy / designhig);
   if abs(1 - sc) < 0.02 then
     sc := 1;
-  RunDPI := round(DesignDPI * sc);
+  if (sc>0.75)and(sc<5) then
+    RunDPI := round(DesignDPI * sc);
   {$endif}
+  except
+  end;
 end;
 
 function scale: double;
