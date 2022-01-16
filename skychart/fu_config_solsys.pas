@@ -1585,8 +1585,13 @@ end;
 
 procedure Tf_config_solsys.SPKrefreshClick(Sender: TObject);
 begin
+try
+  CloseCalcephBody;
   SPKobject.Text:=ExtractFileNameOnly(CurrentSPKfile);
   ButtonDownloadSpk.Click;
+finally
+  InitCalcephBody(csc);
+end;
 end;
 
 procedure Tf_config_solsys.SPKRefreshAllClick(Sender: TObject);
@@ -1601,12 +1606,17 @@ end;
 
 procedure Tf_config_solsys.SPKdeleteClick(Sender: TObject);
 begin
+try
+  CloseCalcephBody;
   if MessageDlg(rsConfirmFileD + CurrentSPKfile, mtConfirmation, mbYesNo, 0) = mrYes then
     begin
       DeleteFile(slash(SPKdir)+CurrentSPKfile);
       CurrentSPKfile:='';
       ListSPK;
     end;
+finally
+  InitCalcephBody(csc);
+end;
 end;
 
 procedure Tf_config_solsys.SPKDeleteExpiredClick(Sender: TObject);
@@ -1614,6 +1624,8 @@ var dat: string;
     i:integer;
     jd1,jd2: double;
 begin
+try
+  CloseCalcephBody;
   jd1:=DateTimetoJD(now);
   for i:=0 to SPKListView.Items.Count-1 do begin
      dat:=SPKListView.Items[i].SubItems[2];
@@ -1623,6 +1635,9 @@ begin
      end;
   end;
   ListSPK;
+finally
+  InitCalcephBody(csc);
+end;
 end;
 
 procedure Tf_config_solsys.SPKemailChange(Sender: TObject);
@@ -1645,6 +1660,8 @@ procedure Tf_config_solsys.ButtonDownloadSpkClick(Sender: TObject);
 var obj,email,dlf,fn: string;
     dt1,dt2: TDateTime;
 begin
+try
+  CloseCalcephBody;
   CancelDownloadSpk:=false;
   MemoSPK.Clear;
   PanelSPKmemo.Visible:=true;
@@ -1684,6 +1701,9 @@ begin
     ButtonReturn.Visible:=true;
     ButtonCancel.Visible:=false;
   end;
+finally
+  InitCalcephBody(csc);
+end;
 end;
 
 function Tf_config_solsys.HorizonSPK(obj:string; date1,date2: TDateTime; email: string; out filetodownload: string):boolean;
