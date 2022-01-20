@@ -1887,6 +1887,8 @@ begin
         buf:=extractfilepath(paramstr(0));
         DLLSSLName:=expandfilename(buf+'/../Frameworks')+'/'+DLLSSLName;
         DLLUtilName:=expandfilename(buf+'/../Frameworks')+'/'+DLLUtilName;
+        SSLUtilHandle := LoadLib(DLLUtilName);
+        SSLLibHandle := LoadLib(DLLSSLName);
       end;
       {$ENDIF}
       {$IFDEF Linux}
