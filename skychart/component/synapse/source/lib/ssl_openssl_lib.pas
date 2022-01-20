@@ -1860,7 +1860,7 @@ end;
 
 function InitSSLInterface: Boolean;
 var
-  s,lver: string;
+  s,lver,buf: string;
   x,lver1,lver2,lver3: integer;
 begin
   {pf}
