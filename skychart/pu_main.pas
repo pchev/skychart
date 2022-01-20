@@ -2573,6 +2573,8 @@ begin
     {$endif}
     {$ifdef darwin}
     step := 'Darwin specific';
+    PanelTop.height:=PanelTop.height+10;
+    TabControl1.height:=TabControl1.height+10;
     {$endif}
     {$ifdef WithUpdateMenu}
     MenuUpdSoft.Visible := True;
