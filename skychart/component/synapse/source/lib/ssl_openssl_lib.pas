@@ -113,8 +113,8 @@ const
 var
   {$IFNDEF MSWINDOWS}
     {$IFDEF DARWIN}
-    DLLSSLName: string = 'libssl.dylib';
-    DLLUtilName: string = 'libcrypto.dylib';
+    DLLSSLName: string = 'libssl.1.1.dylib';       // versioned library required since Big Sur
+    DLLUtilName: string = 'libcrypto.1.1.dylib';
     {$ELSE}
      {$IFDEF OS2}
       {$IFDEF OS2GCC}
@@ -1881,6 +1881,14 @@ begin
 {$ELSE}
       SSLUtilHandle := LoadLib(DLLUtilName);
       SSLLibHandle := LoadLib(DLLSSLName);
+      {$IFDEF DARWIN}
+      if SSLLibHandle=0 then begin
+        // try to load libraries from Frameworks
+        buf:=extractfilepath(paramstr(0));
+        DLLSSLName:=expandfilename(buf+'/../Frameworks')+'/'+DLLSSLName;
+        DLLUtilName:=expandfilename(buf+'/../Frameworks')+'/'+DLLUtilName;
+      end;
+      {$ENDIF}
       {$IFDEF Linux}
          if SSLLibHandle=0 then begin    // try versioned library name
            for lver1:=1 downto 0 do begin

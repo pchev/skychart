@@ -13,11 +13,13 @@ install -d -m 755 $destdir/skychart.app
 install -d -m 755 $destdir/skychart.app/Contents
 install -d -m 755 $destdir/skychart.app/Contents/MacOS
 install -d -m 755 $destdir/skychart.app/Contents/Resources
+install -d -m 755 $destdir/skychart.app/Contents/Frameworks
 install -v -m 644 system_integration/MacOSX/pkg/skychart.app/Contents/Info.plist $destdir/skychart.app/Contents/
 install -v -m 644 system_integration/MacOSX/pkg/skychart.app/Contents/PkgInfo $destdir/skychart.app/Contents/
 install -v -m 755 -s skychart/cdc  $destdir/skychart.app/Contents/MacOS/skychart
 install -v -m 644 system_integration/MacOSX/pkg/skychart.app/Contents/Resources/README.rtf $destdir/skychart.app/Contents/Resources/
 install -v -m 644 system_integration/MacOSX/pkg/skychart.app/Contents/Resources/cdcIcon2.icns $destdir/skychart.app/Contents/Resources/
+tar xvzf system_integration/MacOSX/data/openssl-mac.tgz -C $destdir/skychart.app/Contents/Frameworks/
 
 install -d -m 755 $destdir/varobs.app
 install -d -m 755 $destdir/varobs.app/Contents
