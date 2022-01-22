@@ -4,6 +4,8 @@ version=4.3
 
 builddir=/tmp/skychart  # Be sure this is set to a non existent directory, it is removed after the run!
 
+unset make_debug
+
 arch=$(uname -m)
 
 if [[ -n $1 ]]; then
@@ -49,24 +51,25 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.tar.xz $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
-  #debug
-  cd $wd
-  rm -rf $builddir
-  gmake clean
-  fpcopts="-O1 -g -gl -Ci -Co -Ct" gmake all
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  mkdir $builddir
-  mkdir $builddir/debug
-  cp skychart/cdc $builddir/debug/skychart
-  cp skychart/cdcicon $builddir/debug/
-  cp varobs/varobs $builddir/debug/
-  cp varobs/varobs_lpv_bulletin $builddir/debug/
-  cd $builddir
-  tar cvJf bin-FreeBSD_$arch-debug-$currentrev.tar.xz debug
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  mv bin-*.tar.xz $wd
-  if [[ $? -ne 0 ]]; then exit 1;fi
-
+  if [[ $make_debug ]]; then
+    #debug
+    cd $wd
+    rm -rf $builddir
+    gmake clean
+    fpcopts="-O1 -g -gl -Ci -Co -Ct" gmake all
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    mkdir $builddir
+    mkdir $builddir/debug
+    cp skychart/cdc $builddir/debug/skychart
+    cp skychart/cdcicon $builddir/debug/
+    cp varobs/varobs $builddir/debug/
+    cp varobs/varobs_lpv_bulletin $builddir/debug/
+    cd $builddir
+    tar cvJf bin-FreeBSD_$arch-debug-$currentrev.tar.xz debug
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    mv bin-*.tar.xz $wd
+    if [[ $? -ne 0 ]]; then exit 1;fi
+  fi
 cd $wd
 rm -rf $builddir
 

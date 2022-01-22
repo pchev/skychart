@@ -6,6 +6,8 @@ basedir=/Volumes/TmpInst/skychart    # Be sure this is set to a non existent dir
 
 builddir=$basedir/Cartes
 
+unset make_debug
+
 if [[ -n $1 ]]; then
   configopt="fpc=$1"
 fi
@@ -63,23 +65,24 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.dmg $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
-  #debug
-  cd $wd
-  rm -rf $basedir
-  make CPU_TARGET=x86_64 clean
-  fpcopts="-g -gl -Ci -Co -Ct" make CPU_TARGET=x86_64
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  mkdir $basedir
-  mkdir $basedir/debug
-  cp skychart/cdc $basedir/debug/skychart
-  cp varobs/varobs $basedir/debug/
-  cd $basedir/debug/
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  tar cvjf bin-macosx-x86_64-debug-$currentrev.tar.bz2 *
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  mv bin-*.tar.bz2 $wd
-  if [[ $? -ne 0 ]]; then exit 1;fi
-
+  if [[ $make_debug ]]; then
+    #debug
+    cd $wd
+    rm -rf $basedir
+    make CPU_TARGET=x86_64 clean
+    fpcopts="-g -gl -Ci -Co -Ct" make CPU_TARGET=x86_64
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    mkdir $basedir
+    mkdir $basedir/debug
+    cp skychart/cdc $basedir/debug/skychart
+    cp varobs/varobs $basedir/debug/
+    cd $basedir/debug/
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    tar cvjf bin-macosx-x86_64-debug-$currentrev.tar.bz2 *
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    mv bin-*.tar.bz2 $wd
+    if [[ $? -ne 0 ]]; then exit 1;fi
+  fi
   cd $wd
   rm -rf $basedir
 

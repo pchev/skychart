@@ -12,7 +12,7 @@ arch=$(arch)
 unset extratarget
 
 make_linuxarm=1
-make_linuxarm_debug=1
+unset make_linuxarm_debug
 
 if [[ -n $1 ]]; then
   configopt="fpc=$1"

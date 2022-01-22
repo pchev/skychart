@@ -13,6 +13,7 @@ arch=$(arch)
 # You MUST crosscompile Freepascal and Lazarus for this targets! 
 
 unset extratarget
+unset make_debug
 
 unset make_linux32
 unset make_linux64
@@ -119,24 +120,25 @@ if [[ $make_linux32 ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv RPMS/i386/skychart*.rpm $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
-  #debug
-  cd $wd
-  rm -rf $builddir
-  make CPU_TARGET=i386 OS_TARGET=linux clean
-  fpcopts="-O1 -g -gl -Ci -Co -Ct" make CPU_TARGET=i386 OS_TARGET=linux
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  mkdir $builddir
-  mkdir $builddir/debug
-  cp skychart/cdc $builddir/debug/skychart
-  cp skychart/cdcicon $builddir/debug/
-  cp varobs/varobs $builddir/debug/
-  cp varobs/varobs_lpv_bulletin $builddir/debug/
-  cd $builddir
-  tar cvJf bin-linux_i386-debug-$currentrev.tar.xz debug
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  mv bin-*.tar.xz $wd
-  if [[ $? -ne 0 ]]; then exit 1;fi
-
+  if [[ $make_debug ]]; then
+    #debug
+    cd $wd
+    rm -rf $builddir
+    make CPU_TARGET=i386 OS_TARGET=linux clean
+    fpcopts="-O1 -g -gl -Ci -Co -Ct" make CPU_TARGET=i386 OS_TARGET=linux
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    mkdir $builddir
+    mkdir $builddir/debug
+    cp skychart/cdc $builddir/debug/skychart
+    cp skychart/cdcicon $builddir/debug/
+    cp varobs/varobs $builddir/debug/
+    cp varobs/varobs_lpv_bulletin $builddir/debug/
+    cd $builddir
+    tar cvJf bin-linux_i386-debug-$currentrev.tar.xz debug
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    mv bin-*.tar.xz $wd
+    if [[ $? -ne 0 ]]; then exit 1;fi
+  fi
   cd $wd
   rm -rf $builddir
 fi
@@ -196,24 +198,25 @@ if [[ $make_linux64 ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv RPMS/x86_64/skychart*.rpm $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
-  #debug
-  cd $wd
-  rm -rf $builddir
-  make CPU_TARGET=x86_64 OS_TARGET=linux clean
-  fpcopts="-O1 -g -gl -Ci -Co -Ct" make CPU_TARGET=x86_64 OS_TARGET=linux
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  mkdir $builddir
-  mkdir $builddir/debug
-  cp skychart/cdc $builddir/debug/skychart
-  cp skychart/cdcicon $builddir/debug/
-  cp varobs/varobs $builddir/debug/
-  cp varobs/varobs_lpv_bulletin $builddir/debug/
-  cd $builddir
-  tar cvJf bin-linux_x86_64-debug-$currentrev.tar.xz debug
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  mv bin-*.tar.xz $wd
-  if [[ $? -ne 0 ]]; then exit 1;fi
-
+  if [[ $make_debug ]]; then
+    #debug
+    cd $wd
+    rm -rf $builddir
+    make CPU_TARGET=x86_64 OS_TARGET=linux clean
+    fpcopts="-O1 -g -gl -Ci -Co -Ct" make CPU_TARGET=x86_64 OS_TARGET=linux
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    mkdir $builddir
+    mkdir $builddir/debug
+    cp skychart/cdc $builddir/debug/skychart
+    cp skychart/cdcicon $builddir/debug/
+    cp varobs/varobs $builddir/debug/
+    cp varobs/varobs_lpv_bulletin $builddir/debug/
+    cd $builddir
+    tar cvJf bin-linux_x86_64-debug-$currentrev.tar.xz debug
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    mv bin-*.tar.xz $wd
+    if [[ $? -ne 0 ]]; then exit 1;fi
+  fi
   cd $wd
   rm -rf $builddir
 fi
@@ -251,24 +254,25 @@ if [[ $make_win32 ]]; then
   wine "$innosetup" "$wine_build\cdcv3.iss"
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv $builddir/skychart*.exe $wd
-  #debug
-  cd $wd
-  rm -rf $builddir
-  make  OS_TARGET=win32 CPU_TARGET=i386 clean
-  fpcopts="-O1 -g -gl -Ci -Co -Ct" make  OS_TARGET=win32 CPU_TARGET=i386
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  mkdir $builddir
-  mkdir $builddir/debug
-  cp skychart/cdc.exe $builddir/debug/skychart.exe
-  cp skychart/cdcicon.exe $builddir/debug/
-  cp varobs/varobs.exe $builddir/debug/
-  cp varobs/varobs_lpv_bulletin.exe $builddir/debug/
-  cd $builddir/debug/
-  zip bin-windows_i386-debug-$currentrev.zip *
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  mv bin-*.zip $wd
-  if [[ $? -ne 0 ]]; then exit 1;fi
-
+  if [[ $make_debug ]]; then
+    #debug
+    cd $wd
+    rm -rf $builddir
+    make  OS_TARGET=win32 CPU_TARGET=i386 clean
+    fpcopts="-O1 -g -gl -Ci -Co -Ct" make  OS_TARGET=win32 CPU_TARGET=i386
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    mkdir $builddir
+    mkdir $builddir/debug
+    cp skychart/cdc.exe $builddir/debug/skychart.exe
+    cp skychart/cdcicon.exe $builddir/debug/
+    cp varobs/varobs.exe $builddir/debug/
+    cp varobs/varobs_lpv_bulletin.exe $builddir/debug/
+    cd $builddir/debug/
+    zip bin-windows_i386-debug-$currentrev.zip *
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    mv bin-*.zip $wd
+    if [[ $? -ne 0 ]]; then exit 1;fi
+  fi
   cd $wd
   rm -rf $builddir
 fi
@@ -304,23 +308,25 @@ if [[ $make_win64 ]]; then
   wine "$innosetup" "$wine_build\cdcv3_64.iss"
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv $builddir/skychart*.exe $wd
-  #debug
-  cd $wd
-  rm -rf $builddir
-  make OS_TARGET=win64 CPU_TARGET=x86_64 clean
-  fpcopts="-O1 -g -gl -Ci -Co -Ct" make OS_TARGET=win64 CPU_TARGET=x86_64
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  mkdir $builddir
-  mkdir $builddir/debug
-  cp skychart/cdc.exe $builddir/debug/skychart.exe
-  cp skychart/cdcicon.exe $builddir/debug/
-  cp varobs/varobs.exe $builddir/debug/
-  cp varobs/varobs_lpv_bulletin.exe $builddir/debug/
-  cd $builddir/debug/
-  zip bin-windows-x64-debug-$currentrev.zip *
-  if [[ $? -ne 0 ]]; then exit 1;fi
-  mv bin-*.zip $wd
-  if [[ $? -ne 0 ]]; then exit 1;fi
+  if [[ $make_debug ]]; then
+    #debug
+    cd $wd
+    rm -rf $builddir
+    make OS_TARGET=win64 CPU_TARGET=x86_64 clean
+    fpcopts="-O1 -g -gl -Ci -Co -Ct" make OS_TARGET=win64 CPU_TARGET=x86_64
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    mkdir $builddir
+    mkdir $builddir/debug
+    cp skychart/cdc.exe $builddir/debug/skychart.exe
+    cp skychart/cdcicon.exe $builddir/debug/
+    cp varobs/varobs.exe $builddir/debug/
+    cp varobs/varobs_lpv_bulletin.exe $builddir/debug/
+    cd $builddir/debug/
+    zip bin-windows-x64-debug-$currentrev.zip *
+    if [[ $? -ne 0 ]]; then exit 1;fi
+    mv bin-*.zip $wd
+    if [[ $? -ne 0 ]]; then exit 1;fi
+  fi  
 fi
 
 cd $wd
