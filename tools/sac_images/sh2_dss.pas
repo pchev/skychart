@@ -67,8 +67,8 @@ const b=' ';
       f4='0.0000';
       f5='0.00000';
       f6='0.000000';
-      npix=300;
-      npix2=600;
+      npix=400;
+      npix2=800;
       deg2rad = pi/180;
       rad2deg = 180/pi;
       pi2 = 2*pi;
@@ -405,7 +405,7 @@ if ok then
     end;
 
       size:=min(420,maxvalue([3.0,rec.neb.dim1,rec.neb.dim2]));
-      size:=1.2*size; // margin for small objects
+      size:=1.5*size; // margin for small objects
 
       if size<30 then
          sub:=trunc(size*60/1.7/npix)
