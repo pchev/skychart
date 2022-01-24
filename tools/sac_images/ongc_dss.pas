@@ -187,7 +187,7 @@ repeat
       if keyword='CROTA2' then begin header2[p]:=header1[i]; inc(p);end;
       if keyword='DATAMIN' then dmini:=strtoint(value);
       if keyword='DATAMAX' then dmaxi:=strtoint(value);
-      if keyword='CONTRAS4' then 
+      if keyword='CONTRAS0' then
            try
              dmin:=strtoint(words(value,'',1,1));   // low value for good contrast 
            except
@@ -197,7 +197,7 @@ repeat
            try
              d1:=strtoint(words(value,'',9,1));
              d2:=strtoint(words(value,'',10,1));
-             dmax:=d1;   // high value for good contrast
+             dmax:=(d1+d2) div 2;   // high value for good contrast
            except
              dmax:=dmaxi;
          end;
