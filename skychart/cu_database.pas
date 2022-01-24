@@ -1517,7 +1517,7 @@ begin
           j := findfirst(slash(ImagePath) + '*', faDirectory, c);
           while j = 0 do
           begin
-            if ((c.attr and faDirectory) <> 0) and (c.Name <> '.') and (c.Name <> '..') then
+            if ((c.attr and faDirectory) <> 0) and (c.Name <> '.') and (c.Name <> '..') and (Length(c.Name)<=4) then
             begin
               catdir := slash(ImagePath) + c.Name;
               ProgressCat.Caption := c.Name;
@@ -1593,8 +1593,10 @@ begin
                 i := findnext(f);
               end;
               cmdl:=cmdl+'COMMIT;';
-              if not DB.query(cmdl) then
-                 writetrace(Format(rsDBInsertFail, [f.Name, DB.ErrorMessage]));
+              if not DB.query(cmdl) then begin
+                 writetrace(Format(rsDBInsertFail, [c.Name, DB.ErrorMessage]));
+                 db.Rollback;
+              end;
               findclose(f);
             end;
             j := findnext(c);
