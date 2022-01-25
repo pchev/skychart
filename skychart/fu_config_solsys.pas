@@ -28,7 +28,7 @@ interface
 uses
   u_help, u_translation, u_constant, u_util, u_projection, cu_database, cu_radec, cu_calceph,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math, IniFiles, tlntsend,
-  Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources, UScaleDPI,
+  Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources, UScaleDPI, Clipbrd,
   downloaddialog, jdcalendar, EditBtn, CheckLst, Menus, Process, LazHelpHTML_fix, LazUTF8, LazFileUtils, Types;
 
 type
@@ -40,6 +40,8 @@ type
     BtnLoadAst: TButton;
     BtnLoadCom: TButton;
     BtnSaveCom: TButton;
+    BtnPastAst: TButton;
+    BtnPastCom: TButton;
     ButtonCancel: TButton;
     ButtonDownloadSpk: TButton;
     ButtonReturn: TButton;
@@ -266,6 +268,8 @@ type
     procedure AstNeoClick(Sender: TObject);
     procedure AstPageControl2Changing(Sender: TObject; var AllowChange: boolean);
     procedure BtnLoadComClick(Sender: TObject);
+    procedure BtnPastAstClick(Sender: TObject);
+    procedure BtnPastComClick(Sender: TObject);
     procedure BtnSaveAstClick(Sender: TObject);
     procedure BtnLoadAstClick(Sender: TObject);
     procedure BtnSaveComClick(Sender: TObject);
@@ -1239,6 +1243,29 @@ begin
   comeq.Text := '2000';
 end;
 
+procedure Tf_config_solsys.BtnPastComClick(Sender: TObject);
+var buf: array[0..1024] of char;
+    txt: string;
+    s,p: integer;
+begin
+  s:=Clipboard.GetTextBuf(@buf,1024);
+  txt:=copy(buf,1,s);
+  comep.Text:=trim(copy(txt,1,9));
+  p:=pos('Tp=',txt);
+  if p>0 then comt_jd.Text:=trim(copy(txt,p+3,22));
+  p:=pos('QR=',txt);
+  if p>0 then comq.Text:=trim(copy(txt,p+3,22));
+  p:=pos('EC=',txt);
+  if p>0 then comec.Text:=trim(copy(txt,p+3,22));
+  p:=pos('W =',txt);
+  if p>0 then comperi.Text:=trim(copy(txt,p+3,22));
+  p:=pos('OM=',txt);
+  if p>0 then comnode.Text:=trim(copy(txt,p+3,22));
+  p:=pos('IN=',txt);
+  if p>0 then comi.Text:=trim(copy(txt,p+3,22));
+  comeq.Text:='2000';
+end;
+
 procedure Tf_config_solsys.AddComClick(Sender: TObject);
 var
   msg: string;
@@ -1443,6 +1470,30 @@ begin
   astax.Text:=trim(copy(buf,93,11));
   astref.Text:=trim(copy(buf,108,9));
   astnam.Text:=trim(copy(buf,167,28));
+  asteq.Text:='2000';
+end;
+
+procedure Tf_config_solsys.BtnPastAstClick(Sender: TObject);
+var buf: array[0..1024] of char;
+    txt: string;
+    s,p: integer;
+begin
+  s:=Clipboard.GetTextBuf(@buf,1024);
+  txt:=copy(buf,1,s);
+  astep.Text:=trim(copy(txt,1,9));
+  p:=pos('MA=',txt);
+  if p>0 then astma.Text:=trim(copy(txt,p+3,22));
+  p:=pos('W =',txt);
+  if p>0 then astperi.Text:=trim(copy(txt,p+3,22));
+  p:=pos('OM=',txt);
+  if p>0 then astnode.Text:=trim(copy(txt,p+3,22));
+  p:=pos('IN=',txt);
+  if p>0 then asti.Text:=trim(copy(txt,p+3,22));
+  p:=pos('EC=',txt);
+  if p>0 then astec.Text:=trim(copy(txt,p+3,22));
+  p:=pos('A =',txt);
+  if p>0 then astax.Text:=trim(copy(txt,p+3,22));
+  astref.Text:='Horizon';
   asteq.Text:='2000';
 end;
 

@@ -714,7 +714,7 @@ object f_config_solsys: Tf_config_solsys
               OnChanging = ComPageControl1Changing
               object TabSheet1: TTabSheet
                 Caption = 'Load MPC format file'
-                ClientHeight = 71
+                ClientHeight = 74
                 ClientWidth = 475
                 ParentFont = False
                 object Label2: TLabel
@@ -741,7 +741,7 @@ object f_config_solsys: Tf_config_solsys
               end
               object TabSheet2: TTabSheet
                 Caption = 'Or use a local file :'
-                ClientHeight = 71
+                ClientHeight = 74
                 ClientWidth = 475
                 ParentFont = False
                 object comfile: TFileNameEdit
@@ -1124,12 +1124,15 @@ object f_config_solsys: Tf_config_solsys
               AnchorSideTop.Side = asrCenter
               Left = 397
               Height = 25
+              Hint = 'Add or replace the elements to the database'
               Top = 357
               Width = 75
               BorderSpacing.InnerBorder = 4
               Caption = 'Add'
               OnClick = AddComClick
               ParentFont = False
+              ParentShowHint = False
+              ShowHint = True
               TabOrder = 14
             end
             object comt_y: TEdit
@@ -1251,10 +1254,13 @@ object f_config_solsys: Tf_config_solsys
               AnchorSideTop.Side = asrCenter
               Left = 397
               Height = 25
+              Hint = 'Load the elements from file'
               Top = 422
               Width = 75
               Caption = 'Load'
               OnClick = BtnLoadComClick
+              ParentShowHint = False
+              ShowHint = True
               TabOrder = 16
             end
             object BtnSaveCom: TButton
@@ -1262,11 +1268,26 @@ object f_config_solsys: Tf_config_solsys
               AnchorSideTop.Side = asrCenter
               Left = 397
               Height = 25
+              Hint = 'Save the elements to file'
               Top = 390
               Width = 75
               Caption = 'Save'
               OnClick = BtnSaveComClick
+              ParentShowHint = False
+              ShowHint = True
               TabOrder = 17
+            end
+            object BtnPastCom: TButton
+              Left = 397
+              Height = 25
+              Hint = 'Past JPL Horizon osculating elements'
+              Top = 322
+              Width = 75
+              Caption = 'Past'
+              OnClick = BtnPastComClick
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 18
             end
           end
         end
@@ -1288,7 +1309,7 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 0
           object astsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 517
+            ClientHeight = 490
             ClientWidth = 485
             ImageIndex = 3
             ParentFont = False
@@ -1299,7 +1320,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 485
               Align = alTop
               Caption = 'Chart Setting'
-              ClientHeight = 332
+              ClientHeight = 314
               ClientWidth = 483
               ParentFont = False
               TabOrder = 0
@@ -1368,7 +1389,7 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 70
+                ClientHeight = 88
                 ClientWidth = 395
                 Color = clBtnFace
                 ItemIndex = 1
@@ -1408,7 +1429,7 @@ object f_config_solsys: Tf_config_solsys
             end
             object LabelAstInfo1: TLabel
               Left = 0
-              Height = 162
+              Height = 135
               Top = 355
               Width = 485
               Align = alClient
@@ -1428,13 +1449,13 @@ object f_config_solsys: Tf_config_solsys
           end
           object astload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 517
+            ClientHeight = 490
             ClientWidth = 485
             ImageIndex = 1
             ParentFont = False
             object MemoMPC: TMemo
               Left = 0
-              Height = 289
+              Height = 262
               Top = 228
               Width = 485
               Align = alClient
@@ -1450,7 +1471,7 @@ object f_config_solsys: Tf_config_solsys
               Width = 485
               Align = alTop
               Caption = 'Options'
-              ClientHeight = 95
+              ClientHeight = 77
               ClientWidth = 483
               ParentFont = False
               TabOrder = 1
@@ -1518,7 +1539,7 @@ object f_config_solsys: Tf_config_solsys
               OnChanging = AstPageControl2Changing
               object TabSheet3: TTabSheet
                 Caption = 'Load MPC format file'
-                ClientHeight = 63
+                ClientHeight = 66
                 ClientWidth = 475
                 ParentFont = False
                 object Label1: TLabel
@@ -1545,7 +1566,7 @@ object f_config_solsys: Tf_config_solsys
               end
               object TabSheet4: TTabSheet
                 Caption = 'Or use a local file :'
-                ClientHeight = 63
+                ClientHeight = 66
                 ClientWidth = 475
                 ParentFont = False
                 object mpcfile: TFileNameEdit
@@ -1607,7 +1628,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object astprepare: TTabSheet
             Caption = 'Prepare Monthly Data'
-            ClientHeight = 517
+            ClientHeight = 490
             ClientWidth = 485
             ImageIndex = 2
             ParentFont = False
@@ -1697,7 +1718,7 @@ object f_config_solsys: Tf_config_solsys
             end
             object prepastmemo: TMemo
               Left = 0
-              Height = 380
+              Height = 353
               Top = 137
               Width = 485
               Align = alClient
@@ -1733,7 +1754,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object AddsingleAst: TTabSheet
             Caption = 'Add'
-            ClientHeight = 517
+            ClientHeight = 490
             ClientWidth = 485
             ImageIndex = 4
             ParentFont = False
@@ -1985,36 +2006,45 @@ object f_config_solsys: Tf_config_solsys
             object Addast: TButton
               AnchorSideTop.Control = astax
               AnchorSideTop.Side = asrCenter
-              Left = 396
+              Left = 400
               Height = 25
+              Hint = 'Add or replace the elements to the database'
               Top = 367
               Width = 75
               BorderSpacing.InnerBorder = 4
               Caption = 'Add'
               OnClick = AddastClick
               ParentFont = False
+              ParentShowHint = False
+              ShowHint = True
               TabOrder = 13
             end
             object BtnSaveAst: TButton
               AnchorSideTop.Control = astref
               AnchorSideTop.Side = asrCenter
-              Left = 396
+              Left = 400
               Height = 25
+              Hint = 'Save the elements to file'
               Top = 399
               Width = 75
               Caption = 'Save'
               OnClick = BtnSaveAstClick
+              ParentShowHint = False
+              ShowHint = True
               TabOrder = 14
             end
             object BtnLoadAst: TButton
               AnchorSideTop.Control = asteq
               AnchorSideTop.Side = asrCenter
-              Left = 396
+              Left = 400
               Height = 25
+              Hint = 'Load the elements from file'
               Top = 433
               Width = 75
               Caption = 'Load'
               OnClick = BtnLoadAstClick
+              ParentShowHint = False
+              ShowHint = True
               TabOrder = 15
             end
             object Label11: TLabel
@@ -2070,6 +2100,20 @@ object f_config_solsys: Tf_config_solsys
               Top = 370
               Width = 9
               Caption = 'A'
+            end
+            object BtnPastAst: TButton
+              AnchorSideTop.Control = astec
+              AnchorSideTop.Side = asrCenter
+              Left = 400
+              Height = 25
+              Hint = 'Past JPL Horizon osculating elements'
+              Top = 334
+              Width = 75
+              Caption = 'Past'
+              OnClick = BtnPastAstClick
+              ParentShowHint = False
+              ShowHint = True
+              TabOrder = 16
             end
           end
         end
