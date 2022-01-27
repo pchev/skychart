@@ -1,19 +1,18 @@
 NGC:
 
-col 19 S (messier)
-- label  M   
+col 24 (messier)
 - format #
 
-col 20 T (ngc)
+col 25 (ngc)
 -format #
 - replace ^0 ""
 - replace ,0 ,
 
-col 21 U (ic)
+col 26 (ic)
 - format #
 - replace ^0 ""
 
-col 1 A (name)
+col 1 (name)
 -replace "IC" "IC "
 -replace "IC 0" "IC " x3
 -replace "NGC" "NGC "
@@ -34,8 +33,7 @@ Catgen
 
 Addendum:
 
-col 19 S (messier)
-- label  M   
+col 24 (messier)
 - format #
 
 enregistrer sous addendum.csv
