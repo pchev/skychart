@@ -2543,7 +2543,10 @@ begin
     {$ifdef mswindows}
     step := 'Windows spefic';
     isWOW64 := FindWOW64;
-    isAdmin := IsUserAnAdmin;
+    if Win32MajorVersion>=6 then
+      isAdmin := IsUserAnAdmin    // Vista to ...
+    else
+      isAdmin := false;           // 2000, XP
     DisplayIs32bpp := (ScreenBPP = 32);
     configfile := Defaultconfigfile;
     SaveDialog.Options := SaveDialog.Options - [ofNoReadOnlyReturn];
